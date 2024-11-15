@@ -4,94 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64FF3D6DDEC
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 08:35:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D614D6DDEC
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 08:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FD08889DA;
-	Fri, 15 Nov 2024 09:35:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id BC2D089197;
+	Fri, 15 Nov 2024 09:39:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="t77pxAsC";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="klEhAKLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C688885F4; Fri, 15 Nov 2024 09:35:11 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id C850B8932F; Fri, 15 Nov 2024 09:39:11 +0100 (CET)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2061b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::61b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F075988C85
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 09:35:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3183C88FFC
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 09:39:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com
- [209.85.210.200])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 253C43F2BC
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:35:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1731659708;
- bh=Eju0quAA/W/3ITifqo8O6rLo9aY55/vG9/muPYCUbcM=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=t77pxAsCq8K7H9RtGEugyz4r/C+shShS+LThbCd3aam9vrx7TSN/rUtGk7lyS/C9b
- NF7c8CsORfEyIh/ATJb5oCfhtbAAcMp5vpMUZujV+8W0dzgkR8ubgRIulk48D2yc33
- Hojq4jR4U5gdMhZtNet0bYc+4db3Q/fc5fg9c7u5CwbkGjTDQ8dV49OjR2U5pQPsxx
- nl4yg978f0XVijF8H/MUUYk18A+MpFnfQ0KSh7r9Mfc0yqYtz6T4xUmGFbotdfpKK1
- NV3lpIeT+SHvN4I6u9cbhaq1uNXiI4Mgsn+3TZVIBATzMCHgerl4/yaV260qnRpw+4
- ro5Y8Mv5pE7fQ==
-Received: by mail-pf1-f200.google.com with SMTP id
- d2e1a72fcca58-71e69e06994so1882482b3a.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 00:35:08 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731659706; x=1732264506;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Eju0quAA/W/3ITifqo8O6rLo9aY55/vG9/muPYCUbcM=;
- b=CzYnUNaP2Ul4LNLeRRSuQTI5Jwxwrp1li5bDcJ8+O5usKPS0UcVN3ea0sERC8ySveO
- +S7M4ngqYuO9auBQyLOqMVRbZzevyhO7xS04jbH0BS5OKc2jpImPQYnHk7yV9sFR/yYj
- ej4YAZ8qHDAZDHrZCNx17gWELafgrkUcSDoEHxI5JZadYlnevgb7tCcBCmWbUOJroESl
- axf6AoPvx8QtE8UAwbFBrdI/PDnpp6PtCGEhlO1p3429FCRuBcfTUuFEc0B1fNcZZEPe
- Dg05/iFu72dS/TFoDzE2gaeA/ZWOrZlsBWdPlFRrewns02jx5s9vGNLR0o3ORML3VvcU
- 5p/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVlSmaHEmfDLJG7lwG6JoJndumZeP2u6GU6DjR7/e236aXxy6fNbQ0EVJud4OtTli0O07P44c4=@lists.denx.de
-X-Gm-Message-State: AOJu0YykF7cR8YPUk1pqnTxDG79kd5UZTL8bYvdx0erairuGTTds7w3G
- /DzRw5Mpe7a+klaNctFyvU+Pqp4X6IHIR4cAx9cRJgpphkRrFlvJOtFltBS+YpFVAlEMY2OmFpt
- d731jdb2heXp6CpwVHATkd9nTcl6+SOzIRpav2BU1GPcpfJ072g8mhAOJ+SJFSypcVOnfZ2zJYj
- Mhc+XdOtaWIjApcK2PQ9JrmUj2fbcMM0bIeLI4lfqS0cUu0DL4WLoY
-X-Received: by 2002:a17:90b:1e0d:b0:2e9:5004:2502 with SMTP id
- 98e67ed59e1d1-2ea154f7469mr2217816a91.13.1731659706484; 
- Fri, 15 Nov 2024 00:35:06 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEgqZDP2IfAqi8Y2u9Y+twcWviC0Z7nrVvXUemYIn5BMu8x8/lpMKgH0refblwNWCFENdyUXBTABSQx0wq6Utw=
-X-Received: by 2002:a17:90b:1e0d:b0:2e9:5004:2502 with SMTP id
- 98e67ed59e1d1-2ea154f7469mr2217789a91.13.1731659705877; Fri, 15 Nov 2024
- 00:35:05 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vc9qhcrv3VxgxS0Hl7K6WpZ/J6Cc29ZTzrelpPISJdqVSKkxAP580mPJiWO4U1EkqzObViaSMoIGqLpJtziNxPqXAQucz0laWvL3MIMgSL3IDvo6Em9dSOo6xDuXgZia+0ELRWgZsAboW6U/RqaF9NG3DknBKWZD2U3gr3OPxa0pVPFsL0jYik6Q1+kGGw6CjDTLZVH/srSgNtelNWbFQb0UT8aJ/cZgDxCSaoKP7TG3TQ7TAD+K4q1UPI5v9ofoUbB1Ywel8jMdwbrgtTClHsq1497jwUiifDrFonVltbn5LzPvMfmjkcuAVX9ANGjWFjmN6siN1jifIXbD8crBxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ghKomBQEWFjtXiscjvGKmck9npoBDUfm3eUWQyBGyZc=;
+ b=iduOb52G/MTkJkoH0NYQ5Gikrmrvtl2C9xFn6UcAlHf3H2RR99+wUgZKnACnBN8ddqU+D7gvau3c9ASJMENzQf8qL5/F478E+cpYUDlUylCIX/0x4W84tQkHXQ4mFhE0F5BXKgVLnF49jxHzHfwu/1lFiJndWdRaD4GKuEdh2LuT1lYuQHlAgC5/fsEM9+XmmFKoDAo+WFDrsFeUu6IUaPPiSVo/kYt+D39AV9n77O64b+NaRspM0gFAMs7DoxoXswIND3/ZfvwVA6CgEqGzamRWh6fxDS/wXSsDRvkmeUTmOTL1gkLxfyTSnWhT0CQ+201dH2e92i9yCPYCliFOcQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ghKomBQEWFjtXiscjvGKmck9npoBDUfm3eUWQyBGyZc=;
+ b=klEhAKLz72Uh3e8t3B3HYn88Y3TD1vE3T/Uphv8jHknK+Sn/JBtfVEKaEHD5r1D9glQYWcpuiFGF8h3F0Rj38S1l29KSCmBwvHKyFXZCMpQbcV998yCe9UA43/fk7VFODFgTLi49XSM6zu0WdheQ/8H/cYdWKTs8OD0cxb2J5kg=
+Received: from SN7PR04CA0218.namprd04.prod.outlook.com (2603:10b6:806:127::13)
+ by PH8PR12MB7112.namprd12.prod.outlook.com (2603:10b6:510:22c::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.18; Fri, 15 Nov
+ 2024 08:39:05 +0000
+Received: from SN1PEPF000252A3.namprd05.prod.outlook.com
+ (2603:10b6:806:127:cafe::64) by SN7PR04CA0218.outlook.office365.com
+ (2603:10b6:806:127::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.18 via Frontend
+ Transport; Fri, 15 Nov 2024 08:39:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF000252A3.mail.protection.outlook.com (10.167.242.10) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Fri, 15 Nov 2024 08:39:05 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 15 Nov
+ 2024 02:39:02 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Tom Rini <trini@konsulko.com>
+Subject: [PATCH] microblaze: Disable JFFS2 support
+Date: Fri, 15 Nov 2024 09:38:55 +0100
+Message-ID: <a8239acee8886229fdbff66142c46d522e3fe851.1731659933.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241102163259.305802-1-heinrich.schuchardt@canonical.com>
- <20241114172654.GA4059396@bill-the-cat>
- <CAM=mAOmFn0tytht3oK1F59=-nGxuLJmtSr2HpJDyTf=LWKYQOg@mail.gmail.com>
- <20241114173927.GJ3600562@bill-the-cat>
- <87plmx1h4r.fsf@bloch.sibelius.xs4all.nl>
- <87ttc9m0cm.fsf@prevas.dk>
-In-Reply-To: <87ttc9m0cm.fsf@prevas.dk>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Fri, 15 Nov 2024 09:34:54 +0100
-Message-ID: <CAM=mAOkaHf-TZ1Xw0W6kcYV7G+9wCJk14svaiCtdt6V1KpVQ4A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tools: use cryptographically safe RNG
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>, 
- hugo.cornelis@essensium.com, Simon Glass <sjg@chromium.org>,
- paulerwan.rio@gmail.com, al.kochet@gmail.com, ada@thorsis.com, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1379; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=ksk0qD0U+sDiSYfFGMJ/iwNeDReRVKCD9p4GDnURNbc=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhnRzjgVFjbedKnoOHzN5bLz3XrXsp9urvCq7Zp572Dv5h
+ v1i6wmZHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAi8scZ5sowR2/6d//8owKG
+ 3yziIV3/nkqHCTDMFdeSOuUeU3HQUL1a6d49+8XbPNnfAgA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A3:EE_|PH8PR12MB7112:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6a1bdc7c-4259-4848-6119-08dd0550f6f3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?s8jEKFMu2JgOI7+p+RJodNhpdMHy+DFu2Aq7NfNvXWdwg2kwQ6UAOVe8P/s8?=
+ =?us-ascii?Q?3eXsAsQZDnVXD8Mnfnmr8tD4aYHWjrz18O7vrU68cHCqEweWnuc0PlLr8+C3?=
+ =?us-ascii?Q?fKtjM7ex24GrnpwGaH8r3/Jr5TNSe8HWB3QykNWYDoqlbn7ZkTotOEau21Ct?=
+ =?us-ascii?Q?2Ywd70txwsyOymwPnkE92+XfmsNpCYoMQgUqlnPXm/refw/trP3SoGH/KikQ?=
+ =?us-ascii?Q?jCaJwO5QR3DzvkKrOIYQjyxXAf6J6csWHZPOaWcwzgj8Zxh/Hklt1eng0PKA?=
+ =?us-ascii?Q?lVAY4IYy+mWVGZFv+K0baVV0nclv5yXGUOv0ohmzUSI+7D8/JIUDVoP1WT3L?=
+ =?us-ascii?Q?R/3nAEyHnlBUCiFzUDkZp/Z4V5BTOZdbqYUuLjqjAni+qhGM7T9OPKKSj21l?=
+ =?us-ascii?Q?v7z3svxEAjB8HQYmSlfr5gwtVqNoLBDEbtWYf86eX/YfiNhZVwF8oqF8WBs8?=
+ =?us-ascii?Q?K7Jnh7IDNRTs5wiqAKeXtscyKfzeBnee5x6u6m6pklauOju4clffy08joGb4?=
+ =?us-ascii?Q?YZzixVzIFv1gc1QIOG1EKVN+Vt4XRur1dsvRy+GCLPpj6XcyMJD+y7tN65zm?=
+ =?us-ascii?Q?niU9tR6IFJjv56Hu0wqwHFqDlmNlkyboETiEyvFRAZY6OTpJG5Iy0JI7BgtV?=
+ =?us-ascii?Q?Fz3h9ukWpu62kHrJozrgcz6hltm21Y21Bl2POFD3zlD73yDfSNjS6CFjb0kB?=
+ =?us-ascii?Q?EBDqKksws7W55Bjrj8i/CQQwPJ5AHZQKVv3r4bNL1O1TIpxDfE3qMQgGNgNm?=
+ =?us-ascii?Q?94+PYQekDTGDWQUcysj68y8go3vHm0TlX4QP4dF50yyOsKR/zWKrnoZEZ4v2?=
+ =?us-ascii?Q?CHZ67THMTk+bwsBMfeCaPefpaImEA5TR34BvzwK/UiqmPENm4T4wqS3JHj7+?=
+ =?us-ascii?Q?H53yD9wyQ11dl3982qQf6SFhtKnZYTTj9/xGl2Uxnnox68+2Uflrn52VsMt0?=
+ =?us-ascii?Q?hXWedXO7772kaMfbKK2l1ak8OieTYgNRDe92CY2raJ0gKPsXr/mSfsxWXGNB?=
+ =?us-ascii?Q?Bqk7H4u8alvrT0p1BpcJWv7i2argGQFE0lNGD9fCpu05PhKkpSGZ77IKm0Ca?=
+ =?us-ascii?Q?nyhfP79j3aRM/GEzNnG6ticIxRq7ORWONq+AWCbln0bwIo2ZxcbgRiDF/oOO?=
+ =?us-ascii?Q?QIeGwCMo4G0HNz9Qxc3pry+hPk0RdQiSTH/MbO1xBRjA3XsBBtT98DgUgG/+?=
+ =?us-ascii?Q?l+L7Oi1gCcFU6sTH38QRGZbVplcC5tFFN174zXNlRlfHjtlV+vWQFLvTL+bK?=
+ =?us-ascii?Q?mqsCLe39craiwGJWBLnTW1TRkx2GP+Im9pz69IWrpW2YNT4XEaHKKQO+RJG7?=
+ =?us-ascii?Q?EiAc+kmz3oXC4zvYji5c4yzaWAbGhv8x9H6xP1RAEJi2NwWvqfKxzAT1Ay3P?=
+ =?us-ascii?Q?BlpNfB6xcUWpASMlGH3v9BLd5kZAxt56cvxGP4HwHxq+t/xqoA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2024 08:39:05.4208 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a1bdc7c-4259-4848-6119-08dd0550f6f3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A3.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7112
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,70 +148,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rasmus Villemoes <ravi@prevas.dk> schrieb am Fr., 15. Nov. 2024, 08:18:
+JFFS2 is not maintained for quite a long time and none should be using it.
+Please use other filesystems for flashes like UBIFS instead.
 
-> On Fri, Nov 15 2024, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
->
-> >> Date: Thu, 14 Nov 2024 11:39:27 -0600
-> >> From: Tom Rini <trini@konsulko.com>
-> >>
-> >> On Thu, Nov 14, 2024 at 06:35:44PM +0100, Heinrich Schuchardt wrote:
-> >> > Tom Rini <trini@konsulko.com> schrieb am Do., 14. Nov. 2024, 18:27:
-> >> >
-> >> > > On Sat, Nov 02, 2024 at 05:32:59PM +0100, Heinrich Schuchardt wrote:
-> >> > >
-> >> > > > The PRNG implementing the random() function only has 2^31 states
-> and
-> >> > > > therefore is unsafe to use for cryptography. Use arc4random()
-> instead.
-> >> > > >
-> >> > > > Fixes: cc34f04efd63 ("tools: image-host.c: use random instead of
-> rand")
-> >> > > > Addresses-Coverity-ID: 312953 Calling risky function
-> >> > > > Signed-off-by: Heinrich Schuchardt <
-> heinrich.schuchardt@canonical.com>
-> >> > > > ---
-> >> > > >  tools/image-host.c | 35 +++--------------------------------
-> >> > > >  1 file changed, 3 insertions(+), 32 deletions(-)
-> >> > >
-> >> > > Now I get:
-> >> > > /home/uboot/u-boot/u-boot/tools/image-host.c: In function
-> >> > > 'fit_image_setup_cipher':
-> >> > > /home/uboot/u-boot/u-boot/tools/image-host.c:439:17: warning:
-> implicit
-> >> > > declaration of function 'arc4random_buf'
-> [-Wimplicit-function-declaration]
-> >> > >   439 |                 arc4random_buf((void *)info->iv,
-> >> > > info->cipher->iv_len);
-> >> > >       |                 ^~~~~~~~~~~~~~
-> >> > > /usr/bin/ld: tools/image-host.o: in function
-> `fit_image_cipher_data':
-> >> > > image-host.c:(.text+0xb41): undefined reference to `arc4random_buf'
-> >> > > collect2: error: ld returned 1 exit status
-> >> > > make[3]: *** [scripts/Makefile.host:104: tools/dumpimage] Error 1
-> >> > >
-> >> > > in the docker container. I gather this means arc4random_buf is not
-> as
-> >> > > widely available as assumed.
-> >> > >
-> >> >
-> >> > glibc 2.36 is required published 2022-08. Ubuntu Jammy is 22.04.
-> >>
-> >> Yeah, that's likely (a) too new and (b) strange because:
-> >> https://source.denx.de/u-boot/u-boot/-/jobs/945810 and so is jammy
-> >> 22.04.
-> >
-> > Linking against libbsd might be an alternative on older systems.
->
-> Or use getrandom(), which according to the man page has been exposed via
-> glibc since glibc 2.25. Or just read from /dev/urandom which should work
-> everywhere.
->
-> Rasmus
->
+Also remove jffs to MTD map but MTD map is for example that's why it won't
+affect anything.
 
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-/dev/urandom is not available in containers.
-getrandom is not available in OpenBSD.
+ configs/microblaze-generic_defconfig | 1 -
+ include/configs/microblaze-generic.h | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-Best regards
+diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
+index ca78b32846ae..7b3adecabb61 100644
+--- a/configs/microblaze-generic_defconfig
++++ b/configs/microblaze-generic_defconfig
+@@ -47,7 +47,6 @@ CONFIG_CMD_SAVES=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+ CONFIG_CMD_TFTPPUT=y
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+diff --git a/include/configs/microblaze-generic.h b/include/configs/microblaze-generic.h
+index 6740ab2be3e2..3bcc4c48dc80 100644
+--- a/include/configs/microblaze-generic.h
++++ b/include/configs/microblaze-generic.h
+@@ -82,7 +82,7 @@
+ 	"nor0=flash-0\0"\
+ 	"mtdparts=mtdparts=flash-0:"\
+ 	"256k(u-boot),256k(env),3m(kernel),"\
+-	"1m(romfs),1m(cramfs),-(jffs2)\0"\
++	"1m(romfs),1m(cramfs),-(fs)\0"\
+ 	"nc=setenv stdout nc;"\
+ 	"setenv stdin nc\0" \
+ 	"serial=setenv stdout serial;"\
+-- 
+2.43.0
+
