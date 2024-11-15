@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAF3CD68BC2
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8167D68BC2
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DD38922D;
-	Fri, 15 Nov 2024 15:40:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4644688DD0;
+	Fri, 15 Nov 2024 15:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TExxZruC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Iw446kBW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F5E289235; Fri, 15 Nov 2024 15:40:53 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 2378E88EAF; Fri, 15 Nov 2024 15:44:19 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05D13891F5
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:40:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B4E488D90
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7f8095a200eso1485097a12.1
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:40:50 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6d3f5b0cbd6so9539866d6.2
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731681649; x=1732286449; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XAQghO/+lObIeUDFua1KAoBZpPPpRcxVQZMOyP65O7I=;
- b=TExxZruCLNcGZfTqgS2BKQNIBiIjhw6Y5fDFUkhIvVk8yhhIqpqr4SKj58O1GAmiNd
- ecI3z/ZeNFCWZ5Vuc5flY243gJ/OliZOLTI/mAH2RZ5GeXUIRJv0cR4J5HkZmTvzp/kS
- 2ygowVAsCZevgSwdSgfz7osimuhG9OnU0kCh4vgbH5XsjSuBbzT+GS8vWY5iSD46dO7l
- 2+/7nbj/i6tc2MIX3qpUvPLr2ntkDYMuUNSVgCFixc0viudWuRXluuo/nyQP2OHQbplb
- SsiNFDAyFgOK6nTZ+YkfX74R7GfqW3M3G+bENJc1ftmmd03JYdz6j0lq1FnxrLbdy/9Z
- 84GA==
+ d=konsulko.com; s=google; t=1731681855; x=1732286655; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gY6zMMk4WbHP/301pbi6MMD9nEUTv4jE1tmMbAHELF0=;
+ b=Iw446kBWdX1lPuEzMzNYKOdHVsDuovBhewu2ETiYNwv8Bm+g8C8if0seNCSQWP2Cmg
+ yEBIhGoNpyJhaPS+YqplmCjn3KuCmyn2O/RVpujgUpv+D80BC3+mevQcdZekRJbqe0hy
+ 5yX7JA3Zm2+AR5sRaS6B4++qGk4ziJchHTRo4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731681649; x=1732286449;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XAQghO/+lObIeUDFua1KAoBZpPPpRcxVQZMOyP65O7I=;
- b=wyox6pnW6bUlhnWFVPe0d/tniN4d04LqAzgVTe95R0i41qBLjw+oHGr7asethQy3xz
- xS1otgqLWE3gde6GEPNZNP1x+p/BZWoZLQXCJVbl5mCZHLxnKX2GkL9esCZLRerMb8Ap
- dpbR5qm1gybJN/9br5pMXhwSyets2mwgzapb5k/G5t0pOJp9pJ/mvtkdaRqvdMW907O0
- AINfzbiQ4lxbjw5ZK9cW2rwfBEieOSmJapikhYH+5BP7Rdu1QHHfkQgcew5a4xcHF7Z1
- NvCPTaMIwgUCuty8BmPymaGdUE3Sx4LS3VfdfDOwiz57AIIfEf0URJQEWpGEhOosRrVO
- 4Z3g==
-X-Gm-Message-State: AOJu0YwI7dank+wEZWtEvyP28si6TcYZ497Dpo/U6Nmf48SMOlVSp/hM
- 14Ogy0MqmQIIhOe5P4ux9g3DHU3OhM+kdbBrrzfTyUOF1TRc1mZi94GpzuZEPRKWnY3FWsWVw4U
- g3JISRUtQToAmvmTZfs7YE1qJqKIdZqiTn/g/Zw==
-X-Google-Smtp-Source: AGHT+IF+XxnF+E5axZz1jDkP9fwvNzOtzft4JiC2RwtYjn/g4DOJHtlyP6uyqudbyDwsnbdxPHcnvWrqk5iednuRrj4=
-X-Received: by 2002:a17:90a:d443:b0:2ea:d3f:870d with SMTP id
- 98e67ed59e1d1-2ea0d3f898fmr7478982a91.6.1731681649498; Fri, 15 Nov 2024
- 06:40:49 -0800 (PST)
-MIME-Version: 1.0
-References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-2-sjg@chromium.org>
- <CAC_iWjJB4=6Zm8XsgiQcQkUzoDOWnAowzf6C3sVvXNQTv_oByA@mail.gmail.com>
- <CAFLszTirwS0svRfOA-k-XcKhrWv9E_FaSfda5ziURaf=ynzTqg@mail.gmail.com>
- <CAC_iWjJg4ux0U2hTrmuGDEJGng_-z+GAkg+7Lw_tdXGR8rJGLw@mail.gmail.com>
- <CAC_iWjJpGAWb7VN+psvePJwx3cuFRYDUGqHD-OkSnNfvwgeBjA@mail.gmail.com>
- <CAFLszTh5z_O_q2bGb-fW-6KeMW1OYZ+Qx937WjcPwtnoR+vCJQ@mail.gmail.com>
-In-Reply-To: <CAFLszTh5z_O_q2bGb-fW-6KeMW1OYZ+Qx937WjcPwtnoR+vCJQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 15 Nov 2024 16:40:13 +0200
-Message-ID: <CAC_iWjLfR2_xtiYxz4opODty798mWnNojyXpeXiwa3jJY+QTzw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] sandbox: efi_loader: Correct use of addresses as
- pointers
+ d=1e100.net; s=20230601; t=1731681855; x=1732286655;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gY6zMMk4WbHP/301pbi6MMD9nEUTv4jE1tmMbAHELF0=;
+ b=Pr8zZg46Y9W7Ny80QuovZL1b8o+Jq2jr6Yoy/YIpalM0MJwcfsdQyrrShto2Hn2uQY
+ C0Vj90VNU9UWA2L7CdDjPawcptBBJKZf/vhsA/08h6Jk32AO7yJn8lGgXqzBkSNkooVE
+ MEQrUssYt7xLX5BwWejUKxh4oD5ylgt40msMRKBROVlIc+BsADd8LTZrs9FXPu2wD0EE
+ iRGUQ831+Ov5JzEWtNN1yoK+lfxKvlpZmfmyyrjoveeRpvQWxpXcCajxpZbf9mp5xfoV
+ 21sBkh/MDgWTfUUIvY+BNf6SHBhSyM8fKRVOjsamSRhhQEQ8aaq2b2+M1bQXZZEHL3cO
+ 6gYQ==
+X-Gm-Message-State: AOJu0YzPV7D//7GV9MdyaZCPYLF0tuOogTxT7imJO1xQimuxqBWFQwjt
+ iqUtQz2es9t/kIAhsL+SUgv2uQic1tgYqkN8Hi2pLKov58fN7b/aYABlFzs/EgV6ttmWH8NR5oq
+ fh5M=
+X-Google-Smtp-Source: AGHT+IHGhOKfSQnMkxRsYYjDbNyB7rNHxIU4vxcewUI7kimX0f6WITcrp65qnMe2iO0tyXcyvsltBw==
+X-Received: by 2002:a05:6214:5690:b0:6ce:26d0:c7b4 with SMTP id
+ 6a1803df08f44-6d3fb85a4d5mr37997166d6.44.1731681855389; 
+ Fri, 15 Nov 2024 06:44:15 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d3ee932857sm18384176d6.118.2024.11.15.06.44.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Nov 2024 06:44:14 -0800 (PST)
+Date: Fri, 15 Nov 2024 08:44:12 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 8/9] buildman: Propose a format for extra boards
+Message-ID: <20241115144412.GV3600562@bill-the-cat>
+References: <20241108152350.3686274-1-sjg@chromium.org>
+ <20241108152350.3686274-9-sjg@chromium.org>
+ <20241113024029.GH3600562@bill-the-cat>
+ <CAFLszTirek2=_j15W5LCZERTs2TZXawV0o3aGO12dgDJpzTdQw@mail.gmail.com>
+ <20241113222016.GZ3600562@bill-the-cat>
+ <CAFLszTivnmnB+1p58sZ_VSZBWpL1Kt7QJ=mnnEvHZswAeEZc0g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="L1qCxZxVXMmYkPtu"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTivnmnB+1p58sZ_VSZBWpL1Kt7QJ=mnnEvHZswAeEZc0g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,173 +95,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Nov 2024 at 16:28, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 15 Nov 2024 at 06:58, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> >
-> >
-> > On Fri, 15 Nov 2024 at 15:54, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
-> >>
-> >>
-> >>
-> >> On Fri, 15 Nov 2024 at 15:53, Simon Glass <sjg@chromium.org> wrote:
-> >>>
-> >>> Hi Ilias,
-> >>>
-> >>> On Thu, 14 Nov 2024 at 00:04, Ilias Apalodimas
-> >>> <ilias.apalodimas@linaro.org> wrote:
-> >>> >
-> >>> > Hi Simon,
-> >>> >
-> >>> > On Tue, 12 Nov 2024 at 16:11, Simon Glass <sjg@chromium.org> wrote:
-> >>> > >
-> >>> > > The cache-flush function is incorrect which causes a crash in the
-> >>> > > remoteproc tests with arm64.
-> >>> > >
-> >>> > > Fix both problems by using map_sysmem() to convert an address to a
-> >>> > > pointer and map_to_sysmem() to convert a pointer to an address.
-> >>> > >
-> >>> > > Also update the image-loader's cache-flushing logic.
-> >>> > >
-> >>> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> > > Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
-> >>> > > ---
-> >>> > >
-> >>> > > (no changes since v2)
-> >>> > >
-> >>> > > Changes in v2:
-> >>> > > - Drop message about EFI_LOADER
-> >>> > >
-> >>> > >  arch/sandbox/cpu/cache.c              |  8 +++++++-
-> >>> > >  drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
-> >>> > >  lib/efi_loader/efi_image_loader.c     |  3 ++-
-> >>> > >  3 files changed, 20 insertions(+), 9 deletions(-)
-> >>> > >
-> >>> > > diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
-> >>> > > index c8a5e64214b..96b3da47e8e 100644
-> >>> > > --- a/arch/sandbox/cpu/cache.c
-> >>> > > +++ b/arch/sandbox/cpu/cache.c
-> >>> > > @@ -4,12 +4,18 @@
-> >>> > >   */
-> >>> > >
-> >>> > >  #include <cpu_func.h>
-> >>> > > +#include <mapmem.h>
-> >>> > >  #include <asm/state.h>
-> >>> > >
-> >>> > >  void flush_cache(unsigned long addr, unsigned long size)
-> >>> > >  {
-> >>> > > +       void *ptr;
-> >>> > > +
-> >>> > > +       ptr = map_sysmem(addr, size);
-> >>> > > +
-> >>> > >         /* Clang uses (char *) parameters, GCC (void *) */
-> >>> > > -       __builtin___clear_cache((void *)addr, (void *)(addr + size));
-> >>> > > +       __builtin___clear_cache(map_sysmem(addr, size), ptr + size);
-> >>> > > +       unmap_sysmem(ptr);
-> >>> > >  }
-> >>> > >
-> >>> > >  void invalidate_icache_all(void)
-> >>> > > diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
-> >>> > > index ab1836b3f07..0b3941b7798 100644
-> >>> > > --- a/drivers/remoteproc/rproc-elf-loader.c
-> >>> > > +++ b/drivers/remoteproc/rproc-elf-loader.c
-> >>> > > @@ -6,6 +6,7 @@
-> >>> > >  #include <dm.h>
-> >>> > >  #include <elf.h>
-> >>> > >  #include <log.h>
-> >>> > > +#include <mapmem.h>
-> >>> > >  #include <remoteproc.h>
-> >>> > >  #include <asm/cache.h>
-> >>> > >  #include <dm/device_compat.h>
-> >>> > > @@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
-> >>> > >         for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
-> >>> > >                 void *dst = (void *)(uintptr_t)phdr->p_paddr;
-> >>> > >                 void *src = (void *)addr + phdr->p_offset;
-> >>> > > +               ulong dst_addr;
-> >>> > >
-> >>> > >                 if (phdr->p_type != PT_LOAD)
-> >>> > >                         continue;
-> >>> > > @@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
-> >>> > >                 if (phdr->p_filesz != phdr->p_memsz)
-> >>> > >                         memset(dst + phdr->p_filesz, 0x00,
-> >>> > >                                phdr->p_memsz - phdr->p_filesz);
-> >>> > > -               flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
-> >>> > > -                           roundup((unsigned long)dst + phdr->p_filesz,
-> >>> > > +               dst_addr = map_to_sysmem(dst);
-> >>> > > +               flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-> >>> > > +                           roundup(dst_addr + phdr->p_filesz,
-> >>> > >                                     ARCH_DMA_MINALIGN) -
-> >>> > > -                           rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-> >>> > > +                           rounddown(dst_addr, ARCH_DMA_MINALIGN));
-> >>> > >         }
-> >>> > >
-> >>> > >         return 0;
-> >>> > > @@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
-> >>> > >         const struct dm_rproc_ops *ops;
-> >>> > >         Elf32_Shdr *shdr;
-> >>> > >         void *src, *dst;
-> >>> > > +       ulong dst_addr;
-> >>> > >
-> >>> > >         shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
-> >>> > >         if (!shdr)
-> >>> > > @@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
-> >>> > >                 (ulong)dst, *rsc_size);
-> >>> > >
-> >>> > >         memcpy(dst, src, *rsc_size);
-> >>> > > -       flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
-> >>> > > -                   roundup((unsigned long)dst + *rsc_size,
-> >>> > > -                           ARCH_DMA_MINALIGN) -
-> >>> > > -                   rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-> >>> > > +       dst_addr = map_to_sysmem(dst);
-> >>> > > +       flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-> >>> > > +                   roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
-> >>> > > +                   rounddown(dst_addr, ARCH_DMA_MINALIGN));
-> >>> > >
-> >>> > >         return 0;
-> >>> > >  }
-> >>> > > diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-> >>> > > index 0ddf69a0918..bb58cf1badb 100644
-> >>> > > --- a/lib/efi_loader/efi_image_loader.c
-> >>> > > +++ b/lib/efi_loader/efi_image_loader.c
-> >>> > > @@ -13,6 +13,7 @@
-> >>> > >  #include <efi_loader.h>
-> >>> > >  #include <log.h>
-> >>> > >  #include <malloc.h>
-> >>> > > +#include <mapmem.h>
-> >>> > >  #include <pe.h>
-> >>> > >  #include <sort.h>
-> >>> > >  #include <crypto/mscode.h>
-> >>> > > @@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
-> >>> > >         }
-> >>> > >
-> >>> > >         /* Flush cache */
-> >>> > > -       flush_cache((ulong)efi_reloc,
-> >>> > > +       flush_cache(map_to_sysmem(efi_reloc),
-> >>> >
-> >>> > Shouldn't we now umap that address on the err: tag?
-> >>>
-> >>> This address should be in sandbox's DRAM, so there is no mapping
-> >>> created. The mapping is needed for things that are not in the emulated
-> >>> DRAM, such as stack variables.
-> >>
-> >>
-> >> Isn't there a ref counter that gets increased for these though?
-> >> Why would we not want to decrease it properly?
-> >
-> >
-> > Ah scratch that, the refcnt is not for the sandbox DRAM. But in any case, I don't like seeing that magic of people knowing what they should unmap or not.
-> > I would prefer calling the unmap call unconditionally, since the function deals with sandbox memory correctly already
->
-> Yes, that's OK with me and is clearer, as you say.
 
+--L1qCxZxVXMmYkPtu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks Simon, with the unmap call added
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Fri, Nov 15, 2024 at 06:37:18AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 13 Nov 2024 at 15:20, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Nov 13, 2024 at 09:03:35AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 12 Nov 2024 at 19:40, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Nov 08, 2024 at 08:23:49AM -0700, Simon Glass wrote:
+> > > >
+> > > > > It has become more common to use config fragments to extend or ad=
+just
+> > > > > the functionality of boards in U-Boot.
+> > > > >
+> > > > > Propose a format for how to deal with this. It is not implemented=
+ as
+> > > > > yet.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > I think that the first problem is that this patch series is an
+> > > > inappropriate method and place to start the discussion.
+> > >
+> > > We had a discussion a year ago but it trailed off.
+> >
+> > OK. Still an inappropriate place to resurrect it.
+>=20
+> What do you suggest? I am trying to solve the problem, not just talk
+> about it, so patches are often best for that.
 
->
-> Regards,
-> Simon
+Well, in that there's a problem to be solved, it's that buildman makes
+#include more painful that it should be to use.
+
+Or, we validate config fragments by building them. A requires-buildman
+solution is not appropriate. That:
+https://patchwork.ozlabs.org/project/uboot/patch/20241114115049.2070780-2-p=
+atrick.rudolph@9elements.com/
+doesn't use the acpi.config fragment is because of the parsing issue
+buildman has.
+
+> > > > I also think this gets things backwards as the common case is "make=
+",
+> > > > not "buildman". We need more defconfig's that are just base +
+> > > > fragment(s) if they're important enough to be a combination that ne=
+eds
+> > > > to be tested and work. A board is not a time-expensive part of CI. A
+> > > > pytest run is, a new job itself is.
+> > >
+> > > OK, that would work too. It would also avoid the problem of combinato=
+rial
+> > > explosion. But I am not seeing people actually doing that, with rare
+> > > exceptions.
+> >
+> > I think it's the exception, not the rule, where config fragments are not
+> > being put to use in a defconfig. And that's possibly because not a lot
+> > of people seem to know about the #include option, and then when I
+> > explain it exists to people the next problem is "Oh, I have to do what
+> > so that buildman also works?".
+>=20
+> Are you looking for any feature in Buildman for this? This series is
+> intended to fix [1]
+
+Yes, the part of this series that, if I read it right, causes buildman
+to read the preprocessed config file, rather than the raw defconfig, is
+what should fix that, as the final patch in the series confirmed.
+
+--=20
+Tom
+
+--L1qCxZxVXMmYkPtu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc3XjwACgkQFHw5/5Y0
+tyyYFgv/Q8NeEWZXKuL2hZCzgxYiSPJQK7U3SF65TMYglsm2MkJuo+vrNJldOZr4
+mvDYFg+IJ+mWhblq8biy/6kcVJVIZLnYz/WtXFl+bR30HewIEL0UPeTJFL7eUAEL
+QtFjhqGkQFfyA9TJun6Gahg0iKCmI7LXD9ncGk6/Eh7ulvd1rxigk2r/4bjnWoez
+UmQR1ruRMMuqA51YB6Tp21/qUuMSXowO+igXqtAjHZaptf+Kw+TJRpQAuBMnWEOb
+5FgwxNSXFOnTrjq9ApDkDfCIgCxZAcdNh01EfXuRtjhFB3UyB1ApilK7/o8GUA5Q
+Jx5ZYR1wpUA9fn+KizgZDJOhT6UA7F6K/nxF8WCquO62dFrkPogs2W+s/mxM2kJ9
+hKleZyHTB3czo+m8cznbnetkBQRu3L+bIed9NtK2ZtaT9hFWSH1zmdA1FheQbXNX
+22rUwZ9mYbIXLBqvHGTo9F4cRL2FYyjT2GSxonA5fmANXEB2IOuzAtR7PG+N/f+o
+F1jJt9/W
+=uT8+
+-----END PGP SIGNATURE-----
+
+--L1qCxZxVXMmYkPtu--
