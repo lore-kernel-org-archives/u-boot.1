@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC38D6A25D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Nov 2024 23:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B987FD6A25D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 00:14:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8696B8969D;
-	Fri, 15 Nov 2024 00:30:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6E01890CE;
+	Fri, 15 Nov 2024 01:14:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bixcis+2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uYgd/IHU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBF4389695; Fri, 15 Nov 2024 00:30:15 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 83FB58920B; Fri, 15 Nov 2024 01:14:08 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 910CE89323
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 00:30:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56C4E8852D
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 01:14:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-460c2418e37so1292101cf.0
- for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 15:30:12 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6d3f2aa7632so1279956d6.2
+ for <u-boot@lists.denx.de>; Thu, 14 Nov 2024 16:14:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731627011; x=1732231811; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731629645; x=1732234445; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pGl/sdg2zK3o+zL11+cd+2YCRdsj6zkaBT440rZNITQ=;
- b=bixcis+2giayMLcds7T9l6ppt+8FASuPfmT3B+cY48A0nQpJJ/No79wY85x0IFgllW
- VRKus/MTeL7bM/fEswlQQyPsrxs33nIP1zUSZeZskfjvAVOIRFmZR91Wepsc45MkNYrn
- G05BSHGv/BFAGoW9UR+KIbje/725uHTOwOYTU=
+ bh=jVl3frt7JJvaGoZpVj9nVZRFo9ZUFNgp3w5TRVpUxl4=;
+ b=uYgd/IHUryb9urQRQG3LRkzkhq57lQiVbmCcWXhx0loMsDdmzudqeJYZG7E/grH9OM
+ Lha+GxCIchI4Sv8mEkyf5bbAD5FMj/x8RCgAJ0lVwgIK0Ih5L3GfhLvYzUu8QEvjl5ff
+ 8XzOuvTyMJgbt64YsxDDAbToSUURi47REV3C4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731627011; x=1732231811;
+ d=1e100.net; s=20230601; t=1731629645; x=1732234445;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pGl/sdg2zK3o+zL11+cd+2YCRdsj6zkaBT440rZNITQ=;
- b=eB6tFBQ3DhoEH5vBzJmDpzPIwgZp8MaoJlfupEalA079BeSqyZ2BcZE7nTygv/YD2s
- aX+r8PwWSP0CC0S4X5XxCLEZtSIibipg1KT9e0JNK4I1scWsX274vOQgySCU/+xSWTVn
- LKpP5rbREy5AonZAAso/jB4PhiSFnTjcLqSDOVI68LLEBftGz7PIhTA2macWE2geqptA
- rjlicRxRymZNgiSm8XkCBOny2f2otaY2NSNygzWiKd3CtfZ1JrU2i1kdCEgvJNnLrvXa
- OZyrGehbqqyFdXGnKq369m2WzkYeqXb4/Iab8x5Zuu/S3k1vDyiyieRPAY8aKJWkY9We
- V36g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIvY+JkA6WwON2XHZqNwasUGJsPuPyXVy0e+zsEIbaeZPKLPH7JreKpnF3mKV7hoy/QHd5Cv0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZvBbayl8TaNdf3YG8+sv24jU6PR2a7t81E1VI/lVSywJV7PHJ
- LDQwncJq/HT3Qys0S1FIjbUvkPjHBtYXvCNL088X9Q4IwIOBLGCXfeRny0dtQYI=
-X-Google-Smtp-Source: AGHT+IFQKXDFJsiESla+kUWyhxb2hsRDHUXAvVACKWPP69uCQby1gEhMx/s/hNLMMIIpvmqG9IGR8Q==
-X-Received: by 2002:a05:622a:5b9b:b0:462:af30:47d with SMTP id
- d75a77b69052e-46363b6b7b2mr8002541cf.0.1731627011394; 
- Thu, 14 Nov 2024 15:30:11 -0800 (PST)
+ bh=jVl3frt7JJvaGoZpVj9nVZRFo9ZUFNgp3w5TRVpUxl4=;
+ b=AdswJ3X1v2nEZYHY0/OGqaAMXJxNUNn7AxpWz4ySLL+N3j9jZiGGhj2as/1coFSRYQ
+ IiUJNyNwzkeDccfalF3fDFu0oZMf8oQ4hzmllZkx8g9009NfSjFsi1PoRKGeXj9lpUdS
+ xqDfODrzQQvPXxsjFXA0GweZsizf1bgq+3wZbxm2ZNZ29FMaetUNq9XFYezB7e1nZeHe
+ p0ZHJNWD1aPg8PW+OOiKejYH5jyJRwojxba+ZRKCQdIXynC8sgeGj/Jm/xgIxANHf/C5
+ laKOoNkIj+INOmTIgRUE3Cgu64sEKdeYwIiGAteuBeDKIhRyNG4WR87BiJI3rZuwp9tJ
+ 4vCA==
+X-Gm-Message-State: AOJu0YzxT8UmD6UDdb85qQzmX7VjsoLhpQW+wtcOu2L+LKVFfmP2YYv+
+ EHp7gKBjvZXRVh0RDgFGlIzqojyMV0/Pbd/h+ZQMMpPR+Ww04MinNQwB9cTEQFg=
+X-Google-Smtp-Source: AGHT+IHd68WhzcIAKjpxusuNPkyQIp1BoJ7ysAMUYa/8wtyrW0MS8c/NuaYs+Z0Qnem+s7WRzNELyg==
+X-Received: by 2002:a05:6214:4282:b0:6cb:be8f:a6b1 with SMTP id
+ 6a1803df08f44-6d3fb80c416mr8560646d6.25.1731629645181; 
+ Thu, 14 Nov 2024 16:14:05 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4635aa3a2ebsm11834621cf.51.2024.11.14.15.30.07
+ 6a1803df08f44-6d3ee773269sm11504846d6.4.2024.11.14.16.14.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 15:30:10 -0800 (PST)
-Date: Thu, 14 Nov 2024 17:30:05 -0600
+ Thu, 14 Nov 2024 16:14:04 -0800 (PST)
+Date: Thu, 14 Nov 2024 18:14:00 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Stefan Roese <sr@denx.de>, Michal Simek <michal.simek@amd.com>,
- Thomas Weber <weber@corscience.de>,
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Phil Sutter <phil@nwl.cc>, Siddarth Gore <gores@marvell.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Heiko Schocher <hs@denx.de>, Evgeni Dobrev <evgeni@studio-punkt.com>,
- Ilko Iliev <iliev@ronetix.at>, Dave Purdy <david.c.purdy@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: ZDI-CAN-24679: New Vulnerability Report
-Message-ID: <20241114233005.GN3600562@bill-the-cat>
-References: <DM5PR0102MB3477A6AC67623306D970177980AC2@DM5PR0102MB3477.prod.exchangelabs.com>
- <BYAPR01MB38307E0A0D8A480B35F122F6805B2@BYAPR01MB3830.prod.exchangelabs.com>
- <20241114145636.GF3600562@bill-the-cat>
- <868d9f51-0d84-4c22-abdc-95cd60184465@amd.com>
- <20241114163354.GH3600562@bill-the-cat>
- <CAJaLiFyw5jba5g=8h6R_aB26wqJvdN9eLvu3T6FJBBpm4LkzhA@mail.gmail.com>
- <20241114203349.GM3600562@bill-the-cat>
- <CAJaLiFz+ja_qChEYg-KPh5uydp6Y_nXGv_9FF61W15pzPcpNMQ@mail.gmail.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Subject: Re: [PATCH] test/cmd/wget.c: move net_test_wget() to the cmd test
+ suite
+Message-ID: <20241115001400.GO3600562@bill-the-cat>
+References: <20241105120653.99438-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ksRTnF4FwkEx+Orb"
+ protocol="application/pgp-signature"; boundary="xImupIkxtan7W3ec"
 Content-Disposition: inline
-In-Reply-To: <CAJaLiFz+ja_qChEYg-KPh5uydp6Y_nXGv_9FF61W15pzPcpNMQ@mail.gmail.com>
+In-Reply-To: <20241105120653.99438-1-jerome.forissier@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,130 +92,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ksRTnF4FwkEx+Orb
-Content-Type: text/plain; charset=utf-8
+--xImupIkxtan7W3ec
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 14, 2024 at 03:27:48PM -0800, Tony Dinh wrote:
-> Hi Tom,
-> Hi Stefan,
->=20
-> I've trimmed down the CC list a bit.
->=20
-> On Thu, Nov 14, 2024 at 12:33=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Thu, Nov 14, 2024 at 12:18:49PM -0800, Tony Dinh wrote:
-> > > Hi Tom,
-> > > Hi Stefan,
-> > >
-> > > On Thu, Nov 14, 2024 at 8:33=E2=80=AFAM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Thu, Nov 14, 2024 at 04:07:15PM +0100, Michal Simek wrote:
-> > > >
-> > > > > Hi,
-> > > > >
-> > > > > On 11/14/24 15:56, Tom Rini wrote:
-> > > > > > On Thu, Nov 14, 2024 at 04:02:29AM +0000, zdi-disclosures@trend=
-micro.com wrote:
-> > > > > >
-> > > > > > > Hi,
-> > > > > > > Do you have any updates to share regarding this vulnerability=
- report?
-> > > > > >
-> > > > > > Michal, microblaze-generic is the most active platform that ena=
-bles
-> > > > > > FS_JFFS2 by default and so vulnerable here. Can you find some r=
-esources
-> > > > > > to look in to fixing this please? Thanks.
-> > > > >
-> > > > > We have actually discussed this recently and we have other issues=
- with jffs2
-> > > > > and not going to fix it or recommend to use it.
-> > > > > JFFS2 should be removed from our configs and it is also not under=
- our regression.
-> > > >
-> > > > Ah OK, thanks. Adding a few more maintainers now then.
-> > >
-> > > Does this affect only boards that explicitly use CMD_JFFS2? how about
-> > > boards that have not been converted to bootstd and still use "nand
-> > > read" like this:
-> > >
-> > > include/configs/openrd.h
-> > >
-> > > #define CFG_EXTRA_ENV_SETTINGS  "x_bootargs=3Dconsole=3DttyS0,115200 =
-" \
-> > >         CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=3D2,2048\0" \
-> > >         "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x300000\0" =
-     \
-> >
-> > It's a problem for boards which read from JFFS2 in U-Boot, yes. So in
-> > the case of the kernel / etc being read from a raw location (or ubi or
-> > what-have-you), if FS_JFFS2 (or CMD_JFFS2, same list of platforms) is
-> > disabled the problem goes away. And if we're down to just a few lightly
-> > used platforms, we can just drop JFFS2 support. Thanks!
-> >
-> > --
-> > Tom
->=20
-> I did a survey. Currently, we have 27 boards that use JFFS2. In that,
-> I can take care of 15 boards (1 Armada XP and 14 Kirkwood).
->=20
-> - 10 boards with trivial changes (just remove JFFS2 from defconfigs)
->=20
-> configs/dns325_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/dockstar_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/goflexhome_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/guruplug_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/iconnect_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/nas220_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/nsa310s_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/nsa325_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/pogo_v4_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/pogo_e02_defconfig:CONFIG_CMD_JFFS2=3Dy
->=20
-> - Four boards (actually 2 boards, openrd has 3 variations) need
-> convert to bootstd and remove JFFS2
->=20
-> configs/openrd_base_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/openrd_client_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/openrd_ultimate_defconfig:CONFIG_CMD_JFFS2=3Dy
-> configs/sheevaplug_defconfig:CONFIG_CMD_JFFS2=3Dy
->=20
-> - One board needs to remove legacy boot sequence and remove JFFS2
-> (bootstd already done)
->=20
-> configs/ds414_defconfig:CONFIG_CMD_JFFS2=3Dy
->=20
-> Hopefully someone will take care of the 12 remaining boards.
+On Tue, Nov 05, 2024 at 01:06:53PM +0100, Jerome Forissier wrote:
 
-Great, thanks!
-
+> Since net_test_wget() is testing a command and is in test/cmd it
+> should be in the 'cmd' test suite, not 'lib'.
 >=20
-> All the best,
-> Tony
+> Reported-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  test/cmd/wget.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+
+This leads to a sequencing error in tests:
+------------------------------------ Captured stdout call -----------------=
+--------------------
+=3D> ut dm dm_test_eth_act
+Test: dm_test_eth_act: eth.c
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10004000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10004000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+
+Error: eth@10002000 No valid MAC address found.
+test/dm/eth.c:284, dm_test_eth_act(): -ENODEV =3D=3D net_loop(PING): Expect=
+ed 0xffffffed (-19), got 0xffffffea (-22)
+Test: dm_test_eth_act: eth.c (flat tree)
+test/dm/eth.c:273, dm_test_eth_act(): addr =3D NULL: Expected non-null, got=
+ NULL
+Test 'dm_test_eth_act' failed 2 times
+Failures: 2
+=3D>
+
+Where it's fine when run by itself, but fails in CI/etc when running all
+unit tests.
 
 --=20
 Tom
 
---ksRTnF4FwkEx+Orb
+--xImupIkxtan7W3ec
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2h/kACgkQFHw5/5Y0
-tyxzRAv/dumQR/y2HPnFHIIyDTyZGFFHNyU9KlhdAvDn0Vsax2qA2oTFFqw7BQi1
-A22xb+BbwsxLcqvC3z2ZNzcj6TH5BNMwSxRtAu9TLjuczf5IlaVKmZPYk6rwo44f
-UbUgn9jMlXPaWsdbyPKT2pF95/ZBHDTiwC0LMUNTYYwV9xrd/2G266xmAbcr8zIJ
-Ru9mdlqZum3u/EV6nZ/6Fy2PqeWTrAX7P7RYR/eVc5pnaH7uZGUoeHnyXr8ucttk
-qf5jddpA/1jPKNa87ehwq4idY9+D2Ad9DnH/Oi+oTf3XarxuvcwbiVF4mTmUku8p
-l/NV+5gviYnosIX+PNuArjUYMt7zSXwUtQo7Lj3JIHyB61WY2U+JzOe4XNO9aBqo
-8CYePAEXyyo3VP4X5bMKCxGCaS31yloOf5MwUW+kqB+RQlmnw0XibaTYeueqinsl
-lb+wHN0kDuSAtUlhmLLXBqHd7ves3FVGvuV/yudo8KJ7Lap+RxT5pB4TKc9tV86z
-sWnsfd2p
-=Lr88
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc2kkAACgkQFHw5/5Y0
+tyx0/wv/QRu720thRdeu18sxGuYHG6cO6grgInXRCCqOmh0vW9soZ5wfWlUYYr4B
+h7+plXD75BXPM4wuTdE4pl+jpShA1/R4MWueZrPuwfWKcOBGroE1m7jZCBcnWoKC
+ZUm0YKTSJF1c8uMDqbkb9JZjvtkpeDF5CCOjEw/ALy6SOYEJS5i5G/bBrG2gwimn
+ccq/mudyOtDtQAduxwQl+iNEmempiIalT8UD0BqwuCSjkiihsHthD4Iqxc3AYuPi
+IC9DqoyILrGNpfNj2efrpLkhhQxu5+0RNi2D/dej2oxQhl2Lm9OUg2av5qWPq4mJ
+KE6OXbAnsvFHSGSPq6WSvV0D1DgqDieIfkPmJOYVUv+TWldl5Pz1nrF/YrApdl6U
+LnzdyER3WtGvrLLCYSikZ7ofeg28i6L37xGh3gPaz8GhO1U56gGcUgAKlJTxz6ZU
+Mnq86brWn+lqUVhH0+AzM112ijExrkgeqwNC4Lded0c7TRrjwrU97h/oMk603DAk
+bqHE36QB
+=Pv9a
 -----END PGP SIGNATURE-----
 
---ksRTnF4FwkEx+Orb--
+--xImupIkxtan7W3ec--
