@@ -4,75 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A50D68BD8
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 21:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA6FD68BD8
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 21:39:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B04AF896EC;
-	Fri, 15 Nov 2024 22:39:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20760896E3;
+	Fri, 15 Nov 2024 22:39:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gcQdYFXw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cioI2cir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53694896D5; Fri, 15 Nov 2024 22:39:24 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id D3767896EF; Fri, 15 Nov 2024 22:39:25 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A997D88E32
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 22:39:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9B30896DA
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 22:39:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-4609beb631aso552901cf.2
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:39:21 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6ce3fc4e58bso7498336d6.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:39:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731706760; x=1732311560; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731706762; x=1732311562; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9hm8gyQ6carZfqA1UxuPCB9E2frscgKdGqZLxGMT0g0=;
- b=gcQdYFXwk2oq2W/Xsw281Lhv43mdIdeVxrQjzjsS0F031zZl023Thz9w0cyjx/GlHh
- YJ8Dk6pA4fMFcPGc8yBa666SNS3sgp0OtUKm1YEXEYRiGBUDaFU9d0ebLES6q5Lyhj0y
- wItVPNFJvZxLqZmAOPVMg8kmm9YwFRgAnQ3Jk=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=DrNb9Wkn7bXVIP75Du2rgrOkP4oE6TyPjtPZIHJZAuM=;
+ b=cioI2cirBZu7bgmwJ9x3AJ8iitW3diUnykze+Dnq2udL+f8nMnFsk1cQp3MPrjM/6O
+ VKHKyjPpXZbX5aVv/RuO6D+kchRK9BwwvXlu6YHbZlMo3ie4Rcr7Uq/lmXgl70zdAw2f
+ 9dqXaRAUXsD78x8nFGHfnJ/kKgeP1UPXHcKQg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731706760; x=1732311560;
+ d=1e100.net; s=20230601; t=1731706762; x=1732311562;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9hm8gyQ6carZfqA1UxuPCB9E2frscgKdGqZLxGMT0g0=;
- b=omBMXp5nMiB0nWm0ctPVhN2IdE47mKdC4LxYxoS0xR3r554wCcnfPLWwq3/dAez5/4
- uNe1ksrl0lIUsYkND4R+A3Od27bGQ1+N3yB97LQPnls65qHpajgQ3IU8Ut0PniafeywO
- R28pBGY5mM5DfpU+wlelnc5z1oM46VnDNr5d9waX24vtQzbcz/B1AKijPKuiedacLEH4
- rcJt4wxg+w4KP5n9rGrupMbrY214X6BElb2aTvz7iPnS1MoILgXM12tACncXWgSpuWk4
- UekLswX1iKaQgRjlmhs+SAbglR6BBxcL6fKApiUt1TMRzgEzbzd1IDMWzdoB2/hvS0+j
- ZlcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3fvOjfcbgLXkufz5pRrofhv9aQuAFE6pyY9R9ixRgmEkyVJCJQrxJzlia/ROlb37eWkuVX+8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0MYshsHJFAclA0HqNfXCNad6VpVK4tW2DM4We376nXtsQbotd
- uO6jFSiPoqLEaJDXowMUGmQ4y9dYun2X4JhgD1aEsk4RpaxjCZbArna2XfDn9Ug=
-X-Google-Smtp-Source: AGHT+IGfk9G8PoTPySKrCQBPuzkdP4jCr2rcaGZCfabomz6xGDBpBnHelXBYPZjtIsPJ+bCK7yupAg==
-X-Received: by 2002:ac8:5753:0:b0:460:a037:edba with SMTP id
- d75a77b69052e-46363eb2747mr54904631cf.46.1731706760511; 
- Fri, 15 Nov 2024 13:39:20 -0800 (PST)
+ bh=DrNb9Wkn7bXVIP75Du2rgrOkP4oE6TyPjtPZIHJZAuM=;
+ b=JEZsALGVUj4gWjvq5Sb7Gf++lrBUvvQ3yieKMPElTcRbx1g0Bn49hVCrnpjFU3HyVK
+ gRPROr4QplgnCvXyoau5tKaKOBB8jU03xGvP9NqqWKJfdeDmL1NebMTWw6c4YoLWc9oz
+ Z9Wis2wTrQrgjG/aC72ssQYVgky7hi2ELSnYx6q/X/MTIZv9pdra57dWzXdfJ7Bch3O+
+ eTq7c2KnaIp5HpqEikRlXjGfHf9FtM+XU4X3eD14cOcWdHMf0g/AN5XxMznDjcr7cWA8
+ dKdmIajgEyFkDEtUpeV4BlSN01Ur/pCWfgTvwUH4J3JhdrMq6AAOJ1HZUEWGPmo+Jmmk
+ QnLg==
+X-Gm-Message-State: AOJu0Yw/Bt8HUOsm/jgALy8eVtgWM3NmuU67g3FljJ5YTZas49P6ca+P
+ AKLIvldB+Ks9XAGtqpzFwE7o0OQHWwY8M0+aUxZ5NNxDfCYliIKEkJDc8/DXrl8LLD1CXMhJ5XD
+ V
+X-Google-Smtp-Source: AGHT+IFCG1LFXJEg4nSUoneQxt2NOnWnc7NSOtDlhvj+ou5Z3qAK8TYyCaieLz9Mq9Zt7oC1z5UgYg==
+X-Received: by 2002:a05:6214:390e:b0:6cb:8364:b0d3 with SMTP id
+ 6a1803df08f44-6d3fb7a864cmr46304166d6.1.1731706762592; 
+ Fri, 15 Nov 2024 13:39:22 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b35ca68b71sm201771885a.125.2024.11.15.13.39.18
+ af79cd13be357-7b35ca68b71sm201771885a.125.2024.11.15.13.39.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 13:39:19 -0800 (PST)
+ Fri, 15 Nov 2024 13:39:21 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
- Qu Wenruo <wqu@suse.com>, Dominique Martinet <asmadeus@codewreck.org>
-Cc: Dominique Martinet <dominique.martinet@atmark-techno.com>, 
- linux-btrfs@vger.kernel.org, u-boot@lists.denx.de
-In-Reply-To: <20241115021549.671932-1-asmadeus@codewreck.org>
-References: <20241115021549.671932-1-asmadeus@codewreck.org>
-Subject: Re: [PATCH u-boot v2] fs: btrfs: hide duplicate 'Cannot lookup
- file' error on 'load'
-Message-Id: <173170675838.2851979.15988769611030245565.b4-ty@konsulko.com>
-Date: Fri, 15 Nov 2024 15:39:18 -0600
+To: u-boot@lists.denx.de, Holger Brunck <holger.brunck@hitachienergy.com>
+In-Reply-To: <20241114180654.2564945-1-holger.brunck@hitachienergy.com>
+References: <20241114180654.2564945-1-holger.brunck@hitachienergy.com>
+Subject: Re: [PATCH] km: disable CMD_JFFS2 for all PPC boards
+Message-Id: <173170676066.2851979.14741656128876537249.b4-ty@konsulko.com>
+Date: Fri, 15 Nov 2024 15:39:20 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,18 +87,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Nov 2024 11:15:47 +0900, Dominique Martinet wrote:
+On Thu, 14 Nov 2024 19:06:54 +0100, Holger Brunck wrote:
 
-> Running commands such as 'load mmc 2:1 $addr $path' when path does not
-> exists will print an error twice if the file does not exist, e.g.:
-> ```
-> Cannot lookup file boot/boot.scr
-> Failed to load 'boot/boot.scr'
-> ```
-> (where the first line is printed by btrfs and the second by common fs
-> code)
+> We don't use this feature, we can remove it therefore in the defconfigs.
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
