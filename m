@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 241FBD65C7E
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:17:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8FEAD6A223
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:19:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A74B5890B1;
-	Fri, 15 Nov 2024 15:17:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1EE158907B;
+	Fri, 15 Nov 2024 15:19:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="luuJH8sP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cbQm3q7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3797890F6; Fri, 15 Nov 2024 15:17:54 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 1DD3889348; Fri, 15 Nov 2024 15:19:08 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EC6D88BB7
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:17:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4DE888D29
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:19:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6d400ffb227so2792626d6.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:17:52 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b148919e82so48796685a.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:19:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731680271; x=1732285071; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731680344; x=1732285144; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=p07dijzzbl7JbREuZqE+k+F2/vk4fuURyXNML6NdDCE=;
- b=luuJH8sPhrZbKWjgFE9q1eWbOXt7Ene6Ss6iQsC1FCOBnvqqvx9d0isU30sXicgih0
- OWcuR59mA1//vV2VAp1low4dC0MrXgEYlMDg4o2GAdbK7tyuldxFTF4upX4fL1Zb8Ylu
- 4RuM6ZEAweFL87a79OpuGCZIqoSBiuRV0EPmE=
+ bh=3ykC8tnH2lrue+87nmwK57W7vHwVYU9dCwo+jtCdzXA=;
+ b=cbQm3q7CH3xrPrxNJfIOzO64GTwq9LOzdOzq0uYYhbXEjd9vBLhqXEFpCFIjVbZosJ
+ lJs0toaaVzdi8A+eAACX52zqQFruMCBACEdid2MHlwUkW0/aHMPMJCEM0kginZe/Bad0
+ XVNDJwIfOvfQ43efw/ps4J+fKQsXeWI4IQN54=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731680271; x=1732285071;
+ d=1e100.net; s=20230601; t=1731680344; x=1732285144;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p07dijzzbl7JbREuZqE+k+F2/vk4fuURyXNML6NdDCE=;
- b=k37VPGTTY9pixFYNm8vQ3UbVzZIztWCC9Vh6XpAm6MqaOzBJRdfJgjC/XvHqmWYLLs
- 22UbuS3dPbII38KImOUrSJGFGJ/t3jU2eEtB8QKkVMnajK35+gPa3rDJ7U7ahGB3Haoq
- DsIxsV2Ab+A4JTNC/fj3/Q5Gla0y/2pV31Xz8Cj1+vzQoqwpD2WNjmuSKXmo4cv4LCnZ
- V8aXzo73i+r3RWiCv+tApFWxz3Gc5Bs/L+qy0V20+c/wTP7AOTJmTIpNNE7W9qPalSiq
- 7HAJC7GSO3zed5VXqh65pdTbOXZmtT7LaubFZOMZDnZPq2b/yQiI9CV+zQG6J6lRIRUl
- 4S1Q==
-X-Gm-Message-State: AOJu0YxQKY4vH7UtJuNSISLygi1jB5rGpDqFgC0XgPu7pnryUwaejqOI
- h2F9eXdQaOdNxEc4Hz9iXCZgV2fdCREyXhojwz18Akb4Qcb8rALtYofjOWHQlhg=
-X-Google-Smtp-Source: AGHT+IHuptAmTt9OWHHibUM6z/a9nzzhEoWVFDTAEEVmdU77WeDMgIghQg9OTSL6FgZzsgXDOnKRqw==
-X-Received: by 2002:a05:6214:3991:b0:6d3:6542:8499 with SMTP id
- 6a1803df08f44-6d3fb7dc949mr36169516d6.19.1731680271481; 
- Fri, 15 Nov 2024 06:17:51 -0800 (PST)
+ bh=3ykC8tnH2lrue+87nmwK57W7vHwVYU9dCwo+jtCdzXA=;
+ b=FqEMx8Ia+GiIICIVqDLgBInnZAdszKMkUFbRfoiOkaYETQuH1go96s6TW0UDYtTRCF
+ 1gnqVf5EmskIkS1MVTRosqJeNZeEGauk1Xj1MaAW1/bh/5I4ORrVyJwDiffj6oT4lObh
+ ffiLdOiM+KOITHXEbqibjSQcrofHpZeVg6sAdXMPmIo0LLCGVgX2KfPdhv4G1RYcsdJ+
+ mpqMPGrpOkc8REOeJqq+CkBfHBJg6ffEwrTCbXZiJHjNTBbzMvACYPqw8lPZAi+tOpIU
+ kb3xm3WKQGvbYazL6FfBAiEO7jAujhIyH5h1E+TLepACDUrjGH36vvA/3i7vG18SiN9O
+ aJDQ==
+X-Gm-Message-State: AOJu0YzJDpt/nB9QwZ7az1948e4IP7EXG0qlJUOmgNZpVynGLEMcSCdF
+ RTTGtHKkru69pXa5mpnSdqeEil9+B/epIj8W+7OQLt7ZKupwW5BsLMnHcN4j0aI=
+X-Google-Smtp-Source: AGHT+IGY8gcPehjXxq2YVcA77MRhwIs7/lFgRIwG/A+bYqSdQ0MZsBsQX6ovMO5zzm4+xFfzmMNBFw==
+X-Received: by 2002:a05:620a:4446:b0:7ac:a077:6a3d with SMTP id
+ af79cd13be357-7b3622a56e3mr359843185a.10.1731680344493; 
+ Fri, 15 Nov 2024 06:19:04 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d3ee7cfa88sm18102916d6.65.2024.11.15.06.17.50
+ af79cd13be357-7b35ca3059asm161901285a.84.2024.11.15.06.19.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 06:17:50 -0800 (PST)
-Date: Fri, 15 Nov 2024 08:17:48 -0600
+ Fri, 15 Nov 2024 06:19:03 -0800 (PST)
+Date: Fri, 15 Nov 2024 08:19:00 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Git commit failed with mbedtls/framework
-Message-ID: <20241115141748.GS3600562@bill-the-cat>
-References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tim Harvey <tharvey@gateworks.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] xilinx: Introduce MINI configuration
+Message-ID: <20241115141900.GT3600562@bill-the-cat>
+References: <81d086ccf96f9d601eb4b56a2a88d8bb2dacd48e.1731677784.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zJQQPsXRluZyViFv"
+ protocol="application/pgp-signature"; boundary="a8uOadeXaFlC7gOK"
 Content-Disposition: inline
-In-Reply-To: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
+In-Reply-To: <81d086ccf96f9d601eb4b56a2a88d8bb2dacd48e.1731677784.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,44 +99,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zJQQPsXRluZyViFv
+--a8uOadeXaFlC7gOK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
-> Hi Tom,
->=20
-> I am on 2025.01-rc2, and I am trying to commit some files. The error
-> seems to indicate this framework directory might need some
-> modification. Did I miss something?
->=20
-> error: 'lib/mbedtls/external/mbedtls/framework' does not have a commit
-> checked out
-> fatal: updating files failed
+On Fri, Nov 15, 2024 at 02:36:32PM +0100, Michal Simek wrote:
 
-That's odd. You didn't happen to try out some of the previous lwIP
-iterations on that tree did you?
+> There is no common symbol which mini configurations are using and recent
+> get_mem_top() changes adding 1.3kB without having a way to remove it.
+> That's why introduce new symbol which can be used for removing features
+> which are not requested by these configurations.
+>=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>=20
+> Based on:
+> https://lore.kernel.org/r/20241025172724.195093-3-sughosh.ganu@linaro.org
+> ---
+>  board/xilinx/Kconfig                             | 9 +++++++++
+>  board/xilinx/common/board.c                      | 4 ++++
+>  configs/amd_versal2_mini_defconfig               | 1 +
+>  configs/amd_versal2_mini_emmc_defconfig          | 1 +
+>  configs/amd_versal2_mini_ospi_defconfig          | 1 +
+>  configs/amd_versal2_mini_qspi_defconfig          | 1 +
+>  configs/xilinx_versal_mini_defconfig             | 1 +
+>  configs/xilinx_versal_mini_emmc0_defconfig       | 1 +
+>  configs/xilinx_versal_mini_emmc1_defconfig       | 1 +
+>  configs/xilinx_versal_mini_ospi_defconfig        | 1 +
+>  configs/xilinx_versal_mini_qspi_defconfig        | 1 +
+>  configs/xilinx_versal_net_mini_defconfig         | 1 +
+>  configs/xilinx_versal_net_mini_emmc_defconfig    | 1 +
+>  configs/xilinx_versal_net_mini_ospi_defconfig    | 1 +
+>  configs/xilinx_versal_net_mini_qspi_defconfig    | 1 +
+>  configs/xilinx_zynqmp_mini_defconfig             | 1 +
+>  configs/xilinx_zynqmp_mini_emmc0_defconfig       | 1 +
+>  configs/xilinx_zynqmp_mini_emmc1_defconfig       | 1 +
+>  configs/xilinx_zynqmp_mini_nand_defconfig        | 1 +
+>  configs/xilinx_zynqmp_mini_nand_single_defconfig | 1 +
+>  configs/xilinx_zynqmp_mini_qspi_defconfig        | 1 +
+>  21 files changed, 32 insertions(+)
+>=20
+> diff --git a/board/xilinx/Kconfig b/board/xilinx/Kconfig
+> index 0ff8440e6e06..a7da97dbae8c 100644
+> --- a/board/xilinx/Kconfig
+> +++ b/board/xilinx/Kconfig
+> @@ -40,6 +40,15 @@ config XILINX_PS_INIT_FILE
+> =20
+>  endif
+> =20
+> +config MINI
+> +	bool "Mini configuration"
+> +	depends on ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2
+> +	help
+> +	  This option disables features which are not needed for Mini U-Boot
+> +	  configurations. Mini U-Boot is running in EL3 mostly on size contrain=
+ed
+> +	  systems. It's purpose is to program non volatile memories or running
+> +	  initial memory tests.
+
+This is too generic of a symbol name. Please use XILINX_MINI or similar
+here, thanks.
 
 --=20
 Tom
 
---zJQQPsXRluZyViFv
+--a8uOadeXaFlC7gOK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc3WAwACgkQFHw5/5Y0
-tywkTgwAmFxuWs1ldY7gsYM55Q00yJzczztn9ZIrHWmK++w9Qou8j9atdW4PYPXi
-umd3t89YPBD3eD/ZBtnp3/3knpbckVRf2bQVNlVY/oaT0qViUrcCIGCtQs67sjSL
-W4Dud4IGlYpSKHA471jKdoDyzrNvCDP2Ke7ZKIuP5MByMWJM+gnrh2A1j64FHTVD
-90RD5euzsQG3higQYQUcGniPuWkG2uYmMREQmBB9wlisG/2S2HqtIDUISV1bV64q
-5te1qL12KgIQ0pOTyPnL/UtmZ8xKC/MAyiXrxmo2KEvOFPyNpI0/UYWnxni/MPIV
-1iceS1VaP+4x8/XSbammDrDkUcBVETQyQjESUVrK/pWuJKcucxlglP/FTLUp+ooG
-Dt9hF8ydg8jZ8LL2aDkQD+7FrnRMJlXp7zeVlZ/QLA+7Dya5GAuC/CZfU2nvQgGa
-bCCPlI8JRtam4ZoG/S85zqhYV2+E49qYt4h4JunYjbLysnQJDxS2fc4MWnoTdO0L
-uhfWvWZo
-=g0ZU
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc3WFQACgkQFHw5/5Y0
+tyy67Av7B/n6V3azw9SUAXQI4AlEjZm9Ic1ekBi/ahikXP8BcY8uXYX4PUbfsm3+
+Aih8aOujxuYFohPm49N3yyA30fjIId7lpt2DY2x2UMq9Rg6Se0sQ/C/6yb6qHzoc
+kFhNZJsjuKaGW2NQwZZtgW5SEvdPdjF9vGekZA81hTY7Djg2T8OYB89pq8goPvMn
+Bux23oRAjJQ6lkGG2hyhDp9muhuZulLWPPboLZObFDDl5IVtxCYHRZb4DNtrD1yu
+kMxMGrYb4tMsqO2SfYcPN335SEDiF19iIpySqhNvm/6rCgUCN+tLNGE/Jea2bG2D
+uZgJYOZloLH7bVRh5PEJwrOOk0PgUcdg4QrKaTe/qN3NeYUU7HHjT3AtONw5n0Y5
+232bWaWY5F5mXq2dXvtqzjepnTl7uFuo3c1HvqDT4e7s7FkJcEo0InA9s4ZSfalp
+rgzb6DQT9HBAvNr9U+qG7/bgRVNC4m1wM9zZbns1YqWAP5zcUtNItnmf6NftIKom
+dejpGwjk
+=nNzM
 -----END PGP SIGNATURE-----
 
---zJQQPsXRluZyViFv--
+--a8uOadeXaFlC7gOK--
