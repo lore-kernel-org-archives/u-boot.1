@@ -4,79 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29004D6DDE3
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 13:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB71DD637CE
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:04:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81BBB88FB5;
-	Fri, 15 Nov 2024 14:58:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F5AA88FB5;
+	Fri, 15 Nov 2024 15:04:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f8xo9zni";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hWMSPgxs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A89258904D; Fri, 15 Nov 2024 14:58:07 +0100 (CET)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 97F618904D; Fri, 15 Nov 2024 15:04:14 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC45888E4B
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 14:58:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86E3288EF7
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:04:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7f3e30a43f1so1225333a12.1
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 05:58:04 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-431481433bdso5950605e9.3
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:04:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731679083; x=1732283883; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zqaehUAp9oHwZeI9sYOQdy4MKfPtTC7qZgcdjR131K8=;
- b=f8xo9zniiMvuRvbVMYcW/zr3muddDsDfky6fTHjrzj7n/7ShRhYfA2K/JaZCDR01LR
- lNWXfn68a4bMVysB3XPMZmmrqH27cUXScahj3BbfaZykVAc7ej8/pg8RO5izzLfhcnS6
- MfqetsITlOPaql2UbanHJ2R/TvJjkfs4JDI149n3ZDD0/eiUAmqpHH4SvLbw1C/bupXT
- BaxUEvnPJrd9evslGgMj4nXYrieTaoROZlUPGgm2Gweioy0nPuT3+cYcEyikO5xnHORt
- qE5Lv8dXao7CHMe8SzqXXDPio4NuNFPqXy3CkBwwm61j1ruTzko5bFtCQPsr5z4MDUhw
- hVug==
+ d=linaro.org; s=google; t=1731679452; x=1732284252; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=lpB0qu0GSGHrXDcJf/fV0re+V5hcE5UctaQ+JRYlOx4=;
+ b=hWMSPgxs4Wo9nvy0n7q1HbCTh8E0G0J3ffT9BudE9MTYEEVtAEt64Bc29SQvlyrhot
+ oOxBzQDT451CVs5Hbb4FrFCQRVug9y5lm7ASKTi9QXEWGT3c99IiCfFDwHqFw+VWS3hK
+ U+mrFtSykM8HA0ShmQv0Lzm/rbspLCBwsI9X26D+thGkvp1IMZhewcI1+ZLWqsvsrJAw
+ 0uYxgsPI3+Mrn9x+gwcEdKuVYAaXXyjAInyIL6O7KJ/estdcJJSEPeNpbmMMje9+G3gJ
+ iJcYz+yjnwkr2w9PulHkSX3wTdcJmdYRY7VH2D4gGMnB3QquVaxYUiuhgRu138rkvII/
+ zZ1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731679083; x=1732283883;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zqaehUAp9oHwZeI9sYOQdy4MKfPtTC7qZgcdjR131K8=;
- b=StldiNaDD6lfem5iRtURxzRyracSheR56TKyNZvAdwkPqVbvMcllQwq10EU09Q8qxm
- ac+Rdso5xXpTeNdcDJbvBmL4QAsKvlGjfcV5h+VW6odoifT2Ox4OuVE2H/NjENa2PNTx
- pLlYuKz87BIY62vy44Fj0J2eHCZ2cU6HT+MxtLMkG44nNUJlIPiXCYmhOaNIeINSaRCu
- zmbAzioNQhM+30YkkTD4QU7n1VcJTWjnqHnmi5L4VUldz4SF/CPlPTtPcqo0Q+f48YJS
- l6F40xv8HriqkVraUQ0WtkD4nM7vCyl/o6tXfGpoiayR+FyuUXbglpOiY5Gmo9FUGxJ4
- BrGw==
-X-Gm-Message-State: AOJu0YxYYVZgxn0nKsE4MKEIhcsHLd7T21R31LfAoXglZi3kvZlRfoHS
- hP/ddNtZxV7jvHN3BrpjnYT57A8d2rbl4FGErQx7a9ma4AX7ZI1AA8JtX0U1+VV39TaeBUiR93l
- /qpzjlRhXinj9D+1uTEL9UUJmZLpvyb4iPdPAUg==
-X-Google-Smtp-Source: AGHT+IEugZi+TBm0Jo8tkE0IFdGeQ9KJB4aa8qBHx+qkFLBWnpUn5rOHT0r9jDPQs1bYEUybXKhvC4DJL0WrwYaGbM0=
-X-Received: by 2002:a05:6a21:3985:b0:1dc:7907:6d67 with SMTP id
- adf61e73a8af0-1dc90bf49b3mr4408353637.40.1731679083396; Fri, 15 Nov 2024
- 05:58:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731679452; x=1732284252;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=lpB0qu0GSGHrXDcJf/fV0re+V5hcE5UctaQ+JRYlOx4=;
+ b=La3EuJKBfRT9Qm5DhUZGiN3UPLbX6npOQGozSmx2DV24Dq07dyfFyjixZuS7fdk5wi
+ Jxf6Ik8Fz3JIxmGhYO+ucpMZH6KGWCtrjgnU3LRIk4pNzZZutNttxoxDTjTrsxec/2tN
+ Mz9GXAdMLR2ePNTZhHP/yPxhHeD8oQ3w7a0fhcgawUI9r+BWjHCd4d5GDvqM8CBi5opX
+ sFxLcyklDl/N8kmAG92k4aWK8rP/CPPu7bQNiGtGgUVmM7q1FIA+/lAphZPtTUegodqH
+ gVmQIMiyWapr9HY3Hzz50V6rEYd0EXj0fps2MSdyCX5Pi2z0T5ivUu6VdsxVQa5e3Q8C
+ X1wA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWMZfAZ6UoPgZKWsCa7g3H7JSepRPPd+saE6CLEjNauEn7EJ+GOgLM7Mn8GwIZ0mjUuZmeLpTI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQIVkmXc5LpPCesDZ+zqDUpfSutS3g9k213Ctb8bEp5dpCjWaR
+ 3au+vLX0vab6YhyNb3kSMvr0FIuiMkdZcw7/bZjPHhnd43FY0A79a528Zr+mmvQ=
+X-Google-Smtp-Source: AGHT+IG/H2rXaPEypfg/arEShsMb6iIyTSAfnBTzdySY3ga6aUWt8W9nQa+lW4X+PT5nMK8QNeoe2Q==
+X-Received: by 2002:a05:600c:138f:b0:431:7c78:b885 with SMTP id
+ 5b1f17b1804b1-432df7179d4mr23188545e9.4.1731679450111; 
+ Fri, 15 Nov 2024 06:04:10 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:8512:42be:302f:f436?
+ ([2a01:e0a:982:cbb0:8512:42be:302f:f436])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432d478511dsm80500835e9.0.2024.11.15.06.04.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 Nov 2024 06:04:09 -0800 (PST)
+Message-ID: <6f0f015b-e5b2-4ea6-be6a-bddd945fdcf7@linaro.org>
+Date: Fri, 15 Nov 2024 15:04:08 +0100
 MIME-Version: 1.0
-References: <20241112141105.640189-1-sjg@chromium.org>
- <20241112141105.640189-2-sjg@chromium.org>
- <CAC_iWjJB4=6Zm8XsgiQcQkUzoDOWnAowzf6C3sVvXNQTv_oByA@mail.gmail.com>
- <CAFLszTirwS0svRfOA-k-XcKhrWv9E_FaSfda5ziURaf=ynzTqg@mail.gmail.com>
- <CAC_iWjJg4ux0U2hTrmuGDEJGng_-z+GAkg+7Lw_tdXGR8rJGLw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJg4ux0U2hTrmuGDEJGng_-z+GAkg+7Lw_tdXGR8rJGLw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 15 Nov 2024 15:57:27 +0200
-Message-ID: <CAC_iWjJpGAWb7VN+psvePJwx3cuFRYDUGqHD-OkSnNfvwgeBjA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/9] sandbox: efi_loader: Correct use of addresses as
- pointers
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2 3/5] configs: khadas-vim3l_android{_ab}: move on
+ bootmeth android
+To: Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io
+References: <20241114-adnroidv2-v2-0-015bffb1373a@baylibre.com>
+ <20241114-adnroidv2-v2-3-015bffb1373a@baylibre.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20241114-adnroidv2-v2-3-015bffb1373a@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,197 +122,125 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Nov 2024 at 15:54, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On 14/11/2024 22:29, Guillaume La Roque wrote:
+> Actually khadas vim3l use distro command to boot android image.
+> Move on new bootmeth android for A/B and non-A/B vim3l android.
+> 
+> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+> ---
+>   configs/khadas-vim3l_android_ab_defconfig |  7 ++++++-
+>   configs/khadas-vim3l_android_defconfig    |  7 ++++++-
+>   include/configs/khadas-vim3l_android.h    | 26 ++++++++++++++++++++++----
+>   include/configs/meson64_android.h         |  3 ---
+>   4 files changed, 34 insertions(+), 9 deletions(-)
+> 
+> diff --git a/configs/khadas-vim3l_android_ab_defconfig b/configs/khadas-vim3l_android_ab_defconfig
+> index 4d7b90f23002..43db61056baf 100644
+> --- a/configs/khadas-vim3l_android_ab_defconfig
+> +++ b/configs/khadas-vim3l_android_ab_defconfig
+> @@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+>   CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTMETH_ANDROID=y
+> +# CONFIG_BOOTMETH_EXTLINUX is not set
+> +# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
+> +# CONFIG_BOOTMETH_EFILOADER is not set
+> +# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_OF_BOARD_SETUP=y
+>   # CONFIG_DISPLAY_CPUINFO is not set
+> @@ -35,7 +41,6 @@ CONFIG_SYS_MAXARGS=32
+>   CONFIG_CMD_ADTIMG=y
+>   CONFIG_CMD_ABOOTIMG=y
+>   # CONFIG_CMD_IMI is not set
+> -CONFIG_CMD_BCB=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+>   CONFIG_CMD_I2C=y
+> diff --git a/configs/khadas-vim3l_android_defconfig b/configs/khadas-vim3l_android_defconfig
+> index 4ec27262cdc7..32d57a5b9090 100644
+> --- a/configs/khadas-vim3l_android_defconfig
+> +++ b/configs/khadas-vim3l_android_defconfig
+> @@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+>   CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTMETH_ANDROID=y
+> +# CONFIG_BOOTMETH_EXTLINUX is not set
+> +# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
+> +# CONFIG_BOOTMETH_EFILOADER is not set
+> +# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_OF_BOARD_SETUP=y
+>   # CONFIG_DISPLAY_CPUINFO is not set
+> @@ -34,7 +40,6 @@ CONFIG_SYS_MAXARGS=32
+>   CONFIG_CMD_ADTIMG=y
+>   CONFIG_CMD_ABOOTIMG=y
+>   # CONFIG_CMD_IMI is not set
+> -CONFIG_CMD_BCB=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+>   CONFIG_CMD_I2C=y
+> diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
+> index f39a3782d663..31068c59d5ed 100644
+> --- a/include/configs/khadas-vim3l_android.h
+> +++ b/include/configs/khadas-vim3l_android.h
+> @@ -41,10 +41,28 @@
+>   	"name=rootfs,size=-,uuid=" ROOT_UUID
+>   #endif
+>   
+> -#define EXTRA_ANDROID_ENV_SETTINGS \
+> -	"board=vim3l\0" \
+> -	"board_name=vim3l\0" \
+> +#define CFG_EXTRA_ENV_SETTINGS                                    \
+> +	"board=vim3l\0"                                               \
+> +	"board_name=vim3l\0"                                          \
+> +	"bootmeths=android\0"                                         \
+> +	"bootcmd=bootflow scan\0"                                     \
+> +	"adtb_idx=2\0"                                                \
+> +	"partitions=" PARTS_DEFAULT "\0"                              \
+> +	"mmcdev=2\0"                                                  \
+> +	"fastboot_raw_partition_bootloader=0x1 0xfff mmcpart 1\0"     \
+> +	"fastboot_raw_partition_bootenv=0x0 0xfff mmcpart 2\0"        \
+> +	"gpio_recovery=88\0"                                          \
+> +	"stdin=" STDIN_CFG "\0"                                       \
+> +	"stdout=" STDOUT_CFG "\0"                                     \
+> +	"stderr=" STDOUT_CFG "\0"                                     \
+> +	"dtboaddr=0x08200000\0"                                       \
+> +	"loadaddr=0x01080000\0"                                       \
+> +	"fdt_addr_r=0x01000000\0"                                     \
+> +	"scriptaddr=0x08000000\0"                                     \
+> +	"kernel_addr_r=0x01080000\0"                                  \
+> +	"pxefile_addr_r=0x01080000\0"                                 \
+> +	"ramdisk_addr_r=0x13000000\0"                                 \
+>   
+> -#include <configs/meson64_android.h>
+> +#include <configs/meson64.h>
+>   
+>   #endif /* __CONFIG_H */
+> diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
+> index 77364bbf9cf0..37ef8b8f7a7e 100644
+> --- a/include/configs/meson64_android.h
+> +++ b/include/configs/meson64_android.h
+> @@ -104,9 +104,6 @@
+>   	"elif test $board_name = sei610; then " \
+>   		"echo \"  Reading DTB for sei610...\"; " \
+>   		"setenv dtb_index 1;" \
+> -	"elif test $board_name = vim3l; then " \
+> -		"echo \"  Reading DTB for vim3l...\"; " \
+> -		"setenv dtb_index 2;" \
+>   	"elif test $board_name = vim3; then " \
+>   		"echo \"  Reading DTB for vim3...\"; " \
+>   		"setenv dtb_index 3;" \
+> 
 
->
->
-> On Fri, 15 Nov 2024 at 15:53, Simon Glass <sjg@chromium.org> wrote:
->
->> Hi Ilias,
->>
->> On Thu, 14 Nov 2024 at 00:04, Ilias Apalodimas
->> <ilias.apalodimas@linaro.org> wrote:
->> >
->> > Hi Simon,
->> >
->> > On Tue, 12 Nov 2024 at 16:11, Simon Glass <sjg@chromium.org> wrote:
->> > >
->> > > The cache-flush function is incorrect which causes a crash in the
->> > > remoteproc tests with arm64.
->> > >
->> > > Fix both problems by using map_sysmem() to convert an address to a
->> > > pointer and map_to_sysmem() to convert a pointer to an address.
->> > >
->> > > Also update the image-loader's cache-flushing logic.
->> > >
->> > > Signed-off-by: Simon Glass <sjg@chromium.org>
->> > > Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
->> > > ---
->> > >
->> > > (no changes since v2)
->> > >
->> > > Changes in v2:
->> > > - Drop message about EFI_LOADER
->> > >
->> > >  arch/sandbox/cpu/cache.c              |  8 +++++++-
->> > >  drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
->> > >  lib/efi_loader/efi_image_loader.c     |  3 ++-
->> > >  3 files changed, 20 insertions(+), 9 deletions(-)
->> > >
->> > > diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
->> > > index c8a5e64214b..96b3da47e8e 100644
->> > > --- a/arch/sandbox/cpu/cache.c
->> > > +++ b/arch/sandbox/cpu/cache.c
->> > > @@ -4,12 +4,18 @@
->> > >   */
->> > >
->> > >  #include <cpu_func.h>
->> > > +#include <mapmem.h>
->> > >  #include <asm/state.h>
->> > >
->> > >  void flush_cache(unsigned long addr, unsigned long size)
->> > >  {
->> > > +       void *ptr;
->> > > +
->> > > +       ptr = map_sysmem(addr, size);
->> > > +
->> > >         /* Clang uses (char *) parameters, GCC (void *) */
->> > > -       __builtin___clear_cache((void *)addr, (void *)(addr + size));
->> > > +       __builtin___clear_cache(map_sysmem(addr, size), ptr + size);
->> > > +       unmap_sysmem(ptr);
->> > >  }
->> > >
->> > >  void invalidate_icache_all(void)
->> > > diff --git a/drivers/remoteproc/rproc-elf-loader.c
->> b/drivers/remoteproc/rproc-elf-loader.c
->> > > index ab1836b3f07..0b3941b7798 100644
->> > > --- a/drivers/remoteproc/rproc-elf-loader.c
->> > > +++ b/drivers/remoteproc/rproc-elf-loader.c
->> > > @@ -6,6 +6,7 @@
->> > >  #include <dm.h>
->> > >  #include <elf.h>
->> > >  #include <log.h>
->> > > +#include <mapmem.h>
->> > >  #include <remoteproc.h>
->> > >  #include <asm/cache.h>
->> > >  #include <dm/device_compat.h>
->> > > @@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev,
->> unsigned long addr, ulong size)
->> > >         for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
->> > >                 void *dst = (void *)(uintptr_t)phdr->p_paddr;
->> > >                 void *src = (void *)addr + phdr->p_offset;
->> > > +               ulong dst_addr;
->> > >
->> > >                 if (phdr->p_type != PT_LOAD)
->> > >                         continue;
->> > > @@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev,
->> unsigned long addr, ulong size)
->> > >                 if (phdr->p_filesz != phdr->p_memsz)
->> > >                         memset(dst + phdr->p_filesz, 0x00,
->> > >                                phdr->p_memsz - phdr->p_filesz);
->> > > -               flush_cache(rounddown((unsigned long)dst,
->> ARCH_DMA_MINALIGN),
->> > > -                           roundup((unsigned long)dst +
->> phdr->p_filesz,
->> > > +               dst_addr = map_to_sysmem(dst);
->> > > +               flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
->> > > +                           roundup(dst_addr + phdr->p_filesz,
->> > >                                     ARCH_DMA_MINALIGN) -
->> > > -                           rounddown((unsigned long)dst,
->> ARCH_DMA_MINALIGN));
->> > > +                           rounddown(dst_addr, ARCH_DMA_MINALIGN));
->> > >         }
->> > >
->> > >         return 0;
->> > > @@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice
->> *dev, ulong fw_addr,
->> > >         const struct dm_rproc_ops *ops;
->> > >         Elf32_Shdr *shdr;
->> > >         void *src, *dst;
->> > > +       ulong dst_addr;
->> > >
->> > >         shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
->> > >         if (!shdr)
->> > > @@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice
->> *dev, ulong fw_addr,
->> > >                 (ulong)dst, *rsc_size);
->> > >
->> > >         memcpy(dst, src, *rsc_size);
->> > > -       flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
->> > > -                   roundup((unsigned long)dst + *rsc_size,
->> > > -                           ARCH_DMA_MINALIGN) -
->> > > -                   rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
->> > > +       dst_addr = map_to_sysmem(dst);
->> > > +       flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
->> > > +                   roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
->> > > +                   rounddown(dst_addr, ARCH_DMA_MINALIGN));
->> > >
->> > >         return 0;
->> > >  }
->> > > diff --git a/lib/efi_loader/efi_image_loader.c
->> b/lib/efi_loader/efi_image_loader.c
->> > > index 0ddf69a0918..bb58cf1badb 100644
->> > > --- a/lib/efi_loader/efi_image_loader.c
->> > > +++ b/lib/efi_loader/efi_image_loader.c
->> > > @@ -13,6 +13,7 @@
->> > >  #include <efi_loader.h>
->> > >  #include <log.h>
->> > >  #include <malloc.h>
->> > > +#include <mapmem.h>
->> > >  #include <pe.h>
->> > >  #include <sort.h>
->> > >  #include <crypto/mscode.h>
->> > > @@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct
->> efi_loaded_image_obj *handle,
->> > >         }
->> > >
->> > >         /* Flush cache */
->> > > -       flush_cache((ulong)efi_reloc,
->> > > +       flush_cache(map_to_sysmem(efi_reloc),
->> >
->> > Shouldn't we now umap that address on the err: tag?
->>
->> This address should be in sandbox's DRAM, so there is no mapping
->> created. The mapping is needed for things that are not in the emulated
->> DRAM, such as stack variables.
->>
->
-> Isn't there a ref counter that gets increased for these though?
-> Why would we not want to decrease it properly?
->
-
-Ah scratch that, the refcnt is not for the sandbox DRAM. But in any case, I
-don't like seeing that magic of people knowing what they should unmap or
-not.
-I would prefer calling the unmap call unconditionally, since the function
-deals with sandbox memory correctly already
-
-Thanks
-/Ilias
-
->
->
-> Thanks
-> /Ilias
->
->>
->> >
->> > Thanks
->> > /Ilias
->> > >                     ALIGN(virt_size, EFI_CACHELINE_SIZE));
->> > >
->> > >         /*
->> > > --
->> > > 2.34.1
->> > >
->>
->> Regards,
->> Simon
->>
->
+Acked-by: Neil Armstrong <neil.armstrong@linaro.org>
