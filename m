@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20672D68BC6
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 15:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1727FD68BC6
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 15:44:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE1BD89358;
-	Fri, 15 Nov 2024 16:44:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28F4E89650;
+	Fri, 15 Nov 2024 16:44:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W2gAIl0l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eyqKbR8/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 720AC89362; Fri, 15 Nov 2024 16:44:22 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 8291E89473; Fri, 15 Nov 2024 16:44:23 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 690F989251
+ by phobos.denx.de (Postfix) with ESMTPS id AB8168933F
  for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 16:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-37ed7eb07a4so563045f8f.2
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-432d9bb168cso12245345e9.1
  for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 07:44:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1731685460; x=1732290260; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Dkh8Jt10A3nP/ytR7/E369WaFWR3kynGlq7+K5XIVpg=;
- b=W2gAIl0lD0XxRv5W+IhA5S9UfrW9RZPAvRzSSie609aqor4ZZQTVZZJPp5uNwRLS2d
- YVcVsJnIoNcPOKgM9+jBr8b5+/tP0GwK2DcnltHp/UbJaejSGLXS/ihPOMZEIYwPbwhF
- qQwpX/HP2kCnK5Hf92fL8hIqXo1FGW9MCp24FmeMfaCAqhug/tsYHg3/CaS8qnpihcCT
- H9YFRyK+0tqNVeIPrbtxBo6dd+DeA8XIyG9nDx9bdE1HlYPymUGo+49xx1pEe0fVsit0
- 20Ggp6fINy+p8WRT4GWnGPJVQbKSizMefH5M5nibr64PVdYuq3i+SFFBzgfiJ/5xiApJ
- EOmQ==
+ :reply-to; bh=rrvJRiV3dcn6pHpmLcnFwuBGtehzce3TKQ1cUNVV4Z8=;
+ b=eyqKbR8/u6kwCg9hwlQ34VThWEk1/GMFk3sWMtDRreeK3OYXY+oK6eyU/ph7YZS2XH
+ AbVVn6MC5WNX+VKB7giIaX8x6aM7e3QHdWalRD/pXn0nFiwYc9WnE9GmYL/6WrWEkCnS
+ ri3WMOJLaT1rKt8vzRhaGmtkjcgPquQ6/zr5JYtZZyobN2tVjv0xRzeinUYwAevqBjaZ
+ wb5mhpMril19rwJPjXqmDtriOfbN7r3t1LcH2qndWtz3k+DCiACLzXpQf8EQ/5mZJ5FK
+ hUuP1keLw3nA3ey1qfl1uXiucJlCbCnTb4InASOOj49FfQ+kM2JpqvnETlq7F6Wcab6h
+ rnvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1731685460; x=1732290260;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dkh8Jt10A3nP/ytR7/E369WaFWR3kynGlq7+K5XIVpg=;
- b=DSfPv03Ux5euIuxKbKTK5jRob2tCFg/UDBYUm3qBzeCXEV5AA0RkSDItX6e/+ECeY8
- +I+sHvI0913Tgp4H7C6p9PL/EmZ6jSxrfzDqKR1qc8oooPwwSMzlvqI/piLfju5SAlGF
- dqeN18IFksTLg7pF6e+2rmjINLPIeQBA+TNSALLdwNOxw+FMPNEnh+k9mAyjrKZP1qyc
- Sq43QjTtzibzf7a33eO+9CSD4kiNn0TEJXZXByh/J/1W65viTPy9PCbzHfHc6C0rTtAq
- Ze74kfZvU0Sa4hUrf0v0uW4lLS3UyMqqjjhNmKYWZC27F4vxhtlV4fytpJPjRauGG+4H
- 7JzQ==
-X-Gm-Message-State: AOJu0YxnCXvEz46I8wsXYKothxqLRVSY9esc2Yjnm137LLPpZsOyDBMj
- flRBL5PlO3rDdnJdMp1gdlBrM381+rufZv6WYEoxe/e2RFCnTn8UWJBSUoMhET0=
-X-Google-Smtp-Source: AGHT+IFwaiiR1BGOLuBR0UNx7wKykwXpuJrr8zemtJKWBwxBToTCfE3aB7VOQZRL5oxwYmNS8jW5zw==
-X-Received: by 2002:adf:e18a:0:b0:37d:3e8b:846f with SMTP id
- ffacd0b85a97d-38225a0cd83mr2623969f8f.24.1731685459455; 
- Fri, 15 Nov 2024 07:44:19 -0800 (PST)
+ bh=rrvJRiV3dcn6pHpmLcnFwuBGtehzce3TKQ1cUNVV4Z8=;
+ b=OKjQ+VWqZEqR27QI/jPbU8UnKYvkhkAJeU5oYmnRLFLHEmQk2M1xhyk/RYUHXbSsmc
+ 9i2dViirkWI2dY6mb8Yv6/x17EZWxyXRf8ha6j5a0SaHY5uRFFBUTgbo0eHTsoh3iaYv
+ 6kh1+lJOVrG7Rxhnc7z3o+xtVk1zveTk7OgVLXtqFLTYRKVXnfckHt4/aP3SbSOb+WPQ
+ i9yJOipR7FJotD3JPMG7NbKdZ9xz+JXK9iQyYuTxIcturPuYRr2YhdL+sp15Smgf2bXG
+ JgJow1ZkO9s36srsWNKMNlpegux2eUzhd1GI0dla31H6nYJafDtTyKugOqcH8ZkxeSxC
+ mzvQ==
+X-Gm-Message-State: AOJu0YxkoVHmUfaRh5wbRukuIiuu86Q2MdcPiVQbvFJvtJOpUVV3Eiwa
+ XWjIdq8Eg0cRg8Acl27GaLbdV8j9RQ7EKW1HwwlrFdA0pipOjLKoVCzet48uuuM=
+X-Google-Smtp-Source: AGHT+IGg8pD3ePlbM34PEDnLAWOWsFgaLzqcMFeKXAkf+xYs25oJj2A8ZpULinbtUF33mHLbhyzd3Q==
+X-Received: by 2002:a05:600c:3c8f:b0:431:15f1:421d with SMTP id
+ 5b1f17b1804b1-432d976c221mr75847355e9.16.1731685460137; 
+ Fri, 15 Nov 2024 07:44:20 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3821ada3fc9sm4637773f8f.20.2024.11.15.07.44.18
+ ffacd0b85a97d-3821ada3fc9sm4637773f8f.20.2024.11.15.07.44.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 15 Nov 2024 07:44:19 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 15 Nov 2024 16:44:15 +0100
-Subject: [PATCH 1/2] pinctrl: qcom: Add X1E80100 pinctrl driver
+Date: Fri, 15 Nov 2024 16:44:16 +0100
+Subject: [PATCH 2/2] qcom_defconfig: enable X1E80100 pinctrl driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241115-topic-x1e80100-pinctrl-v1-1-35f984226e47@linaro.org>
+Message-Id: <20241115-topic-x1e80100-pinctrl-v1-2-35f984226e47@linaro.org>
 References: <20241115-topic-x1e80100-pinctrl-v1-0-35f984226e47@linaro.org>
 In-Reply-To: <20241115-topic-x1e80100-pinctrl-v1-0-35f984226e47@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -78,20 +78,20 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4478;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=667;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=wn0cDa2tN9puRZMOsTzMtjvuja94YCzXDuR+VHk30RE=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnN2xRDcsPgVvrV9Eys7ij2dumfa5kPYd9TkFmNKms
- oZiT5YeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZzdsUQAKCRB33NvayMhJ0VVvD/
- 9gw+Kux7dKFOLXEOMH0RcTiqYv1q0EaSspVXUhk3XQ5wz2YGv64HpT20tchdGzLAdh1bf5kBKx+X+l
- MfVELMLV3nXeafV5K8ZSL2MhlKYlnbBYNCbxRDLEu5v+RRE9S7elVLC+2mwmwriN6DuEMUBazon2ya
- UxsDJe8BpIUPKcry9KRwgrXW3VKMege3hQ+uAo9G15VhkkN8jhKDMY2LFjBDCRUh+LtodauXJK4Bzm
- toh2asFeHmPmlHbCQxwLLfQPwYIygt71/ChXAjgjqIoz9EYwlCeZPhithUX8kA8MddqrAF/yY0Ah7m
- x1Ltr2iV6pnXXkVZHe2OhF7bmus9mYWdVdWdXJ/9K5HC5BvUs1Fkg/4OjXSIfY/8uvw+uw28LEuNPk
- 8dIQECNoCCfz3EwqeQOJHM6Wx0vbkMMquE+vMq3VUK6NlzdA9X2xX1vUeerv/W1Axsqh/Wx4JB5X4P
- +ef1G42nYfe2MQ10c0j3k1U6hn/2eTxT80AXR8XjMCHFwWlGVu3KK6kiugTjuMClA+VKdUGp6eDLCZ
- aKEzrBft9V/mGGJK0l5EVwmftO4/DBVfj2Qh1OvHVan/IosMzu71gdGE8xS9454ONvxQszF11SjDJu
- llbEtb2DEGSOJtAf9GkczGA0deAxZ3oCOnJ3W9S7hBdQH+9ZCKc2xgrwnhrA==
+ bh=jrxg3E1Ktm7qMTsO7msEH1Cuk9ciU0/GrfGse9Qs9SE=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnN2xRSlCPpl6gI6FWuoZBBeI+PLTPgnFLYurU32np
+ XkCgPu6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZzdsUQAKCRB33NvayMhJ0SsyD/
+ 432fVfhKckUbo1gDHYg4AGeQBCvkFeqzUO/jsddiIpiDMmAiUVF/Bl61oKpukqO0+GfQCEERhcgfLo
+ 5egdQjQyx97djCaeN4P31fh2ZmKQ6IDGaVw0o5/1uwX0RR24cj1phebqJQWmDvs4cbcemRf9aWkPcS
+ vwfzaqG/E6HXF1HaNnCJWwXnxspayo30pz8JuiNNXrb4dH1CU7MlAkmBx0dfYl2vvC0e5S9qNMgRJM
+ c1LJ3s2AWKjNCJ8UQPeUsQtZwAajXBlMFyLUr5/Mk9kAOUvr2Qi1S/FwCjUhs1cApU2OxYfMutJqNb
+ NvJKljlNCj9B7XNdXubDpPI3Idap2UCiNuaa2wdLJXo8rTcZDVDFHkEIcM1gHWRgtU4QLq3YjtEl2L
+ u2HsmW1O6355tdd+KuKfYeKgWDN3f7YRXwACD/BxW4GGkjTbphGlpW2xTdBGEnLe0Ei8uUBzJWhU3m
+ +ur0KxeFBgk0OKYHGIVaQTtR2R5BG1eC6k/+l3us9xnPnvdkDcUHQAVx6YG9sWHcv84HF+q+huNaEk
+ Oc2fJgjY6ECJQos8X12LIwRDJJJSTW1T9sSN/SZH42TEv94fznFxpkTQ/koMjLAS6kfHrYFflyt9FL
+ IRjBfDnkvfOOZjjro7QW8dOSF/mqi9ovMaLWlPgzLAY656Mo9vToNApqiVJg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -110,148 +110,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add pinctrl driver for the TLMM block found in the X1E80100 SoC.
+Enable the X1E80100 pinctrl driver in the Qualcomm defconfig.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/pinctrl/qcom/Kconfig            |   7 +++
- drivers/pinctrl/qcom/Makefile           |   1 +
- drivers/pinctrl/qcom/pinctrl-x1e80100.c | 100 ++++++++++++++++++++++++++++++++
- 3 files changed, 108 insertions(+)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 4f93a34281d5327e2bb53e5b628106a1c5227755..d3eb699855103ae586e60afedb571cc93702a4ee 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -83,6 +83,13 @@ config PINCTRL_QCOM_SM8650
- 	  Say Y here to enable support for pinctrl on the Snapdragon SM8650 SoC,
- 	  as well as the associated GPIO driver.
- 
-+config PINCTRL_QCOM_X1E80100
-+	bool "Qualcomm X1E80100 GCC"
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon X1E80100 SoC,
-+	  as well as the associated GPIO driver.
-+
- endmenu
- 
- endif
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 43d0dd2922253e93510242d66e8b56f9de72ea4e..06d3c95f93a624bd3cccbd8521f37cfa95a5d022 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -14,3 +14,4 @@ obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8650) += pinctrl-sm8650.o
-+obj-$(CONFIG_PINCTRL_QCOM_X1E80100) += pinctrl-x1e80100.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..2e2f5093272cf8c2a60eecf642ad9c567b539f84
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-@@ -0,0 +1,100 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Qualcomm x1e80100 pinctrl
-+ *
-+ * (C) Copyright 2024 Linaro Ltd.
-+ *
-+ */
-+
-+#include <dm.h>
-+
-+#include "pinctrl-qcom.h"
-+
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	{"qup2_se5", 1},
-+	{"gpio", 0},
-+};
-+
-+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-+	{					        \
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = 0,				\
-+		.pull_bit = pull,			\
-+		.drv_bit = drv,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = -1,				\
-+	}
-+
-+#define UFS_RESET(pg_name, ctl)				\
-+	{					        \
-+		.name = pg_name,			\
-+		.ctl_reg = ctl,				\
-+		.io_reg = ctl + 0x4,			\
-+		.pull_bit = 3,				\
-+		.drv_bit = 0,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = 0,				\
-+	}
-+
-+static const struct msm_special_pin_data msm_special_pins_data[] = {
-+	[0] = UFS_RESET("ufs_reset", 0xf9000),
-+	[1] = SDC_QDSD_PINGROUP("sdc2_clk", 0xf2000, 14, 6),
-+	[2] = SDC_QDSD_PINGROUP("sdc2_cmd", 0xf2000, 11, 3),
-+	[3] = SDC_QDSD_PINGROUP("sdc2_data", 0xf2000, 9, 0),
-+};
-+
-+static const char *x1e80100_get_function_name(struct udevice *dev,
-+					      unsigned int selector)
-+{
-+	return msm_pinctrl_functions[selector].name;
-+}
-+
-+static const char *x1e80100_get_pin_name(struct udevice *dev,
-+					 unsigned int selector)
-+{
-+	if (selector >= 238 && selector <= 241)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN,
-+			 msm_special_pins_data[selector - 238].name);
-+	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+
-+	return pin_name;
-+}
-+
-+static unsigned int x1e80100_get_function_mux(__maybe_unused unsigned int pin,
-+					      unsigned int selector)
-+{
-+	return msm_pinctrl_functions[selector].val;
-+}
-+
-+static struct msm_pinctrl_data x1e80100_data = {
-+	.pin_data = {
-+		.pin_count = 242,
-+		.special_pins_start = 238,
-+		.special_pins_data = msm_special_pins_data,
-+	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = x1e80100_get_function_name,
-+	.get_function_mux = x1e80100_get_function_mux,
-+	.get_pin_name = x1e80100_get_pin_name,
-+};
-+
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{ .compatible = "qcom,x1e80100-tlmm", .data = (ulong)&x1e80100_data },
-+	{ /* Sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_x1e80100) = {
-+	.name		= "pinctrl_x1e80100",
-+	.id		= UCLASS_NOP,
-+	.of_match	= msm_pinctrl_ids,
-+	.ops		= &msm_pinctrl_ops,
-+	.bind		= msm_pinctrl_bind,
-+};
-+
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index ea0dd3e58018c8bf08e4a455a47e29cf1bbd3c60..7e87cbc4dac57c55fa9093b4642e4fa93fb671e8 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -91,6 +91,7 @@ CONFIG_PINCTRL_QCOM_SM8150=y
+ CONFIG_PINCTRL_QCOM_SM8250=y
+ CONFIG_PINCTRL_QCOM_SM8550=y
+ CONFIG_PINCTRL_QCOM_SM8650=y
++CONFIG_PINCTRL_QCOM_X1E80100=y
+ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_QCOM=y
+ CONFIG_DM_REGULATOR=y
 
 -- 
 2.34.1
