@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BFED65C7E
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8ECD6A223
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 14:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B02896C1;
-	Fri, 15 Nov 2024 15:20:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3AEDA8935E;
+	Fri, 15 Nov 2024 15:21:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L4hcabMF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dQnVZ35j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 460BA896B9; Fri, 15 Nov 2024 15:20:58 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id AD6F5896AA; Fri, 15 Nov 2024 15:21:06 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FD289348
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:20:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7E489354
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:21:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53da353eb2eso3364602e87.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:20:55 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a99f3a5a44cso243292266b.3
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 06:21:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731680455; x=1732285255; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731680463; x=1732285263; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cPGakgMMNWuEAI3NRfrQfZzlvrEiY1Eqb4sfj+QggMg=;
- b=L4hcabMFmY8C/Ukh5/LqzOYZ9/uuM7SGD6IeNfnZD+ZeYWqemUxvZ2Lqfv9EOzugzn
- sd0n0j7xBB2MCJE57bLWS+wmyI87TryWHIxe54aamR+DPdOap/KDLKUGn1R6loB0n3Pz
- bhkoiHF0LLpHyOHlAzPNJkQwe/C0ZoOzfFyqI=
+ bh=MPLYdTJ8hfjJcu1LXE4C0tuWhtcILUkmdpiCIUFhFSE=;
+ b=dQnVZ35jWnNUS8kVNe+rfnFbdDg0ENewDCNNX7mHvkujzZRvS0rczgIpG+efeRvcsJ
+ BU/tM6buLK/NB2EkznNqQukVEszVLaF/iUnjb4S0jACwhEOkfeHo+g/DfETbf3pSmQJT
+ 2kq9JylRSj3m/wz9yZONFkm5EoAxsEae8sy2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731680455; x=1732285255;
+ d=1e100.net; s=20230601; t=1731680463; x=1732285263;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cPGakgMMNWuEAI3NRfrQfZzlvrEiY1Eqb4sfj+QggMg=;
- b=QsjTQvrXV05/2af0/SWecRJrVPOy5F+LNgopOavOfnfRR7NtBL1NfqyCy1FDJxXto7
- xjBIGyHo1xajSrXYnJSsY65Es+rcrMYJN69yGkJ/E1oF7eiHK+QgO0sWGg7+oDLZVt6C
- e710QA4Uj1gDYHPIWpaKYiHi2Z8z+vigRg6HN2AAEAQHJDkNOzsaZ41s0hJO/ePDwWyo
- 6bt+gttm/yRGsemT6pUjCxlJdgFK8SMHBubaSP9v56XHbcJXybgSNw7z9PYAMuu9q7io
- 9j2+SLbZgcLA2LUA0s32G4pwm63H9hv5MLZtFyhgWSCB9PnBJf9X0+N9RSU+sEBDZgCm
- 76Xg==
-X-Gm-Message-State: AOJu0Yy1h3S5PJiZRGF/OfP4Sw+eEfOWQqFUUt2pwDqyZTRsxvT4+THk
- F+O8jdbHXJ+EjaWn//OgRsyyvOvgu50cYMOYfM0uDHwA5DWmQCFzih5SmLbo1WngqOVeOJ26SWe
- YoUFUXUCdC8/BmnDcN+9kyikhH47PKpYlBsj5
-X-Google-Smtp-Source: AGHT+IHDr5d22/upq+PTniOLAG8terg5SHOdqlQ/5ETBZZMhOMIIA3hcDeaPp6FY8hW2aIkmszUONk41CtuK3KAjSZ8=
-X-Received: by 2002:a05:6512:2391:b0:53d:a6c8:fb95 with SMTP id
- 2adb3069b0e04-53dab29efffmr2074319e87.19.1731680455092; Fri, 15 Nov 2024
- 06:20:55 -0800 (PST)
+ bh=MPLYdTJ8hfjJcu1LXE4C0tuWhtcILUkmdpiCIUFhFSE=;
+ b=O8l90ggKOFYXRTq3xHn2mqnwTeIXJynBE6Q6HxmtS4Asi9CLf2WnLkPs/Dz2PvYlwQ
+ elB+GWWaIkCgbdJZX/rxbvfKlRCPcaBWBDWkSYNPwp9jo3/TlELsFinmyzr0KPU56bbH
+ lY8FWw6O5k788qm72edeAz8Ak7FtGg3yjnYG6W8U862kTSfojQZUIoAn7wh2/9qFX7n+
+ oixk3wfXmXijxBm9PGOTP2tg6Szt+rICRIbdJDvxrfmmvar/OQbjcorraHBPjPXUTvx4
+ em73hciyMUA88QuPYBj3SjG5iw+ei23aEr6hQhP3RP18gC/7suhgIGqLYJ+WTVoOSVOj
+ IROg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVt+6YoXhcKhVftBjxsmNzFzsh7v52nOhOilppqU51Ix8aYrBlgx4BdW2qvKdqFpWQjwUdPL3M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyw+CDzcemnJJLYEUFdUaA1aEmWMWNvXao8JimdK9AmOfQF6ZHM
+ 7Eh0EaLFN5flUt2vtVkpPLtOvi+twI3B/DTTNsARn69nin+20d76fqaLIMLXv4XdK3A+SiDOtfD
+ aMPlile9EPVqcJ8bxyTz7sAmReLIBMddbCAsk
+X-Google-Smtp-Source: AGHT+IEx/9T8aSMonK/ABnp8SgOm64HoWUA+JOZhYiFG/KBzvJV6ESr569cwbH2wnlhUQSAXZJlcssIkSVw3bC6G4tE=
+X-Received: by 2002:a17:907:25c2:b0:a9a:e9c:1d8d with SMTP id
+ a640c23a62f3a-aa483426398mr270836266b.17.1731680463086; Fri, 15 Nov 2024
+ 06:21:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20241106153544.1277835-1-sjg@chromium.org>
- <87efb07d6eb10e7c7ad45e8bee741f485931f8de.camel@phytec.de>
-In-Reply-To: <87efb07d6eb10e7c7ad45e8bee741f485931f8de.camel@phytec.de>
+References: <20241102193715.432529-1-sjg@chromium.org>
+ <20241102193715.432529-5-sjg@chromium.org>
+ <135727bd-d2e0-4370-954c-644fdd995036@gmx.de>
+In-Reply-To: <135727bd-d2e0-4370-954c-644fdd995036@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Nov 2024 07:20:40 -0700
-Message-ID: <CAFLszTiqjD3GYP_A--+KGVpyNs9gF=3APkrrwCcqoJo+-3DqEw@mail.gmail.com>
-Subject: Re: [PATCH v2] Makefile: Fake external blob with
- BINMAN_ALLOW_MISSING=1
-To: Yannic Moog <Y.Moog@phytec.de>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "bb@ti.com" <bb@ti.com>, 
- "trini@konsulko.com" <trini@konsulko.com>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, 
- "leon@georgemail.eu" <leon@georgemail.eu>, "marex@denx.de" <marex@denx.de>, 
- "sumit.garg@linaro.org" <sumit.garg@linaro.org>,
- "masahiroy@kernel.org" <masahiroy@kernel.org>
+Date: Fri, 15 Nov 2024 07:20:51 -0700
+Message-ID: <CAFLszTjTYiFqv0QjszwPoek7jrWbDOdAakSZ2w3wP0GvFNyJLQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/20] compression: test: Move test into lib
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,94 +88,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+Hi Heinrich,
 
-On Thu, 14 Nov 2024 at 00:51, Yannic Moog <Y.Moog@phytec.de> wrote:
+On Thu, 14 Nov 2024 at 03:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hi Simon,
->
-> On Wed, 2024-11-06 at 08:35 -0700, Simon Glass wrote:
-> > This flag was lost by a previous change and has never been restored.
-> > Without it, binman cannot fully handle missing blobs which are
-> > themselves inputs to mkimage.
-> >
-> > Discussion on this at [1] indicated that this was necessary but the
-> > patch was not updated.
-> >
-> > Restore the flag so that all missing blobs are reported.
-> >
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20221206020336.315465-1-trini@konsulko.com/
->
-> sorry I'm picking this up so late;
-> As I am working on OP-TEE addition to imx8m boards [1], this patch got my interest.
-> I applied the patch on top of my patchstack and tried to build (phycore-imx8mp) with missing tee.bin
-> binary and got unexpected results:
->
->
-> Image 'image' has faked external blobs and is non-functional: tee.bin
->
-> Image 'image' is missing optional external blobs but is still functional: tee-os
->
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open Portable
->    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->
-> Some images are invalid
->
->
-> So build fails even though tee.bin is marked as optional.
-> Did I miss another patch that must be used in conjunction with this one?
->
-> Before this patch, I see the following output.
->
->
-> Image 'image' is missing optional external blobs but is still functional: tee-os
->
-> /binman/section/fit/images/tee/tee-os (tee.bin):
->    See the documentation for your board. You may need to build Open Portable
->    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
->
->
-> With successful build.
-
-The previous behaviour was a bug, at least that's what I concluded. It
-was ignored sections within sections, in some cases.
-
-Do you have tee in there twice? It seems strange to get this case.
-
-If you can't figure it out, can you send patches or share a tree?
-
->
-> Yannic
->
-> [1] https://lore.kernel.org/u-boot/20241107-phytec_imx8m_optee-v2-0-bbc3747a60e8@phytec.de
->
+> On 11/2/24 20:36, Simon Glass wrote:
+> > This test doesn't belong at the top level. Move it into the lib/
+> > directory, since that is where compression is implemented.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: 93685d0dcb9 ("Makefile: With BINMAN_ALLOW_MISSING=1 don't error")
 > > ---
 > >
-> > Changes in v2:
-> > - Use Link: and avoid a line break
+> > (no changes since v1)
 > >
-> >  Makefile | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >   test/Makefile                | 1 -
+> >   test/lib/Makefile            | 3 +++
+> >   test/{ => lib}/compression.c | 0
+> >   3 files changed, 3 insertions(+), 1 deletion(-)
+> >   rename test/{ => lib}/compression.c (100%)
 > >
-> > diff --git a/Makefile b/Makefile
-> > index 7275a02f24c..f92f46b3ab7 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -1398,7 +1398,8 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
-> >                  --toolpath $(objtree)/tools \
-> >               $(if $(BINMAN_VERBOSE),-v$(BINMAN_VERBOSE)) \
-> >               build -u -d u-boot.dtb -O . -m \
-> > -             --allow-missing $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
-> > +             --allow-missing --fake-ext-blobs \
-> > +             $(if $(BINMAN_ALLOW_MISSING),--ignore-missing) \
-> >               -I . -I $(srctree) -I $(srctree)/board/$(BOARDDIR) \
-> >               $(foreach f,$(of_list_dirs),-I $(f)) -a of-list=$(of_list) \
-> >               $(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+> > diff --git a/test/Makefile b/test/Makefile
+> > index 5d62b5c3357..ff621344a03 100644
+> > --- a/test/Makefile
+> > +++ b/test/Makefile
+> > @@ -10,7 +10,6 @@ endif
+> >   obj-$(CONFIG_$(XPL_)CMDLINE) += cmd/
+> >   obj-$(CONFIG_$(XPL_)CMDLINE) += cmd_ut.o
+> >   obj-$(CONFIG_$(XPL_)CMDLINE) += command_ut.o
+> > -obj-$(CONFIG_$(XPL_)UT_COMPRESSION) += compression.o
+> >   obj-y += dm/
+> >   obj-$(CONFIG_FUZZ) += fuzz/
+> >   ifndef CONFIG_SANDBOX_VPL
+> > diff --git a/test/lib/Makefile b/test/lib/Makefile
+> > index a54387a058e..ce22780eed8 100644
+> > --- a/test/lib/Makefile
+> > +++ b/test/lib/Makefile
+> > @@ -2,6 +2,9 @@
+> >   #
+> >   # (C) Copyright 2018
+> >   # Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+> > +
+> > +obj-$(CONFIG_$(XPL_)UT_COMPRESSION) += compression.o
+> > +
+> >   ifeq ($(CONFIG_XPL_BUILD),)
+> >   obj-y += cmd_ut_lib.o
+> >   obj-y += abuf.o
+> > diff --git a/test/compression.c b/test/lib/compression.c
+> > similarity index 100%
+> > rename from test/compression.c
+> > rename to test/lib/compression.c
 >
+> Can we now use LIB_TEST instead of the COMPRESSION_TEST macro?
+
+Yes, we could.
+
+There was some discussion (with Tom) as to whether we should break
+things up this way. For example I changed bloblist back to being
+separate, in the later version of this series.
+
+I would be quite happy with just having ~one test suite per dir.
 
 Regards,
 Simon
