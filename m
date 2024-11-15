@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D11BD68BCE
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 16:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16434D68BCE
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 17:41:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17E2689165;
-	Fri, 15 Nov 2024 17:54:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 201648912E;
+	Fri, 15 Nov 2024 18:41:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SQ6SqY15";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T0bYFNEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C17EB8910E; Fri, 15 Nov 2024 17:54:09 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 93FC189156; Fri, 15 Nov 2024 18:41:19 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E33E890DA
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 17:54:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA7BF890D1
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 18:41:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46353bd879aso6387251cf.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 08:54:07 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2fb51f39394so20229831fa.2
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 09:41:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731689646; x=1732294446; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1731692477; x=1732297277; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YgrEsU+eT5SQvOdR017bPZNdFhrv5gN7YW+JoJklqts=;
- b=SQ6SqY157V6U6GJ8TZE+63qMS3FyxSjSalKlGLwOmHCYKb/odfhBHVZDZlXu5DRhBW
- fxmSgYdJU/NmYwgPc5/n65XWLvQaH+mx6ki3tGmG/JlozK4gRRwqyr0PkylTg1GTKBBE
- wVifMWHka1JnwBY4vzYfGWHQjVbPsCznunw98=
+ bh=1WctNUWZC7iOAM8ROYFOedBBpwGTF+ZRz7x67GnZQes=;
+ b=T0bYFNEXmG4Mt9sDsMPLIltdyNcdiiGkbODjci5YATCoDo9J7/gU9JUJ13xBk/Uv2W
+ buPTUvE7fma6VY2XtHfUlhlOCt+/mVtKO2wNiisEa3Drh237q8EBW+4i9Q3EsrCwkd+P
+ 6RMZaudTEu6OEx9G1OG6tXGDKycQzxcdtKiXhW7Y9JVD1ikM4W+RvIV5XokmmIzfgoRB
+ j51XGU41PNHGUMNbDJ9V5ymJWiK+XNts2lmjBRuK06VVQnAbDqPYYYlnr8N0NOEJEVC/
+ dCcJFpZ1wQl8nHoLPcm6fVKTAGS01VWBotOoDGIbCWfvy9h2Hv3QyOuUTTL//5pa5UV1
+ 7lXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731689646; x=1732294446;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1731692477; x=1732297277;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YgrEsU+eT5SQvOdR017bPZNdFhrv5gN7YW+JoJklqts=;
- b=i6vTnt1PJJAds13FMOnL5uojD3knWp8F+zJqpvTFo3q/yvh+lx34H4Jtg+k8g38G7E
- l54iF38HtK6o/9yvjorxHwdJiWvD6bb8G2AONsoIZsr226VJkjxmSDn1eswLCG65WWQJ
- L1xeczWO7LqBXf4FnXVuArXKrWNtqHtZ/c6RfOXTMm8atAMtcbXy+aeAMvt82dNuG+/4
- BNKpb1ceNQ7qtD6n2PrM6gcIdnvqRwc6F77sL0f/XNSJwOhADeLyGDWidA0ZST+m/uGq
- u8lRZd/imYTFu2NHQP+TP7glu8DEHw0/fk0Z/9O0uvvvbKoOeAid5C2yg/VDhQ/yvxZj
- losg==
-X-Gm-Message-State: AOJu0Yz8L/aBpF2hn0CSBv2Kwx/mMI0YhgNbUHl/wGM3snWaohW3XLon
- XF8CZE2gtkkcA3snu3C5w7Vr5NyrsckxOPiSXmNB82HdKoh8IMfqs4/SL1J8nLoG9U4jb8fySCP
- xy20=
-X-Google-Smtp-Source: AGHT+IH7sbFuYgG3SCzOCpYQv8EpoZJFk/n0sspmSaetmHYsWNXIAjt8ikAsOo85wyGaaxJ2MlZCig==
-X-Received: by 2002:a05:622a:22a4:b0:461:c52:d36 with SMTP id
- d75a77b69052e-46363de7e46mr50681321cf.7.1731689646199; 
- Fri, 15 Nov 2024 08:54:06 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4635a9f20c7sm20784831cf.23.2024.11.15.08.54.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 08:54:05 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Andre Przywara <andre.przywara@arm.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 3/3] arm: sunxi: Use "imply" for USB without further guards
-Date: Fri, 15 Nov 2024 10:53:59 -0600
-Message-ID: <20241115165400.2486914-3-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241115165400.2486914-1-trini@konsulko.com>
-References: <20241115165400.2486914-1-trini@konsulko.com>
+ bh=1WctNUWZC7iOAM8ROYFOedBBpwGTF+ZRz7x67GnZQes=;
+ b=NpBYSaWWKT3g0P+IKe9nKSs25WU7j7kwSNVsTQ2atJ2poNbZb16Fy6DeBbfWFmvq7P
+ bHBQxE7e4hCPi/k8PegFoBDnqAhAreIZs9vTaE5uMEpXMqiKch1zqdPUWLRJEbUnW2rW
+ bae1dM+swiVXPVR6l9X45ZkMviehSBWY1K9DqBek6hS8coC0N8Dfg7F2NWQGpbH7hL0g
+ qsWD6PCa5eVPQRMxx90Pc6icCax01WVHzcV8jxjmy1O6KK4WNUAafccSAtE39QnCU+t+
+ oPnsCqaP9FWv4whgyCEjVloZ98WbUKXsYYwCWQLfk6t6hAxZ0d0j2xVnhjyGUg6LZR5R
+ 8zXQ==
+X-Gm-Message-State: AOJu0Yx/9sePQ7X2QkF2p7Gbm1yZZaqHyhfhZprgkseH6IMBv0TcivZW
+ cnCQY5tLFGj2e2yammAd9eKn8oZn86evGH1tCUJU/5YIUN15GTTSG7HERdljtANJKgnOu64NVfZ
+ oplSXwxRyCwoGqlprtWa7aHwLlAg=
+X-Google-Smtp-Source: AGHT+IHIn7iR9THwIQhRGIXMrYiUWvhoVtP6Q6MmuyKrrPr3p5rgz02iULCsKwIzHLiLOxKDlKIbzt3F0Agb4YK97LY=
+X-Received: by 2002:a05:651c:1147:b0:2fb:5060:7037 with SMTP id
+ 38308e7fff4ca-2ff609bdeefmr19225061fa.41.1731692476683; Fri, 15 Nov 2024
+ 09:41:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241115165400.2486914-1-trini@konsulko.com>
+In-Reply-To: <20241115165400.2486914-1-trini@konsulko.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 15 Nov 2024 14:41:05 -0300
+Message-ID: <CAOMZO5D7JKJ57OzRw5gj5vqPgv4ykfDH7_MWgU+QC2ATJ0+L=g@mail.gmail.com>
+Subject: Re: [PATCH 1/3] aspeed: Fix Kconfig logic on "DM_REGULATOR" and
+ ASPEED_AST2500
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Maxim Sloyko <maxims@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,40 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Given that ARCH_SUNXI already implies that USB_GADGET should be enable,
-we should also imply USB being enabled.
+On Fri, Nov 15, 2024 at 1:54=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> It is not the case that we can only pick ASPEED_AST2500 if DM_REGULATOR
+> is enabled, but rather choosing ASPEED_AST2500 means we must select
+> DM_REGULATOR.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Is this a tiny bit of a cheat to avoid patch 1/8 of Simon's bootstd
-series? Yes, a little. But it's also correct I believe.
-
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>
----
- arch/arm/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 7282c4123b08..3ebda07b00c1 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1177,7 +1177,6 @@ config ARCH_SUNXI
- 	select SUNXI_GPIO
- 	select SYS_NS16550
- 	select SYS_THUMB_BUILD if !ARM64
--	select USB if DISTRO_DEFAULTS
- 	select USB_KEYBOARD if DISTRO_DEFAULTS && USB_HOST
- 	select USB_STORAGE if DISTRO_DEFAULTS && USB_HOST
- 	select SPL_USE_TINY_PRINTF if SPL
-@@ -1203,6 +1202,7 @@ config ARCH_SUNXI
- 	imply SYSRESET
- 	imply SYSRESET_WATCHDOG
- 	imply SYSRESET_WATCHDOG_AUTO
-+	imply USB
- 	imply USB_GADGET
- 	imply WDT
- 
--- 
-2.43.0
-
+Do you mean DM_RESET instead?
