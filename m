@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3ADBD68BDC
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 23:20:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA1CD68BDC
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 23:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 220F889711;
-	Sat, 16 Nov 2024 00:20:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CB39891B1;
+	Sat, 16 Nov 2024 00:20:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dqxZozd7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XqAYQXkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08A47896FD; Sat, 16 Nov 2024 00:20:02 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id BD6C0891AD; Sat, 16 Nov 2024 00:20:04 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1882896F3
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 00:19:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD485896FC
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 00:20:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-83a9cd37a11so81825439f.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:19:59 -0800 (PST)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3a6bf539cabso4105295ab.3
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:20:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731712797; x=1732317597; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731712800; x=1732317600; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RMHRF7I/HYUWFVtWqOQddv72+zgYK7iClIHn7w6RERc=;
- b=dqxZozd7ZFoXapN5B2wQCjocs6cB0v+dpxKAYgDstsdf8IUH5OysN9uAdN0DdamvYB
- GZYLvhzXXLY2xAB0HFo5BR9MpkAnSyXhpgMUOo+VuYIH24urCUEXf/7qlzXS0ZmT4lOW
- P7tUaudjIfeOf/Il+i24wG5yY1u0nQjBKdac0=
+ bh=PwrPzuQpgNfl76ZpRyLtVROJTaLKyHN2pQPjNTmUKO8=;
+ b=XqAYQXkdKALFVaBDBEXcJ2zX3Tfdwkkw0YuntOXb6jei2tv5qt62ZEwXxmR7GtiSjZ
+ UzsULlSNJO24NAaXDg0P08MvDap0Bwhx3HZ2/17zWRonATJO8SgibNhW8qTY3vKgXW7R
+ wPfOdkYE73WDABTVSr4h9EfJoqu7f3Nuv62I0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731712797; x=1732317597;
+ d=1e100.net; s=20230601; t=1731712800; x=1732317600;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RMHRF7I/HYUWFVtWqOQddv72+zgYK7iClIHn7w6RERc=;
- b=Psf9BsZ1cFtzOINTOwIH009R++/slC0DrnGRz+9BCuXd+8vY4SbA2jx1RHOxFyjyoS
- Xck62zZoU4Ksjf0ZOG2VoT1jlsQ4vP1eMpIrbljFi+UNAbZmXc1t3DelAgPqfvACJDW9
- ihWtGtuLeellftrXVKls/hrUjSo4IF3JlSPScb53QavUPSkV7fruKIBRn81bSd5I5NUy
- u8CSxyZ8uUJ5x385Ml4SCl90Xe/IZAx06YI1X1ELiDaW9HXBIN21Mjcfu0zga3ddsJCt
- oshr/fXXASZtM7yhlvYbRdSOzEp4CltX6Q3ver7oAz9imxL3FVT9LLhgIzTXm42E9SQ4
- 6G2Q==
-X-Gm-Message-State: AOJu0YzqtZfv2zXObxhlYjJ7O+j8C8VaMUGjm5DdUb+yphYjQsxAH/2V
- LxlbFCtYPzwPNPpyKKzi2bl3u/5P9zxY/hy08gegSRfDnugmI5njFaX026g3Mx/JLNL4jgi4xeg
+ bh=PwrPzuQpgNfl76ZpRyLtVROJTaLKyHN2pQPjNTmUKO8=;
+ b=g6Zq3B9+ChByhjyNoLO1CV5hgCZHWhnCEA+RniH2jcoRWSxcn0ttu9Xh4ZIYYwOTVP
+ Lceq6zJISc+C0bDo9kjeohVx334sbmaNJXd/caKt+IpYrUNmK7RA1a+nP/D5XNA5m5jQ
+ SYXAI8eELjimjsq9mBmEUB4wqnyTngTkKAJSPTtPOAWzcZ2ujGxSC0HamC7yikAvVo7Y
+ QvwwpqDeseoY2T07Y84eaVo+ypULUmoikFYW3qZHE17q79wnLPkxQtj4dodtlNaJc0rq
+ UBoIaxWdNJ/5PGcELWfsGaDyLXcsokT9SqAMWpAZ+Iw2BsY5pdw0Ru3wGYqRoDCvrROD
+ 3r2Q==
+X-Gm-Message-State: AOJu0YxLhOY+rbwvm4AGLP83Hpm/RsjUutex5Zlp+589+5eNJU4en+w4
+ qa8d73q5Yy8F9EU1ezavgJg/wEdMeIMezQYUZjWkW+9+2gr48Eib82ktFGeWmbRf6i9XwtWQf4k
  =
-X-Google-Smtp-Source: AGHT+IE7uJEdhMMlpsIQ2BBEOXmHZZpcGDXHR0NfKshzbVx9c3RgPcp2DxTuwreFrGE6R2DIdMaNQw==
-X-Received: by 2002:a05:6602:27c1:b0:83b:5221:2a87 with SMTP id
- ca18e2360f4ac-83e6c285e53mr640925739f.3.1731712796799; 
- Fri, 15 Nov 2024 15:19:56 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEv6jVSdrit1Hd4LeWL4VquWAskHdIZ3egPSrklG4aYBxwBddz/TN5mptrNJBLvlKOwSfNpIw==
+X-Received: by 2002:a05:6e02:3203:b0:3a7:1ab5:5416 with SMTP id
+ e9e14a558f8ab-3a7480231a4mr42488045ab.11.1731712800008; 
+ Fri, 15 Nov 2024 15:20:00 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e0756def0dsm582798173.142.2024.11.15.15.19.54
+ 8926c6da1cb9f-4e0756def0dsm582798173.142.2024.11.15.15.19.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 15:19:55 -0800 (PST)
+ Fri, 15 Nov 2024 15:19:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v4 08/19] boot: pxe: Drop the duplicate comment on
- get_pxe_file()
-Date: Fri, 15 Nov 2024 16:19:15 -0700
-Message-Id: <20241115231926.211999-9-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Shantur Rathore <i@shantur.com>
+Subject: [PATCH v4 09/19] bootmeth_efi: Simplify reading files by using the
+ common function
+Date: Fri, 15 Nov 2024 16:19:16 -0700
+Message-Id: <20241115231926.211999-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241115231926.211999-1-sjg@chromium.org>
 References: <20241115231926.211999-1-sjg@chromium.org>
@@ -93,38 +93,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is exported, so document it in the header file. Drop the
-duplicate comment in the C file.
+The efiload_read_file() does similar things to a common function, so
+update it to use that instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v1)
+Changes in v4:
+- Make sure that bflow->buf is set correctly
 
- boot/pxe_utils.c | 10 ----------
- 1 file changed, 10 deletions(-)
+Changes in v2:
+- Change the tag to bootmeth_efi
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 3ae17553c6d..8c9c7f84d97 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -133,16 +133,6 @@ static int get_relfile(struct pxe_context *ctx, const char *file_path,
- 	return 1;
- }
- 
--/**
-- * get_pxe_file() - read a file
-- *
-- * The file is read and nul-terminated
-- *
-- * @ctx: PXE context
-- * @file_path: File path to read (relative to the PXE file)
-- * @file_addr: Address to load file to
-- * Returns 1 for success, or < 0 on error
-- */
- int get_pxe_file(struct pxe_context *ctx, const char *file_path,
- 		 ulong file_addr)
+ boot/bootmeth_efi.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index f836aa655f5..47a22d5bd0a 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -89,18 +89,17 @@ static void set_efi_bootdev(struct blk_desc *desc, struct bootflow *bflow)
+ static int efiload_read_file(struct bootflow *bflow, ulong addr)
  {
+ 	struct blk_desc *desc = NULL;
+-	loff_t bytes_read;
++	ulong size;
+ 	int ret;
+ 
+ 	if (bflow->blk)
+ 		 desc = dev_get_uclass_plat(bflow->blk);
+-	ret = bootmeth_setup_fs(bflow, desc);
+-	if (ret)
+-		return log_msg_ret("set", ret);
+ 
+-	ret = fs_read(bflow->fname, addr, 0, bflow->size, &bytes_read);
++	size = SZ_1G;
++	ret = bootmeth_common_read_file(bflow->method, bflow, bflow->fname,
++					addr, &size);
+ 	if (ret)
+-		return log_msg_ret("read", ret);
++		return log_msg_ret("rdf", ret);
+ 	bflow->buf = map_sysmem(addr, bflow->size);
+ 
+ 	set_efi_bootdev(desc, bflow);
 -- 
 2.34.1
 
