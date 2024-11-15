@@ -4,81 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53180D68BDC
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 23:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688BDD68BDC
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 23:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BEA1896F8;
-	Sat, 16 Nov 2024 00:20:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05A9F896DC;
+	Sat, 16 Nov 2024 00:23:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g1GCgx/t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m3LLdAER";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A057F89724; Sat, 16 Nov 2024 00:20:27 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 420A389163; Sat, 16 Nov 2024 00:19:39 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BEFD89731
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 00:20:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04ACA891AD
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 00:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3a4e30bffe3so8180805ab.3
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:20:25 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-83abdaf8a26so76998639f.1
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 15:19:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731712823; x=1732317623; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k+1VJxVX2epxjZ/p6MeS2gI2pokwHOgX+xG6RmmAO0U=;
- b=g1GCgx/ttuoTfgUvhucxrl0a0TcO8abC9HrI+QUpktGvOk/dPcwmDJRfqHfm5L1QFh
- Wk50LKErSeu5lQmamh5X8p2FM6onW1TjmS818FxrJXRzjpwwCnATf4fuadUC4e7i657q
- IrCfwBjqscucKhx2i57PJBsyRsMsi2kHleYHo=
+ d=chromium.org; s=google; t=1731712775; x=1732317575; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ornGfv7vOeJAUsbciN06d08qCHEtPT/ZWD8tzUAwOJk=;
+ b=m3LLdAERj78YKA9HUTfbX1PLmNMgjlYl2TK5KCnCNEkBRzJYDHbsAY9SmZnrkfMxt7
+ kFHISnRowXSd96Ws1CRyv/hoDsNO4gReunkQvofMG5l91wTyhCQWz7teBoPaqrrkaulH
+ jCPN6HqHdMemdfaL5zdLq0cuElsO9LeXubsr4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731712823; x=1732317623;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k+1VJxVX2epxjZ/p6MeS2gI2pokwHOgX+xG6RmmAO0U=;
- b=TabLXI7R3ZwQsh/Yq9L8LiQ05lNIAAZ8DLfaSuU+Ilksp8Il4GCVGta+Kj4oGsKSm/
- GeBN9kvTDQI8+jppHuG8n0wOV/N+oppbvbKoxgS5vlSNkdFNLo7V23id8JchZfisB6TC
- 1B8YV85Tjwoi7c+qw0Q0VR47IkCAH+yyAcbrx20EBxjkj/039rsJ4c3CqNPGyVJcGxT0
- zGYxAoloeXCeqjMCawxrYJJMa0TEAIFKl1SjBXlVSHhMMcaIAyK9ArhbTd0BKPKaiF9R
- 5TS0PY1k7yscl6XMXZxU/qaEj5D3/S7sx4dF3xv17eFl5ukWFP6VRISxw3nTGvMI4VVh
- BnRg==
-X-Gm-Message-State: AOJu0YwooYly6/k8MW3CpYKQiYTlVwYdsFeOrrfXFz54lUm4d3QxDL+c
- o7KA2xiZLZxAARBexhuh0nXG9ikHoPnPV34KuN01fes5cVoevXAVjDSYXhiBUuapCEdEEGbq6BY
+ d=1e100.net; s=20230601; t=1731712775; x=1732317575;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ornGfv7vOeJAUsbciN06d08qCHEtPT/ZWD8tzUAwOJk=;
+ b=LOTwWzYOWL3bq6+fzW4R1ViXcF4NtCEkrwon9fqavmRz2Li0NOnD34xyFr+oJO3/Ua
+ rh1o7xgupH+7g3n01aX9bnbH3d4i6m1FVDA5H58dKgIoBYFLLTnRempLR5iQOXKkySZY
+ VA000CtKrfkn7POJGeOn/SyWTaHpMjUIGXO4O7UMwdZhIWoU5Eu8xl1nZnU6ma5aBt1k
+ SbTzTYGlMQudNbQIq9qYX1B62QRtfpvr7Qmnj4UDUFEHPrFJImOpsZ3OkxgMgksrt6ul
+ hjfgYYqRa21/wIWiMTBcvpQxRgzAfR3m9oKdNHzqeIQU+6WhtU5x8UrGQpKuOSGIcYTd
+ g++Q==
+X-Gm-Message-State: AOJu0YyTgd3NqOGyYfVvWzMTe5GuVDcAuek8poQ/atlx/B44Olia1SIp
+ ShI+8/grTHkwXzlbh2CY0XAytVSRQ3XXy8mJTnw9qO6u8cC4GerAih7sur5nHbfojupgCixe1gk
  =
-X-Google-Smtp-Source: AGHT+IHQkOdHWnjLvFk0OKh9NqbeKZTizm11jzTjXoeJJIYx4QykGwt+WcekGZ7BX9ac3nWnDZT09g==
-X-Received: by 2002:a05:6602:6c08:b0:82d:9b0:ecb7 with SMTP id
- ca18e2360f4ac-83e6c299f59mr603765439f.3.1731712823572; 
- Fri, 15 Nov 2024 15:20:23 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHrqZxuHqLPx7QcoJiB4BOA/qCC8ET+5kZmrg7WUgRJmo8srmGcL43s3ShxDVZF7fIav4I4Gg==
+X-Received: by 2002:a05:6602:14c8:b0:83a:c0ba:73c6 with SMTP id
+ ca18e2360f4ac-83e6c31965emr448781039f.11.1731712774761; 
+ Fri, 15 Nov 2024 15:19:34 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e0756def0dsm582798173.142.2024.11.15.15.20.21
+ 8926c6da1cb9f-4e0756def0dsm582798173.142.2024.11.15.15.19.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Nov 2024 15:20:22 -0800 (PST)
+ Fri, 15 Nov 2024 15:19:34 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 19/19] fs: Record loaded files in an ad-hoc bootflow
-Date: Fri, 15 Nov 2024 16:19:26 -0700
-Message-Id: <20241115231926.211999-20-sjg@chromium.org>
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Moritz Fischer <moritzf@google.com>, Nam Cao <namcao@linutronix.de>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tim Harvey <tharvey@gateworks.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Wang Jie <dave.wang@rock-chips.com>
+Subject: [PATCH v4 00/19] bootstd: Support recording images
+Date: Fri, 15 Nov 2024 16:19:07 -0700
+Message-Id: <20241115231926.211999-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241115231926.211999-1-sjg@chromium.org>
-References: <20241115231926.211999-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 16 Nov 2024 00:23:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,127 +116,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This makes a start on dealing with images loaded outside the context of
-bootstd. For now, it just records these images. They can be listed using
-the 'bootstd images' command.
+This series provides a way to keep track of the images used in bootstd,
+including the type of each image.
 
-Often, very little is known about these images, but future work could
-perhaps use the filename or contents to detect the type.
+At present this is sort-of handled by struct bootflow but in quite an
+ad-hoc way. The structure has become quite large and is hard to query.
+Future work will be able to reduce its size.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Ultimately the 'bootflow info' command may change to also show images as
+a list, but that is left for later, as this series is already fairly
+long. So for now, just introduce the concept and adjust bootstd to use
+it, with a simple command to list the images.
+
+This series includes various alist enhancements, to make use of this new
+data structure a little easier.
 
 Changes in v4:
+- Make sure that bflow->buf is set correctly
 - Rebase on top of -master (which now has bootflow_efi() test)
 
 Changes in v3:
+- Add a helper in bootflow
+- Add a new patch supporting ad-hoc bootflows
+- Add new patch to export bootdev_get_from_blk()
 - Add new patch to record loaded files in an ad-hoc bootflow
+- Update bootstd_add_bootflow() to return the element number
+- Use the helper function
 
 Changes in v2:
+- Add an image type extension in bootflow.h
+- Change the tag to bootmeth_efi
 - Drop patches already applied
 - Drop patches which add new image types
 - Update to use a new image-type enum in bootflow.h
+- Use the word 'feature' instead of 'hack'
 
- doc/develop/bootstd/overview.rst |  3 +++
- fs/fs.c                          | 15 +++++++++++++++
- test/boot/bootflow.c             | 20 ++++++++++++++++++++
- 3 files changed, 38 insertions(+)
+Simon Glass (19):
+  bootstd: Move bootflow-adding to bootstd
+  bootstd: Move bootflow-clearing to bootstd
+  bootstd: Add a function to get bootstd only if available
+  bootstd: Drop the bootdev-specific list of bootflows
+  bootstd: Move the bootflow list into an alist
+  bootstd: Maintain a list of images
+  bootstd: Update bootmeth_alloc_file() to record images
+  boot: pxe: Drop the duplicate comment on get_pxe_file()
+  bootmeth_efi: Simplify reading files by using the common function
+  bootmeth: Update the read_file() method to include a type
+  bootmeth_efi: Check the filename-allocation in the network path
+  boot: Update extlinux pxe_getfile_func() to include type
+  boot: Update pxe bootmeth to record images
+  Update bootmeth_alloc_other() to record images
+  bootstd: Update cros bootmeth to record images
+  bootstd: Add a simple command to list images
+  bootstd: Export bootdev_get_from_blk()
+  bootstd: Add the concept of an ad-hoc bootflow
+  fs: Record loaded files in an ad-hoc bootflow
 
-diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
-index e3ce97cc4f5..c46bd7a5a90 100644
---- a/doc/develop/bootstd/overview.rst
-+++ b/doc/develop/bootstd/overview.rst
-@@ -486,6 +486,9 @@ be visible.
- Once a bootflow has been selected, images for those that are not selected can
- potentially be dropped from the memory map. For now, this is not implemented.
- 
-+In cases where images are loaded outside the context of standard boot, an ad-hoc
-+bootflow is used to keep track of these. They is visible with the
-+``bootstd images`` command (see :doc:`/usage/cmd/bootstd`).
- 
- .. _BootflowStates:
- 
-diff --git a/fs/fs.c b/fs/fs.c
-index 1afa0fbeaed..d56c95c1b26 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_CORE
- 
-+#include <bootstd.h>
- #include <command.h>
- #include <config.h>
- #include <display_options.h>
-@@ -734,12 +735,14 @@ int do_size(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	    int fstype)
- {
-+	struct blk_desc *dev_desc;
- 	unsigned long addr;
- 	const char *addr_str;
- 	const char *filename;
- 	loff_t bytes;
- 	loff_t pos;
- 	loff_t len_read;
-+	int dev_part;
- 	int ret;
- 	unsigned long time;
- 	char *ep;
-@@ -783,6 +786,10 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	else
- 		pos = 0;
- 
-+	/* save globals before they are cleared */
-+	dev_desc = fs_dev_desc;
-+	dev_part = fs_dev_part;
-+
- 	time = get_timer(0);
- 	ret = _fs_read(filename, addr, pos, bytes, 1, &len_read);
- 	time = get_timer(time);
-@@ -806,6 +813,14 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
- 	env_set_hex("fileaddr", addr);
- 	env_set_hex("filesize", len_read);
- 
-+	if (IS_ENABLED(CONFIG_BOOTSTD) &&
-+	    bootstd_img_add(dev_desc, dev_part, filename,
-+			    (enum bootflow_img_t)IH_TYPE_INVALID, addr,
-+			    len_read)) {
-+		log_err("Failed to record file\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 14de5b591dd..749d79d3295 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1390,3 +1390,23 @@ static int bootstd_images(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootstd_images, UTF_CONSOLE);
-+
-+/* Check creation of ad-hoc images */
-+static int bootstd_adhoc(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("load mmc 1:1 1000 /extlinux/extlinux.conf",
-+				0));
-+	ut_assert_nextlinen("595 bytes read");
-+	ut_assertok(run_command("bootstd images", 0));
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextline(
-+		"  0  ad-hoc               invalid             1000       253  /extlinux/extlinux.conf");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextline("(1 image)");
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootstd_adhoc, UTF_CONSOLE);
+ boot/bootdev-uclass.c            |  78 ++++++-------------
+ boot/bootflow.c                  |  77 +++++++++++++++----
+ boot/bootmeth-uclass.c           |  29 +++++--
+ boot/bootmeth_android.c          |   3 +-
+ boot/bootmeth_cros.c             |  17 ++++-
+ boot/bootmeth_efi.c              |  16 ++--
+ boot/bootmeth_efi_mgr.c          |   3 +-
+ boot/bootmeth_extlinux.c         |   7 +-
+ boot/bootmeth_pxe.c              |  10 ++-
+ boot/bootmeth_qfw.c              |   3 +-
+ boot/bootmeth_sandbox.c          |   3 +-
+ boot/bootmeth_script.c           |   7 +-
+ boot/bootstd-uclass.c            | 104 +++++++++++++++++++++++--
+ boot/pxe_utils.c                 |  36 ++++-----
+ boot/vbe_simple.c                |   5 +-
+ cmd/Kconfig                      |   9 +++
+ cmd/Makefile                     |   1 +
+ cmd/bootdev.c                    |   2 +-
+ cmd/bootflow.c                   |  11 +--
+ cmd/bootstd.c                    |  65 ++++++++++++++++
+ cmd/pxe.c                        |   2 +-
+ cmd/sysboot.c                    |   6 +-
+ doc/develop/bootstd/overview.rst |  24 +++++-
+ doc/usage/cmd/bootstd.rst        |  79 +++++++++++++++++++
+ doc/usage/index.rst              |   1 +
+ fs/fs.c                          |  15 ++++
+ include/bootdev.h                |  36 +++------
+ include/bootflow.h               |  88 ++++++++++++++++++---
+ include/bootmeth.h               |  22 ++++--
+ include/bootstd.h                |  69 ++++++++++++++++-
+ include/pxe_utils.h              |  14 +++-
+ test/boot/bootflow.c             | 126 +++++++++++++++++++++++++++++++
+ test/py/tests/test_ut.py         |   3 +-
+ 33 files changed, 790 insertions(+), 181 deletions(-)
+ create mode 100644 cmd/bootstd.c
+ create mode 100644 doc/usage/cmd/bootstd.rst
+
 -- 
 2.34.1
 
