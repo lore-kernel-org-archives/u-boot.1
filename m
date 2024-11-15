@@ -4,147 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B94D68BC8
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 15:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3242AD68BC6
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 15:44:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DD1089251;
-	Fri, 15 Nov 2024 16:22:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 71D9C89221;
+	Fri, 15 Nov 2024 16:44:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="JmjGN83Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CFnqJS+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F5C89326; Fri, 15 Nov 2024 16:22:35 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::624])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9BF4089362; Fri, 15 Nov 2024 16:44:21 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6169F89221
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 16:22:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E93B89294
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 16:44:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uOw5HWnP5I+3tcjw+9jnPtLgl3X4guHS40XECWa7eW6YnnAoTsVBzFXB8VvOYJ4K+REGkX539muEA4DTcEfESv7l2+qABTk/gMZz8vSvompO3J/A3o4e418O3Zo5FMdALEDb/trAKRvDk8Rolu49v9SacwunP1K4Nr+Z9QMkO0c0UiQ6EZxUlR05KqLZZ9i2f7yVkGyBemzgQgFiDQs//+FabnFbjejH9TfJ3e8pA6z08sdIVR9ZFt1Ql/W6qgbo9w1Rx2+7ajdtnmNbhrM47YnYko5gw0OCWGmsoVQl5Me/Nu7DQ7ONY5GPjCaScfF7VlhUMf1CPYk3rlo+ZfP2qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fFrp6hND3oe8gbsD/7yY3qdCFkGL6nHE61A8A5byc+U=;
- b=yJCUtWlZjdC2FMCzFgbYoiD0okPnSUYH2g7edv7dSAUDURm4umFaVcKRd77fkzmDToZHvVVWPAiPqmlNCHu45gmXxAhZORVH0XYccUVPIfKHg/3xW100Hyv3A3Ddmc0kYXriJUprHQ4zb6/5py4daYhRnVh5terJ7Ft1Fl03KtIsmpuwYFDET6kI9AE9fuawj2YeQ+t9oTv/WqOj3Qf2H2SijPo+GsHzVRDj2ql5x0XSmlrEX2ENqt61NijIh0/hQ0sPz0qzMu17HHhFgGy6HCJAFTjWyEuFJcKTigeDdcZ7HBqSDllh1jWDS0Ea1WaAd7a0RtfwDEHPd9YsFuzz5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fFrp6hND3oe8gbsD/7yY3qdCFkGL6nHE61A8A5byc+U=;
- b=JmjGN83Qj9BqnXM0TTAJmaU/jt4Lx/EyM14uzmERKVrDrzVgZvXk1zxw/QuYgoZ4nX6qj5oS6Ofec/QDwjm3R7v6aczjnzMgNmbP3aW3gd6AtlMpD4SGul+1HtXfb5MtwA58G4f1nSQ8lcWJJq8PnQfLjhM5SvZ+n+S3w0EAQKA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
- by AS8PR10MB7182.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:61e::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.16; Fri, 15 Nov
- 2024 15:22:31 +0000
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8158.013; Fri, 15 Nov 2024
- 15:22:31 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,  Tom Rini <trini@konsulko.com>,  Joe Hershberger
- <joe.hershberger@ni.com>,  Ravi Minnikanti <rminnikanti@marvell.com>
-Subject: Re: [PATCH 0/3] teach 'env default' to optionally keep runtime
- variables
-In-Reply-To: <CAFLszTga-7sdukCdXJ+KXEtDMbxPYjN+NvviVLvtzO1T8MHkBA@mail.gmail.com>
- (Simon Glass's message of "Fri, 15 Nov 2024 07:21:01 -0700")
-References: <20241030213404.2894247-1-ravi@prevas.dk>
- <87y11mn4sh.fsf@prevas.dk>
- <CAFLszTga-7sdukCdXJ+KXEtDMbxPYjN+NvviVLvtzO1T8MHkBA@mail.gmail.com>
-Date: Fri, 15 Nov 2024 16:22:38 +0100
-Message-ID: <87h688msht.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0054.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::24) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:41::17)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4315e62afe0so16908485e9.1
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 07:44:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731685459; x=1732290259; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fyLxjtMSBtFxwOuNyD9lDgw7kfhukvlG21xsyoAkdw0=;
+ b=CFnqJS+ZGsjicSztz3t7tWFPdEyzjOeXsK14eO14pNwzfRMCGoD9ooJ3v8+H/UZ8/G
+ t7KIW74cwmftNXDY9BDHy/udBctiIuAQAtp/2xIZQ5zaGGrUCTyX2jnLayF39wgyT/Tv
+ di3kiz9iJlQ5J0VrT9A1lNFqJgKj9RgjPCTBrNyGKbm3dm6e32geFkEFtPL9ZIV+u2M5
+ a/QdQK1DSmkYGRR9R1wbcaVenTQ4sHOMz+bvodKwkdwEcfQrrepQhfsoTvvujdKqSzhl
+ cPZ72znPoxKq74BT/BTp1aTNTK6+aMIgDz1obA8eihoSIS3KAy85BDYc2KCjCrtv8lNX
+ pPfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731685459; x=1732290259;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fyLxjtMSBtFxwOuNyD9lDgw7kfhukvlG21xsyoAkdw0=;
+ b=sRd3N5tD3kwbexa3hqPMSg05AasFEbe3qnyhM2Rfpam+7Sb/7K3D0pE9Y1OaJr79hj
+ BFixHRUTgyPg0AhxIaFgk99sQP0jkeBD6vbe2Z97wuTzZkgfiL8SwCukXVTrcrJ2Cp4W
+ gMNuSekieXme1Sytay5bIkAGXTpm1ljxKWkxRTdGsdCfejIp/vNyhob9Y1ko/UnndJYc
+ X5VwoYe8wjHdVFnn0N1IermmPCTRLTbwNd+x1zz6yCQpUYUwdOtIMBR6qrLkQhdLfu5n
+ AL8/uJDXiUu0JkFgXwhHeaRFsmOl22bm/vfR/GCFA1wIlbtH+dME102r+qaE9jzGaV+Y
+ 9FVA==
+X-Gm-Message-State: AOJu0YxYxkgPChP/YXJYiVmmjItS72kfXX/TLRso1LVqxxE/NR2SFm4f
+ ulHyjS55UcFnnkMxFqPaKviH6Ke0uvqI8EiPXXXSCm3PqQo3RaWz0ozGuDjWtaY=
+X-Google-Smtp-Source: AGHT+IF0YRMvvKp/r3BiqUESSh4rx8SP20tevpopOg+cjqTLkgWq61U+nsmyqk3vRz2eDX9hnSL03g==
+X-Received: by 2002:a05:600c:1e18:b0:431:5df7:b337 with SMTP id
+ 5b1f17b1804b1-432df7286ffmr26720045e9.8.1731685458724; 
+ Fri, 15 Nov 2024 07:44:18 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3821ada3fc9sm4637773f8f.20.2024.11.15.07.44.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Nov 2024 07:44:18 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] pinctrl: add support for X1E80100 TLMM
+Date: Fri, 15 Nov 2024 16:44:14 +0100
+Message-Id: <20241115-topic-x1e80100-pinctrl-v1-0-35f984226e47@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|AS8PR10MB7182:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65636066-375e-44e6-fb84-08dd0589526e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wIbHKVmIdvP0H+DBf8+IvoX/dfZrKkosSCcb3riK8DzSIhQH7hXlDmzGdWsc?=
- =?us-ascii?Q?K9gHL9MBsN3fIo7UIuopac9yWTj7BB030QeAUqQaJiDvCwO8+Cx6pUroZDmi?=
- =?us-ascii?Q?xQO7Nwz8ALxybXCLXRF9QH88J2uLzLkdMNHSWNgYR/LjImuBbMEVWU8JYMHn?=
- =?us-ascii?Q?wMu7dJh+WE8IoqcoCeR+SMylfJKuW1BkDqq2pib9e2PCuVWHnffFdeGQb1es?=
- =?us-ascii?Q?vgCMOFl2vAA+CRnkYXOoIzQq4Acx+ABQi3H9nWXrkY25IuDcFhsNNl9e9Z5P?=
- =?us-ascii?Q?YXIQOriqfQBr1QXCIEZpphavUUvsmrLy2tpr9EqVQ+AgYICfXpO2QQD4lWPa?=
- =?us-ascii?Q?yGaaFPNSaFJHiSuWDy3lxkRVaA4osZ/40z9EiWj1J+QQWqJHrXKUEe2HEoEW?=
- =?us-ascii?Q?dn/kh+mjgqp8HSvG8obS/v8orE+EN0siE5qY657zDxzgPXvlMtdEs2X6un2F?=
- =?us-ascii?Q?aADdrgYNv/c/1j+R12CeKjf0t3Qfq7XIoQb3vG4XbGkCBysHK3A0ApY9mtCQ?=
- =?us-ascii?Q?XUveQZurSNSXirwIzFvvMkPCgsRXH5nVx3xb3E/CCkzDs6FiC8X4JS2hikrd?=
- =?us-ascii?Q?LyPz9xt6lhYN/uJsBjF4c1WoqOax5xY9gx0X4RbMdulvOTPfVAAF7Vf1z56o?=
- =?us-ascii?Q?/8D1CdBSpSu7z2rYjq5y9HouPklOp4Q54ZMUJtc6hNVHO0995AcR1Qjy3j1t?=
- =?us-ascii?Q?6Vft3a3J0J+4eSz+7f6xiPQVoRJhh8vnkyq60OHX/3v+ne4+g8QzF3swbMhU?=
- =?us-ascii?Q?fRfcdrX5/HQwWeqHm48IlrWN8gnbsxzbXdEEYt0V/VPN1Umqtm659lgTRhlA?=
- =?us-ascii?Q?xZuHmBEKZ4LOnRUbKfZ8TwQ2CObPPEHRiP+MKq0FJlGHc4kvkb44nT4v00Pa?=
- =?us-ascii?Q?xozbLyOrm83sfZqpn42egFk8rUC0d/yRT5uiDAzhBVzgLjcq7AdxGxT5TwEU?=
- =?us-ascii?Q?hI5bebk2u9r9tSOxhfFzW2/cIW7Lwv4a5SZPCYTlwJdRwsdrYh+0zmWkbugG?=
- =?us-ascii?Q?W+E3PfutV9YVCZ98Getgv8L4Q1wEypzTYT4bA10J7tbbsICKE+fzI3y/EzyL?=
- =?us-ascii?Q?Zrhu7aEs+6BKIBPDD0/c/KRd+loXpN91KMcWrXUuG4UsxdUXqduswJ/7U8Ym?=
- =?us-ascii?Q?mHGi7bzcZ3ujvlmwGdo6s2uTLThPYNR6TRG/4KXfHu/iwZnhQIdMzOBOBFpW?=
- =?us-ascii?Q?+TfibBtYcjxXY6x1JvF6rr53XfCFMYev4u5XEUElZVmyv+QoGiuXRt4WvUv3?=
- =?us-ascii?Q?jjTt+xEbz1mEsw7Ebii2956dVdYvDDy7G0zNHTzPhMOjOe3P6rDJ3uTxBeMf?=
- =?us-ascii?Q?VJEv9JHCGF0wjW0fRncwAwikDEmRxQlLgh95UCdVqzH3GYHGjWIOS5npCkQN?=
- =?us-ascii?Q?NPJBMPI=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?t3wD3UFUg3DJ8AhNEuzW6uwBFJhSLXNngfnFaBzL6ZEpYzTaa3HUmEIQsEAm?=
- =?us-ascii?Q?kkH8jNQIGORSpO1qxaxAvZTzOAQtop4x33R2nLXa3Hywj4y0IH/9g2dCQMlp?=
- =?us-ascii?Q?kdVKv7TRJRkrSngLPI+DIKplWWSFKLJtNSPPRc+ck0Zz36fJZZpcsMAKVDHR?=
- =?us-ascii?Q?Z1mZx9Eu/9WBs21EHi0lD7QPtPm3S9XpOjjNgRy32Z1eFupE18p6PWjLEYu8?=
- =?us-ascii?Q?znzAZ6pCiSOIdo4llv7vvx1jx9HNwlADfkM5oABwGVfc3ClTeJXfAligwW9U?=
- =?us-ascii?Q?+vF0h9leF4sGX2jt1WQl8i8ZTgorJzKmJzAA2f5yPzwgFEaTMBLK8aKd5sGe?=
- =?us-ascii?Q?FSmlm3VeJNwbWmlRqd4fduSzNSTaMla4zhcuyztig94iHkOIdALBaPBM9IIP?=
- =?us-ascii?Q?egzQmaAnrWWtmRKYgGjj3EBkCLrS527doFuH2AWlg3qc50lpdY7Qebvvv3vi?=
- =?us-ascii?Q?9AYz3UgvMo2nBhI7aKQeZmwT82NhEDQO14Jm8VelctvA7ZBkdBZ896SmDXv8?=
- =?us-ascii?Q?JMcCc8Eyi4AVagvhvSe3/TqN2zJuExHsSshbysBdwm/SJfXL0qpIGzTbN0Xx?=
- =?us-ascii?Q?cnQBaW9YWYbo5YgZEWPOdXwkgv1nOuhaY+Xh3l7dCO2qMMKyucD4C1IgAlyQ?=
- =?us-ascii?Q?XkoghzcBu5tpAUsDWhcaFWdMQ3l2Xzfm4yiKBO1RjnuXwaHk5dMyPn4xoRaB?=
- =?us-ascii?Q?W+DA9A8uqTFadvyaUTAUhxU5TBDEfSBheUelnBSvBY86KF5McnEUJChVAFQi?=
- =?us-ascii?Q?6tGE2sZAXAFTFrEWdHxMa1WDB9ILwOGbCTd+Oe8sf8qsIVE3glJkPVtlnhkx?=
- =?us-ascii?Q?GhaUPupFzcFUmp2RvsbxrK7nD/HU3JydBVCDZkpHuydImuo2CWc46W7Msn39?=
- =?us-ascii?Q?qYHXv4iYsCckod0cGsTBPuFvcnPxTTWQnqEekt3Wyh2Fddcj1EgytLko8/fZ?=
- =?us-ascii?Q?bmcHWYIlqdQQ9Imf7s/jz/gGVf8bFAXzrVJLeIMY4CrWYDzgM2/2Lx/MBl/q?=
- =?us-ascii?Q?6hKBYVz6UZTXdfpq8OP1Q31HbrmSHGZNhLIQlqog1DNkC9p+X0fUPQohhdii?=
- =?us-ascii?Q?VWfkb3G8LaeEQiR/k9yQFmyiy050KrM1QHwma1YTZ4Y084dyKL2jrzvrhVAN?=
- =?us-ascii?Q?dG0EZ7oazzjCDNE+ckXHX2Bv/xxJctULmPFc9ZtL32HZFz1yA2ArzlQzujOV?=
- =?us-ascii?Q?oZjYksMBDxEGpYL/jOWPlBwIBLNFj4+TMfmL4z+cJVB/hLwxbENGgJHPLD1U?=
- =?us-ascii?Q?J6/jb1t2lnct66wGrxxK6GGuldav1DetS2QpYh+sUMvxBVL68uBQUJzVHKeY?=
- =?us-ascii?Q?08s1oaTWUhdH+g3fmNQTUbOcvtsmx9yq3mGjVllhK7Uvj/ZvOUC+EHNHs8ZV?=
- =?us-ascii?Q?ggLhoDgVdzr3bLlMhcrs+SUJN0L7HIfLyId9AW0ppug6AE2XFWWOX5DqiKly?=
- =?us-ascii?Q?0IFGNpNvltddusqdIdE9uG3xqgyihenYF/lM1tmJxQiXkxfEV+W0AnFmcaG/?=
- =?us-ascii?Q?iKJ4t6pEpdRISrQ1udyQ0ndxRbKdxMypz9bmGMVkPFKPpj8NtCfPTEMWgq5E?=
- =?us-ascii?Q?Mad7gnKsKwtu0gvyyHw7sX7Jq4L5Fy+BaURdLwafxDnHR3chujLKUeLlfozV?=
- =?us-ascii?Q?KA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65636066-375e-44e6-fb84-08dd0589526e
-X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2024 15:22:30.9796 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DlmFLNZQw9tbenMX0s/cTNNISw4DCb9jN0gBN30ApcqH+2auG36cX1FdURA/BG2+v3mQ82fIrXRlai/cBzzfBKjQu1rw8eL+szUyUfbvfkk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7182
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAE5sN2cC/x3MTQqAIBBA4avErBtwouznKtEibayBMNGIILp70
+ vJbvPdA4iicYCgeiHxJksNnUFmA3Wa/MsqSDZWqaiJq8DyCWLyJO0VKYRBvz7ijM7q3rW5NQwZ
+ yHCI7uf/xOL3vB8SF0gNoAAAA
+X-Change-ID: 20241115-topic-x1e80100-pinctrl-fb69c767b51b
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=713;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=Ad8/QAXAeGUmdRdeJpW6DhvlFhQADAyqY9iHqIfK+tc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnN2xQCXzQ11FPCOKDExkeM1giyyNLrlZR9rUuYiDl
+ KZsc3c+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZzdsUAAKCRB33NvayMhJ0X2tD/
+ 98vrV1BgwnZtxYFR1R9E3A0kECtVJI1ehoQWwEepitrwu8DbTYLmTOFWqTXFikxPVGIngUjgixkpGX
+ 55Nff7tm3dhejvL9UGJ6mDQd86UxB3DlDTiJ/JFWWimsiluY9w70iYVPrdEKFec3gKoAAgp2veSz+5
+ ITsiTqDJDgez260i6iGVLuF1EyZemdAaMWoniSfxmZerI51Pbn+XC5d7BAtT+imUDFglkByGkDUZZ8
+ /X3U/5TzJTWg7Gc/+by9Py6w3osTnA0vW3h1oasUC9RQBdvH+BgDhWsGLXRxWmoFdeq096WuWC26uu
+ JFB3iauW34VZIdAIlNsKcCcHfj9RCZ4V8S3mffd0KydL6B/ldggvcrJVqM0BCG5YjiUIWU0r4VvHhx
+ DU0/XSCisE+9zJn8etexqjV/rF1MKFAVcsUADhzhWpUJLJrz3XSlPoE5HzugVZ1viCfVmDwjsWFLsd
+ 2cNxmttsiwV1wLJGyzxKiAK1gn2J+agG65O0fFZ7Srkx1Pu+krtD1OmKo9892jMbi3izi231Tp+HQa
+ ybJIvf1iKe+rqmxyacG47R7HxXCX1raIkiRcy5ck63bpnBc90PY6ear1vdpkWiDbiwAI9eDe7dENVC
+ VqMyBXRmCgSff4g9JL6ueJmB/I4L1u8zEiIBcai3k489OvX1X6af9mduCKSw==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,31 +112,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 15 2024, Simon Glass <sjg@chromium.org> wrote:
+Add support for TLMM in X1E80100, and enable it in qcom_defconfig
 
-> Hi Rasmus,
->
-> On Wed, 13 Nov 2024 at 15:32, Rasmus Villemoes <ravi@prevas.dk> wrote:
->>
->> On Wed, Oct 30 2024, Rasmus Villemoes <ravi@prevas.dk> wrote:
->>
->> > Doing bringup of a board, part of my bootstrap logic is in U-Boot. So
->> > when tweaking that logic, I was bitten by a previous completed
->> > bootstrap having left a copy of the environment on the device, which
->> > was imported and thus overrided the new logic.
->> >
->> > So I thought, "ok, I'll just make sure to put 'env default -a' as the
->> > first part of the bootstrap logic so I'm not bitten again". Alas, my
->> > logic also relies on certain variables that are set by C code
->> > (e.g. for detecting board variant), and doing 'env default -a' also
->> > eliminates those.
->> >
->> > Looking around, the hashtab code already supports a flag that does
->> > exactly what I need, and exposing that is (morally) a one-liner.
->> >
->
-> I didn't see the patch, but can you add a test?
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      pinctrl: qcom: Add X1E80100 pinctrl driver
+      qcom_defconfig: enable X1E80100 pinctrl driver
 
-That's literally patch 3/3.
+ configs/qcom_defconfig                  |   1 +
+ drivers/pinctrl/qcom/Kconfig            |   7 +++
+ drivers/pinctrl/qcom/Makefile           |   1 +
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c | 100 ++++++++++++++++++++++++++++++++
+ 4 files changed, 109 insertions(+)
+---
+base-commit: 56accc56b9aab87ef4809ccc588e1257969cd271
+change-id: 20241115-topic-x1e80100-pinctrl-fb69c767b51b
 
-Rasmus
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
