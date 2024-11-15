@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48622D68BDA
-	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 21:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B8BD68BDB
+	for <u-boot@archiver.kernel.org>; Fri, 15 Nov 2024 22:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B951D895E0;
-	Fri, 15 Nov 2024 22:55:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 29BF1896F1;
+	Fri, 15 Nov 2024 23:35:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=brisammon.fastmail.fm
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dmUOIkdo";
+	dkim=permerror (0-bit key) header.d=fastmail.fm header.i=@fastmail.fm header.b="YwjYmG1C";
+	dkim=permerror (0-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="mYqOhuD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 536C2895E0; Fri, 15 Nov 2024 22:55:47 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3767D8916C; Fri, 15 Nov 2024 19:28:28 +0100 (CET)
+Received: from flow-b2-smtp.messagingengine.com
+ (flow-b2-smtp.messagingengine.com [202.12.124.137])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5016F89688
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 22:55:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E53488D3C
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 19:28:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=brisammon.fastmail.fm
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2ea0d64e78dso1497999a91.1
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:55:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731707743; x=1732312543; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cf85yO0k0JviHGlnFyFyDNDde+fqdMXOr+G6v8uMhNA=;
- b=dmUOIkdolRJFIWRer8GFAuDWCuSdO/mtuajaN99FyS3U2nXd2S1aqi24fRhKudck5b
- amoVkmKDgP8+0mGabvR9yo5PMetn/pLx3/eIkw6J6Zs+pL68gQVB8DPzx1GN9MIu4UCs
- x193tlIJw5TAXk+sIy8UejMMPeRp9ahCzyZFOHaTV0tZGzsauY/VqxRIj1sV+p2gJ9JO
- NCTbpLTDqCj560HacRt1ZVeuIdOkXsqB4projibuzPsGj3wNpyRL0NphkA/nmYTRKUQG
- UuM827OenFA/ONzh6zcbf/7zI17WfIsHSqt3OhtcdlcrXCS4zlOII5qkn6fhvEfRqeUf
- otpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731707743; x=1732312543;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cf85yO0k0JviHGlnFyFyDNDde+fqdMXOr+G6v8uMhNA=;
- b=KQMYKCXSGfY/+Ap3hndUmexfBO2GMtkC7JJsfkZJE2Ph5VvdVFGgvc27YNALRTMqmH
- 7+w+kieWeHo+eCbX62Dth7lh8qh/KvkqXPS8MswLPEr56mHmgs2XFZaQjb1duahtj6n4
- op6Q7cdhXHr/px5/VluP0Cz067i/RMgOI15lltUStwuyfSH4PMz6Zt0vvccoBBKd104I
- 5bDMnOT/Ccu9Gnu2iFZHbR9ZVzKMEj+omYUwXEGUH1r0kR8m7+WRzZL4eBSOi2UxsGLg
- LSlKngSNegZ+/zAkSErNu9+cP/7KjFnvSWjR8dysWq5EQy6WhgPMz3NUFg5DftEQzmaz
- izEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9nciDgfWmLQqCAVnKRqhYh0LWD81/RKbzL+cB0xdezmSo/7ox9JMNS25KR/sSuoRNNp2tBoA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGpWhykGFJHM4xY4QV+1hledy9I6EvxXPraPjLPxSitwhYApuw
- Dk3wj2BvaCgG2adbL8eZVd0+s1keDZmilpNDnYZpUEmon0HHAbZEKq9fr9OthDNTv5iTNpeuTnF
- FaF6oSADUGCLVianiuUI3x2FrgouLX5uBDHKEdQ==
-X-Google-Smtp-Source: AGHT+IH0TGDe74fApXbV8YNgEXAxVjg/yeBq89lQ+SPM27JkEI88iyfsn0RE8Xj3LvE07k55RoDvf5ZohLUsz9BnH+k=
-X-Received: by 2002:a17:90b:1bc6:b0:2ea:303e:cf5f with SMTP id
- 98e67ed59e1d1-2ea303ed035mr1396013a91.8.1731707742641; Fri, 15 Nov 2024
- 13:55:42 -0800 (PST)
-MIME-Version: 1.0
-References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
- <20241115141748.GS3600562@bill-the-cat>
- <CAJaLiFx35Q8L-kR02GrA1PTd2nY699KMc2fy5fT381Khg5hgxg@mail.gmail.com>
- <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
- <CAEfUkUJOd03fc5VERRPY18LWMomEbYFRnkHSJcFLcdnPq4=8jA@mail.gmail.com>
- <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
-In-Reply-To: <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 15 Nov 2024 16:55:31 -0500
-Message-ID: <CAEfUkUKp9wWhgBW2XFubhoccSGeU-CW3Y+FY+iJhfw7eVLZv_g@mail.gmail.com>
-Subject: Re: Git commit failed with mbedtls/framework
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ spf=pass smtp.mailfrom=u-boot@brisammon.fastmail.fm
+Received: from phl-compute-02.internal (phl-compute-02.phl.internal
+ [10.202.2.42])
+ by mailflow.stl.internal (Postfix) with ESMTP id 371D51D40B98
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:28:24 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-02.internal (MEProxy); Fri, 15 Nov 2024 13:28:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+ cc:content-transfer-encoding:content-type:content-type:date:date
+ :from:from:in-reply-to:message-id:mime-version:reply-to:subject
+ :subject:to:to; s=fm3; t=1731695304; x=1731702504; bh=MZl+Rz/0KM
+ Tc/kZ+IjWTC//HUX2kIiBD7wepiM4NBFA=; b=YwjYmG1CdHWcyFkhEvLWJzSFGH
+ /myxbJFfl5Cxq+Eh0kW/ofFQaV5WVnh+Rtpgtj68ZFSyrAch7QMwaNIe/oei4+Dn
+ 7hB/s07sBu93sg9yLiQjQGtYRh1ezOxpJ6aZl+4fRLSpNjlUjyeEuJCXXopWSC55
+ dSQdni28er/Vai2VflWOyOJXe36ObjeqNq/sinGErQa77qAgQBhH4St39yiA7gT7
+ KI3FhnWPz97YNkGaYmSYmlTTNo8qTXQZikj98OE5LveLi47ukouEJNpomuA4Wivv
+ GdLktbNC3/zs3Z7htNgzLig2IgZvlrJmq6VSt3ngVgWfUAuHBerL2M7Tab1Q==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-transfer-encoding:content-type
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1731695304; x=1731702504; bh=MZl+Rz/0KMTc/kZ+IjWTC//HUX2kIiBD7we
+ piM4NBFA=; b=mYqOhuD7EW5PaDSOko1hEf3HbFQwppYxRNVVSRRmJxahXt394wH
+ /c6/L2p0rx14g4kC9xdMOT8KqeyOPwhh3f0V6ACiUSywH9P3RvCcyxjqfi3k0UrK
+ 9dRYsq4sFfdoV2KqdWKb93IOsYzHgYzDUtHUR2pB+DhrbwmzE30TMCMpa6NQQzH3
+ P7eq2L+5Q9PD6zBXOGeOXEnI56cS+Qkouct8R1wime0GV6CCd/9+hJ+3cB6RHwGZ
+ gU8DGkyBxJ2XMLtUKFhNQN7HeZIBjMsZzS7JiQYNaeSAml9fY6zctflDJKGWGHjQ
+ iRHHzBcuGxqpaNgjoE5mfDy6+RQ71Yr4mfg==
+X-ME-Sender: <xms:x5I3Z0ksxcKiudNbeVw50fvbI1LjQF6p_766Hvk_siB1C9a5aNkxqQ>
+ <xme:x5I3Zz2N_3wChnYDPjJO6bRq7G3L5ncfQgDfGeX_xA6BIsKYl_vamf63duvTAv2RH
+ kTlikIdHIXVoQ>
+X-ME-Received: <xmr:x5I3ZypJUONSQglsh42-AZpGtStB9QZ6nGuB6RAjSk2-zEPqr0p1QA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddrvdeggdduuddtucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucenucfjughrpeffhffvuf
+ fkofggtgfgsehtjeertdfjtddvnecuhfhrohhmpeeurhhirghnucfurghmmhhonhcuoehu
+ qdgsohhothessghrihhsrghmmhhonhdrfhgrshhtmhgrihhlrdhfmheqnecuggftrfgrth
+ htvghrnhepueevtdfhiefgveeifefhteejuefhhfegfeelffduheejteekfeehvdegueeg
+ heeunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepuh
+ dqsghoohhtsegsrhhishgrmhhmohhnrdhfrghsthhmrghilhdrfhhmpdhnsggprhgtphht
+ thhopedupdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehuqdgsohhotheslhhish
+ htshdruggvnhigrdguvg
+X-ME-Proxy: <xmx:x5I3ZwlPhg4n86B6NTK8byGnR4k8fTg7x4fWDdLVPbQb6niYJiX8gQ>
+ <xmx:x5I3Zy2BwcBRefEWneDOItsSQfj6zcNN7D8KOOKQFUm_NqiUZDTZcw>
+ <xmx:x5I3Z3sK1YjSZ8laDYEA_oXYcII6B5EspUkhZo44U55iYoD-mPqdoQ>
+ <xmx:x5I3Z-WJIXA2F6pun5xI5VECoCu7gqLvpHiXD8aYMCvAfjCZmuv9sA>
+ <xmx:yJI3Z3-hKfwQFQKBUOhWvP1Al33xK-GOXCgB_sp3JXJoC8JcGkRRL2H->
+Feedback-ID: i431d41ab:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA for
+ <u-boot@lists.denx.de>; Fri, 15 Nov 2024 13:28:23 -0500 (EST)
+Date: Fri, 15 Nov 2024 13:28:21 -0500
+From: Brian Sammon <u-boot@brisammon.fastmail.fm>
+To: u-boot@lists.denx.de
+Subject: "help" output too much for my screen
+Message-Id: <20241115132821.c2cb96e17c9a62e450d155b0@brisammon.fastmail.fm>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; i686-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 15 Nov 2024 23:35:33 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,99 +103,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony and Tom,
+I recently upgraded the u-boot on my Pinebook Pro, and lo and behold!, the new version supports the built-in display.
 
-On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmail.com> wrote:
+So, now I'm experimenting.  I hit the any key to stop the autoboot, and I get the command prompt.  I type "help", and a large quantity of information spews out to my screen, faster than I can read it, and scrolls off the top.
 
-> Hi Tom,
-> Hi Raymond,
->
-> On Fri, Nov 15, 2024 at 1:09=E2=80=AFPM Raymond Mao <raymond.mao@linaro.o=
-rg>
-> wrote:
-> >
-> > Hi Tony
-> >
-> > On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com> wrote:
-> >>
-> >> Hi Tom,
-> >>
-> >> On Fri, Nov 15, 2024 at 11:27=E2=80=AFAM Tony Dinh <mibodhi@gmail.com>=
- wrote:
-> >> >
-> >> > Hi Tom,
-> >> >
-> >> > On Fri, Nov 15, 2024 at 6:17=E2=80=AFAM Tom Rini <trini@konsulko.com=
-> wrote:
-> >> > >
-> >> > > On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
-> >> > > > Hi Tom,
-> >> > > >
-> >> > > > I am on 2025.01-rc2, and I am trying to commit some files. The
-> error
-> >> > > > seems to indicate this framework directory might need some
-> >> > > > modification. Did I miss something?
-> >> > > >
-> >> > > > error: 'lib/mbedtls/external/mbedtls/framework' does not have a
-> commit
-> >> > > > checked out
-> >> > > > fatal: updating files failed
-> >> > >
-> >> > > That's odd. You didn't happen to try out some of the previous lwIP
-> >> > > iterations on that tree did you?
-> >> >
-> >> > No, I did not. The tree is clean with "make mrproper" and on the
-> >> > master branch. I just did a git pull and worked on it.
-> >> >
-> >> > I went and looked at https://github.com/Mbed-TLS/mbedtls.git. The
-> >> > framework directory is pointing to a specific commit.
-> >> > framework @ 3867faa
-> >> >
-> >> > I'll stash and repeat it on another clean tree.
-> >>
-> >> I have the same commit error on a brand new tree.
-> >>
-> > I think you are talking about the test framework of MbedTLS's original
-> testsuite,
-> > am I right?
-> > MbedTLS was ported into U-Boot as a git subtree and that framework is a
-> git
-> > submodule of original MbedTLS repo which was not included in the portin=
-g
-> > of U-Boot since U-Boot has its own testsuite.
->
-> Here is what I found.
->
-> git clone https://github.com/u-boot/u-boot.git u-boot-master-test
-> cd /usr/src/u-boot-master-test/
-> patch -p1 < ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.patch
-> git add .
-> git commit . -m "arm: kirkwood: Enable bootstd and remove jffs2 for
-> Sheevaplug board" -e
->
-> The git commit above gave out this error:
->
-> error: 'lib/mbedtls/external/mbedtls/framework' does not have a commit
-> checked out
-> fatal: updating files failed
->
-> So I tried to commit only the specific files, and it works OK.
->
-> git commit configs/sheevaplug_defconfig include/configs/sheevaplug.h
-> -m "arm: kirkwood: Enable bootstd and remove jffs2 for Sheevaplug
-> board" -e
-> [master 47de8cff2d] arm: kirkwood: Enable bootstd and remove jffs2 for
-> Sheevaplug board
->  2 files changed, 17 insertions(+), 19 deletions(-)
->
-> I think it must be what Raymond said above. So perhaps during Tom's PR
-> pull, the framework directory was created. But "git commit ." does not
-> like the empty lib/mbedtls/external/mbedtls/framework directory.
->
-> Under the native MbedTLS git repo, by default it has a "framework"
-pointing to
-its git submodule.
-Maybe we should mark it in the gitignore.
-
-Regards,
-Raymond
+So, this prompts a few questions:
+1) is there a paginator, so I can do "help | more" or something like that?
+2) is there a scroll-back buffer, so I can do something like "Ctrl-Alt-PageUp" to view stuff that scrolled off the top of the screen?
+3) Is there a website that lists (and documents) the commands available at the command prompt?
