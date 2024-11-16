@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3AC2D68BD0
-	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 02:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7016D68BDA
+	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 02:45:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C95378919F;
-	Sat, 16 Nov 2024 03:45:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4004F891B4;
+	Sat, 16 Nov 2024 03:45:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HE+uOySO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OvtzaYw2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DB6A891B4; Sat, 16 Nov 2024 03:45:30 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 1BFA689688; Sat, 16 Nov 2024 03:45:44 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 100CC8913F
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 03:45:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DD82891B4
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 03:45:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9ed49ec0f1so409296866b.1
- for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 18:45:28 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb6ca2a776so4024324a12.0
+ for <u-boot@lists.denx.de>; Fri, 15 Nov 2024 18:45:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1731725127; x=1732329927; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1731725141; x=1732329941; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=iwO6WUZvtOsjkgYw0rVq+VpsKqXNlPl91zPTWI6JCFY=;
- b=HE+uOySOvkMoerx9VVWLH/YG5aEnjQ98N9a5EUKb8Dm74oUrJrZuT7CSFN5mQb+KL9
- oiHA+CWJ3EoaD/fBoYpgHrpkEqFNPQPZO9eDpdBSQ22Vv6vIC27P7udJpHTB/M72oEcu
- zFSZuSQchjpKOB4Jnktc8PXdcSXLh5+RtIVIA=
+ bh=SN53XNOmqFU8PHbbbpaY9lFHnqtQv96dJ0+zpur0jbk=;
+ b=OvtzaYw24ar16xnSrURL4n1cDo1hfzTpADweb3og5/eXFirTczkUpVkdeI2GrWkpUX
+ 3FR7NIYpc2eyEVdwDJ913CkWVyNAXDLx/te1AmcgRDc95veXJYKSs/XRmEkwk0pOdDZ5
+ K49l/XCvmSnn16F56qQYtZOMT6o8VwNTCGQPM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731725127; x=1732329927;
+ d=1e100.net; s=20230601; t=1731725141; x=1732329941;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=iwO6WUZvtOsjkgYw0rVq+VpsKqXNlPl91zPTWI6JCFY=;
- b=NcmLi/lb6Xrr8ma6KlUfow8+WxhEqLmSv2g8Q5MNUUtGh8+M+Oz4XYVrww+1JfYt2V
- rv9M5V7AATjs7ZG3rKoC0WyThesA761nhTQVuYHWLTdD4oLMp0rj2BdkF6yHXgDxmwUK
- 5qwrCBOEtvnFndpwbd5fhUCu/CE4d1c9C7bCDwM/plD6lnR7kMLnGTP6op3qm2jeNEK9
- Dr7cPkV5wBPA4U5x6PSezAaFHKbeMUxlgS4+he3Z9ZKAyNiLfsc70hlcCkBmFNSgKlzF
- c9FxZLwHuo7Xg5JjHxMfuMg2acrzMBdMb0BcQ4ywoZX2qkqNOzHx8DH6/n+VqWxDjP2t
- 8Dkw==
-X-Gm-Message-State: AOJu0YzIvwVcfKqutfdZ1CHJV7BAJcTUpOK5mE+RFpCgxP42JU/CsV+X
- xLgTfhZVjjG34BYlRWheQYRnffERRsiX3gwd4ws649ryt4k9ALN1nkBqMQtVG6DFa/BFW06FTTq
- z81WU8WBrWSNyjlrKDEbZbaS5TxSHKes/ObuPqIARk1RJQ2rikw==
-X-Google-Smtp-Source: AGHT+IG/YPQI3wVN5+Vvhegcp/0M9Bs1mgnRuLRRww/DkEG4S+cCPKnz3pyKw01Pz24qvBsGrDFSilyxEcRg/TpCK+0=
-X-Received: by 2002:a17:906:d54b:b0:a9a:1b32:5aa8 with SMTP id
- a640c23a62f3a-aa4833e8bc9mr416292366b.4.1731725127351; Fri, 15 Nov 2024
- 18:45:27 -0800 (PST)
+ bh=SN53XNOmqFU8PHbbbpaY9lFHnqtQv96dJ0+zpur0jbk=;
+ b=ne0M5VktOAmPQjq6kjzcFtZcBuArWobZui4szliGPe9kVcEFwDT7JB9D+vGCbKVvto
+ ECATNKVZK0xlRmSUX28cbUfKSv+y3qKwe7+3s9EncX8GFFzHkd9z34j458BZf+HPeI9e
+ QiL6GpJaOHr5HBHe4FxnOQXSxOc9bptNavT9XnajQX5SNM6xf0tcFn/Y8w6m5dOOu5xx
+ 2TIOfs1rBfzij9HXLX2BzlseYlnsUBvFJgokMfwyn0iCSmbmS2lqllU5P9aGkSUJpQg7
+ UjOBJUyiBc36Y7NW5lo2CX2nvp0nezP+YYCB80f2lCjW6Quz2pKtUOY/v0iLoVeAbkVB
+ 0arw==
+X-Gm-Message-State: AOJu0Yx/jfdnAPZ2YY/N0U3vfPgg9lrFTZabwGiA6QsNqdbDTl5hk4GU
+ akv4gtlk0JAg9XTCwa0x5t5wZ/M07QZlQ7jNQti62nYZTU5G222NfSLuPqz148TBIMDK5wPW9R3
+ 3alMb1aEr+e7XRxUAtBFWxwcf84WG8Q1OLRIN
+X-Google-Smtp-Source: AGHT+IHsycXPeRL6KkALy9Ggeu8MxIKwdwRoUBgdmrXnoWibQOD1L6xo31mmpbvOhYZphgkN3dkl5quFfWA+Q4Khcac=
+X-Received: by 2002:a17:907:3f15:b0:a99:f92a:7a66 with SMTP id
+ a640c23a62f3a-aa48344e752mr417352066b.30.1731725141363; Fri, 15 Nov 2024
+ 18:45:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20241115132821.c2cb96e17c9a62e450d155b0@brisammon.fastmail.fm>
-In-Reply-To: <20241115132821.c2cb96e17c9a62e450d155b0@brisammon.fastmail.fm>
+References: <20241115165400.2486914-1-trini@konsulko.com>
+ <20241115165400.2486914-3-trini@konsulko.com>
+In-Reply-To: <20241115165400.2486914-3-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Nov 2024 19:45:15 -0700
-Message-ID: <CAFLszTgp3u1GZYT-n0=6M6YNPkYrx_pzX__5j=tQbHNLUH0f1w@mail.gmail.com>
-Subject: Re: "help" output too much for my screen
-To: Brian Sammon <u-boot@brisammon.fastmail.fm>
-Cc: u-boot@lists.denx.de
+Date: Fri, 15 Nov 2024 19:45:28 -0700
+Message-ID: <CAFLszTiyARoPDhdbzEZj4BCgCFxg6upN7U=4V0wG_PQ_O_BBdw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] arm: sunxi: Use "imply" for USB without further guards
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,30 +82,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Brian,
-
-On Fri, 15 Nov 2024 at 15:35, Brian Sammon <u-boot@brisammon.fastmail.fm> wrote:
+On Fri, 15 Nov 2024 at 09:54, Tom Rini <trini@konsulko.com> wrote:
 >
-> I recently upgraded the u-boot on my Pinebook Pro, and lo and behold!, the new version supports the built-in display.
+> Given that ARCH_SUNXI already implies that USB_GADGET should be enable,
+> we should also imply USB being enabled.
 >
-> So, now I'm experimenting.  I hit the any key to stop the autoboot, and I get the command prompt.  I type "help", and a large quantity of information spews out to my screen, faster than I can read it, and scrolls off the top.
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Is this a tiny bit of a cheat to avoid patch 1/8 of Simon's bootstd
+> series? Yes, a little. But it's also correct I believe.
 >
-> So, this prompts a few questions:
-> 1) is there a paginator, so I can do "help | more" or something like that?
+> Cc: Andre Przywara <andre.przywara@arm.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  arch/arm/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Not that I know of. I suspect something could be implemented, if you are keen.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> 2) is there a scroll-back buffer, so I can do something like "Ctrl-Alt-PageUp" to view stuff that scrolled off the top of the screen?
-
-Not on a real board. If you use sandbox, you can do that, though[1]
-
-> 3) Is there a website that lists (and documents) the commands available at the command prompt?
-
-Yes at [2]. I'm not sure what proportion are documented overall, but
-perhaps close to half of the non-board-specific ones are.
-
-Regards,
-Simon
-
-[1] https://docs.u-boot.org/en/latest/arch/sandbox/sandbox.html
-[2] https://docs.u-boot.org/en/latest/usage/index.html
+(from my side)
