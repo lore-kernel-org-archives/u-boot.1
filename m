@@ -4,59 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4892D68BE4
-	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 07:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7022AD68BE3
+	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 07:17:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D91CA896E6;
-	Sat, 16 Nov 2024 08:16:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DFB9896DC;
+	Sat, 16 Nov 2024 08:17:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="to3C0gQz";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KP8BTz6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83C9F896E6; Sat, 16 Nov 2024 08:16:58 +0100 (CET)
+ id 2EA41896F3; Sat, 16 Nov 2024 08:17:01 +0100 (CET)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5950896F8
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 08:16:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0853896DC
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 08:16:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AG7Gred2942275
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 16 Nov 2024 01:16:53 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AG7GuGC2942311
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 16 Nov 2024 01:16:56 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731741413;
- bh=d0wEHgb84JpBdNl7askMoAt+z/oEFh8QwFEkKIegVXI=;
+ s=ti-com-17Q1; t=1731741416;
+ bh=KhPUUjV+tOxrjUfYZflai9gQTRZoxqWpg+RPQi8xk/I=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=to3C0gQzpFLdR5GWivjuoE44HXsPEPzeLFmeI5NOVeEXB/FgAE+EvqP1UyQ/T+jtA
- XkOR9ROQFa3G+ZcjahlQI1Y29RLcz+5GCcDTH3kNJYZtMLfExFhy7BmtDCYt7rmlA1
- ZVcQzkUFpNkfvDhsYCsOewN6TJdDlrEG442AgyyU=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AG7Grte096970;
- Sat, 16 Nov 2024 01:16:53 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ b=KP8BTz6acPcFqxV/Bxr0AifVQML/qEh5DDAHaLCRd053ocFdaUAWqx+s/vsMfcaMC
+ c8dvAK1IG02nO2tGu/z1Zi4jvzdod5Xmlq0LKtdgqt9kJ8Axs/OU0ZcTm4cv82+29R
+ fmzoqcZ4QzPySd+TMesmKNHkhCtPENIxBIlyI+60=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AG7GuFG022864
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 16 Nov 2024 01:16:56 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 16
- Nov 2024 01:16:53 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 01:16:56 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 16 Nov 2024 01:16:53 -0600
+ Frontend Transport; Sat, 16 Nov 2024 01:16:56 -0600
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AG7Gg64129041;
- Sat, 16 Nov 2024 01:16:51 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AG7Gg65129041;
+ Sat, 16 Nov 2024 01:16:53 -0600
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
  <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v3 3/5] misc: k3_avs: Check validity of efuse voltage data
-Date: Sat, 16 Nov 2024 12:45:17 +0530
-Message-ID: <20241116071615.839623-4-a-limaye@ti.com>
+Subject: [PATCH v3 4/5] arm: mach-k3: j721e-init.c: Add support for
+ CONFIG_K3_OPP_LOW
+Date: Sat, 16 Nov 2024 12:45:18 +0530
+Message-ID: <20241116071615.839623-5-a-limaye@ti.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241116071615.839623-1-a-limaye@ti.com>
 References: <20241116071615.839623-1-a-limaye@ti.com>
@@ -82,91 +84,111 @@ X-Virus-Status: Clean
 
 From: Reid Tonking <reidt@ti.com>
 
-k3_avs driver checks opp_ids when probing and overwrites the voltage
-values in vd_data for the respective board. The new k3_check_opp() can
-be called from board files to check the efuse data and returns 0 if
-valid.
+The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
+for A72/MSMC clks and the OPP_NOM voltage.
 
-Also add the same check in k3_avs_program_voltage() to error out if
-the efuse data was not valid.
+J7200 SOCs may support OPP_LOW Operating Performance Point:
+1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
+
+Hence, add a config check to select OPP_LOW specs:
+- Check if OPP_LOW AVS voltage read from efuse is valid.
+- Update the clock frequencies in devicetree.
+- Program the OPP_LOW AVS voltage for VDD_CPU.
 
 Signed-off-by: Reid Tonking <reidt@ti.com>
 Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+
 ---
 v3:
-- Fix voltage spelling in k3_check_opp() function description. No
-  functional change
-- Link to v2: https://lore.kernel.org/u-boot/20241023130033.1826413-4-a-limaye@ti.com/
+- Use more descriptive name for fdt_fixup_a72ss_clock_frequency()
+  and make function static.
+- Add error codes to prints.
+- Move error prints (with error codes) before else conditions. Helps
+  with code readability to map error print with the function.
+- Remove k3_avs_set_opp() from here altogether. Reasoning being that the
+  value being set through k3_avs_set_opp() will anyway be (correctly)
+  overridden by the k3_avs_notify_freq() call later in the boot process,
+  when a72 freq is actually set from clk_k3.
+- Link to v2: https://lore.kernel.org/u-boot/20241023130033.1826413-5-a-limaye@ti.com/
 
 v2:
-- Update to also handle invalid efuse voltage reading in
-  k3_avs_program_voltage() and reflect the same change in commit msg.
-- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-4-a-limaye@ti.com/
+- Fix indentation in fix_freq()
+- Remove the efuse data check addition from this commit, as it's not
+  related to adding support for CONFIG_K3_OPP_LOW. The same addition
+  was moved to the previous patch in this series.
+- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-5-a-limaye@ti.com/
 
 ---
- drivers/misc/k3_avs.c | 30 ++++++++++++++++++++++++++++++
- include/k3-avs.h      |  1 +
- 2 files changed, 31 insertions(+)
+ arch/arm/mach-k3/j721e/j721e_init.c | 41 ++++++++++++++++++++++++++++-
+ 1 file changed, 40 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-index 9d950d034a5..a3f485af49a 100644
---- a/drivers/misc/k3_avs.c
-+++ b/drivers/misc/k3_avs.c
-@@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
- 	if (!vd->supply)
- 		return -ENODEV;
+diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+index e9ed8cb267c..8d8c4a1c538 100644
+--- a/arch/arm/mach-k3/j721e/j721e_init.c
++++ b/arch/arm/mach-k3/j721e/j721e_init.c
+@@ -19,6 +19,7 @@
+ #include <fdtdec.h>
+ #include <mmc.h>
+ #include <remoteproc.h>
++#include <k3-avs.h>
  
-+	if (!volt) {
-+		dev_err(priv->dev, "No efuse found for opp_%d\n", opp_id);
-+		return -EINVAL;
-+	}
-+
- 	vd->opp = opp_id;
- 	vd->flags |= VD_FLAG_INIT_DONE;
- 
-@@ -192,6 +197,31 @@ static int match_opp(struct vd_data *vd, u32 freq)
- 	return -EINVAL;
+ #include "../sysfw-loader.h"
+ #include "../common.h"
+@@ -147,6 +148,34 @@ static void setup_navss_nb(void)
+ 	writel(NB_THREADMAP_BIT1, (uintptr_t)NAVSS0_NBSS_NB1_CFG_NB_THREADMAP);
  }
  
-+/**
-+ * k3_check_opp: Check for presence of opp efuse
-+ * @opp_id: opp id to check if voltage is present
-+ *
-+ * Checks to see if an opp has voltage. k3_avs probe will populate
-+ * voltage data if efuse is present. Returns 0 if data is valid.
-+ */
-+int k3_check_opp(struct udevice *dev, int vdd_id, int opp_id)
++#if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
++static int fdt_fixup_a72ss_clock_frequency(const void *fdt)
 +{
-+	struct k3_avs_privdata *priv = dev_get_priv(dev);
-+	struct vd_data *vd;
-+	int volt;
++	int node, ret;
++	u32 opp_low_freq[3];
 +
-+	vd = get_vd(priv, vdd_id);
-+	if (!vd)
-+		return -EINVAL;
++	node = fdt_node_offset_by_compatible(fdt, -1, "ti,am654-rproc");
++	if (node < 0) {
++		printf("%s: A72 not found\n", __func__);
++		return node;
++	}
 +
-+	volt = vd->opps[opp_id].volt;
-+	if (volt)
-+		return 0;
++	/* j7200 opp low values according to data sheet */
++	opp_low_freq[0] = cpu_to_fdt32(1000000000); /* 202-2 -> A72SS0_CORE0_0_ARM_CLK */
++	opp_low_freq[1] = cpu_to_fdt32(200000000); /* 61-1 -> GTC0_GTC_CLK */
++	opp_low_freq[2] = cpu_to_fdt32(500000000); /* 4-1 -> A72SS0_CORE0_MSMC_CLK */
 +
-+	printf("No efuse found for opp_%d\n", opp_id);
-+	return -EINVAL;
++	ret = fdt_setprop((void *)fdt, node, "assigned-clock-rates",
++			  opp_low_freq, sizeof(opp_low_freq));
++	if (ret) {
++		printf("%s: Can not set value\n", __func__);
++		return ret;
++	}
++
++	return 0;
 +}
++#endif
 +
- /**
-  * k3_avs_notify_freq: Notify clock rate change towards AVS subsystem
-  * @dev_id: Device ID for the clock to be changed
-diff --git a/include/k3-avs.h b/include/k3-avs.h
-index f6f1031c9cc..41a1da36356 100644
---- a/include/k3-avs.h
-+++ b/include/k3-avs.h
-@@ -27,5 +27,6 @@
- 
- int k3_avs_set_opp(struct udevice *dev, int vdd_id, int opp_id);
- int k3_avs_notify_freq(int dev_id, int clk_id, u32 freq);
-+int k3_check_opp(struct udevice *dev, int vdd_id, int opp_id);
- 
+ /*
+  * This uninitialized global variable would normal end up in the .bss section,
+  * but the .bss is cleared between writing and reading this variable, so move
+@@ -301,8 +330,18 @@ void board_init_f(ulong dummy)
+ #if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
+ 	ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(k3_avs),
+ 					  &dev);
+-	if (ret)
++	if (ret) {
+ 		printf("AVS init failed: %d\n", ret);
++	} else if (IS_ENABLED(CONFIG_K3_OPP_LOW)) {
++		ret = k3_check_opp(dev, J721E_VDD_MPU, AM6_OPP_LOW);
++		if (ret) {
++			printf("OPP_LOW: k3_check_opp failed: %d\n", ret);
++		} else {
++			ret = fdt_fixup_a72ss_clock_frequency(gd->fdt_blob);
++			if (ret)
++				printf("OPP_LOW: fdt_fixup_a72ss_clock_frequency failed: %d\n", ret);
++		}
++	}
  #endif
+ 
+ #if defined(CONFIG_K3_J721E_DDRSS)
 -- 
 2.47.0
 
