@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724E8D68BF5
-	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 19:07:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 422E1D68BF5
+	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 19:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EEF189171;
-	Sat, 16 Nov 2024 20:07:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6AF298932C;
+	Sat, 16 Nov 2024 20:22:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hrGBJdrs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BbWtVR4S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B4138932C; Sat, 16 Nov 2024 20:07:04 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 6C5D48932D; Sat, 16 Nov 2024 20:22:27 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 201188914F
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 20:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF083891BB
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 20:22:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9f1c590ecdso319734866b.1
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 11:07:02 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6d41b209858so719196d6.3
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 11:22:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731784021; x=1732388821; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=N2qq/WYpnBMazFtbP2PWvwKp4oYURYw2yWX3w2mz4NY=;
- b=hrGBJdrsdfqjwqC1rzFjlzB04Jc0QndxHC7V1PUp1MXXwcJf6aQxLjks1GabxuLAWV
- Rcu7k5kyIRirbqPRfsT5xO1u82HrW3NiQSm/vEXSBvefJObkDd60Poa/F0X9KlhacOXD
- j2dP7/bMkDd2/zVQx1J95SDyZTEMK5oHb8j04J/kVV4E9fC+ahrtzP9bgiC3tTty4Rb+
- xuDTg4pF3kR7RDZ3gl+UdMEmSuTadzpqrwjtSwXxTMRvG9RFYmbqJfTDQtBYewsAHNPt
- CtDPEAgXbLnO9Gaihzeh0oPD6LHA/fN7fWAOWim1wJ3ce/14w3eh7m5LBbdx1jqpesO6
- o7QQ==
+ d=konsulko.com; s=google; t=1731784944; x=1732389744; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=E4hQH2fzlJnxptdOs66ouoif8z091SvJ9OCWT5xl1es=;
+ b=BbWtVR4SZVdPG3YuM9g9jBQsZ0zoJVYPKYEq0SNImnycMY6wR/nbitlXhyOdrB6IF2
+ 53zQkqWeJyGCDC/KJlsxQ8WHarguXZ7B/tgyduls46EYxb4zbeDYr/lBckxc2HPgJm9y
+ cvVPJE44x3QSFMO3R7PI6vrSY1uQAtxZqXRZs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731784021; x=1732388821;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=N2qq/WYpnBMazFtbP2PWvwKp4oYURYw2yWX3w2mz4NY=;
- b=kEaiWfYxc3yQ7f8lAjdu7EjNJS9FFoeDgKoltB8oN+qmS0SWRESZEQgwa40xkK9mUL
- /i99vwoSTXadYNfkaLBVF0ta+M+NA+zJiBf/+fapJCwcCrBmYeElXwDxaxd13HqkboQZ
- 153pXki1OZOvkArZOxeGc/4d0RLX9PhyyrMtVm9sge9+et1zsqczzHSbEhelQt1lvKhm
- 4X3UY3TSvemKIAXk0HqJ/DzZCj36ICwnccQwraw2iWawMLYsaavXSeJLJ4oYQY8BBb/P
- 1j2jTJeEOWpJOuWL2J9uYcV3APu7d5QeBNJHy8XvUivqvbXihIUexKgbu7Z3oLAIoBPr
- XWTQ==
-X-Gm-Message-State: AOJu0Yx5JidMDB+cVRt4bvzYdI/X63bILLA6gdj9ABpv0i5ycflQQQuX
- Q6I45htoGcV+uDQB7d/KC39JlHyM5AGl3CEGonuJcZXqp8mzVxkEFPAg8GjACb8KL415pY2v+6b
- p
-X-Google-Smtp-Source: AGHT+IEo6vETplSzLn8al67mgtuauytPeEVLgDWVKy2ZS5WQA/HovS3AUECDDtmdzylVJhsgp3wrmA==
-X-Received: by 2002:a17:906:7315:b0:a9a:f82:7712 with SMTP id
- a640c23a62f3a-aa48354c91fmr682002966b.52.1731784021428; 
- Sat, 16 Nov 2024 11:07:01 -0800 (PST)
-Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
- [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df56b1esm335947966b.71.2024.11.16.11.06.59
+ d=1e100.net; s=20230601; t=1731784944; x=1732389744;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E4hQH2fzlJnxptdOs66ouoif8z091SvJ9OCWT5xl1es=;
+ b=KzJ91ONFKlmClDvEsfIvKsqJGvKHf3pc2eWs//VPq8Dptoo38mXk8DUbsZ6s+ykboy
+ lhk1edkDZ9P9IxrIBkkMnqN0kYlpdbMGZOAQj/PUKAdvUjc234mYD3BqEiODiK9kXYyS
+ tMgO0Bdq/E8SSpke/84Z+q+Vttv/pw4qX6MBH9BoTA2UIIng4cCVKRS13lpdLE+ljuv7
+ TMIU+6UWKs3/eKissbzGIVyZ9a49OaPe1ErofaJixToJVH8a1ZKcOZ8PTXkfiv3yeNlA
+ dut9DMjCgZ/0L+Hli5Egq607RnGCIBlGeZJCyTjyjAwp0wnAS0MFnra1lEbFPb2TKYvF
+ 1PKA==
+X-Gm-Message-State: AOJu0YxOyojasYCjYeFqGE7ampRKrIBCP8bgitHNVj6TX8uGNAxXYP6S
+ cmlhJpPD2C2A7VCC6/L9JbUjcYoRmYL7hezlrqLmwicfj0mQ0rC36EGU0BA/EuA=
+X-Google-Smtp-Source: AGHT+IFi4gAGle7aQ8ibRHzvFRTnX/lHqFo0BXPAsAekmL3B8MekdTXI+UeazvqbQc4DOt6E9rkk+w==
+X-Received: by 2002:a05:6214:5c09:b0:6d3:5265:608c with SMTP id
+ 6a1803df08f44-6d3fb78f53emr93844096d6.3.1731784943902; 
+ Sat, 16 Nov 2024 11:22:23 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d40ddddfe2sm11972216d6.130.2024.11.16.11.22.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Nov 2024 11:07:00 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: xypron.glpk@gmx.de,
-	ilias.apalodimas@linaro.org
-Subject: Pull request for tpm-master-16112024
-Date: Sat, 16 Nov 2024 21:06:58 +0200
-Message-ID: <20241116190658.112452-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ Sat, 16 Nov 2024 11:22:23 -0800 (PST)
+Date: Sat, 16 Nov 2024 13:22:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de
+Subject: Re: Pull request for tpm-master-16112024
+Message-ID: <20241116192220.GF3600562@bill-the-cat>
+References: <20241116190658.112452-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="thgFYTmrSXRobeYV"
+Content-Disposition: inline
+In-Reply-To: <20241116190658.112452-1-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,40 +89,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Not much for the  TPM subsystem on this cycle. Just two patches from Heinrich,
-adding missing tpm libraries to the maintenance list and fix for a coverti issue
+--thgFYTmrSXRobeYV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The following changes since commit f39199e8096dab68fe4a8e15f8ff60026a5fe491:
+On Sat, Nov 16, 2024 at 09:06:58PM +0200, Ilias Apalodimas wrote:
 
-  km: disable CMD_JFFS2 for all PPC boards (2024-11-15 13:11:51 -0600)
+> Hi Tom,
+>=20
+> Not much for the  TPM subsystem on this cycle. Just two patches from Hein=
+rich,
+> adding missing tpm libraries to the maintenance list and fix for a covert=
+i issue
+>=20
+> The following changes since commit f39199e8096dab68fe4a8e15f8ff60026a5fe4=
+91:
+>=20
+>   km: disable CMD_JFFS2 for all PPC boards (2024-11-15 13:11:51 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-16=
+112024
+>=20
+> for you to fetch changes up to c0231ede0f555b098dc7418926a8f9b407cc9928:
+>=20
+>   MAINTAINERS: add lib/tpm* to TPM DRIVERS (2024-11-16 19:23:11 +0200)
+>=20
+> The CI at https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines=
+/23393
+> worked as expected
+>=20
+> Please pull!
+> /Ilias
+>=20
 
-are available in the Git repository at:
+Applied to u-boot/master, thanks!
 
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-16112024
+--=20
+Tom
 
-for you to fetch changes up to c0231ede0f555b098dc7418926a8f9b407cc9928:
+--thgFYTmrSXRobeYV
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  MAINTAINERS: add lib/tpm* to TPM DRIVERS (2024-11-16 19:23:11 +0200)
+-----BEGIN PGP SIGNATURE-----
 
-The CI at https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/23393
-worked as expected
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc48OQACgkQFHw5/5Y0
+tywjwwv/YRq+gOn7Ex7GIm49fdwOF4SP3wE812w0cTdi4WITh+hD/UzadgRatiSc
+pET7yXl6uRYHWo1/Z8Fsh/tzVVZDSCvSz6kD5agDtA103In/ro4MkvcJGIHd05+G
+DUhassynBgl1U/E7nkIl4JQIWzL0Yydo0i0bIohrteXtlsj3RnvNzwdxq9gPiwfK
+7WECP9T+QbVnt2UcTWLH/3Z8N77ZWPaPBJhHW07hTiYF+LZKaAoKP8CkeFscbeje
+D8+hp6/Zdpfg47ztX/sGD/O4jDXeo0ZXxoHUuJu5vrxfRM4MntE6QwLx4gm0iXNk
+laRjW/VlQH4VD6ZjfMXN09hZ/1RadJLvzDUGs9Wgjyb8sEqOG55otL5B1ICmlQ9D
+rQG6fFP2q4pIPObITnq7XAvwD1ClHG8yviAdJEwXn4REF1Mzes90RRzfu0d2jD4V
+63SUReW3Pb4bx2g/B1tn5nYURWv9d7NKfSXAMtWUUtrHG9GiFiP9eGNUoRWk7WsQ
+fb+XEtgt
+=65rW
+-----END PGP SIGNATURE-----
 
-Please pull!
-/Ilias
-
-----------------------------------------------------------------
-Two changes from Heinrich.
-One is adding some missing TPM files for proper maintenance.
-The second addresses Coverity-ID: 356664 replacing a mempcy()
-which has undefined behavior with memmove()
-
-----------------------------------------------------------------
-Heinrich Schuchardt (2):
-      tpm: use memmove() for overlapping buffers
-      MAINTAINERS: add lib/tpm* to TPM DRIVERS
-
- MAINTAINERS  | 1 +
- lib/tpm-v2.c | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+--thgFYTmrSXRobeYV--
