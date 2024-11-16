@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9735CD68BF5
-	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 16:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724E8D68BF5
+	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 19:07:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D84E78919F;
-	Sat, 16 Nov 2024 17:29:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4EEF189171;
+	Sat, 16 Nov 2024 20:07:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DJjn9dgO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hrGBJdrs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B7AC891BB; Sat, 16 Nov 2024 17:29:37 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 9B4138932C; Sat, 16 Nov 2024 20:07:04 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1192788E77
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 17:29:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 201188914F
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 20:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7b148919e82so129926485a.0
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 08:29:35 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a9f1c590ecdso319734866b.1
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 11:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731774574; x=1732379374; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6Oe5MrEpiaxDq1fk2oThatMTHrLnRLZTDuD+vaxCmrA=;
- b=DJjn9dgOQKU1ZGL6oNyhPADLo34pmnrZu3f5EMhrCDFn19SC4BETVS2hjLG64ddafl
- TwC4VArykrMkUu6xwl263t8Gci7YkLGxCnsp5FYgxAPZAuaMcdgbE5XPl9UXunPpT6rR
- tlP6wwjJXjTlPxPWpx1kmMHmNuCut/fPBFATI=
+ d=linaro.org; s=google; t=1731784021; x=1732388821; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=N2qq/WYpnBMazFtbP2PWvwKp4oYURYw2yWX3w2mz4NY=;
+ b=hrGBJdrsdfqjwqC1rzFjlzB04Jc0QndxHC7V1PUp1MXXwcJf6aQxLjks1GabxuLAWV
+ Rcu7k5kyIRirbqPRfsT5xO1u82HrW3NiQSm/vEXSBvefJObkDd60Poa/F0X9KlhacOXD
+ j2dP7/bMkDd2/zVQx1J95SDyZTEMK5oHb8j04J/kVV4E9fC+ahrtzP9bgiC3tTty4Rb+
+ xuDTg4pF3kR7RDZ3gl+UdMEmSuTadzpqrwjtSwXxTMRvG9RFYmbqJfTDQtBYewsAHNPt
+ CtDPEAgXbLnO9Gaihzeh0oPD6LHA/fN7fWAOWim1wJ3ce/14w3eh7m5LBbdx1jqpesO6
+ o7QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731774574; x=1732379374;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6Oe5MrEpiaxDq1fk2oThatMTHrLnRLZTDuD+vaxCmrA=;
- b=MyuCQI5k6WlCE3H30TQ+zrMFp53YL8nM1QdCivcNd5WT1AhIlghkf3rbCLd/39cWR+
- kt9biZqNEyxGqOHHQ1Pz8QZOUWjxTKCP2epMonXqKR7ljl7I28+bG+PEw+55CNX9GQT7
- QyZm2qRmgq0feSPLqtOQlzkqwzfACNwICOaN7wMJhbKbh1Y4dRoldsXeLx7Y5OUnGxY6
- O3Mq/sGVa8aWqiga1Eq8tuK1pgqwVFB2naCcLRUfIR8A7zvxmIF5z1ntQsBaeRe4ly/H
- d56SFAbVunlVsY0zpknz5v5IPP1xDqWlFerH9sckIhyOsMFpW4hgY9xjUb6QL566uaau
- cvlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFVqAUp2gEJ+2NEdXg8FV/H2owPLCtLxrnCG68h6rEHlH08TdU1MC77JQYCAsjczheTmcWfwo=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywh+AccOicQb5NkOOHDY39n6minWelQo+TqsYejACsPsumQMUoD
- BS5DXPfnh0H5/kazoVwYAbae66JaFpE5fcCWW2he5def0oBSjtPAi41erS/Qyuk=
-X-Google-Smtp-Source: AGHT+IHbM2sWnq1nyPr+Ef+40ssIL19K5/I1WmOx/3MRQsav1v98LKHkgLnqCUJXH69TBaDwnooVQA==
-X-Received: by 2002:a05:620a:2684:b0:7b1:4a0b:88a with SMTP id
- af79cd13be357-7b3622a564dmr751424285a.4.1731774573935; 
- Sat, 16 Nov 2024 08:29:33 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b35ca58e5bsm273664585a.111.2024.11.16.08.29.31
+ d=1e100.net; s=20230601; t=1731784021; x=1732388821;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N2qq/WYpnBMazFtbP2PWvwKp4oYURYw2yWX3w2mz4NY=;
+ b=kEaiWfYxc3yQ7f8lAjdu7EjNJS9FFoeDgKoltB8oN+qmS0SWRESZEQgwa40xkK9mUL
+ /i99vwoSTXadYNfkaLBVF0ta+M+NA+zJiBf/+fapJCwcCrBmYeElXwDxaxd13HqkboQZ
+ 153pXki1OZOvkArZOxeGc/4d0RLX9PhyyrMtVm9sge9+et1zsqczzHSbEhelQt1lvKhm
+ 4X3UY3TSvemKIAXk0HqJ/DzZCj36ICwnccQwraw2iWawMLYsaavXSeJLJ4oYQY8BBb/P
+ 1j2jTJeEOWpJOuWL2J9uYcV3APu7d5QeBNJHy8XvUivqvbXihIUexKgbu7Z3oLAIoBPr
+ XWTQ==
+X-Gm-Message-State: AOJu0Yx5JidMDB+cVRt4bvzYdI/X63bILLA6gdj9ABpv0i5ycflQQQuX
+ Q6I45htoGcV+uDQB7d/KC39JlHyM5AGl3CEGonuJcZXqp8mzVxkEFPAg8GjACb8KL415pY2v+6b
+ p
+X-Google-Smtp-Source: AGHT+IEo6vETplSzLn8al67mgtuauytPeEVLgDWVKy2ZS5WQA/HovS3AUECDDtmdzylVJhsgp3wrmA==
+X-Received: by 2002:a17:906:7315:b0:a9a:f82:7712 with SMTP id
+ a640c23a62f3a-aa48354c91fmr682002966b.52.1731784021428; 
+ Sat, 16 Nov 2024 11:07:01 -0800 (PST)
+Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
+ [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20df56b1esm335947966b.71.2024.11.16.11.06.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Nov 2024 08:29:33 -0800 (PST)
-Date: Sat, 16 Nov 2024 10:29:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Simon Glass <sjg@chromium.org>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v13 00/10] net: tcp: improve tcp support in legacy stack
-Message-ID: <20241116162929.GD3600562@bill-the-cat>
-References: <20241114033643.623355-1-mikhail.kshevetskiy@iopsys.eu>
- <20241116003153.GC3600562@bill-the-cat>
- <9da1c8c2-efec-4c46-a159-f1efcfa6827a@iopsys.eu>
+ Sat, 16 Nov 2024 11:07:00 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: xypron.glpk@gmx.de,
+	ilias.apalodimas@linaro.org
+Subject: Pull request for tpm-master-16112024
+Date: Sat, 16 Nov 2024 21:06:58 +0200
+Message-ID: <20241116190658.112452-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZdKKY7WoNbGZK0IX"
-Content-Disposition: inline
-In-Reply-To: <9da1c8c2-efec-4c46-a159-f1efcfa6827a@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,63 +91,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---ZdKKY7WoNbGZK0IX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Not much for the  TPM subsystem on this cycle. Just two patches from Heinrich,
+adding missing tpm libraries to the maintenance list and fix for a coverti issue
 
-On Sat, Nov 16, 2024 at 05:49:06PM +0300, Mikhail Kshevetskiy wrote:
->=20
-> On 16.11.2024 03:31, Tom Rini wrote:
-> > On Thu, Nov 14, 2024 at 06:36:33AM +0300, Mikhail Kshevetskiy wrote:
-> >
-> >> Legacy TCP stack is bad. Here are some of the known issues:
-> >>  * tcp packet from other connection can break a current one
-> >>  * tcp send sequence always starts from zero
-> >>  * bad tcp options processing
-> >>  * strange assumptions on packet size for selective acknowledge
-> >>  * tcp interface assumes one of the two scenarios:
-> >>      - data downloading from remote host to a board
-> >>      - request-response exchange with a small packets
-> >>    so it's not possible to upload large amount of data from the
-> >>    board to remote host.
-> >>  * wget test generate bad tcp stream, test should fail but it passes i=
-nstead
-> >>
-> >> This series of patches fixes all of the above issues.
-> > Can you please work with CI to get everything there to pass? Thanks. See
-> > https://docs.u-boot.org/en/latest/develop/ci_testing.html if needed for
-> > help on starting that.
-> >
-> Hello Tom,
-> Could you look to https://github.com/u-boot/u-boot/pull/692 ?
-> It fails 2 times on ut_lib_test_udelay, but this seems unrelated to my
-> changes.
+The following changes since commit f39199e8096dab68fe4a8e15f8ff60026a5fe491:
 
-Yes, unfortunately Simon's recent moving of the tests caused that one to
-fail more frequently now. I've hit re-run, if that's not something
-available to you, just now.
+  km: disable CMD_JFFS2 for all PPC boards (2024-11-15 13:11:51 -0600)
 
---=20
-Tom
+are available in the Git repository at:
 
---ZdKKY7WoNbGZK0IX
-Content-Type: application/pgp-signature; name="signature.asc"
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-master-16112024
 
------BEGIN PGP SIGNATURE-----
+for you to fetch changes up to c0231ede0f555b098dc7418926a8f9b407cc9928:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc4yFoACgkQFHw5/5Y0
-tywHwgwAiWAChwLucm1CqWN5c3fV6wskipmbS/2yaqlAgj+GTLum2X2f/u4E6k62
-e1MSV6tMOl9X3KsRskovYvSbqrT+BpBeLtlzhzYGwy2CR6Fre6kvm/5fb3qxUgXx
-GDKRLfj5y+yR2DQQYzYSQzkNhkdgWBLNK16GQECLsjqrxF5o1gPbMM6ECOmxtISk
-lt245h5IuEYuvKdZmjC/Tu07E4neAc+Dzi3H3/uK4hG9RjNKXdbHlfmlZYrdbsJ0
-4OrpsJPhest/0e8C0JKH8FInN2u2Ql2D3M6JZr+Pkm6cN5ZbVZXtvLoi2qdnPH6H
-SOXGlck4ukUMqhEQBeHftBfnVfrya7FdzNzF7+t6x1sDlj0RceVpHmhV6GwQDo6O
-8lEwKd12rkWaDQh+3wESIGc9MJrpnX4Ga2Jz2Mjgs5FPFQ/cwWEG+xgXkC7kDuM1
-YUseS3fHEnjTFKlPpyVwlUidaYBsgVN0ONQBpZ72EVoqQ5Mwyg4kKAExWF45PHsZ
-Zjz3jdIm
-=73MQ
------END PGP SIGNATURE-----
+  MAINTAINERS: add lib/tpm* to TPM DRIVERS (2024-11-16 19:23:11 +0200)
 
---ZdKKY7WoNbGZK0IX--
+The CI at https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/23393
+worked as expected
+
+Please pull!
+/Ilias
+
+----------------------------------------------------------------
+Two changes from Heinrich.
+One is adding some missing TPM files for proper maintenance.
+The second addresses Coverity-ID: 356664 replacing a mempcy()
+which has undefined behavior with memmove()
+
+----------------------------------------------------------------
+Heinrich Schuchardt (2):
+      tpm: use memmove() for overlapping buffers
+      MAINTAINERS: add lib/tpm* to TPM DRIVERS
+
+ MAINTAINERS  | 1 +
+ lib/tpm-v2.c | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
