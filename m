@@ -4,73 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28523D10F21
-	for <u-boot@archiver.kernel.org>; Sun, 17 Nov 2024 16:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F77D10F24
+	for <u-boot@archiver.kernel.org>; Sun, 17 Nov 2024 17:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5F2A8939E;
-	Sun, 17 Nov 2024 17:46:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 730BC889EF;
+	Sun, 17 Nov 2024 18:04:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=systemli.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hIzpPH4O";
+	dkim=pass (2048-bit key; secure) header.d=systemli.org header.i=@systemli.org header.b="ZkvbMgFJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D9D0893CE; Sun, 17 Nov 2024 17:46:48 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8699C88FDE; Sun, 17 Nov 2024 17:57:25 +0100 (CET)
+Received: from mail1.systemli.org (mail1.systemli.org [93.190.126.36])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71B4689383
- for <u-boot@lists.denx.de>; Sun, 17 Nov 2024 17:46:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C055893A1
+ for <u-boot@lists.denx.de>; Sun, 17 Nov 2024 17:57:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=systemli.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7b15d7b7a32so257124285a.1
- for <u-boot@lists.denx.de>; Sun, 17 Nov 2024 08:46:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731862005; x=1732466805; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3H1r4AwjoZeca02Vz55kxkf0u1AwJihUKgiJ/YBYGjE=;
- b=hIzpPH4Oisw5lmSrau1H+yPi3zEubqDT92WiHceDxmQu8tAkeCV3UKAa0Nc58qNqBV
- KugBiplv+uWVbpLRSokK36gvukYIeHemqxfO8NuBGjH7yO2B33YT7OkCkSipoU5sW8y8
- AdTQPZuqEVivQjDUJEo8xtgWXVgGCcVonOlns=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731862005; x=1732466805;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3H1r4AwjoZeca02Vz55kxkf0u1AwJihUKgiJ/YBYGjE=;
- b=BtM8OU4UrS1KBOLcq+vM5JX7n/I0XzRWIhQDTFMpGfeF9S8MaPVJWvTY0GHOz5dRSU
- pUOZiEXNX1FJySjM8asrAUJcfPMFw/w7q/zjSzF7u6WwW2wMWL1G7LgwCYqRXrM6Yv5g
- E0nSdEjZvzjMD+WPnlYbCT6EsK0dyakQe+IBA0h6tWhfpvsR72c/RxLgDVSxpoN+PGkC
- IcBh0u1LytKHAWs0sgdmm3FyCFz01sCfGCw5fiQq8M1m54E5Ibs35XrL3Ct2ezo6N1J5
- EQaBJv3ClxCoYrydAQ3u6TWC6EEhUs4GACT5Nufa9dL5YQ1Ws7YoeUx7t0U/3T7IRLbx
- skKA==
-X-Gm-Message-State: AOJu0YwV+xiRJB2+cuBxG5rhwHyq6VH/MfNvuwOP14lepVJpQxecDF5u
- 3uSt0r/Qb5Bc4+blE8Kknh76Q30ESAaD8+WwPXQUgHyMR2JW5fTON2zCVgG7qT9KOL4RSblUYDf
- yPiY=
-X-Google-Smtp-Source: AGHT+IGsKVrrQ3bMk19qz4RTgXrKvUIAknPooKG6keShq7vQqr2g/PGQj08SwmxSVMtZFqk/CwELdQ==
-X-Received: by 2002:a05:620a:179e:b0:7b1:462f:46f7 with SMTP id
- af79cd13be357-7b3622ccab7mr1386731485a.30.1731862005459; 
- Sun, 17 Nov 2024 08:46:45 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b35ca4dcdcsm375768885a.102.2024.11.17.08.46.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Nov 2024 08:46:44 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Yuri Zaporozhets <yuriz@qrv-systems.net>
-In-Reply-To: <20241108131329.15193-1-yuriz@qrv-systems.net>
-References: <20241108131329.15193-1-yuriz@qrv-systems.net>
-Subject: Re: [PATCH] bios_emulator: add missing includes to debug.c
-Message-Id: <173186200368.3244505.4536559672746611689.b4-ty@konsulko.com>
-Date: Sun, 17 Nov 2024 10:46:43 -0600
+ spf=pass smtp.mailfrom=vincent@systemli.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=systemli.org;
+ s=default; t=1731862642;
+ bh=SXR6pKEPWjK5yKCL1HB7NxXeHSEEGc/DXVHOO4lmBSk=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ZkvbMgFJJqa5RJA6UbJ4xkJxJPOmcVWMIb90nwI7gXlm91JdVW9EdYRabzcskJxSF
+ 5cZvMC8jAlyM34b+31scJQe/ObfnEk8tr/P5csy18Wu8ApwYcs+l5LasHTS9YdSXyd
+ DUOXT+Ri7/LlKo85mr4KuJK0n2WIMpkCPRMQwdHkSygn67QUK8ExeppbbL+G1R9aeU
+ +VyXcdQaLMn0Zyqp9x7CVzq4WqNJUDfFeMT8IECIX8uQ7i/8X3533d/oG1MRUj5Xor
+ zCi9KOEP9dEhft66+65OMAgyYACBH0TwQMrbvVhghsv944tbSWroB/W25qAq3rV0+8
+ i5BnkBkGSqKXA==
+From: Nick Hainke <vincent@systemli.org>
+To: u-boot@lists.denx.de
+Cc: Nick Hainke <vincent@systemli.org>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>,
+ Matthias Pritschet <matthias.pritschet@itk-engineering.de>,
+ Simon Glass <sjg@chromium.org>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Joakim Tjernlund <joakim.tjernlund@infinera.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mkimage: ecdsa: resolve duplicate symbol error on macOS
+Date: Sun, 17 Nov 2024 17:57:04 +0100
+Message-ID: <20241117165709.24819-1-vincent@systemli.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 17 Nov 2024 18:04:30 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,16 +66,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 08 Nov 2024 14:13:29 +0100, Yuri Zaporozhets wrote:
+When building `mkimage` with LibreSSL version 3.7.3 or higher on macOS,
+CI tests in OpenWrt encounter linker errors caused by duplicate symbols.
+Specifically, the `_ecdsa_verify` and `_ecdsa_sign` symbols appear in both
+`ecdsa-libcrypto.o` and `libcrypto.a`, leading to errors such as:
 
-> When compiling with X86EMU_DEBUG, the compiler complains that debug.c misses
-> two include files. Fix that.
-> 
-> 
+```
+duplicate symbol '_ecdsa_verify' in:
+    openwrt/build_dir/host/u-boot-2024.01/tools/generated/lib/ecdsa/ecdsa-libcrypto.o
+    openwrt/staging_dir/host/lib/libcrypto.a[249](libcrypto_la-ecdsa.o)
+duplicate symbol '_ecdsa_sign' in:
+    openwrt/build_dir/host/u-boot-2024.01/tools/generated/lib/ecdsa/ecdsa-libcrypto.o
+    openwrt/staging_dir/host/lib/libcrypto.a[249](libcrypto_la-ecdsa.o)
+ld: 2 duplicate symbols
+```
 
-Applied to u-boot/next, thanks!
+The changes in this commit that address this issue were originally written
+by another developer, Linhui Liu, who decided not to send them upstream,
+instead submitting a downstream patch as a PR for OpenWrt.
 
+Given the sensitive nature of cryptographic code, I sought feedback from
+the project maintainers to ensure correctness and encourage the author to
+submit the fix upstream.
+
+Because no action was taken and the original author has been absent for
+several months, the OpenWrt project worked around the issue by holding
+back LibreSSL at a version below 3.7.3. However, we now aim to bump
+LibreSSL to a newer version, making it necessary to apply and upstream
+this fix.
+
+Link: https://github.com/openwrt/openwrt/pull/12799
+Link: https://github.com/openwrt/openwrt/pull/16901
+
+Signed-off-by: Nick Hainke <vincent@systemli.org>
+Cc: Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Cc: Matthias Pritschet <matthias.pritschet@itk-engineering.de>
+Cc: Simon Glass <sjg@chromium.org>
+---
+
+ include/u-boot/ecdsa.h      | 6 ++++++
+ lib/ecdsa/ecdsa-libcrypto.c | 6 ++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/include/u-boot/ecdsa.h b/include/u-boot/ecdsa.h
+index f0ac0f327e..f576c79c8f 100644
+--- a/include/u-boot/ecdsa.h
++++ b/include/u-boot/ecdsa.h
+@@ -9,6 +9,8 @@
+ #include <errno.h>
+ #include <image.h>
+ 
++#ifndef __ECDSA_SIGN__
++#define __ECDSA_SIGN__
+ /**
+  * crypto_algo API impementation for ECDSA;
+  * @see "struct crypto_algo"
+@@ -33,6 +35,7 @@
+  */
+ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+ 	       int region_count, uint8_t **sigp, uint *sig_len);
++#endif
+ 
+ /**
+  * add_verify_data() - Add verification information to FDT
+@@ -49,6 +52,8 @@ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+  */
+ int ecdsa_add_verify_data(struct image_sign_info *info, void *keydest);
+ 
++#ifndef __ECDSA_VERIFY__
++#define __ECDSA_VERIFY__
+ /**
+  * verify() - Verify a signature against some data
+  *
+@@ -63,6 +68,7 @@ int ecdsa_verify(struct image_sign_info *info,
+ 		 const struct image_region region[], int region_count,
+ 		 uint8_t *sig, uint sig_len);
+ /** @} */
++#endif
+ 
+ #define ECDSA256_BYTES	(256 / 8)
+ #define ECDSA384_BYTES	(384 / 8)
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index 1c5dde6069..9a5b7745fc 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -238,6 +238,8 @@ static int do_verify(struct signer *ctx, struct image_sign_info *info,
+ 	return ecdsa_check_signature(ctx, info);
+ }
+ 
++#ifndef __ECDSA_SIGN__
++#define __ECDSA_SIGN__
+ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+ 	       int region_count, uint8_t **sigp, uint *sig_len)
+ {
+@@ -256,7 +258,10 @@ int ecdsa_sign(struct image_sign_info *info, const struct image_region region[],
+ 	free_ctx(&ctx);
+ 	return ret;
+ }
++#endif
+ 
++#ifndef __ECDSA_VERIFY__
++#define __ECDSA_VERIFY__
+ int ecdsa_verify(struct image_sign_info *info,
+ 		 const struct image_region region[], int region_count,
+ 		 uint8_t *sig, uint sig_len)
+@@ -271,6 +276,7 @@ int ecdsa_verify(struct image_sign_info *info,
+ 	free_ctx(&ctx);
+ 	return ret;
+ }
++#endif
+ 
+ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
+ 		  struct image_sign_info *info)
 -- 
-Tom
-
+2.47.0
 
