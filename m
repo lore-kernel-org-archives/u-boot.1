@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B36D68BF0
-	for <u-boot@archiver.kernel.org>; Sat, 16 Nov 2024 21:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F988D68BF6
+	for <u-boot@archiver.kernel.org>; Sun, 17 Nov 2024 02:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16A80892E5;
-	Sat, 16 Nov 2024 22:12:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 49AB3888BE;
+	Sun, 17 Nov 2024 03:54:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TmcLft7w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iyjE/zNk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E610589376; Sat, 16 Nov 2024 22:12:10 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6493088901; Sun, 17 Nov 2024 03:54:01 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6D5D88F4F
- for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 22:12:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47CA388875
+ for <u-boot@lists.denx.de>; Sun, 17 Nov 2024 03:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1731791523; x=1732396323; i=xypron.glpk@gmx.de;
- bh=dsLvrTHlG6zsdsqu3pNJm3bGWUikJQC5f8gT7BKe328=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=TmcLft7wK54wbT/R51Qvs3Le6VrrsVg8WDV54mHU/7lj/YTtsO83JiJp9rYAjeeE
- ohRcBmExUrBSUIuSawC2dK54G+7+1720/z9nGFgxtrj517DXBotGwQCK59N7M7aq1
- W3uZWbzT9+yae4MgqlNL5GFFyuNi6bgKhzJeITUE0PohCcdhiyhj88UUi0CafjlMT
- zfstitMdlDLUskD1NVt55nJX1PwcyPsaRYXZpYHHuvSAThAdwtfJyGXs+oY4TMpjl
- ejkbNQ5M/oQ0N4UXW3O2c9aQ6nooFTjsCJ5aZt024TRp6S3UpCKXY/7oIjIKmSeFO
- 0F4kPRDwWJTj1TDaQg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MplXp-1tXEEw1pWv-00ojhb; Sat, 16
- Nov 2024 22:12:03 +0100
-Message-ID: <eac8bbe6-8126-40c5-bab4-c4884e838f22@gmx.de>
-Date: Sat, 16 Nov 2024 22:12:02 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-460c2418e37so16971981cf.0
+ for <u-boot@lists.denx.de>; Sat, 16 Nov 2024 18:53:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1731812038; x=1732416838; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7bB0hXaSpPY1li0x1uIHXuI8syAac8FcQyNLtrPjHak=;
+ b=iyjE/zNk2UTqhZws5q5UtQQXwUE+rj6X5Yq9Ea6lluC9g7bPemGI4k8kb9t7LCxbQd
+ ONw+xMri9EIUn+ZwF45oncmHyXWnJw4wuQban5WecI9s1eIuWWOVHb8dpGf6zO9TPN6v
+ pkLy154V1hrJL3jbuae6K6XPck/RE+c2fnQSw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731812038; x=1732416838;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7bB0hXaSpPY1li0x1uIHXuI8syAac8FcQyNLtrPjHak=;
+ b=A/j5WW6fvSWsvaE4QThC5UPn9BNA60m4RQgTUmNDtDnR4EjWSiz/OWB7FcfpewHUt5
+ R28ur8sEKRpzj33rMXxB3cRlpNlOWjuNq8oSCexQ7yygIKM44DCFcA0zOdWaiaIUUrT7
+ aVonP18fVxHXjMcH3eJPpXec16LhGxCh7w0scgVMcNCZcq1b8dhcf6Tj1qfb4WVvtZOj
+ +WVNzP7qcI7j7ACmAB4mfsgzK7WhRzUzQaPbuaNgvS72EGKsHaWk/bZQ9/FNqhmcHegZ
+ 2H4cumvpt9vENUYwlqfKLdXLwuOHBWTi98FA5ihoEEbXkwlyNDN0z187zyo0hfusxMhY
+ 2VzA==
+X-Gm-Message-State: AOJu0Yx9lp1MI2QTlmaeMpyPQt98WevCSr2QTfwqhJRk1lkJrQg86H6b
+ m6TvwCWfDwJMCT1Kks/ospZHfmXrKgHoJ6OKeB4V98m0KD8vQ7NygSzqYRfxrVA=
+X-Google-Smtp-Source: AGHT+IGVsnXTSSVzp6veiccaL2mZN9eaR2IJBfef16cjxJ7VrYyEV23bgQVd2Lo/jiruYbVCDPLaeg==
+X-Received: by 2002:a05:622a:5786:b0:461:686:74b0 with SMTP id
+ d75a77b69052e-46363e97f6fmr116873721cf.36.1731812038020; 
+ Sat, 16 Nov 2024 18:53:58 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4635a9c60b9sm39134631cf.16.2024.11.16.18.53.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 Nov 2024 18:53:56 -0800 (PST)
+Date: Sat, 16 Nov 2024 20:53:53 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Yuri Zaporozhets <yuriz@qrv-systems.net>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] bios_emulator: don't select X86EMU_RAW_IO for
+ BIOSEMU and SPL_BIOSEMU
+Message-ID: <20241117025353.GA3151182@bill-the-cat>
+References: <20241103234437.25639-1-yuriz@qrv-systems.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/15] net: wget: let wget_with_dns work with dns
- disabled
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-References: <20241111210959.560738-1-adrianox@gmail.com>
- <20241111210959.560738-3-adrianox@gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241111210959.560738-3-adrianox@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:tafLQleCBLTjK4iaeK0p5MG4Pnhgydgm/mfbO2S1/5YdHdFDnvQ
- LUQG+GxidmaplAT/Le/KrBnbBuNXVlTdxnyi9IOFvkOKCNrPwuNXEls97dBI9AA5+9UKFlD
- QMveZTb5b+P7+FZGqV+ha4PXEqE5GgJV8U4E9y5hRLy04R22BBZklMeL1idp1crQoO13vuR
- fZgs0Rlos+RO4hhJX1UnA==
-UI-OutboundReport: notjunk:1;M01:P0:DDFmqQwaCBo=;y5j1ue2GspfiUHvM8IfcwNW7d2E
- ThZKBcupA/0KncRkAkGtbNYqLvOntVSC88PP8EzzNiqJBYWpwo/eVRmJx4sebsSXVBA562xZa
- K4EBGygyqvX8JnB//t8FV8yX2xy1jYBB9N+q/ibDIHEd01FNb1iTprQXoT9BwatNnDpYJ9Ny1
- uN8JGYKfK66DcrXlJiyH+kGnkP8WrnsMQ7eBac7B/q0WP2x7mYRopRIYIWkXPBNh0zQKVoab/
- QBIXDd3SU9CUBf9T7eDGBSE0YO0Fs7qYtvLM8RgNVYBXRxjs56C4pZ61ftvDHzTbZDabwGrJY
- WKjtg++5JbGirYbU8nJ1qc9OiOaZkb068etad9pt85ejgU3uCSbIdgLtuExoIuUeV8xcBW3GJ
- MB3NZpdHFdPUf5Wy4H2g9A4VIpRYCxvj5+H7lC5fQxzYYOFtNMh9Uyb8fdwH+DAf8cnbcMcoq
- Qkd4UUjS31MyZ1e+NLMn/4Ue73TLyRu4y3XGkBuTfDrTnEdsJ9tqN5UEyWa0TqavG6v91EHAJ
- 9gR2bfcOV65sLDEfedujwWQqBErMMysgUz7to/Jo1nvi0OTCxtz9gOOnFOVkZWZVnRB+qe4zz
- qMyQGl9WTuCkCvF+6Oysul1SajbCW9jj23l7VdmkCvwFRrY19bru8Z4hii+h4ZIPvrCbtHjFX
- kz321aXlQNUSbGzvXlHfysLbeXMfnmXaDxG0QbF+0Jnn+NFDjwqs+oX7Yu0WC+tsgU+z1x4Eg
- 2kQQ15ZBvA5uDoH+w/rhUrnNhgADqvIFlepC2TDYWSDEB+h6eav/WU/X4H2HCGjHMMSpMVq/O
- WmXgw5/t/302t6POKjs04lLwCr15ylI/kzzOLGTfw4m5mKrtFXCxXWDfZFN48d7FnrW+BDa0G
- rjaTLPtj2evKOvRMVgMrz3lEZSkjHMBY3NvsQ7OacZX8DAnH9EkDXZfuE
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Vo1K+tON5U6/sL8f"
+Content-Disposition: inline
+In-Reply-To: <20241103234437.25639-1-yuriz@qrv-systems.net>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,107 +90,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/11/24 22:09, Adriano Cordova wrote:
-> This was marked as TODO in the code:
-> -Enable use of wget_with_dns even if CMD_DNS is disabled if
-> the given uri has the ip address for the http server.
-> -Check for port in the uri when transforming to legacy wget
-> syntax inside wget_with_dns.
-> -Move the check for CMD_DNS inside wget_with_dns.
->
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+
+--Vo1K+tON5U6/sL8f
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 04, 2024 at 12:44:36AM +0100, Yuri Zaporozhets wrote:
+> The X86EMU_RAW_IO mode can be used only on x86, so don't select this opti=
+on
+
+> always, and allow correct compilation of BIOSEMU on other architectures t=
+oo.
+>=20
+> Signed-off-by: Yuri Zaporozhets <yuriz@qrv-systems.net>
 > ---
->
-> (no changes since v2)
->
->   net/wget.c | 38 ++++++++++++++++++++++++--------------
->   1 file changed, 24 insertions(+), 14 deletions(-)
->
-> diff --git a/net/wget.c b/net/wget.c
-> index 3bc2522cde..36158e0a9c 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -530,12 +530,10 @@ void wget_start(void)
->   	wget_send(TCP_SYN, 0, 0, 0);
->   }
->
-> -#if (IS_ENABLED(CONFIG_CMD_DNS))
->   int wget_with_dns(ulong dst_addr, char *uri)
->   {
->   	int ret;
-> -	char *s, *host_name, *file_name, *str_copy;
-> -
-> +	char *s, *host_name, *file_name, *str_copy, *port;
->   	/*
->   	 * Download file using wget.
->   	 *
-> @@ -556,18 +554,31 @@ int wget_with_dns(ulong dst_addr, char *uri)
->   	}
->   	file_name =3D s;
->
-> -	/* TODO: If the given uri has ip address for the http server, skip dns=
- */
-> -	net_dns_resolve =3D host_name;
-> -	net_dns_env_var =3D "httpserverip";
-> -	if (net_loop(DNS) < 0) {
-> -		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_reso=
-lve);
-> -		ret =3D -EINVAL;
-> -		goto out;
-> -	}
-> -	s =3D env_get("httpserverip");
-> -	if (!s) {
-> +	port =3D host_name;
-> +	host_name =3D strsep(&port, ":");
-> +
-> +	if (string_to_ip(host_name).s_addr !=3D 0) {
+>  drivers/bios_emulator/Kconfig | 2 --
+>  1 file changed, 2 deletions(-)
+>=20
+> diff --git a/drivers/bios_emulator/Kconfig b/drivers/bios_emulator/Kconfig
+> index 3660576772..8f73d077f6 100644
+> --- a/drivers/bios_emulator/Kconfig
+> +++ b/drivers/bios_emulator/Kconfig
+> @@ -1,10 +1,8 @@
+>  config BIOSEMU
+>  	bool
+> -	select X86EMU_RAW_IO
+> =20
+>  config SPL_BIOSEMU
+>  	bool
+> -	select X86EMU_RAW_IO
+> =20
+>  config X86EMU_RAW_IO
+>  	bool
 
-In U-Coot code we prefer to remove the '!=3D 0':
+This breaks building on chromebox_panther for example and I suspect the
+answer is to change from removing the select to making it be "select ...
+if X86"
 
-         if (string_to_ip(host_name).s_addr) {
+--=20
+Tom
 
-> +		s =3D host_name;
-> +	} else {
-> +#if IS_ENABLED(CONFIG_CMD_DNS)
-> +		net_dns_resolve =3D host_name;
-> +		net_dns_env_var =3D "httpserverip";
-> +		if (net_loop(DNS) < 0) {
-> +			log_err("DNS lookup of %s failed, check setup\n", net_dns_resolve);
-> +			ret =3D -EINVAL;
-> +			goto out;
-> +		}
-> +		s =3D env_get("httpserverip");
-> +		if (!s) {
-> +			log_err("DNS could not resolve %s\n", net_dns_resolve);
+--Vo1K+tON5U6/sL8f
+Content-Type: application/pgp-signature; name="signature.asc"
 
-In EFI protocols we don't want any message output.
+-----BEGIN PGP SIGNATURE-----
 
-The wget command may write a message when receiving EINVAL.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc5WrYACgkQFHw5/5Y0
+tyxb/AwApQaaS/Qjd+mxh+e/V1j0AlzmQuz4onzWtCp/mSBEJb5XCohSWgEjdW98
+58gYMKa2UEaV4xaXYU4QJXrAd0zPPkjzOLrnotqX3TXaWlEUNfdt4apAqbSQ4T7B
+8oW/rt06B0FAWT/wWFN4xNOFoibdUiulo3qNV+8BTsgKbGQiq5tZQqcpWeq0gmIg
+6gcWAcbheGZ2QS8t4qt4ziILH90Uzr6s1SCdG7KOjO0z2u3SyRgW3SKni/JRUX+V
+NXgSORuuQQysk5PQdFE6fVDjqeXrOyiVf81RQgu36Ynmxfo9W9h5E1IEk+ykR/un
+fSr/5LT/zq5yW4s6AtC6LYL5MtQYu5WFa+MO+jylOvbNCyWVjLs0Be8LIXte9WcX
+S/AL0slBrk0ets2KhHj6coOWZiCHtxxqo5xPOefnz6CWQH7XYT2DlPp3gwh1PVKR
+Bl6vjXwz4nHla69AZ1ENKZXUDd6lnD1XPrd7Dl15ibx5pxFPcropfLd2yaa+37Eh
+KW8N7Slz
+=9K7t
+-----END PGP SIGNATURE-----
 
-> +			ret =3D -EINVAL;
-> +			goto out;
-> +		}
-> +#else
-> +		log_err("DNS disabled, %s could not be resolved\n", host_name);
-
-ditto
-
-Best regards
-
-Heinrich
-
->   		ret =3D -EINVAL;
->   		goto out;
-> +#endif
->   	}
->
->   	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
-> @@ -581,7 +592,6 @@ out:
->
->   	return ret < 0 ? ret : 0;
->   }
-> -#endif
->
->   /**
->    * wget_validate_uri() - validate the uri for wget
-
+--Vo1K+tON5U6/sL8f--
