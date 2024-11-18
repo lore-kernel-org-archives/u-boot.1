@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFAEDD49237
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 15:37:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217BBD49237
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 15:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42C938935F;
-	Mon, 18 Nov 2024 16:37:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 916DA88ECB;
+	Mon, 18 Nov 2024 16:38:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iEBnxmUK";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731944295;
+	bh=i0Gv46eVTn+5kphkvb80w4er/Yx02RnNGCncnLTeL2A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=mN1QD18WYHswrpuye9GAB/tjn3rElnFNcc5zgcyw+ZPOCOOHfjG3WyqoDim5sDvSk
+	 3okYW9LlJSWy9h/V8yC9YP4/JWNrqW5fFi3R7euj4W+nAilImzINy9JNu7vYAXPX0/
+	 jISsFlwxyK7DQOd0AECoO81hZci2+7UexWbxcENokDbzDbsEvjk6Y7+5hqESDt/r35
+	 LnxYe5N1jVe59VPDAaYbCS5h7UNsQtorv43yWEAPB0zxdsQaGp1LckPrDmQ5oxqW49
+	 U0Y8InicPEfooCO7fzl4/t6rKakZAFdReOq2Y2JSvZux9HIWge4ZXxTN+8029yUyj6
+	 0WXm8oFLbvNlw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6C6088F12; Mon, 18 Nov 2024 16:37:49 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A5C389364; Mon, 18 Nov 2024 16:38:14 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E4F088C53
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 16:37:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E5CB88C53
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 16:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-460ad98b043so34524591cf.1
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 07:37:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731944266; x=1732549066; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YHcninl/fmKm3wglrWzTX6WPT0NtxcE97EVkfz4Zj9g=;
- b=iEBnxmUKHwEoOsU206E7Rddm1rSKUG++8S3TL2sfe7M/Tj/JhgHuBVbtTCCehxb3MJ
- 1ySc2D1DMjBBWYX3Y6ITTIObSlApSIcLXJKk7qabHKwyjkaq1omiHE+J5LEK/FEmcUcU
- WAZfEXfYRD0BNdVXVjFOaslHvJCIiaYqxWIj8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731944266; x=1732549066;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YHcninl/fmKm3wglrWzTX6WPT0NtxcE97EVkfz4Zj9g=;
- b=ASY8oWTIp1jCE92QlRtaQZqHtN8ckMALJxDfiabRuws7LGZGlVzD175I5jpRBGMGCI
- BqB8tCQhv5UjGlsTLnnk8yTBhyZVzo5ynLvJ9RT+v1t8YGigiPh0IG2nT1b0y3IOk8ad
- uUCtENLdIqpv4L33Hh5fGeChk0WZ2qbpHeSwpga44DntFp1Wj2T4LyisNIuJz8SV757K
- 7QdDR/c716doLvkJ+b4XMJyfiqqo0pDapcAXovrnoeAQDj8pkv7CrwuOcTT/GTwW9L2Y
- RJWaOiWKiSgqyxpVpCshEHZrwwjIAIltU1qrWo8x2usbjyzYLvecpvaNQYM8tDicwdsG
- iy/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXd6PnncTRfAa/tXYkf5WLc+mPBQkkluLTxnLJ1SJdJ9Pv9OqofA6tEyov+AovbyWT6me6/IqA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYnKzHXu74UMYEvGp9syTEGJAkJJ0qu6gl2/Ps1vNLReau0TU/
- cDR2z+kAw9/fMpDhNaiN/ghbeFHJFJQ3KGeeiEdejdDJDQakdVQ9M1/USZzOwXk=
-X-Google-Smtp-Source: AGHT+IF+Xeh4l902IGpyCBm8ZWVx+DFR5recmYRvBU6yLzL04WKQ6Xm3eUaq7+PssO5fLxN9a/naqw==
-X-Received: by 2002:a05:622a:5e8e:b0:45d:8b53:1888 with SMTP id
- d75a77b69052e-4636352f52fmr217880671cf.11.1731944265967; 
- Mon, 18 Nov 2024 07:37:45 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4635a9c5ffasm59840531cf.1.2024.11.18.07.37.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 07:37:44 -0800 (PST)
-Date: Mon, 18 Nov 2024 09:37:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Git commit failed with mbedtls/framework
-Message-ID: <20241118153742.GO3600562@bill-the-cat>
-References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
- <20241115141748.GS3600562@bill-the-cat>
- <CAJaLiFx35Q8L-kR02GrA1PTd2nY699KMc2fy5fT381Khg5hgxg@mail.gmail.com>
- <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
- <CAEfUkUJOd03fc5VERRPY18LWMomEbYFRnkHSJcFLcdnPq4=8jA@mail.gmail.com>
- <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
- <CAEfUkUKp9wWhgBW2XFubhoccSGeU-CW3Y+FY+iJhfw7eVLZv_g@mail.gmail.com>
- <CAJaLiFzTjHWCw+ioPZv660yQ0XLM6+SMJh3NV=NYivbtE1Uf_Q@mail.gmail.com>
- <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XsWwt5QYnz9sbP;
+ Mon, 18 Nov 2024 16:38:06 +0100 (CET)
+Message-ID: <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
+Date: Mon, 18 Nov 2024 16:37:57 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t9PsAJUi3gkjqowa"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
+ PMIC wdt via IMX8 SCU
+To: Francesco Dolcini <francesco@dolcini.it>, Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Andrej Valek <andrej.valek@siemens.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
+ Fabio Estevam <festevam@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241118062715.32989-1-hs@denx.de>
+ <20241118062715.32989-2-hs@denx.de> <20241118123139.GA42367@francesco-nb>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241118123139.GA42367@francesco-nb>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,162 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 18.11.24 13:31, Francesco Dolcini wrote:
+> On Mon, Nov 18, 2024 at 07:26:55AM +0100, Heiko Schocher wrote:
+>> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+>> extensions. Only useful on some Siemens i.MX8-based platforms as
+>> special SCFW is needed which provides the needed SCU API.
+>>
+>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+>> Signed-off-by: Heiko Schocher <hs@denx.de>
+> 
+> ...
+> 
+>> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+>> index 0e45f0a0922..f317d0922cb 100644
+>> --- a/drivers/watchdog/Kconfig
+>> +++ b/drivers/watchdog/Kconfig
+>> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
+>>   	  Select this to enable Arm SMC watchdog timer. This watchdog will manage
+>>   	  a watchdog based on ARM SMCCC communication.
+>>   
+>> +config WDT_SCU_PMIC
+> Isn't this a too generic name for something the is platform specific?
+> Or this is not Siemens specific? One or the other, I would say.
 
---t9PsAJUi3gkjqowa
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is also my only concern right now. If this driver is specific for
+a Siemens SCU firmware, then IMHO the Kconfig option and the driver
+filename should reflect this.
 
-On Mon, Nov 18, 2024 at 10:24:32AM -0500, Raymond Mao wrote:
-> Hi Tony,
->=20
-> On Sat, 16 Nov 2024 at 02:39, Tony Dinh <mibodhi@gmail.com> wrote:
->=20
-> > Hi Raymond,
-> >
-> > On Fri, Nov 15, 2024 at 1:55=E2=80=AFPM Raymond Mao <raymond.mao@linaro=
-=2Eorg>
-> > wrote:
-> > >
-> > > Hi Tony and Tom,
-> > >
-> > > On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmail.com> wrote:
-> > >>
-> > >> Hi Tom,
-> > >> Hi Raymond,
-> > >>
-> > >> On Fri, Nov 15, 2024 at 1:09=E2=80=AFPM Raymond Mao <raymond.mao@lin=
-aro.org>
-> > wrote:
-> > >> >
-> > >> > Hi Tony
-> > >> >
-> > >> > On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com> wrote:
-> > >> >>
-> > >> >> Hi Tom,
-> > >> >>
-> > >> >> On Fri, Nov 15, 2024 at 11:27=E2=80=AFAM Tony Dinh <mibodhi@gmail=
-=2Ecom>
-> > wrote:
-> > >> >> >
-> > >> >> > Hi Tom,
-> > >> >> >
-> > >> >> > On Fri, Nov 15, 2024 at 6:17=E2=80=AFAM Tom Rini <trini@konsulk=
-o.com>
-> > wrote:
-> > >> >> > >
-> > >> >> > > On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
-> > >> >> > > > Hi Tom,
-> > >> >> > > >
-> > >> >> > > > I am on 2025.01-rc2, and I am trying to commit some files. =
-The
-> > error
-> > >> >> > > > seems to indicate this framework directory might need some
-> > >> >> > > > modification. Did I miss something?
-> > >> >> > > >
-> > >> >> > > > error: 'lib/mbedtls/external/mbedtls/framework' does not ha=
-ve
-> > a commit
-> > >> >> > > > checked out
-> > >> >> > > > fatal: updating files failed
-> > >> >> > >
-> > >> >> > > That's odd. You didn't happen to try out some of the previous
-> > lwIP
-> > >> >> > > iterations on that tree did you?
-> > >> >> >
-> > >> >> > No, I did not. The tree is clean with "make mrproper" and on the
-> > >> >> > master branch. I just did a git pull and worked on it.
-> > >> >> >
-> > >> >> > I went and looked at https://github.com/Mbed-TLS/mbedtls.git. T=
-he
-> > >> >> > framework directory is pointing to a specific commit.
-> > >> >> > framework @ 3867faa
-> > >> >> >
-> > >> >> > I'll stash and repeat it on another clean tree.
-> > >> >>
-> > >> >> I have the same commit error on a brand new tree.
-> > >> >>
-> > >> > I think you are talking about the test framework of MbedTLS's
-> > original testsuite,
-> > >> > am I right?
-> > >> > MbedTLS was ported into U-Boot as a git subtree and that framework=
- is
-> > a git
-> > >> > submodule of original MbedTLS repo which was not included in the
-> > porting
-> > >> > of U-Boot since U-Boot has its own testsuite.
-> > >>
-> > >> Here is what I found.
-> > >>
-> > >> git clone https://github.com/u-boot/u-boot.git u-boot-master-test
-> > >> cd /usr/src/u-boot-master-test/
-> > >> patch -p1 < ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.p=
-atch
-> > >> git add .
-> > >> git commit . -m "arm: kirkwood: Enable bootstd and remove jffs2 for
-> > >> Sheevaplug board" -e
-> > >>
-> > >> The git commit above gave out this error:
-> > >>
-> > >> error: 'lib/mbedtls/external/mbedtls/framework' does not have a comm=
-it
-> > >> checked out
-> > >> fatal: updating files failed
-> > >>
-> > >> So I tried to commit only the specific files, and it works OK.
-> > >>
-> > >> git commit configs/sheevaplug_defconfig include/configs/sheevaplug.h
-> > >> -m "arm: kirkwood: Enable bootstd and remove jffs2 for Sheevaplug
-> > >> board" -e
-> > >> [master 47de8cff2d] arm: kirkwood: Enable bootstd and remove jffs2 f=
-or
-> > >> Sheevaplug board
-> > >>  2 files changed, 17 insertions(+), 19 deletions(-)
-> > >>
-> > >> I think it must be what Raymond said above. So perhaps during Tom's =
-PR
-> > >> pull, the framework directory was created. But "git commit ." does n=
-ot
-> > >> like the empty lib/mbedtls/external/mbedtls/framework directory.
-> > >>
-> > > Under the native MbedTLS git repo, by default it has a "framework"
-> > pointing to
-> > > its git submodule.
-> > > Maybe we should mark it in the gitignore.
-> >
-> > I've tried .gitignore but could not make it work (my Gitfu is pretty
-> > lousy). Can you suggest how that should be done?
-> >
-> > You can use the command without the '.' : git commit -m "<commit_msg>",
-> this
-> should work.
->=20
-> @Tom Rini <trini@konsulko.com> Shall we remove both
-> "lib/mbedtls/external/mbedtls/.gitmodules" and
-> "lib/mbedtls/external/mbedtls/framework"? I can submit a patch if you agr=
-ee.
+Thanks,
+Stefan
 
-Can we do that and not make a problem for the next resync?
-
---=20
-Tom
-
---t9PsAJUi3gkjqowa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc7X0IACgkQFHw5/5Y0
-tyyr1gv9E7/1aU8qqTTp4qDPBiIY6iqfDQeayNAc1B5UAupsHvrJPa3Ip0cJLBh5
-EWyVFo9ahtWQ5CmlqsClIzKRnjkKPwYsO7k5NWx9Gkm8gzl+StD9gjyXJEy1GVfC
-l1K+4JlvX4RwQbH6WnBiXtsqVN8gqDCLFlnwS1IkHiv7hWDdVXNtg5zoMCWYGPc+
-Ybz1jTbASupprK7ZpMNnJ7SO5L4SdN09Jtp5l+KmaopR08rRxYeWubvK8DKM/Ydh
-mPQQO790EC4Y0gcKeKSrwFmQi3bAgko4myaqKxh7nY8+FQ4rcDR1z/W+xyL4l1cV
-k/CAY820/e5TtFQTqJ2iUKuJUWep2CrUsCZ6NB3rgSqCLnmz6sZdhwXUas+fVpsw
-Wc6REo1QJdHLHg3u/RFxr8YnXnVh2fV42p20yXF38+1+Xl5xuJP5DZ1mABiA5NM2
-4kaz5nuE6hvTokRiUz86jMgVlXAp+bWCmSCZclbN/KHv3LpLY1/RFFubePOX0rQk
-m8SFNNZ0
-=4+Zw
------END PGP SIGNATURE-----
-
---t9PsAJUi3gkjqowa--
