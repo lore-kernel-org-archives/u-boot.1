@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 213CED4920F
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 12:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE3ED49211
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 12:28:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7071788E61;
-	Mon, 18 Nov 2024 13:24:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2942288E6B;
+	Mon, 18 Nov 2024 13:28:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fdZzbRor";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HOOpt3a7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 189F989433; Mon, 18 Nov 2024 13:24:13 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 17F9B893E3; Mon, 18 Nov 2024 13:28:37 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89EED88E61
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 13:24:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A86FD88E5C
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 13:28:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7ea7e2ff5ceso3047559a12.2
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 04:24:10 -0800 (PST)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2ea78d164b3so699815a91.2
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 04:28:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731932649; x=1732537449; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1731932913; x=1732537713; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=65Cgc0LOKz77zBNxb7tSN7QUdMIVkjS9r/2lc04UCl8=;
- b=fdZzbRoror1jv7cnMCgXm+4Z9kLVPgzhdj+VJ7ZUINJgYfhf7iNWQAYqPwmVqdyq6c
- KKk3iFmQBz1IFaqwQuYZ71GTKTPBq+xF2nB62t8vDy10UxZ7oQ+NSwTE7JsfvPGS7GKr
- 8Ylj6xLLhYyG/F3s1lBe7lO2vGmeRc36NWquDngijmGVY7z0+s/sPl7Xpoyyu6/YwYko
- dVJ/yl10FKcFw/PA9mK1Qq1OFJtnkitm8z1zLnuSYoIGbPLc36pGsqhnZnMqW8l/6ify
- SkjzioWqD7uzQ/wZdhvRlUF3lgdjmES1LMAxgndN1izYctOpMNYJnBBR1YQyZp1V56To
- Uu4g==
+ bh=6QAfGid8YStkSQiiIssR/XkD3FNfrpWoPqTbXUf6Yc8=;
+ b=HOOpt3a7gZ5CASA/jj3XF+JZl8VbfEy1huPlGyzy7CETOUBm9Q2nuK+sao2UGcPp+z
+ TZMyZDcnYBYFoBPymahdlsiC7gkQZX791CSRVCB3JUbMhHHPLyQLLi8b+o1BRCXrfdw5
+ O8ZHul5y8f96GuiuqLzsIk8FpWqhVHi7uK6O8LkSiN6/4/tLGIWA0m/6bW7MElfQ9R/P
+ oKDML8XipclYdynVwiGQaGU3F0am/F6WU96GlqVKP96c3Q6Q5h3hs/iqQCOnAJRZSr+G
+ U2ioFoR3/pOF2vFRFzzCJoNQUArHzwAO7+I/eJ/mYbTo3kVeYNCkAKNb3X8DJm80pYc0
+ 3oXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731932649; x=1732537449;
+ d=1e100.net; s=20230601; t=1731932913; x=1732537713;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=65Cgc0LOKz77zBNxb7tSN7QUdMIVkjS9r/2lc04UCl8=;
- b=SCjjbd4K/zYz+yiL0Q7HNmX8it9OoYuBC2wbidZt6z7ShfOTdixaGfpucxTYf+yMsD
- D8Uu8lOZH/ENCcsVJEFhfsN2ijte9LOb7BmNOuTpCYSlgaQVrsK+Y+yIa/4damgzR/Zm
- 1EGlPG4b/nowcTAPn+K6f9gp3zQK4pL6AuK29ThZSTYSmww/UJNIxg2QqyfnHpNTct/7
- PFOFgDH6Y+/Gv86V6yX67TPlIXZfzLGmZfGsP5AHJKiytmxFsIT6K0DxTdhJ+vjgS4HE
- U6sMjOM37+2XBveSsGgJUItmmSoOBoXHrh8zYd2o9ymYvIfQOcVa3e63wNcG999nMcgf
- 2PJg==
-X-Gm-Message-State: AOJu0YzPXJ5wTDn+UN5W8rsvUvQk7TbHE4rcX6RUka01m2NjPtVo8t2P
- wDGdLf89e8J6FCUsFd2b2Lq788SIwuIpCpdDL8G9ssPgpU6TKRUl0zzGoAfh3UkYmos5d/c4bHb
- 6iMigxgJ0NV4B2wARGZjDQ1PpGs0IOzAcvhnHRA==
-X-Google-Smtp-Source: AGHT+IEbByXIMuY/Nqzz89vaVFr4FcB0jqN3DR5pG5rsRIKEdRI+CytDEz+SR4Ou0wmNN75l3j86OUJyrv1M+JVSsok=
-X-Received: by 2002:a17:90b:4a8e:b0:2ea:6ad7:8f39 with SMTP id
- 98e67ed59e1d1-2ea6ad7917dmr4923799a91.29.1731932649025; Mon, 18 Nov 2024
- 04:24:09 -0800 (PST)
+ bh=6QAfGid8YStkSQiiIssR/XkD3FNfrpWoPqTbXUf6Yc8=;
+ b=TQakHObgQrEz/9CSKaqgUowcXca3Qmn4wAlNZvfiwrrf4c/RBneuLwXyMAm8oPC3oO
+ JhoxzzPeFwZtbR2WeJ1UeURrw8UxIa8q9wAPw6HyV4Q7IExxrhf3IZqAXe9e3t84TbQ+
+ hO8k2r6wk0UGCnx/HouzJASd9A+wY/VK4AQ1hNzru7YU7JBlWv7yN6v9ivnW1/LJ3Lu3
+ X3/0KMRdTAPhn9r6gxr1+gLF5AXJht708xVNW4aUeGBLg4JM4nKCzCZjoehiqKnBuMaB
+ szsGjsSUrOOTuQoEt991+TS5Xp1T2i0OBND9MesDLbDRgq7NVxqeUYkkO2PR7uIXd3cP
+ QrNA==
+X-Gm-Message-State: AOJu0YyhOzD6P8YLXQfFORF15mdjLKs5JzV/+n1ItTOPHNEQ1dLSivNM
+ kHcj2GDp2We63b6GbPrehhP4Ggqk+J459EIE/3UD/ovivcgRA8QGXen6PbyCUcnqo2W2lL35XmL
+ 28r+vDIBXjSu40+lJ4piI8J8y4So//3ijeom4jA==
+X-Google-Smtp-Source: AGHT+IHfV9BFCOEPyb402NATdOM0aGQLO7sDLTUKFmsciByGxvGwAn8psPGrgztuQn694vN113k0PKqUtkrqRhkJTQo=
+X-Received: by 2002:a17:90b:17c2:b0:2ea:4a6b:79d1 with SMTP id
+ 98e67ed59e1d1-2ea4a6b7a8fmr7297161a91.11.1731932913177; Mon, 18 Nov 2024
+ 04:28:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20241111210959.560738-1-adrianox@gmail.com>
- <20241111210959.560738-10-adrianox@gmail.com>
-In-Reply-To: <20241111210959.560738-10-adrianox@gmail.com>
+ <20241111210959.560738-16-adrianox@gmail.com>
+In-Reply-To: <20241111210959.560738-16-adrianox@gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 18 Nov 2024 14:23:31 +0200
-Message-ID: <CAC_iWjLPO-vq6OzZMOYqcE4J+fDH589v7R1z9Dfzjs9=xx5SUQ@mail.gmail.com>
-Subject: Re: [PATCH v3 09/15] efi_loader: net: set EFI bootdevice device path
- to HTTP when loaded from wget
+Date: Mon, 18 Nov 2024 14:27:56 +0200
+Message-ID: <CAC_iWjLGCcPcdu2H+nZejkqHaYLh=B-Kd5f2c79YzHaN9rwWuw@mail.gmail.com>
+Subject: Re: [PATCH v3 15/15] efi_selftest: add test for IPv4 Config2 protocol
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
  jerome.forissier@linaro.org, xypron.glpk@gmx.de
@@ -88,144 +87,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Overall this looks good. Get rid of the unneeded casts in memcpy for
+the next version.
+
+Thanks
+/Ilias
+
 On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-> Set the device path of the efi boot device to an HTTP device path
-> (as formed by efi_dp_from_http) when the next boot stage is loaded
-> using wget (i.e., when wget is used with wget_info.set_bootdev=1).
-
-We want the reasoning of why you need the change in the commit log,
-instead of what the code does.
-
+> Add a test for the EFI_IP4_CONFIG2_PROTOCOL. The test sets the ip
+> policy to static, adds an ip address, and then reads the current
+> ip address and checks for it to be the same as the one that was set.
 >
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 > ---
 >
 > (no changes since v2)
 >
->  include/efi_loader.h             |  6 ++++++
->  lib/efi_loader/efi_device_path.c |  2 +-
->  lib/efi_loader/efi_net.c         | 22 +++++++++++++++++++++-
->  net/lwip/wget.c                  |  1 +
->  net/wget.c                       |  1 +
->  5 files changed, 30 insertions(+), 2 deletions(-)
+>  lib/efi_selftest/Makefile                |   2 +
+>  lib/efi_selftest/efi_selftest_ipconfig.c | 173 +++++++++++++++++++++++
+>  2 files changed, 175 insertions(+)
+>  create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 96b204dfc3..f49f8e6be0 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -126,6 +126,10 @@ static inline void efi_set_bootdev(const char *dev, const char *devnr,
->  #endif
->
->  #if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
-> +/* Call this to update the current device path of the efi net device */
-> +void efi_net_set_dp(const char *dev, const char *server);
-> +/* Call this to get the current device path of the efi net device */
-> +void efi_net_get_dp(void **dp);
->  void efi_net_get_addr(struct efi_ipv4_address *ip,
->                       struct efi_ipv4_address *mask,
->                       struct efi_ipv4_address *gw);
-> @@ -133,6 +137,8 @@ void efi_net_set_addr(struct efi_ipv4_address *ip,
->                       struct efi_ipv4_address *mask,
->                       struct efi_ipv4_address *gw);
->  #else
-> +static inline void efi_net_set_dp(const char *dev, const char *server) { }
-> +static inline void efi_net_get_dp(void **dp) { }
->  static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
->                                      struct efi_ipv4_address *mask,
->                                      struct efi_ipv4_address *gw) { }
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> index 158f08b9e5..afb4abc3ff 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -1168,7 +1168,7 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
->                 dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
->                                      (uintptr_t)image_addr, image_size);
->         } else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
-> -               dp = efi_dp_from_eth();
-> +               efi_net_get_dp((void **)&dp);
->         } else if (!strcmp(dev, "Uart")) {
->                 dp = efi_dp_from_uart();
->         } else {
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index dd84b3f18d..d4570d4d7c 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -16,6 +16,7 @@
->   */
->
->  #include <efi_loader.h>
-> +#include <dm.h>
->  #include <malloc.h>
->  #include <vsprintf.h>
->  #include <net.h>
-> @@ -31,6 +32,7 @@ static size_t *receive_lengths;
->  static int rx_packet_idx;
->  static int rx_packet_num;
->  static struct efi_net_obj *netobj;
-> +static struct efi_device_path *net_dp;
->
->  /*
->   * The notification function of this event is called in every timer cycle
-> @@ -902,8 +904,10 @@ efi_status_t efi_net_register(void)
->                              &netobj->net);
->         if (r != EFI_SUCCESS)
->                 goto failure_to_add_protocol;
-> +       if (!net_dp)
-> +               efi_net_set_dp("Net", NULL);
->         r = efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> -                            efi_dp_from_eth());
-> +                            net_dp);
->         if (r != EFI_SUCCESS)
->                 goto failure_to_add_protocol;
->         r = efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_guid,
-> @@ -999,6 +1003,22 @@ out_of_resources:
->         return EFI_OUT_OF_RESOURCES;
->  }
->
-> +void efi_net_set_dp(const char *dev, const char *server)
+> diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+> index 140c08effc..17fbfad116 100644
+> --- a/lib/efi_selftest/Makefile
+> +++ b/lib/efi_selftest/Makefile
+> @@ -53,6 +53,8 @@ efi_selftest_watchdog.o
+>  obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
+>  obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
+>  obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
+> +obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
+> +
+>  obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_selftest_devicepath.o
+>  obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) += \
+>  efi_selftest_unicode_collation.o
+> diff --git a/lib/efi_selftest/efi_selftest_ipconfig.c b/lib/efi_selftest/efi_selftest_ipconfig.c
+> new file mode 100644
+> index 0000000000..e81ab4e334
+> --- /dev/null
+> +++ b/lib/efi_selftest/efi_selftest_ipconfig.c
+> @@ -0,0 +1,173 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * efi_selftest_ipconfig
+> + *
+> + * This unit test covers the IPv4 Config2 Protocol.
+> + *
+> + */
+> +
+> +#include <efi_selftest.h>
+> +#include <charset.h>
+> +#include <net.h>
+> +
+> +static struct efi_boot_services *boottime;
+> +
+> +static struct efi_ip4_config2_protocol *ip4_config2;
+> +static const efi_guid_t efi_ip4_config2_guid = EFI_IP4_CONFIG2_PROTOCOL_GUID;
+> +
+> +/*
+> + * Setup unit test.
+> + *
+> + * Open IPv4 Config2 protocol
+> + *
+> + * @handle:    handle of the loaded image
+> + * @systable:  system table
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int setup(const efi_handle_t handle,
+> +                const struct efi_system_table *systable)
 > +{
-> +       if (!strcmp(dev, "Net"))
-> +               net_dp = efi_dp_from_eth();
-> +       else if (!strcmp(dev, "Http"))
-> +               net_dp = efi_dp_from_http(server);
+> +       efi_status_t ret;
+> +       efi_handle_t *net_handle;
+> +       efi_uintn_t num_handles;
+> +       efi_handle_t *handles;
+> +
+> +       boottime = systable->boottime;
+> +
+> +       boottime->locate_handle_buffer(BY_PROTOCOL, &efi_ip4_config2_guid,
+> +                                      NULL, &num_handles, &handles);
+> +
+> +       for (net_handle = handles; num_handles--; net_handle++) {
+> +               ret = boottime->open_protocol(*net_handle, &efi_ip4_config2_guid,
+> +                                             (void **)&ip4_config2, 0, 0,
+> +                                             EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +               if (ret != EFI_SUCCESS || !ip4_config2)
+> +                       continue;
+> +               break; // Get first handle that supports ipv4
+> +       }
+> +
+> +       if (!ip4_config2) {
+> +               efi_st_error("Failed to locate ipv4 config2 protocol\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       return EFI_ST_SUCCESS;
 > +}
 > +
-> +void efi_net_get_dp(void **dp)
+> +/*
+> + * Execute unit test.
+> + *
+> + *
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int execute(void)
 > +{
-> +       if (!net_dp)
-> +               efi_net_set_dp("Net", NULL);
-> +       if (dp && net_dp)
-> +               *dp = efi_dp_dup(net_dp);
+> +       efi_status_t ret;
+> +       enum efi_ip4_config2_policy policy;
+> +       efi_uintn_t data_size;
+> +       struct efi_ip4_config2_manual_address manual_address;
+> +       struct efi_ip4_config2_manual_address orig_address;
+> +       u8 netmask[] = {255, 255, 255, 0};
+> +       u8 ip[] = {10, 0, 0, 1};
+> +
+> +       /* Setup may have failed */
+> +       if (!ip4_config2) {
+> +               efi_st_error("Setup failure, cannot proceed with test\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Set policy to static */
+> +       policy = EFI_IP4_CONFIG2_POLICY_STATIC;
+> +       ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
+> +                             sizeof(enum efi_ip4_config2_policy), (void *)&policy);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("Failed to set policy\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Save original ip address and netmask */
+> +       data_size = sizeof(struct efi_ip4_config2_manual_address);
+> +       ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
+> +                             &data_size, &orig_address);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("Failed to save original ip address and netmask\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Set static ip and netmask */
+> +       memcpy((void *)&manual_address.address, (void *)ip,
+> +              sizeof(struct efi_ipv4_address));
+> +       memcpy((void *)&manual_address.subnet_mask, (void *)netmask,
+> +              sizeof(struct efi_ipv4_address));
+> +       ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
+> +                             sizeof(struct efi_ip4_config2_manual_address), &manual_address);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("Failed to get ip address and netmask\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Try to set interface info, this should fail */
+> +       ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO, 0, NULL);
+> +       if (ret == EFI_SUCCESS) {
+> +               efi_st_error("Interface info is read-only\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Get ip address and netmask and check that they match with the previously set ones */
+> +       data_size = sizeof(struct efi_ip4_config2_manual_address);
+> +       ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
+> +                             &data_size, &manual_address);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("Failed to get ip address and netmask\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       if (memcmp((void *)ip, (void *)&manual_address.address,
+> +                  sizeof(struct efi_ipv4_address)) ||
+> +           memcmp((void *)netmask, (void *)&manual_address.subnet_mask,
+> +                  sizeof(struct efi_ipv4_address))) {
+> +               efi_st_error("Ip address mismatch\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       /* Restore original ip address and netmask */
+> +       ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
+> +                             sizeof(struct efi_ip4_config2_manual_address), &orig_address);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("Failed to restore original ip address and netmask\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +
+> +       efi_st_printf("Efi ipconfig test execute succeeded\n");
+> +       return EFI_ST_SUCCESS;
 > +}
 > +
->  void efi_net_get_addr(struct efi_ipv4_address *ip,
->                       struct efi_ipv4_address *mask,
->                       struct efi_ipv4_address *gw)
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index 53c3b169e0..5c44e324be 100644
-> --- a/net/lwip/wget.c
-> +++ b/net/lwip/wget.c
-> @@ -217,6 +217,7 @@ static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
->         print_size(rx_content_len / elapsed * 1000, "/s)\n");
->         printf("Bytes transferred = %lu (%lx hex)\n", ctx->size, ctx->size);
->         if (wget_info->set_bootdev) {
-> +               efi_net_set_dp("Http", ctx->server_name);
->                 efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0),
->                                 rx_content_len);
->         }
-> diff --git a/net/wget.c b/net/wget.c
-> index 36158e0a9c..676d4db759 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -442,6 +442,7 @@ static void wget_handler(uchar *pkt, u16 dport,
->                 net_set_state(wget_loop_state);
->                 wget_info->file_size = net_boot_file_size;
->                 if (wget_info->method == WGET_HTTP_METHOD_GET && wget_info->set_bootdev) {
-> +                       efi_net_set_dp("Http", NULL);
->                         efi_set_bootdev("Net", "", image_url,
->                                         map_sysmem(image_load_addr, 0),
->                                         net_boot_file_size);
+> +/*
+> + * Tear down unit test.
+> + *
+> + * Close the timer event created in setup.
+> + * Shut down the network adapter.
+> + *
+> + * Return:     EFI_ST_SUCCESS for success
+> + */
+> +static int teardown(void)
+> +{
+> +       int exit_status = EFI_ST_SUCCESS;
+> +
+> +       return exit_status;
+> +}
+> +
+> +EFI_UNIT_TEST(ipconfig) = {
+> +       .name = "IPv4 config2 protocol",
+> +       .phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
+> +       .setup = setup,
+> +       .execute = execute,
+> +       .teardown = teardown,
+> +#ifdef CONFIG_SANDBOX
+> +       /*
+> +        * Running this test on the sandbox requires setting environment
+> +        * variable ethact to a network interface connected to a DHCP server and
+> +        * ethrotate to 'no'.
+> +        */
+> +       .on_request = true,
+> +#endif
+> +};
 > --
 > 2.43.0
 >
