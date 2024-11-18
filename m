@@ -4,56 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5084CD68BD0
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 06:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D249FD43FE3
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 07:19:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA4518946F;
-	Mon, 18 Nov 2024 07:27:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E9CC788F69;
+	Mon, 18 Nov 2024 08:19:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731911264;
-	bh=huis+Gg6TN5IbJ12btTz4g2EtZD0WOV6APLMeIhuz2o=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=CA6CIVPrWTzHeoqaPhtuAcbaxWZM40fW9WlmKdUFNBnJIh5jolZ0uXo+Nny3O+kHM
-	 2v6HXHcfdtYmoRauAxCvWrzlGJxyc0Urm4P5JW50Gs797VLkHRGpvQTgmLRRqhSwCM
-	 JsrX0twHO57+ufoWm5q9iwJTKdBS9eRvjaj6mdaBN3FILFqdmBftf7IrPz/h1eT2lQ
-	 h1wl+Zm+6QMJI2Fj4YjOtARps1FQ3TRuEMkYRVZLcJ+8JEF6aoNy+8iPVHlZ7Fr7Of
-	 toQ39RHpWdZYsCpbDL2tXTxTIkQyHKlJt/NymSOvxqc5ra2DFqgoJ8BbO54TUg61F1
-	 LsVfHz8+JA1dg==
-Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
- [82.131.203.244])
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C497088F69; Mon, 18 Nov 2024 08:19:04 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0280589475;
- Mon, 18 Nov 2024 07:27:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731911261;
- bh=huis+Gg6TN5IbJ12btTz4g2EtZD0WOV6APLMeIhuz2o=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=mHliBC65D7g6rrL4VfG2KSLYzWizD4JoR7nkPh7rQqvmcqAtZPxzZMDkf3whNFSGA
- J6I6x8q621xZhVP/Wkis9AwxEduSn8aFLDKuU/ZXWKofu57IY2qNImHVhIOxCkTpoc
- 6EPxGlTWTUen+ZPWkEyenuDjEhcCasHmIZJSUfkS+0KJFFNVYzvPYjtkEGdtMAXp/+
- IcJpRwbiOaJ+hJx+TPF9UAJ3gHYDUmnh8bjKCOPPxdHxEgvcmh0977gw1EaowbcXRG
- BavypmuW9soWMBfDRlhTOwD0tT0NZsFWIWQR/yM3kvgoW7y2ckM3npZV/m9IjbIKdE
- i44gN6tqcxvog==
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 20/20] siemens: capricorn: update maintainers
-Date: Mon, 18 Nov 2024 07:27:14 +0100
-Message-Id: <20241118062715.32989-21-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20241118062715.32989-1-hs@denx.de>
-References: <20241118062715.32989-1-hs@denx.de>
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B8BC58877E
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 08:19:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 4AI7IrBJ021921
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Mon, 18 Nov 2024 15:18:53 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 18 Nov
+ 2024 15:18:54 +0800
+Date: Mon, 18 Nov 2024 15:18:51 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Yuri Zaporozhets <yuriz@qrv-systems.net>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCH] spl: increase SPL_SYS_MALLOC_SIZE when using BIOSEMU on
+ RISC-V
+Message-ID: <ZzrqW77_WV8rLdRF@swlinux02>
+References: <20241111192404.79676-1-yuriz@qrv-systems.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241111192404.79676-1-yuriz@qrv-systems.net>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 4AI7IrBJ021921
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,44 +66,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Enrico Leto <enrico.leto@siemens.com>
+On Mon, Nov 11, 2024 at 08:24:04PM +0100, Yuri Zaporozhets wrote:
+> If BIOSEMU is compiled for RISC-V (SiFive Unmatched board) and the function
+> dm_pci_run_vga_bios() is executed, U-Boot stops with error message saying
+> that the SPL malloc pool is too small. So increase the default pool size
+> when both BIOSEMU and RISCV parameters are set.
+> 
+> Signed-off-by: Yuri Zaporozhets <yuriz@qrv-systems.net>
+> ---
+>  common/spl/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
-update MAINTAINERS file, add some more board maintainers.
+Applied to u-boot-riscv/master, thanks.
 
-Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
-Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-
----
-
-Changes in v2:
-- add Reviewed-by from Alexander
-
- board/siemens/capricorn/MAINTAINERS | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
-
-diff --git a/board/siemens/capricorn/MAINTAINERS b/board/siemens/capricorn/MAINTAINERS
-index b4c52032cc9..5f467aa9b6e 100644
---- a/board/siemens/capricorn/MAINTAINERS
-+++ b/board/siemens/capricorn/MAINTAINERS
-@@ -1,10 +1,12 @@
- CAPRICORN BOARD
-+M:	Alexander Sverdlin <alexander.sverdlin@siemens.com>
- M:	Anatolij Gustschin <agust@denx.de>
-+M:	Heiko Schocher <hs@denx.de>
-+M:	Walter Schweizer <walter.schweizer@siemens.com>
- S:	Maintained
-+F:	arch/arm/dts/imx8-capricorn-cxg3.dts
-+F:	arch/arm/dts/imx8-capricorn-u-boot.dtsi
-+F:	arch/arm/dts/imx8-capricorn.dtsi
- F:	board/siemens/capricorn/
-+F:	configs/capricorn_cxg3_defconfig
- F:	include/configs/capricorn-common.h
--F:	include/configs/deneb.h
--F:	include/configs/giedi.h
--F:	include/configs/siemens-env-common.h
--F:	configs/deneb_defconfig
--F:	configs/giedi_defconfig
--- 
-2.20.1
-
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
