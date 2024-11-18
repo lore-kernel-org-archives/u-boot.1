@@ -4,78 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EC0D10F40
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 02:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD838D10F57
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 05:12:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 434C088E78;
-	Mon, 18 Nov 2024 03:13:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jms.id.au
+	by phobos.denx.de (Postfix) with ESMTP id F26E08918E;
+	Mon, 18 Nov 2024 06:12:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l3mDJFPJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="t4UTVRJb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69BEE893CD; Mon, 18 Nov 2024 03:13:17 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A28A288E5C
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 03:13:14 +0100 (CET)
+ id B12DE89294; Mon, 18 Nov 2024 06:12:19 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 693928914D
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 06:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jms.id.au
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joel.stan@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-71e681bc315so2511089b3a.0
- for <u-boot@lists.denx.de>; Sun, 17 Nov 2024 18:13:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731895993; x=1732500793; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=FEbicabmU5UOw4HijVnBVlKQlcx09Y2EErBVr4zYXlE=;
- b=l3mDJFPJXOQ5ydNk4L7vcJDA0B1fz/mYgks0WSlfor2zIj90LxeQj2wiOoHjqypdTI
- erVdlTrpGaRMvKB/ymf1a5rxF1ZG9Qz/BbAQdeFzZKmXrCwPdO9mzhEq5wILh3xoHFxk
- 68vSurBZAQegJlcopjFVQpM8QY+j1h4khOK8rT4VVy9saT4yZS5N0fzBsJHz6PWY3dLr
- HfTsHIFdgRu9RafTZhl+BT95WMKafetAuhDnJNxNn0oP2k9qU5U9nNahuNFw6/I9PNAb
- t7zoRQ7rQfAqQo9edTca6PifgmFPE+XDC7yFhDu5gy4QEY6d1CY850cg4B+8+b+1iNcV
- THPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731895993; x=1732500793;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:sender:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FEbicabmU5UOw4HijVnBVlKQlcx09Y2EErBVr4zYXlE=;
- b=wpEErbmF+Ibi6frUOxqAkcvwjLaKOssdNxZ/Llg61wDxw/QfRpKfkbCtKstx77ymzB
- nvA5HhUs5g0q/kHRz95iI7ORUbXqX+CrnJkEUuR4Itq055hQjoXZOL8NATJ0HWX9ir50
- utRPDu3JPxWYHJ30Uf2jVPk/8ouhPXA3R3X2y4kutqYZdJx5d38Mu+rS86NcbpNUyoh+
- ufYf2mFMIB40sc0c2ccMZZhbfwtjTHChO2AM9beq5raki8DFCi86z1Zkxu9WTHX8weo5
- oCR+XOai3TUYjQwe+oULOuj5NFCKPaLJSMF6jbkQl6fznNW5NU+inbhDxHm4DsUPSpFE
- 8MAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUqKFWEZz/RPCoD2Hb54oRz1CtUzr7qZz1J3bXxiR2aj9sySBqPhH7zQj4L1RYUV3RIyXZJ9wI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw3uaYkd9H+vR3K3PDsErDOflliVlBdy1X+ncepDnLDCN+Nt/Th
- sVS72c+JuCrWXq2FaXT/RxMhkBSfJ1Cbst5lRQSx8dE3h4q0/uU58tpJng==
-X-Google-Smtp-Source: AGHT+IFvExST4P00gtSff1Ol81M8xWh24gJpCDVi0XBXZn0sAqYrlMCNc3O8TFZCZXEOxQ9rE5awLQ==
-X-Received: by 2002:aa7:888e:0:b0:71e:71ba:9056 with SMTP id
- d2e1a72fcca58-724760cafafmr15688991b3a.10.1731895992807; 
- Sun, 17 Nov 2024 18:13:12 -0800 (PST)
-Received: from prometheus.lan ([45.124.203.18])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7247720044asm5086549b3a.179.2024.11.17.18.13.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Nov 2024 18:13:12 -0800 (PST)
-From: Joel Stanley <joel@jms.id.au>
-To: Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: BMC-SW@aspeedtech.com,
-	u-boot@lists.denx.de
-Subject: [PATCH] ast2600: spl: Use readl for reading mmio
-Date: Mon, 18 Nov 2024 12:42:56 +1030
-Message-ID: <20241118021257.4615-1-joel@jms.id.au>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AI5CFxD3587055
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sun, 17 Nov 2024 23:12:15 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1731906735;
+ bh=KB4hkRNfuV/TG2UXUxN1jhQgA9N0bgqzSkQHfp+ni0k=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=t4UTVRJb9fHCaj+tOUoXn/CIlOOyNiviJEtSsjYCg6tvyNIXRz6YfxD8REVj72Wlm
+ ks9y3wSFvRoLgVlDa8RBtdCWOombXHz6a6KTVZfV5NvEQI8U0fHdGikau/g1CpqSOZ
+ qtvrBAIC6vYAngoMQZoe8jbrtcQzqnc3mQCctv7Q=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AI5CFbj079819
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sun, 17 Nov 2024 23:12:15 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 17
+ Nov 2024 23:12:14 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 17 Nov 2024 23:12:14 -0600
+Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AI5CEYE017556;
+ Sun, 17 Nov 2024 23:12:14 -0600
+Date: Mon, 18 Nov 2024 10:42:13 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Aniket Limaye <a-limaye@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <nm@ti.com>, <n-francis@ti.com>
+Subject: Re: [PATCH v3 3/5] misc: k3_avs: Check validity of efuse voltage data
+Message-ID: <20241118051213.gylueeryq3fnurfb@uda0497581>
+References: <20241116071615.839623-1-a-limaye@ti.com>
+ <20241116071615.839623-4-a-limaye@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241116071615.839623-4-a-limaye@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,40 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-u-boot was crashing in qemu as the modeled hardware enforced overly
-strict memory reads.
+Hi Aniket,
 
-While this code will work on existing hardware, fix to avoid future issues.
+On 12:45-20241116, Aniket Limaye wrote:
+> From: Reid Tonking <reidt@ti.com>
+> 
+> k3_avs driver checks opp_ids when probing and overwrites the voltage
+> values in vd_data for the respective board. The new k3_check_opp() can
+> be called from board files to check the efuse data and returns 0 if
+> valid.
+> 
+> Also add the same check in k3_avs_program_voltage() to error out if
+> the efuse data was not valid.
+> 
+> Signed-off-by: Reid Tonking <reidt@ti.com>
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> ---
+[..]
+>  
+> +/**
+> + * k3_check_opp: Check for presence of opp efuse
+> + * @opp_id: opp id to check if voltage is present
 
-Fixes: 12770d0df0e8 ("ast2600: spl: Add boot mode detection")
-Link: https://gitlab.com/qemu-project/qemu/-/issues/2636
-Signed-off-by: Joel Stanley <joel@jms.id.au>
----
-GCC 14 was using this sequence to read the value, leading to the
-crash:
+Could you document vdd_id as well which is another input to the function?
 
- ldrbpl.w	r0, [r0, #1280]	@ 0x500
+> + *
+> + * Checks to see if an opp has voltage. k3_avs probe will populate
+> + * voltage data if efuse is present. Returns 0 if data is valid.
+> + */
+> +int k3_check_opp(struct udevice *dev, int vdd_id, int opp_id)
 
- arch/arm/mach-aspeed/ast2600/spl.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/mach-aspeed/ast2600/spl.c b/arch/arm/mach-aspeed/ast2600/spl.c
-index 05390c16f3af..0c5a82ed0947 100644
---- a/arch/arm/mach-aspeed/ast2600/spl.c
-+++ b/arch/arm/mach-aspeed/ast2600/spl.c
-@@ -45,10 +45,10 @@ u32 spl_boot_device(void)
- 	}
- 
- 	/* boot from UART has higher priority */
--	if (scu->hwstrap2 & SCU_HWSTRAP2_BOOT_UART)
-+	if (readl(&scu->hwstrap2) & SCU_HWSTRAP2_BOOT_UART)
- 		return BOOT_DEVICE_UART;
- 
--	if (scu->hwstrap1 & SCU_HWSTRAP1_BOOT_EMMC)
-+	if (readl(&scu->hwstrap1) & SCU_HWSTRAP1_BOOT_EMMC)
- 		return BOOT_DEVICE_MMC1;
- 
- out:
--- 
-2.45.2
-
+Regards,
+Manorit
