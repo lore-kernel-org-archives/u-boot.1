@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54FCD49221
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 13:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF48D49221
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 14:11:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 274C589449;
-	Mon, 18 Nov 2024 14:45:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 668578911A;
+	Mon, 18 Nov 2024 15:10:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zRyuUhOp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LJbCsm3x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4774289449; Mon, 18 Nov 2024 14:45:50 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id C06FA890D0; Mon, 18 Nov 2024 15:10:57 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B5B0893E7
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 14:45:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C27F58911A
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 15:10:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5cb15b84544so2705723a12.2
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 05:45:47 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7b152a923a3so222115385a.3
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 06:10:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731937547; x=1732542347; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6ZMsAm3pFgrqrP6WveZH7Yhs7Vcn9sl1IvRfMXIQUgs=;
- b=zRyuUhOpSsVD8dq2xsRbVbwc84bM4TckWkyEGT6vyIh7TjW8TaRS4R0odM03MrMqnr
- OIQz7Zojafkrptp9AaQEnDrgUppyEXUUx5nTE5cfbTa6sweS1kXPHe+DjXGAjaJBuJlA
- +pcLIDvFWyaYkODN85FoPbs0pG/WkcMB2WD0mRykuMJx5n9SX9wGZ5gitZLmuG3xEMCA
- vlydWIIuSvy4JKz/1aDDiqz4pPa9HXNZdHLjZ5eG90CsZbw8h6hFrQmHCiDg/AYuz8/x
- FNbqOhaIRra8gXLMb9lPEi3aYzd4oM7rRzXR1bGK1u+2QynLugLvB2hw0SASyDRO5z+p
- cPPg==
+ d=konsulko.com; s=google; t=1731939052; x=1732543852; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uDLlP4VFzDTznTBwPWHMF8ZcqEp+RMIm/wHZW2PhsuE=;
+ b=LJbCsm3xVI9u4FLKrBh2gK13ruRjlJ7n1JEHYWT0ls3oePUfcERP86wiAC31K1YOOn
+ 8BrGURzWJ9nJTVLsZSHsOyFXm6dXfeKPUUb3Z6nbrfLRY1sKi18jN5+Hzmg20wmCSRql
+ Cdpcd4JTiALuaIJgWnKseJceQZUP29E4+7ANw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731937547; x=1732542347;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6ZMsAm3pFgrqrP6WveZH7Yhs7Vcn9sl1IvRfMXIQUgs=;
- b=lBB2IIvTrXcm7WwmhKqgu8Xsy/H7ZO5kP6zbHzjZLcyxHzwD5hYKuxIJoAxxXRvgwj
- n7yWFJzXWTjUi3hf905Eve/KqcnIHH077T/5ZkRyqWfANcPnUSK80g6YzKBt1DGvNLqM
- okm7Vq8eCFacZwqUGP7iXR5HzNjVk6sKZRAQRfw+W9xWySiZveqR+zuWN/WKg40eKx7Y
- qYR/oIPQvOIZmCTS7fGtFNk8z3F5F39AQ3VbDW3fJaAB4INuyNPsGkOtTzXjZ9J3+1DU
- uOQmHHFLYUNlDNb6J0nMy2SeJqrh9BqMrYqF9N313dU+Ei7ZgzVayFdKezliWk0Vp+ep
- inPg==
-X-Gm-Message-State: AOJu0YxphQ6CRC7AUDjE5WS9qPneMq+ptW/AWgR7a/x/i2E6lhxkzFKE
- aK2otCdftX4uEEtepVfDNTODegjf+IpODlw74eMda5DQKr8oB+vx/v0am6O6EiA=
-X-Google-Smtp-Source: AGHT+IFgajpASZl0Nzj6EkpAGU8kAHLz3RyJL88SN0wUCzZjTN/14wFmoSIW19u42UfsHji8DKYMIw==
-X-Received: by 2002:a17:906:eec9:b0:a9e:c954:6afb with SMTP id
- a640c23a62f3a-aa48355294dmr1198337666b.51.1731937546654; 
- Mon, 18 Nov 2024 05:45:46 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:db7:e082:63c2:d847?
- ([2a01:e0a:3cb:7bb0:db7:e082:63c2:d847])
+ d=1e100.net; s=20230601; t=1731939052; x=1732543852;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uDLlP4VFzDTznTBwPWHMF8ZcqEp+RMIm/wHZW2PhsuE=;
+ b=PoUNVv3Aw+uKrtrv8SddMpkekcOIf7ZAo5hxjwVoXdinSogCuGtJC2qMz35qrnP5ue
+ W3VTt5DSZ+RL87YjDUH7NawoEgflO13PvZjuqVRP9FwyylRsLHEhzi0KhfjlmJmfXQp5
+ DzkAJw4VcQerjUeKK9yDooZsfSE/u9F0UI7HtKzQQ1alhkdZVG1uzfgeTGudowyuhyN/
+ OgztiTfG6yQVqZNieoDfVIdt5zX8qtFr1UBAcWU2eylpKM3VQ+Wfvu5snczKSQqET5Fz
+ Rog/+Ybj/S/kz7pgc/p+kc6k+gTkgXRNBoQuAe0gs35jrkV3ezSqlJ3kog8eDFWnUmb0
+ qtIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXiN/L8lHishGVRt3yCAmtdxAClUiAbYjjoIcjqziLp3QDy1tP3SUMNpYPcJwyIg52sLuQDwwY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTVHHaj1E2LrotXQC4Nng1B2WPPwhd8tHhd3qoC2doJhipU4UR
+ t6j3OwlJ8aLkoF5PvAhcvzH6vu83uooR6v3CeMDGseqhFLXslBrbAk8iDFOGK5g=
+X-Google-Smtp-Source: AGHT+IGF6M2hwW3soFbCw5HJOuKnCjyeQU0Ga8TbwAMbO2kQah9paM62dYVIVvKQwCOGDBMpsHQlPQ==
+X-Received: by 2002:a05:620a:2488:b0:7b1:5172:5b60 with SMTP id
+ af79cd13be357-7b362364798mr1804954485a.41.1731939052606; 
+ Mon, 18 Nov 2024 06:10:52 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df26c84sm544485966b.35.2024.11.18.05.45.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Nov 2024 05:45:46 -0800 (PST)
-Message-ID: <8ae75fe7-d17f-4f55-9a62-09278e238ac9@linaro.org>
-Date: Mon, 18 Nov 2024 14:45:45 +0100
+ af79cd13be357-7b35c9ab933sm484327985a.55.2024.11.18.06.10.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Nov 2024 06:10:51 -0800 (PST)
+Date: Mon, 18 Nov 2024 08:10:46 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Garrett Giordano <ggiordano@phytec.com>
+Cc: w.egorov@phytec.de, t.remmet@phytec.de, sumit.garg@linaro.org,
+ kever.yang@rock-chips.com, marex@denx.de, festevam@denx.de,
+ jonas@kwiboo.se, Oliver.Gaskell@analog.com, aford173@gmail.com,
+ prasad.kummari@amd.com, neil.armstrong@linaro.org,
+ mibodhi@gmail.com, n-francis@ti.com, d-gole@ti.com, afd@ti.com,
+ sjg@chromium.org, bb@ti.com, nm@ti.com, d.schultz@phytec.de,
+ nmorrisson@phytec.com, francesco.dolcini@toradex.com,
+ vishalm@ti.com, vigneshr@ti.com, y.moog@phytec.de, othacehe@gnu.org,
+ m-chawdhry@ti.com, j-humphreys@ti.com, j-choudhary@ti.com,
+ u-boot@lists.denx.de, upstream@lists.phytec.de
+Subject: Re: [PATCH 1/2] board: phytec: am62a7: Add PHYTEC phyCORE-AM62A7 SoM
+Message-ID: <20241118141046.GN3600562@bill-the-cat>
+References: <20241115195055.3023365-1-ggiordano@phytec.com>
+ <20241115195055.3023365-2-ggiordano@phytec.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/15] efi_loader: efi_net: add efi_net_set_addr,
- efi_net_get_addr
-To: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
- xypron.glpk@gmx.de
-References: <20241111210959.560738-1-adrianox@gmail.com>
- <20241111210959.560738-8-adrianox@gmail.com>
- <CAC_iWjJ19963N20Y52hVpQ8=-n8ifziyTcXdCNFkKR5+9nm3Ug@mail.gmail.com>
- <CAMGU2hWt3YhijXdaKXmEE21rgQBwJ-X6taTy=1MY3TjEAcPLZg@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAMGU2hWt3YhijXdaKXmEE21rgQBwJ-X6taTy=1MY3TjEAcPLZg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nFNZqMFoxv31WkMN"
+Content-Disposition: inline
+In-Reply-To: <20241115195055.3023365-2-ggiordano@phytec.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,213 +102,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--nFNZqMFoxv31WkMN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 11/18/24 13:35, Adriano Córdova wrote:
-> Hi Ilias,
-> 
-> El lun, 18 nov 2024 a las 9:22, Ilias Apalodimas (<
-> ilias.apalodimas@linaro.org>) escribió:
-> 
->> Hi Adriano,
->>
->> On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
->>>
->>> Add the functions efi_net_set_addr and  efi_net_get_addr to set
->>> and get the ip address from efi code in a network agnostic way.
->>> This could also go in net_common, or be compiled conditionally
->>> for each network stack.
->>>
->>> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
->>> ---
->>>
->>> (no changes since v2)
->>>
->>>  include/efi_loader.h     |  16 +++++++
->>>  lib/efi_loader/efi_net.c | 100 +++++++++++++++++++++++++++++++++++++++
->>>  2 files changed, 116 insertions(+)
->>>
->>> diff --git a/include/efi_loader.h b/include/efi_loader.h
->>> index 39809eac1b..612bc42816 100644
->>> --- a/include/efi_loader.h
->>> +++ b/include/efi_loader.h
->>> @@ -125,6 +125,22 @@ static inline void efi_set_bootdev(const char *dev,
->> const char *devnr,
->>>                                    size_t buffer_size) { }
->>>  #endif
->>>
->>> +#if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
->>> +void efi_net_get_addr(struct efi_ipv4_address *ip,
->>> +                     struct efi_ipv4_address *mask,
->>> +                     struct efi_ipv4_address *gw);
->>> +void efi_net_set_addr(struct efi_ipv4_address *ip,
->>> +                     struct efi_ipv4_address *mask,
->>> +                     struct efi_ipv4_address *gw);
->>> +#else
->>> +static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
->>> +                                    struct efi_ipv4_address *mask,
->>> +                                    struct efi_ipv4_address *gw) { }
->>> +static inline void efi_net_set_addr(struct efi_ipv4_address *ip,
->>> +                                    struct efi_ipv4_address *mask,
->>> +                                    struct efi_ipv4_address *gw) { }
->>> +#endif
->>> +
->>>  /* Maximum number of configuration tables */
->>>  #define EFI_MAX_CONFIGURATION_TABLES 16
->>>
->>> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
->>> index 7cd536705f..dd84b3f18d 100644
->>> --- a/lib/efi_loader/efi_net.c
->>> +++ b/lib/efi_loader/efi_net.c
->>> @@ -17,6 +17,7 @@
->>>
->>>  #include <efi_loader.h>
->>>  #include <malloc.h>
->>> +#include <vsprintf.h>
->>>  #include <net.h>
->>>
->>>  static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
->>> @@ -997,3 +998,102 @@ out_of_resources:
->>>         printf("ERROR: Out of memory\n");
->>>         return EFI_OUT_OF_RESOURCES;
->>>  }
->>> +
->>> +void efi_net_get_addr(struct efi_ipv4_address *ip,
->>> +                     struct efi_ipv4_address *mask,
->>> +                     struct efi_ipv4_address *gw)
->>> +{
->>> +#ifdef CONFIG_NET_LWIP
->>> +       char *ipstr = "ipaddr\0\0";
->>> +       char *maskstr = "netmask\0\0";
->>> +       char *gwstr = "gatewayip\0\0";
->>
->> You generally can't define strings like that and expect to change
->> them. The compiler places the string literal somewhere in memory which
->> is immutable.
->> If you want to keep the code as is, you need to define these as ipstr[].
->>
->>> +       int idx;
->>> +       struct in_addr tmp;
->>> +       char *env;
->>> +
->>> +       idx = dev_seq(eth_get_dev());
->>> +
->>> +       if (idx < 0 || idx > 99) {
->>> +               log_err("unexpected idx %d\n", idx);
->>> +               return;
->>> +       }
->>> +
->>> +       if (idx) {
->>
->> Is 0 not legal here?
->> And why is the behavior differnt with and without LWIP?
->>
-> 
-> This is how the lwip code deals with the environment variables for the IP
-> address, see
-> get_udev_ipv4_info in
-> https://github.com/u-boot/u-boot/blob/a38390284ad4261723d3a2411ba988828e994535/net/lwip/net-lwip.c#L91
-> In here I am trying to be consistent with that.
+On Fri, Nov 15, 2024 at 11:50:54AM -0800, Garrett Giordano wrote:
 
-It's a mistake and an oversight on my part. Ilias is right. I will send a
-patch to fix lwIP.
+> Add support for PHYTEC phyCORE-AM62A7 SoM.
+>=20
+> Supported features:
+>   - 2GB LPDDR4 RAM
+>   - eMMC
+>   - External SD
+>   - Ethernet
+>   - debug UART
+>=20
+> Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
+[snip]
+> diff --git a/board/phytec/phycore_am62ax/phycore-am62ax.c b/board/phytec/=
+phycore_am62ax/phycore-am62ax.c
+> new file mode 100644
+> index 00000000000..60752f431d1
+> --- /dev/null
+> +++ b/board/phytec/phycore_am62ax/phycore-am62ax.c
+> @@ -0,0 +1,66 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * Copyright (C) 2024 PHYTEC America LLC
+> + * Author: Garrett Giordano <ggiordano@phytec.com>
+> + */
+> +
+> +#include <asm/arch/hardware.h>
+> +#include <asm/io.h>
+> +#include <spl.h>
+> +#include <fdt_support.h>
+> +
+> +#include "../common/am6_som_detection.h"
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
 
-Thanks,
--- 
-Jerome
+But you don't use gd in the code, so this can go away. With that
+removed:
 
-> In legacy the network stack
-> just uses the variables net_ip and net_netmask.
-> 
-> 
->>> +               sprintf(ipstr, "ipaddr%d", idx);
->>> +               sprintf(maskstr, "netmask%d", idx);
->>> +               sprintf(gwstr, "gatewayip%d", idx);
->>> +       }
->>> +
->>> +       env = env_get(ipstr);
->>> +       if (env && ip) {
->>> +               tmp = string_to_ip(env);
->>> +               memcpy((void *)ip, (void *)&tmp, 4);
->>> +       }
->>> +
->>> +       env = env_get(maskstr);
->>> +       if (env && mask) {
->>> +               tmp = string_to_ip(env);
->>> +               memcpy((void *)mask, (void *)&tmp, 4);
->>> +       }
->>> +       env = env_get(gwstr);
->>> +       if (env && gw) {
->>> +               tmp = string_to_ip(env);
->>> +               memcpy((void *)gw, (void *)&tmp, 4);
->>> +       }
->>> +#else
->>> +       if (ip)
->>> +               memcpy((void *)ip, (void *)&net_ip, 4);
->>> +       if (mask)
->>> +               memcpy((void *)mask, (void *)&net_netmask, 4);
->>
->> Get rid of casts etc.
->>
->>> +#endif
->>> +}
->>> +
->>> +void efi_net_set_addr(struct efi_ipv4_address *ip,
->>> +                     struct efi_ipv4_address *mask,
->>> +                     struct efi_ipv4_address *gw)
->>> +{
->>> +#ifdef CONFIG_NET_LWIP
->>> +       char *ipstr = "ipaddr\0\0";
->>> +       char *maskstr = "netmask\0\0";
->>> +       char *gwstr = "gatewayip\0\0";
->>> +       int idx;
->>> +       struct in_addr *addr;
->>> +       char tmp[46];
->>> +
->>> +       idx = dev_seq(eth_get_dev());
->>> +
->>> +       if (idx < 0 || idx > 99) {
->>> +               log_err("unexpected idx %d\n", idx);
->>> +               return;
->>> +       }
->>> +
->>> +       if (idx) {
->>> +               sprintf(ipstr, "ipaddr%d", idx);
->>> +               sprintf(maskstr, "netmask%d", idx);
->>> +               sprintf(gwstr, "gatewayip%d", idx);
->>> +       }
->>> +
->>> +       if (ip) {
->>> +               addr = (struct in_addr *)ip;
->>> +               ip_to_string(*addr, tmp);
->>> +               env_set(ipstr, tmp);
->>> +       }
->>> +
->>> +       if (mask) {
->>> +               addr = (struct in_addr *)mask;
->>> +               ip_to_string(*addr, tmp);
->>> +               env_set(maskstr, tmp);
->>> +       }
->>> +
->>> +       if (gw) {
->>> +               addr = (struct in_addr *)gw;
->>> +               ip_to_string(*addr, tmp);
->>> +               env_set(gwstr, tmp);
->>> +       }
->>> +#else
->>> +       if (ip)
->>> +               memcpy((void *)&net_ip, (void *)ip, 4);
->>> +       if (mask)
->>> +               memcpy((void *)&net_netmask, (void *)mask, 4);
->>> +#endif
->>> +}
->>> --
->>> 2.43.0
->>>
->>
->> Cheers
->> /Ilias
->>
-> 
-> Thanks,
-> Adriano
-> 
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--nFNZqMFoxv31WkMN
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc7SuMACgkQFHw5/5Y0
+tyykhQv6AlQBQeEeC6OAgouQXyjw3CqHtf8BWunAAcpJTeIOelTuVtsKUjNlhhi2
+03vFy9RBRtoWNPYZDCrLgCRwS2KuYxTjI2Q2YNrlpEdxXEoWeGQ0tJZMhAu+KdT2
+u7tnzI+mb62JHzVuU3SlSmMHjQIotMl3sUky3N4//dcCB+HtJ/d9gVZv1Gijz3Se
+XXNJEa8bqLM36tvPU9YVCARx5M2Opz8h75AjrUCmendrOnmE3tz2umZZXMcrJqsx
+bZBvI4Sb8H8+J5YQJ+TCP3pKOSeHPSIrkODoBJEUJ+U0Wj5Nfj7XuYNdrErdqIu/
+QHNM2knRnqlLILTosb9DnZuY0nI6v81wvOjN5BHxtMCtI/+WuXfLDgiA9cfs9cqC
+ka23yhaYUUZWMFWmOOHvapouZEgDD6cc5Lblf3mAdMhcypW4YN3xHQ6vEdm2WLWU
+EmEb7Bpn6yfF2LWOZ/89ynbfU2qbA11Z9EAaBHU2dprS8F3YAFTKPwtmHC4+Qx56
+By7+wrdx
+=9l4P
+-----END PGP SIGNATURE-----
+
+--nFNZqMFoxv31WkMN--
