@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13163D591AE
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950A4D591AE
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:36:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3EE288E1C;
-	Mon, 18 Nov 2024 20:33:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D65489248;
+	Mon, 18 Nov 2024 20:36:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XJzc6ogV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YKXj9HBh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE45389119; Mon, 18 Nov 2024 20:33:15 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D6D3F88E6B; Mon, 18 Nov 2024 20:36:02 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9577588DB6
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:33:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B9D388E6B
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:36:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AIJWsim068117;
- Mon, 18 Nov 2024 13:32:54 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731958374;
- bh=/eP09uBz6qadgoPC9+PAdTnTiP3a2OZENStbDFX96dM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=XJzc6ogVBvZ3lekFOxY+IgfXs5jAs9oA6c0K5SnyVN62GxMtUom2UETdyXXVVHilj
- UbARztIz42PTRIOYplddi2bYA80VeoW7/cw2FidcJvojBoI+u+cIc1gMGI4j6dani9
- gEq6g9Y5BOVf9894JOYIZSjSIILk5jGz2j0xJn9k=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AIJWsJH115253
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Nov 2024 13:32:54 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Nov 2024 13:32:53 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Nov 2024 13:32:53 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AIJWrPn048304;
- Mon, 18 Nov 2024 13:32:53 -0600
-Date: Mon, 18 Nov 2024 13:32:53 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Garrett Giordano <ggiordano@phytec.com>
-CC: <trini@konsulko.com>, <w.egorov@phytec.de>, <t.remmet@phytec.de>,
- <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, <marex@denx.de>,
- <festevam@denx.de>, <jonas@kwiboo.se>, <Oliver.Gaskell@analog.com>,
- <aford173@gmail.com>, <prasad.kummari@amd.com>,
- <neil.armstrong@linaro.org>, <mibodhi@gmail.com>, <n-francis@ti.com>,
- <d-gole@ti.com>, <afd@ti.com>, <sjg@chromium.org>, <nm@ti.com>,
- <d.schultz@phytec.de>, <nmorrisson@phytec.com>,
- <francesco.dolcini@toradex.com>, <vishalm@ti.com>, <vigneshr@ti.com>,
- <y.moog@phytec.de>, <othacehe@gnu.org>, <m-chawdhry@ti.com>,
- <j-humphreys@ti.com>, <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>
-Subject: Re: [PATCH 1/2] board: phytec: am62a7: Add PHYTEC phyCORE-AM62A7 SoM
-Message-ID: <20241118193253.sx5yvpcyzjdidhou@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20241115195055.3023365-1-ggiordano@phytec.com>
- <20241115195055.3023365-2-ggiordano@phytec.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-20cbca51687so20855325ad.1
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:36:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1731958559; x=1732563359; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bB8ezXzUzHfezRhImY+pYMv5CIadMoHPdEjUwEQ4RHI=;
+ b=YKXj9HBhLAR7SJn4DyKj5YGANc5i1d6hC9Ea+u81Wn+kR1k/7d9hn4KzqMh8XInLHA
+ vGYBueKfWFxCp3nKExenQ0BtC7HhnxEr9kCpbJr3RmH1JDe5CuohobxO3rcObGCMIw/h
+ +g2V6BRJAGT/Tde5/0ubSq9/b1yR1kbMumr/512aZKwQSeC9YetNqyXvIF3JEMTwwrLm
+ b/jNGSQpqVJTbYXKzpLpXGfTomUCv6mub58of+7Q/fV2ebhHr2FlDu7uv5MMt4KDENvi
+ 4JgMiVwFFMhOnO3w/XHplA3dwHUR+VN9bQo71U+IGHdli/LDLHV7WL/rsDNbpNg1N0bj
+ 0xxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731958559; x=1732563359;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bB8ezXzUzHfezRhImY+pYMv5CIadMoHPdEjUwEQ4RHI=;
+ b=ViNczr9T3IzQjtKawuECTN+5Ii4UL/ivAsulL0Q+J7yGewfus5j6vkQ/HxcO9IoDRP
+ wY0Ai38VVK5kkXUHK2AawAH0FbUR/HnHIL3b85sUKhhy0JCwV87hU5exk6bwsaXjJeLC
+ kz0tcd8gjJohXkbgB7ASUvIO9hSjbiE6OM1vyuusEX38yrU5WEk660ceHHMTVMDoHt8b
+ gZXWAptvLgBP3R13zPtoqAqcFl7bzy2edg1DztkrGjp1NfjfSaCm7BYc/P3yhH3xwgYa
+ cU+eI90zcFj7DPOhXwlUdIPSmrWETmbOCIoEl1tDKGdAaXN3JetgIpmSO9+MV2SwuhQM
+ 9Khw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUUrSKnnvWln9JRBt1YfU0BxEr7m0zQQuA27m8+Xm6VsxfXXxVXqoVYp3dnlwB39h2w3WmkLuE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHO33lEadBRztL2nIurG3Wm6il0zRHIPjpLNSr5q6WSKqQ3H/m
+ K9s0F+J+/I/AYVtKd7EzD7KT+EQ6XqGfcmev0eVh19T2OkdgAH5M
+X-Google-Smtp-Source: AGHT+IHx00NFpQYM0w7fPTq2idxSkZStvHVOyMD2Uq2Enc7VOFufD8zQun3cN7TXLDJuKOxikrxPSA==
+X-Received: by 2002:a17:903:440f:b0:212:4d01:d43a with SMTP id
+ d9443c01a7336-2124d01d6cfmr4383515ad.48.1731958558648; 
+ Mon, 18 Nov 2024 11:35:58 -0800 (PST)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-211d0f8c2c0sm60706805ad.182.2024.11.18.11.35.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Nov 2024 11:35:57 -0800 (PST)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Stefan Roese <sr@denx.de>
+Cc: Tony Dinh <mibodhi@gmail.com>, Dave Purdy <david.c.purdy@gmail.com>,
+ Evgeni Dobrev <evgeni@studio-punkt.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Phil Sutter <phil@nwl.cc>,
+ Siddarth Gore <gores@marvell.com>,
+ Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH] arm: mvebu: Disable JFFS2 support for Kirkwood and Armada XP
+ boards
+Date: Mon, 18 Nov 2024 11:34:59 -0800
+Message-Id: <20241118193459.10687-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20241115195055.3023365-2-ggiordano@phytec.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,44 +98,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On November 15, 2024 thus sayeth Garrett Giordano:
-> Add support for PHYTEC phyCORE-AM62A7 SoM.
-> 
-> Supported features:
->   - 2GB LPDDR4 RAM
->   - eMMC
->   - External SD
->   - Ethernet
->   - debug UART
-> 
-> Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
+These boards don't use JFFS2 file system for booting so remove it.
 
-Looks Good!
+Ref: https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-cat/T/#t
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+ configs/dns325_defconfig     | 1 -
+ configs/dockstar_defconfig   | 1 -
+ configs/ds414_defconfig      | 1 -
+ configs/goflexhome_defconfig | 1 -
+ configs/guruplug_defconfig   | 1 -
+ configs/iconnect_defconfig   | 1 -
+ configs/nas220_defconfig     | 3 ---
+ configs/nsa310s_defconfig    | 1 -
+ configs/nsa325_defconfig     | 3 ---
+ configs/pogo_e02_defconfig   | 1 -
+ configs/pogo_v4_defconfig    | 3 ---
+ 11 files changed, 17 deletions(-)
 
-...
+diff --git a/configs/dns325_defconfig b/configs/dns325_defconfig
+index 323e2f5d4c..1ba02e0595 100644
+--- a/configs/dns325_defconfig
++++ b/configs/dns325_defconfig
+@@ -33,7 +33,6 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:896k(u-boot),128k(u-boot-env),5m(kernel),-(rootfs)"
+diff --git a/configs/dockstar_defconfig b/configs/dockstar_defconfig
+index e35ca165d0..941156750a 100644
+--- a/configs/dockstar_defconfig
++++ b/configs/dockstar_defconfig
+@@ -33,7 +33,6 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:1m(uboot),-(root)"
+diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
+index 25e5be3ba7..44e9b17682 100644
+--- a/configs/ds414_defconfig
++++ b/configs/ds414_defconfig
+@@ -49,7 +49,6 @@ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_TFTPPUT=y
+ CONFIG_CMD_TIME=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_UBI=y
+ CONFIG_ENV_OVERWRITE=y
+diff --git a/configs/goflexhome_defconfig b/configs/goflexhome_defconfig
+index af758fcc43..add4a24a31 100644
+--- a/configs/goflexhome_defconfig
++++ b/configs/goflexhome_defconfig
+@@ -35,7 +35,6 @@ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:1m(uboot),6M(uImage),-(root)"
+diff --git a/configs/guruplug_defconfig b/configs/guruplug_defconfig
+index 0fab4c38e0..540b9184b3 100644
+--- a/configs/guruplug_defconfig
++++ b/configs/guruplug_defconfig
+@@ -35,7 +35,6 @@ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:896K(uboot),128K(uboot_env),-@1M(root)"
+diff --git a/configs/iconnect_defconfig b/configs/iconnect_defconfig
+index 9d195e1cf2..6ee40e380b 100644
+--- a/configs/iconnect_defconfig
++++ b/configs/iconnect_defconfig
+@@ -35,7 +35,6 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0x80000@0x0(uboot),0x20000@0x80000(uboot_env),-@0xa0000(rootfs)"
+diff --git a/configs/nas220_defconfig b/configs/nas220_defconfig
+index 783879d4ee..ca70ee9637 100644
+--- a/configs/nas220_defconfig
++++ b/configs/nas220_defconfig
+@@ -34,7 +34,6 @@ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0xa0000@0x0(uboot),0x010000@0xa0000(env),0x500000@0xc0000(uimage),0x1a40000@0x5c0000(rootfs)"
+@@ -66,5 +65,3 @@ CONFIG_SYS_NS16550_REG_SIZE=-4
+ CONFIG_USB=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_STORAGE=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_NAND=y
+diff --git a/configs/nsa310s_defconfig b/configs/nsa310s_defconfig
+index f6718350d5..9a42c39155 100644
+--- a/configs/nsa310s_defconfig
++++ b/configs/nsa310s_defconfig
+@@ -30,7 +30,6 @@ CONFIG_CMD_NAND=y
+ CONFIG_CMD_SATA=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0xe0000@0x0(uboot),0x20000@0xe0000(uboot_env),0x100000@0x100000(second_stage_uboot),-@0x200000(root)"
+diff --git a/configs/nsa325_defconfig b/configs/nsa325_defconfig
+index c4235eecfb..ab9316340d 100644
+--- a/configs/nsa325_defconfig
++++ b/configs/nsa325_defconfig
+@@ -42,7 +42,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_SNTP=y
+ CONFIG_CMD_DNS=y
+ # CONFIG_CMD_BLOCK_CACHE is not set
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:0x100000(uboot),0x80000(stock_uboot_env),0x80000(key_store),0x80000(info),0xA00000(etc),0xA00000(kernel_1),0x2FC0000(rootfs1),0xA00000(kernel_2),0x2FC0000(rootfs2)"
+@@ -73,6 +72,4 @@ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_PCI=y
+ CONFIG_USB_EHCI_HCD=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_NAND=y
+ CONFIG_UBIFS_SILENCE_MSG=y
+diff --git a/configs/pogo_e02_defconfig b/configs/pogo_e02_defconfig
+index 50103f375a..50c9292550 100644
+--- a/configs/pogo_e02_defconfig
++++ b/configs/pogo_e02_defconfig
+@@ -32,7 +32,6 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_FAT=y
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)"
+diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
+index fb8036a75e..03b4fd9b2f 100644
+--- a/configs/pogo_v4_defconfig
++++ b/configs/pogo_v4_defconfig
+@@ -41,7 +41,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_SNTP=y
+ CONFIG_CMD_DNS=y
+ # CONFIG_CMD_BLOCK_CACHE is not set
+-CONFIG_CMD_JFFS2=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
+ CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:2M(u-boot),3M(uImage),3M(uImage2),8M(failsafe),112M(root)"
+@@ -73,6 +72,4 @@ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_PCI=y
+ CONFIG_USB_EHCI_HCD=y
+-CONFIG_JFFS2_LZO=y
+-CONFIG_JFFS2_NAND=y
+ CONFIG_UBIFS_SILENCE_MSG=y
+-- 
+2.39.5
 
-> diff --git a/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi 
-> b/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi
-> new file mode 100644
-> index 00000000000..00330b43fed
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi
-> @@ -0,0 +1,2798 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-> +/*
-> + * This file was generated with the
-> + * AM62Ax SysConfig DDR Subsystem Register Configuration Tool v0.09.08
-> + * Fri Mar 24 2024 11:56:13 GMT-0700 (Pacific Daylight Time)
-> + * DDR Type: LPDDR4
-> + * F0 = 50MHz    F1 = NA     F2 = 1866MHz
-> + * Density (per channel): 8Gb
-> + * Number of Ranks: 1
-> + */
-
-You may want to regenerate this config if you guys see any stability 
-issues. We've had some improvements in our chip select timings which are 
-included in the v0.10.2 EMIF tool's output.
-
-~Bryan
