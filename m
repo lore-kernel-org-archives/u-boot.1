@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3929D49209
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 10:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FDCD49211
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 12:08:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FF9589464;
-	Mon, 18 Nov 2024 11:59:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 08B1088D61;
+	Mon, 18 Nov 2024 13:08:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731927547;
-	bh=PDqVYwMWj6uakUvpSTq4GU4f05XHk9NU84yIXHNp6tc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=nw4oj6c+3ANmfGfoEwv7Y5sQ/TSEB7sVZOq4I8Rf7UsooZxyeOaDij7vJBNzwLF0V
-	 5T6csZWPllAh0sjRl0uwmGkm/CL7WaU+d1Bi5RPKTgKXJ0V1Za/FHwEzpIAOHJbSHD
-	 DSkHZ/kuKFHQuvBaDU1Wy9CsxUXCHo+Dm+jhdvxqTDoDc7cQ53eXMMrJQUGSVGY1SY
-	 p/q7BHq3H5cqCbGSCgV3zeUdqft/OhVqU1yuxxVDjyLY2GYQRvTQfEYrzo7D0/t9Rg
-	 tGW8ikuBra983ogkFmDFfXJt642Z2dq07gJh/tOKTj1gIVa11dk6OjX6qUcaI9sNNo
-	 uTaiZCZDAKInQ==
-Received: from [192.168.1.107] (82-131-203-244.pool.digikabel.hu
- [82.131.203.244])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o7t7j662";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id ED3DA88D7E; Mon, 18 Nov 2024 13:08:49 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2AACD88DEA;
- Mon, 18 Nov 2024 11:59:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731927546;
- bh=PDqVYwMWj6uakUvpSTq4GU4f05XHk9NU84yIXHNp6tc=;
- h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
- b=vffQFlAnm3R0lgad71HE5li9hhJUVABNNwOvbl3OMFXU3bRfwPTvSyonoNanCQJOb
- sbxncJvscdx1Z73BkYtFvEK9tm2eIhKwKK4ymBZzUb2WsPyc54/rQz0xrX9jywBRNu
- lF8CYZhblXjAg2n81nBDcux2DCue3hPjD6mH7rpv2EGKsF1eJO3vKLEUz4UyrOS0wk
- Hvlc5rKwnaxnsB0TZV91y6N3K2ox/UcTRkweqF/399Ws0FrdWC4FL6gHh3KSBuK/ir
- hliSknh5L6k4gFMyzn2TJ3bHWDidN47ufEAA2y4CNMpYklvhtWv/pGWWNbmq/tLZKh
- xdGD4J47P1hBA==
-Message-ID: <cb05307b-14c5-15b3-3fbf-f839b7e16982@denx.de>
-Date: Mon, 18 Nov 2024 11:56:21 +0100
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B9E788BB7
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 13:08:47 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-7f8095a200eso2828255a12.1
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 04:08:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731931726; x=1732536526; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4urFcqNTKlSxmqyNSgMYSfvZKGEgcU9V2ZWdvCwBfvc=;
+ b=o7t7j6629eg2r5LAqdBbGRv09Ph0GDiXGXnWDDkStMrnBtSnwM3n1Ll7BRQa5FWH+4
+ kSWLbhvGBNxd0CPB3zipeI76pjGAc3oBWk7Mp5k3gLan59X3up6sOhijyYuMjCSYdSej
+ MmT+CINdx0aF1KXkuo4pzuyc+e5+Fjy1Kl4a7KOKgxqad8EAyL2P+PumnQW6LCwwHEGI
+ EZDIOlf1DSiEdgx81l7JhbqxgyMj6Dnt7UHepIsFU4itQyRqVLNhYL1E/iqbNXz2lxx3
+ 8zaxbdfJwz3C4LnebBN2cjrVe7niTvLerDk5ppLGDt+aoIsl/jOc2haaFEQbhgXf0/Rr
+ rdUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731931726; x=1732536526;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4urFcqNTKlSxmqyNSgMYSfvZKGEgcU9V2ZWdvCwBfvc=;
+ b=gPFadYxRwrbC6kBkNBQPRYXKKtbK/wWNNbtwi+idQt0AF0y2j9cIF7HTZ4DsI8+D2b
+ vA13lrmL8Shm/mbuUvmklpa1VGYMA21EKbZ7o40EEuW03wYsxAAxRsOdd2v56tEzqQvK
+ X6QB+TyRcaQI4CPRzggwFSB125tbMqYwKZeXRKyupLNZU2ZcN33x9OYHIbHqR1t9sCYr
+ llmk2+O90kh6RDCvFJ5ijR7CdLL+Mins9RYhb+htOb6lgQe4Mp2A4t84Oz0g6wBoC5HX
+ 2L6GLvLRX6BY5JQVYpLvj8BXFyyN/HH6XMBczK7PRRlykNR3jCCqnC+zS6jpKsIWCmrC
+ ldMA==
+X-Gm-Message-State: AOJu0Yx+TAadQ/lKlEXnP0vov8ywVo8GscNYqJCLV0QUwc/RmytIS1kZ
+ WpktdE0skFVGSs+oS88nOxwvgljRNVpYrA1e0fVEGOlJxbVbyEJjpiBArZsHlqk/YBOR5aVXl0I
+ YyD+ZlcfzvgMRvuyIZ0U0/LE+Vz8ZsgV+vNM+dw==
+X-Google-Smtp-Source: AGHT+IHdz9iF1HuAT5U8wcORg0jPEdz5nVunOlvOKin1MfZFbqO8SxxBt/BBXFpwp01Hw2s32K27RvD4VE3/310/K9k=
+X-Received: by 2002:a17:90a:e7ca:b0:2e0:7b03:1908 with SMTP id
+ 98e67ed59e1d1-2e9fe63fca3mr24412222a91.10.1731931725970; Mon, 18 Nov 2024
+ 04:08:45 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
- PMIC wdt via IMX8 SCU
-Content-Language: en-US
-To: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andrej Valek <andrej.valek@siemens.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
- Fabio Estevam <festevam@denx.de>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20241118062715.32989-1-hs@denx.de>
- <20241118062715.32989-2-hs@denx.de>
- <CAL6CDMF=z+wH1xhfwVj=yUBdPe+zQ=odi_FtQsXbR832JaXW8g@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAL6CDMF=z+wH1xhfwVj=yUBdPe+zQ=odi_FtQsXbR832JaXW8g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20241111210959.560738-1-adrianox@gmail.com>
+ <20241111210959.560738-7-adrianox@gmail.com>
+In-Reply-To: <20241111210959.560738-7-adrianox@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 18 Nov 2024 14:08:09 +0200
+Message-ID: <CAC_iWj+fhEMH2kLMuLOZEZFPRfGTPW5DaAChttp642-H0iiTLg@mail.gmail.com>
+Subject: Re: [PATCH v3 06/15] efi_api: add definitions for HTTP and
+ IP4_CONFIG2 protocols
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ jerome.forissier@linaro.org, xypron.glpk@gmx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,228 +83,241 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Igor,
+On Mon, 11 Nov 2024 at 23:10, Adriano Cordova <adrianox@gmail.com> wrote:
+>
+> Add EFI definitions for EFI_IP4_CONFIG2_PROTOCOL,
+> EFI_HTTP_SERVICE_BINDING_PROTOCOL, and EFI_HTTP_PROTOCOL.
+> According to UEFI spec 2.10.
+>
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
+>
+> (no changes since v2)
+>
+>  include/efi_api.h | 203 ++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 203 insertions(+)
+>
+> diff --git a/include/efi_api.h b/include/efi_api.h
+> index 99ee749522..61c4eda8f8 100644
+> --- a/include/efi_api.h
+> +++ b/include/efi_api.h
+> @@ -1725,6 +1725,209 @@ struct efi_pxe_base_code_protocol {
+>         struct efi_pxe_mode *mode;
+>  };
+>
+> +#define EFI_IP4_CONFIG2_PROTOCOL_GUID \
+> +       EFI_GUID(0x5b446ed1, 0xe30b, 0x4faa, \
+> +                0x87, 0x1a, 0x36, 0x54, 0xec, 0xa3, 0x60, 0x80)
+> +
+> +enum efi_ip4_config2_data_type {
+> +       EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO,
+> +       EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
+> +       EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
+> +       EFI_IP4_CONFIG2_DATA_TYPE_GATEWAY,
+> +       EFI_IP4_CONFIG2_DATA_TYPE_DNSSERVER,
+> +       EFI_IP4_CONFIG2_DATA_TYPE_MAXIMUM,
+> +};
+> +
+> +struct efi_ip4_config2_protocol {
+> +       efi_status_t (EFIAPI * set_data)(struct efi_ip4_config2_protocol *this,
+> +                                        enum efi_ip4_config2_data_type data_type,
+> +                                        efi_uintn_t data_size,
+> +                                        void *data);
+> +       efi_status_t (EFIAPI * get_data)(struct efi_ip4_config2_protocol *this,
+> +                                        enum efi_ip4_config2_data_type data_type,
+> +                                        efi_uintn_t *data_size,
+> +                                        void *data);
+> +       efi_status_t (EFIAPI * register_data_notify)(struct efi_ip4_config2_protocol *this,
+> +                                                    enum efi_ip4_config2_data_type data_type,
+> +                                                    struct efi_event *event);
+> +       efi_status_t (EFIAPI * unregister_data_notify)(struct efi_ip4_config2_protocol *this,
+> +                                                      enum efi_ip4_config2_data_type data_type,
+> +                                                      struct efi_event *event);
+> +};
+> +
+> +struct efi_ip4_route_table {
+> +       struct efi_ipv4_address subnet_address;
+> +       struct efi_ipv4_address subnet_mask;
+> +       struct efi_ipv4_address gateway_address;
+> +};
+> +
+> +#define EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE 32
+> +
+> +struct efi_ip4_config2_interface_info {
+> +       u16 name[EFI_IP4_CONFIG2_INTERFACE_INFO_NAME_SIZE];
+> +       u8 if_type;
+> +       u32 hw_address_size;
+> +       struct efi_mac_address hw_address;
+> +       struct efi_ipv4_address station_address;
+> +       struct efi_ipv4_address subnet_mask;
+> +       u32 route_table_size;
+> +       struct efi_ip4_route_table *route_table;
+> +};
+> +
+> +enum efi_ip4_config2_policy {
+> +       EFI_IP4_CONFIG2_POLICY_STATIC,
+> +       EFI_IP4_CONFIG2_POLICY_DHCP,
+> +       EFI_IP4_CONFIG2_POLICY_MAX
+> +};
+> +
+> +struct efi_ip4_config2_manual_address {
+> +       struct efi_ipv4_address address;
+> +       struct efi_ipv4_address subnet_mask;
+> +};
+> +
+> +#define EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID \
+> +       EFI_GUID(0xbdc8e6af, 0xd9bc, 0x4379, \
+> +                0xa7, 0x2a, 0xe0, 0xc4, 0xe7, 0x5d, 0xae, 0x1c)
+> +
+> +struct efi_service_binding_protocol {
+> +       efi_status_t (EFIAPI * create_child)(struct efi_service_binding_protocol *this,
+> +                                            efi_handle_t *child_handle);
+> +       efi_status_t (EFIAPI * destroy_child)(struct efi_service_binding_protocol *this,
+> +                                             efi_handle_t child_handle);
+> +};
+> +
+> +#define EFI_HTTP_PROTOCOL_GUID \
+> +       EFI_GUID(0x7A59B29B, 0x910B, 0x4171, \
+> +                0x82, 0x42, 0xA8, 0x5A, 0x0D, 0xF2, 0x5B, 0x5B)
+> +
+> +enum efi_http_version {
+> +       HTTPVERSION10,
+> +       HTTPVERSION11,
+> +       HTTPVERSIONUNSUPPORTED
+> +};
+> +
+> +struct efi_httpv4_access_point {
+> +       bool use_default_address;
+> +       struct efi_ipv4_address local_address;
+> +       struct efi_ipv4_address local_subnet;
+> +       u16 local_port;
+> +};
+> +
+> +union efi_http_access_point {
+> +       struct efi_httpv4_access_point *ipv4_node;
+> +       struct efi_httpv6_access_point *ipv6_node;
+> +};
+> +
+> +struct efi_http_config_data {
+> +       enum efi_http_version http_version;
+> +       u32 timeout;
+> +       bool is_ipv6;
+> +       union efi_http_access_point access_point;
+> +};
+> +
+> +enum efi_http_method {
+> +       HTTP_METHOD_GET,
+> +       HTTP_METHOD_POST,
+> +       HTTP_METHOD_PATCH,
+> +       HTTP_METHOD_OPTIONS,
+> +       HTTP_METHOD_CONNECT,
+> +       HTTP_METHOD_HEAD,
+> +       HTTP_METHOD_PUT,
+> +       HTTP_METHOD_DELETE,
+> +       HTTP_METHOD_TRACE,
+> +       HTTP_METHOD_MAX
+> +};
+> +
+> +enum efi_http_status_code {
+> +       HTTP_STATUS_UNSUPPORTED_STATUS = 0,
+> +       HTTP_STATUS_100_CONTINUE,
+> +       HTTP_STATUS_101_SWITCHING_PROTOCOLS,
+> +       HTTP_STATUS_200_OK,
+> +       HTTP_STATUS_201_CREATED,
+> +       HTTP_STATUS_202_ACCEPTED,
+> +       HTTP_STATUS_203_NON_AUTHORITATIVE_INFORMATION,
+> +       HTTP_STATUS_204_NO_CONTENT,
+> +       HTTP_STATUS_205_RESET_CONTENT,
+> +       HTTP_STATUS_206_PARTIAL_CONTENT,
+> +       HTTP_STATUS_300_MULTIPLE_CHOICES,
+> +       HTTP_STATUS_301_MOVED_PERMANENTLY,
+> +       HTTP_STATUS_302_FOUND,
+> +       HTTP_STATUS_303_SEE_OTHER,
+> +       HTTP_STATUS_304_NOT_MODIFIED,
+> +       HTTP_STATUS_305_USE_PROXY,
+> +       HTTP_STATUS_307_TEMPORARY_REDIRECT,
+> +       HTTP_STATUS_400_BAD_REQUEST,
+> +       HTTP_STATUS_401_UNAUTHORIZED,
+> +       HTTP_STATUS_402_PAYMENT_REQUIRED,
+> +       HTTP_STATUS_403_FORBIDDEN,
+> +       HTTP_STATUS_404_NOT_FOUND,
+> +       HTTP_STATUS_405_METHOD_NOT_ALLOWED,
+> +       HTTP_STATUS_406_NOT_ACCEPTABLE,
+> +       HTTP_STATUS_407_PROXY_AUTHENTICATION_REQUIRED,
+> +       HTTP_STATUS_408_REQUEST_TIME_OUT,
+> +       HTTP_STATUS_409_CONFLICT,
+> +       HTTP_STATUS_410_GONE,
+> +       HTTP_STATUS_411_LENGTH_REQUIRED,
+> +       HTTP_STATUS_412_PRECONDITION_FAILED,
+> +       HTTP_STATUS_413_REQUEST_ENTITY_TOO_LARGE,
+> +       HTTP_STATUS_414_REQUEST_URI_TOO_LARGE,
+> +       HTTP_STATUS_415_UNSUPPORTED_MEDIA_TYPE,
+> +       HTTP_STATUS_416_REQUESTED_RANGE_NOT_SATISFIED,
+> +       HTTP_STATUS_417_EXPECTATION_FAILED,
+> +       HTTP_STATUS_500_INTERNAL_SERVER_ERROR,
+> +       HTTP_STATUS_501_NOT_IMPLEMENTED,
+> +       HTTP_STATUS_502_BAD_GATEWAY,
+> +       HTTP_STATUS_503_SERVICE_UNAVAILABLE,
+> +       HTTP_STATUS_504_GATEWAY_TIME_OUT,
+> +       HTTP_STATUS_505_HTTP_VERSION_NOT_SUPPORTED,
+> +       HTTP_STATUS_308_PERMANENT_REDIRECT
+> +};
+> +
+> +struct efi_http_request_data {
+> +       enum efi_http_method method;
+> +       u16 *url;
+> +};
+> +
+> +struct efi_http_response_data {
+> +       enum efi_http_status_code status_code;
+> +};
+> +
+> +struct efi_http_header {
+> +       char *field_name;
+> +       char *field_value;
+> +};
+> +
+> +struct efi_http_message {
+> +       union {
+> +               struct efi_http_request_data *request;
+> +               struct efi_http_response_data *response;
+> +       } data;
+> +       efi_uintn_t header_count;
+> +       struct efi_http_header *headers;
+> +       efi_uintn_t body_length;
+> +       void *body;
+> +};
+> +
+> +struct efi_http_token {
+> +       struct efi_event *event;
+> +       efi_status_t status;
+> +       struct efi_http_message *message;
+> +};
+> +
+> +struct efi_http_protocol {
+> +       efi_status_t (EFIAPI * get_mode_data)(struct efi_http_protocol *this,
+> +                                             struct efi_http_config_data *data);
+> +       efi_status_t (EFIAPI * configure)(struct efi_http_protocol *this,
+> +                                         struct efi_http_config_data *data);
+> +       efi_status_t (EFIAPI * request)(struct efi_http_protocol *this,
+> +                                       struct efi_http_token *token);
+> +       efi_status_t (EFIAPI * cancel)(struct efi_http_protocol *this,
+> +                                      struct efi_http_token *token);
+> +       efi_status_t (EFIAPI * response)(struct efi_http_protocol *this,
+> +                                        struct efi_http_token *token);
+> +       efi_status_t (EFIAPI * poll)(struct efi_http_protocol *this);
+> +};
+> +
+>  #define EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID \
+>         EFI_GUID(0x964e5b22, 0x6459, 0x11d2, \
+>                  0x8e, 0x39, 0x0, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
+> --
+> 2.43.0
+>
 
-On 18.11.24 11:39, Igor Opaniuk wrote:
-> Hello Heiko,
-> 
-> some nitpicks below:
-
-Thanks!
-
-> On Mon, Nov 18, 2024 at 7:27 AM Heiko Schocher <hs@denx.de> wrote:
->>
->> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
->> extensions. Only useful on some Siemens i.MX8-based platforms as
->> special SCFW is needed which provides the needed SCU API.
->>
->> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
->> ---
->>
->> Changes in v2:
->> - work on comments from Stefan:
->>    - rename driver file from scu_wdt.c to scu_pmic_wdt.c
->>    - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
->>    - reworked Kconfig help text
->>    - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
->>      SCU API extension in their SCFW.
->>    - reworked commit message
->>
->>   drivers/misc/imx8/scu_api.c     | 21 ++++++++++++
->>   drivers/watchdog/Kconfig        |  7 ++++
->>   drivers/watchdog/Makefile       |  1 +
->>   drivers/watchdog/scu_pmic_wdt.c | 59 +++++++++++++++++++++++++++++++++
->>   include/firmware/imx/sci/rpc.h  |  3 ++
->>   include/firmware/imx/sci/sci.h  |  1 +
->>   6 files changed, 92 insertions(+)
->>   create mode 100644 drivers/watchdog/scu_pmic_wdt.c
->>
->> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
->> index 591d71b096a..edb6923151a 100644
->> --- a/drivers/misc/imx8/scu_api.c
->> +++ b/drivers/misc/imx8/scu_api.c
->> @@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
->>          return ret;
->>   }
->>
->> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
->> +{
->> +       struct udevice *dev = gd->arch.scu_dev;
->> +       struct sc_rpc_msg_s msg;
->> +       int size = sizeof(struct sc_rpc_msg_s);
->> +       int ret;
->> +
->> +       RPC_VER(&msg) = SC_RPC_VERSION;
->> +       RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
->> +       RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
->> +       RPC_U8(&msg, 0U) = (u8)cmd;
->> +       RPC_SIZE(&msg) = 2U;
->> +
->> +       ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
->> +       if (ret)
->> +               printf("%s: res:%d\n",
->> +                      __func__, RPC_R8(&msg));
->> +
->> +       return ret;
->> +}
->> +
->>   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
->>                           sc_faddr_t addr)
->>   {
->> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
->> index 0e45f0a0922..f317d0922cb 100644
->> --- a/drivers/watchdog/Kconfig
->> +++ b/drivers/watchdog/Kconfig
->> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
->>            Select this to enable Arm SMC watchdog timer. This watchdog will manage
->>            a watchdog based on ARM SMCCC communication.
->>
->> +config WDT_SCU_PMIC
->> +       bool "Enable PMIC Watchdog Timer support for siemens platforms"
-> 
-> s/siemens/Siemens/g
-
-Fixed.
-
->> +       depends on IMX8 && WDT
-> depends on ARCH_IMX8 && WDT ?
-> IMX8 Kconfig symbol implies additional dependency on CAAM module,
-> which is not the case with this driver.
-
-Ah, good point! Thanks!
-
-> 
->> +       help
->> +         Select this to enable the PMIC watchdog driver controlled via
->> +         IMX8 SCU API found on Siemens platforms.
->> +
->>   config SPL_WDT
->>          bool "Enable driver model for watchdog timer drivers in SPL"
->>          depends on SPL_DM
->> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
->> index 0b107c008f7..fed924f7e01 100644
->> --- a/drivers/watchdog/Makefile
->> +++ b/drivers/watchdog/Makefile
->> @@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
->>   obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
->>   obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
->>   obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
->> +obj-$(CONFIG_WDT_SCU_PMIC) += scu_pmic_wdt.o
->>   obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
->>   obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
->>   obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
->> diff --git a/drivers/watchdog/scu_pmic_wdt.c b/drivers/watchdog/scu_pmic_wdt.c
->> new file mode 100644
->> index 00000000000..e7ca00de654
->> --- /dev/null
->> +++ b/drivers/watchdog/scu_pmic_wdt.c
->> @@ -0,0 +1,59 @@
->> +// SPDX-License-Identifier: GPL-2.0-or-later
->> +/*
->> + * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
->> + * extensions. Only useful on some Siemens i.MX8-based platforms as
->> + * special NXP SCFW is needed which provides the needed SCU API.
->> + *
->> + * Copyright (C) 2024 Siemens AG
->> + */
->> +
->> +#include <dm.h>
->> +#include <wdt.h>
->> +#include <firmware/imx/sci/sci.h>
->> +
->> +/* watchdog commands */
->> +#define CMD_START_WDT 0x55
->> +#define CMD_STOP_WDT  0x45
->> +#define CMD_PING_WDT  0x35
->> +
->> +static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
->> +{
->> +       /* start external watchdog via Timer API */
->> +       return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
->> +}
->> +
->> +static int scu_wdt_stop(struct udevice *dev)
->> +{
->> +       /* stop external watchdog via Timer API */
->> +       return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
->> +}
->> +
->> +static int scu_wdt_reset(struct udevice *dev)
->> +{
->> +       return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
->> +}
->> +
->> +static int scu_wdt_probe(struct udevice *dev)
->> +{
->> +       debug("%s(dev=%p)\n", __func__, dev);
->> +       return 0;
->> +}
->> +
->> +static const struct wdt_ops scu_wdt_ops = {
->> +       .reset          = scu_wdt_reset,
->> +       .start          = scu_wdt_start,
->> +       .stop           = scu_wdt_stop,
->> +};
->> +
->> +static const struct udevice_id scu_wdt_ids[] = {
->> +       { .compatible = "siemens,scu-wdt" },
->> +       { }
->> +};
->> +
->> +U_BOOT_DRIVER(scu_wdt) = {
->> +       .name           = "scu_wdt",
->> +       .id             = UCLASS_WDT,
->> +       .of_match       = scu_wdt_ids,
->> +       .probe          = scu_wdt_probe,
->> +       .ops            = &scu_wdt_ops,
->> +};
->> diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
->> index 28adec2a8e1..6f16cf4a8b6 100644
->> --- a/include/firmware/imx/sci/rpc.h
->> +++ b/include/firmware/imx/sci/rpc.h
->> @@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
->>   #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
->>   #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
->>
->> +/* siemens specific API extension from Siemens */
-> please drop one "siemens"
-
-Fixed!
-
-Thanks for your comments!
-
-bye,
-Heiko
-
->> +#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
->> +
->>   #endif /* SC_RPC_H */
->> diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
->> index 7d8499f070a..b971b62836d 100644
->> --- a/include/firmware/imx/sci/sci.h
->> +++ b/include/firmware/imx/sci/sci.h
->> @@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
->>
->>   /* Timer API */
->>   int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
->> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
->>
->>   /* SECO API */
->>   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
->> --
->> 2.20.1
->>
-> 
-> 
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
