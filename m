@@ -4,131 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0CCCD49208
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 10:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FDFD49209
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 10:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8CC58946A;
-	Mon, 18 Nov 2024 11:11:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 33C848945E;
+	Mon, 18 Nov 2024 11:39:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xhcMshWO";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="mTSQFQH1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A216A89464; Mon, 18 Nov 2024 11:11:57 +0100 (CET)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::601])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B8A5089466; Mon, 18 Nov 2024 11:39:55 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDC7D8946B
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:11:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 849388945E
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:39:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PF6jIttpGT07kC9tyGKFZDuFlMENf3h/by15YfHSWxXOLXqJFsezgjqIzV83YB+I//bX7O08D1nHiHT9DjENJoVZcClqpTuntlgipSXZIIl9ow22toGfNIjILp9Bj0SepulAXLjbqB1zEasgGOaQF78tu9xU9yZ0LPAladFZ7gjHHzF9xwoQY6u9N1a4hlG5nrBfCEPEuXH2Ab+jPgzRIR0e6w6z8AlwA6Sx87yXrqBbAA51L1e+DIyGrAkCtr8hrqWLIACfVeOwcn2FUWENVotBExRzwaTLPT2Ip72aPICZwLc7ylHP1Oxdcx/J38wi1lXeZu0aw25D0zgy73dawg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OAdZ6s7m3L+xuphyNG5y2yMvwoRaNlSMSTLdzz6K5Fk=;
- b=LqPmbnfe+YYoRUtX1pVA76Gug/qbAqvAuqtKNT6NO7/V+JPw0meSd3SOfMRJV0XhXtft5e0qwzHhvPvH12EGAhIv009WDgF5OGWRf8CrxKzslovZB+jSidMI8x3AnYannY7G3EShHmFVI+GTUbAhdH+5G6DdT5z1GI93NljNELj0ke70rHXoDY+3JI04qtcIoK0YJgJyLyPVuoauBQWYTvzywZIet/idtXbwXf37krT6MwmF9ax0HQO05a+SGm6xFTjEOoFLGY2qt6jRfRAS564lO0Zbf0H0HpJVfaaJdIOKtAXPIuiXkWkYH0N1tTsvTMfvgt6IfWmpHAiSj+CFMw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 165.204.84.12) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OAdZ6s7m3L+xuphyNG5y2yMvwoRaNlSMSTLdzz6K5Fk=;
- b=xhcMshWOm+lRuY+RrCYHyx9N3D5Ynx5va/14UQl5Wj8gRxyuvvo6gbfarcUHRX/+rPU8GKucuauEThvI3SZHB5mcKYEEm7rSlXClIAoH60xvRSvLjVmvYvrgvAeK4RyEkSidzGMRbH1vjY27ay0X4s8TF4z/+Bg4ECmWMW0alA4=
-Received: from CH0P223CA0001.NAMP223.PROD.OUTLOOK.COM (2603:10b6:610:116::32)
- by DS0PR12MB7631.namprd12.prod.outlook.com (2603:10b6:8:11e::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.23; Mon, 18 Nov
- 2024 10:11:47 +0000
-Received: from CH1PEPF0000AD80.namprd04.prod.outlook.com
- (2603:10b6:610:116:cafe::5) by CH0P223CA0001.outlook.office365.com
- (2603:10b6:610:116::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.23 via Frontend
- Transport; Mon, 18 Nov 2024 10:11:47 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is
- 165.204.84.12) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=amd.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- amd.com discourages use of 165.204.84.12 as permitted sender)
-Received: from SATLEXMB04.amd.com (165.204.84.12) by
- CH1PEPF0000AD80.mail.protection.outlook.com (10.167.244.90) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Mon, 18 Nov 2024 10:11:47 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 18 Nov
- 2024 04:08:07 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 18 Nov 2024 04:08:05 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-Subject: [PATCH v13 6/7] configs: zynqmp_kria: Enable the USB onboard hub
-Date: Mon, 18 Nov 2024 15:37:46 +0530
-Message-ID: <20241118100747.30121-7-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241118100747.30121-1-venkatesh.abbarapu@amd.com>
-References: <20241118100747.30121-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2feeb1e8edfso20892391fa.1
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 02:39:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=foundries.io; s=google; t=1731926393; x=1732531193; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sDpHvOkpsJlv59xt4qj4Yf90HqORsaail91PuWmhtxs=;
+ b=mTSQFQH1gBM/d05fSHPHdHSag3TspbDtin30MlD9gx5iirmxeQFaRfG5qg8qU3uvbK
+ e1KVkMU0DNDXAGcB/6yUvsvYG8BlUAlpJMSBuqBhl9Jo0VZ0u2OpP9eftCGdGn4Q0wsF
+ LULiZ2Tqv3usuWk0VIPVXVqG5DETaylGpkHevC7pkwMQ7eFFfdYZdjCsAYIUzzug1fUT
+ kOdqF3C0RuvdUWgM2Ba1tUUdahH0j9H7FsD9vmnUutLAARIvEEUOW8dlxgxzQshIa0Ky
+ Lxz6gLKgSCyeE48qO0+jjuZkuTn4tWeQr+5yQYY+8Xb/AuY2LIFHBSEps9yDOIh/GKZk
+ lBXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731926393; x=1732531193;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sDpHvOkpsJlv59xt4qj4Yf90HqORsaail91PuWmhtxs=;
+ b=T9DqC6WIWHSG1pQGlwevuKU5/gy1zwbOJNDvDW0z7sP0OeimV1FT/QByZQ8++cSMav
+ SFrbzXbhkC11wWodSJKtx9AviOUoTnD9wYdaPcaRa7lvyMtnklT0xqw1FDMIA1/ORUHG
+ FkAhlx/vqKFMG6yROGrb2l3lGBEfEXT0ovC7aNzXBm5LRY3Gs+SplhjqYFuCBs1FLJ9q
+ aMhPZNpXYrc2BHCqGiZEdBK+1XnSQwaiqA3RzwXFTRTGvqq9hZEIQj0Cq7j24V0nHiE4
+ b2qesa1s8F+kSrSqLQSEuSFmxqZyRZXwHCwyvc6oID58Pv2T7XvBJaXwfNYQbToXZPJV
+ AAdw==
+X-Gm-Message-State: AOJu0YzpCQttBnQEFQ/vZUBoNoOD4p9DoNdwSRNj82++41bixhQvmyXm
+ rL3di4cBEOAB9Q8H7rROreOtv7dX37AajLQY8MSGhi3SdshIO26Hhh3PmOTLB5CDMdJP8oXJ5Nz
+ RjbOSHhPkzTo9pmKILBG5lniN7njp3EP2p5C94A==
+X-Google-Smtp-Source: AGHT+IEc1mW+IJelHMUwPkxG8G4pPe6zCqB1TirLgBr1pblIgvKCMN2Yh8BcIMqxhhc+lIXH5aGJ3O1R89zxf9HOjSs=
+X-Received: by 2002:a2e:a914:0:b0:2f7:7be8:fd89 with SMTP id
+ 38308e7fff4ca-2ff6061066bmr77232901fa.6.1731926392776; Mon, 18 Nov 2024
+ 02:39:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD80:EE_|DS0PR12MB7631:EE_
-X-MS-Office365-Filtering-Correlation-Id: 439afb44-a37f-47f0-38e1-08dd07b9697c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|376014|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pM/xJrpAxeE/TMXoOZHt7KZo2l7x9BQLH5B2yI/U/+IinKWqRUjg5frPOpl4?=
- =?us-ascii?Q?3HqoxCyJHOMwKXQhElE1aC9LGNEont7tS4uycoKV1J+W6+Hih7tQngfwSWxY?=
- =?us-ascii?Q?eJ7s9W9f9gZ63/CsBLo/JF35d+5eIJUdxBvvX/31Bes7/JMtSB0bswI7zYNS?=
- =?us-ascii?Q?Z1t/MTcSAotqG6m0dSlsZ9G8nj62PAqCVn9a6Vo8asKVDq9qHkVKC8N60HA6?=
- =?us-ascii?Q?taX4K+KVnZOVHxA7R0LuuCLkVpBdR6WOkW8HMe78FZm5dj2zmaYphCr1d/2d?=
- =?us-ascii?Q?5lcfpw0jTKAefEkO9IrJUC8XlcXFGLPSjEFs8a37Zen7SVT9fQutUixKZybJ?=
- =?us-ascii?Q?TN6u4m2JhJH/tA5qLdG9yNugZFiJ19a5NgKHaZi80P5LmQEad7p5ITb39m2m?=
- =?us-ascii?Q?aRa7vsf5D/ak1aOUPXBR3/u3WlZBUB7UQ3NgmrMEVrjB+Lw7/cmtAWCesV+t?=
- =?us-ascii?Q?zC3raxrZtCQFDzet/LWprZsKF8/C14/Dcl40+16gHA4hAYJD55X5K81NnNF5?=
- =?us-ascii?Q?323QG9yd693b+LJG+cOPfBZEpTbB1uy9fVAf+8yE+ROaEvvpZGipMceoTdeG?=
- =?us-ascii?Q?+e9otwka2RhKkm2Uho0FXHJ+gIPJh+kpprL71WJWULiZytS0YIe520RWUHqX?=
- =?us-ascii?Q?IM7uGd1szmpS0CoPmcK9wwLVN+UiwCobFGGZ6CCANtTM4JR2gu1A4jfuZQ4o?=
- =?us-ascii?Q?iaf8eJLpIb5TU+e1/J9X3Z7u9Lxqq4gs9s+m2EM6qlAgMMHZ8SqXjt4r+5kk?=
- =?us-ascii?Q?UedZLxWgngSZD5rSc9ubJXHdUj0d13saICbiGUL6RI4rpxWz/ilDF5MiAa9b?=
- =?us-ascii?Q?Hyqc1B3hVPuxVY6hKCHv3NZi79KT01i8/trRrgmzbolPsgVdqK888wI8CV/q?=
- =?us-ascii?Q?4+7r/yTMkOUm/kB/MiZRAC1W8Q5NegVFCcZS8VkuYXrL5QONsx9EtBu7FzX3?=
- =?us-ascii?Q?UmLEjIl6O1HpsHY+xipoIH1EBYX5Duds8QzWJFXhG5HLFsKT/YgjwEfPQyRi?=
- =?us-ascii?Q?Ce2usnK//8hgsJlWU70MjEJ4uia4rYAsHt+0f4aoFqhywIEwXc1F+9v8FpMG?=
- =?us-ascii?Q?R/G+1qOJBUvmNYkzLK+nMLS6t1AtcmFElH8a0D6MqcaSvv6xsJvgxNF57ibP?=
- =?us-ascii?Q?txSeFqZqQcDwO8RL5JXN1vG+8zgRfkH85NT1wzKUCtMYMFYCYqeWfRgl1ruW?=
- =?us-ascii?Q?OXa/mqM7EX3UCvrPa5dgVMD3JieP4BnQxclbhcXoxxqDKGR7qWMUNldj4171?=
- =?us-ascii?Q?wpMZ0tLkxJC9e2k7WwQlHifPMHCgpgYWCJOxY1/jGw+KwbARHGcj8lW65fly?=
- =?us-ascii?Q?DSVExKwgHy9379RNqEU2/8vHxrYXP7fiOvFXsyRximThgcYCCjPm9ca1HAYU?=
- =?us-ascii?Q?1sfwwYet6iK78bvSXfDY0NMmv7wCQu4mYezZSGfmuCXKhH/zDw=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.12; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:atlvpn-bp.amd.com; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2024 10:11:47.5790 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 439afb44-a37f-47f0-38e1-08dd07b9697c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.12];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD80.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7631
+References: <20241118062715.32989-1-hs@denx.de>
+ <20241118062715.32989-2-hs@denx.de>
+In-Reply-To: <20241118062715.32989-2-hs@denx.de>
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+Date: Mon, 18 Nov 2024 11:39:36 +0100
+Message-ID: <CAL6CDMF=z+wH1xhfwVj=yUBdPe+zQ=odi_FtQsXbR832JaXW8g@mail.gmail.com>
+Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
+ PMIC wdt via IMX8 SCU
+To: Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Walter Schweizer <walter.schweizer@siemens.com>, 
+ Enrico Leto <enrico.leto@siemens.com>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Andrej Valek <andrej.valek@siemens.com>, 
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, 
+ Chanho Park <chanho61.park@samsung.com>, Fabio Estevam <festevam@denx.de>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,28 +101,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-USB host support on ZYNQMP KRIA SOM needs onboard USB
-hub driver for handling reset GPIO and for i2c initialization
-sequence.
+Hello Heiko,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Acked-by: Michal Simek <michal.simek@amd.com>
----
- configs/xilinx_zynqmp_kria_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+some nitpicks below:
 
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 5757a0c9be..a1d9aaaeb3 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -208,6 +208,7 @@ CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_ULPI_VIEWPORT=y
- CONFIG_USB_ULPI=y
-+CONFIG_USB_ONBOARD_HUB=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_GADGET=y
--- 
-2.17.1
+On Mon, Nov 18, 2024 at 7:27=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+>
+> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+> extensions. Only useful on some Siemens i.MX8-based platforms as
+> special SCFW is needed which provides the needed SCU API.
+>
+> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+> Signed-off-by: Heiko Schocher <hs@denx.de>
+> ---
+>
+> Changes in v2:
+> - work on comments from Stefan:
+>   - rename driver file from scu_wdt.c to scu_pmic_wdt.c
+>   - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
+>   - reworked Kconfig help text
+>   - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
+>     SCU API extension in their SCFW.
+>   - reworked commit message
+>
+>  drivers/misc/imx8/scu_api.c     | 21 ++++++++++++
+>  drivers/watchdog/Kconfig        |  7 ++++
+>  drivers/watchdog/Makefile       |  1 +
+>  drivers/watchdog/scu_pmic_wdt.c | 59 +++++++++++++++++++++++++++++++++
+>  include/firmware/imx/sci/rpc.h  |  3 ++
+>  include/firmware/imx/sci/sci.h  |  1 +
+>  6 files changed, 92 insertions(+)
+>  create mode 100644 drivers/watchdog/scu_pmic_wdt.c
+>
+> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+> index 591d71b096a..edb6923151a 100644
+> --- a/drivers/misc/imx8/scu_api.c
+> +++ b/drivers/misc/imx8/scu_api.c
+> @@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_=
+wdog_time_t window)
+>         return ret;
+>  }
+>
+> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
+> +{
+> +       struct udevice *dev =3D gd->arch.scu_dev;
+> +       struct sc_rpc_msg_s msg;
+> +       int size =3D sizeof(struct sc_rpc_msg_s);
+> +       int ret;
+> +
+> +       RPC_VER(&msg) =3D SC_RPC_VERSION;
+> +       RPC_SVC(&msg) =3D (u8)SC_RPC_SVC_TIMER;
+> +       RPC_FUNC(&msg) =3D (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
+> +       RPC_U8(&msg, 0U) =3D (u8)cmd;
+> +       RPC_SIZE(&msg) =3D 2U;
+> +
+> +       ret =3D misc_call(dev, SC_FALSE, &msg, size, &msg, size);
+> +       if (ret)
+> +               printf("%s: res:%d\n",
+> +                      __func__, RPC_R8(&msg));
+> +
+> +       return ret;
+> +}
+> +
+>  int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+>                          sc_faddr_t addr)
+>  {
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 0e45f0a0922..f317d0922cb 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
+>           Select this to enable Arm SMC watchdog timer. This watchdog wil=
+l manage
+>           a watchdog based on ARM SMCCC communication.
+>
+> +config WDT_SCU_PMIC
+> +       bool "Enable PMIC Watchdog Timer support for siemens platforms"
 
+s/siemens/Siemens/g
+
+> +       depends on IMX8 && WDT
+depends on ARCH_IMX8 && WDT ?
+IMX8 Kconfig symbol implies additional dependency on CAAM module,
+which is not the case with this driver.
+
+> +       help
+> +         Select this to enable the PMIC watchdog driver controlled via
+> +         IMX8 SCU API found on Siemens platforms.
+> +
+>  config SPL_WDT
+>         bool "Enable driver model for watchdog timer drivers in SPL"
+>         depends on SPL_DM
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index 0b107c008f7..fed924f7e01 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) +=3D octeontx_wdt.o
+>  obj-$(CONFIG_WDT_OMAP3) +=3D omap_wdt.o
+>  obj-$(CONFIG_WDT_SBSA) +=3D sbsa_gwdt.o
+>  obj-$(CONFIG_WDT_K3_RTI) +=3D rti_wdt.o
+> +obj-$(CONFIG_WDT_SCU_PMIC) +=3D scu_pmic_wdt.o
+>  obj-$(CONFIG_WDT_SL28CPLD) +=3D sl28cpld-wdt.o
+>  obj-$(CONFIG_WDT_SP805) +=3D sp805_wdt.o
+>  obj-$(CONFIG_WDT_STARFIVE) +=3D starfive_wdt.o
+> diff --git a/drivers/watchdog/scu_pmic_wdt.c b/drivers/watchdog/scu_pmic_=
+wdt.c
+> new file mode 100644
+> index 00000000000..e7ca00de654
+> --- /dev/null
+> +++ b/drivers/watchdog/scu_pmic_wdt.c
+> @@ -0,0 +1,59 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+> + * extensions. Only useful on some Siemens i.MX8-based platforms as
+> + * special NXP SCFW is needed which provides the needed SCU API.
+> + *
+> + * Copyright (C) 2024 Siemens AG
+> + */
+> +
+> +#include <dm.h>
+> +#include <wdt.h>
+> +#include <firmware/imx/sci/sci.h>
+> +
+> +/* watchdog commands */
+> +#define CMD_START_WDT 0x55
+> +#define CMD_STOP_WDT  0x45
+> +#define CMD_PING_WDT  0x35
+> +
+> +static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flag=
+s)
+> +{
+> +       /* start external watchdog via Timer API */
+> +       return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
+> +}
+> +
+> +static int scu_wdt_stop(struct udevice *dev)
+> +{
+> +       /* stop external watchdog via Timer API */
+> +       return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
+> +}
+> +
+> +static int scu_wdt_reset(struct udevice *dev)
+> +{
+> +       return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
+> +}
+> +
+> +static int scu_wdt_probe(struct udevice *dev)
+> +{
+> +       debug("%s(dev=3D%p)\n", __func__, dev);
+> +       return 0;
+> +}
+> +
+> +static const struct wdt_ops scu_wdt_ops =3D {
+> +       .reset          =3D scu_wdt_reset,
+> +       .start          =3D scu_wdt_start,
+> +       .stop           =3D scu_wdt_stop,
+> +};
+> +
+> +static const struct udevice_id scu_wdt_ids[] =3D {
+> +       { .compatible =3D "siemens,scu-wdt" },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(scu_wdt) =3D {
+> +       .name           =3D "scu_wdt",
+> +       .id             =3D UCLASS_WDT,
+> +       .of_match       =3D scu_wdt_ids,
+> +       .probe          =3D scu_wdt_probe,
+> +       .ops            =3D &scu_wdt_ops,
+> +};
+> diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rp=
+c.h
+> index 28adec2a8e1..6f16cf4a8b6 100644
+> --- a/include/firmware/imx/sci/rpc.h
+> +++ b/include/firmware/imx/sci/rpc.h
+> @@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
+>  #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_s=
+et_sysctr_periodic_alarm() RPC call */
+>  #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_=
+sysctr_alarm() RPC call */
+>
+> +/* siemens specific API extension from Siemens */
+please drop one "siemens"
+> +#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic=
+_wdog() RPC call */
+> +
+>  #endif /* SC_RPC_H */
+> diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sc=
+i.h
+> index 7d8499f070a..b971b62836d 100644
+> --- a/include/firmware/imx/sci/sci.h
+> +++ b/include/firmware/imx/sci/sci.h
+> @@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t reso=
+urce, sc_rm_sid_t sid);
+>
+>  /* Timer API */
+>  int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
+> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
+>
+>  /* SECO API */
+>  int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+> --
+> 2.20.1
+>
+
+
+--=20
+Best regards - Freundliche Gr=C3=BCsse - Meilleures salutations
+
+Igor Opaniuk
+Senior Software Engineer, Embedded & Security
+E: igor.opaniuk@foundries.io
+W: www.foundries.io
