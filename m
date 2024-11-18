@@ -4,67 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 217BBD49237
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 15:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7592AD68BFA
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 16:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 916DA88ECB;
-	Mon, 18 Nov 2024 16:38:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C19488947B;
+	Mon, 18 Nov 2024 17:27:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731944295;
-	bh=i0Gv46eVTn+5kphkvb80w4er/Yx02RnNGCncnLTeL2A=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mN1QD18WYHswrpuye9GAB/tjn3rElnFNcc5zgcyw+ZPOCOOHfjG3WyqoDim5sDvSk
-	 3okYW9LlJSWy9h/V8yC9YP4/JWNrqW5fFi3R7euj4W+nAilImzINy9JNu7vYAXPX0/
-	 jISsFlwxyK7DQOd0AECoO81hZci2+7UexWbxcENokDbzDbsEvjk6Y7+5hqESDt/r35
-	 LnxYe5N1jVe59VPDAaYbCS5h7UNsQtorv43yWEAPB0zxdsQaGp1LckPrDmQ5oxqW49
-	 U0Y8InicPEfooCO7fzl4/t6rKakZAFdReOq2Y2JSvZux9HIWge4ZXxTN+8029yUyj6
-	 0WXm8oFLbvNlw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A5C389364; Mon, 18 Nov 2024 16:38:14 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E5CB88C53
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 16:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UWVaPjZI";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 20A6789482; Mon, 18 Nov 2024 17:27:22 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4XsWwt5QYnz9sbP;
- Mon, 18 Nov 2024 16:38:06 +0100 (CET)
-Message-ID: <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
-Date: Mon, 18 Nov 2024 16:37:57 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 3589D88FE5
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 17:27:19 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ea6f821decso1052849a91.1
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 08:27:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731947238; x=1732552038; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LKormixjlng9R1y1C0dW0XpN+vTUpiTaO2uX8V8FkrE=;
+ b=UWVaPjZIfbLbSXtBgGoD74jJOtSfe2yD9b4KJ7C2gbcxCa8ByxVkl0P6AvVCw6tZKV
+ OQ7x77Yo1h70OzDXsjz0YU2WamOBJ2tp5YS6GTrovu5eeA2JksMr4kOUh1EQI3U41HVP
+ N1x2Xg9LKhsTeP8Rw44AAz4qnHw+q6BBQIHvPtPBH1d7ZE/4XkHJhqE9esl18Tzvu9jO
+ 3agGDxHW+urJ8cAPJ0sj/knbebSm6k8YwZfp3mlDDGhI8wnF4IEtjpsBfHUTrHyiQ0n+
+ ymqxyYX24+Ld0WqjnNjWwTKw+e7UdLwM/MsIiKpchMWs6+K54eEzDolVTyuMZlpdZJ6A
+ +q2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731947238; x=1732552038;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LKormixjlng9R1y1C0dW0XpN+vTUpiTaO2uX8V8FkrE=;
+ b=bRnaOqA/zF8EV7WRqPNv+ZwYnvROnNoa/1mQds+z0QOe5DNTokv+ZKIrc7lALQgfvP
+ BG3ikknaglrOZlbfsFQl+TFGjF1jrZSg1T+D1FsmyQTZCSQXSLbcfefxomLtbt/C0kGz
+ OxQr9sQWz0SrxNY2uV/KgJ+UIzgcRoCUenlrWfC2bbcf0t1DWD2t5vEwCx/cnLpF3SEM
+ S9qGPkFsqK4v4qfThSqilD5DZMq8wbKl6kSvadlhTP0moy8sJ6G4z72VhYy3JNRdTdAZ
+ xWEz+l4Kgz9vZBGFDWu4BlA6vEROyzHrm1aBeF9/HrzdyVTgsI+5+yEmlTjHGRrI2U6n
+ px5Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1oUPkCO2TTI0nK9n5n67OWDZOcaGdUu929lP1bSYzM7yEoWxR2KfVG5jhZW5nahOLOAVipts=@lists.denx.de
+X-Gm-Message-State: AOJu0YzDliA8T1sD45uBKgl+WJczv8wpBynx7p9iLMSwK0TiYRE+tL4V
+ 4AVxX7c3c4wtnk6GxVHqht2+qp2toLCfMNlZSYfCY9eTmmytrwf6ai3spCjknL24oUfYAFRnhhE
+ +RV9prZoB9DvDzvOwHYLqOcQzuRX6Cq7SwRfh/vYmti/Z4+8GO3w=
+X-Google-Smtp-Source: AGHT+IHJ6E3b1FrR2K3MCJGXlKAYugDdkn9Jtj/yCrU8oi1rzQqEv+o4sS7fp0mBDEZ+fLxSc0k9iqtkvK4+GuvXTvg=
+X-Received: by 2002:a17:90b:2494:b0:2ea:356f:51a6 with SMTP id
+ 98e67ed59e1d1-2ea356f54a1mr12165183a91.14.1731947237455; Mon, 18 Nov 2024
+ 08:27:17 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
- PMIC wdt via IMX8 SCU
-To: Francesco Dolcini <francesco@dolcini.it>, Heiko Schocher <hs@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andrej Valek <andrej.valek@siemens.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
- Fabio Estevam <festevam@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241118062715.32989-1-hs@denx.de>
- <20241118062715.32989-2-hs@denx.de> <20241118123139.GA42367@francesco-nb>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241118123139.GA42367@francesco-nb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAJaLiFwvFVOKYpAQLSNUqAfVHCsPcxo6g74JGunw8HSQTMCFLA@mail.gmail.com>
+ <20241115141748.GS3600562@bill-the-cat>
+ <CAJaLiFx35Q8L-kR02GrA1PTd2nY699KMc2fy5fT381Khg5hgxg@mail.gmail.com>
+ <CAJaLiFy2oo2fp-08qJni8srUn6RErgGgZs_A3GGPJuD0+=YsOw@mail.gmail.com>
+ <CAEfUkUJOd03fc5VERRPY18LWMomEbYFRnkHSJcFLcdnPq4=8jA@mail.gmail.com>
+ <CAJaLiFw134mzZk7TkJMgAppx11Xv3qZsbU-Y78XimX8jNbJtMA@mail.gmail.com>
+ <CAEfUkUKp9wWhgBW2XFubhoccSGeU-CW3Y+FY+iJhfw7eVLZv_g@mail.gmail.com>
+ <CAJaLiFzTjHWCw+ioPZv660yQ0XLM6+SMJh3NV=NYivbtE1Uf_Q@mail.gmail.com>
+ <CAEfUkULhPuH15fDENXubhNPOQvbAjBv5f_yoeH7gjC4rhczxtA@mail.gmail.com>
+ <20241118153742.GO3600562@bill-the-cat>
+In-Reply-To: <20241118153742.GO3600562@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 18 Nov 2024 11:27:06 -0500
+Message-ID: <CAEfUkUJNOTCsh19VbKsHw9wWO1nn8o-OhRrAB46uhpKHO-Owsw@mail.gmail.com>
+Subject: Re: Git commit failed with mbedtls/framework
+To: Tom Rini <trini@konsulko.com>
+Cc: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,33 +98,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18.11.24 13:31, Francesco Dolcini wrote:
-> On Mon, Nov 18, 2024 at 07:26:55AM +0100, Heiko Schocher wrote:
->> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
->> extensions. Only useful on some Siemens i.MX8-based platforms as
->> special SCFW is needed which provides the needed SCU API.
->>
->> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
-> 
-> ...
-> 
->> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
->> index 0e45f0a0922..f317d0922cb 100644
->> --- a/drivers/watchdog/Kconfig
->> +++ b/drivers/watchdog/Kconfig
->> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
->>   	  Select this to enable Arm SMC watchdog timer. This watchdog will manage
->>   	  a watchdog based on ARM SMCCC communication.
->>   
->> +config WDT_SCU_PMIC
-> Isn't this a too generic name for something the is platform specific?
-> Or this is not Siemens specific? One or the other, I would say.
+Hi Tom,
 
-This is also my only concern right now. If this driver is specific for
-a Siemens SCU firmware, then IMHO the Kconfig option and the driver
-filename should reflect this.
+On Mon, 18 Nov 2024 at 10:37, Tom Rini <trini@konsulko.com> wrote:
 
-Thanks,
-Stefan
+> On Mon, Nov 18, 2024 at 10:24:32AM -0500, Raymond Mao wrote:
+> > Hi Tony,
+> >
+> > On Sat, 16 Nov 2024 at 02:39, Tony Dinh <mibodhi@gmail.com> wrote:
+> >
+> > > Hi Raymond,
+> > >
+> > > On Fri, Nov 15, 2024 at 1:55=E2=80=AFPM Raymond Mao <raymond.mao@lina=
+ro.org>
+> > > wrote:
+> > > >
+> > > > Hi Tony and Tom,
+> > > >
+> > > > On Fri, 15 Nov 2024 at 16:35, Tony Dinh <mibodhi@gmail.com> wrote:
+> > > >>
+> > > >> Hi Tom,
+> > > >> Hi Raymond,
+> > > >>
+> > > >> On Fri, Nov 15, 2024 at 1:09=E2=80=AFPM Raymond Mao <raymond.mao@l=
+inaro.org
+> >
+> > > wrote:
+> > > >> >
+> > > >> > Hi Tony
+> > > >> >
+> > > >> > On Fri, 15 Nov 2024 at 15:32, Tony Dinh <mibodhi@gmail.com>
+> wrote:
+> > > >> >>
+> > > >> >> Hi Tom,
+> > > >> >>
+> > > >> >> On Fri, Nov 15, 2024 at 11:27=E2=80=AFAM Tony Dinh <mibodhi@gma=
+il.com>
+> > > wrote:
+> > > >> >> >
+> > > >> >> > Hi Tom,
+> > > >> >> >
+> > > >> >> > On Fri, Nov 15, 2024 at 6:17=E2=80=AFAM Tom Rini <trini@konsu=
+lko.com>
+> > > wrote:
+> > > >> >> > >
+> > > >> >> > > On Thu, Nov 14, 2024 at 08:26:33PM -0800, Tony Dinh wrote:
+> > > >> >> > > > Hi Tom,
+> > > >> >> > > >
+> > > >> >> > > > I am on 2025.01-rc2, and I am trying to commit some files=
+.
+> The
+> > > error
+> > > >> >> > > > seems to indicate this framework directory might need som=
+e
+> > > >> >> > > > modification. Did I miss something?
+> > > >> >> > > >
+> > > >> >> > > > error: 'lib/mbedtls/external/mbedtls/framework' does not
+> have
+> > > a commit
+> > > >> >> > > > checked out
+> > > >> >> > > > fatal: updating files failed
+> > > >> >> > >
+> > > >> >> > > That's odd. You didn't happen to try out some of the previo=
+us
+> > > lwIP
+> > > >> >> > > iterations on that tree did you?
+> > > >> >> >
+> > > >> >> > No, I did not. The tree is clean with "make mrproper" and on
+> the
+> > > >> >> > master branch. I just did a git pull and worked on it.
+> > > >> >> >
+> > > >> >> > I went and looked at https://github.com/Mbed-TLS/mbedtls.git.
+> The
+> > > >> >> > framework directory is pointing to a specific commit.
+> > > >> >> > framework @ 3867faa
+> > > >> >> >
+> > > >> >> > I'll stash and repeat it on another clean tree.
+> > > >> >>
+> > > >> >> I have the same commit error on a brand new tree.
+> > > >> >>
+> > > >> > I think you are talking about the test framework of MbedTLS's
+> > > original testsuite,
+> > > >> > am I right?
+> > > >> > MbedTLS was ported into U-Boot as a git subtree and that
+> framework is
+> > > a git
+> > > >> > submodule of original MbedTLS repo which was not included in the
+> > > porting
+> > > >> > of U-Boot since U-Boot has its own testsuite.
+> > > >>
+> > > >> Here is what I found.
+> > > >>
+> > > >> git clone https://github.com/u-boot/u-boot.git u-boot-master-test
+> > > >> cd /usr/src/u-boot-master-test/
+> > > >> patch -p1 <
+> ../builds-u-boot-marvell/sheevaplug/sheevaplug_bootstd.patch
+> > > >> git add .
+> > > >> git commit . -m "arm: kirkwood: Enable bootstd and remove jffs2 fo=
+r
+> > > >> Sheevaplug board" -e
+> > > >>
+> > > >> The git commit above gave out this error:
+> > > >>
+> > > >> error: 'lib/mbedtls/external/mbedtls/framework' does not have a
+> commit
+> > > >> checked out
+> > > >> fatal: updating files failed
+> > > >>
+> > > >> So I tried to commit only the specific files, and it works OK.
+> > > >>
+> > > >> git commit configs/sheevaplug_defconfig include/configs/sheevaplug=
+.h
+> > > >> -m "arm: kirkwood: Enable bootstd and remove jffs2 for Sheevaplug
+> > > >> board" -e
+> > > >> [master 47de8cff2d] arm: kirkwood: Enable bootstd and remove jffs2
+> for
+> > > >> Sheevaplug board
+> > > >>  2 files changed, 17 insertions(+), 19 deletions(-)
+> > > >>
+> > > >> I think it must be what Raymond said above. So perhaps during Tom'=
+s
+> PR
+> > > >> pull, the framework directory was created. But "git commit ." does
+> not
+> > > >> like the empty lib/mbedtls/external/mbedtls/framework directory.
+> > > >>
+> > > > Under the native MbedTLS git repo, by default it has a "framework"
+> > > pointing to
+> > > > its git submodule.
+> > > > Maybe we should mark it in the gitignore.
+> > >
+> > > I've tried .gitignore but could not make it work (my Gitfu is pretty
+> > > lousy). Can you suggest how that should be done?
+> > >
+> > > You can use the command without the '.' : git commit -m "<commit_msg>=
+",
+> > this
+> > should work.
+> >
+> > @Tom Rini <trini@konsulko.com> Shall we remove both
+> > "lib/mbedtls/external/mbedtls/.gitmodules" and
+> > "lib/mbedtls/external/mbedtls/framework"? I can submit a patch if you
+> agree.
+>
+> Can we do that and not make a problem for the next resync?
+>
+> Hmmm, no, this cannot be pulled back to the MbedTLS upstream so still a
+problem
+when resync.
+Another option is to include that git submodule into the U-Boot project,
+this needs
+to revert the commit of introducing the library and redo the git subtree
+after the
+submodule is updated, but it does not seem to be a good choice as we don't
+use
+that test framework in U-Boot at all.
+Right now I don't have a perfect solution, maybe we can accept using git
+commit
+without the '.'?
 
+Regards,
+Raymond
