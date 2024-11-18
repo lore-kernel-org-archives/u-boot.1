@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E3D6D49221
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 14:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F844D49221
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 14:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92EEF89187;
-	Mon, 18 Nov 2024 15:19:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EAB8789124;
+	Mon, 18 Nov 2024 15:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cJ0YxU4G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WTg5u+t8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B583389396; Mon, 18 Nov 2024 15:19:36 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 8CD0489456; Mon, 18 Nov 2024 15:19:38 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E2989124
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 15:19:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8DDD8931E
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 15:19:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-460ad0440ddso27323161cf.3
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 06:19:34 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-460c2418e37so26530291cf.0
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 06:19:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731939573; x=1732544373; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731939574; x=1732544374; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3aQu/O9urhIq3wwZNFbZFws3DKJ3LjHW+R53pei/Wz8=;
- b=cJ0YxU4GkDR0PhfpOG4/9I4uiTRO0HIfCbN0w/T3bznwSe5IwYLqrZGzkn7gcIWDi0
- O18Zr9VRd7F0dHfPko38rnv2peo0uj039Q0qZzOgz0MwyNyClSaZywkXWlHO4Ovto+pW
- RKye+SKEY785pHkRVncgMN2Lt+7I2v7hAslUQ=
+ bh=KhSBI4rZkKUeydhkLCuDVfsgZZaX2G4GhYbwOtNlm2M=;
+ b=WTg5u+t8BWY26nXBNgq32tWEoA/9xWqPk8caAbIidPxeOon2RLEkinkszBaL0x+hgN
+ UfWIT4LosOMG1p7TgRplkmPKCr1febVyMKvf7/HuIVnqZge6Vdl9J2l/at/muzB1m3fl
+ ZO6QAtJWfmhANJkCKiaPhVzwJxdaGzVT7JerE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731939573; x=1732544373;
+ d=1e100.net; s=20230601; t=1731939574; x=1732544374;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3aQu/O9urhIq3wwZNFbZFws3DKJ3LjHW+R53pei/Wz8=;
- b=UIXhe5gWzIVyhZxHIWYNB+DCc+Gkg3MFeJZpuYcs7xMVBPF2Hodzm6oGOqlUDCOYpb
- jajAM79c5At+dlaucwNt3MDEz/li0fXynWgepu08/qKa3EGdO9WEGyGuxpDnQabZV5Co
- Q7bYWE6/dwzJUhc+rx0SmIlo30Gr7DcWsBi0utaKUMQVqqefuaCfYpKCsN5rx2dAUN8B
- BaE3utQ9OSJnK7WN7npu25zpn7oc9pxFzYUawJD362L+kLhH6xpz59B5gPm5lXuMPzuy
- 7mCPF0LLmgJqRcKIriV8KBLKXN65L8qa02l66b22Dmmo/exnx28e0r5jB++MO1MvyXE1
- Rflw==
-X-Gm-Message-State: AOJu0YxmKS/XyrzNqItVbZp19ocIuebogUnEDB4/yL5ZVi2Zs8NR5C9c
- 1+uQiGUmw4dgRAde1F+JrhWDSecIy0BTO6f47VEsNzpRJdDlkCINDwtyBiKB5WQ=
-X-Google-Smtp-Source: AGHT+IGqiRMpo5sHQTtDonh2pzQ6u6d2el752fkFT3AkH/f2kthX7djBr8HVMq92eLstl8hab9lNZA==
-X-Received: by 2002:a05:622a:6113:b0:461:6f0a:3826 with SMTP id
- d75a77b69052e-46363ee1e15mr225905931cf.55.1731939573542; 
- Mon, 18 Nov 2024 06:19:33 -0800 (PST)
+ bh=KhSBI4rZkKUeydhkLCuDVfsgZZaX2G4GhYbwOtNlm2M=;
+ b=d+3J95IlEaDpBzsV3Bnm0pE/BeIfa5boJD6szIKMVILvQDtvAqd4E5bzf/8KvRyPtQ
+ jBYehxc5XW8jHyiBLM0FZRqZLXdFiRk+Ya2u+eeg6jlDiNNaDQQcHFaPnGi7LWxargVC
+ Fz5UiRyWp4OHLINblr5ueveGdhzj0KEzgBMLQKXMPNo20V+S8ky46+S6NzyqavUagSRj
+ MYOFGppH7ig1/aflOASxKnr29l4UyjmMWKC5nI8nwg0IVm7L7tdwSgUxrU5wTW9W92MW
+ CR0Bb0l9zeFt3FvrEnRl++fTR0nV6nDrvNNKyC/MHeLY9magoQHV1dY1MWDIP5PWk/TO
+ B6qg==
+X-Gm-Message-State: AOJu0Yxfeecf5v2Kg90O7YKw7anSkpjNEASYr/RQFJ9EESNKo/HveTCQ
+ T1Sg8E5rrNkdWv3ihiXe1NLla2z7IwR+JNs/h9oCwjMHNfyniSju3XTLHQ7Ag94=
+X-Google-Smtp-Source: AGHT+IGeIJWqJXshQv9i9uWB7VWqxmgSMmxziFHWszBzE99RzKuYArnTvDUTU3xia4KbwpesYMZ8pg==
+X-Received: by 2002:a05:622a:5b9b:b0:462:af30:47d with SMTP id
+ d75a77b69052e-46363b6b7b2mr140232101cf.0.1731939574571; 
+ Mon, 18 Nov 2024 06:19:34 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4635ab24e44sm59075981cf.59.2024.11.18.06.19.31
+ d75a77b69052e-4635ab24e44sm59075981cf.59.2024.11.18.06.19.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 06:19:33 -0800 (PST)
+ Mon, 18 Nov 2024 06:19:34 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>, 
- Raymond Mao <raymond.mao@linaro.org>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>, 
- Peter Robinson <pbrobinson@gmail.com>
-In-Reply-To: <20241031175025.74124-1-sjg@chromium.org>
-References: <20241031175025.74124-1-sjg@chromium.org>
-Subject: Re: [PATCH] dm: sysinfo: Shorten the SYSINFO_ID prefix
-Message-Id: <173193957135.3366111.7992721769488938600.b4-ty@konsulko.com>
-Date: Mon, 18 Nov 2024 08:19:31 -0600
+To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20241106135017.696551-1-andrew.goodbody@linaro.org>
+References: <20241106135017.696551-1-andrew.goodbody@linaro.org>
+Subject: Re: [PATCH] test: bootm: Ensure tests can be run twice
+Message-Id: <173193957369.3366111.13228192071794160441.b4-ty@konsulko.com>
+Date: Mon, 18 Nov 2024 08:19:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,14 +88,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Oct 2024 18:50:23 +0100, Simon Glass wrote:
+On Wed, 06 Nov 2024 13:50:17 +0000, Andrew Goodbody wrote:
 
-> We are about to add a large number of new entries. Update the prefix to
-> be a little shorter.
-> 
-> For SMBIOS items, use SYSID_SM_ (for System Management) which is enough
-> to distinguish it. For now at least, it seems that most items will be
-> for SMBIOS.
+> Some of the bootm tests rely on state that is assumed to be
+> correct but is changed by the tests. This means that running
+> 'ut bootm' twice will result in failures on the second run
+> as the state left by the first run is not what the tests
+> expect.
+> Fix this by ensuring the state is as expected by explicitly
+> setting that state.
 > 
 > [...]
 
