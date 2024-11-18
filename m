@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A7AD591AE
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13163D591AE
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2450B894A3;
-	Mon, 18 Nov 2024 20:30:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A3EE288E1C;
+	Mon, 18 Nov 2024 20:33:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E/bhgDau";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XJzc6ogV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4146988E5C; Mon, 18 Nov 2024 20:30:29 +0100 (CET)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AE45389119; Mon, 18 Nov 2024 20:33:15 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0F3F8923D
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:30:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9577588DB6
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:33:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-460a415633fso26531041cf.2
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:30:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731958224; x=1732563024; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=N0rA2fmowLJB+Mq4A+VFBpz5p2ttU1E+uuppx3U5oWo=;
- b=E/bhgDaunhI/hrbMIA1cxau8ndk1zxDRbrDRx2DCnO+5A32xhyVwIZEveT5wUBoo4E
- sDDRQqL4aLdSSCaIMejNQRIUN5IDKcjPbUG0NrYPZGWoz3/n19IEnIC/Ioqmn21vR9eN
- SfUt/AdUzxyuxuPPoCpufarrkm6Jg312k/ogQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731958224; x=1732563024;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N0rA2fmowLJB+Mq4A+VFBpz5p2ttU1E+uuppx3U5oWo=;
- b=lEOddNggQsxFYALd2WJ5wzNj8pJihu6VwJboZoXQhko/k8ckpfN6/75hbF85mnz0jz
- CO/sqDWQEGWiMKSyEw3OZJKAVzy+o5Exqpr3W2zWr/owpLGHB7Y3qBY99QAfdTPb5lI1
- HrTsbzjPr/dv1J5TAwRl/XWMMJyLzLwDiUIL/EomaEFI7UbbPc+1VmOWAOWAIh0snqNM
- AK7xxIXVLROIP0EvUEuH/GR0WlF7kuLxMFpwkyFyM9EPG4HT/LcqEX7/WUTe++rDlDIX
- H6sK1BMV0Z15c27+6qWcUshYHigZ7smR9ZrXWfkds6AY53UbGmKU1BXVamDp4nLceADs
- rN9g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWI7edvkHu64k4A2S0h3wuGkelBElJAV0ADvAX8nwiBCDk42W6zh4dSFqIIShEdFHPfD38y3VE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzWfttZ5LQFuxgFMkWfWQFxDlt1QvFkClStbyZrC7hQ4a7FY5kN
- E0NjhRHUAJi7Zz8hxEl5fscloTvru2fothSV1x12hVDlp5aFZzyimbVAs5PsoeI=
-X-Google-Smtp-Source: AGHT+IF1Y1+Rn2iTrwJywRWjGq9UCcf9AtByo+ZwTaKWsBKjtWxaDMFayYde3rirwjuPFi1nS6UFdA==
-X-Received: by 2002:a05:622a:1c19:b0:461:1734:37e8 with SMTP id
- d75a77b69052e-46363ec1001mr219136421cf.55.1731958224592; 
- Mon, 18 Nov 2024 11:30:24 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46392bbfa6fsm2013571cf.43.2024.11.18.11.30.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 11:30:24 -0800 (PST)
-Date: Mon, 18 Nov 2024 13:30:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: [NEXT] Pull request efi-next-2024-11-1
-Message-ID: <20241118193020.GU3600562@bill-the-cat>
-References: <a3f0803a-4717-437d-8e17-bdd79b126c74@gmx.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AIJWsim068117;
+ Mon, 18 Nov 2024 13:32:54 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1731958374;
+ bh=/eP09uBz6qadgoPC9+PAdTnTiP3a2OZENStbDFX96dM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=XJzc6ogVBvZ3lekFOxY+IgfXs5jAs9oA6c0K5SnyVN62GxMtUom2UETdyXXVVHilj
+ UbARztIz42PTRIOYplddi2bYA80VeoW7/cw2FidcJvojBoI+u+cIc1gMGI4j6dani9
+ gEq6g9Y5BOVf9894JOYIZSjSIILk5jGz2j0xJn9k=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AIJWsJH115253
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 18 Nov 2024 13:32:54 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
+ Nov 2024 13:32:53 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 18 Nov 2024 13:32:53 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AIJWrPn048304;
+ Mon, 18 Nov 2024 13:32:53 -0600
+Date: Mon, 18 Nov 2024 13:32:53 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Garrett Giordano <ggiordano@phytec.com>
+CC: <trini@konsulko.com>, <w.egorov@phytec.de>, <t.remmet@phytec.de>,
+ <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, <marex@denx.de>,
+ <festevam@denx.de>, <jonas@kwiboo.se>, <Oliver.Gaskell@analog.com>,
+ <aford173@gmail.com>, <prasad.kummari@amd.com>,
+ <neil.armstrong@linaro.org>, <mibodhi@gmail.com>, <n-francis@ti.com>,
+ <d-gole@ti.com>, <afd@ti.com>, <sjg@chromium.org>, <nm@ti.com>,
+ <d.schultz@phytec.de>, <nmorrisson@phytec.com>,
+ <francesco.dolcini@toradex.com>, <vishalm@ti.com>, <vigneshr@ti.com>,
+ <y.moog@phytec.de>, <othacehe@gnu.org>, <m-chawdhry@ti.com>,
+ <j-humphreys@ti.com>, <j-choudhary@ti.com>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>
+Subject: Re: [PATCH 1/2] board: phytec: am62a7: Add PHYTEC phyCORE-AM62A7 SoM
+Message-ID: <20241118193253.sx5yvpcyzjdidhou@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20241115195055.3023365-1-ggiordano@phytec.com>
+ <20241115195055.3023365-2-ggiordano@phytec.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZlUQ67ZMEDoySEHm"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <a3f0803a-4717-437d-8e17-bdd79b126c74@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20241115195055.3023365-2-ggiordano@phytec.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,62 +89,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On November 15, 2024 thus sayeth Garrett Giordano:
+> Add support for PHYTEC phyCORE-AM62A7 SoM.
+> 
+> Supported features:
+>   - 2GB LPDDR4 RAM
+>   - eMMC
+>   - External SD
+>   - Ethernet
+>   - debug UART
+> 
+> Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
 
---ZlUQ67ZMEDoySEHm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Looks Good!
 
-On Mon, Nov 18, 2024 at 05:40:22PM +0100, Heinrich Schuchardt wrote:
+Reviewed-by: Bryan Brattlof <bb@ti.com>
 
-> Dear Tom,
->=20
-> Adriano has split the patches needed to implement the EFI_HTTP_PROTOCOL
-> into two series. The first series received no comments requesting
-> changes. Let's get it merged into the next branch so that Adriano can
-> base on this when resubmitting his second series.
->=20
-> The following changes since commit c71d451033db9ed1ea3ac46fa81a09ec9c5891=
-8c:
->=20
->   Merge patch series "teach 'env default' to optionally keep runtime
-> variables" (2024-11-15 16:36:24 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-next-2024-11-18
->=20
-> for you to fetch changes up to ec054b23c6ac56a0125839ae9cf800c20f886e92:
->=20
->   net: net_utils: Move ip_to_string to lib/net_utils.c (2024-11-16
-> 21:58:17 +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23430
->=20
+...
 
-Applied to u-boot/next, thanks!
+> diff --git a/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi 
+> b/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi
+> new file mode 100644
+> index 00000000000..00330b43fed
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am62a-phycore-som-ddr4-2gb.dtsi
+> @@ -0,0 +1,2798 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+> +/*
+> + * This file was generated with the
+> + * AM62Ax SysConfig DDR Subsystem Register Configuration Tool v0.09.08
+> + * Fri Mar 24 2024 11:56:13 GMT-0700 (Pacific Daylight Time)
+> + * DDR Type: LPDDR4
+> + * F0 = 50MHz    F1 = NA     F2 = 1866MHz
+> + * Density (per channel): 8Gb
+> + * Number of Ranks: 1
+> + */
 
---=20
-Tom
+You may want to regenerate this config if you guys see any stability 
+issues. We've had some improvements in our chip select timings which are 
+included in the v0.10.2 EMIF tool's output.
 
---ZlUQ67ZMEDoySEHm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc7lcwACgkQFHw5/5Y0
-tyyXUAwAmo1s9jQXj0mjmWscnzTdyR7u26pCHstHAY3ySBVFwAiaxMhlJpuRPo93
-JtcYq4JN0kC9KaQ4JtfsTgY0OkxHXXEECyL6amuCQ7ATtCOhC+k4dh4OGoOz3JLa
-YdqmSjdrvpX0l3Jx/9Az1Yh6VbMFI1tJIGCJHsclo6Md9wEykTyolLVzUeUKpmJl
-+P8MIa74RMbzG1Bqt3arPFMTiDr4luHXJrKwEVPZOOvAxyHzJ5SRbNw3yVW2xnC6
-TjOSryJskRnC9/GWt4hjTrCfWg2N7j6uOFydtn60c/GpdeNbONhb4uRC1axDsISa
-ZUfdmgn2+PMoKB+FelWByDInqeDnVOITpziv5mWGuXTbwjsFZqQlsST+Ffo2iSKo
-uuKvkh2yhJ70IZRnwa7i/OPBGU966gQHvmUqL5nOkyw6A84RWEX32wVttn14KQ3I
-KUUVG/gIcbHiiYLc5o5N4ialX6O8wnQq367YXsmzWc3inJXMMvcE4FqZgSQ8A68A
-OFjHaAoO
-=2dHU
------END PGP SIGNATURE-----
-
---ZlUQ67ZMEDoySEHm--
+~Bryan
