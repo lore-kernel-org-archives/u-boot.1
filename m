@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F7BD5E396
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 06:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDE5D5E393
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 06:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B943F89454;
-	Mon, 18 Nov 2024 07:27:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 191EC8942F;
+	Mon, 18 Nov 2024 07:27:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731911256;
-	bh=mjH4W4DqyyLiirlJXV5viEiDaon73KF75Uxgfzj8bQs=;
+	s=phobos-20191101; t=1731911257;
+	bh=cyK+ZlDmL1bM5x4ww+VOQrzCA+PP8JQXKazm5dMdGSU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nuEShnD1LWf8PXUssgV5AxLW9S4Xu3BkyRgz8cdUm3/SH9P6Yd/lmAqIdAtDSPwK2
-	 C8bVK6ujs6RQhx0p0Q3fqJKZV232lQvObgJbDJ6neha4wux7WKlPnOIvrWq7fjt+2P
-	 hmASdvRX6hqL3vvq8fYEONkBYOjzrLbq0fuk1sQyBNouGgokoe+zlns1Nqt1jP5XEL
-	 VMIVe6ca3MVgcvk3rbAULoN0zcSq3Or4TYlrShXmxYG5Pkadko803nyFrW+V3oSgAE
-	 7oEMtzm2dakFOynub0S1+2VnhATjljvWQzn/1tvQedC/N2DO6onyCPAupy7BfX7rAT
-	 /LmHSBW7k3foA==
+	b=DEioM3JZekpw3jbeCUvvKqbLoYMTPvaiGYjYZhDJ6C8BAHPXnFWH9C1hfugvXffmM
+	 VEdj/tTx8/I2RyqqA0dhXOot0DNkUyg6K0kEha9N1E9b96pS8IVmFt97edKF+VqjXe
+	 zqbL9Wq5JrSrC2ogkoI/PW5cPgK7vs5ELPAv40p4AJZQSPZnMVdc3UDBlJxVQ1/6ki
+	 X4nycgJEY4XvT5p8wlqvg7evRWkm5YyEIl2v7pNR9/DpG8ht/66wLHWiPk7onT6L4U
+	 sjiEh8htb5sYgc9yBKJ7YoBwbMugVuNCEF9pJH6H3uSbkibI4XIDDlhkgiblpXbgLB
+	 Cxf3flTlqGUKA==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8377089448;
- Mon, 18 Nov 2024 07:27:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5485689443;
+ Mon, 18 Nov 2024 07:27:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1731911254;
- bh=mjH4W4DqyyLiirlJXV5viEiDaon73KF75Uxgfzj8bQs=;
+ bh=cyK+ZlDmL1bM5x4ww+VOQrzCA+PP8JQXKazm5dMdGSU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=vfGnbhCrCw9kJVd/pAl9IP3fdCcZVG1E7moz5YIt39xPMngmkU32RMFjYdWzGcTBD
- oNcrZAyusVmBtkslRqEw3OaIoDCQOvS+gy/pDi5yhk81I7JlX7ikTfRsQfxsRxgXDr
- IQxAGK5eWdmD15f9CCEEQ7aURRVJ35jUTqsIxigeZm+mHfZmD44U+zYJX2ynd/XloB
- V+Ap1baJa2UjtekZ7nGmyRGAJK3vagwalmxInDBO+O/pe+689YEpNyQ6encyxIRkqB
- 1vLvw7r91uYH5vyk3LdNcFjbdfIdZTJ8yRAaMZfdiwV26pPqJDoYTmidwMrQea196M
- yHAqkgLleFSLw==
+ b=loCTqWsmX7yzYX9lRjSkAOq0i6qxpaKqyrT+CbRIpGCTRKXyjm+5p/YvKXjvcLO3T
+ S1LMtoOu9YaWobexkrP0YbpXvIN9YGbjvHAdghEQWcd1NxNfl//Ww50Q8Q6o1proUb
+ IGpPjoY5gVUz+J/kmobp7wcozdDNnsua46AGJgbUvPyW1LBXyQXZnZfmdHvcTM6mk5
+ LTWKiSB3RzlKhhrokmx6FU+xif0rbQUZUNDvQHxV9PDa1Ch4se6TMv/OEBbQhC1zSK
+ JGxxQrpQiUGE19MHyHgyhp1x3BoCB02rsFkqoWK1dpgJIKZ0wFZmHy/hqH1leVKdfQ
+ C48VkIEX9PiPQ==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 11/20] siemens: configs/capricorn_cxg3_defconfig: updates
-Date: Mon, 18 Nov 2024 07:27:05 +0100
-Message-Id: <20241118062715.32989-12-hs@denx.de>
+Subject: [PATCH v2 12/20] siemens: capricorn: sync spl code with 8qxp-mek
+Date: Mon, 18 Nov 2024 07:27:06 +0100
+Message-Id: <20241118062715.32989-13-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241118062715.32989-1-hs@denx.de>
 References: <20241118062715.32989-1-hs@denx.de>
@@ -71,83 +70,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-make savedefconfig and add SCU_WDT and fix environment
-offsets, as since silicon c0 the boot container takes place
-at offset 0 and so the u-boot-env must be moved outside of
-the boot container area.
+sync spl code with 8qxp-mek board.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-
 ---
 
-Changes in v2:
-- add comments from Fabio
-  fix typo: silicium -> silicon
-- add Reviewed-by from Alexander
-- use renamed Kconfig symbol CONFIG_WDT_SCU_PMIC
+(no changes since v1)
 
- configs/capricorn_cxg3_defconfig | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
+ board/siemens/capricorn/spl.c | 38 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
 
-diff --git a/configs/capricorn_cxg3_defconfig b/configs/capricorn_cxg3_defconfig
-index ce820e2c54f..628857c9fe5 100644
---- a/configs/capricorn_cxg3_defconfig
-+++ b/configs/capricorn_cxg3_defconfig
-@@ -10,7 +10,7 @@ CONFIG_NR_DRAM_BANKS=3
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
- CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x0
-+CONFIG_ENV_OFFSET=0x200000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="imx8-capricorn-cxg3"
- CONFIG_SPL_TEXT_BASE=0x100000
-@@ -25,7 +25,7 @@ CONFIG_SPL_BSS_MAX_SIZE=0x1000
- CONFIG_SYS_BOOTM_LEN=0x800000
- CONFIG_SYS_LOAD_ADDR=0x80280000
- CONFIG_SPL=y
--CONFIG_ENV_OFFSET_REDUND=0x2000
-+CONFIG_ENV_OFFSET_REDUND=0x202000
- CONFIG_IDENT_STRING=" ##v01.06"
- CONFIG_REMAKE_ELF=y
- # CONFIG_EFI_LOADER is not set
-@@ -55,9 +55,10 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
--CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
-+CONFIG_SPL_SYS_MALLOC_SIZE=0x4000
- CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
--CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
- CONFIG_SPL_POWER_DOMAIN=y
- CONFIG_SPL_WATCHDOG=y
- CONFIG_HUSH_PARSER=y
-@@ -112,10 +113,13 @@ CONFIG_PHYLIB=y
- CONFIG_MV88E61XX_SWITCH=y
- CONFIG_MV88E61XX_CPU_PORT=5
- CONFIG_MV88E61XX_PHY_PORTS=0x7
-+CONFIG_DM_ETH_PHY=y
- CONFIG_FEC_MXC_SHARE_MDIO=y
- CONFIG_FEC_MXC_MDIO_BASE=0x5B050000
- CONFIG_FEC_MXC=y
- CONFIG_MII=y
-+CONFIG_PHY=y
-+CONFIG_NOP_PHY=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8=y
-@@ -129,5 +133,7 @@ CONFIG_DM_SERIAL=y
- CONFIG_FSL_LPUART=y
- CONFIG_DM_THERMAL=y
- CONFIG_IMX_SCU_THERMAL=y
--# CONFIG_SPL_WDT is not set
-+# CONFIG_WATCHDOG is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_SCU_PMIC=y
- CONFIG_SPL_TINY_MEMSET=y
+diff --git a/board/siemens/capricorn/spl.c b/board/siemens/capricorn/spl.c
+index 696b5ebd340..7ee2895b6d4 100644
+--- a/board/siemens/capricorn/spl.c
++++ b/board/siemens/capricorn/spl.c
+@@ -15,12 +15,30 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/device-internal.h>
+ 
++#include <firmware/imx/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <asm/arch/iomux.h>
++#include <asm/gpio.h>
++#include <asm/arch/sys_proto.h>
++
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#define GPIO_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | \
++			(SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) | \
++			(SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | \
++			(SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define USDHC2_SD_PWR IMX_GPIO_NR(4, 19)
++static iomux_cfg_t usdhc2_sd_pwr[] = {
++	SC_P_USDHC1_RESET_B | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++};
++
+ void spl_board_init(void)
+ {
+ 	struct udevice *dev;
+ 
++	uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(imx8_scu), &dev);
++
+ 	uclass_find_first_device(UCLASS_MISC, &dev);
+ 
+ 	for (; dev; uclass_find_next_device(&dev)) {
+@@ -34,8 +52,28 @@ void spl_board_init(void)
+ 
+ 	timer_init();
+ 
++	imx8_iomux_setup_multiple_pads(usdhc2_sd_pwr, ARRAY_SIZE(usdhc2_sd_pwr));
++	gpio_direction_output(USDHC2_SD_PWR, 0);
++
+ 	preloader_console_init();
++
++	puts("Normal Boot\n");
++}
++
++void spl_board_prepare_for_boot(void)
++{
++	imx8_power_off_pd_devices(NULL, 0);
++}
++
++#ifdef CONFIG_SPL_LOAD_FIT
++int board_fit_config_name_match(const char *name)
++{
++	/* Just empty function now - can't decide what to choose */
++	debug("%s: %s\n", __func__, name);
++
++	return 0;
+ }
++#endif
+ 
+ void board_init_f(ulong dummy)
+ {
 -- 
 2.20.1
 
