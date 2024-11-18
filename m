@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E856DD591AD
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:30:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C05D591AE
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 19:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10E6F88E1C;
-	Mon, 18 Nov 2024 20:30:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6575489246;
+	Mon, 18 Nov 2024 20:30:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sfXq71mm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gV5Ha4PG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB1F088E5C; Mon, 18 Nov 2024 20:30:15 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 6997988E5C; Mon, 18 Nov 2024 20:30:21 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8810688DB6
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:30:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5202D88F48
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:30:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b152a923a3so243435685a.3
- for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:30:13 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b147a2ff04so186863185a.3
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 11:30:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1731958212; x=1732563012; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1731958218; x=1732563018; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gdYndpGoo9aAovtfTFPm82QP9eumH0E1KcABl40N5RE=;
- b=sfXq71mmtXJ+B4QCgwZFx6pHmjtaazr73+D0I7S5P51L1WweHVR1Mkt6d82FP0BgB6
- u3vtarsg+VMUzW7hd2fd6nRE2PNYeC4Rf9miFdlqcL3ns9TRiQFPZMC0cogT3aoJc4Sc
- rLAscRRxW355zR2yIxYvVuq3/jyJSndewxmY8=
+ bh=9B74PxUw3/F8okXqs1Ta1WXUBS5RKCeYX3awMxjPgek=;
+ b=gV5Ha4PGVuVqQLL5z6Wjmx8QFtd4jN3963yPgaTPHtWdFa/QE8oHOtxy5pghpZ5eQZ
+ wNC/5rsKLvilhMtTjhkieh9cc8feVFUs6O9kYdxsoDp2YYhF7MW/ekSM9pFC4l7t/Jbd
+ I2iHWa0kThNuDKwn4/gPxH/YGTpSbTQCV8t3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731958212; x=1732563012;
+ d=1e100.net; s=20230601; t=1731958218; x=1732563018;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gdYndpGoo9aAovtfTFPm82QP9eumH0E1KcABl40N5RE=;
- b=FcmyLgL1uMr+DQkW8J957YPmtD865g3Mb0gapM0MM51331hZAm5I2QxfJZAcXi1nvU
- hU1ZJyX5DIPF0KVThuQnEJGJYnIFcSS+ROaiHGrGvu5VOyc21eAHQ0LUI5ZnkOMgRZ3+
- vq+5UyYIDGObF/pRwW4pniWQDJ19/8PwVPDjL2uC0EMs3YYyOU8Mlv74jG+JGNJewOMJ
- BPvmDL1kfMdrIQfwqPpHjERI91cPZvTWEhVbYkHq6ySRQ/wutwdVm4Q8oDGTB7fey5YG
- vvJb6Lecb2AZmpl9k2ViYyPC2Rz82YwyxwlgpAeEjr7VScdWfQFwGG5s0hgZc20nPHgK
- 82HA==
+ bh=9B74PxUw3/F8okXqs1Ta1WXUBS5RKCeYX3awMxjPgek=;
+ b=PyJ49DKlUk6RMgd76eriQnfZVbrfR+7gloUOQ4YjuvqsR5EkVc7z9ljia9cIAhlPvP
+ dyacTDx32QDVQs6LP07JEbBXgHblYFgSYECGtfDDWhXBTDnAMr0TzqjRypuBy3hULYlZ
+ J1C3+7MmkqX2uyhU5QG1ZeHssekkkhSo90UZ5RSxZO9s0aX3uJAYqk+qpp9zqAFVF3qV
+ mqPiWc2gqBxtzUCQO/mBcPVmsa4FFGyWdmlnthUvfphNQiWe5ik9SEMXONV9eVLk5T6F
+ rjtudjS51yOYVZCDnVX8HHAzOBFP8BA8mDeqEu5sH5y/3AI+Wwa+fVobihriozjBbKpW
+ BcZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7mhbh52v+JmvbkCZhzhGES3m6hqO7CpaZUE/NxLvBj4QYQjFMqye1GnbrOveNNekvE8lr0Os=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1WWX+S2I6Nlw/7ntk+Qj3kzcDbxyHAkhq24SaH7cfP6Yvgz9q
- E8zCHtPgqvHWvm4cWRI+9WIiONIszjvKMivH2lOKc0KI9+7hI/nU7ebnZ9sT6CY=
-X-Google-Smtp-Source: AGHT+IHIaLY8GLmw3Jg8sbI9Uenno3TU2vFKjp59T10+mQnnmWR7AB3Av70J/0FoWYGBIObt9anBjA==
-X-Received: by 2002:a05:620a:2684:b0:7b1:4a0b:88a with SMTP id
- af79cd13be357-7b3622a564dmr1586166685a.4.1731958212271; 
- Mon, 18 Nov 2024 11:30:12 -0800 (PST)
+ AJvYcCUihuK7vMN6H358v6wlaqHyvhFhEMYrP5FmQ8Oo1fFJ+6NJRyXUBn2GF6ne1oJ4NgNQeDTf24c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7jGl7/Q9/FezhmxqHxu3a1fslnR4FegMlFUOe9LKAwcPdLUwa
+ pCuWVn+aFaQ+WrkhIOaYtEpCcahRT97ppWOlOoVMlgweN4IO/RJPqgyDAz54s8E=
+X-Google-Smtp-Source: AGHT+IHsYtnA0McJpkp9kk15ivyUO5rIRrG/0DylfRWzbPkbn1Yz8Pvxu1VHlQIoDWKZonkPganaBA==
+X-Received: by 2002:a05:620a:4111:b0:7ac:d663:f664 with SMTP id
+ af79cd13be357-7b3622bada2mr1848153085a.1.1731958218178; 
+ Mon, 18 Nov 2024 11:30:18 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b37a896398sm18455785a.83.2024.11.18.11.30.10
+ af79cd13be357-7b37a897f2csm18464785a.93.2024.11.18.11.30.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Nov 2024 11:30:11 -0800 (PST)
-Date: Mon, 18 Nov 2024 13:30:08 -0600
+ Mon, 18 Nov 2024 11:30:17 -0800 (PST)
+Date: Mon, 18 Nov 2024 13:30:14 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Nam Cao <namcao@linutronix.de>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -73,16 +73,16 @@ Cc: Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Javier Fernandez Pastrana <javier.pastrana@linutronix.de>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] boot: extlinux: Fix unaligned buffer for reading
- data from file system
-Message-ID: <20241118193008.GS3600562@bill-the-cat>
+Subject: Re: [PATCH v2 2/2] fs: Use ARCH_DMA_MINALIGN as default alignment
+ for fs_read_alloc()
+Message-ID: <20241118193014.GT3600562@bill-the-cat>
 References: <cover.1730988601.git.namcao@linutronix.de>
- <1eb402380414c2b8f1b25d0c63d894efefce4ab9.1730988601.git.namcao@linutronix.de>
+ <e05bde602304f32dd813a8383a2249fabc464940.1730988601.git.namcao@linutronix.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CtKbqdqO6rPzbPIi"
+ protocol="application/pgp-signature"; boundary="mM2XnLIkz4oeCPKW"
 Content-Disposition: inline
-In-Reply-To: <1eb402380414c2b8f1b25d0c63d894efefce4ab9.1730988601.git.namcao@linutronix.de>
+In-Reply-To: <e05bde602304f32dd813a8383a2249fabc464940.1730988601.git.namcao@linutronix.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,33 +101,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---CtKbqdqO6rPzbPIi
-Content-Type: text/plain; charset=utf-8
+--mM2XnLIkz4oeCPKW
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 07, 2024 at 04:01:05PM +0100, Nam Cao wrote:
+On Thu, Nov 07, 2024 at 04:01:06PM +0100, Nam Cao wrote:
 
-> extlinux_read_bootflow() allocates a buffer to read from file system
-> without any alignment.
+> The comment above fs_read_alloc() explains:
 >=20
-> But for some block devices which transfer data via DMA, ARCH_DMA_MINALIGN
-> alignment is required. For example, due to misaligned buffer, the below
-> boot failure is observed.
+>     @align: Alignment to use for memory allocation (0 for default)
 >=20
-> =3D> boot
-> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
-> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
-> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
-> CACHE: Misaligned operation at range [9efa25f8, 9efa27f8]
-> ** Booting bootflow 'mmc@2194000.bootdev.part_1' with extlinux
-> Ignoring unknown command: =EF=BF=BDD=EF=BF=BD=EF=BF=BD=EF=BF=BDD=EF=BF=BD=
-=EF=BF=BD
-> Boot failed (err=3D-14)
+> However, in the actual implementation, there is no alignment when @align =
+is
+> zero.
 >=20
-> Change the buffer alignment to ARCH_DMA_MINALIGN.
+> This current default is probably fine for most cases. But for some block
+> devices which transfer data via DMA, ARCH_DMA_MINALIGN is needed.
 >=20
-> Fixes: 31aefaf89a5b ("bootstd: Add an implementation of distro boot")
+> Change the default alignment to ARCH_DMA_MINALIGN.
+>=20
+> Fixes: de7b5a8a1ac0 ("fs: Create functions to load and allocate a file")
 > Signed-off-by: Nam Cao <namcao@linutronix.de>
 > Tested-by: Javier Fernandez Pastrana <javier.pastrana@linutronix.de>
 
@@ -136,22 +130,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---CtKbqdqO6rPzbPIi
+--mM2XnLIkz4oeCPKW
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc7lb0ACgkQFHw5/5Y0
-tyxnnwv9GhzhL0efrIpp8jSko/EOMsDIunvnb+nWlktFKIcr9vnY/UDkdzYXKueA
-ybtMAhQPIxuxaOX3o9Hd/AysIjEUY0t7XD4SBpqsK5M/dZ4j8wq9dCeTHqCvrYqS
-KGviimnNHuAGogkPgUHFecrDjUsQB7UT27Aies1iZSnoh5I228b9DfwIc3WU9XGb
-Lv+UA20esDuYk0waYfBxZG34B1YM1oYW/+KINvB4AumdTo93C2P5SvdRj4gJmwbP
-KkQ96/slRAet3zxeUsIgwtM1Ug0U+RlILCpGuJzYsi7sYGNiF+is6uMQvXPZaLiU
-X1XjdqoRfwaSSoMmkfYsGMOMGJvSG3AqHwi/pI9n96ZKJW1fWYy+C7ef+CHZz+T4
-3f48NcFTNGr8Gr+WkDH3vKWigKgrhhrhQbru+R9NKAm2BhD1pl1ly9Ku8wMebigk
-LP8R0iyJPLjJMfrD/tTIAVroOIAVCD44SYp+spG7FbtgwJ4w6ejkDAD3EZ0AwMQO
-sXJKIAdG
-=T4hs
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc7lcYACgkQFHw5/5Y0
+tyx2xAv/Wx6cZ2a7UCg7hOGxIQxKmcMpDD5pirDtLS8Mq9rDTdpFL86Zpa3wbNUp
+BAoZpWJsUh9+UuZRe6oVupdKoVaTsXqrW0z0OCr+YMZWuYfouaJu2iK9O13fJ0iB
+wLkoOEA1AvHGsyIXbAcSk9hcJpXKok6+nWY9QdlSH0pbFO9DdGxztBvzbWB/OM3C
+afeVyHWG2A1dO9TIx6RPiQqJzdsJPfEuMXar2iwIa8fU1SvrepwzjmLUnfKqQY+Q
+fzZgrpmvSZRaICsUIhBxIcljDfPGPcLtFdQqCSjdEuUC/jrrhwM2qL2gUJdJpKiB
+nejlAKCyV5Cie9BeL3874lSjrHc+ZNXP8x88fmE1c2fm24JXR4v0RY5OOjtrvWdD
+QnRFxZP53DJLUJOo7amC2Ec6kTKeGjn0GH3JC9VuMoRqDyUOaaZ1qtmHVe+JRVnq
+4Xb+RNbYg6AzZS9p3HnLDs62BNRg4lUKhW/Is5hvH05PuMAZe5SXJNg7tkqJzHFL
+BxFrgNp7
+=v6VC
 -----END PGP SIGNATURE-----
 
---CtKbqdqO6rPzbPIi--
+--mM2XnLIkz4oeCPKW--
