@@ -4,154 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F917D60D03
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:23:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FADED60D00
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D53D1894CB;
-	Tue, 19 Nov 2024 01:22:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=phytec.com
+	by phobos.denx.de (Postfix) with ESMTP id E49C4894F2;
+	Tue, 19 Nov 2024 01:22:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytec.com header.i=@phytec.com header.b="WG4Dv9vy";
+	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="fX6cGyqB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BAA788DDA; Tue, 19 Nov 2024 00:16:55 +0100 (CET)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20706.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:240a::706])
+ id A5113894A2; Mon, 18 Nov 2024 21:50:56 +0100 (CET)
+Received: from mr6.vodafonemail.de (mr6.vodafonemail.de [145.253.228.166])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B71A89386
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 00:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D2D688E63
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 21:50:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=vodafonemail.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=phytec.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ggiordano@phytec.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Trprq5HmXeyHVK3gbFHbCYeCHJ+2VUR1K9MvDhv58QDlpMrKFJ9IQ2RdMwdVT5zXaYijlIX8hBE3A9bqH6akyFBnmg887BhfI2Gf5TTytJn/PwYmhSkgu3AIG12s4N66hl1UNO6MNEE2dxSGuZ70dQIr+uZ4gMwxz+DOr3PJLzS59so7GOXVVskGSiHKhzqI6q20JU0e4JGIFLYWzZrWBqQTFhskOlK/nsPndoFJALD4TC19ZBC98StwmWMO4lQvYXJuiKlwF7b2zOwz1nk3xj/Ky83G9Z2OObb11hO1Aak8xBDRUT1b//EamE97znNIGyYtV6oZyOGnMxBYW8Obxg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GF5ETCx+giLzyiZweoxLJkBOWcYQMxRyxXWRJxtxB8k=;
- b=PdHA6vJbE/7V9RUFWimp2NuNeAoqS3gGwo2lEBRqL4dvJUwDD455OTheIQ+Xt3D63zdW2TPPLRLcm/h6pxOUI9H43Ev0Sbw9+izaRxD2GuZOaNI2JGIha03qg2fGoB84y3f1wFxcKQLhK8YG/zmhuPpsgoTWX4GwHdgFhC7P//jLZwKUtQWIYNYGAaZWmBCE4+bAQ7b9yEEF3ZeIztVhNbwJiqFMHtOzuqJncomRGEe6yS3kvR525Zn8c51gvAGPGv/prqGmTgr53jp/00pqaFr8XnAZZkWxT3j4+0cAad3ncGhAaohLO3FYnDRx7FS53W7eHlhDozxuGQ0tXMDt8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=phytec.com; dmarc=pass action=none header.from=phytec.com;
- dkim=pass header.d=phytec.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GF5ETCx+giLzyiZweoxLJkBOWcYQMxRyxXWRJxtxB8k=;
- b=WG4Dv9vyV5aFHDesOAWrErdFUry9uncIaYzV23nSBQxqGIF4/SxA0+u0+A/RC5vP4Lso82bsB0flgYqeq2sXQpS45cpUl76VZoO1gVbW7kFPUEmQaVkfSfsf4RV6qVOBcWQ9rc16EAg2uvo8wiwB67G+TuU6HGX2RrRNbPIGpws=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.com;
-Received: from SJ2PR22MB4354.namprd22.prod.outlook.com (2603:10b6:a03:537::8)
- by LV8PR22MB5275.namprd22.prod.outlook.com (2603:10b6:408:1c4::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.21; Mon, 18 Nov
- 2024 23:16:47 +0000
-Received: from SJ2PR22MB4354.namprd22.prod.outlook.com
- ([fe80::789c:e41e:1367:383d]) by SJ2PR22MB4354.namprd22.prod.outlook.com
- ([fe80::789c:e41e:1367:383d%5]) with mapi id 15.20.8158.019; Mon, 18 Nov 2024
- 23:16:47 +0000
-From: Garrett Giordano <ggiordano@phytec.com>
-To: trini@konsulko.com, w.egorov@phytec.de, t.remmet@phytec.de,
- sumit.garg@linaro.org, kever.yang@rock-chips.com, marex@denx.de,
- festevam@denx.de, jonas@kwiboo.se, Oliver.Gaskell@analog.com,
- aford173@gmail.com, prasad.kummari@amd.com, neil.armstrong@linaro.org,
- mibodhi@gmail.com, n-francis@ti.com, d-gole@ti.com, afd@ti.com,
- sjg@chromium.org, bb@ti.com, nm@ti.com, d.schultz@phytec.de,
- nmorrisson@phytec.com, francesco.dolcini@toradex.com, vishalm@ti.com,
- vigneshr@ti.com, y.moog@phytec.de, othacehe@gnu.org, m-chawdhry@ti.com,
- j-humphreys@ti.com, j-choudhary@ti.com
-Cc: u-boot@lists.denx.de,
-	upstream@lists.phytec.de
-Subject: [PATCH v2 2/2] doc: board: phytec: Add phyCORE-AM62ax
-Date: Mon, 18 Nov 2024 15:16:06 -0800
-Message-Id: <20241118231606.3161665-3-ggiordano@phytec.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241118231606.3161665-1-ggiordano@phytec.com>
-References: <20241118231606.3161665-1-ggiordano@phytec.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BN0PR04CA0101.namprd04.prod.outlook.com
- (2603:10b6:408:ec::16) To SJ2PR22MB4354.namprd22.prod.outlook.com
- (2603:10b6:a03:537::8)
+ spf=pass smtp.mailfrom=yuriz@vodafonemail.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
+ s=vfde-mb-mr2-23sep; t=1731963053;
+ bh=PhRPIuaCpI+wzcbL3L5LUzc+3nTBt36bdpljmn6yChw=;
+ h=Date:From:To:Subject:Message-ID:Content-Type:From;
+ b=fX6cGyqBpxA48JtE+nwU2c5hUp1KcEKg3QHiycfybwOXlPhB8qBscBhqLUrX231N+
+ V0eoex0cnhLPVw511T4W9Lsjf+9NEcvp4Pz9TsqYj+4d44CkT2A4ulXvk3nFoFqvw5
+ OLT4r0khBIO0mVaeknVrlWZ2vWU33LBMPwJ2AR3s=
+Received: from smtp.vodafone.de (unknown [10.0.0.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mr6.vodafonemail.de (Postfix) with ESMTPS id 4Xsfsn5zB3z1xyB
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:50:53 +0000 (UTC)
+Received: from tachyon.qrv-systems.net
+ (ip-095-222-025-162.um34.pools.vodafone-ip.de [95.222.25.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.vodafone.de (Postfix) with ESMTPSA id 4Xsfsj404lz8snW
+ for <u-boot@lists.denx.de>; Mon, 18 Nov 2024 20:50:46 +0000 (UTC)
+Received: by tachyon.qrv-systems.net (Postfix, from userid 516)
+ id EC8ED2E01AA; Mon, 18 Nov 2024 21:50:45 +0100 (CET)
+Date: Mon, 18 Nov 2024 21:50:45 +0100
+From: Yuri Zaporozhets <yuriz@vodafonemail.de>
+To: u-boot@lists.denx.de
+Subject: BUG: U-Boot crashes on SiFive Unmatched when CONFIG_DM_DEBUG=y
+Message-ID: <Zzuopa6ZqUnQQOjf@vodafonemail.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR22MB4354:EE_|LV8PR22MB5275:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1358c7e1-4b12-48bb-08ba-08dd082712c3
-X-LD-Processed: 67bcab1a-5db0-4ee8-86f4-1533d0b4b5c7,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|1800799024|366016|376014|7416014|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4UuBv80LuRLYorwuHTq7SyuAJJZnN4vOZG8vbOT0jmlRVgRYmBeOWmaV5gfM?=
- =?us-ascii?Q?AZ5NgyvlbpltWVxKjmSoGEFhfMilgu/bYFcRDcm/VBaYCJYYDgM4rBKk2VxF?=
- =?us-ascii?Q?5Bhm/HxaA0l0j+cS6SslTabUm4vfNMsBVwv6nZPZypN7AdE3ewmGMOhDUjjM?=
- =?us-ascii?Q?Npf4NiEcKueHLe98RK8OXeDPWAlKjwtfJGrB5SIfVijNZNDByn59Foi7Iiod?=
- =?us-ascii?Q?BcKkTZ5KWzIQ+cBIp6ta+qOWO4Fhb5PzbbZ7Ss0OpHnCN1SmgdJzil5ZwuW/?=
- =?us-ascii?Q?d+hphmEMDj8Gsm39e0MNOV918eA1R9T0RQxprTUsnmwFOQA/Q7lRJj9k78+m?=
- =?us-ascii?Q?a7JFX3pw8PJwzqxgtt0fG6rSv/csa5I2qK2f/y1U7PLgTSBWGNFf2hkIvklA?=
- =?us-ascii?Q?3Dwp0jP/RdPKda1AKen/E426/gPuxzkiWQusCQPAO1Op+gRXP/+y4b8UgFPY?=
- =?us-ascii?Q?9x7TJUvZzDfLUyPJL/SZlNiLGWv0TsWpgnYagXtvpE1keA3mlokTfUT1j0yJ?=
- =?us-ascii?Q?95dbGxUCEAnY6Pjp7Bc8Z2l1lne7JPGqK4iOx5tquX+9SFrA2Jcn1mGWWIGB?=
- =?us-ascii?Q?I8wV4Fs/thIQzwocEJ1BXPpGWbY55hSyHFQjWgQZYazzyTZr3T7B6B6LDo07?=
- =?us-ascii?Q?WaooBlyeQTqO+SHGIiMwhg4mEQll0+93aWDYVoeGYuaURKJpttQwCgObpXe9?=
- =?us-ascii?Q?Df7q9y+BurJsqIC2c1KnLIWIClfC7ssZZUAg7sm8S8DFLTK1hAjZehv4kVJe?=
- =?us-ascii?Q?LO/2q5e6LC+BE5Ny0BbCmcmPKHikUQjdvtGn3DcQAXWLz6zRrh+6gV81smP5?=
- =?us-ascii?Q?Z27trvIhLud8hiITbm4QIuHB7w5cOxUSLnLNQDnrZbrI0G0pJRsjrBazAM3o?=
- =?us-ascii?Q?5ogQXObMwuAAZJr7A3c93RPXK/3omKZFQXKKsQz8uR2Srn0ZNKchbRRcUsQG?=
- =?us-ascii?Q?tTLohgGOtrX1ViPquC6feLFmIOtI2IThu9KiX1XLnPkwG6cxAB4DAz3DKC/G?=
- =?us-ascii?Q?HUV5ScVCAafprK9C8NSnquNupAgdC2s5Eyx0r9pDcNIehERhbOaFI9YKcRVl?=
- =?us-ascii?Q?jTvVCSZZEBvY1lj30rKENTpyEgkX+fFB7/5DfljNEFIl1/9vnB1FOAtssJtF?=
- =?us-ascii?Q?Sjc8iT5otodwU8pLyjbKBvkhoTT+Cj51QMnKprlvRdYO+qj6L1EQppcyPBDo?=
- =?us-ascii?Q?1EQnruk5wnJoK54xSKjpT1d8wkMkCUGAsJONTX0qMX13f7HEFfZ7n1hH0gmd?=
- =?us-ascii?Q?hD8YZklBkY68sci/Q4jc8ovwc8UwgeEbDMr5zjgoz/R8kqVfSd5NErtWsJN+?=
- =?us-ascii?Q?2+F8mEm7Uq1lVGaur8C5l3MQLM/ER/t9FHsBfU1ikAOYOb+NuhGUShfTm1qo?=
- =?us-ascii?Q?Rby504eJR6ENxhvWLJOm1EJva0Ge+pRXnvQj4cy6mFgeMAVIDg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR22MB4354.namprd22.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(1800799024)(366016)(376014)(7416014)(38350700014)(921020);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0jekoPC5ekIdTQqp7c+E5DFAy1hKIFdRZCj0l1YjDX48ECIwl11tgs0mzVD2?=
- =?us-ascii?Q?NjDrb/cs0h1FlufNwf76cdCx+MG/R/SumbHWgOXtcBJTHJ7UJTvb2NanClW9?=
- =?us-ascii?Q?Fej3DDPOjjNk3bEoKzys6qnbRPw1bW4T7cPsBoF/xKEnJzjET0Zc+hBalfg4?=
- =?us-ascii?Q?4Mi63JqOG8zl3/N8wWKDyPkWlmj6cKtwOBKh3VR20sm2kBXUpT9RRPv16jfb?=
- =?us-ascii?Q?RXGZ1jbrUKX/YRajd3qnllJn9IZg4exyqD1AHDDBJihzU1oFqpoPWsZby/af?=
- =?us-ascii?Q?/fXhOD5Fea0IRnPLEm+aAIQzEE7T590Q4yuUHDw5YmGHXA0o/df8lHsaM0HO?=
- =?us-ascii?Q?Md60P6lSYXk4EsHtHx9J+VKF/A1AoIIeWy8Ab1eMeF5t3dCJu8KfMz8Z2M8n?=
- =?us-ascii?Q?3TOR88CT4kMSdzk+DepAqF/ESzQeVnAirgbrbdtBmIJJFePBIEun+i6hnr78?=
- =?us-ascii?Q?H22saQ8oZWxmaS1U5g6bI/1fsHvpTi9GyE3o1lUzNPm0/02LaAhmgeozc4Du?=
- =?us-ascii?Q?F+rKNfyzX6Ya/kMHHdmCUwhOm94cHBCoO7qcoirj/1UOvaxUmBPmWCkXYaL2?=
- =?us-ascii?Q?I01DoTcB8ojfXfEa5W/5yLWZT8E5/JHqSs8IxkNRyIWBw4YVgYCHHnPgrWn9?=
- =?us-ascii?Q?pWEPhM4ZZE6BmVuvRdmhowdaNOKJPlWzBnz700pFYbaNQPsJnJnUxtUlCbod?=
- =?us-ascii?Q?6GmUi1MhHtoiB8EZv3qw8buDqtKZ3akAQWUwwt9wQTyy6HT2ReTqjbE8e3OE?=
- =?us-ascii?Q?cmWZjkA7YbENLQtvRy+hCuAfArYincP9itx8dUbTTPTZUO8sIDO445rWmrRx?=
- =?us-ascii?Q?RNWYBJWCiJqKEIR0drQ8DW+UpDjNsiT4DHeFE5iRfFk354vK5dHrn8012y4d?=
- =?us-ascii?Q?KrNvffoCoAH56N5Su4dA2PZWIE+3gKXCvmcBimPpO7fCiu/enWt6+8iwy9BP?=
- =?us-ascii?Q?9C1yuISuwFERp5pyWJ27Tp17EFr6XoNUp7AZnABM5WULY6UWFKy1d6lHdT7L?=
- =?us-ascii?Q?63bkeKfayyuSIdRkH8ZAcAN6f8B8IvhgRvd/BDLTWhjQ4GqWD2TWweYQzfqW?=
- =?us-ascii?Q?iEggHLEy/AWRGg1mwhG4Vi3SkeMtPiCPOaZjRo6Z3CFmUxV2xRH/EgmmLkIR?=
- =?us-ascii?Q?K2ZTQ7GjHe9Ln62Nw33rccmDQwBJ/0A3cDQC6GuuzDkw8Ww9gfRVGq0+9X3p?=
- =?us-ascii?Q?u0nMegzsjCFqzyX4kX9mC52vVF+iA8gorjRdbuhpoNwXXql7WvwAsSuFsVcA?=
- =?us-ascii?Q?bya38RFfhA7I7ZZBHXIKRnKe5unlXO7rHzrLjGTkQne/OGLwsaXx/gcc7lVy?=
- =?us-ascii?Q?6/raKucmT65BIZttbEeYFdpPhHWCHiRrIatz9k8IUOW/7YESjTUyztZ3SPyi?=
- =?us-ascii?Q?HEOFsMGPHQVhSbpyLeI0fv8nDTZY2meeVdxdF+qe/PqtG3PYQyMN4E9dMJ//?=
- =?us-ascii?Q?1FlkXl6AVjYp006hW5WmWHzJmBnjo39xUuqOdw2iAXhaDsFbq88w5+yfuOLW?=
- =?us-ascii?Q?dc/d7cdioDoaGURwOvPAVH7C7V3lFRSIV31r+YYVWJz1GsKABnYP3xjk64kq?=
- =?us-ascii?Q?X5iDjxjx0S4kXMMYsHrJkQt4CLVPWb2CEi3WbBZq?=
-X-OriginatorOrg: phytec.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1358c7e1-4b12-48bb-08ba-08dd082712c3
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR22MB4354.namprd22.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Nov 2024 23:16:47.0200 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 67bcab1a-5db0-4ee8-86f4-1533d0b4b5c7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4pjDl67kqPEgI7I6iyQ2hgdwEWujIgjZAzlCopKQgM0Bzir0uOiTw0CCZKLumEYJgBWGR9bKEy0ttEZvWjt59w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR22MB5275
-X-Mailman-Approved-At: Tue, 19 Nov 2024 01:22:52 +0100
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-purgate-type: clean
+X-purgate: clean
+X-purgate-size: 28328
+X-purgate-ID: 155817::1731963049-61FFA465-E63EE30D/0/0
+X-Mailman-Approved-At: Tue, 19 Nov 2024 01:22:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,236 +76,642 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for PHYTEC phyCORE-AM62ax SoM.
+Hi all,
 
-Signed-off-by: Garrett Giordano <ggiordano@phytec.com>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
----
- v2:
-  - Fix underline length in phyCORE-AM62Ax docs.
-  - Explicitly define build steps in docs, replacing include.
-  - Verified make htmldocs is working.
-  - Pick up Reviewed-by:
+I enabled CONFIG_DM_DEBUG on my SiFive Unmatched, and U-Boot boot results in
+failed assertion ("ofnode_valid(node)"). I'm attaching the full log below.
 
- doc/board/phytec/index.rst          |   1 +
- doc/board/phytec/phycore-am62ax.rst | 183 ++++++++++++++++++++++++++++
- doc/board/ti/k3.rst                 |   1 +
- 3 files changed, 185 insertions(+)
- create mode 100644 doc/board/phytec/phycore-am62ax.rst
+The same behavior is also for the 2024.10 stable version.
 
-diff --git a/doc/board/phytec/index.rst b/doc/board/phytec/index.rst
-index 99848a9e958..697aec30512 100644
---- a/doc/board/phytec/index.rst
-+++ b/doc/board/phytec/index.rst
-@@ -9,6 +9,7 @@ PHYTEC
-    imx8mm-phygate-tauri-l
-    imx93-phyboard-segin
-    phycore-am62x
-+   phycore-am62ax
-    phycore-am64x
-    phycore-imx8mm
-    phycore-imx8mp
-diff --git a/doc/board/phytec/phycore-am62ax.rst b/doc/board/phytec/phycore-am62ax.rst
-new file mode 100644
-index 00000000000..0c5b4814fc2
---- /dev/null
-+++ b/doc/board/phytec/phycore-am62ax.rst
-@@ -0,0 +1,183 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Garrett Giordano <ggiordano@phytec.com>
-+
-+phyCORE-AM62Ax
-+==============
-+
-+The `phyCORE-AM62Ax <https://www.phytec.com/product/phycore-am62a>`_ is a
-+SoM (System on Module) featuring TI's AM62Ax SoC. It can be used in combination
-+with different carrier boards. This module can come with different sizes and
-+models for DDR, eMMC, SPI NOR Flash and various SoCs from the AM62Ax family.
-+
-+A development Kit, called `phyBOARD-Lyra <https://www.phytec.com/product/phyboard-am62x>`_
-+is used as a carrier board reference design around the AM62Ax SoM.
-+
-+Quickstart
-+----------
-+
-+* Download sources and TI firmware blobs
-+* Build Trusted Firmware-A
-+* Build OP-TEE
-+* Build U-Boot for the R5
-+* Build U-Boot for the A53
-+* Create bootable uSD Card
-+* Boot
-+
-+Sources
-+-------
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_firmwares
-+    :end-before: .. k3_rst_include_end_tifsstub
-+
-+Build procedure
-+---------------
-+
-+Setup the environment variables:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=phycore_am62ax_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=phycore_am62ax_a53_defconfig
-+ $ export TFA_BOARD=lite
-+ $ # we dont use any extra TFA parameters
-+ $ unset TFA_EXTRA_ARGS
-+ $ export OPTEE_PLATFORM=k3-am62ax
-+ $ # we dont use any extra OPTEE parameters
-+ $ unset OPTEE_EXTRA_ARGS
-+
-+1. Trusted Firmware-A:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+2. OP-TEE:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot:
-+
-+* 3.1 R5:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* 3.2 A53:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+
-+uSD Card creation
-+-----------------
-+
-+Use fdisk to partition the uSD card. The layout should look similar to:
-+
-+.. code-block:: bash
-+
-+ $ sudo fdisk -l /dev/mmcblk0
-+ Disk /dev/mmcblk0: 15 GB, 15913189376 bytes, 31080448 sectors
-+ 242816 cylinders, 4 heads, 32 sectors/track
-+ Units: sectors of 1 * 512 = 512 bytes
-+
-+ Device       Boot StartCHS    EndCHS        StartLBA     EndLBA    Sectors  Size Id Type
-+ /dev/mmcblk0p1 *  128,0,1     1023,3,32        16384     278527     262144  128M  c Win95 FAT32 (LBA)
-+ /dev/mmcblk0p2    1023,3,32   1023,3,32       278528    1693883    1415356  691M 83 Linux
-+
-+
-+Once partitioned, the boot partition has to be formatted with a FAT filesystem.
-+Assuming the uSD card is `/dev/mmcblk0`:
-+
-+.. code-block:: bash
-+
-+ $ mkfs.vfat /dev/mmcblk0p1
-+
-+To boot from a micro SD card on a HSFS device simply copy the following
-+artifacts to the FAT partition:
-+
-+* tiboot3.bin from R5 build
-+* tispl.bin from Cortex-A build
-+* u-boot.img from Cortex-A build
-+
-+Boot
-+----
-+
-+Put the uSD card in the slot on the board and apply power. Check the serial
-+console for output.
-+
-+UART based boot
-+---------------
-+
-+To boot the board via UART, set the switches to UART mode and connect to the
-+micro USB port labeled as "Debug UART". After power-on the build artifacts
-+needs to be uploaded one by one with a tool like sz.
-+
-+Example bash script sequence for running on a Linux host PC feeding all boot
-+artifacts needed to the device. Assuming the host uses /dev/ttyUSB0 as
-+the main domain serial port:
-+
-+.. prompt:: bash $
-+
-+  stty -F /dev/ttyUSB0 115200
-+  sb --xmodem tiboot3.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem tispl.bin > /dev/ttyUSB0 < /dev/ttyUSB0
-+  sb --ymodem u-boot.img > /dev/ttyUSB0 < /dev/ttyUSB0
-+
-+Boot Modes
-+----------
-+
-+The phyCORE-AM62x development kit supports booting from many different
-+interfaces. By default, the development kit is set to boot from the micro-SD
-+card. To change the boot device, DIP switches S5 and S6 can be used.
-+Boot switches should be changed with power off.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW5: 12345678
-+     - SW6: 12345678
-+
-+   * - uSD
-+     - 11000010
-+     - 01000000
-+
-+   * - eMMC
-+     - 11010010
-+     - 00000000
-+
-+   * - OSPI
-+     - 11010000
-+     - 10000000
-+
-+   * - UART
-+     - 11011100
-+     - 00000000
-+
-+Further Information
-+-------------------
-+
-+Please see :doc:`../ti/am62ax_sk` chapter for further AM62Ax SoC related documentation
-+and https://docs.phytec.com/projects/yocto-phycore-am62ax/en/latest/ for vendor documentation.
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 5d01f487622..0deb4d768f9 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -46,6 +46,7 @@ K3 SoC based boards in other sections
- * :doc:`../beagle/am62x_beagleplay`
- * :doc:`../beagle/j721e_beagleboneai64`
- * :doc:`../phytec/phycore-am62x`
-+* :doc:`../phytec/phycore-am62ax`
- * :doc:`../toradex/verdin-am62`
+==================
 
- Boot Flow Overview
---
-2.25.1
+U-Boot SPL 2025.01-rc2-00111-g0135f0e2e8ce (Nov 18 2024 - 21:18:08 +0100)
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: clock-frequency: x (800000004)
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+ofnode_read_u32_array: sifive,ddr-params: 0
+   - 0 'i2c@10030000'
+   - found
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: reg-shift: x (2)
+ofnode_read_u32_index: clock-frequency: (not found)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: reg-io-width: x (1)
+ofnode_read_u32_index: clock-frequency: (not found)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: ngpios: (not found)
+Trying to boot from MMC1
+0
+   - 0 'mmc@0'
+   - found
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: sifive,fifo-depth: (not found)
+ofnode_read_u32_index: sifive,max-bits-per-word: (not found)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: spi-max-frequency: (not found)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: reg: x (0)
+ofnode_read_u32_index: reg: x (1)
+ofnode_read_u32_index: reg: x (2)
+ofnode_read_u32_index: reg: x (3)
+ofnode_read_u32_index: reg: x (4)
+bind node reserved-memory
+Device 'reserved-memory' has no compatible string
+bind node fit-images
+Device 'fit-images' has no compatible string
+bind node aliases
+Device 'aliases' has no compatible string
+bind node chosen
+Device 'chosen' has no compatible string
+bind node cpus
+Device 'cpus' has no compatible string
+bind node soc
+   - attempt to match compatible string 'simple-bus'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'simple_bus' for 'simple-bus'
+ofnode_read_u32_array: ranges: bind node interrupt-controller@c000000
+   - attempt to match compatible string 'sifive,fu540-c000-plic'
+   - attempt to match compatible string 'sifive,plic-1.0.0'
+No match for node 'interrupt-controller@c000000'
+bind node clock-controller@10000000
+   - attempt to match compatible string 'sifive,fu740-c000-prci'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node serial@10010000
+   - attempt to match compatible string 'sifive,fu740-c000-uart'
+   - attempt to match compatible string 'sifive,uart0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node serial@10011000
+   - attempt to match compatible string 'sifive,fu740-c000-uart'
+   - attempt to match compatible string 'sifive,uart0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node i2c@10030000
+   - attempt to match compatible string 'sifive,fu740-c000-i2c'
+   - attempt to match compatible string 'sifive,i2c0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node spi@10040000
+   - attempt to match compatible string 'sifive,fu740-c000-spi'
+   - attempt to match compatible string 'sifive,spi0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node spi@10050000
+   - attempt to match compatible string 'sifive,fu740-c000-spi'
+   - attempt to match compatible string 'sifive,spi0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node ethernet@10090000
+   - attempt to match compatible string 'sifive,fu540-c000-gem'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node pwm@10020000
+   - attempt to match compatible string 'sifive,fu740-c000-pwm'
+   - attempt to match compatible string 'sifive,pwm0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node pwm@10021000
+   - attempt to match compatible string 'sifive,fu740-c000-pwm'
+   - attempt to match compatible string 'sifive,pwm0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node cache-controller@2010000
+   - attempt to match compatible string 'sifive,fu740-c000-ccache'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node gpio@10060000
+   - attempt to match compatible string 'sifive,fu740-c000-gpio'
+   - attempt to match compatible string 'sifive,gpio0'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node pcie@e00000000
+   - attempt to match compatible string 'sifive,fu740-pcie'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+Skipping device pre-relocation
+bind node clint@2000000
+   - attempt to match compatible string 'riscv,clint0'
+No match for node 'clint@2000000'
+bind node dmc@100b0000
+   - attempt to match compatible string 'sifive,fu740-c000-ddr'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+Skipping device pre-relocation
+bind node memory@80000000
+Device 'memory@80000000' has no compatible string
+bind node hfclk
+   - attempt to match compatible string 'fixed-clock'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'fixed_clock' for 'fixed-clock'
+bind node rtcclk
+   - attempt to match compatible string 'fixed-clock'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'fixed_clock' for 'fixed-clock'
+bind node gpio-poweroff
+   - attempt to match compatible string 'gpio-poweroff'
+No match for node 'gpio-poweroff'
+bind node binman
+Device 'binman' has no compatible string
+bind node config
+Device 'config' has no compatible string
+bind node mmode_resv1@80000000
+Device 'mmode_resv1@80000000' has no compatible string
+bind node mmode_resv0@80040000
+Device 'mmode_resv0@80040000' has no compatible string
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: false
+ofnode_read_bool: bootph-pre-sram: false
+ofnode_read_bool: u-boot,dm-pre-reloc: false
+ofnode_read_bool: u-boot,dm-pre-proper: false
+ofnode_read_bool: u-boot,dm-spl: false
+ofnode_read_bool: u-boot,dm-tpl: false
+ofnode_read_bool: u-boot,dm-vpl: false
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+ofnode_read_u32_array: ranges: bind node cpu@1
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@2
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@3
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@4
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+ofnode_read_bool: bootph-all: false
+ofnode_read_bool: bootph-some-ram: false
+ofnode_read_bool: bootph-pre-ram: true
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+ofnode_read_prop: riscv,isa: rv64imafdc
+ofnode_read_prop: riscv,isa: rv64imafdc
+bind node serial@10010000
+   - attempt to match compatible string 'sifive,fu740-c000-uart'
+   - attempt to match compatible string 'sifive,uart0'
+   - found match at driver 'serial_sifive' for 'sifive,uart0'
+   - seq=0
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: (none) (ret=-19)
+   - result for clock-controller@10000000: (none) (ret=-19)
+ofnode_read_u32_index: clock-frequency: (not found)
 
+
+U-Boot 2025.01-rc2-00111-g0135f0e2e8ce (Nov 18 2024 - 21:18:08 +0100)
+
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: (none) (ret=-19)
+   - result for clock-controller@10000000: (none) (ret=-19)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: (none) (ret=-19)
+   - result for clock-controller@10000000: (none) (ret=-19)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: (none) (ret=-19)
+   - result for clock-controller@10000000: (none) (ret=-19)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: (none) (ret=-19)
+   - result for clock-controller@10000000: (none) (ret=-19)
+ofnode_read_prop: compatible: sifive,bullet0
+CPU:   sifive,bullet0
+Model: SiFive HiFive Unmatched A00
+DRAM:  16 GiB
+ofnode_read_prop: assigned-clock-rates: <not found>
+bind node reserved-memory
+Device 'reserved-memory' has no compatible string
+bind node fit-images
+Device 'fit-images' has no compatible string
+bind node aliases
+Device 'aliases' has no compatible string
+bind node chosen
+Device 'chosen' has no compatible string
+bind node cpus
+Device 'cpus' has no compatible string
+bind node soc
+   - attempt to match compatible string 'simple-bus'
+   - found match at driver 'simple_bus' for 'simple-bus'
+ofnode_read_u32_array: ranges: bind node interrupt-controller@c000000
+   - attempt to match compatible string 'sifive,fu540-c000-plic'
+   - attempt to match compatible string 'sifive,plic-1.0.0'
+No match for node 'interrupt-controller@c000000'
+bind node clock-controller@10000000
+   - attempt to match compatible string 'sifive,fu740-c000-prci'
+   - found match at driver 'sifive-prci' for 'sifive,fu740-c000-prci'
+bind node serial@10010000
+   - attempt to match compatible string 'sifive,fu740-c000-uart'
+   - attempt to match compatible string 'sifive,uart0'
+   - found match at driver 'serial_sifive' for 'sifive,uart0'
+   - seq=0
+bind node serial@10011000
+   - attempt to match compatible string 'sifive,fu740-c000-uart'
+   - attempt to match compatible string 'sifive,uart0'
+   - found match at driver 'serial_sifive' for 'sifive,uart0'
+   - seq=1
+bind node i2c@10030000
+   - attempt to match compatible string 'sifive,fu740-c000-i2c'
+   - attempt to match compatible string 'sifive,i2c0'
+   - found match at driver 'i2c_ocores' for 'sifive,i2c0'
+bind node temperature-sensor@4c
+   - attempt to match compatible string 'ti,tmp451'
+No match for node 'temperature-sensor@4c'
+bind node eeprom@54
+   - attempt to match compatible string 'microchip,24c02'
+   - attempt to match compatible string 'atmel,24c02'
+No match for node 'eeprom@54'
+bind node pmic@58
+   - attempt to match compatible string 'dlg,da9063'
+No match for node 'pmic@58'
+bind node spi@10040000
+   - attempt to match compatible string 'sifive,fu740-c000-spi'
+   - attempt to match compatible string 'sifive,spi0'
+   - found match at driver 'sifive_spi' for 'sifive,spi0'
+bind node flash@0
+   - attempt to match compatible string 'jedec,spi-nor'
+   - found match at driver 'jedec_spi_nor' for 'jedec,spi-nor'
+ofnode_read_u32_index: reg: 0x0 (0)
+ofnode_read_u32_index: spi-max-frequency: 0x2faf080 (50000000)
+ofnode_read_bool: spi-cpol: false
+ofnode_read_bool: spi-cpha: false
+ofnode_read_bool: spi-cs-high: false
+ofnode_read_bool: spi-3wire: false
+ofnode_read_bool: spi-half-duplex: false
+ofnode_read_u32_index: spi-tx-bus-width: 0x4 (4)
+ofnode_read_u32_index: spi-rx-bus-width: 0x4 (4)
+bind node spi@10050000
+   - attempt to match compatible string 'sifive,fu740-c000-spi'
+   - attempt to match compatible string 'sifive,spi0'
+   - found match at driver 'sifive_spi' for 'sifive,spi0'
+   - seq=0
+bind node mmc@0
+   - attempt to match compatible string 'mmc-spi-slot'
+   - found match at driver 'mmc_spi' for 'mmc-spi-slot'
+ofnode_read_u32_index: reg: 0x0 (0)
+ofnode_read_u32_index: spi-max-frequency: 0x1312d00 (20000000)
+ofnode_read_bool: spi-cpol: false
+ofnode_read_bool: spi-cpha: false
+ofnode_read_bool: spi-cs-high: false
+ofnode_read_bool: spi-3wire: false
+ofnode_read_bool: spi-half-duplex: false
+ofnode_read_u32_index: spi-tx-bus-width: (not found)
+ofnode_read_u32_index: spi-rx-bus-width: (not found)
+bind node ethernet@10090000
+   - attempt to match compatible string 'sifive,fu540-c000-gem'
+   - found match at driver 'eth_macb' for 'sifive,fu540-c000-gem'
+   - seq=0
+bind node pwm@10020000
+   - attempt to match compatible string 'sifive,fu740-c000-pwm'
+   - attempt to match compatible string 'sifive,pwm0'
+   - found match at driver 'pwm_sifive' for 'sifive,pwm0'
+bind node pwm@10021000
+   - attempt to match compatible string 'sifive,fu740-c000-pwm'
+   - attempt to match compatible string 'sifive,pwm0'
+   - found match at driver 'pwm_sifive' for 'sifive,pwm0'
+bind node cache-controller@2010000
+   - attempt to match compatible string 'sifive,fu740-c000-ccache'
+   - found match at driver 'sifive_ccache' for 'sifive,fu740-c000-ccache'
+bind node gpio@10060000
+   - attempt to match compatible string 'sifive,fu740-c000-gpio'
+   - attempt to match compatible string 'sifive,gpio0'
+   - found match at driver 'gpio_sifive' for 'sifive,gpio0'
+bind node pcie@e00000000
+   - attempt to match compatible string 'sifive,fu740-pcie'
+   - found match at driver 'pcie_sifive' for 'sifive,fu740-pcie'
+bind node clint@2000000
+   - attempt to match compatible string 'riscv,clint0'
+No match for node 'clint@2000000'
+bind node dmc@100b0000
+   - attempt to match compatible string 'sifive,fu740-c000-ddr'
+   - found match at driver 'sifive_ddr' for 'sifive,fu740-c000-ddr'
+bind node memory@80000000
+Device 'memory@80000000' has no compatible string
+bind node hfclk
+   - attempt to match compatible string 'fixed-clock'
+   - found match at driver 'fixed_clock' for 'fixed-clock'
+bind node rtcclk
+   - attempt to match compatible string 'fixed-clock'
+   - found match at driver 'fixed_clock' for 'fixed-clock'
+bind node gpio-poweroff
+   - attempt to match compatible string 'gpio-poweroff'
+No match for node 'gpio-poweroff'
+bind node binman
+Device 'binman' has no compatible string
+bind node config
+Device 'config' has no compatible string
+bind node mmode_resv1@80000000
+Device 'mmode_resv1@80000000' has no compatible string
+bind node mmode_resv0@80040000
+Device 'mmode_resv0@80040000' has no compatible string
+ofnode_read_u32_array: ranges: bind node cpu@1
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@2
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@3
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+bind node cpu@4
+   - attempt to match compatible string 'sifive,bullet0'
+   - attempt to match compatible string 'riscv'
+   - found match at driver 'riscv_cpu' for 'riscv'
+ofnode_read_u32_index: timebase-frequency: (not found)
+ofnode_read_u32_index: timebase-frequency: 0xf4240 (1000000)
+ofnode_read_prop: assigned-clock-rates: ofnode_read_u32_array: assigned-clock-rates: Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for hfclk
+Looking for hfclk
+   - result for hfclk: hfclk (ret=0)
+   - result for hfclk: hfclk (ret=0)
+ofnode_read_u32_index: clock-frequency: 0x18cba80 (26000000)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for rtcclk
+Looking for rtcclk
+   - result for rtcclk: rtcclk (ret=0)
+   - result for rtcclk: rtcclk (ret=0)
+ofnode_read_u32_index: clock-frequency: 0xf4240 (1000000)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: tick-timer: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_prop: assigned-clock-rates: <not found>
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+Core:  36 devices, 21 uclasses, devicetree: separate
+MMC:   0
+   - 0 'mmc@0'
+   - found
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: sifive,fifo-depth: (not found)
+ofnode_read_u32_index: sifive,max-bits-per-word: (not found)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: spi-max-frequency: (not found)
+ofnode_read_prop: assigned-clock-rates: <not found>
+1
+   - 0 'mmc@0'
+   - not found
+spi@10050000:mmc@0: 0
+ofnode_read_u32_index: load-environment: (not found)
+Loading Environment from SPIFlash... 1
+   - 1 'spi@10040000'
+   - found
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: sifive,fifo-depth: (not found)
+ofnode_read_u32_index: sifive,max-bits-per-word: (not found)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: spi-max-frequency: (not found)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_bool: m25p,fast-read: true
+SF: Detected is25wp256 with page size 256 Bytes, erase size 4 KiB, total 32 MiB
+0
+   - 0 'ethernet@10090000'
+   - found
+OK
+EEPROM: 0
+   - 0 'i2c@10030000'
+   - found
+ofnode_read_u32_index: u-boot,i2c-transaction-bytes: (not found)
+ofnode_read_u32_index: u-boot,i2c-transaction-bytes: (not found)
+ofnode_read_u32_index: u-boot,i2c-transaction-bytes: (not found)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: reg-shift: 0x2 (2)
+ofnode_read_u32_index: clock-frequency: (not found)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_u32_index: reg-io-width: 0x1 (1)
+ofnode_read_u32_index: clock-frequency: (not found)
+SiFive PCB EEPROM format v1
+Product ID: 0002 (HiFive Unmatched)
+PCB revision: 3
+BOM revision: B
+BOM variant: 0
+Serial number: SF105SZ211900108
+Ethernet MAC address: 70:b3:d5:92:f4:fc
+CRC: c26d0cff
+Looking for gpio@10060000
+Looking for gpio@10060000
+   - result for gpio@10060000: gpio@10060000 (ret=0)
+   - result for gpio@10060000: gpio@10060000 (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_u32_index: ngpios: (not found)
+Looking for gpio@10060000
+Looking for gpio@10060000
+   - result for gpio@10060000: gpio@10060000 (ret=0)
+   - result for gpio@10060000: gpio@10060000 (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+ofnode_read_prop: assigned-clock-rates: <not found>
+ofnode_read_bool: u-boot,skip-auto-config-until-reloc: false
+ofnode_read_prop: assigned-clock-rates: <not found>
+PCIE-0: Link up (Gen1-x8, Bus0)
+PCI: Failed autoconfig bar 10
+In:    serial@10010000
+Out:   serial@10010000
+Err:   serial@10010000
+Model: SiFive HiFive Unmatched A00
+Net:   ofnode_read_prop: assigned-clock-rates: ofnode_read_u32_array: assigned-clock-rates: Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+ofnode_read_prop: phy-mode: gmii
+ofnode_read_u32_index: reg: 0x0 (0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+   - result for clock-controller@10000000: clock-controller@10000000 (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+Looking for clock-controller@10000000
+Looking for clock-controller@10000000
+   - result for clock-controller@10000000: reset (ret=0)
+   - result for clock-controller@10000000: reset (ret=0)
+eth0: ethernet@10090000
+drivers/core/ofnode.c:575: ofnode_find_subnode: Assertion `ofnode_valid(node)' failed.
+resetting ...
+
+==================
+
+-- 
+Regards,
+Yuri
