@@ -4,57 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 330A0D5E396
-	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 06:27:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B898FD5E396
+	for <u-boot@archiver.kernel.org>; Mon, 18 Nov 2024 06:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DCDC89431;
+	by phobos.denx.de (Postfix) with ESMTP id DF35689432;
 	Mon, 18 Nov 2024 07:27:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1731911248;
-	bh=IZ2lIqyEusdaOEc+VJQcHkQoWL3i3JAGpg4uNsCTRdU=;
+	bh=3pjJB4jc0TpU9r2W5teCYV581lsSMzO7f3G1bRHs5t0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=AsN9WoumEUk45f1eoUZkJqcCnwxVb7pX+dGPOsQQIRF8/FcVOooKFOhFFYbfP2w9w
-	 tkor/dHmzv3Q5dMQ+sE1wm6cUN882Px4d4rYAIf9WjbTYdk6sc0MFj2LAZ5j0JvmSu
-	 Ymi7GGvu3sDfuTTXbsrxftXKi4DSbXLrX1QmMTRlgrxsfvyA/BdHuoAJMT29VMIGhN
-	 JAs2huSDNlzJJyQrRD/K24LLqSTdZ/8laTlJNCDYnKWjVQHB8r4QeGOKP5dHZepf3w
-	 KP9E8KS5WrlY04374aMqrGutsN2VCspfBTGD/kxQ36om2b2cPrxgnpSZo1ailif5o4
-	 OxAcz4fjxfQ+g==
+	b=MvEpGsvbn8ISsA6AWe0kyZZkeuBavwO8N0xGqAoiGt6F16G1SwvqWnJWefqxy+TM+
+	 ae3cRUI9QJKPzCjB7mMYQ/bxhDHqz0zjppd4Jkunou8Kro6a8ysoDzujsk/71aemuj
+	 omqgSRrFxz9kClK6aMizdJTb1Dby4Szh6hlUf/VEFD9kRQuZap/zH9u/R86lgPGRs9
+	 UKdtFMiFIxklQupD2+jpRaB5AMFqInjNwk6FyYMTIszdGvP7H301dzDn6OpoePxcN0
+	 VcPpQtkCkBHGy+a09oKqxRn/WD/bKtJ+3AYhlO6G0TRf4llEshjOcVbRS/4CXzogbB
+	 xzjqDq19ZK4xQ==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 751F389415;
- Mon, 18 Nov 2024 07:27:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id BE56A89426;
+ Mon, 18 Nov 2024 07:27:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731911246;
- bh=IZ2lIqyEusdaOEc+VJQcHkQoWL3i3JAGpg4uNsCTRdU=;
+ s=phobos-20191101; t=1731911247;
+ bh=3pjJB4jc0TpU9r2W5teCYV581lsSMzO7f3G1bRHs5t0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=xKh9Z9F1K7efcW/e0T25zc8SNYN221s7BFV+9BSMiqZh5oD4sc7FybVPAQS/c8Ml5
- Yu43WfNuHAs8ZP+d2LbTcDZTyxweiIhTshGRgMh+IzRALYOY2upE/PeYwx0I8hbFbO
- ceFjaVi9FVWgLIQxyqhJDYpDBYHclZvK5cy3OhiiRfML3GfDM+HuiAGqMH1p4UltHe
- LDnhKHeEC140zcwG0taPJzGN6jaFeRKquUfSKwYs6z9jHtf504bpf6UfCqcKht0Xxz
- 7TQu/9IU1xXWWkP8zFe6H8dBYxxcv6OpDk/L6aBhe9gF8LZsb07GlOzqVb3i5yXSeb
- bSextuFwwx7KQ==
+ b=xbDpKT0ja++Bj4VJ6uWQnaAc2eDURdjglr1VdzzqaG+f5AIUxdCwqaibXcOsHwijo
+ z9pETsT/4LqEJQzkRF++8e23O2hZ0LWLSVQEuLH6TuK5C4+ApC9iGntf5/UIgGC22B
+ wOA2AULyVtu5T3wtnHaQccp4M2O2sIJvllQzfyQYrX8l/blF1C1JQENR24BKPvVaq1
+ r7kM8sdiqwsWs7kHibNDvXpG9xXPaeoutWrExoUdcGBaIhhl/jzmpqEydJqaDIwtFn
+ ESiuGAGrnNL+mCNGky7kdnK2wnSkz/XxsSezVxpl1gDuXSnnFiCpwQkfO8klWd3LpC
+ JH0x+XZw55neQ==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Heiko Schocher <hs@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Baruch Siach <baruch@tkos.co.il>, Fabio Estevam <festevam@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Troy Kisky <troy.kisky@boundarydevices.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2 02/20] net: fec_mxc: fix probing for imx8qxp
-Date: Mon, 18 Nov 2024 07:26:56 +0100
-Message-Id: <20241118062715.32989-3-hs@denx.de>
+ Heiko Schocher <hs@denx.de>, Gary Bisson <bisson.gary@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 03/20] tools: imx8image: Improve error message
+Date: Mon, 18 Nov 2024 07:26:57 +0100
+Message-Id: <20241118062715.32989-4-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241118062715.32989-1-hs@denx.de>
 References: <20241118062715.32989-1-hs@denx.de>
@@ -76,135 +70,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-probing on capricorn board (imx8qxp based) brings:
-
-Can't find FEC0 clk rate: -19
-
-Cause is that when probing fec_mxc driver, fec_mii_setspeed()
-is called which calls fec_get_clk_rate().
-
-fec_mii_setspeed() calls fec_get_clk_rate with NULL pointer
-for udev and so as in IMX8QXP case CLK_CCF is enabled
-udev gets searched with:
-
-uclass_get_device_by_seq(UCLASS_ETH, idx, &dev);
-
-but we do not have yet a UCLASS_ETH ! as we just probing it!
-
-Prevent this by passing udev to fec_get_clk_rate()
+Improve error message "header tag mismatched"
+Add filename to error message to see, which file
+is wrong.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+add Reviewed-by from Alexander
 
- board/boundary/nitrogen6x/nitrogen6x.c |  2 +-
- board/solidrun/mx6cuboxi/mx6cuboxi.c   |  2 +-
- drivers/net/fec_mxc.c                  | 14 +++++++-------
- include/netdev.h                       |  2 +-
- 4 files changed, 10 insertions(+), 10 deletions(-)
+ tools/imx8image.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/boundary/nitrogen6x/nitrogen6x.c b/board/boundary/nitrogen6x/nitrogen6x.c
-index b85fd806cba..1adee9a461f 100644
---- a/board/boundary/nitrogen6x/nitrogen6x.c
-+++ b/board/boundary/nitrogen6x/nitrogen6x.c
-@@ -281,7 +281,7 @@ int board_eth_init(struct bd_info *bis)
- 	setup_iomux_enet();
+diff --git a/tools/imx8image.c b/tools/imx8image.c
+index 96ece28bd6c..b22e8b21c47 100644
+--- a/tools/imx8image.c
++++ b/tools/imx8image.c
+@@ -733,7 +733,7 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
+ 			fclose(fd);
  
- #ifdef CONFIG_FEC_MXC
--	bus = fec_get_miibus(base, -1);
-+	bus = fec_get_miibus(NULL, base, -1);
- 	if (!bus)
- 		return -EINVAL;
- 	/* scan phy 4,5,6,7 */
-diff --git a/board/solidrun/mx6cuboxi/mx6cuboxi.c b/board/solidrun/mx6cuboxi/mx6cuboxi.c
-index e9269ef5353..b543bf8c1fb 100644
---- a/board/solidrun/mx6cuboxi/mx6cuboxi.c
-+++ b/board/solidrun/mx6cuboxi/mx6cuboxi.c
-@@ -385,7 +385,7 @@ static int find_ethernet_phy(void)
- 	int phy_addr = -ENOENT;
- 
- #ifdef CONFIG_FEC_MXC
--	bus = fec_get_miibus(ENET_BASE_ADDR, -1);
-+	bus = fec_get_miibus(NULL, ENET_BASE_ADDR, -1);
- 	if (!bus)
- 		return -ENOENT;
- 
-diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index d6d5cb52fdd..eca681b16d1 100644
---- a/drivers/net/fec_mxc.c
-+++ b/drivers/net/fec_mxc.c
-@@ -160,7 +160,7 @@ static int fec_get_clk_rate(void *udev, int idx)
- 	}
- }
- 
--static void fec_mii_setspeed(struct ethernet_regs *eth)
-+static void fec_mii_setspeed(struct udevice *dev, struct ethernet_regs *eth)
- {
- 	/*
- 	 * Set MII_SPEED = (1/(mii_speed * 2)) * System Clock
-@@ -182,7 +182,7 @@ static void fec_mii_setspeed(struct ethernet_regs *eth)
- 	u32 hold;
- 	int ret;
- 
--	ret = fec_get_clk_rate(NULL, 0);
-+	ret = fec_get_clk_rate(dev, 0);
- 	if (ret < 0) {
- 		printf("Can't find FEC0 clk rate: %d\n", ret);
- 		return;
-@@ -581,7 +581,7 @@ static int fecmxc_init(struct udevice *dev)
- 	fec_reg_setup(fec);
- 
- 	if (fec->xcv_type != SEVENWIRE)
--		fec_mii_setspeed(fec->bus->priv);
-+		fec_mii_setspeed(dev, fec->bus->priv);
- 
- 	/* Set Opcode/Pause Duration Register */
- 	writel(0x00010020, &fec->eth->op_pause);	/* FIXME 0xffff0020; */
-@@ -996,7 +996,7 @@ static void fec_free_descs(struct fec_priv *fec)
- 	free(fec->tbd_base);
- }
- 
--struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id)
-+struct mii_dev *fec_get_miibus(struct udevice *dev, ulong base_addr, int dev_id)
- {
- 	struct ethernet_regs *eth = (struct ethernet_regs *)base_addr;
- 	struct mii_dev *bus;
-@@ -1018,7 +1018,7 @@ struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id)
- 		free(bus);
- 		return NULL;
- 	}
--	fec_mii_setspeed(eth);
-+	fec_mii_setspeed(dev, eth);
- 	return bus;
- }
- 
-@@ -1354,10 +1354,10 @@ static int fecmxc_probe(struct udevice *dev)
- 	if (!bus) {
- 		dm_mii_bus = false;
- #ifdef CONFIG_FEC_MXC_MDIO_BASE
--		bus = fec_get_miibus((ulong)CONFIG_FEC_MXC_MDIO_BASE,
-+		bus = fec_get_miibus(dev, (ulong)CONFIG_FEC_MXC_MDIO_BASE,
- 				     dev_seq(dev));
- #else
--		bus = fec_get_miibus((ulong)priv->eth, dev_seq(dev));
-+		bus = fec_get_miibus(dev, (ulong)priv->eth, dev_seq(dev));
- #endif
- 	}
- 	if (!bus) {
-diff --git a/include/netdev.h b/include/netdev.h
-index 2a06d9a261b..949245ecdec 100644
---- a/include/netdev.h
-+++ b/include/netdev.h
-@@ -117,7 +117,7 @@ static inline int pci_eth_init(struct bd_info *bis)
- 	return num;
- }
- 
--struct mii_dev *fec_get_miibus(ulong base_addr, int dev_id);
-+struct mii_dev *fec_get_miibus(struct udevice *dev, ulong base_addr, int dev_id);
- 
- #ifdef CONFIG_PHYLIB
- struct phy_device;
+ 			if (header.tag != IVT_HEADER_TAG_B0) {
+-				fprintf(stderr, "header tag mismatched \n");
++				fprintf(stderr, "header tag mismatched file %s\n", img_sp->filename);
+ 				exit(EXIT_FAILURE);
+ 			} else {
+ 				file_off +=
 -- 
 2.20.1
 
