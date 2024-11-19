@@ -4,89 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF37D62069
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84196D60D1B
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:14:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 627278953C;
-	Tue, 19 Nov 2024 11:09:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C97F89548;
+	Tue, 19 Nov 2024 11:14:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SRXvZdGv";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pL9KRJeT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A67489543; Tue, 19 Nov 2024 11:09:26 +0100 (CET)
+ id 3E3AD89548; Tue, 19 Nov 2024 11:14:41 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 356228953A
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:09:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5648488606
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:14:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B3C903FA4D
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 10:09:23 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0611B3FA4D
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 10:14:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732010963;
- bh=dWi2RFG3+J0NCpZstFJ/nmoGedgZQGIlIJcdr3l8i5M=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=SRXvZdGv7D5itbpHi3xzoeYlHV7Fh6tPdv8hPEYSRLl3rSNhg1Q02ZDv89lCW5HtO
- QkVQh6BCZt0Qri+egA75mzchADnyGcbvHTSylIX3KXsOgC4Xtkx2UUKTh5MoZr7veO
- BQV1yFZX7wQ+ApD4u71+46wHFblwGxrO483o77kJ+8vNcJ0J8+SjX1t6edmqM0dzVA
- fdcTP7E0hYNRxqAgy4v0nE0KHwsZoSRNTxDzH/sPz3hwziLcr2QUnYrida9blZgnpj
- dFfUBji49V3FIWOmsFtvoQAn19kiAKfoVWdemU+aofVaM3tp81cSB/LPSho6j8EJzw
- 4dth5C2oQ6Qlg==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-431604a3b47so5559165e9.3
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 02:09:23 -0800 (PST)
+ s=20210705; t=1732011279;
+ bh=kQXP2jqR87bTLRCSOnBjKwS9rtaOSJj03b3Rf44LXQI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=pL9KRJeTFEI8BaQpZBsQ+dr4UHWMyg7ibmnO6Hog/CeuKS/ADPt4g5oXmOWcE86dm
+ lyPpAhyN/zDLtkbM6RWAzH6OGp6DXuzj46LzbGvfg155DkW614TI8SE0Kt1A6RI9FF
+ A6JkTFTMq23AVf1+nCUxNYIcIpFtW7osWvGLn6y63DBHEdGwcG/NVLG2ttKn7VsrR+
+ agz6JCqJ/lv3qw5VJFUaLWE1L6zY2K5ZtBkxpP5Lj73oYBvaelv7b05dbbji4HqqtS
+ 7Cx1SulYlJKwsFotYTqBqZ/oTFk4XfjW89BM99wSe2Y5puRiwxhWT5sietH4w3qRY2
+ ROxPAsBF3EHlg==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4315ad4938fso5687745e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 02:14:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732010963; x=1732615763;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dWi2RFG3+J0NCpZstFJ/nmoGedgZQGIlIJcdr3l8i5M=;
- b=TPCvYkHEiiVPxiEp/DPy5Xc/wk8xfSxFqZzBoB7qA/GXiAwciqVKgqf2Osrqc97qNQ
- NucCTaOMykxZR29steMivd7ptNvui9mNgSF6HdtFH4t4Cl199imuhFsFJm9pg0NB3z6e
- zIPc4mEecfi3OBCgVJdmYsFH09abpHJBlrWci0Gx3e4tPFZ1XJ2YlKauJAua0FJ0Gosi
- D0Ub9CgXZO/jTlMnK1Q9Nw53UBoGq1lzgxlpEiF56GiqNorf+OX7iaIctlNmNnthHhjJ
- BQyIsxSiphcsaxU72xjuq454EtLy3yOVwHHoAFNYA1z/WzZ3JdFoDgbg2cb/geu6LsZZ
- 7vLA==
+ d=1e100.net; s=20230601; t=1732011277; x=1732616077;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kQXP2jqR87bTLRCSOnBjKwS9rtaOSJj03b3Rf44LXQI=;
+ b=xQf5MtrvD6VjYy4OyOC6bTwOnNvSf9mzk8MTlHpNQ6M9bHU2kcpIa8jN648CbuKNf8
+ +bRdGzoBiTDCT9cnxxwUiJoOMEYCByv8pPykGvMOOTeSsT34jpJmqNWtyVsIJqRa1aVl
+ GBuSwO44cPVSOLK1WiUJc+swW369npElXITo43bvmK0KW0Ij6alFDG96wG3m8qRs83pu
+ MfsrlNaDCepBdRtykBilALlkw0zNJRgdM+F41wODIViW5NalFbLyyCALLLV042UuDj7h
+ lyATIqaFNbdULDltoemHvVDmVmn3xBISpijMg1ZTefjsZ3hZAA0/eYs3w6gv9JKpqISY
+ VO5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNJd1fKGdU02JoL0bYucVPUOk6kPKPyI9U6Quieka0AwqUBd28g8HWermvA/M9j0WX+Qw9qw4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz02N8CoTakDLXkeE7A+Bn94Dh7tqAyxRNK7S13wC5sm3O+3c3P
- 5jOGwoYlnJQNatbNwA3VnXHTqJTXH8NApuqhKi2lOHtUOWoHmj2ISC0MEFEasCRIb3n1fYB5CD7
- nkOgy/DuFsSJR1pQZSdiSjS5bsQwnKOEi5ZEzRLdMCcL+iNAl3Mx0a7wAGA/WdgkYRqI=
-X-Received: by 2002:a5d:59af:0:b0:382:41ad:d8d1 with SMTP id
- ffacd0b85a97d-38241adda6emr5469474f8f.53.1732010963292; 
- Tue, 19 Nov 2024 02:09:23 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IELwJ7Nl2xu0w+OY8uAHDP+BNf3eyoyDCVOsDSa2N2gIRrJ3/Qx8LLH+uECmK9bkuQZfNjU5A==
-X-Received: by 2002:a5d:59af:0:b0:382:41ad:d8d1 with SMTP id
- ffacd0b85a97d-38241adda6emr5469457f8f.53.1732010962975; 
- Tue, 19 Nov 2024 02:09:22 -0800 (PST)
-Received: from localhost.localdomain
+ AJvYcCXXOM9SR61npnUSwrQf65P5naP9R+WtCCffHnXThgDiKLMGNSpVgT4If+3/DjoiHFslszA+ZV4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyvpbKlMT3yAHPztkvBRlzSJpuw9Gr9XDtoRuxRj5jzuPOTpoKA
+ 6CnpmIzwksBTuSgklvKdNyc8H6nbkU+U+CX59TKQiLaxmJzA+TnDuaUdvOdcvHrJvp0s4wnjBki
+ Quof8VKUWl0jmej0Klho+y6s91llWduyqd+MTRGB/8NmilogHaa+J/ZDpZwXazQVJS0I=
+X-Received: by 2002:a05:600c:138f:b0:431:5ab3:d28d with SMTP id
+ 5b1f17b1804b1-432df72a98bmr138530375e9.9.1732011277491; 
+ Tue, 19 Nov 2024 02:14:37 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG4RTnjXvb5EwRe9k1aEm8t+HCFC//w4dIu6Ggbl6l8dnWti41n4EOhqak0ShlEWG0RlITThA==
+X-Received: by 2002:a05:600c:138f:b0:431:5ab3:d28d with SMTP id
+ 5b1f17b1804b1-432df72a98bmr138530205e9.9.1732011277131; 
+ Tue, 19 Nov 2024 02:14:37 -0800 (PST)
+Received: from [192.168.103.101]
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3824770f3dasm5660945f8f.54.2024.11.19.02.09.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 02:09:22 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] net: correct the description of ip_to_string()
-Date: Tue, 19 Nov 2024 11:09:07 +0100
-Message-ID: <20241119100907.24531-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ 5b1f17b1804b1-432da27ffafsm191445135e9.22.2024.11.19.02.14.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Nov 2024 02:14:36 -0800 (PST)
+Message-ID: <d3e50c54-4d39-4930-a6f1-b29ba60bfd19@canonical.com>
+Date: Tue, 19 Nov 2024 11:14:34 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 07/14] efi_loader: device_path: add support for HTTP
+ device path
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+References: <20241118210908.51196-1-adrianox@gmail.com>
+ <20241118210908.51196-8-adrianox@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241118210908.51196-8-adrianox@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,26 +110,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The output of ip_to_string() is a string.
+On 18.11.24 22:09, Adriano Cordova wrote:
+> Add efi_dp_from_http to form a device path from HTTP. The
+> device path is the concatenation of the device path returned
+> by efi_dp_from_ipv4 together with an URI node and an END node.
+> 
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
+> Changes in v4:
+> - Reworked an if-else
+> 
+> Changes in v3:
+> - Moved argument checks in efi_dp_from_http to the beginning of the function
+>   include/efi_loader.h             |  1 +
+>   lib/efi_loader/efi_device_path.c | 52 ++++++++++++++++++++++++++++++++
+>   2 files changed, 53 insertions(+)
+> 
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 612bc42816..96b204dfc3 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -872,6 +872,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
+>   struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
+>   					 const char *path);
+>   struct efi_device_path *efi_dp_from_eth(void);
+> +struct efi_device_path *efi_dp_from_http(const char *server);
+>   struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
+>   					uint64_t start_address,
+>   					size_t size);
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> index cdeea4791f..9ee03062ac 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -1012,6 +1012,58 @@ struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
+>   	return dp2;
+>   }
+>   
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/net-common.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+A function description is missing.
+Please,
 
-diff --git a/include/net-common.h b/include/net-common.h
-index b7a519e36db..ed3d0a4a185 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -427,7 +427,7 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
- struct in_addr string_to_ip(const char *s);
- 
- /**
-- * ip_to_string() - Convert a string to ip address
-+ * ip_to_string() - Convert an IPv4 address to a string
-  *
-  * Implemented in lib/net_utils.c (built unconditionally)
-  *
--- 
-2.45.2
+> +struct efi_device_path *efi_dp_from_http(const char *server)
+> +{
+> +	struct efi_device_path *dp1, *dp2;
+> +	struct efi_device_path_uri *uridp;
+> +	efi_uintn_t uridp_len;
+> +	char *pos;
+> +	char tmp[128];
+> +	struct efi_ipv4_address ip;
+> +	struct efi_ipv4_address mask;
+> +
+> +	if ((server && strlen("http://") + strlen(server) + 1  > sizeof(tmp)) ||
+> +	    (!server && IS_ENABLED(CONFIG_NET_LWIP)))
+> +		return NULL;
+> +
+> +	efi_net_get_addr(&ip, &mask, NULL);
+> +
+> +	dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
+
+This seems to be the only usage of efi_dp_from_ipv4(). So we should make 
+it static.
+
+dp1 is expected to be NULL if we are out of memory. This error needs to 
+be handled.
+
+> +
+> +	strcpy(tmp, "http://");
+
+@Ilias:
+Linaro sent a patch series for supporting https.
+Will that go in after this series?
+
+> +
+> +	if (server) {
+> +		memcpy(tmp + strlen("http://"), server, strlen(server) + 1);
+
+Please, use strcat() to simplify this line.
+
+> +	}
+> +#if !IS_ENABLED(CONFIG_NET_LWIP)
+
+Please use 'else if' instead of '#if'.
+
+Best regards
+
+Heinrich
+
+> +	else {
+> +		ip_to_string(net_server_ip, tmp + strlen("http://"));
+> +	}
+> +#endif
+> +
+> +	uridp_len = sizeof(struct efi_device_path) + strlen(tmp) + 1;
+> +	uridp = efi_alloc(uridp_len + sizeof(END));
+> +	if (!uridp) {
+> +		log_err("Out of memory\n");
+> +		return NULL;
+> +	}
+> +	uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> +	uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> +	uridp->dp.length = uridp_len;
+> +	debug("device path: setting uri device path to %s\n", tmp);
+> +	memcpy(uridp->uri, tmp, strlen(tmp) + 1);
+> +
+> +	pos = (char *)uridp + uridp_len;
+> +	memcpy(pos, &END, sizeof(END));
+> +
+> +	dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)uridp, 0);
+> +
+> +	efi_free_pool(uridp);
+> +	efi_free_pool(dp1);
+> +
+> +	return dp2;
+> +}
+> +
+>   /* Construct a device-path for memory-mapped image */
+>   struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+>   					uint64_t start_address,
 
