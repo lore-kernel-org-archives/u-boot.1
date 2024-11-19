@@ -4,138 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F03D591CC
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 06:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16AB3D60074
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 07:31:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF2389516;
-	Tue, 19 Nov 2024 07:39:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C81B89514;
+	Tue, 19 Nov 2024 08:31:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3NjFjrig";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="M8vO09A4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E67E89518; Tue, 19 Nov 2024 07:39:42 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20625.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::625])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1153B8951C; Tue, 19 Nov 2024 08:31:24 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FAA989514
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 07:39:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC09989503
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:31:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XOg9D6DNVRLmZk1lAOT8DHx34+wu4CKPhYjKJqhKOAggJsMn+ZHPlGFA3SeHAilmmqujEZmrTbX/Q2Nwk0Mc8Eqb304aEURUSrubMw5cKmYBGFAgY013LWjZwCUOCaWHIg8m0HmCKQmd1jHhV+uz0dYrtvRLaiG6P6XqA88D5GFLZeeF+1xCfjFjZnjVS1DzZuq7eVQq10/sVN3krlg0dJZ389abH47XJO5LxCKzyrxZW7lB32R6CdQR4AnXhfBfzoU/Pqj6BCfLufv6WAkPlsnXU3EoE3bofvSeSWju01Z2HtLvewIJgzHxbEHOdFr/GDuxvy44grcmlauUFqrMvQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JxbDGcD1Ufkp526egNAVnR4PHBlARDW81PJqX5VqpAs=;
- b=qoDi+eDTh6hcJFjGq6WyNgLOWmjbAbsU4jmDkZqSZzbbWWaa5if0HkkhZQvvelK/gcZ/QLDfDR35zGTVQbK5/CibwBrYQ81Gb4krmNLNOZYm1t6/sUug6C0nJc8u/0eCG/QpVwbGBYpzQt6JjutYimN95xRip2o2ccBCcDxRMXaISFb7BCKcv372GPD9DZf9Y2ZN2mi61YlnDNiImuNwHWUc/9q5R/pP7D07hIOZwIGjPdd3oaXHpIlhw1Qc6RCE/A4F1HoK3lXd3rvF1fxgTf2WoChxD/32AK8yfaKqeL4lRb+7emqdD0SaAKq9JmzPWZqj4evJETdxIamHodvfDA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.12) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JxbDGcD1Ufkp526egNAVnR4PHBlARDW81PJqX5VqpAs=;
- b=3NjFjrigPEeJ2Q2espJngY18GMqRmjDxNYGtLmHQAtsgrONk/KaOuoUAQmk2ntN00erP6jX/srgjRC0NZIXDDNVBmghpje+8XubUmfUtBhebxOemn/gvHUxOXaqsm84R9Ft9wK5YDbUxrWmw88TEq46mX2tVqWu/t6RAaxEdnss=
-Received: from MW4PR04CA0085.namprd04.prod.outlook.com (2603:10b6:303:6b::30)
- by CH2PR12MB4118.namprd12.prod.outlook.com (2603:10b6:610:a4::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.22; Tue, 19 Nov
- 2024 06:39:36 +0000
-Received: from CO1PEPF000075F2.namprd03.prod.outlook.com
- (2603:10b6:303:6b:cafe::35) by MW4PR04CA0085.outlook.office365.com
- (2603:10b6:303:6b::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24 via Frontend
- Transport; Tue, 19 Nov 2024 06:39:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.12)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.12 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.12; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.12) by
- CO1PEPF000075F2.mail.protection.outlook.com (10.167.249.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8158.14 via Frontend Transport; Tue, 19 Nov 2024 06:39:35 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 19 Nov
- 2024 00:39:34 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 19 Nov
- 2024 00:39:33 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 19 Nov 2024 00:39:30 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <git@amd.com>, Ashok Reddy Soma
- <ashok.reddy.soma@xilinx.com>
-Subject: [PATCH] mtd: spi-nor: Send write disable cmd after every write enable
-Date: Tue, 19 Nov 2024 12:09:18 +0530
-Message-ID: <20241119063918.12540-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AIGGdPn026837;
+ Tue, 19 Nov 2024 07:31:17 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=RNrIFmwTWO62INS3LDgonR
+ /3iKScluxEOLu2iODGqww=; b=M8vO09A4pONr+HyCieTKZo6RtB+dm2q3k5OmxX
+ lczSIip+3VNZVFPwPEHbtfSPc1myXYiW7gHdkKSZs4ftC9u9CAsdx/B44sHAkLTN
+ UVOL9PjOWxeh5qumOb9riIjr/lnoxbu/EGnP5/roxjM/jTzzyHsn9kLz8rfuZVPj
+ i4SPDWc8eEbivzIXCopYAevg4EX6McoIpXgU+NJXyfW/By0RjVEIX8RRVjyKkphw
+ oAIWl+d8Z/KqfZuWWeBYslO9sPazvtbcKPPI0tq5v1kAHdJtkrzkfUt1oDEMWhjG
+ y1djZyZD5d5LQmsWfYiLjTGQSZXZnNBbD+32TlhV+J0nUfLw==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4308y7stdv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 19 Nov 2024 07:31:17 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AJ7VGpj014160
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 19 Nov 2024 07:31:16 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 18 Nov 2024 23:31:13 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <christian.taedcke@weidmueller.com>,
+ <quic_varada@quicinc.com>, <ada@thorsis.com>,
+ <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
+Subject: [PATCH] fs: fat: Handle 'FAT sector size mismatch'
+Date: Tue, 19 Nov 2024 13:00:48 +0530
+Message-ID: <20241119073048.3469260-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075F2:EE_|CH2PR12MB4118:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7fa0969-f77d-46e3-2fe2-08dd0864ef2e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Q2gK0PRjMs4Ie2zRkEMGYfegW7R+L941vX3KWFrF6AfuDG1VTI3e1mb+qBAq?=
- =?us-ascii?Q?uTcDvUdc9ZanNDpQm2eYEe83udEMnSa61DefG9yHpPfUMskgIUj2nASAoRnb?=
- =?us-ascii?Q?WSvtnk5kuW5RBkNVg9yUK0hl4PdTYhD5c8aH1zYxIhkrxycBkk7gyYRPDIbP?=
- =?us-ascii?Q?+ODJMDIP3QeZRiMDwcPYVcah0LBSNj7vK1bLPJDIi+H1G0meFUEpp1RemQUS?=
- =?us-ascii?Q?avFAAQNTYxG5q6+/DHvaBPjtaI4wgs+u2VIz+ILCmtQZpzHIEKIdcXeYhi8m?=
- =?us-ascii?Q?5Zov2v/LJs2T11M09QSLeRWaFou7UOsZA24earCiL20H666Nk4Eok3rslLGT?=
- =?us-ascii?Q?87d5hnT5BoTpnYkmOiyKUvG5EBiwKjZaIb0MIz41aspkVSxx2qmo1SYNVQvb?=
- =?us-ascii?Q?1RF317HQsy2r2NmuBMPZ8RAjx0xHN1mM3NYsIBSnkNQYzjT+6IGa017k7gUH?=
- =?us-ascii?Q?+mdD60tuXhBt9/JCcFnivNv3cldTz+D8aOcZO0HDu/e3giEUgdbX4R9DPrB9?=
- =?us-ascii?Q?u8I+hQLK0PiTBUCj8YICFhLx1NUYAs/GyZSnydvCWLBTL1VJQEiV72jpJO1r?=
- =?us-ascii?Q?eVW0sm8c+o+NgW4wdcH7ps70Fv6Dt0MKzOl5Mbs/l9eOGu3C/Q9NcBKofRzm?=
- =?us-ascii?Q?1cPvDRJhah/p5k7ECfENU6Ix29wV9OzUz5Lt19A+n9BD2wZKR6E4B6NAsfB7?=
- =?us-ascii?Q?dvIIhrS7IPQC72JmGJFu+hjlGRfcO7xr605NR5wTGr2Wifcwcy5MgB21swX5?=
- =?us-ascii?Q?9af8H0zjXHTFGTPXfabPdaOpbo4QEczz3frLJ816l2frQ/jK1AaudBZW3gnh?=
- =?us-ascii?Q?dHJqxbwzt/E8ULnQLDp4QJA4pPgibdlOrZcwDBe11CrECBLNo52C8O1u8wcq?=
- =?us-ascii?Q?ModFzfYladmI8f54u+SOfwRhgs17z1slxaYao0ruQu9YLXvZDXC6xzi9EDE1?=
- =?us-ascii?Q?WOogHTkL1lmjK1bmMgu+rhNWjN8ZImeN/mPXG2aQEknHtHRK1iRK+0T0HsTw?=
- =?us-ascii?Q?oY+HD3PcTvT9WPcvqbcX20h7iQeoqhX/8siAcsjeDoiKxifF3XBoCPYVv9A+?=
- =?us-ascii?Q?mkCRxdvI+RC7Coljtk7Jg+15P/gulOI/gtdTc/I+qND6qkm0qeXPOJJoiPCW?=
- =?us-ascii?Q?U6qkrEU9jgv9wuE4CVOEtmoXZpRHG1X6DC6k2z+6vaPTouW43mwY5Bm9encj?=
- =?us-ascii?Q?GGqhS+K/d2vFuRHGmJkYO5vGV7FzfFwGOb5hKbcqUcsLhmOr9Oj+qp/nSYQ0?=
- =?us-ascii?Q?0+3Fc9osyBMSnMX91aEmqXnsSMIP2y3BmIxmcqi0B2HeXG04SFpIhOxepkCH?=
- =?us-ascii?Q?Thu3TMcJoeNCikVmV68ifaTRfht1te48sxmxmy1rxS52auRzS3LzFdW4pZo+?=
- =?us-ascii?Q?I+itZxSrgn80rgeUsjmR0dJQFQacd0SBgelV65XIu6o+RLYUbQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.12; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:atlvpn-bp.amd.com; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2024 06:39:35.7136 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7fa0969-f77d-46e3-2fe2-08dd0864ef2e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.12];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000075F2.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4118
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: jbU7HDNS0EF6_zmOb4kADuELgi-C869V
+X-Proofpoint-GUID: jbU7HDNS0EF6_zmOb4kADuELgi-C869V
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ mlxscore=0 spamscore=0
+ mlxlogscore=816 clxscore=1011 suspectscore=0 adultscore=0
+ priorityscore=1501 phishscore=0 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2409260000 definitions=main-2411190054
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,95 +96,310 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Write enable(06h) command will be sent to a flash device to
-set the write enable latch bit before every program, erase,
-write command. After that write disable command (04h) needs
-to be sent to clear the write enable latch.
+Do FAT read and write based on the device sector size
+instead of the size recorded in the FAT meta data. This
+helps to overcome the 'FAT sector size mismatch' error
+and enables U-Boot to read/write those partitions.
 
-This write_disable() is missing at the majority of the places
-in the driver, add it to clear write enable latch.
-
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 23 ++++++++++++++++++++---
- 1 file changed, 20 insertions(+), 3 deletions(-)
+ fs/fat/fat.c       | 227 ++++++++++++++++++++++++++++++++++++++++++---
+ fs/fat/fat_write.c |  19 ----
+ 2 files changed, 214 insertions(+), 32 deletions(-)
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index ec841fb13b..5977c634c2 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -944,6 +944,7 @@ static int spi_nor_erase_chip_wait_till_ready(struct spi_nor *nor, unsigned long
- static int clean_bar(struct spi_nor *nor)
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index e2570e8167..f4bad99335 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -44,24 +44,223 @@ static void downcase(char *str, size_t len)
+ 
+ static struct blk_desc *cur_dev;
+ static struct disk_partition cur_part_info;
++int fat_sect_size;
+ 
+ #define DOS_BOOT_MAGIC_OFFSET	0x1fe
+ #define DOS_FS_TYPE_OFFSET	0x36
+ #define DOS_FS32_TYPE_OFFSET	0x52
+ 
+-static int disk_read(__u32 block, __u32 nr_blocks, void *buf)
++inline __u32 sect_to_block(__u32 sect, __u32 *off)
  {
- 	u8 cmd, bank_sel = 0;
+-	ulong ret;
++	*off = 0;
++	if (fat_sect_size && fat_sect_size < cur_part_info.blksz) {
++		int div = cur_part_info.blksz / fat_sect_size;
++
++		*off = sect % div;
++		return sect / div;
++	} else if (fat_sect_size && (fat_sect_size > cur_part_info.blksz)) {
++		return sect * (fat_sect_size / cur_part_info.blksz);
++	}
+ 
+-	if (!cur_dev)
+-		return -1;
++	return sect;
++}
+ 
+-	ret = blk_dread(cur_dev, cur_part_info.start + block, nr_blocks, buf);
++inline __u32 size_to_blocks(__u32 size)
++{
++	return (size + (cur_part_info.blksz - 1)) / cur_part_info.blksz;
++}
+ 
+-	if (ret != nr_blocks)
+-		return -1;
++static int disk_read(__u32 sect, __u32 nr_sect, void *buf)
++{
 +	int ret;
++	__u8 *block = NULL;
++	__u32 rem, size;
++	__u32 s, n;
  
- 	if (nor->bank_curr == 0)
- 		return 0;
-@@ -951,7 +952,11 @@ static int clean_bar(struct spi_nor *nor)
- 	nor->bank_curr = 0;
- 	write_enable(nor);
- 
--	return nor->write_reg(nor, cmd, &bank_sel, 1);
-+	ret = nor->write_reg(nor, cmd, &bank_sel, 1);
-+	if (ret)
-+		return ret;
+-	return ret;
++	rem = nr_sect * fat_sect_size;
++	/*
++	 *           block N       block N + 1      block N + 2
++	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
++	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++	 * . . . |               |               |               | . . .
++	 * ------+---------------+---------------+---------------+------
++	 *            |<--- FAT reads in sectors          --->|
++	 *
++	 *            |  part 1  |   part 2      |  part 3    |
++	 *
++	 */
 +
-+	return write_disable(nor);
++	/* Do part 1 */
++	if (fat_sect_size) {
++		__u32 offset;
++
++		/* Read one block and copy out the leading sectors */
++		block = malloc_cache_aligned(cur_dev->blksz);
++		if (!block) {
++			printf("Error: allocating block: %lu\n", cur_dev->blksz);
++			return -1;
++		}
++
++		s = sect_to_block(sect, &offset);
++		offset = offset * fat_sect_size;
++
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		}
++
++		if (rem > (cur_part_info.blksz - offset))
++			size = cur_part_info.blksz - offset;
++		else
++			size = rem;
++
++		memcpy(buf, block + offset, size);
++		rem -= size;
++		buf += size;
++		s++;
++	} else {
++		/*
++		 * fat_sect_size not being set implies, this is the first read
++		 * to partition. The first sector is being read to get the
++		 * FS meta data. The FAT sector size is got from this meta data.
++		 */
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
++		if (ret != 1)
++			return -1;
++	}
++
++	/* Do part 2, read directly into the given buffer */
++	if (rem > cur_part_info.blksz) {
++		n = rem / cur_part_info.blksz;
++		ret = blk_dread(cur_dev, cur_part_info.start + s, n, buf);
++		if (ret != n) {
++			ret = -1;
++			goto exit;
++		}
++		buf += n * cur_part_info.blksz;
++		rem = rem % cur_part_info.blksz;
++		s += n;
++	}
++
++	/* Do part 3, read a block and copy the trailing sectors */
++	if (rem) {
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		} else {
++			memcpy(buf, block, rem);
++		}
++	}
++exit:
++	if (block)
++		free(block);
++
++	return (ret == -1) ? -1 : nr_sect;
++}
++
++int disk_write(__u32 sect, __u32 nr_sect, void *buf)
++{
++	int ret;
++	__u8 *block = NULL;
++	__u32 rem, size;
++	__u32 s, n;
++
++	rem = nr_sect * fat_sect_size;
++	/*
++	 *           block N       block N + 1      block N + 2
++	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
++	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++	 * . . . |               |               |               | . . .
++	 * ------+---------------+---------------+---------------+------
++	 *            |<--- FAT reads in sectors          --->|
++	 *
++	 *            |  part 1  |   part 2      |  part 3    |
++	 *
++	 */
++
++	/* Do part 1 */
++	if (fat_sect_size) {
++		__u32 offset;
++
++		/* Read one block and overwrite the leading sectors */
++		block = malloc_cache_aligned(cur_dev->blksz);
++		if (!block) {
++			printf("Error: allocating block: %lu\n", cur_dev->blksz);
++			return -1;
++		}
++
++		s = sect_to_block(sect, &offset);
++		offset = offset * fat_sect_size;
++
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		}
++
++		if (rem > (cur_part_info.blksz - offset))
++			size = cur_part_info.blksz - offset;
++		else
++			size = rem;
++
++		memcpy(block + offset, buf, size);
++		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		}
++
++		rem -= size;
++		buf += size;
++		s++;
++	} else {
++		/*
++		 * fat_sect_size not being set implies, this is the first read
++		 * to partition. The first sector is being read to get the
++		 * FS meta data. The FAT sector size is got from this meta data.
++		 */
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
++		if (ret != 1)
++			return -1;
++	}
++
++	/* Do part 2, write directly from the given buffer */
++	if (rem > cur_part_info.blksz) {
++		n = rem / cur_part_info.blksz;
++		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
++		if (ret != n) {
++			ret = -1;
++			goto exit;
++		}
++		buf += n * cur_part_info.blksz;
++		rem = rem % cur_part_info.blksz;
++		s += n;
++	}
++
++	/* Do part 3, read a block and copy the trailing sectors */
++	if (rem) {
++		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		} else {
++			memcpy(block, buf, rem);
++		}
++		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
++		if (ret != 1) {
++			ret = -1;
++			goto exit;
++		}
++	}
++exit:
++	if (block)
++		free(block);
++
++	return (ret == -1) ? -1 : nr_sect;
  }
  
- static int write_bar(struct spi_nor *nor, u32 offset)
-@@ -1270,6 +1275,10 @@ static int write_sr_and_check(struct spi_nor *nor, u8 status_new, u8 mask)
- 	if (ret)
- 		return ret;
- 
-+	ret = write_disable(nor);
-+	if (ret)
-+		return ret;
-+
- 	ret = read_sr(nor);
- 	if (ret < 0)
- 		return ret;
-@@ -1796,13 +1805,18 @@ static int sst26_lock_ctl(struct spi_nor *nor, loff_t ofs, uint64_t len, enum lo
- 	if (ctl == SST26_CTL_CHECK)
- 		return 0;
- 
-+	/* Write latch enable before write operation */
-+	ret = write_enable(nor);
-+	if (ret)
-+		return ret;
-+
- 	ret = nor->write_reg(nor, SPINOR_OP_WRITE_BPR, bpr_buff, bpr_size);
- 	if (ret < 0) {
- 		dev_err(nor->dev, "fail to write block-protection register\n");
- 		return ret;
+ int fat_set_blk_dev(struct blk_desc *dev_desc, struct disk_partition *info)
+@@ -575,6 +774,8 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+ 		return -1;
  	}
  
--	return 0;
-+	return write_disable(nor);
++	fat_sect_size = 0;
++
+ 	if (disk_read(0, 1, block) < 0) {
+ 		debug("Error: reading block\n");
+ 		ret = -1;
+@@ -645,12 +846,12 @@ static int get_fs_info(fsdata *mydata)
+ 	mydata->rootdir_sect = mydata->fat_sect + mydata->fatlength * bs.fats;
+ 
+ 	mydata->sect_size = get_unaligned_le16(bs.sector_size);
++	fat_sect_size = mydata->sect_size;
+ 	mydata->clust_size = bs.cluster_size;
+-	if (mydata->sect_size != cur_part_info.blksz) {
+-		log_err("FAT sector size mismatch (fs=%u, dev=%lu)\n",
+-			mydata->sect_size, cur_part_info.blksz);
+-		return -1;
+-	}
++	if (mydata->sect_size != cur_part_info.blksz)
++		log_info("FAT sector size mismatch (fs=%u, dev=%lu)\n",
++			 mydata->sect_size, cur_part_info.blksz);
++
+ 	if (mydata->clust_size == 0) {
+ 		log_err("FAT cluster size not set\n");
+ 		return -1;
+diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+index ea877ee917..f7a210d790 100644
+--- a/fs/fat/fat_write.c
++++ b/fs/fat/fat_write.c
+@@ -192,25 +192,6 @@ out:
  }
  
- static int sst26_unlock(struct spi_nor *nor, loff_t ofs, uint64_t len)
-@@ -2204,7 +2218,7 @@ static int write_sr_cr(struct spi_nor *nor, u8 *sr_cr)
- 		return ret;
- 	}
+ static int total_sector;
+-static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
+-{
+-	ulong ret;
+-
+-	if (!cur_dev)
+-		return -1;
+-
+-	if (cur_part_info.start + block + nr_blocks >
+-		cur_part_info.start + total_sector) {
+-		printf("error: overflow occurs\n");
+-		return -1;
+-	}
+-
+-	ret = blk_dwrite(cur_dev, cur_part_info.start + block, nr_blocks, buf);
+-	if (nr_blocks && ret == 0)
+-		return -1;
+-
+-	return ret;
+-}
  
--	return 0;
-+	return write_disable(nor);
- }
- 
- /**
-@@ -4273,6 +4287,9 @@ static int spi_nor_init(struct spi_nor *nor)
- 				write_disable(nor);
- 			}
- 		}
-+		err = write_disable(nor);
-+		if (err)
-+			return err;
- 	}
- 
- 	if (nor->quad_enable) {
+ /*
+  * Write fat buffer into block device
 -- 
-2.17.1
+2.34.1
 
