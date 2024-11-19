@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EDAD44162
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 14:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57DD6D44162
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 14:36:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C01E38953C;
-	Tue, 19 Nov 2024 15:27:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C3E06895B1;
+	Tue, 19 Nov 2024 15:36:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sWmLw12v";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BF9E89548; Tue, 19 Nov 2024 15:27:56 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732026991;
+	bh=PfcOOn8bGZBoKGz4nQ1qEOQzmfShJQzR9/e1YU91l7E=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=llVgsVbWMALfGzssdgkqAfLfxGO3PcNuMIHw9FnInfzZzpPBvSYwrKjPOukGBDgIe
+	 YYJNVWxjIU0mGCBEAUyJBbokct+k7NQVB1PORUkHs1Kodd+g4i60Bl4w6Ht8GBUoAq
+	 +RW58ZkbWcELDcP2/xrTGF7+nz94WkJO2q4pTkkzO9paaVI/kuehUxVMS2Pi7yp1l+
+	 3ygck2KBqiiWhbecyyFmma63+F5Mijsl3p51so9Kwk4DYxCOrelwvJWshQRXwVFwqW
+	 bngBc6qooSUPiSCquSUFWc7jtxWWOOM5ifUMNMREy3ap+Kt1y02fKvcV6kRG3VRd10
+	 u3ScDDquRmmbg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A591889500
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 15:27:53 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7b1505ef7e3so57930185a.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:27:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732026472; x=1732631272; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9BrC+iqYa3DOHOZPyyBxXtt3pRe3BhC1670Qu6gVosc=;
- b=sWmLw12vLZu4E2YyMlMG8U078qWBZvv+E0/FgQXQzdpsADgkXN5oikKJlY+RFBPNEG
- Qs4FEHWuLhOVRPVRxZRgs+xQBNb281iEhEVr1LWj9kU7hcBL6S5IX6M9mxjoRLevSGT5
- bCx3sHxlH1+IvVSOZBm5q2pzlMMptcTXkG0+I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732026472; x=1732631272;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9BrC+iqYa3DOHOZPyyBxXtt3pRe3BhC1670Qu6gVosc=;
- b=S106BQ4nJXZc0eSBpDQSCZEthZIyNF30jzbCoratpjZDmFozk1KrU6woemWiOk1X9E
- 8pKels43NaG2h/LPEgFbQrPvrqRg2+qiAZcDVN8Os8N1d1KDXze+QW2mbJardF/6rrU3
- qipLM3buwqM1fkXHfZqUSGrBSTsSp3wXk/n6bBh9G+EXkkP5aKKFclWgahP46ve9txh1
- z5Wd9jjYuj4dgP9S8L9EnJZs1m+iQXZoN3OEDgEC3yF/jn90pUPmen6bzaLzsIypqhBf
- FAuyUP7vppPR8XziDUevvnbju9yHOCsMdb9hiWiSiktUeluFVZ4gYkPWcmdDLy0Y7BfR
- 4mvw==
-X-Gm-Message-State: AOJu0YydUkUEMO3vTMmqN9ul+WgsxkGe/OSbQbz1hqC3gqh6PbqIVZgn
- FYMM2Q21T3xxzXmSuT41PDH8xFZsJVFUDxFQ0t3Jwjb1JzdEhtwPSpXk8ZdRM/4=
-X-Google-Smtp-Source: AGHT+IHCnrplTg8edls10gtEIEDWKs7wnh1PC0OPZkguDegL3y1WOKGeg6HBXxbcaVatOkjJHgTZ1g==
-X-Received: by 2002:a05:620a:424b:b0:7b1:7f5f:4975 with SMTP id
- af79cd13be357-7b3622f55f5mr2568712385a.36.1732026472520; 
- Tue, 19 Nov 2024 06:27:52 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b37a864646sm97238685a.57.2024.11.19.06.27.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 06:27:51 -0800 (PST)
-Date: Tue, 19 Nov 2024 08:27:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Markus Gothe <markus.gothe@genexis.eu>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH] Bitbanging MDIO driver for DM framework.
-Message-ID: <20241119142749.GV3600562@bill-the-cat>
-References: <d7d1e0ca-f0cf-4458-a52d-0e8ba1b85bdb@genexis.eu>
- <20241027183150.GK4959@bill-the-cat>
- <eb0c7d6e-fa93-4547-b8b4-0419a11caacd@genexis.eu>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D7DB88954F;
+ Tue, 19 Nov 2024 15:36:30 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1732026991;
+ bh=PfcOOn8bGZBoKGz4nQ1qEOQzmfShJQzR9/e1YU91l7E=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=qmzwP+0SnY9qp4mDPCi4wrihWu0yL/mWazugozU9emcXANiHcLxBTqC+QK1N1qURA
+ 8s0pstEV4tjERAJEUldd2bEMlCUXwQglP8FSy2Qc3QiNh2jpB3OexQI0JzQ6LRN8u8
+ xh6m8sgyuMAaxyvagV3PcirqjrHcDSxOd7kUpT12PdZrUS3ulK8XRQxqkvkWUqRT/x
+ s9lpgWMuGfrCpnmKvkOedf1Q1SdwoNJGcowSXmbsfvCdLbEYkzu2/GChBlP2jxZWAh
+ yRlKUFHeyxYoqdDNceYyDgQiff2VLXOYE7UhvPCpaEeSBSl9tfPKvVIMx44SgX+KO/
+ TUCBjKcog/iDQ==
+Message-ID: <da8d990f-b2fa-4f21-bee5-7d609e9364b2@denx.de>
+Date: Tue, 19 Nov 2024 15:19:00 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ylKl6cBH2S/6zkG+"
-Content-Disposition: inline
-In-Reply-To: <eb0c7d6e-fa93-4547-b8b4-0419a11caacd@genexis.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 3/7] usb: onboard-hub: add support for Microchip
+ USB5744
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "Simek, Michal" <michal.simek@amd.com>,
+ "fabrice.gasnier@foss.st.com" <fabrice.gasnier@foss.st.com>,
+ "git (AMD-Xilinx)" <git@amd.com>
+References: <20241112050740.15343-1-venkatesh.abbarapu@amd.com>
+ <20241112050740.15343-4-venkatesh.abbarapu@amd.com>
+ <d61ab683-744d-4024-a5d3-71b372e85d02@denx.de>
+ <SA1PR12MB869770E331845B38B0BC2AC098592@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <5c4c73e1-4b47-427a-b84c-099b044d07a8@denx.de>
+ <SA1PR12MB8697165267E847E8F8FDC0D9985B2@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <b06d22ba-6629-4893-a90e-185f676017a5@denx.de>
+ <SA1PR12MB8697C5004BB109302CE441B198272@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <5cd2a342-7208-4cf1-8faa-90dfd82ae5b0@denx.de>
+ <SA1PR12MB86972FD15A7312EF59F1A5D298202@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SA1PR12MB86972FD15A7312EF59F1A5D298202@SA1PR12MB8697.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,38 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/19/24 4:22 AM, Abbarapu, Venkatesh wrote:
 
---ylKl6cBH2S/6zkG+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+[...]
 
-On Tue, Nov 19, 2024 at 09:26:34AM +0000, Markus Gothe wrote:
+>>>>>> Is there a matching delay requirement specified in the USB hub
+>>>>>> datasheet or is this a workaround for some board-specific behavior ?
+>>>>> The matching delay is not specified in the USB5744 hub document, but
+>>>>> based on
+>>>> testing on 2 boards with the above-mentioned delay i2c failures were not
+>> observed.
+>>>> Is this 10ms a board-specific reset delay ?
+>>>> Why is it in a generic driver ?
+>>> On our boards we observed i2c failures when we set the reset delay as
+>>> 5us and power on delay as 1ms as per the USB5744 datasheet. The reason
+>>> of adding 10ms delay is because of i2c failures and the linux
+>>> reference is
+>>> https://github.com/torvalds/linux/commit/908f61bedb2c40c6d856bbfd7f870
+>>> b967a4cb498 Do you have anything with respect to these delays, as you
+>>> might have tested on some other boards? If anything, please let me know.
+>> If the 10ms delay is a board specific delay, then this has to be handled in a board
+>> specific way, not hard-coded in the driver. Probably add some new property which
+>> specifies the extra board specific reset delay, but be sure to run that property by the
+>> Linux kernel maintainers too.
+> Thanks. I will check how to add the board specific delay as new property.
 
-> Hello,
-> please see https://github.com/u-boot/u-boot/pull/695
+Add some reset-...-us , similar to what ethernet PHYs already do in DT.
 
-OK, thanks, I've taken that commit and sent it to the mailing list.
-
---=20
-Tom
-
---ylKl6cBH2S/6zkG+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc8oF0ACgkQFHw5/5Y0
-tyy8Qgv+LgYug7mW9IYIiY7T0Es2I8din8eCY2PCQzYMt0lS5+TdZ5PYjNiqQpY/
-lZTEgua/rmHezsmNKlOMSkGDvTeKTihQs8RN93rToQ+LXORuYXIL1ZaQ1DolgakB
-psRGmWfkXtAr3Xn+wc0sZQj2fISkHTeJ+g4jVUcS9AmXZHhBfA27WGgdHjjj5kiV
-+B41YRzOzL/Y36kQbtzSpmOLqwsJjBn4IhZ4G5ZN4jcKvIz2izIq/Wp/R+JfE1Qu
-XSh6qipJ/ApA43mZi46CiKlIXRm6hXXGb1nMSUhDmm+DyHRgsedTp4064HiMCbrL
-EHXHToC/RuEESgI3dy84yJBeBZaq/P+GYZEhqMr6KQxhnQCcbkUP00WKL/JuWcDR
-+8P+z3HvNUBfJFnVPaqLjGzRTfPSIz6izSO1ikQ0b7GT8/krvBvnsqWDsQeu3Q7V
-9ebp6VdjA1Sk1Cg6uiBibwOnO6d4EJVdNqkFe3SAx9rXHzhyF1YOR+MVPMMtWbOO
-Y1OZ24Q8
-=5BlG
------END PGP SIGNATURE-----
-
---ylKl6cBH2S/6zkG+--
+> As this delay might be specific to the boards which we tested.
+> There won't be any issue if we can add the default "reset_delay"(5us) and "power_on_delay" (1ms) from the USB5744 datasheet, as other boards will be working without any board specific delay?
+Right, the driver has to be generic , that means it should contain 
+delays specified in the datasheet. Board specific delays have to be 
+configured in board specific DTs.
