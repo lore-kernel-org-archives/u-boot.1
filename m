@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83D2D44001
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 05:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACFF9D591C4
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 06:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5162D88D9B;
-	Tue, 19 Nov 2024 06:18:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EDE98894F4;
+	Tue, 19 Nov 2024 07:12:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i1RPuQUZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZrQUso3D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C175894F9; Tue, 19 Nov 2024 06:18:03 +0100 (CET)
+ id EFA77894B8; Tue, 19 Nov 2024 07:12:20 +0100 (CET)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18FBB88B0B
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:18:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E96B89500
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 07:12:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ5HxiA3804986
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 18 Nov 2024 23:17:59 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ6CG5S3814587
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 19 Nov 2024 00:12:16 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731993479;
- bh=WpqQyxcWdsQHqUwbbbVOsqcgkLDr1UykcjwZo2Bw8DQ=;
+ s=ti-com-17Q1; t=1731996736;
+ bh=78kaMF1LHlXo3fWDyMvlSSrHB4yIV29bYsei3oN+uHo=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=i1RPuQUZH/NZnMY4uYKUF2Ssa1Z8D1kBamDck2gAgM1Q/tp0mJfTmbRjFYgVV9OkN
- W/tCH+wLv9ypYgxQXmWHIJwJEZQ/eqlVzr+exZSRiC2Dna16jxUgIF1nJy5e/r7t6T
- Jzt7DXYOUyktsibT8eaOQ7BlHsg6+dtHAxB+JVVU=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ5HxNb097715
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Nov 2024 23:17:59 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Nov 2024 23:17:59 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ b=ZrQUso3DjUQpndS0hrAgihrun2NAqr9eSzHoPLPSnaw4ngSx1+8y1RYCTtH8fJ6SM
+ 2g55HxGOYQmbxAfl1wJm1vOPomaC+ZIVPnPZkaiDwQie8v0iRgeUaXjwoVmIKa/dwk
+ YizWUNwnfzY7WV1j9GazzLEKnFD4Va/pKTBCTGVw=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ6CGHT000519;
+ Tue, 19 Nov 2024 00:12:16 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Nov 2024 00:12:16 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Nov 2024 23:17:58 -0600
+ Frontend Transport; Tue, 19 Nov 2024 00:12:16 -0600
 Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ5HwaD038398;
- Mon, 18 Nov 2024 23:17:58 -0600
-Date: Tue, 19 Nov 2024 10:47:57 +0530
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ6CFTD101517;
+ Tue, 19 Nov 2024 00:12:15 -0600
+Date: Tue, 19 Nov 2024 11:42:14 +0530
 From: Manorit Chawdhry <m-chawdhry@ti.com>
 To: Aniket Limaye <a-limaye@ti.com>
 CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
  <reidt@ti.com>, <nm@ti.com>, <n-francis@ti.com>
-Subject: Re: [PATCH v4 3/5] misc: k3_avs: Check validity of efuse voltage data
-Message-ID: <20241119051757.mxw5dpbfvsyl47fj@uda0497581>
+Subject: Re: [PATCH v4 4/5] arm: mach-k3: j721e-init.c: Add support for
+ CONFIG_K3_OPP_LOW
+Message-ID: <20241119061214.gcruepd4yimqgz2p@uda0497581>
 References: <20241119003617.1871183-1-a-limaye@ti.com>
- <20241119003617.1871183-4-a-limaye@ti.com>
+ <20241119003617.1871183-5-a-limaye@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20241119003617.1871183-4-a-limaye@ti.com>
+In-Reply-To: <20241119003617.1871183-5-a-limaye@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,92 +84,94 @@ X-Virus-Status: Clean
 Hi Aniket,
 
 On 06:02-20241119, Aniket Limaye wrote:
-> From: Reid Tonking <reidt@ti.com>
+> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
+> for A72/MSMC clks and the OPP_NOM voltage.
 > 
-> k3_avs driver checks opp_ids when probing and overwrites the voltage
-> values in vd_data for the respective board. The new k3_avs_check_opp()
-> can be called from board files to check the efuse data and returns 0 if
-> valid.
+> J7200 SOCs may support OPP_LOW Operating Performance Point:
+> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
 > 
-> Also add the same check in k3_avs_program_voltage() to error out if
-> the efuse data was not valid.
+> Hence, add a config check in board_init_f() to select OPP_LOW specs:
+> - Check if OPP_LOW AVS voltage read from efuse is valid.
+> - Use the device IDs and clock IDs (TISCI docs [0]) to find the A72 and
+>   MSMC clock frequencies in the devicetree.
+> - Fixup the clock frequencies in devicetree as per OPP_LOW spec.
 > 
-> Signed-off-by: Reid Tonking <reidt@ti.com>
+> k3_avs driver programs the OPP_LOW AVS voltage for VDD_CPU through
+> k3_avs_notify_freq() callback from clk_k3.
+> 
+> [0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html
+> 
 > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
 > ---
 [..]
 > ---
->  drivers/misc/k3_avs.c | 32 ++++++++++++++++++++++++++++++++
->  include/k3-avs.h      |  1 +
->  2 files changed, 33 insertions(+)
+>  arch/arm/mach-k3/j721e/j721e_init.c | 92 ++++++++++++++++++++++++++++-
+>  1 file changed, 91 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-> index 9d950d034a5..0774e0a4c9e 100644
-> --- a/drivers/misc/k3_avs.c
-> +++ b/drivers/misc/k3_avs.c
-> @@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
->  	if (!vd->supply)
->  		return -ENODEV;
->  
-> +	if (!volt) {
-> +		dev_err(priv->dev, "No efuse found for opp_%d\n", opp_id);
-> +		return -EINVAL;
+> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+> index e9ed8cb267c..805b28af8e4 100644
+> --- a/arch/arm/mach-k3/j721e/j721e_init.c
+> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+> @@ -19,6 +19,7 @@
+
+[..]
+ 
+> +#if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
+> +static int get_clock_index_by_dev_id(ofnode node, u32 dev_id, u32 clk_id)
+
+I think the following function can be re-usable by other K3 socs too,
+can we put it in some common place instead of j721e_init? Maybe clk-k3.c
+and exported from there?
+
+> +
+> +static int fdt_fixup_a72ss_clock_frequency(void)
+> +{
+> +	int index, size;
+> +	u32 *rates;
+> +	ofnode node;
+> +
+> +	node = ofnode_by_compatible(ofnode_null(), "ti,am654-rproc");
+> +	if (!ofnode_valid(node)) {
+> +		printf("%s: A72 not found\n", __func__);
+> +		return -ENODEV;
 > +	}
 > +
->  	vd->opp = opp_id;
->  	vd->flags |= VD_FLAG_INIT_DONE;
->  
-> @@ -192,6 +197,33 @@ static int match_opp(struct vd_data *vd, u32 freq)
->  	return -EINVAL;
->  }
->  
-> +/**
-> + * k3_check_opp: Check for presence of opp efuse
-> + * @dev: AVS device
-> + * @vdd_id: voltage domain ID
-> + * @opp_id: opp id to check if voltage is present
-> + *
-> + * Checks to see if an opp has voltage. k3_avs probe will populate
-> + * voltage data if efuse is present. Returns 0 if data is valid.
-> + */
-> +int k3_avs_check_opp(struct udevice *dev, int vdd_id, int opp_id)
-> +{
-> +	struct k3_avs_privdata *priv = dev_get_priv(dev);
-> +	struct vd_data *vd;
-> +	int volt;
+> +	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
+> +			      "assigned-clock-rates", &size);
+> +	if (!rates) {
+> +		printf("%s: Wrong A72 assigned-clocks-rates configuration\n", __func__);
+> +		return -1;
+> +	}
 > +
-> +	vd = get_vd(priv, vdd_id);
-> +	if (!vd)
-> +		return -EINVAL;
-> +
-> +	volt = vd->opps[opp_id].volt;
-> +	if (volt)
-> +		return 0;
-> +
-> +	printf("No efuse found for opp_%d\n", opp_id);
-> +	return -EINVAL;
-> +}
-> +
->  /**
->   * k3_avs_notify_freq: Notify clock rate change towards AVS subsystem
->   * @dev_id: Device ID for the clock to be changed
-> diff --git a/include/k3-avs.h b/include/k3-avs.h
-> index f6f1031c9cc..5a973e4ed45 100644
-> --- a/include/k3-avs.h
-> +++ b/include/k3-avs.h
-> @@ -27,5 +27,6 @@
->  
->  int k3_avs_set_opp(struct udevice *dev, int vdd_id, int opp_id);
->  int k3_avs_notify_freq(int dev_id, int clk_id, u32 freq);
-> +int k3_avs_check_opp(struct udevice *dev, int vdd_id, int opp_id);
+> +	/* Update A72 Clock Frequency to OPP_LOW spec */
+> +	index = get_clock_index_by_dev_id(node,
+> +					  DEV_A72SS0_CORE0_0_ID,
+> +					  DEV_A72SS0_CORE0_0_ARM_CLK_CLK_ID);
+> +	if (index < 0 || index >= (size / sizeof(u32))) {
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+When would we encounter the second if..?
+
+> +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
+> +		return -1;
+> +	}
+> +	rates[index] = cpu_to_fdt32(1000000000);
+> +	printf("Changed A72 CPU frequency to %dHz in DT\n", 1000000000);
+> +
+> +	/* Update MSMC Clock Frequency to OPP_LOW spec */
+> +	index = get_clock_index_by_dev_id(node,
+> +					  DEV_A72SS0_CORE0_ID,
+> +					  DEV_A72SS0_CORE0_MSMC_CLK_ID);
+> +	if (index < 0 || index >= (size / sizeof(u32))) {
+> +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
+> +		return -1;
+> +	}
+> +	rates[index] = cpu_to_fdt32(500000000);
+> +	printf("Changed MSMC frequency to %dHz in DT\n", 500000000);
+> +
+> +	return 0;
+> +}
+> +#endif
+[..]
 
 Regards,
 Manorit
-
->  
->  #endif
-> -- 
-> 2.47.0
-> 
