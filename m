@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDBFD44157
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 13:22:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FC73D4415C
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 13:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1296589603;
-	Tue, 19 Nov 2024 14:19:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B594895F9;
+	Tue, 19 Nov 2024 14:20:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cTmzHHdn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QtXxAoHK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C16488954F; Tue, 19 Nov 2024 14:19:57 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 832B48959C; Tue, 19 Nov 2024 14:20:00 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89B81895EA
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:19:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB0B8954F
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:19:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a77fcc787fso1047805ab.1
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 05:19:55 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a73e045cf3so13722115ab.1
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 05:19:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732022394; x=1732627194; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732022396; x=1732627196; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eV3BYvIrlc1Fyb9PlH8Cm7wB42myzV1diYSsehGAAig=;
- b=cTmzHHdngirt5AdMWjOu28dqD7Y+T/xM9ebzhAxzyJ1ZGgTCf/Ruz+izC/TZTjbiVI
- Aa3gp139iQxR8dIvmB04M8Q3IW8IzcbLnEYxc8BtEeSSNnsAtd2NlpFCGNbgkX+bFNJx
- 3/UHBv/z6JRgZAJ9XcFF9kdewPE6UBiH60jzs=
+ bh=Mq3BgmGmgxi1vU0C2llPKfdu0sGxZSceqZJC5l/T3dM=;
+ b=QtXxAoHKzicjNccvfNbZg2zmL/6eDLZ8mohlJf1XHUz4S3rJUwYLkwlsN/pPv3o0eB
+ g/uThNbbiDZyygI40ZLk7lVq1szGuKk9PuyzqDazfQfgTrRJgL/5u6RTU5Z3dz5OkkqV
+ 9vgazN7gNdk0glnG6b80ofvAUgq+7+gjp9fh8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732022394; x=1732627194;
+ d=1e100.net; s=20230601; t=1732022396; x=1732627196;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eV3BYvIrlc1Fyb9PlH8Cm7wB42myzV1diYSsehGAAig=;
- b=Kt8KsxSYmqSGtyDiHDA0NvOqOCAIBNohY6t+Z1h5GxwK28cDzW5Ezs6qkNMRN2YPao
- d3irAMX/7EchTBoIHfhDvPdIPLki1JOSdb8Xn8iyC2WbVN8NhWsvS6X6kparl64lFC9I
- NgwOGao90FOc+IalOwofwYuy5VI76AhE7wQ4fI6Dr1PyYhFW9JOQZA7wKmAhPpErWM/Y
- L58E6wGoBqpUMwZQd+pAgrVUoco1DzqK2QcGr7BcUZ+7GEYQo3lih5DocWHfT54YF5Rh
- 8z9bAxqVtZRD80bpJ+QMmW8+i8jeYhwJLy1p7EsDc9wGVUFvWRWpUfh8OeGVeIwVjzZl
- 9epw==
-X-Gm-Message-State: AOJu0YwmBkRxUxP64OCafE4AbtLBtCmlY+Jq5TxuVXSBVCzJgH3eDrBR
- VWqivuZN19Uh4Zi7clOMBE4cJqd+uWUoA9xiH9nlidxhMgAUNdxuBS+aGocZUXD3SSN+yumzSiA
+ bh=Mq3BgmGmgxi1vU0C2llPKfdu0sGxZSceqZJC5l/T3dM=;
+ b=St7QehAi2V9ODFqTOcxKCaqOOuIX7bNYNxfjTH/VudKC5tGhKujD5jmH1l3IBu3Pt+
+ FZDUbqbe8ygfNdpNlLVktJxiTzw86jAmEm/1Eoy8KdFQ2CK9SC7rT+QW1rfsF3lHLipc
+ DiWW8yBIQbISz0yQR1Oi2ucF64fWNwl9GNKrz67qZQqlS3lmRGxYUYUSMfPXy5Hgll4t
+ oMFtj2AFHQ/Pj2QjETMSa19Y0j4r6+0s1FDfNWAuyjHfq8und98axRyzUtKG0hzwsf/j
+ 2EamPg8Pz7YW6wMsCEXCGnrFxaJ+PmS9NxShV2h/Oemco/fkaQ/1przaq5ik1pBuM2id
+ s66Q==
+X-Gm-Message-State: AOJu0YxB/ve2Dz8Y7xLEu9QW0IYJj5zGx1Obffnf6xP5W3yxBm8MQX0J
+ 3Gjuf6q9vtucD6sIG3cJ8YEs1LpgSWYcB9HkzsZ9kwZc5GqLKA1CaLW6hIHGoK2NyM7xP2RJeac
  =
-X-Google-Smtp-Source: AGHT+IF8Tm0lEbqa16LOmtnVX98s1O3zrPoXh9yHhkQePVt6lEdRIS6fXVG/cmzxsXHxOSwkYEcz4A==
-X-Received: by 2002:a05:6e02:19ce:b0:3a7:1a65:2fbc with SMTP id
- e9e14a558f8ab-3a74808cc28mr191195415ab.23.1732022393673; 
- Tue, 19 Nov 2024 05:19:53 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF75YQU/aoQbfh6QC8MIeUfiXG1KoAEE5ER1P0mNm8VCSYy88YssfH3i5xEsr9HLpJc3z3RhQ==
+X-Received: by 2002:a05:6e02:1d8d:b0:3a7:6825:409d with SMTP id
+ e9e14a558f8ab-3a76825432emr85792295ab.0.1732022396566; 
+ Tue, 19 Nov 2024 05:19:56 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a7811e4905sm753085ab.2.2024.11.19.05.19.50
+ e9e14a558f8ab-3a7811e4905sm753085ab.2.2024.11.19.05.19.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 05:19:51 -0800 (PST)
+ Tue, 19 Nov 2024 05:19:55 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 23/39] net: Provide a function to run network operations
-Date: Tue, 19 Nov 2024 06:18:28 -0700
-Message-Id: <20241119131844.4078144-24-sjg@chromium.org>
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH 24/39] boot: Avoid using the cmdline in bootmeth_pxe and pxe
+ cmd
+Date: Tue, 19 Nov 2024 06:18:29 -0700
+Message-Id: <20241119131844.4078144-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241119131844.4078144-1-sjg@chromium.org>
 References: <20241119131844.4078144-1-sjg@chromium.org>
@@ -94,181 +93,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new netboot_run() function which can be used for simple network
-operations, such as loading a file. Put the implementation in an
-internal function, used by the existing code.
-
-Place this function into the net/ code, so that it does not need the
-command line to be available.
-
-Document which network operations are supported, i.e. a limited subset,
-for now.
+Use the new netboot_run() function to avoid building a command line,
+when running these network operations.
 
 For the one board which uses lwip, it is not quite clear how to avoid
-using the cmdline interface. This will need some discussion.
+using the cmdline interface, so produce an error, for now. This can be
+figured out later.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/net.c            | 40 +---------------------------------------
- include/net-common.h | 30 ++++++++++++++++++++++++++++++
- net/net.c            | 44 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 75 insertions(+), 39 deletions(-)
+ boot/bootmeth_pxe.c | 16 ++++++----------
+ cmd/pxe.c           | 21 +++++++--------------
+ 2 files changed, 13 insertions(+), 24 deletions(-)
 
-diff --git a/cmd/net.c b/cmd/net.c
-index 03b33aa1f20..8ae4639ecb4 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -380,44 +380,6 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
- 	return 0;
- }
- 
--static int netboot_run_(enum proto_t proto, ulong addr, const char *fname,
--			ulong size, bool fname_explicit, bool ipv6)
--{
--	int ret;
--
--	bootstage_mark(BOOTSTAGE_ID_NET_START);
--
--	/*
--	 * For now we use the global variables as that is the only way to
--	 * control the network stack. At some point, perhaps, the state could be
--	 * in a struct
--	 */
--	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
--		image_save_addr = addr;
--	else
--		image_load_addr = addr;
--
--	net_boot_file_name_explicit = fname_explicit;
--	copy_filename(net_boot_file_name, fname, sizeof(net_boot_file_name));
--	if (IS_ENABLED(CONFIG_IPV6))
--		use_ip6 = ipv6;
--	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
--		image_save_addr = addr;
--		image_save_size = size;
--	} else {
--		image_load_addr = addr;
--	}
--
--	ret = net_loop(proto);
--	if (ret < 0) {
--		bootstage_error(BOOTSTAGE_ID_NET_NETLOOP_OK);
--		return ret;
--	}
--	bootstage_mark(BOOTSTAGE_ID_NET_NETLOOP_OK);
--
--	return 0;
--}
--
- static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- 			  char *const argv[])
+diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+index b91e61bcbc4..c6a132b8de2 100644
+--- a/boot/bootmeth_pxe.c
++++ b/boot/bootmeth_pxe.c
+@@ -116,21 +116,17 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
+ 				  const char *file_path, ulong addr,
+ 				  enum bootflow_img_t type, ulong *sizep)
  {
-@@ -473,7 +435,7 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- 	}
+-	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
+-	struct pxe_context *ctx = dev_get_priv(dev);
+-	char file_addr[17];
+ 	ulong size;
+ 	int ret;
  
- 	size = netboot_run_(proto, addr, fname, save_size, fname_explicit,
--			    use_ip6);
-+			    IS_ENABLED(CONFIG_IPV6) && use_ip6);
- 	if (size < 0)
- 		return CMD_RET_FAILURE;
+-	sprintf(file_addr, "%lx", addr);
+-	tftp_argv[1] = file_addr;
+-	tftp_argv[2] = (void *)file_path;
+-
+-	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
+-		return -ENOENT;
+-	ret = pxe_get_file_size(&size);
++	if (IS_ENABLED(CONFIG_NET_LWIP))
++		return -ENOTSUPP;
++	ret = netboot_run(TFTPGET, addr, file_path, 0, false);
+ 	if (ret)
+ 		return log_msg_ret("tftp", ret);
++	ret = pxe_get_file_size(&size);
++	if (ret)
++		return log_msg_ret("tft2", ret);
+ 	if (size > *sizep)
+ 		return log_msg_ret("spc", -ENOSPC);
+ 	*sizep = size;
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index 37b8dea6ad6..c69b8130423 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -29,25 +29,18 @@ const char *pxe_default_paths[] = {
+ static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
+ 		       char *file_addr, enum bootflow_img_t type, ulong *sizep)
+ {
+-	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
+ 	int ret;
+-	int num_args;
  
-diff --git a/include/net-common.h b/include/net-common.h
-index 524ed4ad131..839d82f7d1f 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -463,6 +463,36 @@ int net_init(void);
- enum proto_t;
- int net_loop(enum proto_t protocol);
+-	tftp_argv[1] = file_addr;
+-	tftp_argv[2] = (void *)file_path;
+-	if (ctx->use_ipv6) {
+-		tftp_argv[3] = USE_IP6_CMD_PARAM;
+-		num_args = 4;
+-	} else {
+-		num_args = 3;
+-	}
+-
+-	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
+-		return -ENOENT;
++	if (IS_ENABLED(CONFIG_NET_LWIP))
++		return -ENOTSUPP;
++	ret = netboot_run(TFTPGET, hextoul(file_addr, NULL), file_path, 0,
++			  ctx->use_ipv6);
++	if (ret)
++		return log_msg_ret("tfp", ret);
  
-+/* internal function: do not use! */
-+int netboot_run_(enum proto_t proto, ulong addr, const char *fname, ulong size,
-+		 bool fname_explicit, bool ipv6);
-+
-+/**
-+ * netboot_run() - Run a network operation
-+ *
-+ * The following proto values are NOT supported:
-+ *	PING, since net_ping_ip cannot be set
-+ *	NETCONS, since its parameters cannot bet set
-+ *	RS, since first_call cannot be set, along with perhaps other things
-+ *	UDP, since udp_ops cannot be set
-+ *	DNS, since net_dns_resolve and net_dns_env_var cannot be set
-+ *	WGET, since DNS must be done first and that is not supported
-+ *	DHCP6, since the required parameters cannot be passed in
-+ *
-+ * To support one of these, either add the required arguments or perhaps a
-+ * separate function and a struct to hold the information.
-+ *
-+ * @proto: Operation to run: TFTPGET, FASTBOOT_UDP, FASTBOOT_TCP, BOOTP,
-+ *	TFTPPUT, RARP, NFS, DHCP
-+ * @addr: Load/save address
-+ * @fname: Filename
-+ * @size: Save size (not used for TFTPGET)
-+ * @ipv6: true to use IPv6, false to use IPv4
-+ * Return 0 on success, else -ve error code
-+ */
-+int netboot_run(enum proto_t proto, ulong addr, const char *fname, ulong size,
-+		bool ipv6);
-+
- /**
-  * dhcp_run() - Run DHCP on the current ethernet device
-  *
-diff --git a/net/net.c b/net/net.c
-index f47e9fbe33a..0a1b477bbf8 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -770,6 +770,50 @@ done:
- 	return ret;
- }
+ 	ret = pxe_get_file_size(sizep);
+ 	if (ret)
+-		return log_msg_ret("tftp", ret);
++		return log_msg_ret("tf2", ret);
+ 	ctx->pxe_file_size = *sizep;
  
-+int netboot_run_(enum proto_t proto, ulong addr, const char *fname, ulong size,
-+		 bool fname_explicit, bool ipv6)
-+{
-+	int ret;
-+
-+	bootstage_mark(BOOTSTAGE_ID_NET_START);
-+
-+	/*
-+	 * For now we use the global variables as that is the only way to
-+	 * control the network stack. At some point, perhaps, the state could be
-+	 * in a struct
-+	 */
-+	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-+		image_save_addr = addr;
-+	else
-+		image_load_addr = addr;
-+
-+	net_boot_file_name_explicit = fname_explicit;
-+	copy_filename(net_boot_file_name, fname, sizeof(net_boot_file_name));
-+	if (IS_ENABLED(CONFIG_IPV6))
-+		use_ip6 = ipv6;
-+	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
-+		image_save_addr = addr;
-+		image_save_size = size;
-+	} else {
-+		image_load_addr = addr;
-+	}
-+
-+	ret = net_loop(proto);
-+	if (ret < 0) {
-+		bootstage_error(BOOTSTAGE_ID_NET_NETLOOP_OK);
-+		return ret;
-+	}
-+	bootstage_mark(BOOTSTAGE_ID_NET_NETLOOP_OK);
-+
-+	return 0;
-+}
-+
-+int netboot_run(enum proto_t proto, ulong addr, const char *fname, ulong size,
-+		bool ipv6)
-+{
-+	return netboot_run_(proto, addr, fname, size, true, ipv6);
-+}
-+
- /**********************************************************************/
- 
- static void start_again_timeout_handler(void)
+ 	return 1;
 -- 
 2.34.1
 
