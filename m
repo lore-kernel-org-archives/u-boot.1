@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18905D6C2BA
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 00:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6E4D6C2B9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 00:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44F3B8963A;
+	by phobos.denx.de (Postfix) with ESMTP id F11BD89641;
 	Wed, 20 Nov 2024 01:28:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DDwcf84L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SsihjcQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E46E895D8; Tue, 19 Nov 2024 23:46:57 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 37623895D6; Tue, 19 Nov 2024 23:46:59 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51CD6895D0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:46:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4142B89431
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:46:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-43159555f29so5964695e9.3
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:46:55 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3821a8c7c5cso667214f8f.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:46:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732056415; x=1732661215; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732056417; x=1732661217; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3VeLkBhHNTPKgBKHtvcBkoTCMemneo1KRpoomrwYlaY=;
- b=DDwcf84LYpsDdKWVn+K3lJLjcoTVV0wgL273nhlgSaxK58ksxFAuDL4pp1A5WQ9i6Q
- 2JOl903xlXoOwV6raN4YN2cAf0OJV9quaxxwB6Ftih5VhNb6h2rNZECd55kxXi5/yrNk
- j5DrgKoPrTRFqfUggXrB23bEsauJKPFLN3hT011TCXvAYMPzAYkh36rsdeeDYQKTSWGy
- 9onm9kwrdPNBSEqmTJD5fbO113s6n4uD9YBOj0f+xJ86USTYtKuERGLetCOrVUL7A9NZ
- YUUV67kCxen0GYH0Fh24LX7GVYfNEG2MULYY1Ds3FUB5yWTdp/b0ijSM/zV1D4t2I3Pw
- lMwA==
+ bh=N+gTXKkoNCmg09HrAn3T7WBqGC7JqojyYDP79MXe0rg=;
+ b=SsihjcQnhwFoGDbm2xNs9DB37z0BYFLS7FfK17erP4iwOF9NvM4a298gtQYxfX+SiM
+ cra4nD7tzKvaXvd3mcIyUCp6TOpZLBgiJqcMsVTIJGDO9upHobC/c9PBu7i6VmAq6NW6
+ z1kplNrSVQrm7MI4IebU+XxQDvtSG4oXxGd4AenK7W2lx2vZWPPDSK+cJNfwj88GkM27
+ Q/vrktqqsAwg0uJZsC1kY2jjzI6LGTUc68DZ/fCuCMvHmdpgs7Sgs8sn6Q42ar8qpYGq
+ KGxzPgRwdRbvDGmNNKiWsfxYhkNAA+r+oquzPwnzP8kq7FH9XjllyyEoHGvBAayijSub
+ NNFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732056415; x=1732661215;
+ d=1e100.net; s=20230601; t=1732056417; x=1732661217;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3VeLkBhHNTPKgBKHtvcBkoTCMemneo1KRpoomrwYlaY=;
- b=HeAXVG316U0084l3ORb56+gCwGQRoaITRTGuG5U6HiVEz9iqVTDmgKY9ZMZKWapbg8
- Ot/XuWMqo2QXP2Nm46lOx8cb0LDSzhCjIYiexLm8P/QX1hV0l9+MPHJ3+5OnyJ7dhB45
- FSWCgj+p+wqNM/GetmWm3o/m3SG4iDavZWveLlWim0Db+e0e3Kd0FBptGH/cGcb4gJ4v
- K5j7LIGnOhlnFufQiqjlYMt9YfuKuEmjXjMVHw+vw0SqkS1sqYpEjQ5/6v/yJ1MSsMV2
- tZ1Euwk8bOPN5WIYRA1FujMU80VwzSIBjarX/UgVKZpYzoTmXgLXgvoEJTBwk2aT9RC3
- 2Sgg==
-X-Gm-Message-State: AOJu0YwrKgmzGIuPsQeneBrpeqqIHr7GNBZDasCbdt+ZcSu+bsfzTudQ
- oty/DMAACeelpXSvawCIKYGBACJMcKeEZiKAZBf35Nhvq58NWfuSucpVJZCO
-X-Gm-Gg: ASbGncsc8nLT1KEez2X6JAcZjH6OFAfD8EMojcrjxKKxPM5uzf9i0f9fdr5r3brHsTD
- W6s7G7Vfn8rypE1X6scmDO+5jrDdgfyR68Ln11hrQC/e44T9JkkW6m3hN3lVi30ZAuyVC8ZZdYz
- iN/lx/src+pf64kK0FHEPwFihAC3bdQCXMoWizSrFJw7NunS00CWVsBq/jvoOIO9gLUoPe71gns
- 4jQgMPlkDzAyKP5nNScHqZrjQRoSSmUsHnPxzQYcyt1MJv1+/XrBRDVURvcDxZcIHnb+XRJhoht
- 2RZfkfM+CpGUrBNUYi+E38Eu4Eu2
-X-Google-Smtp-Source: AGHT+IG/2bGj5YoltLW7qTJV6suLg1u9fnYFlIce0y9SzdgUyBmk/z80PuQYwW4c9c7wLTU4G468sw==
-X-Received: by 2002:a5d:6c63:0:b0:37d:4705:ff71 with SMTP id
- ffacd0b85a97d-38254b165eemr153370f8f.10.1732056414353; 
- Tue, 19 Nov 2024 14:46:54 -0800 (PST)
+ bh=N+gTXKkoNCmg09HrAn3T7WBqGC7JqojyYDP79MXe0rg=;
+ b=c6TwUp4exAfuvmFcfijGLO4RTwLUYtu5DJvp54DrtlEzQJC4B01UUbTWO0/GElxPap
+ TFKWaqCm3iawDG7ev2kJsXkSDkrRd2hw5zT3P2ZcYh6h5iOlcPBaMD/M2i4UpRcjr1JN
+ ogfQdIr3fH6hgtq8z+q4XlGMdZTslBaOQGA2kCmKFAD0BO9Nsw9GwOTHdrdlGRb5fome
+ vNPlExiSDvf5Du6SGYHsq1zhiYWzEBB65vkFXAEQKQJhOZSnUAyiP+DOYRhZzxyLvBg7
+ 4rk0LV3DXHC88+7VOl7MIe+gbW88RPxetFtraXQlrG8uxGRF73sIva508fx1uCtUjVet
+ DTcA==
+X-Gm-Message-State: AOJu0YzSphUNuRP8P1KoFdvTulbKLhwtp3Xned2lzKdspiONlfuO6jIy
+ TJmq5SukqWPRkB56HjNsFCiqg+9uGJiIJPWlf/PZo36bmo6EtNAF0YnvSTDX
+X-Gm-Gg: ASbGncuhc0equUYowPIdjg2fkvqElcs1MYm2Ao1Wh6/OMAUynzRuVW3Ril82aZMJfpY
+ o+SdIimsgl8hzkaiCwWX23IFZbq90f6vrUk4/niOyf7Mdx3iHStg5sVQzfWHBKvLHkMVj0lqhR2
+ B4Gol7TdtHi69s6KkLjhtmo8Hw0qw+/fWKv39Jyr3kiQJs8yM56pSzNspB9IuRlvMkGmsS7sbhV
+ 8EiLTv9LHO7slqzZeV4BeqOWzO+EtweB9SMz89hEwa2sb9P9bGPTv0a1QEdO0jLDqoUhD2wlvMP
+ M38xwrL5U1CV4/RW9bqvZYiUaOLu
+X-Google-Smtp-Source: AGHT+IHXu9IP6C6fXdxZ/m7tca1C+rffKvfkh97i/TiOOdFXgLS9ecmDz+aorLo43+yElcwaIBGM+g==
+X-Received: by 2002:a05:600c:1d1a:b0:42c:ba6c:d9b1 with SMTP id
+ 5b1f17b1804b1-4334f01d8d8mr2138705e9.4.1732056416645; 
+ Tue, 19 Nov 2024 14:46:56 -0800 (PST)
 Received: from d71e1d1a2016.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432da27fc8esm216979795e9.21.2024.11.19.14.46.52
+ 5b1f17b1804b1-432da27fc8esm216979795e9.21.2024.11.19.14.46.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 14:46:53 -0800 (PST)
+ Tue, 19 Nov 2024 14:46:56 -0800 (PST)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
  simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sumit.garg@linaro.org
 Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
  jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 v5 05/10] ARM: socfpga: add Mercury+ AA1 boot scripts
-Date: Tue, 19 Nov 2024 22:46:38 +0000
-Message-Id: <20241119224643.27692-6-l.rubusch@gmail.com>
+Subject: [PATCH v4 v5 07/10] misc: atsha204a: update kconfig description
+Date: Tue, 19 Nov 2024 22:46:40 +0000
+Message-Id: <20241119224643.27692-8-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20241119224643.27692-1-l.rubusch@gmail.com>
 References: <20241119224643.27692-1-l.rubusch@gmail.com>
@@ -100,51 +100,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootscripts to boot Enclustra SoMs from MicroSD card or QSPI flash.
-MicroSD card as bood device here covers the cases of sdmmc or emmc as
-such boot media.
+The atsha204a crypto chip is not only on the Turris Omnia board. Extend
+the description of the atsha204a kconfig to cover also other boards. As
+an example the Enclustra Mercury+ AA1 SoM.
 
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
- board/enclustra/bootscripts/qspi-aa1.cmd | 12 ++++++++++++
- board/enclustra/bootscripts/sd-aa1.cmd   |  9 +++++++++
- 2 files changed, 21 insertions(+)
- create mode 100644 board/enclustra/bootscripts/qspi-aa1.cmd
- create mode 100644 board/enclustra/bootscripts/sd-aa1.cmd
+ drivers/misc/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/enclustra/bootscripts/qspi-aa1.cmd b/board/enclustra/bootscripts/qspi-aa1.cmd
-new file mode 100644
-index 0000000000..9633754491
---- /dev/null
-+++ b/board/enclustra/bootscripts/qspi-aa1.cmd
-@@ -0,0 +1,12 @@
-+# This is an example input file for boot.scr generation.
-+# Generate boot.scr
-+# ./tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -d board/enclustra/bootscripts/qspi-aa1.cmd boot.scr
-+#
-+# Note: The needed variables need to be set in the environment.
-+bridge enable
-+sf probe
-+sf read $kernel_addr_r $qspi_offset_addr_kernel $kernel_size
-+sf read $fdt_addr_r $qspi_offset_addr_devicetree $fdt_size
-+sf read $rootfs_addr_r $qspi_offset_addr_rootfs $rootfs_size
-+run fdtload_qspi
-+bootm $kernel_addr_r $rootfs_addr_r $fdt_addr_r
-diff --git a/board/enclustra/bootscripts/sd-aa1.cmd b/board/enclustra/bootscripts/sd-aa1.cmd
-new file mode 100644
-index 0000000000..604ae0760a
---- /dev/null
-+++ b/board/enclustra/bootscripts/sd-aa1.cmd
-@@ -0,0 +1,9 @@
-+# This is an example input file for boot.scr generation.
-+# Generate boot.scr
-+# ./tools/mkimage -A arm -O linux -T script -C none -a 0 -e 0 -n "U-boot mmc start script" -d board/enclustra/bootscripts/sd-aa1.cmd boot.scr
-+#
-+# Note: The needed variables need to be set in the environment.
-+bridge enable
-+load mmc $devnum:$distro_bootpart $kernel_addr_r Image
-+load mmc $devnum:$distro_bootpart $fdt_addr_r $fdtfile
-+booti $kernel_addr_r - $fdt_addr_r
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 6009d55f40..90fa8c9eae 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -73,7 +73,7 @@ config ATSHA204A
+ 	help
+ 	   Enable support for I2C connected Atmel's ATSHA204A
+ 	   CryptoAuthentication module found for example on the Turris Omnia
+-	   board.
++	   board and Enclustra SoC FPGA boards.
+ 
+ config GATEWORKS_SC
+ 	bool "Gateworks System Controller Support"
 -- 
 2.39.2
 
