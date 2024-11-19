@@ -4,94 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A7FD4922B
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 16:27:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D120CD4922B
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 16:29:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A13FA8958A;
-	Tue, 19 Nov 2024 17:27:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 354F289590;
+	Tue, 19 Nov 2024 17:29:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L3PNYlIk";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="joyy3vvT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D3B8958C; Tue, 19 Nov 2024 17:27:38 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E790089592; Tue, 19 Nov 2024 17:29:33 +0100 (CET)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20720.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::720])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22AF089589
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 17:27:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97C7E8958E
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 17:29:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6eeb741c26eso4986847b3.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:27:36 -0800 (PST)
+ spf=pass smtp.mailfrom=C.Stoidner@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FoskTMoCwvL9v3k4pfLNMQ0TUNpr6KJZzMzmJ9c9R5qb54kGEO0+49l1mYPvdEA5VqiIO4BQ17sRj/lKDg2NOKJDbsIry8AYBCOo/Lihlbz0cEt5qMod2LpJKphfUorl2ktS1R3b5/nkozoY7Ibg7gQCsF8fDfVObtIISwtIc5SH2FxYvpjA1GLM5rI29XoC5KJmg9mUXKuE3zMV1klTjHB7r8bYymcsa3OR4qfEiC5TCSGxYSCqKoURHAjgP+LBNKXnX7bawWqWfZEhtxH4CmVzZqzT51dQXpDQkZr5b8WmvxoOsx4K1Q1wNScU5QNAm730tvYZrb0feojRIBI+Ow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PonVSHZU6KednN6Si2UE70VZuuLWh45E86sBA0MOR4M=;
+ b=j3bUAqtfNEyMDVlXOZPLqxbsWFjf9RynJc7o5SRWSj+6h7pK4bF5yZCVnh4bKxvdJEZvpsK2a/5lcyt+cBubhzV9YEkaihyOUdQlMZXSuKUBVq18RK+fxuutWjZP3mdoNEDwDFy7tmCQro8xxQ8dT8yGwgKoSiHdXi8IwsPeUefl4jcXxMye8+XOy1Unp7rHGuTF70q3he9yA1PncC3Dizfa4sZXiCjyf4MnF8ODRAK62SImxWKmfLKqOvv40dxE7HMlzJmJk+4g0STaCvGW2HtAXAMZYL39Tcn1g6opdrHt3f6sLLJmTa/z8sz6pSGKOqqu5vZ8r5VB5MBAlljTjA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
+ dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
+ arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732033655; x=1732638455; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vcEXe/oPpxbL+3mMksQ3rHz4LrSn01pYwf87hX8REmI=;
- b=L3PNYlIkE+d09AtHfJXA5WhY3zfcG4jubBlnrq67GC65l/oFpHum3jhvFPYafwFqSw
- To05alumCPj3V1SPv0xueWHt94yF79zXZAwwUXSkatVXYkewnrKIp6SBQb+LhGiF6XtF
- yJQU7LSjkDWkURcj4IFPrA+GlXZe97Bc+E9hk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732033655; x=1732638455;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vcEXe/oPpxbL+3mMksQ3rHz4LrSn01pYwf87hX8REmI=;
- b=vxW1PVpX9HiJhGI0GDjGfDpRe/DeGRxxvoCiZ6aQvLBD2Maw8pLWZGKkE0NFhFLjTL
- bW4pqLBjTDr45YK2F6sDNpYwBI4xlfSHxWTcPu4HOHsn6hLJ+d01GkpBAh6KTTu1Lia1
- qsgrMsEodXwWSy1bfjyLKlMDdGYWsQZtzlDM03aQEFIvW9nvgpNl4bqukgNQ2qDVsoYC
- 2Mcj89SCgFAqawAPdLyNbHoTmEMHcBOl0ENkd7+4mzs1HzRX/081Sdja3Qpe1V1B0haL
- IO7chfiqeMQz2HmYJqCDi9t8NNq7GAO6R9dzoP/WBL1g8qNbQaiGU6DNP8XzoBH3/xp+
- T5tQ==
-X-Gm-Message-State: AOJu0YxWX2a/wU3G69KsyqmZND0l2NnMahfrSVn6I1Rvi/+BsOpVnHHs
- PSLKhee5iddnIon6IDdHIzKVLlIfMwEcbr6eMihmeBCYI1ZM53E5bOQzxd5dMrA=
-X-Google-Smtp-Source: AGHT+IHVpZAauad9NWxUgUixkTZAwkpSJru+BILdIA5hdz5p2GrL9MAULM/H+t2PCmYer4IOqOXKaQ==
-X-Received: by 2002:a05:690c:9a83:b0:6e3:37a7:8a98 with SMTP id
- 00721157ae682-6ee55a5d623mr185511337b3.14.1732033654952; 
- Tue, 19 Nov 2024 08:27:34 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d40dc1f1bfsm49625476d6.49.2024.11.19.08.27.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 08:27:34 -0800 (PST)
-Date: Tue, 19 Nov 2024 10:27:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH 00/39] pxe: Support read_all() for extlinux and PXE
-Message-ID: <20241119162730.GX3600562@bill-the-cat>
-References: <20241119131844.4078144-1-sjg@chromium.org>
+ d=phytecmesstechnikgmbh.onmicrosoft.com;
+ s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PonVSHZU6KednN6Si2UE70VZuuLWh45E86sBA0MOR4M=;
+ b=joyy3vvTgUeCAEGf+26e2DNab1zeCta7jS+7ec7mOlvOi9cIt75mWe9se/dAhclaOLCPF6CGXFIbX04h3U3qZyNHLXwKCGVfejoQWGHXzUMZBWm+1CEQYEMTGo4k4OJHkYbbe+OsICAizx2NwgA2nBD84pW4tEsxbl0A67TjwDA=
+Received: from AS9PR0301CA0024.eurprd03.prod.outlook.com
+ (2603:10a6:20b:468::31) by AS8P195MB1879.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:53b::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.22; Tue, 19 Nov
+ 2024 16:29:28 +0000
+Received: from AM2PEPF0001C70A.eurprd05.prod.outlook.com
+ (2603:10a6:20b:468:cafe::1d) by AS9PR0301CA0024.outlook.office365.com
+ (2603:10a6:20b:468::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.23 via Frontend
+ Transport; Tue, 19 Nov 2024 16:29:24 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM2PEPF0001C70A.mail.protection.outlook.com (10.167.16.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8158.14 via Frontend Transport; Tue, 19 Nov 2024 16:29:24 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 19 Nov
+ 2024 17:29:24 +0100
+Received: from llp-stoidner.phytec.de (172.25.50.218) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Tue, 19 Nov
+ 2024 17:29:23 +0100
+From: Christoph Stoidner <c.stoidner@phytec.de>
+To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+CC: Christoph Stoidner <c.stoidner@phytec.de>
+Subject: [PATCH v3 0/3] Add support for all variants of the phyCORE-i.MX93 SOM
+Date: Tue, 19 Nov 2024 17:29:04 +0100
+Message-ID: <20241119162907.17934-1-c.stoidner@phytec.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OAsf8OLKDJ8G4Zze"
-Content-Disposition: inline
-In-Reply-To: <20241119131844.4078144-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.50.218]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70A:EE_|AS8P195MB1879:EE_
+X-MS-Office365-Filtering-Correlation-Id: e95489f2-84cf-4e77-df9c-08dd08b7545f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HPC9JNdEyhnOItIx1zomi705D8E4bVApiAXevhtxkJtQTEKw07seluqD8bSe?=
+ =?us-ascii?Q?Yqqp98Kd6AiXycWAl6atqlp30MtRZ2wk+ImQrXe2HyKgDJnZJybQPnHTkhme?=
+ =?us-ascii?Q?NGvFb6p7suOZ1tBI+ykFgwkpYN8PX8HXHOxD7vRucBD57A2nOSh352vaETyq?=
+ =?us-ascii?Q?KoLrTpWOGQf03UmJB8fLt6s15du77TQSGb2e+XumNeDqNOV80KCgELNoj4DJ?=
+ =?us-ascii?Q?WsiYXVIwFB8sIX5L8lAgXVmhjmjkgvxtdfvKRvFt6SHSgGxTx0a31dRauA+g?=
+ =?us-ascii?Q?xGz8zCDz9cMR1juDakIpcu3o9iHFiy/LJfPtwrboRi7qj9TrLMC4cj3iYRDg?=
+ =?us-ascii?Q?yUDZ47cdVISMrCSJKtD8JIE1s/EZ3/c5WJiiw9QFVRiK+PQ1SGdfra3N4d5E?=
+ =?us-ascii?Q?KaN4gd3XfAjaadDSY2ll8E2aRz3h9sfj9dsXFC1tdTzb+wy3sl4VCVNt3mPg?=
+ =?us-ascii?Q?TIFymqNJQJGOHbrOqcJw3xiNhAy9OQrSBtjygg7O3nu0a369IrghaxDsb2bC?=
+ =?us-ascii?Q?AadokxCLdtNuQ7FkiemKwndjlGx6qSurfweOk41SFDtnv+nT2oHCiEYq6z28?=
+ =?us-ascii?Q?1TM4Cr1N4Kr0cWrTymupnEsDGQGsc75RaF1Ufe1B48WeZS7kkFR6RbmhBAeX?=
+ =?us-ascii?Q?H196hEP2zjlgRYGykZSobmaQpFSikQGMnKzc9sBrVyz6O3rtG4ZhHmZGu1Sc?=
+ =?us-ascii?Q?7sX0KZAlxGw33413xLIZIQBZ5zRP0FIZId2Sv3b7cn8OER3Egep7yRZNHoit?=
+ =?us-ascii?Q?rpxJbUHeWO79GWusklVUPpqFF/twXs/gXl6dm7r1YRCfXYiNB27m/LY1aKbR?=
+ =?us-ascii?Q?F2aByAAeyhYfgxNO9OcLaq7sU8wNE5VIQwmBa8DzeMo1iinX45By9A+jVYgt?=
+ =?us-ascii?Q?YJGSQj5jWwtJ3KEO6m1XEJcVFjKRr4oCEhImjGCMaU7h+5zSBQbSejpsxrN7?=
+ =?us-ascii?Q?ta4XPVtdVwCcU/Mh5XkKrB0jzBpLMqV9PIfcMRzx6LbHh5LMPbhHqOPgRhX3?=
+ =?us-ascii?Q?qPXsr39v3cnxLc4h+kpduOzlei7sMF5Y8drDEscW3e7wCf/LDCtJkL8uxb2a?=
+ =?us-ascii?Q?Ue//3KSsUkIjgIyec5k1RLeQjOn4yINjcvT57Ds/zSivRurITCB8qnn3DR76?=
+ =?us-ascii?Q?FKNcAUWjdnLe0vU6XLLHrHjjxtHc0GazE2nejUQGQUx8v39ltNNnCffy2HZh?=
+ =?us-ascii?Q?D5M9g7aNcjMVj6y3hHmnth5qptn9y+EdbX/wHRKmfvDBU5nydK4X/KM2Vl4n?=
+ =?us-ascii?Q?l71Ztgu2oqnfW/LggHkz5Zf828qjmzufnADAqapEhQvzjBHJiRmDzmcT1F1L?=
+ =?us-ascii?Q?ZkPJiTLRw2YVzNV8jyiwFPd2TRz+rM8N93cVcEZt+taoxSq3szZ5lqWZnCto?=
+ =?us-ascii?Q?GMSoKXOeTVPbBQcpRe9Xz0dA28irageDtMKQOKX8slAIUSS/3A=3D=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2024 16:29:24.3616 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e95489f2-84cf-4e77-df9c-08dd08b7545f
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF0001C70A.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1879
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,60 +147,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The phyCORE-i.MX 93 is available in various variants (e.g. different ram
+sizes, eMMC HS400 yes/no). It's eeprom contains information which features
+the existing module supports.
 
---OAsf8OLKDJ8G4Zze
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Extend the existing board-code to support all the SOM variants. The spl/u-boot
+evaluates the eeprom information and enables supported features accordingly.
+The resulting spl and u-boot binary is able to boot each phyCORE-i.MX 93 SOM
+variant on each carrier board.
 
-On Tue, Nov 19, 2024 at 06:18:05AM -0700, Simon Glass wrote:
+Changes in v3:
 
-> This series implements read_all() so that it is possible to read all the
-> files relating to a bootflow, make adjustments and then boot.
->=20
-> Unfortunately quite a few things stand in the way, so this series
-> finishes off several pending items: zboot without CONFIG_CMDLINE,
-> required support in pxe_utils and the differing code in the extlinux and
-> PXE bootmeths. There is very little new code, but quite a lot of
-> refactoring.
->=20
-> The bootm, booti and bootz commands have all been refactored previously,
-> so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> At the, time, zboot was left alone, since it is x86-specific and a bit
-> more trouble.
->=20
-> This series adds a programatic API for zboot and uses the forthcoming
-> bootstd 'image list' to collect information from an extlinux file. It is
-> therefore possible to parse the file, load the resulting images and then
-> examine/adjust the resulting bootflow, before booting.
->=20
-> The addition of options to extlinux resulted in the PXE and extlinux
-> bootmeth having slightly different features. This is tidied up in this
-> series, with common functions for both. This allows the same features
-> (loading images as a separate step) to be provided for PXE.
+patch #1:
+- none changes
 
-This doesn't apply cleanly to -next and doesn't say what other series it
-depends on.
+patch #2:
+- remove unwanted dts node eepromid
+- correct typo in doc (PHYTEC_IMX93_VOLTAGE_3V3)
+- improve enum code-style (phytec_imx93_option_index)
 
---=20
-Tom
+patch #3:
+- add comment about SoM-scope to imx93-phyboard-segin-u-boot.dtsi
+- rebase to the latest master
+- adapt doc according to new defconfig
 
---OAsf8OLKDJ8G4Zze
-Content-Type: application/pgp-signature; name="signature.asc"
+Changes in v2:
 
------BEGIN PGP SIGNATURE-----
+patch #1:
+- remove multiple blank lines
+- add update of 1GB ram timings to commit message
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc8vGoACgkQFHw5/5Y0
-tyxGewv/UWVx+eXHxQNhEhe5gA24/rw33N52cP5scP6XhVtecUij2OBNuKvkoUig
-PESG0L0R8wmGM5p/uNxb2kq+unOqK+E8O/8BDnosyiPeenHNCpUnDwrD7juvZpsS
-E67p5ku4IrDA0aKOifzNc/COQT0IoYat7bVcWb2/inmV2KKmNpDhmrQ7bIrWbe9/
-LN5IShWg2ydmHv1PKW0pMQRO7aBj3ctqZ1iX5Pbp7rXoRHger2rgXjdBfdS9y2rA
-kAOP4nMcmA8bCY46gVzA0z12EbH9A0iMp5JhoyMxAvKczE1F4ZUrWrmovtOMGbDu
-FA/M656kiTqKtSWQnCJ50q6dBb/sTRH2wawt5vf3iQ1VvCZFpT7k5tDqDRwzixmz
-MUsclpPXqIUZ/HuJKa9LZ49GREq7E+GGnGIeFXWbtqeUa/1wjSv+KDFZShaniU6i
-rQR0mssQ1UUHzmWobUM0JowG0GYVXczLMvk7Q2f3C5mCycRGd73/mCUchDgXMaZ5
-JSo3iO68
-=sz6Z
------END PGP SIGNATURE-----
+patch #2:
+- encapsulate handling of feature flag VOLTAGE into own function
+- move definition of enum phytec_imx93_ddr_eeprom_code into header file
 
---OAsf8OLKDJ8G4Zze--
+patch #3:
+- just rename imx93-phyboard-segin_defconfig and add needed CONFIGs,
+  instead of creating an entirely new second defconfig
+- remove wrong comment from imx93-phyboard-segin-u-boot.dtsi
+- improve commit message
+
+Christoph Stoidner (3):
+  board: phytec: phycore-imx93: Add 2GB LPDDR4X RAM timings
+  board: phytec: imx93: Add eeprom-based hardware introspection
+  board: phytec: imx93: Add phyCORE-i.MX 93 support for all SOM variants
+
+ arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi |  20 +-
+ arch/arm/mach-imx/imx9/Kconfig                |   2 +
+ arch/arm/mach-imx/imx9/soc.c                  |   2 +-
+ board/phytec/common/Kconfig                   |   8 +
+ board/phytec/common/Makefile                  |   1 +
+ board/phytec/common/imx93_som_detection.c     | 111 +++
+ board/phytec/common/imx93_som_detection.h     |  51 ++
+ board/phytec/phycore_imx93/Kconfig            |  28 +
+ board/phytec/phycore_imx93/MAINTAINERS        |   7 +-
+ board/phytec/phycore_imx93/lpddr4_timing.c    | 793 ++++++++++++++++--
+ board/phytec/phycore_imx93/phycore-imx93.c    |  51 ++
+ board/phytec/phycore_imx93/spl.c              |  48 ++
+ ...egin_defconfig => imx93-phycore_defconfig} |   2 +
+ ...3-phyboard-segin.rst => imx93-phycore.rst} |   8 +-
+ doc/board/phytec/index.rst                    |   2 +-
+ 15 files changed, 1063 insertions(+), 71 deletions(-)
+ create mode 100644 board/phytec/common/imx93_som_detection.c
+ create mode 100644 board/phytec/common/imx93_som_detection.h
+ rename configs/{imx93-phyboard-segin_defconfig => imx93-phycore_defconfig} (98%)
+ rename doc/board/phytec/{imx93-phyboard-segin.rst => imx93-phycore.rst} (91%)
+
+-- 
+2.34.1
+
