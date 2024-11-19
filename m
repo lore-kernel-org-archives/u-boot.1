@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5031D44161
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 14:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A800CD44161
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 14:17:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 548D3895AA;
-	Tue, 19 Nov 2024 15:11:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0DD70895B1;
+	Tue, 19 Nov 2024 15:16:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LC/r9TCL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1TKQjA+j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F6F3895B1; Tue, 19 Nov 2024 15:11:40 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 50112895A7; Tue, 19 Nov 2024 15:16:57 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD9D0895A4
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 15:11:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2E648959B
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 15:16:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43161c0068bso28430105e9.1
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:11:37 -0800 (PST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-53da22c5863so6027700e87.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:16:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732025497; x=1732630297;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732025814; x=1732630614;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fkYeS0Df1U+5f0qnqgqXbmsyeezQhL5VTQ3Rr7FznhY=;
- b=LC/r9TCLGwTdZ+nORLni40Wt0JLpiB/sbr8v9ksVPkgwIJWgLrCqUApRgJL/rbrh5q
- Bo8RIL2Z4RL59aYcLHk6i8iXjpMTz4G/0ZLhH+lrMsy7/uJcCCEvVMRlyimORdeBzjO9
- 2k33L/vy5aoLSu+7+Uh1w8FLfbQh9lyEq1Ah8Lpb2ffWOOcgCuFvF7PGHcxSSBcm6Ogs
- eNoBPTuUR3Ybk4Uq8WKWdE4t1ygIcSODt/QPdeZZajSqINtrftYf06hu7kdp5l7rhme5
- 9nlYGnCTffyAFM8VRON1O5A+1Ot54rLE482TOWkal3gD250CblaUiewxlozc73cFAnmY
- yq2g==
+ bh=xO6iMguNjFQi8RqwLwvlRTkqCtsJPLcli0cjF+ohy0Y=;
+ b=1TKQjA+jBdUIUik1Bp2j7L2NnB3GM7RigUH1/BL1krYO2fKxB8fwVQVFJGWgaLl6Ol
+ LBS4VmxgByS8cxE3ga3MinGXuKG1wm4rb52lUBkWcDH+SjiP2B1t5Kfh3z473dh1rE2s
+ 2QqIdt8pQRGy3tIn0uIc7wlaJmRwez7QDIUxkQStc7ciodzlXQ4J6KpKAc+CoB8etwST
+ W0CQeP7hcKA95tQP4mAMl0glVzr//EBgJuo7yuPdnuovcle64E2INmORd3SOJ6u7nIo+
+ juVRaCoEwakVKHVfHQ7OXPI0s3j4FehmardX2UcJ89wIA3M/dX95cqrtIExHl3oKNsy5
+ nd8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732025497; x=1732630297;
+ d=1e100.net; s=20230601; t=1732025814; x=1732630614;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fkYeS0Df1U+5f0qnqgqXbmsyeezQhL5VTQ3Rr7FznhY=;
- b=xPVn5a4WzUWot8v2C2/VWJ6AC0fMgAZuiC/tXjspT1R2Y2DmrHt55zlzpfYzaMNpJP
- q8MZQ6Jfht63Jv4D0SvBH+2NcshCfnQG3DGZzf66wag9omWwJPBj4P+ijvN1fIwTOsX0
- zkpHCYnKXyKfl472Q5/whXovzslOb/feor2dllrRGzwdEV6QNJ0Wpj0qY81yZ1zoF2/s
- 5wF37q4aLAX/AFsV1yugz1m1NffyM8Pgp0uH87b16oQs3lpPT1nY0BjD6hAv9+4htT84
- NEYnghZXhhVLAFG2FR88ztER/kNBGwRifCm+tBTVmjOvAo/ayVvSbp4XsEIipWCBn/Jb
- UsKQ==
-X-Gm-Message-State: AOJu0YykgneJuZipu32AnQAYnm/CBpp5l/wjZYwp3oQu8wsYiodblYSv
- upJAXIEQn9TuvAH6xcIl9UE+KJqdAkBbLzIHkDP4wRaLBUjRCjoRg/1eF0AQfJAWJlfTNeGrSbi
- t
-X-Google-Smtp-Source: AGHT+IGP0R8Jw7DcTCye7/ydZkUd2LBK2mvAQ1Qhdooa3Qg/JgCM2kn3xOVYCV79FdN4C2hPpguGxA==
-X-Received: by 2002:a05:600c:1d16:b0:431:5bb1:f088 with SMTP id
- 5b1f17b1804b1-432df78d793mr132483835e9.29.1732025496730; 
- Tue, 19 Nov 2024 06:11:36 -0800 (PST)
+ bh=xO6iMguNjFQi8RqwLwvlRTkqCtsJPLcli0cjF+ohy0Y=;
+ b=Xg8k5GGEENvgu2XkpN77XXVTOUWUbW6PPRGMdsZJvM/aZPc4pl9G5wmnu9gIFLEpE9
+ ytF0AJpxGzFqFa/BnDRB9l+InHjJGVSlIicF1/kz451+RG9Wv3rphHAONTITnSyp+WYH
+ v07vEl7PiiSq8Mp/jd6DrXnjmEpD4B8MlHV0444Mv31Hon579raTonDCfOiyhzDVw7q8
+ fH2DTNrHPC/mcmME9HG54BPr318P/QaE3FU5Pu6x74ZE7uN/CCMPdQdhTxVi5CWeh13I
+ fjMOC0kcOXyqJ0TO1dpGsjupAF+gANJ9HPnYazuvtO0PRcmNUBdzb2KqJTEF6s4r/3LV
+ egjw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEWeRzRUKNguNjdsUEu2b10cHIbzSzxQvQQLWHKIunghp2c3tXG0tusJODThMCPAWb9doooN8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJxKQdSPloUvf80IGGsALIv5xZmIytpm478c0CbAXfexRwD9Eg
+ 0f+hZYkbAlWKnj92o1/VZHsYPKZCWq6QmHKMnToQ9+hmPl3GFAoAz3qJPeE+t4U=
+X-Google-Smtp-Source: AGHT+IFcuTEClhFjjR+ehJtthKvZ8dHlri+0w579n68GJW31iFZCj9AAYLrYHDHX2WAtU1uSIYTJug==
+X-Received: by 2002:a05:6512:130e:b0:539:f807:ada5 with SMTP id
+ 2adb3069b0e04-53dab2941e0mr8476101e87.3.1732025814132; 
+ Tue, 19 Nov 2024 06:16:54 -0800 (PST)
 Received: from [192.168.2.170] ([82.66.159.240])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432dac0ae5csm192841185e9.32.2024.11.19.06.11.35
+ 5b1f17b1804b1-432da2946a3sm195147695e9.35.2024.11.19.06.16.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 06:11:36 -0800 (PST)
+ Tue, 19 Nov 2024 06:16:53 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20241113050607.1850472-1-caleb.connolly@linaro.org>
-References: <20241113050607.1850472-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] fastboot: properly handle unknown partition type
-Message-Id: <173202549576.43956.6642437579660775565.b4-ty@baylibre.com>
-Date: Tue, 19 Nov 2024 15:11:35 +0100
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Guillaume La Roque <glaroque@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io
+In-Reply-To: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
+References: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
+Subject: Re: [PATCH v3 0/5] Add support of Android Boot Image version 2 and
+ non-AB image
+Message-Id: <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
+Date: Tue, 19 Nov 2024 15:16:53 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,23 +101,28 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 13 Nov 2024 06:05:59 +0100, Caleb Connolly wrote:
-> In getvar_partition_type() we attempt to find a filesystem driver for
-> the partition (of the list of driver enabled in U-Boot), on failure we
-> return the error to fastboot and completely bail out of the operation.
+On Tue, 19 Nov 2024 12:37:37 +0100, Guillaume La Roque wrote:
+> Actually bootmethod android only support android boot image version 4
+> and with AB image, some old platform wtill use android boot image
+> version 2 with AB or without AB slot.
 > 
-> However, this should not be a failure, instead we should just default to
-> "raw". This allows commands like "fastboot format:ext4 userdata" to work
-> if userdata didn't already have an ext4 partition table (or if FS_EXT4
-> is disabled in U-Boot), as failing to determine the current partition
-> type is not an error in this case.
+> This patchset add support of both version 2 and non-AB slot images.
+> It's fixed in same time a boot issue seen on khadas vim3{l} board with 16GB eMMC
 > 
 > [...]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 
-[1/1] fastboot: properly handle unknown partition type
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/06b8aafd6810d86f37d5b1cd9c1966f1e42403ed
+[1/5] bootstd: android: add support of bootimage v2
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbe7eee992e90bbe84278db20d29159e3eedfe0d
+[2/5] bootstd: android: add non-A/B image support
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a85f2e0e7bd3665366ca2704d1142d3f16f22c36
+[3/5] configs: khadas-vim3l_android{_ab}: move on bootmeth android
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88547773b2df5e4cabbaec57a0f2e7f212dbf823
+[4/5] configs: khadas-vim3_android{_ab}: move on bootmeth android
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4a2e58717f2f33ef0dbb422026ef71938f2265aa
+[5/5] bootstd: Add test for Android boot image v2
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/acaa7f35a33146f887948d34130229388280844a
 
 --
 Mattijs
