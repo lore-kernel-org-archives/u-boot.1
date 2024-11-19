@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9903ED6206A
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 057BCD6206A
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:36:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32BE88955A;
-	Tue, 19 Nov 2024 11:35:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E64789564;
+	Tue, 19 Nov 2024 11:36:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="h2XVBbAF";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mceweyyB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D70589557; Tue, 19 Nov 2024 11:35:20 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 279D789564; Tue, 19 Nov 2024 11:36:45 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 861CB8955A
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:35:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26E9789558
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:36:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43161c0068bso26309575e9.1
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 02:35:18 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43167ff0f91so36834195e9.1
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 02:36:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732012518; x=1732617318;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732012602; x=1732617402;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=65wVwdtPs6LhZxyrvkZHnkj1YhHrKuX21s0aS8DbkkE=;
- b=h2XVBbAFupiYPoN4VDDhL3ziaVIQXeLOqngz+Mpxvf8pm3C+rnqocsCSh2/R2TZ7ZD
- 1BhFrb7hWThjRbialBPGtgVMVP6TwCy0QoxeURHb8gCWCPvOsalzUAq7Uhn4IhoBV5mp
- GQMDhfYM5ID504wQ8t7GR9nGE8YpKCIbCi2w9H4VyC2CaTEJ/eGPmqvexvhn0ZAxkzCq
- 2A5V5ennwlDaQoRonb0J+C0oIv8tn+/hATGplQ2AbzP8VG86aVzrebGpkd2K6jN/1IPv
- 0fWzn5FR0J5HEpt8adfBo00jOqTDCjWe4s46HCk4tGQ35Ww+644MuRWLwvdu3wcOfgNf
- IiXA==
+ bh=/LBhCHTMqQoVJOzxseY1ef0b7wf1TZ9sjxf392UfOXQ=;
+ b=mceweyyBEIyvxeXtdymO1unaoYRUZiQhd3WKOQmthx467Yaj5/5iBBDEvAl7Es25WG
+ u/fPajCAKx9fRr3pptq2VkwX096ySohHitOf1TIcyQg2CpCE2bCWL/WvdIRTj6nSEW3V
+ KtYT4GJIS+60LvycYF9Eebi7ri/sEEuBxFBTrSUdmojYs28Z9Y9qn2wPeRVgijOus0bv
+ g8wMxc98QEC16ErYdIKPXVmRwka+F0iYQegrmUYiJnP/znSVMGCcmrw2DBWvfo3wRzpb
+ V5zPcRiJcyUCWcqBZragjV+UobkTO5qXNjke+adXcVPr102l4qvEgAXGDYeL+Fyqrs4K
+ Lt8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732012518; x=1732617318;
+ d=1e100.net; s=20230601; t=1732012602; x=1732617402;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=65wVwdtPs6LhZxyrvkZHnkj1YhHrKuX21s0aS8DbkkE=;
- b=G/kdqbDG5Pri5zWXiqPYwGcPdO3+wv5loQ74vqTseZ6CmPBFxGBnJUQ48RDVoaui1W
- uPb7EzgcJhsd6tpL63xHhHpd7h6RTcXleKgfctp+39H7vIkeNn+dDH+CrAmWXgivXv5D
- L4ealJBjWupsE8PejUQLse1jKZxJfj0F3vfiDRwvZVGEs9Y/tjXcbaK8KgxCKr4GGRII
- VAq8OLq/RfsWWSlaetvyrB1tgAMKwU+ORSLBYUJqlzFd3iLQeXYfu+p649m8ffGz7CLn
- vOcZbUvq7t/QYWTuF67XRqZtlqIOsSqHJWBQ/HzxvpRJl7REPKWajpjYJcVJCkLqgBSQ
- m0iQ==
+ bh=/LBhCHTMqQoVJOzxseY1ef0b7wf1TZ9sjxf392UfOXQ=;
+ b=rO6snW+ADty0cJlzG1kh4cbbfjLYvbKyuIkYCmq90EUiuR/UyOyAJFlHNeKzJkMFxl
+ D/f0d6+EXyJammYNVD4boAorv0CiC9CLsfKCo2gVZy7Cm97bsrQhYpsce2MXoXaOmckl
+ jnnF9rx4Df3uff2iLtEQ+E02zDbH19R9B90kJ8CNmsJEMnVf9+ugBriyihUZcIBIys66
+ ErDCYHf42p50jqO5U6pykUM3PpNt+iyrC4qIzz+x2FPf74J2bNoVbtOA0s8YdPjC7+h+
+ oJmLhhznsEq0lS3L7QLN8IEWFS5aHDX2V6UoWNBj0p0/DSnAXPe8IKUZxbt++8AImZsW
+ rrzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnL7RRfbGYDxMlQj4+Kog8yvcILL9ecqgCCB0xBedtkE0sjW0kAGesGufflEd9nqKJwxDL8NA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9aMNF8y1rw3iXuGzHkjUyKjem7fmVsripWqBCRTcA9GEZD/d7
- W+3zoXjPIk3vGQgw9amg2RStdWBiEOM1wqEtjsYUlgXN7jnshvkTwO0j6nlzKbQ=
-X-Google-Smtp-Source: AGHT+IEsmUKV3xbztrNlPE6Zl3hJdojpHKuvPTJPR4tDFWx3QFpekF0QcYjxAwtqZ+4pATrfB2CuQw==
-X-Received: by 2002:a05:600c:3d0b:b0:432:d735:cc85 with SMTP id
- 5b1f17b1804b1-432df74c923mr124923435e9.18.1732012517883; 
- Tue, 19 Nov 2024 02:35:17 -0800 (PST)
+ AJvYcCUmiG8LkJBCOXyquWvzQUdPs+bTFDqxbEx3qBb4HloNhSquTvrpJmD+sEhs6ovyFhatBQv6GQ0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzeIHKxW2soKja+SGfL0xq9gduJqtZdD0okdjnM87tivsfAPWuh
+ fZPO+p7OShCXIgPF0EIFjmkSDRr3emvEUUOIXCLopjgAS9sJtXCLbXKMIARHKdg=
+X-Google-Smtp-Source: AGHT+IGeOhQVK5roYdKsJcwiXti8c1+ZumWM5pcDIV4pdd7hQR+qoNMUg1QKoU1H/sDJeUrYKMRF/w==
+X-Received: by 2002:a05:600c:1908:b0:431:52da:9d67 with SMTP id
+ 5b1f17b1804b1-432df7178f9mr147610135e9.3.1732012602628; 
+ Tue, 19 Nov 2024 02:36:42 -0800 (PST)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432da28cb89sm190822695e9.34.2024.11.19.02.35.17
+ 5b1f17b1804b1-432dab80a28sm188186415e9.24.2024.11.19.02.36.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 02:35:17 -0800 (PST)
+ Tue, 19 Nov 2024 02:36:42 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Guillaume La Roque <glaroque@baylibre.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil Armstrong
  <neil.armstrong@linaro.org>
 Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
  u-boot-amlogic@groups.io, Guillaume La Roque <glaroque@baylibre.com>
-Subject: Re: [PATCH v2 3/5] configs: khadas-vim3l_android{_ab}: move on
+Subject: Re: [PATCH v2 4/5] configs: khadas-vim3_android{_ab}: move on
  bootmeth android
-In-Reply-To: <20241114-adnroidv2-v2-3-015bffb1373a@baylibre.com>
+In-Reply-To: <20241114-adnroidv2-v2-4-015bffb1373a@baylibre.com>
 References: <20241114-adnroidv2-v2-0-015bffb1373a@baylibre.com>
- <20241114-adnroidv2-v2-3-015bffb1373a@baylibre.com>
-Date: Tue, 19 Nov 2024 11:35:14 +0100
-Message-ID: <87v7wjy0il.fsf@baylibre.com>
+ <20241114-adnroidv2-v2-4-015bffb1373a@baylibre.com>
+Date: Tue, 19 Nov 2024 11:36:40 +0100
+Message-ID: <87serny0g7.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -101,40 +101,84 @@ Thank you for the patch.
 
 On jeu., nov. 14, 2024 at 22:29, Guillaume La Roque <glaroque@baylibre.com> wrote:
 
-> Actually khadas vim3l use distro command to boot android image.
-> Move on new bootmeth android for A/B and non-A/B vim3l android.
+> Actually khadas vim3 use distro command to boot android image.
+> Move on new bootmeth android for A/B and non-A/B vim3 android.
 >
 > Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 > ---
->  configs/khadas-vim3l_android_ab_defconfig |  7 ++++++-
->  configs/khadas-vim3l_android_defconfig    |  7 ++++++-
->  include/configs/khadas-vim3l_android.h    | 26 ++++++++++++++++++++++----
->  include/configs/meson64_android.h         |  3 ---
+>  configs/khadas-vim3_android_ab_defconfig |  7 ++++++-
+>  configs/khadas-vim3_android_defconfig    |  7 ++++++-
+>  include/configs/khadas-vim3_android.h    | 26 ++++++++++++++++++++++----
+>  include/configs/meson64_android.h        |  3 ---
 >  4 files changed, 34 insertions(+), 9 deletions(-)
-
-[...]
-
 >
+> diff --git a/configs/khadas-vim3_android_ab_defconfig b/configs/khadas-vim3_android_ab_defconfig
+> index de5357c45cbf..a078c5d363ae 100644
+> --- a/configs/khadas-vim3_android_ab_defconfig
+> +++ b/configs/khadas-vim3_android_ab_defconfig
+> @@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_SIGNATURE=y
+>  CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTMETH_ANDROID=y
+> +# CONFIG_BOOTMETH_EXTLINUX is not set
+> +# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
+> +# CONFIG_BOOTMETH_EFILOADER is not set
+> +# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+>  CONFIG_LEGACY_IMAGE_FORMAT=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  # CONFIG_DISPLAY_CPUINFO is not set
+> @@ -35,7 +41,6 @@ CONFIG_SYS_MAXARGS=32
+>  CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_ABOOTIMG=y
+>  # CONFIG_CMD_IMI is not set
+> -CONFIG_CMD_BCB=y
 >  CONFIG_CMD_GPIO=y
 >  CONFIG_CMD_GPT=y
 >  CONFIG_CMD_I2C=y
-> diff --git a/include/configs/khadas-vim3l_android.h b/include/configs/khadas-vim3l_android.h
-> index f39a3782d663..31068c59d5ed 100644
-> --- a/include/configs/khadas-vim3l_android.h
-> +++ b/include/configs/khadas-vim3l_android.h
+> diff --git a/configs/khadas-vim3_android_defconfig b/configs/khadas-vim3_android_defconfig
+> index a0d9c423c3c3..b77a44ce859b 100644
+> --- a/configs/khadas-vim3_android_defconfig
+> +++ b/configs/khadas-vim3_android_defconfig
+> @@ -24,6 +24,12 @@ CONFIG_REMAKE_ELF=y
+>  CONFIG_FIT=y
+>  CONFIG_FIT_SIGNATURE=y
+>  CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTMETH_ANDROID=y
+> +# CONFIG_BOOTMETH_EXTLINUX is not set
+> +# CONFIG_BOOTMETH_EXTLINUX_PXE is not set
+> +# CONFIG_BOOTMETH_EFILOADER is not set
+> +# CONFIG_BOOTMETH_EFI_BOOTMGR is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+>  CONFIG_LEGACY_IMAGE_FORMAT=y
+>  CONFIG_OF_BOARD_SETUP=y
+>  # CONFIG_DISPLAY_CPUINFO is not set
+> @@ -34,7 +40,6 @@ CONFIG_SYS_MAXARGS=32
+>  CONFIG_CMD_ADTIMG=y
+>  CONFIG_CMD_ABOOTIMG=y
+>  # CONFIG_CMD_IMI is not set
+> -CONFIG_CMD_BCB=y
+>  CONFIG_CMD_GPIO=y
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_I2C=y
+> diff --git a/include/configs/khadas-vim3_android.h b/include/configs/khadas-vim3_android.h
+> index 0e2953fe71b3..096ab4e5fb1f 100644
+> --- a/include/configs/khadas-vim3_android.h
+> +++ b/include/configs/khadas-vim3_android.h
 > @@ -41,10 +41,28 @@
 >  	"name=rootfs,size=-,uuid=" ROOT_UUID
 >  #endif
 >  
 > -#define EXTRA_ANDROID_ENV_SETTINGS \
-> -	"board=vim3l\0" \
-> -	"board_name=vim3l\0" \
+> -	"board=vim3\0" \
+> -	"board_name=vim3\0" \
 > +#define CFG_EXTRA_ENV_SETTINGS                                    \
-> +	"board=vim3l\0"                                               \
-> +	"board_name=vim3l\0"                                          \
+> +	"board=vim3\0"                                               \
+> +	"board_name=vim3\0"                                          \
 > +	"bootmeths=android\0"                                         \
 > +	"bootcmd=bootflow scan\0"                                     \
-> +	"adtb_idx=2\0"                                                \
+> +	"adtb_idx=3\0"                                                \
 > +	"partitions=" PARTS_DEFAULT "\0"                              \
 > +	"mmcdev=2\0"                                                  \
 > +	"fastboot_raw_partition_bootloader=0x1 0xfff mmcpart 1\0"     \
@@ -163,19 +207,19 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 >  
 >  #endif /* __CONFIG_H */
 > diff --git a/include/configs/meson64_android.h b/include/configs/meson64_android.h
-> index 77364bbf9cf0..37ef8b8f7a7e 100644
+> index 37ef8b8f7a7e..d6ef0a83a686 100644
 > --- a/include/configs/meson64_android.h
 > +++ b/include/configs/meson64_android.h
 > @@ -104,9 +104,6 @@
 >  	"elif test $board_name = sei610; then " \
 >  		"echo \"  Reading DTB for sei610...\"; " \
 >  		"setenv dtb_index 1;" \
-> -	"elif test $board_name = vim3l; then " \
-> -		"echo \"  Reading DTB for vim3l...\"; " \
-> -		"setenv dtb_index 2;" \
->  	"elif test $board_name = vim3; then " \
->  		"echo \"  Reading DTB for vim3...\"; " \
->  		"setenv dtb_index 3;" \
+> -	"elif test $board_name = vim3; then " \
+> -		"echo \"  Reading DTB for vim3...\"; " \
+> -		"setenv dtb_index 3;" \
+>  	"else " \
+>  		"echo Error: Android boot is not supported for $board_name; " \
+>  		"exit; " \
 >
 > -- 
 > 2.34.1
