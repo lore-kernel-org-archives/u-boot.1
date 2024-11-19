@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B556D591A5
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 16:49:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 171F6D62077
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 17:21:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ADFA88CE7;
-	Tue, 19 Nov 2024 17:49:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4162488DC6;
+	Tue, 19 Nov 2024 18:21:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A32+L3Jg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="APTDmJLT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E4D894FA; Tue, 19 Nov 2024 17:49:06 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 79FCD8957F; Tue, 19 Nov 2024 18:21:15 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACB2C88C44
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 17:49:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1717888DC6
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 18:21:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2fb4af0b6beso51062401fa.3
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:49:04 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4315eac969aso33231675e9.1
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 09:21:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732034944; x=1732639744; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+cTeg0L/QKlRFelZ0IeMFjLOE2yFeH88stWyE7fdI1E=;
- b=A32+L3JgeABKQvh0wN6hPDKBpvRMtEf3FxTFpSkWnZtHctYJ3B25d0RntGCk98K7EV
- zFYwhn+Hsz9M7JERWryGWf4u8zO9/RrdkF8AVzHnfspc9K6jzPvHijMtVO3FvjJR8QCf
- FKGNrla0o7oXYJsNnJvmyMNuw8Qmck0RTqq0E=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732036872; x=1732641672;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qyiOIRxu2XVeE05fIFWzY8AymSfRDSGGx1SqnKQW1hw=;
+ b=APTDmJLTFqECFdJlzj2dqRncKEJtLDRzYiL2eq8UBP8FE0Ml7bAVgNQQPe0PvjkhR1
+ HXfqb2YEkldtm/RDPnWjs4uIyHuED30pLPftVGf/DnMblCeThgaKQ6kwFttDQ84Sqxdw
+ qhnehwIhs2Mwk89mtf89g1fTNTsAxupF+hfhLAVRbYiFZOe8B1Bval4Nby3IzRCsJlEi
+ t14cjhDblOIG1CVS4gng7MuxFx6BvvS9kYjJ6yHglHOxm/mZy7LFi7AVCbWuS5/7UqFV
+ sbpta54+7hNN1GDEGSk7t7rSs5dsBI0EBYkwRrc1jeLk/Huk6dUqy1XcJZKn5kyeA1zX
+ 6gOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732034944; x=1732639744;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+cTeg0L/QKlRFelZ0IeMFjLOE2yFeH88stWyE7fdI1E=;
- b=BiQbV5HUP26QIRV3hag6tEq96ClgyvxhNIH/RPs/rqcR3rkYk6pv02KT0te2Ytt73+
- j0EO5HhunNo/Ma+AeYddNuIjQwWkJxfbGPdU5BkyIMg9a1Jvh2Xo0hM7mhSXpiDJC6WO
- 1FHAqPTbLPtFfxtqJh4NcwnJlcbGB1ZzDASC9BpiVYlsbg5OWjqpjUYF0HuwhbkaCdWb
- /4ItSPohjgnnPXxvqu/w+ihDsbYF7UIqar6aTT2u7PYPRkeTztD3XIMwfOfeTQ5OUDDA
- zqrsEhji1WJCfAHDbaFF0YHEzANyu0y2qAIW0kyrHbbM4XNn+4ePzXN+2fUGC35QRE8q
- DCzQ==
-X-Gm-Message-State: AOJu0Yy8HSB3SNwdGKnUTkfWOUgMiIYtDRv4IejUIdbxYfwKQR9cjBmV
- mWPdcD2jpiTVqP9tsHvIwdpkYyCyV4ef/76hjc0mmongHRd6JjRWgqdXN3E3HbsGTZL0p6WUJ9P
- YbNGtw3ZxnjsQepyTHCrJo1Uia9WATxqid6Fe
-X-Google-Smtp-Source: AGHT+IFUaUMZ51Dh1Ny6U4Y//BSvVfY5ORLuF7X0gIcEgvH9rJJDIiQArkR5miGVddgylo/6VVUxq9NAvXyb4gMxyQU=
-X-Received: by 2002:a05:651c:4012:b0:2fb:3960:9667 with SMTP id
- 38308e7fff4ca-2ff6062b084mr72277511fa.14.1732034943890; Tue, 19 Nov 2024
- 08:49:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732036872; x=1732641672;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qyiOIRxu2XVeE05fIFWzY8AymSfRDSGGx1SqnKQW1hw=;
+ b=Vw5uQB63WBp9FYQKo2mUT5EBxG8HegC/krSdWfokR+Euf6XvDPBmYq9r4ALapzff9M
+ dWfV98lOrsWHSCS+jbqt2rUtkA8NCCdDye6vaiNYoiC0q8QMn2tFLTcQB6HTtUA0mtm4
+ Dw8LXN8hyuBggAcd+TOhm1+KhM7A+8K0GKQsXwCp50r0nJURGZkg3fXNWDVaiJYYyvY/
+ EZafU3+dGVWd4NrHXy2M7vFBISHNVurH+ARNSM2rxEwGt4Vm/kA7FEJ8r0o+DyIhvoN7
+ SBC9gaVCqh16A0kLhssrqF7Vqmc9QWDHEfJxbe/k1MufDv9OIt8S2qxyQD/8oJCp/PVH
+ vXeg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdx/shcYYKq0PFWLsy5TmOKIyg9XgkpN2a0zrmv2X/y51pFnpmt9/ba8YTLbeKIZIOWxcbQf8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/doiU2b+BjX5Ofz0ODSkgDtoabJ0tVAhs03rPioMDHXYfmrUr
+ GgGGafQe3VqtG0pNCGgqVDC9BJ4Y1BGbiy980bNtUrEL1/wjLkwpHvOawdZhKGI=
+X-Google-Smtp-Source: AGHT+IGqfy+lWRefSC4ejNiuylZ5kNAipR7ZGojlGieSVTyp7qXVtSQuCgREjg4t4i7wal2OXXTKpA==
+X-Received: by 2002:a05:600c:4fce:b0:431:7ccd:ff8a with SMTP id
+ 5b1f17b1804b1-432f57df971mr37285705e9.14.1732036872449; 
+ Tue, 19 Nov 2024 09:21:12 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432da28bc11sm200968415e9.31.2024.11.19.09.21.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Nov 2024 09:21:11 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Guillaume La Roque
+ <glaroque@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io
+Subject: Re: [PATCH v3 0/5] Add support of Android Boot Image version 2 and
+ non-AB image
+In-Reply-To: <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
+References: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
+ <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
+Date: Tue, 19 Nov 2024 18:21:08 +0100
+Message-ID: <87mshvxhq3.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20241119131844.4078144-1-sjg@chromium.org>
- <20241119162730.GX3600562@bill-the-cat>
-In-Reply-To: <20241119162730.GX3600562@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Nov 2024 09:48:52 -0700
-Message-ID: <CAFLszTiWLtZFC4A8JN2cW5NAVwO1RGnHm_HtKvADxr8XHR8Htg@mail.gmail.com>
-Subject: Re: [PATCH 00/39] pxe: Support read_all() for extlinux and PXE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,41 +95,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Guillaume,
 
-On Tue, 19 Nov 2024 at 09:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Nov 19, 2024 at 06:18:05AM -0700, Simon Glass wrote:
->
-> > This series implements read_all() so that it is possible to read all the
-> > files relating to a bootflow, make adjustments and then boot.
-> >
-> > Unfortunately quite a few things stand in the way, so this series
-> > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > required support in pxe_utils and the differing code in the extlinux and
-> > PXE bootmeths. There is very little new code, but quite a lot of
-> > refactoring.
-> >
-> > The bootm, booti and bootz commands have all been refactored previously,
-> > so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> > At the, time, zboot was left alone, since it is x86-specific and a bit
-> > more trouble.
-> >
-> > This series adds a programatic API for zboot and uses the forthcoming
-> > bootstd 'image list' to collect information from an extlinux file. It is
-> > therefore possible to parse the file, load the resulting images and then
-> > examine/adjust the resulting bootflow, before booting.
-> >
-> > The addition of options to extlinux resulted in the PXE and extlinux
-> > bootmeth having slightly different features. This is tidied up in this
-> > series, with common functions for both. This allows the same features
-> > (loading images as a separate step) to be provided for PXE.
->
-> This doesn't apply cleanly to -next and doesn't say what other series it
-> depends on.
+On mar., nov. 19, 2024 at 15:16, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
 
-Yes, that is a bit vague, sorry. The 'forthcoming bootstd image list'
-is the dependency.
+> Hi,
+>
+> On Tue, 19 Nov 2024 12:37:37 +0100, Guillaume La Roque wrote:
+>> Actually bootmethod android only support android boot image version 4
+>> and with AB image, some old platform wtill use android boot image
+>> version 2 with AB or without AB slot.
+>> 
+>> This patchset add support of both version 2 and non-AB slot images.
+>> It's fixed in same time a boot issue seen on khadas vim3{l} board with 16GB eMMC
+>> 
+>> [...]
+>
+> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+>
+> [1/5] bootstd: android: add support of bootimage v2
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbe7eee992e90bbe84278db20d29159e3eedfe0d
+> [2/5] bootstd: android: add non-A/B image support
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a85f2e0e7bd3665366ca2704d1142d3f16f22c36
+> [3/5] configs: khadas-vim3l_android{_ab}: move on bootmeth android
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88547773b2df5e4cabbaec57a0f2e7f212dbf823
+> [4/5] configs: khadas-vim3_android{_ab}: move on bootmeth android
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4a2e58717f2f33ef0dbb422026ef71938f2265aa
+> [5/5] bootstd: Add test for Android boot image v2
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/acaa7f35a33146f887948d34130229388280844a
 
-Regards,
-Simon
+CI has found some issues when applying these series:
+https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23452
+
+Could you have a look please?
+
+Thanks!
+
+>
+> --
+> Mattijs
