@@ -4,69 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28551D60079
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 08:18:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD76D6204A
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 09:27:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 764248952A;
-	Tue, 19 Nov 2024 09:18:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 59953892C6;
+	Tue, 19 Nov 2024 10:27:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kNluOuJ3";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HQMK4o8D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E5588952A; Tue, 19 Nov 2024 09:18:18 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 449A889531; Tue, 19 Nov 2024 10:27:41 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C02288DED
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 09:18:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C86188FB9
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 10:27:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ8IDKY004950;
- Tue, 19 Nov 2024 02:18:13 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732004293;
- bh=rMs5TeP7yVEferyo8Xmp1fJ0151jNCiHc8RD7xNx0tc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=kNluOuJ3X626SfOdxT89S2pDRsSJdxPYPGpzq1Dbq/JwHjpJKvGYbJg0tyBYK8Q3/
- audibaO38+1CuBMNi0x7p16ghUXY3ioF+99xkpCUmTmWhD6m8xkJrswK8grs92ZmVS
- Iy4NVFG7z2aZLQLRy4xAMXevHQWMZ34WelcKvUZ0=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ8IDFB079627
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Nov 2024 02:18:13 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Nov 2024 02:18:13 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Nov 2024 02:18:13 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ8ICKF120428;
- Tue, 19 Nov 2024 02:18:12 -0600
-Date: Tue, 19 Nov 2024 13:48:12 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Aniket Limaye <a-limaye@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <nm@ti.com>, <n-francis@ti.com>
-Subject: Re: [PATCH v4 4/5] arm: mach-k3: j721e-init.c: Add support for
- CONFIG_K3_OPP_LOW
-Message-ID: <20241119081812.ercqfgfsghhgiss6@uda0497581>
-References: <20241119003617.1871183-1-a-limaye@ti.com>
- <20241119003617.1871183-5-a-limaye@ti.com>
- <20241119061214.gcruepd4yimqgz2p@uda0497581>
- <cb780efa-ef28-49ea-9009-86424390d136@ti.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id F30903F182
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 09:27:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732008457;
+ bh=3yg9gzopHCn/m5HTq7Vky/+GNFHBSHqZP2QP4ksTqbc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=HQMK4o8D571maUZ93SxqHYEn9sY2ju65/2k7fASsKlz/3TP8YbgUbxkdKUUuuxtiS
+ Iux82VD0bXuLDFp+cqPeLVLV7ZD4Jzn/1Gts7mCD9YryylLaHy3hMAEohzfZ+m3EOf
+ YH3xAszCuIH1Od0Nfx+ivJgdOTmO2fDoaIgLw4Hin/eeSBWYYDURNKxsEhGxM1Zy/p
+ xIAvyWOpO/j96rWkj02hmLO1vu7ZICC/Yz0CPmX+tGpsiigwRw+KuCVSs+QdGkakUg
+ bOzx69zXFscjcuTAh4Yhym0Q976vXBeADGlO0tOhrhfD0ts+Pysh97tmO1jpMAHWQM
+ pbD5sxwl8B3xQ==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-432d9b8503cso27146715e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 01:27:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732008456; x=1732613256;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3yg9gzopHCn/m5HTq7Vky/+GNFHBSHqZP2QP4ksTqbc=;
+ b=maqCehugFGcq0UBWBXmXd4TGTKxQ9ozMyR7SMOiPG7clJ5kuShGdDVcLFqaGSoXBKN
+ EEDmWupqXzB20dS7bJqMZOy/kvr0mf2xZqBbMtqXD08RYRUlG3PMJUEG+BN9WdO6zvb3
+ MilZTgiGFsVhCKl3t9VGF45azAolPvZSJf9OxtQlJ+wOZQU/QgNPwh/BjB4LZg4y1ZlF
+ dx9opcbpmPGUzVRxHNFt4lPMTlqYPWsOvhARkxIrRTX6okVK27PZ1vZlQu3cmJF2OSc4
+ gBShdiu/ZEtIdzPGkVWJsSb+hoqNECs80HqFxMz1VtFP9QcLXADKLweaMvPOHYJjLH3f
+ xGhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUXxEsZTdKftWp2r6scpmvaFrsPT9AIA9LaTFp6bEjkFThWAlN4ETIFwU9uvyfdHvf+t6a7Pg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4qlyDzXHuiwZTrcsrKx1eIjZo70uOjD4F0yrs6c74wJc0glQ3
+ E4rASccBhOD9woTMVPkzJSStOwN7q7bSRIrWFXItMgzyTdvEUAoQs37P3BLGKafa/RqqRbGZ7m6
+ ph1Zh35aLZxtkQaOvLOiGYeRYqKjmRwE89vPAd8yyrUBIhZyByNpV+6BDCvKumb0mc2Y=
+X-Received: by 2002:a7b:c45a:0:b0:42f:84ec:3e0 with SMTP id
+ 5b1f17b1804b1-432f57b58f4mr18454845e9.9.1732008456615; 
+ Tue, 19 Nov 2024 01:27:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEHErcGT/zn2MPZG36IyzGto7Kp+RO7ybYi1bU1YGnN2BvnbvzEd3Ob1jPllCfe/Dg8LIIUnQ==
+X-Received: by 2002:a7b:c45a:0:b0:42f:84ec:3e0 with SMTP id
+ 5b1f17b1804b1-432f57b58f4mr18454665e9.9.1732008456182; 
+ Tue, 19 Nov 2024 01:27:36 -0800 (PST)
+Received: from [192.168.103.101]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432da244cb6sm194491525e9.0.2024.11.19.01.27.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Nov 2024 01:27:35 -0800 (PST)
+Message-ID: <9d784844-a0ae-4cba-809d-2dff06daa446@canonical.com>
+Date: Tue, 19 Nov 2024 10:27:34 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <cb780efa-ef28-49ea-9009-86424390d136@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/14] net: wget: let wget_with_dns work with dns
+ disabled
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
+References: <20241118210908.51196-1-adrianox@gmail.com>
+ <20241118210908.51196-2-adrianox@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241118210908.51196-2-adrianox@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,138 +110,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aniket,
+On 18.11.24 22:08, Adriano Cordova wrote:
+> This was marked as TODO in the code:
+> -Enable use of wget_with_dns even if CMD_DNS is disabled if
+> the given uri has the ip address for the http server.
+> -Check for port in the uri when transforming to legacy wget
+> syntax inside wget_with_dns.
+> -Move the check for CMD_DNS inside wget_with_dns.
+> 
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
 
-On 13:02-20241119, Aniket Limaye wrote:
-> Hi Manorit,
-> 
-> On 19/11/24 11:42, Manorit Chawdhry wrote:
-> > Hi Aniket,
-> > 
-> > On 06:02-20241119, Aniket Limaye wrote:
-> > > The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
-> > > for A72/MSMC clks and the OPP_NOM voltage.
-> > > 
-> > > J7200 SOCs may support OPP_LOW Operating Performance Point:
-> > > 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
-> > > 
-> > > Hence, add a config check in board_init_f() to select OPP_LOW specs:
-> > > - Check if OPP_LOW AVS voltage read from efuse is valid.
-> > > - Use the device IDs and clock IDs (TISCI docs [0]) to find the A72 and
-> > >    MSMC clock frequencies in the devicetree.
-> > > - Fixup the clock frequencies in devicetree as per OPP_LOW spec.
-> > > 
-> > > k3_avs driver programs the OPP_LOW AVS voltage for VDD_CPU through
-> > > k3_avs_notify_freq() callback from clk_k3.
-> > > 
-> > > [0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html
-> > > 
-> > > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
-> > > ---
-> > [..]
-> > > ---
-> > >   arch/arm/mach-k3/j721e/j721e_init.c | 92 ++++++++++++++++++++++++++++-
-> > >   1 file changed, 91 insertions(+), 1 deletion(-)
-> > > 
-> > > diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
-> > > index e9ed8cb267c..805b28af8e4 100644
-> > > --- a/arch/arm/mach-k3/j721e/j721e_init.c
-> > > +++ b/arch/arm/mach-k3/j721e/j721e_init.c
-> > > @@ -19,6 +19,7 @@
-> > 
-> > [..]
-> > > +#if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
-> > > +static int get_clock_index_by_dev_id(ofnode node, u32 dev_id, u32 clk_id)
-> > 
-> > I think the following function can be re-usable by other K3 socs too,
-> > can we put it in some common place instead of j721e_init? Maybe clk-k3.c
-> > and exported from there?
-> > 
-> 
-> Yeah that does make sense to do... There are already similar usages, I
-> think, in other k3 platforms. Having said that I would like to take that up
-> as a separate series since the DT index search is not directly related to
-> OPP_LOW Perf Point setting for j7200.
-> 
-> Let me know if you think that the k3 DT clock index search belongs in the
-> same series itself...
+Changes in v4 are not described:
 
-I mean you did make the function so I think might as well put it in the
-correct location but it's a non blocker for me, was just a suggestion.
-Would let you see how you want to do it.
+* drop console output
+* avoid checking non-zero via '!= 0'.
 
 > 
-> > > +
-> > > +static int fdt_fixup_a72ss_clock_frequency(void)
-> > > +{
-> > > +	int index, size;
-> > > +	u32 *rates;
-> > > +	ofnode node;
-> > > +
-> > > +	node = ofnode_by_compatible(ofnode_null(), "ti,am654-rproc");
-> > > +	if (!ofnode_valid(node)) {
-> > > +		printf("%s: A72 not found\n", __func__);
-> > > +		return -ENODEV;
-> > > +	}
-> > > +
-> > > +	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
-> > > +			      "assigned-clock-rates", &size);
-> > > +	if (!rates) {
-> > > +		printf("%s: Wrong A72 assigned-clocks-rates configuration\n", __func__);
-> > > +		return -1;
-> > > +	}
-> > > +
-> > > +	/* Update A72 Clock Frequency to OPP_LOW spec */
-> > > +	index = get_clock_index_by_dev_id(node,
-> > > +					  DEV_A72SS0_CORE0_0_ID,
-> > > +					  DEV_A72SS0_CORE0_0_ARM_CLK_CLK_ID);
-> > > +	if (index < 0 || index >= (size / sizeof(u32))) {
-> > 
-> > When would we encounter the second if..?
+> v3:
+>   Removed console output inside efi routine.
 > 
-> Assuming you mean:
-> 	index >= (size / sizeof(u32))
+> (no changes since v2)
+>   net/wget.c | 36 +++++++++++++++++++++---------------
+>   1 file changed, 21 insertions(+), 15 deletions(-)
 > 
-> The RHS is the count of "assigned-clock-rates" in the node and the LHS
-> (index) is the id of the "assigned-clocks".
-> It's possible (and I see it in a few cases too) that count of
-> "assigned-clocks" > count of "assigned-clock-rates". In that case the
-> "index" here, even if parsed correctly, could turn out to be outside of the
-> bounds of the array "rates". Which should be check against.
+> diff --git a/net/wget.c b/net/wget.c
+> index 3bc2522cde..1166aa5aa6 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -530,12 +530,10 @@ void wget_start(void)
+>   	wget_send(TCP_SYN, 0, 0, 0);
+>   }
+>   
+> -#if (IS_ENABLED(CONFIG_CMD_DNS))
+>   int wget_with_dns(ulong dst_addr, char *uri)
+>   {
+>   	int ret;
+> -	char *s, *host_name, *file_name, *str_copy;
+> -
+> +	char *s, *host_name, *file_name, *str_copy, *port;
 
-Ah okay, thanks for explaining!
+nits:
+Missing empty line.
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+>   	/*
+>   	 * Download file using wget.
+>   	 *
+> @@ -550,24 +548,33 @@ int wget_with_dns(ulong dst_addr, char *uri)
+>   	s = str_copy + strlen("http://");
+>   	host_name = strsep(&s, "/");
+>   	if (!s) {
+> -		log_err("Error: invalied uri, no file path\n");
+>   		ret = -EINVAL;
+>   		goto out;
+>   	}
+>   	file_name = s;
+>   
+> -	/* TODO: If the given uri has ip address for the http server, skip dns */
+> -	net_dns_resolve = host_name;
+> -	net_dns_env_var = "httpserverip";
+> -	if (net_loop(DNS) < 0) {
+> -		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
+> -		ret = -EINVAL;
+> -		goto out;
+> -	}
+> -	s = env_get("httpserverip");
+> -	if (!s) {
+> +	port = host_name;
+> +	host_name = strsep(&port, ":");
 
-Regards,
-Manorit
+RFC 1738 has:
 
-> 
-> Regards,
-> Aniket
-> 
-> > 
-> > > +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
-> > > +		return -1;
-> > > +	}
-> > > +	rates[index] = cpu_to_fdt32(1000000000);
-> > > +	printf("Changed A72 CPU frequency to %dHz in DT\n", 1000000000);
-> > > +
-> > > +	/* Update MSMC Clock Frequency to OPP_LOW spec */
-> > > +	index = get_clock_index_by_dev_id(node,
-> > > +					  DEV_A72SS0_CORE0_ID,
-> > > +					  DEV_A72SS0_CORE0_MSMC_CLK_ID);
-> > > +	if (index < 0 || index >= (size / sizeof(u32))) {
-> > > +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
-> > > +		return -1;
-> > > +	}
-> > > +	rates[index] = cpu_to_fdt32(500000000);
-> > > +	printf("Changed MSMC frequency to %dHz in DT\n", 500000000);
-> > > +
-> > > +	return 0;
-> > > +}
-> > > +#endif
-> > [..]
-> > 
-> > Regards,
-> > Manorit
+login          = [ user [ ":" password ] "@" ] hostport
+hostport       = host [ ":" port ]
+
+So here variable port may point to the password. And host_name to the 
+user name. We might check for '@' and bail out with an error code if it 
+occurs.
+
+You are determining the host port as a string, but I cannot see where 
+you are ever using it.
+
+In wget_send_stored() I see this line:
+
+server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
+
+Maybe make server_port a static variable and set it here if variable 
+port does not contain a number.
+
+Best regards
+
+Heinrich
+
+> +
+> +	if (string_to_ip(host_name).s_addr) {
+> +		s = host_name;
+> +	} else {
+> +#if IS_ENABLED(CONFIG_CMD_DNS)
+> +		net_dns_resolve = host_name;
+> +		net_dns_env_var = "httpserverip";
+> +		if (net_loop(DNS) < 0) {
+> +			ret = -EINVAL;
+> +			goto out;
+> +		}
+> +		s = env_get("httpserverip");
+> +		if (!s) {
+> +			ret = -EINVAL;
+> +			goto out;
+> +		}
+> +#else
+>   		ret = -EINVAL;
+>   		goto out;
+> +#endif
+>   	}
+>   
+>   	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
+> @@ -581,7 +588,6 @@ out:
+>   
+>   	return ret < 0 ? ret : 0;
+>   }
+> -#endif
+>   
+>   /**
+>    * wget_validate_uri() - validate the uri for wget
+
