@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7CCD60D03
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D95DD60D00
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79436894C8;
-	Tue, 19 Nov 2024 01:36:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D365F894AD;
+	Tue, 19 Nov 2024 01:36:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CBcoauR4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IWJMZWPw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 671F5894C0; Tue, 19 Nov 2024 01:36:38 +0100 (CET)
+ id D3882894B1; Tue, 19 Nov 2024 01:36:40 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8728C894AF
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 01:36:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0327A894AC
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 01:36:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aXh5001226;
- Mon, 18 Nov 2024 18:36:33 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aaeO001232;
+ Mon, 18 Nov 2024 18:36:36 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731976593;
- bh=+Pqkayv83cQAPqUhUEk816GEYTbIrg3o2MM8fxYGfow=;
+ s=ti-com-17Q1; t=1731976596;
+ bh=4qeaLLUlkt0WGf1zlg/Q9iX1fy7nf23t0DAQyOk7A0E=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=CBcoauR4dy3it/426iBVmGsDxozGRZjeQqsQ8ZCtCUC3l4tLdmXuJ9om4k02aUZXX
- UX4CXJRNottcL3DOTbRWLDvha3zzfMpHFM0E7NmuzecKfYwrDLWW7hdqYcb0kTEmkO
- BA3mWh2iREFOEkTnnSbHHmA82u880H5/JqOpvZ4k=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ0aXlZ031149
+ b=IWJMZWPwj9wQmu1a2xkhU5KvFihBEKK2WTTgsOYZGzmztVuPf7s8shJGXgyWsmsAq
+ CmVSKfPjE5f5pwq5xHZBtcehdAqcrrpWInTgf0GRcj+4ZAd88GVqdKcmuXPg+F2mCa
+ zSAN2TkV2vPhLGGEH04vK7+qs9LBy0HghMET9hzc=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ0aa2s021943
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Nov 2024 18:36:33 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 18 Nov 2024 18:36:36 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Nov 2024 18:36:33 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 18:36:36 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Nov 2024 18:36:33 -0600
+ Frontend Transport; Mon, 18 Nov 2024 18:36:35 -0600
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aPMV114132;
- Mon, 18 Nov 2024 18:36:31 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aPMW114132;
+ Mon, 18 Nov 2024 18:36:33 -0600
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
  <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v4 2/5] misc: k3_avs: Add OPP_LOW voltage and frequency to
- vd_data
-Date: Tue, 19 Nov 2024 06:02:56 +0530
-Message-ID: <20241119003617.1871183-3-a-limaye@ti.com>
+Subject: [PATCH v4 3/5] misc: k3_avs: Check validity of efuse voltage data
+Date: Tue, 19 Nov 2024 06:02:57 +0530
+Message-ID: <20241119003617.1871183-4-a-limaye@ti.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241119003617.1871183-1-a-limaye@ti.com>
 References: <20241119003617.1871183-1-a-limaye@ti.com>
@@ -83,60 +82,97 @@ X-Virus-Status: Clean
 
 From: Reid Tonking <reidt@ti.com>
 
-J7200 SOC supports OPP_LOW and OPP_NOM as two Operating Performance
-Points as per (7.5 Operating Performance Points) section in the
-Datasheet [0].
-- A72SS/MSMC at 2 GHz/1GHz operation must use OPP_NOM.
-- A72SS/MSMC at 1 GHz/500 MHz operation can use OPP_NOM or OPP_LOW
-  voltage (though OPP_LOW voltage is recommended to reduce power
-  consumption).
+k3_avs driver checks opp_ids when probing and overwrites the voltage
+values in vd_data for the respective board. The new k3_avs_check_opp()
+can be called from board files to check the efuse data and returns 0 if
+valid.
 
-Add OPP_LOW frequency->voltage entry to vd_data.
-
-The actual OPP voltage for the device is read from the efuse and
-updated in k3_avs_probe().
-OPP_NOM corresponds to OPP_1 and OPP_LOW to OPP_0 efuse register
-fields, as described in the Datasheet [0]
-The register offsets and fields are described in the TRM (5.2.6.1.5
-WKUP_VTM_VD_OPPVID_j Register) [1].
-
-[0]: https://www.ti.com/lit/gpn/dra821u (J7200 Datasheet)
-[1]: https://www.ti.com/lit/pdf/spruiu1 (J7200 TRM)
+Also add the same check in k3_avs_program_voltage() to error out if
+the efuse data was not valid.
 
 Signed-off-by: Reid Tonking <reidt@ti.com>
 Signed-off-by: Aniket Limaye <a-limaye@ti.com>
 ---
- drivers/misc/k3_avs.c | 4 ++++
- include/k3-avs.h      | 1 +
- 2 files changed, 5 insertions(+)
+
+v4:
+- Update function name to k3_avs_check_opp and update description
+- Link to v3: https://lore.kernel.org/u-boot/20241116071615.839623-4-a-limaye@ti.com/
+
+v3:
+- Fix voltage spelling in k3_check_opp() function description. No
+  functional change
+- Link to v2: https://lore.kernel.org/u-boot/20241023130033.1826413-4-a-limaye@ti.com/
+
+v2:
+- Update to also handle invalid efuse voltage reading in
+  k3_avs_program_voltage() and reflect the same change in commit msg.
+- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-4-a-limaye@ti.com/
+---
+ drivers/misc/k3_avs.c | 32 ++++++++++++++++++++++++++++++++
+ include/k3-avs.h      |  1 +
+ 2 files changed, 33 insertions(+)
 
 diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
-index 99a18a109b7..9d950d034a5 100644
+index 9d950d034a5..0774e0a4c9e 100644
 --- a/drivers/misc/k3_avs.c
 +++ b/drivers/misc/k3_avs.c
-@@ -501,6 +501,10 @@ static struct vd_data j721e_vd_data[] = {
- 		.dev_id = 202, /* J721E_DEV_A72SS0_CORE0 */
- 		.clk_id = 2, /* ARM clock */
- 		.opps = {
-+			[AM6_OPP_LOW] = {
-+				.volt = 0, /* voltage TBD after OPP fuse reading */
-+				.freq = 1000000000,
-+			},
- 			[AM6_OPP_NOM] = {
- 				.volt = 880000, /* TBD in DM */
- 				.freq = 2000000000,
+@@ -121,6 +121,11 @@ static int k3_avs_program_voltage(struct k3_avs_privdata *priv,
+ 	if (!vd->supply)
+ 		return -ENODEV;
+ 
++	if (!volt) {
++		dev_err(priv->dev, "No efuse found for opp_%d\n", opp_id);
++		return -EINVAL;
++	}
++
+ 	vd->opp = opp_id;
+ 	vd->flags |= VD_FLAG_INIT_DONE;
+ 
+@@ -192,6 +197,33 @@ static int match_opp(struct vd_data *vd, u32 freq)
+ 	return -EINVAL;
+ }
+ 
++/**
++ * k3_check_opp: Check for presence of opp efuse
++ * @dev: AVS device
++ * @vdd_id: voltage domain ID
++ * @opp_id: opp id to check if voltage is present
++ *
++ * Checks to see if an opp has voltage. k3_avs probe will populate
++ * voltage data if efuse is present. Returns 0 if data is valid.
++ */
++int k3_avs_check_opp(struct udevice *dev, int vdd_id, int opp_id)
++{
++	struct k3_avs_privdata *priv = dev_get_priv(dev);
++	struct vd_data *vd;
++	int volt;
++
++	vd = get_vd(priv, vdd_id);
++	if (!vd)
++		return -EINVAL;
++
++	volt = vd->opps[opp_id].volt;
++	if (volt)
++		return 0;
++
++	printf("No efuse found for opp_%d\n", opp_id);
++	return -EINVAL;
++}
++
+ /**
+  * k3_avs_notify_freq: Notify clock rate change towards AVS subsystem
+  * @dev_id: Device ID for the clock to be changed
 diff --git a/include/k3-avs.h b/include/k3-avs.h
-index 1014d5d114d..f6f1031c9cc 100644
+index f6f1031c9cc..5a973e4ed45 100644
 --- a/include/k3-avs.h
 +++ b/include/k3-avs.h
-@@ -20,6 +20,7 @@
+@@ -27,5 +27,6 @@
  
- #define NUM_OPPS		4
+ int k3_avs_set_opp(struct udevice *dev, int vdd_id, int opp_id);
+ int k3_avs_notify_freq(int dev_id, int clk_id, u32 freq);
++int k3_avs_check_opp(struct udevice *dev, int vdd_id, int opp_id);
  
-+#define AM6_OPP_LOW		0
- #define AM6_OPP_NOM		1
- #define AM6_OPP_OD		2
- #define AM6_OPP_TURBO		3
+ #endif
 -- 
 2.47.0
 
