@@ -4,67 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D4CD6C2AF
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 22:30:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72621D6C2AF
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 22:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0466988F3C;
-	Tue, 19 Nov 2024 23:30:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E0D4E88DB2;
+	Tue, 19 Nov 2024 23:48:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NMGG0Upo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="H9e5You7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDE2988FDE; Tue, 19 Nov 2024 23:29:57 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7C5F788ED9; Tue, 19 Nov 2024 23:48:30 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA05D88BFC
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:29:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A76A88D7E
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e382661fb79so1275198276.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:29:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732055394; x=1732660194; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wxv2N9EII7ddmkWuSU1XG6l+bs/lFEDhELsNC4L6yLU=;
- b=NMGG0UpoC+vvhxQcV1qYFIwY6bX31R0BwZmM/Q2BwocVTNq1h4XhbCh1B0mu6f+jkC
- 9RR1aA+G8pwZ/QuzuI2D0r3t/QaBBk5gBHPWoYQ5qFHKbJszT6REsSbBlRyTsiD09MTW
- wE+YE4eqG3XF4wMypUFF+trRXETVRTMVWeiYzEB1NBuYZ5QGTPJc//LtjY/AHtiwh35k
- TPeP1BVYZFo+rAIUp23P9so4eMf1yGU0orOFpXx6iqTaE2oFPXsevyBMHMBSwWLBy4+/
- +RO009bbCFd4yydJHzU79tC1mVhXnfsQei+RyD++Z+IemF+ATMbWi7unnHKDxgUsuBtT
- PaIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732055394; x=1732660194;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wxv2N9EII7ddmkWuSU1XG6l+bs/lFEDhELsNC4L6yLU=;
- b=gxeGpH14vj2gCa4Qbu0FuaEp0BI6lh5NfSu9zE1OOlazWB1DOQnOF6GBDUGX5bWUPP
- L6blLQBy7SWv6zMFQkpTdKraNuvet0YFTkOOohXMkxM2FRy2u6NGAGU7ZslTLNy2xK0/
- jmZcGg2dtQ6CNSppqUhblqnNGslC8ouJK9//bbEFKOck9FtBvGTGV27ZkdxiPVia6i8x
- C5DI3PAbl13dD/tvMIOAbIGNgOJ0uX8wk/cbL6cUHEStZCN/1N6O1X3NfrYFXGImiPkj
- FNb2QqTOzQNrcFVvS+Zz2R25LAcCkLNZY5464dDJHrnYB7b3jz9Gib2mxQFROJDhbKuj
- Jlog==
-X-Gm-Message-State: AOJu0YxfRVHyAkpfHNihOs/9i0zi3wikryQldEFgJr/K0WneI7RYJGZV
- 4kVLFJLxHy4ypbC3Xcwf8R2yJ3kfsX5jpMx5g2b+up1tjZq0VmVWccBs9Ke083iQ1EOir+v8uh5
- FCAEroIoBxDeazpsvscwMByNHHkKb/gjdu3A=
-X-Google-Smtp-Source: AGHT+IFRnu1pn4McaNDkH9+swnoMWJ/smTGMxXTeWu0hkiHIjE0EQ3HIx8h+WvrZX2ok/tYHUizGEMzAVqWq5coVI6E=
-X-Received: by 2002:a05:6902:154b:b0:e38:7bc6:6d28 with SMTP id
- 3f1490d57ef6-e38cb5f77d7mr459778276.42.1732055394567; Tue, 19 Nov 2024
- 14:29:54 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732056501; x=1732661301; i=xypron.glpk@gmx.de;
+ bh=33RIPDFTuLbOFhw38k5ibeu6U1RK41Kxkmx5pqji6QM=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=H9e5You7zw2M4WJ5Ypv9D3l/mWBWkyxTQ/pXcZ3v7D/wEbnz1o+gecuABqZluEmP
+ PRzSewGc6a7JPpBb3FI0bOm1qg2hnYKAWKkQzoO2+cs0xrDKfNG+ZOnUBgP7B7sJa
+ T9WJlcwHglGpTHrDkgkO1RKJn/xTNPn2wyTXXx6AxE+g8O6BYrZguK/xekD5mIroW
+ SYI5Ak5ZVnTbytIRXU76FS0VxZ15AKAfCVNPBzfYnuDnKJ7nFWEqIk1YJzXTCss7l
+ 0LiodjIGJay152QH58+hyW9mH08WH55Pq/IG9iLy/nHZ2yW/yf3Bbge07pCPo+r19
+ 23OGv4zN3WDEeSJZ8Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLzFr-1tUvJN3YO1-00Rrh5; Tue, 19
+ Nov 2024 23:48:21 +0100
+Date: Tue, 19 Nov 2024 23:48:17 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Lothar Rubusch <l.rubusch@gmail.com>, sjg@chromium.org, trini@konsulko.com,
+ alpernebiyasak@gmail.com, ada@thorsis.com
+CC: mkorpershoek@baylibre.com, dario.binacchi@amarulasolutions.com,
+ pbrobinson@gmail.com, n-francis@ti.com, afd@ti.com, al.kochet@gmail.com,
+ u-boot@lists.denx.de, l.rubusch@gmail.com
+Subject: Re: [PATCH v1 2/3] doc: develop: Fix typos and wording in gdb.rst
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241119222837.27550-3-l.rubusch@gmail.com>
+References: <20241119222837.27550-1-l.rubusch@gmail.com>
+ <20241119222837.27550-3-l.rubusch@gmail.com>
+Message-ID: <2BD68232-B09D-4F0C-9969-B90230A6FB90@gmx.de>
 MIME-Version: 1.0
-From: Chris Packham <judge.packham@gmail.com>
-Date: Wed, 20 Nov 2024 11:29:43 +1300
-Message-ID: <CAFOYHZCwXSChH_rH251cUp-bgwai+e8xrOuqxepX9Dur2wGTJg@mail.gmail.com>
-Subject: Odd error with cn9130, asix88179 and xhci
-To: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ma0go0Lw9CXc0ZPgRFCA/Dp8DyB+dNOwJSbujh0y8/MbHq0/d0i
+ 1u16bU1NavKKjo4QDRqQgMt5vc1DW3aW7lJGptyVxrNYYBD271L5YnGRrWNLVQpteByyIR2
+ i/dRrl3SYdU7Fb5Q6eFHSK8VfiotJ+5yYnyMTj3uuk8GbXfnY5xpjEClqfOzjl1/Is9aD2a
+ XeSJqdb/z9HQohRtrTekQ==
+UI-OutboundReport: notjunk:1;M01:P0:leZGsqiO4g0=;KVrZS2nqrwHrn76N7hkRaAafEGS
+ HawcYv2PE7RzT5kwrgx9cRT/FtIC2RICmCJFXkUBNjWrOa7nsQSwkrrSFIsTWx8f+dUU+7ELN
+ 4SXIsyZ86lH54HTYw1VOG8kzDVW6nUeDaUtQXMPe593wLrvTgiDmj2pwTnGTrL8k8/7aNYzCn
+ P5nUaya8ws8CQW/prq9UvjK++byBAoMKPt8jRYPer6Q4fPutC0E5ktaB9icSsOeaPAgZ+aP+v
+ fk9tHCeozaOOpJZAtnkX42CSUepZM+TLzCVxGelHxxvwcgMIVjMIbB/bh3/bzc6qmh1FNK6ir
+ FvCGWRfn6zCiEYHaXDMSY2Xhik3HEfPbzjT34EpIK5sGXWwwJqZ2gtc37EE1ERn4+5snGlHC3
+ GoEInRNx++DDtPRGeUnVWBv2ooX8DmYHbyCbOgqeNMHciKxbckgoYS0mEcr1XB84vYikY++1U
+ JrUrmRytHaQnwWCYr2Ox0pv96vXDijV4AZrGGCXi3jgrja/KWFPlTLcyU/rI97PrpfvS9jB9q
+ DC8a5mkuuzKdfEA6JKd6Fu7EnFHqkdpEB1Fe15OzH75HJBzZ86SIzU5+ESuYb9skuiqCW2FOV
+ Oa4YeYK33LpbodZK0xOmw+hLE4E9abKmAVFxCMeFzdwyCd+5zmNoq05hXlx2j/WNmKemgSH7i
+ GMgmBoFOqAnv7fqDVdNnHK5FXDSTHp+U4e3FJo5aljJ+uot7weq79a294ThI6HOFBReW3d+FB
+ Xlhy1h83lgqFjlglR+RyAnHja/t0CplWDPueuio6vJrxlKeQR5WXZaHuEP8n+5HLGeLiCbin0
+ laNyuTyy274eYUWsy4ACTWAVyOExP03txvyvZ1KxTZdoc8SaSVcJYPq4++4Qf1Rd6ttMra3j/
+ gIxywx+9QHyj1mcdUDIvOBQ2MIhOFAmQa/Wu8b27bnoin5sidTYzhVmnE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,64 +93,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi U-Boot,
+Am 19=2E November 2024 23:28:36 MEZ schrieb Lothar Rubusch <l=2Erubusch@gma=
+il=2Ecom>:
+>Fix some typos and duplicate words in gdb=2Erst=2E
+>
+>Signed-off-by: Lothar Rubusch <l=2Erubusch@gmail=2Ecom>
+>---
+> doc/develop/gdb=2Erst | 14 +++++++-------
+> 1 file changed, 7 insertions(+), 7 deletions(-)
+>
+>diff --git a/doc/develop/gdb=2Erst b/doc/develop/gdb=2Erst
+>index 4e359c7f22=2E=2Edc38435227 100644
+>--- a/doc/develop/gdb=2Erst
+>+++ b/doc/develop/gdb=2Erst
+>@@ -8,12 +8,12 @@ Using a JTAG adapter it is possible to debug a running =
+U-Boot with GDB=2E
+> A common way is to connect a debug adapter to the JTAG connector of your
+> board, run a GDB server, connect GDB to the GDB server, and use GDB as u=
+sual=2E
+>=20
+>-Similarly QEMU can provide a GDB server=2E
+>+Similarly, QEMU can provide a GDB server=2E
+>=20
+> Preparing build
+> ---------------
+>=20
+>-Building U-Boot with with reduced optimization (-Og) and without link ti=
+me
+>+Building U-Boot with reduced optimization (-Og) and without link time
+> optimization is recommended for easier debugging::
+>=20
+>     CONFIG_CC_OPTIMIZE_FOR_DEBUG=3Dy
+>@@ -24,8 +24,8 @@ Otherwise build, install, and run U-Boot as usual=2E
+> Using OpenOCD as GDB server
+> ---------------------------
+>=20
+>-`OpenOCD <https://openocd=2Eorg/>`_ is an open source tool supporting ha=
+rdware
+>-debug probes, and providing a GDB server=2E It is readily available in m=
+ajor Linux
+>+`OpenOCD <https://openocd=2Eorg/>`_ is an open-source tool supporting ha=
+rdware
+>+debug probes and provide a GDB server=2E It is readily available in majo=
+r Linux
 
-We've hit a weird problem at $dayjob with a board using the Marvell
-CN9130 SoC and using the asix88179 USB-Eth adapter.
+Thanks for the patch=2E
 
-The problem is after enabling and unrelated feature in u-boot the
-asix88179 fails to receive data (I can confirm that the link partner
-does see packets in the transmit direction)
+'tool' is singular=2E You cannot use 'provide' here=2E
 
-=> version
-U-Boot 2022.01 (Nov 08 2024 - 09:45:44 +0000)
-=> usb start
-starting USB...
-Bus usb3@500000: Register 2000120 NbrPorts 2
-Starting the controller
-USB XHCI 1.00
-scanning bus usb3@500000 for devices... 2 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
-=> ping ${serverip}
-Waiting for Ethernet connection... unable to connect.
-Reset Ethernet Device
-Waiting for Ethernet connection... done.
-Using ax88179_eth device
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
-Rx: failed to receive: -5
+> distributions or you can build it from source=2E
+>=20
+> Here is example of starting OpenOCD on Debian using a J-Link adapter and=
+ a
+>@@ -124,7 +124,7 @@ with the command *bdinfo*:
+>     Early malloc usage: cd8 / 2000
+>=20
+> Look out for the line starting with *relocaddr* which has the address
+>-you need, ``0x27f7a000`` in this case=2E
+>+You need, ``0x27f7a000`` in this case=2E
 
-Abort
-ping failed; host 10.37.233.65 is not alive
-=> <INTERRUPT>
+You is only capitalized at the start of sentences=2E
 
-Debugging a little we can see that the -EIO is actually because
-xhci_bulk_tx() hits a timeout from xhci_wait_for_event().
+>=20
+> On most architectures (not sandbox, x86, Xtensa) the global data pointer=
+ is
+> stored in a fixed register:
+>@@ -144,7 +144,7 @@ riscv        gp
+> sh           r13
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+>-On these architecture the relocation address cat be determined by
+>+On this architecture the relocation address can be determined by
 
-We think this is triggered by the u-boot image size crossing some
-boundary (the problem seems to start when .bss_end crosses
-0x00000000000f0000) although I've so far been unable to find
-specifically why that might be. As far as I can tell u-boot is being
-built relocatably and nothing is overlapping. I also considered that
-ATF might be preventing access to something but so far I see no
-evidence of this.
+On these architectures =2E=2E=2E
 
-If I turn off some features to reduce the build size the problem goes
-away. That is actually how we've avoided the immediate issue, although
-that means the problem will likely come back and an inopportune time.
+The rest seems correct=2E
 
-Does anyone have any ideas as to what the true root cause might be?
-I'm a bit stumped.
+Best regards
 
-Thanks,
-Chris
+Heinrich
+
+
+> dereferencing the global data pointer stored in register, *r9* in the ex=
+ample:
+>=20
+> =2E=2E code-block:: console
+>@@ -153,7 +153,7 @@ dereferencing the global data pointer stored in regis=
+ter, *r9* in the example:
+>      $1 =3D 0x27f7a000
+>=20
+> In the GDB shell discard the previously loaded symbol file and add it on=
+ce
+>-again with the relocation address like this:
+>+again, with the relocation address like this:
+>=20
+> =2E=2E code-block:: console
+>=20
+
