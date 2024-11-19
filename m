@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C04BD44001
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 05:15:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FC6D44001
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 05:16:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B75F689500;
-	Tue, 19 Nov 2024 06:15:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4C04388D9B;
+	Tue, 19 Nov 2024 06:16:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1731993310;
-	bh=4BdFNJkHYOO+4fFNgyd4DR6TV1/yH/4P2FZYw+t5Hgg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=UHxte4IZTh74xjaGOYHfhR4kUz0DtYc1miT7fj8vRmt5oJnwrSW75gL+G/yaSGjMm
-	 ll+AsCYcVWZA604PkuxRV35NRxnaxcyDKq1WuoNrdEkPfxtbfW7x9gZqRPJ04Do2MG
-	 I9NYbe1CRfvPvLpMt1DBq/T7lS80urZAftHeieXGK+I1xxlRX32Z//+W9AwD9WPoXR
-	 qUEMVxAQ+Bsc6XQ2eZRZV1mtZWQbvBDecYmhHPr9gEByzJ7+li04iFpwGcUeN7pwen
-	 4MfTfVk7kCqC22YLR4o8OaHJVZNYqDX4K+shMGhQkCeCphVcxx+HMBJiYjKtkJ94eH
-	 LUvQ6uKxO+RpQ==
-Received: from [192.168.1.107] (82-131-203-244.pool.digikabel.hu
- [82.131.203.244])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D1B4C88B0B;
- Tue, 19 Nov 2024 06:15:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1731993309;
- bh=4BdFNJkHYOO+4fFNgyd4DR6TV1/yH/4P2FZYw+t5Hgg=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=clq6uhe/4xMcv4WbgU8YWYl/HE47yVjkWSUxQ2HTp8MUJzA4BlqTwJLUfhSbAgOLT
- /gxqKL+GUdUjmkfB1jfmkZY5Mgw7LKfgzrDt7Ufyf8J4Ivp4O/SVRJIe4SiRBNCjad
- MDcs9ee/l+rkPlq1SMk/c/rWuJHYVKtjVmqd1+1kJMXGVz9Fg8z7aK5IQkWobCbmqG
- 89RrvcSvfOtSKtveNIR5dZTRK2APOEqU7zK+oRE04UHCU90H1whYbET0zA+tRRBPld
- VmcYpB9L2+fCkBkK+r5Cf/+hgaZBuVLa+yVmLJ4C0ObXVS5edKJKVwzRZy3RPv+GkL
- w9GZcU0CDfQtA==
-Message-ID: <dcfb4129-cb75-3937-6c89-bf1dd2e1b1bb@denx.de>
-Date: Tue, 19 Nov 2024 06:12:25 +0100
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uZITqTou";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1D25688E6B; Tue, 19 Nov 2024 06:16:33 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 78F7988B0B
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:16:30 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ5GSXh3804848
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 18 Nov 2024 23:16:28 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1731993388;
+ bh=CEm0yqXl3kq1TDZpBJ/7zWU/WQ0ed/N4txfyZcGnNEk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=uZITqTouueRq/KlzImWnf9/q3PK5at4hLA9h4tPUadIDNWq2faIRdw4lVr1PULvVK
+ bEuM5PrFhzoVQtx+IABLY+ilhj0BEbEFUyXjapGG1xqh79Ozu9/6ECgH+HqIQEVsAa
+ 30MhH9IqFKH/wkNhV9n6stAa1ABgEuDurk0rCrJk=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ5GSBk063282
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 18 Nov 2024 23:16:28 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
+ Nov 2024 23:16:24 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 18 Nov 2024 23:16:24 -0600
+Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ5GO1p031422;
+ Mon, 18 Nov 2024 23:16:24 -0600
+Date: Tue, 19 Nov 2024 10:46:23 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Aniket Limaye <a-limaye@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <nm@ti.com>, <n-francis@ti.com>
+Subject: Re: [PATCH v4 1/5] arm: dts: k3-j7200-r5-common: Add msmc clk to a72
+ node
+Message-ID: <20241119051623.j5c7rztya34wsljd@uda0497581>
+References: <20241119003617.1871183-1-a-limaye@ti.com>
+ <20241119003617.1871183-2-a-limaye@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
- PMIC wdt via IMX8 SCU
-Content-Language: en-US
-To: Stefan Roese <sr@denx.de>, Francesco Dolcini <francesco@dolcini.it>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andrej Valek <andrej.valek@siemens.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
- Fabio Estevam <festevam@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241118062715.32989-1-hs@denx.de>
- <20241118062715.32989-2-hs@denx.de> <20241118123139.GA42367@francesco-nb>
- <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241119003617.1871183-2-a-limaye@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,48 +77,62 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Francesco, Stefan!
+Hi Aniket,
 
-On 18.11.24 16:37, Stefan Roese wrote:
-> On 18.11.24 13:31, Francesco Dolcini wrote:
->> On Mon, Nov 18, 2024 at 07:26:55AM +0100, Heiko Schocher wrote:
->>> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
->>> extensions. Only useful on some Siemens i.MX8-based platforms as
->>> special SCFW is needed which provides the needed SCU API.
->>>
->>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
->>> Signed-off-by: Heiko Schocher <hs@denx.de>
->>
->> ...
->>
->>> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
->>> index 0e45f0a0922..f317d0922cb 100644
->>> --- a/drivers/watchdog/Kconfig
->>> +++ b/drivers/watchdog/Kconfig
->>> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
->>>         Select this to enable Arm SMC watchdog timer. This watchdog will manage
->>>         a watchdog based on ARM SMCCC communication.
->>> +config WDT_SCU_PMIC
->> Isn't this a too generic name for something the is platform specific?
->> Or this is not Siemens specific? One or the other, I would say.
+On 06:02-20241119, Aniket Limaye wrote:
+> From: Reid Tonking <reidt@ti.com>
 > 
-> This is also my only concern right now. If this driver is specific for
-> a Siemens SCU firmware, then IMHO the Kconfig option and the driver
-> filename should reflect this.
+> The j7200 SOC has a single DDR controller and hence no need for
+> configuring the MSMC interleaver. Hence we do not have an explicit node
+> for MSMC in j7200 DT, unlike j721s2/j784s4.
+> 
+> Also, MSMC clk id is described under A72SS0_CORE0 Device in TISCI
+> documentation [0].
+> 
+> Considering the above, define the MSMC clk in the a72 node.
+> 
+> [0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
+> 
+> Signed-off-by: Reid Tonking <reidt@ti.com>
+> ---
+[..]
+> ---
+>  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 11 ++++++-----
+>  1 file changed, 6 insertions(+), 5 deletions(-)
+> 
+> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> index f096b102793..06fffe2a11b 100644
+> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> @@ -23,11 +23,12 @@
+>  				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
+>  				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+>  		resets = <&k3_reset 202 0>;
+> -		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
+> -		clock-names = "gtc", "core";
+> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
+> -		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+> -		assigned-clock-rates = <2000000000>, <200000000>;
+> +		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>, <&k3_clks 4 1> ;
+> +		clock-names = "gtc", "core", "msmc";
+> +		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 1>,
+> +						  <&k3_clks 323 0>;
+> +		assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
+> +		assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
 
-Yep, I change this in next version.
+Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
-Thanks!
+Regards,
+Manorit
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+>  		ti,sci = <&dmsc>;
+>  		ti,sci-proc-id = <32>;
+>  		ti,sci-host-id = <10>;
+> -- 
+> 2.47.0
+> 
