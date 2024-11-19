@@ -4,64 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A6A0D60D1B
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF37D62069
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 10:09:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F07C58953A;
-	Tue, 19 Nov 2024 11:07:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 627278953C;
+	Tue, 19 Nov 2024 11:09:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X4/ENpIr";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SRXvZdGv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1409F8953E; Tue, 19 Nov 2024 11:07:35 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2A67489543; Tue, 19 Nov 2024 11:09:26 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B89638951C
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:07:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 356228953A
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 11:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJA7VoZ041484;
- Tue, 19 Nov 2024 04:07:31 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732010851;
- bh=WrMrnSbnwK8lb9GkmPk/Q6ATksQ1oV7GfJa7nMKYbnw=;
- h=From:To:CC:Subject:Date;
- b=X4/ENpIr92Jgk7NIFMWSRbvl5NR4Llnt9EGm2QGkdPN9/j2W3CdGym8xyneVjJX6v
- amPvk/fyrIA5IPmgvjfUYyjZpEDoAh6/pO/TnT8/W547I5O1rvDWJzd7XWa9z8WHAs
- 8hIpB0gPGtGLAM69OLR9IFiG88oGAjD07v3s/P8M=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJA7VYI011880
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Nov 2024 04:07:31 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Nov 2024 04:07:30 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Nov 2024 04:07:30 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.6])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJA7REo126790;
- Tue, 19 Nov 2024 04:07:28 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <vigneshr@ti.com>
-CC: <n-francis@ti.com>, <afd@ti.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH] arm64: dts: ti: k3-j7200: Fix OSPI boot
-Date: Tue, 19 Nov 2024 15:37:20 +0530
-Message-ID: <20241119100720.1297067-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B3C903FA4D
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 10:09:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732010963;
+ bh=dWi2RFG3+J0NCpZstFJ/nmoGedgZQGIlIJcdr3l8i5M=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=SRXvZdGv7D5itbpHi3xzoeYlHV7Fh6tPdv8hPEYSRLl3rSNhg1Q02ZDv89lCW5HtO
+ QkVQh6BCZt0Qri+egA75mzchADnyGcbvHTSylIX3KXsOgC4Xtkx2UUKTh5MoZr7veO
+ BQV1yFZX7wQ+ApD4u71+46wHFblwGxrO483o77kJ+8vNcJ0J8+SjX1t6edmqM0dzVA
+ fdcTP7E0hYNRxqAgy4v0nE0KHwsZoSRNTxDzH/sPz3hwziLcr2QUnYrida9blZgnpj
+ dFfUBji49V3FIWOmsFtvoQAn19kiAKfoVWdemU+aofVaM3tp81cSB/LPSho6j8EJzw
+ 4dth5C2oQ6Qlg==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-431604a3b47so5559165e9.3
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 02:09:23 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732010963; x=1732615763;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dWi2RFG3+J0NCpZstFJ/nmoGedgZQGIlIJcdr3l8i5M=;
+ b=TPCvYkHEiiVPxiEp/DPy5Xc/wk8xfSxFqZzBoB7qA/GXiAwciqVKgqf2Osrqc97qNQ
+ NucCTaOMykxZR29steMivd7ptNvui9mNgSF6HdtFH4t4Cl199imuhFsFJm9pg0NB3z6e
+ zIPc4mEecfi3OBCgVJdmYsFH09abpHJBlrWci0Gx3e4tPFZ1XJ2YlKauJAua0FJ0Gosi
+ D0Ub9CgXZO/jTlMnK1Q9Nw53UBoGq1lzgxlpEiF56GiqNorf+OX7iaIctlNmNnthHhjJ
+ BQyIsxSiphcsaxU72xjuq454EtLy3yOVwHHoAFNYA1z/WzZ3JdFoDgbg2cb/geu6LsZZ
+ 7vLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUNJd1fKGdU02JoL0bYucVPUOk6kPKPyI9U6Quieka0AwqUBd28g8HWermvA/M9j0WX+Qw9qw4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz02N8CoTakDLXkeE7A+Bn94Dh7tqAyxRNK7S13wC5sm3O+3c3P
+ 5jOGwoYlnJQNatbNwA3VnXHTqJTXH8NApuqhKi2lOHtUOWoHmj2ISC0MEFEasCRIb3n1fYB5CD7
+ nkOgy/DuFsSJR1pQZSdiSjS5bsQwnKOEi5ZEzRLdMCcL+iNAl3Mx0a7wAGA/WdgkYRqI=
+X-Received: by 2002:a5d:59af:0:b0:382:41ad:d8d1 with SMTP id
+ ffacd0b85a97d-38241adda6emr5469474f8f.53.1732010963292; 
+ Tue, 19 Nov 2024 02:09:23 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IELwJ7Nl2xu0w+OY8uAHDP+BNf3eyoyDCVOsDSa2N2gIRrJ3/Qx8LLH+uECmK9bkuQZfNjU5A==
+X-Received: by 2002:a5d:59af:0:b0:382:41ad:d8d1 with SMTP id
+ ffacd0b85a97d-38241adda6emr5469457f8f.53.1732010962975; 
+ Tue, 19 Nov 2024 02:09:22 -0800 (PST)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3824770f3dasm5660945f8f.54.2024.11.19.02.09.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Nov 2024 02:09:22 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] net: correct the description of ip_to_string()
+Date: Tue, 19 Nov 2024 11:09:07 +0100
+Message-ID: <20241119100907.24531-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,36 +103,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OSPI boot is broken due to missing bootph property
-in pin mux of OSPI.
-So add bootph to fix OSPI boot.
+The output of ip_to_string() is a string.
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+ include/net-common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This fix is already merged into kernel with[0] series.
-Sending this patch to allow OSPI boot, 
-till above fix is getting merged to u-boot.
-
-Bootlog : https://gist.github.com/uditkumarti/4c827d6801b3fde60a4902ffefd5354c
-
-[0]: https://lore.kernel.org/all/173021674661.3859929.13298221281337904627.b4-ty@ti.com/ 
-
- dts/upstream/src/arm64/ti/k3-j7200-som-p0.dtsi | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/dts/upstream/src/arm64/ti/k3-j7200-som-p0.dtsi b/dts/upstream/src/arm64/ti/k3-j7200-som-p0.dtsi
-index 21fe194a57..014cf1805f 100644
---- a/dts/upstream/src/arm64/ti/k3-j7200-som-p0.dtsi
-+++ b/dts/upstream/src/arm64/ti/k3-j7200-som-p0.dtsi
-@@ -124,6 +124,7 @@
- 	};
+diff --git a/include/net-common.h b/include/net-common.h
+index b7a519e36db..ed3d0a4a185 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -427,7 +427,7 @@ void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
+ struct in_addr string_to_ip(const char *s);
  
- 	mcu_fss0_ospi0_pins_default: mcu-fss0-ospi0-default-pins {
-+		bootph-all;
- 		pinctrl-single,pins = <
- 			J721E_WKUP_IOPAD(0x0000, PIN_OUTPUT, 0) /* MCU_OSPI0_CLK */
- 			J721E_WKUP_IOPAD(0x002c, PIN_OUTPUT, 0) /* MCU_OSPI0_CSn0 */
+ /**
+- * ip_to_string() - Convert a string to ip address
++ * ip_to_string() - Convert an IPv4 address to a string
+  *
+  * Implemented in lib/net_utils.c (built unconditionally)
+  *
 -- 
-2.34.1
+2.45.2
 
