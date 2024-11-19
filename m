@@ -4,76 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C4AD4417A
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 15:59:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A7FD4922B
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 16:27:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5462D8957A;
-	Tue, 19 Nov 2024 16:59:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A13FA8958A;
+	Tue, 19 Nov 2024 17:27:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KcLAqrzK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L3PNYlIk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44E9A895A2; Tue, 19 Nov 2024 16:59:46 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 62D3B8958C; Tue, 19 Nov 2024 17:27:38 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0E6C89578
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 16:59:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22AF089589
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 17:27:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7b35b1ca0c2so527057585a.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 07:59:43 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6eeb741c26eso4986847b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:27:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732031983; x=1732636783; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732033655; x=1732638455; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=op1/g0qVALDl/M8FzHKpsNAq5miq1D9HRPDsqXohmFY=;
- b=KcLAqrzKC77sLjej/SnAfVSjSTdZQ+xbrWF46dcSGyExDp3TlwaM27rZcKnahkUDY/
- BJCBow1mvvEfwJsmJRVWRQJHxpSAcIOk0xigbgtKH9yslPC/LEeQdygsp5xFXf98pn+H
- wL92FBPuyWOV7UdHlOiQuTy3WQj1caohGs4E4=
+ bh=vcEXe/oPpxbL+3mMksQ3rHz4LrSn01pYwf87hX8REmI=;
+ b=L3PNYlIkE+d09AtHfJXA5WhY3zfcG4jubBlnrq67GC65l/oFpHum3jhvFPYafwFqSw
+ To05alumCPj3V1SPv0xueWHt94yF79zXZAwwUXSkatVXYkewnrKIp6SBQb+LhGiF6XtF
+ yJQU7LSjkDWkURcj4IFPrA+GlXZe97Bc+E9hk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732031983; x=1732636783;
+ d=1e100.net; s=20230601; t=1732033655; x=1732638455;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=op1/g0qVALDl/M8FzHKpsNAq5miq1D9HRPDsqXohmFY=;
- b=RuWTBUmSvkK/uIUGN0pnPreVI7Yei8nyAF0UxF4HqvqfV30hnzpJ+mWX+/9qGzDGvd
- L1Tc77wbBE9mliS2M4K+MJaJ3a9zoq63KeSgW5HhDKpFegW3UzOTzmVB35WBDldtug/H
- TGfDgPBPzfh0jLxaS8C9xHbXCcWZR4b47Rs0x9RWrZ0zh2vy0K7AYZb+ftC6o0e/Okvw
- 0hwJlGXSmGxRzDAz9tP5M1/wub1+19W+ktvVBa2hTm0dlKi6kNhFT1zQ7v3pG4gQ/I8t
- YIpRqH5t09HGkEUVRAlgLi5zylGVZNw1PMJPLwppamgQqoEXHVnee2w54rqNtUeNmoet
- V2Bw==
-X-Gm-Message-State: AOJu0Yxf7no84S+2AURAEl2hb7TOyQbwTI6zBBKy5URsfbBDmWeno8Xb
- kCxhnr6lw4XpagpJv+7AdyzHuOLCAx1DznmjMGGnOXX4oRczo5FjVf1UBa2rkik=
-X-Google-Smtp-Source: AGHT+IGyYFGT+vn1xP8VDiTbjp0hwPVuHeKXFdKU6Gu9PmMICe0B3MB/BCM7QWgkUFnREfU1yRH+sA==
-X-Received: by 2002:a05:620a:44d5:b0:7a9:c129:504f with SMTP id
- af79cd13be357-7b37aa80df8mr634146785a.23.1732031982756; 
- Tue, 19 Nov 2024 07:59:42 -0800 (PST)
+ bh=vcEXe/oPpxbL+3mMksQ3rHz4LrSn01pYwf87hX8REmI=;
+ b=vxW1PVpX9HiJhGI0GDjGfDpRe/DeGRxxvoCiZ6aQvLBD2Maw8pLWZGKkE0NFhFLjTL
+ bW4pqLBjTDr45YK2F6sDNpYwBI4xlfSHxWTcPu4HOHsn6hLJ+d01GkpBAh6KTTu1Lia1
+ qsgrMsEodXwWSy1bfjyLKlMDdGYWsQZtzlDM03aQEFIvW9nvgpNl4bqukgNQ2qDVsoYC
+ 2Mcj89SCgFAqawAPdLyNbHoTmEMHcBOl0ENkd7+4mzs1HzRX/081Sdja3Qpe1V1B0haL
+ IO7chfiqeMQz2HmYJqCDi9t8NNq7GAO6R9dzoP/WBL1g8qNbQaiGU6DNP8XzoBH3/xp+
+ T5tQ==
+X-Gm-Message-State: AOJu0YxWX2a/wU3G69KsyqmZND0l2NnMahfrSVn6I1Rvi/+BsOpVnHHs
+ PSLKhee5iddnIon6IDdHIzKVLlIfMwEcbr6eMihmeBCYI1ZM53E5bOQzxd5dMrA=
+X-Google-Smtp-Source: AGHT+IHVpZAauad9NWxUgUixkTZAwkpSJru+BILdIA5hdz5p2GrL9MAULM/H+t2PCmYer4IOqOXKaQ==
+X-Received: by 2002:a05:690c:9a83:b0:6e3:37a7:8a98 with SMTP id
+ 00721157ae682-6ee55a5d623mr185511337b3.14.1732033654952; 
+ Tue, 19 Nov 2024 08:27:34 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b37a89637esm104703485a.82.2024.11.19.07.59.41
+ 6a1803df08f44-6d40dc1f1bfsm49625476d6.49.2024.11.19.08.27.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 07:59:42 -0800 (PST)
-Date: Tue, 19 Nov 2024 09:59:39 -0600
+ Tue, 19 Nov 2024 08:27:34 -0800 (PST)
+Date: Tue, 19 Nov 2024 10:27:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Subject: Re: [PATCH v2] test/cmd/wget.c: move net_test_wget() to the cmd test
- suite
-Message-ID: <20241119155939.GA3493897@bill-the-cat>
-References: <20241115164514.2186763-1-jerome.forissier@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ion Agorria <ion@agorria.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH 00/39] pxe: Support read_all() for extlinux and PXE
+Message-ID: <20241119162730.GX3600562@bill-the-cat>
+References: <20241119131844.4078144-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2AySSUhvDcvzvTXm"
+ protocol="application/pgp-signature"; boundary="OAsf8OLKDJ8G4Zze"
 Content-Disposition: inline
-In-Reply-To: <20241115164514.2186763-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241119131844.4078144-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,90 +109,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2AySSUhvDcvzvTXm
+--OAsf8OLKDJ8G4Zze
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 15, 2024 at 05:45:14PM +0100, Jerome Forissier wrote:
+On Tue, Nov 19, 2024 at 06:18:05AM -0700, Simon Glass wrote:
 
-> Since net_test_wget() is testing a command and is in test/cmd it should
-> be in the 'cmd' test suite, not 'lib'.
+> This series implements read_all() so that it is possible to read all the
+> files relating to a bootflow, make adjustments and then boot.
 >=20
-> Saving and restoring the values of the environment variables that the
-> test manipulates is necessary to avoid a regression when running the
-> whole ut test suite. A minimal reproducer is:
+> Unfortunately quite a few things stand in the way, so this series
+> finishes off several pending items: zboot without CONFIG_CMDLINE,
+> required support in pxe_utils and the differing code in the extlinux and
+> PXE bootmeths. There is very little new code, but quite a lot of
+> refactoring.
 >=20
->  $ ./u-boot -T -c "ut cmd net_test_wget; ut dm dm_test_eth_act" | \
->      grep -E "(Test:|Failures:)"
+> The bootm, booti and bootz commands have all been refactored previously,
+> so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> At the, time, zboot was left alone, since it is x86-specific and a bit
+> more trouble.
 >=20
-> Reported-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  test/cmd/wget.c | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
+> This series adds a programatic API for zboot and uses the forthcoming
+> bootstd 'image list' to collect information from an extlinux file. It is
+> therefore possible to parse the file, load the resulting images and then
+> examine/adjust the resulting bootflow, before booting.
 >=20
-> diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-> index fe26fee54c9..7570c065a10 100644
-> --- a/test/cmd/wget.c
-> +++ b/test/cmd/wget.c
-> @@ -19,7 +19,7 @@
->  #include <dm/test.h>
->  #include <dm/device-internal.h>
->  #include <dm/uclass-internal.h>
-> -#include <test/lib.h>
-> +#include <test/cmd.h>
->  #include <test/test.h>
->  #include <test/ut.h>
-> =20
-> @@ -206,6 +206,10 @@ static int sb_http_handler(struct udevice *dev, void=
- *packet,
-> =20
->  static int net_test_wget(struct unit_test_state *uts)
->  {
-> +	char *prev_ethact =3D env_get("ethact");
-> +	char *prev_ethrotate =3D env_get("ethrotate");
-> +	char *prev_loadaddr =3D env_get("loadaddr");
-> +
->  	sandbox_eth_set_tx_handler(0, sb_http_handler);
->  	sandbox_eth_set_priv(0, uts);
-> =20
-> @@ -223,6 +227,10 @@ static int net_test_wget(struct unit_test_state *uts)
->  	ut_assert_nextline("md5 for 00020000 ... 0002001f =3D=3D> 234af48e94b00=
-85060249ecb5942ab57");
->  	ut_assert_console_end();
-> =20
-> +	env_set("ethact", prev_ethact);
-> +	env_set("ethrotate", prev_ethrotate);
-> +	env_set("loadaddr", prev_loadaddr);
-> +
->  	return 0;
->  }
-> -LIB_TEST(net_test_wget, UTF_CONSOLE);
-> +CMD_TEST(net_test_wget, UTF_CONSOLE);
+> The addition of options to extlinux resulted in the PXE and extlinux
+> bootmeth having slightly different features. This is tidied up in this
+> series, with common functions for both. This allows the same features
+> (loading images as a separate step) to be provided for PXE.
 
-I don't know why / how, but now this causes the "hash" unit test to
-fail, in both Azure and GitLab.
+This doesn't apply cleanly to -next and doesn't say what other series it
+depends on.
 
 --=20
 Tom
 
---2AySSUhvDcvzvTXm
+--OAsf8OLKDJ8G4Zze
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc8teMACgkQFHw5/5Y0
-tyztSgv8C/Ip3zaoIJzUlQ1aFp6OzoOB/JpV1EJpf7EWIny43vnoz6c+sIEmT3Pc
-Vk/E78JmUw/EYz74q712/jxpbr06VNN6zI6SEEun/aY/PtCjZIr7z34kDOJ+vBa7
-QHBFMdCMAfTCoadUsKRURU5VEeMjfiCXNzyl/BGO5lXP2UBY6erzXTnRhGgGfC9t
-2RxKmlB8cXzw7UVJpQWV4IitOaG4KqdP5nJqxczvu886pTnY6wDggF6WcSTnfnP/
-xQAk9pGzG1jPA4xRGE3mzmbmnVVPPkjbw0v2axD93UCF9vA9rYNDxRXZz+n+9G6U
-q7TLbAfM/DT2DHtCGMH59KEHnAU558qyR4frKrUJ3AqVQfrUO//SK3ZcNZp5t7xz
-pZwUK14ae7DT+XMZlDxCseqViOF5J1xM6bt8+BX2/3g+UN+Se0zIDn8ADskoXzfs
-3nrJKC/MW4mzXl0jSyfZg6rvcy9tZUNXj2lwzXAy05/e7auP8npoqk8gBmuBhn3E
-j5YIcICQ
-=6fIR
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc8vGoACgkQFHw5/5Y0
+tyxGewv/UWVx+eXHxQNhEhe5gA24/rw33N52cP5scP6XhVtecUij2OBNuKvkoUig
+PESG0L0R8wmGM5p/uNxb2kq+unOqK+E8O/8BDnosyiPeenHNCpUnDwrD7juvZpsS
+E67p5ku4IrDA0aKOifzNc/COQT0IoYat7bVcWb2/inmV2KKmNpDhmrQ7bIrWbe9/
+LN5IShWg2ydmHv1PKW0pMQRO7aBj3ctqZ1iX5Pbp7rXoRHger2rgXjdBfdS9y2rA
+kAOP4nMcmA8bCY46gVzA0z12EbH9A0iMp5JhoyMxAvKczE1F4ZUrWrmovtOMGbDu
+FA/M656kiTqKtSWQnCJ50q6dBb/sTRH2wawt5vf3iQ1VvCZFpT7k5tDqDRwzixmz
+MUsclpPXqIUZ/HuJKa9LZ49GREq7E+GGnGIeFXWbtqeUa/1wjSv+KDFZShaniU6i
+rQR0mssQ1UUHzmWobUM0JowG0GYVXczLMvk7Q2f3C5mCycRGd73/mCUchDgXMaZ5
+JSo3iO68
+=sz6Z
 -----END PGP SIGNATURE-----
 
---2AySSUhvDcvzvTXm--
+--OAsf8OLKDJ8G4Zze--
