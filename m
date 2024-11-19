@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4228D60D03
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF7CCD60D03
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 00:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 231ED89442;
-	Tue, 19 Nov 2024 01:36:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79436894C8;
+	Tue, 19 Nov 2024 01:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mym2zCwp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CBcoauR4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32401894B1; Tue, 19 Nov 2024 01:36:36 +0100 (CET)
+ id 671F5894C0; Tue, 19 Nov 2024 01:36:38 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1019F89442
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 01:36:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8728C894AF
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 01:36:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aVCe001219;
- Mon, 18 Nov 2024 18:36:31 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aXh5001226;
+ Mon, 18 Nov 2024 18:36:33 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731976591;
- bh=aYgMpfwxQHJSePs5ofYVLrQZQqwkZABk2Sd3UM0HS8w=;
+ s=ti-com-17Q1; t=1731976593;
+ bh=+Pqkayv83cQAPqUhUEk816GEYTbIrg3o2MM8fxYGfow=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=mym2zCwpa4Zrersa1KfMQOwY0ZY+2DygykAbuljnJEQzuP5c5Fc6zah55Kg5n+1PM
- 2khJJLqpYM0DfdqYN8VKxnewz2HQEq+0MkILusT1vCwMnAFMlX2dlii0xyyQIKF3kK
- h70czalY19IqenyS/ZoxqpgWjc7rjDnKc85Rmidk=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aVcP063791;
- Mon, 18 Nov 2024 18:36:31 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ b=CBcoauR4dy3it/426iBVmGsDxozGRZjeQqsQ8ZCtCUC3l4tLdmXuJ9om4k02aUZXX
+ UX4CXJRNottcL3DOTbRWLDvha3zzfMpHFM0E7NmuzecKfYwrDLWW7hdqYcb0kTEmkO
+ BA3mWh2iREFOEkTnnSbHHmA82u880H5/JqOpvZ4k=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ0aXlZ031149
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 18 Nov 2024 18:36:33 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Nov 2024 18:36:30 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 18:36:33 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Nov 2024 18:36:30 -0600
+ Frontend Transport; Mon, 18 Nov 2024 18:36:33 -0600
 Received: from PSDKL-Workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
  [172.24.227.91])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aPMU114132;
- Mon, 18 Nov 2024 18:36:28 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ0aPMV114132;
+ Mon, 18 Nov 2024 18:36:31 -0600
 From: Aniket Limaye <a-limaye@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>
 CC: <u-kumar1@ti.com>, <reidt@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
  <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
-Subject: [PATCH v4 1/5] arm: dts: k3-j7200-r5-common: Add msmc clk to a72 node
-Date: Tue, 19 Nov 2024 06:02:55 +0530
-Message-ID: <20241119003617.1871183-2-a-limaye@ti.com>
+Subject: [PATCH v4 2/5] misc: k3_avs: Add OPP_LOW voltage and frequency to
+ vd_data
+Date: Tue, 19 Nov 2024 06:02:56 +0530
+Message-ID: <20241119003617.1871183-3-a-limaye@ti.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241119003617.1871183-1-a-limaye@ti.com>
 References: <20241119003617.1871183-1-a-limaye@ti.com>
@@ -81,59 +83,60 @@ X-Virus-Status: Clean
 
 From: Reid Tonking <reidt@ti.com>
 
-The j7200 SOC has a single DDR controller and hence no need for
-configuring the MSMC interleaver. Hence we do not have an explicit node
-for MSMC in j7200 DT, unlike j721s2/j784s4.
+J7200 SOC supports OPP_LOW and OPP_NOM as two Operating Performance
+Points as per (7.5 Operating Performance Points) section in the
+Datasheet [0].
+- A72SS/MSMC at 2 GHz/1GHz operation must use OPP_NOM.
+- A72SS/MSMC at 1 GHz/500 MHz operation can use OPP_NOM or OPP_LOW
+  voltage (though OPP_LOW voltage is recommended to reduce power
+  consumption).
 
-Also, MSMC clk id is described under A72SS0_CORE0 Device in TISCI
-documentation [0].
+Add OPP_LOW frequency->voltage entry to vd_data.
 
-Considering the above, define the MSMC clk in the a72 node.
+The actual OPP voltage for the device is read from the efuse and
+updated in k3_avs_probe().
+OPP_NOM corresponds to OPP_1 and OPP_LOW to OPP_0 efuse register
+fields, as described in the Datasheet [0]
+The register offsets and fields are described in the TRM (5.2.6.1.5
+WKUP_VTM_VD_OPPVID_j Register) [1].
 
-[0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html#clocks-for-a72ss0-core0-device
+[0]: https://www.ti.com/lit/gpn/dra821u (J7200 Datasheet)
+[1]: https://www.ti.com/lit/pdf/spruiu1 (J7200 TRM)
 
 Signed-off-by: Reid Tonking <reidt@ti.com>
 Signed-off-by: Aniket Limaye <a-limaye@ti.com>
 ---
+ drivers/misc/k3_avs.c | 4 ++++
+ include/k3-avs.h      | 1 +
+ 2 files changed, 5 insertions(+)
 
-v4:
-- Fixup patch styling problems
-- Link to v3: https://lore.kernel.org/u-boot/20241116071615.839623-2-a-limaye@ti.com/
-
-v3:
-- Add msmc clock at the end to preserve current ordering of core and gtc
-  clocks
-- Link to v2: https://lore.kernel.org/u-boot/20241023130033.1826413-2-a-limaye@ti.com/
-
-v2:
-- Update commit msg to justify location of msmc clk in DT
-- Link to v1: https://lore.kernel.org/u-boot/20241017062911.2241167-2-a-limaye@ti.com/
----
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index f096b102793..06fffe2a11b 100644
---- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -23,11 +23,12 @@
- 				<&k3_pds 202 TI_SCI_PD_EXCLUSIVE>,
- 				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
- 		resets = <&k3_reset 202 0>;
--		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>;
--		clock-names = "gtc", "core";
--		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
--		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
--		assigned-clock-rates = <2000000000>, <200000000>;
-+		clocks = <&k3_clks 61 1>, <&k3_clks 202 2>, <&k3_clks 4 1> ;
-+		clock-names = "gtc", "core", "msmc";
-+		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 4 1>,
-+						  <&k3_clks 323 0>;
-+		assigned-clock-parents= <0>, <0>, <0>, <&k3_clks 323 2>;
-+		assigned-clock-rates = <2000000000>, <200000000>, <1000000000>;
- 		ti,sci = <&dmsc>;
- 		ti,sci-proc-id = <32>;
- 		ti,sci-host-id = <10>;
+diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+index 99a18a109b7..9d950d034a5 100644
+--- a/drivers/misc/k3_avs.c
++++ b/drivers/misc/k3_avs.c
+@@ -501,6 +501,10 @@ static struct vd_data j721e_vd_data[] = {
+ 		.dev_id = 202, /* J721E_DEV_A72SS0_CORE0 */
+ 		.clk_id = 2, /* ARM clock */
+ 		.opps = {
++			[AM6_OPP_LOW] = {
++				.volt = 0, /* voltage TBD after OPP fuse reading */
++				.freq = 1000000000,
++			},
+ 			[AM6_OPP_NOM] = {
+ 				.volt = 880000, /* TBD in DM */
+ 				.freq = 2000000000,
+diff --git a/include/k3-avs.h b/include/k3-avs.h
+index 1014d5d114d..f6f1031c9cc 100644
+--- a/include/k3-avs.h
++++ b/include/k3-avs.h
+@@ -20,6 +20,7 @@
+ 
+ #define NUM_OPPS		4
+ 
++#define AM6_OPP_LOW		0
+ #define AM6_OPP_NOM		1
+ #define AM6_OPP_OD		2
+ #define AM6_OPP_TURBO		3
 -- 
 2.47.0
 
