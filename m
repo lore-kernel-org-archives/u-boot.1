@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1806D44157
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 13:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A2ABD44157
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 13:21:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47AD1895DF;
-	Tue, 19 Nov 2024 14:19:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD97889555;
+	Tue, 19 Nov 2024 14:19:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="myf1EKAv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H4KMo7Cx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84CF2895D8; Tue, 19 Nov 2024 14:19:28 +0100 (CET)
+ id 5590B895BA; Tue, 19 Nov 2024 14:19:31 +0100 (CET)
 Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
  [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 477718954F
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:19:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 215A08954F
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:19:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-3a75f77d859so9770705ab.3
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 05:19:26 -0800 (PST)
+ e9e14a558f8ab-3a77fe30b0dso1087425ab.3
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 05:19:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732022364; x=1732627164; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732022367; x=1732627167; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PEqYqBkmlnEijNaOBupWJ1K5dRzvA4egycg9IEiRles=;
- b=myf1EKAvRqI5j2dWDpKMYjA0Y1yAxV+cqZHPJy2ZEA0aaKaxB2PYg8FUQM9PkSQIHN
- SRvrvokb86e+iMtSPk2t/+LYO84L/D3r0HmeD31ETJL7I7px/SksqEH1cwLCY6cgtXe7
- FYhNbIo0wvg8Mza+rtv5O+j84Vs2BTmYDCego=
+ bh=FcCErSn5ouQjP5zs76s5VtT8pPCR60dcScAs3ombcfM=;
+ b=H4KMo7CxDUY+uC0wTlpWuhjtAF09ph/hMTBy0OdpHzz9Z2A8DoIPB/cnrWRUT3TRjA
+ rq78HmpFu0DMgi/Ui/v5A11CMEalHl0yP/M5FyHca+M/GH/IshPqAviOK1RDSVa0Xgsi
+ pKBuWBNFukavShoC/p31l5M7dD+MW9L7I7ZDw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732022364; x=1732627164;
+ d=1e100.net; s=20230601; t=1732022367; x=1732627167;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PEqYqBkmlnEijNaOBupWJ1K5dRzvA4egycg9IEiRles=;
- b=CtxRaSTPqB7X0tHYQGGHUK3uvF6B0N8T4grmMFT+6UFMp9DbhfiTkidBMmVfNyKZsA
- b6zJ/h2W/sFe6yl0/LaETGHDDJp/0YntP+Nv27QSkbORIFQ5Czkkbnlfvo5PoDXz8Pz0
- EKODkbZ6lYoV75YVwjXazUVpIrdTWhk+LDWtvZAJsYNNltV03f4PZDF+rtnOP1x1XTnn
- x91wpCKuWs3gbpMksNxag06gFFUvxRO86DOtYiS4BJk/w64gSl6Z8ZOkhewwL6p+N0jW
- RXn72t+elGDe3E+MqOlyrTX3c0wtfjDq4JsWK+xC9Zmm+lJ/0KSO7KwYhNfaQhrvkK9Q
- C80g==
-X-Gm-Message-State: AOJu0Yz7NyzNOXCxzjsT0jME0hy2Spneucgj5YcoHksvfy0IDvRUpmuZ
- cHle2OA3tK7p3HiR7DYDtHnuQhMFbnwh6we6kc+//BC5AL97674fOkbpxz/Kmn+wRLoeFfs4ccA
+ bh=FcCErSn5ouQjP5zs76s5VtT8pPCR60dcScAs3ombcfM=;
+ b=PINc4yIUH7R9KK0jpBAzNG3xX4b9fOeDICDbtXlO9InGTKfkNxPqsghUtDemm9GQHL
+ +qayiwWzKqGlxpTmFTK8Rn4S7FQF9bU+DmDxn57EQfdgpCkL9JwZBguBZ1PLGIghwx1o
+ RbMWTUU1t+egu8m+IYve4Zn/EjAelmIq8CBQR/zEzpQKVoDQPqS+tbAylM1nC3iPLuY0
+ Yj5Z0tJ6DK7qo0DYBiT1LOrkn8l1R6WHWfklvDy1dJUwqCQIH/Ee38DkT/bx7ymiSkac
+ vT0Kd7xMI178PbZOK8KgubGQ/LEJPNfRusH+qRckv9/onSkkIrFjUxkkFekku3/CDI6e
+ QJNw==
+X-Gm-Message-State: AOJu0Ywbu3Un6f3STYL6yYv1dZOyMFK239pKeiSvGeGGBA7zBwNaKP1T
+ pRivM3wpW4CGk30t6K4V+PD628wapiReJKp/XJtcWKag/tZBq9aOpNRPYpZNOerKeJk9I+EdsXU
  =
-X-Google-Smtp-Source: AGHT+IHLBgJy/d7xJ9qj5nMpz+hlKu5Ls9dlsuWLIFSHmBiX+stUo0NmfBgD9NgRRx+WlflS2FERgw==
-X-Received: by 2002:a92:c566:0:b0:3a7:15aa:3583 with SMTP id
- e9e14a558f8ab-3a74801888dmr183937125ab.6.1732022364518; 
- Tue, 19 Nov 2024 05:19:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGef9XgnGd+GT2HgT9ID7mwyR/3yFrxPJ06NS2utZjaTZfK31VWNcQPwEtY8QjRu1kLIZGPUg==
+X-Received: by 2002:a05:6e02:1848:b0:3a7:7ad4:ff00 with SMTP id
+ e9e14a558f8ab-3a77ad500ffmr20302815ab.19.1732022367350; 
+ Tue, 19 Nov 2024 05:19:27 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a7811e4905sm753085ab.2.2024.11.19.05.19.21
+ e9e14a558f8ab-3a7811e4905sm753085ab.2.2024.11.19.05.19.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 05:19:23 -0800 (PST)
+ Tue, 19 Nov 2024 05:19:25 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Julien Masson <jmasson@baylibre.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH 13/39] boot: pxe: Use bootm_...() functions where possible
-Date: Tue, 19 Nov 2024 06:18:18 -0700
-Message-Id: <20241119131844.4078144-14-sjg@chromium.org>
+Subject: [PATCH 14/39] boot: pxe: Refactor label_run_boot() to avoid cmdline
+Date: Tue, 19 Nov 2024 06:18:19 -0700
+Message-Id: <20241119131844.4078144-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241119131844.4078144-1-sjg@chromium.org>
 References: <20241119131844.4078144-1-sjg@chromium.org>
@@ -95,153 +92,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than building a command line for each operation, use the
-functions provided by the bootm API.
-
-Make sure that the bootm functions are available if pxe_utils is used.
-
-Since SYS_BOOTM_LEN is not present for the tools-only build, adjust the
-code to handle that.
+Adjust the remaining call in this function to use the bootm API. This
+will allow PXE to work without the command line.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/Makefile    |  2 +-
- boot/pxe_utils.c | 43 ++++++++++++++++++++-----------------------
- 2 files changed, 21 insertions(+), 24 deletions(-)
+ arch/x86/lib/zimage.c | 27 +++++++++++++++++++--------
+ boot/pxe_utils.c      | 13 +++++--------
+ include/bootm.h       |  9 +++++++++
+ 3 files changed, 33 insertions(+), 16 deletions(-)
 
-diff --git a/boot/Makefile b/boot/Makefile
-index 43def7c33d7..9ccdc2dc8f4 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -10,7 +10,7 @@ obj-$(CONFIG_CMD_BOOTM) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTZ) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTI) += bootm.o bootm_os.o
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index 4dfcde68060..26d623711bc 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -433,27 +433,38 @@ int zboot_go(struct bootm_info *bmi)
+ 	return ret;
+ }
  
--obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
-+obj-$(CONFIG_PXE_UTILS) += bootm.o pxe_utils.o
+-int zboot_run_args(ulong addr, ulong size, ulong initrd, ulong initrd_size,
+-		   ulong base, char *cmdline)
++int zboot_run(struct bootm_info *bmi)
+ {
+-	struct bootm_info bmi;
+ 	int ret;
  
- endif
+-	bootm_init(&bmi);
+-	zboot_start(&bmi, addr, size, initrd, initrd_size, base, cmdline);
+-	ret = zboot_load(&bmi);
++	ret = zboot_load(bmi);
+ 	if (ret)
+ 		return log_msg_ret("ld", ret);
+-	ret = zboot_setup(&bmi);
++	ret = zboot_setup(bmi);
+ 	if (ret)
+ 		return log_msg_ret("set", ret);
+-	ret = zboot_go(&bmi);
++	ret = zboot_go(bmi);
+ 	if (ret)
+ 		return log_msg_ret("go", ret);
  
+ 	return -EFAULT;
+ }
+ 
++int zboot_run_args(ulong addr, ulong size, ulong initrd, ulong initrd_size,
++		   ulong base, char *cmdline)
++{
++	struct bootm_info bmi;
++	int ret;
++
++	bootm_init(&bmi);
++	zboot_start(&bmi, addr, size, initrd, initrd_size, base, cmdline);
++	ret = zboot_run(&bmi);
++	if (ret)
++		return log_msg_ret("zra", ret);
++
++	return 0;
++}
++
+ static void print_num(const char *name, ulong value)
+ {
+ 	printf("%-20s: %lx\n", name, value);
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 66f82d3fbc1..2517999d408 100644
+index 2517999d408..73d3114813d 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -7,6 +7,7 @@
- #define LOG_CATEGORY	LOGC_BOOT
- 
- #include <bootflow.h>
-+#include <bootm.h>
- #include <command.h>
- #include <dm.h>
- #include <env.h>
-@@ -461,7 +462,7 @@ skip_overlay:
-  * Scenario 4: fdt blob is not available.
-  */
- static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
--			     char *kernel_addr, char **fdt_argp)
-+			     char *kernel_addr, const char **fdt_argp)
- {
- 	/* For FIT, the label can be identical to kernel one */
- 	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
-@@ -584,72 +585,66 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+@@ -585,10 +585,8 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
  			  char *kernel_addr, char *initrd_addr_str,
  			  char *initrd_filesize, char *initrd_str)
  {
--	char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
- 	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
-+	struct bootm_info bmi;
+-	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
+ 	struct bootm_info bmi;
  	ulong kernel_addr_r;
--	int bootm_argc = 2;
- 	int zboot_argc = 3;
+-	int zboot_argc = 3;
  	void *buf;
  	int ret;
  
--	bootm_argv[3] = env_get("fdt_addr_r");
-+	bootm_init(&bmi);
- 
--	ret = label_process_fdt(ctx, label, kernel_addr, &bootm_argv[3]);
-+	bmi.conf_fdt = env_get("fdt_addr_r");
-+
-+	ret = label_process_fdt(ctx, label, kernel_addr, &bmi.conf_fdt);
- 	if (ret)
+@@ -601,14 +599,13 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
  		return ret;
  
--	bootm_argv[1] = kernel_addr;
-+	bmi.addr_img = kernel_addr;
- 	zboot_argv[1] = kernel_addr;
+ 	bmi.addr_img = kernel_addr;
+-	zboot_argv[1] = kernel_addr;
++	bootm_x86_set(&bmi, bzimage_addr, hextoul(kernel_addr, NULL));
  
  	if (initrd_addr_str) {
--		bootm_argv[2] = initrd_str;
--		bootm_argc = 3;
-+		bmi.conf_ramdisk = initrd_str;
- 
- 		zboot_argv[3] = initrd_addr_str;
- 		zboot_argv[4] = initrd_filesize;
- 		zboot_argc = 5;
- 	}
- 
--	if (!bootm_argv[3]) {
-+	if (!bmi.conf_fdt) {
- 		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
- 			if (strcmp("-", label->fdt))
--				bootm_argv[3] = env_get("fdt_addr");
-+				bmi.conf_fdt = env_get("fdt_addr");
- 		} else {
--			bootm_argv[3] = env_get("fdt_addr");
-+			bmi.conf_fdt = env_get("fdt_addr");
- 		}
- 	}
- 
- 	kernel_addr_r = genimg_get_kernel_addr(kernel_addr);
- 	buf = map_sysmem(kernel_addr_r, 0);
- 
--	if (!bootm_argv[3] && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
-+	if (!bmi.conf_fdt && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
- 		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
- 			if (strcmp("-", label->fdt))
--				bootm_argv[3] = env_get("fdtcontroladdr");
-+				bmi.conf_fdt = env_get("fdtcontroladdr");
- 		} else {
--			bootm_argv[3] = env_get("fdtcontroladdr");
-+			bmi.conf_fdt = env_get("fdtcontroladdr");
- 		}
- 	}
- 
--	if (bootm_argv[3]) {
--		if (!bootm_argv[2])
--			bootm_argv[2] = "-";
--		bootm_argc = 4;
--	}
+ 		bmi.conf_ramdisk = initrd_str;
 -
- 	/* Try bootm for legacy and FIT format image */
- 	if (genimg_get_format(buf) != IMAGE_FORMAT_INVALID &&
- 	    IS_ENABLED(CONFIG_CMD_BOOTM)) {
- 		log_debug("using bootm\n");
--		do_bootm(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = bootm_run(&bmi);
- 	/* Try booting an AArch64 Linux kernel image */
- 	} else if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
- 		log_debug("using booti\n");
--		do_booti(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = booti_run(&bmi);
- 	/* Try booting a Image */
- 	} else if (IS_ENABLED(CONFIG_CMD_BOOTZ)) {
- 		log_debug("using bootz\n");
--		do_bootz(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+		ret = bootz_run(&bmi);
+-		zboot_argv[3] = initrd_addr_str;
+-		zboot_argv[4] = initrd_filesize;
+-		zboot_argc = 5;
++		bootm_x86_set(&bmi, initrd_addr, hextoul(kernel_addr, NULL));
++		bootm_x86_set(&bmi, initrd_size,
++			      hextoul(initrd_filesize, NULL));
+ 	}
+ 
+ 	if (!bmi.conf_fdt) {
+@@ -648,7 +645,7 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
  	/* Try booting an x86_64 Linux kernel image */
  	} else if (IS_ENABLED(CONFIG_CMD_ZBOOT)) {
  		log_debug("using zboot\n");
-@@ -657,6 +652,8 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+-		do_zboot_parent(ctx->cmdtp, 0, zboot_argc, zboot_argv, NULL);
++		ret = zboot_run(&bmi);
  	}
  
  	unmap_sysmem(buf);
-+	if (ret)
-+		return ret;
+diff --git a/include/bootm.h b/include/bootm.h
+index d174f18ac18..465577a66f5 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -315,6 +315,15 @@ int bootm_process_cmdline(char *buf, int maxlen, int flags);
+  */
+ int bootm_process_cmdline_env(int flags);
  
- 	return 0;
- }
++/**
++ * zboot_run() - Run through the various steps to boot a zimage
++ *
++ * @bmi: Bootm information, with bzimage_size, initrd_addr, initrd_size and
++ * cmdline set up. If base_ptr is 0, then bzimage_addr must be set to the start
++ * of the bzImage. Otherwise base_ptr and load_address must be provided.
++ */
++int zboot_run(struct bootm_info *bmi);
++
+ /**
+  * zboot_run_args() - Run through the various steps to boot a zimage
+  *
 -- 
 2.34.1
 
