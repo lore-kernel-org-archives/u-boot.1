@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9E7D6C2BA
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 00:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D10E5D6C2BA
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 00:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4A7789623;
-	Wed, 20 Nov 2024 01:28:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8AFF889634;
+	Wed, 20 Nov 2024 01:28:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a6b+EEN5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ggTfNvA2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E20A89555; Tue, 19 Nov 2024 23:46:53 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 659ED895D2; Tue, 19 Nov 2024 23:46:55 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA666895D9
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1CB4588DB2
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:46:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3821a8c7c5cso667193f8f.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:46:50 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43159469053so3644895e9.2
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:46:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732056410; x=1732661210; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732056412; x=1732661212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sF6Tp2/pRdN0BzptcIUevTa/Zbklnfm6T4bZ8FxQZi8=;
- b=a6b+EEN5L3jl2KNwpyHfHXQipa8RxKLY32+9twVhQhNxF+YMGqnic8O6jcEEQTo2tb
- eLcBoGuCLHmbcBgMbbsqBVU3ACmv+TMoBigETGMW+i/RlTBo696RBV1tzWDFUDm0HNOB
- V2hXTT1pgUSSJg8lnShThiIE1vlYSxa057u0UpTNfZpUOfUlegDCVg+MzLcznDL6UcTh
- mHfuUuN6nSPZe0HkLecU3LiFAuao90u1t5oe5oAK11NzEB6wPAXp/MghhWeM2a2Btiy4
- FZ/H2m+UES3VEAVoLTieG3bPB4xfpbGYG6LH9V/mh67MyoTOttgToUexfJuKMjam2IOq
- jMiw==
+ bh=GEFYfRYfTxAJOM+Xjr0Dp4zS0D1pIYZO5UEvV+EOBO0=;
+ b=ggTfNvA2ed3UlGBEy8WV7CC6maKC+0DHnz7t8fj8HuyKtNGdvOMC4UI4IB2E66289d
+ lnY+Tr5a5WgQxdFfKQbKk7Q213gS9tB3+cUEH2Mt8vjsv6hH/PmAVnY6OtRDnhOlhAcV
+ C+HWOpTACiCZYhonG2UJ9Sy9olaA3y+JoCFWRHPDbiX4pmplQsAPK2A1S1GP+cKA3YXC
+ D+nUUTvNmcp2p15lHWG8BNKtYT9Nj6hMA0ERKHMvQcZ0s6n8Jado748E104dDGllVSzV
+ hPjkZvZyqi6APVG1B2+vL738jVpznPYQGci4pMoVjSECpR2XuNOpDlRwSmKoJQfxX4uV
+ gnTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732056410; x=1732661210;
+ d=1e100.net; s=20230601; t=1732056412; x=1732661212;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sF6Tp2/pRdN0BzptcIUevTa/Zbklnfm6T4bZ8FxQZi8=;
- b=OI5+LPh482s0YWdaISQ3s6ESCI3Yvk8V7dk0/YfKIVwV89+q2dYCHGbjY8PLN7hoxB
- x+lXpU8OLBki73SbspkYJ99F2PsHrM7+hoqnCNJvZZYn7Jhkpd9/SMlF/y9POtun2Ypt
- MHOBQcOadfsyo1YCMWOcGoW5thI/R+PG0khEE+emwyZ4P7ZqoB2WmD7z5mhLuv1c8vbT
- R+DbX2y+VdxeN6p2TsPQvP5L7Y2dxUYANh+8f81jN+b5i5jWxGeq3zhOVQ4KNpVca7rV
- rM2yjgvysE7bqeJ4aKtDSae5bMdR9qVUKj4SQWAma261AWStIG67fb1P8wpZHKoVIK8m
- YgsQ==
-X-Gm-Message-State: AOJu0Yy9OroGEl8Ep/dzGp+vfk3CiP5VZtZ8Y/EWPgYxPa/VsYmBfGST
- hYIebY1Qbg4OON/Y2ALINUKIioqiiOv4D2FFOwLPGe/eAfDXYYAVzOQkCrwO
-X-Gm-Gg: ASbGncvz60y34dejWNCm/e5ObI3RSI3u8uHeB9MTU6qcjbeVHed+nTIiNhqAGY+FWCc
- N6o/mJncB2729654I8X/mWnohDsRFYa3Bqi0otCcHONts8o5+YetACgCs+1p2O1TYE1E8GLkHkK
- X/M+bCBRZGO5TioD32dd5Iv0yxwCLTVJtBSaeLwtV4vMNTY/Us4cM+5vlQW+3OTmQHz6uJEx5Rl
- mQJtBlVxIIoiMus4b11S2XIcoWJOag1Jzt5O/qQsvAqfSirm/w7ogTkYxSupcey5MWaWfed10lP
- MgRnkDllx8jhKqMovdLQdLMhgSu5
-X-Google-Smtp-Source: AGHT+IENKCrfsuSN+EAX5dXjVpQEpBjy+/AcX2R682N6EG9DHzKtRHqhReJagMvUq7LcH6LwCoLnlQ==
-X-Received: by 2002:a05:600c:3ba6:b0:432:7c08:d0fb with SMTP id
- 5b1f17b1804b1-433489b1372mr2204645e9.3.1732056409966; 
- Tue, 19 Nov 2024 14:46:49 -0800 (PST)
+ bh=GEFYfRYfTxAJOM+Xjr0Dp4zS0D1pIYZO5UEvV+EOBO0=;
+ b=ImZsztJ7w1vd9jh8v1QWR9Sz/XcYNXFdUbWU26+Uaviin9YhTne8xBpRcmLcNqfCBH
+ H8DWBfhckn2GYUy8VytmciLf9DRIqMPt7vDcGqZGDHcIiX7ux8akFHx8atbWIXp62e0h
+ qzgJR5KjMoKdTOYEylXGTqZDgitV4bjNtTpWlijmJrIhz18FnAA42vIvCh+bzN+prt7w
+ Yx7grLsYvAkAT/QpYRBOU5zPtU62uSXHPUNKYpnpMtkgBf7S9EA3nwJ4I90kUaTVqBza
+ qqJIUkULBF5MQ2U4roq6HHz1KoKZfRE64l/qMoeFKaq8NRzNNer43jnflI2a4rc4KOPu
+ b9sw==
+X-Gm-Message-State: AOJu0YzyGV3icIgTQlZAqxx6olj81xcrpJkKPwbU+9XbxJNCM7L/LfWU
+ x3tKFQIOA8I7jWaVO+cTRoaC0VHjqcOY1LsjpWxEAwhplD0hafwHH7zM4vrh
+X-Gm-Gg: ASbGncssvjshjma759zitkxiucoYDCH8jD+9wWi71u4cmWzW2RIcci10c5NagSh3x13
+ LhqTcK1CNLTaKNXrxNudqefBJuHwy/6P/Zgw1CJsMzDaKTcJjIaTm+Y3jaoJAFD5jWDgrdBGwdd
+ mK+hEpBiR7nb/y9JD5Kh+CeDwhXMeD1pyZC11VFMBcYhussdqKs4UxmQGlCJcGWR0gXGZQNcyiQ
+ OZGJFfOyLB8NxX3YqIz9kh4SsDw8lOEABS3/CWi2sZC6B1LmOyiIqRqiCCbMOeDazibjAZiaOXB
+ 9fY2Ju2sdzOqdDKrkKk1gE3svXq2
+X-Google-Smtp-Source: AGHT+IExgpauUzLpdLYQYhp4n+cW/3tZpzMnn6WOkBY/tRr11TDRnLOSrQOsL7O0B6cvXQpy7qCqPA==
+X-Received: by 2002:a05:600c:4f4f:b0:42c:bb35:b6d0 with SMTP id
+ 5b1f17b1804b1-433489861cbmr2275905e9.1.1732056412414; 
+ Tue, 19 Nov 2024 14:46:52 -0800 (PST)
 Received: from d71e1d1a2016.v.cablecom.net (84-72-156-211.dclient.hispeed.ch.
  [84.72.156.211]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432da27fc8esm216979795e9.21.2024.11.19.14.46.48
+ 5b1f17b1804b1-432da27fc8esm216979795e9.21.2024.11.19.14.46.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 14:46:49 -0800 (PST)
+ Tue, 19 Nov 2024 14:46:51 -0800 (PST)
 From: Lothar Rubusch <l.rubusch@gmail.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
  simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sumit.garg@linaro.org
 Cc: sjg@chromium.org, xypron.glpk@gmx.de, michal.simek@amd.com,
  jit.loon.lim@intel.com, barnas@google.com, l.rubusch@gmail.com
-Subject: [PATCH v4 v5 03/10] ARM: dts: socfpga: add Mercury+ AA1 for u-boot dts
-Date: Tue, 19 Nov 2024 22:46:36 +0000
-Message-Id: <20241119224643.27692-4-l.rubusch@gmail.com>
+Subject: [PATCH v4 v5 04/10] ARM: socfpga: add Enclustra storage switch
+Date: Tue, 19 Nov 2024 22:46:37 +0000
+Message-Id: <20241119224643.27692-5-l.rubusch@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20241119224643.27692-1-l.rubusch@gmail.com>
 References: <20241119224643.27692-1-l.rubusch@gmail.com>
@@ -100,537 +100,311 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce u-boot specific device-tree files for Enclustra Mercury+ AA1
-SoMs (Intel/arria10).
+Some of Enclustra's Intel SoMs need gpio muxing for setting up
+the boot media. This can be done by switching dip switches and also in
+software. The image in this case can be loaded from SD card, and flashed
+to the eMMC or QSPI. After, the dip switches can set the boot select
+accordingly. With altera_set_storage MMC|EMMC|QSPI from off the u-boot
+shell, the media is usually switched.
 
-Generic device-tree fragments for linux and U-boot shall be provided in
-dts/upstream. The selection of the generic device-tree fragments depends
-on a selected boot-mode and a selected carrier board.
-
-On Intel/Arria10 a handoff setup is needed for initialization of
-various clock / pinmux / DRAM settings only used by U-Boot provided by
-the current patch.
-
-Signed-off-by: Andreas Buerkler <andreas.buerkler@enclustra.com>
 Signed-off-by: Lothar Rubusch <l.rubusch@gmail.com>
 ---
- ..._arria10_enclustra_mercury_aa1-u-boot.dtsi |  45 +++
- .../socfpga_arria10_enclustra_mercury_aa1.dts |  45 +++
- .../socfpga_arria10_mercury_aa1-u-boot.dtsi   |  19 ++
- .../dts/socfpga_arria10_mercury_aa1_handoff.h | 305 ++++++++++++++++++
- board/enclustra/mercury_aa1/Kconfig           |  37 +++
- board/enclustra/mercury_aa1/MAINTAINERS       |   2 +
- 6 files changed, 453 insertions(+)
- create mode 100644 arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
- create mode 100644 arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
- create mode 100644 arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
+ .../socfpga_arria10_enclustra_mercury_aa1.dts |  17 ++
+ board/enclustra/mercury_aa1/Makefile          |   8 +
+ .../mercury_aa1/aa1_set_storage_cmd.c         | 190 ++++++++++++++++++
+ doc/board/enclustra/mercury-aa1.rst           |  25 +++
+ 4 files changed, 240 insertions(+)
+ create mode 100644 board/enclustra/mercury_aa1/Makefile
+ create mode 100644 board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
 
-diff --git a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
-new file mode 100644
-index 0000000000..6e38286572
---- /dev/null
-+++ b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1-u-boot.dtsi
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR MIT
-+/*
-+ * Copyright (C) 2024 Lothar Rubusch <l.rubusch@gmail.com>
-+ */
-+
-+/* Arria10 handoff (u-boot) */
-+#include "socfpga_arria10_mercury_aa1_handoff.h"
-+#include "socfpga_arria10-handoff.dtsi"
-+#include "socfpga_arria10_handoff_u-boot.dtsi"
-+#include "socfpga_arria10_mercury_aa1-u-boot.dtsi"
-+
-+/* Specific boot-mode (u-boot) */
-+#if IS_ENABLED(CONFIG_ENCLUSTRA_SDMMC) || IS_ENABLED(CONFIG_ENCLUSTRA_EMMC)
-+
-+/ {
-+	fs_loader0: fs-loader {
-+		bootph-all;
-+		compatible = "u-boot,fs-loader";
-+		phandlepart = <&mmc 1>;
-+	};
-+};
-+
-+&fpga_mgr {
-+	bootph-all;
-+	firmware-loader = <&fs_loader0>;
-+	altr,bitstream = "fpga.itb";
-+};
-+
-+#elif IS_ENABLED(CONFIG_ENCLUSTRA_QSPI)
-+
-+/ {
-+	fs_loader0: fs-loader {
-+		bootph-all;
-+		compatible = "u-boot,fs-loader";
-+		sfconfig = <0 0 50000000 3>;
-+	};
-+};
-+
-+&fpga_mgr {
-+	bootph-all;
-+	firmware-loader = <&fs_loader0>;
-+	altr,bitstream = "300000";
-+};
-+
-+#endif
 diff --git a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-new file mode 100644
-index 0000000000..e8cc51a7b8
---- /dev/null
+index e8cc51a7b8..c038b2352e 100644
+--- a/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
 +++ b/arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR MIT
-+/*
-+ * Copyright (C) 2024 Lothar Rubusch <l.rubusch@gmail.com>
-+ */
+@@ -5,6 +5,8 @@
+ 
+ /dts-v1/;
+ 
++#include <dt-bindings/gpio/gpio.h>
 +
-+/dts-v1/;
+ /* The arria10 family */
+ #include "socfpga/socfpga_arria10_mercury_aa1.dtsi"
+ 
+@@ -17,6 +19,13 @@
+ 		i2c1 = &i2c0;
+ 		spi0 = &qspi;
+ 	};
 +
-+/* The arria10 family */
-+#include "socfpga/socfpga_arria10_mercury_aa1.dtsi"
-+
-+/ {
-+	aliases {
-+		ethernet0 = &gmac0;
-+		serial0 = &uart0;
-+		serial1 = &uart1;
-+		i2c0 = &i2c1;
-+		i2c1 = &i2c0;
-+		spi0 = &qspi;
++	altera_set_storage {
++		compatible = "enclustra,altera_set_storage";
++		status = "okay";
++		oe-gpios = <&portb 5 GPIO_ACTIVE_HIGH>;
++		sel-gpios = <&portc 6 GPIO_ACTIVE_HIGH>;
 +	};
-+};
-+
-+&qspi {
-+	bootph-all;
+ };
+ 
+ &qspi {
+@@ -35,6 +44,14 @@
+ 	};
+ };
+ 
++&gpio1 {
 +	status = "okay";
-+	flash0: s25fl512s@0 {
-+		bootph-all;
-+
-+		cdns,page-size = <256>;
-+		cdns,block-size = <16>;
-+
-+		cdns,tshsl-ns = <200>;
-+		cdns,tsd2d-ns = <255>;
-+		cdns,tchsh-ns = <20>;
-+		cdns,tslch-ns = <20>;
-+	};
 +};
 +
-+/* Carrier board support */
-+#if IS_ENABLED(CONFIG_ENCLUSTRA_PE1)
-+# include "socfpga/socfpga_enclustra_mercury_pe1.dtsi"
-+#elif IS_ENABLED(CONFIG_ENCLUSTRA_PE3)
-+# include "socfpga/socfpga_enclustra_mercury_pe3.dtsi"
-+#elif IS_ENABLED(CONFIG_ENCLUSTRA_ST1)
-+# include "socfpga/socfpga_enclustra_mercury_st1.dtsi"
-+#endif
-diff --git a/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi b/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
-index 8866df3ddd..ad5b5a87e0 100644
---- a/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
-+++ b/arch/arm/dts/socfpga_arria10_mercury_aa1-u-boot.dtsi
-@@ -33,6 +33,21 @@
- 	bootph-all;
- };
- 
-+&l4_main_clk {
-+	bootph-all;
++&gpio2 {
++	status = "okay";
 +};
 +
-+&qspi_clk {
-+	bootph-all;
-+};
-+
-+&qspi {
-+	bootph-all;
-+	flash0: s25fl512s@0 {
-+		bootph-all;
-+	};
-+};
-+
- &mmc {
- 	bootph-all;
- };
-@@ -52,3 +67,7 @@
- &uart1 {
- 	bootph-all;
- };
-+
-+&watchdog1 {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h b/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
+ /* Carrier board support */
+ #if IS_ENABLED(CONFIG_ENCLUSTRA_PE1)
+ # include "socfpga/socfpga_enclustra_mercury_pe1.dtsi"
+diff --git a/board/enclustra/mercury_aa1/Makefile b/board/enclustra/mercury_aa1/Makefile
 new file mode 100644
-index 0000000000..b7cdb74792
+index 0000000000..53c84d8156
 --- /dev/null
-+++ b/arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
-@@ -0,0 +1,305 @@
-+/* SPDX-License-Identifier: BSD-3-Clause */
++++ b/board/enclustra/mercury_aa1/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (c) 2024 Enclustra GmbH
++
++ifeq ($(CONFIG_SPL_BUILD),)
++
++obj-y += aa1_set_storage_cmd.o
++
++endif
+diff --git a/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c b/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
+new file mode 100644
+index 0000000000..31c5ddb23b
+--- /dev/null
++++ b/board/enclustra/mercury_aa1/aa1_set_storage_cmd.c
+@@ -0,0 +1,190 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Intel Arria 10 SoCFPGA configuration
++ * Copyright (C) 2024 Enclustra GmbH
++ * <info@enclustra.com>
 + */
 +
-+#ifndef __SOCFPGA_ARRIA10_CONFIG_H__
-+#define __SOCFPGA_ARRIA10_CONFIG_H__
++#include <command.h>
++#include <env.h>
++#include <init.h>
++#include <dm.h>
++#include <dm/uclass.h>
++#include <asm-generic/gpio.h>
++#include <asm/io.h>
 +
-+/* Clocks */
-+#define CB_INTOSC_LS_CLK_HZ 60000000
-+#define EMAC0_CLK_HZ 250000000
-+#define EMAC1_CLK_HZ 250000000
-+#define EMAC2_CLK_HZ 250000000
-+#define EOSC1_CLK_HZ 33333000
-+#define F2H_FREE_CLK_HZ 200000000
-+#define H2F_USER0_CLK_HZ 100000000
-+#define H2F_USER1_CLK_HZ 50000000
-+#define L3_MAIN_FREE_CLK_HZ 400000000
-+#define SDMMC_CLK_HZ 200000000
-+#define TPIU_CLK_HZ 100000000
-+#define MAINPLLGRP_CNTR15CLK_CNT 900
-+#define MAINPLLGRP_CNTR2CLK_CNT 900
-+#define MAINPLLGRP_CNTR3CLK_CNT 900
-+#define MAINPLLGRP_CNTR4CLK_CNT 900
-+#define MAINPLLGRP_CNTR5CLK_CNT 900
-+#define MAINPLLGRP_CNTR6CLK_CNT 9
-+#define MAINPLLGRP_CNTR7CLK_CNT 19
-+#define MAINPLLGRP_CNTR7CLK_SRC 0
-+#define MAINPLLGRP_CNTR8CLK_CNT 39
-+#define MAINPLLGRP_CNTR9CLK_CNT 900
-+#define MAINPLLGRP_CNTR9CLK_SRC 0
-+#define MAINPLLGRP_MPUCLK_CNT 0
-+#define MAINPLLGRP_MPUCLK_SRC 0
-+#define MAINPLLGRP_NOCCLK_CNT 0
-+#define MAINPLLGRP_NOCCLK_SRC 0
-+#define MAINPLLGRP_NOCDIV_CSATCLK 0
-+#define MAINPLLGRP_NOCDIV_CSPDBGCLK 1
-+#define MAINPLLGRP_NOCDIV_CSTRACECLK 0
-+#define MAINPLLGRP_NOCDIV_L4MAINCLK 0
-+#define MAINPLLGRP_NOCDIV_L4MPCLK 1
-+#define MAINPLLGRP_NOCDIV_L4SPCLK 2
-+#define MAINPLLGRP_VCO0_PSRC 0
-+#define MAINPLLGRP_VCO1_DENOM 32
-+#define MAINPLLGRP_VCO1_NUMER 1980
-+#define PERPLLGRP_CNTR2CLK_CNT 7
-+#define PERPLLGRP_CNTR2CLK_SRC 1
-+#define PERPLLGRP_CNTR3CLK_CNT 900
-+#define PERPLLGRP_CNTR3CLK_SRC 1
-+#define PERPLLGRP_CNTR4CLK_CNT 19
-+#define PERPLLGRP_CNTR4CLK_SRC 1
-+#define PERPLLGRP_CNTR5CLK_CNT 499
-+#define PERPLLGRP_CNTR5CLK_SRC 1
-+#define PERPLLGRP_CNTR6CLK_CNT 900
-+#define PERPLLGRP_CNTR6CLK_SRC 0
-+#define PERPLLGRP_CNTR7CLK_CNT 900
-+#define PERPLLGRP_CNTR8CLK_CNT 900
-+#define PERPLLGRP_CNTR8CLK_SRC 0
-+#define PERPLLGRP_CNTR9CLK_CNT 900
-+#define PERPLLGRP_EMACCTL_EMAC0SEL 0
-+#define PERPLLGRP_EMACCTL_EMAC1SEL 0
-+#define PERPLLGRP_EMACCTL_EMAC2SEL 0
-+#define PERPLLGRP_GPIODIV_GPIODBCLK 32000
-+#define PERPLLGRP_VCO0_PSRC 0
-+#define PERPLLGRP_VCO1_DENOM 32
-+#define PERPLLGRP_VCO1_NUMER 1980
-+#define CLKMGR_TESTIOCTRL_DEBUGCLKSEL 16
-+#define CLKMGR_TESTIOCTRL_MAINCLKSEL 8
-+#define CLKMGR_TESTIOCTRL_PERICLKSEL 8
-+#define ALTERAGRP_MPUCLK_MAINCNT 1
-+#define ALTERAGRP_MPUCLK_PERICNT 900
-+#define ALTERAGRP_NOCCLK_MAINCNT 4
-+#define ALTERAGRP_NOCCLK_PERICNT 900
-+#define ALTERAGRP_MPUCLK ((ALTERAGRP_MPUCLK_PERICNT << 16) | \
-+	(ALTERAGRP_MPUCLK_MAINCNT))
-+#define ALTERAGRP_NOCCLK ((ALTERAGRP_NOCCLK_PERICNT << 16) | \
-+	(ALTERAGRP_NOCCLK_MAINCNT))
++/* Pin muxing */
++#define ALTERA_NONE 0
++#define ALTERA_MMC 1
++#define ALTERA_QSPI 2
++#define ALTERA_EMMC 3
++#define MMC_CLK_DIV 0x9
++#define QSPI_CLK_DIV 0x384
++#define ALTERA_PINMUX_OFFS 0xffd07200
++#define ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE 0xFFD04078
 +
-+/* Pin Mux Configuration */
-+#define CONFIG_IO_10_INPUT_BUF_EN 1
-+#define CONFIG_IO_10_PD_DRV_STRG 10
-+#define CONFIG_IO_10_PD_SLW_RT 1
-+#define CONFIG_IO_10_PU_DRV_STRG 8
-+#define CONFIG_IO_10_PU_SLW_RT 1
-+#define CONFIG_IO_10_RTRIM 1
-+#define CONFIG_IO_10_WK_PU_EN 0
-+#define CONFIG_IO_11_INPUT_BUF_EN 1
-+#define CONFIG_IO_11_PD_DRV_STRG 10
-+#define CONFIG_IO_11_PD_SLW_RT 1
-+#define CONFIG_IO_11_PU_DRV_STRG 8
-+#define CONFIG_IO_11_PU_SLW_RT 1
-+#define CONFIG_IO_11_RTRIM 1
-+#define CONFIG_IO_11_WK_PU_EN 0
-+#define CONFIG_IO_12_INPUT_BUF_EN 1
-+#define CONFIG_IO_12_PD_DRV_STRG 10
-+#define CONFIG_IO_12_PD_SLW_RT 1
-+#define CONFIG_IO_12_PU_DRV_STRG 8
-+#define CONFIG_IO_12_PU_SLW_RT 1
-+#define CONFIG_IO_12_RTRIM 1
-+#define CONFIG_IO_12_WK_PU_EN 0
-+#define CONFIG_IO_13_INPUT_BUF_EN 1
-+#define CONFIG_IO_13_PD_DRV_STRG 10
-+#define CONFIG_IO_13_PD_SLW_RT 1
-+#define CONFIG_IO_13_PU_DRV_STRG 8
-+#define CONFIG_IO_13_PU_SLW_RT 1
-+#define CONFIG_IO_13_RTRIM 1
-+#define CONFIG_IO_13_WK_PU_EN 0
-+#define CONFIG_IO_14_INPUT_BUF_EN 1
-+#define CONFIG_IO_14_PD_DRV_STRG 10
-+#define CONFIG_IO_14_PD_SLW_RT 1
-+#define CONFIG_IO_14_PU_DRV_STRG 8
-+#define CONFIG_IO_14_PU_SLW_RT 1
-+#define CONFIG_IO_14_RTRIM 1
-+#define CONFIG_IO_14_WK_PU_EN 0
-+#define CONFIG_IO_15_INPUT_BUF_EN 1
-+#define CONFIG_IO_15_PD_DRV_STRG 10
-+#define CONFIG_IO_15_PD_SLW_RT 1
-+#define CONFIG_IO_15_PU_DRV_STRG 8
-+#define CONFIG_IO_15_PU_SLW_RT 1
-+#define CONFIG_IO_15_RTRIM 1
-+#define CONFIG_IO_15_WK_PU_EN 0
-+#define CONFIG_IO_16_INPUT_BUF_EN 0
-+#define CONFIG_IO_16_PD_DRV_STRG 10
-+#define CONFIG_IO_16_PD_SLW_RT 1
-+#define CONFIG_IO_16_PU_DRV_STRG 8
-+#define CONFIG_IO_16_PU_SLW_RT 1
-+#define CONFIG_IO_16_RTRIM 1
-+#define CONFIG_IO_16_WK_PU_EN 0
-+#define CONFIG_IO_17_INPUT_BUF_EN 1
-+#define CONFIG_IO_17_PD_DRV_STRG 10
-+#define CONFIG_IO_17_PD_SLW_RT 1
-+#define CONFIG_IO_17_PU_DRV_STRG 8
-+#define CONFIG_IO_17_PU_SLW_RT 1
-+#define CONFIG_IO_17_RTRIM 1
-+#define CONFIG_IO_17_WK_PU_EN 0
-+#define CONFIG_IO_1_INPUT_BUF_EN 1
-+#define CONFIG_IO_1_PD_DRV_STRG 10
-+#define CONFIG_IO_1_PD_SLW_RT 0
-+#define CONFIG_IO_1_PU_DRV_STRG 8
-+#define CONFIG_IO_1_PU_SLW_RT 0
-+#define CONFIG_IO_1_RTRIM 1
-+#define CONFIG_IO_1_WK_PU_EN 1
-+#define CONFIG_IO_2_INPUT_BUF_EN 1
-+#define CONFIG_IO_2_PD_DRV_STRG 10
-+#define CONFIG_IO_2_PD_SLW_RT 0
-+#define CONFIG_IO_2_PU_DRV_STRG 8
-+#define CONFIG_IO_2_PU_SLW_RT 0
-+#define CONFIG_IO_2_RTRIM 1
-+#define CONFIG_IO_2_WK_PU_EN 1
-+#define CONFIG_IO_3_INPUT_BUF_EN 1
-+#define CONFIG_IO_3_PD_DRV_STRG 10
-+#define CONFIG_IO_3_PD_SLW_RT 0
-+#define CONFIG_IO_3_PU_DRV_STRG 8
-+#define CONFIG_IO_3_PU_SLW_RT 0
-+#define CONFIG_IO_3_RTRIM 1
-+#define CONFIG_IO_3_WK_PU_EN 1
-+#define CONFIG_IO_4_INPUT_BUF_EN 1
-+#define CONFIG_IO_4_PD_DRV_STRG 10
-+#define CONFIG_IO_4_PD_SLW_RT 1
-+#define CONFIG_IO_4_PU_DRV_STRG 8
-+#define CONFIG_IO_4_PU_SLW_RT 1
-+#define CONFIG_IO_4_RTRIM 1
-+#define CONFIG_IO_4_WK_PU_EN 0
-+#define CONFIG_IO_5_INPUT_BUF_EN 1
-+#define CONFIG_IO_5_PD_DRV_STRG 10
-+#define CONFIG_IO_5_PD_SLW_RT 1
-+#define CONFIG_IO_5_PU_DRV_STRG 8
-+#define CONFIG_IO_5_PU_SLW_RT 1
-+#define CONFIG_IO_5_RTRIM 1
-+#define CONFIG_IO_5_WK_PU_EN 0
-+#define CONFIG_IO_6_INPUT_BUF_EN 0
-+#define CONFIG_IO_6_PD_DRV_STRG 10
-+#define CONFIG_IO_6_PD_SLW_RT 1
-+#define CONFIG_IO_6_PU_DRV_STRG 8
-+#define CONFIG_IO_6_PU_SLW_RT 1
-+#define CONFIG_IO_6_RTRIM 1
-+#define CONFIG_IO_6_WK_PU_EN 0
-+#define CONFIG_IO_7_INPUT_BUF_EN 1
-+#define CONFIG_IO_7_PD_DRV_STRG 10
-+#define CONFIG_IO_7_PD_SLW_RT 1
-+#define CONFIG_IO_7_PU_DRV_STRG 8
-+#define CONFIG_IO_7_PU_SLW_RT 1
-+#define CONFIG_IO_7_RTRIM 1
-+#define CONFIG_IO_7_WK_PU_EN 0
-+#define CONFIG_IO_8_INPUT_BUF_EN 1
-+#define CONFIG_IO_8_PD_DRV_STRG 10
-+#define CONFIG_IO_8_PD_SLW_RT 1
-+#define CONFIG_IO_8_PU_DRV_STRG 8
-+#define CONFIG_IO_8_PU_SLW_RT 1
-+#define CONFIG_IO_8_RTRIM 1
-+#define CONFIG_IO_8_WK_PU_EN 0
-+#define CONFIG_IO_9_INPUT_BUF_EN 1
-+#define CONFIG_IO_9_PD_DRV_STRG 10
-+#define CONFIG_IO_9_PD_SLW_RT 1
-+#define CONFIG_IO_9_PU_DRV_STRG 8
-+#define CONFIG_IO_9_PU_SLW_RT 1
-+#define CONFIG_IO_9_RTRIM 1
-+#define CONFIG_IO_9_WK_PU_EN 0
-+#define CONFIG_IO_BANK_VOLTAGE_SEL_CLKRST_IO 1
-+#define CONFIG_IO_BANK_VOLTAGE_SEL_PERI_IO 1
-+#define PINMUX_DEDICATED_IO_10_SEL 15
-+#define PINMUX_DEDICATED_IO_11_SEL 15
-+#define PINMUX_DEDICATED_IO_12_SEL 15
-+#define PINMUX_DEDICATED_IO_13_SEL 15
-+#define PINMUX_DEDICATED_IO_14_SEL 15
-+#define PINMUX_DEDICATED_IO_15_SEL 15
-+#define PINMUX_DEDICATED_IO_16_SEL 13
-+#define PINMUX_DEDICATED_IO_17_SEL 13
-+#define PINMUX_DEDICATED_IO_4_SEL 8
-+#define PINMUX_DEDICATED_IO_5_SEL 8
-+#define PINMUX_DEDICATED_IO_6_SEL 8
-+#define PINMUX_DEDICATED_IO_7_SEL 8
-+#define PINMUX_DEDICATED_IO_8_SEL 8
-+#define PINMUX_DEDICATED_IO_9_SEL 8
-+#define PINMUX_I2C0_USEFPGA_SEL 0
-+#define PINMUX_I2C1_USEFPGA_SEL 0
-+#define PINMUX_I2CEMAC0_USEFPGA_SEL 0
-+#define PINMUX_I2CEMAC1_USEFPGA_SEL 0
-+#define PINMUX_I2CEMAC2_USEFPGA_SEL 0
-+#define PINMUX_NAND_USEFPGA_SEL 0
-+#define PINMUX_PLL_CLOCK_OUT_USEFPGA_SEL 0
-+#define PINMUX_QSPI_USEFPGA_SEL 0
-+#define PINMUX_RGMII0_USEFPGA_SEL 0
-+#define PINMUX_RGMII1_USEFPGA_SEL 0
-+#define PINMUX_RGMII2_USEFPGA_SEL 0
-+#define PINMUX_SDMMC_USEFPGA_SEL 0
-+#define PINMUX_SHARED_IO_Q1_10_SEL 8
-+#define PINMUX_SHARED_IO_Q1_11_SEL 8
-+#define PINMUX_SHARED_IO_Q1_12_SEL 8
-+#define PINMUX_SHARED_IO_Q1_1_SEL 8
-+#define PINMUX_SHARED_IO_Q1_2_SEL 8
-+#define PINMUX_SHARED_IO_Q1_3_SEL 8
-+#define PINMUX_SHARED_IO_Q1_4_SEL 8
-+#define PINMUX_SHARED_IO_Q1_5_SEL 8
-+#define PINMUX_SHARED_IO_Q1_6_SEL 8
-+#define PINMUX_SHARED_IO_Q1_7_SEL 8
-+#define PINMUX_SHARED_IO_Q1_8_SEL 8
-+#define PINMUX_SHARED_IO_Q1_9_SEL 8
-+#define PINMUX_SHARED_IO_Q2_10_SEL 4
-+#define PINMUX_SHARED_IO_Q2_11_SEL 4
-+#define PINMUX_SHARED_IO_Q2_12_SEL 4
-+#define PINMUX_SHARED_IO_Q2_1_SEL 4
-+#define PINMUX_SHARED_IO_Q2_2_SEL 4
-+#define PINMUX_SHARED_IO_Q2_3_SEL 4
-+#define PINMUX_SHARED_IO_Q2_4_SEL 4
-+#define PINMUX_SHARED_IO_Q2_5_SEL 4
-+#define PINMUX_SHARED_IO_Q2_6_SEL 4
-+#define PINMUX_SHARED_IO_Q2_7_SEL 4
-+#define PINMUX_SHARED_IO_Q2_8_SEL 4
-+#define PINMUX_SHARED_IO_Q2_9_SEL 4
-+#define PINMUX_SHARED_IO_Q3_10_SEL 15
-+#define PINMUX_SHARED_IO_Q3_11_SEL 1
-+#define PINMUX_SHARED_IO_Q3_12_SEL 1
-+#define PINMUX_SHARED_IO_Q3_1_SEL 15
-+#define PINMUX_SHARED_IO_Q3_2_SEL 15
-+#define PINMUX_SHARED_IO_Q3_3_SEL 15
-+#define PINMUX_SHARED_IO_Q3_4_SEL 15
-+#define PINMUX_SHARED_IO_Q3_5_SEL 15
-+#define PINMUX_SHARED_IO_Q3_6_SEL 15
-+#define PINMUX_SHARED_IO_Q3_7_SEL 0
-+#define PINMUX_SHARED_IO_Q3_8_SEL 0
-+#define PINMUX_SHARED_IO_Q3_9_SEL 15
-+#define PINMUX_SHARED_IO_Q4_10_SEL 15
-+#define PINMUX_SHARED_IO_Q4_11_SEL 15
-+#define PINMUX_SHARED_IO_Q4_12_SEL 15
-+#define PINMUX_SHARED_IO_Q4_1_SEL 10
-+#define PINMUX_SHARED_IO_Q4_2_SEL 10
-+#define PINMUX_SHARED_IO_Q4_3_SEL 10
-+#define PINMUX_SHARED_IO_Q4_4_SEL 10
-+#define PINMUX_SHARED_IO_Q4_5_SEL 10
-+#define PINMUX_SHARED_IO_Q4_6_SEL 10
-+#define PINMUX_SHARED_IO_Q4_7_SEL 15
-+#define PINMUX_SHARED_IO_Q4_8_SEL 15
-+#define PINMUX_SHARED_IO_Q4_9_SEL 15
-+#define PINMUX_SPIM0_USEFPGA_SEL 0
-+#define PINMUX_SPIM1_USEFPGA_SEL 0
-+#define PINMUX_SPIS0_USEFPGA_SEL 0
-+#define PINMUX_SPIS1_USEFPGA_SEL 0
-+#define PINMUX_UART0_USEFPGA_SEL 0
-+#define PINMUX_UART1_USEFPGA_SEL 0
-+#define PINMUX_USB0_USEFPGA_SEL 0
-+#define PINMUX_USB1_USEFPGA_SEL 0
++static int altera_current_storage = ALTERA_NONE;
 +
-+/* Bridge Configuration */
-+#define F2H_AXI_SLAVE 0
-+#define F2SDRAM0_AXI_SLAVE 0
-+#define F2SDRAM1_AXI_SLAVE 0
-+#define F2SDRAM2_AXI_SLAVE 0
-+#define H2F_AXI_MASTER 1
-+#define LWH2F_AXI_MASTER 1
++static const struct udevice_id altera_set_storage_match[] = {
++	{ .compatible = "enclustra,altera_set_storage" },
++	{ }
++};
 +
-+/* Voltage Select for Config IO */
-+#define CONFIG_IO_BANK_VSEL \
-+	(((CONFIG_IO_BANK_VOLTAGE_SEL_CLKRST_IO & 0x3) << 8) | \
-+	(CONFIG_IO_BANK_VOLTAGE_SEL_PERI_IO & 0x3))
++U_BOOT_DRIVER(altera_set_storage) = {
++	.name		= "altera_set_storage",
++	.id			= UCLASS_MISC,
++	.of_match	= altera_set_storage_match,
++};
 +
-+/* Macro for Config IO bit mapping */
-+#define CONFIG_IO_MACRO(NAME) (((NAME ## _RTRIM & 0x7) << 19) | \
-+	((NAME ## _INPUT_BUF_EN & 0x3) << 17) | \
-+	((NAME ## _WK_PU_EN & 0x1) << 16) | \
-+	((NAME ## _PU_SLW_RT & 0x1) << 13) | \
-+	((NAME ## _PU_DRV_STRG & 0x1f) << 8) | \
-+	((NAME ## _PD_SLW_RT & 0x1) << 5) | \
-+	(NAME ## _PD_DRV_STRG & 0x1f))
++static void enclustra_mercury_aa1_write(const u32 *pinmux_arr, int len)
++{
++	u32 i, offset, value;
 +
-+#endif /* __SOCFPGA_ARRIA10_CONFIG_H__ */
-diff --git a/board/enclustra/mercury_aa1/Kconfig b/board/enclustra/mercury_aa1/Kconfig
-index 40c7cb2687..a5f3c2a051 100644
---- a/board/enclustra/mercury_aa1/Kconfig
-+++ b/board/enclustra/mercury_aa1/Kconfig
-@@ -12,4 +12,41 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "socfpga_mercury_aa1"
++	for (i = 0; i < len; i += 2) {
++		offset = pinmux_arr[i];
++		value = pinmux_arr[i + 1];
++		writel(value, ALTERA_PINMUX_OFFS + offset);
++	}
++}
++
++static void enclustra_mercury_aa1_set_mux_mmc(void)
++{
++	static const u32 pinmux_arr[] = {0x0c, 0x8,	// IO4 connected to SDMMC
++					 0x10, 0x8,	// IO5
++					 0x14, 0x8,	// IO6
++					 0x18, 0x8,	// IO7
++					 0x1c, 0x8,	// IO8
++					 0x20, 0x8,	// IO9
++					 0x24, 0xf,	// IO10 connected to GPIO
++					 0x28, 0xf,	// IO11
++					 0x2c, 0xf,	// IO12
++					 0x30, 0xf,	// IO13
++					 0x34, 0xf,	// IO14
++					 0x38, 0xf};	// IO15
++	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
++}
++
++static void enclustra_mercury_aa1_set_mux_emmc(void)
++{
++	static const u32 pinmux_arr[] = {0x0c, 0x8,	// IO4
++					 0x10, 0x8,	// IO5
++					 0x14, 0x8,	// IO6
++					 0x18, 0x8,	// IO7
++					 0x1c, 0x8,	// IO8
++					 0x20, 0x8,	// IO9
++					 0x24, 0xf,	// IO10
++					 0x28, 0xf,	// IO11
++					 0x2c, 0x8,	// IO12
++					 0x30, 0x8,	// IO13
++					 0x34, 0x8,	// IO14
++					 0x38, 0x8};	// IO15
++	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
++}
++
++static void enclustra_mercury_aa1_set_mux_qspi(void)
++{
++	static const u32 pinmux_arr[] = {0x0c, 0x4,	// IO4 connected to QSPI
++					 0x10, 0x4,	// IO5
++					 0x14, 0x4,	// IO6
++					 0x18, 0x4,	// IO7
++					 0x1c, 0x4,	// IO8
++					 0x20, 0x4,	// IO9
++					 0x24, 0xf,	// IO10
++					 0x28, 0xf,	// IO11
++					 0x2c, 0xf,	// IO12
++					 0x30, 0xf,	// IO13
++					 0x34, 0xf,	// IO14
++					 0x38, 0xf};	// IO15
++	enclustra_mercury_aa1_write(pinmux_arr, ARRAY_SIZE(pinmux_arr));
++}
++
++static int altera_set_storage(struct udevice *dev, int store)
++{
++	struct gpio_desc gpio_flash_sel;
++	struct gpio_desc gpio_flash_oe;
++	int ret;
++
++	if (store == altera_current_storage)
++		return CMD_RET_FAILURE;
++
++	/* oe: portb 5 */
++	ret = gpio_request_by_name(dev, "oe-gpios", 0,
++				   &gpio_flash_oe, GPIOD_IS_OUT);
++
++	if (ret) {
++		printf("ERROR: GPIO oe not found\n");
++		return log_msg_ret("gpio", ret);
++	}
++
++	/* sel: portc 6 */
++	ret = gpio_request_by_name(dev, "sel-gpios", 0,
++				   &gpio_flash_sel, GPIOD_IS_OUT);
++	if (ret) {
++		printf("ERROR: GPIO sel not found\n");
++		ret = CMD_RET_FAILURE;
++		goto err;
++	}
++
++	switch (store) {
++	case ALTERA_MMC:
++		enclustra_mercury_aa1_set_mux_mmc();
++		dm_gpio_set_value(&gpio_flash_sel, 0);
++		dm_gpio_set_value(&gpio_flash_oe, 0);
++		altera_current_storage = ALTERA_MMC;
++		writel(MMC_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
++		break;
++	case ALTERA_EMMC:
++		enclustra_mercury_aa1_set_mux_emmc();
++		dm_gpio_set_value(&gpio_flash_sel, 1);
++		dm_gpio_set_value(&gpio_flash_oe, 1);
++		altera_current_storage = ALTERA_EMMC;
++		writel(MMC_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
++		break;
++	case ALTERA_QSPI:
++		enclustra_mercury_aa1_set_mux_qspi();
++		dm_gpio_set_value(&gpio_flash_sel, 1);
++		dm_gpio_set_value(&gpio_flash_oe, 0);
++		altera_current_storage = ALTERA_QSPI;
++		writel(QSPI_CLK_DIV, ALTERA_CLKMGR_MAINPLL_CNTR6CLK_BASE);
++		break;
++	default:
++		altera_current_storage = ALTERA_NONE;
++		break;
++	}
++
++	ret = CMD_RET_SUCCESS;
++	dm_gpio_free(dev, &gpio_flash_sel);
++err:
++	dm_gpio_free(dev, &gpio_flash_oe);
++
++	return ret;
++}
++
++static int altera_set_storage_cmd(struct cmd_tbl *cmdtp, int flag,
++				  int argc, char * const argv[])
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = uclass_get_device_by_driver(UCLASS_MISC,
++					  DM_DRIVER_GET(altera_set_storage), &dev);
++	if (ret)
++		return ret;
++
++	if (argc != 2)
++		return CMD_RET_USAGE;
++
++	if (!strcasecmp(argv[1], "mmc"))
++		return altera_set_storage(dev, ALTERA_MMC);
++	else if (!strcasecmp(argv[1], "qspi"))
++		return altera_set_storage(dev, ALTERA_QSPI);
++	else if (!strcasecmp(argv[1], "emmc"))
++		return altera_set_storage(dev, ALTERA_EMMC);
++	else
++		return CMD_RET_USAGE;
++
++	return CMD_RET_FAILURE;
++}
++
++U_BOOT_CMD(altera_set_storage, 2, 0, altera_set_storage_cmd,
++	   "Set non volatile memory access",
++	   "<MMC|QSPI|EMMC> - Set access for the selected memory device");
+diff --git a/doc/board/enclustra/mercury-aa1.rst b/doc/board/enclustra/mercury-aa1.rst
+index dec7cc3bdd..cba36aae2e 100644
+--- a/doc/board/enclustra/mercury-aa1.rst
++++ b/doc/board/enclustra/mercury-aa1.rst
+@@ -151,6 +151,31 @@ Alternative boot media are possible as officially documented by Enclustra.
+ Note: eMMC and QSPI can be flashed from off the u-boot shell. Usually after
+ flashing, the correct boot mode needs to be set by a BSEL switch.
  
-+choice
-+	prompt "Mercury+ AA1 base-board"
-+	default ENCLUSTRA_PE1
-+	help
-+	  Select the base-board for Mercury+ AA1.
++In the u-boot shell use the following command to switch between the boot media.
++This can be used to flash e.g. eMMC or QSPI with an image file stored on the SD
++card. Approaches are described in detail in the official Enclustra
++documentation according to their releases mentioned as links.
 +
-+config ENCLUSTRA_PE1
-+	bool "Mercury+ PE1"
++ .. code-block:: bash
 +
-+config ENCLUSTRA_PE3
-+	bool "Mercury+ PE3"
++    Hit any key to stop autoboot:  0
++    => altera_set_storage
++    altera_set_storage - Set non volatile memory access
++    Usage:
++    altera_set_storage <MMC|QSPI|EMMC> - Set access for the selected memory device
++    => altera_set_storage QSPI
++    => sf probe
++    SF: Detected s25fl512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
++    => altera_set_storage MMC
++    => mmc rescan
++    => mmc list
++    mmc@ff808000: 0 (SD)
++    => altera_set_storage EMMC
++    => mmc rescan
++    => mmc list
++    mmc@ff808000: 0 (eMMC)
++    =>
 +
-+config ENCLUSTRA_ST1
-+	bool "Mercury+ ST1"
-+
-+config ENCLUSTRA_CUSTOM_BASE
-+	bool "Customized base-board"
-+
-+endchoice
-+
-+choice
-+	prompt "Mercury+ AA1 boot-mode"
-+	default ENCLUSTRA_SDMMC
-+	help
-+	  Select the boot-mode for the Mercury+ AA1 setup.
-+
-+config ENCLUSTRA_SDMMC
-+	bool "SD card"
-+
-+config ENCLUSTRA_EMMC
-+	bool "eMMC"
-+
-+config ENCLUSTRA_QSPI
-+	bool "QSPI flash"
-+
-+endchoice
-+
- endif
-diff --git a/board/enclustra/mercury_aa1/MAINTAINERS b/board/enclustra/mercury_aa1/MAINTAINERS
-index 13baf949ab..f765530770 100644
---- a/board/enclustra/mercury_aa1/MAINTAINERS
-+++ b/board/enclustra/mercury_aa1/MAINTAINERS
-@@ -1,6 +1,8 @@
- Enclustra Mercury+ AA1
- M:	Lothar Rubusch <l.rubusch@gmail.com>
- S:	Maintained
-+N:	arch/arm/dts/socfpga_arria10_enclustra_mercury_aa1.dts
-+N:	arch/arm/dts/socfpga_arria10_mercury_aa1_handoff.h
- N:	board/enclustra/mercury_aa1/
- N:	board/enclustra/common/
- N:	configs/socfpga_enclustra_mercury_aa1_defconfig
+ Before turning on the setup, make sure to have the correct voltage configured
+ at the carrier board, using the jumpers on the voltage pin header. Also make
+ sure to have switched to the correct boot media using typically some dip
 -- 
 2.39.2
 
