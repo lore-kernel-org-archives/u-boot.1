@@ -4,82 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16AB3D60074
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 07:31:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD37D60074
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 07:32:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C81B89514;
-	Tue, 19 Nov 2024 08:31:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EE1789514;
+	Tue, 19 Nov 2024 08:32:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="M8vO09A4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hZlVNQua";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1153B8951C; Tue, 19 Nov 2024 08:31:24 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id D5FDB89503; Tue, 19 Nov 2024 08:32:30 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC09989503
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:31:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2744089519
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 08:32:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AIGGdPn026837;
- Tue, 19 Nov 2024 07:31:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=RNrIFmwTWO62INS3LDgonR
- /3iKScluxEOLu2iODGqww=; b=M8vO09A4pONr+HyCieTKZo6RtB+dm2q3k5OmxX
- lczSIip+3VNZVFPwPEHbtfSPc1myXYiW7gHdkKSZs4ftC9u9CAsdx/B44sHAkLTN
- UVOL9PjOWxeh5qumOb9riIjr/lnoxbu/EGnP5/roxjM/jTzzyHsn9kLz8rfuZVPj
- i4SPDWc8eEbivzIXCopYAevg4EX6McoIpXgU+NJXyfW/By0RjVEIX8RRVjyKkphw
- oAIWl+d8Z/KqfZuWWeBYslO9sPazvtbcKPPI0tq5v1kAHdJtkrzkfUt1oDEMWhjG
- y1djZyZD5d5LQmsWfYiLjTGQSZXZnNBbD+32TlhV+J0nUfLw==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4308y7stdv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 19 Nov 2024 07:31:17 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AJ7VGpj014160
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 19 Nov 2024 07:31:16 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 18 Nov 2024 23:31:13 -0800
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <christian.taedcke@weidmueller.com>,
- <quic_varada@quicinc.com>, <ada@thorsis.com>,
- <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: [PATCH] fs: fat: Handle 'FAT sector size mismatch'
-Date: Tue, 19 Nov 2024 13:00:48 +0530
-Message-ID: <20241119073048.3469260-1-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ7WQ36122252;
+ Tue, 19 Nov 2024 01:32:26 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732001546;
+ bh=Bwo/qfxAFpU4G0CO2WRQxIGu/r3DBe9plZUPrXM4fRQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hZlVNQuaCmgHCdjivVkFfRRHpVgH27R8b+G7LjzHtCHP8NTmPmXZamdWUt9vvpey8
+ tfMYwL0n5ylp6BIC8dz8jRGkFSBMfd4BERGp3euBFVp6SucCmP3N59B7rnEXj9SKKB
+ tcopBLFYWbn3lkuHB62fAW9tbyrbYgWA5Q4b+yFs=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ7WQBN028102
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 19 Nov 2024 01:32:26 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Nov 2024 01:32:26 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 19 Nov 2024 01:32:26 -0600
+Received: from [172.24.227.91] (psdkl-workstation0.dhcp.ti.com [172.24.227.91])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ7WNwQ064384;
+ Tue, 19 Nov 2024 01:32:24 -0600
+Message-ID: <cb780efa-ef28-49ea-9009-86424390d136@ti.com>
+Date: Tue, 19 Nov 2024 13:02:23 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: jbU7HDNS0EF6_zmOb4kADuELgi-C869V
-X-Proofpoint-GUID: jbU7HDNS0EF6_zmOb4kADuELgi-C869V
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 spamscore=0
- mlxlogscore=816 clxscore=1011 suspectscore=0 adultscore=0
- priorityscore=1501 phishscore=0 impostorscore=0 bulkscore=0
- lowpriorityscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2409260000 definitions=main-2411190054
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/5] arm: mach-k3: j721e-init.c: Add support for
+ CONFIG_K3_OPP_LOW
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <nm@ti.com>, <n-francis@ti.com>
+References: <20241119003617.1871183-1-a-limaye@ti.com>
+ <20241119003617.1871183-5-a-limaye@ti.com>
+ <20241119061214.gcruepd4yimqgz2p@uda0497581>
+Content-Language: en-US
+From: Aniket Limaye <a-limaye@ti.com>
+In-Reply-To: <20241119061214.gcruepd4yimqgz2p@uda0497581>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,310 +83,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do FAT read and write based on the device sector size
-instead of the size recorded in the FAT meta data. This
-helps to overcome the 'FAT sector size mismatch' error
-and enables U-Boot to read/write those partitions.
+Hi Manorit,
 
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- fs/fat/fat.c       | 227 ++++++++++++++++++++++++++++++++++++++++++---
- fs/fat/fat_write.c |  19 ----
- 2 files changed, 214 insertions(+), 32 deletions(-)
+On 19/11/24 11:42, Manorit Chawdhry wrote:
+> Hi Aniket,
+> 
+> On 06:02-20241119, Aniket Limaye wrote:
+>> The default j7200 devicetree and k3_avs driver set 2GHz/1GHz frequency
+>> for A72/MSMC clks and the OPP_NOM voltage.
+>>
+>> J7200 SOCs may support OPP_LOW Operating Performance Point:
+>> 1GHz/500MHz clks for A72/MSMC and OPP_LOW AVS voltage read from efuse.
+>>
+>> Hence, add a config check in board_init_f() to select OPP_LOW specs:
+>> - Check if OPP_LOW AVS voltage read from efuse is valid.
+>> - Use the device IDs and clock IDs (TISCI docs [0]) to find the A72 and
+>>    MSMC clock frequencies in the devicetree.
+>> - Fixup the clock frequencies in devicetree as per OPP_LOW spec.
+>>
+>> k3_avs driver programs the OPP_LOW AVS voltage for VDD_CPU through
+>> k3_avs_notify_freq() callback from clk_k3.
+>>
+>> [0]: https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j7200/clocks.html
+>>
+>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>> ---
+> [..]
+>> ---
+>>   arch/arm/mach-k3/j721e/j721e_init.c | 92 ++++++++++++++++++++++++++++-
+>>   1 file changed, 91 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-k3/j721e/j721e_init.c b/arch/arm/mach-k3/j721e/j721e_init.c
+>> index e9ed8cb267c..805b28af8e4 100644
+>> --- a/arch/arm/mach-k3/j721e/j721e_init.c
+>> +++ b/arch/arm/mach-k3/j721e/j721e_init.c
+>> @@ -19,6 +19,7 @@
+> 
+> [..]
+>   
+>> +#if defined(CONFIG_CPU_V7R) && defined(CONFIG_K3_AVS0)
+>> +static int get_clock_index_by_dev_id(ofnode node, u32 dev_id, u32 clk_id)
+> 
+> I think the following function can be re-usable by other K3 socs too,
+> can we put it in some common place instead of j721e_init? Maybe clk-k3.c
+> and exported from there?
+> 
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index e2570e8167..f4bad99335 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -44,24 +44,223 @@ static void downcase(char *str, size_t len)
- 
- static struct blk_desc *cur_dev;
- static struct disk_partition cur_part_info;
-+int fat_sect_size;
- 
- #define DOS_BOOT_MAGIC_OFFSET	0x1fe
- #define DOS_FS_TYPE_OFFSET	0x36
- #define DOS_FS32_TYPE_OFFSET	0x52
- 
--static int disk_read(__u32 block, __u32 nr_blocks, void *buf)
-+inline __u32 sect_to_block(__u32 sect, __u32 *off)
- {
--	ulong ret;
-+	*off = 0;
-+	if (fat_sect_size && fat_sect_size < cur_part_info.blksz) {
-+		int div = cur_part_info.blksz / fat_sect_size;
-+
-+		*off = sect % div;
-+		return sect / div;
-+	} else if (fat_sect_size && (fat_sect_size > cur_part_info.blksz)) {
-+		return sect * (fat_sect_size / cur_part_info.blksz);
-+	}
- 
--	if (!cur_dev)
--		return -1;
-+	return sect;
-+}
- 
--	ret = blk_dread(cur_dev, cur_part_info.start + block, nr_blocks, buf);
-+inline __u32 size_to_blocks(__u32 size)
-+{
-+	return (size + (cur_part_info.blksz - 1)) / cur_part_info.blksz;
-+}
- 
--	if (ret != nr_blocks)
--		return -1;
-+static int disk_read(__u32 sect, __u32 nr_sect, void *buf)
-+{
-+	int ret;
-+	__u8 *block = NULL;
-+	__u32 rem, size;
-+	__u32 s, n;
- 
--	return ret;
-+	rem = nr_sect * fat_sect_size;
-+	/*
-+	 *           block N       block N + 1      block N + 2
-+	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-+	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-+	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-+	 * . . . |               |               |               | . . .
-+	 * ------+---------------+---------------+---------------+------
-+	 *            |<--- FAT reads in sectors          --->|
-+	 *
-+	 *            |  part 1  |   part 2      |  part 3    |
-+	 *
-+	 */
-+
-+	/* Do part 1 */
-+	if (fat_sect_size) {
-+		__u32 offset;
-+
-+		/* Read one block and copy out the leading sectors */
-+		block = malloc_cache_aligned(cur_dev->blksz);
-+		if (!block) {
-+			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-+			return -1;
-+		}
-+
-+		s = sect_to_block(sect, &offset);
-+		offset = offset * fat_sect_size;
-+
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		}
-+
-+		if (rem > (cur_part_info.blksz - offset))
-+			size = cur_part_info.blksz - offset;
-+		else
-+			size = rem;
-+
-+		memcpy(buf, block + offset, size);
-+		rem -= size;
-+		buf += size;
-+		s++;
-+	} else {
-+		/*
-+		 * fat_sect_size not being set implies, this is the first read
-+		 * to partition. The first sector is being read to get the
-+		 * FS meta data. The FAT sector size is got from this meta data.
-+		 */
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
-+		if (ret != 1)
-+			return -1;
-+	}
-+
-+	/* Do part 2, read directly into the given buffer */
-+	if (rem > cur_part_info.blksz) {
-+		n = rem / cur_part_info.blksz;
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, n, buf);
-+		if (ret != n) {
-+			ret = -1;
-+			goto exit;
-+		}
-+		buf += n * cur_part_info.blksz;
-+		rem = rem % cur_part_info.blksz;
-+		s += n;
-+	}
-+
-+	/* Do part 3, read a block and copy the trailing sectors */
-+	if (rem) {
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		} else {
-+			memcpy(buf, block, rem);
-+		}
-+	}
-+exit:
-+	if (block)
-+		free(block);
-+
-+	return (ret == -1) ? -1 : nr_sect;
-+}
-+
-+int disk_write(__u32 sect, __u32 nr_sect, void *buf)
-+{
-+	int ret;
-+	__u8 *block = NULL;
-+	__u32 rem, size;
-+	__u32 s, n;
-+
-+	rem = nr_sect * fat_sect_size;
-+	/*
-+	 *           block N       block N + 1      block N + 2
-+	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-+	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-+	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-+	 * . . . |               |               |               | . . .
-+	 * ------+---------------+---------------+---------------+------
-+	 *            |<--- FAT reads in sectors          --->|
-+	 *
-+	 *            |  part 1  |   part 2      |  part 3    |
-+	 *
-+	 */
-+
-+	/* Do part 1 */
-+	if (fat_sect_size) {
-+		__u32 offset;
-+
-+		/* Read one block and overwrite the leading sectors */
-+		block = malloc_cache_aligned(cur_dev->blksz);
-+		if (!block) {
-+			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-+			return -1;
-+		}
-+
-+		s = sect_to_block(sect, &offset);
-+		offset = offset * fat_sect_size;
-+
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		}
-+
-+		if (rem > (cur_part_info.blksz - offset))
-+			size = cur_part_info.blksz - offset;
-+		else
-+			size = rem;
-+
-+		memcpy(block + offset, buf, size);
-+		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		}
-+
-+		rem -= size;
-+		buf += size;
-+		s++;
-+	} else {
-+		/*
-+		 * fat_sect_size not being set implies, this is the first read
-+		 * to partition. The first sector is being read to get the
-+		 * FS meta data. The FAT sector size is got from this meta data.
-+		 */
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
-+		if (ret != 1)
-+			return -1;
-+	}
-+
-+	/* Do part 2, write directly from the given buffer */
-+	if (rem > cur_part_info.blksz) {
-+		n = rem / cur_part_info.blksz;
-+		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
-+		if (ret != n) {
-+			ret = -1;
-+			goto exit;
-+		}
-+		buf += n * cur_part_info.blksz;
-+		rem = rem % cur_part_info.blksz;
-+		s += n;
-+	}
-+
-+	/* Do part 3, read a block and copy the trailing sectors */
-+	if (rem) {
-+		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		} else {
-+			memcpy(block, buf, rem);
-+		}
-+		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-+		if (ret != 1) {
-+			ret = -1;
-+			goto exit;
-+		}
-+	}
-+exit:
-+	if (block)
-+		free(block);
-+
-+	return (ret == -1) ? -1 : nr_sect;
- }
- 
- int fat_set_blk_dev(struct blk_desc *dev_desc, struct disk_partition *info)
-@@ -575,6 +774,8 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
- 		return -1;
- 	}
- 
-+	fat_sect_size = 0;
-+
- 	if (disk_read(0, 1, block) < 0) {
- 		debug("Error: reading block\n");
- 		ret = -1;
-@@ -645,12 +846,12 @@ static int get_fs_info(fsdata *mydata)
- 	mydata->rootdir_sect = mydata->fat_sect + mydata->fatlength * bs.fats;
- 
- 	mydata->sect_size = get_unaligned_le16(bs.sector_size);
-+	fat_sect_size = mydata->sect_size;
- 	mydata->clust_size = bs.cluster_size;
--	if (mydata->sect_size != cur_part_info.blksz) {
--		log_err("FAT sector size mismatch (fs=%u, dev=%lu)\n",
--			mydata->sect_size, cur_part_info.blksz);
--		return -1;
--	}
-+	if (mydata->sect_size != cur_part_info.blksz)
-+		log_info("FAT sector size mismatch (fs=%u, dev=%lu)\n",
-+			 mydata->sect_size, cur_part_info.blksz);
-+
- 	if (mydata->clust_size == 0) {
- 		log_err("FAT cluster size not set\n");
- 		return -1;
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index ea877ee917..f7a210d790 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -192,25 +192,6 @@ out:
- }
- 
- static int total_sector;
--static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
--{
--	ulong ret;
--
--	if (!cur_dev)
--		return -1;
--
--	if (cur_part_info.start + block + nr_blocks >
--		cur_part_info.start + total_sector) {
--		printf("error: overflow occurs\n");
--		return -1;
--	}
--
--	ret = blk_dwrite(cur_dev, cur_part_info.start + block, nr_blocks, buf);
--	if (nr_blocks && ret == 0)
--		return -1;
--
--	return ret;
--}
- 
- /*
-  * Write fat buffer into block device
--- 
-2.34.1
+Yeah that does make sense to do... There are already similar usages, I 
+think, in other k3 platforms. Having said that I would like to take that 
+up as a separate series since the DT index search is not directly 
+related to OPP_LOW Perf Point setting for j7200.
 
+Let me know if you think that the k3 DT clock index search belongs in 
+the same series itself...
+
+>> +
+>> +static int fdt_fixup_a72ss_clock_frequency(void)
+>> +{
+>> +	int index, size;
+>> +	u32 *rates;
+>> +	ofnode node;
+>> +
+>> +	node = ofnode_by_compatible(ofnode_null(), "ti,am654-rproc");
+>> +	if (!ofnode_valid(node)) {
+>> +		printf("%s: A72 not found\n", __func__);
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	rates = fdt_getprop_w(ofnode_to_fdt(node), ofnode_to_offset(node),
+>> +			      "assigned-clock-rates", &size);
+>> +	if (!rates) {
+>> +		printf("%s: Wrong A72 assigned-clocks-rates configuration\n", __func__);
+>> +		return -1;
+>> +	}
+>> +
+>> +	/* Update A72 Clock Frequency to OPP_LOW spec */
+>> +	index = get_clock_index_by_dev_id(node,
+>> +					  DEV_A72SS0_CORE0_0_ID,
+>> +					  DEV_A72SS0_CORE0_0_ARM_CLK_CLK_ID);
+>> +	if (index < 0 || index >= (size / sizeof(u32))) {
+> 
+> When would we encounter the second if..?
+
+Assuming you mean:
+	index >= (size / sizeof(u32))
+
+The RHS is the count of "assigned-clock-rates" in the node and the LHS 
+(index) is the id of the "assigned-clocks".
+It's possible (and I see it in a few cases too) that count of 
+"assigned-clocks" > count of "assigned-clock-rates". In that case the 
+"index" here, even if parsed correctly, could turn out to be outside of 
+the bounds of the array "rates". Which should be check against.
+
+Regards,
+Aniket
+
+> 
+>> +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
+>> +		return -1;
+>> +	}
+>> +	rates[index] = cpu_to_fdt32(1000000000);
+>> +	printf("Changed A72 CPU frequency to %dHz in DT\n", 1000000000);
+>> +
+>> +	/* Update MSMC Clock Frequency to OPP_LOW spec */
+>> +	index = get_clock_index_by_dev_id(node,
+>> +					  DEV_A72SS0_CORE0_ID,
+>> +					  DEV_A72SS0_CORE0_MSMC_CLK_ID);
+>> +	if (index < 0 || index >= (size / sizeof(u32))) {
+>> +		printf("%s: Wrong A72 assigned-clocks configuration\n", __func__);
+>> +		return -1;
+>> +	}
+>> +	rates[index] = cpu_to_fdt32(500000000);
+>> +	printf("Changed MSMC frequency to %dHz in DT\n", 500000000);
+>> +
+>> +	return 0;
+>> +}
+>> +#endif
+> [..]
+> 
+> Regards,
+> Manorit
