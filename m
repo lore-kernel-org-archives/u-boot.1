@@ -4,65 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1641CD60CEF
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 05:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C04BD44001
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 05:15:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D0EA894F7;
-	Tue, 19 Nov 2024 06:01:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B75F689500;
+	Tue, 19 Nov 2024 06:15:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="on2KyKtc";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E7CC2894F9; Tue, 19 Nov 2024 06:01:27 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A76178926F
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 06:01:25 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ51Ojq078439;
- Mon, 18 Nov 2024 23:01:24 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731992484;
- bh=WYO1Oqy6IjbuPLDW08R8XDhipb+oLyEf3gQbWHpcCho=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=on2KyKtcnrsYu5xaVb1Vi+OMNvEkDiXh36/8cPw5N3kZpUEwLKeLA7H+nWMVbzGuj
- C+MGRj5l6S93aU89r9/NMZif8GNRHUX9eZktNuUzLml5rVfH+lsaWkfjLBYs6CeHps
- V4JUnTGFS9b7fTdztpO5iqo0Nt70RTrQi2Vqns4M=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AJ51O3x055711
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Nov 2024 23:01:24 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Nov 2024 23:01:23 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Nov 2024 23:01:23 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AJ51N5Z020054;
- Mon, 18 Nov 2024 23:01:23 -0600
-Date: Tue, 19 Nov 2024 10:31:22 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <b-padhi@ti.com>, <sabiya.d@ti.com>,
- <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/5] Enable AVS support for AM68, AM69 and J784S4
-Message-ID: <20241119050122.bilk6amwoufnnmux@uda0497581>
-References: <20241118105714.1973573-1-n-francis@ti.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1731993310;
+	bh=4BdFNJkHYOO+4fFNgyd4DR6TV1/yH/4P2FZYw+t5Hgg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=UHxte4IZTh74xjaGOYHfhR4kUz0DtYc1miT7fj8vRmt5oJnwrSW75gL+G/yaSGjMm
+	 ll+AsCYcVWZA604PkuxRV35NRxnaxcyDKq1WuoNrdEkPfxtbfW7x9gZqRPJ04Do2MG
+	 I9NYbe1CRfvPvLpMt1DBq/T7lS80urZAftHeieXGK+I1xxlRX32Z//+W9AwD9WPoXR
+	 qUEMVxAQ+Bsc6XQ2eZRZV1mtZWQbvBDecYmhHPr9gEByzJ7+li04iFpwGcUeN7pwen
+	 4MfTfVk7kCqC22YLR4o8OaHJVZNYqDX4K+shMGhQkCeCphVcxx+HMBJiYjKtkJ94eH
+	 LUvQ6uKxO+RpQ==
+Received: from [192.168.1.107] (82-131-203-244.pool.digikabel.hu
+ [82.131.203.244])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D1B4C88B0B;
+ Tue, 19 Nov 2024 06:15:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1731993309;
+ bh=4BdFNJkHYOO+4fFNgyd4DR6TV1/yH/4P2FZYw+t5Hgg=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=clq6uhe/4xMcv4WbgU8YWYl/HE47yVjkWSUxQ2HTp8MUJzA4BlqTwJLUfhSbAgOLT
+ /gxqKL+GUdUjmkfB1jfmkZY5Mgw7LKfgzrDt7Ufyf8J4Ivp4O/SVRJIe4SiRBNCjad
+ MDcs9ee/l+rkPlq1SMk/c/rWuJHYVKtjVmqd1+1kJMXGVz9Fg8z7aK5IQkWobCbmqG
+ 89RrvcSvfOtSKtveNIR5dZTRK2APOEqU7zK+oRE04UHCU90H1whYbET0zA+tRRBPld
+ VmcYpB9L2+fCkBkK+r5Cf/+hgaZBuVLa+yVmLJ4C0ObXVS5edKJKVwzRZy3RPv+GkL
+ w9GZcU0CDfQtA==
+Message-ID: <dcfb4129-cb75-3937-6c89-bf1dd2e1b1bb@denx.de>
+Date: Tue, 19 Nov 2024 06:12:25 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20241118105714.1973573-1-n-francis@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 01/20] wdt: imx8qxp: add option to control external
+ PMIC wdt via IMX8 SCU
+Content-Language: en-US
+To: Stefan Roese <sr@denx.de>, Francesco Dolcini <francesco@dolcini.it>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Andrej Valek <andrej.valek@siemens.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
+ Fabio Estevam <festevam@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241118062715.32989-1-hs@denx.de>
+ <20241118062715.32989-2-hs@denx.de> <20241118123139.GA42367@francesco-nb>
+ <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <12768a66-99bd-4668-b927-f8869ecdaca9@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,43 +78,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+Hi Francesco, Stefan!
 
-On 16:27-20241118, Neha Malcom Francis wrote:
-> This series adds AVS support for AM68 SK, AM69 SK and J784S4 EVM.
+On 18.11.24 16:37, Stefan Roese wrote:
+> On 18.11.24 13:31, Francesco Dolcini wrote:
+>> On Mon, Nov 18, 2024 at 07:26:55AM +0100, Heiko Schocher wrote:
+>>> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+>>> extensions. Only useful on some Siemens i.MX8-based platforms as
+>>> special SCFW is needed which provides the needed SCU API.
+>>>
+>>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+>>> Signed-off-by: Heiko Schocher <hs@denx.de>
+>>
+>> ...
+>>
+>>> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+>>> index 0e45f0a0922..f317d0922cb 100644
+>>> --- a/drivers/watchdog/Kconfig
+>>> +++ b/drivers/watchdog/Kconfig
+>>> @@ -428,6 +428,13 @@ config WDT_ARM_SMC
+>>>         Select this to enable Arm SMC watchdog timer. This watchdog will manage
+>>>         a watchdog based on ARM SMCCC communication.
+>>> +config WDT_SCU_PMIC
+>> Isn't this a too generic name for something the is platform specific?
+>> Or this is not Siemens specific? One or the other, I would say.
 > 
-> Boot logs:
-> https://gist.github.com/nehamalcom/db5dbf98357ebac46f648c24ad1a17e2
-> 
-> Neha Malcom Francis (4):
->   arm: dts: k3-j784s4-r5: Add VTM node to R5 stage
->   arm: dts: k3-am68-sk-r5-base-board: Add VTM node to R5 stage
->   arch: arm: mach-k3: j784s4_init: Probe AVS driver
->   configs: j784s4_evm_r5_defconfig: Enable AVS
-> 
-> Udit Kumar (1):
->   configs: am68_sk_r5: Add AVS Configs
-> 
->  arch/arm/dts/k3-am68-sk-r5-base-board.dts |  5 +++++
->  arch/arm/dts/k3-j784s4-r5.dtsi            |  6 ++++++
->  arch/arm/mach-k3/j784s4/j784s4_init.c     | 10 ++++++++++
->  configs/am68_sk_r5_defconfig              |  3 ++-
->  configs/j784s4_evm_r5_defconfig           |  4 ++++
->  5 files changed, 27 insertions(+), 1 deletion(-)
+> This is also my only concern right now. If this driver is specific for
+> a Siemens SCU firmware, then IMHO the Kconfig option and the driver
+> filename should reflect this.
 
-For the series:
+Yep, I change this in next version.
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Thanks!
 
-Regards,
-Manorit
-
-> 
-> -- 
-> 2.34.1
-> 
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
