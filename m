@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435E9D6C2AF
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 22:13:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D4CD6C2AF
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 22:30:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C62BA89586;
-	Tue, 19 Nov 2024 23:13:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0466988F3C;
+	Tue, 19 Nov 2024 23:30:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SihYvlHi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NMGG0Upo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81DF6895CC; Tue, 19 Nov 2024 23:12:59 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id EDE2988FDE; Tue, 19 Nov 2024 23:29:57 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BAC188C98
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:12:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA05D88BFC
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 23:29:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b147a2ff04so268804285a.3
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:12:57 -0800 (PST)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e382661fb79so1275198276.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 14:29:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732054376; x=1732659176; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IVjlWjOiTSvJ3EEWLazOFGiqiFjFVXY89CzU9ROijr0=;
- b=SihYvlHi/EIkvJYNjtYrbV7tSKn8YLbLeZC+w/BOiM6yzKalcXMRIQMHHI41o2czwA
- UI6B3TxK+roqm5CaMWUguKAWq7dIw5/rfhlNrTKZVo2xELbf1YOisa/lBnCiGxjvtW8m
- bIX2T+1nHNygQJv8F+iDsM239mjlelcg4/nU4=
+ d=gmail.com; s=20230601; t=1732055394; x=1732660194; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=wxv2N9EII7ddmkWuSU1XG6l+bs/lFEDhELsNC4L6yLU=;
+ b=NMGG0UpoC+vvhxQcV1qYFIwY6bX31R0BwZmM/Q2BwocVTNq1h4XhbCh1B0mu6f+jkC
+ 9RR1aA+G8pwZ/QuzuI2D0r3t/QaBBk5gBHPWoYQ5qFHKbJszT6REsSbBlRyTsiD09MTW
+ wE+YE4eqG3XF4wMypUFF+trRXETVRTMVWeiYzEB1NBuYZ5QGTPJc//LtjY/AHtiwh35k
+ TPeP1BVYZFo+rAIUp23P9so4eMf1yGU0orOFpXx6iqTaE2oFPXsevyBMHMBSwWLBy4+/
+ +RO009bbCFd4yydJHzU79tC1mVhXnfsQei+RyD++Z+IemF+ATMbWi7unnHKDxgUsuBtT
+ PaIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732054376; x=1732659176;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IVjlWjOiTSvJ3EEWLazOFGiqiFjFVXY89CzU9ROijr0=;
- b=B91I4r5DaLqkXTT/N21lWRu+C5WvaWABnAi+jtZaJK8Y5sCsuZKU4rToLnvEGgX/CC
- BrB1Xnr3dK780d2L9tQT5WWUKSoJX2YmSdPRHRcyy1PG08mirUz514W23G0p72DHRtcG
- YWGa8I0LKUWu24SAjT5f6w5MGLoOuQdvpFnb54sVXnFTKpJ3BMENlT3NgqSk88nSpqQ4
- LnYZC7GCPUXVC6hRlCWu1SYeKvufN05JWgQPNPEychQ+XQIEo+X1nX2R8lT0PT9qgwpX
- 1fTf+uuP4hqSkOQLHHQ1hAh4fkwiS19E+UmG9xXvHlV+ujAyiaNEg528IF/htPYtsWL1
- Un6w==
-X-Gm-Message-State: AOJu0Yw5fkAtc2FY/wsP5H+kXkQkNXiMrhb4pC+uuUcXqNvWc5poAGO5
- r56BGuoqcCk9qiaQCUxTjh4bigrHFl5n1kFNZPLHRY03ClM4TrFEp0eUjt4DcK05ooiTKhA0N/i
- fXHk=
-X-Google-Smtp-Source: AGHT+IEbilifO0ZHxHoJgZca3pzwGNsuBToIYXR5Q5fxAomNhA5HmAU+8VjrS/ea4mxO9wL6GxVs/A==
-X-Received: by 2002:a05:620a:28c6:b0:7b1:5143:8da1 with SMTP id
- af79cd13be357-7b42ee82dadmr75628285a.43.1732054375807; 
- Tue, 19 Nov 2024 14:12:55 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b479d2de77sm10252385a.14.2024.11.19.14.12.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 14:12:55 -0800 (PST)
-Date: Tue, 19 Nov 2024 16:12:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2025.01-rc3
-Message-ID: <20241119221252.GY3600562@bill-the-cat>
-References: <cae706ea-b4b5-4b35-886e-58896564f777@amd.com>
+ d=1e100.net; s=20230601; t=1732055394; x=1732660194;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wxv2N9EII7ddmkWuSU1XG6l+bs/lFEDhELsNC4L6yLU=;
+ b=gxeGpH14vj2gCa4Qbu0FuaEp0BI6lh5NfSu9zE1OOlazWB1DOQnOF6GBDUGX5bWUPP
+ L6blLQBy7SWv6zMFQkpTdKraNuvet0YFTkOOohXMkxM2FRy2u6NGAGU7ZslTLNy2xK0/
+ jmZcGg2dtQ6CNSppqUhblqnNGslC8ouJK9//bbEFKOck9FtBvGTGV27ZkdxiPVia6i8x
+ C5DI3PAbl13dD/tvMIOAbIGNgOJ0uX8wk/cbL6cUHEStZCN/1N6O1X3NfrYFXGImiPkj
+ FNb2QqTOzQNrcFVvS+Zz2R25LAcCkLNZY5464dDJHrnYB7b3jz9Gib2mxQFROJDhbKuj
+ Jlog==
+X-Gm-Message-State: AOJu0YxfRVHyAkpfHNihOs/9i0zi3wikryQldEFgJr/K0WneI7RYJGZV
+ 4kVLFJLxHy4ypbC3Xcwf8R2yJ3kfsX5jpMx5g2b+up1tjZq0VmVWccBs9Ke083iQ1EOir+v8uh5
+ FCAEroIoBxDeazpsvscwMByNHHkKb/gjdu3A=
+X-Google-Smtp-Source: AGHT+IFRnu1pn4McaNDkH9+swnoMWJ/smTGMxXTeWu0hkiHIjE0EQ3HIx8h+WvrZX2ok/tYHUizGEMzAVqWq5coVI6E=
+X-Received: by 2002:a05:6902:154b:b0:e38:7bc6:6d28 with SMTP id
+ 3f1490d57ef6-e38cb5f77d7mr459778276.42.1732055394567; Tue, 19 Nov 2024
+ 14:29:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sCtZD5OTK7xVqQEw"
-Content-Disposition: inline
-In-Reply-To: <cae706ea-b4b5-4b35-886e-58896564f777@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Chris Packham <judge.packham@gmail.com>
+Date: Wed, 20 Nov 2024 11:29:43 +1300
+Message-ID: <CAFOYHZCwXSChH_rH251cUp-bgwai+e8xrOuqxepX9Dur2wGTJg@mail.gmail.com>
+Subject: Odd error with cn9130, asix88179 and xhci
+To: u-boot <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,76 +81,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi U-Boot,
 
---sCtZD5OTK7xVqQEw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We've hit a weird problem at $dayjob with a board using the Marvell
+CN9130 SoC and using the asix88179 USB-Eth adapter.
 
-On Tue, Nov 19, 2024 at 07:38:05PM +0100, Michal Simek wrote:
+The problem is after enabling and unrelated feature in u-boot the
+asix88179 fails to receive data (I can confirm that the link partner
+does see packets in the transmit direction)
 
-> Hi Tom,
->=20
-> please pull these patches to your tree. Crucial part is Sughosh series wh=
-ich
-> is fixing issue on SOM where current code is ignoring reserved location at
-> the end of low DDR and u-boot is using for itself instead of ignoring it
-> completely.
-> In past this functionality depended on LMB which could be also possible to
-> use in this case but it is cleaner to make dependent on new Kconfig
-> XILINX_MINI symbol.
-> RTC fixes for SOM also preventing RTC drift on Linux where emulated RTC is
-> replaced by physical one and started as the part of boot sequence.
->=20
-> The rest of the patches should be easy going and I will send another pull
-> request for binman support to next.
->=20
-> There is one pending issue which I am discussing with Sughosh related to
-> commit eb052cbb896f ("lmb: add and reserve memory above ram_top") which m=
-ay
-> end up in another patch to fix logic around ram_top calculation in board
-> file but better to apply current patch and fix it if we find a proper
-> solution.
->=20
-> Thanks,
-> Michal
->=20
-> The following changes since commit cca05617a8f585f3a98a8fa82f75cc68a530d7=
-71:
->=20
->   Prepare v2025.01-rc2 (2024-11-11 10:07:36 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2025.01-rc3-v2
->=20
-> for you to fetch changes up to 383fc2f50166fded0571d41baa7826eaaa5dba97:
->=20
->   xilinx: Introduce XILINX_MINI configuration (2024-11-19 15:57:56 +0100)
->=20
+=> version
+U-Boot 2022.01 (Nov 08 2024 - 09:45:44 +0000)
+=> usb start
+starting USB...
+Bus usb3@500000: Register 2000120 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb3@500000 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+=> ping ${serverip}
+Waiting for Ethernet connection... unable to connect.
+Reset Ethernet Device
+Waiting for Ethernet connection... done.
+Using ax88179_eth device
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
+Rx: failed to receive: -5
 
-Applied to u-boot/master, thanks!
+Abort
+ping failed; host 10.37.233.65 is not alive
+=> <INTERRUPT>
 
---=20
-Tom
+Debugging a little we can see that the -EIO is actually because
+xhci_bulk_tx() hits a timeout from xhci_wait_for_event().
 
---sCtZD5OTK7xVqQEw
-Content-Type: application/pgp-signature; name="signature.asc"
+We think this is triggered by the u-boot image size crossing some
+boundary (the problem seems to start when .bss_end crosses
+0x00000000000f0000) although I've so far been unable to find
+specifically why that might be. As far as I can tell u-boot is being
+built relocatably and nothing is overlapping. I also considered that
+ATF might be preventing access to something but so far I see no
+evidence of this.
 
------BEGIN PGP SIGNATURE-----
+If I turn off some features to reduce the build size the problem goes
+away. That is actually how we've avoided the immediate issue, although
+that means the problem will likely come back and an inopportune time.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc9DV0ACgkQFHw5/5Y0
-tyyMTwv+IDWLtOvxKTSuO/jkTZr3aMNNUVlRYHOVoS1iFJBSEy8o+XpFCRgRhrG/
-icy3wHwtA4D7h2DxHZhynBY/R0FOAGpdaevo4HQ0rxXlSiU2D4SAes0YQZLfPosO
-K1T6qeDo8Z0mAUeOebfJmza2ambO0oEW5gau9k23nTWxQzHnVL3eUvxWla9xH57R
-OYhaRG93CjgMOyEzojAtbPLnmYTl7Z92a9eQV67I/WbvzkOdRy4B8ynuLzJS2MEO
-aKtsidOCrWle5/E0FcSe2o4jiHN47airM1RacYsVW9GGTSVCK0pPf6cS2iKp/LOU
-aU5gm9eOQE9Dzq56YtXLWqi42SMXY+7rBoy8orptWXUj6STbRSth7RkEK0jV4eLP
-670OeFuGF3b01UUcVGqbhCurkFXmkJn4vNc/TyMAIoy7RZ5tXBEkG5AMMommXX9s
-BUk5NZam7K8GAlZN/CqD5Jf0VeRQ/MhQQkEHDjTQCuUq3/yBEN6cHepLOg1xRNIm
-/nuRaWOW
-=0mm0
------END PGP SIGNATURE-----
+Does anyone have any ideas as to what the true root cause might be?
+I'm a bit stumped.
 
---sCtZD5OTK7xVqQEw--
+Thanks,
+Chris
