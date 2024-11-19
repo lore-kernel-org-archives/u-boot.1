@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C86AD60D09
-	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 02:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B196DD60D0C
+	for <u-boot@archiver.kernel.org>; Tue, 19 Nov 2024 02:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5128089277;
+	by phobos.denx.de (Postfix) with ESMTP id A69EA89442;
 	Tue, 19 Nov 2024 03:08:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 579198924B; Tue, 19 Nov 2024 03:05:59 +0100 (CET)
+ id 2D5F889258; Tue, 19 Nov 2024 03:06:01 +0100 (CET)
 Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20723.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::723])
+ (mail-bjschn02on20711.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::711])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 429DC89258
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 03:05:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAF16892EF
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 03:05:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hal.feng@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Q5cIyfo/kOb9/83QjEl0ceEG1XK9ierzjPlWaUeUVgxSaacokbSvAfisK8jDKk6rWRy/uerRBt0HZ9O6x6i9BTfhIhHAMlHNbr8YBbgsIQsvDFc3YXgpD0LS7h0UAXwPhYOPN6OwLlNVIKKIWxt8w4lpQapAI2BOSWkYXxlGooNcxNzq7LvVzDRhknEg4bklEPDilq3wPSH6JKqNMhKkNe4gqx9iNizMNwHhsvm1bzepS68+AYqG3WBfX3gw9A7iv+xXrYQ/tT6Y+/8cBsh6F+7IPvh7yGaG2cJnoFm+3PJ+BVyyHcWAnFrhWXzFsTExgNRH3fGnBgQU5r5bStFp/g==
+ b=YRlN9Xsn+cyR/0kgzwGA009KcXDo3oC7KgZryfQusu82A1OOxvHa5gJMyY6yuNF1Nt2736sO9SeUEJZjJGVEl3CoOV32bJZVH3VdDBFrchireTYtSZMzKkNnWyh6EQUlQDKd+fL0t2PX/0O3Q/eeJxO+BrR5QKW4DOctA7/4hj0YuxX1BvSOli/fv9DiZLqgwnDk0xSkjMuTET2mieM3tLD7xMeagSAjnAK/5RUs0c1BfZmqh6CCAkXjQ9nTkbMFyfast2TPQ2YIYfcLMcFiNOFQYvRuvvvGsTLlhVOMkwyHQjTPpPDLhKTcHqj1fvAh1yxbILJVS/f8KBApJwH7gg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NwkFXu+Ht50MhPGFFxKtuXu21Zyrq3DuHX2pqJwS1qs=;
- b=NWXGCHwS6QSkIkoriZmmlehQpujwNRaoBMa0oyubmLr5be5SmlAAUuySH45mhfbp1eu90Hdz3YQgWzvovrt5pqfNqThjo2t5kHrMO5Q5OlPtNl6K+2H3vB/9b3G+GnWiR46SQryuNH3wPZB9ducY2wdiK1DLNRqX5OLw5ElIGy14VeB665oZ/4Hvv5AkIzIhd6tM5hL2bCI+vl7CbxTKyIcc1AaiOr6S1f4iBqehCq5nOliP+ywOrVEaWhRZAEGM4xuk/Q8qVNfriNdqNyG32aQt2S8vUAHqD+FPV8GfG5Ctv/qV3hBRjbb7SbfS7vsB1J91vrUM8J3cspbOUAuurQ==
+ bh=mMUGOskJCJMmK5wG40VxQMgyiWbSlG+yfT92NZdv5X8=;
+ b=mlNTE/tUtY2tR1BxwQPG+i7pzdvdWSYDg0gEt7WzrMxx7OHd3cudwvuLhUdCV22y2+zvRqRymkjxwb4bxqX1lbAxJQTeZI17r34Da/9HRa0g3XntDjezYNzGyOqJ2ZvVvEE8qbBewy0SAgefjbwlTSGn3irS4GJlrmpWNJP/ZJvBzJgPIVUCbADnW0fTiWOK2wB1MvozFvPKEDMCVts6j7y+Lh4bdPq7PU/qV23MdJyKAwO+omCTMID7U15eP4jivqLk9kJv9jg2R30W9iW4sGipHgsMC4H4Z8gT8r4Fwc3CXKQXpILKYnCYqX7D6bfaSDX8xIbxdJXhhviDEswhcg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=starfivetech.com;
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1275.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:10::6) with Microsoft SMTP Server (version=TLS1_2,
+ (2406:e500:c550:7::14) by ZQ2PR01MB1292.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:12::7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24; Tue, 19 Nov
- 2024 02:06:01 +0000
+ 2024 02:06:04 +0000
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7%7]) with mapi id 15.20.8158.023; Tue, 19 Nov 2024
- 02:06:01 +0000
+ 02:06:04 +0000
 From: Hal Feng <hal.feng@starfivetech.com>
 To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
@@ -54,10 +54,13 @@ To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
 Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH v5 00/11] Support OF_UPSTREAM for StarFive JH7110
-Date: Tue, 19 Nov 2024 10:04:14 +0800
-Message-ID: <20241119020425.51989-1-hal.feng@starfivetech.com>
+Subject: [PATCH v5 03/11] pcie: starfive: Make the driver compatible with
+ upstream DT
+Date: Tue, 19 Nov 2024 10:04:17 +0800
+Message-ID: <20241119020425.51989-4-hal.feng@starfivetech.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20241119020425.51989-1-hal.feng@starfivetech.com>
+References: <20241119020425.51989-1-hal.feng@starfivetech.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: ZQ0PR01CA0035.CHNPR01.prod.partner.outlook.cn
@@ -65,56 +68,56 @@ X-ClientProxiedBy: ZQ0PR01CA0035.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:7::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1275:EE_
-X-MS-Office365-Filtering-Correlation-Id: f5841796-033e-4dc1-a7e1-08dd083eb71c
+X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1292:EE_
+X-MS-Office365-Filtering-Correlation-Id: 034d2c78-260d-4919-5ceb-08dd083eb8fc
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|52116014|1800799024|366016|41320700013|38350700014|921020;
-X-Microsoft-Antispam-Message-Info: e3IqMSQWS22NHAn71iKsAZyZOwu+i1+Sz3X1kIz7bvCFAM7+9ANfcZ2MWJoadJyw6+rc5kt+mpN5Tje4rYxfK6q7XqVQ46cFrtX5y08Yt+j6xA/oQUPgC9JTmsIQLbvyrZkA2aRZzy4K1Lzp4rB1NioA1N6xMcBCg7NwN3/1N7ViGfVFibcSWMHwKWzLMtp6iB6yByCL1c6k5hmFzIw30YEshJD38lP2B01XXOV5udpluzv69MRDCIXElyOGblUqHOA3ElxuOKQdXdELY9Av9zEt5hHeb6z1MxSBpzON9UnvBvqErOpMmATKl8ixDz8Y26nnHH9CiD8lR80a18tvgGGcwtl5KKhtSB9zet+X0fXOhefU2l9/0Bez3dJGZU7iOtdRdUi2l0S2Y9GPyIFTX2OrvoYhYgDQZYIhXKCCs7G6/j43gX6VfcQRBQjA0fpGG80ZKVkxyHjBwZSdKMUquekyx15dY0rFLfQWg6VCNQxVMQ1rX3dA4HV/V6dsLDUdsSPLqB7telfRYApP970UVlZ6EqkDJhNNwvQve8BTD4jXTbLFG/H0WrCxMQSc/mUDG4JM06meRREn6dCL9UEWwmk6/YnGjOwd6L7OL4x/S7vf9lX7/0G+dvBLfsDbEY0k0pNU3bQD6e+RGovkd9wywg==
+ ARA:13230040|1800799024|366016|41320700013|52116014|7416014|38350700014|921020;
+X-Microsoft-Antispam-Message-Info: kBWdPu951WJ/Rp8+N+efk7ze3wWnNrjg+jyJaNERwS5fDv9/d0nsvHPb7PQghNr2Dy6u+NXOoXhujdXdUEabSr40Xjs/v5B9wRNviz36cYtobC8SotBO/M41Hz5qOOL/m0VUcnlS2Dv8SG1Y9z69SAOq8h0jpGB+/dR92MiQSKiedVQlZfKQW+HJh9imxj/s0yJXkxFdxYaFBWLlunnskpMjm50klS+DVEBmUbu0Ih5ahupFXJo7Mm24LaN8CPXjVAP6ttPN5DvS4nuqFFBkeITssq4vUBYqNctWZgQSZ/VLq1rdu5aoSTizYGIF4EJVDz4hzTqcRDNUbaTQ4Iw3XlLgM0rQo2E1X8Xglemi6P+eBoB6lef8c20zK/LgEzbml282KL9vkfHiVf4kKDH+ypeBzTn1BcxwDWkbYtywz7urrMHlgezBdMfC7goR8UQRI2obfthlXl8BHV4mInUEjd6Gx3yVhqC+vuQonPuMEOPJmkhF3bwiiQBpYgT2LjgmzLu5+wxmeJSdJzRrZDdM8c/ZWqiao/YNA0DBaTd1F/RJ5BLL2UaGGcF5LSASyzCAm4uyktEie+JBR5jAbg3ALBEks5Cno0Tt6z4s23x65IqXYBY09KN6I7i2RMtJZ6FFBSBeujrYoZQ/EAMowkazOw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
- SFS:(13230040)(7416014)(52116014)(1800799024)(366016)(41320700013)(38350700014)(921020);
+ SFS:(13230040)(1800799024)(366016)(41320700013)(52116014)(7416014)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?D8o5O43kPFj8tByHCgEKUuFdxZiBBXiJU/I7WJNgHM/msJ6+XJM7tEtzI6YQ?=
- =?us-ascii?Q?2XPKgoy/+XNJBS1xNESOAB/tLJZYZJN7Lbh0BQfQsu8+Dl2p/gjuG3DBokCB?=
- =?us-ascii?Q?f0lCMB8ZzjOTb0eaE0ezG252MeoMdXZDWiMERccLPQh+c01c8XGJMw4RCeIj?=
- =?us-ascii?Q?tZ9h9ly61/+Fcew60eYWO646LScwMdfrDaER2qgdgYqDycJOp8YioWok4r1h?=
- =?us-ascii?Q?Q6VcUmJ99Q4EExV/O/Gtasnzw0dCuMXnhb3QtOYnannhmTWMm6D/MQXZERQ+?=
- =?us-ascii?Q?yFMuz0HF8kIX5InBBvE4QCJud/ZQmJPAYGTfyPRoh71PQSHe5ZyAJ6wueGvV?=
- =?us-ascii?Q?ilpYiPaDiwb/9MQyvqbmCFLfBCt8RwiGIDENMihS+AuQlxnNSpRNl7/kIolS?=
- =?us-ascii?Q?PcrffIHyq/tOvKcM0xTZbubXkLCiyE3aaOLw4vJRlh5XZTML1by5xjnchJlo?=
- =?us-ascii?Q?JkH5fCqo5BMSpP+rtu6k2jU/4JX2EBPFAEN0nXFiLT5Og512q7dACiSS6b1e?=
- =?us-ascii?Q?igrOyvYbbPT1YXFZHVFGHxk/KF0Bil9OeSP8ARXPIO2yQm6xhTstmoKK4gVz?=
- =?us-ascii?Q?F2/Bw6ODDXCS993UzZuVgvOR7jwo7AqheOb+5tYpPpt6M0zL8kK6LHwg70AK?=
- =?us-ascii?Q?m/XDruOrFI/907GsC63dxGrQFhRS1FvbpdDIeNabUkcIqYpRwekKMsBlw/OW?=
- =?us-ascii?Q?kNG7bxHQCuSASOaThVKTPBiOpwI3gyVKeViAfnCn8kvCl5BI4i2l382LJcZv?=
- =?us-ascii?Q?WrTd7DcJvXz+Qtb5PfJXinByafme1oCXiDJ6yiUq9DfsAJ3hey6tAJT4Wh1O?=
- =?us-ascii?Q?dB/OoUJKlt5wFRLNXzAoPI6oROrqzsuvjFv7CEVZx6lrR2+qWIVU4Pd1nUZ8?=
- =?us-ascii?Q?3RkO4V1VIn+H8DDyzetVM8aTlsI9pm9gsW9V0KHkEDYhW7ITnIhKJ/fkWbw8?=
- =?us-ascii?Q?GkA0KbI5bSbBiuSsE20xVDzAOQQaCZC4mbctU/OQCR1CojbHuOe7S7YAd1Uw?=
- =?us-ascii?Q?gCLjpO0yfXvpfGkjEHXA2pZLDk6mZU7yvJfKsjDaGPTHIu7iRNp9KXJ9bPoO?=
- =?us-ascii?Q?3oq+UmhO9BNDnSGWK7aibI+29stDiWD25PRxMS7Ph+OxJ7A+Ti0s/tLb/DOG?=
- =?us-ascii?Q?z2ZYA1MMlZCpa2phXCDLs+/g3lMWf4V2z/50ADF6yDIxzJJRV+L4Yj9Q4ojb?=
- =?us-ascii?Q?ukX21sc4/DNngl0+BPmz5ChO8FU0hThqOq7+UHEe/vcC8G7wCrdnM9iEK/lz?=
- =?us-ascii?Q?MMHVn6mlTXphZvMsG8BKD6+B7elLmZhTJq/A5r1afCyGXw0h0mk1G3CRCdcI?=
- =?us-ascii?Q?Lg7+N5FdA4sNcQ8hPYu6enTRdfioYYKyJE0+bjjdDUaXaGrmTOgBFoscFIUy?=
- =?us-ascii?Q?7Kd8betv+gGVF2c+DNPYe8uP3xMe2QMvZRC9dUQArnr/IkgYXv/bZfMhb8OO?=
- =?us-ascii?Q?R2ZxKBcyBDKI2nDvNJWRHtBPfTObnKexJVU4NRZwTJEKEVSgew8cXRujdm8o?=
- =?us-ascii?Q?TpRAVoQ47Wi2WdV+h4Nw4KN39/aOPGTf5qVR4UjeXhY2Eek9XgLUPLAwfdbT?=
- =?us-ascii?Q?L762XoVzsVg3qhBN5YzCvl1mnDnsX+wCeRgIQzGA2Wb0tmdJbbPfZBKtDIO5?=
- =?us-ascii?Q?Qg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?erXGE81OOYS0qDQWv2sJyWxfYFIkdA06P/RKm/OnKYbzishqwd66OpT0t3wN?=
+ =?us-ascii?Q?xTfJuDDqaJKZEQnHAn3VVJKHeIpSxa0BfVUgbjhCtnc/K2S14KLzh3tvMpTq?=
+ =?us-ascii?Q?syYffEjuEdlkL9mSndOrRXKqtHuN4HBHdnQv0YVJA3ECzB6w0ywoLowXs3Y4?=
+ =?us-ascii?Q?K/6OnUUykQnl3nXkXZ6/qhrgcyPrT83lTLF8sHLPWwjTLbnJIR0WFXlv4+xY?=
+ =?us-ascii?Q?mdL6d1q8rZmSUFlofwvfdLQcslWnWKTmQl9L/AVnxluQU+0hjNsV9YACoxaO?=
+ =?us-ascii?Q?Rk2r3u9zcVTgMKg6bE3J29W1gIYo6FyWk3QtKFmXcS2i7A+1PLYKGl6Fanft?=
+ =?us-ascii?Q?ztTHXceuxeHj8ajPv6ULd/XqlJHAZ9QiHSRIlEPohz/GpiGa2Uv3Gnu9yYCF?=
+ =?us-ascii?Q?ptg4dFRPMSyed31oWtWAV7pMNuBl2j6RUVO98N67SQRtf996Nue37zJF/BX7?=
+ =?us-ascii?Q?fkebq/77V4CleVEBmTosVQHQjXjS33soxQspmLsSlALcZ9zgygfCpGyHkgQA?=
+ =?us-ascii?Q?W5Wxv8A3SplvJ+LVsQYljzGSrFURX1g/7j0Tzd5uejMnKB55R4zKYwGYZ63e?=
+ =?us-ascii?Q?amauYcksP2Bt8r2hVU36uHNhEGcG30aUceEr5R2AQGpMA7N0JggYkJhe1+fU?=
+ =?us-ascii?Q?21KauuzbNwd+wAL+iYeIwdYDc1KHDZBLp0qffx4QrlexgYJEdW8yk3OCjuqv?=
+ =?us-ascii?Q?TBlQlpbO5YD7Ak+SFWcsdxCn2MLpqGTsyypTOl4/jCjGohv6WfqFk1apao0r?=
+ =?us-ascii?Q?bP6ov+KSTV8nW6shoQh1/88vphTrBRmt4RheP/i+hbx9f6yllZdIaC4ReV/M?=
+ =?us-ascii?Q?M/45qtQyt7+nvKviiOdKYIR1yguc8N23QOdhd8jATaNb93DAam8kfTDGu0yg?=
+ =?us-ascii?Q?1us81YTeELN6gj4ch24T+66Z1MFoPWviXZkZuY0KM6N9V3BhmyxRNxag4fS+?=
+ =?us-ascii?Q?cuRFTlrHR09yA34uyrHwW2y1CIJVa9zYJgXDuZlNuXujILhwLV0hkFbYrFHX?=
+ =?us-ascii?Q?7b2v145CxcUYE2tlxXUkRYDzYFRvJp7Ygt+muoMkOE/9+A5CWfgkgGouqfL1?=
+ =?us-ascii?Q?NelBSGKjNbKlyAqrAj2t1QlpiImM063x6kFkrEDfr6iJf1mJz0DaSf20uru/?=
+ =?us-ascii?Q?wJd0Onn3Y27Y6J4GgG9IHKfL2QDsju1OMSDJjG/2DY1129CxzXM3GeD+xEk7?=
+ =?us-ascii?Q?KfzLdyZ84FD9TnWnEONuOMdGwdk4Fk0JBktAjnKpxWDAVaKszI/VZ66iL2kj?=
+ =?us-ascii?Q?XmKzGKsmWcKg0+kgt9Rn9JQmpCyk0duBhjsaU+FI7ZQ6zTxyZdW9k99NZ/4O?=
+ =?us-ascii?Q?g99p915rf1y0lT3I0KXnZoiU+U2K679VAZNt+7r7yvKPmvGsSLHgl747hIv6?=
+ =?us-ascii?Q?FFDecMlvd6iFQq6Xmq6m0Q5a4YLCzK9tYFPml9SeKhttbruDRSYdrxR265PL?=
+ =?us-ascii?Q?pcQ3ns8nnwk288zoveGmE8NulZG5VaeQzH+oL9YdazTFQCHfkbM8PZA/9kKG?=
+ =?us-ascii?Q?W8ocBIM2CeX7dt6oSciPdmhV7K6EoBgKXfJzc4xHNFEsi9RIRwNiiHEyVXHj?=
+ =?us-ascii?Q?jtrq2FOcmWrHWesVBoREDDgBNl4i+T8YvMo99lGPz3hXgeLoshaUlLMChLrP?=
+ =?us-ascii?Q?mw=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5841796-033e-4dc1-a7e1-08dd083eb71c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 034d2c78-260d-4919-5ceb-08dd083eb8fc
 X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2024 02:06:01.1697 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Nov 2024 02:06:04.2273 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sE8Tlmhnqzjr8lZ8nwZacT+yEB9aRx40aChNe7LblOgqXy832Qh09oKMilohhAwpmv2aPDNGMGzVjdRc3UvYaZ/7qyBqdnD2zh+8QMUxMV4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1275
+X-MS-Exchange-CrossTenant-UserPrincipalName: K+v7yqop1ZgLYnT9kHUek1fjsCZCSUSkkY9TATDLtiRXJgvXLg8Zai1zxfiQpMh5Li+2OhSkcX0e4UMSHTJPXGN2Dv16mxJ4Ei0fAhb0O2Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1292
 X-Mailman-Approved-At: Tue, 19 Nov 2024 03:08:50 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -132,89 +135,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
-All the JH7110 based boards can use the DT from upstreaming linux kernel.
-The v1.3b board device tree is set as the default device tree. Support
-CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
-EEPROM information.
+There are difference between upstream DT and the old DT
+in terms of reg base, reset gpio and syscon. Make the driver
+compatible with upstream DT.
 
-Changes since v4:
-- Merge patch 2, 3, 5 into patch 1, ensuring git bisect works.
-- Add a new patch to sort the list of JH7110 imply statements.
-- Drop the reparent of clock JH7110_AONCLK_APB_FUNC in patch 4, which is
-  unnecessary and will cause errors in gmac0 initialization.
+Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+---
+ drivers/pci/pcie_starfive_jh7110.c | 59 +++++++++++++++---------------
+ 1 file changed, 30 insertions(+), 29 deletions(-)
 
-Changes since v3:
-- Add detection for Milk-V Mars CM (lite) boards in patch 13.
-
-Changes since v2:
-- Drop patch 1, because the riscv of_upstream Makefile is created by Conor
-  in commit 239e4705099c.
-- Drop phy0 rx delay for milkv u-boot dtsi in patch 9.
-- Add a Fixes tag for patch 13.
-- In patch 14, the PCB version is only obtained when the product_id is
-  VF7110. Improve the commit messages.
-
-Changes since v1:
-- Drop patch 12.
-- Modify patch 11 and add three new patches to support
-  CONFIG_MULTI_DTB_FIT. The SPL selects the correct U-Boot dtb using the
-  EEPROM information.
-
-History:
-v4: https://lore.kernel.org/all/20241111020808.38974-1-hal.feng@starfivetech.com/
-v3: https://lore.kernel.org/all/20241105034328.56439-1-hal.feng@starfivetech.com/
-v2: https://lore.kernel.org/all/20241028015847.42344-1-hal.feng@starfivetech.com/
-v1: https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfivetech.com/
-
-Hal Feng (11):
-  dts: starfive: Switch to using upstream DT
-  riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
-  pcie: starfive: Make the driver compatible with upstream DT
-  riscv: dts: jh7110: Move common code to the new
-    jh7110-common-u-boot.dtsi
-  riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
-  board: starfive: spl: Drop the unneeded DT modification code
-  configs: visionfive2: Enable MULTI_DTB_FIT for JH7110 based board DT
-  riscv: dts: jh7110: Support multiple DTBs in a Fit image
-  board: starfive: spl: Fix the wrong use of CONFIG_IS_ENABLED()
-  board: starfive: spl: Support multiple DTBs for JH7110 based boards
-  riscv: cpu: jh7110: Sort the list of imply statements
-
- arch/riscv/cpu/jh7110/Kconfig                 |  19 +-
- arch/riscv/dts/Makefile                       |   1 -
- arch/riscv/dts/jh7110-common-u-boot.dtsi      | 198 +++++
- arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  10 +
- .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
- .../jh7110-starfive-visionfive-2-u-boot.dtsi  | 117 ---
- ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
- ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  14 +
- .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
- .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
- arch/riscv/dts/jh7110-u-boot.dtsi             |  36 +-
- arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
- board/starfive/visionfive2/spl.c              | 391 +--------
- configs/starfive_visionfive2_defconfig        |   4 +-
- drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
- drivers/clk/starfive/clk-jh7110.c             |  44 +-
- drivers/pci/pcie_starfive_jh7110.c            |  59 +-
- .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
- .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
- 19 files changed, 369 insertions(+), 2135 deletions(-)
- create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
- create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
- create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
- create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
- create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
- delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
- delete mode 100644 arch/riscv/dts/jh7110.dtsi
- delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
- delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
-
-
-base-commit: 0e6432e19f9c812b4986ca7fd8e6db9fd2c199d3
+diff --git a/drivers/pci/pcie_starfive_jh7110.c b/drivers/pci/pcie_starfive_jh7110.c
+index 569fbfd35c..51aca7359f 100644
+--- a/drivers/pci/pcie_starfive_jh7110.c
++++ b/drivers/pci/pcie_starfive_jh7110.c
+@@ -25,13 +25,19 @@
+ #include "pcie_plda_common.h"
+ 
+ /* system control */
+-#define STG_SYSCON_K_RP_NEP_MASK               BIT(8)
++#define STG_SYSCON_PCIE0_BASE                  0x48
++#define STG_SYSCON_PCIE1_BASE                  0x1f8
++
++#define STG_SYSCON_AR_OFFSET                   0x78
+ #define STG_SYSCON_AXI4_SLVL_ARFUNC_MASK       GENMASK(22, 8)
+ #define STG_SYSCON_AXI4_SLVL_ARFUNC_SHIFT      8
++#define STG_SYSCON_AW_OFFSET                   0x7c
+ #define STG_SYSCON_AXI4_SLVL_AWFUNC_MASK       GENMASK(14, 0)
+ #define STG_SYSCON_CLKREQ_MASK                 BIT(22)
+ #define STG_SYSCON_CKREF_SRC_SHIFT             18
+ #define STG_SYSCON_CKREF_SRC_MASK              GENMASK(19, 18)
++#define STG_SYSCON_RP_NEP_OFFSET               0xe8
++#define STG_SYSCON_K_RP_NEP_MASK               BIT(8)
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -41,9 +47,7 @@ struct starfive_pcie {
+ 	struct reset_ctl_bulk	rsts;
+ 	struct gpio_desc	reset_gpio;
+ 	struct regmap *regmap;
+-	u32 stg_arfun;
+-	u32 stg_awfun;
+-	u32 stg_rp_nep;
++	unsigned int stg_pcie_base;
+ };
+ 
+ static int starfive_pcie_atr_init(struct starfive_pcie *priv)
+@@ -92,7 +96,6 @@ static int starfive_pcie_get_syscon(struct udevice *dev)
+ 	struct starfive_pcie *priv = dev_get_priv(dev);
+ 	struct udevice *syscon;
+ 	struct ofnode_phandle_args syscfg_phandle;
+-	u32 cells[4];
+ 	int ret;
+ 
+ 	/* get corresponding syscon phandle */
+@@ -117,20 +120,6 @@ static int starfive_pcie_get_syscon(struct udevice *dev)
+ 		return -ENODEV;
+ 	}
+ 
+-	/* get syscon register offset */
+-	ret = dev_read_u32_array(dev, "starfive,stg-syscon",
+-				 cells, ARRAY_SIZE(cells));
+-	if (ret) {
+-		dev_err(dev, "Get syscon register err %d\n", ret);
+-		return -EINVAL;
+-	}
+-
+-	dev_dbg(dev, "Get syscon values: %x, %x, %x\n",
+-		cells[1], cells[2], cells[3]);
+-	priv->stg_arfun = cells[1];
+-	priv->stg_awfun = cells[2];
+-	priv->stg_rp_nep = cells[3];
+-
+ 	return 0;
+ }
+ 
+@@ -138,8 +127,9 @@ static int starfive_pcie_parse_dt(struct udevice *dev)
+ {
+ 	struct starfive_pcie *priv = dev_get_priv(dev);
+ 	int ret;
++	u32 domain_nr;
+ 
+-	priv->plda.reg_base = (void *)dev_read_addr_name(dev, "reg");
++	priv->plda.reg_base = (void *)dev_read_addr_name(dev, "apb");
+ 	if (priv->plda.reg_base == (void __iomem *)FDT_ADDR_T_NONE) {
+ 		dev_err(dev, "Missing required reg address range\n");
+ 		return -EINVAL;
+@@ -147,7 +137,7 @@ static int starfive_pcie_parse_dt(struct udevice *dev)
+ 
+ 	priv->plda.cfg_base =
+ 		(void *)dev_read_addr_size_name(dev,
+-						"config",
++						"cfg",
+ 						&priv->plda.cfg_size);
+ 	if (priv->plda.cfg_base == (void __iomem *)FDT_ADDR_T_NONE) {
+ 		dev_err(dev, "Missing required config address range");
+@@ -172,7 +162,18 @@ static int starfive_pcie_parse_dt(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
+-	ret = gpio_request_by_name(dev, "reset-gpios", 0, &priv->reset_gpio,
++	ret = dev_read_u32(dev, "linux,pci-domain", &domain_nr);
++	if (ret) {
++		dev_err(dev, "Can't get pci domain: %d\n", ret);
++		return ret;
++	}
++
++	if (domain_nr == 0)
++		priv->stg_pcie_base = STG_SYSCON_PCIE0_BASE;
++	else
++		priv->stg_pcie_base = STG_SYSCON_PCIE1_BASE;
++
++	ret = gpio_request_by_name(dev, "perst-gpios", 0, &priv->reset_gpio,
+ 				   GPIOD_IS_OUT);
+ 	if (ret) {
+ 		dev_err(dev, "Can't get reset-gpio: %d\n", ret);
+@@ -208,12 +209,12 @@ static int starfive_pcie_init_port(struct udevice *dev)
+ 	/* Disable physical functions except #0 */
+ 	for (i = 1; i < PLDA_FUNC_NUM; i++) {
+ 		regmap_update_bits(priv->regmap,
+-				   priv->stg_arfun,
++				   priv->stg_pcie_base + STG_SYSCON_AR_OFFSET,
+ 				   STG_SYSCON_AXI4_SLVL_ARFUNC_MASK,
+ 				   (i << PLDA_PHY_FUNC_SHIFT) <<
+ 				   STG_SYSCON_AXI4_SLVL_ARFUNC_SHIFT);
+ 		regmap_update_bits(priv->regmap,
+-				   priv->stg_awfun,
++				   priv->stg_pcie_base + STG_SYSCON_AW_OFFSET,
+ 				   STG_SYSCON_AXI4_SLVL_AWFUNC_MASK,
+ 				   i << PLDA_PHY_FUNC_SHIFT);
+ 
+@@ -222,11 +223,11 @@ static int starfive_pcie_init_port(struct udevice *dev)
+ 
+ 	/* Disable physical functions */
+ 	regmap_update_bits(priv->regmap,
+-			   priv->stg_arfun,
++			   priv->stg_pcie_base + STG_SYSCON_AR_OFFSET,
+ 			   STG_SYSCON_AXI4_SLVL_ARFUNC_MASK,
+ 			   0);
+ 	regmap_update_bits(priv->regmap,
+-			   priv->stg_awfun,
++			   priv->stg_pcie_base + STG_SYSCON_AW_OFFSET,
+ 			   STG_SYSCON_AXI4_SLVL_AWFUNC_MASK,
+ 			   0);
+ 
+@@ -273,17 +274,17 @@ static int starfive_pcie_probe(struct udevice *dev)
+ 		return ret;
+ 
+ 	regmap_update_bits(priv->regmap,
+-			   priv->stg_rp_nep,
++			   priv->stg_pcie_base + STG_SYSCON_RP_NEP_OFFSET,
+ 			   STG_SYSCON_K_RP_NEP_MASK,
+ 			   STG_SYSCON_K_RP_NEP_MASK);
+ 
+ 	regmap_update_bits(priv->regmap,
+-			   priv->stg_awfun,
++			   priv->stg_pcie_base + STG_SYSCON_AW_OFFSET,
+ 			   STG_SYSCON_CKREF_SRC_MASK,
+ 			   2 << STG_SYSCON_CKREF_SRC_SHIFT);
+ 
+ 	regmap_update_bits(priv->regmap,
+-			   priv->stg_awfun,
++			   priv->stg_pcie_base + STG_SYSCON_AW_OFFSET,
+ 			   STG_SYSCON_CLKREQ_MASK,
+ 			   STG_SYSCON_CLKREQ_MASK);
+ 
 -- 
 2.43.2
 
