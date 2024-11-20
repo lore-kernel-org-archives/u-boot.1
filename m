@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B204AD63936
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 12:56:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3354D63935
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 12:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0310F89699;
+	by phobos.denx.de (Postfix) with ESMTP id 6193C896AB;
 	Wed, 20 Nov 2024 13:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cVGw7RB6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I5IDzIBe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 724A389417; Wed, 20 Nov 2024 11:25:50 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 22083895F2; Wed, 20 Nov 2024 11:40:48 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E536B893EA
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:25:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 013CF8964F
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:40:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=l.rubusch@gmail.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-6eeb5ee7463so1336137b3.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 02:25:47 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-6e394dea01fso4585377b3.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 02:40:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732098347; x=1732703147; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732099244; x=1732704044; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VuH+YK6gUrpDnasZF/7ZOGaPBc7TCss7cy+ogxqdU/g=;
- b=cVGw7RB6PhQMW6JmQoxG3uYmhHIxrvH44Oz7oj0zolSSUqAMf8L++TPOTQ9qG/ozRI
- MqVrhoAVdozgjAq/Jtg7PN4wLa2hKai9vfdPdtZ+E8RZOVcgcn7KWlqWQToUt8sTm62V
- oE2bIghMPlYKgb4Q+wiwlm17xfILX/RTAXghokhagLh49Ulh5azE+zcAq7diMS/c15Dm
- VT5n6tiaKuq4mSwv8SMJLQMd9Qh1k2cVOG2kz2NURMfc7OshcNgO3ttj2h0NmKWNH2c4
- TSZD2u1hn0pWzv6TPQ27eOYDAhZYm66JIJI7R+I6duXNopf9v2xJhPwyeTL6tzWl/PcB
- sVKw==
+ bh=SM0yV0SdAJ9vM4zJB2ZoY4NP9oswK0lJTJQTJrpk2YU=;
+ b=I5IDzIBexd81/pyU3STCLICu8rOIcWTz1V8HpANwdPG5oMbivg9osUl6ud1uO+KAvd
+ KzgbiqcM6F2if6ha8tLMc1CURxxOdVObChpaEcO8ajRIub6Ohe2blaYNG4+HibH61AA+
+ 9mi50fPLY72lK3NFqN66OPy0WqYCRkyr90FtdeNRKKNn76txy9i7Txm8HEloiLFkOTo6
+ 160uzHliM/1JBDj7uZMw4mvFsR7sul0q+DU1NfiRCcb9ykf6KFAskvs8B7T6BRW1/0dR
+ 0nmcKyJ94OnCtZZU8+bXFBs0pJBmBiQx+mAIul0KYxz4Kg3S6cSJxEqMbIg1bSVsHKKw
+ XKeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732098347; x=1732703147;
+ d=1e100.net; s=20230601; t=1732099244; x=1732704044;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VuH+YK6gUrpDnasZF/7ZOGaPBc7TCss7cy+ogxqdU/g=;
- b=Os7DuG/ZIrQbvy/IpNpRFVr2IWym3ZUJVIpB8vh7jd4KA0RfjW0DjdCChPCxlm5XTX
- zIHZzTwsbWofgNDcHgUAfTVtYCIn+3zWzVRG9maOVZ2RNq2lD0BdPjvJL73AQGowyjZy
- bJt8cPFqYgXP4RPTbaQ67koQPQyh8sd2oFUZ3byptwg7lcs2KF3YDfzV3Wq4EvMxC7UP
- CAqnpU6ywchekLNNyuB/u+0Bp0DVEpSU3wA6pAHJhky2wItWigIEWGNKY/7o4TbbAiR+
- KeSPqDsBo3uFckJNb8F/iQz361zwFgNFtgqYh6VM/hFD0Ap1x8/wwLAZ3eDcYU49PCcJ
- Vb1A==
+ bh=SM0yV0SdAJ9vM4zJB2ZoY4NP9oswK0lJTJQTJrpk2YU=;
+ b=qiblfpP+l4V8u12zGaCxCgtrP3EjBrtHPmUhVMHe7Pc+ZctfvXhmZLNdNctZk1dSgJ
+ 0jEYoOV9ynGUmP1Q/ROBdqmUi1gzq/siunauZPcCrkM+SsyDv+8ngnkRIgU6apOY/KkM
+ lHQVRasLTcL5/SctrTyOnkItOrQFpV9IpYmfasEUYgNxRyCCu3FHTwi3/8UvLJ1bPTwE
+ SwL8UWyL3iQl6QoBPPuBRLmNnPPJ+zd+A+tgvl1MjUb+AmKGUzHoB/WKSWMtSIh4rjHd
+ HF7UiNLRLagkXr5k4DB0pQtA9wlmdesCW78h3lSt1cewHHo9oSzBNcUx9JyIxPBVbZW1
+ so2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUarlrqIJ+IU32kfcH+hkfNHP+zV38amAX9z+OMmX1OA/dRpWeeYGYF/GZ1xsAoV+LKJOVMNc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0JTPjAD3vxQM1bHe3k5yjpbPpu6STA/AHEyhNhYzsn/+7ND11
- A0UNwRj8wZ0zJD8a7TxmlpJBtDIq/8ciWCUMuoe6uNEt9rKeKqsb6DBPGS9MqVejRwR4mm/X24V
- OU/00IRCA7NdRCvB6s2uDcpfFJYw=
-X-Gm-Gg: ASbGncuTDEheqn0p1gCTtMg8Tn6j5nlYdCmPWJ2iuYH85c8KHIleghsQ2MFIqbgahzt
- QOv5BZT9GUoA0s6+ZwBOmj1IcRE95roQ=
-X-Google-Smtp-Source: AGHT+IHQykBdLsnwEZikINeDVw36Hr9QrQMiAHgn2a1bnGgcwx9ba+S9G3m5jcU4iZ3NcOcuKz1hTqxof1qCsy6ITIg=
-X-Received: by 2002:a05:690c:6ac8:b0:6ee:b774:fff7 with SMTP id
- 00721157ae682-6eebd2b0490mr8736537b3.10.1732098346687; Wed, 20 Nov 2024
- 02:25:46 -0800 (PST)
+ AJvYcCXhDQ8kPHAHdlDZYOrK3/fAc1To7noMYJdHfr4dcYEVo4P6sUHkgnD/6PixFH8skbHVdtduDH0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yylce/Tb/I8zO5qFRmEij5+VtsqTKa4tPg6tp88EL2Fh8uRzL+E
+ 7fIjH3jjBJg0k+GSPmx04sTMrnPT1R9tANCQC+w4+m6Fgekiqxxkg1fIMAXQgWiquNNeo9Aiv1R
+ AhSgIY0JNogRbtTS/ukLqAakqgZI=
+X-Gm-Gg: ASbGnctXS7u6zgy7mQLFCXALOVLOtxbOszCnO4fLxq+lwkJVY8AmfDnzFz8C+Flst/6
+ y42kf2JizU7SSQB7YUDTfBW/RIPxRzyI=
+X-Google-Smtp-Source: AGHT+IGz3s8QZNz+onwtCpmtHGMGTJgdwzoUXjljNwDZx+oUy3z23abbZ3mWHSQ+SmrgZWSzeD+t1xhgicTcwE03+/I=
+X-Received: by 2002:a05:690c:6286:b0:6ee:510c:49b7 with SMTP id
+ 00721157ae682-6eebcfaaefbmr8174497b3.0.1732099243704; Wed, 20 Nov 2024
+ 02:40:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20241119222837.27550-1-l.rubusch@gmail.com>
- <20241119222837.27550-3-l.rubusch@gmail.com>
- <2BD68232-B09D-4F0C-9969-B90230A6FB90@gmx.de>
-In-Reply-To: <2BD68232-B09D-4F0C-9969-B90230A6FB90@gmx.de>
+ <20241119222837.27550-4-l.rubusch@gmail.com>
+ <2FEF61FF-5C03-40E0-B962-34E972C2B9B5@gmx.de>
+In-Reply-To: <2FEF61FF-5C03-40E0-B962-34E972C2B9B5@gmx.de>
 From: Lothar Rubusch <l.rubusch@gmail.com>
-Date: Wed, 20 Nov 2024 11:25:10 +0100
-Message-ID: <CAFXKEHbJ3fYNgD_Mxxi30FpX+habBOr2WmkcGjw_6=4b0X8nkA@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] doc: develop: Fix typos and wording in gdb.rst
+Date: Wed, 20 Nov 2024 11:40:07 +0100
+Message-ID: <CAFXKEHZ39=V3DZpbS-OG+YZ5602u1K0EAwywUPZAEx-Hrnn=sQ@mail.gmail.com>
+Subject: Re: [PATCH v1 3/3] doc: develop: Fix typos and wording in
+ binman/entries.rst
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: sjg@chromium.org, trini@konsulko.com, alpernebiyasak@gmail.com, 
  ada@thorsis.com, mkorpershoek@baylibre.com, 
@@ -100,61 +101,50 @@ X-Virus-Status: Clean
 Hi, thank you all! This is outstanding, such a fast feedback! As I
 also just ran a tool over the texts, adjusted formatting and
 reverted/accepted some changes manually to my knowledge (I'm not a
-native speaker).
+native speaker). Please, could you clarify the following?
 
-On Tue, Nov 19, 2024 at 11:48=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@g=
+On Wed, Nov 20, 2024 at 12:02=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
 mx.de> wrote:
 >
-> Am 19. November 2024 23:28:36 MEZ schrieb Lothar Rubusch <l.rubusch@gmail=
+> Am 19. November 2024 23:28:37 MEZ schrieb Lothar Rubusch <l.rubusch@gmail=
 .com>:
-> >Fix some typos and duplicate words in gdb.rst.
 [...]
-> >     CONFIG_CC_OPTIMIZE_FOR_DEBUG=3Dy
-> >@@ -24,8 +24,8 @@ Otherwise build, install, and run U-Boot as usual.
-> > Using OpenOCD as GDB server
-> > ---------------------------
+> > Note that some entries are subclasses of others, using and extending th=
+eir
+> >-features to produce new behaviours.
+> >+features to produce new behaviors.
 > >
-> >-`OpenOCD <https://openocd.org/>`_ is an open source tool supporting har=
-dware
-> >-debug probes, and providing a GDB server. It is readily available in ma=
-jor Linux
-> >+`OpenOCD <https://openocd.org/>`_ is an open-source tool supporting har=
-dware
-> >+debug probes and provide a GDB server. It is readily available in major=
- Linux
 >
-> Thanks for the patch.
+> The project once used to prefer British English.
+
+So, I shall revert to the original rather British i.e. "behaviour" and
+"rationalise" wording, correct?
+
+[...]
+> >-Entry: alternates-fdt: Entry that generates alternative sections for ea=
+ch devicetree provided
+> >+Entry: alternates-fdt: Entry that generates alternative sections for ea=
+ch device-tree provided
 >
-> 'tool' is singular. You cannot use 'provide' here.
+> 'Devicetree' is a frequently used spelling variant, cf. https://www.devic=
+etree.org/ .
 
-Ok.
+Since I found "device tree", "devicetree" and "device-tree", could you
+please advice me, what is the preferred term here?
 
-> > distributions or you can build it from source.
-> >
-> > Here is example of starting OpenOCD on Debian using a J-Link adapter an=
-d a
-> >@@ -124,7 +124,7 @@ with the command *bdinfo*:
-> >     Early malloc usage: cd8 / 2000
-> >
-> > Look out for the line starting with *relocaddr* which has the address
-> >-you need, ``0x27f7a000`` in this case.
-> >+You need, ``0x27f7a000`` in this case.
+[...]
+> >@@ -214,7 +214,7 @@ icons, for example. For verified boot it could be us=
+ed for each part of the
+> > image (e.g. separate FIPs for A and B) but cannot describe the whole
+> > firmware image. As with FMAP there is no hierarchy defined, although FM=
+AP
+> > works around this by having 'section' areas which encompass others. A
+> >-similar workaround would be possible with FIP but is not currently defi=
+ned.
+> >+similar workaround would be possible with FIP but it is not currently d=
+efined.
 >
-> You is only capitalized at the start of sentences.
+> Both versions seem to be correct English.
 
-Ok.
-
-> >
-> > On most architectures (not sandbox, x86, Xtensa) the global data pointe=
-r is
-> > stored in a fixed register:
-> >@@ -144,7 +144,7 @@ riscv        gp
-> > sh           r13
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D
-> >
-> >-On these architecture the relocation address cat be determined by
-> >+On this architecture the relocation address can be determined by
->
-> On these architectures ...
-
-Ok.
+I understand. My tool here claimed to do it a bit more formal. I have
+no idea, to be honest. Shall I revert it and better leave as is?
