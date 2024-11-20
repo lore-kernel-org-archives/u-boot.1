@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CE9D6E2CF
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 08:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7C68D6E2DE
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E4BA891E8;
-	Wed, 20 Nov 2024 09:19:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A840C8877E;
+	Wed, 20 Nov 2024 10:03:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CdjuV+ED";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="q8DxcbCu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B98089666; Wed, 20 Nov 2024 09:19:10 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 703328964F; Wed, 20 Nov 2024 10:03:45 +0100 (CET)
+Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE6FD88C0F
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 09:19:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82AE98916D
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:03:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2fb49510250so50012191fa.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 00:19:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732090747; x=1732695547; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WtVBcGvCBPZzLVLizXIMiWxIcRO/VS7KioK3Ew0h3fI=;
- b=CdjuV+EDqZ2FiHuq+RWazRgCgTRpnH6SasbNjhaz/Fu34H6DybRVuHXkySoVLd4JQK
- HqZlugpXBBhCs44Vche3kFVKTcY9tVOe6RnFcxKK0eRMB+nRIOfX6wD+uXC/jQtMx8RL
- My7xOjCLb+GtTiwIxBj2zC02IXxmBzbJxD49J6y275hkQxx9EpQp8xwNmbgf1zoTrUyz
- ZCqbRLZmBG4qTGuArMfrDiH4uaEqhRPDkF7m3K02kkwf/3ShPf9aIma/IDEc3abnjo3A
- 8W+OiSIdhNKvrglhrJbF3Tdq/DYqV639PkSOQ5QLAV3/YxJuqU2ZE7dsJS7PZTEG8rpO
- ii/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732090747; x=1732695547;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WtVBcGvCBPZzLVLizXIMiWxIcRO/VS7KioK3Ew0h3fI=;
- b=bnwOcPzEtjVztxZcl7cI+7Cw3wsFJGXL/AdJCTCPSrqxQcNHCOAtMUcKEpuvthURFK
- 81wdZH4mXS8UarO3YXJ9o0CG4oPpQqO8pJoL87Ph/XceF1xhSDOGh82byGvx5Vt+whzi
- 1KWW+jEu4rRlm1b/p2YFHhIO8wOhalUsYQ4S2YX+zpQBGcAs6IFpTPterQsddhPxLuTM
- Cmd/KyjZ2+ewLL5DPDJW344F9uORBlNJN1DXGaabUZd0D6N035Yb4WfBUrSOL7zhlXy4
- b0+7svbIAxXnYhRZUEsfbb6i0DtimGHsXan4WhvmeZsDH72YCL8maFF8IAvzJdZAxf7L
- Wsfw==
-X-Gm-Message-State: AOJu0Yw67JS61EXKPIXCAp15u3Z5uJ+VhBB0046IX+UHfrwJQ6Qsc7QK
- TZSbi/XdUCgnfvsbBBtiyePBdnBPP2P4YzoZDurLWTE2oDz7B800u9gMip6P07uquhXgVDVvMtO
- 0ArCGQotL1ugQgpXtW8YWaFAEYkM=
-X-Google-Smtp-Source: AGHT+IF9aBD4YUiqI8PUTR7vL/dLyEtjThirmymQ5NX1ufGcRuVTad21zZmwK4MtuGLW26rGVYHWfrK26/CRnlLvqDM=
-X-Received: by 2002:a05:651c:154c:b0:2fb:6027:7c0a with SMTP id
- 38308e7fff4ca-2ff8db66029mr11665591fa.8.1732090746803; Wed, 20 Nov 2024
- 00:19:06 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+ References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=O63v5S3MscQ9f5pEFpkcPUL7Q0yIOPqAwWIsTJ7n79Q=; b=q8DxcbCuzFfeU2LHETTIXymdQH
+ 4HWNChMhxE0/RhVXJBsiphzNP46lVTAtFaa9TPpkZIjT5dWE1gZevJ+SVEgiS0N3l84AaxLsKkwv9
+ 5QSm+9HtSlKbRikfDxWkMl4c6DiG8Ro0k2vSAGf2XdwKXoFQdX8Z2CFdOHaujKJJu9+tAzaf09trv
+ /3yVss+SlpmNZ2ARjoctZFdRtvnnW6+3M6LIgkL1YWIgqMvSTrycxKKpduycPGXUmxuSk3eEGB5Wu
+ YU9K2IfSAApz52qgm0HXsRvNSCUE+Gk2k2/O8dGDzSewk5vxMdOUk/R9oiHzkHmE6sLLmjhcukW6Q
+ LrHr0trA==;
+Received: from [89.212.21.243] (port=41650 helo=[192.168.69.116])
+ by cpanel.siel.si with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
+ (envelope-from <primoz.fiser@norik.com>) id 1tDgcf-00CsD0-06;
+ Wed, 20 Nov 2024 10:03:41 +0100
+Message-ID: <8981f0ad-78c8-41a4-96de-31c25905b632@norik.com>
+Date: Wed, 20 Nov 2024 10:03:40 +0100
 MIME-Version: 1.0
-References: <CANV2PTN5AbNpCu4TGhZ87q_Eyeemxxwu5m=QjwKVS967x8hbnQ@mail.gmail.com>
- <CADg8p94ohYfNLL8jbRA-hNd=fbg9PuVJvp0z-QYTeaGwHZ9q0Q@mail.gmail.com>
- <CANV2PTNdcc61CUTF9_zammmAugjVQOth=UFPiZv3=Qw_YX5RkA@mail.gmail.com>
- <CADg8p97RHvZG23fE8grvE5DzScT+okV-6qSHv_gQUiwggKDtJQ@mail.gmail.com>
-In-Reply-To: <CADg8p97RHvZG23fE8grvE5DzScT+okV-6qSHv_gQUiwggKDtJQ@mail.gmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Wed, 20 Nov 2024 00:18:55 -0800
-Message-ID: <CANV2PTP-17Z-MUa8-3mcAHduxzPqb6VN-ZKZS31XkwQ-2X1+8A@mail.gmail.com>
-Subject: Re: [BUG regression in HEAD] efi: memory: use the lmb API's for
- allocating and freeing memory
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] board: phytec: phycore-imx93: Add 2GB LPDDR4X RAM
+ timings
+To: Christoph Stoidner <c.stoidner@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yannic Moog <y.moog@phytec.de>, Andrej Picej <andrej.picej@norik.com>,
+ Wadim Egorov <w.egorov@phytec.de>
+References: <20241119162907.17934-1-c.stoidner@phytec.de>
+ <20241119162907.17934-2-c.stoidner@phytec.de>
+From: Primoz Fiser <primoz.fiser@norik.com>
+Content-Language: en-US
+Autocrypt: addr=primoz.fiser@norik.com; keydata=
+ xjMEZrROOxYJKwYBBAHaRw8BAQdAADVOb5tiLVTUAC9nu/FUl4gj/+4fDLqbc3mk0Vz8riTN
+ JVByaW1veiBGaXNlciA8cHJpbW96LmZpc2VyQG5vcmlrLmNvbT7CiQQTFggAMRYhBK2YFSAH
+ ExsBZLCwJGoLbQEHbnBPBQJmtE47AhsDBAsJCAcFFQgJCgsFFgIDAQAACgkQagttAQducE+T
+ gAD+K4fKlIuvH75fAFwGYG/HT3F9mN64majvqJqvp3gTB9YBAL12gu+cm11m9JMyOyN0l6Os
+ jStsQFghPkzBSDWSDN0NzjgEZrROPBIKKwYBBAGXVQEFAQEHQP2xtEOhbgA+rfzvvcFkV1zK
+ 6ym3/c/OUQObCp50BocdAwEIB8J4BBgWCAAgFiEErZgVIAcTGwFksLAkagttAQducE8FAma0
+ TjwCGwwACgkQagttAQducE8ucAD9F1sXtQD4iA7Qu+SwNUAp/9x7Cqr37CSb2p6hbRmPJP8B
+ AMYR91JYlFmOJ+ScPhQ8/MgFO+V6pa7K2ebk5xYqsCgA
+Organization: Norik systems d.o.o.
+In-Reply-To: <20241119162907.17934-2-c.stoidner@phytec.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
+ primoz.fiser@norik.com
+X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,274 +99,1121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all, (on-list)
+Tested on phyBOARD-Nash-i.MX93 with phyCORE-i.MX93 2GiB SOM
 
-On Tue, Nov 19, 2024 at 9:14=E2=80=AFPM Sughosh Ganu <sughosh.ganu@linaro.o=
-rg> wrote:
->
-> On Wed, 20 Nov 2024 at 10:09, E Shattow <lucent@gmail.com> wrote:
-> >
-> > On Tue, Nov 19, 2024 at 6:42=E2=80=AFPM Sughosh Ganu <sughosh.ganu@lina=
-ro.org> wrote:
-> > >
-> > > On Wed, 20 Nov 2024 at 04:48, E Shattow <lucent@gmail.com> wrote:
-> > > >
-> > > > Hello,
-> > > >
-> > > > On HEAD some commits after v2024.10 I encounter a regression for
-> > > > `bootefi bootmgr` fail with error "Not a PE-COFF file";  The fall-t=
-hru
-> > > > case of global EFI boot is successful.
-> > > >
-> > > > Having run a git bisect I discover the first bad commit 22f2c9ed:
-> > > >
-> > > > $ git checkout -b master origin/master
-> > > > branch 'master' set up to track 'origin/master'.
-> > > > Switched to a new branch 'master'
-> > > > $ git bisect start
-> > > > status: waiting for both good and bad commits
-> > > > $ git bisect bad HEAD
-> > > > status: waiting for good commit(s), bad commit known
-> > > > $ git bisect good v2024.10
-> > > > Bisecting: 850 revisions left to test after this (roughly 10 steps)
-> > > > [82686e678e1587ddbd9570f82c58cdc3aecf2dbe] Merge branch 'staging' o=
-f
-> > > > https://source.denx.de/u-boot/custodians/u-boot-tegra
-> > > > $ git bisect good
-> > > > Bisecting: 422 revisions left to test after this (roughly 9 steps)
-> > > > [8963d433eb5d4a9f3a9def84e9c61a45c13e72bc] Merge tag
-> > > > 'u-boot-rockchip-20241026' of
-> > > > https://gitlab.denx.de/u-boot/custodians/u-boot-rockchip
-> > > > $ git bisect bad
-> > > > Bisecting: 214 revisions left to test after this (roughly 8 steps)
-> > > > [0a504585d1cefeaf35ae8f860a5e5aa44dfffed5] arm: dts: k3-j722s-binma=
-n:
-> > > > Add support for HS-SE
-> > > > $ git bisect bad
-> > > > Bisecting: 106 revisions left to test after this (roughly 7 steps)
-> > > > [88057dab2cde8710ccc95d12fb312184e0b023ca] mtd: spi-nor: Allow flas=
-hes
-> > > > to specify MTD writesize
-> > > > $ git bisect good
-> > > > Bisecting: 53 revisions left to test after this (roughly 6 steps)
-> > > > [625d40ab120dbc6f45dbd975857f8f87e422bd0f] test: boot: fix
-> > > > bootflow_cmd_label for when DSA_SANDBOX is disabled
-> > > > $ git bisect bad
-> > > > Bisecting: 26 revisions left to test after this (roughly 5 steps)
-> > > > [5b9261fb0b1ed087387f2036d279fd3f4bb20a61] Makefile: Drop
-> > > > SPL_FIT_GENERATOR support
-> > > > $ git bisect good
-> > > > Bisecting: 13 revisions left to test after this (roughly 4 steps)
-> > > > [e1b6822d6522d94d579d53092342b542d368a04b] efi_memory: do not add R=
-AM
-> > > > memory to the memory map
-> > > > $ git bisect bad
-> > > > Bisecting: 6 revisions left to test after this (roughly 3 steps)
-> > > > [2f6191526a1325b6ddb59795a093eca69dbf8976] lmb: notify of any chang=
-es
-> > > > to the LMB memory map
-> > > > $ git bisect bad
-> > > > Bisecting: 2 revisions left to test after this (roughly 2 steps)
-> > > > [3c6896ad2fb876b0a23202f62a83c0d44380c9ea] lmb: add a flag to allow
-> > > > suppressing memory map change notification
-> > > > $ git bisect good
-> > > > Bisecting: 0 revisions left to test after this (roughly 1 step)
-> > > > [22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1] efi: memory: use the lmb
-> > > > API's for allocating and freeing memory
-> > > > $ git bisect bad
-> > > > Bisecting: 0 revisions left to test after this (roughly 0 steps)
-> > > > [eb052cbb896fee6f947765b44b0d80a54b19ce1a] lmb: add and reserve mem=
-ory
-> > > > above ram_top
-> > > > $ git bisect good
-> > > > 22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1 is the first bad commit
-> > > >
-> > > > A commit is good if Star64 boots and absent the error about "Not a
-> > > > PE-COFF file" (duly confirmed by eficonfig to adjust boot order
-> > > > allowing removable media of an OS installer image on SD Card to be =
-the
-> > > > priority, verifying that the installer runs as expected).  A commit=
- is
-> > > > bad if U-Boot crashes and/or has the error "Not a PE-COFF file".
-> >
-> > >
-> > > Can you post the output of the following. Thanks.
-> >
-> > >
-> > > 1) running the 'bdinfo' command
-> >
-> > U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> > ...
-> > StarFive # bdinfo
-> > boot_params =3D 0x0000000000000000
-> > DRAM bank   =3D 0x0000000000000000
-> > -> start    =3D 0x0000000040000000
-> > -> size     =3D 0x0000000100000000
-> > flashstart  =3D 0x0000000000000000
-> > flashsize   =3D 0x0000000000000000
-> > flashoffset =3D 0x0000000000000000
-> > baudrate    =3D 115200 bps
-> > relocaddr   =3D 0x00000000fff46000
-> > reloc off   =3D 0x00000000bfd46000
-> > Build       =3D 64-bit
-> > current eth =3D ethernet@16030000
-> > ethaddr     =3D 6c:cf:39:00:75:63
-> > IP addr     =3D <NULL>
-> > fdt_blob    =3D 0x00000000ff72da20
-> > lmb_dump_all:
-> >  memory.count =3D 0x1
-> >  memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: none
-> >  reserved.count =3D 0x2
-> >  reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-map
-> >  reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-ove=
-rwrite
-> > devicetree  =3D board
-> > serial addr =3D 0x0000000010000000
-> >  width      =3D 0x0000000000000004
-> >  shift      =3D 0x0000000000000002
-> >  offset     =3D 0x0000000000000000
-> >  clock      =3D 0x00000000016e3600
-> > boot hart   =3D 0x0000000000000001
-> > firmware fdt=3D 0x0000000042200000
-> >
-> > U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -080=
-0)
-> > ...
-> > StarFive # bdinfo
-> > boot_params =3D 0x0000000000000000
-> > DRAM bank   =3D 0x0000000000000000
-> > -> start    =3D 0x0000000040000000
-> > -> size     =3D 0x0000000100000000
-> > flashstart  =3D 0x0000000000000000
-> > flashsize   =3D 0x0000000000000000
-> > flashoffset =3D 0x0000000000000000
-> > baudrate    =3D 115200 bps
-> > relocaddr   =3D 0x00000000fff46000
-> > reloc off   =3D 0x00000000bfd46000
-> > Build       =3D 64-bit
-> > current eth =3D ethernet@16030000
-> > ethaddr     =3D 6c:cf:39:00:75:63
-> > IP addr     =3D <NULL>
-> > fdt_blob    =3D 0x00000000ff72da10
-> > lmb_dump_all:
-> >  memory.count =3D 0x1
-> >  memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: non=
-e
-> >  reserved.count =3D 0x3
-> >  reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
-> >  reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-ove=
-rwrite
-> >  reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
-> > no-notify, no-overwrite
-> > devicetree  =3D board
-> > serial addr =3D 0x0000000010000000
-> >  width      =3D 0x0000000000000004
-> >  shift      =3D 0x0000000000000002
-> >  offset     =3D 0x0000000000000000
-> >  clock      =3D 0x00000000016e3600
-> > boot hart   =3D 0x0000000000000001
-> > firmware fdt=3D 0x0000000042200000
-> >
-> > Differences in bdinfo output between working (parent of the
-> > regression) and non-working (origin/master) version:
-> >
-> > -fdt_blob    =3D 0x00000000ff72da20
-> > +fdt_blob    =3D 0x00000000ff72da10
-> >  lmb_dump_all:
-> >   memory.count =3D 0x1
-> > - memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: non=
-e
-> > - reserved.count =3D 0x2
-> > - reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-ma=
-p
-> > - reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-ov=
-erwrite
-> > + memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: no=
-ne
-> > + reserved.count =3D 0x3
-> > + reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
-> > + reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-ov=
-erwrite
-> > + reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
-> > no-notify, no-overwrite
-> >
-> > >
-> > > 2) do you get any errors when running the 'bootefi bootmgr' command
-> > > other than what you mention above
-> > >
-> >
-> > U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> > ...
-> > StarFive # bootefi bootmgr
-> > Booting: mmc 0
-> > error: no suitable video mode found.
-> >
-> > U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -080=
-0)
-> > ...
-> > StarFive # bootefi bootmgr
-> > Card did not respond to voltage select! : -110
-> > Not a PE-COFF file
-> > Loading Boot0000 'mmc 0' failed
-> > Loading Boot0001 'nvme 0' failed
-> > EFI boot manager: Cannot load any image
-> >
-> > > 3) What exactly do you mean by "global EFI boot is successful"
-> > >
-> >
-> > I don't know what the correct name of it is. EFI can boot with what I
-> > am labeling as global EFI boot and searching for fixed path names (?),
-> > or I guess it can decide from EFI variables what to do which I
-> > consider to be the user-configured EFI boot. One of these (the
-> > user-configured EFI boot) is broken since the regression.
-> >
-> > U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> > ...
-> > Card did not respond to voltage select! : -110
-> > Failed to load EFI variables
-> > ** Booting bootflow '<NULL>' with efi_mgr
-> > Booting: mmc 0
-> > error: no suitable video mode found.
-> >
-> > U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -080=
-0)
-> > ...
-> > Card did not respond to voltage select! : -110
-> > Failed to load EFI variables
-> > ** Booting bootflow '<NULL>' with efi_mgr
-> > Not a PE-COFF file
-> > Loading Boot0000 'mmc 0' failed
-> > Loading Boot0001 'nvme 0' failed
-> > EFI boot manager: Cannot load any image
-> > Boot failed (err=3D-14)
-> > ** Booting bootflow 'mmc@16010000.bootdev.part_1' with efi
-> > Booting /\EFI\BOOT\BOOTRISCV64.EFI
-> > error: no suitable video mode found.
->
-> Based on the logs above, it seems like you are booting using the
-> bootmeth efi_mgr? If so, can you try disabling the bootstd config. I
-> might be wrong, but I remember some issues with the bootstd efi_mgr
-> method on some other platform. Also, are you available on irc?
->
-> -sughosh
->
-> > > -sughosh
-> > >
-> > > >
-> > > > For context, the Star64 eMMC contains here an installed Debian Linu=
-x
-> > > > OS in the usual way with Grub2 EFI on the EFI System Partition ther=
-e,
-> > > > and that image boots fine from U-Boot v2024.10 also when loaded int=
-o
-> > > > memory and using 'bootefi' directly on that memory address.
-> > > >
-> >
-> > Thanks,
-> >
-> > -E Shattow
+Link: https://gist.github.com/pfiser/d5766c95f5639e6a9852c94412f39eb5
 
-Confirming that some discussion about this happened off-list with a
-positive result and now awaiting a fix.
+Tested-by: Primoz Fiser <primoz.fiser@norik.com>
 
-Thanks very much!  -E
+
+On 19. 11. 24 17:29, Christoph Stoidner wrote:
+> The phyCORE-i.MX 93 is available with a 1GB ram chip or a 2GB ram chip.
+> Add the ram timings for the 2GB chip, in form of a diff compared
+> to the existing LPDDR4X 1GB timings. With that, the SPL can select the
+> appropriate timings at startup.
+> Update also the 1GB ram timings with new version of the DDR Tool.
+> 
+> Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
+> ---
+> Cc: Mathieu Othacehe <m.othacehe@gmail.com>
+> Cc: Christoph Stoidner <c.stoidner@phytec.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yannic Moog <y.moog@phytec.de>
+> Cc: Primoz Fiser <primoz.fiser@norik.com>
+> Cc: Andrej Picej <andrej.picej@norik.com>
+> Cc: Wadim Egorov <w.egorov@phytec.de>
+> ---
+> No changes in v3
+> 
+> Changes in v2:
+> - remove multiple blank lines
+> - add update of 1GB ram timings to commit message
+> 
+>  board/phytec/phycore_imx93/lpddr4_timing.c | 793 +++++++++++++++++++--
+>  1 file changed, 732 insertions(+), 61 deletions(-)
+> 
+> diff --git a/board/phytec/phycore_imx93/lpddr4_timing.c b/board/phytec/phycore_imx93/lpddr4_timing.c
+> index 2111972a40..f1261f6a92 100644
+> --- a/board/phytec/phycore_imx93/lpddr4_timing.c
+> +++ b/board/phytec/phycore_imx93/lpddr4_timing.c
+> @@ -1,24 +1,24 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright 2023 NXP
+> - * Copyright (C) 2023 PHYTEC Messtechnik GmbH
+> + * Copyright 2024 NXP
+> + * Copyright (C) 2024 PHYTEC Messtechnik GmbH
+>   * Christoph Stoidner <c.stoidner@phytec.de>
+>   *
+> - * Code generated with DDR Tool v1.0.0.
+> + * Code generated with DDR Tool v3.1.0_7.4.
+>   */
+>  
+>  #include <linux/kernel.h>
+>  #include <asm/arch/ddr.h>
+>  
+> +/* Initialize DDRC registers */
+>  static struct dram_cfg_param ddr_ddrc_cfg[] = {
+> -	/** Initialize DDRC registers **/
+>  	{0x4e300110, 0x44100001},
+>  	{0x4e300000, 0x8000bf},
+>  	{0x4e300008, 0x0},
+>  	{0x4e300080, 0x80000412},
+>  	{0x4e300084, 0x0},
+>  	{0x4e300114, 0x1002},
+> -	{0x4e300260, 0x4080},
+> +	{0x4e300260, 0x80},
+>  	{0x4e300f04, 0x80},
+>  	{0x4e300800, 0x43b30002},
+>  	{0x4e300804, 0x1f1f1f1f},
+> @@ -31,18 +31,17 @@ static struct dram_cfg_param ddr_ddrc_cfg[] = {
+>  	{0x4e301254, 0x0},
+>  	{0x4e301258, 0x0},
+>  	{0x4e30125c, 0x0},
+> -
+>  };
+>  
+>  /* dram fsp cfg */
+>  static struct dram_fsp_cfg ddr_dram_fsp_cfg[] = {
+>  	{
+>  		{
+> -			{0x4e300100, 0x24A0421B},
+> +			{0x4e300100, 0x24A0321B},
+>  			{0x4e300104, 0xF8EE001B},
+> -			{0x4e300108, 0x2F263233},
+> -			{0x4e30010C, 0x0005E18B},
+> -			{0x4e300124, 0x1C770000},
+> +			{0x4e300108, 0x2F2E3233},
+> +			{0x4e30010C, 0x0005C18B},
+> +			{0x4e300124, 0x1C790000},
+>  			{0x4e300160, 0x00009102},
+>  			{0x4e30016C, 0x35F00000},
+>  			{0x4e300170, 0x8B0B0608},
+> @@ -50,21 +49,73 @@ static struct dram_fsp_cfg ddr_dram_fsp_cfg[] = {
+>  			{0x4e300254, 0x00FE00FE},
+>  			{0x4e300258, 0x00000008},
+>  			{0x4e30025C, 0x00000400},
+> -			{0x4e300300, 0x224F2215},
+> +			{0x4e300300, 0x224F2213},
+>  			{0x4e300304, 0x00FE2213},
+> -			{0x4e300308, 0x0A3C0E3C},
+> +			{0x4e300308, 0x0A380E3D},
+>  		},
+>  		{
+>  			{0x01, 0xE4},
+>  			{0x02, 0x36},
+> -			{0x03, 0xF2},
+> -			{0x0b, 0x46},
+> -			{0x0c, 0x11},
+> -			{0x0e, 0x11},
+> +			{0x03, 0x22},
+> +			{0x0b, 0x44},
+> +			{0x0c, 0x1E},
+> +			{0x0e, 0x12},
+> +			{0x16, 0x04},
+> +		},
+> +		0,
+> +	},
+> +	{
+> +		{
+> +			{0x4e300100, 0x124F2100},
+> +			{0x4e300104, 0xF877000E},
+> +			{0x4e300108, 0x1816E4AA},
+> +			{0x4e30010C, 0x005101E6},
+> +			{0x4e300124, 0x0E3C0000},
+> +			{0x4e300160, 0x00009101},
+> +			{0x4e30016C, 0x30900000},
+> +			{0x4e300170, 0x8A0A0508},
+> +			{0x4e300250, 0x00000014},
+> +			{0x4e300254, 0x007B007B},
+> +			{0x4e300258, 0x00000008},
+> +			{0x4e30025C, 0x00000400},
+> +		},
+> +		{
+> +			{0x01, 0xB4},
+> +			{0x02, 0x1B},
+> +			{0x03, 0x22},
+> +			{0x0b, 0x44},
+> +			{0x0c, 0x1E},
+> +			{0x0e, 0x12},
+>  			{0x16, 0x04},
+>  		},
+>  		0,
+>  	},
+> +	{
+> +		{
+> +			{0x4e300100, 0x00051000},
+> +			{0x4e300104, 0xF855000A},
+> +			{0x4e300108, 0x6E620A48},
+> +			{0x4e30010C, 0x0031010D},
+> +			{0x4e300124, 0x04C50000},
+> +			{0x4e300160, 0x00009100},
+> +			{0x4e30016C, 0x30000000},
+> +			{0x4e300170, 0x89090408},
+> +			{0x4e300250, 0x00000007},
+> +			{0x4e300254, 0x00240024},
+> +			{0x4e300258, 0x00000008},
+> +			{0x4e30025C, 0x00000400},
+> +		},
+> +		{
+> +			{0x01, 0x94},
+> +			{0x02, 0x9},
+> +			{0x03, 0x22},
+> +			{0x0b, 0x44},
+> +			{0x0c, 0x1E},
+> +			{0x0e, 0x12},
+> +			{0x16, 0x04},
+> +		},
+> +		1,
+> +	},
+>  
+>  };
+>  
+> @@ -90,25 +141,65 @@ static struct dram_cfg_param ddr_ddrphy_cfg[] = {
+>  	{0x1015f, 0x5ff},
+>  	{0x1105f, 0x5ff},
+>  	{0x1115f, 0x5ff},
+> +	{0x11005f, 0x5ff},
+> +	{0x11015f, 0x5ff},
+> +	{0x11105f, 0x5ff},
+> +	{0x11115f, 0x5ff},
+> +	{0x21005f, 0x5ff},
+> +	{0x21015f, 0x5ff},
+> +	{0x21105f, 0x5ff},
+> +	{0x21115f, 0x5ff},
+>  	{0x55, 0x1ff},
+>  	{0x1055, 0x1ff},
+>  	{0x2055, 0x1ff},
+>  	{0x200c5, 0x19},
+> +	{0x1200c5, 0xb},
+> +	{0x2200c5, 0x7},
+>  	{0x2002e, 0x2},
+> +	{0x12002e, 0x2},
+> +	{0x22002e, 0x2},
+>  	{0x90204, 0x0},
+> +	{0x190204, 0x0},
+> +	{0x290204, 0x0},
+>  	{0x20024, 0x1e3},
+>  	{0x2003a, 0x2},
+>  	{0x2007d, 0x212},
+>  	{0x2007c, 0x61},
+> +	{0x120024, 0x1e3},
+> +	{0x2003a, 0x2},
+> +	{0x12007d, 0x212},
+> +	{0x12007c, 0x61},
+> +	{0x220024, 0x1e3},
+> +	{0x2003a, 0x2},
+> +	{0x22007d, 0x212},
+> +	{0x22007c, 0x61},
+>  	{0x20056, 0x3},
+> +	{0x120056, 0x3},
+> +	{0x220056, 0x3},
+>  	{0x1004d, 0x600},
+>  	{0x1014d, 0x600},
+>  	{0x1104d, 0x600},
+>  	{0x1114d, 0x600},
+> -	{0x10049, 0xe00},
+> -	{0x10149, 0xe00},
+> -	{0x11049, 0xe00},
+> -	{0x11149, 0xe00},
+> +	{0x11004d, 0x600},
+> +	{0x11014d, 0x600},
+> +	{0x11104d, 0x600},
+> +	{0x11114d, 0x600},
+> +	{0x21004d, 0x600},
+> +	{0x21014d, 0x600},
+> +	{0x21104d, 0x600},
+> +	{0x21114d, 0x600},
+> +	{0x10049, 0x604},
+> +	{0x10149, 0x604},
+> +	{0x11049, 0x604},
+> +	{0x11149, 0x604},
+> +	{0x110049, 0x604},
+> +	{0x110149, 0x604},
+> +	{0x111049, 0x604},
+> +	{0x111149, 0x604},
+> +	{0x210049, 0x604},
+> +	{0x210149, 0x604},
+> +	{0x211049, 0x604},
+> +	{0x211149, 0x604},
+>  	{0x43, 0x60},
+>  	{0x1043, 0x60},
+>  	{0x2043, 0x60},
+> @@ -117,14 +208,30 @@ static struct dram_cfg_param ddr_ddrphy_cfg[] = {
+>  	{0x20050, 0x0},
+>  	{0x2009b, 0x2},
+>  	{0x20008, 0x3a5},
+> +	{0x120008, 0x1d3},
+> +	{0x220008, 0x9c},
+>  	{0x20088, 0x9},
+> -	{0x200b2, 0x10c},
+> +	{0x200b2, 0x104},
+>  	{0x10043, 0x5a1},
+>  	{0x10143, 0x5a1},
+>  	{0x11043, 0x5a1},
+>  	{0x11143, 0x5a1},
+> +	{0x1200b2, 0x104},
+> +	{0x110043, 0x5a1},
+> +	{0x110143, 0x5a1},
+> +	{0x111043, 0x5a1},
+> +	{0x111143, 0x5a1},
+> +	{0x2200b2, 0x104},
+> +	{0x210043, 0x5a1},
+> +	{0x210143, 0x5a1},
+> +	{0x211043, 0x5a1},
+> +	{0x211143, 0x5a1},
+>  	{0x200fa, 0x2},
+> +	{0x1200fa, 0x2},
+> +	{0x2200fa, 0x2},
+>  	{0x20019, 0x1},
+> +	{0x120019, 0x1},
+> +	{0x220019, 0x1},
+>  	{0x200f0, 0x600},
+>  	{0x200f1, 0x0},
+>  	{0x200f2, 0x4444},
+> @@ -133,42 +240,83 @@ static struct dram_cfg_param ddr_ddrphy_cfg[] = {
+>  	{0x200f5, 0x0},
+>  	{0x200f6, 0x0},
+>  	{0x200f7, 0xf000},
+> +	{0x1004a, 0x500},
+> +	{0x1104a, 0x500},
+>  	{0x20025, 0x0},
+> -	{0x2002d, 0x1},
+> +	{0x2002d, 0x0},
+> +	{0x12002d, 0x0},
+> +	{0x22002d, 0x0},
+>  	{0x2002c, 0x0},
+>  	{0x20021, 0x0},
+>  	{0x200c7, 0x21},
+>  	{0x1200c7, 0x21},
+>  	{0x200ca, 0x24},
+>  	{0x1200ca, 0x24},
+> -
+>  };
+>  
+> -/* ddr phy trained csr */
+> +/* PHY trained csr */
+>  static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x1005f, 0x0},
+>  	{0x1015f, 0x0},
+>  	{0x1105f, 0x0},
+>  	{0x1115f, 0x0},
+> +	{0x11005f, 0x0},
+> +	{0x11015f, 0x0},
+> +	{0x11105f, 0x0},
+> +	{0x11115f, 0x0},
+> +	{0x21005f, 0x0},
+> +	{0x21015f, 0x0},
+> +	{0x21105f, 0x0},
+> +	{0x21115f, 0x0},
+>  	{0x55, 0x0},
+>  	{0x1055, 0x0},
+>  	{0x2055, 0x0},
+>  	{0x200c5, 0x0},
+> +	{0x1200c5, 0x0},
+> +	{0x2200c5, 0x0},
+>  	{0x2002e, 0x0},
+> +	{0x12002e, 0x0},
+> +	{0x22002e, 0x0},
+>  	{0x90204, 0x0},
+> +	{0x190204, 0x0},
+> +	{0x290204, 0x0},
+>  	{0x20024, 0x0},
+>  	{0x2003a, 0x0},
+>  	{0x2007d, 0x0},
+>  	{0x2007c, 0x0},
+> +	{0x120024, 0x0},
+> +	{0x12007d, 0x0},
+> +	{0x12007c, 0x0},
+> +	{0x220024, 0x0},
+> +	{0x22007d, 0x0},
+> +	{0x22007c, 0x0},
+>  	{0x20056, 0x0},
+> +	{0x120056, 0x0},
+> +	{0x220056, 0x0},
+>  	{0x1004d, 0x0},
+>  	{0x1014d, 0x0},
+>  	{0x1104d, 0x0},
+>  	{0x1114d, 0x0},
+> +	{0x11004d, 0x0},
+> +	{0x11014d, 0x0},
+> +	{0x11104d, 0x0},
+> +	{0x11114d, 0x0},
+> +	{0x21004d, 0x0},
+> +	{0x21014d, 0x0},
+> +	{0x21104d, 0x0},
+> +	{0x21114d, 0x0},
+>  	{0x10049, 0x0},
+>  	{0x10149, 0x0},
+>  	{0x11049, 0x0},
+>  	{0x11149, 0x0},
+> +	{0x110049, 0x0},
+> +	{0x110149, 0x0},
+> +	{0x111049, 0x0},
+> +	{0x111149, 0x0},
+> +	{0x210049, 0x0},
+> +	{0x210149, 0x0},
+> +	{0x211049, 0x0},
+> +	{0x211149, 0x0},
+>  	{0x43, 0x0},
+>  	{0x1043, 0x0},
+>  	{0x2043, 0x0},
+> @@ -177,14 +325,30 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x20050, 0x0},
+>  	{0x2009b, 0x0},
+>  	{0x20008, 0x0},
+> +	{0x120008, 0x0},
+> +	{0x220008, 0x0},
+>  	{0x20088, 0x0},
+>  	{0x200b2, 0x0},
+>  	{0x10043, 0x0},
+>  	{0x10143, 0x0},
+>  	{0x11043, 0x0},
+>  	{0x11143, 0x0},
+> +	{0x1200b2, 0x0},
+> +	{0x110043, 0x0},
+> +	{0x110143, 0x0},
+> +	{0x111043, 0x0},
+> +	{0x111143, 0x0},
+> +	{0x2200b2, 0x0},
+> +	{0x210043, 0x0},
+> +	{0x210143, 0x0},
+> +	{0x211043, 0x0},
+> +	{0x211143, 0x0},
+>  	{0x200fa, 0x0},
+> +	{0x1200fa, 0x0},
+> +	{0x2200fa, 0x0},
+>  	{0x20019, 0x0},
+> +	{0x120019, 0x0},
+> +	{0x220019, 0x0},
+>  	{0x200f0, 0x0},
+>  	{0x200f1, 0x0},
+>  	{0x200f2, 0x0},
+> @@ -193,8 +357,12 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x200f5, 0x0},
+>  	{0x200f6, 0x0},
+>  	{0x200f7, 0x0},
+> +	{0x1004a, 0x0},
+> +	{0x1104a, 0x0},
+>  	{0x20025, 0x0},
+>  	{0x2002d, 0x0},
+> +	{0x12002d, 0x0},
+> +	{0x22002d, 0x0},
+>  	{0x2002c, 0x0},
+>  	{0xd0000, 0x0},
+>  	{0x90000, 0x0},
+> @@ -682,6 +850,14 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x2000c, 0x0},
+>  	{0x2000d, 0x0},
+>  	{0x2000e, 0x0},
+> +	{0x12000b, 0x0},
+> +	{0x12000c, 0x0},
+> +	{0x12000d, 0x0},
+> +	{0x12000e, 0x0},
+> +	{0x22000b, 0x0},
+> +	{0x22000c, 0x0},
+> +	{0x22000d, 0x0},
+> +	{0x22000e, 0x0},
+>  	{0x9000c, 0x0},
+>  	{0x9000d, 0x0},
+>  	{0x9000e, 0x0},
+> @@ -692,12 +868,26 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x90013, 0x0},
+>  	{0x20010, 0x0},
+>  	{0x20011, 0x0},
+> +	{0x120010, 0x0},
+> +	{0x120011, 0x0},
+>  	{0x40080, 0x0},
+>  	{0x40081, 0x0},
+>  	{0x40082, 0x0},
+>  	{0x40083, 0x0},
+>  	{0x40084, 0x0},
+>  	{0x40085, 0x0},
+> +	{0x140080, 0x0},
+> +	{0x140081, 0x0},
+> +	{0x140082, 0x0},
+> +	{0x140083, 0x0},
+> +	{0x140084, 0x0},
+> +	{0x140085, 0x0},
+> +	{0x240080, 0x0},
+> +	{0x240081, 0x0},
+> +	{0x240082, 0x0},
+> +	{0x240083, 0x0},
+> +	{0x240084, 0x0},
+> +	{0x240085, 0x0},
+>  	{0x400fd, 0x0},
+>  	{0x400f1, 0x0},
+>  	{0x10011, 0x0},
+> @@ -866,6 +1056,160 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x90207, 0x0},
+>  	{0x90208, 0x0},
+>  	{0x20020, 0x0},
+> +	{0x100080, 0x0},
+> +	{0x101080, 0x0},
+> +	{0x102080, 0x0},
+> +	{0x110020, 0x0},
+> +	{0x110080, 0x0},
+> +	{0x110081, 0x0},
+> +	{0x1100d0, 0x0},
+> +	{0x1100d1, 0x0},
+> +	{0x11008c, 0x0},
+> +	{0x11008d, 0x0},
+> +	{0x110180, 0x0},
+> +	{0x110181, 0x0},
+> +	{0x1101d0, 0x0},
+> +	{0x1101d1, 0x0},
+> +	{0x11018c, 0x0},
+> +	{0x11018d, 0x0},
+> +	{0x1100c0, 0x0},
+> +	{0x1100c1, 0x0},
+> +	{0x1101c0, 0x0},
+> +	{0x1101c1, 0x0},
+> +	{0x1102c0, 0x0},
+> +	{0x1102c1, 0x0},
+> +	{0x1103c0, 0x0},
+> +	{0x1103c1, 0x0},
+> +	{0x1104c0, 0x0},
+> +	{0x1104c1, 0x0},
+> +	{0x1105c0, 0x0},
+> +	{0x1105c1, 0x0},
+> +	{0x1106c0, 0x0},
+> +	{0x1106c1, 0x0},
+> +	{0x1107c0, 0x0},
+> +	{0x1107c1, 0x0},
+> +	{0x1108c0, 0x0},
+> +	{0x1108c1, 0x0},
+> +	{0x1100ae, 0x0},
+> +	{0x1100af, 0x0},
+> +	{0x111020, 0x0},
+> +	{0x111080, 0x0},
+> +	{0x111081, 0x0},
+> +	{0x1110d0, 0x0},
+> +	{0x1110d1, 0x0},
+> +	{0x11108c, 0x0},
+> +	{0x11108d, 0x0},
+> +	{0x111180, 0x0},
+> +	{0x111181, 0x0},
+> +	{0x1111d0, 0x0},
+> +	{0x1111d1, 0x0},
+> +	{0x11118c, 0x0},
+> +	{0x11118d, 0x0},
+> +	{0x1110c0, 0x0},
+> +	{0x1110c1, 0x0},
+> +	{0x1111c0, 0x0},
+> +	{0x1111c1, 0x0},
+> +	{0x1112c0, 0x0},
+> +	{0x1112c1, 0x0},
+> +	{0x1113c0, 0x0},
+> +	{0x1113c1, 0x0},
+> +	{0x1114c0, 0x0},
+> +	{0x1114c1, 0x0},
+> +	{0x1115c0, 0x0},
+> +	{0x1115c1, 0x0},
+> +	{0x1116c0, 0x0},
+> +	{0x1116c1, 0x0},
+> +	{0x1117c0, 0x0},
+> +	{0x1117c1, 0x0},
+> +	{0x1118c0, 0x0},
+> +	{0x1118c1, 0x0},
+> +	{0x1110ae, 0x0},
+> +	{0x1110af, 0x0},
+> +	{0x190201, 0x0},
+> +	{0x190202, 0x0},
+> +	{0x190203, 0x0},
+> +	{0x190205, 0x0},
+> +	{0x190206, 0x0},
+> +	{0x190207, 0x0},
+> +	{0x190208, 0x0},
+> +	{0x120020, 0x0},
+> +	{0x200080, 0x0},
+> +	{0x201080, 0x0},
+> +	{0x202080, 0x0},
+> +	{0x210020, 0x0},
+> +	{0x210080, 0x0},
+> +	{0x210081, 0x0},
+> +	{0x2100d0, 0x0},
+> +	{0x2100d1, 0x0},
+> +	{0x21008c, 0x0},
+> +	{0x21008d, 0x0},
+> +	{0x210180, 0x0},
+> +	{0x210181, 0x0},
+> +	{0x2101d0, 0x0},
+> +	{0x2101d1, 0x0},
+> +	{0x21018c, 0x0},
+> +	{0x21018d, 0x0},
+> +	{0x2100c0, 0x0},
+> +	{0x2100c1, 0x0},
+> +	{0x2101c0, 0x0},
+> +	{0x2101c1, 0x0},
+> +	{0x2102c0, 0x0},
+> +	{0x2102c1, 0x0},
+> +	{0x2103c0, 0x0},
+> +	{0x2103c1, 0x0},
+> +	{0x2104c0, 0x0},
+> +	{0x2104c1, 0x0},
+> +	{0x2105c0, 0x0},
+> +	{0x2105c1, 0x0},
+> +	{0x2106c0, 0x0},
+> +	{0x2106c1, 0x0},
+> +	{0x2107c0, 0x0},
+> +	{0x2107c1, 0x0},
+> +	{0x2108c0, 0x0},
+> +	{0x2108c1, 0x0},
+> +	{0x2100ae, 0x0},
+> +	{0x2100af, 0x0},
+> +	{0x211020, 0x0},
+> +	{0x211080, 0x0},
+> +	{0x211081, 0x0},
+> +	{0x2110d0, 0x0},
+> +	{0x2110d1, 0x0},
+> +	{0x21108c, 0x0},
+> +	{0x21108d, 0x0},
+> +	{0x211180, 0x0},
+> +	{0x211181, 0x0},
+> +	{0x2111d0, 0x0},
+> +	{0x2111d1, 0x0},
+> +	{0x21118c, 0x0},
+> +	{0x21118d, 0x0},
+> +	{0x2110c0, 0x0},
+> +	{0x2110c1, 0x0},
+> +	{0x2111c0, 0x0},
+> +	{0x2111c1, 0x0},
+> +	{0x2112c0, 0x0},
+> +	{0x2112c1, 0x0},
+> +	{0x2113c0, 0x0},
+> +	{0x2113c1, 0x0},
+> +	{0x2114c0, 0x0},
+> +	{0x2114c1, 0x0},
+> +	{0x2115c0, 0x0},
+> +	{0x2115c1, 0x0},
+> +	{0x2116c0, 0x0},
+> +	{0x2116c1, 0x0},
+> +	{0x2117c0, 0x0},
+> +	{0x2117c1, 0x0},
+> +	{0x2118c0, 0x0},
+> +	{0x2118c1, 0x0},
+> +	{0x2110ae, 0x0},
+> +	{0x2110af, 0x0},
+> +	{0x290201, 0x0},
+> +	{0x290202, 0x0},
+> +	{0x290203, 0x0},
+> +	{0x290205, 0x0},
+> +	{0x290206, 0x0},
+> +	{0x290207, 0x0},
+> +	{0x290208, 0x0},
+> +	{0x220020, 0x0},
+>  	{0x20077, 0x0},
+>  	{0x20072, 0x0},
+>  	{0x20073, 0x0},
+> @@ -888,7 +1232,6 @@ static struct dram_cfg_param ddr_ddrphy_trained_csr[] = {
+>  	{0x11640, 0x0},
+>  	{0x11740, 0x0},
+>  	{0x11840, 0x0},
+> -
+>  };
+>  
+>  /* P0 message block parameter for training firmware */
+> @@ -896,7 +1239,7 @@ static struct dram_cfg_param ddr_fsp0_cfg[] = {
+>  	{0xd0000, 0x0},
+>  	{0x54003, 0xe94},
+>  	{0x54004, 0x4},
+> -	{0x54006, 0x15},
+> +	{0x54006, 0x14},
+>  	{0x54008, 0x131f},
+>  	{0x54009, 0xc8},
+>  	{0x5400b, 0x4},
+> @@ -904,26 +1247,102 @@ static struct dram_cfg_param ddr_fsp0_cfg[] = {
+>  	{0x5400f, 0x100},
+>  	{0x54012, 0x110},
+>  	{0x54019, 0x36e4},
+> -	{0x5401a, 0xf2},
+> -	{0x5401b, 0x1146},
+> -	{0x5401c, 0x1108},
+> +	{0x5401a, 0x22},
+> +	{0x5401b, 0x1e44},
+> +	{0x5401c, 0x1208},
+>  	{0x5401e, 0x4},
+>  	{0x5401f, 0x36e4},
+> -	{0x54020, 0xf2},
+> -	{0x54021, 0x1146},
+> -	{0x54022, 0x1108},
+> +	{0x54020, 0x22},
+> +	{0x54021, 0x1e44},
+> +	{0x54022, 0x1208},
+>  	{0x54024, 0x4},
+>  	{0x54032, 0xe400},
+> -	{0x54033, 0xf236},
+> -	{0x54034, 0x4600},
+> -	{0x54035, 0x811},
+> -	{0x54036, 0x11},
+> +	{0x54033, 0x2236},
+> +	{0x54034, 0x4400},
+> +	{0x54035, 0x81e},
+> +	{0x54036, 0x12},
+>  	{0x54037, 0x400},
+>  	{0x54038, 0xe400},
+> -	{0x54039, 0xf236},
+> -	{0x5403a, 0x4600},
+> -	{0x5403b, 0x811},
+> -	{0x5403c, 0x11},
+> +	{0x54039, 0x2236},
+> +	{0x5403a, 0x4400},
+> +	{0x5403b, 0x81e},
+> +	{0x5403c, 0x12},
+> +	{0x5403d, 0x400},
+> +	{0xd0000, 0x1}
+> +};
+> +
+> +/* P1 message block parameter for training firmware */
+> +static struct dram_cfg_param ddr_fsp1_cfg[] = {
+> +	{0xd0000, 0x0},
+> +	{0x54002, 0x1},
+> +	{0x54003, 0x74a},
+> +	{0x54004, 0x4},
+> +	{0x54006, 0x14},
+> +	{0x54008, 0x121f},
+> +	{0x54009, 0xc8},
+> +	{0x5400b, 0x4},
+> +	{0x5400d, 0x100},
+> +	{0x5400f, 0x100},
+> +	{0x54012, 0x110},
+> +	{0x54019, 0x1bb4},
+> +	{0x5401a, 0x22},
+> +	{0x5401b, 0x1e44},
+> +	{0x5401c, 0x1208},
+> +	{0x5401e, 0x4},
+> +	{0x5401f, 0x1bb4},
+> +	{0x54020, 0x22},
+> +	{0x54021, 0x1e44},
+> +	{0x54022, 0x1208},
+> +	{0x54024, 0x4},
+> +	{0x54032, 0xb400},
+> +	{0x54033, 0x221b},
+> +	{0x54034, 0x4400},
+> +	{0x54035, 0x81e},
+> +	{0x54036, 0x12},
+> +	{0x54037, 0x400},
+> +	{0x54038, 0xb400},
+> +	{0x54039, 0x221b},
+> +	{0x5403a, 0x4400},
+> +	{0x5403b, 0x81e},
+> +	{0x5403c, 0x12},
+> +	{0x5403d, 0x400},
+> +	{0xd0000, 0x1}
+> +};
+> +
+> +/* P2 message block parameter for training firmware */
+> +static struct dram_cfg_param ddr_fsp2_cfg[] = {
+> +	{0xd0000, 0x0},
+> +	{0x54002, 0x102},
+> +	{0x54003, 0x270},
+> +	{0x54004, 0x4},
+> +	{0x54006, 0x14},
+> +	{0x54008, 0x121f},
+> +	{0x54009, 0xc8},
+> +	{0x5400b, 0x4},
+> +	{0x5400d, 0x100},
+> +	{0x5400f, 0x100},
+> +	{0x54012, 0x110},
+> +	{0x54019, 0x994},
+> +	{0x5401a, 0x22},
+> +	{0x5401b, 0x1e44},
+> +	{0x5401c, 0x1200},
+> +	{0x5401e, 0x4},
+> +	{0x5401f, 0x994},
+> +	{0x54020, 0x22},
+> +	{0x54021, 0x1e44},
+> +	{0x54022, 0x1200},
+> +	{0x54024, 0x4},
+> +	{0x54032, 0x9400},
+> +	{0x54033, 0x2209},
+> +	{0x54034, 0x4400},
+> +	{0x54035, 0x1e},
+> +	{0x54036, 0x12},
+> +	{0x54037, 0x400},
+> +	{0x54038, 0x9400},
+> +	{0x54039, 0x2209},
+> +	{0x5403a, 0x4400},
+> +	{0x5403b, 0x1e},
+> +	{0x5403c, 0x12},
+>  	{0x5403d, 0x400},
+>  	{0xd0000, 0x1}
+>  };
+> @@ -933,7 +1352,7 @@ static struct dram_cfg_param ddr_fsp0_2d_cfg[] = {
+>  	{0xd0000, 0x0},
+>  	{0x54003, 0xe94},
+>  	{0x54004, 0x4},
+> -	{0x54006, 0x15},
+> +	{0x54006, 0x14},
+>  	{0x54008, 0x61},
+>  	{0x54009, 0xc8},
+>  	{0x5400b, 0x4},
+> @@ -942,26 +1361,26 @@ static struct dram_cfg_param ddr_fsp0_2d_cfg[] = {
+>  	{0x54010, 0x2080},
+>  	{0x54012, 0x110},
+>  	{0x54019, 0x36e4},
+> -	{0x5401a, 0xf2},
+> -	{0x5401b, 0x1146},
+> -	{0x5401c, 0x1108},
+> +	{0x5401a, 0x22},
+> +	{0x5401b, 0x1e44},
+> +	{0x5401c, 0x1208},
+>  	{0x5401e, 0x4},
+>  	{0x5401f, 0x36e4},
+> -	{0x54020, 0xf2},
+> -	{0x54021, 0x1146},
+> -	{0x54022, 0x1108},
+> +	{0x54020, 0x22},
+> +	{0x54021, 0x1e44},
+> +	{0x54022, 0x1208},
+>  	{0x54024, 0x4},
+>  	{0x54032, 0xe400},
+> -	{0x54033, 0xf236},
+> -	{0x54034, 0x4600},
+> -	{0x54035, 0x811},
+> -	{0x54036, 0x11},
+> +	{0x54033, 0x2236},
+> +	{0x54034, 0x4400},
+> +	{0x54035, 0x81e},
+> +	{0x54036, 0x12},
+>  	{0x54037, 0x400},
+>  	{0x54038, 0xe400},
+> -	{0x54039, 0xf236},
+> -	{0x5403a, 0x4600},
+> -	{0x5403b, 0x811},
+> -	{0x5403c, 0x11},
+> +	{0x54039, 0x2236},
+> +	{0x5403a, 0x4400},
+> +	{0x5403b, 0x81e},
+> +	{0x5403c, 0x12},
+>  	{0x5403d, 0x400},
+>  	{0xd0000, 0x1}
+>  };
+> @@ -1451,10 +1870,18 @@ static struct dram_cfg_param ddr_phy_pie[] = {
+>  	{0x400d7, 0x20b},
+>  	{0x2003a, 0x2},
+>  	{0x200be, 0x3},
+> -	{0x2000b, 0x75},
+> +	{0x2000b, 0x41a},
+>  	{0x2000c, 0xe9},
+>  	{0x2000d, 0x91c},
+>  	{0x2000e, 0x2c},
+> +	{0x12000b, 0x20d},
+> +	{0x12000c, 0x74},
+> +	{0x12000d, 0x48e},
+> +	{0x12000e, 0x2c},
+> +	{0x22000b, 0xb0},
+> +	{0x22000c, 0x27},
+> +	{0x22000d, 0x186},
+> +	{0x22000e, 0x10},
+>  	{0x9000c, 0x0},
+>  	{0x9000d, 0x173},
+>  	{0x9000e, 0x60},
+> @@ -1465,12 +1892,26 @@ static struct dram_cfg_param ddr_phy_pie[] = {
+>  	{0x90013, 0x6152},
+>  	{0x20010, 0x5a},
+>  	{0x20011, 0x3},
+> +	{0x120010, 0x5a},
+> +	{0x120011, 0x3},
+>  	{0x40080, 0xe0},
+>  	{0x40081, 0x12},
+>  	{0x40082, 0xe0},
+>  	{0x40083, 0x12},
+>  	{0x40084, 0xe0},
+>  	{0x40085, 0x12},
+> +	{0x140080, 0xe0},
+> +	{0x140081, 0x12},
+> +	{0x140082, 0xe0},
+> +	{0x140083, 0x12},
+> +	{0x140084, 0xe0},
+> +	{0x140085, 0x12},
+> +	{0x240080, 0xe0},
+> +	{0x240081, 0x12},
+> +	{0x240082, 0xe0},
+> +	{0x240083, 0x12},
+> +	{0x240084, 0xe0},
+> +	{0x240085, 0x12},
+>  	{0x400fd, 0xf},
+>  	{0x400f1, 0xe},
+>  	{0x10011, 0x1},
+> @@ -1505,7 +1946,6 @@ static struct dram_cfg_param ddr_phy_pie[] = {
+>  	{0x20088, 0x19},
+>  	{0xc0080, 0x0},
+>  	{0xd0000, 0x1},
+> -
+>  };
+>  
+>  static struct dram_fsp_msg ddr_dram_fsp_msg[] = {
+> @@ -1515,9 +1955,21 @@ static struct dram_fsp_msg ddr_dram_fsp_msg[] = {
+>  		.fw_type = FW_1D_IMAGE,
+>  		.fsp_cfg = ddr_fsp0_cfg,
+>  		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp0_cfg),
+> -
+>  	},
+> -
+> +	{
+> +		/* P1 1866mts 1D */
+> +		.drate = 1866,
+> +		.fw_type = FW_1D_IMAGE,
+> +		.fsp_cfg = ddr_fsp1_cfg,
+> +		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp1_cfg),
+> +	},
+> +	{
+> +		/* P2 625mts 1D */
+> +		.drate = 625,
+> +		.fw_type = FW_1D_IMAGE,
+> +		.fsp_cfg = ddr_fsp2_cfg,
+> +		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp2_cfg),
+> +	},
+>  	{
+>  		/* P0 3733mts 2D */
+>  		.drate = 3733,
+> @@ -1525,7 +1977,6 @@ static struct dram_fsp_msg ddr_dram_fsp_msg[] = {
+>  		.fsp_cfg = ddr_fsp0_2d_cfg,
+>  		.fsp_cfg_num = ARRAY_SIZE(ddr_fsp0_2d_cfg),
+>  	},
+> -
+>  };
+>  
+>  /* ddr timing config params */
+> @@ -1540,7 +1991,227 @@ struct dram_timing_info dram_timing = {
+>  	.ddrphy_trained_csr_num = ARRAY_SIZE(ddr_ddrphy_trained_csr),
+>  	.ddrphy_pie = ddr_phy_pie,
+>  	.ddrphy_pie_num = ARRAY_SIZE(ddr_phy_pie),
+> -	.fsp_table = { 3733, },
+> +	.fsp_table = { 3733, 1866, 625, },
+>  	.fsp_cfg = ddr_dram_fsp_cfg,
+>  	.fsp_cfg_num = ARRAY_SIZE(ddr_dram_fsp_cfg),
+>  };
+> +
+> +void set_dram_timings_2gb_lpddr4x(void)
+> +{
+> +	/* Initialize DDRC registers */
+> +	dram_timing.ddrc_cfg[1].val = 0x8000ff;
+> +	dram_timing.ddrc_cfg[3].val = 0x80000512;
+> +
+> +	/* dram fsp cfg */
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[0].val = 0x24AB321B;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[2].val = 0x2F2EE233;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[9].val = 0x015B015B;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[13].val = 0x015B2213;
+> +	dram_timing.fsp_cfg[0].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[0].mr_cfg[5].val = 0x13;
+> +
+> +	dram_timing.fsp_cfg[1].ddrc_cfg[0].val = 0x12552100;
+> +	dram_timing.fsp_cfg[1].ddrc_cfg[2].val = 0x1816B4AA;
+> +	dram_timing.fsp_cfg[1].ddrc_cfg[9].val = 0x00AA00AA;
+> +	dram_timing.fsp_cfg[1].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[1].mr_cfg[5].val = 0x13;
+> +
+> +	dram_timing.fsp_cfg[2].ddrc_cfg[0].val = 0x00061000;
+> +	dram_timing.fsp_cfg[2].ddrc_cfg[2].val = 0x6E62FA48;
+> +	dram_timing.fsp_cfg[2].ddrc_cfg[9].val = 0x00340034;
+> +	dram_timing.fsp_cfg[2].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[2].mr_cfg[5].val = 0x13;
+> +
+> +	/* P0 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[0].fsp_cfg[12].val = 0x2044;
+> +	dram_timing.fsp_msg[0].fsp_cfg[13].val = 0x1308;
+> +	dram_timing.fsp_msg[0].fsp_cfg[17].val = 0x2044;
+> +	dram_timing.fsp_msg[0].fsp_cfg[18].val = 0x1308;
+> +	dram_timing.fsp_msg[0].fsp_cfg[23].val = 0x820;
+> +	dram_timing.fsp_msg[0].fsp_cfg[24].val = 0x13;
+> +	dram_timing.fsp_msg[0].fsp_cfg[29].val = 0x820;
+> +	dram_timing.fsp_msg[0].fsp_cfg[30].val = 0x13;
+> +
+> +	/* P1 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[1].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[1].fsp_cfg[14].val = 0x1308;
+> +	dram_timing.fsp_msg[1].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[1].fsp_cfg[19].val = 0x1308;
+> +	dram_timing.fsp_msg[1].fsp_cfg[24].val = 0x820;
+> +	dram_timing.fsp_msg[1].fsp_cfg[25].val = 0x13;
+> +	dram_timing.fsp_msg[1].fsp_cfg[30].val = 0x820;
+> +	dram_timing.fsp_msg[1].fsp_cfg[31].val = 0x13;
+> +
+> +	/* P2 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[2].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[2].fsp_cfg[14].val = 0x1300;
+> +	dram_timing.fsp_msg[2].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[2].fsp_cfg[19].val = 0x1300;
+> +	dram_timing.fsp_msg[2].fsp_cfg[24].val = 0x20;
+> +	dram_timing.fsp_msg[2].fsp_cfg[25].val = 0x13;
+> +	dram_timing.fsp_msg[2].fsp_cfg[30].val = 0x20;
+> +	dram_timing.fsp_msg[2].fsp_cfg[31].val = 0x13;
+> +
+> +	/* P0 2D message block parameter for training firmware */
+> +	dram_timing.fsp_msg[3].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[3].fsp_cfg[14].val = 0x1308;
+> +	dram_timing.fsp_msg[3].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[3].fsp_cfg[19].val = 0x1308;
+> +	dram_timing.fsp_msg[3].fsp_cfg[24].val = 0x820;
+> +	dram_timing.fsp_msg[3].fsp_cfg[25].val = 0x13;
+> +	dram_timing.fsp_msg[3].fsp_cfg[30].val = 0x820;
+> +	dram_timing.fsp_msg[3].fsp_cfg[31].val = 0x13;
+> +}
+> +
+> +/* Generated with DDR Tool v3.3.0_7.8-d1cdb7d3 */
+> +void set_dram_timings_1gb_lpddr4x_900mhz(void)
+> +{
+> +	/* Initialize DDRC registers */
+> +	dram_timing.ddrc_cfg[6].val = 0x4080;
+> +
+> +	/* dram fsp cfg */
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[0].val = 0x124F2100;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[1].val = 0xF877000E;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[2].val = 0x181AE4AA;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[3].val = 0x005101E6;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[4].val = 0x0E3C0000;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[5].val = 0x00009101;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[6].val = 0x30900000;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[7].val = 0x8A0A0508;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[8].val = 0x00000014;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[9].val = 0x007B007B;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[12].val = 0x1128110B;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[13].val = 0x007B140A;
+> +	dram_timing.fsp_cfg[0].ddrc_cfg[14].val = 0x0620071E;
+> +	dram_timing.fsp_cfg[0].mr_cfg[0].val = 0xB4;
+> +	dram_timing.fsp_cfg[0].mr_cfg[1].val = 0x1B;
+> +	dram_timing.fsp_cfg[0].mr_cfg[2].val = 0xE2;
+> +	dram_timing.fsp_cfg[0].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[0].mr_cfg[5].val = 0x15;
+> +
+> +	dram_timing.fsp_cfg[1].ddrc_cfg[2].val = 0x181AE4AA;
+> +	dram_timing.fsp_cfg[1].mr_cfg[2].val = 0xE2;
+> +	dram_timing.fsp_cfg[1].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[1].mr_cfg[5].val = 0x15;
+> +
+> +	dram_timing.fsp_cfg[2].ddrc_cfg[2].val = 0x6E660A48;
+> +	dram_timing.fsp_cfg[2].mr_cfg[2].val = 0xE2;
+> +	dram_timing.fsp_cfg[2].mr_cfg[4].val = 0x20;
+> +	dram_timing.fsp_cfg[2].mr_cfg[5].val = 0x15;
+> +
+> +	/* PHY Initialize Configuration */
+> +	dram_timing.ddrphy_cfg[31].val = 0xb;
+> +	dram_timing.ddrphy_cfg[86].val = 0x1d3;
+> +	dram_timing.ddrphy_cfg[90].val = 0x10c;
+> +	dram_timing.ddrphy_cfg[95].val = 0x10c;
+> +	dram_timing.ddrphy_cfg[100].val = 0x10c;
+> +	dram_timing.ddrphy_cfg[122].val = 0x1;
+> +	/**
+> +	 * NOTE:
+> +	 * In the output from DDR Tool v3.3.0_7.8-d1cdb7d3, array members 119
+> +	 * (reg=0x1004a, val=0x500) and 120 (reg=0x1104a, val=0x500) are not
+> +	 * present in the ddr_ddrphy_cfg array. However they were present in array
+> +	 * generated with previous DDR Tool v3.1.0_7.4. We simply set both values
+> +	 * to default value of 0x400 (read with dwc_ddrphy_apb_rd()) here to avoid
+> +	 * any negative side-effects.
+> +	 */
+> +	dram_timing.ddrphy_cfg[119].val = 0x400;
+> +	dram_timing.ddrphy_cfg[120].val = 0x400;
+> +
+> +	/**
+> +	 * NOTE:
+> +	 * In the output from DDR Tool v3.3.0_7.8-d1cdb7d3, array members 101
+> +	 * (reg=0x1004a, val=0x0) and 120 (reg=0x1104a, val=0x0) are not present
+> +	 * in the ddr_ddrphy_trained_csr array. However they were present in array
+> +	 * generated with previous DDR Tool v3.1.0_7.4. We simply set both values
+> +	 * to default 0x0 (like all other ddrphy_trained_csr values) here to avoid
+> +	 * any negative side-effects.
+> +	 */
+> +	/* PHY trained csr */
+> +	dram_timing.ddrphy_trained_csr[101].val = 0x0;
+> +	dram_timing.ddrphy_trained_csr[102].val = 0x0;
+> +
+> +	/* P0 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[0].fsp_cfg[1].val = 0x74a;
+> +	dram_timing.fsp_msg[0].fsp_cfg[3].val = 0x15;
+> +	dram_timing.fsp_msg[0].fsp_cfg[10].val = 0x1bb4;
+> +	dram_timing.fsp_msg[0].fsp_cfg[11].val = 0xe2;
+> +	dram_timing.fsp_msg[0].fsp_cfg[12].val = 0x2044;
+> +	dram_timing.fsp_msg[0].fsp_cfg[13].val = 0x1508;
+> +	dram_timing.fsp_msg[0].fsp_cfg[15].val = 0x1bb4;
+> +	dram_timing.fsp_msg[0].fsp_cfg[16].val = 0xe2;
+> +	dram_timing.fsp_msg[0].fsp_cfg[17].val = 0x2044;
+> +	dram_timing.fsp_msg[0].fsp_cfg[18].val = 0x1508;
+> +	dram_timing.fsp_msg[0].fsp_cfg[20].val = 0xb400;
+> +	dram_timing.fsp_msg[0].fsp_cfg[21].val = 0xe21b;
+> +	dram_timing.fsp_msg[0].fsp_cfg[23].val = 0x820;
+> +	dram_timing.fsp_msg[0].fsp_cfg[24].val = 0x15;
+> +	dram_timing.fsp_msg[0].fsp_cfg[26].val = 0xb400;
+> +	dram_timing.fsp_msg[0].fsp_cfg[27].val = 0xe21b;
+> +	dram_timing.fsp_msg[0].fsp_cfg[29].val = 0x820;
+> +	dram_timing.fsp_msg[0].fsp_cfg[30].val = 0x15;
+> +
+> +	/* P1 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[1].fsp_cfg[4].val = 0x15;
+> +	dram_timing.fsp_msg[1].fsp_cfg[12].val = 0xe2;
+> +	dram_timing.fsp_msg[1].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[1].fsp_cfg[14].val = 0x1508;
+> +	dram_timing.fsp_msg[1].fsp_cfg[17].val = 0xe2;
+> +	dram_timing.fsp_msg[1].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[1].fsp_cfg[19].val = 0x1508;
+> +	dram_timing.fsp_msg[1].fsp_cfg[22].val = 0xe21b;
+> +	dram_timing.fsp_msg[1].fsp_cfg[24].val = 0x820;
+> +	dram_timing.fsp_msg[1].fsp_cfg[25].val = 0x15;
+> +	dram_timing.fsp_msg[1].fsp_cfg[28].val = 0xe21b;
+> +	dram_timing.fsp_msg[1].fsp_cfg[30].val = 0x820;
+> +	dram_timing.fsp_msg[1].fsp_cfg[31].val = 0x15;
+> +
+> +	/* P2 message block parameter for training firmware */
+> +	dram_timing.fsp_msg[2].fsp_cfg[4].val = 0x15;
+> +	dram_timing.fsp_msg[2].fsp_cfg[12].val = 0xe2;
+> +	dram_timing.fsp_msg[2].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[2].fsp_cfg[14].val = 0x1500;
+> +	dram_timing.fsp_msg[2].fsp_cfg[17].val = 0xe2;
+> +	dram_timing.fsp_msg[2].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[2].fsp_cfg[19].val = 0x1500;
+> +	dram_timing.fsp_msg[2].fsp_cfg[22].val = 0xe209;
+> +	dram_timing.fsp_msg[2].fsp_cfg[24].val = 0x20;
+> +	dram_timing.fsp_msg[2].fsp_cfg[25].val = 0x15;
+> +	dram_timing.fsp_msg[2].fsp_cfg[28].val = 0xe209;
+> +	dram_timing.fsp_msg[2].fsp_cfg[30].val = 0x20;
+> +	dram_timing.fsp_msg[2].fsp_cfg[31].val = 0x15;
+> +
+> +	/* P0 2D message block parameter for training firmware */
+> +	dram_timing.fsp_msg[3].fsp_cfg[1].val = 0x74a;
+> +	dram_timing.fsp_msg[3].fsp_cfg[3].val = 0x15;
+> +	dram_timing.fsp_msg[3].fsp_cfg[11].val = 0x1bb4;
+> +	dram_timing.fsp_msg[3].fsp_cfg[12].val = 0xe2;
+> +	dram_timing.fsp_msg[3].fsp_cfg[13].val = 0x2044;
+> +	dram_timing.fsp_msg[3].fsp_cfg[14].val = 0x1508;
+> +	dram_timing.fsp_msg[3].fsp_cfg[16].val = 0x1bb4;
+> +	dram_timing.fsp_msg[3].fsp_cfg[17].val = 0xe2;
+> +	dram_timing.fsp_msg[3].fsp_cfg[18].val = 0x2044;
+> +	dram_timing.fsp_msg[3].fsp_cfg[19].val = 0x1508;
+> +	dram_timing.fsp_msg[3].fsp_cfg[21].val = 0xb400;
+> +	dram_timing.fsp_msg[3].fsp_cfg[22].val = 0xe21b;
+> +	dram_timing.fsp_msg[3].fsp_cfg[24].val = 0x820;
+> +	dram_timing.fsp_msg[3].fsp_cfg[25].val = 0x15;
+> +	dram_timing.fsp_msg[3].fsp_cfg[27].val = 0xb400;
+> +	dram_timing.fsp_msg[3].fsp_cfg[28].val = 0xe21b;
+> +	dram_timing.fsp_msg[3].fsp_cfg[30].val = 0x820;
+> +	dram_timing.fsp_msg[3].fsp_cfg[31].val = 0x15;
+> +
+> +	/* DRAM PHY init engine image */
+> +	dram_timing.ddrphy_pie[483].val = 0x20d;
+> +	dram_timing.ddrphy_pie[484].val = 0x74;
+> +	dram_timing.ddrphy_pie[485].val = 0x48e;
+> +
+> +	/* P0 3733mts 1D */
+> +	dram_timing.fsp_msg[0].drate = 1866;
+> +
+> +	/* P0 1866mts 2D */
+> +	dram_timing.fsp_msg[3].drate = 1866;
+> +
+> +	/* ddr timing config params */
+> +	dram_timing.fsp_table[0] = 1866;
+> +}
+
+-- 
+Primoz Fiser                    | phone: +386-41-390-545
+<tel:+386-41-390-545> |
+---------------------------------------------------------|
+Norik systems d.o.o.            | https://www.norik.com
+<https://www.norik.com>  |
+Your embedded software partner  | email: info@norik.com
+<mailto:info@norik.com> |
+Slovenia, EU                    | phone: +386-41-540-545
+<tel:+386-41-540-545> |
+
