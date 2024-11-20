@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987FFD711B8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:34:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD189D711B4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:34:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E69FC89350;
-	Wed, 20 Nov 2024 16:34:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F82188FAA;
+	Wed, 20 Nov 2024 16:34:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bWuw33DS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l1JBf0IX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B83B88FAA; Wed, 20 Nov 2024 16:34:14 +0100 (CET)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 05CAD892DE; Wed, 20 Nov 2024 16:34:21 +0100 (CET)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6292D892DE
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:34:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5735D87042
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:34:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-720cb6ac25aso1843950b3a.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:34:12 -0800 (PST)
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-7f71f2b136eso1787317a12.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:34:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732116851; x=1732721651; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732116857; x=1732721657; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kIp3uId5pIDj8tHI7vZ8aGwKnMV7TrAQWTy6iP5YiHg=;
- b=bWuw33DS6wqUbqgGxJoxbm5z5+KyZqw+l3/qV/BUjzylzpsj9hI6YGZz621AN10r3S
- XmcjWyJwZndIYnbNDnW1GPHQTwNWrSz/VLkg2MSlwrjKHr7u/SDYydkfNcFg0eShuiGF
- ngn6R39j1lWIic2HZHsbRCnAv28dzFJwJlrC0=
+ bh=SyFzsT47oyJCIOSuIPJhpXuPLvHCPMwMApOGmqCwZgw=;
+ b=l1JBf0IXB6k/gkmRUxqlsO0XXrRFp6rI6Jkci2hvY2rfib8811J5fw1MQclUM2Vj75
+ GoNS3wiJLiQFh8k6revNJhd5xwqLjP3WAsq5IqVKnczdtrLPlBGSIOUdj4iBSeo9OsbO
+ TXp1opCJ1nicJikNIdu9yvID84o8VgqI5ojxI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732116851; x=1732721651;
+ d=1e100.net; s=20230601; t=1732116857; x=1732721657;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kIp3uId5pIDj8tHI7vZ8aGwKnMV7TrAQWTy6iP5YiHg=;
- b=CcOYF21lPBoOCmCloFtgwRwuBfJQJ3Wg9i44bKjwP9ckjnrX5h3VFQNXg7QXHdvU7O
- 3GUpotHIqR4M48ziw+pQuRio/2eUNghC+S+4/beyzBYlri6hjFtN8n2/YY2y5f77s2vn
- 2RCocZ3hTF4S60TPqQChn3oBcmP8geJLsZsv/ESCHoyRVRkHUCndqX+vXzqZSE1WSHXX
- 0fU+EdlAzpwWaZWmh8ydJozC5dXTO+ykT34flfgkz+ohVt32116jXbXSu1HQiQHbPcWW
- boJIy5CsZma1Byw4WnJ2EKIXHCVlbV/G9x9rVVYBIVwpriiqkvXSPgroF4C5JA0Ri4fb
- ztpQ==
-X-Gm-Message-State: AOJu0YwLs45KfH525LOXisdn2Col21XEn76Ont9NjzLMlYD7K60vrMn1
- zfLOA9l4+wWDrhP3OXewrxmgr6k6pn3cvVnKlHxFWquKnZTZAonQVqHVTRWhuWb1K84MOUcE44M
- nVGs9b8BgcDhx1dPRzvd4boTRf6U1ND1lhfyb
-X-Google-Smtp-Source: AGHT+IE69sBb6CoSkvtNP0V5kUu7esWtTnPtoZIv6I9RreVgGb4kF1Fjih0N28viD9sb2SYmWqfrzX9sSETByjKVOu8=
-X-Received: by 2002:a05:6a00:3a12:b0:71e:5d1d:1aa2 with SMTP id
- d2e1a72fcca58-724bec9ad56mr3521369b3a.7.1732116850927; Wed, 20 Nov 2024
- 07:34:10 -0800 (PST)
+ bh=SyFzsT47oyJCIOSuIPJhpXuPLvHCPMwMApOGmqCwZgw=;
+ b=GUvbxCNSGnnVJbgSg2h4pP53yePMvNHdPw51Ykw2Kzzrl2AOV3c51xJgEYsx5eDala
+ 63YyQfHtFhs6fvVktEUdlP8ke/XM0qrQSfTEVirknLfIfqNbpRQi79U0xb8SkgOnCc+3
+ Q5RZfOfqHLKwK66bFMzO+Vv/3JvDmuGAqd/5dElieqqLV1u940XFJqIswp56oWd4Qtnc
+ 7Z5p2NJQ43kteqEuk21OpmZ+Awjncp04vb3CIHoJPEtBtFXXZF/b4J9c6CtGT5XHHbfB
+ OWg1t8LUhfcoCcvXti8ZGIR+W/TxvvIeyvzB8fIg0rgtv7tuog9Te5YgDh2b1niLt878
+ huYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWlpOcFc+IWTFxBpf2aN/h0Tz+bdH5TcJWgBETHEQXkLTEzbqrpdnLImrGK/e8M/WfAlVKMGJU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhRf04VtSr8V7jCHyyaXa/eEU7amfm9LqyST10tpHq1CZOhkj6
+ 2+2BecMyhmR22TOQqrM4jwkwz/XCjQwr/2n8YFTCNSu+EFeXsjEsElHGtMv1o3zCwMnv2IzqTz8
+ PlKFJjQCx/m+6CCDdBqsIrSLFNvVWiLr0afyr
+X-Google-Smtp-Source: AGHT+IFRxHD7VbgUKZlgYEGba8LVyEQJUd/XrtwWNoMZ4HpIeEQgb+/eUUT599EYWN9rxMihcgxRi6ZfncX6s0r8zOs=
+X-Received: by 2002:a05:6a21:33a2:b0:1d9:61:e783 with SMTP id
+ adf61e73a8af0-1ddafd579f8mr4649081637.36.1732116856865; Wed, 20 Nov 2024
+ 07:34:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20241101130254.473017-1-andrew.goodbody@linaro.org>
- <20241101130254.473017-3-andrew.goodbody@linaro.org>
-In-Reply-To: <20241101130254.473017-3-andrew.goodbody@linaro.org>
+References: <20241114033643.623355-1-mikhail.kshevetskiy@iopsys.eu>
+ <20241116003153.GC3600562@bill-the-cat>
+ <9da1c8c2-efec-4c46-a159-f1efcfa6827a@iopsys.eu>
+ <20241116162929.GD3600562@bill-the-cat>
+ <CAFLszTh+nm8scykJfRfpiXeeZDWtVBGf60KoFxX2_eRdoXQfcQ@mail.gmail.com>
+ <20241117195234.GL3600562@bill-the-cat>
+In-Reply-To: <20241117195234.GL3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 08:33:51 -0700
-Message-ID: <CAFLszTjvPaMe7QW6Qc0Q+3KQeMO9TcXaE4oWkGiC8-phekbwUQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] test: bootm: Ensure GD_FLG_SILENT is reset
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Wed, 20 Nov 2024 08:33:38 -0700
+Message-ID: <CAFLszTjiAs1AHZaD2i_iy3i4kstOCnM__idxRS2oqnHey95KXw@mail.gmail.com>
+Subject: Re: [PATCH v13 00/10] net: tcp: improve tcp support in legacy stack
+To: Tom Rini <trini@konsulko.com>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,60 +98,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 1 Nov 2024 at 07:03, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
->
-> Some bootm tests expect that GD_FLG_SILENT is reset in order
-> to work as expected. This is the state if the test is run with
-> 'pytest --verbose' but not if run from, say, the sandbox command
-> line.
-> So reset the flag for those tests that rely on it being reset. This
-> has to be done in each test as the test infrastructure will set it
-> again before every test when not invoked with 'pytest --verbose'.
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->
->  test/bootm.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, 17 Nov 2024 at 12:52, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Nov 17, 2024 at 12:45:12PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Sat, 16 Nov 2024 at 09:29, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Nov 16, 2024 at 05:49:06PM +0300, Mikhail Kshevetskiy wrote:
+> > > >
+> > > > On 16.11.2024 03:31, Tom Rini wrote:
+> > > > > On Thu, Nov 14, 2024 at 06:36:33AM +0300, Mikhail Kshevetskiy wrote:
+> > > > >
+> > > > >> Legacy TCP stack is bad. Here are some of the known issues:
+> > > > >>  * tcp packet from other connection can break a current one
+> > > > >>  * tcp send sequence always starts from zero
+> > > > >>  * bad tcp options processing
+> > > > >>  * strange assumptions on packet size for selective acknowledge
+> > > > >>  * tcp interface assumes one of the two scenarios:
+> > > > >>      - data downloading from remote host to a board
+> > > > >>      - request-response exchange with a small packets
+> > > > >>    so it's not possible to upload large amount of data from the
+> > > > >>    board to remote host.
+> > > > >>  * wget test generate bad tcp stream, test should fail but it passes instead
+> > > > >>
+> > > > >> This series of patches fixes all of the above issues.
+> > > > > Can you please work with CI to get everything there to pass? Thanks. See
+> > > > > https://docs.u-boot.org/en/latest/develop/ci_testing.html if needed for
+> > > > > help on starting that.
+> > > > >
+> > > > Hello Tom,
+> > > > Could you look to https://github.com/u-boot/u-boot/pull/692 ?
+> > > > It fails 2 times on ut_lib_test_udelay, but this seems unrelated to my
+> > > > changes.
+> > >
+> > > Yes, unfortunately Simon's recent moving of the tests caused that one to
+> > > fail more frequently now. I've hit re-run, if that's not something
+> > > available to you, just now.
+> >
+> > Perhaps we should skip that test (return -EAGAIN) for sandbox?
+>
+> It would be good to understand why:
+> -       if (abs(error) > 100)
+> -               return -EINVAL;
+> +       ut_assert(abs(error) <= 100);
+>
+> is not actually functionally equivalent, seemingly.
 
+-EINVAL is consider an error
 
->
-> diff --git a/test/bootm.c b/test/bootm.c
-> index 5f57ecb337..52b83f149c 100644
-> --- a/test/bootm.c
-> +++ b/test/bootm.c
-> @@ -26,6 +26,9 @@ static int bootm_test_nop(struct unit_test_state *uts)
->  {
->         char buf[BUF_SIZE];
->
-> +       /* This tests relies on GD_FLG_SILENT not being set */
-> +       gd->flags &= ~GD_FLG_SILENT;
-> +
->         *buf = '\0';
->         ut_assertok(bootm_process_cmdline(buf, BUF_SIZE, BOOTM_CL_ALL));
->         ut_asserteq_str("", buf);
-> @@ -43,6 +46,9 @@ static int bootm_test_nospace(struct unit_test_state *uts)
->  {
->         char buf[BUF_SIZE];
->
-> +       /* This tests relies on GD_FLG_SILENT not being set */
-> +       gd->flags &= ~GD_FLG_SILENT;
-> +
->         /* Zero buffer size */
->         *buf = '\0';
->         ut_asserteq(-ENOSPC, bootm_process_cmdline(buf, 0, BOOTM_CL_ALL));
-> @@ -70,6 +76,9 @@ static int bootm_test_silent(struct unit_test_state *uts)
->  {
->         char buf[BUF_SIZE];
->
-> +       /* This tests relies on GD_FLG_SILENT not being set */
-> +       gd->flags &= ~GD_FLG_SILENT;
-> +
->         /* 'silent_linux' not set should do nothing */
->         env_set("silent_linux", NULL);
->         strcpy(buf, CONSOLE_STR);
-> --
-> 2.39.5
->
+-EAGAIN is considered a request to skip the test
+
+Regards,
+Simon
