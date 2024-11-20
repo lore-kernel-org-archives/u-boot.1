@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E1C0D63936
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:36:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BCE1D63936
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7969A8964F;
-	Wed, 20 Nov 2024 14:36:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CDDF5892B8;
+	Wed, 20 Nov 2024 14:36:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EICuDfXj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EoudsiAR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53B5689327; Wed, 20 Nov 2024 14:36:40 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 96F8789270; Wed, 20 Nov 2024 14:36:52 +0100 (CET)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD9CA89270
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:36:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35410892DE
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-7ea7e2ff5ceso5029620a12.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:36:37 -0800 (PST)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-7fb632bfc0eso2996946a12.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:36:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732109796; x=1732714596; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732109809; x=1732714609; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MatQYF0ittPqr2+4SVWxRUeuuoNTpnpoOHKaCnHzFoc=;
- b=EICuDfXjL+qyPNUkvx1nO4qmKJQHWRXora5WlR2FQ7Hq8iKzzpgdynITHsdfAciQLm
- Vbe4/5gxpigeD0Bo1M0y5zModCJJCrUmoKSxwDTtFTGY4O+wMvTDCx/bPN468vfAjbhk
- 3GRmsEfrIGMkUyZFMBusGSWd0FzRPgTcN0SdI=
+ bh=BcRkBM+ZAVTWJdMGAvTEutkeUPAHMXNogZHiWnsh+3Q=;
+ b=EoudsiARZfwNaxO93UD4UMaE+8+9wJZtV29lGlrK2GifQ8IWUTkUdqbpFcnZoLskXz
+ 2WvYIJBp28gvw6bM2sOohx2v3FeUFDqscMfd7fNyw3ukJx6RZll5fj/9oEzzjmV/6bsT
+ kDX3B7Zxo4Ha637/TfaaZOtS6ThB9aq6n+vww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732109796; x=1732714596;
+ d=1e100.net; s=20230601; t=1732109809; x=1732714609;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MatQYF0ittPqr2+4SVWxRUeuuoNTpnpoOHKaCnHzFoc=;
- b=CE6m7mrA4/13YFebG/3LXRi4jj+/PSdCIR6UE/6aLLMvHdIaeTJQNUPm/ucBnO0UA3
- zv1WwWXgkkSViPwDbqbdDFZMG2aRuXmaKnzLBVrBH4AVAiPXH8hbuzoB0N0A3GDCmQ/e
- HuLUO5BcNrMyee3Mfd1cMt20AlJIO+7jz+Jgf4IXNry8B9hZLmXJ9qfa8kGBzgO0+oa2
- cP6C6PLJ8ZuJiR8+Hibf1CSUQAgmuzH3pjc4dJ2kpoc+nITFp7vf5xoHyuxT2hgjyuNA
- nevt70otM4PxXHgqSnCHMFil67T/pM7EQ4Oeo1xcPn01o8BBZbPPB2idh2gR6hj9msjY
- mMiQ==
-X-Gm-Message-State: AOJu0YzMAOuHObvTji+Yyl/wbsFSHDAdHXTu4KVAtNrs4peIiMPCboVz
- XsZuynCTJyHxWTp42kiiEGAaxnRmYNTGVcsYvLVjngMBzTYLSb9ZSAKBH9T+mczDIQpTuoR5VWR
- yEPl85l4Zsh/J8033a1kShQMCIETMjyJW8osINAMaZQFHpTY=
-X-Google-Smtp-Source: AGHT+IGk1RdFuSfyOM67Ww0CLB+YaIXnArZsw+QF4Y5+S903Xlz7doleX29XoMZ9VRhku/qXimYZhtE3d6b97DMp1io=
-X-Received: by 2002:a05:6a20:3417:b0:1db:ddde:33e2 with SMTP id
- adf61e73a8af0-1ddaff54bbemr3229799637.29.1732109796302; Wed, 20 Nov 2024
- 05:36:36 -0800 (PST)
+ bh=BcRkBM+ZAVTWJdMGAvTEutkeUPAHMXNogZHiWnsh+3Q=;
+ b=ZyqAjRWu18JdkzwUCEjJldMKrVQte95tDnuIc4TVuZNbojffXsRuAPfZa8JANRuTR5
+ 3lmpRIM3Bna7Ou6rcYNcPJWcCQ+47YP3fQ5b26L+XFhEdT4Bx9aBMc2Ub/44EWDvoAmM
+ Q3OxNC6gduerAuwjtUV635KmFQH7zqQ2OFQy8aRllXVPpZWk1D/UZoiUFODlwXuVwzbw
+ BFIr2oKwiUiSLa0q7NCVtZVdwv4mdbdXjrenn1voFfDCuOklBzddeE6jXTXlRX1YvAGr
+ H7iaSaoVDvp9oou0oMrdkVam1DGuS2/FwxrIv22iTwXKH+4rEUr/x9/bE+Tnq8TTkh78
+ /ghQ==
+X-Gm-Message-State: AOJu0YyErUnuWbr35LdgpXhpU18qBW7DA3uBcRr/nhIubf4SReVTVMVE
+ Afc6OQ1kB1gcpXIGuTl/pBqwrEEYcvvNRrvflL8Qkbcuzh+99jToFdgIcbVBR3c+NtqG/Iopea+
+ +Wk726+60H4zLmXlA7SxznzkTim4V5SZ/ZPtT
+X-Google-Smtp-Source: AGHT+IEof3jFPnT+FgXFwt+qWbPU/YxvZGvT4jdyJPD2qF8kMSoOmhvR6WPyqVSyQriTuCC3EAOxJs2+tnboDVv3c1M=
+X-Received: by 2002:a05:6a20:12c2:b0:1dc:c1c9:fc0a with SMTP id
+ adf61e73a8af0-1ddaefbfcecmr3687523637.27.1732109808740; Wed, 20 Nov 2024
+ 05:36:48 -0800 (PST)
 MIME-Version: 1.0
 References: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
- <20241120100911.885418-2-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241120100911.885418-2-paul.henrys_ext@softathome.com>
+ <20241120100911.885418-3-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241120100911.885418-3-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:35:48 -0700
-Message-ID: <CAFLszThV+sQ6Hj5TW=8JyLz-Ta_GTJhkXxfNHY-caeN0dpaZtg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] tools: binman: Replace 'fit, sign' by 'fit,
- keys-directory'
+Date: Wed, 20 Nov 2024 06:35:49 -0700
+Message-ID: <CAFLszTj4a-e9y31nSXxMEEm2tdh+sccpqZiEHVNT159U0AQyww@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] tools: binman: Add tests for FIT with data
+ encrypted by mkimage
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
 Cc: u-boot@lists.denx.de, al.kochet@gmail.com, paul.henrysd@gmail.com
 Content-Type: text/plain; charset="UTF-8"
@@ -83,231 +83,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
-
 On Wed, 20 Nov 2024 at 03:09, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> mkimage can be used for both signing the FIT or encrypt its content and the
-> option '-k' can be used to pass a directory where both signing and encryption
-> keys can be retrieved.
-> _get_priv_keys_dir() is also renamed as _get_keys_dir() and adapted to support
-> both signing and encryption nodes in the FIT.
+> Test the property 'fit,keys-directory' which, when a cipher node is
+> present, encrypts the data stored in the FIT.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
 > Changes for v3:
->  - Adapt the code after changes made in commit 133c000ca334
->  - Rename property 'fit,sign' as 'fit,keys-directory' since this is not only
->    about signing but passing a key directory to mkimage for both signing and
->    encrypting
->  - Update the tests and documentation accordingly
+>  - Write out IV in full for clarity as requested
+>  - Do not replace the null byte but use fdt_util.GetString() instead
+>  - Adapt the tests for the FIT data encryption to create a file with the content
+>    of the AES key in the working directory and pass the path to binman
 >
-> My initial changes proposed in v1 and v2 has been outdated by the changes
-> proposed in commit 133c000ca334.
->
->  tools/binman/btool/mkimage.py           |  8 +++----
->  tools/binman/entries.rst                | 13 ++++++-----
->  tools/binman/etype/fit.py               | 31 ++++++++++++++-----------
->  tools/binman/ftest.py                   |  2 +-
->  tools/binman/test/340_fit_signature.dts |  2 +-
->  tools/binman/test/341_fit_signature.dts |  2 +-
->  tools/binman/test/342_fit_signature.dts |  2 +-
->  7 files changed, 32 insertions(+), 28 deletions(-)
+>  tools/binman/ftest.py                         |  45 +++++++++++++++
+>  tools/binman/test/343_fit_encrypt_data.dts    |  53 ++++++++++++++++++
+>  .../test/344_fit_encrypt_data_no_key.dts      |  53 ++++++++++++++++++
+>  tools/binman/test/aes256.bin                  | Bin 0 -> 32 bytes
+>  4 files changed, 151 insertions(+)
+>  create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
+>  create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
+>  create mode 100644 tools/binman/test/aes256.bin
 
-I think it is good to be able to specify the keys directory and not
-just rely on Binman's input path. But do we need to remove the
-fit,sign property? It is the signal that signing should be done.,
-although I understand that there is a key directory too.
-
-If we need to remove it, please do that in a separate patch.
-
-Perhaps we also need a signal that encryption should be done?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 >
-> diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-> index 78d3301bc1..3f84220fb1 100644
-> --- a/tools/binman/btool/mkimage.py
-> +++ b/tools/binman/btool/mkimage.py
-> @@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
->
->      # pylint: disable=R0913
->      def run(self, reset_timestamp=False, output_fname=None, external=False,
-> -            pad=None, align=None, priv_keys_dir=None):
-> +            pad=None, align=None, keys_dir=None):
->          """Run mkimage
->
->          Args:
-> @@ -34,7 +34,7 @@ class Bintoolmkimage(bintool.Bintool):
->                  other things to be easily added later, if required, such as
->                  signatures
->              align: Bytes to use for alignment of the FIT and its external data
-> -            priv_keys_dir: Path to directory containing private keys
-> +            keys_dir: Path to directory containing private and encryption keys
->              version: True to get the mkimage version
->          """
->          args = []
-> @@ -46,8 +46,8 @@ class Bintoolmkimage(bintool.Bintool):
->              args += ['-B', f'{align:x}']
->          if reset_timestamp:
->              args.append('-t')
-> -        if priv_keys_dir:
-> -            args += ['-k', f'{priv_keys_dir}']
-> +        if keys_dir:
-> +            args += ['-k', f'{keys_dir}']
->          if output_fname:
->              args += ['-F', output_fname]
->          return self.run_cmd(*args)
-> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> index e918162fb4..1b1d73ef17 100644
-> --- a/tools/binman/entries.rst
-> +++ b/tools/binman/entries.rst
-> @@ -864,12 +864,13 @@ The top-level 'fit' node supports the following special properties:
->
->              fit,fdt-list-dir = "arch/arm/dts
->
-> -    fit,sign
-> -        Enable signing FIT images via mkimage as described in
-> -        verified-boot.rst. If the property is found, the private keys path is
-> -        detected among binman include directories and passed to mkimage via
-> -        -k flag. All the keys required for signing FIT must be available at
-> -        time of signing and must be located in single include directory.
-> +    fit,keys-directory
-> +        Look for a directory where signing and encryption keys are stored.
-> +        If the property is found, the keys path is detected among binman
-> +        include directories and passed to mkimage via  -k flag. All the keys
-> +        required for signing and encrypting the FIT must be available at the
-> +        time of signing and encrypting and must be located in a single
-> +        include directory.
->
->  Substitutions
->  ~~~~~~~~~~~~~
-> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> index b5afbda41b..e0c1ac08d8 100644
-> --- a/tools/binman/etype/fit.py
-> +++ b/tools/binman/etype/fit.py
-> @@ -102,13 +102,13 @@ class Entry_fit(Entry_section):
->              In this case the input directories are ignored and all devicetree
->              files must be in that directory.
->
-> -        fit,sign
-> -            Enable signing FIT images via mkimage as described in
-> -            verified-boot.rst. If the property is found, the private keys path
-> -            is detected among binman include directories and passed to mkimage
-> -            via  -k flag. All the keys required for signing FIT must be
-> -            available at time of signing and must be located in single include
-> -            directory.
-> +        fit,keys-directory
-> +            Look for a directory where signing and encryption keys are stored.
-> +            If the property is found, the keys path is detected among binman
-> +            include directories and passed to mkimage via  -k flag. All the keys
-> +            required for signing and encrypting the FIT must be available at the
-> +            time of signing and encrypting and must be located in a single
-> +            include directory.
->
->      Substitutions
->      ~~~~~~~~~~~~~
-> @@ -518,14 +518,14 @@ class Entry_fit(Entry_section):
->          # are removed from self._entries later.
->          self._priv_entries = dict(self._entries)
->
-> -    def _get_priv_keys_dir(self, data):
-> -        """Detect private keys path among binman include directories
-> +    def _get_keys_dir(self, data):
-> +        """Detect private and encryption keys path among binman include directories
->
->          Args:
->              data: FIT image in binary format
->
->          Returns:
-> -            str: Single path containing all private keys found or None
-> +            str: Single path containing all keys found or None
->
->          Raises:
->              ValueError: Filename 'rsa2048.key' not found in input path
-> @@ -533,11 +533,14 @@ class Entry_fit(Entry_section):
->          """
->          def _find_keys_dir(node):
->              for subnode in node.subnodes:
-> -                if subnode.name.startswith('signature'):
-> +                if (subnode.name.startswith('signature') or
-> +                    subnode.name.startswith('cipher')):
->                      if subnode.props.get('key-name-hint') is None:
->                          continue
->                      hint = subnode.props['key-name-hint'].value
-> -                    name = tools.get_input_filename(f"{hint}.key")
-> +                    name = tools.get_input_filename(
-> +                        f"{hint}.key" if subnode.name.startswith('signature')
-> +                        else f"{hint}.bin")
->                      path = os.path.dirname(name)
->                      if path not in paths:
->                          paths.append(path)
-> @@ -587,8 +590,8 @@ class Entry_fit(Entry_section):
->          align = self._fit_props.get('fit,align')
->          if align is not None:
->              args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
-> -        if self._fit_props.get('fit,sign') is not None:
-> -            args.update({'priv_keys_dir': self._get_priv_keys_dir(data)})
-> +        if self._fit_props.get('fit,keys-directory') is not None:
-> +            args.update({'keys_dir': self._get_keys_dir(data)})
->          if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
->                              **args) is None:
->              if not self.GetAllowMissing():
 > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 156567ace7..adab65e579 100644
+> index adab65e579..b19b0cc5b3 100644
 > --- a/tools/binman/ftest.py
 > +++ b/tools/binman/ftest.py
-> @@ -7885,7 +7885,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->              str(e.exception))
+> @@ -7900,5 +7900,50 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+>              extra_indirs=[test_subdir])[0]
 >
->      def testFitSignNoSingatureNodes(self):
-> -        """Test that fit,sign doens't raise error if no signature nodes found"""
-> +        """Test that fit,keys-directory doesn't raise error if no signature nodes found"""
->          if not elf.ELF_TOOLS:
->              self.skipTest('Python elftools not available')
->          entry_args = {
-> diff --git a/tools/binman/test/340_fit_signature.dts b/tools/binman/test/340_fit_signature.dts
-> index 9dce62e52d..97c0cbd05e 100644
-> --- a/tools/binman/test/340_fit_signature.dts
-> +++ b/tools/binman/test/340_fit_signature.dts
-> @@ -11,7 +11,7 @@
->                         description = "test desc";
->                         #address-cells = <1>;
->                         fit,fdt-list = "of-list";
-> -                       fit,sign;
+>
+> +    def testSimpleFitEncryptedData(self):
+> +        """Test an image with a FIT containing data to be encrypted"""
+> +        data = tools.read_file(self.TestFile("aes256.bin"))
+> +        self._MakeInputFile("keys/aes256.bin", data)
+> +
+> +        keys_subdir = os.path.join(self._indir, "keys")
+> +        data = self._DoReadFileDtb(
+> +            '343_fit_encrypt_data.dts',
+> +            extra_indirs=[keys_subdir])[0]
+> +
+> +        fit = fdt.Fdt.FromData(data)
+> +        fit.Scan()
+> +
+> +        # Extract the encrypted data and the Initialization Vector from the FIT
+> +        node = fit.GetNode('/images/u-boot')
+> +        subnode = fit.GetNode('/images/u-boot/cipher')
+> +        data_size_unciphered = int.from_bytes(fit.GetProps(node)['data-size-unciphered'].bytes,
+> +                                              byteorder='big')
+> +        self.assertEqual(data_size_unciphered, len(U_BOOT_NODTB_DATA))
+> +
+> +        # Retrieve the key name from the FIT removing any null byte
+> +        key_name = fit.GetProps(subnode)['key-name-hint'].bytes.replace(b'\x00', b'')
+> +        with open(self.TestFile(key_name.decode('ascii') + '.bin'), 'rb') as file:
+> +            key = file.read()
+> +        iv = fit.GetProps(subnode)['iv'].bytes.hex()
+> +        enc_data = fit.GetProps(node)['data'].bytes
+> +        outdir = tools.get_output_dir()
+> +        enc_data_file = os.path.join(outdir, 'encrypted_data.bin')
+> +        tools.write_file(enc_data_file, enc_data)
+> +        data_file = os.path.join(outdir, 'data.bin')
+> +
+> +        # Decrypt the encrypted data from the FIT and compare the data
+> +        tools.run('openssl', 'enc', '-aes-256-cbc', '-nosalt', '-d', '-in',
+> +                  enc_data_file, '-out', data_file, '-K', key.hex(), '-iv', iv)
+> +        with open(data_file, 'r') as file:
+> +            dec_data = file.read()
+> +        self.assertEqual(U_BOOT_NODTB_DATA, dec_data.encode('ascii'))
+> +
+> +    def testSimpleFitEncryptedDataMissingKey(self):
+> +        """Test an image with a FIT containing data to be encrypted but with a missing key"""
+> +        with self.assertRaises(ValueError) as e:
+> +            self._DoReadFile('344_fit_encrypt_data_no_key.dts')
+> +
+> +        self.assertIn("Filename 'aes256.bin' not found in input path", str(e.exception))
+> +
+>  if __name__ == "__main__":
+>      unittest.main()
+> diff --git a/tools/binman/test/343_fit_encrypt_data.dts b/tools/binman/test/343_fit_encrypt_data.dts
+> new file mode 100644
+> index 0000000000..90e504979b
+> --- /dev/null
+> +++ b/tools/binman/test/343_fit_encrypt_data.dts
+> @@ -0,0 +1,53 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells = <1>;
+> +       #size-cells = <1>;
+> +
+> +       binman {
+> +               fit {
 > +                       fit,keys-directory;
->
->                         images {
->                                 u-boot {
-> diff --git a/tools/binman/test/341_fit_signature.dts b/tools/binman/test/341_fit_signature.dts
-> index 77bec8df1e..4a4da7e589 100644
-> --- a/tools/binman/test/341_fit_signature.dts
-> +++ b/tools/binman/test/341_fit_signature.dts
-> @@ -11,7 +11,7 @@
->                         description = "test desc";
->                         #address-cells = <1>;
->                         fit,fdt-list = "of-list";
-> -                       fit,sign;
+> +                       description = "Test a FIT with encrypted data";
+> +                       #address-cells = <1>;
+> +
+> +                       images {
+> +                               u-boot {
+> +                                       description = "U-Boot";
+> +                                       type = "firmware";
+> +                                       arch = "arm64";
+> +                                       os = "U-Boot";
+> +                                       compression = "none";
+> +                                       load = <00000000>;
+> +                                       entry = <00000000>;
+> +                                       cipher {
+> +                                               algo = "aes256";
+> +                                               key-name-hint = "aes256";
+> +                                       };
+> +                                       u-boot-nodtb {
+> +                                       };
+> +                               };
+> +                               fdt-1 {
+> +                                       description = "Flattened Device Tree blob";
+> +                                       type = "flat_dt";
+> +                                       arch = "arm64";
+> +                                       compression = "none";
+> +                                       cipher {
+> +                                               algo = "aes256";
+> +                                               key-name-hint = "aes256";
+> +                                       };
+> +                               };
+> +                       };
+> +
+> +                       configurations {
+> +                               default = "conf-1";
+> +                               conf-1 {
+> +                                       description = "Boot U-Boot with FDT blob";
+> +                                       firmware = "u-boot";
+> +                                       fdt = "fdt-1";
+> +                               };
+> +                       };
+> +               };
+> +       };
+> +};
+> diff --git a/tools/binman/test/344_fit_encrypt_data_no_key.dts b/tools/binman/test/344_fit_encrypt_data_no_key.dts
+> new file mode 100644
+> index 0000000000..90e504979b
+> --- /dev/null
+> +++ b/tools/binman/test/344_fit_encrypt_data_no_key.dts
+> @@ -0,0 +1,53 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +/dts-v1/;
+> +
+> +/ {
+> +       #address-cells = <1>;
+> +       #size-cells = <1>;
+> +
+> +       binman {
+> +               fit {
 > +                       fit,keys-directory;
+> +                       description = "Test a FIT with encrypted data";
+> +                       #address-cells = <1>;
+> +
+> +                       images {
+> +                               u-boot {
+> +                                       description = "U-Boot";
+> +                                       type = "firmware";
+> +                                       arch = "arm64";
+> +                                       os = "U-Boot";
+> +                                       compression = "none";
+> +                                       load = <00000000>;
+> +                                       entry = <00000000>;
+> +                                       cipher {
+> +                                               algo = "aes256";
+> +                                               key-name-hint = "aes256";
+> +                                       };
+> +                                       u-boot-nodtb {
+> +                                       };
+> +                               };
+> +                               fdt-1 {
+> +                                       description = "Flattened Device Tree blob";
+> +                                       type = "flat_dt";
+> +                                       arch = "arm64";
+> +                                       compression = "none";
+> +                                       cipher {
+> +                                               algo = "aes256";
+> +                                               key-name-hint = "aes256";
+> +                                       };
+> +                               };
+> +                       };
+> +
+> +                       configurations {
+> +                               default = "conf-1";
+> +                               conf-1 {
+> +                                       description = "Boot U-Boot with FDT blob";
+> +                                       firmware = "u-boot";
+> +                                       fdt = "fdt-1";
+> +                               };
+> +                       };
+> +               };
+> +       };
+> +};
+> diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/aes256.bin
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..09b8bf6254ada5c084039f32916bc7d30233bb2c
+> GIT binary patch
+> literal 32
+> ncmXpsGBz<aGq<obNK8sjNli=7$jr*l$<50zC@d;2DJ=s4pC}7U
 >
->                         images {
->                                 u-boot {
-> diff --git a/tools/binman/test/342_fit_signature.dts b/tools/binman/test/342_fit_signature.dts
-> index 267105d0f6..9c61aea044 100644
-> --- a/tools/binman/test/342_fit_signature.dts
-> +++ b/tools/binman/test/342_fit_signature.dts
-> @@ -11,7 +11,7 @@
->                         description = "test desc";
->                         #address-cells = <1>;
->                         fit,fdt-list = "of-list";
-> -                       fit,sign;
-> +                       fit,keys-directory;
+> literal 0
+> HcmV?d00001
 >
->                         images {
->                                 u-boot {
 > --
 > 2.43.0
-[..]
 
-Regards,
-Simon
+[..]
