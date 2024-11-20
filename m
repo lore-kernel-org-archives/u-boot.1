@@ -4,70 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B829CD63939
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:49:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420D3D6393C
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:49:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 712678969B;
-	Wed, 20 Nov 2024 14:48:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C634288E94;
+	Wed, 20 Nov 2024 14:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l2MIeK5F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RaQsJiC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41D5989649; Wed, 20 Nov 2024 14:48:34 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 545DE88DD9; Wed, 20 Nov 2024 14:49:01 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DFBE895F3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:48:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46AFB89426
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:48:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-539d9fffea1so2116115e87.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:48:32 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa3a79d4d59so347013966b.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:48:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732110511; x=1732715311; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732110539; x=1732715339; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fbrmmB9W56G+DhA/dIAe69/Q9eHj2E0zkVH8rnDwjE0=;
- b=l2MIeK5FYtMue2Z6p/+ZxTyRKj1sGvnb4W1SYXIBXIz2+MyWFDUXY18KehMaldacqm
- vrmUwc3Q0p1fQ+pdNrzjHX2H3gYTBL437RKtEYxZ2GrvNf8XAXAqyelAJn5PtjDkuVok
- gJHeykjcjWSpUpD6whPvUyxJa00jV6jZLyCCQ=
+ bh=MTblv5uiYB611pFYrLvJJsnvC8XxFVZK/cxxVlm/B1k=;
+ b=RaQsJiC/MZp2JgH9QoXk0OA62DE8Rh5wvD2xwT/FSp6mcQFp3Cx6xkHsgW2VXUQDrz
+ PZhFNj8MOcTEt4yL7/rzFdYHaknX733Jjt33CNZov98B2GHaGXFcLaMmfecOWPwB+6ZD
+ ouaQFF8wh71V+vrVrCGJopNoP/FnxhZlOOxZw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732110511; x=1732715311;
+ d=1e100.net; s=20230601; t=1732110539; x=1732715339;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fbrmmB9W56G+DhA/dIAe69/Q9eHj2E0zkVH8rnDwjE0=;
- b=h7kpgw/6kuoQ5oiSTx8203pN7znpyEKI/I7cfhJuxaCXyEeswn71TtdtIE9722rTcd
- 65UCCCvUgE33eudq8CM+2ADie0z4JpnzTEgipJ1tHZRLHCXd0lmKUT6Pt1ciIgfaRkiG
- kgSH7iM8A4uwWStZdP1ZLh9Ydhuqho0HKyPI31anTeIPjnQHUAwRmmJOqgvjcMbCjl7p
- 6Tj9NYhFYzbMc0ZMqnVJ1m8VwTYFbsw4wWP11eVaKhZMY2Gvt+EUu0jUQnVgovmnxnF8
- KA7mmNAQix3iUcUqrpc0RGaEy1oMV3uFeSnDdL+Ilftql66X+FMH0D+srCNpvOWzMO/8
- yoew==
-X-Gm-Message-State: AOJu0Yz5eRXy0oPKL26NRQnvcaHLXXvJZUk+QKndgSB9AiHRobXv0yoU
- ZHIhvht6vw5dz5xMsa6ecOAMKNKd810eE0V4RX3yYfQoBa+raldZWJHB5SaX7BuGzk/aqSucfBj
- CRkFfjMqq4KMqepPw8kB/sSYWBTe1zPcqvn/iVOxIbDWgE8o=
-X-Gm-Gg: ASbGncvCkk58ZMqtLzT2FOHwQK1RJpMDOgKnHXD/n+EXuWszzvMixnhA61KsxyQAzjf
- Rgzc5rajLqboHWKtG9XYM5zstDlq271s=
-X-Google-Smtp-Source: AGHT+IGxoGJedDOGwOjsgdVI2RAjgOWA9GRFaE2mELy35rvkZs7flxLBxtSBScx1QCyrdvA/CTD6ggHsiU6F3eG4URY=
-X-Received: by 2002:a05:6512:2393:b0:53d:a596:2d24 with SMTP id
- 2adb3069b0e04-53dc136cf46mr1506808e87.44.1732110511373; Wed, 20 Nov 2024
- 05:48:31 -0800 (PST)
+ bh=MTblv5uiYB611pFYrLvJJsnvC8XxFVZK/cxxVlm/B1k=;
+ b=JFHrZoNy7ecEt5NDee3pOJu8LoenU/+EJNExIwfSR/D+2hw8w1FhZLNBVs9Z64tgYj
+ feB/ummQi3DDHlCEsCYWTPZYvRkgcUnCCf4hBWSxQcpKEMZ1FTF6qXCNrizhRAtyb7Sh
+ 2XqX2w7vf9WqFeUsYJDiI9BoElJL2fk9V3HxtYqj2a7jTYzKtPWl4htVTRxO3RR0buC7
+ 0cz5tNCdDextdBNycUk9MO5LUbb4de6fF810mtdoqDFNOqnJ6DjxLhHVBarNM+W3HPJ4
+ ueEkpIfLZm8GxzTJI+rvLHHM97qcm509WHEslCmQUt0lUo9KOPPNfvQg1jUdcdHhl7KW
+ tB0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdsuqUoORS2wXGIMTnZHIPh0BqL+nzeydpAHDHKd1zmjfU/+q5Td0A1D6LcuFEDGT3mLy3P28=@lists.denx.de
+X-Gm-Message-State: AOJu0YyK6aqOMmwM72Cglp9Q5NaenyV5iisAdf8OdNyrsAQB6QX2Mvq5
+ jA7MK+ChUk5T0dcC+aX0A3z1jbJyoRG2IouGL1VCostZMt2kI09IzFu8MpVTPo7lowe6Y6lDpAt
+ B623BH8BzlFclV7rRg/Bvj6n64nAzAmDdhToq
+X-Gm-Gg: ASbGncvWKsviqWiUD0zrRrVesnE93e6+H2VxBN7BIsD70sBzR3XbfF3B5+W0a3/2lCW
+ nu2DWt2hzRN47xIHZkBSzZNVgLN3Jd3A=
+X-Google-Smtp-Source: AGHT+IF84M50TFWVGAU3GqT7lGD04s6st5MXRXJK3LneEyP6SkKVipTWVIAQKSmlmgrznmTNyoFAvtWaB8MSPgUVVxE=
+X-Received: by 2002:a17:907:9707:b0:a9a:230b:fb5e with SMTP id
+ a640c23a62f3a-aa4dd50a474mr297070566b.4.1732110538755; Wed, 20 Nov 2024
+ 05:48:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120100157.485418-1-andrew.goodbody@linaro.org>
- <20241120100157.485418-5-andrew.goodbody@linaro.org>
-In-Reply-To: <20241120100157.485418-5-andrew.goodbody@linaro.org>
+References: <20241110115054.2555-1-ansuelsmth@gmail.com>
+ <20241110115054.2555-7-ansuelsmth@gmail.com>
+In-Reply-To: <20241110115054.2555-7-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:48:10 -0700
-Message-ID: <CAFLszTgsdubkumLO+0wO2qjVGxfmR=pVWc0o4vh2cEQjNtLHgw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] test: lib: Use CONFIG_64BIT to detect 64 bit
- compile
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Wed, 20 Nov 2024 06:48:47 -0700
+Message-ID: <CAFLszTjG3h3UnRSw=3mD65Y+MsUBXWm5fMS51=G7xgYqsRazWg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] test: dm: Add test for ofnode options phandle
+ helper
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Yang Xiwen <forbidden405@outlook.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,64 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Nov 2024 at 03:02, Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
+On Sun, 10 Nov 2024 at 04:51, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> Should use CONFIG_64BIT to detect a 64 bit compile and not
-> CONFIG_PHYS_64BIT. This allows more platforms to run the
-> full test code.
+> Add test for ofnode options phandle helper and add new property in the
+> sandbox test dts.
 >
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->
-> Changes in v3:
-> New patch added for this version.
->
->  test/lib/str.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  arch/sandbox/dts/test.dts |  1 +
+>  test/dm/ofnode.c          | 11 +++++++++++
+>  2 files changed, 12 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-
-
->
-> diff --git a/test/lib/str.c b/test/lib/str.c
-> index 3cc9dfea6a..0505aed09d 100644
-> --- a/test/lib/str.c
-> +++ b/test/lib/str.c
-> @@ -206,13 +206,13 @@ static int str_itoa(struct unit_test_state *uts)
->         ut_asserteq_str("4294967295", simple_itoa(0xffffffff));
->
->         /* Use #ifdef here to avoid a compiler warning on 32-bit machines */
-> -#ifdef CONFIG_PHYS_64BIT
-> +#ifdef CONFIG_64BIT
->         if (sizeof(ulong) == 8) {
->                 ut_asserteq_str("9223372036854775807",
->                                 simple_itoa((1UL << 63) - 1));
->                 ut_asserteq_str("18446744073709551615", simple_itoa(-1));
->         }
-> -#endif /* CONFIG_PHYS_64BIT */
-> +#endif /* CONFIG_64BIT */
->
->         return 0;
->  }
-> @@ -226,13 +226,13 @@ static int str_xtoa(struct unit_test_state *uts)
->         ut_asserteq_str("ffffffff", simple_xtoa(0xffffffff));
->
->         /* Use #ifdef here to avoid a compiler warning on 32-bit machines */
-> -#ifdef CONFIG_PHYS_64BIT
-> +#ifdef CONFIG_64BIT
->         if (sizeof(ulong) == 8) {
->                 ut_asserteq_str("7fffffffffffffff",
->                                 simple_xtoa((1UL << 63) - 1));
->                 ut_asserteq_str("ffffffffffffffff", simple_xtoa(-1));
->         }
-> -#endif /* CONFIG_PHYS_64BIT */
-> +#endif /* CONFIG_64BIT */
->
->         return 0;
->  }
-> --
-> 2.39.5
->
