@@ -4,77 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DDED743CB
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 19:39:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1134DD743D8
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 20:41:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 488E989164;
-	Wed, 20 Nov 2024 20:39:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3AB4E8910B;
+	Wed, 20 Nov 2024 21:41:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B4mBRh68";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qnuAH/3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFACD89164; Wed, 20 Nov 2024 20:39:18 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 255E589301; Wed, 20 Nov 2024 19:06:45 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77D58925A
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 20:39:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C864889346
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 19:06:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5ced377447bso94616a12.1
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:39:15 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-46101120e70so349631cf.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:06:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732131555; x=1732736355; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jrbl/a+dHtKybLr6KROZCrfEcdziNmhgX+SytHP9mZQ=;
- b=B4mBRh68ZEA7lGXMLK0dO7EfAyJtU97YPPlg/pWQoD7VjSBMKppzqItxESJP+r5qQQ
- fFqOconEfGXGZt+GJqW6myKagrqxXC6ERmrnpl4buuBgWbsaSaVipFiqVbvmpVNW5TEt
- 0Nm5Sa+wkU1CzP9Y4sdA2J47gz/A7P8Pk7whTNfulUzcH0fkYK8QzS7JIfYCN6oDzel+
- /RAX93G7zN3FG1YHks1t3jySYM9KdnqttZCtIyI8PIpbTUzzBoUjfe7F3PHN4K3dpkz0
- uSXpL6KDQ8VQm6GiLPPXfQ560JslUx4kxn/N5Q60IIskLSd1h9lCRBd8iqrBHjwQLzzK
- ZtWg==
+ d=konsulko.com; s=google; t=1732126000; x=1732730800; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KIgpyphRz6hOMD/n6XPZ+0XeyeeXh/Egu7p8MBAnYNw=;
+ b=qnuAH/3HRmZC2UNYBziui+tMW4XvdBrG4XZzWItvyuEk0uQ0sIzhT7fETts/Tk/8lH
+ u2bRt9y0aWw2DGpb31qqxkIdR7AZwjVln/BI1E8CL4EQyyxkXaAyX4KB3W12CFDBIM22
+ HAZ2pNMS9I0TxFEtCYsuy2FeHF3HutRiyEEVM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732131555; x=1732736355;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jrbl/a+dHtKybLr6KROZCrfEcdziNmhgX+SytHP9mZQ=;
- b=YsR5Ox+H6Z69iSwh4Yd3Gtf4aACJsuMkWDE19SePDXUGop5kc+aCeHcguZhIGShJd1
- uZYe3M3eHTFYsMW+ls+vc8vwN9D9NPV3dxz7HlqoV8T2IbdwHEUR6C3SpAb2XYPoletu
- G+Wts1iiiyHpr04/36PTjLshZJG9RJk0ml2AIrzEbF6QL6iMPOSrO/76KqBThb57o0dD
- lN6rL+sBKj5X7OforKWAGFdlmyXiwju8TN6dCbNli3GPuYIlwLnBySANHl61hvICiyLe
- 3jDkdy8kMKUC3IxTIwk2NR3jjYjPWk8rpWks/hnS5jEtT6WNsJpebNL6bgw95l2BIR82
- kA8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAy5mpl8rkFGSKAVzlv8p850EibXQSlrbWfOKdTVMAiZOMCU/dNtI4F1Bhg10KHsW6uekEQO0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJ2ZucVB7SXJc5797Tg5VCXux8rRfO53yo2FNFbN7t3H8P7DCn
- iPg9d9r57DGjIUqiiIzrzTMihJ112+nqqwceLr2LHFKf7n7Tp3gB5XPDTS9SByZnTlGpIPGVxZl
- IPmhVaDRArTHUqVAefMjzl+7RIQc=
-X-Google-Smtp-Source: AGHT+IFohkxcjJ/ilyQYU20mCQUihbTTlO7VKQR6xd56WAcXJxAPliLPWKlXNBzuKH+GN6gaauhHF6IExweca9NhTrY=
-X-Received: by 2002:a05:6402:13d0:b0:5cf:e5e3:e0b8 with SMTP id
- 4fb4d7f45d1cf-5cff4c4822dmr3275010a12.17.1732131554454; Wed, 20 Nov 2024
- 11:39:14 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732126000; x=1732730800;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KIgpyphRz6hOMD/n6XPZ+0XeyeeXh/Egu7p8MBAnYNw=;
+ b=sWnT0QHsebA3ltso5C0wL54IgvHgL5hGeyPRGwLK8ZAW5ggq+HekOJnj3tjT9AgZQC
+ zaWiyY81plKNXmVSGGuHE/q+CYBWqpITj2J1dyeinZvpUu7kV3pEiEZxhddgMHTlidZg
+ yZy63+iG7tnwoRrO74jlFmr1wIb5CK/Zhj43DGBeMjMVSjDUh6/szgode4M/lhSrok/2
+ LL9wCiW3QJQZTnWgROgprv4raMJDY7qSPDXB9XraQU22q3sqdgjFSAIEjQyBzRlHYS2p
+ ZqaiHtr7fDGfVno+u5k6Lu9kxdbKDGYpZDxny1+AZX3V7qNsZYil8F7bkBuC/6uwah0W
+ TGFw==
+X-Gm-Message-State: AOJu0YzOs2qsOg+DK1EW08L6QB4Di1KOiY8eH0gxkgy1U2XZIU5ogvx4
+ 5IlhJ81l3MVA6vQ/8iJWnUPaE1G1fRMN4gpjZbFI3IXHQbOiRmmUsHtmrPUtvCo=
+X-Google-Smtp-Source: AGHT+IFvz7urlQI/HdktGSf9HfiERKM33WHIZkbjBsiK/boNm6pQrzTJTQCOwYt+kQCZT2jnxsrA4g==
+X-Received: by 2002:a05:6214:20a5:b0:6d4:1199:52 with SMTP id
+ 6a1803df08f44-6d43782aba9mr45788806d6.28.1732126000628; 
+ Wed, 20 Nov 2024 10:06:40 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d4380f464dsm13434736d6.63.2024.11.20.10.06.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Nov 2024 10:06:39 -0800 (PST)
+Date: Wed, 20 Nov 2024 12:06:33 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Thomas =?iso-8859-1?Q?Wei=DFschuh?= <thomas.weissschuh@linutronix.de>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Wei Ming Chen <jj251510319013@gmail.com>
+Subject: Re: [PATCH 00/15] efi_loader: Add support for logging to a buffer
+Message-ID: <20241120180633.GE3600562@bill-the-cat>
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com>
+ <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
+ <CAC_iWjJkAfJHp_NDXJMfNPe7OhBp6B_WBMxvwU_qHU5tamm6ZA@mail.gmail.com>
+ <CAFLszTiL88dHANMHo1bK2Uj5K1-7B56_Uk8keSQTo6FUfUoOVQ@mail.gmail.com>
+ <CAC_iWjJOFv1v5VPoJ2UEu1YR84i1GUdB7tEng-uqgZ+6o_XWZw@mail.gmail.com>
+ <CAFLszThCONSk2v30pGDGyGjz9mz2X0mtpqGCWSZJdbAuDaT0bw@mail.gmail.com>
+ <CAC_iWj+g1nMA1DrWjguP=YiQhKOmyGKyu233Eb6Zjcv0x4yatA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241119195039.15177-1-mibodhi@gmail.com>
- <CAFLszTjG+o=-1tr_dSf4EsOGSazRFdnSJ_VsMFR9k+vntcdRuA@mail.gmail.com>
-In-Reply-To: <CAFLszTjG+o=-1tr_dSf4EsOGSazRFdnSJ_VsMFR9k+vntcdRuA@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Wed, 20 Nov 2024 11:39:02 -0800
-Message-ID: <CAJaLiFxWYwR203y2REi0sNP0Ho1ZhQq-4cWcCm2og7mV7PRKYw@mail.gmail.com>
-Subject: Re: [PATCH] arm: kirkwood: Enable bootstd for Sheevaplug board
-To: Simon Glass <sjg@chromium.org>
-Cc: Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rFVE7GfguTf5rhNd"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWj+g1nMA1DrWjguP=YiQhKOmyGKyu233Eb6Zjcv0x4yatA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Wed, 20 Nov 2024 21:41:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,141 +126,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Wed, Nov 20, 2024 at 4:40=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+--rFVE7GfguTf5rhNd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Nov 20, 2024 at 05:55:18PM +0200, Ilias Apalodimas wrote:
+> Hi Simon,
+>=20
+> On Wed, 20 Nov 2024 at 17:37, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > HI Ilias,
+> >
+> > On Fri, 1 Nov 2024 at 05:32, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Thu, 31 Oct 2024 at 20:02, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Tue, 29 Oct 2024 at 19:32, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Tue, 29 Oct 2024 at 17:45, Simon Glass <sjg@chromium.org> wrot=
 e:
->
-> Hi Tony,
->
-> On Tue, 19 Nov 2024 at 12:50, Tony Dinh <mibodhi@gmail.com> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Tue, 29 Oct 2024 at 10:58, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Hi Simon,
+> > > > > > >
+> > > > > > > On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> =
+wrote:
+> > > > > > > >
+> > > > > > > > It is a bit of a pain to log EFI boot-services calls at pre=
+sent. The
+> > > > > > > > output goes to the console so cannot easily be inspected la=
+ter. Also it
+> > > > > > > > would be useful to be able to store the log and review it l=
+ater, perhaps
+> > > > > > > > after something has gone wrong.
+> > > > > > > >
+> > > > > > > > This series makes a start on implementing a log-to-buffer f=
+eature. It
+> > > > > > > > provides a simple 'efidebug log' command to inspect the buf=
+fer. For now,
+> > > > > > > > only memory allocations are logged.
+> > > > > > >
+> > > > > > > Why is this problem specific to EFI and no U-Boot in general?=
+ Do we
+> > > > > > > have a similar machinery for malloc()?
+> > > > > >
+> > > > > > Mostly because an app can make EFI calls and we want to know wh=
+at they
+> > > > > > are, e.g. to debug them and figure out what might be wrong when
+> > > > > > something doesn't boot.
+> > > > >
+> > > > > EFI_PRINT() has been proven pretty useful for this. I don't perso=
+nally
+> > > > > see the point of adding ~1300 lines of code to replace a print.
+> > > > > What would make more sense is teach EFI_PRINT to log errors in a =
+buffer.
+> > > >
+> > > > Is that a NAK? Please be clear if you are reviewing the code or just
+> > > > rejecting the whole idea.
+> > >
+> > > For the idea, no. But I don't think what's implemented here is what w=
+e want.
+> > >
+> > > To track what EFI services are called, we already have EFI_ENTRY and =
+EFI_EXIT.
+> > > Why don't we instead, add a logging service (and we already have
+> > > ftrace iirc) and plug it in the macros above?
+> > > That would make more sense not to mention way less code.
 > >
-> > Enable bootstd for Sheevaplug board.
-> > Remove JFFS2 support. See JFFS2 Vulnerability[1].
-> > Enable LTO to keep board size within limit.
-> >
-> > [1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-ca=
-t/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
-> >
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> > ---
-> >
-> >  configs/sheevaplug_defconfig | 16 ++--------------
-> >  include/configs/sheevaplug.h | 20 +++++++++++++++-----
-> >  2 files changed, 17 insertions(+), 19 deletions(-)
->
-> Can I suggest that you move to a test-based environment, too?
+> > I am wanting to programmatically log and manage what EFI_LOADER does,
+> > so that bootstd can present a high-level view of what is going on,
+> > e.g. which protocols are used, how much memory is allocated and where.
+> > So this is not just about logging text output.
+>=20
+> Why the EFI_LOADER only? Bootstd is supposed to cover more cases, so
+> why not a generic framework for all boot commands?
 
-Did you mean a "text-based environment" as in
-board/<vendor>/<board>/<CONFIG_SYS_BOARD>.env ?
+This feels similar to the point I've made elsewhere in this overarching
+series, why not do this at existing common points in the code path?
 
-If yes, I have not tried it but my impression from my past reading is
-that we need to repeat the bootcmd (bootcmd=3Dbootflow scan -lb) and
-other boot #define's in the .env file. In that case the
-include/confis/sheevaplug.h can be removed. I recall reading this
-conversation here in the ML from way past. It'll be easier to maintain
-and I'm all for it!
+--=20
+Tom
 
-Is there a good example somewhere in the u-boot source tree? i.e. any
-other envs that could be useful for bootstd should be in there too.
+--rFVE7GfguTf5rhNd
+Content-Type: application/pgp-signature; name="signature.asc"
 
-All the best,
-Tony
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc+JSUACgkQFHw5/5Y0
+tyy/AAv8CaK/gKPcPa+SFomJEnMTBGZ2Hj+M6gdnCrr3H8P1daU0aP38oSB5b+65
+ZbSjz8BbREfWBEB7R0hdT7dgKyWtXnNU261ZBzgQOhNzcQF+zVOZ4yZvQFzUPidb
+ShDNboJwgHfYAmlFmvUqtDr+m0bswQ5izpc21L1J0HfjDhsp5Mi76QOWTrfKJyF3
+bPnTzp5cP9u/SeisZihI7zX5nrp2Njm12iUFmYNDP5f/z/g8D2cxoLy5kb1MyrUz
+XMgij3fvJa6yjOOR0Y9f4+Z2hZU+UWzqTsWJzEV8giXLv/fM66CA/KGL+vIvFSND
+yXpDWZEgy8NPHtLDYnZvvuwxsovNrSkcGOQqa45UMMsdQb0i/yGcAv2jBxQKGox/
+tHvMvqKBso15fCLnU7rI4NNHsll4H783wUaWevf0BjzYbi08NKMDkbxhe7DmwXnt
+7Pqkd7F4LMxcVK0GvdHIPbBGrC6wL3V6X4Lggy42tq3nPmlKOGQFBgZ4EV1yR8FJ
+Gg3iFTIT
+=lTsj
+-----END PGP SIGNATURE-----
 
->
-> >
-> > diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfi=
-g
-> > index 9ac40b9e57..a7f6c73ecb 100644
-> > --- a/configs/sheevaplug_defconfig
-> > +++ b/configs/sheevaplug_defconfig
-> > @@ -16,16 +16,14 @@ CONFIG_ENV_OFFSET=3D0x80000
-> >  CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/kirkwood-sheevaplug"
-> >  CONFIG_SYS_LOAD_ADDR=3D0x800000
-> >  CONFIG_IDENT_STRING=3D"\nMarvell-Sheevaplug"
-> > +CONFIG_LTO=3Dy
-> >  CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
-> >  CONFIG_BOARD_SIZE_LIMIT=3D524288
-> > +CONFIG_BOOTSTD_FULL=3Dy
-> >  CONFIG_BOOTDELAY=3D3
-> > -CONFIG_USE_BOOTCOMMAND=3Dy
-> > -CONFIG_BOOTCOMMAND=3D"${x_bootcmd_kernel}; setenv bootargs ${x_bootarg=
-s} ${x_bootargs_root}; bootm 0x6400000;"
-> >  CONFIG_USE_PREBOOT=3Dy
-> >  # CONFIG_DISPLAY_BOARDINFO is not set
-> > -CONFIG_HUSH_PARSER=3Dy
-> >  CONFIG_SYS_MAXARGS=3D32
-> > -CONFIG_CMD_BOOTZ=3Dy
-> >  # CONFIG_BOOTM_PLAN9 is not set
-> >  # CONFIG_BOOTM_RTEMS is not set
-> >  # CONFIG_BOOTM_VXWORKS is not set
-> > @@ -35,19 +33,10 @@ CONFIG_CMD_MMC=3Dy
-> >  CONFIG_CMD_NAND=3Dy
-> >  CONFIG_CMD_SATA=3Dy
-> >  CONFIG_CMD_USB=3Dy
-> > -CONFIG_CMD_DHCP=3Dy
-> > -CONFIG_CMD_MII=3Dy
-> > -CONFIG_CMD_PING=3Dy
-> > -CONFIG_CMD_EXT2=3Dy
-> > -CONFIG_CMD_EXT4=3Dy
-> > -CONFIG_CMD_FAT=3Dy
-> > -CONFIG_CMD_FS_GENERIC=3Dy
-> > -CONFIG_CMD_JFFS2=3Dy
-> >  CONFIG_CMD_MTDPARTS=3Dy
-> >  CONFIG_MTDIDS_DEFAULT=3D"nand0=3Dorion_nand"
-> >  CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dorion_nand:512K(uboot),512K(env)=
-,4M(kernel),-(rootfs)"
-> >  CONFIG_CMD_UBI=3Dy
-> > -CONFIG_ISO_PARTITION=3Dy
-> >  CONFIG_OF_CONTROL=3Dy
-> >  CONFIG_ENV_OVERWRITE=3Dy
-> >  CONFIG_ENV_IS_IN_NAND=3Dy
-> > @@ -68,6 +57,5 @@ CONFIG_DM_RTC=3Dy
-> >  CONFIG_RTC_MV=3Dy
-> >  CONFIG_USB=3Dy
-> >  CONFIG_USB_EHCI_HCD=3Dy
-> > -CONFIG_USB_STORAGE=3Dy
-> >  CONFIG_LZMA=3Dy
-> >  CONFIG_BZIP2=3Dy
-> > diff --git a/include/configs/sheevaplug.h b/include/configs/sheevaplug.=
-h
-> > index 4e0b3c663c..c08d29892c 100644
-> > --- a/include/configs/sheevaplug.h
-> > +++ b/include/configs/sheevaplug.h
-> > @@ -12,13 +12,23 @@
-> >
-> >  #include "mv-common.h"
-> >
-> > +#define KERNEL_ADDR_R  __stringify(0x800000)
-> > +#define FDT_ADDR_R     __stringify(0x2c00000)
-> > +#define RAMDISK_ADDR_R __stringify(0x01100000)
-> > +#define SCRIPT_ADDR_R  __stringify(0x200000)
-> > +
-> > +#define LOAD_ADDRESS_ENV_SETTINGS \
-> > +       "kernel_addr_r=3D" KERNEL_ADDR_R "\0" \
-> > +       "fdt_addr_r=3D" FDT_ADDR_R "\0" \
-> > +       "ramdisk_addr_r=3D" RAMDISK_ADDR_R "\0" \
-> > +       "scriptaddr=3D" SCRIPT_ADDR_R "\0"
-> >  /*
-> >   *  Environment variables configurations
-> >   */
-> > -#define CFG_EXTRA_ENV_SETTINGS "x_bootargs=3Dconsole"    \
-> > -       "=3DttyS0,115200 mtdparts=3D" CONFIG_MTDPARTS_DEFAULT       \
-> > -       "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x400000\0" \
-> > -       "x_bootcmd_usb=3Dusb start\0" \
-> > -       "x_bootargs_root=3Droot=3D/dev/mtdblock3 rw rootfstype=3Djffs2\=
-0"
-> > +#define CFG_EXTRA_ENV_SETTINGS \
-> > +       LOAD_ADDRESS_ENV_SETTINGS \
-> > +       "fdtfile=3D" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> > +       "mtdparts=3D" CONFIG_MTDPARTS_DEFAULT "\0" \
-> > +       "console=3DttyS0,115200\0"
-> >
-> >  #endif /* _CONFIG_SHEEVAPLUG_H */
-> > --
-> > 2.39.5
-> >
->
-> REgards,
-> Simon
+--rFVE7GfguTf5rhNd--
