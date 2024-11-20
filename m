@@ -4,81 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0784D60D17
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87279D44171
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D0BD89500;
-	Wed, 20 Nov 2024 10:41:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D5B2088C66;
+	Wed, 20 Nov 2024 10:48:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Tl/7qQFG";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F0D189533; Wed, 20 Nov 2024 10:41:17 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31FFB894B2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:41:15 +0100 (CET)
+ id 7FA4A895EC; Wed, 20 Nov 2024 10:48:44 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id B802C895BD
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:48:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-382376fcc4fso1102121f8f.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 01:41:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732095675; x=1732700475; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Mk6D2STUIO5FHpyLWlq6gHw/81Ip8+VYuV1b0b+hLqM=;
- b=Tl/7qQFGxkauA0phsYtErz7/Ni0TOuR2x8CdTqgRpvgsVgqx9qS07hbc8VfQFAXVQX
- HW3xNemVWMsfYpZEK2OtCGMmBj18ii55fPfv1BritsCAgjR1MhdfyJfW8qL29kwtF2tG
- GUcilsUeVWtQDxUC0FNjLuaxfF+++/iFTSy4DnU0xDk4jqEI8l6mDEj1+wPgcQuLxcv9
- oZ72QBJri7IdbgIr7JCOV+bqvdpQa+vaOIkuyqZCCgC7NfwfoDLmv/g4Bxa5VsiVjcps
- hlTAt42QHOv/GIHeydR89m7BSpMsbfKI+LK7GWr3ac5T4P9BZDVUBZy34VZqP+56wKwS
- LrRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732095675; x=1732700475;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Mk6D2STUIO5FHpyLWlq6gHw/81Ip8+VYuV1b0b+hLqM=;
- b=Jg/v3Gwuop0yw5pkls/Qa1kAB6zFUfl2dc/xzkMWzNuuXuDztqpg1pNJsOcHZSaBZU
- KJLh/MN/LPqRPp0DLIoS/cWJtQ+5XuAOwWASkBj4qloVPIJ3FOUF7isu7DwxgmmH2+4P
- qgnUKBooqSixaSBCnfTCJiipmD2wBRVG18QndsGNMBXjz8Weib7xYXAG+mn8Fzd7G8TU
- v8bTvy17Kl9c4//VdajU5EpnKbVcEIZQqjSyoRY7istTZ++XRCRkyPAAJnJV3YlqetCg
- jvG3kljR2ygyLnMb5cSxmYxZRQeKB7R5+BN5qvc8rYqUdPhGR8bYGskiamqDXHHl5hxM
- oUEw==
-X-Gm-Message-State: AOJu0YxV+OhnSf3dWInLpw6iTHemCgF77cY8yxsZL+ZbfQjoX5RD20bA
- goIaU1qgWLjXZWRRI2VdMyhbIPxCtNvhFRZ89R2/2CmjRLs8hYE3vWfmCAXqWGdBuvJE2FzgxEP
- g9MA=
-X-Google-Smtp-Source: AGHT+IE9vwvgM8nvlyx4igMu5EcxeMoMs4hi3CslPcf7Yxb0XpUTHsCm23Lec4r/38K8HsJfTy1hPA==
-X-Received: by 2002:a05:6000:2a5:b0:382:4bc5:e5f0 with SMTP id
- ffacd0b85a97d-38254b21993mr1374025f8f.39.1732095674674; 
- Wed, 20 Nov 2024 01:41:14 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:edb:fc01:24e0:2f5f:4be2:4309?
- ([2a0a:ef40:edb:fc01:24e0:2f5f:4be2:4309])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-382549452a1sm1520625f8f.106.2024.11.20.01.41.14
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 01:41:14 -0800 (PST)
-Message-ID: <e7bef1db-f9a1-407a-906c-8a74387f35b2@linaro.org>
-Date: Wed, 20 Nov 2024 09:41:13 +0000
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: fWozObMxRW627uGBdacLQg==
+X-CSE-MsgGUID: XDH8SaARS/q7HDJaWMQG2A==
+X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="229403972"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2024 18:48:37 +0900
+Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.28])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id E685C41A662A;
+ Wed, 20 Nov 2024 18:48:35 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 1/3] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
+ interfaces
+Date: Wed, 20 Nov 2024 09:48:28 +0000
+Message-Id: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "test: Update time tests to use unit-test asserts"
-To: u-boot@lists.denx.de
-References: <20241119140526.3485208-1-trini@konsulko.com>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20241119140526.3485208-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,96 +57,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19/11/2024 14:05, Tom Rini wrote:
-> While at the base level, this conversion looks equivalent, we now see
-> both of these tests failing (due to exceeding their allowed margin for
-> being too slow) in Azure with a very high frequency.
-> 
-> This reverts commit 88db4fc5fec20429881896740df61d402b4b1f66.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->   test/lib/time.c | 31 ++++++++++++++++++++++++-------
->   1 file changed, 24 insertions(+), 7 deletions(-)
-> 
-> diff --git a/test/lib/time.c b/test/lib/time.c
-> index b99e738c500f..2095bef75892 100644
-> --- a/test/lib/time.c
-> +++ b/test/lib/time.c
-> @@ -22,7 +22,11 @@ static int test_get_timer(struct unit_test_state *uts)
->   			next = get_timer(0);
->   		} while (start == next);
->   
-> -		ut_asserteq(start + 1, next);
-> +		if (start + 1 != next) {
-> +			printf("%s: iter=%d, start=%lu, next=%lu, expected a difference of 1\n",
-> +			       __func__, iter, start, next);
-> +			return -EINVAL;
-> +		}
->   		start++;
->   	}
->   
-> @@ -31,7 +35,11 @@ static int test_get_timer(struct unit_test_state *uts)
->   	 * an extra millisecond may have passed.
->   	 */
->   	diff = get_timer(base);
-> -	ut_assert(diff == iter || diff == iter + 1);
-> +	if (diff != iter && diff != iter + 1) {
-> +		printf("%s: expected get_timer(base) to match elapsed time: diff=%lu, expected=%d\n",
-> +		       __func__, diff, iter);
-> +			return -EINVAL;
-> +	}
->   
->   	return 0;
->   }
-> @@ -49,8 +57,11 @@ static int test_timer_get_us(struct unit_test_state *uts)
->   		next = timer_get_us();
->   		if (next != prev) {
->   			delta = next - prev;
-> -			ut_assert(delta >= 0);
-> -			if (delta) {
-> +			if (delta < 0) {
-> +				printf("%s: timer_get_us() went backwards from %lu to %lu\n",
-> +				       __func__, prev, next);
-> +				return -EINVAL;
-> +			} else if (delta != 0) {
->   				if (delta < min)
->   					min = delta;
->   				prev = next;
-> @@ -59,7 +70,11 @@ static int test_timer_get_us(struct unit_test_state *uts)
->   		}
->   	}
->   
-> -	ut_asserteq(1, min);
-> +	if (min != 1) {
-> +		printf("%s: Minimum microsecond delta should be 1 but is %lu\n",
-> +		       __func__, min);
-> +		return -EINVAL;
-> +	}
->   
->   	return 0;
->   }
-> @@ -80,7 +95,8 @@ static int test_time_comparison(struct unit_test_state *uts)
->   	error = delta_us - 1000000;
->   	printf("%s: Microsecond time for 1 second: %lu, error = %ld\n",
->   	       __func__, delta_us, error);
-> -	ut_assert(abs(error) <= 1000);
-> +	if (abs(error) > 1000)
-> +		return -EINVAL;
->   
->   	return 0;
->   }
-> @@ -99,7 +115,8 @@ static int test_udelay(struct unit_test_state *uts)
->   	error = delta - 1000;
->   	printf("%s: Delay time for 1000 udelay(1000): %lu ms, error = %ld\n",
->   	       __func__, delta, error);
-> -	ut_assert(abs(error) <= 100);
-> +	if (abs(error) > 100)
-> +		return -EINVAL;
->   
->   	return 0;
->   }
+The Ethenet interfaces on the Renesas RZ/G2L SoC family can operate at
+multiple power supply voltages: 3.3V (default value), 2.5V and 1.8V.
 
-Tested-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+rzg2l_pinconf_set() is extended to support the 2.5V setting, with a
+check to ensure this is only used on Ethernet interfaces as it is not
+supported on the SD & QSPI interfaces.
+
+While we're modifying rzg2l_pinconf_set(), drop the unnecessary default
+value for pwr_reg as it is set in every branch of the following if
+condition.
+
+Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+---
+Changes v1->v2:
+  - Split out of series adding RZ/G2L Ethernet support [1]
+
+[1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@bp.renesas.com/
+
+ drivers/pinctrl/renesas/rzg2l-pfc.c | 49 ++++++++++++++++++++---------
+ include/renesas/rzg2l-pfc.h         |  2 ++
+ 2 files changed, 37 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/renesas/rzg2l-pfc.c
+index e88ec1c18373..0098e2d52d57 100644
+--- a/drivers/pinctrl/renesas/rzg2l-pfc.c
++++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
+@@ -394,18 +394,10 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 	}
+ 
+ 	case PIN_CONFIG_POWER_SOURCE: {
+-		u32 pwr_reg = 0x0;
++		bool support_2500 = false;
++		u32 pwr_reg;
++		u32 value;
+ 
+-		/* argument is in mV */
+-		if (argument != 1800 && argument != 3300) {
+-			dev_err(dev, "Invalid mV %u\n", argument);
+-			return -EINVAL;
+-		}
+-
+-		/*
+-		 * TODO: PIN_CFG_IO_VMC_ETH0 & PIN_CFG_IO_VMC_ETH1 will be
+-		 * handled when the RZ/G2L Ethernet driver is added.
+-		 */
+ 		if (cfg & PIN_CFG_IO_VMC_SD0) {
+ 			dev_dbg(dev, "port off %u:%u set SD_CH 0 PVDD=%u\n",
+ 				port_offset, pin, argument);
+@@ -418,13 +410,42 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			dev_dbg(dev, "port off %u:%u set QSPI PVDD=%u\n",
+ 				port_offset, pin, argument);
+ 			pwr_reg = QSPI;
++		} else if (cfg & PIN_CFG_IO_VMC_ETH0) {
++			dev_dbg(dev, "port off %u:%u set ETH0 PVDD=%u\n",
++				port_offset, pin, argument);
++			pwr_reg = ETH_POC(0);
++			support_2500 = true;
++		} else if (cfg & PIN_CFG_IO_VMC_ETH1) {
++			dev_dbg(dev, "port off %u:%u set ETH1 PVDD=%u\n",
++				port_offset, pin, argument);
++			pwr_reg = ETH_POC(1);
++			support_2500 = true;
+ 		} else {
+-			dev_dbg(dev, "pin power source is not selectable\n");
++			dev_dbg(dev, "port off %u:%u PVDD is not selectable\n",
++				port_offset, pin);
++			return -EINVAL;
++		}
++
++		/* argument is in mV */
++		switch (argument) {
++		case 1800:
++			value = PVDD_1800;
++			break;
++		case 3300:
++			value = PVDD_3300;
++			break;
++		case 2500:
++			if (support_2500) {
++				value = PVDD_2500;
++				break;
++			}
++			fallthrough;
++		default:
++			dev_err(dev, "Invalid mV %u\n", argument);
+ 			return -EINVAL;
+ 		}
+ 
+-		writel((argument == 1800) ? PVDD_1800 : PVDD_3300,
+-		       data->base + pwr_reg);
++		writel(value, data->base + pwr_reg);
+ 		break;
+ 	}
+ 
+diff --git a/include/renesas/rzg2l-pfc.h b/include/renesas/rzg2l-pfc.h
+index 2df17ece2a31..d1015b1d2ac1 100644
+--- a/include/renesas/rzg2l-pfc.h
++++ b/include/renesas/rzg2l-pfc.h
+@@ -77,9 +77,11 @@
+ #define IEN(n)			(0x1800 + (n) * 8)
+ #define PWPR			0x3014
+ #define SD_CH(n)		(0x3000 + (n) * 4)
++#define ETH_POC(ch)		(0x300c + (ch) * 4)
+ #define QSPI			0x3008
+ 
+ #define PVDD_1800		1	/* I/O domain voltage <= 1.8V */
++#define PVDD_2500		2	/* I/O domain voltage 2.5V */
+ #define PVDD_3300		0	/* I/O domain voltage >= 3.3V */
+ 
+ #define PWPR_B0WI		BIT(7)	/* Bit Write Disable */
+-- 
+2.43.0
+
