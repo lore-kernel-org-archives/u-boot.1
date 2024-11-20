@@ -4,73 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA4DD711B4
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381A6D711B4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:36:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6266588DA3;
-	Wed, 20 Nov 2024 16:36:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D7344892DE;
+	Wed, 20 Nov 2024 16:36:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="efr7ToSH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FK9J23bM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 523D688C0F; Wed, 20 Nov 2024 16:36:17 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 1F47187042; Wed, 20 Nov 2024 16:36:54 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F5A788FAA
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:36:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABBB0892DE
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:36:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-83b2a41b81cso157534439f.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:36:15 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-83a9be2c0e6so170101139f.2
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:36:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732116971; x=1732721771; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AohfFloXytCd3x6NZ07u4rFeOO50YPYPqcLjz5+SScQ=;
- b=efr7ToSHeVPzubINAWm0a9QVna+iFXqqd+iSMXd4ePW1D2mcJVCqCoxScVAVMr4pBY
- j+lAeaJbqgyxmx2vnsfaEjS2xx5eHlHcPYVYDTd812rtzWCQTy3c+I709uEMqT2fvcOu
- 8LnryZ1ovalhu4yqTnvUhlfEHVIs+QlIiX1lE=
+ d=chromium.org; s=google; t=1732117009; x=1732721809; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=GIb1CPIzu2m6BoWt66RCGiMZy7p8OvjLs4KfhmxLP7c=;
+ b=FK9J23bM8pMftKNi4ZxP4uik4JrQkZYprmoOLBmDTDWuFArKck2Z7MSIJTxa9O3w1q
+ +HvIMapAmmXtEXvSpEsZJ0FFW544wvQkLrbpBl4kEfCbR4805ihD/yitePlCHE7kUJie
+ y6oHpuOi70F/m7cIcH9+coS2GS9tEPBsPpHms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732116971; x=1732721771;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AohfFloXytCd3x6NZ07u4rFeOO50YPYPqcLjz5+SScQ=;
- b=Lth93nR9CZ3b5WFnUMaBHRAloxirkg14sFLnALbM8RvEZIl4XXIZH49E5MEq/R0teS
- HT5bAMbUcUId8MTrR2icupC9E9Cv1lyPdSyqKZeRBcAVuRPhp4JU601ck2n4+k2g8ny+
- KtI+XPdK57RVyqz8NHVrf/RkDHyUZSgydhwDpoYdb2K9Uw7OhE0nA/iZoNZGTvwrw9+l
- f3WJ14Inoqo9XSlCTsRiFR0bXFhSgoj3yeMi74LC5ZPQT2LZ4A2eawkQpE9ICGoMA4qE
- adJ7yIssexcmWoAsJeT9M388Cjb5u9wz20ZGQUB1VbDuP9RHUOuBJZ96F/Iy2l1BL2O0
- qaUQ==
-X-Gm-Message-State: AOJu0Yw5DcFzjYGJV2M8Gu0V8s1Z+dbUeKXt3E2T/Ub3qeVttBk+M7/6
- QW24qxEeJ56ixEXafm35g9cZZvwvJw++EosrjRKyxcnAn9zHZkwFMunMuLxd2HQHnO0iSAQc4ao
+ d=1e100.net; s=20230601; t=1732117009; x=1732721809;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GIb1CPIzu2m6BoWt66RCGiMZy7p8OvjLs4KfhmxLP7c=;
+ b=qAQhDuFB8pd7M54BBiFTsikGCFeO48z9uhCQRpeVYY6eXC4U15WRHXmIh2zndnMW/d
+ kOBiwxCwRBnbHDAXamTTNmg20FXtNaFhWflqCK1BmBXuVEPst0q0EGts8u6aek9tTvig
+ h2SaqNZpEls4OJ5xVMjIV6fljAHdip2ktPqvaQ9MzFpYX73HUxGpiUlkEtDaq/Q2EWZ2
+ X7EGf+Iktf1LGrubf6PzgCVtzXqnNB7a1jx3EzI4ymb8wjjW/i1EMaagXrI9wkcqVHWN
+ VQNRPlAdxc8MzmnL2S8OpAfJxI2zDhOPbo1k+BDEG+WZN2pRRHVaq0zTPt33FzJLAcMT
+ Fgcg==
+X-Gm-Message-State: AOJu0YyDmQXyRvY3AiF4H90cZ4LGsZoeltiOfHha+PTY4qj9NVe/3VOi
+ Rr8S/rZlFRVu/yXp/qJgb7uF6oTXfE6bCZvYCI2Jp5XvMjcOUaN/igEFyWn1lqLTbfNeVm//70g
  =
-X-Google-Smtp-Source: AGHT+IH95/1qOOc9Ia/2cEI0vqa7bl7SqPVLefnl/Ip99E+CgxiQ/cQpnb6lnowm4uaZZigL5Va7dQ==
-X-Received: by 2002:a05:6602:1486:b0:83e:6232:11a with SMTP id
- ca18e2360f4ac-83eb5fce440mr426156639f.7.1732116971375; 
- Wed, 20 Nov 2024 07:36:11 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHr4tuUlEl8qkJgaa6RK3OAbupGYR3L4LJBvD6f8P9sZKjynD6gckUdD6umFfeb3hXJsLVTwg==
+X-Received: by 2002:a05:6602:483:b0:83b:56df:a173 with SMTP id
+ ca18e2360f4ac-83eb5fa17a0mr361242539f.2.1732117009262; 
+ Wed, 20 Nov 2024 07:36:49 -0800 (PST)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-83e6dffd678sm274395139f.23.2024.11.20.07.36.09
+ ca18e2360f4ac-83e6df8cccfsm288747139f.6.2024.11.20.07.36.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 07:36:09 -0800 (PST)
+ Wed, 20 Nov 2024 07:36:47 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 3/3] x86: coreboot: Make use of disabled console
-Date: Wed, 20 Nov 2024 08:35:54 -0700
-Message-Id: <20241120153554.860710-4-sjg@chromium.org>
+Cc: Svyatoslav <clamor95@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 0/3] Adjust how autoprobe is implemented
+Date: Wed, 20 Nov 2024 08:36:38 -0700
+Message-Id: <20241120153642.861633-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241120153554.860710-1-sjg@chromium.org>
-References: <20241120153554.860710-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,61 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot normally requires a UART. When booting from coreboot it is
-sometimes just not available, e.g. when no sysinfo or DBG2 information
-is provided.
+This little series makes a minor change to how autoprobe is
+implemeneted, as discussed on the list:
 
-In this case we need to continue running, since the display can be used.
-Use the 'disable' flag for this case.
+   https://patchwork.ozlabs.org/project/uboot/patch/
+      20240626235717.272219-1-marex@denx.de/
 
-This allows U-Boot to start up and operation from the display, instead
-of hanging on start-up.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
 
 Changes in v3:
-- Put the feature behind a Kconfig
-- Move the feature to the serial uclass, so any serial driver can use it
+- Add a link to the previous discussion
+- Add a summary of the design challenge in the DM docs
+- Use a simple return in initr_dm()
+- Add a comment to dm_probe_devices()
+- Expand comment to dm_autoprobe()
 
 Changes in v2:
-- Drop RFC tag since there were no comments
+- Add autoprobe to SPL also
+- Leave the function name the same
+- Fix 'Prove' typo
+- Update cover letter since SPL is now covered also
+- Update the documentation too, with a discussion link
 
- arch/x86/cpu/coreboot/Kconfig    | 1 +
- drivers/serial/serial_coreboot.c | 2 ++
- 2 files changed, 3 insertions(+)
+Simon Glass (3):
+  common: Drop check for DM in initf_dm()
+  dm: core: Simplify dm_probe_devices()
+  common: Move autoprobe out to board init
 
-diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconfig
-index 085302c0482..d850be9dc73 100644
---- a/arch/x86/cpu/coreboot/Kconfig
-+++ b/arch/x86/cpu/coreboot/Kconfig
-@@ -29,5 +29,6 @@ config SYS_COREBOOT
- 	select BINMAN if X86_64
- 	select SYSINFO
- 	imply SYSINFO_EXTRA
-+	select SERIAL_CAN_DISABLE
- 
- endif
-diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
-index b1f69f6998c..a53c37a8756 100644
---- a/drivers/serial/serial_coreboot.c
-+++ b/drivers/serial/serial_coreboot.c
-@@ -95,6 +95,7 @@ static int read_dbg2(struct ns16550_plat *plat)
- 
- static int coreboot_of_to_plat(struct udevice *dev)
- {
-+	struct serial_dev_plat *uplat = dev_get_uclass_plat(dev);
- 	struct ns16550_plat *plat = dev_get_plat(dev);
- 	struct cb_serial *cb_info = lib_sysinfo.serial;
- 	int ret = -ENOENT;
-@@ -119,6 +120,7 @@ static int coreboot_of_to_plat(struct udevice *dev)
- 		 * there is no UART, which may panic. So stay silent and
- 		 * pray that the video console will work.
- 		 */
-+		uplat->disable = true;
- 		log_debug("Cannot detect UART\n");
- 	}
- 
+ common/board_f.c                    |  9 ++++++--
+ common/board_r.c                    |  2 +-
+ common/spl/spl.c                    |  4 ++++
+ doc/develop/driver-model/design.rst | 17 ++++++++++++++
+ drivers/core/root.c                 | 36 ++++++++++++++++++++---------
+ include/dm/root.h                   | 15 ++++++++++++
+ 6 files changed, 69 insertions(+), 14 deletions(-)
+
 -- 
 2.34.1
 
