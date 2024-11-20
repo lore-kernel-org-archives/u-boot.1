@@ -4,74 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21132D63936
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:04:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D465ED63936
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADB5A891E8;
-	Wed, 20 Nov 2024 14:03:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F1A689684;
+	Wed, 20 Nov 2024 14:05:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MARrKD8M";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DBm8j2Ii";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4027789001; Wed, 20 Nov 2024 14:03:58 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0EBC48967C; Wed, 20 Nov 2024 14:05:12 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 740B688DC6
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:03:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C29308969E
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=visechelle@gmail.com
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-72483f6e2fbso3575144b3a.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:03:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732107834; x=1732712634; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rAv6xjcjdWkWXyIg23lca4lgwuBUJA/A46ysO8azIbY=;
- b=MARrKD8M75IfSJ+ZLySUpjZYypBPEDelws0/GSBzJRgr3SsqF7RaMc95ah4dHWGDY1
- WXYYlAdwJwgeca+yznegy1ZhDBa4r0BBbsa8UPPQdFnht56tYn3uZRxiEqHzX/QLs7VN
- w1VyfjPVwVMILTTfr2aN+2NQAUK6AbAnxDPpELb2mIKYubnkeZTqYkzpOsPdSplCx+ca
- 3oDJRMxNXQkeY1jSKN9NvC8CRRD8ch2+m4GGQNoopcf//Yvh58asmEzbEJHsSJbAFp04
- pesdmOSY/VLCy5w8lXBCGV7WByFZNWLb8rW6wu9Dh/xO9EwBPyqM59u4UCQU2I2GH+Qw
- msMw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 20C463F5BA
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 13:05:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732107909;
+ bh=8sa1y7Or50aK2MTe3K6fpfHm43L5m39bUllMluWz3xc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=DBm8j2Ii1ndSdG1JxgwFB4cqo81HHViULymg/FnQs+/ZW5BYC1t7SQq3BPFDWG9Wg
+ qGosRSVTqH3/8NGreRJFRYUF9dPPAQ88TC1nRl1Bj69nwTzTGuOOa2cNjlR8a6G9B+
+ vtNKlTALWw4CGFstfbCRFBXpKAiUszzHvlbFHjoEG4g5tXtof5o4N1MvbVBZI+5+Y7
+ F+UP7uRf5w94Ma7WdEPKhd7aQst3k6UoB5g3O80ubR6gsPyN6dl0zrVupPio94nhAa
+ Cw87XNfmHmQeCFyFmc+S/sosBinOszA5aVmySeNPdvJwPFGTSvSM+DHsvqAEUiV6fI
+ b5OsVYFe05+gw==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4314f023f55so13604025e9.2
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:05:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732107834; x=1732712634;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rAv6xjcjdWkWXyIg23lca4lgwuBUJA/A46ysO8azIbY=;
- b=RLEZm9z7EOmon5jHSxlt08R40rNEKITqj5GQRNwtyZI8VhPmHUeDMGLU2FPCt3ryzz
- B0TtFekgsvAJVrQo2XscNzermzfqKKvrRS6hrddvEQ2S3M+GOXMjc0u5E/rK1I5YuLN0
- IEowPYpYWTIefI8M9lFLjCHUX2NQCrqI+ZnTUm4ZT8dYESLMqCt/ZiL1CXLcG2gW+aPo
- /T7WqPt51lZUIINVhYoYGNcXPK9dgWwjHpo7TnjNmFxDxd/R5HY1JQ6vIa4bI2St/VXq
- PdLay0eg/uscDxn6nf1JWmWCxA0gbsGINUKQJ/8uvvMqo0bkGKfV/991I4KzN11rnjaJ
- pK2g==
-X-Gm-Message-State: AOJu0YyEbyQ6zZvf/U+xkUM8QlorHIK4MNiSZVr21HqrdO1FlbDyPXpz
- WPIYJM2vuIBpB2CqBzMB+4qGjh9+fdLjxCyXMVEbgVpFS0RSVPimvLSn8RWR09hkRTCA3+1Unjh
- hOSLpEJBUk01clc5Q5GDQg/Kuq7Y=
-X-Google-Smtp-Source: AGHT+IF7jp7hZO+iHs/OwqSyuJPWX0qY5JgDWXbjr2TPszG6xWtVI2VCdgWB+a1EkrB7bPGD/COXX7CdGksoWubGdwk=
-X-Received: by 2002:a05:6a00:4f8f:b0:71e:8046:2728 with SMTP id
- d2e1a72fcca58-724bed160a6mr3635185b3a.17.1732107833843; Wed, 20 Nov 2024
- 05:03:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732107909; x=1732712709;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8sa1y7Or50aK2MTe3K6fpfHm43L5m39bUllMluWz3xc=;
+ b=hF8VEZUhgDN/vnIq27beDw4KCSenev3crxYFK8jz5ERv0tGcU3gJ967LRU25fMw2Yv
+ B8XnE+W7yAKceLcIKtQeTbsFK+bJ+GbSK5PVFqbRlcFJHtooCSFjqkYGyuydOoaCr2Vy
+ tw6WhjkPTjt+fLN283Xwb5VAqzAIrE17DrmglvEIdCQY0dBD3hH/BmXccvaW+2sPaPjx
+ iERaxjcop5dT7ibegcbTs8cxdZtBXohUxz1eAfhY4inZTkzVsrOzQCPpcVdee8lsbFS3
+ qag5mhGkOziGud1C3PAAIjR77APjnosjRxjXmUXzR5zP9BakzbYiutqndjCxLpSH/OhK
+ yapw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXr2Gpay2x8m+ZtZXKP64iAJRGXyFJeyHROP7RdTYHpAjPMlCb427yJJIQqSri66SneEmrlG9s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLhWJffVo8Q/M0MaaQIxMJjNn217jzGuhaqv5TkLh8Mf8HIfvh
+ L4YpVs9+7VZKYK2Iueaw6REGhmWE/Be9LFZr8eUsyLKsMEQkU6aR/PySzyKkEbC0NFn9HAcg5sp
+ TDjvyO7cbssAql3DkieDS4YdM8dWDbLO0G3NgwUvs6NXvt7v9A81Uz911ha+BiQ9iWsZrHFCx82
+ w=
+X-Received: by 2002:a5d:64af:0:b0:382:d7a:315b with SMTP id
+ ffacd0b85a97d-38254ade9aemr2385119f8f.11.1732107908715; 
+ Wed, 20 Nov 2024 05:05:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHiEUiMbuH3OQbEddyuDKGNOSLz9DGM7bxpAl2HANQHRKOzyE1hwaAOKXdW2uyQSJiYm7OqrA==
+X-Received: by 2002:a5d:64af:0:b0:382:d7a:315b with SMTP id
+ ffacd0b85a97d-38254ade9aemr2385068f8f.11.1732107908085; 
+ Wed, 20 Nov 2024 05:05:08 -0800 (PST)
+Received: from [192.168.103.101]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-433b463af68sm18386705e9.40.2024.11.20.05.05.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Nov 2024 05:05:07 -0800 (PST)
+Message-ID: <5c9f67bd-8c09-440d-820e-524d4fff4240@canonical.com>
+Date: Wed, 20 Nov 2024 14:05:06 +0100
 MIME-Version: 1.0
-References: <20241120103943.886802-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241120103943.886802-1-paul.henrys_ext@softathome.com>
-From: "Paul HENRYS d'AUBIGNY" <paul.henrysd@gmail.com>
-Date: Wed, 20 Nov 2024 14:03:42 +0100
-Message-ID: <CAOTsJ7oYArwpXks9bwMcn3FdGjV0ogRHqAC-2_qF1vqx99j8Cg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] arch: x86: lib: Add support of legacy 64-bit entry
- point at 0x200
-To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] test: cmd/hash: check return value of
+ ut_check_console_line
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20241116200822.27160-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTg=E5ScwSQm6Msm7+AUic5GL+rNCq1Cy4_3wnRWgsJPPA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTg=E5ScwSQm6Msm7+AUic5GL+rNCq1Cy4_3wnRWgsJPPA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,135 +109,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, all,
+On 20.11.24 13:40, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Sat, 16 Nov 2024 at 13:09, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> ut_check_console_line() does include an assert.
+>> Pass the result to ut_assertok().
+>>
+>> Addresses-Coverity-ID:  514958 Error handling issues
+>> Fixes: 7dfafcd65ef3 ("test: unit test for hash command")
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   test/cmd/hash.c | 13 ++++++++-----
+>>   1 file changed, 8 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/test/cmd/hash.c b/test/cmd/hash.c
+>> index 2fcec9cadcd..296dd762b31 100644
+>> --- a/test/cmd/hash.c
+>> +++ b/test/cmd/hash.c
+>> @@ -33,11 +33,13 @@ static int dm_test_cmd_hash_md5(struct unit_test_state *uts)
+>>                          strstr(uts->actual_str, "md5 for "));
+>>          ut_assert(strstr(uts->actual_str,
+>>                           "d41d8cd98f00b204e9800998ecf8427e"));
+>> -       ut_check_console_line(uts, "d41d8cd98f00b204e9800998ecf8427e");
+>> +       ut_assertok(ut_check_console_line(uts,
+>> +                                         "d41d8cd98f00b204e9800998ecf8427e"));
+>>
+>>          if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
+>>                  ut_assert(run_command("hash -v sha256 $loadaddr 0 foo", 0));
+>> -               ut_check_console_line(uts, "hash - compute hash message digest");
+>> +               ut_assertok(ut_check_console_line(
+>> +                               uts, "hash - compute hash message digest"));
+> 
+> ut_assert_nextline("hash - compute hash message digest")
 
-I am really sorry about this automatic footer added by SoftAtHome's mail
-server. I complained about it but the legal and IT departments did not
-agree to remove it.
-I will now send such a patch with my private email address and notify
-SoftAtHome of it.
-Sorry again for the inconvenience.
+Unfortunately your review comes too late. Tom already merged the patch.
 
-Best regards,
-Paul HENRYS
-PGP fingerprint: 1C45 321A 7830 4DCD 8453 2CE4 DF32 6222 6747 82F7
-PGP key: https://pgp.mit.edu/pks/lookup?op=3Dget&search=3D0xDF326222674782F=
-7
+There a number of usages of the function combination.
 
+test/cmd/hash.c:36:     ut_assertok(ut_check_console_line(uts,
+test/cmd/hash.c:41:             ut_assertok(ut_check_console_line(
+test/cmd/hash.c:82:     ut_assertok(ut_check_console_line(
+test/cmd/hash.c:87:             ut_assertok(ut_check_console_line(
+test/log/cont_test.c:33:        ut_assertok(ut_check_console_line(uts, 
+"ERR.arch, ea1"));
+test/log/cont_test.c:34:        ut_assertok(ut_check_console_line(uts, 
+"ERR.arch, cc2"));
+test/log/cont_test.c:45:        ut_assertok(ut_check_console_line(uts, 
+"INFO.efi, ie3"));
+test/log/cont_test.c:57:        ut_assertok(ut_check_console_line(uts, 
+"ERR.arch, ea1 cc2"));
+test/log/nolog_ndebug.c:32: 
+ut_assertok(ut_check_console_line(uts, "testing level %d", i));
+test/log/nolog_test.c:30:       ut_assertok(ut_check_console_line(uts, 
+"testing log_err"));
+test/log/nolog_test.c:43:       ut_assertok(ut_check_console_line(uts, 
+"testing log_warning"));
+test/log/nolog_test.c:56:       ut_assertok(ut_check_console_line(uts, 
+"testing log_notice"));
+test/log/nolog_test.c:69:       ut_assertok(ut_check_console_line(uts, 
+"testing log_info"));
+test/log/nolog_test.c:111:      ut_assertok(ut_check_console_line(uts, 
+"testing debug"));
+test/log/nolog_test.c:125:      ut_assertok(ut_check_console_line(uts, 
+"testing log_debug"));
+test/log/nolog_test.c:126:      ut_assertok(ut_check_console_line(uts, 
+"more log_debug"));
+test/log/pr_cont_test.c:36:     ut_assertok(ut_check_console_line(uts, 
+"ea1 cc2"));
 
-Le mer. 20 nov. 2024 =C3=A0 11:39, Paul HENRYS <paul.henrys_ext@softathome.=
-com>
-a =C3=A9crit :
+Looking at the macro definitions your suggestion would add "console" to 
+the error output but not lead to a functional change.
 
-> Support of legacy 64-bit entry point was already present when booting a
-> bzimage
-> with 'zboot' but not supported with 'bootm' when the x86_64 Linux kernel =
-is
-> embedded in a FIT image.
->
-> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
-> ---
->  arch/x86/lib/bootm.c  | 6 ++++++
->  arch/x86/lib/zimage.c | 1 -
->  2 files changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-> index 55f581836d..38b4ebf759 100644
-> --- a/arch/x86/lib/bootm.c
-> +++ b/arch/x86/lib/bootm.c
-> @@ -189,6 +189,12 @@ int boot_linux_kernel(ulong setup_base, ulong entry,
-> bool image_64bit)
->                 if (CONFIG_IS_ENABLED(X86_64)) {
->                         typedef void (*h_func)(ulong zero, ulong setup);
->                         h_func func;
-> +                       struct setup_header *hdr =3D &(((struct boot_para=
-ms
-> *)(setup_base))->hdr);
-> +
-> +                       /* Handle kernel with legacy 64-bit entry point a=
-t
-> 0x200 */
-> +                       if (hdr->xloadflags & XLF_KERNEL_64) {
-> +                               entry +=3D 0x200;
-> +                       }
->
->                         /* jump to Linux with rdi=3D0, rsi=3Dsetup_base *=
-/
->                         func =3D (h_func)entry;
-> diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-> index 73a21bc8f0..2eece34a07 100644
-> --- a/arch/x86/lib/zimage.c
-> +++ b/arch/x86/lib/zimage.c
-> @@ -426,7 +426,6 @@ int zboot_go(void)
->         image_64bit =3D false;
->         if (IS_ENABLED(CONFIG_X86_RUN_64BIT) &&
->             (hdr->xloadflags & XLF_KERNEL_64)) {
-> -               entry +=3D 0x200;
->                 image_64bit =3D true;
->         }
->
-> --
-> 2.43.0
->
-> -- This message and any attachments herein are, unless otherwise stated,
-> confidential, intended solely for the addressees and are SoftAtHome=E2=80=
-=99s
-> ownership. Any unauthorized use, reproduction or dissemination is
-> prohibited unless formaly agreed beforehand by the sender. If you are not
-> the intended addressee of this message, please immediately delete it and
-> all its attachments from your computer system and notify the sender.
-> SoftAtHome reserves the right to monitor all email communications through
-> its networks. Any views or opinions presented are solely those of its
-> author and do not necessarily represent those of SoftAtHome. The internet
-> cannot guarantee the integrity of this message. SoftAtHome not shall be
-> liable for the message if altered, changed or falsified. While we take al=
-l
-> reasonable precautions to ensure that viruses are not transmitted via
-> emails, we recommend that you take your own measures to prevent viruses
-> from entering your computer system. SoftAtHome is a French Soci=C3=A9t=C3=
-=A9 Anonyme
-> with a Board of Directors, having a capital of 6 450 699 Euros having its
-> registered office located at 9-11 rue du d=C3=A9barcad=C3=A8re =E2=80=93 =
-92700 =E2=80=93 Colombes =E2=80=93
-> France =E2=80=93 Tel + 33 (0)1 57 66 88 88 =E2=80=93 Fax + 33 (0)1 57 66 =
-88 89 - RCS
-> Nanterre B 500 440 813 =E2=80=93 Intra-Community VAT: FR 04500440813 -- C=
-e message
-> et toutes les pi=C3=A8ces jointes qui y sont incluses sont, sauf indicati=
-on
-> contraire, confidentiels, destin=C3=A9s uniquement aux destinataires et s=
-ont la
-> propri=C3=A9t=C3=A9 de SoftAtHome. Toute utilisation non autoris=C3=A9e, =
-reproduction ou
-> diffusion est interdite, sauf accord formel pr=C3=A9alable de l'exp=C3=A9=
-diteur. Si
-> vous n'=C3=AAtes pas le destinataire pr=C3=A9vu de ce message, veuillez l=
-e supprimer
-> imm=C3=A9diatement ainsi que toutes ses pi=C3=A8ces jointes de votre syst=
-=C3=A8me
-> informatique et en informer l'exp=C3=A9diteur. SoftAtHome se r=C3=A9serve=
- le droit de
-> surveiller toutes les communications par e-mail via ses r=C3=A9seaux. Les
-> opinions exprim=C3=A9es dans ce message sont celles de leur auteur et ne
-> repr=C3=A9sentent pas n=C3=A9cessairement celles de SoftAtHome. L=E2=80=
-=99Internet ne
-> permettant pas d=E2=80=99assurer l=E2=80=99int=C3=A9grit=C3=A9 de ce mess=
-age, SoftAtHome d=C3=A9cline
-> toute responsabilit=C3=A9 =C3=A0 ce titre, dans l=E2=80=99hypoth=C3=A8se =
-o=C3=B9 il aurait =C3=A9t=C3=A9 alt=C3=A9r=C3=A9,
-> d=C3=A9form=C3=A9 ou falsifi=C3=A9. Par ailleurs et malgr=C3=A9 toutes le=
-s pr=C3=A9cautions prises
-> pour =C3=A9viter la pr=C3=A9sence de virus dans nos envois, nous vous rec=
-ommandons de
-> prendre, de votre c=C3=B4t=C3=A9, les mesures permettant d'assurer la
-> non-introduction de virus dans votre syst=C3=A8me informatique. SoftAtHom=
-e est
-> une Soci=C3=A9t=C3=A9 Anonyme fran=C3=A7aise =C3=A0 Conseil d=E2=80=99Adm=
-inistration ayant un capital
-> de 6 450 699 euros, dont le si=C3=A8ge social est situ=C3=A9 au 9-11 rue =
-du
-> d=C3=A9barcad=C3=A8re - 92700 - Colombes - France - Tel + 33 (0)1 57 66 8=
-8 88 - Fax +
-> 33 (0)1 57 66 88 89 RCS Nanterre B 500 440 813 - TVA intracommunautaire :
-> FR 04500440813
->
+If we change it, we should do so for all occurrences.
+
+Best regards
+
+Heinrich
+
+> 
+>>
+>>                  return 0;
+>>          }
+>> @@ -77,12 +79,13 @@ static int dm_test_cmd_hash_sha256(struct unit_test_state *uts)
+>>                          strstr(uts->actual_str, "sha256 for "));
+>>          ut_assert(strstr(uts->actual_str,
+>>                           "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"));
+>> -       ut_check_console_line(uts,
+>> -                             "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+>> +       ut_assertok(ut_check_console_line(
+>> +                       uts, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"));
+>>
+>>          if (!CONFIG_IS_ENABLED(HASH_VERIFY)) {
+>>                  ut_assert(run_command("hash -v sha256 $loadaddr 0 foo", 0));
+>> -               ut_check_console_line(uts, "hash - compute hash message digest");
+>> +               ut_assertok(ut_check_console_line(
+>> +                               uts, "hash - compute hash message digest"));
+>>
+>>                  return 0;
+>>          }
+>> --
+>> 2.45.2
+>>
+> 
+> Regards,
+> Simon
+
