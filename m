@@ -4,92 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE28D711D1
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 18:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD22D711D7
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 18:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9A4C89327;
-	Wed, 20 Nov 2024 19:10:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E1EE289328;
+	Wed, 20 Nov 2024 19:29:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QOD9o1cM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="luBM3WkA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6524B891E8; Wed, 20 Nov 2024 19:10:38 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 3FFE989338; Wed, 20 Nov 2024 19:29:22 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EEAD89327
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 19:10:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8C1588E33
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 19:29:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d410b5a94eso525816d6.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:10:36 -0800 (PST)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3823e45339bso4714f8f.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:29:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732126235; x=1732731035; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/oBH4xjqqpdHe6tW8ODgTBA/hgJJ5q4TjHwdF9xe+oQ=;
- b=QOD9o1cMRIGfot8lHdm+W2gHaWKUKmiJOCtFMdqHA5ZcmsAEdFyJppyJ5Dh628q6yb
- v/+UeyOuYy3MpTKYO80EMtEtQGk4XGj3WMTo+K6dpeUc/EY74YlrXAtInGSc4yxw3e1i
- d6bqcYx85RCOlTcfMxbrNg1U9wcf1GeXnVdnc=
+ d=linaro.org; s=google; t=1732127359; x=1732732159; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RbQy3E41EWkjhCXswYDTy0mtFdl0r30lQq4azDh/rvg=;
+ b=luBM3WkAaxd09N6/DLNK/7oyzzJW/HPciLK3JRhIFs9xinZvw5as3wKBvxuyJN7L3s
+ AdoGkg34K9H5OigdGXte0OPD593DFPoYqHwFim9ZIJn3/8wq6f4ieN+/VTeTXBzs/op/
+ Ir4nVMJq7wc35egJt2QBmuhi/ixO4W0iGUYhUYvbRrVwbKsioABR2bcRRleBE2T1+XvW
+ Bkas/Oh9dsAHOzX7brhvltVhfppcV35qkw8cu0NfMAK2hjspMOblogMEcOxXmbKrhccs
+ nDEG3Nf9iFDm2TV24QauWPZgF/4HeLAj5VlrcR+L8dRHyB0pTAsW8e0Q/26I8huv2Mvq
+ zA/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732126235; x=1732731035;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/oBH4xjqqpdHe6tW8ODgTBA/hgJJ5q4TjHwdF9xe+oQ=;
- b=lBLnuq+IMZ6XnJSw+rgQT7iUkir6NNwUbVbF+jeB3SNZ2Texo2NQQ4Sam1agxD1Jon
- TllNfXaRaGtfMjIn4jnSef/D6a0YzHflOaMZO9XuKg90jJ2nI4XrQOxsbQ6BM1Bzte9V
- 2GvMmeQ7AmlNje4WVxFo2dh/Ii4Yl5OSpzilX8g87FPG1FNmFKXqB0i+6QQO/aFIwrb6
- rnrMccqXtr0xIKb31/vTss2OMhzhtejxDPSHQrBrXfNJdG9zsKdR7QwYUFGZqM35eDMc
- Zy1nMOWFwd5GPIoQHOeTLiaRK4AqH8sJHCAIknWivwwWJwXTRXOmtHQPUpAXqrCaA2Rj
- +97w==
-X-Gm-Message-State: AOJu0Yye9B21SnsVwe+IPpwGoafBl3CK/elxOFcXBDghLhNZdCXCm/yc
- 35ThencDY0OYsXNQl0zIxp21GRB0SluC69lb8qLPxQ7YLGmPQwfzamqd1fkaBm8=
-X-Gm-Gg: ASbGncvzwp+0eJcDnH966IJoHLDrrB9GxHpfV8UuXxDbQj8HGF9VncoxtMXhax0K++6
- 6KNyR2lA5qhZiyYvivDqPD+Nj1j3JbuLuYBSpT0eTZo+yUdEElWh/PLwRX6Ke5j8zSi1Rq/PjSV
- HIfVPyDPvNscNOMYCrtUHeGG2lcfATTMPJqrhC24hGAXN7QKuxw16PpHnL3UMFvOl7fzRBdGVbL
- FEm8uuAQL6Ny0/zarKdyT737IaLql16yyz/eMqRqy9lJV7RzA==
-X-Google-Smtp-Source: AGHT+IEXdcpYkwXkTQ+3WghcJ8Z3nigHmHIkSUT/mYQ7wS6TOYagzo7gDBEx9fAhucLYM3JlvJhYOQ==
-X-Received: by 2002:ad4:5cce:0:b0:6d3:f956:e2f with SMTP id
- 6a1803df08f44-6d4377af825mr57173536d6.2.1732126235081; 
- Wed, 20 Nov 2024 10:10:35 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1732127359; x=1732732159;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=RbQy3E41EWkjhCXswYDTy0mtFdl0r30lQq4azDh/rvg=;
+ b=Q+8KqstMTbM8tBYZxKFxAhPzH4ROMTBho8SbOl+OWwRtoaEa0RPyrmySs636Y1z9/a
+ IOqbidaSBtg/nvnbJfvMZEOwvXeI0+xhpwAbwUvA5f4LkYVvH2bZGqGN+SocKejVtGgJ
+ ErM6WXCDs+641Jnip8CaijurvTlqrtx2a3ShB4quldHeAhmBYwb1V6tBWHP7Nt5fVVlF
+ tHpRm9YjnBxRPCkO3/4U1LU17K1BTP2/QquCqoT92dSo1HtCd9WAeLEALaZe0vBgsEKw
+ xMrDXtQcj5ZIlHW/p/hKGzHNGy01LoiVfs2wRpoQGZ2ewsMM9V96MOEOtb3+fK0FTmSW
+ 4BZQ==
+X-Gm-Message-State: AOJu0Yxsi52h6zkuIIfEG9fzHnKdUt/J88YfWuVRJVQ8gHYRgaIhkdZK
+ Mdn8zSH4kJzPYxRCqtaPRk7klZczTT3kudB6VcqT2oyWZHgjnZnwE1HhdDAtDcw=
+X-Gm-Gg: ASbGncsj8GyNBBxKqexkDBRC26f8QCq1fGUv3q9o9Rs1AFIjDSwceFgjzvSfddMCFgR
+ sQqNaR4/OjODwY9mwFjDM+GhBH+y/e2EFXYORv64MlmLjzdWH/lAj7da3+FqVZMvfghKHCA1e7d
+ QTK4QZZR+qqr1P3b0cSI9ssN7z/WscxYbLZzB7a13rjBbYu7YvenlrbuVyE0zqwqOoLwpfg6jQH
+ 61gzAkyd6cYRkg/9pKyE0cg+emFhCH+rjjo0r4KEv6gF58DY2Qee1fbta3bWgXBh4UP5MhBxLKB
+ qyxB9nXhP3urNMnfRIGoZq8Qh+qYOg==
+X-Google-Smtp-Source: AGHT+IGtJVr9beok0dhhQ1Sup+d4K7x+TjL7gddhIEr9vRWFZIN+38NCZlE+EodhujKZffw2u28YvQ==
+X-Received: by 2002:a5d:64c6:0:b0:382:5206:8b5d with SMTP id
+ ffacd0b85a97d-38254b21ac8mr2398069f8f.42.1732127359295; 
+ Wed, 20 Nov 2024 10:29:19 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:edb:fc01:23ef:f614:8d2a:2e1f?
+ ([2a0a:ef40:edb:fc01:23ef:f614:8d2a:2e1f])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d43812b010sm13456366d6.79.2024.11.20.10.10.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 10:10:34 -0800 (PST)
-Date: Wed, 20 Nov 2024 12:10:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rasmus Villemoes <ravi@prevas.dk>,
- Robert Marko <robert.marko@sartura.hr>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v3 0/3] serial: Support a disabled serial port
-Message-ID: <20241120181031.GF3600562@bill-the-cat>
-References: <20241120153554.860710-1-sjg@chromium.org>
- <3ff334f3-b8e3-4359-9c02-a35e9a66c432@linaro.org>
- <CAFLszTgi5uoAYgMNO_72XjU1zrTf=eAJF21a7rZpwQ=Ht+K9mw@mail.gmail.com>
- <7d13e591-11bd-4ee4-a3a7-96c59a2f7b22@linaro.org>
+ ffacd0b85a97d-382549055f2sm2732430f8f.16.2024.11.20.10.29.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Nov 2024 10:29:18 -0800 (PST)
+Message-ID: <4f382014-4a9b-418a-9ac9-7c1f75e6f71e@linaro.org>
+Date: Wed, 20 Nov 2024 18:29:17 +0000
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="29h70y9/W6sgK4TI"
-Content-Disposition: inline
-In-Reply-To: <7d13e591-11bd-4ee4-a3a7-96c59a2f7b22@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] x86: select CONFIG_64BIT for X86_64
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <20241120100157.485418-1-andrew.goodbody@linaro.org>
+ <20241120100157.485418-4-andrew.goodbody@linaro.org>
+ <CAFLszTjAaUVccHaxj758jFqkjQzB_J_cBFi=Nx42ADWdp9EjJw@mail.gmail.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <CAFLszTjAaUVccHaxj758jFqkjQzB_J_cBFi=Nx42ADWdp9EjJw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,79 +119,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 20/11/2024 13:46, Simon Glass wrote:
+> Hi Andrew,
+> 
+> On Wed, 20 Nov 2024 at 03:02, Andrew Goodbody
+> <andrew.goodbody@linaro.org> wrote:
+>>
+>> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
+>> static analysis tools.
+>> Introduce CONFIG_SPL_64BIT and select it for architectures other than
+>> x86 with 64 bit builds. Do not select it for x86 builds as x86 uses
+>> a 32 bit SPL.
+>> Ensure that when limits are set they use CONFIG_64BIT for U-Boot
+>> proper and CONFIG_SPL_64BIT for SPL. This is to allow for the 32 bit
+>> SPL build used by x86.
+>>
+>> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>
+>> Changes in v3:
+>> Introduce CONFIG_SPL_64BIT to allow for x86 building a 32 bit SPL and
+>> a 64 bit U-Boot proper.
+>>
+>> Changes in v2:
+>> Corrected commit title to be x86 not sandbox
+>>
+>>   arch/Kconfig         | 3 +++
+>>   arch/arm/Kconfig     | 1 +
+>>   arch/mips/Kconfig    | 4 ++++
+>>   arch/riscv/Kconfig   | 1 +
+>>   arch/sandbox/Kconfig | 1 +
+>>   arch/x86/Kconfig     | 1 +
+>>   common/bloblist.c    | 3 ++-
+>>   include/limits.h     | 3 ++-
+>>   8 files changed, 15 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/Kconfig b/arch/Kconfig
+>> index 6258788f53..c726ac5fc7 100644
+>> --- a/arch/Kconfig
+>> +++ b/arch/Kconfig
+>> @@ -38,6 +38,9 @@ config 32BIT
+>>   config 64BIT
+>>          bool
+>>
+>> +config SPL_64BIT
+>> +       bool
+> 
+> Please document what this means and its implications, with some help
 
---29h70y9/W6sgK4TI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Ack
 
-On Wed, Nov 20, 2024 at 05:37:35PM +0100, Caleb Connolly wrote:
->=20
->=20
-> On 20/11/2024 17:03, Simon Glass wrote:
-> > Hi Caleb,
-> >=20
-> > On Wed, 20 Nov 2024 at 08:56, Caleb Connolly <caleb.connolly@linaro.org=
-> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 20/11/2024 16:35, Simon Glass wrote:
-> >>> This series provides a way to tell a serial UART that it can't actual=
-ly
-> >>> work, at runtime. The main motivation is to deal with a coreboot feat=
-ure
-> >>> where it does not provide UART details in the sysinfo structure unless
-> >>> the UART is also enabled in coreboot.
-> >>
-> >> Why is the UART driver probed if coreboot doesn't provide the necessary
-> >> info for it?
-> >=20
-> > U-Boot doesn't do well without some sort of serial device. That could
-> > perhaps be improved. But the point here is that we need a single
-> > U-Boot build which can start from coreboot, regardless of what
-> > coreboot decides to do.
->=20
-> Right, I'm suggesting that at runtime you notice that coreboot didn't
-> provide a serial port definition (or gave you a bogus address or
-> something) and skip probing the serial port in that case.
-> >=20
-> >>
-> >> Couldn't you disable CONFIG_REQUIRE_SERIAL_CONSOLE and skip probing it?
-> >=20
-> > No, because I want it to work if the serial info is available.
->=20
-> This option doesn't disable the serial port, it just makes U-Boot not
-> panic if it can't find one. For example I enable this when building
-> U-Boot for the upstream supported Qualcomm phones since many don't
-> enable the serial port in their DTS.
+>> +
+>>   config SYS_CACHELINE_SIZE
+>>          int
+>>          default 128 if SYS_CACHE_SHIFT_7
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 7282c4123b..055762b0b9 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -7,6 +7,7 @@ config SYS_ARCH
+>>   config ARM64
+>>          bool
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          select PHYS_64BIT
+>>          select SYS_CACHE_SHIFT_6
+>>          imply SPL_SEPARATE_BSS
+>> diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
+>> index 38577af43d..7ea439e857 100644
+>> --- a/arch/mips/Kconfig
+>> +++ b/arch/mips/Kconfig
+>> @@ -211,6 +211,7 @@ config CPU_MIPS64_R1
+>>          bool "MIPS64 Release 1"
+>>          depends on SUPPORTS_CPU_MIPS64_R1
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          help
+>>            Choose this option to build a kernel for release 1 through 5 of the
+>>            MIPS64 architecture.
+>> @@ -219,6 +220,7 @@ config CPU_MIPS64_R2
+>>          bool "MIPS64 Release 2"
+>>          depends on SUPPORTS_CPU_MIPS64_R2
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          help
+>>            Choose this option to build a kernel for release 2 through 5 of the
+>>            MIPS64 architecture.
+>> @@ -227,6 +229,7 @@ config CPU_MIPS64_R6
+>>          bool "MIPS64 Release 6"
+>>          depends on SUPPORTS_CPU_MIPS64_R6
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          help
+>>            Choose this option to build a kernel for release 6 or later of the
+>>            MIPS64 architecture.
+>> @@ -235,6 +238,7 @@ config CPU_MIPS64_OCTEON
+>>          bool "Marvell Octeon series of CPUs"
+>>          depends on SUPPORTS_CPU_MIPS64_OCTEON
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          help
+>>           Choose this option for Marvell Octeon CPUs.  These CPUs are between
+>>           MIPS64 R5 and R6 with other extensions.
+>> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+>> index 043d963f63..abb7a984c4 100644
+>> --- a/arch/riscv/Kconfig
+>> +++ b/arch/riscv/Kconfig
+>> @@ -120,6 +120,7 @@ config ARCH_RV32I
+>>   config ARCH_RV64I
+>>          bool "RV64I"
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>          select PHYS_64BIT
+>>          help
+>>            Choose this option to target the RV64I base integer instruction set.
+>> diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
+>> index db29ca14bd..4c169034d9 100644
+>> --- a/arch/sandbox/Kconfig
+>> +++ b/arch/sandbox/Kconfig
+>> @@ -47,6 +47,7 @@ config HOST_32BIT
+>>   config HOST_64BIT
+>>          def_bool $(cc-define,_LP64)
+>>          select 64BIT
+>> +       select SPL_64BIT if SPL
+>>
+>>   config HOST_HAS_SDL
+>>          def_bool $(success,sdl2-config --version)
+>> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+>> index 23a1e21b29..006a59d6fa 100644
+>> --- a/arch/x86/Kconfig
+>> +++ b/arch/x86/Kconfig
+>> @@ -44,6 +44,7 @@ endchoice
+>>
+>>   config X86_64
+>>          bool
+>> +       select 64BIT
+>>
+>>   config SPL_X86_64
+>>          bool
+>> diff --git a/common/bloblist.c b/common/bloblist.c
+>> index ec6ff7a5a9..30fe1cb4b3 100644
+>> --- a/common/bloblist.c
+>> +++ b/common/bloblist.c
+>> @@ -579,7 +579,8 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
+>>          ulong version = BLOBLIST_REGCONV_VER;
+>>          ulong sigval;
+>>
+>> -       sigval = (IS_ENABLED(CONFIG_64BIT)) ?
+>> +       sigval = ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
+>> +                       (IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) ?
+>>                          ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
+>>                           ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
+>>                          ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
+> 
+> Gosh this is pretty ugly.
+> 
+> Can you split it into separate statements?
 
-Yes, this feels like an oddly coreboot specific solution to a generic
-problem that we should be able to handle already I thought? Like a Pi
-can have or not have a serial port enabled and still have video and we
-use that. We might well need something specific to know the port is
-disabled since I gather we aren't getting a devicetree that says status
-=3D disabled in it. But this ought to be a common enough general case?
+Like this?
 
---=20
-Tom
+if ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
+		(IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) {
+	sigval = ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
+		 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64));
+} else {
+	sigval = ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
+		 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
+}
 
---29h70y9/W6sgK4TI
-Content-Type: application/pgp-signature; name="signature.asc"
+Andrew
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc+JhcACgkQFHw5/5Y0
-tyx2OwwAhYsaNzXQ5pj1dcAuPwfAMeYcJ5A3wMcaC+lRRuCmUnULbaR4KUabAVNa
-Drplf2OLWNFz2OhA4kvZEaso3UO1D0Z899ortnTD+MmYDkNWZhv8wXx1OWxVgNcQ
-ly/SysYYZyZ7oCbgUBr1kBYaybT6ppMEp1qyCM3KZ9BDG2bOVg9vK4iCit4Ucf6c
-7L78zZRGsx2MlGHM7wEYhkyBbeAbLWvstwWAwaY3o4quJJFT6bjbEMbEoFSLHWZK
-C5Nx9icmw8gjTuW44vNoKiVSNYlq+CVSj3XdoJWfRgiSAqq7fKuUaoWkcDNIdlH4
-rs5zuQaWM8PmHQ6F29g1d7jtWtvJqhSadQxKrLzW7OUhQCMyGHtbylEDtnEvrbAC
-rJyuD2oHGL4FavOMAXK/KOcdvhsJTLgrfvGRjdME6BtsBNQqBGhO74wA35cFZDQ3
-E8oUDqOqfLQaI6/4kwYArZXkrbGLvQcduuVEMWlBdYcvLLeXWspG4VvWXE0XSbFR
-+bvqOcGL
-=ieFT
------END PGP SIGNATURE-----
+>> diff --git a/include/limits.h b/include/limits.h
+>> index 4700cc7a59..1d0bbf69be 100644
+>> --- a/include/limits.h
+>> +++ b/include/limits.h
+>> @@ -9,7 +9,8 @@
+>>   #define UINT32_MAX  0xffffffffU
+>>   #define UINT64_MAX  0xffffffffffffffffULL
+>>
+>> -#ifdef CONFIG_64BIT
+>> +#if (defined(CONFIG_64BIT) && !defined(CONFIG_SPL_BUILD)) || \
+>> +       (defined(CONFIG_SPL_64BIT) && defined(CONFIG_SPL_BUILD))
+>>       #define UINTPTR_MAX UINT64_MAX
+>>   #else
+>>       #define UINTPTR_MAX UINT32_MAX
+>> --
+>> 2.39.5
+>>
+> 
+> REgards,
+> Simon
 
---29h70y9/W6sgK4TI--
