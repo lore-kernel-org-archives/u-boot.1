@@ -4,86 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29801D711C8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 16:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65D6D711C0
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 16:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 929FF89251;
-	Wed, 20 Nov 2024 17:43:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 4882489270;
+	Wed, 20 Nov 2024 17:55:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Myq4e3d5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dCACikS+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A33B89251; Wed, 20 Nov 2024 17:43:35 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E6B288933D; Wed, 20 Nov 2024 17:55:52 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 206B389229
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 17:43:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60E1E8925A
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 17:55:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AK9FUDm005773;
- Wed, 20 Nov 2024 16:43:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=7FtIYlWpCTm9MG00R34O86Of
- Y25MCeZW3UMrXqUKGOw=; b=Myq4e3d5l0I/AgBvDWEuTsPNpyFZ9fRI3GfexKlo
- TSF1njthJzqR5GvOeNUvPN4u6oZ9kLXZfiW88A0VYnmJqSzxBIObVCudtTOyToVm
- 6VJnncR9vM2FgeL9kp1/P1Xr5yJjU05PHsTOqf314Brpe0cII94DzoFr2B8gFYC9
- 8iXHMIAlzsQ6/V+R52gvtlHVndv1vV1nWtsza7zdrmxl0RjDPD8pOfhOlYazYWyE
- up0B+P71a+4YdZbVvTvAQGm0Xdk8tXWMqVr+frJAr+wGlUxuevJF/wPDg450xaj2
- 8K6wr16s3/DAuK0txJQwE9ffwLFZkQXYFe4MVgb8tdvP1A==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4308y7xj04-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 20 Nov 2024 16:43:25 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AKGhO8q014794
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 20 Nov 2024 16:43:24 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 20 Nov 2024 08:43:21 -0800
-Date: Wed, 20 Nov 2024 22:13:17 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- <christian.taedcke@weidmueller.com>, <ada@thorsis.com>,
- <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] fs: fat: Handle 'FAT sector size mismatch'
-Message-ID: <Zz4RpTSocR/U+4+u@hu-varada-blr.qualcomm.com>
-References: <20241119073048.3469260-1-quic_varada@quicinc.com>
- <20241119154436.GW3600562@bill-the-cat>
- <2f5b61a7-9417-49b1-90b7-8aaf25f65cde@linaro.org>
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9ed0ec0e92so630431766b.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 08:55:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732121750; x=1732726550; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6JO7qr/H97v/ygTJxCjRz309Nrl8YKqgj5vyTyKa2XY=;
+ b=dCACikS+QDDNcCjGwxtvAHWCkWa7DKTai9PhLDWO95GCC2IxEizO/eEnDekhOwg+GE
+ xVlECHHbDSqDnF/iwDPowjt66ANjTxrmnkLJjAr547DEv/WU9Vhi8Fixi79zx7NOUipn
+ Do+yHtea/dndwqdH/6SxcykynWm35BfrMJRE1szgpZsh6Q8tFLd6W5oUkOhSS7QzOVa/
+ Svo9/856xMhFDzc2PLwVm8z2xE/JFjjJUabhvj3WGYHu5uzJC+5rpcIIkv94CjnSlZ5B
+ VdDLfv27SexttggwcOhJo2/LYiicFo5PoFh7dBh8L4xeppnrXpF4Pl52bHyVcgbxMSwg
+ mUVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732121750; x=1732726550;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6JO7qr/H97v/ygTJxCjRz309Nrl8YKqgj5vyTyKa2XY=;
+ b=inxalDz/PRKnanLmyMwuSkbggDSiF+myt3uQa0UxCic+JAMalJM56mzBuiS42WJJqF
+ U3Ln8NO6hVYAzia9oZJSiaSph8tCyhqN9zCN7GF1ELeYOBkOPkTa/VQehgdPqZGhKEIe
+ W6nvdl+hHNlHLel5aWJmPr99HVV+T55nQmty8YpwNwCXLBZXkO1oEXktmP9vpRwiOqNZ
+ 1+VxpNkVa24sGhrX/0K7A+FeBLzauj3fT4KunhGF8mLe4ZjrJNszM5ZJRWGmFCDM2XRH
+ +JbIBCM2NwrZEimh2AgsQYum47iQDG6nm1Y1bf0peNZj0hOUh/Kyrw1kwbKYxC5fsZDF
+ LGDg==
+X-Gm-Message-State: AOJu0Yz29ENqE12OF/NXQBwCsf5yijartParj9ukAzXdFEGaFxpGUV+K
+ +pbdbplrMcfIreP0sntIjrjMYpk9xE3D7xwbC13Ur4rnZLrrWA7TU4K8vZNHtws=
+X-Google-Smtp-Source: AGHT+IG7P04n1mCouwFovfFBMhwEOeohpn0rCkEvsQ91fS2Xi9pNcb4cWmHcLK5U/DKzWKMy+3PFBA==
+X-Received: by 2002:a17:906:6a08:b0:aa4:9ab1:1982 with SMTP id
+ a640c23a62f3a-aa4dd548167mr318325866b.4.1732121749860; 
+ Wed, 20 Nov 2024 08:55:49 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20e086299sm784919166b.195.2024.11.20.08.55.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Nov 2024 08:55:49 -0800 (PST)
+Message-ID: <7af74c01-1307-4be1-9603-8902d57d1137@linaro.org>
+Date: Wed, 20 Nov 2024 17:55:48 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <2f5b61a7-9417-49b1-90b7-8aaf25f65cde@linaro.org>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: bBow4oSl8w3usvHeMr65ZCZKJJ8rWuUq
-X-Proofpoint-GUID: bBow4oSl8w3usvHeMr65ZCZKJJ8rWuUq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 spamscore=0
- mlxlogscore=999 clxscore=1015 suspectscore=0 adultscore=0
- priorityscore=1501 phishscore=0 impostorscore=0 bulkscore=0
- lowpriorityscore=0 malwarescore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2409260000 definitions=main-2411200114
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] common: Move autoprobe out to board init
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Svyatoslav <clamor95@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20241120153642.861633-1-sjg@chromium.org>
+ <20241120153642.861633-4-sjg@chromium.org>
+ <460f478d-62cc-4f17-8d52-00d2e1e83485@linaro.org>
+ <CAFLszTjzZQ=Uaw+wjHUeP86SaHppYBMa3ZPSpFAoBwG9jJfEZw@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTjzZQ=Uaw+wjHUeP86SaHppYBMa3ZPSpFAoBwG9jJfEZw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,183 +108,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 20, 2024 at 02:55:48PM +0100, Caleb Connolly wrote:
-> Hi both,
->
-> Varadarajan: Thanks for sending this patch.
->
-> On 19/11/2024 16:44, Tom Rini wrote:
-> > On Tue, Nov 19, 2024 at 01:00:48PM +0530, Varadarajan Narayanan wrote:
-> >
-> >> Do FAT read and write based on the device sector size
-> >> instead of the size recorded in the FAT meta data. This
-> >> helps to overcome the 'FAT sector size mismatch' error
-> >> and enables U-Boot to read/write those partitions.
->
-> Does this ignore the filesystem sector size or account for it?
-
-Accounts for it.
-
-> There's a whole lot of logic added below which isn't really
-> explained here.
-
-Will post a new version with additional explanation.
-
-> >> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> >> ---
-> >>  fs/fat/fat.c       | 227 ++++++++++++++++++++++++++++++++++++++++++---
-> >>  fs/fat/fat_write.c |  19 ----
-> >>  2 files changed, 214 insertions(+), 32 deletions(-)
-> >>
-> >> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-> >> index e2570e8167..f4bad99335 100644
-> >> --- a/fs/fat/fat.c
-> >> +++ b/fs/fat/fat.c
-> >> @@ -44,24 +44,223 @@ static void downcase(char *str, size_t len)
-> >>
-> >>  static struct blk_desc *cur_dev;
-> >>  static struct disk_partition cur_part_info;
-> >> +int fat_sect_size;
->
-> This variable should be static, no harm in 0 initializing it here either.
-> >>
-
-Sure.
-
-> [...]
->
-> >> +
-> >> +int disk_write(__u32 sect, __u32 nr_sect, void *buf)
-> >> +{
-> >> +	int ret;
-> >> +	__u8 *block = NULL;
-> >> +	__u32 rem, size;
-> >> +	__u32 s, n;
-> >> +
-> >> +	rem = nr_sect * fat_sect_size;
-> >> +	/*
-> >> +	 *           block N       block N + 1      block N + 2
-> >> +	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> >> +	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-> >> +	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> >> +	 * . . . |               |               |               | . . .
-> >> +	 * ------+---------------+---------------+---------------+------
-> >> +	 *            |<--- FAT reads in sectors          --->|
-> >> +	 *
-> >> +	 *            |  part 1  |   part 2      |  part 3    |
-> >> +	 *
-> >> +	 */
-> >> +
-> >> +	/* Do part 1 */
-> >> +	if (fat_sect_size) {
-> >> +		__u32 offset;
-> >> +
-> >> +		/* Read one block and overwrite the leading sectors */
-> >> +		block = malloc_cache_aligned(cur_dev->blksz);
-> >> +		if (!block) {
-> >> +			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-> >> +			return -1;
-> >> +		}
-> >> +
-> >> +		s = sect_to_block(sect, &offset);
-> >> +		offset = offset * fat_sect_size;
-> >> +
-> >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> >> +		if (ret != 1) {
-> >> +			ret = -1;
-> >> +			goto exit;
-> >> +		}
-> >> +
-> >> +		if (rem > (cur_part_info.blksz - offset))
-> >> +			size = cur_part_info.blksz - offset;
-> >> +		else
-> >> +			size = rem;
-> >> +
-> >> +		memcpy(block + offset, buf, size);
-> >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> >> +		if (ret != 1) {
-> >> +			ret = -1;
-> >> +			goto exit;
-> >> +		}
-> >> +
-> >> +		rem -= size;
-> >> +		buf += size;
-> >> +		s++;
-> >> +	} else {
-> >> +		/*
-> >> +		 * fat_sect_size not being set implies, this is the first read
-> >> +		 * to partition. The first sector is being read to get the
-> >> +		 * FS meta data. The FAT sector size is got from this meta data.
-> >> +		 */
->
-> This is the disk_write() function though, I don't think this behaviour
-> is correct?
-
-Will clean this.
-
-Thanks for the inputs.
-
--Varada
 
 
-> >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
-> >> +		if (ret != 1)
-> >> +			return -1;
-> >> +	}
-> >> +
-> >> +	/* Do part 2, write directly from the given buffer */
-> >> +	if (rem > cur_part_info.blksz) {
-> >> +		n = rem / cur_part_info.blksz;
-> >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
-> >> +		if (ret != n) {
-> >> +			ret = -1;
-> >> +			goto exit;
-> >> +		}
-> >> +		buf += n * cur_part_info.blksz;
-> >> +		rem = rem % cur_part_info.blksz;
-> >> +		s += n;
-> >> +	}
-> >> +
-> >> +	/* Do part 3, read a block and copy the trailing sectors */
-> >> +	if (rem) {
-> >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> >> +		if (ret != 1) {
-> >> +			ret = -1;
-> >> +			goto exit;
-> >> +		} else {
-> >> +			memcpy(block, buf, rem);
-> >> +		}
-> >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> >> +		if (ret != 1) {
-> >> +			ret = -1;
-> >> +			goto exit;
-> >> +		}
-> >> +	}
-> >> +exit:
-> >> +	if (block)
-> >> +		free(block);
-> >> +
-> >> +	return (ret == -1) ? -1 : nr_sect;
-> >>  }
->
->
-> [...]
->
-> Hi Tom,
->
-> > With this patch, we now have
-> > https://patchwork.ozlabs.org/project/uboot/patch/20241113044956.1836896-1-caleb.connolly@linaro.org/
->
-> I suspect my patch would corrupt storage on write, I'll give it another
-> test and see.
-> > and
-> > https://patchwork.ozlabs.org/project/uboot/patch/20230730111516.v2.1.Ia13846500fab3d5a1d5573db11a040d233994fa6@changeid/
-> > for seemingly the same issue. Can you please try these other two
-> > patches and report which ones do / don't handle your use case as well?
-> > Thanks!
-> Kind regards,
-> >
->
-> --
-> // Caleb (they/them)
->
+On 20/11/2024 17:03, Simon Glass wrote:
+> Hi Caleb,
+> 
+> On Wed, 20 Nov 2024 at 08:51, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Hi Simon, Marex,
+>>
+>> On 20/11/2024 16:36, Simon Glass wrote:
+>>> Rather than doing autoprobe within the driver model code, move it out to
+>>> the board-init code. This makes it clear that it is a separate step from
+>>> binding devices.
+>>>
+>>> For now this is always done twice, before and after relocation, but we
+>>> should discuss whether it might be possible to drop the post-relocation
+>>> probe.
+>>>
+>>> For boards with SPL, the autoprobe is still done there as well.
+>>>
+>>> Note that with this change, autoprobe happens after the
+>>> EVT_DM_POST_INIT_R/F events are sent, rather than before.
+>>>
+>>> Link: https://lore.kernel.org/u-boot/20240626235717.272219-1-marex@denx.de/
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>
+>> [...]
+>>
+>>> +For some platforms, certain devices must be probed to get the platform into
+>>> +a working state. To help with this, drivers marked with DM_FLAG_PROBE_AFTER_BIND
+>>
+>> I've found the documentation around this flag lacking, and the
+>> implementation confusing. Here you say /drivers/ with this flag (which
+>> would imply I can add it to the U_BOOT_DRIVER() definition, but further
+>> below the function doc says /device/ with this flag.
+>>
+>> In practise, it seems like the flag has to be added to the device in the
+>> bind() function, and adding it to the driver definition doesn't work
+>> (this left me scrataching my head for a while). The commit message
+>> adding it explains this and it seems like the idea was to have a way to
+>> trigger probing a device from the .bind() callback.
+>>
+>> I don't think I'm the only one confused by this, since grepping for it
+>> reveals two watchdog drivers which set this on their U_BOOT_DRIVER()
+>> definition.
+>>
+>> I can only see one driver that ever enables this flag conditionally,
+>> that's the ARM PSCI driver. Every other user sets it unconditionally in
+>> the .bind() callback.
+>>
+>> Would it make sense to rework this into a driver flag?
+>>
+>> Otherwise, could you document this behaviour more explicitly in this series?
+> 
+> I agree with you and I very-much want to document this better.
+> 
+> The original patch[1] came with no documentation nor tests. It was
+> applied within 5 days, after Sean raised exactly the same objections
+> that I have with this feature. Those objections were overruled and the
+> patch was applied anyway.
+> 
+> So here I am trying to clean this up.
+
+Ok, good to hear. Then it would be great if at least the comment above
+the flag definition could be made more explicit (that it must be applied
+to a device not a driver).
+> 
+> As to the driver thing, my main concern is that it is too easy for
+> people to add the flag, causing a large slowdown in U-Boot's
+> pre-relocation startup speed. Perhaps the solution to that could be to
+> enable bootstage everywhere and report the time in the banner?
+
+I'm not sure what the problem is here. You're worried that people will
+set this flag when it isn't needed? This ought to be handled during
+review of the driver in question.
+
+Certainly I don't think making features more obscure will point people
+towards better solution, more likely they'll just get frustrated,
+particularly when this flag actually IS the correct solution as is the
+case for many drivers.
+
+Kind regards,
+> 
+> Regards,
+> Simon
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20220422131555.123598-1-marex@denx.de/
+
+-- 
+// Caleb (they/them)
+
