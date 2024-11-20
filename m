@@ -4,105 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD22D711D7
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 18:29:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DDED743CB
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 19:39:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1EE289328;
-	Wed, 20 Nov 2024 19:29:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 488E989164;
+	Wed, 20 Nov 2024 20:39:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="luBM3WkA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B4mBRh68";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FFE989338; Wed, 20 Nov 2024 19:29:22 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id EFACD89164; Wed, 20 Nov 2024 20:39:18 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8C1588E33
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 19:29:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A77D58925A
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 20:39:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3823e45339bso4714f8f.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:29:19 -0800 (PST)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5ced377447bso94616a12.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:39:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732127359; x=1732732159; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RbQy3E41EWkjhCXswYDTy0mtFdl0r30lQq4azDh/rvg=;
- b=luBM3WkAaxd09N6/DLNK/7oyzzJW/HPciLK3JRhIFs9xinZvw5as3wKBvxuyJN7L3s
- AdoGkg34K9H5OigdGXte0OPD593DFPoYqHwFim9ZIJn3/8wq6f4ieN+/VTeTXBzs/op/
- Ir4nVMJq7wc35egJt2QBmuhi/ixO4W0iGUYhUYvbRrVwbKsioABR2bcRRleBE2T1+XvW
- Bkas/Oh9dsAHOzX7brhvltVhfppcV35qkw8cu0NfMAK2hjspMOblogMEcOxXmbKrhccs
- nDEG3Nf9iFDm2TV24QauWPZgF/4HeLAj5VlrcR+L8dRHyB0pTAsW8e0Q/26I8huv2Mvq
- zA/g==
+ d=gmail.com; s=20230601; t=1732131555; x=1732736355; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jrbl/a+dHtKybLr6KROZCrfEcdziNmhgX+SytHP9mZQ=;
+ b=B4mBRh68ZEA7lGXMLK0dO7EfAyJtU97YPPlg/pWQoD7VjSBMKppzqItxESJP+r5qQQ
+ fFqOconEfGXGZt+GJqW6myKagrqxXC6ERmrnpl4buuBgWbsaSaVipFiqVbvmpVNW5TEt
+ 0Nm5Sa+wkU1CzP9Y4sdA2J47gz/A7P8Pk7whTNfulUzcH0fkYK8QzS7JIfYCN6oDzel+
+ /RAX93G7zN3FG1YHks1t3jySYM9KdnqttZCtIyI8PIpbTUzzBoUjfe7F3PHN4K3dpkz0
+ uSXpL6KDQ8VQm6GiLPPXfQ560JslUx4kxn/N5Q60IIskLSd1h9lCRBd8iqrBHjwQLzzK
+ ZtWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732127359; x=1732732159;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RbQy3E41EWkjhCXswYDTy0mtFdl0r30lQq4azDh/rvg=;
- b=Q+8KqstMTbM8tBYZxKFxAhPzH4ROMTBho8SbOl+OWwRtoaEa0RPyrmySs636Y1z9/a
- IOqbidaSBtg/nvnbJfvMZEOwvXeI0+xhpwAbwUvA5f4LkYVvH2bZGqGN+SocKejVtGgJ
- ErM6WXCDs+641Jnip8CaijurvTlqrtx2a3ShB4quldHeAhmBYwb1V6tBWHP7Nt5fVVlF
- tHpRm9YjnBxRPCkO3/4U1LU17K1BTP2/QquCqoT92dSo1HtCd9WAeLEALaZe0vBgsEKw
- xMrDXtQcj5ZIlHW/p/hKGzHNGy01LoiVfs2wRpoQGZ2ewsMM9V96MOEOtb3+fK0FTmSW
- 4BZQ==
-X-Gm-Message-State: AOJu0Yxsi52h6zkuIIfEG9fzHnKdUt/J88YfWuVRJVQ8gHYRgaIhkdZK
- Mdn8zSH4kJzPYxRCqtaPRk7klZczTT3kudB6VcqT2oyWZHgjnZnwE1HhdDAtDcw=
-X-Gm-Gg: ASbGncsj8GyNBBxKqexkDBRC26f8QCq1fGUv3q9o9Rs1AFIjDSwceFgjzvSfddMCFgR
- sQqNaR4/OjODwY9mwFjDM+GhBH+y/e2EFXYORv64MlmLjzdWH/lAj7da3+FqVZMvfghKHCA1e7d
- QTK4QZZR+qqr1P3b0cSI9ssN7z/WscxYbLZzB7a13rjBbYu7YvenlrbuVyE0zqwqOoLwpfg6jQH
- 61gzAkyd6cYRkg/9pKyE0cg+emFhCH+rjjo0r4KEv6gF58DY2Qee1fbta3bWgXBh4UP5MhBxLKB
- qyxB9nXhP3urNMnfRIGoZq8Qh+qYOg==
-X-Google-Smtp-Source: AGHT+IGtJVr9beok0dhhQ1Sup+d4K7x+TjL7gddhIEr9vRWFZIN+38NCZlE+EodhujKZffw2u28YvQ==
-X-Received: by 2002:a5d:64c6:0:b0:382:5206:8b5d with SMTP id
- ffacd0b85a97d-38254b21ac8mr2398069f8f.42.1732127359295; 
- Wed, 20 Nov 2024 10:29:19 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:edb:fc01:23ef:f614:8d2a:2e1f?
- ([2a0a:ef40:edb:fc01:23ef:f614:8d2a:2e1f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-382549055f2sm2732430f8f.16.2024.11.20.10.29.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 10:29:18 -0800 (PST)
-Message-ID: <4f382014-4a9b-418a-9ac9-7c1f75e6f71e@linaro.org>
-Date: Wed, 20 Nov 2024 18:29:17 +0000
+ d=1e100.net; s=20230601; t=1732131555; x=1732736355;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jrbl/a+dHtKybLr6KROZCrfEcdziNmhgX+SytHP9mZQ=;
+ b=YsR5Ox+H6Z69iSwh4Yd3Gtf4aACJsuMkWDE19SePDXUGop5kc+aCeHcguZhIGShJd1
+ uZYe3M3eHTFYsMW+ls+vc8vwN9D9NPV3dxz7HlqoV8T2IbdwHEUR6C3SpAb2XYPoletu
+ G+Wts1iiiyHpr04/36PTjLshZJG9RJk0ml2AIrzEbF6QL6iMPOSrO/76KqBThb57o0dD
+ lN6rL+sBKj5X7OforKWAGFdlmyXiwju8TN6dCbNli3GPuYIlwLnBySANHl61hvICiyLe
+ 3jDkdy8kMKUC3IxTIwk2NR3jjYjPWk8rpWks/hnS5jEtT6WNsJpebNL6bgw95l2BIR82
+ kA8g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAy5mpl8rkFGSKAVzlv8p850EibXQSlrbWfOKdTVMAiZOMCU/dNtI4F1Bhg10KHsW6uekEQO0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJ2ZucVB7SXJc5797Tg5VCXux8rRfO53yo2FNFbN7t3H8P7DCn
+ iPg9d9r57DGjIUqiiIzrzTMihJ112+nqqwceLr2LHFKf7n7Tp3gB5XPDTS9SByZnTlGpIPGVxZl
+ IPmhVaDRArTHUqVAefMjzl+7RIQc=
+X-Google-Smtp-Source: AGHT+IFohkxcjJ/ilyQYU20mCQUihbTTlO7VKQR6xd56WAcXJxAPliLPWKlXNBzuKH+GN6gaauhHF6IExweca9NhTrY=
+X-Received: by 2002:a05:6402:13d0:b0:5cf:e5e3:e0b8 with SMTP id
+ 4fb4d7f45d1cf-5cff4c4822dmr3275010a12.17.1732131554454; Wed, 20 Nov 2024
+ 11:39:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] x86: select CONFIG_64BIT for X86_64
+References: <20241119195039.15177-1-mibodhi@gmail.com>
+ <CAFLszTjG+o=-1tr_dSf4EsOGSazRFdnSJ_VsMFR9k+vntcdRuA@mail.gmail.com>
+In-Reply-To: <CAFLszTjG+o=-1tr_dSf4EsOGSazRFdnSJ_VsMFR9k+vntcdRuA@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Wed, 20 Nov 2024 11:39:02 -0800
+Message-ID: <CAJaLiFxWYwR203y2REi0sNP0Ho1ZhQq-4cWcCm2og7mV7PRKYw@mail.gmail.com>
+Subject: Re: [PATCH] arm: kirkwood: Enable bootstd for Sheevaplug board
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <20241120100157.485418-1-andrew.goodbody@linaro.org>
- <20241120100157.485418-4-andrew.goodbody@linaro.org>
- <CAFLszTjAaUVccHaxj758jFqkjQzB_J_cBFi=Nx42ADWdp9EjJw@mail.gmail.com>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <CAFLszTjAaUVccHaxj758jFqkjQzB_J_cBFi=Nx42ADWdp9EjJw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,196 +91,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20/11/2024 13:46, Simon Glass wrote:
-> Hi Andrew,
-> 
-> On Wed, 20 Nov 2024 at 03:02, Andrew Goodbody
-> <andrew.goodbody@linaro.org> wrote:
->>
->> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
->> static analysis tools.
->> Introduce CONFIG_SPL_64BIT and select it for architectures other than
->> x86 with 64 bit builds. Do not select it for x86 builds as x86 uses
->> a 32 bit SPL.
->> Ensure that when limits are set they use CONFIG_64BIT for U-Boot
->> proper and CONFIG_SPL_64BIT for SPL. This is to allow for the 32 bit
->> SPL build used by x86.
->>
->> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>
->> Changes in v3:
->> Introduce CONFIG_SPL_64BIT to allow for x86 building a 32 bit SPL and
->> a 64 bit U-Boot proper.
->>
->> Changes in v2:
->> Corrected commit title to be x86 not sandbox
->>
->>   arch/Kconfig         | 3 +++
->>   arch/arm/Kconfig     | 1 +
->>   arch/mips/Kconfig    | 4 ++++
->>   arch/riscv/Kconfig   | 1 +
->>   arch/sandbox/Kconfig | 1 +
->>   arch/x86/Kconfig     | 1 +
->>   common/bloblist.c    | 3 ++-
->>   include/limits.h     | 3 ++-
->>   8 files changed, 15 insertions(+), 2 deletions(-)
->>
->> diff --git a/arch/Kconfig b/arch/Kconfig
->> index 6258788f53..c726ac5fc7 100644
->> --- a/arch/Kconfig
->> +++ b/arch/Kconfig
->> @@ -38,6 +38,9 @@ config 32BIT
->>   config 64BIT
->>          bool
->>
->> +config SPL_64BIT
->> +       bool
-> 
-> Please document what this means and its implications, with some help
+Hi Simon,
 
-Ack
+On Wed, Nov 20, 2024 at 4:40=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Tony,
+>
+> On Tue, 19 Nov 2024 at 12:50, Tony Dinh <mibodhi@gmail.com> wrote:
+> >
+> > Enable bootstd for Sheevaplug board.
+> > Remove JFFS2 support. See JFFS2 Vulnerability[1].
+> > Enable LTO to keep board size within limit.
+> >
+> > [1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-ca=
+t/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> >  configs/sheevaplug_defconfig | 16 ++--------------
+> >  include/configs/sheevaplug.h | 20 +++++++++++++++-----
+> >  2 files changed, 17 insertions(+), 19 deletions(-)
+>
+> Can I suggest that you move to a test-based environment, too?
 
->> +
->>   config SYS_CACHELINE_SIZE
->>          int
->>          default 128 if SYS_CACHE_SHIFT_7
->> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
->> index 7282c4123b..055762b0b9 100644
->> --- a/arch/arm/Kconfig
->> +++ b/arch/arm/Kconfig
->> @@ -7,6 +7,7 @@ config SYS_ARCH
->>   config ARM64
->>          bool
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          select PHYS_64BIT
->>          select SYS_CACHE_SHIFT_6
->>          imply SPL_SEPARATE_BSS
->> diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
->> index 38577af43d..7ea439e857 100644
->> --- a/arch/mips/Kconfig
->> +++ b/arch/mips/Kconfig
->> @@ -211,6 +211,7 @@ config CPU_MIPS64_R1
->>          bool "MIPS64 Release 1"
->>          depends on SUPPORTS_CPU_MIPS64_R1
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          help
->>            Choose this option to build a kernel for release 1 through 5 of the
->>            MIPS64 architecture.
->> @@ -219,6 +220,7 @@ config CPU_MIPS64_R2
->>          bool "MIPS64 Release 2"
->>          depends on SUPPORTS_CPU_MIPS64_R2
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          help
->>            Choose this option to build a kernel for release 2 through 5 of the
->>            MIPS64 architecture.
->> @@ -227,6 +229,7 @@ config CPU_MIPS64_R6
->>          bool "MIPS64 Release 6"
->>          depends on SUPPORTS_CPU_MIPS64_R6
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          help
->>            Choose this option to build a kernel for release 6 or later of the
->>            MIPS64 architecture.
->> @@ -235,6 +238,7 @@ config CPU_MIPS64_OCTEON
->>          bool "Marvell Octeon series of CPUs"
->>          depends on SUPPORTS_CPU_MIPS64_OCTEON
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          help
->>           Choose this option for Marvell Octeon CPUs.  These CPUs are between
->>           MIPS64 R5 and R6 with other extensions.
->> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
->> index 043d963f63..abb7a984c4 100644
->> --- a/arch/riscv/Kconfig
->> +++ b/arch/riscv/Kconfig
->> @@ -120,6 +120,7 @@ config ARCH_RV32I
->>   config ARCH_RV64I
->>          bool "RV64I"
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>          select PHYS_64BIT
->>          help
->>            Choose this option to target the RV64I base integer instruction set.
->> diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
->> index db29ca14bd..4c169034d9 100644
->> --- a/arch/sandbox/Kconfig
->> +++ b/arch/sandbox/Kconfig
->> @@ -47,6 +47,7 @@ config HOST_32BIT
->>   config HOST_64BIT
->>          def_bool $(cc-define,_LP64)
->>          select 64BIT
->> +       select SPL_64BIT if SPL
->>
->>   config HOST_HAS_SDL
->>          def_bool $(success,sdl2-config --version)
->> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
->> index 23a1e21b29..006a59d6fa 100644
->> --- a/arch/x86/Kconfig
->> +++ b/arch/x86/Kconfig
->> @@ -44,6 +44,7 @@ endchoice
->>
->>   config X86_64
->>          bool
->> +       select 64BIT
->>
->>   config SPL_X86_64
->>          bool
->> diff --git a/common/bloblist.c b/common/bloblist.c
->> index ec6ff7a5a9..30fe1cb4b3 100644
->> --- a/common/bloblist.c
->> +++ b/common/bloblist.c
->> @@ -579,7 +579,8 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
->>          ulong version = BLOBLIST_REGCONV_VER;
->>          ulong sigval;
->>
->> -       sigval = (IS_ENABLED(CONFIG_64BIT)) ?
->> +       sigval = ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
->> +                       (IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) ?
->>                          ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
->>                           ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
->>                          ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
-> 
-> Gosh this is pretty ugly.
-> 
-> Can you split it into separate statements?
+Did you mean a "text-based environment" as in
+board/<vendor>/<board>/<CONFIG_SYS_BOARD>.env ?
 
-Like this?
+If yes, I have not tried it but my impression from my past reading is
+that we need to repeat the bootcmd (bootcmd=3Dbootflow scan -lb) and
+other boot #define's in the .env file. In that case the
+include/confis/sheevaplug.h can be removed. I recall reading this
+conversation here in the ML from way past. It'll be easier to maintain
+and I'm all for it!
 
-if ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
-		(IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) {
-	sigval = ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
-		 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64));
-} else {
-	sigval = ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
-		 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
-}
+Is there a good example somewhere in the u-boot source tree? i.e. any
+other envs that could be useful for bootstd should be in there too.
 
-Andrew
+All the best,
+Tony
 
 
->> diff --git a/include/limits.h b/include/limits.h
->> index 4700cc7a59..1d0bbf69be 100644
->> --- a/include/limits.h
->> +++ b/include/limits.h
->> @@ -9,7 +9,8 @@
->>   #define UINT32_MAX  0xffffffffU
->>   #define UINT64_MAX  0xffffffffffffffffULL
->>
->> -#ifdef CONFIG_64BIT
->> +#if (defined(CONFIG_64BIT) && !defined(CONFIG_SPL_BUILD)) || \
->> +       (defined(CONFIG_SPL_64BIT) && defined(CONFIG_SPL_BUILD))
->>       #define UINTPTR_MAX UINT64_MAX
->>   #else
->>       #define UINTPTR_MAX UINT32_MAX
->> --
->> 2.39.5
->>
-> 
+>
+> >
+> > diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfi=
+g
+> > index 9ac40b9e57..a7f6c73ecb 100644
+> > --- a/configs/sheevaplug_defconfig
+> > +++ b/configs/sheevaplug_defconfig
+> > @@ -16,16 +16,14 @@ CONFIG_ENV_OFFSET=3D0x80000
+> >  CONFIG_DEFAULT_DEVICE_TREE=3D"marvell/kirkwood-sheevaplug"
+> >  CONFIG_SYS_LOAD_ADDR=3D0x800000
+> >  CONFIG_IDENT_STRING=3D"\nMarvell-Sheevaplug"
+> > +CONFIG_LTO=3Dy
+> >  CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
+> >  CONFIG_BOARD_SIZE_LIMIT=3D524288
+> > +CONFIG_BOOTSTD_FULL=3Dy
+> >  CONFIG_BOOTDELAY=3D3
+> > -CONFIG_USE_BOOTCOMMAND=3Dy
+> > -CONFIG_BOOTCOMMAND=3D"${x_bootcmd_kernel}; setenv bootargs ${x_bootarg=
+s} ${x_bootargs_root}; bootm 0x6400000;"
+> >  CONFIG_USE_PREBOOT=3Dy
+> >  # CONFIG_DISPLAY_BOARDINFO is not set
+> > -CONFIG_HUSH_PARSER=3Dy
+> >  CONFIG_SYS_MAXARGS=3D32
+> > -CONFIG_CMD_BOOTZ=3Dy
+> >  # CONFIG_BOOTM_PLAN9 is not set
+> >  # CONFIG_BOOTM_RTEMS is not set
+> >  # CONFIG_BOOTM_VXWORKS is not set
+> > @@ -35,19 +33,10 @@ CONFIG_CMD_MMC=3Dy
+> >  CONFIG_CMD_NAND=3Dy
+> >  CONFIG_CMD_SATA=3Dy
+> >  CONFIG_CMD_USB=3Dy
+> > -CONFIG_CMD_DHCP=3Dy
+> > -CONFIG_CMD_MII=3Dy
+> > -CONFIG_CMD_PING=3Dy
+> > -CONFIG_CMD_EXT2=3Dy
+> > -CONFIG_CMD_EXT4=3Dy
+> > -CONFIG_CMD_FAT=3Dy
+> > -CONFIG_CMD_FS_GENERIC=3Dy
+> > -CONFIG_CMD_JFFS2=3Dy
+> >  CONFIG_CMD_MTDPARTS=3Dy
+> >  CONFIG_MTDIDS_DEFAULT=3D"nand0=3Dorion_nand"
+> >  CONFIG_MTDPARTS_DEFAULT=3D"mtdparts=3Dorion_nand:512K(uboot),512K(env)=
+,4M(kernel),-(rootfs)"
+> >  CONFIG_CMD_UBI=3Dy
+> > -CONFIG_ISO_PARTITION=3Dy
+> >  CONFIG_OF_CONTROL=3Dy
+> >  CONFIG_ENV_OVERWRITE=3Dy
+> >  CONFIG_ENV_IS_IN_NAND=3Dy
+> > @@ -68,6 +57,5 @@ CONFIG_DM_RTC=3Dy
+> >  CONFIG_RTC_MV=3Dy
+> >  CONFIG_USB=3Dy
+> >  CONFIG_USB_EHCI_HCD=3Dy
+> > -CONFIG_USB_STORAGE=3Dy
+> >  CONFIG_LZMA=3Dy
+> >  CONFIG_BZIP2=3Dy
+> > diff --git a/include/configs/sheevaplug.h b/include/configs/sheevaplug.=
+h
+> > index 4e0b3c663c..c08d29892c 100644
+> > --- a/include/configs/sheevaplug.h
+> > +++ b/include/configs/sheevaplug.h
+> > @@ -12,13 +12,23 @@
+> >
+> >  #include "mv-common.h"
+> >
+> > +#define KERNEL_ADDR_R  __stringify(0x800000)
+> > +#define FDT_ADDR_R     __stringify(0x2c00000)
+> > +#define RAMDISK_ADDR_R __stringify(0x01100000)
+> > +#define SCRIPT_ADDR_R  __stringify(0x200000)
+> > +
+> > +#define LOAD_ADDRESS_ENV_SETTINGS \
+> > +       "kernel_addr_r=3D" KERNEL_ADDR_R "\0" \
+> > +       "fdt_addr_r=3D" FDT_ADDR_R "\0" \
+> > +       "ramdisk_addr_r=3D" RAMDISK_ADDR_R "\0" \
+> > +       "scriptaddr=3D" SCRIPT_ADDR_R "\0"
+> >  /*
+> >   *  Environment variables configurations
+> >   */
+> > -#define CFG_EXTRA_ENV_SETTINGS "x_bootargs=3Dconsole"    \
+> > -       "=3DttyS0,115200 mtdparts=3D" CONFIG_MTDPARTS_DEFAULT       \
+> > -       "x_bootcmd_kernel=3Dnand read 0x6400000 0x100000 0x400000\0" \
+> > -       "x_bootcmd_usb=3Dusb start\0" \
+> > -       "x_bootargs_root=3Droot=3D/dev/mtdblock3 rw rootfstype=3Djffs2\=
+0"
+> > +#define CFG_EXTRA_ENV_SETTINGS \
+> > +       LOAD_ADDRESS_ENV_SETTINGS \
+> > +       "fdtfile=3D" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+> > +       "mtdparts=3D" CONFIG_MTDPARTS_DEFAULT "\0" \
+> > +       "console=3DttyS0,115200\0"
+> >
+> >  #endif /* _CONFIG_SHEEVAPLUG_H */
+> > --
+> > 2.39.5
+> >
+>
 > REgards,
 > Simon
-
