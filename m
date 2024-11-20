@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D42D63936
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E6D6D63939
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:37:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BFE4892DE;
-	Wed, 20 Nov 2024 14:37:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F71F89301;
+	Wed, 20 Nov 2024 14:37:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gTzTGniU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WzOoV17w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC8C89301; Wed, 20 Nov 2024 14:37:19 +0100 (CET)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 46A1589301; Wed, 20 Nov 2024 14:37:53 +0100 (CET)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E78F89270
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:37:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C72F989270
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-71e5130832aso3448552b3a.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:37:16 -0800 (PST)
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-7248c1849bdso3882621b3a.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:37:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732109835; x=1732714635; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732109869; x=1732714669; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GyV+bNhWOaKCx3lO6wdRzrZqJgMiKrTpoh3zEGA1U+0=;
- b=gTzTGniUEFgsz75zdm6dJ6vFQIrF8sG3onjj0zwAJxFu/jXUBQM20qUVyRGLlEZe1a
- vPNzA0zrctpe6RRa+ocf2tzEXpgErDInNAb2vRfBKtfzVkdUelXTK+LShD8VUo2nO+O1
- UCqc60/CzEEQIXWA0ARQduf7mV3NTEfZrC5Dw=
+ bh=SI8dLpTfmNMtgNqtCmSfO1+r+1V+NNU3e9iDLDGfjN0=;
+ b=WzOoV17wFBAtA2GU1w5zvNK+/Bjh5BuqeV+BjZIX/jvgqBnbUyBWcCDTZP3V9mlJmE
+ zmKnt7XCEPufECs9PUHbP96PHZs/SodH354eAp95Qv+jqCg4Lrwu5MArFDP+kKwmRGqk
+ 90T0ZxaVer5LtXThEo36OsIy1nrCamFSQyfp0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732109835; x=1732714635;
+ d=1e100.net; s=20230601; t=1732109869; x=1732714669;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GyV+bNhWOaKCx3lO6wdRzrZqJgMiKrTpoh3zEGA1U+0=;
- b=Aj5Y0cDNRNXVURHFtK/gyZM/X+ty1Hloh2yt7eKmVlbfFTbepAyYM7ohJaRSeS5zeV
- SrK1UHI+KANf/sfRyDjt2m3aIwIDHYx/8qGYDv8sVOnM0LQOzYygmSj/KmA34nZI5inq
- MRAg+WT7A82wBt4KqhuGjOOOOdfy8DYH+vgrIg745l2LIY2pO1xQHmoP4lR41fZzc6LE
- wFck1+hMv3oVVanBj5IqZonlpN+PhsHG2wObWfrYOUJ2n8pmXyLcn2l51e6rhwf3mc1U
- OGmx8MTbg/YCcPccOqr93YXaahcTq1tYZcqx6m2cTv9p1X9nhaIF9WZk49SN0sly95pl
- LWXA==
-X-Gm-Message-State: AOJu0YzdCUv8thePGAhMZg78WnMSYurzXJmCkS8cIMprgjJiZEQG5Skx
- +vyrXQ7Z0k7ucEpb7dR6f0PV2RVUEo89YYIrbslPpy2+wMUETuKOn7RJce/U0oM/pGxsxGPn6uS
- nUEGjsIEPhTqzrSQWmmpfbheGfnfT32GXoOgy
-X-Google-Smtp-Source: AGHT+IF3YGZdULAXRYCbCZ/TjbHF6O9uRkfHT5nyeSXljeewYXVmqASV5fov2PJMkxOBssgxAnhSd15GVEscHJwdsR8=
-X-Received: by 2002:a05:6a00:850:b0:71e:e3:608 with SMTP id
- d2e1a72fcca58-724bee43e49mr3922935b3a.26.1732109835158; Wed, 20 Nov 2024
- 05:37:15 -0800 (PST)
+ bh=SI8dLpTfmNMtgNqtCmSfO1+r+1V+NNU3e9iDLDGfjN0=;
+ b=oDcM8Vokp0fQ5qhJ9W9K9JD8v7pcqYxQZlCtPn45QAwxawiimY2ovfRwTOuVDXiphm
+ iKzBZoOFRF+eWBrI1Q2YTZiY0qJuqQlG8Wl5bn10iQgLIeZfYKxbZ1CK3flBq70+3Dl4
+ xUwjrXtRNdykOxn2fFNq0nCzTDke29JP8XrQbdkttOCxRckI30AlmhsN+4ssDXkpw0JE
+ ppPhfDQcPFwNsGtpIkeDjoBcujGFVGo2nM2aqDIv6BmaahRWeaoyjFTuU7oto15Up0jg
+ /1y2Prb4yxgzndjwYfse0e4N1eTW2sxHoKKXkGAWBRsT4hyjPykhjLW8Zts5JXD7JcZN
+ HbCw==
+X-Gm-Message-State: AOJu0YxHRid8wwbT/7ZwGQXa1zQS0MRSVFT5So3qtTnsCu/43oOMPLu/
+ xuXSmePauOsbjFUSnlisCN+ykd8/OyvwoZnJhu8GxCY9CBX2066Gbwftml5rOmfKEdueCAc5Ec2
+ xEDLuGR1+NoRbT5WFiFA2WlDfNHBAc6ItdHB2
+X-Google-Smtp-Source: AGHT+IGVSzwZU8Gb8CQq6qSdceAPfE0gdFDug4HL2PxMknNLG2TvKNgpkJi4YM8s7GKUTx5fdTQ3mcEy4Nk5id8jm9E=
+X-Received: by 2002:a05:6a00:1783:b0:71e:db72:3c87 with SMTP id
+ d2e1a72fcca58-724bed27a8bmr3894401b3a.20.1732109869288; Wed, 20 Nov 2024
+ 05:37:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
+References: <20241119131844.4078144-1-sjg@chromium.org>
+ <20241119131844.4078144-13-sjg@chromium.org>
+ <CAC_iWjLVH8puoEvqu-UH6T8xvtQVvkAqksqtHq9+m+Xwq9xUjg@mail.gmail.com>
+In-Reply-To: <CAC_iWjLVH8puoEvqu-UH6T8xvtQVvkAqksqtHq9+m+Xwq9xUjg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:35:47 -0700
-Message-ID: <CAFLszTgGn=x-cZB_9gJuESD2jauDhZwjEc7VX0JWvpxQ_Ro+dQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] aes: Allow to store randomly generated IV in the
- FIT
-To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: u-boot@lists.denx.de, al.kochet@gmail.com, paul.henrysd@gmail.com
+Date: Wed, 20 Nov 2024 06:37:34 -0700
+Message-ID: <CAFLszTjh0gczViYomndt7PAsLR78o9aLTRJH5dW4eBdbmmRzyw@mail.gmail.com>
+Subject: Re: [PATCH 12/39] bootm: Allow building bootm.c without
+ CONFIG_SYS_BOOTM_LEN
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,65 +86,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
+Hi Ilias,
 
-On Wed, 20 Nov 2024 at 03:09, Paul HENRYS
-<paul.henrys_ext@softathome.com> wrote:
+On Wed, 20 Nov 2024 at 03:56, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> When the initialisation vector is randomly generated, its value shall be
-> stored in the FIT together with the encrypted data. The changes allow to
-> store the IV in the FIT also in the case where the key is not stored in
-> the DTB but retrieved somewhere else at runtime.
+> Hi Simon,
 >
-> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
-> ---
->  lib/aes/aes-encrypt.c | 7 +++++++
->  tools/image-host.c    | 2 +-
->  2 files changed, 8 insertions(+), 1 deletion(-)
+> On Tue, 19 Nov 2024 at 15:19, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > This code cannot be compiled by boards which don't have this option. Add
+> > an accessor in the header file to avoid another #ifdef
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  boot/bootm.c    | 8 ++++----
+> >  include/bootm.h | 8 ++++++++
+> >  2 files changed, 12 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > index 16a43d519a8..0a1040ef923 100644
+> > --- a/boot/bootm.c
+> > +++ b/boot/bootm.c
+> > @@ -633,11 +633,11 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+> >         load_buf = map_sysmem(load, 0);
+> >         image_buf = map_sysmem(os.image_start, image_len);
+> >         err = image_decomp(os.comp, load, os.image_start, os.type,
+> > -                          load_buf, image_buf, image_len,
+> > -                          CONFIG_SYS_BOOTM_LEN, &load_end);
+> > +                          load_buf, image_buf, image_len, bootm_len(),
+> > +                          &load_end);
+> >         if (err) {
+> > -               err = handle_decomp_error(os.comp, load_end - load,
+> > -                                         CONFIG_SYS_BOOTM_LEN, err);
+> > +               err = handle_decomp_error(os.comp, load_end - load, bootm_len(),
+> > +                                         err);
+> >                 bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
+> >                 return err;
+> >         }
+> > diff --git a/include/bootm.h b/include/bootm.h
+> > index c471615b08c..d174f18ac18 100644
+> > --- a/include/bootm.h
+> > +++ b/include/bootm.h
+> > @@ -89,6 +89,14 @@ struct bootm_info {
+> >  #define bootm_x86_set(_bmi, _field, _val)
+> >  #endif
+> >
+> > +static inline ulong bootm_len(void)
+> > +{
+> > +#ifdef CONFIG_SYS_BOOTM_LEN
+> > +       return CONFIG_SYS_BOOTM_LEN;
+> > +#endif
+> > +       return 0;
+> > +}
 >
+> Do we really need a function for this?
+> Why don't you
+> #ifdef CONFIG_SYS_BOOTM_LEN
+> #define SYS_BOOTM_LEN CONFIG_SYS_BOOTM_LEN
+> #else
+> #define SYS_BOOTM_LEN 0
+> #endif
 
-I see that struct cipher_algo does not have a function comment for
-add_cipher_data(), so it is not clear that keydest can be NULL, etc.
-Can you please add one?
-
-Otherwise this seems good to me.
-
-> diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
-> index e74e35eaa2..90e1407b4f 100644
-> --- a/lib/aes/aes-encrypt.c
-> +++ b/lib/aes/aes-encrypt.c
-> @@ -84,6 +84,13 @@ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
->         char name[128];
->         int ret = 0;
->
-> +       if (!keydest && !info->ivname) {
-> +               /* At least, store the IV in the FIT image */
-> +               ret = fdt_setprop(fit, node_noffset, "iv",
-> +                                 info->iv, info->cipher->iv_len);
-> +               goto done;
-> +       }
-> +
->         /* Either create or overwrite the named cipher node */
->         parent = fdt_subnode_offset(keydest, 0, FIT_CIPHER_NODENAME);
->         if (parent == -FDT_ERR_NOTFOUND) {
-> diff --git a/tools/image-host.c b/tools/image-host.c
-> index 5e01b853c5..16389bd488 100644
-> --- a/tools/image-host.c
-> +++ b/tools/image-host.c
-> @@ -535,7 +535,7 @@ fit_image_process_cipher(const char *keydir, void *keydest, void *fit,
->          * size values
->          * And, if needed, write the iv in the FIT file
->          */
-> -       if (keydest) {
-> +       if (keydest || (!keydest && !info.ivname)) {
->                 ret = info.cipher->add_cipher_data(&info, keydest, fit, node_noffset);
->                 if (ret) {
->                         fprintf(stderr,
-> --
-> 2.43.0
->
-
-[..]
+Yes, we could. Just trying to avoid #ifdefs in the C files and provide
+a way to improve this logic later...IMO using this value when it is
+not defined should be an error, but we cannot do that in the
+tools-only build, without yet more refactoring.
 
 Regards,
-SImon
+Simon
