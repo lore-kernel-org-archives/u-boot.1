@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF913D6393C
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:48:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EA3D63939
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:48:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 749EA892DE;
-	Wed, 20 Nov 2024 14:48:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D85C789353;
+	Wed, 20 Nov 2024 14:48:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GXJGKIB5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AitG5ECx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCE3E89353; Wed, 20 Nov 2024 14:48:07 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 1FB8A895F3; Wed, 20 Nov 2024 14:48:24 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9686A892B8
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:48:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BD61892B8
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9a850270e2so845584966b.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:48:05 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa1e51ce601so800327966b.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:48:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732110485; x=1732715285; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732110501; x=1732715301; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F3Yh6OPhYRAi1BYh+M3n6HvzJimyLPnB88qI+WGsPBA=;
- b=GXJGKIB5hgMUwAttiIrPsU2hpEcxGRoZGH9OK6g4pY1n/+EOgKV2UU9M9k+m6TD+K8
- 7+WJwT9UNMlBSjokU9U9di3JrVcOUZfqw6IK1QMTmj5g+eQnqy3mWlhA42FQXAxNUCSW
- g6Hhfx5qLdn0XnRor8MIjAE2NwrdsVdlCtQm4=
+ bh=BjwyZcteXigfik52kHZmjoul2LiqTeQVPSdJ1i2JhzU=;
+ b=AitG5ECxb6quaGxB+2d2vRKP8zbbcNv5ws9jMxaWq/vTBPm206rHNsi0RtcVuJCcG+
+ cicCGMpoZijQoLenoTIciK4pB8SusHogU7Iu7uTXHYhsg9z+9XRGn+ylfS4+x6eXVosq
+ lFGktubiUqlzhwK8UoEXUvMMvrdSWA0a3Zwvk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732110485; x=1732715285;
+ d=1e100.net; s=20230601; t=1732110501; x=1732715301;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F3Yh6OPhYRAi1BYh+M3n6HvzJimyLPnB88qI+WGsPBA=;
- b=a25ECyH3Wi3IhNb8r73L1ONKQMfmhDAL1SOXJmzwOL3aDAB1v1c2MovlTxzrnxkq4U
- jKQi017V5J969hik1VY8WZsm5CnFqZpLlTrFmW5JH32mXmOvZRxRq3BGapPD8PDlfhQZ
- E9pUFG/TZtk/EpruSWfSxjTWNvzD9ULd59EXXuJaqyBkTW0F8w9q7TbzCYN/zx1/2t4G
- THw1ECYDVZQ6TArm7qLaBK8DSEaL87IAYBrIAxw5tCjK61njTRJxp0j/C3jOoM/n1N9W
- VVw1Zf/kNXtW9GvbZzLjamV3FVSEmEURsAWFoHEpwWbrnv17MrBhb9cDvgjiZoVkQp6s
- CfJA==
-X-Gm-Message-State: AOJu0Yztk4M3UiJpDc9mIuK0ozt48u+y53+2NLYxbjmA/hl3pPnYeQjR
- 9M5b02OUFGwEtFSgQ67D/6xnAXT+CvlW2pluBRRBgV4Zo3JmgxLicZbcPSATd2F4nocYgAf6cm4
- a8EI/DY74IszEAmsF69OP3uFFb2cpER7bbJgc
-X-Google-Smtp-Source: AGHT+IF9juR+LyZTqKJezTKvgg3OQV9k0+EmjlaXbR7YQiCWTxZW200xO3dtI6P8Kp/8PxTVpK3dv625WPu+SJu/CCE=
-X-Received: by 2002:a17:906:fe0d:b0:aa4:777d:73b5 with SMTP id
- a640c23a62f3a-aa4dd551bd2mr254358166b.21.1732110485115; Wed, 20 Nov 2024
- 05:48:05 -0800 (PST)
+ bh=BjwyZcteXigfik52kHZmjoul2LiqTeQVPSdJ1i2JhzU=;
+ b=TH3wbW9DuHUuAVzcn/lLNhs4I8Ms+PEF89aqEPORdTlBLhotK7Ha7dhE87WotXeu4n
+ 57wH1mJzXvgDbM8ZF6EEOgUf+3VK5Hs+mZEHAtCxOq7SPgXFNwwsAW1Tk74j/LY9y845
+ cUsLnfpMPW/YVFT8wddaNsmrsRR1EHxZPVhmfm8NcygfiwLgP1nXF96MpA2TalpPi4YT
+ S+6szCkn5u33IoSymuEoMSZMKDSGOHXzt80Te0USxMtcYzIBXsx5fwaXl5KaBxuOYEIl
+ DfoW19cbokdbSRewDo0r9F2OAmsEB4zlpaJHN8/J44i+ZvoSzZo7T3WTpgdm9XyfX0AS
+ lcZA==
+X-Gm-Message-State: AOJu0Ywd+G0MC83oGiv3nuImvcaqZHvmCOPIzdSRXyDf+F4ZMNn1OZc1
+ rata/aOtfpgvI0s3MsM9rOMIi3c5NG+3xNBx4JsBnjJVpPuU3HeWd2G++8rtU4jXn+TbQGcIYjR
+ ZW+BnO+OOoNLkMS03qaDiiSBlc4dQ1sQM663n
+X-Google-Smtp-Source: AGHT+IGQaxPk9Nyf3s5ZbOZI2o2CfcMM8lSXg2xfNhlS6XA7c4bh0iETB21hwr5RnboLhF0YVGhHmjRANXVPz5lwrPk=
+X-Received: by 2002:a17:906:dc90:b0:a99:d6cf:a1df with SMTP id
+ a640c23a62f3a-aa4dd731225mr253203366b.46.1732110501416; Wed, 20 Nov 2024
+ 05:48:21 -0800 (PST)
 MIME-Version: 1.0
 References: <20241120103722.886708-1-paul.henrys_ext@softathome.com>
- <20241120103722.886708-2-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241120103722.886708-2-paul.henrys_ext@softathome.com>
+ <20241120103722.886708-3-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241120103722.886708-3-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:47:30 -0700
-Message-ID: <CAFLszTgfrk-ydUOq3c8hJhEdYVWiYFxh1-5NSf7Dgq2FRce-mw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] tools: dtoc: Allow passing optional input directories
+Date: Wed, 20 Nov 2024 06:48:08 -0700
+Message-ID: <CAFLszTiWf5q+EP9R+stntjgVZHqZw7=rdDzv6EfRcFw-JDFqnw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] tools: binman: Pass a list of input directory to
+ EnsureCompiled()
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
 Cc: u-boot@lists.denx.de, paul.henrysd@gmail.com
 Content-Type: text/plain; charset="UTF-8"
@@ -82,62 +83,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
-
 On Wed, 20 Nov 2024 at 03:37, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> An optional list of input directories can be passed to EnsureCompiled() which
-> allows to pass a list of directories where input files can be searched.
+> Input directories can be passed to binman using the '-I' option and those
+> input directories are now also passed to 'dtc' when run by binman.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
->  tools/dtoc/fdt_util.py | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  tools/binman/control.py | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
->
-> diff --git a/tools/dtoc/fdt_util.py b/tools/dtoc/fdt_util.py
-> index f1f70568cf..3e5832fb07 100644
-> --- a/tools/dtoc/fdt_util.py
-> +++ b/tools/dtoc/fdt_util.py
-> @@ -55,7 +55,7 @@ def fdt_cells_to_cpu(val, cells):
->          out = out << 32 | fdt32_to_cpu(val[1])
->      return out
->
-> -def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
-> +def EnsureCompiled(fname, tmpdir=None, capture_stderr=False, indir=[]):
-
-Just a note that I tend to avoid a default argument of a list, since I
-understood that changing indir within this function will apparently
-change the default from then on. I've never tried it though, so could
-be wrong. So I tend to use None as a default rather than a list or
-dict.
-
->      """Compile an fdt .dts source file into a .dtb binary blob if needed.
->
->      Args:
-> @@ -63,6 +63,7 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
->              left alone
->          tmpdir: Temporary directory for output files, or None to use the
->              tools-module output directory
-> +        indir: List of directories where input files can be found
->
->      Returns:
->          Filename of resulting .dtb file
-> @@ -79,6 +80,7 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
->          dtb_output = tools.get_output_filename('source.dtb')
->
->      search_paths = [os.path.join(os.getcwd(), 'include')]
-> +    search_paths += indir
->      root, _ = os.path.splitext(fname)
->      cc, args = tools.get_target_compile_tool('cc')
->      args += ['-E', '-P', '-x', 'assembler-with-cpp', '-D__ASSEMBLY__']
-> --
-> 2.43.0
->
-[..]
-
-Regards,
-Simon
