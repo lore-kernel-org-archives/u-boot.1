@@ -4,90 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92348D711CB
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 17:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A58D711CB
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 17:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF31D8925A;
-	Wed, 20 Nov 2024 18:00:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 68B6D89346;
+	Wed, 20 Nov 2024 18:06:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RmeSIqL8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XcxI0CO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E687F89270; Wed, 20 Nov 2024 18:00:09 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 2D6F488FED; Wed, 20 Nov 2024 16:56:03 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9C128920C
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 18:00:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 003FB89001
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:55:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53da5511f3cso7077877e87.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 09:00:07 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-72061bfec2dso3794198b3a.2
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:55:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732122007; x=1732726807; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hADaI9A/qWHeYyKq5A4FawQ94WAThfq56mXwJoIfq5Y=;
- b=RmeSIqL8ah2dAjJYmjM37aoIMDJ1mlvaSYKomc/nuCxwxXP2Enfn7Onb6wIS/LT286
- fdPIlgan0SANyqlLY0dYoYNMJ3uONbWkyGFjITgMV84/5lUUaRVw1+7rmpwj8mE1gngn
- A/FN56xnsDLzhptSJ4cbYq4ijnBojyG+FxyLaYIN0j3kKT+bKVknjN4ae29pvfJE98Ha
- owEJzT4npzn0VWjatX2QHKyJWbzZkr6DQW09cpOsBxVJ6uY086CtcW04ZRkkmbYyIPEt
- TroZMsUa/z0Z+VkKv5ZxEDxHTFcCqTHJXirVQxukz2kJky2ACqlDMCdgM8wDfPj/6WTA
- xiNA==
+ d=linaro.org; s=google; t=1732118154; x=1732722954; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=j0cyMbIa0dVDvpRVOaV2zbVVSelOr41xBBl53wb1X9A=;
+ b=XcxI0CO+hBB+YGFayDaSVlGQGL1j+y+92yxdu4uZ9loMXdyaRcuvHI/tyuypY2cxAZ
+ YEW9VYzgG79et+XZHQYPyF/7FJhh8xOqI8ImZ1tOw/Z81jOMPD/9hXd5zqY/hnJ7/BYN
+ Q70/GpqBf8C4bE4q5gBfsx1fbChYvrIWz7oiR4NXMregB1RrwFz05nerpDs/F0wX8ZZ9
+ qeXfsXiJLZits8agkFh6Lu6Sfo33NdtOiQcD+LWdDcL50UvjalVK/yxgi1vfwSt0xoyQ
+ NGnCaMIRd+GZgsBps3kUUYeE+61LxrRKepWFLpi9iGN/4Bc4MMjLFtIBn3uTBQdlHcd5
+ VU+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732122007; x=1732726807;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hADaI9A/qWHeYyKq5A4FawQ94WAThfq56mXwJoIfq5Y=;
- b=ZOwPO3aK5aZPi7wcAamBplONZ3iGPHIxP33QsHKdHVnS9kur5QZPaXyWL3ojclK4NY
- yITZ8tcY17JIQua+k1QSxy5oQEQaKOgSzKF//FN/XP/bb4WypqRynB74xWx/wokRNmm6
- l5lPx3g//5RT+Wx4YWlTD9rzQGEXoAvtb5+Jkp6rDswf2r/VjaIN++w9cxCn4drTLM0m
- gATjzlvQOknDIdV0LLy39QAzgiZncQXfg7qBTf9JOQZqgIFY6PQVxdkfNFjcn8chJD67
- PeSw0bNMIO4PZpXa6PRjIGeNPIGpJ9iT2pbSuZOn+MHAiqLRYpCTA5bGRMBTP7t57mAQ
- 2AYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURxbxjUdGL8UuyWUjcVV5+mKpaQ5X2U+ef0y3vXfqAOaDC2YNDv8wCWP9xiwpx+s3HWOF2VhQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YycCQOT3gYgmOELAbrzAQu3Y+UVoH77nCRtEOVk4ed0nweBPy2s
- p8eUFf9/emiql3OguVY5xZ377DAjRJ8vubTK65WUMq0BKCrwBAzTMKCU+svuuhA=
-X-Google-Smtp-Source: AGHT+IFHBB3gJaOFH4NuSyIV+KFRoP9m06Tz4Dj2pcCkAncZhFFXnVAYYz5XOXfjQ0BtGrJp/EA54A==
-X-Received: by 2002:a05:6512:2206:b0:53d:a06b:7b8d with SMTP id
- 2adb3069b0e04-53dc136aa5emr1758490e87.43.1732122006936; 
- Wed, 20 Nov 2024 09:00:06 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:7856:e1d8:479c:9f33?
- ([2a01:e0a:3cb:7bb0:7856:e1d8:479c:9f33])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20e0432fdsm793896866b.138.2024.11.20.09.00.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 09:00:06 -0800 (PST)
-Message-ID: <c776847f-7c70-49c0-8b3d-033d6f62a4c3@linaro.org>
-Date: Wed, 20 Nov 2024 18:00:05 +0100
+ d=1e100.net; s=20230601; t=1732118154; x=1732722954;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j0cyMbIa0dVDvpRVOaV2zbVVSelOr41xBBl53wb1X9A=;
+ b=wWEk3Xj/9QEX6Vs2nhsb//PxwTw6sKccEA5akhXXZ61KH+9EnlyasQMsQeMtifZxat
+ ExJT1SuxZuaO2MIHNeLPh8NBuQCpBSIAzvTc3WwM1xDyDPaG7ngQshqbvQhegrhYBQjW
+ /2mtwi37Nd4ue8DX77kIu5tsEKviQq/yJJzeAPqRQWY53cwy5AaNk7efLL81R/potdRc
+ cEw9ZES+oU7SJWHHiBhc0T6xYARqSJba9/dbJa/thF89kIjOpgP+tvPs+SYCWTeztDjp
+ /viiF37D64mm6AXFFyOU3/xpom7f2Li25/t5yZj8V1YxObk0j6iBQDujY14V0y5KkecI
+ c1Ww==
+X-Gm-Message-State: AOJu0YwC0hUU9pQV2Kx+JP1yRLvnhk5nxot4Ji+s4AuYphfyFscaO6lw
+ ceNhASue1pwfnHGifBZ/h2l+1ulPdN/7Ajo8Yj4j6Y1F6ucm4mjIsG7/SWAwN5VGg7nRKeUxNAz
+ 6RVKN8gYPg0fZlEi3JxKuNPLslwkSoknzQexHBw==
+X-Google-Smtp-Source: AGHT+IFF3Uvof2q/c4XsGZjt1XK8QUep/1IUtFTXGwNA0bQKTEgUx5hA1TrMUfg1MSNRZ9PQuHNHnqOpC09akoXQQE8=
+X-Received: by 2002:a05:6a00:1488:b0:724:6bac:1003 with SMTP id
+ d2e1a72fcca58-724bee2912cmr4598898b3a.24.1732118154417; Wed, 20 Nov 2024
+ 07:55:54 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 07/14] efi_loader: device_path: add support for HTTP
- device path
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- ilias.apalodimas@linaro.org, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de
-References: <20241118210908.51196-1-adrianox@gmail.com>
- <20241118210908.51196-8-adrianox@gmail.com>
- <d3e50c54-4d39-4930-a6f1-b29ba60bfd19@canonical.com>
- <CAMGU2hWJ07OaWJtavxt-dauKQ=WoH5ipuTp2HecKdmKJ4X1M9Q@mail.gmail.com>
- <b0ed71d8-09da-4c9f-ab0b-f356db2fda09@canonical.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <b0ed71d8-09da-4c9f-ab0b-f356db2fda09@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20241028124815.47262-1-sjg@chromium.org>
+ <CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com>
+ <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
+ <CAC_iWjJkAfJHp_NDXJMfNPe7OhBp6B_WBMxvwU_qHU5tamm6ZA@mail.gmail.com>
+ <CAFLszTiL88dHANMHo1bK2Uj5K1-7B56_Uk8keSQTo6FUfUoOVQ@mail.gmail.com>
+ <CAC_iWjJOFv1v5VPoJ2UEu1YR84i1GUdB7tEng-uqgZ+6o_XWZw@mail.gmail.com>
+ <CAFLszThCONSk2v30pGDGyGjz9mz2X0mtpqGCWSZJdbAuDaT0bw@mail.gmail.com>
+In-Reply-To: <CAFLszThCONSk2v30pGDGyGjz9mz2X0mtpqGCWSZJdbAuDaT0bw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 20 Nov 2024 17:55:18 +0200
+Message-ID: <CAC_iWj+g1nMA1DrWjguP=YiQhKOmyGKyu233Eb6Zjcv0x4yatA@mail.gmail.com>
+Subject: Re: [PATCH 00/15] efi_loader: Add support for logging to a buffer
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sean Anderson <seanga2@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Wei Ming Chen <jj251510319013@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 20 Nov 2024 18:06:37 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,166 +118,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
+
+On Wed, 20 Nov 2024 at 17:37, Simon Glass <sjg@chromium.org> wrote:
+>
+> HI Ilias,
+>
+> On Fri, 1 Nov 2024 at 05:32, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, 31 Oct 2024 at 20:02, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Tue, 29 Oct 2024 at 19:32, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > On Tue, 29 Oct 2024 at 17:45, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Tue, 29 Oct 2024 at 10:58, Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > It is a bit of a pain to log EFI boot-services calls at present. The
+> > > > > > > output goes to the console so cannot easily be inspected later. Also it
+> > > > > > > would be useful to be able to store the log and review it later, perhaps
+> > > > > > > after something has gone wrong.
+> > > > > > >
+> > > > > > > This series makes a start on implementing a log-to-buffer feature. It
+> > > > > > > provides a simple 'efidebug log' command to inspect the buffer. For now,
+> > > > > > > only memory allocations are logged.
+> > > > > >
+> > > > > > Why is this problem specific to EFI and no U-Boot in general? Do we
+> > > > > > have a similar machinery for malloc()?
+> > > > >
+> > > > > Mostly because an app can make EFI calls and we want to know what they
+> > > > > are, e.g. to debug them and figure out what might be wrong when
+> > > > > something doesn't boot.
+> > > >
+> > > > EFI_PRINT() has been proven pretty useful for this. I don't personally
+> > > > see the point of adding ~1300 lines of code to replace a print.
+> > > > What would make more sense is teach EFI_PRINT to log errors in a buffer.
+> > >
+> > > Is that a NAK? Please be clear if you are reviewing the code or just
+> > > rejecting the whole idea.
+> >
+> > For the idea, no. But I don't think what's implemented here is what we want.
+> >
+> > To track what EFI services are called, we already have EFI_ENTRY and EFI_EXIT.
+> > Why don't we instead, add a logging service (and we already have
+> > ftrace iirc) and plug it in the macros above?
+> > That would make more sense not to mention way less code.
+>
+> I am wanting to programmatically log and manage what EFI_LOADER does,
+> so that bootstd can present a high-level view of what is going on,
+> e.g. which protocols are used, how much memory is allocated and where.
+> So this is not just about logging text output.
+
+Why the EFI_LOADER only? Bootstd is supposed to cover more cases, so
+why not a generic framework for all boot commands?
 
 
-On 11/20/24 17:07, Heinrich Schuchardt wrote:
-> On 20.11.24 15:52, Adriano Córdova wrote:
->>
->>
->> El mar, 19 nov 2024 a las 7:14, Heinrich Schuchardt (<heinrich.schuchardt@canonical.com <mailto:heinrich.schuchardt@canonical.com>>) escribió:
->>
->>     On 18.11.24 22:09, Adriano Cordova wrote:
->>      > Add efi_dp_from_http to form a device path from HTTP. The
->>      > device path is the concatenation of the device path returned
->>      > by efi_dp_from_ipv4 together with an URI node and an END node.
->>      >
->>      > Signed-off-by: Adriano Cordova <adrianox@gmail.com
->>     <mailto:adrianox@gmail.com>>
->>      > ---
->>      > Changes in v4:
->>      > - Reworked an if-else
->>      >
->>      > Changes in v3:
->>      > - Moved argument checks in efi_dp_from_http to the beginning of
->>     the function
->>      >   include/efi_loader.h             |  1 +
->>      >   lib/efi_loader/efi_device_path.c | 52 +++++++++++++++++++++++++
->>     +++++++
->>      >   2 files changed, 53 insertions(+)
->>      >
->>      > diff --git a/include/efi_loader.h b/include/efi_loader.h
->>      > index 612bc42816..96b204dfc3 100644
->>      > --- a/include/efi_loader.h
->>      > +++ b/include/efi_loader.h
->>      > @@ -872,6 +872,7 @@ struct efi_device_path
->>     *efi_dp_part_node(struct blk_desc *desc, int part);
->>      >   struct efi_device_path *efi_dp_from_file(const struct
->>     efi_device_path *dp,
->>      >                                        const char *path);
->>      >   struct efi_device_path *efi_dp_from_eth(void);
->>      > +struct efi_device_path *efi_dp_from_http(const char *server);
->>      >   struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
->>      >                                       uint64_t start_address,
->>      >                                       size_t size);
->>      > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/
->>     efi_device_path.c
->>      > index cdeea4791f..9ee03062ac 100644
->>      > --- a/lib/efi_loader/efi_device_path.c
->>      > +++ b/lib/efi_loader/efi_device_path.c
->>      > @@ -1012,6 +1012,58 @@ struct efi_device_path
->>     *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
->>      >       return dp2;
->>      >   }
->>      >
->>
->>     A function description is missing.
->>     Please,
->>
->>      > +struct efi_device_path *efi_dp_from_http(const char *server)
->>      > +{
->>      > +     struct efi_device_path *dp1, *dp2;
->>      > +     struct efi_device_path_uri *uridp;
->>      > +     efi_uintn_t uridp_len;
->>      > +     char *pos;
->>      > +     char tmp[128];
->>      > +     struct efi_ipv4_address ip;
->>      > +     struct efi_ipv4_address mask;
->>      > +
->>      > +     if ((server && strlen("http://") + strlen(server) + 1  >
->>     sizeof(tmp)) ||
->>      > +         (!server && IS_ENABLED(CONFIG_NET_LWIP)))
->>      > +             return NULL;
->>      > +
->>      > +     efi_net_get_addr(&ip, &mask, NULL);
->>      > +
->>      > +     dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
->>
->>     This seems to be the only usage of efi_dp_from_ipv4(). So we should
->>     make
->>     it static.
->>
->>     dp1 is expected to be NULL if we are out of memory. This error needs to
->>     be handled.
->>
->>      > +
->>      > +     strcpy(tmp, "http://");
->>
->>     @Ilias:
->>     Linaro sent a patch series for supporting https.
->>     Will that go in after this series?
->>
->>      > +
->>      > +     if (server) {
->>      > +             memcpy(tmp + strlen("http://"), server,
->>     strlen(server) + 1);
->>
->>     Please, use strcat() to simplify this line.
->>
->>      > +     }
->>      > +#if !IS_ENABLED(CONFIG_NET_LWIP)
->>
->>     Please use 'else if' instead of '#if'.
->>
->>     Best regards
->>
->>     Heinrich
->>
->>
->> Hi Heinrich,
->> I can't use 'else if' as the symbol net_server_ip is only defined in legacy net
-> 
-> Understood.
-> 
-> @Jerome
-> Should the function ip_to_string be() moved to net/net-common.c in future to implement the missing commands in lwIP?
+>
+> >
+> > >
+> > > I am hoping to expand this into a debugging tool for figuring out how
+> > > to boot Windows and perhaps logging detailed information when things
+> > > go wrong, for later analysis. It might seem like overkill, but we will
+> > > see.
+> >
+> > I've managed to run windows installers on QEMU & U-Boot. It's been
+> > more than a year but windows boots and calls EBS(). The something
+> > fails down the road.
+> > I think I have a branch somewhere with the changes needed, I'll send
+> > it over if I find it.
+>
+> Did you find it?
 
-That would certainly be a good place for it, yes.
+I didn't but Alexander has a tree on which I based my work on.
+https://github.com/u-boot/u-boot/compare/master...agraf:u-boot:qemu-arm-win10
 
-Thanks,
--- 
-Jerome
+Cheers
+/Ilias
 
-> 
-> Best regards
-> 
-> Heinrich
-> 
->>
->> Best,
->> Adriano
->>
->>
->>      > +     else {
->>      > +             ip_to_string(net_server_ip, tmp + strlen("http://"));
->>      > +     }
->>      > +#endif
->>      > +
->>      > +     uridp_len = sizeof(struct efi_device_path) + strlen(tmp) + 1;
->>      > +     uridp = efi_alloc(uridp_len + sizeof(END));
->>      > +     if (!uridp) {
->>      > +             log_err("Out of memory\n");
->>      > +             return NULL;
->>      > +     }
->>      > +     uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
->>      > +     uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
->>      > +     uridp->dp.length = uridp_len;
->>      > +     debug("device path: setting uri device path to %s\n", tmp);
->>      > +     memcpy(uridp->uri, tmp, strlen(tmp) + 1);
->>      > +
->>      > +     pos = (char *)uridp + uridp_len;
->>      > +     memcpy(pos, &END, sizeof(END));
->>      > +
->>      > +     dp2 = efi_dp_concat(dp1, (const struct efi_device_path
->>     *)uridp, 0);
->>      > +
->>      > +     efi_free_pool(uridp);
->>      > +     efi_free_pool(dp1);
->>      > +
->>      > +     return dp2;
->>      > +}
->>      > +
->>      >   /* Construct a device-path for memory-mapped image */
->>      >   struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
->>      >                                       uint64_t start_address,
->>
-> 
+>
+> Regards,
+> Simon
