@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420D3D6393C
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1D8D63939
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C634288E94;
-	Wed, 20 Nov 2024 14:49:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E81389649;
+	Wed, 20 Nov 2024 14:49:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RaQsJiC/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oMBg1VKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 545DE88DD9; Wed, 20 Nov 2024 14:49:01 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id A6517895F3; Wed, 20 Nov 2024 14:49:05 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46AFB89426
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:48:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B309F89426
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:49:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa3a79d4d59so347013966b.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:48:59 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfaa02c716so2746853a12.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:49:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732110539; x=1732715339; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732110543; x=1732715343; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MTblv5uiYB611pFYrLvJJsnvC8XxFVZK/cxxVlm/B1k=;
- b=RaQsJiC/MZp2JgH9QoXk0OA62DE8Rh5wvD2xwT/FSp6mcQFp3Cx6xkHsgW2VXUQDrz
- PZhFNj8MOcTEt4yL7/rzFdYHaknX733Jjt33CNZov98B2GHaGXFcLaMmfecOWPwB+6ZD
- ouaQFF8wh71V+vrVrCGJopNoP/FnxhZlOOxZw=
+ bh=whuiXhh1Co/d2hGJ9u+c3IzbZ33Fu12J7NUqY7b6vUE=;
+ b=oMBg1VKNdeVgp/fSByuItNEn68gFvMY14yulCTgj2KuoQNFDQtBQh8AoLWPqwqFPa+
+ RsGHaoB257mtozPI3ExFl0fh8HS1IGJEalNtJ2oSZW7QkBUN0tgGiRc1BVFtmOqWZq46
+ rXo9JGKqPnhtiReEr/NSFjdhz5ZqBkEwZGKak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732110539; x=1732715339;
+ d=1e100.net; s=20230601; t=1732110543; x=1732715343;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MTblv5uiYB611pFYrLvJJsnvC8XxFVZK/cxxVlm/B1k=;
- b=JFHrZoNy7ecEt5NDee3pOJu8LoenU/+EJNExIwfSR/D+2hw8w1FhZLNBVs9Z64tgYj
- feB/ummQi3DDHlCEsCYWTPZYvRkgcUnCCf4hBWSxQcpKEMZ1FTF6qXCNrizhRAtyb7Sh
- 2XqX2w7vf9WqFeUsYJDiI9BoElJL2fk9V3HxtYqj2a7jTYzKtPWl4htVTRxO3RR0buC7
- 0cz5tNCdDextdBNycUk9MO5LUbb4de6fF810mtdoqDFNOqnJ6DjxLhHVBarNM+W3HPJ4
- ueEkpIfLZm8GxzTJI+rvLHHM97qcm509WHEslCmQUt0lUo9KOPPNfvQg1jUdcdHhl7KW
- tB0g==
+ bh=whuiXhh1Co/d2hGJ9u+c3IzbZ33Fu12J7NUqY7b6vUE=;
+ b=gvjF9V8gbTTWrR1EtGHOR9Ojq1VoLrCmUijHv/1BeQ5LvxRfWkYEf9j078+vasVKwH
+ RybW6QA32dsmGp8y2QQCc/ASswUnZ8H4TUD2LRsJkWDcqPsLfcaj/ouDO2gl8ElVLBHA
+ w+bVBUEpxX0XouBRcCaiSpFCdkox+osUoVIncw6jAZX31HePSOgManYm6fHZlLIl+eph
+ NcjhO9s49NOFV5VD4eRUtOW5h8HMwakiY3pmJomqmUt4uCPk6zCVtEtrNdfxiVTN+8Oz
+ KHReZTqkja2HskuCuIcBr2TzIMm5x5ZRj4xGx/TgdRhBITOV572FvO/ZUYfoposJPYAI
+ T0+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdsuqUoORS2wXGIMTnZHIPh0BqL+nzeydpAHDHKd1zmjfU/+q5Td0A1D6LcuFEDGT3mLy3P28=@lists.denx.de
-X-Gm-Message-State: AOJu0YyK6aqOMmwM72Cglp9Q5NaenyV5iisAdf8OdNyrsAQB6QX2Mvq5
- jA7MK+ChUk5T0dcC+aX0A3z1jbJyoRG2IouGL1VCostZMt2kI09IzFu8MpVTPo7lowe6Y6lDpAt
- B623BH8BzlFclV7rRg/Bvj6n64nAzAmDdhToq
-X-Gm-Gg: ASbGncvWKsviqWiUD0zrRrVesnE93e6+H2VxBN7BIsD70sBzR3XbfF3B5+W0a3/2lCW
- nu2DWt2hzRN47xIHZkBSzZNVgLN3Jd3A=
-X-Google-Smtp-Source: AGHT+IF84M50TFWVGAU3GqT7lGD04s6st5MXRXJK3LneEyP6SkKVipTWVIAQKSmlmgrznmTNyoFAvtWaB8MSPgUVVxE=
-X-Received: by 2002:a17:907:9707:b0:a9a:230b:fb5e with SMTP id
- a640c23a62f3a-aa4dd50a474mr297070566b.4.1732110538755; Wed, 20 Nov 2024
- 05:48:58 -0800 (PST)
+ AJvYcCUzNlOIRBBiQQ9YjHOgAfS02+XEn3aLdF0/wgLqtLHH17Jf+fZSRUal/gxkj20F5uR62NA8MC0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy96Zll4BkKQ1oPQA7/B9CE2/Ajk7qpzGmUQv8BQzUKEuaGSMCW
+ 1wtDpP+rcVscz9HBdFYnyQUAz7I/pOlBRwfEWWIdc+rjFBGatjUfOUYXdfS8+qLKJIVTh+TCkis
+ IIr3ZtN9N3KR4POrw1DOmQs0+JAIpx4i0zKSd
+X-Google-Smtp-Source: AGHT+IHm68xsIPMPtForsjQsPqRGuUExHAq9tHtvrOy8VufLBXb6qwa24bHRGF06Z+AdqL4vz3qlSLEdT97/EJ56HYU=
+X-Received: by 2002:a17:906:fe0a:b0:a99:f71a:4305 with SMTP id
+ a640c23a62f3a-aa4dd5517f3mr310245566b.18.1732110543159; Wed, 20 Nov 2024
+ 05:49:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20241110115054.2555-1-ansuelsmth@gmail.com>
- <20241110115054.2555-7-ansuelsmth@gmail.com>
-In-Reply-To: <20241110115054.2555-7-ansuelsmth@gmail.com>
+ <20241110115054.2555-9-ansuelsmth@gmail.com>
+In-Reply-To: <20241110115054.2555-9-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:48:47 -0700
-Message-ID: <CAFLszTjG3h3UnRSw=3mD65Y+MsUBXWm5fMS51=G7xgYqsRazWg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/8] test: dm: Add test for ofnode options phandle
- helper
+Date: Wed, 20 Nov 2024 06:48:50 -0700
+Message-ID: <CAFLszTg6yQVVgv1oQODfMggmYDFDt50JjpVd55=vCjr14bduQA@mail.gmail.com>
+Subject: Re: [PATCH v2 8/8] test: dm: Update test for LED activity and boot
 To: Christian Marangi <ansuelsmth@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>,
@@ -97,13 +94,17 @@ X-Virus-Status: Clean
 
 On Sun, 10 Nov 2024 at 04:51, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> Add test for ofnode options phandle helper and add new property in the
-> sandbox test dts.
+> Update test for LED activity and boot to follow new implementation with
+> property set to the LED node phandle.
+>
+> Also update a copy-paste error in the function name for the activity
+> tests and actually enable the test with the DM_TEST macro.
 >
 > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 > ---
->  arch/sandbox/dts/test.dts |  1 +
->  test/dm/ofnode.c          | 11 +++++++++++
->  2 files changed, 12 insertions(+)
+>  arch/sandbox/dts/test.dts |  8 ++++----
+>  test/dm/led.c             | 18 +++++++++++-------
+>  2 files changed, 15 insertions(+), 11 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
