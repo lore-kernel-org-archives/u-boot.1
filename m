@@ -4,92 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FD9D711BC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:56:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDDDD711BC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 16:02:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6F7B89241;
-	Wed, 20 Nov 2024 16:56:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C0E3389234;
+	Wed, 20 Nov 2024 17:02:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xFS3mb0D";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="oBeKVKLy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF68489001; Wed, 20 Nov 2024 16:56:25 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C98188FED
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:56:22 +0100 (CET)
+ id 33A4089241; Wed, 20 Nov 2024 17:02:02 +0100 (CET)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ by phobos.denx.de (Postfix) with ESMTP id 14FD58920B
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 17:02:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9ee097a478so300097466b.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:56:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732118181; x=1732722981; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jXHUyFW7KqPaK1dYRgDcSdY/qOSB8aXD3S0iYDASiZY=;
- b=xFS3mb0Dh9ydiy/3cxDhNUAy/x6MtQl33JpRxDcykIQHRJRGeZZYw3yfXkeR9e5a0a
- +5nrztnQvinUxLMpImwrGTZ+TiYi2/Vi7fmRSwc7yQAWilGvGXiD9331dTt8LfJbDLNu
- MoLkZ9o1MMQ/18NO0RdD5vMTA4Wd8hRhnWZQ4F+CzF0b/5B1tIvVVEo2FRsF2zWriqUg
- KmQYIIQNNZKi34P4b934D3D7NHjJw1SZaJZxMQIltFxnUqD0CWPUp6Bl5jle293vOtOB
- fmC69mHYD2ef8tgbuRaZ5SrAvnw6qgtrbyDse0uxg/+5jvJv8ZOqmJgAy5oLFk/9voNg
- 7khQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732118181; x=1732722981;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jXHUyFW7KqPaK1dYRgDcSdY/qOSB8aXD3S0iYDASiZY=;
- b=YH7XSWG/KVJ3WwSPAtoEkkAs2zycXGtBumNQ6BIO9gvfa0vAIAybN00juR4p75ON4B
- 6h7yj44WgSWu6yk05tMq25Vs2ghB+PjQ1kTuDahtpEcrfmz+U8WOCNNEqHnv8ZZP582M
- 6YTTLTl0NM7c9hchoO5dzG9pV+UCgZiBhI2c86AnKcMRncAdL7X6FsvCYfSPCWPLFWRm
- OtdHd/Q08Pl9yJF0l5Tmnb/u7kdz8TzDXIh+IdfmSFOLMGl1YTnP8TAJw01izLqRlirQ
- NXWE/D6PhGmMJmzbecybfHpQqZPt9IBRjjBsJbkk1I3PVr92JyII67sIX1CZvpRjdUrH
- j64g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6jvSdwM3vskNGehr97w7811gOoVaV+m+UxnXS7wnmZytQvei1g+14iK8YWWCdgBSu/ilMHQI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUY0DAG/i8cR/bg24kwj1ow5sSbvpJhA9O7PhZQ+I7PcjMjCD6
- lni58Dnpn6iOCzqZKBgpulxB4O/bE79QIV9vI46MoyDwmM6h4a3KzrMIrJq66xI=
-X-Google-Smtp-Source: AGHT+IEp0LN6DioKoUtWHMcRySmkygFFaXrwW6xf7vOpNkDWC1i406X+j4K1aQELQAlKGU4vMPFTIQ==
-X-Received: by 2002:a05:6402:84d:b0:5cf:f361:1c11 with SMTP id
- 4fb4d7f45d1cf-5cff4c43b40mr2856744a12.20.1732118181441; 
- Wed, 20 Nov 2024 07:56:21 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cff453e2a9sm924440a12.71.2024.11.20.07.56.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 07:56:19 -0800 (PST)
-Message-ID: <3ff334f3-b8e3-4359-9c02-a35e9a66c432@linaro.org>
-Date: Wed, 20 Nov 2024 16:56:18 +0100
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1732118515;
+ bh=sI8BWmc4F97Xh4OWyCJ8/pqOcdfc+TW7xIGytjfJVEo=;
+ h=From:To:CC:Subject:Date:From;
+ b=oBeKVKLyhby5a4wLrhKYrKvDRAGOswunW+iZF+FzN8/bROMULhDqDO+hu0H82SomX
+ /XNthTcdjLRMjIwSiwuXaLTRvPzdrWhHETY220ruzFxeAznoxc6ajAqWzyMA1+B0Fh
+ 14C/iAdC93KwQpQKaFY/vfspTYWEvDuVAgjdTTYM22EK0khb+WurTyy7zDwzydxO2m
+ Lvxkr1rw8ARVFvtjqhZq6maH2HzZoso5kP5m+OAjzC/MDimdy5CwsMKD/6RK2G+fRq
+ fCTxBJaveLK0RO2VJ0IkiWeKjKqtSOVFTEOLvfLA3c8h5PIMHEJ8IGQMn37qKMXR8W
+ hVtJxoVeQevcQ==
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Marek Vasut
+ <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>
+Subject: [PATCH V2] env: Switch the callback static list to Kconfig
+Date: Wed, 20 Nov 2024 17:01:35 +0100
+Message-ID: <20241120160135.28262-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] serial: Support a disabled serial port
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rasmus Villemoes <ravi@prevas.dk>, Robert Marko <robert.marko@sartura.hr>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-References: <20241120153554.860710-1-sjg@chromium.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241120153554.860710-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,51 +62,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Switch the callback static list from the board configuration variable
+CFG_ENV_CALLBACK_LIST_STATIC to Kconfig CONFIG_ENV_CALLBACK_LIST_STATIC.
 
-On 20/11/2024 16:35, Simon Glass wrote:
-> This series provides a way to tell a serial UART that it can't actually
-> work, at runtime. The main motivation is to deal with a coreboot feature
-> where it does not provide UART details in the sysinfo structure unless
-> the UART is also enabled in coreboot.
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
+---
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+---
+V2: - Fix typo in commit message
+---
+ doc/develop/environment.rst |  4 ++--
+ env/Kconfig                 | 13 +++++++++++++
+ include/env_callback.h      |  7 +------
+ 3 files changed, 16 insertions(+), 8 deletions(-)
 
-Why is the UART driver probed if coreboot doesn't provide the necessary
-info for it?
-
-Couldn't you disable CONFIG_REQUIRE_SERIAL_CONSOLE and skip probing it?
-
-Kind regards,
-> 
-> Attempts to introduce a way to enable a silent UART in coreboot have
-> lead to a large amount of discussion but no result, sadly.
-> 
-> This series reworks a patch sent last year, which was not quite ready to
-> be applied. A coreboot user (on irc) hit this problem, so it needs to be
-> resolved.
-> 
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20231101180447.99361-1-sjg@chromium.org/
-> 
-> Changes in v3:
-> - Put the feature behind a Kconfig
-> - Move the feature to the serial uclass, so any serial driver can use it
-> 
-> Changes in v2:
-> - Drop RFC tag since there were no comments
-> 
-> Simon Glass (3):
->   serial: Allow a serial port to be silent disabled
->   serial: ns16550: Avoid probing hardware when disabled
->   x86: coreboot: Make use of disabled console
-> 
->  arch/x86/cpu/coreboot/Kconfig    |  1 +
->  drivers/serial/Kconfig           |  9 +++++++++
->  drivers/serial/ns16550.c         |  3 ++-
->  drivers/serial/serial-uclass.c   | 19 ++++++++++++++++++-
->  drivers/serial/serial_coreboot.c |  2 ++
->  include/serial.h                 | 25 +++++++++++++++++++++++++
->  6 files changed, 57 insertions(+), 2 deletions(-)
-> 
-
+diff --git a/doc/develop/environment.rst b/doc/develop/environment.rst
+index e1783462bb..e46cd39d60 100644
+--- a/doc/develop/environment.rst
++++ b/doc/develop/environment.rst
+@@ -18,8 +18,8 @@ The callbacks are named and associated with a function using the
+ U_BOOT_ENV_CALLBACK macro in your board or driver code.
+ 
+ These callbacks are associated with variables in one of two ways.  The
+-static list can be added to by defining CFG_ENV_CALLBACK_LIST_STATIC
+-in the board configuration to a string that defines a list of
++static list can be added to by defining CONFIG_ENV_CALLBACK_LIST_STATIC
++in the board defconfig via menuconfig to a string that defines a list of
+ associations.  The list must be in the following format::
+ 
+     entry = variable_name[:callback_name]
+diff --git a/env/Kconfig b/env/Kconfig
+index 031cf58186..aaf0b1fe9a 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -21,6 +21,19 @@ config ENV_SOURCE_FILE
+ 	  environment is assumed to come from the ad-hoc
+ 	  CFG_EXTRA_ENV_SETTINGS #define
+ 
++config ENV_CALLBACK_LIST_STATIC
++	string "Static callbacks list"
++	default ""
++	help
++	  The environment callbacks are associated with variables in a
++	  static list. Define this list in the following format:
++
++	  entry = variable_name[:callback_name]
++	  list = entry[,list]
++
++	  If the callback name is not specified, then the callback is deleted.
++	  Spaces are also allowed anywhere in the list.
++
+ config SAVEENV
+ 	def_bool y if CMD_SAVEENV
+ 
+diff --git a/include/env_callback.h b/include/env_callback.h
+index bc8ff1923e..47a31f6cf5 100644
+--- a/include/env_callback.h
++++ b/include/env_callback.h
+@@ -14,11 +14,6 @@
+ 
+ #define ENV_CALLBACK_VAR ".callbacks"
+ 
+-/* Board configs can define additional static callback bindings */
+-#ifndef CFG_ENV_CALLBACK_LIST_STATIC
+-#define CFG_ENV_CALLBACK_LIST_STATIC
+-#endif
+-
+ #ifdef CONFIG_SILENT_CONSOLE
+ #define SILENT_CALLBACK "silent:silent,"
+ #else
+@@ -90,7 +85,7 @@
+ 	SILENT_CALLBACK \
+ 	"stdin:console,stdout:console,stderr:console," \
+ 	"serial#:serialno," \
+-	CFG_ENV_CALLBACK_LIST_STATIC
++	CONFIG_ENV_CALLBACK_LIST_STATIC
+ 
+ #ifndef CONFIG_XPL_BUILD
+ void env_callback_init(struct env_entry *var_entry);
 -- 
-// Caleb (they/them)
+2.30.2
 
