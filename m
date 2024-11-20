@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06C1D63939
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D42D63936
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33617894B2;
-	Wed, 20 Nov 2024 14:37:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BFE4892DE;
+	Wed, 20 Nov 2024 14:37:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bvXrP/Ki";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gTzTGniU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA48895CF; Wed, 20 Nov 2024 14:37:01 +0100 (CET)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
+ id 0BC8C89301; Wed, 20 Nov 2024 14:37:19 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 860F689647
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:36:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E78F89270
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:37:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-7f8b37edeb7so5071274a12.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:36:58 -0800 (PST)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-71e5130832aso3448552b3a.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:37:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732109817; x=1732714617; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732109835; x=1732714635; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k/ibjneSli7eMcaGdQerQnYm2N+8REGUBWpqkCju1dQ=;
- b=bvXrP/KiR4gclnVDFf8l+muxleURyX/hpbHd8IdLUC2LPPxh4MnODBT+cAgN/3up8p
- jt3ouJvLU7kfK2fd4p27YHf6fUJkKaDb/N2xI1dQIDTWrPiXtuehb+4lHyhPpgBmNKMq
- 18GI9TkJeIPByPMoqYCDkN9VfFsaSiug3muO4=
+ bh=GyV+bNhWOaKCx3lO6wdRzrZqJgMiKrTpoh3zEGA1U+0=;
+ b=gTzTGniUEFgsz75zdm6dJ6vFQIrF8sG3onjj0zwAJxFu/jXUBQM20qUVyRGLlEZe1a
+ vPNzA0zrctpe6RRa+ocf2tzEXpgErDInNAb2vRfBKtfzVkdUelXTK+LShD8VUo2nO+O1
+ UCqc60/CzEEQIXWA0ARQduf7mV3NTEfZrC5Dw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732109817; x=1732714617;
+ d=1e100.net; s=20230601; t=1732109835; x=1732714635;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k/ibjneSli7eMcaGdQerQnYm2N+8REGUBWpqkCju1dQ=;
- b=ZauZKtsY4LyKDkmdguinXK8MEhVUh2CYmCT3XE0UPS4TbNREEH+38o8yrZ10mlHUTf
- SSZO0G/l1lS/Q/0aBWD6MYZrj+BlOmvYzc7+z1tGsFJSo7fvvv9rZZcwp3QR8k/S02Ex
- 4NYklZTapqPVp9NFAoRLPvSkeoiRncKP5yyv85PpSaOASQTpytc3ieYOUQSQeCUO/oFK
- Lg1PDnvoQplZW+CHmvgFQu5BGtx/Dn68hYAHpspfqlnLD6NGwO00a8ay14N1k6MIqJeL
- WMUF24ytvlLjX2AjjeRb/ypFVgo/bT2yTp6XROryLdu2kGrcAnN5nZPnfzY6ud5KjTz9
- YkiA==
-X-Gm-Message-State: AOJu0YxV6skj0yX5cd+8qh6f1pnE3evtevuvVyBUoDM+s1gno2Kp80gl
- H9cX3Jz2cwcpGCslElmBC8kNsFNZmumy7TO3HBfOLUmpXN0+TDnum5b/Sjgx+OQAWoS5wOU5PLU
- Rf9TyLcnQArtpdRSulY5bRoJUyiUp9iZ+D5of/TpWSMWymQ8=
-X-Google-Smtp-Source: AGHT+IEBbikThmLDKKm2tbVl+mNbW2nWSri/dF0gtDxL90Ke0gwWtQegxySrfnknKLJ/LM7Neyo6MDff01I0zNUqX44=
-X-Received: by 2002:a05:6a21:60a:b0:1db:ff57:562b with SMTP id
- adf61e73a8af0-1ddaff54c91mr3487818637.31.1732109817125; Wed, 20 Nov 2024
- 05:36:57 -0800 (PST)
+ bh=GyV+bNhWOaKCx3lO6wdRzrZqJgMiKrTpoh3zEGA1U+0=;
+ b=Aj5Y0cDNRNXVURHFtK/gyZM/X+ty1Hloh2yt7eKmVlbfFTbepAyYM7ohJaRSeS5zeV
+ SrK1UHI+KANf/sfRyDjt2m3aIwIDHYx/8qGYDv8sVOnM0LQOzYygmSj/KmA34nZI5inq
+ MRAg+WT7A82wBt4KqhuGjOOOOdfy8DYH+vgrIg745l2LIY2pO1xQHmoP4lR41fZzc6LE
+ wFck1+hMv3oVVanBj5IqZonlpN+PhsHG2wObWfrYOUJ2n8pmXyLcn2l51e6rhwf3mc1U
+ OGmx8MTbg/YCcPccOqr93YXaahcTq1tYZcqx6m2cTv9p1X9nhaIF9WZk49SN0sly95pl
+ LWXA==
+X-Gm-Message-State: AOJu0YzdCUv8thePGAhMZg78WnMSYurzXJmCkS8cIMprgjJiZEQG5Skx
+ +vyrXQ7Z0k7ucEpb7dR6f0PV2RVUEo89YYIrbslPpy2+wMUETuKOn7RJce/U0oM/pGxsxGPn6uS
+ nUEGjsIEPhTqzrSQWmmpfbheGfnfT32GXoOgy
+X-Google-Smtp-Source: AGHT+IF3YGZdULAXRYCbCZ/TjbHF6O9uRkfHT5nyeSXljeewYXVmqASV5fov2PJMkxOBssgxAnhSd15GVEscHJwdsR8=
+X-Received: by 2002:a05:6a00:850:b0:71e:e3:608 with SMTP id
+ d2e1a72fcca58-724bee43e49mr3922935b3a.26.1732109835158; Wed, 20 Nov 2024
+ 05:37:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120104029.886860-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241120104029.886860-1-paul.henrys_ext@softathome.com>
+References: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:35:46 -0700
-Message-ID: <CAFLszTi1eue=sm0Mv6Q4cTB-ATE6oD6qMFkJJWPAbc=NiWK1Ew@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tools: binman: etype: Allow to replace 'NAME' in node
- names
+Date: Wed, 20 Nov 2024 06:35:47 -0700
+Message-ID: <CAFLszTgGn=x-cZB_9gJuESD2jauDhZwjEc7VX0JWvpxQ_Ro+dQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] aes: Allow to store randomly generated IV in the
+ FIT
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: u-boot@lists.denx.de, paul.henrysd@gmail.com
+Cc: u-boot@lists.denx.de, al.kochet@gmail.com, paul.henrysd@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,43 +84,63 @@ X-Virus-Status: Clean
 
 Hi Paul,
 
-On Wed, 20 Nov 2024 at 03:40, Paul HENRYS
+On Wed, 20 Nov 2024 at 03:09, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> This change allows to replace both 'SEQ' and 'NAME' keywords by respectively a
-> sequence number and the name of the FDT to provide more flexibility in the node
-> name for the device trees included in the FIT.
-
-This seems OK to me, but it would help to understand the motivation
-better. Can you expand this a bit?
-
+> When the initialisation vector is randomly generated, its value shall be
+> stored in the FIT together with the encrypted data. The changes allow to
+> store the IV in the FIT also in the case where the key is not stored in
+> the DTB but retrieved somewhere else at runtime.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
->  tools/binman/etype/fit.py | 1 +
->  1 file changed, 1 insertion(+)
+>  lib/aes/aes-encrypt.c | 7 +++++++
+>  tools/image-host.c    | 2 +-
+>  2 files changed, 8 insertions(+), 1 deletion(-)
 >
-> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-> index e0c1ac08d8..b9ebc3afd0 100644
-> --- a/tools/binman/etype/fit.py
-> +++ b/tools/binman/etype/fit.py
-> @@ -732,6 +732,7 @@ class Entry_fit(Entry_section):
->                  # Generate nodes for each FDT
->                  for seq, fdt_fname in enumerate(self._fdts):
->                      node_name = node.name[1:].replace('SEQ', str(seq + 1))
-> +                    node_name = node_name.replace('NAME', fdt_fname)
->                      if self._fdt_dir:
->                          fname = os.path.join(self._fdt_dir, fdt_fname + '.dtb')
->                      else:
+
+I see that struct cipher_algo does not have a function comment for
+add_cipher_data(), so it is not clear that keydest can be NULL, etc.
+Can you please add one?
+
+Otherwise this seems good to me.
+
+> diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
+> index e74e35eaa2..90e1407b4f 100644
+> --- a/lib/aes/aes-encrypt.c
+> +++ b/lib/aes/aes-encrypt.c
+> @@ -84,6 +84,13 @@ int image_aes_add_cipher_data(struct image_cipher_info *info, void *keydest,
+>         char name[128];
+>         int ret = 0;
+>
+> +       if (!keydest && !info->ivname) {
+> +               /* At least, store the IV in the FIT image */
+> +               ret = fdt_setprop(fit, node_noffset, "iv",
+> +                                 info->iv, info->cipher->iv_len);
+> +               goto done;
+> +       }
+> +
+>         /* Either create or overwrite the named cipher node */
+>         parent = fdt_subnode_offset(keydest, 0, FIT_CIPHER_NODENAME);
+>         if (parent == -FDT_ERR_NOTFOUND) {
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> index 5e01b853c5..16389bd488 100644
+> --- a/tools/image-host.c
+> +++ b/tools/image-host.c
+> @@ -535,7 +535,7 @@ fit_image_process_cipher(const char *keydir, void *keydest, void *fit,
+>          * size values
+>          * And, if needed, write the iv in the FIT file
+>          */
+> -       if (keydest) {
+> +       if (keydest || (!keydest && !info.ivname)) {
+>                 ret = info.cipher->add_cipher_data(&info, keydest, fit, node_noffset);
+>                 if (ret) {
+>                         fprintf(stderr,
 > --
 > 2.43.0
-
-Please update the documentation (near the top of this file) and
-regenerate entries.rst
-
-It also needs a test so that coverage passes (binman test -T)...
+>
 
 [..]
 
 Regards,
-Simon
+SImon
