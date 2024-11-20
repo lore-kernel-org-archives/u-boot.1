@@ -4,41 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87279D44171
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEE5D60D17
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:48:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5B2088C66;
-	Wed, 20 Nov 2024 10:48:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35FA28964F;
+	Wed, 20 Nov 2024 10:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FA4A895EC; Wed, 20 Nov 2024 10:48:44 +0100 (CET)
+ id E42758964F; Wed, 20 Nov 2024 10:48:55 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id B802C895BD
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:48:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 19E9988B6D
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:48:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: fWozObMxRW627uGBdacLQg==
-X-CSE-MsgGUID: XDH8SaARS/q7HDJaWMQG2A==
-X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="229403972"
+X-CSE-ConnectionGUID: io1LMI9JTLiwkUHdKcNaPA==
+X-CSE-MsgGUID: VN3srXlxR46w9rZOrKOrRQ==
+X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="229403987"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2024 18:48:37 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2024 18:48:51 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.28])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id E685C41A662A;
- Wed, 20 Nov 2024 18:48:35 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 277E141A351A;
+ Wed, 20 Nov 2024 18:48:37 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 1/3] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
- interfaces
-Date: Wed, 20 Nov 2024 09:48:28 +0000
-Message-Id: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
+Date: Wed, 20 Nov 2024 09:48:29 +0000
+Message-Id: <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -57,16 +58,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Ethenet interfaces on the Renesas RZ/G2L SoC family can operate at
-multiple power supply voltages: 3.3V (default value), 2.5V and 1.8V.
+On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
+signal is selectable to support an Ethernet PHY operating in either MII
+or RGMII mode. By default, the signal is configured as an input and MII
+mode is supported. The ETH_MODE register can be modified to configure
+this signal as an output to support RGMII mode.
 
-rzg2l_pinconf_set() is extended to support the 2.5V setting, with a
-check to ensure this is only used on Ethernet interfaces as it is not
-supported on the SD & QSPI interfaces.
-
-While we're modifying rzg2l_pinconf_set(), drop the unnecessary default
-value for pwr_reg as it is set in every branch of the following if
-condition.
+As this signal is be default an input, and can optionally be switched to
+an output, it maps neatly onto an `output-enable` property in the device
+tree.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
@@ -75,98 +75,93 @@ Changes v1->v2:
 
 [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@bp.renesas.com/
 
- drivers/pinctrl/renesas/rzg2l-pfc.c | 49 ++++++++++++++++++++---------
+ drivers/pinctrl/renesas/rzg2l-pfc.c | 31 +++++++++++++++++++++++++++--
  include/renesas/rzg2l-pfc.h         |  2 ++
- 2 files changed, 37 insertions(+), 14 deletions(-)
+ 2 files changed, 31 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/renesas/rzg2l-pfc.c
-index e88ec1c18373..0098e2d52d57 100644
+index 0098e2d52d57..af371bd0ff1e 100644
 --- a/drivers/pinctrl/renesas/rzg2l-pfc.c
 +++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
-@@ -394,18 +394,10 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 	}
- 
- 	case PIN_CONFIG_POWER_SOURCE: {
--		u32 pwr_reg = 0x0;
-+		bool support_2500 = false;
-+		u32 pwr_reg;
-+		u32 value;
- 
--		/* argument is in mV */
--		if (argument != 1800 && argument != 3300) {
--			dev_err(dev, "Invalid mV %u\n", argument);
--			return -EINVAL;
--		}
--
--		/*
--		 * TODO: PIN_CFG_IO_VMC_ETH0 & PIN_CFG_IO_VMC_ETH1 will be
--		 * handled when the RZ/G2L Ethernet driver is added.
--		 */
- 		if (cfg & PIN_CFG_IO_VMC_SD0) {
- 			dev_dbg(dev, "port off %u:%u set SD_CH 0 PVDD=%u\n",
- 				port_offset, pin, argument);
-@@ -418,13 +410,42 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 			dev_dbg(dev, "port off %u:%u set QSPI PVDD=%u\n",
- 				port_offset, pin, argument);
- 			pwr_reg = QSPI;
-+		} else if (cfg & PIN_CFG_IO_VMC_ETH0) {
-+			dev_dbg(dev, "port off %u:%u set ETH0 PVDD=%u\n",
-+				port_offset, pin, argument);
-+			pwr_reg = ETH_POC(0);
-+			support_2500 = true;
-+		} else if (cfg & PIN_CFG_IO_VMC_ETH1) {
-+			dev_dbg(dev, "port off %u:%u set ETH1 PVDD=%u\n",
-+				port_offset, pin, argument);
-+			pwr_reg = ETH_POC(1);
-+			support_2500 = true;
- 		} else {
--			dev_dbg(dev, "pin power source is not selectable\n");
-+			dev_dbg(dev, "port off %u:%u PVDD is not selectable\n",
-+				port_offset, pin);
-+			return -EINVAL;
-+		}
-+
-+		/* argument is in mV */
-+		switch (argument) {
-+		case 1800:
-+			value = PVDD_1800;
-+			break;
-+		case 3300:
-+			value = PVDD_3300;
-+			break;
-+		case 2500:
-+			if (support_2500) {
-+				value = PVDD_2500;
-+				break;
-+			}
-+			fallthrough;
-+		default:
-+			dev_err(dev, "Invalid mV %u\n", argument);
- 			return -EINVAL;
- 		}
- 
--		writel((argument == 1800) ? PVDD_1800 : PVDD_3300,
--		       data->base + pwr_reg);
-+		writel(value, data->base + pwr_reg);
+@@ -180,7 +180,7 @@ static const u32 r9a07g044_gpio_configs[] = {
+ 	RZG2L_GPIO_PORT_PACK(3, 0x21, RZG2L_MPXED_PIN_FUNCS),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x22, RZG2L_MPXED_PIN_FUNCS),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x23, RZG2L_MPXED_PIN_FUNCS),
+-	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
++	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0) | PIN_CFG_OEN),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x25, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x26, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x27, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+@@ -189,7 +189,7 @@ static const u32 r9a07g044_gpio_configs[] = {
+ 	RZG2L_GPIO_PORT_PACK(2, 0x2a, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x2b, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x2c, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
+-	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
++	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1) | PIN_CFG_OEN),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x2e, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x2f, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
+ 	RZG2L_GPIO_PORT_PACK(2, 0x30, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
+@@ -449,6 +449,32 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
  		break;
  	}
  
++	case PIN_CONFIG_OUTPUT_ENABLE: {
++		u8 ch;
++
++		if (!(cfg & PIN_CFG_OEN)) {
++			dev_err(dev, "pin does not support OEN\n");
++			return -EINVAL;
++		}
++
++		/*
++		 * We can determine which Ethernet interface we're dealing with from
++		 * the caps.
++		 */
++		if (cfg & PIN_CFG_IO_VMC_ETH0)
++			ch = 0;
++		else /* PIN_CFG_IO_VMC_ETH1 */
++			ch = 1;
++
++		dev_dbg(dev, "set ETH%u TXC OEN=%u\n", ch, argument);
++		if (argument)
++			clrbits_8(data->base + ETH_MODE, BIT(ch));
++		else
++			setbits_8(data->base + ETH_MODE, BIT(ch));
++
++		break;
++	}
++
+ 	default:
+ 		dev_err(dev, "Invalid pinconf parameter\n");
+ 		return -EOPNOTSUPP;
+@@ -542,6 +568,7 @@ static int rzg2l_get_pin_muxing(struct udevice *dev, unsigned int selector,
+ 
+ static const struct pinconf_param rzg2l_pinconf_params[] = {
+ 	{ "input-enable",	PIN_CONFIG_INPUT_ENABLE,	1 },
++	{ "output-enable",	PIN_CONFIG_OUTPUT_ENABLE,	1 },
+ 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	3300 /* mV */ },
+ };
+ 
 diff --git a/include/renesas/rzg2l-pfc.h b/include/renesas/rzg2l-pfc.h
-index 2df17ece2a31..d1015b1d2ac1 100644
+index d1015b1d2ac1..36fa8da8e2e4 100644
 --- a/include/renesas/rzg2l-pfc.h
 +++ b/include/renesas/rzg2l-pfc.h
-@@ -77,9 +77,11 @@
- #define IEN(n)			(0x1800 + (n) * 8)
- #define PWPR			0x3014
+@@ -22,6 +22,7 @@
+ #define PIN_CFG_FILONOFF		BIT(10)
+ #define PIN_CFG_FILNUM			BIT(11)
+ #define PIN_CFG_FILCLKSEL		BIT(12)
++#define PIN_CFG_OEN			BIT(13)
+ 
+ #define RZG2L_MPXED_PIN_FUNCS		(PIN_CFG_IOLH_A | \
+ 					 PIN_CFG_SR | \
+@@ -79,6 +80,7 @@
  #define SD_CH(n)		(0x3000 + (n) * 4)
-+#define ETH_POC(ch)		(0x300c + (ch) * 4)
+ #define ETH_POC(ch)		(0x300c + (ch) * 4)
  #define QSPI			0x3008
++#define ETH_MODE		(0x3018)
  
  #define PVDD_1800		1	/* I/O domain voltage <= 1.8V */
-+#define PVDD_2500		2	/* I/O domain voltage 2.5V */
- #define PVDD_3300		0	/* I/O domain voltage >= 3.3V */
- 
- #define PWPR_B0WI		BIT(7)	/* Bit Write Disable */
+ #define PVDD_2500		2	/* I/O domain voltage 2.5V */
 -- 
 2.43.0
 
