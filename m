@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC235D44171
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:23:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C092D60D14
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B01768965F;
-	Wed, 20 Nov 2024 10:22:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67C348967B;
+	Wed, 20 Nov 2024 10:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ohJEV1kP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pS2Pufte";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1ECF989685; Wed, 20 Nov 2024 10:22:54 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id D41DB89691; Wed, 20 Nov 2024 10:22:54 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E5DF89672
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:22:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 153AD89678
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:22:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3823eb7ba72so1351962f8f.0
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 01:22:51 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-431688d5127so16038725e9.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 01:22:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1732094571; x=1732699371; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=U7s68va0Bu9tGYMzRH/MkeTzC1pkF/rec6OH+95Dc6I=;
- b=ohJEV1kPCyodBC0UV7DFFe93FRAcq4ahC72EvGgJXUKoYh5mSFl0TK067pMqlDbk1D
- XVMCKFbXvZDJ/qkRJm45Kh1/d71xkrrS7Naasj3wWJnlfdWME8+hoS05pYBB9vNCfAKN
- We5AkJIhroTsYhTHXxjJsJ7Qo7tkyS0Lz3xsIeP76WjmUbeP6x1UEx7YMDbW3fUGP7bA
- dh9RSyUv1nyrjHm2qdhi3/o8V4PEJzymra80f3bpe2/nEwoQHhFQSjmDVMYdzuwlJl8m
- 5qQai1cLo3S37zk1q6EsMgxAfSYo+efqIC1yUkk8jIw1KxUyYSbADogznGThCkTrhKKZ
- r5wg==
+ :reply-to; bh=en7bD2OZRmqCgW5+9CmDQZgDCs/w+MFcT5aUqdMc4C8=;
+ b=pS2PufteQ26vKcS02eEvyiDvBvA5kHz7bO46ull+Lgbm6S3MRTTKUmDaZ3Ai16fELc
+ OtB3Vfq2PEXbKBdQXDnwOFK8PTafAI1MYa4pD87L+zh1qXPosqmyBGHvOs+ewL0qwgJE
+ 7nyi0SKO4KpIA9M2ypmfVL9CokshHFYGyUqgTDfyUp1zVsxhEcIeGSNzFvz03F1xNfFD
+ RpYnkFtGWcxAa0c0ImXUn+f6J422s5Wry+/7OQYtCB6dvZUGza8nfOLB4Nt9Mj3UlZzf
+ 8rJlTJ8kluQUq2LF91WbrQHob9PB804kvq0eoaJqLerE8Gv1wIuhOlnabUu2QvZDJXUD
+ kyLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1732094571; x=1732699371;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U7s68va0Bu9tGYMzRH/MkeTzC1pkF/rec6OH+95Dc6I=;
- b=r3KsoQEbxn2EXROaAco7zUNjqMh1gejTIkWHT1leOLx2ub6r52wImJ9HsXdtJK2f+H
- IQDlbr/bfiJhdqulpRE+fStTDqmxhYMjb2kYyeeeguARB93snIS/bpj5TLFKhFmhEYHm
- i0nrW48MH0wE1WXanKfs5y+bHC9rHVdxCvxW5ED+Z11VSfjlGymSp7+0QFnlGT6gXc0/
- mz+2xWd982HcJG5+yZWtMf+toF3QsDL0eCxySlj3r8BkKw0oDjYxTd4nmt260DSeMqET
- We/k69Ps/bdctVKqU9bSFzIfyzV2CHIqSkqXi8j9r5/zxkVYigHBXGzolHmRze4QuHDy
- FTIQ==
+ bh=en7bD2OZRmqCgW5+9CmDQZgDCs/w+MFcT5aUqdMc4C8=;
+ b=eO2cqyHyroJ1OhzYpku4YMesdc0r8FOuKUx/YPbBZWl/KDEC7+13DhXl5cR6+6pRKL
+ H6w66HhDgCggd5iRyMBdH4KU+/a+2YPds/VKlVLqi6ClKNMxiJ82xhUD21q58jqx9S56
+ hroiOYpDT+/Ax3gFVCBuPja0TlYZVfB6sOr7xQ/L1NWJNXQZufROZhBpn1EZ+BE8Ourq
+ Stze63KUyreTYbSOr5RI3cYC1h/JPiqvJSywAhno4V7j3Vdp7/+GnUqszR28TOuNoWfx
+ Iuq3/MrTudai4msde9bOoXJ8Z9NANZqfCyaYNyDXWtb/WxLoso3oAWnrOxsRsJeCMtVE
+ B6OQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1c2MsRdi5W3p1QYnKDb/dfS2y00pRjK9jI4LfdT3F7pzCzhPOiiz8zEfZfl5y8BTHiHSBVug=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvXbmJFzzA1JGW8QfnRS8hNYNTbxOx9Zm0V1A1H9/K+N2t7Hd2
- J2YMOLd7zRY6yjQsedbKB1hLtFLpdKWIHXDyK8OOthB6k8UlHbbVFyRI4GOi24I=
-X-Gm-Gg: ASbGncusePsI56fRBBsHBN34BcshPpx7EaMmJ+FtSDDYtwEYNvGJ+jhSoKj1fv3Qigl
- 3/5ucyiNlKwsZG0VvA7U2gQXbW1cmPZ31Xx1RvHIE3M/EOjwaJeolFRMt4P8LUng98i5fVZQOzK
- ZfzJwsABJIwnQ58nmFS/NcKCwNSzDJsNekovE/l3OIB0QnwVrkcqlbuXMiroJFJV5w7onJYovfz
- KqKKdeyYXMpxSesHMJ/xHsLKTsg9C7EyBCHRYHFnXPmpQoaBaHP813/3TiVOfnY4+esYlc=
-X-Google-Smtp-Source: AGHT+IEy8IbWRq6Le1azqzHEPSa+P4Un8DKy9C++6xOvlIB4neh24dQx/qu/u+JLG8njq6mDLAfzrA==
-X-Received: by 2002:a5d:6d82:0:b0:382:4a8e:b81c with SMTP id
- ffacd0b85a97d-38254afac4dmr1474397f8f.33.1732094570811; 
- Wed, 20 Nov 2024 01:22:50 -0800 (PST)
+ AJvYcCU5nwIXcgBU3R4hD9k+hDKtFyQtHr+8Y9Jc1BrJIX2gL25301FP813l1YqJBqykRm9201UN7UU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwH1FWjzzZLvDS8AYxuy41t82eOl7eRGTw+CLusO+fs1zcH2wPD
+ HwDYuONuLfZWsCgSAQ7ZX0C7zdJ+ZQbCTeaB75mubs0Sm6C17sF7pj4KbUhMl5I=
+X-Google-Smtp-Source: AGHT+IETgaBvu1iv0k3Y6GwGx1Geo/xee+Qt1AZETjIC0QG0oNzTdw8ooW9zHrSgu/5W5Y3+KvGUXA==
+X-Received: by 2002:a05:600c:1ca2:b0:426:5e91:3920 with SMTP id
+ 5b1f17b1804b1-4334f026f5cmr15866885e9.29.1732094571589; 
+ Wed, 20 Nov 2024 01:22:51 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-3825490529fsm1557333f8f.4.2024.11.20.01.22.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 01:22:50 -0800 (PST)
+ Wed, 20 Nov 2024 01:22:51 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 20 Nov 2024 10:22:45 +0100
-Subject: [PATCH 4/6] ufs: core: move ufshci defines in a separate header
+Date: Wed, 20 Nov 2024 10:22:46 +0100
+Subject: [PATCH 5/6] ufs: core: sync unipro.h with Linux v6.12
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241120-topic-ufs-cleanup-v1-4-a5cef54b1cdc@linaro.org>
+Message-Id: <20241120-topic-ufs-cleanup-v1-5-a5cef54b1cdc@linaro.org>
 References: <20241120-topic-ufs-cleanup-v1-0-a5cef54b1cdc@linaro.org>
 In-Reply-To: <20241120-topic-ufs-cleanup-v1-0-a5cef54b1cdc@linaro.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
@@ -84,20 +80,20 @@ Cc: michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
  bmeng.cn@gmail.com, venkatesh.abbarapu@amd.com, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=22225;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8468;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=yEkEui0wwKCyZ6tAIVReVGvf5LAnQHUqaKNUMsS5u5k=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnPapl9umVUX6b21F9gkVTy/frqINF2t20lLuPFALn
- SKWNazaJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZz2qZQAKCRB33NvayMhJ0VgCD/
- 4tQlPxA8J7v6A9y9oiM0QEo9UGFzR4D72qqFcM8rP4PvoDc53WIklUOAwYrMQKZni/EjOrg4yV2hp2
- HLt0JNqOwoSAIxF1c0dO5O7LCsQpY0GwcUz9AO254JZZOEa8LAVPBKtwXUaZ/rRiqrj7Hy2QwAX6xj
- QlyepaJzi+3Nkuwtj/WbNe9RvKmIROm3xeC5H9uQLoPZgg9lZMDMyLrx2DSApniZ+JZrBsZ/oFCy47
- N92+6Fz35tU1b5FCNBClhCpWua1GkxypamUBR3DMCSb/f0nHr58fHWzWpx3o/MBPGe35m3wO4YHMee
- YqTaJlUKS/rq62OJjRHBCzq3IF2y3oxTH2IMpfIBKYHDZUx1QPVd5UqczaQdClfLWYB+miQoGSAH51
- g50dfk5gCMVX+4MyQyaJTiRfv/NnQPIgfWTQuFvhuhEYPqpXWDqpxUDv7ZEO2llCNbu0/Qcl7wTQyR
- J/0vr3bSfW+cMqrBQD5/aEUnQojlOZ63V4gUYtOxS/tdBCqzIvoD0RdkUWVUSDuD+aJi2Uet1ZJ0iY
- qYOrMPs3D/lkmwlOS6HsATO3kEWIlD2jZyTl3fqgrpChG+xxxlYOXlvnrB5I/t7mBpuUnxQL/TEDg1
- e9GQn38pXuTjQFw/PvT4b5lIs8gQEJpdvkmv9HBJ5XmtGhpMg2tf9Dtmq2Jg==
+ bh=bAneN+BP3xzaji1nU2yAgXLWxsUXsur8/mpUZTy/gNY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnPapm4iy9N8hCaRlCdIk60jZdrSwZHrYmUByRGLi5
+ uGfJZ2qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZz2qZgAKCRB33NvayMhJ0aT+D/
+ 9FtzpC/LEKftsjt20Wc5Zx+dMs66tcDDqPSAPWcEqM4w+V+ZKIEI9d/4ydhcvHgEUtdkktD5BbW/8g
+ oehfo128z4wsTTgikgeuhMjI4fz4aVZsrhPdQmuVrgX0V/Z/RTpA+HeeDLseRfJLT+yl20y6T7dYa+
+ XxQRx8ZGsGqLhZlSgtT74oekkiQxLbDmvGJ3boqffiXgEGcMW44CiDitB6byvCbuuQU8G73EC07YHS
+ XgF+1bSS8Wc/a3oKT8QclHewDSLOijBXPTUoLYcQs4oVYwMMQ5Yhxeob4f3PVShwgXKts5lNN9roIZ
+ s6Hov3IxKGGyrXGLRFlvLYx15hT+Xq3RHmplCbVv7ca9Yeax3EmvXY7p/8xXI/eyjNiLB2XT8n2YMX
+ FUfsuPaHa5ym4iG0y7Ru68qwHtZ+6jB2btWfU7kx4x5Tg0ZK6S36hi5KDRKXkPKOvV2SjT4LqfiwbA
+ oAfHEhFxQRZhFHvtKMSbFUyCigA/fbA8ti6rgOzgei9a7cR9wQsMUCJD8+8yhgTqEtPj4LMeEkjeB3
+ Da1CekURaUVLVbWlLQjm3f034Dl0xqBNBhOR2HRUnU8QDWjMg/Pyrimz5T1VV2LXIN4UU2L4vqAJ2f
+ /cfYpBJnPfx2Xpcd9q8plnf/k1linaOcg7X2iq1kwae0xG1RpmKQNoZ8Zmig==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -116,751 +112,263 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Splitting the header will help synchronizing the defines
-again with Linux.
+Sync unipro.h with the version found in the Linux v6.12
+version commit adc218676eef ("Linux 6.12").
+
+It adds new defines, and moves defines to the same place
+as the Linux header.
+
+No functional changes intended.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/ufs/ufs.h    | 329 +-------------------------------------------------
- drivers/ufs/ufshci.h | 334 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 335 insertions(+), 328 deletions(-)
+ drivers/ufs/unipro.h | 124 +++++++++++++++++++++++++++++++--------------------
+ 1 file changed, 76 insertions(+), 48 deletions(-)
 
-diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
-index f4f042005e7fc2638ea6b33f26839c668d22bc9e..53137fae3a81ce87d744dd56c49db2a8ffba1d3d 100644
---- a/drivers/ufs/ufs.h
-+++ b/drivers/ufs/ufs.h
-@@ -4,6 +4,7 @@
+diff --git a/drivers/ufs/unipro.h b/drivers/ufs/unipro.h
+index 0aa35ef31dfd263739c0b5c75c26f9191f38e8ec..56833602b77abbfa4abff5f2b57461986fe815dc 100644
+--- a/drivers/ufs/unipro.h
++++ b/drivers/ufs/unipro.h
+@@ -34,6 +34,18 @@
+ /*
+  * M-RX Configuration Attributes
+  */
++#define RX_HS_G1_SYNC_LENGTH_CAP		0x008B
++#define RX_HS_G1_PREP_LENGTH_CAP		0x008C
++#define RX_MIN_ACTIVATETIME_CAPABILITY		0x008F
++#define RX_HIBERN8TIME_CAPABILITY		0x0092
++#define RX_HS_G2_SYNC_LENGTH_CAP		0x0094
++#define RX_HS_G3_SYNC_LENGTH_CAP		0x0095
++#define RX_HS_G2_PREP_LENGTH_CAP		0x0096
++#define RX_HS_G3_PREP_LENGTH_CAP		0x0097
++#define RX_ADV_GRANULARITY_CAP			0x0098
++#define RX_HIBERN8TIME_CAP			0x0092
++#define RX_ADV_HIBERN8TIME_CAP			0x0099
++#define RX_ADV_MIN_ACTIVATETIME_CAP		0x009A
+ #define RX_MODE					0x00A1
+ #define RX_HSRATE_SERIES			0x00A2
+ #define RX_HSGEAR				0x00A3
+@@ -42,24 +54,27 @@
+ #define RX_HS_UNTERMINATED_ENABLE		0x00A6
+ #define RX_ENTER_HIBERN8			0x00A7
+ #define RX_BYPASS_8B10B_ENABLE			0x00A8
+-#define RX_TERMINATION_FORCE_ENABLE		0x0089
+-#define RX_MIN_ACTIVATETIME_CAPABILITY		0x008F
+-#define RX_HIBERN8TIME_CAPABILITY		0x0092
++#define RX_TERMINATION_FORCE_ENABLE		0x00A9
++#define RXCALCTRL				0x00B4
++#define RXSQCTRL				0x00B5
++#define CFGRXCDR8				0x00BA
++#define CFGRXOVR8				0x00BD
++#define CFGRXOVR6				0x00BF
++#define RXDIRECTCTRL2				0x00C7
++#define CFGRXOVR4				0x00E9
+ #define RX_REFCLKFREQ				0x00EB
+ #define	RX_CFGCLKFREQVAL			0x00EC
+ #define CFGWIDEINLN				0x00F0
+-#define CFGRXCDR8				0x00BA
+ #define ENARXDIRECTCFG4				0x00F2
+-#define CFGRXOVR8				0x00BD
+-#define RXDIRECTCTRL2				0x00C7
+ #define ENARXDIRECTCFG3				0x00F3
+-#define RXCALCTRL				0x00B4
+ #define ENARXDIRECTCFG2				0x00F4
+-#define CFGRXOVR4				0x00E9
+-#define RXSQCTRL				0x00B5
+-#define CFGRXOVR6				0x00BF
  
- #include <linux/types.h>
- #include <asm/io.h>
-+#include "ufshci.h"
- #include "unipro.h"
+ #define is_mphy_tx_attr(attr)			((attr) < RX_MODE)
++#define RX_ADV_FINE_GRAN_STEP(x)		((((x) & 0x3) << 1) | 0x1)
++#define SYNC_LEN_FINE(x)			((x) & 0x3F)
++#define SYNC_LEN_COARSE(x)			((1 << 6) | ((x) & 0x3F))
++#define PREP_LEN(x)				((x) & 0xF)
++
+ #define RX_MIN_ACTIVATETIME_UNIT_US		100
+ #define HIBERN8TIME_UNIT_US			100
  
- struct udevice;
-@@ -14,11 +15,6 @@ struct udevice;
- #define RESPONSE_UPIU_SENSE_DATA_LENGTH	18
- #define UFS_MAX_LUNS		0x7F
+@@ -80,48 +95,51 @@
+ #define UNIPRO_CB_OFFSET(x)			(0x8000 | (x))
  
--enum {
--	TASK_REQ_UPIU_SIZE_DWORDS	= 8,
--	TASK_RSP_UPIU_SIZE_DWORDS	= 8,
--	ALIGNED_UPIU_SIZE		= 512,
--};
+ /*
+- * PHY Adpater attributes
++ * PHY Adapter attributes
+  */
+-#define PA_ACTIVETXDATALANES	0x1560
+-#define PA_ACTIVERXDATALANES	0x1580
+-#define PA_TXTRAILINGCLOCKS	0x1564
+ #define PA_PHY_TYPE		0x1500
+ #define PA_AVAILTXDATALANES	0x1520
+-#define PA_AVAILRXDATALANES	0x1540
+-#define PA_MINRXTRAILINGCLOCKS	0x1543
+-#define PA_TXPWRSTATUS		0x1567
+-#define PA_RXPWRSTATUS		0x1582
+-#define PA_TXFORCECLOCK		0x1562
+-#define PA_TXPWRMODE		0x1563
+-#define PA_LEGACYDPHYESCDL	0x1570
+ #define PA_MAXTXSPEEDFAST	0x1521
+ #define PA_MAXTXSPEEDSLOW	0x1522
+ #define PA_MAXRXSPEEDFAST	0x1541
+ #define PA_MAXRXSPEEDSLOW	0x1542
+ #define PA_TXLINKSTARTUPHS	0x1544
++#define PA_AVAILRXDATALANES	0x1540
++#define PA_MINRXTRAILINGCLOCKS	0x1543
+ #define PA_LOCAL_TX_LCC_ENABLE	0x155E
++#define PA_ACTIVETXDATALANES	0x1560
++#define PA_CONNECTEDTXDATALANES	0x1561
++#define PA_TXFORCECLOCK		0x1562
++#define PA_TXPWRMODE		0x1563
++#define PA_TXTRAILINGCLOCKS	0x1564
+ #define PA_TXSPEEDFAST		0x1565
+ #define PA_TXSPEEDSLOW		0x1566
+-#define PA_REMOTEVERINFO	0x15A0
++#define PA_TXPWRSTATUS		0x1567
+ #define PA_TXGEAR		0x1568
+ #define PA_TXTERMINATION	0x1569
+ #define PA_HSSERIES		0x156A
++#define PA_LEGACYDPHYESCDL	0x1570
+ #define PA_PWRMODE		0x1571
++#define PA_ACTIVERXDATALANES	0x1580
++#define PA_CONNECTEDRXDATALANES	0x1581
++#define PA_RXPWRSTATUS		0x1582
+ #define PA_RXGEAR		0x1583
+ #define PA_RXTERMINATION	0x1584
+ #define PA_MAXRXPWMGEAR		0x1586
+ #define PA_MAXRXHSGEAR		0x1587
+-#define PA_RXHSUNTERMCAP	0x15A5
+-#define PA_RXLSTERMCAP		0x15A6
+-#define PA_GRANULARITY		0x15AA
+ #define PA_PACPREQTIMEOUT	0x1590
+ #define PA_PACPREQEOBTIMEOUT	0x1591
++#define PA_REMOTEVERINFO	0x15A0
++#define PA_LOGICALLANEMAP	0x15A1
++#define PA_SLEEPNOCONFIGTIME	0x15A2
++#define PA_STALLNOCONFIGTIME	0x15A3
++#define PA_SAVECONFIGTIME	0x15A4
++#define PA_RXHSUNTERMCAP	0x15A5
++#define PA_RXLSTERMCAP		0x15A6
+ #define PA_HIBERN8TIME		0x15A7
+ #define PA_LOCALVERINFO		0x15A9
++#define PA_GRANULARITY		0x15AA
+ #define PA_TACTIVATE		0x15A8
+-#define PA_PACPFRAMECOUNT	0x15C0
+-#define PA_PACPERRORCOUNT	0x15C1
+-#define PA_PHYTESTCONTROL	0x15C2
+ #define PA_PWRMODEUSERDATA0	0x15B0
+ #define PA_PWRMODEUSERDATA1	0x15B1
+ #define PA_PWRMODEUSERDATA2	0x15B2
+@@ -134,12 +152,9 @@
+ #define PA_PWRMODEUSERDATA9	0x15B9
+ #define PA_PWRMODEUSERDATA10	0x15BA
+ #define PA_PWRMODEUSERDATA11	0x15BB
+-#define PA_CONNECTEDTXDATALANES	0x1561
+-#define PA_CONNECTEDRXDATALANES	0x1581
+-#define PA_LOGICALLANEMAP	0x15A1
+-#define PA_SLEEPNOCONFIGTIME	0x15A2
+-#define PA_STALLNOCONFIGTIME	0x15A3
+-#define PA_SAVECONFIGTIME	0x15A4
++#define PA_PACPFRAMECOUNT	0x15C0
++#define PA_PACPERRORCOUNT	0x15C1
++#define PA_PHYTESTCONTROL	0x15C2
+ #define PA_TXHSADAPTTYPE	0x15D4
  
- /* UFS device power modes */
- enum ufs_dev_pwr_mode {
-@@ -84,44 +80,6 @@ enum {
- /* Offset of the response code in the UPIU header */
- #define UPIU_RSP_CODE_OFFSET		8
+ /* Adapt type for PA_TXHSADAPTTYPE attribute */
+@@ -151,9 +166,9 @@
+ #define PA_HIBERN8_TIME_UNIT_US		100
  
--/* To accommodate UFS2.0 required Command type */
+ /*Other attributes*/
++#define VS_POWERSTATE		0xD083
+ #define VS_MPHYCFGUPDT		0xD085
+ #define VS_DEBUGOMC		0xD09E
+-#define VS_POWERSTATE		0xD083
+ #define VS_MPHYDISABLE		0xD0C1
+ 
+ #define PA_GRANULARITY_MIN_VAL	1
+@@ -163,7 +178,7 @@
+ #define PA_MAXDATALANES	4
+ 
+ /* PA power modes */
 -enum {
--	UTP_CMD_TYPE_UFS_STORAGE	= 0x1,
--};
--
--enum {
--	UTP_SCSI_COMMAND		= 0x00000000,
--	UTP_NATIVE_UFS_COMMAND		= 0x10000000,
--	UTP_DEVICE_MANAGEMENT_FUNCTION	= 0x20000000,
--	UTP_REQ_DESC_INT_CMD		= 0x01000000,
--};
--
--/* UTP Transfer Request Data Direction (DD) */
--enum {
--	UTP_NO_DATA_TRANSFER	= 0x00000000,
--	UTP_HOST_TO_DEVICE	= 0x02000000,
--	UTP_DEVICE_TO_HOST	= 0x04000000,
--};
--
--/* Overall command status values */
--enum {
--	OCS_SUCCESS			= 0x0,
--	OCS_INVALID_CMD_TABLE_ATTR	= 0x1,
--	OCS_INVALID_PRDT_ATTR		= 0x2,
--	OCS_MISMATCH_DATA_BUF_SIZE	= 0x3,
--	OCS_MISMATCH_RESP_UPIU_SIZE	= 0x4,
--	OCS_PEER_COMM_FAILURE		= 0x5,
--	OCS_ABORTED			= 0x6,
--	OCS_FATAL_ERROR			= 0x7,
--	OCS_INVALID_COMMAND_STATUS	= 0x0F,
--	MASK_OCS			= 0x0F,
--};
--
--/* The maximum length of the data byte count field in the PRDT is 256KB */
--#define PRDT_DATA_BYTE_COUNT_MAX	(256 * 1024)
--/* The granularity of the data byte count field in the PRDT is 32-bit */
--#define PRDT_DATA_BYTE_COUNT_PAD	4
--
- #define GENERAL_UPIU_REQUEST_SIZE (sizeof(struct utp_upiu_req))
- #define QUERY_DESC_MAX_SIZE       255
- #define QUERY_DESC_MIN_SIZE       2
-@@ -297,79 +255,6 @@ enum desc_header_offset {
- 	QUERY_DESC_DESC_TYPE_OFFSET	= 0x01,
++enum ufs_pa_pwr_mode {
+ 	FAST_MODE	= 1,
+ 	SLOW_MODE	= 2,
+ 	FASTAUTO_MODE	= 4,
+@@ -171,8 +186,11 @@ enum {
+ 	UNCHANGED	= 7,
  };
  
--struct ufshcd_sg_entry {
--	__le32    base_addr;
--	__le32    upper_addr;
--	__le32    reserved;
--	__le32    size;
--};
--
--#define MAX_BUFF	128
--/**
-- * struct utp_transfer_cmd_desc - UFS Command Descriptor structure
-- * @command_upiu: Command UPIU Frame address
-- * @response_upiu: Response UPIU Frame address
-- * @prd_table: Physical Region Descriptor
-- */
--struct utp_transfer_cmd_desc {
--	u8 command_upiu[ALIGNED_UPIU_SIZE];
--	u8 response_upiu[ALIGNED_UPIU_SIZE];
--	struct ufshcd_sg_entry    prd_table[MAX_BUFF];
--};
--
--/**
-- * struct request_desc_header - Descriptor Header common to both UTRD and UTMRD
-- * @dword0: Descriptor Header DW0
-- * @dword1: Descriptor Header DW1
-- * @dword2: Descriptor Header DW2
-- * @dword3: Descriptor Header DW3
-- */
--struct request_desc_header {
--	__le32 dword_0;
--	__le32 dword_1;
--	__le32 dword_2;
--	__le32 dword_3;
--};
--
--/**
-- * struct utp_transfer_req_desc - UTRD structure
-- * @header: UTRD header DW-0 to DW-3
-- * @command_desc_base_addr_lo: UCD base address low DW-4
-- * @command_desc_base_addr_hi: UCD base address high DW-5
-- * @response_upiu_length: response UPIU length DW-6
-- * @response_upiu_offset: response UPIU offset DW-6
-- * @prd_table_length: Physical region descriptor length DW-7
-- * @prd_table_offset: Physical region descriptor offset DW-7
-- */
--struct utp_transfer_req_desc {
--	/* DW 0-3 */
--	struct request_desc_header header;
--
--	/* DW 4-5*/
--	__le32  command_desc_base_addr_lo;
--	__le32  command_desc_base_addr_hi;
--
--	/* DW 6 */
--	__le16  response_upiu_length;
--	__le16  response_upiu_offset;
--
--	/* DW 7 */
--	__le16  prd_table_length;
--	__le16  prd_table_offset;
--};
--
--/**
-- * struct utp_upiu_header - UPIU header structure
-- * @dword_0: UPIU header DW-0
-- * @dword_1: UPIU header DW-1
-- * @dword_2: UPIU header DW-2
-- */
--struct utp_upiu_header {
--	__be32 dword_0;
--	__be32 dword_1;
--	__be32 dword_2;
--};
--
- /**
-  * struct utp_upiu_query - upiu request buffer structure for
-  * query request.
-@@ -403,27 +288,6 @@ struct utp_upiu_cmd {
- 	u8 cdb[UFS_CDB_SIZE];
++#define PWRMODE_MASK		0xF
++#define PWRMODE_RX_OFFSET	4
++
+ /* PA TX/RX Frequency Series */
+-enum {
++enum ufs_hs_gear_rate {
+ 	PA_HS_MODE_A	= 1,
+ 	PA_HS_MODE_B	= 2,
+ };
+@@ -193,14 +211,24 @@ enum ufs_hs_gear_tag {
+ 	UFS_HS_G1,		/* HS Gear 1 (default for reset) */
+ 	UFS_HS_G2,		/* HS Gear 2 */
+ 	UFS_HS_G3,		/* HS Gear 3 */
++	UFS_HS_G4,		/* HS Gear 4 */
++	UFS_HS_G5		/* HS Gear 5 */
++};
++
++enum ufs_lanes {
++	UFS_LANE_DONT_CHANGE,	/* Don't change Lane */
++	UFS_LANE_1,		/* Lane 1 (default for reset) */
++	UFS_LANE_2,		/* Lane 2 */
  };
  
--/*
-- * UTMRD structure.
-- */
--struct utp_task_req_desc {
--	/* DW 0-3 */
--	struct request_desc_header header;
--
--	/* DW 4-11 - Task request UPIU structure */
--	struct utp_upiu_header	req_header;
--	__be32			input_param1;
--	__be32			input_param2;
--	__be32			input_param3;
--	__be32			__reserved1[2];
--
--	/* DW 12-19 - Task Management Response UPIU structure */
--	struct utp_upiu_header	rsp_header;
--	__be32			output_param1;
--	__be32			output_param2;
--	__be32			__reserved2[3];
--};
--
- /**
-  * struct utp_upiu_req - general upiu request structure
-  * @header:UPIU header structure DW-0 to DW-2
-@@ -551,63 +415,6 @@ struct uic_command {
- 	int result;
+ enum ufs_unipro_ver {
+ 	UFS_UNIPRO_VER_RESERVED = 0,
+ 	UFS_UNIPRO_VER_1_40 = 1, /* UniPro version 1.40 */
+ 	UFS_UNIPRO_VER_1_41 = 2, /* UniPro version 1.41 */
+-	UFS_UNIPRO_VER_1_6 = 3,  /* UniPro version 1.6 */
+-	UFS_UNIPRO_VER_MAX = 4,  /* UniPro unsupported version */
++	UFS_UNIPRO_VER_1_6  = 3, /* UniPro version 1.6 */
++	UFS_UNIPRO_VER_1_61 = 4, /* UniPro version 1.61 */
++	UFS_UNIPRO_VER_1_8  = 5, /* UniPro version 1.8 */
++	UFS_UNIPRO_VER_MAX  = 6, /* UniPro unsupported version */
+ 	/* UniPro version field mask in PA_LOCALVERINFO */
+ 	UFS_UNIPRO_VER_MASK = 0xF,
  };
+@@ -208,27 +236,27 @@ enum ufs_unipro_ver {
+ /*
+  * Data Link Layer Attributes
+  */
++#define DL_TXPREEMPTIONCAP	0x2000
++#define DL_TC0TXMAXSDUSIZE	0x2001
++#define DL_TC0RXINITCREDITVAL	0x2002
++#define DL_TC1TXMAXSDUSIZE	0x2003
++#define DL_TC1RXINITCREDITVAL	0x2004
++#define DL_TC0TXBUFFERSIZE	0x2005
++#define DL_TC1TXBUFFERSIZE	0x2006
+ #define DL_TC0TXFCTHRESHOLD	0x2040
+ #define DL_FC0PROTTIMEOUTVAL	0x2041
+ #define DL_TC0REPLAYTIMEOUTVAL	0x2042
+ #define DL_AFC0REQTIMEOUTVAL	0x2043
+ #define DL_AFC0CREDITTHRESHOLD	0x2044
+ #define DL_TC0OUTACKTHRESHOLD	0x2045
++#define DL_PEERTC0PRESENT	0x2046
++#define DL_PEERTC0RXINITCREVAL	0x2047
+ #define DL_TC1TXFCTHRESHOLD	0x2060
+ #define DL_FC1PROTTIMEOUTVAL	0x2061
+ #define DL_TC1REPLAYTIMEOUTVAL	0x2062
+ #define DL_AFC1REQTIMEOUTVAL	0x2063
+ #define DL_AFC1CREDITTHRESHOLD	0x2064
+ #define DL_TC1OUTACKTHRESHOLD	0x2065
+-#define DL_TXPREEMPTIONCAP	0x2000
+-#define DL_TC0TXMAXSDUSIZE	0x2001
+-#define DL_TC0RXINITCREDITVAL	0x2002
+-#define DL_TC0TXBUFFERSIZE	0x2005
+-#define DL_PEERTC0PRESENT	0x2046
+-#define DL_PEERTC0RXINITCREVAL	0x2047
+-#define DL_TC1TXMAXSDUSIZE	0x2003
+-#define DL_TC1RXINITCREDITVAL	0x2004
+-#define DL_TC1TXBUFFERSIZE	0x2006
+ #define DL_PEERTC1PRESENT	0x2066
+ #define DL_PEERTC1RXINITCREVAL	0x2067
  
--/* GenSelectorIndex calculation macros for M-PHY attributes */
--#define UIC_ARG_MPHY_TX_GEN_SEL_INDEX(lane) (lane)
--#define UIC_ARG_MPHY_RX_GEN_SEL_INDEX(lane) (PA_MAXDATALANES + (lane))
--
--#define UIC_ARG_MIB_SEL(attr, sel)	((((attr) & 0xFFFF) << 16) |\
--					 ((sel) & 0xFFFF))
--#define UIC_ARG_MIB(attr)		UIC_ARG_MIB_SEL(attr, 0)
--#define UIC_ARG_ATTR_TYPE(t)		(((t) & 0xFF) << 16)
--#define UIC_GET_ATTR_ID(v)		(((v) >> 16) & 0xFFFF)
--
--/* Link Status*/
--enum link_status {
--	UFSHCD_LINK_IS_DOWN	= 1,
--	UFSHCD_LINK_IS_UP	= 2,
--};
--
--#define UIC_ARG_MIB_SEL(attr, sel)	((((attr) & 0xFFFF) << 16) |\
--					 ((sel) & 0xFFFF))
--#define UIC_ARG_MIB(attr)		UIC_ARG_MIB_SEL(attr, 0)
--#define UIC_ARG_ATTR_TYPE(t)		(((t) & 0xFF) << 16)
--#define UIC_GET_ATTR_ID(v)		(((v) >> 16) & 0xFFFF)
--
--/* UIC Commands */
--enum uic_cmd_dme {
--	UIC_CMD_DME_GET			= 0x01,
--	UIC_CMD_DME_SET			= 0x02,
--	UIC_CMD_DME_PEER_GET		= 0x03,
--	UIC_CMD_DME_PEER_SET		= 0x04,
--	UIC_CMD_DME_POWERON		= 0x10,
--	UIC_CMD_DME_POWEROFF		= 0x11,
--	UIC_CMD_DME_ENABLE		= 0x12,
--	UIC_CMD_DME_RESET		= 0x14,
--	UIC_CMD_DME_END_PT_RST		= 0x15,
--	UIC_CMD_DME_LINK_STARTUP	= 0x16,
--	UIC_CMD_DME_HIBER_ENTER		= 0x17,
--	UIC_CMD_DME_HIBER_EXIT		= 0x18,
--	UIC_CMD_DME_TEST_MODE		= 0x1A,
--};
--
--/* UIC Config result code / Generic error code */
--enum {
--	UIC_CMD_RESULT_SUCCESS			= 0x00,
--	UIC_CMD_RESULT_INVALID_ATTR		= 0x01,
--	UIC_CMD_RESULT_FAILURE			= 0x01,
--	UIC_CMD_RESULT_INVALID_ATTR_VALUE	= 0x02,
--	UIC_CMD_RESULT_READ_ONLY_ATTR		= 0x03,
--	UIC_CMD_RESULT_WRITE_ONLY_ATTR		= 0x04,
--	UIC_CMD_RESULT_BAD_INDEX		= 0x05,
--	UIC_CMD_RESULT_LOCKED_ATTR		= 0x06,
--	UIC_CMD_RESULT_BAD_TEST_FEATURE_INDEX	= 0x07,
--	UIC_CMD_RESULT_PEER_COMM_FAILURE	= 0x08,
--	UIC_CMD_RESULT_BUSY			= 0x09,
--	UIC_CMD_RESULT_DME_FAILURE		= 0x0A,
--};
--
--#define MASK_UIC_COMMAND_RESULT			0xFF
--
- /* Host <-> Device UniPro Link state */
- enum uic_link_state {
- 	UIC_LINK_OFF_STATE	= 0, /* Link powered down or disabled */
-@@ -940,17 +747,6 @@ static inline int ufshcd_vops_device_reset(struct ufs_hba *hba)
- 	return 0;
- }
- 
--/* Controller UFSHCI version */
--enum {
--	UFSHCI_VERSION_10 = 0x00010000, /* 1.0 */
--	UFSHCI_VERSION_11 = 0x00010100, /* 1.1 */
--	UFSHCI_VERSION_20 = 0x00000200, /* 2.0 */
--	UFSHCI_VERSION_21 = 0x00000210, /* 2.1 */
--	UFSHCI_VERSION_30 = 0x00000300, /* 3.0 */
--	UFSHCI_VERSION_31 = 0x00000310, /* 3.1 */
--	UFSHCI_VERSION_40 = 0x00000400, /* 4.0 */
--};
--
- /* Interrupt disable masks */
- enum {
- 	/* Interrupt disable mask for UFSHCI v1.0 */
-@@ -964,123 +760,6 @@ enum {
- 	INTERRUPT_MASK_ALL_VER_21	= 0x71FFF,
- };
- 
--/* UFSHCI Registers */
--enum {
--	REG_CONTROLLER_CAPABILITIES		= 0x00,
--	REG_UFS_VERSION				= 0x08,
--	REG_CONTROLLER_DEV_ID			= 0x10,
--	REG_CONTROLLER_PROD_ID			= 0x14,
--	REG_AUTO_HIBERNATE_IDLE_TIMER		= 0x18,
--	REG_INTERRUPT_STATUS			= 0x20,
--	REG_INTERRUPT_ENABLE			= 0x24,
--	REG_CONTROLLER_STATUS			= 0x30,
--	REG_CONTROLLER_ENABLE			= 0x34,
--	REG_UIC_ERROR_CODE_PHY_ADAPTER_LAYER	= 0x38,
--	REG_UIC_ERROR_CODE_DATA_LINK_LAYER	= 0x3C,
--	REG_UIC_ERROR_CODE_NETWORK_LAYER	= 0x40,
--	REG_UIC_ERROR_CODE_TRANSPORT_LAYER	= 0x44,
--	REG_UIC_ERROR_CODE_DME			= 0x48,
--	REG_UTP_TRANSFER_REQ_INT_AGG_CONTROL	= 0x4C,
--	REG_UTP_TRANSFER_REQ_LIST_BASE_L	= 0x50,
--	REG_UTP_TRANSFER_REQ_LIST_BASE_H	= 0x54,
--	REG_UTP_TRANSFER_REQ_DOOR_BELL		= 0x58,
--	REG_UTP_TRANSFER_REQ_LIST_CLEAR		= 0x5C,
--	REG_UTP_TRANSFER_REQ_LIST_RUN_STOP	= 0x60,
--	REG_UTP_TASK_REQ_LIST_BASE_L		= 0x70,
--	REG_UTP_TASK_REQ_LIST_BASE_H		= 0x74,
--	REG_UTP_TASK_REQ_DOOR_BELL		= 0x78,
--	REG_UTP_TASK_REQ_LIST_CLEAR		= 0x7C,
--	REG_UTP_TASK_REQ_LIST_RUN_STOP		= 0x80,
--	REG_UIC_COMMAND				= 0x90,
--	REG_UIC_COMMAND_ARG_1			= 0x94,
--	REG_UIC_COMMAND_ARG_2			= 0x98,
--	REG_UIC_COMMAND_ARG_3			= 0x9C,
--
--	UFSHCI_REG_SPACE_SIZE			= 0xA0,
--
--	REG_UFS_CCAP				= 0x100,
--	REG_UFS_CRYPTOCAP			= 0x104,
--
--	UFSHCI_CRYPTO_REG_SPACE_SIZE		= 0x400,
--};
--
--/* Controller capability masks */
--enum {
--	MASK_TRANSFER_REQUESTS_SLOTS		= 0x0000001F,
--	MASK_TASK_MANAGEMENT_REQUEST_SLOTS	= 0x00070000,
--	MASK_AUTO_HIBERN8_SUPPORT		= 0x00800000,
--	MASK_64_ADDRESSING_SUPPORT		= 0x01000000,
--	MASK_OUT_OF_ORDER_DATA_DELIVERY_SUPPORT	= 0x02000000,
--	MASK_UIC_DME_TEST_MODE_SUPPORT		= 0x04000000,
--};
--
--/* Interrupt Status 20h */
--#define UTP_TRANSFER_REQ_COMPL			0x1
--#define UIC_DME_END_PT_RESET			0x2
--#define UIC_ERROR				0x4
--#define UIC_TEST_MODE				0x8
--#define UIC_POWER_MODE				0x10
--#define UIC_HIBERNATE_EXIT			0x20
--#define UIC_HIBERNATE_ENTER			0x40
--#define UIC_LINK_LOST				0x80
--#define UIC_LINK_STARTUP			0x100
--#define UTP_TASK_REQ_COMPL			0x200
--#define UIC_COMMAND_COMPL			0x400
--#define DEVICE_FATAL_ERROR			0x800
--#define CONTROLLER_FATAL_ERROR			0x10000
--#define SYSTEM_BUS_FATAL_ERROR			0x20000
--
--#define UFSHCD_UIC_PWR_MASK	(UIC_HIBERNATE_ENTER |\
--				UIC_HIBERNATE_EXIT |\
--				UIC_POWER_MODE)
--
--#define UFSHCD_UIC_MASK		(UIC_COMMAND_COMPL | UIC_POWER_MODE)
--
--#define UFSHCD_ERROR_MASK	(UIC_ERROR |\
--				DEVICE_FATAL_ERROR |\
--				CONTROLLER_FATAL_ERROR |\
--				SYSTEM_BUS_FATAL_ERROR)
--
--#define INT_FATAL_ERRORS	(DEVICE_FATAL_ERROR |\
--				CONTROLLER_FATAL_ERROR |\
--				SYSTEM_BUS_FATAL_ERROR)
--
--/* Host Controller Enable 0x34h */
--#define CONTROLLER_ENABLE	0x1
--#define CONTROLLER_DISABLE	0x0
--/* HCS - Host Controller Status 30h */
--#define DEVICE_PRESENT				0x1
--#define UTP_TRANSFER_REQ_LIST_READY		0x2
--#define UTP_TASK_REQ_LIST_READY			0x4
--#define UIC_COMMAND_READY			0x8
--#define HOST_ERROR_INDICATOR			0x10
--#define DEVICE_ERROR_INDICATOR			0x20
--#define UIC_POWER_MODE_CHANGE_REQ_STATUS_MASK	UFS_MASK(0x7, 8)
--
--#define UFSHCD_STATUS_READY	(UTP_TRANSFER_REQ_LIST_READY |\
--				UTP_TASK_REQ_LIST_READY |\
--				UIC_COMMAND_READY)
--
--enum {
--	PWR_OK		= 0x0,
--	PWR_LOCAL	= 0x01,
--	PWR_REMOTE	= 0x02,
--	PWR_BUSY	= 0x03,
--	PWR_ERROR_CAP	= 0x04,
--	PWR_FATAL_ERROR	= 0x05,
--};
--
--/* UICCMD - UIC Command */
--#define COMMAND_OPCODE_MASK		0xFF
--#define GEN_SELECTOR_INDEX_MASK		0xFFFF
--
--#define MIB_ATTRIBUTE_MASK		UFS_MASK(0xFFFF, 16)
--#define RESET_LEVEL			0xFF
--
--#define ATTR_SET_TYPE_MASK		UFS_MASK(0xFF, 16)
--#define CFG_RESULT_CODE_MASK		0xFF
--#define GENERIC_ERROR_CODE_MASK		0xFF
--
- #define ufshcd_writel(hba, val, reg)   \
- 	writel((val), (hba)->mmio_base + (reg))
- #define ufshcd_readl(hba, reg) \
-@@ -1103,12 +782,6 @@ static inline void ufshcd_rmwl(struct ufs_hba *hba, u32 mask, u32 val, u32 reg)
- 	ufshcd_writel(hba, tmp, reg);
- }
- 
--/* UTRLRSR - UTP Transfer Request Run-Stop Register 60h */
--#define UTP_TRANSFER_REQ_LIST_RUN_STOP_BIT	0x1
--
--/* UTMRLRSR - UTP Task Management Request Run-Stop Register 80h */
--#define UTP_TASK_REQ_LIST_RUN_STOP_BIT		0x1
--
- int ufshcd_probe(struct udevice *dev, struct ufs_hba_ops *hba_ops);
- 
- #endif
-diff --git a/drivers/ufs/ufshci.h b/drivers/ufs/ufshci.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..db30812b176f9e36529452e260b847241f97fdab
---- /dev/null
-+++ b/drivers/ufs/ufshci.h
-@@ -0,0 +1,334 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+#ifndef __UFSHCI_H
-+#define __UFSHCI_H
-+
-+enum {
-+	TASK_REQ_UPIU_SIZE_DWORDS	= 8,
-+	TASK_RSP_UPIU_SIZE_DWORDS	= 8,
-+	ALIGNED_UPIU_SIZE		= 512,
-+};
-+
-+/* To accommodate UFS2.0 required Command type */
-+enum {
-+	UTP_CMD_TYPE_UFS_STORAGE	= 0x1,
-+};
-+
-+enum {
-+	UTP_SCSI_COMMAND		= 0x00000000,
-+	UTP_NATIVE_UFS_COMMAND		= 0x10000000,
-+	UTP_DEVICE_MANAGEMENT_FUNCTION	= 0x20000000,
-+	UTP_REQ_DESC_INT_CMD		= 0x01000000,
-+};
-+
-+/* UTP Transfer Request Data Direction (DD) */
-+enum {
-+	UTP_NO_DATA_TRANSFER	= 0x00000000,
-+	UTP_HOST_TO_DEVICE	= 0x02000000,
-+	UTP_DEVICE_TO_HOST	= 0x04000000,
-+};
-+
-+/* Overall command status values */
-+enum {
-+	OCS_SUCCESS			= 0x0,
-+	OCS_INVALID_CMD_TABLE_ATTR	= 0x1,
-+	OCS_INVALID_PRDT_ATTR		= 0x2,
-+	OCS_MISMATCH_DATA_BUF_SIZE	= 0x3,
-+	OCS_MISMATCH_RESP_UPIU_SIZE	= 0x4,
-+	OCS_PEER_COMM_FAILURE		= 0x5,
-+	OCS_ABORTED			= 0x6,
-+	OCS_FATAL_ERROR			= 0x7,
-+	OCS_INVALID_COMMAND_STATUS	= 0x0F,
-+	MASK_OCS			= 0x0F,
-+};
-+
-+/* The maximum length of the data byte count field in the PRDT is 256KB */
-+#define PRDT_DATA_BYTE_COUNT_MAX	(256 * 1024)
-+/* The granularity of the data byte count field in the PRDT is 32-bit */
-+#define PRDT_DATA_BYTE_COUNT_PAD	4
-+
-+/* Controller UFSHCI version */
-+enum {
-+	UFSHCI_VERSION_10 = 0x00010000, /* 1.0 */
-+	UFSHCI_VERSION_11 = 0x00010100, /* 1.1 */
-+	UFSHCI_VERSION_20 = 0x00000200, /* 2.0 */
-+	UFSHCI_VERSION_21 = 0x00000210, /* 2.1 */
-+	UFSHCI_VERSION_30 = 0x00000300, /* 3.0 */
-+	UFSHCI_VERSION_31 = 0x00000310, /* 3.1 */
-+	UFSHCI_VERSION_40 = 0x00000400, /* 4.0 */
-+};
-+
-+/* UFSHCI Registers */
-+enum {
-+	REG_CONTROLLER_CAPABILITIES		= 0x00,
-+	REG_UFS_VERSION				= 0x08,
-+	REG_CONTROLLER_DEV_ID			= 0x10,
-+	REG_CONTROLLER_PROD_ID			= 0x14,
-+	REG_AUTO_HIBERNATE_IDLE_TIMER		= 0x18,
-+	REG_INTERRUPT_STATUS			= 0x20,
-+	REG_INTERRUPT_ENABLE			= 0x24,
-+	REG_CONTROLLER_STATUS			= 0x30,
-+	REG_CONTROLLER_ENABLE			= 0x34,
-+	REG_UIC_ERROR_CODE_PHY_ADAPTER_LAYER	= 0x38,
-+	REG_UIC_ERROR_CODE_DATA_LINK_LAYER	= 0x3C,
-+	REG_UIC_ERROR_CODE_NETWORK_LAYER	= 0x40,
-+	REG_UIC_ERROR_CODE_TRANSPORT_LAYER	= 0x44,
-+	REG_UIC_ERROR_CODE_DME			= 0x48,
-+	REG_UTP_TRANSFER_REQ_INT_AGG_CONTROL	= 0x4C,
-+	REG_UTP_TRANSFER_REQ_LIST_BASE_L	= 0x50,
-+	REG_UTP_TRANSFER_REQ_LIST_BASE_H	= 0x54,
-+	REG_UTP_TRANSFER_REQ_DOOR_BELL		= 0x58,
-+	REG_UTP_TRANSFER_REQ_LIST_CLEAR		= 0x5C,
-+	REG_UTP_TRANSFER_REQ_LIST_RUN_STOP	= 0x60,
-+	REG_UTP_TASK_REQ_LIST_BASE_L		= 0x70,
-+	REG_UTP_TASK_REQ_LIST_BASE_H		= 0x74,
-+	REG_UTP_TASK_REQ_DOOR_BELL		= 0x78,
-+	REG_UTP_TASK_REQ_LIST_CLEAR		= 0x7C,
-+	REG_UTP_TASK_REQ_LIST_RUN_STOP		= 0x80,
-+	REG_UIC_COMMAND				= 0x90,
-+	REG_UIC_COMMAND_ARG_1			= 0x94,
-+	REG_UIC_COMMAND_ARG_2			= 0x98,
-+	REG_UIC_COMMAND_ARG_3			= 0x9C,
-+
-+	UFSHCI_REG_SPACE_SIZE			= 0xA0,
-+
-+	REG_UFS_CCAP				= 0x100,
-+	REG_UFS_CRYPTOCAP			= 0x104,
-+
-+	UFSHCI_CRYPTO_REG_SPACE_SIZE		= 0x400,
-+};
-+
-+/* Controller capability masks */
-+enum {
-+	MASK_TRANSFER_REQUESTS_SLOTS		= 0x0000001F,
-+	MASK_TASK_MANAGEMENT_REQUEST_SLOTS	= 0x00070000,
-+	MASK_AUTO_HIBERN8_SUPPORT		= 0x00800000,
-+	MASK_64_ADDRESSING_SUPPORT		= 0x01000000,
-+	MASK_OUT_OF_ORDER_DATA_DELIVERY_SUPPORT	= 0x02000000,
-+	MASK_UIC_DME_TEST_MODE_SUPPORT		= 0x04000000,
-+};
-+
-+/* Interrupt Status 20h */
-+#define UTP_TRANSFER_REQ_COMPL			0x1
-+#define UIC_DME_END_PT_RESET			0x2
-+#define UIC_ERROR				0x4
-+#define UIC_TEST_MODE				0x8
-+#define UIC_POWER_MODE				0x10
-+#define UIC_HIBERNATE_EXIT			0x20
-+#define UIC_HIBERNATE_ENTER			0x40
-+#define UIC_LINK_LOST				0x80
-+#define UIC_LINK_STARTUP			0x100
-+#define UTP_TASK_REQ_COMPL			0x200
-+#define UIC_COMMAND_COMPL			0x400
-+#define DEVICE_FATAL_ERROR			0x800
-+#define CONTROLLER_FATAL_ERROR			0x10000
-+#define SYSTEM_BUS_FATAL_ERROR			0x20000
-+
-+#define UFSHCD_UIC_PWR_MASK	(UIC_HIBERNATE_ENTER |\
-+				UIC_HIBERNATE_EXIT |\
-+				UIC_POWER_MODE)
-+
-+#define UFSHCD_UIC_MASK		(UIC_COMMAND_COMPL | UIC_POWER_MODE)
-+
-+#define UFSHCD_ERROR_MASK	(UIC_ERROR |\
-+				DEVICE_FATAL_ERROR |\
-+				CONTROLLER_FATAL_ERROR |\
-+				SYSTEM_BUS_FATAL_ERROR)
-+
-+#define INT_FATAL_ERRORS	(DEVICE_FATAL_ERROR |\
-+				CONTROLLER_FATAL_ERROR |\
-+				SYSTEM_BUS_FATAL_ERROR)
-+
-+/* Host Controller Enable 0x34h */
-+#define CONTROLLER_ENABLE	0x1
-+#define CONTROLLER_DISABLE	0x0
-+/* HCS - Host Controller Status 30h */
-+#define DEVICE_PRESENT				0x1
-+#define UTP_TRANSFER_REQ_LIST_READY		0x2
-+#define UTP_TASK_REQ_LIST_READY			0x4
-+#define UIC_COMMAND_READY			0x8
-+#define HOST_ERROR_INDICATOR			0x10
-+#define DEVICE_ERROR_INDICATOR			0x20
-+#define UIC_POWER_MODE_CHANGE_REQ_STATUS_MASK	UFS_MASK(0x7, 8)
-+
-+#define UFSHCD_STATUS_READY	(UTP_TRANSFER_REQ_LIST_READY |\
-+				UTP_TASK_REQ_LIST_READY |\
-+				UIC_COMMAND_READY)
-+
-+enum {
-+	PWR_OK		= 0x0,
-+	PWR_LOCAL	= 0x01,
-+	PWR_REMOTE	= 0x02,
-+	PWR_BUSY	= 0x03,
-+	PWR_ERROR_CAP	= 0x04,
-+	PWR_FATAL_ERROR	= 0x05,
-+};
-+
-+/* UICCMD - UIC Command */
-+#define COMMAND_OPCODE_MASK		0xFF
-+#define GEN_SELECTOR_INDEX_MASK		0xFFFF
-+
-+#define MIB_ATTRIBUTE_MASK		UFS_MASK(0xFFFF, 16)
-+#define RESET_LEVEL			0xFF
-+
-+#define ATTR_SET_TYPE_MASK		UFS_MASK(0xFF, 16)
-+#define CFG_RESULT_CODE_MASK		0xFF
-+#define GENERIC_ERROR_CODE_MASK		0xFF
-+
-+/* GenSelectorIndex calculation macros for M-PHY attributes */
-+#define UIC_ARG_MPHY_TX_GEN_SEL_INDEX(lane) (lane)
-+#define UIC_ARG_MPHY_RX_GEN_SEL_INDEX(lane) (PA_MAXDATALANES + (lane))
-+
-+#define UIC_ARG_MIB_SEL(attr, sel)	((((attr) & 0xFFFF) << 16) |\
-+					 ((sel) & 0xFFFF))
-+#define UIC_ARG_MIB(attr)		UIC_ARG_MIB_SEL(attr, 0)
-+#define UIC_ARG_ATTR_TYPE(t)		(((t) & 0xFF) << 16)
-+#define UIC_GET_ATTR_ID(v)		(((v) >> 16) & 0xFFFF)
-+
-+/* Link Status*/
-+enum link_status {
-+	UFSHCD_LINK_IS_DOWN	= 1,
-+	UFSHCD_LINK_IS_UP	= 2,
-+};
-+
-+#define UIC_ARG_MIB_SEL(attr, sel)	((((attr) & 0xFFFF) << 16) |\
-+					 ((sel) & 0xFFFF))
-+#define UIC_ARG_MIB(attr)		UIC_ARG_MIB_SEL(attr, 0)
-+#define UIC_ARG_ATTR_TYPE(t)		(((t) & 0xFF) << 16)
-+#define UIC_GET_ATTR_ID(v)		(((v) >> 16) & 0xFFFF)
-+
-+/* UIC Commands */
-+enum uic_cmd_dme {
-+	UIC_CMD_DME_GET			= 0x01,
-+	UIC_CMD_DME_SET			= 0x02,
-+	UIC_CMD_DME_PEER_GET		= 0x03,
-+	UIC_CMD_DME_PEER_SET		= 0x04,
-+	UIC_CMD_DME_POWERON		= 0x10,
-+	UIC_CMD_DME_POWEROFF		= 0x11,
-+	UIC_CMD_DME_ENABLE		= 0x12,
-+	UIC_CMD_DME_RESET		= 0x14,
-+	UIC_CMD_DME_END_PT_RST		= 0x15,
-+	UIC_CMD_DME_LINK_STARTUP	= 0x16,
-+	UIC_CMD_DME_HIBER_ENTER		= 0x17,
-+	UIC_CMD_DME_HIBER_EXIT		= 0x18,
-+	UIC_CMD_DME_TEST_MODE		= 0x1A,
-+};
-+
-+/* UIC Config result code / Generic error code */
-+enum {
-+	UIC_CMD_RESULT_SUCCESS			= 0x00,
-+	UIC_CMD_RESULT_INVALID_ATTR		= 0x01,
-+	UIC_CMD_RESULT_FAILURE			= 0x01,
-+	UIC_CMD_RESULT_INVALID_ATTR_VALUE	= 0x02,
-+	UIC_CMD_RESULT_READ_ONLY_ATTR		= 0x03,
-+	UIC_CMD_RESULT_WRITE_ONLY_ATTR		= 0x04,
-+	UIC_CMD_RESULT_BAD_INDEX		= 0x05,
-+	UIC_CMD_RESULT_LOCKED_ATTR		= 0x06,
-+	UIC_CMD_RESULT_BAD_TEST_FEATURE_INDEX	= 0x07,
-+	UIC_CMD_RESULT_PEER_COMM_FAILURE	= 0x08,
-+	UIC_CMD_RESULT_BUSY			= 0x09,
-+	UIC_CMD_RESULT_DME_FAILURE		= 0x0A,
-+};
-+
-+#define MASK_UIC_COMMAND_RESULT			0xFF
-+
-+/* UTRLRSR - UTP Transfer Request Run-Stop Register 60h */
-+#define UTP_TRANSFER_REQ_LIST_RUN_STOP_BIT	0x1
-+
-+/* UTMRLRSR - UTP Task Management Request Run-Stop Register 80h */
-+#define UTP_TASK_REQ_LIST_RUN_STOP_BIT		0x1
-+
-+struct ufshcd_sg_entry {
-+	__le32    base_addr;
-+	__le32    upper_addr;
-+	__le32    reserved;
-+	__le32    size;
-+};
-+
-+#define MAX_BUFF	128
-+/**
-+ * struct utp_transfer_cmd_desc - UFS Command Descriptor structure
-+ * @command_upiu: Command UPIU Frame address
-+ * @response_upiu: Response UPIU Frame address
-+ * @prd_table: Physical Region Descriptor
-+ */
-+struct utp_transfer_cmd_desc {
-+	u8 command_upiu[ALIGNED_UPIU_SIZE];
-+	u8 response_upiu[ALIGNED_UPIU_SIZE];
-+	struct ufshcd_sg_entry    prd_table[MAX_BUFF];
-+};
-+
-+/**
-+ * struct request_desc_header - Descriptor Header common to both UTRD and UTMRD
-+ * @dword0: Descriptor Header DW0
-+ * @dword1: Descriptor Header DW1
-+ * @dword2: Descriptor Header DW2
-+ * @dword3: Descriptor Header DW3
-+ */
-+struct request_desc_header {
-+	__le32 dword_0;
-+	__le32 dword_1;
-+	__le32 dword_2;
-+	__le32 dword_3;
-+};
-+
-+/**
-+ * struct utp_transfer_req_desc - UTRD structure
-+ * @header: UTRD header DW-0 to DW-3
-+ * @command_desc_base_addr_lo: UCD base address low DW-4
-+ * @command_desc_base_addr_hi: UCD base address high DW-5
-+ * @response_upiu_length: response UPIU length DW-6
-+ * @response_upiu_offset: response UPIU offset DW-6
-+ * @prd_table_length: Physical region descriptor length DW-7
-+ * @prd_table_offset: Physical region descriptor offset DW-7
-+ */
-+struct utp_transfer_req_desc {
-+	/* DW 0-3 */
-+	struct request_desc_header header;
-+
-+	/* DW 4-5*/
-+	__le32  command_desc_base_addr_lo;
-+	__le32  command_desc_base_addr_hi;
-+
-+	/* DW 6 */
-+	__le16  response_upiu_length;
-+	__le16  response_upiu_offset;
-+
-+	/* DW 7 */
-+	__le16  prd_table_length;
-+	__le16  prd_table_offset;
-+};
-+
-+/**
-+ * struct utp_upiu_header - UPIU header structure
-+ * @dword_0: UPIU header DW-0
-+ * @dword_1: UPIU header DW-1
-+ * @dword_2: UPIU header DW-2
-+ */
-+struct utp_upiu_header {
-+	__be32 dword_0;
-+	__be32 dword_1;
-+	__be32 dword_2;
-+};
-+
-+/*
-+ * UTMRD structure.
-+ */
-+struct utp_task_req_desc {
-+	/* DW 0-3 */
-+	struct request_desc_header header;
-+
-+	/* DW 4-11 - Task request UPIU structure */
-+	struct utp_upiu_header	req_header;
-+	__be32			input_param1;
-+	__be32			input_param2;
-+	__be32			input_param3;
-+	__be32			__reserved1[2];
-+
-+	/* DW 12-19 - Task Management Response UPIU structure */
-+	struct utp_upiu_header	rsp_header;
-+	__be32			output_param1;
-+	__be32			output_param2;
-+	__be32			__reserved2[3];
-+};
-+
-+#endif
 
 -- 
 2.34.1
