@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A63D44171
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 10:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A27D6207F
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 10:02:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC50C89673;
-	Wed, 20 Nov 2024 11:02:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 53FC989686;
+	Wed, 20 Nov 2024 11:02:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iy6k2tac";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iVZSAOTU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0720F8966E; Wed, 20 Nov 2024 11:02:36 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 19E8989681; Wed, 20 Nov 2024 11:02:36 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 560C98968C
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:02:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 142F68964F
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 11:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-431695fa98bso16164425e9.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 02:02:32 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-431548bd1b4so36896385e9.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 02:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732096952; x=1732701752; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732096953; x=1732701753; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kocb6slSXHHclKNWB/UXW6eV5o3UraK40/Ny6RKtJ0o=;
- b=iy6k2tacfzdyOysMHIKLf5DCyPd0bHDo+EbKkIGyDzlruEWSM+GMqiqVkQeKs/H4Pw
- x37R2rtrAr5TnnTFY3y15clmNKGq9hMtIxTIT3/BOGLLHFTdWb4G/rqZtPRgvaTZYWGy
- 9crkC7UbRrZPZFCqmeQY2UBK96ztBPCzm+jCGGWI83IdDzVOeeg7dsFNixckfVOzOMjN
- 6RY3J2vx7LEXN9CSsbdq03mfsZPZHt6PLVU5dfIfoPbs7ml8ezo9w89ulBBoKWnaNZws
- qnGmVidIIWV5do5ut507IO1bu+Zi+hIvUoThuQBBmDRU2Hv73SnWXM2X/GZyOb6wo9WN
- wBBA==
+ bh=uol12ilzrp93zqLCzBA5S29w8Sc3Lnbq6z2HdvzTkj8=;
+ b=iVZSAOTUbViNwSl+AE7hw98ylEtyNouNJkTK/vyDaoq5gTneezKmUJTYUmDrcboOdH
+ 1QeCdmo4xdKDUn/20phL6dqDBs9XfiY1Y7RX/tuD2Akcqhr8olkcFAs4ED1BuHpTtnjn
+ Vn4R12+J6rZ7UDtwz4sjcqFgojV9E3m93VHVfw9x6zwuvggP8TDv2RGrPaEDg91vLwD8
+ yh9mU4CNSjo3cBbx4GcM5vJNEmbs3UMy56bqa4K7EaF3fixQ2UpHZEfZ8kXbXMOPwYv0
+ F3ogD0FS7FMzMUmAVBb4BbZCcTz0OwiQv8JRNsSDR9fovwgvrHO1THZA4mVbyrpghvRr
+ A9tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732096952; x=1732701752;
+ d=1e100.net; s=20230601; t=1732096953; x=1732701753;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kocb6slSXHHclKNWB/UXW6eV5o3UraK40/Ny6RKtJ0o=;
- b=PyERJE51Iyn5W1cLqnuAmHAt8VciJhZbx3ffKLQKBrSbffEiOQy3OoNeX9NropMj7f
- Q1NUjMrOiWIe1L30Lcwij+BZqvM4HPjMJX0NA1v0mzhwQxH5qTRiVeOUPiQT+7H6zOEJ
- yCB/Oft4vIHE+7HT1+iACvFddnAoUompPEUAXT0eNsrsDjoalmopKPqhK26H/NWRP8P8
- ckLIQbqi16ce8B3IgWzsNraN4XstQndrDnEWpXBiBem5ogVE7TCVOK+/ODc5BvfJXeOF
- WD7X906xqFdanFBJPywVQQ3Uj+qPlTXPwSBRyKAn0irlqgqe00dn8Tnw/DGP16P8nbag
- /t/g==
-X-Gm-Message-State: AOJu0YzOgnQ+CnZI5S6TR7eLWw2BwBCqMz9CrkeUourhzNOuJJ08uBYH
- KWxpfNumn9WvccOP5ONgOZ8sB98kv5BuWarSqu/GqFCuOrDIDB2wChkck5eK4afEZnyFMe584dN
- 24+Xu7g==
-X-Google-Smtp-Source: AGHT+IFiUS9iFI4an1cN3rfkdEgu4d9fimei85q81PcMJRpHHj1nsvb1qLuO3fWRfeKStfh5Y1OXiw==
-X-Received: by 2002:a05:600d:1b:b0:42f:7c9e:1f96 with SMTP id
- 5b1f17b1804b1-433a4caad70mr11606545e9.1.1732096951820; 
- Wed, 20 Nov 2024 02:02:31 -0800 (PST)
+ bh=uol12ilzrp93zqLCzBA5S29w8Sc3Lnbq6z2HdvzTkj8=;
+ b=oVydGkxEQ3oR61EKlw/wD6sMvfyhYSaoMavxD/Tkb2UMpg/XxAByAOfxmfmY4Pxuv/
+ s887j0oPNo15LiLTdL+h5L8ghX+mVWuES2IFX7YETmVv7pKSzeRR2G4hMr4g8BMvn9kG
+ oNh51EocO1DtqdytrfZisjoLJsOG4VJFjMENNF33eWZQ/ZB0PhoCJl/Rj/YO0pUCnFBM
+ aF6IL3l72q0TOv9ah4DCuns8y7vA82L3gJFoE9r770hVj/Kj3fgL+42KzclcI0Ruix+v
+ mWxAkk8H75Km6F2jtPkrqP+WchUgZTamIMxHuBhayWxhSZKWp9lv1c/NTlUlw45/yn05
+ LwMw==
+X-Gm-Message-State: AOJu0YzQXvc3xzodagsTRiT1eEUZlrRBwgE/NX7cNDBtH2394/0lQ8v1
+ sSsazXsZK2vhfL+0i+k03fCTbnceDbu09a2LiCmPZHVFqNrF7SFUoAmI7v4Qw8S5IKgBmeyhHfS
+ CSFxk9w==
+X-Google-Smtp-Source: AGHT+IFCrxqhw34JMoL16Jcfa8PoOus0RH2FzdDTyY+pwTrPfATKtQhjAwnwNHsFNPoDXodkCnhyZw==
+X-Received: by 2002:a05:600c:3b9c:b0:431:5ba1:a513 with SMTP id
+ 5b1f17b1804b1-433489b596cmr20373425e9.10.1732096953524; 
+ Wed, 20 Nov 2024 02:02:33 -0800 (PST)
 Received: from artemis2.broadband ([2a0a:ef40:edb:fc01:24e0:2f5f:4be2:4309])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b45fa706sm13572655e9.16.2024.11.20.02.02.31
+ 5b1f17b1804b1-433b45fa706sm13572655e9.16.2024.11.20.02.02.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 02:02:31 -0800 (PST)
+ Wed, 20 Nov 2024 02:02:33 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Igor Prusov <ivprusov@salutedevices.com>, Simon Glass <sjg@chromium.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 1/4] sandbox: Correct guard around readq/writeq
-Date: Wed, 20 Nov 2024 10:01:54 +0000
-Message-Id: <20241120100157.485418-2-andrew.goodbody@linaro.org>
+Subject: [PATCH v3 2/4] sandbox: select CONFIG_64BIT for sandbox
+Date: Wed, 20 Nov 2024 10:01:55 +0000
+Message-Id: <20241120100157.485418-3-andrew.goodbody@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241120100157.485418-1-andrew.goodbody@linaro.org>
 References: <20241120100157.485418-1-andrew.goodbody@linaro.org>
@@ -94,40 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In include/linux/io.h the declarations of ioread64 and iowrite64
-which make use of readq/writeq are guarded with CONFIG_64BIT so
-guard the sandbox declarations of readq and writeq also with
-CONFIG_64BIT.
+Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
+static analysis tools.
+
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
 
 Changes in v3:
-This is a new patch in the series at this point.
+Updated commit title
 
- arch/sandbox/include/asm/io.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes in v2:
+Moved select of CONFIG_64BIT from SANDBOX64 to HOST_64BIT as
+suggested by reviewer.
 
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index 3d09170063..f656f361cd 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -39,13 +39,13 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
- #define readb(addr) sandbox_read((const void *)addr, SB_SIZE_8)
- #define readw(addr) sandbox_read((const void *)addr, SB_SIZE_16)
- #define readl(addr) sandbox_read((const void *)addr, SB_SIZE_32)
--#ifdef CONFIG_SANDBOX64
-+#ifdef CONFIG_64BIT
- #define readq(addr) sandbox_read((const void *)addr, SB_SIZE_64)
- #endif
- #define writeb(v, addr) sandbox_write((void *)addr, v, SB_SIZE_8)
- #define writew(v, addr) sandbox_write((void *)addr, v, SB_SIZE_16)
- #define writel(v, addr) sandbox_write((void *)addr, v, SB_SIZE_32)
--#ifdef CONFIG_SANDBOX64
-+#ifdef CONFIG_64BIT
- #define writeq(v, addr) sandbox_write((void *)addr, v, SB_SIZE_64)
- #endif
+ arch/sandbox/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
+index 1c8353d615..db29ca14bd 100644
+--- a/arch/sandbox/Kconfig
++++ b/arch/sandbox/Kconfig
+@@ -46,6 +46,7 @@ config HOST_32BIT
  
+ config HOST_64BIT
+ 	def_bool $(cc-define,_LP64)
++	select 64BIT
+ 
+ config HOST_HAS_SDL
+ 	def_bool $(success,sdl2-config --version)
 -- 
 2.39.5
 
