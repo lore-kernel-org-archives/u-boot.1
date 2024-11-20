@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 587FCD44171
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D94E1D60D17
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB89F8967B;
-	Wed, 20 Nov 2024 10:49:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48C908967C;
+	Wed, 20 Nov 2024 10:49:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62ED38967C; Wed, 20 Nov 2024 10:49:16 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id CF7AE8966E
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:49:11 +0100 (CET)
+ id 21A8689682; Wed, 20 Nov 2024 10:49:20 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 6376F8911A
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:49:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: 01wLedhVTkOiUj7Z+p6dRQ==
-X-CSE-MsgGUID: yw4PMOziQMGzGbK09I9H7Q==
-X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="229404008"
+X-CSE-ConnectionGUID: U7fTqYW3RbeLAX0qnrRC/w==
+X-CSE-MsgGUID: ezfsqda0SEyK+5OLbkSZRA==
+X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="225420156"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2024 18:49:10 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 20 Nov 2024 18:49:16 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.28])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 61B9F41A6094;
- Wed, 20 Nov 2024 18:49:08 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id EFD0141A6096;
+ Wed, 20 Nov 2024 18:49:13 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -36,9 +36,9 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
-Date: Wed, 20 Nov 2024 09:49:01 +0000
-Message-Id: <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v2 4/4] net: phy: ksz90x1: Simplify ksz9131_config_rgmii_delay
+Date: Wed, 20 Nov 2024 09:49:03 +0000
+Message-Id: <20241120094903.94-4-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
 References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
@@ -60,90 +60,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Micrel KSZ9131 PHY LED behavior is not correct when configured in
-Individual Mode, LED1 (Activity LED) is in the ON state when there is
-no-link.
-
-Workaround this by setting bit 9 of register 0x1e after verifying that
-the LED configuration is Individual Mode.
-
-This issue is described in KSZ9131RNX Silicon Errata DS80000693B [*]
-and according to that it will not be corrected in a future silicon
-revision.
-
-[*] https://ww1.microchip.com/downloads/en/DeviceDoc/KSZ9131RNX-Silicon-Errata-and-Data-Sheet-Clarification-80000863B.pdf
-
-Based on commit 0316c7e66bbd in the Linux kernel.
+We can call phy_modify_mmd() instead of manually calling drv->readext()
+and drv->writeext().
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
 Changes v1->v2:
   - Split out of series adding RZ/G2L Ethernet support [1]
-  - Add symbols KSZ9131RN_COMMON_CTRL, KSZ9131RN_COMMON_CTRL_LED_MODE,
-    KSZ9131RN_LED_ERRATA_REG, KSZ9131RN_LED_ERRATA_BITS
 
 [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@bp.renesas.com/
 
- drivers/net/phy/micrel_ksz90x1.c | 32 ++++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+ drivers/net/phy/micrel_ksz90x1.c | 26 ++++++++------------------
+ 1 file changed, 8 insertions(+), 18 deletions(-)
 
 diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
-index c48ae6e88f30..b33457910795 100644
+index e0b36f3fcdf9..2871d486c80d 100644
 --- a/drivers/net/phy/micrel_ksz90x1.c
 +++ b/drivers/net/phy/micrel_ksz90x1.c
-@@ -389,6 +389,12 @@ U_BOOT_PHY_DRIVER(ksz9031) = {
- #define KSZ9131RN_DLL_ENABLE_DELAY	0
- #define KSZ9131RN_DLL_DISABLE_DELAY	BIT(12)
+@@ -508,8 +508,7 @@ static int ksz9131_of_load_all_skew_values(struct phy_device *phydev)
  
-+#define KSZ9131RN_COMMON_CTRL		0
-+#define KSZ9131RN_COMMON_CTRL_LED_MODE	BIT(4)
-+
-+#define KSZ9131RN_LED_ERRATA_REG	0x1e
-+#define KSZ9131RN_LED_ERRATA_BITS	BIT(9)
-+
  static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
  {
- 	struct phy_driver *drv = phydev->drv;
-@@ -436,6 +442,28 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
- 	return ret;
- }
- 
-+/* Silicon Errata DS80000693B
-+ *
-+ * When LEDs are configured in Individual Mode, LED1 is ON in a no-link
-+ * condition. Workaround is to set register 0x1e, bit 9, this way LED1 behaves
-+ * according to the datasheet (off if there is no link).
-+ */
-+static int ksz9131_led_errata(struct phy_device *phydev)
-+{
-+	int reg;
-+
-+	reg = phy_read_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
-+			   KSZ9131RN_COMMON_CTRL);
-+	if (reg < 0)
-+		return reg;
-+
-+	if (!(reg & KSZ9131RN_COMMON_CTRL_LED_MODE))
-+		return 0;
-+
-+	return phy_set_bits(phydev, MDIO_DEVAD_NONE, KSZ9131RN_LED_ERRATA_REG,
-+			    KSZ9131RN_LED_ERRATA_BITS);
-+}
-+
- static int ksz9131_config(struct phy_device *phydev)
- {
+-	struct phy_driver *drv = phydev->drv;
+-	u16 rxcdll_val, txcdll_val, val;
++	u16 rxcdll_val, txcdll_val;
  	int ret;
-@@ -446,6 +474,10 @@ static int ksz9131_config(struct phy_device *phydev)
- 			return ret;
+ 
+ 	switch (phydev->interface) {
+@@ -533,24 +532,15 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+ 		return 0;
  	}
  
-+	ret = ksz9131_led_errata(phydev);
+-	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			   KSZ9131RN_RXC_DLL_CTRL);
+-	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
+-	val |= rxcdll_val;
+-	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			    KSZ9131RN_RXC_DLL_CTRL, val);
+-	if (ret)
++	ret = phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
++			     KSZ9131RN_RXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
++			     rxcdll_val);
 +	if (ret < 0)
-+		return ret;
-+
- 	/* add an option to disable the gigabit feature of this PHY */
- 	if (env_get("disable_giga")) {
- 		unsigned features;
+ 		return ret;
+ 
+-	val = drv->readext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			   KSZ9131RN_TXC_DLL_CTRL);
+-
+-	val &= ~KSZ9131RN_DLL_CTRL_BYPASS;
+-	val |= txcdll_val;
+-	ret = drv->writeext(phydev, 0, KSZ9131RN_MMD_COMMON_CTRL_REG,
+-			    KSZ9131RN_TXC_DLL_CTRL, val);
+-
+-	return ret;
++	return phy_modify_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
++			      KSZ9131RN_TXC_DLL_CTRL, KSZ9131RN_DLL_CTRL_BYPASS,
++			      txcdll_val);
+ }
+ 
+ /* Silicon Errata DS80000693B
 -- 
 2.43.0
 
