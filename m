@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEE5D60D17
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC272D44171
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 09:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35FA28964F;
-	Wed, 20 Nov 2024 10:48:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BAF088D1C;
+	Wed, 20 Nov 2024 10:48:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E42758964F; Wed, 20 Nov 2024 10:48:55 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 19E9988B6D
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:48:52 +0100 (CET)
+ id BF49E89678; Wed, 20 Nov 2024 10:48:57 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id C3702895BD
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 10:48:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: io1LMI9JTLiwkUHdKcNaPA==
-X-CSE-MsgGUID: VN3srXlxR46w9rZOrKOrRQ==
-X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="229403987"
+X-CSE-ConnectionGUID: lII46ZM7TMaaCf40Zn+msA==
+X-CSE-MsgGUID: KPZWqTtlTwS4/j2a4WR76g==
+X-IronPort-AV: E=Sophos;i="6.12,169,1728918000"; d="scan'208";a="225420114"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2024 18:48:51 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 20 Nov 2024 18:48:52 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.28])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 277E141A351A;
- Wed, 20 Nov 2024 18:48:37 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 630EE41A5E7B;
+ Wed, 20 Nov 2024 18:48:40 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
-Date: Wed, 20 Nov 2024 09:48:29 +0000
-Message-Id: <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v2 3/3] pinctrl: rzg2l: Drop unnecessary scope
+Date: Wed, 20 Nov 2024 09:48:30 +0000
+Message-Id: <20241120094830.71-3-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
 References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
@@ -58,110 +58,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
-signal is selectable to support an Ethernet PHY operating in either MII
-or RGMII mode. By default, the signal is configured as an input and MII
-mode is supported. The ETH_MODE register can be modified to configure
-this signal as an output to support RGMII mode.
-
-As this signal is be default an input, and can optionally be switched to
-an output, it maps neatly onto an `output-enable` property in the device
-tree.
+In rzg2l_pinconf_set(), there are no new variables defined in the case
+statement for PIN_CONFIG_INPUT_ENABLE so no additional scope is needed.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Changes v1->v2:
   - Split out of series adding RZ/G2L Ethernet support [1]
+  - Added Marek's Reviewed-by tag
 
 [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@bp.renesas.com/
 
- drivers/pinctrl/renesas/rzg2l-pfc.c | 31 +++++++++++++++++++++++++++--
- include/renesas/rzg2l-pfc.h         |  2 ++
- 2 files changed, 31 insertions(+), 2 deletions(-)
+ drivers/pinctrl/renesas/rzg2l-pfc.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/renesas/rzg2l-pfc.c
-index 0098e2d52d57..af371bd0ff1e 100644
+index af371bd0ff1e..3c751e9473a5 100644
 --- a/drivers/pinctrl/renesas/rzg2l-pfc.c
 +++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
-@@ -180,7 +180,7 @@ static const u32 r9a07g044_gpio_configs[] = {
- 	RZG2L_GPIO_PORT_PACK(3, 0x21, RZG2L_MPXED_PIN_FUNCS),
- 	RZG2L_GPIO_PORT_PACK(2, 0x22, RZG2L_MPXED_PIN_FUNCS),
- 	RZG2L_GPIO_PORT_PACK(2, 0x23, RZG2L_MPXED_PIN_FUNCS),
--	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
-+	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0) | PIN_CFG_OEN),
- 	RZG2L_GPIO_PORT_PACK(2, 0x25, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x26, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x27, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
-@@ -189,7 +189,7 @@ static const u32 r9a07g044_gpio_configs[] = {
- 	RZG2L_GPIO_PORT_PACK(2, 0x2a, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x2b, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x2c, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH0)),
--	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
-+	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1) | PIN_CFG_OEN),
- 	RZG2L_GPIO_PORT_PACK(2, 0x2e, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x2f, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
- 	RZG2L_GPIO_PORT_PACK(2, 0x30, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_VMC_ETH1)),
-@@ -449,6 +449,32 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 		break;
+@@ -381,7 +381,7 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
  	}
  
-+	case PIN_CONFIG_OUTPUT_ENABLE: {
-+		u8 ch;
-+
-+		if (!(cfg & PIN_CFG_OEN)) {
-+			dev_err(dev, "pin does not support OEN\n");
-+			return -EINVAL;
-+		}
-+
-+		/*
-+		 * We can determine which Ethernet interface we're dealing with from
-+		 * the caps.
-+		 */
-+		if (cfg & PIN_CFG_IO_VMC_ETH0)
-+			ch = 0;
-+		else /* PIN_CFG_IO_VMC_ETH1 */
-+			ch = 1;
-+
-+		dev_dbg(dev, "set ETH%u TXC OEN=%u\n", ch, argument);
-+		if (argument)
-+			clrbits_8(data->base + ETH_MODE, BIT(ch));
-+		else
-+			setbits_8(data->base + ETH_MODE, BIT(ch));
-+
-+		break;
-+	}
-+
- 	default:
- 		dev_err(dev, "Invalid pinconf parameter\n");
- 		return -EOPNOTSUPP;
-@@ -542,6 +568,7 @@ static int rzg2l_get_pin_muxing(struct udevice *dev, unsigned int selector,
+ 	switch (param) {
+-	case PIN_CONFIG_INPUT_ENABLE: {
++	case PIN_CONFIG_INPUT_ENABLE:
+ 		if (!(cfg & PIN_CFG_IEN)) {
+ 			dev_err(dev, "pin does not support IEN\n");
+ 			return -EINVAL;
+@@ -391,7 +391,6 @@ static int rzg2l_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+ 			port_offset, pin, argument);
+ 		rzg2l_rmw_pin_config(data, IEN(port_offset), pin, IEN_MASK, !!argument);
+ 		break;
+-	}
  
- static const struct pinconf_param rzg2l_pinconf_params[] = {
- 	{ "input-enable",	PIN_CONFIG_INPUT_ENABLE,	1 },
-+	{ "output-enable",	PIN_CONFIG_OUTPUT_ENABLE,	1 },
- 	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	3300 /* mV */ },
- };
- 
-diff --git a/include/renesas/rzg2l-pfc.h b/include/renesas/rzg2l-pfc.h
-index d1015b1d2ac1..36fa8da8e2e4 100644
---- a/include/renesas/rzg2l-pfc.h
-+++ b/include/renesas/rzg2l-pfc.h
-@@ -22,6 +22,7 @@
- #define PIN_CFG_FILONOFF		BIT(10)
- #define PIN_CFG_FILNUM			BIT(11)
- #define PIN_CFG_FILCLKSEL		BIT(12)
-+#define PIN_CFG_OEN			BIT(13)
- 
- #define RZG2L_MPXED_PIN_FUNCS		(PIN_CFG_IOLH_A | \
- 					 PIN_CFG_SR | \
-@@ -79,6 +80,7 @@
- #define SD_CH(n)		(0x3000 + (n) * 4)
- #define ETH_POC(ch)		(0x300c + (ch) * 4)
- #define QSPI			0x3008
-+#define ETH_MODE		(0x3018)
- 
- #define PVDD_1800		1	/* I/O domain voltage <= 1.8V */
- #define PVDD_2500		2	/* I/O domain voltage 2.5V */
+ 	case PIN_CONFIG_POWER_SOURCE: {
+ 		bool support_2500 = false;
 -- 
 2.43.0
 
