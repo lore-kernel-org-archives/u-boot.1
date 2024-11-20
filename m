@@ -4,141 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C317AD711C2
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 16:32:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44CFD711C0
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 16:37:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5589789555;
-	Wed, 20 Nov 2024 17:32:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 592CC89234;
+	Wed, 20 Nov 2024 17:37:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="a2gYqKQK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iw9ib6KT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95FD889328; Wed, 20 Nov 2024 17:32:10 +0100 (CET)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on2071a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::71a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C57D89234; Wed, 20 Nov 2024 17:37:39 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55E018916D
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 17:32:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7852C89229
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 17:37:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=C.Stoidner@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aqoFnfZzh4dTnDK1AFe8KH3rFwvN+JnkKVf+IUQp12ejB6vKPERFjJxcGk74oCrheDTYO4PYxHCDnZSln3nE4t0Jil/xuJqb8a9DymNVFFhhAHpdRRYtQ4e3a+Wg5HCKAueNzloahjZDrIc6cJnIHyqpu++uXdrgvADf4u9FrqawBcITwyDXD4gTJZId+r3ccVvGSpPQVXH2jomWjYvPwUUaMqh9aWPytRp1Qv0sGBfAjUy1wiPqjBBxNl2gntVdsLqu2UMIGBo7qxYwZc8DVO5tp9DeQJyztG0H1P2NzXlDc3O1WfNJ5yG87uAv/HIdVUtUsS1MPrE7G23RT7RNdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=K8jO/Cxu3nLpqNjoXGoPIlqtCUWHNjd/9GPhWLJ+p3o=;
- b=Tm/VLGcolMtNE0yb1jKs4WrGKhaFOuwtoKuDtrO394qhIztMweeH57D1uWyVCcrYqLDffCw82TetKdfK+qsWcdjs8JPTfOH6UoJxmBLKPPt77DXAAaZIRQ9PZB1hMkVSwPoIQSsXkOV1neORJK4hC7qH+tJjOpoXqKzGCL9tXePWYLYiAKlCztBAGN92O8Ha3MtGBAsYxMuy+P3dcZvS2dKUJ+/l1eT7cWsd3JRY5TZ1M9a8LAqS9y7Oj3I9gGGxnIICQCSQH7Yrqqm70dYlbcngVG7Ms370YszX0tiuQb8eUC9ZuuvNYJ8GrSZG99MZ+KEL5ARkqhsQiR+dsCnGxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
- arc=none (0)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa2099efdc3so215606566b.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 08:37:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=phytecmesstechnikgmbh.onmicrosoft.com;
- s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=K8jO/Cxu3nLpqNjoXGoPIlqtCUWHNjd/9GPhWLJ+p3o=;
- b=a2gYqKQKD3oDnuFNga+kjqdeAMp8Pa1d34lt65P9hs18WAeW9Noz5AvC8xcqWSmQTjfwgOEG3Ar8bVCvfPXIhnMDWkRP9Z3thL2vQXxmbg2pkx+pTvwVh6CUALs4GUsgLDeYDOvTSE7sNsaSzWmoVTorRHmGxrSL+3qNf9laDjA=
-Received: from AS9PR06CA0348.eurprd06.prod.outlook.com (2603:10a6:20b:466::8)
- by AS2P195MB2251.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:59c::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.22; Wed, 20 Nov
- 2024 16:32:04 +0000
-Received: from AM4PEPF00027A63.eurprd04.prod.outlook.com
- (2603:10a6:20b:466:cafe::c6) by AS9PR06CA0348.outlook.office365.com
- (2603:10a6:20b:466::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24 via Frontend
- Transport; Wed, 20 Nov 2024 16:32:04 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AM4PEPF00027A63.mail.protection.outlook.com (10.167.16.73) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8182.16 via Frontend Transport; Wed, 20 Nov 2024 16:32:04 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Nov
- 2024 17:32:03 +0100
-Received: from llp-stoidner.fritz.box (172.25.39.157) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Nov
- 2024 17:32:03 +0100
-From: Christoph Stoidner <c.stoidner@phytec.de>
-To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-CC: Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
- <w.egorov@phytec.de>, Yannic Moog <y.moog@phytec.de>, Mathieu Othacehe
- <m.othacehe@gmail.com>, Stefano Babic <sbabic@denx.de>, Fabio Estevam
- <festevam@gmail.com>, NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Tom Rini
- <trini@konsulko.com>, Primoz Fiser <primoz.fiser@norik.com>, Andrej Picej
- <andrej.picej@norik.com>
-Subject: [PATCH v4 3/3] board: phytec: imx93: Add phyCORE-i.MX 93 support for
- all SOM variants
-Date: Wed, 20 Nov 2024 17:31:43 +0100
-Message-ID: <20241120163143.127862-4-c.stoidner@phytec.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241120163143.127862-1-c.stoidner@phytec.de>
-References: <20241120163143.127862-1-c.stoidner@phytec.de>
+ d=linaro.org; s=google; t=1732120657; x=1732725457; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=irGXXZt9TZuJMnvB+mAuCeIRIp9e2mVfxbMYRSlGcTY=;
+ b=iw9ib6KTKSBdnqvxJcjAGOJSytk+ztL5+AxwpfrNyVstgjYIrWpmtysSr0THw9qfjB
+ wvX+kLQhGLZYpCLdoT0/JULYLDQblUWjwUY9/UEvAjHyZ6drrU15SxFguehBnnJ3tqcj
+ pBR0om6uWXARCgnTj/tIe6znl3ggp5Ily5QdRlur6ykqMLngkYEVKPmhukpbyt5g6W6J
+ X/sKAkQeJOrIX9UPyMV9MTq80AK1Qe2jRubCeQy2QRPvaCtTf/H8YDi2Zu4cjP9CQzA6
+ 3Jh/Ex5DxYb0w3w/vrDE6EKwP8IYKrDPufPPtHFlynV20D3ZPEb5sQKO/ZF80zAW85ML
+ Jhqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732120657; x=1732725457;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=irGXXZt9TZuJMnvB+mAuCeIRIp9e2mVfxbMYRSlGcTY=;
+ b=CjS9OTXt26ZwPEXboCfz+JaJyYp04XpY+LXKgZh/vuqQmiHjhi9TUViMwswUASK+kV
+ XYyzB1lwQWm4aQHSQawF557BWodR3sGXcYLFQF7cWWGMZND4IVwrtHbpEjvXVK7IJW4b
+ 9CjPdt+ncsMV36tUzmOo3BoeP6zwNBqRcR0en/N/dov2PiZsEFnO0dfq5TaLcgIAchgq
+ ZwonyO2A2bBOSFsrva+7VbAcLy7QCfxIyh1Ak36EaRbYFn9fbrdJj9dZ4At8XCOq8gZ8
+ ENJwF0FEB+ZLdugHoMg4pUpvUVMsSFSdgYOf5kHXt8u8JpMLZFuAnaX09x2HEe2YdSDK
+ 6m5A==
+X-Gm-Message-State: AOJu0YzjmBPmVBk9mZg0IX9ldLh/TwLzcf/7/eOsJXkC5EMtgX0hJemh
+ u+qFD2ktuYhRyAwQh2hSeMUbb2539FoYgwo38xCua2VlJbun1WGFlE8SJUTuJD4=
+X-Google-Smtp-Source: AGHT+IFEOAzKn9FKfezfHTnE122NOl59mP0IQwapYER9dYtjoTjm3v7Pi06RQd3XdhuYZsuK4n/S0w==
+X-Received: by 2002:a17:906:db06:b0:a99:5587:2a1f with SMTP id
+ a640c23a62f3a-aa4efb75904mr4169566b.15.1732120656994; 
+ Wed, 20 Nov 2024 08:37:36 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa20dffaa0fsm794594366b.106.2024.11.20.08.37.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Nov 2024 08:37:36 -0800 (PST)
+Message-ID: <7d13e591-11bd-4ee4-a3a7-96c59a2f7b22@linaro.org>
+Date: Wed, 20 Nov 2024 17:37:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.39.157]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A63:EE_|AS2P195MB2251:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca22881b-c160-401c-aaf5-08dd0980de3d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?N6MJNqvLowKYpy4GJJ0cnwNYELdNmvmTQ+q50N6dcSbvQm1pp+naDvdH7yMI?=
- =?us-ascii?Q?WMMR8/6cbvV/soE4MRESvRTZfuXG3PUdS5ly7qS17kf3+lTR4M6nX2fUL9tS?=
- =?us-ascii?Q?av4yPbAe+5h7LU1UKkk/YSujHmWf/ILAvYCZNWzRTU2L8x6McsOHOjWTlEXB?=
- =?us-ascii?Q?wZRVl0IsrS+69ISo4U/npGVaj8Xv03H/W9uKxY/HmO0Q96b4AZ0eKeCFk4PU?=
- =?us-ascii?Q?jOYIeK0H7P3rdYR1CXu5FPUtoPXvMkncDN3Z/C9W79SBcKUT8f9SeKbgcvIT?=
- =?us-ascii?Q?F5PZ+Hk08Bg424SrYgJ2NKEmkIAElk5FeQ5ChznNz08zp5FiMs1kbRWCAttP?=
- =?us-ascii?Q?zOkzhJJGRtH6M4e6H8BqcHj1oK5DeP8TTFXaU6zfPQr/zUy4jUWfynrmjyEK?=
- =?us-ascii?Q?gVvpbk6u8//IFQjl3rtRK0Mgdp9Ls1sbmcu/r3Vc7Stumxvo5adszbC1xtZB?=
- =?us-ascii?Q?KzzANKfpT61pJq4S0K2hE/T8ImiHQoK4fwsxr7EK0YU84YLEGY0JgbnHxSWA?=
- =?us-ascii?Q?jWQTlSQw7XJCwpZBhwsGT4kYiiYCPFVFhcp+IattKcB5T5cNv86X4DlD0cga?=
- =?us-ascii?Q?FFCvQxx7+8ojTUJzpcin8ZvjCN/j8B5xT6bdtx7CZH73mFrrQL27FuDvSzVv?=
- =?us-ascii?Q?8u+P8zXox+hI3CKDrDElyaTGpxBQ7yfo6DU+m67XddeseK+y6E6Fr7GR4hZP?=
- =?us-ascii?Q?ZPJ8BjoWfsb29MVKNnULyDer8MLj4cMpiGS+R/FxKFpsIrmOh/A7XZEiBbCL?=
- =?us-ascii?Q?j58RZegiOGLxwcmRcNFEWNJnfD/f4i3ypiH+G4PCPnL2/fq9oHD5i6mA/P2V?=
- =?us-ascii?Q?Uaz3Hhij9xH83pZ32YWQ3yd+/qg8uW2nRFFigZSIV9i55FT/E/bDotTXoQ8R?=
- =?us-ascii?Q?xjzAzEWUISatdDTk3hDBKEyggd+6HJBgkjaX7Me5947QRvs+s2sXaMh+99C5?=
- =?us-ascii?Q?tYcdPcKDDcTwP+/BRxtV3NLT2NY2V/MSA0JbYM12/VdJ8k9tf8h/HeDFVSeF?=
- =?us-ascii?Q?aYI/AIVZSVrbcWkv6MEqinkZqFcpUBqQJDhIVqZa9Wqx4RYfEI/ZPVxn89AK?=
- =?us-ascii?Q?DDylbAvB2Xxl7FPpeoz16UropZKTgPI4ThiKyRTR3J5AfnsDRBGkSDujXaZ1?=
- =?us-ascii?Q?ceh+OHF88opFo2eT6i/H8MSwKfwmuCeI/QpsmvkmgnRqc57Anl7goaSC9q+L?=
- =?us-ascii?Q?dBN8gTlGmPYWWQ07IWYvtHraVgow5+3ogpsenyedvkMWsLa2wBig9YRASWRD?=
- =?us-ascii?Q?FcfFrcvNbr8G6uBAtmBZaDe9FoOrv63gzeC2Ikwfn2q3jPmKFX2Iz+1b+f2k?=
- =?us-ascii?Q?DE12jKyYXWNraEAsTieEsk9b3TQNjZP1y6ahGLm8NE2brNyGLSUlmFbW81gO?=
- =?us-ascii?Q?bT+Gcbc=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2024 16:32:04.5213 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca22881b-c160-401c-aaf5-08dd0980de3d
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00027A63.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2P195MB2251
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/3] serial: Support a disabled serial port
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng
+ <bmeng.cn@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <ravi@prevas.dk>, Robert Marko <robert.marko@sartura.hr>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20241120153554.860710-1-sjg@chromium.org>
+ <3ff334f3-b8e3-4359-9c02-a35e9a66c432@linaro.org>
+ <CAFLszTgi5uoAYgMNO_72XjU1zrTf=eAJF21a7rZpwQ=Ht+K9mw@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTgi5uoAYgMNO_72XjU1zrTf=eAJF21a7rZpwQ=Ht+K9mw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,157 +107,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The phyCORE-i.MX 93 is available in various variants (e.g. different ram
-sizes, eMMC HS400 yes/no). Enable hardware introspection for the
-imx93-phyboard-segin_defconfig, so that during startup the SOM module
-variant can be detected, and the hardware can be configured accordingly.
-The resulting SPL and u-boot binary shall able to boot each
-phyCORE-i.MX 93 module variant on each carrier board. Finally rename
-imx93-phyboard-segin_defconfig to imx93-phycore_defconfig, to highlight
-its SOM scope.
 
-Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
-Reviewed-by: Yannic Moog <y.moog@phytec.de>
----
-Cc: Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: Christoph Stoidner <c.stoidner@phytec.de>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Yannic Moog <y.moog@phytec.de>
-Cc: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Andrej Picej <andrej.picej@norik.com>
-Cc: Wadim Egorov <w.egorov@phytec.de>
----
-no Changes in v4
 
-Changes in v3:
-- add comment about SoM-scope to imx93-phyboard-segin-u-boot.dtsi
-- rebase to the latest master
-- adapt doc according to new defconfig
+On 20/11/2024 17:03, Simon Glass wrote:
+> Hi Caleb,
+> 
+> On Wed, 20 Nov 2024 at 08:56, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 20/11/2024 16:35, Simon Glass wrote:
+>>> This series provides a way to tell a serial UART that it can't actually
+>>> work, at runtime. The main motivation is to deal with a coreboot feature
+>>> where it does not provide UART details in the sysinfo structure unless
+>>> the UART is also enabled in coreboot.
+>>
+>> Why is the UART driver probed if coreboot doesn't provide the necessary
+>> info for it?
+> 
+> U-Boot doesn't do well without some sort of serial device. That could
+> perhaps be improved. But the point here is that we need a single
+> U-Boot build which can start from coreboot, regardless of what
+> coreboot decides to do.
 
-Changes in v2:
-- just rename imx93-phyboard-segin_defconfig and add needed CONFIGs,
-  instead of creating an entirely new second defconfig
-- remove wrong comment from imx93-phyboard-segin-u-boot.dtsi
-- improve commit message
+Right, I'm suggesting that at runtime you notice that coreboot didn't
+provide a serial port definition (or gave you a bogus address or
+something) and skip probing the serial port in that case.
+> 
+>>
+>> Couldn't you disable CONFIG_REQUIRE_SERIAL_CONSOLE and skip probing it?
+> 
+> No, because I want it to work if the serial info is available.
 
- arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi         | 11 +++++++++--
- board/phytec/phycore_imx93/MAINTAINERS                |  2 +-
- ...yboard-segin_defconfig => imx93-phycore_defconfig} |  2 ++
- .../{imx93-phyboard-segin.rst => imx93-phycore.rst}   |  8 ++++----
- doc/board/phytec/index.rst                            |  2 +-
- 5 files changed, 17 insertions(+), 8 deletions(-)
- rename configs/{imx93-phyboard-segin_defconfig => imx93-phycore_defconfig} (98%)
- rename doc/board/phytec/{imx93-phyboard-segin.rst => imx93-phycore.rst} (91%)
+This option doesn't disable the serial port, it just makes U-Boot not
+panic if it can't find one. For example I enable this when building
+U-Boot for the upstream supported Qualcomm phones since many don't
+enable the serial port in their DTS.
+> 
+> [..]
+> 
+> Regards,
+> SImon
 
-diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-index 702d86f4e0..0c3ca2961c 100644
---- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-+++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
-@@ -2,15 +2,22 @@
- /*
-  * Copyright (C) 2023 PHYTEC Messtechnik GmbH
-  * Christoph Stoidner <c.stoidner@phytec.de>
-+ * Copyright (C) 2024 PHYTEC Messtechnik GmbH
-  *
-  * Product homepage:
-- * phyBOARD-Segin carrier board is reused for the i.MX93 design.
-- * https://www.phytec.eu/en/produkte/single-board-computer/phyboard-segin-imx6ul/
-+   https://www.phytec.de/produkte/system-on-modules/phycore-imx-91-93/
-  */
- 
- #include "imx93-u-boot.dtsi"
- 
- / {
-+	/*
-+	 * The phyCORE-i.MX93 u-boot uses the imx93-phyboard-segin.dts as
-+	 * reference, but does only make use of its SoM (phyCORE) contained
-+	 * periphery.
-+	 */
-+	model = "PHYTEC phyCORE-i.MX93";
-+
- 	wdt-reboot {
- 		compatible = "wdt-reboot";
- 		wdt = <&wdog3>;
-diff --git a/board/phytec/phycore_imx93/MAINTAINERS b/board/phytec/phycore_imx93/MAINTAINERS
-index cea817ffdc..718f89a084 100644
---- a/board/phytec/phycore_imx93/MAINTAINERS
-+++ b/board/phytec/phycore_imx93/MAINTAINERS
-@@ -9,5 +9,5 @@ F:      arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
- F:      board/phytec/phycore_imx93/
- F:      board/phytec/common/imx93_som_detection.c
- F:      board/phytec/common/imx93_som_detection.h
--F:      configs/imx93-phyboard-segin_defconfig
-+F:      configs/imx93-phycore_defconfig
- F:      include/configs/phycore_imx93.h
-diff --git a/configs/imx93-phyboard-segin_defconfig b/configs/imx93-phycore_defconfig
-similarity index 98%
-rename from configs/imx93-phyboard-segin_defconfig
-rename to configs/imx93-phycore_defconfig
-index 309262c430..cf9800118a 100644
---- a/configs/imx93-phyboard-segin_defconfig
-+++ b/configs/imx93-phycore_defconfig
-@@ -6,6 +6,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x20000
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
-+CONFIG_PHYTEC_SOM_DETECTION=y
- CONFIG_ENV_SOURCE_FILE="phycore_imx93"
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x700000
-@@ -31,6 +32,7 @@ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x88000000
- CONFIG_SYS_MEMTEST_START=0x80000000
- CONFIG_SYS_MEMTEST_END=0x90000000
- CONFIG_REMAKE_ELF=y
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; then run mmcboot; else run netboot; fi; fi;"
-diff --git a/doc/board/phytec/imx93-phyboard-segin.rst b/doc/board/phytec/imx93-phycore.rst
-similarity index 91%
-rename from doc/board/phytec/imx93-phyboard-segin.rst
-rename to doc/board/phytec/imx93-phycore.rst
-index ce17fbec78..bd110a3ebe 100644
---- a/doc/board/phytec/imx93-phyboard-segin.rst
-+++ b/doc/board/phytec/imx93-phycore.rst
-@@ -1,9 +1,9 @@
- .. SPDX-License-Identifier: GPL-2.0+
- 
--phyBOARD-Segin-i.MX93
--=====================
-+phyCORE-i.MX 93
-+===============
- 
--U-Boot for the phyBOARD-Segin-i.MX93.
-+U-Boot for the phyCORE-i.MX 93.
- 
- Quick Start
- -----------
-@@ -51,7 +51,7 @@ Build U-Boot
- 
- .. code-block:: bash
- 
--   $ make imx93-phyboard-segin_defconfig
-+   $ make imx93-phycore_defconfig
-    $ make
- 
- Burn the flash.bin to MicroSD card offset 32KB:
-diff --git a/doc/board/phytec/index.rst b/doc/board/phytec/index.rst
-index 99848a9e95..fa30697464 100644
---- a/doc/board/phytec/index.rst
-+++ b/doc/board/phytec/index.rst
-@@ -7,7 +7,7 @@ PHYTEC
-    :maxdepth: 2
- 
-    imx8mm-phygate-tauri-l
--   imx93-phyboard-segin
-+   imx93-phycore
-    phycore-am62x
-    phycore-am64x
-    phycore-imx8mm
 -- 
-2.34.1
+// Caleb (they/them)
 
