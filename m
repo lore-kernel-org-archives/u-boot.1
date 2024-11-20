@@ -4,88 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E09D711B4
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48306D711B4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:45:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 696F28933E;
-	Wed, 20 Nov 2024 16:37:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D8AD68932B;
+	Wed, 20 Nov 2024 16:45:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PJyATu6A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QccN428D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF8CB89348; Wed, 20 Nov 2024 16:37:45 +0100 (CET)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id AF42187042; Wed, 20 Nov 2024 16:37:50 +0100 (CET)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E34087042
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:37:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60435892C6
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:37:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-71e79f73aaeso1815045b3a.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:37:43 -0800 (PST)
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-71e681bc315so825221b3a.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:37:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732117062; x=1732721862; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732117067; x=1732721867; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5uidUdmQiMP3tO9L91LmykUXJgIQym+KV3jeXnclG0E=;
- b=PJyATu6AaCCVvOKSLPfnfh/meGCsYEJ/TtLyuhirgnRni6tnGahalqFyddzCZM61Z+
- TwX46njNPYLkwWAm+TZ/LdoclX/CAu/uaq7FA74gxKZuvCPCo1sjBbSb2OUhAYUwvRTX
- JDTRjim+Xekf5Sdlexer/jyyWVv7UqU73Qe8o=
+ bh=qm2u4t46+8tjKn4fdlpHrukIxNf6eqhjqdxEX3pK+bk=;
+ b=QccN428D2eEIdKMeC2VJhUYFXPIzKK/kGYdFdaOC2jQgo8m4Mv01t0bIRXJEtxIDrq
+ 77yayKt4cRWRRzWx/tou5OWyJDHh9GXD7ppXGrUyU0O/OUwe9MQohclwNuZMEpGdAker
+ babQ5gsymeRh157BD4skMD+PzOYOnLWLqEDf8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732117062; x=1732721862;
+ d=1e100.net; s=20230601; t=1732117067; x=1732721867;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5uidUdmQiMP3tO9L91LmykUXJgIQym+KV3jeXnclG0E=;
- b=qYa+eLsxDxbF+TcfwqtAk6WDQKS/TDL3J3XKzfmxKTvG/rwQosi2j/3cRwaloeieLw
- dhZULkgz3Q+ZxCfqO0FmmvecK0pMmf8apwjqjCK3KcrhzyLYJA3u0Pp6dSrLAv6Om2tI
- RpJoNw9NiUuokH1WLlnnw6sNaH43kXfJ6ssK+di+9kFbiBcXd3sHH7AnBxNxiueQ8uBe
- rhVWsiPqGgifYW61TFObrQdVcDX1A+unLH0MgZ7gCa51SyaqW4OrUGWex3VjuIMzDygG
- OAi7WQKgQjiiDpg6zNLsVyWibLGyNQMAJ8gpotDRTjmkcR+SEotz4HJSmq55YbiRjWMO
- TuEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCURmcBDmZJqoY5ObtH9LgxpWI6CC9yUcRkjE08BYz9ceWUBd4QHPmf143EXokjhkLipIVyDCzE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3CmkkkyHQU4XJxdLdLnIpgn0ZUAWNSJ0QC9lSO+pq8R08oP8y
- Q+Mzpxi6KodHZzb9E4HTsogqMdLmfh1RpiX8wMG7ag95B5Zxa7F41IeyuJRh14MOF4qos+sTh7f
- a40ACa/+rNAH9CEd5E40DQ745FZVhcO5ix1c4
-X-Gm-Gg: ASbGncvDW71m5iUMyBYMsgatHOrxGhM+y9oH00xQodZnMftScU02/meW6KhBoELRmUB
- jU2CAqsMofMfnrUBXoRtdv8RrrNv/uwc=
-X-Google-Smtp-Source: AGHT+IHBv2WkYm/aalcbMzl4hN1YtA0mf93vLRPgTCVH14qKn+66m0G1O4bcKbdcgac2fKPBVyg3jb5k82kh7iL7WPM=
-X-Received: by 2002:a05:6a00:4f86:b0:724:5c66:ecbd with SMTP id
- d2e1a72fcca58-724bed8e59dmr4265891b3a.23.1732117061953; Wed, 20 Nov 2024
- 07:37:41 -0800 (PST)
+ bh=qm2u4t46+8tjKn4fdlpHrukIxNf6eqhjqdxEX3pK+bk=;
+ b=mUMCia4aDiad4MzecEIyTWAZvWVowH4BHu6lV01ni80fyoq5LkZ9sfVrHCJvq5q9Cg
+ uirJ8JqWkQZyLS4L8KPHrmjDv5Q3XnBbtePmgEmRVJdixjkNiLe89DnjE1DAp/VZ9JR1
+ r1msnr088oNfxYcT3NOHH5v28vJsdfBUpnH8pWgAPtXCU3hOUm1J3FZEPLC3bWE49qQg
+ kJkKlRnSjyXT8T9q+wu4Olgw5M1fL2UXgkAqoV//fobC0YewPF8Xj+ZjFavPqmYshzV3
+ shnVqz8pYrkFIlVhlm265yAioHZCBltLFVIobtB+gsWpT9/ikA69BON+HwRqZt7fQSUg
+ iaKA==
+X-Gm-Message-State: AOJu0YwU2PRxwcaVM/2P/5T2CcqqjGSw/RlF8YwykZnF3BbK5t2GPTMa
+ /fXwWJlP8wq9VXJj8xUD9skWIqhVF0PoY3dBrcoVfMuwzBWsRFPHdih1PtoH4VQiXfAeQW4WDPi
+ eSJbz0Gkt2bZaVeNEz/BXCiBFPcHnEigfutg8
+X-Google-Smtp-Source: AGHT+IGdeEWz6OxThQRJPbtMMDvWrJzu9zso6J0KJ1FIgJ9u0WdTeKjnOpydzyKpl0YrSN/kqs2QBEhJYs6TPmvBGEk=
+X-Received: by 2002:a05:6a00:189e:b0:724:5b8d:f451 with SMTP id
+ d2e1a72fcca58-724af8f6844mr11209938b3a.6.1732117066938; Wed, 20 Nov 2024
+ 07:37:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20241028124815.47262-1-sjg@chromium.org>
- <20241028124815.47262-11-sjg@chromium.org>
- <A00AAF0F-5E6B-4DE3-B18A-DD564026D3A8@gmx.de>
- <CAFLszTj9EhCKkxjBotx-CvuKjuV2T7C6CyJTpHB59nerLavKjA@mail.gmail.com>
- <00941595-FD52-44B3-B618-CCC43F7342CB@gmx.de>
- <20241031223757.GI3600562@bill-the-cat>
-In-Reply-To: <20241031223757.GI3600562@bill-the-cat>
+ <CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com>
+ <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
+ <CAC_iWjJkAfJHp_NDXJMfNPe7OhBp6B_WBMxvwU_qHU5tamm6ZA@mail.gmail.com>
+ <CAFLszTiL88dHANMHo1bK2Uj5K1-7B56_Uk8keSQTo6FUfUoOVQ@mail.gmail.com>
+ <CAC_iWjJOFv1v5VPoJ2UEu1YR84i1GUdB7tEng-uqgZ+6o_XWZw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJOFv1v5VPoJ2UEu1YR84i1GUdB7tEng-uqgZ+6o_XWZw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 08:37:25 -0700
-Message-ID: <CAFLszTi5rWx-hc5FnzWqq4oz-6oPdqKLYf8SwrfUq_ATBVi_XA@mail.gmail.com>
-Subject: Re: [PATCH 10/15] efi_loader: Add support for logging EFI calls
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Date: Wed, 20 Nov 2024 08:37:14 -0700
+Message-ID: <CAFLszThCONSk2v30pGDGyGjz9mz2X0mtpqGCWSZJdbAuDaT0bw@mail.gmail.com>
+Subject: Re: [PATCH 00/15] efi_loader: Add support for logging to a buffer
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
  Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Sean Anderson <seanga2@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Wei Ming Chen <jj251510319013@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 20 Nov 2024 16:45:28 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,47 +113,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+HI Ilias,
 
-On Thu, 31 Oct 2024 at 16:38, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 1 Nov 2024 at 05:32, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Thu, Oct 31, 2024 at 11:30:58PM +0100, Heinrich Schuchardt wrote:
-> >
-> >
-> > Am 31. Oktober 2024 19:01:47 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > >Hi Heinrich,
-> > >
-> > >On Tue, 29 Oct 2024 at 23:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >>
-> > >>
-> > >>
-> > >> Am 28. Oktober 2024 13:48:01 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > >> >The current logging system suffers from some disadvantages, mainly that
-> > >> >it writes its output to the console and cannot be easily reviewed.
-> > >> >
-> > >> >Add a dedicated log, storing records in a binary format and including
-> > >> >the result codes and any return values from each call. The log is built
-> > >> >sequentially in memory and can be reviewed after any EFI operation. It
-> > >> >could potentially be written to media for later review, but that is not
-> > >> >implemented so far.
-> > >>
-> > >> An EFI specific solution is not a good approach as it does not scale to other parts of the code.  Please, implement a log driver to collect the messages that you are interested in.
-> > >>
-> > >
-> > >I can do that too, but it isn't as easy to programmatically parse. I'd
-> > >like to track what calls are made and understand better what is going
-> > >on when Ubuntu boots, etc.
-> >
-> > What makes calls to log_debug hard to parse? We have __FILE__, __LINE__, __func__, and message text available as individual fields.
-> >
-> > What information are you missing?
-> >
-> > For tracking function calls we already have a trace capability in U-Boot.
+> Hi Simon,
 >
-> Integrating EFI_LOADER with existing U-Boot logging / tracing
-> infrastructure sounds like a reasonable path forward to me.
+> On Thu, 31 Oct 2024 at 20:02, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Tue, 29 Oct 2024 at 19:32, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Tue, 29 Oct 2024 at 17:45, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Tue, 29 Oct 2024 at 10:58, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > It is a bit of a pain to log EFI boot-services calls at present. The
+> > > > > > output goes to the console so cannot easily be inspected later. Also it
+> > > > > > would be useful to be able to store the log and review it later, perhaps
+> > > > > > after something has gone wrong.
+> > > > > >
+> > > > > > This series makes a start on implementing a log-to-buffer feature. It
+> > > > > > provides a simple 'efidebug log' command to inspect the buffer. For now,
+> > > > > > only memory allocations are logged.
+> > > > >
+> > > > > Why is this problem specific to EFI and no U-Boot in general? Do we
+> > > > > have a similar machinery for malloc()?
+> > > >
+> > > > Mostly because an app can make EFI calls and we want to know what they
+> > > > are, e.g. to debug them and figure out what might be wrong when
+> > > > something doesn't boot.
+> > >
+> > > EFI_PRINT() has been proven pretty useful for this. I don't personally
+> > > see the point of adding ~1300 lines of code to replace a print.
+> > > What would make more sense is teach EFI_PRINT to log errors in a buffer.
+> >
+> > Is that a NAK? Please be clear if you are reviewing the code or just
+> > rejecting the whole idea.
+>
+> For the idea, no. But I don't think what's implemented here is what we want.
+>
+> To track what EFI services are called, we already have EFI_ENTRY and EFI_EXIT.
+> Why don't we instead, add a logging service (and we already have
+> ftrace iirc) and plug it in the macros above?
+> That would make more sense not to mention way less code.
 
-Yes, we already have that. I replied to Ilias' response elsewhere.
+I am wanting to programmatically log and manage what EFI_LOADER does,
+so that bootstd can present a high-level view of what is going on,
+e.g. which protocols are used, how much memory is allocated and where.
+So this is not just about logging text output.
+
+>
+> >
+> > I am hoping to expand this into a debugging tool for figuring out how
+> > to boot Windows and perhaps logging detailed information when things
+> > go wrong, for later analysis. It might seem like overkill, but we will
+> > see.
+>
+> I've managed to run windows installers on QEMU & U-Boot. It's been
+> more than a year but windows boots and calls EBS(). The something
+> fails down the road.
+> I think I have a branch somewhere with the changes needed, I'll send
+> it over if I find it.
+
+Did you find it?
 
 Regards,
 Simon
