@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5830D63934
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 12:40:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BDFED63933
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 12:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C92895D7;
-	Wed, 20 Nov 2024 13:40:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE3C9896B0;
+	Wed, 20 Nov 2024 13:40:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LVehU/PR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SPfoLbB3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 481C9896A6; Wed, 20 Nov 2024 13:40:49 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 0128489671; Wed, 20 Nov 2024 13:40:58 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DED3C8932B
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 13:40:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAFCA896B0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 13:40:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9ed7d8c86cso1080321766b.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 04:40:46 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa3a79d4d59so334221866b.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 04:40:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732106446; x=1732711246; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732106454; x=1732711254; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nxrvbXSjyp8kL+ntZgb12bDnlU5No5uA35K0hJcGqVs=;
- b=LVehU/PRdDJgRnO4FSLuueQO+/M1blzdUdXHdcTEuWR1O3YWCzQwC80olRFX1xGDgw
- 0LyeWBCGQeUvhinMjOnEkrUliKTlz4IrEO82ykd09kyhHST4Byt07UkfOpkpPDdQ1GuN
- ji9epeGwolhuNdrcUHq/nsVBttOOMUrNH5k9g=
+ bh=aubYkgD3KEHUfiYfXHTONPN8NxmrkZf0zp4EE35MkZQ=;
+ b=SPfoLbB39f81PH0GvlzJION1kKDoHl1LD4ZhaMUrkE11hbr7BUuBc+eFt05McrrUu1
+ WvzwRc0VgWf+FdcXS4gvacDqaDUJ8CwDmvmJbS926gJKANhlh1mtj7picjqP1zlAjkg4
+ Vnt3/F5zAyBq8JuhY5VVSM+kB9l9vFr4Hufws=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732106446; x=1732711246;
+ d=1e100.net; s=20230601; t=1732106454; x=1732711254;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nxrvbXSjyp8kL+ntZgb12bDnlU5No5uA35K0hJcGqVs=;
- b=MlUHCI8SUSnB5CN4bnCY76bXkH7HfZI2X6YAOsf0gdBVQfRPRhynyKSC9nPczH4jgj
- ABAKy8PP4AdAaCboSov8/bMg64z2W7qASvUDcPzES5febCQXDQVDvHu6NpColh6nfJhI
- PIETkRLDZfU53wQySlNOn4ZmSfq3T+t3fa3KXQo02aY5Qz/rOMehXxOkJV7AUG8Dh8ad
- 7x371p1IuG3bUhvngA50sNrWM4z6tnFhgVs8SplQc5dHVE0pBE4pBPoce9mSGqTd7fG8
- +qoy1El225Zjz65Vg8k3qjA3CFWmVDEBP9A4UkHmk/PA5X//W3WTelBWasBngNuufi5x
- ybdg==
+ bh=aubYkgD3KEHUfiYfXHTONPN8NxmrkZf0zp4EE35MkZQ=;
+ b=sJq9hjiKV5W35GBGRMCHmQ+9UnCOQ9S9JIriq2s6d7d0kRy0madI0+qad3YfLj4pX2
+ rgIGJ+zqL3KXzSlK9ouOI9VaJb5sppuhQG0HkCNh5WLaZacLhs+n10xvqrHeySSXwYdD
+ GumM+v2jRtSUh+QPiR8cp7xiq/RMAAMOGBcEyyo7M/puwnnJP+mOIDJfDbufY0Wg5im+
+ wft83MYv8TOPkslAdhojC56ZcOFrMdJB1/QIoDwxvLd7sSh+TfcjGCI2EI/r2ApFZjZ6
+ agxacHqkhL/anPY2JvzKcbBuxqEQcOmqR8ZXMcLnVT42jrQxoplA6eqmd7CyRWVj9JDV
+ 6EGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc64IaZoV4UfOcEqAOw4xcnUxfc/47+Mjg11l6A37ifpeZXRgNmCIyQtpl0WZ722Hj0KzQ0vw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKSURNUI1oF839F4cfj/rjQkSlo4sdts2jCONW6EP5VilEkF1F
- spsbGKwibWtosWQ9449KuXrlardT7RyhbMU732KIGoQnMUODFKCLlv+4ECkfJQ79+/qXjvgl5Qa
- 7Peaxb+7re0D72lAIU3DK6RcpMFo+QIYz0zfO
-X-Google-Smtp-Source: AGHT+IHTy4g4VWnXjuFW9H+cHJguV0hWroWJOc9KVdHacnDkSQ65eIDDTHLmvMdWrtcu6jmpFvUkHGPgKqcS3E2JaTw=
-X-Received: by 2002:a17:906:ee86:b0:a9a:10c9:f4b8 with SMTP id
- a640c23a62f3a-aa4dd76f714mr224914366b.61.1732106446272; Wed, 20 Nov 2024
- 04:40:46 -0800 (PST)
+ AJvYcCX3z02uKQ4W/ySax4U+5XONrNQNhxc1+atll41mTPzt8rFJkvPMHIz/oJpBI4/RjJ6X1316tIE=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywgo7OkLTEtg6P8+EE0MjNflSs0J2MmRbQ2ZcsKWKWgnLwbu+7k
+ IyNGSh6MzxcHxrsyFnYvFcgnxaDrXXGg5hq+IMJFFIn72rEDFWi8ufss0NP1l3y/W4ofVQCg1B4
+ tELN7DKw18MofhM0Ad71x7/Ey7/49aT8S9L/BYlS5n9w7xXQ=
+X-Gm-Gg: ASbGncuLVlJwA4FV48EFEOdaY6yqr4LtdPnpU9j68oFsIyOq6G+qr6txMlxIUFbXdfZ
+ +hK31LlEQxmE5HrgKmuTUS8ljM/AbJnA=
+X-Google-Smtp-Source: AGHT+IEQlDO55L0gLiAsbbS8qJ202c1Wr+3AaR4maOQC5xsgjmn2CIYqOFVmg8ReRRLaIws304ekD4F/Dvxb7jn3ne4=
+X-Received: by 2002:a17:906:fe4a:b0:a9a:835b:fc8e with SMTP id
+ a640c23a62f3a-aa4dd748bacmr238224066b.54.1732106454450; Wed, 20 Nov 2024
+ 04:40:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20241119195039.15177-1-mibodhi@gmail.com>
-In-Reply-To: <20241119195039.15177-1-mibodhi@gmail.com>
+References: <20241021073749.63-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-1-brian.ruley@gehealthcare.com>
+ <20241030080753.129-2-brian.ruley@gehealthcare.com>
+ <CAOMZO5CC683+5_xohQw_F0kuiE9mmL2PqjqHk66A1oUXje=oSQ@mail.gmail.com>
+ <ZyiGvONusmq03cBO@zoo11.em.health.ge.com>
+In-Reply-To: <ZyiGvONusmq03cBO@zoo11.em.health.ge.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 05:40:33 -0700
-Message-ID: <CAFLszTjG+o=-1tr_dSf4EsOGSazRFdnSJ_VsMFR9k+vntcdRuA@mail.gmail.com>
-Subject: Re: [PATCH] arm: kirkwood: Enable bootstd for Sheevaplug board
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Wed, 20 Nov 2024 05:40:42 -0700
+Message-ID: <CAFLszTj=AfwqRU=ON4psoJR8Rdu=c3RtPzzSKDsX_BoteWHZFw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] binman: expand test coverage to nxp_imx8mcst
+To: Brian Ruley <brian.ruley@gehealthcare.com>
+Cc: Fabio Estevam <festevam@gmail.com>, ian.ray@gehealthcare.com,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,112 +90,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Hi Brian,
 
-On Tue, 19 Nov 2024 at 12:50, Tony Dinh <mibodhi@gmail.com> wrote:
+On Mon, 4 Nov 2024 at 01:33, Brian Ruley <brian.ruley@gehealthcare.com> wrote:
 >
-> Enable bootstd for Sheevaplug board.
-> Remove JFFS2 support. See JFFS2 Vulnerability[1].
-> Enable LTO to keep board size within limit.
+> On Wed, Oct 30, 2024 at 09:23:46AM -0300, Fabio Estevam wrote:
+> >
+> > WARNING: This email originated from outside of GE HealthCare. Please validate the sender's email address before clicking on links or attachments as they may not be safe.
+> >
+> > Hi Brian,
+> >
+> > On Wed, Oct 30, 2024 at 5:08???AM Brian Ruley
+> > <brian.ruley@gehealthcare.com> wrote:
+> > >
+> > > Add coverage for IMX8M code siging. Create PKI tree and other assets
+> > > required by `cst' using `hab4_pki_tree.sh' script and `srktool' in
+> > > `cst_3.4.1' [1].
+> > >
+> > > [1] https://www.nxp.com/webapp/Download?colCode=IMX_CST_TOOL_NEW
+> > >
+> > > Signed-off-by: Brian Ruley <brian.ruley@gehealthcare.com>
+> > > ---
+> > > Changes for v4:
+> > > - Rebased on master:
+> > >     340_nxp_imx8mcst.dts -> 343_nxp_imx8mcst.dts
+> > >     341_nxp_imx8mcst_fast_auth.dts -> 344_nxp_imx8mcst_fast_auth.dts
+> >
+> > Here is the result when I tried applying and testing this:
+> >
+> > $ git am ~/Downloads/v4-1-2-binman-nxp_imx8mcst-read-certificates-from-input-path.patch
+> > Applying: binman: nxp_imx8mcst: read certificates from input path
+> > Applying: binman: expand test coverage to nxp_imx8mcst
+> > .git/rebase-apply/patch:206: trailing whitespace.
+> >             X509v3 Basic Constraints:
+> > .git/rebase-apply/patch:208: trailing whitespace.
+> >             Netscape Comment:
+> > .git/rebase-apply/patch:210: trailing whitespace.
+> >             X509v3 Subject Key Identifier:
+> > .git/rebase-apply/patch:212: trailing whitespace.
+> >             X509v3 Authority Key Identifier:
+> > .git/rebase-apply/patch:333: trailing whitespace.
+> >             X509v3 Basic Constraints:
+> > warning: squelched 7 whitespace errors
+> > warning: 12 lines add whitespace errors.
+> >
+> >
+> > $ ./tools/binman/binman test testNxpImx8mCstFastAuth
+> > ======================== Running binman tests ========================
+> > E
+> > ======================================================================
+> > ERROR: testNxpImx8mCstFastAuth (binman.ftest.TestFunctional)
+> > Test that binman can sign an iMX8M image using fast authentication
+> > ----------------------------------------------------------------------
+> > ValueError: Error -11 running 'cst -i
+> > /tmp/binman.tf697xr9/nxp.csf-config-txt.nxp-imx8mcst -o
+> > /tmp/binman.tf697xr9/nxp.csf-output-blob.nxp-imx8mcst':
+> >
+> > ----------------------------------------------------------------------
+> > Ran 1 test in 1.318s
+> >
+> > FAILED (errors=1)
+> >
+> > Any ideas?
 >
-> [1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-cat/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
+> Hi Fabio,
 >
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
+> Strange, but I don't have a clue. I was able to find the bit of Python
+> where things go wrong in my reply to Simon:
 >
->  configs/sheevaplug_defconfig | 16 ++--------------
->  include/configs/sheevaplug.h | 20 +++++++++++++++-----
->  2 files changed, 17 insertions(+), 19 deletions(-)
+> > Odd, -11 means that is the resouce is temporarily unavailable, no? I
+> > don't see how that could be caused by my changes. I managed to trace it
+> > to line 367 in `tools/u_boot_pylib/tools.py`, which takes us to
+> > the run_pipe() function in `tools/u_boot_pylib/commands.py`, where we
+> > wait on a pipe:
+> >
+> >    108:    result.return_code = last_pipe.wait()
+>
+> I also described the environment I was running:
+>
+> > I've compiled the NXP Code Signing tool myself from version 3.4.1
+> > and added that to path. The system I'm running on is:
+> >
+> >    cat /etc/fedora-release && uname -msrv
+> >    Fedora release 40 (Forty)
+> >    Linux 6.10.12-200.fc40.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Sep 30 21:38:25 UTC 2024 x86_64
+> >
+> > Also, prior to running any tests, I've built the `tools-only_defconfig`.
+> > I admit that I find the test suites sightly confusing, so I might have
+> > missed something.
+>
+> I can try to run it in different environment to see if I can reproduce
+> the issue.
 
-Can I suggest that you move to a test-based environment, too?
+I believe this is something wrong with the tool. This is on Ubuntu 22.04:
 
->
-> diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
-> index 9ac40b9e57..a7f6c73ecb 100644
-> --- a/configs/sheevaplug_defconfig
-> +++ b/configs/sheevaplug_defconfig
-> @@ -16,16 +16,14 @@ CONFIG_ENV_OFFSET=0x80000
->  CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-sheevaplug"
->  CONFIG_SYS_LOAD_ADDR=0x800000
->  CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
-> +CONFIG_LTO=y
->  CONFIG_HAS_BOARD_SIZE_LIMIT=y
->  CONFIG_BOARD_SIZE_LIMIT=524288
-> +CONFIG_BOOTSTD_FULL=y
->  CONFIG_BOOTDELAY=3
-> -CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; bootm 0x6400000;"
->  CONFIG_USE_PREBOOT=y
->  # CONFIG_DISPLAY_BOARDINFO is not set
-> -CONFIG_HUSH_PARSER=y
->  CONFIG_SYS_MAXARGS=32
-> -CONFIG_CMD_BOOTZ=y
->  # CONFIG_BOOTM_PLAN9 is not set
->  # CONFIG_BOOTM_RTEMS is not set
->  # CONFIG_BOOTM_VXWORKS is not set
-> @@ -35,19 +33,10 @@ CONFIG_CMD_MMC=y
->  CONFIG_CMD_NAND=y
->  CONFIG_CMD_SATA=y
->  CONFIG_CMD_USB=y
-> -CONFIG_CMD_DHCP=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_EXT4=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_FS_GENERIC=y
-> -CONFIG_CMD_JFFS2=y
->  CONFIG_CMD_MTDPARTS=y
->  CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
->  CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:512K(uboot),512K(env),4M(kernel),-(rootfs)"
->  CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->  CONFIG_OF_CONTROL=y
->  CONFIG_ENV_OVERWRITE=y
->  CONFIG_ENV_IS_IN_NAND=y
-> @@ -68,6 +57,5 @@ CONFIG_DM_RTC=y
->  CONFIG_RTC_MV=y
->  CONFIG_USB=y
->  CONFIG_USB_EHCI_HCD=y
-> -CONFIG_USB_STORAGE=y
->  CONFIG_LZMA=y
->  CONFIG_BZIP2=y
-> diff --git a/include/configs/sheevaplug.h b/include/configs/sheevaplug.h
-> index 4e0b3c663c..c08d29892c 100644
-> --- a/include/configs/sheevaplug.h
-> +++ b/include/configs/sheevaplug.h
-> @@ -12,13 +12,23 @@
->
->  #include "mv-common.h"
->
-> +#define KERNEL_ADDR_R  __stringify(0x800000)
-> +#define FDT_ADDR_R     __stringify(0x2c00000)
-> +#define RAMDISK_ADDR_R __stringify(0x01100000)
-> +#define SCRIPT_ADDR_R  __stringify(0x200000)
-> +
-> +#define LOAD_ADDRESS_ENV_SETTINGS \
-> +       "kernel_addr_r=" KERNEL_ADDR_R "\0" \
-> +       "fdt_addr_r=" FDT_ADDR_R "\0" \
-> +       "ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
-> +       "scriptaddr=" SCRIPT_ADDR_R "\0"
->  /*
->   *  Environment variables configurations
->   */
-> -#define CFG_EXTRA_ENV_SETTINGS "x_bootargs=console"    \
-> -       "=ttyS0,115200 mtdparts=" CONFIG_MTDPARTS_DEFAULT       \
-> -       "x_bootcmd_kernel=nand read 0x6400000 0x100000 0x400000\0" \
-> -       "x_bootcmd_usb=usb start\0" \
-> -       "x_bootargs_root=root=/dev/mtdblock3 rw rootfstype=jffs2\0"
-> +#define CFG_EXTRA_ENV_SETTINGS \
-> +       LOAD_ADDRESS_ENV_SETTINGS \
-> +       "fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> +       "mtdparts=" CONFIG_MTDPARTS_DEFAULT "\0" \
-> +       "console=ttyS0,115200\0"
->
->  #endif /* _CONFIG_SHEEVAPLUG_H */
-> --
-> 2.39.5
->
+$ binman test -X testNxpImx8mCst
+======================== Running binman tests ========================
+Preserving output dir: /tmp/binman.imy5s98_
+Preserving input dir: /tmp/binmant.izmi883v
+E
+======================================================================
+ERROR: binman.ftest.TestFunctional.testNxpImx8mCst (subunit.RemotedTestCase)
+binman.ftest.TestFunctional.testNxpImx8mCst
+----------------------------------------------------------------------
+testtools.testresult.real._StringException: Traceback (most recent call last):
+ValueError: Error -11 running 'cst -i
+/tmp/binman.imy5s98_/nxp.csf-config-txt.nxp-imx8mcst -o
+/tmp/binman.imy5s98_/nxp.csf-output-blob.nxp-imx8mcst':
 
-REgards,
+
+----------------------------------------------------------------------
+Ran 1 test in 0.157s
+
+FAILED (errors=1)
+
+$ cst -i /tmp/binman.imy5s98_/nxp.csf-config-txt.nxp-imx8mcst -o
+/tmp/binman.imy5s98_/nxp.csf-output-blob.nxp-imx8mcst
+Install SRK
+Install CSFK
+Segmentation fault
+
+So the tool is segfaulting, for some reason.
+
+Regards,
 Simon
