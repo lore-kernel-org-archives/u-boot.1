@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5551FD6393C
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9794D63939
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3179892B8;
-	Wed, 20 Nov 2024 14:47:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49F5189555;
+	Wed, 20 Nov 2024 14:47:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AlxRnP8d";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dWTn5lqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4791B89327; Wed, 20 Nov 2024 14:47:11 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 39AE5893F9; Wed, 20 Nov 2024 14:47:22 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A4918916D
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:47:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4A7E895F1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-71e79f73aaeso1669263b3a.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:47:08 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-21260209c68so6396375ad.0
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:47:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732110427; x=1732715227; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732110438; x=1732715238; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k5kmnHDiVzwHZgebek9b2kPB5VpTl1lsC0SnSoG551k=;
- b=AlxRnP8dlsH6thqhjJBGZSxnf7BxadJ2ug8+krRridoSGN2y9dCrvSqpo1669dp9Ik
- bYdXwJcPSNtw2Vo5whvJC5wCaUnWFTnuCL+bmlPF03Xwo3bzPvMgNDWDFUk1bD6iTlWx
- 04REsCg2bhMFNLgBSu91197B21TC7k3B2hQnw=
+ bh=d4OD/EazqY26aNpzScRzbmhyP6/8Ec3apNHB1EG6Fo8=;
+ b=dWTn5lqkAc9Qbc8+uvjb4BNQl+TRFnuMTfgdcIbCb5VVRZMXp/eMlSxHt0peG8dDAI
+ 8sY7mRA1stiAJVkWZM0VE5NbAZCAZuBId1vpThKAbBmWjGWFQ/576tht1iYDT8qLrGe6
+ mVJexg1bHA6sR3TWJ6gcBalggQ1Yk4DB3ZJ+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732110427; x=1732715227;
+ d=1e100.net; s=20230601; t=1732110438; x=1732715238;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k5kmnHDiVzwHZgebek9b2kPB5VpTl1lsC0SnSoG551k=;
- b=urqbw5kZzepAs0Cejl/mO/t0xQMEFIKv2xnY7P2KWVJfDZ0Gwlj8CVq6PADPN5w2YA
- hR1IX5s9ektsundBHJ/bHQo2Od68uiHTp5f3ykzOkqpj0QJV316Wl9rg7UEAr/W+8voz
- oqhuFAbtZkyOtNHuoNtyehc2x0e++B5OeW6FvMbW9hCs7Up6liRL7qix0Y5v5dtCL3ZD
- s5sCF40u1JhsG3c5drRfkJo0kkvr3FAXPV778tzoiOOmGTQu4gS7pDpBK3n0JuF34zbe
- w6/hP9UdMu4YqfzAvMYup0UcX56TpUHoOjg4GmOJxjTxrSqrMvlrZGgj83LGR7awNIij
- v4kg==
-X-Gm-Message-State: AOJu0YyKntU9vGXPt25zdQ6T041Jer+jXHgd0wyz89kyXj9QW4j7gBii
- C9cS2ODpJCkpGzZjfsVRFAv9eeEaMM6Uyx3i3baBmSFxFvNNYzGl7GWQR8jiZoR+wCbAzaUgbli
- CGkzGrKftzhixBOOSRuLs451XjcKMRx8MYvhk
-X-Gm-Gg: ASbGnct0PvCz49MsF6KmdQcTpy/h5ptTL8ywJfFBOyz1O8xERLnVLldlfqGPFOXE5hJ
- 7BDtuX9PZS016VA5ddnTqAhFLQMzy9Hk=
-X-Google-Smtp-Source: AGHT+IEyYJBPzGWA2XZ/fx6fkSXut/m7RDnvZ2cZkq5eqCO5LfCDZduMPXGz4obe1Ex7s83R10ivue/twBFykdJrEgQ=
-X-Received: by 2002:a05:6a00:1d0c:b0:724:bf30:2d39 with SMTP id
- d2e1a72fcca58-724bf302dc4mr2733388b3a.7.1732110426903; Wed, 20 Nov 2024
- 05:47:06 -0800 (PST)
+ bh=d4OD/EazqY26aNpzScRzbmhyP6/8Ec3apNHB1EG6Fo8=;
+ b=CmbH7tudJRELYo7PonzggWsFxe1HaF6TXyFyON5tOWTwRD8o8XCsYBixFzdN1eT3Ry
+ YOdH+FdMy4Bybpf3FlsSSnviivoPB6jujq6ZL4s3UFEmkP5olX7wOGqqvM/4QSnXsjpK
+ //plbFtbDCrMGoZjtecnXpG4HL4Iz00SjAalcEdmPIKBDYqUQzZBJpzbc9qzhw9QKvJ/
+ fekZQgaf7grvCop8/4E2WkMpqryRv7cLerFeOKGu/VWuCE4Td1rd2xw/ygdKoJA2wgYl
+ ANckIm2Epx8qbnB5wAWJPa7jQ8Sd/9UuaKOoTYuFpPiURH2nkEolkSvXrdk8LQ6gfxOq
+ n8VQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUZw+pkBo79VDDprOZ8DR7R34Kdt9bmWolr8r+xGy9DGM+o2A4pAlMpYJCHtQw5FaQdfE84oDc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/MUGq8Y+CEIAFXCLqmjtjs9t5FxpQutJ0rNngMM6a1wH2WrFF
+ uM0TOdapWbG7HTXzML6abEFWQdzoOZbQAo/W4wCmILDDS9J7ZMCShDg+r11QFfOt5zlU1XDqOg8
+ HELAYUOQGNJ9oh7gunE4hwWMuORDAmKTu7z8a
+X-Google-Smtp-Source: AGHT+IGt9yhOyr1u/ENMB8ekQZqeFSL1ZHIV+/xf7jt2dP1BWewhuQ0yXUMDyWWV+iolFDB5lUZYHmjn4QH5UPEVlIg=
+X-Received: by 2002:a17:902:d504:b0:211:fd79:568 with SMTP id
+ d9443c01a7336-2124d085619mr115056305ad.19.1732110438360; Wed, 20 Nov 2024
+ 05:47:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120100157.485418-1-andrew.goodbody@linaro.org>
- <20241120100157.485418-4-andrew.goodbody@linaro.org>
-In-Reply-To: <20241120100157.485418-4-andrew.goodbody@linaro.org>
+References: <20241109180038.10344-1-ansuelsmth@gmail.com>
+In-Reply-To: <20241109180038.10344-1-ansuelsmth@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Nov 2024 06:46:49 -0700
-Message-ID: <CAFLszTjAaUVccHaxj758jFqkjQzB_J_cBFi=Nx42ADWdp9EjJw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] x86: select CONFIG_64BIT for X86_64
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Kongyang Liu <seashell11234455@gmail.com>, 
- LekKit <50500857+LekKit@users.noreply.github.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Date: Wed, 20 Nov 2024 06:46:51 -0700
+Message-ID: <CAFLszTiNUmogWo1Ok61uOrOtOdtqR_GaxGyEsYBFgdGfQxrUZg@mail.gmail.com>
+Subject: Re: [PATCH 0/8] led: update LED boot/activity to new property
+ implementation
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sean Anderson <seanga2@gmail.com>, Julien Masson <jmasson@baylibre.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,178 +92,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Hi Christian,
 
-On Wed, 20 Nov 2024 at 03:02, Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
+On Sat, 9 Nov 2024 at 11:01, Christian Marangi <ansuelsmth@gmail.com> wrote:
 >
-> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
-> static analysis tools.
-> Introduce CONFIG_SPL_64BIT and select it for architectures other than
-> x86 with 64 bit builds. Do not select it for x86 builds as x86 uses
-> a 32 bit SPL.
-> Ensure that when limits are set they use CONFIG_64BIT for U-Boot
-> proper and CONFIG_SPL_64BIT for SPL. This is to allow for the 32 bit
-> SPL build used by x86.
+> This series is split in 2 part.
 >
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
+> While adapting the LED boot and activity code to the new property
+> accepted by Rob in dt-schema repository, a big BUG was discovered.
 >
-> Changes in v3:
-> Introduce CONFIG_SPL_64BIT to allow for x86 building a 32 bit SPL and
-> a 64 bit U-Boot proper.
+> The reason wasn't clear at start and took me some days to figure it
+> out.
 >
-> Changes in v2:
-> Corrected commit title to be x86 not sandbox
+> This was triggered by adding a new phandle in the test.dts to
+> introduce test for the new OPs.
 >
->  arch/Kconfig         | 3 +++
->  arch/arm/Kconfig     | 1 +
->  arch/mips/Kconfig    | 4 ++++
->  arch/riscv/Kconfig   | 1 +
->  arch/sandbox/Kconfig | 1 +
->  arch/x86/Kconfig     | 1 +
->  common/bloblist.c    | 3 ++-
->  include/limits.h     | 3 ++-
->  8 files changed, 15 insertions(+), 2 deletions(-)
+> This single addition caused the sandbox CI test to fail in the
+> dm_test_ofnode_phandle_ot test.
 >
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index 6258788f53..c726ac5fc7 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -38,6 +38,9 @@ config 32BIT
->  config 64BIT
->         bool
+> This doesn't make sense as reverting the change made the CI test
+> to correctly finish. Also moving the uboot node down
+> after the first phandle (in test.dts the gpio one) also made
+> the CI test to correctly finish.
 >
-> +config SPL_64BIT
-> +       bool
+> A little bit of searching and debugging made me realize the
+> parse phandle OPs didn't support other.dts at all and they
+> were still referencing phandle index from test.dts.
+> (more info in the related commit)
+>
+> In short the test was broken all along and was working by
+> pure luck. The first 4 patch address and fix the problem for good.
+>
+> The other 4 patch expand and address the property change for
+> LED boot/activity.
+>
+> Posting in a single series as changes are trivial and just
+> to speedup review process. (and also because the second
+> part depends on the first)
 
-Please document what this means and its implications, with some help
+Thank you for digging into this and figuring it out.
 
-> +
->  config SYS_CACHELINE_SIZE
->         int
->         default 128 if SYS_CACHE_SHIFT_7
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 7282c4123b..055762b0b9 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -7,6 +7,7 @@ config SYS_ARCH
->  config ARM64
->         bool
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         select PHYS_64BIT
->         select SYS_CACHE_SHIFT_6
->         imply SPL_SEPARATE_BSS
-> diff --git a/arch/mips/Kconfig b/arch/mips/Kconfig
-> index 38577af43d..7ea439e857 100644
-> --- a/arch/mips/Kconfig
-> +++ b/arch/mips/Kconfig
-> @@ -211,6 +211,7 @@ config CPU_MIPS64_R1
->         bool "MIPS64 Release 1"
->         depends on SUPPORTS_CPU_MIPS64_R1
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         help
->           Choose this option to build a kernel for release 1 through 5 of the
->           MIPS64 architecture.
-> @@ -219,6 +220,7 @@ config CPU_MIPS64_R2
->         bool "MIPS64 Release 2"
->         depends on SUPPORTS_CPU_MIPS64_R2
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         help
->           Choose this option to build a kernel for release 2 through 5 of the
->           MIPS64 architecture.
-> @@ -227,6 +229,7 @@ config CPU_MIPS64_R6
->         bool "MIPS64 Release 6"
->         depends on SUPPORTS_CPU_MIPS64_R6
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         help
->           Choose this option to build a kernel for release 6 or later of the
->           MIPS64 architecture.
-> @@ -235,6 +238,7 @@ config CPU_MIPS64_OCTEON
->         bool "Marvell Octeon series of CPUs"
->         depends on SUPPORTS_CPU_MIPS64_OCTEON
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         help
->          Choose this option for Marvell Octeon CPUs.  These CPUs are between
->          MIPS64 R5 and R6 with other extensions.
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index 043d963f63..abb7a984c4 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -120,6 +120,7 @@ config ARCH_RV32I
->  config ARCH_RV64I
->         bool "RV64I"
->         select 64BIT
-> +       select SPL_64BIT if SPL
->         select PHYS_64BIT
->         help
->           Choose this option to target the RV64I base integer instruction set.
-> diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-> index db29ca14bd..4c169034d9 100644
-> --- a/arch/sandbox/Kconfig
-> +++ b/arch/sandbox/Kconfig
-> @@ -47,6 +47,7 @@ config HOST_32BIT
->  config HOST_64BIT
->         def_bool $(cc-define,_LP64)
->         select 64BIT
-> +       select SPL_64BIT if SPL
 >
->  config HOST_HAS_SDL
->         def_bool $(success,sdl2-config --version)
-> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-> index 23a1e21b29..006a59d6fa 100644
-> --- a/arch/x86/Kconfig
-> +++ b/arch/x86/Kconfig
-> @@ -44,6 +44,7 @@ endchoice
+> Christian Marangi (8):
+>   dm: core: implement oftree variant of parse_phandle OPs
+>   test: dm: fix broken dm_test_ofnode_phandle_ot
+>   dm: core: implement ofnode/tree_parse_phandle() helper
+>   test: dm: Expand dm_test_ofnode_phandle(_ot) with new
+>     ofnode/tree_parse_phandle
+>   dm: core: implement phandle ofnode_options helper
+>   test: dm: Add test for ofnode options phandle helper
+>   led: update LED boot/activity to new property implementation
+>   test: dm: Update test for LED activity and boot
 >
->  config X86_64
->         bool
-> +       select 64BIT
+>  arch/sandbox/dts/other.dts |  33 ++++++++--
+>  arch/sandbox/dts/test.dts  |  16 +++--
+>  drivers/core/of_access.c   |  61 +++++++++++++-----
+>  drivers/core/ofnode.c      | 118 ++++++++++++++++++++++++++++++++++
+>  drivers/led/led-uclass.c   |  30 ++++++---
+>  include/dm/of_access.h     |  86 +++++++++++++++++++++++++
+>  include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++++
+>  test/dm/led.c              |  18 +++---
+>  test/dm/ofnode.c           | 125 ++++++++++++++++++++++++++++++++-----
+>  9 files changed, 539 insertions(+), 55 deletions(-)
 >
->  config SPL_X86_64
->         bool
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index ec6ff7a5a9..30fe1cb4b3 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -579,7 +579,8 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
->         ulong version = BLOBLIST_REGCONV_VER;
->         ulong sigval;
->
-> -       sigval = (IS_ENABLED(CONFIG_64BIT)) ?
-> +       sigval = ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
-> +                       (IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) ?
->                         ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_64) - 1)) |
->                          ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_64)) :
->                         ((BLOBLIST_MAGIC & ((1UL << BLOBLIST_REGCONV_SHIFT_32) - 1)) |
-
-Gosh this is pretty ugly.
-
-Can you split it into separate statements?
-
-> diff --git a/include/limits.h b/include/limits.h
-> index 4700cc7a59..1d0bbf69be 100644
-> --- a/include/limits.h
-> +++ b/include/limits.h
-> @@ -9,7 +9,8 @@
->  #define UINT32_MAX  0xffffffffU
->  #define UINT64_MAX  0xffffffffffffffffULL
->
-> -#ifdef CONFIG_64BIT
-> +#if (defined(CONFIG_64BIT) && !defined(CONFIG_SPL_BUILD)) || \
-> +       (defined(CONFIG_SPL_64BIT) && defined(CONFIG_SPL_BUILD))
->      #define UINTPTR_MAX UINT64_MAX
->  #else
->      #define UINTPTR_MAX UINT32_MAX
 > --
-> 2.39.5
+> 2.45.2
 >
 
-REgards,
+Regards,
 Simon
