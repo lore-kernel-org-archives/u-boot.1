@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F939D711BD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:52:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FD9D711BC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 15:56:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2CDB892DE;
-	Wed, 20 Nov 2024 16:52:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E6F7B89241;
+	Wed, 20 Nov 2024 16:56:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uMRwJB89";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xFS3mb0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1019A8932B; Wed, 20 Nov 2024 16:52:01 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id AF68489001; Wed, 20 Nov 2024 16:56:25 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F4A1890BC
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:51:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C98188FED
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 16:56:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a99f646ff1bso1041472866b.2
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:51:57 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9ee097a478so300097466b.2
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:56:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732117916; x=1732722716; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732118181; x=1732722981; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=46LMCmJ3Ik6bnmUXJF6Gz8zYHaCioKXHRUddbYYHTW0=;
- b=uMRwJB89fyTxocgJ3cvT/M/Bk3HCa3qPRThB2A2vLfLEmqulbyKaK8thdbguxIrQ6D
- ZETr1SXVaHzeYDzmRvONs88PcV/ovgxUGjC3NNNe4Mqv7dPq1RycqZa6BCBsr9s0lo+X
- /EL2ZYWEGCiSXET58XZqOSNAtAqmSK8y8LPMfQk8Ti/JWLxgnIfi3qjqCBZ4s2H8cnJR
- +MR87DiHh1zET61eOFclYaSnyn8SHZDiqKVM3hwsyTZDb2FGlbEM8K1+Qr1MMjR6Vpz/
- abMbY8cRNQynupFN0Su6wApPkvL79Rn3GNZLclc6OfScr5nsRYekJequTNnwZe+BiOWw
- 2+9Q==
+ bh=jXHUyFW7KqPaK1dYRgDcSdY/qOSB8aXD3S0iYDASiZY=;
+ b=xFS3mb0Dh9ydiy/3cxDhNUAy/x6MtQl33JpRxDcykIQHRJRGeZZYw3yfXkeR9e5a0a
+ +5nrztnQvinUxLMpImwrGTZ+TiYi2/Vi7fmRSwc7yQAWilGvGXiD9331dTt8LfJbDLNu
+ MoLkZ9o1MMQ/18NO0RdD5vMTA4Wd8hRhnWZQ4F+CzF0b/5B1tIvVVEo2FRsF2zWriqUg
+ KmQYIIQNNZKi34P4b934D3D7NHjJw1SZaJZxMQIltFxnUqD0CWPUp6Bl5jle293vOtOB
+ fmC69mHYD2ef8tgbuRaZ5SrAvnw6qgtrbyDse0uxg/+5jvJv8ZOqmJgAy5oLFk/9voNg
+ 7khQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732117916; x=1732722716;
+ d=1e100.net; s=20230601; t=1732118181; x=1732722981;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=46LMCmJ3Ik6bnmUXJF6Gz8zYHaCioKXHRUddbYYHTW0=;
- b=mqPTYAFXf9HZyiuDAuQOdgoXddURZrCgCOW+Eiq+fVmRlhMuZULizZulJZ75G6vjYO
- EPbO0tYrBY2gHVA4Bktp15tYBsCqKAxG4DOwrC7r2ICQ3v3yHuw7lpTRjZsgOLvWj3A1
- OJ/05ecBm4J/nuWxyxn+qTLJ3mEtgy0bU2TocbOhERishQZxdBJ1Vurajvbl9eehdftm
- /VXVdPKyD/VTWVsVsME9N/Mns4THYMMqiAhzVLBl4S1qJum/8NBTygVV5SrQfeGbhAJR
- OZVnSWsvRwYKDen0glb0UxGeH/cFCbVQcVYB3fRMGYN9ILQfVqzd1ACoErzgEoGfBHlx
- aeOw==
+ bh=jXHUyFW7KqPaK1dYRgDcSdY/qOSB8aXD3S0iYDASiZY=;
+ b=YH7XSWG/KVJ3WwSPAtoEkkAs2zycXGtBumNQ6BIO9gvfa0vAIAybN00juR4p75ON4B
+ 6h7yj44WgSWu6yk05tMq25Vs2ghB+PjQ1kTuDahtpEcrfmz+U8WOCNNEqHnv8ZZP582M
+ 6YTTLTl0NM7c9hchoO5dzG9pV+UCgZiBhI2c86AnKcMRncAdL7X6FsvCYfSPCWPLFWRm
+ OtdHd/Q08Pl9yJF0l5Tmnb/u7kdz8TzDXIh+IdfmSFOLMGl1YTnP8TAJw01izLqRlirQ
+ NXWE/D6PhGmMJmzbecybfHpQqZPt9IBRjjBsJbkk1I3PVr92JyII67sIX1CZvpRjdUrH
+ j64g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlIFm8zX8vYe4oXC6T9kkAHxPL62EJwDYQ3iEfq7Klw+ITOO6ui5XI4bV+ZaChMSIjWAsq7Ko=@lists.denx.de
-X-Gm-Message-State: AOJu0YyoEhXg+xlati1mvMh3a06WCZ3rwvbkh9TSMtJlESXDzcz8j1RL
- qDf2GjhIpGoRGz1SEWkyEYcV9hH7Xjq3FtoB6YvNfW766rMM27vyrAfLK5RsHwY=
-X-Google-Smtp-Source: AGHT+IEPLMt52443vVnQ/9QiVPliWxUqY1EiWnGQeMIJbSlVTVUVqzuyAbXvEbDtQ2XMCzrGlRDCpw==
-X-Received: by 2002:a17:907:705:b0:aa1:e181:f211 with SMTP id
- a640c23a62f3a-aa4dd562fbbmr348037766b.18.1732117916592; 
- Wed, 20 Nov 2024 07:51:56 -0800 (PST)
+ AJvYcCX6jvSdwM3vskNGehr97w7811gOoVaV+m+UxnXS7wnmZytQvei1g+14iK8YWWCdgBSu/ilMHQI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUY0DAG/i8cR/bg24kwj1ow5sSbvpJhA9O7PhZQ+I7PcjMjCD6
+ lni58Dnpn6iOCzqZKBgpulxB4O/bE79QIV9vI46MoyDwmM6h4a3KzrMIrJq66xI=
+X-Google-Smtp-Source: AGHT+IEp0LN6DioKoUtWHMcRySmkygFFaXrwW6xf7vOpNkDWC1i406X+j4K1aQELQAlKGU4vMPFTIQ==
+X-Received: by 2002:a05:6402:84d:b0:5cf:f361:1c11 with SMTP id
+ 4fb4d7f45d1cf-5cff4c43b40mr2856744a12.20.1732118181441; 
+ Wed, 20 Nov 2024 07:56:21 -0800 (PST)
 Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
  ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa20df50a14sm797658866b.64.2024.11.20.07.51.55
+ 4fb4d7f45d1cf-5cff453e2a9sm924440a12.71.2024.11.20.07.56.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 07:51:56 -0800 (PST)
-Message-ID: <460f478d-62cc-4f17-8d52-00d2e1e83485@linaro.org>
-Date: Wed, 20 Nov 2024 16:51:54 +0100
+ Wed, 20 Nov 2024 07:56:19 -0800 (PST)
+Message-ID: <3ff334f3-b8e3-4359-9c02-a35e9a66c432@linaro.org>
+Date: Wed, 20 Nov 2024 16:56:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] common: Move autoprobe out to board init
+Subject: Re: [PATCH v3 0/3] serial: Support a disabled serial port
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>
-Cc: Svyatoslav <clamor95@gmail.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Peter Robinson <pbrobinson@gmail.com>,
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-References: <20241120153642.861633-1-sjg@chromium.org>
- <20241120153642.861633-4-sjg@chromium.org>
+ Rasmus Villemoes <ravi@prevas.dk>, Robert Marko <robert.marko@sartura.hr>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20241120153554.860710-1-sjg@chromium.org>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241120153642.861633-4-sjg@chromium.org>
+In-Reply-To: <20241120153554.860710-1-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,148 +106,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, Marex,
+Hi Simon,
 
-On 20/11/2024 16:36, Simon Glass wrote:
-> Rather than doing autoprobe within the driver model code, move it out to
-> the board-init code. This makes it clear that it is a separate step from
-> binding devices.
-> 
-> For now this is always done twice, before and after relocation, but we
-> should discuss whether it might be possible to drop the post-relocation
-> probe.
-> 
-> For boards with SPL, the autoprobe is still done there as well.
-> 
-> Note that with this change, autoprobe happens after the
-> EVT_DM_POST_INIT_R/F events are sent, rather than before.
-> 
-> Link: https://lore.kernel.org/u-boot/20240626235717.272219-1-marex@denx.de/
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+On 20/11/2024 16:35, Simon Glass wrote:
+> This series provides a way to tell a serial UART that it can't actually
+> work, at runtime. The main motivation is to deal with a coreboot feature
+> where it does not provide UART details in the sysinfo structure unless
+> the UART is also enabled in coreboot.
 
-[...]
+Why is the UART driver probed if coreboot doesn't provide the necessary
+info for it?
 
-> +For some platforms, certain devices must be probed to get the platform into
-> +a working state. To help with this, drivers marked with DM_FLAG_PROBE_AFTER_BIND
-
-I've found the documentation around this flag lacking, and the
-implementation confusing. Here you say /drivers/ with this flag (which
-would imply I can add it to the U_BOOT_DRIVER() definition, but further
-below the function doc says /device/ with this flag.
-
-In practise, it seems like the flag has to be added to the device in the
-bind() function, and adding it to the driver definition doesn't work
-(this left me scrataching my head for a while). The commit message
-adding it explains this and it seems like the idea was to have a way to
-trigger probing a device from the .bind() callback.
-
-I don't think I'm the only one confused by this, since grepping for it
-reveals two watchdog drivers which set this on their U_BOOT_DRIVER()
-definition.
-
-I can only see one driver that ever enables this flag conditionally,
-that's the ARM PSCI driver. Every other user sets it unconditionally in
-the .bind() callback.
-
-Would it make sense to rework this into a driver flag?
-
-Otherwise, could you document this behaviour more explicitly in this series?
+Couldn't you disable CONFIG_REQUIRE_SERIAL_CONSOLE and skip probing it?
 
 Kind regards,
-
-> +will be probed immediately after all devices are bound. For now, this happens in
-> +SPL, before relocation and after relocation. See the call to ``dm_autoprobe()``
-> +for where this is done.
-> +
-> +The auto-probe feature is tricky because it bypasses the normal ordering of
-> +probing. General, if device A (e.g. video) needs device B (e.g. clock), then
-> +A's probe() method uses ``clk_get_by_index()`` and B is probed before A. But
-> +A is only probed when it is used. Therefore care should be taken when using
-> +auto-probe, limiting it to devices which truly are essential, such as power
-> +domains or critical clocks.
-> +
-> +See here for more discussion of this feature:
-> +
-> +:Link: https://patchwork.ozlabs.org/project/uboot/patch/20240626235717.272219-1-marex@denx.de/
-> +
->  Running stage
->  ^^^^^^^^^^^^^
->  
-> diff --git a/drivers/core/root.c b/drivers/core/root.c
-> index 2d4f078f97f..045f8fcda65 100644
-> --- a/drivers/core/root.c
-> +++ b/drivers/core/root.c
-> @@ -281,6 +281,15 @@ void *dm_priv_to_rw(void *priv)
->  }
->  #endif
->  
-> +/**
-> + * dm_probe_devices() - Check whether to probe a device and all children
-> + *
-> + * Probes the device if DM_FLAG_PROBE_AFTER_BIND is enabled for it. Then scans
-> + * all its children recursively to do the same.
-> + *
-> + * @dev: Device to (maybe) probe
-> + * Return 0 if OK, -ve on error
-> + */
->  static int dm_probe_devices(struct udevice *dev)
->  {
->  	struct udevice *child;
-> @@ -299,6 +308,17 @@ static int dm_probe_devices(struct udevice *dev)
->  	return 0;
->  }
->  
-> +int dm_autoprobe(void)
-> +{
-> +	int ret;
-> +
-> +	ret = dm_probe_devices(gd->dm_root);
-> +	if (ret)
-> +		return log_msg_ret("pro", ret);
-> +
-> +	return 0;
-> +}
-> +
->  /**
->   * dm_scan() - Scan tables to bind devices
->   *
-> @@ -331,7 +351,7 @@ static int dm_scan(bool pre_reloc_only)
->  	if (ret)
->  		return ret;
->  
-> -	return dm_probe_devices(gd->dm_root);
-> +	return 0;
->  }
->  
->  int dm_init_and_scan(bool pre_reloc_only)
-> diff --git a/include/dm/root.h b/include/dm/root.h
-> index b2f30a842f5..a71a2ebef85 100644
-> --- a/include/dm/root.h
-> +++ b/include/dm/root.h
-> @@ -136,6 +136,21 @@ int dm_scan_other(bool pre_reloc_only);
->   */
->  int dm_init_and_scan(bool pre_reloc_only);
->  
-> +/**
-> + * dm_autoprobe() - Probe devices which are marked for probe-after-bind
-> + *
-> + * This probes all devices with a DM_FLAG_PROBE_AFTER_BIND flag. It checks the
-> + * entire tree, so parent nodes need not have the flag set.
-> + *
-> + * It recursively probes parent nodes, so they do not need to have the flag
-> + * set themselves. Since parents are always probed before children, if a child
-> + * has the flag set, then its parent (and any devices up the chain to the root
-> + * device) will be probed too.
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int dm_autoprobe(void);
-> +
->  /**
->   * dm_init() - Initialise Driver Model structures
->   *
+> 
+> Attempts to introduce a way to enable a silent UART in coreboot have
+> lead to a large amount of discussion but no result, sadly.
+> 
+> This series reworks a patch sent last year, which was not quite ready to
+> be applied. A coreboot user (on irc) hit this problem, so it needs to be
+> resolved.
+> 
+> Link: https://patchwork.ozlabs.org/project/uboot/patch/20231101180447.99361-1-sjg@chromium.org/
+> 
+> Changes in v3:
+> - Put the feature behind a Kconfig
+> - Move the feature to the serial uclass, so any serial driver can use it
+> 
+> Changes in v2:
+> - Drop RFC tag since there were no comments
+> 
+> Simon Glass (3):
+>   serial: Allow a serial port to be silent disabled
+>   serial: ns16550: Avoid probing hardware when disabled
+>   x86: coreboot: Make use of disabled console
+> 
+>  arch/x86/cpu/coreboot/Kconfig    |  1 +
+>  drivers/serial/Kconfig           |  9 +++++++++
+>  drivers/serial/ns16550.c         |  3 ++-
+>  drivers/serial/serial-uclass.c   | 19 ++++++++++++++++++-
+>  drivers/serial/serial_coreboot.c |  2 ++
+>  include/serial.h                 | 25 +++++++++++++++++++++++++
+>  6 files changed, 57 insertions(+), 2 deletions(-)
+> 
 
 -- 
 // Caleb (they/them)
