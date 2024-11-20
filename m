@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ED1BD6393C
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 13:55:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F2BFD44152
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 14:50:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C796789426;
-	Wed, 20 Nov 2024 14:55:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 91EFB8932F;
+	Wed, 20 Nov 2024 15:50:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1LkcGmY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F4phB+3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ADC789426; Wed, 20 Nov 2024 14:55:53 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 6BDDA890D5; Wed, 20 Nov 2024 15:50:40 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1B57891EF
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 14:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 273E488EEA
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 15:50:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2fb518014b9so18934181fa.3
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:55:50 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6d413def36cso39082766d6.3
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 06:50:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732110950; x=1732715750; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=szc1CRczJzKQkCD9KZAYcdcwuAdvnBCf2I6ogls4Z2M=;
- b=J1LkcGmYIOOyHugl7EjglFmdjVGWuBMRWF0f8Y1RZOBX3VuFvsR6+fG4kanJNZ3/n5
- HoBeAKtsza0nKkV/jr9lumcEOn2SQrvYq4pTIT1OBLHUSn6tZkmd0RPRgyrR5cEN5Wqg
- NfemNZ6EE5nima5w+y7edaVf8zirNrscOvrrifWTPcQYmldnyn/kxaGwDVnP5+NdTI4v
- +2dmGuOd/LrzPQ8l2J77lpYZ6eJj9Lx+mvCjt/zKsiJohWWvT12sXKrdMTFbQBT6CPaw
- yjfpVJdW/Mom/opSp6Fzd8RhtVSNlcPFCSzpiAHZT8sp7NvV35sWsZnRbB3VV8Ha1YuK
- QF0A==
+ d=konsulko.com; s=google; t=1732114237; x=1732719037; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=lhph7czFVKdLul08L+PE4mT4WmF/9AoYI7k64S95p+A=;
+ b=F4phB+3MZPLk99ItvW42U5wIRu1ZDK02+lMq66EcjrOig8j55fLfx/a9JPos5ax5hc
+ HaoaBw0lSC5gy1sVKLQk4d6fb0VCLZJvegNbwgm45L7uf0wfXOwj7C9B+hqbvaU4+Px+
+ 5Os+vi9j8LuVFdJDN8hPvQHQd6zhZASehnOAs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732110950; x=1732715750;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=szc1CRczJzKQkCD9KZAYcdcwuAdvnBCf2I6ogls4Z2M=;
- b=JhaJcf83Yl37J7lIRz2JyBGwaZauhND2MUGraRrztJqSPItSkqrWckD22RItWdiiiH
- V7K8EvxMISAJdekmHG8G0dfAsQj+/YJKoH6YXirY5hn6HWb1oXqg5LP0q96crF0hTf9r
- R2FNp0rt6Ui7IegQACYRDL3ZZqTSQhIg+q6yRmsiLGt/Z127zo3DHDVklU1R/yPcngP9
- QdJQ/yyqf7Iteq9PXH5Wv7kAf4QUjeDWI6Ak15oUGjfQTp5lReZax0vF/GAjY9vZYMJs
- +ER4HkTBbwu7k33hKqsKKaTpTUfdFML+wr4LKTUNM/duoqIch+T3fra2XxbmBlXYmd+1
- aXaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUPEMMPf6xn34cEPe5Gf1eRXd4gvAYcN4Aj0545vfbIp/UDz0eNnn7iEJl4s52Q8FYiN2mTGVc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRzUbrZ5tERq2VwZwA7jnmTvHuAvGZ5anPxKjzbKOXK6Gp7ZKy
- 3jSLt90/rXI2K5yUwbMjV9ba5x9IhWSkVN6MsPGtXnOrMVFvyTmkF67AdO7nPVE=
-X-Google-Smtp-Source: AGHT+IHR6AdAyXJc0Idaonr1iChttIfQyg2zdpPsROyKoWlaqdt+Z15oLkOhU+xhEMncQZiHnkTWaA==
-X-Received: by 2002:a05:651c:545:b0:2fb:4b40:1e18 with SMTP id
- 38308e7fff4ca-2ff8db33d27mr16724571fa.13.1732110949900; 
- Wed, 20 Nov 2024 05:55:49 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ d=1e100.net; s=20230601; t=1732114237; x=1732719037;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lhph7czFVKdLul08L+PE4mT4WmF/9AoYI7k64S95p+A=;
+ b=f90RLFNjYO98MfxriHSC2mJCmed7L6HwjT8i3esyBKZrVaub82j5Y9JFdD+9bMkAYQ
+ 0S8rJ8UmGrVRiLvK+K1slVtPD5TcP19j91Phj9z1P+FcGFqT4mn/tOjCG9T3oIX4Y30h
+ QS767TBE6fqYjO2da3Gq3g0tg9ZR9ruD/ZkZBjHP/Bei/XQEQuAcqbqRtEpYjTGc2nMm
+ 3UKTGDsG7ggVPO5P74a1E6FnMdvitCsb1m44AVWEeoZ0SpPnsbeIoYNR8yFYkINMYqtI
+ yT0uNdyWR9FCWdQPn+E3bSoYsZ7OZxT+mmvwbpdaj2qdLwg48mrg165xa5XPGoeOf+rM
+ 7zkA==
+X-Gm-Message-State: AOJu0YxAxU8bL8MJ56MfHboQL3AMJhorCBzTrNK+6MKBHPbrPTspMwkg
+ 6KrJVcoFRGpMUMkNwVIMVC7QZB0zvHrgl0DW6es3vxtl7wKrM+D5Qod5ARsqHOQ=
+X-Google-Smtp-Source: AGHT+IG4SHVv8ZDR4uvkvvYFI5GsSspsSW+RJR5ZQv5oye2rVMSKa1iULeaZZnnIi9AF3KM+u8EEIA==
+X-Received: by 2002:a05:6214:2aa6:b0:6d3:e740:4b56 with SMTP id
+ 6a1803df08f44-6d4377b3513mr41169806d6.5.1732114236945; 
+ Wed, 20 Nov 2024 06:50:36 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cff453e1b8sm868571a12.63.2024.11.20.05.55.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 05:55:49 -0800 (PST)
-Message-ID: <2f5b61a7-9417-49b1-90b7-8aaf25f65cde@linaro.org>
-Date: Wed, 20 Nov 2024 14:55:48 +0100
+ 6a1803df08f44-6d4380b3019sm11478206d6.13.2024.11.20.06.50.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Nov 2024 06:50:36 -0800 (PST)
+Date: Wed, 20 Nov 2024 08:50:33 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 12/39] bootm: Allow building bootm.c without
+ CONFIG_SYS_BOOTM_LEN
+Message-ID: <20241120145033.GB3600562@bill-the-cat>
+References: <20241119131844.4078144-1-sjg@chromium.org>
+ <20241119131844.4078144-13-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fs: fat: Handle 'FAT sector size mismatch'
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Simon Glass <sjg@chromium.org>
-Cc: christian.taedcke@weidmueller.com, ada@thorsis.com,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, u-boot@lists.denx.de
-References: <20241119073048.3469260-1-quic_varada@quicinc.com>
- <20241119154436.GW3600562@bill-the-cat>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241119154436.GW3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="W9HfSALM6QndssQc"
+Content-Disposition: inline
+In-Reply-To: <20241119131844.4078144-13-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,166 +94,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi both,
 
-Varadarajan: Thanks for sending this patch.
+--W9HfSALM6QndssQc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 19/11/2024 16:44, Tom Rini wrote:
-> On Tue, Nov 19, 2024 at 01:00:48PM +0530, Varadarajan Narayanan wrote:
-> 
->> Do FAT read and write based on the device sector size
->> instead of the size recorded in the FAT meta data. This
->> helps to overcome the 'FAT sector size mismatch' error
->> and enables U-Boot to read/write those partitions.
+On Tue, Nov 19, 2024 at 06:18:17AM -0700, Simon Glass wrote:
 
-Does this ignore the filesystem sector size or account for it? There's a
-whole lot of logic added below which isn't really explained here.
->>
->> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
->> ---
->>  fs/fat/fat.c       | 227 ++++++++++++++++++++++++++++++++++++++++++---
->>  fs/fat/fat_write.c |  19 ----
->>  2 files changed, 214 insertions(+), 32 deletions(-)
->>
->> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
->> index e2570e8167..f4bad99335 100644
->> --- a/fs/fat/fat.c
->> +++ b/fs/fat/fat.c
->> @@ -44,24 +44,223 @@ static void downcase(char *str, size_t len)
->>  
->>  static struct blk_desc *cur_dev;
->>  static struct disk_partition cur_part_info;
->> +int fat_sect_size;
+> This code cannot be compiled by boards which don't have this option. Add
+> an accessor in the header file to avoid another #ifdef
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  boot/bootm.c    | 8 ++++----
+>  include/bootm.h | 8 ++++++++
+>  2 files changed, 12 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index 16a43d519a8..0a1040ef923 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -633,11 +633,11 @@ static int bootm_load_os(struct bootm_headers *imag=
+es, int boot_progress)
+>  	load_buf =3D map_sysmem(load, 0);
+>  	image_buf =3D map_sysmem(os.image_start, image_len);
+>  	err =3D image_decomp(os.comp, load, os.image_start, os.type,
+> -			   load_buf, image_buf, image_len,
+> -			   CONFIG_SYS_BOOTM_LEN, &load_end);
+> +			   load_buf, image_buf, image_len, bootm_len(),
+> +			   &load_end);
+>  	if (err) {
+> -		err =3D handle_decomp_error(os.comp, load_end - load,
+> -					  CONFIG_SYS_BOOTM_LEN, err);
+> +		err =3D handle_decomp_error(os.comp, load_end - load, bootm_len(),
+> +					  err);
+>  		bootstage_error(BOOTSTAGE_ID_DECOMP_IMAGE);
+>  		return err;
+>  	}
+> diff --git a/include/bootm.h b/include/bootm.h
+> index c471615b08c..d174f18ac18 100644
+> --- a/include/bootm.h
+> +++ b/include/bootm.h
+> @@ -89,6 +89,14 @@ struct bootm_info {
+>  #define bootm_x86_set(_bmi, _field, _val)
+>  #endif
+> =20
+> +static inline ulong bootm_len(void)
+> +{
+> +#ifdef CONFIG_SYS_BOOTM_LEN
+> +	return CONFIG_SYS_BOOTM_LEN;
+> +#endif
+> +	return 0;
+> +}
+> +
+>  /**
+>   * bootm_init() - Set up a bootm_info struct with useful defaults
+>   *
 
-This variable should be static, no harm in 0 initializing it here either.
->>  
+This kind of change is wrong in that it moves a build time failure to a
+(potentially non-obvious) runtime failure. If we're moving to now
+dynamically allocating the location where we can decompress to, then it
+should be part of that abstraction. But that doesn't look to be the case
+here.
 
-[...]
+--=20
+Tom
 
->> +
->> +int disk_write(__u32 sect, __u32 nr_sect, void *buf)
->> +{
->> +	int ret;
->> +	__u8 *block = NULL;
->> +	__u32 rem, size;
->> +	__u32 s, n;
->> +
->> +	rem = nr_sect * fat_sect_size;
->> +	/*
->> +	 *           block N       block N + 1      block N + 2
->> +	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
->> +	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
->> +	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
->> +	 * . . . |               |               |               | . . .
->> +	 * ------+---------------+---------------+---------------+------
->> +	 *            |<--- FAT reads in sectors          --->|
->> +	 *
->> +	 *            |  part 1  |   part 2      |  part 3    |
->> +	 *
->> +	 */
->> +
->> +	/* Do part 1 */
->> +	if (fat_sect_size) {
->> +		__u32 offset;
->> +
->> +		/* Read one block and overwrite the leading sectors */
->> +		block = malloc_cache_aligned(cur_dev->blksz);
->> +		if (!block) {
->> +			printf("Error: allocating block: %lu\n", cur_dev->blksz);
->> +			return -1;
->> +		}
->> +
->> +		s = sect_to_block(sect, &offset);
->> +		offset = offset * fat_sect_size;
->> +
->> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
->> +		if (ret != 1) {
->> +			ret = -1;
->> +			goto exit;
->> +		}
->> +
->> +		if (rem > (cur_part_info.blksz - offset))
->> +			size = cur_part_info.blksz - offset;
->> +		else
->> +			size = rem;
->> +
->> +		memcpy(block + offset, buf, size);
->> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
->> +		if (ret != 1) {
->> +			ret = -1;
->> +			goto exit;
->> +		}
->> +
->> +		rem -= size;
->> +		buf += size;
->> +		s++;
->> +	} else {
->> +		/*
->> +		 * fat_sect_size not being set implies, this is the first read
->> +		 * to partition. The first sector is being read to get the
->> +		 * FS meta data. The FAT sector size is got from this meta data.
->> +		 */
+--W9HfSALM6QndssQc
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This is the disk_write() function though, I don't think this behaviour
-is correct?
->> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
->> +		if (ret != 1)
->> +			return -1;
->> +	}
->> +
->> +	/* Do part 2, write directly from the given buffer */
->> +	if (rem > cur_part_info.blksz) {
->> +		n = rem / cur_part_info.blksz;
->> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
->> +		if (ret != n) {
->> +			ret = -1;
->> +			goto exit;
->> +		}
->> +		buf += n * cur_part_info.blksz;
->> +		rem = rem % cur_part_info.blksz;
->> +		s += n;
->> +	}
->> +
->> +	/* Do part 3, read a block and copy the trailing sectors */
->> +	if (rem) {
->> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
->> +		if (ret != 1) {
->> +			ret = -1;
->> +			goto exit;
->> +		} else {
->> +			memcpy(block, buf, rem);
->> +		}
->> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
->> +		if (ret != 1) {
->> +			ret = -1;
->> +			goto exit;
->> +		}
->> +	}
->> +exit:
->> +	if (block)
->> +		free(block);
->> +
->> +	return (ret == -1) ? -1 : nr_sect;
->>  }
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc99zYACgkQFHw5/5Y0
+tyxRNAv+JLK+hb0Bu3Q9fCIcoeLsglmGAOhCHg0DzM58Dq2b6pu6gh6SgOIlH5ZB
+6mDiBzXJTKNGZsYA3nDI+1zASjUMz1N4K5Ejf6OzEDFl5r7DDkvylZGIBRXT3uYE
+lJlkq8T4Hlp04AolWGG/R3kKaeD0hZv71SHa402BQw77Od+qHs69v9hPKIDzbQKA
+uD6aSFAzuV5nbTbBZ/XfARCpqiptB8XzlVzrOSaf0FQTEpfybrAkKiyxc7kIqOHq
+h7Bs7jNTUG3GCMGwMFlraS0JyijQ5++0U52UiuwSoYOuIZetYF9PfZ+XkdXhKlGO
+R+FObhMAYwDdzNlzGfB5lwvr7ZDEZ7I19oKGULR+3CrBQoD/tib29hPyqRIQY8n3
+anManIKjKRMacR2illnjcHcjx86Dtoy0ixb+RiimUC0m+Z5DQvD4dxgxNoqxA7cg
+66MTUUpYlDXTdfsa0I9PHpnRPvbV3FJJo3xexUvklNtWpE9tEXNEW44eIf/E5PCm
+4VuzQfwp
+=keVq
+-----END PGP SIGNATURE-----
 
-[...]
-
-Hi Tom,
-
-> With this patch, we now have
-> https://patchwork.ozlabs.org/project/uboot/patch/20241113044956.1836896-1-caleb.connolly@linaro.org/
-
-I suspect my patch would corrupt storage on write, I'll give it another
-test and see.
-> and
-> https://patchwork.ozlabs.org/project/uboot/patch/20230730111516.v2.1.Ia13846500fab3d5a1d5573db11a040d233994fa6@changeid/
-> for seemingly the same issue. Can you please try these other two
-> patches and report which ones do / don't handle your use case as well?
-> Thanks!
-Kind regards,
-> 
-
--- 
-// Caleb (they/them)
-
+--W9HfSALM6QndssQc--
