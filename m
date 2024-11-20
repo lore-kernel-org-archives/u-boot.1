@@ -4,171 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFF3D6E2AC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 04:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18479D6E2AF
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 04:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2999689347;
-	Wed, 20 Nov 2024 05:22:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 95128895DF;
+	Wed, 20 Nov 2024 05:39:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wh5ERTyM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BOS14zeS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3B528962D; Wed, 20 Nov 2024 05:22:10 +0100 (CET)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2406::61a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E331B895D0; Wed, 20 Nov 2024 05:39:46 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B43089347
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:22:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 622C7895DF
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 05:39:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wgM1fT3C0tjYZdwtm3x6OvsNmHVnB/z1uJO+cyTrbdsUZBPxPLiWS7uEEQ7Sq/REhAse5gnPA50e2IujpdJps7RdbUb6ZDo3f3kwNoyZxChVEdGXQHL1QJDbJVjc0Da+zfOsph6DBvf9iLOXNbEAj39STyGiZPTutf145LyDdZhH9L1Gan9TNGaZ9t55Y/Vd5Ce8JBbnXjoL4Vs+R5J46ivZxSdVqmjEzc88M4VwoTjPormJQtcexK6Ha8nCWkx0+VEN2stCqQUyx6/yT0iFnyBVwEw7T1ljrHLZmVv5SGVGjoi2wal6iZXjl922u3jsA6OC6XFp/L61WC1WpiRkAA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=F5yPVd0ZR8VmUcyR4qp7oKLRRkvgHIXrqVr1LO7dHd0=;
- b=tMj+0Dn0ZPaaPOpzUywqXmaSgaf1RlQLWo1jjsPpcYu3KzXQijrH91Gk1C3sRuglT/stubGYuWmcnICjTi2wZpfYNhzruDCMP6kEjACTZAnv4PXsGa1io3UxnAyk7qvRj3g0VLbWOgeX36RZqH9t6sQ5PjdeLWQl2KDD2uwcVjPQYuOxlzVhiKkaJFxtzvJSA5owJY7yqPivgjzv2opiZqfoYwqyXfyUGXd2uZwcufYlWdl5s9arrEmk/kZNRKeC0cFdD+8S3fec88ACyWnDfgXhWSsZ336baQmvP2qJGncyDjOAAolspeMdlLK4wAKHMRp1Z2BF6RPKgt8gkdSbHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=F5yPVd0ZR8VmUcyR4qp7oKLRRkvgHIXrqVr1LO7dHd0=;
- b=wh5ERTyMgVLTTELmWRTDdfSGL38JCganZxG8euHqcBM+W9t+OT1/zvM8g2R6tFlMXEHBWbV9zxY8kfwY7ZK8c2u9aTPQIzKbA1V2Nu3Ioztton+iitQP5Y0ue6HTfnzW+8lqmaVtAj9r+B8EsOFZJIznepISHCLBcIFuLC5DuOw=
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
- by LV8PR12MB9270.namprd12.prod.outlook.com (2603:10b6:408:205::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.23; Wed, 20 Nov
- 2024 04:22:03 +0000
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c%7]) with mapi id 15.20.8158.023; Wed, 20 Nov 2024
- 04:22:03 +0000
-From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "Simek, Michal" <michal.simek@amd.com>, "fabrice.gasnier@foss.st.com"
- <fabrice.gasnier@foss.st.com>, "git (AMD-Xilinx)" <git@amd.com>
-Subject: RE: [PATCH v11 3/7] usb: onboard-hub: add support for Microchip
- USB5744
-Thread-Topic: [PATCH v11 3/7] usb: onboard-hub: add support for Microchip
- USB5744
-Thread-Index: AQHbNMKT41MM9BpbCkCVHbjRknnK4LKzJkQAgAAKwlCAANxLAIACID3QgAC2pYCABkWfkIAAGvuAgACzSwCAALpXAIAA6oDg
-Date: Wed, 20 Nov 2024 04:22:03 +0000
-Message-ID: <SA1PR12MB8697282F71C84463633BC7D598212@SA1PR12MB8697.namprd12.prod.outlook.com>
-References: <20241112050740.15343-1-venkatesh.abbarapu@amd.com>
- <20241112050740.15343-4-venkatesh.abbarapu@amd.com>
- <d61ab683-744d-4024-a5d3-71b372e85d02@denx.de>
- <SA1PR12MB869770E331845B38B0BC2AC098592@SA1PR12MB8697.namprd12.prod.outlook.com>
- <5c4c73e1-4b47-427a-b84c-099b044d07a8@denx.de>
- <SA1PR12MB8697165267E847E8F8FDC0D9985B2@SA1PR12MB8697.namprd12.prod.outlook.com>
- <b06d22ba-6629-4893-a90e-185f676017a5@denx.de>
- <SA1PR12MB8697C5004BB109302CE441B198272@SA1PR12MB8697.namprd12.prod.outlook.com>
- <5cd2a342-7208-4cf1-8faa-90dfd82ae5b0@denx.de>
- <SA1PR12MB86972FD15A7312EF59F1A5D298202@SA1PR12MB8697.namprd12.prod.outlook.com>
- <da8d990f-b2fa-4f21-bee5-7d609e9364b2@denx.de>
-In-Reply-To: <da8d990f-b2fa-4f21-bee5-7d609e9364b2@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|LV8PR12MB9270:EE_
-x-ms-office365-filtering-correlation-id: f5ce4217-2cf6-43ef-1a35-08dd091ae2c2
-x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?SHJkOG9sOUk3UzBSWE10Z3hxL2lyNEU0WmhPVjJZTDhheVlLNnhsWWMrdmcw?=
- =?utf-8?B?L2ZwUTdnRkRVMXkzSGQ5UXNGa1EwWFNnRXdaTllZcDAwcWc4Z0FWNDlOb2xH?=
- =?utf-8?B?UEFua0VhRlJuYzJubTlJK3QwWVM2S01UWHptY3hJaW4yWWhCMUtVd0EreDRa?=
- =?utf-8?B?WVhsS0l0bGd0VVBQVlYzN3pzdTB5Z1F5NUtsY3NzaTFHVVljZU5NTnVFQXZJ?=
- =?utf-8?B?WURqVFZ4LzF5VjAzK0JUYXlTQWdwM1JBR09hWjFaNnp3ZlppenJNb3BsdlBo?=
- =?utf-8?B?Q0x6ODZ3TGdUYUZEWVFNU3hqSi9PNkNlc1FaY0dxYW1NaWJ6bXNHbnVIZ21P?=
- =?utf-8?B?MXFoc1RsNm43QzBYaDRGTWhScFM1WDhsSTlNQ2hDWk81aWxFRmFuM20vY2tQ?=
- =?utf-8?B?Vk5KMmdQVmJySjVXNXhKV0lFeDVXeDU2a29DTDVkbEZEL3M2KzEvRlVNOTVp?=
- =?utf-8?B?ZlpHSHJKc3BoTFREWnJvdUxEZmlrTm55b0FzRmo5T0FPdXVjTVlISXpONkE1?=
- =?utf-8?B?a3E1NE03MEV1V0JyczgyRDJFek9UdHVERDZQbTl4ajhwRTFhYWxmcmphdTFr?=
- =?utf-8?B?Z2FZYWhBTGZNZVpjbGZMU2t2WHpqZ3VLWG5YUVJjSmpLTWJSVUhQc01aSzVn?=
- =?utf-8?B?WlYveVgrYytsSDFGZlFJWGkyeVdOb2FPZzUwdXpxV00zZlJ1b3FCZjNYOEZB?=
- =?utf-8?B?NjVVdm15dm4zblJraTNDZDFRRVlOV3lGK09CM0l1bkpoeWFYMUJrdUttWjY2?=
- =?utf-8?B?cjQydTdxZUtkMCt5dFprck11MXFTc1FrM1h5OStFZXJQNHU2Ym41ekM3dDFv?=
- =?utf-8?B?ZVZTZHpIMEVzajNQbmNYMHdjRnBybUFpV3FxRXl2NWNmQkJwU21WWUl6aWVS?=
- =?utf-8?B?NU1GdnowQmprOGw4UGZNaTE4bkxjSmlGZndpVWtkdi9RN2NmbWxMSExZUnF6?=
- =?utf-8?B?aWwyMDdLRkZxS0VPVHZxbm1WUkJiOGNwY3FtOFBLU3hVVlF0VW9FV0QrVkJX?=
- =?utf-8?B?Tjd4WnhtZFlpVXhvUGxPNzJ2NFRmOXdZTC94dC93STZOV3NTbWdOUlhySWtF?=
- =?utf-8?B?SjMwckxXUHIvSVAxVU1DTHY0bWJvSmx5STluUllNWmx3c3BXbG1mdXRMM254?=
- =?utf-8?B?NER6ZWpVMmg0T3AwckEzWXE1dUZRVGhRRU5rclhDaEpNY25JY0t3djdJU1p1?=
- =?utf-8?B?bVFxYysyTFNXWFB4ZG5xaHNwNHlkOTRrUEo2Nmg2Q3NENDZFNjhJMDZjaHpG?=
- =?utf-8?B?N0M5RzRUdzlzM0wrL2FZQklBMXlJa1h5Ni93RENJYWd6dmdwejBUUHRxVzda?=
- =?utf-8?B?ZzA1ZVp3QzZvbnQ2M2R2TDNyMHVBKzdQdUg5ay93TjI4cmtnMzJ3aDU5WnlO?=
- =?utf-8?B?VSt6TFVVSUQ5RFQ2VkRwbHBlUTZTR2RMME5IQjY3T1E1TjJMZVVrcnRoT0JT?=
- =?utf-8?B?UCtkQmF5WHVvaXR2NVREYmorNXpTMzB1Um9Kai9GTXJhOHowVGVJc1kxbGt2?=
- =?utf-8?B?N2tzeEZxZTYrRUoydzFSdkpGZnBySTVWWCtSbmVqNUFhMDBpWmRBeDlhQnNo?=
- =?utf-8?B?NnhWUGpwM3pBSW4zc2ZxbldYOFJBVUwzNUNTWHhxOFloU3FKK1c2QlFPZzhz?=
- =?utf-8?B?eEtxQmRtZlYyTWhwVnlNYnMzSUx5ZkZmalNqWXhQb09wVklhVTR3TllRSVA5?=
- =?utf-8?B?V3BoYkFNSG9uL2gzRXNRaTJwdnRRRVBvMFhQMDN1ZHR5OFNERDhkVVZnTWJO?=
- =?utf-8?Q?6wl/61ASqvk2FrMp7OaI3lI5+b1BxMIOzmonI7O?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bUttRGt1WUpKcVZrK0F3SktvSXlORTlpb0lzQk4wZ2VESHIyR0NwRlV2THRQ?=
- =?utf-8?B?c0xxcGJMejA4RFF1bCtsTTM4SWlwWlZIelVjQ1RoTTVMdXBrS092eld6MDhN?=
- =?utf-8?B?WUhIRkJRbGVHaWE0ZnRJa1BuSHo0TVdBbzd6M3l2K2w2MFJwNnhIeGx4aTBL?=
- =?utf-8?B?Y1JpanZtSnFxdk1UM2VDMHkyZDFsL0ZJK29keFRKdmcvZlRTNzlQYkM2TktF?=
- =?utf-8?B?S1NQaXNka3Era3NFRHRkazlQK0RuVVFPazljc0h1SWtvR2g4VkFpOVlzOExF?=
- =?utf-8?B?bTN1QUV2Nm9mZjJGTTFPTE9MelFLeUlwdkMvaDBPZzZTb2k0RDdHZUE5OWhY?=
- =?utf-8?B?M1FBMzVMcC8zVGQwL1kweXBuTlpZMFJWa0RDcFZSN0JrTVBjaHJHeTJKTm1S?=
- =?utf-8?B?eG84WVV2bHFpcDgvd3RYT2t4L3h4czFOclhRbVJjV0creFNXNitaT1RYSWR2?=
- =?utf-8?B?M3cvUDlJZS83bEFkVDIxRDFwV1U0Y01RSUcxYlVIV0V6S3VCWkUzWS9GdWw0?=
- =?utf-8?B?UGN5YTdCV3F6YUsxSld1RVFMSGJ4WFRhQUoxaUxjaFBjR3EycTQxekdEUyt1?=
- =?utf-8?B?U3BKQUtkRVZPSXhkbStWRGpGeVJtMkZTTEVZSVhrV3plK1JvaGp2WnNjWXc1?=
- =?utf-8?B?RmZQc2JUc3NMRi81RUg1czVvV1orY2ZLZDdOQjBzYk96SVJhQXB1c2d4NThm?=
- =?utf-8?B?dnZVWVpXUHpBb3YrUHAvMjhQTEtuMUpOa1E3SlhNS3Bzbkx5QzduajJJc0VE?=
- =?utf-8?B?VC9DK2lYNFkxdGFzQmJHelhzTFVzVFBPcHJxcGFkblZqZjVNd3VJeHl4QWlE?=
- =?utf-8?B?dHpvZHhIem9WdGM5U0ordEtxdjRQaVRNeld3MVQvaW9YQnJBeTFxWVZsNDNw?=
- =?utf-8?B?elA3ckZBNDdqNjB0QlhRQWRDOE9qdmx4YmZOM0J6VHN0Y0Q3ZThnaTVkTEtO?=
- =?utf-8?B?aUFPaisyemQ4dXQ2Y09pdjVvTVowOEdjZWlxS1VaL0FkMXluSHJXclp4WUNY?=
- =?utf-8?B?UTBnb2dwVjZaaXh5MnRtb05iekxnY0FHYU1IQmY5bkcvM3V6VW9WMjl0bUJN?=
- =?utf-8?B?UGtpV1UxRkY4RmVON1hVRU1TcnA5Ri9LeUdZVk1kMGhWdWEybEIxaTZEMGIy?=
- =?utf-8?B?TlRPVjdRWlIwNlh5Q0J6bHdDUHhFMi9xdEI5UHR2STFqeFpudG1yNlkzcldO?=
- =?utf-8?B?TURPbHVlUmFVU0haTlpYWXpZZzY4bUEyN3hkMkJERDdzcXE5THJoZytiYWl6?=
- =?utf-8?B?WldYZWhGekIvOXdDcThQdEdlbU1OYklBZUpyYUpKMksvZ25NNTF4L3JvVVJ4?=
- =?utf-8?B?N0d4NFEySDJSQUtjcDhSdmZvTG5EQVdDMTdWSVBQT05GbmFBeGRGMi9TR21X?=
- =?utf-8?B?WU4zRUozbXNFaTFNZnZOZkIvWUtJZXQzUGJDT3d3aGszUlJzcUhJN2JIUnM3?=
- =?utf-8?B?UHlGOVZxQkdZTUhyN0NSNmgrRW9aejhLeVJEcVluTHFNV2RPVlF5d2YxR3B3?=
- =?utf-8?B?OCsrNGJwOENCbGp6YkR1NEJTaEcrRjZrRldrK2FPRGx5SUhkZGhSd2k3SmlR?=
- =?utf-8?B?aU9JdEpEOGthSmpCTkxlMjVFQ1JwU0U0em93MGoyMUZTbmZDRExwVkgrM3A2?=
- =?utf-8?B?bUJCNURyWHJUUWNQMDRFeVdYT3FCb2krRmV4T3Uvd1dlVmtWcHZOQXIxdU5o?=
- =?utf-8?B?bE5YcEZSN1YzUjFPQWpNOVgxa1BaaW11alB4R2YydGlyV2ptYlVpcDQrNWRM?=
- =?utf-8?B?eW9pWHFpY3AySStEUmFKdlh5TFcrM0lrY2RCaHF1bFBxcUFYdjRyZm1la2dW?=
- =?utf-8?B?bk5CcnZ4V2EwalVuL05ybGpDdmZNL1hjYjMrZ0lxTTVsTTQrRDBCbENmU2NE?=
- =?utf-8?B?VHA3VVQ0VzVWWjBQdXhBTkV0cnR4TWRJa3NpaUM5bDByYWxWQWVQSUpNMjFN?=
- =?utf-8?B?c2pRM0FEaTBJeTI5ZVlBQXVTUGU2STZlckYxR21iSUJQMGc0STRoTXRzVHJh?=
- =?utf-8?B?WVRUelY0ZE5MM0l0cXNTay9TRlpDV2s3WDV1bVhacTZmdUFQWm5laUYzNjk1?=
- =?utf-8?B?WkY0WFlNaEtpd2w4NDlSRjBiMXdWNkpTTnBGY2VyUmR0Qmx0eHAzc29NTElB?=
- =?utf-8?Q?bXgQ=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2fb50e84ec7so14988081fa.1
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 20:39:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732077584; x=1732682384; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BH0BTo0gQEjRnh3EeXyQKCk7weklX1pLoXq018rMudk=;
+ b=BOS14zeSUoUaDL200y9eWS7grWVn5lIcWHfrD+LT/hwPx4Tv97Ik3/r1KZzZIJ2Euc
+ YrywVcTzOotNJvLEBXwV9ZCusQ4mO+zVljs00H6MOOfxbzSY3l7qbb8J2MgcsPRRlOaV
+ 1byT+rKQ8e+Le1ocV52idvZhamZ8kCBRjF+AAJZxOSJsDpHRV2P1YBODuJdloVC3bUNz
+ b4QtL3BwkUzXkvBFJSURuQdKTF+7zoBjsybDzp77OUkEnmwCcOOsEzWaz1QX8Y4fNEkb
+ Y1YyIiHO/P+1Ocspe2tpt0qRBjDEbHeyb+qbTLqygBEHyTjIB7nv25yR1bIakQMMlb8O
+ HkXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732077584; x=1732682384;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BH0BTo0gQEjRnh3EeXyQKCk7weklX1pLoXq018rMudk=;
+ b=XtfO2/ad4yi1Wd5hZMZId+S5r16S0QeZw0T4IOz+QHIGOrJ+zS62kz3bB9H1mG1LVZ
+ lT7VdrN5FKWgbCC+6+jhfXM0zDwk19L1Ztq1Hv1kmtjpOdoib3EKjvL7nXvWDJ0h3m1G
+ LQIPxOar8ahONugnhdaKaUq1M7ojEHZIkOcKijoRe/g57FhhfnP684+zPmy+AIfr5foy
+ oStxHAlIGELZrOzvV9CPNG/lYM16bbvyMzFiC2h7CA7lHw6RwVnd6X+60029bs6TsdCv
+ f1fmU0FGDcUlNzYnSX1bONSSZMjWyTwpBndf1umfXzdNqJ8fqomnjsRFt+B4Exz3K0bH
+ as0A==
+X-Gm-Message-State: AOJu0YxY9t9ZASVuDTBMF+JfKWqviMRGbRxDuMdS8fpmqKMvBadfg7k1
+ N7S87qEsc6fpGwghX5JduiVllGwYRw7Pn/yHCk1/Jv6fowxMWnvTdmnmsIA9u3TOvuzMaMuw8Fm
+ N9zsSBFrwkPJH0rhoC50E1BwknHg=
+X-Gm-Gg: ASbGncuUh/TzwcswBYqoMworhV+oj95k8tApxvAD93ZAvNuiniPMv14YgUw+v+yTMzo
+ Io7VGO1l932YgsKtG/+eey4ivQv1uuEzhOBy+iwFSupnOm8AT0d5UYBnp0LA9lWVmDA==
+X-Google-Smtp-Source: AGHT+IGo52hWRRf50tl3egAEOOgQW4olAQEm7fqwSRPDLlkKe668WXfX3FLgIf0Q6Yyl+7TQSJ3WTTYeebvnhwDZk8U=
+X-Received: by 2002:a05:651c:220c:b0:2fb:62ad:89fe with SMTP id
+ 38308e7fff4ca-2ff8dbb6375mr5366781fa.16.1732077583223; Tue, 19 Nov 2024
+ 20:39:43 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f5ce4217-2cf6-43ef-1a35-08dd091ae2c2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Nov 2024 04:22:03.4464 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jACcDDaAqwgs50/hG/kpvxpY0OoUR3FXJEwBYGOucRcWaMzAB3GoC16ITnzTZxDjBuBdzlz3eV3sYE9OS9vfiA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9270
+References: <CANV2PTN5AbNpCu4TGhZ87q_Eyeemxxwu5m=QjwKVS967x8hbnQ@mail.gmail.com>
+ <CADg8p94ohYfNLL8jbRA-hNd=fbg9PuVJvp0z-QYTeaGwHZ9q0Q@mail.gmail.com>
+In-Reply-To: <CADg8p94ohYfNLL8jbRA-hNd=fbg9PuVJvp0z-QYTeaGwHZ9q0Q@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 19 Nov 2024 20:39:32 -0800
+Message-ID: <CANV2PTNdcc61CUTF9_zammmAugjVQOth=UFPiZv3=Qw_YX5RkA@mail.gmail.com>
+Subject: Re: [BUG regression in HEAD] efi: memory: use the lmb API's for
+ allocating and freeing memory
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,48 +93,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGksDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWFyZWsgVmFzdXQg
-PG1hcmV4QGRlbnguZGU+DQo+IFNlbnQ6IFR1ZXNkYXksIE5vdmVtYmVyIDE5LCAyMDI0IDc6NDkg
-UE0NCj4gVG86IEFiYmFyYXB1LCBWZW5rYXRlc2ggPHZlbmthdGVzaC5hYmJhcmFwdUBhbWQuY29t
-PjsgdS1ib290QGxpc3RzLmRlbnguZGUNCj4gQ2M6IFNpbWVrLCBNaWNoYWwgPG1pY2hhbC5zaW1l
-a0BhbWQuY29tPjsgZmFicmljZS5nYXNuaWVyQGZvc3Muc3QuY29tOyBnaXQNCj4gKEFNRC1YaWxp
-bngpIDxnaXRAYW1kLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2MTEgMy83XSB1c2I6IG9u
-Ym9hcmQtaHViOiBhZGQgc3VwcG9ydCBmb3IgTWljcm9jaGlwDQo+IFVTQjU3NDQNCj4gDQo+IE9u
-IDExLzE5LzI0IDQ6MjIgQU0sIEFiYmFyYXB1LCBWZW5rYXRlc2ggd3JvdGU6DQo+IA0KPiBbLi4u
-XQ0KPiANCj4gPj4+Pj4+IElzIHRoZXJlIGEgbWF0Y2hpbmcgZGVsYXkgcmVxdWlyZW1lbnQgc3Bl
-Y2lmaWVkIGluIHRoZSBVU0IgaHViDQo+ID4+Pj4+PiBkYXRhc2hlZXQgb3IgaXMgdGhpcyBhIHdv
-cmthcm91bmQgZm9yIHNvbWUgYm9hcmQtc3BlY2lmaWMgYmVoYXZpb3IgPw0KPiA+Pj4+PiBUaGUg
-bWF0Y2hpbmcgZGVsYXkgaXMgbm90IHNwZWNpZmllZCBpbiB0aGUgVVNCNTc0NCBodWIgZG9jdW1l
-bnQsDQo+ID4+Pj4+IGJ1dCBiYXNlZCBvbg0KPiA+Pj4+IHRlc3Rpbmcgb24gMiBib2FyZHMgd2l0
-aCB0aGUgYWJvdmUtbWVudGlvbmVkIGRlbGF5IGkyYyBmYWlsdXJlcw0KPiA+Pj4+IHdlcmUgbm90
-DQo+ID4+IG9ic2VydmVkLg0KPiA+Pj4+IElzIHRoaXMgMTBtcyBhIGJvYXJkLXNwZWNpZmljIHJl
-c2V0IGRlbGF5ID8NCj4gPj4+PiBXaHkgaXMgaXQgaW4gYSBnZW5lcmljIGRyaXZlciA/DQo+ID4+
-PiBPbiBvdXIgYm9hcmRzIHdlIG9ic2VydmVkIGkyYyBmYWlsdXJlcyB3aGVuIHdlIHNldCB0aGUg
-cmVzZXQgZGVsYXkNCj4gPj4+IGFzIDV1cyBhbmQgcG93ZXIgb24gZGVsYXkgYXMgMW1zIGFzIHBl
-ciB0aGUgVVNCNTc0NCBkYXRhc2hlZXQuIFRoZQ0KPiA+Pj4gcmVhc29uIG9mIGFkZGluZyAxMG1z
-IGRlbGF5IGlzIGJlY2F1c2Ugb2YgaTJjIGZhaWx1cmVzIGFuZCB0aGUgbGludXgNCj4gPj4+IHJl
-ZmVyZW5jZSBpcw0KPiA+Pj4gaHR0cHM6Ly9naXRodWIuY29tL3RvcnZhbGRzL2xpbnV4L2NvbW1p
-dC85MDhmNjFiZWRiMmM0MGM2ZDg1NmJiZmQ3ZjgNCj4gPj4+IDcwDQo+ID4+PiBiOTY3YTRjYjQ5
-OCBEbyB5b3UgaGF2ZSBhbnl0aGluZyB3aXRoIHJlc3BlY3QgdG8gdGhlc2UgZGVsYXlzLCBhcw0K
-PiA+Pj4geW91IG1pZ2h0IGhhdmUgdGVzdGVkIG9uIHNvbWUgb3RoZXIgYm9hcmRzPyBJZiBhbnl0
-aGluZywgcGxlYXNlIGxldCBtZSBrbm93Lg0KPiA+PiBJZiB0aGUgMTBtcyBkZWxheSBpcyBhIGJv
-YXJkIHNwZWNpZmljIGRlbGF5LCB0aGVuIHRoaXMgaGFzIHRvIGJlDQo+ID4+IGhhbmRsZWQgaW4g
-YSBib2FyZCBzcGVjaWZpYyB3YXksIG5vdCBoYXJkLWNvZGVkIGluIHRoZSBkcml2ZXIuDQo+ID4+
-IFByb2JhYmx5IGFkZCBzb21lIG5ldyBwcm9wZXJ0eSB3aGljaCBzcGVjaWZpZXMgdGhlIGV4dHJh
-IGJvYXJkDQo+ID4+IHNwZWNpZmljIHJlc2V0IGRlbGF5LCBidXQgYmUgc3VyZSB0byBydW4gdGhh
-dCBwcm9wZXJ0eSBieSB0aGUgTGludXgga2VybmVsDQo+IG1haW50YWluZXJzIHRvby4NCj4gPiBU
-aGFua3MuIEkgd2lsbCBjaGVjayBob3cgdG8gYWRkIHRoZSBib2FyZCBzcGVjaWZpYyBkZWxheSBh
-cyBuZXcgcHJvcGVydHkuDQo+IA0KPiBBZGQgc29tZSByZXNldC0uLi4tdXMgLCBzaW1pbGFyIHRv
-IHdoYXQgZXRoZXJuZXQgUEhZcyBhbHJlYWR5IGRvIGluIERULg0KU3VyZS4uLndpbGwgY2hlY2sg
-YW5kIGluaXRpYXRlIGRpc2N1c3Npb24gd2l0aCB0aGUgTGludXggdGVhbS4NCg0KPiANCj4gPiBB
-cyB0aGlzIGRlbGF5IG1pZ2h0IGJlIHNwZWNpZmljIHRvIHRoZSBib2FyZHMgd2hpY2ggd2UgdGVz
-dGVkLg0KPiA+IFRoZXJlIHdvbid0IGJlIGFueSBpc3N1ZSBpZiB3ZSBjYW4gYWRkIHRoZSBkZWZh
-dWx0ICJyZXNldF9kZWxheSIoNXVzKSBhbmQNCj4gInBvd2VyX29uX2RlbGF5IiAoMW1zKSBmcm9t
-IHRoZSBVU0I1NzQ0IGRhdGFzaGVldCwgYXMgb3RoZXIgYm9hcmRzIHdpbGwgYmUNCj4gd29ya2lu
-ZyB3aXRob3V0IGFueSBib2FyZCBzcGVjaWZpYyBkZWxheT8NCj4gUmlnaHQsIHRoZSBkcml2ZXIg
-aGFzIHRvIGJlIGdlbmVyaWMgLCB0aGF0IG1lYW5zIGl0IHNob3VsZCBjb250YWluIGRlbGF5cyBz
-cGVjaWZpZWQgaW4NCj4gdGhlIGRhdGFzaGVldC4gQm9hcmQgc3BlY2lmaWMgZGVsYXlzIGhhdmUg
-dG8gYmUgY29uZmlndXJlZCBpbiBib2FyZCBzcGVjaWZpYyBEVHMuDQpUaGFua3MuIEkgaGF2ZSB1
-cGRhdGVkIHRoZSBkZWxheXMgYmFzZWQgb24gdXNiNTc0NCBzcGVjaWZpY2F0aW9uIGluIHRoZSAN
-CltQQVRDSCB2MTMgMy83XSB1c2I6IG9uYm9hcmQtaHViOiBhZGQgc3VwcG9ydCBmb3IgTWljcm9j
-aGlwIFVTQjU3NDQNClBsZWFzZSByZXZpZXcuDQoNClRoYW5rcw0KVmVua2F0ZXNoDQo=
+On Tue, Nov 19, 2024 at 6:42=E2=80=AFPM Sughosh Ganu <sughosh.ganu@linaro.o=
+rg> wrote:
+>
+> On Wed, 20 Nov 2024 at 04:48, E Shattow <lucent@gmail.com> wrote:
+> >
+> > Hello,
+> >
+> > On HEAD some commits after v2024.10 I encounter a regression for
+> > `bootefi bootmgr` fail with error "Not a PE-COFF file";  The fall-thru
+> > case of global EFI boot is successful.
+> >
+> > Having run a git bisect I discover the first bad commit 22f2c9ed:
+> >
+> > $ git checkout -b master origin/master
+> > branch 'master' set up to track 'origin/master'.
+> > Switched to a new branch 'master'
+> > $ git bisect start
+> > status: waiting for both good and bad commits
+> > $ git bisect bad HEAD
+> > status: waiting for good commit(s), bad commit known
+> > $ git bisect good v2024.10
+> > Bisecting: 850 revisions left to test after this (roughly 10 steps)
+> > [82686e678e1587ddbd9570f82c58cdc3aecf2dbe] Merge branch 'staging' of
+> > https://source.denx.de/u-boot/custodians/u-boot-tegra
+> > $ git bisect good
+> > Bisecting: 422 revisions left to test after this (roughly 9 steps)
+> > [8963d433eb5d4a9f3a9def84e9c61a45c13e72bc] Merge tag
+> > 'u-boot-rockchip-20241026' of
+> > https://gitlab.denx.de/u-boot/custodians/u-boot-rockchip
+> > $ git bisect bad
+> > Bisecting: 214 revisions left to test after this (roughly 8 steps)
+> > [0a504585d1cefeaf35ae8f860a5e5aa44dfffed5] arm: dts: k3-j722s-binman:
+> > Add support for HS-SE
+> > $ git bisect bad
+> > Bisecting: 106 revisions left to test after this (roughly 7 steps)
+> > [88057dab2cde8710ccc95d12fb312184e0b023ca] mtd: spi-nor: Allow flashes
+> > to specify MTD writesize
+> > $ git bisect good
+> > Bisecting: 53 revisions left to test after this (roughly 6 steps)
+> > [625d40ab120dbc6f45dbd975857f8f87e422bd0f] test: boot: fix
+> > bootflow_cmd_label for when DSA_SANDBOX is disabled
+> > $ git bisect bad
+> > Bisecting: 26 revisions left to test after this (roughly 5 steps)
+> > [5b9261fb0b1ed087387f2036d279fd3f4bb20a61] Makefile: Drop
+> > SPL_FIT_GENERATOR support
+> > $ git bisect good
+> > Bisecting: 13 revisions left to test after this (roughly 4 steps)
+> > [e1b6822d6522d94d579d53092342b542d368a04b] efi_memory: do not add RAM
+> > memory to the memory map
+> > $ git bisect bad
+> > Bisecting: 6 revisions left to test after this (roughly 3 steps)
+> > [2f6191526a1325b6ddb59795a093eca69dbf8976] lmb: notify of any changes
+> > to the LMB memory map
+> > $ git bisect bad
+> > Bisecting: 2 revisions left to test after this (roughly 2 steps)
+> > [3c6896ad2fb876b0a23202f62a83c0d44380c9ea] lmb: add a flag to allow
+> > suppressing memory map change notification
+> > $ git bisect good
+> > Bisecting: 0 revisions left to test after this (roughly 1 step)
+> > [22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1] efi: memory: use the lmb
+> > API's for allocating and freeing memory
+> > $ git bisect bad
+> > Bisecting: 0 revisions left to test after this (roughly 0 steps)
+> > [eb052cbb896fee6f947765b44b0d80a54b19ce1a] lmb: add and reserve memory
+> > above ram_top
+> > $ git bisect good
+> > 22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1 is the first bad commit
+> >
+> > A commit is good if Star64 boots and absent the error about "Not a
+> > PE-COFF file" (duly confirmed by eficonfig to adjust boot order
+> > allowing removable media of an OS installer image on SD Card to be the
+> > priority, verifying that the installer runs as expected).  A commit is
+> > bad if U-Boot crashes and/or has the error "Not a PE-COFF file".
+
+>
+> Can you post the output of the following. Thanks.
+
+>
+> 1) running the 'bdinfo' command
+
+U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
+...
+StarFive # bdinfo
+boot_params =3D 0x0000000000000000
+DRAM bank   =3D 0x0000000000000000
+-> start    =3D 0x0000000040000000
+-> size     =3D 0x0000000100000000
+flashstart  =3D 0x0000000000000000
+flashsize   =3D 0x0000000000000000
+flashoffset =3D 0x0000000000000000
+baudrate    =3D 115200 bps
+relocaddr   =3D 0x00000000fff46000
+reloc off   =3D 0x00000000bfd46000
+Build       =3D 64-bit
+current eth =3D ethernet@16030000
+ethaddr     =3D 6c:cf:39:00:75:63
+IP addr     =3D <NULL>
+fdt_blob    =3D 0x00000000ff72da20
+lmb_dump_all:
+ memory.count =3D 0x1
+ memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: none
+ reserved.count =3D 0x2
+ reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-map
+ reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-overwri=
+te
+devicetree  =3D board
+serial addr =3D 0x0000000010000000
+ width      =3D 0x0000000000000004
+ shift      =3D 0x0000000000000002
+ offset     =3D 0x0000000000000000
+ clock      =3D 0x00000000016e3600
+boot hart   =3D 0x0000000000000001
+firmware fdt=3D 0x0000000042200000
+
+U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
+...
+StarFive # bdinfo
+boot_params =3D 0x0000000000000000
+DRAM bank   =3D 0x0000000000000000
+-> start    =3D 0x0000000040000000
+-> size     =3D 0x0000000100000000
+flashstart  =3D 0x0000000000000000
+flashsize   =3D 0x0000000000000000
+flashoffset =3D 0x0000000000000000
+baudrate    =3D 115200 bps
+relocaddr   =3D 0x00000000fff46000
+reloc off   =3D 0x00000000bfd46000
+Build       =3D 64-bit
+current eth =3D ethernet@16030000
+ethaddr     =3D 6c:cf:39:00:75:63
+IP addr     =3D <NULL>
+fdt_blob    =3D 0x00000000ff72da10
+lmb_dump_all:
+ memory.count =3D 0x1
+ memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: none
+ reserved.count =3D 0x3
+ reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
+ reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-overwri=
+te
+ reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
+no-notify, no-overwrite
+devicetree  =3D board
+serial addr =3D 0x0000000010000000
+ width      =3D 0x0000000000000004
+ shift      =3D 0x0000000000000002
+ offset     =3D 0x0000000000000000
+ clock      =3D 0x00000000016e3600
+boot hart   =3D 0x0000000000000001
+firmware fdt=3D 0x0000000042200000
+
+Differences in bdinfo output between working (parent of the
+regression) and non-working (origin/master) version:
+
+-fdt_blob    =3D 0x00000000ff72da20
++fdt_blob    =3D 0x00000000ff72da10
+ lmb_dump_all:
+  memory.count =3D 0x1
+- memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: none
+- reserved.count =3D 0x2
+- reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-map
+- reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-overwr=
+ite
++ memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: none
++ reserved.count =3D 0x3
++ reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
++ reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-overwr=
+ite
++ reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
+no-notify, no-overwrite
+
+>
+> 2) do you get any errors when running the 'bootefi bootmgr' command
+> other than what you mention above
+>
+
+U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
+...
+StarFive # bootefi bootmgr
+Booting: mmc 0
+error: no suitable video mode found.
+
+U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
+...
+StarFive # bootefi bootmgr
+Card did not respond to voltage select! : -110
+Not a PE-COFF file
+Loading Boot0000 'mmc 0' failed
+Loading Boot0001 'nvme 0' failed
+EFI boot manager: Cannot load any image
+
+> 3) What exactly do you mean by "global EFI boot is successful"
+>
+
+I don't know what the correct name of it is. EFI can boot with what I
+am labeling as global EFI boot and searching for fixed path names (?),
+or I guess it can decide from EFI variables what to do which I
+consider to be the user-configured EFI boot. One of these (the
+user-configured EFI boot) is broken since the regression.
+
+U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
+...
+Card did not respond to voltage select! : -110
+Failed to load EFI variables
+** Booting bootflow '<NULL>' with efi_mgr
+Booting: mmc 0
+error: no suitable video mode found.
+
+U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
+...
+Card did not respond to voltage select! : -110
+Failed to load EFI variables
+** Booting bootflow '<NULL>' with efi_mgr
+Not a PE-COFF file
+Loading Boot0000 'mmc 0' failed
+Loading Boot0001 'nvme 0' failed
+EFI boot manager: Cannot load any image
+Boot failed (err=3D-14)
+** Booting bootflow 'mmc@16010000.bootdev.part_1' with efi
+Booting /\EFI\BOOT\BOOTRISCV64.EFI
+error: no suitable video mode found.
+
+> -sughosh
+>
+> >
+> > For context, the Star64 eMMC contains here an installed Debian Linux
+> > OS in the usual way with Grub2 EFI on the EFI System Partition there,
+> > and that image boots fine from U-Boot v2024.10 also when loaded into
+> > memory and using 'bootefi' directly on that memory address.
+> >
+
+Thanks,
+
+-E Shattow
