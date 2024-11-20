@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B4AD6E2B6
-	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 05:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52801D6E2C9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Nov 2024 06:46:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEDCA88E94;
-	Wed, 20 Nov 2024 06:14:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 77BDD8962D;
+	Wed, 20 Nov 2024 07:46:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qrpvWlNn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RfbdBfT6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2699C88F27; Wed, 20 Nov 2024 06:14:12 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 8A44B89634; Wed, 20 Nov 2024 07:46:00 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39DB588E39
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 06:14:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76EA18962D
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 07:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5ceb03aadb1so6725468a12.0
- for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 21:14:09 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-382411ea5eeso306303f8f.0
+ for <u-boot@lists.denx.de>; Tue, 19 Nov 2024 22:45:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732079648; x=1732684448; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732085158; x=1732689958; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kwTNsh+blKTjm4/ZOSdoD8RepX/o3D30Sjdv1zZFSXI=;
- b=qrpvWlNnUKvSTDFZnJ0woM2RPNxPtKrfzxfnaGlz3WTiuVkwd4GAzUTQ85W4LAtiCF
- KixRvI8c3AT6pRATS9uGnVyekv8eWeI4wVwV6cdFSDzZ3LegmfVTixE42gSclKZtPmoM
- Wnbzh13QjZlrGJ6UcSOALY+yqIOV1hwjWy+gpn1iTM8ZwWBtUjQtyaGAQN53f3YywGRz
- upZWJRKVx4BDeWUpu6FKQxF9/oFqxiAZP3945PThapyNVF0pgyCbggblZEN5uFxrOARB
- IJgqi/h3BuNPjBN6Ql5wUVE3W2a+v5w5upAZKe7EOhYx5y+SqJLTBrg2H1EtbtCK+faa
- FM0g==
+ bh=vTQV64BYMR8D8EWpBQRd/aD2J2LubMIUvyWvzoG5dvU=;
+ b=RfbdBfT6tw+o1OcQHX8e9kpeQ8qI8SfcEAsIS2OqfQGiTSl1rIxIt/b4u/GqDsRl83
+ UcbCtuiWdxg8VsQCI++0GMarXbAmmplMmoJ1nXk/xBZveahvOtFanh8w7U1yDtyPzfoy
+ icIMnw0LJ6UNkLojdjev/oQQl6OLHVWfWuwNOJLULj84cOfm8L8uv/TKmgZdA6/arhjR
+ m4GonuYOqU+q9WVUkDpg/wzFHKXwIdJOHRCfOo3K2xMG5KMRhJ4csV1kD0mfcaMtwbR0
+ COJjYhJ7oJUQYqtlm/T1L3v3iro1qkJCpIkngSMW41eC70vLPJpiZPSqRXh23ghJ/wV1
+ Y/sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732079648; x=1732684448;
+ d=1e100.net; s=20230601; t=1732085158; x=1732689958;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kwTNsh+blKTjm4/ZOSdoD8RepX/o3D30Sjdv1zZFSXI=;
- b=XMokuz2LK0vO4T4IQBKSuE8yFP7jGipd0nH5UU2FPA43XKWP1lzHsF8NlpGdKlrqYi
- 8c+9xxGG8sV0EH4kjdUKUXSK4irNjcJFyPbi/GXTRURxL9kLZhgbRd/1LihV+LNVK7i4
- AXiavWjPg69q4qirgdrmTaGhXxtIq7ahFCyFKAVZgZa7pzd84NMGMFgMgQf+tBnBr5lT
- 0lBMZ5TtvOx7amjRq4xHayBRLmmxvOWwpHsHYd1RlMs2UEVLv29hSOHaRjZD/iPY3uer
- NIzdzrTL03EiT60KYy+TCbWh6zD5wxlOJXSf+aOCpJHOPZ7SsDiOTymKA8eo78GKYgQm
- uJqQ==
-X-Gm-Message-State: AOJu0YyDNuVpvMVRNUyxs8ehe8HI/QREzEidMf15LcuXX+q5iHnyqzJ+
- bJTraVZjxuykq57zI9wFlmocrqnsP/N4rMsnw8RnXC6h8vVUojYS26ELiVeh6gwHS2i734zymS8
- oBAX2rHyQVVRPoOq058kWxQ5WfG2dgHKgR4kivA==
-X-Google-Smtp-Source: AGHT+IGUisorEatCo1pTvjCAp0LpI7UzlL3nDLWxHQQODjKFFtN+3wgylUSLIY6xZcCe2DjiF4QAbjCgAwDdnHM2sjQ=
-X-Received: by 2002:a05:6402:2712:b0:5cf:c188:81bd with SMTP id
- 4fb4d7f45d1cf-5cff4c5436dmr661200a12.9.1732079648522; Tue, 19 Nov 2024
- 21:14:08 -0800 (PST)
+ bh=vTQV64BYMR8D8EWpBQRd/aD2J2LubMIUvyWvzoG5dvU=;
+ b=eV6DhUFul6j3CCfUT7A2k0IDhtWuU0QOKBDAGxfiPwXP9MqU667H9g9tMB/jxMq9aD
+ tBhHu++GcmgPLZoMoSmCSBFtKMgc1F0TxJddkgyzqE29rAsjiY2vZ6KII3ehlk9izLQy
+ ISmIgcqEhkOrcoQv+Ay0TqJg18UBGJJLgkg0HVCC6OqSf4vORuYFzVgI2hidO55hBb7T
+ tIfvQM+qFEqj5mPmmj2Ei7nK27nuvUUWhAS9JpXiXKBPdnPCRFNUhyXR8XP/KXh8E1mf
+ VbNw3DFnR9/zq6lPOxTdIl3cXVJjF7zpu3+NLzkarg+GPAvn8zBxpyuWOEl4nAxErcnr
+ +zZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWEu2BsfG4BXEFTcOUjFMDubZ6Sb8HDvL2EYAOxZYqAzHwosMcsPXauhGJKnUZJzI+gf49HGqY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGkLCHyRkFjDS4p1q1ptgnsgk+7ebURxzK6f640zfwGhWYX/Pt
+ EtiyatPIfbzsQC63idwhOwczEZLBSLiD0209Mg7vyMv01N3KJk8RgrvTJ0L1Y2v0XO0hdVzlrYu
+ 8sYFOkeR/9oMatnuMuA7b3AmkQiw=
+X-Google-Smtp-Source: AGHT+IH/EsAjACtEnNGDQSxDOcRsfLv+AKV85IaLF77oZUrwzzpalIS4yhpUqBWuwkSKqh4meH9NMCDb3b3+MunIbZg=
+X-Received: by 2002:a05:6000:1847:b0:382:4995:7a3e with SMTP id
+ ffacd0b85a97d-382544ce4c4mr1285898f8f.16.1732085157705; Tue, 19 Nov 2024
+ 22:45:57 -0800 (PST)
 MIME-Version: 1.0
-References: <CANV2PTN5AbNpCu4TGhZ87q_Eyeemxxwu5m=QjwKVS967x8hbnQ@mail.gmail.com>
- <CADg8p94ohYfNLL8jbRA-hNd=fbg9PuVJvp0z-QYTeaGwHZ9q0Q@mail.gmail.com>
- <CANV2PTNdcc61CUTF9_zammmAugjVQOth=UFPiZv3=Qw_YX5RkA@mail.gmail.com>
-In-Reply-To: <CANV2PTNdcc61CUTF9_zammmAugjVQOth=UFPiZv3=Qw_YX5RkA@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 20 Nov 2024 10:43:57 +0530
-Message-ID: <CADg8p97RHvZG23fE8grvE5DzScT+okV-6qSHv_gQUiwggKDtJQ@mail.gmail.com>
-Subject: Re: [BUG regression in HEAD] efi: memory: use the lmb API's for
- allocating and freeing memory
-To: E Shattow <lucent@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>
+References: <20241013145820.85426-1-clamor95@gmail.com>
+ <20241013145820.85426-2-clamor95@gmail.com>
+ <6f3ce823-93e8-46b5-86f3-52038efc5271@denx.de>
+ <CAPVz0n1dHC9VTgxgPmh=bUg1Ei1Wnamopbpjiyz81YxeFtfdWg@mail.gmail.com>
+In-Reply-To: <CAPVz0n1dHC9VTgxgPmh=bUg1Ei1Wnamopbpjiyz81YxeFtfdWg@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 20 Nov 2024 08:45:46 +0200
+Message-ID: <CAPVz0n1F043u8HNvmm-cU=oUjk17tR17Em+g2o+Z8idqq5NM4Q@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
+ setting address
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Holesch <simon@holesch.de>, Ion Agorria <ion@agorria.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,250 +96,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Nov 2024 at 10:09, E Shattow <lucent@gmail.com> wrote:
+=D0=BD=D0=B4, 27 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 18:4=
+2 Svyatoslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> On Tue, Nov 19, 2024 at 6:42=E2=80=AFPM Sughosh Ganu <sughosh.ganu@linaro=
-.org> wrote:
+> =D0=BD=D0=B4, 27 =D0=B6=D0=BE=D0=B2=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 18=
+:09 Marek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
 > >
-> > On Wed, 20 Nov 2024 at 04:48, E Shattow <lucent@gmail.com> wrote:
+> > On 10/13/24 4:58 PM, Svyatoslav Ryhel wrote:
+> >
+> > Sorry for the late reply.
+> >
+> > > +++ b/drivers/usb/gadget/ci_udc.c
+> > > @@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
+> > >       }
+> > >   }
 > > >
-> > > Hello,
+> > > +/*
+> > > + * This function explicitly sets the address, without the "USBADRA" =
+(advance)
+> > > + * feature, which is not supported by older versions of the controll=
+er.
+> > > + */
+> > > +static void ci_set_address(struct ci_udc *udc, u8 address)
+> > > +{
+> > > +     DBG("%s %x\n", __func__, address);
+> >
+> > log_debug() or dev_dbg() please.
+> >
+>
+> DBG macro is used across entire driver, if you wish to replace it,
+> then pls, send a followup with patch for entire driver. This is out of
+> scope of this patch.
+>
+> > > +     writel(address << 25, &udc->devaddr);
+> > > +}
+> > > +
+> > >   static void handle_ep_complete(struct ci_ep *ci_ep)
+> > >   {
+> > >       struct ept_queue_item *item, *next_td;
+> > >       int num, in, len, j;
+> > >       struct ci_req *ci_req;
 > > >
-> > > On HEAD some commits after v2024.10 I encounter a regression for
-> > > `bootefi bootmgr` fail with error "Not a PE-COFF file";  The fall-thr=
-u
-> > > case of global EFI boot is successful.
+> > > +     /* Set the device address that was previously sent by SET_ADDRE=
+SS */
+> > > +     if (controller.next_device_address !=3D 0) {
+> > > +             struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl=
+->hcor;
+> > > +
+> > > +             ci_set_address(udc, controller.next_device_address);
+> > > +             controller.next_device_address =3D 0;
+> > > +     }
+> > > +
+> > >       num =3D ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MAS=
+K;
+> > >       in =3D (ci_ep->desc->bEndpointAddress & USB_DIR_IN) !=3D 0;
+> > >       item =3D ci_get_qtd(num, in);
+> > > @@ -783,7 +801,7 @@ static void handle_setup(void)
+> > >                * write address delayed (will take effect
+> > >                * after the next IN txn)
+> > >                */
+> > > -             writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
+> > > +             controller.next_device_address =3D r.wValue;
+> >
+> > wValue is word , u16 , but next_device_address is u8 below , why ?
+> >
+>
+> wValue is u16 but only 8 bits are relevant since USB address is 8 bit,
+> hence u8. Changing wValue to u8 is out of scope of this patch as well.
+>
+> > >               req->length =3D 0;
+> > >               usb_ep_queue(controller.gadget.ep0, req, 0);
+> > >               return;
+> > > @@ -814,6 +832,9 @@ static void stop_activity(void)
+> > >       int i, num, in;
+> > >       struct ept_queue_head *head;
+> > >       struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+> > > +
+> > > +     ci_set_address(udc, 0);
+> > > +
+> > >       writel(readl(&udc->epcomp), &udc->epcomp);
+> > >   #ifdef CONFIG_CI_UDC_HAS_HOSTPC
+> > >       writel(readl(&udc->epsetupstat), &udc->epsetupstat);
+> > > @@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, i=
+nt is_on)
+> > >       struct ci_udc *udc =3D (struct ci_udc *)controller.ctrl->hcor;
+> > >       if (is_on) {
+> > >               /* RESET */
+> > > +             controller.next_device_address =3D 0;
+> > >               writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->usb=
+cmd);
+> > >               udelay(200);
 > > >
-> > > Having run a git bisect I discover the first bad commit 22f2c9ed:
-> > >
-> > > $ git checkout -b master origin/master
-> > > branch 'master' set up to track 'origin/master'.
-> > > Switched to a new branch 'master'
-> > > $ git bisect start
-> > > status: waiting for both good and bad commits
-> > > $ git bisect bad HEAD
-> > > status: waiting for good commit(s), bad commit known
-> > > $ git bisect good v2024.10
-> > > Bisecting: 850 revisions left to test after this (roughly 10 steps)
-> > > [82686e678e1587ddbd9570f82c58cdc3aecf2dbe] Merge branch 'staging' of
-> > > https://source.denx.de/u-boot/custodians/u-boot-tegra
-> > > $ git bisect good
-> > > Bisecting: 422 revisions left to test after this (roughly 9 steps)
-> > > [8963d433eb5d4a9f3a9def84e9c61a45c13e72bc] Merge tag
-> > > 'u-boot-rockchip-20241026' of
-> > > https://gitlab.denx.de/u-boot/custodians/u-boot-rockchip
-> > > $ git bisect bad
-> > > Bisecting: 214 revisions left to test after this (roughly 8 steps)
-> > > [0a504585d1cefeaf35ae8f860a5e5aa44dfffed5] arm: dts: k3-j722s-binman:
-> > > Add support for HS-SE
-> > > $ git bisect bad
-> > > Bisecting: 106 revisions left to test after this (roughly 7 steps)
-> > > [88057dab2cde8710ccc95d12fb312184e0b023ca] mtd: spi-nor: Allow flashe=
-s
-> > > to specify MTD writesize
-> > > $ git bisect good
-> > > Bisecting: 53 revisions left to test after this (roughly 6 steps)
-> > > [625d40ab120dbc6f45dbd975857f8f87e422bd0f] test: boot: fix
-> > > bootflow_cmd_label for when DSA_SANDBOX is disabled
-> > > $ git bisect bad
-> > > Bisecting: 26 revisions left to test after this (roughly 5 steps)
-> > > [5b9261fb0b1ed087387f2036d279fd3f4bb20a61] Makefile: Drop
-> > > SPL_FIT_GENERATOR support
-> > > $ git bisect good
-> > > Bisecting: 13 revisions left to test after this (roughly 4 steps)
-> > > [e1b6822d6522d94d579d53092342b542d368a04b] efi_memory: do not add RAM
-> > > memory to the memory map
-> > > $ git bisect bad
-> > > Bisecting: 6 revisions left to test after this (roughly 3 steps)
-> > > [2f6191526a1325b6ddb59795a093eca69dbf8976] lmb: notify of any changes
-> > > to the LMB memory map
-> > > $ git bisect bad
-> > > Bisecting: 2 revisions left to test after this (roughly 2 steps)
-> > > [3c6896ad2fb876b0a23202f62a83c0d44380c9ea] lmb: add a flag to allow
-> > > suppressing memory map change notification
-> > > $ git bisect good
-> > > Bisecting: 0 revisions left to test after this (roughly 1 step)
-> > > [22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1] efi: memory: use the lmb
-> > > API's for allocating and freeing memory
-> > > $ git bisect bad
-> > > Bisecting: 0 revisions left to test after this (roughly 0 steps)
-> > > [eb052cbb896fee6f947765b44b0d80a54b19ce1a] lmb: add and reserve memor=
-y
-> > > above ram_top
-> > > $ git bisect good
-> > > 22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1 is the first bad commit
-> > >
-> > > A commit is good if Star64 boots and absent the error about "Not a
-> > > PE-COFF file" (duly confirmed by eficonfig to adjust boot order
-> > > allowing removable media of an OS installer image on SD Card to be th=
-e
-> > > priority, verifying that the installer runs as expected).  A commit i=
-s
-> > > bad if U-Boot crashes and/or has the error "Not a PE-COFF file".
->
+> > > diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.=
+h
+> > > index bea2f9f3fe3..807f2084c1e 100644
+> > > --- a/drivers/usb/gadget/ci_udc.h
+> > > +++ b/drivers/usb/gadget/ci_udc.h
+> > > @@ -105,6 +105,7 @@ struct ci_drv {
+> > >       struct ept_queue_head           *epts;
+> > >       uint8_t                         *items_mem;
+> > >       struct ci_ep                    ep[NUM_ENDPOINTS];
+> > > +     u8                              next_device_address;
 > >
-> > Can you post the output of the following. Thanks.
+> > Should this be u16 ?
 >
-> >
-> > 1) running the 'bdinfo' command
->
-> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> ...
-> StarFive # bdinfo
-> boot_params =3D 0x0000000000000000
-> DRAM bank   =3D 0x0000000000000000
-> -> start    =3D 0x0000000040000000
-> -> size     =3D 0x0000000100000000
-> flashstart  =3D 0x0000000000000000
-> flashsize   =3D 0x0000000000000000
-> flashoffset =3D 0x0000000000000000
-> baudrate    =3D 115200 bps
-> relocaddr   =3D 0x00000000fff46000
-> reloc off   =3D 0x00000000bfd46000
-> Build       =3D 64-bit
-> current eth =3D ethernet@16030000
-> ethaddr     =3D 6c:cf:39:00:75:63
-> IP addr     =3D <NULL>
-> fdt_blob    =3D 0x00000000ff72da20
-> lmb_dump_all:
->  memory.count =3D 0x1
->  memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: none
->  reserved.count =3D 0x2
->  reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-map
->  reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-overw=
-rite
-> devicetree  =3D board
-> serial addr =3D 0x0000000010000000
->  width      =3D 0x0000000000000004
->  shift      =3D 0x0000000000000002
->  offset     =3D 0x0000000000000000
->  clock      =3D 0x00000000016e3600
-> boot hart   =3D 0x0000000000000001
-> firmware fdt=3D 0x0000000042200000
->
-> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
-> ...
-> StarFive # bdinfo
-> boot_params =3D 0x0000000000000000
-> DRAM bank   =3D 0x0000000000000000
-> -> start    =3D 0x0000000040000000
-> -> size     =3D 0x0000000100000000
-> flashstart  =3D 0x0000000000000000
-> flashsize   =3D 0x0000000000000000
-> flashoffset =3D 0x0000000000000000
-> baudrate    =3D 115200 bps
-> relocaddr   =3D 0x00000000fff46000
-> reloc off   =3D 0x00000000bfd46000
-> Build       =3D 64-bit
-> current eth =3D ethernet@16030000
-> ethaddr     =3D 6c:cf:39:00:75:63
-> IP addr     =3D <NULL>
-> fdt_blob    =3D 0x00000000ff72da10
-> lmb_dump_all:
->  memory.count =3D 0x1
->  memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: none
->  reserved.count =3D 0x3
->  reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
->  reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-overw=
-rite
->  reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
-> no-notify, no-overwrite
-> devicetree  =3D board
-> serial addr =3D 0x0000000010000000
->  width      =3D 0x0000000000000004
->  shift      =3D 0x0000000000000002
->  offset     =3D 0x0000000000000000
->  clock      =3D 0x00000000016e3600
-> boot hart   =3D 0x0000000000000001
-> firmware fdt=3D 0x0000000042200000
->
-> Differences in bdinfo output between working (parent of the
-> regression) and non-working (origin/master) version:
->
-> -fdt_blob    =3D 0x00000000ff72da20
-> +fdt_blob    =3D 0x00000000ff72da10
->  lmb_dump_all:
->   memory.count =3D 0x1
-> - memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: none
-> - reserved.count =3D 0x2
-> - reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no-map
-> - reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no-over=
-write
-> + memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags: none
-> + reserved.count =3D 0x3
-> + reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-map
-> + reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no-over=
-write
-> + reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
-> no-notify, no-overwrite
->
-> >
-> > 2) do you get any errors when running the 'bootefi bootmgr' command
-> > other than what you mention above
-> >
->
-> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> ...
-> StarFive # bootefi bootmgr
-> Booting: mmc 0
-> error: no suitable video mode found.
->
-> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
-> ...
-> StarFive # bootefi bootmgr
-> Card did not respond to voltage select! : -110
-> Not a PE-COFF file
-> Loading Boot0000 'mmc 0' failed
-> Loading Boot0001 'nvme 0' failed
-> EFI boot manager: Cannot load any image
->
-> > 3) What exactly do you mean by "global EFI boot is successful"
-> >
->
-> I don't know what the correct name of it is. EFI can boot with what I
-> am labeling as global EFI boot and searching for fixed path names (?),
-> or I guess it can decide from EFI variables what to do which I
-> consider to be the user-configured EFI boot. One of these (the
-> user-configured EFI boot) is broken since the regression.
->
-> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800)
-> ...
-> Card did not respond to voltage select! : -110
-> Failed to load EFI variables
-> ** Booting bootflow '<NULL>' with efi_mgr
-> Booting: mmc 0
-> error: no suitable video mode found.
->
-> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -0800)
-> ...
-> Card did not respond to voltage select! : -110
-> Failed to load EFI variables
-> ** Booting bootflow '<NULL>' with efi_mgr
-> Not a PE-COFF file
-> Loading Boot0000 'mmc 0' failed
-> Loading Boot0001 'nvme 0' failed
-> EFI boot manager: Cannot load any image
-> Boot failed (err=3D-14)
-> ** Booting bootflow 'mmc@16010000.bootdev.part_1' with efi
-> Booting /\EFI\BOOT\BOOTRISCV64.EFI
-> error: no suitable video mode found.
+> No, USB address is only 8bits (u8)
 
-Based on the logs above, it seems like you are booting using the
-bootmeth efi_mgr? If so, can you try disabling the bootstd config. I
-might be wrong, but I remember some issues with the bootstd efi_mgr
-method on some other platform. Also, are you available on irc?
-
--sughosh
-
-> > -sughosh
-> >
-> > >
-> > > For context, the Star64 eMMC contains here an installed Debian Linux
-> > > OS in the usual way with Grub2 EFI on the EFI System Partition there,
-> > > and that image boots fine from U-Boot v2024.10 also when loaded into
-> > > memory and using 'bootefi' directly on that memory address.
-> > >
->
-> Thanks,
->
-> -E Shattow
+If no other comments were proposed, may this patch be applied?
