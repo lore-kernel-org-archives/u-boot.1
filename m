@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A8B5D6ED11
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 12:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09FE6D6ED15
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 12:21:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 933CE89776;
-	Thu, 21 Nov 2024 13:03:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 70C4F896C9;
+	Thu, 21 Nov 2024 13:21:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sDYBMVmn";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BD03A89775; Thu, 21 Nov 2024 13:03:13 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 437678975E
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 13:03:11 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ALC38eI128803;
- Thu, 21 Nov 2024 06:03:08 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732190588;
- bh=bQaMnmJI9vnFqLhHHWhv0FD7lj5Mzh9dutuH1FLKTeA=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=sDYBMVmnZvYQcGJxMRsFVwHEgfxg3O2ySzFA5jpWv/1434JiRTY6PdtyXSchIhHIf
- JbWu5hJw+mj4y2ct5S3n02pvZLgmD21J7EYkefgALcNvdCbUubSS7NX2zIFbe9M53G
- 0VlFakotNk1k8HBjbHDFfN3LayMRHwRy6zypQoz0=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ALC38Kj060969
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Nov 2024 06:03:08 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Nov 2024 06:03:07 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Nov 2024 06:03:07 -0600
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [172.24.227.240])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ALC2sLe007780;
- Thu, 21 Nov 2024 06:03:04 -0600
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Thu, 21 Nov 2024 17:32:53 +0530
-Subject: [PATCH 3/3] clk: ti: clk-k3-pll: Add additional robustness steps
- to the PLL sequence
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732191662;
+	bh=zzVmN4LJzmhgcDkhpTVRKXI/EIoA0/YbGce8N4R+pfk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=SCWqPkM3fPPwufsFxoi4J3aeE2zVjRANTzBs6+Ik2q4I6HBOlF7OitmPXNPRFNiOZ
+	 u6YbIyWqQi1s+ZyoReUeodqMW/XErCUWjVsgqH2huOtE/ftP1Uwk4afiyFou4QCWMm
+	 gaqdq73lI+WKFuBA97RjFnE3pm/1NYi1Fodeh/thenJOJ3ASPrl7hCdgFAtFfOVKhQ
+	 RGLMSttxWmaddpfo2eOtkKnWia8zKBzHIQ6WJhps40/0+Q1f4Fy6pvIGYwwo5tPbsK
+	 dMOGcermL8wsy0LM4yb4YBe2VD4KbskLKTNhVQy1pAPesUOlTc/LxyyR+391s7nUsa
+	 d3ZxDkQSoGXRA==
+Received: from [192.168.1.107] (82-131-203-244.pool.digikabel.hu
+ [82.131.203.244])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id D42B4894F4;
+ Thu, 21 Nov 2024 13:20:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1732191660;
+ bh=zzVmN4LJzmhgcDkhpTVRKXI/EIoA0/YbGce8N4R+pfk=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=uPbdSnZgynrweEGrrCkBN2Vw7jP96KOXP10szZ93r7Qc9uVyR2pAFZQcSqTBH4vm3
+ 9ET2mgu3LCOMh+ghOAY62nY3qZZUK5P+v2MnZ4H5EMviSLZk7qN9sPTLF1ajCyyAK1
+ 9n+593s56tMuGWfzP/cnAd5ibCcV0h136ltAhE9XM3ue6hVp5B8O5mbH/DhkF6I513
+ SGksldH/Rs6WofVKaJ5VKi0mhvDT2tbbqVr2WyXkid+Sig8T8mMMEILTomHOfmwyuf
+ ReWCYPM//S2UQa1Y6WJ2rPLZQuP3rv0MvvkTGCdQY3igoPP3LDCuVSdzPSEsqIZ3+a
+ QW0DtbA6c4Xrw==
+Message-ID: <0171ddc3-38ca-4cc9-d826-ae426511e5e0@denx.de>
+Date: Thu, 21 Nov 2024 13:18:16 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241121-b4-upstream-pll-fix-v1-3-904f618897a7@ti.com>
-References: <20241121-b4-upstream-pll-fix-v1-0-904f618897a7@ti.com>
-In-Reply-To: <20241121-b4-upstream-pll-fix-v1-0-904f618897a7@ti.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
- Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Vishal Mahaveer <vishalm@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Chandru Dhavamani <chandru@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732190574; l=14538;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=iwpduXrZavJQ6Ve7iyoC8dRj7Ftlx6hRLplyqKvd7r0=;
- b=gMdaFj9FfEaE1bblMiuJyL9GNrCFNf9UZVZ5ozMScgPsb+IIsDc/9nQfE4zj7z+SojvhJNlc7
- 8wnfck9VwjnCyUjjAyLbzppse5k0r2UjgUazRqQ5N0AtQBrjY7VXIOU
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3 01/20] wdt: imx8qxp: add option to control external
+ PMIC wdt via IMX8 SCU
+Content-Language: en-US
+To: Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Walter Schweizer <walter.schweizer@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>,
+ Andrej Valek <andrej.valek@siemens.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
+ Fabio Estevam <festevam@denx.de>, Francesco Dolcini <francesco@dolcini.it>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241121052601.72880-1-hs@denx.de>
+ <20241121052601.72880-2-hs@denx.de>
+ <46efa778-7445-4259-a78f-ad3d16bdc31e@denx.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <46efa778-7445-4259-a78f-ad3d16bdc31e@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,501 +78,239 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Based on the recommendation from HW team make modifications to
-the sequence for more robustness.
+Hello Stefan,
 
-- Unlock the PLL registers
-- Enable external bypass
-- Disable the PLL
-- Program pllm and pllf
-- Program Ref divider
-- Enable other PLL controls like DSM_EN, DAC_EN,etc
-- Enable calibration if available
-- Enable PLL
-- Wait for PLL lock and Calibration lock
-- Remove external bypass
+On 21.11.24 09:12, Stefan Roese wrote:
+> Hi Heiko,
+> 
+> On 21.11.24 06:25, Heiko Schocher wrote:
+>> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+>> extensions. Only useful on some Siemens i.MX8-based platforms as
+>> special SCFW is needed which provides the needed SCU API.
+>>
+>> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+>> Signed-off-by: Heiko Schocher <hs@denx.de>
+>> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+>>
+>>
+>> ---
+>>
+>> Changes in v3:
+>> - add Reviewed-by tag from Alexander
+>> - add comments from Igor
+>>    fix spelling issues
+>>    depends on ARCH_IMX8 instead of IMX8 Kconfig symbol
+>> - comment from Francesco and Stefan
+>>    rename Kconfig symbol from WDT_SCU_PMIC to WDT_SIEMENS_PMIC
+>>    rename scu_pmic_wdt.c to siemens_pmic_wdt.c
+>>
+>> Changes in v2:
+>> - work on comments from Stefan:
+>>    - rename driver file from scu_wdt.c to scu_pmic_wdt.c
+>>    - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
+>>    - reworked Kconfig help text
+>>    - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
+>>      SCU API extension in their SCFW.
+>>    - reworked commit message
+>>
+>>   drivers/misc/imx8/scu_api.c         | 21 ++++++++++
+>>   drivers/watchdog/Kconfig            |  7 ++++
+>>   drivers/watchdog/Makefile           |  1 +
+>>   drivers/watchdog/siemens_pmic_wdt.c | 59 +++++++++++++++++++++++++++++
+>>   include/firmware/imx/sci/rpc.h      |  3 ++
+>>   include/firmware/imx/sci/sci.h      |  1 +
+>>   6 files changed, 92 insertions(+)
+>>   create mode 100644 drivers/watchdog/siemens_pmic_wdt.c
+>>
+>> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+>> index 591d71b096a..edb6923151a 100644
+>> --- a/drivers/misc/imx8/scu_api.c
+>> +++ b/drivers/misc/imx8/scu_api.c
+>> @@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
+>>       return ret;
+>>   }
+>> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
+> 
+> Is this function also Siemens specific?
 
-Re-write the full sequence from scratch as the previous sequence was way
-off and keep it in a single commit for bisectability.
+Yep, renamed it to sc_timer_control_siemens_pmic_wdog()
+> 
+>> +{
+>> +    struct udevice *dev = gd->arch.scu_dev;
+>> +    struct sc_rpc_msg_s msg;
+>> +    int size = sizeof(struct sc_rpc_msg_s);
+>> +    int ret;
+>> +
+>> +    RPC_VER(&msg) = SC_RPC_VERSION;
+>> +    RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
+>> +    RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
+>> +    RPC_U8(&msg, 0U) = (u8)cmd;
+>> +    RPC_SIZE(&msg) = 2U;
+>> +
+>> +    ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
+>> +    if (ret)
+>> +        printf("%s: res:%d\n",
+>> +               __func__, RPC_R8(&msg));
+> 
+> Doesn't this printf statement fit into a single line?
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- drivers/clk/ti/clk-k3-pll.c | 327 +++++++++++++++++++++++++++++++++++---------
- 1 file changed, 261 insertions(+), 66 deletions(-)
+Good catch, yes!
 
-diff --git a/drivers/clk/ti/clk-k3-pll.c b/drivers/clk/ti/clk-k3-pll.c
-index 7c18767236c1e6967a436ec163bd3b8d15833bc0..b775bd55faab98db3c1a7b6093b5e9ff402a5050 100644
---- a/drivers/clk/ti/clk-k3-pll.c
-+++ b/drivers/clk/ti/clk-k3-pll.c
-@@ -14,6 +14,7 @@
- #include <linux/clk-provider.h>
- #include "k3-clk.h"
- #include <linux/rational.h>
-+#include <linux/delay.h>
- 
- /* 16FFT register offsets */
- #define PLL_16FFT_CFG			0x08
-@@ -29,10 +30,12 @@
- 
- /* CAL STAT register bits */
- #define PLL_16FFT_CAL_STAT_CAL_LOCK	BIT(31)
-+#define PLL_16FFT_CAL_STAT_CAL_LOCK_TIMEOUT (4350U * 100U)
- 
- /* CFG register bits */
- #define PLL_16FFT_CFG_PLL_TYPE_SHIFT	(0)
- #define PLL_16FFT_CFG_PLL_TYPE_MASK	(0x3 << 0)
-+#define PLL_16FFT_CFG_PLL_TYPE_FRAC2	0
- #define PLL_16FFT_CFG_PLL_TYPE_FRACF	1
- 
- /* CAL CTRL register bits */
-@@ -41,14 +44,21 @@
- #define PLL_16FFT_CAL_CTRL_CAL_BYP              BIT(15)
- #define PLL_16FFT_CAL_CTRL_CAL_CNT_SHIFT        16
- #define PLL_16FFT_CAL_CTRL_CAL_CNT_MASK         (0x7 << 16)
-+#define PLL_16FFT_CAL_CTRL_CAL_IN_MASK          (0xFFFU)
- 
- /* CTRL register bits */
- #define PLL_16FFT_CTRL_BYPASS_EN	BIT(31)
-+#define PLL_16FFT_CTRL_BYP_ON_LOCKLOSS	BIT(16)
- #define PLL_16FFT_CTRL_PLL_EN		BIT(15)
-+#define PLL_16FFT_CTRL_INTL_BYP_EN	BIT(8)
-+#define PLL_16FFT_CTRL_CLK_4PH_EN	BIT(5)
-+#define PLL_16FFT_CTRL_CLK_POSTDIV_EN	BIT(4)
- #define PLL_16FFT_CTRL_DSM_EN		BIT(1)
-+#define PLL_16FFT_CTRL_DAC_EN		BIT(0)
- 
- /* STAT register bits */
- #define PLL_16FFT_STAT_LOCK		BIT(0)
-+#define PLL_16FFT_STAT_LOCK_TIMEOUT	(150U * 100U)
- 
- /* FREQ_CTRL0 bits */
- #define PLL_16FFT_FREQ_CTRL0_FB_DIV_INT_MASK	0xfff
-@@ -62,7 +72,6 @@
- /* FREQ_CTRL1 bits */
- #define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_BITS	24
- #define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_MASK	0xffffff
--#define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_SHIFT	0
- 
- /* KICK register magic values */
- #define PLL_KICK0_VALUE				0x68ef3490
-@@ -80,63 +89,194 @@ struct ti_pll_clk {
- 
- #define to_clk_pll(_clk) container_of(_clk, struct ti_pll_clk, clk)
- 
--static int ti_pll_wait_for_lock(struct clk *clk)
-+static int ti_pll_clk_disable(struct clk *clk)
- {
- 	struct ti_pll_clk *pll = to_clk_pll(clk);
-+	u32 ctrl;
-+
-+	ctrl = readl(pll->base + PLL_16FFT_CTRL);
-+
-+	if ((ctrl & PLL_16FFT_CTRL_PLL_EN)) {
-+		ctrl &= ~PLL_16FFT_CTRL_PLL_EN;
-+		writel(ctrl, pll->base + PLL_16FFT_CTRL);
-+
-+		/* wait 1us */
-+		udelay(1);
-+	}
-+
-+	return 0;
-+}
-+
-+static int ti_pll_clk_enable(struct clk *clk)
-+{
-+	struct ti_pll_clk *pll = to_clk_pll(clk);
-+	u32 ctrl;
-+
-+	ctrl = readl(pll->base + PLL_16FFT_CTRL);
-+	ctrl |= PLL_16FFT_CTRL_PLL_EN;
-+	writel(ctrl, pll->base + PLL_16FFT_CTRL);
-+
-+	/* Wait 1us */
-+	udelay(1);
-+
-+	return 0;
-+}
-+
-+static bool clk_pll_16fft_check_lock(const struct ti_pll_clk *pll)
-+{
- 	u32 stat;
-+
-+	stat = readl(pll->base + PLL_16FFT_STAT);
-+	return (stat & PLL_16FFT_STAT_LOCK);
-+}
-+
-+static bool clk_pll_16fft_check_cal_lock(const struct ti_pll_clk *pll)
-+{
-+	u32 stat;
-+
-+	stat = readl(pll->base + PLL_16FFT_CAL_STAT);
-+	return (stat & PLL_16FFT_CAL_STAT_CAL_LOCK);
-+}
-+
-+static void clk_pll_16fft_cal_int(const struct ti_pll_clk *pll)
-+{
-+	u32 cal;
-+
-+	cal = readl(pll->base + PLL_16FFT_CAL_CTRL);
-+
-+	/* Enable fast cal mode */
-+	cal |= PLL_16FFT_CAL_CTRL_FAST_CAL;
-+
-+	/* Disable calibration bypass */
-+	cal &= ~PLL_16FFT_CAL_CTRL_CAL_BYP;
-+
-+	/* Set CALCNT to 2 */
-+	cal &= ~PLL_16FFT_CAL_CTRL_CAL_CNT_MASK;
-+	cal |= 2 << PLL_16FFT_CAL_CTRL_CAL_CNT_SHIFT;
-+
-+	/* Set CAL_IN to 0 */
-+	cal &= ~PLL_16FFT_CAL_CTRL_CAL_IN_MASK;
-+
-+	/* Note this register does not readback the written value. */
-+	writel(cal, pll->base + PLL_16FFT_CAL_CTRL);
-+
-+	/* Wait 1us before enabling the CAL_EN field */
-+	udelay(1);
-+
-+	cal = readl(pll->base + PLL_16FFT_CAL_CTRL);
-+
-+	/* Enable calibration for FRACF */
-+	cal |= PLL_16FFT_CAL_CTRL_CAL_EN;
-+
-+	/* Note this register does not readback the written value. */
-+	writel(cal, pll->base + PLL_16FFT_CAL_CTRL);
-+}
-+
-+static void clk_pll_16fft_disable_cal(const struct ti_pll_clk *pll)
-+{
-+	u32 cal, stat;
-+
-+	cal = readl(pll->base + PLL_16FFT_CAL_CTRL);
-+	cal &= ~PLL_16FFT_CAL_CTRL_CAL_EN;
-+	/* Note this register does not readback the written value. */
-+	writel(cal, pll->base + PLL_16FFT_CAL_CTRL);
-+	do {
-+		stat = readl(pll->base + PLL_16FFT_CAL_STAT);
-+	} while (stat & PLL_16FFT_CAL_STAT_CAL_LOCK);
-+}
-+
-+static int ti_pll_wait_for_lock(struct clk *clk)
-+{
-+	struct ti_pll_clk *pll = to_clk_pll(clk);
- 	u32 cfg;
- 	u32 cal;
- 	u32 freq_ctrl1;
--	int i;
-+	unsigned int i;
- 	u32 pllfm;
- 	u32 pll_type;
--	int success;
-+	u32 cal_en = 0;
-+	bool success;
- 
--	for (i = 0; i < 100000; i++) {
--		stat = readl(pll->base + PLL_16FFT_STAT);
--		if (stat & PLL_16FFT_STAT_LOCK) {
--			success = 1;
-+	/*
-+	 * Minimum VCO input freq is 5MHz, and the longest a lock should
-+	 * be consider to be timed out after 750 cycles. Be conservative
-+	 * and assume each loop takes 10 cycles and we run at a
-+	 * max of 1GHz. That gives 15000 loop cycles. We may end up waiting
-+	 * longer than necessary for timeout, but that should be ok.
-+	 */
-+	success = false;
-+	for (i = 0; i < PLL_16FFT_STAT_LOCK_TIMEOUT; i++) {
-+		if (clk_pll_16fft_check_lock(pll)) {
-+			success = true;
- 			break;
- 		}
- 	}
- 
--	/* Enable calibration if not in fractional mode of the FRACF PLL */
-+	/* Disable calibration in the fractional mode of the FRACF PLL based on data
-+	 * from silicon and simulation data.
-+	 */
- 	freq_ctrl1 = readl(pll->base + PLL_16FFT_FREQ_CTRL1);
- 	pllfm = freq_ctrl1 & PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_MASK;
--	pllfm >>= PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_SHIFT;
-+
- 	cfg = readl(pll->base + PLL_16FFT_CFG);
- 	pll_type = (cfg & PLL_16FFT_CFG_PLL_TYPE_MASK) >> PLL_16FFT_CFG_PLL_TYPE_SHIFT;
- 
--	if (success && pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF && pllfm == 0) {
-+	if (success && pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF) {
- 		cal = readl(pll->base + PLL_16FFT_CAL_CTRL);
-+		cal_en = (cal & PLL_16FFT_CAL_CTRL_CAL_EN);
-+	}
- 
--		/* Enable calibration for FRACF */
--		cal |= PLL_16FFT_CAL_CTRL_CAL_EN;
-+	if (success && pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF &&
-+	    pllfm == 0 && cal_en == 1) {
-+		/*
-+		 * Wait for calibration lock.
-+		 *
-+		 * Lock should occur within:
-+		 *
-+		 *	170 * 2^(5+CALCNT) / PFD
-+		 *      21760 / PFD
-+		 *
-+		 * CALCNT = 2, PFD = 5-50MHz. This gives a range of 0.435mS to
-+		 * 4.35mS depending on PFD frequency.
-+		 *
-+		 * Be conservative and assume each loop takes 10 cycles and we run at a
-+		 * max of 1GHz. That gives 435000 loop cycles. We may end up waiting
-+		 * longer than necessary for timeout, but that should be ok.
-+		 *
-+		 * The recommend timeout for CALLOCK to go high is 4.35 ms
-+		 */
-+		success = false;
-+		for (i = 0; i < PLL_16FFT_CAL_STAT_CAL_LOCK_TIMEOUT; i++) {
-+			if (clk_pll_16fft_check_cal_lock(pll)) {
-+				success = true;
-+				break;
-+			}
-+		}
- 
--		/* Enable fast cal mode */
--		cal |= PLL_16FFT_CAL_CTRL_FAST_CAL;
-+		/* In case of cal lock failure, operate without calibration */
-+		if (!success) {
-+			debug("Failure for calibration, falling back without calibration\n");
- 
--		/* Disable calibration bypass */
--		cal &= ~PLL_16FFT_CAL_CTRL_CAL_BYP;
-+			/* Disable PLL */
-+			ti_pll_clk_disable(clk);
- 
--		/* Set CALCNT to 2 */
--		cal &= ~PLL_16FFT_CAL_CTRL_CAL_CNT_MASK;
--		cal |= 2 << PLL_16FFT_CAL_CTRL_CAL_CNT_SHIFT;
-+			/* Disable Calibration */
-+			clk_pll_16fft_disable_cal(pll);
- 
--		/* Note this register does not readback the written value. */
--		writel(cal, pll->base + PLL_16FFT_CAL_CTRL);
-+			/* Enable PLL */
-+			ti_pll_clk_enable(clk);
- 
--		success = 0;
--		for (i = 0; i < 100000; i++) {
--			stat = readl(pll->base + PLL_16FFT_CAL_STAT);
--			if (stat & PLL_16FFT_CAL_STAT_CAL_LOCK) {
--				success = 1;
--				break;
-+			/* Wait for PLL Lock */
-+			for (i = 0; i < PLL_16FFT_STAT_LOCK_TIMEOUT; i++) {
-+				if (clk_pll_16fft_check_lock(pll)) {
-+					success = true;
-+					break;
-+				}
- 			}
- 		}
- 	}
- 
--	if (success == 0) {
-+	if (!success) {
- 		printf("%s: pll (%s) failed to lock\n", __func__,
- 		       clk->dev->name);
- 		return -EBUSY;
-@@ -180,6 +320,30 @@ static ulong ti_pll_clk_get_rate(struct clk *clk)
- 	return current_freq;
- }
- 
-+static bool ti_pll_clk_is_bypass(struct ti_pll_clk *pll)
-+{
-+	u32 ctrl;
-+	bool ret;
-+
-+	ctrl = readl(pll->base + PLL_16FFT_CTRL);
-+	ret = (ctrl & PLL_16FFT_CTRL_BYPASS_EN) != 0;
-+
-+	return ret;
-+}
-+
-+static void ti_pll_clk_bypass(struct ti_pll_clk *pll, bool bypass)
-+{
-+	u32 ctrl;
-+
-+	ctrl = readl(pll->base + PLL_16FFT_CTRL);
-+	if (bypass)
-+		ctrl |= PLL_16FFT_CTRL_BYPASS_EN;
-+	else
-+		ctrl &= ~PLL_16FFT_CTRL_BYPASS_EN;
-+
-+	writel(ctrl, pll->base + PLL_16FFT_CTRL);
-+}
-+
- static ulong ti_pll_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	struct ti_pll_clk *pll = to_clk_pll(clk);
-@@ -187,9 +351,13 @@ static ulong ti_pll_clk_set_rate(struct clk *clk, ulong rate)
- 	u64 parent_freq = clk_get_parent_rate(clk);
- 	int ret;
- 	u32 ctrl;
-+	u32 cfg;
-+	u32 pll_type;
- 	unsigned long pllm;
- 	u32 pllfm = 0;
- 	unsigned long plld;
-+	u32 freq_ctrl0;
-+	u32 freq_ctrl1;
- 	u32 div_ctrl;
- 	u32 rem;
- 	int shift;
-@@ -212,16 +380,22 @@ static ulong ti_pll_clk_set_rate(struct clk *clk, ulong rate)
- 				break;
- 		}
- 
--	/* Put PLL to bypass mode */
--	ctrl = readl(pll->base + PLL_16FFT_CTRL);
--	ctrl |= PLL_16FFT_CTRL_BYPASS_EN;
--	writel(ctrl, pll->base + PLL_16FFT_CTRL);
-+	if (!ti_pll_clk_is_bypass(pll)) {
-+		/* Put the PLL into bypass */
-+		ti_pll_clk_bypass(pll, true);
-+	}
-+
-+	/* Disable the PLL */
-+	ti_pll_clk_disable(clk);
- 
- 	if (rate == parent_freq) {
- 		debug("%s: put %s to bypass\n", __func__, clk->dev->name);
- 		return rate;
- 	}
- 
-+	cfg = readl(pll->base + PLL_16FFT_CFG);
-+	pll_type = (cfg & PLL_16FFT_CFG_PLL_TYPE_MASK) >> PLL_16FFT_CFG_PLL_TYPE_SHIFT;
-+
- 	debug("%s: pre-frac-calc: rate=%u, parent_freq=%u, plld=%u, pllm=%u\n",
- 	      __func__, (u32)rate, (u32)parent_freq, (u32)plld, (u32)pllm);
- 
-@@ -237,31 +411,75 @@ static ulong ti_pll_clk_set_rate(struct clk *clk, ulong rate)
- 		plld = 1;
- 	}
- 
--	if (pllfm)
--		ctrl |= PLL_16FFT_CTRL_DSM_EN;
--	else
--		ctrl &= ~PLL_16FFT_CTRL_DSM_EN;
-+	/* Program the new rate */
-+	freq_ctrl0 = readl(pll->base + PLL_16FFT_FREQ_CTRL0);
-+	freq_ctrl1 = readl(pll->base + PLL_16FFT_FREQ_CTRL1);
-+	div_ctrl = readl(pll->base + PLL_16FFT_DIV_CTRL);
- 
--	writel(pllm, pll->base + PLL_16FFT_FREQ_CTRL0);
--	writel(pllfm, pll->base + PLL_16FFT_FREQ_CTRL1);
-+	freq_ctrl0 &= ~PLL_16FFT_FREQ_CTRL0_FB_DIV_INT_MASK;
-+	freq_ctrl0 |= pllm;
-+
-+	freq_ctrl1 &= ~PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_MASK;
-+	freq_ctrl1 |= pllfm;
- 
- 	/*
- 	 * div_ctrl register contains other divider values, so rmw
- 	 * only plld and leave existing values alone
- 	 */
--	div_ctrl = readl(pll->base + PLL_16FFT_DIV_CTRL);
- 	div_ctrl &= ~PLL_16FFT_DIV_CTRL_REF_DIV_MASK;
- 	div_ctrl |= plld;
--	writel(div_ctrl, pll->base + PLL_16FFT_DIV_CTRL);
- 
--	ctrl &= ~PLL_16FFT_CTRL_BYPASS_EN;
--	ctrl |= PLL_16FFT_CTRL_PLL_EN;
-+	/* Make sure we have fractional support if required */
-+	ctrl = readl(pll->base + PLL_16FFT_CTRL);
-+
-+	/* Don't use internal bypass,it is not glitch free. Always prefer glitchless bypass */
-+	ctrl &= ~(PLL_16FFT_CTRL_INTL_BYP_EN | PLL_16FFT_CTRL_CLK_4PH_EN);
-+
-+	/* Always enable output if PLL,  Always bypass if we lose lock */
-+	ctrl |= (PLL_16FFT_CTRL_CLK_POSTDIV_EN | PLL_16FFT_CTRL_BYP_ON_LOCKLOSS);
-+
-+	/* Enable fractional support if required */
-+	if (pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF) {
-+		if (pllfm != 0)
-+			ctrl |= (PLL_16FFT_CTRL_DSM_EN | PLL_16FFT_CTRL_DAC_EN);
-+		else
-+			ctrl &= ~(PLL_16FFT_CTRL_DSM_EN | PLL_16FFT_CTRL_DAC_EN);
-+	}
-+
-+	/* Enable Fractional by default for PLL_16FFT_CFG_PLL_TYPE_FRAC2 */
-+	if (pll_type == PLL_16FFT_CFG_PLL_TYPE_FRAC2)
-+		ctrl |= (PLL_16FFT_CTRL_DSM_EN | PLL_16FFT_CTRL_DAC_EN);
-+
-+	writel(freq_ctrl0, pll->base + PLL_16FFT_FREQ_CTRL0);
-+	writel(freq_ctrl1, pll->base + PLL_16FFT_FREQ_CTRL1);
-+	writel(div_ctrl, pll->base + PLL_16FFT_DIV_CTRL);
- 	writel(ctrl, pll->base + PLL_16FFT_CTRL);
- 
-+	/* Configure PLL calibration*/
-+	if (pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF) {
-+		if (pllfm != 0) {
-+			/* Disable Calibration in Fractional mode */
-+			clk_pll_16fft_disable_cal(pll);
-+		} else {
-+			/* Enable Calibration in Integer mode */
-+			clk_pll_16fft_cal_int(pll);
-+		}
-+	}
-+
-+	/*
-+	 * Wait at least 1 ref cycle before enabling PLL.
-+	 * Minimum VCO input frequency is 5MHz, therefore maximum
-+	 * wait time for 1 ref clock is 0.2us.
-+	 */
-+	udelay(1);
-+	ti_pll_clk_enable(clk);
-+
- 	ret = ti_pll_wait_for_lock(clk);
- 	if (ret)
- 		return ret;
- 
-+	ti_pll_clk_bypass(pll, false);
-+
- 	debug("%s: pllm=%u, plld=%u, pllfm=%u, parent_freq=%u\n",
- 	      __func__, (u32)pllm, (u32)plld, (u32)pllfm, (u32)parent_freq);
- 
-@@ -279,30 +497,7 @@ static ulong ti_pll_clk_set_rate(struct clk *clk, ulong rate)
- 	return current_freq;
- }
- 
--static int ti_pll_clk_enable(struct clk *clk)
--{
--	struct ti_pll_clk *pll = to_clk_pll(clk);
--	u32 ctrl;
- 
--	ctrl = readl(pll->base + PLL_16FFT_CTRL);
--	ctrl &= ~PLL_16FFT_CTRL_BYPASS_EN;
--	ctrl |= PLL_16FFT_CTRL_PLL_EN;
--	writel(ctrl, pll->base + PLL_16FFT_CTRL);
--
--	return ti_pll_wait_for_lock(clk);
--}
--
--static int ti_pll_clk_disable(struct clk *clk)
--{
--	struct ti_pll_clk *pll = to_clk_pll(clk);
--	u32 ctrl;
--
--	ctrl = readl(pll->base + PLL_16FFT_CTRL);
--	ctrl |= PLL_16FFT_CTRL_BYPASS_EN;
--	writel(ctrl, pll->base + PLL_16FFT_CTRL);
--
--	return 0;
--}
- 
- static const struct clk_ops ti_pll_clk_ops = {
- 	.get_rate = ti_pll_clk_get_rate,
+> 
+>> +
+>> +    return ret;
+>> +}
+>> +
+>>   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+>>                sc_faddr_t addr)
+>>   {
+>> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+>> index 0e45f0a0922..b39b2546e5c 100644
+>> --- a/drivers/watchdog/Kconfig
+>> +++ b/drivers/watchdog/Kconfig
+>> @@ -351,6 +351,13 @@ config WDT_SBSA
+>>          In the single stage mode, when the timeout is reached, your system
+>>          will be reset by WS1. The first signal (WS0) is ignored.
+>> +config WDT_SIEMENS_PMIC
+>> +    bool "Enable PMIC Watchdog Timer support for Siemens platforms"
+>> +    depends on ARCH_IMX8 && WDT
+>> +    help
+>> +      Select this to enable the PMIC watchdog driver controlled via
+>> +      IMX8 SCU API found on Siemens platforms.
+>> +
+>>   config WDT_SL28CPLD
+>>       bool "sl28cpld watchdog timer support"
+>>       depends on WDT && SL28CPLD
+>> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+>> index 0b107c008f7..9b6b1a8e8ad 100644
+>> --- a/drivers/watchdog/Makefile
+>> +++ b/drivers/watchdog/Makefile
+>> @@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
+>>   obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
+>>   obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
+>>   obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
+>> +obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
+>>   obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
+>>   obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
+>>   obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
+>> diff --git a/drivers/watchdog/siemens_pmic_wdt.c b/drivers/watchdog/siemens_pmic_wdt.c
+>> new file mode 100644
+>> index 00000000000..e7ca00de654
+>> --- /dev/null
+>> +++ b/drivers/watchdog/siemens_pmic_wdt.c
+>> @@ -0,0 +1,59 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>> +/*
+>> + * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+>> + * extensions. Only useful on some Siemens i.MX8-based platforms as
+>> + * special NXP SCFW is needed which provides the needed SCU API.
+>> + *
+>> + * Copyright (C) 2024 Siemens AG
+>> + */
+>> +
+>> +#include <dm.h>
+>> +#include <wdt.h>
+>> +#include <firmware/imx/sci/sci.h>
+>> +
+>> +/* watchdog commands */
+>> +#define CMD_START_WDT 0x55
+>> +#define CMD_STOP_WDT  0x45
+>> +#define CMD_PING_WDT  0x35
+>> +
+>> +static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>> +{
+>> +    /* start external watchdog via Timer API */
+>> +    return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
+>> +}
+>> +
+>> +static int scu_wdt_stop(struct udevice *dev)
+>> +{
+>> +    /* stop external watchdog via Timer API */
+>> +    return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
+>> +}
+>> +
+>> +static int scu_wdt_reset(struct udevice *dev)
+>> +{
+>> +    return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
+>> +}
+>> +
+>> +static int scu_wdt_probe(struct udevice *dev)
+>> +{
+>> +    debug("%s(dev=%p)\n", __func__, dev);
+>> +    return 0;
+>> +}
+>> +
+>> +static const struct wdt_ops scu_wdt_ops = {
+>> +    .reset        = scu_wdt_reset,
+>> +    .start        = scu_wdt_start,
+>> +    .stop        = scu_wdt_stop,
+>> +};
+>> +
+>> +static const struct udevice_id scu_wdt_ids[] = {
+>> +    { .compatible = "siemens,scu-wdt" },
+>> +    { }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(scu_wdt) = {
+>> +    .name        = "scu_wdt",
+>> +    .id        = UCLASS_WDT,
+>> +    .of_match    = scu_wdt_ids,
+>> +    .probe        = scu_wdt_probe,
+>> +    .ops        = &scu_wdt_ops,
+>> +};
+>> diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
+>> index 28adec2a8e1..ba5bf9a16fe 100644
+>> --- a/include/firmware/imx/sci/rpc.h
+>> +++ b/include/firmware/imx/sci/rpc.h
+>> @@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
+>>   #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for 
+>> sc_timer_set_sysctr_periodic_alarm() RPC call */
+>>   #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
+>> +/* Siemens specific API extension */
+>> +#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
+> 
+> So if it's Siemens specific, shouldn't this also be reflected in the
+> macro name?
+
+Renamed it to TIMER_FUNC_CTRL_SIEMENS_PMIC_WDOG
+
+> 
+> Other than this:
+> 
+> Reviewed-by: Stefan Roese <sr@denx.de>
+
+Thanks!
+
+bye,
+Heiko
+> 
+> Thanks,
+> Stefan
+> 
+>> +
+>>   #endif /* SC_RPC_H */
+>> diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
+>> index 7d8499f070a..b971b62836d 100644
+>> --- a/include/firmware/imx/sci/sci.h
+>> +++ b/include/firmware/imx/sci/sci.h
+>> @@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
+>>   /* Timer API */
+>>   int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
+>> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
+>>   /* SECO API */
+>>   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+> 
+> Viele Grüße,
+> Stefan Roese
+> 
 
 -- 
-2.46.0
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
