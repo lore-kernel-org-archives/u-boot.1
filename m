@@ -4,101 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45665D78764
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF3F1D78769
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5CC289765;
-	Thu, 21 Nov 2024 15:25:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 791B089765;
+	Thu, 21 Nov 2024 15:28:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SLTzjG6K";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="gDwy1ty+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 324F3896BB; Thu, 21 Nov 2024 15:25:41 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id CB62189763; Thu, 21 Nov 2024 15:28:09 +0100 (CET)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D3998975F
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:25:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97A1F896E0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E05EF40D9D
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 14:25:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732199138;
- bh=IVgvtwW5SD+cBDI+qf4hAvCf1flI5j792EOhOUqfDVc=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=SLTzjG6KuI9/mBY5LYLeR1TvsTDGkp8gNRaMnRzjkZedr81puCPHHEmK2tqr0LZ2+
- ywH4SdSxfZ0VQ7Z0J/Tc7DTPR7Vuu7LD2FyYz68ghqndBg+sU2GnJES8TsCEyDTYrw
- J2azx4TR3ZgRlH4ufHbJaxgBy2Pvhmz9c0Vp6duNm7bOMzngSdZ+aPjwAA4KHGSA+w
- 9jIiHpbKOY/QM9bsMTwMLpUrZYHCmIpr9zlmhiqFbnliW0YavGHI/YR751XbNyn1lF
- 5hpYlp/Gva2lXxMsfHmb7pupPfSpjDiG5Ka1GXSxYafOtwDxNcBSRSwy5ngXk6XwOX
- jbh2lXZUwWvoQ==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-38235e99a53so563130f8f.0
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 06:25:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732199138; x=1732803938;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IVgvtwW5SD+cBDI+qf4hAvCf1flI5j792EOhOUqfDVc=;
- b=MGSL7GTtH5uoSHBBonAy9szgBkvacE5ONChyxwo0TqW65F5ipKOh/ZQn4owkQtHZwA
- ecOgA7gpwUig0wu0lFGgTGZy8VUodBt0yw7v2DDIZuqY0A7Zv0s9lxTlyDB8j9L04Yms
- dT5342BN3mg5lHOYjQ8UOTBLFjZKK/sNNwJulPxh3oHs6s/6d4UakQFndfQgDNZiFE/r
- Xvkedx/WPm/KSZ8rUo7VPGWyWwBmPx3mchKfJzYdYkpDc0jlurrw8Vn7KvO5Z1oa1yZq
- RM+g9chNSNgu7u6ZlaFaesY6vLHwJ+4HAwF3idOf+qnAeWFMxhBSXfHXE7vN8x/zdZlw
- 9TcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXPfbGXmwVOxMycG7bIioJMEIuRxZWeD4D2NBdbzPNF/DE1B6uobfZtVn63hjnzAu5z0Oo20QM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2+v8W9eScYJMu9rKIUkMLcPNezn5W87dLWbWagP41nEYOyulZ
- avGVmJESeXD9ZA3WGVY8lJZj/DzcZxtC+n8adP40/wrCQEZcWQ/AKW82GAOTgnUWwJxx4d9l9UZ
- M1DL28whW1Qus74H6AB8i2eL7qthOQsaqZ4LXGZMk4YIsynG2Al9XnDHlFNHOiJfgi0Vv9p9k3x
- g=
-X-Gm-Gg: ASbGncsdVm0p9TaGDZESmYniUN9rU3Ku3MCzoUn1GwqifbqKQBsxlTs6qmOwnYJkrE9
- AVKyYQMDD+ZENjqGkZhdHBIbK6oNnTm44guZl3wtsKi/kaEbrhrwXPXLw0rHh/rQnFgoTx+n/fh
- DAWVfzFKXPkiVJBj5CvODiD0uRZUS95M3+U33q2eaGJrcAhjonnRrpoXFxFaTXsgRMgLY/oIQ+Q
- krRWwt1rgq5QPJGH4glNzzAqgmwuucWc5wVjO+6PatzG3hgCLvYwEW9Ou+mKYQq1wC3LD+p/HUm
- ul8I6jF6F7S0SUR1j/W+nPiuMAelIG6kf+Wx6xU4OsERl2sW1Khj
-X-Received: by 2002:a5d:64ce:0:b0:37d:34e7:6d24 with SMTP id
- ffacd0b85a97d-38259d2b848mr2804735f8f.18.1732199138201; 
- Thu, 21 Nov 2024 06:25:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE8xWRqacpYO3AF6e/V3H/4SF19r9xENsy0kkO3cn2+QKzSvWWx80grXHLlJfFbCxU8488G0g==
-X-Received: by 2002:a5d:64ce:0:b0:37d:34e7:6d24 with SMTP id
- ffacd0b85a97d-38259d2b848mr2804712f8f.18.1732199137913; 
- Thu, 21 Nov 2024 06:25:37 -0800 (PST)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b4616843sm57238085e9.20.2024.11.21.06.25.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 06:25:37 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Minda Chen <minda.chen@starfivetech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>,
- Andreas Schwab <schwab@suse.de>, Jaehoon Chung <jh80.chung@samsung.com>,
- E Shattow <lucent@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-Date: Thu, 21 Nov 2024 15:25:22 +0100
-Message-ID: <20241121142522.59059-3-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de; 
+ s=gloria202408;
+ h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=upJG5MquwiBeOjbZLBhfm+IYbf0wwm8Cizau+GPKtZU=; b=gDwy1ty+6AAck4BD9fh8bZhFq4
+ Z5tLmO81Da4BBKLU842p5oa3cWQ5E1xUYBrgmry7owwC6JC4oe1O9ObpvU2Tr5XDYyfSrXMZOydGd
+ H4RT3LCT/KPrKFza+o7ypitMDV77Fez8dX6sJawqN1a1qKkoa5oOCUZ1t2u4WU37x8E2eUounj9is
+ 7ovGsdsc3nBzveLn/yVU/Cr10ptZ4Zg5FQAd1hmcKztQO+WCF+BP6YK0a4071oEtZgIPV5E707X8C
+ MUV1+YR8fIrO85D4GzwSq5hRbXjPA6lEaJiqH44s5CpgEmi4/aIP89KLCyYUDrKqrY/1D/BkHe9CP
+ 3uCMsdgA==;
+Received: from [185.156.123.69] (helo=localhost.localdomain)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1tE8A0-0007f9-LZ; Thu, 21 Nov 2024 15:27:56 +0100
+From: Heiko Stuebner <heiko@sntech.de>
+To: sjg@chromium.org,
+	philipp.tomsich@vrull.eu,
+	kever.yang@rock-chips.com
+Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
+ jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com,
+ Finley Xiao <finley.xiao@rock-chips.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Ulf Hansson <ulf.hansson@linaro.org>
+Subject: [PATCH 03/20] dt-bindings: power: Add support for RK3576 SoC
+Date: Thu, 21 Nov 2024 15:27:14 +0100
+Message-ID: <20241121142731.1202209-4-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
-References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241121142731.1202209-1-heiko@sntech.de>
+References: <20241121142731.1202209-1-heiko@sntech.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -117,27 +77,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Our MMC driver for JH7110 boards only supports reading to the low 4 GiB of
-memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUFFER.
+From: Finley Xiao <finley.xiao@rock-chips.com>
 
-Reported-by: E Shattow <lucent@gmail.com>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Define power domain IDs as described in the TRM and add compatible for
+rockchip,rk3576-power-controller
+
+Signed-off-by: Finley Xiao <finley.xiao@rock-chips.com>
+Co-Developed-by: Detlev Casanova <detlev.casanova@collabora.com>
+Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Link: https://lore.kernel.org/r/20240814222824.3170-2-detlev.casanova@collabora.com
+Signed-off-by: Ulf Hansson <ulf.hansson@linaro.org>
+
+[ upstream commit: 77c5e7b623032502ee49fe7e7868eaca6786d7ed ]
+
+(cherry picked from commit 4f3821f3803953f291bbc957dc5a8aaa3f61e1d3)
 ---
- configs/starfive_visionfive2_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ .../power/rockchip,power-controller.yaml      |  1 +
+ .../dt-bindings/power/rockchip,rk3576-power.h | 30 +++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 dts/upstream/include/dt-bindings/power/rockchip,rk3576-power.h
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 1c70d1d4b70..20f89ae6796 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMODEL_MEDANY=y
- CONFIG_RISCV_SMODE=y
- # CONFIG_OF_BOARD_FIXUP is not set
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
- CONFIG_FIT=y
- CONFIG_BOOTSTD_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
+diff --git a/dts/upstream/Bindings/power/rockchip,power-controller.yaml b/dts/upstream/Bindings/power/rockchip,power-controller.yaml
+index 0d5e999a58f..650dc0aae6f 100644
+--- a/dts/upstream/Bindings/power/rockchip,power-controller.yaml
++++ b/dts/upstream/Bindings/power/rockchip,power-controller.yaml
+@@ -41,6 +41,7 @@ properties:
+       - rockchip,rk3368-power-controller
+       - rockchip,rk3399-power-controller
+       - rockchip,rk3568-power-controller
++      - rockchip,rk3576-power-controller
+       - rockchip,rk3588-power-controller
+       - rockchip,rv1126-power-controller
+ 
+diff --git a/dts/upstream/include/dt-bindings/power/rockchip,rk3576-power.h b/dts/upstream/include/dt-bindings/power/rockchip,rk3576-power.h
+new file mode 100644
+index 00000000000..324a056aa85
+--- /dev/null
++++ b/dts/upstream/include/dt-bindings/power/rockchip,rk3576-power.h
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
++#ifndef __DT_BINDINGS_POWER_RK3576_POWER_H__
++#define __DT_BINDINGS_POWER_RK3576_POWER_H__
++
++/* VD_NPU */
++#define RK3576_PD_NPU		0
++#define RK3576_PD_NPUTOP	1
++#define RK3576_PD_NPU0		2
++#define RK3576_PD_NPU1		3
++
++/* VD_GPU */
++#define RK3576_PD_GPU		4
++
++/* VD_LOGIC */
++#define RK3576_PD_NVM		5
++#define RK3576_PD_SDGMAC	6
++#define RK3576_PD_USB		7
++#define RK3576_PD_PHP		8
++#define RK3576_PD_SUBPHP	9
++#define RK3576_PD_AUDIO		10
++#define RK3576_PD_VEPU0		11
++#define RK3576_PD_VEPU1		12
++#define RK3576_PD_VPU		13
++#define RK3576_PD_VDEC		14
++#define RK3576_PD_VI		15
++#define RK3576_PD_VO0		16
++#define RK3576_PD_VO1		17
++#define RK3576_PD_VOP		18
++
++#endif
 -- 
 2.45.2
 
