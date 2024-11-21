@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DB3D75BB9
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F43D75BB9
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAD818966F;
-	Thu, 21 Nov 2024 06:26:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B0CE89678;
+	Thu, 21 Nov 2024 06:26:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732166781;
-	bh=e0gcvqu0C+NqxT7ztb1yMVXCs6We7jlyu+gmAtTxGR4=;
+	bh=8U6ImE8BxUlE67+byrp9+zyRafgyuXWhTs2faD0w6YU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=t2pI8QrTyLfT8YJX6ni/3cIvnROOM//leUDXOOg7JotlPotBRSqv+WK9DC7+BClkv
-	 iZxI1aDjgBAfs7ysZKj39h5oXj/dOrxUidhfTivudpTBHPt7dZs/ZTorMwwhZqIcQ0
-	 9/Nz1f7d2z5zjB0waBuIQ0HUBZnt3dsmriq8p0Cl+2LkCDnWOkALvF0cVM3XJa3N2x
-	 ++2stHWmAX2XQ+b85bDuLBdVpuob6ETz83Oh8uJj6agniY+i1l4ACwJF0FbbAeIOZV
-	 a09EaW1qsgucsqNmdvYCls7nv2I4u2A4HzaT1sjLiWxmfKCGG3V2W5M5iKsvxf0Vcn
-	 DVNi8khzHaIQw==
+	b=AgHzEVQQ2MCjPnqxpHMlKu8CH6JtB1Y7BrgC1sz3PMX0iphchfReSqoEd2GHDzJ0F
+	 i81fRvMQQ+W2WSs/mGfnt6cB4DgXJ2Sbeq4Zym8XpdUdUNjc4WYAZFtYwG2YKeUKBd
+	 Om+2BAa6UNWxYW/7vjXl5gwoxjt1rVFUfnEfFVltwJW6ro2lOjAdwDbjJGOwMjrvdF
+	 ZmKAK6G71XVn79F5y/Epl5eRGi0wkeRf0c9ozFdUXGp9i92errpEuiQGbLRxl4Qxpt
+	 ZSlTTrItZ8Lymhd6bnoGCpBpTJwtQ4ZhKH4/j428ykETzu7OZnFpUfF9B9Te50LOgl
+	 hrrafuC3jiBEA==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5E1BF89672;
- Thu, 21 Nov 2024 06:26:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 46BE589678;
+ Thu, 21 Nov 2024 06:26:16 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1732166776;
- bh=e0gcvqu0C+NqxT7ztb1yMVXCs6We7jlyu+gmAtTxGR4=;
+ bh=8U6ImE8BxUlE67+byrp9+zyRafgyuXWhTs2faD0w6YU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Z3y1trJz7Vqp9Al3ji+exyBe7NPR7ycA9Sk971Z5/PBuFVcrQtcC1FLjWvGpVsNsO
- W0rP9G+LNisb4CIxzdo97H3Blfm2nvWchAMOV6P1ntieVSxPuiBVO2THvYUYlhWEhg
- D/h3kGgI9G2MvMfj29/z8DnSPE1UZtYGDAc1Bfjn/RpKulZ0GvjcPRx0twe9fkjwOn
- URf37pOQ3xvBA25KHA6DJ+s7oaWL7V8xlcCb7Z+xj20n/loBDUGax6R9PVE1qtYmxA
- /simcAn6HfXL/zccKEMZSWUNnbDax5Oh8T7vQ2YP1XqIKoSMeDoBhnhAslC+b/DNrs
- B0Bci3aeNs2aQ==
+ b=T92p/tzTzAf1k38Mi2F3wyGVELtIOhwpbN7OUlBAzOCEdMajjmvfWVK3mF38xMmJm
+ QWXPRiiJnfrDXtaR+IA5Yo79/aafCf0pkX3yGTxr/1UnQE6Pe3fTT0Q1KhR+v4RPRp
+ GGMM/TyCuDiCttDiNtMt0PNcBrTz1CxM5Z/6XiHKniBtodfIVvnGoFt6w3mliEbOTY
+ 3TLLLouJez4WE9g1LBscXwfhx/Xh5IbXOoSJrc1I/IgPb+wvMcgpB8Bd+tp9VO5PS6
+ q1f4KgQwIoNDBLPunSkhQo1onpi1xIDkKEg/Bj+MAyHkEsp6N8jgjWbaBEauxXm6Q5
+ zDMBo4FEIZWIg==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Anatolij Gustschin <agust@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 07/20] siemens: imx8qxp-capricorn-u-boot.dtsi: fix boot
-Date: Thu, 21 Nov 2024 06:25:48 +0100
-Message-Id: <20241121052601.72880-8-hs@denx.de>
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 08/20] siemens: capricorn: use DCD_SKIP entry
+Date: Thu, 21 Nov 2024 06:25:49 +0100
+Message-Id: <20241121052601.72880-9-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241121052601.72880-1-hs@denx.de>
 References: <20241121052601.72880-1-hs@denx.de>
@@ -71,197 +69,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-current generated flash.bin image does not longer
-boot on cxg3 board.
+Boards which use DCD data in SCFW can drop SPL.
 
-Rename bootph-pre-ram to bootph-all so flash.bin
-boots again!
+We tried in our mainline rework to use this approach
+too as other imx8qxp boards do in mainline. But we
+failed ... it was a hard way to understand the
+reason!
 
-Add u-boot specific change (add bootph-all property)
-in A35_0 node to imx8qxp-capricorn-u-boot.dtsi
+We cannot use DCD image in container as the SCFW
+from siemens, does the RAM init on boot itself!
+
+Siemens SCFW reads the RAM config from i2c eeprom and
+dependent on this settings, initializes the RAM.
+
+Adding DCD data to the bootcontainer will result in
+hang of the SCFW, also DCD data in container image is
+static which do not fit our needs.
+
+So we must drop DCD data image, and this has the side
+effect that we need SPL, as the task which loads the images
+from the container only loads the images to addresses,
+and if executed bit is set, starts them.
+
+As now RAM is not initialized from it, and there is no
+option to "wait until SCFW has setup RAM",  we can only
+load SPL into internal RAM at this point, as than SPL
+and SCFW boot parallel.
+
+The SPL itself then uses the SCU API to communicate
+with the SCFW and it seems that SCFW only responds to
+this API requests when RAM setup is already done by the
+SCFW, which has a side-effect of a "sync" for the RAM
+setup is done by SCFW!
+
+We checked if SPL is always save in accessing RAM for
+loading images to it! For tests, we added in our RAM
+init part in the SCFW long delays (10 seconds and more)
+as we thought there is such a sync missing, and we can
+break the board through delaying RAM setup... but we
+did not managed to fail booting U-Boot from SPL!
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
+
 ---
 
 (no changes since v2)
 
 Changes in v2:
-- add "bootph-all" in A35_0 node to u-boot.dtsi not
-  in dts for the board!
+- add comment from Walter
+  fix typo: than -> then
 
- arch/arm/dts/imx8-capricorn-u-boot.dtsi | 67 +++++++++++++------------
- 1 file changed, 35 insertions(+), 32 deletions(-)
+ board/siemens/capricorn/imximage.cfg | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/dts/imx8-capricorn-u-boot.dtsi b/arch/arm/dts/imx8-capricorn-u-boot.dtsi
-index cba56188f86..ad5309bd969 100644
---- a/arch/arm/dts/imx8-capricorn-u-boot.dtsi
-+++ b/arch/arm/dts/imx8-capricorn-u-boot.dtsi
-@@ -6,130 +6,133 @@
- #include "imx8qxp-u-boot.dtsi"
+diff --git a/board/siemens/capricorn/imximage.cfg b/board/siemens/capricorn/imximage.cfg
+index 4350e2967cc..e45f2c9589e 100644
+--- a/board/siemens/capricorn/imximage.cfg
++++ b/board/siemens/capricorn/imximage.cfg
+@@ -9,6 +9,10 @@
  
- &{/imx8qx-pm} {
-+	bootph-all;
-+};
- 
--	bootph-pre-ram;
-+&A35_0 {
-+        bootph-all;
- };
- 
- &mu {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &clk {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &iomuxc {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio3 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio4 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio5 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio6 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_lsio_gpio7 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_dma {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_dma_lpuart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_dma_lpuart2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_conn {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_conn_sdch0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_conn_sdch1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pd_conn_sdch2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio3 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio4 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio5 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio6 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &gpio7 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &lpuart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &lpuart2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &usdhc1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &usdhc2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
+ /* Boot from SD, sector size 0x400 */
+ BOOT_FROM	sd
++
++/* skip DCD data, as firmware initializes the RAM */
++DCD_SKIP true
++
+ /* SoC type IMX8QX */
+ SOC_TYPE IMX8QX
+ /* Append seco container image */
 -- 
 2.20.1
 
