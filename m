@@ -4,66 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941FDD6E2CA
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 10:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E3CD6ED02
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 10:53:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1D64896D4;
-	Thu, 21 Nov 2024 11:17:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3755A8972C;
+	Thu, 21 Nov 2024 11:53:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="DPIOaIRK";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="j7idWbat";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FEB78971D; Thu, 21 Nov 2024 11:17:40 +0100 (CET)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
+ id AB7DE89733; Thu, 21 Nov 2024 11:53:14 +0100 (CET)
+Received: from PA5P264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A4D989689
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 11:17:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98B2D89706
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 11:53:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zSGMNvNeZbGJE6v10ngTLez1tSZgzTkfom1TpaPe45BF28RNtDBnMoDyLV+OurtlC5REUJhsnrPFWY80zuYvwJJ7IBXn6Fsu33K2H3s629oFTaPRLy2cxQfY3scztTn1gG6bteffkns0WIVUQSxl792bV2uATdsVYP/CHvaa0dNSky+DMrhkH/kLZEK/41Nqak397vBFGHxtKpGcyWCKyQESacc205OBwaUX4xOaXUdfUU6RbuoW9lRbK+fTmHaJOd6BPAPMDKLDJtNjlE5zoLlm2Ot9TFV4eWJkxf1IVVhpVmXyX17Koe9kqkAUXDY7RXMtH69Pm/QtXOn3z+l1jg==
+ b=dPskhJlqFVC+If61nDQ6bG3kpV6zwXcYJVBm5WACOwQLURkeKq/lBAq9i3dQzQynarHPJiMnojWBgQK8qENC4U1neR9Dmsm41jxSPB/4XvRpVPzkzAHahfd56kHDQSS5oxzH8exxOM+ttkSeREQz+93sPq9f5kUW1xIGT+bCGTCTIdDYdEFPCnlqGFDV/BP95tiD5a91qNU5kQ/Ti3vZE0OqIvrcBlpIQfkyfQBAS3dOnSwQvWBuZAZr9tU92t0f8EyvDoHEp3nSMC/bp9cZSvjitsAyZ/2KI6OcbfLLMF8Ded2pWgIRrnUobSgUx2pIlsZFdBwE6T4CMuYBef8/FA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=glHY0MRzdRK2N4GwBZbzJeLb1zjjmp/MdQIgCYgau78=;
- b=qavNgkMzNudripnV2CPZDLc3AojMgr9XajwBMzi58hCYxgdDCBXwU9azqrrkjwbzRDTpwbO1kXDU4+bLIU7BDkHZGR9nm4OOBArnLC0E8KMSmHVqQmjt5oqo6KpD0CZLoPg53wVsoKvynL795DfGD81cHDwTuIRed2PBadanbUorxSk1p8q4cZDZfWPjxX6f9hq7B1TSA8Y6DAWe7TaW2nijbzhoSoTAtOfL/MSmT4s6qXcvixvrIEa69xuuZoef1CbdagzsA4DiekW9rXazoEB2IXJNoTKpD8pykODDweH4S+wcLeJ5knBY1uxxPVaQ5xSZnB0GCOsUs64Zd2GsXg==
+ bh=KE2USuNn1Y1NJ2LPsp/yY9gwi2Bk85jzGdLwPBDy5Eg=;
+ b=pEvonGI5FnplHTGLm6F5Mv/+cwJnPaRfK7nOspnr2hiKZDdMItqlKfdhGW2rDjCSuuw7EJEjQyr7r/lS+RQTO3RxISBziXaCsmN1yS/gNNVsoLBfus2ZHiWjH1R61DKejGhdXXvIiH3cGCavuQ9ZaqV3V6/opyr2oS0x3VcNtEpbQK8QTQk1aqQfLy5H4NczDEHZfl4r7Cvp1nJQs4sQ4pXr7XoC/x1Ejzj0ParLYjoULSI+OKCUJp24weAYbnZijCzWuZmNWDjWN+Sod/dBBvlg9lNHJimv4aI8CtFYRTk2s7/pRnQO3r7aeELyhjlfOVcVFni+kI+5DJR/7B8JNQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=softathome.com; dmarc=pass action=none
  header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=glHY0MRzdRK2N4GwBZbzJeLb1zjjmp/MdQIgCYgau78=;
- b=DPIOaIRKlAVeNCvqQkPY/l+gvgu9SD4vh+FsvM1fKhG1kSXju1R2JH4RpfJ0pFcPXPhIprYyGx+3MRf90VeboqBN/6DlCuf66q88oc64L7ibyARorJ0AOPf3TdFp/dyvW2NO4qrQ0d5gMRPP5onf/bCeDcikazSSq/A2C6sw1e/s+5wqwxNI/1jVjK1Bkvz/qgij/DZpJGFrBwEO/j7uCZCXN9dXfc1uvjEyN8ql5QdRPHv6ETZqrsNCG6IP+9zXW94mq9y0+w2XUww5aTd+H5cqy27wOWuQhYenznkv5gGnwkOLVU+Wz3yjgOtE0ZFPddppH9gxrBwxJUYw+9qD8Q==
+ bh=KE2USuNn1Y1NJ2LPsp/yY9gwi2Bk85jzGdLwPBDy5Eg=;
+ b=j7idWbatP+dtYWf0LYz3/F+i3YMx5guBvg8REi9jWNDI22jRPkLtNoQlRdqm9Xv4AyKOotGuxEQw246IbttALM1q7wp7Tnrse5QUH7gSsIafSn1TuU2eULPqgRpaNTSchYHkiTP3z6XCIuyBfXAgHvjbmrIwUEXS1KXDNi1DamDwJgzKhKWYhiAS9jDVHryibttgaPE2DrxKaRBJZBcVCgpIvz7lWY6TkpM4qz3kfhMByMEWG3BMk/KjALr+Ia2viB3vM0UL7CLCXxHtvXJlHMlz1URH6wkzOWlQVxPB1CfJwj5gnnviIkB8YCTZD86Lclfwuc2RDVVQb2rVHFmMmw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=softathome.com;
 Received: from MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:3c::21)
- by PR0P264MB2328.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1e3::16) with
+ by PASP264MB5935.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:49e::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.15; Thu, 21 Nov
- 2024 10:17:35 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24; Thu, 21 Nov
+ 2024 10:53:10 +0000
 Received: from MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM
  ([fe80::b707:71fe:8517:aa42]) by MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM
  ([fe80::b707:71fe:8517:aa42%5]) with mapi id 15.20.8182.014; Thu, 21 Nov 2024
- 10:17:35 +0000
-Message-ID: <d067cee3-88af-4a6d-bef3-726540cb4afa@softathome.com>
-Date: Thu, 21 Nov 2024 11:17:34 +0100
+ 10:53:10 +0000
+Message-ID: <e4474aad-e2f6-4213-ba5d-c54ad4cb3059@softathome.com>
+Date: Thu, 21 Nov 2024 11:53:09 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] tools: binman: Replace 'fit,sign' by
- 'fit,keys-directory'
+Subject: Re: [PATCH 1/1] tools: binman: etype: Allow to replace 'NAME' in node
+ names
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, al.kochet@gmail.com,
- paul.henrysd+nodisclaimer@gmail.com
-References: <20241120100911.885418-1-paul.henrys_ext@softathome.com>
- <20241120100911.885418-2-paul.henrys_ext@softathome.com>
- <CAFLszThV+sQ6Hj5TW=8JyLz-Ta_GTJhkXxfNHY-caeN0dpaZtg@mail.gmail.com>
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
+References: <20241120104029.886860-1-paul.henrys_ext@softathome.com>
+ <CAFLszTi1eue=sm0Mv6Q4cTB-ATE6oD6qMFkJJWPAbc=NiWK1Ew@mail.gmail.com>
 Content-Language: en-US
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 Autocrypt: addr=paul.henrys_ext@softathome.com; keydata=
@@ -109,100 +107,100 @@ Autocrypt: addr=paul.henrys_ext@softathome.com; keydata=
  MVtSwPLGzbgcPyGaMgwbNFg0Lgk+Z0eFfSGO0ROuKZZmyL34FZ3CHFDVZEFQGEFn488SYBeQ
  PVFZ6XtspuBK9LSNi9Y4g4MS5NhWywy7555Q1t/NTiftzPQz3sfmr5iDzVqyxIXFZMKwOxl7
  zE8PsOtQMDauBN1eFehaPb1mlyBio5ispwRCJCm006jBSHvE4i9W+/Lu7DSE2v/LI0U=
-In-Reply-To: <CAFLszThV+sQ6Hj5TW=8JyLz-Ta_GTJhkXxfNHY-caeN0dpaZtg@mail.gmail.com>
+In-Reply-To: <CAFLszTi1eue=sm0Mv6Q4cTB-ATE6oD6qMFkJJWPAbc=NiWK1Ew@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MA2P292CA0001.ESPP292.PROD.OUTLOOK.COM
- (2603:10a6:250:1::17) To MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM
+X-ClientProxiedBy: PR2P264CA0031.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:101:1::19) To MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM
  (2603:10a6:501:3c::21)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1P264MB3107:EE_|PR0P264MB2328:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ae2a5d9-fe1f-42a5-d30c-08dd0a15b7d8
+X-MS-TrafficTypeDiagnostic: MR1P264MB3107:EE_|PASP264MB5935:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f5e4d53-dedd-49d6-bf34-08dd0a1ab06c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SFVjZ2ttV0gwOWZUNVVuVmFCV1h4SVRQNXY2d2IzTDFNdmJzNDBPNmU2dUJq?=
- =?utf-8?B?TnhQZWdlZmZrOTlSOUhLTnRnMnpiYm1oUmhqYWtQcko0YVdKbzNuYldDVTFW?=
- =?utf-8?B?b1R1ajBpK3JRNVpmOFVOUFk0akZGRjUxL2tlbnM4bUhMYzhOc1Zkc25rM0Vq?=
- =?utf-8?B?V1BlTkx0eXVCaVd6Z1JZZ2pBUFBXVGhRUCtSRkU1dVdMUTExMkdHREgraTZQ?=
- =?utf-8?B?b0NzK05ZblB3dVpKUlJaYStoM1MzamFiSVRGZEtxWGk0SWJGMmhPa2s4RC9C?=
- =?utf-8?B?UHFsV2lsQWpSaTVuUTFFVTdoUmZQeFQ2alJLamZTTHg3VisvTEdKT3ZoSFg2?=
- =?utf-8?B?UUJzOXliSGhhL2hBc0twZ2JtTVpvUm9NNXJCTGhtRDc5cHk0TU4xNTFSdVJN?=
- =?utf-8?B?d0pIeitQbFlkREdycU9iaTFPQW9PRGVuU2NpeEdHdzhxblNhM3prQXVvT3RU?=
- =?utf-8?B?SzNoK1UvNGdRRnhuSURITE16eFRHNDN1U01DYlZHak5WV2pFY2tORnhCUC91?=
- =?utf-8?B?NTlsVnhiak9kdWNCQXE3V25KUVdJVG14ZmNkWkxGLyt4U2lnRk1WNXhPSTBr?=
- =?utf-8?B?ZmJ6QXpMVFBxRk4zSmZNa1dZQTRMNmo3aXF0UHQxOUFlVkptT0wrZDljWHlR?=
- =?utf-8?B?YkhZVS96eUhmVis4eEQ3MEE3NVdiNVZKTU1EU2pGTHV5STJPZE55SDZiM20x?=
- =?utf-8?B?SDl4R0U4OWx3N1BaeVRtVHpqNVg1NFBFVFE3UUhTQVdzdjhBQTlkWDQxMWtB?=
- =?utf-8?B?ZGd2ZGJyQ3YzZ3RDczdFcFl2UVpPdzlpemliOHBxbGh2eUxxcXdBR3ZZQklH?=
- =?utf-8?B?SmUzL0s1ZDU5TzJlZ3VJSmtsTUFPems3Tk8zMEtmcURlRzk3VWNIeHBWbDNR?=
- =?utf-8?B?Z2dnNUlLL0dzZElYWjlIb0ViL2hXekp2T2ZadWdOTXk2em5sSVNHRzJsNmtP?=
- =?utf-8?B?ZzFjSkVhU0lWNXVDSW5ET3NyYzA4aE45VkVQdjJqMnE4Tmo1aWw3N2V6R2lM?=
- =?utf-8?B?c0Q2VlB5cUQyc3ZZR3dsR0dIa2hVdVRFQXhkRm5WWVNLZi9UTUFxNHp6TmNm?=
- =?utf-8?B?eTVteXc0dlQxSkdwemJDamhTUldvM0hqak1iY25YSHJucXMraFFqcmJRcVFH?=
- =?utf-8?B?K0w2Nmd1cFBYd0l2NDFINitTc2dsWFZDWEFJamhKZ3VCbk1aRlBmcWJmYnlu?=
- =?utf-8?B?WFlhbVVVYThTNGc1NUxsd203YVVXc1c4SlU1Z3IxRTNSTTVTSXVFQlpoWnVi?=
- =?utf-8?B?M2lSUy9DMU4xQVZtckVoOXduQVNhb1Fma0Y5Q3RtbFA2YmhmUUFiZG1LcVVr?=
- =?utf-8?B?Tit0VnppaUoyQTRUYUZ3MnRUY2ZJOGlzMDkrVEc1VGxZNkZMY3gvYXJvOHh6?=
- =?utf-8?B?NDhyY29wQ2dhdlM2R0QzdklLZ2Q3SFRPRXFXTDJmd2NlQ2x1dldtSm5lelg0?=
- =?utf-8?B?UVd1TmYvL1pqU1JtUzAxVE1VSWdhTE4yaFEwell6US8rVHV5S0xYYlhteURT?=
- =?utf-8?B?TkxYZlVRMHRDbEVKL0dLeW9jVXlBQTUrSHVzYUdUUURIa0VrQUxZZFJkWG8x?=
- =?utf-8?B?cHJYaFNzb0lwbTNQa2laSnYxUWlaT3ZhQXdrUnREZGtaM3hIT084REZBUTJq?=
- =?utf-8?B?WkhTc09WZEpzR2tHTnlIMWRVQlFxODlXSXhMSkNDUEo5aU8wTHNoSVlFOXQ0?=
- =?utf-8?B?NjI3L3Z6c2RteGVzNWRpTUxPRnFwN1ZSZVVCVzcvTHhNeVowTzRmUkVTUDg0?=
- =?utf-8?Q?+jbHg8HiYdegywB9vh6QE2HD6XPGmz3bwECZvhx?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NnA0UkFZWEdRWjRjUFF4TmQ3MENpR25DNWRGSDVHQUNQalJxOS93c1RsTjll?=
+ =?utf-8?B?RUhwcUs0d0ZUT1N5dDg0cE5zdStFSDlnR2gwdEwyNWJhVHZzbXY0WVY3aC9p?=
+ =?utf-8?B?c0x3Qi8zTlRjeUovRzVlZGJyUldJajdjWlRxeFRmczdFOHVxbnVYcXNsb0dv?=
+ =?utf-8?B?R2RGNWtvZTFTMFZpaWhyczhJdlA0Nlh6VHRyeDJpcVZJUmRxbmsxNFZKZmt1?=
+ =?utf-8?B?dklmT3ROUTJXYnFac0VuWlhwRi9IbDgwT3ExWWtQVEc1V0x4K21IeXVDSmVI?=
+ =?utf-8?B?TnhzZUk1ZVBxdnhQT1pYTW1QYkpXTnhCdm5rRTBxMGFubHNJSVNmbDVkQi9M?=
+ =?utf-8?B?R25HTkgyRUc3WEgxeS8zMExoTnYvR09yazE4TlU2bG9ONWZUNXlHKzlyUXVG?=
+ =?utf-8?B?dlpULy9KZnQ1c0VlZ21BNVZXYzVWaXM0RzFkNlNyQmFEalI1ajVsaldNNk4x?=
+ =?utf-8?B?WktVZUI5ZmptSUJwYXJyS21wdUs2QVJCU2lwZ1NXb2xsTHJBcFA3MU42Nkll?=
+ =?utf-8?B?Y1Ftbk1ndmpvQVpPbDJYNUZrNTVUamNnQU54ZFozUUdBTmNTbWhDWHc5VktI?=
+ =?utf-8?B?aStRS1l2L3JJRDlQS21hUFBVcWpNU21EZGQvMlU5Y3FEaDZ5U3VwbFpDWlR1?=
+ =?utf-8?B?Rkl4THBUUG9hbXZRak5GbWIrK28wQi9VK1ZZK0ZxSDNsV2h3cW43VStibklQ?=
+ =?utf-8?B?NEFLdXBrL1hpQzh5T1RjQ01vWGNDMEp0WGtidmIyNCtEOEVweHBmeS80ZnNu?=
+ =?utf-8?B?T3M5Z2k1ejFBSCtqT0RGTXVWcWFqRFBkYmFoblJZeU4rZ2tCTEhGb05qeEQr?=
+ =?utf-8?B?NncySlRhRGJWZmt2QlovanFPYStwcFNwazVDK2Q2T2VaZjdOL0hKcjhuY0lu?=
+ =?utf-8?B?TDVUcGlNS2Q2WFp0NUV2ZHlXcktwb0NKNzFxTUZDYjBBTTBWakxmMURkd2dx?=
+ =?utf-8?B?aHU1ZWpNLzEwajZBNk5GcldvR0c3a05nSUJRZlVxNFhzam84aFFqUE5Kam5n?=
+ =?utf-8?B?SWZMRk85Rktya2xqRU1uZitiZm1KS29QbUl4WjBTMlRFNnY3bTBsaktLNFdl?=
+ =?utf-8?B?N1NlbE8rYktDRXc2OENSK05EejNJandJSDN5Z0o2Y1h6ekUwRzlrcmI3a1dm?=
+ =?utf-8?B?bkErcmRwR3MwVi8wUTdxQXNGanB0V09mZ3lKVDM4Q1lVbXZydFAzczRFWXdp?=
+ =?utf-8?B?TFlrVk5lTWx0M0ZlVDNQR0lQeE5paTZOWTBzUjJ6MFVkNndEbWZoVEdIckRY?=
+ =?utf-8?B?dTU4SHpFWlYvWWY2ZGhnbnJQcnBVcnIrRjhFNHJHeEV3WmdSanN0VnJyM0dm?=
+ =?utf-8?B?cFhoUWV5RjIvUk1qeGRQOFFsQzg0ZDNJUXBtSC9sTFdTeTJ3VHBKbWFoQWRY?=
+ =?utf-8?B?NzhqWnBmTnZxSlRCTTdvQVNuZENDVmNzeXEyTTRGVW05cTdvRnAxOXdVNU5N?=
+ =?utf-8?B?cGl2cXZLQ05aSHViMDVRYm5NUXhOZnV1clZiYVlBRnVnVVhrRW11Q1JVeWlz?=
+ =?utf-8?B?VU9IQThpM083ZlQ1bC80T2Rqb09OQnVzNHpSeFM5RElZVlZiQ0FhcXRvaVlu?=
+ =?utf-8?B?d2ZxWXJqMVQ3R0dsSmVGZ0JpNjdwb3ZCVkpPbUNvZHJuQUIyVkYzZnB0MytZ?=
+ =?utf-8?B?aFFyNTRtdnAyaXlhM2VlNHB3UWRlSkFsMHhnTkwyN1M2M1VyWFRYL245NTFE?=
+ =?utf-8?B?R3ZYbitlc3gwNjNTZ1pPVlhBT29RVUxOZ2wwOGV2R2MxQ3hYa0dsOHA4eTRy?=
+ =?utf-8?Q?b9R6PBTb7Vg1FQxkhE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a1Nqd3hTYkMrNXAyMTFrODZQVGQ1NHp4cDJZSVpGdEFualMraWNlS0xySnRm?=
- =?utf-8?B?NlpuWEVsSnFRQmx6eVZhWWxaL29sd2pxSTFzZGc1WWlPUGZyMlIzY09JWXNU?=
- =?utf-8?B?cGwrNkhVd2sxOFJ1NzJHVk5zL05rTUFoc3NZaEFQejdzWmlTeDJZaDRPRjh6?=
- =?utf-8?B?aEpNUGdEMVNjVjZreFdLS096YlVheFNlREppeEV0ek96dko4amFjWlJiYmJj?=
- =?utf-8?B?b0oycndYUEpteGVRSU9qL01LdGV2VlNGWk5SMjRndEJzTDNDMGNDUHU2K1A1?=
- =?utf-8?B?OXJySFdFZ1ZrMUhLR2N4N295Tm93c2pmUkRCSTY1NXdDQnhIMjc5V0o5QmhU?=
- =?utf-8?B?eExTeWV2L2hCczQyUjdMdzViYlBWeTN4RGNFajB1amd6UHFZMFRyencyY1Vo?=
- =?utf-8?B?Y2dHUVRoYUFKdlVxOGQ2dzFEYW9HSmlmcGw0Z21wYTI1VEJsVlRETTR4UHZt?=
- =?utf-8?B?MUtzbGs5UDFlZzNCd1ErOHkvbGZtYkdPR2RUWlJoeENwOFlJa3d0YUJZRGc5?=
- =?utf-8?B?TnQxSnpEaFIyTW1EUkdsMUFBNXVYUmZBSkFTQkZqMUFQQlpOUWJDREhhYmFv?=
- =?utf-8?B?SDB2a29DVkRaWUx2NUdPY2RyMWJVQTltN0lwczZzYnF6cWlkZWc5YXBiRlg3?=
- =?utf-8?B?SHR6b0FnY0VTR3NxWTkrSUV2OFN5TXBFV3BXN0svR0xzZlVrc3lMRUZFclkv?=
- =?utf-8?B?QzcxQi9PbzVsdkE2RFZRYzlWYkY2Wm40TmtTQm45ZEM0c25MWlNQSURsbVpk?=
- =?utf-8?B?dWZIVXJMbE1MLzMzME9BTGlCYlNKcFoxRll1NjFseDZFV3YyOHJTMWExNFZt?=
- =?utf-8?B?TW12K24vbWhDV1pTeGRIUmtkMWxTbTFsb0lsbmNoaFRHSnN3V3o4OEE1elBS?=
- =?utf-8?B?RExnU0JZL3pJNFJpeU9hdDFyV3FmeWNReDZDRWV6aUM0czFYYWs3cW9iSWxq?=
- =?utf-8?B?OURCVXJlbG1UdjBPSUt5dEYrTVdpYVRxNjQzR0JNZ0pBeEYrTTVKZEs4cEJD?=
- =?utf-8?B?dWZzM1ZINWNmbzNsWEVaaVFTWXB1TDBlQkZVVFZla1oxUjZYQ0xkM1dWbC9a?=
- =?utf-8?B?V3ZIbnRhSWg2Uk1MMS9DRkxLNjlhNE1MQTBLVGx3Q0V5bDB4REJPaE9FeUxa?=
- =?utf-8?B?V2tlZWdIODNuR2dreVc4YkJhdlA3YjYwNTEwbjlObzRYdm41SllFOThuMXBl?=
- =?utf-8?B?RThyOVhEYU9yK1BCSklmY1JaSWpFdlBYbG5MTEpNMDdMa29peDJSb292aWt2?=
- =?utf-8?B?USs2WWg0S00vTkFLczYzUDNETnZFelNFS0RzZHRVUjB5ZFRGb0lTVjU5T2ZH?=
- =?utf-8?B?YmxLV1Y4SmhPR0xZcFo3dStYSWtMeHRmcHBYZDdOd2V4TDhEWnRYR0dBUm1h?=
- =?utf-8?B?U0MzNHcya0dTdHBqa0pqWVBQSFo5SVcvWVpGcnZEbk41ZHNHelM2ZkNDZm95?=
- =?utf-8?B?TC80aWFITkU5aUJORlZtRmlZSU0wNHhBTXhhSmxoWi9ST2xIWlAxMVBSQlVN?=
- =?utf-8?B?QWN6emFhTHg2Ty9McUttZFF1djZzcy9BRGRnWSt5a2RQd09yb2VpcmdDNEox?=
- =?utf-8?B?YW9uOVRyYzJCNWpWS05YQ0hiTnNzanZrZFAzZHh4cnBxR0lUdWlyZGc4bi8x?=
- =?utf-8?B?TVJta2w4UnZsUkgyUGxxNjZCNExRMFNUMElaMjNJQUVSTmlPRFZNRUlFSmgr?=
- =?utf-8?B?WjNsRHc2MjdMd0NQbjBnbGZYUUVBYVVsZFp5WXhXUUJUTk9pWnF1TFpaS2Na?=
- =?utf-8?B?ZkUwZU43eDFmYklTNVNYakdmTlFHZmhoNXpuWjAraUFGcUEwZXlCYjdBSWZF?=
- =?utf-8?B?NmF2NGdNclZ1MGtjVTNONWRnK0pwRldlYUxuVkt3dlMxb2FpNXRpSWJ4OUhG?=
- =?utf-8?B?N3RKUXYwNkNpWTdsTG03dFpSTmNLOE9rRXowaUR3MVBoL2VON3d1eXpTK1Bs?=
- =?utf-8?B?MTRqVTl4NlpEY1psNm5xUmNZdVpPYXFGTnk1dENuUjdYbkJvZDdRc0d5SkUz?=
- =?utf-8?B?TXlyeS9rMmpVRDg3eW5TMXRFMXUrRUYrN2JtS0N0R2JjeXdWME9nZ2M2S3FH?=
- =?utf-8?B?WjIvVXBjV0NxQWlVSElCYlJydkRMK3FIZDVGbnduWkdZdTVXd0tubW0xK1dS?=
- =?utf-8?B?VGFkNXIrbDR3MEF5bkhFUXJLc0g5RFl4eTVsNXpLMzZ5NEdldkFIOXRIMXd0?=
- =?utf-8?B?SVE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWVWd1paY3B1M1FSMUIwZnhna3FiNXFSamQ0WEN4TlN1OWt2R1o1WlMySi82?=
+ =?utf-8?B?SjNESWxGcUJHS05kR1dzbFg0WHVnL2FvWXlXWEc3ZGdNUDNwU3pHdGdOa29w?=
+ =?utf-8?B?clk2QlNuLzcycWFGdUp0YVZDMFlaRWR3b1ViNk85cU4zZkYwSDVuODh2bVNv?=
+ =?utf-8?B?Z3hYYnQyZmlMV0xFZnBtTHBFVVAzL0NFaTZ6YVYzZFh0VDdkZzdMdXhmek5Q?=
+ =?utf-8?B?bFRCaGFUQjVIK3BKK2NXTy9RTUF6UklpeURWVlQwakJwUEpUUlB6WHhGUldJ?=
+ =?utf-8?B?WnhuZU1oektUV0dKaVhZK1FSVE1Wd1dYWjNrL0VsNjVwcjZaY0kvcGlva0Q3?=
+ =?utf-8?B?RVpaQVpNQUs3RnpqbXJUYWZVUFQwcTMyam5tY056QmpqNE5iR2o3ZDJxVnUv?=
+ =?utf-8?B?UnVHbnlpNEw3NVg5QVBFY29kL2NCTGozc2I3OHdxdW9nZ0VTTWdPMm4rOHJX?=
+ =?utf-8?B?YUYwaTlNU0l0WDdNVFB3UStiWklFYVhxQlV0VE5yUXpnR2xNcEwvWFJIN2w2?=
+ =?utf-8?B?YVFmdnJBc2JmZWNpbjhGelROdC8wL2VWWkQ5SXVVcENmTWlrUFNnZTBXNzE5?=
+ =?utf-8?B?Q0lxOUEyYU1nUGNjcnF2dkdUM3A4R29mbFRoayttaHFVZ3MzWFl0TEIwSUR0?=
+ =?utf-8?B?Z1VSMmdKY00wQWdOTmY2ZUk4SkVrcHNoTCt2NXJuNHlUMzE5M1AySnlNQTYy?=
+ =?utf-8?B?azRmQWVNb1FjbmswWCtpV2JKWXBjemxjWXhBVmJ0ODVLRkhmQ1NRZm85OFMy?=
+ =?utf-8?B?alRoa0pCTVNsL2JobERDUWtQL25LMy83T2FaSmtqNlVITEptTS8weTRxcWhS?=
+ =?utf-8?B?QVV6aWk5VnN5UHpGa2k2T3IvOEN4K1dKOEtQZ1FLK2ZhZzgrdzBHb2dIcmI0?=
+ =?utf-8?B?UlZhNVlrMEdpVWdndEMwNW44U25tVk8vSnRRUExIZHp6SzByWDhOY0VRZkhZ?=
+ =?utf-8?B?dDJUb2k2WEVyWXNma3NTYW91Z1JVL3JjcTgzRVhMYmxRZkdBRUZJTUtXTWZW?=
+ =?utf-8?B?VDkxRTRyU1RqWEVVWTgzNW9CQzNZRzhCUDRvdFB5dkwrV2ZLNlVIeDFNbGVF?=
+ =?utf-8?B?S0NKUUlRUlZ1SW9YdUdvQzNjNTUxTHBGRkRJSTFVNzBPdDNPelhWMEYvSVJr?=
+ =?utf-8?B?UVQyRlN5dFAyblBPaWJoV3pqUytMdThpcG1rYlB6bUtrNGpvTWs2aTZ4RVFn?=
+ =?utf-8?B?Y1pqQ3F2c0U5WXk4UGNOWlhMcDdKbFJnMGhGakVjdnN3TmlzSEJQOUhEaVpQ?=
+ =?utf-8?B?alVxZ3NjaU14Rk1HK0VJaWhOOXNUM2NCRzNRYTJ1M2RzdHZXTDl2MmVWV1ZG?=
+ =?utf-8?B?MmlvVkM2TG9vQmo5N0ljREZUZTArZExIeklzQ3h2QzRUM1lPeDlXaTJlODln?=
+ =?utf-8?B?b3hVMkZDWW9pUWJJWFYxRGZ1emNEb0xnY1RCSm0xWTFWcjJTUitiWVIvRVEy?=
+ =?utf-8?B?M0xLbzFBQ0tOQXdRWHcvTHcrRnZCb25OK0pYRy9yZHpUNTNpemJmWGlZclVD?=
+ =?utf-8?B?MGF6WHNUWm92TEpBbEJpbkt3ZUsvbWlyNlN1V3o1ZW4razFmZFd4NkZGc2Nh?=
+ =?utf-8?B?R0xlN3Fud3E5bDg0dnJUQUlsek9KTVZ2allpQ1VUOWdmTzdqYmIzZFBNTmYz?=
+ =?utf-8?B?YXRsVnpHSWlweFQya0R2enRacGJvTmhrL1JyWXkwcVBwcE9wTkk0eERDU0F1?=
+ =?utf-8?B?R0FSVmIyOG90U0JtVThPV0FBUHdONTljYmtDR1hQa2Z0Nk8veDhtOTJrK3dz?=
+ =?utf-8?B?RFJ0YU5oWWNYTFZPT3BDSzJQdm5VWjZlMEt4enRoS0g2UnM3T29zTVBFU09F?=
+ =?utf-8?B?Rk91eVd3MGlVeTl4UWZwQVJiT3Z6VHpTYmIvd3p4Umg4K29YVFBEZHE5YmZF?=
+ =?utf-8?B?RGNtKy95dWZrQlJZTVNhYVFKTW5yN3lHZTQvMVd1RHlXNDVGb0pxdHVveTdl?=
+ =?utf-8?B?REhVdmdkUlM2MUU1QVN3VFpTUURDL1Z1WnFpWDIxN2lOdUVieThtcXFuSWho?=
+ =?utf-8?B?OVpFMEQxdS9WNTJkMVNTNjNxTTRacnZ6THNQTkRsSkNMOERFZkx4VGR3ZU5P?=
+ =?utf-8?B?QzBuSnIxZ1Ixb1NJY0I2K3gvajJaVUVENXFkZHVSRndNb3pUdGR1MlNpeWR5?=
+ =?utf-8?B?Q1NLSnh5NDVkRG9qMXhUTWFkaWxkeHFDVlZqR1pFa0ZKU050NmVrMHVHT0dF?=
+ =?utf-8?Q?7rawiuEOEcVlCSS7kZHyS9o=3D?=
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ae2a5d9-fe1f-42a5-d30c-08dd0a15b7d8
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f5e4d53-dedd-49d6-bf34-08dd0a1ab06c
 X-MS-Exchange-CrossTenant-AuthSource: MR1P264MB3107.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2024 10:17:35.6570 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2024 10:53:10.2973 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sCcZIbqJg57lcYsTpa/522E370qPUT2agTPJS+LrljFz3Xsb/2435bR07qcF1k1yST482ZYnsn5DZuGfOtjF5lfTa5YMHc8ZbWYQrxpzaeM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB2328
+X-MS-Exchange-CrossTenant-UserPrincipalName: mxhcXIGlA6CZOIV3WmxqAidv4hu0ERRyJ5CakiBWTAcxUWjH6vSax1ZqmjuwgAqtJ+vlo4weYpOlazw8k4mwBUZDvuIPpe6McWaUfQFH09o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB5935
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -226,244 +224,53 @@ On 20/11/2024 14:35, Simon Glass wrote:
 >
 > Hi Paul,
 >
-> On Wed, 20 Nov 2024 at 03:09, Paul HENRYS
+> On Wed, 20 Nov 2024 at 03:40, Paul HENRYS
 > <paul.henrys_ext@softathome.com> wrote:
->> mkimage can be used for both signing the FIT or encrypt its content and the
->> option '-k' can be used to pass a directory where both signing and encryption
->> keys can be retrieved.
->> _get_priv_keys_dir() is also renamed as _get_keys_dir() and adapted to support
->> both signing and encryption nodes in the FIT.
->>
+>> This change allows to replace both 'SEQ' and 'NAME' keywords by respectively a
+>> sequence number and the name of the FDT to provide more flexibility in the node
+>> name for the device trees included in the FIT.
+> This seems OK to me, but it would help to understand the motivation
+> better. Can you expand this a bit?
+The rational behind this change is because some projects uses some kind 
+of board data to look for the right config in a FIT image in U-Boot. The 
+default sequence number (config-1, config-2...) does not make it easy to 
+retrieve the right config in such a case. For instance, OpenWrt uses the 
+script "scripts/mkits.sh" to create an ITS passed to mkimage, where the 
+config node names can be customized when supporting multiple configs and 
+typically uses the device tree name appended to "config-".
+The idea is thus to provide the flexibility in binman to use the 
+traditional scheme with the sequence numbers (config-1, config-2...) or 
+use NAME instead (e.g. config-myboard1, config-myboard2...) or a 
+combination of both.
+>
 >> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 >> ---
->> Changes for v3:
->>   - Adapt the code after changes made in commit 133c000ca334
->>   - Rename property 'fit,sign' as 'fit,keys-directory' since this is not only
->>     about signing but passing a key directory to mkimage for both signing and
->>     encrypting
->>   - Update the tests and documentation accordingly
+>>   tools/binman/etype/fit.py | 1 +
+>>   1 file changed, 1 insertion(+)
 >>
->> My initial changes proposed in v1 and v2 has been outdated by the changes
->> proposed in commit 133c000ca334.
->>
->>   tools/binman/btool/mkimage.py           |  8 +++----
->>   tools/binman/entries.rst                | 13 ++++++-----
->>   tools/binman/etype/fit.py               | 31 ++++++++++++++-----------
->>   tools/binman/ftest.py                   |  2 +-
->>   tools/binman/test/340_fit_signature.dts |  2 +-
->>   tools/binman/test/341_fit_signature.dts |  2 +-
->>   tools/binman/test/342_fit_signature.dts |  2 +-
->>   7 files changed, 32 insertions(+), 28 deletions(-)
-> I think it is good to be able to specify the keys directory and not
-> just rely on Binman's input path. But do we need to remove the
-> fit,sign property? It is the signal that signing should be done.,
-> although I understand that there is a key directory too.
->
-> If we need to remove it, please do that in a separate patch.
->
-> Perhaps we also need a signal that encryption should be done?
-Based on my understanding, we don't enable the signing by adding 
-'fit,sign' property but by having a signature node in the DTS passed to 
-binman and thus also in the ITS passed to mkimage by binman (at least 
-with the current implementation). In the current implementation, adding 
-'fit,sign property' in the DTS passed to binman only leads to add the 
-argument '-k' with a directory where the private keys are stored and 
-nothing more. The '-k' argument of mkimage is used to specify the keys 
-directory for both signing and ciphering FIT data. That is why I thought 
-the property could be shared for providing the keys directory for both 
-signing and ciphering when generating the FIT.
-Then maybe your idea would be to use such a property, i.e. 'fit,sign' 
-property, to be able to add more options related to the signature 
-(key-name-hint, algo...) instead of having those information in the ITS 
-in a signature node. In this case, I guess it would indeed make sense to 
-have separate properties that could both set the '-k' argument passed to 
-mkimage.
-The current signal for the encryption is to have a 'cipher' node in the 
-ITS provided to mkimage.
->
->> diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
->> index 78d3301bc1..3f84220fb1 100644
->> --- a/tools/binman/btool/mkimage.py
->> +++ b/tools/binman/btool/mkimage.py
->> @@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
->>
->>       # pylint: disable=R0913
->>       def run(self, reset_timestamp=False, output_fname=None, external=False,
->> -            pad=None, align=None, priv_keys_dir=None):
->> +            pad=None, align=None, keys_dir=None):
->>           """Run mkimage
->>
->>           Args:
->> @@ -34,7 +34,7 @@ class Bintoolmkimage(bintool.Bintool):
->>                   other things to be easily added later, if required, such as
->>                   signatures
->>               align: Bytes to use for alignment of the FIT and its external data
->> -            priv_keys_dir: Path to directory containing private keys
->> +            keys_dir: Path to directory containing private and encryption keys
->>               version: True to get the mkimage version
->>           """
->>           args = []
->> @@ -46,8 +46,8 @@ class Bintoolmkimage(bintool.Bintool):
->>               args += ['-B', f'{align:x}']
->>           if reset_timestamp:
->>               args.append('-t')
->> -        if priv_keys_dir:
->> -            args += ['-k', f'{priv_keys_dir}']
->> +        if keys_dir:
->> +            args += ['-k', f'{keys_dir}']
->>           if output_fname:
->>               args += ['-F', output_fname]
->>           return self.run_cmd(*args)
->> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
->> index e918162fb4..1b1d73ef17 100644
->> --- a/tools/binman/entries.rst
->> +++ b/tools/binman/entries.rst
->> @@ -864,12 +864,13 @@ The top-level 'fit' node supports the following special properties:
->>
->>               fit,fdt-list-dir = "arch/arm/dts
->>
->> -    fit,sign
->> -        Enable signing FIT images via mkimage as described in
->> -        verified-boot.rst. If the property is found, the private keys path is
->> -        detected among binman include directories and passed to mkimage via
->> -        -k flag. All the keys required for signing FIT must be available at
->> -        time of signing and must be located in single include directory.
->> +    fit,keys-directory
->> +        Look for a directory where signing and encryption keys are stored.
->> +        If the property is found, the keys path is detected among binman
->> +        include directories and passed to mkimage via  -k flag. All the keys
->> +        required for signing and encrypting the FIT must be available at the
->> +        time of signing and encrypting and must be located in a single
->> +        include directory.
->>
->>   Substitutions
->>   ~~~~~~~~~~~~~
 >> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
->> index b5afbda41b..e0c1ac08d8 100644
+>> index e0c1ac08d8..b9ebc3afd0 100644
 >> --- a/tools/binman/etype/fit.py
 >> +++ b/tools/binman/etype/fit.py
->> @@ -102,13 +102,13 @@ class Entry_fit(Entry_section):
->>               In this case the input directories are ignored and all devicetree
->>               files must be in that directory.
->>
->> -        fit,sign
->> -            Enable signing FIT images via mkimage as described in
->> -            verified-boot.rst. If the property is found, the private keys path
->> -            is detected among binman include directories and passed to mkimage
->> -            via  -k flag. All the keys required for signing FIT must be
->> -            available at time of signing and must be located in single include
->> -            directory.
->> +        fit,keys-directory
->> +            Look for a directory where signing and encryption keys are stored.
->> +            If the property is found, the keys path is detected among binman
->> +            include directories and passed to mkimage via  -k flag. All the keys
->> +            required for signing and encrypting the FIT must be available at the
->> +            time of signing and encrypting and must be located in a single
->> +            include directory.
->>
->>       Substitutions
->>       ~~~~~~~~~~~~~
->> @@ -518,14 +518,14 @@ class Entry_fit(Entry_section):
->>           # are removed from self._entries later.
->>           self._priv_entries = dict(self._entries)
->>
->> -    def _get_priv_keys_dir(self, data):
->> -        """Detect private keys path among binman include directories
->> +    def _get_keys_dir(self, data):
->> +        """Detect private and encryption keys path among binman include directories
->>
->>           Args:
->>               data: FIT image in binary format
->>
->>           Returns:
->> -            str: Single path containing all private keys found or None
->> +            str: Single path containing all keys found or None
->>
->>           Raises:
->>               ValueError: Filename 'rsa2048.key' not found in input path
->> @@ -533,11 +533,14 @@ class Entry_fit(Entry_section):
->>           """
->>           def _find_keys_dir(node):
->>               for subnode in node.subnodes:
->> -                if subnode.name.startswith('signature'):
->> +                if (subnode.name.startswith('signature') or
->> +                    subnode.name.startswith('cipher')):
->>                       if subnode.props.get('key-name-hint') is None:
->>                           continue
->>                       hint = subnode.props['key-name-hint'].value
->> -                    name = tools.get_input_filename(f"{hint}.key")
->> +                    name = tools.get_input_filename(
->> +                        f"{hint}.key" if subnode.name.startswith('signature')
->> +                        else f"{hint}.bin")
->>                       path = os.path.dirname(name)
->>                       if path not in paths:
->>                           paths.append(path)
->> @@ -587,8 +590,8 @@ class Entry_fit(Entry_section):
->>           align = self._fit_props.get('fit,align')
->>           if align is not None:
->>               args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
->> -        if self._fit_props.get('fit,sign') is not None:
->> -            args.update({'priv_keys_dir': self._get_priv_keys_dir(data)})
->> +        if self._fit_props.get('fit,keys-directory') is not None:
->> +            args.update({'keys_dir': self._get_keys_dir(data)})
->>           if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
->>                               **args) is None:
->>               if not self.GetAllowMissing():
->> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
->> index 156567ace7..adab65e579 100644
->> --- a/tools/binman/ftest.py
->> +++ b/tools/binman/ftest.py
->> @@ -7885,7 +7885,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->>               str(e.exception))
->>
->>       def testFitSignNoSingatureNodes(self):
->> -        """Test that fit,sign doens't raise error if no signature nodes found"""
->> +        """Test that fit,keys-directory doesn't raise error if no signature nodes found"""
->>           if not elf.ELF_TOOLS:
->>               self.skipTest('Python elftools not available')
->>           entry_args = {
->> diff --git a/tools/binman/test/340_fit_signature.dts b/tools/binman/test/340_fit_signature.dts
->> index 9dce62e52d..97c0cbd05e 100644
->> --- a/tools/binman/test/340_fit_signature.dts
->> +++ b/tools/binman/test/340_fit_signature.dts
->> @@ -11,7 +11,7 @@
->>                          description = "test desc";
->>                          #address-cells = <1>;
->>                          fit,fdt-list = "of-list";
->> -                       fit,sign;
->> +                       fit,keys-directory;
->>
->>                          images {
->>                                  u-boot {
->> diff --git a/tools/binman/test/341_fit_signature.dts b/tools/binman/test/341_fit_signature.dts
->> index 77bec8df1e..4a4da7e589 100644
->> --- a/tools/binman/test/341_fit_signature.dts
->> +++ b/tools/binman/test/341_fit_signature.dts
->> @@ -11,7 +11,7 @@
->>                          description = "test desc";
->>                          #address-cells = <1>;
->>                          fit,fdt-list = "of-list";
->> -                       fit,sign;
->> +                       fit,keys-directory;
->>
->>                          images {
->>                                  u-boot {
->> diff --git a/tools/binman/test/342_fit_signature.dts b/tools/binman/test/342_fit_signature.dts
->> index 267105d0f6..9c61aea044 100644
->> --- a/tools/binman/test/342_fit_signature.dts
->> +++ b/tools/binman/test/342_fit_signature.dts
->> @@ -11,7 +11,7 @@
->>                          description = "test desc";
->>                          #address-cells = <1>;
->>                          fit,fdt-list = "of-list";
->> -                       fit,sign;
->> +                       fit,keys-directory;
->>
->>                          images {
->>                                  u-boot {
+>> @@ -732,6 +732,7 @@ class Entry_fit(Entry_section):
+>>                   # Generate nodes for each FDT
+>>                   for seq, fdt_fname in enumerate(self._fdts):
+>>                       node_name = node.name[1:].replace('SEQ', str(seq + 1))
+>> +                    node_name = node_name.replace('NAME', fdt_fname)
+>>                       if self._fdt_dir:
+>>                           fname = os.path.join(self._fdt_dir, fdt_fname + '.dtb')
+>>                       else:
 >> --
 >> 2.43.0
+> Please update the documentation (near the top of this file) and
+> regenerate entries.rst
+>
+> It also needs a test so that coverage passes (binman test -T)...
+Ok. I am going to update the documentation and add a test.
+>
 > [..]
 >
 > Regards,
 > Simon
+Regards,
+Paul
