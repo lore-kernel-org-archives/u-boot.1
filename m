@@ -4,95 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D5DD75BC8
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 07:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B0B8D75BCC
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 07:53:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACDCC8959B;
-	Thu, 21 Nov 2024 08:39:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id B218889610;
+	Thu, 21 Nov 2024 08:53:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="JQK+lyQe";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="X4HJ0+SX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TzAhNmnN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8378A8959B; Thu, 21 Nov 2024 08:39:33 +0100 (CET)
-Received: from fhigh-b1-smtp.messagingengine.com
- (fhigh-b1-smtp.messagingengine.com [202.12.124.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 30C5C89616; Thu, 21 Nov 2024 08:53:43 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C602789082
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:39:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13B4588F55
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:53:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
-Received: from phl-compute-04.internal (phl-compute-04.phl.internal
- [10.202.2.44])
- by mailfhigh.stl.internal (Postfix) with ESMTP id 559F7254011D;
- Thu, 21 Nov 2024 02:39:29 -0500 (EST)
-Received: from phl-mailfrontend-02 ([10.202.2.163])
- by phl-compute-04.internal (MEProxy); Thu, 21 Nov 2024 02:39:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm2; t=1732174769; x=1732261169; bh=bKRwM01xJO
- a6qjzeaEh24bQHCg5B2nQr58eRgx+qkGY=; b=JQK+lyQeXwgulmRFvsoZMEYb3N
- dmPZjdu/c9UshIEoI15n7YgzzhC8nlHjb8yw4dJsSZ9tkmr8e30iV9D5IGbB5B9s
- 8mwm5yzS51RJo6ZOxw7MPPAlRNayNqzdZYopOFbAfmWNYze/XOENOtoNfgcAdyqY
- BwzMCT8u4PmD0rmyVwwEGeNLfQr3csOLnWRfsOUpXSVJirK/KucJrNdwZ8hD0IA8
- DbJE+GX3ocSg4L3Heeo94al2eLfQqnlHQpUR4nHZw8108Itz7A45NcoWm2KmLX0g
- YjTN9imHHnqFH55/df8A4QEr2xvidQN6EbMwn62uan7qbr4+WnOoBfMIwGJQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
- 1732174769; x=1732261169; bh=bKRwM01xJOa6qjzeaEh24bQHCg5B2nQr58e
- Rgx+qkGY=; b=X4HJ0+SXXzR8bKFML+nofR7zxMuYGW1+cojiemHNg6kZBmSKPQD
- rRpj+dJgNKrT1ZTJyGpUl3DLHK0VEVzfa6fWvN/BWjGNmYAEd20M1MPlgIbbzm8/
- UkMjGwJFMr67YAexCeTq6kw6rbqJFDQ0coSagylcl8yOk3l0QvooxhUdPkOlan1L
- cZwssAS7FZp1tHDXJs4I8Dvo83rpLRhb29FFwInqeCJO0lpa8SnZF8l9/n+v6HTV
- izbKhyIcCbDldBIE+J+udVEfmyRyBiE18Hqq18GnMEnLHjpzscWutl/XoK7f/X3O
- uhTslz3fAo5OK5GUWYIgSxXyV23iF1u7EJA==
-X-ME-Sender: <xms:sOM-Z2LcIy1nvIPnRiRDxjbVrrP35z7oyqsmoypAE3UutTZ4gps5Rg>
- <xme:sOM-Z-L9kt7mOC-5tAXjAe3ekNqidNDF6n9qI3mQLZRnUJo0OrU-v_KK8Ar0K012P
- VYZsOgSD5CSFTDAd5I>
-X-ME-Received: <xmr:sOM-Z2t9Z9T30I4iWCCsAoI7PK_LudyDHBk_X0sAoabuetF5isLoK1dROLn1OMB195YQpjuAjbLAzDictvL6B6x5j3wTUaQxTTY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddrfeehgddutdekucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
- rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
- htshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtjeen
- ucfhrhhomheplfgrnhhnvgcuifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenuc
- ggtffrrghtthgvrhhnpefgvdffveelgedujeeffeehheekheelheefgfejffeftedugeet
- hfeuudefheefteenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
- hrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepiedpmhhouggvpehs
- mhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgsshgurdhorhhgpd
- hrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepgiih
- phhrohhnrdhglhhpkhesghhmgidruggvpdhrtghpthhtohepihhlihgrshdrrghprghloh
- guihhmrghssehlihhnrghrohdrohhrghdprhgtphhtthhopehsjhhgsegthhhrohhmihhu
- mhdrohhrghdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvg
-X-ME-Proxy: <xmx:sOM-Z7b0RRg9FEPckd7ZB4IpyqYUA9n8OqsO0hSc9cerTpR_oksmhg>
- <xmx:sOM-Z9Z5sNeayt4Ai3mA4ysW8vTYig1qlDxnYPdlojEOQrlWKgpGeA>
- <xmx:sOM-Z3DAyMmViSFbbxirOSZNKoDdrzOCcfd5kO3isBSJaO3bo2aFrQ>
- <xmx:sOM-ZzYhPEHhzcKpSdlJ3PQ5KspwoRAJr00JhtGQ1zredS-3ezpOtg>
- <xmx:seM-ZyMeqQVRx8u364UPA_92PO6L7V5XlCv-Cu6Ue7XNYtfaMdJmOUqO>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 21 Nov 2024 02:39:28 -0500 (EST)
-Date: Thu, 21 Nov 2024 08:39:26 +0100
-From: Janne Grunau <j@jannau.net>
-To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] Fix device removal order for Apple dart iommu
-Message-ID: <20241121073926.GA2171629@robin.jannau.net>
-References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfaeed515bso729027a12.1
+ for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 23:53:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732175620; x=1732780420; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0LHOrhVukzhc7uLvu6iXorvP1WcO7lukzczV3UaRqeI=;
+ b=TzAhNmnNZxD+sNl0OkqYAr1sblO7nA+rc4yIsZpyhvxlABnbN0HbayITijiw44nx0A
+ Xk/IkwPLHEndiHlX2PBD6Hr2APTsG4rQpQHO90PNXTF3ksSsCVUm8/wd2hDBmnMPfAtX
+ /8nPOuYhgtL+buAgNW3Xohci+cdN5Xdx2DqGuZB4o10AXGmYiwXdxr9yQWZ/Y+XjYT1x
+ j8csTlmS/pWd3qvgzvs+0lcyxODGUg14trSHhDrLQ20ZNs4fv5jRQVrA044KeHCg6fqe
+ h6elbxibqJUf19nCvu7ZF5S8ZWKbZwJyQCtzoZBVt8IiTVSF3gNoYB4NfUalltIW1JFi
+ wjCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732175620; x=1732780420;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0LHOrhVukzhc7uLvu6iXorvP1WcO7lukzczV3UaRqeI=;
+ b=IbUVcbOXywVxvXgObIxkD1turENodwDVZSFYMUvHndJRV+RWtfYMOte4oYVKrRotJ5
+ sMX0WBSP7Jo0/7GesYjhdJpZM/Cf3lGVP8JvBOh91vCg1QHKDaFg2I7uqY8aspaVcBUC
+ H/NbLVHLN0KLMHIRK7pbNQCZPtCvI0Hy/Xg3tKDNAu7R3tkSMXhJlwnST8O59KsAOPlZ
+ Cr4gnbpgr7tMTA/5MSU8bbM35yBr+ybZSCwP1HH/97dORNuWziiAMCJq5khv0ws7CLLp
+ mwKttvC00lVwMjqcvjqe3/gLcZuPYqvU1kKZU8F0hv4ue5BL9WGAcB7/q9wC2uU7wFAx
+ iOYQ==
+X-Gm-Message-State: AOJu0YwbYL0fJ5FrOJtfDkJtG85KTeDFh11tUtxRhxoYTRuSIRa6LraH
+ 4hj3LcrH18q88jHBT7J4AWhkBtq4TyD1mm3RFYfURq78SFWnHHc9BCV3kfU+D9A6pkE48F3C6Ac
+ G5M+Ib9p2TmGCm8mQcHObpujYnY78Y5Tycfi0AoY7M+VInxF0
+X-Gm-Gg: ASbGncvwj7yHmG98hQ8JcNvTPn3pgcxSN/vhvjHZS9BTQozgUYv1lkJ880c79gC1ojy
+ jiOtth8hT87POwhkkqkLSFOSiUZ4sLFwD
+X-Google-Smtp-Source: AGHT+IHu1nFofeXJNtZ2PXDrL9Dq/2dwZjEYaggW+2n2dedO4IjnB8CkWUc+H1/ZIH+WO6JATsmEH79n3+Rco5zwhOs=
+X-Received: by 2002:a05:6402:34cc:b0:5cf:c18b:59dc with SMTP id
+ 4fb4d7f45d1cf-5cff4b17ff6mr4149176a12.6.1732175620467; Wed, 20 Nov 2024
+ 23:53:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+References: <20241112131830.576864-1-sjg@chromium.org>
+In-Reply-To: <20241112131830.576864-1-sjg@chromium.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 21 Nov 2024 13:23:29 +0530
+Message-ID: <CADg8p96cKqSEmZWLaOV1-onUwT4uwBp11=t4K7tmmPwZ-6UvXw@mail.gmail.com>
+Subject: Re: [PATCH] Revert "efi_memory: do not add U-Boot memory to the
+ memory map"
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,19 +90,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 31, 2024 at 11:48:00PM +0100, Janne Grunau wrote:
-> Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
-> trigger a NULL pointer dereference since the the iommu device is removed
-> before its user. The sparsely used DM_FLAG_VITAL flag is intended for
-> this dependency.
-> This series adds it to the Apple dart iommu driver and implements the
-> two phased device removal to the EFI loader.
+On Tue, 12 Nov 2024 at 18:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> A bisect of Ubuntu 2022.04 boot-failure on qemu-x86_64 resulted in this
+> patch. I am not sure how to investigate it.
+>
+> The boot hangs at some point during booting of the install image, before
+> the Ubuntu logo appears.
+>
+> I will sent a series with a script showing how it is run.
+>
+> This reverts commit a68c9ac5d8afc51c619c5d3e865fcf147bea90cb.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 
-Can we get this two small patches merged? They fix a regression although
-it worked previously just accidentally. The only drivers using
-DM_FLAG_VITAL are clk-rcar-gen3.c, rzg2l-cpg.c and apple_dart.c all used
-on arm SoCs. arch/arm/lib/bootm.c already uses a device_remove call with
-DM_REMOVE_NON_VITAL so adding it to efi_loader looks reasonable as
-regression fix.
+I did some digging into this issue, and it turns out that the revert
+is only masking the real issue. What this revert does is mark the
+memory region occupied by U-Boot as EFI_BOOT_SERVICES_CODE. The x86
+kernel seems to mark memory regions other than
+EFI_{BOOT,RUNTIME}_SERVICES_CODE as not executable -- and this is
+precisely why this crash shows up only on x86. The actual cause of
+this issue is in the efi runtime functionality of U-Boot. The kernel
+is calling the SetVirtualAddressMap() runtime service function, and
+that seems to be calling some of the boot service code of U-Boot,
+which it shouldn't. We do not get the crash after disabling the
+ConvertPointer() and SetVirtualAddressMap() runtime functions.
 
-Janne
+-sughosh
+
+>
+>  lib/efi_loader/efi_memory.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index d2f5d563f2a..c7400ec9854 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -809,6 +809,16 @@ static void add_u_boot_and_runtime(void)
+>  {
+>         unsigned long runtime_start, runtime_end, runtime_pages;
+>         unsigned long runtime_mask = EFI_PAGE_MASK;
+> +       unsigned long uboot_start, uboot_pages;
+> +       unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
+> +
+> +       /* Add U-Boot */
+> +       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
+> +                      uboot_stack_size) & ~EFI_PAGE_MASK;
+> +       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
+> +                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
+> +       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
+> +                             false);
+>
+>  #if defined(__aarch64__)
+>         /*
+> --
+> 2.34.1
+>
