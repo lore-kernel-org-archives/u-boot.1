@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99885D7876B
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:29:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D27D78769
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:29:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DEB4891B1;
-	Thu, 21 Nov 2024 15:29:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E76F989779;
+	Thu, 21 Nov 2024 15:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="IdmhNzH3";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="lQiD+c5I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF42D89773; Thu, 21 Nov 2024 15:29:42 +0100 (CET)
+ id 9A38D8976F; Thu, 21 Nov 2024 15:29:49 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8223F8974F
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:29:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8030988278
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:29:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -31,17 +31,17 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZqATr59Kn7CbKw2YjcUXKxmFHJ5A64cPzToK8ETsmic=; b=IdmhNzH3V0QHSsejWFJvRt0v6o
- Zsw1DA0XO9Aw/XsbJxMMD6PhYmS8MYAYINUQj0fO6lZfGC7LVdkmdP/NrSwad3CwR938P2zzwZKla
- ENAVqP7pBn8gX0UjljQbq0JvP5sIr2vcytgDWJPJgRYFv4cBluhwBE+UPUJMAj0dA0GlnT17YFL7S
- c+ZPoTRjOp//HTfIxVcbACzqCw/7lNkfQtiu1vaF262mt2U1mSok9NzbT9luS1wTjvjrmbZsfGq9z
- AfD+s1xiepqfemEtAczVYViSypsYTR2+fZbNFuxGEMATWUaf1I6PMycG60FTDZ6DHTgfNtZT683Sp
- t6ENMn7g==;
+ bh=9wYIB8V+kfJlIjyPBUdHTeRcuE/9AmopZbVj8MQl64s=; b=lQiD+c5ILm8siLmPUMYInXRcrK
+ 3acXXZbOGgTpSTufso38J+Cs7A5FA1/6oXNYmYzzLQoCDggnPe2YxjbcWX865wPfP5zhGyYhqJ2Nu
+ 5zdDWoDfYjuGGrCQ7EklLGu0LcWsjTTcRN5j4S62rnaMBF9wVo9DGIqQbO057ixXSqutUs5OLRUgs
+ oE99Qjwc5PfaBi5K7xkRtTqRQjjdyF9KAxF/HvmzLtFWmBdQQ4v4Qm2vUT8O8YJCCH1FRdbGtxzI2
+ OYoqOV1A+cIH3rqQF/XNm4BrgZuoWZueOwzfjIOiQDyx4jJeXclcidtwVp6HlWTrdllRrFnNLU6hq
+ VGRL1oag==;
 Received: from [185.156.123.69] (helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1tE8A7-0007f9-Qu; Thu, 21 Nov 2024 15:28:03 +0100
+ id 1tE8A4-0007f9-HV; Thu, 21 Nov 2024 15:28:00 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -49,10 +49,11 @@ To: sjg@chromium.org,
 Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
- u-boot@lists.denx.de, sebastian.reichel@collabora.com
-Subject: [PATCH 20/20] rockchip: rk3576: Add support for ROC-RK3576-PC board
-Date: Thu, 21 Nov 2024 15:27:31 +0100
-Message-ID: <20241121142731.1202209-21-heiko@sntech.de>
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com,
+ Steven Liu <steven.liu@rock-chips.com>
+Subject: [PATCH 12/20] pinctrl: rockchip: support rk3576 pinctrl
+Date: Thu, 21 Nov 2024 15:27:23 +0100
+Message-ID: <20241121142731.1202209-13-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241121142731.1202209-1-heiko@sntech.de>
 References: <20241121142731.1202209-1-heiko@sntech.de>
@@ -74,216 +75,339 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ROC-RK3576-PC is a SBC made by Firefly, designed around the RK3576
-SoC. This adds the needed board infrastructure and config for it.
+From: Steven Liu <steven.liu@rock-chips.com>
 
+Add support for the rk3576 variant of pinctrl.
+
+Signed-off-by: Steven Liu <steven.liu@rock-chips.com>
+[adapted to mainline u-boot]
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 ---
- arch/arm/dts/rk3576-roc-pc-u-boot.dtsi  | 12 ++++
- arch/arm/mach-rockchip/rk3576/Kconfig   |  9 +++
- board/firefly/roc-pc-rk3576/Kconfig     | 12 ++++
- board/firefly/roc-pc-rk3576/MAINTAINERS |  7 +++
- configs/roc-pc-rk3576_defconfig         | 77 +++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst         |  3 +
- include/configs/roc-pc-rk3576.h         | 15 +++++
- 7 files changed, 135 insertions(+)
- create mode 100644 arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
- create mode 100644 board/firefly/roc-pc-rk3576/Kconfig
- create mode 100644 board/firefly/roc-pc-rk3576/MAINTAINERS
- create mode 100644 configs/roc-pc-rk3576_defconfig
- create mode 100644 include/configs/roc-pc-rk3576.h
+ drivers/pinctrl/rockchip/Makefile           |   1 +
+ drivers/pinctrl/rockchip/pinctrl-rk3576.c   | 287 ++++++++++++++++++++
+ drivers/pinctrl/rockchip/pinctrl-rockchip.h |   3 +
+ 3 files changed, 291 insertions(+)
+ create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
 
-diff --git a/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
+diff --git a/drivers/pinctrl/rockchip/Makefile b/drivers/pinctrl/rockchip/Makefile
+index c91f650b043..468840913dd 100644
+--- a/drivers/pinctrl/rockchip/Makefile
++++ b/drivers/pinctrl/rockchip/Makefile
+@@ -15,6 +15,7 @@ obj-$(CONFIG_ROCKCHIP_RK3328) += pinctrl-rk3328.o
+ obj-$(CONFIG_ROCKCHIP_RK3368) += pinctrl-rk3368.o
+ obj-$(CONFIG_ROCKCHIP_RK3399) += pinctrl-rk3399.o
+ obj-$(CONFIG_ROCKCHIP_RK3568) += pinctrl-rk3568.o
++obj-$(CONFIG_ROCKCHIP_RK3576) += pinctrl-rk3576.o
+ obj-$(CONFIG_ROCKCHIP_RK3588) += pinctrl-rk3588.o
+ obj-$(CONFIG_ROCKCHIP_RV1108) += pinctrl-rv1108.o
+ obj-$(CONFIG_ROCKCHIP_RV1126) += pinctrl-rv1126.o
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3576.c b/drivers/pinctrl/rockchip/pinctrl-rk3576.c
 new file mode 100644
-index 00000000000..0cfc7b5dcd6
+index 00000000000..9399540ed4a
 --- /dev/null
-+++ b/arch/arm/dts/rk3576-roc-pc-u-boot.dtsi
-@@ -0,0 +1,12 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3576.c
+@@ -0,0 +1,287 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
-+ *
++ * (C) Copyright 2024 Rockchip Electronics Co., Ltd
 + */
 +
-+#include "rk3576-u-boot.dtsi"
++#include <dm.h>
++#include <dm/pinctrl.h>
++#include <regmap.h>
++#include <syscon.h>
 +
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
++#include "pinctrl-rockchip.h"
++#include <dt-bindings/pinctrl/rockchip.h>
++
++static int rk3576_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++	int iomux_num = (pin / 8);
++	struct regmap *regmap;
++	int reg, ret, mask;
++	u8 bit;
++	u32 data;
++
++	debug("setting mux of GPIO%d-%d to %d\n", bank->bank_num, pin, mux);
++
++	regmap = priv->regmap_base;
++	reg = bank->iomux[iomux_num].offset;
++	if ((pin % 8) >= 4)
++		reg += 0x4;
++	bit = (pin % 4) * 4;
++	mask = 0xf;
++
++	data = (mask << (bit + 16));
++	data |= (mux & mask) << bit;
++
++	if (bank->bank_num == 0 && pin >= RK_PB4 && pin <= RK_PB7)
++		reg += 0x1FF4; /* GPIO0_IOC_GPIO0B_IOMUX_SEL_H */
++
++	debug("iomux write reg = %x data = %x\n", reg, data);
++
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RK3576_DRV_BITS_PER_PIN		4
++#define RK3576_DRV_PINS_PER_REG		4
++#define RK3576_DRV_GPIO0_AL_OFFSET	0x10
++#define RK3576_DRV_GPIO0_BH_OFFSET	0x2014
++#define RK3576_DRV_GPIO1_OFFSET		0x6020
++#define RK3576_DRV_GPIO2_OFFSET		0x6040
++#define RK3576_DRV_GPIO3_OFFSET		0x6060
++#define RK3576_DRV_GPIO4_AL_OFFSET	0x6080
++#define RK3576_DRV_GPIO4_CL_OFFSET	0xA090
++#define RK3576_DRV_GPIO4_DL_OFFSET	0xB098
++
++static void rk3576_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
++					int pin_num, struct regmap **regmap,
++					int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++
++	*regmap = priv->regmap_base;
++	if (bank->bank_num == 0 && pin_num < 12) {
++		*reg = RK3576_DRV_GPIO0_AL_OFFSET;
++	} else if (bank->bank_num == 0) {
++		*reg = RK3576_DRV_GPIO0_BH_OFFSET - 0xc;
++	} else if (bank->bank_num == 1) {
++		*reg = RK3576_DRV_GPIO1_OFFSET;
++	} else if (bank->bank_num == 2) {
++		*reg = RK3576_DRV_GPIO2_OFFSET;
++	} else if (bank->bank_num == 3) {
++		*reg = RK3576_DRV_GPIO3_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 16) {
++		*reg = RK3576_DRV_GPIO4_AL_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 24) {
++		*reg = RK3576_DRV_GPIO4_CL_OFFSET - 0x10;
++	} else if (bank->bank_num == 4) {
++		*reg = RK3576_DRV_GPIO4_DL_OFFSET - 0x18;
++	} else {
++		*reg = 0;
++		debug("unsupported bank_num %d\n", bank->bank_num);
++	}
++
++	*reg += ((pin_num / RK3576_DRV_PINS_PER_REG) * 4);
++	*bit = pin_num % RK3576_DRV_PINS_PER_REG;
++	*bit *= RK3576_DRV_BITS_PER_PIN;
++}
++
++static int rk3576_set_drive(struct rockchip_pin_bank *bank,
++			    int pin_num, int strength)
++{
++	struct regmap *regmap;
++	int reg, ret;
++	u32 data;
++	u8 bit;
++	int drv = ((strength & BIT(2)) >> 2) | ((strength & BIT(0)) << 2) | (strength & BIT(1));
++
++	rk3576_calc_drv_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << RK3576_DRV_BITS_PER_PIN) - 1) << (bit + 16);
++	data |= (drv << bit);
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RK3576_PULL_BITS_PER_PIN	2
++#define RK3576_PULL_PINS_PER_REG	8
++#define RK3576_PULL_GPIO0_AL_OFFSET	0x20
++#define RK3576_PULL_GPIO0_BH_OFFSET	0x2028
++#define RK3576_PULL_GPIO1_OFFSET	0x6110
++#define RK3576_PULL_GPIO2_OFFSET	0x6120
++#define RK3576_PULL_GPIO3_OFFSET	0x6130
++#define RK3576_PULL_GPIO4_AL_OFFSET	0x6140
++#define RK3576_PULL_GPIO4_CL_OFFSET	0xA148
++#define RK3576_PULL_GPIO4_DL_OFFSET	0xB14C
++
++static void rk3576_calc_pull_reg_and_bit(struct rockchip_pin_bank *bank,
++					 int pin_num, struct regmap **regmap,
++					 int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++
++	*regmap = priv->regmap_base;
++	if (bank->bank_num == 0 && pin_num < 12) {
++		*reg = RK3576_PULL_GPIO0_AL_OFFSET;
++	} else if (bank->bank_num == 0) {
++		*reg = RK3576_PULL_GPIO0_BH_OFFSET - 0x4;
++	} else if (bank->bank_num == 1) {
++		*reg = RK3576_PULL_GPIO1_OFFSET;
++	} else if (bank->bank_num == 2) {
++		*reg = RK3576_PULL_GPIO2_OFFSET;
++	} else if (bank->bank_num == 3) {
++		*reg = RK3576_PULL_GPIO3_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 16) {
++		*reg = RK3576_PULL_GPIO4_AL_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 24) {
++		*reg = RK3576_PULL_GPIO4_CL_OFFSET - 0x8;
++	} else if (bank->bank_num == 4) {
++		*reg = RK3576_PULL_GPIO4_DL_OFFSET - 0xc;
++	} else {
++		*reg = 0;
++		debug("unsupported bank_num %d\n", bank->bank_num);
++	}
++
++	*reg += ((pin_num / RK3576_PULL_PINS_PER_REG) * 4);
++	*bit = pin_num % RK3576_PULL_PINS_PER_REG;
++	*bit *= RK3576_PULL_BITS_PER_PIN;
++}
++
++static int rk3576_set_pull(struct rockchip_pin_bank *bank,
++			   int pin_num, int pull)
++{
++	struct regmap *regmap;
++	int reg, ret;
++	u8 bit, type;
++	u32 data;
++
++	if (pull == PIN_CONFIG_BIAS_PULL_PIN_DEFAULT)
++		return -EOPNOTSUPP;
++
++	rk3576_calc_pull_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++	type = 1; /* FIXME: was always set to 1 in vendor kernel */
++	ret = rockchip_translate_pull_value(type, pull);
++	if (ret < 0) {
++		debug("unsupported pull setting %d\n", pull);
++		return ret;
++	}
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << RK3576_PULL_BITS_PER_PIN) - 1) << (bit + 16);
++
++	data |= (ret << bit);
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++#define RK3576_SMT_BITS_PER_PIN		1
++#define RK3576_SMT_PINS_PER_REG		8
++#define RK3576_SMT_GPIO0_AL_OFFSET	0x30
++#define RK3576_SMT_GPIO0_BH_OFFSET	0x2040
++#define RK3576_SMT_GPIO1_OFFSET		0x6210
++#define RK3576_SMT_GPIO2_OFFSET		0x6220
++#define RK3576_SMT_GPIO3_OFFSET		0x6230
++#define RK3576_SMT_GPIO4_AL_OFFSET	0x6240
++#define RK3576_SMT_GPIO4_CL_OFFSET	0xA248
++#define RK3576_SMT_GPIO4_DL_OFFSET	0xB24C
++
++static int rk3576_calc_schmitt_reg_and_bit(struct rockchip_pin_bank *bank,
++					   int pin_num,
++					   struct regmap **regmap,
++					   int *reg, u8 *bit)
++{
++	struct rockchip_pinctrl_priv *priv = bank->priv;
++
++	*regmap = priv->regmap_base;
++	if (bank->bank_num == 0 && pin_num < 12) {
++		*reg = RK3576_SMT_GPIO0_AL_OFFSET;
++	} else if (bank->bank_num == 0) {
++		*reg = RK3576_SMT_GPIO0_BH_OFFSET - 0x4;
++	} else if (bank->bank_num == 1) {
++		*reg = RK3576_SMT_GPIO1_OFFSET;
++	} else if (bank->bank_num == 2) {
++		*reg = RK3576_SMT_GPIO2_OFFSET;
++	} else if (bank->bank_num == 3) {
++		*reg = RK3576_SMT_GPIO3_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 16) {
++		*reg = RK3576_SMT_GPIO4_AL_OFFSET;
++	} else if (bank->bank_num == 4 && pin_num < 24) {
++		*reg = RK3576_SMT_GPIO4_CL_OFFSET - 0x8;
++	} else if (bank->bank_num == 4) {
++		*reg = RK3576_SMT_GPIO4_DL_OFFSET - 0xc;
++	} else {
++		*reg = 0;
++		debug("unsupported bank_num %d\n", bank->bank_num);
++	}
++
++	*reg += ((pin_num / RK3576_SMT_PINS_PER_REG) * 4);
++	*bit = pin_num % RK3576_SMT_PINS_PER_REG;
++	*bit *= RK3576_SMT_BITS_PER_PIN;
++
++	return 0;
++}
++
++static int rk3576_set_schmitt(struct rockchip_pin_bank *bank,
++			      int pin_num, int enable)
++{
++	struct regmap *regmap;
++	int reg, ret;
++	u32 data;
++	u8 bit;
++
++	rk3576_calc_schmitt_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
++
++	/* enable the write to the equivalent lower bits */
++	data = ((1 << RK3576_SMT_BITS_PER_PIN) - 1) << (bit + 16);
++	data |= (enable << bit);
++	ret = regmap_write(regmap, reg, data);
++
++	return ret;
++}
++
++static struct rockchip_pin_bank rk3576_pin_banks[] = {
++	RK3576_PIN_BANK_FLAGS(0, 32, "gpio0", IOMUX_WIDTH_4BIT,
++			      0, 0x8, 0x2004, 0x200C),
++	RK3576_PIN_BANK_FLAGS(1, 32, "gpio1", IOMUX_WIDTH_4BIT,
++			      0x4020, 0x4028, 0x4030, 0x4038),
++	RK3576_PIN_BANK_FLAGS(2, 32, "gpio2", IOMUX_WIDTH_4BIT,
++			      0x4040, 0x4048, 0x4050, 0x4058),
++	RK3576_PIN_BANK_FLAGS(3, 32, "gpio3", IOMUX_WIDTH_4BIT,
++			      0x4060, 0x4068, 0x4070, 0x4078),
++	RK3576_PIN_BANK_FLAGS(4, 32, "gpio4", IOMUX_WIDTH_4BIT,
++			      0x4080, 0x4088, 0xA390, 0xB398),
 +};
-diff --git a/arch/arm/mach-rockchip/rk3576/Kconfig b/arch/arm/mach-rockchip/rk3576/Kconfig
-index 2e46b2b90d2..4c2328e5699 100644
---- a/arch/arm/mach-rockchip/rk3576/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3576/Kconfig
-@@ -1,5 +1,12 @@
- if ROCKCHIP_RK3576
- 
-+config TARGET_ROC_PC_RK3576
-+	bool "ROC_PC_RK3576"
-+	select BOARD_LATE_INIT
-+	help
-+	  ROC-RK3576-PC is a single board computer from Firefly
-+	  using the Rockchp RK3576.
 +
- config ROCKCHIP_BOOT_MODE_REG
- 	default 0x26024040
- 
-@@ -45,4 +52,6 @@ config SPL_STACK_R_ADDR
- config SPL_STACK_R_MALLOC_SIMPLE_LEN
- 	default 0x200000
- 
-+source board/firefly/roc-pc-rk3576/Kconfig
++static const struct rockchip_pin_ctrl rk3576_pin_ctrl = {
++	.pin_banks		= rk3576_pin_banks,
++	.nr_banks		= ARRAY_SIZE(rk3576_pin_banks),
++	.nr_pins		= 160,
++	.grf_mux_offset		= 0x0,
++	.set_mux		= rk3576_set_mux,
++	.set_pull		= rk3576_set_pull,
++	.set_drive		= rk3576_set_drive,
++	.set_schmitt		= rk3576_set_schmitt,
++};
 +
- endif
-diff --git a/board/firefly/roc-pc-rk3576/Kconfig b/board/firefly/roc-pc-rk3576/Kconfig
-new file mode 100644
-index 00000000000..2fc0f913c37
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3576/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROC_PC_RK3576
++static const struct udevice_id rk3576_pinctrl_ids[] = {
++	{
++		.compatible = "rockchip,rk3576-pinctrl",
++		.data = (ulong)&rk3576_pin_ctrl
++	},
++	{ }
++};
 +
-+config SYS_BOARD
-+	default "roc-pc-rk3576"
-+
-+config SYS_VENDOR
-+	default "firefly"
-+
-+config SYS_CONFIG_NAME
-+	default "roc-pc-rk3576"
-+
-+endif
-diff --git a/board/firefly/roc-pc-rk3576/MAINTAINERS b/board/firefly/roc-pc-rk3576/MAINTAINERS
-new file mode 100644
-index 00000000000..aa8897c16fc
---- /dev/null
-+++ b/board/firefly/roc-pc-rk3576/MAINTAINERS
-@@ -0,0 +1,7 @@
-+ROC-RK3576-PC
-+M:	Heiko Stuebner <heiko@sntech.de>
-+S:	Maintained
-+F:	board/firefly/roc-pc-rk3576
-+F:	include/configs/roc-pc-rk3576.h
-+F:	configs/roc-pc-rk3576_defconfig
-+F:	arch/arm/dts/rk3576-roc-pc*
-diff --git a/configs/roc-pc-rk3576_defconfig b/configs/roc-pc-rk3576_defconfig
-new file mode 100644
-index 00000000000..25e4fa1e8f6
---- /dev/null
-+++ b/configs/roc-pc-rk3576_defconfig
-@@ -0,0 +1,77 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-roc-pc"
-+CONFIG_ROCKCHIP_RK3576=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ROC_PC_RK3576=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0x2AD40000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-roc-pc.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 6b544e957b2..5b01d536c05 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -125,6 +125,9 @@ List of mainline supported Rockchip boards:
-      - Radxa ROCK 3A (rock-3a-rk3568)
-      - Radxa ROCK 3B (rock-3b-rk3568)
- 
-+* rk3576
-+     - Firefly ROC-RK3576-PC (roc-pc-rk3576)
-+
- * rk3588
-      - ArmSoM Sige7 (sige7-rk3588)
-      - Rockchip EVB (evb-rk3588)
-diff --git a/include/configs/roc-pc-rk3576.h b/include/configs/roc-pc-rk3576.h
-new file mode 100644
-index 00000000000..ac98d516478
---- /dev/null
-+++ b/include/configs/roc-pc-rk3576.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
-+ */
-+
-+#ifndef __ROC_PC_RK3576_H
-+#define __ROC_PC_RK3576_H
-+
-+#include <configs/rk3576_common.h>
-+
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
-+
++U_BOOT_DRIVER(pinctrl_rk3576) = {
++	.name		= "rockchip_rk3576_pinctrl",
++	.id		= UCLASS_PINCTRL,
++	.of_match	= rk3576_pinctrl_ids,
++	.priv_auto	= sizeof(struct rockchip_pinctrl_priv),
++	.ops		= &rockchip_pinctrl_ops,
++#if CONFIG_IS_ENABLED(OF_REAL)
++	.bind		= dm_scan_fdt_dev,
 +#endif
++	.probe		= rockchip_pinctrl_probe,
++};
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+index df7bc684d29..5e3c9c90760 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
+@@ -458,6 +458,9 @@ struct rockchip_pin_bank {
+ #define MR_PMUGRF(ID, PIN, FUNC, REG, VAL)	\
+ 	PIN_BANK_MUX_ROUTE_FLAGS(ID, PIN, FUNC, REG, VAL, ROUTE_TYPE_PMUGRF)
+ 
++#define RK3576_PIN_BANK_FLAGS(ID, PIN, LABEL, M, O1, O2, O3, O4)	\
++	PIN_BANK_IOMUX_FLAGS_OFFSET(ID, PIN, LABEL, M, M, M, M, O1, O2, O3, O4)
++
+ #define RK3588_PIN_BANK_FLAGS(ID, PIN, LABEL, M, P)			\
+ 	PIN_BANK_IOMUX_FLAGS_PULL_FLAGS(ID, PIN, LABEL, M, M, M, M, P, P, P, P)
+ 
 -- 
 2.45.2
 
