@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF06E64039
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 22:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84632E64025
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 22:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9335896C5;
-	Thu, 21 Nov 2024 23:38:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DE91896ED;
+	Thu, 21 Nov 2024 23:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="EP3rkZN2";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WUKuSsJt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF587896C5; Thu, 21 Nov 2024 23:38:15 +0100 (CET)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id D678B89776; Thu, 21 Nov 2024 23:38:31 +0100 (CET)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C2D1896C2
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 23:38:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ADE6896D4
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 23:38:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
 Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20241121223808epoutp01eb061e64ec8b90c1e1779b2abc16193f~KHNBwRDpy2049720497epoutp01e
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:38:08 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20241121223808epoutp01eb061e64ec8b90c1e1779b2abc16193f~KHNBwRDpy2049720497epoutp01e
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20241121223824epoutp0387bc1dfd59089daadacf640635aba3e8~KHNRLc0T82046220462epoutp03t
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:38:24 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20241121223824epoutp0387bc1dfd59089daadacf640635aba3e8~KHNRLc0T82046220462epoutp03t
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1732228688;
- bh=j/N9OqhypVL0GOhKSJprHqqGW3EVJI6YqRcJcbd9lqY=;
+ s=mail20170921; t=1732228704;
+ bh=3qLVJh0w0umtX5axOHpjRWlOKxOKVwzKn+4A3C/twek=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=EP3rkZN2vh++RpwPZguia91NU9IUqEUijFSNHrQmWNHks6+m1z7JkfO0IMENDgZ7O
- VFDyuI5YBGtrKA5ppRLOX+uReposy4xVmpNnb2Vedtn73mCFqfsD3EoWes79tOYIsA
- aB6kL8HZWjdahrQvn/BoYyYiCpW7FB2S5f6WuuQQ=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20241121223807epcas1p2b85895b3f7d3f6880ab885cc6d786520~KHNA4L61h1655716557epcas1p2G;
- Thu, 21 Nov 2024 22:38:07 +0000 (GMT)
-Received: from epsmges1p1.samsung.com (unknown [182.195.36.144]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4XvY662lRGz4x9Pq; Thu, 21 Nov
- 2024 22:38:06 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- DD.99.16307.E46BF376; Fri, 22 Nov 2024 07:38:06 +0900 (KST)
+ b=WUKuSsJtzG3dhdMHb/A2td0m2YK2xBBw0ieLCevaO/C8zoK3tIYNblJoT7cWHqTCt
+ 0/SE9TFBgYHGQ3yyHs30TAE83KNQnIZOFbS1Xwirk6Rr2cAaITehTdQzh3putRI2fi
+ JjsS5KleCi6PcopI8Al+bDkK/D35uhqyZqOkrkgI=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20241121223824epcas1p41c1d40575ce4fbecfe5b9293fa5459a1~KHNQespOx0083700837epcas1p4e;
+ Thu, 21 Nov 2024 22:38:24 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.36.134]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4XvY6R1Jgkz4x9Pp; Thu, 21 Nov
+ 2024 22:38:23 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 50.10.41722.F56BF376; Fri, 22 Nov 2024 07:38:23 +0900 (KST)
 Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20241121223805epcas1p4c6b32558267ab38842e1665aa13e7916~KHM-iEPYU0879308793epcas1p4o;
- Thu, 21 Nov 2024 22:38:05 +0000 (GMT)
+ 20241121223821epcas1p4da43f25dd75dc7c5d57874378406e5f8~KHNOglGsF1467814678epcas1p4Q;
+ Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
 Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
  epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241121223805epsmtrp2e6a1cd9f90ee591eb3d4ea7fdf82959a~KHM-fm0v10487704877epsmtrp2l;
- Thu, 21 Nov 2024 22:38:05 +0000 (GMT)
-X-AuditID: b6c32a35-6c7ff70000023fb3-4f-673fb64e1f3e
+ 20241121223821epsmtrp260518811fdc9f37ada8e1c8198bc37a5~KHNOf2zsn0500705007epsmtrp2S;
+ Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
+X-AuditID: b6c32a33-11bfb7000001a2fa-3b-673fb65f0a2d
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
  epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- AF.CC.18937.D46BF376; Fri, 22 Nov 2024 07:38:05 +0900 (KST)
+ C3.DC.18937.D56BF376; Fri, 22 Nov 2024 07:38:21 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241121223805epsmtip2e21aa4663798263aed8c467cb73a9c94~KHM-OfB9B0749007490epsmtip2h;
- Thu, 21 Nov 2024 22:38:05 +0000 (GMT)
+ 20241121223821epsmtip2ab0093236c14d3fbbc1cf3cf892d9f9f~KHNONoVEL0681206812epsmtip2G;
+ Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Heiko Stuebner'" <heiko@sntech.de>, <sjg@chromium.org>,
  <philipp.tomsich@vrull.eu>, <kever.yang@rock-chips.com>
@@ -71,57 +71,57 @@ Cc: <lukma@denx.de>, <seanga2@gmail.com>, <peng.fan@nxp.com>,
  <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <jonas@kwiboo.se>,
  <quentin.schulz@cherry.de>, <detlev.casanova@collabora.com>,
  <u-boot@lists.denx.de>, <sebastian.reichel@collabora.com>
-In-Reply-To: <20241121142731.1202209-19-heiko@sntech.de>
-Subject: RE: [PATCH 18/20] mmc: rockchip_dw_mmc: Add support for rk3576
-Date: Fri, 22 Nov 2024 07:38:05 +0900
-Message-ID: <000301db3c66$07ff3c60$17fdb520$@samsung.com>
+In-Reply-To: <20241121142731.1202209-18-heiko@sntech.de>
+Subject: RE: [PATCH 17/20] mmc: rockchip_sdhci: Add support for RK3576
+Date: Fri, 22 Nov 2024 07:38:21 +0900
+Message-ID: <000401db3c66$11974a60$34c5df20$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
 Content-Language: ko
-Thread-Index: AQJUeDCn5J2CwOuZwyaxWoAdnWczjwCRlKRnAbU5UOixvaUUoA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Tf1CTZRy/5333k5P1NtCelsV8DzuRG264wTsOUorsPVPjTs2y7mDH3tto
- P28bRPFHOzXlhwrCLhKIS25qrrsshLHxIxQjR2JnEK6uDUJYBJOpgCQBrf0A67/P9/l+fjzP
- 93keFsrtYPBYhVoTZdDK1Dgjhma/niQQ7LPvUAhH/36aGAlOAyJ4108nZp3jdKL/3jCNsNct
- MojJwBBCPLbN04nKS6XE5SE7k7g+d4tJtI1UI4TXv49YaLUDYqa7nLmTQ874LIBsMP9EIx1e
- KyCb6l000lnvZZKu6kGEvOVxANI90I6Q3wQcCLlS30Mj2+80oaTztzEkd91hVaaSkskpA5/S
- FujkhVpFFv76/rxX8iRpQpFAJCXScb5WpqGy8Jw9uYJdherQWXB+sUxdFFrKlRmN+LaXMg26
- IhPFV+qMpiyc0svVeok+xSjTGIu0ihQtZcoQCYWpkhAxX6Ucqetk6JvXlXjO/YiYgS2mArBZ
- EBPD/q4qRhhzMQeATWXJFSAmhGcBvFI7Rn9SPHbP09cUS780rjacALqHK5CofApAi1cUxgws
- BQabz6FhHI+9D2v+/AEJC1AsCGBN82SkwcYI6O+rBGEch70Gl9oWI0Y0bDO03OyKcGIxKRy+
- 2bOazIeLvgsRjGLxsKH8+GrAy/BsYxstHAAxFwv+OmoJGbFCRQ6cuLI3qo2D0zdamVHMg3OB
- bkaUfxTA89Zr9GhxEsB/zG5GlLUd9pyvjRihWBK83LEtGsyBgUcn6VH/WFh2nBtlJ8JB/xSy
- 5u+dCK7umYR/tNbRotMKzbelfAKpBgn1/ztD/X8JnwPEBjZQeqNGQRlFetGTqyzQaVpA5BFv
- lTjAmZkHKb0AYYFeAFkoHh+7E9+h4MbKZR98SBl0eYYiNWXsBZLQJM+gvPUFutAv0JryRGKp
- UJyWul1MiNJE+DOxAz8XU1xMITNRKorSU4Y1HcJi88yIOBF/D2bM3YO+gy3+LfnJk5+WJHPe
- fETfPe2VXDUXC695rI72WW6f59uNR5aShZxB9kL887j/1JeqZ1UJrR+/vcK7ePt3ru6vcQ/q
- VpzYZC/LsVnsmwuZTz3XO3tY8TD9q6rUvg0PDvnNpQNJb93f1Hl6/Z3drsyYFfa7AxNziu+O
- LPs6sx+it6dqGy92+w7a+0u7XhwC9/GsbGWL8+yluo6qBL7+C6VPHtB9VJwhMI1zpZ9hF270
- Cw5sPDR0bMvdvGMuxdjVo/n7OdpF76vpqHfX97pKa4nUtzCis1A1iZ5l23iR5MDo/AvLy5/E
- jZ3qOdGQfXrQ+vUbGto7ek57Ww5OMyploq2owSj7F26/cEhNBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLLMWRmVeSWpSXmKPExsWy7bCSvK7vNvt0gxcftC3u/X/FaPH/0WtW
+Thread-Index: AQJUeDCn5J2CwOuZwyaxWoAdnWczjwKPMoj3AT0SU+OxsXmS0A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLJsWRmVeSWpSXmKPExsWy7bCmnm78Nvt0g1WbWSzu/X/FaPH/0WtW
  i087H7NanHxzlcVi2/SfbBbP311msvix6gurRffKaov1l7exWxz+fJbdYuu9CUwWd1/7WXzb
  so3R4u3eTnYHPo+3T6cwesxuuMjisePuEkaPebNOsHjsnHWX3ePEhEtMHmfv7GD0uH5mO5PH
- xnc7mDz+ztrP4rH92jxmj523HzIF8ERx2aSk5mSWpRbp2yVwZdybvputYBFPxZ2F55gaGFdx
- dTFyckgImEj8vjGHtYuRi0NIYDujRM/rPawQCSmJz0+nsnUxcgDZwhKHDxdD1DxnlPh6/A0T
- SA2bgJ7E/0ULmUFsEYFqiR/znrKBFDELdDNJPH22AWrqFkaJDU9uM4JUcQpYSLw+2g1mCwu4
- S/ze+hNsEouAqsSU03vAJvEKWEpcPb0f6goFiZ9Pl4HZzAIiErM726C2OUnMnLOVZQKjwCwk
- qQWMjKsYRVMLinPTc5MLDPWKE3OLS/PS9ZLzczcxgmNIK2gH47L1f/UOMTJxMB5ilOBgVhLh
- dVCyTxfiTUmsrEotyo8vKs1JLT7EKM3BoiTOq5zTmSIkkJ5YkpqdmlqQWgSTZeLglGpgMir0
- 0Xt9dOLthknWfwUfzdGJ4uKOidSXevXebpl1KePjaEf7Tba6powd+YtvLHaaw8V4jiWII0lH
- Z1/8l95Hzics0vbKxdV7TNkUe3PlKXaD4NT1p9sjp3s8epB8vj4rypfd62rS62LTBpejYRdC
- ih9bBggmfqtN3Mu9gHPaiwSDtZuUOOSeqfyoeHVSzO14n9x5hX+FO3YunCK+WS80q/GbwhrG
- jl3R6e6NVRGP003/pG19Fu9vJD9d9Qlj2F/Hww8mOWhy6C7vsXxdvMxHMJdv4v/nU+rY2lqs
- d1nqKKduaPFtDO9/sMqjvOH9oocFQtO2K80Ie7W1Pd7p8KTF5+/MsVQ1erPdID3RZZ4SS3FG
- oqEWc1FxIgCv5fDbEAMAAA==
-X-CMS-MailID: 20241121223805epcas1p4c6b32558267ab38842e1665aa13e7916
+ xnc7mDz+ztrP4rH92jxmj523HzIF8ERl22SkJqakFimk5iXnp2TmpdsqeQfHO8ebmhkY6hpa
+ WpgrKeQl5qbaKrn4BOi6ZeYA/aKkUJaYUwoUCkgsLlbSt7Mpyi8tSVXIyC8usVVKLUjJKTAt
+ 0CtOzC0uzUvXy0stsTI0MDAyBSpMyM54dnYrS8FqgYq286eZGhgv8nYxcnJICJhI9DU/Zu1i
+ 5OIQEtjBKPHt+AMWCOcTo8TFvlMIzt+tc1hhWrbPfcgMkdjJKPH5eSMbhPOSUWLL9eNMIFVs
+ AnoS/xctZAaxRQTKJSa9OMUEUsQs8J9RYtKi52AJTgELiW3zvjKC2MICbhKHdx8Ca2YRUJXo
+ 3bCIHcTmFbCU2H2nnRFitYLEz6fLwM5gFhCRmN3ZBrXASWL/3rdgX0gInOCQ+LB/NgtEg4tE
+ 4/rfULawxKvjW9ghbCmJz+/2skE0NDNKLF1yEKq7h1HiX8N1NogqY4n9SycDncQBtE5TYv0u
+ fYjNfBLvvvawgoQlBHglOtqEIKpVJC69fskEM//uk//Q8PKQ+L7hCCKIm/c9ZZ7AKD8LyROz
+ EDYsYGRaxSiWWlCcm56abFhgCI/N5PzcTYzgdKxlvIPx8vx/eocYmTgYDzFKcDArifA6KNmn
+ C/GmJFZWpRblxxeV5qQWH2I0BQblRGYp0eR8YEbIK4k3NLE0MDEzMjaxMDQzVBLnPXOlLFVI
+ ID2xJDU7NbUgtQimj4mDU6qByf/86xv3JrrL9jTdUj3J+093rcSNbwc2vzxvKZ+re1I/MbFk
+ R7nxQ6XG2Rl32Lj2c38qnSD4VbQs+vL6Zhf5Wp4uEUuPaT07HrNbe3WUWufqSe6qVJsnFDDX
+ IcF4u1/X/Clv3Yq9O6/FLPAw/c8jNvHMMfZ9inN4vXfn+6f/VkqKuSW8L/O72o+6fxeVs7nq
+ XzH3dPvPts3z+p2TprIsOU+W+1KQ6P4ve9Zuv/dJuLT4AWvmVotA3bvOQbyrjkYK560rvD6z
+ eeHnjwsvS6z65xgqvOSH43rTbOVNe78fyaraVpp3NqdTLCwt1mb3jQ07PDl7DUrjt2v1l4bV
+ zOG+EzXJXmP1zfbZPy6EmWoqsRRnJBpqMRcVJwIAMts82VAEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLLMWRmVeSWpSXmKPExsWy7bCSvG7sNvt0g50bDS3u/X/FaPH/0WtW
+ i087H7NanHxzlcVi2/SfbBbP311msvix6gurRffKaov1l7exWxz+fJbdYuu9CUwWd1/7WXzb
+ so3R4u3eTnYHPo+3T6cwesxuuMjisePuEkaPebNOsHjsnHWX3ePEhEtMHmfv7GD0uH5mO5PH
+ xnc7mDz+ztrP4rH92jxmj523HzIF8ERx2aSk5mSWpRbp2yVwZTw7u5WlYLVARdv500wNjBd5
+ uxg5OSQETCS2z33I3MXIxSEksJ1RYv/B24wQCSmJz0+nsnUxcgDZwhKHDxdD1DxnlOhomcUM
+ UsMmoCfxf9FCMFtEoFrix7ynbCBFzALdTBJPn21ghejYwihx4G4f2FROAQuJbfO+gtnCAm4S
+ h3cfYgKxWQRUJXo3LGIHsXkFLCV232mHukJB4ufTZawgNrOAiMTszjaobU4S+/e+ZZ3AKDAL
+ SWoBI+MqRtHUguLc9NzkAkO94sTc4tK8dL3k/NxNjOAY0grawbhs/V+9Q4xMHIyHGCU4mJVE
+ eB2U7NOFeFMSK6tSi/Lji0pzUosPMUpzsCiJ8yrndKYICaQnlqRmp6YWpBbBZJk4OKUamJJq
+ vz0wKl978HRv8o/HyXayWn/WZ3W2uuvdmW4k37ZGyzxA49CsdbNkMhjy1bQTgm9+2F9UtOOt
+ 9cWCMMOakk/y699/8ZshHtFfIcS1LGhP8TzxxDijnLtSz8xljD/NLWVK+HKoJqNWYfpm7xa1
+ 0sMvQhc9aPrXkag0P1VB/cL7MFWx5oVCemxvtr4Jru3rqNy4qTZ2t/+UKRcb/H/ed7Y40WQ9
+ +3/sZa9y1zsLl67pO5psJDLFR3h7RePKIw67ylepPblj18DDw76gsnZ9l6FjQ15a2C/hf3fX
+ 3Zr4pnjOslnmp9Kqrnhs81a4Xbzt+yythboVf2fyxr1esrJOp5SL7a/V3vcLMzYasjvbK7EU
+ ZyQaajEXFScCAHIxItAQAwAA
+X-CMS-MailID: 20241121223821epcas1p4da43f25dd75dc7c5d57874378406e5f8
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241121142959epcas1p3b51d11ffebe6915a811a30d1357886cd
+X-CMS-RootMailID: 20241121143117epcas1p16bfa5e48951ade1050b4958bfd8f24f1
 References: <20241121142731.1202209-1-heiko@sntech.de>
- <CGME20241121142959epcas1p3b51d11ffebe6915a811a30d1357886cd@epcas1p3.samsung.com>
- <20241121142731.1202209-19-heiko@sntech.de>
+ <CGME20241121143117epcas1p16bfa5e48951ade1050b4958bfd8f24f1@epcas1p1.samsung.com>
+ <20241121142731.1202209-18-heiko@sntech.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,16 +147,15 @@ X-Virus-Status: Clean
 > Cc: heiko@sntech.de; lukma@denx.de; seanga2@gmail.com; peng.fan@nxp.com; jh80.chung@samsung.com;
 > joe.hershberger@ni.com; rfried.dev@gmail.com; jonas@kwiboo.se; quentin.schulz@cherry.de;
 > detlev.casanova@collabora.com; u-boot@lists.denx.de; sebastian.reichel@collabora.com
-> Subject: [PATCH 18/20] mmc: rockchip_dw_mmc: Add support for rk3576
+> Subject: [PATCH 17/20] mmc: rockchip_sdhci: Add support for RK3576
 >
-> The rk3576 uses a different base-compatible, as starting with this
-> generation, the clock phase tuning is done via registers inside
-> the mmc controller and not from inside the CRU.
+> Add support for RK3576 to the rockchip sdhci driver.
 >
-> In U-Boot we do not tune at all, so no other code changes are
-> necessary.
+> It's pretty similar to its cousins found in the RK3568 and RK3588 and the
+> specific hs400-tx-tap number was taken from the vendor-u-boot.
 >
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -164,21 +163,39 @@ Best Regards,
 Jaehoon Chung
 
 > ---
->  drivers/mmc/rockchip_dw_mmc.c | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/mmc/rockchip_sdhci.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 >
-> diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
-> index 422b8f7e4c8..7a72abaa38a 100644
-> --- a/drivers/mmc/rockchip_dw_mmc.c
-> +++ b/drivers/mmc/rockchip_dw_mmc.c
-> @@ -171,6 +171,7 @@ static int rockchip_dwmmc_bind(struct udevice *dev)
->  static const struct udevice_id rockchip_dwmmc_ids[] = {
->  	{ .compatible = "rockchip,rk2928-dw-mshc" },
->  	{ .compatible = "rockchip,rk3288-dw-mshc" },
-> +	{ .compatible = "rockchip,rk3576-dw-mshc" },
->  	{ }
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index da630b9d97a..9571e7d66c9 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -656,6 +656,14 @@ static const struct sdhci_data rk3568_data = {
+>  	.hs400_txclk_tapnum = 0x8,
 >  };
 >
+> +static const struct sdhci_data rk3576_data = {
+> +	.set_ios_post = rk3568_sdhci_set_ios_post,
+> +	.set_clock = rk3568_sdhci_set_clock,
+> +	.config_dll = rk3568_sdhci_config_dll,
+> +	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
+> +	.hs400_txclk_tapnum = 0x7,
+> +};
+> +
+>  static const struct sdhci_data rk3588_data = {
+>  	.set_ios_post = rk3568_sdhci_set_ios_post,
+>  	.set_clock = rk3568_sdhci_set_clock,
+> @@ -673,6 +681,10 @@ static const struct udevice_id sdhci_ids[] = {
+>  		.compatible = "rockchip,rk3568-dwcmshc",
+>  		.data = (ulong)&rk3568_data,
+>  	},
+> +	{
+> +		.compatible = "rockchip,rk3576-dwcmshc",
+> +		.data = (ulong)&rk3576_data,
+> +	},
+>  	{
+>  		.compatible = "rockchip,rk3588-dwcmshc",
+>  		.data = (ulong)&rk3588_data,
 > --
 > 2.45.2
 
