@@ -4,81 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B91D75BCC
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 07:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D5DD75BC8
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 07:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F702895D7;
-	Thu, 21 Nov 2024 08:37:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ACDCC8959B;
+	Thu, 21 Nov 2024 08:39:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QOTD9O7Q";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="JQK+lyQe";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="X4HJ0+SX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1EA889637; Thu, 21 Nov 2024 08:37:32 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8378A8959B; Thu, 21 Nov 2024 08:39:33 +0100 (CET)
+Received: from fhigh-b1-smtp.messagingengine.com
+ (fhigh-b1-smtp.messagingengine.com [202.12.124.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 894E3895D7
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:37:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C602789082
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:39:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-7242f559a9fso610566b3a.1
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 23:37:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732174649; x=1732779449; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9Sc+fScZwmuShhSB7xPKJe9J782hB9zuULcbjb8nIXI=;
- b=QOTD9O7QT2FVvA3MiPpoMc4QUuB6KfB5cBhruky3T7kfjHue1jTwhDLlwD6PtOjdr4
- xzGJTwHBaWWdkPAIuzn5kySdqO6shyN6I4DB2IDybfNQg5k+AhORoZpxxGjkOd7fnHr4
- /8y6EpJv8lelM6i7Q7g+3EAV73qf1gzHpQ9mQGk9QbnghoAM/prEsCewDD0vc5CaL9Ln
- 6lJNEYa1DO/T4BJN0h4qKcr4lljCVjt4nWGrHjnyN+3TnB573hJHGRM3Ar85sXOkot4W
- dHI1dU+Ri+VKubk8X2Xms5FTgMXKIw6DoOBfJFaxG45cCwBnCBeuXqAdV+ZLrvTYXZtT
- YsYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732174649; x=1732779449;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9Sc+fScZwmuShhSB7xPKJe9J782hB9zuULcbjb8nIXI=;
- b=lltz2QnInZsXzc3Rah6XvhJmwvJxyQ37h99PiGfgl7k9V3BHrDOZ2fS2ixpYzdtcpK
- AISWknQbZr58bPdSPoSJfQgjg82UYWO7PmJRE3BXQCFsCOWhNbea9gegEo6s9RjXBFhK
- swULAkVdGd3VMNx4LbuSr32NOYmuJeeYEOjA7TRDhzL1cnZH4/70rlINT4Yh3DfoBb8X
- UtHgt40S5oZoCW0g1OVBzBQt9OoCfkfJIU3L/4YCe1tVApkZywssRYd+NHsGaM96nSmV
- 0UoxIFAGg7/apkbXMGAeakIUJrE3pKpKFne6qywM+5N4oK7yXP4fEr3CD5+zxxL5UXl2
- tO0w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlkTglHa+kGGlEybKR5i+Q43g0txSBuZcbXby1vo1VsKJQVNtO5UYr+c0LdvsrsJP23zy5BMA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxnTLl7BMc7Sb/SQSfnRB5xcnoR1kVAkcp/YJt7vnKeVRpzs5LO
- PDco0I3FWQ6aBbdXboB5z9ZWWOAEhpDve9K9p9lSEOAcYVO9jlPNY7937vCp1nSomatzG4MoIEr
- xySxz8HJoolfMddbKc2AI13W3sU6/zJ92LT/uPg==
-X-Gm-Gg: ASbGncv6WhIdIy3RjxSTPewvT3UH8aFfYcDDTlJ7E3o85LWpTXRmNDwCsVt4LoE8so7
- zQXk3dzdA7XmnpfCEq079dGmVgzYn9A==
-X-Google-Smtp-Source: AGHT+IFYM1gAtBBXB2bWelSO7Z7mvA5zsJDqeiOOz6I64Y77CXJ7JyveyDEKkvt/JZsu6rHHH0yUaTfIrMD/6dH3xLw=
-X-Received: by 2002:a05:6a00:928e:b0:71e:68ae:aaed with SMTP id
- d2e1a72fcca58-724bec7afb0mr7408888b3a.1.1732174648956; Wed, 20 Nov 2024
- 23:37:28 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=jannau.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j@jannau.net
+Received: from phl-compute-04.internal (phl-compute-04.phl.internal
+ [10.202.2.44])
+ by mailfhigh.stl.internal (Postfix) with ESMTP id 559F7254011D;
+ Thu, 21 Nov 2024 02:39:29 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-04.internal (MEProxy); Thu, 21 Nov 2024 02:39:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
+ :cc:content-type:content-type:date:date:from:from:in-reply-to
+ :in-reply-to:message-id:mime-version:references:reply-to:subject
+ :subject:to:to; s=fm2; t=1732174769; x=1732261169; bh=bKRwM01xJO
+ a6qjzeaEh24bQHCg5B2nQr58eRgx+qkGY=; b=JQK+lyQeXwgulmRFvsoZMEYb3N
+ dmPZjdu/c9UshIEoI15n7YgzzhC8nlHjb8yw4dJsSZ9tkmr8e30iV9D5IGbB5B9s
+ 8mwm5yzS51RJo6ZOxw7MPPAlRNayNqzdZYopOFbAfmWNYze/XOENOtoNfgcAdyqY
+ BwzMCT8u4PmD0rmyVwwEGeNLfQr3csOLnWRfsOUpXSVJirK/KucJrNdwZ8hD0IA8
+ DbJE+GX3ocSg4L3Heeo94al2eLfQqnlHQpUR4nHZw8108Itz7A45NcoWm2KmLX0g
+ YjTN9imHHnqFH55/df8A4QEr2xvidQN6EbMwn62uan7qbr4+WnOoBfMIwGJQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-type:content-type:date:date
+ :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+ 1732174769; x=1732261169; bh=bKRwM01xJOa6qjzeaEh24bQHCg5B2nQr58e
+ Rgx+qkGY=; b=X4HJ0+SXXzR8bKFML+nofR7zxMuYGW1+cojiemHNg6kZBmSKPQD
+ rRpj+dJgNKrT1ZTJyGpUl3DLHK0VEVzfa6fWvN/BWjGNmYAEd20M1MPlgIbbzm8/
+ UkMjGwJFMr67YAexCeTq6kw6rbqJFDQ0coSagylcl8yOk3l0QvooxhUdPkOlan1L
+ cZwssAS7FZp1tHDXJs4I8Dvo83rpLRhb29FFwInqeCJO0lpa8SnZF8l9/n+v6HTV
+ izbKhyIcCbDldBIE+J+udVEfmyRyBiE18Hqq18GnMEnLHjpzscWutl/XoK7f/X3O
+ uhTslz3fAo5OK5GUWYIgSxXyV23iF1u7EJA==
+X-ME-Sender: <xms:sOM-Z2LcIy1nvIPnRiRDxjbVrrP35z7oyqsmoypAE3UutTZ4gps5Rg>
+ <xme:sOM-Z-L9kt7mOC-5tAXjAe3ekNqidNDF6n9qI3mQLZRnUJo0OrU-v_KK8Ar0K012P
+ VYZsOgSD5CSFTDAd5I>
+X-ME-Received: <xmr:sOM-Z2t9Z9T30I4iWCCsAoI7PK_LudyDHBk_X0sAoabuetF5isLoK1dROLn1OMB195YQpjuAjbLAzDictvL6B6x5j3wTUaQxTTY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefuddrfeehgddutdekucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdggtfgfnhhsuhgsshgtrhhisggvpdfu
+ rfetoffkrfgpnffqhgenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnh
+ htshculddquddttddmnecujfgurhepfffhvfevuffkfhggtggujgesthdtredttddtjeen
+ ucfhrhhomheplfgrnhhnvgcuifhruhhnrghuuceojhesjhgrnhhnrghurdhnvghtqeenuc
+ ggtffrrghtthgvrhhnpefgvdffveelgedujeeffeehheekheelheefgfejffeftedugeet
+ hfeuudefheefteenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
+ hrohhmpehjsehjrghnnhgruhdrnhgvthdpnhgspghrtghpthhtohepiedpmhhouggvpehs
+ mhhtphhouhhtpdhrtghpthhtohepkhgvthhtvghnihhssehophgvnhgsshgurdhorhhgpd
+ hrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepgiih
+ phhrohhnrdhglhhpkhesghhmgidruggvpdhrtghpthhtohepihhlihgrshdrrghprghloh
+ guihhmrghssehlihhnrghrohdrohhrghdprhgtphhtthhopehsjhhgsegthhhrohhmihhu
+ mhdrohhrghdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvg
+X-ME-Proxy: <xmx:sOM-Z7b0RRg9FEPckd7ZB4IpyqYUA9n8OqsO0hSc9cerTpR_oksmhg>
+ <xmx:sOM-Z9Z5sNeayt4Ai3mA4ysW8vTYig1qlDxnYPdlojEOQrlWKgpGeA>
+ <xmx:sOM-Z3DAyMmViSFbbxirOSZNKoDdrzOCcfd5kO3isBSJaO3bo2aFrQ>
+ <xmx:sOM-ZzYhPEHhzcKpSdlJ3PQ5KspwoRAJr00JhtGQ1zredS-3ezpOtg>
+ <xmx:seM-ZyMeqQVRx8u364UPA_92PO6L7V5XlCv-Cu6Ue7XNYtfaMdJmOUqO>
+Feedback-ID: i47b949f6:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 21 Nov 2024 02:39:28 -0500 (EST)
+Date: Thu, 21 Nov 2024 08:39:26 +0100
+From: Janne Grunau <j@jannau.net>
+To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Fix device removal order for Apple dart iommu
+Message-ID: <20241121073926.GA2171629@robin.jannau.net>
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
 MIME-Version: 1.0
-References: <20241118210908.51196-1-adrianox@gmail.com>
- <20241118210908.51196-8-adrianox@gmail.com>
- <d3e50c54-4d39-4930-a6f1-b29ba60bfd19@canonical.com>
-In-Reply-To: <d3e50c54-4d39-4930-a6f1-b29ba60bfd19@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 21 Nov 2024 09:36:52 +0200
-Message-ID: <CAC_iWjKTmTzeWXO0cs79fs76B1ccD_GsVusL6hhPb14W7_i2ZA@mail.gmail.com>
-Subject: Re: [PATCH v4 07/14] efi_loader: device_path: add support for HTTP
- device path
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Adriano Cordova <adrianox@gmail.com>, joe.hershberger@ni.com,
- rfried.dev@gmail.com, 
- jerome.forissier@linaro.org, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,133 +109,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+On Thu, Oct 31, 2024 at 11:48:00PM +0100, Janne Grunau wrote:
+> Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
+> trigger a NULL pointer dereference since the the iommu device is removed
+> before its user. The sparsely used DM_FLAG_VITAL flag is intended for
+> this dependency.
+> This series adds it to the Apple dart iommu driver and implements the
+> two phased device removal to the EFI loader.
 
-On Tue, 19 Nov 2024 at 12:14, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 18.11.24 22:09, Adriano Cordova wrote:
-> > Add efi_dp_from_http to form a device path from HTTP. The
-> > device path is the concatenation of the device path returned
-> > by efi_dp_from_ipv4 together with an URI node and an END node.
-> >
-> > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-> > ---
-> > Changes in v4:
-> > - Reworked an if-else
-> >
-> > Changes in v3:
-> > - Moved argument checks in efi_dp_from_http to the beginning of the function
-> >   include/efi_loader.h             |  1 +
-> >   lib/efi_loader/efi_device_path.c | 52 ++++++++++++++++++++++++++++++++
-> >   2 files changed, 53 insertions(+)
-> >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 612bc42816..96b204dfc3 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -872,6 +872,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
-> >   struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
-> >                                        const char *path);
-> >   struct efi_device_path *efi_dp_from_eth(void);
-> > +struct efi_device_path *efi_dp_from_http(const char *server);
-> >   struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
-> >                                       uint64_t start_address,
-> >                                       size_t size);
-> > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> > index cdeea4791f..9ee03062ac 100644
-> > --- a/lib/efi_loader/efi_device_path.c
-> > +++ b/lib/efi_loader/efi_device_path.c
-> > @@ -1012,6 +1012,58 @@ struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
-> >       return dp2;
-> >   }
-> >
->
-> A function description is missing.
-> Please,
->
-> > +struct efi_device_path *efi_dp_from_http(const char *server)
-> > +{
-> > +     struct efi_device_path *dp1, *dp2;
-> > +     struct efi_device_path_uri *uridp;
-> > +     efi_uintn_t uridp_len;
-> > +     char *pos;
-> > +     char tmp[128];
-> > +     struct efi_ipv4_address ip;
-> > +     struct efi_ipv4_address mask;
-> > +
-> > +     if ((server && strlen("http://") + strlen(server) + 1  > sizeof(tmp)) ||
-> > +         (!server && IS_ENABLED(CONFIG_NET_LWIP)))
-> > +             return NULL;
-> > +
-> > +     efi_net_get_addr(&ip, &mask, NULL);
-> > +
-> > +     dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
->
-> This seems to be the only usage of efi_dp_from_ipv4(). So we should make
-> it static.
->
-> dp1 is expected to be NULL if we are out of memory. This error needs to
-> be handled.
->
-> > +
-> > +     strcpy(tmp, "http://");
->
-> @Ilias:
-> Linaro sent a patch series for supporting https.
-> Will that go in after this series?
+Can we get this two small patches merged? They fix a regression although
+it worked previously just accidentally. The only drivers using
+DM_FLAG_VITAL are clk-rcar-gen3.c, rzg2l-cpg.c and apple_dart.c all used
+on arm SoCs. arch/arm/lib/bootm.c already uses a device_remove call with
+DM_REMOVE_NON_VITAL so adding it to efi_loader looks reasonable as
+regression fix.
 
-The https:// support in already in -master, but I can live without it
-for now on this series.
-
-
-Cheers
-/Ilias
->
-> > +
-> > +     if (server) {
-> > +             memcpy(tmp + strlen("http://"), server, strlen(server) + 1);
->
-> Please, use strcat() to simplify this line.
->
-> > +     }
-> > +#if !IS_ENABLED(CONFIG_NET_LWIP)
->
-> Please use 'else if' instead of '#if'.
->
-> Best regards
->
-> Heinrich
->
-> > +     else {
-> > +             ip_to_string(net_server_ip, tmp + strlen("http://"));
-> > +     }
-> > +#endif
-> > +
-> > +     uridp_len = sizeof(struct efi_device_path) + strlen(tmp) + 1;
-> > +     uridp = efi_alloc(uridp_len + sizeof(END));
-> > +     if (!uridp) {
-> > +             log_err("Out of memory\n");
-> > +             return NULL;
-> > +     }
-> > +     uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-> > +     uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-> > +     uridp->dp.length = uridp_len;
-> > +     debug("device path: setting uri device path to %s\n", tmp);
-> > +     memcpy(uridp->uri, tmp, strlen(tmp) + 1);
-> > +
-> > +     pos = (char *)uridp + uridp_len;
-> > +     memcpy(pos, &END, sizeof(END));
-> > +
-> > +     dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)uridp, 0);
-> > +
-> > +     efi_free_pool(uridp);
-> > +     efi_free_pool(dp1);
-> > +
-> > +     return dp2;
-> > +}
-> > +
-> >   /* Construct a device-path for memory-mapped image */
-> >   struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
-> >                                       uint64_t start_address,
->
+Janne
