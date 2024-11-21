@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8798D75BB9
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C7AD75BBB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80EE189688;
+	by phobos.denx.de (Postfix) with ESMTP id E0A3E8968F;
 	Thu, 21 Nov 2024 06:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732166776;
-	bh=bXiY6LNbfqfzx/D2Aw9OL7HXgC4i8jLJnAqviLoaYUI=;
+	bh=eMRGy4VglhEmKPnVAkrctdJ723uptXyry4fwECGwfvk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mmoGU6BDeg6SxhjOQWxdc/xo9/Cpi/iPw9o7YQDkNwSfROw7qK6OZNRSTsLcTZZj2
-	 tH4WOqUM5wxk9BpqYZR/hFQ2OrGQsr6TciF6PgsrqvUodjF84h0IEcBmN9PN6TnV97
-	 mnk1b3Fet0Ra2iUXDVUxoY3pdRLo/o8LcP4L9+zOIUp55gOFHWc65pT8MqaTpNeq0L
-	 ALgVKPMt1CX7uQ5qqN+kSrRVd+7SPCugh/Bb712DqxjA12JnlNJHqDzAxCo9SqGMSx
-	 zpl1TnFoORE/EvXZrlU05UxdVzFaLkzZgNwaMX/eMh//KYh2pwjt6kT7mKcEgxhsX8
-	 KkXs4jXM9QWjA==
+	b=osR7GYsk/64bx45fWb8S+ygJ2F3SOeKQkPSpbfcOrMVjHhBbotCq2jQj1dJdONyZE
+	 6alDqcyDOvA5hkNQeWyOo8i70bz2RM9TyCE1MpoSWUMGOE544D8hGePj8RZMmGkib8
+	 F4vxuIK0bhZmFVbA7gtLoeF08ZN5dysd4/9O7oVOVuuvtlNnHuaFY+2cbiEfXdOG5e
+	 LCQmYMCnZr+I4HmxsWbGig/ZzRKe41SfOnTW9dzr15yn0aGX4b/9xADsPsRH/SvR65
+	 tVo6Tc0i9u4A4fotSV3z8LLmwN5OFq+eKrNDtJGmQkZgj1qu3lFTyMg9ZyWal1pQyW
+	 iCTTaAWMtMzgA==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4E9D48966E;
+ by phobos.denx.de (Postfix) with ESMTPSA id F3C5089678;
  Thu, 21 Nov 2024 06:26:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732166772;
- bh=bXiY6LNbfqfzx/D2Aw9OL7HXgC4i8jLJnAqviLoaYUI=;
+ s=phobos-20191101; t=1732166773;
+ bh=eMRGy4VglhEmKPnVAkrctdJ723uptXyry4fwECGwfvk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=OWjUSrXtAAyMAoGhzPCpCFUH4iwlPSWPfhKPn2JRM3J2MFQu2D0uD9INcE7SRyo+c
- VUovgVAxRjUavEHostGv0sH3HjD6qGQoAfdzlS9W5aa/WjbrxfkaWbsiKmDZSM5+qh
- z6MHuRjEFqY051R43Fzjtxwdo7sclFVKC6odfiTtZ2amHLa3cioDYUcYrzBvwIu6oL
- vOoF7IzX/Z9PGxIJR1iX+AN7xLEg9jsPCEnAn4b1AWX3dqL0QoKCBbIyPIXDgZU2py
- laDZHWMPxv6pvUe9cGBGSFJcEZHOP9KMh0C0UewBkQwq/klfmIGBSZ7MOlQdWesmtA
- HG0xQXenf9vpw==
+ b=II0HqN8C2Iy/sXUZNYA5SX0PjZ8Kbl88ilTuOnuQoXjHBGsWRXuAlMm+AgekJVflE
+ d3woprraw5dD8VEtpjFr5TzQfxPsUhuJ6Nfrj7c/d9b71gPyZwyMduLi0WCa+H8nEB
+ imC3DEY8G8siAQEdMXdohUBOnvVT444t5jUfxbKAIOch4z8X1i/+YXgC1ZvanNTZo9
+ GEschpldLpMdD2CRX9lxFnnqRHENIOM0JuuLuBSbHvfk6N3gG9wrW8UMtQrDDQ7yFG
+ r1gn1GJpR1nX8AGjU5Lc9gWOkaBfpvOSI436U5IxgeM18KtlVEbDPrMKPTDeK8dV3d
+ mow16mlSb3nsA==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 04/20] imx: imx_cntr_image.sh: prevent warning for missing
- spl
-Date: Thu, 21 Nov 2024 06:25:45 +0100
-Message-Id: <20241121052601.72880-5-hs@denx.de>
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 05/20] imx8qxp: Fix build when using SPL
+Date: Thu, 21 Nov 2024 06:25:46 +0100
+Message-Id: <20241121052601.72880-6-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241121052601.72880-1-hs@denx.de>
 References: <20241121052601.72880-1-hs@denx.de>
@@ -70,40 +71,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-when building U-Boot on imx8qxp and the board port uses
-SPL, U-boot build shows
+imx8qxp based boards which use SPL drop error when
+calling make all:
+"""
+Writing image to './flash.bin'
+   Node '/binman/imx-boot/spl': GetData: size 0x0
+       Node '/binman/imx-boot': GetPaddedDataForEntry: size 0x0
+       Node '/binman/imx-boot': GetData: 1 entries, total size 0x0
+       Node '/binman/imx-boot': GetPaddedDataForEntry: size 0x0
+Wrote 0x0 bytes
+Image 'imx-boot' is missing external blobs and is non-functional: spl
 
-WARNING '.../spl/u-boot-spl.bin' not found, resulting binary is not-functional
+/binman/imx-boot/spl (spl.bin):
+   Missing blob
 
-This is because U-Boot binary is build first and Makefile
-calls script imx_cntr_image.sh which checks if files
-exists... but of course as spl is not yet build the
-file `spl/u-boot-spl.bin` does not exist yet, so prevent
-this warning.
+Some images are invalid
+"""
+
+Guard creation of flash.bin with CONFIG_XPL_BUILD option.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
+Fixes: c9713c155127 ("imx8-u-boot: Fix SPL guard option")
 ---
 
 (no changes since v1)
 
- tools/imx_cntr_image.sh | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/imx8qxp-u-boot.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/tools/imx_cntr_image.sh b/tools/imx_cntr_image.sh
-index 972b95ccbee..07acd385631 100755
---- a/tools/imx_cntr_image.sh
-+++ b/tools/imx_cntr_image.sh
-@@ -14,6 +14,10 @@ for f in $blobs; do
- 		continue
- 	fi
+diff --git a/arch/arm/dts/imx8qxp-u-boot.dtsi b/arch/arm/dts/imx8qxp-u-boot.dtsi
+index 62791c34c77..8058caae9ba 100644
+--- a/arch/arm/dts/imx8qxp-u-boot.dtsi
++++ b/arch/arm/dts/imx8qxp-u-boot.dtsi
+@@ -120,6 +120,7 @@
+ 		};
+ 	};
  
-+	if [ $f = "spl/u-boot-spl.bin" ]; then
-+		continue
-+	fi
-+
- 	if [ -f $f ]; then
- 		continue
- 	fi
++#ifdef CONFIG_XPL_BUILD
+ 	imx-boot {
+ 		filename = "flash.bin";
+ 		pad-byte = <0x00>;
+@@ -130,4 +131,5 @@
+ 			type = "blob-ext";
+ 		};
+ 	};
++#endif
+ };
 -- 
 2.20.1
 
