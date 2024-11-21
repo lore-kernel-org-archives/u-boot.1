@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2942D78764
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E041AD78768
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 369AC89752;
-	Thu, 21 Nov 2024 15:25:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86E89896E0;
+	Thu, 21 Nov 2024 15:25:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="uj2lkao+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ompJ2Wwi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 905E8896E0; Thu, 21 Nov 2024 15:25:37 +0100 (CET)
+ id 8597989762; Thu, 21 Nov 2024 15:25:40 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 804EB896BB
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:25:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A560896BB
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:25:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id CECFB3F6BB
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 14:25:34 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 313B240D9A
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 14:25:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732199134;
- bh=npcCkTVWlL+dh8rYBtaab5At2+Nh6El7FSG6VX+DJfA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=uj2lkao+Ia5s0xHz1lQKJ8V6qT7dzxF91dGn8V4wTL8Y5XTMaAr5TcONKWFxx+j0N
- 0pCmxtjO/H5tD03LVUHJhG21FVghCa2xH2TYLWvSR+VIo4v+dinoYizVwyMdO4zRGB
- JflzZ9Bv/PaD73v+XvpV2qBvEmoY/AY2MK2HZ4ahJTceOt+oqn1720gdHsOu5iWmZ/
- GHzy+Ubt1YEojA1ahsPE18ce26LRGN92p0Qw7BYldj6VkCfHQLsKbIdt2+XytJjisp
- 7VCBdLuo5Gmm9NvXujVWtnlO6QgEWBfOu6GlwwFf0h8LZ3LQRdoQtXpQ5S2qk8cVNO
- WrhZsGPCCA4oQ==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4314c6ca114so6384055e9.1
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 06:25:34 -0800 (PST)
+ s=20210705; t=1732199138;
+ bh=9CdxqocVlquViiBXv4++Gl5uFTUIDpC66u6GT/LE+hE=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=ompJ2WwiEij99o1NPn80M1LipaQ98PAuuen2EF0LEENt4+Xxu+us1yP4Uuw2LWQCu
+ Kl7EpHjWEOMtjk/MDEBV2ebrlYrkNHO94ZaDpJXxAWgoDZYc3zmKWRdBqvrVRx9Uzz
+ F3liPP5dKzZkQM4fC2E3CgdionT0bBCFjOl8KPloxZNGtCbBx4l4K16zTHay4b2gpO
+ T4ZHiCHY3psW/QHcLQ9wsXLC2Sbb+iAHZ9ePgEkhF+NWxZ7NigB0j8MAE2hf8I+L+7
+ Rsp/Q8flT29eYRr3dTbQf4LqfrYwUX8nKjK8OT2id2UGdfrPMziPcxrXxmWplx7Xop
+ dRFp965s9TMKw==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-382357b294aso478142f8f.3
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 06:25:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732199134; x=1732803934;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=npcCkTVWlL+dh8rYBtaab5At2+Nh6El7FSG6VX+DJfA=;
- b=gJzdqGfTNnkcyc6ZFJ5AEJ2SdARCUyP8panGYP5WNwNrkHuugAHJjeO1o4koKcrmuP
- 6VJyFu/UzXiNdKQMlss3IhEkPzx3JkvkR2mMatDKGZ0LLKEjf9/gRd6DjtJKg5QRzQgh
- XcCZkCa8fTtE4cmKADMwuWvCj3J+YqekSMSdlZ7dpjBOkOKEv5MQTtt1NQFozo6W1EAv
- f+XPXnipvB2pTfNdt69h7WwYPN/93CJDyC21SOOCxgbUZepIVxWMN/0e/sy6LWb5TUYK
- +lh/SF42OLq5nXRo9K7wmcoLZjl852aNEb2vPZN41D1rb4Hm04N3ZmJdqez+eas6okDN
- yWhA==
+ d=1e100.net; s=20230601; t=1732199137; x=1732803937;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9CdxqocVlquViiBXv4++Gl5uFTUIDpC66u6GT/LE+hE=;
+ b=V2MRjL62nZz5Lx/AqbMzi6xi59S+GAE8VcLVl9OkHBVIV2KnctE9m6ijE2PJqZiZd3
+ yUGi4Sw57+3uXLSmh+lqnZtkwCgerUIAQY2ty5rlHxtYAsXSs7wzN7Lww6RqlXuHOR7W
+ kzGPAgZwIEkev+wySYzxnerR9o3d6Ggn3Q+NmiknF+h3x7LGrWyrCKTok+NZiPEgoc0g
+ Bv1IoNm1OB2CrNHcbmAAZM070h+GdVkXZpGLVIoKhIVkZZgbssOWlmAaxgrL1HR669Bw
+ QbVhrdcq72nRAd2jB3AR0T/N2T3UvxMzeMBSvupjBLASONxRlIB/uVGlnzWrC16h3/5S
+ zCSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwHbJF56cmi/E5vfPZqhj8TK4tyETxwfex6uN6vTeq+CeAJH6q1PeuYGgdMgA50IGA78eQuRY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKjB0Vopjldab3tUJhFxrQbVt6IVGaJz1HKIWsRTI0XuoLpgZo
- GmFiSRr7oqnhi1LghN4g5ChmT78XOVBt+ngTqHwyJKAegWn6pju++r8JiTJKCcIiBR4L74Sa5DA
- CjQAZf6Angf8L+SemvvdDmnEn7g1HTuzarANVZDcGMdzfeW0OtaAi6NrWQ7riKXqcBp8=
-X-Gm-Gg: ASbGncs0knEKwAn5N7rBqqkexeoiaNdsj2KtKsdxm1PRmFhLNyp3HElxgjMYJ+rbJc9
- kk74cG4p49EZ31cH6CzOmLrjcsPBcZCCjwIWbrMktYI9YxQaBQLzOn69LXz5mhlulZf5grh7w1U
- asDfDwdnOMKGGRakFIFdu99s9TptpyEv0LCsx4F3Wt4XaxZGBfZPbKQsTnPItkzvivQfsJWDYBo
- 0U9pG/rNC1ajWQwvF4Xos/8jveWdVRnc3EubnldxzoWWWha2L/8BVHRfhFCOEg1K2o1m//yE7sX
- xUoXdGYJZ5gziYveMbwEUYGMBNe7J9j4SfFjM6a3axgRXmeBHx4e
-X-Received: by 2002:a05:600c:4f91:b0:432:9fdb:1490 with SMTP id
- 5b1f17b1804b1-43348986a74mr60374655e9.7.1732199134484; 
- Thu, 21 Nov 2024 06:25:34 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG5Hp0hSiFo3T6HkWYA9wrzMW0H3e51TFoypm7vVMdrGn753KAYID6Ch4P3pu2ykLe/6Vx0lg==
-X-Received: by 2002:a05:600c:4f91:b0:432:9fdb:1490 with SMTP id
- 5b1f17b1804b1-43348986a74mr60374435e9.7.1732199134103; 
- Thu, 21 Nov 2024 06:25:34 -0800 (PST)
+ AJvYcCUaobbpb1RhL6ekOGB0oLpom3qep7OQXUv67wNVNHz4bTbXtjdc3l65dLZPp6aEEuJNySahevU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8otpI6r192vDCM+WZiUIiPiOJZ5LMvOsI61UpVHXQhyOq8iFt
+ KvbSt+onvK8v+doyrREDvtQjutMvd0ltx9Fe+8lwSs3xb/CK3qcnq65n3GGKeg5Y/Y7AfbNO3Z1
+ c1ZjRi9RXFlLtHMCozmm6j/vE6DwbRlz1mDrPLs5W9Ri+y/oCzDjSOhWwQIQDVZWRWIs=
+X-Gm-Gg: ASbGncuAcUK+5nUgCpXODs+SMPwqfqkIMzCAu+4K/AdfnVXAu0UCJj45nolFciiohbT
+ LvbqT0YiQccqBxCmDu/IfFfGXbYXmANB7SbvF2j2p6xy0h/kuDfKdwr+XqJJ0vpjepACeCxqGPy
+ DJnJBbfhsKQHRD1/2EzOCbguC5XrSy5MU6gIN1R5E13ffIRUM7Ynmn+U09wxJvu8l3HTWXEllr4
+ UTBQktfXK4mreJabuBqugbVMIafGoNKLeHB1VBQOBXujpmf6qSBEPPs1bwkO8fm7BFy/NFiM0p1
+ wqLtlJ5jb4uClOTCRPkr9poEKyuwpISnK+wn0qchlv7Bd+M9dYnp
+X-Received: by 2002:a5d:6dae:0:b0:382:450c:2628 with SMTP id
+ ffacd0b85a97d-38254b157b7mr5590533f8f.44.1732199137080; 
+ Thu, 21 Nov 2024 06:25:37 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFX+jAA6RmMsqvHLCutO6428gvMe9ko+1wlogUaFkhCuIfbj5gKW6IfO0yM61FiwW3mODnzLQ==
+X-Received: by 2002:a5d:6dae:0:b0:382:450c:2628 with SMTP id
+ ffacd0b85a97d-38254b157b7mr5590509f8f.44.1732199136732; 
+ Thu, 21 Nov 2024 06:25:36 -0800 (PST)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b4616843sm57238085e9.20.2024.11.21.06.25.33
+ 5b1f17b1804b1-433b4616843sm57238085e9.20.2024.11.21.06.25.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 06:25:33 -0800 (PST)
+ Thu, 21 Nov 2024 06:25:35 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -91,10 +92,13 @@ Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
  Andreas Schwab <schwab@suse.de>, Jaehoon Chung <jh80.chung@samsung.com>,
  E Shattow <lucent@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-Date: Thu, 21 Nov 2024 15:25:20 +0100
-Message-ID: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/2] efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all
+ architectures
+Date: Thu, 21 Nov 2024 15:25:21 +0100
+Message-ID: <20241121142522.59059-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -113,19 +117,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Our MMC driver for JH7110 boards only supports reading to the low 4 GiB of
-memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUFFER.
+Commit 775f7657ba58 ("Kconfig: clean up the efi configuration status")
+by mistake revoked commit dcd1b63b7072 ("efi_loader: allow
+EFI_LOADER_BOUNCE_BUFFER on all architectures").
 
-As a prerequisite we must allow CONFIG_EFI_LOADER_BOUNCE_BUFFER on RISC-V.
+Fixes: 775f7657ba58 ("Kconfig: clean up the efi configuration status")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/Kconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Heinrich Schuchardt (2):
-  efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-  configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-
- configs/starfive_visionfive2_defconfig | 1 +
- lib/efi_loader/Kconfig                 | 1 -
- 2 files changed, 1 insertion(+), 1 deletion(-)
-
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 58d49789f12..d93f28b8422 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -481,7 +481,6 @@ endmenu
+ menu "Misc options"
+ config EFI_LOADER_BOUNCE_BUFFER
+ 	bool "EFI Applications use bounce buffers for DMA operations"
+-	depends on ARM64
+ 	help
+ 	  Some hardware does not support DMA to full 64bit addresses. For this
+ 	  hardware we can create a bounce buffer so that payloads don't have to
 -- 
 2.45.2
 
