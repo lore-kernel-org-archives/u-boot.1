@@ -4,94 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D47D7877B
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 16:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA86D78785
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 16:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CB9089672;
-	Thu, 21 Nov 2024 17:00:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E7FF18967B;
+	Thu, 21 Nov 2024 17:05:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MqW4Dtag";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="eWRhopPc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E34888967B; Thu, 21 Nov 2024 17:00:50 +0100 (CET)
+ id 466ED8968F; Thu, 21 Nov 2024 17:05:51 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08D9389658
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 17:00:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 112AB89658
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 17:05:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70])
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D41773FD49
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:00:45 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A9ACE3F5BA
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:05:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732204845;
- bh=lzS3yz01YJOYJ9qTOvvJH1fZKkJm+Xjz20411z/aCYw=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
+ s=20210705; t=1732205148;
+ bh=8dpXHKhaefn94cxcCE+P/e4PKekDhZCqiDCuGL6w/sI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=MqW4DtagbIYK2mzXCGiX0Zy+Dq7j2RLkPXSNc0VihrygwoGbu90yfLpuUCWhudSMt
- yMxU0y0KjSR7m0epMH5Eh6DGxuBvIL9i0z2Lt7BzORe3AEvswcjqm/YM0uwo8AOWa3
- d1ibAR2ogGyHtQ9WsUROeM3+lZBhyTxQYLwwfj2edfmroN2QN5y1uD41jUOO2YiQiM
- 6zeLjs/3fDEHybAE9MTbXiOmbwBua7OJj99PpR91vAOT5M+MPEP2hiHEWjHWinPUzC
- lLdnTIB+7mCgY1P0xdlVz7P+RO+zVF6x6WM5t2zGMVdSrvvDUC6NLmsn5xxtZrfEyc
- pOwN/iUp7++EQ==
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5cfcd4862b1so777860a12.3
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:00:45 -0800 (PST)
+ b=eWRhopPcJIACr/mx/jAbsZYS+vlxHCZ3Bv2IezQ77G+m82zWSEmCGuHb7lKzoASpi
+ pFA0IydwrTUo7wRcJyJAJhX6Yu5wdlYyAmJ77zMzm1B5QvJJXcTeLkXIYSyFqOJKAE
+ gqhASnB+1mQLnss9FPREpTWKMtt42beGUw6S1f5rUKRr9sE6pzvbv5LxxK0SuP7o8J
+ m+NkLh6JA1KN5dU75tZ3WauCNseehsdYWPCx3HndhPSFVCIh0xSAS1C0T6itL6i6b2
+ kGqh+KkyZy0eine+wYEbizhCN4KPADwnwI58yBGH9vD4hIhte0s5EfI4vHVNK0iNmc
+ v73W6+nysartA==
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-aa209443786so218479166b.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 08:05:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732204845; x=1732809645;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1732205148; x=1732809948;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lzS3yz01YJOYJ9qTOvvJH1fZKkJm+Xjz20411z/aCYw=;
- b=IJ3RJv3ZBl3PrTtaF00KmUDv2VRP3tbKtdUhbwDO+wrCWcIqIrznU8qIXcrhBbmIiS
- rlV89wj2czFMKq3HnXdUl1YBbVlee7hmskxNBu+qMIbWFaGuAXViw454u87lOY0ftRiA
- PDVAI8kOhGoE+XE4KgRWhfrBzAsmglPzz99xDg4+5WgicdOfVFcliGc2TDDsPZ6NwZ2z
- 7SWCmMz2rznJvrDfclyl/jSuU8mpdhQGXlEztZPmOdBXUTIOSWc9cWG89HIA1PLE+eD6
- 94BoRiGjNg+8Yjkc9/2rvW3IMtcGoffrZuv90JdioKRAgIdHoNwZoMqgpiw0mvujCXkO
- Rh2g==
-X-Gm-Message-State: AOJu0YzkTUKB/PvOa/k1fbG5O1KgDG7kviMeZev3DTn3EMUln0g6Boo/
- 6mgMYf0Dszk0CUgEgGfb7CWWFHhupJ1YlX2MTS0YtLoSboLNdw9iNhDpOagsOZBDcQ9jNlQMd21
- 2mEf1oVxhz8E7hZVUa7xcwoUQKQ5xnNA0C+Nv5jozjr+DK55b1z9BykXD20JwOS++NQ4=
-X-Gm-Gg: ASbGncvRuGRY8k7gy899pc4iQafZfhbQH6FYp0a1zrKLFxgyWOwORAOn8pS3zGQP+Zs
- gJ63oCiXOQMTR628kxH6lZOj3MtTURLQS4uGk5irH4gcLwjJJEX8IofP2m9OLp0Alg4+PWR/0op
- 0RXekLZi+QSpijW00aRbdu0u1u4sCjYKbOMBraxnIPUvMHWCNxVInzyGkxav505BPejxKxu3jJn
- lJHYtx/XsxyDC0zXHm2pqvZvY1WDI0NIy6qTzbFne5FrZT7MJqNel0FCM8MxkR2p0pHSsSBFqOM
- lSmqGC3H6aHTVIuxvctNz5OLDHQh6mcQ1fjbG7yHRihRw8I=
-X-Received: by 2002:a05:6402:22af:b0:5cf:f660:d58d with SMTP id
- 4fb4d7f45d1cf-5cff660db28mr4036276a12.29.1732204844565; 
- Thu, 21 Nov 2024 08:00:44 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFMB45Ao2G/0NXWGjiFZ+AESQNrO1hl5jb9oVsjWArK5wPvQn37liHpYKaU5fQIZfXAN20UTw==
-X-Received: by 2002:a05:6402:22af:b0:5cf:f660:d58d with SMTP id
- 4fb4d7f45d1cf-5cff660db28mr4036220a12.29.1732204843783; 
- Thu, 21 Nov 2024 08:00:43 -0800 (PST)
+ bh=8dpXHKhaefn94cxcCE+P/e4PKekDhZCqiDCuGL6w/sI=;
+ b=CpINezBbpmAUug8Vrzzy17r4rWaUokCQOvh9PcqzHKeuZh5P4Eyze0Gl8yEPgjBKcN
+ s7mZwDzsz8Ha8Rqv1cllvhmR3Zb2zu3kdFMDJS1cRbCmGaUduuaFBUEpjZUMCLywUpCy
+ 9GXkXBLJMT+/W1ZbdEOX7vwjsTc4YM/YbDwWFmeb/izn2xCvQnAzOhG279Qgq1G267Ju
+ lwFHkm3wLYzeuuopp1zLAojSMfi+wOiWVe9As8ZsYLvlwAPEg2HPpdsI7EPq1A3Bza6n
+ 9o4POrNauWOtGWZSFZQX+2pO//NSlw608emg8078XKeJlnQu44VNjrLWxKuZpyo1hEr3
+ GPQw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/7mVGWOu57VsVOnihCLTjAuilWVo5/ZahIeGOKrezDl6QsP77G3ki4mF53S2bbg3pMUj3T+I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcGwQ3POxVy4uAUpKuDOiRfVsSuNPqav6AC3x+H62uuXV6TnB5
+ VcLgFdd8csnr4qukMd8cOL7Svxfb1fRITety0MI/MefSpzVIk0tZcsbDNxupwKwxeqn/nV9slPD
+ zXase6peB1F8idF8W84QsFWrZLO41JKC3pc/kIVqcTQ77O5uZ1FCPVZ/ASpsBGDX/RZE=
+X-Gm-Gg: ASbGnctXTeCApixqbcatlebtO25sps61I5l6KjILWVGFyJy9BhMsE7V2qYIaD+Mj+i2
+ bJeys39/KDZumCdquE9iVevVSE8FXkC0U7y4A39QG8c02eBUbSon95SJxwgL1rfTshepHzctbdF
+ whK7VDJ92M+nX3Bq5yQgLu/8pWNLio2swec12fn3NoOtwa8ZQM+PEptNGHyl6lC6TlLBx4+iMxT
+ tidTSKy4MQdN20bdF917XN8Mfoq2Vz1qHccBaxCkbg5BLQ6edTNQ5xgU9nqaQVWyRtY28o0Zm8J
+ 5LqSpJXNr33Tj1BxzrJU7lXoxS3uf9sVrPLVH4Jgx5Udzho=
+X-Received: by 2002:a17:906:da82:b0:a9e:c266:4e82 with SMTP id
+ a640c23a62f3a-aa4ef96a5ccmr427392166b.6.1732205148155; 
+ Thu, 21 Nov 2024 08:05:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFFU7fLTITgvTRPzvy930VujU1nSqjCz1c8+RCDObQ5nzKoM7U2r2AWbZg4vi9Oi7vKc7VknA==
+X-Received: by 2002:a17:906:da82:b0:a9e:c266:4e82 with SMTP id
+ a640c23a62f3a-aa4ef96a5ccmr427372366b.6.1732205146267; 
+ Thu, 21 Nov 2024 08:05:46 -0800 (PST)
 Received: from [192.168.103.101]
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cff44efaf8sm1997306a12.33.2024.11.21.08.00.41
+ a640c23a62f3a-aa4f4153720sm95729666b.4.2024.11.21.08.05.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 08:00:42 -0800 (PST)
-Message-ID: <8d4e3685-8082-4b74-828f-05ccee5ac8e0@canonical.com>
-Date: Thu, 21 Nov 2024 17:00:40 +0100
+ Thu, 21 Nov 2024 08:05:45 -0800 (PST)
+Message-ID: <a6a1d0cb-c363-47bf-aa91-b3c2ad2fd5b9@canonical.com>
+Date: Thu, 21 Nov 2024 17:05:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: 2025.01-rc2 fails to boot on VisionFive2
+Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
 To: Andreas Schwab <schwab@suse.de>
-References: <mvm8qtnv310.fsf@suse.de>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+ <mvmjzcwobi0.fsf@suse.de>
 Content-Language: en-US
-Cc: u-boot@lists.denx.de, E Shattow <lucent@gmail.com>,
- Minda Chen <minda.chen@starfivetech.com>
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <mvm8qtnv310.fsf@suse.de>
+In-Reply-To: <mvmjzcwobi0.fsf@suse.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,67 +119,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13.11.24 11:31, Andreas Schwab wrote:
-> "Error reading cluster" is the new error.
+On 21.11.24 16:24, Andreas Schwab wrote:
+> On Nov 21 2024, Heinrich Schuchardt wrote:
 > 
-> U-Boot SPL 2025.01-rc2 (Nov 08 2024 - 07:13:26 +0000)
-> DDR version: dc2e84f0.
-> Trying to boot from MMC2
+>> Our MMC driver for JH7110 boards only supports reading to the low 4 GiB of
+>> memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUFFER.
 > 
+> That doesn't change the situation with the booting problem I have.
 > 
-> U-Boot 2025.01-rc2 (Nov 08 2024 - 07:13:26 +0000)
-> 
-> CPU:   sifive,u74-mc
-> Model: StarFive VisionFive 2 v1.2A
-> DRAM:  4 GiB
-> Core:  136 devices, 26 uclasses, devicetree: board
-> WDT:   Not starting watchdog@13070000
-> MMC:   mmc@16010000: 0, mmc@16020000: 1
-> Loading Environment from SPIFlash... SF: Detected gd25lq128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
-> *** Warning - bad CRC, using default environment
-> 
-> StarFive EEPROM format v2
-> 
-> --------EEPROM INFO--------
-> Vendor : StarFive Technology Co., Ltd.
-> Product full SN: VF7110A1-2249-D004E000-00000408
-> data version: 0x2
-> PCB revision: 0xa1
-> BOM revision: A
-> Ethernet MAC0 address: 6c:cf:39:00:16:8d
-> Ethernet MAC1 address: 6c:cf:39:00:16:8e
-> --------EEPROM INFO--------
-> 
-> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
-> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
-> In:    serial@10000000
-> Out:   serial@10000000
-> Err:   serial@10000000
-> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
-> starting USB...
-> Bus xhci_pci: Register 5000420 NbrPorts 5
-> Starting the controller
-> USB XHCI 1.00
-> scanning bus xhci_pci for devices... 2 USB Device(s) found
->         scanning usb for storage devices... 0 Storage Device(s) found
-> Working FDT set to ff72ca10
-> Hit any key to stop autoboot:  0
-> Card did not respond to voltage select! : -110
-> ** Booting bootflow '<NULL>' with efi_mgr
-> Error reading cluster
 
-This is a message from the FAT file system driver.
+Do you relate to
+https://lore.kernel.org/u-boot/mvm8qtnv310.fsf@suse.de/
+where you had some problem reading the FAT file system and which was for 
+as system with only 4 GiB of memory?
 
-Which image reproduces the problem?
-
-Did you run dosfsck on the ESP?
+In E Shattow's case on a board with 8 GiB the file was read without 
+error but then reported as not being an EFI binary.
 
 Best regards
 
 Heinrich
 
-> Loading Boot0000 'mmc 1' failed
-> EFI boot manager: Cannot load any image
-> Boot failed (err=-14)
-> Card did not respond to voltage select! : -110
-> 
+
