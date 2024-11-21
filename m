@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26FF1E64012
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 21:18:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4224E64016
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 21:42:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F29198977F;
-	Thu, 21 Nov 2024 22:18:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D16889382;
+	Thu, 21 Nov 2024 22:42:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b/FKxIdv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BHIrNabl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21DA88975B; Thu, 21 Nov 2024 22:18:03 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9023F8941A; Thu, 21 Nov 2024 22:42:17 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 356C489370
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:17:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 29F8B89370
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:42:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ALLHt9Z065669;
- Thu, 21 Nov 2024 15:17:55 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732223875;
- bh=Pd5BB2flEnhVtfwCvAzoNt5hGEZyaADSt1wgasr++lY=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=b/FKxIdvDby77pqn1h/nf1k9JZOY1YEkoigXaIQ0BsUODEtWb+8re8zyFXYEJWqor
- lQMtRYc5sJpgC7tenaOo+BxitkhIrXBLX01bhzRTmguYEX1jzzHo4P8zwg6i/TfFbu
- SOCi/XvF6zBXdl/n/8ubDUWsew7+GHsQ8WlXqzqY=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ALLHtVC079602
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Nov 2024 15:17:55 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Nov 2024 15:17:54 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Nov 2024 15:17:54 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ALLHtE9122438;
- Thu, 21 Nov 2024 15:17:55 -0600
-From: Bryan Brattlof <bb@ti.com>
-Date: Thu, 21 Nov 2024 15:17:50 -0600
-Subject: [PATCH 2/3] arm: dts: k3-am654: cleanup unused board files
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2fb5740a03bso16411351fa.1
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 13:42:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732225334; x=1732830134; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YEpxV+Iu9Q2aZYl9R7Go7FT197xdHnccidn5MfF6aQ8=;
+ b=BHIrNablusP8wDp9Tb6/Lp6gb6uf7AyAY4KAIOcDZG/7palh2n2Ys6oS4atlGNIuB3
+ Kf7A292tKb3nR+dmSAj+C6Hw5qelcebdq7dUPRDN/qKGhipSmWjgZ9GE6GR8tU1lurWF
+ 3sV5jp9rYNGCFyOLL77ogrxOop0LPpRXGBfFKsIyK3Bjf7SK526wcm0abIm+1YDbXfQu
+ EGJnwMhjv23LgoA+a7IFx1nkSMnTPGbVNvQl6wnhc6JnhErTNqU8px6K8vjzBIfIOoQv
+ tDgXUvppGlJA88StztbjoENXFp9o19vbQlCtRJRvbyd3fQ4s9XMZoop1Pp/4KJVxr6cL
+ ZrPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732225334; x=1732830134;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YEpxV+Iu9Q2aZYl9R7Go7FT197xdHnccidn5MfF6aQ8=;
+ b=ekpkgveAQbyDZUMhPHkQDo+Cc2h6VY4TNjC4JgSvqSHLdp8mH/YMEoIWUBeey8y7S2
+ sSXgwyprL+PSE3rrRNYBQ/HHTB2fMw121t+Em7o3QsoeqCMa5bmBdAuw9haqAn7bSqSw
+ PLjXiapemYhObWSoVBAbYowqp0mcNcS7RCVsHJj2efn4YZax9sXVFZ/lvqIqi9DWXo0i
+ AlPL+APx/M4eP/SpV+QhCtZZ4EDjbC75bGor/zfEnB3R6Gv68V4vZ8ih5gvX5UBqS+nw
+ 7rozq1pRMHMvLdPIxk5pZss1uZAz4uvlA7DLUYlTCcZ74kNu02Olmp2ocL2NLLtlL0X5
+ abPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0TkDqeVmNDWEEFxVl1QPqxlQHfd6LKQSyCUkA35fB7asXH32Yo7PdzLzyTQ5sENVwuykmmsw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/m2LgZ5aexi7hnACjCuuwVbkxwDad0KOtl77Yet03y1YTahkI
+ rnlJkB7M57iMK4+tqR2zJkG6OHkga48axsfbGDaoiLtsVQjSEW2FXstjq72myb/2TD44KOUf3hS
+ IRM445S/MdZwYzuBUgcd95sSN6L34L0+f
+X-Gm-Gg: ASbGncsFwXQuljsyQje59r/fhURPcSHRacxH4KSt3NhT+LkcHnFEWG2UufJiRWSHez+
+ 80GwL0C2qxLiBIs65GmunoJFRruRaLHXAdSNeSeqvsGa/ieVH+Ie67WcXZc2KoJR8/w==
+X-Google-Smtp-Source: AGHT+IFICXTi5L4Yi9FKRLBaCIcf6EXzVdF1AycUbfI0lV/wAF+5tS5g5Ydy8+JIWdyLi2hVCv5jHJBZNwgbFX4JDz0=
+X-Received: by 2002:a2e:bc1f:0:b0:2fb:90bc:1b3b with SMTP id
+ 38308e7fff4ca-2ffa716cd2emr2038021fa.28.1732225333975; Thu, 21 Nov 2024
+ 13:42:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241121-am65x-v1-2-fe87aff1b5fc@ti.com>
-References: <20241121-am65x-v1-0-fe87aff1b5fc@ti.com>
-In-Reply-To: <20241121-am65x-v1-0-fe87aff1b5fc@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>, Baocheng Su
- <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, Bryan
- Brattlof <bb@ti.com>
-X-Mailer: b4 0.13.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <mvm8qtnv310.fsf@suse.de>
+ <8d4e3685-8082-4b74-828f-05ccee5ac8e0@canonical.com>
+ <mvmfrnko8tk.fsf@suse.de> <7610b940-63ae-4b52-a71e-555b2d2db35e@canonical.com>
+In-Reply-To: <7610b940-63ae-4b52-a71e-555b2d2db35e@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 21 Nov 2024 13:42:02 -0800
+Message-ID: <CANV2PTMUwRpYyCUJGTakpF3t6QHCMpSH80_N76=uniqk5vbBtQ@mail.gmail.com>
+Subject: Re: 2025.01-rc2 fails to boot on VisionFive2
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Andreas Schwab <schwab@suse.de>, u-boot@lists.denx.de, 
+ Minda Chen <minda.chen@starfivetech.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,803 +93,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the reference board now using CONFIG_OF_UPSTREAM these board files
-are unused. Remove them
+On Thu, Nov 21, 2024 at 9:21=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 21.11.24 17:22, Andreas Schwab wrote:
+> > On Nov 21 2024, Heinrich Schuchardt wrote:
+> >
+> >> On 13.11.24 11:31, Andreas Schwab wrote:
+> >>> "Error reading cluster" is the new error.
+> >>> U-Boot SPL 2025.01-rc2 (Nov 08 2024 - 07:13:26 +0000)
+> >>> DDR version: dc2e84f0.
+> >>> Trying to boot from MMC2
+> >>> U-Boot 2025.01-rc2 (Nov 08 2024 - 07:13:26 +0000)
+> >>> CPU:   sifive,u74-mc
+> >>> Model: StarFive VisionFive 2 v1.2A
+> >>> DRAM:  4 GiB
+> >>> Core:  136 devices, 26 uclasses, devicetree: board
+> >>> WDT:   Not starting watchdog@13070000
+> >>> MMC:   mmc@16010000: 0, mmc@16020000: 1
+> >>> Loading Environment from SPIFlash... SF: Detected gd25lq128 with page=
+ size 256 Bytes, erase size 4 KiB, total 16 MiB
+> >>> *** Warning - bad CRC, using default environment
+> >>> StarFive EEPROM format v2
+> >>> --------EEPROM INFO--------
+> >>> Vendor : StarFive Technology Co., Ltd.
+> >>> Product full SN: VF7110A1-2249-D004E000-00000408
+> >>> data version: 0x2
+> >>> PCB revision: 0xa1
+> >>> BOM revision: A
+> >>> Ethernet MAC0 address: 6c:cf:39:00:16:8d
+> >>> Ethernet MAC1 address: 6c:cf:39:00:16:8e
+> >>> --------EEPROM INFO--------
+> >>> starfive_7110_pcie pcie@2b000000: Starfive PCIe bus probed.
+> >>> starfive_7110_pcie pcie@2c000000: Starfive PCIe bus probed.
+> >>> In:    serial@10000000
+> >>> Out:   serial@10000000
+> >>> Err:   serial@10000000
+> >>> Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+> >>> starting USB...
+> >>> Bus xhci_pci: Register 5000420 NbrPorts 5
+> >>> Starting the controller
+> >>> USB XHCI 1.00
+> >>> scanning bus xhci_pci for devices... 2 USB Device(s) found
+> >>>          scanning usb for storage devices... 0 Storage Device(s) foun=
+d
+> >>> Working FDT set to ff72ca10
+> >>> Hit any key to stop autoboot:  0
+> >>> Card did not respond to voltage select! : -110
+> >>> ** Booting bootflow '<NULL>' with efi_mgr
+> >>> Error reading cluster
+> >>
+> >> This is a message from the FAT file system driver.
+> >
+> > The file system is ok when read after interrupting the boot.
+>
+> That ls works does not mean that the file system is not corrupted.
+>
+> dosfsck will tell you if there is something wrong.
+>
+> >
+> > StarFive # mmc dev 1
+> > switch to partitions #0, OK
+> > mmc1 is current device
+> > StarFive # ls mmc 1:1
+> >              EFI/
+> >        304   ubootefi.var
+> >
+> > 1 file(s), 1 dir(s)
+> >
+> > StarFive # ls mmc 1:1 EFI
+> >              ./
+> >              ../
+> >              BOOT/
+> >
+> > 0 file(s), 3 dir(s)
+> >
+> > StarFive # ls mmc 1:1 EFI/BOOT
+> >              ./
+> >              ../
+> >     167936   BOOTRISCV64.EFI
+> >        164   grub.cfg
+> >
+> > 2 file(s), 2 dir(s)
+> >
+> > But running boot will end with the above error, and mmc 1 no longer
+> > works.
+> >
+> >> Which image reproduces the problem?
+> >
+> > I've built U-Boot here
+> > <https://build.opensuse.org/project/show/home:Andreas_Schwab:riscv:u-bo=
+ot>.
+> >
+>
+> I was asking which SD-card image that was used, e.g. some Suse
+> preinstalled image.
+>
+> Best regards
+>
+> Heinrich
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- arch/arm/dts/k3-am654-base-board.dts | 630 -----------------------------------
- arch/arm/dts/k3-am654-icssg2.dtso    | 145 --------
- 2 files changed, 775 deletions(-)
+Hi Andreas,
 
-diff --git a/arch/arm/dts/k3-am654-base-board.dts b/arch/arm/dts/k3-am654-base-board.dts
-deleted file mode 100644
-index 1637ec5ab5eda..0000000000000
---- a/arch/arm/dts/k3-am654-base-board.dts
-+++ /dev/null
-@@ -1,630 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2016-2020 Texas Instruments Incorporated - https://www.ti.com/
-- */
--
--/dts-v1/;
--
--#include "k3-am654.dtsi"
--#include <dt-bindings/input/input.h>
--#include <dt-bindings/net/ti-dp83867.h>
--
--/ {
--	compatible = "ti,am654-evm", "ti,am654";
--	model = "Texas Instruments AM654 Base Board";
--
--	aliases {
--		serial0 = &wkup_uart0;
--		serial1 = &mcu_uart0;
--		serial2 = &main_uart0;
--		i2c0 = &wkup_i2c0;
--		i2c1 = &mcu_i2c0;
--		i2c2 = &main_i2c0;
--		i2c3 = &main_i2c1;
--		i2c4 = &main_i2c2;
--		ethernet0 = &cpsw_port1;
--		mmc0 = &sdhci0;
--		mmc1 = &sdhci1;
--	};
--
--	chosen {
--		stdout-path = "serial2:115200n8";
--	};
--
--	memory@80000000 {
--		device_type = "memory";
--		/* 4G RAM */
--		reg = <0x00000000 0x80000000 0x00000000 0x80000000>,
--		      <0x00000008 0x80000000 0x00000000 0x80000000>;
--	};
--
--	reserved-memory {
--		#address-cells = <2>;
--		#size-cells = <2>;
--		ranges;
--
--		secure_ddr: secure-ddr@9e800000 {
--			reg = <0 0x9e800000 0 0x01800000>; /* for OP-TEE */
--			alignment = <0x1000>;
--			no-map;
--		};
--
--		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
--			compatible = "shared-dma-pool";
--			reg = <0 0xa0000000 0 0x100000>;
--			no-map;
--		};
--
--		mcu_r5fss0_core0_memory_region: r5f-memory@a0100000 {
--			compatible = "shared-dma-pool";
--			reg = <0 0xa0100000 0 0xf00000>;
--			no-map;
--		};
--
--		mcu_r5fss0_core1_dma_memory_region: r5f-dma-memory@a1000000 {
--			compatible = "shared-dma-pool";
--			reg = <0 0xa1000000 0 0x100000>;
--			no-map;
--		};
--
--		mcu_r5fss0_core1_memory_region: r5f-memory@a1100000 {
--			compatible = "shared-dma-pool";
--			reg = <0 0xa1100000 0 0xf00000>;
--			no-map;
--		};
--
--		rtos_ipc_memory_region: ipc-memories@a2000000 {
--			reg = <0x00 0xa2000000 0x00 0x00100000>;
--			alignment = <0x1000>;
--			no-map;
--		};
--	};
--
--	gpio-keys {
--		compatible = "gpio-keys";
--		autorepeat;
--		pinctrl-names = "default";
--		pinctrl-0 = <&push_button_pins_default>;
--
--		switch-5 {
--			label = "GPIO Key USER1";
--			linux,code = <BTN_0>;
--			gpios = <&wkup_gpio0 24 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-6 {
--			label = "GPIO Key USER2";
--			linux,code = <BTN_1>;
--			gpios = <&wkup_gpio0 27 GPIO_ACTIVE_LOW>;
--		};
--	};
--
--	evm_12v0: regulator-0 {
--		/* main supply */
--		compatible = "regulator-fixed";
--		regulator-name = "evm_12v0";
--		regulator-min-microvolt = <12000000>;
--		regulator-max-microvolt = <12000000>;
--		regulator-always-on;
--		regulator-boot-on;
--	};
--
--	vcc3v3_io: regulator-1 {
--		/* Output of TPS54334 */
--		compatible = "regulator-fixed";
--		regulator-name = "vcc3v3_io";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-always-on;
--		regulator-boot-on;
--		vin-supply = <&evm_12v0>;
--	};
--
--	vdd_mmc1_sd: regulator-2 {
--		compatible = "regulator-fixed";
--		regulator-name = "vdd_mmc1_sd";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-boot-on;
--		enable-active-high;
--		vin-supply = <&vcc3v3_io>;
--		gpio = <&pca9554 4 GPIO_ACTIVE_HIGH>;
--	};
--
--	vtt_supply: regulator-3 {
--		compatible = "regulator-fixed";
--		regulator-name = "vtt";
--		pinctrl-names = "default";
--		pinctrl-0 = <&ddr_vtt_pins_default>;
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		enable-active-high;
--		regulator-always-on;
--		regulator-boot-on;
--		vin-supply = <&vcc3v3_io>;
--		gpio = <&wkup_gpio0 28 GPIO_ACTIVE_HIGH>;
--	};
--};
--
--&wkup_pmx0 {
--	wkup_uart0_pins_default: wkup-uart0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x00a0, PIN_INPUT, 0)	/* (AB1) WKUP_UART0_RXD */
--			AM65X_WKUP_IOPAD(0x00a4, PIN_OUTPUT, 0)	/* (AB5) WKUP_UART0_TXD */
--			AM65X_WKUP_IOPAD(0x00c8, PIN_INPUT, 1)	/* (AC2) WKUP_GPIO0_6.WKUP_UART0_CTSn */
--			AM65X_WKUP_IOPAD(0x00cc, PIN_OUTPUT, 1)	/* (AC1) WKUP_GPIO0_7.WKUP_UART0_RTSn */
--		>;
--	};
--
--	ddr_vtt_pins_default: ddr-vtt-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0040, PIN_OUTPUT_PULLUP, 7)	/* WKUP_GPIO0_28 */
--		>;
--	};
--
--	wkup_i2c0_pins_default: wkup-i2c0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x00e0, PIN_INPUT, 0) /* (AC7) WKUP_I2C0_SCL */
--			AM65X_WKUP_IOPAD(0x00e4, PIN_INPUT, 0) /* (AD6) WKUP_I2C0_SDA */
--		>;
--	};
--
--	push_button_pins_default: push-button-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0030, PIN_INPUT, 7) /* (R5) WKUP_GPIO0_24 */
--			AM65X_WKUP_IOPAD(0x003c, PIN_INPUT, 7) /* (P2) WKUP_GPIO0_27 */
--		>;
--	};
--
--	mcu_fss0_ospi0_pins_default: mcu-fss0-ospi0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0000, PIN_OUTPUT, 0) /* (V1) MCU_OSPI0_CLK */
--			AM65X_WKUP_IOPAD(0x0008, PIN_INPUT, 0)	 /* (U2) MCU_OSPI0_DQS */
--			AM65X_WKUP_IOPAD(0x000c, PIN_INPUT, 0)  /* (U4) MCU_OSPI0_D0 */
--			AM65X_WKUP_IOPAD(0x0010, PIN_INPUT, 0)  /* (U5) MCU_OSPI0_D1 */
--			AM65X_WKUP_IOPAD(0x0014, PIN_INPUT, 0)  /* (T2) MCU_OSPI0_D2 */
--			AM65X_WKUP_IOPAD(0x0018, PIN_INPUT, 0)  /* (T3) MCU_OSPI0_D3 */
--			AM65X_WKUP_IOPAD(0x001c, PIN_INPUT, 0)  /* (T4) MCU_OSPI0_D4 */
--			AM65X_WKUP_IOPAD(0x0020, PIN_INPUT, 0)  /* (T5) MCU_OSPI0_D5 */
--			AM65X_WKUP_IOPAD(0x0024, PIN_INPUT, 0)  /* (R2) MCU_OSPI0_D6 */
--			AM65X_WKUP_IOPAD(0x0028, PIN_INPUT, 0)  /* (R3) MCU_OSPI0_D7 */
--			AM65X_WKUP_IOPAD(0x002c, PIN_OUTPUT, 0) /* (R4) MCU_OSPI0_CSn0 */
--		>;
--	};
--
--	wkup_pca554_default: wkup-pca554-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0034, PIN_INPUT, 7) /* (T1) MCU_OSPI1_CLK.WKUP_GPIO0_25 */
--		>;
--	};
--
--	mcu_uart0_pins_default: mcu-uart0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0044, PIN_INPUT, 4)	/* (P4) MCU_OSPI1_D1.MCU_UART0_RXD */
--			AM65X_WKUP_IOPAD(0x0048, PIN_OUTPUT, 4)	/* (P5) MCU_OSPI1_D2.MCU_UART0_TXD */
--			AM65X_WKUP_IOPAD(0x004C, PIN_INPUT, 4)	/* (P1) MCU_OSPI1_D3.MCU_UART0_CTSn */
--			AM65X_WKUP_IOPAD(0x0054, PIN_OUTPUT, 4)	/* (N3) MCU_OSPI1_CSn1.MCU_UART0_RTSn */
--		>;
--	};
--
--	mcu_cpsw_pins_default: mcu-cpsw-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x0058, PIN_OUTPUT, 0) /* (N4) MCU_RGMII1_TX_CTL */
--			AM65X_WKUP_IOPAD(0x005c, PIN_INPUT, 0) /* (N5) MCU_RGMII1_RX_CTL */
--			AM65X_WKUP_IOPAD(0x0060, PIN_OUTPUT, 0) /* (M2) MCU_RGMII1_TD3 */
--			AM65X_WKUP_IOPAD(0x0064, PIN_OUTPUT, 0) /* (M3) MCU_RGMII1_TD2 */
--			AM65X_WKUP_IOPAD(0x0068, PIN_OUTPUT, 0) /* (M4) MCU_RGMII1_TD1 */
--			AM65X_WKUP_IOPAD(0x006c, PIN_OUTPUT, 0) /* (M5) MCU_RGMII1_TD0 */
--			AM65X_WKUP_IOPAD(0x0078, PIN_INPUT, 0) /* (L2) MCU_RGMII1_RD3 */
--			AM65X_WKUP_IOPAD(0x007c, PIN_INPUT, 0) /* (L5) MCU_RGMII1_RD2 */
--			AM65X_WKUP_IOPAD(0x0080, PIN_INPUT, 0) /* (M6) MCU_RGMII1_RD1 */
--			AM65X_WKUP_IOPAD(0x0084, PIN_INPUT, 0) /* (L6) MCU_RGMII1_RD0 */
--			AM65X_WKUP_IOPAD(0x0070, PIN_OUTPUT, 0) /* (N1) MCU_RGMII1_TXC */
--			AM65X_WKUP_IOPAD(0x0074, PIN_INPUT, 0) /* (M1) MCU_RGMII1_RXC */
--		>;
--	};
--
--	mcu_mdio_pins_default: mcu-mdio1-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x008c, PIN_OUTPUT, 0) /* (L1) MCU_MDIO0_MDC */
--			AM65X_WKUP_IOPAD(0x0088, PIN_INPUT, 0) /* (L4) MCU_MDIO0_MDIO */
--		>;
--	};
--
--	mcu_i2c0_pins_default: mcu-i2c0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_WKUP_IOPAD(0x00e8, PIN_INPUT,  0) /* (AD8) MCU_I2C0_SCL */
--			AM65X_WKUP_IOPAD(0x00ec, PIN_INPUT,  0) /* (AD7) MCU_I2C0_SDA */
--		>;
--	};
--};
--
--&main_pmx0 {
--	main_uart0_pins_default: main-uart0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x01e4, PIN_INPUT, 0)	/* (AF11) UART0_RXD */
--			AM65X_IOPAD(0x01e8, PIN_OUTPUT, 0)	/* (AE11) UART0_TXD */
--			AM65X_IOPAD(0x01ec, PIN_INPUT, 0)	/* (AG11) UART0_CTSn */
--			AM65X_IOPAD(0x01f0, PIN_OUTPUT, 0)	/* (AD11) UART0_RTSn */
--		>;
--	};
--
--	main_i2c2_pins_default: main-i2c2-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x0074, PIN_INPUT, 5) /* (T27) GPMC0_CSn3.I2C2_SCL */
--			AM65X_IOPAD(0x0070, PIN_INPUT, 5) /* (R25) GPMC0_CSn2.I2C2_SDA */
--		>;
--	};
--
--	main_spi0_pins_default: main-spi0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x01c4, PIN_INPUT, 0) /* (AH13) SPI0_CLK */
--			AM65X_IOPAD(0x01c8, PIN_INPUT, 0) /* (AE13) SPI0_D0 */
--			AM65X_IOPAD(0x01cc, PIN_INPUT, 0) /* (AD13) SPI0_D1 */
--			AM65X_IOPAD(0x01bc, PIN_OUTPUT, 0) /* (AG13) SPI0_CS0 */
--		>;
--	};
--
--	main_mmc0_pins_default: main-mmc0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x01a8, PIN_INPUT_PULLDOWN, 0) /* (B25) MMC0_CLK */
--			AM65X_IOPAD(0x01ac, PIN_INPUT_PULLUP, 0) /* (B27) MMC0_CMD */
--			AM65X_IOPAD(0x01a4, PIN_INPUT_PULLUP, 0) /* (A26) MMC0_DAT0 */
--			AM65X_IOPAD(0x01a0, PIN_INPUT_PULLUP, 0) /* (E25) MMC0_DAT1 */
--			AM65X_IOPAD(0x019c, PIN_INPUT_PULLUP, 0) /* (C26) MMC0_DAT2 */
--			AM65X_IOPAD(0x0198, PIN_INPUT_PULLUP, 0) /* (A25) MMC0_DAT3 */
--			AM65X_IOPAD(0x0194, PIN_INPUT_PULLUP, 0) /* (E24) MMC0_DAT4 */
--			AM65X_IOPAD(0x0190, PIN_INPUT_PULLUP, 0) /* (A24) MMC0_DAT5 */
--			AM65X_IOPAD(0x018c, PIN_INPUT_PULLUP, 0) /* (B26) MMC0_DAT6 */
--			AM65X_IOPAD(0x0188, PIN_INPUT_PULLUP, 0) /* (D25) MMC0_DAT7 */
--			AM65X_IOPAD(0x01b4, PIN_INPUT_PULLUP, 0) /* (A23) MMC0_SDCD */
--			AM65X_IOPAD(0x01b0, PIN_INPUT, 0) /* (C25) MMC0_DS */
--		>;
--	};
--
--	main_mmc1_pins_default: main-mmc1-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x02d4, PIN_INPUT_PULLDOWN, 0) /* (C27) MMC1_CLK */
--			AM65X_IOPAD(0x02d8, PIN_INPUT_PULLUP, 0) /* (C28) MMC1_CMD */
--			AM65X_IOPAD(0x02d0, PIN_INPUT_PULLUP, 0) /* (D28) MMC1_DAT0 */
--			AM65X_IOPAD(0x02cc, PIN_INPUT_PULLUP, 0) /* (E27) MMC1_DAT1 */
--			AM65X_IOPAD(0x02c8, PIN_INPUT_PULLUP, 0) /* (D26) MMC1_DAT2 */
--			AM65X_IOPAD(0x02c4, PIN_INPUT_PULLUP, 0) /* (D27) MMC1_DAT3 */
--			AM65X_IOPAD(0x02dc, PIN_INPUT_PULLUP, 0) /* (B24) MMC1_SDCD */
--			AM65X_IOPAD(0x02e0, PIN_INPUT, 0) /* (C24) MMC1_SDWP */
--		>;
--	};
--
--	usb1_pins_default: usb1-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x02c0, PIN_OUTPUT, 0) /* (AC8) USB1_DRVVBUS */
--		>;
--	};
--};
--
--&main_pmx1 {
--	main_i2c0_pins_default: main-i2c0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x0000, PIN_INPUT, 0) /* (D20) I2C0_SCL */
--			AM65X_IOPAD(0x0004, PIN_INPUT, 0) /* (C21) I2C0_SDA */
--		>;
--	};
--
--	main_i2c1_pins_default: main-i2c1-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x0008, PIN_INPUT, 0) /* (B21) I2C1_SCL */
--			AM65X_IOPAD(0x000c, PIN_INPUT, 0) /* (E21) I2C1_SDA */
--		>;
--	};
--
--	ecap0_pins_default: ecap0-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x0010, PIN_INPUT, 0) /* (D21) ECAP0_IN_APWM_OUT */
--		>;
--	};
--};
--
--&wkup_uart0 {
--	/* Wakeup UART is used by System firmware */
--	status = "reserved";
--	pinctrl-names = "default";
--	pinctrl-0 = <&wkup_uart0_pins_default>;
--};
--
--&mcu_uart0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_uart0_pins_default>;
--};
--
--&main_uart0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_uart0_pins_default>;
--	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
--};
--
--&wkup_i2c0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&wkup_i2c0_pins_default>;
--	clock-frequency = <400000>;
--
--	eeprom@50 {
--		/* AT24CM01 */
--		compatible = "atmel,24c1024";
--		reg = <0x50>;
--	};
--
--	vdd_mpu: regulator@60 {
--		compatible = "ti,tps62363";
--		reg = <0x60>;
--		regulator-name = "VDD_MPU";
--		regulator-min-microvolt = <500000>;
--		regulator-max-microvolt = <1770000>;
--		regulator-always-on;
--		regulator-boot-on;
--		ti,vsel0-state-high;
--		ti,vsel1-state-high;
--		ti,enable-vout-discharge;
--	};
--
--	gpio@38 {
--		compatible = "nxp,pca9554";
--		reg = <0x38>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--
--	pca9554: gpio@39 {
--		compatible = "nxp,pca9554";
--		reg = <0x39>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&wkup_pca554_default>;
--		interrupt-parent = <&wkup_gpio0>;
--		interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
--		interrupt-controller;
--		#interrupt-cells = <2>;
--	};
--};
--
--&mcu_i2c0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_i2c0_pins_default>;
--	clock-frequency = <400000>;
--};
--
--&main_i2c0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_i2c0_pins_default>;
--	clock-frequency = <400000>;
--
--	pca9555: gpio@21 {
--		compatible = "nxp,pca9555";
--		reg = <0x21>;
--		gpio-controller;
--		#gpio-cells = <2>;
--	};
--};
--
--&main_i2c1 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_i2c1_pins_default>;
--	clock-frequency = <400000>;
--};
--
--&main_i2c2 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_i2c2_pins_default>;
--	clock-frequency = <400000>;
--};
--
--&ecap0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&ecap0_pins_default>;
--};
--
--&main_spi0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_spi0_pins_default>;
--	#address-cells = <1>;
--	#size-cells = <0>;
--	ti,pindir-d0-out-d1-in;
--
--	flash@0 {
--		compatible = "jedec,spi-nor";
--		reg = <0x0>;
--		spi-tx-bus-width = <1>;
--		spi-rx-bus-width = <1>;
--		spi-max-frequency = <48000000>;
--	};
--};
--
--&sdhci0 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_mmc0_pins_default>;
--	bus-width = <8>;
--	non-removable;
--	ti,driver-strength-ohm = <50>;
--	disable-wp;
--};
--
--/*
-- * Because of erratas i2025 and i2026 for silicon revision 1.0, the
-- * SD card interface might fail. Boards with sr1.0 are recommended to
-- * disable sdhci1
-- */
--&sdhci1 {
--	vmmc-supply = <&vdd_mmc1_sd>;
--	pinctrl-names = "default";
--	pinctrl-0 = <&main_mmc1_pins_default>;
--	ti,driver-strength-ohm = <50>;
--	disable-wp;
--};
--
--&usb1 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&usb1_pins_default>;
--	dr_mode = "otg";
--};
--
--&dwc3_0 {
--	status = "disabled";
--};
--
--&usb0_phy {
--	status = "disabled";
--};
--
--&tscadc0 {
--	status = "okay";
--	adc {
--		ti,adc-channels = <0 1 2 3 4 5 6 7>;
--	};
--};
--
--&tscadc1 {
--	status = "okay";
--	adc {
--		ti,adc-channels = <0 1 2 3 4 5 6 7>;
--	};
--};
--
--&serdes0 {
--	status = "disabled";
--};
--
--&serdes1 {
--	status = "disabled";
--};
--
--&mailbox0_cluster0 {
--	status = "okay";
--	interrupts = <436>;
--
--	mbox_mcu_r5fss0_core0: mbox-mcu-r5fss0-core0 {
--		ti,mbox-tx = <1 0 0>;
--		ti,mbox-rx = <0 0 0>;
--	};
--};
--
--&mailbox0_cluster1 {
--	status = "okay";
--	interrupts = <432>;
--
--	mbox_mcu_r5fss0_core1: mbox-mcu-r5fss0-core1 {
--		ti,mbox-tx = <1 0 0>;
--		ti,mbox-rx = <0 0 0>;
--	};
--};
--
--&mcu_r5fss0_core0 {
--	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
--			<&mcu_r5fss0_core0_memory_region>;
--	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core0>;
--};
--
--&mcu_r5fss0_core1 {
--	memory-region = <&mcu_r5fss0_core1_dma_memory_region>,
--			<&mcu_r5fss0_core1_memory_region>;
--	mboxes = <&mailbox0_cluster1>, <&mbox_mcu_r5fss0_core1>;
--};
--
--&ospi0 {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_fss0_ospi0_pins_default>;
--
--	flash@0 {
--		compatible = "jedec,spi-nor";
--		reg = <0x0>;
--		spi-tx-bus-width = <8>;
--		spi-rx-bus-width = <8>;
--		spi-max-frequency = <25000000>;
--		cdns,tshsl-ns = <60>;
--		cdns,tsd2d-ns = <60>;
--		cdns,tchsh-ns = <60>;
--		cdns,tslch-ns = <60>;
--		cdns,read-delay = <0>;
--
--		partitions {
--			compatible = "fixed-partitions";
--			#address-cells = <1>;
--			#size-cells = <1>;
--
--			partition@0 {
--				label = "ospi.tiboot3";
--				reg = <0x0 0x80000>;
--			};
--
--			partition@80000 {
--				label = "ospi.tispl";
--				reg = <0x80000 0x200000>;
--			};
--
--			partition@280000 {
--				label = "ospi.u-boot";
--				reg = <0x280000 0x400000>;
--			};
--
--			partition@680000 {
--				label = "ospi.env";
--				reg = <0x680000 0x20000>;
--			};
--
--			partition@6a0000 {
--				label = "ospi.env.backup";
--				reg = <0x6a0000 0x20000>;
--			};
--
--			partition@6c0000 {
--				label = "ospi.sysfw";
--				reg = <0x6c0000 0x100000>;
--			};
--
--			partition@800000 {
--				label = "ospi.rootfs";
--				reg = <0x800000 0x37c0000>;
--			};
--
--			partition@3fe0000 {
--				label = "ospi.phypattern";
--				reg = <0x3fe0000 0x20000>;
--			};
--		};
--	};
--};
--
--&mcu_cpsw {
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_cpsw_pins_default>;
--};
--
--&davinci_mdio {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&mcu_mdio_pins_default>;
--
--	phy0: ethernet-phy@0 {
--		reg = <0>;
--		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
--		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
--	};
--};
--
--&cpsw_port1 {
--	phy-mode = "rgmii-rxid";
--	phy-handle = <&phy0>;
--};
--
--&dss {
--	status = "disabled";
--};
-diff --git a/arch/arm/dts/k3-am654-icssg2.dtso b/arch/arm/dts/k3-am654-icssg2.dtso
-deleted file mode 100644
-index faefa2febcf7c..0000000000000
---- a/arch/arm/dts/k3-am654-icssg2.dtso
-+++ /dev/null
-@@ -1,145 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/**
-- * DT overlay for enabling ICSSG2 on AM654 EVM
-- *
-- * Copyright (C) 2018-2023 Texas Instruments Incorporated - https://www.ti.com/
-- */
--
--/dts-v1/;
--/plugin/;
--
--#include <dt-bindings/net/ti-dp83867.h>
--#include "k3-pinctrl.h"
--
--&{/} {
--	aliases {
--		ethernet1 = "/icssg2-eth/ethernet-ports/port@0";
--		ethernet2 = "/icssg2-eth/ethernet-ports/port@1";
--	};
--
--	/* Ethernet node on PRU-ICSSG2 */
--	icssg2_eth: icssg2-eth {
--		compatible = "ti,am654-icssg-prueth";
--		pinctrl-names = "default";
--		pinctrl-0 = <&icssg2_rgmii_pins_default>;
--		sram = <&msmc_ram>;
--		ti,prus = <&pru2_0>, <&rtu2_0>, <&tx_pru2_0>,
--			<&pru2_1>, <&rtu2_1>, <&tx_pru2_1>;
--		firmware-name = "ti-pruss/am65x-sr2-pru0-prueth-fw.elf",
--				"ti-pruss/am65x-sr2-rtu0-prueth-fw.elf",
--				"ti-pruss/am65x-sr2-txpru0-prueth-fw.elf",
--				"ti-pruss/am65x-sr2-pru1-prueth-fw.elf",
--				"ti-pruss/am65x-sr2-rtu1-prueth-fw.elf",
--				"ti-pruss/am65x-sr2-txpru1-prueth-fw.elf";
--
--		ti,pruss-gp-mux-sel = <2>,      /* MII mode */
--				      <2>,
--				      <2>,
--				      <2>,	/* MII mode */
--				      <2>,
--				      <2>;
--
--		ti,mii-g-rt = <&icssg2_mii_g_rt>;
--		ti,mii-rt = <&icssg2_mii_rt>;
--		ti,iep = <&icssg2_iep0>, <&icssg2_iep1>;
--
--		interrupt-parent = <&icssg2_intc>;
--		interrupts = <24 0 2>, <25 1 3>;
--		interrupt-names = "tx_ts0", "tx_ts1";
--
--		dmas = <&main_udmap 0xc300>, /* egress slice 0 */
--		       <&main_udmap 0xc301>, /* egress slice 0 */
--		       <&main_udmap 0xc302>, /* egress slice 0 */
--		       <&main_udmap 0xc303>, /* egress slice 0 */
--		       <&main_udmap 0xc304>, /* egress slice 1 */
--		       <&main_udmap 0xc305>, /* egress slice 1 */
--		       <&main_udmap 0xc306>, /* egress slice 1 */
--		       <&main_udmap 0xc307>, /* egress slice 1 */
--		       <&main_udmap 0x4300>, /* ingress slice 0 */
--		       <&main_udmap 0x4301>; /* ingress slice 1 */
--
--		dma-names = "tx0-0", "tx0-1", "tx0-2", "tx0-3",
--			    "tx1-0", "tx1-1", "tx1-2", "tx1-3",
--			    "rx0", "rx1";
--		ethernet-ports {
--			#address-cells = <1>;
--			#size-cells = <0>;
--			icssg2_emac0: port@0 {
--				reg = <0>;
--				phy-handle = <&icssg2_phy0>;
--				phy-mode = "rgmii-id";
--				ti,syscon-rgmii-delay = <&scm_conf 0x4120>;
--				/* Filled in by bootloader */
--				local-mac-address = [00 00 00 00 00 00];
--			};
--			icssg2_emac1: port@1 {
--				reg = <1>;
--				phy-handle = <&icssg2_phy1>;
--				phy-mode = "rgmii-id";
--				ti,syscon-rgmii-delay = <&scm_conf 0x4124>;
--				/* Filled in by bootloader */
--				local-mac-address = [00 00 00 00 00 00];
--			};
--		};
--	};
--};
--
--&main_pmx0 {
--
--	icssg2_mdio_pins_default: icssg2-mdio-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x0094, PIN_INPUT, 2) /* (AC19) PRG2_PRU0_GPO7.PRG2_MDIO0_MDIO */
--			AM65X_IOPAD(0x00c8, PIN_OUTPUT, 2) /* (AE15) PRG2_PRU1_GPO7.PRG2_MDIO0_MDC */
--		>;
--	};
--
--	icssg2_rgmii_pins_default: icssg2-rgmii-default-pins {
--		pinctrl-single,pins = <
--			AM65X_IOPAD(0x00ac, PIN_INPUT, 2) /* (AH15) PRG2_PRU1_GPO0.PRG2_RGMII2_RD0 */
--			AM65X_IOPAD(0x00b0, PIN_INPUT, 2) /* (AC16) PRG2_PRU1_GPO1.PRG2_RGMII2_RD1 */
--			AM65X_IOPAD(0x00b4, PIN_INPUT, 2) /* (AD17) PRG2_PRU1_GPO2.PRG2_RGMII2_RD2 */
--			AM65X_IOPAD(0x00b8, PIN_INPUT, 2) /* (AH14) PRG2_PRU1_GPO3.PRG2_RGMII2_RD3 */
--			AM65X_IOPAD(0x00cc, PIN_OUTPUT, 2) /* (AD15) PRG2_PRU1_GPO8.PRG2_RGMII2_TD0 */
--			AM65X_IOPAD(0x00d0, PIN_OUTPUT, 2) /* (AF14) PRG2_PRU1_GPO9.PRG2_RGMII2_TD1 */
--			AM65X_IOPAD(0x00d4, PIN_OUTPUT, 2) /* (AC15) PRG2_PRU1_GPO10.PRG2_RGMII2_TD2 */
--			AM65X_IOPAD(0x00d8, PIN_OUTPUT, 2) /* (AD14) PRG2_PRU1_GPO11.PRG2_RGMII2_TD3 */
--			AM65X_IOPAD(0x00dc, PIN_INPUT, 2) /* (AE14) PRG2_PRU1_GPO16.PRG2_RGMII2_TXC */
--			AM65X_IOPAD(0x00c4, PIN_OUTPUT, 2) /* (AC17) PRG2_PRU1_GPO6.PRG2_RGMII2_TX_CTL */
--			AM65X_IOPAD(0x00c0, PIN_INPUT, 2) /* (AG15) PRG2_PRU1_GPO5.PRG2_RGMII2_RXC */
--			AM65X_IOPAD(0x00bc, PIN_INPUT, 2) /* (AG14) PRG2_PRU1_GPO4.PRG2_RGMII2_RX_CTL */
--
--			AM65X_IOPAD(0x0078, PIN_INPUT, 2) /* (AF18) PRG2_PRU0_GPO0.PRG2_RGMII1_RD0 */
--			AM65X_IOPAD(0x007c, PIN_INPUT, 2) /* (AE18) PRG2_PRU0_GPO1.PRG2_RGMII1_RD1 */
--			AM65X_IOPAD(0x0080, PIN_INPUT, 2) /* (AH17) PRG2_PRU0_GPO2.PRG2_RGMII1_RD2 */
--			AM65X_IOPAD(0x0084, PIN_INPUT, 2) /* (AG18) PRG2_PRU0_GPO3.PRG2_RGMII1_RD3 */
--			AM65X_IOPAD(0x0098, PIN_OUTPUT, 2) /* (AH16) PRG2_PRU0_GPO8.PRG2_RGMII1_TD0 */
--			AM65X_IOPAD(0x009c, PIN_OUTPUT, 2) /* (AG16) PRG2_PRU0_GPO9.PRG2_RGMII1_TD1 */
--			AM65X_IOPAD(0x00a0, PIN_OUTPUT, 2) /* (AF16) PRG2_PRU0_GPO10.PRG2_RGMII1_TD2 */
--			AM65X_IOPAD(0x00a4, PIN_OUTPUT, 2) /* (AE16) PRG2_PRU0_GPO11.PRG2_RGMII1_TD3 */
--			AM65X_IOPAD(0x00a8, PIN_INPUT, 2) /* (AD16) PRG2_PRU0_GPO16.PRG2_RGMII1_TXC */
--			AM65X_IOPAD(0x0090, PIN_OUTPUT, 2) /* (AE17) PRG2_PRU0_GPO6.PRG2_RGMII1_TX_CTL */
--			AM65X_IOPAD(0x008c, PIN_INPUT, 2) /* (AF17) PRG2_PRU0_GPO5.PRG2_RGMII1_RXC */
--			AM65X_IOPAD(0x0088, PIN_INPUT, 2) /* (AG17) PRG2_PRU0_GPO4.PRG2_RGMII1_RX_CTL */
--		>;
--	};
--};
--
--&icssg2_mdio {
--	status = "okay";
--	pinctrl-names = "default";
--	pinctrl-0 = <&icssg2_mdio_pins_default>;
--	#address-cells = <1>;
--	#size-cells = <0>;
--
--	icssg2_phy0: ethernet-phy@0 {
--		reg = <0>;
--		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
--		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
--	};
--
--	icssg2_phy1: ethernet-phy@3 {
--		reg = <3>;
--		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
--		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
--	};
--};
+There is an offset (1GB?) in address space to DRAM. On boards having
+4GB DRAM and more there is a failure to load data with mmc driver to
+the 4GB memory address. . If you load data smaller than the length of
+the offset to the 4GB address it is a valid action, however the MMC
+driver limitation will cause this to fail. Similarly you can load that
+same data to $loadaddr (2GB+320MB) or $kernel_addr_r (1GB+2MB) and
+that does not cause a problem.
 
--- 
-2.46.0
+Try 'load' from mmc storage and experiment with addresses above and
+below 0x100000000 (1024*1024*1024*4) this way to get a failure and a
+success. When there is a failure then the mmc storage appears to not
+respond in future requests. The content of data being transferred (OS
+image, EFI app, ...) does not matter there, so it should be easy to
+test for.
 
+-E
