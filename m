@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D27D78769
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C904DD7876B
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 14:30:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E76F989779;
-	Thu, 21 Nov 2024 15:29:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D21389672;
+	Thu, 21 Nov 2024 15:30:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="lQiD+c5I";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=sntech.de header.i=@sntech.de header.b="hzQyH6Hf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A38D8976F; Thu, 21 Nov 2024 15:29:49 +0100 (CET)
+ id 88D5089672; Thu, 21 Nov 2024 15:30:02 +0100 (CET)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8030988278
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:29:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89D9788278
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 15:30:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
@@ -31,17 +31,17 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sntech.de;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9wYIB8V+kfJlIjyPBUdHTeRcuE/9AmopZbVj8MQl64s=; b=lQiD+c5ILm8siLmPUMYInXRcrK
- 3acXXZbOGgTpSTufso38J+Cs7A5FA1/6oXNYmYzzLQoCDggnPe2YxjbcWX865wPfP5zhGyYhqJ2Nu
- 5zdDWoDfYjuGGrCQ7EklLGu0LcWsjTTcRN5j4S62rnaMBF9wVo9DGIqQbO057ixXSqutUs5OLRUgs
- oE99Qjwc5PfaBi5K7xkRtTqRQjjdyF9KAxF/HvmzLtFWmBdQQ4v4Qm2vUT8O8YJCCH1FRdbGtxzI2
- OYoqOV1A+cIH3rqQF/XNm4BrgZuoWZueOwzfjIOiQDyx4jJeXclcidtwVp6HlWTrdllRrFnNLU6hq
- VGRL1oag==;
+ bh=/qcdyVE/Bx+c+hMteGo/0RQQypJNpmEz+dvYpTqa8b0=; b=hzQyH6HfVSi0/oppH0l9h1Hb/V
+ HpKRWIs0IsFoDE1Enhwz/dFS2IUsgcB66y/SPR3qfLXKk6Qw30nhfTVmKgR38eVNhr8YZI640W+iS
+ t8yGKIUgZNgDvHoCxilCn/8i7lQ2IFfFqxVONg+E1XAelBWRcpCOTMP3POqxfct3Ucos/0VrHL+R4
+ rBGKf31Utw1Ia0qbh/sk/+G168lDyhIAkbBVahTgyLrvuQWZO0f3FH+DgFZ4RN9uemj8iuh4vN/Cf
+ JnA+0nwY11V1VRjPOCVfnMPuLs6zDT+3oj9dzRfz4tXWd8geToiU3Z4Naon48NHrd5+AGZ+JnCPZs
+ L2253tzQ==;
 Received: from [185.156.123.69] (helo=localhost.localdomain)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1tE8A4-0007f9-HV; Thu, 21 Nov 2024 15:28:00 +0100
+ id 1tE8A7-0007f9-0f; Thu, 21 Nov 2024 15:28:03 +0100
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
@@ -49,11 +49,10 @@ To: sjg@chromium.org,
 Cc: heiko@sntech.de, lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com,
  jh80.chung@samsung.com, joe.hershberger@ni.com, rfried.dev@gmail.com,
  jonas@kwiboo.se, quentin.schulz@cherry.de, detlev.casanova@collabora.com,
- u-boot@lists.denx.de, sebastian.reichel@collabora.com,
- Steven Liu <steven.liu@rock-chips.com>
-Subject: [PATCH 12/20] pinctrl: rockchip: support rk3576 pinctrl
-Date: Thu, 21 Nov 2024 15:27:23 +0100
-Message-ID: <20241121142731.1202209-13-heiko@sntech.de>
+ u-boot@lists.denx.de, sebastian.reichel@collabora.com
+Subject: [PATCH 18/20] mmc: rockchip_dw_mmc: Add support for rk3576
+Date: Thu, 21 Nov 2024 15:27:29 +0100
+Message-ID: <20241121142731.1202209-19-heiko@sntech.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241121142731.1202209-1-heiko@sntech.de>
 References: <20241121142731.1202209-1-heiko@sntech.de>
@@ -75,338 +74,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Steven Liu <steven.liu@rock-chips.com>
+The rk3576 uses a different base-compatible, as starting with this
+generation, the clock phase tuning is done via registers inside
+the mmc controller and not from inside the CRU.
 
-Add support for the rk3576 variant of pinctrl.
+In U-Boot we do not tune at all, so no other code changes are
+necessary.
 
-Signed-off-by: Steven Liu <steven.liu@rock-chips.com>
-[adapted to mainline u-boot]
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 ---
- drivers/pinctrl/rockchip/Makefile           |   1 +
- drivers/pinctrl/rockchip/pinctrl-rk3576.c   | 287 ++++++++++++++++++++
- drivers/pinctrl/rockchip/pinctrl-rockchip.h |   3 +
- 3 files changed, 291 insertions(+)
- create mode 100644 drivers/pinctrl/rockchip/pinctrl-rk3576.c
+ drivers/mmc/rockchip_dw_mmc.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/rockchip/Makefile b/drivers/pinctrl/rockchip/Makefile
-index c91f650b043..468840913dd 100644
---- a/drivers/pinctrl/rockchip/Makefile
-+++ b/drivers/pinctrl/rockchip/Makefile
-@@ -15,6 +15,7 @@ obj-$(CONFIG_ROCKCHIP_RK3328) += pinctrl-rk3328.o
- obj-$(CONFIG_ROCKCHIP_RK3368) += pinctrl-rk3368.o
- obj-$(CONFIG_ROCKCHIP_RK3399) += pinctrl-rk3399.o
- obj-$(CONFIG_ROCKCHIP_RK3568) += pinctrl-rk3568.o
-+obj-$(CONFIG_ROCKCHIP_RK3576) += pinctrl-rk3576.o
- obj-$(CONFIG_ROCKCHIP_RK3588) += pinctrl-rk3588.o
- obj-$(CONFIG_ROCKCHIP_RV1108) += pinctrl-rv1108.o
- obj-$(CONFIG_ROCKCHIP_RV1126) += pinctrl-rv1126.o
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3576.c b/drivers/pinctrl/rockchip/pinctrl-rk3576.c
-new file mode 100644
-index 00000000000..9399540ed4a
---- /dev/null
-+++ b/drivers/pinctrl/rockchip/pinctrl-rk3576.c
-@@ -0,0 +1,287 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2024 Rockchip Electronics Co., Ltd
-+ */
-+
-+#include <dm.h>
-+#include <dm/pinctrl.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+
-+#include "pinctrl-rockchip.h"
-+#include <dt-bindings/pinctrl/rockchip.h>
-+
-+static int rk3576_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+	int iomux_num = (pin / 8);
-+	struct regmap *regmap;
-+	int reg, ret, mask;
-+	u8 bit;
-+	u32 data;
-+
-+	debug("setting mux of GPIO%d-%d to %d\n", bank->bank_num, pin, mux);
-+
-+	regmap = priv->regmap_base;
-+	reg = bank->iomux[iomux_num].offset;
-+	if ((pin % 8) >= 4)
-+		reg += 0x4;
-+	bit = (pin % 4) * 4;
-+	mask = 0xf;
-+
-+	data = (mask << (bit + 16));
-+	data |= (mux & mask) << bit;
-+
-+	if (bank->bank_num == 0 && pin >= RK_PB4 && pin <= RK_PB7)
-+		reg += 0x1FF4; /* GPIO0_IOC_GPIO0B_IOMUX_SEL_H */
-+
-+	debug("iomux write reg = %x data = %x\n", reg, data);
-+
-+	ret = regmap_write(regmap, reg, data);
-+
-+	return ret;
-+}
-+
-+#define RK3576_DRV_BITS_PER_PIN		4
-+#define RK3576_DRV_PINS_PER_REG		4
-+#define RK3576_DRV_GPIO0_AL_OFFSET	0x10
-+#define RK3576_DRV_GPIO0_BH_OFFSET	0x2014
-+#define RK3576_DRV_GPIO1_OFFSET		0x6020
-+#define RK3576_DRV_GPIO2_OFFSET		0x6040
-+#define RK3576_DRV_GPIO3_OFFSET		0x6060
-+#define RK3576_DRV_GPIO4_AL_OFFSET	0x6080
-+#define RK3576_DRV_GPIO4_CL_OFFSET	0xA090
-+#define RK3576_DRV_GPIO4_DL_OFFSET	0xB098
-+
-+static void rk3576_calc_drv_reg_and_bit(struct rockchip_pin_bank *bank,
-+					int pin_num, struct regmap **regmap,
-+					int *reg, u8 *bit)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+
-+	*regmap = priv->regmap_base;
-+	if (bank->bank_num == 0 && pin_num < 12) {
-+		*reg = RK3576_DRV_GPIO0_AL_OFFSET;
-+	} else if (bank->bank_num == 0) {
-+		*reg = RK3576_DRV_GPIO0_BH_OFFSET - 0xc;
-+	} else if (bank->bank_num == 1) {
-+		*reg = RK3576_DRV_GPIO1_OFFSET;
-+	} else if (bank->bank_num == 2) {
-+		*reg = RK3576_DRV_GPIO2_OFFSET;
-+	} else if (bank->bank_num == 3) {
-+		*reg = RK3576_DRV_GPIO3_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 16) {
-+		*reg = RK3576_DRV_GPIO4_AL_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 24) {
-+		*reg = RK3576_DRV_GPIO4_CL_OFFSET - 0x10;
-+	} else if (bank->bank_num == 4) {
-+		*reg = RK3576_DRV_GPIO4_DL_OFFSET - 0x18;
-+	} else {
-+		*reg = 0;
-+		debug("unsupported bank_num %d\n", bank->bank_num);
-+	}
-+
-+	*reg += ((pin_num / RK3576_DRV_PINS_PER_REG) * 4);
-+	*bit = pin_num % RK3576_DRV_PINS_PER_REG;
-+	*bit *= RK3576_DRV_BITS_PER_PIN;
-+}
-+
-+static int rk3576_set_drive(struct rockchip_pin_bank *bank,
-+			    int pin_num, int strength)
-+{
-+	struct regmap *regmap;
-+	int reg, ret;
-+	u32 data;
-+	u8 bit;
-+	int drv = ((strength & BIT(2)) >> 2) | ((strength & BIT(0)) << 2) | (strength & BIT(1));
-+
-+	rk3576_calc_drv_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+
-+	/* enable the write to the equivalent lower bits */
-+	data = ((1 << RK3576_DRV_BITS_PER_PIN) - 1) << (bit + 16);
-+	data |= (drv << bit);
-+	ret = regmap_write(regmap, reg, data);
-+
-+	return ret;
-+}
-+
-+#define RK3576_PULL_BITS_PER_PIN	2
-+#define RK3576_PULL_PINS_PER_REG	8
-+#define RK3576_PULL_GPIO0_AL_OFFSET	0x20
-+#define RK3576_PULL_GPIO0_BH_OFFSET	0x2028
-+#define RK3576_PULL_GPIO1_OFFSET	0x6110
-+#define RK3576_PULL_GPIO2_OFFSET	0x6120
-+#define RK3576_PULL_GPIO3_OFFSET	0x6130
-+#define RK3576_PULL_GPIO4_AL_OFFSET	0x6140
-+#define RK3576_PULL_GPIO4_CL_OFFSET	0xA148
-+#define RK3576_PULL_GPIO4_DL_OFFSET	0xB14C
-+
-+static void rk3576_calc_pull_reg_and_bit(struct rockchip_pin_bank *bank,
-+					 int pin_num, struct regmap **regmap,
-+					 int *reg, u8 *bit)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+
-+	*regmap = priv->regmap_base;
-+	if (bank->bank_num == 0 && pin_num < 12) {
-+		*reg = RK3576_PULL_GPIO0_AL_OFFSET;
-+	} else if (bank->bank_num == 0) {
-+		*reg = RK3576_PULL_GPIO0_BH_OFFSET - 0x4;
-+	} else if (bank->bank_num == 1) {
-+		*reg = RK3576_PULL_GPIO1_OFFSET;
-+	} else if (bank->bank_num == 2) {
-+		*reg = RK3576_PULL_GPIO2_OFFSET;
-+	} else if (bank->bank_num == 3) {
-+		*reg = RK3576_PULL_GPIO3_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 16) {
-+		*reg = RK3576_PULL_GPIO4_AL_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 24) {
-+		*reg = RK3576_PULL_GPIO4_CL_OFFSET - 0x8;
-+	} else if (bank->bank_num == 4) {
-+		*reg = RK3576_PULL_GPIO4_DL_OFFSET - 0xc;
-+	} else {
-+		*reg = 0;
-+		debug("unsupported bank_num %d\n", bank->bank_num);
-+	}
-+
-+	*reg += ((pin_num / RK3576_PULL_PINS_PER_REG) * 4);
-+	*bit = pin_num % RK3576_PULL_PINS_PER_REG;
-+	*bit *= RK3576_PULL_BITS_PER_PIN;
-+}
-+
-+static int rk3576_set_pull(struct rockchip_pin_bank *bank,
-+			   int pin_num, int pull)
-+{
-+	struct regmap *regmap;
-+	int reg, ret;
-+	u8 bit, type;
-+	u32 data;
-+
-+	if (pull == PIN_CONFIG_BIAS_PULL_PIN_DEFAULT)
-+		return -EOPNOTSUPP;
-+
-+	rk3576_calc_pull_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+	type = 1; /* FIXME: was always set to 1 in vendor kernel */
-+	ret = rockchip_translate_pull_value(type, pull);
-+	if (ret < 0) {
-+		debug("unsupported pull setting %d\n", pull);
-+		return ret;
-+	}
-+
-+	/* enable the write to the equivalent lower bits */
-+	data = ((1 << RK3576_PULL_BITS_PER_PIN) - 1) << (bit + 16);
-+
-+	data |= (ret << bit);
-+	ret = regmap_write(regmap, reg, data);
-+
-+	return ret;
-+}
-+
-+#define RK3576_SMT_BITS_PER_PIN		1
-+#define RK3576_SMT_PINS_PER_REG		8
-+#define RK3576_SMT_GPIO0_AL_OFFSET	0x30
-+#define RK3576_SMT_GPIO0_BH_OFFSET	0x2040
-+#define RK3576_SMT_GPIO1_OFFSET		0x6210
-+#define RK3576_SMT_GPIO2_OFFSET		0x6220
-+#define RK3576_SMT_GPIO3_OFFSET		0x6230
-+#define RK3576_SMT_GPIO4_AL_OFFSET	0x6240
-+#define RK3576_SMT_GPIO4_CL_OFFSET	0xA248
-+#define RK3576_SMT_GPIO4_DL_OFFSET	0xB24C
-+
-+static int rk3576_calc_schmitt_reg_and_bit(struct rockchip_pin_bank *bank,
-+					   int pin_num,
-+					   struct regmap **regmap,
-+					   int *reg, u8 *bit)
-+{
-+	struct rockchip_pinctrl_priv *priv = bank->priv;
-+
-+	*regmap = priv->regmap_base;
-+	if (bank->bank_num == 0 && pin_num < 12) {
-+		*reg = RK3576_SMT_GPIO0_AL_OFFSET;
-+	} else if (bank->bank_num == 0) {
-+		*reg = RK3576_SMT_GPIO0_BH_OFFSET - 0x4;
-+	} else if (bank->bank_num == 1) {
-+		*reg = RK3576_SMT_GPIO1_OFFSET;
-+	} else if (bank->bank_num == 2) {
-+		*reg = RK3576_SMT_GPIO2_OFFSET;
-+	} else if (bank->bank_num == 3) {
-+		*reg = RK3576_SMT_GPIO3_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 16) {
-+		*reg = RK3576_SMT_GPIO4_AL_OFFSET;
-+	} else if (bank->bank_num == 4 && pin_num < 24) {
-+		*reg = RK3576_SMT_GPIO4_CL_OFFSET - 0x8;
-+	} else if (bank->bank_num == 4) {
-+		*reg = RK3576_SMT_GPIO4_DL_OFFSET - 0xc;
-+	} else {
-+		*reg = 0;
-+		debug("unsupported bank_num %d\n", bank->bank_num);
-+	}
-+
-+	*reg += ((pin_num / RK3576_SMT_PINS_PER_REG) * 4);
-+	*bit = pin_num % RK3576_SMT_PINS_PER_REG;
-+	*bit *= RK3576_SMT_BITS_PER_PIN;
-+
-+	return 0;
-+}
-+
-+static int rk3576_set_schmitt(struct rockchip_pin_bank *bank,
-+			      int pin_num, int enable)
-+{
-+	struct regmap *regmap;
-+	int reg, ret;
-+	u32 data;
-+	u8 bit;
-+
-+	rk3576_calc_schmitt_reg_and_bit(bank, pin_num, &regmap, &reg, &bit);
-+
-+	/* enable the write to the equivalent lower bits */
-+	data = ((1 << RK3576_SMT_BITS_PER_PIN) - 1) << (bit + 16);
-+	data |= (enable << bit);
-+	ret = regmap_write(regmap, reg, data);
-+
-+	return ret;
-+}
-+
-+static struct rockchip_pin_bank rk3576_pin_banks[] = {
-+	RK3576_PIN_BANK_FLAGS(0, 32, "gpio0", IOMUX_WIDTH_4BIT,
-+			      0, 0x8, 0x2004, 0x200C),
-+	RK3576_PIN_BANK_FLAGS(1, 32, "gpio1", IOMUX_WIDTH_4BIT,
-+			      0x4020, 0x4028, 0x4030, 0x4038),
-+	RK3576_PIN_BANK_FLAGS(2, 32, "gpio2", IOMUX_WIDTH_4BIT,
-+			      0x4040, 0x4048, 0x4050, 0x4058),
-+	RK3576_PIN_BANK_FLAGS(3, 32, "gpio3", IOMUX_WIDTH_4BIT,
-+			      0x4060, 0x4068, 0x4070, 0x4078),
-+	RK3576_PIN_BANK_FLAGS(4, 32, "gpio4", IOMUX_WIDTH_4BIT,
-+			      0x4080, 0x4088, 0xA390, 0xB398),
-+};
-+
-+static const struct rockchip_pin_ctrl rk3576_pin_ctrl = {
-+	.pin_banks		= rk3576_pin_banks,
-+	.nr_banks		= ARRAY_SIZE(rk3576_pin_banks),
-+	.nr_pins		= 160,
-+	.grf_mux_offset		= 0x0,
-+	.set_mux		= rk3576_set_mux,
-+	.set_pull		= rk3576_set_pull,
-+	.set_drive		= rk3576_set_drive,
-+	.set_schmitt		= rk3576_set_schmitt,
-+};
-+
-+static const struct udevice_id rk3576_pinctrl_ids[] = {
-+	{
-+		.compatible = "rockchip,rk3576-pinctrl",
-+		.data = (ulong)&rk3576_pin_ctrl
-+	},
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_rk3576) = {
-+	.name		= "rockchip_rk3576_pinctrl",
-+	.id		= UCLASS_PINCTRL,
-+	.of_match	= rk3576_pinctrl_ids,
-+	.priv_auto	= sizeof(struct rockchip_pinctrl_priv),
-+	.ops		= &rockchip_pinctrl_ops,
-+#if CONFIG_IS_ENABLED(OF_REAL)
-+	.bind		= dm_scan_fdt_dev,
-+#endif
-+	.probe		= rockchip_pinctrl_probe,
-+};
-diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip.h b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-index df7bc684d29..5e3c9c90760 100644
---- a/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-+++ b/drivers/pinctrl/rockchip/pinctrl-rockchip.h
-@@ -458,6 +458,9 @@ struct rockchip_pin_bank {
- #define MR_PMUGRF(ID, PIN, FUNC, REG, VAL)	\
- 	PIN_BANK_MUX_ROUTE_FLAGS(ID, PIN, FUNC, REG, VAL, ROUTE_TYPE_PMUGRF)
- 
-+#define RK3576_PIN_BANK_FLAGS(ID, PIN, LABEL, M, O1, O2, O3, O4)	\
-+	PIN_BANK_IOMUX_FLAGS_OFFSET(ID, PIN, LABEL, M, M, M, M, O1, O2, O3, O4)
-+
- #define RK3588_PIN_BANK_FLAGS(ID, PIN, LABEL, M, P)			\
- 	PIN_BANK_IOMUX_FLAGS_PULL_FLAGS(ID, PIN, LABEL, M, M, M, M, P, P, P, P)
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index 422b8f7e4c8..7a72abaa38a 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -171,6 +171,7 @@ static int rockchip_dwmmc_bind(struct udevice *dev)
+ static const struct udevice_id rockchip_dwmmc_ids[] = {
+ 	{ .compatible = "rockchip,rk2928-dw-mshc" },
+ 	{ .compatible = "rockchip,rk3288-dw-mshc" },
++	{ .compatible = "rockchip,rk3576-dw-mshc" },
+ 	{ }
+ };
  
 -- 
 2.45.2
