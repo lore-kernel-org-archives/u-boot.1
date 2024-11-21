@@ -4,113 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49EB7D7877B
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 15:25:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07148D78782
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 15:53:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADB4A891AF;
-	Thu, 21 Nov 2024 16:25:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 25AA0894A7;
+	Thu, 21 Nov 2024 16:53:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="RPQY2oyz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="XC8ocf7r";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="RPQY2oyz";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="XC8ocf7r";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DNTKkV2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EF75891C4; Thu, 21 Nov 2024 16:25:01 +0100 (CET)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 02AD189426; Thu, 21 Nov 2024 16:53:45 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DCAA891AB
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:24:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAF3389658
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=schwab@suse.de
-Received: from hawking.nue2.suse.org (unknown
- [IPv6:2a07:de40:a101:3:92b1:1cff:fe69:ddc])
- by smtp-out1.suse.de (Postfix) with ESMTP id 7FFF721923;
- Thu, 21 Nov 2024 15:24:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1732202698; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UNrl5ZEANpbbHMI7JP2Kt8KM9MCQ4NvoOzdhroltUso=;
- b=RPQY2oyze7H0/36dZoRXa/dqkabLPj0jNO+f49Npfl3xwo9a+0NFUliOg3xJp8J0mMEO3R
- XRWEiBgqgYLohLzqJI7GmgFJHLts0e6nkN4E7vbyjcua9RCIxAuKLC+V+zWk/qPsvaGB93
- upnILytbANg93YmPOBLMrQa7/HGOJ6Y=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1732202698;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UNrl5ZEANpbbHMI7JP2Kt8KM9MCQ4NvoOzdhroltUso=;
- b=XC8ocf7rpCkfhQI4XMz6y9C00I4R6XiP0UlUjwmgBjMT5ZIwybz/GbM5vQqpdTKpmMsqVl
- JUQdK4ryup8ZzhBw==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=RPQY2oyz;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=XC8ocf7r
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1732202698; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UNrl5ZEANpbbHMI7JP2Kt8KM9MCQ4NvoOzdhroltUso=;
- b=RPQY2oyze7H0/36dZoRXa/dqkabLPj0jNO+f49Npfl3xwo9a+0NFUliOg3xJp8J0mMEO3R
- XRWEiBgqgYLohLzqJI7GmgFJHLts0e6nkN4E7vbyjcua9RCIxAuKLC+V+zWk/qPsvaGB93
- upnILytbANg93YmPOBLMrQa7/HGOJ6Y=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1732202698;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UNrl5ZEANpbbHMI7JP2Kt8KM9MCQ4NvoOzdhroltUso=;
- b=XC8ocf7rpCkfhQI4XMz6y9C00I4R6XiP0UlUjwmgBjMT5ZIwybz/GbM5vQqpdTKpmMsqVl
- JUQdK4ryup8ZzhBw==
-Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
- id D8E614A055F; Thu, 21 Nov 2024 16:24:55 +0100 (CET)
-From: Andreas Schwab <schwab@suse.de>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>,  Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,  Rick Chen <rick@andestech.com>,  Leo
- Yu-Chi Liang <ycliang@andestech.com>,  Hal Feng
- <hal.feng@starfivetech.com>,  Tom Rini <trini@konsulko.com>,  Chanho Park
- <chanho61.park@samsung.com>,  Aurelien Jarno <aurelien@aurel32.net>,  Nam
- Cao <namcao@linutronix.de>,  Jaehoon Chung <jh80.chung@samsung.com>,  E
- Shattow <lucent@gmail.com>,  u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-In-Reply-To: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
- (Heinrich Schuchardt's message of "Thu, 21 Nov 2024 15:25:20 +0100")
-References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
-Date: Thu, 21 Nov 2024 16:24:55 +0100
-Message-ID: <mvmjzcwobi0.fsf@suse.de>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4316cce103dso12383405e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 07:53:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732204422; x=1732809222;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=osO/4iK97X1YmUEeqSjhTR2QzbxZx4YWrk0nbnyY4QI=;
+ b=DNTKkV2PL35nTX5RwjT9gOrPs+8YwqIwLRV46n1Qdjo7MkjEtULbLCyWzUvswU92Dc
+ CZxNJg/VmUSAp43IgiO8Mrr1CYwZEGTNRT2QS5HvdS1Jw0jB6XBydBv7R8cjDpLl+jXH
+ IfLnGDMv6LI27tPfUrvu8USyOr3IoI6oC2GAVpb3HNd6ZL3vpAEaDPWsH9xSu56/ufNW
+ 7Yb2coOKiLY32MSH/9vQMc2BTLMGVLyFUU/wlZnSca4MdC3aNn80iQUxZwvhInliPzDB
+ Iv2LAukAJDHAgpdIlVFi7nB5YN2ty1v519Af8g+Vw1rZZOsUt4VFHWtLjt+5SmnOQchb
+ ldzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732204422; x=1732809222;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=osO/4iK97X1YmUEeqSjhTR2QzbxZx4YWrk0nbnyY4QI=;
+ b=mPlPDO10sIjJ/r9OVcvFjs0tN3bXxcU7sh65oNIlBTEgKYlN4hRcV4jjbIjRgrdZlX
+ cEi05GQj24L9X6MaJIz6TSJIbg/ehywtvWpADqF8RHhs3Tv2Hwsqd6u1tnX6uTrFHkEH
+ ts5MK7HnbCS/NTCUIX291KPwKhHbatPAI6m4pOco/oBfnNLmpw/4g5UVw6gjg5aBWBTE
+ 8KlhqNrzWuC59yvQ/A7FeKStYP2/sNyUfyZK1KrNOwrd2ozon1hPb1fBL1IVe24J38VD
+ GLKoUefmjrIQaJ/PgkBhRg6ufCiy6F8vmZezqHUMcOTP7v7buish1Bo8lPTVwP0NGD3Y
+ RDXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWUj+NOb93nzpQodY3Ek6J0mATkp3+7JqNvcrFEl8PvsVrQn7cHDSt3UcbuOLiqe3If2QF1fRY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxlDzd3BwbMcNF4kSPQJys8AYvu0jwxWS/PjUj20ndub+4O3bEt
+ z/ivyKSSg2gL+sHb+gq8sRtnoSAFvxymS7VvlTkJRTMMX8IJ4yr2DN5ay7mw8Ec=
+X-Gm-Gg: ASbGncumcemulwtOmJT1f/2a0tXFxzrYJaGjF73t50hsG0RfUCLVpMjysDyRsjZqR3l
+ LJGOBTRGBm/vH8kjBpHxaDaytJd9fGj+AvPf4+pWSK42bxBRfao5sIhsoo52xmbSqvqTpUoDKis
+ q1k8iKXb8A0y2834Njt+8JDSEeVJmY2V8BeAKtfgpiwX+XVFAa9qOOStY0Lk29ykLxyZpiRme8m
+ Gb1jdDUGA5kwrB3S9SbWlu7tyX4KPYQ6kUYaz8hejWXWjauvhGpcQ==
+X-Google-Smtp-Source: AGHT+IGVcmQQamiK+Scv9JjnE69CLRoZpLt5BXPBrXyKKuE/LsNtZd8z8oBORajZjf/EvYXpQR5FlQ==
+X-Received: by 2002:a05:600c:1e10:b0:431:542d:2599 with SMTP id
+ 5b1f17b1804b1-4334f015482mr68016055e9.22.1732204422068; 
+ Thu, 21 Nov 2024 07:53:42 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-433b01e117bsm63527995e9.8.2024.11.21.07.53.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Nov 2024 07:53:41 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>, Tom Rini
+ <trini@konsulko.com>, Simon Holesch <simon@holesch.de>, Ion Agorria
+ <ion@agorria.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/1] usb: ci_udc: don't use "advance" feature when
+ setting address
+In-Reply-To: <CAPVz0n00AoaUV45kM__ADe=jA9XxqWzJiOP8UrOtaAG4TsCZtg@mail.gmail.com>
+References: <20241013145820.85426-1-clamor95@gmail.com>
+ <20241013145820.85426-2-clamor95@gmail.com>
+ <6f3ce823-93e8-46b5-86f3-52038efc5271@denx.de>
+ <CAPVz0n1dHC9VTgxgPmh=bUg1Ei1Wnamopbpjiyz81YxeFtfdWg@mail.gmail.com>
+ <CAPVz0n1F043u8HNvmm-cU=oUjk17tR17Em+g2o+Z8idqq5NM4Q@mail.gmail.com>
+ <87y11cltzg.fsf@baylibre.com>
+ <CAPVz0n00AoaUV45kM__ADe=jA9XxqWzJiOP8UrOtaAG4TsCZtg@mail.gmail.com>
+Date: Thu, 21 Nov 2024 16:53:37 +0100
+Message-ID: <87jzcwlh1a.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Spamd-Result: default: False [2.59 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- HFILTER_HOSTNAME_UNKNOWN(2.50)[]; RDNS_NONE(2.00)[];
- ONCE_RECEIVED(1.20)[];
- HFILTER_HELO_IP_A(1.00)[hawking.nue2.suse.org];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- HFILTER_HELO_NORES_A_OR_MX(0.30)[hawking.nue2.suse.org];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-0.994]; RCVD_NO_TLS_LAST(0.10)[];
- MIME_GOOD(-0.10)[text/plain]; MX_GOOD(-0.01)[];
- RCPT_COUNT_TWELVE(0.00)[13];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- ARC_NA(0.00)[]; MIME_TRACE(0.00)[0:+];
- DIRECT_TO_MX(0.00)[Gnus/5.13 (Gnus v5.13)];
- FUZZY_BLOCKED(0.00)[rspamd.com];
- FREEMAIL_ENVRCPT(0.00)[gmail.com];
- FREEMAIL_CC(0.00)[starfivetech.com,linaro.org,andestech.com,konsulko.com,samsung.com,aurel32.net,linutronix.de,gmail.com,lists.denx.de];
- TO_DN_SOME(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- MID_RHS_MATCH_FROM(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- RCVD_COUNT_ONE(0.00)[1];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:mid,suse.de:email]
-X-Rspamd-Queue-Id: 7FFF721923
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Bar: ++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,14 +103,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Nov 21 2024, Heinrich Schuchardt wrote:
+Hi,
 
-> Our MMC driver for JH7110 boards only supports reading to the low 4 GiB of
-> memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUFFER.
+On jeu., nov. 21, 2024 at 13:15, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
 
-That doesn't change the situation with the booting problem I have.
+[...]
 
--- 
-Andreas Schwab, SUSE Labs, schwab@suse.de
-GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
-"And now for something completely different."
+>> > If no other comments were proposed, may this patch be applied?
+>>
+>> Ah, sorry, i've been waiting for a v2 patch that includes a link to the
+>> related kernel commit as asked in [1].
+>>
+>> Do you want me to fixup the commit message locally or will a v2 be send?
+>>
+>> Thanks!
+>> Mattijs
+>>
+>> [1] https://lore.kernel.org/all/87sesxzo2o.fsf@baylibre.com/
+>
+> Both options are acceptable, it is up to you, what to choose.
+
+Please send a v2 then. Thanks
