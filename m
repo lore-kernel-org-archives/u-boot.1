@@ -4,124 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84632E64025
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 22:38:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533C5E64039
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 22:42:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DE91896ED;
-	Thu, 21 Nov 2024 23:38:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id C900C896C2;
+	Thu, 21 Nov 2024 23:42:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WUKuSsJt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PUerfXnq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D678B89776; Thu, 21 Nov 2024 23:38:31 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 349F6896C5; Thu, 21 Nov 2024 23:42:08 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ADE6896D4
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 23:38:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9A8D8919F
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 23:42:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241121223824epoutp0387bc1dfd59089daadacf640635aba3e8~KHNRLc0T82046220462epoutp03t
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:38:24 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241121223824epoutp0387bc1dfd59089daadacf640635aba3e8~KHNRLc0T82046220462epoutp03t
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1732228704;
- bh=3qLVJh0w0umtX5axOHpjRWlOKxOKVwzKn+4A3C/twek=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=WUKuSsJtzG3dhdMHb/A2td0m2YK2xBBw0ieLCevaO/C8zoK3tIYNblJoT7cWHqTCt
- 0/SE9TFBgYHGQ3yyHs30TAE83KNQnIZOFbS1Xwirk6Rr2cAaITehTdQzh3putRI2fi
- JjsS5KleCi6PcopI8Al+bDkK/D35uhqyZqOkrkgI=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20241121223824epcas1p41c1d40575ce4fbecfe5b9293fa5459a1~KHNQespOx0083700837epcas1p4e;
- Thu, 21 Nov 2024 22:38:24 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.134]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4XvY6R1Jgkz4x9Pp; Thu, 21 Nov
- 2024 22:38:23 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 50.10.41722.F56BF376; Fri, 22 Nov 2024 07:38:23 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20241121223821epcas1p4da43f25dd75dc7c5d57874378406e5f8~KHNOglGsF1467814678epcas1p4Q;
- Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241121223821epsmtrp260518811fdc9f37ada8e1c8198bc37a5~KHNOf2zsn0500705007epsmtrp2S;
- Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
-X-AuditID: b6c32a33-11bfb7000001a2fa-3b-673fb65f0a2d
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- C3.DC.18937.D56BF376; Fri, 22 Nov 2024 07:38:21 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241121223821epsmtip2ab0093236c14d3fbbc1cf3cf892d9f9f~KHNONoVEL0681206812epsmtip2G;
- Thu, 21 Nov 2024 22:38:21 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Heiko Stuebner'" <heiko@sntech.de>, <sjg@chromium.org>,
- <philipp.tomsich@vrull.eu>, <kever.yang@rock-chips.com>
-Cc: <lukma@denx.de>, <seanga2@gmail.com>, <peng.fan@nxp.com>,
- <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <jonas@kwiboo.se>,
- <quentin.schulz@cherry.de>, <detlev.casanova@collabora.com>,
- <u-boot@lists.denx.de>, <sebastian.reichel@collabora.com>
-In-Reply-To: <20241121142731.1202209-18-heiko@sntech.de>
-Subject: RE: [PATCH 17/20] mmc: rockchip_sdhci: Add support for RK3576
-Date: Fri, 22 Nov 2024 07:38:21 +0900
-Message-ID: <000401db3c66$11974a60$34c5df20$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQJUeDCn5J2CwOuZwyaxWoAdnWczjwKPMoj3AT0SU+OxsXmS0A==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLJsWRmVeSWpSXmKPExsWy7bCmnm78Nvt0g1WbWSzu/X/FaPH/0WtW
- i087H7NanHxzlcVi2/SfbBbP311msvix6gurRffKaov1l7exWxz+fJbdYuu9CUwWd1/7WXzb
- so3R4u3eTnYHPo+3T6cwesxuuMjisePuEkaPebNOsHjsnHWX3ePEhEtMHmfv7GD0uH5mO5PH
- xnc7mDz+ztrP4rH92jxmj523HzIF8ERl22SkJqakFimk5iXnp2TmpdsqeQfHO8ebmhkY6hpa
- WpgrKeQl5qbaKrn4BOi6ZeYA/aKkUJaYUwoUCkgsLlbSt7Mpyi8tSVXIyC8usVVKLUjJKTAt
- 0CtOzC0uzUvXy0stsTI0MDAyBSpMyM54dnYrS8FqgYq286eZGhgv8nYxcnJICJhI9DU/Zu1i
- 5OIQEtjBKPHt+AMWCOcTo8TFvlMIzt+tc1hhWrbPfcgMkdjJKPH5eSMbhPOSUWLL9eNMIFVs
- AnoS/xctZAaxRQTKJSa9OMUEUsQs8J9RYtKi52AJTgELiW3zvjKC2MICbhKHdx8Ca2YRUJXo
- 3bCIHcTmFbCU2H2nnRFitYLEz6fLwM5gFhCRmN3ZBrXASWL/3rdgX0gInOCQ+LB/NgtEg4tE
- 4/rfULawxKvjW9ghbCmJz+/2skE0NDNKLF1yEKq7h1HiX8N1NogqY4n9SycDncQBtE5TYv0u
- fYjNfBLvvvawgoQlBHglOtqEIKpVJC69fskEM//uk//Q8PKQ+L7hCCKIm/c9ZZ7AKD8LyROz
- EDYsYGRaxSiWWlCcm56abFhgCI/N5PzcTYzgdKxlvIPx8vx/eocYmTgYDzFKcDArifA6KNmn
- C/GmJFZWpRblxxeV5qQWH2I0BQblRGYp0eR8YEbIK4k3NLE0MDEzMjaxMDQzVBLnPXOlLFVI
- ID2xJDU7NbUgtQimj4mDU6qByf/86xv3JrrL9jTdUj3J+093rcSNbwc2vzxvKZ+re1I/MbFk
- R7nxQ6XG2Rl32Lj2c38qnSD4VbQs+vL6Zhf5Wp4uEUuPaT07HrNbe3WUWufqSe6qVJsnFDDX
- IcF4u1/X/Clv3Yq9O6/FLPAw/c8jNvHMMfZ9inN4vXfn+6f/VkqKuSW8L/O72o+6fxeVs7nq
- XzH3dPvPts3z+p2TprIsOU+W+1KQ6P4ve9Zuv/dJuLT4AWvmVotA3bvOQbyrjkYK560rvD6z
- eeHnjwsvS6z65xgqvOSH43rTbOVNe78fyaraVpp3NqdTLCwt1mb3jQ07PDl7DUrjt2v1l4bV
- zOG+EzXJXmP1zfbZPy6EmWoqsRRnJBpqMRcVJwIAMts82VAEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLLMWRmVeSWpSXmKPExsWy7bCSvG7sNvt0g50bDS3u/X/FaPH/0WtW
- i087H7NanHxzlcVi2/SfbBbP311msvix6gurRffKaov1l7exWxz+fJbdYuu9CUwWd1/7WXzb
- so3R4u3eTnYHPo+3T6cwesxuuMjisePuEkaPebNOsHjsnHWX3ePEhEtMHmfv7GD0uH5mO5PH
- xnc7mDz+ztrP4rH92jxmj523HzIF8ERx2aSk5mSWpRbp2yVwZTw7u5WlYLVARdv500wNjBd5
- uxg5OSQETCS2z33I3MXIxSEksJ1RYv/B24wQCSmJz0+nsnUxcgDZwhKHDxdD1DxnlOhomcUM
- UsMmoCfxf9FCMFtEoFrix7ynbCBFzALdTBJPn21ghejYwihx4G4f2FROAQuJbfO+gtnCAm4S
- h3cfYgKxWQRUJXo3LGIHsXkFLCV232mHukJB4ufTZawgNrOAiMTszjaobU4S+/e+ZZ3AKDAL
- SWoBI+MqRtHUguLc9NzkAkO94sTc4tK8dL3k/NxNjOAY0grawbhs/V+9Q4xMHIyHGCU4mJVE
- eB2U7NOFeFMSK6tSi/Lji0pzUosPMUpzsCiJ8yrndKYICaQnlqRmp6YWpBbBZJk4OKUamJJq
- vz0wKl978HRv8o/HyXayWn/WZ3W2uuvdmW4k37ZGyzxA49CsdbNkMhjy1bQTgm9+2F9UtOOt
- 9cWCMMOakk/y699/8ZshHtFfIcS1LGhP8TzxxDijnLtSz8xljD/NLWVK+HKoJqNWYfpm7xa1
- 0sMvQhc9aPrXkag0P1VB/cL7MFWx5oVCemxvtr4Jru3rqNy4qTZ2t/+UKRcb/H/ed7Y40WQ9
- +3/sZa9y1zsLl67pO5psJDLFR3h7RePKIw67ylepPblj18DDw76gsnZ9l6FjQ15a2C/hf3fX
- 3Zr4pnjOslnmp9Kqrnhs81a4Xbzt+yythboVf2fyxr1esrJOp5SL7a/V3vcLMzYasjvbK7EU
- ZyQaajEXFScCAHIxItAQAwAA
-X-CMS-MailID: 20241121223821epcas1p4da43f25dd75dc7c5d57874378406e5f8
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241121143117epcas1p16bfa5e48951ade1050b4958bfd8f24f1
-References: <20241121142731.1202209-1-heiko@sntech.de>
- <CGME20241121143117epcas1p16bfa5e48951ade1050b4958bfd8f24f1@epcas1p1.samsung.com>
- <20241121142731.1202209-18-heiko@sntech.de>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ffa12ad18cso11572401fa.2
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 14:42:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732228925; x=1732833725; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SxJRfPZo5yGcaWJaBwIRIgX6E8NGo7ZT6qBJtS2y/Hs=;
+ b=PUerfXnqPzIqtTbqHCK1FGZRO0DbypgRFSC6+Bx4PMClq575DNkzc/XmEl+XT3Ynjr
+ 02ia0+B62opcwOW11vbVNJttz00Giw2ovK48bOMJoX9syCJk5Hg9DKK1wVp1w1GN5tt9
+ xC9chnga8L2aMt4Y4xDvEBLTQHj2o5jaPx/4c/cPiIG4uqT5ZEsZZqff3mH/fDHFtUUz
+ cEsekkNErINWwLENsqPsoBO1tsdzzXUkF1DdfU5Cc1vysyPlNz6JpXX1geFs9dU6AEKe
+ EulcnCyByqTKYfOlGeO3m3l6N9SfSrd2mPnQjbY9CrXwh/SJ0GJA69SU3DJ5f6TnybZi
+ zy1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732228925; x=1732833725;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SxJRfPZo5yGcaWJaBwIRIgX6E8NGo7ZT6qBJtS2y/Hs=;
+ b=WmOas9NgaR3DalL+oLsZrNDQeqG198N6Si88wS4qv+qVgb1n3LYKAPrsouxDcRoayD
+ EvwmaXdI7Us7ykKuiHCcT/Jj/ojrB12oF/90y4Lwd65wqV0qAOcFLWH94OiztC6dv8Ri
+ tQQ0ks/Absvaxk9qI86ULfc2h7RfqRCM5YFa8kC5e3qGIGvXJyU59wyQvkLGFCQ4Utpt
+ am/kHgoZuXTMATrzxsiVanLEhv5myS4Tgo0t/dEUqg1jvZRPEHvv11C9NevO557v7hnZ
+ sBaxly96O2TvGHB+L4hvaF8GAnfJYWD1DpxgIvPcQFf0yRa6kCjCNYINHe0lPxzKnmRF
+ 36yg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVObNnEGrSUBakQvHGdmYeQbjuYEpVIeuNaJVOgDsDC3E8AQf2bhVw+8Dut/RCPuYqOZNRxHtA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqmGFOv9wiQUGgm8M/YTXURFUT/Jak0d2RSoEE20JR9dvYpFBa
+ CkJEn2eqJtdDcZ73wU9vKTA+dT+tI8XFazmmllFijhDG2QYk5i5SH9wZE/8P/vzKXovIu2Hxk9e
+ 9efK3QzkV8b9LY3nHZlHdNL0IFJk=
+X-Gm-Gg: ASbGncvAnTamR7wQRKieoDaGFzcMMP9t8C5Kfxf/ciDdmM8abVamkBAd3+5hLZx/8Yh
+ 8pnqLElnHci8Kk2ErrPX1tlD+7oprpmVVbny0/gcQFZ3i1a8FW07uIH9FkNd1i2UNkg==
+X-Google-Smtp-Source: AGHT+IEh7IaQ9jhn6jgRy8xe996yHnXzW5zAjjcvRAbA6TkkP0DCpk6R7LLKP05r9cXV+Y/5nqk+DLyzJ8lahnkwjZQ=
+X-Received: by 2002:a05:651c:1990:b0:2f9:ce91:dea9 with SMTP id
+ 38308e7fff4ca-2ffa71811acmr2439051fa.32.1732228924654; Thu, 21 Nov 2024
+ 14:42:04 -0800 (PST)
+MIME-Version: 1.0
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+ <mvmjzcwobi0.fsf@suse.de> <a6a1d0cb-c363-47bf-aa91-b3c2ad2fd5b9@canonical.com>
+In-Reply-To: <a6a1d0cb-c363-47bf-aa91-b3c2ad2fd5b9@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 21 Nov 2024 14:41:52 -0800
+Message-ID: <CANV2PTNnOC43iYnyoczWev+2vAjKR+BEU5o1rEyZqr4uPVaJ8Q@mail.gmail.com>
+Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Andreas Schwab <schwab@suse.de>, Minda Chen <minda.chen@starfivetech.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rick Chen <rick@andestech.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>, Chanho Park <chanho61.park@samsung.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,66 +97,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-> -----Original Message-----
-> From: Heiko Stuebner <heiko@sntech.de>
-> Sent: Thursday, November 21, 2024 11:27 PM
-> To: sjg@chromium.org; philipp.tomsich@vrull.eu; kever.yang@rock-chips.com
-> Cc: heiko@sntech.de; lukma@denx.de; seanga2@gmail.com; peng.fan@nxp.com; jh80.chung@samsung.com;
-> joe.hershberger@ni.com; rfried.dev@gmail.com; jonas@kwiboo.se; quentin.schulz@cherry.de;
-> detlev.casanova@collabora.com; u-boot@lists.denx.de; sebastian.reichel@collabora.com
-> Subject: [PATCH 17/20] mmc: rockchip_sdhci: Add support for RK3576
+On Thu, Nov 21, 2024 at 8:05=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Add support for RK3576 to the rockchip sdhci driver.
+> On 21.11.24 16:24, Andreas Schwab wrote:
+> > On Nov 21 2024, Heinrich Schuchardt wrote:
+> >
+> >> Our MMC driver for JH7110 boards only supports reading to the low 4 Gi=
+B of
+> >> memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUF=
+FER.
+> >
+> > That doesn't change the situation with the booting problem I have.
+> >
 >
-> It's pretty similar to its cousins found in the RK3568 and RK3588 and the
-> specific hs400-tx-tap number was taken from the vendor-u-boot.
+> Do you relate to
+> https://lore.kernel.org/u-boot/mvm8qtnv310.fsf@suse.de/
+> where you had some problem reading the FAT file system and which was for
+> as system with only 4 GiB of memory?
 >
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> ---
->  drivers/mmc/rockchip_sdhci.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+> In E Shattow's case on a board with 8 GiB the file was read without
+> error but then reported as not being an EFI binary.
 >
-> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-> index da630b9d97a..9571e7d66c9 100644
-> --- a/drivers/mmc/rockchip_sdhci.c
-> +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -656,6 +656,14 @@ static const struct sdhci_data rk3568_data = {
->  	.hs400_txclk_tapnum = 0x8,
->  };
+> Best regards
 >
-> +static const struct sdhci_data rk3576_data = {
-> +	.set_ios_post = rk3568_sdhci_set_ios_post,
-> +	.set_clock = rk3568_sdhci_set_clock,
-> +	.config_dll = rk3568_sdhci_config_dll,
-> +	.hs200_txclk_tapnum = DLL_TXCLK_TAPNUM_DEFAULT,
-> +	.hs400_txclk_tapnum = 0x7,
-> +};
-> +
->  static const struct sdhci_data rk3588_data = {
->  	.set_ios_post = rk3568_sdhci_set_ios_post,
->  	.set_clock = rk3568_sdhci_set_clock,
-> @@ -673,6 +681,10 @@ static const struct udevice_id sdhci_ids[] = {
->  		.compatible = "rockchip,rk3568-dwcmshc",
->  		.data = (ulong)&rk3568_data,
->  	},
-> +	{
-> +		.compatible = "rockchip,rk3576-dwcmshc",
-> +		.data = (ulong)&rk3576_data,
-> +	},
->  	{
->  		.compatible = "rockchip,rk3588-dwcmshc",
->  		.data = (ulong)&rk3588_data,
-> --
-> 2.45.2
+> Heinrich
+>
+>
 
+Hi,
 
+Test failed for both boards here with origin/master then applying this
+series, then starfive_visionfive2_defconfig target and set
+CONFIG_BOOTSTD=3Dn following with oldconfig target.
 
+Testing failed on 4GB Star64:
+
+Hit any key to stop autoboot:  0
+Unknown command 'bootflow' - try 'help'
+StarFive # bootefi bootmgr
+Card did not respond to voltage select! : -110
+Not a PE-COFF file
+Loading Boot0000 'mmc 0' failed
+Booting: nvme 0
+error: no such partition.
+grub rescue>
+
+The grub EFI loader from EFI System Partition on eMMC fails to load.
+The same EFI System Partition data on NVMe is successful.
+
+Testing failed on 8GB Mars CM Lite:
+
+Hit any key to stop autoboot:  0
+Unknown command 'bootflow' - try 'help'
+StarFive # bootefi bootmgr
+Card did not respond to voltage select! : -110
+Failed to load EFI variables
+Error reading cluster
+Loading Boot0000 'mmc 0' failed
+EFI boot manager: Cannot load any image
+
+We see that the grub EFI loader from this EFI System Partition fails
+to load from MMC (SD Card).
+
+Procedure that was used to update SPI NOR flash on either board
+includes sanitizing the environment variable storages:
+env erase; env default -a -f; sf probe; dhcp; env set serverip <ip
+address of tftp server>
+tftpboot $loadaddr u-boot-spl.bin.normal.out; sf update $loadaddr 0 $filesi=
+ze
+tftpboot $loadaddr u-boot.itb; sf update $loadaddr 100000 $filesize
+fatrm mmc 0:1 ubootefi.var
+
+This does not say anything for or against the validity of the patch
+series as the root cause is a limitation of the dw mmc driver on
+JH7110 not resolved here.
+
+-E
