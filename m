@@ -4,50 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0A9D75BB9
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C97BD75BBB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:27:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26A6D89692;
+	by phobos.denx.de (Postfix) with ESMTP id 86D0889699;
 	Thu, 21 Nov 2024 06:26:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732166782;
-	bh=FZpdWdNKPa8UE9QJ8n+pmNNrYrN6/mGXlBVpZ5/w1GE=;
+	bh=s+BIShXZuTF9i3XFqjJoCA+ilx8X9nS+XH2X02mWep8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oUXm1grahOWsLbxCD8nMgnTV18b+Um5kIy/jR62kPth4vI3PU4gEFaY9/vwSOm15q
-	 lFd3zi5mXdq33msC3Ojy5gn1abNCYQglNZQyBecnWU/BvxxqUm8yV1BTZCiSfnUx9W
-	 mkrjunptqMMEezZqSgVJVlusg+qkhWlFbNXZMB52j7l7kGJmGpbxOLArOe6T3jiGeI
-	 Ud4T1UK61WQ2DNrBBuwKKGc/4i08/twz1GZr/AyYAORlgZ80N2CON5H+x2nK0O8t5b
-	 Gt9Gg4U2/ZIaY2U29w7Zws4cxOmotsWE5C+pKFx3q2JBgI1GuNc408Lb7bjlWreP/q
-	 1bgN+StEenymA==
+	b=rrYBpmw+Vm2jb7vyPY4iuyYY4tZfW/vFsa3zdRepa4zcYJiwTyQ6VTPGj3MjgFrF1
+	 efPlKz3jE/DPwJ+k77ZAQZQYx9FJj7/rl95LZ1UcpcbRAotOiES+B1QNlJWBrCJrfx
+	 lKZpRqt8NCyl4fBe3LM3Bzdy1Hd1CDg5zFmd1sHlgM6fUTXVUgtVGxnou74P5ERCOy
+	 4cgfpRzEQKf6qndljS3jjlL5uB6DlBRVVhwatHhMxlC+iAGcWDhFZBKMLPYAe0rK13
+	 wbItXngtnlq2KtxeN2N8mDndGPdwzzWWUPwCryWGTkuiKBLNjZuCrhnQLtv1YB5ku9
+	 95JKQcmcAwG1g==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AC18C89654;
- Thu, 21 Nov 2024 06:26:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 669FE89668;
+ Thu, 21 Nov 2024 06:26:18 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732166778;
- bh=FZpdWdNKPa8UE9QJ8n+pmNNrYrN6/mGXlBVpZ5/w1GE=;
+ s=phobos-20191101; t=1732166779;
+ bh=s+BIShXZuTF9i3XFqjJoCA+ilx8X9nS+XH2X02mWep8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EOI93Z65hYQCega0tG1suTzVlGiHnVOb1kTJ6f5viMpll88cIBLLV+tVJ6TtPvqsH
- BkhHa1Y2mo+j7IiJnJfTEL/NdQmzRoBFv1TU25W8xgryHUcd27ZFvuA6ZBkxmcVfPk
- GbZ8CEhcVLpiej9mu1pJcNCUJDVahN9t0czBuvRko0+n/nh4BMt133JmeNH2ejm7q7
- 2ztgMdulC/e0oZ4dquqcnMPgqTF0tHkpKp76WqmZwbnCbgPBWsXru3Zdq35RNqiVsU
- DzPhMu5IGCeLM1rrxBubuxYB1UUYfT5jtdtuiCoSHSU78CTPt9Tx03b6aHcYRcs++j
- q1ZdFvp6WENyw==
+ b=QfjVkSnMY66yRc9RbJJL17FMtZ9xdLHLqVFlDOjW11sblYaNh/XaFWxLA3cU00SuA
+ HJLaGhOjjCCL2pUYC/ngGt3qNxy9ER6fdA39q/8VwpQEFiApylgU/vGSL4bnK/b5ms
+ sIuk4mOTTNnxMxJ8nM/j4xWKAhpgtbP8k2TV8vkqSpueywp++dIlH0uLh8jmZMrjnB
+ WmuKJXD0Drkf/MmnHB2PECE8jAYUT1KOXO/+eSlYbvSrXfEMJ8POObZ816afDPW8vm
+ C87uQewL15gafdubGaiaWwHTuX8tLhrkWgPaS/ItflRsQqyRsSSDaosBNYQksFTlxL
+ nVjo4lQMCO7zw==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 10/20] siemens: imximage.cfg: sync image names
-Date: Thu, 21 Nov 2024 06:25:51 +0100
-Message-Id: <20241121052601.72880-11-hs@denx.de>
+ Anatolij Gustschin <agust@denx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 11/20] siemens: configs/capricorn_cxg3_defconfig: updates
+Date: Thu, 21 Nov 2024 06:25:52 +0100
+Message-Id: <20241121052601.72880-12-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241121052601.72880-1-hs@denx.de>
 References: <20241121052601.72880-1-hs@denx.de>
@@ -69,44 +72,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sync the image names in imximage.cfg with
-the ones used in arch/arm/dts/imx8qxp-u-boot.dtsi
+make savedefconfig and add SCU_WDT and fix environment
+offsets, as since silicon c0 the boot container takes place
+at offset 0 and so the u-boot-env must be moved outside of
+the boot container area.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+
 ---
 
-(no changes since v1)
+Changes in v3:
+- use renamed Kconfig symbol CONFIG_WDT_SIEMENS_PMIC
 
- board/siemens/capricorn/imximage.cfg | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+Changes in v2:
+- add comments from Fabio
+  fix typo: silicium -> silicon
+- add Reviewed-by from Alexander
+- use renamed Kconfig symbol CONFIG_WDT_SCU_PMIC
 
-diff --git a/board/siemens/capricorn/imximage.cfg b/board/siemens/capricorn/imximage.cfg
-index f73c5a7a9b0..7fd3fb8b72e 100644
---- a/board/siemens/capricorn/imximage.cfg
-+++ b/board/siemens/capricorn/imximage.cfg
-@@ -15,12 +15,18 @@ DCD_SKIP true
- 
- /* SoC type IMX8QX */
- SOC_TYPE IMX8QX
--/* Append seco container image */
--APPEND ahab-container.img
-+/*
-+ * Append seco container image,
-+ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
-+ */
-+APPEND mx8qxc0-ahab-container.img
- /* Create the 2nd container */
- CONTAINER
--/* Add scfw image with exec attribute */
--IMAGE SCU capricorn-scfw-tcm.bin
-+/*
-+ * Add scfw image with exec attribute
-+ * use same name as in arch/arm/dts/imx8qxp-u-boot.dtsi
-+ */
-+IMAGE SCU mx8qx-mek-scfw-tcm.bin
- 
- /* Add SPL image with exec attribute */
- IMAGE A35 spl/u-boot-spl.bin 0x00100000
+ configs/capricorn_cxg3_defconfig | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/configs/capricorn_cxg3_defconfig b/configs/capricorn_cxg3_defconfig
+index ce820e2c54f..dc40880b1f7 100644
+--- a/configs/capricorn_cxg3_defconfig
++++ b/configs/capricorn_cxg3_defconfig
+@@ -10,7 +10,7 @@ CONFIG_NR_DRAM_BANKS=3
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80200000
+ CONFIG_ENV_SIZE=0x2000
+-CONFIG_ENV_OFFSET=0x0
++CONFIG_ENV_OFFSET=0x200000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx8-capricorn-cxg3"
+ CONFIG_SPL_TEXT_BASE=0x100000
+@@ -25,7 +25,7 @@ CONFIG_SPL_BSS_MAX_SIZE=0x1000
+ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_SYS_LOAD_ADDR=0x80280000
+ CONFIG_SPL=y
+-CONFIG_ENV_OFFSET_REDUND=0x2000
++CONFIG_ENV_OFFSET_REDUND=0x202000
+ CONFIG_IDENT_STRING=" ##v01.06"
+ CONFIG_REMAKE_ELF=y
+ # CONFIG_EFI_LOADER is not set
+@@ -55,9 +55,10 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+ CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x120000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x3000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x4000
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+-CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x800
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
+ CONFIG_SPL_POWER_DOMAIN=y
+ CONFIG_SPL_WATCHDOG=y
+ CONFIG_HUSH_PARSER=y
+@@ -112,10 +113,13 @@ CONFIG_PHYLIB=y
+ CONFIG_MV88E61XX_SWITCH=y
+ CONFIG_MV88E61XX_CPU_PORT=5
+ CONFIG_MV88E61XX_PHY_PORTS=0x7
++CONFIG_DM_ETH_PHY=y
+ CONFIG_FEC_MXC_SHARE_MDIO=y
+ CONFIG_FEC_MXC_MDIO_BASE=0x5B050000
+ CONFIG_FEC_MXC=y
+ CONFIG_MII=y
++CONFIG_PHY=y
++CONFIG_NOP_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8=y
+@@ -129,5 +133,7 @@ CONFIG_DM_SERIAL=y
+ CONFIG_FSL_LPUART=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_SCU_THERMAL=y
+-# CONFIG_SPL_WDT is not set
++# CONFIG_WATCHDOG is not set
++CONFIG_WDT=y
++CONFIG_WDT_SIEMENS_PMIC=y
+ CONFIG_SPL_TINY_MEMSET=y
 -- 
 2.20.1
 
