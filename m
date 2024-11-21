@@ -4,84 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EE60D75BB9
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F066DD75BBB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:26:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75E91895FE;
-	Thu, 21 Nov 2024 06:13:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 480E28966B;
+	Thu, 21 Nov 2024 06:26:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E6dmIqY2";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0785789617; Thu, 21 Nov 2024 06:13:50 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A611F895FE
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 06:13:47 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa2099efdc3so321231466b.1
- for <u-boot@lists.denx.de>; Wed, 20 Nov 2024 21:13:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732166027; x=1732770827; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lMewSwji3V0KZOl1gfk1MwbswtaVbnnQ+VxJrZEZuG4=;
- b=E6dmIqY2PYYDQyTCswKQCYq2HkKpfzZOtc4FrapFqXfIjSrlIQLNwVeL+ZyXyuLmV/
- VHAGJf3IouApVt63sdZPUt88wy2KEh/Zm78kvqr4PEhETHDPYr+iRTV/KalqLiFoF/Xl
- K6esQwhXQ+SPDbQQCc8BgUOehpBqFpWwQcYN6OtEc/pEUtbwbOWBWb3Uhue8/EHm8DKL
- WrdzerECIFqZVM0WaCczCxOAoyqDsU7I4McqIT96fniklbhuV1jH4EtTDluaEt14D95C
- v35POkryCyo1sIclZGnomyWEf1kJ4/Fz1KkpCh2kI2AmtUNxFgmTFLiQj37I8nD8gRUi
- tbZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732166027; x=1732770827;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lMewSwji3V0KZOl1gfk1MwbswtaVbnnQ+VxJrZEZuG4=;
- b=ewThXVMi88zgD1vcsI5F6zTbhUx0I7pGeuY+V5JJ0q/ZO7NQ6TmeELlVpJXGVKFYAc
- fTciPQCyNHnynmMNq5qRx9K4RuFVoKLhSf3ORRRHriUMCNp5P/IWO8T6fqj4qhFsAPJx
- Lo6Ibyl8TSbLwWPTKT4MTLoPn2iGdgpGfRI/xxh/klELd6clN1bJtj8RLUGcSGB1kGHs
- t7gbIyhJRmRjPBsFsV58Wsb+Z4bNRuGD8RKYgXBsH9GIlWa0s0e0E4ADrBXyqCR3IH8L
- PA7NVYxniE0sMTR969ptyuDBE+SVBQCTa/IgyeTCHCMF5EZTcJ+9Bj0DrgdHq+Ac661e
- xhuA==
-X-Gm-Message-State: AOJu0YwCk2jg3wc8VNN2toPXYprw03S1Vh18FeGoH9KquCZBEGvYS+H7
- a4WdHs05eOdyWVRbRczrHeBU0krlEfIj5pRhoMyq9DPzFSUT3E8WxNzkaBO8oxmhmTAUvbjaXXi
- HoI0=
-X-Google-Smtp-Source: AGHT+IEVCoRoOucH+XXzf2Xf6uDLVsFSDUFfS+uHHqCqnHE7JdoDkhaNAMRO+TRh2E8IHhAyFwZMJA==
-X-Received: by 2002:a17:907:7b86:b0:a99:f5d8:726 with SMTP id
- a640c23a62f3a-aa4efdd0c3bmr136690066b.23.1732166026882; 
- Wed, 20 Nov 2024 21:13:46 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa4f419db9esm35892066b.87.2024.11.20.21.13.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Nov 2024 21:13:45 -0800 (PST)
-Message-ID: <6619242f-229b-4bc2-8b39-a030f2927c84@linaro.org>
-Date: Thu, 21 Nov 2024 06:13:44 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732166771;
+	bh=zicEErWZH85f2xgBzmrJhskgPuw03cATikMPq0g6sgs=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fQe5yTe0sv54PWxMXbqbSumD/D1hbNPZ6hGs/GnEmgWyzJWBJQm8u4YSzFBbgA3VT
+	 BbMBW453u2LavP9bXdWK0Y/lNnd5mWvp5XCM/R1zPiPOfmBDM55Uw0S65ktPUFZ/ET
+	 shAxodfxz+oUBkKFCkc8ESFvEf9mTh/fk5+Was2Jl0DuFv+tF+bI7nqiqUFGrvSrLj
+	 jiWbe16hFd4ZVQonamoAMNmB39KCYNAG/CgoB1vRNksUBeOJ9Vb6kmvAbBptQfBkRW
+	 iHNvGw9HB+4Q9djvLJKIkB34weOtk4TTk4moYelvpSNE4dquwXvU/rG5lN9wV4lcf/
+	 eCWln9o8dtRQA==
+Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
+ [82.131.203.244])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E95B288C4C;
+ Thu, 21 Nov 2024 06:26:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1732166770;
+ bh=zicEErWZH85f2xgBzmrJhskgPuw03cATikMPq0g6sgs=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=g93stPsEXAtwqJohYuqR7vE16yoaKBCwffIBPt+7yghLASq8c2eckFdJ5mUv1mSo1
+ spDs46s7/ch0YWjtWvA/IqBU0he7ipVnI1l+mqBh8iPEBcN5tq+TVT/UIx8wI6HcaF
+ V+bJQpqOQXRf7ySzrYoBRel7vaWxIs04qrZW3CDooQ29FiynixBNeR9P79G1Ome5kh
+ Yd6ZUwiFpjqI6vORGEJAg5XjpXwkVLSrjcPwPgLBFW8D2GzQuBMjUwBjt3ivntlBG/
+ ZwlIK7HZEdU9IhwI1NIQSzeoFYl8/HW6goGwNqTSD+x7M2Q2CAPWOYVHLxA0+2y1Lu
+ 2AOwH+V8MfJnA==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Walter Schweizer <walter.schweizer@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
+ Andrej Valek <andrej.valek@siemens.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
+ Fabio Estevam <festevam@denx.de>, Francesco Dolcini <francesco@dolcini.it>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 01/20] wdt: imx8qxp: add option to control external PMIC
+ wdt via IMX8 SCU
+Date: Thu, 21 Nov 2024 06:25:42 +0100
+Message-Id: <20241121052601.72880-2-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20241121052601.72880-1-hs@denx.de>
+References: <20241121052601.72880-1-hs@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] clk: qcom: Add X1E80100 clock driver
-Content-Language: en-US
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20241118-topic-x1e80100-clk-v1-0-8841e87ad81f@linaro.org>
- <20241118-topic-x1e80100-clk-v1-1-8841e87ad81f@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241118-topic-x1e80100-clk-v1-1-8841e87ad81f@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,407 +79,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+extensions. Only useful on some Siemens i.MX8-based platforms as
+special SCFW is needed which provides the needed SCU API.
 
-On 18/11/2024 15:42, Neil Armstrong wrote:
-> Add Clock driver for the GCC block found in the X1E80100 SoC.
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Thanks!
-> 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # Yoga Slim 7x
-> ---
->  drivers/clk/qcom/Kconfig          |   8 +
->  drivers/clk/qcom/Makefile         |   1 +
->  drivers/clk/qcom/clock-x1e80100.c | 348 ++++++++++++++++++++++++++++++++++++++
->  3 files changed, 357 insertions(+)
-> 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index d76fca5dba41312561406f8193fa45c59fb06dd9..c69eb7d11679a3b7c65a5e69d2b4aef04fc9f8e1 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -103,6 +103,14 @@ config CLK_QCOM_SC7280
->  	  on the Snapdragon SC7280 SoC. This driver supports the clocks
->  	  and resets exposed by the GCC hardware block.
->  
-> +config CLK_QCOM_X1E80100
-> +	bool "Qualcomm X1E80100 GCC"
-> +	select CLK_QCOM
-> +	help
-> +	  Say Y here to enable support for the Global Clock Controller
-> +	  on the Snapdragon X1E80100 SoC. This driver supports the clocks
-> +	  and resets exposed by the GCC hardware block.
-> +
->  endmenu
->  
->  endif
-> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index ab33f1c5faf987f1dd2f66eead56921a4eee5396..0189e053f23cbce190b5dd3649640cba1f25b8ec 100644
-> --- a/drivers/clk/qcom/Makefile
-> +++ b/drivers/clk/qcom/Makefile
-> @@ -15,3 +15,4 @@ obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
->  obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
->  obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
->  obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
-> +obj-$(CONFIG_CLK_QCOM_X1E80100) += clock-x1e80100.o
-> diff --git a/drivers/clk/qcom/clock-x1e80100.c b/drivers/clk/qcom/clock-x1e80100.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..6bcd705f6c8d40dc477c55fe1f594df70e1187ad
-> --- /dev/null
-> +++ b/drivers/clk/qcom/clock-x1e80100.c
-> @@ -0,0 +1,348 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Clock drivers for Qualcomm x1e80100
-> + *
-> + * (C) Copyright 2024 Linaro Ltd.
-> + */
-> +
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <linux/delay.h>
-> +#include <errno.h>
-> +#include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,x1e80100-gcc.h>
-> +#include <dt-bindings/clock/qcom,x1e80100-tcsr.h>
-> +
-> +#include "clock-qcom.h"
-> +
-> +/* On-board TCXO, TOFIX get from DT */
-> +#define TCXO_RATE	38400000
-> +
-> +/* bi_tcxo_div2 divided after RPMh output */
-> +#define TCXO_DIV2_RATE	(TCXO_RATE / 2)
-> +
-> +static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s4_clk_src[] = {
-> +	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
-> +	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-> +	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-> +	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
-> +	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
-> +	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-> +	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
-> +	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
-> +	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
-> +	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
-> +	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
-> +	{ }
-> +};
-> +
-> +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
-> +	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
-> +	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-> +	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
-> +	/* TOFIX F(202000000, CFG_CLK_SRC_GPLL9, 4, 0, 0), */
-> +	{ }
-> +};
-> +
-> +static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
-> +	F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
-> +	F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
-> +	F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
-> +	F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
-> +	{ }
-> +};
-> +
-> +static ulong x1e80100_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +	const struct freq_tbl *freq;
-> +
-> +	switch (clk->id) {
-> +	case GCC_QUPV3_WRAP2_S5_CLK: /* UART21 */
-> +		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s4_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x1e500,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 16);
-> +		return freq->freq;
-> +	case GCC_SDCC2_APPS_CLK:
-> +		freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x14018,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
-> +		clk_rcg_set_rate_mnd(priv->base, 0x3902c,
-> +				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-> +		return freq->freq;
-> +	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> +		clk_rcg_set_rate(priv->base, 0x39044, 0, 0);
-> +		return TCXO_DIV2_RATE;
-> +	default:
-> +		return 0;
-> +	}
-> +}
-> +
-> +static const struct gate_clk x1e80100_clks[] = {
-> +	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x770e4, BIT(0)),
-> +	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x3908c, BIT(0)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_CORE_2X_CLK,		0x52010, BIT(3)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_CORE_CLK,		0x52010, BIT(0)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S0_CLK,		0x52010, BIT(4)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S1_CLK,		0x52010, BIT(5)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S2_CLK,		0x52010, BIT(6)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S3_CLK,		0x52010, BIT(7)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S4_CLK,		0x52010, BIT(8)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S5_CLK,		0x52010, BIT(9)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S6_CLK,		0x52010, BIT(10)),
-> +	GATE_CLK(GCC_QUPV3_WRAP2_S7_CLK,		0x52010, BIT(17)),
-> +	GATE_CLK(GCC_QUPV3_WRAP_2_M_AHB_CLK,		0x52010, BIT(2)),
-> +	GATE_CLK(GCC_QUPV3_WRAP_2_S_AHB_CLK,		0x52010, BIT(1)),
-> +	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x39018, BIT(0)),
-> +	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x39028, BIT(0)),
-> +	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x39024, BIT(0)),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x39060, BIT(0)),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x39064, BIT(0)),
-> +	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x39068, BIT(0)),
-> +};
-> +
-> +static int x1e80100_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	switch (clk->id) {
-> +	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
-> +		fallthrough;
-> +	case GCC_USB30_PRIM_MASTER_CLK:
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
-> +		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
-> +		break;
-> +	}
-> +
-> +	qcom_gate_clk_en(priv, clk->id);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct qcom_reset_map x1e80100_gcc_resets[] = {
-> +	[GCC_AV1E_BCR] = { 0x4a000 },
-> +	[GCC_CAMERA_BCR] = { 0x26000 },
-> +	[GCC_DISPLAY_BCR] = { 0x27000 },
-> +	[GCC_GPU_BCR] = { 0x71000 },
-> +	[GCC_PCIE_0_LINK_DOWN_BCR] = { 0x6c014 },
-> +	[GCC_PCIE_0_NOCSR_COM_PHY_BCR] = { 0x6c020 },
-> +	[GCC_PCIE_0_PHY_BCR] = { 0x6c01c },
-> +	[GCC_PCIE_0_PHY_NOCSR_COM_PHY_BCR] = { 0x6c028 },
-> +	[GCC_PCIE_0_TUNNEL_BCR] = { 0xa0000 },
-> +	[GCC_PCIE_1_LINK_DOWN_BCR] = { 0x8e014 },
-> +	[GCC_PCIE_1_NOCSR_COM_PHY_BCR] = { 0x8e020 },
-> +	[GCC_PCIE_1_PHY_BCR] = { 0x8e01c },
-> +	[GCC_PCIE_1_PHY_NOCSR_COM_PHY_BCR] = { 0x8e024 },
-> +	[GCC_PCIE_1_TUNNEL_BCR] = { 0x2c000 },
-> +	[GCC_PCIE_2_LINK_DOWN_BCR] = { 0xa5014 },
-> +	[GCC_PCIE_2_NOCSR_COM_PHY_BCR] = { 0xa5020 },
-> +	[GCC_PCIE_2_PHY_BCR] = { 0xa501c },
-> +	[GCC_PCIE_2_PHY_NOCSR_COM_PHY_BCR] = { 0xa5028 },
-> +	[GCC_PCIE_2_TUNNEL_BCR] = { 0x13000 },
-> +	[GCC_PCIE_3_BCR] = { 0x58000 },
-> +	[GCC_PCIE_3_LINK_DOWN_BCR] = { 0xab014 },
-> +	[GCC_PCIE_3_NOCSR_COM_PHY_BCR] = { 0xab020 },
-> +	[GCC_PCIE_3_PHY_BCR] = { 0xab01c },
-> +	[GCC_PCIE_3_PHY_NOCSR_COM_PHY_BCR] = { 0xab024 },
-> +	[GCC_PCIE_4_BCR] = { 0x6b000 },
-> +	[GCC_PCIE_4_LINK_DOWN_BCR] = { 0xb3014 },
-> +	[GCC_PCIE_4_NOCSR_COM_PHY_BCR] = { 0xb3020 },
-> +	[GCC_PCIE_4_PHY_BCR] = { 0xb301c },
-> +	[GCC_PCIE_4_PHY_NOCSR_COM_PHY_BCR] = { 0xb3028 },
-> +	[GCC_PCIE_5_BCR] = { 0x2f000 },
-> +	[GCC_PCIE_5_LINK_DOWN_BCR] = { 0xaa014 },
-> +	[GCC_PCIE_5_NOCSR_COM_PHY_BCR] = { 0xaa020 },
-> +	[GCC_PCIE_5_PHY_BCR] = { 0xaa01c },
-> +	[GCC_PCIE_5_PHY_NOCSR_COM_PHY_BCR] = { 0xaa028 },
-> +	[GCC_PCIE_6A_BCR] = { 0x31000 },
-> +	[GCC_PCIE_6A_LINK_DOWN_BCR] = { 0xac014 },
-> +	[GCC_PCIE_6A_NOCSR_COM_PHY_BCR] = { 0xac020 },
-> +	[GCC_PCIE_6A_PHY_BCR] = { 0xac01c },
-> +	[GCC_PCIE_6A_PHY_NOCSR_COM_PHY_BCR] = { 0xac024 },
-> +	[GCC_PCIE_6B_BCR] = { 0x8d000 },
-> +	[GCC_PCIE_6B_LINK_DOWN_BCR] = { 0xb5014 },
-> +	[GCC_PCIE_6B_NOCSR_COM_PHY_BCR] = { 0xb5020 },
-> +	[GCC_PCIE_6B_PHY_BCR] = { 0xb501c },
-> +	[GCC_PCIE_6B_PHY_NOCSR_COM_PHY_BCR] = { 0xb5024 },
-> +	[GCC_PCIE_PHY_BCR] = { 0x6f000 },
-> +	[GCC_PCIE_PHY_CFG_AHB_BCR] = { 0x6f00c },
-> +	[GCC_PCIE_PHY_COM_BCR] = { 0x6f010 },
-> +	[GCC_PCIE_RSCC_BCR] = { 0xa4000 },
-> +	[GCC_PDM_BCR] = { 0x33000 },
-> +	[GCC_QUPV3_WRAPPER_0_BCR] = { 0x42000 },
-> +	[GCC_QUPV3_WRAPPER_1_BCR] = { 0x18000 },
-> +	[GCC_QUPV3_WRAPPER_2_BCR] = { 0x1e000 },
-> +	[GCC_QUSB2PHY_HS0_MP_BCR] = { 0x1200c },
-> +	[GCC_QUSB2PHY_HS1_MP_BCR] = { 0x12010 },
-> +	[GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
-> +	[GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
-> +	[GCC_QUSB2PHY_TERT_BCR] = { 0x12008 },
-> +	[GCC_QUSB2PHY_USB20_HS_BCR] = { 0x12014 },
-> +	[GCC_SDCC2_BCR] = { 0x14000 },
-> +	[GCC_SDCC4_BCR] = { 0x16000 },
-> +	[GCC_UFS_PHY_BCR] = { 0x77000 },
-> +	[GCC_USB20_PRIM_BCR] = { 0x29000 },
-> +	[GCC_USB30_MP_BCR] = { 0x17000 },
-> +	[GCC_USB30_PRIM_BCR] = { 0x39000 },
-> +	[GCC_USB30_SEC_BCR] = { 0xa1000 },
-> +	[GCC_USB30_TERT_BCR] = { 0xa2000 },
-> +	[GCC_USB3_MP_SS0_PHY_BCR] = { 0x19008 },
-> +	[GCC_USB3_MP_SS1_PHY_BCR] = { 0x54008 },
-> +	[GCC_USB3_PHY_PRIM_BCR] = { 0x50000 },
-> +	[GCC_USB3_PHY_SEC_BCR] = { 0x2a000 },
-> +	[GCC_USB3_PHY_TERT_BCR] = { 0xa3000 },
-> +	[GCC_USB3_UNIPHY_MP0_BCR] = { 0x19000 },
-> +	[GCC_USB3_UNIPHY_MP1_BCR] = { 0x54000 },
-> +	[GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
-> +	[GCC_USB3PHY_PHY_SEC_BCR] = { 0x2a004 },
-> +	[GCC_USB3PHY_PHY_TERT_BCR] = { 0xa3004 },
-> +	[GCC_USB3UNIPHY_PHY_MP0_BCR] = { 0x19004 },
-> +	[GCC_USB3UNIPHY_PHY_MP1_BCR] = { 0x54004 },
-> +	[GCC_USB4_0_BCR] = { 0x9f000 },
-> +	[GCC_USB4_0_DP0_PHY_PRIM_BCR] = { 0x50010 },
-> +	[GCC_USB4_1_DP0_PHY_SEC_BCR] = { 0x2a010 },
-> +	[GCC_USB4_2_DP0_PHY_TERT_BCR] = { 0xa3010 },
-> +	[GCC_USB4_1_BCR] = { 0x2b000 },
-> +	[GCC_USB4_2_BCR] = { 0x11000 },
-> +	[GCC_USB_0_PHY_BCR] = { 0x50020 },
-> +	[GCC_USB_1_PHY_BCR] = { 0x2a020 },
-> +	[GCC_USB_2_PHY_BCR] = { 0xa3020 },
-> +	[GCC_VIDEO_BCR] = { 0x32000 },
-> +};
-> +
-> +static const struct qcom_power_map x1e80100_gdscs[] = {
-> +	[GCC_PCIE_0_TUNNEL_GDSC] = { 0xa0004 },
-> +	[GCC_PCIE_1_TUNNEL_GDSC] = { 0x2c004 },
-> +	[GCC_PCIE_2_TUNNEL_GDSC] = { 0x13004 },
-> +	[GCC_PCIE_3_GDSC] = { 0x58004 },
-> +	[GCC_PCIE_3_PHY_GDSC] = { 0x3e000 },
-> +	[GCC_PCIE_4_GDSC] = { 0x6b004 },
-> +	[GCC_PCIE_4_PHY_GDSC] = { 0x6c000 },
-> +	[GCC_PCIE_5_GDSC] = { 0x2f004 },
-> +	[GCC_PCIE_5_PHY_GDSC] = { 0x30000 },
-> +	[GCC_PCIE_6_PHY_GDSC] = { 0x8e000 },
-> +	[GCC_PCIE_6A_GDSC] = { 0x31004 },
-> +	[GCC_PCIE_6B_GDSC] = { 0x8d004 },
-> +	[GCC_UFS_MEM_PHY_GDSC] = { 0x9e000 },
-> +	[GCC_UFS_PHY_GDSC] = { 0x77004 },
-> +	[GCC_USB20_PRIM_GDSC] = { 0x29004 },
-> +	[GCC_USB30_MP_GDSC] = { 0x17004 },
-> +	[GCC_USB30_PRIM_GDSC] = { 0x39004 },
-> +	[GCC_USB30_SEC_GDSC] = { 0xa1004 },
-> +	[GCC_USB30_TERT_GDSC] = { 0xa2004 },
-> +	[GCC_USB3_MP_SS0_PHY_GDSC] = { 0x1900c },
-> +	[GCC_USB3_MP_SS1_PHY_GDSC] = { 0x5400c },
-> +	[GCC_USB4_0_GDSC] = { 0x9f004 },
-> +	[GCC_USB4_1_GDSC] = { 0x2b004 },
-> +	[GCC_USB4_2_GDSC] = { 0x11004 },
-> +	[GCC_USB_0_PHY_GDSC] = { 0x50024 },
-> +	[GCC_USB_1_PHY_GDSC] = { 0x2a024 },
-> +	[GCC_USB_2_PHY_GDSC] = { 0xa3024 },
-> +};
-> +
-> +static struct msm_clk_data x1e80100_gcc_data = {
-> +	.resets = x1e80100_gcc_resets,
-> +	.num_resets = ARRAY_SIZE(x1e80100_gcc_resets),
-> +	.clks = x1e80100_clks,
-> +	.num_clks = ARRAY_SIZE(x1e80100_clks),
-> +	.power_domains = x1e80100_gdscs,
-> +	.num_power_domains = ARRAY_SIZE(x1e80100_gdscs),
-> +
-> +	.enable = x1e80100_enable,
-> +	.set_rate = x1e80100_set_rate,
-> +};
-> +
-> +static const struct udevice_id gcc_x1e80100_of_match[] = {
-> +	{
-> +		.compatible = "qcom,x1e80100-gcc",
-> +		.data = (ulong)&x1e80100_gcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_x1e80100) = {
-> +	.name		= "gcc_x1e80100",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= gcc_x1e80100_of_match,
-> +	.bind		= qcom_cc_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> +
-> +/* TCSRCC */
-> +
-> +static const struct gate_clk x1e80100_tcsr_clks[] = {
-> +	GATE_CLK(TCSR_PCIE_2L_4_CLKREF_EN,	0x15100, BIT(0)),
-> +	GATE_CLK(TCSR_PCIE_2L_5_CLKREF_EN,	0x15104, BIT(0)),
-> +	GATE_CLK(TCSR_PCIE_8L_CLKREF_EN,	0x15108, BIT(0)),
-> +	GATE_CLK(TCSR_USB3_MP0_CLKREF_EN,	0x1510c, BIT(0)),
-> +	GATE_CLK(TCSR_USB3_MP1_CLKREF_EN,	0x15110, BIT(0)),
-> +	GATE_CLK(TCSR_USB2_1_CLKREF_EN,		0x15114, BIT(0)),
-> +	GATE_CLK(TCSR_UFS_PHY_CLKREF_EN,	0x15118, BIT(0)),
-> +	GATE_CLK(TCSR_USB4_1_CLKREF_EN,		0x15120, BIT(0)),
-> +	GATE_CLK(TCSR_USB4_2_CLKREF_EN,		0x15124, BIT(0)),
-> +	GATE_CLK(TCSR_USB2_2_CLKREF_EN,		0x15128, BIT(0)),
-> +	GATE_CLK(TCSR_PCIE_4L_CLKREF_EN,	0x1512c, BIT(0)),
-> +	GATE_CLK(TCSR_EDP_CLKREF_EN,		0x15130, BIT(0)),
-> +};
-> +
-> +static struct msm_clk_data x1e80100_tcsrcc_data = {
-> +	.clks = x1e80100_tcsr_clks,
-> +	.num_clks = ARRAY_SIZE(x1e80100_tcsr_clks),
-> +};
-> +
-> +static int tcsrcc_x1e80100_clk_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	qcom_gate_clk_en(priv, clk->id);
-> +
-> +	return 0;
-> +}
-> +
-> +static ulong tcsrcc_x1e80100_clk_get_rate(struct clk *clk)
-> +{
-> +	return TCXO_RATE;
-> +}
-> +
-> +static int tcsrcc_x1e80100_clk_probe(struct udevice *dev)
-> +{
-> +	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
-> +	struct msm_clk_priv *priv = dev_get_priv(dev);
-> +
-> +	priv->base = dev_read_addr(dev);
-> +	if (priv->base == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	priv->data = data;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct clk_ops tcsrcc_x1e80100_clk_ops = {
-> +	.enable = tcsrcc_x1e80100_clk_enable,
-> +	.get_rate = tcsrcc_x1e80100_clk_get_rate,
-> +};
-> +
-> +static const struct udevice_id tcsrcc_x1e80100_of_match[] = {
-> +	{
-> +		.compatible = "qcom,x1e80100-tcsr",
-> +		.data = (ulong)&x1e80100_tcsrcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(tcsrcc_x1e80100) = {
-> +	.name		= "tcsrcc_x1e80100",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= tcsrcc_x1e80100_of_match,
-> +	.ops		= &tcsrcc_x1e80100_clk_ops,
-> +	.priv_auto	= sizeof(struct msm_clk_priv),
-> +	.probe		= tcsrcc_x1e80100_clk_probe,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> 
+---
 
+Changes in v3:
+- add Reviewed-by tag from Alexander
+- add comments from Igor
+  fix spelling issues
+  depends on ARCH_IMX8 instead of IMX8 Kconfig symbol
+- comment from Francesco and Stefan
+  rename Kconfig symbol from WDT_SCU_PMIC to WDT_SIEMENS_PMIC
+  rename scu_pmic_wdt.c to siemens_pmic_wdt.c
+
+Changes in v2:
+- work on comments from Stefan:
+  - rename driver file from scu_wdt.c to scu_pmic_wdt.c
+  - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
+  - reworked Kconfig help text
+  - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
+    SCU API extension in their SCFW.
+  - reworked commit message
+
+ drivers/misc/imx8/scu_api.c         | 21 ++++++++++
+ drivers/watchdog/Kconfig            |  7 ++++
+ drivers/watchdog/Makefile           |  1 +
+ drivers/watchdog/siemens_pmic_wdt.c | 59 +++++++++++++++++++++++++++++
+ include/firmware/imx/sci/rpc.h      |  3 ++
+ include/firmware/imx/sci/sci.h      |  1 +
+ 6 files changed, 92 insertions(+)
+ create mode 100644 drivers/watchdog/siemens_pmic_wdt.c
+
+diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+index 591d71b096a..edb6923151a 100644
+--- a/drivers/misc/imx8/scu_api.c
++++ b/drivers/misc/imx8/scu_api.c
+@@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
+ 	return ret;
+ }
+ 
++int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
++{
++	struct udevice *dev = gd->arch.scu_dev;
++	struct sc_rpc_msg_s msg;
++	int size = sizeof(struct sc_rpc_msg_s);
++	int ret;
++
++	RPC_VER(&msg) = SC_RPC_VERSION;
++	RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
++	RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
++	RPC_U8(&msg, 0U) = (u8)cmd;
++	RPC_SIZE(&msg) = 2U;
++
++	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
++	if (ret)
++		printf("%s: res:%d\n",
++		       __func__, RPC_R8(&msg));
++
++	return ret;
++}
++
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+ 			 sc_faddr_t addr)
+ {
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 0e45f0a0922..b39b2546e5c 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -351,6 +351,13 @@ config WDT_SBSA
+ 	   In the single stage mode, when the timeout is reached, your system
+ 	   will be reset by WS1. The first signal (WS0) is ignored.
+ 
++config WDT_SIEMENS_PMIC
++	bool "Enable PMIC Watchdog Timer support for Siemens platforms"
++	depends on ARCH_IMX8 && WDT
++	help
++	  Select this to enable the PMIC watchdog driver controlled via
++	  IMX8 SCU API found on Siemens platforms.
++
+ config WDT_SL28CPLD
+ 	bool "sl28cpld watchdog timer support"
+ 	depends on WDT && SL28CPLD
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 0b107c008f7..9b6b1a8e8ad 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
+ obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
+ obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
+ obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
++obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
+ obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
+ obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
+ obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
+diff --git a/drivers/watchdog/siemens_pmic_wdt.c b/drivers/watchdog/siemens_pmic_wdt.c
+new file mode 100644
+index 00000000000..e7ca00de654
+--- /dev/null
++++ b/drivers/watchdog/siemens_pmic_wdt.c
+@@ -0,0 +1,59 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
++ * extensions. Only useful on some Siemens i.MX8-based platforms as
++ * special NXP SCFW is needed which provides the needed SCU API.
++ *
++ * Copyright (C) 2024 Siemens AG
++ */
++
++#include <dm.h>
++#include <wdt.h>
++#include <firmware/imx/sci/sci.h>
++
++/* watchdog commands */
++#define CMD_START_WDT 0x55
++#define CMD_STOP_WDT  0x45
++#define CMD_PING_WDT  0x35
++
++static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++{
++	/* start external watchdog via Timer API */
++	return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
++}
++
++static int scu_wdt_stop(struct udevice *dev)
++{
++	/* stop external watchdog via Timer API */
++	return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
++}
++
++static int scu_wdt_reset(struct udevice *dev)
++{
++	return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
++}
++
++static int scu_wdt_probe(struct udevice *dev)
++{
++	debug("%s(dev=%p)\n", __func__, dev);
++	return 0;
++}
++
++static const struct wdt_ops scu_wdt_ops = {
++	.reset		= scu_wdt_reset,
++	.start		= scu_wdt_start,
++	.stop		= scu_wdt_stop,
++};
++
++static const struct udevice_id scu_wdt_ids[] = {
++	{ .compatible = "siemens,scu-wdt" },
++	{ }
++};
++
++U_BOOT_DRIVER(scu_wdt) = {
++	.name		= "scu_wdt",
++	.id		= UCLASS_WDT,
++	.of_match	= scu_wdt_ids,
++	.probe		= scu_wdt_probe,
++	.ops		= &scu_wdt_ops,
++};
+diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
+index 28adec2a8e1..ba5bf9a16fe 100644
+--- a/include/firmware/imx/sci/rpc.h
++++ b/include/firmware/imx/sci/rpc.h
+@@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
+ #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
+ #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
+ 
++/* Siemens specific API extension */
++#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
++
+ #endif /* SC_RPC_H */
+diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
+index 7d8499f070a..b971b62836d 100644
+--- a/include/firmware/imx/sci/sci.h
++++ b/include/firmware/imx/sci/sci.h
+@@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
+ 
+ /* Timer API */
+ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
++int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
+ 
+ /* SECO API */
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
 -- 
-// Caleb (they/them)
+2.20.1
 
