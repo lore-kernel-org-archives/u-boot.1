@@ -4,67 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BFEED75BCE
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 08:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF405D6E2A4
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 09:40:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E59AC8967E;
-	Thu, 21 Nov 2024 09:12:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 04B57896C8;
+	Thu, 21 Nov 2024 10:40:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732176740;
-	bh=n3bCwlbhDzxBygi4U4ifmzaiGb0V80XOO4C+Wokxs0o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=qjtlI9VqxdvdPUSkTY48jTd9PHcoOHnO1fx9AdBDom/prMU8v9lEpA32EXiH8cRHH
-	 7oJ83SouHHKchqcLamwQs3nsvA+L97oQZNDAB7pX7BdkdOc+jj1yzplqESvC5E7uyk
-	 Ylpu7zYnMHbpQSQ5s1xOqEWTmlauNzNzEXxB+mrzaIzUdQRZdYOTdf5ZP/BqHNhM6O
-	 tVjyG9K1nEBwlgifbh/vKx+2oH2iekVyW3v40grLZKf+0Z6G1LxxpjIz21s60iN1QB
-	 NUtJIxHzb1AvaRqKchUkbAEWLVJRZ113GaPNzsvNSQO9mMWc0pOUvGB1zs4XffVJ3x
-	 u9DK4d437H6iw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E82208967E; Thu, 21 Nov 2024 09:12:19 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0BC38966B
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 09:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hxgV6k3a";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C973F896C7; Thu, 21 Nov 2024 10:40:31 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Xv9v51yy8z9smJ;
- Thu, 21 Nov 2024 09:12:17 +0100 (CET)
-Message-ID: <46efa778-7445-4259-a78f-ad3d16bdc31e@denx.de>
-Date: Thu, 21 Nov 2024 09:12:10 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 5F735894F4
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 10:40:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43161e7bb25so5488485e9.2
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 01:40:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732182029; x=1732786829;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=cWgsTywPHfI31OysttwdqY606pvPKxlt5ldON59geHI=;
+ b=hxgV6k3aLb9HC+8RYEPsSmI7UWv71w8elt9kYspuzWWClKw9Cad+hbqUxspeKcR9La
+ kLlRyXS3tGic0bggefyWn/diAH6sTpVQOdGNgdWmvOXM+TyTH26G/JXZoC066vDeC9C8
+ ygQLrU+ATbC5TNUyRAHvPIxVucNRjMSPnVtNJ8iE4DKc7/PIrHSyJD1rovgQb4t1Eg0G
+ KaTd5jSlWSJymdqRIoljRjAFR78OgHgT7e9F1fCs7qLebfGw7gHigcoSV8MXd+2egHM2
+ lPyw8FfBW1Qx4WsI8qZvgzmTuHWoiLftplocHjDrO5xMfAvEpLDeX0JMkcGkT6KtLA5E
+ bfIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732182029; x=1732786829;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cWgsTywPHfI31OysttwdqY606pvPKxlt5ldON59geHI=;
+ b=dwpT2X9ZomDyzv6mtIC+S94LU4kB+IFrEKS6QPWbgDaUPFl2/lF2Nmo+Cx96sfituF
+ tDACmBPS5IdKZ6CQQBcIiF55s3ufXY5otVM+bSfTm/wb5HTDOUpfD1C6ZyPZOW5qC7sw
+ 7n9hBP7ZaQHQn/k6/pjxILYlctYlcfOIHGAPUldYADJxD/uoQvlvadn0N1LE5SjaHo91
+ XqLkuYskYW1bOoYkzSMm6SE5ba5t/gXL7X0fJ3MjI7lOvTnTX4A6+qQNebI+594nhhkA
+ rAJgnqPxocIfFh/EZsjGxv4m7ay9W41dfKyzd+g+12j2aLUNTmtiKMftZfJ3d/3Iqp0o
+ iOOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7xY9DL7DTZGzwyszsQ/rzAt8vwy28S+75m7EElQlSrMQEDW934YIjVqKXymQNzVcnCXHn/ZQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx+/+yKa0n+OJfvMRSkPdXBzPGbSfrIlemj1Fu729rUt+uY7nme
+ 4RvWV3Skd7B+/P2g9pYaHCcWJ1nfz0X93+SQfaIlGugc2TSDO48QORrJDZOIMNE=
+X-Google-Smtp-Source: AGHT+IE2JrSIldrhiGTv2t/asx5B6rQM6/VdGFmTOjSt3khqjDM/vUVIH8Ln3i+q4Tve+f0hJurIoQ==
+X-Received: by 2002:a05:600c:19d1:b0:431:5f1c:8352 with SMTP id
+ 5b1f17b1804b1-433489867e7mr51026475e9.5.1732182028794; 
+ Thu, 21 Nov 2024 01:40:28 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38254933bf7sm4491385f8f.72.2024.11.21.01.40.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Nov 2024 01:40:28 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Guillaume LA ROQUE <glaroque@baylibre.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io
+Subject: Re: [PATCH v3 0/5] Add support of Android Boot Image version 2 and
+ non-AB image
+In-Reply-To: <634d3625-deb9-4286-9b1d-4f18bdb49166@baylibre.com>
+References: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
+ <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
+ <87mshvxhq3.fsf@baylibre.com>
+ <d03137b3-02a1-4e1d-860b-5b0bc78be5c9@baylibre.com>
+ <634d3625-deb9-4286-9b1d-4f18bdb49166@baylibre.com>
+Date: Thu, 21 Nov 2024 10:40:25 +0100
+Message-ID: <877c8wncvq.fsf@baylibre.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 01/20] wdt: imx8qxp: add option to control external
- PMIC wdt via IMX8 SCU
-To: Heiko Schocher <hs@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Walter Schweizer <walter.schweizer@siemens.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>,
- Andrej Valek <andrej.valek@siemens.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
- Fabio Estevam <festevam@denx.de>, Francesco Dolcini <francesco@dolcini.it>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20241121052601.72880-1-hs@denx.de>
- <20241121052601.72880-2-hs@denx.de>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241121052601.72880-2-hs@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,221 +100,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
+Hi Guillaume,
 
-On 21.11.24 06:25, Heiko Schocher wrote:
-> Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
-> extensions. Only useful on some Siemens i.MX8-based platforms as
-> special SCFW is needed which provides the needed SCU API.
-> 
-> Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> Signed-off-by: Heiko Schocher <hs@denx.de>
-> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> 
-> ---
-> 
-> Changes in v3:
-> - add Reviewed-by tag from Alexander
-> - add comments from Igor
->    fix spelling issues
->    depends on ARCH_IMX8 instead of IMX8 Kconfig symbol
-> - comment from Francesco and Stefan
->    rename Kconfig symbol from WDT_SCU_PMIC to WDT_SIEMENS_PMIC
->    rename scu_pmic_wdt.c to siemens_pmic_wdt.c
-> 
-> Changes in v2:
-> - work on comments from Stefan:
->    - rename driver file from scu_wdt.c to scu_pmic_wdt.c
->    - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
->    - reworked Kconfig help text
->    - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
->      SCU API extension in their SCFW.
->    - reworked commit message
-> 
->   drivers/misc/imx8/scu_api.c         | 21 ++++++++++
->   drivers/watchdog/Kconfig            |  7 ++++
->   drivers/watchdog/Makefile           |  1 +
->   drivers/watchdog/siemens_pmic_wdt.c | 59 +++++++++++++++++++++++++++++
->   include/firmware/imx/sci/rpc.h      |  3 ++
->   include/firmware/imx/sci/sci.h      |  1 +
->   6 files changed, 92 insertions(+)
->   create mode 100644 drivers/watchdog/siemens_pmic_wdt.c
-> 
-> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
-> index 591d71b096a..edb6923151a 100644
-> --- a/drivers/misc/imx8/scu_api.c
-> +++ b/drivers/misc/imx8/scu_api.c
-> @@ -951,6 +951,27 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
->   	return ret;
->   }
->   
-> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd)
+On mer., nov. 20, 2024 at 18:54, Guillaume LA ROQUE <glaroque@baylibre.com>=
+ wrote:
 
-Is this function also Siemens specific?
+> Hi,
+>
+> unfortunately i don't find for now how i can fix issue in test.
+>
+> i don't really understand with when we launch test individually it's=20
+> working but if we launch test_ut test not working ,
+> I see on android test for image version 4 to mmc7 in bootflow list detect=
+ed.
+>
+> =3D> ut bootstd bootflow_android_image_v4
+> Test: bootflow_android_image_v4: bootflow.c
+> scan_mmc_android_bootdev: mmc7
+> order 0: mmc2
+> order 1: mmc1
+> order 2: mmc7
+> order 3: <NULL>
+> Enabled mmc mmc7 bootdev
+>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slot=
+ a, tries remaining 7
+>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slot=
+ a, tries remaining 7
+> Older order: mmc2
+> Showing all bootflows
+> Seq=C2=A0 Method=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 State=C2=A0=C2=A0 Uc=
+lass=C2=A0=C2=A0=C2=A0 Part Name Filename
+> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- ------------=
+------------=20
+> ----------------
+>  =C2=A0 0=C2=A0 extlinux=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 mmc=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 1 mmc1.bootdev.part_1=20
+> /extlinux/extlinux.conf
+>  =C2=A0 1=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 m=
+mc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.who=
+le
+>  =C2=A0 2=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 m=
+mc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.who=
+le
+> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- ------------=
+------------=20
+> ----------------
+> (3 bootflows, 3 valid)
+>
+> if we just launch bootflow_android_image_v4 we have only a=20
+> mmc7.bootdev.whole and so test is ok.
+>
+> if someone have an idea or can give some idea of what i can try or check .
+>
+> thanks for helping.
 
-> +{
-> +	struct udevice *dev = gd->arch.scu_dev;
-> +	struct sc_rpc_msg_s msg;
-> +	int size = sizeof(struct sc_rpc_msg_s);
-> +	int ret;
-> +
-> +	RPC_VER(&msg) = SC_RPC_VERSION;
-> +	RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
-> +	RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_PMIC_WDOG;
-> +	RPC_U8(&msg, 0U) = (u8)cmd;
-> +	RPC_SIZE(&msg) = 2U;
-> +
-> +	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
-> +	if (ret)
-> +		printf("%s: res:%d\n",
-> +		       __func__, RPC_R8(&msg));
+I'll have a look
 
-Doesn't this printf statement fit into a single line?
-
-> +
-> +	return ret;
-> +}
-> +
->   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
->   			 sc_faddr_t addr)
->   {
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 0e45f0a0922..b39b2546e5c 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -351,6 +351,13 @@ config WDT_SBSA
->   	   In the single stage mode, when the timeout is reached, your system
->   	   will be reset by WS1. The first signal (WS0) is ignored.
->   
-> +config WDT_SIEMENS_PMIC
-> +	bool "Enable PMIC Watchdog Timer support for Siemens platforms"
-> +	depends on ARCH_IMX8 && WDT
-> +	help
-> +	  Select this to enable the PMIC watchdog driver controlled via
-> +	  IMX8 SCU API found on Siemens platforms.
-> +
->   config WDT_SL28CPLD
->   	bool "sl28cpld watchdog timer support"
->   	depends on WDT && SL28CPLD
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index 0b107c008f7..9b6b1a8e8ad 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
->   obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
->   obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
->   obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
-> +obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
->   obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
->   obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
->   obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
-> diff --git a/drivers/watchdog/siemens_pmic_wdt.c b/drivers/watchdog/siemens_pmic_wdt.c
-> new file mode 100644
-> index 00000000000..e7ca00de654
-> --- /dev/null
-> +++ b/drivers/watchdog/siemens_pmic_wdt.c
-> @@ -0,0 +1,59 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
-> + * extensions. Only useful on some Siemens i.MX8-based platforms as
-> + * special NXP SCFW is needed which provides the needed SCU API.
-> + *
-> + * Copyright (C) 2024 Siemens AG
-> + */
-> +
-> +#include <dm.h>
-> +#include <wdt.h>
-> +#include <firmware/imx/sci/sci.h>
-> +
-> +/* watchdog commands */
-> +#define CMD_START_WDT 0x55
-> +#define CMD_STOP_WDT  0x45
-> +#define CMD_PING_WDT  0x35
-> +
-> +static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +{
-> +	/* start external watchdog via Timer API */
-> +	return sc_timer_control_pmic_wdog(-1, CMD_START_WDT);
-> +}
-> +
-> +static int scu_wdt_stop(struct udevice *dev)
-> +{
-> +	/* stop external watchdog via Timer API */
-> +	return sc_timer_control_pmic_wdog(-1, CMD_STOP_WDT);
-> +}
-> +
-> +static int scu_wdt_reset(struct udevice *dev)
-> +{
-> +	return sc_timer_control_pmic_wdog(-1, CMD_PING_WDT);
-> +}
-> +
-> +static int scu_wdt_probe(struct udevice *dev)
-> +{
-> +	debug("%s(dev=%p)\n", __func__, dev);
-> +	return 0;
-> +}
-> +
-> +static const struct wdt_ops scu_wdt_ops = {
-> +	.reset		= scu_wdt_reset,
-> +	.start		= scu_wdt_start,
-> +	.stop		= scu_wdt_stop,
-> +};
-> +
-> +static const struct udevice_id scu_wdt_ids[] = {
-> +	{ .compatible = "siemens,scu-wdt" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(scu_wdt) = {
-> +	.name		= "scu_wdt",
-> +	.id		= UCLASS_WDT,
-> +	.of_match	= scu_wdt_ids,
-> +	.probe		= scu_wdt_probe,
-> +	.ops		= &scu_wdt_ops,
-> +};
-> diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
-> index 28adec2a8e1..ba5bf9a16fe 100644
-> --- a/include/firmware/imx/sci/rpc.h
-> +++ b/include/firmware/imx/sci/rpc.h
-> @@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
->   #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
->   #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
->   
-> +/* Siemens specific API extension */
-> +#define TIMER_FUNC_CTRL_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
-
-So if it's Siemens specific, shouldn't this also be reflected in the
-macro name?
-
-Other than this:
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
-> +
->   #endif /* SC_RPC_H */
-> diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
-> index 7d8499f070a..b971b62836d 100644
-> --- a/include/firmware/imx/sci/sci.h
-> +++ b/include/firmware/imx/sci/sci.h
-> @@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
->   
->   /* Timer API */
->   int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
-> +int sc_timer_control_pmic_wdog(sc_ipc_t ipc, u8 cmd);
->   
->   /* SECO API */
->   int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
-
+>
+> Guillaume
+> Le 20/11/2024 =C3=A0 13:56, Guillaume LA ROQUE a =C3=A9crit=C2=A0:
+>> Hi,
+>>
+>> Le 19/11/2024 =C3=A0 18:21, Mattijs Korpershoek a =C3=A9crit=C2=A0:
+>>> Hi Guillaume,
+>>>
+>>> On mar., nov. 19, 2024 at 15:16, Mattijs Korpershoek=20
+>>> <mkorpershoek@baylibre.com> wrote:
+>>>
+>>>> Hi,
+>>>>
+>>>> On Tue, 19 Nov 2024 12:37:37 +0100, Guillaume La Roque wrote:
+>>>>> Actually bootmethod android only support android boot image version 4
+>>>>> and with AB image, some old platform wtill use android boot image
+>>>>> version 2 with AB or without AB slot.
+>>>>>
+>>>>> This patchset add support of both version 2 and non-AB slot images.
+>>>>> It's fixed in same time a boot issue seen on khadas vim3{l} board=20
+>>>>> with 16GB eMMC
+>>>>>
+>>>>> [...]
+>>>> Thanks, Applied to=20
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+>>>>
+>>>> [1/5] bootstd: android: add support of bootimage v2
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbe7eee99=
+2e90bbe84278db20d29159e3eedfe0d
+>>>> [2/5] bootstd: android: add non-A/B image support
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a85f2e0e7=
+bd3665366ca2704d1142d3f16f22c36
+>>>> [3/5] configs: khadas-vim3l_android{_ab}: move on bootmeth android
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88547773b=
+2df5e4cabbaec57a0f2e7f212dbf823
+>>>> [4/5] configs: khadas-vim3_android{_ab}: move on bootmeth android
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4a2e58717=
+f2f33ef0dbb422026ef71938f2265aa
+>>>> [5/5] bootstd: Add test for Android boot image v2
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/acaa7f35a=
+33146f887948d34130229388280844a
+>>> CI has found some issues when applying these series:
+>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23452
+>>>
+>>> Could you have a look please?
+>> i will check
+>>>
+>>> Thanks!
+>>>
+>>>> --=20
+>>>> Mattijs
+>>
+>>
