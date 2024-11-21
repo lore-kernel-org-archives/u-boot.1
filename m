@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA4A0D75BBB
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646F3D75BBB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 05:28:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57FD0896B1;
+	by phobos.denx.de (Postfix) with ESMTP id BBD3E896B9;
 	Thu, 21 Nov 2024 06:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732166784;
-	bh=Y++89W2deesAdM4JJagzmQ4x9G4Z7WPYXhTYsQG0VfE=;
+	bh=TFzlkhfSJSMQwS+uWvOlMPkxGRVM6g6L5o5kgRfmbYY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Gt6P7uO2ZQZd4cnIPDMYJy3TSdwjDRKvizr6bm48U5tsmzFtLmK84n7R9TnRsji48
-	 0Zk9tFElStcYBPAbV2wkFQBQkNljWNts/XUM/KamwC4/GOQpcKLCm7Yot/CqlVpBeZ
-	 vZ43nMr2pVHhdyKkofZvuOo8VJ8zxGKcdwbZwws13fyDnXomX5HCdOzJDhjrA+ehFY
-	 eqOpobkJMb5qC6NbUfKhraTTBJ5rpbIPLiOIYfUoF6rMYaZbaYe3QJzvYxWXx7tabz
-	 0g63IQBqyvQ5Q8DGJJKzL4CEjzeYkDSp5Y54niuqI3t25pV3zavAlWihM598SSVCC1
-	 9N1aFV28TvnrQ==
+	b=bk3kwpvvF2zq2QnVaD12oXgjaLwaJvfdc/+QP7uMQx87FUQYuJ+yuOHd9+C6Ikbnh
+	 A2Sb2/adNQnrjTLpJsPFjqlCm0e27i/bG0oOe927MyRzDsaPH+8fv4qkSjhoS3gSWC
+	 50dhyszQhgQz3IIEvAOJ5OVshu9w621PZvaFR0xZOiPhsuhD51ijqH/CxTs2J49Yv3
+	 waZqxZCPv0TY3BIHBzVIHmAxeHKCPWrx+qG1SduxLqXRokokohVcTtQ4pKrVQ/KHRH
+	 DB+1ktv3wRcPVDcL0fup9CeeC7OWYO86MoijWX20o8FbBo9zpyS9p5ai5KFCC1P51J
+	 JmrdC2ywya0gg==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0115389654;
- Thu, 21 Nov 2024 06:26:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id D40028966E;
+ Thu, 21 Nov 2024 06:26:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732166780;
- bh=Y++89W2deesAdM4JJagzmQ4x9G4Z7WPYXhTYsQG0VfE=;
+ s=phobos-20191101; t=1732166781;
+ bh=TFzlkhfSJSMQwS+uWvOlMPkxGRVM6g6L5o5kgRfmbYY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GFHQ063Ny9ldrjTdcs7fbTXvOYmnlqej4lbcZzley2XDWXHZsEWmPV7OntEuuWnrO
- KPEt5cceSoKDDb5+RQc8SvDR+Xww6soQEMq51LrszUKYyDysCmeAx792P9R6EiNVJu
- O+SBx28LmRMKTO6AUNWOdx8CFGk2cjKyxQ2naM9ex8BosY//TzyFx2YHVlrVPZohzC
- hS6pWdw2N8wINYP+0M1X46reHsMzN9+z0wRGiv+HbNUK1wB6PKjvp/oWdpljLfZQVB
- c40b3dWUsIZEiejDttw5lhG0uoC29C8tuCcprV2Yl1ZsmrvQuBGmR71zc7e2KbT5TB
- oF7tS7WQUKczA==
+ b=suuUVXeM75Bpq09znOk5hgvNa8r0MawOEAUBoaTk9Zaq00NBpT3eiTl8AicLV2Xx6
+ e8poErBG2fWGJnGGyLXVKsajOU8gWblxdpCmPeg71hGuqMjseNiOcK7zRzjPslGGN/
+ qAthfb5WYp/zyy+44e7fcUc6b/XcoP0gwaQo6UjD5AfeEi++/eP53CAxehZl1JsYPs
+ 44zJTLf4nWbXIncwzHJg1ForjW2YMiolCl7NrJ2Il/BVkaoJKJt0UpdG1vNzxh5yHY
+ +WEowlOUfpHMia/0F0Uw/ftyJ0X0Cgen19pBZrdHrKxXLrTMBJ9U1liuvxdYfbh8jd
+ V4ItQE/eAEpRw==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Walter Schweizer <walter.schweizer@siemens.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Anatolij Gustschin <agust@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 13/20] siemens: imx8-capricorn.dtsi: add wdt device
-Date: Thu, 21 Nov 2024 06:25:54 +0100
-Message-Id: <20241121052601.72880-14-hs@denx.de>
+ Alessandro Zini <alessandro.zini@siemens.com>,
+ Anatolij Gustschin <agust@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 14/20] siemens: capricorn: small board updates
+Date: Thu, 21 Nov 2024 06:25:55 +0100
+Message-Id: <20241121052601.72880-15-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241121052601.72880-1-hs@denx.de>
 References: <20241121052601.72880-1-hs@denx.de>
@@ -71,7 +71,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add wdt device
+with newest SCFW build_info() works now, so call it
+from checkboard() now.
+
+As we only use uart2 as console, do not init uart0.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
 
@@ -80,30 +83,40 @@ Signed-off-by: Heiko Schocher <hs@denx.de>
 (no changes since v2)
 
 Changes in v2:
-- add comments rom Fabio and Enrico
-  do not remove DMA for console
-  remove u-boot specific property addition, instead
-  add it in arch/arm/dts/imx8qxp-u-boot.dtsi
+- add comments from Fabio
+  rename subject line and rework commit message,
+  alse remove unneeded comment in checkboard()
 
- arch/arm/dts/imx8-capricorn.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ board/siemens/capricorn/board.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/dts/imx8-capricorn.dtsi b/arch/arm/dts/imx8-capricorn.dtsi
-index 4918bf8f567..3734a9d21f1 100644
---- a/arch/arm/dts/imx8-capricorn.dtsi
-+++ b/arch/arm/dts/imx8-capricorn.dtsi
-@@ -17,6 +17,11 @@
- 		stdout-path = &lpuart2;
- 	};
+diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
+index ad474d9baa0..bf04f12c75b 100644
+--- a/board/siemens/capricorn/board.c
++++ b/board/siemens/capricorn/board.c
+@@ -63,8 +63,7 @@ int board_early_init_f(void)
+ 	sc_pm_clock_rate_t rate = SC_80MHZ;
+ 	int ret;
  
-+	/* create device for u-boot wdt command */
-+	scu-wdt {
-+		compatible = "siemens,scu-wdt";
-+	};
-+
- };
+-	ret = sc_pm_setup_uart(SC_R_UART_0, rate);
+-	ret |= sc_pm_setup_uart(SC_R_UART_2, rate);
++	ret = sc_pm_setup_uart(SC_R_UART_2, rate);
+ 	if (ret)
+ 		return ret;
  
- &iomuxc {
+@@ -271,11 +270,7 @@ int checkboard(void)
+ {
+ 	puts("Board: Capricorn\n");
+ 
+-	/*
+-	 * Running build_info() doesn't work with current SCFW blob.
+-	 * Uncomment below call when new blob is available.
+-	 */
+-	/*build_info();*/
++	build_info();
+ 
+ 	print_bootinfo();
+ 	return 0;
 -- 
 2.20.1
 
