@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF405D6E2A4
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 09:40:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC23AD6E2CA
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 10:12:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04B57896C8;
-	Thu, 21 Nov 2024 10:40:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D79F48967B;
+	Thu, 21 Nov 2024 11:12:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="hxgV6k3a";
+	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="Arb+EfB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C973F896C7; Thu, 21 Nov 2024 10:40:31 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 664C18971B; Thu, 21 Nov 2024 11:12:46 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F735894F4
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 10:40:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FD8389321
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 11:12:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-43161e7bb25so5488485e9.2
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 01:40:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732182029; x=1732786829;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cWgsTywPHfI31OysttwdqY606pvPKxlt5ldON59geHI=;
- b=hxgV6k3aLb9HC+8RYEPsSmI7UWv71w8elt9kYspuzWWClKw9Cad+hbqUxspeKcR9La
- kLlRyXS3tGic0bggefyWn/diAH6sTpVQOdGNgdWmvOXM+TyTH26G/JXZoC066vDeC9C8
- ygQLrU+ATbC5TNUyRAHvPIxVucNRjMSPnVtNJ8iE4DKc7/PIrHSyJD1rovgQb4t1Eg0G
- KaTd5jSlWSJymdqRIoljRjAFR78OgHgT7e9F1fCs7qLebfGw7gHigcoSV8MXd+2egHM2
- lPyw8FfBW1Qx4WsI8qZvgzmTuHWoiLftplocHjDrO5xMfAvEpLDeX0JMkcGkT6KtLA5E
- bfIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732182029; x=1732786829;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cWgsTywPHfI31OysttwdqY606pvPKxlt5ldON59geHI=;
- b=dwpT2X9ZomDyzv6mtIC+S94LU4kB+IFrEKS6QPWbgDaUPFl2/lF2Nmo+Cx96sfituF
- tDACmBPS5IdKZ6CQQBcIiF55s3ufXY5otVM+bSfTm/wb5HTDOUpfD1C6ZyPZOW5qC7sw
- 7n9hBP7ZaQHQn/k6/pjxILYlctYlcfOIHGAPUldYADJxD/uoQvlvadn0N1LE5SjaHo91
- XqLkuYskYW1bOoYkzSMm6SE5ba5t/gXL7X0fJ3MjI7lOvTnTX4A6+qQNebI+594nhhkA
- rAJgnqPxocIfFh/EZsjGxv4m7ay9W41dfKyzd+g+12j2aLUNTmtiKMftZfJ3d/3Iqp0o
- iOOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU7xY9DL7DTZGzwyszsQ/rzAt8vwy28S+75m7EElQlSrMQEDW934YIjVqKXymQNzVcnCXHn/ZQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+/+yKa0n+OJfvMRSkPdXBzPGbSfrIlemj1Fu729rUt+uY7nme
- 4RvWV3Skd7B+/P2g9pYaHCcWJ1nfz0X93+SQfaIlGugc2TSDO48QORrJDZOIMNE=
-X-Google-Smtp-Source: AGHT+IE2JrSIldrhiGTv2t/asx5B6rQM6/VdGFmTOjSt3khqjDM/vUVIH8Ln3i+q4Tve+f0hJurIoQ==
-X-Received: by 2002:a05:600c:19d1:b0:431:5f1c:8352 with SMTP id
- 5b1f17b1804b1-433489867e7mr51026475e9.5.1732182028794; 
- Thu, 21 Nov 2024 01:40:28 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38254933bf7sm4491385f8f.72.2024.11.21.01.40.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 01:40:28 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Guillaume LA ROQUE <glaroque@baylibre.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>
-Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io
-Subject: Re: [PATCH v3 0/5] Add support of Android Boot Image version 2 and
- non-AB image
-In-Reply-To: <634d3625-deb9-4286-9b1d-4f18bdb49166@baylibre.com>
-References: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
- <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
- <87mshvxhq3.fsf@baylibre.com>
- <d03137b3-02a1-4e1d-860b-5b0bc78be5c9@baylibre.com>
- <634d3625-deb9-4286-9b1d-4f18bdb49166@baylibre.com>
-Date: Thu, 21 Nov 2024 10:40:25 +0100
-Message-ID: <877c8wncvq.fsf@baylibre.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.net;
+ s=s31663417; t=1732183954; x=1732788754; i=wahrenst@gmx.net;
+ bh=e+9eZa9k7K0vnsPGC/pQi/2MVmuqhtTj8flSwcvqV4E=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Arb+EfB4oPHcs8ANYuVRaS8mhQ7ecyuXRjIzB4okfp+FYKimpoYu1nT5QLO1wqex
+ k4BIoQ7C/MDsNRRWd/zvg7QwWePM/5x8yp0BvR045UwcXMa2oMhG4RO70h45ziyBG
+ ahWmrfuAy8UIe40g+reBZ1FJp/N9LWBZdVrJPSV3/vAytYkeq7F/mOXyjsgcIvNMr
+ R45o0GZ2SIH72/DafoHxZP6mDziJru5tWj6dUrYuO2LLOSQdSYSb6Gu96/EJqEXzC
+ HDUS51n43lsZfQ3SHBTEhKWEf63KC0tEgmfb5lUMO1F5Jfz09pzQ7AwmcqKj2dOOw
+ Jpx9YUJNKV8TfoPUYQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.1.105] ([37.4.251.153]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfYPi-1tgpLe132O-00kmRC; Thu, 21
+ Nov 2024 11:12:34 +0100
+Message-ID: <371c6302-438b-45b6-944b-d513f74f38a5@gmx.net>
+Date: Thu, 21 Nov 2024 11:12:32 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] board: phytec: imx93: Add eeprom-based hardware
+ introspection
+To: Christoph Stoidner <c.stoidner@phytec.de>, u-boot@lists.denx.de,
+ upstream@lists.phytec.de
+Cc: Wadim Egorov <w.egorov@phytec.de>, Yannic Moog <y.moog@phytec.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Primoz Fiser <primoz.fiser@norik.com>, Andrej Picej <andrej.picej@norik.com>
+References: <20241120163143.127862-1-c.stoidner@phytec.de>
+ <20241120163143.127862-3-c.stoidner@phytec.de>
+Content-Language: en-US
+From: Stefan Wahren <wahrenst@gmx.net>
+In-Reply-To: <20241120163143.127862-3-c.stoidner@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:XNZ1eAtwzhUXVeNnpnSdVwu780pJklPl79PFgG13cimarXD5XYf
+ uXOj3KyPG4JACiL0htj+8AfZ0Jg5xZ525VNZ6YwdnzugQW3qb/MCu0SNCrTuzmhT+YpHWCD
+ eya7UDjB5NB1pSqaHv2NNML4Hk8U40334SENlDTdiU2wNgNsSDErCO0sRIXBOZRtSrXuiRg
+ dxZ9Cs7XzZgscrJ5ytgSQ==
+UI-OutboundReport: notjunk:1;M01:P0:XrIhspT7+n0=;KTJA2R8g1afvPP289mBOG+SoRT3
+ hVce7T1aI+uN9opD6vaf/a10l2+Ub/KhCkxKe9joyqmxNNOztVCoEdCCnmS8U0EtxpTjHu6eH
+ N2wOAfZ/YelvntyPGsSYhaT8P3eT1ufsgU3D8+q6OdykAz7xUtGzT1Ql33qQDy1NW6zfWR/yE
+ ypOlbb1fHYbTZiV+K3vHNR2qTnT8KvktJZHNTP9MBF9GdrV6zxGLou9/dZgZWuA0iivvHCf/I
+ 7zeRI+B2VtlGFtpRn2xN455EwkWuC7Ep1cil8LZRh0EvHo6shuZOv05TZMGG8hORp3cQprGxR
+ kgJXdjw8tBbGI2WFuQcVzNTZZKmY/mD3R8KM+r6zLwsTSSb4A7g21Z4BlIANUkRKnSJBUa2IF
+ 77R6ivxJizlpwrddYqr+FjR14BWjpZKKsSl6S66kzXiT4XvlzgT9o+PGY4CQ702tkWFpGDi79
+ uygXUmlp0uN7MFagyqiqmFFHgXS99umHJVbQYx00hHvXZXYSckZKAx1cTe0ZzfUMDyyE+/bUa
+ rIKc3wF7ZwH9nt04TeOXfq0UaNJb0E0/1KKRmlfZfhQTepSVb38VTu9YlbJzTvcHea37avBsM
+ nfH2bKxNXuMHPadZqk6PIcTXyL1jbMRbgV07YPiCacs9ctsmhOO3V670KuCwCC+f/8rhqLdhu
+ wp+cgWP5ypSrTj5r7daNe8BZl8ekupmVF1EmPWLQ+WKeNQ6Gfajpx2q7+lnFCK8GrLOJNtFMx
+ oyV3AwVem+qhuD8YJvRKiJVImA2Oy53lNIddPOsQ+LqGnGoYw0uLIudHiTT+q3DiWSWCWb/Cn
+ T3rSvMAK4774G5M3Q7JiEIM76jSFMMQod642WDloBdZKejnhusF7SdLM+S+ctIhLQisX4bxrl
+ hXmLERIat4x9H1m3Om32n2f0gkePBsKc/mrDLZZ9jetnejkRKptVXEZmU
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,112 +96,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
+Hi Christoph,
 
-On mer., nov. 20, 2024 at 18:54, Guillaume LA ROQUE <glaroque@baylibre.com>=
- wrote:
-
-> Hi,
+Am 20.11.24 um 17:31 schrieb Christoph Stoidner:
+> The phyCORE-i.MX 93 is available in various variants. Relevant variant
+> options for the spl/u-boot are:
+> - with or without HS400 support for the eMMC
+> - with 1GB ram chip, or 2GB ram chip
 >
-> unfortunately i don't find for now how i can fix issue in test.
+> The phyCORE's eeprom contains all information about the existing variant
+> options. Add evaluation of the eeprom data to the spl/u-boot to
+> enable/disable HS400 and to select the appropriate ram configuration at
+> startup.
 >
-> i don't really understand with when we launch test individually it's=20
-> working but if we launch test_ut test not working ,
-> I see on android test for image version 4 to mmc7 in bootflow list detect=
-ed.
+> Signed-off-by: Christoph Stoidner <c.stoidner@phytec.de>
+> Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
+> Reviewed-by: Yannic Moog <y.moog@phytec.de>
+> ---
+> Cc: Mathieu Othacehe <m.othacehe@gmail.com>
+> Cc: Christoph Stoidner <c.stoidner@phytec.de>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yannic Moog <y.moog@phytec.de>
+> Cc: Primoz Fiser <primoz.fiser@norik.com>
+> Cc: Andrej Picej <andrej.picej@norik.com>
+> Cc: Wadim Egorov <w.egorov@phytec.de>
+> ---
+> Changes in v4:
+> - add missing pinctrls for eMMC 100mhz and 200mhz
 >
-> =3D> ut bootstd bootflow_android_image_v4
-> Test: bootflow_android_image_v4: bootflow.c
-> scan_mmc_android_bootdev: mmc7
-> order 0: mmc2
-> order 1: mmc1
-> order 2: mmc7
-> order 3: <NULL>
-> Enabled mmc mmc7 bootdev
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slot=
- a, tries remaining 7
->  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slot=
- a, tries remaining 7
-> Older order: mmc2
-> Showing all bootflows
-> Seq=C2=A0 Method=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 State=C2=A0=C2=A0 Uc=
-lass=C2=A0=C2=A0=C2=A0 Part Name Filename
-> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- ------------=
-------------=20
-> ----------------
->  =C2=A0 0=C2=A0 extlinux=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 mmc=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 1 mmc1.bootdev.part_1=20
-> /extlinux/extlinux.conf
->  =C2=A0 1=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 m=
-mc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.who=
-le
->  =C2=A0 2=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 m=
-mc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.who=
-le
-> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- ------------=
-------------=20
-> ----------------
-> (3 bootflows, 3 valid)
+> Changes in v3:
+> - remove unwanted dts node eepromid
+> - correct typo in doc (PHYTEC_IMX93_VOLTAGE_3V3)
+> - improve enum code-style (phytec_imx93_option_index)
 >
-> if we just launch bootflow_android_image_v4 we have only a=20
-> mmc7.bootdev.whole and so test is ok.
+> Changes in v2:
+> - encapsulate handling of feature flag VOLTAGE into own function
+> - move definition of enum phytec_imx93_ddr_eeprom_code into header file
 >
-> if someone have an idea or can give some idea of what i can try or check .
+>   arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi |  58 +++++++++
+>   arch/arm/mach-imx/imx9/Kconfig                |   2 +
+>   arch/arm/mach-imx/imx9/soc.c                  |   2 +-
+>   board/phytec/common/Kconfig                   |   8 ++
+>   board/phytec/common/Makefile                  |   1 +
+>   board/phytec/common/imx93_som_detection.c     | 111 ++++++++++++++++++
+>   board/phytec/common/imx93_som_detection.h     |  51 ++++++++
+>   board/phytec/phycore_imx93/Kconfig            |  28 +++++
+>   board/phytec/phycore_imx93/MAINTAINERS        |   5 +-
+>   board/phytec/phycore_imx93/phycore-imx93.c    |  51 ++++++++
+>   board/phytec/phycore_imx93/spl.c              |  48 ++++++++
+>   11 files changed, 363 insertions(+), 2 deletions(-)
+>   create mode 100644 board/phytec/common/imx93_som_detection.c
+>   create mode 100644 board/phytec/common/imx93_som_detection.h
 >
-> thanks for helping.
-
-I'll have a look
-
+> diff --git a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi b/arch/arm/dt=
+s/imx93-phyboard-segin-u-boot.dtsi
+> index 6897c91f4d..702d86f4e0 100644
+> --- a/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> +++ b/arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi
+> @@ -139,6 +139,13 @@
+>   &usdhc1 {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+> +	/*
+> +	 * Remove pinctrl assignments once they are added to imx93-phycore-som=
+.dtsi
+> +	 */
+> +	pinctrl-names =3D "default", "state_100mhz", "state_200mhz";
+> +	pinctrl-0 =3D <&pinctrl_usdhc1>;
+> +	pinctrl-1 =3D <&pinctrl_usdhc1_100mhz>;
+> +	pinctrl-2 =3D <&pinctrl_usdhc1_200mhz>;
+>   };
 >
-> Guillaume
-> Le 20/11/2024 =C3=A0 13:56, Guillaume LA ROQUE a =C3=A9crit=C2=A0:
->> Hi,
->>
->> Le 19/11/2024 =C3=A0 18:21, Mattijs Korpershoek a =C3=A9crit=C2=A0:
->>> Hi Guillaume,
->>>
->>> On mar., nov. 19, 2024 at 15:16, Mattijs Korpershoek=20
->>> <mkorpershoek@baylibre.com> wrote:
->>>
->>>> Hi,
->>>>
->>>> On Tue, 19 Nov 2024 12:37:37 +0100, Guillaume La Roque wrote:
->>>>> Actually bootmethod android only support android boot image version 4
->>>>> and with AB image, some old platform wtill use android boot image
->>>>> version 2 with AB or without AB slot.
->>>>>
->>>>> This patchset add support of both version 2 and non-AB slot images.
->>>>> It's fixed in same time a boot issue seen on khadas vim3{l} board=20
->>>>> with 16GB eMMC
->>>>>
->>>>> [...]
->>>> Thanks, Applied to=20
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
->>>>
->>>> [1/5] bootstd: android: add support of bootimage v2
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbe7eee99=
-2e90bbe84278db20d29159e3eedfe0d
->>>> [2/5] bootstd: android: add non-A/B image support
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a85f2e0e7=
-bd3665366ca2704d1142d3f16f22c36
->>>> [3/5] configs: khadas-vim3l_android{_ab}: move on bootmeth android
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88547773b=
-2df5e4cabbaec57a0f2e7f212dbf823
->>>> [4/5] configs: khadas-vim3_android{_ab}: move on bootmeth android
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4a2e58717=
-f2f33ef0dbb422026ef71938f2265aa
->>>> [5/5] bootstd: Add test for Android boot image v2
->>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/acaa7f35a=
-33146f887948d34130229388280844a
->>> CI has found some issues when applying these series:
->>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23452
->>>
->>> Could you have a look please?
->> i will check
->>>
->>> Thanks!
->>>
->>>> --=20
->>>> Mattijs
->>
->>
+>   &usdhc2 {
+> @@ -215,6 +222,48 @@
+>   			MX93_PAD_ENET2_RD3__GPIO4_IO27			0x31e
+>   		>;
+>   	};
+> +
+> +	/*
+> +	 * Remove pinctrl_usdhc1_100mhz and pinctrl_usdhc1_200mhz once they
+> +	 * are added to imx93-phycore-som.dtsi
+> +	 */
+> +	/* need to config the SION for data and cmd pad, refer to ERR052021 */
+> +	pinctrl_usdhc1_100mhz: usdhc1-100mhzgrp {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +		fsl,pins =3D <
+> +			MX93_PAD_SD1_CLK__USDHC1_CLK		0x17be
+> +			MX93_PAD_SD1_CMD__USDHC1_CMD		0x4000139e
+> +			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x4000138e
+> +			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x4000139e
+> +			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x400013be
+Could you please explain why the pin configuration for 100 MHz of DATA0
+& DATA2 is different from the other data pins?
+> +			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x4000139e
+> +			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x4000139e
+> +			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x4000139e
+> +			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x4000139e
+> +			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x4000139e
+> +			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x179e
+> +		>;
+> +	};
+> +
+> +	/* need to config the SION for data and cmd pad, refer to ERR052021 */
+> +	pinctrl_usdhc1_200mhz: usdhc1-200mhzgrp {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +		fsl,pins =3D <
+> +			MX93_PAD_SD1_CLK__USDHC1_CLK		0x17be
+> +			MX93_PAD_SD1_CMD__USDHC1_CMD		0x4000139e
+> +			MX93_PAD_SD1_DATA0__USDHC1_DATA0	0x4000139e
+> +			MX93_PAD_SD1_DATA1__USDHC1_DATA1	0x400013be
+> +			MX93_PAD_SD1_DATA2__USDHC1_DATA2	0x400013be
+> +			MX93_PAD_SD1_DATA3__USDHC1_DATA3	0x400013be
+> +			MX93_PAD_SD1_DATA4__USDHC1_DATA4	0x400013be
+> +			MX93_PAD_SD1_DATA5__USDHC1_DATA5	0x400013be
+> +			MX93_PAD_SD1_DATA6__USDHC1_DATA6	0x400013be
+> +			MX93_PAD_SD1_DATA7__USDHC1_DATA7	0x400013be
+> +			MX93_PAD_SD1_STROBE__USDHC1_STROBE	0x179e
+> +		>;
+> +	};
+>   };
+>
