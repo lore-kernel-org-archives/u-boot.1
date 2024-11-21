@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF41D6ED02
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 11:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78582D6ED04
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 11:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C0EC89739;
-	Thu, 21 Nov 2024 12:00:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA98D89745;
+	Thu, 21 Nov 2024 12:11:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="GjPofj5n";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="SK5UF+2h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 653E38973A; Thu, 21 Nov 2024 12:00:28 +0100 (CET)
+ id E23BA8974A; Thu, 21 Nov 2024 12:11:42 +0100 (CET)
 Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
  [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3061389736
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 12:00:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7113289745
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 12:11:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jmasson@baylibre.com
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
 Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-38230ed9baeso517275f8f.1
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 03:00:26 -0800 (PST)
+ ffacd0b85a97d-3824aef833bso565315f8f.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 03:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732186825; x=1732791625;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732187500; x=1732792300;
  darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pAXABHQ/j3+N90IGk6ex/JQLni1M4jFvqW43ixl+FBk=;
- b=GjPofj5ngf7TSd6MjUHOY5zciW8vDOJX3+VGehhMEJONXgabeTXSPv9kxJTrjatXJt
- slUVhMTMFIExB6pA+OAiqw6LwEFFKFtrdD4lBsfACL5SYieAI/1N2mQKdZOclyPM56m5
- a0oBmTNDKXLKixYe0bFTOrZSYk4lK0st+56ZqqxLZWgxv9a7eg1uElGKVF8m2ojOOxDw
- yxneqeIWUeXSa3BtylS+mVgNWh4Pgj5N3xqHXJmKDl1rOhv9yP3NKMZ4i+kWRf/vlhNc
- DkyXQR39IJZ9CHlI//qu5q4RgCglkeF7C12mF0b5WxWvgV1znAh+HsmOzDJo+9ntnaG8
- RtTA==
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=WptBH79be/xHpGCQR+RCMRy74m8idxdy2atR7o1SHFg=;
+ b=SK5UF+2hYsvPvBkWiP4VSSzX/Q4DGnLrD587QQ8C9wiDrTtd6a3ufHF6m4+cDxBG1E
+ x4NzLst3d+BDTFUHd/Max3mqnMjO57BXWYKYuZDbhdi9wXKUxFUnP2CeRMp0P7TGIhuF
+ eKhnLrKpO+0y7vSnzR/0lHKcbiuQkL+zEzPP/ExFs2zBdJy+7MiPEo160sVrgEB6QLN3
+ yP9WnD6GU+rXac+XZsA4Cvw4maLhMFEovKHrnb6qIZtcd5MVcECnFcogB/Lvtm1MAzx0
+ XNzgDgnM6PE+plzccAijGjYhTvpPVXmDbiYOOq4SUVgWWfMFNy41USrrzW/5J3z64iUF
+ +9/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732186825; x=1732791625;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pAXABHQ/j3+N90IGk6ex/JQLni1M4jFvqW43ixl+FBk=;
- b=CH6+OZfmbVx4lHLhm7cLh+9FV4o1mcJLJ9askIReTOBY0PWZc4CvyMPfyuokUHx0aO
- cUlwegUhaSalCFr3YqwRPPBR6VQun178fPLTgGwv8rHUTNU/SkfvNLwcccOlkDCBROft
- hCVcm3g4CAPPw7tz/ScL0+QQkLo5bpekBBIh48cSJ1ougAPny+JIITe3hsgwQAIDynpW
- vugooFXRZ5z7pqYMvCSbF+SLcbPwl/QWh2lQA1Lczb4AZ4NaFbLJX/zQruTsDj17E1SR
- FyBWn60PTOKAJcTagrIPFnRPHGpqMhebNsrieCIP7i0qt2rmp3LLgz2blQiL+LjA0BSF
- yEPA==
-X-Gm-Message-State: AOJu0Yxl97kvxmny1e7877YKjXOxG6h/mJtKP9MDKE4oF5gTAQRccoPU
- za55NXLIQSq9A7gHdkRVZ1fflfMj4zvwTxSCHiiua0BvTquc9EnmiS4BuhDKjOlNnn00NLrv3ZF
- W4Bk=
-X-Google-Smtp-Source: AGHT+IEgRLXp9qOc2gmUchMEsKd4YlhXfrFwx3holiF4Tro5YzK+6+wyMcK//+t+aXyIcp05Dm//Kg==
-X-Received: by 2002:a5d:6dab:0:b0:382:4f9e:711f with SMTP id
- ffacd0b85a97d-38254adee04mr3984011f8f.6.1732186825267; 
- Thu, 21 Nov 2024 03:00:25 -0800 (PST)
-Received: from [192.168.1.127] ([2a04:cec2:a:dda0:7e93:703a:331e:b018])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38254933c32sm4789484f8f.70.2024.11.21.03.00.24
+ d=1e100.net; s=20230601; t=1732187500; x=1732792300;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WptBH79be/xHpGCQR+RCMRy74m8idxdy2atR7o1SHFg=;
+ b=FUFGgk089+1bpiRS34ZUWMEE9DDEVOWTE7KlqMwuGq8LLS9iJbNJGhXKLInO/tL319
+ IlSwbjWLadGHF/vfU+dDmj6H3ELI0g/wVyBSY7PSq0Vaxxz40bkZPY55iwwSA++o0eod
+ 16CWft1e8j7bb2TOrnhg8tFm+ikimILwa3LqzpdCz06Zq3SQbyZ/1a5G0EsOgHrbI+QO
+ 9YlFNKk7/kot3Ds5IQGQeAlpmw62WlXXchCrC2asJnFX4ku4J+CrXOmIfFFhfZ4MT+fa
+ QuSd8h8qkwXtyugsCOD87z0eekAw11H5DV3ZWGo5sr1rRcP2zswKOPIJs3Hfe6BZMztY
+ +4eA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX7b+Y8LRmGOtM5LwrCzKXQKGUOh2M0ych7csP7+4XvtsggJwZ7IFpl2eKjwFKpBNkee12BEV4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyA6TERDhraiCn5Q4Kc97jmHJ/fciZ+W2KLEu3UebA9PLeM05+V
+ dd0bZWcCaodDZKLYW+CS/DymVh/ljsaJikdzAJTr1gmD2DAijmVRyeP0XAr/7qE=
+X-Gm-Gg: ASbGnct2eF7pHLUnwoiMTyNZG0uP56GAoEJGvJ50p+ZxxrxsBjx0t0LKSceAQh0bk6B
+ 64C47rVm/l7zVsCDQGUMusjGxzc5BIc8oQdCbRLqABiL5JplORsAlSRGK6JC1hHF0Y/OXn3evW7
+ mZtIK7wmf27FApWn8kW1vmPahAwX+nhBurSIkPmuaaPUNVyZrs4ldtxZNDu6KsxCPfoooC+cQM7
+ hfJYVXndy3qhz50LvpJk5QlK10LV2PPo3CGNa8VYUsl0e8VeHGqIQ==
+X-Google-Smtp-Source: AGHT+IHGEBWxHz15xkeGgnNptxuXrPJ16T9RzK3iSJHSRcGqDY3gGI7hQ5b4MAeDEnSL4o2DVu9RQA==
+X-Received: by 2002:a5d:6dab:0:b0:382:4115:1ccb with SMTP id
+ ffacd0b85a97d-38254ae039cmr4902345f8f.7.1732187499842; 
+ Thu, 21 Nov 2024 03:11:39 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38254905421sm4702514f8f.14.2024.11.21.03.11.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 03:00:24 -0800 (PST)
-From: Julien Masson <jmasson@baylibre.com>
-Date: Thu, 21 Nov 2024 11:59:55 +0100
-Subject: [PATCH] bootstd: android: don't read whole partition sizes
+ Thu, 21 Nov 2024 03:11:38 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Guillaume LA ROQUE <glaroque@baylibre.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io
+Subject: Re: [PATCH v3 0/5] Add support of Android Boot Image version 2 and
+ non-AB image
+In-Reply-To: <877c8wncvq.fsf@baylibre.com>
+References: <20241119-adnroidv2-v3-0-45baa486fb31@baylibre.com>
+ <173202581313.45491.4764652989056463492.b4-ty@baylibre.com>
+ <87mshvxhq3.fsf@baylibre.com>
+ <d03137b3-02a1-4e1d-860b-5b0bc78be5c9@baylibre.com>
+ <634d3625-deb9-4286-9b1d-4f18bdb49166@baylibre.com>
+ <877c8wncvq.fsf@baylibre.com>
+Date: Thu, 21 Nov 2024 12:11:35 +0100
+Message-ID: <871pz4n8ns.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241121-bootmeth-android-part-sizes-v1-1-25760bbd0f08@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAKoSP2cC/x3MwQqDMAwA0F+RnA20ZTjdrwwPnU01B1tJiojiv
- 1t2fJd3gZIwKXyaC4R2Vs6pwrYNTItPMyGHanDGvax1Fn85l5XKgj4FyRxw81JQ+STFGF3fdWS
- CeQ9Qh00o8vHfv+N9PyYWVdxtAAAA
-X-Change-ID: 20241121-bootmeth-android-part-sizes-ff2866e0d079
-To: Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Julien Masson <jmasson@baylibre.com>
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,217 +105,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current implementation is reading the whole partition for boot and
-vendor_boot image which can be long following the size of the
-partition or the time to read blocks (driver/SoC specific).
+Hi,
 
-For example with mediatek mt8365 EVK board, we have a 64MiB boot
-partition and the boot image flashed in this partition is only 42MiB.
-It takes ~8-9 secs to read the boot partition.
+On jeu., nov. 21, 2024 at 10:40, Mattijs Korpershoek <mkorpershoek@baylibre=
+.com> wrote:
 
-Instead we can retrieved the boot image and vendor boot image size
-with these new functions:
-- android_image_get_bootimg_size
-- android_image_get_vendor_bootimg_size
-Use these information and read only the necessary.
+> Hi Guillaume,
+>
+> On mer., nov. 20, 2024 at 18:54, Guillaume LA ROQUE <glaroque@baylibre.co=
+m> wrote:
+>
+>> Hi,
+>>
+>> unfortunately i don't find for now how i can fix issue in test.
+>>
+>> i don't really understand with when we launch test individually it's=20
+>> working but if we launch test_ut test not working ,
+>> I see on android test for image version 4 to mmc7 in bootflow list detec=
+ted.
+>>
+>> =3D> ut bootstd bootflow_android_image_v4
+>> Test: bootflow_android_image_v4: bootflow.c
+>> scan_mmc_android_bootdev: mmc7
+>> order 0: mmc2
+>> order 1: mmc1
+>> order 2: mmc7
+>> order 3: <NULL>
+>> Enabled mmc mmc7 bootdev
+>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slo=
+t a, tries remaining 7
+>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ab_select_slot() ANDROID: Attempting slo=
+t a, tries remaining 7
+>> Older order: mmc2
+>> Showing all bootflows
+>> Seq=C2=A0 Method=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 State=C2=A0=C2=A0 U=
+class=C2=A0=C2=A0=C2=A0 Part Name Filename
+>> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- -----------=
+-------------=20
+>> ----------------
+>>  =C2=A0 0=C2=A0 extlinux=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 mmc=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 1 mmc1.bootdev.part_=
+1=20
+>> /extlinux/extlinux.conf
+>>  =C2=A0 1=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 =
+mmc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.wh=
+ole
+>>  =C2=A0 2=C2=A0 android=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ready=C2=A0=C2=A0 =
+mmc=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 mmc7.bootdev.wh=
+ole
+>> ---=C2=A0 -----------=C2=A0 ------=C2=A0 --------=C2=A0 ---- -----------=
+-------------=20
+>> ----------------
+>> (3 bootflows, 3 valid)
+>>
+>> if we just launch bootflow_android_image_v4 we have only a=20
+>> mmc7.bootdev.whole and so test is ok.
+>>
+>> if someone have an idea or can give some idea of what i can try or check=
+ .
+>>
+>> thanks for helping.
+>
+> I'll have a look
 
-By doing this with mt8365 EVK board, we read boot image in ~5 secs.
+The following command fails:
+$ ./test/py/test.py --bd sandbox --build -k test_ut
 
-Signed-off-by: Julien Masson <jmasson@baylibre.com>
----
-Changes have been tested with:
-$ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_android_image_v4
-$ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_android_image_v2
----
- boot/bootmeth_android.c | 28 +++++++++++++++++++++++-----
- boot/image-android.c    | 45 +++++++++++++++++++++++++++++++++++++++++++++
- include/image.h         | 24 ++++++++++++++++++++++++
- 3 files changed, 92 insertions(+), 5 deletions(-)
+Running both test at the same time fails as well:
+$ ./test/py/test.py --bd sandbox --build -k bootflow_android_image_v
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 2aac32331d3c28853bc87d05a8c76ae868ea97c7..3a5144aaa3b0125cf13ff1805b05e87385263308 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -45,6 +45,8 @@ struct android_priv {
- 	enum android_boot_mode boot_mode;
- 	char *slot;
- 	u32 header_version;
-+	u32 boot_img_size;
-+	u32 vendor_boot_img_size;
- };
- 
- static int android_check(struct udevice *dev, struct bootflow_iter *iter)
-@@ -98,7 +100,13 @@ static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
- 		return log_msg_ret("header", -ENOENT);
- 	}
- 
-+	if (!android_image_get_bootimg_size(buf, &priv->boot_img_size)) {
-+		free(buf);
-+		return log_msg_ret("get bootimg size", -EINVAL);
-+	}
-+
- 	priv->header_version = ((struct andr_boot_img_hdr_v0 *)buf)->header_version;
-+
- 	free(buf);
- 
- 	return 0;
-@@ -138,6 +146,12 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
- 		free(buf);
- 		return log_msg_ret("header", -ENOENT);
- 	}
-+
-+	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size)) {
-+		free(buf);
-+		return log_msg_ret("get vendor bootimg size", -EINVAL);
-+	}
-+
- 	free(buf);
- 
- 	return 0;
-@@ -330,15 +344,17 @@ static int android_read_file(struct udevice *dev, struct bootflow *bflow,
-  * @blk: Block device to read
-  * @name: Partition name to read
-  * @slot: Nul-terminated slot suffixed to partition name ("a\0" or "b\0")
-+ * @image_size: Image size in bytes used when reading the partition
-  * @addr: Address where the partition content is loaded into
-  * Return: 0 if OK, negative errno on failure.
-  */
- static int read_slotted_partition(struct blk_desc *desc, const char *const name,
--				  const char slot[2], ulong addr)
-+				  const char slot[2], ulong image_size, ulong addr)
- {
- 	struct disk_partition partition;
- 	char partname[PART_NAME_LEN];
- 	size_t partname_len;
-+	ulong num_blks = DIV_ROUND_UP(image_size, desc->blksz);
- 	int ret;
- 	u32 n;
- 
-@@ -364,8 +380,8 @@ static int read_slotted_partition(struct blk_desc *desc, const char *const name,
- 	if (ret < 0)
- 		return log_msg_ret("part", ret);
- 
--	n = blk_dread(desc, partition.start, partition.size, map_sysmem(addr, 0));
--	if (n < partition.size)
-+	n = blk_dread(desc, partition.start, num_blks, map_sysmem(addr, 0));
-+	if (n < num_blks)
- 		return log_msg_ret("part read", -EIO);
- 
- 	return 0;
-@@ -498,12 +514,14 @@ static int boot_android_normal(struct bootflow *bflow)
- 	if (ret < 0)
- 		return log_msg_ret("read slot", ret);
- 
--	ret = read_slotted_partition(desc, "boot", priv->slot, loadaddr);
-+	ret = read_slotted_partition(desc, "boot", priv->slot, priv->boot_img_size,
-+				     loadaddr);
- 	if (ret < 0)
- 		return log_msg_ret("read boot", ret);
- 
- 	if (priv->header_version >= 3) {
--		ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
-+		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
-+					     priv->vendor_boot_img_size, vloadaddr);
- 		if (ret < 0)
- 			return log_msg_ret("read vendor_boot", ret);
- 		set_avendor_bootimg_addr(vloadaddr);
-diff --git a/boot/image-android.c b/boot/image-android.c
-index cd01278f211d63262f2bdad7aa1176e2c1bbfedd..93b54bf8d7936862693d56d5b75343575f3e6293 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -178,6 +178,51 @@ static void android_boot_image_v0_v1_v2_parse_hdr(const struct andr_boot_img_hdr
- 	data->boot_img_total_size = end - (ulong)hdr;
- }
- 
-+bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size)
-+{
-+	struct andr_image_data data;
-+
-+	if (!hdr || !boot_img_size) {
-+		printf("hdr or boot_img_size can't be NULL\n");
-+		return false;
-+	}
-+
-+	if (!is_android_boot_image_header(hdr)) {
-+		printf("Incorrect boot image header\n");
-+		return false;
-+	}
-+
-+	if (((struct andr_boot_img_hdr_v0 *)hdr)->header_version <= 2)
-+		android_boot_image_v0_v1_v2_parse_hdr(hdr, &data);
-+	else
-+		android_boot_image_v3_v4_parse_hdr(hdr, &data);
-+
-+	*boot_img_size = data.boot_img_total_size;
-+
-+	return true;
-+}
-+
-+bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img_size)
-+{
-+	struct andr_image_data data;
-+
-+	if (!hdr || !vendor_boot_img_size) {
-+		printf("hdr or vendor_boot_img_size can't be NULL\n");
-+		return false;
-+	}
-+
-+	if (!is_android_vendor_boot_image_header(hdr)) {
-+		printf("Incorrect vendor boot image header\n");
-+		return false;
-+	}
-+
-+	android_vendor_boot_image_v3_v4_parse_hdr(hdr, &data);
-+
-+	*vendor_boot_img_size = data.vendor_boot_img_total_size;
-+
-+	return true;
-+}
-+
- bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
- 			    struct andr_image_data *data)
- {
-diff --git a/include/image.h b/include/image.h
-index c52fced9b409b1f963daa4ab6c266909ca035aff..9be5acd8158f00930ab1f3988b8f577817acd1fe 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -1801,6 +1801,30 @@ int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
- struct cipher_algo *image_get_cipher_algo(const char *full_name);
- struct andr_image_data;
- 
-+/**
-+ * android_image_get_bootimg_size() - Extract size of Android boot image
-+ *
-+ * This is used to extract the size of an Android boot image
-+ * from boot image header.
-+ *
-+ * @hdr: Pointer to boot image header
-+ * @boot_img_size: On exit returns the size in bytes of the boot image
-+ * Return: true if succeeded, false otherwise
-+ */
-+bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size);
-+
-+/**
-+ * android_image_get_vendor_bootimg_size() - Extract size of Android vendor-boot image
-+ *
-+ * This is used to extract the size of an Android vendor-boot image
-+ * from vendor-boot image header.
-+ *
-+ * @hdr: Pointer to vendor-boot image header
-+ * @vendor_boot_img_size: On exit returns the size in bytes of the vendor-boot image
-+ * Return: true if succeeded, false otherwise
-+ */
-+bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img_size);
-+
- /**
-  * android_image_get_data() - Parse Android boot images
-  *
+However, running individually, no issues are observed:
+$ ./test/py/test.py --bd sandbox --build -k bootflow_android_image_v4
+$ ./test/py/test.py --bd sandbox --build -k bootflow_android_image_v2
 
----
-base-commit: acaa7f35a33146f887948d34130229388280844a
-change-id: 20241121-bootmeth-android-part-sizes-ff2866e0d079
+Going back to look at the v1 series [1], the tests were working fine.
 
-Best regards,
--- 
-Julien Masson <jmasson@baylibre.com>
+If we use the following base (from [1]), it works fine:
+commit 9e1cd2f2cb86 ("Merge https://source.denx.de/u-boot/custodians/u-boot=
+-usb")
 
+However, the don't when using this base:
+commit b7d4c80fce44 ("Merge tag 'efi-next-2024-11-18' of https://source.den=
+x.de/u-boot/custodians/u-boot-efi into next")
+
+I've bisected the issue and I've found that the following patch from
+Simon causes the issue:
+commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()=
+")
+
+Reverting the above patch fixes the problem when running with:
+$ ./test/py/test.py --bd sandbox --build -k test_ut
+
+However, I don't understand why Simon's patch causes a duplicate mmc7
+dev to be mounted.
+
+I will continue the investigation.
+
+[1] https://lore.kernel.org/all/20241017-adnroidv2-v1-0-781c939902c9@baylib=
+re.com/
+
+>
+>>
+>> Guillaume
+>> Le 20/11/2024 =C3=A0 13:56, Guillaume LA ROQUE a =C3=A9crit=C2=A0:
+>>> Hi,
+>>>
+>>> Le 19/11/2024 =C3=A0 18:21, Mattijs Korpershoek a =C3=A9crit=C2=A0:
+>>>> Hi Guillaume,
+>>>>
+>>>> On mar., nov. 19, 2024 at 15:16, Mattijs Korpershoek=20
+>>>> <mkorpershoek@baylibre.com> wrote:
+>>>>
+>>>>> Hi,
+>>>>>
+>>>>> On Tue, 19 Nov 2024 12:37:37 +0100, Guillaume La Roque wrote:
+>>>>>> Actually bootmethod android only support android boot image version 4
+>>>>>> and with AB image, some old platform wtill use android boot image
+>>>>>> version 2 with AB or without AB slot.
+>>>>>>
+>>>>>> This patchset add support of both version 2 and non-AB slot images.
+>>>>>> It's fixed in same time a boot issue seen on khadas vim3{l} board=20
+>>>>>> with 16GB eMMC
+>>>>>>
+>>>>>> [...]
+>>>>> Thanks, Applied to=20
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+>>>>>
+>>>>> [1/5] bootstd: android: add support of bootimage v2
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbe7eee9=
+92e90bbe84278db20d29159e3eedfe0d
+>>>>> [2/5] bootstd: android: add non-A/B image support
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/a85f2e0e=
+7bd3665366ca2704d1142d3f16f22c36
+>>>>> [3/5] configs: khadas-vim3l_android{_ab}: move on bootmeth android
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/88547773=
+b2df5e4cabbaec57a0f2e7f212dbf823
+>>>>> [4/5] configs: khadas-vim3_android{_ab}: move on bootmeth android
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4a2e5871=
+7f2f33ef0dbb422026ef71938f2265aa
+>>>>> [5/5] bootstd: Add test for Android boot image v2
+>>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/acaa7f35=
+a33146f887948d34130229388280844a
+>>>> CI has found some issues when applying these series:
+>>>> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23452
+>>>>
+>>>> Could you have a look please?
+>>> i will check
+>>>>
+>>>> Thanks!
+>>>>
+>>>>> --=20
+>>>>> Mattijs
+>>>
+>>>
