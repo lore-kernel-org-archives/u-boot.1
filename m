@@ -4,84 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DB5E64002
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 19:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B95E64015
+	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 21:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFB798919A;
-	Thu, 21 Nov 2024 20:02:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 76B818941A;
+	Thu, 21 Nov 2024 22:18:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AdECTgrA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EfkByfJx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3698D890B9; Thu, 21 Nov 2024 20:02:53 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADFBC8919A
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 20:02:50 +0100 (CET)
+ id 2C210896ED; Thu, 21 Nov 2024 22:18:00 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 63A8E89382
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:17:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-7fbc1ca1046so753747a12.0
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 11:02:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732215769; x=1732820569; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Mxn+yQEbxkxo1pv8xfAYUdCmQ9mAxNFGUTFAD0vGaWY=;
- b=AdECTgrATn1G/7B4cPmzzHKCBOn76MdnwvAC50qKUTuE2m17zanKMipMtKnsAXQ08H
- Mpwp/KAaHKqArpfJchMy6FtZrLzE9j1DXttKpJM4HkN5ANXSEXRCPxScIssiyTv9p97O
- 7Juc5e4gHstMkdGTMii6DdaPpw/Kc3HAo5ihT7IacBq0F3k8f9iYR469zuolp8n8RxtJ
- LFUh/Iy0CTlfXQlOFVrBa5fEofhjw8aY9vpIEwi0sh/OQow3L2SPVCkGq4JGLLswRLIm
- MZNXnx1DKsHcJaQ31yiCRFEOEFBmOEgsyOX0whadKmrQ9oMlroyjXLxu/Ja9uo5ZJrrE
- 5lsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732215769; x=1732820569;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Mxn+yQEbxkxo1pv8xfAYUdCmQ9mAxNFGUTFAD0vGaWY=;
- b=AragXnZQMZ4ZXNWfbIWug+fAoUCnb89mtN5dOOhjJEMd2pOikwBTuIqljdAwRNPXBh
- QTYQzyhiDaxsM+KOWqAfw+Y3sAYZt5nKCFrTBYOhZ/Qi20W1Wkex6zc/olFuKqlxms6X
- Up0aGRaiQfbw5S1SjwtpwKlmCsRcxyp0eprWRP7mUjBXePdcD5yfVnbJ3kREULcxTU0y
- JFzQYYAoaVZkb1iFYlzvBAFESFXarhtJKtCqDy1pzaZhWEHSBUA/TpoRLe335iZGgSxO
- 95VDdCjyXsy28Q/Ql1xjxlNeqnolzFV7np53nVwsMroA0xx+hvz7H4hAfq+fpUWzBt7W
- eUMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFeKTy07OXs2lTMPn1PNPx163gTJdrqhHk1VQW228OEYSue8LWal0dRUkTHt/A+jK3WrTjB7A=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzy1jmAWQCZomFSQ7bvgzSRMcZecoicdMGN3cnixSPeKFyEiNtA
- FT8s4Myf5zB2z7ic6skcr+vszdBCtvmVjPaPwJehQWZNN0zk+7fmanhS6Q==
-X-Gm-Gg: ASbGncsxoAa0ZsDi2yYf1M0/k0x0ssTERHrj55M3ugiPHxNKrKYDNaTLy4nUKAnA2w9
- R53ELSwNPLL/f+U8CVfPRi7wUNRvsLxgR2ebgcam0CMfz56g3YPkm79zpGTPBvrbrUwbbpaTaQM
- tGOCMM1OFOPTXaRKyEKFSplm19kGn50GRZZ3VfLGJwr/B1JYOy2keawTkaF8VMpM8P/1qPMZWWY
- DQ7Xm3bzDCo2+lzJQXPLgFuLHrfl64GjYWGPyV/dFDuS+7pYwIkfbTLTm176kt4B6/3+DW+SOdV
- EMP0TQaLhaLVmjZq6LMNzZntWx4GrCrVKB7d9A==
-X-Google-Smtp-Source: AGHT+IGmcdQGtYHO+Royk+CrlK1Bc1fKPNmbT8Z3vONnbU9ALAzwR6Dh8u58L7AXPzy1HOXNYcXrQQ==
-X-Received: by 2002:a05:6a21:1789:b0:1dc:c433:144b with SMTP id
- adf61e73a8af0-1ddaf2a2836mr11086554637.27.1732215768934; 
- Thu, 21 Nov 2024 11:02:48 -0800 (PST)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7fbcc218527sm93058a12.38.2024.11.21.11.02.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 11:02:48 -0800 (PST)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2] arm: kirkwood: Enable bootstd for Sheevaplug board
-Date: Thu, 21 Nov 2024 11:02:27 -0800
-Message-Id: <20241121190228.29641-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ALLHtMl088355
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 21 Nov 2024 15:17:55 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732223875;
+ bh=7vjD6xaRcIotfJfoKr8p1apMqtRZDA+QOkbSGMMYs3c=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=EfkByfJxcRW7dHuorITSVcIojXYIdoXB3fjMDlP7tG2r8LoiX8mQrioon0iH5QEiD
+ 9VdJcsm6T1/S0tziHd4nYLi070/z6Pok8aE8qoV+vP7Bs355cqLWrSshmk/Qf2v1Gq
+ FqClzWtELefNJY4qF4L+tzxp5IR+cVSfwKEvpSgg=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ALLHtYH079599
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 21 Nov 2024 15:17:55 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
+ Nov 2024 15:17:54 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 21 Nov 2024 15:17:55 -0600
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ALLHt9T122435;
+ Thu, 21 Nov 2024 15:17:55 -0600
+From: Bryan Brattlof <bb@ti.com>
+Date: Thu, 21 Nov 2024 15:17:49 -0600
+Subject: [PATCH 1/3] board: ti: am65x: migrate to OF_UPSTREAM
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20241121-am65x-v1-1-fe87aff1b5fc@ti.com>
+References: <20241121-am65x-v1-0-fe87aff1b5fc@ti.com>
+In-Reply-To: <20241121-am65x-v1-0-fe87aff1b5fc@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Jan Kiszka <jan.kiszka@siemens.com>, Baocheng Su
+ <baocheng.su@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, Bryan
+ Brattlof <bb@ti.com>
+X-Mailer: b4 0.13.0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,119 +81,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable bootstd for Sheevaplug board.
-Remove JFFS2 support. See JFFS2 Vulnerability[1].
-Enable LTO to keep board size within limit.
-Move default envs to text-base environment
+Rather than rely on manual updates from the arch/arm/dts directory,
+enable CONFIG_OF_UPSTREAM to receive automatic device tree updates for
+the am65x reference board.
 
-[1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-cat/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
-
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
+ arch/arm/dts/Makefile             | 4 +---
+ arch/arm/dts/k3-am65x-binman.dtsi | 4 ++--
+ arch/arm/mach-k3/am65x/Kconfig    | 1 +
+ configs/am65x_evm_a53_defconfig   | 3 ++-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
 
-Changes in v2:
-Move default envs to text-base environment
-
- board/Marvell/sheevaplug/sheevaplug.env | 20 ++++++++++++++++++++
- configs/sheevaplug_defconfig            | 16 ++--------------
- include/configs/sheevaplug.h            |  9 ---------
- 3 files changed, 22 insertions(+), 23 deletions(-)
- create mode 100644 board/Marvell/sheevaplug/sheevaplug.env
-
-diff --git a/board/Marvell/sheevaplug/sheevaplug.env b/board/Marvell/sheevaplug/sheevaplug.env
-new file mode 100644
-index 0000000000..bcd62dbeb7
---- /dev/null
-+++ b/board/Marvell/sheevaplug/sheevaplug.env
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * (C) Copyright 2024 Tony Dinh <mibodhi@gmail.com>
-+ *
-+ *  Environment variables configurations
-+ */
-+
-+kernel_addr_r=0x800000
-+fdt_addr_r=0x2c00000
-+ramdisk_addr_r=0x01100000
-+scriptaddr=0x200000
-+fdtfile=CONFIG_DEFAULT_DEVICE_TREE.dtb
-+mtdparts=CONFIG_MTDPARTS_DEFAULT
-+console=ttyS0,115200
-+
-+/* Standard Boot */
-+bootcmd=
-+	bootflow scan -lb
-+failed=
-+	echo CONFIG_SYS_BOARD boot failed - please check your image
-diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
-index 9ac40b9e57..a7f6c73ecb 100644
---- a/configs/sheevaplug_defconfig
-+++ b/configs/sheevaplug_defconfig
-@@ -16,16 +16,14 @@ CONFIG_ENV_OFFSET=0x80000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-sheevaplug"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
-+CONFIG_LTO=y
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=524288
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; bootm 0x6400000;"
- CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_BOARDINFO is not set
--CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
--CONFIG_CMD_BOOTZ=y
- # CONFIG_BOOTM_PLAN9 is not set
- # CONFIG_BOOTM_RTEMS is not set
- # CONFIG_BOOTM_VXWORKS is not set
-@@ -35,19 +33,10 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_NAND=y
- CONFIG_CMD_SATA=y
- CONFIG_CMD_USB=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nand0=orion_nand"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=orion_nand:512K(uboot),512K(env),4M(kernel),-(rootfs)"
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 042282f372354..0c8e84aca3e1e 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1156,9 +1156,7 @@ dtb-$(CONFIG_STM32MP25X) += \
+ 	stm32mp257f-ev1.dtb
+ 
+ dtb-$(CONFIG_SOC_K3_AM654) += \
+-	k3-am654-base-board.dtb \
+-	k3-am654-r5-base-board.dtb \
+-	k3-am654-icssg2.dtbo
++	k3-am654-r5-base-board.dtb
+ 
+ dtb-$(CONFIG_SOC_K3_J721E) += k3-j721e-r5-common-proc-board.dtb \
+ 			      k3-j7200-r5-common-proc-board.dtb \
+diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+index d0cd4889cdefa..350775e42c2ab 100644
+--- a/arch/arm/dts/k3-am65x-binman.dtsi
++++ b/arch/arm/dts/k3-am65x-binman.dtsi
+@@ -95,10 +95,10 @@
+ 
+ #ifdef CONFIG_TARGET_AM654_A53_EVM
+ 
+-#define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
++#define SPL_AM654_EVM_DTB "spl/dts/ti/k3-am654-base-board.dtb"
+ #define AM654_EVM_DTB "u-boot.dtb"
+ 
+-#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
++#define AM654_EVM_ICSSG2_DTBO "ti/k3-am654-icssg2.dtbo"
+ 
+ &binman {
+ 	ti-spl {
+diff --git a/arch/arm/mach-k3/am65x/Kconfig b/arch/arm/mach-k3/am65x/Kconfig
+index f17b641e1366d..72a8298aebf94 100644
+--- a/arch/arm/mach-k3/am65x/Kconfig
++++ b/arch/arm/mach-k3/am65x/Kconfig
+@@ -16,6 +16,7 @@ config TARGET_AM654_A53_EVM
+ 	select BOARD_LATE_INIT
+ 	select BINMAN
+ 	imply TI_I2C_BOARD_DETECT
++	select OF_UPSTREAM
+ 
+ config TARGET_AM654_R5_EVM
+ 	bool "TI K3 based AM654 EVM running on R5"
+diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+index cf7a2114883c5..b6df8b428c65f 100644
+--- a/configs/am65x_evm_a53_defconfig
++++ b/configs/am65x_evm_a53_defconfig
+@@ -14,7 +14,7 @@ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x680000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+-CONFIG_DEFAULT_DEVICE_TREE="k3-am654-base-board"
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am654-base-board"
+ CONFIG_DM_RESET=y
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -76,6 +76,7 @@ CONFIG_CMD_UBI=y
+ # CONFIG_ISO_PARTITION is not set
  CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_OVERLAY_LIST="ti/k3-am654-icssg2"
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
-@@ -68,6 +57,5 @@ CONFIG_DM_RTC=y
- CONFIG_RTC_MV=y
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_STORAGE=y
- CONFIG_LZMA=y
- CONFIG_BZIP2=y
-diff --git a/include/configs/sheevaplug.h b/include/configs/sheevaplug.h
-index 4e0b3c663c..0a5f23e4c8 100644
---- a/include/configs/sheevaplug.h
-+++ b/include/configs/sheevaplug.h
-@@ -12,13 +12,4 @@
- 
- #include "mv-common.h"
- 
--/*
-- *  Environment variables configurations
-- */
--#define CFG_EXTRA_ENV_SETTINGS	"x_bootargs=console"	\
--	"=ttyS0,115200 mtdparts=" CONFIG_MTDPARTS_DEFAULT	\
--	"x_bootcmd_kernel=nand read 0x6400000 0x100000 0x400000\0" \
--	"x_bootcmd_usb=usb start\0" \
--	"x_bootargs_root=root=/dev/mtdblock3 rw rootfstype=jffs2\0"
--
- #endif /* _CONFIG_SHEEVAPLUG_H */
+
 -- 
-2.39.5
+2.46.0
 
