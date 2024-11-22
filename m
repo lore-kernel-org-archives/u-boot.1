@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2761E69191
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 20:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8DB9E6ADCA
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 21:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A346897E9;
-	Fri, 22 Nov 2024 21:50:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F1E9B8938D;
+	Fri, 22 Nov 2024 22:42:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ic+F57Ue";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KjHggqJS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A5C8893A0; Fri, 22 Nov 2024 21:50:29 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 5E83589382; Fri, 22 Nov 2024 22:42:53 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14BB189366
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 21:50:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B33E897D0
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 22:42:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-718066adb47so1455275a34.0
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 12:50:26 -0800 (PST)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ed91d2a245so521055a91.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 13:42:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732308626; x=1732913426; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NmrDiKrdTyRtoUVLx/KS4Ga9Uk2ZOQa9lDmcEon8txA=;
- b=ic+F57UeVT4K8mS8poT0uqxUXP6jbHrXBaga31HWDXduqm8B8eBWcJ8vladb3/X58X
- B1jbNTkoNbBXWHd/15cE3I30RXEtJizVNXUuh/gFyhEyyt/2zonZYseYBqhNnEFINsLl
- J2BOtyUQeKrbY4BImh1cCBlOu9NFqoUtT7tDA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732308626; x=1732913426;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1732311769; x=1732916569; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NmrDiKrdTyRtoUVLx/KS4Ga9Uk2ZOQa9lDmcEon8txA=;
- b=aJ3tbiLhjDhGCFJVMG0iZGOzADY32X0M0Y8jgN60fko3rt9yL6O75cH4E0cDumMXcG
- YG5CGC5R35fUTN8+1O57VVKCyoir0JnKHKAQx3QBjFaWiYmERZ9onIYcA9TSGQboS00X
- 191qp/0bLto9uvZFSjbTM5NoO4iRV+WInbARFhbzpCjJYIsxtKFum/NKjwnKvUx/8uNo
- vX7FadauHz8XbxfVfsa7kVSw3xTGabHnLN4uRDsWpM/279Zo3IHjIobWtiUTTLNgUgGI
- I5JDUzjHKAnJYf4sqhp8vXRjbHdgfc8Wm2vnr1eEFAG9jNufuDTQyP3MyHe8ldNiY2nc
- pupQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+KRD5AIDqnk8PELEV0WUGRfFqmGSsMbJ1RAFi4bI2JwZBo4zFYfCqCVel89GDPW0tQWNy9yc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5pq3+r2RVrXgIKO7BPcmEn0p6rxbLWtyvPyvXsnyE3iJyw6PJ
- MHwYt0dMUfNPjQV8+KZZzxxdEZF8OFyQRu36RKIEfkhRUJxaWSYkVbrQmhVGuYA=
-X-Gm-Gg: ASbGncszb8fm45D7g8FEeU5f8DB/ceMsoNEO3l2b2NGNUgeDIAH1EwIWWfgkG7cB6S/
- NtPeq3sKI55XP3b9b3eJP0X0lQarFN6QjZ4pWe7Ufhw5Z04jgDzhw9kEsUOeC3UalVe2YRrdGWz
- sisGq3HrLK6PsWLQ37Ef69SQj/DEt3YHGLNtaAKYnmLQj3n+hH/v+toQX5WBA8L6jPdM7U2X8oH
- bEArEjrHJhqLMDSdIkkobpsLE4ydfFDCG/dd5tsLaGvoBgt8A==
-X-Google-Smtp-Source: AGHT+IE8V7Q1dqZtpiO5+TuRNP74neNZGpmNFpG6qwX+71jzpATmg6rJyjPxK6UsyT5BA7Y8e8oX9g==
-X-Received: by 2002:a05:6830:3898:b0:718:14ca:2fdc with SMTP id
- 46e09a7af769-71c04cecda1mr4996441a34.22.1732308625807; 
- Fri, 22 Nov 2024 12:50:25 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b49f54sm14130846d6.104.2024.11.22.12.50.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 12:50:24 -0800 (PST)
-Date: Fri, 22 Nov 2024 14:50:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, Neil Armstrong <neil.armstrong@linaro.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] u-boot-elf.lds: mark executable
-Message-ID: <20241122205020.GA3180363@bill-the-cat>
-References: <20241114170356.3248124-1-caleb.connolly@linaro.org>
+ bh=81TogTZU6WedpTmcpIg9p0DBTRWAp2RIT7f4k+z8i1w=;
+ b=KjHggqJSvWuQUQMKeSl+u58KDv32yWy8zSkCCRg5ohHuYw88ApubYfJVzH6IrSsij6
+ uZfWLxh6Of9AQke9waHACMnT7UKMtGL2Wfefy8nTyPAmyNfz2eRING7SZPGRU4v0fn7T
+ 9EgqXPD8hp/LVY3BDOCxQH1X1fGsal9E5jqkRnDA2wAByBzS5IFBPpYjgrB9nYMCmAu6
+ OHFOvKKFOA1qUI8LBIpB8OuBdSmZAZecEGPyXHf2UcXXbTX+jlj6D1XOMtTRADbN0ZGr
+ Jb/uyJWMPWYih5ja3Fy5EFur2zwzmTvH3seq9+U79OoYlaa1CyE1wOry+zrk2rA6E9GV
+ UU1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732311769; x=1732916569;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=81TogTZU6WedpTmcpIg9p0DBTRWAp2RIT7f4k+z8i1w=;
+ b=gq0CYIjkxzlF4O4jNIfels0JI0PWfShl28ElAwoWpx03f+uA5NLCbXFQIKLaxHiix+
+ uPRjeMOqfhV0QY64g9qy47MDLlWs599PH4BMy5AYhqn1bjR8FoMbOM9S2i25kcRN/cd4
+ CKY3fiLciXoKi5Ye513fgFUOpuuxafzrSgihH+eTo6Rdyzu01sb0RfE7gAyA8TGf+Vd0
+ ci1L03loBOqXkTaSCyXN2uq466mvydFiEG7eOe9AVZMTnrNuzmaqRrGE/Bh1OzsV9v8v
+ F8TyacJzxTv0y7HD1dvk/SfrJzUCSMhdWcdFcC/mBaxNbH9BCFmn1rXkkejVwpozVPb3
+ C9Dg==
+X-Gm-Message-State: AOJu0YykijZzGJuzzZ+QpgNy51417H7wZvmZeqEHqyVjdt1pqwFP3kYU
+ xpZVcIHN+1pZZh3IapB3nrbdlr6rNzK11NPf/2V5XR1gD1RwVG/38/8HSipshVjYPFYVriRQ6m+
+ 1YIJziUeOPX36TtheUv1aaoforf4=
+X-Gm-Gg: ASbGnct+bstygP1laA/6SwXBlxuiKIq6PRVNvoJmIcBsohG6k7FO/8jwd0WjoVQ7+n2
+ 5/idt+FVeN1dZ2EelY5NtDKHtzkpaRuw=
+X-Google-Smtp-Source: AGHT+IGbI88BOTDxFrwXh0i/cQThFdQYtiYU2xu3A92U3+95J4v5SyShRvte5VCtp/JexWwWIayWkoUHsF9zU2tyDMI=
+X-Received: by 2002:a17:90b:4c8e:b0:2ea:3aeb:ecca with SMTP id
+ 98e67ed59e1d1-2eb0e8847b1mr4957775a91.31.1732311769353; Fri, 22 Nov 2024
+ 13:42:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P444gJoc7+6orCKg"
-Content-Disposition: inline
-In-Reply-To: <20241114170356.3248124-1-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241122015858.557561-1-marex@denx.de>
+In-Reply-To: <20241122015858.557561-1-marex@denx.de>
+From: Adam Ford <aford173@gmail.com>
+Date: Fri, 22 Nov 2024 15:42:38 -0600
+Message-ID: <CAHCN7xLNU=skeRJ0apT=URnEiqqW2FJDS6OXE6uxNmpB-mS_0A@mail.gmail.com>
+Subject: Re: [PATCH 1/4] arm64: dts: imx8mn: Include 32kHz oscillator clock in
+ SPL DTs
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Bryan Brattlof <bb@ti.com>, 
+ Fabio Estevam <festevam@gmail.com>, Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,60 +101,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Nov 21, 2024 at 7:59=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Since 50cdd3f74af3 ("clk: imx: clk-imx8mn Fix nand and spi clock parent")=
+,
+> drivers/clk/imx/clk-imx8mn.c clk_get_by_name(dev, "osc_24m", &osc_24m_clk=
+)
+> fails with error -22 EINVAL in SPL. This is because clk_get_by_name() in =
+the
+> end calls fdtdec_parse_phandle_with_args(), which iterates over all phand=
+les
+> in clock-controller@30380000 { clocks =3D <&osc_32k>, <&osc_24m>, ... } n=
+ode
+> 'clocks' property in an attempt to find the "osc_24m" clock, but fails to
+> resolve the &osc_32k phandle and returns with -EINVAL.
 
---P444gJoc7+6orCKg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for doing this.
 
-On Thu, Nov 14, 2024 at 06:03:53PM +0100, Caleb Connolly wrote:
+>
+> Include the osc_32k clock in SPL DTs as a low risk fix for v2025.01 relea=
+se.
+> This way, fdtdec_parse_phandle_with_args() can resolve both the osc_32k a=
+nd
+> following osc_24m phandle and successfully look up the osc_24m clock.
+>
+> Fixes: 50cdd3f74af3 ("clk: imx: clk-imx8mn Fix nand and spi clock parent"=
+)
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-> Some pre-loaders/bootROMs like those on Qualcomm platforms actually
-> use the ELF format and respect the headers. Mark U-Boot as executable so
-> we can actually run it on these boards.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Tested-by: Adam Ford <aford173@gmail.com> #imx8mn-beacon
 > ---
->  arch/u-boot-elf.lds | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/arch/u-boot-elf.lds b/arch/u-boot-elf.lds
-> index 1666027e3635..eb84a22dd71b 100644
-> --- a/arch/u-boot-elf.lds
-> +++ b/arch/u-boot-elf.lds
-> @@ -1,5 +1,9 @@
->  ENTRY(CONFIG_PLATFORM_ELFENTRY)
-> +PHDRS
-> +{
-> +	data PT_LOAD FLAGS(7);
-> +}
->  SECTIONS
->  {
->  	. =3D CONFIG_PLATFORM_ELFENTRY;
-> =20
-
-This leads to thunderx_88xx and many others failing with:
-aarch64-linux-ld.bfd: no sections assigned to phdrs
-
---=20
-Tom
-
---P444gJoc7+6orCKg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdA7oUACgkQFHw5/5Y0
-tyyh1wv/TR+h97Y8RbsbuJV1Wz8ZYajn3YL5r2OmPXNV7kOFBFVnl+dthX48g2Zq
-uks2uhmbhhQ/PCZ9csBDBa7I7iC2d/IM+Xj8zRv4COTyGYfPukMNsmShskdCnsv5
-jbhbXrpw+pMKMkphDMTXgJunkUdMaQ3na5k/IUZH1fPMrE0Pd2zo9jqzfmNrejib
-UnfTEJkWGW5rE/SuMP0Lb1ciI+Q61lzQfvy0yzxEbA9CCZ+pFRKPnuf90kLftqi4
-TX2etCZNLozxFxcdIJcUhdDJXT4fZIBJaF03O2TlfK2AFv2/4+gXZJlJCJedHPye
-F5CfxZrRy8XlmNYfaw4b1pZgyfn14sT5WD7n3px6uN/x28O1zApZBt+AdjCb9jY1
-sSO4YShepW0Wd4bqCw6L174MNclOgR847DM4Be3n6QCXoS34BMukoy/2J4Luol3w
-PuLwUXzelCDm7FEpfUYPn8yHY1t53vmqWTGIFyE8RKkVPOhq9VW8wGBJsPmWZs7J
-CvBRvWOo
-=aAqS
------END PGP SIGNATURE-----
-
---P444gJoc7+6orCKg--
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Bryan Brattlof <bb@ti.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Greg Malysa <greg.malysa@timesys.com>
+> Cc: Ian Roberts <ian.roberts@timesys.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jonathan Humphreys <j-humphreys@ti.com>
+> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+> Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> NOTE: For v2025.01
+> ---
+>  arch/arm/dts/imx8mn-u-boot.dtsi | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/arch/arm/dts/imx8mn-u-boot.dtsi b/arch/arm/dts/imx8mn-u-boot=
+.dtsi
+> index 6875c6d44ff..6d80d856365 100644
+> --- a/arch/arm/dts/imx8mn-u-boot.dtsi
+> +++ b/arch/arm/dts/imx8mn-u-boot.dtsi
+> @@ -68,6 +68,11 @@
+>         bootph-all;
+>  };
+>
+> +&osc_32k {
+> +       bootph-pre-ram;
+> +       bootph-all;
+> +};
+> +
+>  #ifdef CONFIG_FSL_CAAM
+>  &sec_jr0 {
+>         bootph-pre-ram;
+> --
+> 2.45.2
+>
