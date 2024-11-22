@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71258E65D0B
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DCCDE65D0A
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BD3C896CA;
-	Fri, 22 Nov 2024 01:31:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08AC3896FB;
+	Fri, 22 Nov 2024 01:31:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c9jCmek0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dz22YL7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEF85894AE; Fri, 22 Nov 2024 01:31:12 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 435F6894AE; Fri, 22 Nov 2024 01:31:16 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC08F896CA
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B62C896FA
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-71e625b00bcso1334227b3a.3
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:10 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2124ccf03edso15362285ad.2
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732235469; x=1732840269; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dkkbbzxFGmKMAjHimLGdWrlja3ZF0CyOgVFg+5jNKCw=;
- b=c9jCmek00cAD8sWiWBPlKihQhQeM3HFOxQ5ua5vV7Y/77lf+O6Z/gWUw87mVFm0qPC
- byM9XDYZB6PGQme1K2vBHZKABK+af4j3+cwBSmWIeKA3Pm0vHH7dUOOYpM+EuqtDPG7s
- jOhxoCcvVwEENw3BWjZ77V1YIp6HLvqg42D21wN0ZwcA5kAa1YVTGB0YN4v4uT6FTw6o
- CR2PwVDUhNAsifNxY3UGP4pluZLgwxxFl5cjRtG2QrrspYb/3VsaeR8M0NMgJUlmvkSo
- nqS7pe4b//cLEUrLpD0lzLrPcmrkCFuA0uGI8NfvluYxQU7UAII62rrVUnJjkion5Fz2
- fhiw==
+ d=gmail.com; s=20230601; t=1732235472; x=1732840272; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kvXdSE271U+p1rlkM2PYkDAO6VN1lwWGhaj7Ygulstk=;
+ b=Dz22YL7qbTF3U4w8jHECH1yElovD2xL59psntMBaEdulY6vL5SE1vO0qNyzjr1nuLK
+ z+0VTtQoF9cK+CnBMV3pAZKNgwkdAJLbcI5ZkuC81n2fIxjY9bt9K58g6/mKKxU3Vusj
+ yznA4mTSA9+MkhH4E6VwjO+yl6kyxyCmGs3raSih34DWAJeS8UWDMsta7B3x9qJ6qYId
+ zRh8Yt4QCFqaNV+GyU2wF46hB468dHf9t0NXIMQgL3Ch4JbcHyItEmw0xwg4qy7pAIW2
+ 8f1kr3IVFYzbgMztUT2Mwt3yP6n0Q7gPPxIbJs861pSlF3G8hwpZzpPpln8kW9NG7T1/
+ Pr9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732235469; x=1732840269;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dkkbbzxFGmKMAjHimLGdWrlja3ZF0CyOgVFg+5jNKCw=;
- b=Y5pfd4QIXmnPRM62VLsuj8jSnAFL6UiiAmW80MZ+m2LVsoz7CXlLIcjVrssj88aiym
- blQQnMVOVR56UFZy7QinZIjAQ8XxnZ1c22PvlnJS7tQjkjZe6a2Sh7yZClG9U/rmB6Tc
- Uuomb3Q7zxMqIKQ4MaJew4+mMkeb0/oaOqv30anfTcXgbgFMTPUJdz0jvpJluM79B2Yy
- RjC7F6CYzuuYBGuEsRO+w1fRUEtT/9tPgP5sjcW4Zwx6mPW5a7YzbhlmTqZK6c1Fgubh
- 88baMu6IS4dZLtFtqu6rUiP8Gro6LBiY/Vt/IbCiTgHUen3/uXCM0scpTfjFpOldJ4HI
- 0Xag==
-X-Gm-Message-State: AOJu0YwVUuN17O4QGUValq26T1GcNnbDqtnP9B8dIvIV6bynGnY5idLk
- 2AGpmSRrZp1uBsVW0ecl3FVVJegUfwmo74UdKj+Xv9suJP8OE9zvNqElIgQF
-X-Gm-Gg: ASbGncvrr3ZUlUyLaOWFemKK1xghprHo9ywXVCaPLEJCbxXIU33UQvxmc1vMH/JfKA+
- A0IJvfz5oIsgh9zlGnbLyqjsiRQt3iTvf9ckcGrcha6lrDMzxxHyQEAWFDh2dancgvDx4/GUjGn
- Hrzc28KFNSw/wCts312HnG9Q5TBr373XM76ciTpBlioytJ2Xj0ocf+vSOZECuOeUtIx8w7AH/me
- UOdogIo+DEzgk83uX3TM457jJtTG6aFQdC3BZN72eIR7fExfEvpXGxDK5XuaeQI
-X-Google-Smtp-Source: AGHT+IH4+UmuOqNVoqafWyhFsZDYLqYECRMWLPIXMJvowcCSptbUxVc02orVYI7rpONI0IXCqcOlKQ==
-X-Received: by 2002:a17:902:e741:b0:210:f706:dc4b with SMTP id
- d9443c01a7336-2129f67a1femr13856125ad.13.1732235468904; 
- Thu, 21 Nov 2024 16:31:08 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732235472; x=1732840272;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kvXdSE271U+p1rlkM2PYkDAO6VN1lwWGhaj7Ygulstk=;
+ b=UvEacr7agtVMh5A+NFN5/mVGUA4omHw/P5LS3wOvFhHumuHc4bjGF2n7lLb9bA54Gk
+ OoCTkjdKv46J4wnalLM9poNB8yry8feZA8wc2InGy8M0JfUr1IcgDTu5BPewTB1GI6cn
+ Nv5+zDkLSnWpJuityGY1Aous/18Gd2C9UbuuclEZ3x1PztfO9O/IdWuSUxzIJ+wOdLKW
+ F3jDg4aiWp9+ILlvQbXTBbKjMDMDtRT8WGPkoRIEoogyb/wQydf/5csjrd22f2wqwYY5
+ z8i8nxGx4Prv2KXYfPFD6V1C1B4m2IWTR0U9FFlDAC/TcVG+4GD3MSSvw6gFuEU+c/dN
+ LZyQ==
+X-Gm-Message-State: AOJu0YyWtZeTtvTLLdTMnbkqTqaKpoOnlUAoARvMjQmuC85Dt8OrEjM1
+ hcPoKVP80e/MX5PKKdYgh7LFVxrX40zLH71IJmWCvd+H9TAqyRAqQwSUKii7
+X-Gm-Gg: ASbGnctyqjXTHnHn52wsNJSrGN6ePq4IWB+mXIAicy48QKc4+yxZKZWKwJOz9Ddcvji
+ +UCM0ay8KjGbE58MsJYBQ+5Cf6SelUtese1ns8aZp/NWRF82Wns0rpTMbhCU14VgFYDR5DvCBNa
+ hSdsHy7D51kCz5pQ/5lZFxX/+qHCn2Bp6ocaOx6k51PiBOoCXauLhqY0P9myrQRsguFCpt5weQG
+ M/uCMqH358yu5E/oIi/oIF+C0FsbvZEb8KsLVjMvLR82F1pPGhrtr096wlKNgi0
+X-Google-Smtp-Source: AGHT+IHvqgFR39Kw1k7AxzlU3VK6KEhjiX7Zgzr797hOpILVcMIvaiKawIKAZL06We6VUA9mUdZPpg==
+X-Received: by 2002:a17:902:ec8e:b0:211:a6d:85e8 with SMTP id
+ d9443c01a7336-2129f81f20emr10572535ad.39.1732235472279; 
+ Thu, 21 Nov 2024 16:31:12 -0800 (PST)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:db1b:7332:ce96:46a7])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.04
+ d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 16:31:08 -0800 (PST)
+ Thu, 21 Nov 2024 16:31:11 -0800 (PST)
 From: Chris Packham <judge.packham@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Chris Packham <judge.packham@gmail.com>, Alexander Dahl <ada@thorsis.com>,
+Cc: Chris Packham <judge.packham@gmail.com>,
  Chris Packham <chris.packham@alliedtelesis.co.nz>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/7] Updates for Allied Telesis boards
-Date: Fri, 22 Nov 2024 13:30:14 +1300
-Message-ID: <20241122003058.270163-1-judge.packham@gmail.com>
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/7] arm: mvebu: x240: Use default baudrate table
+Date: Fri, 22 Nov 2024 13:30:15 +1300
+Message-ID: <20241122003058.270163-2-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.47.0
+In-Reply-To: <20241122003058.270163-1-judge.packham@gmail.com>
+References: <20241122003058.270163-1-judge.packham@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,27 +97,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a small series to update some of the Allied Telesis boards. The
-x240 is converted to bootstd. I've turned off MKEFICAPSULE as the boards
-don't need it (and our toolchains can't build it). Finally I've enabled
-IPV6 support so this gets a bit more coverage.
+Remove CFG_SYS_BAUDRATE_TABLE as there's no reason not to use the
+defaults defined via config_fallbacks.h.
 
-Chris Packham (7):
-  arm: mvebu: x240: Use default baudrate table
-  arm: mvebu: x240: Switch to standard boot
-  arm: mvebu: x240: Don't build mkeficapsule
-  arm: mvebu: x240: Enable IPV6 support
-  arm: mvebu: x530: Remove dead comments
-  arm: mvebu: x530: Don't build mkeficapsule
-  arm: mvebu: x530: Enable IPV6 support
+Signed-off-by: Chris Packham <judge.packham@gmail.com>
+---
 
- arch/arm/mach-mvebu/Kconfig |  1 +
- configs/x240_defconfig      |  8 ++------
- configs/x530_defconfig      |  2 ++
- include/configs/x240.h      | 12 ++----------
- include/configs/x530.h      | 16 ----------------
- 5 files changed, 7 insertions(+), 32 deletions(-)
+ include/configs/x240.h | 3 ---
+ 1 file changed, 3 deletions(-)
 
+diff --git a/include/configs/x240.h b/include/configs/x240.h
+index 3601df588d56..bc66e4e3c8e6 100644
+--- a/include/configs/x240.h
++++ b/include/configs/x240.h
+@@ -11,9 +11,6 @@
+ /* additions for new ARM relocation support */
+ #define CFG_SYS_SDRAM_BASE   0x200000000
+ 
+-#define CFG_SYS_BAUDRATE_TABLE   { 9600, 19200, 38400, 57600, \
+-				      115200, 230400, 460800, 921600 }
+-
+ /* Default Env vars */
+ 
+ #define BOOT_TARGET_DEVICES(func) \
 -- 
 2.47.0
 
