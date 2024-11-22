@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8C6E64039
-	for <u-boot@archiver.kernel.org>; Thu, 21 Nov 2024 22:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F088BE65D0A
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00400891A8;
-	Thu, 21 Nov 2024 23:49:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 7ADBA896EC;
+	Fri, 22 Nov 2024 01:28:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Qkg49PP2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jt30GIVU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7F4E891C4; Thu, 21 Nov 2024 23:49:11 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 0FAE7896F6; Fri, 22 Nov 2024 01:28:39 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A8A888C05
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 23:49:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id E2AF2896EC
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:28:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7f71f2b136eso1282418a12.1
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 14:49:09 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2ff550d37a6so18756581fa.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:28:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1732229347; x=1732834147;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1732235316; x=1732840116; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AWWPth5uQkZhgwvhd76A2YD+HHlFbWjNY4MLrsWKwD8=;
- b=Qkg49PP28TMrobRGIui89sA4Dn2/xVG6urL8HIbHtvLvMXMgKUmC5vMFG9+be3Rpyw
- UHvT+YxL02hQuRmd2tnrmKrq94ZjSbk8Oydd6R1VbyggpjlvShVMiRSoIDgDPSKUkzQi
- Wpsf3dL6sM29ZxX8HmfkFImlXrLSSDOjoFrjQ=
+ bh=sjjVEl2I7XhzBPOoXO2Y19/4Z9GkVa1hOL6lxlMcXYg=;
+ b=jt30GIVUo4Waa76h1/yNXj/iDEOooT91yg7qavpd6jegs/x8dpibprKf1ieWxFbr6r
+ AXyW2BLfDA0Lt+7PySonRv/hlO2kMUx96Wnn3A/I3QA4hbGhD4of3B4wQTperSgkolHd
+ BwyHUjzvykHQSKm22P9wgwqQ/HJgA3TP4uFyHtlrB77iX/668zHOWMF9xgetMbFxuul1
+ +WYPvvfYigKsuyRW8Z3X9dN3xgpNsPnbpmDbHNPl/A+Ox1KqzxACoAafrVLJy+LIFIjt
+ m68PO3kKtj0vWaYPcgh6+64uaWyGWA3UDm+nSahPgvFDRGtoWG+XOVWi5/KW9YIBGHU2
+ 12oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732229347; x=1732834147;
+ d=1e100.net; s=20230601; t=1732235316; x=1732840116;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AWWPth5uQkZhgwvhd76A2YD+HHlFbWjNY4MLrsWKwD8=;
- b=RTau+ZJpwfQUf8SiIkRQ3k3NFN8b2e1mm1X7Yg9xkIbDJ+oqdq0qW23DsK+GhccS6x
- hZBRmuPzl9KhUVLXz5ufWtYLxs2Q/iuYAsLsL+1lCJk99fnZdROWWrcw2tR1TXaYOIRL
- Y/EYkULBGo9QZaWyHRdrXANdz9p9aKNjSwcaJo/ocPKYFwxpyD+nbW5OJG3GgiZOMGFA
- NTF6mJ+Exhcuos8NwQzylcHS/+DyyBFRo0gYNIBEcLzpos8vo2hMSbcDJncWBA3zZHk3
- Fs583pa2y2L7DthWxmoh7syreLju4HjNlGI5fgaZx/hqbE5xxu29WFXy9BlUuuOUlldO
- HrKQ==
+ bh=sjjVEl2I7XhzBPOoXO2Y19/4Z9GkVa1hOL6lxlMcXYg=;
+ b=JhlcuxfxCG4wxiOfn2L0eBl3MPAvpaevd0J7Wy/c65TRT4IS1IOUW1mov+dgzHkkNa
+ YucAfhqJjK6hVzVrvw16XvfTvvG6YGWI+JBY4Wa0vGHT88F8Mhc8KP3P5iMWWn1yLg7i
+ TaL9/BBv2qJestUDDqgB4NlophrFpzm5tXWIM+1sr3+9CHrRzyZ8eEI5P/8Ul4WfoMcr
+ AsKK00rEmvanugJOhQPn6zc9pkEPZFaLASguzh4A+uSsrvmHFQR9S+bDath25Tspvtf2
+ CWHRKI61RnD8Z2wf3XOEhRx70u/F6QXpfcJL9B+XkTuxo/fEyUnxfiUXJxo1X/HkDr1n
+ o74A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6A7fdZcAzEKvisCFoZV5MJQVUZklnf79Fs7BlFQcqiwyi+O37zodExWUU5YUZZv+oA2b5QIw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxH2N7fhuYZDUe47QIS5oaCAZMVKmIoN/88xUWSG9z4shqbBmIt
- kQDlQUVrx192cVCHR26cp2UqN2g5kgoP3p4vf10yMutpJW7r5fBIxQ24oNUgTya54yNMMt+D9wE
- DoG87tIVR69Ma3gD7LhMAdpMs9lA/fobzmUMRLlRmECphUkQ2
-X-Gm-Gg: ASbGncuSmqka7JyoJup88DeQq3/GKqZ+79NI2nrAiuzrTfCfqBT5OA2fZRD4Kti6WjY
- bO2I0jNMSNbY+/UrPmLio+NPk10Nk18g=
-X-Google-Smtp-Source: AGHT+IFkJx2oMKlx53tfDL39X/Gum4hNdD5F0O8ZCRf2jD4Br0G9nS/XYho22SOh9AeyAgdWlXzCgpv5OVLVegqTTUs=
-X-Received: by 2002:a17:90b:4b4f:b0:2ea:83a0:4797 with SMTP id
- 98e67ed59e1d1-2eb0e2336e3mr667624a91.11.1732229347481; Thu, 21 Nov 2024
- 14:49:07 -0800 (PST)
+ AJvYcCVH+euzvnL+O5+kGoAgypxjFt+ElLsPNAvGZNS/CEEZFGMub7iqstDa/d13c634Urr3JcyAda4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+y9/gq0c1vtioe+rzpmCLfFKZ6bEeBML1bDWA1U5UqCsid8+3
+ eEoucbb642UMQJGWSNd6qUKGLdWCyGMjTq9PpIcexnuRXe3u1jj3HaM3suAs2aO6dloUOjlylFf
+ 8+dWtaRqoIGKMW80MRqQtQbvGYao=
+X-Gm-Gg: ASbGncs529+0kx3b/SXgfH4D8SJQgF3MF+4elD/qlmVtXwxuUxUK38febKOwcbApT8D
+ rBcuIkWm3RkBJfSgjJ9bGvQBIoFr3aZiSem/sqpCfXpIYl094t74dEoeYXfkvG70T4A==
+X-Google-Smtp-Source: AGHT+IFnP3NIeHcXYwXAqdMGiz0Jsfc4ro90P1O7jFDLV26Mvbx7/WqgIHRGad001xYEHPJ75kPP/ZgZs2NrDOB2EIg=
+X-Received: by 2002:a2e:a903:0:b0:2fb:4ddd:a8f0 with SMTP id
+ 38308e7fff4ca-2ffa7174afdmr2589461fa.15.1732235315886; Thu, 21 Nov 2024
+ 16:28:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20241018083006.10349-1-b.spranger@linutronix.de>
- <20241018083006.10349-2-b.spranger@linutronix.de>
- <0c9225d8-9cd2-407e-aea8-baf31efcac34@linaro.org>
- <442a29af-c0b5-4ef1-9b38-51d96b0fe6c0@linaro.org>
-In-Reply-To: <442a29af-c0b5-4ef1-9b38-51d96b0fe6c0@linaro.org>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 21 Nov 2024 23:48:56 +0100
-Message-ID: <CAOf5uwnQ_xNzQMTDfftf2rJfa1GZps=-FV7KkdWd7W2LdTzhCg@mail.gmail.com>
-Subject: Re: [PATCH 0/5] collected fallout of porting an ATSAMA5D2 based board
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: dario.binacchi@amarulasolutions.com, 
- Benedikt Spranger <b.spranger@linutronix.de>,
- John Ogness <john.ogness@linutronix.de>, u-boot@lists.denx.de
+References: <20241119020425.51989-1-hal.feng@starfivetech.com>
+ <20241119020425.51989-6-hal.feng@starfivetech.com>
+In-Reply-To: <20241119020425.51989-6-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Thu, 21 Nov 2024 16:28:24 -0800
+Message-ID: <CANV2PTOK2QSWtCFzPX7tSLj+xcs6zc0mn4UafBYcZCjyN6BsTg@mail.gmail.com>
+Subject: Re: [PATCH v5 05/11] riscv: dts: jh7110: Add u-boot device tree for
+ JH7110 based boards
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
+ Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,89 +98,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI all
-
-On Tue, Nov 19, 2024 at 4:46=E2=80=AFPM Eugen Hristev <eugen.hristev@linaro=
-.org> wrote:
+On Mon, Nov 18, 2024 at 6:06=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
 >
+> To support the other JH7110 based boards, add u-boot
+> device tree for them.
 >
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: H Bell <dmoo_dv@protonmail.com>
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi           | 10 ++++++++++
+>  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi        |  6 ++++++
+>  .../dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi |  6 ++++++
+>  3 files changed, 22 insertions(+)
+>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
+oot.dtsi
 >
-> On 11/12/24 15:45, Eugen Hristev wrote:
-> >
-> >
-> > On 10/18/24 11:30, Benedikt Spranger wrote:
-> >> Hi,
-> >>
-> >> while porting an ATSAMA5D2 based board (booting from NAND flash with U=
-BI)
-> >> I stumbled over generic, NAND- and UBI related asperity:
-> >>
-> >> 1. tiny-printf does not handle NULL arguments to '%s' in a proper way
-> >> 2. vtbl_check() has an useless debug output due to a typo
-> >> 3. NAND: An informative output fails badly, if the NAND vendor is unkn=
-own
-> >> 4. the nand_atmel driver lacks a vital initialisation
-> >>
-> >> OK, you might say the nand_atmel NAND driver is obsolete, but it was t=
-he
-> >> only solution to get booting from NAND running. The new DM based NAND =
-driver
-> >> refused to do anything usefull, so I dropped it after spending a coupl=
-e of
-> >> days debugging it:
-> >>
-> >> <RANT>brilliant!</RANT>
-> >>
+> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dt=
+s/jh7110-milkv-mars-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..cf4f0d4c06
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+> @@ -0,0 +1,10 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> +
+> +&phy0 {
+> +       /delete-property/ motorcomm,tx-clk-10-inverted;
+> +};
 
-I totally missed those patches. I'm really concerned about it. I will
-review the respin
+Why delete this property?
 
-Michael
-
-> >> regards
-> >>     Benedikt Spranger
-> >>
-> >> Benedikt Spranger (5):
-> >>   tiny-printf: Handle NULL pointer argument to %s
-> >>   drivers/mtd/ubispl/ubispl.c: Fix error message
-> >>   mtd: nand: raw: Fix potential NULL pointer dereference
-> >>   mtd: nand: Update NAND manufacturer Ids
-> >>   mtd: nand: raw: atmel_nand: Add missing nand_scan_ident()
-> >>
-> >>  drivers/mtd/nand/raw/atmel_nand.c |  4 ++++
-> >>  drivers/mtd/nand/raw/nand_base.c  |  8 ++++----
-> >>  drivers/mtd/nand/raw/nand_ids.c   | 22 ++++++++++++----------
-> >>  drivers/mtd/ubispl/ubispl.c       |  2 +-
-> >>  include/linux/mtd/rawnand.h       | 23 +++++++++++++----------
-> >>  lib/tiny-printf.c                 |  2 +-
-> >>  6 files changed, 35 insertions(+), 26 deletions(-)
-> >>
-> >
-> > Coming back to these patches I had a look and except a typo , it looks =
-good.
-> > I can take these through at91 tree or maybe Michael you want to have a
-> > look as they touch the MTD/NAND drivers ?
-> >
-> > Thanks,
-> > Eugen
+> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv=
+/dts/jh7110-pine64-star64-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dts=
+i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> --
+> 2.43.2
 >
->
-> I have applied patches 1 and 2 to u-boot-at91/next .
-> The other three would need a resubmit .
->
-> Eugen
 
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Reviewed-by: E Shattow <lucent@gmail.com>
