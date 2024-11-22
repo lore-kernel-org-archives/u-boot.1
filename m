@@ -4,88 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71C24D75E53
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 14:11:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D721FD75E59
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 14:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DABBD8984B;
-	Fri, 22 Nov 2024 15:11:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 0968D89850;
+	Fri, 22 Nov 2024 15:33:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="azEiTWY5";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="LpxeFxci";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A194288FD2; Fri, 22 Nov 2024 15:11:41 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 5709D89851; Fri, 22 Nov 2024 15:33:14 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D14778984B
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 15:11:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCAFC88FDE
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 15:33:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-432d9bb168cso18818665e9.1
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 06:11:38 -0800 (PST)
+ spf=pass smtp.mailfrom=ldevulder@suse.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-53d9ff8f1e4so2453210e87.2
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 06:33:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732284698; x=1732889498;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=s6LdVqY5gwBTlrKiG0Yvdo3fMZbNxJeBGsKXvSlvgTI=;
- b=azEiTWY5hHhlQQUnHHLPBdpvf8EbctX/VoCNYFnpZqwA7SjZltaHqcZOlWlYxFhzyw
- 4cqSJAWOXgrc4NeLZ2gtin+y5FVztK3Oyb+Ms674Wv8DdCcFA3QwwOQNNTRkZqr9veu4
- u4eSP1E2VUCOeUfenuqKSQddmqhFqyc3UECX5H13Cwo2Vll+dByO+B6K6EQN9dLjm/Xa
- YGsVmur5XRJbHo94nUMOox04jZZ0NZoDIHJ6YmA0/1HuRWuyF/P0Zaxq5TrovnHSoVQr
- OB3bO6mPDcJEKrj8vi02EcMjAyF7LjFfJ723ei2cwbQuMf7QaUeEOy1RjAjS+5gUzf14
- uKGQ==
+ d=suse.com; s=google; t=1732285991; x=1732890791; darn=lists.denx.de;
+ h=mime-version:user-agent:content-transfer-encoding:autocrypt
+ :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=V2hEwaO7l4n6QKjabveKMNUrzF2YjhT0ZbEM+Pz3dRc=;
+ b=LpxeFxci33O9rVriwwJZgmY/N4RGD1h7s3YwQ+peq6yqmpEM0E0GnnffwdDTDwFaaE
+ JEvlKCP9uYE68ml4e103JfTxPLwurpm1WdygBo9EkPOkueKQKcfYKzmyBDgGPg1ZbYYP
+ w/VRFQGlylmgawFV89fOSF+mSg4vb+kykCc+tH5ODlWSbIiaFfVVU2Seqz+tkcUOJ/3s
+ iAzAywzFPXnHCdImIMsym22rUpywLhgN2GsnyCHkzEw9+imzNvcXv/3Ur5ajOK/6qlmw
+ UpxDcqeapwXkYHQbKeZ8NkYL3dZM7sjbHAWD0AS6Vp/eOwulRKRs25AkFNh5SIk3bpIX
+ kbNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732284698; x=1732889498;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=s6LdVqY5gwBTlrKiG0Yvdo3fMZbNxJeBGsKXvSlvgTI=;
- b=IdQmd0iNIxrEXE36yT5569dfK8h6LH/MMWRDJlnedSdEwGnHsUzpoHzVM0o1oibFer
- QiZWH3UttkrdlDH8ZMfwBdvT9QvzWoeFvxY70zlfRA2olZCtupN0LkK8rSUBqo1mnSvk
- O+d4/GrZAp/1ZEBC+pIgBWNRuUYbJAbYMgoaMHWTN63NnkGBbA9G0hlKBhKDbLb8Mgs7
- fJxUEz4yDS+2qvnTQnXdu049rahw8ABQJR/ITkD0F/gewApMB1kEc+2vnFKAt1FieTO+
- bHeE+erOx5ZTcHT3bb9TFrF9ywmzlYYp+EVMxhY5gTNYc04hp0/s4iXoTrG11LPjBEAv
- 545w==
+ d=1e100.net; s=20230601; t=1732285991; x=1732890791;
+ h=mime-version:user-agent:content-transfer-encoding:autocrypt
+ :references:in-reply-to:date:cc:to:from:subject:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=V2hEwaO7l4n6QKjabveKMNUrzF2YjhT0ZbEM+Pz3dRc=;
+ b=RLXtk49vP0gI8xR7cZ8k4YSSgvVfxWN4yaxn0iB5oQq5VzaFBxst1IFZp9CWkqE3cp
+ 66IujYh7oNEGLdLZVQ8xr0VwyyBx02RnUgEcSWkRx5Rua406u/+z4L6az8UwR/O1XYyl
+ 0Myg7ecZ16oYP82+SyyGZLAE/ADCD6CiBxdBavlTutOG0BS5GE2NCcgcLyMOeWLJof7j
+ 04gRQbIBD1vy+HBOkDD0HhnW2kZLgEMYxLCdjAQD7WKDeN2gS98G9/iNk7wQ5bgc0UIP
+ wH6Poqlxy6W/TXmdM7JbOguFPeVhZp9iaqocwbTosjgHWEKrYqJQ2TMexzoqfp1KkxQ7
+ 1nnA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhmhSCvq9KqWOhDIecoW3jAGpf6tLjiZqW1sREJUwCWlYuKH9nTWA4trniOHsAPN7UHh1RGFM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzSr9fnCeMpUONp/P9KDXQYj4p04GLu/v+mPwDocaxmpDfzMG8f
- Vyq1AMdk1dyIu6xC/iCLHGBinAeVMDKZndQOxu0VF/S3PZmA3lLnPHPZJyzjKz8=
-X-Gm-Gg: ASbGncuLE6F6F5Uxb2MKfx8E/Als7gDwb1PjWL4+TjJC/8PYy4IKLp9Y+/cAcEDgDnz
- s/wJywtS8ChH0hl4ZRvqUKvhi1zV8k3GJ8VPPYTV/qeF4/Wa7MbCmI01vvVsQnbGHFEIiZ4ySEK
- MXkSwgk1p9noRYGwYgEOPypyfFWcFXxMuekgXoScyiItQqft/pPvzi58YwxP8u0eTRY16raOPu4
- jKZ4R0+14IkCgZkyCL2JX0Sp1aiyeiPBOmQ9eBCLyKW8nEi3VM9tKVEi8Kr/vsnBA==
-X-Google-Smtp-Source: AGHT+IGFQgB7zeX89X+8cg7pBPIJm22DbLkyTT7asm4q3yjPrcyhGsL4OVKlNOCTMNdhKquxfHBhpQ==
-X-Received: by 2002:a7b:cb4e:0:b0:431:416e:2603 with SMTP id
- 5b1f17b1804b1-433c5c8895amr66713475e9.3.1732284698015; 
- Fri, 22 Nov 2024 06:11:38 -0800 (PST)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433cde97cdfsm28305435e9.38.2024.11.22.06.11.36
+ AJvYcCWRCfazQ4KgKbf/fE4DvUi/r3l48PKpMH5Jjg0846y3RkuUG9ccBTSJg15kqDnzNbANDXfDqDY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwiaK77PAV7O18T8uVT206Plr8qEWhZtQ+IPatTz39M/GkDJ/Gy
+ LbQFbziNW2vGp9J5qju0YTgxvlZKDnO7ZvjRqCSRs6Tl7vPa4J5UiAe6CTf37IE=
+X-Gm-Gg: ASbGnctxUl4yGQWDNSZ9K+xVbHixz5sMC6HV8HVEL5j6lSb3DT/iVIdGdjiXj7ZY9r+
+ YQkSdFlJ8zP9zCz9j7E+InrIEDdUKn3tULSoAsdWHOQ6TH18b/6uwQupkqdvNGTRtywMBVJ+mPv
+ erUp/vbUdDYWxANpOtgmlY8ag8t0Mc4DD0e9arvK8OGCNzkNmPfCzNnffM/a7Zn5eeS6yPknLrX
+ lJKfFZGfeA83NPWLg0NoIBDR1yKLKqD7y2f/exZJk5OQ2JC
+X-Google-Smtp-Source: AGHT+IFh+Xf1OWYQ/EhpTv5lBagXdfvXx81kU6pVxdaA1fjVDXIIzks1jQU8JBj4bxSulQkrk/XB0A==
+X-Received: by 2002:a05:6512:a86:b0:539:d0ef:b3f9 with SMTP id
+ 2adb3069b0e04-53dd39b5614mr1211220e87.40.1732285990980; 
+ Fri, 22 Nov 2024 06:33:10 -0800 (PST)
+Received: from [192.168.4.7] ([82.66.145.28]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-433cde06ed1sm28961445e9.6.2024.11.22.06.33.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 06:11:37 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 22 Nov 2024 15:11:34 +0100
-Subject: [PATCH v2] test: boot: Set DM|SCAN_FDT flags for
- bootmeth_{cros,android}
+ Fri, 22 Nov 2024 06:33:10 -0800 (PST)
+Message-ID: <e6eadaccaeef3b902d15dba7f634a7225318f1bb.camel@suse.com>
+Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
+From: Loic Devulder <ldevulder@suse.com>
+To: Andreas Schwab <schwab@suse.de>, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>, Ilias Apalodimas	
+ <ilias.apalodimas@linaro.org>, Rick Chen <rick@andestech.com>, Leo Yu-Chi
+ Liang	 <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>, Tom
+ Rini	 <trini@konsulko.com>, Chanho Park <chanho61.park@samsung.com>,
+ Aurelien Jarno	 <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>,
+ Jaehoon Chung	 <jh80.chung@samsung.com>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de
+Date: Fri, 22 Nov 2024 15:33:09 +0100
+In-Reply-To: <mvmjzcwobi0.fsf@suse.de>
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+ <mvmjzcwobi0.fsf@suse.de>
+Autocrypt: addr=ldevulder@suse.com; prefer-encrypt=mutual;
+ keydata=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
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.54.1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241122-bootstd-test-fix-multiple-bind-v2-1-b7643b59402c@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIABWRQGcC/42NQQ6CMBBFr2Jm7RimAhFX3sOwYOggkwAlbSUSw
- t2tnMDl+/l5b4MgXiXA/bSBl0WDuimBOZ+g7ZvpJag2MZjM5ESGkJ2LIVqMEiJ2+sHxPUSdB0H
- WySIVFVtTmGtOOSTJ7CWdjsCzTtxriM6vR2+h3/q3eiEk7Mo2K7kqbsT04GYdlL1cWjdCve/7F
- 9BqV6vPAAAA
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14.2-dev-b7dec
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,95 +132,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We make fewer calls to dm_test_restore() since
-commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
+Hi guys!
 
-Because of this some valid test combinations are now broken:
+I played with latest openSUSE TW image [1] for VisionFive2=C2=A0and I also =
+had an issue but not exactly
+the same Andreas had. Booting the OS from an sdcard gave me the grub cli bu=
+t not the menu. With
+Heinrich's patch I was able to boot on grub menu as fully boot the OS as we=
+ll.
 
-$ ./test/py/test.py --bd sandbox --build -k test_ut
-$ ./test/py/test.py --bd sandbox --build -k "bootflow_android or bootflow_cros"
+Tested-by: Loic Devulder <ldevulder@suse.com>
 
-Shows:
+--=20
+Loic Devulder <ldevulder@suse.com>
+Senior QA Engineer | SUSE Software Solutions
 
-  Expected '  2  cros         ready   mmc          4 mmc5.bootdev.part_4       ',
-  got '  2  cros         ready   mmc          2 mmc5.bootdev.part_2       '
+[1] -
+https://download.opensuse.org/ports/riscv/tumbleweed/images/openSUSE-Tumble=
+weed-RISC-V-JeOS-starfivevisionfive2.riscv64-2024.11.10-Build1.19.raw.xz
 
-Here prep_mmc_bootdev() is called twice and it will bind bootmeth_cros twice.
-
-Since bootmeth_cros is bound twice, 'bootflow scan' will find 2x the
-expected bootflows.
-
-Before
-commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
-this did not happen because a cleanup was called each time.
-
-Add UTF_DM and UTF_SCAN_FDT flags to both tests to make sure that the
-bootmeths are unbound after the test finishes.
-
-Fixes: fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
-Initially, this was found when merging some Android bootflow patches
-from [1].
-
-However, this can be reproduced on 'next' as well.
-
-Here is the test output that's broken (we have 4 cros bootmethods instead of 2)
-
-=> ut bootstd bootflow_cros
-Test: bootflow_cros: bootflow.c
-Showing all bootflows
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------ ----------------
-0  extlinux     ready   mmc          1  mmc1.bootdev.part_1 /extlinux/extlinux.conf
-1  cros         ready   mmc          2  mmc5.bootdev.part_2
-2  cros         ready   mmc          2  mmc5.bootdev.part_2
-3  cros         ready   mmc          4  mmc5.bootdev.part_4
-4  cros         ready   mmc          4  mmc5.bootdev.part_4
----  -----------  ------  --------  ----  ------------------------ ----------------
-(5 bootflows, 5 valid)
-test/boot/bootflow.c:1192, bootflow_cros(): console:
-Expected '  2  cros         ready   mmc          4 mmc5.bootdev.part_4       ',
-got '  2  cros         ready   mmc          2 mmc5.bootdev.part_2       '
-Test bootflow_cros failed 1 times
-
-[1] https://lore.kernel.org/r/all/87mshvxhq3.fsf@baylibre.com/
----
-Changes in v2:
-- Use UTF_DM | UTF_SCAN_FDT instead (Simon)
-- Link to v1: https://lore.kernel.org/r/20241121-bootstd-test-fix-multiple-bind-v1-1-f6c06b9581b1@baylibre.com
----
- test/boot/bootflow.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 9397328609d0..da713d8ed72b 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1197,7 +1197,7 @@ static int bootflow_cros(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cros, UTF_CONSOLE);
-+BOOTSTD_TEST(bootflow_cros, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
- 
- /* Test Android bootmeth  */
- static int bootflow_android(struct unit_test_state *uts)
-@@ -1220,7 +1220,7 @@ static int bootflow_android(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
-+BOOTSTD_TEST(bootflow_android, UTF_CONSOLE | UTF_DM | UTF_SCAN_FDT);
- 
- /* Test EFI bootmeth */
- static int bootflow_efi(struct unit_test_state *uts)
-
----
-base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
-change-id: 20241121-bootstd-test-fix-multiple-bind-159bd2523414
-
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
+On Thu, 2024-11-21 at 16:24 +0100, Andreas Schwab wrote:
+> On Nov 21 2024, Heinrich Schuchardt wrote:
+>=20
+> > Our MMC driver for JH7110 boards only supports reading to the low 4 GiB=
+ of
+> > memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BUFF=
+ER.
+>=20
+> That doesn't change the situation with the booting problem I have.
+>=20
