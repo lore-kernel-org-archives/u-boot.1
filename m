@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F8AE65D0A
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F44E65D0B
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:32:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 306BC89787;
-	Fri, 22 Nov 2024 01:31:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7E96896FA;
+	Fri, 22 Nov 2024 01:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T5X8UMx2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UyhapPo5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64D138977B; Fri, 22 Nov 2024 01:31:33 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 91345896F0; Fri, 22 Nov 2024 01:31:37 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3ABF289768
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0F4589781
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-211fb27cc6bso16645955ad.0
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:31 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2124a86f4cbso14935535ad.3
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732235489; x=1732840289; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732235493; x=1732840293; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1O2jPCVCf4ELvw1NFjW5SuyFVUz8fKW4rQkPSi78Fvg=;
- b=T5X8UMx26tP8ZaMZlXzrCYenkfSmqnMzGDOQn1R0kfmSv7QhHR2/6e5wDs1/ang3oz
- 45YufWEF+o+LE+5Sz8unsqqqc/l/ad3tTZSZfMUwOMd5KhMSngTVBMKVj/sIbg7Ypxjp
- VnQUN53X202FMKwMR+RKm4FvcOfsGWQv13eozso1RnnFYLg2gR5AtISJQL7zaZZ63Bl8
- Gjl1pbTFjh3sTEBzZF6G9xb1FoHfTS0+QlPXIWlt+NX7pS6ekXbWVUVZTHbsy3qOrzxc
- 9CyuyOdvTHcMYR1C3NkdvUfjK0+Boer+orZyULdmIFOkeqTtczKusWF9cMUqUJnx4IZZ
- 85DQ==
+ bh=iRAW2cPXy3w/n1FiCM/7c/t6rNpc6WB+Ux3dV0zM2UA=;
+ b=UyhapPo5jCbGnKwWJ6LxnMnWFQiKVoodX4RosDyOO8Ij7Js5c2W4candJWc/5/5Kdn
+ X1/2EXkP4p7kZgNNrxgBAI6amkYCe9qRFVa8e54pHP78xGgFCg09JUZDL3ffeZnoQT4l
+ xFVVgEIqtlEoIuuXC77u49Uu1yO7avJfWlSocFo6/2CquBRySdACa+l+c3wC0Qf8muOb
+ x2w6PbfHo2rPccV4C8H2xa+MmnZKnlGb6j3gZuoeh4oyrMOeg1ItoKL+2UFpy99zj0vo
+ 3+s73aSbfKXpthyFn+e11tKuYDIw4tVbBzmaDcyPLuLHGyx3iRy0avYJcVFOz8i7wBSd
+ LJIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732235489; x=1732840289;
+ d=1e100.net; s=20230601; t=1732235493; x=1732840293;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1O2jPCVCf4ELvw1NFjW5SuyFVUz8fKW4rQkPSi78Fvg=;
- b=bpm+kJxostgE9W9xWOmsoZfPRJl7t/vdvvzwT4cwKhIY13+PXzz70OtRYhiDoXnW4+
- zPwJSg2mgr6P6bOuiIZimm3ft6oKMhNEfauCrk/D/gIvA62TQTQEvg24Pxg7nxXQV/lO
- yUHForGKVsEYqeEdud+VQLQ5z2vfSc3esXoYhEIecxFQPt/bQd6B5RdWlRiaDtlY9jCa
- 4Sc2c2WI8felMa6DLWuVr6mffWsPEPM7W5r0vs4T/tcHlGnGS6sLdV8Y32CMshoFLgR4
- 4PB+Ia+8/JOOGOvAhl0WyZuPwYA7WXXJ7DfRVFk2f6DTrAXQ3ORCr7Nsg3lchEuH3fYM
- 4FBw==
-X-Gm-Message-State: AOJu0YxBFgv2vGEMhBoZTEFfCCg4q7P+S3GuTiojjENHNto5DWtk3Ln6
- Uzw6BVlgyYE5SLbzhc9FlWUL4UBk8ObjWiR217DoE0rwoeqYrM5CanSy9UJD
-X-Gm-Gg: ASbGncvzwLgMOA3CLqu+Bao7NLf2Ky65x/rJP1gClceqvAKBrZAQpxNlQ3pFL5j8UyY
- VDFjiwYeVQtU5NP/2iJ7rqMwQ0b3ULGDYElh1dtsFSngfDt5F3TNAZDqOzkKWjDZRXZBlVjEp88
- a2dYPI97PwDnBb/5IbAAHL0PGWhTUFWpFpBJ4Vhju1PFDHJuGMYmKwaPdm6x+DzNsQbIqG22xDb
- g4kpCzAS34uDfarCqf7K1x/xdgkpKwFbn5OICmfPGoOjg+lv/lIwLQQivlSfI6A
-X-Google-Smtp-Source: AGHT+IG/vCyvhFI7cAm2kmc5Mxmama3shA6+HCe82/5jGu8C7PMaI0WaNW0WZ6Jt4VmvRyU7uDIqVg==
-X-Received: by 2002:a17:902:d4cb:b0:212:68c2:4df3 with SMTP id
- d9443c01a7336-2129f5d981fmr11595695ad.17.1732235489568; 
- Thu, 21 Nov 2024 16:31:29 -0800 (PST)
+ bh=iRAW2cPXy3w/n1FiCM/7c/t6rNpc6WB+Ux3dV0zM2UA=;
+ b=HjmqcjZDBbkWmx+tS4qa7iLzdvp938SU7ZjVAqw3rk/VoraTn624ufG+dIH/nHb71A
+ jHL6/+rP4eGU7iKPf+clsdd8qKVAlaIdGIK5jHRhDHxyG3+Yw9zv5Z9r7stpotXy2KoB
+ kP1s4dLSeNtWyM5irsZJFyqQr3As9tsZockXfRXE9shC6eLoygw9sxDOBryOT6p4A1TW
+ J7ITkRLyxmME3HwjG0+mBhdvJJp14AL68DBuYy1Ib00r1L9R3Vn5CwXAI74ZBmrDKcwm
+ xmNBcyEkd/iV+OvTlcui3w9fKDvsxwlfCJOO6aiRr9UwtPe1p2o/8u2xaoudn0t0XMEk
+ xtHQ==
+X-Gm-Message-State: AOJu0Yx8EJaGdsoiKFOtLiPbHjSRtiYtncUk0V5lOdTo4jrzW3+t7wh8
+ uhlYT4+yTC5xWKvO4lfy5kNmYVatvFrBfYorMbyB0Jn8fpk2biTV2NUBL1eB
+X-Gm-Gg: ASbGncvDYAj0KNbKwDWHrfZ59K+gJrrtOUji3HFPtf/7hj5xysMivf8JIHmtyx/UyqP
+ Ln9t0T+cvysQmS5JBBN9YlKoZs2lVxR3rDnKsC6Tcd016P3QiyUEX2bMRNZQUEuc9xj6J3mwiZF
+ 2tE2Xb6EVsZ9fp8LNBWAhF9tf7ufSsLbcIpSbCFAQcSERD2evAPYPsP7xPy6JHDfczYoaj5DEoI
+ KzqUkWch4r4ux1h2kbCuPZ5VeTB7LAkozf+vCCyoiOdbiRR8SsRxndacZCiiW6Z
+X-Google-Smtp-Source: AGHT+IG7XkkoPVhpb7dxm5iGJ6wLIm0uKLuIw4jgm32z3j+b/I7onAZB33EcIyks5iCHAOAKDCZ+1g==
+X-Received: by 2002:a17:902:ecc9:b0:212:615f:c6 with SMTP id
+ d9443c01a7336-2129f82fe3bmr9409305ad.50.1732235492804; 
+ Thu, 21 Nov 2024 16:31:32 -0800 (PST)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:db1b:7332:ce96:46a7])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.26
+ d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 16:31:29 -0800 (PST)
+ Thu, 21 Nov 2024 16:31:32 -0800 (PST)
 From: Chris Packham <judge.packham@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Chris Packham <judge.packham@gmail.com>,
  Chris Packham <chris.packham@alliedtelesis.co.nz>,
  Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 6/7] arm: mvebu: x530: Don't build mkeficapsule
-Date: Fri, 22 Nov 2024 13:30:20 +1300
-Message-ID: <20241122003058.270163-7-judge.packham@gmail.com>
+Subject: [PATCH 7/7] arm: mvebu: x530: Enable IPV6 support
+Date: Fri, 22 Nov 2024 13:30:21 +1300
+Message-ID: <20241122003058.270163-8-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241122003058.270163-1-judge.packham@gmail.com>
 References: <20241122003058.270163-1-judge.packham@gmail.com>
@@ -97,8 +97,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The x530 board doesn't use EFI and our toolchains don't include gnutls
-so disable the tool in the defconfig.
+Enable IPV6 support for the x530 board.
 
 Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
@@ -107,14 +106,17 @@ Signed-off-by: Chris Packham <judge.packham@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/configs/x530_defconfig b/configs/x530_defconfig
-index 89612be631e3..a5b1cc3f8e89 100644
+index a5b1cc3f8e89..815370c90ecc 100644
 --- a/configs/x530_defconfig
 +++ b/configs/x530_defconfig
-@@ -95,3 +95,4 @@ CONFIG_USB_ETHER_ASIX88179=y
- CONFIG_WDT=y
- CONFIG_WDT_ORION=y
- CONFIG_SPL_TINY_MEMSET=y
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
+@@ -65,6 +65,7 @@ CONFIG_CMD_UBI=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ARP_TIMEOUT=200
+ CONFIG_NET_RETRY_COUNT=50
++CONFIG_IPV6=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MVTWSI=y
 -- 
 2.47.0
 
