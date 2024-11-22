@@ -4,140 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F02D3D6ED3E
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 09:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28112E65D3F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 10:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22BD2897D6;
-	Fri, 22 Nov 2024 10:48:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 44B37897E2;
+	Fri, 22 Nov 2024 11:17:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kkFSZBXM";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3XYYE0oY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E00788360; Fri, 22 Nov 2024 10:48:16 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::608])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D78B2897E1; Fri, 22 Nov 2024 11:17:35 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09D07897E0
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 10:48:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 935A589117
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 11:17:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H2nlYo3brbNVpmUFtEIaAyRV/sE7OSvo3d82KtV/JfcqwI+Fq6PaMY3ZFmb41daKyoJ6TqTb1doc6id6MywKWqUCl2i2YEeN0nhs1NyYXW5fr3ZJJYM3PjQtzf5EvwLk/s2yYDTo2chXAtALbsEppvW4wiF7S6EswKuTdsFz7HTKkDEPJdf3xfbNoe8vbNagBPj47w37o+9jwKz/sJGgiCpGLZp5PvZWgSMxRcaNnYuYkXMDXV5sz477Wf6ESkfB8z/GonwrtZJLp79SLlLRuM6aCV0X+0tnHT0acn1VZlMXGTzlPxBbyOOYekbBqO+mY1JdoAFR8whgPPi8wbtvqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Evvawzij1G5PCTUezKNWwfCVBCbndrnUs7xbpr2qrRA=;
- b=WfoTdmAh4j1sKDU5W6T3GlDJwVhUspvDzehdbKgNH6BsgafxiMZobvX/HxvZaGo9lf3GdmMsD+x7vgqLxNM2ho71BvQ9J1q7hQNMHPGf7e22uMyEX+bPn2vInvnS0S3+ZjRxsgHl1ZaN7lX0APM2ZotaW572y1ajEHmUB45+57jpKx1NLrFB7iTjYLHriwQh32Y6LJurXKPg0/SXjs4YsNF0YsxFemiPZusjh9vFDqjmGh0nTjfrKKYXf8ZwdwPt3aWpH2BNneXabvAqeWVTeYpmx77TqInKQ47vdUVmg3i7hUa5Hh5cED/3Dud+CAkOAs/Dbka7ykdRZeHNuB0u1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.12) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Evvawzij1G5PCTUezKNWwfCVBCbndrnUs7xbpr2qrRA=;
- b=kkFSZBXMUxobXx6OEZLgMdphWKIrYkvT5Is5e24nToT35YiAg/W7UYPuMgmGiaGMJgDeyu6C216qhxDMGz17lbW7xEZ0pDsLO69rJg+Tbz2URoeViTDVz+TswETKBEOKkNSNy9y0QcxR8x5t5hsq37MQT3dgsAcAYE+JFnO1iLY=
-Received: from MN2PR14CA0005.namprd14.prod.outlook.com (2603:10b6:208:23e::10)
- by DM4PR12MB8558.namprd12.prod.outlook.com (2603:10b6:8:187::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.15; Fri, 22 Nov
- 2024 09:48:08 +0000
-Received: from BL6PEPF0001AB51.namprd04.prod.outlook.com
- (2603:10b6:208:23e:cafe::a8) by MN2PR14CA0005.outlook.office365.com
- (2603:10b6:208:23e::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.15 via Frontend
- Transport; Fri, 22 Nov 2024 09:48:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.12)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.12 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.12; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.12) by
- BL6PEPF0001AB51.mail.protection.outlook.com (10.167.242.75) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8182.16 via Frontend Transport; Fri, 22 Nov 2024 09:48:08 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Nov
- 2024 03:48:05 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Nov
- 2024 03:48:03 -0600
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 22 Nov 2024 03:47:59 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>, <j-humphreys@ti.com>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <tudor.ambarus@linaro.org>,
- <Takahiro.Kuwano@infineon.com>, <git@amd.com>, Tejas Bhumkar
- <tejas.arvind.bhumkar@amd.com>, Dragan Simic <dsimic@manjaro.org>
-Subject: [PATCH] mtd: spi-nor: Add support for Macronix flash part
-Date: Fri, 22 Nov 2024 15:17:47 +0530
-Message-ID: <20241122094747.1398068-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4315eac969aso10616545e9.1
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 02:17:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732270653; x=1732875453;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qAtPqhxrD026mCcFjpbPDYbU3W/H+4QwBcMOuQxJCLU=;
+ b=3XYYE0oYk1SL/hWBxtaqTscYhpn9NOl4/jl9VpTaqymSVlMH9yWEyXfNDQjnO+vFsq
+ 2C+dUQ4CrJ7iVCVdArqsiFqDAsMWueofAWQV9P/cHFMRsTjea22GVKPJRAUuNwOWfPq7
+ tmWZ1UjTj9UKghXbPY++RP7MHSOVmz8pknmUmCYspoT89ReNtfCfI1RSDfv9m0QOutgl
+ ZiY7wJQ7dpkLPmqsth3EShPNbxhvlfI6vOB0n+/CcrPSgubXoB5ACaLxK8cD4b6Agscg
+ NVbVnDcqueFaGPWTZlggun/bwXiJWVcIlYOMQ9yj8IhBKjLKQE8Bar+5W6baC7GhOXQ1
+ /hfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732270653; x=1732875453;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qAtPqhxrD026mCcFjpbPDYbU3W/H+4QwBcMOuQxJCLU=;
+ b=NR1Hr1+/LnieRrQs/aDB1YGnovRQMMlO0iJhFiyD9Uo2UvxUXLWlZGM0fuwqzkvuJQ
+ xD7F9Nh3UWAx/mjC1Gr43l30ptE2VNlX+1j/hifgY54DRIQ0Y6EdgrzSQ5lPEXKhf4m2
+ Wdm13zt1uJQ+HjAsAezq61eO7Rnr867nE2LTOyDpohEQTLWllFeJK6NIQDUZIt3/i3fK
+ J3cnwFGu7K80ge0mkz+FVur5yJnSOTZl/K/CE5eLacyxJKHOSwET799lEMOwLBqtgX6w
+ 2PfGG/acpg7/L16wPPMe5Dhq7+Od6piMsmn/8wndF1M/XMSFzhFQ4tNd13GCMdHPLzFX
+ jvDg==
+X-Gm-Message-State: AOJu0YxySnsexSd73UdmZxIlayMSnNGLZJ104yM70l5bl0LjvN9E0aUz
+ fEhW5pbMiNSIOyYg3iwOlhmAE8o0FrO1lBVCTl0KdHsFlKhNoN/l2stsat9t/vA=
+X-Gm-Gg: ASbGnct2cARnFX+yHyUynMRQL6xI5MRJHkm+XS3aLeZVDU51eN+i8abS5FkQa0wg4GM
+ U+LiAOtQuvGW+zaL2p9vdM7uAoOuwDPnb5N3Y1BzRm2z6BYqw2GD9GHHHw9mE6+NPT8ex1sZ7KH
+ d2AemXRgReivgDtazEBBgofmSY24GgS1LnMQJa5o/hXbAzWzpFiFIzpPp/ErNKdKUhuCE/cVfqS
+ GeDqGBMA4ZQSw+/+O9+gQ3nUv9m0eBUmm26nZhj+51XdHfykeWkLFc28JE=
+X-Google-Smtp-Source: AGHT+IHXyxoZuiGJNQECEK9qo6McaUCkeASvF/e4A0Pr4GVAxxQzj9W4omPtNACRV2Pg528aKDYaOw==
+X-Received: by 2002:a05:600c:1e88:b0:431:5226:1633 with SMTP id
+ 5b1f17b1804b1-433cda11055mr20774105e9.6.1732270652813; 
+ Fri, 22 Nov 2024 02:17:32 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-433b46430f1sm85716655e9.43.2024.11.22.02.17.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Nov 2024 02:17:32 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Julien Masson <jmasson@baylibre.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Julien Masson <jmasson@baylibre.com>
+Subject: Re: [PATCH] bootstd: android: don't read whole partition sizes
+In-Reply-To: <20241121-bootmeth-android-part-sizes-v1-1-25760bbd0f08@baylibre.com>
+References: <20241121-bootmeth-android-part-sizes-v1-1-25760bbd0f08@baylibre.com>
+Date: Fri, 22 Nov 2024 11:17:31 +0100
+Message-ID: <875xofd138.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB51:EE_|DM4PR12MB8558:EE_
-X-MS-Office365-Filtering-Correlation-Id: c3630cd4-e441-4554-bc1f-08dd0adac50c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|376014|82310400026|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?CTkL3URkGVbSXGsNVST87qAxz4sEFV2vAK6fHEi7Mb0RzSX6tJeXfZ110sQi?=
- =?us-ascii?Q?5nBA0hYyb9okrjL9z6Uzq91o6QTj9x2HeOMmN7SLyRqa6yexieu2KThrzvS2?=
- =?us-ascii?Q?AEZzvhQLfDyw/nLdXKNkUo4cUfWTXyr6XmGAjcE5oP4X5ITL9Vjw9s8KkAnI?=
- =?us-ascii?Q?shug5c81HGh9jSiwtxo+3Jn38sd5o0pDLESnh2/Yx5f7U2OGAvL5/iVBNqbH?=
- =?us-ascii?Q?OT3mni6XypYgKyDefFHwYA9BrbxIQDZy5qNjs/+Qm4oKsTJbIn/5Pzr9fjgS?=
- =?us-ascii?Q?kWlc/ZLfMxyjKsnbddKqUwREM4IsohTNZoFXmCWZIRO0VHf1wVAHDMT/v7oo?=
- =?us-ascii?Q?EtE9kCbhvYLd0J4M10u5VLxYoDxoMZtV1rXkMLoXbjrgRhA5ytKTXf+QU9yr?=
- =?us-ascii?Q?POcrQ5xb6SmApfExOi/DPHwJcb4sdng8gm5yTStosp9Br2KVeiw8mi00nJc7?=
- =?us-ascii?Q?PEBRGyOuloTRQsZCP9JnlQvBtgpb3u42TQfR9wjBSsoMmRJjA/2qGDAF8Imi?=
- =?us-ascii?Q?Tj3wXW7ehD6py5+pAvvldPEGDjVtd8PHIqxMA3dKMiluYQmWzuW6OHflZfRL?=
- =?us-ascii?Q?vXPcXplyQKWCIeGVxGZbLfb4BreHMEbPTcGo+/oYmPl3wqNuxGeqGCFuMSXQ?=
- =?us-ascii?Q?FozE1t9LgEI17AJko5TuJ98KYCs2wX+pF2+iwhDXhoDT604l9dEx52PJ3ZA8?=
- =?us-ascii?Q?WuRgcYFoe2dM+ucgwibXec3hcphTezOrGjp3PwqOgKUl7DTla7VetFmJ4Wc8?=
- =?us-ascii?Q?hLVV7Glj3VY30sh1mIDbeM5XdUP8xmASIw3AlznCwhfUrFK3q6isSecRXaBD?=
- =?us-ascii?Q?X+mbDYVB9LUK8Ryg2fpIioNFvyY+Fzg07lWHK95P1hWkkr6P/mY1E4U2hkS5?=
- =?us-ascii?Q?QT/VsYKW235SKbR1CK+kRdUHqarjA0S3xw3LsL0b3T+/heA6unLoffQL4isc?=
- =?us-ascii?Q?2jJxzk8B4jcJEO7e2A4btvZQo2iHAlBLlfX+IsgoWY1Si1hyYOsJjU+EwJUp?=
- =?us-ascii?Q?RDZ4uU2kVnNtTPZpidL1R9d+Jc+5ehLtPSzlFKF5X/79KsD4pzMDve6/bc/a?=
- =?us-ascii?Q?Cb2RZQ2e2kISp4TWbghJnm3rub2IgvZk7HWYX+HYZxrHH+9PH/w2DFb1lGF+?=
- =?us-ascii?Q?vKQAvwuoK7JW8RdLJ+lCRCcpjSChy7vPuD0KgtyhgYjqb+9nh/+ogmyUyd/0?=
- =?us-ascii?Q?q707/0WAsaL3wwmh5z17PdDwYk4wtHoniqWrGnumx1vLAV0lHNdlCgM637NT?=
- =?us-ascii?Q?/RTz7LASjLL7B00v0Tx+8NcP6urBqe772MJ84DYgTePcukjRpJr+YlYi13c0?=
- =?us-ascii?Q?GH0LNmf4eAwIQyutTuih9LrBlcIc6IESMAfKGGL5HT6f780i37/qwQL9cR7Y?=
- =?us-ascii?Q?hm6UjnxmZSROTUP4TF9F07vLYLogfVK0Dh6YRz8PZ0bfqNOw5g=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.12; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:atlvpn-bp.amd.com; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2024 09:48:08.0479 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c3630cd4-e441-4554-bc1f-08dd0adac50c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.12];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB51.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8558
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,31 +94,225 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added support for Macronix OSPI flash parts MX25UM51345G
-and MX66UM2G45G, with initial testing conducted on the
-Tenzing-se1 board using STR mode for basic erase, write,
-and readback operations.
+Hi Julien,
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
----
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
+Thank you for the patch.
 
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index 91ae49c948..a130845d41 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -275,6 +275,8 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO("mx66l2g45g",  0xc2201c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx25l1633e", 0xc22415, 0, 64 * 1024,   32, SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES | SECT_4K) },
- 	{ INFO("mx25r6435f", 0xc22817, 0, 64 * 1024,   128,  SECT_4K) },
-+	{ INFO("mx25um51345g",   0xc2813a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_4B_OPCODES) },
-+	{ INFO("mx66um2g45g",    0xc2803c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx66uw2g345gx0", 0xc2943c, 0, 64 * 1024, 4096, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES | SPI_NOR_OCTAL_READ) },
- 	{ INFO("mx66lm1g45g",    0xc2853b, 0, 64 * 1024, 2048, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
- 	{ INFO("mx25lm51245g",   0xc2853a, 0, 64 * 1024, 1024, SECT_4K | SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
--- 
-2.25.1
+On jeu., nov. 21, 2024 at 11:59, Julien Masson <jmasson@baylibre.com> wrote:
 
+> The current implementation is reading the whole partition for boot and
+> vendor_boot image which can be long following the size of the
+> partition or the time to read blocks (driver/SoC specific).
+>
+> For example with mediatek mt8365 EVK board, we have a 64MiB boot
+> partition and the boot image flashed in this partition is only 42MiB.
+> It takes ~8-9 secs to read the boot partition.
+>
+> Instead we can retrieved the boot image and vendor boot image size
+> with these new functions:
+> - android_image_get_bootimg_size
+> - android_image_get_vendor_bootimg_size
+> Use these information and read only the necessary.
+>
+> By doing this with mt8365 EVK board, we read boot image in ~5 secs.
+>
+> Signed-off-by: Julien Masson <jmasson@baylibre.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+> Changes have been tested with:
+> $ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_android_image_v4
+> $ ./test/py/test.py --bd sandbox --build -k ut_bootstd_bootflow_android_image_v2
+> ---
+>  boot/bootmeth_android.c | 28 +++++++++++++++++++++++-----
+>  boot/image-android.c    | 45 +++++++++++++++++++++++++++++++++++++++++++++
+>  include/image.h         | 24 ++++++++++++++++++++++++
+>  3 files changed, 92 insertions(+), 5 deletions(-)
+>
+> diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+> index 2aac32331d3c28853bc87d05a8c76ae868ea97c7..3a5144aaa3b0125cf13ff1805b05e87385263308 100644
+> --- a/boot/bootmeth_android.c
+> +++ b/boot/bootmeth_android.c
+> @@ -45,6 +45,8 @@ struct android_priv {
+>  	enum android_boot_mode boot_mode;
+>  	char *slot;
+>  	u32 header_version;
+> +	u32 boot_img_size;
+> +	u32 vendor_boot_img_size;
+>  };
+>  
+>  static int android_check(struct udevice *dev, struct bootflow_iter *iter)
+> @@ -98,7 +100,13 @@ static int scan_boot_part(struct udevice *blk, struct android_priv *priv)
+>  		return log_msg_ret("header", -ENOENT);
+>  	}
+>  
+> +	if (!android_image_get_bootimg_size(buf, &priv->boot_img_size)) {
+> +		free(buf);
+> +		return log_msg_ret("get bootimg size", -EINVAL);
+> +	}
+> +
+>  	priv->header_version = ((struct andr_boot_img_hdr_v0 *)buf)->header_version;
+> +
+>  	free(buf);
+>  
+>  	return 0;
+> @@ -138,6 +146,12 @@ static int scan_vendor_boot_part(struct udevice *blk, struct android_priv *priv)
+>  		free(buf);
+>  		return log_msg_ret("header", -ENOENT);
+>  	}
+> +
+> +	if (!android_image_get_vendor_bootimg_size(buf, &priv->vendor_boot_img_size)) {
+> +		free(buf);
+> +		return log_msg_ret("get vendor bootimg size", -EINVAL);
+> +	}
+> +
+>  	free(buf);
+>  
+>  	return 0;
+> @@ -330,15 +344,17 @@ static int android_read_file(struct udevice *dev, struct bootflow *bflow,
+>   * @blk: Block device to read
+>   * @name: Partition name to read
+>   * @slot: Nul-terminated slot suffixed to partition name ("a\0" or "b\0")
+> + * @image_size: Image size in bytes used when reading the partition
+>   * @addr: Address where the partition content is loaded into
+>   * Return: 0 if OK, negative errno on failure.
+>   */
+>  static int read_slotted_partition(struct blk_desc *desc, const char *const name,
+> -				  const char slot[2], ulong addr)
+> +				  const char slot[2], ulong image_size, ulong addr)
+>  {
+>  	struct disk_partition partition;
+>  	char partname[PART_NAME_LEN];
+>  	size_t partname_len;
+> +	ulong num_blks = DIV_ROUND_UP(image_size, desc->blksz);
+>  	int ret;
+>  	u32 n;
+>  
+> @@ -364,8 +380,8 @@ static int read_slotted_partition(struct blk_desc *desc, const char *const name,
+>  	if (ret < 0)
+>  		return log_msg_ret("part", ret);
+>  
+> -	n = blk_dread(desc, partition.start, partition.size, map_sysmem(addr, 0));
+> -	if (n < partition.size)
+> +	n = blk_dread(desc, partition.start, num_blks, map_sysmem(addr, 0));
+> +	if (n < num_blks)
+>  		return log_msg_ret("part read", -EIO);
+>  
+>  	return 0;
+> @@ -498,12 +514,14 @@ static int boot_android_normal(struct bootflow *bflow)
+>  	if (ret < 0)
+>  		return log_msg_ret("read slot", ret);
+>  
+> -	ret = read_slotted_partition(desc, "boot", priv->slot, loadaddr);
+> +	ret = read_slotted_partition(desc, "boot", priv->slot, priv->boot_img_size,
+> +				     loadaddr);
+>  	if (ret < 0)
+>  		return log_msg_ret("read boot", ret);
+>  
+>  	if (priv->header_version >= 3) {
+> -		ret = read_slotted_partition(desc, "vendor_boot", priv->slot, vloadaddr);
+> +		ret = read_slotted_partition(desc, "vendor_boot", priv->slot,
+> +					     priv->vendor_boot_img_size, vloadaddr);
+>  		if (ret < 0)
+>  			return log_msg_ret("read vendor_boot", ret);
+>  		set_avendor_bootimg_addr(vloadaddr);
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index cd01278f211d63262f2bdad7aa1176e2c1bbfedd..93b54bf8d7936862693d56d5b75343575f3e6293 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -178,6 +178,51 @@ static void android_boot_image_v0_v1_v2_parse_hdr(const struct andr_boot_img_hdr
+>  	data->boot_img_total_size = end - (ulong)hdr;
+>  }
+>  
+> +bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size)
+> +{
+> +	struct andr_image_data data;
+> +
+> +	if (!hdr || !boot_img_size) {
+> +		printf("hdr or boot_img_size can't be NULL\n");
+> +		return false;
+> +	}
+> +
+> +	if (!is_android_boot_image_header(hdr)) {
+> +		printf("Incorrect boot image header\n");
+> +		return false;
+> +	}
+> +
+> +	if (((struct andr_boot_img_hdr_v0 *)hdr)->header_version <= 2)
+> +		android_boot_image_v0_v1_v2_parse_hdr(hdr, &data);
+> +	else
+> +		android_boot_image_v3_v4_parse_hdr(hdr, &data);
+> +
+> +	*boot_img_size = data.boot_img_total_size;
+> +
+> +	return true;
+> +}
+> +
+> +bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img_size)
+> +{
+> +	struct andr_image_data data;
+> +
+> +	if (!hdr || !vendor_boot_img_size) {
+> +		printf("hdr or vendor_boot_img_size can't be NULL\n");
+> +		return false;
+> +	}
+> +
+> +	if (!is_android_vendor_boot_image_header(hdr)) {
+> +		printf("Incorrect vendor boot image header\n");
+> +		return false;
+> +	}
+> +
+> +	android_vendor_boot_image_v3_v4_parse_hdr(hdr, &data);
+> +
+> +	*vendor_boot_img_size = data.vendor_boot_img_total_size;
+> +
+> +	return true;
+> +}
+> +
+>  bool android_image_get_data(const void *boot_hdr, const void *vendor_boot_hdr,
+>  			    struct andr_image_data *data)
+>  {
+> diff --git a/include/image.h b/include/image.h
+> index c52fced9b409b1f963daa4ab6c266909ca035aff..9be5acd8158f00930ab1f3988b8f577817acd1fe 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -1801,6 +1801,30 @@ int fit_image_cipher_get_algo(const void *fit, int noffset, char **algo);
+>  struct cipher_algo *image_get_cipher_algo(const char *full_name);
+>  struct andr_image_data;
+>  
+> +/**
+> + * android_image_get_bootimg_size() - Extract size of Android boot image
+> + *
+> + * This is used to extract the size of an Android boot image
+> + * from boot image header.
+> + *
+> + * @hdr: Pointer to boot image header
+> + * @boot_img_size: On exit returns the size in bytes of the boot image
+> + * Return: true if succeeded, false otherwise
+> + */
+> +bool android_image_get_bootimg_size(const void *hdr, u32 *boot_img_size);
+> +
+> +/**
+> + * android_image_get_vendor_bootimg_size() - Extract size of Android vendor-boot image
+> + *
+> + * This is used to extract the size of an Android vendor-boot image
+> + * from vendor-boot image header.
+> + *
+> + * @hdr: Pointer to vendor-boot image header
+> + * @vendor_boot_img_size: On exit returns the size in bytes of the vendor-boot image
+> + * Return: true if succeeded, false otherwise
+> + */
+> +bool android_image_get_vendor_bootimg_size(const void *hdr, u32 *vendor_boot_img_size);
+> +
+>  /**
+>   * android_image_get_data() - Parse Android boot images
+>   *
+>
+> ---
+> base-commit: acaa7f35a33146f887948d34130229388280844a
+> change-id: 20241121-bootmeth-android-part-sizes-ff2866e0d079
+>
+> Best regards,
+> -- 
+> Julien Masson <jmasson@baylibre.com>
