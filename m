@@ -4,93 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62071D75E3B
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 13:17:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEE78D75E41
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 13:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CF0689824;
-	Fri, 22 Nov 2024 14:17:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 26AC18982D;
+	Fri, 22 Nov 2024 14:37:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MM8RaZ2n";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OrnJTBfM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D5E6897ED; Fri, 22 Nov 2024 14:17:49 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id CC0118982F; Fri, 22 Nov 2024 14:37:16 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 473D389820
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 14:17:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 756828982C
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 14:37:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2fb388e64b0so25373071fa.0
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 05:17:47 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5cef772621eso2682579a12.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 05:37:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732281466; x=1732886266; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fsS22XiJE44JXnjwlOrpkPfG4JK/HLdPkBEHsF4MibQ=;
- b=MM8RaZ2n4XMpNShthK9MP5lsmS5UrciqBYc/BaXsVDbw5JTgBCiKUHLwgQDS901dIC
- mwyNzb3x/lIUbHCZMbuaoCMut0njquNzKDlxDMxgmyMNjfepzfAnuLqJ/D6AoiqyGlC+
- 9d90n1hXLLv2RsCxptyNi5XmIneq8Byw5suuMAUfsDVEuR/3tWPQvLZ42R8Ht2hNgs0S
- TSgPWBZAmOS9QEzvO+ZP6sNHF2hEEwYME2dMpzw01hbHzmuyu6tofYk5Kdo/mA5WSm8N
- Tb55pUV+QX36Fb2cLZpKVOq8IuoHMW+fsANlDKhWYFg/6PnvMuL+QXJNnbfqc5+3D03/
- i4tA==
+ d=chromium.org; s=google; t=1732282634; x=1732887434; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WhWLKAB9k94SwaJxJ9HodOQJ2LQEzTUeBpsZMqducLM=;
+ b=OrnJTBfMzdDyeNzWuEX8IUpVyt1F8za8mvYghSxoneHvAzUgJZaadPKj15KM6vs3Ii
+ 9A2/Ufo8Nk2WZwpU1hHK7stS/PJg9RSFoboUo5l4pfW7GRikQgDVqZI8GP+ubmOyKrBo
+ 3EbnW2osQdlFrLeUNJUALxcjAfLwKvuWdYMmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732281466; x=1732886266;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fsS22XiJE44JXnjwlOrpkPfG4JK/HLdPkBEHsF4MibQ=;
- b=BnY5oUtiKvsJE58YNJ5L5xL1S5fM+K12Ba/hDitf0O6P2ZMRYKynakDbu3oNVIRM0f
- OqyhnSKypvLF/kpN6gxd+64V9iPOZeULAZeISEcwWUj9DoQxwXZpofiBckR4l+8CK4jt
- hMjf87hP95EN1Vhj9Z3T7GMz4lsNPfzWT2U+tP7Er010r1YY2afEQS/0fYMQ2Lh7FW/1
- yIFE136Go6w5Vk/QLX1nasfRroZyL07tzDolnSkrH6/YCp5qs5XQd3ehkGDYTv9ALqrH
- FsclzClg8/2ZhuH+UHN6SAa5TWZ6u32HHM2JCcqrA5dKv3rP/l3tU8T+5v2+JCIG8PpI
- JNvA==
+ d=1e100.net; s=20230601; t=1732282634; x=1732887434;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WhWLKAB9k94SwaJxJ9HodOQJ2LQEzTUeBpsZMqducLM=;
+ b=anw3EsIgi1mBVwpBbPNAy77OLps0wr8Z5oAUAonFjZ/te8ax/aSfU7FHPDJbfKD0WE
+ Sa31uW3a0R0dAG6Jpb0qoJihs4C3+TmK4Kxet75P2ngMu4km0ZfsAP7T3zJi4ueVbALR
+ 34ufXx3Jl6tnWRu1NbjsUQL2SxCZdG3e7jtfjjhrw5n93NF1r46eduR6eR2oI69eT40z
+ b3qbWpWobjdkHvV2YrJDkJ7dn73rAOjNYlD63PdNxt2GtdNoYmoUwHMstqZaBgUrQYTY
+ nlRZ1ygEuILz7SnXLQhMjqphffN/8Fk8xn/oVXOfjrmZKhF+org7MOH54+ymljDO4OCf
+ 6idw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXPSJvRomddlcRJBuh8/iP2aK86E7d7R/6KmKSW9UsEiYlwHs29Tkt2ZwUZ4DtakeaQcDel+m0=@lists.denx.de
-X-Gm-Message-State: AOJu0YymdHb/N/iBvLJsSPWacSV93+lVz5D1CAA9Pzynhwad5D666f4Y
- 9ZBkaztBaO8YROBY75LAwpD3Vrvf+QqGtbmQb2KMSyz27W9LmG4VxRSokZwuQBTtoXKgtpp8AoK
- mN4m76pfX5Bq+vn2JxKp5u0SkEdYzLQ==
-X-Gm-Gg: ASbGncusAIFfeVPipZnUaYUDl/GxCeGOpdxoGWz+nXAocPQs7e9cpe04RdAplc3Daui
- Pi8bJKwU076WknYcPUUwKgMk+Uy12FdtuzlXmhpJAb19DD14tP1VvX+44KvP+PpA=
-X-Google-Smtp-Source: AGHT+IFIAAdUHPIlee9y0mg9TLyx8EFgnlw699Jgzfj8aWb4BZbdkbnhXp5A5i0x75iTXxFY1JYORD72QxxkBjc4IRU=
-X-Received: by 2002:a05:651c:503:b0:2f3:b71a:1e91 with SMTP id
- 38308e7fff4ca-2ffa711f98amr15513861fa.17.1732281466422; Fri, 22 Nov 2024
- 05:17:46 -0800 (PST)
+ AJvYcCXEjjqXtLh5IFOFkBNzb14SIN0jnN5nOccyTXZLvyQ7tLYsERYUPc3JiK7nHQpjb1QEgEr/Ek0=@lists.denx.de
+X-Gm-Message-State: AOJu0YypgB4EWftwLJ+88c3UVD8xaKT/WxBdb43uJPVtkfIuphvVX0Fr
+ a3gu/ozaoEFu/hjkuVHVhE63JSiwdFhBtllCaWd21KCjwWpns5HBixramJUAqGYoSgWHFqzKhxF
+ w+Nn6+PbnmDomDMcyTHfSpEgzk1KpAoWUcEt0yhzg3+JtU5Sf+A==
+X-Gm-Gg: ASbGncvUp1FvrRVHcPgwAAG4YNAJqK1FD9fc/T4T0XrFJRB+JlPhb9WW0mjgsv4bIAd
+ 8dd990nolVuLJun3i3e7gWEQ0yK5DXPh4
+X-Google-Smtp-Source: AGHT+IE9c/CVYX6n2Tl5vznSgnizP5azP5wrR2k5ZHEFNj/aT4L79mlkkReC2yTxnEIuF0GTbBIppARYTkFHodsohDk=
+X-Received: by 2002:a17:906:cc9:b0:a9e:e1be:158 with SMTP id
+ a640c23a62f3a-aa5099eb837mr265209466b.31.1732282633766; Fri, 22 Nov 2024
+ 05:37:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20240707082001.20746-1-michael@amarulasolutions.com>
- <20240707082001.20746-2-michael@amarulasolutions.com>
- <CAHCN7xK4YgEt7xaA6Ln3Q3GzvOP-iZM+YtZwP1Hg402VstBcOg@mail.gmail.com>
- <CAOf5uwn4T573-BDegO8giorZXeePbYszuo3dk1TEmdPvY0+dQw@mail.gmail.com>
- <CAHCN7xLgLwSv_EySui38ePeDqOfetWPi5R7dHJs+exVdZYnjHg@mail.gmail.com>
- <CAOf5uw=r=FsRRmD3tgONbxzCnv-rd2DS3d1bvt4zBHgQn1zomg@mail.gmail.com>
- <CAHCN7xLc0hzXmDaES9961jQ6fXtqof093Tga6d6748gxGYA+Jg@mail.gmail.com>
- <CAOf5uwnZeWTM=doUQ1P+OAoq3pnMPt060LtwaXt_Rnj+GBwjhg@mail.gmail.com>
- <CAHCN7xKg2jBJVfhvz2gCeTBgvMVR-mm0b-L_wEQsZBX4z0UHVw@mail.gmail.com>
- <CAHCN7xKCEjwyhfnCi3un94ssONdJjApMVo3FCRAydGd8Co34Uw@mail.gmail.com>
- <CAOMZO5B7Yedk3G022s_Uoqu=8v9Ds5qD+pg+UNjnObcWNWUv7g@mail.gmail.com>
- <CAHCN7xJ1g3KxzbOYJTONZN1z97mSUtjkHkoxyUSAo-g8DWE1hQ@mail.gmail.com>
-In-Reply-To: <CAHCN7xJ1g3KxzbOYJTONZN1z97mSUtjkHkoxyUSAo-g8DWE1hQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 22 Nov 2024 10:17:35 -0300
-Message-ID: <CAOMZO5CcC4UksuwbR=eNb6cp=t5WLmO48q+yb22GiCfyCmo-yQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] clk: imx: clk-imx8mn Fix nand and spi clock parent
-To: Adam Ford <aford173@gmail.com>
-Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
- linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>
+References: <20241121-bootstd-test-fix-multiple-bind-v1-1-f6c06b9581b1@baylibre.com>
+In-Reply-To: <20241121-bootstd-test-fix-multiple-bind-v1-1-f6c06b9581b1@baylibre.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 22 Nov 2024 06:37:00 -0700
+Message-ID: <CAFLszTjvoOSD+yADG9Oin__tKLs_W-TEkpZ3DPhtRCB4YxmhzQ@mail.gmail.com>
+Subject: Re: [PATCH] test: boot: Bind bootmeth_{cros,
+ android} only once per run
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Guillaume La Roque <glaroque@baylibre.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,10 +87,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 22, 2024 at 10:11=E2=80=AFAM Adam Ford <aford173@gmail.com> wro=
-te:
+Hi Mattijs,
 
-> Sure.  Do you want me to test it against a specific branch or the
-> master mainline branch?
+On Thu, 21 Nov 2024 at 08:03, Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> We make fewer calls to dm_test_restore() since
+> commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
+>
+> Because of this some valid test combinations are now broken:
+>
+> $ ./test/py/test.py --bd sandbox --build -k test_ut
+> $ ./test/py/test.py --bd sandbox --build -k "bootflow_android or bootflow_cros"
+>
+> Shows:
+>
+>   Expected '  2  cros         ready   mmc          4 mmc5.bootdev.part_4       ',
+>   got '  2  cros         ready   mmc          2 mmc5.bootdev.part_2       '
+>
+> Here prep_mmc_bootdev() is called twice and it will bind bootmeth_cros twice.
+>
+> Since bootmeth_cros is bound twice, 'bootflow scan' will find 2x the
+> expected bootflows.
+>
+> Before
+> commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
+> this did not happen because a cleanup was called each time.
+>
+> Check if the bootstd already has a "cros" or "android" driver and only bind it
+> if it does not exist.
+>
+> Fixes: fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests()")
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+> Initially, this was found when merging some Android bootflow patches
+> from [1].
+>
+> However, this can be reproduced on 'next' as well.
+>
+> Here is the test output that's broken (we have 4 cros bootmethods instead of 2)
+>
+> => ut bootstd bootflow_cros
+> Test: bootflow_cros: bootflow.c
+> Showing all bootflows
+> Seq  Method       State   Uclass    Part  Name                      Filename
+> ---  -----------  ------  --------  ----  ------------------------ ----------------
+> 0  extlinux     ready   mmc          1  mmc1.bootdev.part_1 /extlinux/extlinux.conf
+> 1  cros         ready   mmc          2  mmc5.bootdev.part_2
+> 2  cros         ready   mmc          2  mmc5.bootdev.part_2
+> 3  cros         ready   mmc          4  mmc5.bootdev.part_4
+> 4  cros         ready   mmc          4  mmc5.bootdev.part_4
+> ---  -----------  ------  --------  ----  ------------------------ ----------------
+> (5 bootflows, 5 valid)
+> test/boot/bootflow.c:1192, bootflow_cros(): console:
+> Expected '  2  cros         ready   mmc          4 mmc5.bootdev.part_4       ',
+> got '  2  cros         ready   mmc          2 mmc5.bootdev.part_2       '
+> Test bootflow_cros failed 1 times
+>
+> [1] https://lore.kernel.org/r/all/87mshvxhq3.fsf@baylibre.com/
+> ---
+>  test/boot/bootflow.c | 14 ++++++++++----
+>  1 file changed, 10 insertions(+), 4 deletions(-)
+>
+> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> index 9397328609d0..835d2e6e35a6 100644
+> --- a/test/boot/bootflow.c
+> +++ b/test/boot/bootflow.c
+> @@ -552,15 +552,21 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+>         /* Enable the cros bootmeth if needed */
+>         if (IS_ENABLED(CONFIG_BOOTMETH_CROS) && bind_cros_android) {
+>                 ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
+> -               ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_cros),
+> -                                       "cros", 0, ofnode_null(), &dev));
+> +               /* Only bind the bootmeth once to avoid duplicate scan results */
+> +               if (device_find_child_by_name(bootstd, "cros", &dev) == -ENODEV) {
+> +                       ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_cros),
+> +                                               "cros", 0, ofnode_null(), &dev));
+> +               }
+>         }
+>
+>         /* Enable the android bootmeths if needed */
+>         if (IS_ENABLED(CONFIG_BOOTMETH_ANDROID) && bind_cros_android) {
+>                 ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
+> -               ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_android),
+> -                                       "android", 0, ofnode_null(), &dev));
+> +               /* Only bind the bootmeth once to avoid duplicate scan results */
+> +               if (device_find_child_by_name(bootstd, "android", &dev) == -ENODEV) {
+> +                       ut_assertok(device_bind(bootstd, DM_DRIVER_REF(bootmeth_android),
+> +                                               "android", 0, ofnode_null(), &dev));
+> +               }
+>         }
+>
+>         /* Change the order to include the device */
+>
+> ---
+> base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
+> change-id: 20241121-bootstd-test-fix-multiple-bind-159bd2523414
+>
+> Best regards,
+> --
+> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
 
-Master branch, please.
+Instead of this, could you add flags to the test to tell it to reset
+driver mode?
+
+UTF_DM | UTF_SCAN_FDT
+
+Regards,
+Simon
