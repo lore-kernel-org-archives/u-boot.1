@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D3C6D75E39
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 12:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE4E5D75E3B
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 13:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DBE688D4F;
-	Fri, 22 Nov 2024 13:43:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CE0D8897ED;
+	Fri, 22 Nov 2024 14:11:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C6H+dc8m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CMO9zlC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D803389825; Fri, 22 Nov 2024 13:43:44 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id B057189806; Fri, 22 Nov 2024 14:11:41 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB2A489830
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 13:43:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 30729897ED
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 14:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4316f3d3c21so17759115e9.3
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 04:43:41 -0800 (PST)
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2124a86f4cbso19478695ad.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 05:11:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732279421; x=1732884221; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=y6Ii8++RK160KoI1sYoluMcRuSyp/ubanCsHopNNAg8=;
- b=C6H+dc8m60HO7HlRPwfNdK85oi58kD2BjMn5RMryXQWbagB5lse3rOF0aecd0tgDjG
- RptfC4mudSJl+jUb7cyqcGELnSkF8mKsIbEXJYZHXOu4Es0PX99WWPyana83/uCuVMfp
- NNIQmTf7Ja9ZdJ0UgHJVrOfukEXMqFiAp8vdhHaMoHmltryRVQOnNBomIvCVA12bXyi/
- oluNuEjMxt4PxKiTv6QiOR2BoJTGL9zJWKszkwsoTOlekZIEplKutgBMG0g59L+k75j7
- YysMMrUbvXk5pe7uYsR5uruY03QB5fNoIDx57gYg3WM38hZYj7NMtrujizpf+cOTFbvB
- KK8A==
+ d=gmail.com; s=20230601; t=1732281098; x=1732885898; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yvDBKEqbbRT1x/zwgu9gD2I2U8ku7Beg3JArGpHB0m0=;
+ b=CMO9zlC/MyFWe3mnDRXlztKbAHkOIB6NGPCT5eXDW00I/UVMcwr+dE6Huzd4ZdKIR9
+ uPWlhz3GLuvVoqL+ZfHP/XALcwRULGz97eusNDmhP9NEximVm624i6b79uxrw4CYaSJL
+ ekoxea7gcr2BgVnQaVG/6LdY30oxCrTsEDAtdElwIuu3fVXH9ow2IU8L+yYc7Rt6NTo7
+ j9MI2gZ2S/4CAbfXIqdZK1leR3cVXDn7chiERXsakZMzq6FdtmRhiS0phZIbgNo2kVKQ
+ YKMujwTcAYrQy1hX7dvRG2X3bSTM2ICG6aiDDSY3sbn/h6U4OMm56iliSeiCDnBNjwUv
+ 1Ylg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732279421; x=1732884221;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y6Ii8++RK160KoI1sYoluMcRuSyp/ubanCsHopNNAg8=;
- b=uunhHbvldR1s+lsIAOBpMMrrl8vhjeqkd3l1zviNBB9sRm4wmgmJVgfF4pTJtXFci3
- gXtbsA1JZF9dqoLbv7ZK/D5CSTG+HZB9cHfLA8Z3l32m5EghXPz2s2ShioLy7Bghtpaz
- L4HpIZV2vohPZE9IlIwVxfHekxqjq6knL/gkOMWd+2eaEwaOrxbBt7wsM72Acu5ttyX1
- Y9xifUqu0ZXWlSCpCwvvTF3MG90JY9TXpMNPp2KEVFprisw2y+KWVUDNqFmRMxloNU4w
- Iek4fUxGrTCAzBqQ6wsqxtIPBb5bgoMqvvVQxp8GpWoSfhDPuAhJ2g/38eFPIe0mokk/
- 0A9A==
-X-Gm-Message-State: AOJu0Yw2Zy6IK2JKENvxmGwrJnO7YBGLPuzb3EKKoAE9O0N3CtNG57sP
- 39gbVUQg6QUTNdLy+Sbiz9vwOZhda4kzjZ+4FUVcSdKwnPmnQqhbw9zWWR4qdIs=
-X-Gm-Gg: ASbGncs/99viCH+8dCIGBRmxdvS9KiaeEB7VSTqlRD5pEULnLjxvX0oEyFzroLlw1uH
- dHfsQu+l2vq2Gbe63uRfLwUYR0DGkWpfo2PsE2U2H09q7J1Ds3G8yDoVK3z1O2R/fvww5znK2lG
- ymeoJqf9wG93e7V6w7xqbAMPKtPRqoYP8cFY4sM+G1pFRVof1qLcUoX1GLaFj0E/kygw23jKhtb
- mgimhert1E5VygUw6kt9JZJL4gqAmbNAWADosXiaw4BWFqyMP5yTID49nDNkE8cX1IZVhXOz/G9
- j9uDt+FGXPxMJCoS2hdq7AliaNft0A==
-X-Google-Smtp-Source: AGHT+IGmkW6qPS60ZsSTNPZDDA2GKO/o5rSmWfEIKpuT2t40q199mtHAiPmAfj0H5DHinGuI1veoLA==
-X-Received: by 2002:a05:600c:524c:b0:431:58cd:b260 with SMTP id
- 5b1f17b1804b1-433ce4ab2b0mr19447835e9.25.1732279421092; 
- Fri, 22 Nov 2024 04:43:41 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:dc89:a5fc:6ee6:7cb2?
- ([2a01:e0a:3cb:7bb0:dc89:a5fc:6ee6:7cb2])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fbc4173sm2382652f8f.72.2024.11.22.04.43.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Nov 2024 04:43:40 -0800 (PST)
-Message-ID: <d4546db0-7e09-418c-9887-27c0abf85893@linaro.org>
-Date: Fri, 22 Nov 2024 13:43:40 +0100
+ d=1e100.net; s=20230601; t=1732281098; x=1732885898;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yvDBKEqbbRT1x/zwgu9gD2I2U8ku7Beg3JArGpHB0m0=;
+ b=v/Gp0upniFJy49rwYat3Ex/jz94WtEjP4nazrZKr/n7NO/Ke2DpMKVwySZmhV9E+qr
+ rFai6JUcjuLFRc5dk+f1OMzZpzAMLDtNq6sXAB8iZ8MBTPSq3GNi/+8jredbMlmA+ATV
+ MUSIFlb9feSt/olpm2EAeTWjfOYohk554yq5Q4eo9uWzhsQh00i4yu/TR7vX+ZOaUiHT
+ 7w5nylw/JKHLu0uy2bfJH9HvHvuQwAq5AI15rXn1zY741XVMSaJYCpBUyqcqBD6h72eB
+ ZB6fQSBXOWoHPXgRsHjakPs9VkUMHt+yBN1JsChYAQp93vpoLREpZGzqYalG3aliLTMr
+ fYfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWaVOE/7YmrzNcjDE0f1LFbxOUcQ1tBUPBm60SQnnEo1l+Odw9hIQiip2mvdBsiDqzt6N5Opl0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyD+cZ/Lupzus7ndo5/GlEm9e4sxTQ/Y6+cl+AMYEOB6x6s0IiM
+ WUNhzEb34ZWxwZ9ubAQRCVjdR69Ml8G4RBbusu2tCPhmHd30mvM5WnSrwrQGSdVr99pQx4VdZd1
+ k5WZv+QwXT0o3LRZqmobL7XTiZak=
+X-Gm-Gg: ASbGncszadbc9u3i8J10GtTuYgKNbNUhhHALnnpoJZvUHsSxKHmKBU3sw5REjRZ0FV8
+ BbW4x7hbJV/5W1LBuOV2vSUgcxx1ZgEY=
+X-Google-Smtp-Source: AGHT+IHfy4NjvWtnnt/lFrgSKFyaGV2lTjbv/h6qULHIQGCm/NPa6epPlP1FXXugqlJfzuLjTg6fe9DnQBG04ZVO3Sw=
+X-Received: by 2002:a17:902:f705:b0:20b:fd73:32bb with SMTP id
+ d9443c01a7336-2129f730378mr36057605ad.2.1732281097462; Fri, 22 Nov 2024
+ 05:11:37 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: lwip: fix dhcp_loop()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20241122123558.74702-1-jerome.forissier@linaro.org>
- <CAC_iWjKvaai-kraH=NXrzDAtZYJSrr1GV3520KbKGy+3zxx7HA@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAC_iWjKvaai-kraH=NXrzDAtZYJSrr1GV3520KbKGy+3zxx7HA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240707082001.20746-1-michael@amarulasolutions.com>
+ <20240707082001.20746-2-michael@amarulasolutions.com>
+ <CAHCN7xK4YgEt7xaA6Ln3Q3GzvOP-iZM+YtZwP1Hg402VstBcOg@mail.gmail.com>
+ <CAOf5uwn4T573-BDegO8giorZXeePbYszuo3dk1TEmdPvY0+dQw@mail.gmail.com>
+ <CAHCN7xLgLwSv_EySui38ePeDqOfetWPi5R7dHJs+exVdZYnjHg@mail.gmail.com>
+ <CAOf5uw=r=FsRRmD3tgONbxzCnv-rd2DS3d1bvt4zBHgQn1zomg@mail.gmail.com>
+ <CAHCN7xLc0hzXmDaES9961jQ6fXtqof093Tga6d6748gxGYA+Jg@mail.gmail.com>
+ <CAOf5uwnZeWTM=doUQ1P+OAoq3pnMPt060LtwaXt_Rnj+GBwjhg@mail.gmail.com>
+ <CAHCN7xKg2jBJVfhvz2gCeTBgvMVR-mm0b-L_wEQsZBX4z0UHVw@mail.gmail.com>
+ <CAHCN7xKCEjwyhfnCi3un94ssONdJjApMVo3FCRAydGd8Co34Uw@mail.gmail.com>
+ <CAOMZO5B7Yedk3G022s_Uoqu=8v9Ds5qD+pg+UNjnObcWNWUv7g@mail.gmail.com>
+In-Reply-To: <CAOMZO5B7Yedk3G022s_Uoqu=8v9Ds5qD+pg+UNjnObcWNWUv7g@mail.gmail.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Fri, 22 Nov 2024 07:11:25 -0600
+Message-ID: <CAHCN7xJ1g3KxzbOYJTONZN1z97mSUtjkHkoxyUSAo-g8DWE1hQ@mail.gmail.com>
+Subject: Re: [PATCH 1/4] clk: imx: clk-imx8mn Fix nand and spi clock parent
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,52 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Nov 22, 2024 at 6:38=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> Hi Adam,
+>
+> On Sat, Nov 9, 2024 at 8:23=E2=80=AFPM Adam Ford <aford173@gmail.com> wro=
+te:
+>
+> > I did some more investigating, and  with the device tree debugging
+> > turned on, I get the following:
+> ...
+> > clk_set_defaults(clock-controller@30380000)
+> > clk_set_default_parents: could not read assigned-clock-parents for 970a=
+b8
+> > clk_get_by_name_nodev(node=3D92a30c, name=3Dosc_24m, clk=3D96fd38)
+> > clk_get_by_index_tail: Node 'clock-controller@30380000', property
+> > 'clocks', failed to request CLK index 1: -22
+> > Failed to find clock node. Check device tree
+> > Trying to boot from BOOTROM
+> > Boot Stage: Recovery boot
+>
+> Could you please test Marek's patch?
+>
+> https://patchwork.ozlabs.org/project/uboot/patch/20241122015858.557561-1-=
+marex@denx.de/
 
+Sure.  Do you want me to test it against a specific branch or the
+master mainline branch?
 
-On 11/22/24 13:37, Ilias Apalodimas wrote:
-> On Fri, 22 Nov 2024 at 14:36, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> The local variables ipstr, maskstr and gwstr in static function
->> dhcp_loop() cannot be pointers to read-only data, since they may be
->> written to in case the device index is > 0. Therefore make them char
->> arrays allocated on the stack.
->>
->> Reported-by: Ilias Apalodimas <ilias.apalodimas at linaro.org>
-> 
-> @
-> But I guess we can fix that up during merging
-
-Sorry about that. Bad copy/paste from the ML web page ;)
-
--- 
-Jerome
-
-> 
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> 
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  net/lwip/dhcp.c | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
->> index 23b56226921..bfc72ca6c57 100644
->> --- a/net/lwip/dhcp.c
->> +++ b/net/lwip/dhcp.c
->> @@ -27,9 +27,9 @@ static void call_lwip_dhcp_fine_tmr(void *ctx)
->>
->>  static int dhcp_loop(struct udevice *udev)
->>  {
->> -       char *ipstr = "ipaddr\0\0";
->> -       char *maskstr = "netmask\0\0";
->> -       char *gwstr = "gatewayip\0\0";
->> +       char ipstr[] = "ipaddr\0\0";
->> +       char maskstr[] = "netmask\0\0";
->> +       char gwstr[] = "gatewayip\0\0";
->>         unsigned long start;
->>         struct netif *netif;
->>         struct dhcp *dhcp;
->> --
->> 2.43.0
->>
+adam
+>
+> I plan to apply it for 2025.01 to fix this regression.
