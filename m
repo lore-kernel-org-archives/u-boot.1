@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E4F8E65D3A
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 09:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC06E65D3F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 09:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B643897D0;
-	Fri, 22 Nov 2024 10:26:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A307E897D6;
+	Fri, 22 Nov 2024 10:40:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TGsiPEIa";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zjx7zOUt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC57E897D6; Fri, 22 Nov 2024 10:26:38 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::613])
+ id BBE81897D0; Fri, 22 Nov 2024 10:40:43 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2062a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::62a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83E7589384
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 10:26:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 640E8897E0
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 10:40:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jSurRVUjhn10RVbdvqxPFxzWx2JloGrW4c6cK/e8lF0+ZeEFXCH7o8LINzZCRfq5QWfDap1PNbFCxGRXu1FXpeZnie/t/PGwP/YmhR2TKGvmQitFooipgdB0iWO6vpf74e3re7x0QkbroYdxI1y4Qys1dg01a4l3HkO+tfyX+fRPZGDuUCJDk4S1KNOHTiyMcDZfZac+q/1s6qTyJNJ7w17GPlazi6Kqpd96hfQec1zv+fneugEo6JYU4WQrng506xn3CXL93GbrJbsvbf4IPsgictk2Adctxj7KnfMkHkbKi7ssZDbJfTrjiL92fzTK3AkdqUix15Yn14KA5fOX6w==
+ b=JGCgU8t73RDm+aTpmX0G3Yalq9t5JPkzRBX1NZvA/rIWQ62OaeI5xC8woUHCNn0bjeIbrpZV+Adcf7W5Qf6V23Cz+eR/dPkZMt15kELDnNZJAVQzyMw1nonE7MCwqIEzoadTPXSB18g5OcrVg2rvhsVzhUIE7/+tr/SooOg2eEEV5Ie/n9jcCFKD/9YgwDubdSWxFF13pBdk3BhbUkhWmrjue4RzabLCmF0yjsKZvQ0s7nstQeVT8tY/wNb0SXXmmh3Du61Gquop1Wv6QKGDppaQ27pgh4p3l5px6InGN4nfnQSB+llFtlHZc+as5f8TtHpulQOPMcdHLBwmn8UDQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/cnMTM3/AZCNx8w3mD6oLLu1iOVoMDimG/J3PhtE8Fk=;
- b=Ih1yV2vgGqFtV4BDY0VNa5/fAbm6cNzV4Bm2po9kknVsGj39OKLqDKpW8dcHQ5g4Yor5WgnRYd7thhpDAj4AxDmLWKlzY5hHz2n3RxqnANjk2DCQrvMTFLX41Apo9zkCERSMbhlH8anKLZxoN7UW7PaUt+3yZjD186lX/5qQLxIxv11t2N6mdk8TVhPmyb+qGInyss8wAeXCDDoSZxMQ+vvaObyfeNjrsfhD0u7tHW/SOIuNI9CAFv4TEVrw1oGaMGHJADUCz3kgeSaSoRDJIzmwuxu8O9vTk9MfRksONUZDIsjllG2GkCwkQ9AszRGZTKEyNVCtPsgx/ELd315c4g==
+ bh=nz/E537nh/b7ojIPdmUZLYZuu0inYh/DsuY6OcFsbv0=;
+ b=myMvQ0k67EWtPI/ZcmdnjVSqsr1D7ydeN58bqEZVmgXZvyjzQLIWOJSt5M42SKHsBQXM36zbU/WfuRsYgHNYMTt/ahKvIg1skBvuxQeTtjF1BcslV3HMGyRVfY+vKOKe1UQnaxO33ecsnFbI1FqnIn3UQK9A5Yet/wPKGYeIFAsgQD5XDqsSUhB4oXW82aeSeL8iU6G3N6NcR5VEnDAXsDaUQ9QggJLJA64sC4Ark4BvS8l2mtq/mQz2/jCHEszz5QqqhnZ+HEOyAxljKYnbC/7G9X8uZgXETw0oSUR2y6uuh/dJ8WRYm8Or0ijcTcGYDEx6UiZp5jjrI38Oa+7SmA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.12) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/cnMTM3/AZCNx8w3mD6oLLu1iOVoMDimG/J3PhtE8Fk=;
- b=TGsiPEIaZ8CQuKY+13+iMRF5BSJ+2nchErULcSRazGlK4aitCo29TdQaZLwAQwYfDX7Mc+eowsN/YMt17Gw4u2vDs8Zb+ZlGMSfBbM8fjEyLaTg8a5xUmBw1rSqwk81AnTaPM7pnwloEA3eZjyeUMJJEG4OYos2LCM6RJspexQI=
-Received: from BN0PR10CA0022.namprd10.prod.outlook.com (2603:10b6:408:143::30)
- by SJ1PR12MB6217.namprd12.prod.outlook.com (2603:10b6:a03:458::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.26; Fri, 22 Nov
- 2024 09:26:32 +0000
-Received: from BN2PEPF000044A1.namprd02.prod.outlook.com
- (2603:10b6:408:143:cafe::ef) by BN0PR10CA0022.outlook.office365.com
- (2603:10b6:408:143::30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.24 via Frontend
- Transport; Fri, 22 Nov 2024 09:26:32 +0000
+ bh=nz/E537nh/b7ojIPdmUZLYZuu0inYh/DsuY6OcFsbv0=;
+ b=zjx7zOUthqwDCLtQiop47vfZo+naZJTJ+2x1wLYjJt8tKqHtZVM2wpcW6TPQk93CHSyjEdNaNp/4/2a9aXSwucoetz3w4zBhwNuKv57saJvQsZfxhOSm+rzcxsKHuhHg5WFEz0SQpYz4MzrRWABcBKuSCme14UwwWBdCwmUXwac=
+Received: from BN9PR03CA0413.namprd03.prod.outlook.com (2603:10b6:408:111::28)
+ by DM4PR12MB6157.namprd12.prod.outlook.com (2603:10b6:8:ac::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.14; Fri, 22 Nov
+ 2024 09:40:37 +0000
+Received: from BN3PEPF0000B36F.namprd21.prod.outlook.com
+ (2603:10b6:408:111:cafe::cc) by BN9PR03CA0413.outlook.office365.com
+ (2603:10b6:408:111::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8182.16 via Frontend Transport; Fri,
+ 22 Nov 2024 09:40:37 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.12)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.12 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.12; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.12) by
- BN2PEPF000044A1.mail.protection.outlook.com (10.167.243.152) with Microsoft
+ client-ip=165.204.84.12; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.12) by
+ BN3PEPF0000B36F.mail.protection.outlook.com (10.167.243.166) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8182.16 via Frontend Transport; Fri, 22 Nov 2024 09:26:31 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Nov
- 2024 03:26:31 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Nov
- 2024 03:26:29 -0600
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ 15.20.8207.0 via Frontend Transport; Fri, 22 Nov 2024 09:40:37 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 22 Nov
+ 2024 03:40:35 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 22 Nov 2024 03:26:25 -0600
+ Transport; Fri, 22 Nov 2024 03:40:31 -0600
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>, <j-humphreys@ti.com>
 CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
@@ -81,62 +77,64 @@ CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
  <caleb.connolly@linaro.org>, <sjg@chromium.org>,
  <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
  <quentin.schulz@cherry.de>, <tudor.ambarus@linaro.org>,
- <Takahiro.Kuwano@infineon.com>, <git@amd.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>
-Subject: [PATCH] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
- flashes
-Date: Fri, 22 Nov 2024 14:56:19 +0530
-Message-ID: <20241122092619.1376234-1-venkatesh.abbarapu@amd.com>
+ <Takahiro.Kuwano@infineon.com>, <git@amd.com>, Algapally Santosh Sagar
+ <santoshsagar.algapally@amd.com>
+Subject: [PATCH] mtd: spi-nor-ids: Add support for W25Q02NW
+Date: Fri, 22 Nov 2024 15:10:24 +0530
+Message-ID: <20241122094024.1392195-1-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A1:EE_|SJ1PR12MB6217:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9779e17-fb27-486e-ec58-08dd0ad7c068
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B36F:EE_|DM4PR12MB6157:EE_
+X-MS-Office365-Filtering-Correlation-Id: d2ad3fc5-b7af-47bb-df17-08dd0ad9b880
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RCM7XzMVX2ZochEfknLxgWrU7q7mPijQvnnYmFZyUroVYlFhAkGxX8QIqPoH?=
- =?us-ascii?Q?JL0GH88f0FbYb3bfbMvSkVYEmvPzh7ZEjxIuV4FUOc3gb87nYAbFM21pF7Ny?=
- =?us-ascii?Q?2/5MqqVPIRbsYNzhQPp9YErYcFqSo+Y9ObUh2SE7CMnMQrhW735Xml4nRf5j?=
- =?us-ascii?Q?NWtdLl0ueEXPN5Td9OJcILwp2LxvBkUf8NJHXBY40c4uXN9yXzi9dVZ7AFFI?=
- =?us-ascii?Q?ZeplnOST7s8N1OPNwlrl2km4EepL3AGWCaPkRF7x3tqzAJJJ1tC5kGhONXG4?=
- =?us-ascii?Q?mg/qAThYf0ZOY+U9OhqorndI1oItZAS9ItDv8YwQUpV/S1xlkGdHFPKwoc6q?=
- =?us-ascii?Q?KpMt1V9CsrxaES12np47SoGTqhO2e2Gcr3o2f5wt5mCHu171teI4ZvPeX8BY?=
- =?us-ascii?Q?qvmbDNIn5juEJxfP6eu7Rsa5Nlf2f97ihChNNiJmAHDpGaX6AElVrgeGUJjN?=
- =?us-ascii?Q?4YuK8e060XxYcWi3QalG4PmKEpBgKlDiucAnPWQ9ZLzLHVIxHd2t96XdhO1S?=
- =?us-ascii?Q?1i3p1EKBGFoIbIdLteZy9VXeD0YQV/2BbnsbNjEuOsIdK297FkDdgro7TijU?=
- =?us-ascii?Q?l158yGJqgdBBvAufmP3NuOl7Gp5pIvK5qinjdkjH41X3j2TvcfXdrhcg4rLD?=
- =?us-ascii?Q?L+h7ZoSYX0DFgIl1Qo91b3pvHYDz+szsp7k90jeMylAcZ2Yt3X8EJxRJwti5?=
- =?us-ascii?Q?keax62L6NBek/TtwwRbOHo43ulraDRLTOQBaDb1ZpZqxZV6xQjw/7oUYtLIS?=
- =?us-ascii?Q?YMCKaOhjaPeUmPbv0RSox+caDPVle3S4Vqp/4bDCb/HH2lzeXs3jRWNKOqtR?=
- =?us-ascii?Q?J7lsIu3Pg2sMgDCi6PccjO8TgP0LmMlEji+K6+Mz2pI6Jp+LBalallYyF+AJ?=
- =?us-ascii?Q?ZfMoXL/u1iQHcQ7xCCwMlSI/GUBUvbrVZEHZfuKFI/0KtkFaKRFL8ZUEzg3d?=
- =?us-ascii?Q?UsonTCAIzJVwcON2tNTehIuYL8li3FOUQuqGHeO+JBuqJ97eXSleDhBZmXet?=
- =?us-ascii?Q?mELUWzJlGorbJXawdT4+g4G2T5pM6zBRBlyvd2aqRxLx5S5VPOauQ3cWLPQb?=
- =?us-ascii?Q?3Y3zapfkHe4FdkgZ4SEZzLkxNsKhwczFOPrHzIG1Zgg4HdUEeaNMDl9UuOjv?=
- =?us-ascii?Q?B5llMQj5+zEuk5Wt2Pp0gxhD4ZbHlRBg1ZVxPD2Fe0/XJlsZFCjmE7dYrDGi?=
- =?us-ascii?Q?KDy181bfFHlQuxzuDXyRy8Zs0zA82XaF/WdJqwa/ZX+RwXpEJ4PaofoNMCB8?=
- =?us-ascii?Q?oCRjI58ABxlkaaauRVr1b1t73y8RVfAVWIsQZETiXnzkCccfw/Iq1U7XP0sn?=
- =?us-ascii?Q?XqwgL9nAVSiZ80JOlKpAKaWck1AQzMTL6h8Pl3sbCfu2r7Vj7OLF0kZRAl0U?=
- =?us-ascii?Q?xuIcaoDPMKDcJ0R17CWFmyvR1AYAGAWHdUYvaoQraPwtPAnVqg=3D=3D?=
+ ARA:13230040|376014|7416014|1800799024|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?HSBEtQhjNumZzkEuKLQX/fS7AYXBBx+S51G9GNEEdWrNlqHmuYqm7XVl+qxm?=
+ =?us-ascii?Q?VUBSNbam42m8oQe5qwcjIL9RooOmX+dkJv5cGcn6q1fjHjg3PSYY+Vv6WmMZ?=
+ =?us-ascii?Q?2JgOU497307B973WoAvuifF3YwA/GYLXdo8kKCkNoWhl/nXW9drT698pDXO6?=
+ =?us-ascii?Q?C5ruAulJvTUtseolTs7HBvi5At7wa4pfBMrLi5pxcsQ6n0U8ahCfQ32PvUeC?=
+ =?us-ascii?Q?j36gaRM7ANkDgEvxEgj2csIwLPTogULBADAyh8yduplndFH6FrblH/eVi9Io?=
+ =?us-ascii?Q?P7NfJHTAq0YcKjUCNDjJD6nipiQdoGiENCgTrnmu4TwEMN0mhzr0SPR4+O+1?=
+ =?us-ascii?Q?N82F5/3uKbzBG24AihgX6ZCd+RvAhnWP8jhTPXlDv74kpxBwB6h/hwrLZyKv?=
+ =?us-ascii?Q?f4mL+pzD7uFgS8eJtidZIU5Zk9AjcVdFm16BAD7yTiR6P/caVkz1BoBri5jL?=
+ =?us-ascii?Q?UbMaCOuNf+sXKu3+w0f57nS19MaZeFWh8WU7849Q1HPUTE3UpF6Gy+mlZ5O9?=
+ =?us-ascii?Q?i9+2gegaLg17oEwMelnJ7zTaOyayEkWIsVM3mY0Ou9SLD3Dd8A3FCW/igrjq?=
+ =?us-ascii?Q?JVsR6Gduo/1p+1rbMJdTyrlJakHP3n8qS6/xo+XYH2f4KHB+ogLjxgzDPLlu?=
+ =?us-ascii?Q?oWaBaQHlQsz07WdQZMvsn2Qs6awCOEvfcXqJliHTDFIMGHc7wQ/RuQ1bEk4s?=
+ =?us-ascii?Q?gN7BSRQFq3PHf3Qx7LmURLdCQ72YO6V4YV+K0TkONtFplN9YbO71Rit8Z9Ar?=
+ =?us-ascii?Q?6iQBw+u18RY/bDDKld5yTAsNbRaLdcHRgSewEUjY1Kj7ItvhMyW34SF//pU2?=
+ =?us-ascii?Q?wHcmig65xL4bMkftemB5tgOe7i7kIOzE3dKMo4KRHSQTVqzU7NzeVJ6b8jyS?=
+ =?us-ascii?Q?DFbRPQqp3VzgbHM8PnjshdlJH6cKY2GQqAs9u9iqle5P4/UdwuIoPoFPfHMw?=
+ =?us-ascii?Q?6eRQyUbFTAc/u3BgBSkQjrLm8aHmAqVCZ4yO4EuULj94D2byU7HKBZ/QJ/XV?=
+ =?us-ascii?Q?gBzL1kIDC3jhYczjrTsIm7/aDSenss6JL2G2lsYLjlB4NcF2RBegpc+A0VDQ?=
+ =?us-ascii?Q?l0wDmopC20Sw6M76vJqu7NFfii/13vxl1EbSl5CkIz59XyfwGvjKOjZZC0mk?=
+ =?us-ascii?Q?s+fgKsuIyEr4WEbJWpcQHscJOTehARJswkUqeJkSUsV1COKttPXKSTtiHrun?=
+ =?us-ascii?Q?9YdfUJ6JURXo2h6426ZX/KmovXvdEG8mj4nosEcjJnzQqfRYgwoBU5nW9yoS?=
+ =?us-ascii?Q?7BLhyFuv0HWqM+Nv81KT31RC98WivKEsaig2AVCXBCWraR6SShInO3VRJa+1?=
+ =?us-ascii?Q?5+LhC92/iW8m4mY4XVMxmKRVeijaJ7ZOiliUab090B8YTlKOe8jgpNinDmNC?=
+ =?us-ascii?Q?Bj7NErZPjnl0rvyVdiAcPkUZWG3ja9wU5B05GkzVkRBQRy0MR6wq9gwvhYoe?=
+ =?us-ascii?Q?NVXxkXpXHm9ZYzkKVGYamVAUqVYJGKrw?=
 X-Forefront-Antispam-Report: CIP:165.204.84.12; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:atlvpn-bp.amd.com; CAT:NONE;
- SFS:(13230040)(7416014)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:atlvpn-bp.amd.com; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(36860700013)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2024 09:26:31.7889 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9779e17-fb27-486e-ec58-08dd0ad7c068
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2024 09:40:37.5175 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d2ad3fc5-b7af-47bb-df17-08dd0ad9b880
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.12];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A1.namprd02.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B36F.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6217
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6157
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,61 +151,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable mt35xu512aba_fixups for all mt35 series flashes to work
-in DTR mode, and return after nor->fixups is updated, otherwise
-it will get overwritten with macronix_octal_fixups.
-This flash works in DTR mode only if CONFIG_SPI_FLASH_MT35XU
-is enabled and SPI_NOR_OCTAL_DTR_READ flag is set in id table.
+Add support for Winbond 256MB flash W25Q02NW which supports 4byte
+opcodes and also dual and quad read.
 
-Additionally, a new flag, "SPI_XFER_SET_DDR", has been introduced
-to instruct the OSPI controller driver to switch to DDR mode.
-
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Signed-off-by: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 8 +++++++-
- include/spi.h                  | 1 +
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/mtd/spi/spi-nor-ids.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index ec841fb13b..8d201433d5 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -4073,6 +4073,7 @@ static int spi_nor_micron_octal_dtr_enable(struct spi_nor *nor)
- 	if (ret)
- 		return ret;
- 
-+	nor->spi->flags |= SPI_XFER_SET_DDR;
- 	buf = SPINOR_MT_OCT_DTR;
- 	op = (struct spi_mem_op)
- 		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
-@@ -4404,8 +4405,13 @@ void spi_nor_set_fixups(struct spi_nor *nor)
- #endif
- 
- #ifdef CONFIG_SPI_FLASH_MT35XU
--	if (!strcmp(nor->info->name, "mt35xu512aba"))
-+	if (!strcmp(nor->info->name, "mt35xu512aba") ||
-+	    !strcmp(nor->info->name, "mt35xl512aba") ||
-+	    !strcmp(nor->info->name, "mt35xu01g") ||
-+	    !strcmp(nor->info->name, "mt35xu02g")) {
- 		nor->fixups = &mt35xu512aba_fixups;
-+		return;
-+	}
- #endif
- 
- #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
-diff --git a/include/spi.h b/include/spi.h
-index 6944773b59..d7fef36662 100644
---- a/include/spi.h
-+++ b/include/spi.h
-@@ -164,6 +164,7 @@ struct spi_slave {
- #define SPI_XFER_U_PAGE		BIT(4)
- #define SPI_XFER_STACKED	BIT(5)
- #define SPI_XFER_LOWER		BIT(6)
-+#define SPI_XFER_SET_DDR	BIT(7)
- 
- 	/*
- 	 * Flag indicating that the spi-controller has multi chip select
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 91ae49c948..d5258a1fc3 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -569,6 +569,11 @@ const struct flash_info spi_nor_ids[] = {
+ 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ |
+ 			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+ 	},
++	{
++		INFO("w25q02nw", 0xef8022, 0, 64 * 1024, 4096,
++			SECT_4K | SPI_NOR_QUAD_READ | SPI_NOR_DUAL_READ |
++			SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB | SPI_NOR_4B_OPCODES)
++	},
+ 	{ INFO("w25q80", 0xef5014, 0, 64 * 1024,  16, SECT_4K) },
+ 	{ INFO("w25q80bl", 0xef4014, 0, 64 * 1024,  16, SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{
 -- 
 2.25.1
 
