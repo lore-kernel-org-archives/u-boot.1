@@ -4,74 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F7CE65D25
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 04:32:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC0AE65D0C
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 06:32:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C29448878A;
-	Fri, 22 Nov 2024 05:32:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 9059089797;
+	Fri, 22 Nov 2024 07:32:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 31BBD8921A; Fri, 22 Nov 2024 02:56:34 +0100 (CET)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34F6888DD9
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 02:56:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux.starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=hal.feng@linux.starfivetech.com
-X-QQ-mid: bizesmtpsz8t1732240542tzn0kvp
-X-QQ-Originating-IP: PXExxzDfnaGZsXBR6f3Yh7qTNgA+dpkJBjexc58HEyk=
-Received: from [192.168.125.68] ( [183.27.98.255])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 22 Nov 2024 09:55:39 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 5430661908228356672
-Message-ID: <CA5A95C66FB76A59+44cb6507-e25e-4354-8f45-3c1e03460552@linux.starfivetech.com>
-Date: Fri, 22 Nov 2024 09:55:39 +0800
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oOHCQbXk";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3715B89775; Fri, 22 Nov 2024 07:32:15 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BC09F8970A
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 07:32:12 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5cece886771so1968219a12.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 22:32:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732257132; x=1732861932; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TSbLOmeWjiqdYV8umYH56mCp+miRN0UYjA+RSwczXV0=;
+ b=oOHCQbXkR+OA+vyjdxgVTGTz8zkvo7niFeJd9e0iknQwz0J1p96Nb1F5xWfrz4bu/w
+ h12ukBtVdkHaSu/sWtIjOcv/x/LgLytz/cygqIwl5CYRS+9Ng/cNkRZePbuyMZxCWG3R
+ /sJEVI1pwzBf9mhuy8/ELgrJvNlhtnmCa9wdGS6Sk1AWo4ydvyVi/fXc7S/nvSen14Gb
+ MTtHHtVWWoRm5RW6OCBkf6LQ5Zyrevb1Kpd3GixWdV7gT9PlyDEAqUIT2fRt59HX3Cfd
+ hjvUJf05J/P2Qqcs/Vbye6QYSRk80aP4UsoavXgKUtoAnQoILv+aMtpFEnhIsL6eKCk1
+ xxeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732257132; x=1732861932;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TSbLOmeWjiqdYV8umYH56mCp+miRN0UYjA+RSwczXV0=;
+ b=aANYbM/nhb+E2WwTdQd+mWZBswuRZJ2xz4YE5ShTHlNHl7XZ9Kx402aFPYIMl7DuF6
+ i0BWevhp2QyFVt0nNNRX4cLPlRq+RPcrxrg3Rg54p/wuAtkoBYWYd1Z56LG4fnHbjRjq
+ gUBhsUZGxdnvNNNHhMxMrq5lPsfEBl6gFdgtbqLBi3uH+pq3oXB+NQ0r6pwiplZsRtNi
+ 35zvL1hIrAgEpRS3RwIaPS204uXbzkEuuMno/Cmx/ciMDRg+n5b+wzJYOhoSim3yWajo
+ qYkQ8Xz4/GI/f7WiJawSTsCsGHUvs5YMkfryVcdCs3KzQ/yHvsS4dB140SNP5u1zWvm6
+ i4jw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7lTHEf5WMUw2r6/nEyMYkJh6+bnxXOMk/g9+oVPnAnwGIjrQEiGi99ydciZ5ez+1D57QGtkE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQ65gJTKCchGHL7z9KRUpXALcxTsMRXah+hfYH1qOVuRRFmWym
+ Kwb9Fie0SxSH51NoEjQNt/PDCRUNYR0nOM4FLjAktsm5/k+bF3Gp+V4+wmAGFeEJV3xprbE9ghA
+ Yj61o6f8o3dsACSggIhFrvER93rcZUVZY8txs9A==
+X-Gm-Gg: ASbGncsYseATdLuaK2VgyoG9fAq6YMMAbYVv44AfN7D/V2J7d8QPFnZKBBM75ncSbna
+ 5IcF1FA14X5ujhFK8h4yioq9cb9Q1CkDT
+X-Google-Smtp-Source: AGHT+IEa2qLHCV/x2hlhC0zSoaMAP8yQwhSn+yp6zK+MzkfKtQ/X3YNEcjQKohd7Y8uNWsD8eIttfgtep7OjptgzmvQ=
+X-Received: by 2002:a05:6402:2686:b0:5cf:d341:dfec with SMTP id
+ 4fb4d7f45d1cf-5d0073daa0cmr6162198a12.0.1732257132073; Thu, 21 Nov 2024
+ 22:32:12 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 05/11] riscv: dts: jh7110: Add u-boot device tree for
- JH7110 based boards
-To: E Shattow <lucent@gmail.com>, Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>,
- Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>,
- Bo Gan <ganboing@gmail.com>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-References: <20241119020425.51989-1-hal.feng@starfivetech.com>
- <20241119020425.51989-6-hal.feng@starfivetech.com>
- <CANV2PTOK2QSWtCFzPX7tSLj+xcs6zc0mn4UafBYcZCjyN6BsTg@mail.gmail.com>
-Content-Language: en-US
-From: Hal Feng <hal.feng@linux.starfivetech.com>
-In-Reply-To: <CANV2PTOK2QSWtCFzPX7tSLj+xcs6zc0mn4UafBYcZCjyN6BsTg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpsz:linux.starfivetech.com:qybglogicsvrgz:qybglogicsvrgz5a-1
-X-QQ-XMAILINFO: M86u6xf659ZEvvNo5VJ6VLQ7MVAntPSTQjzjra1o0fTIcs8IDaGuY2IS
- AXANBYm2ffriCNYMOsw4MmpISS4TAaoIAKWDsoDHtmKzC/uirdFtEKW/E6h8GXfXoWdwglz
- KndSfp+s4KdSc9FT/a1+Hx7LjhmvhLWnYhtYe3UoodcgTr3W6PZ6Dy87J2zRRS6N0kJ+FQ5
- 7L9yUZDVzKwPtc3RDm3vYJhvDVxzek9EkBvuAeSPGShIfdq7Cj5XlN0KwBy7kFzg2hAzGZT
- M4qq1MmrDRVG3DKLxP/VaIqm//iKUqpSlttwiovZL/xYBM3XxxNSvyhOZASUTn8+dHcuHwA
- kwBnejchu/xwVb41sAlVTv5bJ8PIGXeXjna2oi6bPSjegiXxL68HCjKU3/RAHx0wYONdkOv
- 3czq2/UAo4RFzxdN1sArtx+4CkOa6gOhwF/1TZPHFYUEUoFyudKSlNJp2DgHqOzZ70pWyhc
- X7Js2itMC9nqBip47GJidz9KVsSqa8PCXIVfEOsaxpRM0GS2IoZEnJp3kxo99RG5QvFgQKx
- iMLygiDxW9ILb+vWo5G8iGNJt2qMaPi7eztFRil4iVPyuj+xwGnRhcp2wmLmkizYrfQrKqU
- kZPRvnZ+7uGi4ldiRBrDtrsd/8H3eOO+CXYKqEEp4HsJFPmrEEh46uRBc8e4SLx3bbqZApd
- CDerrT95mJkgGX48gHvphBl+cmBC9JXsYdRgymR3KBSX+UQfJXxhnKtV+Zn/+J+g/7vcnoU
- Nu3Ivkhi42h+pAg6fUZMjxyWXUWl5L/7/kHJUHO92gS3o5Jy8jRyLbcvZ5HReBcAoMt5Tz4
- lmGVFhvhujOPQm+QVV3CiOWjySChRa9PssSxiE/rZL501pEJnkZrEaOi93AOAub2JRr/+7v
- Jcp3PSDJtCtH+4IHf5VKxlETxp63gsqQvdUOjPN6GoO7gZSqr9OHGYcpnmrAvoQHxupG9uU
- qyFaHd8funm35KQIgGjKbqtTmHnIkaJUUNGmTe+cnpGrNmPshYBfjSm1ARXbK9C/3Xf8=
-X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
-X-QQ-RECHKSPAM: 0
-X-Mailman-Approved-At: Fri, 22 Nov 2024 05:32:22 +0100
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+ <mvmjzcwobi0.fsf@suse.de> <a6a1d0cb-c363-47bf-aa91-b3c2ad2fd5b9@canonical.com>
+ <CANV2PTNnOC43iYnyoczWev+2vAjKR+BEU5o1rEyZqr4uPVaJ8Q@mail.gmail.com>
+In-Reply-To: <CANV2PTNnOC43iYnyoczWev+2vAjKR+BEU5o1rEyZqr4uPVaJ8Q@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 22 Nov 2024 12:02:01 +0530
+Message-ID: <CADg8p97T1L-JwPRAu7Wq4Uz-yEBuvNucJcNULcCTi2o+zFTRiQ@mail.gmail.com>
+Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
+To: E Shattow <lucent@gmail.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Andreas Schwab <schwab@suse.de>, 
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>, Chanho Park <chanho61.park@samsung.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,79 +100,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/22/2024 8:28 AM, E Shattow wrote:
-> On Mon, Nov 18, 2024 at 6:06 PM Hal Feng <hal.feng@starfivetech.com> wrote:
->>
->> To support the other JH7110 based boards, add u-boot
->> device tree for them.
->>
->> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> Cc: H Bell <dmoo_dv@protonmail.com>
->> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
->> ---
->>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi           | 10 ++++++++++
->>  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi        |  6 ++++++
->>  .../dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi |  6 ++++++
->>  3 files changed, 22 insertions(+)
->>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->>
->> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> new file mode 100644
->> index 0000000000..cf4f0d4c06
->> --- /dev/null
->> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->> @@ -0,0 +1,10 @@
->> +// SPDX-License-Identifier: GPL-2.0 OR MIT
->> +/*
->> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
->> + */
->> +
->> +#include "jh7110-common-u-boot.dtsi"
->> +
->> +&phy0 {
->> +       /delete-property/ motorcomm,tx-clk-10-inverted;
->> +};
-> 
-> Why delete this property?
+On Fri, 22 Nov 2024 at 04:12, E Shattow <lucent@gmail.com> wrote:
+>
+> On Thu, Nov 21, 2024 at 8:05=E2=80=AFAM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 21.11.24 16:24, Andreas Schwab wrote:
+> > > On Nov 21 2024, Heinrich Schuchardt wrote:
+> > >
+> > >> Our MMC driver for JH7110 boards only supports reading to the low 4 =
+GiB of
+> > >> memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_B=
+UFFER.
+> > >
+> > > That doesn't change the situation with the booting problem I have.
+> > >
+> >
+> > Do you relate to
+> > https://lore.kernel.org/u-boot/mvm8qtnv310.fsf@suse.de/
+> > where you had some problem reading the FAT file system and which was fo=
+r
+> > as system with only 4 GiB of memory?
+> >
+> > In E Shattow's case on a board with 8 GiB the file was read without
+> > error but then reported as not being an EFI binary.
+> >
+> > Best regards
+> >
+> > Heinrich
+> >
+> >
+>
+> Hi,
+>
+> Test failed for both boards here with origin/master then applying this
+> series, then starfive_visionfive2_defconfig target and set
+> CONFIG_BOOTSTD=3Dn following with oldconfig target.
 
-Here I kept the same with the configuration before OF_UPSTREAM applied.
-Is this property required in U-Boot?
+I think you need to apply another patch [1].
 
-> 
->> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> new file mode 100644
->> index 0000000000..9df1e5db55
->> --- /dev/null
->> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->> @@ -0,0 +1,6 @@
->> +// SPDX-License-Identifier: GPL-2.0 OR MIT
->> +/*
->> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
->> + */
->> +
->> +#include "jh7110-common-u-boot.dtsi"
->> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> new file mode 100644
->> index 0000000000..9df1e5db55
->> --- /dev/null
->> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->> @@ -0,0 +1,6 @@
->> +// SPDX-License-Identifier: GPL-2.0 OR MIT
->> +/*
->> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
->> + */
->> +
->> +#include "jh7110-common-u-boot.dtsi"
->> --
->> 2.43.2
->>
-> 
-> Reviewed-by: E Shattow <lucent@gmail.com>
+-sughosh
 
-Thanks for your review.
+[1] - https://patchwork.ozlabs.org/project/uboot/patch/20241121142522.59059=
+-2-heinrich.schuchardt@canonical.com/
 
-Best regards,
-Hal
-
+>
+> Testing failed on 4GB Star64:
+>
+> Hit any key to stop autoboot:  0
+> Unknown command 'bootflow' - try 'help'
+> StarFive # bootefi bootmgr
+> Card did not respond to voltage select! : -110
+> Not a PE-COFF file
+> Loading Boot0000 'mmc 0' failed
+> Booting: nvme 0
+> error: no such partition.
+> grub rescue>
+>
+> The grub EFI loader from EFI System Partition on eMMC fails to load.
+> The same EFI System Partition data on NVMe is successful.
+>
+> Testing failed on 8GB Mars CM Lite:
+>
+> Hit any key to stop autoboot:  0
+> Unknown command 'bootflow' - try 'help'
+> StarFive # bootefi bootmgr
+> Card did not respond to voltage select! : -110
+> Failed to load EFI variables
+> Error reading cluster
+> Loading Boot0000 'mmc 0' failed
+> EFI boot manager: Cannot load any image
+>
+> We see that the grub EFI loader from this EFI System Partition fails
+> to load from MMC (SD Card).
+>
+> Procedure that was used to update SPI NOR flash on either board
+> includes sanitizing the environment variable storages:
+> env erase; env default -a -f; sf probe; dhcp; env set serverip <ip
+> address of tftp server>
+> tftpboot $loadaddr u-boot-spl.bin.normal.out; sf update $loadaddr 0 $file=
+size
+> tftpboot $loadaddr u-boot.itb; sf update $loadaddr 100000 $filesize
+> fatrm mmc 0:1 ubootefi.var
+>
+> This does not say anything for or against the validity of the patch
+> series as the root cause is a limitation of the dw mmc driver on
+> JH7110 not resolved here.
+>
+> -E
