@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8EBE65D0A
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A71AE65D0B
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33C40896EC;
-	Fri, 22 Nov 2024 01:31:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C0F8189774;
+	Fri, 22 Nov 2024 01:31:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CVKNsPcQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="atZeHtCz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0A7689777; Fri, 22 Nov 2024 01:31:28 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id A126D8970A; Fri, 22 Nov 2024 01:31:30 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2993896FD
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFAA189768
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-21260209c68so20100525ad.0
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:24 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-211fb27cc6bso16645565ad.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732235483; x=1732840283; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732235486; x=1732840286; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LAUicIGf2emBdFSfWcPhJBlhFRNPWJ9C4Sw5DzDtFhE=;
- b=CVKNsPcQbQffqUNd9liNStXMoP4Uv+7vnh23ZcsU2plmUtYG1U4b2I3ltRZxlXHRyM
- QLPWn2uwCmztb5YFm2qz6XicFVXA4Y/1YeQO4fLk65BSW5rBtpU5Yzwy4N/TAgPpv6PP
- uxCTrri55tJ1kjmAwNEKDe7MTl55fKAn1GQoozrBPMeHGb8h8xGxJmgpd2R0aeTugHDK
- 7t0j0zV4m/wZx1tKudlbSrlc5RoGkpc2TO3hHC1CPKwgVWvTCqlOnuLMqMyyyH5DzG/k
- isJMFP2zZVbOJxOUmqhfb+N4EsVOh1pS/KVUTNTyDMFbzeUVmiOXw7ZGOojqyLi9ZZMX
- J2eQ==
+ bh=1zc/VMMwNHVlX47T7NlPeQ6C05BzIlKwkDUvZQBGJ2I=;
+ b=atZeHtCzKRFZw0671c/ynbNMRZ6cwRXLHuBTLXNn9v2g0GSvNd+bDKscLga+yjmgFL
+ JGZTboL7yPyna1empEZfUBkXw76nz15lb5Jfr/K/DqXx5j90Gmq7/P1b32x8veQ39BBT
+ Tb4CWzhczmoIK24e7RycpbUa7dAWcbN0mAXgWCSJaeW4Q2CKez09767uOPaB76ImDNA9
+ ficXqA9M2jMVtAFwhvy/20dfG3KUSJz2iZi0AG7VhX/12RJVOuOzDU4T3CAQSDE+9wsp
+ Sh1p1eJoH509IUWopsiR+oVFoxIOLAX8fW3TTiDTtcfewEWWn33Eee5OjK2zEpFiOZxl
+ ncDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732235483; x=1732840283;
+ d=1e100.net; s=20230601; t=1732235486; x=1732840286;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LAUicIGf2emBdFSfWcPhJBlhFRNPWJ9C4Sw5DzDtFhE=;
- b=a1xvPsJdbTIgBpELvTn6YyQ81XPGagS2NOovn+yxCj3T/WWmqnoRD1dRYiJktm+S44
- FHGND8ytKxSjuFbRfvA1BIefIjo3U3NwWaj6lks7eRk8p01Dj+VcJrnZMpSPwifDZsqL
- tYlbw1jW1sWz9coHRS3GGR+/BFampHW5qb98Z5t1n0wv+h+K0lbG2cpSo8FhupRWV/K1
- u0V1byKJTajmUsEWc+2BIAGvUuHTDQmIgo4nPpHi+VOHTuZ4UZbnNkHRaxsFZscZHFuh
- p+fZmFswuoLhyK7eQYaYRUd7q2C5QriBrPYXzuwaPRy9Y9I7BQHoIPvGEyMlnJL1W64+
- q/yA==
-X-Gm-Message-State: AOJu0Yz30abDXucQUEMh1NK3ISyd6jGYG9UbrFO6vQiMYGgfAwmVKVSJ
- 41y6MBjWly7+wEPc3F3GUf7MqACPcHv0M/j0v9MOl9aKkY6QTTMYri38Evyc
-X-Gm-Gg: ASbGncuQm5u0//9Qmk/kGRNFGzJaJGhnw7YHaZDVyHlLA9YuhSbuskiMplgXq6PmNSV
- Q9iU7HeQZfD65ERbkOWxaSeLpfFIGyNxIGtYejQaj3BxNp7jpMkFVSifLJoOSzCLAb6yssPbdpj
- Xd4WX8XS+/VFovKgyP5Dcw9Vs+z5KL1jdXZb442x+xVzLHWAsX0ZlT+20RGEA5G7PqhXAv7f8Rc
- 5E3Azj+glKmuzKJa0voZnbf1tu+ZFZ3BX5ipBjnCTGokJoCP1LsmPchl1L6GOrz
-X-Google-Smtp-Source: AGHT+IH4gzVFAc3imSvSSEtt32ETB2lVqaiwzRYZnMDz4oYM8J5h3ydBOlVKtNuLPHoewuEre+ac2w==
-X-Received: by 2002:a17:903:2288:b0:20c:b6cf:f465 with SMTP id
- d9443c01a7336-2129fe09431mr10617525ad.6.1732235482786; 
- Thu, 21 Nov 2024 16:31:22 -0800 (PST)
+ bh=1zc/VMMwNHVlX47T7NlPeQ6C05BzIlKwkDUvZQBGJ2I=;
+ b=XyOdkAV6aFeIzZPjC9W9VUtJd5edZvYhK3myF98f9mgc/aXKqrpXIjGyDrv7DCn/MB
+ Ti65Jb0/xnQnevDGFYneZKcdfANi2T7ZBu53FpaQH4/co7dChY5I3qGxuFv3IcSIbPw6
+ deNiT/oX1bgVdvIXLLzAy00G6jqHTdyIlVhT47fvogyfY+PCrtZKskrBfbA8kfIZ4Oqu
+ OQbmQRquqfcvtE9UK1NKUVUr53UmtEWu9HIxV/1QJVKsJEQGey3m/WTsohG4OotSpaeP
+ GdIGeKCl/3DbIlmNNbWJvRWdSTcjemSM2XJ1vNatNpUQgLjo2lqY9yChG2uDBANAdQwv
+ EW+A==
+X-Gm-Message-State: AOJu0YxrBluOMJF/QfqJG4AIFnjLSQgiR2dpbDXEHa8PL+8YtsOHVYLG
+ uNY05adSIC5nqeXbW2N0WvKAqxINcLPOb4xjIv9bwMrqQ0TngX4jp/z8Gnpg
+X-Gm-Gg: ASbGnctJe0T3DUJZSQdyRb+LLCMJtdgYTHaXlQrtvMU6mSV27dvNzhy2fUue75nUlEC
+ 7EjcxVuL2WGUT8w9LkSNTFs6Nn+aKykKzyhXNnh3s0Ush5Mtimcf4H1yoRDB150tFIxNj7cOONQ
+ K0hzX+SzWWH5AcGuTWT5ggOb82/m1GbC3NWdaSJASYLGXEngD4s1WU0l/RO6HOpnF/j0xFezhke
+ GKFSliL3N/fjITSod5bpYp7waSxxSncNyi4u9LuVFh2prF4BXQdogC19eIsXH97
+X-Google-Smtp-Source: AGHT+IGAjnr4Omi9vJdD1P8kpqkuRziyI7g2xaMl7jRrfjLyfGFRFuhbe/2b5k9nH3HYl0YbQ/tFtg==
+X-Received: by 2002:a17:903:240a:b0:20c:b606:d014 with SMTP id
+ d9443c01a7336-2129f68abe7mr11879305ad.44.1732235486340; 
+ Thu, 21 Nov 2024 16:31:26 -0800 (PST)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:db1b:7332:ce96:46a7])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.20
+ d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 16:31:22 -0800 (PST)
+ Thu, 21 Nov 2024 16:31:25 -0800 (PST)
 From: Chris Packham <judge.packham@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Chris Packham <judge.packham@gmail.com>,
  Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 4/7] arm: mvebu: x240: Enable IPV6 support
-Date: Fri, 22 Nov 2024 13:30:18 +1300
-Message-ID: <20241122003058.270163-5-judge.packham@gmail.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Stefan Roese <sr@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 5/7] arm: mvebu: x530: Remove dead comments
+Date: Fri, 22 Nov 2024 13:30:19 +1300
+Message-ID: <20241122003058.270163-6-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241122003058.270163-1-judge.packham@gmail.com>
 References: <20241122003058.270163-1-judge.packham@gmail.com>
@@ -97,26 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable IPV6 support for the x240 board.
+As things have been moved to Kconfig there are a number of dead comments
+left over in x530.h. Remove them.
 
 Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
 
- configs/x240_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ include/configs/x530.h | 16 ----------------
+ 1 file changed, 16 deletions(-)
 
-diff --git a/configs/x240_defconfig b/configs/x240_defconfig
-index 5e5b467b7bac..ff64916204cc 100644
---- a/configs/x240_defconfig
-+++ b/configs/x240_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMD_TIME=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_UBI=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_IPV6=y
- CONFIG_CLK=y
- CONFIG_CLK_MVEBU=y
- CONFIG_GPIO_HOG=y
+diff --git a/include/configs/x530.h b/include/configs/x530.h
+index 982b12928734..c7bfd1de17c5 100644
+--- a/include/configs/x530.h
++++ b/include/configs/x530.h
+@@ -18,30 +18,14 @@
+ #define CFG_SYS_NS16550_COM1		MV_UART_CONSOLE_BASE
+ #endif
+ 
+-/*
+- * Serial Port configuration
+- * The following definitions let you select what serial you want to use
+- * for your console driver.
+- */
+-
+ /* NAND */
+ 
+ #define BBT_CUSTOM_SCAN
+ #define BBT_CUSTOM_SCAN_PAGE 0
+ #define BBT_CUSTOM_SCAN_POSITION 2048
+ 
+-/* SPI NOR flash default params, used by sf commands */
+-
+ #define MTDPARTS_MTDOOPS		"errlog"
+ 
+-/* Partition support */
+-
+-/* Additional FS support/configuration */
+-
+-/* Environment in SPI NOR flash */
+-
+-/* NAND */
+-
+ #include <asm/arch/config.h>
+ 
+ /* Keep device tree and initrd in low memory so the kernel can access them */
 -- 
 2.47.0
 
