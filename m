@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F44E65D0B
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F54E65D10
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 01:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7E96896FA;
-	Fri, 22 Nov 2024 01:31:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 29AA488F0C;
+	Fri, 22 Nov 2024 02:30:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UyhapPo5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hvpLPACP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91345896F0; Fri, 22 Nov 2024 01:31:37 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id D053088F28; Fri, 22 Nov 2024 02:30:47 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0F4589781
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0F8488D3C
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 02:30:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2124a86f4cbso14935535ad.3
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:34 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b155cca097so140022185a.1
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 17:30:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732235493; x=1732840293; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iRAW2cPXy3w/n1FiCM/7c/t6rNpc6WB+Ux3dV0zM2UA=;
- b=UyhapPo5jCbGnKwWJ6LxnMnWFQiKVoodX4RosDyOO8Ij7Js5c2W4candJWc/5/5Kdn
- X1/2EXkP4p7kZgNNrxgBAI6amkYCe9qRFVa8e54pHP78xGgFCg09JUZDL3ffeZnoQT4l
- xFVVgEIqtlEoIuuXC77u49Uu1yO7avJfWlSocFo6/2CquBRySdACa+l+c3wC0Qf8muOb
- x2w6PbfHo2rPccV4C8H2xa+MmnZKnlGb6j3gZuoeh4oyrMOeg1ItoKL+2UFpy99zj0vo
- 3+s73aSbfKXpthyFn+e11tKuYDIw4tVbBzmaDcyPLuLHGyx3iRy0avYJcVFOz8i7wBSd
- LJIA==
+ d=konsulko.com; s=google; t=1732239044; x=1732843844; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FZ/hGKRRksyVpAXtvbB5bTtztxNTUc2xwhDb2yIpHKo=;
+ b=hvpLPACPynhABmI6arWISw81yvJWcCv7OEtwEWMEdqJkphb6pdPe4kA0FkWU9u099c
+ PZa9JWldOAIDx6swX84xMf5jO0nBYYZKz3sq3b/Q9df2K2afVdZXO8PEA3TF7mmqscbR
+ mkV2Rd32dYDkasMdMXqdUFmwrJ/B3T3bAyhdM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732235493; x=1732840293;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iRAW2cPXy3w/n1FiCM/7c/t6rNpc6WB+Ux3dV0zM2UA=;
- b=HjmqcjZDBbkWmx+tS4qa7iLzdvp938SU7ZjVAqw3rk/VoraTn624ufG+dIH/nHb71A
- jHL6/+rP4eGU7iKPf+clsdd8qKVAlaIdGIK5jHRhDHxyG3+Yw9zv5Z9r7stpotXy2KoB
- kP1s4dLSeNtWyM5irsZJFyqQr3As9tsZockXfRXE9shC6eLoygw9sxDOBryOT6p4A1TW
- J7ITkRLyxmME3HwjG0+mBhdvJJp14AL68DBuYy1Ib00r1L9R3Vn5CwXAI74ZBmrDKcwm
- xmNBcyEkd/iV+OvTlcui3w9fKDvsxwlfCJOO6aiRr9UwtPe1p2o/8u2xaoudn0t0XMEk
- xtHQ==
-X-Gm-Message-State: AOJu0Yx8EJaGdsoiKFOtLiPbHjSRtiYtncUk0V5lOdTo4jrzW3+t7wh8
- uhlYT4+yTC5xWKvO4lfy5kNmYVatvFrBfYorMbyB0Jn8fpk2biTV2NUBL1eB
-X-Gm-Gg: ASbGncvDYAj0KNbKwDWHrfZ59K+gJrrtOUji3HFPtf/7hj5xysMivf8JIHmtyx/UyqP
- Ln9t0T+cvysQmS5JBBN9YlKoZs2lVxR3rDnKsC6Tcd016P3QiyUEX2bMRNZQUEuc9xj6J3mwiZF
- 2tE2Xb6EVsZ9fp8LNBWAhF9tf7ufSsLbcIpSbCFAQcSERD2evAPYPsP7xPy6JHDfczYoaj5DEoI
- KzqUkWch4r4ux1h2kbCuPZ5VeTB7LAkozf+vCCyoiOdbiRR8SsRxndacZCiiW6Z
-X-Google-Smtp-Source: AGHT+IG7XkkoPVhpb7dxm5iGJ6wLIm0uKLuIw4jgm32z3j+b/I7onAZB33EcIyks5iCHAOAKDCZ+1g==
-X-Received: by 2002:a17:902:ecc9:b0:212:615f:c6 with SMTP id
- d9443c01a7336-2129f82fe3bmr9409305ad.50.1732235492804; 
- Thu, 21 Nov 2024 16:31:32 -0800 (PST)
-Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:db1b:7332:ce96:46a7])
+ d=1e100.net; s=20230601; t=1732239044; x=1732843844;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FZ/hGKRRksyVpAXtvbB5bTtztxNTUc2xwhDb2yIpHKo=;
+ b=uMF8NuVw3lR0VmmC9wb6JI+8z4UgY9X5kKglxnGk/5dBvStaSFOBWFd9liOMGeEqeK
+ h4Vb7RQ15Ywa07ZoHhGrXryCIp35Ta3/ptcsaaKWgt9jCd04uP7D4qnDgFsOBrpeXJ0W
+ Nfyy3Bx5EcCAHTCagaNli/o7pSSv8IhYg04VnB8hnRbXhPdeoT7RCnzLgqT2GiVz1CQI
+ N0VEhd9F7Fkl2jCMKpeuFKDWEZmJEUlMj41LBqeXBjRHosXRIuquplWLg9rimxlqRJV3
+ mRGZmbapbE2E1pvqNBdCn3m1au6VoWr0QO/w3N4BNZyLL8JigtzI46id14aBkPdw8e6B
+ LuWQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgglzIAy6vSn4HxPssegXOnByt0F88xvQAcEKrInCB30BNtrdIuIb/Hz0NJb0rgf6UGbKfvgg=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZqbw49d0aK0w/z6gB/ZoAwx2JKKFvGFVuwem5oF6V/tOQSwzl
+ oUswF6ShHW3mcpZz9YLkng0RaRWUJgKfcrY0gOkB1+ns/J9s5Bc1mbbr3N0PUnY=
+X-Gm-Gg: ASbGncvXwTO6CXw7hpv+CxHoEGCbQprKuA6zDKblHmlmQg2f290olm7CDR08/YtBC+H
+ W7VrWtMyEwg0rHKNSx/wcnY7dYi3x8QFjKHz+zzBxUqlzIcI/BFDo9dfM11tE6p/rOf6g0B4iQS
+ aVL0f7Oive00qdzfb99Nyj3CZ9a4XCbwIr04mHBYIoBGirVaFhGin/MIuLE6ROmye7bre/UVZnQ
+ L0KpezSZEgHG2QroJP3/J4tGNCiCR7YVhppk5pG6iwawi/sdg==
+X-Google-Smtp-Source: AGHT+IGVwQmBpv2YlLSebJWkizUyKNohFS+7bjTqjyqLhdF/WaSiki43/FdC0WqHY6ty99hlKxx9vw==
+X-Received: by 2002:a05:620a:244a:b0:7ac:e8bf:894a with SMTP id
+ af79cd13be357-7b50c1bbe26mr830113685a.20.1732239044395; 
+ Thu, 21 Nov 2024 17:30:44 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.30
+ d75a77b69052e-4653c3d6ff6sm5499991cf.4.2024.11.21.17.30.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 16:31:32 -0800 (PST)
-From: Chris Packham <judge.packham@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Chris Packham <judge.packham@gmail.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 7/7] arm: mvebu: x530: Enable IPV6 support
-Date: Fri, 22 Nov 2024 13:30:21 +1300
-Message-ID: <20241122003058.270163-8-judge.packham@gmail.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241122003058.270163-1-judge.packham@gmail.com>
-References: <20241122003058.270163-1-judge.packham@gmail.com>
+ Thu, 21 Nov 2024 17:30:43 -0800 (PST)
+Date: Thu, 21 Nov 2024 19:30:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Janne Grunau <j@jannau.net>
+Cc: Mark Kettenis <kettenis@openbsd.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] Fix device removal order for Apple dart iommu
+Message-ID: <20241122013038.GJ3600562@bill-the-cat>
+References: <20241031-iommu_apple_dart_ordering-v1-0-8a6877946d6b@jannau.net>
+ <20241121073926.GA2171629@robin.jannau.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pWCjFzDzmhJ7vQ0z"
+Content-Disposition: inline
+In-Reply-To: <20241121073926.GA2171629@robin.jannau.net>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,26 +99,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable IPV6 support for the x530 board.
 
-Signed-off-by: Chris Packham <judge.packham@gmail.com>
----
+--pWCjFzDzmhJ7vQ0z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- configs/x530_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On Thu, Nov 21, 2024 at 08:39:26AM +0100, Janne Grunau wrote:
+> On Thu, Oct 31, 2024 at 11:48:00PM +0100, Janne Grunau wrote:
+> > Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
+> > trigger a NULL pointer dereference since the the iommu device is removed
+> > before its user. The sparsely used DM_FLAG_VITAL flag is intended for
+> > this dependency.
+> > This series adds it to the Apple dart iommu driver and implements the
+> > two phased device removal to the EFI loader.
+>=20
+> Can we get this two small patches merged? They fix a regression although
+> it worked previously just accidentally. The only drivers using
+> DM_FLAG_VITAL are clk-rcar-gen3.c, rzg2l-cpg.c and apple_dart.c all used
+> on arm SoCs. arch/arm/lib/bootm.c already uses a device_remove call with
+> DM_REMOVE_NON_VITAL so adding it to efi_loader looks reasonable as
+> regression fix.
 
-diff --git a/configs/x530_defconfig b/configs/x530_defconfig
-index a5b1cc3f8e89..815370c90ecc 100644
---- a/configs/x530_defconfig
-+++ b/configs/x530_defconfig
-@@ -65,6 +65,7 @@ CONFIG_CMD_UBI=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ARP_TIMEOUT=200
- CONFIG_NET_RETRY_COUNT=50
-+CONFIG_IPV6=y
- CONFIG_SPL_OF_TRANSLATE=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_MVTWSI=y
--- 
-2.47.0
+Can you please take a look at doing the changes Heinrich suggested I
+believe in 2/2 ?
 
+--=20
+Tom
+
+--pWCjFzDzmhJ7vQ0z
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmc/3rsACgkQFHw5/5Y0
+tyyn3Av/XyHL3D1DimsOyM1XrxPdDVp6qNkBwet2EFwAclkiPUMk+QqWPAn03Ud9
+qT9+EQfD/sTn+7LIds1Yyh9cO1Z9k0OKBHJth9IO3f+20FxDgaRtr6zFF347/s2G
+ywWvjHkPlr2wwLZLIiSx1CLyBvIBysQN+P6HakeKYSzO1JkigQ0cZcimZESbGhE2
+HqiUdKnnzQtPZii9O2rUa3gG1F55hQmxtBotP8KAo4ugAPKVwfNlZUTo7q7wV/tf
+t/JhlwcgmWPaHStfk6S9UnSP7wNiKLe6atyhmzAaDakyekMZ6bRdypr6eavvMOTC
+2YFYZEAqT7oE49IcP32b3mDXq2oC1bPEOtZVwUxIyckG1cPC4vBGR6Zm3ZyV30b/
+zHo9Ypbcyasst6lqyJ0VLMWxzMeLntkm3HhIcEoUJ8/vt3ooWLVFRsWrPzyi6KVE
+qqggRRVERREtsHAxW8LpLxlvTkEDWUL9U2m6fJrd7D1qbCCGSpb6F5M2oUIzHawN
+NCbQ2DV9
+=tSAy
+-----END PGP SIGNATURE-----
+
+--pWCjFzDzmhJ7vQ0z--
