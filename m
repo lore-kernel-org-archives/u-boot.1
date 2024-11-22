@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BE5E65D34
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 08:25:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6804CE65D17
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 09:20:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EAAE897AD;
-	Fri, 22 Nov 2024 09:25:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E743897DF;
+	Fri, 22 Nov 2024 10:20:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gwFTSrlm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dtvTCvW/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D3AC897AF; Fri, 22 Nov 2024 09:25:15 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 60FFE897DF; Fri, 22 Nov 2024 10:20:51 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56C5D89288
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 09:25:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCDBA89351
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 10:20:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2ffa678ddd2so4996691fa.3
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 00:25:13 -0800 (PST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2ffa8df8850so3395091fa.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:20:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732263912; x=1732868712; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732267248; x=1732872048; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gXXu1OcJWhyYkqCFeAE+4rra7B7kMS7le+nDzNxtSlU=;
- b=gwFTSrlmfVF8zVEXhGYDGe9NQVJ9bKNJV+VXb73xS/pYo4gqAjQJTDbYDxKOq6kmxc
- Jp5MfqfIeV3TMvkZaK1AfgbMd9Xh6EuBltSa2yHzyNldwUyrs1CyKOwlZ/YpvqEJyWrD
- Zqhdx6aGrHDF2Y6q32YJoXIoX3gQamV1IWbVxlrRqsHhXRL4d0hS4Fj+YBUIvzrSoaCd
- 9d/smXumK+ihc5ADjbWwm05oPwSSCQO1G2yYTAYFc7jak2UXeHjhlI4oWnHJXv41fxkR
- QrQg/mPitRhcvC1hjncqgakOgMi+9aofxbqx1sd9CfvTt6rnHDSDF0HJCQ3GsSo/greZ
- p/oA==
+ bh=P3K3SUY3xO5QbPfN7fmdGHi9q13Fg8NDAEgdDQKxMjA=;
+ b=dtvTCvW/ZY+qdLVOVQRubCBBWKHRcU6XUUUvOB3X+wWb/0YoZfcp49b4aQrohHPAnj
+ uvc9BDsLZWVCQ/wnUyL5TNdbWCjVM98iKn3IhwZgsJYIdrmQ9qEKY0g53O8OnOKHUNGo
+ DHArA/BGEvgWJfDm+/AKqggK1bpfezChGnK/FgJSYVEwyiKGIvTNlrm6pl9qInml4dn4
+ 9iSVjkZB0bh7EkLEVTLh/Wk3eQ6zeXNh/UD+L7doC0u4c7F6m/5aoGZt3wRRkYaYos+c
+ IydnmeNlP5NMf6gIWpbi1Cls/M38WUqur7YgdgXbcb8puiy1sJwjGoCa51FJYglAcMSL
+ GuLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732263912; x=1732868712;
+ d=1e100.net; s=20230601; t=1732267248; x=1732872048;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gXXu1OcJWhyYkqCFeAE+4rra7B7kMS7le+nDzNxtSlU=;
- b=mpqQwNFqRCRrQUl4JDeImvwoex0NKixvX09bSeEqMV7Qg2br8e3XHXuwAs+QCVK4Mt
- qAVQ6qYx2bcz/3l2R00X+aocGFh+IX6PkiUs6jJSyeval8V0UllOC0WQRE/KF7PZG+7D
- Fodxa4Hp5Xf9gOvqBguXA/rawEBoEKnRS1ACir8nJognZ1sbz+HTdPeg0WQ8Fcg37NDS
- M+brDAyUp2DWEeT1aWmTlM49zPCTCAbX3rr/CpiNMlGvrlPlj65qFMcEHVsi/aYq+uEU
- ejdT8YXDwBzM6Y0iUlh7sGkUpes3pdF+1GGOt8lomEJNwjAdkPD+5KLZroQgWrtHdTUL
- Vc0A==
+ bh=P3K3SUY3xO5QbPfN7fmdGHi9q13Fg8NDAEgdDQKxMjA=;
+ b=VswCdV0iADk9J8uJcyTTP7MwXwlcZ9UPXC/dko+AnRhndnizKIjgUTZqvVz/YT1540
+ h7SzO48UhhtwPFKxIx/S1BxN+jg1JY7RSGv0uSuZYXPibkIOycJXKtcNMW2plmQvmeBe
+ vDu2LXIBvijtP87vN5BtB+4gZqsQLlOCIW6Eo7VBE5dTNh2YhW1uUiXPsgzcATyUiDp2
+ QrhFL9N7hiOHxgwb2OLUDHMWXUECNSgAqXGsQk0Xsvy3Book2Sxp5J6eKWcNAk+UqR2+
+ PvMMI5bhUHuEyYElcp1UHyM4xatRKVm/yhE1gH3jbI8Kpx9bfaFeDS2KI5SpP6t/01Ee
+ oNQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaLyL44YQzzn8t3Hm6muhHtWNzqxJctC6AqB6A8GtT8+fDkQ26uy4lbFGPA3ntWVFzix/OPy0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1vrrpZbFJzeFC2dfeo6GA+Qj8XWQAqbKDJlHYpPrqa7iSTFcs
- /PDvjvx/wiFiCnWxKmAFbxY+MXOZyIlzz9XcdPrUjB7XmGNxIZ4xY+qzMT8291rnEIlmCp+JLO3
- J86VPu/8dNTPrRUUd9+81tQDEUvicCVZx
-X-Gm-Gg: ASbGncvUtvVXtRdi4zRs6DX8LBNFrrkLzHfuqFPWyOXC0kCY9z/7Bqc0cD6P+MTR/k+
- je9HhPF1B0oFTzjwvDnfrqTJINVGgaphtM1b615N90QDwfBPy6N5TLa5XNtGYcIjvEQ==
-X-Google-Smtp-Source: AGHT+IF/nNYHv41TEZU1ydvxt+T3flIX19QNuDxruewK6gzFfVYk5yYJ4DBdNCmWqPo/dz3NlMVPvDSqwhvwvEemYYg=
-X-Received: by 2002:a05:651c:2208:b0:2ff:59dd:925a with SMTP id
- 38308e7fff4ca-2ffa71a7aa1mr8680251fa.29.1732263912194; Fri, 22 Nov 2024
- 00:25:12 -0800 (PST)
+ AJvYcCWefvZblI/X7ikbq1TEZhKKuB7LngdAmZNB5Dy7deBRpDhjeZFoIixj/6huvXrHeYTXsSGNnCc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0P+A6VT30sIuMg8ZjCt+GjIpIl/NmU8q+coGf6e1rdzfv19U7
+ 3KDuv9mDqQz8L1IkgiwiU7dFx/FmZ77dmAyAZiqMh73NNJ3Aq17jvJmffgYbU2vFWBSkt5EL6p7
+ RhrGA8XCIAgV3P9UYJeIU/es5afhp+zTUYWo=
+X-Gm-Gg: ASbGnctUs/B/C4ekjkTOfnAqmUcIFOd4jcdXpWrR8JGe2YF88IN4c7RxQ4qmilx/9zj
+ +upB4QOnmoxARkcJg45PtZbejgJGgUpeK33HHB/+q8JwbpGUrLGAEV/A36fmeIxCLUg==
+X-Google-Smtp-Source: AGHT+IHn1BaSIs04p5xMMyNP6kz4rYCMqbuxp9Tf6GZdWEP5aq65bPlWMshq9ei/KOMnBN0SfYbkTDaDnaTxOh6qxRQ=
+X-Received: by 2002:a05:651c:553:b0:2ff:991a:fb96 with SMTP id
+ 38308e7fff4ca-2ffa716d0b6mr9213931fa.12.1732267247502; Fri, 22 Nov 2024
+ 01:20:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
- <mvmjzcwobi0.fsf@suse.de> <a6a1d0cb-c363-47bf-aa91-b3c2ad2fd5b9@canonical.com>
- <CANV2PTNnOC43iYnyoczWev+2vAjKR+BEU5o1rEyZqr4uPVaJ8Q@mail.gmail.com>
- <CADg8p97T1L-JwPRAu7Wq4Uz-yEBuvNucJcNULcCTi2o+zFTRiQ@mail.gmail.com>
-In-Reply-To: <CADg8p97T1L-JwPRAu7Wq4Uz-yEBuvNucJcNULcCTi2o+zFTRiQ@mail.gmail.com>
+References: <20241119020425.51989-1-hal.feng@starfivetech.com>
+ <20241119020425.51989-9-hal.feng@starfivetech.com>
+In-Reply-To: <20241119020425.51989-9-hal.feng@starfivetech.com>
 From: E Shattow <lucent@gmail.com>
-Date: Fri, 22 Nov 2024 00:25:01 -0800
-Message-ID: <CANV2PTMT5S9+JpQ75kaaMKLu1Np=yYUrMr_5HW-L=QaA9RKuTQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Andreas Schwab <schwab@suse.de>, 
- Minda Chen <minda.chen@starfivetech.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Rick Chen <rick@andestech.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
- Tom Rini <trini@konsulko.com>, Chanho Park <chanho61.park@samsung.com>, 
- Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>, 
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Date: Fri, 22 Nov 2024 01:20:36 -0800
+Message-ID: <CANV2PTNBzZUaMGmOU6xQzsz7fBcxs4XkA+OksQmbvGQX0zqC8g@mail.gmail.com>
+Subject: Re: [PATCH v5 08/11] riscv: dts: jh7110: Support multiple DTBs in a
+ Fit image
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
+ Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,25 +98,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 21, 2024 at 10:32=E2=80=AFPM Sughosh Ganu <sughosh.ganu@linaro.=
-org> wrote:
-...
-> > Hi,
-> >
-> > Test failed for both boards here with origin/master then applying this
-> > series, then starfive_visionfive2_defconfig target and set
-> > CONFIG_BOOTSTD=3Dn following with oldconfig target.
+On Mon, Nov 18, 2024 at 6:06=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
 >
-> I think you need to apply another patch [1].
+> Support multiple DTBs for JH7110 based boards, so they can
+> select the correct DT at runtime.
 >
-> -sughosh
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  arch/riscv/dts/jh7110-common-u-boot.dtsi | 60 ++++++++++++++++++++++--
+>  1 file changed, 57 insertions(+), 3 deletions(-)
 >
-> [1] - https://patchwork.ozlabs.org/project/uboot/patch/20241121142522.590=
-59-2-heinrich.schuchardt@canonical.com/
+> diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi b/arch/riscv/dts/jh=
+7110-common-u-boot.dtsi
+> index c44553455e..3928d551c9 100644
+> --- a/arch/riscv/dts/jh7110-common-u-boot.dtsi
+> +++ b/arch/riscv/dts/jh7110-common-u-boot.dtsi
+> @@ -113,20 +113,74 @@
+>                 fit {
+>                         images {
+>                                 fdt-1 {
+> -                                       description =3D "NAME";
+> +                                       description =3D "jh7110-starfive-=
+visionfive-2-v1.3b";
+>                                         load =3D <0x40400000>;
+>                                         compression =3D "none";
+>
+> -                                       uboot_fdt_blob: blob-ext {
+> -                                               filename =3D "u-boot.dtb"=
+;
+> +                                       blob-ext {
+> +                                               filename =3D "dts/upstrea=
+m/src/riscv/starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
+> +                                       };
+> +                               };
+> +
+> +                               fdt-2 {
+> +                                       description =3D "jh7110-starfive-=
+visionfive-2-v1.2a";
+> +                                       load =3D <0x40400000>;
+> +                                       compression =3D "none";
+> +
+> +                                       blob-ext {
+> +                                               filename =3D "dts/upstrea=
+m/src/riscv/starfive/jh7110-starfive-visionfive-2-v1.2a.dtb";
+> +                                       };
+> +                               };
+> +
+> +                               fdt-3 {
+> +                                       description =3D "jh7110-milkv-mar=
+s";
+> +                                       load =3D <0x40400000>;
+> +                                       compression =3D "none";
+> +
+> +                                       blob-ext {
+> +                                               filename =3D "dts/upstrea=
+m/src/riscv/starfive/jh7110-milkv-mars.dtb";
+> +                                       };
+> +                               };
+> +
+> +                               fdt-4 {
+> +                                       description =3D "jh7110-pine64-st=
+ar64";
+> +                                       load =3D <0x40400000>;
+> +                                       compression =3D "none";
+> +
+> +                                       blob-ext {
+> +                                               filename =3D "dts/upstrea=
+m/src/riscv/starfive/jh7110-pine64-star64.dtb";
+>                                         };
+>                                 };
+>                         };
+>
+>                         configurations {
+>                                 conf-1 {
+> +                                       description =3D "jh7110-starfive-=
+visionfive-2-v1.3b";
+> +                                       firmware =3D "opensbi";
+> +                                       loadables =3D "uboot";
+>                                         fdt =3D "fdt-1";
+>                                 };
+> +
+> +                               conf-2 {
+> +                                       description =3D "jh7110-starfive-=
+visionfive-2-v1.2a";
+> +                                       firmware =3D "opensbi";
+> +                                       loadables =3D "uboot";
+> +                                       fdt =3D "fdt-2";
+> +                               };
+> +
+> +                               conf-3 {
+> +                                       description =3D "jh7110-milkv-mar=
+s";
+> +                                       firmware =3D "opensbi";
+> +                                       loadables =3D "uboot";
+> +                                       fdt =3D "fdt-3";
+> +                               };
+> +
+> +                               conf-4 {
+> +                                       description =3D "jh7110-pine64-st=
+ar64";
+> +                                       firmware =3D "opensbi";
+> +                                       loadables =3D "uboot";
+> +                                       fdt =3D "fdt-4";
+> +                               };
+>                         };
+>                 };
+>         };
+> --
+> 2.43.2
 >
 
-I did apply the whole series, patches 1 and 2 inclusive. Is there a
-canary (printf? i.e.) I can add to know if this survives to the
-compiled output and does what you think it should do?
+Are we sure it is a good idea to have sequential numbering for things
+that ought to be ordered by alphanumeric? Sounds to me like a noisy
+commit in the future when adding board support and trying to sort, or
+just piling on sequential additions.
+
+fit{ images{ fdt-1 { ... } } }
+configurations{ conf-1 { description =3D
+"jh7110-starfive-visionfive-2-v1.3b" ... fdt =3D "fdt-1" } }
+
+This is perhaps not as good as it can be, for being git commit
+friendly when adding board support that is sorted by name.
+
+What about?:
+
+fit{ images{ fdt-starfive-visionfive-2-v1.3b { ... } } }
+configurations{ conf-starfive-visionfive-2-v1.3b { description =3D
+"jh7110-starfive-visionfive-2-v1.3b" ... fdt =3D
+"fdt-starfive-visionfive-2-v1.3b" } }
+
+based on the compatible identifier for that board or does that break someth=
+ing?
 
 -E
