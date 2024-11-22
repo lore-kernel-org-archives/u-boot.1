@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A96AE65D0B
-	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8EBE65D0A
+	for <u-boot@archiver.kernel.org>; Fri, 22 Nov 2024 00:31:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C86C6894AE;
-	Fri, 22 Nov 2024 01:31:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33C40896EC;
+	Fri, 22 Nov 2024 01:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EyxFdctJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CVKNsPcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89077896EC; Fri, 22 Nov 2024 01:31:23 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id C0A7689777; Fri, 22 Nov 2024 01:31:28 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 523F4896F8
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2993896FD
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 01:31:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-21116b187c4so12442745ad.3
- for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:21 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-21260209c68so20100525ad.0
+ for <u-boot@lists.denx.de>; Thu, 21 Nov 2024 16:31:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732235480; x=1732840280; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732235483; x=1732840283; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JXy2r/cThp7W/2+s9DSFua1zwg2NRNhm0gAYwffKJHM=;
- b=EyxFdctJ6OooMZEyqZc4rC5wu805sLl1IIN8/VDouSJ6uFZRgPRiOmQarEsILHGESW
- jZAE5CZ9aJuLZamrLoMzlJF56FMOP71b+hNVOvnTG799QqNALCkEgLb0FkUsUtwEq6WF
- XTKpqnd0tS9Sx1zoQhjJspqdYC1/KyrtRNlTegB6lgYdOtcpQH6GeuksRhXpnyw3ZNOY
- slwKiu5Bb9GZfdnD3gxCOzWI0YwDZwepW7n57HRwxnTLTxn43HmDhcvDL9C74hAXOeLK
- aHAe1p7IvjanfpraTT5aMw8qU6gNPqUY11kz1fuYgYAjtelhdtRoAV5Uvf4RILKLQJD2
- ZXWQ==
+ bh=LAUicIGf2emBdFSfWcPhJBlhFRNPWJ9C4Sw5DzDtFhE=;
+ b=CVKNsPcQbQffqUNd9liNStXMoP4Uv+7vnh23ZcsU2plmUtYG1U4b2I3ltRZxlXHRyM
+ QLPWn2uwCmztb5YFm2qz6XicFVXA4Y/1YeQO4fLk65BSW5rBtpU5Yzwy4N/TAgPpv6PP
+ uxCTrri55tJ1kjmAwNEKDe7MTl55fKAn1GQoozrBPMeHGb8h8xGxJmgpd2R0aeTugHDK
+ 7t0j0zV4m/wZx1tKudlbSrlc5RoGkpc2TO3hHC1CPKwgVWvTCqlOnuLMqMyyyH5DzG/k
+ isJMFP2zZVbOJxOUmqhfb+N4EsVOh1pS/KVUTNTyDMFbzeUVmiOXw7ZGOojqyLi9ZZMX
+ J2eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732235480; x=1732840280;
+ d=1e100.net; s=20230601; t=1732235483; x=1732840283;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JXy2r/cThp7W/2+s9DSFua1zwg2NRNhm0gAYwffKJHM=;
- b=k1XcGjoluh5RbcmM8+jJ3CT4LEAKF+n58mx8nOcsr4g/TOGwKwSyLwD1kwU09OWQWF
- OZBOzlVLTE6dv5rgodBch1UhpF4smuIHX48unhIp0dRvkbCfZBQE0t98GNVsuN2ds7JK
- eF4dn7AvpmtYNxoCovrTlHTgRDxPAj8hK+9nTH+RrRH43T+VZuhX6UCBaLeJWT58NWcy
- bq/kBSRYEBN3z14fpb2CB1dptBLPLzemCA/hFLUs24xijd72y+a5ZAPNE9wCyzIh9WO8
- zCyFyiZP67dfwP7ZmT3f2akylBgJS2Cc5QUStyl5BRmfDji2pbdg4OgWPsPlAm1JEnbU
- UNvA==
-X-Gm-Message-State: AOJu0YyyYvu1jjomVgkxGuokBLJNFAG6Y6uu07bEDgY6Stu46zD5rKzB
- TW8GTAIJMgX7Bnu6WQkCNGOlNjd7AFo/S0HU7zK7DIZdjad3ZtKyi8K3wQFQ
-X-Gm-Gg: ASbGncuo9e0Y/J3agsH5r7ctUm5znt5ToWxDAEj3R+V1SeQQfYbkoCKh0bxsmR8U9AP
- 2nYfznVoA/HpYXOvotDIkfSV8Vr7BcmxVtb/jkPrv5Ekrnd1UkBjE2I5QEOiZas6doszBMkL/x/
- +4KulsiBLGLMOYuwRt70pbX6M38e2lw++Db+MLTL6TQ8Vl8Jbign3kfWQ4zX2tqcQUgEMtOSY6y
- FR2FDskm7v/jEMskQ31iXX9tOonT5yXvLlOHB664LVxXdg54ZZs1NhI2fAcFMlO
-X-Google-Smtp-Source: AGHT+IFNMijvzHpe1uHJUnFAuMp7ueLOhychfefM/ft++ZJ3tODIWTiMrMES4huSEEJd7ZQDG1X2wA==
-X-Received: by 2002:a17:902:e54c:b0:211:e4c4:a565 with SMTP id
- d9443c01a7336-2129f2208bemr13939855ad.7.1732235479695; 
- Thu, 21 Nov 2024 16:31:19 -0800 (PST)
+ bh=LAUicIGf2emBdFSfWcPhJBlhFRNPWJ9C4Sw5DzDtFhE=;
+ b=a1xvPsJdbTIgBpELvTn6YyQ81XPGagS2NOovn+yxCj3T/WWmqnoRD1dRYiJktm+S44
+ FHGND8ytKxSjuFbRfvA1BIefIjo3U3NwWaj6lks7eRk8p01Dj+VcJrnZMpSPwifDZsqL
+ tYlbw1jW1sWz9coHRS3GGR+/BFampHW5qb98Z5t1n0wv+h+K0lbG2cpSo8FhupRWV/K1
+ u0V1byKJTajmUsEWc+2BIAGvUuHTDQmIgo4nPpHi+VOHTuZ4UZbnNkHRaxsFZscZHFuh
+ p+fZmFswuoLhyK7eQYaYRUd7q2C5QriBrPYXzuwaPRy9Y9I7BQHoIPvGEyMlnJL1W64+
+ q/yA==
+X-Gm-Message-State: AOJu0Yz30abDXucQUEMh1NK3ISyd6jGYG9UbrFO6vQiMYGgfAwmVKVSJ
+ 41y6MBjWly7+wEPc3F3GUf7MqACPcHv0M/j0v9MOl9aKkY6QTTMYri38Evyc
+X-Gm-Gg: ASbGncuQm5u0//9Qmk/kGRNFGzJaJGhnw7YHaZDVyHlLA9YuhSbuskiMplgXq6PmNSV
+ Q9iU7HeQZfD65ERbkOWxaSeLpfFIGyNxIGtYejQaj3BxNp7jpMkFVSifLJoOSzCLAb6yssPbdpj
+ Xd4WX8XS+/VFovKgyP5Dcw9Vs+z5KL1jdXZb442x+xVzLHWAsX0ZlT+20RGEA5G7PqhXAv7f8Rc
+ 5E3Azj+glKmuzKJa0voZnbf1tu+ZFZ3BX5ipBjnCTGokJoCP1LsmPchl1L6GOrz
+X-Google-Smtp-Source: AGHT+IH4gzVFAc3imSvSSEtt32ETB2lVqaiwzRYZnMDz4oYM8J5h3ydBOlVKtNuLPHoewuEre+ac2w==
+X-Received: by 2002:a17:903:2288:b0:20c:b6cf:f465 with SMTP id
+ d9443c01a7336-2129fe09431mr10617525ad.6.1732235482786; 
+ Thu, 21 Nov 2024 16:31:22 -0800 (PST)
 Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:db1b:7332:ce96:46a7])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.16
+ d9443c01a7336-2129dc225d5sm4181075ad.258.2024.11.21.16.31.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 16:31:19 -0800 (PST)
+ Thu, 21 Nov 2024 16:31:22 -0800 (PST)
 From: Chris Packham <judge.packham@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Chris Packham <judge.packham@gmail.com>,
  Chris Packham <chris.packham@alliedtelesis.co.nz>,
  Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/7] arm: mvebu: x240: Don't build mkeficapsule
-Date: Fri, 22 Nov 2024 13:30:17 +1300
-Message-ID: <20241122003058.270163-4-judge.packham@gmail.com>
+Subject: [PATCH 4/7] arm: mvebu: x240: Enable IPV6 support
+Date: Fri, 22 Nov 2024 13:30:18 +1300
+Message-ID: <20241122003058.270163-5-judge.packham@gmail.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241122003058.270163-1-judge.packham@gmail.com>
 References: <20241122003058.270163-1-judge.packham@gmail.com>
@@ -97,8 +97,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The x240 board doesn't use EFI and our toolchains don't include gnutls
-so disable the tool in the defconfig.
+Enable IPV6 support for the x240 board.
 
 Signed-off-by: Chris Packham <judge.packham@gmail.com>
 ---
@@ -107,14 +106,17 @@ Signed-off-by: Chris Packham <judge.packham@gmail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/configs/x240_defconfig b/configs/x240_defconfig
-index 4fca1096e740..5e5b467b7bac 100644
+index 5e5b467b7bac..ff64916204cc 100644
 --- a/configs/x240_defconfig
 +++ b/configs/x240_defconfig
-@@ -77,3 +77,4 @@ CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_ETHER_SMSC95XX=y
- # CONFIG_FAT_WRITE is not set
- # CONFIG_SMBIOS is not set
-+# CONFIG_TOOLS_MKEFICAPSULE is not set
+@@ -32,6 +32,7 @@ CONFIG_CMD_TIME=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_UBI=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_IPV6=y
+ CONFIG_CLK=y
+ CONFIG_CLK_MVEBU=y
+ CONFIG_GPIO_HOG=y
 -- 
 2.47.0
 
