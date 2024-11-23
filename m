@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1221E6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4437BE6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C65E893A7;
-	Sat, 23 Nov 2024 03:41:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A1F59893AA;
+	Sat, 23 Nov 2024 03:41:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aOhcakyb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pCBXK/M7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95436893CA; Sat, 23 Nov 2024 03:41:41 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 2F724893AA; Sat, 23 Nov 2024 03:41:48 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EB98891E8
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:41:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04491891E8
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:41:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d415acf76aso20157746d6.0
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:41:39 -0800 (PST)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-460b16d4534so17363411cf.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:41:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732329698; x=1732934498; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732329705; x=1732934505; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bmiYoov0TnfKU7apqEpq9IdMcVM8K9Ad62Of74hotqg=;
- b=aOhcakybzoqyelVzXII5w9l38jSxeSlcDf6SJy5r7rn7coFqRum8q2FLJsdA7AKmtv
- l1vROylOCT6Sri0CwtBnlrncmPLucLZSYp5d9L62jxLpjaMMZnMht+7cCPwOgvgnqZJA
- 5MqWL0BotLpc1poK3TKKif2UhLzlbkaV1dqmo=
+ bh=qWdkdl8Vw2Iclued7UuZ9ZpIB1/iwdBzCegRZYKDF2k=;
+ b=pCBXK/M7snrUgoDmISMVaDolLFzmQxDsaEBg4d4LCwmI41am9t5WpiQ7oQmArd2V2E
+ 1xiFZB+aUreWA0rdFJlF5A5igN24CEvMNtH1aNOE5uo+IJQwk3uN83UC/UOmq7dUrn5N
+ CmbvYzByCU/yMOcnyeganl6r2Wfh/1mt7ROeQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732329698; x=1732934498;
+ d=1e100.net; s=20230601; t=1732329705; x=1732934505;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bmiYoov0TnfKU7apqEpq9IdMcVM8K9Ad62Of74hotqg=;
- b=fxOV9jnQTHWWgflPmM4/riYbGNTVWupLMDH9dOhV5YbfnN8R4Mupbm6TRq8sHRAOdP
- wV6rlToc0QzrklUOryWFXQ5uu/JzD5OqwJubxASTpRBhtswt+mouPqeoimB8w+Zs7A0p
- jUpxbktLM6SegJp6N1GCwTTbUtgXrp3oVt4NRhlvjd66ZMcyBCXZtxVR2e71QtOG10J2
- Y/S0cEBBj6xq43jrfYk1fG2bzHO85uTCYjm2jyLsMGIu2jqyg1+ofVYF+WAAD5zq64g0
- WRWSBGgTRHB/bvJz9bpIs5nJ5TTuTlZ/DEX1KYgQYYHxfZa+nU4PPn9papuMk18hDRKT
- FtMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcENo7XfB4OX9ZmLI2IV5OdejSrpwWfFfkSLS4q70X549v8PqmpcUTDQvxx8s1aCRnE55LV3U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8coOxPID4PBMpndINy506txW6eL83WUkdCrpnK6V4PP9uDX0y
- jw//Pdj3JxrCir+Rc9/J54Jp409rUB/Y4V4pj8KpOQA+nnMHPnZ4nS/vqr+sSA+QzD99Z+8tkXO
- U
-X-Gm-Gg: ASbGnctGmnO/Taf9lo9cn/Lc/sISNzatk9PKT69tVgcSsHnJ63oUbmJeaoxmjKgspSp
- HcFL42eIidUtXXFwxg1+dC8TqDbROqLYmwLKR4ldOHldVutwbkS1Z5BZlMLt3J5yaUi/MqwZ2ln
- 5DMdmRen6IHaTsHTpaE7emt5hkyVGhUMFZGuqk57xjv+hLUO+7ojRQ1x5AKxF2WvENX9UfGH8WG
- lAnqmm9U24VLyWgJuoIK9xyidIgh8ApQ0ptUZRf0/mYj7g5aA==
-X-Google-Smtp-Source: AGHT+IFeYVX4Ah5KltzTFYifERmSQky9HUGWICzwREkjR8j6/MYdElCLodxtzZoAru0cL0gnY4Pbtg==
-X-Received: by 2002:a05:6214:2587:b0:6d4:382:6c72 with SMTP id
- 6a1803df08f44-6d45115538amr67200266d6.32.1732329698491; 
- Fri, 22 Nov 2024 18:41:38 -0800 (PST)
+ bh=qWdkdl8Vw2Iclued7UuZ9ZpIB1/iwdBzCegRZYKDF2k=;
+ b=o7N62rdvQWavBqRpGA0hfNtJ+H/z8RjeNNS3K6wswl6eLOthE8c15XLpuxRCB5df/S
+ 1KK9V2zKtCsSKoRgvRRxphBDAGpF1QZTnClPcHNWrXjTFpjnNBoJ6JT4E+NAfGkLUKOM
+ 17X5zLxciWgTOV28BUX5vdvQamfq1vHe+nIj24but4R2o2CXs78NtpKPof6A5Qe3UZfk
+ 3CaIf0hIwkAfIR3OAW9mJKfurbVHLZmFyxJqMtbjXSDXcQ0P0UJClE3zMJ0lZ+qICdPJ
+ H6Vd0PkdJFY9upu/Tw8UTuwfEngDpHodOeXuPK0dGeQGBHp/gr5eHmlB1nGU2UBEbajH
+ XqtA==
+X-Gm-Message-State: AOJu0YxM1//xu6yzUYx1kLWaaRXaTrZ/u4wTD5CEz0iv0LUyBguG4S+z
+ 84GLxYMsrOhegddOpGh/e7PgRQJ1wRytbL07y7G62kOtGkcAx3cfQqCIDX3HqlGKA6rOyqj3BJ9
+ T
+X-Gm-Gg: ASbGncvsGV8kNaRSCRXjBzpVHt21PfNSxy5WpxyIX115QBwleAxfLZgwL8T4mFA29A6
+ 7siMD736lKkPa0n7CL5bL+4/NryJoyb9CfCxnxGlsLB2C53Hm+XMo7chSWgzL+klNwAAAm9lbBj
+ elyQoMSJD48OS9WnO/XoNiKPf8XwN2j+ISjMEUt7Q/ccpF227dBK6enzW4KEqp4bxf5B+Lgx6UJ
+ R4WLRud86Lyf3koV/Z+MdVjvWnYPDvuwmelFBuF46wn0SVshw==
+X-Google-Smtp-Source: AGHT+IFQzv9KBvUaZzO/VCcp4oKg45gzbIKDIuKL7OwNk/bqu/i0Y6KmOWbBs/Sxt/zqP7KZSV20Tw==
+X-Received: by 2002:a05:6214:501d:b0:6d4:254f:1c8e with SMTP id
+ 6a1803df08f44-6d45112ef8emr78012696d6.37.1732329704871; 
+ Fri, 22 Nov 2024 18:41:44 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451a97b1asm17266226d6.40.2024.11.22.18.41.36
+ 6a1803df08f44-6d451b4c2fesm17186526d6.114.2024.11.22.18.41.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 18:41:37 -0800 (PST)
-Date: Fri, 22 Nov 2024 20:41:34 -0600
+ Fri, 22 Nov 2024 18:41:43 -0800 (PST)
+Date: Fri, 22 Nov 2024 20:41:41 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] test: unit test for hextoull()
-Message-ID: <20241123024134.GP3600562@bill-the-cat>
-References: <20241113211512.93184-1-heinrich.schuchardt@canonical.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH] net: lwip: wget: update help string
+Message-ID: <20241123024141.GQ3600562@bill-the-cat>
+References: <20241114142040.2051271-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QmMNRFZl+OWnfZu2"
+ protocol="application/pgp-signature"; boundary="9DLT9rZWcB+8B4KN"
 Content-Disposition: inline
-In-Reply-To: <20241113211512.93184-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241114142040.2051271-1-jerome.forissier@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,39 +95,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---QmMNRFZl+OWnfZu2
+--9DLT9rZWcB+8B4KN
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 10:15:12PM +0100, Heinrich Schuchardt wrote:
+On Thu, Nov 14, 2024 at 03:20:40PM +0100, Jerome Forissier wrote:
 
-> Provide a unit test for the hextoull() function.
+> The lwIP version of wget also supports the legacy syntax. Document it in
+> the help string.
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---QmMNRFZl+OWnfZu2
+--9DLT9rZWcB+8B4KN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQN4ACgkQFHw5/5Y0
-tyzHfQv8DtpNqM9nzmRO29I7pyWBJsyWXDn0gJH73dRTNSgCK9NUcdlP2DI165lR
-rtMOanH4mIOQ16O29p/oGfAEukAesYoodJmpTonzh1cT2Y03YEUBYAObgJS7Cnjt
-rrTH5g32U7jBhB9/368th/ZkXFbV1qoR8AB7SYuv5sQNarQ/5PphZUW3fyt4aLyV
-caMHgOyg1JVWynCk9KNd8nRrsWhORg2I1SxEIzJFKU4+EorEQPOgesZN9OFhpFer
-nwK7iE0jjN3viUGp2OrcASz2SqNX9bodVyKfrRLZmRrrkymbfeeLFyO3hEO7w4cg
-T48I65IlDBveUFKHaxYXwboQGZaMMvHaa8S2Gx8MXfs/WcGsuY7SJl3y1jm1M8rw
-dWc9LOFIFGKMD7usITTs+nuqhKWUBbPk04vCMkNc8y3GHf42fm+7rz4rxEWiv8Cn
-KlOm6CpaVUbn0aR8rqvVh01Lti/HuUF1AlWkTo9xYSML43UNfVhRT26RPbUVwmwh
-6po3mI+A
-=No0N
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQOUACgkQFHw5/5Y0
+tyxiFQv/c2qjgOdw/aATLcrNbWkFvbpGTY1GnApmTnWGYg6bZ9a82BmfJ46AG+tZ
+M4MHT9YmNzXVyvWiZmcGmRDy9JCv3wUxpccbGW/IxZ8n9rBIuw4bgVhjjcz8mUGR
+uIvjFvkRH1dN9Ry61SSSzraE/NEUvjhTeQZ9Tkp78HqVd+R9b8F5B64F3V3GFOl6
+0y9ZNkiNbywEWXoggXFu9WDM54JANf+Hk7p7oZgqvo8YjGL0021wOPHtQJ89dZ5M
+yn1Cdk6KF7DF1SOFO7FrksUaqJuEtiHCZrDTNE9L6hN0vBDvmh//RTE7iRlOyFtC
+u0tdikRuyQM47ApyM1Z2Ma04edzdkKEzS8W4+zekRDfrjGZfW39H6NxRLl8TqfT4
+rFnTC1KifOQxjhBjaB1Mh0ZcEGOiGhBcvvO6MuWtWd+TnG+k7eN/bX8D867ZWDem
+otedw992bxbb1hLOrDR04ZeD9bdAqmoevwolxiNqMDpzrM3/ptdh9jbTTlGIZGjr
+ePszARbT
+=J26O
 -----END PGP SIGNATURE-----
 
---QmMNRFZl+OWnfZu2--
+--9DLT9rZWcB+8B4KN--
