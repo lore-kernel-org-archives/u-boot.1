@@ -4,55 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E1EE6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC20E6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AA108943E;
-	Sat, 23 Nov 2024 17:53:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 29A16893D2;
+	Sat, 23 Nov 2024 17:56:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732380812;
-	bh=73OWqAnbvPHpbX13UH0DKmhSv6TPPIX/xOSyVjC9JDk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=OEzTiRq6Mk7zDMoE/pTjLQLh21qezEevo0sZv9Fv5fMUhVSMIPw9vb8K3oGUL/rCW
-	 YWYDqB1Qf8DkGMZpA+S60YqvTOn25HnCYKHpag+BWpqTAKEEnfmURA3PPU5m60ENGB
-	 9CLhjvRPoe81sTrmxELoiBgR+izNjEJ+7eXt7C6bue8igSSmiMsvKaOFJMx6s3UWm0
-	 4GMnuNC04RM1+EnaL1XRPl8wPTBK0K6CFDLl4Ne0hp3mpnLSof6FvLjLtqXZAZG3mB
-	 //GZwhqBr8BoTIH+nJbz5rFEgNQbKWNFylSREyxA4Ldz9+vl9HeAaWAa8yJUfwEj/l
-	 SjzI5tUHFaeMA==
-Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
- [82.131.203.244])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A3E21893F7;
- Sat, 23 Nov 2024 17:53:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732380809;
- bh=73OWqAnbvPHpbX13UH0DKmhSv6TPPIX/xOSyVjC9JDk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BBpUqhtqt20HAJxQDqPChjuwPVaSLEGla/2+DOygFLEBqTlD/HhmkhcQbWxpzm2/c
- TmAwUEl5B4bcpoJij1kb4oHfmFngKu/BGQhYGcrdWYkfyI2qQHKyAFsaK2xgfQ9W3b
- VlUyUWF6TAIwU2bu0wuU88tjwhqOEhDiPCKCuPn5MJtFThUvPF019I/8t82/VO2iWZ
- Gp3rvJdZ6lV9CLdyWP47f8rWDtEmrvdfHH5jvSawzE+hNTNttBr/nBDP5tZyHBDcAh
- lc2mFAD7X76CQr6X8uUQ2t6ptHM+DEZYunG3SbmgNSm3xIbEWMpk8GSJCUcOHu2EGd
- tcDAHl1yjePNA==
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 20/20] siemens: capricorn: update maintainers
-Date: Sat, 23 Nov 2024 17:53:04 +0100
-Message-Id: <20241123165304.100538-21-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20241123165304.100538-1-hs@denx.de>
-References: <20241123165304.100538-1-hs@denx.de>
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L7/U8UHD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EFE96893DA; Sat, 23 Nov 2024 17:56:45 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5486A893A5
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 17:56:43 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2ea45dac86eso2658292a91.3
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 08:56:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732381002; x=1732985802; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xx8WGKMP83xv+w9JYDTv54ji8HIzv8Bui3COGs/j0GU=;
+ b=L7/U8UHDhvSTmivePLN62pF3OmRWUVvDR/bNIyLZlEduvDCMQw/yLZBthvAwQVY9X/
+ b0b2Qw7G2uZGC8qVp3e9caN9vybvX5zqyqcuhuX+DnyZt0tgnZ3NdY0I/1dviRgBVEoP
+ 0tF+0knztKaIMT/IuLV7qdLnxPnaiKegiBK9Te/NIrzUSuGKxhfsS8eHiMU/eEbWuo8r
+ QsGpy1vPb/ktgiWmQEIPO9ogD0Dsp9E7HFdP+v57l1qIkgg4X2uWr2q24HJ0sTehxGIY
+ AJwWjVKMCCoeBS2VQHBDS5wsgioEReJ1BXb54ynu48S+Ha+arMgTvnB/ndZ9aEPX+QWQ
+ Hl7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732381002; x=1732985802;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xx8WGKMP83xv+w9JYDTv54ji8HIzv8Bui3COGs/j0GU=;
+ b=P/8fBGhzuAJ7Wt+d9mxrALJFFE143zxADtvR50VO76t1FDJ170L99Vqi0fMVIMqkpX
+ chubJzKGd+J5goOELzJagatdUBseMOfAo/El/oMtEM5XaZckkQXBqH+MBm+i1W0MIGwZ
+ gMLRrX8tUVcbZSOrHJ7KHmCXtdoMAFcZ1gXzKqY4D6CCJqFLOKIjidOoz5h2w4/ThO/0
+ p79jjjcDLiG/VTCE+xYJMpI9prTDaoHs+GyEsqCl3iF3uW9dyMtaxkgPbUdUreNwuuEh
+ 4zwVeqsDf+G5/S6EU6MLqnfGX4Th398pXGMtvN/FtJGA3vFzJvzdnqFdberKIo4Q4hrW
+ xXkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNyKlNWy0RvsUQkbrfMVzeDmLGaNOdfD1rLM/iVbWsaxZr9STEnSkLQFzD72ONsX16O9Hojlc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLi6Cg395OpOznIlHdWA+3/1EhQzHefQE9jKQgGydiCgkyajFH
+ DtEU4YVAPkNQsGX3TIC5kWQFIsvmg/WSM5rE80CQD2wVhaNwOwxhbDigywKq4nZ92YjedAUlzDI
+ 7Pcd32paOj3RDf4clB09tvhJjdJ9Ku+6L4h6UmQ==
+X-Gm-Gg: ASbGncuePB1iAu/IacKfQVNhksoOOEGNJfjI2RuzyZfur7b1o0J4VOUeYLNyYeYn/N4
+ DOtz0JASrSlyvsWNFvjZXodSCzjPmIQ==
+X-Google-Smtp-Source: AGHT+IGQViTXWvBK+A21oJLKX9UexGqnC1t1aGgSlHcPgAIHuXMJDlEthOOlOZcHaoWxGWqqgKpC9/AEgNr/yXjAHdU=
+X-Received: by 2002:a17:90b:3b46:b0:2ea:83a0:47a5 with SMTP id
+ 98e67ed59e1d1-2eb0e02b647mr8465667a91.4.1732381001861; Sat, 23 Nov 2024
+ 08:56:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-4-sjg@chromium.org>
+ <20241113175017.GS3600562@bill-the-cat>
+ <CAFLszTjVgz7HxO8jrvVhGORbccGCN6HHMy7fWz=FJYKrfdyQ+g@mail.gmail.com>
+ <20241123020802.26cba055@minigeek.lan>
+ <3F1F4DAC-39AC-4D17-8C92-A467FE90DA38@gmx.de>
+ <20241123130750.10729a5a@minigeek.lan>
+In-Reply-To: <20241123130750.10729a5a@minigeek.lan>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 23 Nov 2024 18:56:05 +0200
+Message-ID: <CAC_iWjK_XoqFfZRM5RFwSo9GYHDmPjEapqWSbdNdFDfcO9LNQw@mail.gmail.com>
+Subject: Re: [PATCH v5 3/8] efi_loader: bootstd: Drop bootmgr for sunxi
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,46 +100,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Enrico Leto <enrico.leto@siemens.com>
+Hi Andre,
 
-update MAINTAINERS file, add some more board maintainers.
+[...]
 
-Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
-Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> > >So while I agree that disabling efi_bootmgr sounds like a hack, it
+> > >solves the problem quite elegantly: We keep the (current) boot order,
+> > >which prioritises scripts over EFI, but still retain EFI. If people
+> > >want EFI first, they can change the order in the environment (I think?).
+> > >
+> > >Without that patch there is quite a regression for users, because
+> > >suddenly any bootaa64.efi files *somewhere* would be booted first, and
+> > >there is no way to turn that off.
+> > >
+> > >This has bitten me actually: for development I put a custom boot.scr on
+> > >an SD card which loads a kernel+DTB via TFTP from my box. And I want
+> > >that to be first, despite there being a proper EFI setup on the eMMC or
+> > >USB drive.
+> > >
+> > >So I hope that clears that up. I am not a big fan of that patch, but I
+> > >would like sunxi to be converted, and Simon seemed to be eager to do
+> > >this as well, so in the interest of not blocking this, I am fine with
+> > >that.
+> >
+> > Disabling EFI will break booting for users that rely on it (like me).
+>
+> So are you using the UEFI BootOrder variables? How do you set them?
+> Manually on the U-Boot shell, or via some Linux tool manipulating the
+> U-Boot environment file? IIUC those are the only two methods that work
+> for sunxi, since the UEFI variable runtime services are not implemented.
 
----
+I haven't followed the rest of the thread but EFI runtime does work
+since commit 00da8d65a3ba.
+Yes for now you have to manually dd the file on updates, but this is
+supposed to be solved by [0]
 
-(no changes since v2)
+>
+> In reality I am using UEFI booting as well, but entirely rely on
+> bootaa64.efi, hence bootmeth_efi is totally sufficient for me.
+>
+> > Yes, the introduction of boot standard changed the boot order and specifically deprioritizing scripts is unexpected.
+> >
+> > The priority sequence used to be
+> >
+> > scripts
+> > extlinux
+> > efi
+> > pxe
+> >
+> > bootmeth_efimgr always running before scripts be fixed.
+>
+> I agree, but with bootmeth_efimgr marked as global this is not gonna work
+> easily, at least that's my understanding.
+>
+> > bootmeth_efi should be removed from the code base as redundant.
+>
+> I wonder if a solution is to split this up: bootmeth_efimgr is only
+> looking at variables - then "glob" would be correct. Then people
+> can place bootmeth_efi at the position they want, either before the
+> scripts (allowing USB boot) or after. I think this would also solve the
+> case where bootaa64.efi is both on an eMMC and an SD card, as it would
+> pick the boot media first.
+>
+> A lot of sunxi use cases are embedded, and people mostly don't
+> want to boot from USB on for instance their TV box, just because the
+> stick with the movies and some bootaa64.efi was still in the slot when
+> they turned the box on. Even more so for truly embedded devices. And
+> that's also the default setting for PCs, I think, where USB booting
+> would need to be explicitly enabled in the BIOS.
+>
+> Cheers,
+> Andre
 
-Changes in v2:
-- add Reviewed-by from Alexander
+[0] https://github.com/rhboot/efivar/pull/267
 
- board/siemens/capricorn/MAINTAINERS | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
-
-diff --git a/board/siemens/capricorn/MAINTAINERS b/board/siemens/capricorn/MAINTAINERS
-index b4c52032cc9..5f467aa9b6e 100644
---- a/board/siemens/capricorn/MAINTAINERS
-+++ b/board/siemens/capricorn/MAINTAINERS
-@@ -1,10 +1,12 @@
- CAPRICORN BOARD
-+M:	Alexander Sverdlin <alexander.sverdlin@siemens.com>
- M:	Anatolij Gustschin <agust@denx.de>
-+M:	Heiko Schocher <hs@denx.de>
-+M:	Walter Schweizer <walter.schweizer@siemens.com>
- S:	Maintained
-+F:	arch/arm/dts/imx8-capricorn-cxg3.dts
-+F:	arch/arm/dts/imx8-capricorn-u-boot.dtsi
-+F:	arch/arm/dts/imx8-capricorn.dtsi
- F:	board/siemens/capricorn/
-+F:	configs/capricorn_cxg3_defconfig
- F:	include/configs/capricorn-common.h
--F:	include/configs/deneb.h
--F:	include/configs/giedi.h
--F:	include/configs/siemens-env-common.h
--F:	configs/deneb_defconfig
--F:	configs/giedi_defconfig
--- 
-2.20.1
-
+Cheers
+/Ilias
