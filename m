@@ -4,36 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54417E66889
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CB3E66882
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD41689434;
-	Sat, 23 Nov 2024 22:49:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B43789438;
+	Sat, 23 Nov 2024 22:49:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=srcf.ucam.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64569893AA; Sat, 23 Nov 2024 20:57:42 +0100 (CET)
-Received: from cavan.codon.org.uk (cavan.codon.org.uk [176.126.240.207])
+ id 554AC893C9; Sat, 23 Nov 2024 20:57:44 +0100 (CET)
+Received: from cavan.codon.org.uk (cavan.codon.org.uk
+ [IPv6:2a00:1098:84:22e::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F4E893D2
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 20:57:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FC22891B4
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 20:57:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=srcf.ucam.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mjg59@codon.org.uk
 Received: from fedora.. (23-93-16-71.fiber.dynamic.sonic.net [23.93.16.71])
- by cavan.codon.org.uk (Postfix) with ESMTPSA id B5A71407EA;
- Sat, 23 Nov 2024 19:57:38 +0000 (GMT)
+ by cavan.codon.org.uk (Postfix) with ESMTPSA id 9F6BA407DD;
+ Sat, 23 Nov 2024 19:57:40 +0000 (GMT)
 From: Matthew Garrett <mjg59@srcf.ucam.org>
 To: u-boot@lists.denx.de
-Cc: Matthew Garrett <mgarrett@aurora.tech>, Bin Meng <bmeng.cn@gmail.com>,
+Cc: Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/10] Use the correct ramdisk address
-Date: Sat, 23 Nov 2024 11:55:07 -0800
-Message-ID: <20241123195616.305687-9-mjg59@srcf.ucam.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 09/10] Fix efi_bind_block.
+Date: Sat, 23 Nov 2024 11:55:08 -0800
+Message-ID: <20241123195616.305687-10-mjg59@srcf.ucam.org>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241123195616.305687-1-mjg59@srcf.ucam.org>
 References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
@@ -56,49 +58,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Matthew Garrett <mgarrett@aurora.tech>
+From: Janis Danisevskis <jdanisevskis@aurora.tech>
 
-CONFIG_SYS_BOOT_RAMDISK_HIGH copies the initrd out of the FIT and into
-correctly aligned RAM, but the addresses used for this are then discarded
-by the x86 bootm code. Fix that.
+efi_bind_block had two issues.
+1. A pointer to a the stack was inserted as plat structure and thus used
+beyond its life time.
+2. Only the first segment of the device path was copied into the
+platfom data structure resulting in an unterminated device path.
 
+Signed-off-by: Janis Danisevskis <jdanisevskis@aurora.tech>
 Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
 ---
 
- arch/x86/lib/bootm.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ lib/efi/efi_app_init.c | 29 +++++++++++++++++++++--------
+ 1 file changed, 21 insertions(+), 8 deletions(-)
 
-diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-index c4446b1f9c6..cabf18fccb7 100644
---- a/arch/x86/lib/bootm.c
-+++ b/arch/x86/lib/bootm.c
-@@ -72,6 +72,7 @@ int arch_fixup_memory_node(void *blob)
- /* Subcommand: PREP */
- static int boot_prep_linux(struct bootm_headers *images)
- {
-+	ulong initrd_start, initrd_size;
- 	char *cmd_line_dest = NULL;
- 	struct legacy_img_hdr *hdr;
- 	int is_zimage = 0;
-@@ -134,10 +135,16 @@ static int boot_prep_linux(struct bootm_headers *images)
- 		goto error;
- 	}
+diff --git a/lib/efi/efi_app_init.c b/lib/efi/efi_app_init.c
+index 9704020b749..cc91e1d74b8 100644
+--- a/lib/efi/efi_app_init.c
++++ b/lib/efi/efi_app_init.c
+@@ -19,6 +19,15 @@
  
-+	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH)) {
-+		initrd_start = images->initrd_start;
-+		initrd_size = images->initrd_end - images->initrd_start;
-+	} else {
-+		initrd_start = images->rd_start;
-+		initrd_size = images->rd_end - images->rd_start;
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++static size_t device_path_length(const struct efi_device_path *device_path)
++{
++	const struct efi_device_path *d;
++
++	for (d = device_path; d->type != DEVICE_PATH_TYPE_END; d = (void *)d + d->length) {
 +	}
- 	printf("Setup at %#08lx\n", images->ep);
- 	ret = setup_zimage((void *)images->ep, cmd_line_dest,
--			0, images->rd_start,
--			images->rd_end - images->rd_start, 0);
-+			   0, initrd_start, initrd_size, 0);
++	return (void *)d - (void *)device_path + d->length;
++}
++
+ /**
+  * efi_bind_block() - bind a new block device to an EFI device
+  *
+@@ -39,19 +48,23 @@ int efi_bind_block(efi_handle_t handle, struct efi_block_io *blkio,
+ 		   struct efi_device_path *device_path, int len,
+ 		   struct udevice **devp)
+ {
+-	struct efi_media_plat plat;
++	struct efi_media_plat *plat;
+ 	struct udevice *dev;
+ 	char name[18];
+ 	int ret;
+-
+-	plat.handle = handle;
+-	plat.blkio = blkio;
+-	plat.device_path = malloc(device_path->length);
+-	if (!plat.device_path)
++	size_t device_path_len = device_path_length(device_path);
++
++	plat = malloc(sizeof(struct efi_media_plat));
++	if (!plat)
++		return log_msg_ret("plat", -ENOMEM);
++	plat->handle = handle;
++	plat->blkio = blkio;
++	plat->device_path = malloc(device_path_len);
++	if (!plat->device_path)
+ 		return log_msg_ret("path", -ENOMEM);
+-	memcpy(plat.device_path, device_path, device_path->length);
++	memcpy(plat->device_path, device_path, device_path_len);
+ 	ret = device_bind(dm_root(), DM_DRIVER_GET(efi_media), "efi_media",
+-			  &plat, ofnode_null(), &dev);
++			  plat, ofnode_null(), &dev);
+ 	if (ret)
+ 		return log_msg_ret("bind", ret);
  
- 	if (ret) {
- 		printf("## Setting up boot parameters failed ...\n");
 -- 
 2.47.0
 
