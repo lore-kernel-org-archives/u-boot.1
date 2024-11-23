@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CED0E6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38708E6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:41:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19EDD893C7;
-	Sat, 23 Nov 2024 03:41:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6CCBA8989C;
+	Sat, 23 Nov 2024 03:41:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VpcJal7n";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l1etTNHO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDE29893C7; Sat, 23 Nov 2024 03:41:22 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id B2F20893CA; Sat, 23 Nov 2024 03:41:28 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A32891E8
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:41:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CC4A893DB
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:41:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d41edfac53so18398086d6.2
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:41:19 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7b15467f383so185551585a.3
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:41:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732329678; x=1732934478; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732329685; x=1732934485; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KHonP94Qfz7u2DH5tmJNgM918hS4PrOQZoS7E2EluPg=;
- b=VpcJal7nfw43grQMxTrwDGNqipmli2TM6Rr+zlvuHhGjDR+SQTfcXPlCxdRDj2I7Vg
- GMy94bV/8OAy2e8A3cslK+EFlspY305DsmKS7FMPxrLpxs7ZYjSbiaZJ7xzHLOdO8/+u
- o0Ue0VwXp1yLAQHJqEDkokgN98BJw7nBV3GRQ=
+ bh=Az4huVuheaHXx4ujkBnRb0EqCgRMLRm+ybC3sSGokMc=;
+ b=l1etTNHO1S1vRvAREzM/iO+2uNTio/j8v6SREFDot2rg4llk/O66o/kSY/K/nM/KeW
+ hcBXcUGliYNRVF1ALKhDaB/LkzGcIKyDF3sQOZLWMe7/5UVjUikR0tpk6PzhkDHxxGb8
+ qmsgJuoIBDKD2bfszIS+hAPaoRJg8yRp9AdS0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732329678; x=1732934478;
+ d=1e100.net; s=20230601; t=1732329685; x=1732934485;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KHonP94Qfz7u2DH5tmJNgM918hS4PrOQZoS7E2EluPg=;
- b=i+xLZmkZzNTiwXkegp3I34niWwHc+pqIhA6rPyTvEmnrADLDYG31F0/hblkFYnRBjR
- i0EFgIKzuR4QeEYLVxSvAIJybxsdVVZpRV1wETBEwZFRMDBe+e5FuQ/TczQ6ce3EWpY0
- T/bPr5wdqhLk51w1LgLw+OBqRGwrMzsSol7L12Y//4f7WzR7rSfvJQ/pIZxFobIbD8MH
- SRbZ0KNcWuiLKSpH9NRUT3OQIVZI2Kvwu6lvIgk47/JDUJpGP5D8fKmiHjiAYxF6ZgIE
- FMCmCFUjVZkVwx3Y5NVtgCskWCtbjpg1VBIH7ZwjRv/a9IhmNAmUTd3txPA82kCMM/c+
- SBgg==
+ bh=Az4huVuheaHXx4ujkBnRb0EqCgRMLRm+ybC3sSGokMc=;
+ b=dSU4a773rL2RzsVbJMreN+sUa2XDzYupar5P7vPPDDEvC7jfExFWfT1sZisk9Mc8OK
+ 6PeTklvd9EKdrcqvpPUiVR7487qfMxNKJpVfGxeVyV8mKIvi3pbeMPeuXHc6Eg+BuCSZ
+ BmcnosJg6KV/VWODsiX4rNs7JX0e9Lq65Y/LAD0tQtViiF3LDXdoxwQOrdSqQehAJzIX
+ KvXAeUkZBBgX7pMRwkIBJ3eikYhMlERlnvJK3WiXvAKPl2U9sBMoEwgKWt96CLjMY2EH
+ Z//DYMUK2qAxByNO6YwK728N7f8Itk5vUAchA6r0CjH+yk42FdUBPDIa5oex609SZVW0
+ pDNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUzN3RcTSkqknGgabEPM4Vat2gii1QSt/HTsx5gvN/U7yV5Yrv1n26fKd8W8f32lxHdbfLfJA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCuBmgGrlAhMk2xBpi0yPT32EAGxtWWnaxy+n46ZLHsqjTQulb
- 3LRPhfiDaVc0u7MR6w8Y2x9jva+wQhdBeQNFAuqHCzieEoe2Yyo2AmgA7rwBYCg=
-X-Gm-Gg: ASbGncs4/+3pcMTYId8Knd29yCyondr4pjprleb02JgfBzpaXhwWOeyZfRU3NTuhVMt
- hqWkkWaVxxawdrvn0Gc/Pf/K13ZYmrgPJJQ2PeWrUCbPuhdQiXgFWTsK4JfnWiS1umcvvS4zOs9
- zUA4Eljlf1OT+Ll40aHgEAzGwA2LJsGbQOzxknmDGQTR9g72seFhU57HncxbJf+7X9RrxbHyNrs
- VAX9bbObS+gJMU/n1KOU9LR2pwKQ93SRlhPZDblaiSxfAnc5g==
-X-Google-Smtp-Source: AGHT+IEDJbhO13cnV4LKoTMlmQnpcthNIz0MDnfjSWO11rBgoxmDOelZt7942pOcUnZ72Js/eTBdEw==
-X-Received: by 2002:a05:6214:766:b0:6d4:1d9b:1563 with SMTP id
- 6a1803df08f44-6d451374123mr74449836d6.40.1732329678124; 
- Fri, 22 Nov 2024 18:41:18 -0800 (PST)
+ AJvYcCUKaycC3LiWmP7ltYlgNlanFbAvNdu9GFPnDlHwa4M3UzWvOzTaL6M3N10nZTVNJlpMpCCLcqw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw6kKTzmwIkVDnsZ3SRntDlhQybldyM2A8ugdZKMtZWpRHlejaA
+ 1786TjRNuSdhcEbOH84OhqooYA+CCFtrT/6jQmxewPuKHVV+Yc797/M3Nybj8Cwm2+yPsykJuUV
+ e
+X-Gm-Gg: ASbGnct/KMuif4uHIe7mUffm1ejGKOqyUhvy/hbN7eD9F/2+IrNZQPTuNjsJE4sSDeJ
+ 2KGLz5TgObh8eYnbyzqx4azkTNnJtatHHc5/MD2eqNmrX6wcQqSpJi4gx3YkbIosJ7jfaKN/aYL
+ 76z7XPrWKqA7TXDQqtOrl8B6xxWrrIKkS7HQOQaF3KmoySRfSPNWs07t02+ZmbEOEgCcodFkiKC
+ QBFSRLS5WeWjL14UlTMpcJJ0JSCz+jglfHJtip/KXn1WaJuCA==
+X-Google-Smtp-Source: AGHT+IF89nXEPlX8RfypBuN41PX6tYHTKCe+skvYia9N38Q5aQ/YCe3mArovh04udmXCd5PssPGK5g==
+X-Received: by 2002:a05:620a:4892:b0:7a1:e2d4:4ff3 with SMTP id
+ af79cd13be357-7b5144ba642mr607891785a.3.1732329685172; 
+ Fri, 22 Nov 2024 18:41:25 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23ec1sm17202896d6.71.2024.11.22.18.41.15
+ af79cd13be357-7b513f90436sm147364685a.6.2024.11.22.18.41.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 18:41:17 -0800 (PST)
-Date: Fri, 22 Nov 2024 20:41:13 -0600
+ Fri, 22 Nov 2024 18:41:24 -0800 (PST)
+Date: Fri, 22 Nov 2024 20:41:20 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Yang Xiwen <forbidden405@outlook.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/8] led: update LED boot/activity to new property
- implementation
-Message-ID: <20241123024113.GM3600562@bill-the-cat>
-References: <20241110115054.2555-1-ansuelsmth@gmail.com>
- <20241113180059.GV3600562@bill-the-cat>
- <67350b1d.5d0a0220.2d4a95.bc9a@mx.google.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>, u-boot@lists.denx.de,
+ u-boot-qcom@lists.denx.de
+Subject: Re: [PULL] Please pull qcom/qcom-main
+Message-ID: <20241123024120.GN3600562@bill-the-cat>
+References: <20241120173127.977520-2-caleb.connolly@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tmgZ55bWJHb9zmqN"
+ protocol="application/pgp-signature"; boundary="bD/MEWGqBC6V3gB1"
 Content-Disposition: inline
-In-Reply-To: <67350b1d.5d0a0220.2d4a95.bc9a@mx.google.com>
+In-Reply-To: <20241120173127.977520-2-caleb.connolly@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,127 +100,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tmgZ55bWJHb9zmqN
+--bD/MEWGqBC6V3gB1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 13, 2024 at 09:24:59PM +0100, Christian Marangi wrote:
-> On Wed, Nov 13, 2024 at 12:00:59PM -0600, Tom Rini wrote:
-> > On Sun, Nov 10, 2024 at 12:50:19PM +0100, Christian Marangi wrote:
-> >=20
-> > > This series is split in 2 part.
-> > >=20
-> > > While adapting the LED boot and activity code to the new property
-> > > accepted by Rob in dt-schema repository, a big BUG was discovered.
-> > >=20
-> > > The reason wasn't clear at start and took me some days to figure it
-> > > out.
-> > >=20
-> > > This was triggered by adding a new phandle in the test.dts to
-> > > introduce test for the new OPs.
-> > >=20
-> > > This single addition caused the sandbox CI test to fail in the
-> > > dm_test_ofnode_phandle_ot test.
-> > >=20
-> > > This doesn't make sense as reverting the change made the CI test
-> > > to correctly finish. Also moving the uboot node down
-> > > after the first phandle (in test.dts the gpio one) also made
-> > > the CI test to correctly finish.
-> > >=20
-> > > A little bit of searching and debugging made me realize the
-> > > parse phandle OPs didn't support other.dts at all and they
-> > > were still referencing phandle index from test.dts.
-> > > (more info in the related commit)
-> > >=20
-> > > In short the test was broken all along and was working by
-> > > pure luck. The first 4 patch address and fix the problem for good.
-> > >=20
-> > > The other 4 patch expand and address the property change for
-> > > LED boot/activity.
-> > >=20
-> > > Posting in a single series as changes are trivial and just
-> > > to speedup review process. (and also because the second
-> > > part depends on the first)
-> > >=20
-> > > All CI tested with azure pipeline.
-> > >=20
-> > > Changes v2:
-> > > - Fix handling of flat tree for phandle
-> > > - Fix test and other.dts changes
-> > >=20
-> > > Christian Marangi (8):
-> > >   dm: core: implement oftree variant of parse_phandle OPs
-> > >   test: dm: fix broken dm_test_ofnode_phandle_ot and get_by_phandle_ot
-> > >   dm: core: implement ofnode/tree_parse_phandle() helper
-> > >   test: dm: Expand dm_test_ofnode_phandle(_ot) with new
-> > >     ofnode/tree_parse_phandle
-> > >   dm: core: implement phandle ofnode_options helper
-> > >   test: dm: Add test for ofnode options phandle helper
-> > >   led: update LED boot/activity to new property implementation
-> > >   test: dm: Update test for LED activity and boot
-> > >=20
-> > >  arch/sandbox/dts/other.dts |  31 ++++++++-
-> > >  arch/sandbox/dts/test.dts  |  16 +++--
-> > >  drivers/core/of_access.c   |  61 ++++++++++++-----
-> > >  drivers/core/ofnode.c      | 124 ++++++++++++++++++++++++++++++++-
-> > >  drivers/led/led-uclass.c   |  30 +++++---
-> > >  include/dm/of_access.h     |  86 +++++++++++++++++++++++
-> > >  include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++
-> > >  test/dm/led.c              |  18 +++--
-> > >  test/dm/ofnode.c           | 136 ++++++++++++++++++++++++++++++++---=
---
-> > >  9 files changed, 551 insertions(+), 58 deletions(-)
-> >=20
-> > My main issue with the series is a lack of documentation updates, as the
-> > biggest challenge thus far has been that for example Peter couldn't
-> > figure out how to make use of this on PinePhone. We generate
-> > documentation today based on include/led.h for this API, yes? Thanks.
-> >=20
->=20
+On Wed, Nov 20, 2024 at 06:16:50PM +0100, Caleb Connolly wrote:
+
 > Hi Tom,
 >=20
-> actually quite the oppisite, led.h describe how these works and was
-> instructed to first have the options property merged in dt-schema. [1]
+> Some nice new features this cycle and a few cleanups for rc3.
 >=20
-> Here we have all the option documented under a yaml.
+> * UFS support is enabled for SC7280 and SM8150 platforms.
+> * Qualcomm dt-bindings headers are all dropped in favour of dts/upstream.
+> * The SMMU driver now correctly handles stream ID 0 and is disabled in EL=
+2.
+> * Initial support for capsule updates (using the new dynamic UUIDs) is ad=
+ded
+>   for the RB3 Gen 2 board alongside a new SCSI backend for DFU.
+> * CONFIG_PINCONF is enabled in qcom_defconfig.
+> * The vqmmc supply is now enabled for sdcard support on boards that need =
+it.
+> * A quirk is added for reading GPIOs on the PM8550 PMIC
 >=20
-> I notice there is a series from Simon that is also pushing a .yaml
-> here locally in U-Boot and I was waiting for that to be merged to also
-> include the additional entry there.
+> CI: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipeline=
+s/23474
 >=20
-> Also led.h description and API have info on where to look about the
-> handling of /options/u-boot/
+> Previous CI run prior to rebase: https://source.denx.de/u-boot/custodians=
+/u-boot-snapdragon/-/pipelines/23364
 >=20
-> I feel the main problem with documentation is currently the fact that we
-> are migrating to a more robust schema and people are used to using Doc
-> directory? Anyway happy to get any hint on how to improve this.
+> The following changes since commit 8573ea4105829b9a915b23f56d1577b3f09ed9=
+18:
 >=20
-> [1] https://github.com/devicetree-org/dt-schema
+>   Merge patch series "labgrid: Provide an integration with Labgrid" (2024=
+-11-13 16:39:19 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git HEAD
+>=20
+> for you to fetch changes up to 7aad7833323aa9260935d172744a50f56356d52a:
+>=20
+>   treewide: remove Qualcomm dt-binding headers that are available upstrea=
+m (2024-11-20 17:57:58 +0100)
+>=20
 
-So Peter, does this bring you what you were asking for in terms of
-details, or can you explain what's still missing from your point of
-view? Thanks!
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---tmgZ55bWJHb9zmqN
+--bD/MEWGqBC6V3gB1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQMkACgkQFHw5/5Y0
-tyzGwAwArzujcpFYl5dSMsmzNHengASaA2m6a5ofoYFqt4j2QZB0bz+jSA7ra9ps
-r7n4Ff8RmIbwu4iye+3m1QjP2jF/S9rBgliUfPW6L5nbdGAq8yl31Ew/TpQgES5e
-mWznFfPoakT3XolecwNccZ07slkpCAK6x179UKmsV/5nzUXaCfRlYl7G9tsWF8vG
-Qhr6361ri1Abo5sbCO5YosJv3htxePfWFfVbZVnYoLyges5nsZmWL6pbIDJZAgWf
-oPIGWS97JnvGHc7e0UwFuyfnTo/uBwT47BFUahBi4uhyfgALtrAG7GC90/XlBaVU
-7LpkpEjNp6x+0iIFjnvihtyJ7vqIatW38LNyq6KOsVJMqswLI/ulEX6DbdSsuxL8
-u8Otb//5GvFSiRIz75SQX7xL25heMobYG2xK953+StMiwqW2PA6VbjKgrb0tz1Fm
-whdS0dOmzOjbLodWSYTKw1KVEM4EQ/wFzAq/WuH0ddJy3W9hMgGizCsEnS07cj9N
-qA5M20h4
-=CxO5
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQNAACgkQFHw5/5Y0
+tywcPAv+Jsb5hbhHMSMMntMgydvWPb8hfoaV1yIV8tAh3TsOMgW/g8HU2fBbPInU
+5zDbVN+lelDMlTKXONTCZpt5aOUAosKitI9V/kYLHx2gEBGdxLEB0fRVtrehOspQ
+bVoANEPnGoKKoaepH3Y0PFH3s3Ls5/BUFtikm906J1TQlgz9h7JnUCwlzRPY204l
+0lAo5Xgti2qw64n16WORikY0AGGJ9w93nk8Mjpm3xyA+xTg8gZq+jwtoa0aTLuZ+
+2irSF/rce4SAa47LPHzkdeE4Xz0xsJdl+Jz3k5+DjHqLYWkMWC6jyXRlGBJM5FJr
+y0ltbBLwqdt96hkBDu5PdFzg4zE2rn28nuKF6DPSVmLVQIx8nUKVezux1BstjIx3
+rZsFbGIrPVdgITUx+tjt4ToBgFzHhHB/xmouuy/WifBFrqIoiuNU142RfHLIxiHw
+nzI+u4MDSnF+p5kUhz/JPrGMf5B0APeI8c5TGkBq3LTQWT3pys2SIu/t4oAIBxCp
+kT1fr98z
+=nLAA
 -----END PGP SIGNATURE-----
 
---tmgZ55bWJHb9zmqN--
+--bD/MEWGqBC6V3gB1--
