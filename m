@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93442E6ADE3
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 096E2E6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:55:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AC3D89432;
-	Sat, 23 Nov 2024 17:53:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9688F893FA;
+	Sat, 23 Nov 2024 17:53:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732380806;
-	bh=SQ2HNFmU5CeNjCvguMAiwL608DQT6l7Ng/l18yH8wzE=;
+	s=phobos-20191101; t=1732380810;
+	bh=Ms/tNQ8u2x1HQWho6Vn6v+8ePrA+9+gmWrNSAmJVT2Y=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ks69PWbo0v8/C1euQcscRnXO/fadjLNoM+2RuRokXpJvuhmHJ08DcAXEyROgxo3fE
-	 IbYs034oHjr3HHmeCpXUCOZag5uNkKGpeXTvVnvpHxCZM7SNqFPBLV9ofi/q4DVEak
-	 rnS4JpCq5vPfFsmlL35KbMBnHdHNrCLL6s42E/PqK9IubSh+WyAgNwvoi/s0gPXqQY
-	 ZXjL23C04bMfQjru8zCordSPDNEp9NRnK6T6YOKN2725FBN7zN4cqqREVRNH+c8UU8
-	 x8KPDwdRvClT1Hq5jkBUEEtHK8mQ49CMJBehONRzZthUyaNMGOCoivqnozf7neULTn
-	 44385JglAzAZQ==
+	b=PC7+gHiaiTDkedzaMyaa5hdbhfLKXhY9TAxpEcB98tD/ytZKfLmZOTDEq67D8Zv3m
+	 V6Ah39uAJXCXG94Ji9IOM/Kifj0YSA1YGbo8sqN4vvtDn3SCqwVX+ajNwJeucJo3ED
+	 M3LzUumHDItQprQGhnyAnwiKp13iSngwAjWC7oK5acNx/cYrxzLCf7rB4AHbGK/5Hp
+	 fOJUfIpxYtvFCm6NlgnYZFPZaouar2yvYXk8uzDFbGF63bnd463zAe9U+DLPHugDvn
+	 b63FLq6+/wahEEEhfd28QEZ3RZIDxeU+gGk5vRVp0tvMWxMmAgorwGAKm7+V9sP6+o
+	 2JSRc8kzoBtpg==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 844CC88EAF;
- Sat, 23 Nov 2024 17:53:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 661D289364;
+ Sat, 23 Nov 2024 17:53:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732380804;
- bh=SQ2HNFmU5CeNjCvguMAiwL608DQT6l7Ng/l18yH8wzE=;
+ s=phobos-20191101; t=1732380805;
+ bh=Ms/tNQ8u2x1HQWho6Vn6v+8ePrA+9+gmWrNSAmJVT2Y=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=N/0n+DeCrZe+lp6zs5FxPTA+4LBJDWmAcnSULHcfe1Ohd0+6nV7sWJBsYzZoo20uQ
- nKBJF6YPyvka0rRr8LJYBkKp1ntdQYykMn9rNXS6LfrwSc0Gt0wOJ3vWwc3WPB6HuF
- WEEtLgMa6+Q+aXf5TuTIpHVKYfO6jcM7+MBFTHcsqtVslcpBYrt2jqDApQQqM3qD2Z
- YRQiPtvbBz0n+2jKXLrafSQhoPX/8RJGTITPypUQJCZkfpX00BdyTi/7fiwwlVcJel
- 2/f50hlWynGLB3duZjN9vctp8OEeV2ADktRWBc1ZQfMs4GRPQDPoCmOIABgJhB6Xle
- r2bkKpAkH8tzw==
+ b=sPor6PiYhDlxIaiJnFSzqAuyp7zSlcur/WSvw+dpHCY5z3KqPk1fDvZXYmZsqy/y3
+ 62s22KjLabqi+WgC2W1z+12UmqLijyXy3b2QvM889FiNENotKRw4TozZlVUrsxojhm
+ 9h718CR2CjxjysfAC6X9spi4RL0OS0ohyqd+yeP4OTIdVmhvwtvF3mkJuKyB0JOu8U
+ J96A4zUBYnkAgLNdg4a6wc5Dn7ssgUfN6AVF2aOYZ9FX85fZpaW0AFbs4Z1k5knWQ6
+ hUinYSjfQOZqDtWqwgFzIvPcSDHKY4cxxWPaG5dS26gHytSnJBEiaoPalzeE1aGzRv
+ pGB2RF9OTuBZA==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Alessandro Zini <alessandro.zini@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>,
+ Alessandro Zini <alessandro.zini@siemens.com>, Heiko Schocher <hs@denx.de>,
  Anatolij Gustschin <agust@denx.de>, Michal Simek <michal.simek@amd.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 14/20] siemens: capricorn: small board updates
-Date: Sat, 23 Nov 2024 17:52:58 +0100
-Message-Id: <20241123165304.100538-15-hs@denx.de>
+Subject: [PATCH v4 15/20] siemens: capricorn: add HW version information to
+ boot log
+Date: Sat, 23 Nov 2024 17:52:59 +0100
+Message-Id: <20241123165304.100538-16-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241123165304.100538-1-hs@denx.de>
 References: <20241123165304.100538-1-hs@denx.de>
@@ -71,54 +72,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-with newest SCFW build_info() works now, so call it
-from checkboard() now.
+From: Alessandro Zini <alessandro.zini@siemens.com>
 
-As we only use uart2 as console, do not init uart0.
+Add the HW version read directly from EEPROM.
 
+EEPROM chip data structure is now in a .h file common to draco
+and capricorn.
+
+Therefore move out the definitions in draco board to siemens
+common place.
+
+From: Alessandro Zini <alessandro.zini@siemens.com>
+Signed-off-by: Alessandro Zini <alessandro.zini@siemens.com>
 Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
 ---
 
-Changes in v4:
-- add Reviewed-by from Alexander
+(no changes since v2)
 
 Changes in v2:
-- add comments from Fabio
-  rename subject line and rework commit message,
-  alse remove unneeded comment in checkboard()
+- add comment from Fabio
+  add From line, as patch is from Alessandro
+  fix typo in commit description: drace -> draco
+- remove CONFIG_XPL_BUILD in board_init as
+  board_init is not called from SPL.
 
- board/siemens/capricorn/board.c | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ board/siemens/capricorn/board.c | 21 ++++++++++++++++
+ board/siemens/common/board.h    | 44 +++++++++++++++++++++++++++++++++
+ board/siemens/draco/board.h     | 10 ++------
+ 3 files changed, 67 insertions(+), 8 deletions(-)
+ create mode 100644 board/siemens/common/board.h
 
 diff --git a/board/siemens/capricorn/board.c b/board/siemens/capricorn/board.c
-index ad474d9baa0..bf04f12c75b 100644
+index bf04f12c75b..decac63db3b 100644
 --- a/board/siemens/capricorn/board.c
 +++ b/board/siemens/capricorn/board.c
-@@ -63,8 +63,7 @@ int board_early_init_f(void)
- 	sc_pm_clock_rate_t rate = SC_80MHZ;
- 	int ret;
+@@ -26,6 +26,7 @@
+ #include <asm/arch-imx8/clock.h>
+ #endif
+ #include <linux/delay.h>
++#include "../common/board.h"
+ #include "../common/eeprom.h"
+ #include "../common/factoryset.h"
  
--	ret = sc_pm_setup_uart(SC_R_UART_0, rate);
--	ret |= sc_pm_setup_uart(SC_R_UART_2, rate);
-+	ret = sc_pm_setup_uart(SC_R_UART_2, rate);
- 	if (ret)
- 		return ret;
+@@ -278,6 +279,26 @@ int checkboard(void)
  
-@@ -271,11 +270,7 @@ int checkboard(void)
+ int board_init(void)
  {
- 	puts("Board: Capricorn\n");
- 
--	/*
--	 * Running build_info() doesn't work with current SCFW blob.
--	 * Uncomment below call when new blob is available.
--	 */
--	/*build_info();*/
-+	build_info();
- 
- 	print_bootinfo();
++	struct chip_data eeprom_data = {};
++	int ret;
++
++	ret = siemens_ee_setup();
++	if (ret) {
++		printf("'siemens_ee_setup' failed, ret: %d\n", ret);
++		goto skip;
++	}
++
++	ret = siemens_ee_read_data(SIEMENS_EE_ADDR_CHIP,
++				   (uchar *)&eeprom_data,
++				   sizeof(eeprom_data));
++	if (ret) {
++		printf("'siemens_ee_read_data' failed, ret: %d\n", ret);
++		goto skip;
++	}
++
++	printf("HW Version: %s\n", eeprom_data.shwver);
++skip:
++
+ 	setup_fec();
  	return 0;
+ }
+diff --git a/board/siemens/common/board.h b/board/siemens/common/board.h
+new file mode 100644
+index 00000000000..db34bc78711
+--- /dev/null
++++ b/board/siemens/common/board.h
+@@ -0,0 +1,44 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Common board functions for siemens based boards
++ * (C) Copyright 2022 Siemens Schweiz AG
++ */
++
++#ifndef __COMMON_BOARD_H
++#define __COMMON_BOARD_H
++
++/*
++ * Chip data
++ * Offset in EEPROM: 0x120 - 0x14F
++ *
++ * -----------------------------------------------------------------------------------
++ * | Address range |                          Content                                |
++ * -----------------------------------------------------------------------------------
++ * | 0x120 - 0x123 |  Magic Number - 0x43484950 (4 byte)                             |
++ * -----------------------------------------------------------------------------------
++ * | 0x124 - 0x133 |  Device Nomenclature (15 + 1 byte)                              |
++ * -----------------------------------------------------------------------------------
++ * | 0x134 - 0x13A |  HW Version of the form "v00.00" (6 + 1 byte)                 |
++ * |               |   - First 2 digits: Layout revision (starting from 1)           |
++ * |               |   - Last 2 digits: Assembly variant revision (starting from 1)  |
++ * -----------------------------------------------------------------------------------
++ * | 0x13B - 0x13F |  Flash Size in Gibit (4 + 1 byte)                               |
++ * -----------------------------------------------------------------------------------
++ * | 0x140 - 0x144 |  Ram Size in Gibit (4 + 1 byte)                                 |
++ * -----------------------------------------------------------------------------------
++ * | 0x145 - 0x14F |  Sequence number, equals DMC-code (10 + 1 byte) [OBSOLETE]      |
++ * -----------------------------------------------------------------------------------
++ */
++
++#define MAGIC_CHIP		0x50494843
++#define EEPROM_CHIP_OFFSET	0x120
++
++struct chip_data {
++	unsigned int magic;
++	char sdevname[16];
++	char shwver[7];
++	char flash_size[5];
++	char ram_size[5];
++};
++
++#endif /* __COMMON_BOARD_H */
+diff --git a/board/siemens/draco/board.h b/board/siemens/draco/board.h
+index 935f340a8f2..77f35a6ab7b 100644
+--- a/board/siemens/draco/board.h
++++ b/board/siemens/draco/board.h
+@@ -11,6 +11,8 @@
+ #ifndef _BOARD_DRACO_H_
+ #define _BOARD_DRACO_H_
+ 
++#include "../common/board.h"
++
+ #define PARGS(x)	#x , /* Parameter Name */ \
+ 			settings.ddr3.x, /* EEPROM Value */ \
+ 			ddr3_default.x, /* Default Value */ \
+@@ -18,8 +20,6 @@
+ 
+ #define PRINTARGS(y)	printf("%-20s, %8x, %8x, %4d\n", PARGS(y))
+ 
+-#define MAGIC_CHIP	0x50494843
+-
+ /* Automatic generated definition */
+ /* Wed, 16 Apr 2014 16:50:41 +0200 */
+ /* From file: draco/ddr3-data-universal-default@303MHz-i0-ES3.txt */
+@@ -43,12 +43,6 @@ struct ddr3_data {
+ 	char manu_marking[32];			/* "default \0" */
+ };
+ 
+-struct chip_data {
+-	unsigned int  magic;
+-	char sdevname[16];
+-	char shwver[7];
+-};
+-
+ struct draco_baseboard_id {
+ 	struct ddr3_data ddr3;
+ 	struct chip_data chip;
 -- 
 2.20.1
 
