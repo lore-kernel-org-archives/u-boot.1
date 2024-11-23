@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784BBE6ADD9
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3963AE6ADDE
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 04:07:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0213B893DF;
-	Sat, 23 Nov 2024 03:43:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F5CE89384;
+	Sat, 23 Nov 2024 05:07:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aisKGXrn";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qttpuUaT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2E0B893DF; Sat, 23 Nov 2024 03:43:07 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8BD3A893CA; Sat, 23 Nov 2024 05:06:59 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF79C898A2
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:43:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1117289383
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 05:06:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7b1457ba751so171165785a.3
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:43:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732329784; x=1732934584; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LFDKLDEcRLy4BuaQ7gJuKTriyKujTpfdvD6ZRwdvGB4=;
- b=aisKGXrncrpL8SQN986ftjOWnJ15sMrnn7QsaNp7xgKeGdMFmy4+nxjIT8SS/zWh6h
- soFwF3R3M6uNUl68u2R9gMMrMp3ZcGNpxPIhFJWXhokUauUyO6oJ1VSMzZ/vKUpE7fz7
- Afgl7P/mhcHOS/LBGiKYo92ui/m/8Na+V7po8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732329784; x=1732934584;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LFDKLDEcRLy4BuaQ7gJuKTriyKujTpfdvD6ZRwdvGB4=;
- b=bjT/GiE/gBqpWkQyJ2RxsY88tBr+w2LylGK76Cu3Jzl1m0kvnOPck442NcfbvpDYQV
- pgnvjUQn02rRJEfLUivI+X+Q2607I8StzatX5uRBMwNfiydn5UbhnuVZeMbodl8U4eZY
- UzcJb87TdWQd59Qp5+9ihfD8Tl3xum+WzohfrEyxWVlPKmKYyN/N0x7ic1T4z872XrS1
- 7eZz2sTn9EuZ6ct6TxJ1SgUYU7pngdJq63qY98HH90N6cYCz1T1QT4h3jbogzQylv5+J
- sNqga7BZqHtaqUEyOO+czqx+ZwTHg8KZM95DXSC/SK4kv1rsOAgK+X1PS9c8+9aRy/jG
- Uzmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVAcZe7QDKswXGYj9LzM6Ujl94ki+nw6JNsiDMqhBcLU17lAkSgvxDd3M0sZaH+9YUS5j7xpDM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzHrlRsu4l7jEL5fn5R1ikP49zOloqlF8gi8j8rBAhc9uSi+Dt8
- IiDeZCD++YpA1r+2vN8yR5+YcYEMneMOyaQMB4wwbx9fiH/yxNzwztn9dK+U8QRXfjg1n98na9X
- Y
-X-Gm-Gg: ASbGncsRMMpPozE6MbZ9R+cK8jUzj8qr4E5ZlOSQWIWefZYxPTdCz993vduhfY1BHTY
- 718vyJUQWFwSO/l3CAdR4ZvrW80cAaBu0n9AzRmTVxkJRMn8mxtWYwPT97lLifFoL4N+s8sw2kJ
- 5uX1QrlPhhUE9kBQxhc91KAqIsMG+/J5/H+5N8LZiG326IHCVA8BJDQ1A6MYybI9dXqNWz7+hKm
- XjB42PtmKHmFptvz+dFKs7sSuiF3T+kao7meabqa1JdC4kR1A==
-X-Google-Smtp-Source: AGHT+IGfmsSfVzJUJVM7kpthKRUBz8pXxeC/HpwkJK53i4IeDWaWVi/26BERxAAoIjb0OvnUPBcVcg==
-X-Received: by 2002:a05:620a:bc6:b0:7b1:462f:46f7 with SMTP id
- af79cd13be357-7b514539249mr825955785a.30.1732329784636; 
- Fri, 22 Nov 2024 18:43:04 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b513fcc51fsm146632285a.65.2024.11.22.18.43.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 18:43:03 -0800 (PST)
-Date: Fri, 22 Nov 2024 20:43:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] test: boot: Set DM|SCAN_FDT flags for
- bootmeth_{cros,android}
-Message-ID: <20241123024300.GY3600562@bill-the-cat>
-References: <20241122-bootstd-test-fix-multiple-bind-v2-1-b7643b59402c@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732334811; x=1732939611; i=xypron.glpk@gmx.de;
+ bh=0+LtG0Rckg0nPlGplG95yV+CdX3x4cv7pJgusIjFoNE=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=qttpuUaTJtFUItKds5XexxsA2Yh4JnYmvi2/AIFRvWT+7vXndn0oRBxp0hnuSBAt
+ EjoyF0bo3vSC8nT5LpWutSSW9n1isooniOTBCZIGXbm33xBDwjxyqRumZ3RZoWCLC
+ u6x5IyeQTU3Mprr5cu4BOCuPcqyJoXGMCqXsEgDRpuJ/xY4UzSVbdlBlCidcYqqRa
+ CL/rDIHiBPNszL5/6lnmRFdYTZeF+NuMtyS4lcj4ja9OM18gx6oCMtFDXm7qh7NjK
+ 2YItyKCiaRc9B876JHWkDhsgfif276Mct941UHOK2qYdzPrKbTeKZfru45PM03kB/
+ XfJQQ3zaWQcJhMAUvg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.107.241]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M5QJJ-1tFWMo1WdR-00Bo5A; Sat, 23
+ Nov 2024 05:06:51 +0100
+Date: Sat, 23 Nov 2024 05:06:49 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH v5 3/8] efi_loader: bootstd: Drop bootmgr for sunxi
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241123020802.26cba055@minigeek.lan>
+References: <20241113150938.1534931-1-sjg@chromium.org>
+ <20241113150938.1534931-4-sjg@chromium.org>
+ <20241113175017.GS3600562@bill-the-cat>
+ <CAFLszTjVgz7HxO8jrvVhGORbccGCN6HHMy7fWz=FJYKrfdyQ+g@mail.gmail.com>
+ <20241123020802.26cba055@minigeek.lan>
+Message-ID: <3F1F4DAC-39AC-4D17-8C92-A467FE90DA38@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mUBl5TMBpIAhYDPN"
-Content-Disposition: inline
-In-Reply-To: <20241122-bootstd-test-fix-multiple-bind-v2-1-b7643b59402c@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+/Zyva0rqyLK/Zhz3ZR8UhUZ1XAjqWxW6m8duMZw3dogdC+9Go7
+ BZgileN62GlWifYFxDnvZOMsJy4Ak+OTYgGM4XyNoZEXD6BqzUNJpz3ohc22jdqT8/cjyqO
+ bWnRj747vfY2OeawV8P8dOSIutdKnWYguvaxR2/CCe4z/k1SLOuOwxb4odaiuEuFTr6+IYl
+ 46IHQnU/1XSawAGMABAUg==
+UI-OutboundReport: notjunk:1;M01:P0:QGbQ3PQyLEc=;tFT08N1N6vwStXboDkMs+1y5c4b
+ uE7LU/G9k+1fKFsijVVH3GRXOrEpoSC102Apx70BF+38Cd+dE2s8IQ7yJ01+4wBKolkL/zzvP
+ eUdNbuBrp8xm4nCqa9XUgjAX6u2h8OGYYqLoNFqXYotpkVeBWYYwBHw5B/7G9ptWAA6hMW0HS
+ BgDzft4+RozyiUnMLWsp9gTX7oaJz2zn0nc5FebVsqFbthvY+zOxyrStHSGLnFjOGGURqSa0m
+ wnCGanOhB7PpSVzK1v659iCBkKEYU/XxYjpHEN3jbWc0BcPzwmYTZEfDG16qJ8obQ+oJcA2Yy
+ zyMM5cpQLQg9w3vgWc6RbaxXFX36ykzepnT0kM9fiRSBFN3LiKWMY/OkcGvTb5rYyDt4SUJw3
+ lWEg+M6Ahbkn9ldrO6NbpzPQjfECkgMSzwHYKISQA/YRHwI6CfbPGEg62HbBpz6YT/hfTbCNY
+ l0YUTly26hIJKX1r2HJaKEbqziWkmvhdc/1Aq4nO+IzfmYU+MtwYILxIj+5JE1/2HX2J/nvYF
+ nvDdzwOdDFIaRNSLz3VRioSXUBIXq8pByA64Kk1cjHZ+yWE+7Bc8RN+t94d33T58sbtK6od28
+ +TvUCG4VSCk/acCEmjmqEDfri3prZBGPzFNOJQFj0lnJeR0l3TlbIARO5Dzs+Uh9wO+PChK6W
+ kQ/PVwue6fqsSAn9eF47szrbksqVkwZ6yefxqYjXltkJpZP8vqR+l0EapcuhX0MnndAdiAj+D
+ Qew2OOBrUfu04pwCf1FDO4RreGYfbKFMjOsIbFsdAn7YekwcvM5o1FJ2qbFc4frZ/GHW3MG0S
+ nUHKYsdoyFKBiWdHgKJQv//nhmset2dtd3lBlVHvAkLkuxEkdeOKyXDq5x+OfBykpZCcxdJBD
+ GpL3wuQWq1GDXVRYsTBMxQgSXTUVra6/1chDillno0QveDxoYeDzW3Qyu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,70 +99,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 23=2E November 2024 03:08:02 MEZ schrieb Andre Przywara <andre=2Eprzywar=
+a@arm=2Ecom>:
+>On Fri, 15 Nov 2024 07:21:53 -0700
+>Simon Glass <sjg@chromium=2Eorg> wrote:
+>
+>Hi Simon, Tom, Heinrich,
+>
+>sorry for the delay, I was away=2E
+>
+>> On Wed, 13 Nov 2024 at 10:50, Tom Rini <trini@konsulko=2Ecom> wrote:
+>> >
+>> > On Wed, Nov 13, 2024 at 08:09:33AM -0700, Simon Glass wrote:
+>> > =20
+>> > > This causes problems with the boot order, so drop it until we can f=
+igure
+>> > > out a better way to know when bootmgr should be used=2E
+>> > >
+>> > > Link: https://lore=2Ekernel=2Eorg/u-boot/20241112171205=2E4e80548d@=
+donnerap=2Emanchester=2Earm=2Ecom/
+>> > >
+>> > > Signed-off-by: Simon Glass <sjg@chromium=2Eorg> =20
+>> >
+>> > I would really prefer a short summary of the contents of the link in =
+the
+>> > commit message=2E I'm not NAK'ing the patch as-is, but it would be he=
+lpful
+>> > when revisiting this if there was a short explanation of the problem =
+to
+>> > solve here and not just "problems with the boot order"=2E Thanks=2E =
+=20
+>>=20
+>> The summary is that sunxi supports FEL (USB boot) but bootmgr is not
+>> aware of it, so boots the OS instead=2E
+>
+>So that's not the problem: FEL is working fine, since it's marked as
+>global, same as efi_bootmgr, but with a lower order number=2E The problem
+>is that the higher priority non-global methods (scripts) are "ignored"=2E
+>
+>So this is the list without this patch:
+>Order  Seq  Name                Description
+>-----  ---  ------------------  ------------------
+>    0    0  extlinux            extlinux
+> glob    1  fel                 FEL
+>    2    2  script              script
+> glob    3  efi_mgr             EFI bootmgr flow
+>    4    4  efi                 EFI
+>    5    5  pxe                 PXE
+> glob    6  vbe_simple          vbe-simple
+>-----  ---  ------------------  ------------------
+>
+>The sequence looks roughly alright, only that it's not the actual
+>order, since "glob" takes precedence=2E So the actual order is:
+>fel -> efi_mgr -> vbe_simple -> extlinux -> script -> efi -> pxe
+>And that puts efi_mgr before extlinux and script, which is not what we
+>want, because efi_mgr finds bootaa64=2Eefi *somewhere* (eMMC or SD card o=
+r
+>USB stick) and uses that, even when there is a tailored boot=2Escr or
+>extlinux=2Econf on the *boot media* which should be higher priority=2E
+>"fel" being first is fine, since it's *only* triggered if someone
+>deliberately uploaded a boot script via USB: in this case they surely
+>want to execute exactly that=2E
+>
+>So I think the underlying problem is the "glob" tag for efi_mgr PLUS
+>the fact that it scans all media for bootaa64=2Eefi files=2E I think it
+>would be fine if efi_mgr would just consider EFI boot order variables,
+>and would ignore any "removable media" default files (bootaa64=2Eefi)=2E
+>The "efi" bootmeth does the scanning as well, and it's fine there,
+>since it's lower priority, so we can still boot EFI systems=2E
+>
+>I guess it would make sense if an installer on an USB stick should boot
+>even if there is something on the eMMC, for instance=2E But we want to
+>control that, and we can't, because the order is ignored due to the
+>"glob" flag=2E
+>
+>So while I agree that disabling efi_bootmgr sounds like a hack, it
+>solves the problem quite elegantly: We keep the (current) boot order,
+>which prioritises scripts over EFI, but still retain EFI=2E If people
+>want EFI first, they can change the order in the environment (I think?)=
+=2E
+>
+>Without that patch there is quite a regression for users, because
+>suddenly any bootaa64=2Eefi files *somewhere* would be booted first, and
+>there is no way to turn that off=2E
+>
+>This has bitten me actually: for development I put a custom boot=2Escr on
+>an SD card which loads a kernel+DTB via TFTP from my box=2E And I want
+>that to be first, despite there being a proper EFI setup on the eMMC or
+>USB drive=2E
+>
+>So I hope that clears that up=2E I am not a big fan of that patch, but I
+>would like sunxi to be converted, and Simon seemed to be eager to do
+>this as well, so in the interest of not blocking this, I am fine with
+>that=2E
 
---mUBl5TMBpIAhYDPN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Disabling EFI will break booting for users that rely on it (like me)=2E
 
-On Fri, Nov 22, 2024 at 03:11:34PM +0100, Mattijs Korpershoek wrote:
+>
+>Cheers,
+>Andre
 
-> We make fewer calls to dm_test_restore() since
-> commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests=
-()")
->=20
-> Because of this some valid test combinations are now broken:
->=20
-> $ ./test/py/test.py --bd sandbox --build -k test_ut
-> $ ./test/py/test.py --bd sandbox --build -k "bootflow_android or bootflow=
-_cros"
->=20
-> Shows:
->=20
->   Expected '  2  cros         ready   mmc          4 mmc5.bootdev.part_4 =
-      ',
->   got '  2  cros         ready   mmc          2 mmc5.bootdev.part_2      =
- '
->=20
-> Here prep_mmc_bootdev() is called twice and it will bind bootmeth_cros tw=
-ice.
->=20
-> Since bootmeth_cros is bound twice, 'bootflow scan' will find 2x the
-> expected bootflows.
->=20
-> Before
-> commit fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests=
-()")
-> this did not happen because a cleanup was called each time.
->=20
-> Add UTF_DM and UTF_SCAN_FDT flags to both tests to make sure that the
-> bootmeths are unbound after the test finishes.
->=20
-> Fixes: fbdac8155c89 ("test: Expand implementation of ut_list_has_dm_tests=
-()")
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Yes, the introduction of boot standard changed the boot order and specific=
+ally deprioritizing scripts is unexpected=2E
 
-Applied to u-boot/master, thanks!
+The priority sequence used to be
 
---=20
-Tom
+scripts
+extlinux
+efi
+pxe
 
---mUBl5TMBpIAhYDPN
-Content-Type: application/pgp-signature; name="signature.asc"
+bootmeth_efimgr always running before scripts be fixed=2E bootmeth_efi sho=
+uld be removed from the code base as redundant=2E
 
------BEGIN PGP SIGNATURE-----
+Best regards
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQTQACgkQFHw5/5Y0
-tywKGAv/YzfiQIy2FyG7ns3Da4zlSbLkP2/6vshvtqjv19bN0NQlwJBP9Me/i5v9
-c98uYXT71HcrnOcql/sPxTJ16cxYJ2zW1fkRsqnLPRzedSTMTZFffg8nNHEnMn9/
-U3DMrsDtvsTjLYDXYxYy3Z8MKAEwISIH3Zgifk9J+WZNdUIfTMWU7a+49/OWA5oy
-G1dfLvNwOWM/izIBabOMZx09zdbX7+1fPp4SzrSIt+6jEwDssWLEo116Zn8pw+Zp
-H3M5x2qa2+PeT+cKEwPVI3bVT5W5Rs3LBN3mJhJ8QckzcjeX4cihXQuwejTAhOaW
-e1GgjTecjxKqOJLUXFtxR4bgkZLlh6jZiQXe1IYJlpTODUIJvhI/4k5DhvNr1Pu/
-kyFN+kP8/jLP+KuLYQ1fv7YJ08oyC1myJoB+Fs8kDq0Wsek1ZBA9239OVDWGuaF0
-WIaygCMkfrM5Ra+BOQLYU+6PswxAFMqhJveFAITejZftRYFYCusptvnl6ndym8Lr
-EbJtiA4b
-=R+iA
------END PGP SIGNATURE-----
+Heinrich
 
---mUBl5TMBpIAhYDPN--
+
