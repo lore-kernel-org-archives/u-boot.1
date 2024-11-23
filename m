@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45372E6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ED15E6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 02:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C00C893D0;
-	Sat, 23 Nov 2024 03:42:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C20A893C7;
+	Sat, 23 Nov 2024 03:42:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SvGrZrdL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="obJYaHTY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 825708981B; Sat, 23 Nov 2024 03:42:26 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 7C8CB893C7; Sat, 23 Nov 2024 03:42:33 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65DFF891E8
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:42:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F7AB891E8
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 03:42:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d41f721047so18890006d6.1
- for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:42:24 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6d41f721047so18890646d6.1
+ for <u-boot@lists.denx.de>; Fri, 22 Nov 2024 18:42:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732329743; x=1732934543; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732329750; x=1732934550; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DZV8h5ns9tE9sk3kmaBwQLAMSsre0zQH+laiDCUlpbk=;
- b=SvGrZrdLdb4/R7MsL8k0S1yt8OXQKECL1WYUvrm8YQhYaiT6qcy8BK4PqHt2sav7GO
- 9Z2BoNPfOFdDFnIk515SUzaPk8miVpPLjRfsVq0i56PuEbjLUt9wFvVllXwTlRDXbnb7
- 3wqjRyYHrdJZC9mqgfYany7TP+va6ecQXIn10=
+ bh=I0yzvwqOxzVpQc01EB+UqvaO6OA4YdR2bBIUWXeoeTU=;
+ b=obJYaHTYth6x9b/p4+9+qN/hYYUW9lC3NI0NjmP67UIFaLW5fvsaMwAVyvw02HxK6n
+ lIvbXVQEcLII3Kx3YJQJeChdSvEer81U9JacOZJ8rg6Ts1KB55hyeQInjP4gZCDkihsD
+ APSHxKdxFDKGX/4OjTxBrewKx4METQL967D+0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732329743; x=1732934543;
+ d=1e100.net; s=20230601; t=1732329750; x=1732934550;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DZV8h5ns9tE9sk3kmaBwQLAMSsre0zQH+laiDCUlpbk=;
- b=ELzGnutA4GY+QSTLcb85WxDT+qpThpNynIboiz6zOL3LyxP8qHctx2vh50RgWdsyCI
- iUfMg9amsooru7m4Il1LEA7BRH547Aov6/jbo4EfcFBxZycRc7TFmwl8CAvubnnUTsl3
- uaCyrmW6rjR6K5WiQ5F+bwKTxVPOVXhq2def/mc7edHEP2WG7QIlvd5QVY75irznSi/c
- w5/i9CpvXX0U8HiJSDyFlAcBvwL07U94/xfqA9/KVI5utovt4xMfGNHRHECC9pox77gL
- +ImP55S1vWq7MCy2CFePLxkdOJXA99uUUhxx4LCEknmh/WmdaR3AcC8bws5yLtRYNaLJ
- /MpQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNw+ZH6hAejNxgagx2jHouBl0bXB3MO8hR3IiroExRzuuLFAXzCRZ1CRIaxxq3kATVdKhkQEo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrkjBk6UC4Q4X+6FGp8XTW5y/5ndnHXfR1FQYa6mQe5QGR2h4/
- WclQDXWpsIxIHkmAATjMm7V3uGRMi6fUvxoKF7weLlYtVOi57SbShJpndYhYC5M=
-X-Gm-Gg: ASbGncuLjS6CtDeH0K92S2tANs5bGN9Qx0zvhPdxaahRw5A1pJbBYsKvFQaOJiFmTYA
- UR1BlwZrxoOIkmsdOKKB92HICrc/pwAW/Ft5oSdeU1/jeFLMY3FozLaimQWoF6PeIuK9cO1lYtQ
- Z6dnBzKoApbjpnma4E2wpYxGFzQt2HQhIZkYqJqeWmY6nUooUVPLSRPGl9vf/r7hIwEQbDhPbk1
- 3FW68tFvZy9B0v+GBDpnb+HNpzOMHH5R1dTrI3b8oAZxYYnYA==
-X-Google-Smtp-Source: AGHT+IEBM+VaM/x1ZhN7UZIzbdcxT1PTrbWT2TfagUpj/W3hYYtkQAZ4lTJ7M/M1G+VC80dNgQzopQ==
-X-Received: by 2002:a05:6214:629:b0:6d4:1d18:3365 with SMTP id
- 6a1803df08f44-6d4513446d3mr69641046d6.38.1732329743355; 
- Fri, 22 Nov 2024 18:42:23 -0800 (PST)
+ bh=I0yzvwqOxzVpQc01EB+UqvaO6OA4YdR2bBIUWXeoeTU=;
+ b=VJ62YmLZDRU0/UWcBDuk2kcVWWwrkx8ZqXg/ZArgu1Ii7djOORLJhgCIojW9cJw9wc
+ RobWu7Du8d2MS1pHsaWGDkrC4u9bIyN7+FOnKb9SqKEWn7VVTMu/3Dy0c+tOPANnaBct
+ FBaOyZ7u6wHaybe/xeDn7+Az05b2mEHlS3R3z8IGmf9UTEFfhEirIai4BufQBLH2YARV
+ vI8ceJfPweW/ZS2zmqdhqF97oRu1DOVx8f/Gp43fCVSDvCtwho+JHSLYPP/nGOrnWhB2
+ UnZximXGXrLW/eQczG2ugSiHlbcBRv3D6IB12/08p94ZPBFKUPXkCzT8wAfivqRrmU3S
+ pJ4g==
+X-Gm-Message-State: AOJu0YxdCksGA3R6ghGmhgYVsNicGZee9VktB1vTCLsLs5scGwr8rFAq
+ SU6AKWFwFwVe1WQaFelbEu2Drxu4xJrwICD7HEQoj3wTDVapHZoK9u5Fm11vQJYKksFFPv+xGG7
+ B
+X-Gm-Gg: ASbGncuT0zP9LqvUPSlTY/pqgx9L9ixBgUmgSkXvj2lbslHMyMrNuF1a7OmakOc0+xk
+ NiMuh8zaqNXE5VeGW5Q1ZbB2q3wliGG2QddDn/KtXkzFUL/fzd7KR02uRAQG5bex4LMMbRRrSpY
+ rr6ermQvKC9iiy1fn2xRerpwOUIkQ6AKo4hwL4Nn8az3O0FjcNtZeGfz4H//+rhReM4TxCNQmKb
+ AGf6fFU8dvCXGwh1oBe/SvxbmWWYRy5Qntl7BnLKdd4bCJ7oQ==
+X-Google-Smtp-Source: AGHT+IHXbckw9W9cIpMPsHpCbRSpPuwDHrPp94AYfoi9AzwjMyrKF4wyJKQQb2PQukhUXcPF83Y0+g==
+X-Received: by 2002:a05:6214:1306:b0:6cb:fb6b:841a with SMTP id
+ 6a1803df08f44-6d450e7fbabmr68715556d6.6.1732329750171; 
+ Fri, 22 Nov 2024 18:42:30 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451a97c5asm17212156d6.32.2024.11.22.18.42.21
+ af79cd13be357-7b513f91e14sm147125885a.22.2024.11.22.18.42.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Nov 2024 18:42:22 -0800 (PST)
-Date: Fri, 22 Nov 2024 20:42:19 -0600
+ Fri, 22 Nov 2024 18:42:28 -0800 (PST)
+Date: Fri, 22 Nov 2024 20:42:25 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Udit Kumar <u-kumar1@ti.com>
-Cc: vigneshr@ti.com, n-francis@ti.com, afd@ti.com, u-boot@lists.denx.de,
- nm@ti.com
-Subject: Re: [PATCH] arm64: dts: ti: k3-j7200: Fix OSPI boot
-Message-ID: <20241123024219.GU3600562@bill-the-cat>
-References: <20241119100720.1297067-1-u-kumar1@ti.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] Revert "test: Update time tests to use unit-test asserts"
+Message-ID: <20241123024225.GV3600562@bill-the-cat>
+References: <20241119140526.3485208-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sEVoitDmBqJ2oAA7"
+ protocol="application/pgp-signature"; boundary="/s3IpTSLguBTjr0K"
 Content-Disposition: inline
-In-Reply-To: <20241119100720.1297067-1-u-kumar1@ti.com>
+In-Reply-To: <20241119140526.3485208-1-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,40 +95,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sEVoitDmBqJ2oAA7
+--/s3IpTSLguBTjr0K
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 19, 2024 at 03:37:20PM +0530, Udit Kumar wrote:
+On Tue, Nov 19, 2024 at 08:05:26AM -0600, Tom Rini wrote:
 
-> OSPI boot is broken due to missing bootph property
-> in pin mux of OSPI.
-> So add bootph to fix OSPI boot.
+> While at the base level, this conversion looks equivalent, we now see
+> both of these tests failing (due to exceeding their allowed margin for
+> being too slow) in Azure with a very high frequency.
 >=20
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> This reverts commit 88db4fc5fec20429881896740df61d402b4b1f66.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Tested-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---sEVoitDmBqJ2oAA7
+--/s3IpTSLguBTjr0K
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQQsACgkQFHw5/5Y0
-tyyn6QwAhoHCZ2LpFAo6xj++rPXmfL8o3BpC82l8q3EZDJsPt98cpFk9MkzSmLpI
-fZ5RGAb6AropqFinjJXfmf6h8Q1P/Pefl2cULK6IJ3DQIa13/l04FMm4U8u2S1xg
-rs6GK8JwABeAJTFNUpqfXdIXxOW7Fh44JW88AkeTYgRyniSrW6/ImsL1ByC/gJU1
-XuehxaxWYR9ihzJK1hBEt7tQVkS7pIZySret5T7cVc24ucZRFpQHMbsdWOk4BSRT
-sW4scCk3zrBwkgkX7MH5+eXnUPar4dNWvnvklam4SsfeiwOwHiQcLXey8D0V0K79
-dyO3unSxEfXxKlS/0TFVdbPrvSdnSoFTyAMN9VaUvhzREunJaAZNpRMMEsnI5NWE
-JnJUzy2U2Tapm0BBJMpQ9fj5ee8j1uXWMpUAnc+rI0ldx+VwbJ2bOhxBMsvn/btz
-X/QNDpuKmHeDJwQGWQuKUW/fb1Ink6tpdGN+4PUhTLgE5kWIpdsPcKV0K8IK9TFa
-+jN6U8gw
-=wtp+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdBQREACgkQFHw5/5Y0
+tyyTAQv/e3O3Q4lVFfkS9C/03ud40hEEGEPPlv0d2xNhBUs7bl3XZnX2m8jLZo2L
+DznJiTyr03mQqZ29WJpCfcoPr1zYIlU9thiE9r/3SOByOpBRRM9lmzVZxctPerDq
+k2y1OsovTP1nesD+J25xT9eRA6Ce5MTaqJqQ/Iyg2asztJVL1vcMkkdqERLWMZ46
+HOkBYmKIxr+V/kEv8gxgUR9zM4fwJc5bFd4Fgxqe07TrP+10KZj2sOMIafYKk4AU
++nit0IV3NSPGjMlTlkgVQYKUTPd/F/I7JTFTtf/4yva7BFUCFM/ilt/Q9hbtj7ol
+4QWLrVp1XjiA1p50vb0Q2FPfX+5PcG49LMZ30hFiSE0NvUf0xswVM8ZR9aluYvX4
+JIb3RmZKCF7uDb+A1Le9/GCuKVxZAKr8r9RK4E1RD4t1BNQSoblUkvplXy4b+RAG
+2M8Lf7CE624u0QePkuDJ6UTSaHGz7XFhQc9qiw8cuhGp8h3gTgCwagoMApy3KLZY
+id3Zffn7
+=nL/4
 -----END PGP SIGNATURE-----
 
---sEVoitDmBqJ2oAA7--
+--/s3IpTSLguBTjr0K--
