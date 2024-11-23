@@ -4,86 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3559ED75E5D
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 18:23:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93494E66887
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63DB6892B5;
-	Sat, 23 Nov 2024 19:23:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F0E8890B9;
+	Sat, 23 Nov 2024 22:29:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hVnIc1LO";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YiMcd9yf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00A8A8935F; Sat, 23 Nov 2024 19:23:52 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 6F51389152; Sat, 23 Nov 2024 22:29:31 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C87F1891B1
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 19:23:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F1148905E
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B42883F2B5
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 18:23:48 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 6B882408D8; 
+ Sat, 23 Nov 2024 21:29:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732386228;
- bh=px9DRITtx+UVMw/KmAKB0Xppc4H87ohE0C+c9ZIoHy4=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=hVnIc1LOdUXouPl3SG+WOCPb3iM8uUdNDD3hX8Q9cmovJh5AWofLIUpYsdgxHKw4p
- tuX8uVRzdQD+GOK8kpVnt1At0GvYmQ/lCqwDNZoYLss5lKnMArhbJ09OavYtcp5/0r
- 1IeUEOp9G27FEr/6lNJV9Ro5G6DIeM7RA8/0w5HvnxITJ7+murfZnobn71zOoMhV0c
- IZcCtnjrceKYc8Zwj3twe+gCY4P8/0Ngp3g8It6EjPP11C9zhpiNH+8QWlKBn8X3F0
- 1vlvIyMPuJNg+XwntPsJFWy7GwKIi+NSNL+6fmr74PwndRluK/Opd1Mfs3ESKlgZwS
- W+gTjAlQuamhA==
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-2ea873d84edso3331015a91.1
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 10:23:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732386227; x=1732991027;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=px9DRITtx+UVMw/KmAKB0Xppc4H87ohE0C+c9ZIoHy4=;
- b=AcMCGFO7i4kxqJe/q9kren2EEfQL88M/T138Xz082EZ+8JZ/3cFMLNyRyPsX+UFtx8
- T2HavMIK0ArtyoYN2uoZ4DZ1pZ7ajGczsH0rxSQpjEDNvIxqfHljR58ylkI4G0nVHmKX
- gs+dqCLj8rVyWmmpEShw+rikhIKpRB0wf3iKvqshvp766dGHFURURvrti884k7RLcOvQ
- TZQPgCgHCzqXK4ymxbG70NV4GJMTBQRqXSjXo/IbeuYFokRnFE4bCRGHv1+YBCdm0Y7t
- emNlG/XSBCge2LAiIYW04vdHKblYFHZl3Rz56IK15Qq5G3+ALrEmT8syqRTwUEEx9JB5
- 1iiQ==
-X-Gm-Message-State: AOJu0YyimLTMh1e7log/Gd4xL/VncclF+fOxZ8nvjMeK/yO4/ANmDvT4
- cZyCFiY1QdPdq1iRlA2sAvdwNJL6eIJeQHyV5E4P8lJgZ7MkG50gPeDZZhHC6s4yOTvbqifs3Ju
- JBU50iu14F07ROZIKihW7UnvY4NsToARt//qsClaF1+oCsOtJH9+ZdCmZcCkseJ443A6fXJmh1y
- GvFbf49RtI8ubac2mHHzE3Mkp35p93NUhuXiF6l6uJraKt13uLnQ==
-X-Gm-Gg: ASbGnctPz4xM1YUZKyiez40LsvcY7oDx/A4bvmIeugXkzw/zyEcM2NdrWtE7s9mRGlb
- msBfMWS3uWLLA9DbTMCzPwbwZtmEsbvaX
-X-Received: by 2002:a17:90b:2683:b0:2ea:4150:3f7f with SMTP id
- 98e67ed59e1d1-2eb0e234d0emr8707830a91.14.1732386227156; 
- Sat, 23 Nov 2024 10:23:47 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFlTjeb+BiCqsjG1xVSkcZV4pXJsERQ56M+QBFJX30iZy4m8CQfDFZg84q/WOsVAEGDqLop1bg2/04NdK2RAa0=
-X-Received: by 2002:a17:90b:2683:b0:2ea:4150:3f7f with SMTP id
- 98e67ed59e1d1-2eb0e234d0emr8707820a91.14.1732386226850; Sat, 23 Nov 2024
- 10:23:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
- <20241123152447.GZ3600562@bill-the-cat>
-In-Reply-To: <20241123152447.GZ3600562@bill-the-cat>
+ s=20210705; t=1732397368;
+ bh=sti9Xh42HkmvYfoSpxP/bDIsVzDV1sEBYJVDMAAUGDU=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=YiMcd9yfjnGJKpwdjLmXoxDYG6MR6GK3aCWC++3oUbKOblkGnaX8qx9+KnzqrH0KS
+ qwgMNIKt3Eqt2DOaV27oMdJFdyVOBAHXpmeHjCn26Yi6o+Q07jfSpYlYCfNkcIKfeC
+ Gx1wkFS7kcH7lZ1o48TJX5WuKcEj4ryCKuLTPN5MWPMS1A3IRUBP2uoRCONlWlXtA5
+ MF5bV484HoHSy8OMTrHex25mI1joUyWJsbYw+FVmQ8BeFozsinz0o+SqdU8PPYkilE
+ 63+sTG6dkB9iAcMVsvtaQW0DPcZihBJ4em/NGir2VanV4pYb5C0ZlywkzCHMzo5lVt
+ OxvNalHj/pC0A==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Sat, 23 Nov 2024 19:23:35 +0100
-Message-ID: <CAM=mAO=zNaaBMFzcqyek8OTZfLbD26gw+OMH2eB8dMgYJXfa5g@mail.gmail.com>
-Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: Simon Glass <sjg@chromium.org>, Love Kumar <love.kumar@amd.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/2] test: add command to 'Lab failure' timeout message
+Date: Sat, 23 Nov 2024 22:29:21 +0100
+Message-ID: <20241123212922.304316-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,49 +70,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> schrieb am Sa., 23. Nov. 2024, 16:24:
+When a timeout occurs while executing a command a 'Lab failure' message is
+written and testing is stopped. The user is left in the dark about the
+failure cause.
 
-> On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
-> > On many 32-bit ARM boards including QEMU memory starts at 0x40000000.
->
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  examples/api/Makefile | 4 ----
-> >  1 file changed, 4 deletions(-)
-> >
-> > diff --git a/examples/api/Makefile b/examples/api/Makefile
-> > index 722c7e45904..f0f107562f1 100644
-> > --- a/examples/api/Makefile
-> > +++ b/examples/api/Makefile
-> > @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
-> >  LOAD_ADDR = 0x40000
-> >  endif
-> >  ifeq ($(ARCH),arm)
-> > -ifdef CONFIG_64BIT
-> >  LOAD_ADDR = 0x40400000
-> > -else
-> > -LOAD_ADDR = 0x1000000
-> > -endif
-> >  endif
-> >  ifeq ($(ARCH),mips)
-> >  ifdef CONFIG_64BIT
->
-> If we're going to start cleaning this area up and expecting it to work
-> more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
-> CONFIG_STANDALONE_LOAD_ADDR here?
->
+    ! _pytest.outcomes.Exit: Lab failure: Marking connection bad - no other tests will run !
 
-loadaddr == CONFIG_SYS_LOAD_ADDR on RISC-V QEMU. Command bootelf did not
-work for me, if the ELF binary had been loaded to its LOAD_ADDR.
+Add the word 'Timeout' and the executed command to the message.
 
-I did not investigate yet why bootelf fails in this case.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ test/py/u_boot_console_base.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Best regards
+diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+index fa9cd57b04b..070ad28ecc9 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/u_boot_console_base.py
+@@ -342,8 +342,8 @@ class ConsoleBase(object):
+             # indentation.
+             return self.p.before.strip('\r\n')
+         except Timeout as exc:
+-            handle_exception(self.config, self, self.log, exc, 'Lab failure',
+-                             True)
++            handle_exception(self.config, self, self.log, exc,
++                             f"Lab failure: Timeout executing '{cmd}'", True)
+             raise
+         except BootFail as exc:
+             handle_exception(self.config, self, self.log, exc, 'Boot fail',
+-- 
+2.45.2
 
-Heinrich
-
-
-> --
-> Tom
->
