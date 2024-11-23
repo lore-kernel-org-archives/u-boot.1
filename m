@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7084E66882
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEAA0E66889
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:46:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B1FF89152;
-	Sat, 23 Nov 2024 22:46:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BF2CB893A5;
+	Sat, 23 Nov 2024 22:46:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UEiO7ruL";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PVPVz9lV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A99189248; Sat, 23 Nov 2024 22:46:42 +0100 (CET)
+ id 60D4689248; Sat, 23 Nov 2024 22:46:44 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02E3588EA8
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:46:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 688B2891B1
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:46:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DC6F340276; 
- Sat, 23 Nov 2024 21:46:38 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9E3474100B; 
+ Sat, 23 Nov 2024 21:46:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732398399;
- bh=y/lErFB0Me2RNyV5jPPObQy+T7FUvS6VkXyHTRyThko=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=UEiO7ruL0XfnBkuiJtLWA6qAmLkhQQ/9sreP3bLjodVRobq30dtZHCSqvD1tYYMvj
- vV1gD+9vucPELQCbz6fOmeYmrqWOoIkVwOw5maSDIwWIPNDi3WhlL3/c/SFz88e1dq
- ouhJEEMV0I5T2AOwn3HsdktS68GB+ySknFqf4Cyi6KUgspmGTYFIBNWO7y33FVC35w
- AFTf1t923XAGbrX8LnKPc3E0MdasiJgJRAXr5YAEFJ0bJa5W4pXFRZVziTMZNKM0Fa
- JeP5PrPd8wzIClcH6V9besAoKXK5YlQew3hNSTe07r7elMMr+AUbgGQC7WD5hhHeBe
- sIibq2f/sQh6w==
+ s=20210705; t=1732398401;
+ bh=DDcYdHmk4ySqIlCYyTzBILfzzJR7hTci+vDGJHw/vaA=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=PVPVz9lVM9h5z9V13XmOYk6QwL1qA/YM2+ZzYObqlGsw2fVLZKzprVZ1jiJv9lbEG
+ GCIsZNB0ZmaaDpF/PPtKbb1V5gHS9Mx+t1jTrg6IdInPLN/lE+2PTH4YrSqB7FHj3a
+ NyIP7eXJTBvWdqS8duS/Gc2o4r4/JppmjZVe7uTUsNs/0f2zPOkI/G1k3uk+4YITvu
+ KVr7Mp0qzY2pvxls4M9ttCzuLxuwPti3QJPQIM1RjnqNdDd9PXZOq8yGxvTkMS6N9E
+ t5sJo4BZKjF+VNxJpQB+bKLCJVpK75zqdfjm2/YQt9i/ajvwKKmLNaMNoTcIB/oeOv
+ 2SO1Zn4xpcvwA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -60,10 +61,13 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  T Karthik Reddy <t.karthik.reddy@xilinx.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/6] efi_loader: run bootdev_hunt() to find ESP
-Date: Sat, 23 Nov 2024 22:45:48 +0100
-Message-ID: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/6] configs: sandbox_deconfig: remove
+ CONFIG_AMIGA_PARTITION
+Date: Sat, 23 Nov 2024 22:45:50 +0100
+Message-ID: <20241123214554.305285-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -82,53 +86,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some hard devices need specific routines to scan for block devices,
-e.g. NVMe (nvme scan), SCSI (scsi start).
+We do not actually test the code.
+Scanning for Amiga partitions of the sandbox is extremely slow,
+especially on the partially implemented USB device.
 
-Invoke bootdev_hunt() to find all block devices.
+For build testing the other sandbox defconfigs are good enough.
 
-Reviewers complained that PXE boot was executed unexpectedly.
-eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
-a file and boot it if autostart=yes. Instead just check that there is a
-network device.
-
-To fix Gitlab CI issues the following changes were necessary:
-
-In test_extension.py do not assume that extensions have not been loaded
-by bootdev hunter in a previous test.
-
-Remove CONFIG_AMIGA_PARTITION from sandbox_deconfig to avoid a timeout.
-
-Remove CONFIG_USB_DWC3 from xilinx_versal_virt_defconfig to avoid a boot
-failure.
-
-Add a parameter '-e' to select if UEFI boot options shall be shown by
-the bootmenu command.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	Do not run dhcp_run() in eth_bootdev_hunt().
-	In test_extension.py do not assume initial state.
-	Remove CONFIG_AMIGA_PARTITION from sandbox_deconfig.
-	Remove CONFIG_USB_DWC3 from xilinx_versal_virt_defconfig.
-	Add a parameter '-e' to bootmenu command.
+	new patch
+---
+ configs/sandbox_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-Heinrich Schuchardt (6):
-  test: fix test_extension.py
-  configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
-  configs: xilinx_versal_virt: disable USB_DWC3
-  net: eth_bootdev_hunt() must not try to boot
-  cmd: bootmenu: add parameter -e for UEFI boot options
-  efi_loader: run bootdev_hunt() to find ESP
-
- cmd/bootmenu.c                       | 39 +++++++++++++++++++++-------
- configs/sandbox_defconfig            |  1 -
- configs/xilinx_versal_virt_defconfig |  2 --
- doc/usage/cmd/bootmenu.rst           | 13 +++++++---
- lib/efi_loader/efi_setup.c           |  8 ++++++
- net/eth_bootdev.c                    | 30 ++++++++++++---------
- test/py/tests/test_extension.py      |  4 ++-
- 7 files changed, 69 insertions(+), 28 deletions(-)
-
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 718e4a8283c..683888f238f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -142,7 +142,6 @@ CONFIG_CMD_SQUASHFS=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_STACKPROTECTOR_TEST=y
+ CONFIG_MAC_PARTITION=y
+-CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+ CONFIG_ENV_IS_NOWHERE=y
 -- 
 2.45.2
 
