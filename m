@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC20E6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:56:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3559ED75E5D
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 18:23:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29A16893D2;
-	Sat, 23 Nov 2024 17:56:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 63DB6892B5;
+	Sat, 23 Nov 2024 19:23:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L7/U8UHD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hVnIc1LO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFE96893DA; Sat, 23 Nov 2024 17:56:45 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00A8A8935F; Sat, 23 Nov 2024 19:23:52 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5486A893A5
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 17:56:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C87F1891B1
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 19:23:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2ea45dac86eso2658292a91.3
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 08:56:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732381002; x=1732985802; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xx8WGKMP83xv+w9JYDTv54ji8HIzv8Bui3COGs/j0GU=;
- b=L7/U8UHDhvSTmivePLN62pF3OmRWUVvDR/bNIyLZlEduvDCMQw/yLZBthvAwQVY9X/
- b0b2Qw7G2uZGC8qVp3e9caN9vybvX5zqyqcuhuX+DnyZt0tgnZ3NdY0I/1dviRgBVEoP
- 0tF+0knztKaIMT/IuLV7qdLnxPnaiKegiBK9Te/NIrzUSuGKxhfsS8eHiMU/eEbWuo8r
- QsGpy1vPb/ktgiWmQEIPO9ogD0Dsp9E7HFdP+v57l1qIkgg4X2uWr2q24HJ0sTehxGIY
- AJwWjVKMCCoeBS2VQHBDS5wsgioEReJ1BXb54ynu48S+Ha+arMgTvnB/ndZ9aEPX+QWQ
- Hl7Q==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B42883F2B5
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 18:23:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732386228;
+ bh=px9DRITtx+UVMw/KmAKB0Xppc4H87ohE0C+c9ZIoHy4=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=hVnIc1LOdUXouPl3SG+WOCPb3iM8uUdNDD3hX8Q9cmovJh5AWofLIUpYsdgxHKw4p
+ tuX8uVRzdQD+GOK8kpVnt1At0GvYmQ/lCqwDNZoYLss5lKnMArhbJ09OavYtcp5/0r
+ 1IeUEOp9G27FEr/6lNJV9Ro5G6DIeM7RA8/0w5HvnxITJ7+murfZnobn71zOoMhV0c
+ IZcCtnjrceKYc8Zwj3twe+gCY4P8/0Ngp3g8It6EjPP11C9zhpiNH+8QWlKBn8X3F0
+ 1vlvIyMPuJNg+XwntPsJFWy7GwKIi+NSNL+6fmr74PwndRluK/Opd1Mfs3ESKlgZwS
+ W+gTjAlQuamhA==
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-2ea873d84edso3331015a91.1
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 10:23:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732381002; x=1732985802;
+ d=1e100.net; s=20230601; t=1732386227; x=1732991027;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xx8WGKMP83xv+w9JYDTv54ji8HIzv8Bui3COGs/j0GU=;
- b=P/8fBGhzuAJ7Wt+d9mxrALJFFE143zxADtvR50VO76t1FDJ170L99Vqi0fMVIMqkpX
- chubJzKGd+J5goOELzJagatdUBseMOfAo/El/oMtEM5XaZckkQXBqH+MBm+i1W0MIGwZ
- gMLRrX8tUVcbZSOrHJ7KHmCXtdoMAFcZ1gXzKqY4D6CCJqFLOKIjidOoz5h2w4/ThO/0
- p79jjjcDLiG/VTCE+xYJMpI9prTDaoHs+GyEsqCl3iF3uW9dyMtaxkgPbUdUreNwuuEh
- 4zwVeqsDf+G5/S6EU6MLqnfGX4Th398pXGMtvN/FtJGA3vFzJvzdnqFdberKIo4Q4hrW
- xXkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNyKlNWy0RvsUQkbrfMVzeDmLGaNOdfD1rLM/iVbWsaxZr9STEnSkLQFzD72ONsX16O9Hojlc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLi6Cg395OpOznIlHdWA+3/1EhQzHefQE9jKQgGydiCgkyajFH
- DtEU4YVAPkNQsGX3TIC5kWQFIsvmg/WSM5rE80CQD2wVhaNwOwxhbDigywKq4nZ92YjedAUlzDI
- 7Pcd32paOj3RDf4clB09tvhJjdJ9Ku+6L4h6UmQ==
-X-Gm-Gg: ASbGncuePB1iAu/IacKfQVNhksoOOEGNJfjI2RuzyZfur7b1o0J4VOUeYLNyYeYn/N4
- DOtz0JASrSlyvsWNFvjZXodSCzjPmIQ==
-X-Google-Smtp-Source: AGHT+IGQViTXWvBK+A21oJLKX9UexGqnC1t1aGgSlHcPgAIHuXMJDlEthOOlOZcHaoWxGWqqgKpC9/AEgNr/yXjAHdU=
-X-Received: by 2002:a17:90b:3b46:b0:2ea:83a0:47a5 with SMTP id
- 98e67ed59e1d1-2eb0e02b647mr8465667a91.4.1732381001861; Sat, 23 Nov 2024
- 08:56:41 -0800 (PST)
+ bh=px9DRITtx+UVMw/KmAKB0Xppc4H87ohE0C+c9ZIoHy4=;
+ b=AcMCGFO7i4kxqJe/q9kren2EEfQL88M/T138Xz082EZ+8JZ/3cFMLNyRyPsX+UFtx8
+ T2HavMIK0ArtyoYN2uoZ4DZ1pZ7ajGczsH0rxSQpjEDNvIxqfHljR58ylkI4G0nVHmKX
+ gs+dqCLj8rVyWmmpEShw+rikhIKpRB0wf3iKvqshvp766dGHFURURvrti884k7RLcOvQ
+ TZQPgCgHCzqXK4ymxbG70NV4GJMTBQRqXSjXo/IbeuYFokRnFE4bCRGHv1+YBCdm0Y7t
+ emNlG/XSBCge2LAiIYW04vdHKblYFHZl3Rz56IK15Qq5G3+ALrEmT8syqRTwUEEx9JB5
+ 1iiQ==
+X-Gm-Message-State: AOJu0YyimLTMh1e7log/Gd4xL/VncclF+fOxZ8nvjMeK/yO4/ANmDvT4
+ cZyCFiY1QdPdq1iRlA2sAvdwNJL6eIJeQHyV5E4P8lJgZ7MkG50gPeDZZhHC6s4yOTvbqifs3Ju
+ JBU50iu14F07ROZIKihW7UnvY4NsToARt//qsClaF1+oCsOtJH9+ZdCmZcCkseJ443A6fXJmh1y
+ GvFbf49RtI8ubac2mHHzE3Mkp35p93NUhuXiF6l6uJraKt13uLnQ==
+X-Gm-Gg: ASbGnctPz4xM1YUZKyiez40LsvcY7oDx/A4bvmIeugXkzw/zyEcM2NdrWtE7s9mRGlb
+ msBfMWS3uWLLA9DbTMCzPwbwZtmEsbvaX
+X-Received: by 2002:a17:90b:2683:b0:2ea:4150:3f7f with SMTP id
+ 98e67ed59e1d1-2eb0e234d0emr8707830a91.14.1732386227156; 
+ Sat, 23 Nov 2024 10:23:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFlTjeb+BiCqsjG1xVSkcZV4pXJsERQ56M+QBFJX30iZy4m8CQfDFZg84q/WOsVAEGDqLop1bg2/04NdK2RAa0=
+X-Received: by 2002:a17:90b:2683:b0:2ea:4150:3f7f with SMTP id
+ 98e67ed59e1d1-2eb0e234d0emr8707820a91.14.1732386226850; Sat, 23 Nov 2024
+ 10:23:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20241113150938.1534931-1-sjg@chromium.org>
- <20241113150938.1534931-4-sjg@chromium.org>
- <20241113175017.GS3600562@bill-the-cat>
- <CAFLszTjVgz7HxO8jrvVhGORbccGCN6HHMy7fWz=FJYKrfdyQ+g@mail.gmail.com>
- <20241123020802.26cba055@minigeek.lan>
- <3F1F4DAC-39AC-4D17-8C92-A467FE90DA38@gmx.de>
- <20241123130750.10729a5a@minigeek.lan>
-In-Reply-To: <20241123130750.10729a5a@minigeek.lan>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 23 Nov 2024 18:56:05 +0200
-Message-ID: <CAC_iWjK_XoqFfZRM5RFwSo9GYHDmPjEapqWSbdNdFDfcO9LNQw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/8] efi_loader: bootstd: Drop bootmgr for sunxi
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
+References: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
+ <20241123152447.GZ3600562@bill-the-cat>
+In-Reply-To: <20241123152447.GZ3600562@bill-the-cat>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sat, 23 Nov 2024 19:23:35 +0100
+Message-ID: <CAM=mAO=zNaaBMFzcqyek8OTZfLbD26gw+OMH2eB8dMgYJXfa5g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,79 +100,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Tom Rini <trini@konsulko.com> schrieb am Sa., 23. Nov. 2024, 16:24:
 
-[...]
-
-> > >So while I agree that disabling efi_bootmgr sounds like a hack, it
-> > >solves the problem quite elegantly: We keep the (current) boot order,
-> > >which prioritises scripts over EFI, but still retain EFI. If people
-> > >want EFI first, they can change the order in the environment (I think?).
-> > >
-> > >Without that patch there is quite a regression for users, because
-> > >suddenly any bootaa64.efi files *somewhere* would be booted first, and
-> > >there is no way to turn that off.
-> > >
-> > >This has bitten me actually: for development I put a custom boot.scr on
-> > >an SD card which loads a kernel+DTB via TFTP from my box. And I want
-> > >that to be first, despite there being a proper EFI setup on the eMMC or
-> > >USB drive.
-> > >
-> > >So I hope that clears that up. I am not a big fan of that patch, but I
-> > >would like sunxi to be converted, and Simon seemed to be eager to do
-> > >this as well, so in the interest of not blocking this, I am fine with
-> > >that.
+> On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
+> > On many 32-bit ARM boards including QEMU memory starts at 0x40000000.
+>
 > >
-> > Disabling EFI will break booting for users that rely on it (like me).
->
-> So are you using the UEFI BootOrder variables? How do you set them?
-> Manually on the U-Boot shell, or via some Linux tool manipulating the
-> U-Boot environment file? IIUC those are the only two methods that work
-> for sunxi, since the UEFI variable runtime services are not implemented.
-
-I haven't followed the rest of the thread but EFI runtime does work
-since commit 00da8d65a3ba.
-Yes for now you have to manually dd the file on updates, but this is
-supposed to be solved by [0]
-
->
-> In reality I am using UEFI booting as well, but entirely rely on
-> bootaa64.efi, hence bootmeth_efi is totally sufficient for me.
->
-> > Yes, the introduction of boot standard changed the boot order and specifically deprioritizing scripts is unexpected.
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  examples/api/Makefile | 4 ----
+> >  1 file changed, 4 deletions(-)
 > >
-> > The priority sequence used to be
-> >
-> > scripts
-> > extlinux
-> > efi
-> > pxe
-> >
-> > bootmeth_efimgr always running before scripts be fixed.
+> > diff --git a/examples/api/Makefile b/examples/api/Makefile
+> > index 722c7e45904..f0f107562f1 100644
+> > --- a/examples/api/Makefile
+> > +++ b/examples/api/Makefile
+> > @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
+> >  LOAD_ADDR = 0x40000
+> >  endif
+> >  ifeq ($(ARCH),arm)
+> > -ifdef CONFIG_64BIT
+> >  LOAD_ADDR = 0x40400000
+> > -else
+> > -LOAD_ADDR = 0x1000000
+> > -endif
+> >  endif
+> >  ifeq ($(ARCH),mips)
+> >  ifdef CONFIG_64BIT
 >
-> I agree, but with bootmeth_efimgr marked as global this is not gonna work
-> easily, at least that's my understanding.
+> If we're going to start cleaning this area up and expecting it to work
+> more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
+> CONFIG_STANDALONE_LOAD_ADDR here?
 >
-> > bootmeth_efi should be removed from the code base as redundant.
->
-> I wonder if a solution is to split this up: bootmeth_efimgr is only
-> looking at variables - then "glob" would be correct. Then people
-> can place bootmeth_efi at the position they want, either before the
-> scripts (allowing USB boot) or after. I think this would also solve the
-> case where bootaa64.efi is both on an eMMC and an SD card, as it would
-> pick the boot media first.
->
-> A lot of sunxi use cases are embedded, and people mostly don't
-> want to boot from USB on for instance their TV box, just because the
-> stick with the movies and some bootaa64.efi was still in the slot when
-> they turned the box on. Even more so for truly embedded devices. And
-> that's also the default setting for PCs, I think, where USB booting
-> would need to be explicitly enabled in the BIOS.
->
-> Cheers,
-> Andre
 
-[0] https://github.com/rhboot/efivar/pull/267
+loadaddr == CONFIG_SYS_LOAD_ADDR on RISC-V QEMU. Command bootelf did not
+work for me, if the ELF binary had been loaded to its LOAD_ADDR.
 
-Cheers
-/Ilias
+I did not investigate yet why bootelf fails in this case.
+
+Best regards
+
+Heinrich
+
+
+> --
+> Tom
+>
