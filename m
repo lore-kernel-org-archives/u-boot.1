@@ -4,80 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B030E6ADDD
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 15:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F3D9E6ADE3
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12168893C2;
-	Sat, 23 Nov 2024 16:24:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A86D2893DA;
+	Sat, 23 Nov 2024 17:53:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I3UI4sND";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A26E893D2; Sat, 23 Nov 2024 16:24:54 +0100 (CET)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25724893AB
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 16:24:52 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-4611abb6bd5so20308621cf.1
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 07:24:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732375491; x=1732980291; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=e534K5UD65PLVi3xG31xpH3woKK2H+tN40L+/7iAsOM=;
- b=I3UI4sNDixmwqzzuxGSbyulNYk5stJQCYOhdJvXl2XJ28UwWBb82Sv1pOp9kiSEb+J
- CsDhWjtW8c3EXDcsjNqtek7N5H3Bpxr5wnXbOTNBDIqKqmGoczGYW5flWQUdnDaEKWpo
- kbn+6cBDd0FoPhGagtZE7rKk8+WRjHRmjAhAc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732375491; x=1732980291;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e534K5UD65PLVi3xG31xpH3woKK2H+tN40L+/7iAsOM=;
- b=N5JdXQkRGDnEPggJLxgj84rb6o0Fra/EThwQKR/uqSsyop/oRN7mSRmnV6Pu72RFIL
- lp+AqdVD5qT/EQJ+B20APHkM6QGcm6YvXl75/5kBYMos5VW6V0rCai+lZQ7tjcOdf/L5
- WUnUXPwUQ50p+PXYvm4FwGPQgsPi3nmm9T2V6suNygodl1Vqk5miMgYqxzyumpZ1XQvb
- zORf14fPgfB91OZYTN0sLGQZe32/rB9qxtXqcXXiNrzlFynDXsZ78IYxQBB4y/TnjTeH
- 9sXuwdRB60ZL5QOaSSBQ53X8yFQMQRVnczclpFczRXDPgqljvZeTou7nJERne/clFhWk
- pLYw==
-X-Gm-Message-State: AOJu0YwaJV77Mz7EJJwoxXH3c6ckKQkD28RQESlyLgktvwe/A3W9Tj/+
- laKvwD87V9oT/wTwnbW//+Z9zXfEx80rZYQEIM0BCw4UR6UYeKiWBCOKx2IvhFXqKiLu6SZpv8d
- /2M4=
-X-Gm-Gg: ASbGncuaTS0NwqRyg5rsD4q+orqniaLfJcg+mt/3/UuNAq/4ZaEP7bNP02mBgAWT/rG
- LqjxhYwsSYuCtUaObE0qyQOY/aZ94ROhJ7YSoHADPSn2rR9S+3b+lfmX19TB3aSBRgARVDP9t8N
- C+iP2HSt1x/i1/d8GYFa7m/mdO21fEtPD2kqK5msrj4G/S3H27FBgToEM2jT06sYMUoD1no9ayK
- oG2BRJSMmuvdZvKXsHanmjpncBsuP4Z1Bj2ZkChyGEFxDsO0w==
-X-Google-Smtp-Source: AGHT+IENEz0iy3nZZj9qmLPz2lco2tuCDRDUp65qLnjl+nwPjCXy6xyAm5Ny6+h5mXcFFdgJvM43UQ==
-X-Received: by 2002:a05:622a:180d:b0:458:2894:984e with SMTP id
- d75a77b69052e-4653d5225a2mr92056451cf.3.1732375490950; 
- Sat, 23 Nov 2024 07:24:50 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4653c47d0b3sm25030851cf.64.2024.11.23.07.24.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Nov 2024 07:24:50 -0800 (PST)
-Date: Sat, 23 Nov 2024 09:24:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
-Message-ID: <20241123152447.GZ3600562@bill-the-cat>
-References: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732380793;
+	bh=FvRszQFkwocFO5raNVuNJeaz3vJSpLGjOWpIELVQHJ8=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ZhC65NJ/2GIdo4+hZQrwc3zZcjLhH3EsYrYOZ0V1Ct1pqoM45xY265JF0sIOQEtCo
+	 BTmxpugeAofQZFQXw/zACVEqnjkOZJuqqd4jfHQoy0lRqqijq2ppeANCwaca+mkukR
+	 A0ReRRK8PrckyMz71feymlnNfJfH1u9zbSyC9FW8iItNTE/JuEmx/GecKetioyiDF5
+	 dd4bPeNgBTYQEEY1tmn3EMSkrA18pYEiX+8h1EhofQZ00qOWRLnzGJxddXlKpUD3Qe
+	 1Epb/6EUYwD6AXWmwWBabm9rKppOgln5YSWFhbUBOl9PyizbFeZb8SbccSJCCCP1k6
+	 RNDEd4yB0GJww==
+Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
+ [82.131.203.244])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 78A3D88EAF;
+ Sat, 23 Nov 2024 17:53:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1732380792;
+ bh=FvRszQFkwocFO5raNVuNJeaz3vJSpLGjOWpIELVQHJ8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=knmGOcbRw36+ucBdwg7F/WG2nBsyuAfW8ZqQpLzBEgxofntrumz8JGbLXd947L0so
+ /B5Qq6zXAo14gVa73tbWrKHcKqtMJXLMQ0qcGINfHNme/rEDRjigLhGjCK3uo1rNQX
+ QjVH+t5FUH76BG3kU6fRtBUw1nabbmOzyTv2ZUiM+1MlyyPtNl6kPgwSS46+k8O+2T
+ Gw2/w/WMOqrDXHz5awfzdash5OJnG37EMbGzdp2Em4NSk2bKyEea8RW4cvPwXdksqF
+ yr5n7KCb77Ax7GBTsG31T5jPn+4kWuQ+WI2Kba3MhuY45vh541XAGPg0A2p/7NXt/R
+ 9wPGH9IXWGrHA==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
+ Andrej Valek <andrej.valek@siemens.com>, Stefan Roese <sr@denx.de>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ CL Wang <cl634@andestech.com>, Chanho Park <chanho61.park@samsung.com>,
+ Fabio Estevam <festevam@denx.de>, Francesco Dolcini <francesco@dolcini.it>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Randolph <randolph@andestech.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 01/20] wdt: imx8qxp: add option to control external PMIC
+ wdt via IMX8 SCU
+Date: Sat, 23 Nov 2024 17:52:45 +0100
+Message-Id: <20241123165304.100538-2-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20241123165304.100538-1-hs@denx.de>
+References: <20241123165304.100538-1-hs@denx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FugdMIViYxq5RgeH"
-Content-Disposition: inline
-In-Reply-To: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,61 +78,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
+extensions. Only useful on some Siemens i.MX8-based platforms as
+special SCFW is needed which provides the needed SCU API.
 
---FugdMIViYxq5RgeH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+Signed-off-by: Heiko Schocher <hs@denx.de>
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
-> On many 32-bit ARM boards including QEMU memory starts at 0x40000000.
 
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  examples/api/Makefile | 4 ----
->  1 file changed, 4 deletions(-)
->=20
-> diff --git a/examples/api/Makefile b/examples/api/Makefile
-> index 722c7e45904..f0f107562f1 100644
-> --- a/examples/api/Makefile
-> +++ b/examples/api/Makefile
-> @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
->  LOAD_ADDR =3D 0x40000
->  endif
->  ifeq ($(ARCH),arm)
-> -ifdef CONFIG_64BIT
->  LOAD_ADDR =3D 0x40400000
-> -else
-> -LOAD_ADDR =3D 0x1000000
-> -endif
->  endif
->  ifeq ($(ARCH),mips)
->  ifdef CONFIG_64BIT
+---
 
-If we're going to start cleaning this area up and expecting it to work
-more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
-CONFIG_STANDALONE_LOAD_ADDR here?
+Changes in v4:
+- rebased to mainline commit
+  7fe55182d92 ("Merge tag 'xilinx-for-v2025.01-rc3-v2' of https://source.denx.de/u-boot/custodians/u-boot-microblaze")
+  and fixed merge problem in defconfig
+- remove hint that patch
+  https://patchwork.ozlabs.org/project/uboot/patch/20241104180203.110395-1-hs@denx.de/
+  is needed as already in mainline now.
+- comment from Stefan
+  rename sc_timer_control_pmic_wdog() to sc_timer_control_siemens_pmic_wdog()
+  rename TIMER_FUNC_CTRL_PMIC_WDOG to TIMER_FUNC_CTRL_SIEMENS_PMIC_WDOG
+  correct debug printf (fits into one line)
+  added Reviewed-by from Stefan
 
---=20
-Tom
+Changes in v3:
+- add Reviewed-by tag from Alexander
+- add comments from Igor
+  fix spelling issues
+  depends on ARCH_IMX8 instead of IMX8 Kconfig symbol
+- comment from Francesco and Stefan
+  rename Kconfig symbol from WDT_SCU_PMIC to WDT_SIEMENS_PMIC
+  rename scu_pmic_wdt.c to siemens_pmic_wdt.c
 
---FugdMIViYxq5RgeH
-Content-Type: application/pgp-signature; name="signature.asc"
+Changes in v2:
+- work on comments from Stefan:
+  - rename driver file from scu_wdt.c to scu_pmic_wdt.c
+  - rename Kconfig symbol from CONFIG_WDT_IMX_SCU to CONFIG_WDT_SCU_PMIC
+  - reworked Kconfig help text
+  - add comment that TIMER_FUNC_CTRL_PMIC_WDOG is a siemens specific
+    SCU API extension in their SCFW.
+  - reworked commit message
 
------BEGIN PGP SIGNATURE-----
+ drivers/misc/imx8/scu_api.c         | 20 ++++++++++
+ drivers/watchdog/Kconfig            |  7 ++++
+ drivers/watchdog/Makefile           |  1 +
+ drivers/watchdog/siemens_pmic_wdt.c | 59 +++++++++++++++++++++++++++++
+ include/firmware/imx/sci/rpc.h      |  3 ++
+ include/firmware/imx/sci/sci.h      |  1 +
+ 6 files changed, 91 insertions(+)
+ create mode 100644 drivers/watchdog/siemens_pmic_wdt.c
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdB87sACgkQFHw5/5Y0
-tyzBRgv+MI8lQwNAaZDDHJLpeu0Gp8JQN5qX7wn7W/FQlWdqC2ukUhRAYR5M1mCI
-K18qwBym5606mU5GMDZaD61YMUD/W8n/R83WG+QRkUAVfmYMcdzwiDRftH7tpsNS
-pTHByAnIC001WSIXqMoDPkQayjZKz5b7VVF/P7SzB7vjCLFSUtbL2U7F4bwUImWb
-Ogrskpq3YIJ6x/7zPVrbLWL8T0bRzgQmnz11sik6my69N4w9bO0F2VJzh47Pr2Fa
-ry9nzyYres/0u8wRFfmI3ilhuxN5B/JWblLFRHmOiSz6E2uUYpAOLwTYbYkI1Zvh
-bJvj1TZ5RRmRFbv5QOxKpudfD7Uz7f5hJ/pCEx8zcMX3D5Oxqj1u+FptETEwSm8X
-MtUqZinDy4MOrjXGA4HPBkw7EbR9VZA2Hy66oBH4RYodigB4VRxEvbsldm9JdX4J
-HcbHj6yv8xhupeeTgTshL6Kdr4fMMOHv1z1I3D2532xBkZ/TDjpAyW0TA+ETZHpJ
-ZLdRlADj
-=30uH
------END PGP SIGNATURE-----
+diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+index 591d71b096a..a40c8badf9a 100644
+--- a/drivers/misc/imx8/scu_api.c
++++ b/drivers/misc/imx8/scu_api.c
+@@ -951,6 +951,26 @@ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window)
+ 	return ret;
+ }
+ 
++int sc_timer_control_siemens_pmic_wdog(sc_ipc_t ipc, u8 cmd)
++{
++	struct udevice *dev = gd->arch.scu_dev;
++	struct sc_rpc_msg_s msg;
++	int size = sizeof(struct sc_rpc_msg_s);
++	int ret;
++
++	RPC_VER(&msg) = SC_RPC_VERSION;
++	RPC_SVC(&msg) = (u8)SC_RPC_SVC_TIMER;
++	RPC_FUNC(&msg) = (u8)TIMER_FUNC_CTRL_SIEMENS_PMIC_WDOG;
++	RPC_U8(&msg, 0U) = (u8)cmd;
++	RPC_SIZE(&msg) = 2U;
++
++	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
++	if (ret)
++		printf("%s: res:%d\n", __func__, RPC_R8(&msg));
++
++	return ret;
++}
++
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+ 			 sc_faddr_t addr)
+ {
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 0e45f0a0922..b39b2546e5c 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -351,6 +351,13 @@ config WDT_SBSA
+ 	   In the single stage mode, when the timeout is reached, your system
+ 	   will be reset by WS1. The first signal (WS0) is ignored.
+ 
++config WDT_SIEMENS_PMIC
++	bool "Enable PMIC Watchdog Timer support for Siemens platforms"
++	depends on ARCH_IMX8 && WDT
++	help
++	  Select this to enable the PMIC watchdog driver controlled via
++	  IMX8 SCU API found on Siemens platforms.
++
+ config WDT_SL28CPLD
+ 	bool "sl28cpld watchdog timer support"
+ 	depends on WDT && SL28CPLD
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 0b107c008f7..9b6b1a8e8ad 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -45,6 +45,7 @@ obj-$(CONFIG_WDT_OCTEONTX) += octeontx_wdt.o
+ obj-$(CONFIG_WDT_OMAP3) += omap_wdt.o
+ obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
+ obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
++obj-$(CONFIG_WDT_SIEMENS_PMIC) += siemens_pmic_wdt.o
+ obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
+ obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
+ obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
+diff --git a/drivers/watchdog/siemens_pmic_wdt.c b/drivers/watchdog/siemens_pmic_wdt.c
+new file mode 100644
+index 00000000000..87e817bb5b2
+--- /dev/null
++++ b/drivers/watchdog/siemens_pmic_wdt.c
+@@ -0,0 +1,59 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Driver for a PMIC watchdog timer controlled via Siemens SCU firmware
++ * extensions. Only useful on some Siemens i.MX8-based platforms as
++ * special NXP SCFW is needed which provides the needed SCU API.
++ *
++ * Copyright (C) 2024 Siemens AG
++ */
++
++#include <dm.h>
++#include <wdt.h>
++#include <firmware/imx/sci/sci.h>
++
++/* watchdog commands */
++#define CMD_START_WDT 0x55
++#define CMD_STOP_WDT  0x45
++#define CMD_PING_WDT  0x35
++
++static int scu_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
++{
++	/* start external watchdog via Timer API */
++	return sc_timer_control_siemens_pmic_wdog(-1, CMD_START_WDT);
++}
++
++static int scu_wdt_stop(struct udevice *dev)
++{
++	/* stop external watchdog via Timer API */
++	return sc_timer_control_siemens_pmic_wdog(-1, CMD_STOP_WDT);
++}
++
++static int scu_wdt_reset(struct udevice *dev)
++{
++	return sc_timer_control_siemens_pmic_wdog(-1, CMD_PING_WDT);
++}
++
++static int scu_wdt_probe(struct udevice *dev)
++{
++	debug("%s(dev=%p)\n", __func__, dev);
++	return 0;
++}
++
++static const struct wdt_ops scu_wdt_ops = {
++	.reset		= scu_wdt_reset,
++	.start		= scu_wdt_start,
++	.stop		= scu_wdt_stop,
++};
++
++static const struct udevice_id scu_wdt_ids[] = {
++	{ .compatible = "siemens,scu-wdt" },
++	{ }
++};
++
++U_BOOT_DRIVER(scu_wdt) = {
++	.name		= "scu_wdt",
++	.id		= UCLASS_WDT,
++	.of_match	= scu_wdt_ids,
++	.probe		= scu_wdt_probe,
++	.ops		= &scu_wdt_ops,
++};
+diff --git a/include/firmware/imx/sci/rpc.h b/include/firmware/imx/sci/rpc.h
+index 28adec2a8e1..04acc7ff95b 100644
+--- a/include/firmware/imx/sci/rpc.h
++++ b/include/firmware/imx/sci/rpc.h
+@@ -231,4 +231,7 @@ struct sc_rpc_msg_s {
+ #define TIMER_FUNC_SET_SYSCTR_PERIODIC_ALARM 17U /* Index for sc_timer_set_sysctr_periodic_alarm() RPC call */
+ #define TIMER_FUNC_CANCEL_SYSCTR_ALARM 18U /* Index for sc_timer_cancel_sysctr_alarm() RPC call */
+ 
++/* Siemens specific API extension */
++#define TIMER_FUNC_CTRL_SIEMENS_PMIC_WDOG 20U  /*!< Index for sc_timer_ctrl_pmic_wdog() RPC call */
++
+ #endif /* SC_RPC_H */
+diff --git a/include/firmware/imx/sci/sci.h b/include/firmware/imx/sci/sci.h
+index 7d8499f070a..588f3671103 100644
+--- a/include/firmware/imx/sci/sci.h
++++ b/include/firmware/imx/sci/sci.h
+@@ -123,6 +123,7 @@ int sc_rm_set_master_sid(sc_ipc_t ipc, sc_rsrc_t resource, sc_rm_sid_t sid);
+ 
+ /* Timer API */
+ int sc_timer_set_wdog_window(sc_ipc_t ipc, sc_timer_wdog_time_t window);
++int sc_timer_control_siemens_pmic_wdog(sc_ipc_t ipc, u8 cmd);
+ 
+ /* SECO API */
+ int sc_seco_authenticate(sc_ipc_t ipc, sc_seco_auth_cmd_t cmd,
+-- 
+2.20.1
 
---FugdMIViYxq5RgeH--
