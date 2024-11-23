@@ -4,98 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE6BE6688F
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 22:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C22E66891
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 23:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7736189419;
-	Sat, 23 Nov 2024 23:59:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6FA8D891F1;
+	Sun, 24 Nov 2024 00:14:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cVmh4RsP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hCeNK5pN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F01DA89407; Sat, 23 Nov 2024 23:59:44 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8A62789416; Sun, 24 Nov 2024 00:14:26 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E4A189401
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 23:59:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D34E688F12
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 00:14:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id CAABC3F2B3
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:59:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732402781;
- bh=8Ra6SLWUTDdLo55pc1JK1NB7Oc6ey3jq3RbZv5J9DXg=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=cVmh4RsPONhuOqS7vs7C0ZYznzk9mAUu3ypJsCPNUr4Jdl440c3XOKF3VXj8ihHLC
- zG6IaJ/3BFRF3IRQTmrcU9EGMDnTko8zCU0XDMj0qLlEa2Jqqj70kJGeRaAVZREEiP
- 6Bi9xa0ITYxJ8N9N8zNJKA+t/ABfyTGAwM6Nx/Q+uibemTy6i4kGLnoSGKGEwv72ZC
- xBOHrITB2TtDIqLvQPTqg9DwJhpKjKOAHAO/ABMcZL+y0tbGMBG6rUuKDmn/pH1ljr
- 21m4sYvjlu2kkcD6cItK0X31rs4MvutGh5/uFGeNmQkXSvYl+8bzcOVwHfN7uBhFBu
- /9c1fISlhL3xg==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3822ebe9321so1968603f8f.2
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 14:59:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d42b87aceaso39530386d6.0
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 15:14:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1732403663; x=1733008463; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nf6MjBdZMj9o8K37hjy0ySvmim3YL7Jsvq/DpBODsOE=;
+ b=hCeNK5pNAKiwFV92Nx6noDveK7VyyJCS79Mv+iVwUPNaDDizfYU1KRLhAWMmWXTdRf
+ pL7Ce9Xfxb6GF4sbYNxmWLu4DYBgFzFfr6ihxpKFCr2KVHTvi4eWzJbbe/dUUPw8yAjo
+ fKqk9mW0YlqyYaYvvuLud0bGTqk3Td+9g6PsQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732402781; x=1733007581;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8Ra6SLWUTDdLo55pc1JK1NB7Oc6ey3jq3RbZv5J9DXg=;
- b=flWsJAs3TohZMPbwzjmI2pKri6JwaQzy3OSA82Luw9ZgHT0AxXNkGfBsJI6lRJl+lJ
- VpLmqVTgwbW0j1nbsuuNpj/os4BpWFMxHGTlZUId7i315Z3qJmojotHgQqhp/DM1md+G
- 1VpQiXzsc3V38JR4s72voEYROa5Wcc+3iR3bbSnnl1ll6KlBoVBy/EnGlVzrAE59/sJ7
- emxxdPy02y/SFJFPamYGoKVYt5gAyYMZAErAJFLny+JbDZ13WAd/YSnA+OUdpQC0kiJK
- uVjlYORiMzwdnWbx6rqCNJMYcyCkN6F764+6oAWoreMtDs+LVcHByI2npamFdKdeFlrs
- V6tg==
-X-Gm-Message-State: AOJu0YwdWVBY8ZVSsqpcEBx4Mzamw7wkObm1BOgfKBI+/2KKBFwuFUqU
- jLZsoUw9v14fHCFRtqDLuqLaDRIC+SQpHZS1Te5lkJw/2zNqkBeN2kfql52Q58Bfa8Cfo1NhLy7
- rJCc3WYzf6jBG3u1rPAWdTYtId59hTNeZUJipKYRo+NI1OucrkLD39qnKULKDTyTYUk8=
-X-Gm-Gg: ASbGnct91JKDEUj6VzarErvNdBOlFuS+prFEUuz0nbgtwiHouPxMAe2vu/colmYecm1
- 0ek+KofoT13WEHMlbwkQv7NvQgRSvIMjgM7rYsYF1DX4Clbufcs49E1QQx8MmyGmhxTk3DQ1fty
- uM3pJPufDJJ28S1NqywCaFf7mmnUOUyWM4/pjmtKZrNgC8kKifmNQAeVgJ0im7KdCkDXvP7FJcn
- 0X3WCqxhD0J72h/HN+/xi1bpckmyEQaiTxVr1jL4MxGNGpEgIPiX6VaMzqc42yk8Wx9leb/Jme6
- RMNHtI0O1s2hbMvmEP/okAcRWFkygAugqXZ6q6eL6Hd/2dI=
-X-Received: by 2002:a05:6000:154c:b0:382:5471:655b with SMTP id
- ffacd0b85a97d-38260bc8649mr6913381f8f.47.1732402781328; 
- Sat, 23 Nov 2024 14:59:41 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE4USX16xU3JhA0TdpKUI0sbGl8yx07zXuzTJTKmwo3JPVSGDjQsrhXrJppu2PECZYeW4B9mQ==
-X-Received: by 2002:a05:6000:154c:b0:382:5471:655b with SMTP id
- ffacd0b85a97d-38260bc8649mr6913370f8f.47.1732402780357; 
- Sat, 23 Nov 2024 14:59:40 -0800 (PST)
-Received: from [192.168.123.161]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ d=1e100.net; s=20230601; t=1732403663; x=1733008463;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nf6MjBdZMj9o8K37hjy0ySvmim3YL7Jsvq/DpBODsOE=;
+ b=oXdFJ34VEeYptIjwM5mwoniF/NJ/tt1qxz9BsMiXPmtx17Ogm/4TDL3Rop51jXvJkS
+ EbqGqHVBUBWpthoZXyGXGmjMawLIKdqdYT3ar9Hfkv8J1LOP/cOLB5zS111fhfIl7H/T
+ S9haZMP0NNFU1T1z12YK7Am3JYKSaEixJ8LHCPJ1x3zLxi1+2pFz71YzfVz/B8biNr0y
+ 9nt5fGCwnwztKBALx6zkgtqSxVC1KfOhyvWOGeCjTp0TUkKkXZxBc3IUWB0FmukJTS8/
+ rqCE8VFFBCWi9TeL5Qb3LfZsJgfRUg/0N6CT4ue1nFvi+8Wp62Hf/wJ923TwLrheaskJ
+ HS6g==
+X-Gm-Message-State: AOJu0YzswLh7pakTK+hIOP7puww2WG+4L7cw39dn/b6a0XPaOwIixXGm
+ +4c5VSiLHlzqSD2UeBPq9y3SgwfU45LMQ8Ne2TyJu/7050ZaWaIsShMCe/lbpjcHGGF0OlMqzR9
+ uLJc=
+X-Gm-Gg: ASbGncu3OZSorraFK29y27T0FJbu4XXTwWXiIU1G4RrvK663zTpZBVNiMS7nzmJSL3l
+ LVJhECq4N/ct53XDNx1mFfXf7K7yRvM4DHuKcn+KN6ZvgT+E2DPjXFIvXzbIZ2RKJfKpdqgw1mR
+ usZuyr1NlovmmnoyBUMXo+PoQvidQYizvaXvuJFUhFYOHHNkEJCvTrOPKbt3Q9w780Qjz7Dwzgv
+ Q2A3z2bmieKNTuXpQrlhi04Y675LiCCBk2gNswefg06OSaopA==
+X-Google-Smtp-Source: AGHT+IH/du4hWY4nz541fisjZX0+Ed35YRHqGANvkCckHHCE5Le1UZgJZoKICZfMSdFKTq3a5BgvpQ==
+X-Received: by 2002:a05:6214:ac7:b0:6d4:15c5:b119 with SMTP id
+ 6a1803df08f44-6d4511503d0mr166012086d6.19.1732403662753; 
+ Sat, 23 Nov 2024 15:14:22 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fb271ffsm6297382f8f.53.2024.11.23.14.59.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 23 Nov 2024 14:59:38 -0800 (PST)
-Message-ID: <69ff1a82-e887-4950-bd06-c8e16f776f8a@canonical.com>
-Date: Sat, 23 Nov 2024 23:59:36 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
-To: Tom Rini <trini@konsulko.com>
+ 6a1803df08f44-6d451b2509dsm25967526d6.83.2024.11.23.15.14.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 23 Nov 2024 15:14:21 -0800 (PST)
+Date: Sat, 23 Nov 2024 17:14:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
+Message-ID: <20241123231418.GB3600562@bill-the-cat>
 References: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
  <20241123152447.GZ3600562@bill-the-cat>
  <CAM=mAO=zNaaBMFzcqyek8OTZfLbD26gw+OMH2eB8dMgYJXfa5g@mail.gmail.com>
  <20241123225541.GA3600562@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241123225541.GA3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <69ff1a82-e887-4950-bd06-c8e16f776f8a@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="c6bc0E6ZHKkE/Gnw"
+Content-Disposition: inline
+In-Reply-To: <69ff1a82-e887-4950-bd06-c8e16f776f8a@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,61 +98,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/23/24 23:55, Tom Rini wrote:
-> On Sat, Nov 23, 2024 at 07:23:35PM +0100, Heinrich Schuchardt wrote:
->> Tom Rini <trini@konsulko.com> schrieb am Sa., 23. Nov. 2024, 16:24:
->>
->>> On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
->>>> On many 32-bit ARM boards including QEMU memory starts at 0x40000000.
->>>
->>>>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
->>>>   examples/api/Makefile | 4 ----
->>>>   1 file changed, 4 deletions(-)
->>>>
->>>> diff --git a/examples/api/Makefile b/examples/api/Makefile
->>>> index 722c7e45904..f0f107562f1 100644
->>>> --- a/examples/api/Makefile
->>>> +++ b/examples/api/Makefile
->>>> @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
->>>>   LOAD_ADDR = 0x40000
->>>>   endif
->>>>   ifeq ($(ARCH),arm)
->>>> -ifdef CONFIG_64BIT
->>>>   LOAD_ADDR = 0x40400000
->>>> -else
->>>> -LOAD_ADDR = 0x1000000
->>>> -endif
->>>>   endif
->>>>   ifeq ($(ARCH),mips)
->>>>   ifdef CONFIG_64BIT
->>>
->>> If we're going to start cleaning this area up and expecting it to work
->>> more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
->>> CONFIG_STANDALONE_LOAD_ADDR here?
->>>
->>
->> loadaddr == CONFIG_SYS_LOAD_ADDR on RISC-V QEMU. Command bootelf did not
->> work for me, if the ELF binary had been loaded to its LOAD_ADDR.
->>
->> I did not investigate yet why bootelf fails in this case.
-> 
-> The examples, broadly speaking, do not run out of the box since they
-> assume an address to be loaded in to memory at and run from, rather than
-> a Kconfig entry. The next problem for RISC-V is that, well, there's no
-> api/api_platform-riscv.c file (and forever ago I steered people away
 
-https://patchwork.ozlabs.org/project/uboot/patch/20241123084754.59182-2-heinrich.schuchardt@canonical.com/
+--c6bc0E6ZHKkE/Gnw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-provides api_platform.c for RISC-V. This patch is only about ARM.
+On Sat, Nov 23, 2024 at 11:59:36PM +0100, Heinrich Schuchardt wrote:
+> On 11/23/24 23:55, Tom Rini wrote:
+> > On Sat, Nov 23, 2024 at 07:23:35PM +0100, Heinrich Schuchardt wrote:
+> > > Tom Rini <trini@konsulko.com> schrieb am Sa., 23. Nov. 2024, 16:24:
+> > >=20
+> > > > On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
+> > > > > On many 32-bit ARM boards including QEMU memory starts at 0x40000=
+000.
+> > > >=20
+> > > > >=20
+> > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical=
+=2Ecom>
+> > > > > ---
+> > > > >   examples/api/Makefile | 4 ----
+> > > > >   1 file changed, 4 deletions(-)
+> > > > >=20
+> > > > > diff --git a/examples/api/Makefile b/examples/api/Makefile
+> > > > > index 722c7e45904..f0f107562f1 100644
+> > > > > --- a/examples/api/Makefile
+> > > > > +++ b/examples/api/Makefile
+> > > > > @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
+> > > > >   LOAD_ADDR =3D 0x40000
+> > > > >   endif
+> > > > >   ifeq ($(ARCH),arm)
+> > > > > -ifdef CONFIG_64BIT
+> > > > >   LOAD_ADDR =3D 0x40400000
+> > > > > -else
+> > > > > -LOAD_ADDR =3D 0x1000000
+> > > > > -endif
+> > > > >   endif
+> > > > >   ifeq ($(ARCH),mips)
+> > > > >   ifdef CONFIG_64BIT
+> > > >=20
+> > > > If we're going to start cleaning this area up and expecting it to w=
+ork
+> > > > more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
+> > > > CONFIG_STANDALONE_LOAD_ADDR here?
+> > > >=20
+> > >=20
+> > > loadaddr =3D=3D CONFIG_SYS_LOAD_ADDR on RISC-V QEMU. Command bootelf =
+did not
+> > > work for me, if the ELF binary had been loaded to its LOAD_ADDR.
+> > >=20
+> > > I did not investigate yet why bootelf fails in this case.
+> >=20
+> > The examples, broadly speaking, do not run out of the box since they
+> > assume an address to be loaded in to memory at and run from, rather than
+> > a Kconfig entry. The next problem for RISC-V is that, well, there's no
+> > api/api_platform-riscv.c file (and forever ago I steered people away
+>=20
+> https://patchwork.ozlabs.org/project/uboot/patch/20241123084754.59182-2-h=
+einrich.schuchardt@canonical.com/
+>=20
+> provides api_platform.c for RISC-V. This patch is only about ARM.
 
-Best regards
+Yeah. For everyone we need to move this to Kconfig and it should likely
+be STANDALONE_LOAD_ADDR being re-used and not a new symbol. Hard coded
+might-work addresses are a leftover of pre-Kconfig days.
 
-Heinrich
+--=20
+Tom
 
+--c6bc0E6ZHKkE/Gnw
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> from adding that and instead adding EFI support, the patches are in
-> patchwork somewhere).
-> 
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdCYccACgkQFHw5/5Y0
+tyyIOgv/diL48RPO4A2C+GBhIC48W0dlsn/ZmIhE1yrrexjlRJSkKlWQNuOLOFUZ
+KBfrdcNZbDDRKFtlgEwaujFsEHWwvKL08vswHCfMIn7esdddjZNFjWcUZXBfE2AE
+ctuJk256DcyfzygUAsGJJyS6iyQmY4cpriCZNnjWK/Esn9RT3lZG+fQB3ULdPAjX
+0ELf4Cf1fUBYn+PmlkAPtAu4eluoAOtOP8T2p7xvNV7qRbfdSkPzLaaa7cfWTI72
+RowyGzEUVspJZyOtQ0WuDQ2PdAMov1ryVIOSdQKu1lotaK22ZQu8erEeUEvwMJ96
+P0CE1b5o0mdQ9HPsbrKvL0S/UrblGGtXFTYCO5lp9S4yQ/KbINiBgmyhWN5Aga7C
+KB7BB98yZjZbMdbfFbKYtR1amjPhiJMOr8Bndtc0df9x7xxPl7jOGxQa5dgyzEKc
+5+bWwTCeWQ00OFkSmH5v4kw3vCKfc8JPp6oSq7njoQ3nrU4b4vz4x26Jreeh0vHN
+9rQlmi7i
+=t7fg
+-----END PGP SIGNATURE-----
+
+--c6bc0E6ZHKkE/Gnw--
