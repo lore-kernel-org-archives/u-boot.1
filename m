@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32202E66889
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:47:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41050E66889
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DA8B893EE;
+	by phobos.denx.de (Postfix) with ESMTP id 982E789400;
 	Sat, 23 Nov 2024 22:46:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SJ8d5MJP";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nrYhpwPT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64F0B893EE; Sat, 23 Nov 2024 22:46:46 +0100 (CET)
+ id 7E019893FA; Sat, 23 Nov 2024 22:46:48 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 677E789160
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:46:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B85C189349
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:46:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B2DD641005; 
- Sat, 23 Nov 2024 21:46:39 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8099A4100D; 
+ Sat, 23 Nov 2024 21:46:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732398400;
- bh=gt3v8pZeChvpJfNiBHbI23J7TKx7WoXlXHmAd1AXCf8=;
+ s=20210705; t=1732398402;
+ bh=LJ05b6vCBY4VJKvS4/v4LN21CxatYjXYubNKAJjFozs=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=SJ8d5MJPq1FWEzSUrky+QQllBDQmUDhM/VPqATQ130qhE9IepxhviBDqrBkzwCEuF
- K1rxp7rwl2EPOoJNptQ8vq9BMupe0BVmD4889GGGKU/zau8qw90awK1WmMCh5fGZZ2
- svnoluQcEIIwj25cTRwIn4y40Vu8xNB4TRkI3BBXfDiE4JXnrQzg6okr1pg5boYjEN
- m7uyWMJ+CzDEXmj30LMOo2ZpH6QShQGkmGo5usSZDxsQSyi++Velek3K8We6Y59aiM
- FwtVLZVnApSbjbyR+EqamrKR0r4ocHEZRF09vdzIlJM5LgfGciNsZE3iSRuzTgFk8W
- LXKcbFp5N1XEw==
+ b=nrYhpwPTEKTWoX4Sn1OSnyAw/41OvJe7l1cZkvRCo9Lb+bddjFQ67DnQKh4ImpgUM
+ /8iud53hsfaXL02wKM3lKgnz2aock9A+IKBb4TNnSjZ0h9sq05o7ttRCOK/9J8OyWb
+ bsoN19UPfJf6q5gJ98MUQdtu9lhntRlBbVoktwwrU+86DA+FZLW7J4uTp8+7ILMxt7
+ GQWGuCTtSsfp01F6mrZfcA0KGzVf/B5c97bV0Y4BMykHZlk+ff+lrzWlACuil3nmQc
+ dC4e4oJY3Il7vw+6KR6522hAe/lgaezh7cDYdiv678vx+T6BPqeh332NuDrL+/zKWT
+ d/s3+SSBQuKSw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -61,9 +61,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  T Karthik Reddy <t.karthik.reddy@xilinx.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/6] test: fix test_extension.py
-Date: Sat, 23 Nov 2024 22:45:49 +0100
-Message-ID: <20241123214554.305285-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 3/6] configs: xilinx_versal_virt: disable USB_DWC3
+Date: Sat, 23 Nov 2024 22:45:51 +0100
+Message-ID: <20241123214554.305285-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
 References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
@@ -85,35 +85,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-test_extension.py assumes that no extension is known at test start.
-This assumption is wrong because we do not come out of reboot.
-A prior test may have already hunted for the extension bootdev.
+The CI uses the following command to launch xilinx_versal_virt_defconfig:
 
-Remove the invalid assert.
+    qemu-system-aarch64 -M xlnx-versal-virt \
+    -display none -m 4G -serial mon:stdio \
+    -device loader,file=u-boot,cpu-num=0
+
+'usb start' or invoking eth_bootdev_hunt leads to a crash when function
+dwc3_core_init() tries to access a register at offset 0xc704 (DWC3_DCTL)
+relative to the register start address 0xfe20c100.
+
+Disable CONFIG_USB_DWC3 until the driver problem is fixed.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
 	new patch
 ---
- test/py/tests/test_extension.py | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ configs/xilinx_versal_virt_defconfig | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/test/py/tests/test_extension.py b/test/py/tests/test_extension.py
-index 267cf2ff27c..2a3c5116171 100644
---- a/test/py/tests/test_extension.py
-+++ b/test/py/tests/test_extension.py
-@@ -26,7 +26,9 @@ def test_extension(u_boot_console):
-     load_dtb(u_boot_console)
- 
-     output = u_boot_console.run_command('extension list')
--    assert('No extension' in output)
-+    # extension_bootdev_hunt may have already run.
-+    # Without reboot we cannot make any assumption here.
-+    # assert('No extension' in output)
- 
-     output = u_boot_console.run_command('extension scan')
-     assert output == 'Found 2 extension board(s).'
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index c8f166c1221..06a240173ba 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -153,8 +153,6 @@ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_DWC3_GENERIC=y
+ CONFIG_USB_ULPI_VIEWPORT=y
+ CONFIG_USB_ULPI=y
+ CONFIG_USB_GADGET=y
 -- 
 2.45.2
 
