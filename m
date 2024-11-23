@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95577E6ADE3
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526FDE6ADDD
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 16:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 762D8893EE;
-	Sat, 23 Nov 2024 17:53:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1F88893FD;
+	Sat, 23 Nov 2024 17:53:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732380795;
-	bh=Kq8pnkKExJHOT7WtmwQkYDpexu7srMYlQgdL92KmGds=;
+	s=phobos-20191101; t=1732380797;
+	bh=bXiY6LNbfqfzx/D2Aw9OL7HXgC4i8jLJnAqviLoaYUI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vKDft1d2TrYJIej5wl/Iv78FvTKvqyobD22Acn9hE51HXxZ3BLuq4liGZHUZpuwUz
-	 jRHJ5Tns57RijtXPKYdVQ94fZ64wF2gK0w1YYAL6cg6FKqtWIR+UXbHSRvqRDMcAqO
-	 k6d4cBxEq0AOBlfU4tHngYlCgKrh+uHcJ9pvyA4LUFFF9oHWVqrOfvfbYA/aCcSOop
-	 DtEcMROw6X8oyaMD2f96Dt53A+J2ewk8IcsN6og9nJgnr6QSiw2Hw43hR1PYaOynAE
-	 0boORTo1T+N/EnkpHmKJxdkS6SYfqhPyqOFqsBLlXp2DLcKfAePIY/gHlkAUcVaG3w
-	 GpsD+l+RYaIgw==
+	b=RXztziLyvOWJhCQoDKtSkOH2jj9LCWZoo9A/URtL2rGN6+LL1vXzYGuvBMiLooIBo
+	 6pzLL7CNMaD8cdwf4I83muLQERQZXEKVVxZDa/RLXJVLeq5V/xDgPwXj7koj1jcOTd
+	 z0C3r6jd+whTj9Rsidtt74f/yPbOHvvtgvXfeE0cXlFHVO9218d4zIIlrBmXxEsYun
+	 oIfWjbH6gBoW+EKtGsTm2ttnNgqfhc9NuGCYKYn6kue2+R9Hq3Q6zoddUxklIWmwHC
+	 nlmrykaAlEhaPPZ6lLQEC7xUvY1J9CrC0FPIOzJmh6zVRtxGACIAdrPJV/qR+rnZ5h
+	 hhqhADg+FQk9w==
 Received: from localhost.localdomain (82-131-203-244.pool.digikabel.hu
  [82.131.203.244])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 20148893E4;
+ by phobos.denx.de (Postfix) with ESMTPSA id E8218893E2;
  Sat, 23 Nov 2024 17:53:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732380794;
- bh=Kq8pnkKExJHOT7WtmwQkYDpexu7srMYlQgdL92KmGds=;
+ s=phobos-20191101; t=1732380795;
+ bh=bXiY6LNbfqfzx/D2Aw9OL7HXgC4i8jLJnAqviLoaYUI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=FR/yJETMN1B9v7zm8AL4KcGARUEwQCZ6RQqsaUY+RDVO+00bCAV3I85SGZzFaYnm3
- 8H5o4N4ZFyTIUufsGQCMunwvyetJPYRlqQ3QQbqL/030XDHlf4gsYSiZ8m2Tcn5PMf
- 4JUa6OIBzstugRCUhSyEm/mgm43+3zwrHJcMaYjNbEg+37Xw/9bItPERA9iGAayLb6
- bH75YbEnIthI6IpOrub+SdVfMkNZQfr4BSHypHfLjemFpHS7anpJ4EJezGMcQ6AVGQ
- b2z5FCVWnM7EnRa8uFMNGnzPzW+OG1+nZV3AzKqW+KdVYrnAn1CHx5z0sRPpub7sKo
- H2QmaoRTq40lg==
+ b=x/RhT3HkFcspC3d9ev7VGJPNgL8nZR2Y4ySkU+xqkWo+L03Wasv+Oc10nO7zKmyhF
+ o8Oe1HDqHSzyVKX/3Qp3hPMqDipIfvU4x1rWWddllqandqmZWHiwdKCHMoCBPZ5/0j
+ zB36BGLohvgd9uiKwk6oG1bQdqrcEiPdIEGT4zaeDDnzKxMEzYATyl6quEBykKxsHg
+ S5H2Z4DFoIzku7dLqDhQ2BD6hULv16OYYR+GKwcjUVsqnZLKHGEUKdKPj/m1iVWvbR
+ yw5h3J25Ajw9FKcSaJE161p50EEwMDidPdW6jJ/13Qzklt0nQZrZziwFI1pyunTG6v
+ NPKLFN3Spbw5Q==
 From: Heiko Schocher <hs@denx.de>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
  Walter Schweizer <walter.schweizer@siemens.com>,
  Enrico Leto <enrico.leto@siemens.com>, Heiko Schocher <hs@denx.de>,
- Fabio Estevam <festevam@denx.de>, Gary Bisson <bisson.gary@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 03/20] tools: imx8image: Improve error message
-Date: Sat, 23 Nov 2024 17:52:47 +0100
-Message-Id: <20241123165304.100538-4-hs@denx.de>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 04/20] imx: imx_cntr_image.sh: prevent warning for missing
+ spl
+Date: Sat, 23 Nov 2024 17:52:48 +0100
+Message-Id: <20241123165304.100538-5-hs@denx.de>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20241123165304.100538-1-hs@denx.de>
 References: <20241123165304.100538-1-hs@denx.de>
@@ -70,36 +70,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Improve error message "header tag mismatched"
-Add filename to error message to see, which file
-is wrong.
+when building U-Boot on imx8qxp and the board port uses
+SPL, U-boot build shows
+
+WARNING '.../spl/u-boot-spl.bin' not found, resulting binary is not-functional
+
+This is because U-Boot binary is build first and Makefile
+calls script imx_cntr_image.sh which checks if files
+exists... but of course as spl is not yet build the
+file `spl/u-boot-spl.bin` does not exist yet, so prevent
+this warning.
 
 Signed-off-by: Heiko Schocher <hs@denx.de>
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-add Reviewed-by from Alexander
+ tools/imx_cntr_image.sh | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- tools/imx8image.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/tools/imx8image.c b/tools/imx8image.c
-index 7a060811c7e..15510d3e712 100644
---- a/tools/imx8image.c
-+++ b/tools/imx8image.c
-@@ -734,7 +734,7 @@ static int get_container_image_start_pos(image_t *image_stack, uint32_t align)
- 			fclose(fd);
+diff --git a/tools/imx_cntr_image.sh b/tools/imx_cntr_image.sh
+index 972b95ccbee..07acd385631 100755
+--- a/tools/imx_cntr_image.sh
++++ b/tools/imx_cntr_image.sh
+@@ -14,6 +14,10 @@ for f in $blobs; do
+ 		continue
+ 	fi
  
- 			if (header.tag != IVT_HEADER_TAG_B0) {
--				fprintf(stderr, "header tag mismatched \n");
-+				fprintf(stderr, "header tag mismatched file %s\n", img_sp->filename);
- 				exit(EXIT_FAILURE);
- 			} else {
- 				file_off +=
++	if [ $f = "spl/u-boot-spl.bin" ]; then
++		continue
++	fi
++
+ 	if [ -f $f ]; then
+ 		continue
+ 	fi
 -- 
 2.20.1
 
