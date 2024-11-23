@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00FD2E6688C
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 22:34:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DDB7E6688E
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 22:34:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4278D893F4;
+	by phobos.denx.de (Postfix) with ESMTP id A24B989406;
 	Sat, 23 Nov 2024 23:34:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732401265;
-	bh=kedmpQXUMcl2Y1AfpzMfvi0X2iuTEdjU7Vg1jWSYVWA=;
+	bh=dgmy7ZKWAl8GS26Tqm+diNyHmplacm18GlxI+/InolY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=qwSG+EykuXIBihadVOSDVT4wZRy0mtloBhQhhdRCwcnr+3040Hu7bPTb2BwfAYin+
-	 zAP8/vFgpxaMvpesVsVoRqeIyxf3LQXMW1DTpGkjhg2ajbiAn28Mdj1roa9cMBOJSb
-	 zxV4jF1t2/rLTGkXgUxlosVeO7ze+KgDZsuXiJJV+udVFS4yY2Eu14dCEBGna8HxVm
-	 +AM+erl1Et1IHGPza2P3iiVtlwtNXt2svURiy1kYyPCEHZ8Jd+58nd4yhd79vJ5Oj2
-	 8gZxQiknArEDk0majK9vHfknJw8RoJjfqhIzVtqTgVYJ40bVCK8hYqdRBClzs/c8ou
-	 mNQRDm9K+HAig==
+	b=PVzza9CRdwgraIMooRRXYXa3rSeHZGRbLot7t0+vR4ozXxeR7Lt7yl+xABqrJ9h/E
+	 ujv0IdJg82tT9aw6N8eFK6+9kFUfUGNQcPo2OLtrsiUzs6GtC9lILumDcDAukz++/g
+	 CjVJt+4b6MnSSVcIEA9jQN2nNTZn99datV3AZV1QYxFkqZzDjF0O9lWuSJnyPkoe1G
+	 s3VM5TfY633M2l4E/FOMjevk7HtLC55Yo1HVREoYn2dffsJrt9JHKkA6fxsyU7UIJL
+	 0pl2PtCDXWZV6sETqTjzDLMZZdcbVXlFTkLGgNGreA9r5afX3cOq0Cb1TGNJJ9Lxeg
+	 Qv+1UHZy6bsiw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 19EA7891A0;
+ by phobos.denx.de (Postfix) with ESMTPSA id 91E5A8934F;
  Sat, 23 Nov 2024 23:34:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1732401264;
- bh=kedmpQXUMcl2Y1AfpzMfvi0X2iuTEdjU7Vg1jWSYVWA=;
+ bh=dgmy7ZKWAl8GS26Tqm+diNyHmplacm18GlxI+/InolY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=O8RRx2CoDL1Z0T7K8B5ctGjih+OjuM1/2KGcIdSpZc0kVBYGRUKDiQ0Px2QHJgjjG
- D2u27GpnIsrvvH6cirXY16MEbPxAjcIwnEUuH2cI+fn/tDUSm4saaZOU+YQDo4DI4b
- upNtnw9f3nREmUuaKO2dkdO8exu2UBNJh3KbUdLgIULDds6zjkRItNpZHJmD4c28VI
- 2pMcsffGFi36Blh1dpKO4uOznoxeNIR5lUtcrho/ZTNe6/LSJmsu6i3MUWFjPaXfIh
- F0ifFex+xKUBywK6toJoyLYqZsYCYrnn8XNB4RBricxHx3SH0SflDXdoEbhFncvVMc
- UaTfZTzUncuJA==
-Message-ID: <b85432c1-2e49-46f7-b764-ee213131a291@denx.de>
-Date: Sat, 23 Nov 2024 20:56:29 +0100
+ b=T8oVWUL8huk0h8zxOrtyZ4n/qUEVyn+brhiBJAH77xruassFZACrIrXEh+V4GU57B
+ qUAc5DYKAFG8xJz1UPx7XGwFEdjjnQN6PFc0lK58cwcXygih/6CxOugEQjh3+kYQN1
+ bsQq5dvXwU8hcd0LECbcGerIe9f/XTr1YmhUJhyMmQJLhJDFuGJkH7ynSaOk4L6TTT
+ cGPIwTYl5UjKSASqj/Seos/8S8ZPXrfrPLDzoNR4OC9jAQ0q16CFvrj0GsY9S3FSKQ
+ hc+/HhGmv0ZrAR09ZPuYwYWOgfKTyX7DT0ydCW2dfOqdz4lV9oGLTrwWzDRDPywQuh
+ fxkM8r+0zMj5A==
+Message-ID: <d1e02e6d-d5e4-4323-835c-d505cbaa6dfa@denx.de>
+Date: Sat, 23 Nov 2024 20:57:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] eth: asix88179: Fix ASIX AX88179A PHY hang
+Subject: Re: [PATCH v2 2/2] eth: asix88179: packet drop when receiving large
+ fragmented packets
 To: Khoa Hoang <admin@khoahoang.com>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
 References: <20241108055136.50701-1-admin@khoahoang.com>
- <20241108055136.50701-2-admin@khoahoang.com>
+ <20241108055136.50701-3-admin@khoahoang.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241108055136.50701-2-admin@khoahoang.com>
+In-Reply-To: <20241108055136.50701-3-admin@khoahoang.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,21 +71,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/8/24 6:51 AM, Khoa Hoang wrote:
-> The ASIX AX88179A locks up when the ADVERTISE_NPAGE bit is set in the
-> MII_ADVERTISE register, suggesting that this feature may be broken or
-> unsupported on this chip. In the Linux kernel, this bit is not set,
-> and enabling it also causes the PHY to lock up and stay in a
-> link-down state.
+> The ASIX 88179A drops packets when receiving fragmented packets larger
+> than the MTU size due to an insufficient URB buffer size. This change
+> synchronizes the URB buffer size with the configuration used in the
+> Linux kernel, resolving the packet drop issue.
 > 
-> Additionally, the AX88179 and AX88179A variants do not appear to
-> support the ADVERTISE_LPACK bit, as setting it consistently reads
-> back as 0.
+> To reproduce the issue, set the following configuration:
+>      CONFIG_IP_DEFRAG=y
+>      CONFIG_TFTP_BLOCKSIZE=16352
 > 
-> This patch removes the ADVERTISE_NPAGE and ADVERTISE_LPACK bits from
-> the MII_ADVERTISE register configuration. It also resets the PHY
-> before modifying the MII_ADVERTISE register, then restarts
-> auto-negotiation, following the same flow used in the U-Boot asix.c
-> driver.
+> Then, run the `tftp` command. It will fail with a timeout error:
+> 
+>      U-Boot> tftp zero.bin
+>      Using ax88179_eth device
+>      TFTP from server 10.0.0.196; our IP address is 10.0.0.18
+>      Filename 'zero.bin'
+>      Load address: 0x10000000
+>      Loading: T T T T T T T T T T T
+>      Retry count exceeded; starting again
 > 
 > Signed-off-by: Khoa Hoang <admin@khoahoang.com>
+> ---
+>   drivers/usb/eth/asix88179.c | 12 ++++++------
+>   1 file changed, 6 insertions(+), 6 deletions(-)
 Reviewed-by: Marek Vasut <marex@denx.de>
+
+Thanks !
