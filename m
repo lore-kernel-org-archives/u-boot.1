@@ -4,48 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76407E66882
-	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F54EE66889
+	for <u-boot@archiver.kernel.org>; Sat, 23 Nov 2024 21:50:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A267D89440;
-	Sat, 23 Nov 2024 22:49:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=srcf.ucam.org
+	by phobos.denx.de (Postfix) with ESMTP id 2EE9289432;
+	Sat, 23 Nov 2024 22:49:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=dominik.wernberger@gmx.de header.b="W30SxuQj";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18177893AA; Sat, 23 Nov 2024 20:58:07 +0100 (CET)
-Received: from cavan.codon.org.uk (cavan.codon.org.uk [176.126.240.207])
+ id 36242884B0; Sat, 23 Nov 2024 22:47:38 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F21C891B4
- for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 20:58:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E062A893F7
+ for <u-boot@lists.denx.de>; Sat, 23 Nov 2024 22:47:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=srcf.ucam.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mjg59@codon.org.uk
-Received: from fedora.. (23-93-16-71.fiber.dynamic.sonic.net [23.93.16.71])
- by cavan.codon.org.uk (Postfix) with ESMTPSA id B41D0407DD;
- Sat, 23 Nov 2024 19:57:42 +0000 (GMT)
-From: Matthew Garrett <mjg59@srcf.ucam.org>
+ spf=pass smtp.mailfrom=dominik.wernberger@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732398449; x=1733003249;
+ i=dominik.wernberger@gmx.de;
+ bh=inAbOi7KG8PLkTspCjzhA81iqVvc35b07rSHgROPxEw=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
+ MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=W30SxuQjt+ZTagK7FBZIhQGwIYU3uH+DMhHG5xzxaSCbapDZ+kzYc7dF5yXdUlkN
+ GZ9oMuHvzsBBxbm1jpd3RdZzEj7fxbmsLqTiJBWL5YAYudAZMA99Mq55Le1Z0y53O
+ zEvLmDuc2jDTDrxX6AXK7sNADrKk9GxBhiNXJkkCWaR8X1p4SXyhI2Q4WFXb7PBVN
+ e4j+fhM8docvr94n528ZpkC0cqYqZfoOBekYM7Tj/fPBs9PKEsKWZbjoeBL6hKKPq
+ 1c+Rmio7KYJEyXJ/IJpw1Ix9gIxTSxLqC/FdrGl2/8UwY8g5RALkiViyvmHdzuVWE
+ 2cfe68mnf91yfVj2/g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from doms-pc.fritz.box ([87.162.74.135]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N8XTv-1tk9tg1xT7-00wqJU; Sat, 23
+ Nov 2024 22:47:29 +0100
+From: Dominik Wernberger <dominik.wernberger@gmx.de>
 To: u-boot@lists.denx.de
-Cc: Matthew Garrett <mgarrett@aurora.tech>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/10] Add command to set an environment variable to an EFI
- variable
-Date: Sat, 23 Nov 2024 11:55:09 -0800
-Message-ID: <20241123195616.305687-11-mjg59@srcf.ucam.org>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241123195616.305687-1-mjg59@srcf.ucam.org>
-References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+Cc: marek.vasut+renesas@mailbox.org, jagan@amarulasolutions.com,
+ michal.simek@amd.com, tudor.ambarus@linaro.org, venkatesh.abbarapu@amd.com,
+ Dominik Wernberger <dominik.wernberger@gmx.de>
+Subject: [PATCH] spi: Fix missed rename from SPI_ADVANCE to
+ SPI_STACKED_PARALLEL
+Date: Sat, 23 Nov 2024 22:47:08 +0100
+Message-Id: <20241123214708.44405-1-dominik.wernberger@gmx.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 23 Nov 2024 22:49:00 +0100
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:hZJ6C/VPuxmHoIIb1kpSmUHViZCsorio58O2meakzQ7A0hRnGTk
+ tE3wwDTZq/AJ5ncwWz9v03awuuj4Zd+vPPgH4c3vepiyFvNV1y1ePlSKTtMDa76Ri1RMcap
+ ml2vhNbCnDUf7eBuHFvX6Tc6H8Ibv3Ma1HqpO+authv2ixHPULYXvHCWhxRWDLmjwqbNcl2
+ siDMq6DHiK7APCQzI+ecg==
+UI-OutboundReport: notjunk:1;M01:P0:7QA7XvSkrYo=;soY65L0WfA2KSX+yfPaQ7EF3NaL
+ Wmh7A2Hpd8t7L0YTyrivsycE7sqpUJ33Rtpyw+7DcbumXRxr1XayI26ZWzGkCNh41gN8wiCun
+ VrcZd+75vMcUFME2m15HdO0vBpTZS8sVj3SLMRNwPB+Ei17rzfPFicNTD87bGxOTc49l4DpV6
+ OB0xjkncWsuvJ7oJPoP+cHQdxpQlNAIID7EoxtdKXqigHpjEHWC/SJo0DdXrpYiY/i7MJDDEJ
+ yS9fkI6VmqSvtvcRJT7QaWmw615rK1vJa//h/8+5OMT60hsf+X9yiU6k1GmzFlhjT4Myg7kV7
+ kUP8Xq6MoVDp/rN0qzxEYv8jQewPStScSivRLqdkRWg4hHs4RMfRPU5PywFfUT7pNFoUSOH/2
+ s5ySpBNKOI0s0Cl+sZl8N5c30AqqDea5hsNGfzx9xUPVNpzYEWFn8CHNYdzMIoEu6fDcu/kRb
+ 435sBwlH+TgRYEytgtLCe8XlaW3Na6LE2ub4zFBAFv1qbcKBSzgHWg7t6XKaWgZse2kxy+28O
+ yCjRJgnHi9oKU8lNO9AgnVDT9bAGKICj2V+OlLDQ09yNUeCEC66uYlcqZWI6r8N1dYrFbH14E
+ D3c4wfXAudOOkbkEMK6SaXRWcL2yX9zj0xK0EHZRXx3gtSHM9LdgfRXkJZVsANaBSR0SvXRD9
+ d9mXtlYWmGS98xRAeNYO03+OB2xkEHry1UyQrtdslYooO6XMqCx2j4oY20RKeUYi+IcN8foki
+ 3lIf9Ao1R7PQCGwAV5t7lFyF3ZVSybOmeY9UMvki/mEreXAI0AASm2ou64STZWsXTEb3lCFXM
+ eUFXgccG3gDCprTc/GWzTqbm8T9s9kOMSZwS2N2hCjJxIiHuwsaYHmuaj08LnPbI4Yld7oi55
+ yf3oLmoSpBN4zEL6Dr8J+SUVtQmD2jtexczr/VBIfc/nB8mW0Z/sPRbua
+X-Mailman-Approved-At: Sat, 23 Nov 2024 22:49:33 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,185 +90,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Matthew Garrett <mgarrett@aurora.tech>
+See https://lore.kernel.org/u-boot/20241026201741.171073-8-marek.vasut+ren=
+esas@mailbox.org/
 
-We may want to make things conditional on EFI variable state
+Signed-off-by: Dominik Wernberger <dominik.wernberger@gmx.de>
+=2D--
+ drivers/spi/spi-uclass.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
----
+diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
+index 36b7d383aa..d604975374 100644
+=2D-- a/drivers/spi/spi-uclass.c
++++ b/drivers/spi/spi-uclass.c
+@@ -446,7 +446,7 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed,=
+ int mode,
+ 	slave =3D dev_get_parent_priv(dev);
+ 	bus_data =3D dev_get_uclass_priv(bus);
 
- cmd/Kconfig     |   4 ++
- cmd/Makefile    |   1 +
- cmd/efigetenv.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 138 insertions(+)
- create mode 100644 cmd/efigetenv.c
+-#if CONFIG_IS_ENABLED(SPI_ADVANCE)
++#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
+ 	if ((dev_read_bool(dev, "parallel-memories")) && !slave->multi_cs_cap) {
+ 		dev_err(dev, "controller doesn't support multi CS\n");
+ 		return -EINVAL;
+@@ -515,7 +515,7 @@ int spi_slave_of_to_plat(struct udevice *dev, struct d=
+m_spi_slave_plat *plat)
+ 	int mode =3D 0;
+ 	int value;
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 33bf3d1ad39..118fb721081 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -752,6 +752,10 @@ config CMD_NVEDIT_SELECT
- 	help
- 	  Select the compiled-in persistent storage of environment variables.
- 
-+config CMD_EFI_GET_ENV
-+	bool "efi get env"
-+	help
-+	  Set an environment variable to the contents of an EFI variable
- endmenu
- 
- menu "Memory commands"
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 38cb7a4aea5..0507c204c0e 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -69,6 +69,7 @@ obj-$(CONFIG_CMD_EEPROM) += eeprom.o
- obj-$(CONFIG_EFI) += efi.o efi_common.o
- obj-$(CONFIG_CMD_EFIDEBUG) += efidebug.o efi_common.o
- obj-$(CONFIG_CMD_EFICONFIG) += eficonfig.o
-+obj-$(CONFIG_CMD_EFI_GET_ENV) += efigetenv.o
- ifdef CONFIG_CMD_EFICONFIG
- ifdef CONFIG_EFI_MM_COMM_TEE
- obj-$(CONFIG_EFI_SECURE_BOOT) += eficonfig_sbkey.o
-diff --git a/cmd/efigetenv.c b/cmd/efigetenv.c
-new file mode 100644
-index 00000000000..5284ee92d6c
---- /dev/null
-+++ b/cmd/efigetenv.c
-@@ -0,0 +1,133 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <charset.h>
-+#include <command.h>
-+#include <efi_loader.h>
-+#include <efi_variable.h>
-+#include <env.h>
-+#include <hexdump.h>
-+#include <malloc.h>
-+#include <uuid.h>
-+
-+/* Set a U-Boot environment variable to the contents of a UEFI variable */
-+int do_efi_get_env(struct cmd_tbl *cmdtb, int flat, int argc, char *const argv[])
-+{
-+	u16 *var_name = NULL;
-+	char *strdata = NULL;
-+	efi_uintn_t size = 0;
-+	bool var_content_is_utf16_string = false;
-+	efi_status_t ret;
-+	efi_guid_t guid;
-+	u8 *data = NULL;
-+	u32 attributes;
-+	size_t len;
-+	u64 time;
-+	u16 *p;
-+
-+	ret = efi_init_obj_list();
-+	if (ret != EFI_SUCCESS) {
-+		printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-+		       ret & ~EFI_ERROR_MASK);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	argv++;
-+	argc--;
-+
-+	if (argc != 3 && argc != 4)
-+		return CMD_RET_USAGE;
-+
-+	if (argc == 4) {
-+		if (strcmp(argv[0], "-s"))
-+			return CMD_RET_USAGE;
-+		var_content_is_utf16_string = true;
-+		argv++;
-+		argc--;
-+	}
-+
-+	len = utf8_utf16_strnlen(argv[0], strlen(argv[0]));
-+	var_name = malloc((len + 1) * 2);
-+	if (!var_name) {
-+		printf("## Out of memory\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	p = var_name;
-+	utf8_utf16_strncpy(&p, argv[0], len + 1);
-+
-+	if (uuid_str_to_bin(argv[1], guid.b, UUID_STR_FORMAT_GUID)) {
-+		ret = CMD_RET_USAGE;
-+		goto out;
-+	}
-+
-+	ret = efi_get_variable_int(var_name, &guid, &attributes, &size, data,
-+				   &time);
-+	if (ret == EFI_BUFFER_TOO_SMALL) {
-+		data = malloc(size);
-+		if (!data) {
-+			printf("## Out of memory\n");
-+			ret = CMD_RET_FAILURE;
-+			goto out;
-+		}
-+		ret = efi_get_variable_int(var_name, &guid, &attributes,
-+					   &size, data, &time);
-+	}
-+
-+	if (ret == EFI_NOT_FOUND) {
-+		printf("Error: \"%ls\" not defined\n", var_name);
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	if (ret != EFI_SUCCESS) {
-+		printf("Error: Cannot read variable, r = %lu\n",
-+		       ret & ~EFI_ERROR_MASK);
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	if (var_content_is_utf16_string) {
-+		char *p;
-+
-+		len = utf16_utf8_strnlen((u16 *)data, size / 2);
-+		strdata = malloc(len + 1);
-+		if (!strdata) {
-+			printf("## Out of memory\n");
-+			ret = CMD_RET_FAILURE;
-+			goto out;
-+		}
-+		p = strdata;
-+		utf16_utf8_strncpy(&p, (u16 *)data, size / 2);
-+	} else {
-+		len = size * 2;
-+		strdata = malloc(len + 1);
-+		if (!strdata) {
-+			printf("## Out of memory\n");
-+			ret = CMD_RET_FAILURE;
-+			goto out;
-+		}
-+		bin2hex(strdata, data, size);
-+	}
-+
-+	strdata[len] = '\0';
-+
-+	ret = env_set(argv[2], strdata);
-+	if (ret) {
-+		ret = CMD_RET_FAILURE;
-+		goto out;
-+	}
-+
-+	ret = CMD_RET_SUCCESS;
-+out:
-+	free(strdata);
-+	free(data);
-+	free(var_name);
-+
-+	return ret;
-+}
-+
-+U_BOOT_CMD(
-+	efigetenv, 5, 4, do_efi_get_env,
-+	"set environment variable to content of EFI variable",
-+	"[-s] name guid envvar\n"
-+	"    - set environment variable 'envvar' to the EFI variable 'name'-'guid'\n"
-+	"      \"-s\": Interpret the EFI variable value as a UTF-16 string\n"
-+);
--- 
-2.47.0
+-#if CONFIG_IS_ENABLED(SPI_ADVANCE)
++#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
+ 	int ret;
+
+ 	ret =3D dev_read_u32_array(dev, "reg", plat->cs, SPI_CS_CNT_MAX);
+=2D-
+2.34.1
 
