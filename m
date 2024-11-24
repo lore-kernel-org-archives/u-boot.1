@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EDD0E668B3
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 14:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E322DE668B3
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 14:58:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF08488F7B;
-	Sun, 24 Nov 2024 15:43:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4CF188954E;
+	Sun, 24 Nov 2024 15:58:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="flNrtzQA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WL1hEeC+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F119F88FBA; Sun, 24 Nov 2024 15:43:21 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 3CC9589558; Sun, 24 Nov 2024 15:58:33 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B870588E24
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 15:43:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E1FD89547
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 15:58:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732459396; x=1733064196; i=xypron.glpk@gmx.de;
- bh=lmaRmlMmu9K2LyFZnZGsk0itwfExLmKBC3PCJSw7SwQ=;
+ s=s31663417; t=1732460303; x=1733065103; i=xypron.glpk@gmx.de;
+ bh=4+TFhqwzWbCCUpl+6S/ZEsjD+mMXgFE/0pRD6hrSHjA=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=flNrtzQAyMaCAfedioBLZdjA3/SFQ+AfcrlOxOAy/fUvmRdU9riwKoo0tMwRradN
- /zgexOXnJtHk50y62sMn3ZEsax2Iadlia0Zf+OHlTpkcomRzIcl+ohe1Mt5l9EE3Z
- g/KZK9757eBRDr3KA+QtpU3hqC4g6MQLCnLSSkQtJCEQCOnOXWqKAinaOo9cDYpN2
- LhrtEyPvS/5jvZ+gMe3OX98PvFtsPIDhT6C5Xw+qvnP+mHedkreCztvSv0P4cXedg
- CnkLT4J0U91dX4hN9QvDKrwSyM5oQjybH+3XvJSfpHVR+/pYPqyP/jNy7vq25Eduh
- nPzIXMfWgBCyVd1pLQ==
+ b=WL1hEeC+XqM+VZfCXEUPWLBYtntZA/n+qJc7LNa9z+QpWtNmcUmkMHgYSUskLeBC
+ g3Koq79hxIK86Apv/px9y79riLwDRy4sA7cclqaD1o6RIkRkKD7+EbaJUM/kaJkDe
+ EogmzT9RcXYF9HfCTZOpVuJWgMlUtN1bei5hoTmwevODBmJAXaENgW7Tz8tXm614X
+ b48O6HfXs4f9TEmB7YXahi3uecv4QCeYYoR62V1P5VLBhf4ZGGPg6Ci9Fif+1GgBj
+ uSLcf6GL3mH3b+owe+gp55OiKTyFIOZlUZh4+li3EKflfnpn5wH4OJLo4tvAogcE2
+ 3yr96V4YnfqNKYdafg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MJE6F-1sz3Ud3Ebr-00Rh9u; Sun, 24
- Nov 2024 15:43:16 +0100
-Message-ID: <e1592ca0-03aa-4f83-848a-70c8979a9b2a@gmx.de>
-Date: Sun, 24 Nov 2024 15:43:12 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1fii-1thzKY3m5A-00sknB; Sun, 24
+ Nov 2024 15:58:23 +0100
+Message-ID: <b79cd88a-4346-444d-979c-8eb2ed913d5e@gmx.de>
+Date: Sun, 24 Nov 2024 15:58:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/10] Add EFI handover support to bootm
-To: Matthew Garrett <mjg59@srcf.ucam.org>
-Cc: Matthew Garrett <mgarrett@aurora.tech>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
+Subject: Re: [PATCH 10/10] Add command to set an environment variable to an
+ EFI variable
+To: Matthew Garrett <mjg59@srcf.ucam.org>, u-boot@lists.denx.de
+Cc: Matthew Garrett <mgarrett@aurora.tech>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, u-boot@lists.denx.de
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-2-mjg59@srcf.ucam.org>
+ <20241123195616.305687-11-mjg59@srcf.ucam.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241123195616.305687-2-mjg59@srcf.ucam.org>
+In-Reply-To: <20241123195616.305687-11-mjg59@srcf.ucam.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9zniSshLecAC8BcEkaxzpf1yH4EA1cAEPN3DF1vGEz2JGdWBRpP
- nt8fL75sCDtXPejWPkQTGFKC/6PKhEgByX7dEGIUhbamP9YncqzAvw4qnyNDWpsUyqwa1YD
- X/OO2fKgnkTstOhWvGN5WXv6mBp862/ZEum2wh9/yKjcVrfSq3gWcu+HaavI3+tbzLAFoz4
- +rNrRP703LYljSds/baMw==
-UI-OutboundReport: notjunk:1;M01:P0:aR/R5kV9oQg=;gdNfcXKg8gkEaVe4mtGFVRoG7pv
- J7jr986YXQs9AFdSDNQ4Wfd+9I6bBJyAOVUsY3ynW9mDAeyYjt+FRY8zyJJwdBxNwr+BneJsz
- Z7dhDucarqtRcyPB6lduxj3fmrfXhXsSTyaYc2yrblopa+HAZ8wHdWc9DBkl90yXAbMQlBzig
- 7lOumY23p1fBSuGYZWaZUtTvg/XiFTXP0lLnpCRE/G2kVFdOmsm+y3SU2fqO3lNRLKfchBIeb
- UXljkyp25QP43YtEUYZ71863TDP09E8Ur/J9njN6b6PrQxbtvS4sKrjdXDfvQjcyT1iZaSxVd
- YaEB/caMFrfuuCUEWJe5GXxDVTsWoWiRdmNTiKGUvpxs2m258qNTRXEFKqxncXNZjnVsNR6ew
- z2KVs9zfYlkQcvCQXPIfurFPCE+ILbrpkiQgGHKbrIyWwZSCVDbHejxJ7c+VlKeTiESzHr+9r
- TD4SNVTKpIWEWlq2fVgXXkozCQIeng+7eOXzFicJO7ky/cjpM49qO5XgZCI+RE4gAJw9qkzl0
- DVaARwvnj29bdd3rB+cCcsekifZaBuFywyFBXu+wYybX8/mo0PVteGkslLgF7Sp8iD+/KawpD
- dOpK86SFSaE80M7TZVar5aYNGSUdcPrV5KFivS6iw1Yj/XPiVveq1YCcHpyrmakLZSCeM1zju
- USo4bCFOC9iMTU2uXtp+5xfhWqgnYMY0DGFUKoR9QUrKEqOqAjpEnVDkspIEoAoblPsiVcs/1
- s91lsvTLmwPyfDWcQAfkWBFkuiw1p7RN2T60wTz4oiRs1QFPnL2Ki7+TiZnrLfkcZD9XJ5sSo
- K1XoDBEIWE3gCLdQig7mqan66ucBfwjYEwMD5QFAQa4Bskz72sQE1V7zlcaJLl0pGO0axI+b/
- cAND5UPcHfv7IBrbbmcWLVCNNYDRBkUA0FNG9JjL8G0PgIF1nnJxXjZOX
+X-Provags-ID: V03:K1:hAjBzop3Lbch4IL9ZXBpw3RzXT6LlUeitfqM5k1gnp7Js0BEY4Z
+ 8iSwZX7YI4xV5IVLzBpivbD869fcqgd1ZN3BWn3ZMMdDVBXHuzueMr5rEP1WLODMmEq1paf
+ opYIf1mF8EogObWu9etP/y8v08MdfiU+RxdnORweHe1SpjIpT+s/Gbf9+kQO2nfrES1WA3g
+ lE8p5UtbHUJlCfYpCGkfQ==
+UI-OutboundReport: notjunk:1;M01:P0:N6JuFkFu+jo=;7T8NXv8chHUMNoakUyBcs3Oa3LQ
+ 0UDmk+XvMffBQ7a8IOysCF/9XbADINsPXpK/wMSCg5GMEFInS98AT7WQB1mk1EKGEthWDJ0Kb
+ O3X+IgOa+vPHTJlK/PKNMQQY3+RUlXmh4hNB+4eJhmFLR2pwCTmlS12jqWZ3MdQy2xy084/bI
+ jZsVqcl9ZWtBqgQpIWG8sIt3J69mwdCoXANzBIIhFsgUV7AAVXSnMfhFj5+s5Bm+QnKmX6Js9
+ +GYS6QxvpjwAsNOKzZ5cwqx/ERI0SpHrJepSznGgzW90/WXYkAt/LFDccK53lkGRCHbi2+Gxc
+ PuSAEHaAMawJ/unM3uRoMVXHTXDte+VppMYNH3Vdy9Hwg4u7LdHIl513Gtzhv9jQHUU2czFjO
+ ELSiaVrOZDsP/K7tfSxc/iAtHDOShClSCZYS/5e3aRlJhpdLVSzWT1Q1NU/DJCTsCjhWG3Z5I
+ kihbmNIuDDW9rB8irZzo9wf0K66M7pi2CbuTi6X8f7JclRnf2zRVx8g3E9xoSzz37DXfivUIr
+ 1+P6ufyGuxMQgcLQq6M1GHVHsYwL2Ah/iSRfsWtTK5Wul50Ix2/DA0unFDVmjB/tmrtNlnKUU
+ bB8kv0sgx9dF9xcjMMCLuD9dU1bE1JJL0/3xRP2I8SZJr9YjK5yXGgDxM7KbJqA+gaKgdTrIo
+ tZZnE/R5ywsMLzlho9Tags/QAdJFGTzIa9iOWBA54RX0wgK4XmPUEksdLbmBs/3y8ytpOnwvY
+ wGdio8uiVCkST4RJ4hKvgESaxwynqOoEvG+ODq53xMa4hMv9XIWZsY3QIGko+JWAVQ9uMlXbh
+ KzGytD99BP0GtlRAJtbp3eIdOxaQwm9HmdIHTEsYiGdQNVEyMXxlt4ZZecolJ7S7S16M/Z5Vg
+ FotmA9aHq+N5kIJWNpcIFuTPmW5sTgLjq+xr/fc910aswBRvYkkfe/UjIa+hPepoqwPRn64nl
+ PYfCGM0+/6EVovGw951oukJtGvdqBcWSZhdYYPL44wfqa7eDLkR73VIu9LgcEI77W73vH6ihF
+ /X5JKZTwnG8BZW/+AJTC41z4gfXibS+J4btDEWtpNRe+iiNI8oyXkqedvITfYgi3VafID9j93
+ EO+9Iv7Ko=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,224 +105,195 @@ X-Virus-Status: Clean
 On 11/23/24 20:55, Matthew Garrett wrote:
 > From: Matthew Garrett <mgarrett@aurora.tech>
 >
-> We want to jump into the EFI stub in the kernel so it can perform
-> appropriate init and call ExitBootServices. Add support for doing that,
-> including ensuring that we copy the kernel to somewhere that's not
-> currently being used by the firmware.
+> We may want to make things conditional on EFI variable state
 >
 > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
->
 > ---
 >
->   arch/x86/lib/bootm.c | 49 ++++++++++++++++++++++++++++++--------------
->   boot/bootm.c         |  5 +++++
->   include/bootm.h      |  6 ++++++
->   include/efi.h        |  1 +
->   lib/efi/efi.c        |  1 +
->   lib/efi/efi_app.c    | 36 ++++++++++++++++++++++++++++++++
->   6 files changed, 83 insertions(+), 15 deletions(-)
+>   cmd/Kconfig     |   4 ++
+>   cmd/Makefile    |   1 +
+>   cmd/efigetenv.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 138 insertions(+)
+>   create mode 100644 cmd/efigetenv.c
 >
-> diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-> index 55f581836df..c4446b1f9c6 100644
-> --- a/arch/x86/lib/bootm.c
-> +++ b/arch/x86/lib/bootm.c
-> @@ -150,6 +150,38 @@ error:
->   	return 1;
->   }
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 33bf3d1ad39..118fb721081 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -752,6 +752,10 @@ config CMD_NVEDIT_SELECT
+>   	help
+>   	  Select the compiled-in persistent storage of environment variables.
 >
-> +typedef void(*handover_func)(void *, struct efi_system_table *sys_table=
-, struct
-> +boot_params *params);
+> +config CMD_EFI_GET_ENV
+> +	bool "efi get env"
+> +	help
+> +	  Set an environment variable to the contents of an EFI variable
+>   endmenu
+>
+>   menu "Memory commands"
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 38cb7a4aea5..0507c204c0e 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -69,6 +69,7 @@ obj-$(CONFIG_CMD_EEPROM) +=3D eeprom.o
+>   obj-$(CONFIG_EFI) +=3D efi.o efi_common.o
+>   obj-$(CONFIG_CMD_EFIDEBUG) +=3D efidebug.o efi_common.o
+>   obj-$(CONFIG_CMD_EFICONFIG) +=3D eficonfig.o
+> +obj-$(CONFIG_CMD_EFI_GET_ENV) +=3D efigetenv.o
+>   ifdef CONFIG_CMD_EFICONFIG
+>   ifdef CONFIG_EFI_MM_COMM_TEE
+>   obj-$(CONFIG_EFI_SECURE_BOOT) +=3D eficonfig_sbkey.o
+> diff --git a/cmd/efigetenv.c b/cmd/efigetenv.c
+> new file mode 100644
+> index 00000000000..5284ee92d6c
+> --- /dev/null
+> +++ b/cmd/efigetenv.c
+> @@ -0,0 +1,133 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +#include <charset.h>
+> +#include <command.h>
+> +#include <efi_loader.h>
+> +#include <efi_variable.h>
+> +#include <env.h>
+> +#include <hexdump.h>
+> +#include <malloc.h>
+> +#include <uuid.h>
 > +
-> +int efi_boot(ulong setup_base, ulong entry, bool image_64bit)
+> +/* Set a U-Boot environment variable to the contents of a UEFI variable=
+ */
+> +int do_efi_get_env(struct cmd_tbl *cmdtb, int flat, int argc, char *con=
+st argv[])
 > +{
-> +	struct boot_params *params =3D (struct boot_params *)setup_base;
-> +	struct setup_header *hdr =3D &params->hdr;
-> +	struct efi_priv *priv =3D efi_get_priv();
-> +	handover_func hf;
-> +	int offset =3D 0;
+> +	u16 *var_name =3D NULL;
+> +	char *strdata =3D NULL;
+> +	efi_uintn_t size =3D 0;
+> +	bool var_content_is_utf16_string =3D false;
+> +	efi_status_t ret;
+> +	efi_guid_t guid;
+> +	u8 *data =3D NULL;
+> +	u32 attributes;
+> +	size_t len;
+> +	u64 time;
+> +	u16 *p;
 > +
-> +	if (IS_ENABLED(CONFIG_EFI_APP_64BIT)) {
-> +		if (!image_64bit) {
-> +			printf("## Can only boot 64-bit kernels\n");
-> +			return 1;
+> +	ret =3D efi_init_obj_list();
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		printf("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +		       ret & ~EFI_ERROR_MASK);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	argv++;
+> +	argc--;
+> +
+> +	if (argc !=3D 3 && argc !=3D 4)
+> +		return CMD_RET_USAGE;
+> +
+> +	if (argc =3D=3D 4) {
+> +		if (strcmp(argv[0], "-s"))
+> +			return CMD_RET_USAGE;
+> +		var_content_is_utf16_string =3D true;
+> +		argv++;
+> +		argc--;
+> +	}
+> +
+> +	len =3D utf8_utf16_strnlen(argv[0], strlen(argv[0]));
+> +	var_name =3D malloc((len + 1) * 2);
+> +	if (!var_name) {
+> +		printf("## Out of memory\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+> +	p =3D var_name;
+> +	utf8_utf16_strncpy(&p, argv[0], len + 1);
+> +
+> +	if (uuid_str_to_bin(argv[1], guid.b, UUID_STR_FORMAT_GUID)) {
+> +		ret =3D CMD_RET_USAGE;
+> +		goto out;
+> +	}
+> +
+> +	ret =3D efi_get_variable_int(var_name, &guid, &attributes, &size, data=
+,
+> +				   &time);
+> +	if (ret =3D=3D EFI_BUFFER_TOO_SMALL) {
+> +		data =3D malloc(size);
+> +		if (!data) {
+> +			printf("## Out of memory\n");
+> +			ret =3D CMD_RET_FAILURE;
+> +			goto out;
 > +		}
-> +		offset =3D 512;
-> +	} else if (image_64bit) {
-> +		printf("# Can only boot 32-bit kernels\n");
-> +		return 1;
-> +	}
-> +
-> +	hdr->code32_start =3D (int)entry;
-> +	hdr->type_of_loader =3D 0x80; /* U-Boot, from Linux Documentation/x86/=
-boot.rst */
-> +
-> +	hf =3D (handover_func)(entry + hdr->handover_offset + offset);
-> +	asm volatile ("cli");
-> +	priv->loaded_image->image_base =3D (char *)entry;
-> +	hf(priv->parent_image, priv->sys_table, params);
-> +	return -EFAULT;
-> +}
-> +
->   int boot_linux_kernel(ulong setup_base, ulong entry, bool image_64bit)
->   {
->   	bootm_announce_and_cleanup();
-> @@ -158,21 +190,8 @@ int boot_linux_kernel(ulong setup_base, ulong entry=
-, bool image_64bit)
->   	timestamp_add_now(TS_U_BOOT_START_KERNEL);
->   #endif
->
-> -	/*
-> -	 * Exit EFI boot services just before jumping, after all console
-> -	 * output, since the console won't be available afterwards.
-> -	 */
-> -	if (IS_ENABLED(CONFIG_EFI_APP)) {
-> -		int ret;
-> -
-> -		ret =3D efi_store_memory_map(efi_get_priv());
-> -		if (ret)
-> -			return ret;
-> -		printf("Exiting EFI boot services\n");
-> -		ret =3D efi_call_exit_boot_services();
-> -		if (ret)
-> -			return ret;
-> -	}
-> +	if (IS_ENABLED(CONFIG_EFI_APP))
-> +		return efi_boot(setup_base, entry, image_64bit)
->
->   	if (image_64bit) {
->   		if (!cpu_has_64bit()) {
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index 16a43d519a8..d5caa4cdb31 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -49,6 +49,10 @@ __weak void board_quiesce_devices(void)
->   {
->   }
->
-> +__weak void board_fixup_os(image_info_t *os)
-> +{
-> +}
-> +
->   #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
->   /**
->    * image_get_kernel - verify legacy format kernel image
-> @@ -999,6 +1003,7 @@ int bootm_run_states(struct bootm_info *bmi, int st=
-ates)
->   	/* Load the OS */
->   	if (!ret && (states & BOOTM_STATE_LOADOS)) {
->   		iflag =3D bootm_disable_interrupts();
-> +		board_fixup_os(&images->os);
->   		ret =3D bootm_load_os(images, 0);
->   		if (ret && ret !=3D BOOTM_ERR_OVERLAP)
->   			goto err;
-> diff --git a/include/bootm.h b/include/bootm.h
-> index 61160705215..b0d10123b53 100644
-> --- a/include/bootm.h
-> +++ b/include/bootm.h
-> @@ -217,6 +217,12 @@ void arch_preboot_os(void);
->    */
->   void board_quiesce_devices(void);
->
-> +/*
-> + * boards should define this if they need to fix up the kernel before b=
-oot
-> + * (eg, by modifying the desired load address).
-> + */
-> +void board_fixup_os(image_info_t *os);
-> +
->   /**
->    * switch_to_non_secure_mode() - switch to non-secure mode
->    */
-> diff --git a/include/efi.h b/include/efi.h
-> index c559fda3004..1d06230439f 100644
-> --- a/include/efi.h
-> +++ b/include/efi.h
-> @@ -459,6 +459,7 @@ static inline struct efi_mem_desc *efi_get_next_mem_=
-desc(
->    */
->   struct efi_priv {
->   	efi_handle_t parent_image;
-> +	struct efi_loaded_image *loaded_image;
->   	struct efi_system_table *sys_table;
->   	struct efi_boot_services *boot;
->   	struct efi_runtime_services *run;
-> diff --git a/lib/efi/efi.c b/lib/efi/efi.c
-> index bcb34d67465..bb1d9e24f84 100644
-> --- a/lib/efi/efi.c
-> +++ b/lib/efi/efi.c
-> @@ -113,6 +113,7 @@ int efi_init(struct efi_priv *priv, const char *bann=
-er, efi_handle_t image,
->   		efi_puts(priv, "Failed to get loaded image protocol\n");
->   		return ret;
->   	}
-> +	priv->loaded_image =3D loaded_image;
->   	priv->image_data_type =3D loaded_image->image_data_type;
->
->   	return 0;
-> diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
-> index 9b94a93ee4f..7c3ef9a7926 100644
-> --- a/lib/efi/efi_app.c
-> +++ b/lib/efi/efi_app.c
-> @@ -14,6 +14,7 @@
->   #include <efi.h>
->   #include <efi_api.h>
->   #include <errno.h>
-> +#include <image.h>
->   #include <init.h>
->   #include <malloc.h>
->   #include <sysreset.h>
-> @@ -218,6 +219,41 @@ static int efi_sysreset_request(struct udevice *dev=
-, enum sysreset_t type)
->   	return -EINPROGRESS;
->   }
->
-> +/*
-> + * Attempt to relocate the kernel to somewhere the firmware isn't using
-> + */
-> +#define PAGE_SIZE_BITS 12
-> +void board_fixup_os(image_info_t *os)
-> +{
-> +	int pages;
-> +	ulong load_addr;
-> +	u64 addr;
-> +	efi_status_t status;
-> +	struct efi_priv *priv =3D efi_get_priv();
-> +	struct efi_boot_services *boot =3D priv->boot;
-> +
-> +	pages =3D (os->image_len + ((1 << PAGE_SIZE_BITS) - 1)) >> PAGE_SIZE_B=
-ITS;
-> +
-> +	addr =3D os->load;
-> +
-> +	/* Try to allocate at the preferred address */
-> +	status =3D boot->allocate_pages(EFI_ALLOCATE_ADDRESS, EFI_LOADER_DATA,
-> +				      pages, &addr);
-> +	if (status =3D=3D EFI_SUCCESS)
-> +		return;
-> +
-> +	/* That failed, so try allocating anywhere there's enough room */
-> +	status =3D boot->allocate_pages(EFI_ALLOCATE_ANY_PAGES, EFI_LOADER_DAT=
-A, pages, &addr);
-> +	if (status =3D=3D EFI_SUCCESS) {
-> +		/* Make sure bootm knows where we loaded the image */
-> +		os->load =3D addr;
-> +		return;
-> +	}
+> +		ret =3D efi_get_variable_int(var_name, &guid, &attributes,
+> +					   &size, data, &time);
 
-Why don't you simply call LoadImage()?
+This duplicates code in efi_dump_single_var(), do_efi_capsule_res(),
+get_dp_device() and others.
+
+We should carve out a function.
 
 Best regards
 
 Heinrich
 
+> +	}
 > +
-> +	printf("Failed to alloc %lx bytes at %lx: %lx\n", os->image_len, load_=
-addr,
-> +	       status);
+> +	if (ret =3D=3D EFI_NOT_FOUND) {
+> +		printf("Error: \"%ls\" not defined\n", var_name);
+> +		ret =3D CMD_RET_FAILURE;
+> +		goto out;
+> +	}
+> +
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		printf("Error: Cannot read variable, r =3D %lu\n",
+> +		       ret & ~EFI_ERROR_MASK);
+> +		ret =3D CMD_RET_FAILURE;
+> +		goto out;
+> +	}
+> +
+> +	if (var_content_is_utf16_string) {
+> +		char *p;
+> +
+> +		len =3D utf16_utf8_strnlen((u16 *)data, size / 2);
+> +		strdata =3D malloc(len + 1);
+> +		if (!strdata) {
+> +			printf("## Out of memory\n");
+> +			ret =3D CMD_RET_FAILURE;
+> +			goto out;
+> +		}
+> +		p =3D strdata;
+> +		utf16_utf8_strncpy(&p, (u16 *)data, size / 2);
+> +	} else {
+> +		len =3D size * 2;
+> +		strdata =3D malloc(len + 1);
+> +		if (!strdata) {
+> +			printf("## Out of memory\n");
+> +			ret =3D CMD_RET_FAILURE;
+> +			goto out;
+> +		}
+> +		bin2hex(strdata, data, size);
+> +	}
+> +
+> +	strdata[len] =3D '\0';
+> +
+> +	ret =3D env_set(argv[2], strdata);
+> +	if (ret) {
+> +		ret =3D CMD_RET_FAILURE;
+> +		goto out;
+> +	}
+> +
+> +	ret =3D CMD_RET_SUCCESS;
+> +out:
+> +	free(strdata);
+> +	free(data);
+> +	free(var_name);
+> +
+> +	return ret;
 > +}
 > +
->   static const struct udevice_id efi_sysreset_ids[] =3D {
->   	{ .compatible =3D "efi,reset" },
->   	{ }
+> +U_BOOT_CMD(
+> +	efigetenv, 5, 4, do_efi_get_env,
+> +	"set environment variable to content of EFI variable",
+> +	"[-s] name guid envvar\n"
+> +	"    - set environment variable 'envvar' to the EFI variable 'name'-'g=
+uid'\n"
+> +	"      \"-s\": Interpret the EFI variable value as a UTF-16 string\n"
+> +);
 
