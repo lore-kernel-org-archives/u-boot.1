@@ -4,78 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 192E8E668B9
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 15:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DECE668B9
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 15:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AA1289046;
-	Sun, 24 Nov 2024 16:34:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6A6AF89523;
+	Sun, 24 Nov 2024 16:57:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="t0melT57";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BcFoEYQa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E454891A8; Sun, 24 Nov 2024 16:34:25 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D756B8952C; Sun, 24 Nov 2024 16:57:06 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFCF789040
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:34:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A04C68951D
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:57:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732462461; x=1733067261; i=xypron.glpk@gmx.de;
- bh=O7wl/YoEmvSYSHC3kLWlxqywB01Ki3nUtT8P8oMmHTo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=t0melT57KLhKC6k/7LkqP8qH8R7+rZ/aKmYxT1EsDbSVtBBlKs9NiZT4nDG57ZEy
- 2FczEy79IORIowJQ8LkFodGT1dkJFFuu5BuebAWxoNHD12A+WrZb2BcEbNGHSQDev
- 2F4C84p4ZdarkwEvOrQgMyYywOsyZgqFun0YQT9iAMiuxMqrbMA+UB1bCcciR7GcV
- TIpcLHw6zFUl69XtZ4jTAxpTSW3LH9ea0khFoEmV+zHqhcLaMpi0qCYjC8hcJckms
- im2HBOeCxV/PXXOUboOVebVvAISqsDjWTDa6+ccv3dsIk0g03D8ey1G8dssXZ2ipE
- HDZiHZnk7IaTVbZzgg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M1ps8-1tHRY449X6-003dHb; Sun, 24
- Nov 2024 16:34:21 +0100
-Message-ID: <ce72d064-807a-47a6-abb8-e9110c63b739@gmx.de>
-Date: Sun, 24 Nov 2024 16:34:16 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6d83bff5fe4so11760966d6.3
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 07:57:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1732463823; x=1733068623; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WKBpaejFxBY14vQv/OMftRJE5nGSoQkrkhrcVWWFHro=;
+ b=BcFoEYQaJdMDvuQOBShxF4M3yP4z299O9co1qkujI7pRc7OymVTAEsLZAd/E5l/df9
+ Fa+YiZQIu4RORFWJE1nVzKHr2oZFafTyXT0n+nIZ+lsVQymM3RRJuyP/6TAl1XqhXjZI
+ 5hw/KSTk6XpX+YLW7L+Qpto/Iu3JuGOMHGPY8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732463823; x=1733068623;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WKBpaejFxBY14vQv/OMftRJE5nGSoQkrkhrcVWWFHro=;
+ b=TZxSwRzVq+dZ2lrpL/ems07gqJs34LxFpdUDIMfPmGos7w0MHTbPdSGZhmY1ScWBt2
+ liLg0dLL9NyR1YnNH1m4O3DbaZuBOXrtMB4bDzczsgVbFTLQN+o8vcSYqu1cn/T3ih6s
+ fTg6KDL4HTrqjTGoSEwZqZmJKXWCo7e0+27Q8R44sq13Itwzz1WfkWf6yy8g7ILo+B+Z
+ IKtIqa99+eg7QOfV1138SZvYK8CfSMKIwd1FV/QOtjHRdE8UpBAteitAfwOJ/5Jt8H9s
+ gIlsL8A+N5uLF4t2cGFcp3zdp3zHeSaAmqDrliV+DsKm4W5hG5mrnmJylI9vmy1LrV3o
+ pPKQ==
+X-Gm-Message-State: AOJu0YynPI7aZX7pY6REaN21uRW/3WapXi1t6J7/TCye/fXPdxIWyw8c
+ jawVZw5+VejemG8dmglTjxl5CyOi/DaCkhO8i+2o57k2hGtaPfNdEnW4hmjAPFc=
+X-Gm-Gg: ASbGncu0HPlbtbXJc1jK2eT963pU0eiyE3u0mTfTMfl1uZtsv9+a9lYUOwr6G2q8JHp
+ 50jCIZv7llXN/hTb2QlFMj/S7D5o6xO3CtkI1fzPBx7ElQiE7p0t4YxMfg8+/rnz086ssuVqPct
+ JLXqDC6qMAmX+wnMY12idfg2rhgyASByQtqLtw1XXEhPmBxAq6M14HshMkVKkDAf77wNUmVSU3x
+ Nu3sGPm7DnszhGMKYVg4GNbfhe4HNm4gSQx7HOmBkX6jzMrmw==
+X-Google-Smtp-Source: AGHT+IEzRlnY7IdbS+jfURF2X0LNBu+awN8VvioVxK6vSI7C2cWEl5vayY7nySPxJ7oC74JxN5akEg==
+X-Received: by 2002:ad4:5bcf:0:b0:6d4:36ff:4354 with SMTP id
+ 6a1803df08f44-6d4511555e9mr154399836d6.37.1732463823487; 
+ Sun, 24 Nov 2024 07:57:03 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d451b2509dsm32479266d6.83.2024.11.24.07.57.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Nov 2024 07:57:02 -0800 (PST)
+Date: Sun, 24 Nov 2024 09:56:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Matthew Garrett <mjg59@srcf.ucam.org>
+Cc: u-boot@lists.denx.de, Matthew Garrett <mgarrett@aurora.tech>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [MASTER] Pull request efi-2025-01-rc3
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:i8th8YCJqBY9l0v5M5EBTFMxEFhAMdDgg6biJrvTcGaVtJjU7jw
- yThobwtdH27A+GKSzwLapXGtSnFZvvAc2NVBaWhVTmdmd7dZ8XxddChiK911cbmMJrE9F1e
- 6ehiSnAMMUsKS77QH9PQdXxGjzUB+7drQamqyjKbdzVH1XrFpiqMaFYX/4oh/TbGnF6cDUx
- 3FFcdrwuoFMkU78SGlUcA==
-UI-OutboundReport: notjunk:1;M01:P0:VpbrNIMDvJE=;vU7fSUO6uPBjoVEkmrGMXNm1Cun
- cAXJHqlG36+VbMcKnpl3jxPbFPAxTbSww2LaqqtiMWZzM2ZfY5+x3OepZ5gUC6AQihfn1TY1y
- pZIVE2smbZwkyaf2wtv8uWNeMXoRZaxQajtjeQGO2byq+IV727hCkk4ZFb4SKTQMQuPEoyg3h
- p6KepY3fSLcPwbY9mNBl7EUJ8rfU54FKCI/BBkKcEvDsyr4ggKkEGUp1JHyg1+C4wyTJRO6HW
- chWThsPxSVXzuTwUjaYLrEKq2XYQfp7CWCMnkXdaX7jt1nJHK6Bfjez8EkFiRbB+spnBDWuYb
- IjHUGmhnNFAb8Mxz1/0RGWSplkI5LJWxSivkl1kL4flnNg5MUs0+tK3fKMgd5AonMjGpy2Nhj
- h8K8kX63jhxOICwaN5VtFQJucPxtqyrpt188r7MoL3AX2dmIsHnxucqKge1MtbqFTEPoAIobp
- grdOj5Wjv7S71eBH7GwP+coT5zInyqYBrWKpy3uYEVAUGxmqAjmkpg05Bnt/odfOSgI9CZM/d
- BzJW25K/RY4DXlqEGxAQgQ2LgNGyKJv+tY63YYcN4ctoGYKB0kqGiiIVI9znBZ/7K18Zw68cr
- NJAGtGH+qEpvVcZZ9aplaj37767hUNu7h5OBRs5cnqgEZ11U2DYXB5FLpOC5sOaEqp/mb0erg
- pccUhw9o7rL+/0ULRoeC6W30VlzYrDEPsgaR98O2nvWphHsv7NfzH7oN/OaHYAYRgNVRnem13
- VuvDDuhEtN6+T+Vo2fd8iQw1Eq8WgRL9BAiwx4q3OEmQ2xmIQLV9qAdlWV2Z8OtpDwIizmHNz
- tbQTkSMNTGPWkDUrpO89xVwNhkX6FwGYqBFEup0MskDf0jCBAqj/zY214hYq1k0ROiwrlCwzr
- +SLC5wUjxkaLXCsBzYr4ctaFq0VgnmnaEQYLLQY2JyX8hWw1Vg+EBfS4Ocuy4wH/C6kHPrjui
- zTys/u7bCWukZj7cLSyLX6UhyP1f4Sxjd8GC8FjNanuyGOPXp+HohUAduJJ0znL4AAFDEi0pv
- zqhf0cNsAf4c7jU97tlMrf0+tMvGPeibgUSzMSbCwLZHgS3clcq9i4vtrp5n34o1oFxUDONQm
- lTNICVdlI3K5hnt/p5WUrC+pjZbhut
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 03/10] Add a command to find a load address
+Message-ID: <20241124155658.GC3600562@bill-the-cat>
+References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <20241123195616.305687-4-mjg59@srcf.ucam.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iEo+nLbvtz690P5E"
+Content-Disposition: inline
+In-Reply-To: <20241123195616.305687-4-mjg59@srcf.ucam.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,68 +102,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
 
-The following changes since commit 52c0e5f8a39ef022ee5ab2dfd67661d1d34941c=
-7:
+--iEo+nLbvtz690P5E
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-   Merge branch '2024-11-22-assorted-fixes' (2024-11-22 15:04:54 -0600)
+On Sat, Nov 23, 2024 at 11:55:02AM -0800, Matthew Garrett wrote:
 
-are available in the Git repository at:
+> From: Matthew Garrett <mgarrett@aurora.tech>
+>=20
+> For systems with more complicated firmware, the firmware memory map may
+> vary significantly based on a number of factors. This makes it difficult =
+to
+> pick a hardcoded load address. Add a command for finding an available
+> address with sufficient room to load the provided path.
+>=20
+> Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> ---
+>=20
+>  cmd/Kconfig     |  7 ++++
+>  cmd/Makefile    |  1 +
+>  cmd/addr_find.c | 87 +++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 95 insertions(+)
+>  create mode 100644 cmd/addr_find.c
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2025-01-rc3
+This needs to be reworked on top of how lmb works today (which did
+change post v2024.10) and looks a lot like what
+arch/arm/mach-apple/board.c::board_late_init() was doing, even back in
+2022. Do you end up using this functionality on more than one board /
+family of boards? The easy path is likely to just follow what mach-apple
+does, but the more broad path would be adding an option to configure the
+key environment variables that are used as buffers and documented in
+doc/develop/bootstd/overview.rst / doc/develop/distro.rst dynamically
+rather than statically.
 
-for you to fetch changes up to 967d57ab592ce1bcab0785f8483b1b43c2d881aa:
+--=20
+Tom
 
-   lmb: Correctly unmap and free memory on errors (2024-11-24 15:25:03
-+0100)
+--iEo+nLbvtz690P5E
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23529
+-----BEGIN PGP SIGNATURE-----
 
-=2D---------------------------------------------------------------
-Pull request efi-2025-01-rc3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdDTMIACgkQFHw5/5Y0
+tyxVBQwAowF0o6Ks0t/SqW/xQUPEYFkOEhFKq7YnVNBwyzLTOrDHwU8zEX0n1H7F
+BqROFN381wOSR7wo+y3gK3V3mO1O79/P8sCZNZ5PhQnxnpLp27JGGu+/E/bGRvO8
+++xxS8M5kFzoYQxU7qxjq60J5HxQ4Hhu6Rgh9xfbGfHAQQoTaGT0TtAWtyXjG1Vf
+lhxKC3sGJp7dgp8DgjU/x2V6NGvDNeRnAe0hEXhd0pxRPjgh0PqXWO3GmAHVXzbx
+8ai7bnF1qNwmBdWhi3OefuTtn7U7ILO9iVpwbVELsnGvhVIjHYq6M4sDShL0QA+i
+Oi/kqPWCrS524alR6WgQgWJq0vuKZW9GE2r4r0xj7i/pB/Lci4wxGyixYNvZEhh1
+JzfyiizhSxp5r6Zg+LzPCZmOykeK48Wv2B8M7DtozMMfLEPB9I287H9AogcYtVwY
+IJeIJixNEhmdpgEBvFi1hLowu+smFGtUbjGU17zrG7+Z16ocLsyy6mIUV1Vr+RS5
+NdiL4wYC
+=Z1Ol
+-----END PGP SIGNATURE-----
 
-Documentation:
-
-* document wget syntax enhancements with lwIP network stack
-* move README.kconfig to HTML documentation
-* remove redundant README.TPL
-
-UEFI:
-
-* simplify efi_tcg2_hash_log_extend_event()
-* allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-* correctly unmap and free memory on errors
-
-Other:
-
-* enable EFI_LOADER_BOUNCE_BUFFER on StarFive VisionFive 2
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (5):
-       efi_loader: simplify efi_tcg2_hash_log_extend_event()
-       doc: move README.kconfig to HTML documentation
-       doc: remove README.TPL
-       efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-       configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
-
-Ilias Apalodimas (1):
-       lmb: Correctly unmap and free memory on errors
-
-Jerome Forissier (1):
-       doc: cmd: wget: document lwIP syntax
-
-  configs/starfive_visionfive2_defconfig      |   1 +
-  doc/README.TPL                              |  49 -----------
-  doc/develop/index.rst                       |   1 +
-  doc/{README.kconfig =3D> develop/kconfig.rst} | 124
-+++++++++++++++-------------
-  doc/usage/cmd/wget.rst                      |  76 ++++++++++++++---
-  lib/efi_loader/Kconfig                      |   1 -
-  lib/efi_loader/efi_memory.c                 |  15 ++--
-  lib/efi_loader/efi_tcg2.c                   |   5 +-
-  8 files changed, 143 insertions(+), 129 deletions(-)
-  delete mode 100644 doc/README.TPL
-  rename doc/{README.kconfig =3D> develop/kconfig.rst} (54%)
+--iEo+nLbvtz690P5E--
