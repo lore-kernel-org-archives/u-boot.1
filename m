@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF52D75E34
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86854E668BC
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6685B899C2;
+	by phobos.denx.de (Postfix) with ESMTP id B602E899C9;
 	Sun, 24 Nov 2024 20:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JZEeMc+w";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L7fq+orU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6804D89920; Sun, 24 Nov 2024 20:18:04 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id E5EFB89920; Sun, 24 Nov 2024 20:18:05 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 183FB89578
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:18:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5056F899B5
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9ed49ec0f1so601873666b.1
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa5325af6a0so189247666b.2
  for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:18:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732475881; x=1733080681; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732475882; x=1733080682; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=tUPs0yp6kU8qCe+jxwHLZfTPx5odl1foc42JUWMVeHU=;
- b=JZEeMc+wUJfudqw7d3MUqFz2JOc5I4sxo8rJYi0yed0JfR5y1rehv+GhG+ISjVRyMk
- 1k1Df2Mv6Ouk6DXK9VmMGSpPx4HvxFBYcTvaqaCu2kXUyCfJ9SDjInfh7AxL+xqgAaW+
- BV3/z+H/RM5eTY95Q3UvJfuz1Ht5kBtHliR5IDKCqFN2Gb26gDgImRjlsjU4j2YSurh1
- Pbe5G7E8RZ0HHtdhMFXatfgxUXkIbEY4xBxQeu7YSPNKXwnheAkdsqHXsjAV9qtr05yq
- lWXzgnxb6JuA508NJ3MsA44kZ6boFf9mI00VTKXIPkBrg6nyAf3Giq0bHidArunzFySU
- swVQ==
+ :reply-to; bh=RjeBhaqIirQRAw5XkNFw7+PXaJs9j/MkAcv8cgNDNtY=;
+ b=L7fq+orUGOEFkdVzKGy6ILfS7Afo9BSxvyXMUY8JhOwnT+bfhIQC3nDCS2Rl7Tn66j
+ mVAnB/X3Jhn92ecfqRGG9ynZ/42/2DWVdfxUEC7osHbCOvYrWQ0wQc4ume6DN53JOnkH
+ 171M0XUl5Ca14nVfuysUxJAJzqbfuBvaZu1YCLU6ktY3oU8UIUVvSDaYnQjrbkuaRlHk
+ qD3Z9SQBJoTbRapGHflhhrhkN/bSvc+oUckRzLxbVWI6M2ZjV8Ise2aQEXrneTjRuHVA
+ ySAi39sAIcEwbx+rFkXJcba8D3x+gOiVar0xjJs19oX0UyH35KZsrcZcGtkK8ZKqBv+R
+ 1AkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732475881; x=1733080681;
+ d=1e100.net; s=20230601; t=1732475882; x=1733080682;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tUPs0yp6kU8qCe+jxwHLZfTPx5odl1foc42JUWMVeHU=;
- b=LBFwj9v8z9OPBfWGR4uR6hmjl/NsjSTLXQslq7hA1H2E/YYd9UrPWqnpyvcQqPY+QF
- ccWRmpZS4g8bPWj+/X4R0WYTOi+epNV1JY7XxNMD6Ogmac+SGfq1kAoGFoCYk0znlIan
- oLkff8OD0q/v85FzX3nZSxTwOZyac9lS2+bqqFWZnpovS6dvlXw0Tq6G6zAnAYMFMNig
- oSSQelHrh62BOTYkqQGnegy/75rgn1fZSkcwtd8VyOmUxZvae2yac5B1svZQqyKWueQW
- o9drpFbPpd47mJ0riOwoM7NaYZ5VUOpgSgxiZw52TWSgNpwCn75oAOkaLz/PhJVEzoNh
- G5jQ==
-X-Gm-Message-State: AOJu0YweTHeUnbLpOQfhrZTJoaez52POF/i8L827zXlZ0vAVtxxBT9t6
- kth1xHhM3evd8HRhI8fkWoN+8ijHcALJq96psMRpxJ0bylT6PJ9bGnPmSLVINNKBYJW4WstR+qu
- mSSg=
-X-Gm-Gg: ASbGnctwRrN6t5UfLDzU2xYMDGOkK0/fIH9REmtodL21exg5OX2K3j0EHnU5MM9VxTk
- NCLKRcjYpjwmDoyVW9Jy+UMdk/XN0v4zsK8p+Liwd1GlnP6YojP5DINTmZpSxVe1IWsMEf7wBCu
- 1jF4VkA6DBGUn7PUFYdG59maTgEtRHymFLsmAvSBuJz7wHIs4m6Fy2xXtJGivp+paizMofx8FcD
- +ltDshE7RA5eyA3RQ4cERF5bmC1vVHKLP9QG2XDMBqFu6tchefFRtlkIvYg+/XWoelI
-X-Google-Smtp-Source: AGHT+IFpKr1XQMAtOmZCQ+kvYfMS7Z0gHaL7p5GgG1CO6QTmEVIsAYm6ThPVeD0AOj09tYQrCY8wRg==
-X-Received: by 2002:a17:907:ca09:b0:aa2:c73:3720 with SMTP id
- a640c23a62f3a-aa50a0a7d77mr820548466b.58.1732475881638; 
- Sun, 24 Nov 2024 11:18:01 -0800 (PST)
+ bh=RjeBhaqIirQRAw5XkNFw7+PXaJs9j/MkAcv8cgNDNtY=;
+ b=T+YvzwJmzN2epJZeAvpFXQjCWdGHClKcmnwyhtxA3tXm4MPPvWn4ahBue0ocmJk6S7
+ fryT79OXjV4bzHu6TFunQhQNZfj/jvrGDGrKwwMknU4AfOmjCTMqnAV+UXtMo1c6M7Hv
+ b/HHYVZZUNIg9ugoHHihx70ly8ZqeODRMKlz96C4HY/o9ovQ3KzbppweboZ5czBzb0g3
+ y2SdqxH3VKVE5BQf0h1ZScjPhvAG0nWCiblQwkxGZ6fWkFZWibRK6M9EguuwjLm11TIo
+ iZL9EUcwog3U5vpbRg9V4tRDym/F1f5i72PwqMt8yH8bZFvHGiP8eSmcC38J9CHdwEkW
+ PJKg==
+X-Gm-Message-State: AOJu0YzTahmQcC3R6TlNMPAZLCzch7ypvCm5pext1yJOVB4TsQrN84g5
+ 7wUOi2Nfphfl4ZGMK2+yJWkzmBqE4V7JWg00mR9FtgL8MN59ObxNDgFYSdv6eKQ=
+X-Gm-Gg: ASbGncvIioM/f5nUeXaG5IyVjH7qwFL/2pxPbrj7iKKmSTW49hEKqDdMcQbxModb+A+
+ qEu+x8jHS02pE9jl8Mziwq6OO8taOt3GwpIX8bpEZw3GVIfEkkYHnTYy6r9FCclW+GFbPdRWtT5
+ hjM4aQZ4oLlF6KX+ccVLMIeuMZzB4VzPiq+IFkAgBz1bL5JeT8qjX78tpHuVNR247qXyse5g646
+ xXeCCfI5hXxtP9aEHqOW4ghMjJ+hUINnXB82HCEc3Fq+zuI+mERgOW4t7Ul2DsDp6wB
+X-Google-Smtp-Source: AGHT+IECwkTUGiTS6s0jdkO+hVaDYtjVDDfzjvianh/jhmA6SxpUi4zHYnUxPBXsNon7hoh9mJVRrA==
+X-Received: by 2002:a17:906:599c:b0:a9a:eeb:b263 with SMTP id
+ a640c23a62f3a-aa509c0d7femr831025866b.58.1732475882512; 
+ Sun, 24 Nov 2024 11:18:02 -0800 (PST)
 Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b28f848sm371874566b.36.2024.11.24.11.18.00
+ a640c23a62f3a-aa50b28f848sm371874566b.36.2024.11.24.11.18.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 11:18:01 -0800 (PST)
+ Sun, 24 Nov 2024 11:18:02 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Sun, 24 Nov 2024 20:17:56 +0100
-Subject: [PATCH 14/15] mach-snapdragon: fetch serial# from SMEM
+Date: Sun, 24 Nov 2024 20:17:57 +0100
+Subject: [PATCH 15/15] qcom_defconfig: enable QCOM_SMEM
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241124-b4-modernise-smem-v1-14-b7852c11b67c@linaro.org>
+Message-Id: <20241124-b4-modernise-smem-v1-15-b7852c11b67c@linaro.org>
 References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
 In-Reply-To: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
 To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
@@ -84,13 +83,13 @@ To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Sumit Garg <sumit.garg@linaro.org>, Mario Six <mario.six@gdsys.cc>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1342;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=596;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=vXtKUBdkMOD+rs8Qv8lyRTm3q8cJlHAlpVPQp8PMFtk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTn6pv9d8um73rrHyrTrHLbyzhgjZzVy4Bbdy7dY9/Io
- Lgg4GdYRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjICQGGv2LZ58Uu/JlsFbeB
- r3lV5xLhoE1/cifEvl4u71h5w5bR1Yrhn6W4x/XLoR+TPxhKlb1MNijXuNWyRfDM5i1SGbP326g
- f1gcA
+ bh=rjav2a8/SG5oSCZLcwsNWj1/xZr8bVLlTaBGS/39Uj4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTn6ptbfwtmbD9r4pzxbVbO1FSN+ysSm/p9Z62JuPaq9
+ uj/nDXbO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEJnUy/LNo4X+9/+3K7vmL
+ iyOD+e09rydNvMVctG3vIn737C9c8Y8ZGeZnWj85n6EfyPJgk2j6XFU5mz8TxErrXhVbP24sV5g
+ dJgYA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,57 +108,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If available, otherwise fall back to cmdline.
+Used to parse memory layout in some situations.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 269d39e4f6e1..dbac8aa2709a 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -30,8 +30,9 @@
- #include <malloc.h>
- #include <fdt_support.h>
- #include <usb.h>
- #include <sort.h>
-+#include <soc/qcom/smem.h>
- #include <time.h>
- 
- #include "qcom-priv.h"
- 
-@@ -198,11 +199,16 @@ static const char *get_cmdline(void)
- }
- 
- void qcom_set_serialno(void)
- {
--	const char *cmdline = get_cmdline();
-+	const char *cmdline;
- 	char serial[32];
- 
-+	if (!qcom_socinfo_init())
-+		return;
-+
-+	cmdline = get_cmdline();
-+
- 	if (!cmdline) {
- 		log_debug("Failed to get bootargs\n");
- 		return;
- 	}
-@@ -353,8 +359,11 @@ int board_late_init(void)
- 
- 	/* By default copy U-Boots FDT, it will be used as a fallback */
- 	memcpy((void *)addr, (void *)gd->fdt_blob, fdt32_to_cpu(fdt_blob->totalsize));
- 
-+	/* Initialise SMEM if it wasn't done already */
-+	qcom_smem_init();
-+
- 	configure_env();
- 	qcom_late_init();
- 
- 	/* Configure the dfu_string for capsule updates */
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 30f7b1c773fa..b49d897123c1 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -109,8 +109,9 @@ CONFIG_MSM_SERIAL=y
+ CONFIG_MSM_GENI_SERIAL=y
+ CONFIG_SOC_QCOM=y
+ CONFIG_QCOM_COMMAND_DB=y
+ CONFIG_QCOM_RPMH=y
++CONFIG_QCOM_SMEM=y
+ CONFIG_SPMI_MSM=y
+ CONFIG_SYSINFO=y
+ CONFIG_SYSINFO_SMBIOS=y
+ CONFIG_USB=y
 
 -- 
 2.47.0
