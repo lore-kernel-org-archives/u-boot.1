@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE6BE668BC
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:19:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A49D75E34
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:19:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3154899BE;
-	Sun, 24 Nov 2024 20:18:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2878E899AD;
+	Sun, 24 Nov 2024 20:18:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Et873+BR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FKHRcp8b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7084E899AC; Sun, 24 Nov 2024 20:18:01 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 750C989922; Sun, 24 Nov 2024 20:18:01 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DDC289986
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:17:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67A0789578
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:17:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa549f2fa32so80085566b.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:17:57 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa549d9dffdso88846966b.2
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:17:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732475877; x=1733080677; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732475879; x=1733080679; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=fbZv7I51Fvc8FujdGK3KkOlLr4aE65D95KWDsJk/+u4=;
- b=Et873+BRKrbyghp5Sn1l8z40o5B3SacSbV3RWmsPfshyK2P5/r5jIj5pIzsFuTjGOx
- ety1JVyhPqUP2pab31Hjs2XtETxL2pTAwnJy9eZl32VmGpIDRAupfI/HWROd/aAb48tn
- dnfhAg/y0yDGnKZT1suBtF5d4ly3B973nDQVVdi3wHEZEVMTBaAR9GoxrAz31ZGIxdU2
- NBRd+Oy8NqB+rwRXtZJC5Vhm36U1SXo20u4Yuv/bVgObLoKvsulvCWSgc6fCtzUYYe4x
- a8NVT9DwDUjs5ZHbL0NGX3vFKkRC4t5EGzjwZw2+cVs/+n381jLxKes6hMT3KQa2ikdp
- pTuQ==
+ :reply-to; bh=MClsSL1e2wvBAGUc3z1v56Mq9hCHj5kkjYLV+fa+pnY=;
+ b=FKHRcp8bTdvksPYjeti/dUHnWyWmux757vvmARvszFKpf650kd+LQ4oE7wQURB/C+u
+ bmhMRe7JgRBUvI40s09l9yTBbHmUmhq7pmqpDC0Dnx8RflAuoz0j6DFFKIV228ddFN4o
+ RQ+0jtWROSP5tqk8gMPFkuGUWLmVl2i9tn0OqyO+SMuoOFuB0Cu+GZ2W7M1oj8PILZLM
+ Ga/qmMh8T8tpZF35JwTmxC6cUaREwK5S9UlO0NFW+U5tsFfOJW2qprqjuLFYV3QByvfR
+ Mqeddfcyisnop1GQRY8yV/yVis/SwDl1hYCAHpV6EQkQjbf/uCDBygZ+8cguFIEUb5qk
+ oKWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732475877; x=1733080677;
+ d=1e100.net; s=20230601; t=1732475879; x=1733080679;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fbZv7I51Fvc8FujdGK3KkOlLr4aE65D95KWDsJk/+u4=;
- b=h5Qs5Xytq+M6wc6KsVqc1kgZ6a7VKSyNsbq2r1JLNnHIMcXrne0mk5tkJI7kubZpQu
- e2tK2P9YpQFNcFuujQHpu7dTodQTdj88mYqDVHmr02SW0DocDSn27h4Hj/s8YzKr0dHY
- jHI+Zz5GEWwkdKXPig39ObB/OxaBzFS8ot1DpjiuMnkF36UItaQEc/AKO18c63QYCLmo
- 8GSi0smbmyZaV21i3EQCr8xmhwE+ZG7ctvb9X8wTRj768SwLOwioeIkbViXeUZy6attD
- 60jXovgCiAFMouILYtfw1YGk8n/hb+1deh6xNs7uCY7kPKaumx5sYqxmR33TMFjf6zvt
- zw+Q==
-X-Gm-Message-State: AOJu0YzepB3pbU7Aw9iBP2SUCXyqxgi6dJ1SY5mW6AWaOGC2l0koiLu7
- yNoRpcB/43JF/l8ScUoLHMZBzGFG/aXfUZMGt2M4mGJj59nuT4mmM0rhiRArid8=
-X-Gm-Gg: ASbGncsuUbNu3MAaVoogFTV0/EZkJ2bA2asJUixP3f7FnGlwmhz9F/2Jv99k4wcD/mm
- 6GSwsJempIZrv9mMEPZpAAl1hThZAT3Wz6Ju7OFB6mqQwfAMqCgU7Ylr2xWYx5jhQvBE/Wu7aVC
- Aj/guDyHudR0W9QPC5vHInFltoL1t8bmkKC2yrFTnI5jL5V8Wsh1tgPaedeUy5s90/OhWIyRKnI
- CyNviteDcdzI5Vcr33a/Qyd5DKzH1UiXwPuTsfiZkOTVeleBnVCWjAgMIRj/FyD6rVx
-X-Google-Smtp-Source: AGHT+IEaboD9LIiolLUR2e5COxF2ZGnT1c6JAqfc6wzzO9A+JN0jXWZ42Wf75KxgKWkDCVI27palsA==
-X-Received: by 2002:a17:906:9c2:b0:aa5:297a:429f with SMTP id
- a640c23a62f3a-aa5297a431cmr640441866b.51.1732475877104; 
- Sun, 24 Nov 2024 11:17:57 -0800 (PST)
+ bh=MClsSL1e2wvBAGUc3z1v56Mq9hCHj5kkjYLV+fa+pnY=;
+ b=jbc9Dka4gAS7mDuMQy8wQV/bKzjh6EhEJPOkapiyzMAs88JMgcjzIvagEvI9ce+RMY
+ 5iZqcFGjG3cW8+w6B9AR/p1ZSWZu8oMGXYC0qtwbUsdSB7CXlkx4YmA0BEPTPlZ3H8ZT
+ VeJweJBorpktnMxBuoRPKFc9o8pSQxFO7dLOftpLDk8NlGF/gC7Ykk/pPxVHSp/VX/dY
+ t7kCZKF1ysruTFFcd4ugV1iuvMaFS3DQ8hfgqUCdpQKnRubBfMJ5MIH6sINMJkjRBfU1
+ lQ26teZ1A47aZ3h4Hmf56zWw7DTpCaAH/pDyqgTduRAxkCJwFoettn5x4VKLBE07xNi0
+ lmUg==
+X-Gm-Message-State: AOJu0Ywex0UMDmx5E79TDg9svIUKj6OCAQi3RPuUPMWrKNII5H9Pf4ws
+ pVKEEq7cJzP0t918Gf54pg04OfjiqaBNjVdLN6/hcPXRyao8+GyTNCpnLwJEFbg=
+X-Gm-Gg: ASbGncumCAqVzb1IEe/v2jWZgNQBlBFIrC67Bw/JRpl/9zPpavJx6vWf+S+Hyzass2w
+ LPu4M/BUO+KjjEO0I5UkHwfiq20sWHfRkL+SJGnUqgBs9JrJwoPoIeeRlPQkXukBXvUFQOUPgx/
+ 3+kPxde7zV0gv2VpLRAG9T0XQ8esASOqq3iKhXWYn39GNgY7sVZsoqrzRUO4ytS4Z1XByZwQF5m
+ eLrRG9V89byvM7Qrdy6NYrtEYEP41XFN5LRTieeafzUnZMsBIRmn8ePkAhG6SuS8e2O
+X-Google-Smtp-Source: AGHT+IEBRsKDMRFuYyjJcvIQVIOlhFkVGmQ49SFczY35U0JfvzIpcbSUAKMNTYsvT+qQERv8cSfqbg==
+X-Received: by 2002:a17:906:18b2:b0:aa5:152a:d0a5 with SMTP id
+ a640c23a62f3a-aa5152ae2a9mr960416366b.18.1732475878912; 
+ Sun, 24 Nov 2024 11:17:58 -0800 (PST)
 Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b28f848sm371874566b.36.2024.11.24.11.17.55
+ a640c23a62f3a-aa50b28f848sm371874566b.36.2024.11.24.11.17.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 11:17:55 -0800 (PST)
+ Sun, 24 Nov 2024 11:17:58 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Sun, 24 Nov 2024 20:17:51 +0100
-Subject: [PATCH 09/15] soc: qcom: smem: stub functions
+Date: Sun, 24 Nov 2024 20:17:53 +0100
+Subject: [PATCH 11/15] mach-snapdragon: increase pre-relocation malloc size
+ for smem
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241124-b4-modernise-smem-v1-9-b7852c11b67c@linaro.org>
+Message-Id: <20241124-b4-modernise-smem-v1-11-b7852c11b67c@linaro.org>
 References: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
 In-Reply-To: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
 To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
@@ -83,13 +84,13 @@ To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Sumit Garg <sumit.garg@linaro.org>, Mario Six <mario.six@gdsys.cc>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1326;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=687;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=0Q7QWrKEhKPoIqHJdNt08/uJsx0eh4DAgJs/Cmym8Yc=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTn6psnKzhEp80KPNjBdqWQ+67q+oS312dwLJyRd0j1e
- u+5qdusOkpZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEtGwZ/icx90b/enFIYXXN
- vX3C7dJumxsWe3p5qn88suf+vqiVwicY/kdzsGZxbW75M//v6tmP5h83U/Lp2SD9ZJZGwey5GxZ
- I+O4AAA==
+ bh=P/QiqoWmYOMMkdpsxY7kqwwQ68XMYt+OSTz5Ofylu2o=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTn6pu/Sm5wuTiaTV/m6nUlMsP014QYhuxHqw7ujD3/w
+ 9sp+kRyRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIXx5GhuWZx7mEuBqv/7oe
+ 7js7/LzDBP8bS95YFP5jYe5caO2sW8jwvyqymqnxQHSu3qK199br/unXyTe4/YNfvJ4vN4VZPWR
+ mEwA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,55 +109,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow smem to be optional for Qualcomm platforms by providing stub
-functions.
+Ensure we have enough space to init smem prior to relocation, since we
+might parse the DDR bank layout from there.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/soc/qcom/smem.h | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ arch/arm/mach-snapdragon/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/soc/qcom/smem.h b/include/soc/qcom/smem.h
-index 755003807dba..586432412eb8 100644
---- a/include/soc/qcom/smem.h
-+++ b/include/soc/qcom/smem.h
-@@ -1,16 +1,36 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- #ifndef __QCOM_SMEM_H__
- #define __QCOM_SMEM_H__
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index 976c0e35fcef..5f3a1b11d8e2 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -14,9 +14,9 @@ config SYS_VENDOR
+ config SYS_MALLOC_LEN
+ 	default 0x10000000
  
-+#include <linux/err.h>
-+#include <stdbool.h>
-+
- #define QCOM_SMEM_HOST_ANY -1
+ config SYS_MALLOC_F_LEN
+-	default 0x2000
++	default 0x20000
  
-+#if defined(CONFIG_QCOM_SMEM)
- int qcom_smem_init(void);
- int qcom_socinfo_init(void);
+ config SPL_SYS_MALLOC_F
+ 	default y
  
- bool qcom_smem_is_available(void);
- int qcom_smem_alloc(unsigned host, unsigned item, size_t size);
- void *qcom_smem_get(unsigned host, unsigned item, size_t *size);
- 
- int qcom_smem_get_free_space(unsigned host);
-+#else
-+static int qcom_smem_init(void) { return -ENOSYS; }
-+
-+static bool qcom_smem_is_available(void) { return false; }
-+int qcom_smem_alloc(unsigned host, unsigned item, size_t size)
-+{
-+	return -ENOSYS;
-+}
-+
-+void *qcom_smem_get(unsigned host, unsigned item, size_t *size)
-+{
-+	return ERR_PTR(-ENOSYS);
-+}
-+
-+int qcom_smem_get_free_space(unsigned host);
-+#endif
- 
- #endif
 
 -- 
 2.47.0
