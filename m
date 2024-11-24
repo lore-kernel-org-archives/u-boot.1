@@ -4,62 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B98BBE6688A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 05:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58600E668A0
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 05:16:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 609E4894D5;
-	Sun, 24 Nov 2024 06:16:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF9F2894F1;
+	Sun, 24 Nov 2024 06:16:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sh7dV3qs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iQeKqaOy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1F02894D9; Sun, 24 Nov 2024 06:16:06 +0100 (CET)
-Received: from lelvem-ot05.ext.ti.com (lelvem-ot05.ext.ti.com [198.47.23.236])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15CE6894CE
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 06:16:03 +0100 (CET)
+ id 84D7B894EE; Sun, 24 Nov 2024 06:16:13 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F209889981
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 06:16:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot05.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO5FpA0439075
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Sat, 23 Nov 2024 23:15:51 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5G5sp058856;
+ Sat, 23 Nov 2024 23:16:05 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732425351;
- bh=Z2aQ5eZFJWKV9wEfl1krZa+e0Z6mZSjnVpIH+U0NXqk=;
- h=From:To:CC:Subject:Date;
- b=sh7dV3qsYc6fhDTevik9d7SPzf0JDs/jqQLGWub/eaJJnQ+1TbdNUOQBZY28mmyHI
- iqklvGSfzbSF9B2NC4wa3qdEEmn6FJDDsTrBQzprVZG1gcLnNGaWJOxiUSDJqesyFu
- YfHoj2uN6b/S4dLSLidcQUJMQMR58ND11Dc3jl/w=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5FptX099999;
- Sat, 23 Nov 2024 23:15:51 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ s=ti-com-17Q1; t=1732425365;
+ bh=cDVwfA8iL/Ygwcma3RQa8ol0m/y8BY/P+Kc4vEfGdVM=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=iQeKqaOyL30z9Z+AXvpZWbflWCEETa/YJWypH1fjYGGI1vaaMlRQXnoaP4IMKAX5W
+ q1euGxpdJy2Os3UZ5a3sCRwITJ4FW5T588VvShdyo/7nlJeF8BidCgP/BHQrqdr2w1
+ Ca1i4RlcjnmJrP0TG1Q4wgF4KQwcGnLzwkY4YsvQ=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO5G5cd034458
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 23 Nov 2024 23:16:05 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 23
- Nov 2024 23:15:50 -0600
+ Nov 2024 23:16:04 -0600
 Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
  (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 23 Nov 2024 23:15:51 -0600
+ Frontend Transport; Sat, 23 Nov 2024 23:16:04 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5FkDn129179;
- Sat, 23 Nov 2024 23:15:46 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5FkDq129179;
+ Sat, 23 Nov 2024 23:16:00 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>,
  <m-chawdhry@ti.com>, <rogerq@kernel.org>, <nm@ti.com>,
  <sjg@chromium.org>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
  <afd@ti.com>, <u-kumar1@ti.com>, <sabiya.d@ti.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH 0/5] EFI Capsule "dfu_alt_info" fixes for TI Boards
-Date: Sun, 24 Nov 2024 10:45:29 +0530
-Message-ID: <20241124051545.382397-1-s-vadapalli@ti.com>
+Subject: [PATCH 3/5] board: ti: am62x: evm: Set "dfu_alt_info" only if
+ interface is SPI Flash
+Date: Sun, 24 Nov 2024 10:45:32 +0530
+Message-ID: <20241124051545.382397-4-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241124051545.382397-1-s-vadapalli@ti.com>
+References: <20241124051545.382397-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,53 +83,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Commit 2af879df86f8 ("board: am62x: Define capsule update firmware info")
+updated the "dfu_alt_info" variable to support use-cases with SPI Flash.
+However, this breaks use-cases where the interface is not SPI Flash ("sf").
+Fix this by setting "dfu_alt_info" only when the interface is "sf".
 
-This series fixes the commits which introduced EFI Capsule support. The
-blamed commits unconditionally updated "dfu_alt_info" with the
-"dfu_string" corresponding to SPI Flash and therefore its associated
-partitions. While this addresses use-cases where the interface is indeed
-SPI Flash ("sf"), it breaks use-cases such as USB DFU Boot where the
-interface is RAM ("ram").
+Fixes: 2af879df86f8 ("board: am62x: Define capsule update firmware info")
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+ board/ti/am62x/evm.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-As of commit
-52c0e5f8a3 Merge branch '2024-11-22-assorted-fixes'
-of the master branch of U-Boot, USB DFU Boot on AM625-SK is
-non-functional. Logs:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/726854b49eb199f4acf79028212fabdc
-
-In order to fix this, update "dfu_alt_info" only if the interface is "sf".
-
-The patch for AM62x in this series has been tested and it fixes USB DFU
-Boot on AM625-SK. Logs:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/feaed5b0a30aff752306d370531a4e10
-
-Series is based on commit
-52c0e5f8a3 Merge branch '2024-11-22-assorted-fixes'
-of the master branch of U-Boot.
-
-Regards,
-Siddharth.
-
-Siddharth Vadapalli (5):
-  board: ti: am64x: evm: Set "dfu_alt_info" only if interface is SPI
-    Flash
-  board: ti: j721e: evm: Set "dfu_alt_info" only if interface is SPI
-    Flash
-  board: ti: am62x: evm: Set "dfu_alt_info" only if interface is SPI
-    Flash
-  board: ti: am62px: evm: Set "dfu_alt_info" only if interface is SPI
-    Flash
-  board: ti: j784s4: evm: Set "dfu_alt_info" only if interface is SPI
-    Flash
-
- board/ti/am62px/evm.c | 8 +++++++-
- board/ti/am62x/evm.c  | 8 +++++++-
- board/ti/am64x/evm.c  | 8 +++++++-
- board/ti/j721e/evm.c  | 8 +++++++-
- board/ti/j784s4/evm.c | 8 +++++++-
- 5 files changed, 35 insertions(+), 5 deletions(-)
-
+diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+index 9075df01ca..3e5d6406ae 100644
+--- a/board/ti/am62x/evm.c
++++ b/board/ti/am62x/evm.c
+@@ -76,7 +76,13 @@ struct efi_capsule_update_info update_info = {
+ #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+ void set_dfu_alt_info(char *interface, char *devstr)
+ {
+-	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
++	/*
++	 * Since the EFI Capsule support is enabled only for SPI Flash,
++	 * update the "dfu_alt_info" environment variable only if the
++	 * interface happens to be "sf" (SPI Flash).
++	 */
++	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
++	    (strcmp(interface, "sf") == 0))
+ 		env_set("dfu_alt_info", update_info.dfu_string);
+ }
+ #endif
 -- 
 2.43.0
 
