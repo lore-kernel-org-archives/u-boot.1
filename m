@@ -4,60 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F60D3B7C3
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 22:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971D2D3B7C2
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 23:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A551C8976E;
-	Sun, 24 Nov 2024 23:51:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C9ABD887FA;
+	Mon, 25 Nov 2024 00:54:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732488678;
-	bh=gLYbLfd9N3pNliQ84XTtt+qFvOw+nfWADrnBckY8xEc=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=k3nx9GCEMbumw3KGK6KwLh0sM7UClYyf9q4JbxjchWbpTc5pookCvKdy4WCfjgpuJ
-	 3QsRxbEDbb1SNYoQXY3DIFu+CllEKwL6ai3m7Hp9JelFAYSiFPrxUTG2a0Vtq5abqD
-	 7VOw6ocBwGf0/n/zZ/Ri8N/GqKeb49+Mt4t9O1wu8r3omj1iokmbzCj4cjL5UKurBa
-	 +DdWK6jxtbim/47fFLiTF8jowY/C4o+8LUtov4THYz+PzA0VIdrzPTnM/QZz0iw9Nd
-	 P+5kcemS5YvxLLOhsgVCGMfZvwf3Ebdqq5jVFhsTTO5noJW6dCpET3vBPyr5QDsA/B
-	 rChaT/5gKBTsw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l4ViImFN";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8003C88B0B; Mon, 25 Nov 2024 00:54:35 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1EC43895B7;
- Sun, 24 Nov 2024 23:51:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732488675;
- bh=gLYbLfd9N3pNliQ84XTtt+qFvOw+nfWADrnBckY8xEc=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=LaJEDrNMz7WIqic7A2Y3yHRN7tkP14pkrTWBM2qevFsFKNoz51jiFimqKZGN52qHM
- +7JPb3LTRjqQPe6OxPWXEjTbs5f1tg1XtQumA0dwyA6iXe9PhRubGC0SLT8wxFOU70
- tiARebh3l4FHcfKfaeC5RGl9EqlV0aeuzUao9yg5wGetBDip2qQg83jNXoxDJtq67r
- XL1gJIEmP7hC/wdFXrebFBqj3cEkuXY10Npjsm6xX7MACiZtHoodSBFcXRhdix2fNg
- Lz2A5rPAw2Oa9NRaas2dWqqkGzKQu/R7dt1kDs0Hhvx7/xH/u+Dc7CuLFk2pTIH6QN
- 0sBhHa3/GbDeQ==
-Message-ID: <751efcf2-b51f-43b8-affb-46fdbd59002a@denx.de>
-Date: Sun, 24 Nov 2024 23:11:21 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 568198877E
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:54:33 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-4668983b04eso7976541cf.1
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 15:54:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1732492472; x=1733097272; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TzI4qkeY+pdV3kQN6kpjQAXX6W5Ys297UHRHoeaeJV8=;
+ b=l4ViImFNxhcYMHU50S9Q9XHeddWSh1g7kVkZHcLcXBbF2TSTYXhsHjiykHQaLD9RRN
+ w2yGpLgTFfj4mDm+oGvoYnDRuAnOCRNRiRH8xyfRPZ8CTeNQ+0ywtRoP4QAiwLfdWfhL
+ 4eovl1mzAMVlzuSRkYnQ9Zml2hu+6O3/WSpog=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732492472; x=1733097272;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TzI4qkeY+pdV3kQN6kpjQAXX6W5Ys297UHRHoeaeJV8=;
+ b=H1X9YR+DaKQZBr1pyr5LQCmbAJfxNzw6GJ9bdiZ4Vhyhxw5s0f/qHsUlkIjkxE/XtT
+ Csr8vXMZ9p+816rsoKDYo/u2frjln1xJ3gBAyzuHvXx6yHLONkwNugF8gRHZsmDlCER1
+ o7QLHr5+6tmbT6EstLuz/KWkerVGWVf4xHOCEBHg2Ks5OPoTOdPlHG/734g/563WHK0E
+ X1XpUEyaaSs2Ekp844N8KGM2IEG6P8B4SN1hj/kkIFrv4WNP1MALJQ63lC6q1x8rrksG
+ AJEsEKWBODeFSUSHfARTpZe8jAvvGzhcwH9iQ8BaF4CSzKCasRigTM0CtTjN7ulYvG8n
+ fveg==
+X-Gm-Message-State: AOJu0YyMVSmFNeI4LC8nzbt9Kuwg0Zr9xoMtjH1WjaCaJQNoJXOvOfMZ
+ Lbh8acxJ+CQqd4WH/TYv22KWrL/pkVLwZidDi6cQf1fGnCC8hYrXNPfkaWYLGTw=
+X-Gm-Gg: ASbGnctylmqIg/VpHlrZPEFZY5KmshuGLUAYa9fRZG7sBXMYT53nra1zzWdOexTSaER
+ GSiQJ20qrzgZrAf9fZoJWm4UXuK1fpIIWuJw/IM9Comynpzw2r0dpyj9suq1HtbSmH4CC7zuV9h
+ wxzKwtmturmWEoHWcCpKvK5PP+HsLuYfHQrK2FrbsBnuTrtwXxfdmyQU60rDpWU2W3VxT8aOT77
+ 0BsnR38iOObqbywj6VcCQE3Uny4xS2l6bKk4qd5+uSqKPIG
+X-Google-Smtp-Source: AGHT+IHGsLX6mxpibIeztavPADxSfwopyyHKaehlN+PAEWp3sqz2s0m/PD3ovfTw7+UyBeJLHKP4oA==
+X-Received: by 2002:a05:622a:1915:b0:461:3834:b632 with SMTP id
+ d75a77b69052e-4653d535afbmr155839651cf.1.1732492472229; 
+ Sun, 24 Nov 2024 15:54:32 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4653c3d9c14sm39505091cf.15.2024.11.24.15.54.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Nov 2024 15:54:31 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Mark Kettenis <kettenis@openbsd.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Janne Grunau <j@jannau.net>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20241123-iommu_apple_dart_ordering-v2-0-cc2ade6dde97@jannau.net>
+References: <20241123-iommu_apple_dart_ordering-v2-0-cc2ade6dde97@jannau.net>
+Subject: Re: [PATCH v2 0/2] Fix device removal order for Apple dart iommu
+Message-Id: <173249246979.3866893.9999724495145524536.b4-ty@konsulko.com>
+Date: Sun, 24 Nov 2024 17:54:29 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V3 3/3] board: dhelectronics: Sync env variable
- dh_som_serial_number with SN
-From: Marek Vasut <marex@denx.de>
-To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- u-boot@lists.denx.de
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-References: <20241121172154.90507-1-cniedermaier@dh-electronics.com>
- <20241121172154.90507-3-cniedermaier@dh-electronics.com>
- <f87a45e6-0f37-4625-bf34-12205b8ee4b7@denx.de>
-Content-Language: en-US
-In-Reply-To: <f87a45e6-0f37-4625-bf34-12205b8ee4b7@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,83 +97,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/24/24 10:10 PM, Marek Vasut wrote:
-> On 11/21/24 6:21 PM, Christoph Niedermaier wrote:
->> The env variable "SN" is used to store the serial number on DH 
->> electronics
->> SoMs. New SoMs will use the variable "dh_som_serial_number". To ensure
->> compatibility, these env variables are synchronized. This is achieved
->> using callback functions. To avoid recursive calls, these are locked
->> against each other.
-> 
-> What kind of recursive calls?
-> 
-> It would be good to expand the commit message and elaborate on the 
-> recursive calls problem .
-> 
->> diff --git a/board/dhelectronics/common/dh_common.c b/board/ 
->> dhelectronics/common/dh_common.c
->> index a7b0472a09..2e3e5c483b 100644
->> --- a/board/dhelectronics/common/dh_common.c
->> +++ b/board/dhelectronics/common/dh_common.c
->> @@ -45,6 +45,32 @@ struct eeprom_id_page {
->>   #define DH_EEPROM_ID_PAGE_V1_0_DATA_LEN    (sizeof(struct 
->> eeprom_id_page) - \
->>                       offsetof(struct eeprom_id_page, mac0))
->> +static bool in_dh_som_serial_number;
->> +static bool in_SN;
->> +
->> +static int on_dh_som_serial_number(const char *name, const char 
->> *value, enum env_op op,
->> +                   int flags)
->> +{
->> +    in_dh_som_serial_number = true;
->> +    if (!in_SN)
->> +        env_set("SN", value);
->> +    in_dh_som_serial_number = false;
->> +    return 0;
->> +}
-Maybe a more generic solution is:
+On Sat, 23 Nov 2024 22:44:03 +0100, Janne Grunau wrote:
 
-diff --git a/lib/hashtable.c b/lib/hashtable.c
-index e8a59e2dcac..75c263b5053 100644
---- a/lib/hashtable.c
-+++ b/lib/hashtable.c
-@@ -221,11 +221,32 @@ static int
-  do_callback(const struct env_entry *e, const char *name, const char 
-*value,
-             enum env_op op, int flags)
-  {
-+       int ret = 0;
-+
-  #ifndef CONFIG_XPL_BUILD
--       if (e->callback)
--               return e->callback(name, value, op, flags);
-+       static bool in_callback;
-+
-+       if (!e->callback || in_callback)
-+               return 0;
-+
-+       /*
-+        * In case there are two variables which each implement env callback
-+        * that performs env_set() on the other variable, the callbacks will
-+        * call each other recursively until the stack runs out. Prevent 
-such
-+        * a recursion from happening.
-+        *
-+        * Example which triggers this behavior:
-+        * static int on_foo(...) { env_set("bar", 0); ... }
-+        * static int on_bar(...) { env_set("foo", 0); ... }
-+        * U_BOOT_ENV_CALLBACK(foo, on_foo);
-+        * U_BOOT_ENV_CALLBACK(bar, on_bar);
-+        */
-+       in_callback = true;
-+       ret = e->callback(name, value, op, flags);
-+       in_callback = false;
-  #endif
--       return 0;
-+
-+       return ret;
-  }
+> Starting with v2024.10 dev_iommu_dma_unmap calls during device removal
+> trigger a NULL pointer dereference in the Apple dart iommu driver. The
+> iommu device is removed before its user. The sparsely used DM_FLAG_VITAL
+> flag is intended to describe this dependency. Add it to the driver.
+> 
+> Adding this flag is unfortunately not enough since the boot routines
+> except the arm one simply remove all drivers. Add and use a new function
+> which calls
+>     dm_remove_devioce_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
+>     dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
+> to ensure this order dependency is head consistently.
+> 
+> [...]
 
-  /*
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
