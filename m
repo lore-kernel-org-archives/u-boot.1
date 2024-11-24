@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DCACE6780A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 20:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE33E6780A
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 20:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55950899BE;
-	Sun, 24 Nov 2024 21:27:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6AD489595;
+	Sun, 24 Nov 2024 21:27:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dtGddXLU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MtGBQJqm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE86F895AD; Sun, 24 Nov 2024 21:27:39 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 16357895A4; Sun, 24 Nov 2024 21:27:41 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F25C895B0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 21:27:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A189589595
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 21:27:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a9f1d76dab1so628299866b.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 12:27:37 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5d01db666ceso3308873a12.0
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 12:27:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732480057; x=1733084857; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732480058; x=1733084858; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=g24thDeGzFqn4fR2qRDSIk9ZZg63dpkzDzU0hMVE3gE=;
- b=dtGddXLUVyQNsvWbOBHgiZVNsVx+8wGGKFNDXYuE3N0jbdi8d6kcvogLVMPxwxfDE5
- G55amY92IHprKlUkQGJgeN8H54CkKoS7miY5Br46WAL34Xjr+XHk0SPyzQ3AZ3NvinHy
- PGvRsLtgY6BAyqOhkIL4/NVBR/7TrCw8uvXd9AFoMGx0eFBdgL5PxtoVNNlCGbGYnqL0
- HP4DiPLpnrA0PRNs2N59Hu852MkhDD+O3eUmhTjsSEy0Ou04VgTs640BeqXyZoxLqWrx
- igB8dQqJrTDFAu38w+mkzqKQO4N8Nty4w+AkWOYsg5q5PpMjXEXqGVREnUpCWaw2gjAz
- L4lw==
+ :reply-to; bh=t/PbdUuyyMB+2vDC/D4lmQfpGBwk36cNcf834S6sHQ8=;
+ b=MtGBQJqmV2T95HWexxCFE4KSEKOE0yyVFZ/7tSuYtYFrszNgGjgf52z0XE7IKut6dK
+ Vg46buLqM7ld51nwVzdECOEXlB3JGZZVwPIPduxfvCb5nTQhbkQ89Fj32hrzzhL9AdCW
+ 8EuAuhtiUonsLPL918t9x68eEIPVELVljj4wxlnvlMFaq1fa0RTxEOFPDltAjrQyAL45
+ AR8YexYmpclcHDx4dVv7uHMXc3em1v/lAptA6CDOGyyRsw006YZjlbeWqAA7an+wtL5Y
+ A/xLHd5RoKDKbxvvp7vwUmtf5UxS1h3q0GGHF1eBnPlEKSENLyA4a1xNzsd1g+jd+p9+
+ Btcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732480057; x=1733084857;
+ d=1e100.net; s=20230601; t=1732480058; x=1733084858;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g24thDeGzFqn4fR2qRDSIk9ZZg63dpkzDzU0hMVE3gE=;
- b=clVaMRCcEkz5vyqhumYaL/+0Ir5Tm1rFh3mc7mUhZgDv0YpuT6tQXnrxPRuEue4dlu
- ZcIHBAzNLR19iMaMdNg8qTFV5hKnnRM+PEthbsPFPzLv7nw/rmXFiwvVF4b1pl6GdLLU
- p7hQNC2FD6z8X1hYG6hfdm0Xq62GIK+fP4ehozscnlUQ8jKu/LsVWl9TOVbZCYWt3Lg3
- IxmtCYZeRDIk6DaUxFaHBTu03/T7xL8vdUteKKupsM1CGA3+oIk3ix7D4kZLq9q5N0Jm
- ZsbYtLPqnGm7bOhWbnqJwPeMPl7mx3CDkCX9/ZTHo9Qwpu7yjl2Bg1ZfnLdrEohHsQ4V
- Wr7w==
-X-Gm-Message-State: AOJu0YzkF2zWHMV+Rqy12sOP4aTYY2hnLnHs0gIKjUMZnRpTZVwSVk6m
- Fx2kpie9e8s8YJHbSL9j1gEwErbJXkxFWKhHSAWqaGQIxQN1sElxqekyjaw2lNQ=
-X-Gm-Gg: ASbGncsypCJf6ifSwmoCCgccsZDfF3bhGcFBEWhG5JALNE5HeeWwrwYuqi8U6Nz82Rl
- nBoVnJNk0nJ9b2G7bG25SmYmiaJY5+kOPTNrI9bjDpnHCaZG1DEgBJuOurFPofCXpDebEwHrexg
- GNEjw4RQeVSwC+YYWlfaldbVdQI+4lrZPlrrUMq5oGuGHbFWt+fX09+xPP2V3PN1ehe2qn7NkUu
- v2B9aw5GT1iPPuXJtKT0KketAmut0HpzlDRbdtZFmodOOlW2BtZdFc8EL0GFVG11ki0
-X-Google-Smtp-Source: AGHT+IEionknA6G8n2huyfYJB52WdWT2sCo1P1eg0qxQehkSOit3IztXe6W5j1DVAuzu8zBX2bF01A==
-X-Received: by 2002:a17:907:77c5:b0:aa5:11fa:626d with SMTP id
- a640c23a62f3a-aa511fa6426mr722776166b.3.1732480056956; 
- Sun, 24 Nov 2024 12:27:36 -0800 (PST)
+ bh=t/PbdUuyyMB+2vDC/D4lmQfpGBwk36cNcf834S6sHQ8=;
+ b=YhGQrMrqflDnZnu7Dnrw20YHYhIVvoAU9wtmqRCCBvExuj8hJzfTEpADwyAYL1W4eT
+ CzMPaXj0RpQxFh4MZjevkHF0DujoFx0fGk1t/W5UwkAQF1Qbomp+vDJirjMAoJEp6jLm
+ Ql35z8BIMx09n1GbMaRdAssAEIi3s/CceK+3AlKob2lflS+R/hnIWWAQqR/m7A+XT3B2
+ yMXeT+3vPTWF7ljYBJVyz+kvmmTJYrG762QAZ7S4iKP2N00RIxxVFoqPp5oZuL0ta5Co
+ EcwVQtFHvXZO0E/naVfrwxhdn4EhkMctqc8NHZ9GN4quWjxvOdL8hD1y0eFh4viMq6JR
+ YpNw==
+X-Gm-Message-State: AOJu0YwVkYYEAjC7/JTA2urRq5cZmWhU8LC7+KT8tIxxpidrv9VK2W3c
+ 3pyOazvuZZ6AUPxVOqtjWTSwjv5JfS2oWNPbkf2dBhgQXtnsuX/cqYB1d1eEG6s=
+X-Gm-Gg: ASbGncuYYSpwvQTY3MsdK27PrdijsPzpqQPuPaK5G0O+T/1Tz0BFcM9L4LFAhVBkpRP
+ RJH1yl0BLHwuC4FXFJXsE62Ium656H6Sa4LKC2BDw3skXfvTLvDhvd0V4XZVHGJaS/h8xaXvU4h
+ 6NZbLwYW+lAh6UI6s2ANf7B7n5VwdFlIPttNAH+6+oM1LK06c0Qi0YZX7iQ/5cHiUZ00Zyg2biH
+ 08bQr624lLxkbaRYo7Wgu+R6ZJwCTbTHFWE9jRedBnB+6GBbRsoLasLW71bBz3CrrZp
+X-Google-Smtp-Source: AGHT+IGJcXo45hVuaWroI74sT3nYK3tLD/yomPrBDtAihDIjPOcIZPR9KK1guJlSklis8k/HKzDtdA==
+X-Received: by 2002:a17:906:309a:b0:aa5:39d0:845a with SMTP id
+ a640c23a62f3a-aa539d0b069mr445279566b.15.1732480058060; 
+ Sun, 24 Nov 2024 12:27:38 -0800 (PST)
 Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b28cda1sm378720666b.9.2024.11.24.12.27.35
+ a640c23a62f3a-aa50b28cda1sm378720666b.9.2024.11.24.12.27.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 12:27:36 -0800 (PST)
+ Sun, 24 Nov 2024 12:27:37 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Sun, 24 Nov 2024 21:26:59 +0100
-Subject: [PATCH RFC 03/14] efi: move efi_info_get() to a new header file
+Date: Sun, 24 Nov 2024 21:27:00 +0100
+Subject: [PATCH RFC 04/14] efi: stub: add helpers to populate memory map
+ and framebuffer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241124-b4-efistub-arm64-v1-3-3e33f0340071@linaro.org>
+Message-Id: <20241124-b4-efistub-arm64-v1-4-3e33f0340071@linaro.org>
 References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
 In-Reply-To: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -85,13 +86,13 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5761;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7609;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=GxRiPAPfDI3V0zydS7anqZn5E0A6kCpt5AK9398JmAk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTnHsPPn9/ul+2Sfq440VMu/Wpzc9iSwIUpehMtWTUdr
- k83ucTXUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACZyWJSRYbOj+qtJMuw//7wy
- bc2pC9U8r3l8W/3T58ocspsPlEsnLmH4K1B1+fGO2SrGzAsO+6693FW2xCpu14I8y5XzzraXW23
- fqwEA
+ bh=DFfkuzxS+aC+qf3YS3hKZDlY6hipiZn6l+MnJwx2yuo=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTnHqPqzYyuMZsYzf5f5H2Y0+hbt/clywrmsisLTu5ZO
+ d23VeZ/RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIayuG/9462op3kiNaSv4G
+ HviR+ES7+vvHs/lmrFqLgplmyHKtOMHwV3rWZ+nvjHFXhd3WOQdoyb/2vHSs1UpbftbEpphrHnN
+ WMwMA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,210 +111,258 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Split out the EFI stub specific code to a new efi_stub.h header file.
+Introduce two new helpers dram_init_banksize_from_efi() and
+of_populate_from_efi(). These populate the DRAM bank info and simplefb
+framebuffer OF node respectively using the EFI table populated by the
+EFI stub.
+
+dram_init_banksize_from_efi() is directly moved from the x86 payload
+code to make it available for other boards.
+
+Populating the simplefb node allows for an easy way to bring up video
+without the full heft of VIDEO_EFI which is not particularly well-suited
+to ARM.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/x86/cpu/efi/payload.c |  1 +
- cmd/efi.c                  |  1 +
- drivers/video/efi.c        |  1 +
- include/efi.h              | 25 -------------------------
- include/efi_stub.h         | 38 ++++++++++++++++++++++++++++++++++++++
- lib/efi/efi_app.c          |  1 +
- lib/efi/efi_info.c         |  1 +
- lib/efi/efi_stub_arm64.c   |  1 +
- lib/efi/efi_stub_x86.c     |  1 +
- 9 files changed, 45 insertions(+), 25 deletions(-)
+ arch/x86/cpu/efi/payload.c |  31 +------------
+ include/efi_stub.h         |  22 ++++++++++
+ lib/efi/efi_info.c         | 107 +++++++++++++++++++++++++++++++++++++++++++++
+ lib/of_live.c              |   9 ++++
+ 4 files changed, 139 insertions(+), 30 deletions(-)
 
 diff --git a/arch/x86/cpu/efi/payload.c b/arch/x86/cpu/efi/payload.c
-index 6845ce72ff94..68cda25aca63 100644
+index 68cda25aca63..b71917615d13 100644
 --- a/arch/x86/cpu/efi/payload.c
 +++ b/arch/x86/cpu/efi/payload.c
-@@ -6,8 +6,9 @@
+@@ -100,38 +100,9 @@ int dram_init(void)
+ }
  
- #include <cpu_func.h>
- #include <efi.h>
- #include <efi_api.h>
-+#include <efi_stub.h>
- #include <errno.h>
- #include <event.h>
- #include <init.h>
- #include <log.h>
-diff --git a/cmd/efi.c b/cmd/efi.c
-index 1fb67a83aae5..53213be0a2fa 100644
---- a/cmd/efi.c
-+++ b/cmd/efi.c
-@@ -6,8 +6,9 @@
- 
- #include <command.h>
- #include <efi.h>
- #include <efi_api.h>
-+#include <efi_stub.h>
- #include <errno.h>
- #include <log.h>
- #include <malloc.h>
- #include <sort.h>
-diff --git a/drivers/video/efi.c b/drivers/video/efi.c
-index 78d123fad4be..a7b6d47f9a15 100644
---- a/drivers/video/efi.c
-+++ b/drivers/video/efi.c
-@@ -8,8 +8,9 @@
- #define LOG_CATEGORY LOGC_EFI
- 
- #include <dm.h>
- #include <efi_api.h>
-+#include <efi_stub.h>
- #include <log.h>
- #include <vesa.h>
- #include <video.h>
- 
-diff --git a/include/efi.h b/include/efi.h
-index a6eff13a6bbb..933be35852df 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -321,18 +321,8 @@ struct efi_open_protocol_info_entry {
- 	u32 attributes;
- 	u32 open_count;
- };
- 
--enum efi_entry_t {
--	EFIET_END,	/* Signals this is the last (empty) entry */
--	EFIET_MEMORY_MAP,
--	EFIET_GOP_MODE,
--	EFIET_SYS_TABLE,
+ int dram_init_banksize(void)
+ {
+-	struct efi_mem_desc *desc, *end;
+-	struct efi_entry_memmap *map;
+-	int ret, size;
+-	int num_banks;
 -
--	/* Number of entries */
--	EFIET_MEMORY_COUNT,
--};
+-	ret = efi_info_get(EFIET_MEMORY_MAP, (void **)&map, &size);
+-	if (ret) {
+-		/* We should have stopped in dram_init(), something is wrong */
+-		debug("%s: Missing memory map\n", __func__);
+-		return -ENXIO;
+-	}
+-	end = (struct efi_mem_desc *)((ulong)map + size);
+-	desc = map->desc;
+-	for (num_banks = 0;
+-	     desc < end && num_banks < CONFIG_NR_DRAM_BANKS;
+-	     desc = efi_get_next_mem_desc(desc, map->desc_size)) {
+-		/*
+-		 * We only use conventional memory and ignore
+-		 * anything less than 1MB.
+-		 */
+-		if (desc->type != EFI_CONVENTIONAL_MEMORY ||
+-		    (desc->num_pages << EFI_PAGE_SHIFT) < 1 << 20)
+-			continue;
+-		gd->bd->bi_dram[num_banks].start = desc->physical_start;
+-		gd->bd->bi_dram[num_banks].size = desc->num_pages <<
+-			EFI_PAGE_SHIFT;
+-		num_banks++;
+-	}
 -
- #define EFI_TABLE_VERSION	1
+-	return 0;
++	return dram_init_banksize_from_efi();
+ }
  
- /**
-  * struct efi_info_hdr - Header for the EFI info table
-@@ -609,23 +599,8 @@ void efi_puts(struct efi_priv *priv, const char *str);
-  * @ch:		Character to write (note this is not unicode)
-  */
- void efi_putc(struct efi_priv *priv, const char ch);
- 
--/**
-- * efi_info_get() - get an entry from an EFI table
-- *
-- * This function is called from U-Boot proper to read information set up by the
-- * EFI stub. It can only be used when running from the EFI stub, not when U-Boot
-- * is running as an app.
-- *
-- * @type:	Entry type to search for
-- * @datap:	Returns pointer to entry data
-- * @sizep:	Returns entry size
-- * Return: 0 if OK, -ENODATA if there is no table, -ENOENT if there is no entry
-- * of the requested type, -EPROTONOSUPPORT if the table has the wrong version
-- */
--int efi_info_get(enum efi_entry_t type, void **datap, int *sizep);
--
- /**
-  * efi_store_memory_map() - Collect the memory-map info from EFI
-  *
-  * Collect the memory info and store it for later use, e.g. in calling
+ int arch_cpu_init(void)
+ {
 diff --git a/include/efi_stub.h b/include/efi_stub.h
-new file mode 100644
-index 000000000000..4780badd3ac4
---- /dev/null
+index 4780badd3ac4..ff3befd4830b 100644
+--- a/include/efi_stub.h
 +++ b/include/efi_stub.h
-@@ -0,0 +1,38 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Helpers for U-Boot running as an EFI payload.
-+ *
-+ * Copyright (c) 2024 Linaro, Ltd
-+ */
-+
-+#ifndef _EFI_STUB_H
-+#define _EFI_STUB_H
-+
-+#include <linux/types.h>
-+
-+enum efi_entry_t {
-+	EFIET_END,	/* Signals this is the last (empty) entry */
-+	EFIET_MEMORY_MAP,
-+	EFIET_GOP_MODE,
-+	EFIET_SYS_TABLE,
-+
-+	/* Number of entries */
-+	EFIET_MEMORY_COUNT,
-+};
+@@ -34,5 +34,27 @@ enum efi_entry_t {
+  * of the requested type, -EPROTONOSUPPORT if the table has the wrong version
+  */
+ int efi_info_get(enum efi_entry_t type, void **datap, int *sizep);
+ 
++struct device_node;
 +
 +/**
-+ * efi_info_get() - get an entry from an EFI table
++ * of_populate_from_efi() - Populate the live tree from EFI tables
 + *
-+ * This function is called from U-Boot proper to read information set up by the
-+ * EFI stub. It can only be used when running from the EFI stub, not when U-Boot
-+ * is running as an app.
++ * @root: Root node of tree to populate
 + *
-+ * @type:	Entry type to search for
-+ * @datap:	Returns pointer to entry data
-+ * @sizep:	Returns entry size
-+ * Return: 0 if OK, -ENODATA if there is no table, -ENOENT if there is no entry
-+ * of the requested type, -EPROTONOSUPPORT if the table has the wrong version
++ * This function populates the live tree with information from EFI tables
++ * it is only applicable when running U-Boot as an EFI payload with
++ * CONFIG_EFI_STUB enabled.
 + */
-+int efi_info_get(enum efi_entry_t type, void **datap, int *sizep);
++int of_populate_from_efi(struct device_node *root);
 +
-+#endif /* _EFI_STUB_H */
-diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
-index 9b94a93ee4f1..2c66133648e4 100644
---- a/lib/efi/efi_app.c
-+++ b/lib/efi/efi_app.c
-@@ -12,8 +12,9 @@
- #include <debug_uart.h>
- #include <dm.h>
- #include <efi.h>
- #include <efi_api.h>
-+#include <efi_stub.h>
- #include <errno.h>
- #include <init.h>
- #include <malloc.h>
- #include <sysreset.h>
++/**
++ * dram_init_banksize_from_efi() - Initialize the memory banks from EFI tables
++ *
++ * This function initializes the memory banks from the EFI memory map table we
++ * stashed from the EFI stub. It is only applicable when running U-Boot as an
++ * EFI payload with CONFIG_EFI_STUB enabled.
++ */
++int dram_init_banksize_from_efi(void);
++
+ #endif /* _EFI_STUB_H */
 diff --git a/lib/efi/efi_info.c b/lib/efi/efi_info.c
-index 5fa4baeec635..32ba7e499c57 100644
+index 32ba7e499c57..3fa594b34b42 100644
 --- a/lib/efi/efi_info.c
 +++ b/lib/efi/efi_info.c
-@@ -5,8 +5,9 @@
-  * Access to the EFI information table
-  */
- 
- #include <efi.h>
-+#include <efi_stub.h>
+@@ -9,8 +9,13 @@
+ #include <efi_stub.h>
  #include <errno.h>
  #include <mapmem.h>
  #include <asm/global_data.h>
++#include <efi_api.h>
++#include <dm/of.h>
++#include <dm/ofnode.h>
++#include <dm/of_access.h>
++#include <log.h>
  
-diff --git a/lib/efi/efi_stub_arm64.c b/lib/efi/efi_stub_arm64.c
-index 54bee6c55d7e..2cabb16f2414 100644
---- a/lib/efi/efi_stub_arm64.c
-+++ b/lib/efi/efi_stub_arm64.c
-@@ -11,8 +11,9 @@
+ DECLARE_GLOBAL_DATA_PTR;
  
- #include <debug_uart.h>
- #include <efi.h>
- #include <efi_api.h>
+ int efi_info_get(enum efi_entry_t type, void **datap, int *sizep)
+@@ -46,4 +51,106 @@ err:
+ 	unmap_sysmem(info);
+ 
+ 	return -ENOSYS;
+ }
++
++#ifdef CONFIG_OF_LIVE
++static int of_populate_framebuffer(struct device_node *root)
++{
++	struct device_node *chosen, *fb;
++	struct efi_entry_gopmode *mode;
++	ofnode node;
++	int ret, size;
++	u64 reg[2];
++	char fb_node_name[50] = { 0 };
++
++	ret = efi_info_get(EFIET_GOP_MODE, (void **)&mode, &size);
++	if (ret) {
++		printf("EFI graphics output entry not found\n");
++		return ret;
++	}
++
++	fb = of_find_node_opts_by_path(root, "/chosen/framebuffer", NULL);
++	/* framebuffer already defined */
++	if (fb)
++		return 0;
++
++	chosen = of_find_node_opts_by_path(root, "/chosen", NULL);
++	if (!chosen) {
++		ret = of_add_subnode(root, "chosen", -1, &chosen);
++		if (ret) {
++			debug("Failed to add chosen node\n");
++			return ret;
++		}
++	}
++	node = np_to_ofnode(chosen);
++	ofnode_write_u32(node, "#address-cells", 2);
++	ofnode_write_u32(node, "#size-cells", 2);
++	/*
++	 * In order for of_translate_one() to correctly detect an empty ranges property, the value
++	 * pointer has to be non-null even though the length is 0.
++	 */
++	of_write_prop(chosen, "ranges", 0, (void *)FDT_ADDR_T_NONE);
++
++	snprintf(fb_node_name, sizeof(fb_node_name), "framebuffer@%llx", mode->fb_base);
++	ret = of_add_subnode(chosen, fb_node_name, -1, &fb);
++	if (ret) {
++		debug("Failed to add framebuffer node\n");
++		return ret;
++	}
++	node = np_to_ofnode(fb);
++	ofnode_write_string(node, "compatible", "simple-framebuffer");
++	reg[0] = cpu_to_fdt64(mode->fb_base);
++	reg[1] = cpu_to_fdt64(mode->fb_size);
++	ofnode_write_prop(node, "reg", reg, sizeof(reg), true);
++	ofnode_write_u32(node, "width", mode->info->width);
++	ofnode_write_u32(node, "height", mode->info->height);
++	ofnode_write_u32(node, "stride", mode->info->pixels_per_scanline * 4);
++	ofnode_write_string(node, "format", "a8r8g8b8");
++
++	return 0;
++}
++#endif
++
++int of_populate_from_efi(struct device_node *root)
++{
++	int ret = 0;
++
++	if (CONFIG_IS_ENABLED(VIDEO_SIMPLE) && CONFIG_IS_ENABLED(OF_LIVE))
++		ret = of_populate_framebuffer(root);
++
++	return ret;
++}
++
++int dram_init_banksize_from_efi(void)
++{
++	struct efi_mem_desc *desc, *end;
++	struct efi_entry_memmap *map;
++	int ret, size;
++	int num_banks;
++
++	ret = efi_info_get(EFIET_MEMORY_MAP, (void **)&map, &size);
++	if (ret) {
++		/* We should have stopped in dram_init(), something is wrong */
++		debug("%s: Missing memory map\n", __func__);
++		return -ENXIO;
++	}
++	end = (struct efi_mem_desc *)((ulong)map + size);
++	desc = map->desc;
++	for (num_banks = 0;
++	     desc < end && num_banks < CONFIG_NR_DRAM_BANKS;
++	     desc = efi_get_next_mem_desc(desc, map->desc_size)) {
++		/*
++		 * We only use conventional memory and ignore
++		 * anything less than 1MB.
++		 */
++		if (desc->type != EFI_CONVENTIONAL_MEMORY ||
++		    (desc->num_pages << EFI_PAGE_SHIFT) < 1 << 20)
++			continue;
++		gd->bd->bi_dram[num_banks].start = desc->physical_start;
++		gd->bd->bi_dram[num_banks].size = desc->num_pages <<
++			EFI_PAGE_SHIFT;
++		num_banks++;
++	}
++
++	return 0;
++}
+diff --git a/lib/of_live.c b/lib/of_live.c
+index 90b9459ede31..572ae09d377b 100644
+--- a/lib/of_live.c
++++ b/lib/of_live.c
+@@ -10,8 +10,9 @@
+ 
+ #define LOG_CATEGORY	LOGC_DT
+ 
+ #include <abuf.h>
 +#include <efi_stub.h>
+ #include <log.h>
+ #include <linux/libfdt.h>
+ #include <of_live.h>
  #include <malloc.h>
- #include <asm/io.h>
- #include <linux/err.h>
- #include <linux/types.h>
-diff --git a/lib/efi/efi_stub_x86.c b/lib/efi/efi_stub_x86.c
-index 40fc29d9adf7..ea1993f745d3 100644
---- a/lib/efi/efi_stub_x86.c
-+++ b/lib/efi/efi_stub_x86.c
-@@ -11,8 +11,9 @@
+@@ -334,8 +335,16 @@ int of_live_build(const void *fdt_blob, struct device_node **rootp)
+ 		return ret;
+ 	}
+ 	debug("%s: stop\n", __func__);
  
- #include <debug_uart.h>
- #include <efi.h>
- #include <efi_api.h>
-+#include <efi_stub.h>
- #include <errno.h>
- #include <malloc.h>
- #include <ns16550.h>
- #include <asm/cpu.h>
++	/*
++	 * When booting with EFI_STUB we can automatically generate a framebuffer
++	 * node based on the EFI data.
++	 */
++	ret = of_populate_from_efi(*rootp);
++	if (ret)
++		debug("Failed to populate live tree nodes from EFI: err=%d\n", ret);
++
+ 	return ret;
+ }
+ 
+ void of_live_free(struct device_node *root)
 
 -- 
 2.47.0
