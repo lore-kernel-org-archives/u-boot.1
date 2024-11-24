@@ -4,82 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E655E668BC
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58664E668BC
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:17:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 646578975E;
-	Sun, 24 Nov 2024 20:06:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D1CD89580;
+	Sun, 24 Nov 2024 20:17:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YteOFOZ7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JEbY1p4D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8D5C8958E; Sun, 24 Nov 2024 20:06:10 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id AB4018958F; Sun, 24 Nov 2024 20:17:49 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6585389574
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:06:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EEE989574
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:17:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6d419832bf5so33352746d6.1
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:06:08 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9a0ef5179dso564264266b.1
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:17:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732475167; x=1733079967; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+lpRxvK4M8RZ6IdvzV6M15pkWJ7CpsmGnEp/SfYbJCI=;
- b=YteOFOZ7uc3uYwhddEz1HvwfQRppxjrgPDAcTXjzTRPMeGSUmispnjbYWVqmrTqvyT
- zXMK2LzrNdAKJDH1m03Y2i14OyofyOl5yP9XXqO7mvOjviSKJUuKRrH2C+FsfPIkf2+a
- 7My2YaPnB9C83YFwQ7tadL3+j+OEoITDynYNc=
+ d=linaro.org; s=google; t=1732475867; x=1733080667; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AkS16PdFl146Kj58iM4khx1LEGiCxpCttDd/fCzxI7o=;
+ b=JEbY1p4Dvr74VuvvKcfndo2I/nJZZ8B97FQxggLrJ8kH/kLkR/K2wPymmIQiBNmMjq
+ XABxhk+KBZ8sOGsM5zmQskZ5ExmDuHvwDC9/G/bc3/Q9LugN0e7Z3PDyunSclTbkEdit
+ zga7SwbPoUn7TxTLWxqzHDZ93rUnXRyZ4Mx69aOACLUq9tSmFr8uYvUzIEbDDy2ho4Rs
+ oe0e10zt7mzEElHJ7W3dbVhhl3c/sbuh4W7p1LiIgjnPiZeLtc7QkAHKcHQ8QwSRGWvr
+ Drf8/CNLFVzSwox+EFQ3q9elnUF4wUS+yZ31drgSlwh3Sz4wXwDdU4np7r5rFehuC4c4
+ oD8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732475167; x=1733079967;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+lpRxvK4M8RZ6IdvzV6M15pkWJ7CpsmGnEp/SfYbJCI=;
- b=HiC11ogFJvV1yMZgcVjmfqxtiktvGmizQmY/OrI/8FOSFcHxM9fWSg3L+Kj+icCksV
- W8oo3Cst0VgpTylFJJgntWNeBTSGOAVeUEG30J7XJsvMv27x4/Zr97jCf1k8Ka1Xb9gx
- cBe19c+wKLV+AbPvQcblkLJze+ox44d0IKzm+OtN9KGoM1SCfeTZFePMkILTWfCnnWYU
- bi0fRVK6/gkfEh/GoRdQB6h1iBOKe1VmHUP9Og7h5CXJs+8bpPGAUNqnq3dYZBcKz/fB
- sdE7wjysP7laBaOb2lUBVb/AObS2JMabhZO26Eu7XxtmeGrnydmhIv84S1hNC6gOJVGh
- jj8w==
-X-Gm-Message-State: AOJu0YwSfzMCANkNcvHuudLWk39i5mJPxvzs+RYzXZuoRp//FAOxeC07
- 4c9YY1sB59Iw07XqkUl2iBifq181aDADMR4YL6vSZ9hnh1g23xbS3RyTTdm9JcW6ITnQ0z8cjXt
- vMNs=
-X-Gm-Gg: ASbGncu9Car7pQk9aV3mOUS/54Kr5cBD57LTZwofNzph9lAFF9ig0jEOo8v64rGyURk
- puMoOo11AuHWhFg05wvAlfSZlaX8BzwgwlmFwQzbi99UfVecU6eAJU9N8jCVJXAfFQTkHV8suBl
- znUduc5b2NUvBTmkW8gAzEUG8vyX2NUPKba0NI+JmxcEyp+KcRatNUhcP07h5uR7yA1i+LHXv7M
- 4663/snwHaoT3W8QZCuUX9qiorOjUC6uBavb0eziVLepgkidQ==
-X-Google-Smtp-Source: AGHT+IEfsjdtSg92+NNzs2nlIt6oj0VAzYbhLAwuc5+0zhmVtHn5JUxgf1QAPap6fuwT/9XLrob2Tw==
-X-Received: by 2002:ad4:5c63:0:b0:6d4:d7a:89f7 with SMTP id
- 6a1803df08f44-6d4514b6256mr165580786d6.44.1732475167327; 
- Sun, 24 Nov 2024 11:06:07 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1732475867; x=1733080667;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AkS16PdFl146Kj58iM4khx1LEGiCxpCttDd/fCzxI7o=;
+ b=wn5Jw1GmgyYsCyeaCXbD03Bwt7e3R9bAVM77sTry2ccqVN9dX249U5h4dAm8GZM87N
+ aNNcGCZXwEoDgY95AxNUKnTJKZqGI3/bRtdp0uNyzvwNTlhqGQkmsPS+NKMSd2gjLBhe
+ Cc+0nXTdLC3UtH+6wh18oBemXyrXAodBAC4bTAEuElVQ0u7DNWTt4wLj266ZqlZzhoZK
+ dczFZOUelEcOKCYmn5Qvq3iUVdBTn5MeamwBLjgQbyouXFQET2X8JkQ6xJzRK5fc2jeN
+ 9s8yr6RSGEzk7muI2Fu+kUPGT8QHpfToQhmzTTs58YyPbuB08EnGY0P4QjYHkXheFsou
+ G6XA==
+X-Gm-Message-State: AOJu0YzYl7VldJy82i/8H7xI3KF1DA7jvHfY/Zb3TcEH9MrBOXxNwYO+
+ WYHiHWjxe0R3oSjHWtpyNwo7ZLMRV0iztM65xG6OYTAJoAobgQP8zoUwc56sLus=
+X-Gm-Gg: ASbGncuuZtHd/mN+lNel/1xMRcSeX2pFrk1HWoom6Z+7hdXBhPH2mzxeDAT71dqLNEa
+ izmXDxSC3plB3kPjLhuFyQX9YjgSOA0BmMkifC7gXg+a0ksGKkPL5qKnWiOGaKk/cGNgVIzqwKb
+ sjiIyYElwCJDB1tlGYaHeSbgf+vkhDUGt3Opw7rfoW/Wy7IcoHV/721oGMcCjoEdC+AFdoSknZi
+ uaZOZwLwfBmcIh6ryyWTTGXwIds+BqB4/8cyqG9cy9c5qLzGqWTLMlkLMtm6L97qUYT
+X-Google-Smtp-Source: AGHT+IG95rHOTS9ZxFJcQ7IynkGhQdFEKNClRu3UcKiwuMvxfLHacsNA/qt8qjdsA7C2VBzowq3RrQ==
+X-Received: by 2002:a17:907:7784:b0:aa5:3f3b:31dd with SMTP id
+ a640c23a62f3a-aa53f3b323fmr334291366b.19.1732475866690; 
+ Sun, 24 Nov 2024 11:17:46 -0800 (PST)
+Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451a83769sm34380746d6.14.2024.11.24.11.06.05
+ a640c23a62f3a-aa50b28f848sm371874566b.36.2024.11.24.11.17.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 11:06:06 -0800 (PST)
-Date: Sun, 24 Nov 2024 13:06:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: [MASTER] Pull request efi-2025-01-rc3
-Message-ID: <20241124190603.GG3600562@bill-the-cat>
-References: <ce72d064-807a-47a6-abb8-e9110c63b739@gmx.de>
+ Sun, 24 Nov 2024 11:17:46 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 00/15] qcom: smem: modernize SMEM in U-Boot
+Date: Sun, 24 Nov 2024 20:17:42 +0100
+Message-Id: <20241124-b4-modernise-smem-v1-0-b7852c11b67c@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8Gqj0WQvTbcqU1CU"
-Content-Disposition: inline
-In-Reply-To: <ce72d064-807a-47a6-abb8-e9110c63b739@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIANZ7Q2cC/x2MwQqAIBAFfyX2nNBKRfQr0SHzVXvQwoUIwn9PO
+ s7AzEuKJFAaq5cSblE5YwGuK1qPJe4w4guTbWzLbNm41oTTI0VRGA0IxXS9G2DZ945KdyVs8vz
+ Pac75A6Y74pNjAAAA
+To: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Mario Six <mario.six@gdsys.cc>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3589;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=km2revj1f6xG09fMv4sBaaaQ40UoL0ywYbO1ZWSE4Xs=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTn6htzv8ZrKypzMKXUiMxYPNPX32CR4Wfx7RYnDmVY7
+ 3F5cflSRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIlQhGhi619Dz1D4pTutk/
+ nOF2kqg2VEw7Mp/r1fW7Cx44tVgFnmT4xZzVEL7/n/GhrGmXnu72unox7ve+EzFnWxbrl1mpr9Y
+ /FgQA
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,56 +109,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Smem is currently implemented a uclass in U-Boot. This carries with it
+some implicit limitations about how and when we can actually talk with
+it, since its modelled as a device.
 
---8Gqj0WQvTbcqU1CU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The SMEM uclass is qualcomm specific and has no other users, while it
+was originally proposed as a platform agnostic abstraction it seems
+clear that UCLASS_MISC has served that purpose better.
 
-On Sun, Nov 24, 2024 at 04:34:16PM +0100, Heinrich Schuchardt wrote:
+Let's drop the old smem code and replace it with a straight port from
+Linux, providing a familiar interface and enabling us to access it much
+earlier in the boot process that would be possible with a standard
+device.
 
-> Dear Tom,
->=20
-> The following changes since commit 52c0e5f8a39ef022ee5ab2dfd67661d1d34941=
-c7:
->=20
->   Merge branch '2024-11-22-assorted-fixes' (2024-11-22 15:04:54 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2025-01-rc3
->=20
-> for you to fetch changes up to 967d57ab592ce1bcab0785f8483b1b43c2d881aa:
->=20
->   lmb: Correctly unmap and free memory on errors (2024-11-24 15:25:03
-> +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23529
->=20
+Additionally, this will be easier to maintain going forwards since any
+patches from Linux can be more easily ported over.
 
-Applied to u-boot/master, thanks!
+With this new smem framework in place, we can now use SMEM to parse
+the memory map when it's not provided via some other mechanism.
+Additionally, we can use it to read the serial number of the board.
 
---=20
-Tom
+Implement this functionality and split the snapdragon memory parsing off
+to its own file to try and organise things a bit better.
 
---8Gqj0WQvTbcqU1CU
-Content-Type: application/pgp-signature; name="signature.asc"
+This depends on a patch [1] making malloc available in fdtdec_setup() since
+malloc is required to initialise smem.
 
------BEGIN PGP SIGNATURE-----
+[1]: https://lore.kernel.org/u-boot/20241124183832.2476928-1-caleb.connolly@linaro.org
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdDeRsACgkQFHw5/5Y0
-tyxUygv/S0YSekUGmIGfMlCj/o1slQ5PYEUh0ApcpEr9hj+bLtSSdGfijPZuqz0/
-y/Ux4+yMvZacM2wW0+o70nQ9SPQxSY9HOE8Mq1P7gdKWZdKrx87Q31GqWi5KU/dg
-YY2sqa13tc58loAbyeNUlFw8nmVMVSObH7Lj6Lvkr+AdiwwLDMERnhpzQtc4vPsR
-ArWUzwCrB61OZAiYz2c7D/CBFvMB//Zg8nHgd47OrccvCOgX5hO7MFSDrKDIMcFX
-SKx6BIpvuzbmg4+DdnzCSKONgpBmjJ0A4qgQMnoHAJWqfzS6CBxNlWe3pQJfHxoa
-pizzMMgY3O0xUk88PmojHLuFmX6ZW8/fOPMxoGMdXTaY1muJmuN8psp9jHt8Pa2Y
-kYmhkVwJVQ3cjVezlhK1jmwBcdyB8OprukOr2ezF9ih/41JipcksMH7/3QGJmsdn
-ua0YwUNkh17x5lYdERSagh2X+Fsel+5C98Qg6N1JoiK71VEF6w9LiFmlGyBRp/gT
-Cz5xAjf3
-=Bv86
------END PGP SIGNATURE-----
+---
+Caleb Connolly (15):
+      Revert "dm: SMEM (Shared memory) uclass"
+      smem: drop drivers/smem
+      Revert "test: smem: add basic smem test"
+      Revert "drivers: smem: sandbox"
+      soc: qcom: import smem from Linux 6.11-rc2
+      soc: qcom: smem: adjust headers for U-Boot
+      soc: qcom: smem: adjust for U-Boot
+      soc: qcom: smem: get serial number from socinfo
+      soc: qcom: smem: stub functions
+      soc: qcom: smem: add build infra
+      mach-snapdragon: increase pre-relocation malloc size for smem
+      mach-snapdragon: move memory parsing to its own file
+      mach-snapdragon: support parsing memory map from SMEM
+      mach-snapdragon: fetch serial# from SMEM
+      qcom_defconfig: enable QCOM_SMEM
 
---8Gqj0WQvTbcqU1CU--
+ arch/arm/Kconfig                             |   2 -
+ arch/arm/mach-snapdragon/Kconfig             |   2 +-
+ arch/arm/mach-snapdragon/Makefile            |   2 +-
+ arch/arm/mach-snapdragon/board.c             | 107 +---
+ arch/arm/mach-snapdragon/dram.c              | 214 ++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h         |   4 +
+ arch/sandbox/dts/test.dts                    |   4 -
+ configs/qcom_defconfig                       |   1 +
+ configs/sandbox64_defconfig                  |   2 -
+ configs/sandbox_defconfig                    |   2 -
+ drivers/Kconfig                              |   2 -
+ drivers/Makefile                             |   1 -
+ drivers/smem/Kconfig                         |  24 -
+ drivers/smem/Makefile                        |   7 -
+ drivers/smem/sandbox_smem.c                  |  44 --
+ drivers/smem/smem-uclass.c                   |  46 --
+ drivers/soc/qcom/Kconfig                     |   8 +
+ drivers/soc/qcom/Makefile                    |   1 +
+ drivers/{smem/msm_smem.c => soc/qcom/smem.c} | 741 ++++++++++++++++-----------
+ include/dm/uclass-id.h                       |   1 -
+ include/smem.h                               |  90 ----
+ include/soc/qcom/smem.h                      |  36 ++
+ include/soc/qcom/socinfo.h                   | 111 ++++
+ test/dm/Makefile                             |   1 -
+ test/dm/smem.c                               |  26 -
+ 25 files changed, 842 insertions(+), 637 deletions(-)
+---
+base-commit: 7aad7833323aa9260935d172744a50f56356d52a
+
+// Caleb (they/them)
+
