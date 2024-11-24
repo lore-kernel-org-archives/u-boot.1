@@ -4,88 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20DECE668B9
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 15:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B690E668BA
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 16:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A6AF89523;
-	Sun, 24 Nov 2024 16:57:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C225D8955E;
+	Sun, 24 Nov 2024 17:05:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BcFoEYQa";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BLpO7Gze";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D756B8952C; Sun, 24 Nov 2024 16:57:06 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E7BA789547; Sun, 24 Nov 2024 15:41:38 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A04C68951D
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:57:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACAAE88E24
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 15:41:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d83bff5fe4so11760966d6.3
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 07:57:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732463823; x=1733068623; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WKBpaejFxBY14vQv/OMftRJE5nGSoQkrkhrcVWWFHro=;
- b=BcFoEYQaJdMDvuQOBShxF4M3yP4z299O9co1qkujI7pRc7OymVTAEsLZAd/E5l/df9
- Fa+YiZQIu4RORFWJE1nVzKHr2oZFafTyXT0n+nIZ+lsVQymM3RRJuyP/6TAl1XqhXjZI
- 5hw/KSTk6XpX+YLW7L+Qpto/Iu3JuGOMHGPY8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732463823; x=1733068623;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WKBpaejFxBY14vQv/OMftRJE5nGSoQkrkhrcVWWFHro=;
- b=TZxSwRzVq+dZ2lrpL/ems07gqJs34LxFpdUDIMfPmGos7w0MHTbPdSGZhmY1ScWBt2
- liLg0dLL9NyR1YnNH1m4O3DbaZuBOXrtMB4bDzczsgVbFTLQN+o8vcSYqu1cn/T3ih6s
- fTg6KDL4HTrqjTGoSEwZqZmJKXWCo7e0+27Q8R44sq13Itwzz1WfkWf6yy8g7ILo+B+Z
- IKtIqa99+eg7QOfV1138SZvYK8CfSMKIwd1FV/QOtjHRdE8UpBAteitAfwOJ/5Jt8H9s
- gIlsL8A+N5uLF4t2cGFcp3zdp3zHeSaAmqDrliV+DsKm4W5hG5mrnmJylI9vmy1LrV3o
- pPKQ==
-X-Gm-Message-State: AOJu0YynPI7aZX7pY6REaN21uRW/3WapXi1t6J7/TCye/fXPdxIWyw8c
- jawVZw5+VejemG8dmglTjxl5CyOi/DaCkhO8i+2o57k2hGtaPfNdEnW4hmjAPFc=
-X-Gm-Gg: ASbGncu0HPlbtbXJc1jK2eT963pU0eiyE3u0mTfTMfl1uZtsv9+a9lYUOwr6G2q8JHp
- 50jCIZv7llXN/hTb2QlFMj/S7D5o6xO3CtkI1fzPBx7ElQiE7p0t4YxMfg8+/rnz086ssuVqPct
- JLXqDC6qMAmX+wnMY12idfg2rhgyASByQtqLtw1XXEhPmBxAq6M14HshMkVKkDAf77wNUmVSU3x
- Nu3sGPm7DnszhGMKYVg4GNbfhe4HNm4gSQx7HOmBkX6jzMrmw==
-X-Google-Smtp-Source: AGHT+IEzRlnY7IdbS+jfURF2X0LNBu+awN8VvioVxK6vSI7C2cWEl5vayY7nySPxJ7oC74JxN5akEg==
-X-Received: by 2002:ad4:5bcf:0:b0:6d4:36ff:4354 with SMTP id
- 6a1803df08f44-6d4511555e9mr154399836d6.37.1732463823487; 
- Sun, 24 Nov 2024 07:57:03 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b2509dsm32479266d6.83.2024.11.24.07.57.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 07:57:02 -0800 (PST)
-Date: Sun, 24 Nov 2024 09:56:58 -0600
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732459265; x=1733064065; i=xypron.glpk@gmx.de;
+ bh=PixhUjKCt3GZmRA4Ob7bp3gWGY65uPu326uKd32jHpw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=BLpO7Gzei9nZ+GRXOzWusGtkC4R3oL2YFNkfoNYdFCzKd8C4ERgsJXAfKH5H+26w
+ egc8GHc+E0CIbS+WOnCQlWuJTdFQeAXHDRr8UoKpyIWzT6MLQyJqHlh9cQX9fhvhh
+ ft3wkxosxbGceZOHneGVHCo/XHtjOx4phHBECexcGE4QDAVQp/c9mpnW5wOhIbzf/
+ WlmsDqiT7M8Br63m1Z1Gl2hfE563WNDWzXCGWVj+ayZVJKL3SMsbtm9bOhRqWwq+n
+ i9WPuhp/pVT0sf3mY8cNnAF9+AjVcNPr/hpvhuCMLnpvRrELQ4B1tT5dlvA4eighN
+ OjrKFgjc3uHKNbZMZA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MyKHc-1teho438v6-00xuiI; Sun, 24
+ Nov 2024 15:41:04 +0100
+Message-ID: <62d1cf97-82e0-41e8-a8e8-bb4699057382@gmx.de>
+Date: Sun, 24 Nov 2024 15:40:46 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] Improve UEFI app support
 To: Matthew Garrett <mjg59@srcf.ucam.org>
-Cc: u-boot@lists.denx.de, Matthew Garrett <mgarrett@aurora.tech>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Boon Khai Ng <boon.khai.ng@intel.com>, Bryan Brattlof <bb@ti.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christophe ROULLIER <christophe.roullier@foss.st.com>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Gabor Juhos <j4g8y7@gmail.com>, Hanyuan Zhao <hanyuan-z@qq.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
  Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>,
+ Matthew Garrett <mgarrett@aurora.tech>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 03/10] Add a command to find a load address
-Message-ID: <20241124155658.GC3600562@bill-the-cat>
+ Neil Armstrong <neil.armstrong@linaro.org>, Philip Oberfichtner
+ <pro@denx.de>, Ramon Fried <rfried.dev@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Romain Naour
+ <romain.naour@smile.fr>, Sam Edwards <CFSworks@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ u-boot@lists.denx.de
 References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-4-mjg59@srcf.ucam.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iEo+nLbvtz690P5E"
-Content-Disposition: inline
-In-Reply-To: <20241123195616.305687-4-mjg59@srcf.ucam.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:537hfapR72Ai7zCk9/1HG4KnOyVk3jW+SGBBaUmkg/RPzQmIBxY
+ 4eEHA8Mye8Y8FogB5bhHPRAO0kM5jLJQ7aszN3Xs2CH+t8MdFRkRXW/HaF9llAbiM3OWv88
+ D/B7A4dqO5bsDytVkU279XaCxXoTmkk0B4eYxSdXmy+XV+wAYD/pl8GVE/uAFjghzRErFe5
+ Sro/oNoZ2Fpgn9Hgofuqw==
+UI-OutboundReport: notjunk:1;M01:P0:ovirtZ1nZYw=;mPET7j4j29rgM5MlCuI+0tSvInV
+ jk1yF+PvEv7XztG74gh8fL6Zm2Mk3R/JJbMFL/vJGJvQSttNNy+NGU5lM1RyAmT6EadHPdgk7
+ 1dKxectDaufC7GlapWowfJgVLMlGHRUzOL4eZwDup3SlEIPXfgaMn+jGiCXIHyzos0QLQxElu
+ oZdnJwgmBJyoFp7s5aEkzuwlGTVoZ/9WuBZ8qvXZd3Il9E57S+5suE7R9i8no5KYS/z2SIq5M
+ rVvFH4BsYv9/PXwzv4ZcTGmnzwKprl4PmFhbUQ7QJBslJuGv+vArIddR/PmtkqK0l+PD0o3kV
+ E9Nk7MylKEd94CZIPDnCgjuDovDK/HNF9DSYVYLu9xgiikP4JkEmvnoVgVgH5SVBbDYRQfdRq
+ bUn2JQWgkW/2iLiwZMvc/dgc2iGs8jvSG2OJK1CXJ30s+pjMGIMN/Q2Hmoe6rGVX/UAHRQmSl
+ QEEBNCGfZW0GnViDQbdrBCmdmOjw674j/3gjYeyFWchPdwzS6sz9oiTqRj288uNmWcNvfRbpu
+ kNo9U6bCVqsTmavyLszPsk0nw/Mhqho+KjVFhn9l3x7S0P8BNa6jJwXFN8IzszVzPnjgi4vwy
+ UFH4KMVzdEmoYFDeZ8e+iytT9I1p21qwsInBT2qdxUKmgVMtu+o8p2sOUxv4zgaihFokzDUyG
+ GNy84mZ48ao/kwBBcLHi7U359FSjOWO75VvCy2NFr+etgh5F/YhgJOOsuqi+ccsEhRsccR6+L
+ 2EEzSunLd7CLL+PD23fCGNQXGNIYGxkaFzDMuxJwqqMXPuepDyrDXiHiETmWF5RMV8qD1q4Is
+ fV2H8oXV8/cbPzTZbfjAJ/FZptkpst36LRtZ0uWHSKdKqpqXax9UVJoGJEE4X53nFQ7eJCbwJ
+ Mu2U6vhLCcDrkQe5QQ592cUtxki+v4O6DWdZ7jE36eDkHZeioj4CsaTdP
+X-Mailman-Approved-At: Sun, 24 Nov 2024 17:05:39 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,60 +114,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/23/24 20:54, Matthew Garrett wrote:
+> We run a mixed environment including traditional embedded Linux and
+> UEFI. For consistency it's valuable to use U-Boot in both cases, but on
+> UEFI systems we want to run the full Linux kernel UEFI boot stub. This
+> patchset adds support for that, along with various other quality-of-life
+> improvements such as automatically finding partitions based on their
+> GUID, automatic identification of load addresses where the firmware has
+> given us constraints, support for EFI variable access in the EFI app,
+> drivers for EFI network adapters and TPMs, support for embedding DTBs in
+> the EFI app, and a couple of bug fixes.
 
---iEo+nLbvtz690P5E
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Matthew,
 
-On Sat, Nov 23, 2024 at 11:55:02AM -0800, Matthew Garrett wrote:
+Unfortunately from what you write I do not understand what you are missing=
+.
 
-> From: Matthew Garrett <mgarrett@aurora.tech>
->=20
-> For systems with more complicated firmware, the firmware memory map may
-> vary significantly based on a number of factors. This makes it difficult =
-to
-> pick a hardcoded load address. Add a command for finding an available
-> address with sufficient room to load the provided path.
->=20
-> Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
-> ---
->=20
->  cmd/Kconfig     |  7 ++++
->  cmd/Makefile    |  1 +
->  cmd/addr_find.c | 87 +++++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 95 insertions(+)
->  create mode 100644 cmd/addr_find.c
+We already have the bootefi command to execute EFI applications
+including the EFI stub.
 
-This needs to be reworked on top of how lmb works today (which did
-change post v2024.10) and looks a lot like what
-arch/arm/mach-apple/board.c::board_late_init() was doing, even back in
-2022. Do you end up using this functionality on more than one board /
-family of boards? The easy path is likely to just follow what mach-apple
-does, but the more broad path would be adding an option to configure the
-key environment variables that are used as buffers and documented in
-doc/develop/bootstd/overview.rst / doc/develop/distro.rst dynamically
-rather than statically.
+We have support for FIT images including an EFI kernel and a
+device-tree. Initrd support could be added here.
 
---=20
-Tom
+Embedding DTBs into the EFI app is something you should implement in the
+EFI stub. The EFI stub should invoke the EFI_DT_FIXUP_PROTOCOL after
+choosing the device-tree.
 
---iEo+nLbvtz690P5E
-Content-Type: application/pgp-signature; name="signature.asc"
+Could you, please, elaborate a bit more on you target.
 
------BEGIN PGP SIGNATURE-----
+>
+>
+> Janis Danisevskis (1):
+>    Fix efi_bind_block.
+>
+> Matthew Garrett (9):
+>    Add EFI handover support to bootm
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdDTMIACgkQFHw5/5Y0
-tyxVBQwAowF0o6Ks0t/SqW/xQUPEYFkOEhFKq7YnVNBwyzLTOrDHwU8zEX0n1H7F
-BqROFN381wOSR7wo+y3gK3V3mO1O79/P8sCZNZ5PhQnxnpLp27JGGu+/E/bGRvO8
-++xxS8M5kFzoYQxU7qxjq60J5HxQ4Hhu6Rgh9xfbGfHAQQoTaGT0TtAWtyXjG1Vf
-lhxKC3sGJp7dgp8DgjU/x2V6NGvDNeRnAe0hEXhd0pxRPjgh0PqXWO3GmAHVXzbx
-8ai7bnF1qNwmBdWhi3OefuTtn7U7ILO9iVpwbVELsnGvhVIjHYq6M4sDShL0QA+i
-Oi/kqPWCrS524alR6WgQgWJq0vuKZW9GE2r4r0xj7i/pB/Lci4wxGyixYNvZEhh1
-JzfyiizhSxp5r6Zg+LzPCZmOykeK48Wv2B8M7DtozMMfLEPB9I287H9AogcYtVwY
-IJeIJixNEhmdpgEBvFi1hLowu+smFGtUbjGU17zrG7+Z16ocLsyy6mIUV1Vr+RS5
-NdiL4wYC
-=Z1Ol
------END PGP SIGNATURE-----
+This already exists if you enable CONFIG_BOOTM_EFI.
 
---iEo+nLbvtz690P5E--
+Best regards
+
+Heinrich
+
+>    Add part_find command
+>    Add a command to find a load address
+>    Hook up EFI env variable support in the EFI app
+>    Add EFI network driver
+>    Add UEFI TPM2 driver
+>    Support separate DTB files with the UEFI app
+>    Use the correct ramdisk address
+>    Add command to set an environment variable to an EFI variable
+>
+>   Makefile                        |   7 +-
+>   arch/x86/config.mk              |   2 +-
+>   arch/x86/lib/bootm.c            |  60 ++++++++----
+>   arch/x86/lib/elf_x86_64_efi.lds |   4 +
+>   boot/bootm.c                    |   5 +
+>   cmd/Kconfig                     |  23 ++++-
+>   cmd/Makefile                    |   3 +
+>   cmd/addr_find.c                 |  87 +++++++++++++++++
+>   cmd/efigetenv.c                 | 133 ++++++++++++++++++++++++++
+>   cmd/part_find.c                 | 156 ++++++++++++++++++++++++++++++
+>   drivers/net/Kconfig             |   7 ++
+>   drivers/net/Makefile            |   1 +
+>   drivers/net/efi_net.c           | 110 +++++++++++++++++++++
+>   drivers/tpm/Kconfig             |   7 ++
+>   drivers/tpm/Makefile            |   1 +
+>   drivers/tpm/tpm2_efi.c          |  97 +++++++++++++++++++
+>   include/asm-generic/sections.h  |   1 +
+>   include/bootm.h                 |   6 ++
+>   include/efi.h                   |  24 +++++
+>   include/efi_tcg2.h              |   1 +
+>   lib/efi/Makefile                |   2 +-
+>   lib/efi/efi.c                   |   1 +
+>   lib/efi/efi_app.c               |  41 ++++++++
+>   lib/efi/efi_app_init.c          | 163 ++++++++++++++++++++++++++++++--
+>   lib/efi/efi_dtb.S               |   6 ++
+>   lib/efi/efi_vars.c              |  44 +++++++++
+>   lib/fdtdec.c                    |   3 +
+>   27 files changed, 967 insertions(+), 28 deletions(-)
+>   create mode 100644 cmd/addr_find.c
+>   create mode 100644 cmd/efigetenv.c
+>   create mode 100644 cmd/part_find.c
+>   create mode 100644 drivers/net/efi_net.c
+>   create mode 100644 drivers/tpm/tpm2_efi.c
+>   create mode 100644 lib/efi/efi_dtb.S
+>   create mode 100644 lib/efi/efi_vars.c
+>
+
