@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60967E668A1
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 07:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BFABE66894
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 09:00:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDCBA89263;
-	Sun, 24 Nov 2024 08:09:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3817688AAC;
+	Sun, 24 Nov 2024 10:00:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SIwIuw0z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q3z8GiaB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D62D489263; Sun, 24 Nov 2024 08:09:02 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1775A89535; Sun, 24 Nov 2024 10:00:12 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C4258760C
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 08:09:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E728E889EF
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 10:00:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AO78tJr008874;
- Sun, 24 Nov 2024 01:08:55 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732432136;
- bh=6Gm+hCIYgTl3E0A1ECexjJlzXRr/CWqnfbOfRQL/zbs=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=SIwIuw0zvyllxzj6CVHSUZiOGspJqSXaE8omRNi0cYwvBhJrrL+8cVHPlNZxpL/uX
- pmMrSlbp7/zzn0ZrbXPEsvoojQygJj28q7Hrb4EL7x+/epGvUyUjKCylzFP1Xt7DZA
- efcoDgRNdlS8AeVit6ff/rR5Q7pUZsKLC0nZ7Ne0=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO78t5D080364
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 24 Nov 2024 01:08:55 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 24
- Nov 2024 01:08:55 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 24 Nov 2024 01:08:55 -0600
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO78Tf9107079;
- Sun, 24 Nov 2024 01:08:51 -0600
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>,
- <m-chawdhry@ti.com>, <rogerq@kernel.org>, <nm@ti.com>,
- <sjg@chromium.org>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
- <afd@ti.com>, <u-kumar1@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2 5/5] board: ti: j784s4: evm: Set "dfu_alt_info" only if
- interface is Serial Flash
-Date: Sun, 24 Nov 2024 12:37:59 +0530
-Message-ID: <20241124070828.617558-6-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241124070828.617558-1-s-vadapalli@ti.com>
-References: <20241124070828.617558-1-s-vadapalli@ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5cece886771so5199733a12.0
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 01:00:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732438809; x=1733043609; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c0x+S8fN5tg3OjvzXTcLAJz1VQ5U1XX27OfsMOODU78=;
+ b=q3z8GiaB/KbogBjtB3YsvAnp3FT/+qZ6/fwkXXnAx7OY/ieZbYbeeir2VOim3n1xPi
+ u6MoTCXm5iailtsAObwOXa/Ym20a3geO+PC0dQFEGCc8i0X6/bnBI4iLDDYQ8vfYNKii
+ oXKGytTG7fmsCkQ5jAXwbOXFbdS0/ZKrbLHd7aWkDuc4lwIGfAAtJ7Q5ynR8oSlekcA3
+ qBb9fHmuChNT+Yu87NnhGvWZX1501AoBqRIAS4lCAvD39UriZ9eS2vixHwYR653wt1PP
+ H2Lio12A7tZ4AWk2p3T/dSZcqG8YZQkkV8O2WIrDcbisdhQv2ScgZxZEa6E9WtpNt0NC
+ 32tg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732438809; x=1733043609;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c0x+S8fN5tg3OjvzXTcLAJz1VQ5U1XX27OfsMOODU78=;
+ b=pTuBNRXVjNLdJ6jA7PYXvapF0oPHdteXx8pETe3dWJNSXJk/AO2y+I9SfXsJQeK9Nn
+ tYGyRGYbjKVxODF/RpZp0FchkD9m6pnY8Fi1m/E7CPvmu+shVgbdga+48PgLCgIDmMio
+ p9+hoW4hkjvQd5S9WS4xK9WX1QWUC9y3UA+ep93loPa0nggq97Q2F+2pRU0HtQtBVa4q
+ 08FezWDLHf2aIurMw9C34W+MdQHnx7Txt8H2+Ky3GCqCBhqBrTmYrOYP3Iok+7sgskEi
+ n4oKayQ3ggmqTR31KBm4kuDvN6opoNFlFLVQEe00uccJoLRl7/tJuRzKTqS0lkPx3N9e
+ bpPA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjvKlR+p9u1IJ/pO7H6n9PUr4ZW6CY5YbHmLrLG96oxEXMH9SrcfFNLqUUOkd7aOi1QZkl8kg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwciBhirunRYoPoecnW3gnt07hacEyxRauY/OFgW4T3fHoMqjrM
+ 7WBU2KC2wPADZEkh7GpLY9TmijctoAe0vBuoSi2KhJc4YLs/u+1LFHIOfi1Pc64=
+X-Gm-Gg: ASbGnct0A1VK9nfGVRYJSZlrHX8BfoIUG21RpZxWtQSlvBP3afSDAkVlTg7mayB9CKx
+ plC3/4NN//oGRJcjBT68x72SXvy9XRC2RAmvURiJ0FUHAnLfWSYZ6NxhGc1FRKN+FmA0Dm61rgL
+ ETlTSxyNAbqwJw6XGun2PrbHbiAj2Bi/dSJDU3EsKPj70cFORmzXYTT9+sMVqeZlqs+juK/ee4a
+ QJvrceBeqbBZt47QRd8587TpNyGNCp/zWHJgDcSPU+TdQBOPUDuH70v/euSI/yY96KfRQdPU39O
+ Hr3AjLE4TO3/tyq++2pOynTJiw==
+X-Google-Smtp-Source: AGHT+IH6aZXM7hjq5Wh+/SYE//sbTczOqIMuZudUo6uaqMuYqLJeJco/sYK9iT3+gseLipXFvLPYCQ==
+X-Received: by 2002:a05:6402:27cd:b0:5d0:975:b1c0 with SMTP id
+ 4fb4d7f45d1cf-5d00975b228mr11826912a12.11.1732438809304; 
+ Sun, 24 Nov 2024 01:00:09 -0800 (PST)
+Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
+ [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa54423e8e9sm74790566b.77.2024.11.24.01.00.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Nov 2024 01:00:08 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH v2] lmb: Correctly unmap and free memory on errors
+Date: Sun, 24 Nov 2024 11:00:03 +0200
+Message-ID: <20241124090003.495315-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,45 +97,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-updated the "dfu_alt_info" variable to support use-cases with Serial Flash.
-However, this breaks use-cases where interface is not Serial Flash ("sf").
-Fix this by setting "dfu_alt_info" only when the interface is "sf".
+We never free and unmap the memory on errors and we never unmap it when
+freeing it. The latter won't cause any problems even on sandbox, but for
+consistency always use unmap_sysmem()
 
-Fixes: a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocating and freeing memory")
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-
-v1:
-https://patchwork.ozlabs.org/project/uboot/patch/20241124051545.382397-6-s-vadapalli@ti.com/
 Changes since v1:
-- Replaced "SPI Flash" with "Serial Flash" everywhere.
+- added r-b tags
+- reword the commit message
+- rebase on -master
 
-Regards,
-Siddharth.
+ lib/efi_loader/efi_memory.c | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
- board/ti/j784s4/evm.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index 548dbd5925..d915aee48f 100644
---- a/board/ti/j784s4/evm.c
-+++ b/board/ti/j784s4/evm.c
-@@ -42,7 +42,13 @@ struct efi_capsule_update_info update_info = {
- #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
- void set_dfu_alt_info(char *interface, char *devstr)
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index d2f5d563f2a0..e493934c7131 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 				enum efi_memory_type memory_type,
+ 				efi_uintn_t pages, uint64_t *memory)
  {
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+	/*
-+	 * Since the EFI Capsule support is enabled only for Serial Flash,
-+	 * update the "dfu_alt_info" environment variable only if the
-+	 * interface happens to be "sf" (Serial Flash).
-+	 */
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
-+	    (strcmp(interface, "sf") == 0))
- 		env_set("dfu_alt_info", update_info.dfu_string);
+-	u64 len;
++	u64 efi_addr, len;
+ 	uint flags;
+ 	efi_status_t ret;
+ 	phys_addr_t addr;
+@@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+ 		return EFI_INVALID_PARAMETER;
+ 	}
+
+-	addr = (u64)(uintptr_t)map_sysmem(addr, 0);
++	efi_addr = (u64)(uintptr_t)map_sysmem(addr, 0);
+ 	/* Reserve that map in our memory maps */
+-	ret = efi_add_memory_map_pg(addr, pages, memory_type, true);
+-	if (ret != EFI_SUCCESS)
++	ret = efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
++	if (ret != EFI_SUCCESS) {
+ 		/* Map would overlap, bail out */
++		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
++		unmap_sysmem((void *)(uintptr_t)efi_addr);
+ 		return  EFI_OUT_OF_RESOURCES;
++	}
+
+-	*memory = addr;
++	*memory = efi_addr;
+
+ 	return EFI_SUCCESS;
  }
- #endif
--- 
-2.43.0
+@@ -546,6 +549,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
+ 	if (status)
+ 		return EFI_NOT_FOUND;
+
++	unmap_sysmem((void *)(uintptr_t)memory);
++
+ 	return ret;
+ }
+
+--
+2.45.2
 
