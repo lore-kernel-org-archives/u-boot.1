@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01ADDE668A0
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 05:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9180E668A1
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 06:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC86B89986;
-	Sun, 24 Nov 2024 06:16:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E7C91894D9;
+	Sun, 24 Nov 2024 07:52:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K9kd0v0V";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qM4zgYrI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B3A08999F; Sun, 24 Nov 2024 06:16:23 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E360889987
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 06:16:18 +0100 (CET)
+ id 39C65894E0; Sun, 24 Nov 2024 07:52:24 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79364894D8
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 07:52:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5GEjC058872;
- Sat, 23 Nov 2024 23:16:14 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO6qFql478569
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sun, 24 Nov 2024 00:52:15 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732425374;
- bh=MctyX4P6azIux8FDTHDOBomOuOfs2A3U2aqDLZZRsUM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=K9kd0v0Vcjw1ViF+eLm1XU2YEvbtLCrkDPlPC4ByTB9w0x5uZZEI+FrxmkVMIeFI/
- P1L0+LmYcUfAh3wkDxEL18U0rMoIaVfilLA5s4oR+9qxYDMb082GmYRD92eLss8Srh
- /rZTxHfgdXmReYoLsBRI9PLDxnVprXBoHRVZZUHc=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO5GEVX034505
+ s=ti-com-17Q1; t=1732431135;
+ bh=cvITiGGBUyfx8QBY2qrU29/0DMx+yLvqw9z2V/BkZ0k=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=qM4zgYrISW67ov3BCWElnmdOvJyD4j3gx4LFuU3cnyitQ61UGMh4L5Fc8lZdp2esO
+ g0PLMy8s1W1B18Xsx0mROpqoINwG8/6MYnBwZuK/LGDweQhV25dKSqegKkxXDZHsKP
+ ZOKAzY2KqRm0dD1criVMVIzj+2T0ZLr0FDwYEQf4=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AO6qFrj071635
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 23 Nov 2024 23:16:14 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 23
- Nov 2024 23:16:13 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Sun, 24 Nov 2024 00:52:15 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 24
+ Nov 2024 00:52:14 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 23 Nov 2024 23:16:13 -0600
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO5FkDs129179;
- Sat, 23 Nov 2024 23:16:09 -0600
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
+ Frontend Transport; Sun, 24 Nov 2024 00:52:14 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AO6qDP5090343;
+ Sun, 24 Nov 2024 00:52:14 -0600
+Date: Sun, 24 Nov 2024 12:22:12 +0530
+From: s-vadapalli <s-vadapalli@ti.com>
 To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <j-humphreys@ti.com>,
  <m-chawdhry@ti.com>, <rogerq@kernel.org>, <nm@ti.com>,
  <sjg@chromium.org>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
  <afd@ti.com>, <u-kumar1@ti.com>, <sabiya.d@ti.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH 5/5] board: ti: j784s4: evm: Set "dfu_alt_info" only if
- interface is SPI Flash
-Date: Sun, 24 Nov 2024 10:45:34 +0530
-Message-ID: <20241124051545.382397-6-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241124051545.382397-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH 0/5] EFI Capsule "dfu_alt_info" fixes for TI Boards
+Message-ID: <wluigthyeij6rqroztkewu7lf253wwmwmxgksyizeshcjifmvz@zr753q3qu6yo>
 References: <20241124051545.382397-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241124051545.382397-1-s-vadapalli@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,36 +82,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-updated the "dfu_alt_info" variable to support use-cases with SPI Flash.
-However, this breaks use-cases where the interface is not SPI Flash ("sf").
-Fix this by setting "dfu_alt_info" only when the interface is "sf".
+On Sun, Nov 24, 2024 at 10:45:29AM +0530, Siddharth Vadapalli wrote:
 
-Fixes: a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
- board/ti/j784s4/evm.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+Kindly ignore this series. I had mistakenly assumed that "sf" was an
+abbreviation for SPI Flash. I found out later that it is an abbreviation
+for Serial Flash as indicated at:
+https://docs.u-boot.org/en/latest/usage/dfu.html#overview
 
-diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index 548dbd5925..3699076a93 100644
---- a/board/ti/j784s4/evm.c
-+++ b/board/ti/j784s4/evm.c
-@@ -42,7 +42,13 @@ struct efi_capsule_update_info update_info = {
- #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
- void set_dfu_alt_info(char *interface, char *devstr)
- {
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+	/*
-+	 * Since the EFI Capsule support is enabled only for SPI Flash,
-+	 * update the "dfu_alt_info" environment variable only if the
-+	 * interface happens to be "sf" (SPI Flash).
-+	 */
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
-+	    (strcmp(interface, "sf") == 0))
- 		env_set("dfu_alt_info", update_info.dfu_string);
- }
- #endif
--- 
-2.43.0
+I will change all references of "SPI Flash" to "Serial Flash" and post
+the v2 series.
 
+Regards,
+Siddharth.
