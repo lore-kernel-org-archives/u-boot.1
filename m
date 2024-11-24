@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17FADD68BFF
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 18:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07D8D68BFF
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 19:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07A2C88901;
-	Sun, 24 Nov 2024 19:38:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0AABC8954C;
+	Sun, 24 Nov 2024 20:06:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yIAbqEYC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iqZJzAkc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DD5A895A9; Sun, 24 Nov 2024 19:38:44 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 29D3A8956D; Sun, 24 Nov 2024 20:06:05 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34D9A895A0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 19:38:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 881048954C
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 20:06:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-539eb97f26aso4154886e87.2
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 10:38:42 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4668c8e757dso3053641cf.0
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 11:06:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732473521; x=1733078321; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Djcnt4zRb4tK6dxCtXwg5cfgPTfFiViYeaFFG+OS6IA=;
- b=yIAbqEYCMfTh8qLVbALwr81Oy3nhN0HTy908CffZOqySoILrk4sjE3cRBmWkwwfXTt
- BMwjhTv994VMnXUvALNrvXKoTh/N0t6Jiu3ZAKwJeLrPj92OzyGCIrF1r3g8aROgoyh6
- yT/XAcj7Kho7pFp6g20SKfWm2UXMCF+r5qoEt5w3HvBImXRr1tKcCRYsqbtRT79DzeR9
- I9Bivq75YXh7KYKNBpxEm3vwzQbCUPQrj5h89SlbRxq+fKuwUAQiXr9+6CN56F3WYiqd
- 8JM3ziJN1odTRLvDl7E1FrJaWfvdU1HucYktlK0WOoNYXRc8xEPUkGdzoft6m1PsRWFC
- aUSA==
+ d=konsulko.com; s=google; t=1732475161; x=1733079961; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=G2ZW+3LuNNZgLo2xXSWnlxdsZ9Npkm4So4PZP5c2dA4=;
+ b=iqZJzAkcj1bVCWs9s5oQK5gqoMGXuaNHU0JxVy0si1qdYlcM9rMAw6sP6n93J0L59u
+ 8m3XlHFrTcyoDaxWYFssTQLCCkzWdk35WKB/JGfwxaHGDbnD7srvYSDjbwbENPK5m+zD
+ 5WQuxbR1lBz/hx8vLkGIr+Sx5INejZdHDjXyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732473521; x=1733078321;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Djcnt4zRb4tK6dxCtXwg5cfgPTfFiViYeaFFG+OS6IA=;
- b=dhZAQOdcmn7b658V0hzl6RcUZpGu6o8ZPbfMrdMgeP3u38j2slkKiXb3yBVoc7og91
- zMVe2djOdE/AqVWXRKjv7P/VfmjU0X1EvmDvC9L2pUoUyFGqKFu1GI9j9ocQKiXyMSyh
- /RKc/khXDgxAWCmOdLKPgWyxXWQUjH92wg+bhFKXMErFVutLlyue8JTZDXx7TgORXwq4
- yDYoel+EosHyJLXq/6VAkdWOIbHRp7aUxeEWRkjEADK7/PtGTB/lV0J9g1UCsLQMDkaF
- Gvtae3pNge8oYVhd+BEzK9BnNZCDiMHCMDPYIye2+3/lVG86Cd3/mRac20HHQh9n1DVf
- Z8lQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXXpgqW1xqBYxTbOnA5+9cH6nYcisZTTFBW6dizRMXhgUZTWodV77RJxibB8xgoB7R4puizXQY=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywh+jLCvLbx2ZIlh5AsyR4agcycmdqgfplvzcvz9xa8qdkZCbuG
- IFS7JI62PaACI3r8HcOZD/tCwkmT7DN9UfeOTMtehON3FsfH76legjpL5iLxfHE=
-X-Gm-Gg: ASbGncv6BNn+8O7v8pttAfMfvVufoI03b0c1Rq5/Xok3MfykTc1rP+rx2c3RzwuH61e
- 3tgJsnAqd+F45Zun4AXKscP2SRmNoayXCI8f+5JYjqsJNlD/oESezY2ILIdyNrV2836o9GIW1g8
- 5b1ErE8SntOLbq+OrW+mURYSaS8Q0XZTcmQ+YUcs6c0IrD5wlRf4jCoyDC99J/QciJjTad/5eJV
- /SOsmv+TbEJBvUFfGE1mKEND1UxH+KEhXsBKqBe4H+z0nhYRamdr9R2Fc3eIGubZ0lDDSde32KU
- i2iqDo9A
-X-Google-Smtp-Source: AGHT+IFgxSBO8EGTH11zMjrwhQ/Cp6twzTqekFxfyJAISyGHEao6nfX2gUTGo+Y8Dg7HILcjXRJbaA==
-X-Received: by 2002:a05:6512:12c2:b0:53d:dd7e:338e with SMTP id
- 2adb3069b0e04-53ddd7e33dbmr1801452e87.16.1732473520485; 
- Sun, 24 Nov 2024 10:38:40 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ d=1e100.net; s=20230601; t=1732475161; x=1733079961;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G2ZW+3LuNNZgLo2xXSWnlxdsZ9Npkm4So4PZP5c2dA4=;
+ b=Pk2QkawZ1/JNK1uc0SSpXKbY5C7M8hPRyO3wlPOOpbYpOxH6BpfWyrUFBhdOpjVi3h
+ S0DomGanZv/rUURgPIgguDmMV24MOnvjQ3wk5CRZJLIIbeD4a9jgut6JAIgJlgnQZqy4
+ OvJINhfq0l3K+8ugzUmhe3A1J8qyFqmSevNCKu9nrRz9SVKKRKhPZiDO9sjeaM804G0/
+ emnNOFfYgqFhWqLcUsst49iR8LWxDd1FbRf4C2Pi9mSi96a91JdOJKbaE6Sbw4DSJdIs
+ LiZqluX6XKYtnUoUsrvb5wUarEqnWP51Hsfiw6JhCPXYhqYMXicEegU1K7DEK4nd6v6m
+ Fmvw==
+X-Gm-Message-State: AOJu0YzNrbjrTdS7mHpqiIp+yK2DI6UlarGVOKk5Nje7GYZz1GHuTP09
+ yL2J8mLETcBi8EbfWF1fTvHs6cyJm0lNuIfFbnkPK1btR4mqxyzxblPzdgewc6U/PWxnglVUIXm
+ bvF8=
+X-Gm-Gg: ASbGncvPxOgzCaiSJJGdt70nFV+KFiAvdpA8W2zQ97oM8rYKGKTcS1Z8DqdUDEEpfSJ
+ 1w/GS9mIGJSRpG3l2gLIBOS/fJw1MIr6cvLCz3dcuHY9xqOxlVYKYnGD5XK0jNWxP6+EzDIekgX
+ OFTF84DoFm8uRE4PgHOI8SaA3vgybAlPiNwTBEg5JBkZHi69nfTl6CZ/RHBZf9XcqsGdCw1u1NZ
+ ovZRTLbiwcsKGWhKGQz6ESfIUlOPHAheqjzCsengzDoreMP8Q==
+X-Google-Smtp-Source: AGHT+IGQj9xo32VFv2rCSRguocxwakeIICgjWN1LvE4VSBE1YXA8ytf52+j/AMP+S6VuVjdr/57tiA==
+X-Received: by 2002:a05:622a:a0e:b0:464:888f:ae6c with SMTP id
+ d75a77b69052e-4653d63b13cmr202848641cf.52.1732475161292; 
+ Sun, 24 Nov 2024 11:06:01 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b344fccsm371392566b.86.2024.11.24.10.38.39
+ d75a77b69052e-4653c4902casm36850601cf.85.2024.11.24.11.05.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 10:38:39 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>, Simon Glass <sjg@chromium.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH] common/board_f: init malloc earlier
-Date: Sun, 24 Nov 2024 19:38:29 +0100
-Message-ID: <20241124183832.2476928-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.47.0
+ Sun, 24 Nov 2024 11:06:00 -0800 (PST)
+Date: Sun, 24 Nov 2024 13:05:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20241123
+Message-ID: <20241124190557.GF3600562@bill-the-cat>
+References: <20241123213651.670462-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wxqRhwoFTDkS2JUJ"
+Content-Disposition: inline
+In-Reply-To: <20241123213651.670462-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,48 +94,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the early malloc initialisation is done partially in
-board_init_f_init_reserve() (on arm64 at least), which configures
-gd->malloc_base. But it isn't actually usable until initf_malloc() is
-called which doesn't happen until after fdtdec_setup().
 
-This causes problems in a few scenarios:
+--wxqRhwoFTDkS2JUJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1. when using MULTI_DTB_FIT as this needs a working malloc (especially
-   for compressed FIT).
-2. Some platforms may need to allocate memory as part of memory map
-   initialisation (e.g. Qualcomm will need this to parse the memory map
-   from SMEM).
+On Sat, Nov 23, 2024 at 06:36:51PM -0300, Fabio Estevam wrote:
 
-Move the initf_malloc() call earlier so that malloc is available during
-fdtdec_setup().
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/master, thanks.
+>=20
+> The following changes since commit 52c0e5f8a39ef022ee5ab2dfd67661d1d34941=
+c7:
+>=20
+>   Merge branch '2024-11-22-assorted-fixes' (2024-11-22 15:04:54 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20241123
+>=20
+> for you to fetch changes up to c02cdd41877bab89ab17f922f1e19c1c4237e83a:
+>=20
+>   arm64: dts: imx8mn: Include 32kHz oscillator clock in SPL DTs (2024-11-=
+23 15:46:34 -0300)
+>=20
+> u-boot-imx-master-20241123
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- common/board_f.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 98dc2591e1d0..bddfa6b992b9 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -867,15 +867,15 @@ static int initf_upl(void)
- }
- 
- static const init_fnc_t init_sequence_f[] = {
- 	setup_mon_len,
-+	initf_malloc,
- #ifdef CONFIG_OF_CONTROL
- 	fdtdec_setup,
- #endif
- #ifdef CONFIG_TRACE_EARLY
- 	trace_early_init,
- #endif
--	initf_malloc,
- 	initf_upl,
- 	log_init,
- 	initf_bootstage,	/* uses its own timer, so does not need DM */
- 	event_init,
--- 
-2.47.0
+--=20
+Tom
 
+--wxqRhwoFTDkS2JUJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdDeRIACgkQFHw5/5Y0
+tywtWQwAnCgkmDxiwd4MzpGeBRRryCr0DB8s+3IMne1z+C9QopHpyj3AxQsiXMZW
+VZBWIdIjQss5aQU4tVtOGQLFAFI1KrgzhK5AmXdJb3pUYps2rjKnywFFa0zXLsYU
+OxXQvB7Drr9LQZGNR/7VubRMB6e+3YtWzTVhDnktcRXxmwR9NscArT59zPx6XI/V
+j4oZssRhQ7+IxR2H1njMLPykAobZEILF0AB0Yy3rHX9Gownw1nXcwBfAhBEEiECH
+gYeG/TkBGBhhTIjtQBmboGX7UL7FWGt1H94mH2PRUiig14jm+SET/W8tMV6NFFjt
+r3716zyBxKT3/1En6XLFOKzdyMv1xHp0+MlPGMua+swYbSrd6/sRYb4FYF0JxrHs
+Ksd3HKb4ykjhft/26dAdzXguqpvN2PRG1ji0y4VjKoEA7deE4P/TUFMeMVMaYkxI
+rOdydWupvvalZHdC++XyJslb1lnMe4zIIvqFlgOSLD//B3dKz4vrvCSDX4IsT4Wl
+BOZYq+vq
+=/iFv
+-----END PGP SIGNATURE-----
+
+--wxqRhwoFTDkS2JUJ--
