@@ -4,96 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECF5E6780A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 20:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA5DFD3B7C2
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 22:51:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539688984B;
-	Sun, 24 Nov 2024 21:27:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EB8ED895AC;
+	Sun, 24 Nov 2024 23:51:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wYvsJsT8";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E95EA8995B; Sun, 24 Nov 2024 21:27:51 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732488675;
+	bh=qQaBpwRoZI5qgS6PDx5Q86E4lJsiJGWkn0v8ogrJDU8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=PCSQWxBihUwbK6VlB0Y/4/27cQN8gMHSkAlrcj+W/Htbrne5pRXtSR76JDlm/LS2S
+	 RHCXD0zR+Kd0Bt8wgocfXqlDHMU0B+0N+ptJj+TrBp9S7DdiTkUGEaVKuH4kbJ5gtG
+	 6zLvrBpWRta5GQvr4w/iObU4h9BndSrkc1nqjhwhvXkrPq9SZD0fYDwlmmAhX44SLp
+	 vB8Z/yHBJ+7Dyvu0iMa5WpLwYGNfP9EbLvV0RDVdHIHgX4jilzzeMNrgGJ9tsjnYdB
+	 sX2b2F05DCCzwMT5CqjHY7FuOdcSyKHxmfG/imDlYAdzcb47oiNExs9ezJRYpDEMVi
+	 rQWuSFPiKpgCg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F25B4895A4
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 21:27:49 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aa55171d73cso45088166b.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 12:27:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732480069; x=1733084869; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=XTnj2V+fCGfjE3UXwJb+V6Ed8v35O0pP0mKPTMlEpv8=;
- b=wYvsJsT8iB8jk3O1eCc6nUjPtK6h4vreJlxHU3cJlD1xO3uA37JC3jjldHP6b9Wklf
- kQZK80gnpeHGuHVsSCisbfSho+kjb1wUfcV252PkDLZS04DOzawtVNhY22fWJXYWg4UH
- Cmn01FXWC8qz+1DA9vtHvw2cSXIEdBs0EkZSU/MGxMWUgQ8w/R+abM67Fl+0hXCUKHRc
- ZQQJ1AJtpiibibFd0gFQiagP66cuzQVdn6P3ekeWlCvmkCzhtODrZOimuZ0MxP+b//IQ
- sc5FOphvlRtiHK/i9Mq51ck6i6s1xNpLcC2HKeyoE/RC5xvUlYU7O3kUXz+W2Zs/wblR
- gTlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732480069; x=1733084869;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XTnj2V+fCGfjE3UXwJb+V6Ed8v35O0pP0mKPTMlEpv8=;
- b=oOC/x9KW9b9QK4n8zlYNNtwtRTKMhM3rHC4UVqkPUmtzjj/NBJfjfkrvQWn+oe366e
- P+nle/5Bk16Buska3fPhyIsGel5e1kLd67Ge7hXIWIASH4sZ5ZOvzU0LkOsHahGegaY8
- wtVT4T/kYNVe1Yk2O2txKSyZ/CAXWZ4ldKgkOpmLS5v8gAnA/1+RxP75oxz1W4AVBNYy
- ej4DSVGaTF8Ixu0Yagh+xQJp6CHQoi9JwPO9QljZjHoRInZlb7ZT+YssSqqA5JiGQUTo
- /wIDKybYAHrk6MEpI677TqBWAcSzwR6i185Hp6hAyLp4Zs9xSRPP5Vcg1jPMQoTWX0E0
- lerw==
-X-Gm-Message-State: AOJu0YyMeV9jy+ITuY4e9OsjCHiJa4BciJcp/N7mECWRGptnKmaEytEE
- omFE6AAdYQKQ/YrywbLi9V+FnBx5/ceD8TjJRIt63ekks6md3Au0nZEoYAPjsvE=
-X-Gm-Gg: ASbGncsL/onFblD9uCxUUgL7axypC/AhewFbFjcao13oSrZoO+YSytr5Cx4a8wdFvCu
- fNrp+tLg97rHrhCqjniQ7Thjs+XFWdkIigeZ3QAEhrM/U33offPUIYlpfFtXb4n1H2VPFFYlL7w
- VmG+W+98GD4Zlfr2UYXU3Hmi0r94SQ2cIngxhwuHYfnre60tn99NNfDcC8U9/9Srs/3ryT7+Dsz
- goQ/Zzua66D4+e193fPC+9Nh60wH2xnlfxmdjIrBHjf5zxVvmmZ7rLgabqsaSQKh50Y
-X-Google-Smtp-Source: AGHT+IEE89lC6WWdy6DxoycyKst2v71ujXM6Vx5bhjwNC4Lswlr4iLKc/16LjZ6hKAGkd/T7BGUzig==
-X-Received: by 2002:a17:906:1daa:b0:aa5:37f1:ce63 with SMTP id
- a640c23a62f3a-aa537f1cef6mr487720866b.32.1732480069514; 
- Sun, 24 Nov 2024 12:27:49 -0800 (PST)
-Received: from lion.localdomain ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b28cda1sm378720666b.9.2024.11.24.12.27.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 12:27:49 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Sun, 24 Nov 2024 21:27:10 +0100
-Subject: [PATCH RFC 14/14] configs: add x1e_defconfig
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 40F0E89582;
+ Sun, 24 Nov 2024 23:51:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1732488673;
+ bh=qQaBpwRoZI5qgS6PDx5Q86E4lJsiJGWkn0v8ogrJDU8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=w9kjHhenhYtZ1ff+jrOpT+LftU61Jpl/1BuGFbf9EXLQfogVFM0JUy9L9GwGDEjwh
+ 0WLPXLSw518jYApM11XA+Q0rRxns4Z7wScsowCkzqocJzN0wAIuvXawgY9lB3Z9R2O
+ h2jAUrz1bnkMiRtMi7Z7WcghlAAALygxZV5rO1dDIVuOAAPftwkJdlNlKZk06tvc4n
+ eorahX5Gza+m4STCyfX3pveTo5u2B14SJri2Vr/wp+Kt7+i71kJn4SZPGQWQGU1vMb
+ vbYvnHjnnkJO2a0W0m7atHRlRapvNzKopK8BBaojW/EYLUVd1rYGTtPzdkTEFGCt0l
+ /eKPUjeo5Oc0g==
+Message-ID: <38fa4180-707b-4870-9f47-a1aaf7056795@denx.de>
+Date: Sun, 24 Nov 2024 22:01:55 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3 2/3] arm64: imx8mp: Read values from M24C32-D
+ write-lockable page on DHCOM i.MX8MP
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+References: <20241121172154.90507-1-cniedermaier@dh-electronics.com>
+ <20241121172154.90507-2-cniedermaier@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241121172154.90507-2-cniedermaier@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241124-b4-efistub-arm64-v1-14-3e33f0340071@linaro.org>
-References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
-In-Reply-To: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1620;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=u5YEv9aLJ6aJE9FD/crDptwvK0hZP0TbWUtL5V+XcZU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhnTnHuPDZ0MzK3bxVPAvCNGUUcqYd8yHWzq6jtHKjyN0w
- pdZ7z53lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgImczmf4X3eEISIxuExs2V+n
- ExI+fmVx/ZpZHO++79q/7oVGYN+dTIa/4jkm4kGMu5Y7f+uZMsVJuWZtrtsExdK+VzpC+/VqLbL
- 3AQA=
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,59 +73,362 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a defconfig for Qualcomm X1 Elite based devices. These boot U-Boot
-using EFISTUB from their stock EFI bootloader.
+On 11/21/24 6:21 PM, Christoph Niedermaier wrote:
 
-Initially we support display and USB, keyboard will require i2c-hid,
-NVME will require PCIe support.
+[...]
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- board/qualcomm/efistub.env | 11 +++++++++++
- configs/x1e_defconfig      | 17 +++++++++++++++++
- 2 files changed, 28 insertions(+)
+> +struct eeprom_id_page {
+> +	u8	id[3];		/* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
+> +	u8	version;	/* 0x10 -- Version 1.0 */
+> +	u8	data_crc16[2];	/* [1] is MSbyte */
+> +	u8	header_crc8;
+> +	u8	mac0[6];
+> +	u8	mac1[6];
+> +	u8	item_prefix;	/* H/F is coded in MSbits, Vendor coding starts at LSbits */
+> +	u8	item_num[3];	/* [2] is MSbyte */
+> +	u8	serial[9];	/* [8] is MSbyte */
+> +};
+> +
+> +#define DH_EEPROM_ID_PAGE_HEADER_LEN	offsetof(struct eeprom_id_page, mac0)
 
-diff --git a/board/qualcomm/efistub.env b/board/qualcomm/efistub.env
-new file mode 100644
-index 000000000000..5264603556ad
---- /dev/null
-+++ b/board/qualcomm/efistub.env
-@@ -0,0 +1,11 @@
-+stdin=serial,button-kbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+preboot=usb start; pci enum; nvme scan;
-+fastboot=fastboot -l $fastboot_addr_r usb 0
-+do_boot=bootefi bootmgr
-+bootmenu_0=Boot first available device=run do_boot
-+bootmenu_1=Enable fastboot mode=run fastboot
-+bootmenu_2=Reset device=reset
-+menucmd=bootmenu
-+bootcmd=run do_boot
-diff --git a/configs/x1e_defconfig b/configs/x1e_defconfig
-new file mode 100644
-index 000000000000..d60210f2ca5b
---- /dev/null
-+++ b/configs/x1e_defconfig
-@@ -0,0 +1,17 @@
-+#include "qcom_defconfig"
-+
-+# Broken?? Probably an issue with mapping the memory
-+CONFIG_QCOM_COMMAND_DB=n
-+
-+CONFIG_EFI=y
-+CONFIG_EFI_STUB=y
-+CONFIG_EFI_STUB_64BIT=y
-+
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x894000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
-+
-+CONFIG_DEFAULT_ENV_FILE="board/qualcomm/efistub.env"
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/x1e80100-crd"
+If this is really meant to be header length and it should work reliably, 
+then it should not depend on payload layout. You likely need something like:
 
--- 
-2.47.0
+offsetof(struct eeprom_id_page, header_crc8) + sizeof(u8)
 
+Or better yet, rework the structure this way:
+
+struct eeprom_id_page {
+    struct {
+	u8	id[3];		/* Identifier 'D', 'H', 'E' - 'D' is at index 0 */
+	u8	version;	/* 0x10 -- Version 1.0 */
+	u8	data_crc16[2];	/* [1] is MSbyte */
+	u8	header_crc8;
+    } header;
+
+    struct {
+	u8	mac0[6];
+	u8	mac1[6];
+	u8	item_prefix;	/* H/F is coded in MSbits, Vendor coding starts at 
+LSbits */
+	u8	item_num[3];	/* [2] is MSbyte */
+	u8	serial[9];	/* [8] is MSbyte */
+    } payload;
+};
+
+... and in the one callsite (*) which does use this macro, do:
+
+struct eeprom_id_page *eip;
+...
+-crc16_calc = crc16(0xffff, eeprom_buffer + 
+DH_EEPROM_ID_PAGE_HEADER_LEN, data_len);
++crc16_calc = crc16(0xffff, eip->payload, sizeof(*eip->payload));
+
+> +#define DH_EEPROM_ID_PAGE_V1_0		0x10
+> +#define DH_EEPROM_ID_PAGE_V1_0_DATA_LEN	(sizeof(struct eeprom_id_page) - \
+> +					offsetof(struct eeprom_id_page, mac0))
+
+This is not needed either, this would become
+
+sizeof(*eip->payload)
+
+in the only callsite which does use the macro.
+
+>   bool dh_mac_is_in_env(const char *env)
+>   {
+>   	unsigned char enetaddr[6];
+> @@ -30,6 +65,141 @@ int dh_get_mac_is_enabled(const char *alias)
+>   	return 0;
+>   }
+>   
+> +int dh_read_eeprom_id_page(u8 *eeprom_buffer, const char *alias)
+> +{
+> +	struct eeprom_id_page *eip;
+
+You can assign the eip pointer here already:
+
+struct eeprom_id_page *eip = eeprom_buffer;
+
+> +	struct udevice *dev;
+> +	size_t data_len;
+> +	int eeprom_size;
+> +	u16 crc16_calc;
+> +	u16 crc16_eip;
+> +	u8 crc8_calc;
+> +	ofnode node;
+> +	int ret;
+> +
+> +	node = ofnode_path(alias);
+> +
+> +	ret = uclass_get_device_by_ofnode(UCLASS_I2C_EEPROM, node, &dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	eeprom_size = i2c_eeprom_size(dev);
+> +	if (eeprom_size < 0 || eeprom_size > DH_EEPROM_ID_PAGE_MAX_SIZE) {
+
+Wouldn't it be better to exit if eeprom_size < 0 (error) ?
+
+What happens if eeprom_size == 0 ? Maybe that should be considered 
+problematic too ?
+
+> +		eeprom_size = DH_EEPROM_ID_PAGE_MAX_SIZE;
+> +		printf("Warning: Cannot get valid EEPROM.ID page size! Try to read %d bytes.\n",
+
+s@EEPROM.ID@EEPROM ID@ , replace dot with space .
+
+Also please drop the Warning: prefix , it is unnecessary.
+
+> +		       DH_EEPROM_ID_PAGE_MAX_SIZE);
+
+Print both the original eeprom_size reported by i2c_eeprom_size() and 
+DH_EEPROM_ID_PAGE_MAX_SIZE , the former is an important hint for debug 
+purposes.
+
+> +	}
+> +
+> +	ret = i2c_eeprom_read(dev, 0x0, eeprom_buffer, eeprom_size);
+> +	if (ret) {
+> +		printf("%s: Error reading EEPROM ID page! ret = %d\n", __func__, ret);
+> +		return ret;
+> +	}
+> +
+> +	eip = (struct eeprom_id_page *)eeprom_buffer;
+
+See above.
+
+> +	/* Validate header ID */
+> +	if (eip->id[0] != 'D' || eip->id[1] != 'H' || eip->id[2] != 'E') {
+> +		printf("%s: Error validating header ID! (expected DHE)\n", __func__);
+
+To expedite and ease debugging, it is also important to print what the 
+code received , not just what the code expected to receive.
+
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Validate header checksum */
+> +	crc8_calc = crc8(0xff, eeprom_buffer, offsetof(struct eeprom_id_page, header_crc8));
+> +	if (eip->header_crc8 != crc8_calc) {
+> +		printf("%s: Error validating header checksum! (expected 0x%02X)\n",
+
+Better use %02x , I believe lib/tiny-printf.c cannot handle X modifier , 
+please fix globally.
+
+To expedite and ease debugging, it is also important to print what the 
+code received , not just what the code expected to receive, please fix 
+globally.
+
+> +		       __func__, crc8_calc);
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Validate header version */
+> +	if (eip->version == DH_EEPROM_ID_PAGE_V1_0) {
+
+if if (eip->version != DH_EEPROM_ID_PAGE_V1_0) {
+   printf(...);
+   return -EINVAL;
+}
+
+data_len = sizeof(*eip->payload);
+
+> +		data_len = DH_EEPROM_ID_PAGE_V1_0_DATA_LEN;
+> +	} else {
+> +		printf("%s: Error validating version! (0x%02X is not supported)\n",
+
+The CRC that got calculated is also very interesting, not only the 
+expected one.
+
+> +		       __func__, eip->version);
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Validate data checksum */
+> +	crc16_eip = (eip->data_crc16[1] << 8) | eip->data_crc16[0];
+> +	crc16_calc = crc16(0xffff, eeprom_buffer + DH_EEPROM_ID_PAGE_HEADER_LEN, data_len);
+
+See (*) above
+
+> +	if (crc16_eip != crc16_calc) {
+> +		printf("%s: Error validating data checksum! (expected 0x%02X)\n",
+> +		       __func__, crc16_calc);
+
+The CRC that got calculated is also very interesting, not only the 
+expected one.
+
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, int data_len,
+> +				    u8 *eeprom_buffer)
+> +{
+> +	struct eeprom_id_page *eip = (struct eeprom_id_page *)eeprom_buffer;
+
+Is the type cast really needed at all here ? (it might be, please check)
+
+> +	char soc_chr;
+> +
+> +	if (!eeprom_buffer)
+
+Why not pass in "struct eeprom_id_page *eip" directly as function 
+parameter of this function ?
+
+This would become if (!eip) return -EINVAL; and the whole type cast 
+business above would go away altogether.
+
+> +		return -EINVAL;
+> +
+> +	/* Copy requested data */
+> +	switch (request) {
+> +	case DH_MAC0:
+> +		if (!is_valid_ethaddr(eip->mac0))
+> +			return -EINVAL;
+> +
+> +		if (data_len >= sizeof(eip->mac0))
+> +			memcpy(data, eip->mac0, sizeof(eip->mac0));
+> +		else
+> +			return -EINVAL;
+> +		break;
+> +	case DH_MAC1:
+> +		if (!is_valid_ethaddr(eip->mac1))
+> +			return -EINVAL;
+> +
+> +		if (data_len >= sizeof(eip->mac1))
+> +			memcpy(data, eip->mac1, sizeof(eip->mac1));
+> +		else
+> +			return -EINVAL;
+> +		break;
+> +	case DH_ITEM_NUMBER:
+> +		if (data_len < 8) /* String length must be 7 characters + string termination */
+> +			return -EINVAL;
+> +
+> +		const u8 soc_coded = eip->item_prefix & 0xf;
+
+Doesn't the compiler warn about mixing code and variable declarations ?
+If yes, you can easily move this line to the very beginning of this 
+function, which is probably just fine to do.
+
+[...]
+
+> @@ -28,9 +37,40 @@ int dh_get_mac_is_enabled(const char *alias);
+>    */
+>   int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias);
+>   
+> +/*
+> + * dh_read_eeprom_id_page() - Read EEPROM ID page content into given buffer
+> + * @eeprom_buffer:	Buffer for EEPROM ID page content
+> + * @alias:		Alias for EEPROM device tree node
+
+Is this really alias to the EEPROM node or to the EEPROM WLP node ?
+
+> + * Read the content of the EEPROM ID page into the given buffer (parameter
+> + * eeprom_buffer). The EEPROM device is selected via alias device tree name
+> + * (parameter alias). The data of the EEPROM ID page is verified. An error
+> + * is returned for reading failures and invalid data.
+> + *
+> + * Return: 0 if OK, other value on error
+> + */
+> +int dh_read_eeprom_id_page(u8 *eeprom_buffer, const char *alias);
+> +
+> +/*
+> + * dh_get_value_from_eeprom_buffer() - Get value from EEPROM buffer
+> + * @eip_request_values:	Requested value as enum
+> + * @data:		Buffer where value is to be stored
+> + * @data_len:		Length of the value buffer
+> + * @eeprom_buffer:	EEPROM buffer from which the data is parsed
+> + *
+> + * Gets the value specified by the parameter eip_request_values from the EEPROM
+> + * buffer (parameter eeprom_buffer). The data is written to the specified data
+> + * buffer (parameter data). If the length of the data (parameter data_len) is
+> + * not sufficient to copy the data into the buffer, an error is returned.
+> + *
+> + * Return: 0 if OK, other value on error
+> + */
+> +int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, int data_len,
+> +				    u8 *eeprom_buffer);
+
+[...]
+
+> +void dh_add_item_number_and_serial_to_env(u8 *eeprom_buffer)
+> +{
+> +	char *item_number_env;
+> +	char item_number[8];	/* String with 7 characters + string termination */
+> +	char *serial_env;
+> +	char serial[10];	/* String with 9 characters + string termination */
+> +	int ret;
+> +
+> +	ret = dh_get_value_from_eeprom_buffer(DH_ITEM_NUMBER, item_number, sizeof(item_number),
+> +					      eeprom_buffer);
+> +	if (ret) {
+> +		printf("%s: Unable to get DHSOM item number from EEPROM ID page! ret = %d\n",
+> +		       __func__, ret);
+> +	} else {
+> +		item_number_env = env_get("dh_som_item_number");
+> +		if (!item_number_env)
+> +			env_set("dh_som_item_number", item_number);
+> +		else if (strcmp(item_number_env, item_number) != 0)
+
+The != 0 is not necessary, please drop it.
+
+> +			printf("Warning: Environment dh_som_item_number differs from EEPROM ID page value (%s != %s)\n",
+> +			       item_number_env, item_number);
+> +	}
+> +
+> +	ret = dh_get_value_from_eeprom_buffer(DH_SERIAL_NUMBER, serial, sizeof(serial),
+> +					      eeprom_buffer);
+> +	if (ret) {
+> +		printf("%s: Unable to get DHSOM serial number from EEPROM ID page! ret = %d\n",
+> +		       __func__, ret);
+> +	} else {
+> +		serial_env = env_get("dh_som_serial_number");
+> +		if (!serial_env)
+> +			env_set("dh_som_serial_number", serial);
+> +		else if (strcmp(serial_env, serial) != 0)
+
+The != 0 is not necessary, please drop it.
+
+> +			printf("Warning: Environment dh_som_serial_number differs from EEPROM ID page value (%s != %s)\n",
+> +			       serial_env, serial);
+> +	}
+> +}
+> +
+>   int board_init(void)
+>   {
+>   	return 0;
+> @@ -117,7 +160,26 @@ int board_init(void)
+>   
+>   int board_late_init(void)
+>   {
+> -	dh_setup_mac_address();
+> +	u8 eeprom_buffer[DH_EEPROM_ID_PAGE_MAX_SIZE] = { 0 };
+
+Do the following cast here:
+
+struct eeprom_id_page *eip = eeprom_buffer;
+
+and then you can pass *eip to dh_setup_mac_address() and 
+dh_add_item_number_and_serial_to_env() and save yourself a lot of 
+typecasts all around.
+
+> +	int ret;
+> +
+> +	ret = dh_read_eeprom_id_page(eeprom_buffer, "eeprom0wl");
+> +	if (ret) {
+> +		/*
+> +		 * The EEPROM ID page is available on SoM rev. 200 and greater.
+> +		 * For SoM rev. 100 the return value will be -ENODEV. Suppress
+> +		 * the error message for that, because the absence cannot be
+> +		 * treated as an error.
+> +		 */
+> +		if (ret != -ENODEV)
+> +			printf("%s: Cannot read valid data from EEPROM ID page! ret = %d\n",
+> +			       __func__, ret);
+> +		dh_setup_mac_address(NULL);
+> +	} else {
+> +		dh_setup_mac_address(eeprom_buffer);
+> +		dh_add_item_number_and_serial_to_env(eeprom_buffer);
+[...]
