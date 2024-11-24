@@ -4,83 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BFABE66894
-	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 09:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 248D5E668AD
+	for <u-boot@archiver.kernel.org>; Sun, 24 Nov 2024 13:05:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3817688AAC;
-	Sun, 24 Nov 2024 10:00:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 36C538950E;
+	Sun, 24 Nov 2024 14:05:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=motor-comm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q3z8GiaB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1775A89535; Sun, 24 Nov 2024 10:00:12 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3ADC489070; Sun, 24 Nov 2024 08:39:13 +0100 (CET)
+Received: from out28-53.mail.aliyun.com (out28-53.mail.aliyun.com
+ [115.124.28.53])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E728E889EF
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 10:00:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1DB58852D
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 08:39:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=motor-comm.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5cece886771so5199733a12.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 01:00:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732438809; x=1733043609; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c0x+S8fN5tg3OjvzXTcLAJz1VQ5U1XX27OfsMOODU78=;
- b=q3z8GiaB/KbogBjtB3YsvAnp3FT/+qZ6/fwkXXnAx7OY/ieZbYbeeir2VOim3n1xPi
- u6MoTCXm5iailtsAObwOXa/Ym20a3geO+PC0dQFEGCc8i0X6/bnBI4iLDDYQ8vfYNKii
- oXKGytTG7fmsCkQ5jAXwbOXFbdS0/ZKrbLHd7aWkDuc4lwIGfAAtJ7Q5ynR8oSlekcA3
- qBb9fHmuChNT+Yu87NnhGvWZX1501AoBqRIAS4lCAvD39UriZ9eS2vixHwYR653wt1PP
- H2Lio12A7tZ4AWk2p3T/dSZcqG8YZQkkV8O2WIrDcbisdhQv2ScgZxZEa6E9WtpNt0NC
- 32tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732438809; x=1733043609;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c0x+S8fN5tg3OjvzXTcLAJz1VQ5U1XX27OfsMOODU78=;
- b=pTuBNRXVjNLdJ6jA7PYXvapF0oPHdteXx8pETe3dWJNSXJk/AO2y+I9SfXsJQeK9Nn
- tYGyRGYbjKVxODF/RpZp0FchkD9m6pnY8Fi1m/E7CPvmu+shVgbdga+48PgLCgIDmMio
- p9+hoW4hkjvQd5S9WS4xK9WX1QWUC9y3UA+ep93loPa0nggq97Q2F+2pRU0HtQtBVa4q
- 08FezWDLHf2aIurMw9C34W+MdQHnx7Txt8H2+Ky3GCqCBhqBrTmYrOYP3Iok+7sgskEi
- n4oKayQ3ggmqTR31KBm4kuDvN6opoNFlFLVQEe00uccJoLRl7/tJuRzKTqS0lkPx3N9e
- bpPA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUjvKlR+p9u1IJ/pO7H6n9PUr4ZW6CY5YbHmLrLG96oxEXMH9SrcfFNLqUUOkd7aOi1QZkl8kg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwciBhirunRYoPoecnW3gnt07hacEyxRauY/OFgW4T3fHoMqjrM
- 7WBU2KC2wPADZEkh7GpLY9TmijctoAe0vBuoSi2KhJc4YLs/u+1LFHIOfi1Pc64=
-X-Gm-Gg: ASbGnct0A1VK9nfGVRYJSZlrHX8BfoIUG21RpZxWtQSlvBP3afSDAkVlTg7mayB9CKx
- plC3/4NN//oGRJcjBT68x72SXvy9XRC2RAmvURiJ0FUHAnLfWSYZ6NxhGc1FRKN+FmA0Dm61rgL
- ETlTSxyNAbqwJw6XGun2PrbHbiAj2Bi/dSJDU3EsKPj70cFORmzXYTT9+sMVqeZlqs+juK/ee4a
- QJvrceBeqbBZt47QRd8587TpNyGNCp/zWHJgDcSPU+TdQBOPUDuH70v/euSI/yY96KfRQdPU39O
- Hr3AjLE4TO3/tyq++2pOynTJiw==
-X-Google-Smtp-Source: AGHT+IH6aZXM7hjq5Wh+/SYE//sbTczOqIMuZudUo6uaqMuYqLJeJco/sYK9iT3+gseLipXFvLPYCQ==
-X-Received: by 2002:a05:6402:27cd:b0:5d0:975:b1c0 with SMTP id
- 4fb4d7f45d1cf-5d00975b228mr11826912a12.11.1732438809304; 
- Sun, 24 Nov 2024 01:00:09 -0800 (PST)
-Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
- [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa54423e8e9sm74790566b.77.2024.11.24.01.00.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 01:00:08 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH v2] lmb: Correctly unmap and free memory on errors
-Date: Sun, 24 Nov 2024 11:00:03 +0200
-Message-ID: <20241124090003.495315-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=Frank.Sae@motor-comm.com
+Received: from ubuntu.localdomain(mailfrom:Frank.Sae@motor-comm.com
+ fp:SMTPD_---.aKqrfC5_1732433928 cluster:ay29) by smtp.aliyun-inc.com;
+ Sun, 24 Nov 2024 15:39:02 +0800
+From: Frank Sae <Frank.Sae@motor-comm.com>
+To: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
+ trini@konsulko.com, ycliang@andestech.com, tekieli.lukasz@gmail.com,
+ frattaroli.nicolas@gmail.com
+Cc: yuanlai.cui@motor-comm.com, xiaoyong.li@motor-comm.com,
+ suting.hu@motor-comm.com, jie.han@motor-comm.com,
+ Frank Sae <Frank.Sae@motor-comm.com>
+Subject: [PATCH v1 1/2] net: phy: Add driver for Motorcomm YT8531S Gigabit
+ ethernet phy
+Date: Sat, 23 Nov 2024 23:38:43 -0800
+Message-Id: <20241124073844.7785-1-Frank.Sae@motor-comm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 24 Nov 2024 14:05:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,66 +57,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We never free and unmap the memory on errors and we never unmap it when
-freeing it. The latter won't cause any problems even on sandbox, but for
-consistency always use unmap_sysmem()
+Add driver for Motorcomm YT8531S Gigabit ethernet phy.
 
-Fixes: commit 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocating and freeing memory")
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Frank Sae <Frank.Sae@motor-comm.com>
 ---
-Changes since v1:
-- added r-b tags
-- reword the commit message
-- rebase on -master
+ drivers/net/phy/motorcomm.c | 96 ++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 94 insertions(+), 2 deletions(-)
 
- lib/efi_loader/efi_memory.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
-
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index d2f5d563f2a0..e493934c7131 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -451,7 +451,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 				enum efi_memory_type memory_type,
- 				efi_uintn_t pages, uint64_t *memory)
- {
--	u64 len;
-+	u64 efi_addr, len;
- 	uint flags;
- 	efi_status_t ret;
- 	phys_addr_t addr;
-@@ -499,14 +499,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 		return EFI_INVALID_PARAMETER;
- 	}
-
--	addr = (u64)(uintptr_t)map_sysmem(addr, 0);
-+	efi_addr = (u64)(uintptr_t)map_sysmem(addr, 0);
- 	/* Reserve that map in our memory maps */
--	ret = efi_add_memory_map_pg(addr, pages, memory_type, true);
--	if (ret != EFI_SUCCESS)
-+	ret = efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
-+	if (ret != EFI_SUCCESS) {
- 		/* Map would overlap, bail out */
-+		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-+		unmap_sysmem((void *)(uintptr_t)efi_addr);
- 		return  EFI_OUT_OF_RESOURCES;
-+	}
-
--	*memory = addr;
-+	*memory = efi_addr;
-
- 	return EFI_SUCCESS;
+diff --git a/drivers/net/phy/motorcomm.c b/drivers/net/phy/motorcomm.c
+index 4d67203ee7..a1d5eac7bf 100644
+--- a/drivers/net/phy/motorcomm.c
++++ b/drivers/net/phy/motorcomm.c
+@@ -1,8 +1,8 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Motorcomm 8531 PHY driver.
++ * Motorcomm YT8511/YT8531/YT8531S/YT8821 PHY driver.
+  *
+- * Copyright (C) 2023 StarFive Technology Co., Ltd.
++ * Copyright (C) 2024 Motorcomm Electronic Technology Co., Ltd.
+  */
+ 
+ #include <config.h>
+@@ -13,6 +13,7 @@
+ #define PHY_ID_YT8511				0x0000010a
+ #define PHY_ID_YT8531				0x4f51e91b
+ #define PHY_ID_YT8821				0x4f51ea19
++#define PHY_ID_YT8531S				0x4f51e91a
+ #define PHY_ID_MASK				GENMASK(31, 0)
+ 
+ /* Extended Register's Address Offset Register */
+@@ -1114,6 +1115,86 @@ static int yt8821_startup(struct phy_device *phydev)
+ 	return 0;
  }
-@@ -546,6 +549,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
- 	if (status)
- 		return EFI_NOT_FOUND;
-
-+	unmap_sysmem((void *)(uintptr_t)memory);
+ 
++static int yt8531s_config(struct phy_device *phydev)
++{
++	struct ytphy_plat_priv *priv = phydev->priv;
++	u16 mask, val;
++	int ret;
 +
- 	return ret;
- }
-
---
-2.45.2
++	ret = genphy_config_aneg(phydev);
++	if (ret < 0)
++		return ret;
++
++	ytphy_dt_parse(phydev);
++	switch (priv->clk_out_frequency) {
++	case YTPHY_DTS_OUTPUT_CLK_DIS:
++		mask = YT8531_SCR_SYNCE_ENABLE;
++		val = 0;
++		break;
++	case YTPHY_DTS_OUTPUT_CLK_25M:
++		mask = YT8531_SCR_SYNCE_ENABLE | YT8531_SCR_CLK_SRC_MASK |
++			   YT8531_SCR_CLK_FRE_SEL_125M;
++		val = YT8531_SCR_SYNCE_ENABLE |
++			  FIELD_PREP(YT8531_SCR_CLK_SRC_MASK,
++				     YT8531_SCR_CLK_SRC_REF_25M);
++		break;
++	case YTPHY_DTS_OUTPUT_CLK_125M:
++		mask = YT8531_SCR_SYNCE_ENABLE | YT8531_SCR_CLK_SRC_MASK |
++			   YT8531_SCR_CLK_FRE_SEL_125M;
++		val = YT8531_SCR_SYNCE_ENABLE | YT8531_SCR_CLK_FRE_SEL_125M |
++			  FIELD_PREP(YT8531_SCR_CLK_SRC_MASK,
++				     YT8531_SCR_CLK_SRC_PLL_125M);
++		break;
++	default:
++		pr_warn("Freq err:%u\n", priv->clk_out_frequency);
++		return -EINVAL;
++	}
++
++	ret = ytphy_modify_ext(phydev, YTPHY_SYNCE_CFG_REG, mask,
++			       val);
++	if (ret < 0)
++		return ret;
++
++	ret = ytphy_rgmii_clk_delay_config(phydev);
++	if (ret < 0)
++		return ret;
++
++	if (priv->flag & AUTO_SLEEP_DISABLED) {
++		/* disable auto sleep */
++		ret = ytphy_modify_ext(phydev,
++				       YT8531_EXTREG_SLEEP_CONTROL1_REG,
++				       YT8531_ESC1R_SLEEP_SW, 0);
++		if (ret < 0)
++			return ret;
++	}
++
++	if (priv->flag & KEEP_PLL_ENABLED) {
++		/* enable RXC clock when no wire plug */
++		ret = ytphy_modify_ext(phydev,
++				       YT8531_CLOCK_GATING_REG,
++				       YT8531_CGR_RX_CLK_EN, 0);
++		if (ret < 0)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int yt8531s_startup(struct phy_device *phydev)
++{
++	int ret;
++
++	ret = genphy_update_link(phydev);
++	if (ret)
++		return ret;
++
++	ret = yt8531_parse_status(phydev);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
+ U_BOOT_PHY_DRIVER(motorcomm8511) = {
+ 	.name          = "YT8511 Gigabit Ethernet",
+ 	.uid           = PHY_ID_YT8511,
+@@ -1145,3 +1226,14 @@ U_BOOT_PHY_DRIVER(motorcomm8821) = {
+ 	.startup	= &yt8821_startup,
+ 	.shutdown	= &genphy_shutdown,
+ };
++
++U_BOOT_PHY_DRIVER(motorcomm8531S) = {
++	.name		= "YT8531S Gigabit Ethernet Transceiver",
++	.uid		= PHY_ID_YT8531S,
++	.mask		= PHY_ID_MASK,
++	.features	= PHY_GBIT_FEATURES,
++	.probe		= &yt8531_probe,
++	.config		= &yt8531s_config,
++	.startup	= &yt8531s_startup,
++	.shutdown	= &genphy_shutdown,
++};
+-- 
+2.34.1
 
