@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58196D3B7EF
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06CFD3B7F0
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:21:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B163988CC7;
-	Mon, 25 Nov 2024 09:19:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5715588FC8;
+	Mon, 25 Nov 2024 09:21:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XZZ4YEhw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gqAmvupW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B22188DEA; Mon, 25 Nov 2024 09:19:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 20EB78919B; Mon, 25 Nov 2024 09:21:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 578C688ACB
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:19:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0B9A88EC4
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:21:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732522769; x=1733127569; i=xypron.glpk@gmx.de;
- bh=4f9IhJxej7N82QJt2pNmlqjPK5sMnED2NSvEzR5v7q4=;
+ s=s31663417; t=1732522875; x=1733127675; i=xypron.glpk@gmx.de;
+ bh=ad/9cal9P3lFoHkfTyytdGHqSS73A0nVsoQN2Sf18UI=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=XZZ4YEhwkYB1nsHFtCT4uwpZ3Ga6bylAEVhe14LIHWKgPXV8d0cDrv1aYjN1KBlJ
- CmhQ7b1LGh9LIaS5CZFhgryuFNhL9p2eAG0gqiRjRpssup5TNtp6dGG8Y+YGGmR21
- Fgs4dSWrk4IoX9coCGMkwC5wV0dIPxvIanCIhGt9sQoZE7E1u+EnipBOr6qrqhMQZ
- 0G542PHs1kXRBhMTiUrYcgxTGMhTs2bHB0hwc18opGB3xWsBXr84+ndTMxNGA2Xv1
- MEnAzmSV+OBNGkXMPrIwTLnZ3LDETUXKTdho3M10py0iLzXyRT+QHbRmbZd7HgXKy
- iA4rW54k3VKnj/5g3w==
+ b=gqAmvupWObPITWWxJ1YHNEterERHplg0wsJtbx041zfXpyr0nDym3XiIVi+elosW
+ CH82opVPJEQSgVEwZU2FaRNqEK9yN4u3tVNPV5kova9COnHzrZ9G25cWKNCbOc1RY
+ QD11OtXz2omyESuu2CBegfXaVExdKIWrDtZUCrK/elpgsMEsBcm0pb3yhd8duXyS1
+ tLRWq4XPOoW1ZgqLKOktpSWifMyGvNEmioHXD6DOSBojWPQQZFWJwwlUA5ZXdDAw9
+ keciPM9P7RAi1Wkedf8LYmu+KZWsL+E2fMYOT/nfZEaXkVul6X9Obm9tpAGGVKyvf
+ zTKZCJLw14UVawgO3g==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.30] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MfHAB-1twEih4BMx-00hcmh; Mon, 25
- Nov 2024 09:19:29 +0100
-Message-ID: <078dc41b-da65-4c39-933c-eece281e3e5b@gmx.de>
-Date: Mon, 25 Nov 2024 09:19:24 +0100
+Received: from [192.168.123.30] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mqs4f-1u2FHW1afx-00hWKy; Mon, 25
+ Nov 2024 09:21:15 +0100
+Message-ID: <a49c2068-1d45-4538-ba24-58a79b033cc3@gmx.de>
+Date: Mon, 25 Nov 2024 09:21:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 1/2] doc: develop: Fix typos and wording in
@@ -52,7 +52,7 @@ Subject: Re: [PATCH v2 1/2] doc: develop: Fix typos and wording in
 To: Lothar Rubusch <l.rubusch@gmail.com>
 Cc: mkorpershoek@baylibre.com, dario.binacchi@amarulasolutions.com,
  u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com,
- alpernebiyasak@gmail.com, ada@thorsis.com
+ alpernebiyasak@gmail.com, ada@thorsis.com, xypron.glpk@gmx.de
 References: <20241120185717.29768-1-l.rubusch@gmail.com>
  <20241120185717.29768-2-l.rubusch@gmail.com>
 Content-Language: en-US
@@ -60,24 +60,24 @@ From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 In-Reply-To: <20241120185717.29768-2-l.rubusch@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:YOhL3SpCPp05PmSAzKMbmBXk361Ji42FyqR4u1exRsiUWdaiIUD
- nArGCR+4srE0eUylYHYUsCSG76SUAs8yp8HzYx50hleVjtl+9o/G+xQMJlXbF6hotuIv5LK
- 60a40zm+UIhIf/QRAzbvP4s7vlpAG+g3O4SE693y4FlRnLlWKgF4HtZI9lmvXbtuY8P1uWx
- mqti7rdNMXGma8w4YEWmg==
-UI-OutboundReport: notjunk:1;M01:P0:4tMDij7UjaQ=;NCQj+UzNhSmHn/yG6TPaydo6+Z9
- X3V6IKU5EHr/3794M6XOgjm6QKRhkRHLJoTJ9PqZtuRlPyTflHBZqxTLVYWO+A/+PeifLpudW
- jA0+yLfHa1pBuU3KiBW2Ig88dAUu6l7QIklp8QvtDbDiLY/lUIzRaH0+vY1D1Zew7P9ImM0rs
- Qv4JIwxfpfc/APbk1FhpZF4hCSqARYDOQ1tBq5w8mQSMpI5c+8dABvSTl5CXb5d6bC2r67lDp
- HTBEw6mX66n39fOV6qjfUe6J88mvFeYf0penMjKDaKCtPHO41gwXbd0eTrCwZk6ioajvA0q7O
- 2YMBbwejkhkRhLN+OeNr+39NLMtyuTxWz9+HR9rKK65PgZG/rv45EILJzlpaBB2sy9Tz8/m1Q
- bHKbWkblUEnjDa09T8P8frF8LrN+vCEJ88DIPhPH0bMvs9SCVZ+9z/5wah4q/5kFu4bvM+sKN
- ciW/+FcVTyroKqNHFfsUOMDtXQTJih+NIwch87R29B96dUfV3UB80Ip3asBXdKstbe8IRWKsn
- WfNK8D6AGLl4JcHFDGxwIrjNyCpdueREnxX3uIoTUBXF1iFoytfeCaNAUlxREiKU77VFEXuo2
- IEGwuLnc+DJ5swv1oUNctujRZZ/5p7IA0+Q2YDihDjr0NPda1kp0S/907VcXjYHF9Q+/C2DAP
- 7IzsLkCRkHG4y9b3oWY8em3HLHWDQiTr0he9/Yz0JTQXM5PHPD6e0vD00slUE1SPYAHhxK/Xs
- PbzKOOUzfSTEdOPmLibzwb1p3wQSf8w9VY7bFPeLQbPZ2cH/Scxb2VCI8Sj9aUoRZ7HhsJk+8
- I1V6gv6f6llz/A8g8tYYFXwdnpgC+8yiEqbG77DesEsMt9k8yoTqtYoJ2zACPUF1hHVpfaWEL
- o1YyvifeTb8GZsM6LU/gCbAKA6/BbHcNGbOhB/QntcfJ+6LCT1Y/Oaa1/
+X-Provags-ID: V03:K1:gx07r/WtCrZax9jSbIo1WGllsnSKad9PFiaZJ6v4YFIOwybo0PO
+ j3mpidqe4/TIH0cgnSnylbSs2XNkismf6odd1GJYlWRX79IeyRrn+yKaqwJgjZbbEz3qF52
+ Dijj3UzmxaSU86MRlHKPne+Wg2jFVlfGSjSTrinMWILuKj8T97JZWtfh3H17w/OqU21Pesz
+ Lxx7eiqk7CUIaallUnloA==
+UI-OutboundReport: notjunk:1;M01:P0:tKNiSZ96FT4=;QUeSE1+ROhAT0hhPLkNLu/995Zy
+ M+gtpTR/lV/pGougQumwsv+5Dd2pJ+Wb5iUwMja/EHuYzI24uhcO2kc8hzcD4EngSR0BrCChc
+ GzQawkouaivjgPvm/3tc0ecn/MUhSIQzyGXB7S0DGCjG3/CNmVO4sSnXkwjSPfiCNyyw5a+jy
+ VAhJQlwFnOzuBQ0MH9suFJZiG57OAiCgfiSETnzFlfQTFwkrzC2Ehq8lJreGh8UMTmrE6GwM8
+ t8sQnHFxnZin6MaecIhZE9XHTLqSonlMrraAyHPBoc4eMffa2tQ4n02uCFYiuOT5+AS38ORNU
+ aSn8BS3JPBcV04kW1xsT8X9NOcSZ38hmdJAEHmwEeb68l/ALF218pQ4khicNrusvwaNQKExRj
+ NrUpmJ56hYwzBx3E4xrojaMNN3ppgjpcdTF+ITgI2jF9ryEasZoaVpUZ3sJIbw++5TCgxcsNS
+ dG/3/KPhLj6IxF5PK6766wfry6R3FfNFlSnkV+NGDekmIE4a3Kt+iTz78WwTrcitPa0Qzy3xZ
+ /fbFhvvQlFgDWHzYSqst9jSYOyOk3o/FZ8D2Zrc8ZziBGsW/Q71q0i/2X9NEQzZ3sDjkLL8ao
+ OBC1vtIMQFgopHLfKOYavBEoDBlkyUFyfBIpW/mN5AmVh5N8UWik6uWBTCTZmvCEPUKDLb/OR
+ sffAJXfdc3E4+EWeHxyHdsfZZGpkVjjJCUjTFaqohYHGmBMwPQgiu5qn6As0yYhZbx4NTEQQD
+ ch04UmsJABMO3oSaKO40L9rHyKCvk6ZLukf+GwvRDlA27SSXq2e1sMg5EavHaVk4vdPiKu9fE
+ nBCA9Z4fMABPA4NvR89+eyausoXNNOGe8K1zQ1FWc7WAfd4eBHD7IMxW7NTw+1hsHE2l1nmrp
+ /UbWXctG+isJX2eBy0WCtbm7wT5MRSeagOqxJQkpB+7w0PsPqC02YGrLB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -269,11 +269,6 @@ the
 > +used for the things that binman creates. Hence, the binaries are inputs=
  to the
 > + image(s), and it is the image that is actually loaded on the board.
-
-This does not build. You can run 'make htmldocs' to check your submission.
-
-doc/develop/package/binman.rst:212:Unexpected indentation.
-
 >
 > -Again, at present, there are a number of things created in Makefile whi=
 ch should
@@ -817,6 +812,13 @@ ute.
 > -Sections and hierachical images
 > +Sections and hierarchical images
 >   -------------------------------
+
+The underline should match the heading.
+
+Best regards
+
+Heinrich
+
 >
 >   Sometimes it is convenient to split an image into several pieces, each=
  of which
@@ -848,13 +850,6 @@ is known
  be
 > +    section. In the example above, the 'u-boot' binaries which be
 >       renamed to 'ro-u-boot' and 'rw-u-boot'. This can be useful to
-
-"which be renamed" in syntactically wrong.
-
-How about "will be renamed"?
-
-
-
 >       distinguish binaries with otherwise identical names.
 >
 > @@ -955,7 +955,7 @@ filename:
@@ -888,18 +883,6 @@ te a
 tion
 > -    to fall out of its allow region (e.g. read-only portion of flash).
 > +    to fall out of its allow-region (e.g. read-only portion of flash).
-
-If the size is increased and the start address stays the same, the
-section cannot fall out of its allowed region.
-
-%s/fall out of/exceed/
-
-%s/read-only/the read-only/
-
-Best regards
-
-Heinrich
-
 >
 >       Adding this property causes the original offset and size values in=
  the
