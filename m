@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B54D3B7CC
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 03:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B301D3B7D0
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 03:57:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2AD2899C0;
-	Mon, 25 Nov 2024 04:01:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 76ED5899BE;
+	Mon, 25 Nov 2024 04:57:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nYw5HBka";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MryryHpl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C54789622; Mon, 25 Nov 2024 04:01:35 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E103F899C9; Mon, 25 Nov 2024 04:57:23 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72B0D89574
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 04:01:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0832B899BE
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 04:57:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-4668c8e757dso4497431cf.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 19:01:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732503691; x=1733108491; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Cz1y4aHFaiU47x8fQ42+IMWlyhEYKQVTvrLeW0Af1tk=;
- b=nYw5HBka7dZ2sYoOWaAmG8d+Qq6oyQ58f5TcLKX1tzjWD2T+7ZUUJbQINg/kl5MzJA
- NXbscS8IFYNuFugYLv9ujWqmSBe7slHZYKnWwEWujK47YN0VF+tM4z9HOgFjlNprFumL
- UfBubDE75a4ffTFYgN3jNM9j2G5ughpBI2ZWQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732503691; x=1733108491;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Cz1y4aHFaiU47x8fQ42+IMWlyhEYKQVTvrLeW0Af1tk=;
- b=KmTwgeixX9owRBHe6QuBJTykGmuk74D4dr3sfdCpUZzOng92dKf1AROOC2yi5e4+3n
- b2FLrQvW4kkjidc31c8uAsq9LyA9OMvsXNBqF2u6TfdRjZJVyyuCOWYUxZDjzO0BXUEf
- QI1mJqxMU4F0k2ioqIhYiCeJZZV8Dxq4ILz3uvO1uqbmPO/5S1KaxM2l4b17Ts+/TxP1
- He09yrGidFLRN5HExtiZaOGp1RwVJ0cpgXPbfphJXbuzL2hqTYkpBGjanry7sBICIZEI
- vvhSRVwIVj90gAy/8by/CVjH8a3lWmNBC9tiddi1jih0weTuXsK3f0dYUdOQGkFh4xGO
- pHiw==
-X-Gm-Message-State: AOJu0YwEadj3n3QxNV9FDe6BVqe/k++WMFZYNGfV63tLvWc86OND2o8a
- rha/q4antfSgktUqHZca4RdHY/0gI4O0r3uSGtMjhPeA8Dq1lFD1G9GyPqrDza1++KT7jaxGheN
- PPrY=
-X-Gm-Gg: ASbGncs+fXTJE1Ygd+kZF1pCRGPpSZEG8nmA7ov9qhWVy/H69bbxc8oLjUxud6HEkZO
- uH1HdWe8xCjdkstP6Zs+23O2QijUdqYV3zMjinPh14kchggE6OPTpNkFEcdvZGSgbrK8Ya7yr8J
- lDYHLThpkrnxiWlScuYa2qrJVA6opfYlgEhhhhnmxz7YqYk0G1a30j5ZWDioW+SDjo1HMGhl/9Q
- d/LyHGwM44n+wywm60d/YT4SXfZ17QFDgv4IHLvOeD1nbDLIQ==
-X-Google-Smtp-Source: AGHT+IE0IXL1ZZjmMPPot8bVwDpOJnB7EwfxH65z/f1PUZnEpWWBcGqAt/B5Vrr3ZhV5+7ch7Vy1bQ==
-X-Received: by 2002:a05:622a:590f:b0:463:6bc4:2a23 with SMTP id
- d75a77b69052e-4653d3e24ecmr194935441cf.0.1732503691301; 
- Sun, 24 Nov 2024 19:01:31 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46698d02e2fsm1697581cf.18.2024.11.24.19.01.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 19:01:30 -0800 (PST)
-Date: Sun, 24 Nov 2024 21:01:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Chris Packham <judge.packham@gmail.com>
-Cc: u-boot <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>
-Subject: Re: u-boot mailing list issues
-Message-ID: <20241125030127.GH3600562@bill-the-cat>
-References: <CAFOYHZAJA52O9NiKtHxSRdaP=Yu_4FG36VReai=gSyWhHZG_=g@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AP3vDYY104721;
+ Sun, 24 Nov 2024 21:57:13 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732507033;
+ bh=uIO0cZRZPrenPNbBcYpTWMkNVTfYpEnWX3RvdgC5Zj8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=MryryHplyIrstbvD0g+67uKX8LmlPjwPQ4TYyWlG8XW3+qax1yShIayT22ln3WgIu
+ Zkurm9nDmf6R2WCMxaojUodJnTbVFS74+u/lEi9fQyXfFgi+xI6fhjVckRBHfLHui6
+ 09kxhRfQzQ9r/lDHWBUylwH+4Z9lGNXskMr/9lKc=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AP3vDLF125208;
+ Sun, 24 Nov 2024 21:57:13 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 24
+ Nov 2024 21:57:12 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 24 Nov 2024 21:57:12 -0600
+Received: from [172.24.30.208] (lt5cd2489kgj.dhcp.ti.com [172.24.30.208])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AP3v8C3042751;
+ Sun, 24 Nov 2024 21:57:09 -0600
+Message-ID: <2ee7f723-3744-471e-a94b-701d544fb5a4@ti.com>
+Date: Mon, 25 Nov 2024 09:27:08 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="H62a3xtZiDjmhUmL"
-Content-Disposition: inline
-In-Reply-To: <CAFOYHZAJA52O9NiKtHxSRdaP=Yu_4FG36VReai=gSyWhHZG_=g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/5] board: ti: j721e: evm: Set "dfu_alt_info" only if
+ interface is Serial Flash
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
+ <trini@konsulko.com>, <j-humphreys@ti.com>, <m-chawdhry@ti.com>,
+ <rogerq@kernel.org>, <nm@ti.com>, <sjg@chromium.org>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <afd@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>
+References: <20241124070828.617558-1-s-vadapalli@ti.com>
+ <20241124070828.617558-3-s-vadapalli@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241124070828.617558-3-s-vadapalli@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,58 +83,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Siddharth
 
---H62a3xtZiDjmhUmL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 11/24/2024 12:37 PM, Siddharth Vadapalli wrote:
+> Commit 9bd6cc292fa8 ("board: j721e: Define capsule update firmware info")
+> updated the "dfu_alt_info" variable to support use-cases with Serial Flash.
+> However, this breaks use-cases where interface is not Serial Flash ("sf").
+> Fix this by setting "dfu_alt_info" only when the interface is "sf".
 
-On Mon, Nov 25, 2024 at 03:04:05PM +1300, Chris Packham wrote:
 
-> Hi,
->=20
-> I've noticed a few odd things on the u-boot mailing list lately.
->=20
-> A couple of weeks ago I seemed to stop getting new messages. At first
-> I thought this was just gmail deciding to helpfully file messages away
-> for me but they didn't appear anywhere (even in spam). Then I thought
-> maybe I'd been unsubscribed (there were a couple of automated messages
-> around the time the problems started for me that I'd just ignored).
-> But when I went to re-subscribe I got a message saying I was already
-> subscribed. Recently I tried again and this time I was re-subscribed
-> successfully. Just now I got a "Your message to U-Boot awaits
-> moderator approval" after I replied to a thread.
->=20
-> Is there something going on with the list or have I just managed to
-> get things into a confused state.
+I am not sure, if we are on same page.
 
-The problem (largely) is unfortunately on Google's side and as far as I
-know we can't do anything about it. Once again everyone using gmail (or
-I believe Google domains) was bounced, and I think it's the second time
-this year that happened. I'm not entirely sure if we can easily
-re-configure mailman to not add the moderate flag when someone posts
-while not subscribed, then subscribes. It's just a one time thing and I
-do clear the flag whenever I see it pop up.
+Setting this dfu_alt_info on shell works for me
 
---=20
-Tom
+https://gist.github.com/uditkumarti/e5185838bcc32b47f5d9dae48eff72c9
 
---H62a3xtZiDjmhUmL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdD6IMACgkQFHw5/5Y0
-tyyD2wv/UTkoQ4xc8NH2YsWRg7On9FtS4zW0uev2Bworp7KmcC+pcIKedSafmqeC
-Q0WSKayhp9EcUBcT1RShJjwoIDuA53rAEE3b0ZwA27l6uLKFJzuvlNHTQo/wY4Np
-kuGKF1+I7OPEsxMMZZMvV4icvIJYSBB/B294mDmfCCSWoz9BUeZv+muC3vnjeO9l
-QDAxSDmd9xgO4ymYrxTBB75tu00zK95ybYDc42zBMIiOXoQTR4wZp0JZNhBLs6BH
-Snt413LLz4SJScGg9YzQyXQJn5xvRdG+9GYfP7tiCEje6G+INn3Lm488FW2I/pu8
-G7Y6jL1DvXP+qNZ5/+zPYtTlOY/T8CflNymMHOdJe4fobw/UZm+yQQN9gPITm7oS
-CxycJJR9VxOKUJLnwfXeL/QFItfMvuitN1HMPGpMfYCnPd87W3o/HNaR4xuZiZ5d
-bRcyNp6T+4PWNLM5BchCAABnaUy76AB28wwd3P9rdeZJ9jPvm4tgF4kYGTs2Ndcu
-wJsRF2QJ
-=XcxS
------END PGP SIGNATURE-----
-
---H62a3xtZiDjmhUmL--
+> Fixes: 9bd6cc292fa8 ("board: j721e: Define capsule update firmware info")
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
+>
+> v1:
+> https://patchwork.ozlabs.org/project/uboot/patch/20241124051545.382397-3-s-vadapalli@ti.com/
+> Changes since v1:
+> - Replaced "SPI Flash" with "Serial Flash" everywhere.
+>
+> Regards,
+> Siddharth.
+>
+>   board/ti/j721e/evm.c | 8 +++++++-
+>   1 file changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> index 6221be9dcf..ae24964ab9 100644
+> --- a/board/ti/j721e/evm.c
+> +++ b/board/ti/j721e/evm.c
+> @@ -67,7 +67,13 @@ struct efi_capsule_update_info update_info = {
+>   #if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
+>   void set_dfu_alt_info(char *interface, char *devstr)
+>   {
+> -	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
+> +	/*
+> +	 * Since the EFI Capsule support is enabled only for Serial Flash,
+> +	 * update the "dfu_alt_info" environment variable only if the
+> +	 * interface happens to be "sf" (Serial Flash).
+> +	 */
+> +	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
+> +	    (strcmp(interface, "sf") == 0))
+>   		env_set("dfu_alt_info", update_info.dfu_string);
+>   }
+>   #endif
