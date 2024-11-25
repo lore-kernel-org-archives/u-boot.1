@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E69B5D3B7F0
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:34:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A70ED3B7EF
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:35:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36392899DF;
+	by phobos.denx.de (Postfix) with ESMTP id 82ECC899F7;
 	Mon, 25 Nov 2024 09:34:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hRg8YQ9l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k5O5tje6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AE1D8965C; Mon, 25 Nov 2024 09:34:35 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id CE53A899D3; Mon, 25 Nov 2024 09:34:35 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2BB7899D4
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:34:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 944FC899E7
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:34:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-38241435528so2684140f8f.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:34:31 -0800 (PST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3823f1ed492so2794027f8f.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:34:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732523671; x=1733128471; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732523672; x=1733128472; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=AEMFBLDOfj1lrbfwaS3o11j6YNe04Vv2+BAtjKZcbao=;
- b=hRg8YQ9lay2DCAgbUXOL9LyBoMtbQGPVI2wmPFyItnacgXhIgIO9qCskMpkjmOXGJ2
- h9jKGikjx1pGC2XVC2Idc+CLoyQzt77mwl3raUEwN64Fx29xw9BS+fBDz6rBEKr5RWLW
- BTkMqx0Rz/ZCb6voafTHtA1PBZiZSN8xngphHzJ6lt2TM+fUWjxr7NwrSYWqt5PkwMje
- OgFg7n5UsEk6rHNUhx/kcw4jJn0Sp+RBPVrFaO52iicjlI9M0sDZoo1MprIAuOuZSFey
- /zSEtCC2uftRveQxQ/tykoHfrMWGn9ro0xoNiHHjm9+E5jMPJvk3Ssh9dedRVRHUJbDx
- 5cMw==
+ :reply-to; bh=lKHBUoi7i9sL4zy2D4QZgFc+IVVVdBZyPOxJkJtUxdo=;
+ b=k5O5tje6sgWquAOHnZZrjW/Xj39qKaNjSQjQW5Ss6+aCl9Wg67pQha+r2em1xMhrlc
+ iXwxWNVmEz5ke4axnAbMrOZMtKSr4sUs/Q2acMVb4g+jBnsocVeiCPdX3o0lvDFHJz9C
+ 3TIfFMJAAcRkC04bwdx+WPV5sNKW9jqJ9SerhG/wpFOQOXyEkSm5EPyy7N/wlSUfo4FT
+ 2DykSnY/oDyboEKjfnqF6RXdgASlGzENzuxvXi8f/QGuAvfc6cNRctuLJcNwAQmLR75o
+ MshQcHHNzXNOdaWKvWVoaushCC/VcG6L+gB+WeKwIp7Qkb0GjduO4VSL3wataSrb5Wap
+ kPpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732523671; x=1733128471;
+ d=1e100.net; s=20230601; t=1732523672; x=1733128472;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AEMFBLDOfj1lrbfwaS3o11j6YNe04Vv2+BAtjKZcbao=;
- b=JnqHfcREHx/tPN/ldKfEUyaIA8eEq+A2icp25uS4fvJ/FaHYCw6BA297zfD3X2Blsg
- Cx70W+Kh2kB/Y9GtD8aONQR65wjWXwFgMLqXBG57c4ohtW9LPv2550j/HiNnEeC8/rOt
- wpkX+B7XIVO5/bDQ0sg0kHBFCnV2Cc3nUoz9JvSWnqYGtwa4EoAjEKLVitwj2GOqkDOZ
- WDHbn4gpHni+2cTCdf6UqbBIQuDZwXPHBntWLs6vhI0Tt3YxJJyI9wa2bDSdulmHmL4C
- sHb6siFwS8WrS5EHaY1G4kA6qZYhv5Mv98dd4qR8cywHQmvtwm9Do7sVeGGupQEQVZ2c
- yDnw==
+ bh=lKHBUoi7i9sL4zy2D4QZgFc+IVVVdBZyPOxJkJtUxdo=;
+ b=QLOUdgDLc8EXFXJhqctwSNo5gi5RHIhw/Hw3I2nzPjYapoZZWyJ5awIA5TFbIpGGTu
+ Hqi8parUB7Bkj108gAiPi/yr4BYePRdDdwTDaHDZgrSq3Rk8y3DbqtPhVwYtAjlnyW8i
+ 7S5EqRtPcIatzLNRiP68cYItklS8vfSo/1VOp3208gYAOcCWthDtH4447eW7Z6rEnr2F
+ ihinNorxD+czRmxPUKy2sQXnndhZ9r8oNo4O+ZbKlQ2V1funieOecisiP0mNaOaaYKo0
+ XumGb+GCv8GzdqZUSe0V26y8UjT3/RrLGr1TES3x5EdDFWHi+cELrmfErLTutP+c5qUz
+ Y5FA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYU3b4f0k4wUgbY+mI8Dkc9sg6gbUV8HsXnez2WDEeiWWEf1k9hJoJ+g3SyDisNRhnAXUXBOM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyOfR2Pz7ZnRNRswUDJ7BDbKa0wJug7zOvrMvIFEwb1DDki5umj
- FggVnyTO+ZeRB7za1S5h+hI2OfSfAdwgqtjMiYv4EcE4cWlXz8tzcR/bTrQw08E=
-X-Gm-Gg: ASbGncvFrtvTmf2HyAX7yTTE2qHB3U1/e19hRyhnqBXrF5JzcIrjNEVnEPJwJiBokId
- +pYeKBZKDkR5BWB4FeXzKBAKUmWM9N0QGQGjr2K7YzGrfFt45U/w424fuZ7qHR9/+wHO4mKqHdn
- jVXUUao9/hom+/Z562E47+3wjZ5BwzqoDpRu4+9Dcft9sPiibMWE4SGfRzr6G3VsfzmDr+T0VaT
- 4d9mipMyNIhb9uYSMxS5YEJmhvkOW0B9xHR6Sd+GIi5X2M+0aRZO1DfMvaMudWSu+tjFeg=
-X-Google-Smtp-Source: AGHT+IHUbRQHTMgzhvBTVIME+NyYloNmu2/gZxvuHCTXgQMhuWN2+gIObozUWjrEZJthR7gHLSqpTQ==
-X-Received: by 2002:a5d:5f89:0:b0:382:43ab:7d68 with SMTP id
- ffacd0b85a97d-38260b46e1fmr9618802f8f.12.1732523671221; 
- Mon, 25 Nov 2024 00:34:31 -0800 (PST)
+ AJvYcCXPSdlf+CdH4VqU0wTqh/M0NvFcGKa8G6oxrfrE32bExrs/VtgRt+ybgVhyvXus3o0aLV8tkgo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzbCSeRYcj/ngwl9BcMLMVMm5/M68X4EC2CN0YpwaJD+rOMFl1Z
+ /oF8W4RVJIu0mOvVUDYRwlo8/Q0rFakmA/lNwkT+jhhwYyX+hZ+K8Mexfvn/TFE=
+X-Gm-Gg: ASbGncviMUb1qL8P4DqUVND56p9nJYN46rFt3dwBOO9hbYJ4W/d254ug5AcMqYCEGZj
+ hBDLbyGQsnHvURFmk/PZbKAnAygWYqzI/RYFlnsm8QL9YCPoKZC01m7SgbSHJxKij855qd3fUML
+ lzg1CGokgbqZyL837K23bP02zq+0pndp6QpixWXOMVIJs4cjEKXZY5GosuN9di4XhbRoa5+Vg3H
+ z85WjkMqJgLH/BV6kJvhyLtZWqSYetbrm3jvqB/9BVV/AOnl/3l4dBs935dtWj/1t4+RmE=
+X-Google-Smtp-Source: AGHT+IHK43dmNAghKzrYFK1Hhk1FSQlhQME/g5cz1Ti2zn7bJmNQ3RRjSp3hN1dkw4WdPIrYwFeLag==
+X-Received: by 2002:a5d:64ce:0:b0:37d:34e7:6d24 with SMTP id
+ ffacd0b85a97d-38259d2b848mr12516811f8f.18.1732523672071; 
+ Mon, 25 Nov 2024 00:34:32 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825f98b3a4sm10013421f8f.0.2024.11.25.00.34.30
+ ffacd0b85a97d-3825f98b3a4sm10013421f8f.0.2024.11.25.00.34.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 00:34:30 -0800 (PST)
+ Mon, 25 Nov 2024 00:34:31 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 25 Nov 2024 09:34:27 +0100
-Subject: [PATCH 2/4] clk: qcom: sm8550: add support for PCIe clocks
+Date: Mon, 25 Nov 2024 09:34:28 +0100
+Subject: [PATCH 3/4] clk: qcom: sm8650: add support for PCIe clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241125-topic-pcie-clk-v1-2-4315d1e4e164@linaro.org>
+Message-Id: <20241125-topic-pcie-clk-v1-3-4315d1e4e164@linaro.org>
 References: <20241125-topic-pcie-clk-v1-0-4315d1e4e164@linaro.org>
 In-Reply-To: <20241125-topic-pcie-clk-v1-0-4315d1e4e164@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -86,18 +86,18 @@ Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de,
 X-Mailer: b4 0.14.2
 X-Developer-Signature: v=1; a=openpgp-sha256; l=2499;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=7v8yHf1Xr5hvCGhLH17xt8vT38yWqbNI8HP3CAE9U9s=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRDaT79p41vv0Q7UbtpW/HMcQHMSnX+rk+SWMwYoH
- 4Brfb8+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0Q2kwAKCRB33NvayMhJ0U87D/
- 0Vwm1pLfmG8Rs9lQ+eat4NAA3FC9TeRMEfWn5K4tBKW0P4wSYKhzj1AG6WmGVoZf0ri6YC04+bO195
- PTJtzNljmwfFhiIy6T8tThGF6K1InLS82Xmnip8yzMJZpb37c4s9z/CBHVtheG+iSGjmZbExSVSdZP
- KCXXJrgbBo5QStnLiqXvfDehquJ33iDSnBTZu5TjMeGsPTW+d+C87pqOIxAe/DiPerPOhNHOGPnq92
- RKfXkay5oNdU7OFDBW8tMkC9LwFT3ZyvpEgsoZQaR7uErrlETRfcIluZJZy6TmZ2pGUj4jOyzDtGEf
- EbMrzyrBJ6ZiEDY5J4zno0BiCpbO3fl6Eoa2c6vGAfjZyqMg+PZjamVi5kHD/Onn4Zv4XEf2GB69r1
- EmKxcrcLWiCS6VQrxuno+zmCPdyWrwWuFQ/JKs45kQbP5lZmT0Z6PGJaet9pC5x8s08SGw7GRfi2Ku
- e0JYvqxrbkZHobJl9pSbzEYiVGbfu4qkDZo3bJ6Sqj5d5ighxbG09J+YI86CymkjPZcB+pW0fceI22
- SuXxeUrRu3MBAoqjBquaSOKsAzfmDXoNlrf2h1SGgZYgS9BausvUZqUrAPKp+Jm62LlV5bzEXZiD1i
- IBKy1Nmtdz8Whvq4S09GqNnGWzynC8YxAMhYqR/xtwnroV+TYNanHecX67Ww==
+ bh=Bdz2SeZUb5BmZho1bLFOZ+RD51DphnJ1Z9qxkJ4pego=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRDaUCjLpP9/ummMwNfnKEJorMPql122ewa75t2JU
+ 7MHp9kyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0Q2lAAKCRB33NvayMhJ0aeVD/
+ 4yCAhRkY5XhYUIRbLZ/U6rGGSlitKGScU23jULlxXmwUPJ+SNsHNoiExJiT0VePwV0Tqa6jmlAvJxD
+ CdWZZDCfpOiWvQu8IgvZffc0yaeDyhAdlmhumS5Zb0mYHsXvYez3o6KICIa8TrWNubT/SRHaHsWKLm
+ SXOBNSISQSvth6x8SmmWJK1/m0oOFLC5LQc+D3rcvcI+U8y+ESYd5qcBWd7iBoCiojN5Mqcd1Zc56v
+ UcFYjjiW0r88XB3CQxbyO95xKzDEFZjnsvYdXWI+c08sq5oYwd1fwtPyfIoK9mNZZj+oPejjdPtB7W
+ 2hK29LNf+Vb6Epnj/t3ieuVoR2XqdQ86MlK9fl3aGv7Bunt4QXWYbi3nzH2TmP/0kAN6ty5bPtWDgk
+ CJ4ooleLRPbjYBx0eOgq7Rs4XSTC0oMJACD++ZI4dOep9L181MrbsXUlaPOxcePfHCW+zSmPt+KmWZ
+ hU7YjlncocuxDiWANMF3y57ScVyLdtXJoLBQHRqG/fTW4f4m82B9mC17QpQ1DtJcMSYyKfxLxonhm2
+ vHgdN4M14VyGZ3Z24KDC3hOwqvFdjWvTyDNixRUgJFlSFc/iLb7zyo6S/Ag7G5QRJEPKk+lTTM3v2C
+ A2wLgXkpdSltDOX2AFi9HuH3VSbwPcnhwZj5PAtY5uK4NpzawbUmTdow9mpg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -116,18 +116,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the PCIe clocks for the SM8550 GCC.
+Add the PCIe clocks for the SM8650 GCC.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/clk/qcom/clock-sm8550.c | 36 ++++++++++++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-sm8650.c | 36 ++++++++++++++++++++++++++++++++++++
  1 file changed, 36 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-sm8550.c b/drivers/clk/qcom/clock-sm8550.c
-index c0249925cc7eb165faefea35ef29c5ff59faf07f..62b5a409e8e08243ad53a0bc58af1c7754a3d950 100644
---- a/drivers/clk/qcom/clock-sm8550.c
-+++ b/drivers/clk/qcom/clock-sm8550.c
-@@ -57,6 +57,16 @@ static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
+diff --git a/drivers/clk/qcom/clock-sm8650.c b/drivers/clk/qcom/clock-sm8650.c
+index 0ce83e9b24375820016397c3c5491dd9d44edb4b..9baaecb571f6c575c0e7c48d66214c1331b6642f 100644
+--- a/drivers/clk/qcom/clock-sm8650.c
++++ b/drivers/clk/qcom/clock-sm8650.c
+@@ -54,6 +54,16 @@ static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
  	{ }
  };
  
@@ -141,10 +141,10 @@ index c0249925cc7eb165faefea35ef29c5ff59faf07f..62b5a409e8e08243ad53a0bc58af1c77
 +	{ }
 +};
 +
- static ulong sm8550_set_rate(struct clk *clk, ulong rate)
+ static ulong sm8650_set_rate(struct clk *clk, ulong rate)
  {
  	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -84,6 +94,24 @@ static ulong sm8550_set_rate(struct clk *clk, ulong rate)
+@@ -81,6 +91,24 @@ static ulong sm8650_set_rate(struct clk *clk, ulong rate)
  	case GCC_USB3_PRIM_PHY_AUX_CLK_SRC:
  		clk_rcg_set_rate(priv->base, 0x39070, 0, 0);
  		return TCXO_DIV2_RATE;
@@ -169,7 +169,7 @@ index c0249925cc7eb165faefea35ef29c5ff59faf07f..62b5a409e8e08243ad53a0bc58af1c77
  	default:
  		return 0;
  	}
-@@ -182,6 +210,14 @@ static int sm8550_enable(struct clk *clk)
+@@ -179,6 +207,14 @@ static int sm8650_enable(struct clk *clk)
  		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
  		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
  		break;
