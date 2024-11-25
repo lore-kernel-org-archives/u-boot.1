@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB0CED3B7CB
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC89DD3B7CB
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA82895F8;
-	Mon, 25 Nov 2024 01:58:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0795189633;
+	Mon, 25 Nov 2024 01:58:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P8SWB8YW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S/DGtv3V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83FDC895F8; Mon, 25 Nov 2024 01:58:29 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 47D46895E1; Mon, 25 Nov 2024 01:58:32 +0100 (CET)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23F848952A
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:58:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BA608952A
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:58:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7f43259d220so2793614a12.3
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:58:27 -0800 (PST)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-72483f6e2fbso3290014b3a.2
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732496305; x=1733101105; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732496308; x=1733101108; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a16BKITQ7bUj5Rl/BUTdBDKF70Is7E/0WJtXYzoHzek=;
- b=P8SWB8YWyxEhz0+DFp7ZW+ozL0JP97HojP/4B8GpOQwdjBoBPfAnsK3O1GZ+GHCTsi
- SmQ/QmdweXaNVcPdD6io4db09J0sObfKG2cby4AG9uYUNr4KP8tiRH8h3hsxIrdWkzZH
- YiucXeJTS2sGPVuu/Rb+U7283sTz5FOC3XEjKW/jgi9VFuGVNUjB24ZeGOrgtqkwTxsd
- M466BnAUoW8jfNsCtXifx3ft+Iriv1WYjnrBzpwB79OsN/uQBB212mYtna8/yaB7GZ1V
- 2h5spd1wjpVnq/t9jHyd0kwzNWYmpYsXU+wCjSw2tmg6Gg/1xa7ii6Khs+wjKoS69XoR
- IBlw==
+ bh=4yiVtXGen04U2jhRL7NJnx1rM4z0X1yIJqHm3jNX7/A=;
+ b=S/DGtv3Vcl0jq0BJ4iO4BeYxAXfueEXh0zQbPtX86BRDu+ClhgOeR7w0qNi4sztqlH
+ gOLwS5+y7/VI0fXAkkzlfQ6R7DZA0B2UGOYMTiR3M2GrPwCVIcLhK+zPTjuEqAA/Sz2l
+ DPJkYs5yIGHKenFGSK2AsyLD4MayqTlqNQySqXZ5WbaWD6iS0QWPiQs99eKvzVX2d46R
+ X8cXUxZOocjd5wysRhf2y7WOf+KbCEYYte9yT6IkhBHCcGJdxQzVgCfr2RiHoEruUAsb
+ 6y4ozWobx+g99xeeHTNabsjeIQiBQwQM4YEN6KSpTFnODS8TEY6RGM+77taTLr3tL17G
+ na8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732496305; x=1733101105;
+ d=1e100.net; s=20230601; t=1732496308; x=1733101108;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a16BKITQ7bUj5Rl/BUTdBDKF70Is7E/0WJtXYzoHzek=;
- b=e7siHZvSiU9fZQROLPxKQKU2qribGPhT6p1HEVqNr+gtM1C1YuDlkdId/IGBcPH1uT
- Z8pep6UHccK6PfP73W2470JT+xC8S9PryDRf1KuhYieyKm1QsoHIrm5aoUl5v0QmkqNn
- Zz6ddpKecl+8LDSNwOeN5TRMWIYSphmFdtiEnv3VXP9fSywzfLYbhQvHghTe26XLW4uo
- wSTQx3VkD5AMWd2bOiqySz+xliw8Poq9lVmHCRWiJIfgmseN5XqHaljU51k3yzunXE4z
- ZWh90vS4W6kcOx2m6SNXlt1RJ0hCRqsNuk0csn4zeE4w81GvCTHucGMUo/rki40JDfFd
- Xb+Q==
-X-Gm-Message-State: AOJu0YxphqbpRsPtuD1YEmjoHcyiBmlmiforkF3eqYa2J19d0/A+4zvs
- 8fb12J0Lq4C3iD9Z4lDuTmeZo/aizMGwYfaqT9fcwjG/g6ImpVg2lJc0Nxup2EY=
-X-Gm-Gg: ASbGnctxVNU7S4nHnB9A7wmz4JAKe8YZPkEuQsQzXE7T7gLNoM0X4EHI0a2mKMuAwkW
- BHXCv3I5Gw/daxQ+8JNaAwAE1Mr8b6XOG+fa2nLf1yrWmNLDXuNp4aMr717/iHHHgSGEgmDn45Z
- n9YlBCNGvSBYIfqij7QPWFU1PMh42FhqlPsubW+xcNFHBLqRTDwB40roaCXmNDW44qQthm7Tt96
- aF/7L2O7bIrO8ZbHeM5dowf58RWuBVl/HDOOPPTrXZM
-X-Google-Smtp-Source: AGHT+IGdM7HZx46VZl2ycTMPgaF1BUJ5S+Xvag9uerH5Fej3/ic3ZZCfsBKckzsAiV0u9BRM8pv4wg==
-X-Received: by 2002:a05:6a21:33a6:b0:1db:e0ad:8ff6 with SMTP id
- adf61e73a8af0-1e09e397991mr16221881637.1.1732496305515; 
- Sun, 24 Nov 2024 16:58:25 -0800 (PST)
+ bh=4yiVtXGen04U2jhRL7NJnx1rM4z0X1yIJqHm3jNX7/A=;
+ b=cv//q/RZ74Ip2KjO6gDkHesa7kLL+grGlBTdQxa6k3XQMGWc5izhQo1huQAera7ug4
+ 5HRJ5kzLnK6+F54tsHbGBIjWRn+J5F/R6QfsdJ1E1fo/TirsfVleh/6sKEttvfDNnDd+
+ vkjWe9KnrL/iW1JN8iZ90alduUH6SBhUgWdxyk1hZbQDYSwMuAjDl3AZjikRi8hvNGnt
+ ikJTpE0eWbR/ukVg5KjaFguH2/bUa8T/LZ4tWPBJ35iPcFWHNTAtgP0Mg4YGWihrlYfF
+ oVyBJEjEkV5bsyGdNuWwARvVZmvXvLSDvtGh2LDNnokSsM1KS40tNf+n9hb4yBV0JYi/
+ 8mKQ==
+X-Gm-Message-State: AOJu0YzRrDRgEQ0wqxxxNF9uBBaMLQMdXLykF266qKLrfSbGzsKBr2E+
+ /ozR3v99TReZjkcIrQizR6i4HfS8wkxT6nI9YLTVYqzc+QxvzLHplKvmV1J4oQ0=
+X-Gm-Gg: ASbGnctwmVxrin5qCS09ta9mkWEGgHWDOVmUQOPpp7Dgi/FcyAf4cy//lkveG+y0sfD
+ WprghM41FEYcL0fjwPXd2DWeT7mXOmndmjp1c/bqhHcExXQk78SPqyQefNDnr6nE8ca1xi7Xe2a
+ j0Y6ygxD5Q3QeuQrJl1dUfiMXzbO0+PS8/6nKeZb9pssUGC+lUjHdg6+rAUmbVEErJib9xdBhaL
+ 0Zv+5Fsa3MkxsQ1vxBf0gJ5vCjpzQygN3Y1YSNhjA5p
+X-Google-Smtp-Source: AGHT+IF2/n9gVAAVu56XCEDm1ej8gp2udPHoGnJ9jtRdEBM2lKIQH5FkzyxeCH/C7+9n7HhXW5w9zA==
+X-Received: by 2002:a05:6a00:b45:b0:71e:75c0:2545 with SMTP id
+ d2e1a72fcca58-724df6ba118mr16379917b3a.25.1732496308467; 
+ Sun, 24 Nov 2024 16:58:28 -0800 (PST)
 Received: from adriano.. ([186.11.57.125]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724de47955asm5377793b3a.65.2024.11.24.16.58.23
+ d2e1a72fcca58-724de47955asm5377793b3a.65.2024.11.24.16.58.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 16:58:25 -0800 (PST)
+ Sun, 24 Nov 2024 16:58:28 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v5 01/14] net: wget: let wget_with_dns work with dns disabled
-Date: Sun, 24 Nov 2024 21:58:01 -0300
-Message-ID: <20241125005814.236669-2-adrianox@gmail.com>
+Subject: [PATCH v5 02/14] efi_loader: device_path: add definition of
+ DEVICE_PATH_SUB_TYPE_MSG_IPV4
+Date: Sun, 24 Nov 2024 21:58:02 -0300
+Message-ID: <20241125005814.236669-3-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241125005814.236669-1-adrianox@gmail.com>
 References: <20241125005814.236669-1-adrianox@gmail.com>
@@ -96,164 +97,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This was marked as TODO in the code:
- - Enable use of wget_with_dns even if CMD_DNS is disabled if
-   the given uri has the ip address for the http server.
- - Move the check for CMD_DNS inside wget_with_dns.
- - Rename wget_with_dns to wget_do_request
+Add definition for DEVICE_PATH_SUB_TYPE_MSG_IPV4 device path
+subtype.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v3)
 
-v3: 
- Removed console output inside efi routine.
+Changes in v3:
+- Removed alignment in struct efi_ipv4_address
 
-(no changes since v2)
+ include/efi_api.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
- include/net-common.h         |  7 +++++--
- lib/efi_loader/efi_bootmgr.c |  2 +-
- net/lwip/wget.c              |  4 ++--
- net/net-common.c             |  2 +-
- net/wget.c                   | 34 ++++++++++++++++++++--------------
- 5 files changed, 29 insertions(+), 20 deletions(-)
-
-diff --git a/include/net-common.h b/include/net-common.h
-index b7a519e36d..139cece091 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -501,13 +501,16 @@ int dhcp_run(ulong addr, const char *fname, bool autoload);
- int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+diff --git a/include/efi_api.h b/include/efi_api.h
+index f07d074f93..99ee749522 100644
+--- a/include/efi_api.h
++++ b/include/efi_api.h
+@@ -616,6 +616,7 @@ struct efi_device_path_acpi_path {
+ #  define DEVICE_PATH_SUB_TYPE_MSG_SCSI		0x02
+ #  define DEVICE_PATH_SUB_TYPE_MSG_USB		0x05
+ #  define DEVICE_PATH_SUB_TYPE_MSG_MAC_ADDR	0x0b
++#  define DEVICE_PATH_SUB_TYPE_MSG_IPV4		0x0c
+ #  define DEVICE_PATH_SUB_TYPE_MSG_UART		0x0e
+ #  define DEVICE_PATH_SUB_TYPE_MSG_USB_CLASS	0x0f
+ #  define DEVICE_PATH_SUB_TYPE_MSG_USB_WWI	0x10
+@@ -691,6 +692,22 @@ struct efi_device_path_uri {
+ 	u8 uri[];
+ } __packed;
  
- /**
-- * wget_with_dns() - runs dns host IP address resulution before wget
-+ * wget_do_request() - sends a wget request
-+ *
-+ * Sends a wget request, if DNS resolution is enabled it resolves the
-+ * given uri.
-  *
-  * @dst_addr:	destination address to download the file
-  * @uri:	uri string of target file of wget
-  * Return:	zero on success, negative if failed
-  */
--int wget_with_dns(ulong dst_addr, char *uri);
-+int wget_do_request(ulong dst_addr, char *uri);
- /**
-  * wget_validate_uri() - varidate the uri
-  *
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 8c51a6ef2e..c6124c590d 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -479,7 +479,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	}
- 
- 	image_addr = hextoul(s, NULL);
--	err = wget_with_dns(image_addr, uridp->uri);
-+	err = wget_do_request(image_addr, uridp->uri);
- 	if (err < 0) {
- 		ret = EFI_INVALID_PARAMETER;
- 		goto err;
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 53c3b169e0..3347a61e74 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -289,7 +289,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	return -1;
- }
- 
--int wget_with_dns(ulong dst_addr, char *uri)
-+int wget_do_request(ulong dst_addr, char *uri)
- {
- 	eth_set_current();
- 
-@@ -323,7 +323,7 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
- 	    return CMD_RET_FAILURE;
- 
- 	wget_info = &default_wget_info;
--	if (wget_with_dns(dst_addr, nurl))
-+	if (wget_do_request(dst_addr, nurl))
- 		return CMD_RET_FAILURE;
- 
- 	return CMD_RET_SUCCESS;
-diff --git a/net/net-common.c b/net/net-common.c
-index 45288fe5f8..e01b0da7d7 100644
---- a/net/net-common.c
-+++ b/net/net-common.c
-@@ -23,5 +23,5 @@ struct wget_http_info *wget_info;
- int wget_request(ulong dst_addr, char *uri, struct wget_http_info *info)
- {
- 	wget_info = info ? info : &default_wget_info;
--	return wget_with_dns(dst_addr, uri);
-+	return wget_do_request(dst_addr, uri);
- }
-diff --git a/net/wget.c b/net/wget.c
-index 3bc2522cde..4bb1590410 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -530,8 +530,7 @@ void wget_start(void)
- 	wget_send(TCP_SYN, 0, 0, 0);
- }
- 
--#if (IS_ENABLED(CONFIG_CMD_DNS))
--int wget_with_dns(ulong dst_addr, char *uri)
-+int wget_do_request(ulong dst_addr, char *uri)
- {
- 	int ret;
- 	char *s, *host_name, *file_name, *str_copy;
-@@ -550,24 +549,32 @@ int wget_with_dns(ulong dst_addr, char *uri)
- 	s = str_copy + strlen("http://");
- 	host_name = strsep(&s, "/");
- 	if (!s) {
--		log_err("Error: invalied uri, no file path\n");
- 		ret = -EINVAL;
- 		goto out;
- 	}
- 	file_name = s;
- 
--	/* TODO: If the given uri has ip address for the http server, skip dns */
--	net_dns_resolve = host_name;
--	net_dns_env_var = "httpserverip";
--	if (net_loop(DNS) < 0) {
--		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
--		ret = -EINVAL;
--		goto out;
--	}
--	s = env_get("httpserverip");
--	if (!s) {
-+	host_name = strsep(&host_name, ":");
++struct efi_ipv4_address {
++	u8 ip_addr[4];
++};
 +
-+	if (string_to_ip(host_name).s_addr) {
-+		s = host_name;
-+	} else {
-+#if IS_ENABLED(CONFIG_CMD_DNS)
-+		net_dns_resolve = host_name;
-+		net_dns_env_var = "httpserverip";
-+		if (net_loop(DNS) < 0) {
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+		s = env_get("httpserverip");
-+		if (!s) {
-+			ret = -EINVAL;
-+			goto out;
-+		}
-+#else
- 		ret = -EINVAL;
- 		goto out;
-+#endif
- 	}
- 
- 	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
-@@ -581,7 +588,6 @@ out:
- 
- 	return ret < 0 ? ret : 0;
- }
--#endif
- 
- /**
-  * wget_validate_uri() - validate the uri for wget
++struct efi_device_path_ipv4 {
++	struct efi_device_path dp;
++	struct efi_ipv4_address local_ip_address;
++	struct efi_ipv4_address remote_ip_address;
++	u16 local_port;
++	u16 remote_port;
++	u16 protocol;
++	u8 static_ip_address;
++	struct efi_ipv4_address gateway_ip_address;
++	struct efi_ipv4_address subnet_mask;
++} __packed;
++
+ #define DEVICE_PATH_TYPE_MEDIA_DEVICE		0x04
+ #  define DEVICE_PATH_SUB_TYPE_HARD_DRIVE_PATH	0x01
+ #  define DEVICE_PATH_SUB_TYPE_CDROM_PATH	0x02
 -- 
 2.43.0
 
