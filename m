@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4623D3B7CA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF42CD3B7CA
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF87389986;
-	Mon, 25 Nov 2024 01:40:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60B6B895DB;
+	Mon, 25 Nov 2024 01:58:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F/1wKKJ8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qyg9a44w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2CD489323; Mon, 25 Nov 2024 01:09:38 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id DB0D0895DB; Mon, 25 Nov 2024 01:58:26 +0100 (CET)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A33588815
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:09:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 470F38952A
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:58:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6eeac3535baso36475317b3.1
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:09:36 -0800 (PST)
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-723f37dd76cso3681294b3a.0
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:58:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732493375; x=1733098175; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9+AN2kiW4SdF4PKYHJzy1n7eNoDLuLmngAkFu5YiDKA=;
- b=F/1wKKJ8Hf+0urujPDbOMrd64wYQ/gduIsfyKDelXID+lrulkHh14oBBR42UM4qgAt
- puYZRqP4ATZKrf8fq4lqrbrepsmtNQG32zDevhfaf/M/sYkW0onRPSc80cYrC7DTva7H
- Wuz1/djrCkeQlfdIxtRWyLJhyE/FxO0HlTm18JkN0ukB71oIR14w5ZAySzOOEFGWoD62
- l/3OSLGw1y0nF6T+MYbHGjN3G1FE2pB41LFgCn13Qv/YjI0n+gfvSYRw12XMoNR1UpIl
- +6XfQ0T6AVF6zMqJPk2azVtn9bZkXxQ5vFgCIZ9s05gSFHLCjuWwkA/9e2xs4S4FuGQf
- HDSg==
+ d=gmail.com; s=20230601; t=1732496303; x=1733101103; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YfouRfHR+unrsLM+DIml9kDgwZ9wog4Hug1UMJUogPY=;
+ b=Qyg9a44wnwP9PGS6DYqtbci03nJUDKuhb6X+c9UxV5gNUVK3E4PL2jTtjqob/hlRA2
+ XdVb3VwZ2Md1XJ6p4ddy7tN8qwmLsNltF8a5LTTLdN7awb7AzIUFfzCwqGQHkFmblky2
+ kyPCTMBb2FUvQ4YPa7JHZzyUM1ilZ6rXH1Xep22qMSLr/bP5RCDymj37+vG9lwNTno+4
+ qYblzQ2NUOQ/kLsLV4MRpjr07Rfq47+6ZTDePVSPcnAQhRxUIBGLW96N5GEGO7PEB/jx
+ noFg9epovJmofOnFAprMtCBAINPxu0Etw61HF/KsimG88d6U4SdeORF4VteE+Kb5NFIc
+ 2c8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732493375; x=1733098175;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9+AN2kiW4SdF4PKYHJzy1n7eNoDLuLmngAkFu5YiDKA=;
- b=O5oZ3MczAm8AQ8UUpvWLekIfUidhW5bDa/N2Xf3J8IC8/k8MWF1Ii43BVoMimSijwv
- 2q64xxaQiinhTR897sd675LZwUICGzTnS7DCiFFsf2gSP2KrJ2mGs8kNPG7S39oVJEZA
- Cr1LuxCsz8lyxHXPAb/cxtWMK4CLEt8O5HE/5Z/gGIgTKJ+KnexiLjd8Mo3erbtnT4s5
- uLs5GnehOeIBFfOFE1M4jZg57rGybcetslWxBCecfvLtk7gZp+bn9mxjAEsiMyzxrFOC
- uwtC+RBwvRmY/ni+GPhJaJ64RP38pVFSXbzYN9rrAMb5px48ZTyn8avaBM1K2JiKUyWr
- uU/A==
-X-Gm-Message-State: AOJu0YzphRVzonfxGH6oDWUN5mKPi+Sr8DpBwUjsfVjJBifMewWPNEk3
- IKWuCmfYBd+nEvocv3KbYS0/SS3yk6Y2UMsIPNaZCS7IG8yveXR+WiK5s010pPKH3FjJQSxyffm
- yN5G1BKQPCOTh7hg6kezB8RI1fFbzBSUe72k=
-X-Gm-Gg: ASbGncuJgWO2VYYcVfsD+UAmM/3bEk8hBuRWGFWaCjSbtfIs4BelPmdRXMrh/qJu4sE
- 0GDkJ/ixJVKn8wHC0zLLqIVvcAkIQyQ==
-X-Google-Smtp-Source: AGHT+IHiF0L7qQORKDd+Mo/Gsftqd1F43WTaS7XnnHOILPmTV0f2Its9kbV0KB6kX13DuTd4i8E5qQd1lgWIvVXICzU=
-X-Received: by 2002:a05:690c:3686:b0:6ee:ba42:7611 with SMTP id
- 00721157ae682-6eee08c3391mr105800137b3.10.1732493374921; Sun, 24 Nov 2024
- 16:09:34 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732496303; x=1733101103;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YfouRfHR+unrsLM+DIml9kDgwZ9wog4Hug1UMJUogPY=;
+ b=ldc5kQDCNI3mQ84TtJSIh6Ch8rv2qP+pyT0cGgCb6FgXYOIFLoiU1bY30CMXuTxJfb
+ X4DMYNZuYFx0h2EN6WD0OKy8XwgsT73NqpVfB1cPcdDwSAbW0joouisAtQri+nhnr89E
+ yomi1q6ttx3Lat5Gkp8tGKZrKo1rivoUBrbpDcnHAZO/RzriKnitOvoGNujuUMcw/ZKp
+ xCfjs/lZfIYUlUMHgt3j0kfdD8VOfrMkGS24cvwN8yPXAschNFBC25xXBCLm1bwMJJm3
+ XOiO5skGuhVsYAsrlX+7EZkBeR2hyQfSY1zO6soMwKU/Y3qtETuTnK3DfGUmUanMCaD0
+ wptA==
+X-Gm-Message-State: AOJu0YzscD8IjPQoAYdb1yX1XXoBKuJaKYCc18aw7AKQnCZsRSb1Q1+S
+ GPfGObiacuts2uH2lmr9J/4GSR7GAL7w9WXFvNyWZB9Ra2Z+wPzqYSOfaD7TA5g=
+X-Gm-Gg: ASbGncuwHblD+CACs4EWz24DcquIqk2iDMq9eDtlggYvj1rchIioHNH2HZJdKWtiLH+
+ v4vynhD5E5/n59Epu0um8dYLglSjn/LP7pEMsTLvphOA6xkFpfqdfuD5Sy7ZqIdUp4I5tE+CNTG
+ s9yX7E75BhHdKspSwrGR4YMVNuM51DXA/KO5ShAcXCJ1ualEu1IrnKkSKKBrSO9gwJrtVlA2V2d
+ tIviGgo3fo8yuDR7z3BQ38oEk6bUkL1uuUOZXy4FqKQ
+X-Google-Smtp-Source: AGHT+IG5YKl8dmSoaqdapIDM3++VkLjELvCjNmjj0W9/prFBBi0u8hhESwJhZjahYVLZmVL/oT/PkQ==
+X-Received: by 2002:a05:6a20:6a1a:b0:1e0:ce71:48e0 with SMTP id
+ adf61e73a8af0-1e0ce7155ecmr997102637.39.1732496302672; 
+ Sun, 24 Nov 2024 16:58:22 -0800 (PST)
+Received: from adriano.. ([186.11.57.125]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-724de47955asm5377793b3a.65.2024.11.24.16.58.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Nov 2024 16:58:22 -0800 (PST)
+From: Adriano Cordova <adrianox@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH v5 00/14] efi_loader: efi http and ipconfig drivers
+Date: Sun, 24 Nov 2024 21:58:00 -0300
+Message-ID: <20241125005814.236669-1-adrianox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAFOYHZCwXSChH_rH251cUp-bgwai+e8xrOuqxepX9Dur2wGTJg@mail.gmail.com>
- <20241123024048.GK3600562@bill-the-cat>
-In-Reply-To: <20241123024048.GK3600562@bill-the-cat>
-From: Chris Packham <judge.packham@gmail.com>
-Date: Mon, 25 Nov 2024 13:09:23 +1300
-Message-ID: <CAFOYHZCuqSDWOUBGQ5_PAaLW229fwyk9vF47vC+rq_TW5J-qjg@mail.gmail.com>
-Subject: Re: Odd error with cn9130, asix88179 and xhci
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 25 Nov 2024 01:40:56 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,109 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 23, 2024 at 3:40=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Wed, Nov 20, 2024 at 11:29:43AM +1300, Chris Packham wrote:
-> > Hi U-Boot,
-> >
-> > We've hit a weird problem at $dayjob with a board using the Marvell
-> > CN9130 SoC and using the asix88179 USB-Eth adapter.
-> >
-> > The problem is after enabling and unrelated feature in u-boot the
-> > asix88179 fails to receive data (I can confirm that the link partner
-> > does see packets in the transmit direction)
-> >
-> > =3D> version
-> > U-Boot 2022.01 (Nov 08 2024 - 09:45:44 +0000)
-> > =3D> usb start
-> > starting USB...
-> > Bus usb3@500000: Register 2000120 NbrPorts 2
-> > Starting the controller
-> > USB XHCI 1.00
-> > scanning bus usb3@500000 for devices... 2 USB Device(s) found
-> >        scanning usb for storage devices... 0 Storage Device(s) found
-> > =3D> ping ${serverip}
-> > Waiting for Ethernet connection... unable to connect.
-> > Reset Ethernet Device
-> > Waiting for Ethernet connection... done.
-> > Using ax88179_eth device
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> > Rx: failed to receive: -5
-> >
-> > Abort
-> > ping failed; host 10.37.233.65 is not alive
-> > =3D> <INTERRUPT>
-> >
-> > Debugging a little we can see that the -EIO is actually because
-> > xhci_bulk_tx() hits a timeout from xhci_wait_for_event().
-> >
-> > We think this is triggered by the u-boot image size crossing some
-> > boundary (the problem seems to start when .bss_end crosses
-> > 0x00000000000f0000) although I've so far been unable to find
-> > specifically why that might be. As far as I can tell u-boot is being
-> > built relocatably and nothing is overlapping. I also considered that
-> > ATF might be preventing access to something but so far I see no
-> > evidence of this.
-> >
-> > If I turn off some features to reduce the build size the problem goes
-> > away. That is actually how we've avoided the immediate issue, although
-> > that means the problem will likely come back and an inopportune time.
-> >
-> > Does anyone have any ideas as to what the true root cause might be?
-> > I'm a bit stumped.
->
-> Hummmm. Since you note it seems to be when a threshold is crossed in BSS
-> size, add something to the BSS of a variable size that you control, and
-> after confirming that you can replicate the problem this way, grow it
-> just past the limit and compare u-boot.map files in the works/fails
-> cases to see just what's being moved around?
+Add support for EFI_HTTP_PROTOCOL, EFI_HTTP_SERVICE_BINDING_PROTOCOL,
+and EFI_IP4_CONFIG2_PROTOCOL.
 
-So I tried a little experiment
+This series depends on the series 'wget: Expose wget to applications',
+also found at:
+https://github.com/0n41rd4/u-boot/commits/http-driver-wget
 
-diff --git a/net/net.c b/net/net.c
-index b003b84b3537..a6def9785133 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -180,6 +180,10 @@ u32 net_boot_file_size;
- /* Boot file size in blocks as reported by the DHCP server */
- u32 net_boot_file_expected_size_in_blocks;
+The fist two patches of this series are not efi specific and have also
+been sent to the corresponding maintainers, but this series depends on
+them, so they are added here for redundancy. A branch with both series
+of patches, concatenated, is at:
+https://github.com/0n41rd4/u-boot/commits/efi-http-driver
 
-+#define DUMMY_SIZE (1 << 11)
-+
-+int dummy[DUMMY_SIZE] =3D {0};
-+
- static uchar net_pkt_buf[(PKTBUFSRX+1) * PKTSIZE_ALIGN + PKTALIGN];
- /* Receive packets */
- uchar *net_rx_packets[PKTBUFSRX];
-@@ -211,6 +215,7 @@ int __maybe_unused net_busy_flag;
- static int on_ipaddr(const char *name, const char *value, enum env_op op,
-        int flags)
- {
-+       dummy[DUMMY_SIZE - 1] =3D -1;
-        if (flags & H_PROGRAMMATIC)
-                return 0;
+Adriano Cordova (12):
+  net: wget: let wget_with_dns work with dns disabled
+  efi_loader: device_path: add definition of
+    DEVICE_PATH_SUB_TYPE_MSG_IPV4
+  efi_loader: device_path: add efi_dp_from_ipv4
+  efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
+  efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
+  efi_loader: device_path: add support for HTTP device path
+  efi_loader: net: set EFI bootdevice device path to HTTP when loaded
+    from wget
+  efi_loader: net: add support to send http requests and parse http
+    headers
+  efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+  efi_loader: efi_net: add EFI_HTTP_PROTOCOL
+  efi_selftest: add test for HTTP protocol
+  efi_selftest: add test for IPv4 Config2 protocol
 
+Heinrich Schuchardt (2):
+  efi_loader: add IPv4() to device path to text protocol
+  lib: uuid: display HTTP and IPV4 Config II protocols
 
-If I make DUMMY_SIZE (1 << 10) I don't see the problem. With
-DUMMY_SIZE (1 << 11) I can see the problem. If I make it DUMMY_SIZE (1
-<< 14) then the problem goes away again.
+ include/efi_api.h                        | 220 +++++++++
+ include/efi_loader.h                     |  42 ++
+ include/net-common.h                     |   7 +-
+ lib/efi_loader/Kconfig                   |  17 +
+ lib/efi_loader/Makefile                  |   2 +
+ lib/efi_loader/efi_bootmgr.c             |   2 +-
+ lib/efi_loader/efi_device_path.c         | 108 ++++-
+ lib/efi_loader/efi_device_path_to_text.c |  23 +
+ lib/efi_loader/efi_http.c                | 548 +++++++++++++++++++++++
+ lib/efi_loader/efi_ipconfig.c            | 214 +++++++++
+ lib/efi_loader/efi_net.c                 | 360 ++++++++++++++-
+ lib/efi_selftest/Makefile                |   2 +
+ lib/efi_selftest/efi_selftest_http.c     | 315 +++++++++++++
+ lib/efi_selftest/efi_selftest_ipconfig.c | 170 +++++++
+ lib/uuid.c                               |  14 +
+ net/lwip/wget.c                          |   5 +-
+ net/net-common.c                         |   2 +-
+ net/wget.c                               |  35 +-
+ 18 files changed, 2059 insertions(+), 27 deletions(-)
+ create mode 100644 lib/efi_loader/efi_http.c
+ create mode 100644 lib/efi_loader/efi_ipconfig.c
+ create mode 100644 lib/efi_selftest/efi_selftest_http.c
+ create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
 
-The obvious things that are moving are net_rx_packet,
-net_rx_packet_len and net_rx_packets. I'll see if I can narrow things
-down to specifically which of these is being problematic.
+-- 
+2.43.0
 
->
-> --
-> Tom
