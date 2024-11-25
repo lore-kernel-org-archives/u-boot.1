@@ -4,70 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E36D3B7DB
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 05:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CABD3B7DB
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 05:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54ED1899BF;
-	Mon, 25 Nov 2024 06:28:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1040589A22;
+	Mon, 25 Nov 2024 06:47:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JcePUyZ2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mkKMVpU2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46929899C0; Mon, 25 Nov 2024 06:28:02 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6F3CA89A26; Mon, 25 Nov 2024 06:47:21 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 184A689987
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 06:27:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21D2C8955B
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 06:47:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AP5RtBw123390;
- Sun, 24 Nov 2024 23:27:55 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732512475;
- bh=b8CBryJV1bB+HE2GJWdb3+RKO0LZZGwPL6eQ20E8apo=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=JcePUyZ2WXXVP0LAWllukxwuY3bGsO8NQZb7zpFpB5DDzkDMRNOaLRaFEc1XrqIhD
- EhGZFevgjs+8kBUJSMAH83F00OtmJvZSmTUib6rC2EqTjvmsihk7hP/Y2+ALUgx+ij
- lm007iLEtjhNG2EiwOr6iuZ1mtS7rGnDRNZAUskk=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AP5RtQa038450;
- Sun, 24 Nov 2024 23:27:55 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 24
- Nov 2024 23:27:54 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 24 Nov 2024 23:27:54 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AP5RrjV022019;
- Sun, 24 Nov 2024 23:27:54 -0600
-Date: Mon, 25 Nov 2024 10:57:53 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <j-humphreys@ti.com>, <m-chawdhry@ti.com>,
- <rogerq@kernel.org>, <nm@ti.com>, <sjg@chromium.org>,
- <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <afd@ti.com>,
- <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH v2 5/5] board: ti: j784s4: evm: Set "dfu_alt_info" only
- if interface is Serial Flash
-Message-ID: <ed5wsehr3ovr7xglukbukd7wvyrfsub6v5n7iylvaw5hqkkouy@u2yl4o2uhblm>
-References: <20241124070828.617558-1-s-vadapalli@ti.com>
- <20241124070828.617558-6-s-vadapalli@ti.com>
- <dc562c69-ccb3-494e-b5fd-5c016382879e@ti.com>
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-85709529823so2230454241.1
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 21:47:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732513638; x=1733118438; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QmUnDyxG011ezCXZozn2JfugaaOyZkQCHxkyPu28pG4=;
+ b=mkKMVpU2MZ9hzg/7RHVfLznLwWHqbCMRlxFKfzaMYosfl42d50AKxjDQf54oqLMM9b
+ Qv/Lfx407MqxGajy0pPhejwpOSZnS74jQFBR/mfuVpIpkK13IYtJyZ7W3FFNM5QEJttC
+ ds0PcscbxhY/ssTysKOCMhWdYJQuIbZ6WCjfWR1dDxJjhPS+jG9YuXZ7L4Q3gDnmNmui
+ /I9UcBS1Ts46ZSFXZHF1HC7TxFVGrqbnBczFXubTtKfbOQCZPfQEEUxOH7Q1wti5d/kJ
+ CJ1AHsjc+46WFeRuH/4KWV9S5e0jYBjVJ+jX3F347sHzGVepQiMgZ+JTtXVehedICAd5
+ 9TvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732513638; x=1733118438;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QmUnDyxG011ezCXZozn2JfugaaOyZkQCHxkyPu28pG4=;
+ b=Nl31LbxWI4C0/keVYyy95CdcPHL0KLCxRfmPZKF7vKfCTYkNcIDyPnbVBMdbb5B/kD
+ 5UCgIjEyGqhpyP02/hUDf873HWbDSQx7nsOLDJ2HygxKuJzW5aSbTx9xiX2YaQxUDm0N
+ WZdSsKk7fGXznDxueDvV79vgf9O6wop3xtH/p4xZvyfpmcqN8fpqldEBw7v6IiaADdpK
+ 2hUGyE9W2QKR6y4Jpl5siiJem8pbpy6mtNttBDgumqTk6pMAxNEJn0tHsaxkLP4/eLP2
+ u0Km50sdEdHBTvQMRxtCrCvelGV9O14Gnnn4rs3JGkPI+s19oQM4i+hGxKhYhM5rbNaY
+ +1pA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU0eTFBK87fabd1YYxQRxh6tvQpkcO6Ac+vdyiFdfOg63qtPnEL2QP1YcqzJdY3XpGlrbFuRI0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/ZZUwlHNFNqt8Xq5pSrmYqcDeS/DtQBSwC7t3DoCmK1we6/vf
+ mVPJiFdtdGQDijvj2xuvFAkFX8v0CyClwVzFN3ee6UpfRvAEXrantXMNF57ZVupFOsqZhEZxVVM
+ 41TJgXLPtsChaUI1gr+DetnKy5woE/ZecET5okg==
+X-Gm-Gg: ASbGncuOQbp+8ClSNAquiKTTbf1QMOefOkMA+wJVskAeb1Hs2PjI6XPrTqodh2DrYly
+ Z3tdEXUNJociHoOw5gefv4lJ113PHWhG+dA==
+X-Google-Smtp-Source: AGHT+IFStyYy47lB2rMFmIR2Z6qyRe7bTiC1xIQEr4pfUtneSqgm1mCHxhrEG2XEPYbKAvqQoQrvZ9850P+gjNdSEDE=
+X-Received: by 2002:a67:f3cc:0:b0:4af:f45:d360 with SMTP id
+ ada2fe7eead31-4af0f45eeb6mr3146846137.5.1732513637903; Sun, 24 Nov 2024
+ 21:47:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <dc562c69-ccb3-494e-b5fd-5c016382879e@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241119020425.51989-1-hal.feng@starfivetech.com>
+ <20241119020425.51989-3-hal.feng@starfivetech.com>
+ <CAFA6WYOLxG68O4FYrDPt9q13dR=H3c2LcRVKhx4sRMBhy8dCTg@mail.gmail.com>
+ <CANV2PTNAqxrPYypHwuDa6Dz5LUO_kzRGV0PzOand-tOo_peMCg@mail.gmail.com>
+ <CAFA6WYPciEc-WJNc73j=C5AoGb5bbQ139p6=m7a_xqCVD4uYSA@mail.gmail.com>
+ <CANV2PTPuKLnn3+0d-hqEogq9aE0iat9NhXjC-CxE40m5ht9SPw@mail.gmail.com>
+In-Reply-To: <CANV2PTPuKLnn3+0d-hqEogq9aE0iat9NhXjC-CxE40m5ht9SPw@mail.gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Mon, 25 Nov 2024 11:17:06 +0530
+Message-ID: <CAFA6WYNDMS0zzebMKjS7YT36+=L2HcR2mQd7ccVixq4DOH+v0w@mail.gmail.com>
+Subject: Re: [PATCH v5 02/11] riscv: dts: jh7110: Make u-boot device trees
+ adapting to upstream DT
+To: E Shattow <lucent@gmail.com>
+Cc: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>, 
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
+ Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,32 +103,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 25, 2024 at 09:29:01AM +0530, Kumar, Udit wrote:
-> Hi Siddharth
-> 
-> On 11/24/2024 12:37 PM, Siddharth Vadapalli wrote:
-> > Commit a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-> > updated the "dfu_alt_info" variable to support use-cases with Serial Flash.
-> > However, this breaks use-cases where interface is not Serial Flash ("sf").
-> > Fix this by setting "dfu_alt_info" only when the interface is "sf".
-> > 
-> > Fixes: a4d5e5daa847 ("board: sk-am69: Define capsule update firmware info")
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> 
-> 
-> AFAIR, DFU in general is not enabled on J784S4
+On Sat, 23 Nov 2024 at 17:43, E Shattow <lucent@gmail.com> wrote:
+>
+> On Thu, Nov 21, 2024 at 11:44=E2=80=AFPM Sumit Garg <sumit.garg@linaro.or=
+g> wrote:
+> >
+> > On Fri, 22 Nov 2024 at 12:12, E Shattow <lucent@gmail.com> wrote:
+> > >
+> > > On Mon, Nov 18, 2024 at 8:06=E2=80=AFPM Sumit Garg <sumit.garg@linaro=
+.org> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > On Tue, 19 Nov 2024 at 07:35, Hal Feng <hal.feng@starfivetech.com> =
+wrote:
+> > > > >
+> > > > > Add u-boot features to the U-Boot device tree.
+> > > > >
+> > > >
+> > > > For follow-up work, I would suggest minimizing U-Boot specific DT
+> > > > bits. You can either re-use what's available in upstream DT or push
+> > > > U-Boot specific changes (eg. bootph-* properties etc.) upstream.
+> > > >
+> > > > FWIW:
+> > > >
+> > > > Acked-by: Sumit Garg <sumit.garg@linaro.org>
+> > > >
+> > > > -Sumit
+> > >
+> > > Sumit, with the whole series applied this U-Boot specific DT addition
+> > > is confined (with exception of what I comment on below for rx delay
+> > > values on VF2 1.3b) to a single include file. Looking at linux-next
+> > > there is a bit of re-organization since the Framework / DeepComputing
+> > > JH7110 mainboard moved more nodes out of the common file and into
+> > > board specific dts. When upstream dts settles again then there will b=
+e
+> > > some more work to update this anyways. Is it any blocker for you now?
+> > >
+> >
+> > No, it's not really a blocker for me. Actually it will make life
+> > further easier for the board maintainers in future if they upstream
+> > everything in *-u-boot.dtsi to Linux DT. This will ensure that no more
+> > rework is needed when DT is synced from Linux and rather U-Boot uses
+> > the same DT as Linux does.
+> >
+> > -Sumit
+>
+> Does the "snps,dw-mshc" override of compatible belong here or should
+> the driver in U-Boot be amended to accept "starfive,jh7110-mmc" as in
+> upstream dts?
+>
 
-Yes, it is not yet enabled.
+It's better to make U-Boot drivers compatible with upstream DTS as we
+do need to maintain a stable DT ABI upstream.
 
-> 
-> Can i request to enable DFU along with this update.
+-Sumit
 
-This series is a pre-requisite for enabling/fixing USB DFU boot on
-various devices. I will be enabling USB DFU boot on all TI K3 Boards,
-but again, that doesn't have to be tied to this series and can be done
-independently. This series is a fix, while enabling USB DFU boot on
-devices is a new feature. So I don't think that the feature *has* to be
-enabled along with this series.
-
-Regards,
-Siddharth.
+> -E
