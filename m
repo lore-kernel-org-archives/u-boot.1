@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFC7D58D69
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED749D58D69
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:13:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E481B89A3E;
-	Mon, 25 Nov 2024 18:13:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49B2989559;
+	Mon, 25 Nov 2024 18:13:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OonBbbiU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ri8xPTZd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33EAD8961D; Mon, 25 Nov 2024 18:13:02 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id E62D789A1C; Mon, 25 Nov 2024 18:13:03 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF6BD89491
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:12:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2090895A0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:13:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-434a2f3bae4so4366555e9.3
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:12:59 -0800 (PST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-53de035ea13so1572630e87.0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:13:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732554779; x=1733159579; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5ikNlsr/DyG1NHQwLKQZibbM4r/skLXj1kvl8s3ycFU=;
- b=OonBbbiUVqOoB+OeDp+Ce97Uq9be5tEcjwbl8ZXbREdbzPHoW0BPMQFu9+DoNSAFsx
- APUejPGuXhTclzcoYFptmD8dhth2GjKiN6Fim0arUmoXP8vOgI9BfORL7askVYE79EJR
- yovtOeeZ1H76x3xd0iFv4DhhwFRlsRl3kioXeHxZH38HGRQ2sOI2mUsVvgZifuwcOt03
- Lwmv2AiCfHBKw1LUVNExGVJS8iYKDkkMDUqcREyknTGgvSr2rUHCFHsqJ9L1aAAFhyA9
- G64pCrJnuWwocp8yZ8kPuDjwp7RRTqq4gwOywsaFN7WMDyn5agpozK6oA55eqxsiOJN/
- qyDQ==
+ d=linaro.org; s=google; t=1732554781; x=1733159581; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=mAeXDEtmKQtx/Y4UDIV53sYZdZn3U0huEcR0YJ+ZS28=;
+ b=Ri8xPTZdPmhIKZOS+eAsozYP7lZ4eBKSNHiAZv8bXhdURxVrWWr2OeleG2kRgCG8ku
+ /0DHaOq4xAS+edC/pnx5sFnEQ0HJjfqCuXiveWZ9GhdDpLB2z2CiHq5pJGbIbgkZ3SyN
+ 410xlrb0cgkhGgKpxZfq7Ttxy2JbHf/AGy6iQYrpLPYvscicAb8nmzsUeRuN1ix4q/Qo
+ yAWgZFwHso3+xIWGGBdkbamX5CynIZpbjXMlE0weIxlObUV7fIop1WQv4EDdk45M8mQy
+ ZS/d96Adjh3VNjxndeutdDXA8RZcQioG1j3xLYBKnVCwNUt1l4VV4+XWZ3iCPlDOxWQs
+ hbVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732554779; x=1733159579;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5ikNlsr/DyG1NHQwLKQZibbM4r/skLXj1kvl8s3ycFU=;
- b=Qof2c4b/VWlsIZPTKHBGHUyXzmsUsFz0gGtk/OAMjFk660Lw+b3PLiObrtPCasFIGI
- yOCj5ydLxkjwp/8K/dLu3Kph5FYsYVzGIiSXFLZUThARylH/y758INY7efLxI1CjzrBN
- 6TtVwkJ+4HQBiDjyc6BEgOcsPFtDnBLg+7uDX/atAEPPoxS6QpBdq6dwH4ykQ3W+xVyB
- pJG44d8MDppx6YjOQq7wuFOmKGWt2N9RYXsgl++1+BBgebd2/a/s0+On+Q4gXk77Qm8d
- lFS7zCtiYbcGtg8KxVcxfrS/6uRVbMfydhmLq/GpW+SqHUDBgbUxBvq9QorC1qzm4PeB
- zBSg==
-X-Gm-Message-State: AOJu0Yzcc8f97zJW9EI28aLzuw9LAQL4tWcabPIPPkDwEvlPZ8YLayyX
- FUixAcpgyCOrVNfmuL58TcDLNoFbcpoKhZtruVKIalZVQachwW8vl3NfvlHLOGE=
-X-Gm-Gg: ASbGncsxaB0yE+kz4I4bLhwb572gidIeXfoXTJZHlYL6h7aIJp1Y9WbEo6WfyaYl0Ul
- GO+93aaN4ComIKzR3p1IC+UxsTXIC6WTFUl7sFoJXVqXHGfWTx17dkky9nzbMgjMXlWlERpC5kf
- ueij+jZT+NNzZf2MgmPDf3Ih+sC2VefVTOyKcrWoc+m1AuZg1xZISqQ74XE+UI5SGRK2nTpzDUx
- 2qKmRkyLc7pXLXLqPm3ecDUmtTt1EzVx89WgvCwLn/ZDJ5OeDqWcIraS80K4cHUHidBXFg=
-X-Google-Smtp-Source: AGHT+IHxSkqXKpPLUTbK8aA7v49XZ6U14nTw1Yxf2eZrUda/baQYLIm8gTSwnGIoS5fkFUBB1UH8Hw==
-X-Received: by 2002:a05:6000:4802:b0:37d:4fab:c198 with SMTP id
- ffacd0b85a97d-38260b69dffmr11972118f8f.26.1732554779381; 
- Mon, 25 Nov 2024 09:12:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732554781; x=1733159581;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mAeXDEtmKQtx/Y4UDIV53sYZdZn3U0huEcR0YJ+ZS28=;
+ b=tvQIATJUfGcvSGhQVSBLEbEZEFsl+NUilgLUeTvUOSdTMq7mnSgIpZe1HBzxEst9VM
+ LqQw5EdxT2Xk4N3VlOPGrP6ZwCpCs3AJuMb4daY45te836LrLDmuBfwr3biwFzN1X16I
+ WXchv8m+yvOY1rWgaJSroXlQoQqL3YFez1G42fnr3wYe1RwR/06HwDEDciTPMMn8jOiT
+ 4v5/4yCciW2DcDRROD+XDbFKJ8dsUkTcD8741feTBAX8AFoXL0nHoIpaa5v6jI9+ADTQ
+ /fzRRCjytlTv36jKO9OmulWTfXTsbRuYttv6NwHuTAf0nIpOoswEqEzEMWbePr0SdY/u
+ DsGg==
+X-Gm-Message-State: AOJu0Yx9l5f+Vb8OkhNM0Jr/Xs6P9Jh+pcsHK0leGJV3BIfA8/q7286C
+ 4MSwBv/Hy1b4Hymo3GOTzBMCKZj3xYPo8Mag2/6xdhWURUiaaVXEQkc6zzM7ess=
+X-Gm-Gg: ASbGnctOwx4gncI/9hR8wvibr4CN8foKymFFb5pK88CSsqUveA/42JRRo/TSxD2jp3W
+ 2MulJJr7WAhkQJ5oWB1Y/HGA7lHarEuQtB5hnMxCXHpLM43ZJfpRwVAEDTOBTSrHq0P9Uy6iBzn
+ DgaKieM0V5jrtw2KxdaJiVOciHjjew9BEX10sA/3o+mYfYXaL8Mjh0gzfgOE8I2fxOKsdHkckYD
+ CfwEUPs+yaKNRvX3oJGf4oi1aZ7hqFzv4OIZqaIfRj901RzlPnTxyDZBWT5yPoYfCQzboE=
+X-Google-Smtp-Source: AGHT+IHuzXZYgEVkiHc8pPii1U1lAtzWC9yNEkd5ZTPK1Mmo1iAWbODiXGzFnZrgyXap1XfiFmVpKw==
+X-Received: by 2002:a05:6512:e83:b0:53d:df26:b782 with SMTP id
+ 2adb3069b0e04-53ddf26b7cbmr3107640e87.31.1732554780990; 
+ Mon, 25 Nov 2024 09:13:00 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fcff017sm10919419f8f.108.2024.11.25.09.12.58
+ ffacd0b85a97d-3825fcff017sm10919419f8f.108.2024.11.25.09.13.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 09:12:58 -0800 (PST)
+ Mon, 25 Nov 2024 09:13:00 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH 0/2] rng: msm: support newer SoCs
-Date: Mon, 25 Nov 2024 18:12:55 +0100
-Message-Id: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
+Date: Mon, 25 Nov 2024 18:12:57 +0100
+Subject: [PATCH 2/2] configs: qcom_defconfig: enable RNG driver and command
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABewRGcC/x3MTQqAIBBA4avIrBtwrOjnKtEidLJZZKERQXj3p
- OW3eO+FxFE4waheiHxLkiMUUKXAbkvwjOKKwWjTEJkWr+MUi2nvn1ZjDB47aqzTmkw9EJTsjLz
- K8y+nOecP7YkEkGIAAAA=
-X-Change-ID: 20241125-topic-sm8x50-rng-714cd0012391
+Message-Id: <20241125-topic-sm8x50-rng-v1-2-52b72821c3e9@linaro.org>
+References: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
+In-Reply-To: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
 To: Robert Marko <robert.marko@sartura.hr>, 
  Luka Perkov <luka.perkov@sartura.hr>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>, 
@@ -87,20 +85,20 @@ To: Robert Marko <robert.marko@sartura.hr>,
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=698;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=886;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=i+jQ0s02Gc+xhwz73ZKYjGJbRDxvjUuoJDVr8w5+Byc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRLAZzNZzn8lF8ZNYWNLouWGZ49tctiTtxc1Xg8zj
- Di9I88GJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0SwGQAKCRB33NvayMhJ0ahXD/
- 95PpwsbV503kuqes7IZYONaedt9BOZWj+tjXgU7irTi4O2S6fl5zSuIRul4oTZVlf6IiVxCVpjFe1q
- /vo6izElJ08SUo5iET3bOyS8U2ROpC+d7+M0utYynq1ZOGuTi+oYhcKtsqdgrVHupVSmBt7GAhHfN0
- 0xrwmC6IKZjPkXfB6dF88f+hlYlCwS18acMToGF9/riHbwGJxyI5RUPwwaiytog148xaxHxiEe9IY/
- LR0d/bZI687WOD+iexHhVq1hL7ATetB9D8oA9Ys7GeUHRcQqP5uhqZtGuzH96vZuFz7WRRIhmy1GL7
- lI0xUPfrj64yfntU9LctNkBnX9ctrKVTXRChi64f7IzqOOtLM0n4QjgLT8ABwS9dUsmF95GucUg8z9
- UT3fO2ncn+cUiI0NGPZgELd6BIdTFOSlYjB+CK6GzXNOImXK7xTU2xwsaICtSVZN8mDiGbozbgOlqW
- 7grohsvlhmxg9dXviB7VsXOsXED4aA7ji1sl1JBhl3Ul0uWeGZPr7gkeEKrmhMIzXeZOIXYX30yRhA
- 6oaS1FeB23UeFzlpNcgrlJ83QnIGVEj5NzMSUiHIBL2JuA2Zh8YCBjfdnqHruMyMFr9jA7i3QV/7AH
- DAqiWz8QGpOp7TxMMDjD52Io+TjVczDaDt0EL6Km+He9xuu8OINok3EiLPtQ==
+ bh=vJUMWPzm73V7xONpa/LBdHLuHJz/FIZN+BIAep3WR6k=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRLAaNHxCmx/v8Pl5nXeZALJ1WZOxv71MInIy+lQC
+ TNPnw42JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0SwGgAKCRB33NvayMhJ0SexEA
+ CcHpaURqF6VWqarEPsbUenYGAPA+EK1GJJxDPS89BXo8M7LPeQtqlqfNWI9zpb0UTJSFk86YFXBN28
+ Lx1vcCWEIDbK1IYOwqiSiqFJ3EM9c2/T9MRLpnDrmutnggmm6FmskGzIpHoipQlRk86dohcKQh0t6F
+ RzVhGuMkYx+MtpIDh9M3yAWp3AW4inPjFs/2AQLDgTHyrxpsre9yegjRimNR2IRsmnqmVTdBEzx7jK
+ EMR2z8mnrwWhdVlQ3ydd7pWikZRf+jA1ns0vTYPvbLa05GmtTwMrYqXCktctv6b3WGNivBCVPm1cML
+ LCxtnYEMqBsgYuRg87oPLfCpBpLkp5n2TqVwO8kbThW5adLAMahNrioBYHkqhHtmuBZ+SGw0Rlj/7i
+ z81E0xlPxUilVo2OwDI5gG+yR+CBY6A8saw7ZBqQXGJrKq3WXK3rtdc5thqS/uoEExYzcBNskC8XtE
+ ignOld9UNJBqXKhrt0TmSS+qvafi/bHrQpQz8e5aSoYUMixeic5Re0PIpNEu2dssf5/KlLyuJECGrp
+ yKQkCykE0eHIKO8kuwI62BaB26jVdpfRTKWNqbbk/w2caqdD1Xhls5qpHCZTWHRv8GO8ZTOLjEOVqD
+ Cnnj0OkWvv2VZSh7AC7SvSUWdRdEzj5HxhRcnt6galN9n7N1PahrLxQvhD+A==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -119,25 +117,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for RNG on newer SoCs which shares the
-RNG hardware between different Execution Environments (EE).
-
-Also enable it by default to fill KASL seed when running Linux.
+Enable the MSM RNG driver by default with the associated
+command, this will fill KASLR seed when booting Linux.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Neil Armstrong (2):
-      rng: msm: add support for newer Qualcomm hwrandom IPs
-      configs: qcom_defconfig: enable RNG driver and command
+ configs/qcom_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
- configs/qcom_defconfig |  3 +++
- drivers/rng/msm_rng.c  | 13 ++++++++++++-
- 2 files changed, 15 insertions(+), 1 deletion(-)
----
-base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
-change-id: 20241125-topic-sm8x50-rng-714cd0012391
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index ea0dd3e58018c8bf08e4a455a47e29cf1bbd3c60..fa631ea4976a2c38494832b196c60fd127288cc4 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -34,6 +34,7 @@ CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_CAT=y
+ CONFIG_CMD_BMP=y
++CONFIG_CMD_RNG=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_LOG=y
+ CONFIG_OF_LIVE=y
+@@ -96,6 +97,8 @@ CONFIG_PMIC_QCOM=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_QCOM_RPMH=y
++CONFIG_DM_RNG=y
++CONFIG_RNG_MSM=y
+ CONFIG_SCSI=y
+ CONFIG_MSM_SERIAL=y
+ CONFIG_MSM_GENI_SERIAL=y
 
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
