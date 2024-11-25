@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D5DCD3B7CA
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F017BD3B7CB
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 00:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56201895E6;
-	Mon, 25 Nov 2024 01:58:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A8B7B8995B;
+	Mon, 25 Nov 2024 01:58:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XHAp4pUd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CZNCD5Js";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBBB18929F; Mon, 25 Nov 2024 01:58:34 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id 1CC648961C; Mon, 25 Nov 2024 01:58:38 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C5E98952A
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:58:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C94CD8929F
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:58:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7f43259d220so2793630a12.3
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:58:32 -0800 (PST)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-723f37dd76cso3681399b3a.0
+ for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 16:58:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732496311; x=1733101111; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732496314; x=1733101114; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gz7yp+vvFXRGfhQ088k5HGimD+NNGxnDNN80AafH1l8=;
- b=XHAp4pUd7K9a+gDTYEg5dS9i5ayxeGtBam+Q6KvsJNV8do7hfycQd+JwAaZ0oifnKZ
- QCmAN17td70bvat0muCgD8CXFDNw3v0lur83cxPYPML0ESDjhbHnK7xKDmU239DYn4cc
- WA8hMrBTY2q0OFlEUCgy6qIOM64ekjAo77hdmydjZqolauT3LYk39RIwXew7y+yKvi+D
- aCf2C9Y14ekWRk1rPQq0LPWPVEINATPdncRZmgPsLedvOqACHlgdU+kpAMaQBRWX9c2u
- NM1D1wTNg4WubQoEig5x/EtyEJ92r+T5xBGYgjfi2kLP6PIl2gIRd/WIPA4kxeQwbMqH
- I4WA==
+ bh=UCL0sc6dScbywI7CnFt+u28w+AOTlXjqKi0BjsYM188=;
+ b=CZNCD5JsOwOCdnSPljeuwBKLqKpMcm4aJw24CuFpWaJWE+Mc1lFMuXyyxfYNGLgxXn
+ nZ15w2uH+LCX28j7MKgo19+GOsVuniQwD9qXsvpHZh+yB9jg6CE24JrT+ttsRFrf4Xxa
+ /E8+iF5IywJmyFHz4TGWvlsP9epjoBJvlIv17FgQIfvENQibsssKekHUVGHRaTo9Xdfh
+ sD0eb2AYCRZwO2m+hrAAySJOaRSqg14ujge2izJ7K7XEsPdYGheouElVd3YSkJY0pMYz
+ jnTP6cjdDa9n8EZ9vaLrgK/UkGXPaS+cUBJqhaAQGErrpQSaK8f/sF0YKNo1+6J78Vxq
+ 9ZEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732496311; x=1733101111;
+ d=1e100.net; s=20230601; t=1732496314; x=1733101114;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gz7yp+vvFXRGfhQ088k5HGimD+NNGxnDNN80AafH1l8=;
- b=qtDpXRCG3MoTx04+3eFzWjRfhJLBG1YJhWDQz8N4jcA27xufmBQN+XQ/z2YwXqSDK+
- SXpj0Q8PBmoRSJIyrABKLkAYfLf/ggsaOUdtmd6Fvne0dq/CmVrMafsamsotDrmn5fMa
- FVxpBg/Kk9czK8ecE2no3SHTpd3TpVqOXK9FG3xkcSv6Wk4czVAcYJTdy1d8zCQ6uyio
- IRireZbaAg8CHq3srjwsxV5LE5guntBkwKDOjJkPdhR4zLTgTA5s3Bz+kKNTJFKPYWwo
- X6j6SiE8I7geemqL6yd6R7qlnBVZHqsGR2KNxXd8odUYlI8yg+EotQH6TG0lJk0JdNqi
- lENg==
-X-Gm-Message-State: AOJu0YxH5JRoZWy1JPq3qpEjx/YVDW7ra68j8jNsVxRQ5UdqW5ROTlEi
- /IlVHjvfvuiLkz8XPG3seZc2IWCSfwi24BykTEidyaTFfTuSgfxNWGeIU1DvWeo=
-X-Gm-Gg: ASbGncuCNDsaRG4bn9RNEttAFm2iMbyoOjCWR+LaCcpk5W4iD/+WtfFspqzgF6tuQ/7
- yXbS7J8ShtrxF5PI1zxvV03yLVazlNVrBiIPMO4Ss0aMZZG8xkqQP8SPDYYnBtAamz1/ACcTcGh
- BDyATrzWTGew2e/EoJurff7SZQgSSaKIBvPkKJlRSKdRGQwn+nrzwTcV5OFKxqc6+ImNnR0vtBo
- faanJVqXKfeTsSoZchFsGJWLJYuQani2NxV1+IeojG1
-X-Google-Smtp-Source: AGHT+IEboaeQ5SHnLld3ZL2dFDc06mTTJS2dF2TXoo1Vfe76z6e76gTH3QrqV2BjSof49HtB9Pqhow==
-X-Received: by 2002:a05:6a20:1582:b0:1d4:fc66:30e8 with SMTP id
- adf61e73a8af0-1e09e3f0006mr15976086637.10.1732496311053; 
- Sun, 24 Nov 2024 16:58:31 -0800 (PST)
+ bh=UCL0sc6dScbywI7CnFt+u28w+AOTlXjqKi0BjsYM188=;
+ b=BXgRKEqQ8OyAZ682jDwCGOeObU4izaAUvgRvq4kGJmiVQwyl094wCD3cjgtBSGMqog
+ pLiXRKtJu9V2ekM3VPaSBlTH4V8Mtpzv43GUyavolOWT/reh4NgRZkjAgCELn3RfztUz
+ DLfOLsVXWn/b8vRCO3plsPvExbYvFH6XA0m6qjBuEGgaPFibNAFvGP9RZlzWmx+hy6td
+ J5pKALjyyk/vJ5DNxm7IpLyuy6BxV9PGRDzQ3vPF1nhYqABw8Q4wBLxTs6jw5HdItB+n
+ 9vVqkfmxCH3bwHzz49cTeV+7Qs3/lvwPsHg4KBYIkwizVsyPq/DLfgLEtZGYUjLahR81
+ 8aLQ==
+X-Gm-Message-State: AOJu0YyuE5f9slUawr0o+TCsFOmG+psbVh5s2hzCNg7HfFmlLPbn1SsM
+ fOkBVnHfvl0OCkhAQZ9rmpM2jJo7NgDIRJcQDLKsHw83r7vqxhHr5G+dnsLmCjk=
+X-Gm-Gg: ASbGncspqxTQbWesSO1JT7h0V00g8zKgtDQ7cMNlVNhzPktSuJrjSP2CgYRTTAAMOh8
+ yIQ3AUfByMKr+6lo60NT1k5CxM0M7OgXZRkTJsjxw8PaJw9MiVPwWw8edcCTE6QH+YrQ4+a/xb7
+ ZWB4t98HmXaFtBnIQwTMiSb/L1KGII7SNA5HOIZqnVeBJJolosWzTBojgS7UlCYOhWTfaZX53aw
+ 3jE6S3uex6uQiR6V9U67PPiS8XPz1397sTyL0Ftsm/a
+X-Google-Smtp-Source: AGHT+IGGRK7gmOhbDy74Jl7kJmEMM3YYnD593nU33J6H9lV9zJBfbwdNbwV1+XHLPIuARCKuD4DUMA==
+X-Received: by 2002:a05:6a20:8426:b0:1db:d8a5:7c82 with SMTP id
+ adf61e73a8af0-1e09e3a370cmr15372366637.5.1732496314138; 
+ Sun, 24 Nov 2024 16:58:34 -0800 (PST)
 Received: from adriano.. ([186.11.57.125]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724de47955asm5377793b3a.65.2024.11.24.16.58.28
+ d2e1a72fcca58-724de47955asm5377793b3a.65.2024.11.24.16.58.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Nov 2024 16:58:30 -0800 (PST)
+ Sun, 24 Nov 2024 16:58:33 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v5 03/14] efi_loader: device_path: add efi_dp_from_ipv4
-Date: Sun, 24 Nov 2024 21:58:03 -0300
-Message-ID: <20241125005814.236669-4-adrianox@gmail.com>
+Subject: [PATCH v5 04/14] efi_loader: add IPv4() to device path to text
+ protocol
+Date: Sun, 24 Nov 2024 21:58:04 -0300
+Message-ID: <20241125005814.236669-5-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241125005814.236669-1-adrianox@gmail.com>
 References: <20241125005814.236669-1-adrianox@gmail.com>
@@ -96,83 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add efi_dp_from_ipv4 to form a device path from an ipv4 address.
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
+Implement Ipv4() node support in the device path to text protocol.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-Changes in v5:
-- Add function description to efi_dp_from_ipv4
-- Allocate ipv4dp in the stack
-- Make efi_dp_from_ipv4 static
-- Remove u-boot log messages inside efi routine
-- Change (void *)(unitptr_t) to char *
+(no changes since v2)
+ lib/efi_loader/efi_device_path_to_text.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-Changes in v4:
-- Fix memcpy mistake
-
-Changes in v3:
-- Remove some unnecessary void* casts.
-- Change sizeof(struct efi_device_path_ipv4) to sizeof(*ipv4dp)
-  in efi_dp_from_ipv4.
-
- lib/efi_loader/efi_device_path.c | 43 ++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
-
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index ee387e1dfd..96e72f72fc 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -974,6 +974,49 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
- 	return start;
- }
+diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
+index 0c7b30a26e..481a9712d9 100644
+--- a/lib/efi_loader/efi_device_path_to_text.c
++++ b/lib/efi_loader/efi_device_path_to_text.c
+@@ -8,6 +8,7 @@
+ #include <blk.h>
+ #include <efi_loader.h>
+ #include <malloc.h>
++#include <net.h>
  
-+/**
-+ * efi_dp_from_ipv4() - set device path from IPv4 address
-+ *
-+ * Set the device path to an ethernet device path as provided by
-+ * efi_dp_from_eth() concatenated with a device path of subtype
-+ * DEVICE_PATH_SUB_TYPE_MSG_IPV4, and an END node.
-+ *
-+ * @ip:		IPv4 local address
-+ * @mask:	network mask
-+ * @srv:	IPv4 remote/server address
-+ */
-+static struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
-+					 struct efi_ipv4_address *mask,
-+					 struct efi_ipv4_address *srv)
-+{
-+	struct efi_device_path *dp1, *dp2, *pos;
-+	struct {
-+		struct efi_device_path_ipv4 ipv4dp;
-+		struct efi_device_path end;
-+	} dp;
+ #define MAC_OUTPUT_LEN 22
+ #define UNKNOWN_OUTPUT_LEN 23
+@@ -170,6 +171,28 @@ static char *dp_msging(char *s, struct efi_device_path *dp)
+ 
+ 		break;
+ 	}
++	case DEVICE_PATH_SUB_TYPE_MSG_IPV4: {
++		struct efi_device_path_ipv4 *idp =
++			(struct efi_device_path_ipv4 *)dp;
 +
-+	memset(&dp.ipv4dp, 0, sizeof(dp.ipv4dp));
-+	dp.ipv4dp.dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+	dp.ipv4dp.dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_IPV4;
-+	dp.ipv4dp.dp.length = sizeof(dp.ipv4dp);
-+	dp.ipv4dp.protocol = 6;
-+	if (ip)
-+		memcpy(&dp.ipv4dp.local_ip_address, ip, sizeof(*ip));
-+	if (mask)
-+		memcpy(&dp.ipv4dp.subnet_mask, mask, sizeof(*mask));
-+	if (srv)
-+		memcpy(&dp.ipv4dp.remote_ip_address, srv, sizeof(*srv));
-+	pos = &dp.end;
-+	memcpy(pos, &END, sizeof(END));
++		s += sprintf(s, "IPv4(%pI4,", &idp->remote_ip_address);
++		switch (idp->protocol) {
++		case IPPROTO_TCP:
++			s += sprintf(s, "TCP,");
++		case IPPROTO_UDP:
++			s += sprintf(s, "UDP,");
++		default:
++			s += sprintf(s, "0x%x,", idp->protocol);
++		}
++		s += sprintf(s, idp->static_ip_address ? "Static" : "DHCP");
++		s += sprintf(s, ",%pI4", &idp->local_ip_address);
++		if (idp->dp.length == sizeof(struct efi_device_path_ipv4))
++			s += sprintf(s, ",%pI4,%pI4", &idp->gateway_ip_address,
++				     &idp->subnet_mask);
++		s += sprintf(s, ")");
 +
-+	dp1 = efi_dp_from_eth();
-+	dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)&dp, 0);
-+
-+	efi_free_pool(dp1);
-+
-+	return dp2;
-+}
-+
- /* Construct a device-path for memory-mapped image */
- struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
- 					uint64_t start_address,
++		break;
++	}
+ 	case DEVICE_PATH_SUB_TYPE_MSG_USB_CLASS: {
+ 		struct efi_device_path_usb_class *ucdp =
+ 			(struct efi_device_path_usb_class *)dp;
 -- 
 2.43.0
 
