@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E911D58D78
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 18:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B255D58D78
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 18:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1A889A5E;
-	Mon, 25 Nov 2024 19:17:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35CB789A69;
+	Mon, 25 Nov 2024 19:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="m5Z+Qo0v";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="pGO9Gxsi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DBFC89A5E; Mon, 25 Nov 2024 19:17:07 +0100 (CET)
+ id ABCBB89A61; Mon, 25 Nov 2024 19:17:07 +0100 (CET)
 Received: from PA5P264CU001.outbound.protection.outlook.com
  (mail-francecentralazhn150100000.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:da0a::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE7C489A5E
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 19:17:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A99D688CED
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 19:17:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r4DFCkfB0xQ9TP5tFODUGVC43MhFgB6GB9BrZjaF3nBThdip1wOmVxISQOL4YePL4OrBUV19fBdKhEjiE054Xl9GRjSU1Rf/4DjT05mBbNNUPFo/V1Sp2/XU1cr96z3dSSrryf4QzIpd2q+IgeH9It0QNsUIcX6/nofjHileiMu63TG9rB5p3w8ULVYhpsFGSl543GQv+a/M14GbAiyPs3WaCby7I1oNzxd3qBuJ71Ft/7CUw121XWWGkt/xBqGBPq3wgC9qhFU2KZuoSY5TTRZO6kZ9SUEnZVWdXFixCWW/1garYPWO3RoYaYypcifd64w33b3ONwdXDPy73kpO4A==
+ b=X4ZSoO832Ffw4W/l1vG+406I4heetzjRRpguImeaaV8pQ6LUCvkpkXwKr22QN2eFnty2sICNpilxM9ZYINNWUAfruw5sBjurk9JXx77dSgO8xzm9xNVAIrCdL7pAw9I9+nuHmJWyQTl54dDrfEmTSxsKDXWjORSqJjvCu3Duiw5lUtslD/CQ2rBRAjjhxKtZtx8u+RPTlY8hZ5au5/tij/20SzsLreLyx359FevUPAsqHFrex7uXAlItycfBoMV2SJeB4s2T8k98WiGJXIHBx7f2GA4iQYbNawSVZehfVOenq3l4YTKf54xIaJCrrFgxjwIeV66d63Odu7fPwNQAkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bJ2V+YcUOa1FtkDvPomweoakyWiivRrX/sqgwAQXp+A=;
- b=smZAr4rMLGzKb8jfibzYjPTJwOIenQ5cqlZIvwQt+yoHk9yJtpBO2z/UecAf5fAu2B4jB+TzYI+KFGd2T/VD704uG5jK69ThYv8mptOY1+jM3Zh254EccVWNukexWbhv63sydeTm6scr0fAxb6aQaBKFjj+R6uLxFId461UNcmXmeA+baqe5+IlkDOOgqbtJbCcAfXyvUCFwSm2NkB54QrQJO5qgTqTNRaoxyzqMSwuipngjoITgL+Huu/upJyDVJyCnDoFzCdYr4sk9M32Bam24DerD6/0e1a7zE3ziApI577V6l/GNt3MOT/VoNIzt+m2CghKYwNd3TQtHWZvkMg==
+ bh=FVTr7ztI1B3rNIku+X7eAdKCZM9LadqjyQM0Y/OztuM=;
+ b=ZrPRP3exZ5+YXF8YR3POYPgX7+VWu0zDAOBwdKj3enTb+9G5gh4W5YN8KuDlmyIhr7A0kfZAa66NTzgIbOwxonlc7FApqsONMpH+TK7sX71MVW3lDVhG9PuuqZBfnY/bT9Fgq3z5iETDcWt3qnzp6fM818kXNKWSfQnXDmyc9U1Wy6g5dYpyZQeiTx96Jg0AYlV6UFm43bG3ZDF3pctb7WuqKee4X4QFyBk3HNMaozil0CrkqPd3UAbNDoRxUYFQOZXP/09fQDmjNWreLXwFGOCZyAUlGaD2ncrNI8KbQUshG1RYPi8+zdnUCS/gcXepyuC9QgqCAZDraYDZLKMqLw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bJ2V+YcUOa1FtkDvPomweoakyWiivRrX/sqgwAQXp+A=;
- b=m5Z+Qo0vFpmL84OVkjma4lnVAiIKSSUFbXvnEcZL+vtHmY6Dm59qE7ZzA9Rnpuv2PxMJ1h86Wi5SvGjpG0xIDZ8OonjeEGLSDTGJrP2RPA8sAPlaQPRtZ6VUJKvv+V6rtf8YkzlCRo1U57FeHQvq7v3kJ44n9JrVAEc2MgrMM/+dXl+Th3J53G+S/FscprIkcZa9RPA5qRDNijU7WARXOHJi9J8k+t8I2ivg8v/3HGUdCcGdA1Tgg7MaRVP1auMv6AhnQQVwNR3w+p+/Kz3UF/ZT2ctOkyt4c06ltId86zU/h3hhyKsQHnF/KWUIs7kg8unr7ZofLDuPTbtNt8Ak6A==
-Received: from PA7P264CA0383.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:399::19)
- by MR1P264MB2643.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:38::11) with
+ bh=FVTr7ztI1B3rNIku+X7eAdKCZM9LadqjyQM0Y/OztuM=;
+ b=pGO9GxsiWu0mn/y7g6qQActuoDx/TR2LCzXTYTTwhZ6IGb6uyr+7AX9gGOnuRpnbp343MBSzf0VAHST+/vGZkKQILEBEQzHDdKLwC5bl6ANu1MKK12udvB/Yn1quFqb2M8ckzo3dUa5nTV8LcWs0ZJfF3w1p4H19u5fqukdM1RYyNPd19fUcfzyDCfu4LGmwmDRxKgNNbMErKQIYkbH+ng7OnnsqAPbuZsXhHih96EHej1YAuCkXKu6WSqDoT6lktr3jYgHhaIgx6WTT3ouWQ2zCe4jfin0BrFfNWuZxuFtU9ECV3BcVbKAX5YM8V5DI8NMR8+lIPNuzl9ZU1VfRRQ==
+Received: from PA7P264CA0381.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:399::20)
+ by MRZP264MB1797.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:9::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.21; Mon, 25 Nov
  2024 18:17:01 +0000
 Received: from PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:399:cafe::2) by PA7P264CA0383.outlook.office365.com
- (2603:10a6:102:399::19) with Microsoft SMTP Server (version=TLS1_3,
+ (2603:10a6:102:399:cafe::eb) by PA7P264CA0381.outlook.office365.com
+ (2603:10a6:102:399::20) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8182.20 via Frontend Transport; Mon,
  25 Nov 2024 18:17:01 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -65,16 +65,16 @@ Received: from proxy.softathome.com (149.6.166.170) by
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.12
  via Frontend Transport; Mon, 25 Nov 2024 18:17:01 +0000
 Received: from sah2lpt245.. (unknown [192.168.72.99])
- by proxy.softathome.com (Postfix) with ESMTPSA id 35D492027B;
+ by proxy.softathome.com (Postfix) with ESMTPSA id 86CE720323;
  Mon, 25 Nov 2024 19:17:01 +0100 (CET)
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 To: u-boot@lists.denx.de
 Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org,
  Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH 1/2] tools: u_boot_pylib: Allow to append input directories to
- indir
-Date: Mon, 25 Nov 2024 19:16:53 +0100
-Message-ID: <20241125181654.1182646-2-paul.henrys_ext@softathome.com>
+Subject: [PATCH 2/2] tools: binman: etype: fit: Append DTB directory to the
+ list of input directories
+Date: Mon, 25 Nov 2024 19:16:54 +0100
+Message-ID: <20241125181654.1182646-3-paul.henrys_ext@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241125181654.1182646-1-paul.henrys_ext@softathome.com>
 References: <20241125181654.1182646-1-paul.henrys_ext@softathome.com>
@@ -82,52 +82,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|MR1P264MB2643:EE_
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|MRZP264MB1797:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 1652363f-030a-405a-7388-08dd0d7d5ba4
+X-MS-Office365-Filtering-Correlation-Id: 9b0eb044-e1ec-4f4e-22be-08dd0d7d5bd4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|36860700013|34020700016|376014|82310400026|12100799063;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?E9LGrubly3n78Ac690bvflf3y/8hGV7P2WgAk4ubfj8001xmsGBBlNGDRv9e?=
- =?us-ascii?Q?yI1niY2K/fb+w3/c1OLjY01QrOLLg+kDNtvwW5/nowExdvetW83hIdQHm7sD?=
- =?us-ascii?Q?2y7Jg5lJn4PgLSy/UsAWeQnnZmWScUkvq+UxkIdK9kJxeW4xOphg55jmuo8l?=
- =?us-ascii?Q?tWUVJlKE4h1Xhnbt78gzSa21GKSEmJ8AtL9b0D7j7tRyWeMC6ge0lNwCJFBE?=
- =?us-ascii?Q?4UtL6CsORH2MYDSOOL40UDz8jlWF6kK1WWdG1uTbIsZ9yi0o8TZ35FahsimS?=
- =?us-ascii?Q?LLeyaWcTfr7ji5jHUUz/NdzAh7NoeRoRoDNqWd9wAiPPM9A6BcX1FlLRtX82?=
- =?us-ascii?Q?IjYBwnrtI3xUpNk5NTNJOXfe4BM2Uk6puPXYL8lRKhOLMfoBMjPzhj/UlL2U?=
- =?us-ascii?Q?4PPxYBnuNSVsl+W6JQMYv68a5PJUA8MR0p8swhwspxndgVBhlgGdzosr9euY?=
- =?us-ascii?Q?fYK0ET0DrX2q89PAh8VWbcP/DsAiXr3HPHE00ES9lMA55PrpFMibnpLm9Oqe?=
- =?us-ascii?Q?c+zd+CMG1CEiGLySjqE8xi7PA01TgFHV6hvwlbSly/1pXmgl3HGNDbVRw5Ob?=
- =?us-ascii?Q?Po05Kh3f78OtFl/2BxXLzddsTIVrcyIJZWB4QVOqfW36OtU/nLT4ku0srR30?=
- =?us-ascii?Q?u7lSUyOoiO8R5E4VgOk3wYVsp2fKPfdGRwb6i0KQwScjgNqMA8urszi2SC4t?=
- =?us-ascii?Q?JlWonlDZMvVwUfDxah5p/3xNsy0/6ArtKgXHQjnYuuM3KH8qBm/ik3NMqmPN?=
- =?us-ascii?Q?AOSawckZFacWRhpRHNG95GUZOR7DIJmpZjbF1zON/uXz1e1vuDCZVgy2zh6U?=
- =?us-ascii?Q?97RGvOExfLKFriNmxKkF4L6o1kxC8obn0N12GS13b/Oqyefku7DEP7dvfGFV?=
- =?us-ascii?Q?3vPmID6mURYvQmZofUHsRoszAYdTvi7Shnf1ro1C+O6WZNCG4EgMNpXtx9mZ?=
- =?us-ascii?Q?0hCJdYAtVeK4OvEhf12+iLHAzIzfy/3GNikKAIEv7dDfJsMDsp+U3r6okScE?=
- =?us-ascii?Q?pojG74ZC+5NfK+x1YcmydhLkC5Xn2KnpODkHXVrXDTGsQPRrepdNE5pQDw+G?=
- =?us-ascii?Q?FFEDZa2VKdzeUa4Kpj7iGQJysAPv2yscD8nPmnzG4W+8LsyDwMv2l4OO/NxW?=
- =?us-ascii?Q?MZvLlT82hbTKkhhA8CAhdioy1Tt9Q9Zwzp0ot6UhimvW/c58PBIbZUxDXsY7?=
- =?us-ascii?Q?j77blmi8swXEd4kIAklbOXjufT/6ScTcauP7UXErzSvturltv5eeSOW9LT7T?=
- =?us-ascii?Q?hQFHOsKtPJT9TJ82S6ZEOTpvS8SddHi6TC9INUc4RaOJMbk+bHdBIitbuPu1?=
- =?us-ascii?Q?BHgM4IGDQ3UxTXPtUm4bTWKHCRR7dv5SO0om4n9p/Umf4gRhrfR8JT8ps3jL?=
- =?us-ascii?Q?CTQjw3867yke7BPUHV7IT6/HlXBGVtJgSbRqro1T9n1m849jRX/dqFdj5xIz?=
- =?us-ascii?Q?Z0OWJqCEJldghtbvJ6/fO1x+Ln7cC32P?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nB7/tyVTe7M1jWltO2o6DQgV/aQ4nBsXkZ3tvYE78ioN83y/hgMxryE4EeQ0?=
+ =?us-ascii?Q?RDbd5hbBnusRu34XqZ0FoflPXWS/mR99613VZncFL+29jKxIiYM/jF2BMd81?=
+ =?us-ascii?Q?l70iO3uUpDBVlBRzfEzDRM4m6e/tzkB6KHNCjokCU4v+F8mLSDROcP3FVHH0?=
+ =?us-ascii?Q?1DlPv2LwrGjEudX8I/YEFuCy85kEe9JzXd4mritDFreXbrRwKsGE1eO0sN9j?=
+ =?us-ascii?Q?FQ0RakFTo4Y8PJTABqdXpz3ajcrrYoYjb1LOmWje2mGz4c6oFQgJTjzpHGmJ?=
+ =?us-ascii?Q?sJQ6xTxSwey1BU5YGWDvJQviPmIDYF8sJzRPpHmw8YQQ8OuuUIdQbxIHlaoJ?=
+ =?us-ascii?Q?R2VFSC6n2IuuvFQGmMzKmrBR28sEr3Zlrr3Jo/1oOeuH+3EhHvqn9LlaP/Mr?=
+ =?us-ascii?Q?NCd5xvIRYOfzj4kmBEJBBbuXa2J1OFQxm6il2SNh6/+al8Yn/tsZ3VlyvFQQ?=
+ =?us-ascii?Q?EM6qqmu/vD/4xfoygTiDElgE5P/JPX/tug34fczRQACITEADLTd76BVRbpXP?=
+ =?us-ascii?Q?tXRo4NU/WuQXbRfk5P4g3MU4ckRqL3WID9OKFZ7QYR5BwKJyF/aDpMawZ+IT?=
+ =?us-ascii?Q?uTXHg3vI/vL2py/RXeeO/nOiKxC2vIuvMA5gHTuzwxOaxTegebCuJigQLLqL?=
+ =?us-ascii?Q?2dx3UqIoULqivWF6ZfpSd6llTb3nQB/D8m90qEUSNS3xbwpkCM8xZJqcstos?=
+ =?us-ascii?Q?US1iOBrp1QDGRFFH/SIPCff+5MNTC41S+FOa6xzc+j81lIBZVYYmvktQtV6v?=
+ =?us-ascii?Q?fl1n07qPXKqJRafZVGuP5YG4iqtHOYt0nveo1d4a+l1gghqRMvPcB8IrCFbS?=
+ =?us-ascii?Q?ohb5v+uO+DDCxJUeZixHxVBRICxQk+DC5UUgNeDYK4GWz0hYtmjN4VmlSyJX?=
+ =?us-ascii?Q?mKg1lC+LBhJXwxQb60emU1u++jR6K9ydNzJG4AlD+nqnftiRGVPjA2xC4Qr2?=
+ =?us-ascii?Q?B3kSGmTckVKKlC9ntPTWTz0CDZgD6H7CaEXMIioJ2K/8D6A0XBnnXNBu7nwW?=
+ =?us-ascii?Q?RHqsWsKR7f71u8K/QV1yDTn6Mesf7DFNtMW+0BhmXJZfrQ46vCmx/UgOTmEX?=
+ =?us-ascii?Q?ICzoIrJHnGI5Mxf8zzC9gOVsmnRjABJprTSn/8Z9LGvgt3sVrdwzb4ympuzX?=
+ =?us-ascii?Q?4gepVNpVw1CfoO3L8Dy4byTprPtuNZPgtSSQ8Tt4zvYTmHQqc0MK0WDpdKyj?=
+ =?us-ascii?Q?UAlgqb1oooRIxSWHWkZQ26CYUHSiJpcDg8meoyzdkAzYe/Zlnq0iJCyrd3+m?=
+ =?us-ascii?Q?AEaYfxB3j4E8ax96/JP7dWX0zOqBy8FZ32szMK3tdVc0cFXCbxmpWoLfaMnC?=
+ =?us-ascii?Q?t7p6ERQTJjGZZXStAnMl4A0SxzJFUhtTVAIGuQjqbT79BpN0q/oli3V+MDSh?=
+ =?us-ascii?Q?bDsYjeXiSp8k4xphFBje1ZCZNBtW748qUliiCabpTA5qQDEBwWxPXCoh/ORH?=
+ =?us-ascii?Q?v1vXDOioUdozlBkmE117NxLfbsAk1Egn?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(1800799024)(36860700013)(34020700016)(376014)(82310400026)(12100799063);
  DIR:OUT; SFP:1501; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2024 18:17:01.5586 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1652363f-030a-405a-7388-08dd0d7d5ba4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2024 18:17:01.8711 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b0eb044-e1ec-4f4e-22be-08dd0d7d5bd4
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
 X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB2643
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRZP264MB1797
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,40 +144,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-append_input_dirs() can be used to append a list of input directories to indir
-global list.
+When specifying a directory containing DTBs with 'fit,fdt-list-dir', it can be
+handy not to have to also specify this directory to the input directories of
+binman with '-I' option and use the method tools.append_input_dirs() append it.
+This avoids to have to specify the DTB directory in both the device tree
+provided to binman and through '-I' option to binman.
 
 Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 ---
- tools/u_boot_pylib/tools.py | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ tools/binman/etype/fit.py | 2 ++
+ tools/binman/ftest.py     | 5 ++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/tools/u_boot_pylib/tools.py b/tools/u_boot_pylib/tools.py
-index 187725b501..0499a75526 100644
---- a/tools/u_boot_pylib/tools.py
-+++ b/tools/u_boot_pylib/tools.py
-@@ -123,6 +123,22 @@ def set_input_dirs(dirname):
-     indir = dirname
-     tout.debug("Using input directories %s" % indir)
- 
-+def append_input_dirs(dirname):
-+    """Append a list of input directories to the current list of input
-+    directories
-+
-+    Args:
-+        dirname: a list of paths to input directories to use for obtaining
-+                files needed by binman to place in the image.
-+    """
-+    global indir
-+
-+    for dir in dirname:
-+        if dirname not in indir:
-+            indir.append(dirname)
-+
-+    tout.debug("Updated input directories %s" % indir)
-+
- def get_input_filename(fname, allow_missing=False):
-     """Return a filename for use as input.
+diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+index 343094a16e..803fb66ea8 100644
+--- a/tools/binman/etype/fit.py
++++ b/tools/binman/etype/fit.py
+@@ -477,6 +477,8 @@ class Entry_fit(Entry_section):
+             self._fdt_dir = fdt_util.GetString(self._node, 'fit,fdt-list-dir')
+             if self._fdt_dir:
+                 indir = tools.get_input_filename(self._fdt_dir)
++                if indir:
++                    tools.append_input_dirs(indir)
+                 fdts = glob.glob('*.dtb', root_dir=indir)
+                 self._fdts = [os.path.splitext(f)[0] for f in sorted(fdts)]
+             else:
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 4a2a9f2288..a553ca9e56 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -4285,14 +4285,17 @@ class TestFunctional(unittest.TestCase):
+         entry_args = {
+             'default-dt': 'test-fdt2',
+         }
++        extra_indirs = None
+         if use_fdt_list:
+             entry_args['of-list'] = 'test-fdt1 test-fdt2'
+         if default_dt:
+             entry_args['default-dt'] = default_dt
++        if use_fdt_list:
++            extra_indirs = [os.path.join(self._indir, TEST_FDT_SUBDIR)]
+         data = self._DoReadFileDtb(
+             dts,
+             entry_args=entry_args,
+-            extra_indirs=[os.path.join(self._indir, TEST_FDT_SUBDIR)])[0]
++            extra_indirs=extra_indirs)[0]
+         self.assertEqual(U_BOOT_NODTB_DATA, data[-len(U_BOOT_NODTB_DATA):])
+         fit_data = data[len(U_BOOT_DATA):-len(U_BOOT_NODTB_DATA)]
  
 -- 
 2.43.0
