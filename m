@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB852D3B7F6
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:39:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF76D3B7F6
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:39:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B86558965B;
-	Mon, 25 Nov 2024 10:39:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C435892FB;
+	Mon, 25 Nov 2024 10:39:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="WE9UwgW/";
-	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.b="WE9UwgW/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="CayhLCm+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 433F288EC4; Mon, 25 Nov 2024 10:39:12 +0100 (CET)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:2])
+ id E9B8689A06; Mon, 25 Nov 2024 10:39:31 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2477F890D9
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:39:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id CE74988EC4
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:39:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ldevulder@suse.com
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 991211F381
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:39:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1732527549; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=M38OQQgKrbkd/WS9zAGga/hAUZHcgFm18Lvo1w5Cch4=;
- b=WE9UwgW/Ri+9fFD5Lfnm0cBDbI4JYrsi1JROcJ49+CuGfHWMYRsTzRwPWv2l+vF/AWyVH2
- 4WjxSzwa6so+pBv03xUNWE+daNgkEvvt5cvKimxumpDMlt/VBs5VU99KjTUmxxhESOatkS
- ETyGHx+Gn9hG1u66kc4A0G1geVswZTg=
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.com header.s=susede1 header.b="WE9UwgW/"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1732527549; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=M38OQQgKrbkd/WS9zAGga/hAUZHcgFm18Lvo1w5Cch4=;
- b=WE9UwgW/Ri+9fFD5Lfnm0cBDbI4JYrsi1JROcJ49+CuGfHWMYRsTzRwPWv2l+vF/AWyVH2
- 4WjxSzwa6so+pBv03xUNWE+daNgkEvvt5cvKimxumpDMlt/VBs5VU99KjTUmxxhESOatkS
- ETyGHx+Gn9hG1u66kc4A0G1geVswZTg=
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7B1B113A73
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:39:09 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id QMMNHL1FRGeoZQAAD6G6ig
- (envelope-from <ldevulder@suse.com>)
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:39:09 +0000
-From: Loic Devulder <ldevulder@suse.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH 1/1] configs: visionfive2: enable CONFIG_DISTRO_DEFAULTS
-Date: Mon, 25 Nov 2024 10:39:02 +0100
-Message-ID: <20241125093908.50903-2-ldevulder@suse.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241125093908.50903-1-ldevulder@suse.com>
-References: <20241125093908.50903-1-ldevulder@suse.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.net;
+ s=s31663417; t=1732527561; x=1733132361; i=wahrenst@gmx.net;
+ bh=jGzPq2Fs3GPdH/SlcGJqbXgxWrcuaqXGeVXNcSud6ZY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=CayhLCm+lLU/UHZfdkMMMAuv1sShcr3GpeFbGEGvjQqTQDFaJaZbmaJAPIAABosX
+ y3nTIolXvda45tOG+ftRDQ/Qdq2TzMLcXMwTXtdKxs/SYSNhuOE2j4HiDwh2xSTnk
+ U1+mh+fqnEIpLd9xai28bZp3Pfm8YPCN+sDpaEGZcX44ck359u6uZVFh6nmByggZL
+ dHbWNK3SaKR8LwG4Ho4evRqU9i8bKMHroQ2HMIImbaTnNDStiO+uHoz3tOFcY+pOY
+ yJZEKtyBb3cuJ/PNaLZR6FeUipsPPlcl9vOVADwDxvXUmFCA5GNzKcIY9GYRvncw8
+ 04cN7q87xDnqGMaA+Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.1.105] ([37.4.251.153]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N79yQ-1tlWvE3xsK-00umJZ; Mon, 25
+ Nov 2024 10:39:21 +0100
+Message-ID: <8c8607a0-f8b0-438e-886e-a637a561366c@gmx.net>
+Date: Mon, 25 Nov 2024 10:39:19 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 991211F381
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[99.98%];
- MID_CONTAINS_FROM(1.00)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_MISSING_CHARSET(0.50)[];
- R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[];
- PREVIOUSLY_DELIVERED(0.00)[u-boot@lists.denx.de];
- RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- ARC_NA(0.00)[]; FROM_HAS_DN(0.00)[]; RCPT_COUNT_ONE(0.00)[1];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- RCVD_COUNT_TWO(0.00)[2]; TO_DN_NONE(0.00)[];
- RCVD_TLS_ALL(0.00)[]; DKIM_SIGNED(0.00)[suse.com:s=susede1];
- MIME_TRACE(0.00)[0:+]; DKIM_TRACE(0.00)[suse.com:+]
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/3] board: phytec: imx93: Add eeprom-based hardware
+ introspection
+To: Christoph Stoidner <C.Stoidner@phytec.de>,
+ PHYTEC Upstream <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Yannic Moog <Y.Moog@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>,
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "festevam@gmail.com" <festevam@gmail.com>,
+ Andrej Picej <andrej.picej@norik.com>, "sbabic@denx.de" <sbabic@denx.de>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>,
+ Primoz Fiser <primoz.fiser@norik.com>,
+ "m.othacehe@gmail.com" <m.othacehe@gmail.com>
+References: <20241120163143.127862-1-c.stoidner@phytec.de>
+ <20241120163143.127862-3-c.stoidner@phytec.de>
+ <371c6302-438b-45b6-944b-d513f74f38a5@gmx.net>
+ <05db2b94c4eb28aefc33a13c6fb2fa324eb62ee7.camel@phytec.de>
+Content-Language: en-US
+From: Stefan Wahren <wahrenst@gmx.net>
+In-Reply-To: <05db2b94c4eb28aefc33a13c6fb2fa324eb62ee7.camel@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:SpTRGFKGaCUt9R9x1ayYHQ+Vr58qWoQRnomyYznvh6TE9CO1gOL
+ /1+P4P0nRcPzxCvPgI4nNCYt5izkJ3Ks0uRZdJxl+1P4vnhMsfaB5HdG8bIUhqGbJvoTEhc
+ qoUGuLgFy5z7xH0FZZ8nU+qN4u/XKM7wapB+LhUcZnvfZNOJOHyi7WoSBvJargVtSOM0+0M
+ QTEqeRTHmLY4DEI5lBRDA==
+UI-OutboundReport: notjunk:1;M01:P0:bTaoA65nrOw=;RbxB9FLtIBIR7S7BEFm9s5mZQqi
+ dMn4EAtYknocRXy8IaPfj8yCvZZtj14RQqBM3k9qt3TMEXN6OP/RwdcSKgFlYSfpXBtcAzuM0
+ hELf9kVB2Vrq/1Rr9fYU/KTMtSKtgg9Q3xb2x7glMXwNYIcitymEueiBaXRPHTAtZ7XVIzPUB
+ aMs1sIwGvjD3fCdeky96gl3E4EWIc1V5fqiddBvLYcal4JuT/IMIH2HP4DgVWtbwueo5SKP+1
+ Ad5vLm0q82oQdfyO/ZCvsU36AqnBfUCOVTVOKGcT45PMPlrSaFV16o1l4ZcQrx/bMK+q7FKvj
+ X7hKqBABOYgmq+9nyn2eLmS952h65ajZEeyWSUGAMl5FT6qWfPNhPq+d7Q4gFDTyLoOSZJu5Z
+ b1Suvk7ATha5YkYYnEIpEtYwYGjOegi9NqmiTEMdaCfNXuhe6TAejJ5sTNfnVwyuScbNkQf+5
+ KwqxbvXfHsjyGwf0swvztc6F7fsB9vq5rSvwfb6yQdlfIV3g6m40ABeE8XjIy3SYVYsOtyOqf
+ v0d2THKlCra9/E1ifxvx2MND3ASiAt92HQR0LqRoJSdIRQCdMxzEJTC1LWOwkKy2k2qva6rHI
+ KnDDbxF1fOwI93BsPn4JLXOr2j0HMLOjfAo+zf7SiUbjxywhjLgQX7cVhd6nULDdtTgkxD5OU
+ VAt/H+iLtmk5eVzUlI7VkPTlGIqw2RX0dcf+1KzwTRu+K4LRkv0+HWWOAZ7NhFdvT3mkydBKJ
+ 21O1IhKnK14zHgC/+GtTf/w33Mfa+a4dgLeCkymvUr3Wpf/8mERQ3lTZjGdzf0hxSD8ETAJut
+ SKvCXpRoY3xcyscTRYSGvO6NmG9MysNV6/zLnsPa8M77spU2LRdEHkuKrLO+45eSJImp0d6Gh
+ p5bKSnrFMLw64Vyr4/e/qn+A1S1Tdid5YC2D1wcrOIKEOldEGVzAn9/EG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,75 +101,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Supported boot device types are MMC, USB, SF and DHCP.
-
-Signed-off-by: Loic Devulder <ldevulder@suse.com>
----
- configs/starfive_visionfive2_defconfig |  1 +
- include/configs/starfive-visionfive2.h | 29 ++++++++++++++++++++------
- 2 files changed, 24 insertions(+), 6 deletions(-)
-
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 20f89ae6796..e817e63858b 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -41,6 +41,7 @@ CONFIG_SD_BOOT=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 debug rootwait earlycon=sbi"
-+CONFIG_DISTRO_DEFAULTS=y
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="nvme scan; usb start; setenv fdt_addr ${fdtcontroladdr}; fdt addr ${fdtcontroladdr};"
- CONFIG_SYS_CBSIZE=256
-diff --git a/include/configs/starfive-visionfive2.h b/include/configs/starfive-visionfive2.h
-index 049b0a06301..7f187307ffe 100644
---- a/include/configs/starfive-visionfive2.h
-+++ b/include/configs/starfive-visionfive2.h
-@@ -15,14 +15,29 @@
- 
- #define __io
- 
-+#ifdef CONFIG_DISTRO_DEFAULTS
-+#define BOOT_TARGET_DEVICES(func) \
-+	func(MMC, mmc, 1) \
-+	func(MMC, mmc, 0) \
-+	func(USB, usb, 0) \
-+	func(SF, sf, 0) \
-+	func(DHCP, dhcp, na)
-+
-+#include <config_distro_bootcmd.h>
-+#include <env/distro/sf.h>
-+#else
-+#define BOOTENV
-+#define BOOTENV_SF
-+#endif
-+
- #define TYPE_GUID_SPL		"2E54B353-1271-4842-806F-E436D6AF6985"
--#define TYPE_GUID_UBOOT	"BC13C2FF-59E6-4262-A352-B275FD6F7172"
-+#define TYPE_GUID_UBOOT		"BC13C2FF-59E6-4262-A352-B275FD6F7172"
- #define TYPE_GUID_SYSTEM	"EBD0A0A2-B9E5-4433-87C0-68B6B72699C7"
- 
--#define PARTS_DEFAULT							\
--		"name=spl,start=2M,size=2M,type=${type_guid_gpt_loader1};" \
--		"name=uboot,size=4MB,type=${type_guid_gpt_loader2};"		\
--		"name=system,size=-,bootable,type=${type_guid_gpt_system};"
-+#define PARTS_DEFAULT \
-+	"name=spl,start=2M,size=2M,type=${type_guid_gpt_loader1};" \
-+	"name=uboot,size=4MB,type=${type_guid_gpt_loader2};" \
-+	"name=system,size=-,bootable,type=${type_guid_gpt_system};"
- 
- #define CFG_EXTRA_ENV_SETTINGS \
- 	"kernel_addr_r=0x40200000\0" \
-@@ -37,6 +52,8 @@
- 	"type_guid_gpt_loader2=" TYPE_GUID_UBOOT "\0" \
- 	"type_guid_gpt_system=" TYPE_GUID_SYSTEM "\0" \
- 	"partitions=" PARTS_DEFAULT "\0" \
--	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"
-+	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
-+	BOOTENV \
-+	BOOTENV_SF
- 
- #endif /* _STARFIVE_VISIONFIVE2_H */
--- 
-2.47.0
-
+SGkgQ2hyaXN0b3BoLA0KDQpBbSAyNS4xMS4yNCB1bSAwOToyOCBzY2hyaWViIENocmlzdG9waCBT
+dG9pZG5lcjoNCj4gSGkgU3RlZmFuLA0KPg0KPiBPbiBEbywgMjAyNC0xMS0yMSBhdCAxMToxMiAr
+MDEwMCwgU3RlZmFuIFdhaHJlbiB3cm90ZToNCj4+IEhpIENocmlzdG9waCwNCj4+DQo+PiBBbSAy
+MC4xMS4yNCB1bSAxNzozMSBzY2hyaWViIENocmlzdG9waCBTdG9pZG5lcjoNCj4+DQo+IFsuLi5d
+DQo+DQo+Pj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9pbXg5My1waHlib2FyZC1zZWdpbi11
+LWJvb3QuZHRzaQ0KPj4+IGIvYXJjaC9hcm0vZHRzL2lteDkzLXBoeWJvYXJkLXNlZ2luLXUtYm9v
+dC5kdHNpDQo+Pj4gaW5kZXggNjg5N2M5MWY0ZC4uNzAyZDg2ZjRlMCAxMDA2NDQNCj4+PiAtLS0g
+YS9hcmNoL2FybS9kdHMvaW14OTMtcGh5Ym9hcmQtc2VnaW4tdS1ib290LmR0c2kNCj4+PiArKysg
+Yi9hcmNoL2FybS9kdHMvaW14OTMtcGh5Ym9hcmQtc2VnaW4tdS1ib290LmR0c2kNCj4+PiBAQCAt
+MTM5LDYgKzEzOSwxMyBAQA0KPj4+ICDCoCAmdXNkaGMxIHsNCj4+PiAgwqDCoMKgwqDCoMKgwqDC
+oGJvb3RwaC1wcmUtcmFtOw0KPj4+ICDCoMKgwqDCoMKgwqDCoMKgYm9vdHBoLXNvbWUtcmFtOw0K
+Pj4+ICvCoMKgwqDCoMKgwqDCoC8qDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICogUmVtb3ZlIHBpbmN0
+cmwgYXNzaWdubWVudHMgb25jZSB0aGV5IGFyZSBhZGRlZCB0byBpbXg5My0NCj4+PiBwaHljb3Jl
+LXNvbS5kdHNpDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKgcGlu
+Y3RybC1uYW1lcyA9ICJkZWZhdWx0IiwgInN0YXRlXzEwMG1oeiIsICJzdGF0ZV8yMDBtaHoiOw0K
+Pj4+ICvCoMKgwqDCoMKgwqDCoHBpbmN0cmwtMCA9IDwmcGluY3RybF91c2RoYzE+Ow0KPj4+ICvC
+oMKgwqDCoMKgwqDCoHBpbmN0cmwtMSA9IDwmcGluY3RybF91c2RoYzFfMTAwbWh6PjsNCj4+PiAr
+wqDCoMKgwqDCoMKgwqBwaW5jdHJsLTIgPSA8JnBpbmN0cmxfdXNkaGMxXzIwMG1oej47DQo+Pj4g
+IMKgIH07DQo+Pj4NCj4+PiAgwqAgJnVzZGhjMiB7DQo+Pj4gQEAgLTIxNSw2ICsyMjIsNDggQEAN
+Cj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5
+M19QQURfRU5FVDJfUkQzX19HUElPNF9JTzI3DQo+Pj4gIMKgwqDCoMKgwqAweDMxZQ0KPj4+ICDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoD47DQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqB9
+Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgwqAvKg0KPj4+ICvCoMKgwqDCoMKgwqDCoCAqIFJl
+bW92ZSBwaW5jdHJsX3VzZGhjMV8xMDBtaHogYW5kIHBpbmN0cmxfdXNkaGMxXzIwMG1oeg0KPj4+
+IG9uY2UgdGhleQ0KPj4+ICvCoMKgwqDCoMKgwqDCoCAqIGFyZSBhZGRlZCB0byBpbXg5My1waHlj
+b3JlLXNvbS5kdHNpDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKg
+LyogbmVlZCB0byBjb25maWcgdGhlIFNJT04gZm9yIGRhdGEgYW5kIGNtZCBwYWQsIHJlZmVyIHRv
+DQo+Pj4gRVJSMDUyMDIxICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKgcGluY3RybF91c2RoYzFfMTAw
+bWh6OiB1c2RoYzEtMTAwbWh6Z3JwIHsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgYm9vdHBoLXByZS1yYW07DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJv
+b3RwaC1zb21lLXJhbTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZnNsLHBp
+bnMgPSA8DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqBNWDkzX1BBRF9TRDFfQ0xLX19VU0RIQzFfQ0xLwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgMHgx
+DQo+Pj4gN2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqBNWDkzX1BBRF9TRDFfQ01EX19VU0RIQzFfQ01EwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+MHg0DQo+Pj4gMDAwMTM5ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEEwX19VU0RIQzFfREFUQTDCoMKgwqDCoMKgwqDC
+oMKgMHg0DQo+Pj4gMDAwMTM4ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEExX19VU0RIQzFfREFUQTHCoMKgwqDCoMKg
+wqDCoMKgMHg0DQo+Pj4gMDAwMTM5ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEEyX19VU0RIQzFfREFUQTLCoMKgwqDC
+oMKgwqDCoMKgMHg0DQo+Pj4gMDAwMTNiZQ0KPj4gQ291bGQgeW91IHBsZWFzZSBleHBsYWluIHdo
+eSB0aGUgcGluIGNvbmZpZ3VyYXRpb24gZm9yIDEwMCBNSHogb2YNCj4+IERBVEEwDQo+PiAmIERB
+VEEyIGlzIGRpZmZlcmVudCBmcm9tIHRoZSBvdGhlciBkYXRhIHBpbnM/DQo+IFRoZSBkaWZmZXJl
+bmNlIGluIHRoZSB2YWx1ZXMgaXMgZHVlIHRvIGRpZmZlcmVudCBkcml2ZS1zdHJlbmd0aA0KPiBz
+ZXR0aW5ncyBwZXIgcGluLiBUaGUgdmFsdWVzIGFyZSB0aGUgcmVzdWx0IG9mIG1lYXN1cmVtZW50
+cyB3ZQ0KPiBkaWQgZm9yIHRoZSBlTU1DIGludGVyZmFjZS4gVGhlcmUsIHdlIGFkanVzdGVkIGVh
+Y2ggcGluJ3MNCj4gZHJpdmUtc3RyZW5ndGggdG8gZ2V0IGl0J3MgYmVzdCBzaWduYWwgcXVhbGl0
+eS4NClRoYW5rcyBmb3IgdGhlIGV4cGxhbmF0aW9uLiBTbyB5b3UgbWVhc3VyZWQgYWxzbyB0aGUg
+MjAwIE1IeiBjYXNlPyANCkJlY2F1c2UgdGhlcmUgYXJlIG5vIGRpZmZlcmVuY2VzIGJldHdlZW4g
+dGhlIGRhdGEgcGlucy4NCg0KUmVnYXJkcw0KPg0KPiBSZWdhcmRzLA0KPiBDaHJpc3RvcGgNCj4N
+Cj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNf
+UEFEX1NEMV9EQVRBM19fVVNESEMxX0RBVEEzwqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+IDAwMDEz
+OWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1Y
+OTNfUEFEX1NEMV9EQVRBNF9fVVNESEMxX0RBVEE0wqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+IDAw
+MDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oE1YOTNfUEFEX1NEMV9EQVRBNV9fVVNESEMxX0RBVEE1wqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+
+IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoE1YOTNfUEFEX1NEMV9EQVRBNl9fVVNESEMxX0RBVEE2wqDCoMKgwqDCoMKgwqDCoDB4NA0K
+Pj4+IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoE1YOTNfUEFEX1NEMV9EQVRBN19fVVNESEMxX0RBVEE3wqDCoMKgwqDCoMKgwqDCoDB4
+NA0KPj4+IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9TVFJPQkVfX1VTREhDMV9TVFJPQkXCoMKgwqDCoMKgwqAw
+eDENCj4+PiA3OWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPjsNCj4+PiAr
+wqDCoMKgwqDCoMKgwqB9Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgwqAvKiBuZWVkIHRvIGNv
+bmZpZyB0aGUgU0lPTiBmb3IgZGF0YSBhbmQgY21kIHBhZCwgcmVmZXIgdG8NCj4+PiBFUlIwNTIw
+MjEgKi8NCj4+PiArwqDCoMKgwqDCoMKgwqBwaW5jdHJsX3VzZGhjMV8yMDBtaHo6IHVzZGhjMS0y
+MDBtaHpncnAgew0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgtcHJl
+LXJhbTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vdHBoLXNvbWUtcmFt
+Ow0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBmc2wscGlucyA9IDwNCj4+PiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NE
+MV9DTEtfX1VTREhDMV9DTEvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAweDENCj4+PiA3YmUNCj4+
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFE
+X1NEMV9DTURfX1VTREhDMV9DTUTCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAweDQNCj4+PiAwMDAx
+MzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBN
+WDkzX1BBRF9TRDFfREFUQTBfX1VTREhDMV9EQVRBMMKgwqDCoMKgwqDCoMKgwqAweDQNCj4+PiAw
+MDAxMzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqBNWDkzX1BBRF9TRDFfREFUQTFfX1VTREhDMV9EQVRBMcKgwqDCoMKgwqDCoMKgwqAweDQNCj4+
+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqBNWDkzX1BBRF9TRDFfREFUQTJfX1VTREhDMV9EQVRBMsKgwqDCoMKgwqDCoMKgwqAweDQN
+Cj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTNfX1VTREhDMV9EQVRBM8KgwqDCoMKgwqDCoMKgwqAw
+eDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTRfX1VTREhDMV9EQVRBNMKgwqDCoMKgwqDCoMKg
+wqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTVfX1VTREhDMV9EQVRBNcKgwqDCoMKgwqDC
+oMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTZfX1VTREhDMV9EQVRBNsKgwqDCoMKg
+wqDCoMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTdfX1VTREhDMV9EQVRBN8KgwqDC
+oMKgwqDCoMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfU1RST0JFX19VU0RIQzFfU1RST0JF
+wqDCoMKgwqDCoMKgMHgxDQo+Pj4gNzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoD47DQo+Pj4gK8KgwqDCoMKgwqDCoMKgfTsNCj4+PiAgwqAgfTsNCj4+Pg0KDQo=
