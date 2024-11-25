@@ -4,88 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC9DDD58D71
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E676FD58D71
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86AE789A65;
-	Mon, 25 Nov 2024 18:47:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 62C8889A53;
+	Mon, 25 Nov 2024 18:51:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bXpuRUOM";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="PvoDG0mX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 196AF89A59; Mon, 25 Nov 2024 18:47:53 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18A4789A5B; Mon, 25 Nov 2024 18:51:22 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E60689A5B
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:47:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 187B489A00
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:51:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53dd0cb9ce3so4372939e87.3
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:47:50 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g6eJYpfcsv5+fltSKUwcsaxHabIW1XEjrERjBr04q/DM+w78uLPz+g0uNmjoialPbfDuuCXEKVZG0OhBqfA61tabPrBumpELsnfTUKYsjpytr2tWNjQswlNddIz/Q+9CsHO5gzdlVN7QzZK9nhkOEuTx2aJIgZ2z1IxoXoiXnQprk4KJGW0A/of/cckt1LCKlTn1wu3jQqUAUSrjf79QILIIpZ7oqNIfIHrQh7fZDuoKpaHnUuxUnxjv2URYCs40HRYLWxVKNrB8LFijUmnXtmfIcMTUXkUWqIjVE3ewdnoC/royRBlH/FDppp7aJDjNOvS7m4QI7KLM4UhG628XYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QwdvtiVXRDWYC9fX8e8fQjUCibc7AfM7wQulfWzUEKU=;
+ b=VmQMLy5/LRnFafMB1l2XGpL59G/K58yIzOuevwOVn5oep9APJ0ZVFXhg1oGgXunIkDXYrtBTeo1uFvQx7U97Iw/5rpEq7xQ8OPm1Gu9heFu4Kffng4iRecxUuDsp7U4WU+J2y2yDVRm/9JLpMtceSaBUuU67UwFJB8oBeQgRWjp/cWXt4OmTm6I7SYfE9nzciz3nYAA0GslldhrTIpxD56JL4+phMZ3tFV9djw+CcUkWQxc7JqeZnTsnzV0G1p/HmeRnDvxEZQQsJsO3+f8qxgh2hqP7zbhzBJZQWzItf02Ja2Dajg+o3iEU7Jk2QYaofLpmIWxA0E7+fWa/lr1Z7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732556870; x=1733161670; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=s9RXqcuHZyng3cHxl9uJDRE6FBe7n3O8USJVCgCjyaw=;
- b=bXpuRUOMPbAxm/e2PuWl3z+huZEbdwZwW0DDdanb69irtOEUJfuG9VMU83P8zXo5Bq
- qjuI7iSY1TALUStfFuX9okBUM/vHchzQaUkliutSarOvh4ppv9ueitoQNhiezzPNPHMv
- RiQW8z5mUVMmUFBj2myldzUv+H5lwG28YuSnJ56E20qrrnnzo8ZFa3ezW8t0F9d5mEmN
- 7UTGx9CIv5LcZp5pELL5TaOF7dP56g3QeZOXPHDlEDOMu19VM/lh9rt95R60IexiDSxZ
- +ow0IsbtP4MIsQBO9QzfZIYz6ngrJxVVUuLYN2WHspAHhIV5PCm3PqqKUJHBQb7TYTiH
- aIHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732556870; x=1733161670;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=s9RXqcuHZyng3cHxl9uJDRE6FBe7n3O8USJVCgCjyaw=;
- b=ivaXAQUKswhQjvl4WMKXEZtl5IZ+qvt79jNxEJXxwDQDUOPC4QNYBT9l9hcZwyWRTn
- bl3sQ/S88SY6Cxovaum7O0AK55JrYE3eyBZTOJftOhGLVRa8vpTWd6I9WG86iLWBQQvx
- g7mgGl1+qohAtVnV8TJm8nODabE9ccuqa/71qaLbfdI3AB8Gk9Rj+bC6ts+L/s6Ikndy
- Bxck79YwEykf9zDnfKycMKXkoQhHqMKnVii3qlwfLG1FE+axjmm6wNBGtt6LgbD5ixld
- xEPsq4JtgYWnqTLdwwI+ndchwOX5fK916dBX1uy3ZLwYlfPnibnQ1Hu3fNXdjjR1W1xF
- 592A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWxg37jt32wUQkc5iOYUXBp7izRDPPj0n+ueMTaN7uowK6u70Yu0DWiznilCMw5baqwWKCFK9I=@lists.denx.de
-X-Gm-Message-State: AOJu0YxrLkShNt0YJYSEqlGuvH1Wh7TcjsSCQXBqRxTP65Tg3c1HXfdb
- N8RATqkLJ6k3g82m1rYHTcjoEiund8sXNNodJQVFowvHF9BN8segyWmi7Wur4kI=
-X-Gm-Gg: ASbGncvlal2QkL3ttBwVUncRgmHarKI6GUhjt3hIKYkO0Hl+qe3s/PgVG/1xgZmFapt
- xQXQiu+cICgU9If8IgHdJ9muiYeXZxJ6UQjDALOj7rQpf4uECzEQV1/2vWJI1UNaMucoDIVZdNI
- FTqaaw2MhFwETfwTK9hTUe1noC03IhQHz8ZscdJzW9IFfry2d/nTGDqNnUOZExFCKfXzcEr6LVA
- Zyp2AhgZ/AP09P+NqrWUZ7/6v2vaG1bB9dpDKdNqt+nDty+tsnYVzQjO3SEkWJYHyrSfNiRLeHI
- 144qRQ1qexBIg9vkAAKc8RztMsX1USYV
-X-Google-Smtp-Source: AGHT+IEGLxA6sdW+mEX6MhZEE8IZyKdiFbSCdofU3oBXtYyl4itVDmpfIDou+0d/xXD7DWxYQa8Fmg==
-X-Received: by 2002:ac2:5690:0:b0:53d:aec4:3440 with SMTP id
- 2adb3069b0e04-53dd399276amr7526733e87.32.1732556869680; 
- Mon, 25 Nov 2024 09:47:49 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa53299ff77sm352940166b.73.2024.11.25.09.47.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Nov 2024 09:47:49 -0800 (PST)
-Message-ID: <01c891bc-4fbb-4ef5-aa22-bd10a8ae0aff@linaro.org>
-Date: Mon, 25 Nov 2024 18:47:48 +0100
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QwdvtiVXRDWYC9fX8e8fQjUCibc7AfM7wQulfWzUEKU=;
+ b=PvoDG0mXKW7Ljrhz5pFXfObOecLb5zaQrdoHvDqWg4z6HsTxC2N+DGtJwHx1RFz0krqYhdl/ms9FT6kKIWEevYZhDbH9crNEhahZvTW5hbQIeR57/PHZlHMOnwGvCpNij2gj9sO5O8GSBuaCvg8eF1meDWiy1RAkxm4ILpdG/9ct7C5QmdNHLtBOIIrYfZFlXoJRTa2WzGSPs2ANp5EgA9+jbwmhmO8l0P7XbK8x+e/IKZx5j7NJm5FDv91Iw8FryQA0I85JH5XBoC5k59Rd7ipk0QjM/whc1Qfd/xmUM7dVNZz2F0FV34iUxbu8hfHEu6nLB4NUakQCVGb49N0nzg==
+Received: from PA7P264CA0457.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:398::6)
+ by PARP264MB4927.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3f2::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.21; Mon, 25 Nov
+ 2024 17:51:17 +0000
+Received: from PA1PEPF000CC3FA.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:398:cafe::b4) by PA7P264CA0457.outlook.office365.com
+ (2603:10a6:102:398::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8182.19 via Frontend Transport; Mon,
+ 25 Nov 2024 17:51:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA1PEPF000CC3FA.mail.protection.outlook.com (10.167.242.5) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.12
+ via Frontend Transport; Mon, 25 Nov 2024 17:51:17 +0000
+Received: from sah2lpt245.. (unknown [192.168.72.99])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 39E6220152;
+ Mon, 25 Nov 2024 18:51:17 +0100 (CET)
+From: Paul HENRYS <paul.henrys_ext@softathome.com>
+To: u-boot@lists.denx.de
+Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org,
+ Paul HENRYS <paul.henrys_ext@softathome.com>
+Subject: [PATCH v2 1/2] tools: dtoc: Allow passing optional input directories
+Date: Mon, 25 Nov 2024 18:51:10 +0100
+Message-ID: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] fs: fat: Handle 'FAT sector size mismatch'
-Content-Language: en-US
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- christian.taedcke@weidmueller.com, ada@thorsis.com,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, u-boot@lists.denx.de
-References: <20241125085213.460723-1-quic_varada@quicinc.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20241125085213.460723-1-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FA:EE_|PARP264MB4927:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: a261145b-f364-4235-cf16-08dd0d79c35c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?I8hC99l0TQ/u+7fLDzqW8mYG0CaXCGTScD7LJRRZ/JSZIp3PAjWxR/r0d3XT?=
+ =?us-ascii?Q?Jl2W2z4HT55cU1ioQXKmZdSvKBF2TW9Rvs2JN2mLnKYBPqd8QEvYs1CIHPZf?=
+ =?us-ascii?Q?EWACiNeo8z2oaDNcSDXL/MHohEMwnou2m9b2ZoyUJUAtOSZch4Wc8reKPvso?=
+ =?us-ascii?Q?0iiBWmyLWCBOHBL2cuu6GB8Ai0fPQjjoStgsw98XfPn9xuPGMeOfGsuJ/RQX?=
+ =?us-ascii?Q?r6s9RIJlKT58kuiH89OS8BECsaEfEgU4SZsro4o7vqKwpA7eDt8ZVMsTlAhb?=
+ =?us-ascii?Q?b4ohpTWfIv+S/CPy/DqIfrI4Vhl8vfDWRRsD6VHqfKpKw+ixSxe6Qa0SebLw?=
+ =?us-ascii?Q?uwxsF238kg15Mu0DvnlsswVsOEP6VNrAvxlXRM7FuYVMhlgX3QEVLE6bn0q8?=
+ =?us-ascii?Q?9tBSSh5cnbhSRr3q7QqYNKL2HTsTVSEBsbQuC3YGTQkIQWP1dPuvmBe2kp2/?=
+ =?us-ascii?Q?tWS/HYpaqlWy61SEOwz/RCPt0R3wsdIhwtLsETg5FKqGaQaM4M/3+cnTb4P5?=
+ =?us-ascii?Q?UTdGsKSIu/Anur9ETP8reyTuYGW/A8/XGZADWQA9xDbT+PK0lMphcqwiRWkQ?=
+ =?us-ascii?Q?SdUXCbVi3U3jn2V8+qdvdVyflGs2BVq/yjefpbJgcbKZdA5MpiKWZq8FXOCy?=
+ =?us-ascii?Q?e05S6dpYBvr3jdfCZtNxFnyYZzxfW8HWMscJGEEZereOtUJvm559tNl72Hrl?=
+ =?us-ascii?Q?LDBmw7R7FrWdoms41FdiFQmsBZRo7YQ846KLKN2LM9AJy+vIVV04fbWnjkca?=
+ =?us-ascii?Q?XVm73rEt7+52QkvVQ2rbknu171pw0qunOyY9CI57WedEvNrCpMx8MvI3bU9/?=
+ =?us-ascii?Q?RTTI2X1Uw6xJH4GoM/HqXpQbipPoA7FtPYIh7Y9Y+tmQiDUS6HQ02g9JAgiC?=
+ =?us-ascii?Q?0+EG5+Pi9z9tMJzjZdIP9mBMI2cPkJJaT6+wOsr8PTXeGXpWIlbHGw0/7MUd?=
+ =?us-ascii?Q?Wl3gqsO4RHDS7rZWcx1QOXPPnX1a3XA4QRcPEjcG22tEM/s20F7Q5xTofOMp?=
+ =?us-ascii?Q?SRQOP9KTYOHzkLhk8ZEsqBClLggpvtVW7vx8+qTFTfoCDVhjHe8IW9YHhDM9?=
+ =?us-ascii?Q?sybTztofKCaII3pfPCwCDwG6KVDfzXa7CnprDfPVxvyPyK5f6rrLuNJ7WCiw?=
+ =?us-ascii?Q?W+hjqe7fQPv9iYoFEeZxzsINIjOBjrLapBYQnxiwgPH9B3gCeiakI7SHtJTM?=
+ =?us-ascii?Q?4bf5fHFYXYV2l9+tDz+dG+u94zjUjDsmOqQgTaypMtD+3bK4NKeJT1ew4zGh?=
+ =?us-ascii?Q?ZozBFAYNbj9l9Jw1iK85Y/sbOoacocimN5CMkJB4gbDJh6KHD7ffulV/aK6u?=
+ =?us-ascii?Q?NW/6RmmQsHtK7Vkc71QURJfW203SmlEQsUMlhb7Qma6Jvo14Ne9T4CoE0ZzM?=
+ =?us-ascii?Q?N9Gr121o79Cm1apo5DyGB08KBiNB2Ig67F/8N2xpu0aFuvEiAfP/R8SUXPgP?=
+ =?us-ascii?Q?XFcyEar1WKb0pJ7Cu+U0+LAuxuj3AlMz?=
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2024 17:51:17.5696 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a261145b-f364-4235-cf16-08dd0d79c35c
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FA.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB4927
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,322 +141,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
+An optional list of input directories can be passed to EnsureCompiled() which
+allows to pass a list of directories where input files can be searched.
 
-Thanks for re-spinning this.
+Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+---
+Changes for v2:
+- Use 'None' instead of a list as a default argument for EnsureCompiled()
 
-On 25/11/2024 09:52, Varadarajan Narayanan wrote:
-> Do FAT read and write based on the device sector size
-> instead of the size recorded in the FAT meta data.
-> 
-> FAT code issues i/o in terms of the sector size. Convert that to
-> device sector size before doing the actual i/o. Additionally,
-> handle leading/trailing blocks when the meta data based block
-> no and i/o size is not an exact multiple of the device sector
-> size or vice versa.
-> 
-> Tested on UFS device with sector size 4096 and meta data recorded
-> sector size 512.
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+ tools/dtoc/fdt_util.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-I'd appreciate it if you could just CC me in the v2, then you don't have
-to reply to the v1 thread.
-
-It would also be great if you could include a changelog so we can keep
-track of things across versions. Just for future reference.
-
-Kind regards,
-> ---
->  fs/fat/fat.c       | 218 ++++++++++++++++++++++++++++++++++++++++++---
->  fs/fat/fat_write.c |  19 ----
->  2 files changed, 205 insertions(+), 32 deletions(-)
-> 
-> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-> index e2570e8167..efbf892c7a 100644
-> --- a/fs/fat/fat.c
-> +++ b/fs/fat/fat.c
-> @@ -44,24 +44,214 @@ static void downcase(char *str, size_t len)
->  
->  static struct blk_desc *cur_dev;
->  static struct disk_partition cur_part_info;
-> +static int fat_sect_size;
->  
->  #define DOS_BOOT_MAGIC_OFFSET	0x1fe
->  #define DOS_FS_TYPE_OFFSET	0x36
->  #define DOS_FS32_TYPE_OFFSET	0x52
->  
-> -static int disk_read(__u32 block, __u32 nr_blocks, void *buf)
-> +inline __u32 sect_to_block(__u32 sect, __u32 *off)
->  {
-> -	ulong ret;
-> +	*off = 0;
-> +	if (fat_sect_size && fat_sect_size < cur_part_info.blksz) {
-> +		int div = cur_part_info.blksz / fat_sect_size;
-> +
-> +		*off = sect % div;
-> +		return sect / div;
-> +	} else if (fat_sect_size && (fat_sect_size > cur_part_info.blksz)) {
-> +		return sect * (fat_sect_size / cur_part_info.blksz);
-> +	}
->  
-> -	if (!cur_dev)
-> -		return -1;
-> +	return sect;
-> +}
->  
-> -	ret = blk_dread(cur_dev, cur_part_info.start + block, nr_blocks, buf);
-> +inline __u32 size_to_blocks(__u32 size)
-> +{
-> +	return (size + (cur_part_info.blksz - 1)) / cur_part_info.blksz;
-> +}
->  
-> -	if (ret != nr_blocks)
-> -		return -1;
-> +static int disk_read(__u32 sect, __u32 nr_sect, void *buf)
-> +{
-> +	int ret;
-> +	__u8 *block = NULL;
-> +	__u32 rem, size;
-> +	__u32 s, n;
->  
-> -	return ret;
-> +	rem = nr_sect * fat_sect_size;
-> +	/*
-> +	 *           block N       block N + 1      block N + 2
-> +	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> +	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-> +	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> +	 * . . . |               |               |               | . . .
-> +	 * ------+---------------+---------------+---------------+------
-> +	 *            |<--- FAT reads in sectors          --->|
-> +	 *
-> +	 *            |  part 1  |   part 2      |  part 3    |
-> +	 *
-> +	 */
-> +
-> +	/* Do part 1 */
-> +	if (fat_sect_size) {
-> +		__u32 offset;
-> +
-> +		/* Read one block and copy out the leading sectors */
-> +		block = malloc_cache_aligned(cur_dev->blksz);
-> +		if (!block) {
-> +			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-> +			return -1;
-> +		}
-> +
-> +		s = sect_to_block(sect, &offset);
-> +		offset = offset * fat_sect_size;
-> +
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +
-> +		if (rem > (cur_part_info.blksz - offset))
-> +			size = cur_part_info.blksz - offset;
-> +		else
-> +			size = rem;
-> +
-> +		memcpy(buf, block + offset, size);
-> +		rem -= size;
-> +		buf += size;
-> +		s++;
-> +	} else {
-> +		/*
-> +		 * fat_sect_size not being set implies, this is the first read
-> +		 * to partition. The first sector is being read to get the
-> +		 * FS meta data. The FAT sector size is got from this meta data.
-> +		 */
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
-> +		if (ret != 1)
-> +			return -1;
-> +	}
-> +
-> +	/* Do part 2, read directly into the given buffer */
-> +	if (rem > cur_part_info.blksz) {
-> +		n = rem / cur_part_info.blksz;
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, n, buf);
-> +		if (ret != n) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +		buf += n * cur_part_info.blksz;
-> +		rem = rem % cur_part_info.blksz;
-> +		s += n;
-> +	}
-> +
-> +	/* Do part 3, read a block and copy the trailing sectors */
-> +	if (rem) {
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		} else {
-> +			memcpy(buf, block, rem);
-> +		}
-> +	}
-> +exit:
-> +	if (block)
-> +		free(block);
-> +
-> +	return (ret == -1) ? -1 : nr_sect;
-> +}
-> +
-> +int disk_write(__u32 sect, __u32 nr_sect, void *buf)
-> +{
-> +	int ret;
-> +	__u8 *block = NULL;
-> +	__u32 rem, size;
-> +	__u32 s, n;
-> +
-> +	rem = nr_sect * fat_sect_size;
-> +	/*
-> +	 *           block N       block N + 1      block N + 2
-> +	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> +	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-> +	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> +	 * . . . |               |               |               | . . .
-> +	 * ------+---------------+---------------+---------------+------
-> +	 *            |<--- FAT reads in sectors          --->|
-> +	 *
-> +	 *            |  part 1  |   part 2      |  part 3    |
-> +	 *
-> +	 */
-> +
-> +	/* Do part 1 */
-> +	if (fat_sect_size) {
-> +		__u32 offset;
-> +
-> +		/* Read one block and overwrite the leading sectors */
-> +		block = malloc_cache_aligned(cur_dev->blksz);
-> +		if (!block) {
-> +			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-> +			return -1;
-> +		}
-> +
-> +		s = sect_to_block(sect, &offset);
-> +		offset = offset * fat_sect_size;
-> +
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +
-> +		if (rem > (cur_part_info.blksz - offset))
-> +			size = cur_part_info.blksz - offset;
-> +		else
-> +			size = rem;
-> +
-> +		memcpy(block + offset, buf, size);
-> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +
-> +		rem -= size;
-> +		buf += size;
-> +		s++;
-> +	}
-> +
-> +	/* Do part 2, write directly from the given buffer */
-> +	if (rem > cur_part_info.blksz) {
-> +		n = rem / cur_part_info.blksz;
-> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
-> +		if (ret != n) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +		buf += n * cur_part_info.blksz;
-> +		rem = rem % cur_part_info.blksz;
-> +		s += n;
-> +	}
-> +
-> +	/* Do part 3, read a block and copy the trailing sectors */
-> +	if (rem) {
-> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		} else {
-> +			memcpy(block, buf, rem);
-> +		}
-> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> +		if (ret != 1) {
-> +			ret = -1;
-> +			goto exit;
-> +		}
-> +	}
-> +exit:
-> +	if (block)
-> +		free(block);
-> +
-> +	return (ret == -1) ? -1 : nr_sect;
->  }
->  
->  int fat_set_blk_dev(struct blk_desc *dev_desc, struct disk_partition *info)
-> @@ -575,6 +765,8 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
->  		return -1;
->  	}
->  
-> +	fat_sect_size = 0;
-> +
->  	if (disk_read(0, 1, block) < 0) {
->  		debug("Error: reading block\n");
->  		ret = -1;
-> @@ -645,12 +837,12 @@ static int get_fs_info(fsdata *mydata)
->  	mydata->rootdir_sect = mydata->fat_sect + mydata->fatlength * bs.fats;
->  
->  	mydata->sect_size = get_unaligned_le16(bs.sector_size);
-> +	fat_sect_size = mydata->sect_size;
->  	mydata->clust_size = bs.cluster_size;
-> -	if (mydata->sect_size != cur_part_info.blksz) {
-> -		log_err("FAT sector size mismatch (fs=%u, dev=%lu)\n",
-> -			mydata->sect_size, cur_part_info.blksz);
-> -		return -1;
-> -	}
-> +	if (mydata->sect_size != cur_part_info.blksz)
-> +		log_info("FAT sector size mismatch (fs=%u, dev=%lu)\n",
-> +			 mydata->sect_size, cur_part_info.blksz);
-> +
->  	if (mydata->clust_size == 0) {
->  		log_err("FAT cluster size not set\n");
->  		return -1;
-> diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-> index ea877ee917..f7a210d790 100644
-> --- a/fs/fat/fat_write.c
-> +++ b/fs/fat/fat_write.c
-> @@ -192,25 +192,6 @@ out:
->  }
->  
->  static int total_sector;
-> -static int disk_write(__u32 block, __u32 nr_blocks, void *buf)
-> -{
-> -	ulong ret;
-> -
-> -	if (!cur_dev)
-> -		return -1;
-> -
-> -	if (cur_part_info.start + block + nr_blocks >
-> -		cur_part_info.start + total_sector) {
-> -		printf("error: overflow occurs\n");
-> -		return -1;
-> -	}
-> -
-> -	ret = blk_dwrite(cur_dev, cur_part_info.start + block, nr_blocks, buf);
-> -	if (nr_blocks && ret == 0)
-> -		return -1;
-> -
-> -	return ret;
-> -}
->  
->  /*
->   * Write fat buffer into block device
-
+diff --git a/tools/dtoc/fdt_util.py b/tools/dtoc/fdt_util.py
+index f1f70568cf..d5ecc4207d 100644
+--- a/tools/dtoc/fdt_util.py
++++ b/tools/dtoc/fdt_util.py
+@@ -55,7 +55,7 @@ def fdt_cells_to_cpu(val, cells):
+         out = out << 32 | fdt32_to_cpu(val[1])
+     return out
+ 
+-def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
++def EnsureCompiled(fname, tmpdir=None, capture_stderr=False, indir=None):
+     """Compile an fdt .dts source file into a .dtb binary blob if needed.
+ 
+     Args:
+@@ -63,6 +63,7 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
+             left alone
+         tmpdir: Temporary directory for output files, or None to use the
+             tools-module output directory
++        indir: List of directories where input files can be found
+ 
+     Returns:
+         Filename of resulting .dtb file
+@@ -79,6 +80,8 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
+         dtb_output = tools.get_output_filename('source.dtb')
+ 
+     search_paths = [os.path.join(os.getcwd(), 'include')]
++    if indir is not None:
++        search_paths += indir
+     root, _ = os.path.splitext(fname)
+     cc, args = tools.get_target_compile_tool('cc')
+     args += ['-E', '-P', '-x', 'assembler-with-cpp', '-D__ASSEMBLY__']
 -- 
-// Caleb (they/them)
+2.43.0
 
