@@ -4,87 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF76D3B7F6
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:39:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7BFD3B7F5
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C435892FB;
-	Mon, 25 Nov 2024 10:39:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+	by phobos.denx.de (Postfix) with ESMTP id 2521C89A0C;
+	Mon, 25 Nov 2024 10:46:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="CayhLCm+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dJSQC/Tl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9B8689A06; Mon, 25 Nov 2024 10:39:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1C82289A17; Mon, 25 Nov 2024 10:46:21 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE74988EC4
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:39:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 174348965A
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.net;
- s=s31663417; t=1732527561; x=1733132361; i=wahrenst@gmx.net;
- bh=jGzPq2Fs3GPdH/SlcGJqbXgxWrcuaqXGeVXNcSud6ZY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=CayhLCm+lLU/UHZfdkMMMAuv1sShcr3GpeFbGEGvjQqTQDFaJaZbmaJAPIAABosX
- y3nTIolXvda45tOG+ftRDQ/Qdq2TzMLcXMwTXtdKxs/SYSNhuOE2j4HiDwh2xSTnk
- U1+mh+fqnEIpLd9xai28bZp3Pfm8YPCN+sDpaEGZcX44ck359u6uZVFh6nmByggZL
- dHbWNK3SaKR8LwG4Ho4evRqU9i8bKMHroQ2HMIImbaTnNDStiO+uHoz3tOFcY+pOY
- yJZEKtyBb3cuJ/PNaLZR6FeUipsPPlcl9vOVADwDxvXUmFCA5GNzKcIY9GYRvncw8
- 04cN7q87xDnqGMaA+Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.1.105] ([37.4.251.153]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N79yQ-1tlWvE3xsK-00umJZ; Mon, 25
- Nov 2024 10:39:21 +0100
-Message-ID: <8c8607a0-f8b0-438e-886e-a637a561366c@gmx.net>
-Date: Mon, 25 Nov 2024 10:39:19 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3823e45339bso3155132f8f.0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:46:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732527978; x=1733132778; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JyKxS+hLgYzISS3761MGPAZ7z6zzltfIEZhEborCt3E=;
+ b=dJSQC/Tl+hcTwQHeAdNPDSeMOMLpDMBVbbjrOc0LceaFCUV/ngKhOT8iTXFWBrCLYB
+ pHM1/CdiU/pnE2cjV22v7w8RGDnFAZfakZwyGPMQrzDVlGsz1EOrQuvm+/iGUyoyrok1
+ EzNREkg+ovBnbpxc/e9slB/KEyWUoLesxBNtNVLvf6EjW2yme2zqbDRjIEbdhZsEkgMi
+ vrhJk6oWw/odi11FV2o5bmDCkG9bnVUMO74X4aP3fHb6ENJJo735MYFERRFf9b4DW3fC
+ WMKHlL94rb0QCBsFktk5nQ0SYGjos3w3/bLhEK8oeux5k3SiwUofNxY+xRRWwiEP0Iwq
+ OFVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732527978; x=1733132778;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JyKxS+hLgYzISS3761MGPAZ7z6zzltfIEZhEborCt3E=;
+ b=G4XiL+gZILWPAyuRlH1YCw8fQTHOCLx8EEz1MV4W4ruMxOMlm6EVojzE/gUmBKuxCj
+ vaxi3MGy62v6fNu9nG2l8s7dusrVX9rVsLUtOent205wZMvYlsC8kl78awo1FJC5Pn5Y
+ 7Sc+27nM+/lQ1vmP7hJMDR2/Tw4pQB70+YTs/hfba+EBlbkW2mNgdwJDQo0VyAfyGMTF
+ GdxG8nMVTWUDK4vPuG9IBaCO/GE4bVplpmadQIqZXzepDSqTF29SOz26BudhbcSeLQkn
+ XzCP79qPXTa5hcivVzMS34N/YukZ79YjnokyHKjwzbilWGc0SQGc28i2W4/RoVoQc2rF
+ dUyg==
+X-Gm-Message-State: AOJu0YxzB6xlVOed7E0yZogbdAczhC+j4F/Oh5pKc9MhVHVegXLIyLLR
+ pQoeQcHM+9Iw6iwWIgIIfzkAxE0Oy5g9iph8fhp17/3oG9Gg1YGOZZytkncYDBI=
+X-Gm-Gg: ASbGnctoApQFJYp5UiZOLVe4OOhT0mu2bSaoBRT32LSDD18iRna/2L3aucj5gZ5oyVh
+ K4hLHQ5eg3bPCJphJzgHxdwUmElXbsBmD0nWcRKxOJJKKeqfK+QPri0dhoH8Bj8JMxkiguuPr1K
+ q5EKYtVbnrlPM129WkBDPa+dkExl7DkzPO0fvG2KCpXqm1ODK7GNUVlwEhHJPA7BLSLKl7j0A5F
+ m5O7CmB+CB7r+dxtaimp0+5GZZug2M8k7IpND7li1shzAa4rznNXmma8dBsY9w66YAGgeg=
+X-Google-Smtp-Source: AGHT+IE4pIC4Bxm78UnV/M0+zzZDqAfvm8wKWlXnW0yo5JhaakYhteGOO1bp/LIzhjwuxKN5+U1JCQ==
+X-Received: by 2002:a5d:64e8:0:b0:382:3894:3479 with SMTP id
+ ffacd0b85a97d-38260bcb9f3mr9805034f8f.41.1732527978581; 
+ Mon, 25 Nov 2024 01:46:18 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825fb271ffsm9804590f8f.53.2024.11.25.01.46.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Nov 2024 01:46:18 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] pci: Add support for Qualcomm PCIe controller
+Date: Mon, 25 Nov 2024 10:46:15 +0100
+Message-Id: <20241125-topic-pcie-controller-v1-0-45c20070dd53@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] board: phytec: imx93: Add eeprom-based hardware
- introspection
-To: Christoph Stoidner <C.Stoidner@phytec.de>,
- PHYTEC Upstream <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Yannic Moog <Y.Moog@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>,
- Andrej Picej <andrej.picej@norik.com>, "sbabic@denx.de" <sbabic@denx.de>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>,
- Primoz Fiser <primoz.fiser@norik.com>,
- "m.othacehe@gmail.com" <m.othacehe@gmail.com>
-References: <20241120163143.127862-1-c.stoidner@phytec.de>
- <20241120163143.127862-3-c.stoidner@phytec.de>
- <371c6302-438b-45b6-944b-d513f74f38a5@gmx.net>
- <05db2b94c4eb28aefc33a13c6fb2fa324eb62ee7.camel@phytec.de>
-Content-Language: en-US
-From: Stefan Wahren <wahrenst@gmx.net>
-In-Reply-To: <05db2b94c4eb28aefc33a13c6fb2fa324eb62ee7.camel@phytec.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-X-Provags-ID: V03:K1:SpTRGFKGaCUt9R9x1ayYHQ+Vr58qWoQRnomyYznvh6TE9CO1gOL
- /1+P4P0nRcPzxCvPgI4nNCYt5izkJ3Ks0uRZdJxl+1P4vnhMsfaB5HdG8bIUhqGbJvoTEhc
- qoUGuLgFy5z7xH0FZZ8nU+qN4u/XKM7wapB+LhUcZnvfZNOJOHyi7WoSBvJargVtSOM0+0M
- QTEqeRTHmLY4DEI5lBRDA==
-UI-OutboundReport: notjunk:1;M01:P0:bTaoA65nrOw=;RbxB9FLtIBIR7S7BEFm9s5mZQqi
- dMn4EAtYknocRXy8IaPfj8yCvZZtj14RQqBM3k9qt3TMEXN6OP/RwdcSKgFlYSfpXBtcAzuM0
- hELf9kVB2Vrq/1Rr9fYU/KTMtSKtgg9Q3xb2x7glMXwNYIcitymEueiBaXRPHTAtZ7XVIzPUB
- aMs1sIwGvjD3fCdeky96gl3E4EWIc1V5fqiddBvLYcal4JuT/IMIH2HP4DgVWtbwueo5SKP+1
- Ad5vLm0q82oQdfyO/ZCvsU36AqnBfUCOVTVOKGcT45PMPlrSaFV16o1l4ZcQrx/bMK+q7FKvj
- X7hKqBABOYgmq+9nyn2eLmS952h65ajZEeyWSUGAMl5FT6qWfPNhPq+d7Q4gFDTyLoOSZJu5Z
- b1Suvk7ATha5YkYYnEIpEtYwYGjOegi9NqmiTEMdaCfNXuhe6TAejJ5sTNfnVwyuScbNkQf+5
- KwqxbvXfHsjyGwf0swvztc6F7fsB9vq5rSvwfb6yQdlfIV3g6m40ABeE8XjIy3SYVYsOtyOqf
- v0d2THKlCra9/E1ifxvx2MND3ASiAt92HQR0LqRoJSdIRQCdMxzEJTC1LWOwkKy2k2qva6rHI
- KnDDbxF1fOwI93BsPn4JLXOr2j0HMLOjfAo+zf7SiUbjxywhjLgQX7cVhd6nULDdtTgkxD5OU
- VAt/H+iLtmk5eVzUlI7VkPTlGIqw2RX0dcf+1KzwTRu+K4LRkv0+HWWOAZ7NhFdvT3mkydBKJ
- 21O1IhKnK14zHgC/+GtTf/w33Mfa+a4dgLeCkymvUr3Wpf/8mERQ3lTZjGdzf0hxSD8ETAJut
- SKvCXpRoY3xcyscTRYSGvO6NmG9MysNV6/zLnsPa8M77spU2LRdEHkuKrLO+45eSJImp0d6Gh
- p5bKSnrFMLw64Vyr4/e/qn+A1S1Tdid5YC2D1wcrOIKEOldEGVzAn9/EG
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGdHRGcC/x2MQQqAMAzAviI9W9imXvyKeNDaaUG20Q0RxL87P
+ IaQPJBZhTOMzQPKl2SJoYJtG6BjCTujbJXBGddb6wYsMQlhImGkGIrG82RF8lVas/ph7aC2Sdn
+ L/X+n+X0/bj6mgmcAAAA=
+X-Change-ID: 20241125-topic-pcie-controller-cf11210bf5b3
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=883;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=Ms54ZhaKqTJn9UDj6cizrIZJTKnuVFsIYiXUp6/W3Vo=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnREdoQDtzWGj4z1lXJzpVLVHJ9HooOKUdp7M837t7
+ /TaMj6KJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0RHaAAKCRB33NvayMhJ0TQdD/
+ 9vbZqm/rLsAQ0aVrr688vjnl8ZN6xY8tMbjfbYGSlRjXSvgH8nLYuVXmlgYfiRaGQ8vDz2Eo1N6gwG
+ BLoHQUL3wCU9hhTVVCoKyg9uA6tCRWlElrhMYM6NW4wGzgmHYkPGchic2EoZ7OByDfIxK87KLEP5Rg
+ lrcGuYIMyI7MnZJVekKPVOtbGPXF6OzxT7lcaNr5Qhx98VM1O+tBnOodHp/ygQl4y+ioxND0Y0oPLX
+ SVwHfLhUhsRygzF/UztDu3bK91RoWHoxYuPl13T5nsmokjuCt62h6JOtjx4Hs1SrB711wyJe+ANTxX
+ tV9a6iKfoEWr6MMrZN/xJudz+vxFY9I1FBRlLVcOJmaHMmCtpTuxF5qJTCqFy/ahzIAAfGy9juvDJJ
+ b7B5fr9o7DyizHLObDp6BWQDcjDt5uEnyFl9nSAYBNVwrf8mQF3hqC7r0UZmI8cKHlYYS23FIPrw+y
+ 2/ORjvEZ7QiPsVav72cbBptwIQ0w7kKpC4qRMVXyO/vtFIc+1mXJ3wtmxmw03Hz/7kfQPTX2pIDyTv
+ F+4Q07FR9vgAin42fA0WNK5zpj1RBEnuGOEUHPJMaxoC8+RSBqvGi6d04N6RK0ETDUnzUu8E9nDdtr
+ o0YRwwwaIJGanJrCaGCdRnmcba5tx2+Ueae5j4LRvIJ4s05RBUx5rucRLzUA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,97 +116,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQ2hyaXN0b3BoLA0KDQpBbSAyNS4xMS4yNCB1bSAwOToyOCBzY2hyaWViIENocmlzdG9waCBT
-dG9pZG5lcjoNCj4gSGkgU3RlZmFuLA0KPg0KPiBPbiBEbywgMjAyNC0xMS0yMSBhdCAxMToxMiAr
-MDEwMCwgU3RlZmFuIFdhaHJlbiB3cm90ZToNCj4+IEhpIENocmlzdG9waCwNCj4+DQo+PiBBbSAy
-MC4xMS4yNCB1bSAxNzozMSBzY2hyaWViIENocmlzdG9waCBTdG9pZG5lcjoNCj4+DQo+IFsuLi5d
-DQo+DQo+Pj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9pbXg5My1waHlib2FyZC1zZWdpbi11
-LWJvb3QuZHRzaQ0KPj4+IGIvYXJjaC9hcm0vZHRzL2lteDkzLXBoeWJvYXJkLXNlZ2luLXUtYm9v
-dC5kdHNpDQo+Pj4gaW5kZXggNjg5N2M5MWY0ZC4uNzAyZDg2ZjRlMCAxMDA2NDQNCj4+PiAtLS0g
-YS9hcmNoL2FybS9kdHMvaW14OTMtcGh5Ym9hcmQtc2VnaW4tdS1ib290LmR0c2kNCj4+PiArKysg
-Yi9hcmNoL2FybS9kdHMvaW14OTMtcGh5Ym9hcmQtc2VnaW4tdS1ib290LmR0c2kNCj4+PiBAQCAt
-MTM5LDYgKzEzOSwxMyBAQA0KPj4+ICDCoCAmdXNkaGMxIHsNCj4+PiAgwqDCoMKgwqDCoMKgwqDC
-oGJvb3RwaC1wcmUtcmFtOw0KPj4+ICDCoMKgwqDCoMKgwqDCoMKgYm9vdHBoLXNvbWUtcmFtOw0K
-Pj4+ICvCoMKgwqDCoMKgwqDCoC8qDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICogUmVtb3ZlIHBpbmN0
-cmwgYXNzaWdubWVudHMgb25jZSB0aGV5IGFyZSBhZGRlZCB0byBpbXg5My0NCj4+PiBwaHljb3Jl
-LXNvbS5kdHNpDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKgcGlu
-Y3RybC1uYW1lcyA9ICJkZWZhdWx0IiwgInN0YXRlXzEwMG1oeiIsICJzdGF0ZV8yMDBtaHoiOw0K
-Pj4+ICvCoMKgwqDCoMKgwqDCoHBpbmN0cmwtMCA9IDwmcGluY3RybF91c2RoYzE+Ow0KPj4+ICvC
-oMKgwqDCoMKgwqDCoHBpbmN0cmwtMSA9IDwmcGluY3RybF91c2RoYzFfMTAwbWh6PjsNCj4+PiAr
-wqDCoMKgwqDCoMKgwqBwaW5jdHJsLTIgPSA8JnBpbmN0cmxfdXNkaGMxXzIwMG1oej47DQo+Pj4g
-IMKgIH07DQo+Pj4NCj4+PiAgwqAgJnVzZGhjMiB7DQo+Pj4gQEAgLTIxNSw2ICsyMjIsNDggQEAN
-Cj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5
-M19QQURfRU5FVDJfUkQzX19HUElPNF9JTzI3DQo+Pj4gIMKgwqDCoMKgwqAweDMxZQ0KPj4+ICDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoD47DQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqB9
-Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgwqAvKg0KPj4+ICvCoMKgwqDCoMKgwqDCoCAqIFJl
-bW92ZSBwaW5jdHJsX3VzZGhjMV8xMDBtaHogYW5kIHBpbmN0cmxfdXNkaGMxXzIwMG1oeg0KPj4+
-IG9uY2UgdGhleQ0KPj4+ICvCoMKgwqDCoMKgwqDCoCAqIGFyZSBhZGRlZCB0byBpbXg5My1waHlj
-b3JlLXNvbS5kdHNpDQo+Pj4gK8KgwqDCoMKgwqDCoMKgICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKg
-LyogbmVlZCB0byBjb25maWcgdGhlIFNJT04gZm9yIGRhdGEgYW5kIGNtZCBwYWQsIHJlZmVyIHRv
-DQo+Pj4gRVJSMDUyMDIxICovDQo+Pj4gK8KgwqDCoMKgwqDCoMKgcGluY3RybF91c2RoYzFfMTAw
-bWh6OiB1c2RoYzEtMTAwbWh6Z3JwIHsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgYm9vdHBoLXByZS1yYW07DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGJv
-b3RwaC1zb21lLXJhbTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZnNsLHBp
-bnMgPSA8DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBNWDkzX1BBRF9TRDFfQ0xLX19VU0RIQzFfQ0xLwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgMHgx
-DQo+Pj4gN2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBNWDkzX1BBRF9TRDFfQ01EX19VU0RIQzFfQ01EwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-MHg0DQo+Pj4gMDAwMTM5ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEEwX19VU0RIQzFfREFUQTDCoMKgwqDCoMKgwqDC
-oMKgMHg0DQo+Pj4gMDAwMTM4ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEExX19VU0RIQzFfREFUQTHCoMKgwqDCoMKg
-wqDCoMKgMHg0DQo+Pj4gMDAwMTM5ZQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEEyX19VU0RIQzFfREFUQTLCoMKgwqDC
-oMKgwqDCoMKgMHg0DQo+Pj4gMDAwMTNiZQ0KPj4gQ291bGQgeW91IHBsZWFzZSBleHBsYWluIHdo
-eSB0aGUgcGluIGNvbmZpZ3VyYXRpb24gZm9yIDEwMCBNSHogb2YNCj4+IERBVEEwDQo+PiAmIERB
-VEEyIGlzIGRpZmZlcmVudCBmcm9tIHRoZSBvdGhlciBkYXRhIHBpbnM/DQo+IFRoZSBkaWZmZXJl
-bmNlIGluIHRoZSB2YWx1ZXMgaXMgZHVlIHRvIGRpZmZlcmVudCBkcml2ZS1zdHJlbmd0aA0KPiBz
-ZXR0aW5ncyBwZXIgcGluLiBUaGUgdmFsdWVzIGFyZSB0aGUgcmVzdWx0IG9mIG1lYXN1cmVtZW50
-cyB3ZQ0KPiBkaWQgZm9yIHRoZSBlTU1DIGludGVyZmFjZS4gVGhlcmUsIHdlIGFkanVzdGVkIGVh
-Y2ggcGluJ3MNCj4gZHJpdmUtc3RyZW5ndGggdG8gZ2V0IGl0J3MgYmVzdCBzaWduYWwgcXVhbGl0
-eS4NClRoYW5rcyBmb3IgdGhlIGV4cGxhbmF0aW9uLiBTbyB5b3UgbWVhc3VyZWQgYWxzbyB0aGUg
-MjAwIE1IeiBjYXNlPyANCkJlY2F1c2UgdGhlcmUgYXJlIG5vIGRpZmZlcmVuY2VzIGJldHdlZW4g
-dGhlIGRhdGEgcGlucy4NCg0KUmVnYXJkcw0KPg0KPiBSZWdhcmRzLA0KPiBDaHJpc3RvcGgNCj4N
-Cj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNf
-UEFEX1NEMV9EQVRBM19fVVNESEMxX0RBVEEzwqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+IDAwMDEz
-OWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1Y
-OTNfUEFEX1NEMV9EQVRBNF9fVVNESEMxX0RBVEE0wqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+IDAw
-MDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oE1YOTNfUEFEX1NEMV9EQVRBNV9fVVNESEMxX0RBVEE1wqDCoMKgwqDCoMKgwqDCoDB4NA0KPj4+
-IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoE1YOTNfUEFEX1NEMV9EQVRBNl9fVVNESEMxX0RBVEE2wqDCoMKgwqDCoMKgwqDCoDB4NA0K
-Pj4+IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoE1YOTNfUEFEX1NEMV9EQVRBN19fVVNESEMxX0RBVEE3wqDCoMKgwqDCoMKgwqDCoDB4
-NA0KPj4+IDAwMDEzOWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9TVFJPQkVfX1VTREhDMV9TVFJPQkXCoMKgwqDCoMKgwqAw
-eDENCj4+PiA3OWUNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPjsNCj4+PiAr
-wqDCoMKgwqDCoMKgwqB9Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgwqAvKiBuZWVkIHRvIGNv
-bmZpZyB0aGUgU0lPTiBmb3IgZGF0YSBhbmQgY21kIHBhZCwgcmVmZXIgdG8NCj4+PiBFUlIwNTIw
-MjEgKi8NCj4+PiArwqDCoMKgwqDCoMKgwqBwaW5jdHJsX3VzZGhjMV8yMDBtaHo6IHVzZGhjMS0y
-MDBtaHpncnAgew0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgtcHJl
-LXJhbTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vdHBoLXNvbWUtcmFt
-Ow0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBmc2wscGlucyA9IDwNCj4+PiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NE
-MV9DTEtfX1VTREhDMV9DTEvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAweDENCj4+PiA3YmUNCj4+
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFE
-X1NEMV9DTURfX1VTREhDMV9DTUTCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAweDQNCj4+PiAwMDAx
-MzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBN
-WDkzX1BBRF9TRDFfREFUQTBfX1VTREhDMV9EQVRBMMKgwqDCoMKgwqDCoMKgwqAweDQNCj4+PiAw
-MDAxMzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBNWDkzX1BBRF9TRDFfREFUQTFfX1VTREhDMV9EQVRBMcKgwqDCoMKgwqDCoMKgwqAweDQNCj4+
-PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqBNWDkzX1BBRF9TRDFfREFUQTJfX1VTREhDMV9EQVRBMsKgwqDCoMKgwqDCoMKgwqAweDQN
-Cj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTNfX1VTREhDMV9EQVRBM8KgwqDCoMKgwqDCoMKgwqAw
-eDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTRfX1VTREhDMV9EQVRBNMKgwqDCoMKgwqDCoMKg
-wqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTVfX1VTREhDMV9EQVRBNcKgwqDCoMKgwqDC
-oMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTZfX1VTREhDMV9EQVRBNsKgwqDCoMKg
-wqDCoMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTdfX1VTREhDMV9EQVRBN8KgwqDC
-oMKgwqDCoMKgwqAweDQNCj4+PiAwMDAxM2JlDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfU1RST0JFX19VU0RIQzFfU1RST0JF
-wqDCoMKgwqDCoMKgMHgxDQo+Pj4gNzllDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoD47DQo+Pj4gK8KgwqDCoMKgwqDCoMKgfTsNCj4+PiAgwqAgfTsNCj4+Pg0KDQo=
+Add support for the DWC PCIe controllers found
+on the Qualcomm SoCs, it requires introducing
+pcie_dw_find_capability() to properly configure
+the Host controller capabilities.
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      pci: pcie_dw_common: introduce pcie_dw_find_capability()
+      pci: Add support for Qualcomm PCIe controller
+
+ drivers/pci/Kconfig          |   8 +
+ drivers/pci/Makefile         |   1 +
+ drivers/pci/pcie_dw_common.c |  42 ++++
+ drivers/pci/pcie_dw_common.h |   2 +
+ drivers/pci/pcie_dw_qcom.c   | 571 +++++++++++++++++++++++++++++++++++++++++++
+ include/pci.h                |   4 +
+ 6 files changed, 628 insertions(+)
+---
+base-commit: 7fe55182d9263a62e18b450c97bdf0b8031e5667
+change-id: 20241125-topic-pcie-controller-cf11210bf5b3
+
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
