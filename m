@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49BFD59D73
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08FBD59D71
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:28:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D5E288C9C;
-	Mon, 25 Nov 2024 22:28:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6732389390;
+	Mon, 25 Nov 2024 22:28:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lRLYAuBZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OL7qrDf/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CE6D896C3; Mon, 25 Nov 2024 22:28:45 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 5E9008937F; Mon, 25 Nov 2024 22:28:46 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04602890A8
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:28:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41BCB896A7
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:28:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b1474b1377so375019785a.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 13:28:42 -0800 (PST)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6d41f721047so37048016d6.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 13:28:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732570122; x=1733174922; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732570123; x=1733174923; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qYd//irFcvUm3dU3DY/eiENHprft+J8Q93egBxI55dY=;
- b=lRLYAuBZjw534Ku1FtiJBlwIyzIa9exfVftCBfSFRiKUQvvkAMbT7je6SgPtyYbnxf
- isx0rHoU/R6I0Ods8wAkThin39h2JENZGMgjG/xRE6Yn8Woe0yrXddPjekG6GZ1hjXqb
- 5hGiId4Sa8ZIHJ+zMqczLGl4vfTgJaKd0HH+E=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zj/kaGpvco9kfNjaa9Gb7Fn3isQ9rvDPqgLu/HuUajA=;
+ b=OL7qrDf/iPGBVRdM5dauXh/R6S9sc2WaZ6cADgKOD9fJyUDEibKl0HSkzQOgtQyQ05
+ uRMgMnpD27zpeXXOJ9uf2a0Vg5LALZHhqaiNp7wqUTm3wcHs3ueYhgYNzoKrJFlYEHIj
+ eu5crb/PpIhryTi7PcsoFwKsB1lUF0G8UA7Cw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732570122; x=1733174922;
+ d=1e100.net; s=20230601; t=1732570123; x=1733174923;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qYd//irFcvUm3dU3DY/eiENHprft+J8Q93egBxI55dY=;
- b=M8BiSDblu7WvnYH4nWb3NKfoT5Bc0HWUAPoGXgH7QhwCfr1f5Kv52Ue2XJR7njbaGW
- JAi2+6S9PqEbA4pX88qTHSPNtKesYAn0L36bHe93Q3LRpynsBHAgfK3W5i5vhBxSQcYR
- iWkMHCWqY++DbD82iOZ8j8rha0hlYcIgJIvRQg5nMgdVUVGSXvhxHoQdABd0LMQZdtT3
- lNZD+jE9pUYpOXFlW2ZhrJBzqmXF6G8NmVOKQO9EyrHsxi4chA+POO4eef0EdEpQ0G+U
- ZyIfqSKdGKJvxZmPKDF3nTA9VfcRPYsfLxtLKPQYBEZ0ugGjkjubpBieDVpIZCd5sR/9
- 6qjg==
-X-Gm-Message-State: AOJu0YyD5BcVfLIMhqKMA2JbX6BmgH1Ch4+6X4nQfDg3EMYvQRHT+tf2
- /Wn/BJ32EnkMlssr/50FWB53qDZNDgAVC+vezNFwx/OUQY+rQTA25SH0p0sedAtZiQGDp45BbRk
- r294=
-X-Gm-Gg: ASbGncvrmZQ3I2aRjYlZTy8o1A0ZTttpT7mhdijv27zpC4gNmWf/eiQRyHUyWtF+wzr
- cm75HdcZrixQoSTVaN/Yve5q0O+8Ado5e6s5HOWy43gBAR2XIfcWMoF6KwkJh0UR24bJ/n2jGNu
- +iVHUvY92YsPIdO4jO3tfqmefw1X9Z6WcCLyoWN3XuykBIczPkWckYVdgiWWpIT8pw3h2uXlcUp
- TfoJx6HqSRpUEtipv6NoymRgOdCme8IVEyg/MjloZjllY1+
-X-Google-Smtp-Source: AGHT+IH/T9RNilov8rLfImjZK5bjWf1gIEwJOmQDXroxv+R9mbBsqdXKC6U95Bhj92GN0MqLPD7Gyw==
-X-Received: by 2002:a05:620a:1912:b0:7b6:668a:5a5 with SMTP id
- af79cd13be357-7b6668a07a5mr742277285a.50.1732570121257; 
- Mon, 25 Nov 2024 13:28:41 -0800 (PST)
+ bh=Zj/kaGpvco9kfNjaa9Gb7Fn3isQ9rvDPqgLu/HuUajA=;
+ b=rhYnvwWX256IwqLI2ToxvdbLlDEkMsymvEC/hQb/LgrIV7sAzWOeNLi+iF7/l0b5vr
+ maOeAlOS53E9m6NLdZiTStP2oEX4/YwjAX1BqpP/WsND7X8VYkm8ILCJv7x9XUToFuI7
+ 98ZsJFh9lNPoAA3EeL9eHkxuvngw/ala/4GsDdyn6Te+xzuSDIUVV1jo0IPfarOoHbU7
+ 1na1pCwURSnAFYAmTafi6uKqVQjmQ0IkhMt97prAgDp9ac3L+UsOAakm4xC6nLMq0fFM
+ aLwxym3R6ZXpcOnAwZAWgrtPsQrRWDJp1QV9CkgTHqJxw2SJZb9MPgTYt/AQjJmSmKem
+ sBng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXt/9+Vcjdos1gOnf3TZ3iTFHQm1p7BS7AAHmkb4QHIpcQfK4VOEzzCAccQzkFX3g08wcpP/WQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEJkCqO4Ju9ZYGzNHzjU0EFGJe0y+KZCQvD+06fTB2uFAuxnSx
+ 6xTCeVGVT6d4zObGcmbAbQ085Ybp1fY6kqrt86DogXdu6XNZ9+9VghSdXbwfLgUG0yBE8qqBE+Q
+ vGdA=
+X-Gm-Gg: ASbGncuokVXdUTf90h8NIEDBKvn20/WVVIKL3ziy8EkuyBTA3t5NhMa/27O4OakGG5S
+ BU9zS6ToGhxfBMqrjGxbll4+n/ruE4PtdxfuMkBcp3ikQ+InwfKMB6Dlso8OJyoUfavf6k1zjWx
+ fQvet8cbcvSx+klZqBjL7kf5DXgMbf4GeTGfsbtlGQtH+9tFg99BiWY8uJeYmOBNnDfR+n8tjXH
+ +XbPs7M22SlPAnZz3FB4rLX9l5U4KcjK502iSQWtth1MTTj
+X-Google-Smtp-Source: AGHT+IF5fJMWnhCC1nBr7KVLfMU+z3zOAh7fnayMjPgRj4H3iVguPfaQBQP6zH+0LI0m2ZM9VSRjFw==
+X-Received: by 2002:ad4:5fca:0:b0:6d4:2910:7f13 with SMTP id
+ 6a1803df08f44-6d4513446f3mr205386386d6.32.1732570123166; 
+ Mon, 25 Nov 2024 13:28:43 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b66003e909sm223082185a.69.2024.11.25.13.28.39
+ af79cd13be357-7b66003e909sm223082185a.69.2024.11.25.13.28.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 13:28:40 -0800 (PST)
+ Mon, 25 Nov 2024 13:28:42 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
-References: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
-Subject: Re: [PATCH v1 1/1] mtd: Drop superfluous const qualifier
-Message-Id: <173257011976.3962364.990881836798624153.b4-ty@konsulko.com>
-Date: Mon, 25 Nov 2024 15:28:39 -0600
+To: Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>
+Cc: BMC-SW@aspeedtech.com, u-boot@lists.denx.de
+In-Reply-To: <20241118021257.4615-1-joel@jms.id.au>
+References: <20241118021257.4615-1-joel@jms.id.au>
+Subject: Re: [PATCH] ast2600: spl: Use readl for reading mmio
+Message-Id: <173257012140.3962364.17578389439455011476.b4-ty@konsulko.com>
+Date: Mon, 25 Nov 2024 15:28:41 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -91,11 +96,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 21 Oct 2024 17:20:40 +0300, Andy Shevchenko wrote:
+On Mon, 18 Nov 2024 12:42:56 +1030, Joel Stanley wrote:
 
-> The compiler will ignore it anyway:
+> u-boot was crashing in qemu as the modeled hardware enforced overly
+> strict memory reads.
 > 
->   include/linux/mtd/mtd.h:342:15: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+> While this code will work on existing hardware, fix to avoid future issues.
 > 
 > 
 
