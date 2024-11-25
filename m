@@ -4,103 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE713D58D69
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:13:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E737FD58D6C
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A1F389A5B;
-	Mon, 25 Nov 2024 18:13:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 67556895A0;
+	Mon, 25 Nov 2024 18:17:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ilXX9Et+";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FBWH5Ruh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5910C89A5B; Mon, 25 Nov 2024 18:13:08 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8603A89A53; Mon, 25 Nov 2024 18:17:03 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 490DE89A53
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:13:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CF83895A0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:17:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-38232cebb0cso3614646f8f.1
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:13:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732554786; x=1733159586; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=F331ANeodgGj+3Dj869WB+lkkCaNgcX65CXGAJzLS8Y=;
- b=ilXX9Et+QkG2hUM4jcy8ArxTzW9k6vkNtCi0gHp5cBDL/mMHoB66evpABj8h/C58Bx
- Z2s6ui5Rt8j5Bd9U4hQpxSxJEnwLdn8tVoWPEZ0KLt1zNJUc+tnDBFIPvCrBCWdTcTgT
- /Tyq7I9up+ZXk7HIUQWUQYaYLshntT1bIe2CWZuixNqENGMdnx12EoFoJIMn5axg9zbv
- 5Yn1ODMC9VkfJ3mLf0vBKOMR0Cpy8JZR1bZVqzfa7L7RIpRvg78ncXMqZOqTpQIGkDPs
- lO+FwIdZ5HNw+OiNkbBpgg2uGnbNkWOhh1q/3mCrAdYIFIdge5y9MofbVqqs6u5j+xy8
- WzpQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 627083F8D9
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 17:17:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732555020;
+ bh=Ltp7msWrbuqAm3Eu1yne+XL3geVlNA4ONB9l5L/+NC8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=FBWH5RuhHJePCKeoXLk90435RVYtjrUQLPZVX1SFFdI9tjjtyZR2xBwQskF04wV3g
+ mG1M9s6gph7Tb53EQBo1e36v8lzBqocztqwn5KFg7MBAuDmecdCxMk1iDmcnrJ5v40
+ x1vCcrHHYXHLzXAzat1bEfLcgEA0/cc2efuRZchxyu7p+qX37ukuqCCsvuoXqS+2OS
+ nWwWIYucRdcWb+H78E+K3MAiptFaO0E8wR02gr1DIzXiG5FoNZrfhMKCfC96n4j/6T
+ f8iVCRk1S/Np+M/y75MrhrtwCm7agzGMsFeg+rK4q/xEhW4X9DgO3SYytuY5qTKj5i
+ AClV40481LwSQ==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4314a22ed8bso34010015e9.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:17:00 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732554786; x=1733159586;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F331ANeodgGj+3Dj869WB+lkkCaNgcX65CXGAJzLS8Y=;
- b=LKEgn+9MEYQ9rgGQHDBcWPhU4fZvfftK5xEVrxnTWCpGuK3vAFXk9COs5C15EYeYXP
- cTss0OU8G5yqfy9b7Wwn6gO90J1MPWs+drtRJFUSbsniUlG+hx9dOLRjYcOrd5B7U8Nl
- V32V282/3nG6uBuJINCZsCNVY6KXGX+LA/JR5HE+YxG2/jCrcxONbzEC3W6HGKwuzF8M
- hQX7NOUk/3PJaWrJ3VfXB/egJrY85c8H+qQOw3do6vDFE+PJGChYvxE/G/ByhLPT6YcI
- Aop+GIIMywaBtot4lE4Q8mhcgHkbxvTVBRp09k8Dh/msbSFHKjlAt/N4mmf0GiCWf1WC
- dK1g==
-X-Gm-Message-State: AOJu0YzZFZI6OZVFVLH10tAKlFiPD+l4X7tlDP1Q4bUVZOMvef6z1hZ6
- Pn5FSabrGwByskwerOTp/exRAhIFxwJGtxLrKVhv3BeMuzjLn0PW3J4FtAoSfWw=
-X-Gm-Gg: ASbGncuozuE9bLPAfXZVlMZRXTjMGowGgLfJosey/0tXsPTBaoYTQHFlDnSDEMM5d5M
- WnBPVSWayRuNiBHSoFysOIEyUxOcALieiosGBpkv6rAgsIj0rrBI6YN/kwH3omRd/+z8f2j01DD
- CV+rpf8ylRKLDDAZAhKy4XT7cQ4e6K/QdDW6S4mwu1FsgSF5ezBQ0vkqAdqHf6QknlmyaeN+dif
- DpU39saucTOI2Elfh9oAHtZt+4WEDmXuGm96W6KbbNoEWP999l3f8bG/bMBYH+WCfJA5o0=
-X-Google-Smtp-Source: AGHT+IGjttHDs5ru8yLr/5Sczi6t+M1trwrX8e59LYtwVd5YsPKjmr+dvRTEnoq50AEhn+OYz4qgLw==
-X-Received: by 2002:a5d:64ac:0:b0:381:d890:b4b6 with SMTP id
- ffacd0b85a97d-38260bd94f6mr12368877f8f.48.1732554780176; 
- Mon, 25 Nov 2024 09:13:00 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1732555020; x=1733159820;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ltp7msWrbuqAm3Eu1yne+XL3geVlNA4ONB9l5L/+NC8=;
+ b=fAxcJXXS0Zh9dDbvNpb6C7/G45n/GyVpfcyL2Iba18qimizkUbwX4/HncQ9U8lp291
+ eMFpBuNJ7jpsrjoLZjI3k28sS6OmfA6sT6voyRlY4w3KcCybLiBxzHuDn/huUQ091jFG
+ sFrjw/UP13QuXH87YznkXuqOxUMo8cw8Z0U7JzuD8mjr9KDUIVekdXwHyobQ0c6Dc/H3
+ M9jdZOQwSPq3A2Fq7eFFS4jZNg174+TQti0sYGr5/XrAJXrTKQPp1iaPp0lNaMFt5yrv
+ nZWaNU53PZ6neslYUH4XFe1EAdaqu7vRPqipg6HD/8HrgbmB8IY6WgzeHnFiQegCuler
+ RKYA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXtoDTqx/UTZAlxJiy0A2YS4Rb/x17+Wo5ZFNZI8kLGR9XeDGoL04wmQYXNs+SZd08QR/BKtt0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz185orug2AIriaN6uom4FQn1qzFqu4BYhyF/u5aO0uVnNPLHhx
+ 5i0TE6thUSm1KYTRme1JRx7zsW3CPRNNIBFKa2HzaaiPRPgxLwtmvjx02ufoax11HQk+1kiYV8/
+ dDdBoROQrY2CdO4pnTiOWpS0FDa0UFCr5KdZqzdb26O+5CNdyT05qLan6MYQLlFTc4z0=
+X-Gm-Gg: ASbGnct543QipuSNirKfj2+/F+iId2noG4uZ43mPN0ixzgHbofv0eW2FeNHU5fl4CHr
+ FbaNCoO5ir2I1YI++C2WM60DnHxrkQ5z4mugmVdMqE8cmu6PJ2W8z83f+FsllWyC7ip14zt6KeF
+ YvaBRR2Pwwzm/bO445PshOVhFV6BSS+3ktv3s2CxX0UHp5r8K6Bs90y/m9VGqHDM8PnXYDETEl9
+ 4dSV7PR32zBVdHiBni352aYxsQ0qvG63v2DI9ssR6o1aJV768tZsLf3hGdXeXwz7IWWk8ACi0Ey
+ XvX2tMTk
+X-Received: by 2002:a05:6000:2ae:b0:382:5206:8b84 with SMTP id
+ ffacd0b85a97d-38260b5b839mr13093612f8f.14.1732555019963; 
+ Mon, 25 Nov 2024 09:16:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEkSB7UgjIwAdw3aEkIayPYE0x5/UK5O0unOrW++3ia0ebcM3FturWYPzNBjDyZHZ9b4sihMw==
+X-Received: by 2002:a05:6000:2ae:b0:382:5206:8b84 with SMTP id
+ ffacd0b85a97d-38260b5b839mr13093580f8f.14.1732555019673; 
+ Mon, 25 Nov 2024 09:16:59 -0800 (PST)
+Received: from localhost.localdomain ([2a02:3035:6e0:c8c8:ead3:f691:15b7:cddc])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fcff017sm10919419f8f.108.2024.11.25.09.12.59
+ ffacd0b85a97d-3825fbc38afsm10877938f8f.67.2024.11.25.09.16.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 09:12:59 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 25 Nov 2024 18:12:56 +0100
-Subject: [PATCH 1/2] rng: msm: add support for newer Qualcomm hwrandom IPs
+ Mon, 25 Nov 2024 09:16:59 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] net: zero terminate string with headers in
+ wget_fill_info()
+Date: Mon, 25 Nov 2024 18:16:45 +0100
+Message-ID: <20241125171645.126487-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241125-topic-sm8x50-rng-v1-1-52b72821c3e9@linaro.org>
-References: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
-In-Reply-To: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
-To: Robert Marko <robert.marko@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1820;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=eBg4Ydo4UCF/rdI47CkqU7I7R82YACn0mrqKh33uHJg=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRLAZDOs4YzDpAFqWAZRLAeXoUOmUPqZuaat6VKLd
- FJ3CJWmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0SwGQAKCRB33NvayMhJ0TNdEA
- CmWnSWeaJRLu2VrF5HWhWqBjWU6VxqjcuBQMbUDi7qHExkI7dbQyyII/KPdXhrhFMZehvLvLxpIlRg
- hhy8hpt+Y+D0wlS4BtlKqRf3GJLo34cYmM00fYh1N+NH5BtHNHiKm13fyg6DpDvp9GWt5cxhRNS3gY
- c5lxz8K5eb9wHKeSo7M+uwJRexMUzrDmjWu894ckBUNIpPvQXDAoXcOp6TMC3xB0aHMkcUUQN+l2Vk
- raW08JnNEiq6TzUquI+sC+mGJj2GKrkddyf3xRD0WKDZ0sUdP38c7IyO9vXehnQq2kWlqhg7KzBH2i
- Dt1agwWF6mwWcKtfDbxQhLdIclRPTjcyxjZKpvBFofA+cO/8UMz6XECjB2+qw2OOVqQTIeFo8pFXrr
- hoJxzXDx3fHbiD0rvlYbE6jfq/He3wuEUaSfRrkkxNsXBkGDopJ5RAViPTA+VyzgNksre/U0dkMh7p
- Z0sKJHHhKI2MvSdQLPWq3eCnyu9VHiovkAPQk5n+I25lbgoRZUo7C322XPzSI5ZXcdNxGsNk3ziwoB
- aMXlmwKRui8XuONMgQc2zlCLEopAhR3G69P6AuN5IRCbG1bDCeccpJ14gSrMRHO3AdkMW4ioPPjuhy
- BiIUPMZU5l6nIDgeZZ4wiKkm0+ZT2Nb9iJ4HZuQaQwmhnkSpBr732I2hpAAA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,69 +115,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On recent Qualcomm SoCs, the hardware random generator
-is initialized and handled by the firmware because shared
-between different Execution Environments (EE), thus the
-initialization step should be skipped.
+Commit 2dd076a9c1b4 ("net: wget: integrate struct wget_info into legacy
+wget code") introduced function wget_fill_info() which retrieves the
+headers from the HTTP server response. As we want to parse the string in
+later patches we need to ensure that it is NUL terminated.
 
-Also support the newer "TRNG" found on SM8550 and newer
-SoCs that has inbuilt NIST SP800 90B compliant entropic source.
+We must further check that wget_info->headers in not NULL.
+Otherwise a crash occurs.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Fixes: 2dd076a9c1b4 ("net: wget: integrate struct wget_info into legacy wget code")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/rng/msm_rng.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ net/wget.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/rng/msm_rng.c b/drivers/rng/msm_rng.c
-index 658c153d3edb2590b0b470e3067da9aac76169ac..f790d3b60f99bfc04ecd9acdd21405a8c38c257a 100644
---- a/drivers/rng/msm_rng.c
-+++ b/drivers/rng/msm_rng.c
-@@ -34,6 +34,7 @@
- struct msm_rng_priv {
- 	phys_addr_t base;
- 	struct clk clk;
-+	bool skip_init;
- };
+diff --git a/net/wget.c b/net/wget.c
+index 3bc2522cde5..b290ca1843e 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -208,8 +208,13 @@ static void wget_fill_info(const uchar *pkt, int hlen)
+ 	const char *second_space;
+ 	char *pos, *end;
  
- static int msm_rng_read(struct udevice *dev, void *data, size_t len)
-@@ -100,10 +101,15 @@ static int msm_rng_probe(struct udevice *dev)
+-	if (wget_info->headers && hlen < MAX_HTTP_HEADERS_SIZE)
+-		strncpy(wget_info->headers, pkt, hlen);
++	if (wget_info->headers) {
++		if (wget_info->headers && hlen < MAX_HTTP_HEADERS_SIZE - 1)
++			strncpy(wget_info->headers, pkt, hlen);
++		else
++			hlen = 0;
++		wget_info->headers[hlen] = 0;
++	}
  
- 	int ret;
- 
-+	priv->skip_init = (bool)dev_get_driver_data(dev);
-+
- 	priv->base = dev_read_addr(dev);
- 	if (priv->base == FDT_ADDR_T_NONE)
- 		return -EINVAL;
- 
-+	if (priv->skip_init)
-+		return 0;
-+
- 	ret = clk_get_by_index(dev, 0, &priv->clk);
- 	if (ret)
- 		return ret;
-@@ -119,6 +125,9 @@ static int msm_rng_remove(struct udevice *dev)
- {
- 	struct msm_rng_priv *priv = dev_get_priv(dev);
- 
-+	if (priv->skip_init)
-+		return 0;
-+
- 	return msm_rng_enable(priv, 0);
- }
- 
-@@ -127,7 +136,9 @@ static const struct dm_rng_ops msm_rng_ops = {
- };
- 
- static const struct udevice_id msm_rng_match[] = {
--	{ .compatible = "qcom,prng", },
-+	{ .compatible = "qcom,prng", .data = (ulong)false },
-+	{ .compatible = "qcom,prng-ee", .data = (ulong)true },
-+	{ .compatible = "qcom,trng", .data = (ulong)true },
- 	{},
- };
- 
-
+ 	//Get status code
+ 	first_space = strchr(pkt, ' ');
 -- 
-2.34.1
+2.45.2
 
