@@ -4,78 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7365BD58D65
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 16:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34A61D58D65
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 16:27:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A67989A4A;
-	Mon, 25 Nov 2024 17:21:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9A3D089A0B;
+	Mon, 25 Nov 2024 17:27:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SkDzWU7H";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bvT2+dI3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6B3A89A3E; Mon, 25 Nov 2024 17:21:45 +0100 (CET)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC8389A4D
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 17:21:43 +0100 (CET)
+ id CA77589A53; Mon, 25 Nov 2024 17:27:09 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0309488D9C
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 17:27:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-724e1742d0dso2643996b3a.0
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 08:21:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732551702; x=1733156502; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Kii04N0eLOEHl560t1sRAyr8Y23OvEEm0ju29zwcvww=;
- b=SkDzWU7Hd+EXJ/ErwmxTa16BpstGMZ78kk+ox/gKjpMdBSxcaOt1yne8XqNiw/bhJc
- SMN33n6y/wgGfYNwTX1lUKxYGTd6BCYAGkPHkGeXJXntg30Le0aXqMF4bd+gX27ckMFa
- ReDlYcABG9PnlqR4SDGbVSUORKVc5DjVDLY/0CZuaa0s3OiDD5ej3EtkPvKfsvUQjiTz
- CSwHVnZDBZcVCB/s1mpUxeVqPklyq/kHdYon+HCZ3R8LICwNEOMJM3XssWvBAA8U7s9p
- ENj4yKNxFb94+B6FSXNw2mqNtjzSD+ZzDPvAtsP73bKC/B/3JT6ndoxBklYnVcW4blS0
- Q45w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732551702; x=1733156502;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Kii04N0eLOEHl560t1sRAyr8Y23OvEEm0ju29zwcvww=;
- b=RfePmsRDH1Ifb0x0btMib+ucC9mhskswkf3OHhXfkaakWRdPfFTDWQKjHrRKpE8JUo
- VjumUI3YP08ZuookwU7/fDyLhlKO1t+aVGKDfIbkC7MvZTRYnhlHGwDqP0K0dI2i+5u7
- RFQstOKS+KtA3ijVwGriKizhcDJHNf9csDLpe9Y8MBNS52YQMzbiu1VExjClHeDlrJiY
- YHKtStlx1Sv8Xhaw5yaGH3TEI9e8m98cyZDPrSjz3XuZeus50gyQCNa0c/2hgKjy7O3k
- 7TSZTdqpE3DCs2htGiTcYX/9MmQqLCqxcmR0w/EvtDX4VlF9yh0w+u/Z6zY5dySg9I1L
- Fn2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFVgNMSLLQaKHpWMwNrIIkI0tXFY490qkeaWSCXTjvf4OG4uhiVVqOKOYj+KkW2eE/eTzMzQs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxjXzd53LmJf6nsIXTsRcEcQfxxV8IVM1HC2n2PHo5XJkDMdfMa
- bNpECcnE/0AOD0PwRajTD4/fN2iv53R6GL1gV/lgPemFvuG6acBgmHGfWmGXmOXAbk5tCbbkm7L
- t04WmXVVYnlxgCBw1yCofqc1r+nNfWS5i53jTPw==
-X-Gm-Gg: ASbGncurg7adzDF4vzeOfTPZXWa/1Lz9sEXZCpXYB6w9TFNrMUwGmMyg/XWe1XlznSI
- peKFg6LmskjCl3i3OJeQxsO2Nri6nUg==
-X-Google-Smtp-Source: AGHT+IH5vBntfO787YPKMZawRCnGzeSjHw5L/JZrM/Jwg+nb71/u1Gji67hgc6/5YXUkWqwRGPCM718h10Dm3CxH+nE=
-X-Received: by 2002:a05:6a00:1bc3:b0:724:d758:f35 with SMTP id
- d2e1a72fcca58-724df3c77f4mr17940124b3a.2.1732551701797; Mon, 25 Nov 2024
- 08:21:41 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4APGR4p9699422
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 25 Nov 2024 10:27:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732552024;
+ bh=LrCyXYVDuNAc0qCxFgvgcSHhJSNu0toQX2kWWbZfATY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=bvT2+dI3DlROjfFicnQE+H5Qkfe/JtTBCHYWosx5MxDkq7xmnNKAGzvrBNMXw8BIw
+ fMgdYey+FZEJT5y/YJNLUurj9rN1xfwaNSCUjcpc/hysjtZKUhEq+GV5DxUweBKMjm
+ qv+G+ssCxftkRDghEBTgFpul9H9oAfzzPzVeS4OQ=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4APGR4Ce024926
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Nov 2024 10:27:04 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Nov 2024 10:27:04 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Nov 2024 10:27:04 -0600
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4APGR1Tm035877;
+ Mon, 25 Nov 2024 10:27:02 -0600
+Message-ID: <ea5abd4c-1f18-44f2-b44c-1b4014ceb5cb@ti.com>
+Date: Mon, 25 Nov 2024 21:57:00 +0530
 MIME-Version: 1.0
-References: <20241125150834.90448-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241125150834.90448-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 25 Nov 2024 18:21:05 +0200
-Message-ID: <CAC_iWjLdhxoWQUWw6fjDJ-Za9LYBoa6M9PBKqj=WvZpM=J4FMw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] net: remove duplicate definition of ip_to_string()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: spi-nor-core: Fixup SNOR_F_IO_MODE_EN_VOLATILE for
+ MT35X
+To: Prasanth Babu Mantena <p-mantena@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <vigneshr@ti.com>, Jagan Teki
+ <jagan@amarulasolutions.com>
+CC: <j-humphreys@ti.com>, <n-francis@ti.com>, <vaishnav.a@ti.com>
+References: <20241125104947.1324824-1-p-mantena@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241125104947.1324824-1-p-mantena@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,34 +83,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 17:09, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Thanks for fix
+
+On 11/25/2024 4:19 PM, Prasanth Babu Mantena wrote:
+> From: Vaishnav Achath <vaishnav.a@ti.com>
 >
-> ip_to_string() was added to net-common.h but not removed from net-legacy.h
-> in commit 9063dba2d326 ("net: net_utils: Move ip_to_string to
-> lib/net_utils.c").
+> MT35XU512ABA has only BFPT and 4-Byte Address Instruction Table
+> in  SFDP. commit bebdc237507c ("mtd: spi-nor: Parse SFDP SCCR Map")
+> added checks in spi_nor_octal_dtr_enable() to bail out if the 22nd DWORD
+> in SCCR does not indicate DTR Octal Mode Enable, since MT35XU512ABA device
+> supports octal DTR mode, add this property in SFDP fixup.
 >
-> Fixes: 9063dba2d326 ("net: net_utils: Move ip_to_string to lib/net_utils.c")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 > ---
->  include/net-legacy.h | 3 ---
->  1 file changed, 3 deletions(-)
 >
-> diff --git a/include/net-legacy.h b/include/net-legacy.h
-> index ca1efd17af7..5a431fc6b16 100644
-> --- a/include/net-legacy.h
-> +++ b/include/net-legacy.h
-> @@ -502,9 +502,6 @@ static inline void net_copy_u32(void *to, void *from)
->         memcpy((void *)to, (void *)from, sizeof(u32));
->  }
+> Test results : https://gist.github.com/PrasanthBabuMantena/678cbd7a230a4e2d19e22d20dfeb1235
 >
-> -/* Convert an IP address to a string */
-> -void ip_to_string(struct in_addr x, char *s);
-> -
->  /**
->   * string_to_ip() - Convert a string to ip address
->   *
-> --
-> 2.45.2
+>   drivers/mtd/spi/spi-nor-core.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 >
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> index ec841fb13bd..6364d91fac0 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -4109,6 +4109,12 @@ static void mt35xu512aba_post_sfdp_fixup(struct spi_nor *nor,
+>   	params->rdsr_dummy = 8;
+>   	params->rdsr_addr_nbytes = 0;
+>   
+> +	/*
+> +	 * SCCR Map 22nd DWORD does not indicate DTR Octal Mode Enable
+> +	 * for MT35XU512ABA but is actually supported by device.
+> +	 */
+> +	nor->flags |= SNOR_F_IO_MODE_EN_VOLATILE;
+> +
+
+
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
++ jagan@amarulasolutions.com, not sure, if this needs to go through SPI 
+branch
+
+
+>   	/*
+>   	 * The BFPT quad enable field is set to a reserved value so the quad
+>   	 * enable function is ignored by spi_nor_parse_bfpt(). Make sure we
