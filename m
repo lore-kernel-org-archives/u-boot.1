@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78206D59D64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 23:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4403ED59D7F
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 23:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8489894DE;
-	Mon, 25 Nov 2024 23:59:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 01D2389A18;
+	Tue, 26 Nov 2024 00:00:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OjseK7vc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R1GxWxBx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EE1A899F1; Mon, 25 Nov 2024 23:59:52 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id E98ED8975D; Tue, 26 Nov 2024 00:00:18 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82FF0885F4
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 23:59:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A07BB89A13
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 00:00:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7b66402d0b0so118031385a.0
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 14:59:50 -0800 (PST)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-466a0ac9211so5435771cf.0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 15:00:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732575589; x=1733180389; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pOA3EClvru0kn42IwLKblg0QzOlPsDO983bTHuZgLo0=;
- b=OjseK7vcgt7CZCgOSGo5vadpY/ESEDN3pjNB5GC71IDayRfBokNOtde3XuOZyPCPCq
- E6FwFZMHQkH3SVyl3a8X7cM+Ov94TmXhMMtCZm+qRcVf0DRRwwBtA1h9rAsCFw2OViDn
- sJnVmyDy4F5nqKWsNCxY41B5HHRkv4/jz4eiM=
+ d=konsulko.com; s=google; t=1732575614; x=1733180414; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OHg3aLC6NoNxO6gBoQTDTGRv9QfoWnhcKc/5eeq1koU=;
+ b=R1GxWxBxlI73D3UVEtX8D/BHCWVKcoQgLkPmo7L4ckM+cN1vMPc/KY4r7Fqc6qtPef
+ +BXjw6iuNj7FWFDoMOnyLjshnR/lVSLubV/Wv8dEqhNfGngp81GVYt4mSSJoqR+AP3gB
+ Xw063/ohXO7ddKr/pn3B3ppbUdlka+7DRx8Tc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732575589; x=1733180389;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pOA3EClvru0kn42IwLKblg0QzOlPsDO983bTHuZgLo0=;
- b=R0A7neho/71+TUGwrzMgQ8EWJwGC+p+dDgN2xTePsmoRx8tdzwRdvCEokt4jpQTUCi
- crPE0NkUQ8CwVPuk+cmfnA+23IG2uypRWpMnJ9Wu2Q4XQMSxGzZ7hgWOc09xAO9HIKNk
- 0M7Ws3Up/DNIxd4EMCRRYSVeaXXLUv8Ft8rVxUeQjPz7cJMLvIU0XPi1Jfra+GPFjguA
- A8O4HUBjPqY3nQ5P0AyLFr6v8+i/CFPprrdvyFG/2GrIRUYf3VvhmfclDEoQ7GrKa3WP
- PKVJ5WAnKTUzFTZEiYb8HjZp4SNlS8FKqAXBtML92xapLlj/0MveJI+Iz7q66t2iYjll
- M00w==
-X-Gm-Message-State: AOJu0YxBstsI79ASl1JMqeBnFGley4FAuUI6Rz0YmGCRblM7QQ5lJcCm
- vOiYKDF3Qz115FliuOICQmAcnYVzZdsjyq9LcnuWFw2FudS00TwAOSRPB1Q0IKY=
-X-Gm-Gg: ASbGncuHRu00uHx9/maO2WpuwyreMn6uxQyVxqQA18czm94tqkGVUYWXNgmvLtv2EbK
- ywRtBJwjcUU8KR513Rd2qSllieIo3eSn0XXGNCYt8MM06ZMI5ADNDkzP0WsOcuxfpM1t8VAHnEf
- WZk3BBx5UIHLqxtdIDPTZOs4DIKFN89eaU1DZMEGtYrlp7S++qFC3O+pRDcEtcbt1kogH+y2mY8
- c/InmPVrENFzR9xt90GmSm2cUlx/AD9erTFfYkuVuSCO8Ep4Q==
-X-Google-Smtp-Source: AGHT+IHV2V+95/71Epp3R7huuJkmc7TubBEGGrEY5SKlGWvrVdEISdXddljSGCl6jTABNEbELeXBMg==
-X-Received: by 2002:a05:620a:2889:b0:7ac:d673:2057 with SMTP id
- af79cd13be357-7b5144ba7bdmr1880903785a.13.1732575589337; 
- Mon, 25 Nov 2024 14:59:49 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732575614; x=1733180414;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OHg3aLC6NoNxO6gBoQTDTGRv9QfoWnhcKc/5eeq1koU=;
+ b=c2/Q0EFQqxhFwFW/EB5pIuPUAPTK6HprTBqVDPBla4DGZlH+P62h44HPWU1dicxqqZ
+ EtzUvhQEY9OLI9ndyj+XxZzlXbIKnqG0jLgi8VwxIM9NBkZt6a1MDQZSoo+gp8KU9Hln
+ +bRAZ1aEGr6MCyv6qufuYhSVWcJDQ5CR2OfjbZ7aG3sVK+NlCqymJHsDhuWo+Z7anKDj
+ B9yqMK2SU+5IKSiADG70yakqZDMRpQHWPEEc2SZ+duNLRxkwe8mTeGutbtmQlg4gLM7R
+ LpVtcXj2wa4/Hn0Kq7yrAXrq2b6HW73hcHEXj91JcWssZDiIHaWmaWU5DI9RkoZGDwHE
+ 1L5Q==
+X-Gm-Message-State: AOJu0YwTSAzGoJ6+Q5BDWCLA5kw//4T+XgHI9/ORT6exbpzm3yKD0fi/
+ NMwdQ0D0mGja2nWkagvroM+hbWdQI4ct2mMf/o4AKeVbQIrQL7TSIn6lxGihRUzmuekcLZLu8nU
+ 3oT8=
+X-Gm-Gg: ASbGncu4OnOJEtYWFk84I5zZljIXs8nJvnrNBXDYvVM97AHm7yFlWdW9hkmOZqK1yRE
+ 1QUb4H4MAtL9p3B6+h4puajQziEcL1W523OHUWhx5VqprSYtXL72rHzseEpugSsYt70qDWZY589
+ 8rON7Ni6FT2FpYlL0wVKG89oGGghQhFgSZ7qM+kWyJTBabuQEbsIMHkPPSHbW839G2W5gAZGZGY
+ vBb3fQzAbN3hY+26zDeg2jXM4tl9tjihcMowYvwzXHwD8iqHw==
+X-Google-Smtp-Source: AGHT+IGBdaWo0YvF5LcsA7g0TarUVMp6TJwsEiUseBBCTQKC/LpH1aNpmux6KlrTciS6/rTzA+5Wbw==
+X-Received: by 2002:a05:622a:90c:b0:463:5344:b9a3 with SMTP id
+ d75a77b69052e-4653d5ae3e9mr209302531cf.25.1732575614208; 
+ Mon, 25 Nov 2024 15:00:14 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b66b5a5dfdsm156604385a.99.2024.11.25.14.59.47
+ d75a77b69052e-4653c47f065sm51282841cf.61.2024.11.25.15.00.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 14:59:48 -0800 (PST)
-Date: Mon, 25 Nov 2024 16:59:46 -0600
+ Mon, 25 Nov 2024 15:00:13 -0800 (PST)
+Date: Mon, 25 Nov 2024 17:00:10 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Khoa Hoang <admin@khoahoang.com>
-Subject: Re: [PULL] u-boot-usb/master-asix
-Message-ID: <20241125225946.GO3600562@bill-the-cat>
-References: <20241125204117.18423-1-marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2025.01-rc3 released
+Message-ID: <20241125230010.GP3600562@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wLuNFr7aribNKXZQ"
+ protocol="application/pgp-signature"; boundary="boymTQnZmqtiZrSi"
 Content-Disposition: inline
-In-Reply-To: <20241125204117.18423-1-marex@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,49 +91,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wLuNFr7aribNKXZQ
+--boymTQnZmqtiZrSi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 25, 2024 at 09:41:04PM +0100, Marek Vasut wrote:
+Hey all,
 
-> The following changes since commit 52c0e5f8a39ef022ee5ab2dfd67661d1d34941=
-c7:
->=20
->   Merge branch '2024-11-22-assorted-fixes' (2024-11-22 15:04:54 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git://source.denx.de/u-boot-usb.git master-asix
->=20
-> for you to fetch changes up to 05278af8b3df1c0c02e345ccf4c8c59bd0111f68:
->=20
->   eth: asix88179: packet drop when receiving large fragmented packets (20=
-24-11-25 19:11:19 +0100)
->=20
+Once again it's release day and so here's v2025.01-rc3 and I'll update
+the -next branch soon.
 
-Applied to u-boot/master, thanks!
+At this point, the biggest outstanding changes I see are what fixes are
+still requires to the spi subsystem to bring spi-nor functionality back
+in to line with v2024.10, and what further cleanups are needed to lwIP
+or LMB now and shouldn't wait until v2025.04.
+
+In terms of a changelog,=20
+git log --merges v2025.01-rc2..v2025.01-rc3
+As always, more details in pull requests (or the tags referenced by
+them) will result in more details here.
+
+I continue to plan to do an rc release every two weeks with the exception
+of I'm also doing -rc6 on Monday, December 30th to have one more tag
+over the end of year holidays, to see if that helps with people finding
+time to test.  We'll how that went in January.
+
+Thanks all!
 
 --=20
 Tom
 
---wLuNFr7aribNKXZQ
+--boymTQnZmqtiZrSi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdFAWIACgkQFHw5/5Y0
-tyx9jQv9FKx47+uM00U584fbchK0ri5dWPMW/rublHIhHupBHhEXEIJO0VccrLEf
-auPne78+5s6RF0X+32AZRf741hrr5eihIbKcZwp6MMqnHbaupMYqLjk7lHSxjCDn
-lXSxzT9uwZ+sjI9G4irQJ4LjYXzi1p8/DyZ02x9pSf4ShDsxNf94GAVoJqT7meeP
-Ugp/G9ma0FTMnVMw7I9+Z5IB+wX+veey1OEtRXFkqOo6Dvw4b6AvPwLS9tU/MdMO
-X584y9IO7X1KEIajmlmXlOgO97iwpkvU48oXj40/h8Lr9Xq+MuhlkYPnfqHAes1m
-+a5Zd2f9b/nbrqqwnheNf2X1MBBrhwTh6XmuEERnq0jRuHRwcpR3g9sINaniznEI
-BiW6wld0cQD+B/yQzzvwplkHYAkKMapW9yD/1DmgOT+Oaw1H6kdy7Xk2f53Kafd0
-AY02TdxFrXrL0Ef6h+wfXNtV7sTqQHdBTrRbVsfPQcT1dZDzLga8qFv0an17giEd
-6UgaV7DF
-=taoy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdFAXoACgkQFHw5/5Y0
+tywEKQv+Pdh+btXhB21AbQiqjBVrBWsrD1j12y3C09VLZfbXH+zBUAHnKqrhtP1M
+T/ZWhYGBfcyUVWZYTkyxA+mlM6JNgdIM0O9betH1jhDctidME/kjXXn5TDdktH4f
+HsF2jDHliuCStLLSK9a/kpaSWLuvdvt8F0vMqK8UmpLT47VPsTwekSFDfuqYL/Xs
+OAJORNjBCrIjSaXeo36gomswDF/YiWvmtkxIn6ZOqXLzltfba/wzIVJIvI+0oWRm
+uqw8EEBlKiJOq7JrZx6JrVoLc2wfz8B0d6lwRMorWS1ZwYI25vcRXKe8gkwHDqLA
+paGh5uZf0EvQVjXjajf0EvGW+JTIX3JccxtR8NCwa2iwPK7My2rteKzrCLkwOTjH
+UiL2CBFJZBCeCyoEunxFBw0GRnSPgmMj7SMjBBKXjMLWiw1V3r4si5xXn4/1qoyI
+TjDhSBfrraV8xd13fCKlDnj8KDPbR6zFgXhLeGruFOsYEsKcgmq3yOByRVJNciQo
+jTXKsW+M
+=LvVI
 -----END PGP SIGNATURE-----
 
---wLuNFr7aribNKXZQ--
+--boymTQnZmqtiZrSi--
