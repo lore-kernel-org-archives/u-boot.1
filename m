@@ -4,81 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283B2D3B7EF
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF30DD3B7EF
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A518F8961D;
-	Mon, 25 Nov 2024 09:25:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C7B288EF5;
+	Mon, 25 Nov 2024 09:29:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j3cdoel7";
+	dkim=pass (1024-bit key; unprotected) header.d=phytecmesstechnikgmbh.onmicrosoft.com header.i=@phytecmesstechnikgmbh.onmicrosoft.com header.b="HovoEyBj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD19B89664; Mon, 25 Nov 2024 09:25:57 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E81B588901; Mon, 25 Nov 2024 09:29:06 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F4708961B
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:25:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7E3088F48
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:29:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5ced377447bso5559057a12.1
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:25:55 -0800 (PST)
+ spf=pass smtp.mailfrom=C.Stoidner@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PBtcQiiEKY6rLPa2QJGCxA5CF9Ltwkc7LN66o7imKGOrl8z2uRBlJDb2TLVZPli8oqHywZ1hIzgWA3aMPNL+FBx0t9QkqthQbvo6Wj9RbYkLIl43G5tL7FUDgKImAZ+ZF/+nwEmOlJTg+mwuOlh5pj7cjnojFdN3o7Wt+d+wU8R0ozU/EjqGBF63HKLyNvD/toxJkSI8c8wHDYpmrrvv9cfcPdfXVMURnc9pZmhmak5D4p7Sc6uWjFJRdACSBcHREqLTVPUAzOU0nBS6fU+zybc/mvLbczSXnwDEg30KTA9yj0RCuYHmaCd1ot53kPVyJM4SFnF22tXMbtZ6zVLlMw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BmhkkDlzyAle4DOPWjrgzrqthYoecww7NP+f5VyHGcQ=;
+ b=BZSxW3R50EEc8+hQWlbr/k6j7gyOq4srX36+Q1QygNeTYsbaxJxqfunc7wcWrlm46l0lqG8RBHCQ2p2LwEQkLi3nj8175V01pZEzB1PX0RCzODrW+l3Mpp1ukc/D1a38zV3FGuZMVCEOmu0Dp8FgEuyAHTv9ID2Y9JKB1oQ2KV96+CtYLjsFo5LLHJ+mBk2KhJVi4ngCnJQ9YJHfl1oR3g9dm4xP2FlUELHeJwSQOzr/+z/+zhfc4c4lvnpmUfppcjWkFWHKp0XcmMf6A+SGU074iHrPQQmAvpz+aebG/xOFLUih3vygf6zfco9DGF6MrfxWHn0IEKrZBZCRO6dBzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
+ dmarc=none action=none header.from=phytec.de; dkim=none (message not signed); 
+ arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732523155; x=1733127955; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r3HEzw0Tdm8E8mijqZgEOsaOjGQseIXH1gXkJ9DgLZA=;
- b=j3cdoel73S0Lp8HKFXBGckkLyjOfzyqwigmJtLWP1QF+PFD7nmhQPhYsqmHf3MGu9D
- d4wtlUIWU1Rn4pxU67Hmn6+kpWfOn1CSGwubEwL818o3unY6A9Hk+192ijJ10mMaQUVj
- 34gmajnA/RIZWK5rgWRZRiwitWmYzfnINJVxCY6JfaHNwS8HV72bJkWfD42NWXi/0Pqp
- KT5cgWJlR3vjRf7FRbszwSvDwvGR0BJxbdbX5QbQ1c/Vffgwt3nLUmFjVgZKm4oWnx+Z
- 6iceSoRoo+lcqwBNe37lDn6ORsl/mWSk/f/lc8bMqWabFCRIvyU+2Rty5Jw1tQpGdMv/
- TXLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732523155; x=1733127955;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=r3HEzw0Tdm8E8mijqZgEOsaOjGQseIXH1gXkJ9DgLZA=;
- b=Exfu4g7xEg3M92G9thzFy3KUynmul6KPcC8Jl0qWllTBpubAVl7F6XuuqRat+2tqv3
- 1hd8ryExmsj13VsOM3+Q5E8+pwsnBGe/Y0p7RnZleL3SApgdTofYA0Vtz3bT5DbOAl72
- jF2nBRgY7aBF+cQhIeLc4rjEZQ9OlQn7dyLMrdXac8GzOOSWvN6YxJVEuV6CJZKKx8VW
- 7GeZLyYVBKyLM5ABXRBgqk/nx50j6lFpVMQ0N1lHlqhB99g0RtiIM0uzzMq4eT2xUzv0
- 3wSezYyCJpaXfRrjRFpQWDGNeH6Y+Oeqo+tYWW8KJfTxGUKBq+/leUYeJt8zi8rPxJRm
- JdaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHWo+nZMdp9h+/Qqj4liCMJllyaK5LpfA1sc8207HEgnSHSjCvc0FbmqpcdAW7pj26ImUsgpk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxKV+jWZkl4rBaGeV/4EIJn4vhaN4TwY6MMGZf9UY8NqqWqjn33
- gVxs0agoSPPHTEIWAdzCgBA1YUpI8QppZZGiKF6bm+FdwUSPPZ+6Em71CLNmeJJDt5I/bomFoHv
- YWhjr9BUDwpR5EZ3DWi6CQk/bOEM=
-X-Gm-Gg: ASbGncu5G2bIdLASmCeOOXCrmpT7GQROuvcKQQfjJLPkftP550X+17Qs0f6u9k22C/E
- uybZbZ1wyxbnDxgNJKb6LCOMqC4iY9P8/
-X-Google-Smtp-Source: AGHT+IHMrcnqEWQ102EEetTwcVuG37S1CCYZGLtQyl4qTHngkfoPSBg7nhn00ieiZgkwauUm/wWJBOeb4Dsz5HcElz8=
-X-Received: by 2002:a17:907:31c5:b0:a99:89e9:a43d with SMTP id
- a640c23a62f3a-aa509d3fbd0mr1191418366b.39.1732523154579; Mon, 25 Nov 2024
- 00:25:54 -0800 (PST)
+ d=phytecmesstechnikgmbh.onmicrosoft.com;
+ s=selector1-phytecmesstechnikgmbh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BmhkkDlzyAle4DOPWjrgzrqthYoecww7NP+f5VyHGcQ=;
+ b=HovoEyBjVC5dU93h7Rl2Sc1oaHthU/mgIyC2N7m1bc+tHecAK8VFdXVe87vPIi3qNIFlfBo4lTSz0oBPfsI8W6CZWFuBV4gnp8HiRCEV9tn/L+tCTxTUz4Iop8hUpFId/h2ExiuXZgCHRHizn4wed/sMwAfsjLJssQruowINrcM=
+Received: from AS9PR06CA0682.eurprd06.prod.outlook.com (2603:10a6:20b:49c::27)
+ by AS8P195MB2043.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:52f::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.18; Mon, 25 Nov
+ 2024 08:28:48 +0000
+Received: from AM3PEPF0000A795.eurprd04.prod.outlook.com
+ (2603:10a6:20b:49c:cafe::83) by AS9PR06CA0682.outlook.office365.com
+ (2603:10a6:20b:49c::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.20 via Frontend
+ Transport; Mon, 25 Nov 2024 08:28:48 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AM3PEPF0000A795.mail.protection.outlook.com (10.167.16.100) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8182.16 via Frontend Transport; Mon, 25 Nov 2024 08:28:48 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 25 Nov
+ 2024 09:28:48 +0100
+Received: from Florix.phytec.de (172.25.0.13) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 25 Nov
+ 2024 09:28:48 +0100
+Received: from Florix.phytec.de ([fe80::a802:84f9:c56c:4c6d]) by
+ florix.phytec.de ([fe80::a802:84f9:c56c:4c6d%5]) with mapi id 15.01.2507.006; 
+ Mon, 25 Nov 2024 09:28:47 +0100
+From: Christoph Stoidner <C.Stoidner@phytec.de>
+To: PHYTEC Upstream <upstream@lists.phytec.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "wahrenst@gmx.net" <wahrenst@gmx.net>
+CC: Yannic Moog <Y.Moog@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>,
+ "trini@konsulko.com" <trini@konsulko.com>, "festevam@gmail.com"
+ <festevam@gmail.com>, Andrej Picej <andrej.picej@norik.com>, "sbabic@denx.de"
+ <sbabic@denx.de>, "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Primoz Fiser
+ <primoz.fiser@norik.com>, "m.othacehe@gmail.com" <m.othacehe@gmail.com>
+Subject: Re: [PATCH v4 2/3] board: phytec: imx93: Add eeprom-based hardware
+ introspection
+Thread-Topic: [PATCH v4 2/3] board: phytec: imx93: Add eeprom-based hardware
+ introspection
+Thread-Index: AQHbO2m655mv1wTilUe5fMsmnpmCI7LBdCoAgAYsVIA=
+Date: Mon, 25 Nov 2024 08:28:47 +0000
+Message-ID: <05db2b94c4eb28aefc33a13c6fb2fa324eb62ee7.camel@phytec.de>
+References: <20241120163143.127862-1-c.stoidner@phytec.de>
+ <20241120163143.127862-3-c.stoidner@phytec.de>
+ <371c6302-438b-45b6-944b-d513f74f38a5@gmx.net>
+In-Reply-To: <371c6302-438b-45b6-944b-d513f74f38a5@gmx.net>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D67EBFCDDE09FF4B8D4E199E64B831E4@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20241125003205.75327-1-hal.feng@starfivetech.com>
-In-Reply-To: <20241125003205.75327-1-hal.feng@starfivetech.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Mon, 25 Nov 2024 13:55:38 +0530
-Message-ID: <CANAwSgQ0ScgATSWHgaWPCuJFWEY-MspEDJaGHj9gwWcS2BKcew@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] Support OF_UPSTREAM for StarFive JH7110
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
- E Shattow <lucent@gmail.com>, Conor Dooley <conor.dooley@microchip.com>, 
- Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A795:EE_|AS8P195MB2043:EE_
+X-MS-Office365-Filtering-Correlation-Id: 27779751-6ed8-4e19-0eba-08dd0d2b2f75
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NXlTbWZNSTA3TzVUcmRtTm5WMHIzV1NzSFdPWEJnd1E2R0JkaWNiQUZ4Vm9D?=
+ =?utf-8?B?UG9Ja0lGZlVUM0JERmw2SFJ4TG5wckRYdTV2aXhtYUpGLzFpS205K25BRWdE?=
+ =?utf-8?B?RHpRcVZuaElpSkRUOUpjSDdWM1dSbktwT0dHL0R4U1JCM0J0ai9uaDIwTUJI?=
+ =?utf-8?B?NDY4ZUw5MVNzQlpyTk1jcjczYVY2OUJ2R0V5MTd1OU5zbkVnUHh1OWUvWjQz?=
+ =?utf-8?B?c2JvL29JWTd5bzkvdytqUndmcFJHd01Vcm8zVTZKQ3Vwb01EbitnQ1BFcWQy?=
+ =?utf-8?B?NTM4Qld1WVhraTQ2OEdEa1VtNHhabGJhamJyV1pXbEpLeHkwWWlRdzhaamZE?=
+ =?utf-8?B?KzhEVkYyUmhuOWNGWjdHOFlrY2pNU3dtNW1GajZpbCtqWnNFdHRvQWE4WUdW?=
+ =?utf-8?B?SWxIdXZXQlpxYTZzSXBFOTZySE10WEdGK0k1bnNLUHYrVU5pSGRNU2hGS3Jh?=
+ =?utf-8?B?UGROeU9xdmw3M010dWZpNkwvSGtYakc5RlVSbldkOGhFRjBHR1FkZG9OWUVj?=
+ =?utf-8?B?VjVVQ09keXhLdURsWTU3OWh6b1BGTW5SRzlaM25vRWJsSURVaEgvbUl6dmpv?=
+ =?utf-8?B?T2xWYkx6cjh5YmJYT0xCVExCNUdzOVlQakdLZ2JTQmtjanl0Z0padzNQUE1r?=
+ =?utf-8?B?Yy9iMEdtK1hybE54eVJqV21mdzZrOUM5MlhqWUJ0VWhwYXFEbWpFaFlzRnRB?=
+ =?utf-8?B?SHRpZ3AzdXNUNmphK25sNjRuRkErOWJ5cmVEWSs5VFBCdEoyNGdaS2syRUpw?=
+ =?utf-8?B?QTN1cEQwTzV5QnpxVnZyUXJLS0QzR3RIREhKSFJWK29kT3dXcmtqQ3daUGFs?=
+ =?utf-8?B?UGlldVYrTElsTXRCY0hCSFVOa3M4bjlaUklzWjY2MHhLdzdqMWRwNjRLZkhX?=
+ =?utf-8?B?K1N4clpaMXNreDkvSHVsWmNJU3pJK1BEVjlsRnJ3dEdHUjZmb1Z6VWpmaUNx?=
+ =?utf-8?B?aUt6bUdIdEpxUi9ZbzVYVXVXTmtsUlNEekJpQndQL2VlWXRiM3JJU3RaVHpG?=
+ =?utf-8?B?RFJiSlBlT1Z0R251a09RS0JpeTM1cE90ZVdVVG5TazkyU1hXbzg5bVJDTDlQ?=
+ =?utf-8?B?b0daRzl5UWFuOVcvRlRFVHZCdVVEUnUyZityaG5rem9RazdXODhMV09Ud3Nv?=
+ =?utf-8?B?U1NtVVBXY283MEs0UDNYTU1ZaFE3ZzY2ZG9wTGJWT3F5cnprMzUrWWVwdHpT?=
+ =?utf-8?B?VFV3R0dQRWFLSGRoVm1uTmlNVzV2blBhZXE1RXRnd29Zb0p2QVFGRzNYYW00?=
+ =?utf-8?B?a0NEOWdtRFFDMzBBRW91UGRkaC9Vb1FZaEhxOGlEUWd0V2dDcHpJaFljM1lU?=
+ =?utf-8?B?Y1kyNzR2bWZhcnJtd1RPdzZQbXZJMlNSdlNoaVV3c1liZkx6ZW1zcVJYcGhx?=
+ =?utf-8?B?OEdpWEE0czgydnMyalBQaTRuOGlDUFpNN01lZVQ2QTlmT0pTSHNSNmhqQUwx?=
+ =?utf-8?B?U1ZWS0ltTmdiSmVrVWdjRVY2RWdMR0kwR3lZZUx4dEpZK0ZJcEFIVHRRektm?=
+ =?utf-8?B?REpQejNEU0szaWd0MUVQeXl0TDVhNndMZWFCTk9hWTdydzBlbkNBbjJ6cGs2?=
+ =?utf-8?B?QmRRVnB0UXVqemd2Q3JpWW5ZQitkOWpuVGRMOG5iVU9ROW9ZUWZwbU5OUS83?=
+ =?utf-8?B?dEZBSnV6S1U2bWE1bm1RdFdLcXQyS0cwWHRIUGgvZmZZZkZrcjBhWnFOTEho?=
+ =?utf-8?B?dU5GWFI5ZUh2WnFiZEtBL0N5bk1GRDA4b1Z4Vk5ZejRkdVplRDZ6YnQ0VzBY?=
+ =?utf-8?B?UHA2S2U5S2ZsR3BaRFF5RytWZmxEbUNQQXNvbUo5QUdocnJCb25NZFM0MG9D?=
+ =?utf-8?B?MC9CR2RQUStXS3RUdHFXOEc4eWV1RUNiSTNsc28xYzFKQnBRN2VXZ1NrR3Iz?=
+ =?utf-8?B?OTBZekg1RXFwMWFrbVlkZVlyWHBVeXV3VGtnRzZjZitqVGNnUnN6N0NzR3VY?=
+ =?utf-8?Q?p31liW6YmeAtKNbrl7g3hAa9w9FbQWdQ?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Nov 2024 08:28:48.6808 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27779751-6ed8-4e19-0eba-08dd0d2b2f75
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A795.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB2043
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,115 +174,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hal Feng,
-
-On Mon, 25 Nov 2024 at 06:11, Hal Feng <hal.feng@starfivetech.com> wrote:
->
-> This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
-> All the JH7110 based boards can use the DT from upstreaming linux kernel.
-> The v1.3b board device tree is set as the default device tree. Support
-> CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
-> EEPROM information.
->
-> Note:
-> 1. Mars CM (lite) are missing upstream dts and so are detected but not
-> supported in this series. Users of Mars CM and Mars CM Lite may stay with
-> U-Boot v2024.10 until this is resolved.
->
-> 2. Property values of network phy0/1 for all JH7110 based boards now
-> follow the upstream dts.
->
-
-Please add my
-Tested-by: Anand Moon <linux.amoon@gmail.com>
-
-Best Regards
--Anand
-> Changes since v5:
-> - In patch 2, drop the override of rx-internal-delay-ps on phy0 and phy1.
-> - In patch 5, drop "/delete-property/ motorcomm,tx-clk-10-inverted;" for
->   Mars network phy0.
-> - In patch 8, rename fdt and conf based on the compatible identifier of
->   boards.
->
-> Changes since v4:
-> - Merge patch 2, 3, 5 into patch 1, ensuring git bisect works.
-> - Add a new patch to sort the list of JH7110 imply statements.
-> - Drop the reparent of clock JH7110_AONCLK_APB_FUNC in patch 4, which is
->   unnecessary and will cause errors in gmac0 initialization.
->
-> Changes since v3:
-> - Add detection for Milk-V Mars CM (lite) boards in patch 13.
->
-> Changes since v2:
-> - Drop patch 1, because the riscv of_upstream Makefile is created by Conor
->   in commit 239e4705099c.
-> - Drop phy0 rx delay for milkv u-boot dtsi in patch 9.
-> - Add a Fixes tag for patch 13.
-> - In patch 14, the PCB version is only obtained when the product_id is
->   VF7110. Improve the commit messages.
->
-> Changes since v1:
-> - Drop patch 12.
-> - Modify patch 11 and add three new patches to support
->   CONFIG_MULTI_DTB_FIT. The SPL selects the correct U-Boot dtb using the
->   EEPROM information.
->
-> History:
-> v5: https://lore.kernel.org/all/20241119020425.51989-1-hal.feng@starfivetech.com/
-> v4: https://lore.kernel.org/all/20241111020808.38974-1-hal.feng@starfivetech.com/
-> v3: https://lore.kernel.org/all/20241105034328.56439-1-hal.feng@starfivetech.com/
-> v2: https://lore.kernel.org/all/20241028015847.42344-1-hal.feng@starfivetech.com/
-> v1: https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfivetech.com/
->
-> Hal Feng (11):
->   dts: starfive: Switch to using upstream DT
->   riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
->   pcie: starfive: Make the driver compatible with upstream DT
->   riscv: dts: jh7110: Move common code to the new
->     jh7110-common-u-boot.dtsi
->   riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
->   board: starfive: spl: Drop the unneeded DT modification code
->   configs: visionfive2: Enable MULTI_DTB_FIT for JH7110 based board DT
->   riscv: dts: jh7110: Support multiple DTBs in a Fit image
->   board: starfive: spl: Fix the wrong use of CONFIG_IS_ENABLED()
->   board: starfive: spl: Support multiple DTBs for JH7110 based boards
->   riscv: cpu: jh7110: Sort the list of imply statements
->
->  arch/riscv/cpu/jh7110/Kconfig                 |  19 +-
->  arch/riscv/dts/Makefile                       |   1 -
->  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 198 +++++
->  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |   7 +
->  .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
->  .../jh7110-starfive-visionfive-2-u-boot.dtsi  | 117 ---
->  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
->  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |   6 +
->  .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
->  .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
->  arch/riscv/dts/jh7110-u-boot.dtsi             |  36 +-
->  arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
->  board/starfive/visionfive2/spl.c              | 391 +--------
->  configs/starfive_visionfive2_defconfig        |   4 +-
->  drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
->  drivers/clk/starfive/clk-jh7110.c             |  44 +-
->  drivers/pci/pcie_starfive_jh7110.c            |  59 +-
->  .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
->  .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
->  19 files changed, 358 insertions(+), 2135 deletions(-)
->  create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110.dtsi
->  delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
->  delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
->
->
-> base-commit: 880fcc49eb40a78ed27ff575aa02034d7bd74e80
-> --
-> 2.43.2
->
+SGkgU3RlZmFuLAoKT24gRG8sIDIwMjQtMTEtMjEgYXQgMTE6MTIgKzAxMDAsIFN0ZWZhbiBXYWhy
+ZW4gd3JvdGU6Cj4gSGkgQ2hyaXN0b3BoLAo+IAo+IEFtIDIwLjExLjI0IHVtIDE3OjMxIHNjaHJp
+ZWIgQ2hyaXN0b3BoIFN0b2lkbmVyOgo+IAoKWy4uLl0KCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9h
+cmNoL2FybS9kdHMvaW14OTMtcGh5Ym9hcmQtc2VnaW4tdS1ib290LmR0c2kKPiA+IGIvYXJjaC9h
+cm0vZHRzL2lteDkzLXBoeWJvYXJkLXNlZ2luLXUtYm9vdC5kdHNpCj4gPiBpbmRleCA2ODk3Yzkx
+ZjRkLi43MDJkODZmNGUwIDEwMDY0NAo+ID4gLS0tIGEvYXJjaC9hcm0vZHRzL2lteDkzLXBoeWJv
+YXJkLXNlZ2luLXUtYm9vdC5kdHNpCj4gPiArKysgYi9hcmNoL2FybS9kdHMvaW14OTMtcGh5Ym9h
+cmQtc2VnaW4tdS1ib290LmR0c2kKPiA+IEBAIC0xMzksNiArMTM5LDEzIEBACj4gPiDCoCAmdXNk
+aGMxIHsKPiA+IMKgwqDCoMKgwqDCoMKgwqBib290cGgtcHJlLXJhbTsKPiA+IMKgwqDCoMKgwqDC
+oMKgwqBib290cGgtc29tZS1yYW07Cj4gPiArwqDCoMKgwqDCoMKgwqAvKgo+ID4gK8KgwqDCoMKg
+wqDCoMKgICogUmVtb3ZlIHBpbmN0cmwgYXNzaWdubWVudHMgb25jZSB0aGV5IGFyZSBhZGRlZCB0
+byBpbXg5My0KPiA+IHBoeWNvcmUtc29tLmR0c2kKPiA+ICvCoMKgwqDCoMKgwqDCoCAqLwo+ID4g
+K8KgwqDCoMKgwqDCoMKgcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IiwgInN0YXRlXzEwMG1oeiIs
+ICJzdGF0ZV8yMDBtaHoiOwo+ID4gK8KgwqDCoMKgwqDCoMKgcGluY3RybC0wID0gPCZwaW5jdHJs
+X3VzZGhjMT47Cj4gPiArwqDCoMKgwqDCoMKgwqBwaW5jdHJsLTEgPSA8JnBpbmN0cmxfdXNkaGMx
+XzEwMG1oej47Cj4gPiArwqDCoMKgwqDCoMKgwqBwaW5jdHJsLTIgPSA8JnBpbmN0cmxfdXNkaGMx
+XzIwMG1oej47Cj4gPiDCoCB9Owo+ID4gCj4gPiDCoCAmdXNkaGMyIHsKPiA+IEBAIC0yMTUsNiAr
+MjIyLDQ4IEBACj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqBNWDkzX1BBRF9FTkVUMl9SRDNfX0dQSU80X0lPMjfCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoAo+ID4gwqDCoMKgwqDCoDB4MzFlCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoD47Cj4gPiDCoMKgwqDCoMKgwqDCoMKgfTsKPiA+ICsKPiA+ICvCoMKgwqDCoMKgwqDCoC8q
+Cj4gPiArwqDCoMKgwqDCoMKgwqAgKiBSZW1vdmUgcGluY3RybF91c2RoYzFfMTAwbWh6IGFuZCBw
+aW5jdHJsX3VzZGhjMV8yMDBtaHoKPiA+IG9uY2UgdGhleQo+ID4gK8KgwqDCoMKgwqDCoMKgICog
+YXJlIGFkZGVkIHRvIGlteDkzLXBoeWNvcmUtc29tLmR0c2kKPiA+ICvCoMKgwqDCoMKgwqDCoCAq
+Lwo+ID4gK8KgwqDCoMKgwqDCoMKgLyogbmVlZCB0byBjb25maWcgdGhlIFNJT04gZm9yIGRhdGEg
+YW5kIGNtZCBwYWQsIHJlZmVyIHRvCj4gPiBFUlIwNTIwMjEgKi8KPiA+ICvCoMKgwqDCoMKgwqDC
+oHBpbmN0cmxfdXNkaGMxXzEwMG1oejogdXNkaGMxLTEwMG1oemdycCB7Cj4gPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgYm9vdHBoLXByZS1yYW07Cj4gPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgYm9vdHBoLXNvbWUtcmFtOwo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoGZzbCxwaW5zID0gPAo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfQ0xLX19VU0RIQzFfQ0xLwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgMHgxCj4gPiA3YmUKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0NNRF9fVVNESEMxX0NNRMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoDB4NAo+ID4gMDAwMTM5ZQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTBfX1VTREhDMV9EQVRBMMKg
+wqDCoMKgwqDCoMKgwqAweDQKPiA+IDAwMDEzOGUKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEExX19VU0RIQzFfREFUQTHC
+oMKgwqDCoMKgwqDCoMKgMHg0Cj4gPiAwMDAxMzllCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9EQVRBMl9fVVNESEMxX0RBVEEy
+wqDCoMKgwqDCoMKgwqDCoDB4NAo+ID4gMDAwMTNiZQo+IENvdWxkIHlvdSBwbGVhc2UgZXhwbGFp
+biB3aHkgdGhlIHBpbiBjb25maWd1cmF0aW9uIGZvciAxMDAgTUh6IG9mCj4gREFUQTAKPiAmIERB
+VEEyIGlzIGRpZmZlcmVudCBmcm9tIHRoZSBvdGhlciBkYXRhIHBpbnM/CgpUaGUgZGlmZmVyZW5j
+ZSBpbiB0aGUgdmFsdWVzIGlzIGR1ZSB0byBkaWZmZXJlbnQgZHJpdmUtc3RyZW5ndGgKc2V0dGlu
+Z3MgcGVyIHBpbi4gVGhlIHZhbHVlcyBhcmUgdGhlIHJlc3VsdCBvZiBtZWFzdXJlbWVudHMgd2UK
+ZGlkIGZvciB0aGUgZU1NQyBpbnRlcmZhY2UuIFRoZXJlLCB3ZSBhZGp1c3RlZCBlYWNoIHBpbidz
+CmRyaXZlLXN0cmVuZ3RoIHRvIGdldCBpdCdzIGJlc3Qgc2lnbmFsIHF1YWxpdHkuCgpSZWdhcmRz
+LApDaHJpc3RvcGgKCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoE1YOTNfUEFEX1NEMV9EQVRBM19fVVNESEMxX0RBVEEzwqDCoMKgwqDCoMKgwqDCoDB4
+NAo+ID4gMDAwMTM5ZQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTRfX1VTREhDMV9EQVRBNMKgwqDCoMKgwqDCoMKgwqAw
+eDQKPiA+IDAwMDEzOWUKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgTVg5M19QQURfU0QxX0RBVEE1X19VU0RIQzFfREFUQTXCoMKgwqDCoMKgwqDCoMKg
+MHg0Cj4gPiAwMDAxMzllCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9EQVRBNl9fVVNESEMxX0RBVEE2wqDCoMKgwqDCoMKgwqDC
+oDB4NAo+ID4gMDAwMTM5ZQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfREFUQTdfX1VTREhDMV9EQVRBN8KgwqDCoMKgwqDCoMKg
+wqAweDQKPiA+IDAwMDEzOWUKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgTVg5M19QQURfU0QxX1NUUk9CRV9fVVNESEMxX1NUUk9CRcKgwqDCoMKgwqDC
+oDB4MQo+ID4gNzllCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPjsKPiA+ICvC
+oMKgwqDCoMKgwqDCoH07Cj4gPiArCj4gPiArwqDCoMKgwqDCoMKgwqAvKiBuZWVkIHRvIGNvbmZp
+ZyB0aGUgU0lPTiBmb3IgZGF0YSBhbmQgY21kIHBhZCwgcmVmZXIgdG8KPiA+IEVSUjA1MjAyMSAq
+Lwo+ID4gK8KgwqDCoMKgwqDCoMKgcGluY3RybF91c2RoYzFfMjAwbWh6OiB1c2RoYzEtMjAwbWh6
+Z3JwIHsKPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgtcHJlLXJhbTsK
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBib290cGgtc29tZS1yYW07Cj4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZnNsLHBpbnMgPSA8Cj4gPiArwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9DTEtfX1VT
+REhDMV9DTEvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAweDEKPiA+IDdiZQo+ID4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFfQ01EX19V
+U0RIQzFfQ01EwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgMHg0Cj4gPiAwMDAxMzllCj4gPiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NEMV9E
+QVRBMF9fVVNESEMxX0RBVEEwwqDCoMKgwqDCoMKgwqDCoDB4NAo+ID4gMDAwMTM5ZQo+ID4gK8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9TRDFf
+REFUQTFfX1VTREhDMV9EQVRBMcKgwqDCoMKgwqDCoMKgwqAweDQKPiA+IDAwMDEzYmUKPiA+ICvC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURfU0Qx
+X0RBVEEyX19VU0RIQzFfREFUQTLCoMKgwqDCoMKgwqDCoMKgMHg0Cj4gPiAwMDAxM2JlCj4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFEX1NE
+MV9EQVRBM19fVVNESEMxX0RBVEEzwqDCoMKgwqDCoMKgwqDCoDB4NAo+ID4gMDAwMTNiZQo+ID4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BBRF9T
+RDFfREFUQTRfX1VTREhDMV9EQVRBNMKgwqDCoMKgwqDCoMKgwqAweDQKPiA+IDAwMDEzYmUKPiA+
+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5M19QQURf
+U0QxX0RBVEE1X19VU0RIQzFfREFUQTXCoMKgwqDCoMKgwqDCoMKgMHg0Cj4gPiAwMDAxM2JlCj4g
+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoE1YOTNfUEFE
+X1NEMV9EQVRBNl9fVVNESEMxX0RBVEE2wqDCoMKgwqDCoMKgwqDCoDB4NAo+ID4gMDAwMTNiZQo+
+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBNWDkzX1BB
+RF9TRDFfREFUQTdfX1VTREhDMV9EQVRBN8KgwqDCoMKgwqDCoMKgwqAweDQKPiA+IDAwMDEzYmUK
+PiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgTVg5M19Q
+QURfU0QxX1NUUk9CRV9fVVNESEMxX1NUUk9CRcKgwqDCoMKgwqDCoDB4MQo+ID4gNzllCj4gPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgPjsKPiA+ICvCoMKgwqDCoMKgwqDCoH07Cj4g
+PiDCoCB9Owo+ID4gCg==
