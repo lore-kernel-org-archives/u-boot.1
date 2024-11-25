@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94BCD59D6C
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 20:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE24FD59D6B
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 20:47:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F1B789A9E;
-	Mon, 25 Nov 2024 21:45:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C891989A7F;
+	Mon, 25 Nov 2024 21:45:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VTlszsyt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F9WU1xF1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBA0B89A9C; Mon, 25 Nov 2024 21:45:44 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 7609B89251; Mon, 25 Nov 2024 21:45:47 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 850DE89A7F
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 21:45:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4884089A9C
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 21:45:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-84386a6669bso13949039f.3
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:45:42 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-83b2a41b81cso183880739f.0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:45:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732567541; x=1733172341; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732567543; x=1733172343; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vvGGIlI7n2nX6b0pt6D9Yna77Ycx5O8OQ6dV8ZvBacM=;
- b=VTlszsytoCZl/mWEuic3RoFAqpKAGXzBsZ6xQdHJEAgqNvCeqgwovgODf2EYhiFR/E
- t310QRcsGXolrjaKe+rY549uPlSRCb1GgghHLLXHT4Q+r+gguynKsz6b2KDk+DreDR+V
- xg5vp0Id0eTlGpn+hPv5Rnu2jIARPF2Xxo8+0=
+ bh=UjDSKWBcFLOYzxIF2T2aS49nlgPuQb6G/LFjK9nR6FM=;
+ b=F9WU1xF197ZMGHvQ1vYG9+YQDAjV15lG8i5C1yL62yB80GaSGS/XIHNWgtmiVUDrtb
+ NamY1S6BqqRm3PvpZQQXQwBzxp3KRgVJt8/0mEQXo4mMvOozr4ZFopJRxfHlA17uAA4E
+ 6B2xtnDCnkdq0xM3C9XV4/VN6oq+AARiCclXY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732567541; x=1733172341;
+ d=1e100.net; s=20230601; t=1732567543; x=1733172343;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vvGGIlI7n2nX6b0pt6D9Yna77Ycx5O8OQ6dV8ZvBacM=;
- b=f45dK9Y3eOZY0Ssk3PR61qO1s+h9INLky/MtqD68UKKaMVdP3a6pF+XCcV7UInEMYl
- F+ubnn6vPJDW35Yg2S201Ip+RLh5BUQRcn2XwgJ9Jb/UbZPkC61xMpgaDWODy/QDEBO8
- DDxSa93xAMYDesK+qRluZsXWj/len/RsUNJOswXuuUYe8eUQgdRja+e2UipTwzMtidRW
- QA96UY/ETU8viJyWhBQ022nqu54aV1NpNDPIR4DS26HuOmhR+bNdLP24VgvPvUR3+88E
- +PVTQvCZ4yaPRtUTbJRiW8iFkuJecnhsQXJqddajUHYoI2o9sTp7GXOGpGibpifQXZS8
- Vc5g==
-X-Gm-Message-State: AOJu0YwMCIpva49sSEXFmJrm/FkpqjZDXBF/zO7KKMnSEK+raqhKi/PL
- sS8vb+7aFibnKg2PEMrlXSgahN8cp+AkTNOemznauJ11hxq6W8Hgyn7fh30h4ER2WlcbuSHDhZ4
+ bh=UjDSKWBcFLOYzxIF2T2aS49nlgPuQb6G/LFjK9nR6FM=;
+ b=SYcjJIE33ARoyjG8jbV4/tWsiQWK5PDlPxnOfhRQPraoFXTwbvzZQ+hUnJBxnTZyIx
+ RmVqtYy2BjtyfBUjjo21+tEdnJlMFQOHjmjGsisBD4afLk8SM1167L4atXB93vSO2oct
+ SHHQN9yDbLdARPOjRGnBYwYJAvMnccLJvisRal6egayxf69MoV1ZFd5ACE9OAK0lfqEL
+ xOU15Q1wdZhxvH6qnZTop0ypSGhPgO1d11kC6YxHJYClRvDlT6LzAoLSq6DbPenS21Kj
+ EopFjYpbnD6LZYDHNMVbGaszOH/ZsjCxGB1LlaaKoKnbTfc4BbWH6UgaY52IQR63iTeW
+ Pykw==
+X-Gm-Message-State: AOJu0YyPkanzH+IJMVrg4VPa1NPuTRggiBUnvdNVmNx3YbKCTQ73FwGU
+ f54bMXWOVfqpWor8lGZNkZt7wq9zP9UJQY8yuE5M7AoXdNXj5DSacOqb54AmokDLWWfDxbRqu4Y
  =
-X-Gm-Gg: ASbGnctGEzYfT3vVPE3m3ICJ7yA9DWGO7qh2lXooMMBZtRCgMLqjfI4Noa98Kf8Ht6g
- oReJ32GtQ6lZyWZME/HOyanwoIP/c0VbZvb6xJLGolTirXfqaNFaxZABZK+zGaJ4QLlL+tZdP5A
- LNBQPx/lAsiD+HS4PjKiHjsIaSIERFsfvrzzbl66QLR/d84ibU2/1YVKjvchLNm8b+Qj5qU5uav
- 7KYoCoHPm8A0wbrbT4KgwvQBj7FliS3sXZBkbzvJl1ImDA=
-X-Google-Smtp-Source: AGHT+IG6ZE0Kkx9GSuatJWSfkSL8NistjfZ8aSHCSRkloMzegTen4agvBl3a6z78nrIc7aOLtf7ucw==
-X-Received: by 2002:a05:6602:14d3:b0:835:4402:e2eb with SMTP id
- ca18e2360f4ac-83ecdc60ebemr1331415439f.7.1732567540792; 
- Mon, 25 Nov 2024 12:45:40 -0800 (PST)
+X-Gm-Gg: ASbGncuFHpAWsviLvxhA6/2P6zsBunnfCggs+XuHQmVC1yuHzcVHpK+39ZOSByC+TJL
+ o/DG8naaCtiYJm3fyz9beEMImzqDMSYSXJMplei7W4sN6/oUzmv26WadHnsSqB+h2u9UmMq6HDN
+ YIRdIfBq5hb0lBNofTdi2QR0MuiQquydw2rPFYep/FezVTIr5o1ugqrl024JL7dY2vZIAeiaYG1
+ /qCUoux0NphVtOd75HFRKct1R0sDMwO48GB7ZCTCGAig54=
+X-Google-Smtp-Source: AGHT+IE1HmITe0Ce9nBTzT2zymjP74qkGKrSuGnFnn/XIptM0AmO3P2NqhRw6x7UHnez+3LrF/kyKQ==
+X-Received: by 2002:a05:6602:3c6:b0:83b:47:8d5 with SMTP id
+ ca18e2360f4ac-83ecdc538d9mr1612444039f.3.1732567543556; 
+ Mon, 25 Nov 2024 12:45:43 -0800 (PST)
 Received: from chromium.org ([50.235.115.130])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-841ac8403a2sm26134639f.9.2024.11.25.12.45.38
+ ca18e2360f4ac-841ac8403a2sm26134639f.9.2024.11.25.12.45.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 12:45:39 -0800 (PST)
+ Mon, 25 Nov 2024 12:45:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/13] efi_loader: Tidy up efi_reserve_memory()
-Date: Mon, 25 Nov 2024 13:44:50 -0700
-Message-ID: <20241125204456.1525752-12-sjg@chromium.org>
+Subject: [PATCH 12/13] efi_loader: Drop extra brackets in efi_mem_carve_out()
+Date: Mon, 25 Nov 2024 13:44:51 -0700
+Message-ID: <20241125204456.1525752-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241125204456.1525752-1-sjg@chromium.org>
 References: <20241125204456.1525752-1-sjg@chromium.org>
@@ -94,52 +94,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust this function to use addresses rather than pointers, so that it
-doesn't have to use mapmem.
+Simplify a few expressions in this function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/efi_loader/efi_dt_fixup.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ lib/efi_loader/efi_memory.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
-index 0dac94b0c6c..ddb0d1f8fce 100644
---- a/lib/efi_loader/efi_dt_fixup.c
-+++ b/lib/efi_loader/efi_dt_fixup.c
-@@ -9,7 +9,6 @@
- #include <efi_loader.h>
- #include <efi_rng.h>
- #include <fdtdec.h>
--#include <mapmem.h>
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index f687e49c98e..32c5143e205 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+ 			     (carve_desc->num_pages << EFI_PAGE_SHIFT);
  
- const efi_guid_t efi_guid_dt_fixup_protocol = EFI_DT_FIXUP_PROTOCOL_GUID;
+ 	/* check whether we're overlapping */
+-	if ((carve_end <= map_start) || (carve_start >= map_end))
++	if (carve_end <= map_start || carve_start >= map_end)
+ 		return EFI_CARVE_NO_OVERLAP;
  
-@@ -21,14 +20,11 @@ const efi_guid_t efi_guid_dt_fixup_protocol = EFI_DT_FIXUP_PROTOCOL_GUID;
-  * @nomap:	indicates that the memory range shall not be accessed by the
-  *		UEFI payload
-  */
--static void efi_reserve_memory(u64 addr, u64 size, bool nomap)
-+static void efi_reserve_memory(ulong addr, ulong size, bool nomap)
- {
- 	int type;
- 	efi_uintn_t ret;
+ 	/* We're overlapping with non-RAM, warn the caller if desired */
+-	if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
++	if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
+ 		return EFI_CARVE_OVERLAPS_NONRAM;
  
--	/* Convert from sandbox address space. */
--	addr = (uintptr_t)map_sysmem(addr, 0);
--
- 	if (nomap)
- 		type = EFI_RESERVED_MEMORY_TYPE;
- 	else
-@@ -36,7 +32,7 @@ static void efi_reserve_memory(u64 addr, u64 size, bool nomap)
- 
- 	ret = efi_add_memory_map(addr, size, type);
- 	if (ret != EFI_SUCCESS)
--		log_err("Reserved memory mapping failed addr %llx size %llx\n",
-+		log_err("Reserved memory mapping failed addr %lx size %lx\n",
- 			addr, size);
- }
- 
+ 	/* Sanitize carve_start and carve_end to lie within our bounds */
 -- 
 2.43.0
 
