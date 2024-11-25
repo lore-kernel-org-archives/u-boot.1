@@ -4,106 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D714CD3B7F0
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 283B2D3B7EF
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:26:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 433438961D;
-	Mon, 25 Nov 2024 09:24:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A518F8961D;
+	Mon, 25 Nov 2024 09:25:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kwSMQi9X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j3cdoel7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17CF89664; Mon, 25 Nov 2024 09:24:52 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id BD19B89664; Mon, 25 Nov 2024 09:25:57 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1C478961B
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:24:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F4708961B
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:25:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43155abaf0bso38387765e9.0
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:24:50 -0800 (PST)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5ced377447bso5559057a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:25:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732523090; x=1733127890; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dEf3RQiZJv1WT5rlKkP3LJTXLyeWIgkGPqV3QkkyIbs=;
- b=kwSMQi9XLhOlS4j+VsvHVZ8lrcMg16mx2AKD37lfBNOxsROrMOazQs54+ftdg6I8Dm
- zLRyCH2JOpWHr01J1s2lSTiTqwweaWNHpvRUaAL8QrFuSEoxDRvLNkDF/Fpveb0VrVGJ
- VGkJpfMfZrx1JtdMujlP+t8+i8iuu66H8L0H3mYAsF26+iU+azFwHeRa3xuPvbetHByv
- r28UFE7awlLAvMZeYtP8je79fFF/lH74m3TdYBbELdoQBCeQWejqJ7u4ndofDx9hLXLo
- NFMxPLXcgLcEKoWmcOA93CWm1wrAuZtPdO/ktfY934lXpJ5Dhpi9bSmQt3LnJwXqH8Yl
- DQxg==
+ d=gmail.com; s=20230601; t=1732523155; x=1733127955; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r3HEzw0Tdm8E8mijqZgEOsaOjGQseIXH1gXkJ9DgLZA=;
+ b=j3cdoel73S0Lp8HKFXBGckkLyjOfzyqwigmJtLWP1QF+PFD7nmhQPhYsqmHf3MGu9D
+ d4wtlUIWU1Rn4pxU67Hmn6+kpWfOn1CSGwubEwL818o3unY6A9Hk+192ijJ10mMaQUVj
+ 34gmajnA/RIZWK5rgWRZRiwitWmYzfnINJVxCY6JfaHNwS8HV72bJkWfD42NWXi/0Pqp
+ KT5cgWJlR3vjRf7FRbszwSvDwvGR0BJxbdbX5QbQ1c/Vffgwt3nLUmFjVgZKm4oWnx+Z
+ 6iceSoRoo+lcqwBNe37lDn6ORsl/mWSk/f/lc8bMqWabFCRIvyU+2Rty5Jw1tQpGdMv/
+ TXLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732523090; x=1733127890;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1732523155; x=1733127955;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dEf3RQiZJv1WT5rlKkP3LJTXLyeWIgkGPqV3QkkyIbs=;
- b=Ss1sJp9gLngx/1Cxi9hXUDMi/K9yVbMYD9A0ywaSK6KuF7qg+Uua6h7Rm3lpw9rX0t
- PrxBvuPnTR4HVJIIyWqz3DpYP24XDsc4mSHGJDs12V0EDCWMoTHyP7rDO2S7muj9eHr/
- QcZ+nb4OSnh3GG+fHEnPEeshlcTAH4RoJ4SSqO4AKDJAsAH/m59//7wrf/JHbU2OdAhV
- Ldxj9fQ9iM8lKIe8ncCdDqPNChdirJZwvS10aXapATXAhd13WH8TCpcyOlY++ehkyw8i
- 0QQcuqgYVGAPH131FNx6hYAqad9RAEztoMwPg7ElgLROh60/EUmHS4HYT8dINnkg/lK2
- 2uyQ==
+ bh=r3HEzw0Tdm8E8mijqZgEOsaOjGQseIXH1gXkJ9DgLZA=;
+ b=Exfu4g7xEg3M92G9thzFy3KUynmul6KPcC8Jl0qWllTBpubAVl7F6XuuqRat+2tqv3
+ 1hd8ryExmsj13VsOM3+Q5E8+pwsnBGe/Y0p7RnZleL3SApgdTofYA0Vtz3bT5DbOAl72
+ jF2nBRgY7aBF+cQhIeLc4rjEZQ9OlQn7dyLMrdXac8GzOOSWvN6YxJVEuV6CJZKKx8VW
+ 7GeZLyYVBKyLM5ABXRBgqk/nx50j6lFpVMQ0N1lHlqhB99g0RtiIM0uzzMq4eT2xUzv0
+ 3wSezYyCJpaXfRrjRFpQWDGNeH6Y+Oeqo+tYWW8KJfTxGUKBq+/leUYeJt8zi8rPxJRm
+ JdaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXen1w+n5tS0E7lBakFOkCD4O8RKWZnEXnpYC9I5ScFWbSAGncAFCzHJTl3qUI5pR4gUwxWhJw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3lNtKwsa28l1tKvojSOJ20GuomyitGPoxQkkmkrdsV/Jnz8qX
- NdqetsOL9Tl1kVGVq36O8PcchkCsrb6x4qnwbwr4P33TA7j5FldbguCnur49n4plnckbV6/xsdm
- e
-X-Gm-Gg: ASbGncuh3fd/c6k+qIBi9DlmjqoN40Loblawupo5oN8lYby/0nHfWcF42GaSvjT67AX
- 6LD8cgygoNRWC7u1pV9fGRcQ/f4Hqeu1/naOeifA4aw2GWOpY8cimM0TU9ww8ys4QhHZ2N6mlR7
- nGV6ijgg1OVAAmiKuzqJOd2P4lUvlujY1GBhCNSjvpIhW/26P8qSO20jA9vuruaOZAaI9qzSww/
- Dna2pqPqPPGSEv+/B4UNxKTVG2LhJryV36Y0Hu7t6/5Lvwyt5AavP/fEg9L9HU4Pj+2Ztc=
-X-Google-Smtp-Source: AGHT+IEPSi64Km3ZUZfUBHusP+mYqM3E7pS7UcuZf2n3HPAIEkagRqd/5Pninpt82F2a7cywUpkInA==
-X-Received: by 2002:a05:600c:4f4e:b0:431:5e3c:2ff0 with SMTP id
- 5b1f17b1804b1-433ce42549amr98621775e9.8.1732523090269; 
- Mon, 25 Nov 2024 00:24:50 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433cde8c804sm119996345e9.30.2024.11.25.00.24.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 00:24:49 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 25 Nov 2024 09:24:47 +0100
-Subject: [PATCH] regulator: qcom-rpmh-regulator: add support for pmc8380
- regulators
+ AJvYcCXHWo+nZMdp9h+/Qqj4liCMJllyaK5LpfA1sc8207HEgnSHSjCvc0FbmqpcdAW7pj26ImUsgpk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxKV+jWZkl4rBaGeV/4EIJn4vhaN4TwY6MMGZf9UY8NqqWqjn33
+ gVxs0agoSPPHTEIWAdzCgBA1YUpI8QppZZGiKF6bm+FdwUSPPZ+6Em71CLNmeJJDt5I/bomFoHv
+ YWhjr9BUDwpR5EZ3DWi6CQk/bOEM=
+X-Gm-Gg: ASbGncu5G2bIdLASmCeOOXCrmpT7GQROuvcKQQfjJLPkftP550X+17Qs0f6u9k22C/E
+ uybZbZ1wyxbnDxgNJKb6LCOMqC4iY9P8/
+X-Google-Smtp-Source: AGHT+IHMrcnqEWQ102EEetTwcVuG37S1CCYZGLtQyl4qTHngkfoPSBg7nhn00ieiZgkwauUm/wWJBOeb4Dsz5HcElz8=
+X-Received: by 2002:a17:907:31c5:b0:a99:89e9:a43d with SMTP id
+ a640c23a62f3a-aa509d3fbd0mr1191418366b.39.1732523154579; Mon, 25 Nov 2024
+ 00:25:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241125-topic-hamoa-pmc8380-rpmh-regulators-v1-1-695c44ea8586@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAE40RGcC/x3NQQqDMBBA0avIrB1IUttaryIuYjKagcaEiZaCe
- PeGLt/m/xMKCVOBoTlB6MOF01ah2wZcsNtKyL4ajDKd1uaOe8rsMNiYLObo+luvUHIMKLQeb7s
- nKWjmV/dQi/PP2UMtZaGFv//LOF3XD1amD1d1AAAA
-X-Change-ID: 20241125-topic-hamoa-pmc8380-rpmh-regulators-2b9460fcd7bd
-To: Jaehoon Chung <jh80.chung@samsung.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2085;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=qPjA59fMJLiQZUQ+EkTBXDvq7VRasHz0wthIEZ7uvzY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnRDRRkGew4Lg6iXT4H/Ez8hXDWN2Rhy8DMYmNslAh
- 9sEowmyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0Q0UQAKCRB33NvayMhJ0cweEA
- C1UunBxet0nUiQFw3Qd0paXDFww0rYQc6hXkVr/sQLDxMr9x/kVP8ne+Fb5WZGyl9Icm8GggZZ3CBg
- jdP5udVbgPozSFuyU1B8NoSCIk1SYpa01dP9kssUfMmXCCvPBecr8WHo36Ij82mjZy9o+rSydl1NB8
- AM4DaqcDlJfRsitf4SCGctgn36M7aNr7i99JBkOOpu5V1BI3s7cCujk4G3uGXZsxmKfO3bikyQD9yv
- kcl7yBNXZQIA6a7EjUNatkouXbBN92C6KM6FIGj960aR19BE1tjTKVAAgDwYrsUoln7wE9UF9XEIpz
- CfCRJ22BkOQQlJQ51d0DLy+4oSo0EOHAQIBpfRf3n+h2gs7WAy3areGGd+1en+3gPNFfgGtE4OmE5I
- emep0IihqaMnVswC8NLCSymY/MqWS31mGWUmhd34zns9op8eE5VA0LKJ+nbmhw7HpGGMRh1Ogou+iv
- 6NdzXP2uUCJBAV/BLHazAU4gmPUmbkjsfoU3ucSWOkyttGxpfDYvUlQJ/f09i1z7ZnpSa8Ygb3Ipgy
- UjU1uyrxnCT/oGINrQhjXJAa77zqXgX916ZqfK+CE0/EEuVLlUXwoFVyjvHXbo7pQ/PRCstMkC0Fhh
- dnxs6pJ2NHUeSEamIDGJyIqbu5cpgaraUiQdVfxH1CbqFtHvjFNZoj82X23Q==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+References: <20241125003205.75327-1-hal.feng@starfivetech.com>
+In-Reply-To: <20241125003205.75327-1-hal.feng@starfivetech.com>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Mon, 25 Nov 2024 13:55:38 +0530
+Message-ID: <CANAwSgQ0ScgATSWHgaWPCuJFWEY-MspEDJaGHj9gwWcS2BKcew@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] Support OF_UPSTREAM for StarFive JH7110
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ E Shattow <lucent@gmail.com>, Conor Dooley <conor.dooley@microchip.com>, 
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,57 +95,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the PMC8380 regulator data found on the Snapdragon X Elite platforms.
-The tables are imported from the Linux driver.
+Hi Hal Feng,
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- drivers/power/regulator/qcom-rpmh-regulator.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+On Mon, 25 Nov 2024 at 06:11, Hal Feng <hal.feng@starfivetech.com> wrote:
+>
+> This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
+> All the JH7110 based boards can use the DT from upstreaming linux kernel.
+> The v1.3b board device tree is set as the default device tree. Support
+> CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
+> EEPROM information.
+>
+> Note:
+> 1. Mars CM (lite) are missing upstream dts and so are detected but not
+> supported in this series. Users of Mars CM and Mars CM Lite may stay with
+> U-Boot v2024.10 until this is resolved.
+>
+> 2. Property values of network phy0/1 for all JH7110 based boards now
+> follow the upstream dts.
+>
 
-diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-index 2dc261d83e3727a5b2f72a5d13c1ef17a9677a8c..70df51b5fa4ee4001b7eff6facc80957ada84391 100644
---- a/drivers/power/regulator/qcom-rpmh-regulator.c
-+++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-@@ -536,6 +536,21 @@ static const struct rpmh_vreg_init_data pm8550ve_vreg_data[] = {
- 	{}
- };
- 
-+static const struct rpmh_vreg_init_data pmc8380_vreg_data[] = {
-+	RPMH_VREG("smps1", "smp%s1", &pmic5_ftsmps525_lv, "vdd-s1"),
-+	RPMH_VREG("smps2", "smp%s2", &pmic5_ftsmps525_lv, "vdd-s2"),
-+	RPMH_VREG("smps3", "smp%s3", &pmic5_ftsmps525_lv, "vdd-s3"),
-+	RPMH_VREG("smps4", "smp%s4", &pmic5_ftsmps525_mv, "vdd-s4"),
-+	RPMH_VREG("smps5", "smp%s5", &pmic5_ftsmps525_lv, "vdd-s5"),
-+	RPMH_VREG("smps6", "smp%s6", &pmic5_ftsmps525_lv, "vdd-s6"),
-+	RPMH_VREG("smps7", "smp%s7", &pmic5_ftsmps525_lv, "vdd-s7"),
-+	RPMH_VREG("smps8", "smp%s8", &pmic5_ftsmps525_lv, "vdd-s8"),
-+	RPMH_VREG("ldo1",  "ldo%s1", &pmic5_nldo515,   "vdd-l1"),
-+	RPMH_VREG("ldo2",  "ldo%s2", &pmic5_nldo515,   "vdd-l2"),
-+	RPMH_VREG("ldo3",  "ldo%s3", &pmic5_nldo515,   "vdd-l3"),
-+	{}
-+};
-+
- /* probe an individual regulator */
- static int rpmh_regulator_probe(struct udevice *dev)
- {
-@@ -662,6 +677,10 @@ static const struct udevice_id rpmh_regulator_ids[] = {
- 		.compatible = "qcom,pm8550vs-rpmh-regulators",
- 		.data = (ulong)pm8550vs_vreg_data,
- 	},
-+	{
-+		.compatible = "qcom,pmc8380-rpmh-regulators",
-+		.data = (ulong)pmc8380_vreg_data,
-+	},
- 	{ /* sentinal */ },
- };
- 
+Please add my
+Tested-by: Anand Moon <linux.amoon@gmail.com>
 
----
-base-commit: 7fe55182d9263a62e18b450c97bdf0b8031e5667
-change-id: 20241125-topic-hamoa-pmc8380-rpmh-regulators-2b9460fcd7bd
-
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
-
+Best Regards
+-Anand
+> Changes since v5:
+> - In patch 2, drop the override of rx-internal-delay-ps on phy0 and phy1.
+> - In patch 5, drop "/delete-property/ motorcomm,tx-clk-10-inverted;" for
+>   Mars network phy0.
+> - In patch 8, rename fdt and conf based on the compatible identifier of
+>   boards.
+>
+> Changes since v4:
+> - Merge patch 2, 3, 5 into patch 1, ensuring git bisect works.
+> - Add a new patch to sort the list of JH7110 imply statements.
+> - Drop the reparent of clock JH7110_AONCLK_APB_FUNC in patch 4, which is
+>   unnecessary and will cause errors in gmac0 initialization.
+>
+> Changes since v3:
+> - Add detection for Milk-V Mars CM (lite) boards in patch 13.
+>
+> Changes since v2:
+> - Drop patch 1, because the riscv of_upstream Makefile is created by Conor
+>   in commit 239e4705099c.
+> - Drop phy0 rx delay for milkv u-boot dtsi in patch 9.
+> - Add a Fixes tag for patch 13.
+> - In patch 14, the PCB version is only obtained when the product_id is
+>   VF7110. Improve the commit messages.
+>
+> Changes since v1:
+> - Drop patch 12.
+> - Modify patch 11 and add three new patches to support
+>   CONFIG_MULTI_DTB_FIT. The SPL selects the correct U-Boot dtb using the
+>   EEPROM information.
+>
+> History:
+> v5: https://lore.kernel.org/all/20241119020425.51989-1-hal.feng@starfivetech.com/
+> v4: https://lore.kernel.org/all/20241111020808.38974-1-hal.feng@starfivetech.com/
+> v3: https://lore.kernel.org/all/20241105034328.56439-1-hal.feng@starfivetech.com/
+> v2: https://lore.kernel.org/all/20241028015847.42344-1-hal.feng@starfivetech.com/
+> v1: https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfivetech.com/
+>
+> Hal Feng (11):
+>   dts: starfive: Switch to using upstream DT
+>   riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
+>   pcie: starfive: Make the driver compatible with upstream DT
+>   riscv: dts: jh7110: Move common code to the new
+>     jh7110-common-u-boot.dtsi
+>   riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
+>   board: starfive: spl: Drop the unneeded DT modification code
+>   configs: visionfive2: Enable MULTI_DTB_FIT for JH7110 based board DT
+>   riscv: dts: jh7110: Support multiple DTBs in a Fit image
+>   board: starfive: spl: Fix the wrong use of CONFIG_IS_ENABLED()
+>   board: starfive: spl: Support multiple DTBs for JH7110 based boards
+>   riscv: cpu: jh7110: Sort the list of imply statements
+>
+>  arch/riscv/cpu/jh7110/Kconfig                 |  19 +-
+>  arch/riscv/dts/Makefile                       |   1 -
+>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 198 +++++
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |   7 +
+>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
+>  .../jh7110-starfive-visionfive-2-u-boot.dtsi  | 117 ---
+>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
+>  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |   6 +
+>  .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
+>  .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
+>  arch/riscv/dts/jh7110-u-boot.dtsi             |  36 +-
+>  arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
+>  board/starfive/visionfive2/spl.c              | 391 +--------
+>  configs/starfive_visionfive2_defconfig        |   4 +-
+>  drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
+>  drivers/clk/starfive/clk-jh7110.c             |  44 +-
+>  drivers/pci/pcie_starfive_jh7110.c            |  59 +-
+>  .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
+>  .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
+>  19 files changed, 358 insertions(+), 2135 deletions(-)
+>  create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110.dtsi
+>  delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
+>  delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
+>
+>
+> base-commit: 880fcc49eb40a78ed27ff575aa02034d7bd74e80
+> --
+> 2.43.2
+>
