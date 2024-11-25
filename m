@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ACAD59D72
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49BFD59D73
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7932892C6;
-	Mon, 25 Nov 2024 22:25:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0D5E288C9C;
+	Mon, 25 Nov 2024 22:28:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=dominik.wernberger@gmx.de header.b="ojqYKJfE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lRLYAuBZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E71D789757; Mon, 25 Nov 2024 22:22:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2CE6D896C3; Mon, 25 Nov 2024 22:28:45 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7992B896AC
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:22:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04602890A8
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:28:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dominik.wernberger@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732569731; x=1733174531;
- i=dominik.wernberger@gmx.de;
- bh=Dtw3jKnFWTScq+bEtPQXeq5v5Gi8TBhEXHx7bMz4898=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
- MIME-Version:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=ojqYKJfEmWWc+4Bf34mBbPui1GI9pSy2xiw0V5zwqtSVRIoxEgkBajBRCKO5X/02
- WbKok0rkbaa/KAjHjaKrsJgSGlqmPD8M9JqgtPipi4BUvF+Qng17OcpwkO2RG3dBb
- Ry9FpE9w2DW1OH0sfa2uHnQi3dL+fBC/u2lCl8d5vwjPvaUyFauYXGBSJ2YVG1wtw
- ozU4xB4WStkryyHBkJr9ePRSORPOkAxr0mO+zG4SNSL827kA6Y9/h9Y3lmEi2aR12
- dAJLLEePh3iePAVrVKR+tzA3LstyjI/D/pjqQng0OKhfiRkDZEJuNlk09/WLhPW/o
- lWoZ8rYy/zM5khEhfA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from doms-pc.fritz.box ([91.51.57.47]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTABZ-1t8hbw37pH-00Pp92; Mon, 25
- Nov 2024 22:22:11 +0100
-From: Dominik Wernberger <dominik.wernberger@gmx.de>
-To: u-boot@lists.denx.de
-Cc: marek.vasut+renesas@mailbox.org, jagan@amarulasolutions.com,
- michal.simek@amd.com, tudor.ambarus@linaro.org, venkatesh.abbarapu@amd.com,
- Dominik Wernberger <dominik.wernberger@gmx.de>
-Subject: [PATCH] spi: Fix missed rename from SPI_ADVANCE to
- SPI_STACKED_PARALLEL
-Date: Mon, 25 Nov 2024 22:21:52 +0100
-Message-Id: <20241125212152.29397-1-dominik.wernberger@gmx.de>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b1474b1377so375019785a.2
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 13:28:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1732570122; x=1733174922; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=qYd//irFcvUm3dU3DY/eiENHprft+J8Q93egBxI55dY=;
+ b=lRLYAuBZjw534Ku1FtiJBlwIyzIa9exfVftCBfSFRiKUQvvkAMbT7je6SgPtyYbnxf
+ isx0rHoU/R6I0Ods8wAkThin39h2JENZGMgjG/xRE6Yn8Woe0yrXddPjekG6GZ1hjXqb
+ 5hGiId4Sa8ZIHJ+zMqczLGl4vfTgJaKd0HH+E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732570122; x=1733174922;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qYd//irFcvUm3dU3DY/eiENHprft+J8Q93egBxI55dY=;
+ b=M8BiSDblu7WvnYH4nWb3NKfoT5Bc0HWUAPoGXgH7QhwCfr1f5Kv52Ue2XJR7njbaGW
+ JAi2+6S9PqEbA4pX88qTHSPNtKesYAn0L36bHe93Q3LRpynsBHAgfK3W5i5vhBxSQcYR
+ iWkMHCWqY++DbD82iOZ8j8rha0hlYcIgJIvRQg5nMgdVUVGSXvhxHoQdABd0LMQZdtT3
+ lNZD+jE9pUYpOXFlW2ZhrJBzqmXF6G8NmVOKQO9EyrHsxi4chA+POO4eef0EdEpQ0G+U
+ ZyIfqSKdGKJvxZmPKDF3nTA9VfcRPYsfLxtLKPQYBEZ0ugGjkjubpBieDVpIZCd5sR/9
+ 6qjg==
+X-Gm-Message-State: AOJu0YyD5BcVfLIMhqKMA2JbX6BmgH1Ch4+6X4nQfDg3EMYvQRHT+tf2
+ /Wn/BJ32EnkMlssr/50FWB53qDZNDgAVC+vezNFwx/OUQY+rQTA25SH0p0sedAtZiQGDp45BbRk
+ r294=
+X-Gm-Gg: ASbGncvrmZQ3I2aRjYlZTy8o1A0ZTttpT7mhdijv27zpC4gNmWf/eiQRyHUyWtF+wzr
+ cm75HdcZrixQoSTVaN/Yve5q0O+8Ado5e6s5HOWy43gBAR2XIfcWMoF6KwkJh0UR24bJ/n2jGNu
+ +iVHUvY92YsPIdO4jO3tfqmefw1X9Z6WcCLyoWN3XuykBIczPkWckYVdgiWWpIT8pw3h2uXlcUp
+ TfoJx6HqSRpUEtipv6NoymRgOdCme8IVEyg/MjloZjllY1+
+X-Google-Smtp-Source: AGHT+IH/T9RNilov8rLfImjZK5bjWf1gIEwJOmQDXroxv+R9mbBsqdXKC6U95Bhj92GN0MqLPD7Gyw==
+X-Received: by 2002:a05:620a:1912:b0:7b6:668a:5a5 with SMTP id
+ af79cd13be357-7b6668a07a5mr742277285a.50.1732570121257; 
+ Mon, 25 Nov 2024 13:28:41 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b66003e909sm223082185a.69.2024.11.25.13.28.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Nov 2024 13:28:40 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+In-Reply-To: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
+References: <20241021142040.2981390-1-andriy.shevchenko@linux.intel.com>
+Subject: Re: [PATCH v1 1/1] mtd: Drop superfluous const qualifier
+Message-Id: <173257011976.3962364.990881836798624153.b4-ty@konsulko.com>
+Date: Mon, 25 Nov 2024 15:28:39 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:D2lslVrHwFikwDOXtpTueYS8mM4rf/5tM7wzjc+8MXxSaTf5KCD
- ia4ej1+WU8Jpyk+TFYid3WEA6TQodFzv6NhWQwQK3et4w5fnPwnl0GaoXirf7UdT5EhUUYz
- xtiKYscT3crgdxu4sPtM/9zVL+PD6dedazo9mDZ6MKX1G6r85uYTVLycT7DTYtn7ztpTKpw
- +eqn/AZYX56cWvarktR1g==
-UI-OutboundReport: notjunk:1;M01:P0:0JkXQfR/8Kk=;qvRk0D0XX2rESp2CTarTS3ODTi1
- 662CiicCJCJx8vVtPHfURRAuNKGuOt15cdB0XEVCLmp1IKAvhsHh50OSAAe3PtvonWc6pzDl1
- jqsJtLEGU+WEpUkiOmaPxZmmLuhDXhKsmw+VBXwvS4IJashPnzoGw5nDozmMfGBWXw9+cUFrN
- rHikFzFhEY+7QwNnPVPSRjpe/x8q8FqXFP0CAVId6zhGPvZbxuzn+h2jeTIiBxV2oCG1yjipb
- urGEazH7/EuLRWfndgv4A62mXPwVehpSx3iS4QVaGN2r6cVFdqNBcaHopLKEe0AY2GzYpirXR
- YUXj29cA4q0ZoO98UIk5FdZiLjzOiCUfjsELZHrlPaqyhdli/0eXAtwBaPa/j4yPxtBB2wEp1
- 42/j2zfitNaMovs1T3TcPUgcjUKQM4/meO5roPfpZlqnK5fofg5lD5nNUPU3yUJFi6fTznEsv
- BuPCAMxSGTcZ8VqGdPmoK3BgZZXw6CpgVHywLlPv8h8sFMZSHELpkde+xHnV97+g7PJkBkxL3
- Z2YsqLd084NG18xjU9k+6Iy+Y1GGSLrPVmxfsOupNyRiRJX97cesajzJnA363/rt1AwqEG1tT
- EthIUWFSQcoIvoBkCQ3kZqU22MwRH+hVfEhWXjLcBSiI9gxVrK5bnuetRuwmcUe1elxt+DNPp
- B2guggLlpk+3xHxvVireN9NK6NpAs0V61pHw5Lppp+ajRPYsb4kOLveb3S7XKXoUGppXCs8Nk
- lmvzGUm+6YC+msc+MxdR8WdzepOioF4ttgXrVbIurP7s8VSLNbGRL8/pl+42Zsa290pmjxXYo
- FphKj7jM0TB4T9Ewz/avADco3SFG7mbwj9u55iix8IVinjT9YhyG36XFCRhRVLX2zOiByESv+
- tUKPNaWsukLmWt/VrYQ8DCBH9gzTCWABeY53mZ7cbemJgHnIPx+DKswiaWYM2cK0lb68L5+a9
- KRxMimcNppm2den79nITb2TXWBi7UJXjj4Z4hadejY3QoL1swMxXq1FPcysqTd2rAjaRZaJib
- OkcBeSyHoEQ8FYumJsQzn0Ad8/SRNZhUfegH4R5WCJYvlObVzgs6ILyrJYMsV9zivr0nRBHPD
- wf1rf6ZPbvtUyad0FcXeHYusd/cZxd
-X-Mailman-Approved-At: Mon, 25 Nov 2024 22:25:14 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,44 +91,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix missed rename from SPI_ADVANCE to SPI_STACKED_PARALLEL. This fixes an issue encountered while testing the Zynq-7000 QSPI parallel Flash implementation.
+On Mon, 21 Oct 2024 17:20:40 +0300, Andy Shevchenko wrote:
 
-Signed-off-by: Dominik Wernberger <dominik.wernberger@gmx.de>
----
- drivers/spi/spi-uclass.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> The compiler will ignore it anyway:
+> 
+>   include/linux/mtd/mtd.h:342:15: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+> 
+> 
 
-diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-index 36b7d383aa..d604975374 100644
---- a/drivers/spi/spi-uclass.c
-+++ b/drivers/spi/spi-uclass.c
-@@ -446,7 +446,7 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 	slave = dev_get_parent_priv(dev);
- 	bus_data = dev_get_uclass_priv(bus);
+Applied to u-boot/master, thanks!
 
--#if CONFIG_IS_ENABLED(SPI_ADVANCE)
-+#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
- 	if ((dev_read_bool(dev, "parallel-memories")) && !slave->multi_cs_cap) {
- 		dev_err(dev, "controller doesn't support multi CS\n");
- 		return -EINVAL;
-@@ -515,7 +515,7 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
- 	int mode = 0;
- 	int value;
+-- 
+Tom
 
--#if CONFIG_IS_ENABLED(SPI_ADVANCE)
-+#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
- 	int ret;
 
- 	ret = dev_read_u32_array(dev, "reg", plat->cs, SPI_CS_CNT_MAX);
---
-2.34.1
-
----
-
-Another approach to get the commit message right. In case there are still some issues
-feel free to fix them up. I'm obviously not yet used to the Linux mailing list which
-will hopefully change soon. Until then I don't want to annoy you with too many mails.
-
-Thanks for your help! :)
-
-BR Dominik
