@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D27D59D71
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:09:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ACAD59D72
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 21:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D732388B4B;
-	Mon, 25 Nov 2024 22:09:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B7932892C6;
+	Mon, 25 Nov 2024 22:25:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ySfE6eIN";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RQJgYUtf";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=dominik.wernberger@gmx.de header.b="ojqYKJfE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BCFF88E87; Mon, 25 Nov 2024 22:09:16 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id E71D789757; Mon, 25 Nov 2024 22:22:18 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D58688001
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:09:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7992B896AC
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:22:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Xxyxk0JPMz9slv;
- Mon, 25 Nov 2024 22:09:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1732568954;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ICjKSjDpYG+KY3ETNh6MVw42CP3AvzAvwfzqjWVUDf8=;
- b=ySfE6eINYR5Hqzh0HeS5Kw80Y2YPpbGkuveE+LtHPVzJqUg0Ay1v4l/D/9O/PofkTfpO9q
- Y+SPKrHAKVuruE6U7MCeua0BfFiqAtff3gwb6TA46K7EdSnJ4Q1LSMVJN3vvAjHT+V9fGP
- jLSPxOC88xBbSvp55V4fA7TMiOYlR5l1Hu0ajxWK9g++kR7iw1UzE7gvP2W7RO6/XJ3baR
- 3vqtTMq2JecZiaWCyYml+bCHsZfNTmpEsS2fIYim6MGu0yQZtSqVtU7qrm4Z698v61nWcW
- YBkbV1YwUYybiyUHqDBZ8YhPDhB4pBaJIvTHQ2AGLbCM9cVSQd3ll69G2CRssA==
-Message-ID: <1a4c2b8e-6a9d-428c-a44b-6ed4335af8ee@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1732568952;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ICjKSjDpYG+KY3ETNh6MVw42CP3AvzAvwfzqjWVUDf8=;
- b=RQJgYUtfhUAQ8+fc0tE7pP9XKxSpocY0f7xleRI4vBs6gfN/5Xbrg70CKmorGLrKWUyGAH
- M2A7H6GfpLSoPb+HpjK+i19EiofxBrz2HJHSFB3gqsjE2myk09uhehvpirIWp0iq/Zml2k
- itSh3xQexQi42buHaTlnVIAhLB5a6aY7HRr1PDU1g3OyXb/TXSwjTv2uOoP4s98fvKec8N
- WDp+du+QgfKHpIfDd9D+W2OJewONkiDq4qtnLdsRdoesSGBL0e8+hCl2iP86RHYqjFbyRK
- StCoKfdSVJihN2Ok3Wq74rzPo8zuToTwx/veyklLjT0GAbzmKRyKySYQi0mjbQ==
-Date: Mon, 25 Nov 2024 22:09:09 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH] spi: Fix missed rename from SPI_ADVANCE to
- SPI_STACKED_PARALLEL
-To: Dominik Wernberger <dominik.wernberger@gmx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=dominik.wernberger@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732569731; x=1733174531;
+ i=dominik.wernberger@gmx.de;
+ bh=Dtw3jKnFWTScq+bEtPQXeq5v5Gi8TBhEXHx7bMz4898=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-Id:
+ MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=ojqYKJfEmWWc+4Bf34mBbPui1GI9pSy2xiw0V5zwqtSVRIoxEgkBajBRCKO5X/02
+ WbKok0rkbaa/KAjHjaKrsJgSGlqmPD8M9JqgtPipi4BUvF+Qng17OcpwkO2RG3dBb
+ Ry9FpE9w2DW1OH0sfa2uHnQi3dL+fBC/u2lCl8d5vwjPvaUyFauYXGBSJ2YVG1wtw
+ ozU4xB4WStkryyHBkJr9ePRSORPOkAxr0mO+zG4SNSL827kA6Y9/h9Y3lmEi2aR12
+ dAJLLEePh3iePAVrVKR+tzA3LstyjI/D/pjqQng0OKhfiRkDZEJuNlk09/WLhPW/o
+ lWoZ8rYy/zM5khEhfA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from doms-pc.fritz.box ([91.51.57.47]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTABZ-1t8hbw37pH-00Pp92; Mon, 25
+ Nov 2024 22:22:11 +0100
+From: Dominik Wernberger <dominik.wernberger@gmx.de>
+To: u-boot@lists.denx.de
 Cc: marek.vasut+renesas@mailbox.org, jagan@amarulasolutions.com,
- michal.simek@amd.com, tudor.ambarus@linaro.org, venkatesh.abbarapu@amd.com
-References: <20241125205322.15894-1-dominik.wernberger@gmx.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241125205322.15894-1-dominik.wernberger@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 1mma7tqy99wb9fxeggrk876nprbfazch
-X-MBO-RS-ID: 9095acdb01dc4b0f29b
+ michal.simek@amd.com, tudor.ambarus@linaro.org, venkatesh.abbarapu@amd.com,
+ Dominik Wernberger <dominik.wernberger@gmx.de>
+Subject: [PATCH] spi: Fix missed rename from SPI_ADVANCE to
+ SPI_STACKED_PARALLEL
+Date: Mon, 25 Nov 2024 22:21:52 +0100
+Message-Id: <20241125212152.29397-1-dominik.wernberger@gmx.de>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:D2lslVrHwFikwDOXtpTueYS8mM4rf/5tM7wzjc+8MXxSaTf5KCD
+ ia4ej1+WU8Jpyk+TFYid3WEA6TQodFzv6NhWQwQK3et4w5fnPwnl0GaoXirf7UdT5EhUUYz
+ xtiKYscT3crgdxu4sPtM/9zVL+PD6dedazo9mDZ6MKX1G6r85uYTVLycT7DTYtn7ztpTKpw
+ +eqn/AZYX56cWvarktR1g==
+UI-OutboundReport: notjunk:1;M01:P0:0JkXQfR/8Kk=;qvRk0D0XX2rESp2CTarTS3ODTi1
+ 662CiicCJCJx8vVtPHfURRAuNKGuOt15cdB0XEVCLmp1IKAvhsHh50OSAAe3PtvonWc6pzDl1
+ jqsJtLEGU+WEpUkiOmaPxZmmLuhDXhKsmw+VBXwvS4IJashPnzoGw5nDozmMfGBWXw9+cUFrN
+ rHikFzFhEY+7QwNnPVPSRjpe/x8q8FqXFP0CAVId6zhGPvZbxuzn+h2jeTIiBxV2oCG1yjipb
+ urGEazH7/EuLRWfndgv4A62mXPwVehpSx3iS4QVaGN2r6cVFdqNBcaHopLKEe0AY2GzYpirXR
+ YUXj29cA4q0ZoO98UIk5FdZiLjzOiCUfjsELZHrlPaqyhdli/0eXAtwBaPa/j4yPxtBB2wEp1
+ 42/j2zfitNaMovs1T3TcPUgcjUKQM4/meO5roPfpZlqnK5fofg5lD5nNUPU3yUJFi6fTznEsv
+ BuPCAMxSGTcZ8VqGdPmoK3BgZZXw6CpgVHywLlPv8h8sFMZSHELpkde+xHnV97+g7PJkBkxL3
+ Z2YsqLd084NG18xjU9k+6Iy+Y1GGSLrPVmxfsOupNyRiRJX97cesajzJnA363/rt1AwqEG1tT
+ EthIUWFSQcoIvoBkCQ3kZqU22MwRH+hVfEhWXjLcBSiI9gxVrK5bnuetRuwmcUe1elxt+DNPp
+ B2guggLlpk+3xHxvVireN9NK6NpAs0V61pHw5Lppp+ajRPYsb4kOLveb3S7XKXoUGppXCs8Nk
+ lmvzGUm+6YC+msc+MxdR8WdzepOioF4ttgXrVbIurP7s8VSLNbGRL8/pl+42Zsa290pmjxXYo
+ FphKj7jM0TB4T9Ewz/avADco3SFG7mbwj9u55iix8IVinjT9YhyG36XFCRhRVLX2zOiByESv+
+ tUKPNaWsukLmWt/VrYQ8DCBH9gzTCWABeY53mZ7cbemJgHnIPx+DKswiaWYM2cK0lb68L5+a9
+ KRxMimcNppm2den79nITb2TXWBi7UJXjj4Z4hadejY3QoL1swMxXq1FPcysqTd2rAjaRZaJib
+ OkcBeSyHoEQ8FYumJsQzn0Ad8/SRNZhUfegH4R5WCJYvlObVzgs6ILyrJYMsV9zivr0nRBHPD
+ wf1rf6ZPbvtUyad0FcXeHYusd/cZxd
+X-Mailman-Approved-At: Mon, 25 Nov 2024 22:25:14 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,30 +93,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/25/24 9:53 PM, Dominik Wernberger wrote:
+Fix missed rename from SPI_ADVANCE to SPI_STACKED_PARALLEL. This fixes an issue encountered while testing the Zynq-7000 QSPI parallel Flash implementation.
 
-The commit message goes here (now it is empty).
+Signed-off-by: Dominik Wernberger <dominik.wernberger@gmx.de>
+---
+ drivers/spi/spi-uclass.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Use 'git commit --amend' and fill something in here, something simple 
-similar to the subject is fine, like:
+diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
+index 36b7d383aa..d604975374 100644
+--- a/drivers/spi/spi-uclass.c
++++ b/drivers/spi/spi-uclass.c
+@@ -446,7 +446,7 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
+ 	slave = dev_get_parent_priv(dev);
+ 	bus_data = dev_get_uclass_priv(bus);
 
-"
-Fix missed rename from SPI_ADVANCE to SPI_STACKED_PARALLEL. This fixes 
-an issue encountered while testing the Zynq-7000 QSPI parallel Flash 
-implementation.
-"
+-#if CONFIG_IS_ENABLED(SPI_ADVANCE)
++#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
+ 	if ((dev_read_bool(dev, "parallel-memories")) && !slave->multi_cs_cap) {
+ 		dev_err(dev, "controller doesn't support multi CS\n");
+ 		return -EINVAL;
+@@ -515,7 +515,7 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
+ 	int mode = 0;
+ 	int value;
 
-> Signed-off-by: Dominik Wernberger <dominik.wernberger@gmx.de>
-> ---
-And then it would be perfect.
+-#if CONFIG_IS_ENABLED(SPI_ADVANCE)
++#if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
+ 	int ret;
 
-Thanks for the fix.
+ 	ret = dev_read_u32_array(dev, "reg", plat->cs, SPI_CS_CNT_MAX);
+--
+2.34.1
 
-(
-Tom, if you want to fix up the commit message while applying and it is 
-fine with Dominik, please add my:
+---
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Another approach to get the commit message right. In case there are still some issues
+feel free to fix them up. I'm obviously not yet used to the Linux mailing list which
+will hopefully change soon. Until then I don't want to annoy you with too many mails.
 
-This is obviously a valid fix for RC3
-)
+Thanks for your help! :)
+
+BR Dominik
