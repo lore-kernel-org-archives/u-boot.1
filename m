@@ -4,100 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7BFD3B7F5
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:46:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6EED3B7F5
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 09:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2521C89A0C;
-	Mon, 25 Nov 2024 10:46:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC01A89A0B;
+	Mon, 25 Nov 2024 10:46:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dJSQC/Tl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fkr3DcCr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C82289A17; Mon, 25 Nov 2024 10:46:21 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id CFD4489A0B; Mon, 25 Nov 2024 10:46:21 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 174348965A
+ by phobos.denx.de (Postfix) with ESMTPS id C79B889A0C
  for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3823e45339bso3155132f8f.0
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-3824a089b2cso2505495f8f.1
  for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 01:46:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732527978; x=1733132778; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JyKxS+hLgYzISS3761MGPAZ7z6zzltfIEZhEborCt3E=;
- b=dJSQC/Tl+hcTwQHeAdNPDSeMOMLpDMBVbbjrOc0LceaFCUV/ngKhOT8iTXFWBrCLYB
- pHM1/CdiU/pnE2cjV22v7w8RGDnFAZfakZwyGPMQrzDVlGsz1EOrQuvm+/iGUyoyrok1
- EzNREkg+ovBnbpxc/e9slB/KEyWUoLesxBNtNVLvf6EjW2yme2zqbDRjIEbdhZsEkgMi
- vrhJk6oWw/odi11FV2o5bmDCkG9bnVUMO74X4aP3fHb6ENJJo735MYFERRFf9b4DW3fC
- WMKHlL94rb0QCBsFktk5nQ0SYGjos3w3/bLhEK8oeux5k3SiwUofNxY+xRRWwiEP0Iwq
- OFVQ==
+ d=linaro.org; s=google; t=1732527979; x=1733132779; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=oNQ8O576FgB3fxeG/SxKle4tmWqWhdc0jmFGpnDf5VQ=;
+ b=Fkr3DcCrEPMoy4FOWc09+sYIbTQX6Ay7K/RYB/K5CAPFstRa61ScEq9RdlOh4TI1mE
+ S/VpX/UNUM69Asfw6/4v0f1B/TW26GPrlK1gc6SVHo6ywoLMhlrdy2/08Txf8eDJD2K1
+ b7RrI3KwcKO4+rEQEXZDpN880R+6uNva017Svla7PM784iWhuXqOf9H5lYKWzrD0zXKZ
+ uvpL6rpPqPXkmHCfhXfa1CdVR8pRKiACAJESRH3pXwBMuNWqs59xipH2xMRrAn0M3lLR
+ 9z1GJVDJuIso7WbhlwHAinsO67t97oBpVa0PZptToVbcsjvoUfIfg2b5BJwkRNKXHmpX
+ Ax0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732527978; x=1733132778;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JyKxS+hLgYzISS3761MGPAZ7z6zzltfIEZhEborCt3E=;
- b=G4XiL+gZILWPAyuRlH1YCw8fQTHOCLx8EEz1MV4W4ruMxOMlm6EVojzE/gUmBKuxCj
- vaxi3MGy62v6fNu9nG2l8s7dusrVX9rVsLUtOent205wZMvYlsC8kl78awo1FJC5Pn5Y
- 7Sc+27nM+/lQ1vmP7hJMDR2/Tw4pQB70+YTs/hfba+EBlbkW2mNgdwJDQo0VyAfyGMTF
- GdxG8nMVTWUDK4vPuG9IBaCO/GE4bVplpmadQIqZXzepDSqTF29SOz26BudhbcSeLQkn
- XzCP79qPXTa5hcivVzMS34N/YukZ79YjnokyHKjwzbilWGc0SQGc28i2W4/RoVoQc2rF
- dUyg==
-X-Gm-Message-State: AOJu0YxzB6xlVOed7E0yZogbdAczhC+j4F/Oh5pKc9MhVHVegXLIyLLR
- pQoeQcHM+9Iw6iwWIgIIfzkAxE0Oy5g9iph8fhp17/3oG9Gg1YGOZZytkncYDBI=
-X-Gm-Gg: ASbGnctoApQFJYp5UiZOLVe4OOhT0mu2bSaoBRT32LSDD18iRna/2L3aucj5gZ5oyVh
- K4hLHQ5eg3bPCJphJzgHxdwUmElXbsBmD0nWcRKxOJJKKeqfK+QPri0dhoH8Bj8JMxkiguuPr1K
- q5EKYtVbnrlPM129WkBDPa+dkExl7DkzPO0fvG2KCpXqm1ODK7GNUVlwEhHJPA7BLSLKl7j0A5F
- m5O7CmB+CB7r+dxtaimp0+5GZZug2M8k7IpND7li1shzAa4rznNXmma8dBsY9w66YAGgeg=
-X-Google-Smtp-Source: AGHT+IE4pIC4Bxm78UnV/M0+zzZDqAfvm8wKWlXnW0yo5JhaakYhteGOO1bp/LIzhjwuxKN5+U1JCQ==
-X-Received: by 2002:a5d:64e8:0:b0:382:3894:3479 with SMTP id
- ffacd0b85a97d-38260bcb9f3mr9805034f8f.41.1732527978581; 
- Mon, 25 Nov 2024 01:46:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732527979; x=1733132779;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oNQ8O576FgB3fxeG/SxKle4tmWqWhdc0jmFGpnDf5VQ=;
+ b=d7s+9THbYwD72JSNeJ9Wqr6KEmSxeYkCHU6tI+egUjH7dbIdYinvJUv44QFSzabWTl
+ KLcVGjx8+gT/xE6ZXb67jDwQo4Kq+U6q9OHmOHV2XCU0meS++llyxn77xLj7yLJuOvc1
+ I2KyXaA8ca4gcguKd9R2yEDH52kjWgl8Z/OnBz65LVJ+uJFtOB1xzDVeEUBKrZL06h0t
+ ZI7cNtiPZQBG8GQyqeBmES0VeKhBvWF9gWzWkYlLHbcYrm4L7uhFVJEeHbeJs8MdjcLc
+ YM8iACOk1TFQYAJJdphQQBgmBKiZW8cIQEu6kBQYxbPWlF9E6CNYQbwWrJn4HPr8NdaF
+ 78lA==
+X-Gm-Message-State: AOJu0YyTmx6CuUFdgDCVfGhjug7N7wcFcbNcWzbbcejlMKqpwQq8zdeS
+ cbNC3p3TtHVVSEUmuSHHWbEPN0ou1okUwV26uDAWp6DebfM3uwg0zsT75zmZSXo=
+X-Gm-Gg: ASbGncuGZnbSRP+C5eubYtJBQ41qIrkmYGhg13Y7gcfkPgTHrAct+YfVY3OKmrNmUGx
+ DUCUpN+90hKkKPTnEyvZGsUepkGgcVllNVJk0Cq/F28FrYKDtd5FkLEkusu98Wmdd1qmwFf7GrL
+ L9UKlxrFr5OJvgp0zwW2PfqHjwJPJhnP75IVwnFYzAzBzl9utsz65Q/QOpHSkU8DU9+EfGxxuAO
+ BqQR3H71YqviZUiO7e2bCCIe4bOr4qqeOA1CbvPz3l1FRjkk4hZRiukqNtTulGylqE++Xo=
+X-Google-Smtp-Source: AGHT+IHHGLRZ/+nN2Av9UdqzOmdGqTf4BB1yK+lCfuV65kt8ISJrjBF6cnz4POgKm2nZatRDwa8sSw==
+X-Received: by 2002:a5d:64cc:0:b0:382:5010:c8c8 with SMTP id
+ ffacd0b85a97d-38260bcbafcmr8990650f8f.41.1732527979249; 
+ Mon, 25 Nov 2024 01:46:19 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fb271ffsm9804590f8f.53.2024.11.25.01.46.17
+ ffacd0b85a97d-3825fb271ffsm9804590f8f.53.2024.11.25.01.46.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 25 Nov 2024 01:46:18 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH 0/2] pci: Add support for Qualcomm PCIe controller
-Date: Mon, 25 Nov 2024 10:46:15 +0100
-Message-Id: <20241125-topic-pcie-controller-v1-0-45c20070dd53@linaro.org>
+Date: Mon, 25 Nov 2024 10:46:16 +0100
+Subject: [PATCH 1/2] pci: pcie_dw_common: introduce pcie_dw_find_capability()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGdHRGcC/x2MQQqAMAzAviI9W9imXvyKeNDaaUG20Q0RxL87P
- IaQPJBZhTOMzQPKl2SJoYJtG6BjCTujbJXBGddb6wYsMQlhImGkGIrG82RF8lVas/ph7aC2Sdn
- L/X+n+X0/bj6mgmcAAAA=
-X-Change-ID: 20241125-topic-pcie-controller-cf11210bf5b3
+Message-Id: <20241125-topic-pcie-controller-v1-1-45c20070dd53@linaro.org>
+References: <20241125-topic-pcie-controller-v1-0-45c20070dd53@linaro.org>
+In-Reply-To: <20241125-topic-pcie-controller-v1-0-45c20070dd53@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=883;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2511;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=Ms54ZhaKqTJn9UDj6cizrIZJTKnuVFsIYiXUp6/W3Vo=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnREdoQDtzWGj4z1lXJzpVLVHJ9HooOKUdp7M837t7
- /TaMj6KJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0RHaAAKCRB33NvayMhJ0TQdD/
- 9vbZqm/rLsAQ0aVrr688vjnl8ZN6xY8tMbjfbYGSlRjXSvgH8nLYuVXmlgYfiRaGQ8vDz2Eo1N6gwG
- BLoHQUL3wCU9hhTVVCoKyg9uA6tCRWlElrhMYM6NW4wGzgmHYkPGchic2EoZ7OByDfIxK87KLEP5Rg
- lrcGuYIMyI7MnZJVekKPVOtbGPXF6OzxT7lcaNr5Qhx98VM1O+tBnOodHp/ygQl4y+ioxND0Y0oPLX
- SVwHfLhUhsRygzF/UztDu3bK91RoWHoxYuPl13T5nsmokjuCt62h6JOtjx4Hs1SrB711wyJe+ANTxX
- tV9a6iKfoEWr6MMrZN/xJudz+vxFY9I1FBRlLVcOJmaHMmCtpTuxF5qJTCqFy/ahzIAAfGy9juvDJJ
- b7B5fr9o7DyizHLObDp6BWQDcjDt5uEnyFl9nSAYBNVwrf8mQF3hqC7r0UZmI8cKHlYYS23FIPrw+y
- 2/ORjvEZ7QiPsVav72cbBptwIQ0w7kKpC4qRMVXyO/vtFIc+1mXJ3wtmxmw03Hz/7kfQPTX2pIDyTv
- F+4Q07FR9vgAin42fA0WNK5zpj1RBEnuGOEUHPJMaxoC8+RSBqvGi6d04N6RK0ETDUnzUu8E9nDdtr
- o0YRwwwaIJGanJrCaGCdRnmcba5tx2+Ueae5j4LRvIJ4s05RBUx5rucRLzUA==
+ bh=y2HdtS5CQGOYvcDh20iPQF5aU5NB6kPBpR2LOqM+p7k=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnREdpTtvmZVEomk92F5J6fIzrbKn5MO98MSXXzXi2
+ uHwRGKCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ0RHaQAKCRB33NvayMhJ0fNIEA
+ CtXqJKB6RHsdEL9nTmITSe6ppGHfAMqoPtKm6AHFRgj6IVeWVCNZPRSZb+4KSeo1imOLg9ayeTJ826
+ 3CsQuKvIorAFdt4jLq0htf1MDPXnikDfNzxzmpnC3dxHWJcBR7aLW4cV+dtjI0AocFDeKmIeIppvUa
+ JXe2tTJIMF5WRggSS0PMbaA4ffizA/Ae71FrgGb/cCz0Y3ZrLOevivoI8ZeIgG3/eec78wdQgiCIQl
+ wWsDVLpMZn+KOJRD4Rb4wXzg8v6xd2JLTxHPSgXugKXqDAn5B66yiyV/JexAKK3Zxn2Icd35q2P+dQ
+ sxv+jwquQb/VMeZlohrvSQV4/wN0UVNJrdt7CVZiVgHyhvVfXHyQ5OivMn8Y9CgDpNxCWNaEYeYR0g
+ o1/26/UL4XYb7oqLUyb9bG5moo+8hYoErjtUABOpZOklWIl74XhM/v8FoxvmuEsQfOBo3Vg0V+M0I7
+ EUwT88AtNZxFyrBpwYyGuqsVpGpCVVce+d0PvEg++pEjHePchP+xWylLK6FZZSsYGsargzD+G3QTTG
+ hlhA0FlctpjF8gQiO9NeN6eczqAPoofm2aC/RwAAHD3PlRn3qiuw/f6nLklazQQXnuvzIsoO6Waj2Q
+ 2u95055rtwXAJBz+XStGJhuVVMSlwitsQNAJse2V9s6RoXY07/NYIZ7Io/+Q==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -116,29 +114,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the DWC PCIe controllers found
-on the Qualcomm SoCs, it requires introducing
-pcie_dw_find_capability() to properly configure
-the Host controller capabilities.
+Add PCIe config space capability search function specific for
+the host controller, which are bridges *to* PCI devices but
+are not PCI devices themselves.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Neil Armstrong (2):
-      pci: pcie_dw_common: introduce pcie_dw_find_capability()
-      pci: Add support for Qualcomm PCIe controller
+ drivers/pci/pcie_dw_common.c | 42 ++++++++++++++++++++++++++++++++++++++++++
+ drivers/pci/pcie_dw_common.h |  2 ++
+ 2 files changed, 44 insertions(+)
 
- drivers/pci/Kconfig          |   8 +
- drivers/pci/Makefile         |   1 +
- drivers/pci/pcie_dw_common.c |  42 ++++
- drivers/pci/pcie_dw_common.h |   2 +
- drivers/pci/pcie_dw_qcom.c   | 571 +++++++++++++++++++++++++++++++++++++++++++
- include/pci.h                |   4 +
- 6 files changed, 628 insertions(+)
----
-base-commit: 7fe55182d9263a62e18b450c97bdf0b8031e5667
-change-id: 20241125-topic-pcie-controller-cf11210bf5b3
+diff --git a/drivers/pci/pcie_dw_common.c b/drivers/pci/pcie_dw_common.c
+index 0673e516c6fee6c01e5a5d23592e0ef55d49d823..78961271a8eef8e4b6991675ee9de2bb1968b8da 100644
+--- a/drivers/pci/pcie_dw_common.c
++++ b/drivers/pci/pcie_dw_common.c
+@@ -267,6 +267,48 @@ int pcie_dw_write_config(struct udevice *bus, pci_dev_t bdf,
+ 						 pcie->io.bus_start, pcie->io.size);
+ }
+ 
++/*
++ * These interfaces resemble the pci_find_*capability() interfaces, but these
++ * are for configuring host controllers, which are bridges *to* PCI devices but
++ * are not PCI devices themselves.
++ */
++static u8 pcie_dw_find_next_cap(struct pcie_dw *pci, u8 cap_ptr, u8 cap)
++{
++	u8 cap_id, next_cap_ptr;
++	u32 val;
++	u16 reg;
++
++	if (!cap_ptr)
++		return 0;
++
++	val = readl(pci->dbi_base + (cap_ptr & ~0x3));
++	reg = pci_conv_32_to_size(val, cap_ptr, 2);
++	cap_id = (reg & 0x00ff);
++
++	if (cap_id > PCI_CAP_ID_MAX)
++		return 0;
++
++	if (cap_id == cap)
++		return cap_ptr;
++
++	next_cap_ptr = (reg & 0xff00) >> 8;
++	return pcie_dw_find_next_cap(pci, next_cap_ptr, cap);
++}
++
++u8 pcie_dw_find_capability(struct pcie_dw *pci, u8 cap)
++{
++	u8 next_cap_ptr;
++	u32 val;
++	u16 reg;
++
++	val = readl(pci->dbi_base + (PCI_CAPABILITY_LIST & ~0x3));
++	reg = pci_conv_32_to_size(val, PCI_CAPABILITY_LIST, 2);
++
++	next_cap_ptr = (reg & 0x00ff);
++
++	return pcie_dw_find_next_cap(pci, next_cap_ptr, cap);
++}
++
+ /**
+  * pcie_dw_setup_host() - Setup the PCIe controller for RC opertaion
+  *
+diff --git a/drivers/pci/pcie_dw_common.h b/drivers/pci/pcie_dw_common.h
+index e0f7796f2a873f91ef74bc6ce84966a4215c22f0..8cb99a12ea1a5fd3687f980cc1ff99839d06dbc2 100644
+--- a/drivers/pci/pcie_dw_common.h
++++ b/drivers/pci/pcie_dw_common.h
+@@ -139,6 +139,8 @@ int pcie_dw_read_config(const struct udevice *bus, pci_dev_t bdf, uint offset, u
+ int pcie_dw_write_config(struct udevice *bus, pci_dev_t bdf, uint offset, ulong value,
+ 			 enum pci_size_t size);
+ 
++u8 pcie_dw_find_capability(struct pcie_dw *pci, u8 cap);
++
+ static inline void dw_pcie_dbi_write_enable(struct pcie_dw *pci, bool en)
+ {
+ 	u32 val;
 
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
