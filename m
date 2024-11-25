@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88720D59D6C
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 20:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F26D59D6B
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 20:46:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E60F89A86;
-	Mon, 25 Nov 2024 21:45:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08B1A89A8D;
+	Mon, 25 Nov 2024 21:45:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m4vJudUk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M0ZuBEyI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9E9E89A96; Mon, 25 Nov 2024 21:45:39 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 120D589A8D; Mon, 25 Nov 2024 21:45:42 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8506289251
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 21:45:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD82889A94
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 21:45:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-8418ecda199so65755339f.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:45:37 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-83eafef523bso150611839f.3
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:45:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732567536; x=1733172336; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732567538; x=1733172338; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xgnyo9CsADHGmYilUfrDGFAOum3DjE3JX24TwOXEZxk=;
- b=m4vJudUk6TVqvK4CF9zcQXhITaMJmDfbZuMgtgCM6eL7JnZ2QEAiF6LBOIgRWs+h1J
- RhXhAc0tDj14i18zY2mmnMHd/6X9xnL/pCT/7Vj/ehmmKxlKFofj3+h08PIzWJ68zUM/
- H8vTBh1d5mkmX8Raucy3aaTJTottMaiA/Nyow=
+ bh=K+KfB92Ul9gyoRpg+jZWy2BEFYQweKmriei6ITJcL08=;
+ b=M0ZuBEyI/zurMjWbSMgUTA+RMkbQID5/OP1kFpdwLOSYgUFulO75WN4QpbZN9usMwV
+ MFx3E8IY9gfL26roQELqAfLpT5biHDGcGamiLKiTYTdFR7My/mJw/dmd6Lxw4Iz9Hq8Y
+ rrEvqFqOtmx5wyU+aPDqwy388jVTpdMfjKHXk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732567536; x=1733172336;
+ d=1e100.net; s=20230601; t=1732567538; x=1733172338;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xgnyo9CsADHGmYilUfrDGFAOum3DjE3JX24TwOXEZxk=;
- b=HD88Qq9TCfitX1tjSoi6VJl+Hh+Du0AJykOoReiIWx+Y4C3Wr0PwUAcWj3vt2nHfhl
- eJ3Zd9eE8b72eViZ9gyBga6xIvOq5PqLXH3QQyPZSfy3dPOasgc4wqwwTPI/in2PzM4Q
- iwFVU9+BmbQfH/y0vKWMVA8Cpm1Uvp0L65kMTEgWXCsyoKG/2C/BsxXlzVNBIbzSdtZE
- PYIM0TCVId7iYjtjIXwUSs6hVHD6Yid0oK2XuRee7BilRtbaUx9ZWHPcG7GfTMDzBMFn
- cZOqVwDq2XDgWN8ERLhmdHucVECVNR3TjIk9KFasaBezuoRrThi6+iRUZ5NGBk+JsAKv
- Fc0Q==
-X-Gm-Message-State: AOJu0YxkDpGzaZwgIodRm/BsV1e9104M3hbjrVjlAK440Rn1oxifFZ1d
- MwDc0YADfm9OKc4Y+gg3MnZhgyXsnkGtRE2gvuzOkm18nMzQJXg49daGgIzkdvnQGY5p2gpA9+Y
+ bh=K+KfB92Ul9gyoRpg+jZWy2BEFYQweKmriei6ITJcL08=;
+ b=vlbfrO19n5ZVL8XzZKaaufkRiYyMf9t7/Bi2gv5bmo0XHxAByYeh3zadiaer7WGgp4
+ iOoxsvyh3BgGgUTN6Zi0pYDUK/RgOcldmVml3oNMUDaCCVYGIEBR9atfVOE37aGANo0k
+ QCcymGJaJMC2nTpPlFj+oEUKJrtOZ7Uura+LM0iv8JdYZVd0u83XFj1BMSuJhENDGA4N
+ mV6qw0p0KdLG9ulUJbU4dVo+T/b28w4e95MGzdSqJfyU2LRFp7R2STKW37byg5hhF76L
+ Twvv6dgk9DzWewoVy8DlLCT6SWY+CrCyhUiHymvocXyUu1EBMLoD8oy1vBqyWn11wr4z
+ GDNA==
+X-Gm-Message-State: AOJu0YxTuBmMyxwRyfVsB5Ox9D6x7LmPmCFjYJko8xbYYaQwFnqOMhvd
+ H6Rsr+96TUcyfWhYaMe/s09qf5Ctdn5rCA7bc/+q0yDRzbPlhMa/ibVUH199W64/7QlwglWswAw
  =
-X-Gm-Gg: ASbGnctyVh1LOMiJozaKad9EUp3zGPOkJG4vAtBNDHjwR02aq+RUNZJImGKk5ztPbfx
- odXikZhY0jS5iC5J4fbkmB8BGEI+4isTi+xW19UMh4Uww5d23c9c7DKaJdpk9Tx+J9qkTteuIIH
- dkf9pDVPMO84ZMY4Je72hSosrn7U1NprEJT7XdsacgDVSwMIWSYNDGLXyQ+8tpKT1JWBD2YvVjf
- xyL/5J2nYCNktSZzguG3v81pRjWOCSgpB0dtqZjnO5oyDE=
-X-Google-Smtp-Source: AGHT+IFOG8Kc8/9BxtO94ylHzgxGXWeyEcFXb+3xeslzkjR1W+bvVuYHcY3Etb1PmyaiTKWcGhIqYA==
-X-Received: by 2002:a6b:4e17:0:b0:841:9516:4e2e with SMTP id
- ca18e2360f4ac-841951652a8mr421067039f.11.1732567535779; 
- Mon, 25 Nov 2024 12:45:35 -0800 (PST)
+X-Gm-Gg: ASbGncvZnRRQR7j3eYP0o37XIR1u7sCXKRWb23LIhduCo/K0h0WSjzES2or1HcCqV2w
+ 3lVReeN9Mv9u7Qf9/67pbixGT6Gj4MVekHaX9umnDrsinPtTNKx9M0B3xAMpZuPkvUvX+tKcLmh
+ DhiTuXYwbwcv0soRIrZpw2TQCFqTSdu7KDF6Cvc3bLBYTfxkmaqr3l6zRay5r+zBoYu85RxOyOL
+ MlbHdK0NhemATwG12c82TtRienI+x+DmqfZs9D94GINYIM=
+X-Google-Smtp-Source: AGHT+IFfyak45Y21DcIsQ/07EP8ek03PvOmDSiKNgJIUwtBcA1Ho6eRLVZTvRTvIvwTxsE0s4t0wqg==
+X-Received: by 2002:a05:6602:6b82:b0:82c:f30d:fc72 with SMTP id
+ ca18e2360f4ac-83ecdc53c49mr1675983939f.2.1732567537918; 
+ Mon, 25 Nov 2024 12:45:37 -0800 (PST)
 Received: from chromium.org ([50.235.115.130])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-841ac8403a2sm26134639f.9.2024.11.25.12.45.33
+ ca18e2360f4ac-841ac8403a2sm26134639f.9.2024.11.25.12.45.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 12:45:34 -0800 (PST)
+ Mon, 25 Nov 2024 12:45:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Janne Grunau <j@jannau.net>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/13] lmb: Reduce mapmem contortions in
- lmb_map_update_notify()
-Date: Mon, 25 Nov 2024 13:44:48 -0700
-Message-ID: <20241125204456.1525752-10-sjg@chromium.org>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH 10/13] efi_loader: Simplify efi_dp_from_mem()
+Date: Mon, 25 Nov 2024 13:44:49 -0700
+Message-ID: <20241125204456.1525752-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241125204456.1525752-1-sjg@chromium.org>
 References: <20241125204456.1525752-1-sjg@chromium.org>
@@ -96,57 +99,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the EFI-loader uses addresses, we can simplify the code here.
+This function should take a pointer, not an address. Update it along
+with all users.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/lmb.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+ include/efi_loader.h             |  5 ++---
+ lib/efi_loader/efi_bootbin.c     |  3 +--
+ lib/efi_loader/efi_bootmgr.c     |  2 +-
+ lib/efi_loader/efi_device_path.c | 20 ++++++++++----------
+ 4 files changed, 14 insertions(+), 16 deletions(-)
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 14b9b8466ff..588787d2a90 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -10,7 +10,6 @@
- #include <efi_loader.h>
- #include <event.h>
- #include <image.h>
--#include <mapmem.h>
- #include <lmb.h>
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index c4afcf2b60b..7f3854a2d6c 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -915,9 +915,8 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
+ struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
+ 					 const char *path);
+ struct efi_device_path *efi_dp_from_eth(void);
+-struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
+-					uint64_t start_address,
+-					size_t size);
++struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  mem_type,
++					void *start_ptr, size_t size);
+ /* Determine the last device path node that is not the end node. */
+ const struct efi_device_path *efi_dp_last_node(
+ 			const struct efi_device_path *dp);
+diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+index a87006b3c0e..7e7a6bf31aa 100644
+--- a/lib/efi_loader/efi_bootbin.c
++++ b/lib/efi_loader/efi_bootbin.c
+@@ -136,8 +136,7 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+ 		 * loaded directly into memory via JTAG, etc:
+ 		 */
+ 		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+-					    (uintptr_t)source_buffer,
+-					    source_size);
++					    source_buffer, source_size);
+ 		/*
+ 		 * Make sure that device for device_path exist
+ 		 * in load_image(). Otherwise, shell and grub will fail.
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 9e42fa03921..f435c7225b9 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -515,7 +515,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 		 * will be freed in return_to_efibootmgr event callback.
+ 		 */
+ 		loaded_dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+-					    (uintptr_t)image_addr, image_size);
++					    source_buffer, image_size);
+ 		ret = efi_install_multiple_protocol_interfaces(
+ 			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
+ 		if (ret != EFI_SUCCESS)
+diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+index 9c8cd35b97b..025a17b19fa 100644
+--- a/lib/efi_loader/efi_device_path.c
++++ b/lib/efi_loader/efi_device_path.c
+@@ -11,6 +11,7 @@
+ #include <dm.h>
+ #include <dm/root.h>
  #include <log.h>
- #include <malloc.h>
-@@ -448,7 +447,6 @@ static bool lmb_should_notify(enum lmb_flags flags)
- static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 				 enum lmb_flags flags)
- {
--	u64 efi_addr;
- 	u64 pages;
- 	efi_status_t status;
- 
-@@ -460,11 +458,10 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 	if (!lmb_should_notify(flags))
- 		return 0;
- 
--	efi_addr = (uintptr_t)map_sysmem(addr, 0);
--	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
--	efi_addr &= ~EFI_PAGE_MASK;
-+	pages = efi_size_in_pages(size + (addr & EFI_PAGE_MASK));
-+	addr &= ~EFI_PAGE_MASK;
- 
--	status = efi_add_memory_map_pg(efi_addr, pages,
-+	status = efi_add_memory_map_pg(addr, pages,
- 				       op == MAP_OP_RESERVE ?
- 				       EFI_BOOT_SERVICES_DATA :
- 				       EFI_CONVENTIONAL_MEMORY,
-@@ -474,7 +471,6 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 			status & ~EFI_ERROR_MASK);
- 		return -1;
- 	}
--	unmap_sysmem((void *)(uintptr_t)efi_addr);
- 
- 	return 0;
++#include <mapmem.h>
+ #include <net.h>
+ #include <usb.h>
+ #include <mmc.h>
+@@ -975,9 +976,8 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
  }
+ 
+ /* Construct a device-path for memory-mapped image */
+-struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
+-					uint64_t start_address,
+-					size_t size)
++struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  memory_type,
++					void *start_ptr, size_t size)
+ {
+ 	struct efi_device_path_memory *mdp;
+ 	void *buf, *start;
+@@ -990,9 +990,9 @@ struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
+ 	mdp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
+ 	mdp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MEMORY;
+ 	mdp->dp.length = sizeof(*mdp);
+-	mdp->memory_type = mem_type;
+-	mdp->start_address = start_address;
+-	mdp->end_address = start_address + size;
++	mdp->memory_type = memory_type;
++	mdp->start_address = map_to_sysmem(start_ptr);
++	mdp->end_address = mdp->start_address + size;
+ 	buf = &mdp[1];
+ 
+ 	*((struct efi_device_path *)buf) = END;
+@@ -1061,7 +1061,7 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
+ 	struct efi_device_path *dp;
+ 	struct disk_partition fs_partition;
+ 	size_t image_size;
+-	void *image_addr;
++	void *image_ptr;
+ 	int part = 0;
+ 
+ 	if (path && !file)
+@@ -1070,10 +1070,10 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
+ 	if (IS_ENABLED(CONFIG_EFI_BINARY_EXEC) &&
+ 	    (!strcmp(dev, "Mem") || !strcmp(dev, "hostfs")))  {
+ 		/* loadm command and semihosting */
+-		efi_get_image_parameters(&image_addr, &image_size);
++		efi_get_image_parameters(&image_ptr, &image_size);
+ 
+-		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+-				     (uintptr_t)image_addr, image_size);
++		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, image_ptr,
++				     image_size);
+ 	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
+ 		dp = efi_dp_from_eth();
+ 	} else if (!strcmp(dev, "Uart")) {
 -- 
 2.43.0
 
