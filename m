@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC51D3B7F4
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A83EDD3B7F4
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 08:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94D3B88D56;
-	Mon, 25 Nov 2024 09:56:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 1413288D56;
+	Mon, 25 Nov 2024 09:56:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="K9eOLN8X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zCnxGJh3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADD5789559; Mon, 25 Nov 2024 09:55:59 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 090E788815; Mon, 25 Nov 2024 09:56:35 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FD1088815
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:55:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 041C8895FB
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:56:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AOLC0TF022151;
- Mon, 25 Nov 2024 08:55:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=clsCQ4VrQ1dPKfrPpMbFucgH
- szeikMPCjxOiTg4XUr4=; b=K9eOLN8XEC5pHl11MFGV6lCkDHB4N/5Tyb8REIUd
- wNdX7KuuqLC0I8crIqAqPK7llEB647awli1n/N1tTtSPSu/UvPhm0emCBVndpZor
- mthpdKdS3ebB22KuxjCPqCNvuOMlq4fXkQsxmsg3AA3UmSx3+RwNpQmrCh6NAvB3
- PT8FTc5mtkubcPrZ6YXNjZpoQyUIHb+b4KZshGYjTfKgIeR9sz8+39NiXgSTlVmL
- 1aVyHJuBIAMkczAQzQvKAIJj+5Pf9W7dvCsYuEQKUjttojB4XrFpZUHUIx+vqEjI
- vCA8nLA/tXft+tXoJATZmBKJ/GBUeVaPtko0PFFqYT4Kmg==
-Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 433626c2c5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 Nov 2024 08:55:52 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AP8tp7F012042
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 Nov 2024 08:55:51 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 25 Nov 2024 00:55:48 -0800
-Date: Mon, 25 Nov 2024 14:25:44 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- <christian.taedcke@weidmueller.com>, <ada@thorsis.com>,
- <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] fs: fat: Handle 'FAT sector size mismatch'
-Message-ID: <Z0Q7kKT+gRF9PrY1@hu-varada-blr.qualcomm.com>
-References: <20241119073048.3469260-1-quic_varada@quicinc.com>
- <20241119154436.GW3600562@bill-the-cat>
- <2f5b61a7-9417-49b1-90b7-8aaf25f65cde@linaro.org>
- <Zz4RpTSocR/U+4+u@hu-varada-blr.qualcomm.com>
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aa549f2f9d2so140401066b.3
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 00:56:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732524992; x=1733129792; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3Z6/oRnMffVhBAcZR9TPPrjFHTugsG+81tcott3kFns=;
+ b=zCnxGJh37P4tGnPxbT+KMz3A1JjdCi6vH/gyevrGW3NoMMeSVHFF9U6qUJxyIGCD59
+ /vlzy/+5cUC5skqr+LZ0qCbe/lJ0wPx6onZog9yyYgTAhrBS5aa+FlXWc148FhQXIsqZ
+ Av3a9TDN1amMLwAl4ANqc00J+ttc4eBRaNgyM7e1TIa5i/jnyA2UW31L4PTp1D7sP2PX
+ fl3UreseoRRsh2PFpDEMLpFq+KCxOqbhKxpRPWx2dThvSxgFZ9ziX/3lDLoN2MZZxbFH
+ 7RGS8uW0CWInuNSwg7yIYNn6B23K5YClFEKAJGKbhexA9kr+k7OhAN4/sxE/Qe18QuNT
+ yS8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732524992; x=1733129792;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3Z6/oRnMffVhBAcZR9TPPrjFHTugsG+81tcott3kFns=;
+ b=B3IHA62HDck2mOH67OqpH8i+e1olTsHHuRrkudA2StLMXaequw3gWLpo+PtS+7Uj9W
+ 8MtBhTl6u1gyrG921v6gPU22nyT3ffQ7WKv9YOPXBzmkBGX47xLM4aEy4OatVSgMzx41
+ TmfBeV+sBdvTOa80Et3q45uHwmQCbwkaOfdtGSETsrpXparAz+tMhuRfxw7kSVV2JWc0
+ XM910uER9gJgNRt0pxNZHKvXyoJQYgxDNNAtobixGbiXafNEvAJIOLOjRXoPMCnRrBKd
+ hOFshtSj+CA6iplFn2bfRuPM+2yPAiqs/pq5Od+uXV9CaIBmJHsJdQkykaQ1X4eqtTXM
+ vUhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXpWCpliH5lFnGYQPZDwneIVodQxDmaIeANXQH+d6rQKCetfRTXrMXSE8DwejrA7IapSQnS7z8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWtYYqcUia+Yj0KUpyfpPSHpCCyByDyp8+TcOwbvyokgCpKHFW
+ 374mEeRWiJ7MjdeULcVWglCrd3atlmmnMqvI95Bwa/NeZawr+P1sWcWz+h2+MIQ=
+X-Gm-Gg: ASbGncukLx4kWUsK5btL7JtRzO6eBC4S63Z2MT9T9xYtH8OkMeE7f5rte6gKcrJBqmD
+ 12imA/zEe6cN4uecAUiEpgUhcZjGi42IHiIBlqDoK3fu07jzhJLphccSrrsc3OR0I7NZ/R/sH0y
+ uoNJKV1rmBm4QLLObmHPo0+aGaiKtml1yjLocpi7EKnm3CxaXhcNqFe30rM8OW/rGrJOudRiYQ8
+ Ep0dNwxswgm+zsrlS5OqAHC1jJ0egDy2FqSMqOOZ2WYTVes1jsW2qgAMoNpCaJEorz/eAdeFhk/
+ 7TJMuv32s2oi7qHZqpYtC93cfmSr0A==
+X-Google-Smtp-Source: AGHT+IG7CITgR5By5yUKEgykGgC/AI2AGtq0xl7womz7KkdCSS9uf8DmDP6tThjOyo7DTPv0x3hJhg==
+X-Received: by 2002:a17:906:cc9:b0:aa5:459e:2db with SMTP id
+ a640c23a62f3a-aa5459e03bcmr397708366b.53.1732524992461; 
+ Mon, 25 Nov 2024 00:56:32 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:208d:e9ad:3f7f:556b?
+ ([2a01:e0a:3cb:7bb0:208d:e9ad:3f7f:556b])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa50b52ffe3sm443563766b.126.2024.11.25.00.56.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Nov 2024 00:56:32 -0800 (PST)
+Message-ID: <04d797f8-1004-41c0-b395-8310a8315571@linaro.org>
+Date: Mon, 25 Nov 2024 09:56:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <Zz4RpTSocR/U+4+u@hu-varada-blr.qualcomm.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: toF6P93V-u9NlIquiP6GRiGDfDTGuzzP
-X-Proofpoint-ORIG-GUID: toF6P93V-u9NlIquiP6GRiGDfDTGuzzP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0
- priorityscore=1501 clxscore=1015 phishscore=0 spamscore=0 adultscore=0
- impostorscore=0 mlxscore=0 malwarescore=0 suspectscore=0 mlxlogscore=999
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2409260000 definitions=main-2411250075
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 01/14] net: wget: let wget_with_dns work with dns
+ disabled
+To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org
+References: <20241125005814.236669-1-adrianox@gmail.com>
+ <20241125005814.236669-2-adrianox@gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241125005814.236669-2-adrianox@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,197 +104,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 20, 2024 at 10:13:24PM +0530, Varadarajan Narayanan wrote:
-> On Wed, Nov 20, 2024 at 02:55:48PM +0100, Caleb Connolly wrote:
-> > Hi both,
-> >
-> > Varadarajan: Thanks for sending this patch.
-> >
-> > On 19/11/2024 16:44, Tom Rini wrote:
-> > > On Tue, Nov 19, 2024 at 01:00:48PM +0530, Varadarajan Narayanan wrote:
-> > >
-> > >> Do FAT read and write based on the device sector size
-> > >> instead of the size recorded in the FAT meta data. This
-> > >> helps to overcome the 'FAT sector size mismatch' error
-> > >> and enables U-Boot to read/write those partitions.
-> >
-> > Does this ignore the filesystem sector size or account for it?
->
-> Accounts for it.
->
-> > There's a whole lot of logic added below which isn't really
-> > explained here.
->
-> Will post a new version with additional explanation.
->
-> > >> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> > >> ---
-> > >>  fs/fat/fat.c       | 227 ++++++++++++++++++++++++++++++++++++++++++---
-> > >>  fs/fat/fat_write.c |  19 ----
-> > >>  2 files changed, 214 insertions(+), 32 deletions(-)
-> > >>
-> > >> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-> > >> index e2570e8167..f4bad99335 100644
-> > >> --- a/fs/fat/fat.c
-> > >> +++ b/fs/fat/fat.c
-> > >> @@ -44,24 +44,223 @@ static void downcase(char *str, size_t len)
-> > >>
-> > >>  static struct blk_desc *cur_dev;
-> > >>  static struct disk_partition cur_part_info;
-> > >> +int fat_sect_size;
-> >
-> > This variable should be static, no harm in 0 initializing it here either.
-> > >>
->
-> Sure.
+On 11/25/24 01:58, Adriano Cordova wrote:
+> This was marked as TODO in the code:
+>  - Enable use of wget_with_dns even if CMD_DNS is disabled if
+>    the given uri has the ip address for the http server.
+>  - Move the check for CMD_DNS inside wget_with_dns.
+>  - Rename wget_with_dns to wget_do_request
+> 
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
+> 
+> (no changes since v3)
+> 
+> v3: 
+>  Removed console output inside efi routine.
+> 
+> (no changes since v2)
+> 
+>  include/net-common.h         |  7 +++++--
+>  lib/efi_loader/efi_bootmgr.c |  2 +-
+>  net/lwip/wget.c              |  4 ++--
+>  net/net-common.c             |  2 +-
+>  net/wget.c                   | 34 ++++++++++++++++++++--------------
+>  5 files changed, 29 insertions(+), 20 deletions(-)
 
-Have posted v2 addressing the comments. Please take a look.
-
-Skipped initializing the variable to zero due to this checkpatch
-error.
-	-------------------------------------
-	ERROR: do not initialise statics to 0
-	#32: FILE: fs/fat/fat.c:47:
-	+static int fat_sect_size = 0;
-	-------------------------------------
-
-Thanks
-Varada
-
-> > [...]
-> >
-> > >> +
-> > >> +int disk_write(__u32 sect, __u32 nr_sect, void *buf)
-> > >> +{
-> > >> +	int ret;
-> > >> +	__u8 *block = NULL;
-> > >> +	__u32 rem, size;
-> > >> +	__u32 s, n;
-> > >> +
-> > >> +	rem = nr_sect * fat_sect_size;
-> > >> +	/*
-> > >> +	 *           block N       block N + 1      block N + 2
-> > >> +	 * +-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> > >> +	 * | | | | |s|e|c|t|o|r| | |s|e|c|t|o|r| | |s|e|c|t|o|r| | | | |
-> > >> +	 * +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-> > >> +	 * . . . |               |               |               | . . .
-> > >> +	 * ------+---------------+---------------+---------------+------
-> > >> +	 *            |<--- FAT reads in sectors          --->|
-> > >> +	 *
-> > >> +	 *            |  part 1  |   part 2      |  part 3    |
-> > >> +	 *
-> > >> +	 */
-> > >> +
-> > >> +	/* Do part 1 */
-> > >> +	if (fat_sect_size) {
-> > >> +		__u32 offset;
-> > >> +
-> > >> +		/* Read one block and overwrite the leading sectors */
-> > >> +		block = malloc_cache_aligned(cur_dev->blksz);
-> > >> +		if (!block) {
-> > >> +			printf("Error: allocating block: %lu\n", cur_dev->blksz);
-> > >> +			return -1;
-> > >> +		}
-> > >> +
-> > >> +		s = sect_to_block(sect, &offset);
-> > >> +		offset = offset * fat_sect_size;
-> > >> +
-> > >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> > >> +		if (ret != 1) {
-> > >> +			ret = -1;
-> > >> +			goto exit;
-> > >> +		}
-> > >> +
-> > >> +		if (rem > (cur_part_info.blksz - offset))
-> > >> +			size = cur_part_info.blksz - offset;
-> > >> +		else
-> > >> +			size = rem;
-> > >> +
-> > >> +		memcpy(block + offset, buf, size);
-> > >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> > >> +		if (ret != 1) {
-> > >> +			ret = -1;
-> > >> +			goto exit;
-> > >> +		}
-> > >> +
-> > >> +		rem -= size;
-> > >> +		buf += size;
-> > >> +		s++;
-> > >> +	} else {
-> > >> +		/*
-> > >> +		 * fat_sect_size not being set implies, this is the first read
-> > >> +		 * to partition. The first sector is being read to get the
-> > >> +		 * FS meta data. The FAT sector size is got from this meta data.
-> > >> +		 */
-> >
-> > This is the disk_write() function though, I don't think this behaviour
-> > is correct?
->
-> Will clean this.
->
-> Thanks for the inputs.
->
-> -Varada
->
->
-> > >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, buf);
-> > >> +		if (ret != 1)
-> > >> +			return -1;
-> > >> +	}
-> > >> +
-> > >> +	/* Do part 2, write directly from the given buffer */
-> > >> +	if (rem > cur_part_info.blksz) {
-> > >> +		n = rem / cur_part_info.blksz;
-> > >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, n, buf);
-> > >> +		if (ret != n) {
-> > >> +			ret = -1;
-> > >> +			goto exit;
-> > >> +		}
-> > >> +		buf += n * cur_part_info.blksz;
-> > >> +		rem = rem % cur_part_info.blksz;
-> > >> +		s += n;
-> > >> +	}
-> > >> +
-> > >> +	/* Do part 3, read a block and copy the trailing sectors */
-> > >> +	if (rem) {
-> > >> +		ret = blk_dread(cur_dev, cur_part_info.start + s, 1, block);
-> > >> +		if (ret != 1) {
-> > >> +			ret = -1;
-> > >> +			goto exit;
-> > >> +		} else {
-> > >> +			memcpy(block, buf, rem);
-> > >> +		}
-> > >> +		ret = blk_dwrite(cur_dev, cur_part_info.start + s, 1, block);
-> > >> +		if (ret != 1) {
-> > >> +			ret = -1;
-> > >> +			goto exit;
-> > >> +		}
-> > >> +	}
-> > >> +exit:
-> > >> +	if (block)
-> > >> +		free(block);
-> > >> +
-> > >> +	return (ret == -1) ? -1 : nr_sect;
-> > >>  }
-> >
-> >
-> > [...]
-> >
-> > Hi Tom,
-> >
-> > > With this patch, we now have
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20241113044956.1836896-1-caleb.connolly@linaro.org/
-> >
-> > I suspect my patch would corrupt storage on write, I'll give it another
-> > test and see.
-> > > and
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20230730111516.v2.1.Ia13846500fab3d5a1d5573db11a040d233994fa6@changeid/
-> > > for seemingly the same issue. Can you please try these other two
-> > > patches and report which ones do / don't handle your use case as well?
-> > > Thanks!
-> > Kind regards,
-> > >
-> >
-> > --
-> > // Caleb (they/them)
-> >
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
