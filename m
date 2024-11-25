@@ -4,87 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03E9D58066
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 11:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D406D5806A
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 11:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF090890CE;
-	Mon, 25 Nov 2024 12:27:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1395689A32;
+	Mon, 25 Nov 2024 12:56:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ltynu8Cw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G0MVngAB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3881289A33; Mon, 25 Nov 2024 12:27:35 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id B798A89A34; Mon, 25 Nov 2024 12:56:27 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D493088E81
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:27:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6BD989A31
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 12:56:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7f43259d220so3077935a12.3
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 03:27:32 -0800 (PST)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43152b79d25so39626525e9.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 03:56:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732534051; x=1733138851; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MviT+SMEDfdEhvUf3V6p88XsNberdUuWaTe/6J45DZA=;
- b=ltynu8CwWonoMUevh6XponoiQFLQgv6lBTzN0zCc7rZREYxsInJ6g3QD1NJxI/EJ5L
- 0TJ/1+1qlZWL8G1hIwQefLn5AahjIyRH8ezQ6X270flPobrFHepxJ1fwq7BH4N9+nsfm
- kQ/0jK1Lgwl90YdxHoa7/xI86KCMJ2NL/QNdPLDJspnQqzivhgEyTGVbPxhIVhkkGg+n
- s7Q+sqR6VlKuEDl6rpX9OgJHDCKrfOTtzLtoEnihXn+VkJFBOGleBdz14F2vznY0rO7X
- +sIxbea6y3U1hcXba00nmqJ7DNCcBU5WjusFRJcjy3SOgd86h7Ndj5z4v0kDiVkwqYMg
- MjAQ==
+ d=linaro.org; s=google; t=1732535785; x=1733140585; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mK8XrJIHh0NqaeGQGqZph7D4cJAJlCNB4jCXvQFzlr8=;
+ b=G0MVngAB9x/Ygd/eI8hzK1iqSnj25imBmirHmBsxEJZ6CYksGbf4pcd9E3Ky3BNozv
+ G4P2X+/EZl3D5qBHd8EtofX+oqfnaeKDwfuauNIYoaf2CfmltpG194z5jaCaqN9r4YmJ
+ pS7+GSfR8CDKiHiImJo0C2fCMMW8s3nWirymMOB+KD3T4j9FKDyzbRfXl56VpTNAb+jt
+ yqECRu2b+fMbiLaSaeBTZN2AZEK0aedX6/eMDlD57hkXiPkDBhB3CAaPv5cNThnsJNBi
+ 6wX6M9EdUBMuqSFLJUlCeFzub6BdHqL2xah6tEfDYiHh9O2tnfKdCTSZo44laK7ApaoW
+ BJBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732534051; x=1733138851;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1732535785; x=1733140585;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MviT+SMEDfdEhvUf3V6p88XsNberdUuWaTe/6J45DZA=;
- b=Ds9HLUU4pnW2kyxZtAqKyUBF0hq2gUCC/jYI8NpwpDTvhArWUbIVGxOA6rZVkyfW07
- 7PXkNXbyk9+tsTXRmfnv9cUewlSw2rfb+bjHyqZQhNCYKZZCoGhlFpGrc0RBhyS51yGG
- 3gmnwmVPuLmRB1gpeSqvl33ooT5yBooJ7mU9Jf9zGIfoAqp6wYlrOz+UYShG9l77XylH
- LTEgnkN3KLxLplKBCzQ/K1ILWe110NOS6TcKRA9+L31MUHD0ISojpnTs6ALPCaARoFKF
- OBpHHKYLWmqfaXDO0iRBSJr5cxv/qKCq7Yh2zC8CsE/AT7ytv+NKCt9OXzvfibq0haFg
- ywBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVzWpR25X7wqlkkoiwdTNN/jppwQwVa0OPe2ICYh2EOwTJM0OXEx8if32or+LnChi65DbVUF8g=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJOgFDEHo/79zKWD90apRcAi6KofXeb/vnLd2t5pVVngpfqlb2
- RPNgoxKgiH2CbiyZzFLmreO9C1QVibYNTsLLEljibUmOhdTfZK63CFn5ZaTgUxJUqLV2p6jwvbz
- lpkcGnHsJJkKmvuDGj67T6dlKm1FdDFVgm28nog==
-X-Gm-Gg: ASbGncukpV7UlwpN3phrWxEiXevSM/+JUiVS1u1grbYd7TFXoBBpQyMVx3EB6gFQLOB
- 6E1AAkU8cweW0p521pnifoCyH7hVWrg==
-X-Google-Smtp-Source: AGHT+IGqfpeM59sktdTaApRA2JAN0JBBl2zw14VFszDR8+tJOKiAP55YMxarVQg6HyN4sGzgtbRR4GixBXOTeSNrbeU=
-X-Received: by 2002:a05:6a20:7fa6:b0:1db:e8dc:4ae1 with SMTP id
- adf61e73a8af0-1e09e41f74bmr17752879637.17.1732534051391; Mon, 25 Nov 2024
- 03:27:31 -0800 (PST)
+ bh=mK8XrJIHh0NqaeGQGqZph7D4cJAJlCNB4jCXvQFzlr8=;
+ b=bwDkHKQ7cg8dAsEaUDsdFKG1jNuFiPtoHyUfI2W+nTmUeIznS+cv1UcSFe6TaWxJIw
+ p0qGV0l/4T6Lx7jqR71rF7eUyg4QzfKiC8rSBR2R9FexOIuEQzEJN2ktBQ1amILGpSAO
+ eD3+wHCngff/hQihGaAI31HtmXPPauN1Gf3V/yWyWciU3zyN/lWYQqG1cTd6loFnWD4+
+ Q+YMYpZpgRuwDiAC6/xKwvE7nN3yF8yp4b0jXG8AwTpbbEd3+Gq0nySPcNhtuHP6JOgV
+ xZf/JnYy3jVKZ7HWN8d3OVhkXmyslE9i3ObqvRAZyWJ2GT2O4ww8AtThtzRfmJKWOXZZ
+ ETzQ==
+X-Gm-Message-State: AOJu0YzOexIbXbUUHFuRsavtfU/7LoicxiZZEJPereHZnIOLN2pf4adc
+ XpokIshz6Gg+sVjiNbfw2V9qCc9Hs2iWiuXO3ijQOLLQBFCYAggy/1UEK1ZXBQhUfjbL7Dp9du/
+ j4bhPhw==
+X-Gm-Gg: ASbGncsZ0Fxg2WUPPUoET1keTMnPnTqlP0HA1PY232KssrjolbpSN+8H+jHiLXGG0E0
+ EP/zYm8PHvdosqxKoDIRp1TdWz07zWofD+U7NhDv7SsRE7DbRx/Fm5AauWkoz6ffsNk3JthUmVq
+ 5lD9saV+6kO66kIgjITmryZPUuBqXjPcXnM8cWTsd11SjTeD7G5twQeGJipqrxNMTWXy4f1PDxQ
+ IABElknlyzwqmkQeZj8ucZIYFQOxOv7YennpICJ8QCyPP28BdDleIGmKdDb5b5AuXciOg==
+X-Google-Smtp-Source: AGHT+IH3fFCl+L6y9Vy3X+NH6bAZ7r7lvmmRMK8YmFvIeJk/lhExH059bV8KF+EVS/8AJ6V4DozYYg==
+X-Received: by 2002:a05:600c:3516:b0:432:d797:404a with SMTP id
+ 5b1f17b1804b1-433ce49105emr95045595e9.22.1732535785101; 
+ Mon, 25 Nov 2024 03:56:25 -0800 (PST)
+Received: from artemis2.broadband ([2a0a:ef40:edb:fc01:7b40:ce24:60a6:e419])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825fb271ffsm10139626f8f.53.2024.11.25.03.56.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Nov 2024 03:56:24 -0800 (PST)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 0/4] Select CONFIG_64BIT for sandbox64 and x86_64
+Date: Mon, 25 Nov 2024 11:55:50 +0000
+Message-Id: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
- <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 25 Nov 2024 13:26:55 +0200
-Message-ID: <CAC_iWjJNGcuiL3ceafmOL69od91cVkX5gPyDr2kyNdiFR=QSUw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Michal Simek <michal.simek@amd.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, 
- T Karthik Reddy <t.karthik.reddy@xilinx.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,84 +114,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
+Picking up a series from Dan Carpenter and applying requested
+changes for v2.
 
-On Sat, 23 Nov 2024 at 23:46, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
-> a file and boot it if autostart=yes.
->
-> Instead just check that there is a network device.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         new patch
-> ---
->  net/eth_bootdev.c | 30 ++++++++++++++++++------------
->  1 file changed, 18 insertions(+), 12 deletions(-)
->
-> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
-> index 6ee54e3c790..b0fca6e8313 100644
-> --- a/net/eth_bootdev.c
-> +++ b/net/eth_bootdev.c
-> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
->         return 0;
->  }
->
-> +/**
-> + * eth_bootdev_hunt() - probe all network devices
-> + *
-> + * Network devices can also come from USB, but that is a higher
-> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
-> + * enumerated already. If something like 'bootflow scan dhcp' is used,
-> + * then the user will need to run 'usb start' first.
-> + *
-> + * @info:      info structure describing this hunter
-> + * @show:      true to show information from the hunter
-> + *
-> + * Return:     0 if device found, -EINVAL otherwise
-> + */
->  static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
->  {
->         int ret;
-> +       struct udevice *dev = NULL;
->
->         if (!test_eth_enabled())
->                 return 0;
-> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
->                         log_warning("Failed to init PCI (%dE)\n", ret);
->         }
->
-> -       /*
-> -        * Ethernet devices can also come from USB, but that is a higher
-> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
-> -        * enumerated already. If something like 'bootflow scan dhcp' is used
-> -        * then the user will need to run 'usb start' first.
-> -        */
-> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
-> -               ret = dhcp_run(0, NULL, false);
-> -               if (ret)
-> -                       return -EINVAL;
-> -       }
-> +       ret = -EINVAL;
-> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
-> +               ret = 0;
->
-> -       return 0;
-> +       return ret;
+I had previously set CONFIG_64BIT for arm64.  This patchset does the
+same thing for sandbox and x86_64.  (Mips and riscv were already
+doing it).  This CONFIG option is used in the Makefile to determine
+if it's a 32 or 64 bit system for the CHECKER.
 
-I agree with the reasoning above. Now that we have LWIP it would be a
-good idea to try to boot only if ww receive and parse option 66 on
-DHCP.
+Makefile
+  1052  # the checker needs the correct machine size
+  1053  CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
 
-In any case FWIW
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Changes in v4:
+ - Add help text to describe new symbol CONFIG_SPL_64BIT
+ - Split the statement in bloblist.c to be more readable
 
->  }
->
->  struct bootdev_ops eth_bootdev_ops = {
-> --
-> 2.45.2
->
+Changes in v3:
+Added a new patch 1/4 to make fixes to the source needed
+by the sandbox patch 2/4.
+Updated 3/4 to account for x86 being built with a 64 bit
+U-Boot proper but a 32 bit SPL.
+Added another patch 4/4 to fix an incorrect use of
+CONFIG_PHYS_64BIT which should be CONFIG_64BIT at the request
+of Tom Rini.
+
+Changes in v2:
+Resubmitted by Andrew Goodbody with changes requested by reviewer
+
+Andrew Goodbody (4):
+  sandbox: Correct guard around readq/writeq
+  sandbox: select CONFIG_64BIT for sandbox
+  x86: select CONFIG_64BIT for X86_64
+  test: lib: Use CONFIG_64BIT to detect 64 bit compile
+
+ arch/Kconfig                  |  8 ++++++++
+ arch/arm/Kconfig              |  1 +
+ arch/mips/Kconfig             |  4 ++++
+ arch/riscv/Kconfig            |  1 +
+ arch/sandbox/Kconfig          |  2 ++
+ arch/sandbox/include/asm/io.h |  4 ++--
+ arch/x86/Kconfig              |  1 +
+ common/bloblist.c             | 11 +++++++----
+ include/limits.h              |  3 ++-
+ test/lib/str.c                |  8 ++++----
+ 10 files changed, 32 insertions(+), 11 deletions(-)
+
+-- 
+2.39.5
+
