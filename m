@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE95D58D74
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:55:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388CCD58D76
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 17:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B1AE89A62;
-	Mon, 25 Nov 2024 18:55:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B30518906C;
+	Mon, 25 Nov 2024 18:59:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L11qTeQw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F+82ia6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82810899C1; Mon, 25 Nov 2024 18:49:19 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 16B61893E7; Mon, 25 Nov 2024 18:59:06 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B0289040
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:49:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5C158906C
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 18:59:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3824a089b2cso2812285f8f.1
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:49:17 -0800 (PST)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-71d40003870so429357a34.0
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 09:59:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732556956; x=1733161756; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732557542; x=1733162342; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dHg8Mhz6YvqKJjIxW4cHgf9xQDDckWZwKMPjEPgN690=;
- b=L11qTeQwMab5UYyZEnEvqT1m0WE1eRh/tlcBdzGqoAMEldjWA4Tx1zg0vJ8r4YUye8
- C82bGjPWYZDER66NQtnQv/mVh/TzJa+LC1LueOwfDRFvcPH0cO0dRMPXOi4T412Hhdhi
- B2mNa3a3hcyn+XRh9dnEd+Yt0O+oe3PSLJj/JuX/hj/qiPwOfi02M1QTqkjyUpxYa43C
- bcivy3rkuW9EX0IM5qNGvsl0RPGnYsNqXXnyV5Hmd0PjX3PE4Fxfgjr2BIQzcMm/Ull1
- kdBncJ7xAe/82xFJcdtXomHtoPl8rTPTWsqMgagBW8g2GlDa4u/ptpliXGREiViY1+p9
- 6FYw==
+ bh=xioWqpO9xXmVVeBEkHKP5SvISe49PxuiOa+L2b2GhNs=;
+ b=F+82ia6R7cpk6ubQw0+qWUnZR+hes4JWGugjy4yeT3LLBP1DvDNSh5b0hRCb2z5cfN
+ NSwjl8uWvb1eT2p3g/iC/5NuIDTVtCweW05AQvm4YgaVU+Bit4eJXOVM+9kgmpE5tMPy
+ UynmFYoA+uvoadEF+wJk7xfhOJfUulRSaaApoZ7u0QbfmqpWK/F5kmLE+cmARGNF6V9W
+ CoDIt6OB9ezIFBhGoInDONeg+uny3kHfw5WEGrnXi7Hitir4crE9ziShJzhp/ESzARQA
+ bC6MghdAyGyl/7JyFUlJ/Y96DTtNWIzO60WGEoAkZ116ONxHVpVpbzdhrkq2r8Yv/NFd
+ qR/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732556956; x=1733161756;
+ d=1e100.net; s=20230601; t=1732557542; x=1733162342;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dHg8Mhz6YvqKJjIxW4cHgf9xQDDckWZwKMPjEPgN690=;
- b=fMjHRdEvlXbrDaUHu1GpnCgXV/4LOrKt+sXFDWWPu/KU2WLPq9EbOc2Y7ON7Xh0LG2
- P0jJFBXRyLMa0wIzhG3rzqcqZVkYGAw7c6Hkf4iQSQYTQJ+QA+4LDeToHrf8kjYiPuxo
- o+D2xFdh8AWjaMFwbFGt1XspF5dZJUBh8AhoN1LsejwEYoLbe/7zn8dK5NCvvkMFDy3r
- zSgPydz8wGyZIrzXbKYB6o2LgwZh16AQX0/kit2LXdtXoycRtJhUjAGk5RwLmmEgMeBP
- K72WeHI7NF68uD1M8jLvA/I5sK8VKBvWlZSqi0eA+hbkC08y7t70nHA7OQ3Kq6n6KZzO
- T0uA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBb4n9ZSOf+7FGZmvHiJ3ATjTWl2H5k3RtcN5ZtccjAgC3HbakXSSPZ7EFOU3HdJ7V8V8mUbU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzJ36m3Ppv1pGFPEs8UVRfnaK468zNqlfi2juHvrFumliUz7Ebe
- hCYq7k0wj51RKNWmcL9jZ5ht03uGowZ72jG71kgQRXVbPYfOx/ty
-X-Gm-Gg: ASbGnct9TKgz9tVqWiKVKk+9XFdq3uOX8WOvoQoYyimqi/6xLDV/WoVAOud0M1aHrdr
- B1BNOiSOrF+DXG3CrbCPxwDGhBXBcQauVxdXrvNOU7mtbVVrrB2sM8KRnsndvhrERKVSHXtCA2n
- gRtTT3K4/yVY9NN2KTFT7L12QoSFuAdUA/fJVli2QG6lSO1i3Za6h7KZXfTBjlsgiUoocFBMzpn
- 6X/LVsXFFT2lpNAI0J5QZGW1Bd83aTSHdRMAs+6ijMjaiA=
-X-Google-Smtp-Source: AGHT+IHdC9Q8J9DzHv6kpp4vK+9ihW3Om5JbnMS0ApYAxh9PQinFfa6vrz+Z0+YKBaOJTsIWIT+UFA==
-X-Received: by 2002:a5d:64ce:0:b0:382:38e6:1eb3 with SMTP id
- ffacd0b85a97d-38260b86501mr9786536f8f.30.1732556956146; 
- Mon, 25 Nov 2024 09:49:16 -0800 (PST)
-Received: from vitor-nb.. ([2001:8a0:e622:f700:99c7:849e:ac2b:8adc])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434a16d96d6sm23293205e9.7.2024.11.25.09.49.13
+ bh=xioWqpO9xXmVVeBEkHKP5SvISe49PxuiOa+L2b2GhNs=;
+ b=rSaJg/LGRJwLpSAFdnKxMefB9IE2oo/2/RW0gIVNN8DaCpUEx3IoPyItfrXfMUkHv3
+ nXeY9CaznnCtGx1aXzcgNZjiyhpEsOEBTu6wOCqZqA82W7QKuEaD+hzfR2uYBj+18FnJ
+ uNSI4PcQ8e1yEFgRaWz0H9ZL9/EDcx0097472ZtoxpU2K4eY0tE+yW2Cs+aDkTeXn8+w
+ Biboj4cDEkJaWbKT9uGcLqFeprSXInqxTtG9kASngNkC/GSIAgsQoj7+XAm6FqIzShqu
+ MtOtgFeZCsj8k/o8Bqc1VY4f6CVce2RX1V3A02njNhnefnK5mskbVYL3DZLQvHnYnDCb
+ aKYw==
+X-Gm-Message-State: AOJu0Yzk07G9a1f6SdQfPLdPNXSpic06vyB42FZUms8wOtjRA5HhD1HO
+ ZHJb5oYBH/u/p1CFqLcJ84+dmRl6ETK4F3rmTtcZstxNt22Cp/7DVfI68eVFG1s=
+X-Gm-Gg: ASbGncvRjAT12tVULQdTeenKQOl7+O4C6ku7FPhwaKL9UzF2b9oT2MNQHX7EhvfLQaX
+ rGyBF/+MZZkIBoUuSsgNdlYXp1mA3Y3oMOm/iJTQF7fxca5VeqG/OWcV6nJ/dDNUsqrznV5t8ld
+ okD6cpCNE8lk6IcwSpy5kGdtqHW/xKs2LNcBLt74rDAOFxUowRLShm4nC0tzcJo1xWrT4EdXFpK
+ oYerxXl28COg0fZQl/wt9aBG+kmHFNG9AB/M1eYsenB
+X-Google-Smtp-Source: AGHT+IERQh5GDitzIBwAQNLxTT9X7iP4sK3O4GrOrDWwxwZ9qGHw+Tj8owbkA+x99OD7DIfelcY7kg==
+X-Received: by 2002:a05:6830:390a:b0:718:19a9:434d with SMTP id
+ 46e09a7af769-71c04b733e4mr12336920a34.1.1732557542474; 
+ Mon, 25 Nov 2024 09:59:02 -0800 (PST)
+Received: from adriano.. ([186.11.57.125]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7fbcc3f450esm6939664a12.69.2024.11.25.09.58.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 09:49:15 -0800 (PST)
-From: Vitor Soares <ivitro@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
- ivitro@gmail.com, emanuele.ghidoli@toradex.com
-Subject: [PATCH v3] toradex: tdx-cfg-block: rework modules pid4 handling
-Date: Mon, 25 Nov 2024 17:49:10 +0000
-Message-Id: <20241125174911.70723-1-ivitro@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Mon, 25 Nov 2024 09:59:02 -0800 (PST)
+From: Adriano Cordova <adrianox@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH] net-lwip: zero terminate string with headers in
+ wget_lwip_fill_info()
+Date: Mon, 25 Nov 2024 14:58:49 -0300
+Message-ID: <20241125175849.316876-1-adrianox@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 25 Nov 2024 18:55:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,326 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vitor Soares <vitor.soares@toradex.com>
+    This patch comes as a companion to the same patch but for the legacy
+    net stack. Commit 1327c2a8d6 ("net/lwip: wget: integrate struct wget_info
+    into wget code") introduced function wget_fill_info() which retrieves
+    the headers from the HTTP server response. As we want to parse the
+    string in later patches we need to ensure that it is NUL terminated.
 
-The module pid4 currently corresponds to the index of the toradex_module
-array. If a new pid4 is introduced that does not follow the sequence of
-the previous entries, it will create a gap in the array.
+    We must further check that wget_info->headers in not NULL.
+    Otherwise a crash occurs.
 
-To address this, embed pid4 within the toradex_som structure and
-implement a function to retrieve the index corresponding to pid4.
-
-Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
+Fixes: 1327c2a8d6 ("net/lwip: wget: integrate struct wget_info into wget code")
+Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
-v2->v3:
-  - Don't create variables inside the switch case block, this is not valid.
+ net/lwip/wget.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-v1->v2:
-  - Fix incorrect PID4 print when creating config block in interactive mode.
-
- board/toradex/common/tdx-cfg-block.c | 207 ++++++++++++++-------------
- board/toradex/common/tdx-cfg-block.h |   2 +
- board/toradex/common/tdx-common.c    |   5 +-
- 3 files changed, 117 insertions(+), 97 deletions(-)
-
-diff --git a/board/toradex/common/tdx-cfg-block.c b/board/toradex/common/tdx-cfg-block.c
-index a6e3c6afae80..0fb49fcdfbf6 100644
---- a/board/toradex/common/tdx-cfg-block.c
-+++ b/board/toradex/common/tdx-cfg-block.c
-@@ -70,97 +70,95 @@ struct toradex_hw tdx_car_hw_tag;
- #define TARGET_IS_ENABLED(x) IS_ENABLED(CONFIG_TARGET_ ## x)
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+index 53c3b169e0..15cf4e25bd 100644
+--- a/net/lwip/wget.c
++++ b/net/lwip/wget.c
+@@ -36,8 +36,13 @@ struct wget_ctx {
  
- const struct toradex_som toradex_modules[] = {
--	 [0] = { "UNKNOWN MODULE",                       0                                  },
--	 [1] = { "Colibri PXA270 312MHz",                0                                  },
--	 [2] = { "Colibri PXA270 520MHz",                0                                  },
--	 [3] = { "Colibri PXA320 806MHz",                0                                  },
--	 [4] = { "Colibri PXA300 208MHz",                0                                  },
--	 [5] = { "Colibri PXA310 624MHz",                0                                  },
--	 [6] = { "Colibri PXA320IT 806MHz",              0                                  },
--	 [7] = { "Colibri PXA300 208MHz XT",             0                                  },
--	 [8] = { "Colibri PXA270 312MHz",                0                                  },
--	 [9] = { "Colibri PXA270 520MHz",                0                                  },
--	[10] = { "Colibri VF50 128MB",                   TARGET_IS_ENABLED(COLIBRI_VF)      },
--	[11] = { "Colibri VF61 256MB",                   TARGET_IS_ENABLED(COLIBRI_VF)      },
--	[12] = { "Colibri VF61 256MB IT",                TARGET_IS_ENABLED(COLIBRI_VF)      },
--	[13] = { "Colibri VF50 128MB IT",                TARGET_IS_ENABLED(COLIBRI_VF)      },
--	[14] = { "Colibri iMX6S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[15] = { "Colibri iMX6DL 512MB",                 TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[16] = { "Colibri iMX6S 256MB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[17] = { "Colibri iMX6DL 512MB IT",              TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[18] = { "UNKNOWN MODULE",                       0                                  },
--	[19] = { "UNKNOWN MODULE",                       0                                  },
--	[20] = { "Colibri T20 256MB",                    TARGET_IS_ENABLED(COLIBRI_T20)     },
--	[21] = { "Colibri T20 512MB",                    TARGET_IS_ENABLED(COLIBRI_T20)     },
--	[22] = { "Colibri T20 512MB IT",                 TARGET_IS_ENABLED(COLIBRI_T20)     },
--	[23] = { "Colibri T30 1GB",                      TARGET_IS_ENABLED(COLIBRI_T30)     },
--	[24] = { "Colibri T20 256MB IT",                 TARGET_IS_ENABLED(COLIBRI_T20)     },
--	[25] = { "Apalis T30 2GB",                       TARGET_IS_ENABLED(APALIS_T30)      },
--	[26] = { "Apalis T30 1GB",                       TARGET_IS_ENABLED(APALIS_T30)      },
--	[27] = { "Apalis iMX6Q 1GB",                     TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[28] = { "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[29] = { "Apalis iMX6D 512MB",                   TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[30] = { "Colibri T30 1GB IT",                   TARGET_IS_ENABLED(COLIBRI_T30)     },
--	[31] = { "Apalis T30 1GB IT",                    TARGET_IS_ENABLED(APALIS_T30)      },
--	[32] = { "Colibri iMX7S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
--	[33] = { "Colibri iMX7D 512MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
--	[34] = { "Apalis TK1 2GB",                       TARGET_IS_ENABLED(APALIS_TK1)      },
--	[35] = { "Apalis iMX6D 1GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[36] = { "Colibri iMX6ULL 256MB",                TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
--	[37] = { "Apalis iMX8QM 4GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[38] = { "Colibri iMX8QXP 2GB WB IT",            TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
--	[39] = { "Colibri iMX7D 1GB",                    TARGET_IS_ENABLED(COLIBRI_IMX7)    },
--	[40] = { "Colibri iMX6ULL 512MB WB IT",          TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
--	[41] = { "Colibri iMX7D 512MB EPDC",             TARGET_IS_ENABLED(COLIBRI_IMX7)    },
--	[42] = { "Apalis TK1 4GB",                       TARGET_IS_ENABLED(APALIS_TK1)      },
--	[43] = { "Colibri T20 512MB IT SETEK",           TARGET_IS_ENABLED(COLIBRI_T20)     },
--	[44] = { "Colibri iMX6ULL 512MB IT",             TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
--	[45] = { "Colibri iMX6ULL 512MB WB",             TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
--	[46] = { "Apalis iMX8QXP 2GB WB IT",             0                                  },
--	[47] = { "Apalis iMX8QM 4GB IT",                 TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[48] = { "Apalis iMX8QP 2GB WB",                 TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[49] = { "Apalis iMX8QP 2GB",                    TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[50] = { "Colibri iMX8QXP 2GB IT",               TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
--	[51] = { "Colibri iMX8DX 1GB WB",                TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
--	[52] = { "Colibri iMX8DX 1GB",                   TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
--	[53] = { "Apalis iMX8QXP 2GB ECC IT",            0                                  },
--	[54] = { "Apalis iMX8DXP 1GB",                   TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[55] = { "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[56] = { "Verdin iMX8M Nano Quad 1GB WB",        0                                  },
--	[57] = { "Verdin iMX8M Mini DualLite 1GB",       TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[58] = { "Verdin iMX8M Plus Quad 4GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[59] = { "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[60] = { "Verdin iMX8M Mini DualLite 1GB WB IT", TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[61] = { "Verdin iMX8M Plus Quad 2GB",           TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[62] = { "Colibri iMX6ULL 1GB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
--	[63] = { "Verdin iMX8M Plus Quad 4GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[64] = { "Verdin iMX8M Plus Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[65] = { "Verdin iMX8M Plus QuadLite 1GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[66] = { "Verdin iMX8M Plus Quad 8GB WB",        TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[67] = { "Apalis iMX8QM 8GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
--	[68] = { "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[69] = { "Verdin AM62 Quad 1GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[70] = { "Verdin iMX8M Plus Quad 8GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
--	[71] = { "Verdin AM62 Solo 512MB",               TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[72] = { "Verdin AM62 Solo 512MB WB IT",         TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[73] = { "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[74] = { "Verdin AM62 Dual 1GB IT",              TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[75] = { "Verdin AM62 Dual 1GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[76] = { "Verdin AM62 Quad 2GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
--	[77] = { "Colibri iMX6S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[78] = { "Colibri iMX6S 256MB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[79] = { "Colibri iMX6DL 512MB",                 TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[80] = { "Colibri iMX6DL 512MB IT",              TARGET_IS_ENABLED(COLIBRI_IMX6)    },
--	[81] = { "Colibri iMX7D 512MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
--	[82] = { "Apalis iMX6D 512MB",                   TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[83] = { "Apalis iMX6Q 1GB",                     TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[84] = { "Apalis iMX6D 1GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[85] = { "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
--	[86] = { "Verdin iMX8M Mini DualLite 2GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[87] = { "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
--	[88] = { "Aquila AM69 Octa 32GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72) },
--	[89] = { "Verdin iMX95 Hexa 16GB WB IT",         TARGET_IS_ENABLED(VERDIN_IMX95)    },
--	[90] = { "Verdin iMX8M Mini Quad 4GB WB ET",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ 0,                                 "UNKNOWN MODULE",                       0                                  },
-+	{ COLIBRI_PXA270_V1_312MHZ,          "Colibri PXA270 312MHz",                0                                  },
-+	{ COLIBRI_PXA270_V1_520MHZ,          "Colibri PXA270 520MHz",                0                                  },
-+	{ COLIBRI_PXA320,                    "Colibri PXA320 806MHz",                0                                  },
-+	{ COLIBRI_PXA300,                    "Colibri PXA300 208MHz",                0                                  },
-+	{ COLIBRI_PXA310,                    "Colibri PXA310 624MHz",                0                                  },
-+	{ COLIBRI_PXA320_IT,                 "Colibri PXA320IT 806MHz",              0                                  },
-+	{ COLIBRI_PXA300_XT,                 "Colibri PXA300 208MHz XT",             0                                  },
-+	{ COLIBRI_PXA270_312MHZ,             "Colibri PXA270 312MHz",                0                                  },
-+	{ COLIBRI_PXA270_520MHZ,             "Colibri PXA270 520MHz",                0                                  },
-+	{ COLIBRI_VF50,                      "Colibri VF50 128MB",                   TARGET_IS_ENABLED(COLIBRI_VF)      },
-+	{ COLIBRI_VF61,                      "Colibri VF61 256MB",                   TARGET_IS_ENABLED(COLIBRI_VF)      },
-+	{ COLIBRI_VF61_IT,                   "Colibri VF61 256MB IT",                TARGET_IS_ENABLED(COLIBRI_VF)      },
-+	{ COLIBRI_VF50_IT,                   "Colibri VF50 128MB IT",                TARGET_IS_ENABLED(COLIBRI_VF)      },
-+	{ COLIBRI_IMX6S,                     "Colibri iMX6S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6DL,                    "Colibri iMX6DL 512MB",                 TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6S_IT,                  "Colibri iMX6S 256MB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6DL_IT,                 "Colibri iMX6DL 512MB IT",              TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_T20_256MB,                 "Colibri T20 256MB",                    TARGET_IS_ENABLED(COLIBRI_T20)     },
-+	{ COLIBRI_T20_512MB,                 "Colibri T20 512MB",                    TARGET_IS_ENABLED(COLIBRI_T20)     },
-+	{ COLIBRI_T20_512MB_IT,              "Colibri T20 512MB IT",                 TARGET_IS_ENABLED(COLIBRI_T20)     },
-+	{ COLIBRI_T30,                       "Colibri T30 1GB",                      TARGET_IS_ENABLED(COLIBRI_T30)     },
-+	{ COLIBRI_T20_256MB_IT,              "Colibri T20 256MB IT",                 TARGET_IS_ENABLED(COLIBRI_T20)     },
-+	{ APALIS_T30_2GB,                    "Apalis T30 2GB",                       TARGET_IS_ENABLED(APALIS_T30)      },
-+	{ APALIS_T30_1GB,                    "Apalis T30 1GB",                       TARGET_IS_ENABLED(APALIS_T30)      },
-+	{ APALIS_IMX6Q,                      "Apalis iMX6Q 1GB",                     TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ APALIS_IMX6Q_IT,                   "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ APALIS_IMX6D,                      "Apalis iMX6D 512MB",                   TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ COLIBRI_T30_IT,                    "Colibri T30 1GB IT",                   TARGET_IS_ENABLED(COLIBRI_T30)     },
-+	{ APALIS_T30_IT,                     "Apalis T30 1GB IT",                    TARGET_IS_ENABLED(APALIS_T30)      },
-+	{ COLIBRI_IMX7S,                     "Colibri iMX7S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
-+	{ COLIBRI_IMX7D,                     "Colibri iMX7D 512MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
-+	{ APALIS_TK1_2GB,                    "Apalis TK1 2GB",                       TARGET_IS_ENABLED(APALIS_TK1)      },
-+	{ APALIS_IMX6D_IT,                   "Apalis iMX6D 1GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ COLIBRI_IMX6ULL,                   "Colibri iMX6ULL 256MB",                TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
-+	{ APALIS_IMX8QM_WIFI_BT_IT,          "Apalis iMX8QM 4GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ COLIBRI_IMX8QXP_WIFI_BT_IT,        "Colibri iMX8QXP 2GB WB IT",            TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
-+	{ COLIBRI_IMX7D_EMMC,                "Colibri iMX7D 1GB",                    TARGET_IS_ENABLED(COLIBRI_IMX7)    },
-+	{ COLIBRI_IMX6ULL_WIFI_BT_IT,        "Colibri iMX6ULL 512MB WB IT",          TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
-+	{ COLIBRI_IMX7D_EPDC,                "Colibri iMX7D 512MB EPDC",             TARGET_IS_ENABLED(COLIBRI_IMX7)    },
-+	{ APALIS_TK1_4GB,                    "Apalis TK1 4GB",                       TARGET_IS_ENABLED(APALIS_TK1)      },
-+	{ COLIBRI_T20_512MB_IT_SETEK,        "Colibri T20 512MB IT SETEK",           TARGET_IS_ENABLED(COLIBRI_T20)     },
-+	{ COLIBRI_IMX6ULL_IT,                "Colibri iMX6ULL 512MB IT",             TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
-+	{ COLIBRI_IMX6ULL_WIFI_BT,           "Colibri iMX6ULL 512MB WB",             TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
-+	{ APALIS_IMX8QXP_WIFI_BT_IT,         "Apalis iMX8QXP 2GB WB IT",             0                                  },
-+	{ APALIS_IMX8QM_IT,                  "Apalis iMX8QM 4GB IT",                 TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ APALIS_IMX8QP_WIFI_BT,             "Apalis iMX8QP 2GB WB",                 TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ APALIS_IMX8QP,                     "Apalis iMX8QP 2GB",                    TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ COLIBRI_IMX8QXP_IT,                "Colibri iMX8QXP 2GB IT",               TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
-+	{ COLIBRI_IMX8DX_WIFI_BT,            "Colibri iMX8DX 1GB WB",                TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
-+	{ COLIBRI_IMX8DX,                    "Colibri iMX8DX 1GB",                   TARGET_IS_ENABLED(COLIBRI_IMX8X)   },
-+	{ APALIS_IMX8QXP,                    "Apalis iMX8QXP 2GB ECC IT",            0                                  },
-+	{ APALIS_IMX8DXP,                    "Apalis iMX8DXP 1GB",                   TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ VERDIN_IMX8MMQ_WIFI_BT_IT,         "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_IMX8MNQ_WIFI_BT,            "Verdin iMX8M Nano Quad 1GB WB",        0                                  },
-+	{ VERDIN_IMX8MMDL,                   "Verdin iMX8M Mini DualLite 1GB",       TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_IMX8MPQ_WIFI_BT_IT,         "Verdin iMX8M Plus Quad 4GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ VERDIN_IMX8MMQ_IT,                 "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_IMX8MMDL_WIFI_BT_IT,        "Verdin iMX8M Mini DualLite 1GB WB IT", TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_IMX8MPQ,                    "Verdin iMX8M Plus Quad 2GB",           TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ COLIBRI_IMX6ULL_IT_EMMC,           "Colibri iMX6ULL 1GB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6ULL) },
-+	{ VERDIN_IMX8MPQ_IT,                 "Verdin iMX8M Plus Quad 4GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ VERDIN_IMX8MPQ_2GB_WIFI_BT_IT,     "Verdin iMX8M Plus Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ VERDIN_IMX8MPQL_IT,                "Verdin iMX8M Plus QuadLite 1GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ VERDIN_IMX8MPQ_8GB_WIFI_BT,        "Verdin iMX8M Plus Quad 8GB WB",        TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ APALIS_IMX8QM_8GB_WIFI_BT_IT,      "Apalis iMX8QM 8GB WB IT",              TARGET_IS_ENABLED(APALIS_IMX8)     },
-+	{ VERDIN_IMX8MMQ_WIFI_BT_IT_NO_CAN,  "Verdin iMX8M Mini Quad 2GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_AM62Q_WIFI_BT_IT,           "Verdin AM62 Quad 1GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_IMX8MPQ_8GB_WIFI_BT_IT,     "Verdin iMX8M Plus Quad 8GB WB IT",     TARGET_IS_ENABLED(VERDIN_IMX8MP)   },
-+	{ VERDIN_AM62S_512MB,                "Verdin AM62 Solo 512MB",               TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_AM62S_512MB_WIFI_BT_IT,     "Verdin AM62 Solo 512MB WB IT",         TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_AM62D_1G_ET,                "Verdin AM62 Dual 1GB ET",              TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_AM62D_1G_IT,                "Verdin AM62 Dual 1GB IT",              TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_AM62D_1G_WIFI_BT_IT,        "Verdin AM62 Dual 1GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ VERDIN_AM62Q_2G_WIFI_BT_IT,        "Verdin AM62 Quad 2GB WB IT",           TARGET_IS_ENABLED(VERDIN_AM62_A53) },
-+	{ COLIBRI_IMX6S_NOWINCE,             "Colibri iMX6S 256MB",                  TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6S_IT_NOWINCE,          "Colibri iMX6S 256MB IT",               TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6DL_NOWINCE,            "Colibri iMX6DL 512MB",                 TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX6DL_IT_NOWINCE,         "Colibri iMX6DL 512MB IT",              TARGET_IS_ENABLED(COLIBRI_IMX6)    },
-+	{ COLIBRI_IMX7D_NOWINCE,             "Colibri iMX7D 512MB",                  TARGET_IS_ENABLED(COLIBRI_IMX7)    },
-+	{ APALIS_IMX6D_NOWINCE,              "Apalis iMX6D 512MB",                   TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ APALIS_IMX6Q_NOWINCE,              "Apalis iMX6Q 1GB",                     TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ APALIS_IMX6D_IT_NOWINCE,           "Apalis iMX6D 1GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ APALIS_IMX6Q_IT_NOWINCE,           "Apalis iMX6Q 2GB IT",                  TARGET_IS_ENABLED(APALIS_IMX6)     },
-+	{ VERDIN_IMX8MMDL_2G_IT,             "Verdin iMX8M Mini DualLite 2GB IT",    TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ VERDIN_IMX8MMQ_2G_IT_NO_CAN,       "Verdin iMX8M Mini Quad 2GB IT",        TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
-+	{ AQUILA_AM69O_32G_WIFI_BT_IT,       "Aquila AM69 Octa 32GB WB IT",          TARGET_IS_ENABLED(AQUILA_AM69_A72) },
-+	{ VERDIN_IMX95H_16G_WIFI_BT_IT,      "Verdin iMX95 Hexa 16GB WB IT",         TARGET_IS_ENABLED(VERDIN_IMX95)    },
-+	{ VERDIN_IMX8MMQ_4G_WIFI_BT_ET,      "Verdin iMX8M Mini Quad 4GB WB ET",     TARGET_IS_ENABLED(VERDIN_IMX8MM)   },
- };
- 
- struct pid4list {
-@@ -188,6 +186,20 @@ const u32 toradex_ouis[] = {
- 	[1] = 0x8c06cbUL,
- };
- 
-+int get_toradex_modules_idx(int pid4)
-+{
-+	int i, index = 0;
-+
-+	for (i = 1; i < ARRAY_SIZE(toradex_modules); i++) {
-+		if (pid4 == toradex_modules[i].pid4) {
-+			index = i;
-+			break;
-+		}
+ static void wget_lwip_fill_info(struct pbuf *hdr, u16_t hdr_len, u32_t hdr_cont_len)
+ {
+-	if (wget_info->headers && hdr_len < MAX_HTTP_HEADERS_SIZE)
+-		pbuf_copy_partial(hdr, (void *)wget_info->headers, hdr_len, 0);
++	if (wget_info->headers) {
++		if (wget_info->headers && hdr_len < MAX_HTTP_HEADERS_SIZE)
++			pbuf_copy_partial(hdr, (void *)wget_info->headers, hdr_len, 0);
++		else
++			hdr_len = 0;
++		wget_info->headers[hdr_len] = 0;
 +	}
-+
-+	return index;
-+}
-+
- const char * const get_toradex_carrier_boards(int pid4)
- {
- 	int i, index = 0;
-@@ -361,7 +373,7 @@ static int write_tdx_cfg_block_to_eeprom(unsigned char *config_block)
+ 	wget_info->hdr_cont_len = (u32)hdr_cont_len;
+ }
  
- int read_tdx_cfg_block(void)
- {
--	int ret = 0;
-+	int idx, ret = 0;
- 	u8 *config_block = NULL;
- 	struct toradex_tag *tag;
- 	size_t size = TDX_CFG_BLOCK_MAX_SIZE;
-@@ -430,7 +442,8 @@ int read_tdx_cfg_block(void)
- 	}
- 
- 	/* Cap product id to avoid issues with a yet unknown one */
--	if (tdx_hw_tag.prodid >= ARRAY_SIZE(toradex_modules))
-+	idx = get_toradex_modules_idx(tdx_hw_tag.prodid);
-+	if (!toradex_modules[idx].pid4)
- 		tdx_hw_tag.prodid = 0;
- 
- out:
-@@ -456,19 +469,21 @@ static int get_cfgblock_interactive(void)
- 	int len = 0;
- 	int ret = 0;
- 	unsigned int prodid;
--	int i;
-+	int i, idx;
- 
- 	printf("Enabled modules:\n");
- 	for (i = 0; i < ARRAY_SIZE(toradex_modules); i++) {
- 		if (toradex_modules[i].is_enabled)
--			printf(" %04d %s\n", i, toradex_modules[i].name);
-+			printf(" %04d %s\n", toradex_modules[i].pid4,
-+			       toradex_modules[i].name);
- 	}
- 
- 	sprintf(message, "Enter the module ID: ");
- 	len = cli_readline(message);
- 
- 	prodid = dectoul(console_buffer, NULL);
--	if (prodid >= ARRAY_SIZE(toradex_modules) || !toradex_modules[prodid].is_enabled) {
-+	idx = get_toradex_modules_idx(prodid);
-+	if (!toradex_modules[idx].pid4 || !toradex_modules[idx].is_enabled) {
- 		printf("Parsing module id failed\n");
- 		return -1;
- 	}
-diff --git a/board/toradex/common/tdx-cfg-block.h b/board/toradex/common/tdx-cfg-block.h
-index 0d6dd1c3a721..937e84c3199b 100644
---- a/board/toradex/common/tdx-cfg-block.h
-+++ b/board/toradex/common/tdx-cfg-block.h
-@@ -21,6 +21,7 @@ struct toradex_eth_addr {
- } __attribute__((__packed__));
- 
- struct toradex_som {
-+	int pid4;
- 	const char *name;
- 	int is_enabled;
- };
-@@ -139,6 +140,7 @@ extern u32 tdx_car_serial;
- 
- int read_tdx_cfg_block(void);
- int read_tdx_cfg_block_carrier(void);
-+int get_toradex_modules_idx(int pid4);
- const char * const get_toradex_carrier_boards(int pid4);
- const char * const get_toradex_display_adapters(int pid4);
- int try_migrate_tdx_cfg_block_carrier(void);
-diff --git a/board/toradex/common/tdx-common.c b/board/toradex/common/tdx-common.c
-index a6b45cdab810..1afa7ec16d4a 100644
---- a/board/toradex/common/tdx-common.c
-+++ b/board/toradex/common/tdx-common.c
-@@ -191,13 +191,16 @@ static int tdx_detect(struct udevice *dev)
- static int tdx_get_str(struct udevice *dev, int id, size_t size, char *val)
- {
- 	int ret = -ENOTSUPP;
-+	int idx;
- 
- 	switch (id) {
- 	case SYSINFO_ID_BOARD_MODEL:
-+		idx = get_toradex_modules_idx(tdx_hw_tag.prodid);
-+
- 		snprintf(val, size,
- 			 "Toradex %04d %s %s",
- 			 tdx_hw_tag.prodid,
--			 toradex_modules[tdx_hw_tag.prodid].name,
-+			 toradex_modules[idx].name,
- 			 tdx_board_rev_str);
- 
- 		ret = 0;
 -- 
-2.34.1
+2.43.0
 
