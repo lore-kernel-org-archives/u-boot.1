@@ -4,91 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E040AD58D41
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 13:07:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB625D58D41
+	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 13:07:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A0789A42;
-	Mon, 25 Nov 2024 14:06:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C552899B1;
+	Mon, 25 Nov 2024 14:06:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ADRl+QjK";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="fnX1Tt3d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F95A89642; Mon, 25 Nov 2024 08:50:25 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F816899E7; Mon, 25 Nov 2024 10:15:22 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E2888E77
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 08:50:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6511688B0B
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 10:15:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-38248b810ffso3113038f8f.0
- for <u-boot@lists.denx.de>; Sun, 24 Nov 2024 23:50:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732521022; x=1733125822; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7/xcFvqAqh4DauH9ahYD6W+2UiQwO7gKvcpyemPWcyM=;
- b=ADRl+QjKE+lF0skas6tKNnpSbOu7gMs+lbUy7+bB71DIXHbNMyjZjZbxeKnAMsmolZ
- TJiKM0ekb/epuakyYDHGYrZeDYVCRKcERFpMtk2Uyq6WFpY1aKVxubhdbyNgRwMOfAE3
- jTNz15mp9GyaWWNHDo0FZDRCL/sSNN9lLhCwshisB9hn4BYMG33QSZxl1eZtK7u7RJJ/
- 9re2trM7Vfun959AZQV2rWG6ZS7s78sL5h39kO2854ARPuISuTz6Rzft3SEurjR9jGNh
- dOc5PNU0WTZy8SP248Uc6IFQ/OgC2opmTuFMNkBbr/9OHC9oNzZ2zxOMZCTPBF32C6lh
- BGwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732521022; x=1733125822;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7/xcFvqAqh4DauH9ahYD6W+2UiQwO7gKvcpyemPWcyM=;
- b=r0O8kdMRUUBu/ye0bOWnIKtyG5V3YTcX0GfYdq2PHVJK9H4Jn8hGKVEMTxVhb5cG1e
- IAus3A/5t8fEX0lsEeud7BH9ElKbern/e9BwdyJrDZ7WgwDk/vAA88JYvUlihhVnEsiN
- PoMO6lzc69ORPzvQAucU4gYXHB2aifR0Urkn7vIrlf9qnhgaQnrqzyYeiVj8ByDGQc4f
- 334i4G6YX5trkPiNYy9PBfcBB/KCZ8o/zK0GbFiXiSIzxq7h7nsa7VEyBJ7ffdFtw8yc
- EVJaSHCbfUEWNuJlIRWfduPzNxJgcoryvAdWQ664xMGTckOeGju+O3tGhiu4JQZyWeXT
- FzCg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHjSHTUhn4RZUePfQGzWNbSQd5bm/nLT35mS2sEfBGh6ohXfH93uqZKzel7y8eJphGxsrCdkM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEZvn9yP9Yu9ZpxM4xVXvq/+AB2tA7/YEyCxaYQUqHuZXYm17d
- ukhUD0elq+AVlH3gaxHA4MjyiGF7ruPyuP8lCx2CMVqSGm3PN5vsek5C+I49e9I=
-X-Gm-Gg: ASbGncuJoHoOWg/Aq9LbSWj84Tujym06IZUUAphXwgyt+C/FhYOn0h4LkSLH8OAKx/8
- Nle1uFrtzubdgw7eSVJ8fGTYuGU0qF/4AecqqPxVOqaN+exFOPZ+AsP4MINcOfwOwCAtUddMO8+
- iqxaeN5GsxZJtQZGMFDjYDObYhYp9Y+kPIA2s1yOoWYMZg68QgmEr0gufQQndFIJUMdQNnHjG2h
- YgqFxezILQ6PpP5V+9v+2bbHoaEo0D1ObIBPZCfqeNd1I1pgdQFoCUksw==
-X-Google-Smtp-Source: AGHT+IFT1E4/RhfnHwT2utQR91SAzQlhyK670YFbX2LQT7yv46NBV3MMgjA44x9P4KU/DuyAQbIiHQ==
-X-Received: by 2002:a05:6000:178b:b0:382:4b2f:f755 with SMTP id
- ffacd0b85a97d-38260be3c7dmr9853135f8f.54.1732521022499; 
- Sun, 24 Nov 2024 23:50:22 -0800 (PST)
-Received: from [192.168.0.14] ([79.115.63.27])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825faf9f59sm9575599f8f.34.2024.11.24.23.50.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 24 Nov 2024 23:50:22 -0800 (PST)
-Message-ID: <76a95870-e767-4145-b03c-fb8a1ca5ac6f@linaro.org>
-Date: Mon, 25 Nov 2024 07:50:20 +0000
+ spf=pass smtp.mailfrom=eabachinin@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id DA891120003;
+ Mon, 25 Nov 2024 12:15:18 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru DA891120003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1732526118;
+ bh=idASX9dZK2FvIPcjZYWItL31kkLyyF72be9VnDzzvD8=;
+ h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
+ b=fnX1Tt3dl4YiW81x98F+LKNuakbO1Ce3nCsX5pxwcW3ANk6+DBH18qzmxghQgH64i
+ 0aATvBLpLpnHD0KOxUxvo3MiThNTKrlQdmNBsO0fLHrRy3wO+zfNAG5HV+Tucgf0Bc
+ nu8rJQ5wch6T/IQKgrEqVBLcNtDprWptCaaWxgiqjB0QfTAkduiDhVdEd+72XVR1Gf
+ 4Zm9xbX6i9ird+b+B2LpYZe/7H5tEKrI9bWP5Qy/OgUroICeapsk3IbE6LXR8+sykO
+ CecQyppTq50RAioUXSjj3omXef9DSA5n0LS1V0puiKJkz5YTOSIEEmhSAX5nvoGkkE
+ NhwaeNpOgsDbg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon, 25 Nov 2024 12:15:18 +0300 (MSK)
+From: Evgeny Bachinin <EABachinin@salutedevices.com>
+Date: Mon, 25 Nov 2024 12:15:07 +0300
+Subject: [PATCH] common: relocate fdt_blob in global_data for FDTSRC_EMBED case
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Add support for Macronix flash part
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, j-humphreys@ti.com, marek.vasut@mailbox.org
-Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- u-kumar1@ti.com, trini@konsulko.com, seanga2@gmail.com,
- caleb.connolly@linaro.org, sjg@chromium.org, william.zhang@broadcom.com,
- stefan_b@posteo.net, quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com,
- git@amd.com, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Dragan Simic <dsimic@manjaro.org>
-References: <20241122094747.1398068-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <20241122094747.1398068-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-ID: <20241125-of_embed_fdt_blob_garbage-v1-1-faa78e2e1ee9@salutedevices.com>
+X-B4-Tracking: v=1; b=H4sIABpARGcC/x2MUQrCMBAFrxL2uwE3ilqvIhI25qUuaCKJSKH07
+ g39HJiZhRqqotHNLFTx16Yld+DB0PMleYLV2JncwZ2YebQleXwCok/x58O7BD9JDdJFyMWNcnX
+ HM5h6/61IOu/v+2NdN0FvIelrAAAA
+X-Change-ID: 20241119-of_embed_fdt_blob_garbage-ea729a8236e1
+To: Tom Rini <trini@konsulko.com>
+CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
+ <u-boot@lists.denx.de>, Evgeny Bachinin <EABachinin@salutedevices.com>
+X-Mailer: b4 0.14.2
+X-Originating-IP: [172.28.65.172]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 189385 [Nov 25 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 42 0.3.42
+ bec10d90a7a48fa5da8c590feab6ebd7732fec6b, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
+ github.com:7.1.1; salutedevices.com:7.1.1; 127.0.0.199:7.1.2, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/11/25 08:02:00
+X-KSMG-LinksScanning: Clean, bases: 2024/11/25 07:59:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/11/25 07:20:00 #26891671
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Mon, 25 Nov 2024 14:06:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,24 +101,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+ Marek
+Patch resolves two kind of bugs, one of which is vulnerability related
+to KASLR.
 
-Hi, Marek!
+=== Issue briefly ===
 
-On 11/22/24 9:47 AM, Venkatesh Yadav Abbarapu wrote:
-> with initial testing conducted on the
-> Tenzing-se1 board using STR mode for basic erase, write,
-> and readback operations.
+  Working with FDT (via non-relocated gd::fdt_blob) from inside bootm
+command may lead to the reading the garbage instead of FDT nodes. And
+this can result in various side-effects depending on DTS nodes, being
+parsed during bootm.
 
-Would you please advise us what are the minimum testing requirements for
-a flash addition/update to be accepted upstream?
+  But below is my specific story how I faced with this issue due to
+MESON_RNG probing failure.
 
-In linux we added a guide on how to propose new flash additions and what
-tests one shall do: https://docs.kernel.org/driver-api/mtd/spi-nor.html
+=== Bugs description ===
 
-The idea was to be sure that the flash works since day one and to have
-enough data in case flash collisions appear so that we decide how to
-handle the conflicts. u-boot can benefit of this too.
+1) Bug is revealed on:
+* configuration below
+* U-boot 2024.10 - f919c3a889f ("Prepare v2024.10")
 
-Thanks!
-ta
+  It seems, the following patch is a trigger:
+ea955eea4f ("fdt: automatically add /chosen/kaslr-seed if DM_RNG is enabled")
+
+  Generally, CONFIG_OF_EMBED=y & CONFIG_RNG_MESON=y are the most
+valuable ones for reproducing the issue.
+```
+  CONFIG_ARCH_FIXUP_FDT_MEMORY=y
+  CONFIG_CMD_FDT=y
+  CONFIG_DEFAULT_FDT_FILE=""
+  CONFIG_FDT_64BIT=y
+  CONFIG_OF_BOARD_SETUP=y
+  CONFIG_OF_CONTROL=y
+  CONFIG_OF_EMBED=y
+  CONFIG_OF_LIBFDT_ASSUME_MASK=0x0
+  CONFIG_OF_LIBFDT_OVERLAY=y
+  CONFIG_OF_LIBFDT=y
+  CONFIG_OF_LIST="meson-axg-our-device-name"
+  CONFIG_OF_REAL=y
+  CONFIG_OF_TRANSLATE=y
+  CONFIG_SUPPORT_OF_CONTROL=y
+  CONFIG_SYS_FDT_PAD=0x3000
+  CONFIG_TOOLS_OF_LIBFDT=y
+
+  CONFIG_DM_RNG=y
+  CONFIG_RNG_MESON=y
+```
+
+2) Due to CONFIG_OF_EMBED, the DTS is embedded into U-boot ELF and
+accessible via __dtb_dt_begin symbol.
+
+  On early boot stage (board_f.c) the fdtdec_setup() is called only
+once before U-boot's relocation into top of RAM. fdtdec_setup()
+initializes gd::fdt_blob for FDTSRC_EMBED case:
+```
+  gd->fdt_blob = dtb_dt_embedded();
+  gd->fdt_src = FDTSRC_EMBED;
+```
+
+3) Then reloc_fdt() is called in board_f.c
+
+  But due to CONFIG_OF_EMBED=y the reloc_fdt() does not update
+gd::fdt_blob value (strictly speaking, it is impossible for
+CONFIG_OF_EMBED=y, because U-boot ELF has not been relocated yet
+at this moment).
+
+  As a result after relocation we get fdt_blob, pointing to DTS address
+before relocation:
+```
+   # bdinfo
+  <...>
+  relocaddr = 0x000000000fedf000
+  reloc off = 0x000000000eedf000
+  <...>
+  fdt_blob = 0x010ce6c0 << points to __dtb_dt_begin before relocation
+  new_fdt = 0x0000000000000000  << empty erroneously
+  fdt_size = 0x0000000000000000 << zero erroneously
+```
+
+4) During bootm command (according to our ITS-config file) the Linux
+is loaded into 0x01080000 (which is very close to fdt_blob addr
+0x010ce6c0).
+```
+  ## Loading kernel from FIT Image at 04000000 ...
+     Trying 'kernel' kernel subimage
+       <...>
+       Load Address: 0x01080000
+```
+
+  So Linux image overwrites the gd::fdt_blob memory location
+in RAM (0x010ce6c0).
+
+5) Issue:
+
+  Hence any manipulation with DTS (say, via FDT API) inside
+implementation of bootm command leads to accessing the fdt_blob area
+with garbage, that can lead to two situations:
+
+5.1) Abort.
+
+  Call to fdt_off_dt_struct() from fdt_next_tag() :: fdt_offset_ptr()::
+fdt_offset_ptr_() returns with garbage, that leads to tagp value
+being out of RAM top addr (256 Mb in our board), causing the abort:
+```
+  Boot cmd: bootm 0x4000000#boot_evt1
+  bootm_run_states()
+  <...>
+  image_setup_libfdt()
+   fdt_chosen()
+    fdt_kaslrseed()
+     uclass_get_device()
+      uclass_get_device_tail()
+       device_probe()
+        device_of_to_plat()
+        meson_rng_of_to_plat()
+         clk_get_by_name_optional()
+          clk_get_by_name()
+           clk_get_by_name_nodev()
+            ofnode_stringlist_search()
+             fdt_stringlist_search()
+              fdt_getprop()
+               fdt_get_property_namelen_()
+                fdt_first_property_offset()
+                 fdt_check_node_offset_()
+                  fdt_next_tag():
+                    ```
+                      tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+                    ```
+                  fdt_next_tag() tagp:0x22890766
+                  fdt_next_tag() ram_top:0x10000000 (tagp OUT of RAM)
+  "Synchronous Abort" handler, esr 0x96000010, far 0x22890766
+  elr: 000000000108be24 lr : 000000000108be24 (reloc)
+  elr: 000000000ff6fe24 lr : 000000000ff6fe24
+  x0 : 0000000000000041 x1 : 0000000000000000
+  x2 : 000000000ff3b57c x3 : 0000000000000012
+  x4 : 000000000ded2ad5 x5 : 0000000000000020
+  x6 : 00000000ffffffe8 x7 : 000000000ded2f40
+  x8 : 00000000ffffffd8 x9 : 000000000000000d
+  x10: 0000000000000006 x11: 000000000001869f
+  x12: 000000000fffffff x13: 000000000fffffff
+  x14: 0000000000000000 x15: 000000000ded2abb
+  x16: 000000000ff3b080 x17: 0000000000000001
+  x18: 000000000ded3dc0 x19: 0000000022890766
+  x20: 00000000010cb0f0 x21: 00000000000015e4
+  x22: 000000000ff8f4d8 x23: 000000000000000b
+  x24: 000000000ded2fbc x25: 000000000ffe2000
+  x22: 000000000ff8f4d8 x23: 000000000000000b
+  x24: 000000000ded2fbc x25: 000000000ffe2000
+  x26: 000000000ffe2000 x27: 000000000000000b
+  x28: 000000000ff9cf2d x29: 000000000ded2f40
+
+  Code: aa1603e1 91197484 52801742 94004de8 (b9400276)
+```
+
+5.2) Vulnerability situation "KASLR is disabled".
+
+Almost the same as in (5.1), but 2 situations happen (depending on
+the value of garbage):
+  * call to fdt_offset_ptr_() :: fdt_off_dt_struct(fdt)
+    returns not so big garbage, leading to tagp, being inside RAM.
+  * or calculations of absoffset inside fdt_offset_ptr() leads to
+    failure of the one of if() conditions with NULL as retval.
+
+  Result is fdt_next_tag() interprets the tagp as FDT_END. And we are
+returning from our callstack via functions' error paths, leading to
+"No RNG device" and "KASLR disabled due to lack of seed":
+```
+  fdt_kaslrseed()
+   uclass_get_device()
+   <...>
+    device_probe()
+     device_of_to_plat()
+      meson_rng_of_to_plat()
+       clk_get_by_name()
+        clk_get_by_name_nodev()
+        <...>
+         fdt_stringlist_search()
+          fdt_getprop()
+           fdt_get_property_namelen_()
+            fdt_first_property_offset()
+             fdt_check_node_offset_()
+              fdt_next_tag():
+                ```
+                  tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+                ```
+              fdt_next_tag() tagp:0000000001890677
+              fdt_next_tag() ram_top:0x10000000 (tagp is inside RAM)
+      uclass_get_device_tail():486 device_probe() ret:-22
+  No RNG device
+ Starting kernel ...
+
+  [ 0.000000] Linux version 6.9.12
+  [ 0.000000] KASLR disabled due to lack of seed
+```
+
+Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
+---
+Tested:
+* on board with Amlogic AXG SoC.
+* on sandbox: make sure that certain code from patch is called (of
+  course, when CONFIG_OF_EMBED=y)
+* U-boot CI: https://github.com/u-boot/u-boot/pull/698/checks
+---
+ common/board_r.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/common/board_r.c b/common/board_r.c
+index 62228a723e12f8742437acae380e82f79903a8f5..88dc756b2a5e5a44f55f9b0fd012adc798a8afdb 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -152,6 +152,15 @@ static int initr_reloc_global_data(void)
+ 	 */
+ 	gd->env_addr += gd->reloc_off;
+ #endif
++
++	/*
++	 * For CONFIG_OF_EMBED case the FDT is embedded into ELF, available by
++	 * __dtb_dt_begin. After U-boot ELF self-relocation to RAM top address
++	 * it is worth to update fdt_blob in global_data
++	 */
++	if (IS_ENABLED(CONFIG_OF_EMBED))
++		gd->fdt_blob = dtb_dt_embedded();
++
+ #ifdef CONFIG_EFI_LOADER
+ 	/*
+ 	 * On the ARM architecture gd is mapped to a fixed register (r9 or x18).
+
+---
+base-commit: cca05617a8f585f3a98a8fa82f75cc68a530d771
+change-id: 20241119-of_embed_fdt_blob_garbage-ea729a8236e1
+
+Best regards,
+-- 
+Evgeny Bachinin <EABachinin@salutedevices.com>
+
