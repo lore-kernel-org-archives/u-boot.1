@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A4C7D5A6E4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 06:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3C67D5A6E4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 06:36:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C756889C21;
-	Tue, 26 Nov 2024 07:35:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AE0A89C15;
+	Tue, 26 Nov 2024 07:36:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZkD8+mi7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FzIGGVsu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 926B789C13; Tue, 26 Nov 2024 07:35:57 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76DCD89C13
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:35:55 +0100 (CET)
+ id D10DE89C1A; Tue, 26 Nov 2024 07:36:01 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 428D189C3C
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:35:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ6ZrB5016426;
- Tue, 26 Nov 2024 00:35:53 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQ6Zu42467148
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 26 Nov 2024 00:35:56 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732602953;
- bh=R/RFIJOKOEBhMUszm+oqkxmhVWwh7kjLpJJJWohpEJM=;
+ s=ti-com-17Q1; t=1732602956;
+ bh=fnW8q33tUf3a39lu97lYxvTuuJLq1ossS+xznfxpHG4=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ZkD8+mi7pn1P/bo92oQs1B0pCkzTC/NqY/aGGzyPoTeXf6TlIEBlcIAXTXXw504z3
- 0ivAkNL9q5IAPOH/J/w3o9zw9Oo3cZw2JgM9lJLir2QdtSoEAaRelGRBu2jzn8iZhh
- 8VTOieplnaoiGt064t6ysyfnkYspoR7tjtn9xKco=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQ6ZrKr040309
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 26 Nov 2024 00:35:53 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ b=FzIGGVsu4Qq5HbXoADhEhLGbTvgCmXBItckiyay06NTCQtQa2rCf3Ohr2NRf2DQfH
+ VKSAvSTx+3O2LQmMYkfjn13w4eCTinGHmg9EvT7rxkzQQrbw2dYeDSASpM3H7yGSkO
+ t897wkDgerVB98s8H7stn3ZBCy1zGH3Xi4nKfIy8=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ6ZugC079909;
+ Tue, 26 Nov 2024 00:35:56 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
- Nov 2024 00:35:53 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 00:35:56 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 26 Nov 2024 00:35:53 -0600
+ Frontend Transport; Tue, 26 Nov 2024 00:35:56 -0600
 Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.6])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ6ZikO051095;
- Tue, 26 Nov 2024 00:35:51 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ6ZikP051095;
+ Tue, 26 Nov 2024 00:35:53 -0600
 From: Udit Kumar <u-kumar1@ti.com>
 To: <trini@konsulko.com>, <vigneshr@ti.com>, <u-boot@lists.denx.de>
 CC: <n-francis@ti.com>, <afd@ti.com>, <nm@ti.com>, <a-limaye@ti.com>,
  <reidt@ti.com>, <u-kumar1@ti.com>
-Subject: [RFC PATCH 2/3] arm: dts: k3-j7200: Add ESM PMIC support for tps659413
-Date: Tue, 26 Nov 2024 12:05:42 +0530
-Message-ID: <20241126063543.2678052-3-u-kumar1@ti.com>
+Subject: [RFC PATCH 3/3] arm: dts: k3-j7200: Add bootph for esm and pmic nodes
+Date: Tue, 26 Nov 2024 12:05:43 +0530
+Message-ID: <20241126063543.2678052-4-u-kumar1@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241126063543.2678052-1-u-kumar1@ti.com>
 References: <20241126063543.2678052-1-u-kumar1@ti.com>
@@ -80,31 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gowtham Tammana <g-tammana@ti.com>
+In order to get esm and pmic probed by R5 SPL, these nodes should
+be have bootph pre ram property.
 
-On J7200 processor board MCU_SAFETY_ERROR signal is routed to PMIC for
-ESM error handling. The PMIC resets the board on receipt of the signal.
-Enable the support for the board by adding ESM PMIC node.
+However these changes are committed in kernel with following sha-id
+b903ab269e67 (arm64: dts: ti: k3-j7200: Add bootph-* properties)
+and bdb543b1664b (arm64: dts: ti: k3-j7200-evm*: Add bootph-* properties).
 
-Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+While we wait for above committed to get synched with u-boot.
+Meanwhile add bootph in these nodes.
+
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 ---
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index f096b102793..53c8d7827b9 100644
+index 53c8d7827b9..64a4ffd3605 100644
 --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
 +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -108,3 +108,10 @@
- 	vdd-supply-2 = <&buckb1>;
- 	bootph-pre-ram;
+@@ -115,3 +115,11 @@
+ 		bootph-pre-ram;
+ 	};
  };
 +
-+&tps659414 {
-+	esm: esm {
-+		compatible = "ti,tps659413-esm";
-+		bootph-pre-ram;
-+	};
++&bucka1 {
++	bootph-pre-ram;
++};
++
++&main_esm {
++	bootph-pre-ram;
 +};
 -- 
 2.34.1
