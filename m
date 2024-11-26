@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1410D3B9A4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B661AD3B9AC
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:55:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59D4289C97;
-	Tue, 26 Nov 2024 16:42:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 084F188DDA;
+	Tue, 26 Nov 2024 16:55:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DO1OxE7/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ow6eVpNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 064FC89C9B; Tue, 26 Nov 2024 16:42:10 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id D0EA288DF1; Tue, 26 Nov 2024 16:55:15 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CF6689C9C
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F6BD88360
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:55:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aa51b8c5f4dso572051066b.2
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:42:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6d41d46162eso35083246d6.0
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:55:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732635727; x=1733240527; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NrUM5yeQ0sYSfPzeyirb7G2JiQOLKICjhPtm+NyyLC8=;
- b=DO1OxE7/Rt3f8+FJiu6V6Zp8yPVkkJfDZrVTh+nLv+LnQ8ifC1jhhJwAQSiaKpLozz
- 5+ZfB/7xxDbSKFUSp1KW2NslXS+WHPGsxRdC4boztonngWFjH+4GaJCCK8awYWH2M3UT
- ZTXUS/0WCt1moHFY7QModiWaBT7JrS8rr1Akg=
+ d=konsulko.com; s=google; t=1732636512; x=1733241312; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TyX3UzqRYwNpiuXU2RObhA/CwRR3/X1yhLrPbb7S3tw=;
+ b=Ow6eVpNyV46df+mW7XkVddvSREUpunrNH4yUAvsDiyM05FVCPIPZYSrvXoQFpI31n4
+ 76wiEzOLodTk9u6+FMDqnWsJyKQR02Uz2HBY981LApxQrQ/ZMAfQLGrfSEJ/IASW+1Z/
+ Y8WJYBwYZ37+bTY/otehS4pk2U+BF+MDzfQNM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732635727; x=1733240527;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NrUM5yeQ0sYSfPzeyirb7G2JiQOLKICjhPtm+NyyLC8=;
- b=vx60zpZQyK0OuqhLYeZj6/GKH3N5o3Tg5WD0qM5/g1KlI5dmirjPTg6fzE5LFNUmmY
- k4sNHb/xLiD/+BHTfbn+QmLNxa6uwQGeBivQKHnzYsn0AwPMwn9XOdJ1V4GeGSW3qzsK
- i3thRN4PcTfct4Ln4HP52nl6ZtDPP6Vl/KGJITlUYZQMpet4yyypZyx31sHBQO9unNRV
- N1trYU12SN+lwOOZ6k7Ur8h9iAQ3phLONSqTdYVUg9GoQ9N4QRzueT239bDYJ+KHPV7V
- X3oFaY3/vKHpfPxFWxzTGiysJOybM8f1WahASSJzZJpT5jzI+l+fg3RnYA/RiU/kB7J3
- SK1Q==
-X-Gm-Message-State: AOJu0YzDgOJY1yQMQoBcEUh5aJ5xcZvgPW6r8J9BCWuyAffJgtuXXz+x
- DkuKARVsWfjiKPx0K59Tm6B7V/Rxi+P0RFJI8wEBIJQUCpiuR0Jdx/p/IXl72LDD4IzcpGRxYQY
- smoDf7f7Yf8/TGrnuqm3+wYLGDhLi1uYPxZze
-X-Gm-Gg: ASbGncsGa7Y106+xb3XDrRCMlh8YDiuS0teaobnzulpmZ4dCjg1kXamLNyyAT3uUKdu
- lEcXMROzje9zEN8Yy2+4Hk2HzOQAb9bI=
-X-Google-Smtp-Source: AGHT+IHhz3ihi12xESjJySrPNVje1M6TaIDAGeqZ6ZNmntcnYOhIxkxH7ccuOgIgTuK5aI5qsMNj40UYi0KLv5ApyJw=
-X-Received: by 2002:a17:906:cc1:b0:aa5:41b2:e23c with SMTP id
- a640c23a62f3a-aa541b2f6d4mr738465066b.54.1732635727176; Tue, 26 Nov 2024
- 07:42:07 -0800 (PST)
-MIME-Version: 1.0
-References: <20241125204456.1525752-1-sjg@chromium.org>
- <CAC_iWjJif4Q1FYGkQC6fO3bSkxtrYYBkPYagd-Wn1fQf7GV2kg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJif4Q1FYGkQC6fO3bSkxtrYYBkPYagd-Wn1fQf7GV2kg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Nov 2024 08:41:55 -0700
-Message-ID: <CAFLszTiQYeV7x7bdpq-Cfc2f6_w1jyg2ttmWpP-yNm0nD6hnzw@mail.gmail.com>
-Subject: Re: [PATCH 00/13] efi: Tidy up confusion between pointers and
- addresses
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ d=1e100.net; s=20230601; t=1732636512; x=1733241312;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TyX3UzqRYwNpiuXU2RObhA/CwRR3/X1yhLrPbb7S3tw=;
+ b=o+0okKTqy1/LbNEFhceasd5qPOL2Xcu1/ffO2SVaW22Vhdvrq3Vvaburdam2CFagc6
+ q0Wo8g+EH34zTYfQMJRvc6R4TSktfX8AFBkaDgzCxcLDJJaEblga88SNvwxaxNAevezQ
+ P9PngyspJflBrHvNE6IQabzdm0Vd1mlQ/nWsuKTlLSNcDZ0gLw1tW0YuW3NKNMcY+GPO
+ y+tsnZj+zQT9jISjfo89+isA+FnwBKNoEul28CqH9AVZQFdKRiQmZp6T/QIuA58AZm3M
+ OzatD2iRQm1GRpTyuG+mnI3MqwbqGsjQbEpR2FWW8xgcOX0CUI4IRTi+B/nrzWPXcpdh
+ 6kfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUljqkTQt3cCJNxNqCchDKTrFvmFveBQFwO3RQhT5lkSD7yIHRHDNxmjJh8peQxkJg5n9NdU44=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+jrS2f8rQOuIB7q6SW0lSZ4/gtpBpKcHjp/5jO4mJitcAECrr
+ +REzRc9L4QmhAXro2Lh8ogu17LyY+BomPe8e71taz+qO0epI1I8S07ZgpaUVen8=
+X-Gm-Gg: ASbGnct9716giu18TXyqBqKbPuqyzJ9FS3QIOwf573YoKZZHP+PI7o2aFp8u1nNiO9e
+ VfrJJ+2eVzIRA0IubSyyGOruWoUHkxBpXuH5pdeCsp9W6PvaujgxVMAyLrhZkVaFF/tNbdigg8q
+ ss61m7JrASxQfgrWkzAVXtvj53Mq0GjVOhFbBQbrf4bnAHaGj+GvPS4XOOTGxfbTm1rtN0SZALV
+ 0YKq7Q0hXAPggYgZVHpqzTkYiLgCfgY4Lr4hWBMSy+BIQkBpg==
+X-Google-Smtp-Source: AGHT+IGrETWuIixikXw6ISpOSzWGHnRG6zBGg4nTf6RzzmjJB3H09tlbJelD12yhP6aOMIfzQci4cA==
+X-Received: by 2002:ad4:5fca:0:b0:6d4:1680:612f with SMTP id
+ 6a1803df08f44-6d451345932mr235416066d6.31.1732636512465; 
+ Tue, 26 Nov 2024 07:55:12 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b66aea65d2sm238706085a.103.2024.11.26.07.55.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Nov 2024 07:55:12 -0800 (PST)
+Date: Tue, 26 Nov 2024 09:55:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Janne Grunau <j@jannau.net>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
+Message-ID: <20241126155508.GR3600562@bill-the-cat>
+References: <20241125204456.1525752-1-sjg@chromium.org>
+ <20241125204456.1525752-6-sjg@chromium.org>
+ <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
+ <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Npe8IFkXV6DKz+AA"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,81 +104,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
 
-On Tue, 26 Nov 2024 at 01:13, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon
->
-> Apart from the comments on the other patches, the SCT memory tests
-> crash with this series. Please run it locally before sending a v2.
+--Npe8IFkXV6DKz+AA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I did briefly get it running on my laptop, but not for x86_64. I
-understand from Heinrich that EDK2 doesn't build for any architecture
-at present.
+On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+> >
+> > On 25.11.24 21:44, Simon Glass wrote:
+> > > Exported functions should be documented in the header file, not the
+> > > implementation. We tend to make such updates on a piecemeal basis to
+> > > avoid a 'flag day'. Move some comments related to memory allocation to
+> > > follow the convention.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > Please, have a look at this line in doc/
+> >
+> > doc/api/efi.rst:78:
+> > .. kernel-doc:: lib/efi_loader/efi_memory.c
+>=20
+> Hmm, we should not add C files as then we end up with all sorts of
+> internal functions, like checksum(). The help is a bit of a mess on
+> that page IMO and it could use an index at the top or side.
 
-Which arch are you using? I'd like to be able to run SCT easily, if possible.
+Why? Looking at the linux kernel (where we borrow this framework from
+and lots of developers expect to follow that style) it's extremely
+common to kernel-doc C files. I don't see why documenting internal
+functions (which should be clear as being internal) is a problem.
 
-Regards,
-Simon
+--=20
+Tom
 
->
-> Thanks
-> /Ilias
->
-> On Mon, 25 Nov 2024 at 22:45, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The EFI-loader implementation converts things back and forth between
-> > addresses and pointers, with not much consistency in how this is done.
-> >
-> > Within most of U-Boot a pointer is a void * and an address is a ulong
-> >
-> > This convention is very helpful, since it is obvious in common code as
-> > to whether you need to call map_sysmem() and friends, or not.
-> >
-> > As part of cleaning up the EFI memory-management, I found it almost
-> > impossible to know in some cases whether something is an address or a
-> > pointer. I decided to give up on that and come back to it when this is
-> > resolved.
-> >
-> > This series starts applying the normal ulong/void * convention to the
-> > EFI_loader code, so making things easier to follow.
-> >
-> > Link: https://lore.kernel.org/u-boot/20240725135629.3505072-1-sjg@chromium.org/
-> >
-> >
-> > Simon Glass (13):
-> >   efi: Define fields in struct efi_mem_desc
-> >   efi_loader: Convert efi_get_memory_map() to return pointers
-> >   efi_loader: Show the resulting memory address from an alloc
-> >   efi_loader: Update startimage_exit self-test to check error
-> >   efi_loader: Move some memory-function comments to header
-> >   efi_loader: Use the enum for memory type
-> >   efi_loader: Make more use of ulong
-> >   efi_loader: Tidy up use of addresses
-> >   lmb: Reduce mapmem contortions in lmb_map_update_notify()
-> >   efi_loader: Simplify efi_dp_from_mem()
-> >   efi_loader: Tidy up efi_reserve_memory()
-> >   efi_loader: Drop extra brackets in efi_mem_carve_out()
-> >   efi_loader: Don't try to add sandbox runtime code
-> >
-> >  include/efi.h                                 |  15 ++
-> >  include/efi_api.h                             |   6 +-
-> >  include/efi_loader.h                          | 100 +++++--
-> >  lib/efi_loader/efi_bootbin.c                  |   3 +-
-> >  lib/efi_loader/efi_bootmgr.c                  |  11 +-
-> >  lib/efi_loader/efi_boottime.c                 |  51 ++--
-> >  lib/efi_loader/efi_device_path.c              |  18 +-
-> >  lib/efi_loader/efi_dt_fixup.c                 |   8 +-
-> >  lib/efi_loader/efi_helper.c                   |   7 +-
-> >  lib/efi_loader/efi_image_loader.c             |   2 +-
-> >  lib/efi_loader/efi_memory.c                   | 246 +++++++-----------
-> >  lib/efi_loader/efi_var_mem.c                  |   6 +-
-> >  .../efi_selftest_startimage_exit.c            |   6 +-
-> >  lib/lmb.c                                     |  10 +-
-> >  14 files changed, 251 insertions(+), 238 deletions(-)
-> >
-> > --
-> > 2.43.0
-> >
+--Npe8IFkXV6DKz+AA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdF71gACgkQFHw5/5Y0
+tyxLoQv/cW4WSyV/ho9kPAehC4p5RY2M96Sylntdfe0chuSK+LrS+k/ZucEEqh0b
+lOSE63W0IjY291l19CM0AhzdPFu6zK+vim1EyX4nTMHZC4qGXPGboRqAD1SDA4VG
+3yJNe399dvzUmquyYgHoMTqXJvQeWEmlm53WevkKspS9XxtLUyyD3dWUDr8ze6Ec
+/7XFb0T8k6H9SlO4xn1mLyppk5CtSw6hvxa+jrZjznePAmHzhl/eeVcMtUS5lyeJ
+HCyDBj5pCA1PfXh7Em7W9q8cYsQHEy8u2Zb/XGs5HmmxH6crV80IQeXzEg5znGM1
+geHD2SgEIqR0S+UAOmptdw/WIJdBy+yi6h+3+2JA0dAUp6mkGgSpKd/coIrg69jN
+ojEJQ6KTLQR+lMUleGV1N37LhpGWLSeMjyeDCGiMHx6WErehUQd8q8QhGzTzQ8Zt
+dUuKpOTBg7N7V4HCiNX2KjxsMk/wVhae4W+m2hOiPKwB2chjJfHZcGcG/Evf7CtA
+ie5LdfpF
+=vuAw
+-----END PGP SIGNATURE-----
+
+--Npe8IFkXV6DKz+AA--
