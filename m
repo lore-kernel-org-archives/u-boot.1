@@ -4,161 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4641FD3B7CA
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 09:34:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0300D3B7CA
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 09:35:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE2C18969C;
-	Tue, 26 Nov 2024 10:34:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 36CDF88360;
+	Tue, 26 Nov 2024 10:35:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="UuOXaObA";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lgwf5juQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7BF38961E; Tue, 26 Nov 2024 10:34:13 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::614])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BF2C85B66; Tue, 26 Nov 2024 10:35:11 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AAF08966F
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 10:34:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 777928857C
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 10:35:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mgt5Lgfg3lbUcsPokAljWzc9kmHqIrSMeXZ1ymB6/R/hPIvXaa25gYLVCl1ad7v9Wx9MMCSQOCVjb6DBgXsmGiGVEdci7jGesZfAwVxZykTytzKo1ZegUNd1rMuQFgQEY8sgwQzwu8GS5A1CBI98CvZGTO1uKph5i+4crfBT1cmhmsvcXjJPR87EKFLJ9+EQ/RQTojULUaAMxrnkeJVejBe82x5sOU+6FngNCFd8hwh23eYw62CZG/78iGYrt0rIM5URfFYllZhoBghvbdC1136+RKvM/NnDG2cy6CpPCUOC98ictDV+dbWaQgJOUWPtf68mfag/TDrtIL9aD+4lGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H/XBhZsrrdGl0aTS6O2vOh03SoixZJuTKE8SMq68Whk=;
- b=FaTzhdlK9kNbuk2HCyuL/l3tBEPO3sZ72tkBlt60FIQIdybHEPGMY1w4yl2HbGdsGQfytM13B/ZhN/4MA//X7cG+FzdLruPks9h21RJWTQLbtSNVnXA+4q4c8Vw/mPG2XXVOOoukIywv/wYwExjurOuW/PVM1icZEIwZ6/Tzk7EfYG8epzmheM3UNxUi06Gp26C7vTbRd+gV1EvboJxML0+hZtSOXy75gIGArBX1LtDvmFRi9A6zjJkDgEvr/90d3KcrMpCdSpYnFaMj6jrB/Q0399DFgs7nRWGUGtHF70VvBMC/Fq2nm5elo0xHsLJhHkvIZ0BKCfhj9Nwl8MTMRA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H/XBhZsrrdGl0aTS6O2vOh03SoixZJuTKE8SMq68Whk=;
- b=UuOXaObAiFDGa9B41raO8iN0VgTBQfoM9KfVe7J2IYlJ/1ItdSe3IZlvdoznY6vBmIybeXJC8tXNm9fCv7IZAn0XRg3ZNAdp5yT2aa8ejkTBPqiCSYaya4KuSUIRDJxOvRolhBjDW4H3YgPzpW4KBmxJqU5JfE5Ws7rvIIf06Zg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS8PR04MB8884.eurprd04.prod.outlook.com (2603:10a6:20b:42f::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.21; Tue, 26 Nov
- 2024 09:34:07 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8182.019; Tue, 26 Nov 2024
- 09:34:07 +0000
-Message-ID: <71d9a5bf-c2f3-429c-a2e6-8dc103f07f44@cherry.de>
-Date: Tue, 26 Nov 2024 10:34:07 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: theobroma-systems: Update TF-A setup steps for
- RK3588 boards
-To: Daniel Semkowicz <dse@thaumatec.com>, Klaus Goger
- <klaus.goger@cherry.de>, Heiko Stuebner <heiko.stuebner@cherry.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20241126082738.14854-1-dse@thaumatec.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241126082738.14854-1-dse@thaumatec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0023.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4349fd77b33so15680825e9.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:35:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732613708; x=1733218508;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=RGckb0XLAvPvYoXMYnoqjgBpy3ZLGc5yol+GD5Jmejw=;
+ b=lgwf5juQD+7xHr7HsFRgmXXWehz/um3PAiXeE/X0Kyve8J7mqOdGKLoA1qhIcLswmH
+ OpmVsL2485N+S4BSdcS2tq3SPoONpBUy1f3fgAo+4D/MGcxyB6AtE9QN3qSBIVp2d0dp
+ CXluKRnb6PAA5tgjXcUfSZMXcrX/ba3tcM288ozmT2MRl+XhQOqADrOQP4k23l5cd1Lm
+ RSbVPJFQs+UocrMQPYWMqxkO8YP8FeXFqE664LAorhgM08M4JRmvMidwokzSVjo21GFc
+ xIEJK+d41dDeNy4Wqvrf73nwjWq9oq30eCxLJUxZ6L4Qqz8v8jsnbpzO1H0KfJDhCse7
+ KwDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732613708; x=1733218508;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RGckb0XLAvPvYoXMYnoqjgBpy3ZLGc5yol+GD5Jmejw=;
+ b=douaRXwVDAXGw/tbHNPu3jOj0cO4LrunYhl2URt1nqdx8nJvnQlyDzj24ddfMvpDqG
+ 0/TM2N/9C3krmckg9NJitBFrzyerdyYwRB6oNz6W0rZoya8TBIJnYIJyGIBsdKWVONBU
+ Pql8/0k0QkCtirujbGHnAA1aWKtVCWI3bTHZzCVyOYQxnnIGjsHdf9T/S3DhWSRHnESG
+ WLMIoTfbTZ9RfgWTM5aBKs0xXFRpwX0SHF7hHV1Thetj42FKgebxdh8W8F1USnrp9fhG
+ rnVA1DKQdcTbf8yMdeCe12O8UqYiAam6twSAZJWxDx+qzDMmN3K1R5sCQZNzBVIO+n6G
+ 3dSg==
+X-Gm-Message-State: AOJu0YwwY8CVgnTRI7tIV7w4FV3uUsMNLxQiGIBIuVIHf8DZ0HULW4cb
+ NuNQOpUz2yGKR8A05PeH3yNFuwZ1G0aw2gt2zxdiy5paAVFGE1XrQHgIaNR1yeI=
+X-Gm-Gg: ASbGnctDskCiZkKqeRL3ujv8kASCZ56rkRp08VVAxOSJE36Fn1zYb4MYM0SuJNEhWTT
+ l92j1Y3n4fdwa23YN6janTzl4CjXnu7+9Y8Px6ZF46I9yO2hknJslngSkB8Zu4m1j7iC6mNY//w
+ ISKvt/fodAZZyGCQChud6fT80UFlJDQNQSM6GON3gIycNJZoOH91Cmd9Rx9a8eshUOq+v/bngrF
+ vrVBW7N+9F2QjM0b9hV0svmbm/75X/ZCm7MzBESsQGwmCORC6LKXQ==
+X-Google-Smtp-Source: AGHT+IEcQ4M/7DNrI/vt4Md2Uzqeo7b1mQ3UcANl8ak64bwdX6t2hB5/5f5YXtfjt78IK0ZuLC/6lA==
+X-Received: by 2002:a05:6000:184e:b0:382:319f:3abd with SMTP id
+ ffacd0b85a97d-38260bcb8a6mr13931764f8f.36.1732613707898; 
+ Tue, 26 Nov 2024 01:35:07 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825fad6441sm13100632f8f.4.2024.11.26.01.35.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Nov 2024 01:35:07 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitrii Merkurev <dimorinny@google.com>, neil.armstrong@linaro.org
+Cc: u-boot@lists.denx.de, rammuthiah@google.com, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Ying-Chun
+ Liu <paul.liu@linaro.org>
+Subject: Re: [PATCH 2/4] fastboot: blk: add block device flashing configuration
+In-Reply-To: <CAOWkq4mgzqdAjU+a3iFc7_UnsP03NTNp+TdK94t4g10tD2DOuA@mail.gmail.com>
+References: <20240306185921.1854109-1-dimorinny@google.com>
+ <20240306185921.1854109-2-dimorinny@google.com>
+ <f2e90ccc-424e-4ab7-93d9-7ca4aaa5a600@linaro.org>
+ <CAOWkq4mgzqdAjU+a3iFc7_UnsP03NTNp+TdK94t4g10tD2DOuA@mail.gmail.com>
+Date: Tue, 26 Nov 2024 10:35:05 +0100
+Message-ID: <87v7wapcc6.fsf@baylibre.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB8884:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1b83fd80-91cf-41f4-bed6-08dd0dfd79c1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEtiZ1c0K3N3MDVGTHdzRzF3amo0ZlE4b1ZrTTRMeHFrOG03Yy8wenFEazZU?=
- =?utf-8?B?T3hMTmxETnM3UEZCRm9nZmdiOXBkWk9Sb1Vrb3Q3RVQ0b0k0ZWs4Ukt1SFJh?=
- =?utf-8?B?SGpLV0lOanA4OFBrcjhxR2t4RVA5cnV4enRoRlNwSGpoemdZSExidWRjMUdz?=
- =?utf-8?B?L3lSdlMyMmhPRzJidUdvckFOeW1NVi9DWTJISzVBTUEvc210MUVobURMblR5?=
- =?utf-8?B?cVVpU2FidVRHeXhyL0krbjBvcEoyOFpiZ0J2ZC8wNVBKdW44NDEwSGowVm8x?=
- =?utf-8?B?VzZtTnNVUVNYNjMvRDVGamRiZkswOFp4cnUxR1hwd1ZFVGdwbFppdGY0akpy?=
- =?utf-8?B?dE0wNnh3bHU0WUE3Y0xyMFFBYVluNEFHNXJvMzRpQ0p6N2huelJpOFV5RHhY?=
- =?utf-8?B?YVBhbWM0QWloOVJwcVcrY1N1Mm1aVHUyU3dzckRDTi9OUFdveWNPL3lwNi9S?=
- =?utf-8?B?ZjIweUFDMURMeEx3Si9GTy9jU3JVZXdUQnM0c05STm9TUi9ZU1Z2OHF4bGt3?=
- =?utf-8?B?UlB4YmdyOFA2aEhNT2QzbEZreStLYmUxcG1PcmpyZnN5SFd0QnpuL3pMcUsx?=
- =?utf-8?B?OWlWcEllMDZ0M1RhdzB2dWIxODBDOWY5RHBYMUpXVzAwOHZINWl0a1dXZmFT?=
- =?utf-8?B?NU1MUzN5L0VrcTY1NHZWMHVTV0NLcTVrTjNXcGg5dHBHRkJCVjB4R2l6enps?=
- =?utf-8?B?MGNLUDRLb0d5TEM3Rm5LNGEya3pXNUdVUHRyakdsU3BXWDQ5eEo0TnZKRURO?=
- =?utf-8?B?THZ2SEx2TUMzbzZSeisvdldDK2VBd3lRckFCcUhkNmJ0TGxqeklnNTAwQldi?=
- =?utf-8?B?U2tIY2h5cXcraEdDVHl3MC9iWmt1ZW8reUNOaTc1dlZrM3RNclR5Um1JYXJs?=
- =?utf-8?B?Yk5ZUzQzdkZCR1hVeWJZOFhLSE8rVkRBL094TytyemFlMXdmdjlOcGhLM3ZN?=
- =?utf-8?B?MVlYUzJlcTBidXNxVHBCandFTEFOMlpCUUJvSGtoSkJaWm1BV3VGb0lkTnY3?=
- =?utf-8?B?dG1OU1kwa3U0NXQ1L01TSmV2ajB2QWJOcnVaOU1jK3VTM0NaUnA3N05tc04w?=
- =?utf-8?B?RkNPMmI2L2F2ZmREU3l3M3dPQmtBd2xqYnhuQzF1WTByT1A2cUxzV2JSb3NM?=
- =?utf-8?B?MEluNVZSc1BoSmRrNThNMnZ3NVNQVUFOdTFtRjZVRGROUG5yWnZsM2w5TFpK?=
- =?utf-8?B?VTNPWFRobU9TM2hJSFFXeHh0ckVuYy9ZRVBxeXRTNEZOUWUxako1U1JPc3hW?=
- =?utf-8?B?dlprbnZzM21YaE16WEwrUjd0UC8zUjRYU051NzN4Zm90SnBlbUh0SE53bGhk?=
- =?utf-8?B?bzU1eWNlWFpkUmZWZlk3RUNyenN2NEc1MFlNVDhJVUxOZzhzU0VxSElqd2hv?=
- =?utf-8?B?YWh5MlhyL2VGaDlTOHFNTTI2UXFlekhoVW5BZ1ZCMU9zSXltaHB0ODBTYXZi?=
- =?utf-8?B?WFpEWC96a29JUy82WCtGZ1lJTS9CU3ZNRUM2YmRiS2hkRVBlSHZDd1hWUkJR?=
- =?utf-8?B?VitUdWh6bjVKRjEyWWhSRG5xaFlPYXFUVlFKcXVtQzB2QmFCUjZpZnQzRFo1?=
- =?utf-8?B?MXlrOEFvbFMzQVFRc3FaUW9hNzd0bEdKMzN0NEVQVWZXZCtRMGVBMUd4bytW?=
- =?utf-8?B?SmJvbkczR0EwTXc1bktxb1JMdzk3dWlIYnhRWVQvdEgyUm9nWWhjUjZ2bllQ?=
- =?utf-8?B?NlV0ZC95TlY5Wi9pZ2lyVkdETExHdmZXT3h0bHJORmxuaUFVdVprVDBiSDRa?=
- =?utf-8?B?MmpLcTVUa2syOVJ0TklPUjdxMS80bE1aS2NNMWVuRU90VVJjSkFrdnlGWVFo?=
- =?utf-8?B?RTRDaU16UTQyR3lTeWY1UT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RTRLc2ZSYUg4aWNGNFoyVkQxWjcvNTRORFFmSUZwK05TV3Q5RTUrV21YMGpL?=
- =?utf-8?B?ZGdiMlFsR1Qvbit0cnVFeFUwU1ZWWTZXTUpJUFI3eFh2RnNCaTFFTUc4V3F6?=
- =?utf-8?B?VEFFakxUQlhzcm9YcFBkN2J2WmZBZVo0bjBNYy91OXBER1YrV0J5YVJCY0xL?=
- =?utf-8?B?S2lRQkREWDczM1ZmSDBNZVhweFpZNTNncEd5SGZWejdnL0dINHNXUjNxeE9O?=
- =?utf-8?B?Vlkyc01CSU1wd2VCclg4OWNXQVZ4N21qVU5NQUc2cCtwcERqaURwQUNGNXpr?=
- =?utf-8?B?VGh4UEZKWVVHcFc2eTlDZzNwYnpmbUJHWG5HejlnaTRVUWZucENJc3BIUnF5?=
- =?utf-8?B?WGhpcjRTRytZUG5pMTBweUkxaHYveXQ5eFBxQVByQUxWdURlK001R01pMGZX?=
- =?utf-8?B?NUZRclFUc2R2OGYwZGZIdFUrRnhzL2xaZGx4SzVYdG41NmlSc0FYVWE3dGxP?=
- =?utf-8?B?WjNzbUlUL0RrQi9uZ2VnaEJFSXFqblMzSmc4NUtoc09SdWRBWXpmaE5rQmhX?=
- =?utf-8?B?MXZYalVDSlJDM1ltcWFFUTUvemdCMUl3RUkwTXhDREJldjZuRjRiKzBaZWR0?=
- =?utf-8?B?TXo4cEVma0pjK3FicFNsUVZPMURxU3FDY3p1ekdXZks5UnRZMDNVVXcvTFJ4?=
- =?utf-8?B?NWlwWThsdVBzRWVOU2EzaUJsWHQwYUtreEc5TDBFSHJjWmNHT2pJUkx3S0lu?=
- =?utf-8?B?RWUxL0JZM2cwUVZDQjlFdktjU0prV3ptRExJOHhIbDlXeUNyYjBYSXJQdzVO?=
- =?utf-8?B?aHFJSTVFdUdWbzZvYjhtNXUwdFMreVpPRmNTdndnaks4cVlCWVl6Nm1VR21Q?=
- =?utf-8?B?M3pLb0g2L0x1NWw1WmpoT0RtaUppcm9FVXRSTitidUN6ZTFXWndDdG9uWHo3?=
- =?utf-8?B?SitJcjlPZFhmRjA0ZnBZWjVtSkRsYVMwMDU0WGQ5TDhkYXRqM0s2S2Z6SVBi?=
- =?utf-8?B?UXRFS1FLa0NVbXh4OXM3RXNkRG5FK0IxaHlVNU5DOVkydmlGWjZXUXdUbE9a?=
- =?utf-8?B?SkNtSm5YK2R4cGFZUndGbS9HTlpGSXBxSkoyU1hnYlIxaFlrYUV0MUkyMjBR?=
- =?utf-8?B?QmlKdmxvcEVMTFZpdXFLOCtic05uTmFwbmlNMkRVc0cwb20xWlNhSFd4L1ds?=
- =?utf-8?B?MG5GbHN1WEdQSnZlcGJ0NXBjUjllajljUit1MzhFQUoyL2ZKcUdFdXQxbFly?=
- =?utf-8?B?WHdmZkJLc0xydUJIUURNODdtUjVPVXZJbUdUWWttakdsNzRUY28zWnk4YkFG?=
- =?utf-8?B?Ym03eUdBRHh0UXE5STl4MGdqYld0cUxUMExkbEtwOUdkYVQ5aVZXTG9sQW5u?=
- =?utf-8?B?cjFDL1B2L1NOU2wyYVBZWUpETXcvZVlFWjRic2hUeHBuaDNMWEwwWHM4VVZD?=
- =?utf-8?B?MW1vUE44VWhsMnJHeFZDNDFMNDBQd1F1a1B5S1Z6MXJhKzk1d0FhY09STjM2?=
- =?utf-8?B?aTRhZ0NBcWExUVUvanB2MERmWWpyaUZsS29ESkN0YXEyMDNsOFN1S3loZGM2?=
- =?utf-8?B?M0N5NmJqOGVSZnBuYlZ5QjBqQ0Zjdjl3bW4ramlEd2FYVURUci82SzFXMHgz?=
- =?utf-8?B?a2JERGxhczQ5ODI4VHlWcEN4RDEvZ1JWQlhDVXdJcjFtbU1hWnBWRDBMU0Zo?=
- =?utf-8?B?dGtHWjRLZExBczZjNFhzNCsydERnQWg5N1p4QmJEb1U0MXVRK3JBaW1kYm1h?=
- =?utf-8?B?OXZTVUlSWlp1Y05XNURrYzJqVDFlSENGblVlQ3VkY09LL0JVZnhEd1RCRjZP?=
- =?utf-8?B?cXY2QVNEbXNSZ20rdGtJU3J6L2tvd2d2QmpOU3ZwNkIwZ2doYVU0M1M5UnY1?=
- =?utf-8?B?V3dDUjcxTkk1clNqdVRhWExia2liQUd5Rjl2MzhlNXlBQ20yVVNFOVhCUGtL?=
- =?utf-8?B?LzA4eCt6aXdLUUJENm9kVTdVMFBSOGZkYmtHS3hpTmZORnNZSjhTMXpPUlZ2?=
- =?utf-8?B?K2M2ZkpjTEMzQzZZNGpPdkhhb0NBMTI5T1REZTI0QWI2WkpHcC9tWHl0b0Zr?=
- =?utf-8?B?c29YWERDM3NPTVp2dkRreWlsS3NHWmdUNkNMK0dxTmwxdVpZNTh0UE5acmRT?=
- =?utf-8?B?OEwzMWNIYzJDL0JHeTN1MDVhZVF2ZE40cy9UbEk4OEZMdVdkei9FR0huM3hs?=
- =?utf-8?B?Tmx3VEpjcTk3SnNpZTJSWEFFS0twOTZ1emtuTFFua0JtL0srSXRSR2hnSUdP?=
- =?utf-8?B?Smc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b83fd80-91cf-41f4-bed6-08dd0dfd79c1
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2024 09:34:07.8497 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4yB7muQALBhn9f1JR5pI3AE4gZw1cSlKpc6IB8UwZw1YAq6vXCVOIV7PskXzlfVXApVYGLPtmWLPNelfULy/d6OdxXelgddj3her9MGmUg0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8884
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,20 +99,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+On lun., nov. 25, 2024 at 23:41, Dmitrii Merkurev <dimorinny@google.com> wr=
+ote:
 
-On 11/26/24 9:27 AM, Daniel Semkowicz wrote:
-> ddrbin_tool interface has been changed. Additional chip_name argument
-> is now required to modify ddr binary file. Update documentation
-> to be consistent with the new interface.
-> 
-> Update BL31 and ROCKCHIP_TPL file paths to match current version
-> of binaries available in the rkbin repository.
-> 
-> Signed-off-by: Daniel Semkowicz <dse@thaumatec.com>
+> Hey Neil.
+>
+> Will do it by the end of the year. Only tested it with a virtio-block
+> though.
+>
+> On Thu, Nov 21, 2024 at 12:44=E2=80=AFPM <neil.armstrong@linaro.org> wrot=
+e:
+>
+>> Hi Dmitrii,
+>>
+>> So you plan to send a new version of this patchset ?
+>>
+>> It would be very useful to enable fastboot onr UFS/SCSI based devices.
 
-Acked-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+FYI another development for UFS/SCSI has been submitted here:
 
-Thanks!
-Quentin
+https://patchwork.ozlabs.org/project/uboot/patch/20241125110354.602124-1-qu=
+ic_varada@quicinc.com/
+
+>>
+>> Thanks,
+>> Neil
+>>
+>> On 06/03/2024 19:59, Dmitrii Merkurev wrote:
+>> > Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+>> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> > Cc: Simon Glass <sjg@chromium.org>
+>> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> > Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+>> > ---
+>> >   drivers/fastboot/Kconfig | 20 ++++++++++++++++++--
+>> >   1 file changed, 18 insertions(+), 2 deletions(-)
+>> >
+>> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>> > index 5e5855a76c..460c5e98d7 100644
+>> > --- a/drivers/fastboot/Kconfig
+>> > +++ b/drivers/fastboot/Kconfig
+>> > @@ -87,7 +87,7 @@ config FASTBOOT_USB_DEV
+>> >   config FASTBOOT_FLASH
+>> >       bool "Enable FASTBOOT FLASH command"
+>> >       default y if ARCH_SUNXI || ARCH_ROCKCHIP
+>> > -     depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
+>> > +     depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
+>> >       select IMAGE_SPARSE
+>> >       help
+>> >         The fastboot protocol includes a "flash" command for writing
+>> > @@ -109,12 +109,16 @@ choice
+>> >
+>> >   config FASTBOOT_FLASH_MMC
+>> >       bool "FASTBOOT on MMC"
+>> > -     depends on MMC
+>> > +     depends on MMC && BLK
+>> >
+>> >   config FASTBOOT_FLASH_NAND
+>> >       bool "FASTBOOT on NAND"
+>> >       depends on MTD_RAW_NAND && CMD_MTDPARTS
+>> >
+>> > +config FASTBOOT_FLASH_BLOCK
+>> > +     bool "FASTBOOT on block device"
+>> > +     depends on BLK
+>> > +
+>> >   endchoice
+>> >
+>> >   config FASTBOOT_FLASH_MMC_DEV
+>> > @@ -189,6 +193,18 @@ config FASTBOOT_MMC_USER_NAME
+>> >         defined here.
+>> >         The default target name for erasing EMMC_USER is "mmc0".
+>> >
+>> > +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+>> > +     string "Define FASTBOOT block interface name"
+>> > +     depends on FASTBOOT_FLASH_BLOCK
+>> > +     help
+>> > +       "Fastboot block interface name (mmc, virtio, etc)"
+>> > +
+>> > +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+>> > +     int "Define FASTBOOT block device id"
+>> > +     depends on FASTBOOT_FLASH_BLOCK
+>> > +     help
+>> > +       "Fastboot block device id"
+>> > +
+>> >   config FASTBOOT_GPT_NAME
+>> >       string "Target name for updating GPT"
+>> >       depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+>>
+>>
