@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A00EED3B996
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 14:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FE5D3B9A0
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 100F589C8A;
-	Tue, 26 Nov 2024 15:51:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A5F3889691;
+	Tue, 26 Nov 2024 16:14:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f2YHNH4H";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EvF8P9L5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4368489C8B; Tue, 26 Nov 2024 15:51:12 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 133A289697; Tue, 26 Nov 2024 16:14:29 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE18289C89
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 15:51:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADE6C89657
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:14:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-434a2f3bae4so13435445e9.3
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:51:09 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2f75c56f16aso66306391fa.0
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:14:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732632669; x=1733237469; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dY22EhnmDtoPKCZN5v4HaV/9cik5yZ1vzaAHxqJo5nE=;
- b=f2YHNH4HQdaGHrd7NN8flpq6InpmO6c6TQEKheMu/ypIpLUzh+62FQ9ETxRqHc3zv1
- Hod9Ik5eVRnH+xCbXGckujC5U+qVqFNjo2UUbwEGWfwY0J57eMcV+9kzQpQcDV22siFM
- yvd+pE/I7QJn2FPeCUyREt52iTg7zHxEaz0uQbIG2t+fXTbDPBp/kK+DOb5Jmqw04omv
- uV1VAQ0I71lbBeAP0H9W54+04GpPlwfeF80vBSESzpFRklOh8CNKs3HIOUoWYTC+BpKM
- 1WH7WshVynW22EjI9w4Q3TuAGd0d8Cq9t514kTYUoCHzgM46Yxed/kabbm8OQeycWATQ
- icYg==
+ d=gmail.com; s=20230601; t=1732634066; x=1733238866; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WE+WW8QHCGEDZ5sX2MP8DAyC4f3MozRL5F+OznyF2Yo=;
+ b=EvF8P9L5awRNIaD6mHPbR+nhrD/uQ8eQz1XbfatavLHtcFMBMzutlfoEh1wxA0qjDl
+ I9+rp9SzQ88fbZ6kpZQuDn4sigSF3uTf3QCQpftd/wInCR8w/+G1rVOjys4JD03xAgbb
+ P9wMlOuJPi1bhrR+oCtt4ecd/vo8zDCY0Xjky5lmXE5blTGX3XJbS3Gva3IwIYJ95KN3
+ lE+OUkWLocnOMdIQZZAMJgTSYSHKaHxEXhc2tGtsEHvmsh9kxUPn3by4ceOoOroBgt7H
+ X1z8TnpH5F+8JCsFygJvn3opunKpVGTidIjBQ1RQOOph8QM+BBQmOtBMU7HEKnbZS5+Q
+ 0VqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732632669; x=1733237469;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dY22EhnmDtoPKCZN5v4HaV/9cik5yZ1vzaAHxqJo5nE=;
- b=lh5BD2xEV2SaJGb1mv23pYhMdXrhOZDTWS3yZ7gOqwrei3kCk0qWDiiFi/kGzpSFIO
- jXGdfjEq+xuw0v1yK/Zh62N6eVaywjYlCJ9NrnhiKgz5iYMGPLuLSak1VI0mFmTQZbyp
- /tFBw7SBcwKxwmPXDgi3LfIrxX4+0JtRd8PvWURXOtrCCvtKRjeHqTzOKhUJTxYfOVYH
- 6welQ8UMYcXae+iMUrzwSNtnTFn0bIRC+KrbEBoZiUulS9c91CAjNhlc60DMRx13kG8T
- dAQLsLCLvNA/VTJiOLoNauNOs/W50M5a2sfvnR5JYpwL0Kkah2oxHQtAMjh0NvY95G9r
- SYWg==
-X-Gm-Message-State: AOJu0Ywv8JvxEzDdR159CM/uQ0MpNB4zT1hzX12mwMRNW0PVY0Ufj4ZN
- rrpkbycNbnhF5Qw/mI01s2/8tNXJwbe/AHADPMg/DgeEBJA1VtOLwnCDIuPCv7M=
-X-Gm-Gg: ASbGncshAWGi5PGEHgBeaYzV5NZstHSZl5p3wWakeEzxxdVwWuILwlNX+OlbBAQHzr7
- Vhs1Evq/pukn6P5ODOLbfuaeNdSbxsShgdolu9OXSe9rVlTweB9eTKmuf8V0itFCGtufG2tKL2S
- f5beJKU7mAayV0I5KWu/5dmMyvN/zO1tB2ZtoNfvzHb34W7xxuzpb54Ibrsp9v8rPuUK7JjIL/a
- RzzgIeoSw6rGgHB82TYbVHdkMoWk35zp3p3KBQ6Gh9pFRjSyhWKl7qgDkyxNRE=
-X-Google-Smtp-Source: AGHT+IGHun/nky6/mNpd/7/Pyl6bITFyMCM9E05st4qAdpyjOTMA9H/iKE8Exdii9zi9+Elb2Z6dpA==
-X-Received: by 2002:a05:600c:5128:b0:434:a802:43d with SMTP id
- 5b1f17b1804b1-434a80206f9mr15260885e9.27.1732632669237; 
- Tue, 26 Nov 2024 06:51:09 -0800 (PST)
-Received: from [192.168.7.95] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4349ca82957sm99996585e9.33.2024.11.26.06.51.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Nov 2024 06:51:08 -0800 (PST)
-Message-ID: <b10dece7-15c4-48a7-90eb-59e88d89ca9a@linaro.org>
-Date: Tue, 26 Nov 2024 15:51:08 +0100
+ d=1e100.net; s=20230601; t=1732634066; x=1733238866;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WE+WW8QHCGEDZ5sX2MP8DAyC4f3MozRL5F+OznyF2Yo=;
+ b=k/4Ffs9xum64ZnrZr9xKJdHNU+IFRNss2yd0xQa/vmjTRT1ROTsELCsNYKHMKGc/xR
+ BA757JogQGVNfsSPu4qX19cBfAq6lP+ss+6/ebJcr4RsoFAHlafWogCjKnpvXcDs9fJv
+ 4+rmpkevnOmUNQ/SKYC8vWLeHuozAZ4OvSHW1pS6VzmPp4lIvGWPAGMcCDC11opVtggD
+ TJgyOWgQyT7m2afDfoE33Y191G9FPUxRDCGMmuVr34TZIyefUS8erksxTLTAHS9pvNIX
+ Xvbvx+Yq2876QUqEFlQ5zaERGQQ/fW3zbdfMLAi1fRra1UqF+S0cMdWRmoNfkSmQJOxh
+ Ff2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZJOqSvDbIkdDDRWoHFUbuUf7ApuCUsipaA0vaknj0MGPO0r06VYLoHh9YzPwSrbphzfLf1Vs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwyDe9xC1yBdp/rwium3Wmm7Tpg7sdtrUwxmcz7cJR02PBGVw8q
+ Vlg8s2SbSI6ehsrAjDcldYMTHwTeSalXEBQauunmtFQ2TK9nDBEe4sETVQkDqQjSdePmDlZs6Lf
+ d9TMK3IrOAPfi157XBa6ERHUzo9U=
+X-Gm-Gg: ASbGnctEki/uq7jwuSYPU9ubfapOoytqZgWS8z1qzvcgyQFsmr7ZBlKB7qUNqoitjlR
+ K9ejeZL07QgLSoGmZpUwZqnWECul38u3je2FtbSpAglRknSpolhjlRx7ct7y+QKbd0Q==
+X-Google-Smtp-Source: AGHT+IFkYZQB/9hi4QIlxWO8c20N+BdBPVtS2+6hcdMmdJcPIXBxvhTqUqGupWpttx2dkvOmCEnBZU5YYjV3Y7sqy7I=
+X-Received: by 2002:a2e:a916:0:b0:2ff:c67f:5197 with SMTP id
+ 38308e7fff4ca-2ffc67f54b2mr37031601fa.13.1732634065615; Tue, 26 Nov 2024
+ 07:14:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] net: lwip: dhcp: support arguments for TFTP file
- download
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- E Shattow <lucent@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-References: <20241114172007.2074874-1-jerome.forissier@linaro.org>
- <20241123024206.GS3600562@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241123024206.GS3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20241125003205.75327-1-hal.feng@starfivetech.com>
+ <20241125003205.75327-3-hal.feng@starfivetech.com>
+In-Reply-To: <20241125003205.75327-3-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 26 Nov 2024 07:14:14 -0800
+Message-ID: <CANV2PTM8co61g5spb1_Wtt5_+CueOB+EpYX4=uSrGhK=OVMwbw@mail.gmail.com>
+Subject: Re: [PATCH v6 02/11] riscv: dts: jh7110: Make u-boot device trees
+ adapting to upstream DT
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
+ Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,39 +98,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sun, Nov 24, 2024 at 4:33=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
+>
+> Add u-boot features to the U-Boot device tree.
+>
+> Tested-by: E Shattow <lucent@gmail.com>
+> Acked-by: Sumit Garg <sumit.garg@linaro.org>
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi | 35 ++++++++++++++++---
+>  arch/riscv/dts/jh7110-u-boot.dtsi             | 34 ++++++++++++++++++
+>  2 files changed, 65 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dts=
+i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+> index 3012466b30..c44553455e 100644
+> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+> @@ -6,6 +6,10 @@
+>  #include "binman.dtsi"
+>  #include "jh7110-u-boot.dtsi"
+>  / {
+> +       aliases {
+> +               spi0 =3D &qspi;
+> +       };
+> +
+>         chosen {
+>                 bootph-pre-ram;
+>         };
+> @@ -27,42 +31,62 @@
+>
+>  &uart0 {
+>         bootph-pre-ram;
+> +       reg-offset =3D <0>;
+> +       current-speed =3D <115200>;
+> +       clock-frequency =3D <24000000>;
+>  };
+>
+>  &mmc0 {
+>         bootph-pre-ram;
+> +       compatible =3D "snps,dw-mshc";
+>  };
+>
+>  &mmc1 {
+>         bootph-pre-ram;
+> +       compatible =3D "snps,dw-mshc";
+>  };
+>
+>  &qspi {
+>         bootph-pre-ram;
+> +       spi-max-frequency =3D <250000000>;
+>
+> -       nor-flash@0 {
+> +       flash@0 {
+>                 bootph-pre-ram;
+> +               /delete-property/ cdns,read-delay;
+> +               spi-max-frequency =3D <100000000>;
+>         };
+>  };
+>
+> +&syscrg {
+> +       assigned-clocks =3D <&syscrg JH7110_SYSCLK_CPU_ROOT>,
+> +                         <&syscrg JH7110_SYSCLK_BUS_ROOT>,
+> +                         <&syscrg JH7110_SYSCLK_PERH_ROOT>,
+> +                         <&syscrg JH7110_SYSCLK_QSPI_REF>;
+> +       assigned-clock-parents =3D <&pllclk JH7110_PLLCLK_PLL0_OUT>,
+> +                                <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+> +                                <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+> +                                <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
+> +       assigned-clock-rates =3D <0>, <0>, <0>, <0>;
+> +};
+> +
+>  &sysgpio {
+>         bootph-pre-ram;
+>  };
+>
+>  &mmc0_pins {
+>         bootph-pre-ram;
+> -       mmc0-pins-rest {
+> +       rst-pins {
+>                 bootph-pre-ram;
+>         };
+>  };
+>
+>  &mmc1_pins {
+>         bootph-pre-ram;
+> -       mmc1-pins0 {
+> +       clk-pins {
+>                 bootph-pre-ram;
+>         };
+>
+> -       mmc1-pins1 {
+> +       mmc-pins {
+>                 bootph-pre-ram;
+>         };
+>  };
 
-On 11/23/24 03:42, Tom Rini wrote:
-> On Thu, Nov 14, 2024 at 06:20:07PM +0100, Jerome Forissier wrote:
-> 
->> The dhcp command is supposed to have the following syntax as per
->> "help dhcp":
->>
->>   dhcp [loadAddress] [[hostIPaddr:]bootfilename]
->>
->> In other words, any arguments should be passed to an implicit
->> tftpboot command after the DHCP exchange has occurred.
->>
->> Add the missing code to the lwIP version of do_dhcp().
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> 
-> Applied to u-boot/master, thanks!
-> 
-> But please note, I believe this is what breaks
-> test_efi_helloworld_net_http now as we can no longer abuse "wget 200000
-> EFI/arm64/helloworld.efi" for example:
-> U-Boot> wget 200000 EFI/arm64/helloworld.efi
-> invalid uri, no file path
-> Invalid URL. Use http(s)://
-> U-Boot>
+> @@ -78,6 +102,9 @@
+>         bootph-pre-ram;
+>         eeprom@50 {
+>                 bootph-pre-ram;
+> +               compatible =3D "atmel,24c04";
+> +               reg =3D <0x50>;
+> +               pagesize =3D <16>;
+>         };
+>  };
 
-That's actually caused by commit 356011f7ac25 ("lwip: fix code style
-issues") :-/ I've just sent a fix [1]. Sorry for the breakage.
+In some configurations with RTC there is a conflict in the addressing
+with EEPROM, as in:
 
+https://github.com/milkv-mars/mars-buildroot-sdk/commit/d381610c92827de01b2=
+5843786012351b3f35519
 
-[1] https://lists.denx.de/pipermail/u-boot/2024-November/573054.html
+Okay to keep this for now, a conflict is the exception and not the
+normal situation. Refactor this out of U-Boot when EEPROM node is sent
+upstream to Linux.
 
-Thanks,
--- 
-Jerome
+>
+> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi b/arch/riscv/dts/jh7110-u-=
+boot.dtsi
+> index 52c1d60859..21a2ab1789 100644
+> --- a/arch/riscv/dts/jh7110-u-boot.dtsi
+> +++ b/arch/riscv/dts/jh7110-u-boot.dtsi
+> @@ -46,6 +46,15 @@
+>                 };
+>         };
+>
+> +       timer {
+> +               compatible =3D "riscv,timer";
+> +               interrupts-extended =3D <&cpu0_intc 5>,
+> +                                     <&cpu1_intc 5>,
+> +                                     <&cpu2_intc 5>,
+> +                                     <&cpu3_intc 5>,
+> +                                     <&cpu4_intc 5>;
+> +       };
+> +
+>         soc {
+>                 bootph-pre-ram;
+>
+> @@ -73,10 +82,35 @@
+>         bootph-pre-ram;
+>  };
+>
+> +&gmac0_rgmii_rxin {
+> +       bootph-pre-ram;
+> +};
+> +
+>  &gmac0_rmii_refin {
+>         bootph-pre-ram;
+>  };
+>
+> +&gmac1_rgmii_rxin {
+> +       bootph-pre-ram;
+> +};
+> +
+> +&gmac1_rmii_refin {
+> +       bootph-pre-ram;
+> +};
+> +
+> +&stmmac_axi_setup {
+> +       snps,wr_osr_lmt =3D <4>;
+> +       snps,rd_osr_lmt =3D <4>;
+> +};
+> +
+> +&gmac0 {
+> +       snps,perfect-filter-entries =3D <8>;
+> +};
+> +
+> +&gmac1 {
+> +       snps,perfect-filter-entries =3D <8>;
+> +};
+> +
+>  &aoncrg {
+>         bootph-pre-ram;
+>  };
+> --
+> 2.43.2
+>
+
+Reviewed-by: E Shattow <lucent@gmail.com>
