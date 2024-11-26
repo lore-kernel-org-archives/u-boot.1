@@ -4,87 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6C4D5A6E2
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 05:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58766D5A6DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 05:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 314AA89BF2;
-	Tue, 26 Nov 2024 06:16:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id 80D988916D;
+	Tue, 26 Nov 2024 06:24:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="f0Byhp1T";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E602189BF3; Tue, 26 Nov 2024 06:16:51 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
+ id 4201889229; Tue, 26 Nov 2024 06:24:35 +0100 (CET)
+Received: from smtpbgbr2.qq.com (smtpbgbr2.qq.com [54.207.22.56])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 372ED89BCD
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:16:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9FC288F48
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:24:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQ2rr4l010320;
- Tue, 26 Nov 2024 05:16:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- cc:content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=qcppdkim1; bh=qNRrLX6L6Nk+28MQCjjj5KNQ
- f9z4QNzAgigavZi+WF4=; b=f0Byhp1TOr56K4scqFL05FqwwTXpV9w1U1Rt+5xC
- 6duJ4kdyfMSnpC8CSacq5/H7ht47SXz9AOwB8/Y/doA1EWuYxLbDLmdAPCz1oCgK
- gUPd1r3Go93EQS5nicIf8SbRB1p0XcNIvcbDKQMOyBJK04Al9LbvQOJTip/H52KE
- Z7fB5Lwehcl6XrF8mDcoSzXRlrLKlbA0T+e/2nH8fuDa7SQ0q/5Gi11zya+hZ/v+
- 2+sH4d4oWmBsvtHSMikk6gGAWyIPUcClbzvH9wId0PKSLFRDHPXwoP9RuspLxQnr
- xLHQ1JTOSZBiho2bHcdDzEEF0BZRxhz1+0mFG3HcY4RsdA==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 434sw9a20p-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Nov 2024 05:16:33 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AQ5GWeq029217
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Nov 2024 05:16:32 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 25 Nov 2024 21:16:29 -0800
-Date: Tue, 26 Nov 2024 10:46:25 +0530
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-CC: <mkorpershoek@baylibre.com>, <trini@konsulko.com>,
- <jerome.forissier@linaro.org>, <avromanov@salutedevices.com>,
- <sjg@chromium.org>, <ion@agorria.com>, <clamor95@gmail.com>,
- <quentin.schulz@cherry.de>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] drivers: fastboot: Enable flashing support for UFS
-Message-ID: <Z0VZqWbA8avK0cjU@hu-varada-blr.qualcomm.com>
-References: <20241125110354.602124-1-quic_varada@quicinc.com>
- <d741a762-f56d-44b9-898f-38a4ae3c5689@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip3t1732598642tle5mca
+X-QQ-Originating-IP: bTKN7QTfwgu4xYPZ56RgYm933hoHGxVys51XAF0DLLU=
+Received: from [IPV6:240f:10b:7440:1:4b4e:609c ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 26 Nov 2024 13:23:57 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1839713764897788090
+Message-ID: <3DE1121FC064812D+0e03e5c7-0ac3-4849-8db5-c78871de6461@radxa.com>
+Date: Tue, 26 Nov 2024 14:23:56 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <d741a762-f56d-44b9-898f-38a4ae3c5689@linaro.org>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: Um6SKTZdvKtObL4t5hQ7CtFLpSYPlhtO
-X-Proofpoint-ORIG-GUID: Um6SKTZdvKtObL4t5hQ7CtFLpSYPlhtO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0
- mlxlogscore=999 adultscore=0 spamscore=0 impostorscore=0
- priorityscore=1501 phishscore=0 clxscore=1015 mlxscore=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 classifier=spam adjust=0
- reason=mlx scancount=1 engine=8.19.0-2409260000
- definitions=main-2411260042
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] rockchip: rk356x: Implement checkboard() to print
+ SoC variant
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+References: <20241110005622.1515100-1-jonas@kwiboo.se>
+ <20241110005622.1515100-2-jonas@kwiboo.se>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20241110005622.1515100-2-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: OSjQccS6YHkH2WwCnp2h2sLSjRsuOx8Q3TsTXq7iNxYlTsem4dQFVk6g
+ 4V58de96UAX45Z4f/3i57y0UyQSbKz6+N0ZlYjeIhNQX969RUMlwrbSWODzqnlomaQYpdm5
+ lDnFgEIW6vnFE1VZnHrSN+uLh0m2foT8Y03oqKqUqyjvhGKFmoDsfiRDX2HSKjrDpgzK3bh
+ gGgCQqmHtWpoQLGwPdwwJ/7CqeUVKki7qxm4V+KrPpUO7DJs7N0t74+0MkCBouqf1p/5Mbi
+ KMgg78gngPTkLqyMYIFMoifAigdJJEzDf1GFlkpfvEeKLW/Iopft98WPZz7oPtGwaXN+DBm
+ +XpnS9y6bYXdWeWymut0jfOJErZezzYA8LmSOrdTQ609Xozd9qW7azHwy9SXpPdV8fblRxu
+ q33OjZggJv4dYrTISoA5PQ535MhZpOmLJfUIC341Wuhj4K1hhcrjAO877BmM/Cslud/5uAo
+ FB7VGb1HoK+4vpUeOp6BGEFnyFU/DV2s1zyPWPrTmodRu7jnZlvWbSTwEnNnxIfQ8CoThHm
+ PtNxY05wDqRcsNHW/IF5cKOahZ7AY81dh7i9UZOkZ9skfO6W6p68yYoa94gs7746U07b5Gx
+ ExGW+MN/DJdU4RbQHSpC6YFvO08nQ/9Nbo3dLD3fPm5MXy8yxTZdGZ+L2kKWOygHCzwiXy6
+ cesDJi51JqPanA3hqSVbITegnAp4ERp2u05hM62n0U9PjVRBejqkINO9E4vTYaEZJXqdScx
+ vK1Lyqk/RGvDYvbNZ34Dc+KdNIXapXrZJJExiphcmyMQSCyCWmtcihWewa+xLPHN/TkzZct
+ yKwIN9hpJ3qnW1l6RDSeZ4hlyb/2pKL7jEejaCS0BG4UHnr4pO6NpIOo4dkZA247OEL77qT
+ dqF98Qv8ZHdxBIsZ7HWayTE+e3w/v9SKOcWmII3I4BXtmoRMj2FlXJu0t5sgb+KMaGnN/ee
+ 6j8+ARjxxmnp8OA==
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,260 +82,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 25, 2024 at 06:59:40PM +0100, Caleb Connolly wrote:
-> Hi Varadarajan,
->
-> On 25/11/2024 12:03, Varadarajan Narayanan wrote:
-> > MMC and UFS seem to execute very similar steps to identify the
-> > partition and write to it. Hence try to enable fastboot flashing
-> > support in UFS leveraging the MMC functions.
->
-> Thanks for this! Do you think we could make this dynamic at runtime?
-> Since it's currently possible to build a single binary with
-> qcom_defconfig that will work across a wide range of boards (both with
-> eMMC and UFS), I don't think it makes sense to pick a fastboot backend
-> at build time.
->
-> Some additional comments below.
-> >
-> > Tested on rb3gen2 platform.
-> >
-> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> > ---
-> >  drivers/fastboot/Kconfig      | 19 +++++++++++++++---
-> >  drivers/fastboot/Makefile     |  1 +
-> >  drivers/fastboot/fb_command.c |  6 ++++--
-> >  drivers/fastboot/fb_mmc.c     | 36 ++++++++++++++++++++++++-----------
-> >  4 files changed, 46 insertions(+), 16 deletions(-)
-> >
-> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> > index 1eb460f5a0..5c41fc4684 100644
-> > --- a/drivers/fastboot/Kconfig
-> > +++ b/drivers/fastboot/Kconfig
-> > @@ -92,7 +92,7 @@ config FASTBOOT_USB_DEV
-> >  config FASTBOOT_FLASH
-> >  	bool "Enable FASTBOOT FLASH command"
-> >  	default y if ARCH_SUNXI || ARCH_ROCKCHIP
-> > -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
-> > +	depends on MMC || UFS || (MTD_RAW_NAND && CMD_MTDPARTS)
-> >  	select IMAGE_SPARSE
-> >  	help
-> >  	  The fastboot protocol includes a "flash" command for writing
-> > @@ -120,6 +120,10 @@ config FASTBOOT_FLASH_NAND
-> >  	bool "FASTBOOT on NAND"
-> >  	depends on MTD_RAW_NAND && CMD_MTDPARTS
-> >
-> > +config FASTBOOT_FLASH_UFS
-> > +	bool "FASTBOOT on UFS"
-> > +	depends on UFS && EFI_PARTITION
-> > +
-> >  endchoice
-> >
-> >  config FASTBOOT_FLASH_MMC_DEV
-> > @@ -133,6 +137,15 @@ config FASTBOOT_FLASH_MMC_DEV
-> >  	  regarding the non-volatile storage device. Define this to
-> >  	  the eMMC device that fastboot should use to store the image.
-> >
-> > +config FASTBOOT_FLASH_UFS_DEV
-> > +	int "Define FASTBOOT UFS FLASH default device"
-> > +	depends on FASTBOOT_FLASH_UFS
-> > +	default 0 if CONFIG_ARCH_SNAPDRAGON
-> > +	help
-> > +	  The fastboot "flash" command requires additional information
-> > +	  regarding the non-volatile storage device. Define this to
-> > +	  the UFS device that fastboot should use to store the image.
->
-> This doesn't map at all to how fastboot is intended to work. We would
-> expect to see all partitions exposed not just those of a specific LUN.
+Hi,
 
-Yes. Took this approach as this would easily align with the MMC's
-way of searching for a partition. Will fix this.
+On 11/10/24 09:56, Jonas Karlman wrote:
+> Implement checkboard() to print current SoC model used by a board,
+> e.g. one of:
+> 
+>    SoC:   RK3566
+>    SoC:   RK3566T
+>    SoC:   RK3568
+>    SoC:   RK3568B2
+>    SoC:   RK3568J
+> 
+> when U-Boot proper is running.
+> 
+>    U-Boot 2025.01-rc1 (Nov 10 2024 - 00:39:37 +0000)
+> 
+>    Model: Generic RK3566/RK3568
+>    SoC:   RK3568J
+>    DRAM:  8 GiB (effective 7.7 GiB)
+> 
+> Information about the SoC model and variant is read from OTP.
+> 
+> Also update rk356x-u-boot.dtsi to include OTP in U-Boot pre-reloc phase,
+> where checkboard() is called.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-> > +
-> >  config FASTBOOT_FLASH_NAND_TRIMFFS
-> >  	bool "Skip empty pages when flashing NAND"
-> >  	depends on FASTBOOT_FLASH_NAND
-> > @@ -196,7 +209,7 @@ config FASTBOOT_MMC_USER_NAME
-> >
-> >  config FASTBOOT_GPT_NAME
-> >  	string "Target name for updating GPT"
-> > -	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
-> > +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && EFI_PARTITION
-> >  	default "gpt"
-> >  	help
-> >  	  The fastboot "flash" command supports writing the downloaded
-> > @@ -209,7 +222,7 @@ config FASTBOOT_GPT_NAME
-> >
-> >  config FASTBOOT_MBR_NAME
-> >  	string "Target name for updating MBR"
-> > -	depends on FASTBOOT_FLASH_MMC && DOS_PARTITION
-> > +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && DOS_PARTITION
-> >  	default "mbr"
-> >  	help
-> >  	  The fastboot "flash" command allows to write the downloaded image
-> > diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
-> > index 048af5aa82..772276cb6c 100644
-> > --- a/drivers/fastboot/Makefile
-> > +++ b/drivers/fastboot/Makefile
-> > @@ -4,4 +4,5 @@ obj-y += fb_common.o
-> >  obj-y += fb_getvar.o
-> >  obj-y += fb_command.o
-> >  obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
-> > +obj-$(CONFIG_FASTBOOT_FLASH_UFS) += fb_mmc.o
-> >  obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
-> > diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-> > index e4484d65ac..a6fa8299b8 100644
-> > --- a/drivers/fastboot/fb_command.c
-> > +++ b/drivers/fastboot/fb_command.c
-> > @@ -336,7 +336,8 @@ void fastboot_data_complete(char *response)
-> >   */
-> >  static void __maybe_unused flash(char *cmd_parameter, char *response)
-> >  {
-> > -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
-> > +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC) ||
-> > +	    IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
-> >  		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
-> >  					 image_size, response);
-> >
-> > @@ -356,7 +357,8 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
-> >   */
-> >  static void __maybe_unused erase(char *cmd_parameter, char *response)
-> >  {
-> > -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
-> > +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC) ||
-> > +	    IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
-> >  		fastboot_mmc_erase(cmd_parameter, response);
-> >
-> >  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
-> > diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
-> > index f11eb66761..bf242e4b2a 100644
-> > --- a/drivers/fastboot/fb_mmc.c
-> > +++ b/drivers/fastboot/fb_mmc.c
-> > @@ -20,6 +20,16 @@
-> >
-> >  #define BOOT_PARTITION_NAME "boot"
-> >
-> > +#if defined(CONFIG_FASTBOOT_FLASH_MMC)
-> > +#define fb_flash_str	"mmc"
->
-> Macros be in upper case.
->
-> This is something I think would make more sense as a variable. Perhaps
-> the fastboot command could be extended to allow passing in a device (or
-> list of devices?) to use.
+Tested-by: FUKAUMI Naoki <naoki@radxa.com>
 
-Considered that approach but didn't follow through since it might
-break the existing command syntax. Should we extend the 'flash'
-command itself or should we add an 'oem' command to select mmc or
-ufs.
+SoC:   RK3566
+SoC:   RK3566T
+SoC:   RK3568
+SoC:   RK3568J
 
-> > +#define fb_flash_dev	CONFIG_FASTBOOT_FLASH_MMC_DEV
-> > +#elif defined(CONFIG_FASTBOOT_FLASH_UFS)
-> > +#define fb_flash_str	"scsi"
-> > +#define fb_flash_dev	CONFIG_FASTBOOT_FLASH_UFS_DEV
-> > +#else
-> > +#error "Incorrect flash type"
-> > +#endif
-> > +
-> >  struct fb_mmc_sparse {
-> >  	struct blk_desc	*dev_desc;
-> >  };
-> > @@ -78,7 +88,7 @@ static int do_get_part_info(struct blk_desc **dev_desc, const char *name,
-> >  	int ret;
-> >
-> >  	/* First try partition names on the default device */
-> > -	*dev_desc = blk_get_dev("mmc", CONFIG_FASTBOOT_FLASH_MMC_DEV);
-> > +	*dev_desc = blk_get_dev(fb_flash_str, fb_flash_dev);
-> >  	if (*dev_desc) {
-> >  		ret = part_get_info_by_name(*dev_desc, name, info);
-> >  		if (ret >= 0)
-> > @@ -91,8 +101,8 @@ static int do_get_part_info(struct blk_desc **dev_desc, const char *name,
-> >  	}
-> >
-> >  	/* Then try dev.hwpart:part */
-> > -	ret = part_get_info_by_dev_and_name_or_num("mmc", name, dev_desc,
-> > -						   info, true);
-> > +	ret = part_get_info_by_dev_and_name_or_num(fb_flash_str, name,
-> > +						   dev_desc, info, true);
-> >  	return ret;
-> >  }
-> >
-> > @@ -202,17 +212,20 @@ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
-> >  {
-> >  	lbaint_t blks;
-> >
-> > -	debug("Start Erasing mmc hwpart[%u]...\n", dev_desc->hwpart);
-> > +	debug("Start Erasing %s hwpart[%u]...\n",
-> > +	      fb_flash_str, dev_desc->hwpart);
-> >
-> >  	blks = fb_mmc_blk_write(dev_desc, 0, dev_desc->lba, NULL);
-> >
-> >  	if (blks != dev_desc->lba) {
-> > -		pr_err("Failed to erase mmc hwpart[%u]\n", dev_desc->hwpart);
-> > +		pr_err("Failed to erase %s hwpart[%u]\n",
-> > +		       fb_flash_str, dev_desc->hwpart);
-> >  		return 1;
-> >  	}
-> >
-> > -	printf("........ erased %lu bytes from mmc hwpart[%u]\n",
-> > -	       dev_desc->lba * dev_desc->blksz, dev_desc->hwpart);
-> > +	printf("........ erased %lu bytes from %s hwpart[%u]\n",
-> > +	       dev_desc->lba * dev_desc->blksz, fb_flash_str,
-> > +	       dev_desc->hwpart);
-> >
-> >  	return 0;
-> >  }
-> > @@ -487,11 +500,10 @@ int fastboot_mmc_get_part_info(const char *part_name,
-> >
-> >  static struct blk_desc *fastboot_mmc_get_dev(char *response)
-> >  {
-> > -	struct blk_desc *ret = blk_get_dev("mmc",
-> > -					   CONFIG_FASTBOOT_FLASH_MMC_DEV);
-> > +	struct blk_desc *ret = blk_get_dev(fb_flash_str, fb_flash_dev);
-> >
-> >  	if (!ret || ret->type == DEV_TYPE_UNKNOWN) {
-> > -		pr_err("invalid mmc device\n");
-> > +		pr_err("invalid %s device\n", fb_flash_str);
->
-> 		pr_err("invalid "fb_flash_str" device\n"); -- and the same for all
-> other cases.
+Best regards,
 
-Not sure if this will be applicable if we move to dynamic mmc or
-ufs selection. Will see.
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
 
-> >  		fastboot_fail("invalid mmc device", response);
-> >  		return NULL;
-> >  	}
-> > @@ -644,10 +656,11 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
-> >   */
-> >  void fastboot_mmc_erase(const char *cmd, char *response)
-> >  {
-> > +#ifdef CONFIG_FASTBOOT_FLASH_MMC
-> >  	struct blk_desc *dev_desc;
-> >  	struct disk_partition info;
-> >  	lbaint_t blks, blks_start, blks_size, grp_size;
-> > -	struct mmc *mmc = find_mmc_device(CONFIG_FASTBOOT_FLASH_MMC_DEV);
-> > +	struct mmc *mmc = find_mmc_device(fb_flash_dev);
-> >
-> >  #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
-> >  	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT1_NAME) == 0) {
-> > @@ -706,5 +719,6 @@ void fastboot_mmc_erase(const char *cmd, char *response)
-> >
-> >  	printf("........ erased " LBAFU " bytes from '%s'\n",
-> >  	       blks_size * info.blksz, cmd);
-> > +#endif
-> >  	fastboot_okay(NULL, response);
->
-> I don't think it's really acceptable to just lie that we erase a
-> partition when in fact we did nothing at all.
->
-> This should respond with some error indicating that the command isn't
-> supported.
+> ---
+> v3:
+> - Fix build issue with MISC=n or ROCKCHIP_OTP=n
+> - Remove use of cpu-version
+> - Use log_debug() instead of debug()
+> v2:
+> - Update commit message
+> - Update code comments
+> - Drop generic-rk3568_defconfig change
+> ---
+>   arch/arm/dts/rk356x-u-boot.dtsi        |  4 ++
+>   arch/arm/mach-rockchip/rk3568/rk3568.c | 61 ++++++++++++++++++++++++++
+>   2 files changed, 65 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+> index 0a0943b462a9..24a976cf7e21 100644
+> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+> @@ -87,6 +87,10 @@
+>   	bootph-all;
+>   };
+>   
+> +&otp {
+> +	bootph-some-ram;
+> +};
+> +
+>   &pcfg_pull_none {
+>   	bootph-all;
+>   };
+> diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> index c9a32287e924..c2b96902d2dd 100644
+> --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
+> +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+> @@ -3,7 +3,10 @@
+>    * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+>    */
+>   
+> +#define LOG_CATEGORY LOGC_ARCH
+> +
+>   #include <dm.h>
+> +#include <misc.h>
+>   #include <asm/armv8/mmu.h>
+>   #include <asm/arch-rockchip/bootrom.h>
+>   #include <asm/arch-rockchip/grf_rk3568.h>
+> @@ -139,3 +142,61 @@ int arch_cpu_init(void)
+>   #endif
+>   	return 0;
+>   }
+> +
+> +#define RK3568_OTP_CPU_CODE_OFFSET		0x02
+> +#define RK3568_OTP_SPECIFICATION_OFFSET		0x07
+> +#define RK3568_OTP_PERFORMANCE_OFFSET		0x22
+> +
+> +int checkboard(void)
+> +{
+> +	u8 cpu_code[2], specification, package, performance;
+> +	struct udevice *dev;
+> +	char suffix[3];
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
+> +		return 0;
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+> +	if (ret) {
+> +		log_debug("Could not find otp device, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* cpu-code: SoC model, e.g. 0x35 0x66 or 0x35 0x68 */
+> +	ret = misc_read(dev, RK3568_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+> +	if (ret < 0) {
+> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* specification: SoC variant, e.g. 0x2 for RK3568B2 and 0xA for RK3568J */
+> +	ret = misc_read(dev, RK3568_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +	if (ret < 0) {
+> +		log_debug("Could not read specification, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +	/* package: likely SoC variant revision, 0x2 for RK3568B2 */
+> +	package = specification >> 5;
+> +	specification &= 0x1f;
+> +
+> +	/* performance: used to identify RK3566T SoC variant */
+> +	ret = misc_read(dev, RK3568_OTP_PERFORMANCE_OFFSET, &performance, 1);
+> +	if (ret < 0) {
+> +		log_debug("Could not read performance, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +	if (performance & 0x0f)
+> +		specification = 0x14; /* T-variant */
+> +
+> +	/* for RK3568J i.e. '@' + 0xA = 'J' */
+> +	suffix[0] = specification > 1 ? '@' + specification : '\0';
+> +	/* for RK3568B2 i.e. '0' + 0x2 = '2' */
+> +	suffix[1] = package > 1 ? '0' + package : '\0';
+> +	suffix[2] = '\0';
+> +
+> +	printf("SoC:   RK%02x%02x%s\n", cpu_code[0], cpu_code[1], suffix);
+> +
+> +	return 0;
+> +}
 
-Sure.
 
-Will post a new version shortly.
-
-Thanks for the feedback.
-
--Varada
