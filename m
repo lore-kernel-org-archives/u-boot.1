@@ -4,95 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11966D3B9B7
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 16:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93693D3B9B7
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 16:16:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94A2D895F1;
-	Tue, 26 Nov 2024 17:15:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 21E3F8972F;
+	Tue, 26 Nov 2024 17:16:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pAK/KJgn";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Oo/w/LMX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D78678972F; Tue, 26 Nov 2024 17:15:47 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 82F158972F; Tue, 26 Nov 2024 17:16:52 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3F8B895EC
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 17:15:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F8D895EC
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 17:16:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa55171d73cso403858466b.0
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 08:15:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732637745; x=1733242545; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5ecDo1OCslmCzjzNvc8m/o39zJzDGMbPZZEsI9miejg=;
- b=pAK/KJgndAw9Q9wpo87jGebSBhJXbQw482rwmi6RlKpK5DkciV+JKEFJ1hbOjDo5zo
- pU2MvQXi6xutlDwmd1AF7m659UnmVT1ATfPVQSt5T0sIfNIvn6o2nFjruhpzm38IOEgJ
- Hye24V7y82wBGFdMMrPgaMKkXhhyCaqCS1ajzMR77IeG0WOmJVNMC49jT8OEJX6GGvMJ
- xpF+MFuNRySZZlrNVKz9qg/PE13Bh8ktNnspnQYFGYzUtcO5DYP8SCTg77ko37q0WNxZ
- tUoZtYavycfidRhwa9U4ZzUZUj3UQveMVEiEIj53ZrgjOsFvuhbEi1CY0ivYZO9jafvL
- bq6A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 5450D3F215
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:16:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732637808;
+ bh=mRvirHOyJcgvkNCPR+hkfFBK0N7TrIxzrtJQ3zAuETQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Oo/w/LMX9JyQt0wifd5AXAzEueyDLIaCtUSkt+MHKI5ow8OIeWrCn25Wkv30VY7Dr
+ fhE1CtwfpdvXY+BM1JYdTC0KSLHV9LZC/33EOC7+/CeA3AlGDbMplBFR5iz6/HiqO8
+ 7zfiBYQCSNaRHMiEHIVYFE04+XB4prfZ+yU90yndL7e1FWBxlBi2rtS7DK3Ll+R6MI
+ 4RuMMK5s/2LUwM7XfRmnor2mLgNEFPuQHSPKxjQsKTlInVNKafp0XDJnBhsyoXhl5D
+ kE4xWBRJZ2LHlQ8o1Bh142N8t1tpaV4OdWVZc+XUSzNwW/9Q+b3Lpy++huAhAsFzwu
+ 96MlajP+ZEV5A==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-434a0bf9914so15786315e9.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 08:16:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732637745; x=1733242545;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1732637808; x=1733242608;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5ecDo1OCslmCzjzNvc8m/o39zJzDGMbPZZEsI9miejg=;
- b=dbbhwflzzVDDUbW3DKinJFlseAEUuGIY2HgfDgjwkU/fB4xq/MB3JXqRnmhd8AYkAH
- I3v9iniaaFItTU+m65pLB26KLSvzUhTk0vpFP05zTxN9bvdB/zM+s6jL1Ymj346ExDSS
- ewnxYw937f7e6gTJSeDZ+E6Y33M9hw0AN1EfltnHS+DWj6vn2wE7QcgKIzQUPKHCxNhe
- PaCBCd6LHGq3h7GBwaWL/0W/0KmJNzjVZo87Y+DWWSSLiL41jk02d94xyR5RaRSBSQ81
- GwAKAoQzWi/lE3pdkmddDwQvOOeLLMMKt00mjkwLw0Y2w64az7qsDIlpsgElw2liJAdE
- vHBA==
+ bh=mRvirHOyJcgvkNCPR+hkfFBK0N7TrIxzrtJQ3zAuETQ=;
+ b=pXMmaD2vZNbyM7vxHiyTLmGonUH1I0TD7fLQHafdTcJJf4n8A9UYlrtYwvEM5iR6+l
+ Q7vAQBz6bu9XsMft3j22b+yNl2wayCqfGTQKFmUUOo5PBXDB+FWYPVlvMfYDrlqm6FZ9
+ zeVrYu+Qe1rZRgQdobzwfkUyVVyyUWRyzKzF1IxEfT74HL6QjTImY9tvJDdYowRJUPTY
+ gRdEKh/TZV0o6ojBsg4ZUnW0BigJS5N0Q9PStUNjCteLdxkY7K11je5QuQohqUHdoXck
+ 6qtA1qPzvK8SlVvnhwvK+rsAM0gNpiZeR2UN386HHUUMivOTto1k6nUM8fZpKAl0EqVE
+ Y2BA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWS1yk8lEc6CxL2sf1sTfb38PzygF9tB+MnOzovzoe+Eutfjy9j6D+37BWetjwQDdmHv0W8AAk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6b5kCdRjR4qbl/51wq/tU4MkLfB01M0JAMTBbxILGQ1Nr8dRT
- pm939ppeqQyhHmStjoHEEbWKsZdZufGdoBsthWunNzFlgX69+/TKNcrWQh32mpk=
-X-Gm-Gg: ASbGncsB4ECcF5pRMtw9j3EFbif2DvK4wk41CCq3gcAqq/yG2jOo+ZuXhMyT9ui1LtP
- XCoHeCJD88tapuBH8RKK0sKNuYWKPxm/GIKsNN9h7Q3HadQ2qhmKj4CUPEK1LtnQFCRjgFcDAl2
- TPH51cXWQ/F2SkJ7M4cRpQDFq8nmG9F6rI3bcrSXATCGmI3B/iXVLmwgHAu+Qyc8zmqFBx3erhj
- rPIGYYrNxHG5WUit8BPET4I8BBwsk1GdYVxl1xlcsts4jSb+R3h6q2E5ibdP7plH9LJyfFbRezl
- 3JEhC+5OIxHUHFaZmxf41G4B446E2Obk
-X-Google-Smtp-Source: AGHT+IEzUTK5P08CSTfL3X+LizISDkgNChnoWoTjqwmQSd5Ybl2hbQk8ohLDcE9Q43P5EnYM9Lslhw==
-X-Received: by 2002:a17:907:2cc6:b0:a99:3db2:eb00 with SMTP id
- a640c23a62f3a-aa5649cf412mr425411266b.28.1732637745112; 
- Tue, 26 Nov 2024 08:15:45 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ AJvYcCW2XNozUOlcX5HVhfZqgRTUQlBqk5cbdrdRy25qWRxnTNGVWb3nQvRv6WjqEKEff8wF0GhUrC4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRxQIlCmOnWTajP80Xr5oEGb8wnaGM2aDZTXelgv/m3jwIyeXj
+ 33RtNocOJLtAovmopwPcxVdCYbDZ3P2k3SILbIZwiwk6+femALkWvhh4fi6Yvp1HXPnUZ5v9CnG
+ bluEL+htojrxiQeSgvQ54XvPRczRsD49HcSGzvvWyh0nKnzYl+ZiQ4gdzI9sM2ISEcXQ=
+X-Gm-Gg: ASbGncsXU90kFUw2zK+voZc8j0F/RCif6XyvfvaMgfWz7YRiQPcWjm1XRdehwzaQvs4
+ S6BNph7AqZNWKWY0AJiFmisMXnSGTRHYpE6SDS6bmzKbeXh8xT1UhooPI7MTla+b0ERnIM1WI9y
+ KuBePiwZz+l3AnT4dvyZeEE0v72G02IRapCukJiHFYLnnC10zA1WkgCzrEWum4IyS+t6SZ6UyhN
+ FkXJa7fpUnyQODKGnK2W9asobJL3mM2O56F+ZdGBF59Sqo4u8lSVVWXGz2fINL2yTG0CaPq8tDV
+ fTGm1Sesgh7vDSWLYaoCemvvgxTysL7Xh97nGHJ4
+X-Received: by 2002:a05:600c:1f85:b0:431:5ce4:bcf0 with SMTP id
+ 5b1f17b1804b1-433ce428100mr166011025e9.15.1732637807943; 
+ Tue, 26 Nov 2024 08:16:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGCrT0ymjpMTmlD2pWwbxy8jF/UG3x+nsh4KVcVZ5MVjkUVfiD+o3CMBoEKy0pbxhe70JyB7A==
+X-Received: by 2002:a05:600c:1f85:b0:431:5ce4:bcf0 with SMTP id
+ 5b1f17b1804b1-433ce428100mr166010645e9.15.1732637807601; 
+ Tue, 26 Nov 2024 08:16:47 -0800 (PST)
+Received: from ?IPV6:2a02:3035:6e0:b920:5c3d:9b8a:b7bb:8983?
+ ([2a02:3035:6e0:b920:5c3d:9b8a:b7bb:8983])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa54423e8e9sm368547166b.77.2024.11.26.08.15.44
+ ffacd0b85a97d-3825fafe207sm13743028f8f.36.2024.11.26.08.16.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Nov 2024 08:15:44 -0800 (PST)
-Message-ID: <a8cd7895-7968-4ef9-bc5f-dd36c04d9db8@linaro.org>
-Date: Tue, 26 Nov 2024 17:15:43 +0100
+ Tue, 26 Nov 2024 08:16:46 -0800 (PST)
+Message-ID: <5c80bb06-28fd-47c6-a249-55237a81d4a6@canonical.com>
+Date: Tue, 26 Nov 2024 17:16:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common/board_f: init malloc earlier
-Content-Language: en-US
+Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
 To: Simon Glass <sjg@chromium.org>
-Cc: Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20241124183832.2476928-1-caleb.connolly@linaro.org>
- <CAFLszThqtA_WBxOU-EnEvw956ZMN9KErx_C4gTzW_+p_tGu9qw@mail.gmail.com>
- <cd43db10-4939-4958-97f2-9a2046d82160@linaro.org>
- <CAFLszTgEhfbk4ug=JoU_jTgdzSkF-fXuqamGmPJHpdogwocbRA@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTgEhfbk4ug=JoU_jTgdzSkF-fXuqamGmPJHpdogwocbRA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+ <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
+ <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
+ <f7706753-d4bc-484a-bf5d-f4b85205ac8e@canonical.com>
+ <CAFLszTiCv3zdeg+1vNKY__iYmdZgVs4E=GXT6Y2DYCGQOi4RzA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTiCv3zdeg+1vNKY__iYmdZgVs4E=GXT6Y2DYCGQOi4RzA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,150 +127,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On 26/11/2024 16:38, Simon Glass wrote:
-> Hi Caleb,
+On 26.11.24 16:38, Simon Glass wrote:
+> Hi Heinrich,
 > 
-> On Tue, 26 Nov 2024 at 05:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> On Tue, 26 Nov 2024 at 00:42, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
 >>
->> Hi Simon,
->>
->> On 26/11/2024 01:32, Simon Glass wrote:
->>> Hi Caleb,
+>> On 11/26/24 01:32, Simon Glass wrote:
+>>> Hi Heinrich,
 >>>
->>> On Sun, 24 Nov 2024 at 11:38, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>> On Sat, 23 Nov 2024 at 14:46, Heinrich Schuchardt
+>>> <heinrich.schuchardt@canonical.com> wrote:
 >>>>
->>>> Currently the early malloc initialisation is done partially in
->>>> board_init_f_init_reserve() (on arm64 at least), which configures
->>>> gd->malloc_base. But it isn't actually usable until initf_malloc() is
->>>> called which doesn't happen until after fdtdec_setup().
+>>>> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
+>>>> a file and boot it if autostart=yes.
 >>>>
->>>> This causes problems in a few scenarios:
->>>>
->>>> 1. when using MULTI_DTB_FIT as this needs a working malloc (especially
->>>>    for compressed FIT).
+>>>> Instead just check that there is a network device.
 >>>
->>> Hmmm, how does this work today?
+>>> If you look at dhcp_run() you will see an 'autoload' parameter. This
+>>> is 'false' in this code, so it never loads a file.
 >>
->> I honestly have no idea, I assume boards that make use of it do some
->> custom board_f.
+>> This is not the complete truth.
+>>
+>> If $autostart=true and CONFIG_NET=y, dhcp_run(false) still tries to load
+>> a file.
 > 
-> OK.
+> Here is the code:
 > 
->>>
->>>> 2. Some platforms may need to allocate memory as part of memory map
->>>>    initialisation (e.g. Qualcomm will need this to parse the memory map
->>>>    from SMEM).
->>>
->>> That really needs to be tidied up. When does this fixup need to be
->>> done? I imagine it is somewhere prior to setup_dest_addr() ? Perhaps
->>
->> It's necessary in order to figure out gd->ram_base/ram_size. We do it in
->> board_fdt_blob_setup() so that we can support another use-case where
->> U-Boot has an internal FDT (which it should use) but the memory layout
->> is provided via an external FDT which is unavailable (although this
->> usecase isn't enabled upstream yet).
->>
->>> we could introduce an event to do 'memory map' stuff?
->>
->> We could, but considering that on most platforms the pre-relocation
->> malloc is fixed at build time and at a known location relative to U-Boot
->> there is no reason for us to arbitrary decide that some codepaths at the
->> start of board_f aren't allowed to use malloc().
->>
->> Just moving the malloc initialization earlier ensures malloc() is
->> consistently available and greatly simplifies things.
+> int dhcp_run(ulong addr, const char *fname, bool autoload)
+> {
+> char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
+> struct cmd_tbl cmdtp = {}; /* dummy */
+> char file_addr[17];
+> int old_autoload;
+> int ret, result;
 > 
-> I'd like to see a more generic solution to this problem...I think we
-> discussed this before?
+> log_debug("addr=%lx, fname=%s, autoload=%d\n", addr, fname, autoload);
+> old_autoload = env_get_yesno("autoload");
+> ret = env_set("autoload", autoload ? "y" : "n");
+> if (ret)
+> return log_msg_ret("en1", -EINVAL);
+> 
+> It respects the autoload parameter. If there is a bug in that, we
+> should fix it, but it seems to work OK to me. Please fix your commit
+> message.
 
-I think so. I'm not sure I follow with "more generic solution"?
-> 
-> To my eye it looks like if we called an event in setup_dest_addr() we
-> could allow ram_base to be set.
+The cited code only sets "autoload". It does not adjust "autostart".
 
-Right, it's possible/likely that we could clean up how mach-snapdragon
-currently does memory parsing.
+As I have shown below this leads to trying to boot via DHCP.
 
-I do think this patch would still be justified even if we ignore the
-Qualcomm case.
+This is exactly what the commit message says: "load a file and boot it 
+if autostart=yes".
+
 > 
 >>
->> fwiw, I had another variation of this patch which dropped initf_malloc()
->> entirely and just set up gd->malloc_limit/malloc_ptr in
->> board_init_f_init_reserve() since that's where we set malloc_base
->> anyways. But after digging some more there seem to be quite a few other
->> entrypoints into U-Boot that don't go through
->> board_init_f_init_reserve() (e.g. sandbox, EFI app) and it seemed more
->> error prone to duplicate the implementation there.
+>> In all cases dhcp_run() wastes boot time.
 > 
-> Fair enough.
+> Yes, it uses time. With bootstd the hunters are only called as needed.
+> In your case you are calling all of them at once.
 > 
-> One more thing I notice in your board_fdt_blob_setup() implementation
-> in arch/arm/mach-snapdragon/board.c :
-> 
-> It seems to be using either an built-in or external devicetree. It
-> seems that we should show this in dm_announce(), i.e. with the call to
-> fdtdec_get_srcname() ?
+> Is there a way to just call hunters which relate to block devices, perhaps?
 
-Yes, the way it's implemented currently assumes that if CONFIG_OF_BOARD
-is set that we'd never use the built-in DT and mach-snapdragon doesn't
-fit this assumption. It's not a high priority but for sure something I'd
-like to see fixed.
+We need to probe network to provide the simple network protocol 
+(lib/efi_loader/efi_net.c) but we don't need to execute DHCP.
 
-Kind regards,
+We also need the correct device-tree provided by the extension hunter.
+
+Best regards
+
+Heinrich
+
+> 
+>>
+>> CONFIG_NET=y
+>> => dhcp_run
+>> BOOTP broadcast 1
+>> BOOTP broadcast 2
+>> BOOTP broadcast 3
+>> DHCP client bound to address 10.0.2.15 (1004 ms)
+>>
+>> => setenv autostart true
+>> => dhcp run
+>> BOOTP broadcast 1
+>> BOOTP broadcast 2
+>> BOOTP broadcast 3
+>> DHCP client bound to address 10.0.2.15 (1002 ms)
+>> Using e1000#0 device
+>> TFTP from server 10.0.2.2; our IP address is 10.0.2.15
+>> Filename 'run'.
+>> Load address: 0x40200000
+>> Loading: *
+>> TFTP error: 'File not found' (1)
+>> Not retrying...
+>>
+>> CONFIG_NET_LWIP=y
+>> => dhcp_run
+>> DHCP client bound to address 10.0.2.15 (1007 ms)
+>>
+>> Where command dhcp_run is provided by:
+>>
+>> #include <command.h>
+>> #include <env.h>
+>> #include <net-common.h>
+>> #include <vsprintf.h>
+>>
+>> static int do_dhcp_run(struct cmd_tbl *cmdtp, int flag, int argc,
+>>                     char *const argv[])
+>> {
+>>           ulong addr = hextoul(env_get("loadaddr"), NULL);
+>>
+>>           dhcp_run(addr, NULL, false);
+>>
+>>           return 0;
+>> }
+>>
+>> U_BOOT_CMD(
+>>           dhcp_run,       CONFIG_SYS_MAXARGS,     1,      do_dhcp_run,
+>>           "dhcp_run",
+>>           NULL
+>> );
+> 
+> See above
+> 
+> [..]
 > 
 > Regards,
 > Simon
-> 
-> 
->>
->> Kind regards
->>
->>>
->>> Regards,
->>> Simon
->>>
->>>
->>>>
->>>> Move the initf_malloc() call earlier so that malloc is available during
->>>> fdtdec_setup().
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>  common/board_f.c | 2 +-
->>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/common/board_f.c b/common/board_f.c
->>>> index 98dc2591e1d0..bddfa6b992b9 100644
->>>> --- a/common/board_f.c
->>>> +++ b/common/board_f.c
->>>> @@ -867,15 +867,15 @@ static int initf_upl(void)
->>>>  }
->>>>
->>>>  static const init_fnc_t init_sequence_f[] = {
->>>>         setup_mon_len,
->>>> +       initf_malloc,
->>>>  #ifdef CONFIG_OF_CONTROL
->>>>         fdtdec_setup,
->>>>  #endif
->>>>  #ifdef CONFIG_TRACE_EARLY
->>>>         trace_early_init,
->>>>  #endif
->>>> -       initf_malloc,
->>>>         initf_upl,
->>>>         log_init,
->>>>         initf_bootstage,        /* uses its own timer, so does not need DM */
->>>>         event_init,
->>>> --
->>>> 2.47.0
->>>>
->>
->> --
->> // Caleb (they/them)
->>
-
--- 
-// Caleb (they/them)
 
