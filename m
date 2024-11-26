@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB4FD3B98E
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:23:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E15BD3B98F
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F0E289734;
-	Tue, 26 Nov 2024 14:23:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E39B889700;
+	Tue, 26 Nov 2024 14:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="u16uM858";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="wVFhjfdG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDB4B89C65; Tue, 26 Nov 2024 14:23:19 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 5FB2D89680; Tue, 26 Nov 2024 14:26:48 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DC2589734
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:23:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC1358973E
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:26:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-37ed3bd6114so3340324f8f.2
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 05:23:17 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43497839b80so23510965e9.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 05:26:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732627397; x=1733232197;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732627604; x=1733232404;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to;
- bh=FA7eBmx1GsENcEiAvTdrEQEA7YfUtQBvAZyrMBtTybc=;
- b=u16uM858i/wH2UVp99HNJbLYflMBGriLUjycrbov6RTIjSenutluQBW4+ikadiAB4T
- 9ZUAHqxHhBrt6upGp+Gm/v6X1edtT9qEjXnPA+eti4uURpSdCZ9SVWU4FYhCz3mQ9xR+
- 9lunkW3H7zAVHD8449zdVIOE/CL1lrcH4gjJuyhs/jZSN2MVBlbuCShwORfFNqojJl7r
- c0MzIgIHPle5Cqca+mZOvMPNEupS9bP+OSULKAQ54Vm+X2K9ZkcpKewmuO1JetkLFgIo
- YryYlCtC2nlTRN0nEN5Qb8rr/GdIYsyoqULmwPoM9slPBNrRp/hFKtrcMx6WbSCsHhLt
- 62hw==
+ bh=O92NB/UMO/Jh+pdNDJvs2hDdW61m5uHTYQMYcI4vG0A=;
+ b=wVFhjfdGHAKF1gsZIOfaGGj5SOxBobrJ3r/D7sAD+FlvIwL6ku3C/3ya1yQltA9xjH
+ NbAARENPw7RVI3IKsnZiLDRQigxtAl0fkiFRlLB67//uG8vPVSTBYG0F3MXgre9UBtH7
+ hkTgyQYG9mB/zPGVZZMUsh1AO0mHgeZBINJXY/EEBTrDq4FlQQE/2YpwdQgNu9ZmKFGl
+ ZMhcHnQnH44tdTubB9MPW+8Zm+LCuDcgJDzcbe7jqxk08Cc09CxdVh6R2xjD7PSC/CpZ
+ Gvm/GlBeb3CL+fg9NRpbTVONWerMPOuBGSNlRMQ4x552XdMiEV2rDxDkXpb+nFbm6MX+
+ 1O3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732627397; x=1733232197;
+ d=1e100.net; s=20230601; t=1732627604; x=1733232404;
  h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=FA7eBmx1GsENcEiAvTdrEQEA7YfUtQBvAZyrMBtTybc=;
- b=VDcL3dx0tJY4G5PCMtCdanYTzF4p1vz9PWvfZBwleuNXaLdieuNTSYC6QGH+EkuYfv
- P6xRSgtfQuK/NsCrsNgKjCOaW8RbjM1/QgV8UXdUD+E6M1QFJ+O48PbIyA3RPX7ub6bN
- LGfhWNIsZaAcyf5cLKXUK+rNhr367Tt1mpYHI31NbOTaXqfxngdxQBhl+Nplteao1MTz
- LOLROYkkXR80Unrwf85f/jK5TbhJGJ02NMcAdIcBVprP3HPzY+Qk+TzGQADYUfbWVhyg
- agunpjHjiu5VkHdkRaL+oCjP5PswLBbh4TXX2IN8S49qHjCoNGogq/F/4UZPcOSM+2wS
- pd2g==
+ bh=O92NB/UMO/Jh+pdNDJvs2hDdW61m5uHTYQMYcI4vG0A=;
+ b=BCE3jiQ0ZV4RMPT9bS5guctd9k6bUVnLvD8K82hQeZCeqeN4uYgUlUimjn1C3lDTaL
+ EIcY7VmaiAGbCeutdC6/G0BKiVW1kKQH5W0RAbGraxvoOWKOAekklGNmdM9AAyQPEPur
+ FPHAgiKWWyjG16QhBBW9Zcf00RFaJL3CrRfurB8xz0fUWUsfDhnfzRThbfAjOHrAnifn
+ UeoK8bPt3G9B8ktl2QMfribCuQkXV6zxKVsx4UHLfnj4SoO4IR5cZivamJz03lRsSlfp
+ ZpgKTPIkur2a12CrUGNk3GhrnL2515re/bO8fbafnkPDyRno711xOaWLP49pR8iHf0WD
+ 4r7Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3lQLRi5Gm/3KnFl3drSofklu3HkEblDEQYSN3eWKFrY3JKH7OQpLMhHbuc4n2Ox+tS5DbDX0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7Xk4PYxik6MYy5dwlZfT42zTWg4nODgwGk6pt+nuVEn7bufIx
- 3o1UAwcQznOLOubqNdYjJ1vSKWpl9uuCVZXL6g7gKlmSW5dgGryQ+HqLzYUXoCE=
-X-Gm-Gg: ASbGncvumPPTET4mwVr1kF6DsLmqf6zcPB/p76j5BE+759znISFesZlkvIG9WewiPCz
- w9Hmr8H8ILYRwrlru69WxIyMQlWGttIo0nR6wdzC53hh4fau06jvWDJVNOmF6tlsEY0CzrEUYOG
- BznW00vkyYXw1qGm2C4u8Lcf9rnQODm326h2/MShMW1adFvBPLka+sUig4YIlEvX24g7FTlgtUZ
- IhIVkiBKC7cGyTB5hBlUyMX04RzPajDA2y/ngIWdy8aZItAuOkVmA==
-X-Google-Smtp-Source: AGHT+IE3czjU6zQOuASJRI6LCJFZbdRAsO6XLM73VaMCYvex123KRZYo4wcjKPzblw0KANK4MYx5LA==
-X-Received: by 2002:a05:6000:2a5:b0:382:4faa:767 with SMTP id
- ffacd0b85a97d-38260bcc47bmr15302112f8f.38.1732627396821; 
- Tue, 26 Nov 2024 05:23:16 -0800 (PST)
+ AJvYcCWCuCYQ2QZ1v+3+tQSxc2J1oyCS94eTF2wUiLn+s/M3VTVPfe3sEIxlENoM63hpQEE/+vmVaTE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDHVVv0+LKXGVZbKOb3yLEqfIJZw+GUq+helUxYTfBuO7Z6gW4
+ 7AiXno0Tb885EdzKYg8BVX+dCk//nBQ7hQqJdGMpoEeBjEWLdMrfNRDK8N2GaOw=
+X-Gm-Gg: ASbGncu2loUOl83FKNj3w1IKq2peTiI11CjyArdFK1MfiQxwiMK1nea0e/WDxBIQZ2R
+ I3UfzuFWP+fjSJNsJJlMX0zItzJnNc6MyE5y84qjJNItgrrgdhF63HEFnzl4HGqNehDxD84/pvq
+ k6FHA0oyxtRub8/lwtWfvv+du9Ybu1vtJP27kxF51SSmLnJa0TVj28Oa5oO/srDlQzz1hY1B7x4
+ uSK1Y6sVHMnflDZ/r8S+YZPE/Wqj+hM9Xor1IPGb9D9NCgfhxTHKA==
+X-Google-Smtp-Source: AGHT+IEl+iN2Kivah1mCQs/1LyUlmtvC/Qd4EKFLUrFl29QRYaFTYtfaF1YC5QLP+lJ5Tz/gSSmtJg==
+X-Received: by 2002:a05:600c:4ed0:b0:431:55c1:f440 with SMTP id
+ 5b1f17b1804b1-433ce4d4ad0mr158490285e9.30.1732627604254; 
+ Tue, 26 Nov 2024 05:26:44 -0800 (PST)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fbedf63sm13361897f8f.102.2024.11.26.05.23.15
+ 5b1f17b1804b1-433b463abb4sm235438755e9.31.2024.11.26.05.26.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 05:23:16 -0800 (PST)
+ Tue, 26 Nov 2024 05:26:43 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Caleb Connolly
- <caleb.connolly@linaro.org>, Ion Agorria <ion@agorria.com>, Svyatoslav
- Ryhel <clamor95@gmail.com>
-Subject: [GIT PULL] Please pull u-boot-dfu-20241126
-Date: Tue, 26 Nov 2024 14:23:13 +0100
-Message-ID: <87serep1ry.fsf@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io
+Cc: Lukasz Majewski <lukma@denx.de>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>
+Subject: [GIT PULL] Please pull u-boot-dfu-next-20241126
+Date: Tue, 26 Nov 2024 14:26:41 +0100
+Message-ID: <87plmip1m6.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -96,49 +97,68 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-Please find some fixes for master:
+Please find some new developments for next:
 
-Fastboot:
-- handle unknown partition type as "raw"
-
-Usb gadget:
-- Fix ci_udc gadget driver for Tegra 2 devices by not using USBADRA
+Android:
+- bootstd: Implement bootimage v2 support
+- bootstd: Support non-A/B in bootmeth_android
+- Migrate VIM3 and VIM3L to use bootmeth_android
+- bootstd: Additional test for bootimage v2
+- bootstd: Optimize load time when reading partitions
 
 CI job:
-- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23572
+- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23573
 
 Thanks,
 Mattijs
 
-The following changes since commit 0e6432e19f9c812b4986ca7fd8e6db9fd2c199d3:
+The following changes since commit 48380f9b2a12e3fc6339d6af5a154bded769d911:
 
-  Merge patch series "Fix boot failure due to misaligned DMA buffer" (2024-11-18 08:24:06 -0600)
+  Merge tag 'v2025.01-rc3' into next (2024-11-25 17:34:08 -0600)
 
 are available in the Git repository at:
 
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20241126
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-next-20241126
 
-for you to fetch changes up to 35d967f5a8219adc47628247a98c302b1870313e:
+for you to fetch changes up to abadcda24b100b8eb0f138085cca6595518cec85:
 
-  usb: ci_udc: don't use "advance" feature when setting address (2024-11-26 09:56:03 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20241126
-
-Fastboot:
-- handle unknown partition type as "raw"
-
-Usb gadget:
-- Fix ci_udc gadget driver for Tegra 2 devices by not using USBADRA
+  bootstd: android: don't read whole partition sizes (2024-11-26 10:04:40 +0100)
 
 ----------------------------------------------------------------
-Caleb Connolly (1):
-      fastboot: properly handle unknown partition type
+u-boot-dfu-next-20241126
 
-Ion Agorria (1):
-      usb: ci_udc: don't use "advance" feature when setting address
+Android:
+- bootstd: Implement bootimage v2 support
+- bootstd: Support non-A/B in bootmeth_android
+- Migrate VIM3 and VIM3L to use bootmeth_android
+- bootstd: Additional test for bootimage v2
+- bootstd: Optimize load time when reading partitions
 
- drivers/fastboot/fb_getvar.c |  3 ++-
- drivers/usb/gadget/ci_udc.c  | 24 +++++++++++++++++++++++-
- drivers/usb/gadget/ci_udc.h  |  1 +
- 3 files changed, 26 insertions(+), 2 deletions(-)
+----------------------------------------------------------------
+Guillaume La Roque (5):
+      bootstd: android: add support of bootimage v2
+      bootstd: android: add non-A/B image support
+      configs: khadas-vim3l_android{_ab}: move on bootmeth android
+      configs: khadas-vim3_android{_ab}: move on bootmeth android
+      bootstd: Add test for Android boot image v2
+
+Julien Masson (1):
+      bootstd: android: don't read whole partition sizes
+
+ arch/sandbox/dts/test.dts                 |  10 ++-
+ boot/Kconfig                              |   1 -
+ boot/bootmeth_android.c                   | 104 ++++++++++++++++++++++--------
+ boot/image-android.c                      |  45 +++++++++++++
+ configs/am62x_a53_android.config          |   1 +
+ configs/khadas-vim3_android_ab_defconfig  |   7 +-
+ configs/khadas-vim3_android_defconfig     |   7 +-
+ configs/khadas-vim3l_android_ab_defconfig |   7 +-
+ configs/khadas-vim3l_android_defconfig    |   7 +-
+ configs/sandbox_defconfig                 |   1 +
+ include/configs/khadas-vim3_android.h     |  25 +++++--
+ include/configs/khadas-vim3l_android.h    |  25 +++++--
+ include/configs/meson64_android.h         |   6 --
+ include/image.h                           |  24 +++++++
+ test/boot/bootflow.c                      |  29 ++++++++-
+ test/py/tests/test_ut.py                  |  49 ++++++++++++++
+ 16 files changed, 297 insertions(+), 51 deletions(-)
