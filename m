@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F88AD6555F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 21:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F338DD66B85
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 22:33:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64BE18999F;
-	Tue, 26 Nov 2024 22:46:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1ACC689612;
+	Tue, 26 Nov 2024 23:33:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MAmIXaCf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yns2oowY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E91F489C73; Tue, 26 Nov 2024 22:46:29 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 3C8BB894F4; Tue, 26 Nov 2024 23:33:41 +0100 (CET)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 931DD8972A
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 22:46:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7CB489266
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 23:33:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-6ee9d50efaaso59177787b3.1
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 13:46:27 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-297078d8eaeso4332339fac.1
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:33:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732657586; x=1733262386; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iRKtyW18geUlBWd0FV+bBIvb8dkV1BsBM9oM0VbHXE8=;
- b=MAmIXaCf5OP5yJTg2h4gBuO0R3jXJFGjga6VuH4hfbhdHJt7azkC6sZIy5TCH4Cx+E
- 8dzsu5UqKk5xV7rt0jkEHgS8FXDQINFA0UXTF5xBDB/EsPj5iOYvrbv+qd+KszQDvi3+
- 2b4sAfS0LVeNHq1o17R0AuvGrbn/nUVNM7ptx/a1HWKvH4ApNBcCX6u7HIattRuZb3mf
- CkLbFpxJpur87J5DnNk6cfjKkZMJLKe3fxwDUzdT82B34zoYA2FMjX9mGpdlliXtmPmf
- BsbDWTuiE12meoDKsR3inIYWcqomhyC1eHKcusDp34l96GiF9QEIABb7an/fyg7kyMtJ
- PnYQ==
+ d=konsulko.com; s=google; t=1732660416; x=1733265216; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Eek4nEbSgnbMZsavauArj0ASt5znWdCQWCzVBJdjl4k=;
+ b=Yns2oowYGbM+nr9M70aFDFUX5ZYeP2rodrzYrkeS7OoM+3g6GJvNYjoE6t2CEz4HjY
+ hNvX0tEL6cIG0LHGkGOqiSmPvtFbyKuO5XFO/uLueA20pUWLOihdxjJTNdUrXAAgX/m/
+ 62w54ehJmcuzavWh87sWhmE0NjA8yl4eGhK9o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732657586; x=1733262386;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iRKtyW18geUlBWd0FV+bBIvb8dkV1BsBM9oM0VbHXE8=;
- b=TsyIHL2MhSiALwVf2QkSPGuGXGHYio5p4+kXRlL5AIRShAZkrG9TTB6gQtohhF8ulv
- 8PkeEE67BlzA8wpVxTY2l8YG/4bciYDNxmEuYnJwxlwc078M7NYqoenQR2d+P7UZgb6O
- L3+hMiYyRoGUC5T266ONXdio0/9pJ3X+dK5kzkYUTa9LCDH5+wMA3rPm6BUxbN8kgmty
- jl8YnTngSqVFxiX7akZjFmSHGMwCN+3mzFpx7bA0+uy6xKeJ/+4E+pkQMfriupXG0eTQ
- nwVf85Fq0cFL9DKBtC8T9JhDuaYUbP51DO9B/D8IyxU5ORzfrZ5ZzJiEvHHsrK2BK9fr
- RX1A==
-X-Gm-Message-State: AOJu0Yxk69pkg7a9+rV65esxLY6CdPnHkFSE7ht9ZP88jmUe3AwKY68z
- 8+F71RcMJ6G+4mSM96PHQOWNkhY8JJM04SqaCqAbHD7cFdvaBpRaa3H/dmGtHiLhFh3YD5cp/Un
- gpM0KFT6LTHj1w7wOI8j+Ba2NrBLjrLkC
-X-Gm-Gg: ASbGncsTrhJrSSVobqIDgkzzYIZyKXwxUBPa0vgrgUCdWp60jzC4bR+Viv8eenJTb3C
- JSM4BfH1jH8IExfKHPNFkQ4J7WEXgsQ==
-X-Google-Smtp-Source: AGHT+IFS6tvm4FuYG1IpjstlCTzT+U5z/AxjOxelALH6dmRPOEQxTLi9iVMneNIJvuTyyaLZkmzvpXypKz4ojvpM4E0=
-X-Received: by 2002:a05:690c:7009:b0:6ea:edab:de1b with SMTP id
- 00721157ae682-6ef371e7b67mr12826707b3.2.1732657586317; Tue, 26 Nov 2024
- 13:46:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732660416; x=1733265216;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Eek4nEbSgnbMZsavauArj0ASt5znWdCQWCzVBJdjl4k=;
+ b=ILtckaUrqUwJZ5+XB5MuMShfeeuRxjgObTrpx9ljh21CaozZlPnnje0FCWJVeOHrma
+ rp+gpO1xtcR5ZtSQpd98gepqZyUSl87WBbVaSG7w1QFpM1ArzROgZqq6D9RwHTewpF7g
+ gqECnCTfb4KdYBF+WjXwwp5MljhgcK/WatRZdy+ejwqddpAcRwfRDQwG7/BRZ9JvudfW
+ Zi0zXMusQhb5SNGn1doBbgCQcgBs/OC3+rEHNrHPaBGcWid5sXMBuCsLkxErbWkjkOM/
+ ETuUIyftGbEty6LZTR6loCbAEklMZ2cmtb7KQYfciQGW+RNLNTNtml1uD4WMhrRuqjZI
+ pRZw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWeLX7msakvkQDHS+QMAZpSE2WWmeDq57rVqfmPeHbIV3eW/8HM5NUR8DA0okiDBjn51jnzZYI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyoAO5820YBgJv3kWvFwtfh8pgGdLEZH/BgXWTcnP25NIBLG2ta
+ 8vCEM9SpzGJp6WH1M/RGmHBwMetbCfx9+W6Gy1aRwnbPsRspvyg6JY89cyphGMg=
+X-Gm-Gg: ASbGncsXsFZt5utzo1lLHpzAi/BmYPyy773BSPrTkGP3roN1tLpFenZyohVG9cADXxX
+ v7cUZrC6kavsHO9MHwWpOSdzQcfGFBUlMoIlPGL7pl3QilpqLQbzC+hTcT406Co+3uX7lwnBYSm
+ LO1inCFH2PYCiWcPoRUzgoJMTlznyLl+ItXayMaSOl79M3M4fI5G6omuhhrM+ylqQF3rSimbhch
+ nuT/tfO9XOM6GxJ5LxRujxZloM/MYm7Dvv1uDO0ILGdlZwNPg==
+X-Google-Smtp-Source: AGHT+IHOloh3V3C37rrUoqMNJYXwwtqL6By8uPa6UkJ+657lYFSOWM0pKaODYGw1FXI8+gh1T15yPA==
+X-Received: by 2002:a05:6359:5fac:b0:1b8:3435:5999 with SMTP id
+ e5c5f4694b2df-1cab15d44edmr124578955d.14.1732660416645; 
+ Tue, 26 Nov 2024 14:33:36 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-466a43545besm16197931cf.83.2024.11.26.14.33.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Nov 2024 14:33:35 -0800 (PST)
+Date: Tue, 26 Nov 2024 16:33:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
+Message-ID: <20241126223332.GV3600562@bill-the-cat>
+References: <20241125204456.1525752-1-sjg@chromium.org>
+ <20241125204456.1525752-6-sjg@chromium.org>
+ <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
+ <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
+ <20241126155508.GR3600562@bill-the-cat>
+ <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAFOYHZCwXSChH_rH251cUp-bgwai+e8xrOuqxepX9Dur2wGTJg@mail.gmail.com>
- <20241123024048.GK3600562@bill-the-cat>
- <CAFOYHZCuqSDWOUBGQ5_PAaLW229fwyk9vF47vC+rq_TW5J-qjg@mail.gmail.com>
-In-Reply-To: <CAFOYHZCuqSDWOUBGQ5_PAaLW229fwyk9vF47vC+rq_TW5J-qjg@mail.gmail.com>
-From: Chris Packham <judge.packham@gmail.com>
-Date: Wed, 27 Nov 2024 10:46:14 +1300
-Message-ID: <CAFOYHZDSw3_3t-AMF2M8DcoQ6XkcEjDCGpEiCJaQrB6MOgpnHw@mail.gmail.com>
-Subject: Re: Odd error with cn9130, asix88179 and xhci
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BJywYHbw+qriKrcA"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,121 +106,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 25, 2024 at 1:09=E2=80=AFPM Chris Packham <judge.packham@gmail.=
-com> wrote:
->
-> On Sat, Nov 23, 2024 at 3:40=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Wed, Nov 20, 2024 at 11:29:43AM +1300, Chris Packham wrote:
-> > > Hi U-Boot,
-> > >
-> > > We've hit a weird problem at $dayjob with a board using the Marvell
-> > > CN9130 SoC and using the asix88179 USB-Eth adapter.
-> > >
-> > > The problem is after enabling and unrelated feature in u-boot the
-> > > asix88179 fails to receive data (I can confirm that the link partner
-> > > does see packets in the transmit direction)
-> > >
-> > > =3D> version
-> > > U-Boot 2022.01 (Nov 08 2024 - 09:45:44 +0000)
-> > > =3D> usb start
-> > > starting USB...
-> > > Bus usb3@500000: Register 2000120 NbrPorts 2
-> > > Starting the controller
-> > > USB XHCI 1.00
-> > > scanning bus usb3@500000 for devices... 2 USB Device(s) found
-> > >        scanning usb for storage devices... 0 Storage Device(s) found
-> > > =3D> ping ${serverip}
-> > > Waiting for Ethernet connection... unable to connect.
-> > > Reset Ethernet Device
-> > > Waiting for Ethernet connection... done.
-> > > Using ax88179_eth device
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > > Rx: failed to receive: -5
-> > >
-> > > Abort
-> > > ping failed; host 10.37.233.65 is not alive
-> > > =3D> <INTERRUPT>
-> > >
-> > > Debugging a little we can see that the -EIO is actually because
-> > > xhci_bulk_tx() hits a timeout from xhci_wait_for_event().
-> > >
-> > > We think this is triggered by the u-boot image size crossing some
-> > > boundary (the problem seems to start when .bss_end crosses
-> > > 0x00000000000f0000) although I've so far been unable to find
-> > > specifically why that might be. As far as I can tell u-boot is being
-> > > built relocatably and nothing is overlapping. I also considered that
-> > > ATF might be preventing access to something but so far I see no
-> > > evidence of this.
-> > >
-> > > If I turn off some features to reduce the build size the problem goes
-> > > away. That is actually how we've avoided the immediate issue, althoug=
-h
-> > > that means the problem will likely come back and an inopportune time.
-> > >
-> > > Does anyone have any ideas as to what the true root cause might be?
-> > > I'm a bit stumped.
-> >
-> > Hummmm. Since you note it seems to be when a threshold is crossed in BS=
-S
-> > size, add something to the BSS of a variable size that you control, and
-> > after confirming that you can replicate the problem this way, grow it
-> > just past the limit and compare u-boot.map files in the works/fails
-> > cases to see just what's being moved around?
->
-> So I tried a little experiment
->
-> diff --git a/net/net.c b/net/net.c
-> index b003b84b3537..a6def9785133 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -180,6 +180,10 @@ u32 net_boot_file_size;
->  /* Boot file size in blocks as reported by the DHCP server */
->  u32 net_boot_file_expected_size_in_blocks;
->
-> +#define DUMMY_SIZE (1 << 11)
-> +
-> +int dummy[DUMMY_SIZE] =3D {0};
-> +
->  static uchar net_pkt_buf[(PKTBUFSRX+1) * PKTSIZE_ALIGN + PKTALIGN];
->  /* Receive packets */
->  uchar *net_rx_packets[PKTBUFSRX];
-> @@ -211,6 +215,7 @@ int __maybe_unused net_busy_flag;
->  static int on_ipaddr(const char *name, const char *value, enum env_op op=
-,
->         int flags)
->  {
-> +       dummy[DUMMY_SIZE - 1] =3D -1;
->         if (flags & H_PROGRAMMATIC)
->                 return 0;
->
->
-> If I make DUMMY_SIZE (1 << 10) I don't see the problem. With
-> DUMMY_SIZE (1 << 11) I can see the problem. If I make it DUMMY_SIZE (1
-> << 14) then the problem goes away again.
->
-> The obvious things that are moving are net_rx_packet,
-> net_rx_packet_len and net_rx_packets. I'll see if I can narrow things
-> down to specifically which of these is being problematic.
->
 
-The plot thickens on this one. First I found that even if I moved my
-dummy block after the symbols I suspected the failure would remain. I
-kept narrowing things down and found that my dummy array needed to
-have a length between 0x800 and 0x8e0 to cause an issue. As I was
-trying to debug why this was, I found that I could fix a failing
-system with a `usb reset`. I'm now suspecting there's something in the
-mix that is relying on uninitialised memory (or perhaps the
-calculation for clearing out .bss is slightly off).
+--BJywYHbw+qriKrcA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de=
+> wrote:
+> > > >
+> > > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > > Exported functions should be documented in the header file, not t=
+he
+> > > > > implementation. We tend to make such updates on a piecemeal basis=
+ to
+> > > > > avoid a 'flag day'. Move some comments related to memory allocati=
+on to
+> > > > > follow the convention.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > Please, have a look at this line in doc/
+> > > >
+> > > > doc/api/efi.rst:78:
+> > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
+> > >
+> > > Hmm, we should not add C files as then we end up with all sorts of
+> > > internal functions, like checksum(). The help is a bit of a mess on
+> > > that page IMO and it could use an index at the top or side.
+> >
+> > Why? Looking at the linux kernel (where we borrow this framework from
+> > and lots of developers expect to follow that style) it's extremely
+> > common to kernel-doc C files. I don't see why documenting internal
+> > functions (which should be clear as being internal) is a problem.
+>=20
+> It depends what you mean by docs. U-Boot puts the documentation for
+> exported functions in header files.
+
+I'm sorry, that's a circular definition. And no, there is not a hard and
+fast rule that we only put kernel-doc style comments in header files
+(which are consumed by other files and tooling to generate
+documentation).
+
+> Putting docs in C files clutters the docs with internal
+> implementations, when most people just want to see the API. The way
+> U-Boot does things, it is easy to see the internal (implementation)
+> docs by looking at the C code and the external functions by looking at
+> the header files.
+
+Or it makes things harder to understand because the human readable
+documentation for a given function is separate from the file the
+implements the function. This is possibly why in the linux kernel, where
+we borrow "kernel-doc" from, documentation is frequently in the C file
+which is then included in Documentation files (the type you objected to
+in the start of this patch) which include additional human-readable
+explanation of the intention and usage of the API in question.
+
+--=20
+Tom
+
+--BJywYHbw+qriKrcA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdGTLAACgkQFHw5/5Y0
+tyzmOgv/clnMCEW+2RpnTvu1LSdHVqdp8dz19gaHFnBDJ+kPpa0Lo2XVeKFQHMWr
+0tmo63Cz5R2yUp5pHmH9pn2LMRt28GwnJcCWbd+UB7pYCTiORc845aOYdn14Ehpk
+6w9n6wTzrt+hTc5zq7hajnLszKMy5gGrh+JrpVrz3nRnEuxgwXMSBJot4/ajegyD
+gICmeQNRDx8kSV9LBfNw8Wkaf3hJyYBk51mtJOAvTJm+kM4itmQu3inmz+yMOw1Y
+RQ+m7Ep9Rr6hRDb71G0V45rxnw4g/D4YkXkNgxPN59u5OOSMGPqNXqmhOGI2j09y
+k5Ay2gLgRjc3ril8r5hGH/0IuyAr1TQd/tT8f0IggMGpemi/ZUqHxm+Uo2PMuX+5
+bphV0XjgWdgRWqWCKqeK0TRrB4AixGOuK/amnGjuYHPmrCxpicVm/7ASKv7qkouJ
+XHdP12XkG7iT5ssRvBxtTvS8oCfDl1VYQRskncV/aD9W8FkeCBxAlr/WyJGjsk+m
+/hu+UD0n
+=DdyU
+-----END PGP SIGNATURE-----
+
+--BJywYHbw+qriKrcA--
