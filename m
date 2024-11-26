@@ -4,84 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8A7D66BA5
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 00:57:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 921B9D66BA5
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 01:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90D3089688;
-	Wed, 27 Nov 2024 01:57:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DB28896CA;
+	Wed, 27 Nov 2024 02:21:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MbFzcwmu";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="AalfFzZC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D1848974C; Wed, 27 Nov 2024 01:57:39 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A3AC089C95; Tue, 26 Nov 2024 18:10:48 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C48488BE3
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 01:57:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 847DC896A4
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 18:10:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2ea304ce809so5250424a91.2
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:57:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732669055; x=1733273855; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fcLXDjHeo3/gkyacVIeiSamFsp16si+PLZ/IxxsPMro=;
- b=MbFzcwmuFu0hn0rRm2Jte5SPmZdBUxubpdeZgrtJWUCKNTsj/86MBdNyntwYcS24TW
- VCJEeMdJZxu1pukKQ4MIIy9QRjpQHvOL9T33dn41glVhiQiaqvJf4i5adR0C/4bHEeMn
- pbX0FjBPLZck/1mm3Mrz9FV/aAAiqiKMSFAPouEYtjcVYbYacij7s1E8mrnypmWbBaFw
- cJOHat9xjqUrm/WiBgRFkOdNR2Zde305wxZBXWOfgEJKj3JzLWpQ4ERqi8bivT+D8KbP
- TaPgk6RUQ6xZO+7OhPtzarXxFTbMga0cqC8qOFeyWoRucIod+2guv8QeZLCt3i+b89yt
- G7eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732669055; x=1733273855;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fcLXDjHeo3/gkyacVIeiSamFsp16si+PLZ/IxxsPMro=;
- b=ONdBP9kQOcDSFSnYrL/M1CVJgvu95UN/fIWhGbVaFpc7vMXvC+25lCAplWPbxqW7ka
- fYxVaa/nCxmpp1peU7L0C42g8zNW1WV5KGMoQVM27E9tJ5ESgAY/UAEnsxUBTPKww3K+
- EzQaePse/8WMQBMshTwCVZf3RH28yXiKqthRq2K4pYqR+z5NeYxeFRgVX4OrRb9BKiGV
- N1KpXo/U4fS2aUV+d51pXE1os2HSUyUcxd1xwS0r5EuVnKxZZrjnWFd6C9AP4yaGorZ2
- rx+8SpqIo6l5XFcppfDQ4BPMeiz7jG9sVcceTvxUxtaU/IfU6frEh9PFanpzHHOyMbYV
- mYqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6v9L7XqBs3UOA+MA1nbl03djhR0uWfz+p0Lcw5g67WDZBnsAcOLnssaCCp2vwNSyZ6o/+mY4=@lists.denx.de
-X-Gm-Message-State: AOJu0YztnO98187W/9rVaWUcEeW5vluHuntkaagaJim9xxnherGQ8GUt
- x1kX+IP/LgNiPjdTUGKZ8pn/xSDNlrMC/oEjuDn7Co2giYQuxVioxeuUyQ==
-X-Gm-Gg: ASbGnctuWSMMEuGKH81UpM1HX9r8QdawjSFEirvyvyiuemZDCoXj7keUTS06mHtjesP
- w4Rw30BzNXTxY/um9kFvEjF5NN7E0m1A5Lpg1bKm5SozWjguLH5bfLXyWcMHP1hEZQkUk2aeT/D
- 57O8HbykjhVO4BgNnrUG5ZdroywQNc2QPBP6PINJxEuVDH78kwVr/YOUEaTFqPpMqALQ60UiJl5
- bda/fyF1TgVRACS20AlT8kprnKnYUZiaNZTgvc+Ujx+bb11rl3voxTh/RGH9csPs0UY2sou1Bjv
- JO+DWSvmyiaC5xsOYwOaroDsXXTm5VmWib3VsA==
-X-Google-Smtp-Source: AGHT+IFyCJNT8fnT8Ab9bkFTS6q7+OP2sIEBvhhGt8H5YoSdz8eoUWAc9ImC4+NYDKJ67krOUe5kOA==
-X-Received: by 2002:a17:90b:3887:b0:2ea:77d9:6346 with SMTP id
- 98e67ed59e1d1-2ee08e9fe11mr1706212a91.11.1732669054926; 
- Tue, 26 Nov 2024 16:57:34 -0800 (PST)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ee0fa5fff0sm192931a91.21.2024.11.26.16.57.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 16:57:34 -0800 (PST)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Stefan Roese <sr@denx.de>
-Cc: Tony Dinh <mibodhi@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] arm: kirkwood: Enable bootstd and other modernization for
- OpenRD boards
-Date: Tue, 26 Nov 2024 16:57:16 -0800
-Message-Id: <20241127005716.6234-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.5
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1060e6c96f=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQG37LY000967;
+ Tue, 26 Nov 2024 18:10:02 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 9AnQEsF3FhvrN5gEjxfqCqV24TPTVE3upLJsIOP8Sk4=; b=AalfFzZC2Dk69LIZ
+ mtSrqvhCVBqBk8acABr6zrf8YhIm1k0Gh9mmR/BPYvvk3PPGK9IwqAgpOjWj/SCM
+ iYDCxcmhXirjuexrJFRG0x5vWmUsnazwpaZLiZ0GShxeVLglIK8IgryJbqnSofFh
+ Sj3YAqq5KINaI+rUaws0R8kF7QSz2k3ZWqBpV1xBVYEx7mUqGNXrei5w/P7FGUlc
+ G0cKlBlOh6+AqTkDZ6mjnqj5WUtJW5ThnGAYKA/K5+PEF0VlfxFrsCsl9rzYYrOT
+ Qe9Y6OT+ZaGeSm6tVpRh4HroAD/7WdCN2R0a+diio3kLl5CUw7+A/E8MZTkyaC6T
+ HkcQsg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 433sg4bs9c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Nov 2024 18:10:02 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 807A14002D;
+ Tue, 26 Nov 2024 18:05:54 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E360429DE7A;
+ Tue, 26 Nov 2024 18:04:18 +0100 (CET)
+Received: from [10.252.30.7] (10.252.30.7) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Tue, 26 Nov
+ 2024 18:04:16 +0100
+Message-ID: <280e1d54-89ff-496f-93d3-0de7a9797bc9@foss.st.com>
+Date: Tue, 26 Nov 2024 18:04:14 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] fdt: Swap the signature for board_fdt_blob_setup()
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Aaron Williams
+ <awilliams@marvell.com>, Alexander Graf <agraf@csgraf.de>, Anastasiia
+ Lukianenko <anastasiia_lukianenko@epam.com>, Andre Przywara
+ <andre.przywara@arm.com>, Anup Patel <anup@brainfault.org>, Atish Patra
+ <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, David Feng <fenghua@phytium.com.cn>, E Shattow
+ <lucent@gmail.com>, Eric Curtin <ecurtin@redhat.com>, Francois Berder
+ <fberder@outlook.fr>, Green Wan <green.wan@sifive.com>, H Bell
+ <dmoo_dv@protonmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor
+ Opaniuk <igor.opaniuk@foundries.io>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, Leo Yu-Chi Liang
+ <ycliang@andestech.com>, Linus Walleij <linus.walleij@linaro.org>, Liviu
+ Dudau <liviu.dudau@foss.arm.com>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>, Matthias Brugger <mbrugger@suse.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Oleksandr Andrushchenko
+ <oleksandr_andrushchenko@epam.com>, Oleksandr Suvorov
+ <oleksandr.suvorov@foundries.io>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Randolph <randolph@andestech.com>, Rasmus
+ Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
+ Sam Day <me@samcday.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Tim Harvey
+ <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>, William Zhang <william.zhang@broadcom.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>, <u-boot-qcom@groups.io>,
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>
+References: <20241102174944.412088-1-sjg@chromium.org>
+ <20241102174944.412088-2-sjg@chromium.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20241102174944.412088-2-sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.30.7]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Mailman-Approved-At: Wed, 27 Nov 2024 02:21:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,284 +127,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable bootstd for OpenRD boards
-Update defconfigs to the latest u-boot requirements
-Remove JFFS2 support. See JFFS2 Vulnerability[1].
-Move default envs to text-base environment
 
-[1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-cat/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+On 11/2/24 18:49, Simon Glass wrote:
+> This returns a devicetree and updates a parameter with an error code.
+> Swap it, since this fits better with the way U-Boot normally works. It
+> also (more easily) allows leaving the existing pointer unchanged.
+> 
+> No yaks were harmed in this change, but there is a very small code-size
+> reduction.
+> 
+> For sifive, the OF_BOARD option must be set for the function to be
+> called, so there is no point in checking it again. Also OF_SEPARATE is
+> defined always.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v2:
+> - Set up the existing FDT in case the board wants to check it
+> - Update snapdragon to return -EEXIST
+> - Set the existing FDT before calling board_fd_blob_setup()
+> - Update sandbox to return -EEXIST if an fdt comes from a bloblist
+> - Update do_go_uboot() to set the existing FDT
+> - Drop unnecessary setting of FDT in vexpress64
+> - Tidy up redundant RISC-V code
+> 
+>  arch/arm/mach-apple/board.c                   |  7 ++--
+>  arch/arm/mach-snapdragon/board.c              |  9 ++---
+>  arch/arm/mach-stm32mp/boot_params.c           | 19 ++++++-----
+>  arch/sandbox/cpu/cpu.c                        | 34 +++++++++----------
+>  board/Marvell/octeontx/board-fdt.c            | 12 +++----
+>  board/Marvell/octeontx2/board-fdt.c           | 12 +++----
+>  board/Marvell/octeontx2/board.c               |  3 +-
+>  board/andestech/ae350/ae350.c                 | 23 +++++++------
+>  board/armltd/vexpress64/vexpress64.c          | 33 ++++++++----------
+>  board/broadcom/bcmstb/bcmstb.c                |  7 ++--
+>  board/emulation/qemu-arm/qemu-arm.c           |  7 ++--
+>  board/emulation/qemu-ppce500/qemu-ppce500.c   | 12 +++----
+>  board/emulation/qemu-riscv/qemu-riscv.c       |  7 ++--
+>  board/highbank/highbank.c                     |  7 ++--
+>  board/raspberrypi/rpi/rpi.c                   | 13 ++++---
+>  board/sifive/unleashed/unleashed.c            | 12 +++----
+>  board/sifive/unmatched/unmatched.c            | 11 +++---
+>  .../visionfive2/starfive_visionfive2.c        | 11 +++---
+>  board/xen/xenguest_arm64/xenguest_arm64.c     | 14 ++++----
+>  board/xilinx/common/board.c                   | 26 ++++++++------
+>  include/fdtdec.h                              |  9 ++---
+>  lib/fdtdec.c                                  | 14 +++++---
+>  22 files changed, 152 insertions(+), 150 deletions(-)
+> 
+> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> index 0b6d290b8ac..2644a04a622 100644
+> --- a/arch/arm/mach-apple/board.c
+> +++ b/arch/arm/mach-apple/board.c
+> @@ -691,11 +691,12 @@ int dram_init_banksize(void)
+>  
+>  extern long fw_dtb_pointer;
+>  
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	/* Return DTB pointer passed by m1n1 */
+> -	*err = 0;
+> -	return (void *)fw_dtb_pointer;
+> +	*fdtp = (void *)fw_dtb_pointer;
+> +
+> +	return 0;
+>  }
+>  
+>  void build_mem_map(void)
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 2ab2ceb5138..cd49de540f0 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -147,12 +147,12 @@ static void show_psci_version(void)
+>   * or for supporting quirky devices where it's easier to leave the downstream DT in place
+>   * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
+>   */
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	struct fdt_header *fdt;
+>  	bool internal_valid, external_valid;
+> +	int ret = 0;
+>  
+> -	*err = 0;
+>  	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+>  	external_valid = fdt && !fdt_check_header(fdt);
+>  	internal_valid = !fdt_check_header(gd->fdt_blob);
+> @@ -167,10 +167,11 @@ void *board_fdt_blob_setup(int *err)
+>  
+>  	if (internal_valid) {
+>  		debug("Using built in FDT\n");
+> +		ret = -EEXIST;
+>  	} else {
+>  		debug("Using external FDT\n");
+>  		/* So we can use it before returning */
+> -		gd->fdt_blob = fdt;
+> +		*fdtp = fdt;
+>  	}
+>  
+>  	/*
+> @@ -179,7 +180,7 @@ void *board_fdt_blob_setup(int *err)
+>  	 */
+>  	qcom_parse_memory();
+>  
+> -	return (void *)gd->fdt_blob;
+> +	return ret;
+>  }
+>  
+>  void reset_cpu(void)
+> diff --git a/arch/arm/mach-stm32mp/boot_params.c b/arch/arm/mach-stm32mp/boot_params.c
+> index ebddf6a7dbc..2d058edc419 100644
+> --- a/arch/arm/mach-stm32mp/boot_params.c
+> +++ b/arch/arm/mach-stm32mp/boot_params.c
+> @@ -6,6 +6,7 @@
+>  #define LOG_CATEGORY LOGC_ARCH
+>  
+>  #include <config.h>
+> +#include <errno.h>
+>  #include <log.h>
+>  #include <linux/libfdt.h>
+>  #include <asm/arch/sys_proto.h>
+> @@ -16,20 +17,22 @@
+>   * Use the saved FDT address provided by TF-A at boot time (NT_FW_CONFIG =
+>   * Non Trusted Firmware configuration file) when the pointer is valid
+>   */
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	unsigned long nt_fw_dtb = get_stm32mp_bl2_dtb();
+>  
+>  	log_debug("%s: nt_fw_dtb=%lx\n", __func__, nt_fw_dtb);
+>  
+> -	*err = 0;
+>  	/* use external device tree only if address is valid */
+> -	if (nt_fw_dtb >= STM32_DDR_BASE) {
+> -		if (fdt_magic(nt_fw_dtb) == FDT_MAGIC)
+> -			return (void *)nt_fw_dtb;
+> -		log_debug("%s: DTB not found.\n", __func__);
+> +	if (nt_fw_dtb < STM32_DDR_BASE ||
+> +	    fdt_magic(nt_fw_dtb) != FDT_MAGIC) {
+> +		log_debug("DTB not found.\n");
+> +		log_debug("fall back to builtin DTB, %p\n", _end);
+> +
+> +		return -EEXIST;
+>  	}
+> -	log_debug("%s: fall back to builtin DTB, %p\n", __func__, _end);
+>  
+> -	return (void *)_end;
+> +	*fdtp = (void *)nt_fw_dtb;
+> +
+> +	return 0;
+>  }
 
- arch/arm/mach-kirkwood/Kconfig    |  1 +
- board/Marvell/openrd/openrd.env   | 20 ++++++++++++++++++++
- configs/openrd_base_defconfig     | 18 +++++-------------
- configs/openrd_client_defconfig   | 18 +++++-------------
- configs/openrd_ultimate_defconfig | 18 +++++-------------
- include/configs/openrd.h          | 18 ------------------
- 6 files changed, 36 insertions(+), 57 deletions(-)
- create mode 100644 board/Marvell/openrd/openrd.env
+For mach-stm32mp:
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
-index 031d4e5ecd..6761a9cb39 100644
---- a/arch/arm/mach-kirkwood/Kconfig
-+++ b/arch/arm/mach-kirkwood/Kconfig
-@@ -38,6 +38,7 @@ config TARGET_OPENRD
- 	bool "Marvell OpenRD Board"
- 	select KW88F6281
- 	select SHEEVA_88SV131
-+	select KIRKWOOD_COMMON
- 
- config TARGET_DREAMPLUG
- 	bool "DreamPlug Board"
-diff --git a/board/Marvell/openrd/openrd.env b/board/Marvell/openrd/openrd.env
-new file mode 100644
-index 0000000000..70ca704b73
---- /dev/null
-+++ b/board/Marvell/openrd/openrd.env
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2024 Tony Dinh <mibodhi@gmail.com>
-+ *
-+ *  Environment variables configurations
-+ */
-+
-+kernel_addr_r=0x800000
-+fdt_addr_r=0x2c00000
-+ramdisk_addr_r=0x01100000
-+scriptaddr=0x200000
-+fdtfile=CONFIG_DEFAULT_DEVICE_TREE.dtb
-+mtdparts=CONFIG_MTDPARTS_DEFAULT
-+console=ttyS0,115200
-+
-+/* Standard Boot */
-+bootcmd=
-+	bootflow scan -lb
-+failed=
-+	echo CONFIG_SYS_BOARD boot failed - please check your image
-diff --git a/configs/openrd_base_defconfig b/configs/openrd_base_defconfig
-index 708bf5eefd..1ca0b45d93 100644
---- a/configs/openrd_base_defconfig
-+++ b/configs/openrd_base_defconfig
-@@ -4,22 +4,22 @@ CONFIG_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_KIRKWOOD=y
-+CONFIG_SUPPORT_PASSING_ATAGS=y
-+CONFIG_CMDLINE_TAG=y
-+CONFIG_INITRD_TAG=y
- CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x600000
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_OPENRD=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-base"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_IDENT_STRING="\nOpenRD-Base"
--# CONFIG_SYS_MALLOC_F is not set
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=524288
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
- CONFIG_USE_PREBOOT=y
- CONFIG_LOGLEVEL=2
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -30,23 +30,17 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_NAND=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NETCONSOLE=y
- CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SYS_ATA_STRIDE=4
- CONFIG_SYS_ATA_DATA_OFFSET=0x100
- CONFIG_SYS_ATA_REG_OFFSET=0x100
-@@ -59,7 +53,5 @@ CONFIG_MTD=y
- CONFIG_MTD_RAW_NAND=y
- CONFIG_MVGBE=y
- CONFIG_MII=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SYS_NS16550_REG_SIZE=-4
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/openrd_client_defconfig b/configs/openrd_client_defconfig
-index 82a9c77761..e0cc2e65db 100644
---- a/configs/openrd_client_defconfig
-+++ b/configs/openrd_client_defconfig
-@@ -4,10 +4,12 @@ CONFIG_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_KIRKWOOD=y
-+CONFIG_SUPPORT_PASSING_ATAGS=y
-+CONFIG_CMDLINE_TAG=y
-+CONFIG_INITRD_TAG=y
- CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x600000
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_OPENRD=y
- CONFIG_BOARD_IS_OPENRD_CLIENT=y
- CONFIG_ENV_SIZE=0x20000
-@@ -15,12 +17,10 @@ CONFIG_ENV_OFFSET=0x80000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-client"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_IDENT_STRING="\nOpenRD-Client"
--# CONFIG_SYS_MALLOC_F is not set
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=524288
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
- CONFIG_USE_PREBOOT=y
- CONFIG_LOGLEVEL=2
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -31,23 +31,17 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_NAND=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NETCONSOLE=y
- CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SYS_ATA_STRIDE=4
- CONFIG_SYS_ATA_DATA_OFFSET=0x100
- CONFIG_SYS_ATA_REG_OFFSET=0x100
-@@ -60,7 +54,5 @@ CONFIG_MTD=y
- CONFIG_MTD_RAW_NAND=y
- CONFIG_MVGBE=y
- CONFIG_MII=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SYS_NS16550_REG_SIZE=-4
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/configs/openrd_ultimate_defconfig b/configs/openrd_ultimate_defconfig
-index 10b46e2ec1..a115691daa 100644
---- a/configs/openrd_ultimate_defconfig
-+++ b/configs/openrd_ultimate_defconfig
-@@ -4,10 +4,12 @@ CONFIG_SYS_DCACHE_OFF=y
- CONFIG_ARCH_CPU_INIT=y
- CONFIG_SYS_THUMB_BUILD=y
- CONFIG_ARCH_KIRKWOOD=y
-+CONFIG_SUPPORT_PASSING_ATAGS=y
-+CONFIG_CMDLINE_TAG=y
-+CONFIG_INITRD_TAG=y
- CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x600000
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_OPENRD=y
- CONFIG_BOARD_IS_OPENRD_ULTIMATE=y
- CONFIG_ENV_SIZE=0x20000
-@@ -15,12 +17,10 @@ CONFIG_ENV_OFFSET=0x80000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-ultimate"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_IDENT_STRING="\nOpenRD-Ultimate"
--# CONFIG_SYS_MALLOC_F is not set
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=524288
-+CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTDELAY=3
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
- CONFIG_USE_PREBOOT=y
- CONFIG_LOGLEVEL=2
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -31,23 +31,17 @@ CONFIG_CMD_MMC=y
- CONFIG_CMD_NAND=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_JFFS2=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
- CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
- CONFIG_CMD_UBI=y
--CONFIG_ISO_PARTITION=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_NAND=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NETCONSOLE=y
- CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SYS_ATA_STRIDE=4
- CONFIG_SYS_ATA_DATA_OFFSET=0x100
- CONFIG_SYS_ATA_REG_OFFSET=0x100
-@@ -60,7 +54,5 @@ CONFIG_MTD=y
- CONFIG_MTD_RAW_NAND=y
- CONFIG_MVGBE=y
- CONFIG_MII=y
--CONFIG_SYS_NS16550_SERIAL=y
--CONFIG_SYS_NS16550_REG_SIZE=-4
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
-diff --git a/include/configs/openrd.h b/include/configs/openrd.h
-index 1e6b16b4e7..f91e62a2e4 100644
---- a/include/configs/openrd.h
-+++ b/include/configs/openrd.h
-@@ -15,22 +15,4 @@
- 
- #include "mv-common.h"
- 
--/*
-- *  Environment variables configurations
-- */
--/*
-- * max 4k env size is enough, but in case of nand
-- * it has to be rounded to sector size
-- */
--
--/*
-- * Default environment variables
-- */
--
--#define CFG_EXTRA_ENV_SETTINGS	"x_bootargs=console=ttyS0,115200 " \
--	CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=2,2048\0" \
--	"x_bootcmd_kernel=nand read 0x6400000 0x100000 0x300000\0"	\
--	"x_bootcmd_usb=usb start\0"					\
--	"x_bootargs_root=root=ubi0:rootfs rootfstype=ubifs\0"
--
- #endif /* _CONFIG_OPENRD_BASE_H */
--- 
-2.39.5
+Thanks
 
