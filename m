@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D389DD3B9A7
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:38:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE7AD3B9A4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:38:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D24F895D0;
-	Tue, 26 Nov 2024 16:38:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92FFF89C8C;
+	Tue, 26 Nov 2024 16:38:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Trph1k7/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I88ghdym";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A272289C8C; Tue, 26 Nov 2024 16:38:40 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 257B088D13; Tue, 26 Nov 2024 16:38:55 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A71FA88D13
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:38:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ECCB989C8C
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:38:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5cfadf851e2so7460189a12.2
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:38:38 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-53dde4f0f23so2923005e87.3
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:38:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732635518; x=1733240318; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732635532; x=1733240332; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HVM2Jt0Ft6J3lmf7dkP8WaIJaIUgWCn11At8NskVvSk=;
- b=Trph1k7/G7ab/B4fSrd4w2+j392pEiYwAiAEviANq5IUdf3bQW6NYv0+puqm0bm1Ky
- eEg2fzfPDxKkvMmyDqzNNybH7cUzRj8HKVlpZR9c0LiflEwfwTuK3ogRsvFDzMfECoPs
- r0sFeJ82G3IBiuBUPQrRl/ODWnO6Pejsu7oZA=
+ bh=o0rGRb+v+xELCVBLw83wGDae4JZLE0CJAlu3zf10lIQ=;
+ b=I88ghdymi7HBjak7UfVdjZa4h8BS3A+NlJrdNUyVxGfoYCMq5l+s/ahn+n8iK5V0HY
+ 1+60OWhEALpkKZMHZqsTnWssst6Uq9nlJvb4VMJ+3ZCTTrgS0sk/MtK5GLX34YKzTxIW
+ 0DEZzTWBerObW3atcKn1o2mr002OqeWvOlxcM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732635518; x=1733240318;
+ d=1e100.net; s=20230601; t=1732635532; x=1733240332;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HVM2Jt0Ft6J3lmf7dkP8WaIJaIUgWCn11At8NskVvSk=;
- b=X4OdOmxr6EPVpba63meYqboSqEX2MKOR1w94la9QAuQfCcUZ2a5oFDTYVq6HlMKwQn
- vfvMp3hhvkc/ZYGAdHi03odt18NzMbUzPsN3mLkadt8VkrP99D6F1K33UB0CLUmu9DII
- WBA2Vx/gQklR0KOFEXXd5NefhnGLzvdN9PwcISYGBSqWKadWzag+JdOnR9DIBAgIHrOA
- mzZRJZarvzLTOwykaJ9KYbyl4HKAca5AmW+mGZJmeOu9fmOTH1Lb5tBKrA1cFF9PLMJh
- D78nGp0LLmGQcTFP2q9/FQiHPCYObLzhy+xfPOkigqtVYF1f2NzpP2PF9I84dtnTK54/
- Y6sw==
+ bh=o0rGRb+v+xELCVBLw83wGDae4JZLE0CJAlu3zf10lIQ=;
+ b=WZceCYk6AAjD2qHnECrkBVEsOTxreTX2+JNQP87VzL/7fNXHU0naEfacnP2OWpO4wp
+ yuAn5P95dtMfR8vcGwFKwyZmqmq5HQuC+LDhaHTJNZYncCK9Hv/0Td1UaJqs7Yf4TC6+
+ MKB6GZFQdV2sMwzVBzYhGSObs7xeQWYqRsOGmmlGAcbKyIWX4e2l4x1eUbgsr+x6L5u4
+ uq4ujVXvDPbqAk/zrxru0xE9qMFQX9E9ReJFtfnwkreVwEeG6DMPl6UmydsdmtVTTg7J
+ 0jUnsrLL7nSB3rtjCSQpKTQyoTMPx1Ohbf4vHA/XPeBJFLp/Fp1eGKxHeg77QIIguLbk
+ yp1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgTHNILcLehLgNiAqPxXA5CVTvFHs6CpldAe/AUjaw+uMXzEQONhyp+Yx7CUV5TlVQBNwq3D4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzXQvAimiSkupWtMkEPqo/GUeLa5EGM1uXm2RC8c7hnoP7qclEt
- +Y32Z5eqcrXNq8tdFUAUC7MfVBZDfb4EHTwf45wLG4KodwxdGuwRn0Irsi1O5akIwXBrPxrF3Hi
- QltLy4n+apdfbAQWN72rsCgTlwrkMIOBeh2q2fqpFhcvQbIQ=
-X-Gm-Gg: ASbGncvclCoGFC69dgnHVcPvFRXD4hm1DbKC3vVayV2y0buPb4cAS1QdnDxt1ohJ5i9
- 8G03vAPMZfJR3KUKj0ymVW46J7aqL4c8=
-X-Google-Smtp-Source: AGHT+IFZvXQ01id8p+ZNyl+0FfMn1VqR9MPkPErPSY+Ny9MotUziTViwraOeHTTAnqW7lpXqU/v4wTDitMNx4WLu31w=
-X-Received: by 2002:a17:906:da8d:b0:a9a:dac:2ab9 with SMTP id
- a640c23a62f3a-aa509d3fbf1mr1508409066b.42.1732635518207; Tue, 26 Nov 2024
- 07:38:38 -0800 (PST)
+ AJvYcCWwGwLw9LuRufoDDQgqFeyPXeqJx04qOdS4zabmjh98YyPWtzCQveR0eeoLQhvSuhse9kH2sUI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yww1upv5mHj7K6+82MxRnQXcM0MqsodTUdBAds/sYw8LEhUgebd
+ OyYlgMXoRDyAXNdMBuLJl6LbPsGprRTYqpQnnMmEmFzK/WMbAlUiCbms/nAWgE9B7XHTKRCOmse
+ CBORGO9rfHgD1dSFFaf9UZV5KEaH3M/LlIWJg
+X-Gm-Gg: ASbGncvs/T2JLwneeNXZjxEkFbdZH8KDJnED8SARMlcQbdhsegaVvMq9ZK+bdmw6iRP
+ ZyG1hp963y1A+bgn5EwCWtcJ41KiRHsM=
+X-Google-Smtp-Source: AGHT+IG9DV2lLKd3ITihjObOctEUni27GIFA61p2gUuCN/AuSRtvcMPZw85z9kaWFaTIKUjMYWhRU+6cFDwba2Huzjk=
+X-Received: by 2002:a05:6512:b18:b0:53d:e537:c780 with SMTP id
+ 2adb3069b0e04-53de537c929mr4686399e87.35.1732635531906; Tue, 26 Nov 2024
+ 07:38:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-3-sjg@chromium.org>
- <74286a06-89dc-43ec-a669-f4dd0a97fee6@gmx.de>
-In-Reply-To: <74286a06-89dc-43ec-a669-f4dd0a97fee6@gmx.de>
+References: <20241124183832.2476928-1-caleb.connolly@linaro.org>
+ <CAFLszThqtA_WBxOU-EnEvw956ZMN9KErx_C4gTzW_+p_tGu9qw@mail.gmail.com>
+ <cd43db10-4939-4958-97f2-9a2046d82160@linaro.org>
+In-Reply-To: <cd43db10-4939-4958-97f2-9a2046d82160@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Nov 2024 08:38:26 -0700
-Message-ID: <CAFLszTgi_dsw917cQytCOAZ7sFsLnyz3XXmeeNVo3MNqS9VkuA@mail.gmail.com>
-Subject: Re: [PATCH 02/13] efi_loader: Convert efi_get_memory_map() to return
- pointers
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 26 Nov 2024 08:38:37 -0700
+Message-ID: <CAFLszTgEhfbk4ug=JoU_jTgdzSkF-fXuqamGmPJHpdogwocbRA@mail.gmail.com>
+Subject: Re: [PATCH] common/board_f: init malloc earlier
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,51 +94,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Caleb,
 
-On Tue, 26 Nov 2024 at 02:27, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 26 Nov 2024 at 05:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On 25.11.24 21:44, Simon Glass wrote:
-> > This function should return pointers, not addresses. Add the conversion.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   lib/efi_loader/efi_memory.c | 5 +++++
-> >   1 file changed, 5 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index e493934c713..8b01821a993 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -748,6 +748,11 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
-> >       memory_map = &memory_map[map_entries - 1];
-> >       list_for_each_entry(lmem, &efi_mem, link) {
-> >               *memory_map = lmem->desc;
-> > +             /* Convert to pointers, which is what the caller expects */
-> > +             memory_map->physical_start =
-> > +                     (ulong)map_sysmem(lmem->desc.physical_start, 0);
-> > +             memory_map->virtual_start =
-> > +                     (ulong)map_sysmem(lmem->desc.virtual_start, 0);
-> >               memory_map--;
-> >       }
-> >
+> Hi Simon,
 >
-> NAK.
+> On 26/11/2024 01:32, Simon Glass wrote:
+> > Hi Caleb,
+> >
+> > On Sun, 24 Nov 2024 at 11:38, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> Currently the early malloc initialisation is done partially in
+> >> board_init_f_init_reserve() (on arm64 at least), which configures
+> >> gd->malloc_base. But it isn't actually usable until initf_malloc() is
+> >> called which doesn't happen until after fdtdec_setup().
+> >>
+> >> This causes problems in a few scenarios:
+> >>
+> >> 1. when using MULTI_DTB_FIT as this needs a working malloc (especially
+> >>    for compressed FIT).
+> >
+> > Hmmm, how does this work today?
 >
-> physical_start and virtual_addr are not sandbox virtual addresses.
->
-> The sandbox virtual address space is irrelevant for UEFI. They should be
-> restricted to the CLI.
+> I honestly have no idea, I assume boards that make use of it do some
+> custom board_f.
 
-Well, you can't have it both ways. Either this is a pointer expressed
-as a u64, or it is an address.
+OK.
 
-My understanding is that it is a pointer expressed as a u64. The use
-of u64 is a confusing part of the spec, but it is because they want to
-specify the size as 64-bit, whereas a void * would not have a fixed
-size. But you can't run a 32-bit image on a 64-bit machine anyway, so
-this decision is a mystery to me.
+> >
+> >> 2. Some platforms may need to allocate memory as part of memory map
+> >>    initialisation (e.g. Qualcomm will need this to parse the memory map
+> >>    from SMEM).
+> >
+> > That really needs to be tidied up. When does this fixup need to be
+> > done? I imagine it is somewhere prior to setup_dest_addr() ? Perhaps
+>
+> It's necessary in order to figure out gd->ram_base/ram_size. We do it in
+> board_fdt_blob_setup() so that we can support another use-case where
+> U-Boot has an internal FDT (which it should use) but the memory layout
+> is provided via an external FDT which is unavailable (although this
+> usecase isn't enabled upstream yet).
+>
+> > we could introduce an event to do 'memory map' stuff?
+>
+> We could, but considering that on most platforms the pre-relocation
+> malloc is fixed at build time and at a known location relative to U-Boot
+> there is no reason for us to arbitrary decide that some codepaths at the
+> start of board_f aren't allowed to use malloc().
+>
+> Just moving the malloc initialization earlier ensures malloc() is
+> consistently available and greatly simplifies things.
+
+I'd like to see a more generic solution to this problem...I think we
+discussed this before?
+
+To my eye it looks like if we called an event in setup_dest_addr() we
+could allow ram_base to be set.
+
+>
+> fwiw, I had another variation of this patch which dropped initf_malloc()
+> entirely and just set up gd->malloc_limit/malloc_ptr in
+> board_init_f_init_reserve() since that's where we set malloc_base
+> anyways. But after digging some more there seem to be quite a few other
+> entrypoints into U-Boot that don't go through
+> board_init_f_init_reserve() (e.g. sandbox, EFI app) and it seemed more
+> error prone to duplicate the implementation there.
+
+Fair enough.
+
+One more thing I notice in your board_fdt_blob_setup() implementation
+in arch/arm/mach-snapdragon/board.c :
+
+It seems to be using either an built-in or external devicetree. It
+seems that we should show this in dm_announce(), i.e. with the call to
+fdtdec_get_srcname() ?
 
 Regards,
 Simon
+
+
+>
+> Kind regards
+>
+> >
+> > Regards,
+> > Simon
+> >
+> >
+> >>
+> >> Move the initf_malloc() call earlier so that malloc is available during
+> >> fdtdec_setup().
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>  common/board_f.c | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/common/board_f.c b/common/board_f.c
+> >> index 98dc2591e1d0..bddfa6b992b9 100644
+> >> --- a/common/board_f.c
+> >> +++ b/common/board_f.c
+> >> @@ -867,15 +867,15 @@ static int initf_upl(void)
+> >>  }
+> >>
+> >>  static const init_fnc_t init_sequence_f[] = {
+> >>         setup_mon_len,
+> >> +       initf_malloc,
+> >>  #ifdef CONFIG_OF_CONTROL
+> >>         fdtdec_setup,
+> >>  #endif
+> >>  #ifdef CONFIG_TRACE_EARLY
+> >>         trace_early_init,
+> >>  #endif
+> >> -       initf_malloc,
+> >>         initf_upl,
+> >>         log_init,
+> >>         initf_bootstage,        /* uses its own timer, so does not need DM */
+> >>         event_init,
+> >> --
+> >> 2.47.0
+> >>
+>
+> --
+> // Caleb (they/them)
+>
