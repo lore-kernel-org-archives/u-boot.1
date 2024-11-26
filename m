@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4946AD3B9A7
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:38:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D389DD3B9A7
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:38:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFF4F89C8C;
-	Tue, 26 Nov 2024 16:38:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D24F895D0;
+	Tue, 26 Nov 2024 16:38:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VAqMDGHJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Trph1k7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03E5489C8C; Tue, 26 Nov 2024 16:38:06 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id A272289C8C; Tue, 26 Nov 2024 16:38:40 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9571588D13
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:38:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A71FA88D13
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:38:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa54adcb894so319652166b.0
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:38:03 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfadf851e2so7460189a12.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:38:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732635478; x=1733240278; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732635518; x=1733240318; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sOglckqpzSGB7kgyGp8eifrMe7Q8QHYO+OCIsWCYw9g=;
- b=VAqMDGHJlusGQ1L3OJhNZolnuDkgxSgFmWwwktZEe1R3boIy12N6k5DsbpZSq8+nc6
- rKGuPKI83jmWmjC3V2/nnJgY96VUD627f/DfGwlLLrRUdgkjl47p34LV+9xonmKxr+Md
- MG5gvjJsoIRFjP+It0uF4jrXaRpaNfc1TCqTU=
+ bh=HVM2Jt0Ft6J3lmf7dkP8WaIJaIUgWCn11At8NskVvSk=;
+ b=Trph1k7/G7ab/B4fSrd4w2+j392pEiYwAiAEviANq5IUdf3bQW6NYv0+puqm0bm1Ky
+ eEg2fzfPDxKkvMmyDqzNNybH7cUzRj8HKVlpZR9c0LiflEwfwTuK3ogRsvFDzMfECoPs
+ r0sFeJ82G3IBiuBUPQrRl/ODWnO6Pejsu7oZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732635478; x=1733240278;
+ d=1e100.net; s=20230601; t=1732635518; x=1733240318;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sOglckqpzSGB7kgyGp8eifrMe7Q8QHYO+OCIsWCYw9g=;
- b=qwrukZmm2mgwAtrycNZT2tdRaG9TjJukOpLPzgUPzm/mJGmzj6B/c4P7UbngEQkpw4
- p6UuHbHMu+e7B1Qm2a4+Dtkt6zVg/VcgVy5SGWl0GgUprDmkjY0aNpdOw7EHVsLj4NQx
- OUuZuQaKun3XGmYQU4qYTVXZqGIfTD5FdFK514HyvDim+npwYa/0jQsNRbroLTKEngPz
- VNNMnnbsGO2EHD2nFCBCYww8ScwzRX+iuHxie5Vf6PDI9kE5fDJYAwMy+nGJQfWmefDZ
- LmqpM7qKEd/Oafs7Nfy7HXGg2omUtYJUcKz0Wo134gPW+Ln5PCTqUM/cFK/06XRpWMIv
- wCrA==
+ bh=HVM2Jt0Ft6J3lmf7dkP8WaIJaIUgWCn11At8NskVvSk=;
+ b=X4OdOmxr6EPVpba63meYqboSqEX2MKOR1w94la9QAuQfCcUZ2a5oFDTYVq6HlMKwQn
+ vfvMp3hhvkc/ZYGAdHi03odt18NzMbUzPsN3mLkadt8VkrP99D6F1K33UB0CLUmu9DII
+ WBA2Vx/gQklR0KOFEXXd5NefhnGLzvdN9PwcISYGBSqWKadWzag+JdOnR9DIBAgIHrOA
+ mzZRJZarvzLTOwykaJ9KYbyl4HKAca5AmW+mGZJmeOu9fmOTH1Lb5tBKrA1cFF9PLMJh
+ D78nGp0LLmGQcTFP2q9/FQiHPCYObLzhy+xfPOkigqtVYF1f2NzpP2PF9I84dtnTK54/
+ Y6sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXTRloDOdtcatqYR/ZMpRBugvcEpprxdbTxTJ3z1cnd11a0ewl2OVhP4dbp/1BshwPKq6CxRcU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVps2d/Pxi8jy0gWqP6TMYC2o+EO3FNinDyCHWZdF72HXin4Or
- 0U/3d5akImeHvOTkf+eM6rY/0U8D5vEEZQNVC3c12EtSQWKvlDspNduMQynms9L5l5ZoZx1hIHf
- dDRvXaNDZ3lhFqSaQqnAJK6NNfPb7rI7bbeiu
-X-Gm-Gg: ASbGncupB/dxhygwMggK33oy2Kvtw/KG4nhXbDj4eJGw84JVQlo1AbwblUnRcR2cQg2
- i2qY0mePAOC8A0QmF3U4qdx5gH9n4c6Y=
-X-Google-Smtp-Source: AGHT+IGQfrqdHueC1xgwqz0s0W7V4CGP/ESKDngAgzcglRm3ORvhIEMyrMI6ngl9oe/FtDSlvEhdwOXe/CMQ1LmfetA=
-X-Received: by 2002:a17:906:cc11:b0:a9a:a5c:e23b with SMTP id
- a640c23a62f3a-aa509e7bb6amr1551488066b.58.1732635477958; Tue, 26 Nov 2024
- 07:37:57 -0800 (PST)
+ AJvYcCUgTHNILcLehLgNiAqPxXA5CVTvFHs6CpldAe/AUjaw+uMXzEQONhyp+Yx7CUV5TlVQBNwq3D4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXQvAimiSkupWtMkEPqo/GUeLa5EGM1uXm2RC8c7hnoP7qclEt
+ +Y32Z5eqcrXNq8tdFUAUC7MfVBZDfb4EHTwf45wLG4KodwxdGuwRn0Irsi1O5akIwXBrPxrF3Hi
+ QltLy4n+apdfbAQWN72rsCgTlwrkMIOBeh2q2fqpFhcvQbIQ=
+X-Gm-Gg: ASbGncvclCoGFC69dgnHVcPvFRXD4hm1DbKC3vVayV2y0buPb4cAS1QdnDxt1ohJ5i9
+ 8G03vAPMZfJR3KUKj0ymVW46J7aqL4c8=
+X-Google-Smtp-Source: AGHT+IFZvXQ01id8p+ZNyl+0FfMn1VqR9MPkPErPSY+Ny9MotUziTViwraOeHTTAnqW7lpXqU/v4wTDitMNx4WLu31w=
+X-Received: by 2002:a17:906:da8d:b0:a9a:dac:2ab9 with SMTP id
+ a640c23a62f3a-aa509d3fbf1mr1508409066b.42.1732635518207; Tue, 26 Nov 2024
+ 07:38:38 -0800 (PST)
 MIME-Version: 1.0
 References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-7-sjg@chromium.org>
- <5976a08e-a242-4665-85e6-410f48776229@gmx.de>
-In-Reply-To: <5976a08e-a242-4665-85e6-410f48776229@gmx.de>
+ <20241125204456.1525752-3-sjg@chromium.org>
+ <74286a06-89dc-43ec-a669-f4dd0a97fee6@gmx.de>
+In-Reply-To: <74286a06-89dc-43ec-a669-f4dd0a97fee6@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Nov 2024 08:37:45 -0700
-Message-ID: <CAFLszThWDNCNhZ6wAaG3omKpT-ZEDkK-R1W-9DWyMuth8Vd55Q@mail.gmail.com>
-Subject: Re: [PATCH 06/13] efi_loader: Use the enum for memory type
+Date: Tue, 26 Nov 2024 08:38:26 -0700
+Message-ID: <CAFLszTgi_dsw917cQytCOAZ7sFsLnyz3XXmeeNVo3MNqS9VkuA@mail.gmail.com>
+Subject: Re: [PATCH 02/13] efi_loader: Convert efi_get_memory_map() to return
+ pointers
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Moritz Fischer <moritzf@google.com>, 
- Patrick Wildt <pwildt@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,51 +92,49 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 26 Nov 2024 at 02:44, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 26 Nov 2024 at 02:27, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 25.11.24 21:44, Simon Glass wrote:
-> > Rather than an integer, it is better to use the enum provided, when
-> > referring to an EFI memory-type. Update existing uses.
->
-> The C standard provides no definition of the size of the integer used to
-> implement enums. It could use u8, u16, u32, or u64.
->
-> As EFI applications may be compiled using a different compiler we need
-> to control the width used for passing parameters in the API interface.
->
-> We should have used u32 instead of int here. We could use a typedef for
-> more verbosity though that is frowned upon in U-Boot.
-
-Yes, the ext function is debatable. The rest seem OK to me, though, as
-they are internal functions, See also [1].
-
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Call the value 'mem_type' consistently. Fix up one instance of
-> > upper-case hex.
-> >
-> > Fix up the calls in struct efi_boot_services so that they use the same
-> > enum, adding the missing parameter names and enum efi_allocate_type.
-> >
-> > While we are here, rename the 'memory' parameter to 'memoryp' so that it
-> > is clear it is a return value.
+> > This function should return pointers, not addresses. Add the conversion.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> >   include/efi_api.h                |  6 ++++--
-> >   include/efi_loader.h             | 28 ++++++++++++++-------------
-> >   lib/efi_loader/efi_boottime.c    | 13 +++++++------
-> >   lib/efi_loader/efi_device_path.c |  4 ++--
-> >   lib/efi_loader/efi_memory.c      | 33 ++++++++++++++++----------------
-> >   5 files changed, 45 insertions(+), 39 deletions(-)
+> >   lib/efi_loader/efi_memory.c | 5 +++++
+> >   1 file changed, 5 insertions(+)
 > >
+> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > index e493934c713..8b01821a993 100644
+> > --- a/lib/efi_loader/efi_memory.c
+> > +++ b/lib/efi_loader/efi_memory.c
+> > @@ -748,6 +748,11 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+> >       memory_map = &memory_map[map_entries - 1];
+> >       list_for_each_entry(lmem, &efi_mem, link) {
+> >               *memory_map = lmem->desc;
+> > +             /* Convert to pointers, which is what the caller expects */
+> > +             memory_map->physical_start =
+> > +                     (ulong)map_sysmem(lmem->desc.physical_start, 0);
+> > +             memory_map->virtual_start =
+> > +                     (ulong)map_sysmem(lmem->desc.virtual_start, 0);
+> >               memory_map--;
+> >       }
+> >
+>
+> NAK.
+>
+> physical_start and virtual_addr are not sandbox virtual addresses.
+>
+> The sandbox virtual address space is irrelevant for UEFI. They should be
+> restricted to the CLI.
+
+Well, you can't have it both ways. Either this is a pointer expressed
+as a u64, or it is an address.
+
+My understanding is that it is a pointer expressed as a u64. The use
+of u64 is a confusing part of the spec, but it is because they want to
+specify the size as 64-bit, whereas a void * would not have a fixed
+size. But you can't run a 32-bit image on a 64-bit machine anyway, so
+this decision is a mystery to me.
 
 Regards,
-SImon
-
-[1] https://stackoverflow.com/questions/4879286/specifying-size-of-enum-type-in-c/4879350#4879350
+Simon
