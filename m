@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65473D3B9A4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 800F7D3B9A7
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECD2D89C76;
-	Tue, 26 Nov 2024 16:39:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 489D789CA9;
+	Tue, 26 Nov 2024 16:39:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dy/y6Jw1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KcdtIN+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C38D189C76; Tue, 26 Nov 2024 16:39:21 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 88E9989CA4; Tue, 26 Nov 2024 16:39:26 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC18489CA3
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:39:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8515589C90
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:39:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa53a971480so422694966b.1
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:39:17 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa52bb7beceso460848266b.3
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:39:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732635557; x=1733240357; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732635564; x=1733240364; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=57jP3v0lNjLt1OH9Y7KwOwbnZWbOlG0WCepiukWb0I0=;
- b=dy/y6Jw1ZYu94nKvlDiK4Jh1rAZwMZ1EFhBfOiJYeBVY+OoN2OPawtJhW9uBxzlkKz
- +53zHQ7WjtGP1O4oYuLpzplyGPVY9oqMKKu2aZsp6UpsJ0eCZB6+fHV4GbzmoHgxDsek
- z6/yCF83exC1mk516+B7Xxvcse1LoAgy8iMrM=
+ bh=isVDWiv1KYhV7Ksd5jX2t7aUAYg1nZSTElvo+mbVLvk=;
+ b=KcdtIN+VdMcOTM7+/kT4avvZ+GZV11Cht/hrWItxX8bhW88zkeAN59OwOQxgGP1a1v
+ 1GmfIhy0PFp+xb9ZmjZ9Xhj+8re0oE8HeO4WYI5D/kFoBzd5hwRJ5SPhY3C+hIhwKYn5
+ KEq9NYc0jD6mjlClNaMy998twY11lO9yg8uL8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732635557; x=1733240357;
+ d=1e100.net; s=20230601; t=1732635564; x=1733240364;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=57jP3v0lNjLt1OH9Y7KwOwbnZWbOlG0WCepiukWb0I0=;
- b=qwFH6LsKdZYmOAl8zsXu76/I4GwDw38xkoMVtbDCady+AkIp+oz4aqgldnnZx7WPmD
- sQLgivlICtiRLDSaAKSZCq38UX49bEdwVIawIEa1Xqvg9OP/mcX5Kk6CKseI0SZn4WPF
- g+SpoQoFzlz/MTRnxQVQEhq5CGwSi7jl0rShaMWkpYwWAzhZOPupZrC+EREP5pJQw8fO
- CCrA0tsjVy3b89d/JOJSNS3CeHXlelwfQgnYwoJNba70DvQGKoHQKxG5G7J+OLZWYTok
- KYnaaOL3AzzTSGP1rbyC8XRAQyikSaxxdGIYcn4mj0QBmlz8xuweELwn56P3m9Zip36+
- nq+Q==
+ bh=isVDWiv1KYhV7Ksd5jX2t7aUAYg1nZSTElvo+mbVLvk=;
+ b=mtCaoB6eOhr3u2rW0YC1BmnHu097aGB+X/oiRZ41ElMPbsdWH4FVFqkVfMYJ89yA6H
+ uFAFh/WG2aj48reluz0/9iNpm8jgIr9qc8A3BWjWra4B4DgSoZgoHSoSfCeJ9t+n/4c7
+ QcSMIbaDGc3z02MCr4z8O9e/ZEi/E0amNXU7aSvpYEQjvRG2nbzgnCIlyTDLFyCZTWmE
+ 8WI73NducqJk9mHU7EeY5Ad+RDGSnDp+EmD2uuTJpeiQEcRUErOSP5QJaEebJGV/C2LU
+ DYIPRRQ6+OJUcjZ88exgZN7mKzxGIV2I1noc0Ta6ItW828PsX2KzhxL4z9NRRDwflAwd
+ 9NXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNTyRofZHfEHRZWOz/SRsI5OCuY3l69KEVQZHd7qLkMeQ1k7mBHrKANMSJ2DwkYSEnfZ8p4CI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy04HYtmraUDidA8oOuIOsp1UD5beICOxAndWj318eoZ3osW+rT
- lmjOuhOaKy7BuzAmdln2UUpWXCt75bht/13nwC2raK5xMLYBb4LrLiKYvdpbPtDIUj2ZRryFCrv
- jEbtvtqDXvPlEk5efsC8hvQEY+aKIEK1lG6fi
-X-Gm-Gg: ASbGncusk3m7HJyOVUPGdnLTriv11UL7vClTmgVwhlQKPqxa8fpwrJKX2eFmuutAuK4
- /q8EW2/5gZnjqB6OzMBpTYCMpfw+wY50=
-X-Google-Smtp-Source: AGHT+IEZhJgtwSrAXJPAdgOHGrR2ZvbdZqrdSqABZKxOmMWS2ySWEyQGA5pUek+6bXkihKw96IFSrlD1OcnCgsq6acM=
-X-Received: by 2002:a17:906:1bb1:b0:aa5:4d26:8e52 with SMTP id
- a640c23a62f3a-aa54d268e73mr762408366b.47.1732635557174; Tue, 26 Nov 2024
- 07:39:17 -0800 (PST)
+ AJvYcCW1imIldJKZ3bt8VSjgapG2IGx4W+fdme438HtdBxopgsvYl2w7yirVXuae2RjWmf9+2aHF0uM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHl0+ST/EkBztc6LyKKrr2dxu9AXTN0/bSu5xVqwxAEc6rkmqt
+ utV/n6UZ27/n2lKjpVR6G0r+XG1vHnw5E7fhfj5DMSs2qO4jkTOZH7XD5W+kHuXeVCpp6K+bYMM
+ XTys24lDPqCLg4bJWGpjuq5EgN6XVKe8a7aRu
+X-Gm-Gg: ASbGnctbIKoFgsAWhUqzBJgWU0mH9fBy7P+Y1TNYWw+6DSbZPPnR5vI3/nv0FqtufeE
+ k+zMgLDZpf84eAun107tMQ/VR67iKDMM=
+X-Google-Smtp-Source: AGHT+IG7YICfbYvejXoywap85chASNOeM+WTBTIOeC1XFc6NP+680rmTJqR4sOulqV77PBqiHqs1vOyz9uICh9r/N2I=
+X-Received: by 2002:a17:906:3155:b0:a9a:230b:fb5e with SMTP id
+ a640c23a62f3a-aa509966471mr1421645666b.4.1732635564012; Tue, 26 Nov 2024
+ 07:39:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20241125204456.1525752-1-sjg@chromium.org>
- <a6ba9ebe-9d52-4b2d-bb62-02c4f0ea86fb@gmx.de>
-In-Reply-To: <a6ba9ebe-9d52-4b2d-bb62-02c4f0ea86fb@gmx.de>
+ <20241125204456.1525752-9-sjg@chromium.org>
+ <ba686354-41a7-413f-aaae-77e286277510@gmx.de>
+In-Reply-To: <ba686354-41a7-413f-aaae-77e286277510@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Nov 2024 08:39:05 -0700
-Message-ID: <CAFLszThf3aSwi1yhaQP9Ns7wTNjKH8XicAqUU6vy5gej5GP+CQ@mail.gmail.com>
-Subject: Re: [PATCH 00/13] efi: Tidy up confusion between pointers and
- addresses
+Date: Tue, 26 Nov 2024 08:39:12 -0700
+Message-ID: <CAFLszThW0x7-Pxbm0LfkKGSUa+R+SuLfhUDPJn+Rm3S9kQQgig@mail.gmail.com>
+Subject: Re: [PATCH 08/13] efi_loader: Tidy up use of addresses
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Moritz Fischer <moritzf@google.com>, 
- Patrick Wildt <pwildt@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
+ Janne Grunau <j@jannau.net>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
  =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -99,47 +96,66 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 26 Nov 2024 at 02:10, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 26 Nov 2024 at 03:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 25.11.24 21:44, Simon Glass wrote:
-> > The EFI-loader implementation converts things back and forth between
-> > addresses and pointers, with not much consistency in how this is done.
+> > The EFI loader's memory implementation is quite confusing. The EFI spec
+> > requires that addresses are used in the calls to allocate_pages(), etc.
+> > This is unavoidable.
 > >
-> > Within most of U-Boot a pointer is a void * and an address is a ulong
+> > This usage then filters down to various functions within the
+> > implementation. This is unfortunate, as there is no clear separation
+> > between addresses and pointers. In some parts of the code things become
+> > hopelessly confusing, and several bugs have crept in.
+> >
+> > Adjust the internal functions to always use a ulong for an address or a
+> > void * for a pointer.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   include/efi_loader.h              | 13 +++--
+> >   lib/efi_loader/efi_bootmgr.c      |  9 ++--
+> >   lib/efi_loader/efi_boottime.c     | 37 ++++++++------
+> >   lib/efi_loader/efi_helper.c       |  7 +--
+> >   lib/efi_loader/efi_image_loader.c |  2 +-
+> >   lib/efi_loader/efi_memory.c       | 84 +++++++++++++------------------
+> >   lib/efi_loader/efi_var_mem.c      |  6 +--
+> >   7 files changed, 76 insertions(+), 82 deletions(-)
+> >
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index cae94fc4661..c4afcf2b60b 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -791,7 +791,7 @@ void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
+> >    */
+> >   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+> >                               enum efi_memory_type mem_type,
+> > -                             efi_uintn_t pages, uint64_t *memoryp);
+> > +                             efi_uintn_t pages, void **memoryp);
+> >
+> >   /**
+> >    * efi_free_pages() - free memory pages
+> > @@ -800,7 +800,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+> >    * @pages:  number of pages to be freed
+> >    * Return:  status code
+> >    */
+> > -efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages);
+> > +efi_status_t efi_free_pages(void *memory, efi_uintn_t pages);
 >
-> No. It is phys_addr_t that was introduced to handle the sandbox's
-> virtual addresses.
->
-> And we should keep this sandbox stuff out of the EFI code. They are only
-> needed for the command line interface.
+> Read the UEFI spec, please.
 
-No. My statement is correct and long predates sandbox. U-Boot has
-always used ulong. Using an address is generally much easier than a
-pointer, so I believe this design decision was (and remains) a good
-one. I certainly would not support changing it. The phys_addr_t type
-has nothing to do with sandbox.
+Again?
 
 >
-> >
-> > This convention is very helpful, since it is obvious in common code as
-> > to whether you need to call map_sysmem() and friends, or not.
-> >
-> > As part of cleaning up the EFI memory-management, I found it almost
-> > impossible to know in some cases whether something is an address or a
-> > pointer. I decided to give up on that and come back to it when this is
-> > resolved.
-> >
-> > This series starts applying the normal ulong/void * convention to the
-> > EFI_loader code, so making things easier to follow.
+> FreePages() expects EFI_PHYSICAL_ADDRESS which is defined as
 >
-> According to the C specification size of long may be different to the
-> size of void *. uintptr_t is the type that is guaranteed to match the
-> size of void *.
->
-> There is no benefit in spreading the ulong abuse any further.
+> typedef UINT64 EFI_PHYSICAL_ADDRESS;
 
-U-Boot specifically uses compilers where ulong can hold a pointer.
-Same with Linux.
+How does this comment relate to my patch? We should be using pointers
+in most cases, as is done with allocate_pool.
+
+[..]
 
 Regards,
 Simon
