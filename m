@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438F9D5A6E4
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 06:31:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3014D5A6DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 06:32:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C275289BFC;
-	Tue, 26 Nov 2024 07:31:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F0C88933D;
+	Tue, 26 Nov 2024 07:32:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jVEucEyl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RA0fDOlU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB46589C08; Tue, 26 Nov 2024 07:31:55 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id CB6458933D; Tue, 26 Nov 2024 07:32:55 +0100 (CET)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FF588F20
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:31:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A32589BFC
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:32:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-724e1b08fc7so3467585b3a.0
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:31:52 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2ffbea0acc2so21628501fa.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:32:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732602711; x=1733207511; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yNz8xDRL1bPbYz6Lw6aV9leVyjEOvdHASUEXnZNakfw=;
- b=jVEucEylWq/nKQyYbUK9OMFYUAJ4muPGwMEDgO6xAy5PpUZ0Kya+tZZLHLX79NJWIy
- o6fgOOQN2SPkjzrgVhBfTKxcQWY0wp+k2PnlH/I/WK1b/0bna3kR0L9sN+1CCI3m9EBv
- /3datS57CHu1bGtWCKFdU7F9r2PuIH3n2HAQOWm0c2V1fZxuESUKLMfUgpWomF1B0G62
- tsfUfG28nhGo5iYxp/sP6jgZrQOIW1qJ2y5C9aorMx91V/WjN4+isojc8wDPz0LQRk8U
- Uw3Wo4H41Acbl+q0KrCqpS87UxqFdXXjpfJvjd/6fDaHjk9C5f5kfaK0Avve8jprqyMI
- p8qQ==
+ d=gmail.com; s=20230601; t=1732602773; x=1733207573; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8E2ZNJ7fJhhfW0H7Nhq4MvoP13ZqBCQ8M5S+siMjHj0=;
+ b=RA0fDOlUOUhbv+8+11EHGKm2Ufx1yCnLpA0vblB2ykrkoRvzyzu3DbXQdAvrfRWsF+
+ sNqA/1RT7lxgLbkD/aXvOtOquZiMusil+o1C9W0luFnuPbbvg4E/ZqNjHhU4FKzQyCoA
+ VKXHgx/dHYLEVsw2gCfXH3zjbKiDHdU/QRRJNC71ugxQXDNH1IGDsTF9pOdeeeVRAp3v
+ ideOJSLPyEIACoAyWHSOXad4jcK3429AsgjabbtzMMaRJk6yrY43dSz2NXJ/bDAdN0tK
+ BfOGj2sJbTrLtclvpZKpa1CxhyMJUksmITTULi6BGLLfffnMTcYJVFu1AWrbMC1pTlUU
+ wgPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732602711; x=1733207511;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yNz8xDRL1bPbYz6Lw6aV9leVyjEOvdHASUEXnZNakfw=;
- b=bfsgGYeEQ7yOjkG+iftDd0y4m2erC5JaiGVYcbUk8u/QjVrmzzwKQdQ7gBvOpjVw2x
- 9Meqv5bzwXIrBal2m/7AKQB9bvJ9nnPxg1XpURuh9uHBRuAlC+C7DA8gvIS+cfjvyID/
- VpeUMLfox47FJ5futMkLVKtgk/jt2v4YOgeuQ8i949Ir/1Hq8BhCHgTlJyStLjqEnHob
- vhn80mXUgqGNTBXRdyftsVNyshzIJkzH1z3ZghvuIpyHoWi1GoisYPVeI7GBs7s6ciCN
- kBh9Q703fIfThXQgj++XLi0KtpQbGND55th1zXNMxUDRN/LdCJyZIGD5R+kw2kX7RoBv
- IA0A==
-X-Gm-Message-State: AOJu0YxIhVM2iTUJFKf/1Z2Xh3RGALP+WeAX9dpnTgOeSkGcoAZX1POo
- wDiapGRKxOX4hmRZkA+4fXNiU68DCD/4TwJWexYERAg3xqBb4jzTqpx7gjKojHDHzOLRSZBKozq
- fBtxysk2Z7MFkOLI0yYT3qghwQNRJBqdgDGLRvw==
-X-Gm-Gg: ASbGncvTw00IsVuhiQSl/uMAjA1tNVZ6oCI9NVUSsSV/WmoN28tcamiN04lWcQrw0MO
- ZhtZV+Lfa74+8V/b3+PGUZ7H9l2B+/g==
-X-Google-Smtp-Source: AGHT+IE2Z7UYzjyFg2SvT1pnYfd/8WdnMjTNr3lOFjz5gA1M78D09iPPMqGdArn/JjIRzWoQODlS9z6wSZJMYNAACi0=
-X-Received: by 2002:a17:90b:380c:b0:2ea:4c5f:923e with SMTP id
- 98e67ed59e1d1-2eb0e12578dmr18928607a91.5.1732602711370; Mon, 25 Nov 2024
- 22:31:51 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732602773; x=1733207573;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8E2ZNJ7fJhhfW0H7Nhq4MvoP13ZqBCQ8M5S+siMjHj0=;
+ b=WnRycJhMz9PqaoA6iYe5z4svIAYUhvm4G78k0grf9q5XxrLcolSNm/ZUJB2OwaOnRa
+ yMzBMrNz3QCAMCWHJJ33LtFgtvbh086beAjvqN95sXYXBOgfPwPrflJc0cL++ZLMrUR4
+ yqgWDnkvqKQS+950jtrCASjKE/FBsAFAmGBYnDsEy3R7uQhb3DIFYVGVnNSBVmF1kNK2
+ 0m5+qxqg5cc3WN2KWhGPwnwe+BtVYiRxQefElHOWkh2/ZyEctT3EzQ7WwibJ9nsfPa3H
+ +XHir9xSIm8Psw0lJx5qOE0iyU8X/upkbPF8oFFMUeR4f2hyJZZipus+dxbS7lkam4JI
+ QhoQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOeEJlvbX7Np+pfREaQlv04T9Pe1IwW8ha/iW5k+88eM1wxT8Qjc8++jRplEGwd+JLExyZ5iM=@lists.denx.de
+X-Gm-Message-State: AOJu0YylbEr6/G+MluJGT1XcfOYdix6JmjSIMGLUh/J7kXIHjWKT4lXj
+ f7oG1r5XOHA2IKos54YYCi4JY2CuSjBU3VJ39+dTUgsm+tDyvmUBpPGaAPFoEmaUy2KMCL2cq8z
+ mh+KSRts4H0Z2dvCVfhwXMcBmTvU=
+X-Gm-Gg: ASbGncvJfz9p5Gj4CvHWjSYqvMgf07TVyBOvBVN4MQoc7uZyW8Qgn2zYawRBtt6Tw6M
+ efkmZA6MA1u1CABB5efYa6hbY8cE6cLMv3Wr63VSrp5CWIPeZrqP45CT5RVDbsbp4Rg==
+X-Google-Smtp-Source: AGHT+IHHdaq5rSKKXbT+tptY3k2ldSyjhE6peNATkKoh5rJzAs6qwzO+pureB5Ga7Yki5RhkSe3Db1bXd95GS8CREHM=
+X-Received: by 2002:a05:651c:12c7:b0:2ff:5645:1265 with SMTP id
+ 38308e7fff4ca-2ffa7206d75mr64314491fa.41.1732602772529; Mon, 25 Nov 2024
+ 22:32:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-2-sjg@chromium.org>
-In-Reply-To: <20241125204456.1525752-2-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 26 Nov 2024 08:31:15 +0200
-Message-ID: <CAC_iWjLhYSHbwgN=Z+-4wk=gWzVrxHs_mb4focBchMXyYPL=7g@mail.gmail.com>
-Subject: Re: [PATCH 01/13] efi: Define fields in struct efi_mem_desc
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+References: <20241121142522.59059-1-heinrich.schuchardt@canonical.com>
+ <mvmjzcwobi0.fsf@suse.de>
+ <e6eadaccaeef3b902d15dba7f634a7225318f1bb.camel@suse.com>
+In-Reply-To: <e6eadaccaeef3b902d15dba7f634a7225318f1bb.camel@suse.com>
+From: E Shattow <lucent@gmail.com>
+Date: Mon, 25 Nov 2024 22:32:41 -0800
+Message-ID: <CANV2PTNJScKtwS-u3FL6jeZM1xhXnF-+OWn8Z1q8ABRTiLg0Dw@mail.gmail.com>
+Subject: Re: [PATCH 0/2] configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER
+To: Loic Devulder <ldevulder@suse.com>
+Cc: Andreas Schwab <schwab@suse.de>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Rick Chen <rick@andestech.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Tom Rini <trini@konsulko.com>, Chanho Park <chanho61.park@samsung.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Nam Cao <namcao@linutronix.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +99,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 22:45, Simon Glass <sjg@chromium.org> wrote:
+On Fri, Nov 22, 2024 at 6:33=E2=80=AFAM Loic Devulder <ldevulder@suse.com> =
+wrote:
 >
-> There is quite a bit of confusion in the EFI code as to whether a field
-> contains an address or a pointer. As a first step towards resolving
-> this, document the memory-descriptor struct, indicating that it holds
-> addresses, not pointers.
+> Hi guys!
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> I played with latest openSUSE TW image [1] for VisionFive2 and I also had=
+ an issue but not exactly
+> the same Andreas had. Booting the OS from an sdcard gave me the grub cli =
+but not the menu. With
+> Heinrich's patch I was able to boot on grub menu as fully boot the OS as =
+well.
 >
->  include/efi.h | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
+> Tested-by: Loic Devulder <ldevulder@suse.com>
 >
-> diff --git a/include/efi.h b/include/efi.h
-> index c559fda3004..6f48c6569d5 100644
-> --- a/include/efi.h
-> +++ b/include/efi.h
-> @@ -273,6 +273,21 @@ enum efi_memory_type {
->  #define EFI_PAGE_SIZE          (1ULL << EFI_PAGE_SHIFT)
->  #define EFI_PAGE_MASK          (EFI_PAGE_SIZE - 1)
->
-> +/**
-> + * struct efi_mem_desc - defines an EFI memory record
-> + *
-> + * type (enum efi_memory_type): EFI memory-type
-> + * reserved: unused
-
-@type, @reserved
-> + * @physical_start: Start address of region in physical memory. Note that this
-> + *     is an address, not a pointer. Use map_sysmem(physical_start) to convert
-> + *     to a pointer
-> + * @virtual_start: Start address of region in physical memory. Note that this
-> + *     is an address, not a pointer. Use map_sysmem(virtual_start) to convert
-> + *     to a pointer
-> + * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
-> + *     bytes)
-> + * @attribute: Memory attributes (see EFI_MEMORY_...)
-> + */
->  struct efi_mem_desc {
->         u32 type;
->         u32 reserved;
 > --
-> 2.43.0
+> Loic Devulder <ldevulder@suse.com>
+> Senior QA Engineer | SUSE Software Solutions
 >
+> [1] -
+> https://download.opensuse.org/ports/riscv/tumbleweed/images/openSUSE-Tumb=
+leweed-RISC-V-JeOS-starfivevisionfive2.riscv64-2024.11.10-Build1.19.raw.xz
+>
+> On Thu, 2024-11-21 at 16:24 +0100, Andreas Schwab wrote:
+> > On Nov 21 2024, Heinrich Schuchardt wrote:
+> >
+> > > Our MMC driver for JH7110 boards only supports reading to the low 4 G=
+iB of
+> > > memory. Booting boards with more memory requires EFI_LOADER_BOUNCE_BU=
+FFER.
+> >
+> > That doesn't change the situation with the booting problem I have.
+> >
 
-Thanks
-/Ilias
+What was this series supposed to do and how to test for it properly?
+I did not see any difference, still just failure on 4GB and 8GB DRAM
+... is my testing method wrong?
+
+-E
