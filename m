@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA3BD59D85
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCBBD59D85
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 684C289270;
-	Tue, 26 Nov 2024 01:32:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5876A89338;
+	Tue, 26 Nov 2024 01:33:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jVVTwZpj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bn8dVsqe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C66089270; Tue, 26 Nov 2024 01:32:58 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 06C9E89A09; Tue, 26 Nov 2024 01:33:32 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4305C88BFB
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:32:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00BFF88BFB
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:33:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5cfe5da1251so6153821a12.1
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:32:56 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2ea39f39666so3968001a91.2
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:33:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732581176; x=1733185976; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732581206; x=1733186006; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y1zt0mZ3WLslNr38dYJgTK0e//mnMbGVJOJQwnQH2vU=;
- b=jVVTwZpjrFCmGW/fNn+CTLhCxZ4FrOHunGOGrRYOS7URjbeQiVoZB6fsXDf8Kbf/C1
- xHxg/AhAm4kXNSOVVnaQSoMqOJ3D73Y+bJBr0ijNd7u307YqGecQ8FPraT88Mr8KrCOW
- YGGhnhcDG9GntZzgQA/CdEq596m5jlgsajewY=
+ bh=bQzaFjelvQM37DyTwtTG1pv7NLKMguPGcSjB2fRrbTE=;
+ b=Bn8dVsqelqgZfhu2OwBLYBLdscG7wQTT1V84I42fF11LtV84rW6IQlkD83jLkUnkpZ
+ mLl9y9Ag5jNkYiL3rrU9FEVMFjFP4QJejtO6JVXXJyzNK/lwmuA76326bFSY56/90j2s
+ 7fPA2Gx+cty58LkbQFKYMFlZRMm9vMIZA300M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732581176; x=1733185976;
+ d=1e100.net; s=20230601; t=1732581206; x=1733186006;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=y1zt0mZ3WLslNr38dYJgTK0e//mnMbGVJOJQwnQH2vU=;
- b=vyug6ZKHJ1VUQ36qk61Zb154/IN6gkHi51r00ixuYtXExxjpCAuuad6QFZoL6UwSv9
- B/YMTL/n53wrCfU0XoDFbXUjOWjq/5svWyTFnrtB4jJE1kWWMoeRS9+5BQiHS8oxneIu
- fnCVHBdYDe1HChiIGnGn7QRZXDAhJ75IWCpGhaxqGG+LyZyaMjfOCMQRZW5dUyWq0kmG
- 3BecV0XH+63KXKZVLlz7zwAU3+II7VC5HjdSAcfUCW60r+qF/290IfxxqdUXvs7rK6Bl
- URexLDQzK5Cuod8m7jmpMgBMk7pn8ADUC9PC8xonlxw0t0hdchptLSvozKKDAzbngtot
- 2aeg==
-X-Gm-Message-State: AOJu0YwfRSfkuNj5FPZxw+plN6ZsqsWWQBCxNrJ/W+oO21XEkJ+y2DFY
- 1CrusX2DGu+9t1lHjkY2fgbMb3gwoZHhhfhVGDqljy/4Jvih2lCBveqF5fB/qRBBmpECxUXZ2ih
- 8wb5gcr5FQ/zNhA0Cb6DeUIH4dEH2ZkuHAZL9
-X-Gm-Gg: ASbGncvsqXtBgJZ14m1PefUG244QcRX+2kWeI6dzYHfqVzPqn83cMBv7pcCYztZoj+e
- LmHLYe+C07BRO5qpt+lj53vwbqMXqnuE=
-X-Google-Smtp-Source: AGHT+IHyCrrJpBEh6EYgx7673avPKvmQ5DcjWrfhcRFVZb6c51xhV01thnh3X1LhhMHszr1iqlKpDg9kOG4Q/ka2nC4=
-X-Received: by 2002:a17:906:329b:b0:aa5:3979:cb3d with SMTP id
- a640c23a62f3a-aa53979cbecmr825374466b.26.1732581175780; Mon, 25 Nov 2024
- 16:32:55 -0800 (PST)
+ bh=bQzaFjelvQM37DyTwtTG1pv7NLKMguPGcSjB2fRrbTE=;
+ b=Owe8kgP8r8JZOABjyiKLlsK4oJ0x6K/J5sJRtxHO5rT0x1sIqXH5ytCg7QyrteUqKH
+ iuXby9Qxl3a0HDwKR/5IHBGS1sTJw2NKJjKPxRmeDpZEN9N1Tb4PeXPdhZ90sdNde11s
+ mgzBLbfVmTJZJYBQwSuy+DDSTKPtnyWXPVS2CjxeAck/gkkFCeUaNpJOYJx9qD/5ZS54
+ oEs57avLydb1gcolCwR2O1AsmuOH9wm6GmD+6tSJDf/5L++NSDrQaqYX95sOgu8P5TA0
+ qjNQpeV6SwyumDqy+vpWBlETg8qeO7jz5ncNScIQVkaTCDHkwhqbw3X9yitguqVUswKi
+ L2Ow==
+X-Gm-Message-State: AOJu0Yz0tktdG+VkJdIDzuJp9zBqIJJAn4etdFI6JqoWsSKA0zUbTYVU
+ SHkPz8hyy56RTd95vizFuZLsichg61Z4ay4NsDg3KTdszSKs87shSFv5tZPPCmiIrwZgEWkWrt1
+ V8ztuRoGpj5Wh3meazupqyMp6K27EpLJE4VOR
+X-Gm-Gg: ASbGncuiZTO6wD+rzgZ6SIkKNMOonCsw5nD+rFIJP3GpXETLKN94JOdbGCy9kN+7NV2
+ CzAbOs4EtHoeObYlFtpG8meD0gH5Hh9o=
+X-Google-Smtp-Source: AGHT+IFK7oTAkYr6NxAqfe7g6XFSS9x2kLTKIpsc3NUHnaKIoAryFBFPtmFUyhpIbvPuBlSUSUkFO2BxBfwiv79gfbY=
+X-Received: by 2002:a17:90b:33cb:b0:2ea:5823:c141 with SMTP id
+ 98e67ed59e1d1-2eb0e22ce72mr20784333a91.16.1732581206582; Mon, 25 Nov 2024
+ 16:33:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
- <20241125115554.1707080-3-andrew.goodbody@linaro.org>
-In-Reply-To: <20241125115554.1707080-3-andrew.goodbody@linaro.org>
+References: <20241122015858.557561-1-marex@denx.de>
+ <20241122015858.557561-2-marex@denx.de>
+In-Reply-To: <20241122015858.557561-2-marex@denx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Nov 2024 17:32:41 -0700
-Message-ID: <CAFLszTgz9jRKaySEhuHM2Kh1FxmigY1SJobpn-DPq3NvkN_psQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/4] sandbox: select CONFIG_64BIT for sandbox
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Date: Mon, 25 Nov 2024 17:32:44 -0700
+Message-ID: <CAFLszTjJWrrxbeqr1hRnMsaJyTGLWx2-mY1LKQ4NMkkHHjxYQQ@mail.gmail.com>
+Subject: Re: [PATCH 2/4] build: Respect CONFIG_SPL_BUILD in DT sources
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Bryan Brattlof <bb@ti.com>, 
+ Fabio Estevam <festevam@gmail.com>, Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Stefano Babic <sbabic@denx.de>, Sumit Garg <sumit.garg@linaro.org>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,45 +94,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 04:56, Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
+Hi Marek,
+
+On Thu, 21 Nov 2024 at 18:59, Marek Vasut <marex@denx.de> wrote:
 >
-> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
-> static analysis tools.
+> Currently the U-Boot SPL build uses the same DTBs that were generated
+> during U-Boot proper build, and calls 'fdtgrep' on those DTBs to filter
+> out uninteresting nodes and properties. Those U-Boot proper DTBs are
+> built from DTS which are first preprocessed by CPP, but that CPP is
+> invoked in U-Boot proper build context and effectively ignores the
+> CONFIG_SPL_BUILD macro. In case the CONFIG_SPL_BUILD macro is used
+> in any .dts file, the content of the macro is removed by CPP.
 >
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> Fix this by building a separate set of DTBs for the SPL, which are
+> preprocessed by CPP with -DCONFIG_SPL_BUILD set. Use the same way
+> for the other PLs.
 >
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->
-> (no changes since v3)
->
-> Changes in v3:
-> Updated commit title
->
-> Changes in v2:
-> Moved select of CONFIG_64BIT from SANDBOX64 to HOST_64BIT as
-> suggested by reviewer.
->
->  arch/sandbox/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Bryan Brattlof <bb@ti.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Greg Malysa <greg.malysa@timesys.com>
+> Cc: Ian Roberts <ian.roberts@timesys.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jonathan Humphreys <j-humphreys@ti.com>
+> Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+> Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefano Babic <sbabic@denx.de>
+> Cc: Sumit Garg <sumit.garg@linaro.org>
+> Cc: Tim Harvey <tharvey@gateworks.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> NOTE: For v2025.04
+> ---
+>  dts/Makefile         |  5 ++++-
+>  scripts/Makefile.lib | 11 +++++++++++
+>  scripts/Makefile.xpl |  7 ++++++-
+>  3 files changed, 21 insertions(+), 2 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+As mentioned on the other patch, this should be handled in fdtgrep
 
-
-> diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
-> index 1c8353d615..db29ca14bd 100644
-> --- a/arch/sandbox/Kconfig
-> +++ b/arch/sandbox/Kconfig
-> @@ -46,6 +46,7 @@ config HOST_32BIT
->
->  config HOST_64BIT
->         def_bool $(cc-define,_LP64)
-> +       select 64BIT
->
->  config HOST_HAS_SDL
->         def_bool $(success,sdl2-config --version)
-> --
-> 2.39.5
->
+Regards,
+Simon
