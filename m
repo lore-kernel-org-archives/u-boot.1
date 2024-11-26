@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6100D5A6E2
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 05:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6C4D5A6E2
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 05:16:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BEC3896C1;
-	Tue, 26 Nov 2024 06:08:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 314AA89BF2;
+	Tue, 26 Nov 2024 06:16:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g0ZcMseZ";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="f0Byhp1T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4AA389634; Tue, 26 Nov 2024 06:08:25 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id E602189BF3; Tue, 26 Nov 2024 06:16:51 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C5D889634
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:08:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 372ED89BCD
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:16:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ589Sg117680;
- Mon, 25 Nov 2024 23:08:09 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732597689;
- bh=yzm0n7Ti0BggBq9yhBuqsrsWGLHnAxX988XyzlIFm1o=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=g0ZcMseZkiVTmLsQMf1nLUKEH7qIF1kcdAerYdpNFnzLOxyeks2AA3IxarwPVrg2g
- nEgYQn/0JqH+QgrGYou93NZBm7g/Ryq25g9id+/rEYKIyfZYHW5gwrun4P3Btfziz0
- TkRHqz5tm8E6V01uMAt1pERVGL5HQUBtfhw7l+n4=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ5897v031325;
- Mon, 25 Nov 2024 23:08:09 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
- Nov 2024 23:08:09 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 25 Nov 2024 23:08:09 -0600
-Received: from localhost (prasanth-server.dhcp.ti.com [172.24.227.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ588Hv078909;
- Mon, 25 Nov 2024 23:08:09 -0600
-Date: Tue, 26 Nov 2024 10:38:08 +0530
-From: Prasanth Mantena <p-mantena@ti.com>
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "j-humphreys@ti.com"
- <j-humphreys@ti.com>, "Simek, Michal" <michal.simek@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>,
- "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>, "sjg@chromium.org"
- <sjg@chromium.org>, "william.zhang@broadcom.com"
- <william.zhang@broadcom.com>, "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>, "git
- (AMD-Xilinx)" <git@amd.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: Re: [PATCH] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
- flashes
-Message-ID: <20241126050808.yvezx37spuxnxucu@prasanth-server>
-References: <20241122092619.1376234-1-venkatesh.abbarapu@amd.com>
- <20241125084919.e3mr4nwmoecqj3y7@prasanth-server>
- <SA1PR12MB8697E660E054185666B19C17982E2@SA1PR12MB8697.namprd12.prod.outlook.com>
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQ2rr4l010320;
+ Tue, 26 Nov 2024 05:16:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=qNRrLX6L6Nk+28MQCjjj5KNQ
+ f9z4QNzAgigavZi+WF4=; b=f0Byhp1TOr56K4scqFL05FqwwTXpV9w1U1Rt+5xC
+ 6duJ4kdyfMSnpC8CSacq5/H7ht47SXz9AOwB8/Y/doA1EWuYxLbDLmdAPCz1oCgK
+ gUPd1r3Go93EQS5nicIf8SbRB1p0XcNIvcbDKQMOyBJK04Al9LbvQOJTip/H52KE
+ Z7fB5Lwehcl6XrF8mDcoSzXRlrLKlbA0T+e/2nH8fuDa7SQ0q/5Gi11zya+hZ/v+
+ 2+sH4d4oWmBsvtHSMikk6gGAWyIPUcClbzvH9wId0PKSLFRDHPXwoP9RuspLxQnr
+ xLHQ1JTOSZBiho2bHcdDzEEF0BZRxhz1+0mFG3HcY4RsdA==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 434sw9a20p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Nov 2024 05:16:33 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 4AQ5GWeq029217
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Nov 2024 05:16:32 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 25 Nov 2024 21:16:29 -0800
+Date: Tue, 26 Nov 2024 10:46:25 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+CC: <mkorpershoek@baylibre.com>, <trini@konsulko.com>,
+ <jerome.forissier@linaro.org>, <avromanov@salutedevices.com>,
+ <sjg@chromium.org>, <ion@agorria.com>, <clamor95@gmail.com>,
+ <quentin.schulz@cherry.de>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] drivers: fastboot: Enable flashing support for UFS
+Message-ID: <Z0VZqWbA8avK0cjU@hu-varada-blr.qualcomm.com>
+References: <20241125110354.602124-1-quic_varada@quicinc.com>
+ <d741a762-f56d-44b9-898f-38a4ae3c5689@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <SA1PR12MB8697E660E054185666B19C17982E2@SA1PR12MB8697.namprd12.prod.outlook.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <d741a762-f56d-44b9-898f-38a4ae3c5689@linaro.org>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: Um6SKTZdvKtObL4t5hQ7CtFLpSYPlhtO
+X-Proofpoint-ORIG-GUID: Um6SKTZdvKtObL4t5hQ7CtFLpSYPlhtO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0
+ mlxlogscore=999 adultscore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 phishscore=0 clxscore=1015 mlxscore=0
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2409260000
+ definitions=main-2411260042
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,104 +101,260 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09:12, Abbarapu, Venkatesh wrote:
-Hi Venkatesh,
+On Mon, Nov 25, 2024 at 06:59:40PM +0100, Caleb Connolly wrote:
+> Hi Varadarajan,
+>
+> On 25/11/2024 12:03, Varadarajan Narayanan wrote:
+> > MMC and UFS seem to execute very similar steps to identify the
+> > partition and write to it. Hence try to enable fastboot flashing
+> > support in UFS leveraging the MMC functions.
+>
+> Thanks for this! Do you think we could make this dynamic at runtime?
+> Since it's currently possible to build a single binary with
+> qcom_defconfig that will work across a wide range of boards (both with
+> eMMC and UFS), I don't think it makes sense to pick a fastboot backend
+> at build time.
+>
+> Some additional comments below.
+> >
+> > Tested on rb3gen2 platform.
+> >
+> > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> > ---
+> >  drivers/fastboot/Kconfig      | 19 +++++++++++++++---
+> >  drivers/fastboot/Makefile     |  1 +
+> >  drivers/fastboot/fb_command.c |  6 ++++--
+> >  drivers/fastboot/fb_mmc.c     | 36 ++++++++++++++++++++++++-----------
+> >  4 files changed, 46 insertions(+), 16 deletions(-)
+> >
+> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> > index 1eb460f5a0..5c41fc4684 100644
+> > --- a/drivers/fastboot/Kconfig
+> > +++ b/drivers/fastboot/Kconfig
+> > @@ -92,7 +92,7 @@ config FASTBOOT_USB_DEV
+> >  config FASTBOOT_FLASH
+> >  	bool "Enable FASTBOOT FLASH command"
+> >  	default y if ARCH_SUNXI || ARCH_ROCKCHIP
+> > -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
+> > +	depends on MMC || UFS || (MTD_RAW_NAND && CMD_MTDPARTS)
+> >  	select IMAGE_SPARSE
+> >  	help
+> >  	  The fastboot protocol includes a "flash" command for writing
+> > @@ -120,6 +120,10 @@ config FASTBOOT_FLASH_NAND
+> >  	bool "FASTBOOT on NAND"
+> >  	depends on MTD_RAW_NAND && CMD_MTDPARTS
+> >
+> > +config FASTBOOT_FLASH_UFS
+> > +	bool "FASTBOOT on UFS"
+> > +	depends on UFS && EFI_PARTITION
+> > +
+> >  endchoice
+> >
+> >  config FASTBOOT_FLASH_MMC_DEV
+> > @@ -133,6 +137,15 @@ config FASTBOOT_FLASH_MMC_DEV
+> >  	  regarding the non-volatile storage device. Define this to
+> >  	  the eMMC device that fastboot should use to store the image.
+> >
+> > +config FASTBOOT_FLASH_UFS_DEV
+> > +	int "Define FASTBOOT UFS FLASH default device"
+> > +	depends on FASTBOOT_FLASH_UFS
+> > +	default 0 if CONFIG_ARCH_SNAPDRAGON
+> > +	help
+> > +	  The fastboot "flash" command requires additional information
+> > +	  regarding the non-volatile storage device. Define this to
+> > +	  the UFS device that fastboot should use to store the image.
+>
+> This doesn't map at all to how fastboot is intended to work. We would
+> expect to see all partitions exposed not just those of a specific LUN.
 
-> Hi Prasanth,
-> 
-> > -----Original Message-----
-> > From: Prasanth Mantena <p-mantena@ti.com>
-> > Sent: Monday, November 25, 2024 2:19 PM
-> > To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>
-> > Cc: u-boot@lists.denx.de; j-humphreys@ti.com; Simek, Michal
-> > <michal.simek@amd.com>; jagan@amarulasolutions.com; vigneshr@ti.com; u-
-> > kumar1@ti.com; trini@konsulko.com; seanga2@gmail.com;
-> > caleb.connolly@linaro.org; sjg@chromium.org; william.zhang@broadcom.com;
-> > stefan_b@posteo.net; quentin.schulz@cherry.de; tudor.ambarus@linaro.org;
-> > Takahiro.Kuwano@infineon.com; git (AMD-Xilinx) <git@amd.com>; Ashok Reddy
-> > Soma <ashok.reddy.soma@amd.com>
-> > Subject: Re: [PATCH] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
-> > flashes
-> > 
-> > On 14:56, Venkatesh Yadav Abbarapu wrote:
-> > Hi Venkatesh,
-> > > Enable mt35xu512aba_fixups for all mt35 series flashes to work in DTR
-> > > mode, and return after nor->fixups is updated, otherwise it will get
-> > > overwritten with macronix_octal_fixups.
-> > > This flash works in DTR mode only if CONFIG_SPI_FLASH_MT35XU is
-> > > enabled and SPI_NOR_OCTAL_DTR_READ flag is set in id table.
-> > >
-> > > Additionally, a new flag, "SPI_XFER_SET_DDR", has been introduced to
-> > > instruct the OSPI controller driver to switch to DDR mode.
-> > >
-> > > Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> > > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> > > ---
-> > >  drivers/mtd/spi/spi-nor-core.c | 8 +++++++-
-> > >  include/spi.h                  | 1 +
-> > >  2 files changed, 8 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/drivers/mtd/spi/spi-nor-core.c
-> > > b/drivers/mtd/spi/spi-nor-core.c index ec841fb13b..8d201433d5 100644
-> > > --- a/drivers/mtd/spi/spi-nor-core.c
-> > > +++ b/drivers/mtd/spi/spi-nor-core.c
-> > > @@ -4073,6 +4073,7 @@ static int spi_nor_micron_octal_dtr_enable(struct
-> > spi_nor *nor)
-> > >  	if (ret)
-> > >  		return ret;
-> > >
-> > > +	nor->spi->flags |= SPI_XFER_SET_DDR;
-> > >  	buf = SPINOR_MT_OCT_DTR;
-> > >  	op = (struct spi_mem_op)
-> > >
-> > 	SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
-> > @@ -4404,8
-> > > +4405,13 @@ void spi_nor_set_fixups(struct spi_nor *nor)  #endif
-> > >
-> > >  #ifdef CONFIG_SPI_FLASH_MT35XU
-> > > -	if (!strcmp(nor->info->name, "mt35xu512aba"))
-> > > +	if (!strcmp(nor->info->name, "mt35xu512aba") ||
-> > > +	    !strcmp(nor->info->name, "mt35xl512aba") ||
-> > > +	    !strcmp(nor->info->name, "mt35xu01g") ||
-> > > +	    !strcmp(nor->info->name, "mt35xu02g")) {
-> > >  		nor->fixups = &mt35xu512aba_fixups;
-> > > +		return;
-> > > +	}
-> > >  #endif
-> > >
-> > >  #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
-> > > diff --git a/include/spi.h b/include/spi.h index
-> > > 6944773b59..d7fef36662 100644
-> > > --- a/include/spi.h
-> > > +++ b/include/spi.h
-> > > @@ -164,6 +164,7 @@ struct spi_slave {
-> > >  #define SPI_XFER_U_PAGE		BIT(4)
-> > >  #define SPI_XFER_STACKED	BIT(5)
-> > >  #define SPI_XFER_LOWER		BIT(6)
-> > > +#define SPI_XFER_SET_DDR	BIT(7)
-> > 
-> > Are we using this anywhere in the Controller driver ? What is the significance of this
-> > flag, when we can send the DDR info through the ops.
-> Yes...we will be checking this 
-> If (spi->flags & SPI_XFER_SET_DDR) && op->cmd.dtr) then 
-> 	setup the DDR mode in controller driver.
+Yes. Took this approach as this would easily align with the MMC's
+way of searching for a partition. Will fix this.
 
-Is this change going to be for every read/write exec op or in some init
-function. Current driver has this setup dtr mode on checking the opcode.
-Curious to know, what does this extra flag bring something new to the driver.
+> > +
+> >  config FASTBOOT_FLASH_NAND_TRIMFFS
+> >  	bool "Skip empty pages when flashing NAND"
+> >  	depends on FASTBOOT_FLASH_NAND
+> > @@ -196,7 +209,7 @@ config FASTBOOT_MMC_USER_NAME
+> >
+> >  config FASTBOOT_GPT_NAME
+> >  	string "Target name for updating GPT"
+> > -	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+> > +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && EFI_PARTITION
+> >  	default "gpt"
+> >  	help
+> >  	  The fastboot "flash" command supports writing the downloaded
+> > @@ -209,7 +222,7 @@ config FASTBOOT_GPT_NAME
+> >
+> >  config FASTBOOT_MBR_NAME
+> >  	string "Target name for updating MBR"
+> > -	depends on FASTBOOT_FLASH_MMC && DOS_PARTITION
+> > +	depends on (FASTBOOT_FLASH_MMC || FASTBOOT_FLASH_UFS) && DOS_PARTITION
+> >  	default "mbr"
+> >  	help
+> >  	  The fastboot "flash" command allows to write the downloaded image
+> > diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
+> > index 048af5aa82..772276cb6c 100644
+> > --- a/drivers/fastboot/Makefile
+> > +++ b/drivers/fastboot/Makefile
+> > @@ -4,4 +4,5 @@ obj-y += fb_common.o
+> >  obj-y += fb_getvar.o
+> >  obj-y += fb_command.o
+> >  obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
+> > +obj-$(CONFIG_FASTBOOT_FLASH_UFS) += fb_mmc.o
+> >  obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
+> > diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> > index e4484d65ac..a6fa8299b8 100644
+> > --- a/drivers/fastboot/fb_command.c
+> > +++ b/drivers/fastboot/fb_command.c
+> > @@ -336,7 +336,8 @@ void fastboot_data_complete(char *response)
+> >   */
+> >  static void __maybe_unused flash(char *cmd_parameter, char *response)
+> >  {
+> > -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+> > +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC) ||
+> > +	    IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
+> >  		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
+> >  					 image_size, response);
+> >
+> > @@ -356,7 +357,8 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
+> >   */
+> >  static void __maybe_unused erase(char *cmd_parameter, char *response)
+> >  {
+> > -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+> > +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC) ||
+> > +	    IS_ENABLED(CONFIG_FASTBOOT_FLASH_UFS))
+> >  		fastboot_mmc_erase(cmd_parameter, response);
+> >
+> >  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
+> > diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
+> > index f11eb66761..bf242e4b2a 100644
+> > --- a/drivers/fastboot/fb_mmc.c
+> > +++ b/drivers/fastboot/fb_mmc.c
+> > @@ -20,6 +20,16 @@
+> >
+> >  #define BOOT_PARTITION_NAME "boot"
+> >
+> > +#if defined(CONFIG_FASTBOOT_FLASH_MMC)
+> > +#define fb_flash_str	"mmc"
+>
+> Macros be in upper case.
+>
+> This is something I think would make more sense as a variable. Perhaps
+> the fastboot command could be extended to allow passing in a device (or
+> list of devices?) to use.
 
-Prasanth
+Considered that approach but didn't follow through since it might
+break the existing command syntax. Should we extend the 'flash'
+command itself or should we add an 'oem' command to select mmc or
+ufs.
 
-> 
-> I need to send the controller change series.
-> 
-> Thanks
-> Venkatesh
-> > 
-> > >
-> > >  	/*
-> > >  	 * Flag indicating that the spi-controller has multi chip select
-> > > --
-> > > 2.25.1
-> > >
-> > >
+> > +#define fb_flash_dev	CONFIG_FASTBOOT_FLASH_MMC_DEV
+> > +#elif defined(CONFIG_FASTBOOT_FLASH_UFS)
+> > +#define fb_flash_str	"scsi"
+> > +#define fb_flash_dev	CONFIG_FASTBOOT_FLASH_UFS_DEV
+> > +#else
+> > +#error "Incorrect flash type"
+> > +#endif
+> > +
+> >  struct fb_mmc_sparse {
+> >  	struct blk_desc	*dev_desc;
+> >  };
+> > @@ -78,7 +88,7 @@ static int do_get_part_info(struct blk_desc **dev_desc, const char *name,
+> >  	int ret;
+> >
+> >  	/* First try partition names on the default device */
+> > -	*dev_desc = blk_get_dev("mmc", CONFIG_FASTBOOT_FLASH_MMC_DEV);
+> > +	*dev_desc = blk_get_dev(fb_flash_str, fb_flash_dev);
+> >  	if (*dev_desc) {
+> >  		ret = part_get_info_by_name(*dev_desc, name, info);
+> >  		if (ret >= 0)
+> > @@ -91,8 +101,8 @@ static int do_get_part_info(struct blk_desc **dev_desc, const char *name,
+> >  	}
+> >
+> >  	/* Then try dev.hwpart:part */
+> > -	ret = part_get_info_by_dev_and_name_or_num("mmc", name, dev_desc,
+> > -						   info, true);
+> > +	ret = part_get_info_by_dev_and_name_or_num(fb_flash_str, name,
+> > +						   dev_desc, info, true);
+> >  	return ret;
+> >  }
+> >
+> > @@ -202,17 +212,20 @@ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+> >  {
+> >  	lbaint_t blks;
+> >
+> > -	debug("Start Erasing mmc hwpart[%u]...\n", dev_desc->hwpart);
+> > +	debug("Start Erasing %s hwpart[%u]...\n",
+> > +	      fb_flash_str, dev_desc->hwpart);
+> >
+> >  	blks = fb_mmc_blk_write(dev_desc, 0, dev_desc->lba, NULL);
+> >
+> >  	if (blks != dev_desc->lba) {
+> > -		pr_err("Failed to erase mmc hwpart[%u]\n", dev_desc->hwpart);
+> > +		pr_err("Failed to erase %s hwpart[%u]\n",
+> > +		       fb_flash_str, dev_desc->hwpart);
+> >  		return 1;
+> >  	}
+> >
+> > -	printf("........ erased %lu bytes from mmc hwpart[%u]\n",
+> > -	       dev_desc->lba * dev_desc->blksz, dev_desc->hwpart);
+> > +	printf("........ erased %lu bytes from %s hwpart[%u]\n",
+> > +	       dev_desc->lba * dev_desc->blksz, fb_flash_str,
+> > +	       dev_desc->hwpart);
+> >
+> >  	return 0;
+> >  }
+> > @@ -487,11 +500,10 @@ int fastboot_mmc_get_part_info(const char *part_name,
+> >
+> >  static struct blk_desc *fastboot_mmc_get_dev(char *response)
+> >  {
+> > -	struct blk_desc *ret = blk_get_dev("mmc",
+> > -					   CONFIG_FASTBOOT_FLASH_MMC_DEV);
+> > +	struct blk_desc *ret = blk_get_dev(fb_flash_str, fb_flash_dev);
+> >
+> >  	if (!ret || ret->type == DEV_TYPE_UNKNOWN) {
+> > -		pr_err("invalid mmc device\n");
+> > +		pr_err("invalid %s device\n", fb_flash_str);
+>
+> 		pr_err("invalid "fb_flash_str" device\n"); -- and the same for all
+> other cases.
+
+Not sure if this will be applicable if we move to dynamic mmc or
+ufs selection. Will see.
+
+> >  		fastboot_fail("invalid mmc device", response);
+> >  		return NULL;
+> >  	}
+> > @@ -644,10 +656,11 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
+> >   */
+> >  void fastboot_mmc_erase(const char *cmd, char *response)
+> >  {
+> > +#ifdef CONFIG_FASTBOOT_FLASH_MMC
+> >  	struct blk_desc *dev_desc;
+> >  	struct disk_partition info;
+> >  	lbaint_t blks, blks_start, blks_size, grp_size;
+> > -	struct mmc *mmc = find_mmc_device(CONFIG_FASTBOOT_FLASH_MMC_DEV);
+> > +	struct mmc *mmc = find_mmc_device(fb_flash_dev);
+> >
+> >  #ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
+> >  	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT1_NAME) == 0) {
+> > @@ -706,5 +719,6 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+> >
+> >  	printf("........ erased " LBAFU " bytes from '%s'\n",
+> >  	       blks_size * info.blksz, cmd);
+> > +#endif
+> >  	fastboot_okay(NULL, response);
+>
+> I don't think it's really acceptable to just lie that we erase a
+> partition when in fact we did nothing at all.
+>
+> This should respond with some error indicating that the command isn't
+> supported.
+
+Sure.
+
+Will post a new version shortly.
+
+Thanks for the feedback.
+
+-Varada
