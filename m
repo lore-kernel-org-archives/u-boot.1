@@ -4,107 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C31D3B98E
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:09:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2B4D3B98D
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3005E89C60;
-	Tue, 26 Nov 2024 14:09:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B06158972F;
+	Tue, 26 Nov 2024 14:16:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UZHWlJmQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C2lpeBJH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73C5D89C6D; Tue, 26 Nov 2024 13:00:52 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 013FC89734; Tue, 26 Nov 2024 14:16:09 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1020489C4E
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 13:00:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E47EB89189
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:16:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2ffc81cee68so16888661fa.0
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 04:00:50 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2ffc86948dcso19344511fa.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 05:16:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732622449; x=1733227249; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732626966; x=1733231766; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a2SCebXF3Sfj6hPX7SaJAuUL2pLKNvpzPo+W/AN/zrI=;
- b=UZHWlJmQYLU2wMAA4tlPLvPeFOTC18Loas19vGePZYYzhb1PKXhxJvo+ER21Rp4rB5
- lA4tdciqzLq5B9vNmDiItL0nIS7rhltGrXQPZ2xFXY8ZPwro/iXW/amDoKcJK0EvyCxA
- HvLB5PBsFcGjXLK7xyEnGec+/MKapbM/d/3IFT44ndA4q3uN0soYJZjeC7pYUUCvaZl/
- 3l6iUkBpIH4SAf2JKLZgIN2V7Uilpq3dZ2E33lffllJlFYOUn37NZlNBRBp/YMmXkqRm
- hpeCRS6lOcVZabVPJD/GpaVnpaQPhWzUMhPFPNa45/VqA5yDFiJmHuX8xN/FlLZ3FB2Y
- gHYQ==
+ bh=7M9Ip7Nr5oEa/uMmJSJ6TQ+t3JKx8mut9/ewOabwl2A=;
+ b=C2lpeBJHsDmcsB8vEOrPtA0YFBAVK0VTXwaxODGVDatT3LqhJEoBQ80DdbSfo3DC77
+ FbGgp1TX1++KvfEU0rVd0gQ/Unu1TRbEJH5VZ9W5ep2tUFXKzSShB8Q/aXXCmopfT5H0
+ ePp9zYSngKgaGp6O835FHf2f1NfG0gRGo0lRWCewdMmc2/zIRK5vtXKPOSXAjuyEwBac
+ DeUJaFY48fzB/RDCtvsPP6hXh+/JMNj8grfNXkjGzxXbJZw7kjgKdIi2v1XISUrhfubT
+ 7+jKSgoacmUpecrbury0ajc7lr8stbWjRzpA3bCFdbb8ryqEInimj9qjp8oR2xmGpuy0
+ axdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732622449; x=1733227249;
+ d=1e100.net; s=20230601; t=1732626966; x=1733231766;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a2SCebXF3Sfj6hPX7SaJAuUL2pLKNvpzPo+W/AN/zrI=;
- b=NjIDOH3LZiimauKRCx33juVyXZ0SLwq0G7sxNE4Mi7UAGZ8ylEONHKjUqd3uCAV5hg
- LZDwcqfQjobL+RwwJpp3NIANCCFhBEq+Tp5xGQMpx4NBpkBrr4icC8CnpaL23hsuFSwb
- he1mjA8ACB9ZjTa0pVZNgy4VpwMPj1FwuOb2tmJh1ujjQyBBlgeJDwCXgDm/u/W9361x
- H29XNKAEKXkEzDRtTDeZ6IvsNYrkYXN6tJ5WVBJOt2k+AwNOqM0aJHX74OJWON/YUure
- vuAP6kJwYRieZlpuMpSMln7ggTDEoKkTLvEuflmFUz4hnBpWZDbIFi67fCdkNh+yqxaO
- bAfg==
-X-Gm-Message-State: AOJu0Yxxuz4VUFUj3qqXVy+h2rjQg1nEM9UPWa9B21yJOwcZRtDxuY6V
- iSN+4JeaUrXQseFzc/oERmDNjphe8mgYQYULC4tINP437lL3NVMt020XufZ0ZS+WpUpZniZ8I3/
- G2tq3Tp9vUSaCB9qeh9ra8z+WxUcD5A==
-X-Gm-Gg: ASbGnctT4HbHhh1Rg2qH+k3mwwFaAsW+zDBYC33APdwe8opOtoUE/mYsaUO6ZVXzcPH
- gUV1QKNkoTYvVtQIhh2i5uH43NdI1QBj/tu3eGn2CWyQR022/43mlMaBaiVvvn5k=
-X-Google-Smtp-Source: AGHT+IFBq1Ba+pvp9DJMmVfssYh28J7IKlNQrvr8FIV11Lxwwv8gkU8WQ2JqykNQ/EGZ9RQhCpZKpONJXnnfUO7CRUw=
-X-Received: by 2002:a2e:a5c6:0:b0:2ff:a246:f94e with SMTP id
- 38308e7fff4ca-2ffa711baeemr65909731fa.12.1732622449025; Tue, 26 Nov 2024
- 04:00:49 -0800 (PST)
+ bh=7M9Ip7Nr5oEa/uMmJSJ6TQ+t3JKx8mut9/ewOabwl2A=;
+ b=QMkY/ywnX2T4L74TUXAdV6c1DUVKycPx4uqAslduK4zl37XaBtjfdBgpkXYEjVbVjm
+ 7X/OBgToLhNBJ0VtxR9IVHjxvqMft7wSOxCkIY94gcmuiJ/A0CiNv0cBlXRaLdWBCIC6
+ xtfxy6c7H/0VI3WkaAI2mlzNqvXVvPG+T78ga/cbJvYaRtlq/adTgjLoU8hc6wOoM1I4
+ HCF/3nuK1gmG6rr+Tg7eci0hYe9e9WBjTFnRRaqr93iNrq8iB7hutEB6+rvSL8Glvbn7
+ 8K1jsYfcJsa/ArrQ1J8jpvJp9eKifDajMoJCkxtlEvU4I42esXHl3/mOnVBlvlHesHs2
+ wC2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVo9yGdiiBlEs4XBW4yWEj5ddVq06907lJo7a9f1o65AOt21OokVZVy1LRIX0J4hLWaBpSm1k8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzElyf0RdeUpO9GUb9iSGhlFqhH6sxmovlDfvRzFx9g8l+2m8MI
+ m1cFW1hXy3I/EXSak2bSHT56MbgdHHrZeREe3bNog4zi5987kmgodVgyccQx6YwTzMWj/curp2r
+ Kq7vk1sGuXjgrGZp3+jxq/sUyfL4=
+X-Gm-Gg: ASbGncsIE9HFEg/Y41fyyURxUXtff7W0KFbyEHdy1DB+L9K0JboK04wRe4tfRZO9dIQ
+ rfbOT4xJL2e02wrHegkD4MRW++9ie89yYZOToywXtzlOvqVvQUeCyCT/5Vfm3HZX8bg==
+X-Google-Smtp-Source: AGHT+IHHXbc4cvcIw3i6DqdhjF47hIrAQFrIg8zgBSRe98Fc9kmgDRuIgXiupNLQH1B0kBsph8thE7TxZo6YySe3w54=
+X-Received: by 2002:a2e:a809:0:b0:2ff:8137:60a9 with SMTP id
+ 38308e7fff4ca-2ffa712ac11mr86953211fa.23.1732626965923; Tue, 26 Nov 2024
+ 05:16:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20241123165304.100538-1-hs@denx.de>
-In-Reply-To: <20241123165304.100538-1-hs@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 26 Nov 2024 09:00:37 -0300
-Message-ID: <CAOMZO5CBzszzyecV1mf=Dv97MJ91xuDVWM+Uv+_30nPcgh_X_A@mail.gmail.com>
-Subject: Re: [PATCH v4 00/20] imx8qxp: siemens board: updates / sync with
- mainline
-To: Heiko Schocher <hs@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Walter Schweizer <walter.schweizer@siemens.com>,
- Enrico Leto <enrico.leto@siemens.com>, 
- Adam Ford <aford173@gmail.com>, Alessandro Zini <alessandro.zini@siemens.com>, 
- Anatolij Gustschin <agust@denx.de>, Andrej Valek <andrej.valek@siemens.com>, 
- Baruch Siach <baruch@tkos.co.il>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>, 
- CL Wang <cl634@andestech.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Chanho Park <chanho61.park@samsung.com>, Fabio Estevam <festevam@denx.de>, 
- Francesco Dolcini <francesco@dolcini.it>, Gary Bisson <bisson.gary@gmail.com>, 
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Michal Simek <michal.simek@amd.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Prasad Kummari <prasad.kummari@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Ramon Fried <rfried.dev@gmail.com>, Randolph <randolph@andestech.com>, 
- Rasmus Villemoes <ravi@prevas.dk>, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>, 
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>, 
- Troy Kisky <troy.kisky@boundarydevices.com>, Ye Li <ye.li@nxp.com>
+References: <20241125003205.75327-1-hal.feng@starfivetech.com>
+ <20241125003205.75327-6-hal.feng@starfivetech.com>
+In-Reply-To: <20241125003205.75327-6-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 26 Nov 2024 05:15:54 -0800
+Message-ID: <CANV2PTOs_ZLX6=H0ZS1zizKum1VzZE2LHm6dE+OgF9O+XPXAGg@mail.gmail.com>
+Subject: Re: [PATCH v6 05/11] riscv: dts: jh7110: Add u-boot device tree for
+ JH7110 based boards
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
+ Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
+ Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 26 Nov 2024 14:09:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,41 +98,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 23, 2024 at 1:53=E2=80=AFPM Heiko Schocher <hs@denx.de> wrote:
+On Sun, Nov 24, 2024 at 4:33=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
 >
-> Updating the imx8qxp based siemens board. The current
-> state of the siemens imx8qxp board is in an old not
-> really working state.
+> To support the other JH7110 based boards, add u-boot
+> device tree for them.
 >
-> This series brings mainline back working on the siemens
-> deneb board, the guedi board is dropped as not longer used.
+> Tested-by: E Shattow <lucent@gmail.com>
+> Reviewed-by: E Shattow <lucent@gmail.com>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: H Bell <dmoo_dv@protonmail.com>
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi               | 7 +++++++
+>  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi            | 6 ++++++
+>  .../dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi     | 6 ++++++
+>  3 files changed, 19 insertions(+)
+>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
+oot.dtsi
 >
-> make all runs fine without having all the needed firmware images
-> on board, and so CI @azure.
->
-> If you want to have a working image you need to copy the
-> following images to your build directory $BDIR:
->
-> ATF : bl31-imx8dx.bin            -> $BDIR/bl31.bin
-> AHAB: mx8qxc0-ahab-container.img -> $BDIR/mx8qxc0-ahab-container.img
-> SCFW: deneb-scfw-tcm.bin         -> $BDIR/mx8qx-mek-scfw-tcm.bin
->
-> and call make flash.bin
->
-> There are also updates for ethernet and USB support, but not
-> ready to push upstream currently, hopefully following soon.
->
-> Azure build:
-> https://dev.azure.com/hs0298/hs/_build/results?buildId=3D139&view=3Dresul=
-ts
->
-> series is based on mainline commit:
-> 7fe55182d92 ("Merge tag 'xilinx-for-v2025.01-rc3-v2' of https://source.de=
-nx.de/u-boot/custodians/u-boot-microblaze")
->
-> Ah yes, not to forget, we work at siemens also on a CI setup to
-> have a mainline nightly build and test on hardware. We already
-> have such a CI for internall U-Boot versions up and running, but
-> we do not want again loose sync with mainline.
 
-Applied all for -next, thanks.
+> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dt=
+s/jh7110-milkv-mars-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..f56528c988
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+> @@ -0,0 +1,7 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> +
+
+delete newline at end of file
+
+> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv=
+/dts/jh7110-pine64-star64-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dts=
+i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..9df1e5db55
+> --- /dev/null
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
+> + */
+> +
+> +#include "jh7110-common-u-boot.dtsi"
+> --
+> 2.43.2
+>
+
+Reviewed-by: E Shattow <lucent@gmail.com>
