@@ -4,85 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6F2D5A6EB
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 07:30:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2694D5A6EB
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 07:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A29889C22;
-	Tue, 26 Nov 2024 08:30:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CDAF89BEB;
+	Tue, 26 Nov 2024 08:42:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AYYS57uj";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JVHeOnId";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD1389165; Tue, 26 Nov 2024 08:30:27 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8D89B89BEF; Tue, 26 Nov 2024 08:42:10 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F37B589C25
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 08:30:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 445C289BCD
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 08:42:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-53dd59a2bc1so4352215e87.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 23:30:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732606223; x=1733211023; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hrJyzW/D2iITtZneUeeA5UlkhsYOH0iRryDRUnShO6U=;
- b=AYYS57ujELLzDjYaOBK1EEoZmdjyuWzlcBu7/QsJds+D02aessqOIVQcS9XgB9g5wx
- K4b170ob3RhvpPvWYI9hhdox4InD0ybQNZejenP3nRgxRDmrZUPYjo+q7yZKsZhhgiVI
- ixGLOHyziuxogcSmVI1kykTIQnoPMhR7A746Iu8ulselCX2jN/AC13r7+IxdKS2jbYBB
- SiJRLb5mapCRYC7vHdWKeeAjuX9fZ598538n7Sw9S7n/PkYknCTJuh0cTItpyuhDMBZo
- Ek2bSdYsuN2ktfVuGve7oTRIiteY2Zsw3ootT+t1Wi4EkUci3VLyEHY7hWRHkAetlQoP
- OhNQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id AD9763F84D
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:42:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1732606927;
+ bh=LLJXO03XIHTrPmjz4jBMyRAlF0VRHxO8zfS/ECJ6UiI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=JVHeOnIdA5d40e7ZhvpTvj89DIsMNe9dncS4kPzFVu0K/xBBiys/WwsJHdknPrgRM
+ Wv6rPYFJynwjNWWaC9cZXcY3eWvQp5RvnCcIzM0wmMg8cIJ0Bszru0EW/OCCCvMrZt
+ cawkXFLf6JHOikcpzZHJVcxZivf+DloFlamX1SSmFOYwbGQmxlFmet7AG3V89xOJ0+
+ orGTTVNsJ/x8VCXdfDwjogjSU/qvni8myDsXhx1Ldj0MCAFIR6FNqtAUK994/1CUEe
+ 7KsKmEcgbSntpGSZcJu+8bhw/8mXiwxnD5PCd71eaPYbqeg2zfikOUOsiId6ZNyW+d
+ B6Z3iL9Kk+H5w==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43499c1342aso18293815e9.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 23:42:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732606223; x=1733211023;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hrJyzW/D2iITtZneUeeA5UlkhsYOH0iRryDRUnShO6U=;
- b=JR07SMiEP0fMH30V7d/UmUEebjNJ8+BCa72g1Frc159p0zvzSgov2cHPcusy/jE8Yy
- mjbVh+du7Cr6kAAqDTBE1bYGCCR5EHHtFCtviUKW4yPc591Xn6Upu+e4U+H0US7rKeO+
- b4zedZ5bJ9jnSUwkj7C0ETvBGbVfjfhzjrRtEbUgBLounzP60CT7z2ZB5EmC47PFZKCA
- rYSZQGEAfyxoAATcyrElEhT9JKuuR1zY1t1MEXQcEbm19jIEZyYGWqfjJBkEQ/9jNphY
- KW2vhvfFC7TX4DVROenlvEc6VKguIZSJRsFH+lOpy93fXrXemk2UxXOTf/Z6Ov+lvAWY
- UeLg==
-X-Gm-Message-State: AOJu0YzSraf1Jqnkk3K7o0aTysKhvqpIZUvtbrYPJmmuFEBXWBagqUlB
- S2yOl+pHmJzYxVr7HWSa8jQ2cK3WeQvAQHRs66K5Pq/+ROsaxUaR
-X-Gm-Gg: ASbGncv1+mY7oehChoqVEwShiTMZDSV9nYqSTFgBZO8ezZUuGHKbH+axXv2RBv2vSwZ
- BO3Y1TfIGNr/OcHzxFJ5Vd14TeIq9rM7JNHVlruA0m614Uhh4dSbP/oikfx7mhm04Qkvpm6HGjF
- hj5ZU57sf1i97zPzJf4DctQ6m26gpryyDi9W77Zi/xnCwoeGbGNlueMV7qJBkeKy6VqWT7X32db
- plEhwy+f13mgWmC+dwpR8CjGsrZO6+gyEf41/nuKg==
-X-Google-Smtp-Source: AGHT+IEYNfcqz+DX6VNiJ/MJtYK52ebHQlCvnv+ctaLmr4Htm8g/lzNfMjzuAa+aNwjJm4nRZOnXgA==
-X-Received: by 2002:a05:6512:2314:b0:53d:a24b:db0f with SMTP id
- 2adb3069b0e04-53dd39b5396mr7523324e87.57.1732606222970; 
- Mon, 25 Nov 2024 23:30:22 -0800 (PST)
-Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53dd2497df2sm1898216e87.245.2024.11.25.23.30.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Nov 2024 23:30:22 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Holesch <simon@holesch.de>, Ion Agorria <ion@agorria.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] usb: ci_udc: don't use "advance" feature when setting
- address
-Date: Tue, 26 Nov 2024 09:29:56 +0200
-Message-ID: <20241126072956.64778-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241126072956.64778-1-clamor95@gmail.com>
-References: <20241126072956.64778-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1732606927; x=1733211727;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LLJXO03XIHTrPmjz4jBMyRAlF0VRHxO8zfS/ECJ6UiI=;
+ b=TV3ffMKFO7MGkpM1ZaM8AqKLg16sfGaoS5eNb+etaPXhHa8KHzxEQY9TDOT3PZmBDP
+ 73LLUog6Hyw+NzKCO6oSONuR3ZVkNOckGKD6PECtefvgHyKeVCFAUgOJd354ARlknSCs
+ 8H19ggg3d1Nfj/71MqmE+LkUsIlE9OicB6xhQwt0kysfDLmb73wR+Nh3LSkgCb1+INEh
+ tmm+D5URM9Q+XQFJPxMZSBWLpX5OebNWa616rcrKntP4IQL1krhTS4OvKu73lPHEGC6a
+ PGhGHoHoiL+Xk60KpZ8YODwVSt77mvjBaAo21R4PU5nDdPZi5nh6MTyAUyU4wWFeOr2b
+ piUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUwtHeg96XpuVfRlWOKhKqJ5FEYj+qfFwxiaYm8R/4G5KgrX6zoUpZS/WZmOEZylpxfEegfDMM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqjNvLTdTWZOcTJHu5dBcHqQFoe6LCY7XSef8JMQFa/VyCRWxa
+ jwDy5AnkWU0nkytKNLVjy0hBsZLKewcr9l2dD9WopLzsOeLNubTMXq5ZYgdvTtdL2JEg5dsQkvJ
+ 0E6sEo4y7NqJGVPx8lf7UAXFdRXJFsgehFgdIb0xlPVud6zM6mG701qBPxrRFYrOIGLc=
+X-Gm-Gg: ASbGncvihoZCWz9ShreZZPk5bmJbEPXb78shIYo9a6rrXaw6OqJ6CeiU/n5pb5LntZb
+ tE/JQvfmc4z8COJz1ifoQ6OS3hb5v5MwDqHy2AnqWoXy7pJYIwLb2AAJtMnRrSpb9iTKWvvT7AO
+ S2Bglv6JWokxZEU3UxvTe2DErMfU+eNMFOs4qwdn/L9pw2yi/u5v5zlzTJR4W9Ptochtkslw21b
+ XRvshbDTLPMCcLM/z5xA8ctFu+Vi3qNnQjYTyZT39UxNdCDsCurWREWb+wLpwjR5DVdaH1uQ5T6
+ dAH/Y66x0ObqNSvG5lYCHmSeiRTb828xH8TZMGTdA92DVZY=
+X-Received: by 2002:a05:6000:18ab:b0:382:5066:6f38 with SMTP id
+ ffacd0b85a97d-38260b67c52mr12864893f8f.23.1732606927062; 
+ Mon, 25 Nov 2024 23:42:07 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE/6xXBC6Iptp5eMaj+IB/wrY9hK7p/fi0U2S4pHesR1JQsCTS6oHaZTCMvdlH0irJgIOK2bw==
+X-Received: by 2002:a05:6000:18ab:b0:382:5066:6f38 with SMTP id
+ ffacd0b85a97d-38260b67c52mr12864866f8f.23.1732606926690; 
+ Mon, 25 Nov 2024 23:42:06 -0800 (PST)
+Received: from [192.168.123.161]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825faf9a5asm12477127f8f.23.2024.11.25.23.42.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Nov 2024 23:42:06 -0800 (PST)
+Message-ID: <f7706753-d4bc-484a-bf5d-f4b85205ac8e@canonical.com>
+Date: Tue, 26 Nov 2024 08:42:04 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+ <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
+ <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,101 +125,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ion Agorria <ion@agorria.com>
+On 11/26/24 01:32, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Sat, 23 Nov 2024 at 14:46, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
+>> a file and boot it if autostart=yes.
+>>
+>> Instead just check that there is a network device.
+> 
+> If you look at dhcp_run() you will see an 'autoload' parameter. This
+> is 'false' in this code, so it never loads a file.
 
-In the older USB controllers like for example in ChipIdea controller
-used by the Tegra 2 the "USBADRA: Device Address Advance" bitflag
-does not exist, so the new device address set during SET_ADDRESS
-can't be deferred by hardware, which causes the host to not recognize
-the device and give an error.
+This is not the complete truth.
 
-Instead store it until ep completes to apply the change into the hw
-register as Linux kernel does. This should fix regression on old and
-and be compatible with newer controllers.
+If $autostart=true and CONFIG_NET=y, dhcp_run(false) still tries to load 
+a file.
 
-Inspired by: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ef15e5490edc7edf808d3477ab32e0e320792f65
+In all cases dhcp_run() wastes boot time.
 
-Signed-off-by: Ion Agorria <ion@agorria.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/usb/gadget/ci_udc.c | 24 +++++++++++++++++++++++-
- drivers/usb/gadget/ci_udc.h |  1 +
- 2 files changed, 24 insertions(+), 1 deletion(-)
+CONFIG_NET=y
+=> dhcp_run
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+DHCP client bound to address 10.0.2.15 (1004 ms)
 
-diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
-index bbe03cfff1f..4bff75da759 100644
---- a/drivers/usb/gadget/ci_udc.c
-+++ b/drivers/usb/gadget/ci_udc.c
-@@ -649,12 +649,30 @@ static void flip_ep0_direction(void)
- 	}
- }
- 
-+/*
-+ * This function explicitly sets the address, without the "USBADRA" (advance)
-+ * feature, which is not supported by older versions of the controller.
-+ */
-+static void ci_set_address(struct ci_udc *udc, u8 address)
-+{
-+	DBG("%s %x\n", __func__, address);
-+	writel(address << 25, &udc->devaddr);
-+}
-+
- static void handle_ep_complete(struct ci_ep *ci_ep)
- {
- 	struct ept_queue_item *item, *next_td;
- 	int num, in, len, j;
- 	struct ci_req *ci_req;
- 
-+	/* Set the device address that was previously sent by SET_ADDRESS */
-+	if (controller.next_device_address != 0) {
-+		struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
-+
-+		ci_set_address(udc, controller.next_device_address);
-+		controller.next_device_address = 0;
-+	}
-+
- 	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
- 	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
- 	item = ci_get_qtd(num, in);
-@@ -783,7 +801,7 @@ static void handle_setup(void)
- 		 * write address delayed (will take effect
- 		 * after the next IN txn)
- 		 */
--		writel((r.wValue << 25) | (1 << 24), &udc->devaddr);
-+		controller.next_device_address = r.wValue;
- 		req->length = 0;
- 		usb_ep_queue(controller.gadget.ep0, req, 0);
- 		return;
-@@ -814,6 +832,9 @@ static void stop_activity(void)
- 	int i, num, in;
- 	struct ept_queue_head *head;
- 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
-+
-+	ci_set_address(udc, 0);
-+
- 	writel(readl(&udc->epcomp), &udc->epcomp);
- #ifdef CONFIG_CI_UDC_HAS_HOSTPC
- 	writel(readl(&udc->epsetupstat), &udc->epsetupstat);
-@@ -934,6 +955,7 @@ static int ci_pullup(struct usb_gadget *gadget, int is_on)
- 	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
- 	if (is_on) {
- 		/* RESET */
-+		controller.next_device_address = 0;
- 		writel(USBCMD_ITC(MICRO_8FRAME) | USBCMD_RST, &udc->usbcmd);
- 		udelay(200);
- 
-diff --git a/drivers/usb/gadget/ci_udc.h b/drivers/usb/gadget/ci_udc.h
-index bea2f9f3fe3..807f2084c1e 100644
---- a/drivers/usb/gadget/ci_udc.h
-+++ b/drivers/usb/gadget/ci_udc.h
-@@ -105,6 +105,7 @@ struct ci_drv {
- 	struct ept_queue_head		*epts;
- 	uint8_t				*items_mem;
- 	struct ci_ep			ep[NUM_ENDPOINTS];
-+	u8				next_device_address;
- };
- 
- struct ept_queue_head {
--- 
-2.43.0
+=> setenv autostart true
+=> dhcp run
+BOOTP broadcast 1
+BOOTP broadcast 2
+BOOTP broadcast 3
+DHCP client bound to address 10.0.2.15 (1002 ms)
+Using e1000#0 device
+TFTP from server 10.0.2.2; our IP address is 10.0.2.15
+Filename 'run'.
+Load address: 0x40200000
+Loading: *
+TFTP error: 'File not found' (1)
+Not retrying...
+
+CONFIG_NET_LWIP=y
+=> dhcp_run
+DHCP client bound to address 10.0.2.15 (1007 ms)
+
+Where command dhcp_run is provided by:
+
+#include <command.h>
+#include <env.h>
+#include <net-common.h>
+#include <vsprintf.h>
+
+static int do_dhcp_run(struct cmd_tbl *cmdtp, int flag, int argc,
+                   char *const argv[])
+{
+         ulong addr = hextoul(env_get("loadaddr"), NULL);
+
+         dhcp_run(addr, NULL, false);
+
+         return 0;
+}
+
+U_BOOT_CMD(
+         dhcp_run,       CONFIG_SYS_MAXARGS,     1,      do_dhcp_run,
+         "dhcp_run",
+         NULL
+);
+
+Best regards
+
+Heinrich
+
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          new patch
+>> ---
+>>   net/eth_bootdev.c | 30 ++++++++++++++++++------------
+>>   1 file changed, 18 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
+>> index 6ee54e3c790..b0fca6e8313 100644
+>> --- a/net/eth_bootdev.c
+>> +++ b/net/eth_bootdev.c
+>> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
+>>          return 0;
+>>   }
+>>
+>> +/**
+>> + * eth_bootdev_hunt() - probe all network devices
+>> + *
+>> + * Network devices can also come from USB, but that is a higher
+>> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
+>> + * enumerated already. If something like 'bootflow scan dhcp' is used,
+>> + * then the user will need to run 'usb start' first.
+>> + *
+>> + * @info:      info structure describing this hunter
+>> + * @show:      true to show information from the hunter
+>> + *
+>> + * Return:     0 if device found, -EINVAL otherwise
+>> + */
+>>   static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>>   {
+>>          int ret;
+>> +       struct udevice *dev = NULL;
+>>
+>>          if (!test_eth_enabled())
+>>                  return 0;
+>> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>>                          log_warning("Failed to init PCI (%dE)\n", ret);
+>>          }
+>>
+>> -       /*
+>> -        * Ethernet devices can also come from USB, but that is a higher
+>> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
+>> -        * enumerated already. If something like 'bootflow scan dhcp' is used
+>> -        * then the user will need to run 'usb start' first.
+>> -        */
+>> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
+>> -               ret = dhcp_run(0, NULL, false);
+>> -               if (ret)
+>> -                       return -EINVAL;
+>> -       }
+>> +       ret = -EINVAL;
+>> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
+>> +               ret = 0;
+>>
+>> -       return 0;
+>> +       return ret;
+>>   }
+>>
+>>   struct bootdev_ops eth_bootdev_ops = {
+>> --
+>> 2.45.2
+>>
 
