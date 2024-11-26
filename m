@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2B4D3B98D
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB4FD3B98E
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:23:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B06158972F;
-	Tue, 26 Nov 2024 14:16:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F0E289734;
+	Tue, 26 Nov 2024 14:23:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C2lpeBJH";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="u16uM858";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 013FC89734; Tue, 26 Nov 2024 14:16:09 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id BDB4B89C65; Tue, 26 Nov 2024 14:23:19 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47EB89189
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:16:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DC2589734
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:23:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2ffc86948dcso19344511fa.2
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 05:16:06 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37ed3bd6114so3340324f8f.2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 05:23:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732626966; x=1733231766; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7M9Ip7Nr5oEa/uMmJSJ6TQ+t3JKx8mut9/ewOabwl2A=;
- b=C2lpeBJHsDmcsB8vEOrPtA0YFBAVK0VTXwaxODGVDatT3LqhJEoBQ80DdbSfo3DC77
- FbGgp1TX1++KvfEU0rVd0gQ/Unu1TRbEJH5VZ9W5ep2tUFXKzSShB8Q/aXXCmopfT5H0
- ePp9zYSngKgaGp6O835FHf2f1NfG0gRGo0lRWCewdMmc2/zIRK5vtXKPOSXAjuyEwBac
- DeUJaFY48fzB/RDCtvsPP6hXh+/JMNj8grfNXkjGzxXbJZw7kjgKdIi2v1XISUrhfubT
- 7+jKSgoacmUpecrbury0ajc7lr8stbWjRzpA3bCFdbb8ryqEInimj9qjp8oR2xmGpuy0
- axdg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732627397; x=1733232197;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=FA7eBmx1GsENcEiAvTdrEQEA7YfUtQBvAZyrMBtTybc=;
+ b=u16uM858i/wH2UVp99HNJbLYflMBGriLUjycrbov6RTIjSenutluQBW4+ikadiAB4T
+ 9ZUAHqxHhBrt6upGp+Gm/v6X1edtT9qEjXnPA+eti4uURpSdCZ9SVWU4FYhCz3mQ9xR+
+ 9lunkW3H7zAVHD8449zdVIOE/CL1lrcH4gjJuyhs/jZSN2MVBlbuCShwORfFNqojJl7r
+ c0MzIgIHPle5Cqca+mZOvMPNEupS9bP+OSULKAQ54Vm+X2K9ZkcpKewmuO1JetkLFgIo
+ YryYlCtC2nlTRN0nEN5Qb8rr/GdIYsyoqULmwPoM9slPBNrRp/hFKtrcMx6WbSCsHhLt
+ 62hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732626966; x=1733231766;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7M9Ip7Nr5oEa/uMmJSJ6TQ+t3JKx8mut9/ewOabwl2A=;
- b=QMkY/ywnX2T4L74TUXAdV6c1DUVKycPx4uqAslduK4zl37XaBtjfdBgpkXYEjVbVjm
- 7X/OBgToLhNBJ0VtxR9IVHjxvqMft7wSOxCkIY94gcmuiJ/A0CiNv0cBlXRaLdWBCIC6
- xtfxy6c7H/0VI3WkaAI2mlzNqvXVvPG+T78ga/cbJvYaRtlq/adTgjLoU8hc6wOoM1I4
- HCF/3nuK1gmG6rr+Tg7eci0hYe9e9WBjTFnRRaqr93iNrq8iB7hutEB6+rvSL8Glvbn7
- 8K1jsYfcJsa/ArrQ1J8jpvJp9eKifDajMoJCkxtlEvU4I42esXHl3/mOnVBlvlHesHs2
- wC2Q==
+ d=1e100.net; s=20230601; t=1732627397; x=1733232197;
+ h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FA7eBmx1GsENcEiAvTdrEQEA7YfUtQBvAZyrMBtTybc=;
+ b=VDcL3dx0tJY4G5PCMtCdanYTzF4p1vz9PWvfZBwleuNXaLdieuNTSYC6QGH+EkuYfv
+ P6xRSgtfQuK/NsCrsNgKjCOaW8RbjM1/QgV8UXdUD+E6M1QFJ+O48PbIyA3RPX7ub6bN
+ LGfhWNIsZaAcyf5cLKXUK+rNhr367Tt1mpYHI31NbOTaXqfxngdxQBhl+Nplteao1MTz
+ LOLROYkkXR80Unrwf85f/jK5TbhJGJ02NMcAdIcBVprP3HPzY+Qk+TzGQADYUfbWVhyg
+ agunpjHjiu5VkHdkRaL+oCjP5PswLBbh4TXX2IN8S49qHjCoNGogq/F/4UZPcOSM+2wS
+ pd2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVo9yGdiiBlEs4XBW4yWEj5ddVq06907lJo7a9f1o65AOt21OokVZVy1LRIX0J4hLWaBpSm1k8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzElyf0RdeUpO9GUb9iSGhlFqhH6sxmovlDfvRzFx9g8l+2m8MI
- m1cFW1hXy3I/EXSak2bSHT56MbgdHHrZeREe3bNog4zi5987kmgodVgyccQx6YwTzMWj/curp2r
- Kq7vk1sGuXjgrGZp3+jxq/sUyfL4=
-X-Gm-Gg: ASbGncsIE9HFEg/Y41fyyURxUXtff7W0KFbyEHdy1DB+L9K0JboK04wRe4tfRZO9dIQ
- rfbOT4xJL2e02wrHegkD4MRW++9ie89yYZOToywXtzlOvqVvQUeCyCT/5Vfm3HZX8bg==
-X-Google-Smtp-Source: AGHT+IHHXbc4cvcIw3i6DqdhjF47hIrAQFrIg8zgBSRe98Fc9kmgDRuIgXiupNLQH1B0kBsph8thE7TxZo6YySe3w54=
-X-Received: by 2002:a2e:a809:0:b0:2ff:8137:60a9 with SMTP id
- 38308e7fff4ca-2ffa712ac11mr86953211fa.23.1732626965923; Tue, 26 Nov 2024
- 05:16:05 -0800 (PST)
+ AJvYcCW3lQLRi5Gm/3KnFl3drSofklu3HkEblDEQYSN3eWKFrY3JKH7OQpLMhHbuc4n2Ox+tS5DbDX0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7Xk4PYxik6MYy5dwlZfT42zTWg4nODgwGk6pt+nuVEn7bufIx
+ 3o1UAwcQznOLOubqNdYjJ1vSKWpl9uuCVZXL6g7gKlmSW5dgGryQ+HqLzYUXoCE=
+X-Gm-Gg: ASbGncvumPPTET4mwVr1kF6DsLmqf6zcPB/p76j5BE+759znISFesZlkvIG9WewiPCz
+ w9Hmr8H8ILYRwrlru69WxIyMQlWGttIo0nR6wdzC53hh4fau06jvWDJVNOmF6tlsEY0CzrEUYOG
+ BznW00vkyYXw1qGm2C4u8Lcf9rnQODm326h2/MShMW1adFvBPLka+sUig4YIlEvX24g7FTlgtUZ
+ IhIVkiBKC7cGyTB5hBlUyMX04RzPajDA2y/ngIWdy8aZItAuOkVmA==
+X-Google-Smtp-Source: AGHT+IE3czjU6zQOuASJRI6LCJFZbdRAsO6XLM73VaMCYvex123KRZYo4wcjKPzblw0KANK4MYx5LA==
+X-Received: by 2002:a05:6000:2a5:b0:382:4faa:767 with SMTP id
+ ffacd0b85a97d-38260bcc47bmr15302112f8f.38.1732627396821; 
+ Tue, 26 Nov 2024 05:23:16 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825fbedf63sm13361897f8f.102.2024.11.26.05.23.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Nov 2024 05:23:16 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Ion Agorria <ion@agorria.com>, Svyatoslav
+ Ryhel <clamor95@gmail.com>
+Subject: [GIT PULL] Please pull u-boot-dfu-20241126
+Date: Tue, 26 Nov 2024 14:23:13 +0100
+Message-ID: <87serep1ry.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20241125003205.75327-1-hal.feng@starfivetech.com>
- <20241125003205.75327-6-hal.feng@starfivetech.com>
-In-Reply-To: <20241125003205.75327-6-hal.feng@starfivetech.com>
-From: E Shattow <lucent@gmail.com>
-Date: Tue, 26 Nov 2024 05:15:54 -0800
-Message-ID: <CANV2PTOs_ZLX6=H0ZS1zizKum1VzZE2LHm6dE+OgF9O+XPXAGg@mail.gmail.com>
-Subject: Re: [PATCH v6 05/11] riscv: dts: jh7110: Add u-boot device tree for
- JH7110 based boards
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, H Bell <dmoo_dv@protonmail.com>, 
- Conor Dooley <conor.dooley@microchip.com>, Nam Cao <namcao@linutronix.de>, 
- Bo Gan <ganboing@gmail.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,73 +94,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Nov 24, 2024 at 4:33=E2=80=AFPM Hal Feng <hal.feng@starfivetech.com=
-> wrote:
->
-> To support the other JH7110 based boards, add u-boot
-> device tree for them.
->
-> Tested-by: E Shattow <lucent@gmail.com>
-> Reviewed-by: E Shattow <lucent@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: H Bell <dmoo_dv@protonmail.com>
-> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> ---
->  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi               | 7 +++++++
->  arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi            | 6 ++++++
->  .../dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi     | 6 ++++++
->  3 files changed, 19 insertions(+)
->  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
-oot.dtsi
->
+Hi Tom,
 
-> diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dt=
-s/jh7110-milkv-mars-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..f56528c988
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
-> @@ -0,0 +1,7 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
-> +
+Please find some fixes for master:
 
-delete newline at end of file
+Fastboot:
+- handle unknown partition type as "raw"
 
-> diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv=
-/dts/jh7110-pine64-star64-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..9df1e5db55
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dts=
-i b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..9df1e5db55
-> --- /dev/null
-> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
-> @@ -0,0 +1,6 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2024 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include "jh7110-common-u-boot.dtsi"
-> --
-> 2.43.2
->
+Usb gadget:
+- Fix ci_udc gadget driver for Tegra 2 devices by not using USBADRA
 
-Reviewed-by: E Shattow <lucent@gmail.com>
+CI job:
+- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/23572
+
+Thanks,
+Mattijs
+
+The following changes since commit 0e6432e19f9c812b4986ca7fd8e6db9fd2c199d3:
+
+  Merge patch series "Fix boot failure due to misaligned DMA buffer" (2024-11-18 08:24:06 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20241126
+
+for you to fetch changes up to 35d967f5a8219adc47628247a98c302b1870313e:
+
+  usb: ci_udc: don't use "advance" feature when setting address (2024-11-26 09:56:03 +0100)
+
+----------------------------------------------------------------
+u-boot-dfu-20241126
+
+Fastboot:
+- handle unknown partition type as "raw"
+
+Usb gadget:
+- Fix ci_udc gadget driver for Tegra 2 devices by not using USBADRA
+
+----------------------------------------------------------------
+Caleb Connolly (1):
+      fastboot: properly handle unknown partition type
+
+Ion Agorria (1):
+      usb: ci_udc: don't use "advance" feature when setting address
+
+ drivers/fastboot/fb_getvar.c |  3 ++-
+ drivers/usb/gadget/ci_udc.c  | 24 +++++++++++++++++++++++-
+ drivers/usb/gadget/ci_udc.h  |  1 +
+ 3 files changed, 26 insertions(+), 2 deletions(-)
