@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76104D5A6FD
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 08:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5499D5A6FD
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 08:30:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A8C288F55;
-	Tue, 26 Nov 2024 09:30:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E50F89140;
+	Tue, 26 Nov 2024 09:30:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732609843;
-	bh=UGf7Iza/oVEx/8XdqU0eto1XK2KEhATi1kDYG5Bycck=;
+	s=phobos-20191101; t=1732609855;
+	bh=lXN2wKm1IA+Pj553lyFRCHY2TmHJY14MwLZuV2nVpNM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=n8JkaZxnrtAHhWipqxVgMVc0oOPWDe52yeXYFVbA9KhbCbi4sjcYC07nrNuHVBx9E
-	 uAVdrMIdfOELKUnrAgnEBATxSDebW+emWxZQG5QHFDGDQMpeVzjIBgJg2VBGZEgHiR
-	 XzXkxA1W/SZk/NXZ9Lcjv7Eg+eMEiogeFAtgVTHFEgYBskhwQdDfr/ofMAhRoyvbBb
-	 QyvkW9utzV97axhRo+AxobxObt3+oEO9D/5ADBbF0Vc25sQnGuTmWEyPE03cR0EqQ7
-	 7mL5Q1wvDsfXS2HIGNCLMqfyz/4oWD95joDoeJmA/V2fzIMsrOPtHaRN5sklIWySu0
-	 xS6JdMeNCrmxg==
+	b=oTfItgOK6/UQ/QqHsUfnMR9XniSRA+t2c4i7V3H5RNZjnrgIFj/MSdbyegft/tu9+
+	 vvJ3kC5eq03WOvnYfzELTB1teipgZbD+jkCrNtNHEyU6KM28ML5O3Oxf6axU6FMipB
+	 ruqIePjkCIKA1GaXMk2GF2pILH7vcik7tvkowX0BQcZmEl38OQbhG5hZrOcc/MRQhr
+	 Nww7rfI3+OQtqqrRKlnxcuUkJwH6kJMsYZX314h8IJirJCzRl5uZE0t/mwPr4odvEF
+	 Ff+wTymfExoVM1hbbkCNW5O0iwTBm0z6rT0zPtkMK6jezlpMKanHvFKxA2ChB6cH4T
+	 E8UHcSXx6Nmrg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 659BD88ECC; Tue, 26 Nov 2024 09:30:42 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id CB14A88ECC; Tue, 26 Nov 2024 09:30:54 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C55589681
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 09:30:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3D9089C42
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 09:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XyG3y2G0Sz9sTS;
- Tue, 26 Nov 2024 09:30:38 +0100 (CET)
-Message-ID: <14ac3c55-8bd1-4957-9f83-cfea2e593823@denx.de>
-Date: Tue, 26 Nov 2024 09:30:37 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4XyG4C3zHMz9t5J;
+ Tue, 26 Nov 2024 09:30:51 +0100 (CET)
+Message-ID: <07f3ae29-844b-477b-a354-c9a4f533a372@denx.de>
+Date: Tue, 26 Nov 2024 09:30:48 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 4/7] arm: mvebu: x240: Enable IPV6 support
+Subject: Re: [PATCH 5/7] arm: mvebu: x530: Remove dead comments
 To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
 Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Tom Rini <trini@konsulko.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
 References: <20241122003058.270163-1-judge.packham@gmail.com>
- <20241122003058.270163-5-judge.packham@gmail.com>
+ <20241122003058.270163-6-judge.packham@gmail.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241122003058.270163-5-judge.packham@gmail.com>
+In-Reply-To: <20241122003058.270163-6-judge.packham@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,7 +70,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 22.11.24 01:30, Chris Packham wrote:
-> Enable IPV6 support for the x240 board.
+> As things have been moved to Kconfig there are a number of dead comments
+> left over in x530.h. Remove them.
 > 
 > Signed-off-by: Chris Packham <judge.packham@gmail.com>
 
@@ -82,21 +82,44 @@ Stefan
 
 > ---
 > 
->   configs/x240_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   include/configs/x530.h | 16 ----------------
+>   1 file changed, 16 deletions(-)
 > 
-> diff --git a/configs/x240_defconfig b/configs/x240_defconfig
-> index 5e5b467b7bac..ff64916204cc 100644
-> --- a/configs/x240_defconfig
-> +++ b/configs/x240_defconfig
-> @@ -32,6 +32,7 @@ CONFIG_CMD_TIME=y
->   CONFIG_CMD_REGULATOR=y
->   CONFIG_CMD_UBI=y
->   CONFIG_ENV_IS_IN_SPI_FLASH=y
-> +CONFIG_IPV6=y
->   CONFIG_CLK=y
->   CONFIG_CLK_MVEBU=y
->   CONFIG_GPIO_HOG=y
+> diff --git a/include/configs/x530.h b/include/configs/x530.h
+> index 982b12928734..c7bfd1de17c5 100644
+> --- a/include/configs/x530.h
+> +++ b/include/configs/x530.h
+> @@ -18,30 +18,14 @@
+>   #define CFG_SYS_NS16550_COM1		MV_UART_CONSOLE_BASE
+>   #endif
+>   
+> -/*
+> - * Serial Port configuration
+> - * The following definitions let you select what serial you want to use
+> - * for your console driver.
+> - */
+> -
+>   /* NAND */
+>   
+>   #define BBT_CUSTOM_SCAN
+>   #define BBT_CUSTOM_SCAN_PAGE 0
+>   #define BBT_CUSTOM_SCAN_POSITION 2048
+>   
+> -/* SPI NOR flash default params, used by sf commands */
+> -
+>   #define MTDPARTS_MTDOOPS		"errlog"
+>   
+> -/* Partition support */
+> -
+> -/* Additional FS support/configuration */
+> -
+> -/* Environment in SPI NOR flash */
+> -
+> -/* NAND */
+> -
+>   #include <asm/arch/config.h>
+>   
+>   /* Keep device tree and initrd in low memory so the kernel can access them */
 
 Viele Grüße,
 Stefan Roese
