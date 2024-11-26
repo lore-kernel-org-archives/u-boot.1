@@ -4,89 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6499AD59D80
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77717D5A6C3
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 01:52:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B83B189A51;
-	Tue, 26 Nov 2024 01:33:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8D49289502;
+	Tue, 26 Nov 2024 02:52:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DCXPQ/8x";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C4ewiXjP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41DB889715; Tue, 26 Nov 2024 01:33:35 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D439F895E2; Tue, 26 Nov 2024 02:52:03 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E774488BFB
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:33:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06B7B894B2
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 02:52:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7f3da2c2cb5so3655002a12.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:33:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732581211; x=1733186011; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GUIY8s2Ujla3h9dxRkQ5+NRy6OyU31SytOMVkgH+oAM=;
- b=DCXPQ/8xfUi6Z1IF12k97p3/KaBbzji+GDrhnXs6govH2aCJpfVz8ZZ5sQqGSTLvCS
- dNBwVBeB6cppBLyXhOQkuFtI3zYIh68yNLC47JlOgim3orq2TUm3RzcF+IDbLiLgZqeU
- a7VnxgADyXkYZOOlVDl2r471io0GeUBJYRKLA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732581211; x=1733186011;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GUIY8s2Ujla3h9dxRkQ5+NRy6OyU31SytOMVkgH+oAM=;
- b=Riuc8bwDQoVc4sjdTUyNZEdbFoQ73+rMXBq73SguHhjSyhga3t7Hj5IaQNsffe08La
- crhLl3gHwcklQv8RYazYm8AJU6FXAqn/oY6cU4uVW1+ZG3iAIu+gEQhFtQTwc5VQF8TG
- uQahhbn6SLxMpgp3zmyJ4jMjECsls2nWTS1TLL1ASMgq2vxzlXUpXFJYvQRCNlV5c5tD
- LrUsy3rGlb9EyLZXXAVFgne8nrCMwV15Y2eTFTLekQ6l3pj+fVbJV+kj/qui2i++BGYz
- EDDX2XEv13twwQ4gqycThEuOdf8UDOnouA3YiHl2iDaCfQTBJQmFGArTfr70v9oN7fYp
- R0jw==
-X-Gm-Message-State: AOJu0YzYDyEojcsKvqZrL/8X8Wn8Rbktfuhf6LU58/aAf5STRMUy4148
- jFWpp1Oqzd9locL5st7lrtjp7cC4Dx4vdHCcE/r6tSHj0BYX5n/WoTcv/pJYFflbnnCKFOlx+dW
- W0mMmM95ph0VSKrNR4Lrz/NNRHJsG59wGzwJF
-X-Gm-Gg: ASbGnct4cY1epib9dsS05D1eetPebrIGjo7Y+YozZNdxRWDCROjHlNW0YzfoxTWbx6k
- frCWLs/9oWWBDVT4+9f6msHyOk0P/1tQ=
-X-Google-Smtp-Source: AGHT+IFv/L/wODedt5VsdfNwkC5tYJkBYrrL5bYkqF5sGTkfNWRgImFxXHgURykBouE2eUC3x5I59RqtvvioYiZrDmc=
-X-Received: by 2002:a05:6a21:1646:b0:1e0:cbd1:8046 with SMTP id
- adf61e73a8af0-1e0cbd1839bmr7315007637.0.1732581211491; Mon, 25 Nov 2024
- 16:33:31 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ1ptqt065186;
+ Mon, 25 Nov 2024 19:51:55 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732585915;
+ bh=P3qVbNaT9E8obmTe7ST0XMoPqAGNWdCoQ1vnxwhkrX8=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=C4ewiXjPral4f6y3wQDZNzRtQTPTpcY6jHGDMVfnmYzsGSNtL2C5j3O/4WJHJ/uno
+ rmlxWKUXAgYIB4vbEGjGCpmuQoH4D973QsiZGtzI2kTuuj2eK65hcQ81dFgDeJ0F6S
+ QX+ho/l2XW6D9kjuwkwMW+g88jj4XMx3aNHC8aNo=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQ1ptuK015084
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Nov 2024 19:51:55 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Nov 2024 19:51:54 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Nov 2024 19:51:54 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ1psGt006119;
+ Mon, 25 Nov 2024 19:51:54 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
+ <trini@konsulko.com>, <m-chawdhry@ti.com>, <rogerq@kernel.org>,
+ <nm@ti.com>, <sjg@chromium.org>, <devarsht@ti.com>,
+ <ilias.apalodimas@linaro.org>, <afd@ti.com>, <u-kumar1@ti.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: Re: [PATCH v2 0/5] EFI Capsule "dfu_alt_info" fixes for TI Boards
+In-Reply-To: <20241124070828.617558-1-s-vadapalli@ti.com>
+References: <20241124070828.617558-1-s-vadapalli@ti.com>
+Date: Mon, 25 Nov 2024 19:51:54 -0600
+Message-ID: <86ed2y69tx.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
- <20241125115554.1707080-4-andrew.goodbody@linaro.org>
-In-Reply-To: <20241125115554.1707080-4-andrew.goodbody@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Nov 2024 17:32:38 -0700
-Message-ID: <CAFLszTiJ9LOM_EBASt7psJN7tqbtM=i=HMBgrVrNAX+_x62u=A@mail.gmail.com>
-Subject: Re: [PATCH v4 3/4] x86: select CONFIG_64BIT for X86_64
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, 
- Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, 
- =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,42 +80,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 04:56, Andrew Goodbody
-<andrew.goodbody@linaro.org> wrote:
->
-> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
-> static analysis tools.
-> Introduce CONFIG_SPL_64BIT and select it for architectures other than
-> x86 with 64 bit builds. Do not select it for x86 builds as x86 uses
-> a 32 bit SPL.
-> Ensure that when limits are set they use CONFIG_64BIT for U-Boot
-> proper and CONFIG_SPL_64BIT for SPL. This is to allow for the 32 bit
-> SPL build used by x86.
->
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->
-> Changes in v4:
->  - Add help text to describe new symbol CONFIG_SPL_64BIT
->  - Splite statement in bloblist.c to make it more readable
->
-> Changes in v3:
-> Introduce CONFIG_SPL_64BIT to allow for x86 building a 32 bit SPL and
-> a 64 bit U-Boot proper.
->
-> Changes in v2:
-> Corrected commit title to be x86 not sandbox
->
->  arch/Kconfig         |  8 ++++++++
->  arch/arm/Kconfig     |  1 +
->  arch/mips/Kconfig    |  4 ++++
->  arch/riscv/Kconfig   |  1 +
->  arch/sandbox/Kconfig |  1 +
->  arch/x86/Kconfig     |  1 +
->  common/bloblist.c    | 11 +++++++----
->  include/limits.h     |  3 ++-
->  8 files changed, 25 insertions(+), 5 deletions(-)
->
+Siddharth Vadapalli <s-vadapalli@ti.com> writes:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> Hello,
+>
+> This series fixes the commits which introduced EFI Capsule support. The
+> blamed commits unconditionally updated "dfu_alt_info" with the
+> "dfu_string" corresponding to Serial Flash and therefore its associated
+> partitions. While this addresses use-cases where the interface is indeed
+> Serial Flash ("sf"), it breaks use-cases such as USB DFU Boot where the
+> interface is RAM ("ram").
+>
+> As of commit
+> 52c0e5f8a3 Merge branch '2024-11-22-assorted-fixes'
+> of the master branch of U-Boot, USB DFU Boot on AM625-SK is
+> non-functional. Logs:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/726854b49eb199f4acf79028212fabdc
+>
+> In order to fix this, update "dfu_alt_info" only if the interface is
+> "sf".
+
+Hi Siddharth, this is an issue that I also discovered while working on a
+separate issue with Collabora, but haven't posted a patch yet.  The issue
+is that when DFU booting, spl_dfu_cmd() will setup it's own value for
+dfu_alt_info before calling run_dfu().  In our existing code, however, this
+will get overridden by set_dfu_alt_info().  This issue isn't specific to TI
+boards.
+
+Can you try this patch to drivers/dfu/dfu.c to see if it solves the
+problems you are seeing:
+
+@@ -153,10 +153,11 @@ int dfu_init_env_entities(char *interface, char
+*devstr)
+
+  dfu_reinit_needed = false;
+
++ str_env = env_get("dfu_alt_info");
+ #ifdef CONFIG_SET_DFU_ALT_INFO
+- set_dfu_alt_info(interface, devstr);
++ if (!str_env) {
++ set_dfu_alt_info(interface, devstr);
++ str_env = env_get("dfu_alt_info");
++ }
+#endif
+- str_env = env_get("dfu_alt_info");
+  if (!str_env) {
+  pr_err("\"dfu_alt_info\" env variable not defined!\n");
+  return -EINVAL;
+
+thanks
+Jon
+
+>
+> The patch for AM62x in this series has been tested and it fixes USB DFU
+> Boot on AM625-SK. Logs:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/feaed5b0a30aff752306d370531a4e10
+>
+> Series is based on commit
+> 52c0e5f8a3 Merge branch '2024-11-22-assorted-fixes'
+> of the master branch of U-Boot.
+>
+> v1 of this series is at:
+> https://patchwork.ozlabs.org/project/uboot/list/?series=433959&state=%2A&archive=both
+> Changes since v1:
+> - Replaced "SPI Flash" with "Serial Flash" everywhere.
+>
+> Regards,
+> Siddharth.
+>
+> Siddharth Vadapalli (5):
+>   board: ti: am64x: evm: Set "dfu_alt_info" only if interface is Serial
+>     Flash
+>   board: ti: j721e: evm: Set "dfu_alt_info" only if interface is Serial
+>     Flash
+>   board: ti: am62x: evm: Set "dfu_alt_info" only if interface is Serial
+>     Flash
+>   board: ti: am62px: evm: Set "dfu_alt_info" only if interface is Serial
+>     Flash
+>   board: ti: j784s4: evm: Set "dfu_alt_info" only if interface is Serial
+>     Flash
+>
+>  board/ti/am62px/evm.c | 8 +++++++-
+>  board/ti/am62x/evm.c  | 8 +++++++-
+>  board/ti/am64x/evm.c  | 8 +++++++-
+>  board/ti/j721e/evm.c  | 8 +++++++-
+>  board/ti/j784s4/evm.c | 8 +++++++-
+>  5 files changed, 35 insertions(+), 5 deletions(-)
+>
+> -- 
+> 2.43.0
