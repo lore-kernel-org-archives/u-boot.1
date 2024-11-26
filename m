@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E22D3B998
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 14:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A00EED3B996
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 14:51:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F34B388DEA;
-	Tue, 26 Nov 2024 15:45:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 100F589C8A;
+	Tue, 26 Nov 2024 15:51:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zLqQBk6o";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f2YHNH4H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BABDE88DF1; Tue, 26 Nov 2024 15:45:29 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 4368489C8B; Tue, 26 Nov 2024 15:51:12 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF48E88360
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 15:45:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE18289C89
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 15:51:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-434a852bb6eso3928115e9.3
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:45:27 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-434a2f3bae4so13435445e9.3
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:51:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732632327; x=1733237127; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QeRR32QADWCZ+aoxZbvsQewxa+eh8ZGkU57utxJF+WQ=;
- b=zLqQBk6ou1sRAY9w7W6bZDEnbk96HdrCppv3mCCwMfSOWDeDj/UpWFsonRn6q1A7dp
- E1Rs7MimhADPwPiyzCG1GyykpIXrG09kRKYhDlquTkJ8kzlPBJIg+4lNLEwbc6Js5SZy
- oLRF2NQ+RbUhAbOClDDR3tkXXxoKvbNqNAw9fOlHjKr/fPdcQa5peIn9URGJJDFw/wwp
- 6dN5VqXI3xx+aUh7/MSwAbbKszPXcb/K4kaXWn3IrQy6wjIIly1UdfEWjfbWhwO//0cV
- cJz8sLxHt7FyuHqZ/0hz+a4e2KbEKxgkA1RzZDim1AFcNZKbgcpSgTm8TJeXyCZq1n3o
- 9ggA==
+ d=linaro.org; s=google; t=1732632669; x=1733237469; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dY22EhnmDtoPKCZN5v4HaV/9cik5yZ1vzaAHxqJo5nE=;
+ b=f2YHNH4HQdaGHrd7NN8flpq6InpmO6c6TQEKheMu/ypIpLUzh+62FQ9ETxRqHc3zv1
+ Hod9Ik5eVRnH+xCbXGckujC5U+qVqFNjo2UUbwEGWfwY0J57eMcV+9kzQpQcDV22siFM
+ yvd+pE/I7QJn2FPeCUyREt52iTg7zHxEaz0uQbIG2t+fXTbDPBp/kK+DOb5Jmqw04omv
+ uV1VAQ0I71lbBeAP0H9W54+04GpPlwfeF80vBSESzpFRklOh8CNKs3HIOUoWYTC+BpKM
+ 1WH7WshVynW22EjI9w4Q3TuAGd0d8Cq9t514kTYUoCHzgM46Yxed/kabbm8OQeycWATQ
+ icYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732632327; x=1733237127;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QeRR32QADWCZ+aoxZbvsQewxa+eh8ZGkU57utxJF+WQ=;
- b=VYwp9TYNX4A/ZjyQcy/x6NhOmaO3Dprt8ObBSw1xeXDIE/dJLxZNuaDdt3q6K+Z2uW
- /T1I7uFohSh5ZM/9k6gaVQh8EJ92XfH+6/0QD4/1mS+PPhRSQS7F/6lhdJ+PEOKkOq+x
- feSQth4vS2xXeqT6QBe/E6FAaQ8T35feojpEUuk2d1mbtbOFK4s6Hu0yyBfDsY/oZn6E
- 2LjkYfvWYjFfdCI21jGQsOJ7zvqoZSf/1bwp+DnXDV+AHpeL8OKvESKLLUPFs5TBaA7w
- ZgiU5VW0rjC/eU32BPCPGaX7/0jsKA5GD9gmrHI05ls1iDTxiZl3o+AZl//yGgT4fRXl
- Y3aQ==
-X-Gm-Message-State: AOJu0YxGfn6433x5+vNx9qnSrNiFC1J2kKhL/zU2Pkjh7c93OIuWTL0A
- Hn0pl+IuEwS+SIez8rX9T8Fxn2OXDkuW3pkmp97e7w7Tr+Y8t6fHS3I4mEX/Eif1mt+LqtXfQ/C
- Ynro=
-X-Gm-Gg: ASbGncv2p/c7+aXk+iYhfUX4QuT2E5suVhq0q3KTnda6FsL29exIEckwKVyJfAKHF+9
- CMJvlvZEMcxxCF/ziLLPKAJWp7ruFTe8OEKk2Apb9YWrWrPNUX8Gi+5r0PmganrdmAw+dYd99vy
- 8ntIboWW7zAP1wyHGlR7TW8OqEnL2MA/wht/sCNdmNUS3pXGRCo98BHsWDLeKXwdpS2u2mX32km
- 9ejYE9sB6EjWjEJ2XmmJlLao2Wjx5Tq4DQbNvty6GgJxaOKQ2+apEi4Xw==
-X-Google-Smtp-Source: AGHT+IHF96//jdvypB7BE16ZRmvmw8D+mSbldxtag9FxVyWtFDk2uX11et574eAZJjN81foWp1rznw==
-X-Received: by 2002:a05:600c:4f86:b0:431:5632:448b with SMTP id
- 5b1f17b1804b1-433ce48eb82mr133462375e9.25.1732632326724; 
- Tue, 26 Nov 2024 06:45:26 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:d868:8373:c88:a797])
+ d=1e100.net; s=20230601; t=1732632669; x=1733237469;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dY22EhnmDtoPKCZN5v4HaV/9cik5yZ1vzaAHxqJo5nE=;
+ b=lh5BD2xEV2SaJGb1mv23pYhMdXrhOZDTWS3yZ7gOqwrei3kCk0qWDiiFi/kGzpSFIO
+ jXGdfjEq+xuw0v1yK/Zh62N6eVaywjYlCJ9NrnhiKgz5iYMGPLuLSak1VI0mFmTQZbyp
+ /tFBw7SBcwKxwmPXDgi3LfIrxX4+0JtRd8PvWURXOtrCCvtKRjeHqTzOKhUJTxYfOVYH
+ 6welQ8UMYcXae+iMUrzwSNtnTFn0bIRC+KrbEBoZiUulS9c91CAjNhlc60DMRx13kG8T
+ dAQLsLCLvNA/VTJiOLoNauNOs/W50M5a2sfvnR5JYpwL0Kkah2oxHQtAMjh0NvY95G9r
+ SYWg==
+X-Gm-Message-State: AOJu0Ywv8JvxEzDdR159CM/uQ0MpNB4zT1hzX12mwMRNW0PVY0Ufj4ZN
+ rrpkbycNbnhF5Qw/mI01s2/8tNXJwbe/AHADPMg/DgeEBJA1VtOLwnCDIuPCv7M=
+X-Gm-Gg: ASbGncshAWGi5PGEHgBeaYzV5NZstHSZl5p3wWakeEzxxdVwWuILwlNX+OlbBAQHzr7
+ Vhs1Evq/pukn6P5ODOLbfuaeNdSbxsShgdolu9OXSe9rVlTweB9eTKmuf8V0itFCGtufG2tKL2S
+ f5beJKU7mAayV0I5KWu/5dmMyvN/zO1tB2ZtoNfvzHb34W7xxuzpb54Ibrsp9v8rPuUK7JjIL/a
+ RzzgIeoSw6rGgHB82TYbVHdkMoWk35zp3p3KBQ6Gh9pFRjSyhWKl7qgDkyxNRE=
+X-Google-Smtp-Source: AGHT+IGHun/nky6/mNpd/7/Pyl6bITFyMCM9E05st4qAdpyjOTMA9H/iKE8Exdii9zi9+Elb2Z6dpA==
+X-Received: by 2002:a05:600c:5128:b0:434:a802:43d with SMTP id
+ 5b1f17b1804b1-434a80206f9mr15260885e9.27.1732632669237; 
+ Tue, 26 Nov 2024 06:51:09 -0800 (PST)
+Received: from [192.168.7.95] ([212.114.21.58])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4349f9eca01sm74615135e9.29.2024.11.26.06.45.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 06:45:26 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH] net: lwip: wget: fix legacy syntax
-Date: Tue, 26 Nov 2024 15:45:06 +0100
-Message-ID: <20241126144508.501779-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ 5b1f17b1804b1-4349ca82957sm99996585e9.33.2024.11.26.06.51.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 Nov 2024 06:51:08 -0800 (PST)
+Message-ID: <b10dece7-15c4-48a7-90eb-59e88d89ca9a@linaro.org>
+Date: Tue, 26 Nov 2024 15:51:08 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: lwip: dhcp: support arguments for TFTP file
+ download
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ E Shattow <lucent@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+References: <20241114172007.2074874-1-jerome.forissier@linaro.org>
+ <20241123024206.GS3600562@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241123024206.GS3600562@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,48 +102,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 356011f7ac25 ("lwip: fix code style issues") has inadvertently
-broken the support for the legacy syntax:
+Hi Tom,
 
- => wget 192.168.0.16:test.bin
- invalid uri, no file path
- Invalid URL. Use http(s)://
+On 11/23/24 03:42, Tom Rini wrote:
+> On Thu, Nov 14, 2024 at 06:20:07PM +0100, Jerome Forissier wrote:
+> 
+>> The dhcp command is supposed to have the following syntax as per
+>> "help dhcp":
+>>
+>>   dhcp [loadAddress] [[hostIPaddr:]bootfilename]
+>>
+>> In other words, any arguments should be passed to an implicit
+>> tftpboot command after the DHCP exchange has occurred.
+>>
+>> Add the missing code to the lwIP version of do_dhcp().
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> 
+> Applied to u-boot/master, thanks!
+> 
+> But please note, I believe this is what breaks
+> test_efi_helloworld_net_http now as we can no longer abuse "wget 200000
+> EFI/arm64/helloworld.efi" for example:
+> U-Boot> wget 200000 EFI/arm64/helloworld.efi
+> invalid uri, no file path
+> Invalid URL. Use http(s)://
+> U-Boot>
 
-The reason is two calls to strncpy() were replaced by strlcpy() without
-paying attention to the fact that they are not equivalent in the present
-case. Since we are using a character counter (n) and since we do not
-depend on having a properly null-terminated string at each step in the
-parsing, strlcpy() is not justified and strncpy() is the right tool for
-the job. So use it again.
+That's actually caused by commit 356011f7ac25 ("lwip: fix code style
+issues") :-/ I've just sent a fix [1]. Sorry for the breakage.
 
-Reported-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- net/lwip/wget.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 062aa7c44f0..5501ffdd004 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -161,7 +161,7 @@ static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
- 
- 	if (rem < n)
- 		return -1;
--	strlcpy(p, server, n);
-+	strncpy(p, server, n);
- 	p += n;
- 	rem -= n;
- 	if (rem < 1)
-@@ -172,7 +172,7 @@ static int parse_legacy_arg(char *arg, char *nurl, size_t rem)
- 	n = strlen(path);
- 	if (rem < n)
- 		return -1;
--	strlcpy(p, path, n);
-+	strncpy(p, path, n);
- 	p += n;
- 	rem -= n;
- 	if (rem < 1)
+[1] https://lists.denx.de/pipermail/u-boot/2024-November/573054.html
+
+Thanks,
 -- 
-2.43.0
-
+Jerome
