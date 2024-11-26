@@ -4,69 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10881D3B98D
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C31D3B98E
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 13:09:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8488A89C84;
-	Tue, 26 Nov 2024 14:09:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3005E89C60;
+	Tue, 26 Nov 2024 14:09:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e3JJKlvo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UZHWlJmQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75B9A89C53; Tue, 26 Nov 2024 11:51:52 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40ACC89C64
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 11:51:50 +0100 (CET)
+ id 73C5D89C6D; Tue, 26 Nov 2024 13:00:52 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1020489C4E
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 13:00:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=g-praveen@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQAphIa824382
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 26 Nov 2024 04:51:43 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732618303;
- bh=kzc7j5Xo+VXqfQsETmPgPELxp6S4ulN8/tEFDCSkSeA=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=e3JJKlvoOh6FStskFHoElKah57R0QiF5nLWvaUDM3yv9kL/cHFVmqObxLIUMwW8gA
- mlXMjx/10TjRisi6rCzRb8PfiRIlxdPgI3VsdUYwGDfR3C46LWwNcA446h2hSoQGSF
- 3AziWG9B884xyU8QMzldIGkWFvcJvMOktix4TgLQ=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQAphp8013777
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 26 Nov 2024 04:51:43 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
- Nov 2024 04:51:43 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 26 Nov 2024 04:51:43 -0600
-Received: from a0507176-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0507176-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.52])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQApXPR104864;
- Tue, 26 Nov 2024 04:51:40 -0600
-From: Gokul Praveen <g-praveen@ti.com>
-To: <trini@konsulko.com>
-CC: <sjg@chromium.org>, <rasmus.villemoes@prevas.dk>, <sr@denx.de>,
- <pbrobinson@gmail.com>, <jonas@kwiboo.se>, <u-boot@lists.denx.de>, Gokul
- Praveen <g-praveen@ti.com>
-Subject: [PATCH 2/2] drivers: serial: serial_omap: Fix TI OMAP UART U-Boot
- driver to support higher baudrates
-Date: Tue, 26 Nov 2024 16:21:31 +0530
-Message-ID: <20241126105131.43359-3-g-praveen@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241126105131.43359-1-g-praveen@ti.com>
-References: <20241126105131.43359-1-g-praveen@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ffc81cee68so16888661fa.0
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 04:00:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732622449; x=1733227249; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a2SCebXF3Sfj6hPX7SaJAuUL2pLKNvpzPo+W/AN/zrI=;
+ b=UZHWlJmQYLU2wMAA4tlPLvPeFOTC18Loas19vGePZYYzhb1PKXhxJvo+ER21Rp4rB5
+ lA4tdciqzLq5B9vNmDiItL0nIS7rhltGrXQPZ2xFXY8ZPwro/iXW/amDoKcJK0EvyCxA
+ HvLB5PBsFcGjXLK7xyEnGec+/MKapbM/d/3IFT44ndA4q3uN0soYJZjeC7pYUUCvaZl/
+ 3l6iUkBpIH4SAf2JKLZgIN2V7Uilpq3dZ2E33lffllJlFYOUn37NZlNBRBp/YMmXkqRm
+ hpeCRS6lOcVZabVPJD/GpaVnpaQPhWzUMhPFPNa45/VqA5yDFiJmHuX8xN/FlLZ3FB2Y
+ gHYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732622449; x=1733227249;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a2SCebXF3Sfj6hPX7SaJAuUL2pLKNvpzPo+W/AN/zrI=;
+ b=NjIDOH3LZiimauKRCx33juVyXZ0SLwq0G7sxNE4Mi7UAGZ8ylEONHKjUqd3uCAV5hg
+ LZDwcqfQjobL+RwwJpp3NIANCCFhBEq+Tp5xGQMpx4NBpkBrr4icC8CnpaL23hsuFSwb
+ he1mjA8ACB9ZjTa0pVZNgy4VpwMPj1FwuOb2tmJh1ujjQyBBlgeJDwCXgDm/u/W9361x
+ H29XNKAEKXkEzDRtTDeZ6IvsNYrkYXN6tJ5WVBJOt2k+AwNOqM0aJHX74OJWON/YUure
+ vuAP6kJwYRieZlpuMpSMln7ggTDEoKkTLvEuflmFUz4hnBpWZDbIFi67fCdkNh+yqxaO
+ bAfg==
+X-Gm-Message-State: AOJu0Yxxuz4VUFUj3qqXVy+h2rjQg1nEM9UPWa9B21yJOwcZRtDxuY6V
+ iSN+4JeaUrXQseFzc/oERmDNjphe8mgYQYULC4tINP437lL3NVMt020XufZ0ZS+WpUpZniZ8I3/
+ G2tq3Tp9vUSaCB9qeh9ra8z+WxUcD5A==
+X-Gm-Gg: ASbGnctT4HbHhh1Rg2qH+k3mwwFaAsW+zDBYC33APdwe8opOtoUE/mYsaUO6ZVXzcPH
+ gUV1QKNkoTYvVtQIhh2i5uH43NdI1QBj/tu3eGn2CWyQR022/43mlMaBaiVvvn5k=
+X-Google-Smtp-Source: AGHT+IFBq1Ba+pvp9DJMmVfssYh28J7IKlNQrvr8FIV11Lxwwv8gkU8WQ2JqykNQ/EGZ9RQhCpZKpONJXnnfUO7CRUw=
+X-Received: by 2002:a2e:a5c6:0:b0:2ff:a246:f94e with SMTP id
+ 38308e7fff4ca-2ffa711baeemr65909731fa.12.1732622449025; Tue, 26 Nov 2024
+ 04:00:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241123165304.100538-1-hs@denx.de>
+In-Reply-To: <20241123165304.100538-1-hs@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 26 Nov 2024 09:00:37 -0300
+Message-ID: <CAOMZO5CBzszzyecV1mf=Dv97MJ91xuDVWM+Uv+_30nPcgh_X_A@mail.gmail.com>
+Subject: Re: [PATCH v4 00/20] imx8qxp: siemens board: updates / sync with
+ mainline
+To: Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Walter Schweizer <walter.schweizer@siemens.com>,
+ Enrico Leto <enrico.leto@siemens.com>, 
+ Adam Ford <aford173@gmail.com>, Alessandro Zini <alessandro.zini@siemens.com>, 
+ Anatolij Gustschin <agust@denx.de>, Andrej Valek <andrej.valek@siemens.com>, 
+ Baruch Siach <baruch@tkos.co.il>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>, 
+ CL Wang <cl634@andestech.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Chanho Park <chanho61.park@samsung.com>, Fabio Estevam <festevam@denx.de>, 
+ Francesco Dolcini <francesco@dolcini.it>, Gary Bisson <bisson.gary@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Michal Simek <michal.simek@amd.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Ramon Fried <rfried.dev@gmail.com>, Randolph <randolph@andestech.com>, 
+ Rasmus Villemoes <ravi@prevas.dk>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>, 
+ Troy Kisky <troy.kisky@boundarydevices.com>, Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Tue, 26 Nov 2024 14:09:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,102 +121,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move to OMAP specific implementation of certain ops functions as the UART
-prints on the serial console fail for baudrates greater than 460800.
+On Sat, Nov 23, 2024 at 1:53=E2=80=AFPM Heiko Schocher <hs@denx.de> wrote:
+>
+> Updating the imx8qxp based siemens board. The current
+> state of the siemens imx8qxp board is in an old not
+> really working state.
+>
+> This series brings mainline back working on the siemens
+> deneb board, the guedi board is dropped as not longer used.
+>
+> make all runs fine without having all the needed firmware images
+> on board, and so CI @azure.
+>
+> If you want to have a working image you need to copy the
+> following images to your build directory $BDIR:
+>
+> ATF : bl31-imx8dx.bin            -> $BDIR/bl31.bin
+> AHAB: mx8qxc0-ahab-container.img -> $BDIR/mx8qxc0-ahab-container.img
+> SCFW: deneb-scfw-tcm.bin         -> $BDIR/mx8qx-mek-scfw-tcm.bin
+>
+> and call make flash.bin
+>
+> There are also updates for ethernet and USB support, but not
+> ready to push upstream currently, hopefully following soon.
+>
+> Azure build:
+> https://dev.azure.com/hs0298/hs/_build/results?buildId=3D139&view=3Dresul=
+ts
+>
+> series is based on mainline commit:
+> 7fe55182d92 ("Merge tag 'xilinx-for-v2025.01-rc3-v2' of https://source.de=
+nx.de/u-boot/custodians/u-boot-microblaze")
+>
+> Ah yes, not to forget, we work at siemens also on a CI setup to
+> have a mainline nightly build and test on hardware. We already
+> have such a CI for internall U-Boot versions up and running, but
+> we do not want again loose sync with mainline.
 
-The MDR1 register is responsible for determining the speed mode at which
-the UART should operate for OMAP specific devices. The baud divisor is used
-to set the UART_DLL register which is used for generation of the baud
-clock in the baud rate generator. The implementation logic is similar to
-how it is implemented in omap_8250_get_divisor function of 8250_omap UART
-linux driver.
-
-Signed-off-by: Gokul Praveen <g-praveen@ti.com>
----
- drivers/serial/serial_omap.c | 56 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 55 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/serial/serial_omap.c b/drivers/serial/serial_omap.c
-index 94672655c2..224d9cbf29 100644
---- a/drivers/serial/serial_omap.c
-+++ b/drivers/serial/serial_omap.c
-@@ -15,6 +15,12 @@
- #include <clk.h>
- #include <linux/err.h>
- 
-+/*
-+ * These are the definitions for the MDR1 register
-+ */
-+#define UART_OMAP_MDR1_16X_MODE		0x00	/* UART 16x mode */
-+#define UART_OMAP_MDR1_13X_MODE		0x03	/* UART 13x mode */
-+
- #ifndef CFG_SYS_NS16550_CLK
- #define CFG_SYS_NS16550_CLK  0
- #endif
-@@ -151,6 +157,54 @@ static const struct udevice_id omap_serial_ids[] = {
- };
- #endif /* OF_REAL */
- 
-+static int omap_serial_calc_divisor(struct ns16550 *com_port, int clock, int baudrate)
-+{
-+	unsigned int div_13, div_16;
-+	unsigned int abs_d13, abs_d16;
-+	/*
-+	 * The below logic sets the MDR1 register based on clock and baudrate.
-+	 */
-+	div_13 = DIV_ROUND_CLOSEST(clock, 13 * baudrate);
-+	div_16 = DIV_ROUND_CLOSEST(clock, 16 * baudrate);
-+
-+	if (!div_13)
-+		div_13 = 1;
-+	if (!div_16)
-+		div_16 = 1;
-+
-+	abs_d13 = abs(baudrate - clock / 13 / div_13);
-+	abs_d16 = abs(baudrate - clock / 16 / div_16);
-+
-+	if (abs_d13 >= abs_d16)
-+		serial_out(UART_OMAP_MDR1_16X_MODE, &com_port->mdr1);
-+	else
-+		serial_out(UART_OMAP_MDR1_13X_MODE, &com_port->mdr1);
-+
-+	return abs_d13 >= abs_d16 ? div_16 : div_13;
-+}
-+
-+static int omap_serial_setbrg(struct udevice *dev, int baudrate)
-+{
-+	struct ns16550 *const com_port = dev_get_priv(dev);
-+	struct ns16550_plat *plat = com_port->plat;
-+	int clock_divisor;
-+
-+	clock_divisor = omap_serial_calc_divisor(com_port, plat->clock, baudrate);
-+
-+	ns16550_setbrg(com_port, clock_divisor);
-+
-+	return 0;
-+}
-+
-+const struct dm_serial_ops omap_serial_ops = {
-+	.putc = ns16550_serial_putc,
-+	.pending = ns16550_serial_pending,
-+	.getc = ns16550_serial_getc,
-+	.setbrg = omap_serial_setbrg,
-+	.setconfig = ns16550_serial_setconfig,
-+	.getinfo = ns16550_serial_getinfo,
-+};
-+
- #if CONFIG_IS_ENABLED(SERIAL_PRESENT)
- U_BOOT_DRIVER(omap_serial) = {
- 	.name	= "omap_serial",
-@@ -162,7 +216,7 @@ U_BOOT_DRIVER(omap_serial) = {
- #endif
- 	.priv_auto	= sizeof(struct ns16550),
- 	.probe = ns16550_serial_probe,
--	.ops	= &ns16550_serial_ops,
-+	.ops	= &omap_serial_ops,
- #if !CONFIG_IS_ENABLED(OF_CONTROL)
- 	.flags	= DM_FLAG_PRE_RELOC,
- #endif
--- 
-2.34.1
-
+Applied all for -next, thanks.
