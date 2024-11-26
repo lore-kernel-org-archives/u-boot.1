@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF65BD3B9A7
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65473D3B9A4
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 15:39:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B43389C97;
-	Tue, 26 Nov 2024 16:39:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ECD2D89C76;
+	Tue, 26 Nov 2024 16:39:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gdGcagB5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dy/y6Jw1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3374989C96; Tue, 26 Nov 2024 16:39:04 +0100 (CET)
+ id C38D189C76; Tue, 26 Nov 2024 16:39:21 +0100 (CET)
 Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
  [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3314089C98
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:39:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC18489CA3
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 16:39:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa535eed875so505304166b.3
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:39:02 -0800 (PST)
+ a640c23a62f3a-aa53a971480so422694966b.1
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:39:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732635541; x=1733240341; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732635557; x=1733240357; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aZ2DgF6O3vxgyDeGmp2dQwrMnFfyqQDz6rUnAu4LNRM=;
- b=gdGcagB5EZEmiYntdOaeK3nNWqYNITMXccgZHaM07q3/l83I6SwpwXXAGdabZYNYuA
- jfBXJ5gmzZw0CMsuHvxIlKBpiF1JAGhdbdyS9JJPO5W1c047GHfR48d9TY2FXV9wjD5x
- 7Ej5W8zJQSkVUO2WLRYvtk7y6afWQDg7cQXkc=
+ bh=57jP3v0lNjLt1OH9Y7KwOwbnZWbOlG0WCepiukWb0I0=;
+ b=dy/y6Jw1ZYu94nKvlDiK4Jh1rAZwMZ1EFhBfOiJYeBVY+OoN2OPawtJhW9uBxzlkKz
+ +53zHQ7WjtGP1O4oYuLpzplyGPVY9oqMKKu2aZsp6UpsJ0eCZB6+fHV4GbzmoHgxDsek
+ z6/yCF83exC1mk516+B7Xxvcse1LoAgy8iMrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732635541; x=1733240341;
+ d=1e100.net; s=20230601; t=1732635557; x=1733240357;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aZ2DgF6O3vxgyDeGmp2dQwrMnFfyqQDz6rUnAu4LNRM=;
- b=E+1aDXjLsxvafVRzQFsaKGE61oHTZ/LhI3cbJnqwDisbGv84tL4y2G50vtyK6kL6TV
- Rn4P/2Wu1l1Mp2ybyEf4wooICZZ51HPKQm+bSRRZDZHfhQfTcU1igMSfFKEE/NBQ7jVw
- fKHFUIxBMh9hH3l69plm2bNRrdGCZWUaEBtHIGYvoF/UOhBs59rQ/IDqVfD8vWjw00g0
- C+YKkRyEA77ig9YftGfqnh8qTubK955+RQu6kdz5hebl1Usj3fjxI+ke5EsXUJfpxIsN
- w1AlibMcpoUmcO/2kPUoI3QjQZ+9gYzIXA9Rc6bbxZMmTYvqW89drQLR8h+odCBiuMQU
- VE6g==
+ bh=57jP3v0lNjLt1OH9Y7KwOwbnZWbOlG0WCepiukWb0I0=;
+ b=qwFH6LsKdZYmOAl8zsXu76/I4GwDw38xkoMVtbDCady+AkIp+oz4aqgldnnZx7WPmD
+ sQLgivlICtiRLDSaAKSZCq38UX49bEdwVIawIEa1Xqvg9OP/mcX5Kk6CKseI0SZn4WPF
+ g+SpoQoFzlz/MTRnxQVQEhq5CGwSi7jl0rShaMWkpYwWAzhZOPupZrC+EREP5pJQw8fO
+ CCrA0tsjVy3b89d/JOJSNS3CeHXlelwfQgnYwoJNba70DvQGKoHQKxG5G7J+OLZWYTok
+ KYnaaOL3AzzTSGP1rbyC8XRAQyikSaxxdGIYcn4mj0QBmlz8xuweELwn56P3m9Zip36+
+ nq+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbV4+1fkXU6W5tukQBcv95B80ojmNECWuQHkm5lEmEWyLJwyvVWEzGEsP/sz2swIXzcPq3FyQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yykmg6q1od02oYK/iZgRm/3rHQQmg9LU7uuMeDCQcDzbyAdopHc
- duWQw5/ZxXUjsrS0IpVpQ677Dkeskbs0dsgd4+6wq6tXWA9dq7d5bbO2+Sdf+D2+wBcGuE8W/V/
- NsEfc8TT9AknP65cKmjo80kBbQBr5LGdmG7pS
-X-Gm-Gg: ASbGncu5CA+oz96PqHdUlx4y5mnwK/KveCnpYmyWSxMmluDgjE+Sl8qgF5Bn5i6uRJW
- S3Tc4UTcqr6guvlI9X4Sw/2DC5k1fnPQ=
-X-Google-Smtp-Source: AGHT+IHxVROxzP5xoTx/Z74d4lJP0in7emGdHx/vMJWwDyI/ArOVMDp8iFmnkWJ3e15jvCEvgM05EE82wdQguVrjop0=
-X-Received: by 2002:a17:906:3caa:b0:aa5:158a:fc18 with SMTP id
- a640c23a62f3a-aa5158afe46mr1255471466b.31.1732635541601; Tue, 26 Nov 2024
- 07:39:01 -0800 (PST)
+ AJvYcCUNTyRofZHfEHRZWOz/SRsI5OCuY3l69KEVQZHd7qLkMeQ1k7mBHrKANMSJ2DwkYSEnfZ8p4CI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy04HYtmraUDidA8oOuIOsp1UD5beICOxAndWj318eoZ3osW+rT
+ lmjOuhOaKy7BuzAmdln2UUpWXCt75bht/13nwC2raK5xMLYBb4LrLiKYvdpbPtDIUj2ZRryFCrv
+ jEbtvtqDXvPlEk5efsC8hvQEY+aKIEK1lG6fi
+X-Gm-Gg: ASbGncusk3m7HJyOVUPGdnLTriv11UL7vClTmgVwhlQKPqxa8fpwrJKX2eFmuutAuK4
+ /q8EW2/5gZnjqB6OzMBpTYCMpfw+wY50=
+X-Google-Smtp-Source: AGHT+IEZhJgtwSrAXJPAdgOHGrR2ZvbdZqrdSqABZKxOmMWS2ySWEyQGA5pUek+6bXkihKw96IFSrlD1OcnCgsq6acM=
+X-Received: by 2002:a17:906:1bb1:b0:aa5:4d26:8e52 with SMTP id
+ a640c23a62f3a-aa54d268e73mr762408366b.47.1732635557174; Tue, 26 Nov 2024
+ 07:39:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20241123212922.304316-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241123212922.304316-1-heinrich.schuchardt@canonical.com>
+References: <20241125204456.1525752-1-sjg@chromium.org>
+ <a6ba9ebe-9d52-4b2d-bb62-02c4f0ea86fb@gmx.de>
+In-Reply-To: <a6ba9ebe-9d52-4b2d-bb62-02c4f0ea86fb@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Nov 2024 08:38:48 -0700
-Message-ID: <CAFLszTi6kMR42eYfzZRH3+AwW44yk6jsckOkDCJzqiSZCoLHAg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] test: add command to 'Lab failure' timeout message
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Love Kumar <love.kumar@amd.com>,
- u-boot@lists.denx.de
+Date: Tue, 26 Nov 2024 08:39:05 -0700
+Message-ID: <CAFLszThf3aSwi1yhaQP9Ns7wTNjKH8XicAqUU6vy5gej5GP+CQ@mail.gmail.com>
+Subject: Re: [PATCH 00/13] efi: Tidy up confusion between pointers and
+ addresses
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Moritz Fischer <moritzf@google.com>, 
+ Patrick Wildt <pwildt@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,20 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Nov 2024 at 14:29, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> When a timeout occurs while executing a command a 'Lab failure' message is
-> written and testing is stopped. The user is left in the dark about the
-> failure cause.
->
->     ! _pytest.outcomes.Exit: Lab failure: Marking connection bad - no other tests will run !
->
-> Add the word 'Timeout' and the executed command to the message.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  test/py/u_boot_console_base.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Heinrich,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 26 Nov 2024 at 02:10, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 25.11.24 21:44, Simon Glass wrote:
+> > The EFI-loader implementation converts things back and forth between
+> > addresses and pointers, with not much consistency in how this is done.
+> >
+> > Within most of U-Boot a pointer is a void * and an address is a ulong
+>
+> No. It is phys_addr_t that was introduced to handle the sandbox's
+> virtual addresses.
+>
+> And we should keep this sandbox stuff out of the EFI code. They are only
+> needed for the command line interface.
+
+No. My statement is correct and long predates sandbox. U-Boot has
+always used ulong. Using an address is generally much easier than a
+pointer, so I believe this design decision was (and remains) a good
+one. I certainly would not support changing it. The phys_addr_t type
+has nothing to do with sandbox.
+
+>
+> >
+> > This convention is very helpful, since it is obvious in common code as
+> > to whether you need to call map_sysmem() and friends, or not.
+> >
+> > As part of cleaning up the EFI memory-management, I found it almost
+> > impossible to know in some cases whether something is an address or a
+> > pointer. I decided to give up on that and come back to it when this is
+> > resolved.
+> >
+> > This series starts applying the normal ulong/void * convention to the
+> > EFI_loader code, so making things easier to follow.
+>
+> According to the C specification size of long may be different to the
+> size of void *. uintptr_t is the type that is guaranteed to match the
+> size of void *.
+>
+> There is no benefit in spreading the ulong abuse any further.
+
+U-Boot specifically uses compilers where ulong can hold a pointer.
+Same with Linux.
+
+Regards,
+Simon
