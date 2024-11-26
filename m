@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F338DD66B85
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 22:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8969D66B86
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 22:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ACC689612;
-	Tue, 26 Nov 2024 23:33:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F538895F0;
+	Tue, 26 Nov 2024 23:50:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yns2oowY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OZsLAACJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C8BB894F4; Tue, 26 Nov 2024 23:33:41 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ACC6B896DA; Tue, 26 Nov 2024 23:50:51 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7CB489266
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 23:33:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9274489335
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 23:50:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-297078d8eaeso4332339fac.1
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 14:33:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732660416; x=1733265216; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Eek4nEbSgnbMZsavauArj0ASt5znWdCQWCzVBJdjl4k=;
- b=Yns2oowYGbM+nr9M70aFDFUX5ZYeP2rodrzYrkeS7OoM+3g6GJvNYjoE6t2CEz4HjY
- hNvX0tEL6cIG0LHGkGOqiSmPvtFbyKuO5XFO/uLueA20pUWLOihdxjJTNdUrXAAgX/m/
- 62w54ehJmcuzavWh87sWhmE0NjA8yl4eGhK9o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732660416; x=1733265216;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Eek4nEbSgnbMZsavauArj0ASt5znWdCQWCzVBJdjl4k=;
- b=ILtckaUrqUwJZ5+XB5MuMShfeeuRxjgObTrpx9ljh21CaozZlPnnje0FCWJVeOHrma
- rp+gpO1xtcR5ZtSQpd98gepqZyUSl87WBbVaSG7w1QFpM1ArzROgZqq6D9RwHTewpF7g
- gqECnCTfb4KdYBF+WjXwwp5MljhgcK/WatRZdy+ejwqddpAcRwfRDQwG7/BRZ9JvudfW
- Zi0zXMusQhb5SNGn1doBbgCQcgBs/OC3+rEHNrHPaBGcWid5sXMBuCsLkxErbWkjkOM/
- ETuUIyftGbEty6LZTR6loCbAEklMZ2cmtb7KQYfciQGW+RNLNTNtml1uD4WMhrRuqjZI
- pRZw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWeLX7msakvkQDHS+QMAZpSE2WWmeDq57rVqfmPeHbIV3eW/8HM5NUR8DA0okiDBjn51jnzZYI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyoAO5820YBgJv3kWvFwtfh8pgGdLEZH/BgXWTcnP25NIBLG2ta
- 8vCEM9SpzGJp6WH1M/RGmHBwMetbCfx9+W6Gy1aRwnbPsRspvyg6JY89cyphGMg=
-X-Gm-Gg: ASbGncsXsFZt5utzo1lLHpzAi/BmYPyy773BSPrTkGP3roN1tLpFenZyohVG9cADXxX
- v7cUZrC6kavsHO9MHwWpOSdzQcfGFBUlMoIlPGL7pl3QilpqLQbzC+hTcT406Co+3uX7lwnBYSm
- LO1inCFH2PYCiWcPoRUzgoJMTlznyLl+ItXayMaSOl79M3M4fI5G6omuhhrM+ylqQF3rSimbhch
- nuT/tfO9XOM6GxJ5LxRujxZloM/MYm7Dvv1uDO0ILGdlZwNPg==
-X-Google-Smtp-Source: AGHT+IHOloh3V3C37rrUoqMNJYXwwtqL6By8uPa6UkJ+657lYFSOWM0pKaODYGw1FXI8+gh1T15yPA==
-X-Received: by 2002:a05:6359:5fac:b0:1b8:3435:5999 with SMTP id
- e5c5f4694b2df-1cab15d44edmr124578955d.14.1732660416645; 
- Tue, 26 Nov 2024 14:33:36 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466a43545besm16197931cf.83.2024.11.26.14.33.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 14:33:35 -0800 (PST)
-Date: Tue, 26 Nov 2024 16:33:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732661446; x=1733266246; i=xypron.glpk@gmx.de;
+ bh=4mt2sqBBLZBJHaFl/YJoi6rRwdVLFiHKJ31gOSRYOy0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=OZsLAACJiKEqug91IlTvBXSIjdMtReYlbCKaDJEPi16qzZwjWFLQKwg3tusyfchC
+ Dvla35zQjlD1R2Ku1gDtX9htXcuLifZngdBtmQcYDIrW1CWLTUBbVBCe9HT8FFv6t
+ svijLEyuQoFHKpPUqeEbwiJftfOvF2MVs92IfT5lFeh9J6chtTMdxmrNTqBDvkE9T
+ wtsCaV7PuePiwyI4vbREbRS0Hib4nyzlV8/KAVmwJNt8mXYiOX+nu6fTxQ7YP4LgP
+ PLzToC9KaEk9mhPeMGlzpbdbLHq88lFOcGOYpDBBnowNin4x7MS3yvH9vkY04N0B/
+ QbFhnR5yq4Mx6SPWrA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.104.206]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNbox-1t4imT23YZ-00W5Hh; Tue, 26
+ Nov 2024 23:50:46 +0100
+Message-ID: <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
+Date: Tue, 26 Nov 2024 23:50:40 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
  header
-Message-ID: <20241126223332.GV3600562@bill-the-cat>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 References: <20241125204456.1525752-1-sjg@chromium.org>
  <20241125204456.1525752-6-sjg@chromium.org>
  <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
  <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
  <20241126155508.GR3600562@bill-the-cat>
  <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BJywYHbw+qriKrcA"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20241126223332.GV3600562@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241126223332.GV3600562@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:nR8X9yIVHOuzSPOuxfCrAg5PDJEZc8Khn9df6e9YrZWviIucKgB
+ qUQlHsD/lhkYZxgUqT7Ir05/2LlPFC+ooJqESBKOAM7QR4StMD/8gtWRlzDQEV9tH2eCiih
+ 939d6DDRyu9RwT0bEipOx5ZUxJVj/OREWKnC4Nai2smRLaQoyA2Pb1hdO81tNug3vyShdZi
+ ngOfQc5pWNBKuirmXbQFQ==
+UI-OutboundReport: notjunk:1;M01:P0:p1/w2AjA0Bw=;CNwZg8XkB1RAsLyW0Uhqp6mHKLW
+ Vxdyj08AeNZCSxkExiOaIceHw6CLDiZ5k30wd3qPHhi75WN4tYs6P0y91S6JQoJ8m2JgTmw36
+ mFkZ+i9P0VNp9RHYnnDli7WMdBFfqko9A+C14W8J0hbrOzfDSMOyj3m7LUxmRWVPF6zEvtrm6
+ vYv34RrKR/Wip1JcbgSFvI3F1ITn66JRSUSH5b1aXKQq5SW+p58X4Q3MZELkCtNFZlQ01iHva
+ mbQbmbIACwsMZF4HoM6KifO2SpFW4kM3lrwipY9IOSLD8GzyKobdhGKdX8tWY6YaISvhETUJo
+ PuzjljEOeEt4vmqGXsgX3AtWKXwQydk0ho4K2lNbO4oRygJXe+Vqa5J6oQcs5LcJNAAhwxq4n
+ unNtVnhoGX/8AMWrC0wmfVwIJJCBzH2eV+A7XmDy0fMXJpdHTbcsxGFPSzG+1f3nBrID8kGdC
+ 5HPjgv/e0LeDN4Qck8EzmT/PgVgVPHcXR2MKjqmdknUpl0JN1z/i7UASJn28lEKHurOBhCdCL
+ orNk8TXGaGVD9NwofA5Bv7iHZO75WL4uA0Y2Mbhsz3WHjFboxWqSaeYKfmac8SseEWC2fTHs6
+ AlX+jlCAc86UPl5Z3pEjOIK1mCVb6pq/xNFLwWSesLeQP2znnXiKtdI2qk1W2c0DfUQK2Yqqe
+ 8X8Jg09tAXyRs73H4CxKH6wYKObmXzD6Zc0SPdRpLapncXNoyegAKs+mMy0YCM8dy5uFhg55/
+ 97qBObv1Mu0AObwwlza2glu3VKwCBkR+hAgX7+UE8TQ3ey9zd0RsHyMHD1A6w4zGFryWbHZfI
+ hAe/mzOGi7WXZA0R5o9j1SJxpoqPPxFz9tbQr/XirKwySzee+fL1/Bxjn3WsC+XBj20tqosZ5
+ +LPGmHz2mpfJU852Pa/radoZayLL7SPU0c6QaaWJBlGT+2buwcvnx7K+h
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,89 +101,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---BJywYHbw+qriKrcA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
-> > > Hi Heinrich,
-> > >
-> > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de=
+On 11/26/24 23:33, Tom Rini wrote:
+> On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+>> Hi Tom,
+>>
+>> On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+>>>> Hi Heinrich,
+>>>>
+>>>> On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de=
 > wrote:
-> > > >
-> > > > On 25.11.24 21:44, Simon Glass wrote:
-> > > > > Exported functions should be documented in the header file, not t=
-he
-> > > > > implementation. We tend to make such updates on a piecemeal basis=
+>>>>>
+>>>>> On 25.11.24 21:44, Simon Glass wrote:
+>>>>>> Exported functions should be documented in the header file, not the
+>>>>>> implementation. We tend to make such updates on a piecemeal basis t=
+o
+>>>>>> avoid a 'flag day'. Move some comments related to memory allocation=
  to
-> > > > > avoid a 'flag day'. Move some comments related to memory allocati=
-on to
-> > > > > follow the convention.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > Please, have a look at this line in doc/
-> > > >
-> > > > doc/api/efi.rst:78:
-> > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
-> > >
-> > > Hmm, we should not add C files as then we end up with all sorts of
-> > > internal functions, like checksum(). The help is a bit of a mess on
-> > > that page IMO and it could use an index at the top or side.
-> >
-> > Why? Looking at the linux kernel (where we borrow this framework from
-> > and lots of developers expect to follow that style) it's extremely
-> > common to kernel-doc C files. I don't see why documenting internal
-> > functions (which should be clear as being internal) is a problem.
->=20
-> It depends what you mean by docs. U-Boot puts the documentation for
-> exported functions in header files.
+>>>>>> follow the convention.
+>>>>>>
+>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>>
+>>>>> Please, have a look at this line in doc/
+>>>>>
+>>>>> doc/api/efi.rst:78:
+>>>>> .. kernel-doc:: lib/efi_loader/efi_memory.c
+>>>>
+>>>> Hmm, we should not add C files as then we end up with all sorts of
+>>>> internal functions, like checksum(). The help is a bit of a mess on
+>>>> that page IMO and it could use an index at the top or side.
+>>>
+>>> Why? Looking at the linux kernel (where we borrow this framework from
+>>> and lots of developers expect to follow that style) it's extremely
+>>> common to kernel-doc C files. I don't see why documenting internal
+>>> functions (which should be clear as being internal) is a problem.
+>>
+>> It depends what you mean by docs. U-Boot puts the documentation for
+>> exported functions in header files.
+>
+> I'm sorry, that's a circular definition. And no, there is not a hard and
+> fast rule that we only put kernel-doc style comments in header files
+> (which are consumed by other files and tooling to generate
+> documentation).
+>
+>> Putting docs in C files clutters the docs with internal
+>> implementations, when most people just want to see the API. The way
+>> U-Boot does things, it is easy to see the internal (implementation)
+>> docs by looking at the C code and the external functions by looking at
+>> the header files.
+>
+> Or it makes things harder to understand because the human readable
+> documentation for a given function is separate from the file the
+> implements the function. This is possibly why in the linux kernel, where
+> we borrow "kernel-doc" from, documentation is frequently in the C file
+> which is then included in Documentation files (the type you objected to
+> in the start of this patch) which include additional human-readable
+> explanation of the intention and usage of the API in question.
+>
 
-I'm sorry, that's a circular definition. And no, there is not a hard and
-fast rule that we only put kernel-doc style comments in header files
-(which are consumed by other files and tooling to generate
-documentation).
+For static functions we will continue to have function documentation in
+the C files and not in the headers. I personally never looked up the API
+documentation in the HTML docs but always in the source.
 
-> Putting docs in C files clutters the docs with internal
-> implementations, when most people just want to see the API. The way
-> U-Boot does things, it is easy to see the internal (implementation)
-> docs by looking at the C code and the external functions by looking at
-> the header files.
+I am not opposed against moving the EFI function documentation into the
+header files. But we should update doc/develop/efi.rst accordingly in
+the same patch series. This is missing here.
 
-Or it makes things harder to understand because the human readable
-documentation for a given function is separate from the file the
-implements the function. This is possibly why in the linux kernel, where
-we borrow "kernel-doc" from, documentation is frequently in the C file
-which is then included in Documentation files (the type you objected to
-in the start of this patch) which include additional human-readable
-explanation of the intention and usage of the API in question.
+Best regards
 
---=20
-Tom
-
---BJywYHbw+qriKrcA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdGTLAACgkQFHw5/5Y0
-tyzmOgv/clnMCEW+2RpnTvu1LSdHVqdp8dz19gaHFnBDJ+kPpa0Lo2XVeKFQHMWr
-0tmo63Cz5R2yUp5pHmH9pn2LMRt28GwnJcCWbd+UB7pYCTiORc845aOYdn14Ehpk
-6w9n6wTzrt+hTc5zq7hajnLszKMy5gGrh+JrpVrz3nRnEuxgwXMSBJot4/ajegyD
-gICmeQNRDx8kSV9LBfNw8Wkaf3hJyYBk51mtJOAvTJm+kM4itmQu3inmz+yMOw1Y
-RQ+m7Ep9Rr6hRDb71G0V45rxnw4g/D4YkXkNgxPN59u5OOSMGPqNXqmhOGI2j09y
-k5Ay2gLgRjc3ril8r5hGH/0IuyAr1TQd/tT8f0IggMGpemi/ZUqHxm+Uo2PMuX+5
-bphV0XjgWdgRWqWCKqeK0TRrB4AixGOuK/amnGjuYHPmrCxpicVm/7ASKv7qkouJ
-XHdP12XkG7iT5ssRvBxtTvS8oCfDl1VYQRskncV/aD9W8FkeCBxAlr/WyJGjsk+m
-/hu+UD0n
-=DdyU
------END PGP SIGNATURE-----
-
---BJywYHbw+qriKrcA--
+Heinrich
