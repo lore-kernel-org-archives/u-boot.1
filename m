@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E058D5A6E2
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 05:40:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B069D5A6DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 06:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91AB389655;
-	Tue, 26 Nov 2024 06:40:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4172489BFC;
+	Tue, 26 Nov 2024 07:30:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QGKaMz/h";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QAEsqNFh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54235896C3; Tue, 26 Nov 2024 06:40:47 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0741388E6B
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 06:40:44 +0100 (CET)
+ id E454589C0C; Tue, 26 Nov 2024 07:30:13 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A077D88F20
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 07:30:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQ5eXKj786868
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 25 Nov 2024 23:40:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732599633;
- bh=M3vx6KXuzJpb8G2S79bnd+DGWvGZLvgPtOdoXijBZFQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=QGKaMz/hm5xKVrAl3FoxTAnaWY0IqzQpQ4fh7MN0zVu5JV7C2pAzIGtyqFEtbUGZv
- soM9rZqVCqEV8H4uV8An7cEeBsxFyw7Rn5T6ymINZ1OnIqHyoXcI4yvgywzG7cT2Vu
- mOGptE90w/ZeocLsyFBbQb+vNWJM47ubY8kqOJR0=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AQ5eX6F122279
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 25 Nov 2024 23:40:33 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
- Nov 2024 23:40:33 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 25 Nov 2024 23:40:33 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AQ5eVv1116277;
- Mon, 25 Nov 2024 23:40:32 -0600
-Date: Tue, 26 Nov 2024 11:10:31 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <u-boot@lists.denx.de>,
- <srk@ti.com>, <rogerq@kernel.org>, <sjg@chromium.org>, <nm@ti.com>,
- <j-humphreys@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
- <u-kumar1@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
- <trini@konsulko.com>, <bb@ti.com>
-Subject: Re: [PATCH v2 1/5] board: ti: am64x: evm: Set "dfu_alt_info" only if
- interface is Serial Flash
-Message-ID: <bfd7ki4e2rtw5cnyp5phrqfxxkm27u7jkaqgbqcea7ahxe3uhn@oon3ag6iosjp>
-References: <20241124070828.617558-1-s-vadapalli@ti.com>
- <20241124070828.617558-2-s-vadapalli@ti.com>
- <f348c51f-3f34-406d-8013-9c4185c8d40b@ti.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3ea49cc8b88so846172b6e.2
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 22:30:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732602610; x=1733207410; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zx2iLAsA5xvdKCxXlZDoYprb/gcHfnFSnY2qFaC948Q=;
+ b=QAEsqNFhfNq7LYKpbARzxmBMLea8hw8jY8+2BpGqr/YHp1WstgXjQg1SdaXA1z12lD
+ CeJ1O2xF5YrZBax7mDSyutUFf46ZH1trZwQtsG7xT4/Fsan7lxz5On8cnqOcZDJgEFyI
+ A1eTr+YET22zYoXc9RMMMdzgZ5/x3JcVuROVagMA7QBnU2iL5ZLY3Mi6at9WFaNfoMRr
+ MNrfG6AnIZZR3lfs2Wqdleq7KrUkxsMjSvm7kjlcSd/+RcuQ1VprkvZ4bXVnew3k+AcZ
+ Xn7QWNIKwBqLPsryZWvLKLBPX+aMLjyb9Lkat1P7n4KkutVN90XYMbUfKI1xZS19qUjr
+ Gt0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732602610; x=1733207410;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zx2iLAsA5xvdKCxXlZDoYprb/gcHfnFSnY2qFaC948Q=;
+ b=kx7FO8mnvTQiwOMI2R4XfAfMruugMuoIO7Cw/Bv71pQQstT6Lce9HPGM1GdFSscDa3
+ YP9K55bZrFd1wDWuWWDsfcVlczrfnlnTIV4RA6ijFNC6sHZk3ughYyxI3qbWgkokJJup
+ quxAAOFyl1/icsO0H0fL+LdVc/ga69KBqxePZrj1rvgAyy3cZBFbFTKLTtbEeYr6ha9E
+ 1ll85VfzhjBn8KnMXLAV6ELEzNxSmTSTRUw5DyhJwOWnTuYk0Np8Nc3bXn0jPTdGgMyt
+ 4yuIwZl8RygjUScKIhw/N7MEpyUZ18FtsUYtcMr7OWpjM/SIa3UjxR5l9E52HvbyioKY
+ GN6w==
+X-Gm-Message-State: AOJu0YxE2r1ALeH00WdBXL6VjxHZIMeQTB3mmeEp6/mB9U3h3gHgz2Ic
+ 8WYru2jfgw+NNcD31tiiYGTewB6z+7hwpAIhn/aOB8G19n2dU8lv1lk0GU+4eg+zW5uoMNdh5EA
+ Tk5DZ1KgZkGb2DROGjEnWXH7GjaeZBaU0lT0oNw==
+X-Gm-Gg: ASbGnctxNGgZj3OdNYOPfZieV+sueVdMWY5AEEPbIdHUgnP3TbPn4XWSuuzW9pOOgsw
+ SG79dG4agcm2Po/vQDHlulXHnC1vftQ==
+X-Google-Smtp-Source: AGHT+IHmveivEZMWbu2VZbjgktHr9Sk62rGCgSHI+hQROzHCDGUe8/E5EeSUZIksXJudJYDHp0um0uQ7ZrZnMb/4Kds=
+X-Received: by 2002:a05:6808:1a0f:b0:3ea:5222:f019 with SMTP id
+ 5614622812f47-3ea5222fe89mr4503800b6e.42.1732602605251; Mon, 25 Nov 2024
+ 22:30:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <f348c51f-3f34-406d-8013-9c4185c8d40b@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241125204456.1525752-1-sjg@chromium.org>
+ <20241125204456.1525752-5-sjg@chromium.org>
+In-Reply-To: <20241125204456.1525752-5-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 26 Nov 2024 08:29:29 +0200
+Message-ID: <CAC_iWjLgPqvmvMjHQsY+dPrQ4cmz11KKSKEs87OHW7KEpBWR5g@mail.gmail.com>
+Subject: Re: [PATCH 04/13] efi_loader: Update startimage_exit self-test to
+ check error
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,29 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 26, 2024 at 10:33:30AM +0530, Vignesh Raghavendra wrote:
-
-Hello Vignesh,
-
-[...]
-
-> > +	/*
-> > +	 * Since the EFI Capsule support is enabled only for Serial Flash,
-> > +	 * update the "dfu_alt_info" environment variable only if the
-> > +	 * interface happens to be "sf" (Serial Flash).
-> > +	 */
-> > +	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) &&
-> > +	    (strcmp(interface, "sf") == 0))
-> 
-> IIUC, EFI_HAVE_CAPSULE_SUPPORT is probably only functional at U-Boot
-> proper and not at SPL (I dont see any SPL_EFI_* options), so would this
-> work instead?
-> 
-> 	if (CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT) {
-> 		...
-> 	}
-
-This works! Thank you for the suggestion.
-
-Regards,
-Siddharth.
+On Mon, 25 Nov 2024 at 22:45, Simon Glass <sjg@chromium.org> wrote:
+>
+> Check for an error returned from the decompress() function, just in
+> case.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  lib/efi_selftest/efi_selftest_startimage_exit.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_selftest/efi_selftest_startimage_exit.c b/lib/efi_selftest/efi_selftest_startimage_exit.c
+> index b65a10b7a4b..8d119f054c5 100644
+> --- a/lib/efi_selftest/efi_selftest_startimage_exit.c
+> +++ b/lib/efi_selftest/efi_selftest_startimage_exit.c
+> @@ -84,13 +84,15 @@ static efi_status_t decompress(u8 **image)
+>  static int setup(const efi_handle_t handle,
+>                  const struct efi_system_table *systable)
+>  {
+> +       efi_status_t ret;
+> +
+>         image_handle = handle;
+>         boottime = systable->boottime;
+>
+>         /* Load the application image into memory */
+> -       decompress(&image);
+> +       ret = decompress(&image);
+>
+> -       return EFI_ST_SUCCESS;
+> +       return ret;
+>  }
+>
+>  /*
+> --
+> 2.43.0
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
