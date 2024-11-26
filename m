@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E7CD59D7F
-	for <u-boot@archiver.kernel.org>; Mon, 25 Nov 2024 23:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818F0D59D85
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C1AF8975D;
-	Tue, 26 Nov 2024 00:41:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 91E7A892DE;
+	Tue, 26 Nov 2024 01:32:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="lzsOtU8F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dPt7pDNM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6950B899FE; Tue, 26 Nov 2024 00:41:15 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id AC1DF8922D; Tue, 26 Nov 2024 01:32:15 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DE5B88FC8
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 00:41:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C93E89328
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:32:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dimorinny@google.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa5366d3b47so325781766b.0
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 15:41:13 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3822ec43fb0so3922538f8f.3
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:32:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1732578072; x=1733182872; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732581132; x=1733185932; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8SdHkU298doPpZMV6hdirWBtr1BmuXkZRK/e1z9H8LA=;
- b=lzsOtU8FTxI5SoE2Jy6ipBid0HmYYaFe4iWsGwFmR1I1xLxoHUmIOUKC84nbx6hhfg
- YHfCLtyZwZOyXZ3uDoxiaUGIK8AvlsrOrrSqfYL9cl/bIaLkrOYiS/hBxI+3mW2/vDtN
- JRHsLNxBcFFt+oCPA9xDmCN2zDPfz1ODofi5BXLKSrgXF6wtap8ivSLtXtlYsDhCmlIG
- rTxS7r04N1Qic5NLHmoJrPu0EZDgOfr87D+MKggYN6dkKiPpNyreY2NO7NEXqa+d+OZt
- dSQbzRTer5N3ExGoklNYPK48mm6AHqvZtWMnYx9IJt6+4LEd7WLYcjCa0jzALei3yE3Z
- 6KjQ==
+ bh=A4wzS5UMrOJSPhalFTWKlXp2uSglxyZyh9XiuBGdw9E=;
+ b=dPt7pDNMMGNw42bzZ2cq76e/noV+9xbgUgH+Hh9F0lloefvTXaiDn3CtdiKuQdHVcI
+ 1W4A4d5OaamEUEqSSzxwUntweVkV/z9kia/hdD5Db8xk8GECZX+peuYLBtamVYf2Ok2A
+ W4RkYZet0oguia2F7rh1BOL/CfpLJQ+XbVnVE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732578072; x=1733182872;
+ d=1e100.net; s=20230601; t=1732581132; x=1733185932;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8SdHkU298doPpZMV6hdirWBtr1BmuXkZRK/e1z9H8LA=;
- b=HFRT0sZuMPtQSQAIhW89+NMfwbuJy2+WFNUtt0id3LfSIEpPtpVFsTfbSfUNDQ6arE
- Lr3mMaI9ipX7xU9eWGxQhPUsk3bTGt5e4OQqaspty2h6WREe09+wDewr3+LXDMibb8XU
- hvS9QQ+mu4c4HMdHcmIthsuvoy7gEdQGWP53UVfUDjwsND2QdCHvsyaT8PIODSsRyQlR
- Whg5QWWsIPfvXHZVYSsCpXvs8RWlX19ApLotTdRU4JZHlrOfv6wOoOcVBGFGOUdfAb95
- Xb+JWYUFmEyaD6VUnFRNPZWuTEiM/irREYGOjYOxIwUmXbeAXimRu/Eo+pEg0bdB3L3T
- NC5A==
-X-Gm-Message-State: AOJu0YwMGbSkozOb4WSyVTzhJzMlF3N2WS4Ef0BVDrJh2CASgjKuLkKe
- HijEZaPXJrc4wktWQGKFwcK1DAacNR13wy4CwpF6EDRaOLQ9T9SRQhyRsKArkd1ShxRFKekMVT/
- 2DW2wBFoItngiEzoxeR0TmyDLMGicz11KyHwp
-X-Gm-Gg: ASbGncv76+/QCTrAFj+KbYwoWglG4OsgF0HtiC7Gyw4IsEKpL1tzAVLEgS26LjJGoS8
- 7bZzwI16ThYR63Ps3V5zYnuYqn/cG2jnixsIGjE7I5xDmXz2Nv09EX1amHeHOGGCTwQ==
-X-Google-Smtp-Source: AGHT+IFVky0gy/DoUY7XYJVB/QHs2A7Pl8KWi1VaNpagO5CplIyLDm03nYrE5KQmJi0e2/Wf/qNTIR8KDsdq1GcV92s=
-X-Received: by 2002:a17:907:77c9:b0:a9a:67aa:31f5 with SMTP id
- a640c23a62f3a-aa50990b2a9mr1215719066b.10.1732578072430; Mon, 25 Nov 2024
- 15:41:12 -0800 (PST)
+ bh=A4wzS5UMrOJSPhalFTWKlXp2uSglxyZyh9XiuBGdw9E=;
+ b=F6fMcM9i2d1LYNaGd3BVawHYB5Z8JjcZBHma1nqUcMg6iiazm/Yf+bg0WCUECogrAr
+ 1PSVl5zTZeBFvDML16DM9Aj3mS0P4I7l6pb5NK7pTTxcckXzZf9x5kSuUO2U0MFtGBQ9
+ q3Pdwh8kJ1Q1xaosop/f+xURNbeb6EVhj20xPRBH5LUL8118X9cfJ8pPx+f3qemFgjpY
+ SYZPoFxAcUmIA7TeoCKFVsYndW9jdi600nfCz4tBlAcuopyGDhBap72ULGgep64DLGJr
+ m+aEr4z+Zg34/H56gIqEuGAYzja4oCQcmoIP9kVY7ezgZUg7jSh45xWgRW6ykU9aLz1i
+ Hihw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEvITc5I0bqV85G2t+pdJ1/9V75DVgcXg6UeAZ+bs/9LOe5V21KZJzdsL1wuY9EHOcWjdcAZQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yys76sKFy+rUh7QIQEtTSOs2WOZDKvGtipCMSS05crQYz2VPQwK
+ BXzEXs1/CG75NBUWFMQgRu45AVJCluoefTFlH24hwn95Df9eoi4O7ely0rJzzttJPDDxB2Ajrgs
+ 9ZGyb7WiME3mqMjECY5iN3bi6Jxx82VLTY0hA
+X-Gm-Gg: ASbGncuF8uPB+WfZwZvPflU2t35k8pHnk+oEN5TGyRu+gQT/NYmYsjnYKEzdWbgo9wl
+ iTSDEAmT+0XAskQy2bXoFiNSHyyTszTU=
+X-Google-Smtp-Source: AGHT+IHAhtZNTk7sQY9VicH0gQeQ+BoCfE2eEFhC1Vt7OoO7jKOUy/DXi0TeEjdYl26v2TcW4ep+7v1eDsEfDLnJR4c=
+X-Received: by 2002:a05:6000:2807:b0:382:45c9:e34f with SMTP id
+ ffacd0b85a97d-38260b59713mr8351050f8f.18.1732581131905; Mon, 25 Nov 2024
+ 16:32:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20240306185921.1854109-1-dimorinny@google.com>
- <20240306185921.1854109-2-dimorinny@google.com>
- <f2e90ccc-424e-4ab7-93d9-7ca4aaa5a600@linaro.org>
-In-Reply-To: <f2e90ccc-424e-4ab7-93d9-7ca4aaa5a600@linaro.org>
-From: Dmitrii Merkurev <dimorinny@google.com>
-Date: Mon, 25 Nov 2024 23:41:00 +0000
-Message-ID: <CAOWkq4mgzqdAjU+a3iFc7_UnsP03NTNp+TdK94t4g10tD2DOuA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] fastboot: blk: add block device flashing configuration
-To: neil.armstrong@linaro.org
-Cc: u-boot@lists.denx.de, rammuthiah@google.com, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>,
+References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+ <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 Nov 2024 17:32:00 -0700
+Message-ID: <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ying-Chun Liu <paul.liu@linaro.org>
+ Raymond Mao <raymond.mao@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, 
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,81 +98,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Neil.
+Hi Heinrich,
 
-Will do it by the end of the year. Only tested it with a virtio-block
-though.
+On Sat, 23 Nov 2024 at 14:46, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
+> a file and boot it if autostart=yes.
+>
+> Instead just check that there is a network device.
 
-On Thu, Nov 21, 2024 at 12:44=E2=80=AFPM <neil.armstrong@linaro.org> wrote:
+If you look at dhcp_run() you will see an 'autoload' parameter. This
+is 'false' in this code, so it never loads a file.
 
-> Hi Dmitrii,
+Regards,
+Simon
+
+
 >
-> So you plan to send a new version of this patchset ?
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         new patch
+> ---
+>  net/eth_bootdev.c | 30 ++++++++++++++++++------------
+>  1 file changed, 18 insertions(+), 12 deletions(-)
 >
-> It would be very useful to enable fastboot onr UFS/SCSI based devices.
+> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
+> index 6ee54e3c790..b0fca6e8313 100644
+> --- a/net/eth_bootdev.c
+> +++ b/net/eth_bootdev.c
+> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
+>         return 0;
+>  }
 >
-> Thanks,
-> Neil
+> +/**
+> + * eth_bootdev_hunt() - probe all network devices
+> + *
+> + * Network devices can also come from USB, but that is a higher
+> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
+> + * enumerated already. If something like 'bootflow scan dhcp' is used,
+> + * then the user will need to run 'usb start' first.
+> + *
+> + * @info:      info structure describing this hunter
+> + * @show:      true to show information from the hunter
+> + *
+> + * Return:     0 if device found, -EINVAL otherwise
+> + */
+>  static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>  {
+>         int ret;
+> +       struct udevice *dev = NULL;
 >
-> On 06/03/2024 19:59, Dmitrii Merkurev wrote:
-> > Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > ---
-> >   drivers/fastboot/Kconfig | 20 ++++++++++++++++++--
-> >   1 file changed, 18 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> > index 5e5855a76c..460c5e98d7 100644
-> > --- a/drivers/fastboot/Kconfig
-> > +++ b/drivers/fastboot/Kconfig
-> > @@ -87,7 +87,7 @@ config FASTBOOT_USB_DEV
-> >   config FASTBOOT_FLASH
-> >       bool "Enable FASTBOOT FLASH command"
-> >       default y if ARCH_SUNXI || ARCH_ROCKCHIP
-> > -     depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
-> > +     depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
-> >       select IMAGE_SPARSE
-> >       help
-> >         The fastboot protocol includes a "flash" command for writing
-> > @@ -109,12 +109,16 @@ choice
-> >
-> >   config FASTBOOT_FLASH_MMC
-> >       bool "FASTBOOT on MMC"
-> > -     depends on MMC
-> > +     depends on MMC && BLK
-> >
-> >   config FASTBOOT_FLASH_NAND
-> >       bool "FASTBOOT on NAND"
-> >       depends on MTD_RAW_NAND && CMD_MTDPARTS
-> >
-> > +config FASTBOOT_FLASH_BLOCK
-> > +     bool "FASTBOOT on block device"
-> > +     depends on BLK
-> > +
-> >   endchoice
-> >
-> >   config FASTBOOT_FLASH_MMC_DEV
-> > @@ -189,6 +193,18 @@ config FASTBOOT_MMC_USER_NAME
-> >         defined here.
-> >         The default target name for erasing EMMC_USER is "mmc0".
-> >
-> > +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
-> > +     string "Define FASTBOOT block interface name"
-> > +     depends on FASTBOOT_FLASH_BLOCK
-> > +     help
-> > +       "Fastboot block interface name (mmc, virtio, etc)"
-> > +
-> > +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
-> > +     int "Define FASTBOOT block device id"
-> > +     depends on FASTBOOT_FLASH_BLOCK
-> > +     help
-> > +       "Fastboot block device id"
-> > +
-> >   config FASTBOOT_GPT_NAME
-> >       string "Target name for updating GPT"
-> >       depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+>         if (!test_eth_enabled())
+>                 return 0;
+> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>                         log_warning("Failed to init PCI (%dE)\n", ret);
+>         }
 >
+> -       /*
+> -        * Ethernet devices can also come from USB, but that is a higher
+> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
+> -        * enumerated already. If something like 'bootflow scan dhcp' is used
+> -        * then the user will need to run 'usb start' first.
+> -        */
+> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
+> -               ret = dhcp_run(0, NULL, false);
+> -               if (ret)
+> -                       return -EINVAL;
+> -       }
+> +       ret = -EINVAL;
+> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
+> +               ret = 0;
+>
+> -       return 0;
+> +       return ret;
+>  }
+>
+>  struct bootdev_ops eth_bootdev_ops = {
+> --
+> 2.45.2
 >
