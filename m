@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0D7D59D80
-	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA3BD59D85
+	for <u-boot@archiver.kernel.org>; Tue, 26 Nov 2024 00:33:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E638922D;
-	Tue, 26 Nov 2024 01:32:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 684C289270;
+	Tue, 26 Nov 2024 01:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E5XAnjuy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jVVTwZpj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B63888BFB; Tue, 26 Nov 2024 01:32:50 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 3C66089270; Tue, 26 Nov 2024 01:32:58 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BE8D8922D
- for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:32:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4305C88BFB
+ for <u-boot@lists.denx.de>; Tue, 26 Nov 2024 01:32:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9aa8895facso816860566b.2
- for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:32:48 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfe5da1251so6153821a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 Nov 2024 16:32:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732581168; x=1733185968; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732581176; x=1733185976; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+zNZqzRX+sxFhq+teLewyeIox16A/cj1vgQ/zFYCoDk=;
- b=E5XAnjuyVRnupp5ku3AOCNp8f1cO5xMIPceRDL4yuGKLddJxCf96qk0/P+sL1Yc2fS
- I6sd/lu2uJnjEIupkG4N+5qI3JycU0E4+Ot44+p5XZzEy1Jyn4r7bkvyuIk+TN4cpxm8
- 963099iqkjuxFNlXsTFT5eBwHkEWLnhGrN1wA=
+ bh=y1zt0mZ3WLslNr38dYJgTK0e//mnMbGVJOJQwnQH2vU=;
+ b=jVVTwZpjrFCmGW/fNn+CTLhCxZ4FrOHunGOGrRYOS7URjbeQiVoZB6fsXDf8Kbf/C1
+ xHxg/AhAm4kXNSOVVnaQSoMqOJ3D73Y+bJBr0ijNd7u307YqGecQ8FPraT88Mr8KrCOW
+ YGGhnhcDG9GntZzgQA/CdEq596m5jlgsajewY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732581168; x=1733185968;
+ d=1e100.net; s=20230601; t=1732581176; x=1733185976;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+zNZqzRX+sxFhq+teLewyeIox16A/cj1vgQ/zFYCoDk=;
- b=dS7Nf7TCbZWmuEHIrXhk9WJ9MU2BpgByIrijHfpKQ62bKniLOEoTzHGwfp1R/P/at4
- D6xfnE7jIZbhDNWXD9UedqAv8+/3Uyzu0XwvDHEF4gCrOsUwiw5xT2b7g1IiaZt1g5Mb
- pEHThmqQg+m2Gk1zVvcNC96hfuIGFrtN7kgQ2fSUsRMrbbeJv5DJUJJsZYjzAy5z2eE0
- iesh7uemzXtIAfkPu2ESEEwEtgAA/YaqlEDXVA92DdZt0LlIrJpd83HH7S2/iwK3zZqU
- to19gynsGyYEIvU2/s32NHTGSMCsYP7k/CbXnJMvveYYrbgWhzYSp/sWrvfZNmqC/BKN
- LqeQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUY/Fkl0jVnf73fKeTp0INMMxr+IX3oFMEce8T0aDXCvNdupH06RxGZHch/t8quXyzZn7rqe1U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDZIRH+FIhuX2y/fwLti6k9vJYkVlDnO+nQFn22T1sX3JkuBVj
- zHL43ZdwtB8IIYITHj72lkmxTwQFH27cPc2XQRXCkRDxQyh5Wim4+taExTZxH1KmtkZJoBnOeOD
- Qdepbn1z0V6B6tvpNHgTTNq4zfc55MeLpk9Pp
-X-Gm-Gg: ASbGncux1pW70DoO5NFn/cO0H/DGKfVGwyJA8K2ZGcbmLdZB2moaAOZVXjnTLV/l4Ek
- vSzS0y+UL9HSfZWzlovN4K3VlxWGqeb0=
-X-Google-Smtp-Source: AGHT+IHJq0hOaiEji1Zk1DJG4ollP7DeX6uMbwsjavoiceVM3JJc7Z10lD2eguT6GEgopUgiJ0IDijzY7urQvF26Zhs=
-X-Received: by 2002:a17:906:318a:b0:aa5:3fa9:e90c with SMTP id
- a640c23a62f3a-aa53fa9efbemr692364866b.32.1732581167829; Mon, 25 Nov 2024
- 16:32:47 -0800 (PST)
+ bh=y1zt0mZ3WLslNr38dYJgTK0e//mnMbGVJOJQwnQH2vU=;
+ b=vyug6ZKHJ1VUQ36qk61Zb154/IN6gkHi51r00ixuYtXExxjpCAuuad6QFZoL6UwSv9
+ B/YMTL/n53wrCfU0XoDFbXUjOWjq/5svWyTFnrtB4jJE1kWWMoeRS9+5BQiHS8oxneIu
+ fnCVHBdYDe1HChiIGnGn7QRZXDAhJ75IWCpGhaxqGG+LyZyaMjfOCMQRZW5dUyWq0kmG
+ 3BecV0XH+63KXKZVLlz7zwAU3+II7VC5HjdSAcfUCW60r+qF/290IfxxqdUXvs7rK6Bl
+ URexLDQzK5Cuod8m7jmpMgBMk7pn8ADUC9PC8xonlxw0t0hdchptLSvozKKDAzbngtot
+ 2aeg==
+X-Gm-Message-State: AOJu0YwfRSfkuNj5FPZxw+plN6ZsqsWWQBCxNrJ/W+oO21XEkJ+y2DFY
+ 1CrusX2DGu+9t1lHjkY2fgbMb3gwoZHhhfhVGDqljy/4Jvih2lCBveqF5fB/qRBBmpECxUXZ2ih
+ 8wb5gcr5FQ/zNhA0Cb6DeUIH4dEH2ZkuHAZL9
+X-Gm-Gg: ASbGncvsqXtBgJZ14m1PefUG244QcRX+2kWeI6dzYHfqVzPqn83cMBv7pcCYztZoj+e
+ LmHLYe+C07BRO5qpt+lj53vwbqMXqnuE=
+X-Google-Smtp-Source: AGHT+IHyCrrJpBEh6EYgx7673avPKvmQ5DcjWrfhcRFVZb6c51xhV01thnh3X1LhhMHszr1iqlKpDg9kOG4Q/ka2nC4=
+X-Received: by 2002:a17:906:329b:b0:aa5:3979:cb3d with SMTP id
+ a640c23a62f3a-aa53979cbecmr825374466b.26.1732581175780; Mon, 25 Nov 2024
+ 16:32:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20241124183832.2476928-1-caleb.connolly@linaro.org>
-In-Reply-To: <20241124183832.2476928-1-caleb.connolly@linaro.org>
+References: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
+ <20241125115554.1707080-3-andrew.goodbody@linaro.org>
+In-Reply-To: <20241125115554.1707080-3-andrew.goodbody@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Nov 2024 17:32:34 -0700
-Message-ID: <CAFLszThqtA_WBxOU-EnEvw956ZMN9KErx_C4gTzW_+p_tGu9qw@mail.gmail.com>
-Subject: Re: [PATCH] common/board_f: init malloc earlier
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
+Date: Mon, 25 Nov 2024 17:32:41 -0700
+Message-ID: <CAFLszTgz9jRKaySEhuHM2Kh1FxmigY1SJobpn-DPq3NvkN_psQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] sandbox: select CONFIG_64BIT for sandbox
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Dan Carpenter <dan.carpenter@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,64 +85,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
-On Sun, 24 Nov 2024 at 11:38, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Mon, 25 Nov 2024 at 04:56, Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
 >
-> Currently the early malloc initialisation is done partially in
-> board_init_f_init_reserve() (on arm64 at least), which configures
-> gd->malloc_base. But it isn't actually usable until initf_malloc() is
-> called which doesn't happen until after fdtdec_setup().
+> Select CONFIG_64BIT so that we pass the -m64 option (instead of -m32) to
+> static analysis tools.
 >
-> This causes problems in a few scenarios:
+> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
 >
-> 1. when using MULTI_DTB_FIT as this needs a working malloc (especially
->    for compressed FIT).
-
-Hmmm, how does this work today?
-
-> 2. Some platforms may need to allocate memory as part of memory map
->    initialisation (e.g. Qualcomm will need this to parse the memory map
->    from SMEM).
-
-That really needs to be tidied up. When does this fixup need to be
-done? I imagine it is somewhere prior to setup_dest_addr() ? Perhaps
-we could introduce an event to do 'memory map' stuff?
-
-Regards,
-Simon
-
-
->
-> Move the initf_malloc() call earlier so that malloc is available during
-> fdtdec_setup().
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  common/board_f.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/common/board_f.c b/common/board_f.c
-> index 98dc2591e1d0..bddfa6b992b9 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -867,15 +867,15 @@ static int initf_upl(void)
->  }
+> (no changes since v3)
 >
->  static const init_fnc_t init_sequence_f[] = {
->         setup_mon_len,
-> +       initf_malloc,
->  #ifdef CONFIG_OF_CONTROL
->         fdtdec_setup,
->  #endif
->  #ifdef CONFIG_TRACE_EARLY
->         trace_early_init,
->  #endif
-> -       initf_malloc,
->         initf_upl,
->         log_init,
->         initf_bootstage,        /* uses its own timer, so does not need DM */
->         event_init,
+> Changes in v3:
+> Updated commit title
+>
+> Changes in v2:
+> Moved select of CONFIG_64BIT from SANDBOX64 to HOST_64BIT as
+> suggested by reviewer.
+>
+>  arch/sandbox/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+> diff --git a/arch/sandbox/Kconfig b/arch/sandbox/Kconfig
+> index 1c8353d615..db29ca14bd 100644
+> --- a/arch/sandbox/Kconfig
+> +++ b/arch/sandbox/Kconfig
+> @@ -46,6 +46,7 @@ config HOST_32BIT
+>
+>  config HOST_64BIT
+>         def_bool $(cc-define,_LP64)
+> +       select 64BIT
+>
+>  config HOST_HAS_SDL
+>         def_bool $(success,sdl2-config --version)
 > --
-> 2.47.0
+> 2.39.5
 >
