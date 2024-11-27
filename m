@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0099D6ACF7
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:23:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ECC2D6ACF4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 342588980A;
-	Wed, 27 Nov 2024 18:23:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C5AB897EC;
+	Wed, 27 Nov 2024 18:23:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="svtJ/DaQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WEruIX9m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0206897BE; Wed, 27 Nov 2024 18:23:02 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id A58F189807; Wed, 27 Nov 2024 18:23:03 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30A4D897BE
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2579A896DC
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6d41edfac53so80696d6.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:00 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b15d7b7a32so508983685a.1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:22:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732728179; x=1733332979; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732728177; x=1733332977; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lvoarqXbCSO3/TlKcs8g3oRI0nBqylQPY3+WYaNAev4=;
- b=svtJ/DaQB/xwOXRm/BeTa7wFHkluPNeAGSAgEJbKCGXj/iC6OAUhqSHHPzta7lmSh5
- Z43lx/05gZStEpogtmeLZIuJOm9GU+RpbYwAZtour2Wi0JoRBOWjeJqFBGx85pntuKc/
- KW2wTCbKk0NWcxngcpWH1ZT9wBX1R9384uDL4=
+ bh=kWBdcIEgr5qwAVHUJ5m17h7G1APKnwNOit1EqCpgVio=;
+ b=WEruIX9mGxM6L8fwieoLyPlbkXeYNELWYt5CWyeKNRGnhw8yZnkvdN9jQFrFa+iRRu
+ M50NjSEveVKVIE4wUxlPlCIndB3Cfysuzom/GALlmGO0+gQJhiVrJ4lEuEsrENs4LoiN
+ NDv1Zq/6+2OCU+wEdMm5IUqCLiivL2QF1mwbg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732728179; x=1733332979;
+ d=1e100.net; s=20230601; t=1732728177; x=1733332977;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lvoarqXbCSO3/TlKcs8g3oRI0nBqylQPY3+WYaNAev4=;
- b=Rx4sh2SEFO/EQtEzcLoiw5o1PaY1crObvaSm180FR3xgkjC5viOhpw0TckcNU2Si1M
- 8utlZcU7z46Hfd2o7kTAuwnZdRC3Brjn2Ynd4Cr1YdEEdk9ZVGG9Cj4Y0eNvzHe44wt8
- JncHQq1Idb7Ck7RMvGViR5N1UCeP5f85EBe4iXFf82KVKf7UASYqwYgaR6h5L8UTCEyq
- 7R89dIinSS3nhaOqBdW4cqO5hRWeJOmGeFm4diWsGYUqT6DyrbRsRB5FnAqbHQ/FsM/R
- pIKzg14AG1trvM7/ia40V1HVlSUWghkUNOB7rEIc56tSouDGPtBy0JINm2UXR04HhJXV
- DKCA==
-X-Gm-Message-State: AOJu0Yy1wLHiqg6HwEtcx+/reRcxPfOY8MNlG+QiJmqjlV7IJjd7F2EA
- Hb5lQV+I7Jh41MvqHNfNyvu/Usa0OdggWKNMHjKwWTNsSx1notlGNcDghYp+RMhAWPE9spPH9r6
- Qf0g=
-X-Gm-Gg: ASbGnctDShoRUc0ip+Ajbod15zu0KlbADzXaf4nVBbioDtnGaOHMrm8X/YYcUwBnyjU
- RS97XYViIAtTM/sNHVOsXfnvDmJwpwaJsecWdPhtp91y9vt6W/2Vzk6AMvTwMzqgWo829y73Tlp
- T3hZCfsHAf+jQljzBqx2uUC5gHc83YgDPJGX33VjnVrrOW2OlbGfWtth5HPqZSCwyJW0ghTvMo9
- dj8qjxcuUQUxNT2midkZenInj7aDtdcIGXmYkCeePM7wX1d+RF7CcJwhaQRc73unbi0kF3O
-X-Google-Smtp-Source: AGHT+IH7JJEu0l+X5+flWZHP84soOEzxuWEBnBYkevAto5YdButHHMwmT5B18MnNqsXoWwFrU9rf7A==
-X-Received: by 2002:a05:6214:f2b:b0:6d4:76a:d966 with SMTP id
- 6a1803df08f44-6d864d3c31amr60490786d6.21.1732728179149; 
- Wed, 27 Nov 2024 09:22:59 -0800 (PST)
+ bh=kWBdcIEgr5qwAVHUJ5m17h7G1APKnwNOit1EqCpgVio=;
+ b=TyKLj3YsduHn21BdAxPCrRjN/jkBZOF5B28NeNuPr+TGER/DLZpXubdEGHU8NrRIqT
+ 1hCAwtolIn9avykltfk+PvPJ+6nJdMP1ReeRHUP8ks+8Qy5LLnCGlOEf31rBrPa1AMAx
+ I7lkF4zvo7z918iXT4m/+g83wYNY2K/CkHFLLm8fsrrMNQXQPTcjN+T/LiVmf0dcb+RZ
+ jb0d7L21HTdHl0v7R4wQd3MOHCnvjgpMicCAw2iHheIuSB4mBCUIg3nzel9Xyht9F/MN
+ //blwoRMt6KqUzgES6yyv8dkMCjIvNmTEpCajc8ykStQZrjTndAPka+2rHPp3ovhPptK
+ bNHQ==
+X-Gm-Message-State: AOJu0Yzp3O/oVDVg//eUIvMI9ROF/dffjwMsxmYsHMm3yzg8p+O9BRU2
+ nkGTmBhXLJFVbdi79IRFfDaeFMXCkpnW9xLdKZ3NFbm46HPWwPPFeZeiWo0cGehRABOAETtih+Y
+ IEng=
+X-Gm-Gg: ASbGncvhe/4NKfE6XkUE5cFMiA5m+SFsZd4dMOEHE802VZSoikkUdzmvaXN7LggU+zW
+ jchZqabX1t71ftwUtOVZSZGbg5t92miY66fityZDAP3MQnM3CpGnccBzYzcss1DHWgQMPNE/yIl
+ 8JeM+5ooFZMuwCpH28rcS9KeeM21HP7C+xx+DXSvbHpwB1OcxNAm9dR2dIiTncywo82Q3EWGNcq
+ JyA57cI80QMXgM4c42ZOk33QDrBTc0dh+bSKUWTVzJmbB2I3ZiA5H1Z4cASJ77gVM7q4p1R
+X-Google-Smtp-Source: AGHT+IG+w+3Fokg5V0aZZHamDv1RZ56MzyCvJLv0b5hp5FOD0aLCGw/VvCYZ2ewmzluqRs+iQebzXw==
+X-Received: by 2002:a05:6214:27c1:b0:6d4:19a0:1fa with SMTP id
+ 6a1803df08f44-6d864d96912mr49441546d6.29.1732728177053; 
+ Wed, 27 Nov 2024 09:22:57 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.22.58
+ 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.22.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 09:22:58 -0800 (PST)
+ Wed, 27 Nov 2024 09:22:56 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [v6 04/12] docker: Use "make -j$(nproc)" when invoking make
-Date: Wed, 27 Nov 2024 11:17:22 -0600
-Message-ID: <20241127172247.1488685-5-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+	Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [v6 02/12] test: Adjust print_ut test to use unsigned char
+Date: Wed, 27 Nov 2024 11:17:20 -0600
+Message-ID: <20241127172247.1488685-3-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241127172247.1488685-1-trini@konsulko.com>
 References: <20241127172247.1488685-1-trini@konsulko.com>
@@ -93,57 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We had a few places that were not using "make -j$(nproc)" but instead
-just plain "make" and so slowing down the overall build.
+From: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
+Since char is unsigned on arm64, this test currently fails. It seems
+better to use unsigned anyway, since 0xff is written into the string at
+the start. Update the terminator-assert to use a character instead of a
+byte.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 Changes in v6:
-- New patch
+- Re-introduce
+
+Changes in v2:
+- Use '\0' instead of 0
+
+ test/print_ut.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 ---
- tools/docker/Dockerfile | 8 ++++----
+ test/common/print.c | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 0f6890b78218..449745712de3 100644
---- a/tools/docker/Dockerfile
-+++ b/tools/docker/Dockerfile
-@@ -142,7 +142,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-strip \
- 	TARGET_NM=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-nm \
- 	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-ranlib && \
--	make && \
-+	make -j$(nproc) && \
- 	./grub-mkimage -O arm64-efi -o /opt/grub/grubaa64.efi --prefix= -d \
- 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
- 	lsefisystab loadenv lvm minicmd normal part_msdos part_gpt reboot \
-@@ -156,7 +156,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-strip \
- 	TARGET_NM=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-nm \
- 	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ranlib && \
--	make && \
-+	make -j$(nproc) && \
- 	./grub-mkimage -O arm-efi -o /opt/grub/grubarm.efi --prefix= -d \
- 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
- 	lsefisystab loadenv lvm minicmd normal part_msdos part_gpt reboot \
-@@ -170,7 +170,7 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
- 	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-strip \
- 	TARGET_NM=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-nm \
- 	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-ranlib && \
--	make && \
-+	make -j$(nproc) && \
- 	./grub-mkimage -O riscv64-efi -o /opt/grub/grubriscv64.efi --prefix= -d \
- 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
- 	lsefisystab loadenv lvm minicmd normal part_msdos part_gpt reboot \
-@@ -196,7 +196,7 @@ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/t
- 	cd /tmp/tf-a/ && \
- 	git checkout v2.10.0 && \
- 	cd tools/fiptool && \
--	make && \
-+	make -j$(nproc) && \
- 	mkdir -p /usr/local/bin && \
- 	cp fiptool /usr/local/bin && \
- 	rm -rf /tmp/tf-a
+diff --git a/test/common/print.c b/test/common/print.c
+index 464e425edee5..e3711b108091 100644
+--- a/test/common/print.c
++++ b/test/common/print.c
+@@ -241,7 +241,7 @@ COMMON_TEST(print_display_buffer, UTF_CONSOLE);
+ 
+ static int print_hexdump_line(struct unit_test_state *uts)
+ {
+-	char *linebuf;
++	u8 *linebuf;
+ 	u8 *buf;
+ 	int i;
+ 
+@@ -254,10 +254,10 @@ static int print_hexdump_line(struct unit_test_state *uts)
+ 	linebuf = map_sysmem(0x400, BUF_SIZE);
+ 	memset(linebuf, '\xff', BUF_SIZE);
+ 	ut_asserteq(-ENOSPC, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 75));
+-	ut_asserteq(-1, linebuf[0]);
++	ut_asserteq(0xff, linebuf[0]);
+ 	ut_asserteq(0x10, hexdump_line(0, buf, 1, 0x10, 0, linebuf, 76));
+-	ut_asserteq(0, linebuf[75]);
+-	ut_asserteq(-1, linebuf[76]);
++	ut_asserteq('\0', linebuf[75]);
++	ut_asserteq(0xff, linebuf[76]);
+ 
+ 	unmap_sysmem(buf);
+ 
 -- 
 2.43.0
 
