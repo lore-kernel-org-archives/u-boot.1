@@ -4,70 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5F5D6ACE4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:54:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57ED8D6ACE4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B138897D8;
-	Wed, 27 Nov 2024 15:54:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DB61B895E2;
+	Wed, 27 Nov 2024 15:55:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JvLuo9gy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d9FhVAt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57A4B897D8; Wed, 27 Nov 2024 15:54:11 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C9C9897E5
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:54:08 +0100 (CET)
+ id 6C33F8961A; Wed, 27 Nov 2024 15:55:49 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A07A895D2
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:55:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AREs7WF1013245
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 27 Nov 2024 08:54:07 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732719247;
- bh=cW5AEXtvHiutrtBXiwDQudWmvfWS4td+ylE7hSPSuTA=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=JvLuo9gyk52d+LR5MqAChHz/tNWGzt5/uVq0P2SC1CUWaH7GupRmXcN5Cs+0w9lDI
- PTwEYpTjbs6+Oc0G2BqXCiC2JYXEB/u7pv4Y2YNpRdwhKkDgoObR1NIDNUqV1wIh8C
- zO/nZWBeUmA6QVgO2n7P+EaTtZn+w9Z4HqoFEyuA=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AREs7oc056479
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Nov 2024 08:54:07 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Nov 2024 08:54:07 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Nov 2024 08:54:07 -0600
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ARErlpG051687;
- Wed, 27 Nov 2024 08:54:03 -0600
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>
-CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH 4/4] DONOTMERGE: arm: mach-k3: j784s4_init: Trigger LBIST and
- PBIST on MAIN R5 2_0
-Date: Wed, 27 Nov 2024 20:23:46 +0530
-Message-ID: <20241127145346.2609868-5-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241127145346.2609868-1-n-francis@ti.com>
-References: <20241127145346.2609868-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-53ddb99e9dcso4530005e87.3
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 06:55:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1732719346; x=1733324146; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3500fk57A9dRklCFSJnym0IlvEQ6NZHWUiWAwirVj9g=;
+ b=d9FhVAt6lEqAHGct0kLWkqeLhkajWJ0ga3jlwQ1PquG/BJO3eDW0enme6SvqrP1JQL
+ yOobLbZdsdt2Xofhq0MmPXP2E3R6+qDYjP17ktHOV/e7MIWXhfGiGouoD2mMbDMgzG2x
+ 2ciTLJ79a+cMF3KHhCxmgU4WH/vebV4E6dfEU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732719346; x=1733324146;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3500fk57A9dRklCFSJnym0IlvEQ6NZHWUiWAwirVj9g=;
+ b=F/irS7YI+tV6eO2Y+IA5h59x9bYdmRkpuT9Hlrg+MITunHgjoKu4iRsh181VKqqv3p
+ 4aQ83LMpmP5DlQ7DRQk3u99a+S5BsLftvVKfOzWKP19R640PYVfoDwWHus2L+GyX66+0
+ X8TiAnckjaWebY+Vh6XDGgmy2YTpBvDjB3NlYapAr1goGUczJA6MEhgmadetE44Yrjaa
+ qhfNXf05BUptNSbRw71N6RpwD6VJKGSWApsthmAAQMrGs8s3sX357U+VZWluK5lXaoYs
+ MCWbqEybmlNWUmPwOTsR/LcmDLQb60ZX9NYZS1OjDlgM+ArpsXkVNBpO1ZzV6UgivxJj
+ MicQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDTWWegtQVbO+GqIQPNLFESZw+9c9x4a+oR/iAkKHmGWYI+5LrlNwWRps4ZfI8sR2WxiqbKyQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyuSrAfQSy5/tCGKTvrxOic5DR1ObiSsxWknXJjZz0QKj0OQX6
+ SY6mqTmWDWCobmZWteRZ9BKz0knmJc3IpCVtbdvl8OE4WRooX+TMvghV9PYOf5lti5dRHO2JBiJ
+ BBmkdpTjhyXIcXg6ZIm+XyZXvBxWEKgLXOLUo
+X-Gm-Gg: ASbGnctgP7hEVPocX/4L5bb5rH83JBPXcBx76zkD2gycBE6Pi/dN8tFtPFTC4KhO9yE
+ EtWtTyRhPAPm+LrLRtpahHHN9Vtf2k5s=
+X-Google-Smtp-Source: AGHT+IHAFjQY/qSEiujHiHxDiR3bg2Cu6tqtQe2JppZCPMDmq5Nyo5vrRq8WretCk26ql8Mo9NgAWUquf50C0w5XdmI=
+X-Received: by 2002:a05:6512:3c99:b0:53d:ed8d:9a14 with SMTP id
+ 2adb3069b0e04-53df00c7448mr1983322e87.2.1732719344850; Wed, 27 Nov 2024
+ 06:55:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
+ <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
+ <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
+ <f7706753-d4bc-484a-bf5d-f4b85205ac8e@canonical.com>
+ <CAFLszTiCv3zdeg+1vNKY__iYmdZgVs4E=GXT6Y2DYCGQOi4RzA@mail.gmail.com>
+ <5c80bb06-28fd-47c6-a249-55237a81d4a6@canonical.com>
+ <CAFLszThH5i2cmf0WH_X2BYonMUHWbMHkUmCL-mgLO1SvbKjQEg@mail.gmail.com>
+ <9e572f07-9cd4-472e-a6f0-acf4c38ec982@canonical.com>
+In-Reply-To: <9e572f07-9cd4-472e-a6f0-acf4c38ec982@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 27 Nov 2024 07:55:33 -0700
+Message-ID: <CAFLszTgnuURujjipbL51Z=94D3TW-bGmyxoj2NJFh9r9ZcQBjw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Michal Simek <michal.simek@amd.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, 
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,83 +104,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Trigger all tests of PBIST and LBIST using appropriate calls to set the
-core under test (MAIN R5 2_0) to it's required state.
+Hi Heinrich,
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/mach-k3/j784s4/j784s4_init.c | 48 +++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+On Wed, 27 Nov 2024 at 06:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 27.11.24 14:08, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Tue, 26 Nov 2024 at 09:16, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> On 26.11.24 16:38, Simon Glass wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On Tue, 26 Nov 2024 at 00:42, Heinrich Schuchardt
+> >>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>
+> >>>> On 11/26/24 01:32, Simon Glass wrote:
+> >>>>> Hi Heinrich,
+> >>>>>
+> >>>>> On Sat, 23 Nov 2024 at 14:46, Heinrich Schuchardt
+> >>>>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>>
+> >>>>>> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
+> >>>>>> a file and boot it if autostart=yes.
+> >>>>>>
+> >>>>>> Instead just check that there is a network device.
+> >>>>>
+> >>>>> If you look at dhcp_run() you will see an 'autoload' parameter. This
+> >>>>> is 'false' in this code, so it never loads a file.
+> >>>>
+> >>>> This is not the complete truth.
+> >>>>
+> >>>> If $autostart=true and CONFIG_NET=y, dhcp_run(false) still tries to load
+> >>>> a file.
+> >>>
+> >>> Here is the code:
+> >>>
+> >>> int dhcp_run(ulong addr, const char *fname, bool autoload)
+> >>> {
+> >>> char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
+> >>> struct cmd_tbl cmdtp = {}; /* dummy */
+> >>> char file_addr[17];
+> >>> int old_autoload;
+> >>> int ret, result;
+> >>>
+> >>> log_debug("addr=%lx, fname=%s, autoload=%d\n", addr, fname, autoload);
+> >>> old_autoload = env_get_yesno("autoload");
+> >>> ret = env_set("autoload", autoload ? "y" : "n");
+> >>> if (ret)
+> >>> return log_msg_ret("en1", -EINVAL);
+> >>>
+> >>> It respects the autoload parameter. If there is a bug in that, we
+> >>> should fix it, but it seems to work OK to me. Please fix your commit
+> >>> message.
+> >>
+> >> The cited code only sets "autoload". It does not adjust "autostart".
+> >>
+> >> As I have shown below this leads to trying to boot via DHCP.
+> >>
+> >> This is exactly what the commit message says: "load a file and boot it
+> >> if autostart=yes".
+> >
+> > Oh, I just thought they were the same and I didn't remember about autostart
+> >
+> >>
+> >>>
+> >>>>
+> >>>> In all cases dhcp_run() wastes boot time.
+> >>>
+> >>> Yes, it uses time. With bootstd the hunters are only called as needed.
+> >>> In your case you are calling all of them at once.
+> >>>
+> >>> Is there a way to just call hunters which relate to block devices, perhaps?
+> >>
+> >> We need to probe network to provide the simple network protocol
+> >> (lib/efi_loader/efi_net.c) but we don't need to execute DHCP.
+> >>
+> >> We also need the correct device-tree provided by the extension hunter.
+> >
+> > It would be good to get some use of that, as it has no tests really.
+> >
+> > As I ask on the other patch, why do you need to probe?
+>
+> You asked on the Network protocol.
+>
+> If your idea is that the concept of extensions is not yet deployed, is
+> there a good way to exclude BOOTDEV_HUNTER(extension_bootdev_hunter)?
 
-diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-index 07b5d7d7504..f9bd13d962b 100644
---- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-+++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-@@ -17,6 +17,7 @@
- #include <dm/pinctrl.h>
- #include <mmc.h>
- #include <remoteproc.h>
-+#include <k3_bist.h>
- 
- #include "../sysfw-loader.h"
- #include "../common.h"
-@@ -233,9 +234,56 @@ void k3_mem_init(void)
- 
- void board_init_f(ulong dummy)
- {
-+	struct udevice *dev;
-+	int ret;
-+
- 	k3_spl_init();
- 	k3_mem_init();
- 
-+	if (!IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_BIST)) {
-+		ret = uclass_get_device_by_driver(UCLASS_MISC,
-+						  DM_DRIVER_GET(k3_bist),
-+						  &dev);
-+		if (ret)
-+			printf("Failed to run BIST: %d\n", ret);
-+
-+		struct bist_ops *ops = (struct bist_ops *)device_get_ops(dev);
-+		struct ti_sci_handle *handle = get_ti_sci_handle();
-+
-+		/* get status of HW POST PBIST on MCU1_x */
-+		ret = ops->run_pbist_post();
-+		if (ret)
-+			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-+
-+		/* trigger PBIST tests on MCU4_0 */
-+		prepare_pbist(handle);
-+		ret = ops->run_pbist_neg();
-+		deprepare_pbist(handle);
-+
-+		prepare_pbist(handle);
-+		ret |= ops->run_pbist();
-+		deprepare_pbist(handle);
-+
-+		prepare_pbist(handle);
-+		ret |= ops->run_pbist_rom();
-+		deprepare_pbist(handle);
-+
-+		if (ret)
-+			panic("PBIST on MCU4_0 failed: %d\n", ret);
-+
-+		/* get status of HW POST PBIST on MCU1_x */
-+		ret = ops->run_lbist_post();
-+		if (ret)
-+			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-+
-+		/* trigger LBIST tests on MCU1_x */
-+		prepare_lbist(handle);
-+		ret = ops->run_lbist();
-+		deprepare_lbist(handle);
-+		if (ret)
-+			panic("LBIST on MCU4_0 failed: %d\n", ret);
-+	}
-+
- 	if (IS_ENABLED(CONFIG_CPU_V7R))
- 		setup_navss_nb();
- 
--- 
-2.34.1
+Well, my approach with bootstd was to try to reverse-engineer what
+distro_boot did and extensions was one of those things.
 
+I am not suggesting excluding it, merely that I am pleased that it is
+being used!
+
+[..]
+
+Regards,
+Simon
