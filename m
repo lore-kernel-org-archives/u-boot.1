@@ -4,64 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5CAD609B6
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 08:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3573DD609B6
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 08:45:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91581892B8;
-	Wed, 27 Nov 2024 09:45:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9EC47892B8;
+	Wed, 27 Nov 2024 09:45:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Qcs2FSqw";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="nn4/oiX1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAABA89657; Wed, 27 Nov 2024 09:44:59 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20620.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::620])
+ id 6DEE6892B8; Wed, 27 Nov 2024 09:45:41 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::612])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3ACE488C44
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:44:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 092CB89076
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:45:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uLXM7oKPWgXBw07fc/JCofJEE+WKq/DwIlTavTRrpg26s6EnBZnvLpybhZ9hDGQVaje5IGBGi0tYZB01J0LD3oW4I367T4TR1biH4DLcyK9M7PxjViYEQbP7JoZi/DAGWleoqKXVByWcVP1JDoMSoztuCJKq+YGkQ30S07Vm7xK77NM1KidXb/bhizNYFUPtl6OrQbEyE2hC0foMaSefBmfjb2bszvRYsdXKWOyFiBJyJlw5fo49pgA6BjlTbQPG9TgT3ssQjsCYRINfKzfVYXBprKJKM6b4My+AIfABt0CAIH5s6huLJmyNOU/SweUIcUam1bdlNERcqWQzq2JkFA==
+ b=IK2TrLKbp2J3P6pk0xYiB2C76+Mb2wre8Z8qkHq2GREfgfWVgic4U9ucfEFAnP7ao51DUGLaSqEPujB+2IjtATmG4/PwSOVHVUf74W+O0H1+gR3G0LPY9KJgFfd7lu73IU8HPVXq33j2nPtOo25SMYeBxdcrG9VepmnDL78L/RP7Uejj2PIlFcfX4tc1NEizpcNp4cBco/KqP2gqzODBBvR9+SsGk01dFxYBU05PmoLCIJcoZoXGu+O9cX5WACqaRYkyRWbs0vNhRWrHpNmGRWVhdCn1xZ5QcbHJ0Te/SWVN6/de90W6nvwRAPrc0jAQAlbSIEk3+ksgvjhhyNkYsw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2N1BzC8ao9JlQamo71WOY2nJEIzGh77ud71y5qKJYvU=;
- b=fEwzIt6V4fQdrYUICZ+HNgaYwfb1vfRqU/Kux/Y1we7hPDv89KYnS1n4qFic3g8kUX1JE5yrM3FAIq3rwFC5yONeC9ppJyqvEcne0Pvyjx/Mv/X/qAUAwRjqmUCVUexXxF4jlf10bqnvoFtgiHL3XYMuND6+QVc7T1MbnY1FC0jg70drfRmImS/qost4P/m5e4BHdnn8LM8DpZCUnVSW+9cUzPK9vFy2M0wbCOuvkLDbAJtCUk/9ellOIyXsh/a+bY7vPBW0QOxKsFHViuGcZfXm7zJ9XBj5o9tizG+3290zc8WGoGUBjhbR7Uf/TPhfza8sm2lWa+fvdWhePrFRUA==
+ bh=0+i/VVL/lujbzCoOZvsAFMNrC57zxxMCYNLwnPF6atY=;
+ b=wSimHmV2UUHLfz13ekyx+IgptEUD410YcPxoOyd1yoq0Ef79fQ8tkc053xwFoXpoDvS2+XOFUh3DvimatRdsI6ZMVt/PWr8hfuv/rFlIT4mRpb+oT+K5NfGFGp6RwvWuJRu1wSh5PmiPs/LJ8BNNBrWNds7hGUnjlDLIJsO6By44U54/KARt3PVrkWvWn78WCR0vRAltq/gtD+EdnkA+x7ppt6NVuRVtnzpvLxUTrAIQvXBTJlVPh/wj9jRkvllz9L1m7wcA3l5Vb3h+2GbKGlN91N0trptFl2xRvqZfE1ZgM7IAj/CzefXQHPVp77CdLIZi7523zCWv/z1HZXX5wQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2N1BzC8ao9JlQamo71WOY2nJEIzGh77ud71y5qKJYvU=;
- b=Qcs2FSqwrtwmW785OUuVdB9C+AzSttkEJp/AC62cDLh0SwN4qRAtIY9PPswxOeSKVfQzKDRCtnW+pW2uljH8HSuZCkR+3o481bCA+10qWoazFJjuBHeaRFLBqrNsO4q11vGmNzsvCErSa9L1YRx8zJOSSI2TpzSsoiIk0VyjsL8=
+ bh=0+i/VVL/lujbzCoOZvsAFMNrC57zxxMCYNLwnPF6atY=;
+ b=nn4/oiX1lMJz9EKKDkrk0BoK9QyTdq+dPXdGHmtUsmTfiuS9nHePuN93VjkWrdug6kls1FhTl2lfJNcw4GWrb5R6mHuh45kPj3U8DfHLZN7MK7G8UhKcRpcgunArIPYJPazbSwsYExpPcxSst0ChSX8ZU4VfhCNgw8m6T9jICKo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by CH3PR12MB9282.namprd12.prod.outlook.com (2603:10b6:610:1cb::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.20; Wed, 27 Nov
- 2024 08:44:48 +0000
+ 2024 08:45:35 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.8182.018; Wed, 27 Nov 2024
- 08:44:48 +0000
-Message-ID: <5fa9ce53-f616-495a-9480-4935836fdef9@amd.com>
-Date: Wed, 27 Nov 2024 09:44:36 +0100
+ 08:45:35 +0000
+Message-ID: <79758ab8-8e47-447f-b7c3-744267402612@amd.com>
+Date: Wed, 27 Nov 2024 09:45:25 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] cadence_qspi: Refactor the flash reset functionality
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, u-kumar1@ti.com,
- trini@konsulko.com, seanga2@gmail.com, caleb.connolly@linaro.org,
- sjg@chromium.org, william.zhang@broadcom.com, stefan_b@posteo.net,
- git@amd.com
-References: <20241108063537.13180-1-venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] test/py: zynqmp_rpu: Fix tcminit mode value
+To: Love Kumar <love.kumar@amd.com>, u-boot@lists.denx.de
+Cc: padmarao.begari@amd.com, venkatesh.abbarapu@amd.com, git@xilinx.com
+References: <48f75577f6735a0d14105658e89b625d45537bb1.1731672024.git.love.kumar@amd.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -108,100 +105,99 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20241108063537.13180-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <48f75577f6735a0d14105658e89b625d45537bb1.1731672024.git.love.kumar@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR5P281CA0052.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:f0::11) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: FR5P281CA0059.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f0::13) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB9282:EE_
-X-MS-Office365-Filtering-Correlation-Id: eb96abb0-1f9d-46ba-cd30-08dd0ebfc062
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-Office365-Filtering-Correlation-Id: f5166cde-b529-4ecd-c566-08dd0ebfdc0e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QmdDUm1kZWNDaDkwV0xjODl2K0hVUTg3RVFNbk5GZDFmallzM2FMcC8xSGhp?=
- =?utf-8?B?RFdQcUhoQU50U3NDQmlYK3Jic1pQRitDK0VtR2JKN0VWUEpvTjZQa0VmNHd5?=
- =?utf-8?B?S0NKQjlvUDB4UmhEMis2UmxYdi8xYVp2VitLSUNIL0tIaHZoNjJMMjNvRmUy?=
- =?utf-8?B?WlBTdUcwZUhpaGYyQ01QTm5CbnZNMkJSL1pDeGxGb2lmS1BMcU5kQTNyeEJ6?=
- =?utf-8?B?UUNQcVRxN3B2WWdQdXk5Ym51TEptWmw3dXEwK1Vuc1lSNnF0V29ScE5yZDVP?=
- =?utf-8?B?aFVLbUJGaHM4RGRmalVoTkQvY2pQYnUyOC9vU1lmSkhpQVN0MXF3Mkw2em9K?=
- =?utf-8?B?d1lLN3hsbVY0Q2VzSGprRnVPWFhpeEx1dmFqRVMxanhhKzByVUIvRjNpai9m?=
- =?utf-8?B?WWVaVlh3MDZMcW1QakZUNG1NQ1NkM25Ldk9BWEJBazVUWXFPWkVjbEpiaFZy?=
- =?utf-8?B?aXFyQVZJWDQyQmhCMkFBblEvSXp4azhyMC9OVWVGQjZDTSs2S0xCYVNFMVNF?=
- =?utf-8?B?YWZlNVlWWjdlUWQwRmw5OEwyMGljVSthSjg0UFVaOVQvdHJOdjJwU1FhTkVR?=
- =?utf-8?B?ditsOHBjY0RIQ1VyNkp0YlpLcGZ2TmFFZWJIK0lBRzJtblg4ZkwwS3ZqTVB1?=
- =?utf-8?B?cm0zaVdUMWlmWTZIa0lCd0tQWVZhUmZRZlhkNTJyNzRucERWMzNCVUhjRXRm?=
- =?utf-8?B?Y1B0VHZ0cjZjWkFYK3BFRzhLYmhJeGduQ015d3dJdVcwSnVXb3dIVWViRzFs?=
- =?utf-8?B?WmpXb3d5ZVJjUHQvMnZvQU0wTi85NFMvUWxKTlNZS3ZZOGxmcmJsNU53dWNz?=
- =?utf-8?B?aVRxSFByM2ZPMlR4WXRLYjE5SWlWT2w2dkU0dFhYeVdRbHJRbmtWczh1dHFp?=
- =?utf-8?B?OWhmUXdLSlBNS0k4VFNEYkczRmxaR2tEeVJZcGZNaTlzWEptWEUyeW04NkNx?=
- =?utf-8?B?K3VXL0VzLzF4eXBRNEtBTkFXNCtFeW9kR2dSdHFOOGI4aVhjd2J5L2pBZWhx?=
- =?utf-8?B?K2h5cWRUMHR6NzJOVjFVbGQrRzd1MHdRVmpnZkJ6bkt4bnhBQjFVYUNyM0pG?=
- =?utf-8?B?Wk00TEErWm9xYmEvOHRsaWlIdTlaVzRYOWFUcXRISk5mU3M0b2hacUkwTStw?=
- =?utf-8?B?ejNDbW1FT3Ivdk9CVXNEMmRiL2tyOTFIT3ZhZEFxejRLbnhROTh3RnhEck1y?=
- =?utf-8?B?VTQ5S1RKTXhZSTg0WmNnOVZvdlYvQWZoN0tJUnRvZG1wS1dPRStONytXVHZB?=
- =?utf-8?B?WE1pWmswTjVZR014UEU2Vk1YcXFLa2dzWGxUVTROeDJXWnF1MFJheDFIRW5O?=
- =?utf-8?B?WFFxWHR2NXZ5bEdDYVVtWmt2enNRZlJTNnBhaEIrYzZwVVQyRWVpemlFcDdD?=
- =?utf-8?B?OW1FbDgzSUxKYlc4a0J5ZmhmWHNHb2xOODZHalQ4OE9TT3g5bDFFZ3d4MDYw?=
- =?utf-8?B?VnEzeVg3aWM4Tjl5NDczZTJSdlNMOUJXNCtKa1lXY3dsTHJ6SUtXZTZwdGFW?=
- =?utf-8?B?RE9PdXA4OERIdnZNTmxXZUxEMkJPMXhkZXNQZXRGcHQyYlVTRmE4MG9RVW85?=
- =?utf-8?B?Wlh5V0I0dGJLUjVyUlZ5M1orSFg3T2hVL042WXRic0ptV1ZaUEw2RHhnd25I?=
- =?utf-8?B?Y0tEUjhtV0wzVU9vRWd2cml4T01xbzgwWFhHeEVzUm5aVTFGTjhKbTR1cjla?=
- =?utf-8?B?VTBBNjVvTk5pRUdGK2xYdXV3aVNQOGFBZFlyNmFlUjNVV2hYQkQ1WHhJMmV2?=
- =?utf-8?B?RENTNG1ZTm9mUysvZWt5TnkrL3NQVWRub2RYQkIwTVdVNVBxZUJKSGxJd1lY?=
- =?utf-8?B?d0lpRUQ4NExIY2VpRVlYQT09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SlBNOGVpTkxXSkhLcVRWZ2V0WWQwRWFrUnd0TzRZS2lLRXBjUmZZejJldU5L?=
+ =?utf-8?B?UWROb3lsenJJa3ZjS1BtaUkvaisrcVhmc3VEb3Z5bTZ5dkVRUzZlU2l0WUFW?=
+ =?utf-8?B?aHdHVmJkLyt2SzBYZkgxZzA5V1ZRdW8vbW1nMGhkYm40c3h5MDMyZDIzbkkz?=
+ =?utf-8?B?VVp4WTlVcUFHSUlVVCtRbnpBeXlDcTlwaXo5QjR0aWNUYmZxSGsyZ1hwdWRr?=
+ =?utf-8?B?emtlNmJEdVpsRjlrL0tRLzZSS0Fqbzl6WnplSXBiOVZiajAzRWtGZERHOHRn?=
+ =?utf-8?B?SGVJYWdYb2hsditkUzhIR01Od1AzWjFMQXdWNlB4eFdERWdkYU1tV0dRcElp?=
+ =?utf-8?B?OHlOTXc2c1BSU2VZbE84MDdLT215bWIvM3NnVmJ5VE54WS9jSnF6N3FwR1l5?=
+ =?utf-8?B?MEI0R24vbG1yU3RlaEFGcFRKclJmVHIvd0ZxdHZxV2pnb3kvWG93aUhrZHhO?=
+ =?utf-8?B?Nm5WOWdHcEJkVWp5TXdrZHhRRkExQ0lEa3pTY0VhQ2I1ZldOVWo1U0dOWUdh?=
+ =?utf-8?B?WVBFN1J4dzVkbVB3YTNLS2FVb3dhT2xGOElrbFFuOElZWWkvZkZLYmhBVVBC?=
+ =?utf-8?B?V0hmckFaMkszNGwwSmQ3aDl2a2NtRlVKKythVmFUcG15QVg0cW1WaGZIbFZI?=
+ =?utf-8?B?Tm10a3ZGZ2VpNSs0TEpZSUt3RVBOa0o2SE05U3BrZUlKV0NwVzdnZUNxVEl0?=
+ =?utf-8?B?d3Y1ekIvTFFlazdFcy9rdHB1RmNaWHBMRTBuamY1RUZSZjlSQ21aYWx5WTVN?=
+ =?utf-8?B?UnB3T3ZSS0lKK3VwQzBkQzgreVJTQS9sMWxscVpCeDdEL0JjemRzR2xQUlA5?=
+ =?utf-8?B?MGFWSEpqWnNwc2JkUUgyY2p0cFFQaGdoOEFCbHRnMStRZHNKYjRVYkdQd0pV?=
+ =?utf-8?B?MjRPQ25TR0dUbGxoRzY5S3JkR3VsUnZkeHh5THRqMlJHbU54Ry9LZEsyNlND?=
+ =?utf-8?B?aERYTFFETkIxV3p2TUJOVUF1ZStXb1VhOWhLdU9LSkorSEdSZHFzVnQzYm56?=
+ =?utf-8?B?Qm00ck9OUVFKM2ZmN1hpWFI5Y0dueWtzeFZ2NTRsUHl0OVZqTkF1L21Bbkc4?=
+ =?utf-8?B?WlFTRDBmdmdHa1lwK3JsRVVTZ2hFQUtvVXF6aUZ2UWgyV2NoYXdBNWhFYkcx?=
+ =?utf-8?B?SjQ4VmY2c3UxSis4TndENjRzQmZid2VnTWFYSzhUcjBnUGpQcGcvZGlJZURZ?=
+ =?utf-8?B?RmZyY2VOSFpNWEVvU1JKWTFpM01YZjFxempEV3R3TGluTzNBdzNnNS94U2ZX?=
+ =?utf-8?B?UFVDZ0tmdG9GTGIzWWRvUWtIUUpteFVmNDdaSUVHQlFNaGttMnB2R29oWUNC?=
+ =?utf-8?B?Z2V5eW1iaFVRb3dSU0lST05qc2xzc205bjFtS2dYckNuUDJUTHUyU1F4WkZV?=
+ =?utf-8?B?bjhydFpJSGhhTmw5a1pVOGFDUDY3eUtaQi9ZYkZQYW92WnlVT0J2WmY1U2JY?=
+ =?utf-8?B?Qk0ySjdRcVhHdmpxZzFZSzJqK1dGL25BbnRjKy9GREl3WjlwTitmbTNlem00?=
+ =?utf-8?B?TlNKc1I0SElkRmN1VnBFbTkwRlZxVit2RmdCTjVsNDVxZEZUdXRYL0x3NzB2?=
+ =?utf-8?B?Ym8xK09vc0pTL00xMk0vZUgwVFBDVXpWM0tWMW9HWmFRSlZncXVvRDVzL0x6?=
+ =?utf-8?B?VEcxYkM3MGNtY2ErdjRPcVJQTHkvT3NFUEtJRDVSMzNMSVZVR2ptb2lURDNY?=
+ =?utf-8?B?Zm43emx2d1RsRDVzeHVOWU5kbmZOWEdqS3BQYkZqMmt0Vm1sUC8vUlh6YUpq?=
+ =?utf-8?B?NTFjS3RacmVPOWI4dkJVSWhIL0x6eEZtbkZqSTVOWDVmRUdRUmN0N2xEczhl?=
+ =?utf-8?B?NVlRWiszWWE4NmorRlI5Zz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(7416014)(376014)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eEFtaFlKZjJ3WU9va0NscldXYjVPaUVYRTg4MThiTWJhMTRheE9QNmZBYjdx?=
- =?utf-8?B?VUF5U3BNSC81dFNKK2JDc1prTXNjRTBKZWNWOEVHUDZ1L0ZwNlZwV3FKektz?=
- =?utf-8?B?MnEvekR1b3p5MHliU3dVSEdtUW9kS3ZBbmFOUUFKdGhLOUpRTVNOOGVvUjdk?=
- =?utf-8?B?bUh5bEtKU1NRdDJHd1ZFR3JrdXo2U3NlbUpqSHcxckM4d3d3dzJZbFpla2Rv?=
- =?utf-8?B?MUlxSUUyVFk1NWtrOFdCL1FOcUtjUUs2Y2NJaUJVMW9uREVUb1JSSTVZY092?=
- =?utf-8?B?OWdLUGxkZEpXRWNNRE5VRVBQWXNlN21kd3lDL0xSenUyczhwdHJHWlU1TVVh?=
- =?utf-8?B?cHgrSktRUE1jdVZYT0J0cGY2Rk5tRFlPNVdndmJmWUVjaU00NVByWitua0Zq?=
- =?utf-8?B?VkpEMzc0akZjdHY0Y1RTTVBpOGtRUWliU01HVnppS21iUUVkNXoxVExYSE1s?=
- =?utf-8?B?aUNSTW9NMnhsc2lpSHppbHRWNDVrcWlJY0NvbWJmRk1sbW5rS0FZWDZ3ZTRp?=
- =?utf-8?B?cVBsMVo1eW9iVmkwa2plcmVDQWcvZUtqcVBsNjBhOEp1NEdqN1dWOVlJM2pU?=
- =?utf-8?B?dFNkV2ZzR05JVm92bzI1azZ3MGtBMmVDTzZTcUZnaUFsZ2lkZ3pRd3Y3MzFK?=
- =?utf-8?B?R2hObjBEN2NIU09qYThuYXZNbnIrRmtPVHVtZ2NlV1dmN3hiVXdTTGo5SzJn?=
- =?utf-8?B?aVNUdEVQTnlLejlkTnh2Q2dWSUo1cWVuaXQ0cUM0UXZISXNRQ2FjdzltaGpt?=
- =?utf-8?B?dG95RVpkTzBRS2ZPSGRqNkZpcnVZZHdwRndZblB2VXRNL3NFS2U2TUxvdE80?=
- =?utf-8?B?eTh2cnhKRG5lc2NOZDVyVllsdWRVOEpUelU1bFdPUEFYMEtPN2FKUVpRaTEr?=
- =?utf-8?B?anVtaVJwZUpmY242ZWg3MmI0UWg2N2dna3o2QlB3cWJWSlJKbGNJR0VTbEZN?=
- =?utf-8?B?c1d2dnJMVHJIZVRhcjFrWXVKUkhpSE83SFUwQS9IcjZWQ1pVRnYxR21Vejhn?=
- =?utf-8?B?SnE0NzdQdUh6TVF5NHR1V0JGMklWcUREWW1ycEtyTlNXWHdrMmF0NlJLVkIw?=
- =?utf-8?B?SDl1a0sxcVlHS2NOcVNJT3V2SnJGRzhtUU9BcDN4NmhONkREcjBUZGZwUTNK?=
- =?utf-8?B?bmhlQjM2N2YxdlNLSXhPbVhvZjhYZEhzRXlyOWZ0T0tKMXdCTzFyWHh6a1BQ?=
- =?utf-8?B?Q014RXFmaVNFaG1tVGMzY0MxWVRNUTl0ZlZ2b2w5SU02SEhMMTVFUDF3VGM3?=
- =?utf-8?B?OVhSOUJZNmV3NTY2emR1RTRyU0dPcjZ0eDJrZnNyLzVHZ1NQSXZadE0yZWps?=
- =?utf-8?B?RGRtbDN2c2RLMjhNNk94Z1pOa3RxZlEzc1ZsSVdiVnlyRWlBL3ZMaTJROU1y?=
- =?utf-8?B?UEVZYWZ5QkltYit4bkNsUTc4THk3VjlBOTNQUlRNc29BcFR2N211ZVpnMHFh?=
- =?utf-8?B?YjREMHgxckMyTXpGVXI5ZlVKVXZaejB0ZlB3dE1vVFA1OUxyaFdzN2RacGVn?=
- =?utf-8?B?VXJSc0xVK0QzQ1hxRlk1RXRVSVdJV1VJTHUyQTVZb0ZIaEk3UFQ3QW1GM0dX?=
- =?utf-8?B?WjJub3lWSGJJSmJDU25VcEJSYXZ2SFB0VW9LclBUMldrMUlTODVJVmNXNWlJ?=
- =?utf-8?B?V0dsY3V3TWRmdjZOVjYyUXFtMHVOakt1YUtBVjYxeUlIVEdtRElNWCtqak90?=
- =?utf-8?B?SUJzSkNHZ0NsT3c2ejFjMnFzcksvWlAwOWNiYXRMS3gyWitHVnNFcDAvb0kv?=
- =?utf-8?B?UmVqaVZoaXl3UkxoZCsrb1hWV1F6UmVOYUNhbG4zL0FDdjhJVnlnMk5GcTJn?=
- =?utf-8?B?NnRxSlFKdkNPbFI5N1g1ODNMSVloTkZlb21tWGtaSFd5R2NyQWU3S0hSci9l?=
- =?utf-8?B?bEFMaW1Ncm5WOVhTa01ISU9SRHk4NWFIZGg5emFiUDZLM3cyZmJkQWRJNVBk?=
- =?utf-8?B?N205WU5EY2Rqdi9td1kvREQ4Y3gyNGlwZlpOUFhobFgzUStCZ1hjeHRTM1lj?=
- =?utf-8?B?UUdaOGJuYzJyaXJtanFMRE9ROW9ZWUdTbW9wWjdzYTk0K2M0L3FQelB2UXFQ?=
- =?utf-8?B?NkNIRXpLVUlBSGIwM1B4NU9pTFlmTHNFRkhtbVZIaHdhZXNmNndPU3p6SnJI?=
- =?utf-8?Q?izTnJx40TwVJtuiK8CXzmhaTv?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SjBaZk4zU0VYV2V2UUJnRnRmWC9RUnF1djBwUlZZWXd3cmM5SnNMZ25hclFp?=
+ =?utf-8?B?VGpKZzJkSTNpVW5hN0JTcnMwUFpqVUxjY0VVVXdjY1lWakxGdm8wcjBJVVlS?=
+ =?utf-8?B?b2UxK0dCUjhReDc4NzliemdMTDA5ZUNDaUc3MVF3dEVLd2U3T1FON0VjUm1Y?=
+ =?utf-8?B?K2tEWEJrdmF0T3dHNmgvbTFQeVQyaldPbWN0V3gzSDlmdk5sQWxmczIzZnU2?=
+ =?utf-8?B?YUVtZVdtMk42ZFkyWUtOK01UZ05JU2NPdFJEVk9jbXNZUWlnOUVpd2doakRE?=
+ =?utf-8?B?ZXEzVm45Q0dyTU50T3NFdjZ2RVhldldqdDM2VENvRkZNZjJsMFRqa3pjR3Ix?=
+ =?utf-8?B?KzRENmxxVlFJTzhJSjU2akhDc3ZnY2pYMEhTSmtKT0QxRjNOd0hxb0lqcVN4?=
+ =?utf-8?B?UjhLNnA0eitMMlIyRzV3ekRhaHk5d0FpVmlGcEhxVzl1ZE1qNVg0SjZVTkRp?=
+ =?utf-8?B?ZllpVTRkZmNFTDh1Uk5sL3c4YWc1VnpZZ1V6VVhKUnAxWEEvRWdHdi9hWFRz?=
+ =?utf-8?B?SENCcDZpOFlveXNFT3VLWjJ4TnZUak81enhGaU9CajZTODhZeWlxS0daQjB5?=
+ =?utf-8?B?dkRXZmFIRmk3NDBRTlNubUY3STQxRTFLbWU0eHRYVWRsSks2LzdvSjlpamFN?=
+ =?utf-8?B?SXlxNUFsdWlBMndFNko4STVBMTFiRGFpQWFtS3JBY2N3eUlJZWlDUDZBdldw?=
+ =?utf-8?B?amJ3dHA3Z3NQTXAzb1F0Q2x5YVovOUJPa2tOM0hEN1B6YWp4VzIwLzR1MHBY?=
+ =?utf-8?B?Wm1uZVpHbEg0NUhoSk1WWVBVRnNCQTd1STZiV2IwQ0wvd0FOVEIyTGJzbml2?=
+ =?utf-8?B?aENvWE5TR1l3aXN4WEo4U3BCZXJOTjNuVWxNUmU2UEMwS3R0RGUxbnpLSkow?=
+ =?utf-8?B?clFVVGJOSW12eFllcmN1OXFxc0hNVVcvMk8yZHBPVGlMbjBtRjV2M3BpaUgv?=
+ =?utf-8?B?THBBSkxVdk5td2gza3BUSG5JT3FEUldDK1pMdjd3UmN2L2RTOFV6NDN6dUpC?=
+ =?utf-8?B?R0QxVHRmQ2NueUFJQW8xV0hQOUU5dmRsSXBXT2xyVTRONjJoTHNWMXhZUEFM?=
+ =?utf-8?B?QWZwYXJ6UWY2MGhkTkMvZ2VVWGJGVjVZQTZaM045Ni85eEJvQnh0R21ja3R0?=
+ =?utf-8?B?eEw3WjZQTm9hc0VCc0liQnQzOHJYWTNzcmZ6TndvYlBDL0RNSlptSkoxTXVQ?=
+ =?utf-8?B?U3ovOGRDeVZLeFJmRmwvTDNPVDNMQUt5Zm5UaXZwcy9EOTliRWNnT2ZwVzRE?=
+ =?utf-8?B?ZUVnR3RlM1dvbVVMQmJTY0tGTWh0N1RSK3B1OWZwbnpCY01qOXgvVHhzQklt?=
+ =?utf-8?B?ZDVjclhoZ296QnlWU1YrNk5qTk1CSW9xK1JzV2NYQzQ3YUJ1TUNUWE9hTFVu?=
+ =?utf-8?B?a0JiWDQ1U2ptSGd6dS9KWGRuSnVsWTA0Rlo1NXlqYlYzaEZwUmtTTnpsMWg5?=
+ =?utf-8?B?L2VYcXdlNkVOa1lrQnlGZE52NGFSdXBsUnJOUHlZd25UOUJpWjdGTzcyTjlZ?=
+ =?utf-8?B?SjV6RjFSbCt4RW5HL1BuT2YvMEFvWGUxcFBtTHh1Wm1JT2E4ZXQ4MTlBeWMr?=
+ =?utf-8?B?RC8wQTFCQTZwRHZnRG9yTzdiZ01mK0RhR24zSlRBYlAvM3I5QktMYWwxV2Ry?=
+ =?utf-8?B?YmN3bWdrV0NHNmU5cXk3TWtzZ3AzOWVtSzk2QTRvdWZSWkxiUW9oc1J1KzZk?=
+ =?utf-8?B?eTJEWVE2QmJIeWZoQ3VjWFF6NEwvQk5qYktRaW9sWFlkSTcwMVpTem1uelFX?=
+ =?utf-8?B?bXlwaHI5dXJRbndEWFRHOVVvMHdQdmxYMHNkY3ZFQTZEYWhhZyt0Rzc2ZVJq?=
+ =?utf-8?B?SFoxdTBLSGI4ZWRtekQwbmdrVFNuSG1WcHorV3hJUmhTQnQzRDlVUnFpLzJu?=
+ =?utf-8?B?Y1EwQThhOTNBMURBN3dOYUxxR1JkZHJBUExaM0MyYWM3dDNEQ2hBei8xOXpo?=
+ =?utf-8?B?T3EwaHdTQTcxV0RKUkFCRG5FMjJMZ2RTcExqMnJRUFVEbG1pUFdwZGJiR1VO?=
+ =?utf-8?B?MW9SRGU5elphM1pmMmd0RUtZNmpucjhHSmduaStOUFN3cnBXWlB4ZWpQcCs2?=
+ =?utf-8?B?cHhaei9waWJha0NiZmVVaHVHWXZMTUZWMk5KeHA2TStaZ2tjNnBROHZiM0JU?=
+ =?utf-8?Q?ITxvdrigw3P93U1ZoxGTCI1Qq?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb96abb0-1f9d-46ba-cd30-08dd0ebfc062
+X-MS-Exchange-CrossTenant-Network-Message-Id: f5166cde-b529-4ecd-c566-08dd0ebfdc0e
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2024 08:44:48.8067 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2024 08:45:35.1031 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FOuPq2vjBUfRVBq9OlWfi0kax44Rts4AtVdVRUlnMNePnRo3ycVXq3eQVPeIaDYI
+X-MS-Exchange-CrossTenant-UserPrincipalName: pFgA8Q8tGVbV9pakv6RbfBG+5bCpP/8b2T5uk+bzT4+NnY5r+wOUdQ8JNAlEabWP
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9282
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -221,106 +217,179 @@ X-Virus-Status: Clean
 
 
 
-On 11/8/24 07:35, Venkatesh Yadav Abbarapu wrote:
-> As the flash reset is handled in spi nor core, removing the
-> flash reset functionality. As the configuration like tristate
-> and hysterisis need to be enabled by the cdo. Handle the flash
-> reset only for mini u-boot case.
+On 11/15/24 13:02, Love Kumar wrote:
+> Update the tcminit value to string and number both as per commit
+> 342ccba5586a ("arm64: zynqmp: Fix tcminit mode value based on argv") and
+> also adds negative cases based on invalid command sequences.
 > 
-> Rename the "cadence_qspi_versal_flash_reset" to generic name
-> "cadence_qspi_flash_reset" as this can be used by other platforms
-> as well.
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
 > ---
-> Changes in v2:
-> - Rename the cadence_qspi_versal_flash_reset to cadence_qspi_flash_reset.
-> - Add the DM_GPIO flag in the paltform specific file.
-> ---
->   drivers/spi/cadence_ospi_versal.c | 45 ++-----------------------------
->   drivers/spi/cadence_qspi.c        |  6 +++--
->   2 files changed, 6 insertions(+), 45 deletions(-)
+>   test/py/tests/test_zynqmp_rpu.py | 84 +++++++++++++++++++-------------
+>   1 file changed, 49 insertions(+), 35 deletions(-)
 > 
-> diff --git a/drivers/spi/cadence_ospi_versal.c b/drivers/spi/cadence_ospi_versal.c
-> index 222f828f54..dcf28c7559 100644
-> --- a/drivers/spi/cadence_ospi_versal.c
-> +++ b/drivers/spi/cadence_ospi_versal.c
-> @@ -125,49 +125,8 @@ int cadence_qspi_apb_wait_for_dma_cmplt(struct cadence_spi_priv *priv)
->   	return 0;
->   }
+> diff --git a/test/py/tests/test_zynqmp_rpu.py b/test/py/tests/test_zynqmp_rpu.py
+> index 479a612b4ec2..22f687dd6d39 100644
+> --- a/test/py/tests/test_zynqmp_rpu.py
+> +++ b/test/py/tests/test_zynqmp_rpu.py
+> @@ -70,7 +70,7 @@ def ret_code(u_boot_console):
 >   
-> -#if defined(CONFIG_DM_GPIO)
-> -int cadence_qspi_versal_flash_reset(struct udevice *dev)
-> -{
-> -	struct gpio_desc gpio;
-> -	u32 reset_gpio;
-> -	int ret;
-> -
-> -	/* request gpio and set direction as output set to 1 */
-> -	ret = gpio_request_by_name(dev, "reset-gpios", 0, &gpio,
-> -				   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> -	if (ret) {
-> -		printf("%s: unable to reset ospi flash device", __func__);
-> -		return ret;
-> -	}
-> -
-> -	reset_gpio = PMIO_NODE_ID_BASE + gpio.offset;
-> -
-> -	/* Request for pin */
-> -	xilinx_pm_request(PM_PINCTRL_REQUEST, reset_gpio, 0, 0, 0, NULL);
-> -
-> -	/* Enable hysteresis in cmos receiver */
-> -	xilinx_pm_request(PM_PINCTRL_CONFIG_PARAM_SET, reset_gpio,
-> -			  PM_PINCTRL_CONFIG_SCHMITT_CMOS,
-> -			  PM_PINCTRL_INPUT_TYPE_SCHMITT, 0, NULL);
-> -
-> -	/* Disable Tri-state */
-> -	xilinx_pm_request(PM_PINCTRL_CONFIG_PARAM_SET, reset_gpio,
-> -			  PM_PINCTRL_CONFIG_TRI_STATE,
-> -			  PM_PINCTRL_TRI_STATE_DISABLE, 0, NULL);
-> -	udelay(1);
-> -
-> -	/* Set value 0 to pin */
-> -	dm_gpio_set_value(&gpio, 0);
-> -	udelay(1);
-> -
-> -	/* Set value 1 to pin */
-> -	dm_gpio_set_value(&gpio, 1);
-> -	udelay(1);
-> -
-> -	return 0;
-> -}
-> -#else
-> -int cadence_qspi_versal_flash_reset(struct udevice *dev)
-> +#if !CONFIG_IS_ENABLED(DM_GPIO)
-> +int cadence_qspi_flash_reset(struct udevice *dev)
->   {
->   	/* CRP WPROT */
->   	writel(0, WPROT_CRP);
-> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-> index 9c466f8695..c8d640f068 100644
-> --- a/drivers/spi/cadence_qspi.c
-> +++ b/drivers/spi/cadence_qspi.c
-> @@ -33,7 +33,7 @@ __weak int cadence_qspi_apb_dma_read(struct cadence_spi_priv *priv,
->   	return 0;
->   }
+>   # Initialize tcm
+>   def tcminit(u_boot_console, rpu_mode):
+> -    output = u_boot_console.run_command('zynqmp tcminit %s' % rpu_mode)
+> +    output = u_boot_console.run_command(f'zynqmp tcminit {rpu_mode}')
+>       assert 'Initializing TCM overwrites TCM content' in output
+>       return ret_code(u_boot_console)
 >   
-> -__weak int cadence_qspi_versal_flash_reset(struct udevice *dev)
-> +__weak int cadence_qspi_flash_reset(struct udevice *dev)
->   {
->   	return 0;
->   }
-> @@ -259,7 +259,9 @@ static int cadence_spi_probe(struct udevice *bus)
->   			priv->read_delay = -1;
+> @@ -89,6 +89,13 @@ def disable_cpus(u_boot_console, cpu_nums):
+>       for num in cpu_nums:
+>           u_boot_console.run_command(f'cpu {num} disable')
 >   
->   	/* Reset ospi flash device */
-> -	return cadence_qspi_versal_flash_reset(bus);
-> +	return cadence_qspi_flash_reset(bus);
+> +# Get random RPU mode between string and integer
+> +def get_rpu_mode(rpu_mode):
+> +    if rpu_mode == 0 or rpu_mode == 'lockstep':
+> +        return random.choice(['lockstep', 0])
+> +    elif rpu_mode == 1 or rpu_mode == 'split':
+> +        return random.choice(['split', 1])
 > +
-> +	return 0;
->   }
+>   # Load apps on RPU cores
+>   def rpu_apps_load(u_boot_console, rpu_mode):
+>       apps, procs, cpu_nums, addrs, outputs, tftp_addrs = get_rpu_apps_env(
+> @@ -98,20 +105,20 @@ def rpu_apps_load(u_boot_console, rpu_mode):
+>           test_net.test_net_setup_static(u_boot_console)
 >   
->   static int cadence_spi_remove(struct udevice *dev)
+>       try:
+> -        assert tcminit(u_boot_console, rpu_mode).endswith('0')
+> +        assert tcminit(u_boot_console, get_rpu_mode(rpu_mode)).endswith('0')
+>   
+>           for i in range(len(apps)):
+>               if rpu_mode == 'lockstep' and procs[i] != 'rpu0':
+>                   continue
+>   
+>               load_app_ddr(u_boot_console, tftp_addrs[i], apps[i])
+> -            rel_addr = int(addrs[i] + 0x3C)
+> +            rel_addr = hex(int(addrs[i] + 0x3C))
+>   
+>               # Release cpu at app load address
+>               cpu_num = cpu_nums[i]
+> -            cmd = 'cpu %d release %x %s' % (cpu_num, rel_addr, rpu_mode)
+> +            cmd = f'cpu {cpu_num} release {rel_addr} {rpu_mode}'
+>               output = u_boot_console.run_command(cmd)
+> -            exp_op = f'Using TCM jump trampoline for address {hex(rel_addr)}'
+> +            exp_op = f'Using TCM jump trampoline for address {rel_addr}'
+>               assert exp_op in output
+>               assert f'R5 {rpu_mode} mode' in output
+>               u_boot_console.wait_for(outputs[i])
+> @@ -133,16 +140,13 @@ def test_zynqmp_rpu_app_load_negative(u_boot_console):
+>           u_boot_console)
+>   
+>       # Invalid commands
+> -    u_boot_console.run_command('zynqmp tcminit mode')
+> -    assert ret_code(u_boot_console).endswith('1')
+> -
+>       rand_str = ''.join(random.choices(string.ascii_lowercase, k=4))
+> -    u_boot_console.run_command('zynqmp tcminit %s' % rand_str)
+> -    assert ret_code(u_boot_console).endswith('1')
+> -
+>       rand_num = random.randint(2, 100)
+> -    u_boot_console.run_command('zynqmp tcminit %d' % rand_num)
+> -    assert ret_code(u_boot_console).endswith('1')
+> +    inv_modes = ['mode', rand_str, rand_num, 'splittt', 'locksteppp', '00', 11]
+> +
+> +    for mode in inv_modes:
+> +        u_boot_console.run_command(f'zynqmp tcminit {mode}')
+> +        assert ret_code(u_boot_console).endswith('1')
+>   
+>       test_net.test_net_dhcp(u_boot_console)
+>       if not test_net.net_set_up:
+> @@ -150,56 +154,66 @@ def test_zynqmp_rpu_app_load_negative(u_boot_console):
+>   
+>       try:
+>           rpu_mode = 'split'
+> -        assert tcminit(u_boot_console, rpu_mode).endswith('0')
+> +        assert tcminit(u_boot_console, get_rpu_mode(rpu_mode)).endswith('0')
+>   
+> +        inv_modes += [0, 1]
+>           for i in range(len(apps)):
+>               load_app_ddr(u_boot_console, tftp_addrs[i], apps[i])
+>   
+>               # Run in split mode at different load address
+> -            rel_addr = int(addrs[i]) + random.randint(200, 1000)
+> +            rel_addr = hex(int(addrs[i]) + random.randint(200, 1000))
+>               cpu_num = cpu_nums[i]
+> -            cmd = 'cpu %d release %x %s' % (cpu_num, rel_addr, rpu_mode)
+> +            cmd = f'cpu {cpu_num} release {rel_addr} {rpu_mode}'
+>               output = u_boot_console.run_command(cmd)
+> -            exp_op = f'Using TCM jump trampoline for address {hex(rel_addr)}'
+> +            exp_op = f'Using TCM jump trampoline for address {rel_addr}'
+>               assert exp_op in output
+>               assert f'R5 {rpu_mode} mode' in output
+>               assert not outputs[i] in output
+>   
+>               # Invalid rpu mode
+> -            rand_str = ''.join(random.choices(string.ascii_lowercase, k=4))
+> -            cmd = 'cpu %d release %x %s' % (cpu_num, rel_addr, rand_str)
+> -            output = u_boot_console.run_command(cmd)
+> -            assert exp_op in output
+> -            assert f'Unsupported mode' in output
+> -            assert not ret_code(u_boot_console).endswith('0')
+> +            for mode in inv_modes:
+> +                cmd = f'cpu {cpu_num} release {rel_addr} {mode}'
+> +                output = u_boot_console.run_command(cmd)
+> +                assert exp_op in output
+> +                assert f'Unsupported mode' in output
+> +                assert not ret_code(u_boot_console).endswith('0')
+>   
+>           # Switch to lockstep mode, without disabling CPUs
+>           rpu_mode = 'lockstep'
+> -        u_boot_console.run_command('zynqmp tcminit %s' % rpu_mode)
+> -        assert not ret_code(u_boot_console).endswith('0')
+> +        output = u_boot_console.run_command(
+> +            f'zynqmp tcminit {get_rpu_mode(rpu_mode)}'
+> +        )
+> +        assert 'ERROR: ' in output
+>   
+>           # Disable cpus
+>           disable_cpus(u_boot_console, cpu_nums)
+>   
+>           # Switch to lockstep mode, after disabling CPUs
+> -        output = u_boot_console.run_command('zynqmp tcminit %s' % rpu_mode)
+> +        output = u_boot_console.run_command(
+> +            f'zynqmp tcminit {get_rpu_mode(rpu_mode)}'
+> +        )
+>           assert 'Initializing TCM overwrites TCM content' in output
+>           assert ret_code(u_boot_console).endswith('0')
+>   
+> -        # Run lockstep mode for RPU1
+> +        # Run lockstep mode for RPU1/RPU0
+>           for i in range(len(apps)):
+> -            if procs[i] == 'rpu0':
+> -                continue
+> -
+>               load_app_ddr(u_boot_console, tftp_addrs[i], apps[i])
+> -            rel_addr = int(addrs[i] + 0x3C)
+> +            rel_addr = hex(int(addrs[i] + 0x3C))
+>               cpu_num = cpu_nums[i]
+> -            cmd = 'cpu %d release %x %s' % (cpu_num, rel_addr, rpu_mode)
+> +            cmd = f'cpu {cpu_num} release {rel_addr} {rpu_mode}'
+>               output = u_boot_console.run_command(cmd)
+> -            exp_op = f'Using TCM jump trampoline for address {hex(rel_addr)}'
+> +            exp_op = f'Using TCM jump trampoline for address {rel_addr}'
+>               assert exp_op in output
+> -            assert f'R5 {rpu_mode} mode' in output
+> -            assert u_boot_console.p.expect([outputs[i]])
+> +
+> +            if procs[i] == 'rpu1':
+> +                assert 'Lockstep mode should run on ZYNQMP_CORE_RPU0' in output
+> +                assert not ret_code(u_boot_console).endswith('0')
+> +            elif procs[i] == 'rpu0':
+> +                assert f'R5 {rpu_mode} mode' in output
+> +                u_boot_console.wait_for(outputs[i])
+> +                assert ret_code(u_boot_console).endswith('0')
+> +            else:
+> +                assert False, 'ERROR: Invalid processor!'
+>       finally:
+>           disable_cpus(u_boot_console, cpu_nums)
+>           # This forces the console object to be shutdown, so any subsequent test
 
 Applied.
 M
