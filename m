@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED2CD6ACCA
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46661D6ACCD
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BA88897EB;
-	Wed, 27 Nov 2024 14:08:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A699B897D6;
+	Wed, 27 Nov 2024 14:08:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z+Nfkamz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M+vM62ph";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41A0B897D9; Wed, 27 Nov 2024 14:08:34 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 7ED19897DF; Wed, 27 Nov 2024 14:08:40 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 299A3897D5
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:08:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57873897D6
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:08:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9ec267b879so967438166b.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:08:32 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aadb1so8919009a12.0
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:08:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732712911; x=1733317711; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732712918; x=1733317718; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xrO518/R8Rw88lN95lpJxDx7SkDFpuxxm9fJFS6z7FE=;
- b=Z+NfkamzFUJExCyKIkQPiw2VzFfAgDvVWbyT04LfRJ7i6FPJt3GSIZWYt7jrLjINAz
- BuI//WMlZ6KvQSczhjz55P9NvZeelhdjvuQaqCgqYJUSIkrQ8wLLOQY6P46ku8YCUNU7
- Dcnai1sKuA3YVzNTBI5SiBzkkJAYAdihD6NlE=
+ bh=ZHHqhmcSLkJiR1mj+K/Nn/YfM2qcc3bY0mMgKkkftXo=;
+ b=M+vM62phPEw50TgzkkpOZtjYUDRi1EGq+Q9tYYSCBP+1lax8ueR7lPceo/QaJJlo44
+ kYuEDmKyzgQzqSuwdXJtG5uxH1XOevXcWuj3QBAzvBifhrainvwZGrRBWpGVr7wOAX0t
+ ubjoY+NDVufIDG3nhzFAv5uE0hutSqyCffDPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732712911; x=1733317711;
+ d=1e100.net; s=20230601; t=1732712918; x=1733317718;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xrO518/R8Rw88lN95lpJxDx7SkDFpuxxm9fJFS6z7FE=;
- b=JqK4mD12tHPlcb2shjfRVSD+1p4dGSFEY93jbv2jUHHRYzk1tBnmNBDPdHBGPcyvwF
- /ac8SgWy38Ej2v4OJ7NxZd1jZvxJkgXfVo0Lblf1ikvBH8OUGTQ0iXPTegSB8M5MvFjU
- bufiCVUE9UHegcXiEUiiY5SxiRW0w8R2EZBSoO7eELK/JhTfh1ZPN2DSdU+hOiowbYf+
- AICLXebTv5hqaaabllHwCyEf88JOWOh4A39s0cIrqdAs8ZNO+0cho5L380Q+7M6gWUPT
- Sk6aXKkMetwGFJZO/2y0OoHMIS5Z5CQ/Vb04KPfzu/Vax0P+UexNqd6ArrfPfEt2pXsx
- Ynzg==
+ bh=ZHHqhmcSLkJiR1mj+K/Nn/YfM2qcc3bY0mMgKkkftXo=;
+ b=cPcFbYke79z05WAweRAIps/bwc7YcHKap7SKg4SzFPnVJASY5E9FO/oa6NwdYn9EO0
+ /IJIS868V6HCMqnik0FZcI8+kQfahuxI3FDVuqKzeDqhEXsC6yYk5dHd/lNLFSmV6wG8
+ G+GtvTtinxoIqJE4xXsLVwE+IFzjal59JyMcZ3qbrHNjFxAUZ4Xed0jzfkON04ZmXwBD
+ ybTNn5Bdb5fid6M/SFIRcXIHui3OAi5oPcJPYlqAIwYnOTDDMGQNLXEeMb0rbwKwStNy
+ jeVgN8zmXidJAYnK6a4NmFKV775SvcwUxmPQU20he5M7ybhFVGPY3RP6jp1I3cOi556i
+ +yzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIQP2A7DVncj6z/tfpXlEmKenXVddC34rIvqhwmn1MuxICFEjkYEdm2sYj6PpFKI9EIgi6qbY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzhS24/iW2Q3g9dvgIl7moMVoy1c1hLZe0u2u9SEwmneC/O0ew7
- 0JrXwVjqhUF/jElOQZsWR7YDKvoSy8ATqEDBgLOJsE33K3L5WmUZGYoR8TUJM7HI/QX03UQhoV+
- BH3CoCcOvcMpKpOzwHEDls530dwM2ssFgWlu2
-X-Gm-Gg: ASbGncti1nao3IjHBH1rTOsVAzmymhYIQUwiM5N+OUwTq1T/VjuQI48hhiiF6p6sC7V
- x7VudXmEJnrBOZ7ny6YxG/sLafjfw+30=
-X-Google-Smtp-Source: AGHT+IEVuE18nGOlD6VWtZ7tjyqHt4rGQT4AF5cgCfdVZoUqmJiySIBDHpzHUFTQovc3/PFk94Oz6MbZfu+UvGNi9/U=
-X-Received: by 2002:a17:907:2cf7:b0:aa4:e18e:1ca1 with SMTP id
- a640c23a62f3a-aa58109a35bmr178115166b.60.1732712911635; Wed, 27 Nov 2024
- 05:08:31 -0800 (PST)
+ AJvYcCUG/1YMwGl/7u6A6t2CzDkX+f26Vjm6pHoMZnXilnH/cM1rkKhP6J3qpxDZDZ1W0LAQCmp3bUg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyz8+nTGwlleqNzP+Rd2J2Iz7egI0SHfJoauSdJMU1vLmDrb4vi
+ eHO0OPWLldnSrx3kzRFtsSjVYj4uq8h3zzCKhwv5fkSsWt6nLOGDJsOtdkfqUx1dtncsLqC2I4b
+ zm1DqbNj+UffLk1yu4gv1dIrmS1ZFg6NjiMSGtPvo5LnmI1o=
+X-Gm-Gg: ASbGncsqDGCSdJzvCs5T3XmKHYNMTzqinPtwCqu77jC0oCQlAyJpAxNLRJJx4gcYmu9
+ zF3P4nIv+f/dPue6T3aP7/Bwa5w5geM4=
+X-Google-Smtp-Source: AGHT+IEmC3FQfSt+GWF76Z92mj1NlqypycM3IgUjDJLj2wW0euJkMbv9IYB49uWWK40txXhYf1Gwavk96EmiMeYziJo=
+X-Received: by 2002:a17:906:cd2:b0:aa5:2575:e75d with SMTP id
+ a640c23a62f3a-aa580edfbd0mr192225866b.2.1732712917671; Wed, 27 Nov 2024
+ 05:08:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20241123214554.305285-1-heinrich.schuchardt@canonical.com>
- <20241123214554.305285-5-heinrich.schuchardt@canonical.com>
- <CAFLszTgNguURurFAnX4W4mw8_Fokj2iCQOw15MCnFtT_zea6hw@mail.gmail.com>
- <f7706753-d4bc-484a-bf5d-f4b85205ac8e@canonical.com>
- <CAFLszTiCv3zdeg+1vNKY__iYmdZgVs4E=GXT6Y2DYCGQOi4RzA@mail.gmail.com>
- <5c80bb06-28fd-47c6-a249-55237a81d4a6@canonical.com>
-In-Reply-To: <5c80bb06-28fd-47c6-a249-55237a81d4a6@canonical.com>
+References: <20241124183832.2476928-1-caleb.connolly@linaro.org>
+ <CAFLszThqtA_WBxOU-EnEvw956ZMN9KErx_C4gTzW_+p_tGu9qw@mail.gmail.com>
+ <cd43db10-4939-4958-97f2-9a2046d82160@linaro.org>
+ <CAFLszTgEhfbk4ug=JoU_jTgdzSkF-fXuqamGmPJHpdogwocbRA@mail.gmail.com>
+ <a8cd7895-7968-4ef9-bc5f-dd36c04d9db8@linaro.org>
+In-Reply-To: <a8cd7895-7968-4ef9-bc5f-dd36c04d9db8@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Nov 2024 06:08:19 -0700
-Message-ID: <CAFLszThH5i2cmf0WH_X2BYonMUHWbMHkUmCL-mgLO1SvbKjQEg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() must not try to boot
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Date: Wed, 27 Nov 2024 06:08:25 -0700
+Message-ID: <CAFLszThuqGKt+j9y+JgPpwKYe-2f_MJ4DHh=wzWzOjWv715xUw@mail.gmail.com>
+Subject: Re: [PATCH] common/board_f: init malloc earlier
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ This contributor prefers not to receive mails <noreply@example.com>,
  Tom Rini <trini@konsulko.com>, 
- Michal Simek <michal.simek@amd.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, 
- T Karthik Reddy <t.karthik.reddy@xilinx.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,146 +96,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Caleb,
 
-On Tue, 26 Nov 2024 at 09:16, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 26 Nov 2024 at 09:15, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On 26.11.24 16:38, Simon Glass wrote:
-> > Hi Heinrich,
+> Hi Simon,
+>
+> On 26/11/2024 16:38, Simon Glass wrote:
+> > Hi Caleb,
 > >
-> > On Tue, 26 Nov 2024 at 00:42, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
+> > On Tue, 26 Nov 2024 at 05:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 > >>
-> >> On 11/26/24 01:32, Simon Glass wrote:
-> >>> Hi Heinrich,
+> >> Hi Simon,
+> >>
+> >> On 26/11/2024 01:32, Simon Glass wrote:
+> >>> Hi Caleb,
 > >>>
-> >>> On Sat, 23 Nov 2024 at 14:46, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
+> >>> On Sun, 24 Nov 2024 at 11:38, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 > >>>>
-> >>>> eth_bootdev_hunt() should not execute dhcp_run() as this itself would load
-> >>>> a file and boot it if autostart=yes.
+> >>>> Currently the early malloc initialisation is done partially in
+> >>>> board_init_f_init_reserve() (on arm64 at least), which configures
+> >>>> gd->malloc_base. But it isn't actually usable until initf_malloc() is
+> >>>> called which doesn't happen until after fdtdec_setup().
 > >>>>
-> >>>> Instead just check that there is a network device.
+> >>>> This causes problems in a few scenarios:
+> >>>>
+> >>>> 1. when using MULTI_DTB_FIT as this needs a working malloc (especially
+> >>>>    for compressed FIT).
 > >>>
-> >>> If you look at dhcp_run() you will see an 'autoload' parameter. This
-> >>> is 'false' in this code, so it never loads a file.
+> >>> Hmmm, how does this work today?
 > >>
-> >> This is not the complete truth.
+> >> I honestly have no idea, I assume boards that make use of it do some
+> >> custom board_f.
+> >
+> > OK.
+> >
+> >>>
+> >>>> 2. Some platforms may need to allocate memory as part of memory map
+> >>>>    initialisation (e.g. Qualcomm will need this to parse the memory map
+> >>>>    from SMEM).
+> >>>
+> >>> That really needs to be tidied up. When does this fixup need to be
+> >>> done? I imagine it is somewhere prior to setup_dest_addr() ? Perhaps
 > >>
-> >> If $autostart=true and CONFIG_NET=y, dhcp_run(false) still tries to load
-> >> a file.
+> >> It's necessary in order to figure out gd->ram_base/ram_size. We do it in
+> >> board_fdt_blob_setup() so that we can support another use-case where
+> >> U-Boot has an internal FDT (which it should use) but the memory layout
+> >> is provided via an external FDT which is unavailable (although this
+> >> usecase isn't enabled upstream yet).
+> >>
+> >>> we could introduce an event to do 'memory map' stuff?
+> >>
+> >> We could, but considering that on most platforms the pre-relocation
+> >> malloc is fixed at build time and at a known location relative to U-Boot
+> >> there is no reason for us to arbitrary decide that some codepaths at the
+> >> start of board_f aren't allowed to use malloc().
+> >>
+> >> Just moving the malloc initialization earlier ensures malloc() is
+> >> consistently available and greatly simplifies things.
 > >
-> > Here is the code:
-> >
-> > int dhcp_run(ulong addr, const char *fname, bool autoload)
-> > {
-> > char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
-> > struct cmd_tbl cmdtp = {}; /* dummy */
-> > char file_addr[17];
-> > int old_autoload;
-> > int ret, result;
-> >
-> > log_debug("addr=%lx, fname=%s, autoload=%d\n", addr, fname, autoload);
-> > old_autoload = env_get_yesno("autoload");
-> > ret = env_set("autoload", autoload ? "y" : "n");
-> > if (ret)
-> > return log_msg_ret("en1", -EINVAL);
-> >
-> > It respects the autoload parameter. If there is a bug in that, we
-> > should fix it, but it seems to work OK to me. Please fix your commit
-> > message.
+> > I'd like to see a more generic solution to this problem...I think we
+> > discussed this before?
 >
-> The cited code only sets "autoload". It does not adjust "autostart".
->
-> As I have shown below this leads to trying to boot via DHCP.
->
-> This is exactly what the commit message says: "load a file and boot it
-> if autostart=yes".
+> I think so. I'm not sure I follow with "more generic solution"?
 
-Oh, I just thought they were the same and I didn't remember about autostart
+Using an event to set the RAM location, rather than repurposing the
+FDT-setup function.
 
->
 > >
-> >>
-> >> In all cases dhcp_run() wastes boot time.
-> >
-> > Yes, it uses time. With bootstd the hunters are only called as needed.
-> > In your case you are calling all of them at once.
-> >
-> > Is there a way to just call hunters which relate to block devices, perhaps?
+> > To my eye it looks like if we called an event in setup_dest_addr() we
+> > could allow ram_base to be set.
 >
-> We need to probe network to provide the simple network protocol
-> (lib/efi_loader/efi_net.c) but we don't need to execute DHCP.
+> Right, it's possible/likely that we could clean up how mach-snapdragon
+> currently does memory parsing.
 >
-> We also need the correct device-tree provided by the extension hunter.
+> I do think this patch would still be justified even if we ignore the
+> Qualcomm case.
 
-It would be good to get some use of that, as it has no tests really.
+It does put malloc() outside the purview of trace. There is always
+going to be a race between which subsystem wants to be first and we
+have certainly changed it several times. But until we have an actual
+need, I think it is better to wait.
 
-As I ask on the other patch, why do you need to probe?
+> >
+> >>
+> >> fwiw, I had another variation of this patch which dropped initf_malloc()
+> >> entirely and just set up gd->malloc_limit/malloc_ptr in
+> >> board_init_f_init_reserve() since that's where we set malloc_base
+> >> anyways. But after digging some more there seem to be quite a few other
+> >> entrypoints into U-Boot that don't go through
+> >> board_init_f_init_reserve() (e.g. sandbox, EFI app) and it seemed more
+> >> error prone to duplicate the implementation there.
+> >
+> > Fair enough.
+> >
+> > One more thing I notice in your board_fdt_blob_setup() implementation
+> > in arch/arm/mach-snapdragon/board.c :
+> >
+> > It seems to be using either an built-in or external devicetree. It
+> > seems that we should show this in dm_announce(), i.e. with the call to
+> > fdtdec_get_srcname() ?
+>
+> Yes, the way it's implemented currently assumes that if CONFIG_OF_BOARD
+> is set that we'd never use the built-in DT and mach-snapdragon doesn't
+> fit this assumption. It's not a high priority but for sure something I'd
+> like to see fixed.
 
->
-> Best regards
->
-> Heinrich
->
-> >
-> >>
-> >> CONFIG_NET=y
-> >> => dhcp_run
-> >> BOOTP broadcast 1
-> >> BOOTP broadcast 2
-> >> BOOTP broadcast 3
-> >> DHCP client bound to address 10.0.2.15 (1004 ms)
-> >>
-> >> => setenv autostart true
-> >> => dhcp run
-> >> BOOTP broadcast 1
-> >> BOOTP broadcast 2
-> >> BOOTP broadcast 3
-> >> DHCP client bound to address 10.0.2.15 (1002 ms)
-> >> Using e1000#0 device
-> >> TFTP from server 10.0.2.2; our IP address is 10.0.2.15
-> >> Filename 'run'.
-> >> Load address: 0x40200000
-> >> Loading: *
-> >> TFTP error: 'File not found' (1)
-> >> Not retrying...
-> >>
-> >> CONFIG_NET_LWIP=y
-> >> => dhcp_run
-> >> DHCP client bound to address 10.0.2.15 (1007 ms)
-> >>
-> >> Where command dhcp_run is provided by:
-> >>
-> >> #include <command.h>
-> >> #include <env.h>
-> >> #include <net-common.h>
-> >> #include <vsprintf.h>
-> >>
-> >> static int do_dhcp_run(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>                     char *const argv[])
-> >> {
-> >>           ulong addr = hextoul(env_get("loadaddr"), NULL);
-> >>
-> >>           dhcp_run(addr, NULL, false);
-> >>
-> >>           return 0;
-> >> }
-> >>
-> >> U_BOOT_CMD(
-> >>           dhcp_run,       CONFIG_SYS_MAXARGS,     1,      do_dhcp_run,
-> >>           "dhcp_run",
-> >>           NULL
-> >> );
-> >
-> > See above
-> >
-> > [..]
-> >
-> > Regards,
-> > Simon
->
+I'm not even sure that assumption is right, actually...
 
-Regards,
+[..]
+
+REgards,
 Simon
