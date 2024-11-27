@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A62D6ACF7
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:24:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD6B7D6ACF7
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FBA189817;
-	Wed, 27 Nov 2024 18:23:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 676978980B;
+	Wed, 27 Nov 2024 18:23:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ADo9z2Rd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nx5E+X3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84B3A896DC; Wed, 27 Nov 2024 18:23:09 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 3E6F989817; Wed, 27 Nov 2024 18:23:10 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA0C4897E8
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76FEA8958D
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6d40bdbb59dso86926d6.3
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:05 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b666215645so176382385a.0
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732728184; x=1733332984; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732728185; x=1733332985; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wexM5h4hYWUtNGORvMUiRfWBed9uzLUYrA7wwdjbd5g=;
- b=ADo9z2RdOWdOvFt5GNKZkkffr0tOR5FdMsF5pggCqOWckXNZ6UkdG0115aW2Of1PDb
- 2FnkkfK5gVgLbWsPyytOOyHer2iR6tYq0awM+6071oGalkl8YiVnrLQgf4Gd0CiuA7FG
- Ht4x2vTTRcz+XHz9Talb4CjuQsCA9xpBFFxwM=
+ bh=4d9zKiG9lJgrJu2wdkiWYeM0JLpgVIeclL+/CY3kJFU=;
+ b=nx5E+X3Cxx+b580/3FkWU0pqbOnGtyuo3FtX+NLkxU9nX/SNB3N+JCTKlGfQKso6aq
+ vZPJCht60XvUqLqtHKHEsBr11gsJ/fMxYi7u9+z10AsTWZ0R89iAcJcClrrGJPA1YhS2
+ PmaG8GP3FdaVzJm2xmLZKw6dJI7VZDeDuqR8E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732728184; x=1733332984;
+ d=1e100.net; s=20230601; t=1732728185; x=1733332985;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wexM5h4hYWUtNGORvMUiRfWBed9uzLUYrA7wwdjbd5g=;
- b=D6Y05u6y4eSS0QMKhDbn+CVitKjPFbWnwA8M4tM4uvCZ6z3NKwFucX2vQV9BeRckC8
- VQyK0bn53ZUzajfbYtqLSGh4dCC1FKXW6ybov+AimnrhmQk6ePVV1p7Lh00rM8ecAXXP
- P9kBc78JuHSSbvJEriTwu7rCA6vX+LduVBoUgbUgG+NLP80rv7Pti9+SbmZ+lY6ZIQ6F
- 52EjYNzEeTOFSv15KlVrVRayFAGySDuY8UkWBeMCjHFEG2Tf/UDst07UjSJMNBVpvKGm
- nq+UHcityCJp55PcpfLnVnzyre5uRbnxLCgWviXJUuFT6uC+pNNN5rPuQ1bEtyv3hH8c
- f+eg==
-X-Gm-Message-State: AOJu0YyTc5iyY56cAEB30Pw6BAvM0nUfbEx7QaKeljKZmoxSQRgGwIke
- aBivfbwzMkWo6BnBuY8eRJKEjZte/vUzojXHM3KgXGUXBFIztoYu3o3uz+0RuIVLZyggzhd4pGs
- cFKY=
-X-Gm-Gg: ASbGnctRYN+kRAj4UWbmoTQ35F531hbzOvsvLNTzAvc6ub+5HqnGAZ5uRQ5i7YuBhgW
- TQfm60cA0L7mxMSNCK2q0q0/SxVftEM6LMh5yTGXP/hdLiU52H2+udBZZkaz3tcs3QgCFe7syPx
- 9uW9p24gxakJoFYjSnFiJPqhkUgyl+FtEMycM2TI2vq/JHQgjiShWZrKt03nf8OYQD+ygFUSRLr
- ZFRy6vsxaYz3Dc2gnf7dbXrcJzzHja/l+Vh2m1vTRx2HXEe0XIC1MP7tantFPlUjZBxSMpK
-X-Google-Smtp-Source: AGHT+IHf1bbSPmO20uSQ8RJInBLr5uUETlN09iBNtl4NW7YqTNahUGeqcQwAip147TUwrgbjCp0zwg==
-X-Received: by 2002:a05:6214:4018:b0:6d4:36ff:435a with SMTP id
- 6a1803df08f44-6d864d51c27mr40611636d6.23.1732728183069; 
- Wed, 27 Nov 2024 09:23:03 -0800 (PST)
+ bh=4d9zKiG9lJgrJu2wdkiWYeM0JLpgVIeclL+/CY3kJFU=;
+ b=KSzpTkFnjatHPA6F2MVWAg9H+ivorkuDv0AKt2Hnzu3ZUlbQ9Ar47gNY/UNeKBkTIo
+ TsGsq2RrNPmn0i3vbgtrF/3hLlyywMHxLRkKtAtxq07DrKk8JRqrx5sPPrbjupbmoPGY
+ rSHNytmWe1IWX3+soUXvIOQxGR8lI/XgebbooiwMkWrEk1Ueeif6BpUCN9K84zGTpfSA
+ lAig0Zm8gXVYS6p+YoUaAasQkljnDNd4DJDXO1yWFZKXTSK1Nh7UorN17Y4cwJM/nTH8
+ lsJXZgxSLJ0SOzCQ4AQTOKlu+IuVpi+hlqUTeUl7V8MslmyPeGV5mVV/afeK6/uJIL71
+ gUhg==
+X-Gm-Message-State: AOJu0YwTCuhbE8anCG/lk4RPxp51LCiBALlbBfVZNsmnxMZTKIXkSa7h
+ 9nNafm0EwEDZe4q+CR6UAW4KdvVMlHoHCJNJJsWOXDgbhUoltOS4S3H9Hir9JeHJDFrtHaOdEcz
+ zt8s=
+X-Gm-Gg: ASbGncuR1wnsiDfiVaxS7LELT4X8ssONLmf0f7w0f/2ihnKsEkjf0YuTri+Li98QJUh
+ JovfWep6lWxYYopvGDGUGO0yYYJWW9/2FZWTV4XJ9scvjfTE3ylfOS8kfk+TUHmdkY6uQ+rY3rc
+ JsRkgloMuLJENXbvgOZP/1zbRUDv9x2Vqkz7m06HKEkgz3TChloqT3uKYJXZmx6PuiNPNDr7H1F
+ hMmlMoP8Q5Z+gtRr2PsVmcF8BgcnYfTXunUyKWo/KA9UdLsznpGiVAFwgGcXs9AHF3ZXCQE
+X-Google-Smtp-Source: AGHT+IGLIeFgYNq7Pio8bU/e5uJ+c8xRDFZfoe21vysiiIhCHR0p6crJBAH7rpXDlVw5spUIjp1NOw==
+X-Received: by 2002:a05:6214:27c1:b0:6d4:254f:1c8e with SMTP id
+ 6a1803df08f44-6d864d9421cmr54148886d6.37.1732728185447; 
+ Wed, 27 Nov 2024 09:23:05 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.23.02
+ 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.23.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 09:23:02 -0800 (PST)
+ Wed, 27 Nov 2024 09:23:04 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [v6 08/12] docker: Support building for multiple architectures
-Date: Wed, 27 Nov 2024 11:17:26 -0600
-Message-ID: <20241127172247.1488685-9-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+	Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [v6 10/12] docker: Fix LegacyKeyValueFormat warning with PYTHONPATH
+Date: Wed, 27 Nov 2024 11:17:28 -0600
+Message-ID: <20241127172247.1488685-11-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241127172247.1488685-1-trini@konsulko.com>
 References: <20241127172247.1488685-1-trini@konsulko.com>
@@ -95,81 +96,31 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Add instructions on how to build the file for multiple architectures.
-Add a message indicating what is happening.
+Fix a warning due to the syntax used for PYTHONPATH:
 
-Update the documentation as well.
+   LegacyKeyValueFormat: "ENV key=value" should be used instead of
+      legacy "ENV key value" format (line 304)
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v6:
 - None
 ---
- doc/build/docker.rst    | 23 +++++++++++++++++++++--
- tools/docker/Dockerfile |  9 +++++++++
- 2 files changed, 30 insertions(+), 2 deletions(-)
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/doc/build/docker.rst b/doc/build/docker.rst
-index 45659b3b89dc..5896dd5ac4a6 100644
---- a/doc/build/docker.rst
-+++ b/doc/build/docker.rst
-@@ -1,11 +1,30 @@
- GitLab CI / U-Boot runner container
- ===================================
- 
--In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.  To build the image yourself
-+In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.
-+
-+The docker image supports both amd64 and arm64. Ensure that the
-+'docker-buildx' Debian package is installed (or the equivalent on another
-+distribution).
-+
-+You will need a multi-platform container, otherwise this error is shown::
-+
-+    ERROR: Multi-platform build is not supported for the docker driver.
-+    Switch to a different driver, or turn on the containerd image store, and try again.
-+
-+You can add one with::
-+
-+    sudo docker buildx create --name multiarch --driver docker-container --use
-+
-+Building is supported on both amd64 (i.e. 64-bit x86) and arm64 machines. While
-+both amd64 and arm64 happen in parallel, the non-native part will take
-+considerably longer as it must use QEMU to emulate the foreign code.
-+
-+To build the image yourself::
- 
- .. code-block:: bash
- 
--    sudo docker build -t your-namespace:your-tag .
-+    sudo docker buildx build --platform linux/arm64/v8,linux/amd64 -t your-namespace:your-tag .
- 
- Or to use an existing container
- 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index bc8d1ebbb1e8..43cd37070e48 100644
+index 5d3bd4e24ab5..9d10de5b8926 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -6,9 +6,18 @@ FROM ubuntu:jammy-20240808
- LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
- LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
+@@ -315,4 +315,4 @@ RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
  
-+# Used by docker to set the target platform: valid values are linux/arm64/v8
-+# and linux/amd64
-+ARG TARGETPLATFORM
-+
-+# Used by docker to set the build platform: the only valid value is linux/amd64
-+ARG BUILDPLATFORM
-+
- # Make sure apt is happy
- ENV DEBIAN_FRONTEND=noninteractive
- 
-+RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
-+
- # Add LLVM repository
- RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-     --mount=type=cache,target=/var/lib/apt,sharing=locked \
+ # Add mkbootimg tool
+ RUN git clone https://android.googlesource.com/platform/system/tools/mkbootimg /home/uboot/mkbootimg
+-ENV PYTHONPATH "${PYTHONPATH}:/home/uboot/mkbootimg"
++ENV PYTHONPATH="${PYTHONPATH}:/home/uboot/mkbootimg"
 -- 
 2.43.0
 
