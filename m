@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B318D609A7
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A483D609A8
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5436089CDF;
-	Wed, 27 Nov 2024 08:07:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D55A889CCE;
+	Wed, 27 Nov 2024 08:07:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="R0PSZaQn";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sGCm0pfW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E3F189CDB; Wed, 27 Nov 2024 08:07:01 +0100 (CET)
+ id 8E2B389CA5; Wed, 27 Nov 2024 08:07:01 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05C1F89789
+ by phobos.denx.de (Postfix) with ESMTPS id 431B589CA5
  for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 08:06:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E447F41026; 
- Wed, 27 Nov 2024 07:06:45 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4943C41028; 
+ Wed, 27 Nov 2024 07:06:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732691206;
- bh=n2NDz1h1Ki2L4yClmszG9peszw3PLDqJE4/8HcpNG34=;
+ s=20210705; t=1732691209;
+ bh=XA/hrsUL6qa2FihaC619dps5SnfGaoc/I36j+6MBqjA=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=R0PSZaQnGq/kzIa9LQRfLx6yj52VI8Xn5GvULDti9xTEtambtbmKaLX1GxReC41y4
- cnAxUVXBV718whK6WriWb06vwFXTqj4faDNF1Ax13EfRtmOQMJE0K4Q6LNzqIiiZYS
- 9p/e+lD9zzMM5KSeEHPULxr7vciZTGKjTsbjrWV/o4Qx2nAFywox6F1TedvAPn8mmn
- DMu2gyXMxDTr1vXvOHqcuryzzCIYR6/k05RD6lcb4SHfB4fzKbIrq1TyzOJBLUAQLc
- xtCRC0Xwjv34IH3O81L1aigeR7wuDSVEHmZpGD9WgzJ7ilVPIIAuqeUjSjcbwyYmk3
- bHKWhDwCaS+NQ==
+ b=sGCm0pfW5g/+Xn8FdFhJpdx4V7rBU4mdsGUgwtQvdrLml89HA1/6+P2dARl/I40MF
+ Xf/eEXL0mWDSo+Ew+Vt3HXTcAtyl7z0jzT5W85CRh7xAusvQ3PbNwpdxvIDRDaYqmS
+ 2qT+vRu4AkW/Z3efkpJz6qodXfwG/oWmucD/RHVWmW/G/wFctuQlgUdwazJKMDJ0+K
+ l5loRTlfr9JmCJefIfNyDGwq3eTa/ql9SqExBlNvTWombcxvwp+RjCenOtrcmt+Ku3
+ f45zJLRmeZs0Z5sJfo1uyzLposV7+bd4riuCazTrXAp7nFB39CbOAenS9ot1xP51xu
+ 1EYaUBwlFsiTQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
@@ -61,9 +61,9 @@ Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 4/6] net: eth_bootdev_hunt() should not run DHCP
-Date: Wed, 27 Nov 2024 08:06:29 +0100
-Message-ID: <20241127070631.16412-5-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 6/6] efi_loader: run bootdev_hunt() to find ESP
+Date: Wed, 27 Nov 2024 08:06:31 +0100
+Message-ID: <20241127070631.16412-7-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
 References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
@@ -85,83 +85,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently when booting dhcp_run() may be executed multiple times:
-once in eth_bootdev_hunt() and once in the network booting bootmeth.
+Some hard devices need specific routines to scan for block devices,
+e.g. NVMe (nvme scan), SCSI (scsi start).
 
-We need to call eth_bootdev_hunt() when setting up the EFI sub-system to
-supply the simple network protocol. We don't need an IP address set up.
-
-We can reduce the bootime by not executing dhcp_run() in
-eth_bootdev_hunt().
-
-Furthermore eth_bootdev_hunt() with autostart=yes leads on the legacy
-network statck leads to downloading a file via TFTP and to booting the
-downloaded file.
-
-Instead of running dchp_run() just check that there is a network device
-in eth_bootdev_hunt().
+Invoke bootdev_hunt() to find all block devices.
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	reword the commit message
+	no change
 ---
- net/eth_bootdev.c | 30 ++++++++++++++++++------------
- 1 file changed, 18 insertions(+), 12 deletions(-)
+ cmd/bootmenu.c             | 39 +++++++++++++++++++++++++++++---------
+ doc/usage/cmd/bootmenu.rst | 13 ++++++++++---
+ 2 files changed, 40 insertions(+), 12 deletions(-)
 
-diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
-index 6ee54e3c790..b0fca6e8313 100644
---- a/net/eth_bootdev.c
-+++ b/net/eth_bootdev.c
-@@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
- 	return 0;
+diff --git a/cmd/bootmenu.c b/cmd/bootmenu.c
+index ffa63a4628d..90f4f3d583c 100644
+--- a/cmd/bootmenu.c
++++ b/cmd/bootmenu.c
+@@ -330,7 +330,13 @@ static int prepare_uefi_bootorder_entry(struct bootmenu_data *menu,
  }
+ #endif
  
+-static struct bootmenu_data *bootmenu_create(int delay)
 +/**
-+ * eth_bootdev_hunt() - probe all network devices
++ * bootmenu_create() - create boot menu entries
 + *
-+ * Network devices can also come from USB, but that is a higher
-+ * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
-+ * enumerated already. If something like 'bootflow scan dhcp' is used,
-+ * then the user will need to run 'usb start' first.
-+ *
-+ * @info:	info structure describing this hunter
-+ * @show:	true to show information from the hunter
-+ *
-+ * Return:	0 if device found, -EINVAL otherwise
++ * @uefi:	consider UEFI boot options
++ * @delay:	autostart delay in seconds
 + */
- static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
++static struct bootmenu_data *bootmenu_create(int uefi, int delay)
  {
  	int ret;
-+	struct udevice *dev = NULL;
+ 	unsigned short int i = 0;
+@@ -357,7 +363,7 @@ static struct bootmenu_data *bootmenu_create(int delay)
+ 		goto cleanup;
  
- 	if (!test_eth_enabled())
- 		return 0;
-@@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
- 			log_warning("Failed to init PCI (%dE)\n", ret);
- 	}
+ #if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) && (IS_ENABLED(CONFIG_CMD_EFICONFIG))
+-	if (i < MAX_COUNT - 1) {
++	if (uefi && i < MAX_COUNT - 1) {
+ 		efi_status_t efi_ret;
+ lib/efi_loader/efi_setup.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index aa59bc7779d..8e0ff16f3eb 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -7,6 +7,7 @@
  
--	/*
--	 * Ethernet devices can also come from USB, but that is a higher
--	 * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
--	 * enumerated already. If something like 'bootflow scan dhcp' is used
--	 * then the user will need to run 'usb start' first.
--	 */
--	if (IS_ENABLED(CONFIG_CMD_DHCP)) {
--		ret = dhcp_run(0, NULL, false);
--		if (ret)
--			return -EINVAL;
--	}
-+	ret = -EINVAL;
-+	uclass_foreach_dev_probe(UCLASS_ETH, dev)
-+		ret = 0;
+ #define LOG_CATEGORY LOGC_EFI
  
--	return 0;
-+	return ret;
- }
- 
- struct bootdev_ops eth_bootdev_ops = {
++#include <bootdev.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+ #include <log.h>
+@@ -228,6 +229,13 @@ efi_status_t efi_init_obj_list(void)
+ 	 * Probe block devices to find the ESP.
+ 	 * efi_disks_register() must be called before efi_init_variables().
+ 	 */
++	if (CONFIG_IS_ENABLED(BOOTSTD)) {
++		int r;
++
++		r = bootdev_hunt(NULL, 0);
++		if (r)
++			log_debug("No boot device available\n");
++	}
+ 	ret = efi_disks_register();
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
 -- 
 2.45.2
 
