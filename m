@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D12DDD6ACCD
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3385FD6ACCA
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EB5E897DD;
-	Wed, 27 Nov 2024 14:07:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B78B9897D9;
+	Wed, 27 Nov 2024 14:07:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FqFDPefz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZjhQDgOQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39A14897D9; Wed, 27 Nov 2024 14:07:20 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 13616897DC; Wed, 27 Nov 2024 14:07:41 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E17C0897D6
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:07:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D781B897D6
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:07:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5cfadf851e2so8936168a12.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:07:17 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aa51d32fa69so718281566b.2
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:07:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732712837; x=1733317637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732712858; x=1733317658; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LwaWIycZMk0jaeiOsXMk9QVlaKMcWSgnysrfB6EYZKU=;
- b=FqFDPefzx2F10LcEBhcBw7QZgiwbI6TS/vghoW4pF11j9ANIbIbdIl17et3CI2O0DW
- DzJcbnJaf39+yIn9fPpbnDqbrYzvHxgcOQ9dnbBgrVnQ2Z1MFrFWUaaq+gPms86peWXi
- ijr0kdUF4/xoNeo+JxHGuSpoPdBc+Jke/TaO8=
+ bh=3xR7PyXjrgdPdMyedQvbGSsrD/lq4lZMdW+e9PCl4N0=;
+ b=ZjhQDgOQMKT6th3QM0+LqEJGQqYxkGErIbzIPcH9/5LMfzTWYVDxCY2gdO+BgJ8QHw
+ U0639R/omRf249csnwwAqggx9/HSV0bqJkEbF0M96BiwLm+CFNatCrln8wMisYf3Bz4n
+ /HBAD9HY0SdNWARKDn/Fv19ZvE11v/Q8QGooY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732712837; x=1733317637;
+ d=1e100.net; s=20230601; t=1732712858; x=1733317658;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LwaWIycZMk0jaeiOsXMk9QVlaKMcWSgnysrfB6EYZKU=;
- b=GXaemoAFIDFJSiiSfgVu/zoMxOjVmay3zkhXCi4JxFaNgU36QzJgab/4vaHmrwv0Do
- XlYj33s/l1c9hJKHSRMqv0v0JmLriB5Sy2Hp94SNtzkc38P03gaw/PLVSTKlY4FArb80
- 35Nu7BrE42ljhfGUKpsjv5RcCbsP7COWLJjmSoOvkfO+DsJUb9RqtCk/Hea6wgZthvtw
- HUfyUsYMWMpPmcSOSl2jTfdid02EjoNfg6CkmmqLc+nkcmFbFGhCbXnpmMvqCmEPNqdN
- iXnqefsZe2UWe/8I64EbVoWgE3ymkJ5hapwwQ/g7kSZ6YEcirdX9zn1p8/B8xIPo8JaD
- DzRQ==
+ bh=3xR7PyXjrgdPdMyedQvbGSsrD/lq4lZMdW+e9PCl4N0=;
+ b=koOMLHmGFxYDD5qn73r2xTQZ0e+j1q1rgRraQWmZLOqx7sf6079qlAyj9mDi4IR6uj
+ QbYDc3/jknO01Bmco31gy3ADQRtyo736kTERw61b2SldMjNBPwJ2LqmPk+t4tLhSDCE4
+ pA688ypIEG2sXGyK1J9pYBnB1qF38bAMAQj2xedyJmNhGk73Fm7Xod8gayk7hZylh2fG
+ yKovNcS4l7g90s8cCuaia9D/P8nflmoV23LsOCyXzmzJzIapl4VljoKFsgQRrOiM1SV2
+ v0ib5CVPGmib0xvyDSJbTVR/dJ+ihQYR3+DC/ANNRU5irpsMXY14RTim/44lmqndgsNa
+ 2FMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3BB9Y+DYalXdWL5HVGLU+8dNeS+rrtih+8f4cQ1l85xYe48HRZYa3ipBB3o/Ai9V3SVAbe0s=@lists.denx.de
-X-Gm-Message-State: AOJu0YzM+sW1fMrvYZVDBlyaHsXB58cizDUsx/15PBLt0GdKo/3eKipP
- DmW2dDi4N6vBeTR4GUwntOMoOdRWrf+e8wj96rraei4nRfbLWDeBWLppzuNNXT2cEcKwfecbQpX
- iuTxwQR/CWVZFkKyoNCwC8XB9b8Xs0w//Mq6o
-X-Gm-Gg: ASbGncuO7lmNqkS03iVyttTnyZherJlO547SoZ+rihPXAytWd+/UbyfVyN/Jjjveo1C
- aNxpDU169hn1M4rgdhgO7zolSCNswtAY=
-X-Google-Smtp-Source: AGHT+IH2JzpmNmjolUzfmLtToP9XBTJ6BbLdqIwHs7yA9SMtmA06CivmplHekqBsFTMFP6GyhQysm5MOia27N8S7fg8=
-X-Received: by 2002:a17:906:3293:b0:aa5:1ec3:b96f with SMTP id
- a640c23a62f3a-aa580f1e06amr306890166b.17.1732712837171; Wed, 27 Nov 2024
- 05:07:17 -0800 (PST)
+ AJvYcCUuMX3O43BnwXFlHlqaANC74VZ2+ls2MmU97T/dLhTxEBqh7Hgq452TvmDlNOabTjypA8dnlJw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxrBz6ZHsr1+Te/fHLr0dBXnf0c/4q5fEKkP/SyB0PIOAwyl8a
+ mkXwlIvjjjEWIsknBrxBEuEZbHVYgROqMsqNluQzbN2/+xviYckoOPXFHWTJ2mSgzpc03s3kGNK
+ wRa+sKApayr3rXzCLStOvY0OuqQ3WkrUaz7Ee
+X-Gm-Gg: ASbGncvSRn40k3OblVPU4RWkJICFhFzkaoIs7wxm6GQYelIZihRFOpvM/GSZWBGYrtA
+ WiCJb5OQUC7gCHF14BTQ9+9fxZbasAEo=
+X-Google-Smtp-Source: AGHT+IEvb/PTsvys8D3z2UiZyeljcZ9ZUZlJ+Ad7EtLZi9CwEjMjIuu4d2XJiqvgRtECYgMKblKjOOBMlCo0NhgnGNs=
+X-Received: by 2002:a17:906:30ce:b0:aa5:3591:4208 with SMTP id
+ a640c23a62f3a-aa580ed0a58mr173303966b.12.1732712858193; Wed, 27 Nov 2024
+ 05:07:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-7-sjg@chromium.org>
- <5976a08e-a242-4665-85e6-410f48776229@gmx.de>
- <CAFLszThWDNCNhZ6wAaG3omKpT-ZEDkK-R1W-9DWyMuth8Vd55Q@mail.gmail.com>
-In-Reply-To: <CAFLszThWDNCNhZ6wAaG3omKpT-ZEDkK-R1W-9DWyMuth8Vd55Q@mail.gmail.com>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+ <20241127070631.16412-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241127070631.16412-5-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Nov 2024 06:07:05 -0700
-Message-ID: <CAFLszTjWgWZ6VZg8ZQOd2RVrX-+vGy1NuwaBZ+8vwGJ2R83wqw@mail.gmail.com>
-Subject: Re: [PATCH 06/13] efi_loader: Use the enum for memory type
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>, 
+Date: Wed, 27 Nov 2024 06:07:25 -0700
+Message-ID: <CAFLszTjWzN0xmyCeMQEirNuhUQvAAjYUz+SaPTozy-+FFQJ_1w@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() should not run DHCP
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Moritz Fischer <moritzf@google.com>, 
- Patrick Wildt <pwildt@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Jonathan Humphreys <j-humphreys@ti.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,61 +101,114 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 26 Nov 2024 at 08:37, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 27 Nov 2024 at 00:07, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi Heinrich,
+> Currently when booting dhcp_run() may be executed multiple times:
+> once in eth_bootdev_hunt() and once in the network booting bootmeth.
 >
-> On Tue, 26 Nov 2024 at 02:44, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 25.11.24 21:44, Simon Glass wrote:
-> > > Rather than an integer, it is better to use the enum provided, when
-> > > referring to an EFI memory-type. Update existing uses.
-> >
-> > The C standard provides no definition of the size of the integer used to
-> > implement enums. It could use u8, u16, u32, or u64.
-> >
-> > As EFI applications may be compiled using a different compiler we need
-> > to control the width used for passing parameters in the API interface.
-> >
-> > We should have used u32 instead of int here. We could use a typedef for
-> > more verbosity though that is frowned upon in U-Boot.
+> We need to call eth_bootdev_hunt() when setting up the EFI sub-system to
+> supply the simple network protocol. We don't need an IP address set up.
 >
-> Yes, the ext function is debatable. The rest seem OK to me, though, as
-> they are internal functions, See also [1].
+> We can reduce the bootime by not executing dhcp_run() in
+> eth_bootdev_hunt().
+>
+> Furthermore eth_bootdev_hunt() with autostart=yes leads on the legacy
+> network statck leads to downloading a file via TFTP and to booting the
 
-Hmm, but the spec uses enum, so arguably this patch is more correct?
+spelling
+
+> downloaded file.
+
+I have now found the feature you're referring to - the calls to
+env_get_autostart(). Perhaps we can remove this feature? It seems
+pretty old and I don't see boards using it.
+
+That feature stops bootstd working properly.
+
+But if we don't remove it, we need to disable autostart in dhcp_run(),
+since in that case it does not behave correctly. I can do a patch for
+that if needed.
 
 >
-> >
-> > Best regards
-> >
-> > Heinrich
-> >
-> > >
-> > > Call the value 'mem_type' consistently. Fix up one instance of
-> > > upper-case hex.
-> > >
-> > > Fix up the calls in struct efi_boot_services so that they use the same
-> > > enum, adding the missing parameter names and enum efi_allocate_type.
-> > >
-> > > While we are here, rename the 'memory' parameter to 'memoryp' so that it
-> > > is clear it is a return value.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >   include/efi_api.h                |  6 ++++--
-> > >   include/efi_loader.h             | 28 ++++++++++++++-------------
-> > >   lib/efi_loader/efi_boottime.c    | 13 +++++++------
-> > >   lib/efi_loader/efi_device_path.c |  4 ++--
-> > >   lib/efi_loader/efi_memory.c      | 33 ++++++++++++++++----------------
-> > >   5 files changed, 45 insertions(+), 39 deletions(-)
-> > >
+> Instead of running dchp_run() just check that there is a network device
+> in eth_bootdev_hunt().
 >
-> Regards,
-> SImon
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         reword the commit message
+> ---
+>  net/eth_bootdev.c | 30 ++++++++++++++++++------------
+>  1 file changed, 18 insertions(+), 12 deletions(-)
 >
-> [1] https://stackoverflow.com/questions/4879286/specifying-size-of-enum-type-in-c/4879350#4879350
+> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
+> index 6ee54e3c790..b0fca6e8313 100644
+> --- a/net/eth_bootdev.c
+> +++ b/net/eth_bootdev.c
+> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
+>         return 0;
+>  }
+>
+> +/**
+> + * eth_bootdev_hunt() - probe all network devices
+> + *
+> + * Network devices can also come from USB, but that is a higher
+> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
+> + * enumerated already. If something like 'bootflow scan dhcp' is used,
+> + * then the user will need to run 'usb start' first.
+> + *
+> + * @info:      info structure describing this hunter
+> + * @show:      true to show information from the hunter
+> + *
+> + * Return:     0 if device found, -EINVAL otherwise
+> + */
+>  static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>  {
+>         int ret;
+> +       struct udevice *dev = NULL;
+>
+>         if (!test_eth_enabled())
+>                 return 0;
+> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
+>                         log_warning("Failed to init PCI (%dE)\n", ret);
+>         }
+>
+> -       /*
+> -        * Ethernet devices can also come from USB, but that is a higher
+> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
+> -        * enumerated already. If something like 'bootflow scan dhcp' is used
+> -        * then the user will need to run 'usb start' first.
+> -        */
+
+Please keep this comment
+
+> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
+> -               ret = dhcp_run(0, NULL, false);
+> -               if (ret)
+> -                       return -EINVAL;
+> -       }
+> +       ret = -EINVAL;
+> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
+> +               ret = 0;
+
+There is a uclass_probe_all() function.
+
+My suggestion from the original series was to just do the dhcp once.
+
+How does probing the ethernet devices actually help EFI? It is not
+needed for bootstd, since it probes any devices it uses.
+
+>
+> -       return 0;
+> +       return ret;
+>  }
+>
+>  struct bootdev_ops eth_bootdev_ops = {
+> --
+> 2.45.2
+>
 
 Regards,
 Simon
