@@ -4,83 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BDA2D6ACF9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:27:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CEFD6ACF9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D13A28961A;
-	Wed, 27 Nov 2024 18:27:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F0A0897E6;
+	Wed, 27 Nov 2024 18:27:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QhYTnnIm";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="w3OKLzlc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EF3A88DB1; Wed, 27 Nov 2024 14:04:59 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 140C6897C1; Wed, 27 Nov 2024 16:29:15 +0100 (CET)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CCD288B55
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:04:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9C2A897C1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 16:29:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcin.slusarz@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2ffbea0acc2so40366431fa.1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:04:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732712696; x=1733317496; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yRtxs+fi0JrHoBBdkYy/oq63q4qC4J5XqmNc6nsYuus=;
- b=QhYTnnImWovT8MUZJ32drEWBBxdVgUa5VOaIdKHARAy1O2vYUfjFdjzESOU/IyrD7u
- WN2lRVZydaSVj1xUuh107FUj+GMF9Q8QpIck/VNjeuLFUMGbgX4M4KKAMSrzwAZ1clWV
- bePMhNeJdFjD+j5eZ0DWb9LAonJjb4WIr8PVdM0DWHxVbr/wddS5WYVPzD4nVjb/Yhg0
- NbvRZVcPYwMDtQQgSIaEulQj1auzJvMcaZjvdgWlhy6meNBIE+CACgstrGAOChL4fnPO
- 1wSuDCWOuHpvBhEvBiJze5IX0vNZxJ0EsNiHoU9wWzDGYGyNOm5AHi8SYYA3CvSe626a
- hixQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732712696; x=1733317496;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yRtxs+fi0JrHoBBdkYy/oq63q4qC4J5XqmNc6nsYuus=;
- b=YIwa3/2Ld7CpJWBxGLTvSm87u7rdpn8SirvUveBW8gcJUKUbOgIwSe2UFOB1Lp8Ca+
- JkvU8YIi59px5wlJlohwDkKswoo+Bpt2sdYXF3lCs0x0R8+3tNR/FQ60Cnp0uUjGJc3u
- swnJrfIItR9Ybf0QVeG/PBaIfxzVJys+SP+p2BFHvxSjg1U+S+EvEDfb+RSXthLK4X7W
- 3YW4VsduQRbRVO3vplbyBHDxJIl3vJAf8OA65ZMQm+mANzMzovqT8nNSACqGq03QX2yk
- GOSnr4pV6ZoIIFs3qW7aAIabo4gvsCeJKFUJuuuv+jaybRtWeELlxAlcuH07VNe/BmOI
- CT1g==
-X-Gm-Message-State: AOJu0Yycmgg4oWQiyd3Z6vFKfvZbuzZSdGPdZck0vmHlKrByedUopSwo
- 4iLVtm+Ew/0BPsiN7nar6pz9U3UMFSXNITRlIh9EVbBr5Z7tqosUTPZDrg==
-X-Gm-Gg: ASbGncvs5LJs1ijD/8pIyfgm55BX0k4NkA+RkLgOIk2ECW8cNGnuTpgvQzeGYnlaPSs
- cGnRMzu4NQq+YH4Gs/l91zWAW6KL6CvecEANCh/S5Z3TcXV3kLpbatXNRRHl2V3SyIon7j+ntkZ
- 26fEeJKqytF+Dyip2JJeXZ2JA2FLRQuCpSjcu6C8Bf89bBYmd1iv+dhGAHAyrhk7jji5JoSCMs/
- eTfwMhGtfbJ2ru1G1y3OortC2Pk4KcFJUS41vU/xc7uxs+rWsnMHInryf6CCOixz4+zQ3y0Q9dC
- fZJNtZRFy14aGw==
-X-Google-Smtp-Source: AGHT+IFmJ7QXHsa9w3QWByKS+UnYQMWBTEYQk9AVqtYHvb2aANPTK6H0oB0pgEYJO8QY3DKjtl5SDQ==
-X-Received: by 2002:a2e:a5c1:0:b0:2fb:8774:4412 with SMTP id
- 38308e7fff4ca-2ffd60dc656mr13978561fa.24.1732712695442; 
- Wed, 27 Nov 2024 05:04:55 -0800 (PST)
-Received: from renau-vm3.mshome.net (1779df417e104.rev.snt.net.pl.
- [213.192.104.90]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ffa538ea2fsm20371341fa.97.2024.11.27.05.04.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 05:04:53 -0800 (PST)
-From: "=?UTF-8?q?Marcin=20=C5=9Alusarz?=" <marcin.slusarz@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Marcin=20=C5=9Alusarz?= <mslusarz@renau.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Marcin=20=C5=9Alusarz?= <mslusarz@renau.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: [PATCH] power: axp: sunxi: configure charge current
-Date: Wed, 27 Nov 2024 13:04:19 +0000
-Message-Id: <20241127130419.50489-1-mslusarz@renau.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=pzimmermann@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1732721347;
+ bh=2CmUZRKWX1MFxCBnPhSfh7wWFt9MjqP+Egh37+CUFDA=;
+ h=From:To:CC:Subject:Date:From;
+ b=w3OKLzlcNmIVpfp15syxKNnswULWM5Gt1gFPt/6h3HvUz9wdRbSqTl/rJSdo/nMbT
+ yg2aMc745WUBhHX30ilsN0UDvbApvvlswN+/Ng5EDpJB4ALykWvFLkz+o2Br/ScZCG
+ 2eA0AF+mNVX0FCA1mn5BGnFPDm4FfZ0R1OEOtlKB7GiYd2hOMTA9PGSYH/Tw424z57
+ eQ3D8j6JKiwz+CDSDYZK9yTo1ik2ijAKgvT7rY89snwne0uPOCXlep3gKrjf3X1Xwm
+ uPr8SDThoCzO4X750yclW3mKYlCGOIuUNWQdbLNWJd/psIwtMKJUhKG6yycVL7gDZp
+ beojvFzLLHqHQ==
+X-secureTransport-forwarded: yes
+From: Pascal Zimmermann <pzimmermann@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Simon Glass <sjg@chromium.org>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 1/2] config_distro_bootcmd: make possible to substitute
+ 'part list' in distro_bootcmd
+Thread-Topic: [PATCH 1/2] config_distro_bootcmd: make possible to substitute
+ 'part list' in distro_bootcmd
+Thread-Index: AdtA31t8WFBCNxZFTWOa9j5CkUfgdw==
+Date: Wed, 27 Nov 2024 15:29:05 +0000
+Message-ID: <9ee7f1fc7c77445b85348555f705a774@dh-electronics.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 27 Nov 2024 18:27:29 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,123 +73,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allows decreasing initial charge current, e.g. when power
-supply is too weak to support both charging and other operations.
-
-Signed-off-by: Marcin Ślusarz <mslusarz@renau.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Andre Przywara <andre.przywara@arm.com>
----
- board/sunxi/board.c    |  4 ++++
- drivers/power/Kconfig  |  7 +++++++
- drivers/power/axp221.c | 33 +++++++++++++++++++++++++++++++++
- include/axp221.h       |  3 +++
- include/axp_pmic.h     |  1 +
- 5 files changed, 48 insertions(+)
-
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 824c322a0d..07fccf972a 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -623,6 +623,10 @@ void sunxi_board_init(void)
- #if defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER
- 	power_failed |= axp_set_sw(IS_ENABLED(CONFIG_AXP_SW_ON));
- #endif
-+
-+#ifdef CONFIG_AXP221_POWER
-+	power_failed |= axp221_set_charge_current(CONFIG_AXP221_CHARGE_CURRENT);
-+#endif
- #endif	/* CONFIG_AXPxxx_POWER */
- 	printf("DRAM:");
- 	gd->ram_size = sunxi_dram_init();
-diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-index 4b81aeb749..06b509a383 100644
---- a/drivers/power/Kconfig
-+++ b/drivers/power/Kconfig
-@@ -142,6 +142,13 @@ config SY8106A_POWER
- 
- endchoice
- 
-+config AXP221_CHARGE_CURRENT
-+	int "axp221 constant charge current in mA"
-+	depends on AXP221_POWER
-+	default 1200
-+	---help---
-+	Any value between 300 and 2100 in 150 increments, or 0 to disable charging.
-+
- config AXP_DCDC1_VOLT
- 	int "axp pmic dcdc1 voltage"
- 	depends on AXP221_POWER || AXP809_POWER || AXP818_POWER
-diff --git a/drivers/power/axp221.c b/drivers/power/axp221.c
-index c22ca03f46..bf48585da0 100644
---- a/drivers/power/axp221.c
-+++ b/drivers/power/axp221.c
-@@ -205,6 +205,39 @@ int axp_set_eldo(int eldo_num, unsigned int mvolt)
- 				AXP221_OUTPUT_CTRL2_ELDO1_EN << (eldo_num - 1));
- }
- 
-+static u8 axp221_mamp_to_cfg(int mamp, int min, int max, int div)
-+{
-+	if (mamp < min)
-+		mamp = min;
-+	else if (mamp > max)
-+		mamp = max;
-+
-+	return (mamp - min) / div;
-+}
-+
-+int axp221_set_charge_current(unsigned int mamp)
-+{
-+	int ret;
-+	u8 cfg, chrg_ctrl;
-+
-+	cfg = axp221_mamp_to_cfg(mamp, 300, 2100, 150);
-+	if (cfg > 0x0f)
-+		return -EINVAL;
-+
-+	ret = pmic_bus_read(AXP221_CHRG_CTRL1, &chrg_ctrl);
-+	if (ret)
-+		return ret;
-+
-+	chrg_ctrl = (chrg_ctrl & 0xf0) | cfg;
-+
-+	if (mamp == 0)
-+		chrg_ctrl &= 0x7f;
-+	else
-+		chrg_ctrl |= 0x80;
-+
-+	return pmic_bus_write(AXP221_CHRG_CTRL1, chrg_ctrl);
-+}
-+
- int axp_init(void)
- {
- 	u8 axp_chip_id;
-diff --git a/include/axp221.h b/include/axp221.h
-index 32b988f3a9..8eb1792435 100644
---- a/include/axp221.h
-+++ b/include/axp221.h
-@@ -44,6 +44,9 @@
- #define AXP221_ALDO3_CTRL	0x2a
- #define AXP221_SHUTDOWN		0x32
- #define AXP221_SHUTDOWN_POWEROFF	(1 << 7)
-+#define AXP221_CHRG_CTRL1	0x33
-+#define AXP221_CHRG_CTRL2	0x34
-+#define AXP221_CHRG_CTRL3	0x35
- #define AXP221_PAGE		0xff
- 
- /* Page 1 addresses */
-diff --git a/include/axp_pmic.h b/include/axp_pmic.h
-index ae62ef0d76..3bcd8f9ca9 100644
---- a/include/axp_pmic.h
-+++ b/include/axp_pmic.h
-@@ -52,6 +52,7 @@ int axp_set_aldo4(unsigned int mvolt);
- int axp_set_dldo(int dldo_num, unsigned int mvolt);
- int axp_set_eldo(int eldo_num, unsigned int mvolt);
- int axp_set_fldo(int fldo_num, unsigned int mvolt);
-+int axp221_set_charge_current(unsigned int mamp);
- int axp_set_sw(bool on);
- int axp_init(void);
- int axp_get_sid(unsigned int *sid);
--- 
-2.25.1
-
+SGVsbG8gU2ltb24sDQoNCk9uIFdlZCwgMjcgTm92IDIwMjQgYXQgMTQ6MDgsIFNpbW9uIEdsYXNz
+IDxzamdAY2hyb21pdW0ub3JnPiB3cm90ZToNCj4gDQo+IEhpIFBhc2NhbCwNCj4gDQo+IE9uIFdl
+ZCwgMjcgTm92IDIwMjQgYXQgMDM6MzAsIFBhc2NhbCBaaW1tZXJtYW5uIDxwemltbWVybWFubkBk
+aC0NCj4gZWxlY3Ryb25pY3MuY29tPiB3cm90ZToNCj4gPg0KPiA+IE1ha2UgaXQgcG9zc2libGUg
+dG8gc3Vic3RpdHV0ZSB0aGUgJ3BhcnQgbGlzdCcgY29tbWFuZCBpbnNpZGUNCj4gPiAnc2Nhbl9k
+ZXZfZm9yX2Jvb3RfcGFydCcgd2l0aCBhIGN1c3RvbSBib2FyZCBzcGVjaWZpYyBpbXBsZW1lbnRh
+dGlvbi4NCj4gPg0KPiA+IEZvciB0aGlzIHRoZSBuZXcgZGVmaW5lICdTQ0FOX0RFVl9GT1JfQk9P
+VF9QQVJUUycgaXMgaW50cm9kdWNlZC4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IFBhc2NhbCBa
+aW1tZXJtYW5uIDxwemltbWVybWFubkBkaC1lbGVjdHJvbmljcy5jb20+DQo+ID4gLS0tDQo+ID4g
+Q2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQo+ID4gQ2M6IFNpbW9uIEdsYXNzIDxz
+amdAY2hyb21pdW0ub3JnPg0KPiA+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZQ0KPiA+IC0tLQ0K
+PiA+ICBpbmNsdWRlL2NvbmZpZ19kaXN0cm9fYm9vdGNtZC5oIHwgNyArKysrKystDQo+ID4gIDEg
+ZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4gDQo+IEhhdmUg
+eW91IGxvb2tlZCBhdCBjb252ZXJ0aW5nIHRoZSBib2FyZCB0byBzdGFuZGFyZCBib290Pw0KDQpX
+ZSBhcmUgYXQgaW50ZXJuYWwgZGlzY3Vzc2lvbiBhYm91dCB0aGUgc3dpdGNoIHRvIHN0YW5kYXJk
+IGJvb3QNCmZvciBvdXIgYm9hcmRzLCBidXQgdGhpcyB3aWxsIHRha2Ugc29tZSB0aW1lLg0KDQo+
+IA0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvY29uZmlnX2Rpc3Ryb19ib290Y21kLmgN
+Cj4gPiBiL2luY2x1ZGUvY29uZmlnX2Rpc3Ryb19ib290Y21kLmggaW5kZXggMGE0ZTRiOGZmOC4u
+ZGYwZGM4Y2ZkZSAxMDA2NDQNCj4gPiAtLS0gYS9pbmNsdWRlL2NvbmZpZ19kaXN0cm9fYm9vdGNt
+ZC5oDQo+ID4gKysrIGIvaW5jbHVkZS9jb25maWdfZGlzdHJvX2Jvb3RjbWQuaA0KPiA+IEBAIC0x
+OTQsNiArMTk0LDExIEBADQo+ID4gICNkZWZpbmUgU0NBTl9ERVZfRk9SX0VGSQ0KPiA+ICAjZW5k
+aWYNCj4gPg0KPiA+ICsjaWZuZGVmIFNDQU5fREVWX0ZPUl9CT09UX1BBUlRTDQo+ID4gKyNkZWZp
+bmUgU0NBTl9ERVZfRk9SX0JPT1RfUEFSVFMgXA0KPiA+ICsgICAgICAgInBhcnQgbGlzdCAke2Rl
+dnR5cGV9ICR7ZGV2bnVtfSAtYm9vdGFibGUgZGV2cGxpc3Q7ICINCj4gPiArI2VuZGlmDQo+ID4g
+Kw0KPiA+ICAjaWZkZWYgQ09ORklHX1NBVEENCj4gPiAgI2RlZmluZSBCT09URU5WX1NIQVJFRF9T
+QVRBICAgIEJPT1RFTlZfU0hBUkVEX0JMS0RFVihzYXRhKQ0KPiA+ICAjZGVmaW5lIEJPT1RFTlZf
+REVWX1NBVEEgICAgICAgQk9PVEVOVl9ERVZfQkxLREVWDQo+ID4gQEAgLTUzOCw3ICs1NDMsNyBA
+QA0KPiA+ICAgICAgICAgICAgICAgICAiXDAiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgXA0KPiA+ICAgICAgICAgXA0KPiA+ICAgICAgICAgInNj
+YW5fZGV2X2Zvcl9ib290X3BhcnQ9IiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgXA0KPiA+IC0gICAgICAgICAgICAgICAicGFydCBsaXN0ICR7ZGV2dHlwZX0gJHtkZXZu
+dW19IC1ib290YWJsZSBkZXZwbGlzdDsgIiAgICAgXA0KPiA+ICsgICAgICAgICAgICAgICBTQ0FO
+X0RFVl9GT1JfQk9PVF9QQVJUUyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXA0K
+PiA+ICAgICAgICAgICAgICAgICAiZW52IGV4aXN0cyBkZXZwbGlzdCB8fCBzZXRlbnYgZGV2cGxp
+c3QgMTsgIiAgICAgICAgICAgICAgXA0KPiA+ICAgICAgICAgICAgICAgICAiZm9yIGRpc3Ryb19i
+b290cGFydCBpbiAke2RldnBsaXN0fTsgZG8gIiAgICAgICAgICAgICAgICAgXA0KPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICJpZiBmc3R5cGUgJHtkZXZ0eXBlfSAiICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgXA0KPiA+IC0tDQo+ID4gMi4zMC4yDQo+ID4NCj4gDQo+IFJlZ2FyZHMsDQo+
+IFNpbW9uDQoNCkJlc3QgcmVnYXJkcywNClBhc2NhbA0K
