@@ -4,87 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13437D6ACDC
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F41D6ACDC
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:15:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93EE088EE1;
-	Wed, 27 Nov 2024 15:15:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id ED36A8907B;
+	Wed, 27 Nov 2024 15:15:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ut23myIY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jgK5iW7K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67DFE8907B; Wed, 27 Nov 2024 15:15:07 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 02F2D893E7; Wed, 27 Nov 2024 15:15:40 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5947887D1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:15:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81595887D1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:15:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa560a65fd6so148432666b.0
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 06:15:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-4668f208f10so28500421cf.3
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 06:15:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732716904; x=1733321704; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t/dRSMfvZZC1UtHk+rOPYBub1V5DlzWVIK62cSk5Kuk=;
- b=Ut23myIY9kSD2e3/rRU6MD0sKywPH77AxfsGA3dgaD/cZwnQafJ6KzGe4glWYBdRTF
- 4w2CyGHkHg9NLt2fcp8ZvZMU1aLzwR+W6w2EJcCRad2X9IQT/PMlI0UzMCeTmzzpzUx6
- YlDTEvFWthIXmEFC2HTVlfWE18evdOBdgQj70=
+ d=konsulko.com; s=google; t=1732716936; x=1733321736; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IXQROYn9qY+tk68VbX0pF3F2bN8jqnIlSrrkqYnoEbE=;
+ b=jgK5iW7Kmu6+AcVFdmBCNUDeZywWsAjLgecDP6uEpQB3tvgnla6vaU2oQOSNOWQHts
+ c40bE6LtEbBVYxuAKp32N1QC3xHS/kgW6Z8XNvFkH3VUlQDwLt4ZKEPomNFb2PCYMs6Y
+ eAjD5TZl3plYs8SIXNqnNlMcA73cE3kfoclPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732716904; x=1733321704;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t/dRSMfvZZC1UtHk+rOPYBub1V5DlzWVIK62cSk5Kuk=;
- b=TmxdZpDO/n7/8cqt6giO/9qFR+JYDhujRHur4InqxDAgnPwltAUeN8sb6lbkl0P3iX
- tA0kQC2SHpJtmtCocz7Zgr6BDm3K4n/TcIDHRu5W9IgNx4ikIsHhk9JaTafFznbYvwA/
- kRl/09eejcDx+ppZZmh4+gclZryqW7wJO9Hy6ivrpl7dUAPjBNxXOS1bwDfq/ZuaEsZI
- Cs8f3QYA3QU3cLwMxHmh5I5VFoaTbebTpUptVN2XORFip0nkbQJbsapd/YBbCQZcaXo6
- nTBzMWRFyjgKmOXVu2oL0wvA+h7NOSSiKeqhXVaXp4muDxXxpeb8NtghNlb70sioTjn4
- TgzA==
+ d=1e100.net; s=20230601; t=1732716936; x=1733321736;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IXQROYn9qY+tk68VbX0pF3F2bN8jqnIlSrrkqYnoEbE=;
+ b=PrD+Ab5wshL3egtpqIS7PlDmTMLIBNBmZGT6YFrOkQBOOL4CYei6f6TOOGrjf5xLtq
+ 8VzMNKb8/Xav8Q8UA4wBqviZcS1DirAVvxN2iIP4gL0TUmEljBn/IUSjWFIoPbu3+R9I
+ msmwnHJny+gt85xm7dW11g7DqgtLk5rnWhEB7Ft+7TdmM65rrWoL7dBkF7H9cwAg//CB
+ wCnVF+n0+RFwLaJAKvt5igGdmdSNCAgyyszoLU9I4qhqz5XdPx/1zmq/wLUhNb1SDYso
+ PPMUJJxAw3q/GThqJhGLUWy/sOcYYxhP7NFiVB33EmAGDfBMDdfKEw81VYs4jejMELLs
+ g8MQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXsMGTrpp9Po26P5tmQAomQijpX4D7ZMFK4F/8MPLsBBctclRFDjwm0KKmzHg7yeckCWNRh1o=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx4cVDMJ0JVJ08pIelTWmTnGPnFPA/TON4En0z+OTSvxWI2+fmK
- iFP0D5AxJqg9FsubNhSamLi/z7mrlfm88Oc0HTD+lbs3dSOgZUCbfsKmdPVnM6HdofVDYAFo+gH
- j6NgiOUog58EwmdCk/x+rCVsoxnyM6qEvnDCw
-X-Gm-Gg: ASbGncsVw/znIz0yBRdwJUdUUmwChWNvAzhdgWxb57O+FXlfT8mLzxQWE9t86z7VJ6O
- KlKrp5SBmvIAvDrDHTDz+qWj8Lrr8GYk=
-X-Google-Smtp-Source: AGHT+IF+ykR5IzxUHEZU9taFitXQIsKzvgjQg1l9zU/3Il2iU2sMuU9u0d3DkLru74ivNagyOR8PFTv6DHFdJu56eds=
-X-Received: by 2002:a17:907:77cd:b0:aa5:1d09:2083 with SMTP id
- a640c23a62f3a-aa57fac2827mr362827966b.13.1732716904415; Wed, 27 Nov 2024
- 06:15:04 -0800 (PST)
-MIME-Version: 1.0
-References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
- <20241127070631.16412-5-heinrich.schuchardt@canonical.com>
- <CAFLszTjWzN0xmyCeMQEirNuhUQvAAjYUz+SaPTozy-+FFQJ_1w@mail.gmail.com>
- <df1e66dd-7b69-4d28-baef-8e992778d5c2@canonical.com>
-In-Reply-To: <df1e66dd-7b69-4d28-baef-8e992778d5c2@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Nov 2024 07:14:53 -0700
-Message-ID: <CAFLszTiS-2MCZih4CzM-3YjgvX0MraxvY_thSDdHVy0_T_do3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() should not run DHCP
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>, 
+ AJvYcCVT+dq7eClYtu3Es3BN94oFkOEaLPyDtlgxkyQsqwV2QqoiIrico68gLA8GZImzuQkwYtmL2K8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPIvcBxuY/QbISQNqKapaJW6X2HUbEkGQI82T5X82K6VtUn6nP
+ 4yH52FqC0GOvlozK2+vg5rCxjmsADaBwAtU69cpBC5mlXHU0GmND1bNA02FBHBk=
+X-Gm-Gg: ASbGnctDwXyM3AQ/N5of+zupfZIWZdudgpEjgbYq+IQrt/m1+8Gv8pRS2Y+ppTCvC0E
+ fyy+gm9e5k8YoT2IAsI25EEN5ewL9unzBDZuNzaf/DlMuuEawytiArnWUovpmccCq3tQSpljehd
+ wu7EDmZD9jmLlK2NV8aiG40QWaRxztiS+sNDma2y5uuQqc5uH4EEBstG4lj8Qk6cpLtu2mQfTf5
+ +q8UnjcnRBYFt3lR5QOiBkIeqN8gQZ9sFwwuYipObHqAcXbPw==
+X-Google-Smtp-Source: AGHT+IEfITcYKVc99YO06nAf4y1zXhRgGiGfcqc5U2R4tF1e+eFBSoGl99LUDDkGiYsW+g9ZiIqE3Q==
+X-Received: by 2002:ad4:5cc7:0:b0:6d4:85f:ccac with SMTP id
+ 6a1803df08f44-6d864d3eae0mr39666336d6.13.1732716936212; 
+ Wed, 27 Nov 2024 06:15:36 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d451b23eccsm66460766d6.94.2024.11.27.06.15.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Nov 2024 06:15:35 -0800 (PST)
+Date: Wed, 27 Nov 2024 08:15:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Weijie Gao <weijie.gao@mediatek.com>, 
- Daniel Golle <daniel@makrotopia.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
+Message-ID: <20241127141532.GZ3600562@bill-the-cat>
+References: <20241125204456.1525752-1-sjg@chromium.org>
+ <20241125204456.1525752-6-sjg@chromium.org>
+ <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
+ <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
+ <20241126155508.GR3600562@bill-the-cat>
+ <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
+ <20241126223332.GV3600562@bill-the-cat>
+ <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
+ <20241126233218.GW3600562@bill-the-cat>
+ <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TF5XHdfn4VAuhIgV"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,123 +110,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Wed, 27 Nov 2024 at 07:00, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 27.11.24 14:07, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Wed, 27 Nov 2024 at 00:07, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Currently when booting dhcp_run() may be executed multiple times:
-> >> once in eth_bootdev_hunt() and once in the network booting bootmeth.
-> >>
-> >> We need to call eth_bootdev_hunt() when setting up the EFI sub-system to
-> >> supply the simple network protocol. We don't need an IP address set up.
-> >>
-> >> We can reduce the bootime by not executing dhcp_run() in
-> >> eth_bootdev_hunt().
-> >>
-> >> Furthermore eth_bootdev_hunt() with autostart=yes leads on the legacy
-> >> network statck leads to downloading a file via TFTP and to booting the
-> >
-> > spelling
-> >
-> >> downloaded file.
-> >
-> > I have now found the feature you're referring to - the calls to
-> > env_get_autostart(). Perhaps we can remove this feature? It seems
-> > pretty old and I don't see boards using it.
-> >
-> > That feature stops bootstd working properly.
-> >
-> > But if we don't remove it, we need to disable autostart in dhcp_run(),
-> > since in that case it does not behave correctly. I can do a patch for
-> > that if needed.
-> >
-> >>
-> >> Instead of running dchp_run() just check that there is a network device
-> >> in eth_bootdev_hunt().
-> >>
-> >> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >> v2:
-> >>          reword the commit message
-> >> ---
-> >>   net/eth_bootdev.c | 30 ++++++++++++++++++------------
-> >>   1 file changed, 18 insertions(+), 12 deletions(-)
-> >>
-> >> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
-> >> index 6ee54e3c790..b0fca6e8313 100644
-> >> --- a/net/eth_bootdev.c
-> >> +++ b/net/eth_bootdev.c
-> >> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
-> >>          return 0;
-> >>   }
-> >>
-> >> +/**
-> >> + * eth_bootdev_hunt() - probe all network devices
-> >> + *
-> >> + * Network devices can also come from USB, but that is a higher
-> >> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
-> >> + * enumerated already. If something like 'bootflow scan dhcp' is used,
-> >> + * then the user will need to run 'usb start' first.
-> >> + *
-> >> + * @info:      info structure describing this hunter
-> >> + * @show:      true to show information from the hunter
-> >> + *
-> >> + * Return:     0 if device found, -EINVAL otherwise
-> >> + */
-> >>   static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
-> >>   {
-> >>          int ret;
-> >> +       struct udevice *dev = NULL;
-> >>
-> >>          if (!test_eth_enabled())
-> >>                  return 0;
-> >> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
-> >>                          log_warning("Failed to init PCI (%dE)\n", ret);
-> >>          }
-> >>
-> >> -       /*
-> >> -        * Ethernet devices can also come from USB, but that is a higher
-> >> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
-> >> -        * enumerated already. If something like 'bootflow scan dhcp' is used
-> >> -        * then the user will need to run 'usb start' first.
-> >> -        */
-> >
-> > Please keep this comment
->
-> I have moved the comment to the function description. See above. I think
-> that is the adequate place.
->
-> >
-> >> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
-> >> -               ret = dhcp_run(0, NULL, false);
-> >> -               if (ret)
-> >> -                       return -EINVAL;
-> >> -       }
-> >> +       ret = -EINVAL;
-> >> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
-> >> +               ret = 0;
-> >
-> > There is a uclass_probe_all() function.
-> >
-> > My suggestion from the original series was to just do the dhcp once.
-> >
-> > How does probing the ethernet devices actually help EFI? It is not
-> > needed for bootstd, since it probes any devices it uses.
->
-> bootstd is not the only way to start an EFI application, you could use
-> bootefi or bootm.
+--TF5XHdfn4VAuhIgV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That's fine, but I'm just trying to understand what probing does, in
-this particular case. Doesn't EFI probe a device before it uses it? I
-think I am just missing some context.
+On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
+> Hi,
+>=20
+> On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
+> > > On 11/26/24 23:33, Tom Rini wrote:
+> > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glp=
+k@gmx.de> wrote:
+> > > > > > > >
+> > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > > > > > > Exported functions should be documented in the header fil=
+e, not the
+> > > > > > > > > implementation. We tend to make such updates on a pieceme=
+al basis to
+> > > > > > > > > avoid a 'flag day'. Move some comments related to memory =
+allocation to
+> > > > > > > > > follow the convention.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > >
+> > > > > > > > Please, have a look at this line in doc/
+> > > > > > > >
+> > > > > > > > doc/api/efi.rst:78:
+> > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
+> > > > > > >
+> > > > > > > Hmm, we should not add C files as then we end up with all sor=
+ts of
+> > > > > > > internal functions, like checksum(). The help is a bit of a m=
+ess on
+> > > > > > > that page IMO and it could use an index at the top or side.
+> > > > > >
+> > > > > > Why? Looking at the linux kernel (where we borrow this framewor=
+k from
+> > > > > > and lots of developers expect to follow that style) it's extrem=
+ely
+> > > > > > common to kernel-doc C files. I don't see why documenting inter=
+nal
+> > > > > > functions (which should be clear as being internal) is a proble=
+m.
+> > > > >
+> > > > > It depends what you mean by docs. U-Boot puts the documentation f=
+or
+> > > > > exported functions in header files.
+> > > >
+> > > > I'm sorry, that's a circular definition. And no, there is not a har=
+d and
+> > > > fast rule that we only put kernel-doc style comments in header files
+> > > > (which are consumed by other files and tooling to generate
+> > > > documentation).
+> > > >
+> > > > > Putting docs in C files clutters the docs with internal
+> > > > > implementations, when most people just want to see the API. The w=
+ay
+> > > > > U-Boot does things, it is easy to see the internal (implementatio=
+n)
+> > > > > docs by looking at the C code and the external functions by looki=
+ng at
+> > > > > the header files.
+> > > >
+> > > > Or it makes things harder to understand because the human readable
+> > > > documentation for a given function is separate from the file the
+> > > > implements the function. This is possibly why in the linux kernel, =
+where
+> > > > we borrow "kernel-doc" from, documentation is frequently in the C f=
+ile
+> > > > which is then included in Documentation files (the type you objecte=
+d to
+> > > > in the start of this patch) which include additional human-readable
+> > > > explanation of the intention and usage of the API in question.
+> > > >
+> > >
+> > > For static functions we will continue to have function documentation =
+in
+> > > the C files and not in the headers. I personally never looked up the =
+API
+> > > documentation in the HTML docs but always in the source.
+>=20
+> Same here.
+>=20
+> > >
+> > > I am not opposed against moving the EFI function documentation into t=
+he
+> > > header files. But we should update doc/develop/efi.rst accordingly in
+> > > the same patch series. This is missing here.
+>=20
+> OK
+>=20
+> >
+> > My point is that the linux kernel is about 60% C files and 40% header
+> > files being kernel-doc'd in to documentation files and so "U-Boot
+> > doesn't put documentation in to C files" seems like the wrong approach.
+>=20
+> U-Boot tries to document functions in header files. At the risk of
+> making a blanket statement with thousands of counter-examples, that is
+> not so much the case in Linux.
+>=20
+> To a large extent, people developing features in U-Boot rely on the
+> header files to see what functions they can call. With the
+> documentation there, they often don't need to look at the source. I
+> certainly don't, unless the header-file comment is inadequate.
 
-Regards,
-Simon
+I think this is a case of what you do, rather than what everyone else
+does. We want to be more like the linux kernel here, rather than less
+like the linux kernel, given the number of kernel people also working
+here. If Heinrich is fine with re-arranging everything, OK. But I think
+documentation with the code makes it less likely to get out of date,
+both in terms of intentional changes and bug fixes.
+
+--=20
+Tom
+
+--TF5XHdfn4VAuhIgV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdHKXwACgkQFHw5/5Y0
+tyx7AQv9E0xab5z700DymYnCuR3prR7eZYHJNJMiWQSswBxsLNhH5BMAz7+PQuAg
+tt286nBUDlZbB6jAFdj0AjpCtfSQ60HNaAxZge3X4I2PsOuzg/R6v1jVt6dJZ2/o
+H1gsNLfh4v9v9+TwhBbLAI8jnUuIGXwcgmWikZ3kw7jI7hEYQVidqFLxEtQHzudP
+RbuaX/fvU/Y+zmVmjWvwNmxbANYi4ewJdtk4DN/7abuqoIctPBkps2bO9TYcOIUZ
+JjhdnB//kjhwRzqp9IqxCtIKFFFOCWyCRfci3lidaPUat8zoLdN6CsXx65AVxDPo
+MQ4rd9x2zE89jJNpRmmi3YkNXNeaT6tKSb1OYXf6+EorSHaA/R2Pb7n7cWmdqwqL
+GUPcjlO6uLuCReBm2l4bVPfrvn3NW1KUp2djWqoDNNJS7TyfyR3Z4tEZOjDnYQoT
+QnjvIfgJrXfA+59qL+aDx55Ds/Dv1JeZmI/AShHHoZ5cre7vlA60ODo5ZuxK2sos
+j6wwC6nA
+=4bOh
+-----END PGP SIGNATURE-----
+
+--TF5XHdfn4VAuhIgV--
