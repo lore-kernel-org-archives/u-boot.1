@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2503ED6ACF7
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3185ED6ACF7
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:24:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D09A1896DC;
-	Wed, 27 Nov 2024 18:23:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41BE08958D;
+	Wed, 27 Nov 2024 18:23:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HVEpJDvM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JhkS+1Y2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6961489817; Wed, 27 Nov 2024 18:23:07 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 55F0D89803; Wed, 27 Nov 2024 18:23:08 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35A73897FB
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C9378980D
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-46684744173so41873211cf.3
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:03 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d4531d1309so207336d6.0
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732728182; x=1733332982; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732728178; x=1733332978; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w4R+T0mMgyvOdQArneGnVX6+07POCZUbmRKef7Hzv1E=;
- b=HVEpJDvM7iuuMa0yng5fzuSlaGnoDDsAYB7jG3TxvUq89JIqPi/Ikt+KqOraiwp9pN
- ruRbdDUndtnGXA9O07lLzZn6Wm7I777kz/zYfzZ1EWTjNJs0RFkUwIBkuTT6zqqDqilY
- hV0R60z0pLGxIqbRx+5dOqQuEqHSsAI7umoQM=
+ bh=4yZKGpo3V98CBXIiznsYuO/LIiEdpDahL/lwFfxMw90=;
+ b=JhkS+1Y2o+Spa5GqPzH/aQtG/NnypJYBsJKiVMFoAgV2Wn3pNF+yXCIGXOgMynV6t0
+ B7X0jCTdVi64mBtg2SanYsuXLuCXnE5OGiHxyv1yYMuK1gTmHe/6QKdFWKg3VZk6ZYi3
+ 72mWblPohQRYkHWaXix5xjhgDCr5095IdKpbI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732728182; x=1733332982;
+ d=1e100.net; s=20230601; t=1732728178; x=1733332978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w4R+T0mMgyvOdQArneGnVX6+07POCZUbmRKef7Hzv1E=;
- b=RpAucbVwQ0S/ERHm2U0nCaozCEH1R2s1CTH7lanMCI27UVqhsjX9PAFK8sdR49CKgz
- X6eOXmboHAvDR1Cr9M2txLw8ZCGtdS3/7jqyXbN6F6BHKOwMcmKuAGfgzd1OqQizq44A
- YioonPGBphn5+9OZKGdyxcuMzdCnvvxoep2WvPIWmYr5iJAoKMjNvLY1X25aNKRWmS8F
- yiyqpjCm5EwKZVgomWpOj0nHkosp4HT0JxAhG0d9Ta3Y1Je0rvooXH1WunYplX3CLs5A
- +3Ddpzb6q3U0l6JPcRMrIK7mZkYFzZjpJhY8qFmmcrvNqUK3RuYufqAfnsMUYquoaPXH
- KfEw==
-X-Gm-Message-State: AOJu0Ywm+cmorD997Gyd50wWSb2Yd2PUrjGJUbRL0qBjNkTP46KEHmBe
- 7R70MkT9MLkxPWOXSq1xxv7pdDbnaKC2f60XOrwANaUQuPJ14YKve6vudI5qzgyze50ACPOqaYr
- CUxc=
-X-Gm-Gg: ASbGnctixZ4PF/yRLkVqu3DqC9ELQptYZAWmuUnMe/hXQ6XvfTBW+cPDkwxG8TM6lf5
- 7P9KKuuumMRMahEqY+cYQiM6csRvUTu9aEL64ZF23SHlMPLr11VX8p2N+aA4FjQGHtGpICFrdt5
- MbfNjFGC8gmSrxxEe8aeIGjQ5tDFDsEOFq/PVNGU5R9KWKvLxrRIRajU2HsM6fbZRC93P5FdGhu
- Q+QO9Ws7qb5HqDEgwMbKCJi9igc54WgIc85J8JbFIBD579FSyi35fxCHnpiHn58dvSLgoXz
-X-Google-Smtp-Source: AGHT+IHFsejb5cPQUPcrFBHh7PNCo/qfcLXAx7Cp1VpGCg9pBcrFrYf+c2Fp1qxYRMG1/LbSSn0qDg==
-X-Received: by 2002:a05:6214:2688:b0:6d3:6859:c070 with SMTP id
- 6a1803df08f44-6d864d07225mr67268346d6.5.1732728182105; 
- Wed, 27 Nov 2024 09:23:02 -0800 (PST)
+ bh=4yZKGpo3V98CBXIiznsYuO/LIiEdpDahL/lwFfxMw90=;
+ b=R+dleEaK8jaaLnI2MpIUCB+gvU0ocbisklTKD7mp3LI+WTxf763kxGdwZD1Pg7Ehyr
+ Sxa5s1lXF881O9+Y5FpzEl8wFOlnvg0pAx2etl82J+j/MfUe7Gd/IcTtLqVWZ/W0cqXK
+ 3jKRX7POaBCmaskvZ0sXVmoiCPNdiqMjOAgT6ZTVXurA3l7Te69fGVkx+Z0UWwaUaxpz
+ 55iEMvakT9VnLYxias2ObPq147pnppuqJZVZzDj/901zU8SDEFummC0WuVMKuMb93uwW
+ Cc29EcPg+efjhBiyst3Xt8Q2vVUtUhwVQZo57t6io+g3/uw7qCBsbEpUlju8AUzFnMbG
+ OktQ==
+X-Gm-Message-State: AOJu0YzEM+iJ4QEcz5vS2V2FjXI+0x4fz0ZaFTKHxaI/AVXn3gAx/sGm
+ wH3WiR8w/53nYPCY1zLQRdxKd/vo8LCpHtPvPnp4tAXLhLtweB+P1m7R1XhyiyWIgHi72albToD
+ Vh8c=
+X-Gm-Gg: ASbGncuTM/KzGm055DaLVqaz4DxaAv3U2EtsOGI3ShIX3vuOk5RS7kqbZ1p7dco6tmi
+ KTPW1EtE9eYYzpEoXLmRP3uKYq/35MqIRFk6WIf0pbcc7qN8lBrq+ZUXrYplmPUrOn+2H9fcGwc
+ GPvn0ZruL4l1n7FBvuZnRNT1xWOLHjkocyiMltbHV+LpVqIATrD8RbgLqyTBI4xc6NOdrT/sYgg
+ 4zSa8vuyPDP34ZFTC4VgGRuezInGDmAhVgSd2BldttrC3vEyRU0b0c8TprqdKTAo+5LUaRD
+X-Google-Smtp-Source: AGHT+IEpz98V30vlOVPqfv3gCYIoLvmhFexISlzc+iOatRL06BSamdL/Npv1CFTXjACcBVssHLMtyQ==
+X-Received: by 2002:a05:6214:da3:b0:6d4:1f44:1688 with SMTP id
+ 6a1803df08f44-6d864d4ae49mr42368186d6.15.1732728178199; 
+ Wed, 27 Nov 2024 09:22:58 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.23.01
+ 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.22.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 09:23:01 -0800 (PST)
+ Wed, 27 Nov 2024 09:22:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [v6 07/12] docker: Use cache mounts for apt
-Date: Wed, 27 Nov 2024 11:17:25 -0600
-Message-ID: <20241127172247.1488685-8-trini@konsulko.com>
+Subject: [v6 03/12] docker: Add kernel.org x86_64 toolchain
+Date: Wed, 27 Nov 2024 11:17:21 -0600
+Message-ID: <20241127172247.1488685-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241127172247.1488685-1-trini@konsulko.com>
 References: <20241127172247.1488685-1-trini@konsulko.com>
@@ -93,53 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of deleting /var/lib/apt/lists after each relevant RUN line, use
-a cache mount as is the current best practices.
+Add in the x86_64 toolchain, but do not enforce using it for sandbox.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v6:
 - New patch
 ---
- tools/docker/Dockerfile | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ tools/docker/Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 90c90bd05f0b..bc8d1ebbb1e8 100644
+index 967ac89fbde8..0f6890b78218 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -10,7 +10,9 @@ LABEL org.opencontainers.image.description=" This image is for building U-Boot i
- ENV DEBIAN_FRONTEND=noninteractive
+@@ -27,6 +27,7 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
+ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-riscv64-linux.tar.xz | tar -C /opt -xJ
+ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-riscv32-linux.tar.xz | tar -C /opt -xJ
+ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-sh2-linux.tar.xz | tar -C /opt -xJ
++RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_64/13.2.0/x86_64-gcc-13.2.0-nolibc-x86_64-linux.tar.xz | tar -C /opt -xJ
  
- # Add LLVM repository
--RUN apt-get update && apt-get install -y gnupg2 wget xz-utils && rm -rf /var/lib/apt/lists/*
-+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-+    apt-get update && apt-get install -y gnupg2 wget xz-utils
- RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
- RUN echo deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main | tee /etc/apt/sources.list.d/llvm.list
- 
-@@ -33,7 +35,9 @@ RUN wget -O - https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/x86_
+ # Manually install other toolchains
  RUN wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz
+@@ -280,7 +281,6 @@ RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
+ RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
+ RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
+ RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
+-RUN /bin/echo -e "\nsandbox = x86_64" >> ~/.buildman
+ RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
  
- # Update and install things from apt now
--RUN apt-get update && apt-get install -y \
-+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-+    apt-get update && apt-get install -y \
- 	automake \
- 	autopoint \
- 	bc \
-@@ -118,8 +122,7 @@ RUN apt-get update && apt-get install -y \
- 	vboot-utils \
- 	xilinx-bootgen \
- 	xxd \
--	zip \
--	&& rm -rf /var/lib/apt/lists/*
-+	zip
- 
- # Make kernels readable for libguestfs tools to work correctly
- RUN chmod +r /boot/vmlinu*
+ # Add mkbootimg tool
 -- 
 2.43.0
 
