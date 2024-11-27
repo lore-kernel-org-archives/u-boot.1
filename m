@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9BAD6ACF7
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25A62D6ACF7
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:24:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5EA48980D;
-	Wed, 27 Nov 2024 18:23:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FBA189817;
+	Wed, 27 Nov 2024 18:23:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tvVcZXNV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ADo9z2Rd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3E5289817; Wed, 27 Nov 2024 18:23:08 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 84B3A896DC; Wed, 27 Nov 2024 18:23:09 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49D36897E5
+ by phobos.denx.de (Postfix) with ESMTPS id AA0C4897E8
  for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:23:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6d41b1e842aso64996d6.2
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6d40bdbb59dso86926d6.3
  for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:23:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1732728184; x=1733332984; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RCZ1PCz0aKxKh/Q4ZMD1v9aKoKeJ0Q6Y0Zvra5tWrzg=;
- b=tvVcZXNVUZK6hzfwN5FKL9czijHMC3zRn13kWRFDHrJPcmO7ceCVvS5UZN32fTFHCT
- iZO+NGF5Rlx6LxMcq/yT8goIKVJoM8wkZvOUxgZWIe5Y25vXHQj96cqYT+NlMgyTboy9
- OWxQVDjClMPyp7bcTGsFq02E+UBccO/LLnC8w=
+ bh=wexM5h4hYWUtNGORvMUiRfWBed9uzLUYrA7wwdjbd5g=;
+ b=ADo9z2RdOWdOvFt5GNKZkkffr0tOR5FdMsF5pggCqOWckXNZ6UkdG0115aW2Of1PDb
+ 2FnkkfK5gVgLbWsPyytOOyHer2iR6tYq0awM+6071oGalkl8YiVnrLQgf4Gd0CiuA7FG
+ Ht4x2vTTRcz+XHz9Talb4CjuQsCA9xpBFFxwM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1732728184; x=1733332984;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RCZ1PCz0aKxKh/Q4ZMD1v9aKoKeJ0Q6Y0Zvra5tWrzg=;
- b=i6xquLlT7zo4TpgUhTQ2e2NTeGHFbyPL9OS9qCjRNqgU/XkuqRbffVeBI+/x2/ZYC/
- MHShK57zOmZBh7VLrSpvVEn1JKPN4TY6M3c9gwTOWvv3S71HO4f2ocChkdmc4HzpU9Mt
- pPPIiLMvxuk0HEZz5bnm4F1s2oxMijurzponZLEpQcXwTwEiYAQsPHPBUvA/r4Me8t3d
- Jyn2QvWKSlMhhQJth3UelpwWJMHZwZuT1iLmApnlaSRXYzJAa5/+WBLTms0I7B5Wlckx
- Ssebqj2N3IeFVLAEi+/5pCOhQ0g7dMAaVqdOwCHsA9hUeRha7+XGLDQkiWn4eeNAa/NZ
- FW5Q==
-X-Gm-Message-State: AOJu0YxeIvfkT9GNZ1m1CyfwD7zHXXsehdzxbLFCrMv5R3ce8ylP2Lah
- CeU01TQxeEIH82uTlPcpkbZutN+i/8STJVmWN5TDeq4qeHFLuI9m40h4FxGMbu2x2LIC4j6fPYv
- cWWQ=
-X-Gm-Gg: ASbGncuDBFR++i3rhzu1ArSIdurZMbPgUcpdbrTES1o39+fATwhlp6KEKb5UuKo3OSt
- 7xc0fwZJbVuvpt57qYGluJQMtnEn4spxyoga9ArSENpZaRznBux0uLzpXzijmqBMjIQvVEn3wmR
- DCQ1eD+RS1HEcLR8IZYQXq61PFEK0Eh9d9/twrD1wK7sqP/Mc4XZjU0sAVr70nZVstUg6AjoM0k
- r7KIfCDFPdO7+lEgFV7vGzQeVD9BiOfz31nfmosfybOe0CZh3nIn27eBbllvZ8fsCRLn+KO
-X-Google-Smtp-Source: AGHT+IErhWuSqFFrlLf+P6aG3QQQjamaK7JFzX56FcFFCFfpdEcl7edoHi5i0Ndl8ttiPC/SvIYF7w==
-X-Received: by 2002:a05:6214:acf:b0:6d4:22be:9824 with SMTP id
- 6a1803df08f44-6d864d82fbcmr61573556d6.28.1732728184235; 
- Wed, 27 Nov 2024 09:23:04 -0800 (PST)
+ bh=wexM5h4hYWUtNGORvMUiRfWBed9uzLUYrA7wwdjbd5g=;
+ b=D6Y05u6y4eSS0QMKhDbn+CVitKjPFbWnwA8M4tM4uvCZ6z3NKwFucX2vQV9BeRckC8
+ VQyK0bn53ZUzajfbYtqLSGh4dCC1FKXW6ybov+AimnrhmQk6ePVV1p7Lh00rM8ecAXXP
+ P9kBc78JuHSSbvJEriTwu7rCA6vX+LduVBoUgbUgG+NLP80rv7Pti9+SbmZ+lY6ZIQ6F
+ 52EjYNzEeTOFSv15KlVrVRayFAGySDuY8UkWBeMCjHFEG2Tf/UDst07UjSJMNBVpvKGm
+ nq+UHcityCJp55PcpfLnVnzyre5uRbnxLCgWviXJUuFT6uC+pNNN5rPuQ1bEtyv3hH8c
+ f+eg==
+X-Gm-Message-State: AOJu0YyTc5iyY56cAEB30Pw6BAvM0nUfbEx7QaKeljKZmoxSQRgGwIke
+ aBivfbwzMkWo6BnBuY8eRJKEjZte/vUzojXHM3KgXGUXBFIztoYu3o3uz+0RuIVLZyggzhd4pGs
+ cFKY=
+X-Gm-Gg: ASbGnctRYN+kRAj4UWbmoTQ35F531hbzOvsvLNTzAvc6ub+5HqnGAZ5uRQ5i7YuBhgW
+ TQfm60cA0L7mxMSNCK2q0q0/SxVftEM6LMh5yTGXP/hdLiU52H2+udBZZkaz3tcs3QgCFe7syPx
+ 9uW9p24gxakJoFYjSnFiJPqhkUgyl+FtEMycM2TI2vq/JHQgjiShWZrKt03nf8OYQD+ygFUSRLr
+ ZFRy6vsxaYz3Dc2gnf7dbXrcJzzHja/l+Vh2m1vTRx2HXEe0XIC1MP7tantFPlUjZBxSMpK
+X-Google-Smtp-Source: AGHT+IHf1bbSPmO20uSQ8RJInBLr5uUETlN09iBNtl4NW7YqTNahUGeqcQwAip147TUwrgbjCp0zwg==
+X-Received: by 2002:a05:6214:4018:b0:6d4:36ff:435a with SMTP id
+ 6a1803df08f44-6d864d51c27mr40611636d6.23.1732728183069; 
+ Wed, 27 Nov 2024 09:23:03 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.23.03
+ 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.23.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 09:23:03 -0800 (PST)
+ Wed, 27 Nov 2024 09:23:02 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [v6 09/12] docker: Adjust installed packages slightly
-Date: Wed, 27 Nov 2024 11:17:27 -0600
-Message-ID: <20241127172247.1488685-10-trini@konsulko.com>
+Subject: [v6 08/12] docker: Support building for multiple architectures
+Date: Wed, 27 Nov 2024 11:17:26 -0600
+Message-ID: <20241127172247.1488685-9-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241127172247.1488685-1-trini@konsulko.com>
 References: <20241127172247.1488685-1-trini@konsulko.com>
@@ -95,40 +95,81 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-We no longer need to install libc6-i386 so we can drop that. Switch to
-installing linux-image-generic as that will be available on all hosts,
-to provide the /boot/vmlinu* file that's requires for various tools.
+Add instructions on how to build the file for multiple architectures.
+Add a message indicating what is happening.
+
+Update the documentation as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v6:
-- Adjust further now and reword the commit message.
+- None
 ---
- tools/docker/Dockerfile | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ doc/build/docker.rst    | 23 +++++++++++++++++++++--
+ tools/docker/Dockerfile |  9 +++++++++
+ 2 files changed, 30 insertions(+), 2 deletions(-)
 
+diff --git a/doc/build/docker.rst b/doc/build/docker.rst
+index 45659b3b89dc..5896dd5ac4a6 100644
+--- a/doc/build/docker.rst
++++ b/doc/build/docker.rst
+@@ -1,11 +1,30 @@
+ GitLab CI / U-Boot runner container
+ ===================================
+ 
+-In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.  To build the image yourself
++In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.
++
++The docker image supports both amd64 and arm64. Ensure that the
++'docker-buildx' Debian package is installed (or the equivalent on another
++distribution).
++
++You will need a multi-platform container, otherwise this error is shown::
++
++    ERROR: Multi-platform build is not supported for the docker driver.
++    Switch to a different driver, or turn on the containerd image store, and try again.
++
++You can add one with::
++
++    sudo docker buildx create --name multiarch --driver docker-container --use
++
++Building is supported on both amd64 (i.e. 64-bit x86) and arm64 machines. While
++both amd64 and arm64 happen in parallel, the non-native part will take
++considerably longer as it must use QEMU to emulate the foreign code.
++
++To build the image yourself::
+ 
+ .. code-block:: bash
+ 
+-    sudo docker build -t your-namespace:your-tag .
++    sudo docker buildx build --platform linux/arm64/v8,linux/amd64 -t your-namespace:your-tag .
+ 
+ Or to use an existing container
+ 
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index 43cd37070e48..5d3bd4e24ab5 100644
+index bc8d1ebbb1e8..43cd37070e48 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -77,7 +77,6 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	iasl \
- 	imagemagick \
- 	iputils-ping \
--	libc6-i386 \
- 	libconfuse-dev \
- 	libgit2-dev \
- 	libjson-glib-dev \
-@@ -95,7 +94,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
- 	libtool \
- 	libudev-dev \
- 	libusb-1.0-0-dev \
--	linux-image-kvm \
-+	linux-image-generic \
- 	lzma-alone \
- 	lzop \
- 	mount \
+@@ -6,9 +6,18 @@ FROM ubuntu:jammy-20240808
+ LABEL org.opencontainers.image.authors="Tom Rini <trini@konsulko.com>"
+ LABEL org.opencontainers.image.description=" This image is for building U-Boot inside a container"
+ 
++# Used by docker to set the target platform: valid values are linux/arm64/v8
++# and linux/amd64
++ARG TARGETPLATFORM
++
++# Used by docker to set the build platform: the only valid value is linux/amd64
++ARG BUILDPLATFORM
++
+ # Make sure apt is happy
+ ENV DEBIAN_FRONTEND=noninteractive
+ 
++RUN echo "Building on $BUILDPLATFORM, for target $TARGETPLATFORM"
++
+ # Add LLVM repository
+ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+     --mount=type=cache,target=/var/lib/apt,sharing=locked \
 -- 
 2.43.0
 
