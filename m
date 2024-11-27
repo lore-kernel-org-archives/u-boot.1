@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E396BD6ACF4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18D24D6ACF4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 17:23:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2976A896C7;
-	Wed, 27 Nov 2024 18:12:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 68A1D8961A;
+	Wed, 27 Nov 2024 18:22:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CyV5KJ4g";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="taCPj48s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09B63897B5; Wed, 27 Nov 2024 18:12:18 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3F2A4896FC; Wed, 27 Nov 2024 18:22:58 +0100 (CET)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A017A8958D
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:12:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2B938936D
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 18:22:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5cf6f804233so8146463a12.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:12:15 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6d842280932so118146d6.2
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 09:22:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732727535; x=1733332335; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HzCOpJZeY7XkuMFJJjD9XuezcXATCZ2mEPW6l1xiMHc=;
- b=CyV5KJ4g8cBKbu9wiWYwAqdLCrsZMlGOFJPot5wJ4g+OzVg0upZlGM3AKGUzgNIgof
- mWHWmLkDOWOItUt8m0NF560IzWdJOeGZPaSnHrBa1jLE91TAGH5nSastZb+WMLaT2Pt2
- 57cf0XqHdGqXCeHJfsVQojdCEs5icec2belA0N3pnN1tA0dzPDJaig2edVlwwzPDD+eY
- x3IF/w47/dtPLF+G/EsGo3AAJW/lwEqsua/19x72GPa+l/yAqJsAquTVXDjE+UuZBiY/
- rXg/pa8jdHHnS4pT/Pal/rvkZP7eKefuElwtf7hGIhjlWhQA/9DbBUR9JKQZ3VkT7Cde
- kRZA==
+ d=konsulko.com; s=google; t=1732728174; x=1733332974; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CisaVjTsXsPACKxwbYATx8Wtq1TJnfTmY6U+K7WQUv8=;
+ b=taCPj48sLX4CG5rzXzs6HQNZQ65yIDSnx84+1N0jVX4+upefFNEMP049oH7GXSil2S
+ b+I0iAWxldAxskFWyNkjGsnTtBCgsdNdHkXe0YOiHeUac9P9Z3F3196S7Ib1zB33RIZ7
+ QxjxH9Jko0B+k2K5aUnXXEO6oeGKeghKIWARo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732727535; x=1733332335;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HzCOpJZeY7XkuMFJJjD9XuezcXATCZ2mEPW6l1xiMHc=;
- b=BeOMxUAXN3X5/Oc4pqawFDpq8nbi6tMFXPc7inS0lBu8awHmM8gyvg4TvkNrUkkIbK
- RdOx2yU6gBpBlVBCHDHQeIxKw8n/1PpQRtvEJadehxEwuSUejpN1SLbutEaICylOMyk8
- QEFqMoBS1O4mtb4+fRuO0b458tIEqMZENCc10X4pRDL5lQXhy7RlGYeqnF2vF+x7kgJp
- 3yM558KyYi9DtjvXUSTajDWIo4Po4pLiOHgE2HHWEZaMeISWCyDdEv3RBJ6vKq7OHzuJ
- NLT8L4uuBO0rxmTM68yqPmd1Ld7jnV6lVjVBmjstD3vFg5ZWvR4iKbhSMwdBUa7dyyM+
- G6uA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvDLBpmV8b38ZBe1iw/A0uW2gbScvBurvr84vhjWfPn8tgIBtBCtSFJLanAJDqm6CM/TLbkVM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyu8eVXNm1NSpyRiP4DvK+QiLuLzMEeR6aDrm9tDaUgAWyqO+Af
- QWdE9jcAksNhxN2d7+VFz8UqrRFhhASEAJruzKtdYo2LsLp7oWC4jA2pyGz8scE=
-X-Gm-Gg: ASbGncuGKxQXDYzbQYG8Iq4DXlAOgBQzwHaHpHw6i/I4+4Ot0tvITHnva1X27qH10dF
- 25dOvROwZI62QKOtAsvRKhNuqrtm9bqzqRCS63Ee/jsQtYk9188HmMq58QWIkbPZ8jDS5iN7Gya
- u8cWHyDSpwyp7WVe2blyodOJSmUa4Xye/b48L2YKvdmUYmCWWLprpcARdPrPNkl0YEBFwLc9XtM
- pT/O7/ZEf2mJUXiapatQE23rc1I/x7gLP2DcNd6U6AIkmFVtK8ZRPuPAQY8Il+Vi1dM/naiBb4X
- vaSCsZMfSP9HJBZIGOLhxlznCnydpwUq
-X-Google-Smtp-Source: AGHT+IGXg0jc37eLvs64cXRdI9Qrd1zjqIpCm7TT7YS6hQeswJEnydVD4Z7I9HiYraQBDToPqNhcNg==
-X-Received: by 2002:a05:6402:5210:b0:5d0:81dd:4886 with SMTP id
- 4fb4d7f45d1cf-5d081dd48b6mr3208021a12.26.1732727535063; 
- Wed, 27 Nov 2024 09:12:15 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ d=1e100.net; s=20230601; t=1732728174; x=1733332974;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CisaVjTsXsPACKxwbYATx8Wtq1TJnfTmY6U+K7WQUv8=;
+ b=OimMqxYpUeeXViz9DlU0CATU8jCR/zsmyC0J+EHnZIYfuo6OS/6XcVoPwNmVMOGTOI
+ az7x5KcoxwrtOriOuppHdcbHiL+Xl4kBm/O3zRGkJefdF6QZg52W2GTcKnhqw9u3+ChP
+ kmk3G5857YSWxnPSEg16JrQ0tjin/ZMYSzAdG+e2OTQFkzOW8nMIKE903cA732Vi5eNt
+ g5dDm/cbwY6BmR1LC9mkvmr+W7p1N0IaXEN/EO8qZNxRN/Py63U2NSpfyiwOlzV6D8Sp
+ uMfekrmlPTS4l+NHClZ7k2cLrNmlnVVv9GwDmHA+Igxo2u/BHeE0svse+OG4sUI0HNA4
+ YTTQ==
+X-Gm-Message-State: AOJu0YzS66hE6ghlvwqaaVsgli7DXQ79kByl68v6FHYiZaBb0Y1X/aRW
+ oRPUzbz1imzwLRKyZ6eVCgY3bh6VT8VnxTJ8EZ7FRw4u3Eaw0BxxTGrAKmFfJNADlERHzG9fzpn
+ TMLQ=
+X-Gm-Gg: ASbGnctO62/TgfWq53xF29pgJTgzAAh1+0cNXeHBj1bTlreosrONVgd+75B7PckdlJM
+ D6/mbQNounHrrm3LaP7+SZuQIdRtWyB0D4fg/9tSaCWhO1DYqTZVlNjCtjeNVbrUr9lFDH7W1Xo
+ puE1Egma0Oallo78hrqc0JX62Aj9rGxsYPggj2ssC3EWUdbLsVM6VecYhWC3IAJIkgAP92XSiJ2
+ W5rVOKy5wcPhPuKAioC76xDRX9ibeO5CJCS14jZ3omVVqApYbGdzPPgXYmTCmBmgV42kUmA
+X-Google-Smtp-Source: AGHT+IH0HXJcCkCIt1fdzgqQtUnaXx0jyIMK+iKta5ebNK4DqD2aRzZ4J21g7GjHDtTQlS8u7Degjg==
+X-Received: by 2002:a05:6214:2424:b0:6d4:e0a:230e with SMTP id
+ 6a1803df08f44-6d864d26013mr57643646d6.16.1732728174642; 
+ Wed, 27 Nov 2024 09:22:54 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d01d41a5fcsm6329677a12.78.2024.11.27.09.12.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 Nov 2024 09:12:14 -0800 (PST)
-Message-ID: <d89d7d04-8ff9-460d-844f-c85129c5ba77@linaro.org>
-Date: Wed, 27 Nov 2024 18:12:13 +0100
+ 6a1803df08f44-6d451b23e25sm67160976d6.89.2024.11.27.09.22.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Nov 2024 09:22:54 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [v6 0/12] CI: Set up for an arm64 runner
+Date: Wed, 27 Nov 2024 11:17:18 -0600
+Message-ID: <20241127172247.1488685-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: core: ofnode: safely fallback in ofnode_lookup_fdt
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, Jonas Karlman
- <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20241113052050.1862420-1-caleb.connolly@linaro.org>
- <CAFLszThAmn_NU-PoYopjx17Bk6QxgbFaCWJjKdMAG5JzLJWdEg@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszThAmn_NU-PoYopjx17Bk6QxgbFaCWJjKdMAG5JzLJWdEg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,66 +90,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hey all,
 
-On 27/11/2024 17:52, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Tue, 12 Nov 2024 at 22:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Under some conditions it's possible to hit the null condition here like
->> when running with OF_LIVE and using the ofnode API before
->> initr_of_live() is called. There is very little null
->> checking for this in the FDT framework, so returning null here can
->> result in weird null pointer conditions.
->>
->> Instead let's return the control FDT in the fallback case, this is
->> usually what the user was expecting.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  drivers/core/ofnode.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
->> index 950895e72a99..7a7f25fc537c 100644
->> --- a/drivers/core/ofnode.c
->> +++ b/drivers/core/ofnode.c
->> @@ -152,9 +152,9 @@ void *ofnode_lookup_fdt(ofnode node)
->>                 uint i = OFTREE_TREE_ID(node.of_offset);
->>
->>                 if (i >= oftree_count) {
->>                         log_debug("Invalid tree ID %x\n", i);
->> -                       return NULL;
->> +                       return (void *)gd->fdt_blob;
->>                 }
->>
->>                 return oftree_list[i];
->>         } else {
->> --
->> 2.47.0
->>
-> 
-> Eek I really don't like that, since it will silently return an
-> unexpected value.
-What's the unexpected value? The only caller for this is ofnode_to_fdt()
-and the return value for that is never checked. It seems clear to me
-that in practise NULL is the unexpected value here.
+This is picking up Simon's v5 of the above-named series and making a few
+more changes so that the follow-up series I have leads to arm64 being
+supported for almost all jobs. To quote Simon's cover letter:
 
-> I think we should panic. Do you know what code path
-> gets you here?
+All gitlab runners are currently amd64 machines. This series attempts to
+create a docker image which can also support arm64 so that sandbox tests
+can be run on it.
 
-Hmm, I don't exactly recall. Should really have made a note when I wrote
-this patch :/
+The TARGET_... environment variables for grub could perhaps be adjusted,
+using the new variables, but I have not done that for now.
 
-Guess I'll drop this from my dev branch and come back when I figure this
-out again.
-> 
-> More work is needed in livetree to sort of the rough edges, sadly...
-> 
-> Regards,
-> Simon
+Adding to what Simon said, we now build grub for all architectures as
+the reason to install it was to be able to use the binaries in QEMU.
+That won't provide us with amd64 binaries on arm64 hosts so we can't use
+that shortcut anymore.
 
+Changes in v6:
+- Re-introduce patches dropped in v4
+- Add x86_64 toolchain
+- Move to grub-2.12 and then build that (with -j$(nproc)) for all
+  architectures
+
+Changes in v5:
+- Drop the comment in the gitlab file
+- Add back a final missing sudo
+
+Changes in v4:
+- Leave the 'sudo' in
+
+Changes in v3:
+- Move ARGs to the top
+- Revise documentation to explain a common error and building on arm64
+- Use grub-efi and linux-image-generic for both archs
+- Add patch to install toolchains on arm64 host
+- Drop patches which remove grub and tracing for arm64
+
+Changes in v2:
+- Update docs also
+- Add comments to the ARG variables
+- Swap order so that amd64 is the exception
+
+Link: https://lore.kernel.org/all/20241115134807.3068947-1-sjg@chromium.org/
 -- 
-// Caleb (they/them)
+Tom
 
