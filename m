@@ -4,158 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD2B9D6ACC4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 12:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607ACD6ACC9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 12:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35427897B1;
-	Wed, 27 Nov 2024 13:42:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id E2776897CC;
+	Wed, 27 Nov 2024 13:47:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="g4ZKkncK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VLN1a+F4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F1AB897BF; Wed, 27 Nov 2024 13:42:56 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::630])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D3AFE897D5; Wed, 27 Nov 2024 13:47:18 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C9C8897B1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 13:42:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 1F1FD896C7
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 13:47:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pVpSBNdgFhZjybW4FJnWZioxudtImHM6xsk/iwXVqi3vYyl0vEtKfIsTetQv5hH8TbIJ1oeYbx1wixN7gdqiKQ8dqsvrGdu3bsxBvfwCd5J/JWbRiHYpInZsTubwixV16/N68cuvCdrmvZUSqr5+oFX7d8rKGL9Queqxnuuz9QqSitIgRUGGY5oAjDOmJ2rROuyqA+rSAv5glK/jc+UNHqSTtjzGS4DCWkV0zd09Crzv2dnBz6v2aH1/ABg7npl+dTNpxUN2OWieIgrGljCc9Agw/nvtx3pCWMiY38AgjKLrFSNXZmOrIijIZi6ZLWC8CvPfwhMiqeNEAajqwOl/yA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X3/QFgNlMq4fL22iFMWNewzqaVjAEulfWfw/hfwFn2E=;
- b=jT4RenySz/guQnDFw1MAi6YhaSdXlwberXygFS9OP5D0/MRrlX9fGf3EYadJ6O1TXTcC8TMcjlIaMttxi+/wBT7vGhr/t9gP1BFXc5OfFT1xOMR98/vIBEGm0i4QlDxJePnuGnGPDOBIWjVpe9YVrQyLwOK7Xco9rwF25gbe/yR5etiYHR9tJX3OYqTJzww5mAEnFH+xbe5zbWGHAfhXyR9az0zMzZugUsep3hlCJaIWqAGPef05uv1xD9xZL/Dc/+cW+AgKYNGWUX+yUSo1jJ5jxdxOUENLUoclGJKntxg6XMBYVhBGUH+xz2lpeBYdbiK6dc3s24LFC0nA/Lhudg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X3/QFgNlMq4fL22iFMWNewzqaVjAEulfWfw/hfwFn2E=;
- b=g4ZKkncK8T0gA1FNi4Dg2bt5y54TpoHGMiQXm9gwyNkEQ6PTW4CC4cGZLvsexG7Y4TTi2pQ8p5/4e3u0hJvxeXAdOrW8+dhDQFxSF427WnELwaDGWBHfkEutozZlfMP2D9FYGRMQgqc340G3zcYQD/vCbzyKW8aeo4EDhN5TCt8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DB8PR04MB6827.eurprd04.prod.outlook.com (2603:10a6:10:f8::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8182.21; Wed, 27 Nov
- 2024 12:42:51 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8182.019; Wed, 27 Nov 2024
- 12:42:51 +0000
-Message-ID: <7a713b05-030c-48ae-af3d-e7fb02b2f7c5@cherry.de>
-Date: Wed, 27 Nov 2024 13:42:50 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Makefile: avoid non-standard sed expressions
-To: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, marex@denx.de
-References: <20241126191214.21709-1-kettenis@openbsd.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241126191214.21709-1-kettenis@openbsd.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0104.eurprd04.prod.outlook.com
- (2603:10a6:803:64::39) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ffd6b7d77aso9273161fa.0
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 04:47:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732711635; x=1733316435; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/4CpfASXQC8TCoIO25yW1YG+eR67nHG56IcEIRCra6A=;
+ b=VLN1a+F4+Hj/gEEuAgPeUgLG7CHt3M8gY3u+riGxs51L4kix3hrta/KIp2DVAkFpO3
+ t010B8TEbsBReZHKSoqN9WhctXTGhVr4adMItRANonKUnBVp+yDFB//UL5EuJ4xNi6Km
+ jzyu2bU6VY1de1FRb1QSTSrIWzwhr63hS+UZnazJx/bijWr2KdfWsuP/evcYUvUDVIfo
+ rnMddsgcazqf8GaHgj5gDoUzAqhH8T8nAyW1XIMSoxRqR2HTCXpsjNvYCVMlLfMBF0/0
+ wCoifdqZauobBqqGctX2iGzEDfkfX2Tih354ZxL6we7fDZnj7BQma7hBFjLzKPCMz5Da
+ WATA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732711635; x=1733316435;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/4CpfASXQC8TCoIO25yW1YG+eR67nHG56IcEIRCra6A=;
+ b=B5HjCynqS/pDqZCpFYEJfoLqRfwNE0F/jyLdSLdTjgXTl2ar6UaS+TPblk7SKUWdGM
+ 5093CyX+lQWyPG7t2aG9Tv3yMxz6zBjC2PKYhiGaHbZgTXFC5fMaz/jfChBeEGFEFSsr
+ Cg4jHZqO6DZDGjsoBp9N2CjkJ+cTvymT/Kek8JY3sbs+qLCpFEvkdF9L0H9olLx2sKCj
+ SyQ+qFkp7wAq+hCGWP0afwfn6bl+Uuk6UCbkf7y724ErP5kPJGEJLsp+SKdcAWk7c9xW
+ Yen2PmsxR3l1IfZ2lt5TqWuPXI6M25PVubGAEpIBc5xbfd0+p55gHnRkma6uCoOI4u/w
+ Mxjg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXw6za3fnJn+gIpxYoPgVCm1YQ6hHZ6EyeVZSwrCdXqjRB1pXVNweRWs6i8H+BksF+XBvsFvzA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRfTRHc6jsXtNvzn+yH24fe2SGGByN3Uolkdk0KW3TvFmPw0J/
+ JstDDiexAyG3/dAvxfyK6kf5/whYz2p8LRJCPZTB5u5nd0ofXdvePRe4PDbaa7PEZPOkHEL5LoE
+ s3zyR/xWxGx8PDe+LU7b95hM5krDfEw+T
+X-Gm-Gg: ASbGnctE6KoR6HW0ZOyK/mzrUnrbLwwfX/+XxcaYjemvuni6J3tqpemE7idbhejO5+z
+ pT7wdby8pF4MyaLLVPqmJDYna1Gn59AZ6Io4jHwodxe6GJAmFlZ83WmnLKEdSyHg/Ww==
+X-Google-Smtp-Source: AGHT+IHkrOQI4qI/LT96/hZWP5XNMj4AJ6D0SX0HxDP+wfX47dzwUscJFru6wH+zManOEeHYmJM0uQn8rkE5chep6iY=
+X-Received: by 2002:a2e:a9a6:0:b0:2fa:cc86:f217 with SMTP id
+ 38308e7fff4ca-2ffd610d26emr14142381fa.35.1732711634806; Wed, 27 Nov 2024
+ 04:47:14 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DB8PR04MB6827:EE_
-X-MS-Office365-Filtering-Correlation-Id: 68886c12-5ce2-44a8-04bc-08dd0ee10185
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|366016|1800799024|376014|10070799003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZnNTQXY2UUh2OURLU1dsOVd0RWNWY29BcVhxMzZkcHkyZUgydGo5VGxBaisv?=
- =?utf-8?B?WUVNR2dQdE9LOURzeUJRM3VlMmQwZFdYLzlGWjhWNDNxcUNQbGI5Q2hrKy9s?=
- =?utf-8?B?Nkl4NW1kOHhyYjNBMUtmVWtFakRBWXJUWk9OSkw5ZE9VWUU4NG5KRW94bzlW?=
- =?utf-8?B?Ynh5dzdoam1tZkdsL25hby81WGtBdFM3T1p4dkdBQWtMRFdwVm9zTDUvWVBN?=
- =?utf-8?B?cjdvc0s5UFNBazNtaEVFanEvRGJuakZJbFArNGZPYTV2N0dXMkJRdTc3d3BU?=
- =?utf-8?B?UGVFMysxTHY2VTNuakliM0pGUnFJLzYzQVkxVlp3dFhncnk5YXFibmxqYUow?=
- =?utf-8?B?SEhIdVg0OXZWWmE1SnNYb1lxRkVubnJnLzlJVVFEajZXVXpyZkRTU3UyOEtl?=
- =?utf-8?B?VjRNRlM1ZEtQUUJjaW9pYUVDTlk0aUpEV0JQVTE0MDhtNkVmeHRiK0puamQy?=
- =?utf-8?B?WW9LOGQ5UlNXRTB2d0hNN3hlVmx3c25vYWI0Z0ZtSU9aYjhvc3RiaEtHc1hD?=
- =?utf-8?B?dzJBWVc0elpVa1crZU9uUFJoTVNTQmFZN0E0eDl3ek9ubzZVcU51a2s0U29y?=
- =?utf-8?B?Vzh5bEhIM3VPSWlCNFVCYnkybXlhNFhSaFlRZCtGRGs4ZlN5UkNZVlpmM3oz?=
- =?utf-8?B?NFFkQXdKbXl1emRIa3QwQWc1T01qYzFmbkxUQjFvNVVqb2dDVDNyVUxHTkpt?=
- =?utf-8?B?bWRXK2Q5cjFhdGRmUXB5RCs2WllvUENpbTJ2MG9xSis3QjlQOS92WldLUWc2?=
- =?utf-8?B?SFpyNXN0akt4UGdoa2ZXNVJaT1p5NytRZTRDekRjZ2ZyajRNaHlhcTF0SUZ5?=
- =?utf-8?B?Z21pV3lJUS9FazI4c253TkxjWXY0K1JGWjJDTytKWjZMaXVoeGxkN0E5OFMy?=
- =?utf-8?B?dTRlSStjUCtqRGY5TS9iWDhHOWNoQW9hdjdzRDRHTSs3N0toWFZNbVJVS0hV?=
- =?utf-8?B?VDNIRGNNTXlsdGdTOEVmRGNQZitHOEU4UVVrSlBTa1VNWTZsVXZJcUFlK2Qr?=
- =?utf-8?B?dlpVdGp1SGdMdS94UFNDYmYvekNJcmxWMktpTEg5RFM5OFN1Z0t6UFd6QzlC?=
- =?utf-8?B?aHRvelpEQzBrUVRpWDdGWmdnUm9NM2VoRFczd0xQZk42OW1JZmt0L3hwTnEy?=
- =?utf-8?B?UHJKUUtsYjF4NXNuMGwyTlJDc1J1WEZZNkpKK0RYdFBDb3hmb2Y4eXpqa3F6?=
- =?utf-8?B?R1Q1Y2xTWlpTcTdFU291b3ltL3FYK0FRaGRQUERuRzRDTmVmVFNSRlJteEtw?=
- =?utf-8?B?Z1JDTzArYkFLV2E4ck9Bdko4UDJUVkRxZ1VYckJlRUJHR0pVWlNUb21RUjlM?=
- =?utf-8?B?Q2xHNnR6OEQxSlBxT0NhRHVuMldQcm1CSHM5NldMTXhpeTVzeENBcjBxZm5G?=
- =?utf-8?B?U2hKdzdUTHZteVg2REQ0a04vNDRObTM1NTJzcTlmd0xCanhmMkk0VXJYUDRr?=
- =?utf-8?B?Q2VsQjBqWGV3UDNDOTRqWUgwcW81ZExYa0xJdEdIOWRKMkpiVHB4bFViSm4x?=
- =?utf-8?B?cThaaE9CbnBKNnRtTi8xUzNvVjA3UXV1d0g3ZG1FOFZZTjdOVzhVRjFicnRo?=
- =?utf-8?B?cXZLQU1YUmxRNWZPOEJlR0RuUnJ4SGVqMDh0eng3SS9yaklQMWYvblpTUWVr?=
- =?utf-8?B?bkMwMktNaGREQ28zNUdsTm5RRmVyMXZOUnRwTEcvdDZHLzZsZXBlRkNBbFVq?=
- =?utf-8?B?WlE2VzZZZlNiRFVjTTBjWFJXL1lUVlpsUWNkTjQ4VHVFVGpST09pSHppYUJQ?=
- =?utf-8?B?cHhTK0pUR1ZvL3lOSWVCUVdHcWROMUo1SE9nd0hhK0dSTEJVMUVxc3AxaVpD?=
- =?utf-8?B?M2ZBK2lTd2tQTDJLaHpoUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(10070799003); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?enNrRUZIY0dSVTBGSHNPQTZZb0Z5Y2JUZE04Ny9Nck1uakdhYjNydVBoSW1p?=
- =?utf-8?B?b0tIKzlzUHluRXBieGsybS9EVzhZcmUxV2o3M1ZiUmxzcUNqZ0NEdGNJSTdK?=
- =?utf-8?B?Mng3OWFCMlhoK0N0d1doeGtLa0xRb2Q2TXpzcXhiUjQxUlJKZ3FVT3FwNlcx?=
- =?utf-8?B?NTFLd1B4MDU5WkdGZkhpNGk3aXRkZTV4M3ZmU3Bvd2JlVzVlak9tZXlndHJs?=
- =?utf-8?B?c1IwdVFHV1gvTGVra1hGVWU4TFc5NnFvTHdZMkNFL2FFLzNFUUcxM3lVUlVF?=
- =?utf-8?B?Q0xPMjBXOVNXUjkxQ1lzekJBamNoVENpbzlsaklkT1pmTm1zK1VnSC9mNGVo?=
- =?utf-8?B?SGk4TW1LeGZ6RitEaERucW93cFcvUXJkd08xMWU4YzBYbjlpWTFwaDcvU2dn?=
- =?utf-8?B?VHcwSzlDbkJhUFJqcG1rNFo5azJEYnNtY0JGejdnRFl3Ujd6dHZlUU9oa1NO?=
- =?utf-8?B?QWtiaFBlZEM1QmxSN01sWnFVUFZYZWg0eXlOYUc2WkVtcG12dlRIV3dlbERx?=
- =?utf-8?B?NjFZQ3BtV0FKUUpUdG8vdVY0eGlsTnlxMVZXMjc5c2hsbWoxR2NJdG81VWZp?=
- =?utf-8?B?cDlDTWFzZkhxbWZ6bXhDU0Z2R3pLTGw4VFpYZUJQLzh1M0RQVHQ3RjNlQkRy?=
- =?utf-8?B?elBBUklOa29RZm9aT21rWlZWL282aDJRU1BRcGpEMXF0T2gwVFJUWVB1MHd5?=
- =?utf-8?B?L2pYZGg0Z25FeEs5UjZwbm9GZFE4U3RjU0o1ZjBxUVFMWmphWlJ5RHJWYUVi?=
- =?utf-8?B?TzVGcDd5T2pBTHl3cnJoMlZpNXNZN2FpaHJrV25vWklkRUVZWk5KVUtQZm1C?=
- =?utf-8?B?ck44MXFKeGNRbTc5TVFycDdDWXBvcGQzOExBMnFtZmV4RVAzL1RoRXVJWFoy?=
- =?utf-8?B?bG1jWU5ndVIvZHRwTFBCYWMrekxvYllwekE1RlZ5VHRvZTYwdzZheGlsbGlR?=
- =?utf-8?B?Yk10RmEwSEcxdVp4b0FsbTlqL3dPU2gyU1c3Nkp0eXJvNDQ5ZnZKY3NTQUdR?=
- =?utf-8?B?TnQzOGoraEcrVWVVVWkvTzBzQ3hEUi9JVFdZNHZwSEtWQlNWdStkZzhTd2x1?=
- =?utf-8?B?QWI5eHhrMkdaalZwQ2wxa1lxRVRIRUo5Q0cyTVI4cnp3RWxVOHBFSnkyZ2Y0?=
- =?utf-8?B?MHl3MzFWbjJUQWpQWWgrWUd0Vzk3MnNDajZzeldZMTNkRkcvanpNZkZWSnU0?=
- =?utf-8?B?SmU1YmNhRXorVXZXZDIyTXMySmhiNVczLzZJSEFTRHY1NUVvRnFKRnJiem1H?=
- =?utf-8?B?UlQzV1ByOUNCdjJqRUs5MVJiVDYzYVZ1NFB1R09heTlLVDROY0NRUlQvZHFX?=
- =?utf-8?B?NThINEVtZUwzVi95Qkl3TlRCZ0Rib1JxRVRtNGUrZXBoM2VteWptNm9IajZS?=
- =?utf-8?B?L2RPeWcxL1VYV2xlK3pybllyZTBnSTZaMFNnZDV0V3VxdG9QR3JJcEZvQUVj?=
- =?utf-8?B?ak04RGJnWFdUaEdLVFY2RFdYWXZ5U1U4WHV6aTU3eWtJK3RzclhYMjI2SXhs?=
- =?utf-8?B?QnBTMEx6S1RPTDRSREwvT0ZGSG9qbml2SXZpeDdYOEdBYlhsS3FaMW9jTGxk?=
- =?utf-8?B?c0U4NWxaZTRSTFhPdEtrYVFHczY2b3AzbXJraVgzYWZGVHJMMlRWdkJXL1RY?=
- =?utf-8?B?cEZMWnRCcTJyRHNpZFVIUHUveWYzMy92aG04OTVURGlGWFdxTzJEeENLRlhU?=
- =?utf-8?B?SHVOQ0JJWURrTkM1Q1kzT3VyVXRFUnpvdjFxT0VmTGpRWkQ1SjdvWlpYVHhv?=
- =?utf-8?B?bkNtek42dnhvUnhISXkrVEN5cmVOMnRqTDJWS21DY2pxWVJYc2R4SGdJRFk2?=
- =?utf-8?B?eEVWekhINXI0K3ZUWTU4WXZFdVluUjBZQzFTWURNUFlXanBpbXBFUk02NWRL?=
- =?utf-8?B?QVgvOS9aRldLZExLN3hqNTZydWU4UTZBNXJBY0J4a2Q4TDlwMU92VitYd1VI?=
- =?utf-8?B?MW91SWNQajVuR0RjTlNZRGZITlFtVHRIR3l4ZHhKdHZXbnNOWGM5dG5WdG1v?=
- =?utf-8?B?dE82S09OQ1N0S3hRT05tZFZUZ1Bsb1dBdVBKdUFuTllMT00yMWJvaGIxZFQ3?=
- =?utf-8?B?U292K0s5M3RBd0RYU2VXWVdmMWhlUFRTTkFvcWM1aEVUN3hFRFRCOWM3ZEow?=
- =?utf-8?B?TlcwanJFMlQ3Nnd2TVZ2VXowS210WE5KSFlkcFQwTDlubmFMMEIxSERIVzkv?=
- =?utf-8?Q?d/HGmlHwVGX92agihZaPMzw=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 68886c12-5ce2-44a8-04bc-08dd0ee10185
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Nov 2024 12:42:51.4483 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: u8dJSfIo1lTZXghCSfZIv3MnaJP9ImqwFlFg1Cda1OBsefi94HyAlLHjf1+v65AuvVNe5gHic/NNd3mNVGoTp+tfex0M2bHgeLTrBh5BVzQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6827
+References: <CANV2PTN5AbNpCu4TGhZ87q_Eyeemxxwu5m=QjwKVS967x8hbnQ@mail.gmail.com>
+ <CADg8p94ohYfNLL8jbRA-hNd=fbg9PuVJvp0z-QYTeaGwHZ9q0Q@mail.gmail.com>
+ <CANV2PTNdcc61CUTF9_zammmAugjVQOth=UFPiZv3=Qw_YX5RkA@mail.gmail.com>
+ <CADg8p97RHvZG23fE8grvE5DzScT+okV-6qSHv_gQUiwggKDtJQ@mail.gmail.com>
+ <CANV2PTP-17Z-MUa8-3mcAHduxzPqb6VN-ZKZS31XkwQ-2X1+8A@mail.gmail.com>
+ <CADg8p97vUaELMimYc52bT6uVpqnLJWWfYPRJj=rJ6QDUcn8iEg@mail.gmail.com>
+ <b3279988-ddda-423f-8caf-3fa5e4192fcb@gmx.de>
+In-Reply-To: <b3279988-ddda-423f-8caf-3fa5e4192fcb@gmx.de>
+From: E Shattow <lucent@gmail.com>
+Date: Wed, 27 Nov 2024 04:47:03 -0800
+Message-ID: <CANV2PTM55_Fb4_=0sGoZ1XQo89X9_UdH3tNWp=ZcT0KSY9o+kA@mail.gmail.com>
+Subject: Re: [BUG regression in HEAD] efi: memory: use the lmb API's for
+ allocating and freeing memory
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -172,23 +102,376 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+Following up on this with some positive results:
 
-On 11/26/24 8:12 PM, Mark Kettenis wrote:
-> The '?' that is used in the sed expression that determines MK_ARCH
-> is part of the extended regular expression syntax, but the default
-> behaviour of sed as specified by POSIX is to use only basic regular
-> expression syntax.  Use the equivalent '\{0,1\}' instead as
-> suggested by the OpenBSD re_format(7) man page.
-> 
-> Fixes: 04b1d84221d5 ("Makefile: fix empty MK_ARCH when using ccache")
+On Thu, Nov 21, 2024 at 4:22=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
+>
+> On 21.11.24 09:04, Sughosh Ganu wrote:
+> > On Wed, 20 Nov 2024 at 13:49, E Shattow <lucent@gmail.com> wrote:
+> >>
+> >> Hi all, (on-list)
+> >>
+> >> On Tue, Nov 19, 2024 at 9:14=E2=80=AFPM Sughosh Ganu <sughosh.ganu@lin=
+aro.org> wrote:
+> >>>
+> >>> On Wed, 20 Nov 2024 at 10:09, E Shattow <lucent@gmail.com> wrote:
+> >>>>
+> >>>> On Tue, Nov 19, 2024 at 6:42=E2=80=AFPM Sughosh Ganu <sughosh.ganu@l=
+inaro.org> wrote:
+> >>>>>
+> >>>>> On Wed, 20 Nov 2024 at 04:48, E Shattow <lucent@gmail.com> wrote:
+> >>>>>>
+> >>>>>> Hello,
+> >>>>>>
+> >>>>>> On HEAD some commits after v2024.10 I encounter a regression for
+> >>>>>> `bootefi bootmgr` fail with error "Not a PE-COFF file";  The fall-=
+thru
+> >>>>>> case of global EFI boot is successful.
+> >>>>>>
+> >>>>>> Having run a git bisect I discover the first bad commit 22f2c9ed:
+> >>>>>>
+> >>>>>> $ git checkout -b master origin/master
+> >>>>>> branch 'master' set up to track 'origin/master'.
+> >>>>>> Switched to a new branch 'master'
+> >>>>>> $ git bisect start
+> >>>>>> status: waiting for both good and bad commits
+> >>>>>> $ git bisect bad HEAD
+> >>>>>> status: waiting for good commit(s), bad commit known
+> >>>>>> $ git bisect good v2024.10
+> >>>>>> Bisecting: 850 revisions left to test after this (roughly 10 steps=
+)
+> >>>>>> [82686e678e1587ddbd9570f82c58cdc3aecf2dbe] Merge branch 'staging' =
+of
+> >>>>>> https://source.denx.de/u-boot/custodians/u-boot-tegra
+> >>>>>> $ git bisect good
+> >>>>>> Bisecting: 422 revisions left to test after this (roughly 9 steps)
+> >>>>>> [8963d433eb5d4a9f3a9def84e9c61a45c13e72bc] Merge tag
+> >>>>>> 'u-boot-rockchip-20241026' of
+> >>>>>> https://gitlab.denx.de/u-boot/custodians/u-boot-rockchip
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 214 revisions left to test after this (roughly 8 steps)
+> >>>>>> [0a504585d1cefeaf35ae8f860a5e5aa44dfffed5] arm: dts: k3-j722s-binm=
+an:
+> >>>>>> Add support for HS-SE
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 106 revisions left to test after this (roughly 7 steps)
+> >>>>>> [88057dab2cde8710ccc95d12fb312184e0b023ca] mtd: spi-nor: Allow fla=
+shes
+> >>>>>> to specify MTD writesize
+> >>>>>> $ git bisect good
+> >>>>>> Bisecting: 53 revisions left to test after this (roughly 6 steps)
+> >>>>>> [625d40ab120dbc6f45dbd975857f8f87e422bd0f] test: boot: fix
+> >>>>>> bootflow_cmd_label for when DSA_SANDBOX is disabled
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 26 revisions left to test after this (roughly 5 steps)
+> >>>>>> [5b9261fb0b1ed087387f2036d279fd3f4bb20a61] Makefile: Drop
+> >>>>>> SPL_FIT_GENERATOR support
+> >>>>>> $ git bisect good
+> >>>>>> Bisecting: 13 revisions left to test after this (roughly 4 steps)
+> >>>>>> [e1b6822d6522d94d579d53092342b542d368a04b] efi_memory: do not add =
+RAM
+> >>>>>> memory to the memory map
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 6 revisions left to test after this (roughly 3 steps)
+> >>>>>> [2f6191526a1325b6ddb59795a093eca69dbf8976] lmb: notify of any chan=
+ges
+> >>>>>> to the LMB memory map
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 2 revisions left to test after this (roughly 2 steps)
+> >>>>>> [3c6896ad2fb876b0a23202f62a83c0d44380c9ea] lmb: add a flag to allo=
+w
+> >>>>>> suppressing memory map change notification
+> >>>>>> $ git bisect good
+> >>>>>> Bisecting: 0 revisions left to test after this (roughly 1 step)
+> >>>>>> [22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1] efi: memory: use the lm=
+b
+> >>>>>> API's for allocating and freeing memory
+> >>>>>> $ git bisect bad
+> >>>>>> Bisecting: 0 revisions left to test after this (roughly 0 steps)
+> >>>>>> [eb052cbb896fee6f947765b44b0d80a54b19ce1a] lmb: add and reserve me=
+mory
+> >>>>>> above ram_top
+> >>>>>> $ git bisect good
+> >>>>>> 22f2c9ed9f533a56bed09bd4e0e37852b6b9f3b1 is the first bad commit
+> >>>>>>
+> >>>>>> A commit is good if Star64 boots and absent the error about "Not a
+> >>>>>> PE-COFF file" (duly confirmed by eficonfig to adjust boot order
+> >>>>>> allowing removable media of an OS installer image on SD Card to be=
+ the
+> >>>>>> priority, verifying that the installer runs as expected).  A commi=
+t is
+> >>>>>> bad if U-Boot crashes and/or has the error "Not a PE-COFF file".
+> >>>>
+> >>>>>
+> >>>>> Can you post the output of the following. Thanks.
+> >>>>
+> >>>>>
+> >>>>> 1) running the 'bdinfo' command
+> >>>>
+> >>>> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800=
+)
+> >>>> ...
+> >>>> StarFive # bdinfo
+> >>>> boot_params =3D 0x0000000000000000
+> >>>> DRAM bank   =3D 0x0000000000000000
+> >>>> -> start    =3D 0x0000000040000000
+> >>>> -> size     =3D 0x0000000100000000
+> >>>> flashstart  =3D 0x0000000000000000
+> >>>> flashsize   =3D 0x0000000000000000
+> >>>> flashoffset =3D 0x0000000000000000
+> >>>> baudrate    =3D 115200 bps
+> >>>> relocaddr   =3D 0x00000000fff46000
+> >>>> reloc off   =3D 0x00000000bfd46000
+> >>>> Build       =3D 64-bit
+> >>>> current eth =3D ethernet@16030000
+> >>>> ethaddr     =3D 6c:cf:39:00:75:63
+> >>>> IP addr     =3D <NULL>
+> >>>> fdt_blob    =3D 0x00000000ff72da20
+> >>>> lmb_dump_all:
+> >>>>   memory.count =3D 0x1
+> >>>>   memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: =
+none
+> >>>>   reserved.count =3D 0x2
+> >>>>   reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no=
+-map
+> >>>>   reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no=
+-overwrite
+> >>>> devicetree  =3D board
+> >>>> serial addr =3D 0x0000000010000000
+> >>>>   width      =3D 0x0000000000000004
+> >>>>   shift      =3D 0x0000000000000002
+> >>>>   offset     =3D 0x0000000000000000
+> >>>>   clock      =3D 0x00000000016e3600
+> >>>> boot hart   =3D 0x0000000000000001
+> >>>> firmware fdt=3D 0x0000000042200000
+> >>>>
+> >>>> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -=
+0800)
+> >>>> ...
+> >>>> StarFive # bdinfo
+> >>>> boot_params =3D 0x0000000000000000
+> >>>> DRAM bank   =3D 0x0000000000000000
+> >>>> -> start    =3D 0x0000000040000000
+> >>>> -> size     =3D 0x0000000100000000
+> >>>> flashstart  =3D 0x0000000000000000
+> >>>> flashsize   =3D 0x0000000000000000
+> >>>> flashoffset =3D 0x0000000000000000
+> >>>> baudrate    =3D 115200 bps
+> >>>> relocaddr   =3D 0x00000000fff46000
+> >>>> reloc off   =3D 0x00000000bfd46000
+> >>>> Build       =3D 64-bit
+> >>>> current eth =3D ethernet@16030000
+> >>>> ethaddr     =3D 6c:cf:39:00:75:63
+> >>>> IP addr     =3D <NULL>
+> >>>> fdt_blob    =3D 0x00000000ff72da10
+> >>>> lmb_dump_all:
+> >>>>   memory.count =3D 0x1
+> >>>>   memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags:=
+ none
+> >>>>   reserved.count =3D 0x3
+> >>>>   reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-m=
+ap
+> >>>>   reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no=
+-overwrite
+> >>>>   reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
+> >>>> no-notify, no-overwrite
+> >>>> devicetree  =3D board
+> >>>> serial addr =3D 0x0000000010000000
+> >>>>   width      =3D 0x0000000000000004
+> >>>>   shift      =3D 0x0000000000000002
+> >>>>   offset     =3D 0x0000000000000000
+> >>>>   clock      =3D 0x00000000016e3600
+> >>>> boot hart   =3D 0x0000000000000001
+> >>>> firmware fdt=3D 0x0000000042200000
+> >>>>
+> >>>> Differences in bdinfo output between working (parent of the
+> >>>> regression) and non-working (origin/master) version:
+> >>>>
+> >>>> -fdt_blob    =3D 0x00000000ff72da20
+> >>>> +fdt_blob    =3D 0x00000000ff72da10
+> >>>>   lmb_dump_all:
+> >>>>    memory.count =3D 0x1
+> >>>> - memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes flags: =
+none
+> >>>> - reserved.count =3D 0x2
+> >>>> - reserved[0]    [0x40000000-0x4005ffff], 0x00060000 bytes flags: no=
+-map
+> >>>> - reserved[1]    [0xfe729630-0xffffffff], 0x018d69d0 bytes flags: no=
+-overwrite
+> >>>> + memory[0]      [0x40000000-0x13fffffff], 0x100000000 bytes, flags:=
+ none
+> >>>> + reserved.count =3D 0x3
+> >>>> + reserved[0]    [0x40000000-0x4005ffff], 0x60000 bytes, flags: no-m=
+ap
+> >>>> + reserved[1]    [0xfe72d620-0xffffffff], 0x18d29e0 bytes, flags: no=
+-overwrite
+> >>>> + reserved[2]    [0x13fffb000-0x13fffffff], 0x5000 bytes, flags:
+> >>>> no-notify, no-overwrite
+> >>>>
+> >>>>>
+> >>>>> 2) do you get any errors when running the 'bootefi bootmgr' command
+> >>>>> other than what you mention above
+> >>>>>
+> >>>>
+> >>>> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800=
+)
+> >>>> ...
+> >>>> StarFive # bootefi bootmgr
+> >>>> Booting: mmc 0
+> >>>> error: no suitable video mode found.
+> >>>>
+> >>>> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -=
+0800)
+> >>>> ...
+> >>>> StarFive # bootefi bootmgr
+> >>>> Card did not respond to voltage select! : -110
+> >>>> Not a PE-COFF file
+> >>>> Loading Boot0000 'mmc 0' failed
+> >>>> Loading Boot0001 'nvme 0' failed
+> >>>> EFI boot manager: Cannot load any image
+> >>>>
+> >>>>> 3) What exactly do you mean by "global EFI boot is successful"
+> >>>>>
+> >>>>
+> >>>> I don't know what the correct name of it is. EFI can boot with what =
+I
+> >>>> am labeling as global EFI boot and searching for fixed path names (?=
+),
+> >>>> or I guess it can decide from EFI variables what to do which I
+> >>>> consider to be the user-configured EFI boot. One of these (the
+> >>>> user-configured EFI boot) is broken since the regression.
+> >>>>
+> >>>> U-Boot SPL 2024.10-00989-geb052cbb896f (Nov 19 2024 - 14:39:43 -0800=
+)
+> >>>> ...
+> >>>> Card did not respond to voltage select! : -110
+> >>>> Failed to load EFI variables
+> >>>> ** Booting bootflow '<NULL>' with efi_mgr
+> >>>> Booting: mmc 0
+> >>>> error: no suitable video mode found.
+> >>>>
+> >>>> U-Boot SPL 2025.01-rc2-00129-g7fe55182d926 (Nov 19 2024 - 19:56:55 -=
+0800)
+> >>>> ...
+> >>>> Card did not respond to voltage select! : -110
+> >>>> Failed to load EFI variables
+> >>>> ** Booting bootflow '<NULL>' with efi_mgr
+> >>>> Not a PE-COFF file
+> >>>> Loading Boot0000 'mmc 0' failed
+> >>>> Loading Boot0001 'nvme 0' failed
+> >>>> EFI boot manager: Cannot load any image
+> >>>> Boot failed (err=3D-14)
+> >>>> ** Booting bootflow 'mmc@16010000.bootdev.part_1' with efi
+> >>>> Booting /\EFI\BOOT\BOOTRISCV64.EFI
+> >>>> error: no suitable video mode found.
+> >>>
+> >>> Based on the logs above, it seems like you are booting using the
+> >>> bootmeth efi_mgr? If so, can you try disabling the bootstd config. I
+> >>> might be wrong, but I remember some issues with the bootstd efi_mgr
+> >>> method on some other platform. Also, are you available on irc?
+> >>>
+> >>> -sughosh
+> >>>
+> >>>>> -sughosh
+> >>>>>
+> >>>>>>
+> >>>>>> For context, the Star64 eMMC contains here an installed Debian Lin=
+ux
+> >>>>>> OS in the usual way with Grub2 EFI on the EFI System Partition the=
+re,
+> >>>>>> and that image boots fine from U-Boot v2024.10 also when loaded in=
+to
+> >>>>>> memory and using 'bootefi' directly on that memory address.
+> >>>>>>
+> >>>>
+> >>>> Thanks,
+> >>>>
+> >>>> -E Shattow
+> >>
+> >> Confirming that some discussion about this happened off-list with a
+> >> positive result and now awaiting a fix.
+> >
+> > I tried to reproduce this issue on the qemu arm64 virt platform, with
+> > 4GB of DRAM memory starting from 0x4000_0000 - 0x1_4000_0000. This is
+> > the exact same memory map for DRAM memory as on your board. I also
+> > modified the value of ram_top to 4GB, as on your board. But I am
+> > unable to hit this on the qemu arm64 platform when I try to boot the
+> > Debian image with 'bootefi bootmgr' command. The only difference that
+> > I see is that on the qemu emulator, the OS is on a virtio disk, as
+> > against mmc in your case. So I think we should try to get to the root
+> > cause of this. I think you mentioned on irc yesterday that you observe
+> > this on two boards, so there is definitely something going on here.
+> >
+> > -sughosh
+> >
+> >>
+> >> Thanks very much!  -E
+>
+> Hello Eric,
+>
+> I reproduced the issue you had with the Debian installer on a Pine64
+> Star64 with 8 GiB.
+>
+> try_load_from_media: file_path =3D
+> /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d7=
+3b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/SD(1)/SD(1)
+> no file name present, try default file
+> try_load_from_media: final_dp =3D
+> /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d7=
+3b9-a384-4acc-aeab-82e828f3628b,6d00000000000000)/SD(1)/SD(1)/HD(2,0x01,0,0=
+x1da800,0x1000)/\EFI\BOOT\BOOTRISCV64.EFI
+> efi_load_image_from_file: buffer 0x23feab000, size 0x11d000
+> efi_load_pe: efi 0x000000023feab000, size 0x11d000
+> Not a PE-COFF file
+> Loading Boot0000 'mmc 1' failed
+> EFI boot manager: Cannot load any image
+> Boot failed (err=3D-14)
+> Card did not respond to voltage select! : -110
+> ** Booting bootflow 'mmc@16020000.bootdev.part_2' with efi
+> efi_install_fdt: fdt copied to 0x000000023ffba000
+> Booting /\EFI\BOOT\BOOTRISCV64.EFI
+> efi_load_pe: efi 0x0000000040200000, size 0x11d000
+> error: no such device: /.disk/info.
+>
+> So loading to high memory fails though CONFIG_BOUNCE_BUFFER is enabled.
+>
+> With CONFIG_EFI_LOADER_BOUNCE_BUFFER=3Dy booting the Debian installer
+> image succeeds.
+>
+> In efi_disk.c we call disk_blk_read(). But CONFIG_BOUNCE_BUFFER is only
+> evaluated in blk_read() same for write. This should be changed.
+>
+> CONFIG_EFI_LOADER_BOUNCE_BUFFER should not depend on an architecture.
+>
+> @Hal, @Minda
+> The MMC driver not supporting addresses over 4GiB, is this due to a
+> hardware deficiency or can that be fixed in the U-Boot driver?
+>
+> Best regards
+>
+> Heinrich
+>
+>
 
-Tested-by: Quentin Schulz <quentin.schulz@cherry.de>
+A combination of these two series remedy this issue:
 
-Considering that it's not the first time someone breaks this by making 
-it non-POSIX, can you add a comment just above with a link to the 
-re_format(7) man page so people are at least more aware than they are 
-right now?
+"configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER"
+"bouncebuf: Allow allocation from U-Boot heap"
 
-Thanks!
-Quentin
+Tested on 4GB Milk-V Mars CM Lite, 8GB Milk-V Mars CM Lite WiFi, 4GB
+Pine64 Star64.
+
+Sughosh can you please add to your series my Tested-by: E Shattow
+<lucent@gmail.com>
+
+Google inexplicably failed to deliver your patch series message(s) to
+my e-mail account, it is not in spam folder or anything it just never
+made it through even though I am CC and a list subscriber. If the
+messages do later appear on my e-mail account I will reply there. Tom
+mentioned some quirk of non-subscribers getting flagged with Google
+mail accounts but this is weird that I don't get any message when I am
+on the CC directly - could be a question for Linaro if they're getting
+bounces from Google mail or what...
+
+-E
