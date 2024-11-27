@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B66D6ACCA
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9778ED6ACCA
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 13:08:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 448C6897E0;
-	Wed, 27 Nov 2024 14:08:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B52DB897FC;
+	Wed, 27 Nov 2024 14:08:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lx4MWpxj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hfaln+rA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED0A9897F8; Wed, 27 Nov 2024 14:08:16 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 4E872897F3; Wed, 27 Nov 2024 14:08:26 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8442897D6
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:08:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35E3C897D5
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:08:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53de7321675so3462853e87.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:08:14 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfcf4df87aso8501696a12.1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 05:08:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732712894; x=1733317694; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732712903; x=1733317703; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zczpIOcNd1KlKjEJVb8UznL6vcf6i/avx13M96regp8=;
- b=lx4MWpxjGjUzMaC+k/1UbosjtF/5d8JsJotDJXKL1P6lorqkYNTjAlPBeYNI62vjOA
- eYlBtjiI4w4XdTVl3cH1hRnv2X/2PHFV/9iXyCgY7dwz4mTg8NDsUr1upohgSnoh0nxs
- xY3PfDkNlmKHnD2I3pxIGJbnn9so14EtNA/cs=
+ bh=2e3oh4gerAgjWZntU30FCjclYM4YcSRQc2okOlNqesk=;
+ b=hfaln+rAiwdxAlV5ZpIjxHnLzHdDDzW07won2VkMy3KA7lCrSswf1+jx+q7L0A+znO
+ hUkgvOEiEfTgj8PpUFh5hebfweEOps9hj196nRyd6fSQxLEkE8FvXvHWuy+caj0gisZH
+ uL/uy2alAYkFX+x6oB+WQSswJvyXOWrT+62nI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732712894; x=1733317694;
+ d=1e100.net; s=20230601; t=1732712903; x=1733317703;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zczpIOcNd1KlKjEJVb8UznL6vcf6i/avx13M96regp8=;
- b=TGgx7iglNrsxpGvYFnJ/RC0Vg19KrAzxZEA+kybDE1L3FgqwNl7H6DZNKpYsiAgUjR
- ADZ3u6G4dPMZHjmNdFz8YC/Z8Jy3WOnEFr7zxCPWHMtfMOkCTh0hzRqfFRwCjqW0qqeA
- hgtrztkg2MXPK+MupXOXl683KNh7t53WLcnTeUEScVxMrJ6aCcQEvUiCq8zXdbZB+5yU
- 7Cpmd5SQB8EVvEKbp4R7sYHsWoxk9UN9+WMSfwo82XmqtlBvASuQM/aTIMLzygzYIk17
- GMeJwUXLYtCw78eZiP6a4gkg06kPZpvlddaLcs5CPHTqLYaBPLJCfBBPJsUXHiTE9D95
- PEIA==
+ bh=2e3oh4gerAgjWZntU30FCjclYM4YcSRQc2okOlNqesk=;
+ b=Lf/d9Y1GYincOT0/mW0kHRrRHlnxvF+3XuRWQQZbqNt/Ix5OJ50dBcGvQgTt/MkT6q
+ MMYtcui9LOKI74riv+zD039yvPMyrBKbTnoIxEnKFRFz8+/pbUs6aalAbQ4upGYcGQ2H
+ A7qwMlC4/HDtf5UIKdgm7cRiKsU2zid5cqObL79nLkbP5EvsCLU0cFieOVWbUogXEsPB
+ cZjRQSIXI9csI4W6xhMpU1cIT1EPmOYXKHvpd6A7l6da918i3+0C9wOM1RA5lPZ7lskX
+ yg4z4hP2tyX95uvXourtO6SvvESzV+oxlIIHCSB4r4YJ6XCij/VUr6+i8+2h0jpUYi9l
+ ZNOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWuBwb3xyXJRqIov9aBMnkY8L1llh9apzaVWGcXaPVjSlG8ZQw1vz747XQ/PnvTp+UG6JSHlLM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5K4xw0utfvhAUimpgzcrEXwst4J5jLiraEUOCPEo4VcR+SVgE
- /X1Fg/NSW0ED099DQemaB5p+9Mb2cNz2OaNYAIbtUrGAm/YjV594ZxCe1hVkusVhc4R8evY+ZVy
- GKS83fcC1tougdwC07auH1onmbFd2DeeRSylg
-X-Gm-Gg: ASbGncsX6MMFwKmvu/EMQymWgAt7GMkJ5ODoGnLM7/jT7u/+CKsi/ZDp0Eg3lvXNP5x
- UoacZk3RU1u8QWNd9A6aOAgwK4ZJzFns=
-X-Google-Smtp-Source: AGHT+IE2MXxceZTUdk5L3PR57f+wVZUnFtntEwzTn/pZKKjt+2iUdRr4KxMzzGYrn9axSyTIMS7LyCkwQi/KQxu204Y=
-X-Received: by 2002:a05:6512:124e:b0:53d:d3ff:7309 with SMTP id
- 2adb3069b0e04-53df00d9e96mr1876419e87.32.1732712893367; Wed, 27 Nov 2024
- 05:08:13 -0800 (PST)
+ AJvYcCWLHT0ZgP6j49RSxUcTcU3+sxT2F4P38jWksOMiWuOTq+JgiVIhvUNdQuoJLP1i2CH0raS1gEg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8agc0CZ04I4kHFIZbWR7qOYqn5hwXHXDzHRUDPx4SjCBDrWJt
+ QdgQzLHXmWaWhIsO+huntJP9jZvbz6gmdQi+ToEl25gjr1eqyZFyH30iaRvFYMD1uMhMHYuq4xo
+ /+yV+55CwARU9FRLQwFErBpGWiB9EtM0OIx34
+X-Gm-Gg: ASbGnctmyzrcvN3mO2zjBIJ6LXm/oPi3xdtE4JCAuyMKcC8hcL9BbkkhLrwGBrUJK+2
+ JukITSMv5GXxFQ9XW2/UGClEYVLoZeVU=
+X-Google-Smtp-Source: AGHT+IGqKFKMLj8VIZCDDg+2SfcF9Erj/uMdQmBMuYkAJ/rgooIRqLp5IEVmfDXsW7870MZl5oPfXZakDr3pZ7iCGfc=
+X-Received: by 2002:a17:906:31d0:b0:aa5:37b4:cd5a with SMTP id
+ a640c23a62f3a-aa580eded57mr213960766b.3.1732712903645; Wed, 27 Nov 2024
+ 05:08:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-6-sjg@chromium.org>
- <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
- <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
- <20241126155508.GR3600562@bill-the-cat>
- <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
- <20241126223332.GV3600562@bill-the-cat>
- <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
- <20241126233218.GW3600562@bill-the-cat>
-In-Reply-To: <20241126233218.GW3600562@bill-the-cat>
+ <a6ba9ebe-9d52-4b2d-bb62-02c4f0ea86fb@gmx.de>
+ <CAFLszThf3aSwi1yhaQP9Ns7wTNjKH8XicAqUU6vy5gej5GP+CQ@mail.gmail.com>
+ <20241126160817.GS3600562@bill-the-cat>
+In-Reply-To: <20241126160817.GS3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Nov 2024 06:07:58 -0700
-Message-ID: <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
-Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
- header
+Date: Wed, 27 Nov 2024 06:08:10 -0700
+Message-ID: <CAFLszThDb-dCiGUqDdZmTMAgU7X6P0Zya3ovUgPibPKJQMasVg@mail.gmail.com>
+Subject: Re: [PATCH 00/13] efi: Tidy up confusion between pointers and
+ addresses
 To: Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Janne Grunau <j@jannau.net>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -99,93 +99,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 26 Nov 2024 at 09:08, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
-> > On 11/26/24 23:33, Tom Rini wrote:
-> > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > >
-> > > > > > > On 25.11.24 21:44, Simon Glass wrote:
-> > > > > > > > Exported functions should be documented in the header file, not the
-> > > > > > > > implementation. We tend to make such updates on a piecemeal basis to
-> > > > > > > > avoid a 'flag day'. Move some comments related to memory allocation to
-> > > > > > > > follow the convention.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > >
-> > > > > > > Please, have a look at this line in doc/
-> > > > > > >
-> > > > > > > doc/api/efi.rst:78:
-> > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
-> > > > > >
-> > > > > > Hmm, we should not add C files as then we end up with all sorts of
-> > > > > > internal functions, like checksum(). The help is a bit of a mess on
-> > > > > > that page IMO and it could use an index at the top or side.
-> > > > >
-> > > > > Why? Looking at the linux kernel (where we borrow this framework from
-> > > > > and lots of developers expect to follow that style) it's extremely
-> > > > > common to kernel-doc C files. I don't see why documenting internal
-> > > > > functions (which should be clear as being internal) is a problem.
-> > > >
-> > > > It depends what you mean by docs. U-Boot puts the documentation for
-> > > > exported functions in header files.
-> > >
-> > > I'm sorry, that's a circular definition. And no, there is not a hard and
-> > > fast rule that we only put kernel-doc style comments in header files
-> > > (which are consumed by other files and tooling to generate
-> > > documentation).
-> > >
-> > > > Putting docs in C files clutters the docs with internal
-> > > > implementations, when most people just want to see the API. The way
-> > > > U-Boot does things, it is easy to see the internal (implementation)
-> > > > docs by looking at the C code and the external functions by looking at
-> > > > the header files.
-> > >
-> > > Or it makes things harder to understand because the human readable
-> > > documentation for a given function is separate from the file the
-> > > implements the function. This is possibly why in the linux kernel, where
-> > > we borrow "kernel-doc" from, documentation is frequently in the C file
-> > > which is then included in Documentation files (the type you objected to
-> > > in the start of this patch) which include additional human-readable
-> > > explanation of the intention and usage of the API in question.
-> > >
+> On Tue, Nov 26, 2024 at 08:39:05AM -0700, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > For static functions we will continue to have function documentation in
-> > the C files and not in the headers. I personally never looked up the API
-> > documentation in the HTML docs but always in the source.
-
-Same here.
-
+> > On Tue, 26 Nov 2024 at 02:10, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > The EFI-loader implementation converts things back and forth between
+> > > > addresses and pointers, with not much consistency in how this is done.
+> > > >
+> > > > Within most of U-Boot a pointer is a void * and an address is a ulong
+> > >
+> > > No. It is phys_addr_t that was introduced to handle the sandbox's
+> > > virtual addresses.
+> > >
+> > > And we should keep this sandbox stuff out of the EFI code. They are only
+> > > needed for the command line interface.
 > >
-> > I am not opposed against moving the EFI function documentation into the
-> > header files. But we should update doc/develop/efi.rst accordingly in
-> > the same patch series. This is missing here.
-
-OK
-
+> > No. My statement is correct and long predates sandbox. U-Boot has
+> > always used ulong. Using an address is generally much easier than a
+> > pointer, so I believe this design decision was (and remains) a good
+> > one. I certainly would not support changing it. The phys_addr_t type
+> > has nothing to do with sandbox.
 >
-> My point is that the linux kernel is about 60% C files and 40% header
-> files being kernel-doc'd in to documentation files and so "U-Boot
-> doesn't put documentation in to C files" seems like the wrong approach.
+> At the high level, I think parts of the problem are that when U-Boot
+> went from 32bit architectures to 36bit architectures (assorted PowerPC
+> Freescale parts) to 64bit architectures that no, we didn't make some
+> concious and consistent statement that "ulong is for address (except
+> when it's not). If you look at the linux kernel, phys_addr_t is physical
+> addresses, ulong is virtual addresses.
+>
+> And so phys_addr_t was introduced, iirc, for PowerPC where we had a
+> 32bit architecture with 36bit addresses and had to deal with that.
 
-U-Boot tries to document functions in header files. At the risk of
-making a blanket statement with thousands of counter-examples, that is
-not so much the case in Linux.
+OK, thanks.
 
-To a large extent, people developing features in U-Boot rely on the
-header files to see what functions they can call. With the
-documentation there, they often don't need to look at the source. I
-certainly don't, unless the header-file comment is inadequate.
+I'm a bit unsure what to do here...but am leaning towards having a
+separate struct for the memory areas in struct efi_mem_list, rather
+than using the same efi_mem_desc. Then I can have one use addresses
+and the other pointers.
 
 Regards,
-SImon
+Simon
