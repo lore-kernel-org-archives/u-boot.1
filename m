@@ -4,97 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBB44D6D242
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 22:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED79D6D247
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 22:21:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A6268980C;
-	Wed, 27 Nov 2024 23:11:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CB58289831;
+	Wed, 27 Nov 2024 23:21:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HaT7K+9i";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="a9NK6LSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A59988981D; Wed, 27 Nov 2024 23:11:07 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id EFB3F89827; Wed, 27 Nov 2024 23:21:31 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D55A897F9
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 23:11:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 677B38980C
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 23:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b65f2daae6so14474085a.1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:11:05 -0800 (PST)
+ spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa52bb7beceso13448566b.3
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 14:21:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732745464; x=1733350264; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eoLD2FyBXJfBNg9h+3eNF8ibw8llOjNGpNg1e+jt6ZE=;
- b=HaT7K+9iL29BD7YcPbc9UA+nLOorXTyFFL6C/fu3upPZI/WvpIMsLwTqrfOp3Ts7mY
- ZQrUomA+04z/vNSK/XB7tGyO2NIKYUK3S5/rTEpsahpYWBVogfuCfL5hLhWulVt8TIYr
- 6RYGG0XVwG9xwC3rUJATJqmFXnHsVlFj6XIOk=
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1732746089; x=1733350889;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=i1zzaj4fklDh4ku8feoWqKSp4fpNSSWYqQLfJJVGV90=;
+ b=a9NK6LSMz3Y+MBrOqKwYZkr5GuRAOz4Q3OkXqZEHJ314oemVHnagj2csiQinZqY/pF
+ CW3jX/xELkBsfWi/2YL2XGuUt7iAm5ekc1tj3fWpHUBQSTzddeZ2B04AQYy+t6xXr6+O
+ cbEtc5hQBUFb17AzQigB9rOBKNkknVjIL824o82SFHk4YXdAthcHQd/BkgG5gHACa6rw
+ g0qj8egxos8SiZZsbo4SOsVhbRYssfojO9WFGQKmgG10fNua/xQliqVwCTy3JDQbO7Ig
+ womy3XGZLd4EaX18HZ3n5wdXafuGUISfR/DH5Jpj5ebr/9Gs9Zp2wgUQ2xGyJp2MUEVh
+ OyGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732745464; x=1733350264;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eoLD2FyBXJfBNg9h+3eNF8ibw8llOjNGpNg1e+jt6ZE=;
- b=AW2O9PC9RQKc4PMN8+7GD6fUNocL2FQYxdHWkoA23TNHFZv2O8QZPLiBO+KS9dybQf
- 9icxL/SeZMF+0YDL/hQqAQEH5Vg/hqPXfaKRtcxsmevzNJqZbZqd4Ga9Gf3OUz2JFGy2
- 1r3npvho38a22oRCAxWDNUBX1KYLoSfPZuPnVf7u0EhynhjyRSsMSVAGxMePxS1wt2+w
- N3TFuKqg8YpAeoiPEGjv58RIdOYCruHQoZJ2MfBWbxb8zWX7i039F/T4Cw/ldX8H9DJC
- 1o0KrENJaa0axQPN1Psu8RhuPIxnq2mB5E5jKqCtj3QPy2TE56k3YzR/eDp4b73ydy/V
- 26DA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUmnKB0zUjIsKHgUOTERInGJAfdN+JGqWiZcIaEkJELEtFlwe0PORHmzcc/CUCB5wUKucVjqew=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/y+/X8AsStKZATtPrfjZkmtI1oaHyeO2m/cA7i8BmNNjulouD
- 6AP9zmHAQ8P9LQZLQq9vgbtlirCwZ0Ae5PABuNZFX8Y3DsbEL5b/MatYbEZUpJKHqnB0i4et09g
- ZQAQ=
-X-Gm-Gg: ASbGncuucIiAUiCjIuh+fSumVaIFKX/tcZgO5lK3IS2UXryXpJOu9phRChg9KaPnL1b
- 1iWS2LPHIyWbD0R1ab5yFbSijzRTZoh9tkC8Yg11FpYfyLgX5I57K7oElDxEPLR6nnoP7spqa8f
- TR1Wfal0wu0mdlVFcb1s0b8etIsCkVV99TDKV8hKWmMctV/CHGZm7aucELPJ72uyBl1XWfqqzw0
- XBDjj1B1+v2SEBj3a219aQJwVpjkBeMlg1KSid2l3yA1IKIdg==
-X-Google-Smtp-Source: AGHT+IHOA7EkshjVW9DChE+IT/v3KTvc9vshDItf06WuZsQELKnGiMaGAPImHG7JoFwFBXB3ifuc4A==
-X-Received: by 2002:a05:620a:268c:b0:7b6:6a76:3a4a with SMTP id
- af79cd13be357-7b67c2c16d3mr538370285a.28.1732745463966; 
- Wed, 27 Nov 2024 14:11:03 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b68492e03bsm4746385a.38.2024.11.27.14.11.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 14:11:02 -0800 (PST)
-Date: Wed, 27 Nov 2024 16:10:59 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
- header
-Message-ID: <20241127221059.GE3600562@bill-the-cat>
-References: <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
- <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
- <20241126155508.GR3600562@bill-the-cat>
- <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
- <20241126223332.GV3600562@bill-the-cat>
- <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
- <20241126233218.GW3600562@bill-the-cat>
- <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
- <20241127141532.GZ3600562@bill-the-cat>
- <CAFLszTg8L4A0oGLh=K5kc8hR_E+LxFYeC_vNHMZDbV_+ZT8Btg@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1732746089; x=1733350889;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=i1zzaj4fklDh4ku8feoWqKSp4fpNSSWYqQLfJJVGV90=;
+ b=hI262ymUZLczyA6cWMfqHnMNY7ShfB0YYN0SrCuk3E7hd47eBAm5m76honPM9IC9g7
+ NN2kZeNXl2aKGMiFfRTzk1T/eHB9RNz2Bh3d2Sg7WZ+yjLq9cMwTiRAF181L0kBivqR7
+ MkXdXUrn4frgPRppUvTdAOxtYWAH7FbFkq5vmKiK/0oWrMb10zGjGQjvF8GJmqQE5TUN
+ tAHOSowZKIyX+lNqVMSgPutzsV8PlODDJaQLTqxouNlpqly+lOfu2E0C48Qr+wGWOJzT
+ nKjuFpmC4qEBFAro9/46XCB7gzpDjWbDUIAmUH/azajDew1tpx+KlNtGXylIyItaHRGG
+ NILg==
+X-Gm-Message-State: AOJu0YxLyKpCWifS65vqUP7jFurDxwC77owcOZQdln6CafYGhwB8trv1
+ m/jQKrpTH66YPXIOv/s7ci4LL6xHq7aLSONsAYsKjHIV+ve2LSTnagdDf99VoNP2MX4RMAbvCbc
+ UHrIAMsRhnFMUBHp9RTBV+gFQ2J+reO92SKoot3Q3hqOK612IY24=
+X-Gm-Gg: ASbGncs0BCqYek9MEjnYmH/1eL1kjeYhRiYuJJ/ocqKMrzvFGXhI6qEUhQdFhKps2Np
+ f+7fVOsA3UjgxjKd96shOVRGMcPPMbVs=
+X-Google-Smtp-Source: AGHT+IHDECM4oGHwhb+Y5V5EIccTFjM1srg0XJlfXvVN+MBg8X1lrvboh/8se+3qNXe/38/l7OnFZSRiPdlaHKMO+Sg=
+X-Received: by 2002:a17:906:32d7:b0:aa5:30a6:13d3 with SMTP id
+ a640c23a62f3a-aa580f35501mr318281566b.27.1732746088653; Wed, 27 Nov 2024
+ 14:21:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3kyW4h1BUFCzcpVp"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg8L4A0oGLh=K5kc8hR_E+LxFYeC_vNHMZDbV_+ZT8Btg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240918130155.299353-1-lukasz.czechowski@thaumatec.com>
+ <20240918130155.299353-2-lukasz.czechowski@thaumatec.com>
+ <d63d53bd-3f63-430d-b0bc-2379b7bded81@rock-chips.com>
+In-Reply-To: <d63d53bd-3f63-430d-b0bc-2379b7bded81@rock-chips.com>
+From: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>
+Date: Wed, 27 Nov 2024 23:21:17 +0100
+Message-ID: <CABd623t3-U+TF9VD0O2dtNZzpZPBM9LcOQ_a4mDpv6ierbLuCQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] debug_uart: Replace debug functions with dummies
+ if CONFIG_DEBUG_UART is not set
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
+ philipp.tomsich@vrull.eu, quentin.schulz@cherry.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,204 +92,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Kever,
 
---3kyW4h1BUFCzcpVp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024/11/27 03:42 Kever Yang <kever.yang@rock-chips.com> wrote:
+>
+> Hi Lukasz,
+>
+>      I got a new error base on patch [1], see full log here [2].
 
-On Wed, Nov 27, 2024 at 07:56:11AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 27 Nov 2024 at 07:15, Tom Rini <trini@konsulko.com> wrote:
+Looking at the file efi_stub.c that is used in the failing
+configuration it looks to me
+that some functions from debug_uart.h are used here for convenience
+(i.e. printhex),
+even though the DEBUG_UART is not used. This is contrary to my assumption that
+DEBUG_UART_FUNCS macro should not be used if DEBUG UART is not available.
+In order to apply the patch then, either the efi_stub code must be
+updated to not
+use debug functions or the assumption must be relaxed - I'm not yet
+sure what shall be
+the correct approach.
+
+>
+> +/binman/rom/intel-mrc (mrc.bin):
+> +In file included from lib/efi/efi_stub.c:12:
+> +include/debug_uart.h:205:9: error: stray '#' in program
+> +  205 |         #warning "DEBUG_UART not defined!"
+> +      |         ^
+> +lib/efi/efi_stub.c:91:1: note: in expansion of macro 'DEBUG_UART_FUNCS'
+> +   91 | DEBUG_UART_FUNCS
+> +      | ^~~~~~~~~~~~~~~~
+> +include/debug_uart.h:205:18: error: expected '=', ',', ';', 'asm' or
+> '__attribute__' before string constant
+> +      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> +lib/efi/efi_stub.c:86:13: error: '_debug_uart_putc' defined but not
+> used [-Werror=unused-function]
+> +   86 | static void _debug_uart_putc(int ch)
+> +      |             ^~~~~~~~~~~~~~~~
+> +cc1: all warnings being treated as errors
+> +make[3]: *** [scripts/Makefile.build:257: lib/efi/efi_stub.o] Error 1
+>
+>
+> [1]https://patchwork.ozlabs.org/project/uboot/patch/20241108163612.1.Ib408a6723ba954c932968419678bd45b0767a470@changeid/
+> [2] https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/958639
+>
+>
+> Thanks,
+> - Kever
+> On 2024/9/18 21:01, Lukasz Czechowski wrote:
+> > In case DEBUG UART is not used, define dummy macros replacing
+> > the actual function implementations that will not be available.
+> > This allows to compile code and avoid linker errors.
+> > Because the DEBUG_UART_FUNCS macro should not be used if
+> > DEBUG UART is not available, redefine it to generate compilation
+> > warning.
 > >
-> > On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
-> > > > > On 11/26/24 23:33, Tom Rini wrote:
-> > > > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
-> > > > > > > > > Hi Heinrich,
-> > > > > > > > >
-> > > > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron=
-=2Eglpk@gmx.de> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
-> > > > > > > > > > > Exported functions should be documented in the header=
- file, not the
-> > > > > > > > > > > implementation. We tend to make such updates on a pie=
-cemeal basis to
-> > > > > > > > > > > avoid a 'flag day'. Move some comments related to mem=
-ory allocation to
-> > > > > > > > > > > follow the convention.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > >
-> > > > > > > > > > Please, have a look at this line in doc/
-> > > > > > > > > >
-> > > > > > > > > > doc/api/efi.rst:78:
-> > > > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
-> > > > > > > > >
-> > > > > > > > > Hmm, we should not add C files as then we end up with all=
- sorts of
-> > > > > > > > > internal functions, like checksum(). The help is a bit of=
- a mess on
-> > > > > > > > > that page IMO and it could use an index at the top or sid=
-e.
-> > > > > > > >
-> > > > > > > > Why? Looking at the linux kernel (where we borrow this fram=
-ework from
-> > > > > > > > and lots of developers expect to follow that style) it's ex=
-tremely
-> > > > > > > > common to kernel-doc C files. I don't see why documenting i=
-nternal
-> > > > > > > > functions (which should be clear as being internal) is a pr=
-oblem.
-> > > > > > >
-> > > > > > > It depends what you mean by docs. U-Boot puts the documentati=
-on for
-> > > > > > > exported functions in header files.
-> > > > > >
-> > > > > > I'm sorry, that's a circular definition. And no, there is not a=
- hard and
-> > > > > > fast rule that we only put kernel-doc style comments in header =
-files
-> > > > > > (which are consumed by other files and tooling to generate
-> > > > > > documentation).
-> > > > > >
-> > > > > > > Putting docs in C files clutters the docs with internal
-> > > > > > > implementations, when most people just want to see the API. T=
-he way
-> > > > > > > U-Boot does things, it is easy to see the internal (implement=
-ation)
-> > > > > > > docs by looking at the C code and the external functions by l=
-ooking at
-> > > > > > > the header files.
-> > > > > >
-> > > > > > Or it makes things harder to understand because the human reada=
-ble
-> > > > > > documentation for a given function is separate from the file the
-> > > > > > implements the function. This is possibly why in the linux kern=
-el, where
-> > > > > > we borrow "kernel-doc" from, documentation is frequently in the=
- C file
-> > > > > > which is then included in Documentation files (the type you obj=
-ected to
-> > > > > > in the start of this patch) which include additional human-read=
-able
-> > > > > > explanation of the intention and usage of the API in question.
-> > > > > >
-> > > > >
-> > > > > For static functions we will continue to have function documentat=
-ion in
-> > > > > the C files and not in the headers. I personally never looked up =
-the API
-> > > > > documentation in the HTML docs but always in the source.
-> > >
-> > > Same here.
-> > >
-> > > > >
-> > > > > I am not opposed against moving the EFI function documentation in=
-to the
-> > > > > header files. But we should update doc/develop/efi.rst accordingl=
-y in
-> > > > > the same patch series. This is missing here.
-> > >
-> > > OK
-> > >
-> > > >
-> > > > My point is that the linux kernel is about 60% C files and 40% head=
-er
-> > > > files being kernel-doc'd in to documentation files and so "U-Boot
-> > > > doesn't put documentation in to C files" seems like the wrong appro=
-ach.
-> > >
-> > > U-Boot tries to document functions in header files. At the risk of
-> > > making a blanket statement with thousands of counter-examples, that is
-> > > not so much the case in Linux.
-> > >
-> > > To a large extent, people developing features in U-Boot rely on the
-> > > header files to see what functions they can call. With the
-> > > documentation there, they often don't need to look at the source. I
-> > > certainly don't, unless the header-file comment is inadequate.
+> > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 > >
-> > I think this is a case of what you do, rather than what everyone else
-> > does.
->=20
-> That's not my reading of the source tree.
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> > ---
+> >   include/debug_uart.h | 16 ++++++++++++++++
+> >   1 file changed, 16 insertions(+)
+> >
+> > diff --git a/include/debug_uart.h b/include/debug_uart.h
+> > index 714b369e6fe..dc0f1aa4c98 100644
+> > --- a/include/debug_uart.h
+> > +++ b/include/debug_uart.h
+> > @@ -128,6 +128,8 @@ void printdec(unsigned int value);
+> >                       (1 << CONFIG_DEBUG_UART_SHIFT), \
+> >               CONFIG_DEBUG_UART_SHIFT)
+> >
+> > +#ifdef CONFIG_DEBUG_UART
+> > +
+> >   /*
+> >    * Now define some functions - this should be inserted into the serial driver
+> >    */
+> > @@ -197,4 +199,18 @@ void printdec(unsigned int value);
+> >               _DEBUG_UART_ANNOUNCE \
+> >       } \
+> >
+> > +#else
+> > +
+> > +#define DEBUG_UART_FUNCS \
+> > +     #warning "DEBUG_UART not defined!"
+> > +
+> > +#define printch(ch) do{}while(0);
+> > +#define printascii(str) do{}while(0);
+> > +#define printhex2(value) do{}while(0);
+> > +#define printhex4(value) do{}while(0);
+> > +#define printhex8(value) do{}while(0);
+> > +#define printdec(value) do{}while(0);
+> > +
+> > +#endif
+> > +
+> >   #endif
 
-So, if we call this point 1 for a moment.
-
-> The file we are talking about has some comments in the header and some
-> in the source file. When you use an lsp client, it doesn't know what
-> to do.
-
-Sounds like a bad client? Because again, we should be following the
-kernel here.
-
-> > We want to be more like the linux kernel here, rather than less
-> > like the linux kernel, given the number of kernel people also working
-> > here. If Heinrich is fine with re-arranging everything, OK. But I think
-> > documentation with the code makes it less likely to get out of date,
-> > both in terms of intentional changes and bug fixes.
->=20
-> I am not suggesting separating documentation from code. I agree that
-> makes no sense. What I have consistently done (and asked for in
-> reviews) is:
->=20
-> - exported functions are documented next to their prototype in the header
-> - static functions are documented next to their implementation
-
-So going back to point 1 now, yes. This is what I'm saying. Your
-preference, expressed through reviews and telling people to change when
-they do it other ways, is where the current situation comes from.
-
-> This makes it easy to read the header file and see what the module is
-> doing, without having to dive into the implementation, which could be
-> 1000 lines or more. It also makes for more useful kerneldoc, IMO,
-> since we are showing functions which are exported and therefore more
-> useful for development. Adding the entire C code of U-Boot into
-> kerneldoc seems like a bad use of space.
-
-Um, I don't follow you here. If the code doesn't have kerneldoc
-comments, it's not included. I just made a silly test with a change to
-include/clk.h. It's not included in the output. And "the code might be
-so big it needs refactoring" is not a good excuse.
-
-The kernel is inconsistent here. The first example I went to look for of
-something that uses both C and header files in a document was
-Documentation/admin-guide/pstore-blk.rst and both fs/pstore/blk.c and
-include/linux/pstore_blk.h are kernel-doc'd in and the header describes
-a public function of the C file while the C file describes other
-functions too.
-
---=20
-Tom
-
---3kyW4h1BUFCzcpVp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdHmO4ACgkQFHw5/5Y0
-tyxStgv/QrsCY/mPqYKucTgEil5NHTin7SzS7XKfaFwu0VO/ZJtoAujVyATAC9pn
-S2Xkp8aqmg57GHIveiGJfgL1wz6vkMy2+sCZvgK9LN6AM18V/0K2LT+Py0dK+Q+7
-jWjWwBo72OtoRuXHVPcfAJypBfUSGsrbpgXLXi2fFlWkCv/rK9XTL2ATvS/KLhEU
-+RJM03HsnXI13SOQT3fyEM65CvBkbERxbeYSCTqIVgTJlksDV3iDIZTIC5BcPOPr
-InkvweVUfkNnM07IQLd2rWFRjrx1xVhoDsJaAZzzBVenyFOKr6ymdYnSphKz4ZaR
-v1gYVtxO778JA8GHhwmKXP4TmgdaSQAu/qloFb6BBH+G6rd8iNFs3/rC31kZsD0r
-kVZiKyI2XKpPMzNXF/zfRVkd8povO0q0uSfoGsEOG7gYRdxQD65dqBIgy9aS4lp5
-X0A8NuGgdriAAeI5j71v4NnXXPoAU7nQVKmJnI1QFHkh/5nLOVeDXVUfPU28nQR2
-Sg1ZdX2H
-=WRud
------END PGP SIGNATURE-----
-
---3kyW4h1BUFCzcpVp--
+Best regards,
+Lukasz
