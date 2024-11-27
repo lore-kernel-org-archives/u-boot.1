@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4B3D6D227
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 18:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AEBD6D227
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 18:55:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F3D489288;
-	Wed, 27 Nov 2024 19:54:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A2091894D9;
+	Wed, 27 Nov 2024 19:55:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fvNCwEmv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LQjoM/C+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DD3989251; Wed, 27 Nov 2024 19:54:53 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id CC6C1894D9; Wed, 27 Nov 2024 19:54:58 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8505B89326
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 19:54:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 676A489608
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 19:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-46689dba2fbso373111cf.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 10:54:50 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b15d7b7a32so4035185a.1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 10:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732733689; x=1733338489; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1732733695; x=1733338495; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ENm0yl7Bfda2qSwqo/xx/luRLbb2jp/xK/bxfTFZBO0=;
- b=fvNCwEmvoeF/AHSWnRebNoJkym92UI7cNmrOsjhJk7+0SErfmb5XlkXccv3bjSEt6z
- +jsL/AgBzmlZ0rTCc6cyakHVVaPs6mxRFTnzYksbsRw5/3QeGVfHt0+sjJZcLmU6aByc
- M8Ve2YHemOS09uu0E8ImK+zQD/If9kmaAzhig=
+ bh=voEd3iYUnYWLCuEQqci6i3eGpFxrvn9hjw/BRVKWajU=;
+ b=LQjoM/C+SmWsgRW1jKTXtP85wFsxIsAS6Ikj1u/JGbPqMkdg3yo93G6nXZYY26Yogl
+ M/0m7J9kHnXwoveAji+Z1T2A8ht9Fj6sc7mBgQfdsv0FIbdiSqxpj1v1X0rfGbJ6sbTa
+ 9tceHGoePRstFx/U5VCUAcf8TTl224IOg0+2Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732733689; x=1733338489;
+ d=1e100.net; s=20230601; t=1732733695; x=1733338495;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ENm0yl7Bfda2qSwqo/xx/luRLbb2jp/xK/bxfTFZBO0=;
- b=rXBGpVx921kI3utqHBNZQM0c604ro1H9mFa/BZjbuLqnpJGcApH92CFo1QiV5qXXlm
- AtJ94PC4YjWDZTI6Siim1vuj8uGHDf5HW9y+xWalcHI7SXicqsps/yn85NfwOmAQ1SkQ
- 2PKqiMatwLGIiOKII49+Xm2jt8kERpN2GkivdQYQifJXATwFYQT2SYFE68k9MtbeXW1l
- uhLjZ9kEJ5X8l2gVjcdKBaEVWMVDDoz5ue6tAoy2WsqmlFKWWphuHvljdwAS60lS1iyr
- kxqp1EUsFL43hltTBGZDlqP2qMmGzJjgXke6Tq0E9oXkui7+utaQnywTbXFiBgBojNPs
- bLoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdjN6wfQsSTJmxZsqrXOBiSsUQZOdP6RAKxQEKpLrWnp7VDJq+AcQ/2f0OBZCMuIbGRtEFzag=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxcli3CtiEM3CXS+9sTgn1iliu5t9VoA3MOB+2OfCXxQ/mFXtBS
- vc/C9KPWaAVJ+7fXgCxcpx/XcsUKdH4jzCtG14UkQjdZwQR29dFYrjt7iSNxkR8=
-X-Gm-Gg: ASbGncuRooLXglEzdc2Yb0R5vKBJKvX3KvpVG1sd3IurmtkOb6GTWOI+RVX2gbQxyz3
- RecNcAIuKuqVK7nsBM3DVDhsvFVcd+Rffr0OGMUhU90S4afbrf1mgEpiaCJAqR7XE5yZCwM71P4
- N5rsrHRtnrum596cnfnYWrxpHWy5o1uE5q92LxdffSiWCKcOcF/vfeffSuH4Kw/lmRfVqjtCfR8
- mDO/1O83QJ5rMEYnoKb+Z2RCLWpQ3zj7sgcam7xPcCh5j1c2A==
-X-Google-Smtp-Source: AGHT+IE2KNHiG5LxGe1wLPb1rNsemzs5R80r8/Zisr/lIMjpRBw6Ej/v5ZcP+GnzBTAqC18sDlXIMA==
-X-Received: by 2002:ac8:5a49:0:b0:466:ac9e:8269 with SMTP id
- d75a77b69052e-466b3646867mr71007711cf.39.1732733689340; 
- Wed, 27 Nov 2024 10:54:49 -0800 (PST)
+ bh=voEd3iYUnYWLCuEQqci6i3eGpFxrvn9hjw/BRVKWajU=;
+ b=q4kZr74W61EXMy7j1bCDIsfBXO+uVR8rAzjS/VbZ+fYGd3Qvpa8obBCLwLhDzOXOTu
+ us52dWpdskKXzra7yMh4hqWMB4L8sCpB1OfcFzOXpcFJ170bffBXaq/IlJbnpWcE21GX
+ GMEt7LQcSUEIBxtVpcQfntHhf/TBRH4urn72H2/L8gFhWxVcXKqr0NjYiKpDk+brC0Fd
+ L6MyvkffWBk9xugDci0gPDNXVtuMu0du1FUjuiRwoLAU+ZMUH4FqMvaLuTnSz3VjBicH
+ wIIc/Ts8YGAN5GYWMtDfbm40IS9E2I+BciwNdv73WJn201MRMFGDsrAhltKZir25d7AT
+ HSbw==
+X-Gm-Message-State: AOJu0YwcrSwIGgBzCzhfmekSK+IKX2L9NHZimZ8HtffGuJqs8aT2WX//
+ aI5BDsa2RmfsVZ6g0eMOMGkRL7wWK4XLFsZhGEomZTvqxwa4aV2ppYTkfxQoGjQ8jEhj4Lc8lva
+ 8s7I=
+X-Gm-Gg: ASbGncvdukly9I0YUMqp8pNsnzpMGW6m5NFAMUGsEClG+CQGQf/4icgMOr8eyr5fqI7
+ 0YBKEXJ9T9QSx+avx9KkgRjxp3vG8XEvqm/+uhkHmnN/yOXZp4I7jrygVt1tkcdrDQ21aWvFOQW
+ 283AzZvj6i6f3ZlyaP3dLh+i3krLPETShkpr3TIsb9yo5yOLbEdHEM0gYJ7VbQVfwKES1OK6dsT
+ 24YUsf+vOIEjWifUnxkvHAlERWaEoDlthi1VjZ+EEShdhtyHQ==
+X-Google-Smtp-Source: AGHT+IEVOJtCHOIt+oXlZfT6LNNgbvpsUDAbxleU/QtrWGO9Mbj1MwXkXCoo/1YpIeifrAMVcA0Sug==
+X-Received: by 2002:a05:620a:4085:b0:7ac:dfed:65ee with SMTP id
+ af79cd13be357-7b67c2568efmr470806185a.3.1732733695230; 
+ Wed, 27 Nov 2024 10:54:55 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466b0a61144sm15319341cf.27.2024.11.27.10.54.46
+ af79cd13be357-7b67a76dcc7sm124584885a.30.2024.11.27.10.54.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 10:54:47 -0800 (PST)
-Date: Wed, 27 Nov 2024 12:54:44 -0600
+ Wed, 27 Nov 2024 10:54:54 -0800 (PST)
+Date: Wed, 27 Nov 2024 12:54:51 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- U-Boot-Denx <u-boot@lists.denx.de>, David Regan <dregan@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>
-Subject: Re: Pull request for u-boot-nand-20241126 External
-Message-ID: <20241127185444.GB3600562@bill-the-cat>
-References: <CAOf5uwkTusCYYEBTQ6xN3SyFg0z3mujVG+SRx9X8kB9E1nWMcQ@mail.gmail.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20241127185451.GC3600562@bill-the-cat>
+References: <Z0cZ274duxXqZ-9r@swlinux02>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R3nbbc/SFcya+GRh"
+ protocol="application/pgp-signature"; boundary="mso9HhrG1bGEMOEZ"
 Content-Disposition: inline
-In-Reply-To: <CAOf5uwkTusCYYEBTQ6xN3SyFg0z3mujVG+SRx9X8kB9E1nWMcQ@mail.gmail.com>
+In-Reply-To: <Z0cZ274duxXqZ-9r@swlinux02>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,14 +95,14 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---R3nbbc/SFcya+GRh
+--mso9HhrG1bGEMOEZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 27, 2024 at 11:12:46AM +0100, Michael Nazzareno Trimarchi wrote:
+On Wed, Nov 27, 2024 at 09:08:43PM +0800, Leo Liang wrote:
 
-> Hi Tom
+> Hi Tom,
 >=20
 > The following changes since commit 3881c6b90350b0b04085ad46ef64989b43967e=
 ef:
@@ -114,60 +111,37 @@ ef:
 >=20
 > are available in the Git repository at:
 >=20
->   git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
-> mike/u-boot-nand-20241126
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
 >=20
-> for you to fetch changes up to 5b70f26fed5aee9820530fd818f041d1779a4911:
+> for you to fetch changes up to bdca70632dad38a1f7830c955771c0bd88ce7ae0:
 >=20
->   mtd: rawnand: brcmnand: update log level messages (2024-11-26 21:14:44 =
-+0100)
+>   configs: enable CONFIG_PCI_REGION_MULTI_ENTRY=3Dy in sifive_unmatched_d=
+efconfig (2024-11-27 19:58:08 +0800)
 >=20
-> Description comes from David Regan, that include a nice summary.
->=20
-> Remove device specific nand driver files as they are now replaced
-> by a common driver bcmbca_nand.c
->=20
-> Make use of OF_UPSTREAM which uses Linux dts.
->=20
-> Implement a minimal set of defconfig options to enable basic NAND
-> functionality. Tested on:
-> 47622
-> 63146
-> 63158
-> 63178
-> 6813
->=20
-> Set parameter_page_big_endian to zero for bcmbca.
->=20
-> Update log level messages so that more critical messages can be logged
-> to console and help the troubleshooting with field devices.
->=20
-> The patches pass the pipeline CI:
-> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/23=
-584
->=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/23592
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---R3nbbc/SFcya+GRh
+--mso9HhrG1bGEMOEZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdHavQACgkQFHw5/5Y0
-tywXtAwAg0orSeF91IHl3y2/svrxo96GhldTChpNiBOfVA4EQ8aiHIX8E2oA4Gxh
-fejPswX+o/9Q8QHGyvMQr3nehR3+hSTaRNhqlhCXOwkDFRjPKTjG4Zbgu7LJ5Orj
-g4NSw27UzKfSzWrHgHaDKnXqjjUKBa/KSW/2vgvlbKXV9FR+vAVAUzN+USVYjzYj
-pFWq3FidVSOoamgV8/O8O3n3i3YEwrx2xbBf7lXIVT7J202W4SJwepGt0u/r2npd
-V5tTTWzUKhJ//AoGXmcQVxzKh9MOnvKF/81jH2QAw/NxOdO6KAl5Rnv1UrF2Lpfb
-DP7uhkTDXFT66salfJlTSVOY2rZhPuluoXscM7KajbhEly+SFNYAnCIeiSjmA2lb
-diHx6Hre7b/HlAJen3DDzJpkqT9dHyreefB0YemGxAF04v7YkCH5DCJSrChefq4Q
-wbwaF4MhfXS22+if+lu8oocyU54WQKVLs4bF5Vgr2xw9gyqbr7JlxuZMaaMFFgQM
-QRRRUVbr
-=RV/h
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdHavsACgkQFHw5/5Y0
+tywxoQwAkcYkr8VAWBcWIFCh5251s/3MR1CnsKVwAzja8RwE28WV/udqojk5pp5y
+yLYazrM6WerGiillOzxCI/XHPhaMVfwG3xJDFa6fq+nPshtlj2XjWxStNnZebeK3
+vltlN2lDn07eO5W8ds9Jt99pjdJzRMg+NDw6lhrhn9+CVWEqhjacu0F8+gp/3Zg9
+vEhrbCDjyf2INn78E+iYYzIFfwydkdwZwtKIYDQ8cMCx1B8DHkKcbspI1TxN2Rzs
+dqdWCx2FZU6LShEmMxakxENfPvMQN7kHaXPaY+HbGOVrfew2FquIT12exk8jVk1b
+FCzpTZex550HIvn0+jU1DYGm2N90IsKoADOCSW+mMkS5Utq8nZEbYzqsug0HxdHn
+/hCCTe4zxW1clWNtE4v7/CfVNyiQG29Xuvzcq7XpyNn8Pt4yJVWY6nHhlBKNwACH
+hv92d178uP4IZRAUSTcWiNOw2UHcxWjpzu9pj/GNvaBKi1ZFogiBDmcuu9fntQUe
+bYCiHZbC
+=meAF
 -----END PGP SIGNATURE-----
 
---R3nbbc/SFcya+GRh--
+--mso9HhrG1bGEMOEZ--
