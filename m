@@ -4,61 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F0ED6ACE4
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B5F5D6ACE4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:54:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D875895D2;
-	Wed, 27 Nov 2024 15:54:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B138897D8;
+	Wed, 27 Nov 2024 15:54:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SJS+COwQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JvLuo9gy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86282895D2; Wed, 27 Nov 2024 15:54:07 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7852F895A0
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:54:05 +0100 (CET)
+ id 57A4B897D8; Wed, 27 Nov 2024 15:54:11 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C9C9897E5
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:54:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AREs41N075184;
- Wed, 27 Nov 2024 08:54:04 -0600
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AREs7WF1013245
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 27 Nov 2024 08:54:07 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732719244;
- bh=bHQFAT1bGAywQblOohmBn6G3oCw30B3Sa805J2auzvo=;
+ s=ti-com-17Q1; t=1732719247;
+ bh=cW5AEXtvHiutrtBXiwDQudWmvfWS4td+ylE7hSPSuTA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=SJS+COwQOEx83Yqr+IPsf+lp/rmBX7tIuwGLjzdkb79O2BzV1A4Jh9nsD4CYY6Ddi
- cwQVunEEJbsQDVSXGu/cwojL+ODurGD2E690ESA5nvSH74hZNUyDqwZC4ag2ix+atY
- Ngj6yvJpkAWlDKo/t/2LfiVtO+N4hnMMx9P278KA=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AREs3AI056388
+ b=JvLuo9gyk52d+LR5MqAChHz/tNWGzt5/uVq0P2SC1CUWaH7GupRmXcN5Cs+0w9lDI
+ PTwEYpTjbs6+Oc0G2BqXCiC2JYXEB/u7pv4Y2YNpRdwhKkDgoObR1NIDNUqV1wIh8C
+ zO/nZWBeUmA6QVgO2n7P+EaTtZn+w9Z4HqoFEyuA=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AREs7oc056479
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Nov 2024 08:54:04 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 27 Nov 2024 08:54:07 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Nov 2024 08:54:03 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 08:54:07 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Nov 2024 08:54:03 -0600
+ Frontend Transport; Wed, 27 Nov 2024 08:54:07 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ARErlpF051687;
- Wed, 27 Nov 2024 08:53:59 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ARErlpG051687;
+ Wed, 27 Nov 2024 08:54:03 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>
 CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
  <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
  <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 3/4] configs: j784s4_evm_a72_defconfig: Enable BIST
-Date: Wed, 27 Nov 2024 20:23:45 +0530
-Message-ID: <20241127145346.2609868-4-n-francis@ti.com>
+Subject: [PATCH 4/4] DONOTMERGE: arm: mach-k3: j784s4_init: Trigger LBIST and
+ PBIST on MAIN R5 2_0
+Date: Wed, 27 Nov 2024 20:23:46 +0530
+Message-ID: <20241127145346.2609868-5-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241127145346.2609868-1-n-francis@ti.com>
 References: <20241127145346.2609868-1-n-francis@ti.com>
@@ -82,26 +84,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the BIST driver to be able to successfully probe and trigger BIST
-tests on MAIN_R5 cores.
+Trigger all tests of PBIST and LBIST using appropriate calls to set the
+core under test (MAIN R5 2_0) to it's required state.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- configs/j784s4_evm_a72_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/j784s4/j784s4_init.c | 48 +++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index c7fc6bedda3..643e73dc7e4 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -3,6 +3,7 @@ CONFIG_ARCH_K3=y
- CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_SYS_MALLOC_F_LEN=0x8000
- CONFIG_SPL_GPIO=y
-+CONFIG_K3_BIST=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=2
+diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
+index 07b5d7d7504..f9bd13d962b 100644
+--- a/arch/arm/mach-k3/j784s4/j784s4_init.c
++++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
+@@ -17,6 +17,7 @@
+ #include <dm/pinctrl.h>
+ #include <mmc.h>
+ #include <remoteproc.h>
++#include <k3_bist.h>
+ 
+ #include "../sysfw-loader.h"
+ #include "../common.h"
+@@ -233,9 +234,56 @@ void k3_mem_init(void)
+ 
+ void board_init_f(ulong dummy)
+ {
++	struct udevice *dev;
++	int ret;
++
+ 	k3_spl_init();
+ 	k3_mem_init();
+ 
++	if (!IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_BIST)) {
++		ret = uclass_get_device_by_driver(UCLASS_MISC,
++						  DM_DRIVER_GET(k3_bist),
++						  &dev);
++		if (ret)
++			printf("Failed to run BIST: %d\n", ret);
++
++		struct bist_ops *ops = (struct bist_ops *)device_get_ops(dev);
++		struct ti_sci_handle *handle = get_ti_sci_handle();
++
++		/* get status of HW POST PBIST on MCU1_x */
++		ret = ops->run_pbist_post();
++		if (ret)
++			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
++
++		/* trigger PBIST tests on MCU4_0 */
++		prepare_pbist(handle);
++		ret = ops->run_pbist_neg();
++		deprepare_pbist(handle);
++
++		prepare_pbist(handle);
++		ret |= ops->run_pbist();
++		deprepare_pbist(handle);
++
++		prepare_pbist(handle);
++		ret |= ops->run_pbist_rom();
++		deprepare_pbist(handle);
++
++		if (ret)
++			panic("PBIST on MCU4_0 failed: %d\n", ret);
++
++		/* get status of HW POST PBIST on MCU1_x */
++		ret = ops->run_lbist_post();
++		if (ret)
++			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
++
++		/* trigger LBIST tests on MCU1_x */
++		prepare_lbist(handle);
++		ret = ops->run_lbist();
++		deprepare_lbist(handle);
++		if (ret)
++			panic("LBIST on MCU4_0 failed: %d\n", ret);
++	}
++
+ 	if (IS_ENABLED(CONFIG_CPU_V7R))
+ 		setup_navss_nb();
+ 
 -- 
 2.34.1
 
