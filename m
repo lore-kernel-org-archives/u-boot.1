@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3614D609A8
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D2AED609A7
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36B1A8978B;
-	Wed, 27 Nov 2024 08:06:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 90FF489792;
+	Wed, 27 Nov 2024 08:06:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BllTBnhI";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RjSNUrES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74EB989768; Wed, 27 Nov 2024 08:06:46 +0100 (CET)
+ id DBEA689788; Wed, 27 Nov 2024 08:06:47 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D3A28977E
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 08:06:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 578BA89788
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 08:06:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 516543F212; 
- Wed, 27 Nov 2024 07:06:43 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2F9604100C; 
+ Wed, 27 Nov 2024 07:06:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1732691204;
- bh=3CrcaoZPDvYXeEKdnJj2CalIIYn6gCqdCfPogLaRt2M=;
+ bh=60UizV1RhNYnBu4fhQ3Mnm8aBDyAmUk07Ir/p7v8nws=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=BllTBnhIM64rZPE/Osfb2Sso3Jjw0rGLuDf4CEBzk3B7lVNPIPACtE4ozUGjLHAHF
- I2gLdZxsmQA81tdOMP0+18dO9w0ZG73Cw65xMrMHG6/BlpQlC9z/h7eu7EXAB0CXRD
- wWrFTW8e/VjqWIr7B04y77MWOom8PhrrEqTjJZHizmkcpMs2ftO7xGZLBhSJF8YL0A
- 3+U1TQa7Kt9yuQ5f94GAfzc/61LkuiEemh/RveIJmRdUWfcneI/WuyHYE/eRKlCupe
- Gxycu8vP7SGfpXzbFvB9k8PYb2XecJQBhzf0eqd/ktmboYD7wJtroCNhLBqUhTG1YU
- AolKZhh+vKIsQ==
+ b=RjSNUrESI6WvbTrsy5ecBRg2LNSp/TiRx5ayqZxYZQsrim57H3zl8hDrUFylKWu71
+ WFEp1oILiHNWwNdZtaAgl/hb652T5fm/gzpHPVOh5bf+SbakBB+b5cUqlmR34NA0no
+ gqdCtyzKUk6pczzeNSq3PsWSnwpr1DhCSCpwtYc/ptWLsq1oNhpYZmv86FPehPxaye
+ sHB8SXCGJwMCigvRPezqYAwp1lu4QFRAibjoSBF7UEg7CyOLZATjBrjXR/59Mja4eq
+ 8IJ/8q0AC1m3J7EpybAS/6koecGlsB0CHTuIavUhuv2aaridCX1hIzQX27ocSE+Wom
+ xACDLdmeS5zGA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
@@ -61,9 +61,10 @@ Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/6] test: fix test_extension.py
-Date: Wed, 27 Nov 2024 08:06:26 +0100
-Message-ID: <20241127070631.16412-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 2/6] configs: sandbox_deconfig: remove
+ CONFIG_AMIGA_PARTITION
+Date: Wed, 27 Nov 2024 08:06:27 +0100
+Message-ID: <20241127070631.16412-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
 References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
@@ -85,35 +86,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-test_extension.py assumes that no extension is known at test start.
-This assumption is wrong because we do not come out of reboot.
-A prior test may have already hunted for the extension bootdev.
+We do not actually test the code.
+Scanning for Amiga partitions of the sandbox is extremely slow,
+especially on the partially implemented USB device.
 
-Remove the invalid assert.
+For build testing the other sandbox defconfigs are good enough.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
 	no change
 ---
- test/py/tests/test_extension.py | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ configs/sandbox_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/test/py/tests/test_extension.py b/test/py/tests/test_extension.py
-index 267cf2ff27c..2a3c5116171 100644
---- a/test/py/tests/test_extension.py
-+++ b/test/py/tests/test_extension.py
-@@ -26,7 +26,9 @@ def test_extension(u_boot_console):
-     load_dtb(u_boot_console)
- 
-     output = u_boot_console.run_command('extension list')
--    assert('No extension' in output)
-+    # extension_bootdev_hunt may have already run.
-+    # Without reboot we cannot make any assumption here.
-+    # assert('No extension' in output)
- 
-     output = u_boot_console.run_command('extension scan')
-     assert output == 'Found 2 extension board(s).'
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 718e4a8283c..683888f238f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -142,7 +142,6 @@ CONFIG_CMD_SQUASHFS=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_CMD_STACKPROTECTOR_TEST=y
+ CONFIG_MAC_PARTITION=y
+-CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+ CONFIG_ENV_IS_NOWHERE=y
 -- 
 2.45.2
 
