@@ -4,62 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BEB9D609B0
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 09:05:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25754D609C4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 09:47:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B97AD892DE;
-	Wed, 27 Nov 2024 10:05:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DB9C89731;
+	Wed, 27 Nov 2024 10:47:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PDXc/Qfu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gy+pSKFv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0029E893A4; Wed, 27 Nov 2024 10:05:31 +0100 (CET)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 24F2389775; Wed, 27 Nov 2024 10:47:29 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D2889046
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 10:05:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.bonnefille@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A744124000F;
- Wed, 27 Nov 2024 09:05:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1732698329;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5otO2C67bAQEqVL5H6pT4uzkm4j06WU0iP/eLrL17lc=;
- b=PDXc/QfuMqUM7lQZ5kJ+q4COXi36/QO5JQU8nymH6NRicVPv58ds5/wqUZklZNo4jsXieu
- yS1A0YrdKpm5TxBNqB6nozvk9DBySYLRrWyHRDKS1UI+qdTroDdwciuIXYZw1UU77UWMYm
- 8bQgkGb0fbEptpNZZO5cpOHLFwsrlhz2hKmwerWF3/261c01GpNaUP6sLT7+XH1d1lGF/q
- q5oO2G2z5iGqsgwnSJ0VmLBBzYp/Y3OA6+LYD0XgeK2mh4H5HjysYBhYWhx4/kTnMZyPdN
- GzojMIzHyx3WhNYunaXCv+zOxP4fZjGhNl2vb3Y/HILgrqwiuNRE1MqcL4QQHw==
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 27 Nov 2024 10:05:28 +0100
-Message-Id: <D5WUAN7HC5ND.1PMXQHYOO2PUG@bootlin.com>
-Cc: "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung" <jh80.chung@samsung.com>,
- "Tom Rini" <trini@konsulko.com>, "Rick Chen" <rick@andestech.com>,
- "Kongyang Liu" <seashell11234455@gmail.com>, "Thomas Petazzoni"
- <thomas.petazzoni@bootlin.com>, =?utf-8?q?Miqu=C3=A8l_Raynal?=
- <miquel.raynal@bootlin.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/3] riscv: dts: sophgo: add device tree for LicheeRV Nano
-From: "Thomas Bonnefille" <thomas.bonnefille@bootlin.com>
-To: "Leo Liang" <ycliang@andestech.com>
-X-Mailer: aerc 0.18.2-0-ge037c095a049
-References: <20241112-licheerv-nano-v1-0-bf75d1eb560e@bootlin.com>
- <20241112-licheerv-nano-v1-2-bf75d1eb560e@bootlin.com>
- <ZzsQb-QO2YrffjeB@swlinux02> <D5QFYNC0TNVT.11K9SURYSS7W1@bootlin.com>
- <Z0RKnfpS5d4I5QbG@swlinux02>
-In-Reply-To: <Z0RKnfpS5d4I5QbG@swlinux02>
-X-GND-Sasl: thomas.bonnefille@bootlin.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1703D89773
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 10:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 3D8A0A41DEB;
+ Wed, 27 Nov 2024 09:45:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4ECB2C4CECC;
+ Wed, 27 Nov 2024 09:47:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1732700845;
+ bh=d+X+L0PzlNxX1oIvcJ97sDeVOApKbCAzHgalL3bgAcE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=gy+pSKFvcBu5sxZ2qYr1aqBOT0k6ToXseoRtQV7GzHv70A9DyCQFggEbswKa4Jfid
+ Xjb17NWguiApZ2651m57g3fCW8lk2z71l+6XuhSumoJTAkYDK8uy/gGJnjXX6Jdhrp
+ YVgZGPMgcauBFeCU1dABvOU0zpwwW+LdZWhWzrEnsbNojtkK0pp4DUoF9sSksCeCMr
+ jBw6rvxULGDD0v3GcXYfcD+uKR85BQUx2ALKLVDCwtq5ymPtnZ+vQaZColSDcjoTxW
+ 1qmKOPx212S6CHXK9kpdboVh9wgorkNsF4K69vYC5yY+EToYGiksRibj+Y+Z+t+EE8
+ S31yw7REx6OEA==
+Date: Wed, 27 Nov 2024 10:47:21 +0100
+From: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>, Stefan Roese <sr@denx.de>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] cmd/rng: fix long help text
+Message-ID: <o6h7ajw3qkwkuurllnaqhw3mudjxbqnma6kfgqtx2g7lik6kh2@m2asyz3a55bh>
+References: <20241126142026.68680-1-heinrich.schuchardt@canonical.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20241126142026.68680-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,57 +70,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon Nov 25, 2024 at 10:59 AM CET, Leo Liang wrote:
-> On Tue, Nov 19, 2024 at 09:35:32PM +0100, Thomas Bonnefille wrote:
-> > [EXTERNAL MAIL]
-> >=20
-> > On Mon Nov 18, 2024 at 11:01 AM CET, Leo Liang wrote:
-> > > On Tue, Nov 12, 2024 at 03:57:37PM +0100, Thomas Bonnefille wrote:
-> > > > [EXTERNAL MAIL]
-> > > >
-> > > > Import a slightly modified version of the LicheeRV Nano and SG2002
-> > > > device trees from the Linux Kernel. The current supported IPs are U=
-ART,
-> > > > MMC, Timer, PLIC and CLINT.
-> > > >
-> > > > Signed-off-by: Thomas Bonnefille <thomas.bonnefille@bootlin.com>
-> > > > ---
-> > > >  arch/riscv/dts/Makefile                   |  1 +
-> > > >  arch/riscv/dts/sg2002-licheerv-nano-b.dts | 45 +++++++++++++++++++=
-++++++++++++
-> > > >  arch/riscv/dts/sg2002.dtsi                | 34 +++++++++++++++++++=
-++++
-> > > >  3 files changed, 80 insertions(+)
-> > >
-> > > Hi Thomas,
-> > >
-> > > Could we switch to use OF_UPSTREAM ?
-> > >
-> >=20
-> > Hello Leo,
-> >=20
-> > Thank you for your review, I have a question though.
-> >=20
-> > The LicheeRV Nano device tree isn't upstreamed yet. It's just in the
-> > Sophgo SoC maintainer tree and should be merged in v6.13 so in ~10 week=
-s.
-> > Can I keep it out of dts/upstream for the moment or should I merge it b=
-y
-> > hand before ?
->
-> Hi Thomas,
->
-> Got it! So there should be a follow-up patch that=20
-> switch to OF_UPSTREAM once the upstream LicheeRV Nano DTS is settled, rig=
-ht?
+Acked-by: Marek Behún <kabel@kernel.org>
 
-Yes, of course, I'll do that when Linux 6.13 comes out.
-
->
-> I can take this patch as is for now. Thanks!
->
-> Best regards,
-> Leo
-Thank you very much !
-
-Best regards, Thomas
+On Tue, Nov 26, 2024 at 03:20:26PM +0100, Heinrich Schuchardt wrote:
+> The number of bytes may only be specified if a device number id provided.
+> 
+> Correct the formatting.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  cmd/rng.c             | 4 ++--
+>  doc/usage/cmd/rng.rst | 4 ++--
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/cmd/rng.c b/cmd/rng.c
+> index 2fb7202303a..4d91094a8ec 100644
+> --- a/cmd/rng.c
+> +++ b/cmd/rng.c
+> @@ -75,6 +75,6 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>  U_BOOT_CMD(
+>  	rng, 3, 0, do_rng,
+>  	"print bytes from the hardware random number generator",
+> -	"list         - list all the probed rng devices\n"
+> -	"rng [dev] [n]    - print n random bytes(max 64) read from dev\n"
+> +	"list          - list all probed rng devices\n"
+> +	"rng [dev [n]] - print n random bytes (max 64) read from dev\n"
+>  );
+> diff --git a/doc/usage/cmd/rng.rst b/doc/usage/cmd/rng.rst
+> index 4a61e33d272..c071f01e841 100644
+> --- a/doc/usage/cmd/rng.rst
+> +++ b/doc/usage/cmd/rng.rst
+> @@ -12,14 +12,14 @@ Synopsis
+>  ::
+>  
+>      rng list
+> -    rng [dev] [n]
+> +    rng [dev [n]]
+>  
+>  rng list
+>  --------
+>  
+>  List all the probed rng devices.
+>  
+> -rng [dev] [n]
+> +rng [dev [n]]
+>  -------------
+>  
+>  The *rng* command reads the random number generator(RNG) device and
+> -- 
+> 2.45.2
+> 
