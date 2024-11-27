@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A97C5D609A8
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:06:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3614D609A8
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 07:06:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C637189776;
-	Wed, 27 Nov 2024 08:06:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36B1A8978B;
+	Wed, 27 Nov 2024 08:06:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LLXuQWAZ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BllTBnhI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2E948978B; Wed, 27 Nov 2024 08:06:45 +0100 (CET)
+ id 74EB989768; Wed, 27 Nov 2024 08:06:46 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C53C389768
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 08:06:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D3A28977E
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 08:06:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E00004093E; 
- Wed, 27 Nov 2024 07:06:39 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 516543F212; 
+ Wed, 27 Nov 2024 07:06:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1732691200;
- bh=vW44iktlWPdRzxaMCP/RWnYSsFYSVwgWRXavKTxXPUU=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=LLXuQWAZgMWdVq77sr8R4hw4kYn7uapygkjy2KNb2u2YU+xrdPT3s8epgWGxukkBq
- heHBqc1BO6OPHEELM1izcmlU54X5etAIlz+5/G5n721HQi15gG6o8+IxfZqszuERIb
- OYARZJyvWzy9+2yRQDpTTrKvJDE4tqsormqyhLG4kjLmFuGRAqm1nOEpVNHB/0mcha
- mzQCglsIzV4jT30iWolfsyAocIwAJFW6J+4YM7XVzoBFlYgfd4K/tD2aa7Ded4KDQi
- 8cMpLGvztezSbH02BCzBTAzj+BUxYwueV4R9JiP9FaEuFjffJVzPPmLrsP7JyMAvGv
- JPp6h3/9NWrrA==
+ s=20210705; t=1732691204;
+ bh=3CrcaoZPDvYXeEKdnJj2CalIIYn6gCqdCfPogLaRt2M=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=BllTBnhIM64rZPE/Osfb2Sso3Jjw0rGLuDf4CEBzk3B7lVNPIPACtE4ozUGjLHAHF
+ I2gLdZxsmQA81tdOMP0+18dO9w0ZG73Cw65xMrMHG6/BlpQlC9z/h7eu7EXAB0CXRD
+ wWrFTW8e/VjqWIr7B04y77MWOom8PhrrEqTjJZHizmkcpMs2ftO7xGZLBhSJF8YL0A
+ 3+U1TQa7Kt9yuQ5f94GAfzc/61LkuiEemh/RveIJmRdUWfcneI/WuyHYE/eRKlCupe
+ Gxycu8vP7SGfpXzbFvB9k8PYb2XecJQBhzf0eqd/ktmboYD7wJtroCNhLBqUhTG1YU
+ AolKZhh+vKIsQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
@@ -60,10 +61,12 @@ Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/6] efi_loader: run bootdev_hunt() to find ESP
-Date: Wed, 27 Nov 2024 08:06:25 +0100
-Message-ID: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/6] test: fix test_extension.py
+Date: Wed, 27 Nov 2024 08:06:26 +0100
+Message-ID: <20241127070631.16412-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
+References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -82,62 +85,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When initializing the EFI sub-system we need all block devices and the
-NIC to be probed. Extensions should have been applied to the device-tree.
+test_extension.py assumes that no extension is known at test start.
+This assumption is wrong because we do not come out of reboot.
+A prior test may have already hunted for the extension bootdev.
 
-Our current implementation only guarantees that bound block devices are
-probed. But this misses out devices where binding requires specific
-routines to be executed, e.g. NVMe (nvme scan), SCSI (scsi start).
+Remove the invalid assert.
 
-Invoking bootdev_hunt() allows to find all block devices, probe the
-network nic, and enable extensions.
-
-Reviewers complained that PXE boot was executed unexpectedly with a patch
-that only added the bootdev_hunt() call to the EFI sub-system
-initialization.
-
-The EFI sub-system does not require the IP address to be set up. We can
-reduce the boottime by not executing dchp_run() in eth_bootdev_hunt().
-
-Furthermore on the legacy network stack with autostart=yes dhcp_run()
-tries to download the boot file via TFTP and execute it which seems
-to be a problem with non-observance of autoload=no.
-
-To fix Gitlab CI issues the following changes are necessary:
-
-In test_extension.py do not assume that extensions have not been loaded
-by bootdev hunter in a previous test.
-
-Remove CONFIG_AMIGA_PARTITION from sandbox_deconfig to avoid a timeout.
-
-Remove CONFIG_USB_DWC3 on the CI from xilinx_versal_virt_defconfig to
-avoid a boot failure.
-
-Add a parameter '-e' to select if UEFI boot options shall be shown by
-the bootmenu command.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	disable USB_DWC3 only in CI
-	update commit message for eth_bootdev_hunt() change
+	no change
+---
+ test/py/tests/test_extension.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Heinrich Schuchardt (6):
-  test: fix test_extension.py
-  configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
-  CI: xilinx_versal_virt: disable USB_DWC3
-  net: eth_bootdev_hunt() must not try to boot
-  cmd: bootmenu: add parameter -e for UEFI boot options
-  efi_loader: run bootdev_hunt() to find ESP
-
- .azure-pipelines.yml            |  1 +
- .gitlab-ci.yml                  |  1 +
- cmd/bootmenu.c                  | 39 +++++++++++++++++++++++++--------
- configs/sandbox_defconfig       |  1 -
- doc/usage/cmd/bootmenu.rst      | 13 ++++++++---
- lib/efi_loader/efi_setup.c      |  8 +++++++
- net/eth_bootdev.c               | 30 +++++++++++++++----------
- test/py/tests/test_extension.py |  4 +++-
- 8 files changed, 71 insertions(+), 26 deletions(-)
-
+diff --git a/test/py/tests/test_extension.py b/test/py/tests/test_extension.py
+index 267cf2ff27c..2a3c5116171 100644
+--- a/test/py/tests/test_extension.py
++++ b/test/py/tests/test_extension.py
+@@ -26,7 +26,9 @@ def test_extension(u_boot_console):
+     load_dtb(u_boot_console)
+ 
+     output = u_boot_console.run_command('extension list')
+-    assert('No extension' in output)
++    # extension_bootdev_hunt may have already run.
++    # Without reboot we cannot make any assumption here.
++    # assert('No extension' in output)
+ 
+     output = u_boot_console.run_command('extension scan')
+     assert output == 'Found 2 extension board(s).'
 -- 
 2.45.2
 
