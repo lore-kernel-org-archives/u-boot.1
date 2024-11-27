@@ -4,96 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F41D6ACDC
-	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:15:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41667D6ACE4
+	for <u-boot@archiver.kernel.org>; Wed, 27 Nov 2024 14:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED36A8907B;
-	Wed, 27 Nov 2024 15:15:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C2B6895E2;
+	Wed, 27 Nov 2024 15:53:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jgK5iW7K";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KB2xJ4Y8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02F2D893E7; Wed, 27 Nov 2024 15:15:40 +0100 (CET)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DE8F8895E2; Wed, 27 Nov 2024 15:53:56 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81595887D1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:15:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED172895A0
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 15:53:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-4668f208f10so28500421cf.3
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 06:15:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732716936; x=1733321736; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IXQROYn9qY+tk68VbX0pF3F2bN8jqnIlSrrkqYnoEbE=;
- b=jgK5iW7Kmu6+AcVFdmBCNUDeZywWsAjLgecDP6uEpQB3tvgnla6vaU2oQOSNOWQHts
- c40bE6LtEbBVYxuAKp32N1QC3xHS/kgW6Z8XNvFkH3VUlQDwLt4ZKEPomNFb2PCYMs6Y
- eAjD5TZl3plYs8SIXNqnNlMcA73cE3kfoclPc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732716936; x=1733321736;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IXQROYn9qY+tk68VbX0pF3F2bN8jqnIlSrrkqYnoEbE=;
- b=PrD+Ab5wshL3egtpqIS7PlDmTMLIBNBmZGT6YFrOkQBOOL4CYei6f6TOOGrjf5xLtq
- 8VzMNKb8/Xav8Q8UA4wBqviZcS1DirAVvxN2iIP4gL0TUmEljBn/IUSjWFIoPbu3+R9I
- msmwnHJny+gt85xm7dW11g7DqgtLk5rnWhEB7Ft+7TdmM65rrWoL7dBkF7H9cwAg//CB
- wCnVF+n0+RFwLaJAKvt5igGdmdSNCAgyyszoLU9I4qhqz5XdPx/1zmq/wLUhNb1SDYso
- PPMUJJxAw3q/GThqJhGLUWy/sOcYYxhP7NFiVB33EmAGDfBMDdfKEw81VYs4jejMELLs
- g8MQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVT+dq7eClYtu3Es3BN94oFkOEaLPyDtlgxkyQsqwV2QqoiIrico68gLA8GZImzuQkwYtmL2K8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPIvcBxuY/QbISQNqKapaJW6X2HUbEkGQI82T5X82K6VtUn6nP
- 4yH52FqC0GOvlozK2+vg5rCxjmsADaBwAtU69cpBC5mlXHU0GmND1bNA02FBHBk=
-X-Gm-Gg: ASbGnctDwXyM3AQ/N5of+zupfZIWZdudgpEjgbYq+IQrt/m1+8Gv8pRS2Y+ppTCvC0E
- fyy+gm9e5k8YoT2IAsI25EEN5ewL9unzBDZuNzaf/DlMuuEawytiArnWUovpmccCq3tQSpljehd
- wu7EDmZD9jmLlK2NV8aiG40QWaRxztiS+sNDma2y5uuQqc5uH4EEBstG4lj8Qk6cpLtu2mQfTf5
- +q8UnjcnRBYFt3lR5QOiBkIeqN8gQZ9sFwwuYipObHqAcXbPw==
-X-Google-Smtp-Source: AGHT+IEfITcYKVc99YO06nAf4y1zXhRgGiGfcqc5U2R4tF1e+eFBSoGl99LUDDkGiYsW+g9ZiIqE3Q==
-X-Received: by 2002:ad4:5cc7:0:b0:6d4:85f:ccac with SMTP id
- 6a1803df08f44-6d864d3eae0mr39666336d6.13.1732716936212; 
- Wed, 27 Nov 2024 06:15:36 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d451b23eccsm66460766d6.94.2024.11.27.06.15.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 06:15:35 -0800 (PST)
-Date: Wed, 27 Nov 2024 08:15:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
- header
-Message-ID: <20241127141532.GZ3600562@bill-the-cat>
-References: <20241125204456.1525752-1-sjg@chromium.org>
- <20241125204456.1525752-6-sjg@chromium.org>
- <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
- <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
- <20241126155508.GR3600562@bill-the-cat>
- <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
- <20241126223332.GV3600562@bill-the-cat>
- <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
- <20241126233218.GW3600562@bill-the-cat>
- <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ARErpEd075092;
+ Wed, 27 Nov 2024 08:53:52 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732719232;
+ bh=CxLzryrAdSmcFm5lQjOwi5kRPKodMOHAR/DOf4JITzI=;
+ h=From:To:CC:Subject:Date;
+ b=KB2xJ4Y8Uf0/LVY/32C1V2vFdtjjnV3MVmphHRdgCPCy2qfFs1wEmcGFLZhj1PsTl
+ j205ZCaWbBLb2bvw9FP/84SfMAKmVhNeDFLvQCb8tZEMUOax6fZtv2AYC+q9f979wF
+ kbNguWo7MJBfM0seEpeDa5zECzZ/zuZPux/IuXOg=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ARErpbx056234
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Nov 2024 08:53:51 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Nov 2024 08:53:51 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Nov 2024 08:53:51 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ARErlpC051687;
+ Wed, 27 Nov 2024 08:53:48 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 0/4] Add support for K3 BIST
+Date: Wed, 27 Nov 2024 20:23:42 +0530
+Message-ID: <20241127145346.2609868-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TF5XHdfn4VAuhIgV"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,148 +80,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series implements a driver for the BIST (Built-In Self Test) module
+for K3 devices. The BIST driver must ideally support triggering of BIST
+tests, both PBIST (Memory BIST) and LBIST (Logic BIST) on a core. Both
+tests are destructive in nature. Please see links [1] and [2] for
+further information regarding the two.
 
---TF5XHdfn4VAuhIgV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+At boot up, BIST is executed by hardware for the MCU domain
+automatically as part of HW POST. So BIST has been checked only for the
+MCU domain when U-Boot comes up in the usual U-Boot to Linux boot flow.
+To facilitate the use-case where some safe firmware is intended to be
+run on a safe core, it is best to have triggered the BIST tests on that
+core. As an example, we take triggering the BIST tests on the MAIN R52_x
+cores. The triggering patch is kept as DONOTMERGE.
 
-On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
-> Hi,
->=20
-> On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
-> > > On 11/26/24 23:33, Tom Rini wrote:
-> > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
-> > > > > > > Hi Heinrich,
-> > > > > > >
-> > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glp=
-k@gmx.de> wrote:
-> > > > > > > >
-> > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
-> > > > > > > > > Exported functions should be documented in the header fil=
-e, not the
-> > > > > > > > > implementation. We tend to make such updates on a pieceme=
-al basis to
-> > > > > > > > > avoid a 'flag day'. Move some comments related to memory =
-allocation to
-> > > > > > > > > follow the convention.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > >
-> > > > > > > > Please, have a look at this line in doc/
-> > > > > > > >
-> > > > > > > > doc/api/efi.rst:78:
-> > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
-> > > > > > >
-> > > > > > > Hmm, we should not add C files as then we end up with all sor=
-ts of
-> > > > > > > internal functions, like checksum(). The help is a bit of a m=
-ess on
-> > > > > > > that page IMO and it could use an index at the top or side.
-> > > > > >
-> > > > > > Why? Looking at the linux kernel (where we borrow this framewor=
-k from
-> > > > > > and lots of developers expect to follow that style) it's extrem=
-ely
-> > > > > > common to kernel-doc C files. I don't see why documenting inter=
-nal
-> > > > > > functions (which should be clear as being internal) is a proble=
-m.
-> > > > >
-> > > > > It depends what you mean by docs. U-Boot puts the documentation f=
-or
-> > > > > exported functions in header files.
-> > > >
-> > > > I'm sorry, that's a circular definition. And no, there is not a har=
-d and
-> > > > fast rule that we only put kernel-doc style comments in header files
-> > > > (which are consumed by other files and tooling to generate
-> > > > documentation).
-> > > >
-> > > > > Putting docs in C files clutters the docs with internal
-> > > > > implementations, when most people just want to see the API. The w=
-ay
-> > > > > U-Boot does things, it is easy to see the internal (implementatio=
-n)
-> > > > > docs by looking at the C code and the external functions by looki=
-ng at
-> > > > > the header files.
-> > > >
-> > > > Or it makes things harder to understand because the human readable
-> > > > documentation for a given function is separate from the file the
-> > > > implements the function. This is possibly why in the linux kernel, =
-where
-> > > > we borrow "kernel-doc" from, documentation is frequently in the C f=
-ile
-> > > > which is then included in Documentation files (the type you objecte=
-d to
-> > > > in the start of this patch) which include additional human-readable
-> > > > explanation of the intention and usage of the API in question.
-> > > >
-> > >
-> > > For static functions we will continue to have function documentation =
-in
-> > > the C files and not in the headers. I personally never looked up the =
-API
-> > > documentation in the HTML docs but always in the source.
->=20
-> Same here.
->=20
-> > >
-> > > I am not opposed against moving the EFI function documentation into t=
-he
-> > > header files. But we should update doc/develop/efi.rst accordingly in
-> > > the same patch series. This is missing here.
->=20
-> OK
->=20
-> >
-> > My point is that the linux kernel is about 60% C files and 40% header
-> > files being kernel-doc'd in to documentation files and so "U-Boot
-> > doesn't put documentation in to C files" seems like the wrong approach.
->=20
-> U-Boot tries to document functions in header files. At the risk of
-> making a blanket statement with thousands of counter-examples, that is
-> not so much the case in Linux.
->=20
-> To a large extent, people developing features in U-Boot rely on the
-> header files to see what functions they can call. With the
-> documentation there, they often don't need to look at the source. I
-> certainly don't, unless the header-file comment is inadequate.
+The general procedure for triggering BIST on a core is:
+	1. Power on the core under test following a sequence
+	2. Trigger the BIST test
+	3. Reset the core under test following a sequence
 
-I think this is a case of what you do, rather than what everyone else
-does. We want to be more like the linux kernel here, rather than less
-like the linux kernel, given the number of kernel people also working
-here. If Heinrich is fine with re-arranging everything, OK. But I think
-documentation with the code makes it less likely to get out of date,
-both in terms of intentional changes and bug fixes.
+An RFC was posted earlier with an incomplete version of the driver along
+with a bug as mentioned in the cover-letter. The workaround to this was
+to trigger the BIST tests from A72 SPL where the DM (Device Manager
+firmware that handles power management) is already up and can perform
+the power sequences for us.
 
---=20
-Tom
+Boot logs (with LOG_DEBUG enabled):
+https://gist.github.com/nehamalcom/b6831be41b35023be33c566e6d2e4820
 
---TF5XHdfn4VAuhIgV
-Content-Type: application/pgp-signature; name="signature.asc"
+Link to RFC:
+https://patchwork.ozlabs.org/project/uboot/cover/20240903114402.2155740-1-n-francis@ti.com
 
------BEGIN PGP SIGNATURE-----
+[1] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/pbist.html#introduction
+[2] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/lbist.html#introduction
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdHKXwACgkQFHw5/5Y0
-tyx7AQv9E0xab5z700DymYnCuR3prR7eZYHJNJMiWQSswBxsLNhH5BMAz7+PQuAg
-tt286nBUDlZbB6jAFdj0AjpCtfSQ60HNaAxZge3X4I2PsOuzg/R6v1jVt6dJZ2/o
-H1gsNLfh4v9v9+TwhBbLAI8jnUuIGXwcgmWikZ3kw7jI7hEYQVidqFLxEtQHzudP
-RbuaX/fvU/Y+zmVmjWvwNmxbANYi4ewJdtk4DN/7abuqoIctPBkps2bO9TYcOIUZ
-JjhdnB//kjhwRzqp9IqxCtIKFFFOCWyCRfci3lidaPUat8zoLdN6CsXx65AVxDPo
-MQ4rd9x2zE89jJNpRmmi3YkNXNeaT6tKSb1OYXf6+EorSHaA/R2Pb7n7cWmdqwqL
-GUPcjlO6uLuCReBm2l4bVPfrvn3NW1KUp2djWqoDNNJS7TyfyR3Z4tEZOjDnYQoT
-QnjvIfgJrXfA+59qL+aDx55Ds/Dv1JeZmI/AShHHoZ5cre7vlA60ODo5ZuxK2sos
-j6wwC6nA
-=4bOh
------END PGP SIGNATURE-----
+Neha Malcom Francis (4):
+  arm: dts: k3-j784s4-main: Add PBIST_14 node
+  drivers: misc: k3_bist: Add K3 BIST driver
+  configs: j784s4_evm_a72_defconfig: Enable BIST
+  DONOTMERGE: arm: mach-k3: j784s4_init: Trigger LBIST and PBIST on MAIN
+    R5 2_0
 
---TF5XHdfn4VAuhIgV--
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  48 +
+ configs/j784s4_evm_a72_defconfig              |   1 +
+ drivers/misc/Kconfig                          |   8 +
+ drivers/misc/Makefile                         |   1 +
+ drivers/misc/k3_bist.c                        | 856 ++++++++++++++++++
+ drivers/misc/k3_bist_static_data.h            | 576 ++++++++++++
+ drivers/misc/k3_lbist_static_data.h           | 460 ++++++++++
+ dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi |  12 +
+ include/k3_bist.h                             |  44 +
+ 9 files changed, 2006 insertions(+)
+ create mode 100644 drivers/misc/k3_bist.c
+ create mode 100644 drivers/misc/k3_bist_static_data.h
+ create mode 100644 drivers/misc/k3_lbist_static_data.h
+ create mode 100644 include/k3_bist.h
+
+-- 
+2.34.1
+
