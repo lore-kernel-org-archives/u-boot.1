@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7719D690E0
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 07:11:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27AB6D690EF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 10:14:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D7B489510;
-	Thu, 28 Nov 2024 08:11:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 55CA38919A;
+	Thu, 28 Nov 2024 11:14:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rY3KoTLI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oJbJ40DX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7823C89608; Thu, 28 Nov 2024 08:11:28 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id DED3389501; Thu, 28 Nov 2024 11:14:57 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 573CB893D6
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 08:11:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 692D589078
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5cfe5da1251so593842a12.1
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 23:11:26 -0800 (PST)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4349f160d62so5614235e9.2
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 02:14:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732777886; x=1733382686; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TTNUsCRROLxZN/RF3nyODhqQB69D+GDX1WXoLBu24XM=;
- b=rY3KoTLItTrvryQZ8UqCsRhj5dHKsN1xJdcCW/y1N4DXbRn4QC5+nLjL9GzFSPV2HP
- E8dkaXxEV2xU3F8o+NvFMECEHvgO9SGYJKhMba/2WTZ+mmwl0JlnraJPzYpl4kBqnaXo
- XzSyZcUQCJg5d2YxEwh0Tlu7KJOh0Hvyu/Oiv3O5O83XDEoBqYyhLrB+gTo/Ox5TafGj
- BHU554XfPvVZQEp8VF8y6ytpYyjXuz5xLGZ8CXxpRvs4EHAvn6vXMMculVwjCPupKJge
- QhFVXVMWIWT8IccECffHFRNibXbYJgswDQyqdjg4EkXD1VEEU5C86eras8i9WnrfcAlh
- S9yg==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732788894; x=1733393694;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SPQstkYaF8+S8cT0TyP3SWCruN6uY9pnVzfcqeriUkw=;
+ b=oJbJ40DXpCVI6tLD54fuSO+3dP4gLu0pZ8VQLshwsS7yAv5sqNJBQDEDFEN7M1IVgJ
+ Xyz5M9uy5f/DAthU6Gee3J1vowpL+6n7uuEZOGztMXoiMnWcwCCWiXVJspI9W1mFpt/n
+ ugjEwPXOIDoxWmSDLVzuVZEzoSxBGE1M3EVPe/usCUw0AtaPAeToNT4b174NaI1px1nh
+ PNj30J0F6lo/47KdqiV6svn+6PWyCOP4g4pFs0yF8Ba49JohL+sZGQnNDX8b7xvNmm3L
+ jEpm3yt9+zRyXEafGfXEZiv/jA4A4zn7KcyaAzGPJsEWVM2LSFPOS+8gsXPaq9gSDC+R
+ X4lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732777886; x=1733382686;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1732788894; x=1733393694;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TTNUsCRROLxZN/RF3nyODhqQB69D+GDX1WXoLBu24XM=;
- b=cjM/UoqLSwVd49DTjXCd5MedkwGQuh7WAvn2IWONB80+U/6eN8quNru4r8htkM27rz
- yBeCjrOjtiPcPk6ctC2VVUIknE1scvQBQ1Eh9KgOdJLrvYWwHFXdWLLjDX/4bR62dpf/
- n8UWd1xgcsCzrR+M1hcksJhCT0+v/xDpbkV0wGssW1WIHMhYyPV3oppza/nr3B0sqhq5
- V+9doyJuSw1KfgE6YpMl7srlWQurFJ4ZmMFcKkETFR5dKJ4Q+Qy3SSXBodHfGi/fLTOy
- aye/8zsjoOkge5BkuaiygUp22XDmEAnW5INcDHSoyVcPsiwH4PwSzabkO3Ya2diFnpXg
- GKog==
+ bh=SPQstkYaF8+S8cT0TyP3SWCruN6uY9pnVzfcqeriUkw=;
+ b=J0gpQiOg8Bzk2OIlD8QUG5ENvLeaCp6Yde7PSuvxEfmWzZMaznECoUnYybJUYJH2TA
+ R2i6NkNTotTsjAEZ1iG+xCnJo8GQD/OKK9QiKWvVuGosaUJQLfrT0Kn7JkBRQsWW+x0d
+ rFXRq04ZGkHmtv7q+D9liEvGUvt9d3bE4CIg1ejDhrRZsE1NqArrVoMNfPis/Q7uhUY/
+ 06btkw8Nl7p8DAkwl2QLSF7LBnsjY/MHHXllsaix8k6agEqgoe4qGbZOJs5G23KClrpi
+ j6cMEMxP36eZjSkJ/JeGwGVAdCnhZ3GnMlDnvBA6XuGyzbg6tPVjpGdKFsWMt8uApIdg
+ YyCw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQIhHZXot5mz7htEhyLVdx1ap7DZXub33xwpy+dH8Rob6OTZR2t4KdoTeEjGrdHqAV03Ktx/M=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGtuoenPcMX2UYeV1chp7f8phLfCD6LYjiFffb1XMx05R4bH+k
- Qe0TBBSPK/y7PfGY+pquQZvf4ZvH03AN93AqS8xXA6yWoEw4AxhJsGt6je9hZns=
-X-Gm-Gg: ASbGnctio+pqGZZSOY+ecsncAYrDlSK/mD+ZCmULNtP1zOiOPagyUvn0cA4QYgQQ53p
- EkMeCJODGfYhnThPkvIQh4+/dcxIHi0DkqC3wsaode/3da6Dg1EKGhi6sIFoTy3LD9+GOIP5KEJ
- 5mMS2wNoxEF237q2nQfc8zh5fsm1a5kblNCoHQ9Mrn1pq+L3Cbr/lptf4fRxb/QAnqa4PUjGxPq
- d4wLmpjqecpi7pRrrizRv5Cc4lch7jefMmT+rYhSm/vysPPhGA7BFbQR0HMAwwM/i3rHrD6OB+p
- PmalJCA4nWV1+rdtSSvQx6Ao6A==
-X-Google-Smtp-Source: AGHT+IGBd17HbTrNm7ZC9bTJ1NiN7fwVfOLWExobmfaDw6EefqNg1LiS1TiGcZ7A2h4LNYTLGOcGtw==
-X-Received: by 2002:a05:6402:4015:b0:5d0:9062:7dfe with SMTP id
- 4fb4d7f45d1cf-5d0906282a5mr3806548a12.15.1732777885734; 
- Wed, 27 Nov 2024 23:11:25 -0800 (PST)
-Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
- [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa5999059b4sm32800866b.145.2024.11.27.23.11.24
+ AJvYcCW4sIPCgG1m6lUxD0NtT1nUj7k96vNJ3dga4+pJmohjKOzQ6cN7ZMXjSzt6LOecdLneR23IK8Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJJj7cfpUxOMqjFn8zGrIFMvqlM6vHssWN2wvGg40dy9tAY1DN
+ VKa8HeSRjhd90vE86//QIe3/J6rvJDwUewSj1uyGashwCwJ9vaTVa6KqFKj20prVIjzyAQgff/J
+ pF/A=
+X-Gm-Gg: ASbGncuwtNiuM6SrwJqr8d33esux9hu9HD7WUr8a73F67g6gIx35vuAvYELK6lpMthE
+ gdfuC+xC6EngNg7VBqPznVlyvr+gUOdZwjRKtgnPUUd8oXtHKduRVtQQYUKi3MHV7mBTJYiWTRR
+ 0dadqSc8jG3zQg5x7DsMMzRIrNEAlfVd1u+RjyiT491VLGU54zFB8JNsvnBCOaptNpvdEgh1Xgd
+ bFm9AXpa5YEAzHO1b0pSCtF4dEFMeLw5x3UTpJi7XKYhqMg4U7yTw==
+X-Google-Smtp-Source: AGHT+IGx3AsM0KZ9G8+zMqWvcBb3yPqyDPIq4K6rEUFsDpq8V3td0vAzHDw59tiekdkgfRtOhZRI7g==
+X-Received: by 2002:a05:600c:45c9:b0:434:a196:6377 with SMTP id
+ 5b1f17b1804b1-434a9dbed9bmr64186895e9.14.1732788894718; 
+ Thu, 28 Nov 2024 02:14:54 -0800 (PST)
+Received: from [127.0.1.1] ([2001:861:d40:ed60:91a7:bd7d:8e99:8990])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-434aa74efbesm48554535e9.7.2024.11.28.02.14.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Nov 2024 23:11:25 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Tim Harvey <tharvey@gateworks.com>, Raymond Mao <raymond.mao@linaro.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Don't warn if the TCG2 FinalEvents table is not
- installed
-Date: Thu, 28 Nov 2024 09:11:20 +0200
-Message-ID: <20241128071121.272072-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ Thu, 28 Nov 2024 02:14:54 -0800 (PST)
+From: Guillaume La Roque <glaroque@baylibre.com>
+Subject: [PATCH 0/2] android: add bootconfig support
+Date: Thu, 28 Nov 2024 11:14:46 +0100
+Message-Id: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJZCSGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxNDQyML3aT8/JLk/Ly0zHRdI3OzVCMT86RUS0sjJaCGgqLUtMwKsGHRsbW
+ 1AMpvaqFcAAAA
+To: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
+ Guillaume La Roque <glaroque@baylibre.com>
+X-Mailer: b4 0.14.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +102,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the TCG2 protocol installation fails, we are trying to remove
-all the objects we created in tcg2_uninit().
+This patchset add support of android bootconfig partition[1] in u-boot.
+With Android boot image v4, all androidboot.* arguments must be
+passed via bootconfig instead of using the kernel commandline.
 
-However, there are cases when this function runs before the config
-table was installed. So instead of printing an error unconditionally
-check against EFI_NOT_FOUND and don't print anything if the table wasn't
-installed to begin with.
+[1] https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- lib/efi_loader/efi_tcg2.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Guillaume La Roque (1):
+      boot: android: Add bootconfig support
 
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 572c6b5bf630..a15c73162ee3 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -791,7 +791,7 @@ static void tcg2_uninit(void)
- 	efi_status_t ret;
- 
- 	ret = efi_install_configuration_table(&efi_guid_final_events, NULL);
--	if (ret != EFI_SUCCESS)
-+	if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
- 		log_err("Failed to delete final events config table\n");
- 
- 	efi_free_pool(event_log.buffer);
+Mattijs Korpershoek (1):
+      boot: android: import addBootConfigParameters() from AOSP
+
+ boot/image-android.c | 59 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+---
+base-commit: 62224280d9e89648ae90346c0aede76f9b7e7610
+change-id: 20241128-bootconfig-276e247be992
+
+Best regards,
 -- 
-2.45.2
+Guillaume La Roque <glaroque@baylibre.com>
 
