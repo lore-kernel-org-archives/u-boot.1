@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE8ED69119
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84242D69119
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49E08895E2;
-	Thu, 28 Nov 2024 16:46:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A896689D1C;
+	Thu, 28 Nov 2024 16:46:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V1fPH4NW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VDzHLDPH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3585C89885; Thu, 28 Nov 2024 16:46:08 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 1A02989D0A; Thu, 28 Nov 2024 16:46:14 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9F00893D7
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:46:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D40E88988F
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7f46d5d1ad5so640465a12.3
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:46:05 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2e59746062fso796868a91.2
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:46:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732808764; x=1733413564; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732808770; x=1733413570; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1YDGyIoAyII9g+3pZkF6oobVFAtOOxfZ7lNUPs7csxM=;
- b=V1fPH4NWxtzOjppNnaz4h7KLRbVT6IgyylBPeS6I0yovTap9tzC0KBs4Y2IVn8ySbQ
- DWcSXYxtuYLrgYseLeAsgMGU/J1kx8PCnH18EWp5smiXve0eWGIxTDVqtalCS/m0BJvP
- nYEsQCMrGwxf8Y6icT0BZv36MK74NeLqH3QjU=
+ bh=fC9tT9sRjmnDfz4DD51qYRNBm+25QtB19Y5vqnPMUS0=;
+ b=VDzHLDPHRrYu8NtPm2NqvrJAVDb4vv3J1M9b/Km3yQrw15JUHpPEwtDEoKpeR+wPyR
+ cvuNSGJCWebzUHzjWh1ncivHSrzvqmzZrJ4pMpp4ZnHUGw/s8JmINkr/eDa6aIUMxZu3
+ NlVZM8c+mD0HrE+aE/6CNY3g6IIStKjHC6a3g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732808764; x=1733413564;
+ d=1e100.net; s=20230601; t=1732808770; x=1733413570;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1YDGyIoAyII9g+3pZkF6oobVFAtOOxfZ7lNUPs7csxM=;
- b=hyRU4HP8nRfjkaL9zrx19oKIVSdlqLebdg43OP1LLByGaIylV0evmVpnwW007SQs1s
- pkip0BQlPw+oDeHVQwH1/flPW5nO3UNtnsD0NaUfI6j6Gj+8OSxGjhWIvYATU+pYlWUJ
- WmOYVAL4kEg3yvKiutqsze5HPIpzk1a7tHKFVU9MUMHy0hg2Vd+rqnYIhxapt+taKJQI
- FsIN8xpV2Dn20EOjcfXJ1n4AsMOJ85ErhCja+rOZ3RbTat4fqIqb7TlwZzKRXaYqaFvj
- Q6QzuRiAyasOumnUUR+PpxINjGWtYYxmNzEyWPYCrsrEp88OuxxFpTzYP8XVyxIp1Zrv
- MYjQ==
-X-Gm-Message-State: AOJu0Yxr+MwW25D+OeAo4seDTMCPYmTphapfclwsfwmibVevtSyMdBba
- zKJt6hjicFIWteOY4bjQ71JALs7H5L8OSmVH3pce34+CtEod0eP8lQR7Fkn6ggOpNI+xwEN/1GS
- mhnC/ztbfmel2ZSwyCjWhOIn0r0Htar+9HPXOrqVRfzYS8L8=
-X-Gm-Gg: ASbGncvywt/9v6WzZZIhi8Y/1jQTP91RC7BTZkOEWwtog6mZfk2DMvj4TY2PnbVH0ru
- SIRwVanrD76sNrd1Yfb6rqeteZWd8o/E=
-X-Google-Smtp-Source: AGHT+IE8MAHiIhtKYut5px2rBL6e+tWD9aVhAkmDlJeV+c3wS+bDBX7QLL47Gl/hr9AaRnlSjE6K6n8t8Sq6e6bAwOc=
-X-Received: by 2002:a17:90b:3e86:b0:2ea:9309:757e with SMTP id
- 98e67ed59e1d1-2ee08e9fa32mr9804284a91.9.1732808764572; Thu, 28 Nov 2024
- 07:46:04 -0800 (PST)
+ bh=fC9tT9sRjmnDfz4DD51qYRNBm+25QtB19Y5vqnPMUS0=;
+ b=iungME3BEBVjGGTcC07u6lzzAYECrE/PneQGETRT8Qy5XHvNb13i5gTDGVff/FGrK+
+ OxIi300InXp8BYGsj5y6mOdwLpqyS+gVVmQ0eJkH7QT+Rs2bxyDaMMA3WCEVNyrmMss8
+ j3KvEebqL+8Wmnj7HBXsaNV9YInBXctNUziTvWXGcCLCZ3fi2GJPLfC3/iMSpFim/mlQ
+ Sa3xMCVhb3ZEWD6z4M+jE+5v9OAsMMDyWmZKmkqgOlzIspngZM+pIybBTnB5VeQHAvkJ
+ yhqzrMYhzIT4BeXgImIHHpzp+7KYJJW0OEucp4HO/f+vE3j0UTeTT91jRqwa6jwPfcpb
+ Etsw==
+X-Gm-Message-State: AOJu0YwnTy6ljlSngxaMc7gsEj+/VxvWnm4oFIsuS1pNUVwNuAiz5bH2
+ MNz8PjuUGTeoLLc62TQ2Y5W0xq8ael+6MrTQc5bBS3YOESTvSjtlM/90w7Dn4jF3xqLDEEXI7Fq
+ 37AVsoV2Ysi6pqDP6t/hyxaR617IruoTNLAyQSkBkze1y5wQ=
+X-Gm-Gg: ASbGncvCmUpJlA0fMc9w4T7FuM2tjFmaKQ5ogQZJkWVD0LmNeKhV+lIdmYdiadB+8dk
+ ov1X2xXSBotKT5b/ilOpdiM3JkBlnx0Y=
+X-Google-Smtp-Source: AGHT+IHxgfN5u3sa83ItnJ/wRF7a/H9+0jpNbZ61rk4LDPCFCudfpDOaXp7UHmQm/a+RDZMK2jqK9X7qzc2H9KoZKUA=
+X-Received: by 2002:a17:90b:1e46:b0:2ea:9f38:9934 with SMTP id
+ 98e67ed59e1d1-2ee08ed4425mr8473192a91.21.1732808770376; Thu, 28 Nov 2024
+ 07:46:10 -0800 (PST)
 MIME-Version: 1.0
 References: <20241127172247.1488685-1-trini@konsulko.com>
- <20241127172247.1488685-7-trini@konsulko.com>
-In-Reply-To: <20241127172247.1488685-7-trini@konsulko.com>
+ <20241127172247.1488685-6-trini@konsulko.com>
+In-Reply-To: <20241127172247.1488685-6-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Nov 2024 08:45:48 -0700
-Message-ID: <CAFLszTiB5p5MTM_qaCwrA7YfAcYzR7k1uz7X2RY-zb=Qkh-=YQ@mail.gmail.com>
-Subject: Re: [v6 06/12] docker: Build grub for all architectures
+Date: Thu, 28 Nov 2024 08:45:40 -0700
+Message-ID: <CAFLszTh23FucEvDvDQe6T3FV-aqJvm00Z+Sw+wnr+494qrj8BQ@mail.gmail.com>
+Subject: Re: [v6 05/12] docker: Update to grub-2.12
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -86,18 +86,15 @@ X-Virus-Status: Clean
 
 On Wed, 27 Nov 2024 at 10:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> For consistency now, and future ease of testing with non-amd64 hosts,
-> build grub for all architectures rather than relying on host binaries
-> for i386/x86_64.
+> The current release of grub is 2.12 and it will be good to pick this up
+> now so that we can update other parts of our stack.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Changes in v6:
 > - New patch
 > ---
->  .azure-pipelines.yml    |  6 ++----
->  .gitlab-ci.yml          |  6 ++----
->  tools/docker/Dockerfile | 24 ++++++++++++++++++++++--
->  3 files changed, 26 insertions(+), 10 deletions(-)
+>  tools/docker/Dockerfile | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
