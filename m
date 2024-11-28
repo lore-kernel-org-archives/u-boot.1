@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325E2D69114
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:51:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7480CD6911B
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDFD189D87;
-	Thu, 28 Nov 2024 16:48:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F6B289D98;
+	Thu, 28 Nov 2024 16:48:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OvuFfMno";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d7BLMe3f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B04689D6B; Thu, 28 Nov 2024 16:48:54 +0100 (CET)
+ id 511F989D93; Thu, 28 Nov 2024 16:48:58 +0100 (CET)
 Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
  [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AC5E893D7
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:48:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BF5A89885
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3ea3bf79a03so460945b6e.2
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:48:52 -0800 (PST)
+ 5614622812f47-3ea5e405870so445911b6e.3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:48:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732808930; x=1733413730; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732808933; x=1733413733; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8kKT9HoY2+7KH63qIOQXaz9mBZ0nLzOo2Q/+WA0kqS0=;
- b=OvuFfMnomgyPuol9MeBskS808eUEI8pUspp6o4YVgWME4xHU0ATAZVS0u5jzttlJKj
- /sWmKa4cUH/YVqpYt0a+9RfDRUBWqciegciV7rz+7Dd0z89pzBWOYcbKcMAHNN46JO/F
- kkNIGheHdh4R+lxmVGv9oktJXnXkVZsggU+I8=
+ bh=3Mc2SOHZscXBipI6MC5Tl7VBc9MmxrFpy3A5HNEHk54=;
+ b=d7BLMe3fhW8UwftnZ9Kwq9jPmuw9e1F1yScNpUmsIjz9uHN8WI0Y7CKQ5HkGUGxdAn
+ VaUAVycBp+woG8JWg0rwxdDYr/pFiQAeA5RBhU19pOXiimsLk0gpzftJq0TBaW0ym/fm
+ k86uPRdS0qm85VSORSffud5M4slhU+ohBPVAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732808930; x=1733413730;
+ d=1e100.net; s=20230601; t=1732808933; x=1733413733;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8kKT9HoY2+7KH63qIOQXaz9mBZ0nLzOo2Q/+WA0kqS0=;
- b=GJl9vSh1JPE+9pbFakAa08KQlNI6w/W3egrX99RfkoVsG5ZrMvwzQdBigM7Jj7F/PY
- XcN1Si9PQBAczKfzF8fvbyYSY1tqdr/GIG8apI37CgvKCgi1CbpWUgG3jlMYvb+X1Oh6
- 29wVXi1IEQAbIfpg9a2Ba8u4U6DNS67jJU9LdNSQvnmCu9c9MGpohq8Q+1gNeTK+Izgj
- psCsOCdb0Sz31Xg1sC0+N3PQgABI5rANJnaTuq93BaQO1KDYm7o5a6JBAAlD+Rk6Wg1X
- QB4yWtCmszbqCuE7klPAEKcP/r5acZOgFEUFrG/lfY5qQRrnzLlpULpxZKIZhoVXF1+l
- QpAw==
-X-Gm-Message-State: AOJu0YyYt9rsKCftDivRxXszzgk5EWl1hV9rdWFESP0d9+T0RIo98jpi
- PhU2VAsoUf0N4FgMxxrWJhY/ev7KaMVwWFUEOkH5G2z6m1HjoKIa11dUcDGO3ULYQzS8NZ/2de0
+ bh=3Mc2SOHZscXBipI6MC5Tl7VBc9MmxrFpy3A5HNEHk54=;
+ b=wBaE4sNapw3OG0WnQi8EX2SS4kFaW2kWFHLeL9Z8ArGfErHFRAMLPBvyZQTn9MrD7z
+ +mCGZi5ZHxAFiukUHjPu/BI0eBXzdTT1QLm1lZNXLH0cTRUDwzeHq2rqj8Sg7uYzvcEz
+ Bf2MB1lEt0K6uacjUW3qjLYDeYruQeGIIWSVfDmSF+M0bol5tmHXH4E63xPIGLdsaQgO
+ SKpN5Ltzl4f7PRlPwlKsU6HIoSiNB4DJiLc0p++6P0iNDvvv7DlA8XdNHuqPYZhRCE2u
+ BPAAuiw/ofvw3IxoRUFPcejbMjh4hUxSxe5XsarzhbohGlOzM38Ff7PtcWbi++qgTsOA
+ kYpw==
+X-Gm-Message-State: AOJu0YwJ1WxhhUCVZ4+s/Kd7g0InWJ/DcfcJPR0axDPwRvnqdxt2VzlW
+ QIE/+pLrDSGL0OKG1JJACrX8YUVLxHlYYP7GjJBnqbAsYPsHbTtVy00ntvGr073orWuRJ62ldjc
  =
-X-Gm-Gg: ASbGncsUkKOLG6G3jxfkfPwB+uxh9Z+mzCW0/TkLhwyVsUCwFC7yykKt3V9sqywxTej
- eXwT/kKyRyfTeDWreDRRM15fapVYjm0vRXRWRFbCgQmpH/AkyJyOH91fOPDi11dmCv52Nus/726
- 068FLO7OTTpObdw9awIaS5eRZxcgZ3SUvfdfIf2heO5Da5+ZSZNk61PGBKF/cIuhDU9ChLk0Uxh
- Mog+hAFlGXcfIPIc/8jzzJ12Ia5RuMsfVUzjFkgNOhSwQ==
-X-Google-Smtp-Source: AGHT+IHUVIJ6NV0WYrHMR+HCOI/BXVEJYQi8IaaaaiIGS/dAoIFB5z2qqtRh81vfO37kUAhPIhIKZA==
-X-Received: by 2002:a05:6808:17a8:b0:3e6:63b5:f248 with SMTP id
- 5614622812f47-3ea6db60e41mr8645217b6e.7.1732808930235; 
- Thu, 28 Nov 2024 07:48:50 -0800 (PST)
+X-Gm-Gg: ASbGnctz05w61UPx6ADL0xd91koUSEoVK7c7g2+FD/dZTWxb89BJSDQ/jg81acn9St6
+ Rz70cETYpGs9i4xlm42/wh1EG0beGYqYpF7N4+pmCiVNNkcz0qtPItqeoB+iEPdoqVVcF5pOITm
+ lExns/OOHPWFCzfyiCPeQjgtCFl9Tm43OxdqmJBHZQfpgktT6HNm535Uwh6h4yMMYE5oPcWwrX6
+ HJu5gsx8EboFG8dWdw/FVqWim0dzEnM8kKTUsBCZPbnvA==
+X-Google-Smtp-Source: AGHT+IEa1IfAB7mNPnPUABBRHAN8+GfeFOOdBAV9zxYeo2w/88tsQCCG0p+hYfwmrXVvkOBGANekvg==
+X-Received: by 2002:a05:6808:1a02:b0:3ea:43b8:29f2 with SMTP id
+ 5614622812f47-3ea6dbebf9emr7485491b6e.17.1732808932773; 
+ Thu, 28 Nov 2024 07:48:52 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.48.46
+ 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.48.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 07:48:47 -0800 (PST)
+ Thu, 28 Nov 2024 07:48:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 23/28] efi_loader: Update efi_add_runtime_mmio() to pass an
- address
-Date: Thu, 28 Nov 2024 08:47:22 -0700
-Message-Id: <20241128154727.771871-24-sjg@chromium.org>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 24/28] efi_loader: Correct address-usage in copy_fdt()
+Date: Thu, 28 Nov 2024 08:47:23 -0700
+Message-Id: <20241128154727.771871-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241128154727.771871-1-sjg@chromium.org>
 References: <20241128154727.771871-1-sjg@chromium.org>
@@ -95,40 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that efi_add_memory_map() takes an address rather than a pointer,
-do the mapping in this function.
-
-This is fix#4/4 for: Update efi_add_memory_map() to use address
+Update this function to work correctly with sandbox
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_runtime.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ lib/efi_loader/efi_helper.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 9d3b940afbd..37ed5963e2b 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -13,6 +13,7 @@
- #include <efi_variable.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <rtc.h>
- #include <asm/global_data.h>
- #include <u-boot/crc.h>
-@@ -930,7 +931,7 @@ out:
- efi_status_t efi_add_runtime_mmio(void **mmio_ptr, u64 len)
- {
- 	struct efi_runtime_mmio_list *newmmio;
--	uint64_t addr = *(uintptr_t *)mmio_ptr;
-+	u64 addr = map_to_sysmem(*mmio_ptr);
- 	efi_status_t ret;
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index fd89ef6036f..72902a5ade3 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -486,12 +486,11 @@ static efi_status_t copy_fdt(void **fdtp)
+ 		log_err("Failed to reserve space for FDT\n");
+ 		goto done;
+ 	}
+-	/* TODO(sjg): This does not work on sandbox */
+-	new_fdt = (void *)(uintptr_t)new_fdt_addr;
++	new_fdt = map_sysmem(new_fdt_addr, fdt_size);
+ 	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
+ 	fdt_set_totalsize(new_fdt, fdt_size);
  
- 	ret = efi_add_memory_map(addr, len, EFI_MMAP_IO);
+-	*fdtp = (void *)(uintptr_t)new_fdt_addr;
++	*fdtp = new_fdt;
+ done:
+ 	return ret;
+ }
 -- 
 2.34.1
 
