@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1763AD70DE4
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:16:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94494D70DE5
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:19:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6009089877;
-	Thu, 28 Nov 2024 17:16:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 145CF894F2;
+	Thu, 28 Nov 2024 17:19:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GnoEDopz";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mkcHnDv8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA0DD895E2; Thu, 28 Nov 2024 17:16:53 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 7886E895E2; Thu, 28 Nov 2024 17:19:36 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 813A8893AB
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:16:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C2FD893AB
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:19:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732810604; x=1733415404; i=xypron.glpk@gmx.de;
- bh=ufXer7uSRquREOUN9XWeX8O6Dw4uvTzlNSL1XlAJzXc=;
+ s=s31663417; t=1732810770; x=1733415570; i=xypron.glpk@gmx.de;
+ bh=GQtCYtAr4ugb+PuG+ProqPnhA+1szGxA2WZRMtnRnaY=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=GnoEDopz6dNeKdy8849O91KpfG2E8bH8CYL1Ta2BVk5U1iaIvyrUt94EfJ2s1HVO
- C8VRpn/NZ6bAn6XzLpLf8DdtoukcHaxE+3Gw8p8+HYRyq49FpF8QL0JFSBffhHXhq
- eEUqPq95IIba4K+yf0kaXxJeVxTVywMPefolB6S9c2XLzQYcqJbmXd+gbERXGENQm
- USOgU1mg97lgb2Q4vAqUduBJi7/slOO42mFauFU+d503YOUU+EjSKuL9Km8hfAAi3
- kLvHMOUYtAjhgmH2RnrqtoMk9xSPm+hdcg5c9mXijH207j7/Zh49ibvLfwrgLPp+q
- 0ictwbwH03e4Q3JdTA==
+ b=mkcHnDv8Sd76B/MGUKFcScIruMoq2z4uAWlrshShRaQNcA9A7xIT3LZqt9iH500q
+ 7OnkscUNT2H8ClOwvIyDts0AIOVkniPdtTDXSKns3WWSvt9dK+N8vfJAeCaFYNocy
+ U0dmf7yWa7EzMNU+medepJCP1rZ85RheITYdV1K01kkjAmf3anNBZbBgwGjdStrWc
+ AQuyWag6NonTa3eqKhGfXXGSmMY5Ds4skS9KD4JwDp/JCxNwI+TyHKzzpCU98YX6S
+ LEhDpmyVAKhjn9iVbHVyQRjuuN25hsfA4Pkuc26HZBjTTqO5BD5QZzrLfKEOeDf0t
+ QcjKl5WHrbPTu1HOZA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7K3Y-1tJyz20M3A-006urb; Thu, 28
- Nov 2024 17:16:44 +0100
-Message-ID: <962703fe-7ba0-4585-a65e-4b514be54977@gmx.de>
-Date: Thu, 28 Nov 2024 17:16:39 +0100
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1tgVdH3Upq-00r6H2; Thu, 28
+ Nov 2024 17:19:29 +0100
+Message-ID: <fb055f90-daed-4c5a-a5a6-6fc35e6375a9@gmx.de>
+Date: Thu, 28 Nov 2024 17:19:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/28] efi_loader: Use the enum for memory type
+Subject: Re: [PATCH v2 08/28] doc: efi: Add the EFI-loader API documentation
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>,
- Moritz Fischer <moritzf@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
- <vincent.stehle@arm.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-10-sjg@chromium.org>
+ <20241128154727.771871-9-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-10-sjg@chromium.org>
+In-Reply-To: <20241128154727.771871-9-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:GJNVJFtTTTySOTbdazxVsB88XvGtExOM6oQuMNPJ+HhtvnFljpj
- RBeSZW9l5mU5TW9njDGmncfDGeq/u4N5QvYnDu2AdmIP9QoCRC/hOwmLM5YFh50kNKvY48A
- ziKQKx/ZPBgTOBR7tHSHILJz6pBU9L8ZO9r5h17ty5SQ6U3DIpQ78O9d9juFp3e5txX5pEe
- kXkfS6kVirk8JcpVhYdtw==
-UI-OutboundReport: notjunk:1;M01:P0:x8VKU/sZ7hw=;OviXqAAZpmmoABzID/vLqr3EYtd
- LDdSTcCWbFXCXmkSD8/2l+qmaaUXTTGudhexMNBQPMWEFYPE3xlhUKNrD5140IklcYKS5w1gl
- LWoZKM8Aw0gAoYcgBH097z8m0ik01hmC/TihxijiJ9SsD8pcUSU5KKva8wf2Xq6Hjc3t6DPNd
- d0MKEwaIEeISqIZfqV7BXOv4jKEBopQG4bDJYmn9g0TZ8v5gzNrBVin94NfVgegfWtbJ8z1Yp
- x5nXBaIRj3uzRGhsKM/fMBBQngiWrKkD2rFYPq4K9I51+rp+ZOq4tSZZ7hFc4HbDMr6TPzQ0w
- PEUATQRXsuAVKmRZHc3N6mGPka/76llnzKfjcNJMG3US2QigMot2AJjA/OFQdvqCJAQa7RhbZ
- ut35KsWYZt4/yyvJodknQXt6M7QmsD6CTbiH/UuyXw4IS/810SK/U1sgwhJVsxxbxV+EgoidA
- xnRj4xoRh+9OhmIRoYnln7z7274H+e7DsxZYcp1Rb+rk9eQa751/a5wWpumvyy6yPcHQqCG7C
- MEFB+zRssoXLnngGea6AGWMLVvhxEL09H7UYMqWzjUnlH6bG/PHrsju2F14QWBlsqWla5HzCJ
- LxnJeHsVYQy91TwzH2mF04OYL2F4bAZ3RDXA1zvfJ0Q7wXcx9ET3Krv2pXm2v2HdZhsf4/EqA
- b9DxOzFQcLjDNeoexQKebLICdNPXrLIiyRORYcBZBAJ7nQWyB9ATxYEwoUX07dcucDxzDpzoH
- Z9gVrmFimlRp0lSOKiJPSdmCldA8NVFcdsV7wf1hljRNEJpbkcMbBHBHkCB4g8UxG5o6KW2nV
- +2GiqIMCgmxv8RI3pIgnnBW/AcAbY8a5epqC+48PRpqPda7Y+6NEaEd0oTrHQ7OxN1INRnwAo
- xCasfKD2vDVwL09KDcPalUXEIgPQ3g+MUOv087h7IncRZnOSrTysAvNQ8wsSiYH0FwYZzHqM3
- 28/jgbwWEDWk38GxLV+aWMnz4lwMOga4fc14PMTPTB+cAn6Onfo6trmApVKdZUkUV31XMZqB5
- xphpjt/g6NVundIl5Lykxh/Ey7mnheb+fmCHQf0hx75ovatM6wcmKmS+f+oxOeOyFRcu31qN1
- qnMwOKxtrXugw8KoeVcIxVhbkRojzz
+X-Provags-ID: V03:K1:UWOU/RDpw5xwVoqhP09jdFo39MhJ1rwz7rlRtUyWQkqkiROhGe1
+ hWsFxPaFuJhskAfbfe6rwm2m/yWIhlzayy0tKau/z0GGe2KkTatz8ATAop1XRAHKiyUSxoP
+ 1m3sNK51JIM0RSDX67bKwXbbQqVwatAG2XsaHULLpyhwK8krQwtRIZhJSL86SpI3uTnYRUu
+ fu+R+NFseT78zOzYk3Kgg==
+UI-OutboundReport: notjunk:1;M01:P0:ZMEc/NWOWSM=;IjQpXhngQrS1UQb32VQOJns4eoe
+ PVwDpEaejDQlY3534gZLJ6YhVTxyfPq8jZU8Hfrh7PW3CrTBXrF6kOLuXzFb0a/DX6mt3+GhN
+ hdiPx4/uObe1LIlYHAX+Ja4J72sOZgkC1dciSAOu2dURqeVz1yGhZW4VgWMK1Wh4wXEPp0SrQ
+ H3BzT0FghDY0JQjFUgHwy4T5RlmmhDZBfzNSWCxrCndL95uj75vu9w4AahypupboyHr4S3DRw
+ z0W5fBYlr17Nd23ikFZjFFX3JD0dq0oqOClwgiUADQnApG+lj4DLYSF1jsfgGZoWiChE3pyHc
+ ywpDF7BalVApZMp0Wfiw+po3En/i6hr/2ADnKYXQVS2cA5LGH8y2WlcKyXmDFfR2++IQco13s
+ 7M6l/MXMynsdjA3PpoP7pP7AVAl/GX84A1zcgx2RZJXlllZlOOMFrv4xEkjX5N+xx7iarHSze
+ FzVxR5TcuARe+xL9Q5KcNpwECANQwvdvPt7uLFaAQLQofBNlQDfrEg+fzDH/RAFZVqnJRId2D
+ EPts3rt6yfiK+gdP7QyRwqFz15sEd/v2wfIw7M0bP1u3vikxPho0mLuBNNWe0MR31g6UMvtZ5
+ s5q+OSlgqn17ko58L+lb80JVr17iD1rx89qzRGaxboNrKhF9rRTPEYQl1weXhzcCHFXeAwq2o
+ Ey10VSSK5dIpbxy1OAQG3pA4kL4bOmyM2paYwzrEwPEUKQxYu0fZsd8xtjb12bzTqE04TO9lM
+ F+Nzw1R1yDt3kB8ookG7b0ZOHk8ba1+dBLWlgYazy9hDi7qB9RGTOWSG3sJoIG+1OFdK57LEy
+ YPjHnvVBLiLZiSoEz35hBabblJHpTXwdkXRbqaeoO/4uEMtqMxKRSeqF47g39IZASYgTyejXP
+ Rm2INlN4e1wIFiWcSB5LYbp4qswRyFzts8rTgjlygq2nLUXUSqQxfZm0SM6c5+IPmtHd8adJP
+ Yiz//qwAmGMXqCHJbihZMphZDRU8Da7fh85Qnnbf+7lc3MrOUYak1iDYDmsf8YghcWxM8S91P
+ n1P09cPAXSoZ43H9+2Gey4KJInyRxv0XQZ0RFsNwoZdqtsIIKBGiW1LDe2e47fsdCs/bzcpBx
+ /BTmnjuFCDNKBUyvvz1sK7ts2S4yZo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,408 +99,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.11.24 16:47, Simon Glass wrote:
-> Rather than an integer, it is better to use the enum provided, when
-> referring to an EFI memory-type. Update existing uses.
+> Bring in the documentation from the efi_loader.h header file, so we can
+> see the API defined there.
 >
-> Call the value 'mem_type' consistently. Fix up one instance of
-> upper-case hex.
->
-> Fix up the calls in struct efi_boot_services so that they use the same
-> enum, adding the missing parameter names and enum efi_allocate_type.
-
-This was already NAKed for struct efi_boot_services in reply to your
-previous submission. We must have control over the size of the parameter.
-
-Where the memory type is provided by internal callers we could use the enu=
-m.
-
->
-> While we are here, rename the 'memory' parameter to 'memoryp' so that it
-> is clear it is a return value.
-
-Parameter names should match the UEFI specification.
-This renaming just creates confustion.
-
+> Fix efi_alloc() to avoid a warning.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
 >
 > Changes in v2:
-> - Drop the changes to the boottime API
+> - Add new patch to add the EFI-loader API documentation
 >
->   include/efi_loader.h             | 29 ++++++++++----------
->   lib/efi_loader/efi_boottime.c    | 12 ++++-----
->   lib/efi_loader/efi_device_path.c |  4 +--
->   lib/efi_loader/efi_memory.c      | 46 +++++++++++++++++---------------
->   4 files changed, 47 insertions(+), 44 deletions(-)
+>   doc/api/efi.rst      | 3 +++
+>   include/efi_loader.h | 2 +-
+>   2 files changed, 4 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 3f75f2efcb6..a7228672f27 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -773,24 +773,25 @@ void *efi_alloc(size_t len);
->    * efi_alloc_aligned_pages() - allocate aligned memory pages
->    *
->    * @len:		len in bytes
-> - * @memory_type:	usage type of the allocated memory
-> + * @mem_type:		usage type of the allocated memory
->    * @align:		alignment in bytes
->    * Return:		aligned memory or NULL
->    */
-> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
-> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
-> +			      size_t align);
+> diff --git a/doc/api/efi.rst b/doc/api/efi.rst
+> index 43d6f936fb0..57da7f615a6 100644
+> --- a/doc/api/efi.rst
+> +++ b/doc/api/efi.rst
+> @@ -75,6 +75,9 @@ Image relocation
+>   Memory services
+>   ~~~~~~~~~~~~~~~
 >
->   /**
->    * efi_allocate_pages - allocate memory pages
->    *
->    * @type:		type of allocation to be performed
-> - * @memory_type:	usage type of the allocated memory
-> + * @mem_type:		usage type of the allocated memory
->    * @pages:		number of pages to be allocated
-> - * @memory:		returns a pointer to the allocated memory
-> + * @memoryp:		returns a pointer to the allocated memory
->    * Return:		status code
->    */
->   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> -				enum efi_memory_type memory_type,
-> -				efi_uintn_t pages, uint64_t *memory);
-> +				enum efi_memory_type mem_type,
-> +				efi_uintn_t pages, uint64_t *memoryp);
->
->   /**
->    * efi_free_pages() - free memory pages
-> @@ -804,12 +805,12 @@ efi_status_t efi_free_pages(uint64_t memory, efi_u=
-intn_t pages);
->   /**
->    * efi_allocate_pool - allocate memory from pool
->    *
-> - * @pool_type:	type of the pool from which memory is to be allocated
-> + * @mem_type:	memory type of the pool from which memory is to be alloca=
-ted
->    * @size:	number of bytes to be allocated
->    * @buffer:	allocated memory
->    * Return:	status code
->    */
-> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type,
-> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type,
->   			       efi_uintn_t size, void **buffer);
->
->   /**
-> @@ -837,14 +838,14 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memor=
-y_map_size,
->    *			actually a pointer provided as an integer. To pass in
->    *			an address, pass in (ulong)map_to_sysmem(addr)
->    * @size:		length in bytes of the memory area
-> - * @memory_type:	type of memory added
-> - *
-> + * @mem_type:		EFI type of memory added
->    * Return:		status code
->    *
->    * This function automatically aligns the start and size of the memory=
- area
->    * to EFI_PAGE_SIZE.
->    */
-> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
-> +efi_status_t efi_add_memory_map(u64 start, u64 size,
-> +				enum efi_memory_type mem_type);
->
->   /**
->    * efi_add_memory_map_pg() - add pages to the memory map
-> @@ -854,13 +855,13 @@ efi_status_t efi_add_memory_map(u64 start, u64 siz=
-e, int memory_type);
->    * in (ulong)map_to_sysmem(addr)
->    *
->    * @pages:			number of pages to add
-> - * @memory_type:		EFI type of memory added
-> + * @mem_type:		EFI type of memory added
->    * @overlap_conventional:	region may only overlap free(conventional)
->    *				memory
->    * Return:			status code
->    */
->   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> +				   enum efi_memory_type mem_type,
->   				   bool overlap_conventional);
->
->   /* Called by board init to initialize the EFI drivers */
-> @@ -919,7 +920,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_=
-desc *desc, int part);
->   struct efi_device_path *efi_dp_from_file(const struct efi_device_path =
-*dp,
->   					 const char *path);
->   struct efi_device_path *efi_dp_from_eth(void);
-> -struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
->   					uint64_t start_address,
->   					size_t size);
->   /* Determine the last device path node that is not the end node. */
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index be8e4f41ad2..8f311f95d1f 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -414,9 +414,9 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old_t=
-pl)
->   /**
->    * efi_allocate_pages_ext() - allocate memory pages
->    * @type:        type of allocation to be performed
-> - * @memory_type: usage type of the allocated memory
-> + * @mem_type:    usage type of the allocated memory
->    * @pages:       number of pages to be allocated
-> - * @memory:      allocated memory
-> + * @memoryp:     allocated memory
->    *
->    * This function implements the AllocatePages service.
->    *
-> @@ -425,14 +425,14 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old=
-_tpl)
->    *
->    * Return: status code
->    */
-> -static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int memory_=
-type,
-> +static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int mem_typ=
-e,
->   						  efi_uintn_t pages,
-> -						  uint64_t *memory)
-> +						  uint64_t *memoryp)
+> +.. kernel-doc:: include/efi_loader.h
+> +   :internal:
+> +
 
-We want the names to match the UEFI specification.
-This change is not helpful.
-
->   {
->   	efi_status_t r;
->
-> -	EFI_ENTRY("%d, %d, 0x%zx, %p", type, memory_type, pages, memory);
-> -	r =3D efi_allocate_pages(type, memory_type, pages, memory);
-> +	EFI_ENTRY("%d, %d, 0x%zx, %p", type, mem_type, pages, memoryp);
-> +	r =3D efi_allocate_pages(type, mem_type, pages, memoryp);
->   	return EFI_EXIT(r);
->   }
->
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index ee387e1dfd4..9c8cd35b97b 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -975,7 +975,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
-th(void)
->   }
->
->   /* Construct a device-path for memory-mapped image */
-> -struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
-
-Why rename the parameter?
-
->   					uint64_t start_address,
->   					size_t size)
->   {
-> @@ -990,7 +990,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t mem=
-ory_type,
->   	mdp->dp.type =3D DEVICE_PATH_TYPE_HARDWARE_DEVICE;
->   	mdp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MEMORY;
->   	mdp->dp.length =3D sizeof(*mdp);
-> -	mdp->memory_type =3D memory_type;
-> +	mdp->memory_type =3D mem_type;
->   	mdp->start_address =3D start_address;
->   	mdp->end_address =3D start_address + size;
->   	buf =3D &mdp[1];
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 9d0f27dbb3e..3cece51f030 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
-p,
->   }
->
->   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> +				   enum efi_memory_type mem_type,
->   				   bool overlap_conventional)
->   {
->   	struct efi_mem_list *lmem;
-> @@ -268,10 +268,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	struct efi_event *evt;
->
->   	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
-> -		  start, pages, memory_type, overlap_conventional ?
-> +		  start, pages, mem_type, overlap_conventional ?
->   		  "yes" : "no");
->
-> -	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
-> +	if (mem_type >=3D EFI_MAX_MEMORY_TYPE)
->   		return EFI_INVALID_PARAMETER;
->
->   	if (!pages)
-> @@ -281,12 +281,12 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	newlist =3D calloc(1, sizeof(*newlist));
->   	if (!newlist)
->   		return EFI_OUT_OF_RESOURCES;
-> -	newlist->desc.type =3D memory_type;
-> +	newlist->desc.type =3D mem_type;
->   	newlist->desc.physical_start =3D start;
->   	newlist->desc.virtual_start =3D start;
->   	newlist->desc.num_pages =3D pages;
->
-> -	switch (memory_type) {
-> +	switch (mem_type) {
->   	case EFI_RUNTIME_SERVICES_CODE:
->   	case EFI_RUNTIME_SERVICES_DATA:
->   		newlist->desc.attribute =3D EFI_MEMORY_WB | EFI_MEMORY_RUNTIME;
-> @@ -370,14 +370,15 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	return EFI_SUCCESS;
->   }
->
-> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
-> +efi_status_t efi_add_memory_map(u64 start, u64 size,
-> +				enum efi_memory_type mem_type)
-
-Why rename the parameter?
-
->   {
->   	u64 pages;
->
->   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
->   	start &=3D ~EFI_PAGE_MASK;
->
-> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
-> +	return efi_add_memory_map_pg(start, pages, mem_type, false);
->   }
->
->   /**
-> @@ -416,8 +417,8 @@ static efi_status_t efi_check_allocated(u64 addr, bo=
-ol must_be_allocated)
->   }
->
->   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> -				enum efi_memory_type memory_type,
-> -				efi_uintn_t pages, uint64_t *memory)
-> +				enum efi_memory_type mem_type,
-
-We should stick to the parameter name from the UEFI specification.
-
-
-> +				efi_uintn_t pages, uint64_t *memoryp)
-
-Ditto
+Look at the section title above. Adding efi_loader.h here makes no sense.
 
 Best regards
 
 Heinrich
 
->   {
->   	u64 efi_addr, len;
->   	uint flags;
-> @@ -425,10 +426,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_t=
-ype type,
->   	phys_addr_t addr;
+>   .. kernel-doc:: lib/efi_loader/efi_memory.c
+>      :internal:
 >
->   	/* Check import parameters */
-> -	if (memory_type >=3D EFI_PERSISTENT_MEMORY_TYPE &&
-> -	    memory_type <=3D 0x6FFFFFFF)
-> +	if (mem_type >=3D EFI_PERSISTENT_MEMORY_TYPE && mem_type <=3D 0x6fffff=
-ff)
->   		return EFI_INVALID_PARAMETER;
-> -	if (!memory)
-> +	if (!memoryp)
->   		return EFI_INVALID_PARAMETER;
->   	len =3D (u64)pages << EFI_PAGE_SHIFT;
->   	/* Catch possible overflow on 64bit systems */
-> @@ -447,17 +447,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
-type type,
->   		break;
->   	case EFI_ALLOCATE_MAX_ADDRESS:
->   		/* Max address */
-> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
-> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
->   		addr =3D (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, addr,
->   						 flags);
->   		if (!addr)
->   			return EFI_OUT_OF_RESOURCES;
->   		break;
->   	case EFI_ALLOCATE_ADDRESS:
-> -		if (*memory & EFI_PAGE_MASK)
-> +		if (*memoryp & EFI_PAGE_MASK)
->   			return EFI_NOT_FOUND;
->
-> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
-> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
->   		addr =3D (u64)lmb_alloc_addr_flags(addr, len, flags);
->   		if (!addr)
->   			return EFI_NOT_FOUND;
-> @@ -469,7 +469,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->
->   	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
->   	/* Reserve that map in our memory maps */
-> -	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
-> +	ret =3D efi_add_memory_map_pg(efi_addr, pages, mem_type, true);
->   	if (ret !=3D EFI_SUCCESS) {
->   		/* Map would overlap, bail out */
->   		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> @@ -477,7 +477,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->   		return  EFI_OUT_OF_RESOURCES;
->   	}
->
-> -	*memory =3D efi_addr;
-> +	*memoryp =3D efi_addr;
->
->   	return EFI_SUCCESS;
->   }
-> @@ -515,7 +515,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uin=
-tn_t pages)
->   	return ret;
->   }
->
-> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
-> +			      size_t align)
->   {
->   	u64 req_pages =3D efi_size_in_pages(len);
->   	u64 true_pages =3D req_pages + efi_size_in_pages(align) - 1;
-> @@ -533,12 +534,12 @@ void *efi_alloc_aligned_pages(u64 len, int memory_=
-type, size_t align)
->   		return NULL;
->
->   	if (align < EFI_PAGE_SIZE) {
-> -		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
-> +		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
->   				       req_pages, &mem);
->   		return (r =3D=3D EFI_SUCCESS) ? (void *)(uintptr_t)mem : NULL;
->   	}
->
-> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
-> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
->   			       true_pages, &mem);
->   	if (r !=3D EFI_SUCCESS)
->   		return NULL;
-> @@ -559,7 +560,8 @@ void *efi_alloc_aligned_pages(u64 len, int memory_ty=
-pe, size_t align)
->   	return (void *)(uintptr_t)aligned_mem;
->   }
->
-> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uint=
-n_t size, void **buffer)
-> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type, efi_uintn=
-_t size,
-> +			       void **buffer)
->   {
->   	efi_status_t r;
->   	u64 addr;
-> @@ -575,7 +577,7 @@ efi_status_t efi_allocate_pool(enum efi_memory_type =
-pool_type, efi_uintn_t size,
->   		return EFI_SUCCESS;
->   	}
->
-> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type, num_pages,
->   			       &addr);
->   	if (r =3D=3D EFI_SUCCESS) {
->   		alloc =3D (struct efi_pool_allocation *)(uintptr_t)addr;
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 00a1259c006..3f75f2efcb6 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -764,7 +764,7 @@ efi_status_t efi_next_variable_name(efi_uintn_t *siz=
+e, u16 **buf,
+>    *
+>    * Allocate memory from pool and zero it out.
+>    *
+> - * @size:	number of bytes to allocate
+> + * @len:	number of bytes to allocate
+>    * Return:	pointer to allocated memory or NULL
+>    */
+>   void *efi_alloc(size_t len);
+
 
