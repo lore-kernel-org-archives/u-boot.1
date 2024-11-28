@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0A7D69114
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:21:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09846D69119
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:37:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BF48894FC;
-	Thu, 28 Nov 2024 16:21:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FB4F897F3;
+	Thu, 28 Nov 2024 16:37:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ukRYZHJM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VNdVnQzq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9598389500; Thu, 28 Nov 2024 16:21:31 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 7F4318985C; Thu, 28 Nov 2024 16:37:18 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C96689384
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:21:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B31C89708
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:37:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-aa535eed875so131612066b.3
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:21:29 -0800 (PST)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2ffc1009a06so14810771fa.2
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:37:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732807289; x=1733412089; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732808235; x=1733413035; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Kzj5wLz+6xLHHvIIbmJC4PeUQV80CuW8IEGwPqiLnLM=;
- b=ukRYZHJMYNDduGRyk0eVb2aP8PvfYrt8+4bOtFnUgj/7TE6nVon5EHhUvNM0NqKk1c
- xOdyi5qG8OQOADK3aMbskH7PKk/4SktICpsI6LDrr4cUg0TpPL1eky7jhin8HkJwco6Q
- +R+toii3qsJ4wwWhjoCkGk1A9QYUa/zwtgX/IlHqB+blxoElUn6vxWDzhsWa6BayiQ46
- 2fwrD659e9nAzVeZmr5QeJt0ftb4fIJlaDOoKErybTQpwb75eiqrGHta9I1yh3bBTi/y
- iUX1PSUb6EEkM6lxvcgWbcJ1ZgIkOgwqofJgUgTuXF+8SKAWPL4gKCPBgqiCaHfFF6wT
- uBpw==
+ bh=/0Zy3/GgINLKM6Y3J7LDoHXJMqFpAXVBbNX0MHZfozs=;
+ b=VNdVnQzqH2bJeM5DVpce3j7qPF7WK/rTKquVeUxyfLQI05RhrdVO6moxFDOhpdD3B+
+ z6SEzz4m17l65sQA3W2RyhDBNarHSV1qJV6O+vRi+XYI8ANsxuOhKR3rhhYQFLn2ecAb
+ 7wcUb2SfVubQTwyZOwnvlMJuCxmXWQtoHRXIcaImgYO7ox9g/TR3sG7xvJ9okreeVJ+3
+ SbLAH/CWDPhjXq8ZERYVIn6ZV8mVkXV93Fg/7Iy89YmWza03Dy71Ksw3Lbm4YOGgkz7q
+ n7mJx+X8IDrKn2el383vqlF8mN4hCx+1G5E7Tf/21cs6FyuI2sh0TA7sh545SK2M7LPf
+ tY+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732807289; x=1733412089;
+ d=1e100.net; s=20230601; t=1732808235; x=1733413035;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Kzj5wLz+6xLHHvIIbmJC4PeUQV80CuW8IEGwPqiLnLM=;
- b=CxvPw/PCCk2/xMi5DgfyShjaXJQa7ECgMD3xCgcqT1Tr0VsuduZkpOZqKW8A+C4PQ0
- e5X/Kt6nzqByR38lqK8mtHWjOLdbj9kt0HxaRz6vL6rcob0hVrUuHJOZfHTlyGpbiLH3
- jZWfGW4zHuLTi+/yaKgUqDR5vdPQAEnDkI6eG2r6oJFJKCuivv5p7p++yznDhpsJB8Oz
- F3s1vcd+ftDATRhvzfiba+pivd2XoGjbumWREwT7O0cXMfs1x6qQlUK0rW1lAqJZ4HEa
- NaQr29BNsManje8aJH7aGriQqGUBK483X4Dj/H1qM1RR3ogcZhHcdD0fdPhI2E9gHN5o
- cogA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXivObicSKbbvypcixpeJwsqaUvtH8geck7SnEIu3Ffphn4uIJMV1jMceT786YjvWW/KViYwvQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYRFRKShzz9q6sFCWKdrwqhzsAAHYC3J9C1VYDRr6TguVuF9LA
- PeKWeeqygj2IwZ0kwI6SExy6+4L/vwGXfceWNh4ctuqBRjKtL/Q8T2k+HF+3VIQ=
-X-Gm-Gg: ASbGncvJnZcltDAmRIdEgEFlBnAikgVJfUe30Kjndg01PrFzj8eejAKj3X0xBpLBcvG
- mlhr57c0svBWjdg4Ub/SKRbSvzOoOQ/AHWCmo4GcM2hV0vDZPln8mq8nw5BWWHDpBMLs6ipWNls
- hasUKASKSR4FbBI5AmxaDewkqia8R9vaM4ofLfk2q3jiMJcEW1GY+tjPd2dpb/qe+kxo1Oj8gTT
- kuFNMSVLR4ImfbDCYxqWI8uT5GY83J3LZPOppTTava/N7uIEK8tj1WN2cCFVnyYx0vvlaoJhz9p
- tsPDw2fwtiXWFsy4HWwNSXQpIYqtDg==
-X-Google-Smtp-Source: AGHT+IGnyzymBrvgpcB1qnspl+NUjv2omQ0nAKoA0vyUQQ/tHfptfB96dqzXr/Voc1KU9rnVpEx0oQ==
-X-Received: by 2002:a17:906:328f:b0:aa5:4b7f:e705 with SMTP id
- a640c23a62f3a-aa580eee492mr586819566b.1.1732807289027; 
- Thu, 28 Nov 2024 07:21:29 -0800 (PST)
+ bh=/0Zy3/GgINLKM6Y3J7LDoHXJMqFpAXVBbNX0MHZfozs=;
+ b=bgDFoAFSFMtdKQe738wAlyXWIUB6649hRFY6p73J2VTiv1DmMM0HRdTKtq4l3DTjRY
+ NcyhRTsaepYIsaHBEBHM13bnj70C4mw6NfFKTSEINNtW2P8DNIQGif9RnuNnSNkVzrT2
+ OSc73NIG+wRqH3y9dXwKs92OHKOUo5RYYkhOLI7fgPdgJLMZBKUskaljvLn67mI4y5um
+ sAVaWtDuTfkgWDToehkbA9EeosFi3kA/W+bZUKOjh5j9VNgbnawWilYNNIhGkGuadMSp
+ CmP8mjToa9MP/NPXCx8iqXkeNQL6H5qdslEVPKJMlU6W+M8Fv//wMEusl0mSkQDzPIYx
+ gxJA==
+X-Gm-Message-State: AOJu0YzwI56BLkHyoiYoDgbvmffwhI5efuJflQ+QiiT8AFg44uLbCZwY
+ QyNB7/GpaWhMNSI5g1UTN4W02yB1QsiamR7UjF6OTIbD8nUwRoneTuFJQOZQ4zg=
+X-Gm-Gg: ASbGncsi+OTZkhn3HUchfaZHO/BXjDlKHnMHkYWuniHovRCxjyp8HcEz/vIWWPxu5/g
+ /0IzMgo6kCp2EEsBcjF535oGqhsVU3m3cBT99rZjHhNlgKZD/DGcSPzlAi/E1dZ/rKRhQi6Cb5R
+ zufga6s2JAYucLsbyq9kZ6aUSraULR1LABRp/aEYdwYSyeWz5qF3lniYqn7Jbc7DrEvS08wXy46
+ HhhoH0o8l3xbfEK1RKVaLy2Usa/CTu1gA1mLtteMa7+wH/w8VsftPodkCH6Terv8qsHxGg22wGs
+ G6/n+dfRaKCCUplIlFcOUE96cE3lyQ==
+X-Google-Smtp-Source: AGHT+IGY+rrW7C/Xas6C4Or3j3yY//HW/TABfk22Rq7b/FNoM7pNZPgv8F7cvGdP8Txm8ymd9fl/Fg==
+X-Received: by 2002:a2e:ab0a:0:b0:2fb:5c84:929b with SMTP id
+ 38308e7fff4ca-2ffd60d2b4dmr68073271fa.36.1732808235203; 
+ Thu, 28 Nov 2024 07:37:15 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:869b:f8c3:dc94:123a?
  ([2a01:e0a:3cb:7bb0:869b:f8c3:dc94:123a])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa5998e64a8sm75913966b.130.2024.11.28.07.21.28
+ a640c23a62f3a-aa59994e43dsm77231766b.177.2024.11.28.07.37.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 07:21:28 -0800 (PST)
-Message-ID: <13227e59-010c-412d-8209-b6e39683038e@linaro.org>
-Date: Thu, 28 Nov 2024 16:21:27 +0100
+ Thu, 28 Nov 2024 07:37:14 -0800 (PST)
+Message-ID: <37f469bc-5610-401d-81c1-1e2a99ababdb@linaro.org>
+Date: Thu, 28 Nov 2024 16:37:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] lwip: wget: pass port and server_name via wget_ctx
-To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, trini@konsulko.com
-References: <20241128151919.605791-1-adrianox@gmail.com>
+Subject: Re: [PATCH v2] test/cmd/wget.c: move net_test_wget() to the cmd test
+ suite
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>
+References: <20241115164514.2186763-1-jerome.forissier@linaro.org>
+ <20241119155939.GA3493897@bill-the-cat>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241128151919.605791-1-adrianox@gmail.com>
+In-Reply-To: <20241119155939.GA3493897@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -104,21 +104,67 @@ X-Virus-Status: Clean
 
 
 
-On 11/28/24 16:19, Adriano Cordova wrote:
->   Commit 5907c81 ("net: lwip: Enable https:// support for wget") was not
->   correctly rebased on top of the changes introduced by Commit 6cc4d04
->   ("net/lwip: wget: put server_name and port into wget_ctx") in next.
->   This commit re-applies a  couple of lines from 6cc4d04.
+On 11/19/24 16:59, Tom Rini wrote:
+> On Fri, Nov 15, 2024 at 05:45:14PM +0100, Jerome Forissier wrote:
 > 
-> Fixes: Commit 5907c81 ("net: lwip: Enable https:// support for wget")
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Changes in v2: changed commit name
->  net/lwip/wget.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>> Since net_test_wget() is testing a command and is in test/cmd it should
+>> be in the 'cmd' test suite, not 'lib'.
+>>
+>> Saving and restoring the values of the environment variables that the
+>> test manipulates is necessary to avoid a regression when running the
+>> whole ut test suite. A minimal reproducer is:
+>>
+>>  $ ./u-boot -T -c "ut cmd net_test_wget; ut dm dm_test_eth_act" | \
+>>      grep -E "(Test:|Failures:)"
+>>
+>> Reported-by: Simon Glass <sjg@chromium.org>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>  test/cmd/wget.c | 12 ++++++++++--
+>>  1 file changed, 10 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/test/cmd/wget.c b/test/cmd/wget.c
+>> index fe26fee54c9..7570c065a10 100644
+>> --- a/test/cmd/wget.c
+>> +++ b/test/cmd/wget.c
+>> @@ -19,7 +19,7 @@
+>>  #include <dm/test.h>
+>>  #include <dm/device-internal.h>
+>>  #include <dm/uclass-internal.h>
+>> -#include <test/lib.h>
+>> +#include <test/cmd.h>
+>>  #include <test/test.h>
+>>  #include <test/ut.h>
+>>  
+>> @@ -206,6 +206,10 @@ static int sb_http_handler(struct udevice *dev, void *packet,
+>>  
+>>  static int net_test_wget(struct unit_test_state *uts)
+>>  {
+>> +	char *prev_ethact = env_get("ethact");
+>> +	char *prev_ethrotate = env_get("ethrotate");
+>> +	char *prev_loadaddr = env_get("loadaddr");
+>> +
+>>  	sandbox_eth_set_tx_handler(0, sb_http_handler);
+>>  	sandbox_eth_set_priv(0, uts);
+>>  
+>> @@ -223,6 +227,10 @@ static int net_test_wget(struct unit_test_state *uts)
+>>  	ut_assert_nextline("md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57");
+>>  	ut_assert_console_end();
+>>  
+>> +	env_set("ethact", prev_ethact);
+>> +	env_set("ethrotate", prev_ethrotate);
+>> +	env_set("loadaddr", prev_loadaddr);
+>> +
+>>  	return 0;
+>>  }
+>> -LIB_TEST(net_test_wget, UTF_CONSOLE);
+>> +CMD_TEST(net_test_wget, UTF_CONSOLE);
+> 
+> I don't know why / how, but now this causes the "hash" unit test to
+> fail, in both Azure and GitLab.
 
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+CI passed on https://github.com/u-boot/u-boot/pull/700. How do I reproduce
+the problem?
 
 Thanks,
 -- 
