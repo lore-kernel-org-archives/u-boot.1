@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E6FCD69114
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:48:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130B1D6911A
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:48:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D0FF89D47;
-	Thu, 28 Nov 2024 16:48:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8322D89D25;
+	Thu, 28 Nov 2024 16:48:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g3Jhwhlm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l46818C/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C274E89D65; Thu, 28 Nov 2024 16:47:59 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id DDDD089894; Thu, 28 Nov 2024 16:48:02 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42C67893D7
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:47:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 329F589D65
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:48:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3ea462a98b9so543961b6e.0
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:47:57 -0800 (PST)
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3ea5a7a5e48so472735b6e.0
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732808875; x=1733413675; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732808877; x=1733413677; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sSbPHGlwx5YNHoTHrX0/fYT9kIHv9mZ7mC/qm0xzThg=;
- b=g3JhwhlmzBEYbvbvepxYGjgIp4/A8rtGVR+cJjcZrVZx7M57iTMoXnTWi6lgVRwO6j
- XW9OVmHrcpddDJCkDpAt1RscvCZvFZ+k+vSeajusWlzkWBNTkKCpAPykM3j+rCNRpeqS
- Z5rtrmEMQPxk7quqyKODTTc18JGTdPtV/x34g=
+ bh=BvZfHboekwGKZaTf2sYSOgInL9b19oQYgvVUO9winh4=;
+ b=l46818C/Wy+Ep4apG7Cio2HuTfY9CDEbft9zbhSQwTu1OQHU3zbBlhaniBYsFjYc7j
+ ueJ3J/abYjGzOtfag4K3reyJaSWoaAiJVsmItQ9SlG+9wQtanrlvqggXWd0Oj0HhtoRQ
+ vJq2964vhMJaio3sMO2E9ASpTDjOP6k+eikXk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732808875; x=1733413675;
+ d=1e100.net; s=20230601; t=1732808877; x=1733413677;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sSbPHGlwx5YNHoTHrX0/fYT9kIHv9mZ7mC/qm0xzThg=;
- b=SIct0ZV3V0xrjiZkzNOXvELwp9fdUuzs2QlGwZ+mC3bBAJ/CNEQOIX5YeHfG1E/XJ6
- pO4CfqrE3HhE6J4Tqlk2J93xuJCgfIieFep/UYVM/Ucs6uNR+1vIhXl+ihABQxpW5gf0
- DJIUs5IcpZpltiebNi+2p4zLj9Wy6xwGaXfTU8AE63VCyVYejNahf231r98cNCg0pRnv
- 5X0MGZCsIVvOTs0IJmc1muXoiw6Frgti6E5Wcu9NRsaVl1TSgwQlGue8/WFHvk7qWuO0
- CnlwIqqsBnwmijnANCfQy1+QS8MlSa4Hv3X98S/FvSseqkmPvKBw+/uuFOUHs7iJQDsi
- GJQw==
-X-Gm-Message-State: AOJu0Yz39BWV3WytBQApaKbQekEoYAE/+nZhQAnNq65b5jzTA0AnAGlH
- fa+6GmXoqrmW925Eya1bLt3kfIxL4CMOFlYomIaPht/IsyYiwVSv8mXpFMLs4GuqRlVz6xOkLzs
+ bh=BvZfHboekwGKZaTf2sYSOgInL9b19oQYgvVUO9winh4=;
+ b=XZEvW7OpUmg+8/7s1lblAsXjWdIn1QWqhi7uIMLWkSRGKYOXPVY5Ofwh22SCpxEZuR
+ oQvUzX12S8AOshPcfLCZJu3O4zPQAsQ9AB/k+oHkYmyuuZDbLEWRH+9Nf1YGZOHRP1Fl
+ oAXhwhB3oVwxHBBDxn7efHvAcabyFGLERk7ZiQu4Ym2rAh1iBEm1OiWublKxYZldNaUX
+ 0dHhuYVqQW+2T5EkXnizI3qRKgJhSIV7U6JC8YcVGBo1WktaOwjm7pEQXRYdDJRbs9zm
+ S5k7PBz1RzAZSq0LER/+T2uNA3xa9GcRzg9W4G2QxNXFVnh3ZKGfx3qvbF2oox4hSGYn
+ Rehw==
+X-Gm-Message-State: AOJu0YwMzuln63zsUZQEAhgBgdGTY/Q4ODAC3kYrR2IqHU740oL87aN0
+ IEgpmCyDVaNDrH2ee7//+H7kS7DKgb/Rg9K+tya/RkPCzDDjPlrybwpMk7p4T/qXHlGyvLLGBVw
  =
-X-Gm-Gg: ASbGncsHOLREUtcQj9pAdKye9d0J44IiQWlCvd98L8JWVHwBUpnXnMj6fgiI9ruDciD
- ACF25ig9MZTpo3Gq7hfgkpVWI3WdgM0LwGJwgkax2z2HLVY3iWvQm6e9d3h4ic7QxagezlJNspk
- eNp8rLoxjLpALnRg+27njqEnWbZCo3vJFrdOVYKtETUl+8NDOfksV1EnlVnatsxMCPWbXY83uQH
- bhQVrRlfoKFETTwcy4KgvwxDwOvpBS88qIS+s4iNJxdxA==
-X-Google-Smtp-Source: AGHT+IG6aX2xmE2IbU6NVbPxU4o52mmVsPgeKbj+/YN97z1O3R0+WxkSWOBB/6Byi4VQnQmCgvvEHg==
-X-Received: by 2002:a05:6808:f89:b0:3e6:10d1:ecb6 with SMTP id
- 5614622812f47-3ea6dd46778mr7870969b6e.28.1732808875168; 
- Thu, 28 Nov 2024 07:47:55 -0800 (PST)
+X-Gm-Gg: ASbGncuJWrJuWR0g/+XHAPUGcPfL38MU9mS3ui+MOBkXz8iIK9tQTR9D4uFJ6m00cu+
+ Dpu2tRKADi8bnRsp+j9amP6fppouiEg/0Y2ti8ZYjpeqNL6ue1G7Ra1ZzVCrGOVVUOsEKhaRT+l
+ GCtlawCgELoxIYZiMQWuHuPGU+bugbA/bJkp0xnyGS5s4yQjttJzM8SHwI3QODed2BSmyIIst9+
+ LL3fIhNOOIzEiee8GsbqVyoHDQPOpcfErma4Pn5oLIz6A==
+X-Google-Smtp-Source: AGHT+IFIs4v8Qd+vaMolpvXCRmY2Pj5GshPn/yBXUwZaBVbPD5XooG0sVOsJIfPwCOiE2o3/F0rZxg==
+X-Received: by 2002:a05:6808:1997:b0:3e6:22da:843b with SMTP id
+ 5614622812f47-3ea6dd4676cmr9456615b6e.28.1732808877711; 
+ Thu, 28 Nov 2024 07:47:57 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.47.52
+ 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.47.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 07:47:53 -0800 (PST)
+ Thu, 28 Nov 2024 07:47:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -71,10 +71,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v2 07/28] efi_loader: Move some memory-function comments to
- header
-Date: Thu, 28 Nov 2024 08:47:06 -0700
-Message-Id: <20241128154727.771871-8-sjg@chromium.org>
+Subject: [PATCH v2 08/28] doc: efi: Add the EFI-loader API documentation
+Date: Thu, 28 Nov 2024 08:47:07 -0700
+Message-Id: <20241128154727.771871-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241128154727.771871-1-sjg@chromium.org>
 References: <20241128154727.771871-1-sjg@chromium.org>
@@ -96,280 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Exported functions should be documented in the header file, not the
-implementation. We tend to make such updates on a piecemeal basis to
-avoid a 'flag day'. Move some comments related to memory allocation to
-follow the convention.
+Bring in the documentation from the efi_loader.h header file, so we can
+see the API defined there.
+
+Fix efi_alloc() to avoid a warning.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
 Changes in v2:
-- Rebase on early patch
+- Add new patch to add the EFI-loader API documentation
 
- include/efi_loader.h        | 77 +++++++++++++++++++++++++++++++----
- lib/efi_loader/efi_memory.c | 81 -------------------------------------
- 2 files changed, 69 insertions(+), 89 deletions(-)
+ doc/api/efi.rst      | 3 +++
+ include/efi_loader.h | 2 +-
+ 2 files changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/doc/api/efi.rst b/doc/api/efi.rst
+index 43d6f936fb0..57da7f615a6 100644
+--- a/doc/api/efi.rst
++++ b/doc/api/efi.rst
+@@ -75,6 +75,9 @@ Image relocation
+ Memory services
+ ~~~~~~~~~~~~~~~
+ 
++.. kernel-doc:: include/efi_loader.h
++   :internal:
++
+ .. kernel-doc:: lib/efi_loader/efi_memory.c
+    :internal:
+ 
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index ee0cdd36500..00a1259c006 100644
+index 00a1259c006..3f75f2efcb6 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
-@@ -758,21 +758,68 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
-  * Return:	size in pages
-  */
- #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
--/* Allocate boot service data pool memory */
-+
-+/**
-+ * efi_alloc() - allocate boot-services-data pool-memory
-+ *
-+ * Allocate memory from pool and zero it out.
-+ *
-+ * @size:	number of bytes to allocate
-+ * Return:	pointer to allocated memory or NULL
-+ */
- void *efi_alloc(size_t len);
--/* Allocate pages on the specified alignment */
-+
-+/**
-+ * efi_alloc_aligned_pages() - allocate aligned memory pages
-+ *
-+ * @len:		len in bytes
-+ * @memory_type:	usage type of the allocated memory
-+ * @align:		alignment in bytes
-+ * Return:		aligned memory or NULL
-+ */
- void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
--/* More specific EFI memory allocator, called by EFI payloads */
-+
-+/**
-+ * efi_allocate_pages - allocate memory pages
-+ *
-+ * @type:		type of allocation to be performed
-+ * @memory_type:	usage type of the allocated memory
-+ * @pages:		number of pages to be allocated
-+ * @memory:		returns a pointer to the allocated memory
-+ * Return:		status code
-+ */
- efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 				enum efi_memory_type memory_type,
- 				efi_uintn_t pages, uint64_t *memory);
--/* EFI memory free function. */
-+
-+/**
-+ * efi_free_pages() - free memory pages
-+ *
-+ * @memory:	start of the memory area to be freed
-+ * @pages:	number of pages to be freed
-+ * Return:	status code
-+ */
- efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages);
--/* EFI memory allocator for small allocations */
-+
-+/**
-+ * efi_allocate_pool - allocate memory from pool
-+ *
-+ * @pool_type:	type of the pool from which memory is to be allocated
-+ * @size:	number of bytes to be allocated
-+ * @buffer:	allocated memory
-+ * Return:	status code
-+ */
- efi_status_t efi_allocate_pool(enum efi_memory_type pool_type,
- 			       efi_uintn_t size, void **buffer);
--/* EFI pool memory free function. */
-+
-+/**
-+ * efi_free_pool() - free memory from pool
-+ *
-+ * @buffer:	start of memory to be freed
-+ * Return:	status code
-+ */
- efi_status_t efi_free_pool(void *buffer);
-+
- /* Allocate and retrieve EFI memory map */
- efi_status_t efi_get_memory_map_alloc(efi_uintn_t *map_size,
- 				      struct efi_mem_desc **memory_map);
-@@ -782,7 +829,21 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
- 				efi_uintn_t *map_key,
- 				efi_uintn_t *descriptor_size,
- 				uint32_t *descriptor_version);
--/* Adds a range into the EFI memory map */
-+
-+/**
-+ * efi_add_memory_map() - add memory area to the memory map
-+ *
-+ * @start:		start address of the memory area. Note that this is
-+ *			actually a pointer provided as an integer. To pass in
-+ *			an address, pass in (ulong)map_to_sysmem(addr)
-+ * @size:		length in bytes of the memory area
-+ * @memory_type:	type of memory added
-+ *
-+ * Return:		status code
-+ *
-+ * This function automatically aligns the start and size of the memory area
-+ * to EFI_PAGE_SIZE.
-+ */
- efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
- 
- /**
-@@ -793,7 +854,7 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
-  * in (ulong)map_to_sysmem(addr)
+@@ -764,7 +764,7 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
   *
-  * @pages:			number of pages to add
-- * @memory_type:		type of memory added
-+ * @memory_type:		EFI type of memory added
-  * @overlap_conventional:	region may only overlap free(conventional)
-  *				memory
-  * Return:			status code
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 3b1c7528e92..9d0f27dbb3e 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -257,17 +257,6 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 	return EFI_CARVE_LOOP_AGAIN;
- }
- 
--/**
-- * efi_add_memory_map_pg() - add pages to the memory map
-- *
-- * @start:			start address, must be a multiple of
-- *				EFI_PAGE_SIZE
-- * @pages:			number of pages to add
-- * @memory_type:		type of memory added
-- * @overlap_conventional:	region may only overlap free(conventional)
-- *				memory
-- * Return:			status code
-- */
- efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 				   int memory_type,
- 				   bool overlap_conventional)
-@@ -381,20 +370,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 	return EFI_SUCCESS;
- }
- 
--/**
-- * efi_add_memory_map() - add memory area to the memory map
-- *
-- * @start:		start address of the memory area. Note that this is
-- *			actually a pointer provided as an integer. To pass in
-- *			an address, pass in (ulong)map_to_sysmem(addr)
-- * @size:		length in bytes of the memory area
-- * @memory_type:	type of memory added
-- *
-- * Return:		status code
-- *
-- * This function automatically aligns the start and size of the memory area
-- * to EFI_PAGE_SIZE.
-- */
- efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
- {
- 	u64 pages;
-@@ -440,15 +415,6 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
- 	return EFI_NOT_FOUND;
- }
- 
--/**
-- * efi_allocate_pages - allocate memory pages
-- *
-- * @type:		type of allocation to be performed
-- * @memory_type:	usage type of the allocated memory
-- * @pages:		number of pages to be allocated
-- * @memory:		allocated memory
-- * Return:		status code
-- */
- efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 				enum efi_memory_type memory_type,
- 				efi_uintn_t pages, uint64_t *memory)
-@@ -516,13 +482,6 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 	return EFI_SUCCESS;
- }
- 
--/**
-- * efi_free_pages() - free memory pages
-- *
-- * @memory:	start of the memory area to be freed
-- * @pages:	number of pages to be freed
-- * Return:	status code
-- */
- efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
- {
- 	u64 len;
-@@ -556,14 +515,6 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uintn_t pages)
- 	return ret;
- }
- 
--/**
-- * efi_alloc_aligned_pages() - allocate aligned memory pages
-- *
-- * @len:		len in bytes
-- * @memory_type:	usage type of the allocated memory
-- * @align:		alignment in bytes
-- * Return:		aligned memory or NULL
-- */
- void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
- {
- 	u64 req_pages = efi_size_in_pages(len);
-@@ -608,14 +559,6 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
- 	return (void *)(uintptr_t)aligned_mem;
- }
- 
--/**
-- * efi_allocate_pool - allocate memory from pool
-- *
-- * @pool_type:	type of the pool from which memory is to be allocated
-- * @size:	number of bytes to be allocated
-- * @buffer:	allocated memory
-- * Return:	status code
-- */
- efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
- {
- 	efi_status_t r;
-@@ -644,14 +587,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
- 	return r;
- }
- 
--/**
-- * efi_alloc() - allocate boot services data pool memory
-- *
-- * Allocate memory from pool and zero it out.
-- *
+  * Allocate memory from pool and zero it out.
+  *
 - * @size:	number of bytes to allocate
-- * Return:	pointer to allocated memory or NULL
-- */
- void *efi_alloc(size_t size)
- {
- 	void *buf;
-@@ -666,12 +601,6 @@ void *efi_alloc(size_t size)
- 	return buf;
- }
- 
--/**
-- * efi_free_pool() - free memory from pool
-- *
-- * @buffer:	start of memory to be freed
-- * Return:	status code
-- */
- efi_status_t efi_free_pool(void *buffer)
- {
- 	efi_status_t ret;
-@@ -793,16 +722,6 @@ efi_status_t efi_get_memory_map_alloc(efi_uintn_t *map_size,
- 	return ret;
- }
- 
--/**
-- * efi_add_known_memory() - add memory types to the EFI memory map
-- *
-- * This function is to be used to add different memory types other
-- * than EFI_CONVENTIONAL_MEMORY to the EFI memory map. The conventional
-- * memory is handled by the LMB module and gets added to the memory
-- * map through the LMB module.
-- *
-- * This function may be overridden for architectures specific purposes.
-- */
- __weak void efi_add_known_memory(void)
- {
- }
++ * @len:	number of bytes to allocate
+  * Return:	pointer to allocated memory or NULL
+  */
+ void *efi_alloc(size_t len);
 -- 
 2.34.1
 
