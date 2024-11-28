@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CE5D69114
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:20:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0A7D69114
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:21:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E01038962C;
-	Thu, 28 Nov 2024 16:20:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BF48894FC;
+	Thu, 28 Nov 2024 16:21:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QXm0qps9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ukRYZHJM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D098A895C6; Thu, 28 Nov 2024 16:20:38 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 9598389500; Thu, 28 Nov 2024 16:21:31 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D21089384
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C96689384
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-53de579f775so1312362e87.2
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:20:36 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa535eed875so131612066b.3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:21:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732807236; x=1733412036; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732807289; x=1733412089; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PvpSqSxLk/Yd6gOijAiRUXYYlobadBMazDIb56aX83Y=;
- b=QXm0qps9Z2yt2pruSkvYEjZ7ccAF4oKbag32n65X7o0PtgIQcq3xuFSIc2lAQFBGdl
- QIdbt0sqwCFCrkJmHZt32nF9BPdHfid1Lxem2D9TF+HYQ54jSe7SxF5tY8Epv1323y8K
- O+cnVe2Y2X2Vs4x8nipvRmFhZ62pVr7ZOGpQLmladEH/DSbz0IqPYKcJ08x98hj6v0Mt
- 25atRiTxnrl1OOdxjeP06Sc9UUoIT2944OiuDS6daYKtuFsz2I4i28LXMUtcJtphIrZU
- cGO+A5K1ktCnL2+kL/NzIJJ3qm4KXHpw9hXeLyippKZd4BQQXsMXOzYfpCd1i7DqNU0t
- EamQ==
+ bh=Kzj5wLz+6xLHHvIIbmJC4PeUQV80CuW8IEGwPqiLnLM=;
+ b=ukRYZHJMYNDduGRyk0eVb2aP8PvfYrt8+4bOtFnUgj/7TE6nVon5EHhUvNM0NqKk1c
+ xOdyi5qG8OQOADK3aMbskH7PKk/4SktICpsI6LDrr4cUg0TpPL1eky7jhin8HkJwco6Q
+ +R+toii3qsJ4wwWhjoCkGk1A9QYUa/zwtgX/IlHqB+blxoElUn6vxWDzhsWa6BayiQ46
+ 2fwrD659e9nAzVeZmr5QeJt0ftb4fIJlaDOoKErybTQpwb75eiqrGHta9I1yh3bBTi/y
+ iUX1PSUb6EEkM6lxvcgWbcJ1ZgIkOgwqofJgUgTuXF+8SKAWPL4gKCPBgqiCaHfFF6wT
+ uBpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732807236; x=1733412036;
+ d=1e100.net; s=20230601; t=1732807289; x=1733412089;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PvpSqSxLk/Yd6gOijAiRUXYYlobadBMazDIb56aX83Y=;
- b=Mhtfr31QJYH/yxyCbKLyQcjJelE56V2yILKgA3zvDB2I6qlHM9XvCoVGcBAvH5j44q
- ml7JzzFlmv/or1DpkOGbNzESvEEnI9X8z9AChiaNDiNY0cQJKsX52B/8n53Qh9vqSXlb
- /3v3n1sy3QLNy30OFvGDCtraa2sUReGNd7gPjANVVb3HafpFQ6UvjnmgmqP+xqBdZR0o
- A94fEDuROSE7qkBB0JyDRBHiyaMb/2QJLXer02dOai1cRUbtmKOH66XVv9PT6Qurl68F
- Kg5lf298VwI3oQhxzFjfjgUG+f94XDanOmjtFjt3gZ+NhY0MD3jlEtd5CtzyVbHUmbdn
- cAAg==
+ bh=Kzj5wLz+6xLHHvIIbmJC4PeUQV80CuW8IEGwPqiLnLM=;
+ b=CxvPw/PCCk2/xMi5DgfyShjaXJQa7ECgMD3xCgcqT1Tr0VsuduZkpOZqKW8A+C4PQ0
+ e5X/Kt6nzqByR38lqK8mtHWjOLdbj9kt0HxaRz6vL6rcob0hVrUuHJOZfHTlyGpbiLH3
+ jZWfGW4zHuLTi+/yaKgUqDR5vdPQAEnDkI6eG2r6oJFJKCuivv5p7p++yznDhpsJB8Oz
+ F3s1vcd+ftDATRhvzfiba+pivd2XoGjbumWREwT7O0cXMfs1x6qQlUK0rW1lAqJZ4HEa
+ NaQr29BNsManje8aJH7aGriQqGUBK483X4Dj/H1qM1RR3ogcZhHcdD0fdPhI2E9gHN5o
+ cogA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8I5JKOAbbmv9nuxrYe735BMXbRZtISrkJettUj+Dip/8itZ6DI4jOT2MCEKCwqi6+YwUNpyc=@lists.denx.de
-X-Gm-Message-State: AOJu0YyddXN8F1hHZEyFMabjDURs4Yjk1VFbAwUBGvHwdce8sVn0FAdO
- 2Z0TmmYEm0cf0+i6lMGhTCFtkrmA93qcQj+qXeghzXZ4ztzB9Y2qf6e/Fg0nAuE=
-X-Gm-Gg: ASbGnctabUjj95OZeC6oxacFZKPGwagzt3cau2dFySLdFyyWxCv3LVwtOpBIq1xkbyR
- 4XTwRJ7GIJOxvNu1n+F/Y20n39OSVX0dFYlTfH68l11QkRQEzrL1xjXOOsEoeVtsG7iosrJrzrx
- sEXO3mxW7I1Yr0nrhJrrGCe/IqxW2Nama25yKW7hfSbBOr4ejhaRJ2yacYxNE+ujYkZ22h3GXlA
- B7sWsM0Iv+f3J5G1fiPdJn5FKT85t5nLLCU9UykB5t6nSuInA8btHZ3Uvb+rZzBXWDbcdQar3ls
- 9UL8sVZZWU99L0id8QX4oZUx1f4S2Q==
-X-Google-Smtp-Source: AGHT+IE5dgLf0XebBIjGHmC7/pJpA9SLe977ogHiSUZc9No11R7WpXbTV/H2UoFs+/Ieun0fUQRMYQ==
-X-Received: by 2002:a05:6512:1286:b0:53d:eecf:e25d with SMTP id
- 2adb3069b0e04-53df010b161mr6804050e87.37.1732807235788; 
- Thu, 28 Nov 2024 07:20:35 -0800 (PST)
+ AJvYcCXivObicSKbbvypcixpeJwsqaUvtH8geck7SnEIu3Ffphn4uIJMV1jMceT786YjvWW/KViYwvQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YyYRFRKShzz9q6sFCWKdrwqhzsAAHYC3J9C1VYDRr6TguVuF9LA
+ PeKWeeqygj2IwZ0kwI6SExy6+4L/vwGXfceWNh4ctuqBRjKtL/Q8T2k+HF+3VIQ=
+X-Gm-Gg: ASbGncvJnZcltDAmRIdEgEFlBnAikgVJfUe30Kjndg01PrFzj8eejAKj3X0xBpLBcvG
+ mlhr57c0svBWjdg4Ub/SKRbSvzOoOQ/AHWCmo4GcM2hV0vDZPln8mq8nw5BWWHDpBMLs6ipWNls
+ hasUKASKSR4FbBI5AmxaDewkqia8R9vaM4ofLfk2q3jiMJcEW1GY+tjPd2dpb/qe+kxo1Oj8gTT
+ kuFNMSVLR4ImfbDCYxqWI8uT5GY83J3LZPOppTTava/N7uIEK8tj1WN2cCFVnyYx0vvlaoJhz9p
+ tsPDw2fwtiXWFsy4HWwNSXQpIYqtDg==
+X-Google-Smtp-Source: AGHT+IGnyzymBrvgpcB1qnspl+NUjv2omQ0nAKoA0vyUQQ/tHfptfB96dqzXr/Voc1KU9rnVpEx0oQ==
+X-Received: by 2002:a17:906:328f:b0:aa5:4b7f:e705 with SMTP id
+ a640c23a62f3a-aa580eee492mr586819566b.1.1732807289027; 
+ Thu, 28 Nov 2024 07:21:29 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:869b:f8c3:dc94:123a?
  ([2a01:e0a:3cb:7bb0:869b:f8c3:dc94:123a])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa59990a777sm76736966b.154.2024.11.28.07.20.35
+ a640c23a62f3a-aa5998e64a8sm75913966b.130.2024.11.28.07.21.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 07:20:35 -0800 (PST)
-Message-ID: <da818188-cfec-43d7-9d7d-21fbb5530f9c@linaro.org>
-Date: Thu, 28 Nov 2024 16:20:34 +0100
+ Thu, 28 Nov 2024 07:21:28 -0800 (PST)
+Message-ID: <13227e59-010c-412d-8209-b6e39683038e@linaro.org>
+Date: Thu, 28 Nov 2024 16:21:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lwip: wget: Fix incorrect rebase of 5907c81 on top of
- 5907c81
+Subject: Re: [PATCH v2] lwip: wget: pass port and server_name via wget_ctx
 To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org, trini@konsulko.com
-References: <20241128143704.590211-1-adrianox@gmail.com>
+References: <20241128151919.605791-1-adrianox@gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241128143704.590211-1-adrianox@gmail.com>
+In-Reply-To: <20241128151919.605791-1-adrianox@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,20 +104,19 @@ X-Virus-Status: Clean
 
 
 
-On 11/28/24 15:37, Adriano Cordova wrote:
+On 11/28/24 16:19, Adriano Cordova wrote:
 >   Commit 5907c81 ("net: lwip: Enable https:// support for wget") was not
 >   correctly rebased on top of the changes introduced by Commit 6cc4d04
 >   ("net/lwip: wget: put server_name and port into wget_ctx") in next.
 >   This commit re-applies a  couple of lines from 6cc4d04.
 > 
->   Fixes: Commit 5907c81 ("net: lwip: Enable https:// support for wget")
-> 
+> Fixes: Commit 5907c81 ("net: lwip: Enable https:// support for wget")
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
+> Changes in v2: changed commit name
 >  net/lwip/wget.c | 4 +---
 >  1 file changed, 1 insertion(+), 3 deletions(-)
-
-With Quentin's comment on the commit subject addressed:
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
