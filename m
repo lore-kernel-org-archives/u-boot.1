@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94494D70DE5
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A569D70DE6
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:26:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 145CF894F2;
-	Thu, 28 Nov 2024 17:19:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1E71894F2;
+	Thu, 28 Nov 2024 17:26:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mkcHnDv8";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j1Ux5SCR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7886E895E2; Thu, 28 Nov 2024 17:19:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id B719E89430; Thu, 28 Nov 2024 17:26:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C2FD893AB
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:19:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B095789430
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:26:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732810770; x=1733415570; i=xypron.glpk@gmx.de;
- bh=GQtCYtAr4ugb+PuG+ProqPnhA+1szGxA2WZRMtnRnaY=;
+ s=s31663417; t=1732811173; x=1733415973; i=xypron.glpk@gmx.de;
+ bh=VZ/p61zkJQDN5/pU3W3AoUG6ZGoptE7zOQM5fWJVB2c=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=mkcHnDv8Sd76B/MGUKFcScIruMoq2z4uAWlrshShRaQNcA9A7xIT3LZqt9iH500q
- 7OnkscUNT2H8ClOwvIyDts0AIOVkniPdtTDXSKns3WWSvt9dK+N8vfJAeCaFYNocy
- U0dmf7yWa7EzMNU+medepJCP1rZ85RheITYdV1K01kkjAmf3anNBZbBgwGjdStrWc
- AQuyWag6NonTa3eqKhGfXXGSmMY5Ds4skS9KD4JwDp/JCxNwI+TyHKzzpCU98YX6S
- LEhDpmyVAKhjn9iVbHVyQRjuuN25hsfA4Pkuc26HZBjTTqO5BD5QZzrLfKEOeDf0t
- QcjKl5WHrbPTu1HOZA==
+ b=j1Ux5SCRdpQFbhthgBSXrPgPYIRT2lSe+VOnrsmZSMSIHF2ULqO3MpOG0VENzUO5
+ O23xGQX5dpoVQAf+LwcIGH2C4ihJK71cAUw1lmrEf8gbVRDb26tWe+Z4jZt3jvTTL
+ SzvXie4GrePQRzkq/X2jajRB+zMKNcVUNMmg6nvvxofA9v+9UG+r2F1GiEeBTbN0i
+ niRsvtgw9ADRcOnHmGy1jAiCC0COGs4tkZ9EMtdGkRaBF60dq78JpDieaPp9RfyOq
+ GRiYShQb1COhk13hhDcS4UNAUT2MTi7EBPO97eMMbVcpiVHng/aaxCS7ni556MPLC
+ X6LM/d0jdhrd2udcfw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1tgVdH3Upq-00r6H2; Thu, 28
- Nov 2024 17:19:29 +0100
-Message-ID: <fb055f90-daed-4c5a-a5a6-6fc35e6375a9@gmx.de>
-Date: Thu, 28 Nov 2024 17:19:29 +0100
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MuDXp-1tXOiO0RYb-00tFpJ; Thu, 28
+ Nov 2024 17:26:13 +0100
+Message-ID: <914a746a-bf2d-4415-85b0-2f33d365c956@gmx.de>
+Date: Thu, 28 Nov 2024 17:26:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/28] doc: efi: Add the EFI-loader API documentation
+Subject: Re: [PATCH v2 05/28] efi_loader: Show the resulting memory address
+ from an alloc
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-9-sjg@chromium.org>
+ <20241128154727.771871-6-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-9-sjg@chromium.org>
+In-Reply-To: <20241128154727.771871-6-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:UWOU/RDpw5xwVoqhP09jdFo39MhJ1rwz7rlRtUyWQkqkiROhGe1
- hWsFxPaFuJhskAfbfe6rwm2m/yWIhlzayy0tKau/z0GGe2KkTatz8ATAop1XRAHKiyUSxoP
- 1m3sNK51JIM0RSDX67bKwXbbQqVwatAG2XsaHULLpyhwK8krQwtRIZhJSL86SpI3uTnYRUu
- fu+R+NFseT78zOzYk3Kgg==
-UI-OutboundReport: notjunk:1;M01:P0:ZMEc/NWOWSM=;IjQpXhngQrS1UQb32VQOJns4eoe
- PVwDpEaejDQlY3534gZLJ6YhVTxyfPq8jZU8Hfrh7PW3CrTBXrF6kOLuXzFb0a/DX6mt3+GhN
- hdiPx4/uObe1LIlYHAX+Ja4J72sOZgkC1dciSAOu2dURqeVz1yGhZW4VgWMK1Wh4wXEPp0SrQ
- H3BzT0FghDY0JQjFUgHwy4T5RlmmhDZBfzNSWCxrCndL95uj75vu9w4AahypupboyHr4S3DRw
- z0W5fBYlr17Nd23ikFZjFFX3JD0dq0oqOClwgiUADQnApG+lj4DLYSF1jsfgGZoWiChE3pyHc
- ywpDF7BalVApZMp0Wfiw+po3En/i6hr/2ADnKYXQVS2cA5LGH8y2WlcKyXmDFfR2++IQco13s
- 7M6l/MXMynsdjA3PpoP7pP7AVAl/GX84A1zcgx2RZJXlllZlOOMFrv4xEkjX5N+xx7iarHSze
- FzVxR5TcuARe+xL9Q5KcNpwECANQwvdvPt7uLFaAQLQofBNlQDfrEg+fzDH/RAFZVqnJRId2D
- EPts3rt6yfiK+gdP7QyRwqFz15sEd/v2wfIw7M0bP1u3vikxPho0mLuBNNWe0MR31g6UMvtZ5
- s5q+OSlgqn17ko58L+lb80JVr17iD1rx89qzRGaxboNrKhF9rRTPEYQl1weXhzcCHFXeAwq2o
- Ey10VSSK5dIpbxy1OAQG3pA4kL4bOmyM2paYwzrEwPEUKQxYu0fZsd8xtjb12bzTqE04TO9lM
- F+Nzw1R1yDt3kB8ookG7b0ZOHk8ba1+dBLWlgYazy9hDi7qB9RGTOWSG3sJoIG+1OFdK57LEy
- YPjHnvVBLiLZiSoEz35hBabblJHpTXwdkXRbqaeoO/4uEMtqMxKRSeqF47g39IZASYgTyejXP
- Rm2INlN4e1wIFiWcSB5LYbp4qswRyFzts8rTgjlygq2nLUXUSqQxfZm0SM6c5+IPmtHd8adJP
- Yiz//qwAmGMXqCHJbihZMphZDRU8Da7fh85Qnnbf+7lc3MrOUYak1iDYDmsf8YghcWxM8S91P
- n1P09cPAXSoZ43H9+2Gey4KJInyRxv0XQZ0RFsNwoZdqtsIIKBGiW1LDe2e47fsdCs/bzcpBx
- /BTmnjuFCDNKBUyvvz1sK7ts2S4yZo
+X-Provags-ID: V03:K1:LYjFVpNlj3tqLypg9mhqsrPQ3bwlW0VHXgUAoUPbYck6eYjA5DG
+ WiILYXLkdt7xuigxizq4jiZgjXnviPmWoBrw7lsuN+HnlNWZQkV9oUtjSy9BRltoSs/hi6c
+ YQhNMExVNL/uZ9Z0vmU5WDbvWCBR0ptlPeqnJgGAnjvA4maI3hHeK6gLAYC+OF3Uk7Vf3Nt
+ DKp6NEvOl0OdeqxCX200w==
+UI-OutboundReport: notjunk:1;M01:P0:BShYYn8dt1w=;bw7GXrHrT9mWDzzbyObkU8r8J6Z
+ bJuw6/X4mqbXn9m2VE+3tx/5A7Qvo34DdHgOxsdBbLFg0sEmnlJTdJwi5Qj41wBoIPqfTTXAy
+ XZ1j2a6AMdL6BNuZwAYs6DJEwoHPHeTelXuTaA+CfBKroVPqMqQGJJAgekU4ivT6ABqUqxdnq
+ yAKdNhuMGL/ESXzhW4bchG2yzhuUobWoYA19T1izbYFf+fEnxWW0+K3HXpcpFhBv7up/1MeJt
+ jnQt19CJgD/gcnSuMEzedRrITIkn8pihLVLcQ7p670ti1YJ2RslHyhTabBxIFgHJw4Tur+IDZ
+ Ds8/MgMeeeQxkLz27ySjkyV0eecIunMMuleF0snai6AxuJXg8UN56z6/JPzcQp7JYfdN4Us1o
+ MQnLobmUEG53QZ9+e9qq+G4CB3ykICI191twLchwvUaU76U+XXz2gQelL64jhFXm0oTF2cpV7
+ h9U/rTBgV4z0QFSecRpA6h/cG7HIVc1nA9/eJHulnKhtC1VnSD3eTK85Gl9tclLy3NwUOVROh
+ YPcdZgO38rB02Y7F+ahpGibFCr1Adjf6EwYcb86rlE/GmhPy1gZILpjBJDJdogUK9d/qo6LYg
+ ivaDnjxBXtPPdZU5ygKfYNtDeWqLtqLEOLwFNOdRaGozn7zN5sLGCbkb8CcpCGtnSEKFJSsJJ
+ Rkh/mt/niv0q86Pl8oLwYqHiHPJFoMdrqfuvVrghzBGy9vlPW+4T93oyOYD7UiVED7ftVvNBA
+ /d6id2RIDPoXdnKQoxJgK0xLOeYJhus4KJ33ZRqaSkvR9Le7psdNHMFKOPAvnG5X/SP+P8+Je
+ d1ruJYP0pvDmGQBXDlu+DPlFYzbKQrfS4rEcUE9TUqvB58g1tgSMNNMdhs+vfzwTbx3xv+74Q
+ r/uqipQFrkfddMqwfBLDQENLHleaIcHyHx6kt28r/nV0kgYMOMV5RzNjI1wDyvgdQSGKuRQTn
+ AXE1FXSSX4PFdTLPgeEqE7Kn4hywKm358rew/zypWjcwtAnIMaYQLCI8dpibz0n1IiJHUdNRk
+ GiSTf35H1ag+4iEPUh5YQlvmjNVuU+KEsyZKxQSwoAVcZEX6d0CZKsVyu+uH1yMKLPqXs3hx+
+ 2alrYGBhKwaHgH7k/JkVFwCFySsQHo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,56 +98,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.11.24 16:47, Simon Glass wrote:
-> Bring in the documentation from the efi_loader.h header file, so we can
-> see the API defined there.
->
-> Fix efi_alloc() to avoid a warning.
+> Update efi_allocate_pool_ext() to log the pointer returned from this
+> call, which can be helpful when debugging.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
 >
 > Changes in v2:
-> - Add new patch to add the EFI-loader API documentation
+> - Use EFI_PRINT() instead of log_debug()
 >
->   doc/api/efi.rst      | 3 +++
->   include/efi_loader.h | 2 +-
->   2 files changed, 4 insertions(+), 1 deletion(-)
+>   lib/efi_loader/efi_boottime.c | 3 +++
+>   1 file changed, 3 insertions(+)
 >
-> diff --git a/doc/api/efi.rst b/doc/api/efi.rst
-> index 43d6f936fb0..57da7f615a6 100644
-> --- a/doc/api/efi.rst
-> +++ b/doc/api/efi.rst
-> @@ -75,6 +75,9 @@ Image relocation
->   Memory services
->   ~~~~~~~~~~~~~~~
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index 080e7f78ae3..be8e4f41ad2 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -511,6 +511,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int=
+ pool_type,
 >
-> +.. kernel-doc:: include/efi_loader.h
-> +   :internal:
-> +
+>   	EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
+>   	r =3D efi_allocate_pool(pool_type, size, buffer);
+> +	if (r =3D=3D EFI_SUCCESS)
+> +		EFI_PRINT("*buffer =3D %p\n", *buffer);
 
-Look at the section title above. Adding efi_loader.h here makes no sense.
+The UEFI spec provides:
+
+typedef UINT64 EFI_PHYSICAL_ADDRESS;
+
+typedef
+EFI_STATUS
+(EFIAPI *EFI_ALLOCATE_PAGES) (
+IN EFI_ALLOCATE_TYPE Type,
+IN EFI_MEMORY_TYPE MemoryType,
+IN UINTN Pages,
+IN OUT EFI_PHYSICAL_ADDRESS *Memory
+);
+
+%p does not match u64.
 
 Best regards
 
 Heinrich
 
->   .. kernel-doc:: lib/efi_loader/efi_memory.c
->      :internal:
+> +
+>   	return EFI_EXIT(r);
+>   }
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 00a1259c006..3f75f2efcb6 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -764,7 +764,7 @@ efi_status_t efi_next_variable_name(efi_uintn_t *siz=
-e, u16 **buf,
->    *
->    * Allocate memory from pool and zero it out.
->    *
-> - * @size:	number of bytes to allocate
-> + * @len:	number of bytes to allocate
->    * Return:	pointer to allocated memory or NULL
->    */
->   void *efi_alloc(size_t len);
 
 
