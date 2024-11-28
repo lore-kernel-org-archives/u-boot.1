@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF5B4D70DEB
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:13:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11B7ED70DED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 796FF89D0C;
-	Thu, 28 Nov 2024 20:13:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBE7D89D31;
+	Thu, 28 Nov 2024 20:13:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OaNZlVWN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QzcjqJM5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE08C89D23; Thu, 28 Nov 2024 20:13:10 +0100 (CET)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 0C14189D39; Thu, 28 Nov 2024 20:13:12 +0100 (CET)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72E7C89D3E
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:13:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD1EA89D18
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:13:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-296994dd3bfso660262fac.0
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:13:08 -0800 (PST)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-2969ae2c99fso664231fac.3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732821186; x=1733425986; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732821187; x=1733425987; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HUaUpwiQYkli58IVrFzZf2BGkBfnfEb85/8u04Z0F5I=;
- b=OaNZlVWNxCDtqNx/AqU0XS/LtzBYQyGhJyhRznUhuJJwZkxMAfDHR2hEI5A1wx7OBD
- gxpLGjDOmHBNhbby4xiJtneWlU0PoAGvZJ8rrTKNOqCFzdehLN1MkFaDCe+HphJ3TAOq
- 9AOU+G3aI0+AezoaRbhSRJJzcOehmWrRGOmUU=
+ bh=T1dOJqfhavQlk1vzE1H71zxp82RS5HyP8F7dPO0ifK4=;
+ b=QzcjqJM52c75x5xQMtPKu/YhWmpFzlWgoSmsk3zgGI+dmGZ5NHygzPI8Qp7XeL5Scl
+ 5AbgemVIWBX0ZbNSbMVhVOPfiDKnqMcNhhR2koQZ3oNcI006XEsHbg0CVMsRvrrMQRE2
+ 4/RMUNn+sh4D/Y54Zz06OnRwkgXyoHQgq8iHU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732821186; x=1733425986;
+ d=1e100.net; s=20230601; t=1732821187; x=1733425987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HUaUpwiQYkli58IVrFzZf2BGkBfnfEb85/8u04Z0F5I=;
- b=T/ZFlu/dbmqYZGSxNcGgbm93Kw0aDFDgUY/SXUt1fAWHisimoOCpgeI1S/d4NkKHnl
- XLIvjtnb+xJeVcVLorIFTMEJBWiY9CyJeu4iCDp0/dCiFjQcSkGQv96nrIKtASQw/vLx
- 8coXJKTXOEfx5ghy+mfWWO1Mp68oGINFwKSgxuj/VJGNAhHeRZZwiR2gXKL5rQpuyY9g
- mrrHTJPXdLemPWN+OgtfrLXfVFUwpUKZvXHvIUWOQy9NSQ56JKLAsO6Ye0mrKBdPUGrN
- IM0oK2V62YwU9VQFcss80jm4f6kBJxGB7f0vuP2y2BvvWp35BpGYf3B8efme1iFc2ldc
- TWxg==
-X-Gm-Message-State: AOJu0YyL+Tz81Btg5HF+uUa8vYXg3I9rYuEJ1zgNpI21hGiMt8uLHJRk
- rn92IrVJX//MXG5DrJqrZsw+NtplH/pweUKKwIe4+qBFuFPmc8vjydcG2qVcLmGz6A8pBKA4vGI
+ bh=T1dOJqfhavQlk1vzE1H71zxp82RS5HyP8F7dPO0ifK4=;
+ b=dx0psVz8MU0necPFrGxnq+EelS9vKdlBG2kEFu609Kri6r/sEySVKQAMnFcFaEsSVP
+ JvI2HhUFWB0hLjrXMsn+ICFdK2nqWYl+NKA3mb/1B+fd+UXsUNhcDbFL8Uhmxzpi9y2w
+ ea4Z5hefvvvq2AjqZf04NotonYLgY+NDaEXz9ei6GtwJ1ULjuhRaD7d5rz2U8OB0RQl9
+ RilKschDs/OZkpUo9FKUBWGhxUO9w3QWMFqKxy5yDB+GfSdJOoVj1f5b99dQllWOC+im
+ rJeY26n4sgwdPRWc6R1WPlmHmJ/eneFUjql0cax/z/nIw0O/jvMYVc57M2odZ5n56Oeu
+ skyw==
+X-Gm-Message-State: AOJu0YwTwTqGRHG041uf0UYfkX70JIDPNgpBObQZsKhc1TKX3PBttlUv
+ 2pi9QKYWsNxLvTW6sotAJQvlth12moRSnozSEr9ksMjGx/8SY8bn7Jl2yLmk6JJH7Oo5eD9r3AE
  =
-X-Gm-Gg: ASbGncuphYsZ1HFkaCusWiVbJCfs45GvaULnurDZAa/0AaxITbt4qzDCA9dNzQy0T1L
- VACraGtXg+Dh9UfN9503omVji5kYBu3ia+FWbgi9SBaah3Bfx1Hs9KtgwmdJc2TOmThhOASVvsB
- p2YmLVIjxKjlaHPM9rNgEtxPaVblgm7vM76tfTfqbkUmN1jeqcPKDAecVYos3fZZRP6BqjqXvPh
- 1IQFXAy9h7NZ5A8k6hF/mt3bzYz2fuHO345BctoTfeSLg==
-X-Google-Smtp-Source: AGHT+IGy1KwnjsZFP+tEGl6NbARr4QEUIwYsQNRgIdK67KJrwP3G37zOU6oJ7GP44IacWSYNr0JjGQ==
-X-Received: by 2002:a05:6870:a19e:b0:296:a67c:d239 with SMTP id
- 586e51a60fabf-29dc4008d30mr6291130fac.12.1732821184760; 
- Thu, 28 Nov 2024 11:13:04 -0800 (PST)
+X-Gm-Gg: ASbGncvipv026rjY7txnvy29litjK8LnQhgHp7y+rdmpY441viiEWEL7Me/U+unYoaH
+ DMds/uuwH8BSxPsx0qEdw+JRkL3q4O0fXyav2xlTfW5w7JNw/LYoI5PaPG9jeonGCxuB5a4ly28
+ RyiQfJ0SnJd0VjpIj2rmAUGP14THq+dfVJTMdKYY7dpyvaLyRQ7WUmjYrJqG7rrB49NWFYDNNdg
+ 5RUMN1jFXhRKropTiKlKid7zecTRF9lJZP4IGmObpz4Jw==
+X-Google-Smtp-Source: AGHT+IGQcSo6QHt8udMYNtajjjlYo9pFLHrosMQqOIx5XDKiOboJJ1NJoVGKDhj0uaMdkJitdlpitQ==
+X-Received: by 2002:a05:6870:6125:b0:270:1884:9db1 with SMTP id
+ 586e51a60fabf-29dc3f96796mr6460574fac.7.1732821186084; 
+ Thu, 28 Nov 2024 11:13:06 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71d725d873esm429521a34.54.2024.11.28.11.13.02
+ 46e09a7af769-71d725d873esm429521a34.54.2024.11.28.11.13.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 11:13:03 -0800 (PST)
+ Thu, 28 Nov 2024 11:13:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 05/28] efi_loader: Show the resulting memory address from
- an alloc
-Date: Thu, 28 Nov 2024 12:12:21 -0700
-Message-Id: <20241128191244.900006-6-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 06/28] efi_loader: Update startimage_exit self-test to
+ check error
+Date: Thu, 28 Nov 2024 12:12:22 -0700
+Message-Id: <20241128191244.900006-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241128191244.900006-1-sjg@chromium.org>
 References: <20241128191244.900006-1-sjg@chromium.org>
@@ -94,34 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update efi_allocate_pool_ext() to log the pointer returned from this
-call, which can be helpful when debugging.
+Check for an error returned from the decompress() function, just in
+case.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Use EFI_PRINT() instead of log_debug()
+ lib/efi_selftest/efi_selftest_startimage_exit.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
- lib/efi_loader/efi_boottime.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 080e7f78ae3..be8e4f41ad2 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -511,6 +511,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int pool_type,
- 
- 	EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
- 	r = efi_allocate_pool(pool_type, size, buffer);
-+	if (r == EFI_SUCCESS)
-+		EFI_PRINT("*buffer = %p\n", *buffer);
+diff --git a/lib/efi_selftest/efi_selftest_startimage_exit.c b/lib/efi_selftest/efi_selftest_startimage_exit.c
+index b65a10b7a4b..8d119f054c5 100644
+--- a/lib/efi_selftest/efi_selftest_startimage_exit.c
++++ b/lib/efi_selftest/efi_selftest_startimage_exit.c
+@@ -84,13 +84,15 @@ static efi_status_t decompress(u8 **image)
+ static int setup(const efi_handle_t handle,
+ 		 const struct efi_system_table *systable)
+ {
++	efi_status_t ret;
 +
- 	return EFI_EXIT(r);
+ 	image_handle = handle;
+ 	boottime = systable->boottime;
+ 
+ 	/* Load the application image into memory */
+-	decompress(&image);
++	ret = decompress(&image);
+ 
+-	return EFI_ST_SUCCESS;
++	return ret;
  }
  
+ /*
 -- 
 2.34.1
 
