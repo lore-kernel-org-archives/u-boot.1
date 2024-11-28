@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2CAD70DE6
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97F14D70DE7
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:20:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D065489D1E;
-	Thu, 28 Nov 2024 18:06:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 24F9E893DA;
+	Thu, 28 Nov 2024 18:20:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="m1vW4Ijv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oFEAgpzp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6B36897F7; Thu, 28 Nov 2024 18:06:07 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0EF17893DA; Thu, 28 Nov 2024 18:20:33 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E50589D27
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 18:06:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A10A38939D
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 18:20:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732813561; x=1733418361; i=xypron.glpk@gmx.de;
- bh=dyRbm6tMhixTs7KXlhsJWz6iQT8hE7M27w5J31Jwa0E=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=m1vW4IjvlPeSeaSwwvzMVCrDPwHOi2Y6dQfZ32lL8285XcnYvY5H6XAbGYikBbiG
- nIgh6tNcQ3ET8UGajpYHk3mAqEBm/8esuqFBXV05KzeLq34dUIrYPTNof+VLVd3oE
- OipXRtoJuaNJBl67VhbY2/ZB1Z8tlKnifRWDs6JzQQiN/FgrEpHD625msSo3ZKlww
- XOjLl2AAdq9+Thu4NtPBL5cCtROoe0fpVskkWjJTpJilBC/g4Gf9ds/NN6zL4TkLY
- I5PiRmlOhf0WmxLPI/Dr8elHP/FowGmrkXxUrgvJvqwm1n/lYKqBs2tXFiBNrqsWM
- bP9GhnhaKhh3CRPitw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4z6q-1ti6fd21nI-00tqKQ; Thu, 28
- Nov 2024 18:06:01 +0100
-Message-ID: <dec42d99-6eb4-4272-bf9a-79ecff3bde47@gmx.de>
-Date: Thu, 28 Nov 2024 18:06:00 +0100
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ASHKKmo044962;
+ Thu, 28 Nov 2024 11:20:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732814420;
+ bh=SpYW8ilD9sUFhPhZTuFJ846TGvbKcsK8qUrBbKeM3hQ=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=oFEAgpzpP9u9LY6VBadn5qoDb6nZoeIdEAPrjB2HFHmLjoTXHLU99MZHRA1TqD/Fh
+ z1e/GtBqTaRqmFRkyF979uJKkzE2wz6cRIiAevlWvSAO5pAXd4hoALc9ZKREIsjFZa
+ qCDGgMQ7ym8ciUJtjSat6vD7umtm8Q70NYT68EJE=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ASHKJAg108546
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 28 Nov 2024 11:20:19 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
+ Nov 2024 11:20:19 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 28 Nov 2024 11:20:19 -0600
+Received: from [10.249.131.218] ([10.249.131.218])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ASHKCgw108355;
+ Thu, 28 Nov 2024 11:20:13 -0600
+Message-ID: <252751ec-2000-43bd-a9e3-fc0b53362baf@ti.com>
+Date: Thu, 28 Nov 2024 22:50:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/28] efi_loader: Use a separate struct for memory
- nodes
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-11-sjg@chromium.org>
+CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH 1/2] usb: dwc3-generic: set "mode" based on caller of
+ dwc3_generic_probe()
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-11-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:mC0Toe4kkdB2t1P8h9Gz+KIGAzT1sF/wLl2xZivBGT1+DOGz66y
- youpa0QCqgqkByUPWWfI2C0GzZx+aZcbQID+BWqoGnNo4rSpgLPMijVWvEtVb94GyengQuN
- Ec9KuuEUkXePhvcolnHglYQSxzs6WSzdmbbDQTW/lZE13oo4ZzPhseTOXJeXGEibUlRyrLH
- 3i5KSLGHS0f5Vq2bRaSkw==
-UI-OutboundReport: notjunk:1;M01:P0:CxrGRIllLBA=;YqbwNJJDWrxqYr5GIr2MJPlRAAx
- +rwk5GQPJf4HHwQrMIWAbnA/j2vnH8agMiaAdlwFClESDwuNbSry2Ow/++r6Jgudv2AVMFYA3
- vNeQ28C5OAjdbVSwfusruJIw0dxghYhOW4AkoOWIhBvi1OtCxjc0TTspEhKCf/fRhfUu5hAI1
- nKGnlcgc72tfgxBfnHPIz5C53Uyrpbuq83S5nomA/s1QQtRMYyDaAtHcczwr8Y6qoWVD1Kp/g
- RNnnuZy8F7jNCSeDWdltOwnDCXy/x3ZOeKmdulWOobIC4qHp0aZiXprU0JqNWtzuwZBzQRDHI
- OqYqcBuWZDwL1AjKm7Ez3RhIoffAtnHvLl4XhhDs6HP4tfNhGusRUrtcrYCem7xEhHqT+FmQt
- ADy5cj7PIjuyocNNz/0u3fdh5qEjVPpuqEWeAfU+mabx30GPuiUTi6LWPGks+TWhGEVjOtoYK
- jc/iIGbUtJpYcecphOcrDRb5G0bZZvL+W18NzTZIB9bnRLl8qiwDnVMqV2Cy2Vj7jnVjIOmnM
- 79hW41jfjlWY08c0sxEmVIeVcw18Ds4YneGfMmcy9yzNfWJRz+F07zqe08ZVt6fCVxBPtBIKx
- rcLLNW4HQHuAU4NuJdE2oLoViw23wogY6GHc+HHkA+f/fr8s8voKhZT0QJIkYHi9bwXGfH3As
- /GKEpaiVMzm9w0Hn47yFpyWdHIPOJJ6fWUp9PxKIJWc/VulgveLulNLrpnRVj7crY/q04QDyI
- hFH81md4eOqXC1gcJbskHVSTJPdl3MTUOI57Xs9/1ISXzchZY5cz3xjFS4WKJquzBnAxsh4RH
- wSEmxFhM3aawbCOliXB7Kzq26xIzvSmCNvggEKkDqzwS0BKdTdU1tMvMZWkv5EI+vnOARGbLg
- hnO/1ot/tlKyKQaCQHXtYPboFK1PWw8oooWcgZ80AhGBY+/FLqm//r+np3u9q9ADst82j82b8
- gs/mVj0OrCdFsOoAUyCzYi+OUfFLbSUiVPOrjK6brtFPVNZRHEkrCfZgVzVVtLVBmFYYxwMWt
- vOrL8XXtKhVDjvTfy3FsCBqEqrIaI3YxDzl+EEQn+o4KQJS51Ejj3nALbS/io0rWRngg+cGND
- qOdwy6s3M=
+To: Roger Quadros <rogerq@kernel.org>, <vigneshr@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
+ <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
+ <jonas@kwiboo.se>, <j-humphreys@ti.com>, <nm@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
+References: <20241126120322.1760862-1-s-vadapalli@ti.com>
+ <20241126120322.1760862-2-s-vadapalli@ti.com>
+ <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,137 +88,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.11.24 16:47, Simon Glass wrote:
-> At present efi_memory uses struct efi_mem_desc for each node of its
-> memory list. This is convenient but is not ideal, since:
->
-> - it means that the fields are under a 'desc' sub-structure
-> - it includes an unused 'reserved' field
-> - it includes virtual_start which is confusing as it is always the same
->    as physical_start
-> - we must use u64 to store pointers, since that is how they are returned
->    by calls to efi_get_memory_map()
->
-> As a first step to tidying this up, create a new, private struct to hold
-> these fields.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Hello Roger,
 
-The EFI memory map should be generated from LMB.
+On 28-11-2024 18:40, Roger Quadros wrote:
+> 
+> 
+> On 26/11/2024 14:03, Siddharth Vadapalli wrote:
+>> There are only two callers of "dwc3_generic_probe()", namely:
+>> 1. dwc3_generic_peripheral_probe()
+>> 2. dwc3_generic_host_probe()
+>> Currently, the "mode" is set based on the device-tree node of the
+>> platform device. Also, the DWC3 core doesn't support updating the "mode"
+>> dynamically at runtime if it is set to "OTG", i.e. "OTG" is treated as a
+>> separate mode in itself, rather than being treated as a mode which should
+>> eventually lead to "host"/"peripheral".
+>>
+>> Given that the callers of "dwc3_generic_probe()" clarify the expected
+>> "mode" of the USB Controller, use that "mode" instead of the one
+>> specified in the device-tree. This shall allow the USB Controller to
+>> function both as a "Host" and as a "Peripheral" when the "mode" is "otg"
+>> in the device-tree, based on the caller of "dwc3_generic_probe()".
+>>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> ---
+>>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++----
+> 
+> TI AM62a is not even using this driver so how did you test this?
+> Did I miss a DT patch?
 
-We should not waste our time on code which shall be removed and possibly
-introduce regressions in the meantime.
+USB DFU boot utilizes this driver when the "dr_mode" is set to "otg" in
+the device-tree for AM62A. This driver is invoked both for the host and
+device commands corresponding to USB. I came up with this patch while
+trying to enable USB DFU boot on AM62A with "dr_mode" as "otg" in the
+device-tree. Additionally, USB DFU boot works on AM62A with the change
+made by this patch and it doesn't work without this change. I have
+traced the call sequence to see that the driver is probed and have come
+up with the change performed in this patch on the basis of this observation.
 
-Best regards
+> 
+>>  1 file changed, 5 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+>> index 2ab41cbae45..55e62b35c61 100644
+>> --- a/drivers/usb/dwc3/dwc3-generic.c
+>> +++ b/drivers/usb/dwc3/dwc3-generic.c
+>> @@ -51,7 +51,8 @@ struct dwc3_generic_host_priv {
+>>  };
+>>  
+>>  static int dwc3_generic_probe(struct udevice *dev,
+>> -			      struct dwc3_generic_priv *priv)
+>> +			      struct dwc3_generic_priv *priv,
+>> +			      enum usb_dr_mode mode)
+>>  {
+>>  	int rc;
+>>  	struct dwc3_generic_plat *plat = dev_get_plat(dev);
+>> @@ -62,7 +63,7 @@ static int dwc3_generic_probe(struct udevice *dev,
+>>  
+>>  	dwc3->dev = dev;
+>>  	dwc3->maximum_speed = plat->maximum_speed;
+>> -	dwc3->dr_mode = plat->dr_mode;
+>> +	dwc3->dr_mode = mode;
+> 
+> if platform supported mode was "host" only or "peripheral" only
+> then you shouldn't we prevent from using the other role?
 
-Heinrich
+Yes, but that check doesn't exist prior to this patch either. Platform
+could support only "host" mode as specified by "dr_mode", but if the
+user runs a command for device mode it will lead to
+"dwc3_generic_peripheral_probe" in this driver. On the other hand, if
+the check does exist outside this driver, then it doesn't have to be
+checked within "dwc3_generic_probe". There are only two callers of
+"dwc3_generic_probe", both of which are in this driver, and both of
+which unconditionally invoke "dwc3_generic_probe".
 
-> ---
->
-> Changes in v2:
-> - Add new patch to use a separate stuct for memory nodes
->
->   lib/efi_loader/efi_memory.c | 49 +++++++++++++++++++++++++++++++------
->   1 file changed, 42 insertions(+), 7 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 3cece51f030..9e4158edfaf 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -27,9 +27,39 @@ DECLARE_GLOBAL_DATA_PTR;
->
->   efi_uintn_t efi_memory_map_key;
->
-> +/**
-> + * struct priv_mem_desc - defines an memory region
-> + *
-> + * Note that this struct is for use inside U-Boot and is not visible to=
- the
-> + * EFI application, other than through calls to efi_get_memory_map(), w=
-here this
-> + * internal format is converted to the external struct efi_mem_desc for=
-mat.
-> + *
-> + * @type (enum efi_memory_type): EFI memory-type
-> + * @reserved: unused
-> + * @physical_start: Start address of region in physical memory
-> + * @virtual_start: Start address of region in physical memory
-> + * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE=
-_SIZE
-> + *	bytes)
-> + * @attribute: Memory attributes (see EFI_MEMORY...)
-> + */
-> +struct priv_mem_desc {
-> +	u32 type;
-> +	u32 reserved;
-> +	efi_physical_addr_t physical_start;
-> +	efi_virtual_addr_t virtual_start;
-> +	u64 num_pages;
-> +	u64 attribute;
-> +};
-> +
-> +/**
-> + * struct efi_mem_list - defines an EFI memory record
-> + *
-> + * @link: Link to prev/next node in list
-> + * @desc: Memory information about this node
-> + */
->   struct efi_mem_list {
->   	struct list_head link;
-> -	struct efi_mem_desc desc;
-> +	struct priv_mem_desc desc;
->   };
->
->   #define EFI_CARVE_NO_OVERLAP		-1
-> @@ -116,7 +146,7 @@ static int efi_mem_cmp(void *priv, struct list_head =
-*a, struct list_head *b)
->    * @desc:	memory descriptor
->    * Return:	end address + 1
->    */
-> -static uint64_t desc_get_end(struct efi_mem_desc *desc)
-> +static uint64_t desc_get_end(struct priv_mem_desc *desc)
->   {
->   	return desc->physical_start + (desc->num_pages << EFI_PAGE_SHIFT);
->   }
-> @@ -138,8 +168,8 @@ static void efi_mem_sort(void)
->   	while (merge_again) {
->   		merge_again =3D false;
->   		list_for_each_entry(lmem, &efi_mem, link) {
-> -			struct efi_mem_desc *prev;
-> -			struct efi_mem_desc *cur;
-> +			struct priv_mem_desc *prev;
-> +			struct priv_mem_desc *cur;
->   			uint64_t pages;
->
->   			if (!prevmem) {
-> @@ -194,11 +224,11 @@ static void efi_mem_sort(void)
->    * to re-add the already carved out pages to the mapping.
->    */
->   static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> -			     struct efi_mem_desc *carve_desc,
-> +			     struct priv_mem_desc *carve_desc,
->   			     bool overlap_conventional)
->   {
->   	struct efi_mem_list *newmap;
-> -	struct efi_mem_desc *map_desc =3D &map->desc;
-> +	struct priv_mem_desc *map_desc =3D &map->desc;
->   	uint64_t map_start =3D map_desc->physical_start;
->   	uint64_t map_end =3D map_start + (map_desc->num_pages << EFI_PAGE_SHI=
-FT);
->   	uint64_t carve_start =3D carve_desc->physical_start;
-> @@ -680,7 +710,12 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory=
-_map_size,
->   	/* Return the list in ascending order */
->   	memory_map =3D &memory_map[map_entries - 1];
->   	list_for_each_entry(lmem, &efi_mem, link) {
-> -		*memory_map =3D lmem->desc;
-> +		memory_map->type =3D lmem->desc.type;
-> +		memory_map->reserved =3D lmem->desc.reserved;
-> +		memory_map->physical_start =3D lmem->desc.physical_start;
-> +		memory_map->virtual_start =3D lmem->desc.virtual_start;
-> +		memory_map->num_pages =3D lmem->desc.num_pages;
-> +		memory_map->attribute =3D lmem->desc.attribute;
->   		memory_map--;
->   	}
->
+However, I agree that having a check here will help. I will update this
+patch to add the check to confirm if there is a conflict with what the
+platform supports, though this doesn't seem to be the case with the
+existing code.
+> 
+> In u-boot shell, if user starts Host driver first and then starts peripheral driver
+> how does it work?
+> Did you test this case?
 
+I didn't test the case where both are used. I validated that peripheral
+mode works across various stages of boot with "otg" mode via USB DFU
+boot. This isn't the case without this patch.
+
+If we forget the reason that this patch is introduced and take a moment
+to analyze the existing code prior to this patch, we see that:
+1. Both dwc3_generic_peripheral_probe() and dwc3_generic_host_probe()
+invoke dwc3_generic_probe().
+2. dwc3_generic_probe() sets the role based on the role specified in the
+device-tree and not what the caller wants the role to be.
+This seems to be strange to me considering that dwc3_generic_probe()
+simply proceeds to configure without comparing the role supported by the
+platform with the role requested by the caller.
+
+So even if we entirely forget the "otg" fix being attempted by this
+patch, the same patch is fixing something else i.e. ensuring that
+dwc3_generic_probe() does what the caller wants it to do by using the
+role that the caller expects. Isn't it incorrect that the existing code
+might end up with:
+a) Caller being dwc3_generic_host_probe() with dr_mode being set to
+"peripheral" within dwc3_generic_probe() based on the device-tree and
+proceeding to configure the controller.
+b) Caller being dwc3_generic_peripheral_probe() with dr_mode being set
+to "host" within dwc3_generic_probe() based on the device-tree and
+proceeding to configure the controller.
+Shouldn't this inconsistency be fixed? This patch fixes that by setting
+dr_mode to what the caller expects. However, based on your suggestion, I
+agree that there should have been a check within dwc3_generic_probe() to
+ensure that the platform supports what the caller is requesting. I will
+update this patch by adding the check.
+
+Please let me know what you think.
+
+[...]
+
+-- 
+Regards,
+Siddharth.
