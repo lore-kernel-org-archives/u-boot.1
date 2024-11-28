@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5720D6911B
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F787D6911F
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:00:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B54989D3A;
-	Thu, 28 Nov 2024 16:49:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA5DB89D8D;
+	Thu, 28 Nov 2024 17:00:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TX2bI6FM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hAfKLJN5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 719FB89D3A; Thu, 28 Nov 2024 16:49:11 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 76BC789D9F; Thu, 28 Nov 2024 17:00:22 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1381E893D7
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1948589D88
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:00:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3ea5f158138so477187b6e.0
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:49:09 -0800 (PST)
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-296bff3f5e8so574289fac.2
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 08:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732808945; x=1733413745; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pjNYaVlDFqJABuDpf46t4kEvTW7lIv/c9hBUTQLHclY=;
- b=TX2bI6FMRgU7m8RNWlIeZNLb8aFWGDVc/XYyE4KGmYMTYFSbHr9Il13qII91Ia7QGs
- eJcTOSwDw1i5B9SITRE/RcFQmIK1/yUC4OhXpD3TGwdPBn/jGBKI1Dar9UTHYFBD4LP/
- 9HnrfotWzZSNwGDUgSbpya0LCieJG/Jo4sgPY=
+ d=chromium.org; s=google; t=1732809617; x=1733414417; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hye3nUpnDy19r/33/kRsSKOqPHWFlsTr+v87dLcBajo=;
+ b=hAfKLJN5tiyn/g5arKIothbsIcgl6DWoQBV1SywNUto5w6/A6CJCaCu3eiLIiqd2Cx
+ uTxWM3YrSteTfBwk8XAFksC7Hq0ASep2aEgY5Zfmqc3iVu0zqwA0gifFJPvkGp+0CQqw
+ q/7Ts5AJBrsUJ+/aTWftnMB8furBIaumsLdiE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732808945; x=1733413745;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pjNYaVlDFqJABuDpf46t4kEvTW7lIv/c9hBUTQLHclY=;
- b=gjw0tZbhCJEz1yxO3h1GHc6RoM/9+owrXT/dwFkAiNt86WA4Gd32vXWJvuMxCtHFDY
- DiPCZhdqNmoVmaFI9lc53xuRKw+WLkt/3aPqZy7SOQ076ISK1u7soFh03phZCnsokc2y
- HozCClWJ32x5RS7pv9DK1xMIrLYb9syWLu20GuFwhpO2CrzAXAP8rNHKTgzUEn/k6yo3
- jyQjvJfBJ84vmH9+3lNYeE/h1F/HAzuXzGirkSeo+0Tx588evBQGHCXBPbkL6NF8WeYV
- td3sg6KAvjOoFZGe/B8eDXmbmRMNMvE1paNYk8NLgk0AJXkomMQK/zLqupevjVltKR8v
- hSsA==
-X-Gm-Message-State: AOJu0YyZT0Cfz8uTYfEB1z1XlPQkFnWO72edGozpMhXCB9d96dKMidTs
- Lf4P0KHyhMS64JlZdkS5X9kqADImOlnzGr1PlECQh1ECpjbuPnStXble5BTparlxEmPpy1mlSRM
+ d=1e100.net; s=20230601; t=1732809617; x=1733414417;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Hye3nUpnDy19r/33/kRsSKOqPHWFlsTr+v87dLcBajo=;
+ b=vH6cmpA1bNcO3b/2zn7FrgOVXhBdgTKtkM6f6C4+YWti3jdYoAWOwH+CXENth+Pm92
+ 2dfkQplGA5gYTdYeRkg96Z9db70iI/x9tdCdtERgodM2RHXRBAJ8GwSocEbG/vFUv50U
+ HdQFKBMgh43cRPsB8i+EKyuHYVbyruMW5zKzNlOJl6toUe8mn5VbNeKclgWJn2d5/s0/
+ 9B6sC6m2AmVQRBIKgZS8IzDMgT3T6xMjj1l9wbPKgDRkrDFV2N1Jnb3utelItDFwPIBG
+ Ok1Dt2FZhO/zdnLQ9Ou137/3TL/sHCdrhstpi1R/NVIlqqvgxCO6QpkUH/v1psUv7bQC
+ OWgw==
+X-Gm-Message-State: AOJu0Yy6sPV/8ZcNRukZcix42Znq6jEX+eLPzwu1j2IfiZn6ipnYiJub
+ yD3jz53pFGxAH0T4rE/bh/XtxBjxf0MfW91B+M3xr1gE5XK7OBcwPu/GNp6raHtuQcZuJRf2PpU
  =
-X-Gm-Gg: ASbGncs8g4OzYZ99fW6O9Js8gKf9ze72pHoH3gaEAIDvXkR/V0L9udoB9VkKwOMYoUN
- XUnoxKTclfVwQ3v4q39T6bvAIk62Z2JYMrHsjS82YcnaL3S3/Q+dRPDKWSiyixG04Mml+wjsbM/
- pb/iPIW5vTQVC9TKbZ1syUtzYws1s7wOr8O0deD8Punw6xFGTAmNPPS2OefNULAQlqqihRp1V7e
- 5cWyav0THlYaYrgH3DL3ggvR5w6CVnmhlQ9A89Nc31DfA==
-X-Google-Smtp-Source: AGHT+IESYp/wLpaXuy+B/tcnJTHzL03sCY+LB4u6AgcQMg6l322Un5gpDvJ0L9K4keRZXM7DcP+spA==
-X-Received: by 2002:a05:6808:2018:b0:3ea:6b4f:f545 with SMTP id
- 5614622812f47-3ea6dd49260mr8997867b6e.28.1732808945526; 
- Thu, 28 Nov 2024 07:49:05 -0800 (PST)
+X-Gm-Gg: ASbGncurzOC0EmaBCg478YMPW7TZykoCGybOegMsprVM9ywbANlTo0VcTkLyCkaVFhb
+ jUERw/eBwFKSBVPXEn/SbBl7YnrgziJqt+8H+meq7GhngoSN3etOsO8pvVhwOv7i7XTEB4sh/oz
+ pk2OK7IGqpggACzogsobNkw2DM2I38vZv1Lq5VYcWuDrdxgPQvzJ1pJ+1vWhjpAxi60rMPK1YcX
+ bF6dkqZ4ghbyjS2Wnu1KsepUbvwGJVb7St1MoiVo/ODYw==
+X-Google-Smtp-Source: AGHT+IE9CqfDmTfo6XxKYS+N3wjHZjQ14oUtaUGGuqM2w8elkGlqtBc+m9Z6DQWHIih1cfg0FYP+/g==
+X-Received: by 2002:a05:6871:108:b0:288:62c8:fd4b with SMTP id
+ 586e51a60fabf-29dc42f857bmr6274169fac.28.1732809617144; 
+ Thu, 28 Nov 2024 08:00:17 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.49.01
+ 46e09a7af769-71d72543866sm362028a34.18.2024.11.28.08.00.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 07:49:02 -0800 (PST)
+ Thu, 28 Nov 2024 08:00:15 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v2 28/28] efi_loader: Simplify efi_dp_from_mem()
-Date: Thu, 28 Nov 2024 08:47:27 -0700
-Message-Id: <20241128154727.771871-29-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH] CI: Add gitlab tags to builds which can use all CPUs
+Date: Thu, 28 Nov 2024 09:00:10 -0700
+Message-Id: <20241128160011.780550-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241128154727.771871-1-sjg@chromium.org>
-References: <20241128154727.771871-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,126 +93,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function should take a pointer, not an address. Update it along
-with all users.
+Most gitlab runners are mostly idle at present and could happily run
+several jobs at once.
+
+There are a few exceptions, such as the world builds.
+
+Add a 'single' tag for the exceptions so that they are dealt with
+separately, with no concurrency. This is not quite perfect, since it
+means that a 'single' job can be combined with a number of normal jobs,
+but in practice this doesn't seem to matter.
+
+To use this, for each existing machine, add a new, separate runner, with
+the tag 'single'. Set 'limit = 1' in its config.toml file and set
+'concurrent = 10' (for example) in the global section. The machine will
+then pick up one 'single' job and up to 9 other jobs at once.
+
+In my testing this reduces the time to complete a CI pipeline.
+
+My choice of which jobs to mark as single is mostly down to how much CPU
+they need. For the 'docs' job, it runs for a short time, so doesn't seem
+worth marking it as a 'single' job.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Drop patch 'Convert efi_get_memory_map() to return pointers'
-- Drop patch 'efi_loader: Make more use of ulong'
-- Significantly expand and redirect the series
+ .gitlab-ci.yml | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
- include/efi_loader.h             |  5 ++---
- lib/efi_loader/efi_bootbin.c     |  3 +--
- lib/efi_loader/efi_bootmgr.c     |  2 +-
- lib/efi_loader/efi_device_path.c | 20 ++++++++++----------
- 4 files changed, 14 insertions(+), 16 deletions(-)
-
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 4e34e1caede..1269907fa3c 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -919,9 +919,8 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
- struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
- 					 const char *path);
- struct efi_device_path *efi_dp_from_eth(void);
--struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
--					uint64_t start_address,
--					size_t size);
-+struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  mem_type,
-+					void *start_ptr, size_t size);
- /* Determine the last device path node that is not the end node. */
- const struct efi_device_path *efi_dp_last_node(
- 			const struct efi_device_path *dp);
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index a87006b3c0e..7e7a6bf31aa 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -136,8 +136,7 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
- 		 * loaded directly into memory via JTAG, etc:
- 		 */
- 		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--					    (uintptr_t)source_buffer,
--					    source_size);
-+					    source_buffer, source_size);
- 		/*
- 		 * Make sure that device for device_path exist
- 		 * in load_image(). Otherwise, shell and grub will fail.
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 98799aead84..e3b8dfb6013 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -515,7 +515,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 		 * will be freed in return_to_efibootmgr event callback.
- 		 */
- 		loaded_dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--					    image_addr, image_size);
-+					    source_buffer, image_size);
- 		ret = efi_install_multiple_protocol_interfaces(
- 			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
- 		if (ret != EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index 9c8cd35b97b..025a17b19fa 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -11,6 +11,7 @@
- #include <dm.h>
- #include <dm/root.h>
- #include <log.h>
-+#include <mapmem.h>
- #include <net.h>
- #include <usb.h>
- #include <mmc.h>
-@@ -975,9 +976,8 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
- }
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 2164ad79a72..03bbf764a44 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -110,6 +110,8 @@ stages:
  
- /* Construct a device-path for memory-mapped image */
--struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
--					uint64_t start_address,
--					size_t size)
-+struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  memory_type,
-+					void *start_ptr, size_t size)
- {
- 	struct efi_device_path_memory *mdp;
- 	void *buf, *start;
-@@ -990,9 +990,9 @@ struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
- 	mdp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
- 	mdp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MEMORY;
- 	mdp->dp.length = sizeof(*mdp);
--	mdp->memory_type = mem_type;
--	mdp->start_address = start_address;
--	mdp->end_address = start_address + size;
-+	mdp->memory_type = memory_type;
-+	mdp->start_address = map_to_sysmem(start_ptr);
-+	mdp->end_address = mdp->start_address + size;
- 	buf = &mdp[1];
+ build all 32bit ARM platforms:
+   extends: .world_build
++  tags:
++    - single
+   script:
+     - ret=0;
+       git config --global --add safe.directory "${CI_PROJECT_DIR}";
+@@ -122,6 +124,8 @@ build all 32bit ARM platforms:
  
- 	*((struct efi_device_path *)buf) = END;
-@@ -1061,7 +1061,7 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
- 	struct efi_device_path *dp;
- 	struct disk_partition fs_partition;
- 	size_t image_size;
--	void *image_addr;
-+	void *image_ptr;
- 	int part = 0;
+ build all 64bit ARM platforms:
+   extends: .world_build
++  tags:
++    - single
+   script:
+     - virtualenv -p /usr/bin/python3 /tmp/venv
+     - . /tmp/venv/bin/activate
+@@ -136,6 +140,8 @@ build all 64bit ARM platforms:
  
- 	if (path && !file)
-@@ -1070,10 +1070,10 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
- 	if (IS_ENABLED(CONFIG_EFI_BINARY_EXEC) &&
- 	    (!strcmp(dev, "Mem") || !strcmp(dev, "hostfs")))  {
- 		/* loadm command and semihosting */
--		efi_get_image_parameters(&image_addr, &image_size);
-+		efi_get_image_parameters(&image_ptr, &image_size);
+ build all PowerPC platforms:
+   extends: .world_build
++  tags:
++    - single
+   script:
+     - ret=0;
+       git config --global --add safe.directory "${CI_PROJECT_DIR}";
+@@ -147,6 +153,8 @@ build all PowerPC platforms:
  
--		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--				     (uintptr_t)image_addr, image_size);
-+		dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, image_ptr,
-+				     image_size);
- 	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
- 		dp = efi_dp_from_eth();
- 	} else if (!strcmp(dev, "Uart")) {
+ build all other platforms:
+   extends: .world_build
++  tags:
++    - single
+   script:
+     - ret=0;
+       git config --global --add safe.directory "${CI_PROJECT_DIR}";
+@@ -192,6 +200,8 @@ Check for configs without MAINTAINERS entry:
+ # Ensure host tools build
+ Build tools-only and envtools:
+   extends: .testsuites
++  tags:
++    - single
+   script:
+     - make tools-only_config tools-only -j$(nproc);
+       make mrproper;
+@@ -224,6 +234,8 @@ Run binman, buildman, dtoc, Kconfig and patman testsuites:
+ # Check for any pylint regressions
+ Run pylint:
+   extends: .testsuites
++  tags:
++    - single
+   script:
+     - git config --global --add safe.directory "${CI_PROJECT_DIR}"
+     - pip install -r test/py/requirements.txt
 -- 
 2.34.1
 
