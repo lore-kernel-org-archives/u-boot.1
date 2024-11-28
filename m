@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBC4D70DE7
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5720AD70DEA
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 078EB89398;
-	Thu, 28 Nov 2024 18:26:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9996089891;
+	Thu, 28 Nov 2024 18:38:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tN1A6lft";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="k7UOnxGP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF6FB8939D; Thu, 28 Nov 2024 18:26:33 +0100 (CET)
+ id C6E4889D20; Thu, 28 Nov 2024 18:38:55 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FC38937E
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 18:26:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0AB9893A7
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 18:38:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732814784; x=1733419584; i=xypron.glpk@gmx.de;
- bh=y2D2yxNgbu0mx+CwjVhC11RNPa9ySp6L3RAiggLXaA4=;
+ s=s31663417; t=1732815532; x=1733420332; i=xypron.glpk@gmx.de;
+ bh=z1YZNm3rxSE5LdS9dCzxF9LDR/2KdJ7QylI7KlKgnD8=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=tN1A6lftswdxSFuLbFzhfnH8c6psizKEA3NivDWHJ+NnS5cyy/HXIbHM0ouY4R02
- vx3QbfPdGxhwlENm7h9uLgCBC1Jr5c9mkMRmUEz09srpAxyfC0SabOUNX9VJTpyjF
- Z7xPFumxq2GHF9wRQ4n0ZTItObEtnJ0N5pSkiT/uBuUfx+0728uv1fRL9kCHyoRTS
- 5feGjbzE7VbhvnBcys1AKVec08NY7JbgdNpeEOBXEcD7o95p37h/w3madzPPByNaP
- EWStqlqE9A5wzKpgLmZRcd72iZVbH1DuZpnkgCoUOzDQpOcrqNpk7nqVG9KeHxBGW
- m182JzeKYU/2J/48rw==
+ b=k7UOnxGPMxR8ZMLVBh7qEvZXMXGpU4hha072tNo1RC7pzV7p0PdLBNCWUoJx964k
+ nuSKHVeOIewxoOmGdtwr0G6P8306w2vmg3MXmSUpFbLb78gg3wsuHXHX8LRNxqhSJ
+ SGjvdfe4+35ETkV8EUmJLRBqaFynP6nz67P0Fqr2+Bh7hvGHZ/PLH4lxsRr4pHg/t
+ HmbRD+AGL8Uul00zIryuW9QhZc4hnZmCaLYtREGU/gIetu3dgklpQaOqsLOPtigSD
+ kSEvepTrTdkoRB4UXBK0LtgzErzUravE3BokF+iVBOP2K1qWFjUEMJxwCUlLh4eBM
+ HUqLr9wkEGY6uERyOg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MSt8Q-1t7Ot73dnC-00I2ot; Thu, 28
- Nov 2024 18:26:23 +0100
-Message-ID: <e04cd688-a39b-488f-a599-b8b1311ca366@gmx.de>
-Date: Thu, 28 Nov 2024 18:26:22 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MUowb-1t8EAM47tJ-00Lbpl; Thu, 28
+ Nov 2024 18:38:52 +0100
+Message-ID: <c158c1e4-95f6-422e-8bb5-c86dcf418d11@gmx.de>
+Date: Thu, 28 Nov 2024 18:38:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 28/28] efi_loader: Simplify efi_dp_from_mem()
+Subject: Re: [PATCH v2 27/28] efi_loader: Don't try to add sandbox runtime code
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-29-sjg@chromium.org>
+ <20241128154727.771871-28-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-29-sjg@chromium.org>
+In-Reply-To: <20241128154727.771871-28-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:54a71d0E8wBxmLoHKu9uWSABt/AQ004RoVntPhaqwgFOKpJuE7o
- DLnYzNoDv4Y6t+SM+jgjH4/iv2b9kPNIwl6pZAaPiVTtYIIp/pPZXq5THkQRQ+BS1WRk2TI
- 7c3vnA9vClNpysqbuivLejjbY6coSQcUhMADmhTECxOrOXM1VRwnulQqh69gjYTTSSw6wyO
- JfcuuUoGbrPkNImakn2Tw==
-UI-OutboundReport: notjunk:1;M01:P0:VEku8XA8B5s=;HoAWxUt866Wjw1/22usu/txfFKr
- UD+cg9qe6yhx6TRTc+2BkUDwv62XIygXIt7YUrEOjaO/FQRbJTsWI2MjMjPxloL70Rs7Jb3d7
- BbW6gG+DlCv+GMgrKckV1lUvNkKojdfH1z17Zcp5ZXixsc5T2cnNFdpkt1xg4Kt79Kqtp0ecd
- 1DrP9c/2X/kUkWVEhyBXAocg660y4GgEzTIjlkOSFf+f8d02omD6s1HOHfDWHgKyRhaHmYl9o
- PHiPF7tAurgfF2wJk/Px082B+5Bvef2LA/cRPEcDmomFRzlfOuT1N//45uPdB1GinEFFihVTZ
- BNF8ZeEyV8S69MmuWkfeGj171H762+GoKPzAKzllh4zQq/vyz8lOeK+jAwCdiXHICJBi2oIue
- 5b70Q0rKv8QzgGnrN5Q/BmHmx7Y9n8Ncy4Zjw+IgAOvCnsvY6kXdbCuNk0APqO66ezkSDCp1N
- dSL6OIqRE1DctbRq4rJET/LH6A2Zg497acQl4SXwPhwTOpTUnWG6pQTOYlbKRjrTrO63Jo5zI
- S/wz+ROpmBKHiGz0id2mYVXpKw+LBSPtd4zBMdn1TOKqZFN3m00qo9QNk4qDmDdnLHL08STtb
- bTW+3qqJVyutI9Igl7l0rpaJmdgHyrJ6nvjetCnJ84YYwMPsqPRiSkxZAoOIzOrNB4MMTnY6+
- OR4oml4AP5UxZO83MetzUvCGoDUcrtqwP6wKSFVBw24CaVSIbvAGSJkxLzEUPHPLIW9X/AH2K
- 36fRIzTk8GdAOF57KuYWbJcnlaw/O8zYbfLsx2/LCv7SRNx5vUS1OzNvPP756YVBJdO5sSE2R
- B21UumImh4ttD08hZx9yeB8+OahoHMO48VepnPhKsrCV0IZBOpjsCUXycnRnhnvQTjlr3qz1S
- Vh1xb3nPugASZYswkFJnCgknWVatbxrHMULq7x2fGHVX9vLQmQKniYkuVboZC0Xjj3aJlgQ0R
- FJCjStXo1qqJJA3Enbl5dZyFB8vKGWuHhXkjt51UvJS8vpjwBzaV4TUw8cPtKFHsVcEzt2nL7
- +R5m3jSQiNXhqV6FOey1bKnvC4A74B2gzXdxW9iFtlKMdvBMNKT+KPgHdUd1Imin+nRZRHf8f
- JSKH2PJ8CQ1uFxJfhBjy1FWgbgiB0U
+X-Provags-ID: V03:K1:RWASFvL1iGmQFUjtV0+eGUpj8+SP4guv50/vxr3KG2suGWnnvpw
+ aCIFcXDWUWYZJrW0vZmPENAJGb/Ew/9KR9XZuAzalvTH2btNR/ANQGHsRgKWHpIpCB8vjq8
+ InZ5pLyQRFp8gaJPW2ciyGXugZu4/VrkUL/D2kkRrzqxMGSubfGt0BU/Zn/QOzq/JWH2le4
+ ktXOiekOvYsjcnwTU9n9w==
+UI-OutboundReport: notjunk:1;M01:P0:Piww2aaRohc=;Njh65MdrGpEKEUVsqdamyWvNw9T
+ dXS2Jkb6Ne94NUrWfMF7a2kz7Ut7SAd97Mx5FitFbzB6Oc8dYJuUB9jlGnCghULiVrMV7YAeH
+ VJ6jEoqgAa9mstYQapof2lW6MedGYURG6luFeR0XrPYJv1HtZw8IrWnOAO4aeVdM7fq4yVKUU
+ BRte4uTT88o15pqGftXnZ/sDUxRI3s2+0wBTgGwmC7hlTLZYmc/haeZRWMpnLOPn2G8lDEaPD
+ YFKGXfNPWnoe2hNeJRtiRLpwuTKfnQxdqv+mWKZDJoi8d9jNq/wpjO/S/VSbVSt08KlJPNM/m
+ rQ7uNPSWFbyg1HF8Jg1V6GGVQzu5pzeDBMjb3mE8Uzp4o0XMRVV0L5thlC/DXJS+8e9drHLlk
+ Km+KOZGcXx+BNJYCFBKxFcl4LEPp/RLNBIon7jmFB/Q9yA4+iIYvSZ3blgoC38/JRsPoScQdF
+ fXCTY2iYfPNH6E6KLYEryhZ8AycJ8rdF83iDObD6GEhKkLYawcpeh3NcevZtfXwAs5AbMmbcy
+ S6sEJNbE0FU9Q7WCv1AenF69sEJGbMzdZ8xtX5HMHHtSpf2ClTLAbTqNngBVyc4U8VtYtLP87
+ TFtB9tQuGy+HZAmS5sDwjnu5rFtlHleX/+3bPV7rXPJBcVlkzNDHqzpsmrOSThESgVd04AYxp
+ 9pXnyFvEUn8Z0YnAFY/o6QUBox+0+komVX7ghktpallv5+Mknr8eXTYuEQWmMhxxUMyBoSHlF
+ AVWAxh/O28do0yGvxni9Bs1VtZ32J2tZbuawT96DwuMuz+rFxXadnvAw3xMMHpU6OzwlQKwFk
+ iyI02DyLjVlBL7Lzw/x2m4ssy+05o7P1WhtiMxU8i8ATCq08y3md1T2UmnaDzw1TmMkEE/x7S
+ 4vWjGxZul6bnVZe7axvPHSDsK+nThzW3cYkcQ2LRo672pQLUkgYtZnphRh+FuBQK9cSUTW6Qh
+ 6mj35xg1CjGEx6YrNB0Up3XL/ELfd1L0wPXPovVKJyuw18SrkI6ktaQvnHIZ8DJPsReaFDThi
+ 5V8AbQOEqMsqyS90egALruuZVdsp8DtWSwrdzcTLiBxhsL5469uvActKWdCYh3LRxN/Ya9dJX
+ 3WOn6dKbw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,167 +97,82 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.11.24 16:47, Simon Glass wrote:
-> This function should take a pointer, not an address. Update it along
-> with all users.
+> This cannot work since the code is not present in the emulated memory.
+> In any case, sandbox cannot make use of the runtime code.
 
-This function never was meant to take a sandbox virtual address. It
-always expected an EFI_PHYSICAL_ADDRESS which must be convertible to
-void * as UEFI uses an identity mapping.
+For sure an EFI application running on the sandbox can run
+ExitBootServices() and then call the ResetSystem() runtime system service.
 
-A reasonable commit message would be:
+Have a look at
 
-"We can reduce the number of locations where we convert from a pointer
-to an integer by passing the address as a pointer instead of an u64."
+arch/sandbox/cpu/start.c:472:
+void __efi_runtime EFIAPI efi_reset_system().
 
+__efi_runtime implements ResetSystem() after ExitBootServices().
+
+>
+> For now, just drop it from sandbox. We can always adjust things to copy
+> it into memory, if needed.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> Changes in v2:
-> - Drop patch 'Convert efi_get_memory_map() to return pointers'
-> - Drop patch 'efi_loader: Make more use of ulong'
-> - Significantly expand and redirect the series
+> (no changes since v1)
 >
->   include/efi_loader.h             |  5 ++---
->   lib/efi_loader/efi_bootbin.c     |  3 +--
->   lib/efi_loader/efi_bootmgr.c     |  2 +-
->   lib/efi_loader/efi_device_path.c | 20 ++++++++++----------
->   4 files changed, 14 insertions(+), 16 deletions(-)
+>   lib/efi_loader/efi_memory.c | 26 ++++++++++++++++----------
+>   1 file changed, 16 insertions(+), 10 deletions(-)
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 4e34e1caede..1269907fa3c 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -919,9 +919,8 @@ struct efi_device_path *efi_dp_part_node(struct blk_=
-desc *desc, int part);
->   struct efi_device_path *efi_dp_from_file(const struct efi_device_path =
-*dp,
->   					 const char *path);
->   struct efi_device_path *efi_dp_from_eth(void);
-> -struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
-> -					uint64_t start_address,
-> -					size_t size);
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  mem_type,
-> +					void *start_ptr, size_t size);
->   /* Determine the last device path node that is not the end node. */
->   const struct efi_device_path *efi_dp_last_node(
->   			const struct efi_device_path *dp);
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index a87006b3c0e..7e7a6bf31aa 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -136,8 +136,7 @@ efi_status_t efi_run_image(void *source_buffer, efi_=
-uintn_t source_size)
->   		 * loaded directly into memory via JTAG, etc:
->   		 */
->   		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> -					    (uintptr_t)source_buffer,
-> -					    source_size);
-> +					    source_buffer, source_size);
->   		/*
->   		 * Make sure that device for device_path exist
->   		 * in load_image(). Otherwise, shell and grub will fail.
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 98799aead84..e3b8dfb6013 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -515,7 +515,7 @@ static efi_status_t try_load_from_uri_path(struct ef=
-i_device_path_uri *uridp,
->   		 * will be freed in return_to_efibootmgr event callback.
->   		 */
->   		loaded_dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> -					    image_addr, image_size);
-> +					    source_buffer, image_size);
->   		ret =3D efi_install_multiple_protocol_interfaces(
->   			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
->   		if (ret !=3D EFI_SUCCESS)
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index 9c8cd35b97b..025a17b19fa 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -11,6 +11,7 @@
->   #include <dm.h>
->   #include <dm/root.h>
->   #include <log.h>
-> +#include <mapmem.h>
->   #include <net.h>
->   #include <usb.h>
->   #include <mmc.h>
-> @@ -975,9 +976,8 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
-th(void)
->   }
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index a33c025fa20..796fa99f4fb 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -755,16 +755,22 @@ static void add_u_boot_and_runtime(void)
+>   	runtime_mask =3D SZ_64K - 1;
+>   #endif
 >
->   /* Construct a device-path for memory-mapped image */
-> -struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
-> -					uint64_t start_address,
-> -					size_t size)
+> -	/*
+> -	 * Add Runtime Services. We mark surrounding boottime code as runtime =
+as
+> -	 * well to fulfill the runtime alignment constraints but avoid padding=
+.
+> -	 */
+> -	runtime_start =3D (uintptr_t)__efi_runtime_start & ~runtime_mask;
+> -	runtime_end =3D (uintptr_t)__efi_runtime_stop;
+> -	runtime_end =3D (runtime_end + runtime_mask) & ~runtime_mask;
+> -	runtime_pages =3D (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> -	efi_add_memory_map_pg(runtime_start, runtime_pages,
+> -			      EFI_RUNTIME_SERVICES_CODE, false);
+> +	if (!IS_ENABLED(CONFIG_SANDBOX)) {
+> +		/*
+> +		 * Add Runtime Services. We mark surrounding boottime code as
+> +		 * runtime as well to fulfill the runtime alignment constraints
+> +		 * but avoid padding.
+> +		 *
+> +		 * This is not enabled for sandbox, since we cannot map the
+> +		 * sandbox code into emulated SDRAM
 
-The parameter used to be an EFI_PHYSICAL_ADDRESS in the UEFI spec terms
-which is an UINT64.
+The memory map is consumed by an EFI application like shim, GRUB, or the
+kernel stub.
 
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type  memory_ty=
-pe,
-> +					void *start_ptr, size_t size)
+The memory map entries must take address values which can be used a
+void* without conversion. This is true both on real systems and on the
+sandbox.
 
-We only can use a pointer here because we do not expect addresses above
-4 GiB on 32bit systems.
-
->   {
->   	struct efi_device_path_memory *mdp;
->   	void *buf, *start;
-> @@ -990,9 +990,9 @@ struct efi_device_path *efi_dp_from_mem(enum efi_mem=
-ory_type mem_type,
->   	mdp->dp.type =3D DEVICE_PATH_TYPE_HARDWARE_DEVICE;
->   	mdp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MEMORY;
->   	mdp->dp.length =3D sizeof(*mdp);
-> -	mdp->memory_type =3D mem_type;
-> -	mdp->start_address =3D start_address;
-> -	mdp->end_address =3D start_address + size;
-> +	mdp->memory_type =3D memory_type;
-> +	mdp->start_address =3D map_to_sysmem(start_ptr);
-
-An UEFI application loaded by the sandbox does not know anything about
-the virtual address space (phys_addr_t) of the sandbox.
-
-The device-tree node must contain addresses that an UEFI application can
-use as void *.
-
-map_to_sysmem() is wrong here. You could use
-
-mdp->start_address =3D (uintptr_t)start_ptr;
+Isn't __efi_runtime_start a pointer to the start of the efi_runtime code
+section on the sandbox?
 
 Best regards
 
 Heinrich
-
-> +	mdp->end_address =3D mdp->start_address + size;
->   	buf =3D &mdp[1];
+> +		 */
+> +		runtime_start =3D (uintptr_t)__efi_runtime_start & ~runtime_mask;
+> +		runtime_end =3D (uintptr_t)__efi_runtime_stop;
+> +		runtime_end =3D (runtime_end + runtime_mask) & ~runtime_mask;
+> +		runtime_pages =3D (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> +		efi_add_memory_map_pg(runtime_start, runtime_pages,
+> +				      EFI_RUNTIME_SERVICES_CODE, false);
+> +	}
+>   }
 >
->   	*((struct efi_device_path *)buf) =3D END;
-> @@ -1061,7 +1061,7 @@ efi_status_t efi_dp_from_name(const char *dev, con=
-st char *devnr,
->   	struct efi_device_path *dp;
->   	struct disk_partition fs_partition;
->   	size_t image_size;
-> -	void *image_addr;
-> +	void *image_ptr;
->   	int part =3D 0;
->
->   	if (path && !file)
-> @@ -1070,10 +1070,10 @@ efi_status_t efi_dp_from_name(const char *dev, c=
-onst char *devnr,
->   	if (IS_ENABLED(CONFIG_EFI_BINARY_EXEC) &&
->   	    (!strcmp(dev, "Mem") || !strcmp(dev, "hostfs")))  {
->   		/* loadm command and semihosting */
-> -		efi_get_image_parameters(&image_addr, &image_size);
-> +		efi_get_image_parameters(&image_ptr, &image_size);
->
-> -		dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> -				     (uintptr_t)image_addr, image_size);
-> +		dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, image_ptr,
-> +				     image_size);
->   	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
->   		dp =3D efi_dp_from_eth();
->   	} else if (!strcmp(dev, "Uart")) {
+>   int efi_memory_init(void)
 
