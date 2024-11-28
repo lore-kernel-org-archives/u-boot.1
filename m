@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703D4D70DEB
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:11:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94AFD70DED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040198949D;
+	by phobos.denx.de (Postfix) with ESMTP id 5EFB189D0F;
 	Thu, 28 Nov 2024 20:11:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U6xs0Q7w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N2Z43d7r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30BB189D0A; Thu, 28 Nov 2024 20:11:11 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 3F38C89D0C; Thu, 28 Nov 2024 20:11:11 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7845F89D18
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:11:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BE0889D06
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:11:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa53a971480so147677166b.1
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:11:07 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa51b8c5f4dso145342566b.2
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:11:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732821067; x=1733425867; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732821068; x=1733425868; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fckHG/mVz0XolDT6msnNt4VmiXuPAw5FTkTJDbryiMU=;
- b=U6xs0Q7wvdkKzHEXE2Pv0TCrRbglgLXdGLduA5PmqzLrX5r6qxnu8sBdrl+co3xpsh
- 0uuTR4iD8QVg47Zct80qNPP2K/r8/wVG281sQFFqZGmqlD0Z7xCYiuMeemOeZeZV79f1
- TqX0c0POQt2RypKrDOxtoz8wiVhnb3s4YFxHc=
+ bh=GVoKMjVjmIaVw3w4vSPpSM/NrBaUAN5qLitHy6qB+Sg=;
+ b=N2Z43d7rrAaNbkEJXQXu329MuOkT+3mCptqJEaOOMIrpRSpFFLeFUdlaitQ1XLe5Au
+ 4p0LlXfXK5z49w/h6MvhtnX7lUIkykCMRNIKZTXRoBwn9mlbdch+5tsdTvfakCy4LC9L
+ KbWXiHrQtgrvUULP1PPBo2ggelAvNtIgk6RvI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732821067; x=1733425867;
+ d=1e100.net; s=20230601; t=1732821068; x=1733425868;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fckHG/mVz0XolDT6msnNt4VmiXuPAw5FTkTJDbryiMU=;
- b=sdwQHgNnZuPFm6mhenHEg12rmoN8exseslQEpA1zppxcAmeIEsZ/8kxRG3gSSYEO4P
- 7h73Mnw9Bz8q5G3CYB7qntf1SUIMmLAvIIs20dTxaWZA+TnYMmO54vhdJph8PeXW3Xhz
- S6ulVSBkk3Vy1YsNrX6di2e1JxGXfRbsgCibXvoy5TR0Xq3dCthFmhnBgnqFmupAoARW
- Uak+WUc9DKBUOMfBSIt5CB64iyd1rw00tPd2QrzTugE4ECiOaIFfD2CQBEGFnB1Dyo2E
- eZ5b/ZzCaaxt/8lUBcaPRGZETsOIFCGLZB3UUAsqEcwxAoxckS5n3QgAc4v3inpx/tEW
- C70Q==
+ bh=GVoKMjVjmIaVw3w4vSPpSM/NrBaUAN5qLitHy6qB+Sg=;
+ b=W2e37nJkmWHcBxD/kSArsAFg6PMvU7ZCEBNIXY9FlCwMU0a2rEMFtois2bBVLxN+2d
+ JNthCvKweMeQQ4XKfnkudbbXOIstUJ6d9xRS2nS0QvSFQog5lLR9u4D+7YBOrvTliFpZ
+ 37C8rlmYUPg4hHdlJ6+0n4thDJ7+HlUV0yrn0dLnY+lZWePzkVa24WJbQUPKxGaJEtX0
+ NJvoX5WEv5G9ob5uoQLGaCeRy4fdGvi/FaqFqXCdUpDihIIiLvsatPCSDAY2mpa1dRsk
+ 3oDNAIXWvO2KrxrmeNFiheaNoYVTNnKDFRsaUtZFyRlUEbV8cEJ/YrDD35TioQ1xWLQL
+ a0MQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBqfxPRsBXfvUtpDvABbOCnMGCkLYsWZNIFm+Tfe9lbJqitWGzohhpO/VJTquRepFgC+LkX/Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YycPzDKxyn2EPmghLNIKmTskIwd69Os1qlc6Ot5pBqv6dfLyGDI
- i9XvBM4PjzWcy2Vl9wgr3IsnaRDdYFVgZkP5Q1vhcxfBdVCigpR2dgTy9GmP8/6nURc+5U4aoJQ
- D6WVJhuQP6rDqJRtU+LjnsMcx4kjcBjt0XRJl
-X-Gm-Gg: ASbGncvSHZLfnjg0Wj1Tjqu9JRamG524yZ0bwIr4cgLH6ZDtNL4E/NV7o6rsh12cLu6
- 4ko2+SjExNKO76UyLRY6xKLqUwpevPO0=
-X-Google-Smtp-Source: AGHT+IG2ZsqhPbsb3cb0D0WhRcGt2Yf1YSrT8TK7Jms2QwtQzaNq8B3De8MF3hnEXJRvb6dmSR8ERZ/52Oh5Xs47IxQ=
-X-Received: by 2002:a17:906:3143:b0:a9a:6d7:9c4 with SMTP id
- a640c23a62f3a-aa580ef31b5mr621336366b.12.1732821066998; Thu, 28 Nov 2024
- 11:11:06 -0800 (PST)
+ AJvYcCXy/bGY/sImj2BQNWR/u5w/WQnm9R8RQxVYSvjykyfOUL26yxtHpESbNABgBP2vKHBq7Vc1Aao=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAuEeNUaMqpntH1Aas0qcAA2G3lP/9bVc9UsYZfxzVlbCpj08V
+ 2DNMa805pF0KhgFAXiJjbxxhQfjRSeHHrMl4Gl5orQtB2IlQ8ZmXpQKpW+m4THQX1NCQFObCn7w
+ L+SvKVZfZ4ovIv5XdJuW3iaDKOQyB6TAALIJ8
+X-Gm-Gg: ASbGncuw7rC9oNUMwsOA1M3QESjiAzlgGznKz6J3e8WIaQpn9eAe6MgKrubPtJOR9Ni
+ ejpXfQG3/6cUxKvqjq9nH+AiUHeY6Sk8=
+X-Google-Smtp-Source: AGHT+IEXp2d8mQdbpe7jGQEFqxYOako6v9QdABTLLBSfyAEDBOwwdXKCgsQd4oZw5U91wn5AL6t010+fABk2xt985PQ=
+X-Received: by 2002:a17:906:32cf:b0:aa5:14a8:f6d9 with SMTP id
+ a640c23a62f3a-aa580f01a5dmr569395966b.14.1732821067751; Thu, 28 Nov 2024
+ 11:11:07 -0800 (PST)
 MIME-Version: 1.0
 References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-4-sjg@chromium.org>
- <f97773e8-e734-45b4-a5ac-074856dc6acf@gmx.de>
-In-Reply-To: <f97773e8-e734-45b4-a5ac-074856dc6acf@gmx.de>
+ <20241128154727.771871-2-sjg@chromium.org>
+ <e1dfadd0-8c26-4daa-b775-4e176ee1a2b6@gmx.de>
+In-Reply-To: <e1dfadd0-8c26-4daa-b775-4e176ee1a2b6@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Nov 2024 12:10:51 -0700
-Message-ID: <CAFLszTgxqEVZ-ooLqvPkm44GyzCfTtOWjmoLQZrLpq1tyqMuUw@mail.gmail.com>
-Subject: Re: [PATCH v2 03/28] efi_loader: Drop extra brackets in
- efi_mem_carve_out()
+Date: Thu, 28 Nov 2024 12:10:54 -0700
+Message-ID: <CAFLszThkcadwfiX78U=hbKoGPOCtuUseSDh4QdqdsAOTq9B9Uw@mail.gmail.com>
+Subject: Re: [PATCH v2 01/28] efi: Define fields in struct efi_mem_desc
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,57 +94,105 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Thu, 28 Nov 2024 at 09:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 28 Nov 2024 at 10:04, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 28.11.24 16:47, Simon Glass wrote:
-> > Simplify a few expressions in this function.
+> > There is quite a bit of confusion in the EFI code as to whether a field
+> > contains an address or a pointer. As a first step towards resolving
+> > this, document the memory-descriptor struct, indicating that it holds
+> > pointers, not addresses.
+> >
+> > Dro the same for efi_add_memory_map() as it is widely used, as well as
+> > efi_add_memory_map_pg() which is only used by lmb
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> > (no changes since v1)
+> > Changes in v2:
+> > - Fix missing @
+> > - Note that this holds pointers, not addresses
 > >
-> >   lib/efi_loader/efi_memory.c | 4 ++--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >   include/efi.h               | 15 +++++++++++++++
+> >   include/efi_loader.h        |  6 ++++--
+> >   lib/efi_loader/efi_memory.c |  4 +++-
+> >   3 files changed, 22 insertions(+), 3 deletions(-)
 > >
+> > diff --git a/include/efi.h b/include/efi.h
+> > index c559fda3004..3fce281233c 100644
+> > --- a/include/efi.h
+> > +++ b/include/efi.h
+> > @@ -273,6 +273,21 @@ enum efi_memory_type {
+> >   #define EFI_PAGE_SIZE               (1ULL << EFI_PAGE_SHIFT)
+> >   #define EFI_PAGE_MASK               (EFI_PAGE_SIZE - 1)
+> >
+> > +/**
+> > + * struct efi_mem_desc - defines an EFI memory record
+>
+> Please, add here that this structure implements the
+> EFI_MEMORY_DESCRIPTOR type of the UEFI specification.
+>
+> > + *
+> > + * Note that this struct is for use outside U-Boot, so the two 'start' fields
+> > + * are pointers, not addresses. Use map_to_sysmem() to convert to an address, so
+> > + * that sandbox operates correctly.
+> > + *
+> > + * @type (enum efi_memory_type): EFI memory-type
+> > + * @reserved: unused
+> > + * @physical_start: Start address of region in physical memory
+> > + * @virtual_start: Start address of region in physical memory
+>
+> %s/virtual memory/
+>
+> where both addresses will always be the same before
+> SetVirtualMemoryMap() as the UEFI specification requires identity mapping.
+>
+> > + * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
+> > + *   bytes)
+> > + * @attribute: Memory attributes (see EFI_MEMORY_...)
+> > + */
+> >   struct efi_mem_desc {
+> >       u32 type;
+> >       u32 reserved;
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 39809eac1bc..ee0cdd36500 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -788,8 +788,10 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+> >   /**
+> >    * efi_add_memory_map_pg() - add pages to the memory map
+> >    *
+> > - * @start:                   start address, must be a multiple of
+> > - *                           EFI_PAGE_SIZE
+> > + * @start: start address, must be a multiple of EFI_PAGE_SIZE. Note that this
+> > + * is actually a pointer provided as an integer. To pass in an address, pass
+>
+> %s/an address/a sandbox virtual address/
+>
+> > + * in (ulong)map_to_sysmem(addr)
+> > + *
+> >    * @pages:                  number of pages to add
+> >    * @memory_type:            type of memory added
+> >    * @overlap_conventional:   region may only overlap free(conventional)
 > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index f1154f73e05..3b1c7528e92 100644
+> > index e493934c713..f1154f73e05 100644
 > > --- a/lib/efi_loader/efi_memory.c
 > > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
-> >
-> >       /* check whether we're overlapping */
-> > -     if ((carve_end <= map_start) || (carve_start >= map_end))
-> > +     if (carve_end <= map_start || carve_start >= map_end)
+> > @@ -384,7 +384,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> >   /**
+> >    * efi_add_memory_map() - add memory area to the memory map
+> >    *
+> > - * @start:           start address of the memory area
+> > + * @start:           start address of the memory area. Note that this is
+> > + *                   actually a pointer provided as an integer. To pass in
+> > + *                   an address, pass in (ulong)map_to_sysmem(addr)
 >
-> As operator precedence is not always easy to remember, some people like
-> Alex and some static code analysis tools prefer parentheses.
+> %s/an address/a sandbox virtual address/
 
-It seems silly to have brackets in this case. It just makes the code
-harder to read and checkpatch doesn't like it.
-
+Sorry, no I don't want to introduce that terminology.
 >
-> >               return EFI_CARVE_NO_OVERLAP;
-> >
-> >       /* We're overlapping with non-RAM, warn the caller if desired */
-> > -     if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-> > +     if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
->
-> ditto
-
-ditto
-
->
-> We should get rid of this code as it duplicates what we already have in
-> LMB and generate the UEFI memory map from from LMB.
-
-OK, please send a patch.
-
->
-> >               return EFI_CARVE_OVERLAPS_NONRAM;
-> >
-> >       /* Sanitize carve_start and carve_end to lie within our bounds */
+> >    * @size:           length in bytes of the memory area
+> >    * @memory_type:    type of memory added
+> >    *
 >
 
 Regards,
