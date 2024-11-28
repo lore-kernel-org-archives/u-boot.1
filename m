@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EFE7D66BAD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 06:38:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7719D690E0
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 07:11:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84FE489819;
-	Thu, 28 Nov 2024 07:38:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D7B489510;
+	Thu, 28 Nov 2024 08:11:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a2yvZntd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rY3KoTLI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B99C689841; Thu, 28 Nov 2024 07:38:15 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 7823C89608; Thu, 28 Nov 2024 08:11:28 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7855689818
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:38:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 573CB893D6
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 08:11:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5d0062e9c80so593616a12.2
- for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 22:38:13 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfe5da1251so593842a12.1
+ for <u-boot@lists.denx.de>; Wed, 27 Nov 2024 23:11:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732775893; x=1733380693; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hvp8bqJNY16hwMWLUhEhVPhNyehQ4f+RpMe3UTU1veI=;
- b=a2yvZntdZAun22KLJjlwk+qwUwJvuWxaQVki5qZLRUIlZnfqsemNxrLgWUGguRoVOG
- 2VpCpVG1OOOQQK3dQncyM2gmiCmbnAooKnQw6u50uq2JiciAslb1rMObxnlpphfnaiT3
- XH20TdqbeRl/RA10qeO+cYV2gTPRSnfHo8pq5Tvek3W8w04QC9a7S+ITArC8hznvWru7
- mpml59896t9ZqDmWzAa3C6n34ujwAQG/fMMqvC/3/cYUXaNnIlmOAO+eGYwHIBoQTNt9
- i6mbaV+vXxdyUJjcdAuLJvQp3N+DsBoqeC/egISCJMHjHra0nLhU6yR02jVgeDKD7IeA
- THIg==
+ d=linaro.org; s=google; t=1732777886; x=1733382686; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TTNUsCRROLxZN/RF3nyODhqQB69D+GDX1WXoLBu24XM=;
+ b=rY3KoTLItTrvryQZ8UqCsRhj5dHKsN1xJdcCW/y1N4DXbRn4QC5+nLjL9GzFSPV2HP
+ E8dkaXxEV2xU3F8o+NvFMECEHvgO9SGYJKhMba/2WTZ+mmwl0JlnraJPzYpl4kBqnaXo
+ XzSyZcUQCJg5d2YxEwh0Tlu7KJOh0Hvyu/Oiv3O5O83XDEoBqYyhLrB+gTo/Ox5TafGj
+ BHU554XfPvVZQEp8VF8y6ytpYyjXuz5xLGZ8CXxpRvs4EHAvn6vXMMculVwjCPupKJge
+ QhFVXVMWIWT8IccECffHFRNibXbYJgswDQyqdjg4EkXD1VEEU5C86eras8i9WnrfcAlh
+ S9yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732775893; x=1733380693;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1732777886; x=1733382686;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hvp8bqJNY16hwMWLUhEhVPhNyehQ4f+RpMe3UTU1veI=;
- b=t/RX9gq1jOGJQZ8j9wBHYSq4w86Iip5cJQM7imKnn3hTn4bf2ef46/EVCODTBuin7Z
- ZQTue5OpxLA0AFpSFEo13jMUe3Fev8MikDtssg1iXDKJYh3O8RpR68fw0AzYdKiPrwBj
- Sgtm0cyCRmEoN3l7xdAsWjSwHDUlfa1eEn6LKklxs5Wnl0J3+eJmaOtdDO88aDRfi107
- aLJZXENJYOi0IB9deIcrsgaStEROYtKo2dOWY6Ckh5CmzGNUO90mx4bT5qQpD9h/Gx+g
- 1oupRSkMURefC0fialnpKYrtMZuogJrYTbhAXCHCR22iY9kyrtB3hHzUHqON6+tcEFL3
- Jx5g==
+ bh=TTNUsCRROLxZN/RF3nyODhqQB69D+GDX1WXoLBu24XM=;
+ b=cjM/UoqLSwVd49DTjXCd5MedkwGQuh7WAvn2IWONB80+U/6eN8quNru4r8htkM27rz
+ yBeCjrOjtiPcPk6ctC2VVUIknE1scvQBQ1Eh9KgOdJLrvYWwHFXdWLLjDX/4bR62dpf/
+ n8UWd1xgcsCzrR+M1hcksJhCT0+v/xDpbkV0wGssW1WIHMhYyPV3oppza/nr3B0sqhq5
+ V+9doyJuSw1KfgE6YpMl7srlWQurFJ4ZmMFcKkETFR5dKJ4Q+Qy3SSXBodHfGi/fLTOy
+ aye/8zsjoOkge5BkuaiygUp22XDmEAnW5INcDHSoyVcPsiwH4PwSzabkO3Ya2diFnpXg
+ GKog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0SDIZrdcE/u+qfDOMUeK0i1lLHGrSz6VpUnKJqKbr7bf1nyVCaQeiTMzrqupvCubZliKeew0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzF01Hyc5kdapfk1fYmk/4TTW5JopDxSup6bsEKl7Ynt+qKgm5S
- vXFCg5iB1mIlarv8r9zraOfD4OiKqvc94RI6BuNXva9nNfJA81NeFRoNXTZAMtytzSv9AP0VMsk
- SxWTZMGVCFAmGePC2hI/K4p6yY52d8ZnQcL+Ikg==
-X-Gm-Gg: ASbGncv3l6NRqf8v3JEmmY9OF7Dg9rCrYOcNDlkEDGH4QGF1YNR1Q2kF9lDkCYjTPv4
- aF63mZfcUoRYF0V9hI0kYHhBPPokYz0UI
-X-Google-Smtp-Source: AGHT+IFDrc5D4crD16YDG6VoyTdu9mfeBPoIm/zEZcMYz4su+lBTBnkSjnx/O8xYu4HONLYqTaEW4OeToiRxK9HquXM=
-X-Received: by 2002:a05:6402:26cf:b0:5d0:8f25:24ff with SMTP id
- 4fb4d7f45d1cf-5d08f252625mr2987106a12.14.1732775892961; Wed, 27 Nov 2024
- 22:38:12 -0800 (PST)
+ AJvYcCUQIhHZXot5mz7htEhyLVdx1ap7DZXub33xwpy+dH8Rob6OTZR2t4KdoTeEjGrdHqAV03Ktx/M=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGtuoenPcMX2UYeV1chp7f8phLfCD6LYjiFffb1XMx05R4bH+k
+ Qe0TBBSPK/y7PfGY+pquQZvf4ZvH03AN93AqS8xXA6yWoEw4AxhJsGt6je9hZns=
+X-Gm-Gg: ASbGnctio+pqGZZSOY+ecsncAYrDlSK/mD+ZCmULNtP1zOiOPagyUvn0cA4QYgQQ53p
+ EkMeCJODGfYhnThPkvIQh4+/dcxIHi0DkqC3wsaode/3da6Dg1EKGhi6sIFoTy3LD9+GOIP5KEJ
+ 5mMS2wNoxEF237q2nQfc8zh5fsm1a5kblNCoHQ9Mrn1pq+L3Cbr/lptf4fRxb/QAnqa4PUjGxPq
+ d4wLmpjqecpi7pRrrizRv5Cc4lch7jefMmT+rYhSm/vysPPhGA7BFbQR0HMAwwM/i3rHrD6OB+p
+ PmalJCA4nWV1+rdtSSvQx6Ao6A==
+X-Google-Smtp-Source: AGHT+IGBd17HbTrNm7ZC9bTJ1NiN7fwVfOLWExobmfaDw6EefqNg1LiS1TiGcZ7A2h4LNYTLGOcGtw==
+X-Received: by 2002:a05:6402:4015:b0:5d0:9062:7dfe with SMTP id
+ 4fb4d7f45d1cf-5d0906282a5mr3806548a12.15.1732777885734; 
+ Wed, 27 Nov 2024 23:11:25 -0800 (PST)
+Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
+ [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa5999059b4sm32800866b.145.2024.11.27.23.11.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Nov 2024 23:11:25 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Tim Harvey <tharvey@gateworks.com>, Raymond Mao <raymond.mao@linaro.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Don't warn if the TCG2 FinalEvents table is not
+ installed
+Date: Thu, 28 Nov 2024 09:11:20 +0200
+Message-ID: <20241128071121.272072-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
- <20241124-b4-efistub-arm64-v1-7-3e33f0340071@linaro.org>
-In-Reply-To: <20241124-b4-efistub-arm64-v1-7-3e33f0340071@linaro.org>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 28 Nov 2024 12:08:01 +0530
-Message-ID: <CADg8p94ma+FcJH2dAx=PtNjSq77Y0bGH8V_k64z_7+ij8R=P3Q@mail.gmail.com>
-Subject: Re: [PATCH RFC 07/14] efi: stub: add known memory to U-Boot's EFI
- memory map
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,128 +101,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 01:58, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> When running U-Boot as an EFI payload with CONFIG_EFI_STUB, the reserved
-> regions from the previous stage EFI bootloader should be carried over
-> since they may not fully align with the reserved-memory regions in
-> devicetree.
->
-> Implement a helper to map these pages when the EFI subsystem starts up.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  include/efi_stub.h          |  7 +++++++
->  lib/efi/efi_info.c          | 31 +++++++++++++++++++++++++++++++
->  lib/efi_loader/efi_memory.c |  5 +++++
->  3 files changed, 43 insertions(+)
->
-> diff --git a/include/efi_stub.h b/include/efi_stub.h
-> index ff3befd4830b..343c84435970 100644
-> --- a/include/efi_stub.h
-> +++ b/include/efi_stub.h
-> @@ -56,5 +56,12 @@ int of_populate_from_efi(struct device_node *root);
->   * EFI payload with CONFIG_EFI_STUB enabled.
->   */
->  int dram_init_banksize_from_efi(void);
->
-> +/**
-> + * efi_add_known_memory_from_efi() - Add known memory pages from the memory map
-> + * of the EFI bootloader that booted U-Boot. This is only applicable when running
-> + * U-Boot as an EFI payload with CONFIG_EFI_STUB enabled.
-> + */
-> +void efi_add_known_memory_from_efi(void);
-> +
->  #endif /* _EFI_STUB_H */
-> diff --git a/lib/efi/efi_info.c b/lib/efi/efi_info.c
-> index f9743a3e7fad..ef4e646b082b 100644
-> --- a/lib/efi/efi_info.c
-> +++ b/lib/efi/efi_info.c
-> @@ -5,8 +5,9 @@
->   * Access to the EFI information table
->   */
->
->  #include <efi.h>
-> +#include <efi_loader.h>
->  #include <efi_stub.h>
->  #include <errno.h>
->  #include <mapmem.h>
->  #include <asm/global_data.h>
-> @@ -177,4 +178,34 @@ int dram_init_banksize_from_efi(void)
->         }
->
->         return 0;
->  }
-> +
-> +/* Called by U-Boot's EFI subsystem to add known memory. In our case
-> + * we need to add some specific memory types from the original bootloaders
-> + * EFI memory map
-> + */
-> +void efi_add_known_memory_from_efi(void)
-> +{
-> +       struct efi_mem_desc *desc, *end;
-> +       struct efi_entry_memmap *map;
-> +       int ret, size;
-> +
-> +       EFI_PRINT("Adding known memory from previous stage EFI bootloader\n");
-> +
-> +       ret = efi_info_get(EFIET_MEMORY_MAP, (void **)&map, &size);
-> +       if (ret) {
-> +               EFI_PRINT("%s: Missing memory map\n", __func__);
-> +               return;
-> +       }
-> +       end = (struct efi_mem_desc *)((ulong)map + size);
-> +
-> +       for (desc = map->desc; desc < end; desc = efi_get_next_mem_desc(desc, map->desc_size)) {
-> +               switch (desc->type) {
-> +               case EFI_RESERVED_MEMORY_TYPE:
-> +                       efi_add_memory_map_pg(desc->physical_start, desc->num_pages, desc->type, false);
-> +                       break;
-> +               default:
-> +                       continue;
-> +               }
-> +       }
-> +}
+When the TCG2 protocol installation fails, we are trying to remove
+all the objects we created in tcg2_uninit().
 
-If this is DRAM memory that is being added, this now needs to happen
-through LMB to ensure that these reserved memory regions don't get
-used by the LMB allocator. You can check if something can be added to
-the lmb_reserve_common() function. These regions will get marked as
-boot services data. If these are to be kept as reserved memory even in
-the OS, the memory type of these regions can be updated by keeping
-this function. But the point to consider is that this needs to be
-updated in the LMB memory map also.
+However, there are cases when this function runs before the config
+table was installed. So instead of printing an error unconditionally
+check against EFI_NOT_FOUND and don't print anything if the table wasn't
+installed to begin with.
 
--sughosh
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_tcg2.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index d2f5d563f2a0..50b0010608e7 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -7,8 +7,9 @@
->
->  #define LOG_CATEGORY LOGC_EFI
->
->  #include <efi_loader.h>da
-> +#include <efi_stub.h>
->  #include <init.h>
->  #include <lmb.h>
->  #include <log.h>
->  #include <malloc.h>
-> @@ -834,8 +835,12 @@ static void add_u_boot_and_runtime(void)
->  int efi_memory_init(void)
->  {
->         efi_add_known_memory();
->
-> +#ifdef CONFIG_EFI_STUB
-> +       efi_add_known_memory_from_efi();
-> +#endif
-> +
->         add_u_boot_and_runtime();
->
->  #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
->         /* Request a 32bit 64MB bounce buffer region */
->
-> --
-> 2.47.0
->
+diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+index 572c6b5bf630..a15c73162ee3 100644
+--- a/lib/efi_loader/efi_tcg2.c
++++ b/lib/efi_loader/efi_tcg2.c
+@@ -791,7 +791,7 @@ static void tcg2_uninit(void)
+ 	efi_status_t ret;
+ 
+ 	ret = efi_install_configuration_table(&efi_guid_final_events, NULL);
+-	if (ret != EFI_SUCCESS)
++	if (ret != EFI_SUCCESS && ret != EFI_NOT_FOUND)
+ 		log_err("Failed to delete final events config table\n");
+ 
+ 	efi_free_pool(event_log.buffer);
+-- 
+2.45.2
+
