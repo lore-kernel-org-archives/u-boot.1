@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FD3D69113
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 14:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D3BD69112
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 14:23:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 039F089D08;
-	Thu, 28 Nov 2024 15:22:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 697B689D0E;
+	Thu, 28 Nov 2024 15:23:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="NmI37WY6";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="xjAMkKkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1118D89D0E; Thu, 28 Nov 2024 15:22:54 +0100 (CET)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- by phobos.denx.de (Postfix) with ESMTP id 11C3C8985C
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 15:22:52 +0100 (CET)
+ id 671A089D10; Thu, 28 Nov 2024 15:23:06 +0100 (CET)
+Received: from mx2.securetransport.de (mx2.securetransport.de
+ [IPv6:2a03:4000:13:6c7::1])
+ by phobos.denx.de (Postfix) with ESMTP id 631A089D12
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 15:23:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1732803766;
- bh=3p10Y9PuV6QZhXshqot3LrFElSDF9q7pMuKQbSlWYNA=;
+ s=dhelectronicscom; t=1732803778;
+ bh=pHHcN3MFP6hprsXIHhKx3F0qWOiXlUiQhCKxds4ZpmY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References:From;
- b=NmI37WY68jkOobqPrT4seew6K7miAaS1tjqq9sa/sPos0oB4inJkX3S4dZjGaRHu6
- P3xwyS4n2cASGOiOwnzKjrQkLpMdjoDDVA3sGqiP2arYDvL8eDvh42JBUsrNT6GN8E
- bVHXPe3VFPuNLm2m1jMnkK9qetHtjA+sUyYPe/uk2QRPpO19mdX7fLHMa/8FgjJrf0
- 9luun6RyCITSpArmKEYAIPElz7PqDOO0Nqvvi7R/mzRYt2PfE3N4A0fb/QrbMXgf6l
- AJOm2mya3wryvaNLxhAU+RDn2UptIuC65g2dZJXMCRLoV+ncwGdJWAo8ylqoHH7+Rz
- IXAo0D92yjqig==
+ b=xjAMkKkr8m74LrENafLBZCWiORWdEXUO3uyjC1tnFb+Bg6jJKuXkxtJbRGBYK8BRu
+ j0UKv196ChHF+64PkqisFnPNuIV+Gv/VWcN6ZYjTQFWsLf8s9IM8Sv/rR02Y706yvG
+ wNdMl10/4H2MExI+7viCWShI2nzPJi/ouPAETUKt9szNCu+vUKW/BMjTzC/kqTNlsv
+ V28LvbDTakkJ14qfUE/4WyXfsYMkwxlMqlnYYiDSzG4BlP2Pdm6ceAxu5+Os/l7nMW
+ 3SiZM28xAczxBR5h6ORANtamTqP+US7Z+0oS5NiO3z9xsQf2vt/NB4mIusKgrU8CeD
+ rZzix6OjOqyjw==
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, NXP i.MX U-Boot
- Team <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Fabio Estevam
- <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>
-Subject: [PATCH V4 3/4] board: dhelectronics: Sync env variable
- dh_som_serial_number with SN
-Date: Thu, 28 Nov 2024 15:20:19 +0100
-Message-ID: <20241128142020.35386-4-cniedermaier@dh-electronics.com>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, <u-boot@dh-electronics.com>
+Subject: [PATCH V4 4/4] lib: hashtable: Prevent recursive calling of callback
+ functions
+Date: Thu, 28 Nov 2024 15:20:20 +0100
+Message-ID: <20241128142020.35386-5-cniedermaier@dh-electronics.com>
 X-klartext: yes
 In-Reply-To: <20241128142020.35386-1-cniedermaier@dh-electronics.com>
 References: <20241128142020.35386-1-cniedermaier@dh-electronics.com>
@@ -65,69 +65,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The env variable "SN" is used to store the serial number on DH electronics
-SoMs. New SoMs will use the variable "dh_som_serial_number". To ensure
-compatibility, these env variables are synchronized. This is achieved
-using callback functions.
+In case there are two variables which each implement env callback
+that performs env_set() on the other variable, the callbacks will
+call each other recursively until the stack runs out. Prevent such
+a recursion from happening.
+
+Example which triggers this behavior:
+static int on_foo(...) { env_set("bar", 0); ... }
+static int on_bar(...) { env_set("foo", 0); ... }
+U_BOOT_ENV_CALLBACK(foo, on_foo);
+U_BOOT_ENV_CALLBACK(bar, on_bar);
 
 Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Suggested-by: Marek Vasut <marex@denx.de>
 ---
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>
 Cc: u-boot@dh-electronics.com
 ---
-V3: - Add this patch to the series
-V4: - Remove the recursion prevention from the callback functions
-      => The recursion prevention will be generally solved in the
-         callback function call in a separate patch
+V4: - Add this patch to the series
 ---
- board/dhelectronics/common/dh_common.c | 17 +++++++++++++++++
- configs/dhsom.config                   |  1 +
- 2 files changed, 18 insertions(+)
+ lib/hashtable.c | 27 ++++++++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-index 0bf1f2f8c1..4dff5f7b16 100644
---- a/board/dhelectronics/common/dh_common.c
-+++ b/board/dhelectronics/common/dh_common.c
-@@ -11,6 +11,23 @@
- 
- #include "dh_common.h"
- 
-+static int on_dh_som_serial_number(const char *name, const char *value, enum env_op op,
-+				   int flags)
-+{
-+	env_set("SN", value);
-+	return 0;
-+}
-+
-+U_BOOT_ENV_CALLBACK(dh_som_serial_number, on_dh_som_serial_number);
-+
-+static int on_SN(const char *name, const char *value, enum env_op op, int flags)
-+{
-+	env_set("dh_som_serial_number", value);
-+	return 0;
-+}
-+
-+U_BOOT_ENV_CALLBACK(SN, on_SN);
-+
- bool dh_mac_is_in_env(const char *env)
+diff --git a/lib/hashtable.c b/lib/hashtable.c
+index e8a59e2dca..75c263b505 100644
+--- a/lib/hashtable.c
++++ b/lib/hashtable.c
+@@ -221,11 +221,32 @@ static int
+ do_callback(const struct env_entry *e, const char *name, const char *value,
+ 	    enum env_op op, int flags)
  {
- 	unsigned char enetaddr[6];
-diff --git a/configs/dhsom.config b/configs/dhsom.config
-index fc76632630..380bedaa5d 100644
---- a/configs/dhsom.config
-+++ b/configs/dhsom.config
-@@ -49,6 +49,7 @@ CONFIG_CMD_UUID=y
- CONFIG_CMD_WGET=y
- CONFIG_CMD_XXD=y
- CONFIG_CRC32_VERIFY=y
-+CONFIG_ENV_CALLBACK_LIST_STATIC="dh_som_serial_number:dh_som_serial_number,SN:SN,"
- CONFIG_HASH_VERIFY=y
- CONFIG_MD5SUM_VERIFY=y
- CONFIG_SHA1SUM_VERIFY=y
++	int ret = 0;
++
+ #ifndef CONFIG_XPL_BUILD
+-	if (e->callback)
+-		return e->callback(name, value, op, flags);
++	static bool in_callback;
++
++	if (!e->callback || in_callback)
++		return 0;
++
++	/*
++	 * In case there are two variables which each implement env callback
++	 * that performs env_set() on the other variable, the callbacks will
++	 * call each other recursively until the stack runs out. Prevent such
++	 * a recursion from happening.
++	 *
++	 * Example which triggers this behavior:
++	 * static int on_foo(...) { env_set("bar", 0); ... }
++	 * static int on_bar(...) { env_set("foo", 0); ... }
++	 * U_BOOT_ENV_CALLBACK(foo, on_foo);
++	 * U_BOOT_ENV_CALLBACK(bar, on_bar);
++	 */
++	in_callback = true;
++	ret = e->callback(name, value, op, flags);
++	in_callback = false;
+ #endif
+-	return 0;
++
++	return ret;
+ }
+ 
+ /*
 -- 
 2.30.2
 
