@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FB9D6D25E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 04:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B245DD3B9BD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 04:51:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B6F689833;
-	Thu, 28 Nov 2024 05:12:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E34AD893A3;
+	Thu, 28 Nov 2024 05:51:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="p1RWS7y7";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="CxLlOOw+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A0zSnUUS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13D328983E; Thu, 28 Nov 2024 05:11:59 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABC5A89634
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 05:11:56 +0100 (CET)
+ id 7A7AA893D0; Thu, 28 Nov 2024 05:51:43 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 30FAE8926A
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 05:51:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XzNDX2PsFz9t0S;
- Thu, 28 Nov 2024 05:11:56 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1732767116;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=loV7kM3Dg/ZCk7mAo1b0R/qDU8xR4o0utsvh+IyQIVE=;
- b=p1RWS7y7yxxSkvfPoD6g+EoT//Hn7eJhXH89blFh6+23yhyHZG8jn++CNnb8ky6ake5dy0
- tQlOSExOkPZE2uUrbaAxa8NtqDJK4OEI8BcDeTbErC6y7EKvhvFH8IWCii1yXzBqEraxGv
- IFQ0eDYYcONAPmuxsv5ZmMGiyVfoq71LXRYTiNccTKQlyUg85he6kx5oY0iSjFhQbNXAm3
- ifrKrJ//Q5isbj62MHtzsRmoRcXLJRdsvE1lzo5c7h09vZQZ+voRZFLkXJT4PVvYnvcrON
- 0AJKdNnyUiLTnvrjPSR1FNb7m3UsqOgxpphYF5oZH8njmTh3DzKB9Tfd5TpKGw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1732767114;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=loV7kM3Dg/ZCk7mAo1b0R/qDU8xR4o0utsvh+IyQIVE=;
- b=CxLlOOw+lAtvAM6DPCT873eplacWR9A/nnouLk105J2TQ2Xl5VI/mwSwh1uyBOSMhhJD3T
- KCmjGwhvSHFn4NE8I3+w5nQX6sdIGEakaAwvVehjQXB1vTaEyfWKz2J1qj8lsMvdj/NFgh
- BybZXcDOsptMfV74DdYxRKj7hZ8FkjcpZkBdvte6OGvrLllGveLr94XU73f9c35YjWbQNp
- pxZxw67rsK17BBBO6Ly2gb3Sgf0t3GgaLxdhXLMu/nSu65VW6MbXzWFq1gJ3037E8C88ch
- Hw//uy316IKfWXDg0EL+779XZP8tv2DRUBXwNVoCemuj/Pcjv6w78Aa5G7M3dg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adam Ford <aford173@gmail.com>, Cong Dang <cong.dang.xn@renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Disable AVB1 and AVB2 on R8A779G0 V4H White
- Hawk board
-Date: Thu, 28 Nov 2024 05:11:19 +0100
-Message-ID: <20241128041140.293109-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4AS4pdcn1106606
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 27 Nov 2024 22:51:39 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732769499;
+ bh=FWOwUn9ukwms0VNMf5oXX1nFstLk+8Nn/w8+HOt3JTg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=A0zSnUUSjVmLh3wxBG3gpSdE77Y+E5PN0A3YoQEcNE0KPz0LHSGO0XB8fQXdi3llp
+ ZSEU3LZtpgo60lZK2HciZ9X+IlMpd5HEJbb/t3f981FX/3sABESzXQEA9fCyLepopn
+ l39MMYRIQXm1LXr5GvOaIxAf6+iCWMS4D62z7Urk=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AS4pdN2091365
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Nov 2024 22:51:39 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Nov 2024 22:51:38 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Nov 2024 22:51:38 -0600
+Received: from [10.24.69.37]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AS4pYOQ106958;
+ Wed, 27 Nov 2024 22:51:35 -0600
+Message-ID: <0db79f51-c510-4a57-bc3e-500898d6a7d4@ti.com>
+Date: Thu, 28 Nov 2024 10:21:34 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: dts: k3-j784s4-main: Add PBIST_14 node
+To: "Kumar, Udit" <u-kumar1@ti.com>, <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-boot@lists.denx.de>
+References: <20241127145346.2609868-1-n-francis@ti.com>
+ <20241127145346.2609868-2-n-francis@ti.com>
+ <4515c566-2c7c-441b-8e31-279b64427a73@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <4515c566-2c7c-441b-8e31-279b64427a73@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 5hxd1bzpxi6jnrm67mwfzf3ec8wr9owx
-X-MBO-RS-ID: bf99006b58c8f8afe8f
-X-Rspamd-Queue-Id: 4XzNDX2PsFz9t0S
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,42 +85,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U-Boot is currently not capable of handling ethernet-phy-ieee802.3-c45
-PHYs correctly, and also does not handle MDIO bus wide reset-gpios property.
-Until proper C45 PHY support lands in U-Boot, disable AVB1/AVB2 interfaces.
-This only disables the two MACs with 88Q2110/88Q2112 100/1000BASE-T1 PHYs
-on ethenet sub-board, the main board AVB0 ethernet is unaffected.
+Hi Udit
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Cong Dang <cong.dang.xn@renesas.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On 28/11/24 09:28, Kumar, Udit wrote:
+> 
+> On 11/27/2024 8:23 PM, Neha Malcom Francis wrote:
+>> Add DT node for PBIST_14 that is responsible for triggering the PBIST
+>> self-tests for the MAIN_R5_2_x cores.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi | 12 ++++++++++++
+>>   1 file changed, 12 insertions(+)
+>>
+>> diff --git a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi 
+>> b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> index d4ac1c9872a..21e2777cd9d 100644
+>> --- a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> +++ b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+>> @@ -2782,4 +2782,16 @@
+>>           power-domains = <&k3_pds 269 TI_SCI_PD_EXCLUSIVE>;
+>>           status = "disabled";
+>>       };
+>> +
+>> +    bist_main14: bist@33c0000 {
+>> +        compatible = "ti,j784s4-bist";
+>> +        reg-names = "cfg", "ctrl_mmr";
+>> +        reg = <0x00 0x033c0000 0x00 0x400>,
+>> +              <0x00 0x0010c1a0 0x00 0x01c>;
+>> +        clocks = <&k3_clks 237 7>;
+> 
+> Please go through kernel route for device tree update.
+> 
+> Even this is getting applied, in next kernel-u-boot sync, we will be losing this 
+> node
 
-diff --git a/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi b/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
-index c3704d789e8..531767cfdb2 100644
---- a/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
-@@ -13,6 +13,14 @@
- 	};
- };
- 
-+&avb1 {
-+	status = "disabled";
-+};
-+
-+&avb2 {
-+	status = "disabled";
-+};
-+
- &rpc {
- 	flash@0 {
- 		spi-tx-bus-width = <1>;
+Yes will be sending it out today, just sent this series a little ahead for reviews.
+
+> 
+> 
+>> +        power-domains = <&k3_pds 237 TI_SCI_PD_EXCLUSIVE>;
+>> +        bootph-pre-ram;
+>> +        ti,bist-instance = <14>;
+>> +        cores-under-test = <&main_r5fss2_core0>, <&main_r5fss2_core1>;
+>> +    };
+>>   };
+
 -- 
-2.45.2
-
+Thanking You
+Neha Malcom Francis
