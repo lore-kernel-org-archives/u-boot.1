@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4812D70DE6
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2CAD70DE6
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 17:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 200CF89D2B;
-	Thu, 28 Nov 2024 18:02:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D065489D1E;
+	Thu, 28 Nov 2024 18:06:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ASwXlbwu";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="m1vW4Ijv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7891089D25; Thu, 28 Nov 2024 17:48:10 +0100 (CET)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C6B36897F7; Thu, 28 Nov 2024 18:06:07 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4988F89782
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:48:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E50589D27
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 18:06:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ppeter.bme@gmail.com
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-51532deb8a4so283425e0c.0
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 08:48:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732812487; x=1733417287; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:mime-version:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=dY8Y6UdjlzEUXjuzkiKeiycJJmiIwHq6lVzDXHD2vs8=;
- b=ASwXlbwuOg6qlFYh8yPG344/Wzsr9aj+XffpBQM11n77RCmbYldVzDApq5qWEyCLUe
- nZ1gwUPjLjzr3r/7NClz9kuUqb22wv2Sz1s3VjgXhu7rlS5fANB84QrAhca9kQ/20xgs
- zKHwTcWiOq6XScugI6LR3d8WsG7PH5lrlmjKTNg0Guh0lJxstwEHRxUGlmAirvFiE5Kq
- k5tpEK7ZgOKxEgKCxHzYBmRv7Wok7LCpwoegTo4kGpJwHkunYAr13eDYTCvwdgpCmxO7
- EFQuYTh5ylWupTJhjm974JQdh0jqqFylWQgs0yC63B7HzSi3kGOS+VYo61WYKPuBsq00
- mfwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732812487; x=1733417287;
- h=cc:to:subject:message-id:date:mime-version:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dY8Y6UdjlzEUXjuzkiKeiycJJmiIwHq6lVzDXHD2vs8=;
- b=wVZ104ItW3BogW2l4FptuOd23I/Ymq68jHwL+/Fcf2oMCOQihoSxtGrDVX/ud+1bYi
- Z/Q/csn5SJLYd4mcDpvaszlezI9hwu+F8PmNXeeOS3mT/MA0pzjh1yeVEuNM0WOW8p22
- /8TyRsIEEoswx3GJPc+MnV28k8grw0QBaJ3ObFeTonu7m4D3a3H534ubsc9ATSlGXGyQ
- l/189udvwlvV+QDotNGUmXDE1hyWn6iwSkRqsPK3hWiNeL/Zg9yuaZsSJUarmpq0sjE5
- O4neyyvcCQ80YdYhLqvrkfgbY2+LEeEyx75gqgPSWp5Ft0UbWHsC/kI5xznwiDQqO5RD
- 2DRA==
-X-Gm-Message-State: AOJu0YxtiK7heJ0mIdZK9GhXqlOytuQUlxMVQDslleCI1OcOyoy5KMg/
- gHD9KXhICYoDY7IpD6jm3GmXmY54GQ8In2SJGqcEqp3CJOMYtY05f8nYUZNxFH37qdjQUkm+paI
- oqqVQ/jO3Oelc5mPrfMOWT5VU6/EtcVArApE7jw==
-X-Gm-Gg: ASbGncvPnqwey+3Z2xN1M3GuBHXeVpns+E5cAGj1iCsBYnp0roJamU1vO3hVjaYGU8x
- swY0laeCR+88zRB5E369I+zqIEe5Zle0=
-X-Google-Smtp-Source: AGHT+IGJ3Q3pSVo06jMBv9xy4+Ts5ZNWZ1rvkAAsP9gPK879b4MFHz59RoZrZigpbxp1mueb6Y14hA2cmyOqCFO0AYM=
-X-Received: by 2002:a05:6122:2985:b0:514:f579:3bad with SMTP id
- 71dfb90a1353d-515569ddaa6mr10146073e0c.9.1732812487045; Thu, 28 Nov 2024
- 08:48:07 -0800 (PST)
-Received: from 513505537346 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 28 Nov 2024 11:48:06 -0500
-From: Peter Polgar <ppeter.bme@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732813561; x=1733418361; i=xypron.glpk@gmx.de;
+ bh=dyRbm6tMhixTs7KXlhsJWz6iQT8hE7M27w5J31Jwa0E=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=m1vW4IjvlPeSeaSwwvzMVCrDPwHOi2Y6dQfZ32lL8285XcnYvY5H6XAbGYikBbiG
+ nIgh6tNcQ3ET8UGajpYHk3mAqEBm/8esuqFBXV05KzeLq34dUIrYPTNof+VLVd3oE
+ OipXRtoJuaNJBl67VhbY2/ZB1Z8tlKnifRWDs6JzQQiN/FgrEpHD625msSo3ZKlww
+ XOjLl2AAdq9+Thu4NtPBL5cCtROoe0fpVskkWjJTpJilBC/g4Gf9ds/NN6zL4TkLY
+ I5PiRmlOhf0WmxLPI/Dr8elHP/FowGmrkXxUrgvJvqwm1n/lYKqBs2tXFiBNrqsWM
+ bP9GhnhaKhh3CRPitw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4z6q-1ti6fd21nI-00tqKQ; Thu, 28
+ Nov 2024 18:06:01 +0100
+Message-ID: <dec42d99-6eb4-4272-bf9a-79ecff3bde47@gmx.de>
+Date: Thu, 28 Nov 2024 18:06:00 +0100
 MIME-Version: 1.0
-Date: Thu, 28 Nov 2024 11:48:06 -0500
-Message-ID: <CAF2BDb_g8385y8WpAw0epu-oSE5Wx2Nab0NvQ1mf+=hOVowZmg@mail.gmail.com>
-Subject: [PATCH] Add cross compile dependecy info for ARMv7
-To: u-boot@lists.denx.de
-Cc: Peter Polgar <ppeter.bme@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 28 Nov 2024 18:02:50 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 10/28] efi_loader: Use a separate struct for memory
+ nodes
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241128154727.771871-1-sjg@chromium.org>
+ <20241128154727.771871-11-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128154727.771871-11-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:mC0Toe4kkdB2t1P8h9Gz+KIGAzT1sF/wLl2xZivBGT1+DOGz66y
+ youpa0QCqgqkByUPWWfI2C0GzZx+aZcbQID+BWqoGnNo4rSpgLPMijVWvEtVb94GyengQuN
+ Ec9KuuEUkXePhvcolnHglYQSxzs6WSzdmbbDQTW/lZE13oo4ZzPhseTOXJeXGEibUlRyrLH
+ 3i5KSLGHS0f5Vq2bRaSkw==
+UI-OutboundReport: notjunk:1;M01:P0:CxrGRIllLBA=;YqbwNJJDWrxqYr5GIr2MJPlRAAx
+ +rwk5GQPJf4HHwQrMIWAbnA/j2vnH8agMiaAdlwFClESDwuNbSry2Ow/++r6Jgudv2AVMFYA3
+ vNeQ28C5OAjdbVSwfusruJIw0dxghYhOW4AkoOWIhBvi1OtCxjc0TTspEhKCf/fRhfUu5hAI1
+ nKGnlcgc72tfgxBfnHPIz5C53Uyrpbuq83S5nomA/s1QQtRMYyDaAtHcczwr8Y6qoWVD1Kp/g
+ RNnnuZy8F7jNCSeDWdltOwnDCXy/x3ZOeKmdulWOobIC4qHp0aZiXprU0JqNWtzuwZBzQRDHI
+ OqYqcBuWZDwL1AjKm7Ez3RhIoffAtnHvLl4XhhDs6HP4tfNhGusRUrtcrYCem7xEhHqT+FmQt
+ ADy5cj7PIjuyocNNz/0u3fdh5qEjVPpuqEWeAfU+mabx30GPuiUTi6LWPGks+TWhGEVjOtoYK
+ jc/iIGbUtJpYcecphOcrDRb5G0bZZvL+W18NzTZIB9bnRLl8qiwDnVMqV2Cy2Vj7jnVjIOmnM
+ 79hW41jfjlWY08c0sxEmVIeVcw18Ds4YneGfMmcy9yzNfWJRz+F07zqe08ZVt6fCVxBPtBIKx
+ rcLLNW4HQHuAU4NuJdE2oLoViw23wogY6GHc+HHkA+f/fr8s8voKhZT0QJIkYHi9bwXGfH3As
+ /GKEpaiVMzm9w0Hn47yFpyWdHIPOJJ6fWUp9PxKIJWc/VulgveLulNLrpnRVj7crY/q04QDyI
+ hFH81md4eOqXC1gcJbskHVSTJPdl3MTUOI57Xs9/1ISXzchZY5cz3xjFS4WKJquzBnAxsh4RH
+ wSEmxFhM3aawbCOliXB7Kzq26xIzvSmCNvggEKkDqzwS0BKdTdU1tMvMZWkv5EI+vnOARGbLg
+ hnO/1ot/tlKyKQaCQHXtYPboFK1PWw8oooWcgZ80AhGBY+/FLqm//r+np3u9q9ADst82j82b8
+ gs/mVj0OrCdFsOoAUyCzYi+OUfFLbSUiVPOrjK6brtFPVNZRHEkrCfZgVzVVtLVBmFYYxwMWt
+ vOrL8XXtKhVDjvTfy3FsCBqEqrIaI3YxDzl+EEQn+o4KQJS51Ejj3nALbS/io0rWRngg+cGND
+ qOdwy6s3M=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,42 +97,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit adds info about the needed package to cross compile
-U-Boot to ARMv7 (32 bit) architecture on Debian based distros.
----
- doc/build/gcc.rst | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+On 28.11.24 16:47, Simon Glass wrote:
+> At present efi_memory uses struct efi_mem_desc for each node of its
+> memory list. This is convenient but is not ideal, since:
+>
+> - it means that the fields are under a 'desc' sub-structure
+> - it includes an unused 'reserved' field
+> - it includes virtual_start which is confusing as it is always the same
+>    as physical_start
+> - we must use u64 to store pointers, since that is how they are returned
+>    by calls to efi_get_memory_map()
+>
+> As a first step to tidying this up, create a new, private struct to hold
+> these fields.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
-index d8fcfdc4bf..c552e7b590 100644
---- a/doc/build/gcc.rst
-+++ b/doc/build/gcc.rst
-@@ -19,6 +19,12 @@ You could install GCC and the GCC cross compiler
-for the ARMv8 architecture with
+The EFI memory map should be generated from LMB.
 
-     sudo apt-get install gcc gcc-aarch64-linux-gnu
+We should not waste our time on code which shall be removed and possibly
+introduce regressions in the meantime.
 
-+For the ARMv7 architecture (32 bit)  use the below command instead
-+
-+.. code-block:: bash
-+
-+    sudo apt-get install gcc crossbuild-essential-armhf
-+
- Depending on the build targets further packages maybe needed
+Best regards
 
- .. code-block:: bash
-@@ -118,6 +124,12 @@ Assuming cross compiling on Debian for ARMv8 this would be
+Heinrich
 
-     CROSS_COMPILE=aarch64-linux-gnu- make
+> ---
+>
+> Changes in v2:
+> - Add new patch to use a separate stuct for memory nodes
+>
+>   lib/efi_loader/efi_memory.c | 49 +++++++++++++++++++++++++++++++------
+>   1 file changed, 42 insertions(+), 7 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 3cece51f030..9e4158edfaf 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -27,9 +27,39 @@ DECLARE_GLOBAL_DATA_PTR;
+>
+>   efi_uintn_t efi_memory_map_key;
+>
+> +/**
+> + * struct priv_mem_desc - defines an memory region
+> + *
+> + * Note that this struct is for use inside U-Boot and is not visible to=
+ the
+> + * EFI application, other than through calls to efi_get_memory_map(), w=
+here this
+> + * internal format is converted to the external struct efi_mem_desc for=
+mat.
+> + *
+> + * @type (enum efi_memory_type): EFI memory-type
+> + * @reserved: unused
+> + * @physical_start: Start address of region in physical memory
+> + * @virtual_start: Start address of region in physical memory
+> + * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE=
+_SIZE
+> + *	bytes)
+> + * @attribute: Memory attributes (see EFI_MEMORY...)
+> + */
+> +struct priv_mem_desc {
+> +	u32 type;
+> +	u32 reserved;
+> +	efi_physical_addr_t physical_start;
+> +	efi_virtual_addr_t virtual_start;
+> +	u64 num_pages;
+> +	u64 attribute;
+> +};
+> +
+> +/**
+> + * struct efi_mem_list - defines an EFI memory record
+> + *
+> + * @link: Link to prev/next node in list
+> + * @desc: Memory information about this node
+> + */
+>   struct efi_mem_list {
+>   	struct list_head link;
+> -	struct efi_mem_desc desc;
+> +	struct priv_mem_desc desc;
+>   };
+>
+>   #define EFI_CARVE_NO_OVERLAP		-1
+> @@ -116,7 +146,7 @@ static int efi_mem_cmp(void *priv, struct list_head =
+*a, struct list_head *b)
+>    * @desc:	memory descriptor
+>    * Return:	end address + 1
+>    */
+> -static uint64_t desc_get_end(struct efi_mem_desc *desc)
+> +static uint64_t desc_get_end(struct priv_mem_desc *desc)
+>   {
+>   	return desc->physical_start + (desc->num_pages << EFI_PAGE_SHIFT);
+>   }
+> @@ -138,8 +168,8 @@ static void efi_mem_sort(void)
+>   	while (merge_again) {
+>   		merge_again =3D false;
+>   		list_for_each_entry(lmem, &efi_mem, link) {
+> -			struct efi_mem_desc *prev;
+> -			struct efi_mem_desc *cur;
+> +			struct priv_mem_desc *prev;
+> +			struct priv_mem_desc *cur;
+>   			uint64_t pages;
+>
+>   			if (!prevmem) {
+> @@ -194,11 +224,11 @@ static void efi_mem_sort(void)
+>    * to re-add the already carved out pages to the mapping.
+>    */
+>   static s64 efi_mem_carve_out(struct efi_mem_list *map,
+> -			     struct efi_mem_desc *carve_desc,
+> +			     struct priv_mem_desc *carve_desc,
+>   			     bool overlap_conventional)
+>   {
+>   	struct efi_mem_list *newmap;
+> -	struct efi_mem_desc *map_desc =3D &map->desc;
+> +	struct priv_mem_desc *map_desc =3D &map->desc;
+>   	uint64_t map_start =3D map_desc->physical_start;
+>   	uint64_t map_end =3D map_start + (map_desc->num_pages << EFI_PAGE_SHI=
+FT);
+>   	uint64_t carve_start =3D carve_desc->physical_start;
+> @@ -680,7 +710,12 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory=
+_map_size,
+>   	/* Return the list in ascending order */
+>   	memory_map =3D &memory_map[map_entries - 1];
+>   	list_for_each_entry(lmem, &efi_mem, link) {
+> -		*memory_map =3D lmem->desc;
+> +		memory_map->type =3D lmem->desc.type;
+> +		memory_map->reserved =3D lmem->desc.reserved;
+> +		memory_map->physical_start =3D lmem->desc.physical_start;
+> +		memory_map->virtual_start =3D lmem->desc.virtual_start;
+> +		memory_map->num_pages =3D lmem->desc.num_pages;
+> +		memory_map->attribute =3D lmem->desc.attribute;
+>   		memory_map--;
+>   	}
+>
 
-+Also on Debian but for ARMv7 it would be
-+
-+.. code-block:: bash
-+
-+    CROSS_COMPILE=arm-linux-gnueabihf- make
-+
- Out-of-tree building
- ~~~~~~~~~~~~~~~~~~~~
-
--- 
-2.43.0
