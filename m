@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F883D69104
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 12:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A6FFD69104
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 12:41:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DEB7897F3;
-	Thu, 28 Nov 2024 13:33:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5661E89877;
+	Thu, 28 Nov 2024 13:41:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gYocDcJj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LaiDu1U6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C364D8985C; Thu, 28 Nov 2024 13:33:40 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 28B7989CEC; Thu, 28 Nov 2024 13:41:25 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82D77897DD
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 13:33:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE19D8986D
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 13:41:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5cfc19065ffso921582a12.3
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:33:38 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aa543c4db92so106504666b.0
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:41:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732797218; x=1733402018; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1732797682; x=1733402482; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fRrJ9LdAjweqvmZUTUmqPoHFXxLF6p+3lo2Ih48iAyA=;
- b=gYocDcJje+vKgXTOBgCvOR1BOtDzktsbtWPGZ1KEKlDpiB6qviMIAW0zPMN7nzuMLk
- 3+5yoSMK0cCtNM/4/GCF7Gko+IPhiL7Tjhe0KQuTs+oCi66zY7GMoOurn4jpDzOfCgYH
- xryuePz+KgwLDoDb3kl0mUNUHI+H9Vo/6ByAZXLqaBeeHt2rmRABcqd/q5MTMRNMzTuu
- ostNqkESduiBxT5dAqei+9U62jZT3mZTFzVWXrUcvssNEyyDpNjhZxZ3dqRhv0h2qlK5
- sRh3ZBQApDVGmqYrbtWlpfJkqzSWqTIIpNiK+3RzZBlCAnMtiC6+MpsXe06zXB+Ix9at
- oOwQ==
+ bh=daIsPMXeBlgSp1iAlRHmw9xdiKKM/MHyAINTH5e3fcU=;
+ b=LaiDu1U6MLxBqnCTZZ5J2HhaQd+P7qN5wvbWGaFd067oriE62kiCUCKuC0Wl89UWCH
+ s/NAPs6TC+uHfRhq5UiAp0dBfQ6uBUmLu2kBxapv9lNgf5dG1X8vNRx/n4EmTOhyUgEr
+ vkFPs/axqeGkp6HJ2ZZ//XNavSMIPkkajPJwHy3LsGQaIZdgcN6kG1HaHu9XxuEmHASM
+ 041X3ExA4vUZmUr8i1aaXSJSuLBZ2Z6ZLTWLkXPAOqx/h9SemE5Ty5LpCrydVKKD+clk
+ 6/CkYGNovPLqpct936GNsaS3F2LeNFbQKkDJUNfma967JpGpegJaECkjtvhZqoNL5/QG
+ zm2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732797218; x=1733402018;
+ d=1e100.net; s=20230601; t=1732797682; x=1733402482;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fRrJ9LdAjweqvmZUTUmqPoHFXxLF6p+3lo2Ih48iAyA=;
- b=HiVFuqwbqXabfOfosHaC8D/QWxNbORB/9A7efRTk41XUD6UgsmpTF5SrFKgbM29FPi
- XzZQenWkFzc4C3kRLVYQdgMRqjRuGPxgcA8dD0blPrrIrfdEOme6xin+HHLHULecR7Bu
- YcQMu9d3LwC0qy8PyDMZXFvrCDx09X1qOTtgQOQbh58cYf0w4kV65WwiODKnDac9Ts7B
- +Y85pG0QjDyHfC8ynIbElYc39ZsNIPFltJMeScSrOhiRj8s0HyX5phm3cF+Bs0izntOi
- pQN2SQL3Ni2dreJAO+2MaV+SVmdwdAqWlJwDvEbMaPMKba5xPcP60cMMMMZwHWbKLNhv
- RVYQ==
+ bh=daIsPMXeBlgSp1iAlRHmw9xdiKKM/MHyAINTH5e3fcU=;
+ b=iGASTExMmIbNLK7KcaciKWgcYhKhldzneSrpT9M9kJPsV4k1k8cfZfQu7BE2Uu5zj2
+ bf71qDEPmYu3Dd2d39ePLciKCqMyciCSx/T6ggqnrkwP/1Z+s4pTI1Ut5gNggcWG8+PT
+ 91eEpOMcw/iwCtVQDbGrcpw/hH87O77HOJRrRaoI7JpXN6PmCKnnyyl7OZs6FSMqiji3
+ mXyShYwJZY9k0UDXCaLFyzxO1RmthfUC8YfVxio/QUWzdxzGMNdHucwMVr+Cb91zeEML
+ WR6bXydhu59a7gGnlicz7azc0Y4Iq1aiXBdmc3nFUNheQO/mqx70zpK+Yxleq92sLE5H
+ D0sg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4TvRIEtVY6F0kCc2hH52fwc7CHbhGuUzbXp4Ayz8RApUQ7sTTCjz2XT7AfqzFu2zYn3Pj5Gg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqOeNkaNol7xsggUuewWTHq8TUaMCUdX2qP9R49J/8zFoRNAWe
- g76U9fMMnw2IbmFttToCaN2DGfWJHtbKZclSejzaDhSOKWf2213u5u/hZLA3XpM=
-X-Gm-Gg: ASbGncvVQFcuZ6pD9aGPMSQWg1HaBaWgPP2LLS+v6wb3I4VliJc2nXKpG3s7oUNZBLc
- 0bolbfF1uTtkWUgmImHS6caocee+77EC9OSqR9at/Pd7I7rOvLOUuKwmgyxVNDq4UVC4wokXRC7
- Qk26l1yeSNQSqckYZCdp7sWhgDb1/rE4WN7Czs80F3ug6m6qMG6p3cXLEHIHF1HOsoNlMFQ002x
- TSxuVfm9N6LU3hdBmrSuKtvQgSQIR3xpOtkSD6ihXnsFOLAhlJbuRYJCZZGGOCIfEcvmvQqnpny
- DF3O60AQ8d7/h/+SB/GO7cQOV/ingivy
-X-Google-Smtp-Source: AGHT+IHjfBoauDl1HGCXpenlePbFMbJtbzNqQAuIfBxZCPTMi8lRGvqQ/CWGrm0rwynnXzW1I7MR/Q==
-X-Received: by 2002:a05:6402:2712:b0:5cf:ac4f:83c4 with SMTP id
- 4fb4d7f45d1cf-5d080bb5b3dmr6540495a12.12.1732797217840; 
- Thu, 28 Nov 2024 04:33:37 -0800 (PST)
+ AJvYcCX4MbUGQSZ98L0V+p3eh+dOjOgv26qHWjcuXdYcf81EfxJjzoVzFIYpfn24pMTOzi0BjWSG9Og=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhuSjO1tJ9vORCho2o1zWNsZRgQEGexg7u5wzmFyyPnxWSuL1z
+ y2npMBiwYE3EDcevKOcf8xEu6tc8/N9dW4CCXSmqnlbzcS//6WZ8gDR7z7Pe9dA=
+X-Gm-Gg: ASbGncsqJvmZvQRokXKgb5iC13D9bdZWnAtzhO+EeB/L8Juebz5uYuw1bw4yFmGD9xt
+ jPso8ImfDKuGzLoE+hHd1x02WoZR4s/lgkiGyew8uaxsAfyko2TkyUrLejRwuNqtfrligrIcLYQ
+ HO6ox7IgqX5hQas4Ip0za1ZBx1qsomV0PnXVrNxvWBE2+7qU+EpRfgZ2HXRzbx5TfODtoIj1riP
+ ss57ogRufjooJRqGGeCuq25Q1bfnItPlNwb0GIth4ppeFKPqeC5leDrHo22i0C6MdlioSTBVWnd
+ vnZDRLJK2Dzejx0NR/SxhhJG8lvjHhJV
+X-Google-Smtp-Source: AGHT+IFxfbO4X5LI2gpnPHPeExvZR1ADHRPgdc6YrO2Kbkwe00mv8HQARxSGxT94oDI0+oT8IFa3pw==
+X-Received: by 2002:a17:906:310b:b0:aa5:d7c:2acf with SMTP id
+ a640c23a62f3a-aa580ed0299mr410892266b.12.1732797682405; 
+ Thu, 28 Nov 2024 04:41:22 -0800 (PST)
 Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
  ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d097eb1fe8sm682394a12.74.2024.11.28.04.33.36
+ a640c23a62f3a-aa599953c69sm62582366b.187.2024.11.28.04.41.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 04:33:37 -0800 (PST)
-Message-ID: <482ea637-f8e2-4880-9125-19c7eba517a2@linaro.org>
-Date: Thu, 28 Nov 2024 13:33:36 +0100
+ Thu, 28 Nov 2024 04:41:21 -0800 (PST)
+Message-ID: <62e7b798-f9ff-46d2-ad7e-44c4a8e572b0@linaro.org>
+Date: Thu, 28 Nov 2024 13:41:21 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dm: core: ofnode: safely fallback in ofnode_lookup_fdt
+Subject: Re: [PATCH RFC 07/14] efi: stub: add known memory to U-Boot's EFI
+ memory map
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, Jonas Karlman
- <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20241113052050.1862420-1-caleb.connolly@linaro.org>
- <CAFLszThAmn_NU-PoYopjx17Bk6QxgbFaCWJjKdMAG5JzLJWdEg@mail.gmail.com>
- <d89d7d04-8ff9-460d-844f-c85129c5ba77@linaro.org>
- <CAFLszThmRJZHzecSH1A9zS7f3oiS+kCB=jBarHOZG7RGv3gL_A@mail.gmail.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
+ <20241124-b4-efistub-arm64-v1-7-3e33f0340071@linaro.org>
+ <CADg8p94ma+FcJH2dAx=PtNjSq77Y0bGH8V_k64z_7+ij8R=P3Q@mail.gmail.com>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszThmRJZHzecSH1A9zS7f3oiS+kCB=jBarHOZG7RGv3gL_A@mail.gmail.com>
+In-Reply-To: <CADg8p94ma+FcJH2dAx=PtNjSq77Y0bGH8V_k64z_7+ij8R=P3Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,111 +110,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sughosh,
 
+Thanks for the review.
 
-On 27/11/2024 18:51, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Wed, 27 Nov 2024 at 10:12, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On 28/11/2024 07:38, Sughosh Ganu wrote:
+> On Mon, 25 Nov 2024 at 01:58, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >>
->> Hi Simon,
+>> When running U-Boot as an EFI payload with CONFIG_EFI_STUB, the reserved
+>> regions from the previous stage EFI bootloader should be carried over
+>> since they may not fully align with the reserved-memory regions in
+>> devicetree.
 >>
->> On 27/11/2024 17:52, Simon Glass wrote:
->>> Hi Caleb,
->>>
->>> On Tue, 12 Nov 2024 at 22:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>
->>>> Under some conditions it's possible to hit the null condition here like
->>>> when running with OF_LIVE and using the ofnode API before
->>>> initr_of_live() is called. There is very little null
->>>> checking for this in the FDT framework, so returning null here can
->>>> result in weird null pointer conditions.
->>>>
->>>> Instead let's return the control FDT in the fallback case, this is
->>>> usually what the user was expecting.
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>  drivers/core/ofnode.c | 2 +-
->>>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>>
->>>> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
->>>> index 950895e72a99..7a7f25fc537c 100644
->>>> --- a/drivers/core/ofnode.c
->>>> +++ b/drivers/core/ofnode.c
->>>> @@ -152,9 +152,9 @@ void *ofnode_lookup_fdt(ofnode node)
->>>>                 uint i = OFTREE_TREE_ID(node.of_offset);
->>>>
->>>>                 if (i >= oftree_count) {
->>>>                         log_debug("Invalid tree ID %x\n", i);
->>>> -                       return NULL;
->>>> +                       return (void *)gd->fdt_blob;
->>>>                 }
->>>>
->>>>                 return oftree_list[i];
->>>>         } else {
->>>> --
->>>> 2.47.0
->>>>
->>>
->>> Eek I really don't like that, since it will silently return an
->>> unexpected value.
->> What's the unexpected value? The only caller for this is ofnode_to_fdt()
->> and the return value for that is never checked. It seems clear to me
->> that in practise NULL is the unexpected value here.
+>> Implement a helper to map these pages when the EFI subsystem starts up.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>  include/efi_stub.h          |  7 +++++++
+>>  lib/efi/efi_info.c          | 31 +++++++++++++++++++++++++++++++
+>>  lib/efi_loader/efi_memory.c |  5 +++++
+>>  3 files changed, 43 insertions(+)
+>>
+>> diff --git a/include/efi_stub.h b/include/efi_stub.h
+>> index ff3befd4830b..343c84435970 100644
+>> --- a/include/efi_stub.h
+>> +++ b/include/efi_stub.h
+>> @@ -56,5 +56,12 @@ int of_populate_from_efi(struct device_node *root);
+>>   * EFI payload with CONFIG_EFI_STUB enabled.
+>>   */
+>>  int dram_init_banksize_from_efi(void);
+>>
+>> +/**
+>> + * efi_add_known_memory_from_efi() - Add known memory pages from the memory map
+>> + * of the EFI bootloader that booted U-Boot. This is only applicable when running
+>> + * U-Boot as an EFI payload with CONFIG_EFI_STUB enabled.
+>> + */
+>> +void efi_add_known_memory_from_efi(void);
+>> +
+>>  #endif /* _EFI_STUB_H */
+>> diff --git a/lib/efi/efi_info.c b/lib/efi/efi_info.c
+>> index f9743a3e7fad..ef4e646b082b 100644
+>> --- a/lib/efi/efi_info.c
+>> +++ b/lib/efi/efi_info.c
+>> @@ -5,8 +5,9 @@
+>>   * Access to the EFI information table
+>>   */
+>>
+>>  #include <efi.h>
+>> +#include <efi_loader.h>
+>>  #include <efi_stub.h>
+>>  #include <errno.h>
+>>  #include <mapmem.h>
+>>  #include <asm/global_data.h>
+>> @@ -177,4 +178,34 @@ int dram_init_banksize_from_efi(void)
+>>         }
+>>
+>>         return 0;
+>>  }
+>> +
+>> +/* Called by U-Boot's EFI subsystem to add known memory. In our case
+>> + * we need to add some specific memory types from the original bootloaders
+>> + * EFI memory map
+>> + */
+>> +void efi_add_known_memory_from_efi(void)
+>> +{
+>> +       struct efi_mem_desc *desc, *end;
+>> +       struct efi_entry_memmap *map;
+>> +       int ret, size;
+>> +
+>> +       EFI_PRINT("Adding known memory from previous stage EFI bootloader\n");
+>> +
+>> +       ret = efi_info_get(EFIET_MEMORY_MAP, (void **)&map, &size);
+>> +       if (ret) {
+>> +               EFI_PRINT("%s: Missing memory map\n", __func__);
+>> +               return;
+>> +       }
+>> +       end = (struct efi_mem_desc *)((ulong)map + size);
+>> +
+>> +       for (desc = map->desc; desc < end; desc = efi_get_next_mem_desc(desc, map->desc_size)) {
+>> +               switch (desc->type) {
+>> +               case EFI_RESERVED_MEMORY_TYPE:
+>> +                       efi_add_memory_map_pg(desc->physical_start, desc->num_pages, desc->type, false);
+>> +                       break;
+>> +               default:
+>> +                       continue;
+>> +               }
+>> +       }
+>> +}
 > 
-> Firstly, it looks like ofnode_lookup_fdt() should be static
-> 
-> If a node offset cannot be found, that suggests that oftree_list[] is
-> empty, which suggests that oftree_reset() has not been called yet.
-> 
-> oftree_reset() is called after relocation. Before relocation, it just
-> assumes that the control FDT is being used.
-> 
-> I wonder if you are hitting this problem after relocation, in one of
-> the functions in init_sequence_r[] before initr_dm()?
+> If this is DRAM memory that is being added, this now needs to happen
+> through LMB to ensure that these reserved memory regions don't get
+> used by the LMB allocator. You can check if something can be added to
+> the lmb_reserve_common() function. These regions will get marked as
+> boot services data. If these are to be kept as reserved memory even in
+> the OS, the memory type of these regions can be updated by keeping
+> this function. But the point to consider is that this needs to be
+> updated in the LMB memory map also.
 
-aha! Now I remember, mach-snapdragon has it's own enable_caches() which
-looks at the DT to determine if we should do some additional work to
-carve out reserved memory regions which some platforms might otherwise
-speculate on triggering a crash.
+Right I see. Thanks.
 
-I think this is also specific to some non-upstream patches I have which
-use the ofnode API, since the current compatible check uses fdt_blob
-directly.
+I'm not sure if this function is really necessary, I added it while
+trying to debug some EFI crash but the cause was something else.
 
-Disabling OFNODE_MULTI_TREE works around the crash, which would be fine
-since we don't currently use it on Qualcomm (I think?).
+In theory the DT reserved-memory regions should match the reserved
+regions from the EFI (I'm fairly sure this is the case for the X1E
+laptops anyways), and I suppose there's no risk of mapping these as
+normal memory anyway since we populate the dram banks from the same EFI
+memory map.
 
-but it would be nice to solve this.
-
-What about if we called oftree_reset() immediately after initr_reloc?
+So probably I'll remove this function from the next revision.
 
 Kind regards,
 > 
-> In any case this does seem like a bug that we should fix.
+> -sughosh
 > 
+>> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+>> index d2f5d563f2a0..50b0010608e7 100644
+>> --- a/lib/efi_loader/efi_memory.c
+>> +++ b/lib/efi_loader/efi_memory.c
+>> @@ -7,8 +7,9 @@
 >>
->>> I think we should panic. Do you know what code path
->>> gets you here?
+>>  #define LOG_CATEGORY LOGC_EFI
 >>
->> Hmm, I don't exactly recall. Should really have made a note when I wrote
->> this patch :/
-> 
-> Yes, I know that feeling :-(
-> 
+>>  #include <efi_loader.h>da
+>> +#include <efi_stub.h>
+>>  #include <init.h>
+>>  #include <lmb.h>
+>>  #include <log.h>
+>>  #include <malloc.h>
+>> @@ -834,8 +835,12 @@ static void add_u_boot_and_runtime(void)
+>>  int efi_memory_init(void)
+>>  {
+>>         efi_add_known_memory();
 >>
->> Guess I'll drop this from my dev branch and come back when I figure this
->> out again.
-> 
-> Yes OK. A patch which panics would be fine for now, if you like.
-> 
-> 
->>>
->>> More work is needed in livetree to sort of the rough edges, sadly...
-> 
-> Regards,
-> Simon
+>> +#ifdef CONFIG_EFI_STUB
+>> +       efi_add_known_memory_from_efi();
+>> +#endif
+>> +
+>>         add_u_boot_and_runtime();
+>>
+>>  #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+>>         /* Request a 32bit 64MB bounce buffer region */
+>>
+>> --
+>> 2.47.0
+>>
 
 -- 
 // Caleb (they/them)
