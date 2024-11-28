@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE194D70DE3
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A5B9D70DE6
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:50:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA11289C67;
-	Thu, 28 Nov 2024 17:47:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9278789D27;
+	Thu, 28 Nov 2024 17:50:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h43tmrOt";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="r2aOU23h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC44489D08; Thu, 28 Nov 2024 17:47:48 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8962089782
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:47:46 +0100 (CET)
+ id AB10089D34; Thu, 28 Nov 2024 17:50:38 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 971EC89D08
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ASGlWuU1187847
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 28 Nov 2024 10:47:32 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732812452;
- bh=//xOWqpDW4WtfJHUAcZUiMmo6B5fTNt/EfFbXdkZo34=;
- h=Date:CC:Subject:To:References:From:In-Reply-To;
- b=h43tmrOt/6I3VdlzlFGNPdUK5c+x4QJu6hSVRm75PeSNEsPl4dK/dh6LNrcJnQlcm
- x2Nx03J4+P3am6xXeamzEZtDAAWPtH3dxR0mEKQFPxllkJDbVUDesekVUNovs3HC3d
- Gd3shpD1gamtbXdOXKoydKnKAwVPyGY2GWF8uT3E=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ASGlWqB017318
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 28 Nov 2024 10:47:32 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
- Nov 2024 10:47:31 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 28 Nov 2024 10:47:31 -0600
-Received: from [10.249.131.218] ([10.249.131.218])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ASGlNvJ075788;
- Thu, 28 Nov 2024 10:47:24 -0600
-Message-ID: <c80a0234-d9e2-4c41-b403-38e6346a4d1d@ti.com>
-Date: Thu, 28 Nov 2024 22:17:21 +0530
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732812634; x=1733417434; i=xypron.glpk@gmx.de;
+ bh=zEdzj+enp68DHm8b+5S9M8d1RC9M1L5o3zF5LgL2+mE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=r2aOU23hzfV4WbRv+ygXLZGPf3JeRfQYgdyMiwbuqVI45K6PqCxFCF+R2gALpZmT
+ zfiFhaTMX+YhZ+j/o2phE/Vur6pE0nWt42sXcC2goiJrECgo1LU4W8bIeTBL4Cds+
+ XCVzBLq9wZsiIYpAHz24wSrZhWoL2Fklt75N19QRpR6M6Yzvlb8ZTs19Mafyl38YW
+ bOFOGXBj+ZPP7FhDq2YfC2FluWc2eInpeym9LipChC8hNuRbtcpNmB2kXH6Yy22tl
+ h1MmnK5N1UO3mXZElDga+/+MW+ZE2EbWs4guxmn6afbv0iOx7G6VgpyCscJ7I6PSR
+ VN+s/ifzjRzfcxGuiw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MJmKX-1sxEtX1Lrd-00SFiW; Thu, 28
+ Nov 2024 17:50:34 +0100
+Message-ID: <f97773e8-e734-45b4-a5ac-074856dc6acf@gmx.de>
+Date: Thu, 28 Nov 2024 17:50:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH 0/2] AM62A DWC3: Add support for USB DFU boot in OTG mode
-To: Roger Quadros <rogerq@kernel.org>, <vigneshr@ti.com>, <bb@ti.com>,
- <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
- <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
- <jonas@kwiboo.se>, <j-humphreys@ti.com>, <nm@ti.com>,
- <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-References: <20241126120322.1760862-1-s-vadapalli@ti.com>
- <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
+Subject: Re: [PATCH v2 03/28] efi_loader: Drop extra brackets in
+ efi_mem_carve_out()
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241128154727.771871-1-sjg@chromium.org>
+ <20241128154727.771871-4-sjg@chromium.org>
 Content-Language: en-US
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128154727.771871-4-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:msRXfSBotQrUtxJ5BG35mxop1QgVTtd9OSCyFQhMtjmPrB9QMI2
+ h2D9xrxfCmLO1k62vyFjfA06r7EDt3UrCaRy80IxGMFHO73axNkEG7mbZmBNQWpEc44/C8v
+ a9s0hOx6GrU3sRWekSndOptI2Twc4+VUkm++KQUmfPWw8lbh/Qbetn5XynHWpVKM6FpMkQv
+ OJG2r4V3H4wJSR1lrt9Xw==
+UI-OutboundReport: notjunk:1;M01:P0:EkD8eodAruE=;uDJNZxNrUmvfB7wu1ciwyPdw8m4
+ Tsoo+bczrMLuw9aavq8SVkrv1PQRfOp27eKC+6TisnoptDDao2GRFBxnpYSrpqjlnduXHQEcN
+ ec89VPvDNSoPMRy8dJLkhl79rqJxhgWaJVWoxH8bRngkyfwOIekl7VQZYJdMEl9MN0E3r82Yw
+ Or+RGoWLoZcXToqAYy6dIfKI5KPPvbhDN/+UTn/bPyhgM/UQ/vBgr2u3BKOpf1d7U5UYCdvoo
+ pYrSJUE4QacMH8nlpXAGA62ZpSzDBxGBUVCj9CPV6f7dmgpSZ3jLsQUJhtI+8SpNf/OpgPDZk
+ NKnzKP8WYASP8donbLNg5B/BJ3DBLtwb30sdiXKCoY5pPNXnQcwZdoChfBpx4GX0gJuvRBFaG
+ OgvBuVRdMmO6y8Y4k0bvWc7Ua43dXjcP5D6vJPbrhJHu9CoswZGX9nRULh86K8gv8duBAkn0z
+ 6gWotKqP/S8QtVMeWmrJ5kfpd2NL0iwJq8s/J8dmdNVM+3M2NZlvBBDFZx+Dv32kg9ypyBATT
+ j6MuIPePOkatnbdB5jT7QK0wdO3nNHiKQl37pfhUPe7Sx3BpWLsA8WwJsP7IQIBjkMmwiSO9M
+ NmpRJis2mjetzp70cO3aWrW+dvnFSNnh3uL0AxgP2mCnlJQwQRJeh5BPlTMn2wHr7SnYoLrLs
+ eIIWJ/GVfqhVb71neWwf0ttq3NOhLGhuE+81TDwU7oOwA1exj2KsE3yajICSozBD9eqMZMBPi
+ rkeYt3rL25R8p33XX0CnaOlfdR8LjXEMVE8+ka+BSLdmgN09vl0MmGGO9WfLE3vn+6JUqH5M7
+ QV17Gqhc2VZDcxBpbkRPRKKI4cbjwzJP0PtBtQ4WRt8T/twuoiC3lfYHi4cevZh9sJY5TIx57
+ rtg0gQjQYlOUbuNpdT8yjylYxc4ijIxEZPY+jv/j8t2tB5HQuVSbfUbZiVW5zgIS6hcyq99Y1
+ s/AXgdO4TTm0TGXKAZW3wypigUwJ4iuBb4Aw+dNJ4kel4a+a4quJkXALMl2xN9wlYJud/giNw
+ 1oSWu9iZAnEpRJ0ExcW/DvhWFJoPGPQYznpg3hSlAfa7vUDL7RKzvp129n+Prwg4j37W7ZmIo
+ 5MSRUvqaw9WoeQwrsTMU2UfUAnUmDi
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,55 +97,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Roger,
+On 28.11.24 16:47, Simon Glass wrote:
+> Simplify a few expressions in this function.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>   lib/efi_loader/efi_memory.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index f1154f73e05..3b1c7528e92 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *=
+map,
+>   			     (carve_desc->num_pages << EFI_PAGE_SHIFT);
+>
+>   	/* check whether we're overlapping */
+> -	if ((carve_end <=3D map_start) || (carve_start >=3D map_end))
+> +	if (carve_end <=3D map_start || carve_start >=3D map_end)
 
-On 28-11-2024 18:15, Roger Quadros wrote:
-> 
-> 
-> On 26/11/2024 14:03, Siddharth Vadapalli wrote:
->> Hello,
->>
->> This series adds support for USB DFU boot on TI's AM62A SoC which has
->> two instances of DWC3 USB Controllers namely USB0 and USB1. The USB0
->> instance of the USB Controller supports USB DFU boot:
->> ROM => tiboot3.bin => tispl.bin => u-boot.img
->>
->> USB DFU Boot requires the USB Controller to be configured for Gadget
->> mode of operation. Since the USB0 instance of the DWC3 USB Controller
->> supports both Host and Gadget modes of operation via the Type-C interface
->> on the AM62A7-SK board, the device-tree specifies the "dr_mode" as "OTG".
->> However, there is currently no support for dynamically switching the "mode"
->> from Host to Gadget and vice-versa with the help of a state-machine.
->> The OTG mode is treated as a separate mode in itself rather than being
->> treated as an intermediate stage before assuming the Host/Gadget mode.
->> Due to this, USB DFU boot via the Type-C interface doesn't work as the
->> USB Controller hasn't been appropriately configured for Device/Gadget
->> mode of operation. One option is to change the device-tree to specify
->> "dr_mode" as "peripheral" and force the controller to assume the Device
->> role. This will imply that the U-Boot device-tree for AM62A diverges
->> from its Linux counterpart. Therefore, with the intent of keeping the
->> device-tree uniform across Linux and U-Boot, and at the same time, in
->> order to enable USB DFU boot in "OTG" mode with the DWC3 Controller,
->> the first patch in this series sets the "mode" on the basis of the
->> caller function, rather than using the "dr_mode" property in the
->> device-tree. There are only two callers of "dwc3_generic_probe()",
->> each of which clearly specify the expected mode of configuration.
->> This will enable both Host and Device mode of operation based on the
->> command executed by the user, thereby truly supporting "OTG"
->> functionality when the USB Controller supports it.
-> 
-> We don't really support OTG state machine. All you are supporting is
-> user initiated role change.
+As operator precedence is not always easy to remember, some people like
+Alex and some static code analysis tools prefer parentheses.
 
-I should have probably used the term "Dual Role" instead of "OTG". I
-meant to say that the controller can be used both as Host and Device
-based on the command executed by the user, if the controller's dr_mode
-is "otg". I am aware that we don't support the OTG state machine in
-U-Boot unlike Linux, which is why I have posted this series as a
-workaround to utilize both Host and Device modes in the interim.
+>   		return EFI_CARVE_NO_OVERLAP;
+>
+>   	/* We're overlapping with non-RAM, warn the caller if desired */
+> -	if (overlap_conventional && (map_desc->type !=3D EFI_CONVENTIONAL_MEMO=
+RY))
+> +	if (overlap_conventional && map_desc->type !=3D EFI_CONVENTIONAL_MEMOR=
+Y)
 
-[...]
+ditto
 
--- 
-Regards,
-Siddharth.
+We should get rid of this code as it duplicates what we already have in
+LMB and generate the UEFI memory map from from LMB.
+
+Best regards
+
+Heinrich
+
+>   		return EFI_CARVE_OVERLAPS_NONRAM;
+>
+>   	/* Sanitize carve_start and carve_end to lie within our bounds */
+
