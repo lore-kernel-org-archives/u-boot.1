@@ -4,57 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8399D6D25F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 03:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A918D6D25F
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 03:58:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C7BC89840;
-	Thu, 28 Nov 2024 04:48:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 4EA9B8950F;
+	Thu, 28 Nov 2024 04:58:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UgbLv+lj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mkqVi13C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9305D8983F; Thu, 28 Nov 2024 04:48:13 +0100 (CET)
-Received: from mail-m17237.xmail.ntesmail.com (mail-m17237.xmail.ntesmail.com
- [45.195.17.237])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B545893A4; Thu, 28 Nov 2024 04:58:41 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E14398956D
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:48:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id D364E89825
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:58:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 4109ad64;
- Thu, 28 Nov 2024 11:48:05 +0800 (GMT+08:00)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: u-boot@lists.denx.de
-Cc: Kever Yang <kever.yang@rock-chips.com>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] config: efi-x86_payload: Enable DEBUG_UART
-Date: Thu, 28 Nov 2024 11:47:58 +0800
-Message-Id: <20241128114737.2.I03b59e1d26d2a79a666adc8ef313077da8dce145@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
-References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4AS3wbFK072516;
+ Wed, 27 Nov 2024 21:58:37 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732766317;
+ bh=IzkU791AGfUeZ1LP1t+uiUJY7mMceqPA/Fp3RIXHUQo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=mkqVi13C2UVCjaDfD9M+6jEBsOpzXm3A6Vyzt4NJ2zskNXZGSIlpqr3NLKAkre7O9
+ gkMmsMc5vu0R++vmT1dblO3xl2g/lYKF83ACp4TyiO+sTbATHTFFoG6uLRE4UZoV37
+ CiFAZ4tm/Q3Pzvq0Dq/LWdi7rrePdFbkQUqknxQg=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4AS3wbZ1064819
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Nov 2024 21:58:37 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Nov 2024 21:58:36 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Nov 2024 21:58:36 -0600
+Received: from [172.24.23.130] (lt5cd2489kgj.dhcp.ti.com [172.24.23.130])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4AS3wWxQ048633;
+ Wed, 27 Nov 2024 21:58:33 -0600
+Message-ID: <4515c566-2c7c-441b-8e31-279b64427a73@ti.com>
+Date: Thu, 28 Nov 2024 09:28:31 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0hMGFZKS0JOSk9MTkIeHUpWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9370e2169303afkunm4109ad64
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mxg6Mjo6FjIoFSwxASoIFEow
- GBMaFFZVSlVKTEhJTE1OTUNNSEpKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSk5KNwY+
-DKIM-Signature: a=rsa-sha256;
- b=UgbLv+ljdAIvKv1ZzkL9AL72KzVk27b1+sNQFddcEMPO4YZu/AlIRSYFEwb3XcOl+Wp33hCnTOOoVChpTrcKwO6Jo/tRNdfi2V4kUZQFifG00Fg3RI+cAHD4fOfl3P5RJHXAJ3xPwnJ9iqDgpKH3cvYVYhVQR0wEsijdTokUWaE=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=8RG3dRia0TlrkmqtfF2KwPcX41uxALdDNbpoXAZzZZw=;
- h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: dts: k3-j784s4-main: Add PBIST_14 node
+To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-boot@lists.denx.de>
+References: <20241127145346.2609868-1-n-francis@ti.com>
+ <20241127145346.2609868-2-n-francis@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241127145346.2609868-2-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,39 +82,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_stub is useing DEBUG_UART interface by default, Enable it.
 
-Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
----
+On 11/27/2024 8:23 PM, Neha Malcom Francis wrote:
+> Add DT node for PBIST_14 that is responsible for triggering the PBIST
+> self-tests for the MAIN_R5_2_x cores.
+>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>   dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
+>
+> diff --git a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+> index d4ac1c9872a..21e2777cd9d 100644
+> --- a/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+> +++ b/dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi
+> @@ -2782,4 +2782,16 @@
+>   		power-domains = <&k3_pds 269 TI_SCI_PD_EXCLUSIVE>;
+>   		status = "disabled";
+>   	};
+> +
+> +	bist_main14: bist@33c0000 {
+> +		compatible = "ti,j784s4-bist";
+> +		reg-names = "cfg", "ctrl_mmr";
+> +		reg = <0x00 0x033c0000 0x00 0x400>,
+> +			  <0x00 0x0010c1a0 0x00 0x01c>;
+> +		clocks = <&k3_clks 237 7>;
 
- configs/efi-x86_payload32_defconfig | 1 +
- configs/efi-x86_payload64_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+Please go through kernel route for device tree update.
 
-diff --git a/configs/efi-x86_payload32_defconfig b/configs/efi-x86_payload32_defconfig
-index 071ddb8e36d..f0b9acc358d 100644
---- a/configs/efi-x86_payload32_defconfig
-+++ b/configs/efi-x86_payload32_defconfig
-@@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
- CONFIG_PRE_CON_BUF_ADDR=0x100000
- CONFIG_VENDOR_EFI=y
- CONFIG_TARGET_EFI_PAYLOAD=y
-+CONFIG_DEBUG_UART=y
- CONFIG_EFI=y
- CONFIG_EFI_STUB=y
- CONFIG_FIT=y
-diff --git a/configs/efi-x86_payload64_defconfig b/configs/efi-x86_payload64_defconfig
-index 71612d7fb19..b02a861e59c 100644
---- a/configs/efi-x86_payload64_defconfig
-+++ b/configs/efi-x86_payload64_defconfig
-@@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
- CONFIG_PRE_CON_BUF_ADDR=0x100000
- CONFIG_VENDOR_EFI=y
- CONFIG_TARGET_EFI_PAYLOAD=y
-+CONFIG_DEBUG_UART=y
- CONFIG_EFI=y
- CONFIG_EFI_STUB=y
- CONFIG_EFI_STUB_64BIT=y
--- 
-2.25.1
+Even this is getting applied, in next kernel-u-boot sync, we will be 
+losing this node
 
+
+> +		power-domains = <&k3_pds 237 TI_SCI_PD_EXCLUSIVE>;
+> +		bootph-pre-ram;
+> +		ti,bist-instance = <14>;
+> +		cores-under-test = <&main_r5fss2_core0>, <&main_r5fss2_core1>;
+> +	};
+>   };
