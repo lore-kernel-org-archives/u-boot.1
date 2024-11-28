@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB64FD70DEB
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A48DD70DED
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 19:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8472289D74;
-	Thu, 28 Nov 2024 20:13:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E9C7489D9C;
+	Thu, 28 Nov 2024 20:13:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JMWurwSq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kjYF1+Rh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CC1889D8A; Thu, 28 Nov 2024 20:13:55 +0100 (CET)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 7B7A78938D; Thu, 28 Nov 2024 20:13:56 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB0589D33
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:13:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3ADE789D74
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 20:13:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-71d4e043dd9so501137a34.1
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:13:52 -0800 (PST)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-71d4994dfbaso1134551a34.0
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:13:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732821231; x=1733426031; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732821232; x=1733426032; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DmrBFPpqz3a9b7Ie49II2QIxVH35uzk7Uwx/yEzQbvA=;
- b=JMWurwSqhfSp0Cf8oeiTgMvWEtPmWtBig3bFnOVPFq9CD2qJw7GER5UudXR9Vq3u+X
- ZZSX2UIiboWjEKl/xT0rpcmyHd5RPIwew9o2BjLaFLFGhdST8lyi8fc7iv+7rSPUa6R8
- Rfk1XuVsN0GmWfg1RUWltIGPBZB0lkXB1Z8tE=
+ bh=6Mw1t/I+/muCk46ImzpLc+2GXIP5Z6/o6wtnRIY2esI=;
+ b=kjYF1+RhDEQYQcio/m5Thb/D7kxbAYEekWTp/Yjyw398Hjt+rhRIT3eggd1VWA4n0G
+ +YN0bGuJ7De7FWAY+nbgbt4TpXvbxduqY3Gyah5Z/ibxOvKff+YRBhFBNQCHnCGkSEaO
+ fzh2JqjYLxUghT+QNYDJyIF6w/3EmqhmwYXjw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732821231; x=1733426031;
+ d=1e100.net; s=20230601; t=1732821232; x=1733426032;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DmrBFPpqz3a9b7Ie49II2QIxVH35uzk7Uwx/yEzQbvA=;
- b=BasUOMS9zfwyRZBHgnHQxKI3FDciAclSvrOL1OFVDJfWT2T9UMlURJXKWU9BRU4Kcs
- TvUoNxb9l0SRxx+7D9YK0rGWJxykFr3tGNy/9J6ayL28nUEKfvVGL/r/jmvzBP7SOVbj
- ZDz+sM7bttJjEuGnVIoGOJIKy1i0HjNh7JxVn1gEp8T8MUv0/RQttwu1rl1qxW3o3fyM
- ldYD/vbUZC87hcziKE/HAdU9pzZM2l0S11KtEDMQIcEOs15UY7jUb+ZsFb+FjoXbfWUb
- MclKkx5nEq5w7rfx1vt4XHG56EI6hHsMSN8l+vA1ExLf7acwsCCkYRChW9GwpnUNM8fx
- CrQw==
-X-Gm-Message-State: AOJu0YwGu5Uixc5FSVG84OaXlcsXZqpY5rfoe6Njy98m770U+Bl7q2zF
- 6cwYtH0dns4VBIbd2JQApU4Lwffn22B+oUWQ2lDWo7+gxQ4NAcGr+tWfLhuksiYRsHIh6+Hk/3E
+ bh=6Mw1t/I+/muCk46ImzpLc+2GXIP5Z6/o6wtnRIY2esI=;
+ b=KPd+b0km8Xg9ZKrMov7AS6Tuy6qP6sQmIzYsyh2U8L8/IlorQLbyZlW9+78lFF2P+l
+ MK9VnlAChZ5IIUEn37FaMtWiE3gflhkeO69RC90eAK9ox4e7CrhtOX4yTL2nNW2WQGNV
+ l5jQgNxjIRSvdPVhBU7ltkb64yizakeT93l6/WwSf4v6hBqQbeCwIp/7eDYAm5SCReao
+ lMqAMCTTyt+FBN6bOl/8QkYbxckCyTHV7NA6nwhCPlouriIO6hmXBsezjQMm/0Jj+SEI
+ VycIu6KkWC60bkRulll0ePuihHAAuFHGQqKmObfFGnnWANgqFlBP26TjjetDglBQPUqu
+ CjTg==
+X-Gm-Message-State: AOJu0YyRVuj8/o7K7qTG1y7Hguyy+RaL+oGODeu2KtbrYwbfEdA9OpAY
+ /bKArJ48KMN+l9Ibv7sSUR9d3WeBhG+BDTEWaYrcT1/VN36/07a66Bld2hirsy9lthl3T6JI5pw
  =
-X-Gm-Gg: ASbGncvLLyxZS4iveXEc5bVYGopvu8CJTrADzkke3vKv7t/egBpC8q3zTAiOHOJ84wx
- dI+MRv6SYQXH66YagGnpLV5tbYT0bqgihmCgoN2lluHesuMH8Fl3xR6yG+LuuQcCzJWJtoMd4j3
- S9Gjbuej5o8UmG0sIy03x95zZ9Y1Yz3kNYHWz6wILPvTN4P2Vx6atQuppPS9wRrSQpWQS/RPiCJ
- FgtIG5a5PTgR/2khZVufAPxV0LcPRvF1cp0czK3Ub0L2g==
-X-Google-Smtp-Source: AGHT+IFwAoSpZjSJYy8ehftvqItOu7rSg1KVH6KBgUeLx37TddSIKjoMIDSa+nIXMdoMTahw96eZYQ==
-X-Received: by 2002:a05:6830:6e9c:b0:717:d2f8:6bb8 with SMTP id
- 46e09a7af769-71d65cb2043mr7703652a34.12.1732821231093; 
- Thu, 28 Nov 2024 11:13:51 -0800 (PST)
+X-Gm-Gg: ASbGncsLQGUhwUh33dtmw8kgwt/cRXAzhNB5DPw/EgdE5Z4ic0t7pNeic7hh64yyllB
+ mnZOK31u5QPDhyODSrD1AiWUoapQ04S8wokcfA9otUNc+fXlwsDp/VD+7ujPjJq7uqp5xAcrW84
+ P8u6AylJrPcx38bGXqtkVtG3f/pqqkhsfQABzqWQoXk2/JH25IsxarH2+KovM/va3DWe4dUIe4j
+ S+lWoAayqepJIxIF+r0avIJ96vPCal+gy7L6MF7d0YI3g==
+X-Google-Smtp-Source: AGHT+IGaaZVh9Ic1MGtXqKq+bTNYdOzKNOZXiLk1/mhaiIFpIFjWBo7isq8phWDMiPOZftX/o5o4UQ==
+X-Received: by 2002:a05:6830:1bf2:b0:71d:4081:7bdc with SMTP id
+ 46e09a7af769-71d70c87fc4mr2506767a34.12.1732821232473; 
+ Thu, 28 Nov 2024 11:13:52 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71d725d873esm429521a34.54.2024.11.28.11.13.48
+ 46e09a7af769-71d725d873esm429521a34.54.2024.11.28.11.13.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 11:13:49 -0800 (PST)
+ Thu, 28 Nov 2024 11:13:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 26/28] efi_bootmgr: Avoid casts in try_load_from_uri_path()
-Date: Thu, 28 Nov 2024 12:12:42 -0700
-Message-Id: <20241128191244.900006-27-sjg@chromium.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 27/28] efi_loader: Don't try to add sandbox runtime code
+Date: Thu, 28 Nov 2024 12:12:43 -0700
+Message-Id: <20241128191244.900006-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241128191244.900006-1-sjg@chromium.org>
 References: <20241128191244.900006-1-sjg@chromium.org>
@@ -95,62 +93,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update this function to use map_sysmem() so that it can work correctly
-on sandbox
+This cannot work since the code is not present in the emulated memory.
+In any case, sandbox cannot make use of the runtime code.
+
+For now, just drop it from sandbox. We can always adjust things to copy
+it into memory, if needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_bootmgr.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ lib/efi_loader/efi_memory.c | 26 ++++++++++++++++----------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index b4ea6b817b6..98799aead84 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -14,6 +14,7 @@
- #include <efi.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <net.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-@@ -497,6 +498,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	 * If the file is PE-COFF image, load the downloaded file.
- 	 */
- 	uri_len = strlen(uridp->uri);
-+	source_buffer = map_sysmem(image_addr, image_size);
- 	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
- 	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
- 		ret = prepare_loaded_image(lo_label, image_addr, image_size,
-@@ -506,21 +508,19 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index a33c025fa20..796fa99f4fb 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -755,16 +755,22 @@ static void add_u_boot_and_runtime(void)
+ 	runtime_mask = SZ_64K - 1;
+ #endif
  
- 		source_buffer = NULL;
- 		source_size = 0;
--
--	/* TODO(sjg): This does not work on sandbox */
--	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-+	} else if (efi_check_pe(source_buffer, image_size, NULL) ==
-+			EFI_SUCCESS) {
- 		/*
- 		 * loaded_dp must exist until efi application returns,
- 		 * will be freed in return_to_efibootmgr event callback.
- 		 */
- 		loaded_dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--					    (uintptr_t)image_addr, image_size);
-+					    image_addr, image_size);
- 		ret = efi_install_multiple_protocol_interfaces(
- 			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
- 		if (ret != EFI_SUCCESS)
- 			goto err;
+-	/*
+-	 * Add Runtime Services. We mark surrounding boottime code as runtime as
+-	 * well to fulfill the runtime alignment constraints but avoid padding.
+-	 */
+-	runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
+-	runtime_end = (uintptr_t)__efi_runtime_stop;
+-	runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+-	runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+-	efi_add_memory_map_pg(runtime_start, runtime_pages,
+-			      EFI_RUNTIME_SERVICES_CODE, false);
++	if (!IS_ENABLED(CONFIG_SANDBOX)) {
++		/*
++		 * Add Runtime Services. We mark surrounding boottime code as
++		 * runtime as well to fulfill the runtime alignment constraints
++		 * but avoid padding.
++		 *
++		 * This is not enabled for sandbox, since we cannot map the
++		 * sandbox code into emulated SDRAM
++		 */
++		runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
++		runtime_end = (uintptr_t)__efi_runtime_stop;
++		runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
++		runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
++		efi_add_memory_map_pg(runtime_start, runtime_pages,
++				      EFI_RUNTIME_SERVICES_CODE, false);
++	}
+ }
  
--		source_buffer = (void *)image_addr;
- 		source_size = image_size;
- 	} else {
- 		log_err("Error: file type is not supported\n");
+ int efi_memory_init(void)
 -- 
 2.34.1
 
