@@ -4,94 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A6FFD69104
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 12:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78857D69104
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 12:45:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5661E89877;
-	Thu, 28 Nov 2024 13:41:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EAB508962C;
+	Thu, 28 Nov 2024 13:45:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LaiDu1U6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fbzQbSHO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28B7989CEC; Thu, 28 Nov 2024 13:41:25 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E4BF38932F; Thu, 28 Nov 2024 13:45:14 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE19D8986D
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 13:41:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4678B8962C
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 13:45:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa543c4db92so106504666b.0
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:41:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732797682; x=1733402482; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=daIsPMXeBlgSp1iAlRHmw9xdiKKM/MHyAINTH5e3fcU=;
- b=LaiDu1U6MLxBqnCTZZ5J2HhaQd+P7qN5wvbWGaFd067oriE62kiCUCKuC0Wl89UWCH
- s/NAPs6TC+uHfRhq5UiAp0dBfQ6uBUmLu2kBxapv9lNgf5dG1X8vNRx/n4EmTOhyUgEr
- vkFPs/axqeGkp6HJ2ZZ//XNavSMIPkkajPJwHy3LsGQaIZdgcN6kG1HaHu9XxuEmHASM
- 041X3ExA4vUZmUr8i1aaXSJSuLBZ2Z6ZLTWLkXPAOqx/h9SemE5Ty5LpCrydVKKD+clk
- 6/CkYGNovPLqpct936GNsaS3F2LeNFbQKkDJUNfma967JpGpegJaECkjtvhZqoNL5/QG
- zm2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732797682; x=1733402482;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=daIsPMXeBlgSp1iAlRHmw9xdiKKM/MHyAINTH5e3fcU=;
- b=iGASTExMmIbNLK7KcaciKWgcYhKhldzneSrpT9M9kJPsV4k1k8cfZfQu7BE2Uu5zj2
- bf71qDEPmYu3Dd2d39ePLciKCqMyciCSx/T6ggqnrkwP/1Z+s4pTI1Ut5gNggcWG8+PT
- 91eEpOMcw/iwCtVQDbGrcpw/hH87O77HOJRrRaoI7JpXN6PmCKnnyyl7OZs6FSMqiji3
- mXyShYwJZY9k0UDXCaLFyzxO1RmthfUC8YfVxio/QUWzdxzGMNdHucwMVr+Cb91zeEML
- WR6bXydhu59a7gGnlicz7azc0Y4Iq1aiXBdmc3nFUNheQO/mqx70zpK+Yxleq92sLE5H
- D0sg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4MbUGQSZ98L0V+p3eh+dOjOgv26qHWjcuXdYcf81EfxJjzoVzFIYpfn24pMTOzi0BjWSG9Og=@lists.denx.de
-X-Gm-Message-State: AOJu0YyhuSjO1tJ9vORCho2o1zWNsZRgQEGexg7u5wzmFyyPnxWSuL1z
- y2npMBiwYE3EDcevKOcf8xEu6tc8/N9dW4CCXSmqnlbzcS//6WZ8gDR7z7Pe9dA=
-X-Gm-Gg: ASbGncsqJvmZvQRokXKgb5iC13D9bdZWnAtzhO+EeB/L8Juebz5uYuw1bw4yFmGD9xt
- jPso8ImfDKuGzLoE+hHd1x02WoZR4s/lgkiGyew8uaxsAfyko2TkyUrLejRwuNqtfrligrIcLYQ
- HO6ox7IgqX5hQas4Ip0za1ZBx1qsomV0PnXVrNxvWBE2+7qU+EpRfgZ2HXRzbx5TfODtoIj1riP
- ss57ogRufjooJRqGGeCuq25Q1bfnItPlNwb0GIth4ppeFKPqeC5leDrHo22i0C6MdlioSTBVWnd
- vnZDRLJK2Dzejx0NR/SxhhJG8lvjHhJV
-X-Google-Smtp-Source: AGHT+IFxfbO4X5LI2gpnPHPeExvZR1ADHRPgdc6YrO2Kbkwe00mv8HQARxSGxT94oDI0+oT8IFa3pw==
-X-Received: by 2002:a17:906:310b:b0:aa5:d7c:2acf with SMTP id
- a640c23a62f3a-aa580ed0299mr410892266b.12.1732797682405; 
- Thu, 28 Nov 2024 04:41:22 -0800 (PST)
-Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
- ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa599953c69sm62582366b.187.2024.11.28.04.41.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 04:41:21 -0800 (PST)
-Message-ID: <62e7b798-f9ff-46d2-ad7e-44c4a8e572b0@linaro.org>
-Date: Thu, 28 Nov 2024 13:41:21 +0100
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 83E74A41394;
+ Thu, 28 Nov 2024 12:43:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33152C4CED3;
+ Thu, 28 Nov 2024 12:45:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1732797911;
+ bh=GAjqKmTF6CS9HJZ+JsuFHl0dAA3u959B7FoOO0UVmTE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=fbzQbSHOeJtUVEOYtHkNYIuScxfZwlhw+hKAro11hqENcWvevrbe3Y10As4KvhvSn
+ Nd70H5ymLbn+nGdVSeig7qFEVDJmq4G4t8HSW3kQfI6i4J0pDyA+Y1hknM1YMkLHe2
+ fYjy5WkSKGVpaYqtcj8AGxOU6feoRMnth6keLDzXnUMBvF+qQh2lHBC5buLhown7UW
+ TrRiToTNOLH4TROnNjCHcKFHD51OfHz/pEfOyhdRcZUZBuj3LPpTBftrYSC/mExxpw
+ 36+GL83/lLvsTpH94vooaRmsr+18qEJDOVHEJo1d9RXanpp55dF5MUwb60WiA6b490
+ Oa7kd9ABXirdg==
+Message-ID: <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
+Date: Thu, 28 Nov 2024 14:45:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 07/14] efi: stub: add known memory to U-Boot's EFI
- memory map
+Subject: Re: [PATCH 0/2] AM62A DWC3: Add support for USB DFU boot in OTG mode
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
+ trini@konsulko.com, marex@denx.de, hnagalla@ti.com,
+ mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, jan.kiszka@siemens.com, jonas@kwiboo.se,
+ j-humphreys@ti.com, nm@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org
+Cc: u-boot@lists.denx.de, srk@ti.com
+References: <20241126120322.1760862-1-s-vadapalli@ti.com>
 Content-Language: en-US
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <agust@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-qcom@groups.io
-References: <20241124-b4-efistub-arm64-v1-0-3e33f0340071@linaro.org>
- <20241124-b4-efistub-arm64-v1-7-3e33f0340071@linaro.org>
- <CADg8p94ma+FcJH2dAx=PtNjSq77Y0bGH8V_k64z_7+ij8R=P3Q@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CADg8p94ma+FcJH2dAx=PtNjSq77Y0bGH8V_k64z_7+ij8R=P3Q@mail.gmail.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20241126120322.1760862-1-s-vadapalli@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -110,152 +73,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
 
-Thanks for the review.
 
-On 28/11/2024 07:38, Sughosh Ganu wrote:
-> On Mon, 25 Nov 2024 at 01:58, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> When running U-Boot as an EFI payload with CONFIG_EFI_STUB, the reserved
->> regions from the previous stage EFI bootloader should be carried over
->> since they may not fully align with the reserved-memory regions in
->> devicetree.
->>
->> Implement a helper to map these pages when the EFI subsystem starts up.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  include/efi_stub.h          |  7 +++++++
->>  lib/efi/efi_info.c          | 31 +++++++++++++++++++++++++++++++
->>  lib/efi_loader/efi_memory.c |  5 +++++
->>  3 files changed, 43 insertions(+)
->>
->> diff --git a/include/efi_stub.h b/include/efi_stub.h
->> index ff3befd4830b..343c84435970 100644
->> --- a/include/efi_stub.h
->> +++ b/include/efi_stub.h
->> @@ -56,5 +56,12 @@ int of_populate_from_efi(struct device_node *root);
->>   * EFI payload with CONFIG_EFI_STUB enabled.
->>   */
->>  int dram_init_banksize_from_efi(void);
->>
->> +/**
->> + * efi_add_known_memory_from_efi() - Add known memory pages from the memory map
->> + * of the EFI bootloader that booted U-Boot. This is only applicable when running
->> + * U-Boot as an EFI payload with CONFIG_EFI_STUB enabled.
->> + */
->> +void efi_add_known_memory_from_efi(void);
->> +
->>  #endif /* _EFI_STUB_H */
->> diff --git a/lib/efi/efi_info.c b/lib/efi/efi_info.c
->> index f9743a3e7fad..ef4e646b082b 100644
->> --- a/lib/efi/efi_info.c
->> +++ b/lib/efi/efi_info.c
->> @@ -5,8 +5,9 @@
->>   * Access to the EFI information table
->>   */
->>
->>  #include <efi.h>
->> +#include <efi_loader.h>
->>  #include <efi_stub.h>
->>  #include <errno.h>
->>  #include <mapmem.h>
->>  #include <asm/global_data.h>
->> @@ -177,4 +178,34 @@ int dram_init_banksize_from_efi(void)
->>         }
->>
->>         return 0;
->>  }
->> +
->> +/* Called by U-Boot's EFI subsystem to add known memory. In our case
->> + * we need to add some specific memory types from the original bootloaders
->> + * EFI memory map
->> + */
->> +void efi_add_known_memory_from_efi(void)
->> +{
->> +       struct efi_mem_desc *desc, *end;
->> +       struct efi_entry_memmap *map;
->> +       int ret, size;
->> +
->> +       EFI_PRINT("Adding known memory from previous stage EFI bootloader\n");
->> +
->> +       ret = efi_info_get(EFIET_MEMORY_MAP, (void **)&map, &size);
->> +       if (ret) {
->> +               EFI_PRINT("%s: Missing memory map\n", __func__);
->> +               return;
->> +       }
->> +       end = (struct efi_mem_desc *)((ulong)map + size);
->> +
->> +       for (desc = map->desc; desc < end; desc = efi_get_next_mem_desc(desc, map->desc_size)) {
->> +               switch (desc->type) {
->> +               case EFI_RESERVED_MEMORY_TYPE:
->> +                       efi_add_memory_map_pg(desc->physical_start, desc->num_pages, desc->type, false);
->> +                       break;
->> +               default:
->> +                       continue;
->> +               }
->> +       }
->> +}
+On 26/11/2024 14:03, Siddharth Vadapalli wrote:
+> Hello,
 > 
-> If this is DRAM memory that is being added, this now needs to happen
-> through LMB to ensure that these reserved memory regions don't get
-> used by the LMB allocator. You can check if something can be added to
-> the lmb_reserve_common() function. These regions will get marked as
-> boot services data. If these are to be kept as reserved memory even in
-> the OS, the memory type of these regions can be updated by keeping
-> this function. But the point to consider is that this needs to be
-> updated in the LMB memory map also.
-
-Right I see. Thanks.
-
-I'm not sure if this function is really necessary, I added it while
-trying to debug some EFI crash but the cause was something else.
-
-In theory the DT reserved-memory regions should match the reserved
-regions from the EFI (I'm fairly sure this is the case for the X1E
-laptops anyways), and I suppose there's no risk of mapping these as
-normal memory anyway since we populate the dram banks from the same EFI
-memory map.
-
-So probably I'll remove this function from the next revision.
-
-Kind regards,
+> This series adds support for USB DFU boot on TI's AM62A SoC which has
+> two instances of DWC3 USB Controllers namely USB0 and USB1. The USB0
+> instance of the USB Controller supports USB DFU boot:
+> ROM => tiboot3.bin => tispl.bin => u-boot.img
 > 
-> -sughosh
+> USB DFU Boot requires the USB Controller to be configured for Gadget
+> mode of operation. Since the USB0 instance of the DWC3 USB Controller
+> supports both Host and Gadget modes of operation via the Type-C interface
+> on the AM62A7-SK board, the device-tree specifies the "dr_mode" as "OTG".
+> However, there is currently no support for dynamically switching the "mode"
+> from Host to Gadget and vice-versa with the help of a state-machine.
+> The OTG mode is treated as a separate mode in itself rather than being
+> treated as an intermediate stage before assuming the Host/Gadget mode.
+> Due to this, USB DFU boot via the Type-C interface doesn't work as the
+> USB Controller hasn't been appropriately configured for Device/Gadget
+> mode of operation. One option is to change the device-tree to specify
+> "dr_mode" as "peripheral" and force the controller to assume the Device
+> role. This will imply that the U-Boot device-tree for AM62A diverges
+> from its Linux counterpart. Therefore, with the intent of keeping the
+> device-tree uniform across Linux and U-Boot, and at the same time, in
+> order to enable USB DFU boot in "OTG" mode with the DWC3 Controller,
+> the first patch in this series sets the "mode" on the basis of the
+> caller function, rather than using the "dr_mode" property in the
+> device-tree. There are only two callers of "dwc3_generic_probe()",
+> each of which clearly specify the expected mode of configuration.
+> This will enable both Host and Device mode of operation based on the
+> command executed by the user, thereby truly supporting "OTG"
+> functionality when the USB Controller supports it.
+
+We don't really support OTG state machine. All you are supporting is
+user initiated role change.
+
 > 
->> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
->> index d2f5d563f2a0..50b0010608e7 100644
->> --- a/lib/efi_loader/efi_memory.c
->> +++ b/lib/efi_loader/efi_memory.c
->> @@ -7,8 +7,9 @@
->>
->>  #define LOG_CATEGORY LOGC_EFI
->>
->>  #include <efi_loader.h>da
->> +#include <efi_stub.h>
->>  #include <init.h>
->>  #include <lmb.h>
->>  #include <log.h>
->>  #include <malloc.h>
->> @@ -834,8 +835,12 @@ static void add_u_boot_and_runtime(void)
->>  int efi_memory_init(void)
->>  {
->>         efi_add_known_memory();
->>
->> +#ifdef CONFIG_EFI_STUB
->> +       efi_add_known_memory_from_efi();
->> +#endif
->> +
->>         add_u_boot_and_runtime();
->>
->>  #ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
->>         /* Request a 32bit 64MB bounce buffer region */
->>
->> --
->> 2.47.0
->>
+> The second patch in this series adds USB DFU environment for AM62A,
+> enabling USB DFU Boot and USB DFU flash on AM62A.
+> 
+> In addition to the patches in this series, the following device-tree
+> changes will be required to test USB DFU on AM62A (bootph-all property
+> to be added to ensure that USB Controller is present at all stages
+> for DFU Boot):
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/53ba02cb0ff4a09c47e920d08247065f
+> The above device-tree changes will be made to the Linux device-tree,
+> which shall ensure that the same shall be a part of U-Boot device-tree
+> eventually.
+> 
+> The USB DFU config fragments for AM62x have been used for enabling
+> USB DFU boot on AM62a as follows:
+> R5  => am62ax_evm_r5_defconfig + am62x_r5_usbdfu.config
+> A53 => am62ax_evm_a53_defconfig + am62x_a53_usbdfu.config
+> 
+> Logs validating USB DFU boot with this series:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/daa71da1b0e478a51afea42605fb2d2c
+> 
+> Series is based on commit
+> 3073246d1be Prepare v2025.01-rc3
+> of the master branch of U-Boot.
+> 
+> Regards,
+> Siddharth.
+> 
+> Siddharth Vadapalli (2):
+>   usb: dwc3-generic: set "mode" based on caller of dwc3_generic_probe()
+>   board: ti: am62ax: env: include environment for DFU
+> 
+>  board/ti/am62ax/am62ax.env      | 1 +
+>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++----
+>  2 files changed, 6 insertions(+), 4 deletions(-)
+> 
 
 -- 
-// Caleb (they/them)
+cheers,
+-roger
 
