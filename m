@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78857D69104
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 12:45:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920BED69108
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 13:10:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAB508962C;
-	Thu, 28 Nov 2024 13:45:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02DE1893D0;
+	Thu, 28 Nov 2024 14:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fbzQbSHO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="SOCpZk3p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4BF38932F; Thu, 28 Nov 2024 13:45:14 +0100 (CET)
+ id C853289CF4; Thu, 28 Nov 2024 14:10:36 +0100 (CET)
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4678B8962C
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 13:45:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85BDB893A3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 14:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 83E74A41394;
- Thu, 28 Nov 2024 12:43:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 33152C4CED3;
- Thu, 28 Nov 2024 12:45:06 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id E384AA43BA2;
+ Thu, 28 Nov 2024 13:08:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADBE3C4CECE;
+ Thu, 28 Nov 2024 13:10:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732797911;
- bh=GAjqKmTF6CS9HJZ+JsuFHl0dAA3u959B7FoOO0UVmTE=;
+ s=k20201202; t=1732799433;
+ bh=ApJuxzjfZ9XoMjAu2TKrd2QetarJcu01EaEhnEJxK5E=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=fbzQbSHOeJtUVEOYtHkNYIuScxfZwlhw+hKAro11hqENcWvevrbe3Y10As4KvhvSn
- Nd70H5ymLbn+nGdVSeig7qFEVDJmq4G4t8HSW3kQfI6i4J0pDyA+Y1hknM1YMkLHe2
- fYjy5WkSKGVpaYqtcj8AGxOU6feoRMnth6keLDzXnUMBvF+qQh2lHBC5buLhown7UW
- TrRiToTNOLH4TROnNjCHcKFHD51OfHz/pEfOyhdRcZUZBuj3LPpTBftrYSC/mExxpw
- 36+GL83/lLvsTpH94vooaRmsr+18qEJDOVHEJo1d9RXanpp55dF5MUwb60WiA6b490
- Oa7kd9ABXirdg==
-Message-ID: <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
-Date: Thu, 28 Nov 2024 14:45:04 +0200
+ b=SOCpZk3pUn3hUIoFC40insIxaxrbSjqn5ZndcE7kg0AqUV1fL0/DS8Jf4ntcyKNrH
+ adqSCKXY6B76MSmMp77hQDql8nBAqaAh16d7FNtylw4/mdlclSlZsRDRp4O4jsmkyA
+ dc51F564ohcNF3l5deDsySXKTU/G1BUYrMYRv8CH1Ve6RQykD1h4q073xCqh9SaZpk
+ PdDlRIussckWFdLskYqLOh1+yJEb+xbdmG+e9BPK/xGQ9fryhkjTcw1Qf31MYLW89I
+ 4sDhra4OJQ6GuWPpbWAJHMqsUXvF9bLS4oAt+y6AHCaUCQzkATPKOM03gdUBXZxcz0
+ udsMmjLDX6Arg==
+Message-ID: <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
+Date: Thu, 28 Nov 2024 15:10:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] AM62A DWC3: Add support for USB DFU boot in OTG mode
+Subject: Re: [PATCH 1/2] usb: dwc3-generic: set "mode" based on caller of
+ dwc3_generic_probe()
 To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  trini@konsulko.com, marex@denx.de, hnagalla@ti.com,
  mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
@@ -52,9 +53,10 @@ To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  j-humphreys@ti.com, nm@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org
 Cc: u-boot@lists.denx.de, srk@ti.com
 References: <20241126120322.1760862-1-s-vadapalli@ti.com>
+ <20241126120322.1760862-2-s-vadapalli@ti.com>
 Content-Language: en-US
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20241126120322.1760862-1-s-vadapalli@ti.com>
+In-Reply-To: <20241126120322.1760862-2-s-vadapalli@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,76 +78,79 @@ X-Virus-Status: Clean
 
 
 On 26/11/2024 14:03, Siddharth Vadapalli wrote:
-> Hello,
+> There are only two callers of "dwc3_generic_probe()", namely:
+> 1. dwc3_generic_peripheral_probe()
+> 2. dwc3_generic_host_probe()
+> Currently, the "mode" is set based on the device-tree node of the
+> platform device. Also, the DWC3 core doesn't support updating the "mode"
+> dynamically at runtime if it is set to "OTG", i.e. "OTG" is treated as a
+> separate mode in itself, rather than being treated as a mode which should
+> eventually lead to "host"/"peripheral".
 > 
-> This series adds support for USB DFU boot on TI's AM62A SoC which has
-> two instances of DWC3 USB Controllers namely USB0 and USB1. The USB0
-> instance of the USB Controller supports USB DFU boot:
-> ROM => tiboot3.bin => tispl.bin => u-boot.img
+> Given that the callers of "dwc3_generic_probe()" clarify the expected
+> "mode" of the USB Controller, use that "mode" instead of the one
+> specified in the device-tree. This shall allow the USB Controller to
+> function both as a "Host" and as a "Peripheral" when the "mode" is "otg"
+> in the device-tree, based on the caller of "dwc3_generic_probe()".
 > 
-> USB DFU Boot requires the USB Controller to be configured for Gadget
-> mode of operation. Since the USB0 instance of the DWC3 USB Controller
-> supports both Host and Gadget modes of operation via the Type-C interface
-> on the AM62A7-SK board, the device-tree specifies the "dr_mode" as "OTG".
-> However, there is currently no support for dynamically switching the "mode"
-> from Host to Gadget and vice-versa with the help of a state-machine.
-> The OTG mode is treated as a separate mode in itself rather than being
-> treated as an intermediate stage before assuming the Host/Gadget mode.
-> Due to this, USB DFU boot via the Type-C interface doesn't work as the
-> USB Controller hasn't been appropriately configured for Device/Gadget
-> mode of operation. One option is to change the device-tree to specify
-> "dr_mode" as "peripheral" and force the controller to assume the Device
-> role. This will imply that the U-Boot device-tree for AM62A diverges
-> from its Linux counterpart. Therefore, with the intent of keeping the
-> device-tree uniform across Linux and U-Boot, and at the same time, in
-> order to enable USB DFU boot in "OTG" mode with the DWC3 Controller,
-> the first patch in this series sets the "mode" on the basis of the
-> caller function, rather than using the "dr_mode" property in the
-> device-tree. There are only two callers of "dwc3_generic_probe()",
-> each of which clearly specify the expected mode of configuration.
-> This will enable both Host and Device mode of operation based on the
-> command executed by the user, thereby truly supporting "OTG"
-> functionality when the USB Controller supports it.
-
-We don't really support OTG state machine. All you are supporting is
-user initiated role change.
-
-> 
-> The second patch in this series adds USB DFU environment for AM62A,
-> enabling USB DFU Boot and USB DFU flash on AM62A.
-> 
-> In addition to the patches in this series, the following device-tree
-> changes will be required to test USB DFU on AM62A (bootph-all property
-> to be added to ensure that USB Controller is present at all stages
-> for DFU Boot):
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/53ba02cb0ff4a09c47e920d08247065f
-> The above device-tree changes will be made to the Linux device-tree,
-> which shall ensure that the same shall be a part of U-Boot device-tree
-> eventually.
-> 
-> The USB DFU config fragments for AM62x have been used for enabling
-> USB DFU boot on AM62a as follows:
-> R5  => am62ax_evm_r5_defconfig + am62x_r5_usbdfu.config
-> A53 => am62ax_evm_a53_defconfig + am62x_a53_usbdfu.config
-> 
-> Logs validating USB DFU boot with this series:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/daa71da1b0e478a51afea42605fb2d2c
-> 
-> Series is based on commit
-> 3073246d1be Prepare v2025.01-rc3
-> of the master branch of U-Boot.
-> 
-> Regards,
-> Siddharth.
-> 
-> Siddharth Vadapalli (2):
->   usb: dwc3-generic: set "mode" based on caller of dwc3_generic_probe()
->   board: ti: am62ax: env: include environment for DFU
-> 
->  board/ti/am62ax/am62ax.env      | 1 +
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
 >  drivers/usb/dwc3/dwc3-generic.c | 9 +++++----
->  2 files changed, 6 insertions(+), 4 deletions(-)
+
+TI AM62a is not even using this driver so how did you test this?
+Did I miss a DT patch?
+
+>  1 file changed, 5 insertions(+), 4 deletions(-)
 > 
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index 2ab41cbae45..55e62b35c61 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -51,7 +51,8 @@ struct dwc3_generic_host_priv {
+>  };
+>  
+>  static int dwc3_generic_probe(struct udevice *dev,
+> -			      struct dwc3_generic_priv *priv)
+> +			      struct dwc3_generic_priv *priv,
+> +			      enum usb_dr_mode mode)
+>  {
+>  	int rc;
+>  	struct dwc3_generic_plat *plat = dev_get_plat(dev);
+> @@ -62,7 +63,7 @@ static int dwc3_generic_probe(struct udevice *dev,
+>  
+>  	dwc3->dev = dev;
+>  	dwc3->maximum_speed = plat->maximum_speed;
+> -	dwc3->dr_mode = plat->dr_mode;
+> +	dwc3->dr_mode = mode;
+
+if platform supported mode was "host" only or "peripheral" only
+then you shouldn't we prevent from using the other role?
+
+In u-boot shell, if user starts Host driver first and then starts peripheral driver
+how does it work?
+Did you test this case?
+
+>  #if CONFIG_IS_ENABLED(OF_CONTROL)
+>  	dwc3_of_parse(dwc3);
+>  
+> @@ -197,7 +198,7 @@ static int dwc3_generic_peripheral_probe(struct udevice *dev)
+>  {
+>  	struct dwc3_generic_priv *priv = dev_get_priv(dev);
+>  
+> -	return dwc3_generic_probe(dev, priv);
+> +	return dwc3_generic_probe(dev, priv, USB_DR_MODE_PERIPHERAL);
+>  }
+>  
+>  static int dwc3_generic_peripheral_remove(struct udevice *dev)
+> @@ -241,7 +242,7 @@ static int dwc3_generic_host_probe(struct udevice *dev)
+>  	struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
+>  	int rc;
+>  
+> -	rc = dwc3_generic_probe(dev, &priv->gen_priv);
+> +	rc = dwc3_generic_probe(dev, &priv->gen_priv, USB_DR_MODE_HOST);
+>  	if (rc)
+>  		return rc;
+>  
 
 -- 
 cheers,
