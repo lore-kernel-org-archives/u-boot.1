@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A569D70DE6
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ABBD70DE6
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1E71894F2;
-	Thu, 28 Nov 2024 17:26:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD273894F2;
+	Thu, 28 Nov 2024 17:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="j1Ux5SCR";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="N4chutrj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B719E89430; Thu, 28 Nov 2024 17:26:19 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 390D0897F3; Thu, 28 Nov 2024 17:34:10 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B095789430
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:26:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1525989430
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:34:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732811173; x=1733415973; i=xypron.glpk@gmx.de;
- bh=VZ/p61zkJQDN5/pU3W3AoUG6ZGoptE7zOQM5fWJVB2c=;
+ s=s31663417; t=1732811642; x=1733416442; i=xypron.glpk@gmx.de;
+ bh=GvxmozrGp/VSEsbqXKk8kF8vRulUO434q7wv5YLe3aA=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=j1Ux5SCRdpQFbhthgBSXrPgPYIRT2lSe+VOnrsmZSMSIHF2ULqO3MpOG0VENzUO5
- O23xGQX5dpoVQAf+LwcIGH2C4ihJK71cAUw1lmrEf8gbVRDb26tWe+Z4jZt3jvTTL
- SzvXie4GrePQRzkq/X2jajRB+zMKNcVUNMmg6nvvxofA9v+9UG+r2F1GiEeBTbN0i
- niRsvtgw9ADRcOnHmGy1jAiCC0COGs4tkZ9EMtdGkRaBF60dq78JpDieaPp9RfyOq
- GRiYShQb1COhk13hhDcS4UNAUT2MTi7EBPO97eMMbVcpiVHng/aaxCS7ni556MPLC
- X6LM/d0jdhrd2udcfw==
+ b=N4chutrjCWZAl73cFbI32PA+wuXEvl/whU8LWlWR1BEl0blp3Ubs5DMuqF0r/egQ
+ Q3Ibu7j7AfgVhWt5OUzsGpybPMl9HiznD3YR6icLr2VLpW7in1K7DJcCdCn5Qsuo7
+ Ka6ndRoaSUsMOCQQ9eSUoDUqcXiUmNWBfU9so/ntMVvhmkAOB7bS3rnrznsAg19Wc
+ HZwouWaePXGWVf2RByY4/D+AD920ENOx6QtPj6ndRbpHjH/Dl4QktDBCAd7MAQoOq
+ kDoCzTjs52uyQTorrZmMYzGvmuSGuSKBNjAciZVEpTJ7pA4aCQXlW/YkI8DOaYvVP
+ 5j+BiJXXOHu+HDNtyg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MuDXp-1tXOiO0RYb-00tFpJ; Thu, 28
- Nov 2024 17:26:13 +0100
-Message-ID: <914a746a-bf2d-4415-85b0-2f33d365c956@gmx.de>
-Date: Thu, 28 Nov 2024 17:26:12 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MOiDX-1t3GmD08cB-00Or2p; Thu, 28
+ Nov 2024 17:34:02 +0100
+Message-ID: <60b25206-8f4d-4955-991e-47e851c1aed2@gmx.de>
+Date: Thu, 28 Nov 2024 17:34:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/28] efi_loader: Show the resulting memory address
- from an alloc
+Subject: Re: [PATCH v2 04/28] efi_loader: Add comments where incorrect
+ addresses are used
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-6-sjg@chromium.org>
+ <20241128154727.771871-5-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-6-sjg@chromium.org>
+In-Reply-To: <20241128154727.771871-5-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LYjFVpNlj3tqLypg9mhqsrPQ3bwlW0VHXgUAoUPbYck6eYjA5DG
- WiILYXLkdt7xuigxizq4jiZgjXnviPmWoBrw7lsuN+HnlNWZQkV9oUtjSy9BRltoSs/hi6c
- YQhNMExVNL/uZ9Z0vmU5WDbvWCBR0ptlPeqnJgGAnjvA4maI3hHeK6gLAYC+OF3Uk7Vf3Nt
- DKp6NEvOl0OdeqxCX200w==
-UI-OutboundReport: notjunk:1;M01:P0:BShYYn8dt1w=;bw7GXrHrT9mWDzzbyObkU8r8J6Z
- bJuw6/X4mqbXn9m2VE+3tx/5A7Qvo34DdHgOxsdBbLFg0sEmnlJTdJwi5Qj41wBoIPqfTTXAy
- XZ1j2a6AMdL6BNuZwAYs6DJEwoHPHeTelXuTaA+CfBKroVPqMqQGJJAgekU4ivT6ABqUqxdnq
- yAKdNhuMGL/ESXzhW4bchG2yzhuUobWoYA19T1izbYFf+fEnxWW0+K3HXpcpFhBv7up/1MeJt
- jnQt19CJgD/gcnSuMEzedRrITIkn8pihLVLcQ7p670ti1YJ2RslHyhTabBxIFgHJw4Tur+IDZ
- Ds8/MgMeeeQxkLz27ySjkyV0eecIunMMuleF0snai6AxuJXg8UN56z6/JPzcQp7JYfdN4Us1o
- MQnLobmUEG53QZ9+e9qq+G4CB3ykICI191twLchwvUaU76U+XXz2gQelL64jhFXm0oTF2cpV7
- h9U/rTBgV4z0QFSecRpA6h/cG7HIVc1nA9/eJHulnKhtC1VnSD3eTK85Gl9tclLy3NwUOVROh
- YPcdZgO38rB02Y7F+ahpGibFCr1Adjf6EwYcb86rlE/GmhPy1gZILpjBJDJdogUK9d/qo6LYg
- ivaDnjxBXtPPdZU5ygKfYNtDeWqLtqLEOLwFNOdRaGozn7zN5sLGCbkb8CcpCGtnSEKFJSsJJ
- Rkh/mt/niv0q86Pl8oLwYqHiHPJFoMdrqfuvVrghzBGy9vlPW+4T93oyOYD7UiVED7ftVvNBA
- /d6id2RIDPoXdnKQoxJgK0xLOeYJhus4KJ33ZRqaSkvR9Le7psdNHMFKOPAvnG5X/SP+P8+Je
- d1ruJYP0pvDmGQBXDlu+DPlFYzbKQrfS4rEcUE9TUqvB58g1tgSMNNMdhs+vfzwTbx3xv+74Q
- r/uqipQFrkfddMqwfBLDQENLHleaIcHyHx6kt28r/nV0kgYMOMV5RzNjI1wDyvgdQSGKuRQTn
- AXE1FXSSX4PFdTLPgeEqE7Kn4hywKm358rew/zypWjcwtAnIMaYQLCI8dpibz0n1IiJHUdNRk
- GiSTf35H1ag+4iEPUh5YQlvmjNVuU+KEsyZKxQSwoAVcZEX6d0CZKsVyu+uH1yMKLPqXs3hx+
- 2alrYGBhKwaHgH7k/JkVFwCFySsQHo
+X-Provags-ID: V03:K1:kZIcv7gI0WWnOi8M5IOEtD+VN9sr5vujGj2Ml/cbyIpucLJUyiz
+ YxPDL4Ol5779aKYvyq/8TAxWObEllM3S3Dxvc0/4gzDXTyLeP04mG5XhvAMDGCY1Zfg8qox
+ uajlqmZQQ9oEzGXttKOc8FeJP6qcRRBTRkimhvDeGqY0Ah+BfgxL7Bl3iDXisE23F7DsLQ7
+ UDQfUek0d1Pmwika8CDGw==
+UI-OutboundReport: notjunk:1;M01:P0:we/q218RGBQ=;/iCVcQpNYD0rPXM89QphdRgg0fg
+ 9DNs2BLGtLAlivOCjD1cuVpjutAAPILsYq+Ptt7+7aEFQzowNT7/COu1Alw6kDhR294wP8Cgd
+ aGoKHjWPBlkOH8Dgv4CllxkHYvPaIdz8Sq9PpEIOz3keDdb2Z5eKnAuxdftuC7eNx1OoBsuoi
+ CvzTmpUN2ipnR1kplP4FWMiR4/i1vx5J1dL0rjpGFsAUBuyKPt5HRlR+NdW4DfR2t+/jOHekx
+ gWV40yv8GZmDKkcnwjonBe5V9oadXO3iC7sNwJTwUHbZkG2PHY5oKkTOiHF/JC6M4IEo0yGFY
+ k721pOeM2hEf2diXvlOebkjf85+6MqvrdnMSFcPK7gGnRKtjCe2wxsP49RuN2bpRjz+yoru5q
+ G7xA671DsfsM1CeAwLoLdKXTSemAQZivepJks52shqgcOcrVzIVA113j9Gg911Csj2hKE8DzD
+ 5ZyemXbG3/mM8mdCddqbIvTrX3kPzHJDjqmC1qG35oNs/7wEJf/Uv620xASK1mTNUs9ZKmMpR
+ b2kGFgigk3WxJuVujH+EpViBGfpXKOmLMC9uCiBJyFe0bq7BnVI2bUq45CDzFjx8YcCOhsTWD
+ dSFih1eWWpCf37yBCV0uZI7QR83/GeNdwKZG2arRTNHG+6JXnOAw4l1YQYhZWZGOW+L/8BLNA
+ BODGb2iakxXJ2rz/DiSf2aQfU/dYogsI/Ya2bB17haQYJGkRUbcDoj1RipP1jsCP0RqrN/aHm
+ gAL0n7g+DBrltfaGVEoIW3afR5R8H1Jx8V7GqHVzCiNB8YPLKfaHf8Agnj1+tR5Qm3N41FcOh
+ WHbH/641v8YSuRwmYP86zpxelVJ4+cQA09ASALEvyFUT9X9dTF37y0makQnxBLCyybt0nqxP6
+ 5dS0kDObmB9vD9nXtlI7rf5yEshQZyPqen/xWg7MHJbybmE75xIvA2RHYYxOMqr2yHOx3vaG8
+ JIcsxWKdtCagrhG5zgFdXiaHJYQ7hQNwnH66bQ5cxzOzxPjFjdrQZIp2YVycvZ5VoUH0le2e8
+ T6uPQYGo1YVLfKGnWsoob55r1sG1lLqVul4zSJcRkRhBqLcQYSEFojJHeaXDN5GmjvIwytor8
+ y4NDp7F4ZPQU27gn+/3cw1hFeJvGBZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,53 +101,148 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.11.24 16:47, Simon Glass wrote:
-> Update efi_allocate_pool_ext() to log the pointer returned from this
-> call, which can be helpful when debugging.
+> Some functions are passing addresses instead of pointers to the
+> efi_add_memory_map() function. This confusion is understandable since
+> the function arguments indicate an address.
+>
+> Make a note of the 8 places where there are problems, which would break
+> usage in sandbox tests.
+>
+> Future work will resolve these problems.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > Changes in v2:
-> - Use EFI_PRINT() instead of log_debug()
+> - Add a new patch with comments where incorrect addresses are used
 >
->   lib/efi_loader/efi_boottime.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   lib/efi_loader/efi_acpi.c    | 2 ++
+>   lib/efi_loader/efi_bootmgr.c | 5 +++++
+>   lib/efi_loader/efi_helper.c  | 1 +
+>   lib/efi_loader/efi_smbios.c  | 6 +++++-
+>   lib/efi_loader/efi_var_mem.c | 2 ++
+>   5 files changed, 15 insertions(+), 1 deletion(-)
 >
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 080e7f78ae3..be8e4f41ad2 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -511,6 +511,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int=
- pool_type,
+> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> index 67bd7f8ca24..ffb360d461b 100644
+> --- a/lib/efi_loader/efi_acpi.c
+> +++ b/lib/efi_loader/efi_acpi.c
+> @@ -28,12 +28,14 @@ efi_status_t efi_acpi_register(void)
+>   	/* Mark space used for tables */
+>   	start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+>   	end =3D ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
+> +	/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+>   	ret =3D efi_add_memory_map(start, end - start, EFI_ACPI_RECLAIM_MEMOR=
+Y);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+>   	if (gd->arch.table_start_high) {
+>   		start =3D ALIGN_DOWN(gd->arch.table_start_high, EFI_PAGE_MASK);
+>   		end =3D ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
+> +		/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+>   		ret =3D efi_add_memory_map(start, end - start,
+>   					 EFI_ACPI_RECLAIM_MEMORY);
+>   		if (ret !=3D EFI_SUCCESS)
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index 8c51a6ef2ed..bb635d77b53 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -365,6 +365,8 @@ static efi_status_t prepare_loaded_image(u16 *label,=
+ ulong addr, ulong size,
+>   	 * TODO: expose the ramdisk to OS.
+>   	 * Need to pass the ramdisk information by the architecture-specific
+>   	 * methods such as 'pmem' device-tree node.
+> +	 *
+> +	 * TODO(sjg): This should use (ulong)map_sysmem(addr)
+>   	 */
+
+This cannot work. The EFI memory according to the EFI specification
+uses  EFI_PHYSICAL_ADDRESS defined as UINT64.
+
+>   	ret =3D efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
+>   	if (ret !=3D EFI_SUCCESS) {
+> @@ -399,6 +401,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct=
+ uridp_context *ctx)
 >
->   	EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
->   	r =3D efi_allocate_pool(pool_type, size, buffer);
-> +	if (r =3D=3D EFI_SUCCESS)
-> +		EFI_PRINT("*buffer =3D %p\n", *buffer);
+>   	/* cleanup for iso or img image */
+>   	if (ctx->ramdisk_blk_dev) {
+> +		/* TODO(sjg): This should use (ulong)map_sysmem(...) */
+>   		ret =3D efi_add_memory_map(ctx->image_addr, ctx->image_size,
+>   					 EFI_CONVENTIONAL_MEMORY);
+>   		if (ret !=3D EFI_SUCCESS)
+> @@ -506,6 +509,8 @@ static efi_status_t try_load_from_uri_path(struct ef=
+i_device_path_uri *uridp,
+>
+>   		source_buffer =3D NULL;
+>   		source_size =3D 0;
+> +
+> +	/* TODO(sjg): This does not work on sandbox */
+>   	} else if (efi_check_pe((void *)image_addr, image_size, NULL) =3D=3D =
+EFI_SUCCESS) {
+>   		/*
+>   		 * loaded_dp must exist until efi application returns,
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index bf96f61d3d0..fd89ef6036f 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -486,6 +486,7 @@ static efi_status_t copy_fdt(void **fdtp)
+>   		log_err("Failed to reserve space for FDT\n");
+>   		goto done;
+>   	}
+> +	/* TODO(sjg): This does not work on sandbox */
+>   	new_fdt =3D (void *)(uintptr_t)new_fdt_addr;
 
-The UEFI spec provides:
+What is not working?
 
-typedef UINT64 EFI_PHYSICAL_ADDRESS;
+AllocatePages() MUST provide an EFI_PHYSICAL_ADDRESS according to the
+UEFI specification.
 
-typedef
-EFI_STATUS
-(EFIAPI *EFI_ALLOCATE_PAGES) (
-IN EFI_ALLOCATE_TYPE Type,
-IN EFI_MEMORY_TYPE MemoryType,
-IN UINTN Pages,
-IN OUT EFI_PHYSICAL_ADDRESS *Memory
-);
+The UEFI specification further requires an identity mapping. So
+EFI_PHYSICAL_ADDRESS variables MUST take a value that can be used as
+pointer.
 
-%p does not match u64.
+
+>   	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
+>   	fdt_set_totalsize(new_fdt, fdt_size);
+> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> index 8d2ef6deb51..02d4a5dd045 100644
+> --- a/lib/efi_loader/efi_smbios.c
+> +++ b/lib/efi_loader/efi_smbios.c
+> @@ -40,7 +40,11 @@ efi_status_t efi_smbios_register(void)
+>   		return EFI_NOT_FOUND;
+>   	}
+>
+> -	/* Mark space used for tables */
+> +	/*
+> +	 * Mark space used for tables/
+> +	 *
+> +	 * TODO(sjg): This should use (ulong)map_sysmem(addr, ...)
+
+No. See above.
+
+> +	 */
+>   	ret =3D efi_add_memory_map(addr, TABLE_SIZE, EFI_RUNTIME_SERVICES_DAT=
+A);
+>   	if (ret)
+>   		return ret;
+> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> index 139e16aad7c..5c69a1e0f3e 100644
+> --- a/lib/efi_loader/efi_var_mem.c
+> +++ b/lib/efi_loader/efi_var_mem.c
+> @@ -226,6 +226,8 @@ efi_status_t efi_var_mem_init(void)
+>   				 &memory);
+>   	if (ret !=3D EFI_SUCCESS)
+>   		return ret;
+> +
+> +	/* TODO(sjg): This does not work on sandbox */
+
+It has been working fine up to now.
 
 Best regards
 
 Heinrich
 
-> +
->   	return EFI_EXIT(r);
->   }
->
-
+>   	efi_var_buf =3D (struct efi_var_file *)(uintptr_t)memory;
+>   	memset(efi_var_buf, 0, EFI_VAR_BUF_SIZE);
+>   	efi_var_buf->magic =3D EFI_VAR_FILE_MAGIC;
 
