@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B37D690F0
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 10:15:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8DF5D690EF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 10:15:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC2E1893E8;
-	Thu, 28 Nov 2024 11:14:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E9EE8987F;
+	Thu, 28 Nov 2024 11:15:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="YuNHJlOg";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eS18xmwN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9874C891C4; Thu, 28 Nov 2024 11:14:58 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 39AD189877; Thu, 28 Nov 2024 11:15:00 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DC35891C4
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:14:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 415A3894FB
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 11:14:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-434b3e32e9dso1740315e9.2
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 02:14:56 -0800 (PST)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3825a721ae5so402433f8f.1
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 02:14:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732788895; x=1733393695;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1732788896; x=1733393696;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=tkWOBqq+Lp0suiTX32F0hJskD7rR7vljOoUjJ9arKEw=;
- b=YuNHJlOg6KOu+pSzFm6shTjTg0a2dyFVNOOfj5Ia9LueAUHeyTtomieXwi6ZEei/Om
- BNVg13zI5hU8UdHK8d085Ns0ZfqTuWL3m5V1EyF34ZlwusyaieectJyLg+jZnw/2Va9W
- q/DAMEcAGI/43TQj6AJTGDFEfxoJDBM2F22lKC0r9AplqMg/0fXNfewx26DnB578D16r
- 1IVu1bdMfhh9zGljiLY5jydl1y8z0Y2PMduAA/tvqU0fCQ0+3D9cYXEeJWAmQykQbIFu
- 7cIPEg3klp9qa2KWMZuT1sQZrof3yY9MawvP9yaXu2bgcSjpN/1lcRm/oDM4ZqTjq7Nq
- 6kAA==
+ :reply-to; bh=flIiIfgV4V2w8bARC+srqswyX8PrNis02re9DIlC2Dg=;
+ b=eS18xmwN3RuK7Ci//O2NWwIHrRne3300jtydfYpBePQYT9SqVtV4uT33bVyQuPYbEm
+ OeER4meSriUoXegaYCXal3XhGLYqCa0hO0g0fSXarKR9zn3s0Vu82SwdnLuGP4ckT7pP
+ 2tWW+6kD+ezXdOZk/hD6eTlnEznsh/DPnBXla87L+9+N4jNTy8USCEJBIGe85YQnXaLt
+ VGN8WhjzTUCVi5JR3skIyIOZSuEJ/FRvf30Dv7izEV56QjSNpgrfmb4KHSZdclG4LKt9
+ J9xpoInkaJMqc9hfzk+7qw02uks4qOjH+RgTSfbb1se91EuBJiHWmozOywjW42+VdaJZ
+ dczw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732788895; x=1733393695;
+ d=1e100.net; s=20230601; t=1732788896; x=1733393696;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tkWOBqq+Lp0suiTX32F0hJskD7rR7vljOoUjJ9arKEw=;
- b=DaYflG9jU9YA362VviyCS2cTSqDb0Zbuux5I7B7GtwWVDfGTdcVlrMOKX6lYRaSz+T
- 1+hN5tavoi4gZ5+s44RA9JqmHAAYEqeP6aGPMnnfT+yk+B9yMS45MBWmbrk/7sDh8ioi
- RQobs4bbzr1nzLzWP54Kjj1X+q7LK5iMJcebs7pEONIk7lRkd0IvNusOTNiaHlEKfq5O
- NtKZuOjuq/DURyP0Q9Fb+dqbuImTBasIt9EmLonqKgUZWDEeqzDscEUNJf93BX0f25R5
- 0LrAmduMWFYbyxJiNsL8k0pgmhCO1a8tOegG0QjDhDD3IxXpZtoL4S/nFOig+2M16J/d
- ItDg==
+ bh=flIiIfgV4V2w8bARC+srqswyX8PrNis02re9DIlC2Dg=;
+ b=g7OrACXhJwvuiIaXSQkLwQ3GYMMogyG/KjYxrdCEzhke+c3OY1iRIGEypDhmeEVzCi
+ 6IncKP3d0yasrqgS67pncbPM882gwWSgY3aJzIb0XR0OSwJuY+qOsw8ZPlbTsIRF/4Do
+ PP4M+4/cJdjQg9mc9jrlzCfJxEhojv7APoIMktqlpeb9jvuWxq+T3pmEhDjyrag3CscQ
+ APyNZ00y1Q0Si44944GCwMI9XG4cLZEAuc20kRG5HrGUW58gS95NnvCB6/YVaqF0YeXb
+ dMnJHZbjbvfP1prFnOEnUR37wTJEyjjHunTcZncYfW6vr8GXAUUMtGC5jzglY3O8MOIU
+ CW+A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWW6JsJP61IN5CUelfGMVKaqe5Dfn0oTbAu0OLQBrf2dmdh925SbgK4wbsOWdYpNbHkmSQJtnU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPR48ikrsLy5NQzXvJwg4C8xxKyl3GJOv8dgn1xz7NHeU2HkOG
- nK0L/loiIL7LNDFp8eoegrKqwfny7nOalkVY+wTvx4tRxBbVQ0wWznoCIiQPj90xx/4Lias642P
- F7Fg=
-X-Gm-Gg: ASbGncvE4aNp1sGt6CIHEzuP7zdQaGGzrHfxpO3lvQkrDsNBoAAhyOS6A72vhWzPJq9
- LNxKcf9XPCmmSizhtZPHz6okzOmB7z9wnZqQ8SaiZjQVuwGgl7ELESiB4R278IuNEx1YTsVoNCG
- pZh+/lMCPaWEF/J0rZT4aSFjAZEKzzA8BjcYfFA7spfte18upFZKfUA3zOveZj6Fls0XjQ6rY0S
- o5aNjRsg0GLRFAFBvXYY71W1on8MvvqK892Ae4HFxa4OFu0EYMriQ==
-X-Google-Smtp-Source: AGHT+IFkxK7do7PhrFL+wMnO50CZ7ZKYgJkJAQI0A4Cj5KRHUD51DF+dAFWVzb8wtWe6JGgePMYtrw==
-X-Received: by 2002:a05:600c:4f8f:b0:434:9fb5:fe04 with SMTP id
- 5b1f17b1804b1-434a9df0803mr47751045e9.28.1732788895457; 
- Thu, 28 Nov 2024 02:14:55 -0800 (PST)
+ AJvYcCVdGz8eDSyvAX29Ftz6IVqx2C05jaN84enNcTcc0LTQfXcOrcI8UjByQcNURL/61bfT7jgkNQQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLrq/mvsuDN6UuTx3urECiz0DM0H78XuB68Rg3sZAlMeMeTwnr
+ 5CRYLFhHKSiR1ccqJFbay1l83QQL+SxKTvk38irLTS4JOU0+/QDb51KUWj33ukPJKHu9pjVXfHT
+ /hw4=
+X-Gm-Gg: ASbGnctr8byizHzAm1VV9CImdknX+w6fKplAh5otmYxCvcjPVgK9AJr0V5WiCd/kCex
+ ERzULWlcfiVZ/9N19qbxm5EEvjR6gXVHXPIOwQ4M0BXhEQD/98JHvuiTacJ6BQs9VT2g1b9LAHm
+ /YLFAPt6w3oGjmbopjnwlur5et8s3iOODwYEHB00SFjAQ468LwkQnPrqknJlifmKbDondT9LVmy
+ /xc9oijWxEyQcD0NaSiurOP0lV10I6RIYq0ntp+HfMPHrbutSrcNA==
+X-Google-Smtp-Source: AGHT+IFsAgEz0UQLB6v0JW4T+8Oz73Sm35+G6fDqwbRuQ1x2cE62nsx1HXLdF32ca6WFfwdYbMtnJQ==
+X-Received: by 2002:a5d:6d02:0:b0:382:3ef9:dfca with SMTP id
+ ffacd0b85a97d-385cbda22b4mr2069959f8f.25.1732788896314; 
+ Thu, 28 Nov 2024 02:14:56 -0800 (PST)
 Received: from [127.0.1.1] ([2001:861:d40:ed60:91a7:bd7d:8e99:8990])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434aa74efbesm48554535e9.7.2024.11.28.02.14.54
+ 5b1f17b1804b1-434aa74efbesm48554535e9.7.2024.11.28.02.14.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 02:14:54 -0800 (PST)
+ Thu, 28 Nov 2024 02:14:55 -0800 (PST)
 From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Thu, 28 Nov 2024 11:14:47 +0100
-Subject: [PATCH 1/2] boot: android: import addBootConfigParameters() from AOSP
+Date: Thu, 28 Nov 2024 11:14:48 +0100
+Subject: [PATCH 2/2] boot: android: Add bootconfig support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241128-bootconfig-v1-1-0e63a5dae82c@baylibre.com>
+Message-Id: <20241128-bootconfig-v1-2-0e63a5dae82c@baylibre.com>
 References: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
 In-Reply-To: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -101,65 +101,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+For android vendor boot image version 4 bootconfig is mandatory.[1]
 
-To properly implement Android boot image v4, U-Boot must be able to
-add additional entries to the bootconfig.
+In the android_image_get_ramdisk function, after copying both vendor and
+boot ramdisks, we extract all androidboot.* entries from the kernel
+command line. These entries are added to the bootconfig section.
+We then update the sizes of the ramdisk and bootconfig.
+Finally, all androidboot.* entries are removed from the kernel command
+line.
 
-Add `add_bootconfig_parameters()` to do so.
-
-This has been imported from Google's U-Boot source[1]
-The variables/function names have been reworked to be
-compliant with U-Boot's coding style.
-
-[1] https://android.googlesource.com/platform/external/u-boot/+/7af0a0506d4de6f5ea147d10fb0664a8af07d326
+[1] https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions#vendor-boot-partition-v4
+Co-developed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
 ---
- boot/image-android.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ boot/image-android.c | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
 diff --git a/boot/image-android.c b/boot/image-android.c
-index 93b54bf8d793..05245a0ba918 100644
+index 05245a0ba918..66e4c58ab4eb 100644
 --- a/boot/image-android.c
 +++ b/boot/image-android.c
-@@ -57,6 +57,36 @@ static ulong add_trailer(ulong bootconfig_start_addr, ulong bootconfig_size)
- 	return BOOTCONFIG_TRAILER_SIZE;
- }
- 
-+/*
-+ * Add a string of boot config parameters to memory appended by the trailer.
-+ */
-+u32 add_bootconfig_parameters(char *params, ulong params_size,
-+			      ulong bootconfig_start_addr, u32 bootconfig_size)
-+{
-+	if (!params || !bootconfig_start_addr)
-+		return -1;
-+
-+	if (params_size == 0)
-+		return 0;
-+
-+	u32 applied_bytes = 0;
-+	u32 new_size = 0;
-+	ulong end = bootconfig_start_addr + bootconfig_size;
-+
-+	if (is_trailer_present(end)) {
-+		end -= BOOTCONFIG_TRAILER_SIZE;
-+		applied_bytes -= BOOTCONFIG_TRAILER_SIZE;
-+		memcpy(&new_size, (void *)end, BOOTCONFIG_SIZE_SIZE);
-+	} else {
-+		new_size = bootconfig_size;
-+	}
-+	memcpy((void *)end, params, params_size);
-+	applied_bytes += params_size;
-+	applied_bytes += add_trailer(bootconfig_start_addr,
-+				     bootconfig_size + applied_bytes);
-+	return applied_bytes;
-+}
-+
- __weak ulong get_avendor_bootimg_addr(void)
+@@ -475,6 +475,9 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
  {
- 	return -1;
+ 	struct andr_image_data img_data = {0};
+ 	ulong ramdisk_ptr;
++	size_t ret, len = 0;
++	size_t bootconfig_size = 0;
++	char *bootargs, *androidbootarg, *end;
+ 
+ 	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
+ 		return -EINVAL;
+@@ -510,6 +513,32 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 			memcpy((void *)
+ 			       (ramdisk_ptr), (void *)img_data.bootconfig_addr,
+ 			       img_data.bootconfig_size);
++
++			bootargs = env_get("bootargs");
++			bootconfig_size = img_data.bootconfig_size;
++
++			while (1) {
++				androidbootarg = strstr(bootargs, "androidboot.");
++				if (!androidbootarg)
++					break;
++				end = strchr(androidbootarg, ' ');
++				*end = '\0';
++				len = strlen(androidbootarg);
++				*end = '\n'; // bootConfig are new-line terminated
++				ret = add_bootconfig_parameters(androidbootarg, len + 1,
++								ramdisk_ptr, bootconfig_size);
++				if (!ret)
++					return -EINVAL;
++				bootconfig_size += ret;
++				img_data.ramdisk_size += ret;
++				/* Erase the androidboot.* bootarg from bootargs */
++				*end = ' ';
++				memmove(androidbootarg, androidbootarg + len,
++					strlen(androidbootarg + len) + 1);
++			}
++
++			/* Save back the new commandline without androidboot. */
++			env_set("bootargs", bootargs);
+ 		}
+ 	} else {
+ 		/* Ramdisk can be used in-place, use current ptr */
 
 -- 
 2.34.1
