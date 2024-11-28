@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2EBFD69113
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 14:53:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5BF4D69113
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 14:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6FFA89CE7;
-	Thu, 28 Nov 2024 15:53:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5934089D50;
+	Thu, 28 Nov 2024 15:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ag8Mp8Eo";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cMc1rch4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8B78891F5; Thu, 28 Nov 2024 15:53:33 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::601])
+ id 4F6DD89D08; Thu, 28 Nov 2024 15:53:43 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::629])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12B5989D4B
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 15:53:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC0789D50
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 15:53:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R0gjNCNOp1jC31YVsuT0Bf1u3AuhD5FPpbF5ZB4al/OD2/uN9FoY7u9IQuoh5V3J+cBGc3aIKBjp4QJBnc6bOQW85N03yAV+GjyBToRjy6Uzn6EjYdiS8+aXmAOtJ2fFTB2XQABjUX3LvQzo2H5NRaJrLG87mtGXpkkQOXXDJGHbsBQQe/O2CataAtlDssG7X93ypdU1ZeAF7OYxbrwwO/yghRAc0zNkYFkohVeP6gGTZwjiiKBRynDRSqTx9pupAIGRSl0D2buFv4OMW1t74A5/js7STtXFDrwn68ldNLiC/iYzRmbZolzZQ5G3PCq9UDakUf02l7JBbWOYtysj8A==
+ b=fXk/E6wZ0IVCymnOgcQrJWDxrpUYF4YFDfwDZsnBL0FBxjrCkC4+OkzHHfMHVNvSwAttIqWSy5xTf3B4Gdm6xshcLrgho/EdEaw16LJEil7oZCM5SgJj/oMl7ihRo53Pm27rtwESeKNvah/Fobi9p/9eo5KfAR1m6Pnm7DPCwsTVQ/D6a42V4PVxttJpFdX5ejXIRTHuTUAkAJtzgN3N690X6yVw/O60uiUATtgRTbo98IQoLP37svZhzLvFeX6AzMewbepvdgSo0Djta71VGtCOvVKc8gHt5FYvM6uEE/Mj2ryv6c1hL+iFPbnFdKGYrhPg0xHwoc181+oA39ENug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7QI6HQ06Z/Vk0p82MTWciD0VvT9YFQsdj9KmjvnwjoY=;
- b=hzujD8fH8aPLyCY2+LH6Ya58B1c3+xOqtgR3HQXrD15z7DzjtZg0xy/dKStnAIKSJfYobqfUBKWdsKaTv66Zy/6tMDDyZGUMXVXduwEp6NwgpOUnGzdIQHvAumaus6OlwyVme42KjzXRfBqfhVIu6c4AVFxnB300ZPT6l8X+GBvPwarGqa/tC9hfrPxdJHlfPcKD3zfgTHg7tQvgQiVi+1C+AbxH0VV2uKg1A1fu6lZylDqP8ahJ60+GETRa3bxKa2/1heEdKnBVfphFi52BS9uRYB0RKPM9J0icXTqJYRN/Qv2DZN9YtweYvfOmGglpdySkW28sSNfHGdJ4xLmT3Q==
+ bh=bVAMR4z1yoHk5FiNxYbp5iATiVqOu2BftupyHAN7JFI=;
+ b=PRHQ4g3Xqlf0bmFsm+A+riMrVmUJFXd7wzqRwnpTxuuK5QQbD6RVJPXFcw/X8AboF8jh1mKR8V3/1WUpf+eWwTFmCWaXSeYIbKC27nn4N1MO2dtlhmz18gVO2eiJNXIF5OeiE17wrsW02lUaEB19ZTNnhKOMzRdkviWeX21SyRBYtiYEgAz+9gPR0FwdFrRNtaBJ/4GfhdR4A+dP6nHn8EWObuu1+LkMKP9wspSrD8oq4IWPBg60h40IX4tQhehg1YNBaPAj4GaqUBz92IwpyTpARUwFoiNIqjf/dSs94MOL6r0M0TOT1yO4h37qAV3r7UBIyB0r3/cqbRUjggwbDg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7QI6HQ06Z/Vk0p82MTWciD0VvT9YFQsdj9KmjvnwjoY=;
- b=ag8Mp8Eojvo4uJbccoxe03op98mQlw0b/ThZNK1BytGbedgiZBREOA+0aKjEWOn6nXYdc7RTSw1P2SDvFO0eXGC+zBHKUGkGSOr7We3kDqkZ26LbDCAyX5N9Q6TmV3409/1SpZGF2RUwG/SDNAbnU/RqDOHKSa72tONlfIKzcpQ=
+ bh=bVAMR4z1yoHk5FiNxYbp5iATiVqOu2BftupyHAN7JFI=;
+ b=cMc1rch4kGXA72aLHvnbzFrZ+eRWado0Yzs7Fp2VJNufeHd8PfXrluxJAeOxMK2S3EHO9v91pVTU298gDjEOJKyiN+ateIhCTFlD8cF4XYWXAufwmXMTsYPeaIMugTrLBLdIYXiH74ulwLqKUtsP9drug6nBWIWjQjRJzsEYlfk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by LV3PR12MB9142.namprd12.prod.outlook.com (2603:10b6:408:198::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.13; Thu, 28 Nov
- 2024 14:53:26 +0000
+ 2024 14:53:34 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.8207.010; Thu, 28 Nov 2024
- 14:53:26 +0000
-Message-ID: <d2ac7abb-a5e6-4088-9e1e-c4d18c24d173@amd.com>
-Date: Thu, 28 Nov 2024 15:53:17 +0100
+ 14:53:34 +0000
+Message-ID: <54cf5c1d-054c-4baf-b5d9-1775c31d49da@amd.com>
+Date: Thu, 28 Nov 2024 15:53:30 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Update the usb5744 hub node as per binding
+Subject: Re: [PATCH] configs: zynqmp_kria: Enable the USB onboard hub
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: git@amd.com
-References: <20241126041600.1972942-1-venkatesh.abbarapu@amd.com>
+References: <20241126041238.1969723-1-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -105,7 +105,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20241126041600.1972942-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20241126041238.1969723-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR04CA0131.eurprd04.prod.outlook.com
@@ -114,89 +114,91 @@ X-ClientProxiedBy: VI1PR04CA0131.eurprd04.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|LV3PR12MB9142:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a110c13-2d7d-4374-3e30-08dd0fbc69f4
+X-MS-Office365-Filtering-Correlation-Id: e3ee8ec4-36b7-40a4-b614-08dd0fbc6e6e
 X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MFVOdnhtcFRoQkFJNk4wSER0Y3N6RStIRjlGQS9sL2R2U1E0RUl5L1dBUVRh?=
- =?utf-8?B?bDIxcHBNMGVNSTlMVktaTXBFQ3ozTEtYVkxIQi9IM1Qvd2kvckNHa1BUeUYw?=
- =?utf-8?B?ai9XTkRSaXovaVlLS0laZnE2eVlmNXRHc05iVVp5dTBXT0VKOTZOQ3NzcVdn?=
- =?utf-8?B?K1F5Q3VoN2o3dFFKWE1SYlBrWnFtMzV2WU5hZ1pwTW8zbVhqUWpIY0h1akFs?=
- =?utf-8?B?aUt2SWo0Nm5pZWJqVDlqQldWRFphUVRVa3ZVZTZkREFDUE5FdktTMHdGdGwz?=
- =?utf-8?B?YThEMHZDZHRTTUdNSmJqQmc0MVFEams2UFdhcGdCN1M4RVhwbXBOK1A4SHE0?=
- =?utf-8?B?Q2s1WHFhMVdla0xVeXhLNm5EQWFURnJhN1RhajhZTW1qd1hDeFhiYXBnMVJo?=
- =?utf-8?B?a3VDTU4vNzh5NGdQN01DNzhsOTZFYVpXSmxDM1BibGJvcEp4TmowRDYzV3FE?=
- =?utf-8?B?NWNwOTdaZm1mM1pmUE1wQ1R1Z3BRaUdWd09QRHZKT2NDNkxucmkrN2xwMGpu?=
- =?utf-8?B?V3NMMUxUcndUWUo2dkNZdXVtcFpOTzYxQUZhTVQxRW1PTEd3TzVwcm14UlBF?=
- =?utf-8?B?RGhienBoVXNNT2JYN2RGbnFnaVZzcTdpNWNHSXY4Z3c5bUZiUXF6ODU2azdM?=
- =?utf-8?B?eCtBSGlJVmhBWTlSVXRZdkxrY1lFYjIxUVZqZndnTlVPVVhGSzY1NEN6TTk4?=
- =?utf-8?B?YkNoTHRzQWdMZWdyTUc0R1JwV0tGQ3o3VzFvUlZZMzNocFd1ZjkydHU4VWIw?=
- =?utf-8?B?UEdqaXRTTkVpZDNHOXQyVUQ2ZWxELzJTZVlMOFErTUxIOFpBU2JDSFBuZGxI?=
- =?utf-8?B?ZnZTUWljQ2ZFUzRoVThMREpIVkdUUUxuclJwcWljMjZZeEk3OVJ3bE9GWEEv?=
- =?utf-8?B?NFgrV1QxUXh0L3pjT284eTBRMTd4WitzbnB3ZlNtaXlkZ3BkeVhEalE3R3NU?=
- =?utf-8?B?aEp3MkN1eUphaFkzUXpLMFIxeXhXRCs4blNZd2RxTks2b2Z0RUhFV0tNQllP?=
- =?utf-8?B?UW9VdEFqVW5VOGJRWWZ5VmF0d1gxTGt1WWtTVzdhWWU5Z2YvVTNqSFF3aGhJ?=
- =?utf-8?B?M3pFRkFrM0JKTWtndXJwMUJpRGF5OFFBVGFSejhXZ3hpa28va1VSVi9MUGI1?=
- =?utf-8?B?aWVyQW8yNTRjNU5NT3NHZERNcjQ4bGZGZmdhcFh2S21kOFAzS3JjZjlIa2FQ?=
- =?utf-8?B?VVQ3QVVKTmxNbytNMm1iNVVmR2ZsblM5ekNQYWxxSXJ1YU5oWStMRWpsYkV1?=
- =?utf-8?B?Zk9CaE1QY2NuTEgwbzBTR3hKK052SDRkQTJsMkc0cW9peVk0bHMwdElCelhL?=
- =?utf-8?B?WVNyRTFmUHQ4Q1NYSmNSUWdyQkJ5UlU2cGxpRnFZUXFUNzVob0ZhM1ZxVDhS?=
- =?utf-8?B?emhkb2R4YnAzRjFRbkFmR3lwZGV5V0xMU1M0WHdEcmEwamdkZW9IUG13YVFY?=
- =?utf-8?B?THNaczBhT1hVQUVBQ3dVdlUwYzVqY3NDd0w1VlJsOUtpTkxsTEtpczJhMm9F?=
- =?utf-8?B?aXQ1RGp5Vi83VXpyWFo5RnpFL3VFUFJhZ0pMS1dJRjJ4U3FhcnlzeTdaZ3g3?=
- =?utf-8?B?NDJJRUhEZ0FqZytaaWc5SXpHcTlxZmNMVVBXRGl3NWVtR0xaSWlLUUpwdGUx?=
- =?utf-8?B?ZmUzRm16RjFhV0RXWUNlSmxsZXRrTU0xc1R5aS9IMzBSbXI3ZVJzUnhzQU9p?=
- =?utf-8?B?bkJCckpGK3UwaDM3aXZmd2tmVTBuR0V3c2E4Wld3QnRKeWNiWFJFdjB3PT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEloZmVaRnJ1d0VCT2NXZzBYNmtLNmFSTTQzM2JEUWJNOFFDbWcvaEttSi96?=
+ =?utf-8?B?V2dKL1RYT2ROZ2V0OVFHVUVncU15eDlHV3J6RUw4VlNYek0zV0tTbG45aW1T?=
+ =?utf-8?B?TmIxR3lnbDZuZnhjRFF2aWNHUkRYRm5tRjl0VWFhVnVDb0RpYis5aDlOa1lp?=
+ =?utf-8?B?VXhIT2N2c1lWcGtJL1JvT1UvUHh1dlk1WkJ4Ry94ZW5tNklWcGxDenpJV0hS?=
+ =?utf-8?B?a3ovN01QRVJDeU43eHVoVVlYcFU5cnpyYmpqb0dnZGhpZThyUXVwcUNJU0Qz?=
+ =?utf-8?B?dXZCZGxld3ZZTDl3OXN6NGlxd2pjOG10ZlFIU25LclJQTisyMUQzVDNGSGdo?=
+ =?utf-8?B?NGZoQVNmRzhiZHJyU1F3VWlFY2FvVTE1UWxQZGhNTWwxZFJDMlVuS0FiTFlx?=
+ =?utf-8?B?MzBZcW1aQWZpOEF2LzB5NHpQTGJJQTd4M3ZOWG8waXBwOFNFT3JqVUo0Ukxk?=
+ =?utf-8?B?RW9VK1RRajZ6clhrNmJUbUZnWmYrcUhpcE0wTVJKWFdNR0FRQlV6dnRoVDlz?=
+ =?utf-8?B?OVdjZTBKVnFqdEpmQnhRRUpSQ2d0VEhHSW5sbUdzMS9KS1lwMFZPWUsxNm5K?=
+ =?utf-8?B?ZkZ3T2lWcUtxZFNvUU1mVUU5MWlpWW1UeHRYYnJ6dTRsck4zVk9aQldWMEJ3?=
+ =?utf-8?B?OGl4Q3U3bk54MFB3Q3hJMVY4b0lybGNPOGxDSmo3T1VCK1JlbGhyMGJxNXQ1?=
+ =?utf-8?B?RU8wb2NKV3FnOGRaZmt3NFloS2ZyRWxIckFNRE1hVDlYVFlleUhtSGx2SG82?=
+ =?utf-8?B?Z3dsbjUrUVNIdmZkYjNob0RmQTBMV2JHS2xteGhWVmNrdjM5STFSbk92SUJq?=
+ =?utf-8?B?K3RpWm42RURiMTNTanNnL3VsMUxOY2xQTmxlWlZucThZaERPYnB0Yjg1TE9a?=
+ =?utf-8?B?OGtXNHo0akhpMCsxbDFEUzdwcHNNd002OTJ1dTh1ZW9IbXNMRmlHM1JTLzVY?=
+ =?utf-8?B?TkIxVXAzb2tlb21BRGZxVnBMWVZRcHlMc09hT1Rnb0xLL0krbEV3QlFmRW8x?=
+ =?utf-8?B?eXhCdjJ6SGt6UW1PSlZsblIxVkNxd1J5eEs1WDdxc0lzbmN0QjVxcWVpYjhC?=
+ =?utf-8?B?ZlljTFVWT09rT3pxc0tTSUdPdm5zUDR1TzYrWGNQdHBOQnpDd0lZZUgwaVJU?=
+ =?utf-8?B?Z2RjVE95RDZ4VUpQK1V6bGRySUdXZWFGQzFqQ1IxbXFIbHlDcGIvdEx4bWJo?=
+ =?utf-8?B?bWMrTWRQdGs2eXdialJWMERuNm5qdlAvMTB3UTlNNlFKVVhDMFV4ZGp0WFU1?=
+ =?utf-8?B?NUplRThkaTdTQkRhZnYwQUxzaWllTDVVWFdoS3VvZVRXaWpNZFZHUEFiMDhy?=
+ =?utf-8?B?aFRSbHNiZzYzYkRRZVZFZTZ0UUFrV3FuSXU2MCtCUzhiM25DZmkyblJrME9v?=
+ =?utf-8?B?blhoYjRqMXR0S2dOdm1nRDl1M2VncHpwbDVHeVF0VldWQ0hQL1ZybERIRDgy?=
+ =?utf-8?B?ZW1pODB5bDZHZ2FiaENyQlpVellHWVBxZlAzcklGNVUwN0tmUW1NaVZFRFZp?=
+ =?utf-8?B?eUsyTE1mVjd5K0thY0JJOXpLdENIaWdRZ0V6b0FyVTk1UmRGSFo3YlJSZFNH?=
+ =?utf-8?B?NUQvRERCTlhza1MwVlptUE9ieDdiSlpkdlJOclVtNFNMNVJpQXVNSGJ3bk1a?=
+ =?utf-8?B?eXhpempsUW83TkVYZmlrcWFXV2c5T2RQS25LNFpXU3JrUlZlOGZySVFvblgw?=
+ =?utf-8?B?NkZhNlowZ3ZKbFpsV1pLU2x1ZDZsclJLRTBkTTFBWEhncGhLRUN6dm0wM252?=
+ =?utf-8?B?RHZrKytQR1ZIMjVVcG84YXJHb3dwZEZJVCt1bEIrUEhJT2l3VkMxVGQzazM1?=
+ =?utf-8?Q?IAt8IJb+xaqrarFnidVw6MCbspWZmaHu4g1nc=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RERGbjZ2MGduSjIwRWFiRHlYRmVlUHdFbUZ4ZFE3cmZESnd2bGFpZDAzR1dM?=
- =?utf-8?B?cjVHZElRUUpKWWhLSlduKytpcFR6akJPRjNGZUhSWHUrRzQ5aTNRSFFUSjNh?=
- =?utf-8?B?ZmRmUWRwakZRUmtrcUgvR0FkdDJhangrN25ERmc1SHpUdjZ5R2o1ZG1vZEdr?=
- =?utf-8?B?TlBEZ2VnekdISGFjUW5wNy9yMlJMZkRnQlBtRHd3U3BVTExXdHRvWWplOTNz?=
- =?utf-8?B?U0FFVjZVblVwekEvbllDZUhHREVZRFQvaEY1dFZ4UDlPR1o4MU9GaVA5d3Y2?=
- =?utf-8?B?VVNwYUpkMm1FRUR3SVVjbFAzb2l6QkVtbFFTRDZhMzJnZVVxME4ySUszaXI3?=
- =?utf-8?B?M2IvTGljQk51YTd2Rm45OS9uaFRwNGlxY280Mm9xVW04UEQxeXhCUzRSd29K?=
- =?utf-8?B?U3BUb2pmUGZPUURmdU9HWUFTVUs2QnR2RGxxNGRaeTI0bWNjYldMOXBrR2tO?=
- =?utf-8?B?NjVQeFAxeUZwa3RObFdiWHlld1pQUEpaRGxmWm9VanRQRHFVV1V3TFBBcCts?=
- =?utf-8?B?eXJWdS82cHRac0owRVlBVkg5anNpQkV0c3FqRG53dHFjcGM4Y2NzV0U3aXI2?=
- =?utf-8?B?eGE4RC94bmxoQTc2bmxyLytmMG5BVDErWmJJWVplLzZjbnVpdVk4Zk83cDhh?=
- =?utf-8?B?dEVQcXV6cE5kR2E2T1A3MFlsbnRpaUZvS20ydnltM0R3NWpxZGloeHQ5U0N0?=
- =?utf-8?B?NDNiUHp0cXNkT0V4Sm5oRnNLZEpjMUJiU01VRTVjWndOOWxJY240WGtIUDBt?=
- =?utf-8?B?T2h2MnZoUUxiWkNHbEdhWFZxVDhVNUhCN2NSSWNmbGp6aFc4T2tpd2phY3NK?=
- =?utf-8?B?cGN1L1pISlh3NGFOLzlTOGo5TXplTnJIRndQT3M2TmN0M1RRQXlZeDZrN0V3?=
- =?utf-8?B?UjV1Q1BPR1JHOXR6KzIxenlTcUY4dXBmaTFFZ1llaXZ0RVBpbDN1RkJRa1d6?=
- =?utf-8?B?R0hRSXdhOXBpTVdNbjNzamNHcDlRVTBNc0lmM2tYbE1lVjhkenIreDlQR1Uy?=
- =?utf-8?B?YUlxbTFNajF5NjZteEdRRUU3NzZ1QW4zNFdpekRVdC9Oa0ZFdzJPN09yYkY5?=
- =?utf-8?B?d3lnOVN1WlpqUnZocUtuSXltbmRNK01HZ0V2NVlab2dBQmFtYlZjRWNaKzQr?=
- =?utf-8?B?T2tWNmZLOTRrNy9TbWFkYWZkNGZGTUdrYUpMb3JTUTZFdjF6ZS9Yc1c2TW15?=
- =?utf-8?B?dWprVTRSc2Z2Q2JGTTlNelJHTGE3S1MxR0dWYzNZTWE4czVEMlpBQjJoQUcv?=
- =?utf-8?B?a202QUdyWHBtRjJaYUNzMmdNb3pGSTN6R0p1MjJkSktIeHFuQnJqSk5salIy?=
- =?utf-8?B?SC9HTm5sYUQ4YkVQTGxXaEcvM3g4ekM2V29pSjZmelRTVjF6RkZWL2tHK1JD?=
- =?utf-8?B?dkNsbXYrb09iUWJOVDhrR1BwcGRPaS9WdmxMaDVCVisvRVFlTEo0eFk3Nlg0?=
- =?utf-8?B?Q21LT3dwQlh6bndzR3ZiK2RzRnA3dkNJVWYwSExrU0pPdFQreFFudGVWS3pB?=
- =?utf-8?B?SmNWL1M3UTl5ZWY5ZWMrMnl6YjN4RTZENnRxL0thczNaanNwdmJsMUFMaVp2?=
- =?utf-8?B?ckZ2NlU1TEhTd0tiQ3RQQm1nY1pFcC9yZDE4Vk1MdnJ1Ly9iQTRETS9FQnk0?=
- =?utf-8?B?N1JoMFlEOGk5NGVRWWd3aWdUSjE3TFh3QnpPL0Q0SkY2MEs4cFdaSWFwTHFx?=
- =?utf-8?B?VUlETm1NNnVPaFZRNk5GZ2s4QWlBeHozNk14SHExNXlXTEs4ME9xTjhtUEVM?=
- =?utf-8?B?NXR3Z1hEMC9qZmpJOUowS0Z6MS9NTnplZmpZWHl0VjBYaDFndWVRRnlNdTNl?=
- =?utf-8?B?bms1TE8wdE1kYWJOSUZMV0ZaRWp0ZmZCcDlFU1NtbHV1WTM0U2hmcEVEUzM2?=
- =?utf-8?B?VDVtWmRsY3d1SjdsZy9tMnZmQy9GSWo0QTRRS1NRZEdBWWJqbjlYM1hIMCtC?=
- =?utf-8?B?S0htM2gxTHBYd3pxZU5PK240bHo4QlQwVDI3MjUyeVJyMXhBcitoZVEyT0pU?=
- =?utf-8?B?T3FqOW1TOGRjdmkzQk5rT2VsYmFEUlE2WkJrek9acitMbEhGd3MzZ3ZDV3oy?=
- =?utf-8?B?Y2FNMi9yZ21PWGhqNkVZVm5Nb2NMT3p0dXpweFA5ODJpQXFvOGd2N2VMM3Vh?=
- =?utf-8?Q?kaM07Uq5ZVLEfeiiLR6pyZ64E?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aHI4YnVIZ3V4SmpUYlNNSkxYL3VORzhVRFgvL3ExT3JkRFFpUjhFTUZKdDNt?=
+ =?utf-8?B?V3B0UUpWNVUzN05lWjdROWhoMGRjSjM2YjZxSjVyVGRSb2NKTEhIT3BvNm81?=
+ =?utf-8?B?elgrZ0hKTzY4Y0d6eWVRWHJFNmE2RzlPbzV2U3FuRmpRelA1TmgycVYxTEJ6?=
+ =?utf-8?B?WEdtZVplK2p5WGc4UG44TzBCVTFyakNlQkg1VHQxeHQ0NEc0TlNQOFZwc2Zt?=
+ =?utf-8?B?SDYxMFVnUHdqYno5QWh2eCthZGVoclhWZTFZbEhhY2NMTzJ4L2paY0szYTQ3?=
+ =?utf-8?B?by8rSDN1eWdlaGpPSGxNdlNYZCtBUTRxZjhtSEFoWmRYL3hXcUZvdmp4MHAv?=
+ =?utf-8?B?ZTc0NWhLNjU2K0RDa2IvUFNWZlFoT3FZZGU0a3dMS2YyVndQWlNDRjdvdkhG?=
+ =?utf-8?B?bGtkWlA3OG5ENG00MG9pTEU1UHY5a25WU1pzU0hWZklNUXQ2VC9LdDBYTTFo?=
+ =?utf-8?B?aGp6ZWJ3UjllNW1LMnJydDFSMENjY1RodHJobjFHalQ0dDBDOWpaR1JiVkk2?=
+ =?utf-8?B?cThlcUNZalZtNDZzUEh3YXozaE5wZnl5Mjl0eVE2K3pvOE1vTDJrK3hXbGlT?=
+ =?utf-8?B?RitFWXM2VzBsVU9iSCtoZkkyc1FHdU5KN0lxSm5YV1I3dE9EQTlDTWgwL2dB?=
+ =?utf-8?B?eFdTSmxqM1VsM2lGT0o5THdHMHVSMHQvTmdxUk9rOVJCd3hRcCtKbDB6cUZ4?=
+ =?utf-8?B?eWVXM0o4QmpSblcwOHJPV3U5dkthQkphVVUxbDZGVjk0RzBlbkF2UlJDbE9E?=
+ =?utf-8?B?L0ppSy9TMXFwbUZXMFZuNXRXbG1HeHFSb3M0V1BTL1FYZjFwdk9ma05kTTZz?=
+ =?utf-8?B?eElBOUFxek5LVGEzNVkweXJCS0l5MzgwWG9MTUkvTjNkbTBTcGJ5Yk9YQmxU?=
+ =?utf-8?B?Q1JvY3RnUkxWUDJsN3ErMVNxQUNCUW9QUXJRNFdFZjcwbStkb0VLRGxSUS9E?=
+ =?utf-8?B?eUlPbEJOZmg3SFVtbDdtcVZVViswdFV2Z3VRNTdBelkrL1NOWitZZ3ZZenR1?=
+ =?utf-8?B?Rm9uUW80VDJNVVpkajhzV0lYRkdCVUQ1eEpYTEpldS90VVJkaVc3V2Q4NElj?=
+ =?utf-8?B?SFg3YTVuV0cxQjUwbXNZUmdKRlZxdXUwUHlQN2JtVXZwVEFRZXhBRDdhSW45?=
+ =?utf-8?B?YzFrVWE4OGY5NWxSZmRrSG1PdUdxRDViMnpiakJJb2VPRTkxU3ozbGZDTkt3?=
+ =?utf-8?B?MzNHS0hydzJHcWtSZ2xRR2owRFlQcTBtRWsvWFh5a0pqUmpQajZsUHAyRjdy?=
+ =?utf-8?B?eVJmRHZ0YXoyVWY2cllmU1dsNUU4dE5YS1JLOHFHVWFzSzVHWHBZTUdNWWls?=
+ =?utf-8?B?ZHIwNXNFVnZuMnc3YWtXVHFSZTdRRlR0ODNQcTZRUkgyOXUzOXI4ZnVOSE5L?=
+ =?utf-8?B?bmFCVkZDaVNtdkZreFVEUXV5RkxQNFRwWDJranZFM0IrdzVqTjdiVVNlQ3Ur?=
+ =?utf-8?B?WVlNSTFQQVFYSHhTRCtXK25SaTg4Z1dPT1dmYWU4alVVSGNLUUlCbmZ3dVI5?=
+ =?utf-8?B?RWFaQ3laaDBDOTNSUzEzYVpacDRidDV1THpuTW54WDBXZXJ1WHltWDNEd2lX?=
+ =?utf-8?B?OCtldDBheTRaVHU5M1M0d0pRV3JXd3hraWRLcUcwd0xkazFYbzhLc3NiN1dY?=
+ =?utf-8?B?RDJjZktLVkxKODB6aE91dG1jK0FuNEZ1RS9WUEc0eGI2TkJ5Vzc4UFFsRkI2?=
+ =?utf-8?B?VnVNVkNnNklpM0lIMEduSS9tZjF2d3cvNlNnSURCT3dwd2Fvakhmai83b0lo?=
+ =?utf-8?B?QkpPSnluWUU2STE3SjVhc21uMWpDT3ErejJhbS80UE9xUWlPSWFybzlnRTVY?=
+ =?utf-8?B?NXJRejU2V2FIWUM0MU1EMVlqYlc2dTgxQnZ6c1BOMGNQa3lTODk3aXNwdGNX?=
+ =?utf-8?B?bThLNnU1V0g5NWNFN3ZBakZyNHNsME1ORStnamZJalZRZHoxdVVFRUxpNUE3?=
+ =?utf-8?B?M0lJZHZPVVYzMnpDS0hLUURqd2F1aFJiVDlhUnVjNHc3b1g4QW13dS9NRlBM?=
+ =?utf-8?B?M21PSWpVVmlDYTF3UStJbFVkQ2hDSEF6dVZ1bVdXcFZEclRJZjZyS0VJanlJ?=
+ =?utf-8?B?ZmdhclNORWkvN1QvSnIvV1IrRFFqelBlbDcrRUVxZitLeWhKa2YyRjJvb1ZN?=
+ =?utf-8?Q?yC69phrr677RjJ4cPf0IQRLmp?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a110c13-2d7d-4374-3e30-08dd0fbc69f4
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3ee8ec4-36b7-40a4-b614-08dd0fbc6e6e
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2024 14:53:26.6277 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2024 14:53:33.9854 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: rSP7xV2EStE4MZpx2iWeqpTMgFpizOM1D74kH6p+drQ8uB00jk1niJSOlNend257
+X-MS-Exchange-CrossTenant-UserPrincipalName: Wvy9PU1JP+NFCJzHFi34Q5hvrIJajvmQ2GY8tR5xTLQp94REI+ItIgSgYiTDtoxw
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9142
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -216,252 +218,34 @@ X-Virus-Status: Clean
 
 
 
-On 11/26/24 05:16, Venkatesh Yadav Abbarapu wrote:
-> Updating the usb5744 hub node as per the latest upstream DT binding
-> https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
-> tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
+On 11/26/24 05:12, Venkatesh Yadav Abbarapu wrote:
+> USB host support on ZYNQMP KRIA SOM needs onboard USB
+> hub driver for handling reset GPIO and for i2c initialization
+> sequence.
 > 
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > Acked-by: Michal Simek <michal.simek@amd.com>
 > ---
->   arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 48 ++++++++++++++++++++++++++
->   arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 48 ++++++++++++++++++++++++++
->   arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 18 ++++++++++
->   arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++-
->   4 files changed, 138 insertions(+), 1 deletion(-)
+> NOTE: The usb hub patches are merged.
+> https://lore.kernel.org/u-boot/20241125041202.980-2-venkatesh.abbarapu@amd.com/
+> ---
+>   configs/xilinx_zynqmp_kria_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> index 6349a0e108..e40840acb8 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> @@ -105,11 +105,19 @@
->   			#address-cells = <1>;
->   			#size-cells = <0>;
->   			reg = <0>;
-> +			hub_1: usb-hub@2d {
-> +				compatible = "microchip,usb5744";
-> +				reg = <0x2d>;
-> +			};
->   		};
->   		usbhub_i2c1: i2c@1 {
->   			#address-cells = <1>;
->   			#size-cells = <0>;
->   			reg = <1>;
-> +			hub_2: usb-hub@2d {
-> +				compatible = "microchip,usb5744";
-> +				reg = <0x2d>;
-> +			};
->   		};
->   		/* Bus 2/3 are not connected */
->   	};
-> @@ -164,6 +172,26 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub_3_0>;
-> +		i2c-bus = <&hub_1>;
-> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub_2_0>;
-> +		i2c-bus = <&hub_1>;
-> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &usb1 { /* mio64 - mio75 */
-> @@ -188,6 +216,26 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub1_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub1_3_0>;
-> +		i2c-bus = <&hub_2>;
-> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub1_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub1_2_0>;
-> +		i2c-bus = <&hub_2>;
-> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &gem0 { /* mdio mio50/51 */
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> index b0d737d3ca..ce1ad2b765 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> @@ -117,11 +117,19 @@
->   			#address-cells = <1>;
->   			#size-cells = <0>;
->   			reg = <0>;
-> +			hub_1: usb-hub@2d {
-> +				compatible = "microchip,usb5744";
-> +				reg = <0x2d>;
-> +			};
->   		};
->   		usbhub_i2c1: i2c@1 {
->   			#address-cells = <1>;
->   			#size-cells = <0>;
->   			reg = <1>;
-> +			hub_2: usb-hub@2d {
-> +				compatible = "microchip,usb5744";
-> +				reg = <0x2d>;
-> +			};
->   		};
->   		/* Bus 2/3 are not connected */
->   	};
-> @@ -184,6 +192,26 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub_3_0>;
-> +		i2c-bus = <&hub_1>;
-> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub_2_0>;
-> +		i2c-bus = <&hub_1>;
-> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &usb1 { /* mio64 - mio75 */
-> @@ -209,6 +237,26 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub1_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub1_3_0>;
-> +		i2c-bus = <&hub_2>;
-> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub1_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub1_2_0>;
-> +		i2c-bus = <&hub_2>;
-> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &gem0 { /* mdio mio50/51 */
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> index 561b546e37..0ef0357bd2 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> @@ -142,6 +142,24 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub_3_0>;
-> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub_2_0>;
-> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &sdhci1 { /* on CC with tuned parameters */
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> index 64683e0ccb..92d8851eb8 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> @@ -92,7 +92,10 @@
->   		label = "ina260-u14";
->   		reg = <0x40>;
->   	};
-> -	/* u43 - 0x2d - USB hub */
-> +	hub: usb-hub@2d {
-> +		compatible = "microchip,usb5744";
-> +		reg = <0x2d>;
-> +	};
->   	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
->   };
->   
-> @@ -146,6 +149,26 @@
->   	dr_mode = "host";
->   	snps,usb3_lpm_capable;
->   	maximum-speed = "super-speed";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	/* 2.0 hub on port 1 */
-> +	hub_2_0: hub@1 {
-> +		compatible = "usb424,2744";
-> +		reg = <1>;
-> +		peer-hub = <&hub_3_0>;
-> +		i2c-bus = <&hub>;
-> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-> +	};
-> +
-> +	/* 3.0 hub on port 2 */
-> +	hub_3_0: hub@2 {
-> +		compatible = "usb424,5744";
-> +		reg = <2>;
-> +		peer-hub = <&hub_2_0>;
-> +		i2c-bus = <&hub>;
-> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
-> +	};
->   };
->   
->   &sdhci1 { /* on CC with tuned parameters */
+> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+> index e5ffc7076f..1707a7ecf9 100644
+> --- a/configs/xilinx_zynqmp_kria_defconfig
+> +++ b/configs/xilinx_zynqmp_kria_defconfig
+> @@ -207,6 +207,7 @@ CONFIG_USB_DWC3=y
+>   CONFIG_USB_DWC3_GENERIC=y
+>   CONFIG_USB_ULPI_VIEWPORT=y
+>   CONFIG_USB_ULPI=y
+> +CONFIG_USB_ONBOARD_HUB=y
+>   CONFIG_USB_HOST_ETHER=y
+>   CONFIG_USB_ETHER_ASIX=y
+>   CONFIG_USB_GADGET=y
 
-Please also fix kd240 and there are also some #if 0 which should be removed by 
-this patch too.
+Queue to next.
 
 Thanks,
 Michal
-
