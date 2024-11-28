@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F787D6911F
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1763AD70DE4
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:16:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA5DB89D8D;
-	Thu, 28 Nov 2024 17:00:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6009089877;
+	Thu, 28 Nov 2024 17:16:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hAfKLJN5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GnoEDopz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76BC789D9F; Thu, 28 Nov 2024 17:00:22 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EA0DD895E2; Thu, 28 Nov 2024 17:16:53 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1948589D88
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:00:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 813A8893AB
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:16:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-296bff3f5e8so574289fac.2
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 08:00:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732809617; x=1733414417; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Hye3nUpnDy19r/33/kRsSKOqPHWFlsTr+v87dLcBajo=;
- b=hAfKLJN5tiyn/g5arKIothbsIcgl6DWoQBV1SywNUto5w6/A6CJCaCu3eiLIiqd2Cx
- uTxWM3YrSteTfBwk8XAFksC7Hq0ASep2aEgY5Zfmqc3iVu0zqwA0gifFJPvkGp+0CQqw
- q/7Ts5AJBrsUJ+/aTWftnMB8furBIaumsLdiE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732809617; x=1733414417;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Hye3nUpnDy19r/33/kRsSKOqPHWFlsTr+v87dLcBajo=;
- b=vH6cmpA1bNcO3b/2zn7FrgOVXhBdgTKtkM6f6C4+YWti3jdYoAWOwH+CXENth+Pm92
- 2dfkQplGA5gYTdYeRkg96Z9db70iI/x9tdCdtERgodM2RHXRBAJ8GwSocEbG/vFUv50U
- HdQFKBMgh43cRPsB8i+EKyuHYVbyruMW5zKzNlOJl6toUe8mn5VbNeKclgWJn2d5/s0/
- 9B6sC6m2AmVQRBIKgZS8IzDMgT3T6xMjj1l9wbPKgDRkrDFV2N1Jnb3utelItDFwPIBG
- Ok1Dt2FZhO/zdnLQ9Ou137/3TL/sHCdrhstpi1R/NVIlqqvgxCO6QpkUH/v1psUv7bQC
- OWgw==
-X-Gm-Message-State: AOJu0Yy6sPV/8ZcNRukZcix42Znq6jEX+eLPzwu1j2IfiZn6ipnYiJub
- yD3jz53pFGxAH0T4rE/bh/XtxBjxf0MfW91B+M3xr1gE5XK7OBcwPu/GNp6raHtuQcZuJRf2PpU
- =
-X-Gm-Gg: ASbGncurzOC0EmaBCg478YMPW7TZykoCGybOegMsprVM9ywbANlTo0VcTkLyCkaVFhb
- jUERw/eBwFKSBVPXEn/SbBl7YnrgziJqt+8H+meq7GhngoSN3etOsO8pvVhwOv7i7XTEB4sh/oz
- pk2OK7IGqpggACzogsobNkw2DM2I38vZv1Lq5VYcWuDrdxgPQvzJ1pJ+1vWhjpAxi60rMPK1YcX
- bF6dkqZ4ghbyjS2Wnu1KsepUbvwGJVb7St1MoiVo/ODYw==
-X-Google-Smtp-Source: AGHT+IE9CqfDmTfo6XxKYS+N3wjHZjQ14oUtaUGGuqM2w8elkGlqtBc+m9Z6DQWHIih1cfg0FYP+/g==
-X-Received: by 2002:a05:6871:108:b0:288:62c8:fd4b with SMTP id
- 586e51a60fabf-29dc42f857bmr6274169fac.28.1732809617144; 
- Thu, 28 Nov 2024 08:00:17 -0800 (PST)
-Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71d72543866sm362028a34.18.2024.11.28.08.00.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 08:00:15 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH] CI: Add gitlab tags to builds which can use all CPUs
-Date: Thu, 28 Nov 2024 09:00:10 -0700
-Message-Id: <20241128160011.780550-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1732810604; x=1733415404; i=xypron.glpk@gmx.de;
+ bh=ufXer7uSRquREOUN9XWeX8O6Dw4uvTzlNSL1XlAJzXc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=GnoEDopz6dNeKdy8849O91KpfG2E8bH8CYL1Ta2BVk5U1iaIvyrUt94EfJ2s1HVO
+ C8VRpn/NZ6bAn6XzLpLf8DdtoukcHaxE+3Gw8p8+HYRyq49FpF8QL0JFSBffhHXhq
+ eEUqPq95IIba4K+yf0kaXxJeVxTVywMPefolB6S9c2XLzQYcqJbmXd+gbERXGENQm
+ USOgU1mg97lgb2Q4vAqUduBJi7/slOO42mFauFU+d503YOUU+EjSKuL9Km8hfAAi3
+ kLvHMOUYtAjhgmH2RnrqtoMk9xSPm+hdcg5c9mXijH207j7/Zh49ibvLfwrgLPp+q
+ 0ictwbwH03e4Q3JdTA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7K3Y-1tJyz20M3A-006urb; Thu, 28
+ Nov 2024 17:16:44 +0100
+Message-ID: <962703fe-7ba0-4585-a65e-4b514be54977@gmx.de>
+Date: Thu, 28 Nov 2024 17:16:39 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 09/28] efi_loader: Use the enum for memory type
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>,
+ Moritz Fischer <moritzf@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, =?UTF-8?Q?Vincent_Stehl=C3=A9?=
+ <vincent.stehle@arm.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241128154727.771871-1-sjg@chromium.org>
+ <20241128154727.771871-10-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128154727.771871-10-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:GJNVJFtTTTySOTbdazxVsB88XvGtExOM6oQuMNPJ+HhtvnFljpj
+ RBeSZW9l5mU5TW9njDGmncfDGeq/u4N5QvYnDu2AdmIP9QoCRC/hOwmLM5YFh50kNKvY48A
+ ziKQKx/ZPBgTOBR7tHSHILJz6pBU9L8ZO9r5h17ty5SQ6U3DIpQ78O9d9juFp3e5txX5pEe
+ kXkfS6kVirk8JcpVhYdtw==
+UI-OutboundReport: notjunk:1;M01:P0:x8VKU/sZ7hw=;OviXqAAZpmmoABzID/vLqr3EYtd
+ LDdSTcCWbFXCXmkSD8/2l+qmaaUXTTGudhexMNBQPMWEFYPE3xlhUKNrD5140IklcYKS5w1gl
+ LWoZKM8Aw0gAoYcgBH097z8m0ik01hmC/TihxijiJ9SsD8pcUSU5KKva8wf2Xq6Hjc3t6DPNd
+ d0MKEwaIEeISqIZfqV7BXOv4jKEBopQG4bDJYmn9g0TZ8v5gzNrBVin94NfVgegfWtbJ8z1Yp
+ x5nXBaIRj3uzRGhsKM/fMBBQngiWrKkD2rFYPq4K9I51+rp+ZOq4tSZZ7hFc4HbDMr6TPzQ0w
+ PEUATQRXsuAVKmRZHc3N6mGPka/76llnzKfjcNJMG3US2QigMot2AJjA/OFQdvqCJAQa7RhbZ
+ ut35KsWYZt4/yyvJodknQXt6M7QmsD6CTbiH/UuyXw4IS/810SK/U1sgwhJVsxxbxV+EgoidA
+ xnRj4xoRh+9OhmIRoYnln7z7274H+e7DsxZYcp1Rb+rk9eQa751/a5wWpumvyy6yPcHQqCG7C
+ MEFB+zRssoXLnngGea6AGWMLVvhxEL09H7UYMqWzjUnlH6bG/PHrsju2F14QWBlsqWla5HzCJ
+ LxnJeHsVYQy91TwzH2mF04OYL2F4bAZ3RDXA1zvfJ0Q7wXcx9ET3Krv2pXm2v2HdZhsf4/EqA
+ b9DxOzFQcLjDNeoexQKebLICdNPXrLIiyRORYcBZBAJ7nQWyB9ATxYEwoUX07dcucDxzDpzoH
+ Z9gVrmFimlRp0lSOKiJPSdmCldA8NVFcdsV7wf1hljRNEJpbkcMbBHBHkCB4g8UxG5o6KW2nV
+ +2GiqIMCgmxv8RI3pIgnnBW/AcAbY8a5epqC+48PRpqPda7Y+6NEaEd0oTrHQ7OxN1INRnwAo
+ xCasfKD2vDVwL09KDcPalUXEIgPQ3g+MUOv087h7IncRZnOSrTysAvNQ8wsSiYH0FwYZzHqM3
+ 28/jgbwWEDWk38GxLV+aWMnz4lwMOga4fc14PMTPTB+cAn6Onfo6trmApVKdZUkUV31XMZqB5
+ xphpjt/g6NVundIl5Lykxh/Ey7mnheb+fmCHQf0hx75ovatM6wcmKmS+f+oxOeOyFRcu31qN1
+ qnMwOKxtrXugw8KoeVcIxVhbkRojzz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,91 +98,409 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most gitlab runners are mostly idle at present and could happily run
-several jobs at once.
+On 28.11.24 16:47, Simon Glass wrote:
+> Rather than an integer, it is better to use the enum provided, when
+> referring to an EFI memory-type. Update existing uses.
+>
+> Call the value 'mem_type' consistently. Fix up one instance of
+> upper-case hex.
+>
+> Fix up the calls in struct efi_boot_services so that they use the same
+> enum, adding the missing parameter names and enum efi_allocate_type.
 
-There are a few exceptions, such as the world builds.
+This was already NAKed for struct efi_boot_services in reply to your
+previous submission. We must have control over the size of the parameter.
 
-Add a 'single' tag for the exceptions so that they are dealt with
-separately, with no concurrency. This is not quite perfect, since it
-means that a 'single' job can be combined with a number of normal jobs,
-but in practice this doesn't seem to matter.
+Where the memory type is provided by internal callers we could use the enu=
+m.
 
-To use this, for each existing machine, add a new, separate runner, with
-the tag 'single'. Set 'limit = 1' in its config.toml file and set
-'concurrent = 10' (for example) in the global section. The machine will
-then pick up one 'single' job and up to 9 other jobs at once.
+>
+> While we are here, rename the 'memory' parameter to 'memoryp' so that it
+> is clear it is a return value.
 
-In my testing this reduces the time to complete a CI pipeline.
+Parameter names should match the UEFI specification.
+This renaming just creates confustion.
 
-My choice of which jobs to mark as single is mostly down to how much CPU
-they need. For the 'docs' job, it runs for a short time, so doesn't seem
-worth marking it as a 'single' job.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v2:
+> - Drop the changes to the boottime API
+>
+>   include/efi_loader.h             | 29 ++++++++++----------
+>   lib/efi_loader/efi_boottime.c    | 12 ++++-----
+>   lib/efi_loader/efi_device_path.c |  4 +--
+>   lib/efi_loader/efi_memory.c      | 46 +++++++++++++++++---------------
+>   4 files changed, 47 insertions(+), 44 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 3f75f2efcb6..a7228672f27 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -773,24 +773,25 @@ void *efi_alloc(size_t len);
+>    * efi_alloc_aligned_pages() - allocate aligned memory pages
+>    *
+>    * @len:		len in bytes
+> - * @memory_type:	usage type of the allocated memory
+> + * @mem_type:		usage type of the allocated memory
+>    * @align:		alignment in bytes
+>    * Return:		aligned memory or NULL
+>    */
+> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
+> +			      size_t align);
+>
+>   /**
+>    * efi_allocate_pages - allocate memory pages
+>    *
+>    * @type:		type of allocation to be performed
+> - * @memory_type:	usage type of the allocated memory
+> + * @mem_type:		usage type of the allocated memory
+>    * @pages:		number of pages to be allocated
+> - * @memory:		returns a pointer to the allocated memory
+> + * @memoryp:		returns a pointer to the allocated memory
+>    * Return:		status code
+>    */
+>   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+> -				enum efi_memory_type memory_type,
+> -				efi_uintn_t pages, uint64_t *memory);
+> +				enum efi_memory_type mem_type,
+> +				efi_uintn_t pages, uint64_t *memoryp);
+>
+>   /**
+>    * efi_free_pages() - free memory pages
+> @@ -804,12 +805,12 @@ efi_status_t efi_free_pages(uint64_t memory, efi_u=
+intn_t pages);
+>   /**
+>    * efi_allocate_pool - allocate memory from pool
+>    *
+> - * @pool_type:	type of the pool from which memory is to be allocated
+> + * @mem_type:	memory type of the pool from which memory is to be alloca=
+ted
+>    * @size:	number of bytes to be allocated
+>    * @buffer:	allocated memory
+>    * Return:	status code
+>    */
+> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type,
+> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type,
+>   			       efi_uintn_t size, void **buffer);
+>
+>   /**
+> @@ -837,14 +838,14 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memor=
+y_map_size,
+>    *			actually a pointer provided as an integer. To pass in
+>    *			an address, pass in (ulong)map_to_sysmem(addr)
+>    * @size:		length in bytes of the memory area
+> - * @memory_type:	type of memory added
+> - *
+> + * @mem_type:		EFI type of memory added
+>    * Return:		status code
+>    *
+>    * This function automatically aligns the start and size of the memory=
+ area
+>    * to EFI_PAGE_SIZE.
+>    */
+> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+> +efi_status_t efi_add_memory_map(u64 start, u64 size,
+> +				enum efi_memory_type mem_type);
+>
+>   /**
+>    * efi_add_memory_map_pg() - add pages to the memory map
+> @@ -854,13 +855,13 @@ efi_status_t efi_add_memory_map(u64 start, u64 siz=
+e, int memory_type);
+>    * in (ulong)map_to_sysmem(addr)
+>    *
+>    * @pages:			number of pages to add
+> - * @memory_type:		EFI type of memory added
+> + * @mem_type:		EFI type of memory added
+>    * @overlap_conventional:	region may only overlap free(conventional)
+>    *				memory
+>    * Return:			status code
+>    */
+>   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -				   int memory_type,
+> +				   enum efi_memory_type mem_type,
+>   				   bool overlap_conventional);
+>
+>   /* Called by board init to initialize the EFI drivers */
+> @@ -919,7 +920,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_=
+desc *desc, int part);
+>   struct efi_device_path *efi_dp_from_file(const struct efi_device_path =
+*dp,
+>   					 const char *path);
+>   struct efi_device_path *efi_dp_from_eth(void);
+> -struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
+> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
+>   					uint64_t start_address,
+>   					size_t size);
+>   /* Determine the last device path node that is not the end node. */
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
+.c
+> index be8e4f41ad2..8f311f95d1f 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -414,9 +414,9 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old_t=
+pl)
+>   /**
+>    * efi_allocate_pages_ext() - allocate memory pages
+>    * @type:        type of allocation to be performed
+> - * @memory_type: usage type of the allocated memory
+> + * @mem_type:    usage type of the allocated memory
+>    * @pages:       number of pages to be allocated
+> - * @memory:      allocated memory
+> + * @memoryp:     allocated memory
+>    *
+>    * This function implements the AllocatePages service.
+>    *
+> @@ -425,14 +425,14 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old=
+_tpl)
+>    *
+>    * Return: status code
+>    */
+> -static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int memory_=
+type,
+> +static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int mem_typ=
+e,
+>   						  efi_uintn_t pages,
+> -						  uint64_t *memory)
+> +						  uint64_t *memoryp)
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+We want the names to match the UEFI specification.
+This change is not helpful.
 
- .gitlab-ci.yml | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+>   {
+>   	efi_status_t r;
+>
+> -	EFI_ENTRY("%d, %d, 0x%zx, %p", type, memory_type, pages, memory);
+> -	r =3D efi_allocate_pages(type, memory_type, pages, memory);
+> +	EFI_ENTRY("%d, %d, 0x%zx, %p", type, mem_type, pages, memoryp);
+> +	r =3D efi_allocate_pages(type, mem_type, pages, memoryp);
+>   	return EFI_EXIT(r);
+>   }
+>
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
+e_path.c
+> index ee387e1dfd4..9c8cd35b97b 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -975,7 +975,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
+th(void)
+>   }
+>
+>   /* Construct a device-path for memory-mapped image */
+> -struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 2164ad79a72..03bbf764a44 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -110,6 +110,8 @@ stages:
- 
- build all 32bit ARM platforms:
-   extends: .world_build
-+  tags:
-+    - single
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-@@ -122,6 +124,8 @@ build all 32bit ARM platforms:
- 
- build all 64bit ARM platforms:
-   extends: .world_build
-+  tags:
-+    - single
-   script:
-     - virtualenv -p /usr/bin/python3 /tmp/venv
-     - . /tmp/venv/bin/activate
-@@ -136,6 +140,8 @@ build all 64bit ARM platforms:
- 
- build all PowerPC platforms:
-   extends: .world_build
-+  tags:
-+    - single
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-@@ -147,6 +153,8 @@ build all PowerPC platforms:
- 
- build all other platforms:
-   extends: .world_build
-+  tags:
-+    - single
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-@@ -192,6 +200,8 @@ Check for configs without MAINTAINERS entry:
- # Ensure host tools build
- Build tools-only and envtools:
-   extends: .testsuites
-+  tags:
-+    - single
-   script:
-     - make tools-only_config tools-only -j$(nproc);
-       make mrproper;
-@@ -224,6 +234,8 @@ Run binman, buildman, dtoc, Kconfig and patman testsuites:
- # Check for any pylint regressions
- Run pylint:
-   extends: .testsuites
-+  tags:
-+    - single
-   script:
-     - git config --global --add safe.directory "${CI_PROJECT_DIR}"
-     - pip install -r test/py/requirements.txt
--- 
-2.34.1
+Why rename the parameter?
+
+>   					uint64_t start_address,
+>   					size_t size)
+>   {
+> @@ -990,7 +990,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t mem=
+ory_type,
+>   	mdp->dp.type =3D DEVICE_PATH_TYPE_HARDWARE_DEVICE;
+>   	mdp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MEMORY;
+>   	mdp->dp.length =3D sizeof(*mdp);
+> -	mdp->memory_type =3D memory_type;
+> +	mdp->memory_type =3D mem_type;
+>   	mdp->start_address =3D start_address;
+>   	mdp->end_address =3D start_address + size;
+>   	buf =3D &mdp[1];
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 9d0f27dbb3e..3cece51f030 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
+p,
+>   }
+>
+>   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+> -				   int memory_type,
+> +				   enum efi_memory_type mem_type,
+>   				   bool overlap_conventional)
+>   {
+>   	struct efi_mem_list *lmem;
+> @@ -268,10 +268,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
+pages,
+>   	struct efi_event *evt;
+>
+>   	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
+> -		  start, pages, memory_type, overlap_conventional ?
+> +		  start, pages, mem_type, overlap_conventional ?
+>   		  "yes" : "no");
+>
+> -	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
+> +	if (mem_type >=3D EFI_MAX_MEMORY_TYPE)
+>   		return EFI_INVALID_PARAMETER;
+>
+>   	if (!pages)
+> @@ -281,12 +281,12 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
+pages,
+>   	newlist =3D calloc(1, sizeof(*newlist));
+>   	if (!newlist)
+>   		return EFI_OUT_OF_RESOURCES;
+> -	newlist->desc.type =3D memory_type;
+> +	newlist->desc.type =3D mem_type;
+>   	newlist->desc.physical_start =3D start;
+>   	newlist->desc.virtual_start =3D start;
+>   	newlist->desc.num_pages =3D pages;
+>
+> -	switch (memory_type) {
+> +	switch (mem_type) {
+>   	case EFI_RUNTIME_SERVICES_CODE:
+>   	case EFI_RUNTIME_SERVICES_DATA:
+>   		newlist->desc.attribute =3D EFI_MEMORY_WB | EFI_MEMORY_RUNTIME;
+> @@ -370,14 +370,15 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
+pages,
+>   	return EFI_SUCCESS;
+>   }
+>
+> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
+> +efi_status_t efi_add_memory_map(u64 start, u64 size,
+> +				enum efi_memory_type mem_type)
+
+Why rename the parameter?
+
+>   {
+>   	u64 pages;
+>
+>   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
+>   	start &=3D ~EFI_PAGE_MASK;
+>
+> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
+> +	return efi_add_memory_map_pg(start, pages, mem_type, false);
+>   }
+>
+>   /**
+> @@ -416,8 +417,8 @@ static efi_status_t efi_check_allocated(u64 addr, bo=
+ol must_be_allocated)
+>   }
+>
+>   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
+> -				enum efi_memory_type memory_type,
+> -				efi_uintn_t pages, uint64_t *memory)
+> +				enum efi_memory_type mem_type,
+
+We should stick to the parameter name from the UEFI specification.
+
+
+> +				efi_uintn_t pages, uint64_t *memoryp)
+
+Ditto
+
+Best regards
+
+Heinrich
+
+>   {
+>   	u64 efi_addr, len;
+>   	uint flags;
+> @@ -425,10 +426,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_t=
+ype type,
+>   	phys_addr_t addr;
+>
+>   	/* Check import parameters */
+> -	if (memory_type >=3D EFI_PERSISTENT_MEMORY_TYPE &&
+> -	    memory_type <=3D 0x6FFFFFFF)
+> +	if (mem_type >=3D EFI_PERSISTENT_MEMORY_TYPE && mem_type <=3D 0x6fffff=
+ff)
+>   		return EFI_INVALID_PARAMETER;
+> -	if (!memory)
+> +	if (!memoryp)
+>   		return EFI_INVALID_PARAMETER;
+>   	len =3D (u64)pages << EFI_PAGE_SHIFT;
+>   	/* Catch possible overflow on 64bit systems */
+> @@ -447,17 +447,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
+type type,
+>   		break;
+>   	case EFI_ALLOCATE_MAX_ADDRESS:
+>   		/* Max address */
+> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
+> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
+>   		addr =3D (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, addr,
+>   						 flags);
+>   		if (!addr)
+>   			return EFI_OUT_OF_RESOURCES;
+>   		break;
+>   	case EFI_ALLOCATE_ADDRESS:
+> -		if (*memory & EFI_PAGE_MASK)
+> +		if (*memoryp & EFI_PAGE_MASK)
+>   			return EFI_NOT_FOUND;
+>
+> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
+> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
+>   		addr =3D (u64)lmb_alloc_addr_flags(addr, len, flags);
+>   		if (!addr)
+>   			return EFI_NOT_FOUND;
+> @@ -469,7 +469,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
+pe type,
+>
+>   	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
+>   	/* Reserve that map in our memory maps */
+> -	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
+> +	ret =3D efi_add_memory_map_pg(efi_addr, pages, mem_type, true);
+>   	if (ret !=3D EFI_SUCCESS) {
+>   		/* Map would overlap, bail out */
+>   		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
+> @@ -477,7 +477,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
+pe type,
+>   		return  EFI_OUT_OF_RESOURCES;
+>   	}
+>
+> -	*memory =3D efi_addr;
+> +	*memoryp =3D efi_addr;
+>
+>   	return EFI_SUCCESS;
+>   }
+> @@ -515,7 +515,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uin=
+tn_t pages)
+>   	return ret;
+>   }
+>
+> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
+> +			      size_t align)
+>   {
+>   	u64 req_pages =3D efi_size_in_pages(len);
+>   	u64 true_pages =3D req_pages + efi_size_in_pages(align) - 1;
+> @@ -533,12 +534,12 @@ void *efi_alloc_aligned_pages(u64 len, int memory_=
+type, size_t align)
+>   		return NULL;
+>
+>   	if (align < EFI_PAGE_SIZE) {
+> -		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
+> +		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
+>   				       req_pages, &mem);
+>   		return (r =3D=3D EFI_SUCCESS) ? (void *)(uintptr_t)mem : NULL;
+>   	}
+>
+> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
+> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
+>   			       true_pages, &mem);
+>   	if (r !=3D EFI_SUCCESS)
+>   		return NULL;
+> @@ -559,7 +560,8 @@ void *efi_alloc_aligned_pages(u64 len, int memory_ty=
+pe, size_t align)
+>   	return (void *)(uintptr_t)aligned_mem;
+>   }
+>
+> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uint=
+n_t size, void **buffer)
+> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type, efi_uintn=
+_t size,
+> +			       void **buffer)
+>   {
+>   	efi_status_t r;
+>   	u64 addr;
+> @@ -575,7 +577,7 @@ efi_status_t efi_allocate_pool(enum efi_memory_type =
+pool_type, efi_uintn_t size,
+>   		return EFI_SUCCESS;
+>   	}
+>
+> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type, num_pages,
+>   			       &addr);
+>   	if (r =3D=3D EFI_SUCCESS) {
+>   		alloc =3D (struct efi_pool_allocation *)(uintptr_t)addr;
 
