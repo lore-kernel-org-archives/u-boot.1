@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BE95D6911B
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC85FD6911B
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 15:51:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7839C89D73;
-	Thu, 28 Nov 2024 16:49:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFEA889D92;
+	Thu, 28 Nov 2024 16:49:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zl1uRohq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KjX3NZ9L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2F9F89D5B; Thu, 28 Nov 2024 16:49:00 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 6EBBB89D92; Thu, 28 Nov 2024 16:49:03 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74FB389D93
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:48:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2216E89885
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 16:49:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3ea405aa7b3so501702b6e.3
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:48:58 -0800 (PST)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3e786167712so480067b6e.3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 07:49:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732808936; x=1733413736; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732808939; x=1733413739; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5zPdgEbV3HPHqSpHmttxjBvGV2tK12o2D096yTT2nTk=;
- b=Zl1uRohqtvq8dzyGzG3oVeu+sY3fw/xgzH/Ypm7+DJnYhwkYVpV6sGTHSrgcyhIvJu
- XEpIgBsoxHokweAaXHwgujqXjOQoNIapOccBUU3IAZTcFaXPur4R5rImPGPIOKr8SF2v
- B3R4GV4KmZ4teCEfnu4DrcAcSF8cDoxTWqJ/Y=
+ bh=DmrBFPpqz3a9b7Ie49II2QIxVH35uzk7Uwx/yEzQbvA=;
+ b=KjX3NZ9LFe/kDmFIWxFAOlZ9lfM+rTNpCbO3XCEjyMS4pqZ2b6WLlJl+16iDtWLUqt
+ 92+4oYx0QVWyedFKSSiRryzatXfEcDVfb7bW1KFbNQX5TmezIgNWRL9RIM4F23WszMO8
+ mFcrjwyqavgTh00PbJiuLTSoJqs0ioVon0n3g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732808936; x=1733413736;
+ d=1e100.net; s=20230601; t=1732808939; x=1733413739;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5zPdgEbV3HPHqSpHmttxjBvGV2tK12o2D096yTT2nTk=;
- b=JPlYF1VlyR6MrllfXu+YtNC3G02GtScSYteeIjZ6+e0s3meAWZJ/tvtXaEErQzvfB3
- pN8aDe/Pd4pgKkM04kkxnffCSjS+JV7aX46kBALXxPvYE9XonA/nT8YR5Sr4evuHLEj9
- vS3Zs240GobEOj7KCobYaxsPA+52L0MkZcgMz/rkDMBBXvQS7QEYeS3y07Df6mvc4Kxy
- J/6H2ylRK1uIcq0WbfUUSix1iFmT/07vlenpRQwPxh2dWPUpEr5Biybylv71So/tAhkD
- fDNLzpyy+q9Ml5cKAc3RFjVnGK+Q1t8tKoMOY5ywen41f+eu1pWeXbXFQ66JdD1K74j5
- u+qg==
-X-Gm-Message-State: AOJu0YxdJpR8YOEOajO+O+3Q7KEgyJ93xJtFSSItefPz6+bJIHmH0S3n
- w/QNNN17+8TDc6me6nQ/OX9VDk0dzjRKQpOp+UePXkXfp0dF94aOEhUWjv9CmGkndMKYhzL9v3M
+ bh=DmrBFPpqz3a9b7Ie49II2QIxVH35uzk7Uwx/yEzQbvA=;
+ b=vE0wqSsbf5BE/UsiKlSGsUiKpd+0nG51up0bmR5dCQ2gVeN1XVVU+C86b/iBwdb3Bk
+ /xVcMEkxDRu8380cdSKHDc9teQFSiQK24ldJ6kWHKzI2bwfe49k9WfD0vdd5oGim9O8E
+ 0i+h+15MI0lx4TRurJOaySHdohDff0x+LM3AEAic4/ZmpIHTDnwpJTySCPrHxyHFk20o
+ wb7pIwXNTwRy1G0Wlvl4hBXFpbxw6s3FNmB8vyi21SSJ2RxoGXIP0izwbS3QBJ/9cTpO
+ A0LQyNJX5bpFqBSmDc7LLKPXWGdZ8GCODV4xNxfAnQnrO8RNwWnlsc+SEUreBv9qhNpc
+ u8qQ==
+X-Gm-Message-State: AOJu0YzeX7BKyb6MayjUrY3p7GCIWHJRN7OiBwgc1egmP7fMpX/IAX2q
+ l71/V5DB289PnMz039AX8/9n0KHIWNeV3vI3/+yfEc4FTy9ALadAjr4coItaqyXTJLLDEZk078k
  =
-X-Gm-Gg: ASbGncvOy4aXFSvP+MrLbqB9AZKH/joo2u34XEY0kt8f74rGBSinfxiI8nfSYDs25TV
- Aoprw0PWKdTpTuZ8h5/wFQ+6dC2eyeRFb2Fr2/VVO0WQ+iImRhoRvsS9EGLVRt4pfZgyUE42F8T
- xF/qBDOrHn+07aLU/XppAfWWkSiyrziCp9gVHdqX3RTrBTxTIUgoQV/Hm1hoL1BqlWu9PjDO+OE
- 29sBFm5Bxqi4Cp7k2vHDXQNtyOYrCXJJ0l9I3y7+AxO0Q==
-X-Google-Smtp-Source: AGHT+IE9lIwxLLX7eJRqNVECPeF2A/t00WipMdQI5bsLLEAIYulJoza/8tmGBYRm5NcKz99hWBPZVQ==
-X-Received: by 2002:a05:6808:2009:b0:3ea:4652:53fc with SMTP id
- 5614622812f47-3ea6db60e2bmr4304543b6e.6.1732808936404; 
- Thu, 28 Nov 2024 07:48:56 -0800 (PST)
+X-Gm-Gg: ASbGnctHx1XsHYHxUikL5nzCZzP0cwHWvE481cSWoUFqk0DZ/qHIKYQJWQkYvC24Xj1
+ VkisS57jDpGr0M9UOzWm4evkkAAqZUweX1eSz8hKDwL0StEPSj6zVjUL8qAp8KXLn8nSQfDTasT
+ xf7CdyY3d6hjBG0BQwtAALIJIeJA22Nw9Sr3qn8ehKWtx35/YiaIcvDdAFBC28l0TBNymE7AarQ
+ n0/2VkvPoRHGu/gUTVPDbviHxxIgWJq2iCgdpmpELuLtw==
+X-Google-Smtp-Source: AGHT+IGKVLIu5pmKJpzGLXSO5d243w+e+TdzbAW4kEJPbsbdRl0NpJk8SqLLGblAykzyi7S0OVTYAQ==
+X-Received: by 2002:a05:6808:1304:b0:3e6:37f7:5a3a with SMTP id
+ 5614622812f47-3ea6dd9fbffmr6905174b6e.41.1732808939119; 
+ Thu, 28 Nov 2024 07:48:59 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.48.53
+ 5614622812f47-3ea86347014sm305419b6e.47.2024.11.28.07.48.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 07:48:53 -0800 (PST)
+ Thu, 28 Nov 2024 07:48:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -71,9 +71,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 25/28] efi_loader: Drop comments about incorrect addresses
-Date: Thu, 28 Nov 2024 08:47:24 -0700
-Message-Id: <20241128154727.771871-26-sjg@chromium.org>
+Subject: [PATCH v2 26/28] efi_bootmgr: Avoid casts in try_load_from_uri_path()
+Date: Thu, 28 Nov 2024 08:47:25 -0700
+Message-Id: <20241128154727.771871-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241128154727.771871-1-sjg@chromium.org>
 References: <20241128154727.771871-1-sjg@chromium.org>
@@ -95,75 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that these problems have been resolved, drop the comments.
+Update this function to use map_sysmem() so that it can work correctly
+on sandbox
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_acpi.c    | 2 --
- lib/efi_loader/efi_bootmgr.c | 3 ---
- lib/efi_loader/efi_smbios.c  | 6 +-----
- 3 files changed, 1 insertion(+), 10 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-index ffb360d461b..67bd7f8ca24 100644
---- a/lib/efi_loader/efi_acpi.c
-+++ b/lib/efi_loader/efi_acpi.c
-@@ -28,14 +28,12 @@ efi_status_t efi_acpi_register(void)
- 	/* Mark space used for tables */
- 	start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
- 	end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
--	/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
- 	ret = efi_add_memory_map(start, end - start, EFI_ACPI_RECLAIM_MEMORY);
- 	if (ret != EFI_SUCCESS)
- 		return ret;
- 	if (gd->arch.table_start_high) {
- 		start = ALIGN_DOWN(gd->arch.table_start_high, EFI_PAGE_MASK);
- 		end = ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
--		/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
- 		ret = efi_add_memory_map(start, end - start,
- 					 EFI_ACPI_RECLAIM_MEMORY);
- 		if (ret != EFI_SUCCESS)
 diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index b05d7e2ed54..b4ea6b817b6 100644
+index b4ea6b817b6..98799aead84 100644
 --- a/lib/efi_loader/efi_bootmgr.c
 +++ b/lib/efi_loader/efi_bootmgr.c
-@@ -365,8 +365,6 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 	 * TODO: expose the ramdisk to OS.
- 	 * Need to pass the ramdisk information by the architecture-specific
- 	 * methods such as 'pmem' device-tree node.
--	 *
--	 * TODO(sjg): This should use (ulong)map_sysmem(addr)
+@@ -14,6 +14,7 @@
+ #include <efi.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <mapmem.h>
+ #include <net.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+@@ -497,6 +498,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	 * If the file is PE-COFF image, load the downloaded file.
  	 */
- 	ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
- 	if (ret != EFI_SUCCESS) {
-@@ -401,7 +399,6 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+ 	uri_len = strlen(uridp->uri);
++	source_buffer = map_sysmem(image_addr, image_size);
+ 	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+ 	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+ 		ret = prepare_loaded_image(lo_label, image_addr, image_size,
+@@ -506,21 +508,19 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
  
- 	/* cleanup for iso or img image */
- 	if (ctx->ramdisk_blk_dev) {
--		/* TODO(sjg): This should use (ulong)map_sysmem(...) */
- 		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
- 					 EFI_CONVENTIONAL_MEMORY);
+ 		source_buffer = NULL;
+ 		source_size = 0;
+-
+-	/* TODO(sjg): This does not work on sandbox */
+-	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
++	} else if (efi_check_pe(source_buffer, image_size, NULL) ==
++			EFI_SUCCESS) {
+ 		/*
+ 		 * loaded_dp must exist until efi application returns,
+ 		 * will be freed in return_to_efibootmgr event callback.
+ 		 */
+ 		loaded_dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+-					    (uintptr_t)image_addr, image_size);
++					    image_addr, image_size);
+ 		ret = efi_install_multiple_protocol_interfaces(
+ 			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
  		if (ret != EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-index 02d4a5dd045..8d2ef6deb51 100644
---- a/lib/efi_loader/efi_smbios.c
-+++ b/lib/efi_loader/efi_smbios.c
-@@ -40,11 +40,7 @@ efi_status_t efi_smbios_register(void)
- 		return EFI_NOT_FOUND;
- 	}
+ 			goto err;
  
--	/*
--	 * Mark space used for tables/
--	 *
--	 * TODO(sjg): This should use (ulong)map_sysmem(addr, ...)
--	 */
-+	/* Mark space used for tables */
- 	ret = efi_add_memory_map(addr, TABLE_SIZE, EFI_RUNTIME_SERVICES_DATA);
- 	if (ret)
- 		return ret;
+-		source_buffer = (void *)image_addr;
+ 		source_size = image_size;
+ 	} else {
+ 		log_err("Error: file type is not supported\n");
 -- 
 2.34.1
 
