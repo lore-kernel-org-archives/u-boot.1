@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8543DD6D25E
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 03:48:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8399D6D25F
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 03:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 027E389826;
-	Thu, 28 Nov 2024 04:48:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C7BC89840;
+	Thu, 28 Nov 2024 04:48:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="DlApI0O6";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UgbLv+lj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94AE089826; Thu, 28 Nov 2024 04:48:12 +0100 (CET)
+ id 9305D8983F; Thu, 28 Nov 2024 04:48:13 +0100 (CET)
 Received: from mail-m17237.xmail.ntesmail.com (mail-m17237.xmail.ntesmail.com
  [45.195.17.237])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 040F089825
+ by phobos.denx.de (Postfix) with ESMTPS id E14398956D
  for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 04:48:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 4109ad5e;
- Thu, 28 Nov 2024 11:48:04 +0800 (GMT+08:00)
+ by smtp.qiye.163.com (Hmail) with ESMTP id 4109ad64;
+ Thu, 28 Nov 2024 11:48:05 +0800 (GMT+08:00)
 From: Kever Yang <kever.yang@rock-chips.com>
 To: u-boot@lists.denx.de
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] efi_stub: Sync the debug UART definition like other
- platform
-Date: Thu, 28 Nov 2024 11:47:57 +0800
-Message-Id: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 2/2] config: efi-x86_payload: Enable DEBUG_UART
+Date: Thu, 28 Nov 2024 11:47:58 +0800
+Message-Id: <20241128114737.2.I03b59e1d26d2a79a666adc8ef313077da8dce145@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ05LGVZJTUsYThhDGktJQ05WFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0hMGFZKS0JOSk9MTkIeHUpWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9370e2124503afkunm4109ad5e
+X-HM-Tid: 0a9370e2169303afkunm4109ad64
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OjI6Pyo*QjIsASwDPyo5FAMC
- LzpPCyJVSlVKTEhJTE1OTUNOSk5CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSElJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mxg6Mjo6FjIoFSwxASoIFEow
+ GBMaFFZVSlVKTEhJTE1OTUNNSEpKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSk5KNwY+
 DKIM-Signature: a=rsa-sha256;
- b=DlApI0O61DJx+Ye0e8QUFNxZ7Gig6lK09mCRSKOS4osPbqASSmUxb5zqxrlQRFklX/eCnzh71NGtkmwWDWG9c8rzNlYVICdbZFoWlo54/1rXnACrtq16seUn+wAZIeAZOQAtbsCjktEBhM/YfZGQjQt77nbJ385uVIUL2dMZ+kA=;
+ b=UgbLv+ljdAIvKv1ZzkL9AL72KzVk27b1+sNQFddcEMPO4YZu/AlIRSYFEwb3XcOl+Wp33hCnTOOoVChpTrcKwO6Jo/tRNdfi2V4kUZQFifG00Fg3RI+cAHD4fOfl3P5RJHXAJ3xPwnJ9iqDgpKH3cvYVYhVQR0wEsijdTokUWaE=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=ihKjC19EuXqeS4k4EMhQVjnxatCY6v6d2anH/kEELN0=;
+ bh=8RG3dRia0TlrkmqtfF2KwPcX41uxALdDNbpoXAZzZZw=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,61 +71,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The debug UART interface is available when CONFIG_DEBUG_UART is defined,
-sync with the other platforms to use the same definition.
+The efi_stub is useing DEBUG_UART interface by default, Enable it.
 
 Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
 ---
 
- lib/efi/efi_stub.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+ configs/efi-x86_payload32_defconfig | 1 +
+ configs/efi-x86_payload64_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
-index 40fc29d9adf..5179c5b2c09 100644
---- a/lib/efi/efi_stub.c
-+++ b/lib/efi/efi_stub.c
-@@ -9,7 +9,6 @@
-  * EFI application. It can be built either in 32-bit or 64-bit mode.
-  */
- 
--#include <debug_uart.h>
- #include <efi.h>
- #include <efi_api.h>
- #include <errno.h>
-@@ -55,10 +54,6 @@ struct __packed desctab_info {
-  * considering if we start needing more U-Boot functionality. Note that we
-  * could then move get_codeseg32() to arch/x86/cpu/cpu.c.
-  */
--void _debug_uart_init(void)
--{
--}
--
- void putc(const char ch)
- {
- 	struct efi_priv *priv = efi_get_priv();
-@@ -83,12 +78,21 @@ void puts(const char *str)
- 		putc(*str++);
- }
- 
--static void _debug_uart_putc(int ch)
-+#ifdef CONFIG_DEBUG_UART
-+
-+#include <debug_uart.h>
-+
-+void _debug_uart_init(void)
-+{
-+}
-+
-+static inline void _debug_uart_putc(int ch)
- {
- 	putc(ch);
- }
- 
- DEBUG_UART_FUNCS
-+#endif
- 
- void *memcpy(void *dest, const void *src, size_t size)
- {
+diff --git a/configs/efi-x86_payload32_defconfig b/configs/efi-x86_payload32_defconfig
+index 071ddb8e36d..f0b9acc358d 100644
+--- a/configs/efi-x86_payload32_defconfig
++++ b/configs/efi-x86_payload32_defconfig
+@@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
+ CONFIG_PRE_CON_BUF_ADDR=0x100000
+ CONFIG_VENDOR_EFI=y
+ CONFIG_TARGET_EFI_PAYLOAD=y
++CONFIG_DEBUG_UART=y
+ CONFIG_EFI=y
+ CONFIG_EFI_STUB=y
+ CONFIG_FIT=y
+diff --git a/configs/efi-x86_payload64_defconfig b/configs/efi-x86_payload64_defconfig
+index 71612d7fb19..b02a861e59c 100644
+--- a/configs/efi-x86_payload64_defconfig
++++ b/configs/efi-x86_payload64_defconfig
+@@ -5,6 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
+ CONFIG_PRE_CON_BUF_ADDR=0x100000
+ CONFIG_VENDOR_EFI=y
+ CONFIG_TARGET_EFI_PAYLOAD=y
++CONFIG_DEBUG_UART=y
+ CONFIG_EFI=y
+ CONFIG_EFI_STUB=y
+ CONFIG_EFI_STUB_64BIT=y
 -- 
 2.25.1
 
