@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78ABBD70DE6
-	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE194D70DE3
+	for <u-boot@archiver.kernel.org>; Thu, 28 Nov 2024 16:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD273894F2;
-	Thu, 28 Nov 2024 17:34:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id EA11289C67;
+	Thu, 28 Nov 2024 17:47:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="N4chutrj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h43tmrOt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 390D0897F3; Thu, 28 Nov 2024 17:34:10 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1525989430
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:34:08 +0100 (CET)
+ id CC44489D08; Thu, 28 Nov 2024 17:47:48 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8962089782
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 17:47:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1732811642; x=1733416442; i=xypron.glpk@gmx.de;
- bh=GvxmozrGp/VSEsbqXKk8kF8vRulUO434q7wv5YLe3aA=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=N4chutrjCWZAl73cFbI32PA+wuXEvl/whU8LWlWR1BEl0blp3Ubs5DMuqF0r/egQ
- Q3Ibu7j7AfgVhWt5OUzsGpybPMl9HiznD3YR6icLr2VLpW7in1K7DJcCdCn5Qsuo7
- Ka6ndRoaSUsMOCQQ9eSUoDUqcXiUmNWBfU9so/ntMVvhmkAOB7bS3rnrznsAg19Wc
- HZwouWaePXGWVf2RByY4/D+AD920ENOx6QtPj6ndRbpHjH/Dl4QktDBCAd7MAQoOq
- kDoCzTjs52uyQTorrZmMYzGvmuSGuSKBNjAciZVEpTJ7pA4aCQXlW/YkI8DOaYvVP
- 5j+BiJXXOHu+HDNtyg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MOiDX-1t3GmD08cB-00Or2p; Thu, 28
- Nov 2024 17:34:02 +0100
-Message-ID: <60b25206-8f4d-4955-991e-47e851c1aed2@gmx.de>
-Date: Thu, 28 Nov 2024 17:34:00 +0100
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ASGlWuU1187847
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 28 Nov 2024 10:47:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732812452;
+ bh=//xOWqpDW4WtfJHUAcZUiMmo6B5fTNt/EfFbXdkZo34=;
+ h=Date:CC:Subject:To:References:From:In-Reply-To;
+ b=h43tmrOt/6I3VdlzlFGNPdUK5c+x4QJu6hSVRm75PeSNEsPl4dK/dh6LNrcJnQlcm
+ x2Nx03J4+P3am6xXeamzEZtDAAWPtH3dxR0mEKQFPxllkJDbVUDesekVUNovs3HC3d
+ Gd3shpD1gamtbXdOXKoydKnKAwVPyGY2GWF8uT3E=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ASGlWqB017318
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 28 Nov 2024 10:47:32 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
+ Nov 2024 10:47:31 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 28 Nov 2024 10:47:31 -0600
+Received: from [10.249.131.218] ([10.249.131.218])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ASGlNvJ075788;
+ Thu, 28 Nov 2024 10:47:24 -0600
+Message-ID: <c80a0234-d9e2-4c41-b403-38e6346a4d1d@ti.com>
+Date: Thu, 28 Nov 2024 22:17:21 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/28] efi_loader: Add comments where incorrect
- addresses are used
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241128154727.771871-1-sjg@chromium.org>
- <20241128154727.771871-5-sjg@chromium.org>
+CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH 0/2] AM62A DWC3: Add support for USB DFU boot in OTG mode
+To: Roger Quadros <rogerq@kernel.org>, <vigneshr@ti.com>, <bb@ti.com>,
+ <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
+ <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
+ <jonas@kwiboo.se>, <j-humphreys@ti.com>, <nm@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
+References: <20241126120322.1760862-1-s-vadapalli@ti.com>
+ <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128154727.771871-5-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:kZIcv7gI0WWnOi8M5IOEtD+VN9sr5vujGj2Ml/cbyIpucLJUyiz
- YxPDL4Ol5779aKYvyq/8TAxWObEllM3S3Dxvc0/4gzDXTyLeP04mG5XhvAMDGCY1Zfg8qox
- uajlqmZQQ9oEzGXttKOc8FeJP6qcRRBTRkimhvDeGqY0Ah+BfgxL7Bl3iDXisE23F7DsLQ7
- UDQfUek0d1Pmwika8CDGw==
-UI-OutboundReport: notjunk:1;M01:P0:we/q218RGBQ=;/iCVcQpNYD0rPXM89QphdRgg0fg
- 9DNs2BLGtLAlivOCjD1cuVpjutAAPILsYq+Ptt7+7aEFQzowNT7/COu1Alw6kDhR294wP8Cgd
- aGoKHjWPBlkOH8Dgv4CllxkHYvPaIdz8Sq9PpEIOz3keDdb2Z5eKnAuxdftuC7eNx1OoBsuoi
- CvzTmpUN2ipnR1kplP4FWMiR4/i1vx5J1dL0rjpGFsAUBuyKPt5HRlR+NdW4DfR2t+/jOHekx
- gWV40yv8GZmDKkcnwjonBe5V9oadXO3iC7sNwJTwUHbZkG2PHY5oKkTOiHF/JC6M4IEo0yGFY
- k721pOeM2hEf2diXvlOebkjf85+6MqvrdnMSFcPK7gGnRKtjCe2wxsP49RuN2bpRjz+yoru5q
- G7xA671DsfsM1CeAwLoLdKXTSemAQZivepJks52shqgcOcrVzIVA113j9Gg911Csj2hKE8DzD
- 5ZyemXbG3/mM8mdCddqbIvTrX3kPzHJDjqmC1qG35oNs/7wEJf/Uv620xASK1mTNUs9ZKmMpR
- b2kGFgigk3WxJuVujH+EpViBGfpXKOmLMC9uCiBJyFe0bq7BnVI2bUq45CDzFjx8YcCOhsTWD
- dSFih1eWWpCf37yBCV0uZI7QR83/GeNdwKZG2arRTNHG+6JXnOAw4l1YQYhZWZGOW+L/8BLNA
- BODGb2iakxXJ2rz/DiSf2aQfU/dYogsI/Ya2bB17haQYJGkRUbcDoj1RipP1jsCP0RqrN/aHm
- gAL0n7g+DBrltfaGVEoIW3afR5R8H1Jx8V7GqHVzCiNB8YPLKfaHf8Agnj1+tR5Qm3N41FcOh
- WHbH/641v8YSuRwmYP86zpxelVJ4+cQA09ASALEvyFUT9X9dTF37y0makQnxBLCyybt0nqxP6
- 5dS0kDObmB9vD9nXtlI7rf5yEshQZyPqen/xWg7MHJbybmE75xIvA2RHYYxOMqr2yHOx3vaG8
- JIcsxWKdtCagrhG5zgFdXiaHJYQ7hQNwnH66bQ5cxzOzxPjFjdrQZIp2YVycvZ5VoUH0le2e8
- T6uPQYGo1YVLfKGnWsoob55r1sG1lLqVul4zSJcRkRhBqLcQYSEFojJHeaXDN5GmjvIwytor8
- y4NDp7F4ZPQU27gn+/3cw1hFeJvGBZ
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+In-Reply-To: <ea2bb69c-280a-4ab2-85ef-cd0d9e6e3f76@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,149 +87,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.11.24 16:47, Simon Glass wrote:
-> Some functions are passing addresses instead of pointers to the
-> efi_add_memory_map() function. This confusion is understandable since
-> the function arguments indicate an address.
->
-> Make a note of the 8 places where there are problems, which would break
-> usage in sandbox tests.
->
-> Future work will resolve these problems.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v2:
-> - Add a new patch with comments where incorrect addresses are used
->
->   lib/efi_loader/efi_acpi.c    | 2 ++
->   lib/efi_loader/efi_bootmgr.c | 5 +++++
->   lib/efi_loader/efi_helper.c  | 1 +
->   lib/efi_loader/efi_smbios.c  | 6 +++++-
->   lib/efi_loader/efi_var_mem.c | 2 ++
->   5 files changed, 15 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
-> index 67bd7f8ca24..ffb360d461b 100644
-> --- a/lib/efi_loader/efi_acpi.c
-> +++ b/lib/efi_loader/efi_acpi.c
-> @@ -28,12 +28,14 @@ efi_status_t efi_acpi_register(void)
->   	/* Mark space used for tables */
->   	start =3D ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
->   	end =3D ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
-> +	/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
->   	ret =3D efi_add_memory_map(start, end - start, EFI_ACPI_RECLAIM_MEMOR=
-Y);
->   	if (ret !=3D EFI_SUCCESS)
->   		return ret;
->   	if (gd->arch.table_start_high) {
->   		start =3D ALIGN_DOWN(gd->arch.table_start_high, EFI_PAGE_MASK);
->   		end =3D ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
-> +		/* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
->   		ret =3D efi_add_memory_map(start, end - start,
->   					 EFI_ACPI_RECLAIM_MEMORY);
->   		if (ret !=3D EFI_SUCCESS)
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 8c51a6ef2ed..bb635d77b53 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -365,6 +365,8 @@ static efi_status_t prepare_loaded_image(u16 *label,=
- ulong addr, ulong size,
->   	 * TODO: expose the ramdisk to OS.
->   	 * Need to pass the ramdisk information by the architecture-specific
->   	 * methods such as 'pmem' device-tree node.
-> +	 *
-> +	 * TODO(sjg): This should use (ulong)map_sysmem(addr)
->   	 */
+Hello Roger,
 
-This cannot work. The EFI memory according to the EFI specification
-uses  EFI_PHYSICAL_ADDRESS defined as UINT64.
+On 28-11-2024 18:15, Roger Quadros wrote:
+> 
+> 
+> On 26/11/2024 14:03, Siddharth Vadapalli wrote:
+>> Hello,
+>>
+>> This series adds support for USB DFU boot on TI's AM62A SoC which has
+>> two instances of DWC3 USB Controllers namely USB0 and USB1. The USB0
+>> instance of the USB Controller supports USB DFU boot:
+>> ROM => tiboot3.bin => tispl.bin => u-boot.img
+>>
+>> USB DFU Boot requires the USB Controller to be configured for Gadget
+>> mode of operation. Since the USB0 instance of the DWC3 USB Controller
+>> supports both Host and Gadget modes of operation via the Type-C interface
+>> on the AM62A7-SK board, the device-tree specifies the "dr_mode" as "OTG".
+>> However, there is currently no support for dynamically switching the "mode"
+>> from Host to Gadget and vice-versa with the help of a state-machine.
+>> The OTG mode is treated as a separate mode in itself rather than being
+>> treated as an intermediate stage before assuming the Host/Gadget mode.
+>> Due to this, USB DFU boot via the Type-C interface doesn't work as the
+>> USB Controller hasn't been appropriately configured for Device/Gadget
+>> mode of operation. One option is to change the device-tree to specify
+>> "dr_mode" as "peripheral" and force the controller to assume the Device
+>> role. This will imply that the U-Boot device-tree for AM62A diverges
+>> from its Linux counterpart. Therefore, with the intent of keeping the
+>> device-tree uniform across Linux and U-Boot, and at the same time, in
+>> order to enable USB DFU boot in "OTG" mode with the DWC3 Controller,
+>> the first patch in this series sets the "mode" on the basis of the
+>> caller function, rather than using the "dr_mode" property in the
+>> device-tree. There are only two callers of "dwc3_generic_probe()",
+>> each of which clearly specify the expected mode of configuration.
+>> This will enable both Host and Device mode of operation based on the
+>> command executed by the user, thereby truly supporting "OTG"
+>> functionality when the USB Controller supports it.
+> 
+> We don't really support OTG state machine. All you are supporting is
+> user initiated role change.
 
->   	ret =3D efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
->   	if (ret !=3D EFI_SUCCESS) {
-> @@ -399,6 +401,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct=
- uridp_context *ctx)
->
->   	/* cleanup for iso or img image */
->   	if (ctx->ramdisk_blk_dev) {
-> +		/* TODO(sjg): This should use (ulong)map_sysmem(...) */
->   		ret =3D efi_add_memory_map(ctx->image_addr, ctx->image_size,
->   					 EFI_CONVENTIONAL_MEMORY);
->   		if (ret !=3D EFI_SUCCESS)
-> @@ -506,6 +509,8 @@ static efi_status_t try_load_from_uri_path(struct ef=
-i_device_path_uri *uridp,
->
->   		source_buffer =3D NULL;
->   		source_size =3D 0;
-> +
-> +	/* TODO(sjg): This does not work on sandbox */
->   	} else if (efi_check_pe((void *)image_addr, image_size, NULL) =3D=3D =
-EFI_SUCCESS) {
->   		/*
->   		 * loaded_dp must exist until efi application returns,
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index bf96f61d3d0..fd89ef6036f 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -486,6 +486,7 @@ static efi_status_t copy_fdt(void **fdtp)
->   		log_err("Failed to reserve space for FDT\n");
->   		goto done;
->   	}
-> +	/* TODO(sjg): This does not work on sandbox */
->   	new_fdt =3D (void *)(uintptr_t)new_fdt_addr;
+I should have probably used the term "Dual Role" instead of "OTG". I
+meant to say that the controller can be used both as Host and Device
+based on the command executed by the user, if the controller's dr_mode
+is "otg". I am aware that we don't support the OTG state machine in
+U-Boot unlike Linux, which is why I have posted this series as a
+workaround to utilize both Host and Device modes in the interim.
 
-What is not working?
+[...]
 
-AllocatePages() MUST provide an EFI_PHYSICAL_ADDRESS according to the
-UEFI specification.
-
-The UEFI specification further requires an identity mapping. So
-EFI_PHYSICAL_ADDRESS variables MUST take a value that can be used as
-pointer.
-
-
->   	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
->   	fdt_set_totalsize(new_fdt, fdt_size);
-> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-> index 8d2ef6deb51..02d4a5dd045 100644
-> --- a/lib/efi_loader/efi_smbios.c
-> +++ b/lib/efi_loader/efi_smbios.c
-> @@ -40,7 +40,11 @@ efi_status_t efi_smbios_register(void)
->   		return EFI_NOT_FOUND;
->   	}
->
-> -	/* Mark space used for tables */
-> +	/*
-> +	 * Mark space used for tables/
-> +	 *
-> +	 * TODO(sjg): This should use (ulong)map_sysmem(addr, ...)
-
-No. See above.
-
-> +	 */
->   	ret =3D efi_add_memory_map(addr, TABLE_SIZE, EFI_RUNTIME_SERVICES_DAT=
-A);
->   	if (ret)
->   		return ret;
-> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-> index 139e16aad7c..5c69a1e0f3e 100644
-> --- a/lib/efi_loader/efi_var_mem.c
-> +++ b/lib/efi_loader/efi_var_mem.c
-> @@ -226,6 +226,8 @@ efi_status_t efi_var_mem_init(void)
->   				 &memory);
->   	if (ret !=3D EFI_SUCCESS)
->   		return ret;
-> +
-> +	/* TODO(sjg): This does not work on sandbox */
-
-It has been working fine up to now.
-
-Best regards
-
-Heinrich
-
->   	efi_var_buf =3D (struct efi_var_file *)(uintptr_t)memory;
->   	memset(efi_var_buf, 0, EFI_VAR_BUF_SIZE);
->   	efi_var_buf->magic =3D EFI_VAR_FILE_MAGIC;
-
+-- 
+Regards,
+Siddharth.
