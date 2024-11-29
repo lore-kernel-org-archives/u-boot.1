@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B5DD6EC05
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2F3D6EC05
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED7C389421;
-	Fri, 29 Nov 2024 13:45:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5EFFC89436;
+	Fri, 29 Nov 2024 13:45:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OzO9/5xn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l2nsXPBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF80893C9; Fri, 29 Nov 2024 12:32:17 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFCE98921B
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:14 +0100 (CET)
+ id 4C76F891AB; Fri, 29 Nov 2024 12:32:23 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 22DAC89392
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBW37l083537;
- Fri, 29 Nov 2024 05:32:03 -0600
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBW7ZB1308202
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 29 Nov 2024 05:32:07 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732879923;
- bh=QUIyUsc7tNhlUNyVhnRhCansErNoTUv66pdzBGJvEVY=;
+ s=ti-com-17Q1; t=1732879927;
+ bh=frOr+fW3tfO/FlwXbSmi4m4ATFfvy2eQ6XPzv9FMubI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OzO9/5xnJyKmDb1g8bLigKVIftUEp5sivkzCRILfB2nhsP0hVGZGVQ0rGR1IBFk7S
- zaWKfFiY+5T1zapFZAMjLhaZ2SPTvmE2MfdZtWHLYLfdr2q5PiEGdSMDJ93wl0nLf2
- bHEXzxUlT+94Fm/w8za7UOh/peoK+z3z1SvqTRCA=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBW3Q2029695
+ b=l2nsXPBsNwBL7ctgcwhpiCMc3WP35Rhu+T99f9b1KKesOKSjI3Cqmz+kY+f3Vx+Cs
+ 4RVtcvsxuQ/DCIkjOY2bZiCcybYohd6jtXTltgwYTVL/zTUfxiOf2QGc8yxJ6Z/2Sm
+ MuOc+aozSLkG63HV2YQeLe80ib694UA/eeguW54E=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBW7MF029777
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 Nov 2024 05:32:03 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 29 Nov 2024 05:32:07 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Nov 2024 05:32:02 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 05:32:07 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Nov 2024 05:32:02 -0600
+ Frontend Transport; Fri, 29 Nov 2024 05:32:07 -0600
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabR106135;
- Fri, 29 Nov 2024 05:31:57 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabS106135;
+ Fri, 29 Nov 2024 05:32:02 -0600
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <marex@denx.de>, <jonas@kwiboo.se>, <kever.yang@rock-chips.com>,
@@ -58,10 +59,10 @@ To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <ilias.apalodimas@linaro.org>, <afd@ti.com>, <nm@ti.com>,
  <avromanov@salutedevices.com>, <michael@amarulasolutions.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 4/8] arm: dts: k3-j721e-r5-common: Add HBMC overrides for R5
- SPL
-Date: Fri, 29 Nov 2024 17:01:32 +0530
-Message-ID: <20241129113136.383277-5-a-dutta@ti.com>
+Subject: [PATCH 5/8] configs: j721e_evm_*_defconfig: Add configs for
+ Hyperflash boot
+Date: Fri, 29 Nov 2024 17:01:33 +0530
+Message-ID: <20241129113136.383277-6-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241129113136.383277-1-a-dutta@ti.com>
 References: <20241129113136.383277-1-a-dutta@ti.com>
@@ -88,33 +89,72 @@ X-Virus-Status: Clean
 
 From: Vaishnav Achath <vaishnav.a@ti.com>
 
-Add 32-bit address overrides for Hyper Bus Memory Controller
-for Hyperflash to be functional in R5 SPL.
+Kernel commit 5b2671594b80 ("configs: j721e: Remove HBMC_AM654
+config") removed the HBMC_AM654 config because hbmc was broken
+in u-boot. Hence, add the missing configs necessary to re-enable
+Hyperflash boot.
 
 Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 7 +++++++
- 1 file changed, 7 insertions(+)
+ configs/j721e_evm_a72_defconfig | 4 +++-
+ configs/j721e_evm_r5_defconfig  | 4 ++++
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-index ce55ea6bae..c775432505 100644
---- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-@@ -51,6 +51,13 @@
- 	bootph-pre-ram;
- };
- 
-+&hbmc {
-+	reg = <0x0 0x47040000 0x0 0x100>,
-+		<0x0 0x50000000 0x0 0x8000000>;
-+	ranges = <0x0 0x0 0x0 0x50000000 0x4000000>,
-+		 <0x1 0x0 0x0 0x54000000 0x800000>;
-+};
-+
- &ospi0 {
- 	/* Address change for data region (32-bit) */
- 	reg = <0x0 0x47040000 0x0 0x100>,
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index bd55634924..d742ae6934 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -140,11 +140,13 @@ CONFIG_MMC_SDHCI_AM654=y
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_CFI_FLASH=y
+ CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+ CONFIG_FLASH_CFI_MTD=y
+ CONFIG_SYS_FLASH_CFI=y
++CONFIG_HBMC_AM654=y
+ CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+@@ -157,7 +159,7 @@ CONFIG_SPI_FLASH_MT35XU=y
+ # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+ CONFIG_SPI_FLASH_MTD=y
+ CONFIG_MULTIPLEXER=y
+-CONFIG_MUX_MMIO=y
++CONFIG_SPL_MUX_MMIO=y
+ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_FIXED=y
+ CONFIG_TI_AM65_CPSW_NUSS=y
+diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+index 00546aea27..a593fed50a 100644
+--- a/configs/j721e_evm_r5_defconfig
++++ b/configs/j721e_evm_r5_defconfig
+@@ -121,11 +121,13 @@ CONFIG_MMC_SDHCI_AM654=y
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+ CONFIG_MTD_NOR_FLASH=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
+ CONFIG_FLASH_SHOW_PROGRESS=0
+ CONFIG_CFI_FLASH=y
+ CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+ CONFIG_FLASH_CFI_MTD=y
+ CONFIG_SYS_FLASH_CFI=y
++CONFIG_HBMC_AM654=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPI_FLASH_SOFT_RESET=y
+@@ -134,6 +136,8 @@ CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_S28HX_T=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_SPI_FLASH_MT35XU=y
++CONFIG_MULTIPLEXER=y
++CONFIG_MUX_MMIO=y
+ CONFIG_PINCTRL=y
+ # CONFIG_PINCTRL_GENERIC is not set
+ CONFIG_SPL_PINCTRL=y
 -- 
 2.34.1
 
