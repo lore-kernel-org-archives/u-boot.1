@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C40D6EC0B
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 13:46:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDB5D6EC0D
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 13:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D86189338;
-	Fri, 29 Nov 2024 14:46:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E8B789338;
+	Fri, 29 Nov 2024 14:48:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EIVbn2ts";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xul/mDdu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B9D089338; Fri, 29 Nov 2024 14:46:20 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C36A5891B0
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 14:46:17 +0100 (CET)
+ id 61E7D89376; Fri, 29 Nov 2024 14:48:25 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 81DB6891EA
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 14:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4349fd77b33so17152525e9.2
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 05:46:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732887977; x=1733492777; darn=lists.denx.de;
- h=content-transfer-encoding:subject:cc:to:from:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HfK5VAYatvGWtuJ5L78ya1rK/EcMsgemUCyFztEdx/4=;
- b=EIVbn2tssfsTEkWBftuQ2yE3bLOz7tGDYtO6ByxYEquL8nt3tUAJpVy0+Q+NJPYwLJ
- hhZWq9P0b28ePJUhlLBiam8y8TKrnxD/sVP83xwqCy+WS1ZIH4I78xcIgKSccqtz4fBQ
- Y4H0AnjIYLOGMDJbUK9kxZXNpLQ0Lp8ym7SDFeZBN3KC7iUW8TzfGrD3n3QIU8+rmZem
- uHv0MlsbT6x1yn5vwd+iNVEdGWbjjmmzPlwAvjxdlS0m1Vl2CSvRzL3WGr4sFjI5T0os
- jeI6WP3EvW+XDfrhr1iHQqOg2dfvau3jk+ioID/UES08O3WG1GoG2MrCJESkenBcRrNr
- 5WuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732887977; x=1733492777;
- h=content-transfer-encoding:subject:cc:to:from:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=HfK5VAYatvGWtuJ5L78ya1rK/EcMsgemUCyFztEdx/4=;
- b=BKNx3NU9JEsV6vNRwD68BrTrVxPrJzFJ7ENLE0y/D7d3ds5Dk1Sim3FFfoiabJX2Bx
- CxBul2jTG5bjOdz1HRCAycPAggYDbrVj9sxQ/2PTZ1/szcXavpdozPPYXGSHe/xeIaPQ
- 6dzMdZeeg9jO6uiQPVug3USz/CkuPSQ2IPtv0J+K1kGPnq6mifODPSsrysTEmiAopKM8
- SVJd1NIQHaOQ3fGec0eEBcVaFUPT9VFTBZ8ulvrJ7IAPgleSs0WbU8ENqJPY4MYKRuyu
- GXM04o0VnIYLuUIjgRLcoPwB0rddZD4Gzj6hn3cULNMgcENpVysX8QWg0nytCPvd54I4
- riJw==
-X-Gm-Message-State: AOJu0YwUtuZGZxx4Gi/xrysvuz2ZTYW8/WxCDQJxE7GA1MfIRFqYbIfF
- FocgOzAjrTAdfii7ZmHJHlCRxQo0vc4Ib/N0CDbWECbLtXTvCkO+0Ld/nBGcLHWKmytrIOmUO6A
- JKE4=
-X-Gm-Gg: ASbGncsOztgHc3Pskk9yq44TZeuFLU+zKYvEEYYeNNsI9FXgQlhvdRYpRHMorsvRt1Z
- 5eSAbC04XT1XR6EcUGsTV8TbIoOeoKBRoJ8tO7btaujsOJa4xDdgQmRnLfeajz9I+oRxGaGT7Bf
- AAU7qehL15/bIt3MrfUGzU3KMBuZtW8HNYMlPru4ACYBJwqzHk3HZ3Tea4a+xXPDRblZ6XXFw3M
- Me0GGo2JZBqff6Yx5YwXPkq/HoYzvtty2VA60S+ZDzysySf36wyzjewGFY=
-X-Google-Smtp-Source: AGHT+IFgbL9+C7GpY+Dh/bmfKGnej6Cu+QlGH6MC8MPjjNGuPzqgGUjHPHSHdgUPv2zrGQsAX6EyLw==
-X-Received: by 2002:a05:600c:4750:b0:431:60d0:9088 with SMTP id
- 5b1f17b1804b1-434a9dc5241mr110478695e9.13.1732887977052; 
- Fri, 29 Nov 2024 05:46:17 -0800 (PST)
-Received: from [192.168.0.190] ([82.76.24.202])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434aa74f18bsm87305195e9.4.2024.11.29.05.46.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 05:46:16 -0800 (PST)
-Message-ID: <9c200bc9-e481-4c2f-a4f0-2ef594c2a512@linaro.org>
-Date: Fri, 29 Nov 2024 15:46:16 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATDmJaA904982
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 29 Nov 2024 07:48:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1732888100;
+ bh=85jsefkuc5CNIiPKLpDJ1vD3/4R840pUHUhk/wOeBQM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=xul/mDduQOUohR20FifXJpT2GAnG91BSorZU2AQju5iebNynlpOMxthCg8b7Qt8aw
+ CSRRCjdFaBf0t5QFniwskS5j34XmzOax+hAxYisDQ1FpsZFxM1ZIEPLJMa1HA/9Gwh
+ q/CwFvI+hGvfoP8R7lQHFbR6KsqTJW2koCMUSTtM=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATDmJus095867
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 29 Nov 2024 07:48:19 -0600
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
+ Nov 2024 07:48:19 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 29 Nov 2024 07:48:19 -0600
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATDmGnC017021;
+ Fri, 29 Nov 2024 07:48:17 -0600
+Message-ID: <4711a378-b10c-4ff6-b2de-d9da7dfc03be@ti.com>
+Date: Fri, 29 Nov 2024 19:18:15 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: dts: ti: k3-j7200: Fix OSPI boot
+To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
+CC: <vigneshr@ti.com>, <n-francis@ti.com>, <afd@ti.com>,
+ <u-boot@lists.denx.de>, <nm@ti.com>, <u-kumar1@ti.com>
+References: <20241119100720.1297067-1-u-kumar1@ti.com>
+ <20241123024219.GU3600562@bill-the-cat>
+ <CAFA6WYM9esX2VwGf91P9ics419OXq48zH_Taq_0xtHT19HmgUQ@mail.gmail.com>
+ <20241129133618.GI3600562@bill-the-cat>
 Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PULL next] u-boot-at91-2025.04-a
-Content-Type: text/plain; charset=UTF-8
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20241129133618.GI3600562@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,54 +84,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
 
-Please pull tag u-boot-at91-2025.04-a , the first set of features and
-fixes for the next 2025.04 cycle.
+On 11/29/2024 7:06 PM, Tom Rini wrote:
+> On Fri, Nov 29, 2024 at 12:33:04PM +0530, Sumit Garg wrote:
+>> Hi Tom,
+>>
+>> On Sat, 23 Nov 2024 at 08:12, Tom Rini <trini@konsulko.com> wrote:
+>>> On Tue, Nov 19, 2024 at 03:37:20PM +0530, Udit Kumar wrote:
+>>>
+>>>> OSPI boot is broken due to missing bootph property
+>>>> in pin mux of OSPI.
+>>>> So add bootph to fix OSPI boot.
+>>>>
+>>>> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+>>> Applied to u-boot/master, thanks!
+>>>
+>> Please don't merge direct contributions to dts/upstream subtree. It
+>> should rather have been a change via *-u-boot.dtsi or a cherry pick
+>> from dts/upstream subtree. Otherwise, it is very likely it's going to
+>> cause conflicts.
+> I thought this was a cherry-pick, sorry.
 
-This feature set includes the at91 gpio driver function alternate mode
-for pins, and some fixes.
 
-Thanks,
-Eugen
+Sorry for confusion , it was not cherry-pick,
+
+Let me know, if i need to send patch to revert above commit.
+
+Thanks
+
+Udit
 
 
-The following changes since commit 62224280d9e89648ae90346c0aede76f9b7e7610:
-
-  Merge tag 'u-boot-dfu-next-20241126' of
-https://source.denx.de/u-boot/custodians/u-boot-dfu into next
-(2024-11-26 10:50:05 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-at91.git
-tags/u-boot-at91-2025.04-a
-
-for you to fetch changes up to bf424a110dc6180b65e6cdf05897428ca7cac98d:
-
-  mtd: nand: raw: atmel: Remove redundant PMECC probe (2024-11-29
-12:59:27 +0200)
-
-----------------------------------------------------------------
-First set of u-boot-at91 features for the 2025.04 cycle
-
-----------------------------------------------------------------
-Alexander Dahl (1):
-      mtd: nand: raw: atmel: Remove redundant PMECC probe
-
-Benedikt Spranger (2):
-      tiny-printf: Handle NULL pointer argument to %s
-      drivers/mtd/ubispl/ubispl.c: Fix error message
-
-Zixun LI (3):
-      gpio: at91: Implement GPIOF_FUNC in get_function()
-      gpio: at91: Implement ops set_flags
-      gpio: at91: Implement ops get_flags
-
- drivers/gpio/at91_gpio.c                     | 97
-+++++++++++++++++++++++++++-
- drivers/mtd/nand/raw/atmel/nand-controller.c |  7 --
- drivers/mtd/nand/raw/atmel/pmecc.c           |  1 +
- drivers/mtd/ubispl/ubispl.c                  |  2 +-
- lib/tiny-printf.c                            |  2 +-
- 5 files changed, 99 insertions(+), 10 deletions(-)
