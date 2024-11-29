@@ -4,146 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68FEAD70DE3
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 05:30:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25571D70E1A
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 05:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5330C8923D;
-	Fri, 29 Nov 2024 06:30:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 45B41893A3;
+	Fri, 29 Nov 2024 06:37:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="TnflIcZz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R4gBamew";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FD7B8922D; Fri, 29 Nov 2024 06:30:22 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::62a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF171893A6; Fri, 29 Nov 2024 06:37:55 +0100 (CET)
+Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com
+ [IPv6:2607:f8b0:4864:20::644])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DFE89383
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:30:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D04B89397
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=buQYfiQ/1lx+48I/vsSZ6Bb+ImCA1KTBb35B8GzxKe0dJusH00N/TBNEwJeUVueD7S0ebnr6ega0vYg/GgFCXKJSRMXhI9IbzsYvIVFl5lsoNpU9PG0CqMVU2hxWwz+2Pb0ZUHc+5FBE+3yz6AtKYyawvu+CfuM9uEu0gWi23YSYe+ZxbPrJiGVRXxeknwMdAN2xcgMkTrWkWapiE2BEx1rfQkTg97oPVrYeTAfA5EOzvOpJ7zFycnjKZAmP8r47WKHoSWA/vSalQZTy1MwsbkEnIJIlsMnFjQV59xcUQaxrKePIBFYJVJPa8bbjtGcAXJGfCGewJycLxb4TAvI/dQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PzLppU698YJfTIvMgaeG7Ke+rg/yrhZJ6trh3qHbWWk=;
- b=QMTEktCIsntd1jb667cAaPbWgpUJJNj53U+/6ixMgSoHr7Bmp9E5dpHJ4vfkzMuinlUHJPUlEVOU750oMq8p8kvzR4xeq24A5+P1zCJ0bksdSPf0rSqPDDZFerABMxE/aAFLhz4BGcppEN/VIUiseXNqxFggwtIYmhCUMB4bhZTq3B2hELEUI53kHf/IJrUIWW2wcSmRnDkNxgqlJq7DEBXFqa2Nbu8nZKTwVfqXFhWYJ090Fkq3j9a5w9klLRsKkVSbGigVXsEMB2mwfh3eGLkXruo0HOs3QpOx0L+p2Nkg6lXv5CkBGmB3QrVpMbOyNl1X8LLq0ovPplk7cS3WhQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PzLppU698YJfTIvMgaeG7Ke+rg/yrhZJ6trh3qHbWWk=;
- b=TnflIcZzHqItAAub8FU/wHcRPtC4lv5PZCQbXaDCKmMIYi2cnItgt/CYCpUzGn3Qa7SS0x7DDK8J3TloWypBmiNK3fY69iCkIfn2SGoRnyZrqXyK7tUueZKqKb66CaJKWVNXDO9Ed7ELZ1GBGX6ehAK7v7BPn4ErD/X4t51zk/nXLbeBWe5hpS2Y4tsGs2WpzA7PL/tMFBVO4RsSUVDCUhWelTF54CU/mNunz4ywzg4MeHjWrdekagbW5T5h2uYAGR4Ck9AeMfGDDiWBT6ZKwE15y4b2Q4nLG+P2DL1rMzLL5D7j5Tqr+wyHV5OtNBPciT2ogalTN4gojNI5Mxi1UA==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI0PR04MB10614.eurprd04.prod.outlook.com (2603:10a6:800:260::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.15; Fri, 29 Nov
- 2024 05:30:14 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8207.014; Fri, 29 Nov 2024
- 05:30:14 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: dl-uboot-imx <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>
-Subject: RE: [PATCH v2] ARM: imx: Replace YModem with SDP on Data Modul i.MX8M
- Mini eDM SBC SPL
-Thread-Topic: [PATCH v2] ARM: imx: Replace YModem with SDP on Data Modul
- i.MX8M Mini eDM SBC SPL
-Thread-Index: AQHbQghcTU7HWjpG1k6as7StZ+++FbLNu03Q
-Date: Fri, 29 Nov 2024 05:30:14 +0000
-Message-ID: <PAXPR04MB8459F881811EC6EA7D3DF953882A2@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20241129024218.337845-1-marex@denx.de>
-In-Reply-To: <20241129024218.337845-1-marex@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|VI0PR04MB10614:EE_
-x-ms-office365-filtering-correlation-id: d5d7d549-532e-42a5-6850-08dd1036e6c5
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?g2vPlKuXt25KbIOjGj0Orm5CZQj8t6/3gHXTvL9ql3B0wiCiFJQzKvQmMWTq?=
- =?us-ascii?Q?U100OOYe5oCPSRV6aWaT1TlPsjtZTcJUTgLwlZIDjlFAWPjPw2edEnhgWS+E?=
- =?us-ascii?Q?o1L8R5HbDer4O/DrBBW+iNTWKApswse2gaW7y+jfb1qp80Audh2lXiEjLGan?=
- =?us-ascii?Q?hzh2ued5f6g8plZhnjoEEz0cNcF/Q8FYUjcXgVjDAppKTyj/xpNNJbz6vE5F?=
- =?us-ascii?Q?nai73HQOh4WZmXRpHs6yuUZr6+cEIx8J06rcjtMsmOdHVdcFRJCaSgErh57m?=
- =?us-ascii?Q?6CyqnU7CO27//2VfBynDWXn8yWowd9S+yELYm6ks67Byrg3yFS2ydeZiXKTb?=
- =?us-ascii?Q?NsCMgUE6aS+FFxv05pnBn6JevRaQVQGsOWNjBTpc7FQai47WTjw6XRPMQ2OT?=
- =?us-ascii?Q?XlX/9dvQfg57+8Q7M91gCXe8tuyiLQLoSgNJaVEDgN78GExFJAnUEdS4VJEn?=
- =?us-ascii?Q?tIFk9JrM36PqIjFQ8fLu4TDJHs/5BKTPmU+9GPySYvlWEz7mwFn8o5egtMul?=
- =?us-ascii?Q?RYj2xzYX32idhMiox/yfoIOq8Fl2ECbuc5Sx5iqfWh9u5reVrarylHdbEoSC?=
- =?us-ascii?Q?LTHHRASokKK0SLSc4vINTjYXNtlaWf9VThV/4kjZm7DE3T6TO8ZwmZq5Cohc?=
- =?us-ascii?Q?uyjBL5jVfhgslX+zFVJIOeEXc4IXWZ90fGp/HWt1rTVHu7d4BTPWe/mN4KZO?=
- =?us-ascii?Q?SCGhvbAb3goZg4KXI4pf8/ZGRqCQjVMByQcYW3rzZTtOpv2p/FuWXk4sr2ID?=
- =?us-ascii?Q?O3DXff759fRJOrzYTkvqumJo15pFX+c1XHP03HdPrPB6tXjUYs0c1ZFronVq?=
- =?us-ascii?Q?ih817VKsgCtNtzeEIdFOgFaqlDQwyeF9NpCDiS/1lidf2v4ac8Qo7oNT62ZK?=
- =?us-ascii?Q?BtwaLRA9xQj/q73P1hY4QAfaqwUibaZSw/Ky8+Huc6X6wnP7bSpApQprJZfu?=
- =?us-ascii?Q?y6k/jy+esbbcFG6rr4/c11rDzgWIb/qO3yCfNpT83Vn3JrlFcyrSm8LHYrHT?=
- =?us-ascii?Q?ZSOGTnVob6ozzF0Q9Y4L6cQqztHNAtL97YYdNwe1rWFG9exO5irA+8t5XCok?=
- =?us-ascii?Q?IuSmwuL2wSyQAAGxdpWL6JaxKz+8AYwzDYuvWIbodw8BcsO0BPZTZLvSUg+k?=
- =?us-ascii?Q?KeYI6yK9s0YQ1AjIRjjVTEJm4o0aGIqTN23R7yt4g9CTuoJPfuCKBUvgN52p?=
- =?us-ascii?Q?mmDvXcg/9CBAHv0aHgLkoDEqbqTqFxweagsVx91yEB8PInfam+cGW4UYoyPe?=
- =?us-ascii?Q?RrLUolZg85P6RKbgP2LrXZor6woAhXRvejCMWoRyw1pF8RdGd3zAe5525GHp?=
- =?us-ascii?Q?IJRkdi7smu+nXBcKrdUUkeUH8P5XMUTBEpQ4ViV53KJgBG8JyYzC0MXIF/9s?=
- =?us-ascii?Q?nI8hPS69xfyHORD+W70kd4GJPznMWgbT5q5UoUsJ0GFZZjNwng=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?i2NW4t/6ulpF8VhG7ClnrNUG+9FJYhwzyWwFnB7hh2myzdh7USeALw4W9cKE?=
- =?us-ascii?Q?Th5ACgZ/6b6IdGPHtRtDjR4RgcuAjFqbtzdnoHloPv+xrfcurYL8WzMLLLLV?=
- =?us-ascii?Q?rO4whta/mKSvd1GGUq8P6sSRAb7031K65EWxgFux56d+Hkmlpo7UlI9sjTnQ?=
- =?us-ascii?Q?NgiWDRBDwqi8tl723lNEqbHZ89VYdAL5gOXiPRYIb5Tly2d/s1HamQ/q06Tj?=
- =?us-ascii?Q?3LYhrHEwZDY+8gADVBcpUAjUsvX26ZeZONygC+hNNeWXzQY3qHcPWolJI6xa?=
- =?us-ascii?Q?fkQj+U31gLB+F1ATIgYmDxf9Ru1UkBe47B7NVvu58QBRFP9ddCCvxR6WnZho?=
- =?us-ascii?Q?A/J6kklS9sMk0o4wrzhhDXkwT57Z+Mfu+VWgOqwPOnAOpv7eifAFWnN1IQl4?=
- =?us-ascii?Q?Y0uLh8b6PkStAv0J3NVfmupN13YHQQ8Vo6aKOurbdtQOPTayVv4CaMdW5BoQ?=
- =?us-ascii?Q?vRFZbNOQuK5sPLRPOpbXMtrhjxy/hzuJAZ6U9wVgYKME7R2/PiJcWaHY9Ftg?=
- =?us-ascii?Q?fdPgLq1X73NokTq7KDunr/X4wKbGk7BuZNq1CB2TpgCqWYU+XWWBkyRPHD1g?=
- =?us-ascii?Q?CUKy2MY4U/7gzVQKfz0etoQ3xfPnQqyFQSGsGeqF7PTVpgarR3ku89BcmH25?=
- =?us-ascii?Q?mx1dZPeKORbOVkRpBkl/BigyKqrz4cIeVb7x3/NZs7zv1FroOjdFm91vGuM/?=
- =?us-ascii?Q?hzYahhX03gGtBX2xzp7u+STcO/g4YSgZ1n4GNXpLLMQ+yDyUcCG215nXnrpl?=
- =?us-ascii?Q?G/GqULqSQSWzgxDFUQi28stpo8TRf9A+z0/oHf6/bX2BGc1UVWDwpERkFrFq?=
- =?us-ascii?Q?UZ9DWH7IGHcuMdKIOwLpYHCGG5coza1gao+C2gw6D5NUnDQsFVETZ/euBGqt?=
- =?us-ascii?Q?ECFHxGbDCfHwU0wZcpAPOd7m2D55PRAqIb8+nTQrRWDzHJK6Ooa5tehXO7BG?=
- =?us-ascii?Q?9y1yfdFq/tcjfmNFEXUz9IDQUDQ0xDVL3afNgTKY2JrmOjFRJcJYnVdtFzsG?=
- =?us-ascii?Q?2UBybVP7HZRHmWxRntFSKlIuQfQhzDQkBB3Qep8chpwo25Zik/ZZttLhBufV?=
- =?us-ascii?Q?pxsDg2NWbhCHQwiZCu02gy2BMmPsInMHop4uWq8hniT5q+wmIbokyaqbwhEv?=
- =?us-ascii?Q?Duvvmo8oUBzvgFbDLrGOQY6yYVqinTKK75O5BbMfoJ6DYZM5jQKaqzIyvyel?=
- =?us-ascii?Q?QRVEvOZaAhijMUvBmQ1lQaIeY2i3M0aN6ZGHsTP/lxwgt07yLjwMPtKer06+?=
- =?us-ascii?Q?S+fmskL2xas/Tk5sImoh1dt66CRuZXaA0Kw5Boe96Mp7iwWTDA134UfHfUWQ?=
- =?us-ascii?Q?00zUmZcOtezBYoy1ZNHks0qJCSEqU1/T8TcU7gtZn8RqWGxI/lfsxV26qLPf?=
- =?us-ascii?Q?7rxQZPtqPGfHL6Oi5Ay8YmXpwKCKkN4BGX5Cl84wo0GSdkNPQ/XNmwF0YHV3?=
- =?us-ascii?Q?nSO1MElkAcnyqsRShA+D69GDU5sDkRcbI0CaUw0TU/0bAEaCTqzNP+2f2HMI?=
- =?us-ascii?Q?GFH6IHhiWLVsOEHrAZ18AEozD6ujMgPHB0eA/R2/3JvrLrzIK1DkRIyhb9kk?=
- =?us-ascii?Q?E9AyIvzBkNF2Qg6zc7U=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pericycle.cc@gmail.com
+Received: by mail-pl1-x644.google.com with SMTP id
+ d9443c01a7336-21285c1b196so13495165ad.3
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 21:37:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732858672; x=1733463472; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dTVRg65Krx58El4Z9GaI2OBLfLZtXpfWQN9YHnLiWpU=;
+ b=R4gBamewPjOt9GpmFOMsts+zVlyyX79RqosiGcOEj/KO5V8W9lZ+mCkZgQKwMGvNnL
+ 1MMEW79zdSHmjpCcqX9nzgLHRhghCSL9djhp1Wq7C4EpMHv2EfzoEoPqNiBoKArhdtzD
+ 17Ow+mlpTHguHKXDWmujYnIIzNtYgR4wwd2o1novHCgUNc3fUxnQW3S2mDlcg58uHpye
+ /jzhxog7sNGyeqbmKSR5mnV1mnqXnZp0uEuT5/jOzAopNek23j2q6TZjYwa8uDFr0w58
+ /LWmdz29BQCTJcgXcvx9zUAkuLiHrhafIE5iJmvQ6iyEPKOnI316mYku6nV/7nKwSFnt
+ gvMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732858672; x=1733463472;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dTVRg65Krx58El4Z9GaI2OBLfLZtXpfWQN9YHnLiWpU=;
+ b=RTh9ztpIo++2WKvlbcefqIu0kvkV1FZd/9yLk6c6IbE3Lg3a3DubB1YFEhfGUWsDjq
+ sVwcuboUlK3elgp3eRHo7A5QCFMcZEfm0DXXjKxq0CZSeexeRX9hNgKhl3BVlmgXIUfe
+ BIsfiElp5yth5B/8CGCX6Rc9RTdbPUGvCiWfciMyRSwWRsRI3V5OMSC9O1p46COkorsW
+ qctpmJ/u4jyN5uiAYIHqfVozZqw0JedsgT50NuC554Dsaxky0m0jWYtLb1h0LQTvuRWJ
+ GLlhLWfv3+dTmRM0zR3MrQkcOV5ryiYNgLHNby4CFhgO2C4Cw59OBfXkW7wtIV2Tlw2D
+ 4R2Q==
+X-Gm-Message-State: AOJu0YwamS/gXLqoqqNPwHlu2n40SEapG6mFY6TJAaDlPQ25KrCawnx6
+ YAekAKH9BlUhnXNooh0hqGRsTawt7n5ND79TS4l/mWiY3ADnDveZ
+X-Gm-Gg: ASbGnctBzRtHJ2Gm7XyBKkdPEBJYd1AcJF0OPn7ZDm5WGg8WqmNK2TQZdLPGyHbVmfG
+ sDlyATCsVkAxaYPDWpQ2DRNo+Dj5Ns0IpooLxJqZeyYwfNXtwqnpKpBRfAd6G6XbYNiV/PB3P/T
+ 7990X052ClPQBC6V+BffM4NsLyk5AMR5+SE+fNeDfAtw6Tpxk6VKzTcyV2z7Ishf4ugp5j7QZVR
+ /KTxdCaHsNOQx6GIhv251H+YgULd0gXPaon02QVtUENRXRwQ1XD9o8ay4Dc5IWOQ678ORNiuA1/
+ dUijqO5Fb8u46XtpnGw=
+X-Google-Smtp-Source: AGHT+IEN/0j/QkPMmt4oNOD+ginGVSIUL9rwEcNY/bewZ38RlyvSr7LWwU/TCnq7HwAmK3xgXL4jXA==
+X-Received: by 2002:a17:902:d507:b0:20c:7ee8:fc3c with SMTP id
+ d9443c01a7336-2150175b496mr123921345ad.22.1732858669549; 
+ Thu, 28 Nov 2024 21:37:49 -0800 (PST)
+Received: from per1cycle.per1cycle (n220246100016.netvigator.com.
+ [220.246.100.16]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-215218f2345sm22901415ad.17.2024.11.28.21.37.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Nov 2024 21:37:49 -0800 (PST)
+From: Huan Zhou <pericycle.cc@gmail.com>
+Subject: [PATCH v4 0/2] riscv: spacemit: add support for bananapi-f3
+Date: Fri, 29 Nov 2024 13:37:38 +0800
+Message-Id: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d5d7d549-532e-42a5-6850-08dd1036e6c5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Nov 2024 05:30:14.2182 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 9Q/iO09LERhv8/Ny7/Pxqdj6SwlGVDt28/l63jSr+Y0MVeJD12KcW871Yv8fzr0oC4QZXeCn1ob2zCffdLQGvA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10614
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACJTSWcC/12Oy27DIBREfyViXSKeNnSV/4i6uMAluWodu+BYr
+ SL/e4nTRdrljHTOzI1VLISVve5urOBClcZLC+Zlx+IZLifklFpmSigjpVR8ovh+nXiYKGuujIW
+ ghAseDGvIVDDT16Y7vj1ywc9rs86PkgWoyOM4DDS3FRGbwPa+NyEF4XPOoGVK2NmUcufRJrQaA
+ 7u7zlTnsXxvTxe5yX5P6b+nFskFVxqsczFaLbvDaQD62LfVTbToZ9j8g3WDvQNjnVAQev8Mr+v
+ 6A3B8TRwxAQAA
+X-Change-ID: 20241112-pickup-bpif3-245ab208b9a4
+To: u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
+ Padmarao Begari <padmarao.begari@microchip.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732858662; l=2625;
+ i=pericycle.cc@gmail.com; s=20241109; h=from:subject:message-id;
+ bh=g/Mh5FLMGo7HcyYwnAgEo4RyjQoy+GkTrQcm/uNVVOk=;
+ b=bgb2IgfEDOa08s6PKBEdUosQlMQ128sg8FhwY/qtwNq8HfliN1YDqeSfxzPrAa0I42GiURWVv
+ RWEmEezlYf4ALOwYozAsmbsJXePuyG9+w545fEudN63iUWAUhPBYtJx
+X-Developer-Key: i=pericycle.cc@gmail.com; a=ed25519;
+ pk=Wd3eEYWh1pNETTTXjX4aeanCWrr201iLaYYW5G1BdbU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -160,20 +121,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: [PATCH v2] ARM: imx: Replace YModem with SDP on Data
-> Modul i.MX8M Mini eDM SBC SPL
->=20
-> The YModem support in SPL was never really used on this device, the
-> SDP support is much more convenient on i.MX8M Mini based
-> hardware. Replace the YModem support with SDP support.
->=20
-> The SDP can be utilized by forcing the board into SDP boot mode by
-> grounding test point right next to silkscreen label U30, and then by
-> using mfgtools 'uuu -brun spl flash.bin' once the device enumerates on
-> host system USB bus. The SDP capable USB port is available on the USB
-> micro-B port on the base board.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
+Banana Pi F3 board is a industrial grade RISC-V development board, it
+design with SpacemiT K1 8 core RISC-V chip, CPU integrates 2.0 TOPs AI
+computing power. 4G DDR and 16G eMMC onboard. 2x GbE Ethernet port, 4x USB
+3.0 and PCIe for M.2 interface, support HDMI and Dual MIPI-CSI Camera.
 
-Reviewed-by: Peng Fan <peng.fan@nxp.com>
+This patch introduces fundamental support for the Banana Pi F3 board,
+encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+operate in serial console mode.
+
+Changes in v4:
+- Change uart compatible in k1.dtsi in v3, cause related driver in not implemented in u-boot.
+- Update doc, show how to validate the patch.
+- Update maintainer, remove kongyang cause he lefted.
+- Link to v3: https://lore.kernel.org/r/20241114-pickup-bpif3-v3-0-98a45802ab79@gmail.com
+
+Changes in v3:
+- Add base commit
+- Clear redifinition warning while building in UART_IIR_ID
+- Change underscore to dash in bananapi*f3
+- Update maintainer
+- link to v2 https://lore.kernel.org/u-boot/20240718043329.1500-1-seashell11234455@gmail.com/
+
+Changes in v2:
+- Change license to GPL-2.0-or-later
+- Add memory node for dts
+- Add ft_board_setup function for kernel memory init
+- Use default prompt
+- links to v1 https://lore.kernel.org/u-boot/20240714150828.736-1-seashell11234455@gmail.com/
+
+Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+---
+Kongyang Liu (2):
+      riscv: spacemit: bananapi_f3: initial support added
+      doc: spacemit: bananapi_f3: document Banana Pi F3 board
+
+ arch/riscv/Kconfig                     |   5 +
+ arch/riscv/cpu/k1/Kconfig              |  18 ++
+ arch/riscv/cpu/k1/Makefile             |   6 +
+ arch/riscv/cpu/k1/cpu.c                |   9 +
+ arch/riscv/cpu/k1/dram.c               |  54 ++++
+ arch/riscv/dts/Makefile                |   1 +
+ arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
+ arch/riscv/dts/k1.dtsi                 | 459 +++++++++++++++++++++++++++++++++
+ board/spacemit/bananapi-f3/Kconfig     |  25 ++
+ board/spacemit/bananapi-f3/MAINTAINERS |   6 +
+ board/spacemit/bananapi-f3/Makefile    |   5 +
+ board/spacemit/bananapi-f3/board.c     |   9 +
+ configs/bananapi-f3_defconfig          |  20 ++
+ doc/board/index.rst                    |   1 +
+ doc/board/spacemit/bananapi-f3.rst     |  86 ++++++
+ doc/board/spacemit/index.rst           |   8 +
+ include/configs/bananapi-f3.h          |  13 +
+ 17 files changed, 750 insertions(+)
+---
+base-commit: 40c45a57974bdb09fffa31dde65ddf69e5de53eb
+change-id: 20241112-pickup-bpif3-245ab208b9a4
+
+Best regards,
+-- 
+Huan Zhou <pericycle.cc@gmail.com>
+
