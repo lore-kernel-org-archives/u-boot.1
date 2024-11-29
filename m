@@ -4,56 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CEB7D6EBED
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 08:22:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8A5D6EBF2
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 10:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC97B89382;
-	Fri, 29 Nov 2024 09:22:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 95B31893C6;
+	Fri, 29 Nov 2024 11:03:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732868562;
-	bh=Hrf+e098NbOcnd7aqDn/bYYkgFyGjGxucqhgwV0J8Es=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Tjn85yqRHjwg45rvLZtsIWFQ4+T4HYIJLgzNQ5dxHj7l48XE7Srsg25V9ohTtU8Gg
-	 Olr23SqHONeKB5jyVizJHOAeA1PWTln5FG2BjCwscPh+6bO+Bc2OErTrnfvtKnX5yw
-	 TJtkewgSKE2pqB1zpF3lrtB/1j0K9f51BO6gWbw8k1FUOSRvO9EdyTLBAQm3rHgWg2
-	 CSsHciJBF4UaC9yPzbWSRLFCEwAE5CqMw5kpO9auP3jFBOA8F4tdGDVrG19MIZnepe
-	 2GI4Rq6MmZtCX2eI2lk8bgYYLIBV/69LDwAsTcEAQceRis7M/UJP2voTkx6zUp+mg8
-	 loTBce9Tox7yQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F05B0893B3; Fri, 29 Nov 2024 09:22:41 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FE108937E
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 09:22:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="mgi7wcMb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9789A893D8; Fri, 29 Nov 2024 11:03:55 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Y05lK1X5zz9spG;
- Fri, 29 Nov 2024 09:22:37 +0100 (CET)
-Message-ID: <c8fa63d9-65f7-4807-9aa3-d5e76a2fb5e3@denx.de>
-Date: Fri, 29 Nov 2024 09:22:36 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 70BAD89215
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 11:03:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eabachinin@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 12DAB120012;
+ Fri, 29 Nov 2024 13:03:48 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 12DAB120012
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1732874628;
+ bh=1zuIVY+TW3YnwxHFd0RiFq/9h5dWgP12ldjQ10OGG0Q=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=mgi7wcMbNlIR1SDS91sIZixr8dtV1Weli9MPDnqvz7yks/Tl3+C/TEft1AR8PWYUU
+ MUvS8rG1zETjh3LrFN+EZvxsMak5g6o3IheYiI2olW8VZGJLh/PsXbW8kJDH/MwKiQ
+ 8ae45hllHj4m1PywfS4f8LqF1q3fMmtrM7UxDZmVQskDFYWsfa9F8FU/mXDHNVHq+O
+ nzx7QZLkM1CjYUG33qT6HESmXI3JSUssOJlG38UGtceu2vkuxfpTNn2nI0/T23sKRx
+ J8W7rYtS4t7aR4lDuoUc4iIBTu15Gn3W66GVQYHfEgDekJqtQ42oMBB9ooRrUWRUNx
+ fybO46TaT7EMQ==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 29 Nov 2024 13:03:47 +0300 (MSK)
+Date: Fri, 29 Nov 2024 13:03:47 +0300
+From: Evgeny Bachinin <eabachinin@salutedevices.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Ilias
+ Apalodimas" <ilias.apalodimas@linaro.org>, Peter Robinson
+ <pbrobinson@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, "Rasmus
+ Villemoes" <rasmus.villemoes@prevas.dk>, Evgeny Bachinin
+ <EABachinin@salutedevices.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] common: relocate fdt_blob in global_data for
+ FDTSRC_EMBED case
+Message-ID: <35slrpavqjk23bsybse752vmwsjqzk3ej6stozo3gtlbpe5pfg@3rytobz4ewik>
+References: <20241125-of_embed_fdt_blob_garbage-v1-1-faa78e2e1ee9@salutedevices.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: kirkwood: Enable bootstd and other modernization for
- OpenRD boards
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20241127005716.6234-1-mibodhi@gmail.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20241127005716.6234-1-mibodhi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20241125-of_embed_fdt_blob_garbage-v1-1-faa78e2e1ee9@salutedevices.com>
+User-Agent: NeoMutt/20231006
+X-Originating-IP: [79.139.251.228]
+X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 189493 [Nov 29 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 44 0.3.44
+ 5149b91aab9eaefa5f6630aab0c7a7210c633ab6, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
+ salutedevices.com:7.1.1; github.com:7.1.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/11/29 08:43:00
+X-KSMG-LinksScanning: Clean, bases: 2024/11/29 08:43:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/11/29 07:52:00 #26914637
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,297 +105,252 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.11.24 01:57, Tony Dinh wrote:
-> Enable bootstd for OpenRD boards
-> Update defconfigs to the latest u-boot requirements
-> Remove JFFS2 support. See JFFS2 Vulnerability[1].
-> Move default envs to text-base environment
+Hello, dear reviewers!
+
+It was my 1st attempt to use b4-tool and it did not list all relevant
+reviewers.
+
+So, let me manually CC relevant stakeholders/maintainers.
+Please, take a look on the fix of bug/vulnerability
+
+P.S. If you wish, advise me, please, whether I need to re-send with
+updated CC list or just publish v2.
+
+On Mon, Nov 25, 2024 at 12:15:07PM +0300, Evgeny Bachinin wrote:
+> Patch resolves two kind of bugs, one of which is vulnerability related
+> to KASLR.
 > 
-> [1] https://lore.kernel.org/u-boot/20241114233005.GN3600562@bill-the-cat/T/#m2fc25da1d2c019bc3cd8676991fdd64b8a21aa9b
+> === Issue briefly ===
 > 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
+>   Working with FDT (via non-relocated gd::fdt_blob) from inside bootm
+> command may lead to the reading the garbage instead of FDT nodes. And
+> this can result in various side-effects depending on DTS nodes, being
+> parsed during bootm.
+> 
+>   But below is my specific story how I faced with this issue due to
+> MESON_RNG probing failure.
+> 
+> === Bugs description ===
+> 
+> 1) Bug is revealed on:
+> * configuration below
+> * U-boot 2024.10 - f919c3a889f ("Prepare v2024.10")
+> 
+>   It seems, the following patch is a trigger:
+> ea955eea4f ("fdt: automatically add /chosen/kaslr-seed if DM_RNG is enabled")
+> 
+>   Generally, CONFIG_OF_EMBED=y & CONFIG_RNG_MESON=y are the most
+> valuable ones for reproducing the issue.
+> ```
+>   CONFIG_ARCH_FIXUP_FDT_MEMORY=y
+>   CONFIG_CMD_FDT=y
+>   CONFIG_DEFAULT_FDT_FILE=""
+>   CONFIG_FDT_64BIT=y
+>   CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_OF_CONTROL=y
+>   CONFIG_OF_EMBED=y
+>   CONFIG_OF_LIBFDT_ASSUME_MASK=0x0
+>   CONFIG_OF_LIBFDT_OVERLAY=y
+>   CONFIG_OF_LIBFDT=y
+>   CONFIG_OF_LIST="meson-axg-our-device-name"
+>   CONFIG_OF_REAL=y
+>   CONFIG_OF_TRANSLATE=y
+>   CONFIG_SUPPORT_OF_CONTROL=y
+>   CONFIG_SYS_FDT_PAD=0x3000
+>   CONFIG_TOOLS_OF_LIBFDT=y
+> 
+>   CONFIG_DM_RNG=y
+>   CONFIG_RNG_MESON=y
+> ```
+> 
+> 2) Due to CONFIG_OF_EMBED, the DTS is embedded into U-boot ELF and
+> accessible via __dtb_dt_begin symbol.
+> 
+>   On early boot stage (board_f.c) the fdtdec_setup() is called only
+> once before U-boot's relocation into top of RAM. fdtdec_setup()
+> initializes gd::fdt_blob for FDTSRC_EMBED case:
+> ```
+>   gd->fdt_blob = dtb_dt_embedded();
+>   gd->fdt_src = FDTSRC_EMBED;
+> ```
+> 
+> 3) Then reloc_fdt() is called in board_f.c
+> 
+>   But due to CONFIG_OF_EMBED=y the reloc_fdt() does not update
+> gd::fdt_blob value (strictly speaking, it is impossible for
+> CONFIG_OF_EMBED=y, because U-boot ELF has not been relocated yet
+> at this moment).
+> 
+>   As a result after relocation we get fdt_blob, pointing to DTS address
+> before relocation:
+> ```
+>    # bdinfo
+>   <...>
+>   relocaddr = 0x000000000fedf000
+>   reloc off = 0x000000000eedf000
+>   <...>
+>   fdt_blob = 0x010ce6c0 << points to __dtb_dt_begin before relocation
+>   new_fdt = 0x0000000000000000  << empty erroneously
+>   fdt_size = 0x0000000000000000 << zero erroneously
+> ```
+> 
+> 4) During bootm command (according to our ITS-config file) the Linux
+> is loaded into 0x01080000 (which is very close to fdt_blob addr
+> 0x010ce6c0).
+> ```
+>   ## Loading kernel from FIT Image at 04000000 ...
+>      Trying 'kernel' kernel subimage
+>        <...>
+>        Load Address: 0x01080000
+> ```
+> 
+>   So Linux image overwrites the gd::fdt_blob memory location
+> in RAM (0x010ce6c0).
+> 
+> 5) Issue:
+> 
+>   Hence any manipulation with DTS (say, via FDT API) inside
+> implementation of bootm command leads to accessing the fdt_blob area
+> with garbage, that can lead to two situations:
+> 
+> 5.1) Abort.
+> 
+>   Call to fdt_off_dt_struct() from fdt_next_tag() :: fdt_offset_ptr()::
+> fdt_offset_ptr_() returns with garbage, that leads to tagp value
+> being out of RAM top addr (256 Mb in our board), causing the abort:
+> ```
+>   Boot cmd: bootm 0x4000000#boot_evt1
+>   bootm_run_states()
+>   <...>
+>   image_setup_libfdt()
+>    fdt_chosen()
+>     fdt_kaslrseed()
+>      uclass_get_device()
+>       uclass_get_device_tail()
+>        device_probe()
+>         device_of_to_plat()
+>         meson_rng_of_to_plat()
+>          clk_get_by_name_optional()
+>           clk_get_by_name()
+>            clk_get_by_name_nodev()
+>             ofnode_stringlist_search()
+>              fdt_stringlist_search()
+>               fdt_getprop()
+>                fdt_get_property_namelen_()
+>                 fdt_first_property_offset()
+>                  fdt_check_node_offset_()
+>                   fdt_next_tag():
+>                     ```
+>                       tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+>                     ```
+>                   fdt_next_tag() tagp:0x22890766
+>                   fdt_next_tag() ram_top:0x10000000 (tagp OUT of RAM)
+>   "Synchronous Abort" handler, esr 0x96000010, far 0x22890766
+>   elr: 000000000108be24 lr : 000000000108be24 (reloc)
+>   elr: 000000000ff6fe24 lr : 000000000ff6fe24
+>   x0 : 0000000000000041 x1 : 0000000000000000
+>   x2 : 000000000ff3b57c x3 : 0000000000000012
+>   x4 : 000000000ded2ad5 x5 : 0000000000000020
+>   x6 : 00000000ffffffe8 x7 : 000000000ded2f40
+>   x8 : 00000000ffffffd8 x9 : 000000000000000d
+>   x10: 0000000000000006 x11: 000000000001869f
+>   x12: 000000000fffffff x13: 000000000fffffff
+>   x14: 0000000000000000 x15: 000000000ded2abb
+>   x16: 000000000ff3b080 x17: 0000000000000001
+>   x18: 000000000ded3dc0 x19: 0000000022890766
+>   x20: 00000000010cb0f0 x21: 00000000000015e4
+>   x22: 000000000ff8f4d8 x23: 000000000000000b
+>   x24: 000000000ded2fbc x25: 000000000ffe2000
+>   x22: 000000000ff8f4d8 x23: 000000000000000b
+>   x24: 000000000ded2fbc x25: 000000000ffe2000
+>   x26: 000000000ffe2000 x27: 000000000000000b
+>   x28: 000000000ff9cf2d x29: 000000000ded2f40
+> 
+>   Code: aa1603e1 91197484 52801742 94004de8 (b9400276)
+> ```
+> 
+> 5.2) Vulnerability situation "KASLR is disabled".
+> 
+> Almost the same as in (5.1), but 2 situations happen (depending on
+> the value of garbage):
+>   * call to fdt_offset_ptr_() :: fdt_off_dt_struct(fdt)
+>     returns not so big garbage, leading to tagp, being inside RAM.
+>   * or calculations of absoffset inside fdt_offset_ptr() leads to
+>     failure of the one of if() conditions with NULL as retval.
+> 
+>   Result is fdt_next_tag() interprets the tagp as FDT_END. And we are
+> returning from our callstack via functions' error paths, leading to
+> "No RNG device" and "KASLR disabled due to lack of seed":
+> ```
+>   fdt_kaslrseed()
+>    uclass_get_device()
+>    <...>
+>     device_probe()
+>      device_of_to_plat()
+>       meson_rng_of_to_plat()
+>        clk_get_by_name()
+>         clk_get_by_name_nodev()
+>         <...>
+>          fdt_stringlist_search()
+>           fdt_getprop()
+>            fdt_get_property_namelen_()
+>             fdt_first_property_offset()
+>              fdt_check_node_offset_()
+>               fdt_next_tag():
+>                 ```
+>                   tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
+>                 ```
+>               fdt_next_tag() tagp:0000000001890677
+>               fdt_next_tag() ram_top:0x10000000 (tagp is inside RAM)
+>       uclass_get_device_tail():486 device_probe() ret:-22
+>   No RNG device
+>  Starting kernel ...
+> 
+>   [ 0.000000] Linux version 6.9.12
+>   [ 0.000000] KASLR disabled due to lack of seed
+> ```
+> 
+> Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
 > ---
+> Tested:
+> * on board with Amlogic AXG SoC.
+> * on sandbox: make sure that certain code from patch is called (of
+>   course, when CONFIG_OF_EMBED=y)
+> * U-boot CI: https://github.com/u-boot/u-boot/pull/698/checks
+> ---
+>  common/board_r.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 > 
->   arch/arm/mach-kirkwood/Kconfig    |  1 +
->   board/Marvell/openrd/openrd.env   | 20 ++++++++++++++++++++
->   configs/openrd_base_defconfig     | 18 +++++-------------
->   configs/openrd_client_defconfig   | 18 +++++-------------
->   configs/openrd_ultimate_defconfig | 18 +++++-------------
->   include/configs/openrd.h          | 18 ------------------
->   6 files changed, 36 insertions(+), 57 deletions(-)
->   create mode 100644 board/Marvell/openrd/openrd.env
+> diff --git a/common/board_r.c b/common/board_r.c
+> index 62228a723e12f8742437acae380e82f79903a8f5..88dc756b2a5e5a44f55f9b0fd012adc798a8afdb 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -152,6 +152,15 @@ static int initr_reloc_global_data(void)
+>  	 */
+>  	gd->env_addr += gd->reloc_off;
+>  #endif
+> +
+> +	/*
+> +	 * For CONFIG_OF_EMBED case the FDT is embedded into ELF, available by
+> +	 * __dtb_dt_begin. After U-boot ELF self-relocation to RAM top address
+> +	 * it is worth to update fdt_blob in global_data
+> +	 */
+> +	if (IS_ENABLED(CONFIG_OF_EMBED))
+> +		gd->fdt_blob = dtb_dt_embedded();
+> +
+>  #ifdef CONFIG_EFI_LOADER
+>  	/*
+>  	 * On the ARM architecture gd is mapped to a fixed register (r9 or x18).
 > 
-> diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
-> index 031d4e5ecd..6761a9cb39 100644
-> --- a/arch/arm/mach-kirkwood/Kconfig
-> +++ b/arch/arm/mach-kirkwood/Kconfig
-> @@ -38,6 +38,7 @@ config TARGET_OPENRD
->   	bool "Marvell OpenRD Board"
->   	select KW88F6281
->   	select SHEEVA_88SV131
-> +	select KIRKWOOD_COMMON
->   
->   config TARGET_DREAMPLUG
->   	bool "DreamPlug Board"
-> diff --git a/board/Marvell/openrd/openrd.env b/board/Marvell/openrd/openrd.env
-> new file mode 100644
-> index 0000000000..70ca704b73
-> --- /dev/null
-> +++ b/board/Marvell/openrd/openrd.env
-> @@ -0,0 +1,20 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2024 Tony Dinh <mibodhi@gmail.com>
-> + *
-> + *  Environment variables configurations
-> + */
-> +
-> +kernel_addr_r=0x800000
-> +fdt_addr_r=0x2c00000
-> +ramdisk_addr_r=0x01100000
-> +scriptaddr=0x200000
-> +fdtfile=CONFIG_DEFAULT_DEVICE_TREE.dtb
-> +mtdparts=CONFIG_MTDPARTS_DEFAULT
-> +console=ttyS0,115200
-> +
-> +/* Standard Boot */
-> +bootcmd=
-> +	bootflow scan -lb
-> +failed=
-> +	echo CONFIG_SYS_BOARD boot failed - please check your image
-> diff --git a/configs/openrd_base_defconfig b/configs/openrd_base_defconfig
-> index 708bf5eefd..1ca0b45d93 100644
-> --- a/configs/openrd_base_defconfig
-> +++ b/configs/openrd_base_defconfig
-> @@ -4,22 +4,22 @@ CONFIG_SYS_DCACHE_OFF=y
->   CONFIG_ARCH_CPU_INIT=y
->   CONFIG_SYS_THUMB_BUILD=y
->   CONFIG_ARCH_KIRKWOOD=y
-> +CONFIG_SUPPORT_PASSING_ATAGS=y
-> +CONFIG_CMDLINE_TAG=y
-> +CONFIG_INITRD_TAG=y
->   CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
->   CONFIG_TEXT_BASE=0x600000
->   CONFIG_NR_DRAM_BANKS=2
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
->   CONFIG_TARGET_OPENRD=y
->   CONFIG_ENV_SIZE=0x20000
->   CONFIG_ENV_OFFSET=0x80000
->   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-base"
->   CONFIG_SYS_LOAD_ADDR=0x800000
->   CONFIG_IDENT_STRING="\nOpenRD-Base"
-> -# CONFIG_SYS_MALLOC_F is not set
->   CONFIG_HAS_BOARD_SIZE_LIMIT=y
->   CONFIG_BOARD_SIZE_LIMIT=524288
-> +CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTDELAY=3
-> -CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
->   CONFIG_USE_PREBOOT=y
->   CONFIG_LOGLEVEL=2
->   # CONFIG_DISPLAY_BOARDINFO is not set
-> @@ -30,23 +30,17 @@ CONFIG_CMD_MMC=y
->   CONFIG_CMD_NAND=y
->   CONFIG_CMD_USB=y
->   # CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_JFFS2=y
->   CONFIG_CMD_MTDPARTS=y
->   CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
->   CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
->   CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_ENV_OVERWRITE=y
->   CONFIG_ENV_IS_IN_NAND=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NETCONSOLE=y
->   CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
->   CONFIG_SYS_ATA_STRIDE=4
->   CONFIG_SYS_ATA_DATA_OFFSET=0x100
->   CONFIG_SYS_ATA_REG_OFFSET=0x100
-> @@ -59,7 +53,5 @@ CONFIG_MTD=y
->   CONFIG_MTD_RAW_NAND=y
->   CONFIG_MVGBE=y
->   CONFIG_MII=y
-> -CONFIG_SYS_NS16550_SERIAL=y
-> -CONFIG_SYS_NS16550_REG_SIZE=-4
->   CONFIG_USB=y
->   CONFIG_USB_EHCI_HCD=y
-> diff --git a/configs/openrd_client_defconfig b/configs/openrd_client_defconfig
-> index 82a9c77761..e0cc2e65db 100644
-> --- a/configs/openrd_client_defconfig
-> +++ b/configs/openrd_client_defconfig
-> @@ -4,10 +4,12 @@ CONFIG_SYS_DCACHE_OFF=y
->   CONFIG_ARCH_CPU_INIT=y
->   CONFIG_SYS_THUMB_BUILD=y
->   CONFIG_ARCH_KIRKWOOD=y
-> +CONFIG_SUPPORT_PASSING_ATAGS=y
-> +CONFIG_CMDLINE_TAG=y
-> +CONFIG_INITRD_TAG=y
->   CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
->   CONFIG_TEXT_BASE=0x600000
->   CONFIG_NR_DRAM_BANKS=2
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
->   CONFIG_TARGET_OPENRD=y
->   CONFIG_BOARD_IS_OPENRD_CLIENT=y
->   CONFIG_ENV_SIZE=0x20000
-> @@ -15,12 +17,10 @@ CONFIG_ENV_OFFSET=0x80000
->   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-client"
->   CONFIG_SYS_LOAD_ADDR=0x800000
->   CONFIG_IDENT_STRING="\nOpenRD-Client"
-> -# CONFIG_SYS_MALLOC_F is not set
->   CONFIG_HAS_BOARD_SIZE_LIMIT=y
->   CONFIG_BOARD_SIZE_LIMIT=524288
-> +CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTDELAY=3
-> -CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
->   CONFIG_USE_PREBOOT=y
->   CONFIG_LOGLEVEL=2
->   # CONFIG_DISPLAY_BOARDINFO is not set
-> @@ -31,23 +31,17 @@ CONFIG_CMD_MMC=y
->   CONFIG_CMD_NAND=y
->   CONFIG_CMD_USB=y
->   # CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_JFFS2=y
->   CONFIG_CMD_MTDPARTS=y
->   CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
->   CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
->   CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_ENV_OVERWRITE=y
->   CONFIG_ENV_IS_IN_NAND=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NETCONSOLE=y
->   CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
->   CONFIG_SYS_ATA_STRIDE=4
->   CONFIG_SYS_ATA_DATA_OFFSET=0x100
->   CONFIG_SYS_ATA_REG_OFFSET=0x100
-> @@ -60,7 +54,5 @@ CONFIG_MTD=y
->   CONFIG_MTD_RAW_NAND=y
->   CONFIG_MVGBE=y
->   CONFIG_MII=y
-> -CONFIG_SYS_NS16550_SERIAL=y
-> -CONFIG_SYS_NS16550_REG_SIZE=-4
->   CONFIG_USB=y
->   CONFIG_USB_EHCI_HCD=y
-> diff --git a/configs/openrd_ultimate_defconfig b/configs/openrd_ultimate_defconfig
-> index 10b46e2ec1..a115691daa 100644
-> --- a/configs/openrd_ultimate_defconfig
-> +++ b/configs/openrd_ultimate_defconfig
-> @@ -4,10 +4,12 @@ CONFIG_SYS_DCACHE_OFF=y
->   CONFIG_ARCH_CPU_INIT=y
->   CONFIG_SYS_THUMB_BUILD=y
->   CONFIG_ARCH_KIRKWOOD=y
-> +CONFIG_SUPPORT_PASSING_ATAGS=y
-> +CONFIG_CMDLINE_TAG=y
-> +CONFIG_INITRD_TAG=y
->   CONFIG_SYS_KWD_CONFIG="board/Marvell/openrd/kwbimage.cfg"
->   CONFIG_TEXT_BASE=0x600000
->   CONFIG_NR_DRAM_BANKS=2
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
->   CONFIG_TARGET_OPENRD=y
->   CONFIG_BOARD_IS_OPENRD_ULTIMATE=y
->   CONFIG_ENV_SIZE=0x20000
-> @@ -15,12 +17,10 @@ CONFIG_ENV_OFFSET=0x80000
->   CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-ultimate"
->   CONFIG_SYS_LOAD_ADDR=0x800000
->   CONFIG_IDENT_STRING="\nOpenRD-Ultimate"
-> -# CONFIG_SYS_MALLOC_F is not set
->   CONFIG_HAS_BOARD_SIZE_LIMIT=y
->   CONFIG_BOARD_SIZE_LIMIT=524288
-> +CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTDELAY=3
-> -CONFIG_USE_BOOTCOMMAND=y
-> -CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; ${x_bootcmd_usb}; bootm 0x6400000;"
->   CONFIG_USE_PREBOOT=y
->   CONFIG_LOGLEVEL=2
->   # CONFIG_DISPLAY_BOARDINFO is not set
-> @@ -31,23 +31,17 @@ CONFIG_CMD_MMC=y
->   CONFIG_CMD_NAND=y
->   CONFIG_CMD_USB=y
->   # CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=y
-> -CONFIG_CMD_MII=y
-> -CONFIG_CMD_PING=y
-> -CONFIG_CMD_EXT2=y
-> -CONFIG_CMD_FAT=y
-> -CONFIG_CMD_JFFS2=y
->   CONFIG_CMD_MTDPARTS=y
->   CONFIG_MTDIDS_DEFAULT="nand0=nand_mtd"
->   CONFIG_MTDPARTS_DEFAULT="mtdparts=nand_mtd:0x100000@0x000000(uboot),0x400000@0x100000(uImage),0x1fb00000@0x500000(rootfs)"
->   CONFIG_CMD_UBI=y
-> -CONFIG_ISO_PARTITION=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_ENV_OVERWRITE=y
->   CONFIG_ENV_IS_IN_NAND=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NETCONSOLE=y
->   CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
-> +CONFIG_NET_RANDOM_ETHADDR=y
->   CONFIG_SYS_ATA_STRIDE=4
->   CONFIG_SYS_ATA_DATA_OFFSET=0x100
->   CONFIG_SYS_ATA_REG_OFFSET=0x100
-> @@ -60,7 +54,5 @@ CONFIG_MTD=y
->   CONFIG_MTD_RAW_NAND=y
->   CONFIG_MVGBE=y
->   CONFIG_MII=y
-> -CONFIG_SYS_NS16550_SERIAL=y
-> -CONFIG_SYS_NS16550_REG_SIZE=-4
->   CONFIG_USB=y
->   CONFIG_USB_EHCI_HCD=y
-> diff --git a/include/configs/openrd.h b/include/configs/openrd.h
-> index 1e6b16b4e7..f91e62a2e4 100644
-> --- a/include/configs/openrd.h
-> +++ b/include/configs/openrd.h
-> @@ -15,22 +15,4 @@
->   
->   #include "mv-common.h"
->   
-> -/*
-> - *  Environment variables configurations
-> - */
-> -/*
-> - * max 4k env size is enough, but in case of nand
-> - * it has to be rounded to sector size
-> - */
-> -
-> -/*
-> - * Default environment variables
-> - */
-> -
-> -#define CFG_EXTRA_ENV_SETTINGS	"x_bootargs=console=ttyS0,115200 " \
-> -	CONFIG_MTDPARTS_DEFAULT " rw ubi.mtd=2,2048\0" \
-> -	"x_bootcmd_kernel=nand read 0x6400000 0x100000 0x300000\0"	\
-> -	"x_bootcmd_usb=usb start\0"					\
-> -	"x_bootargs_root=root=ubi0:rootfs rootfstype=ubifs\0"
-> -
->   #endif /* _CONFIG_OPENRD_BASE_H */
-
-Viele Grüße,
-Stefan Roese
+> ---
+> base-commit: cca05617a8f585f3a98a8fa82f75cc68a530d771
+> change-id: 20241119-of_embed_fdt_blob_garbage-ea729a8236e1
+> 
+> Best regards,
+> -- 
+> Evgeny Bachinin <EABachinin@salutedevices.com>
+> 
 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
-
+Best Regards,
+Evgeny Bachinin
