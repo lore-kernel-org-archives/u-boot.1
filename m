@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19143D6EC13
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 14:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEF15D729E0
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 14:47:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D2158935C;
-	Fri, 29 Nov 2024 15:36:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3730F8932A;
+	Fri, 29 Nov 2024 15:47:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Twb2Nfcy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kSt4Gqr3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D785C8935C; Fri, 29 Nov 2024 15:36:20 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 44C2C89021; Fri, 29 Nov 2024 15:47:51 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 991528932A
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 15:36:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2296C893D0
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 15:47:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d8878ec049so4466986d6.3
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:36:18 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-385e1721716so114298f8f.3
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:47:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732890977; x=1733495777; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NZsvLbjCuyaTTiNH5VVBcnOfljUyKrBTlFmgc8K+q/Q=;
- b=Twb2NfcyhahvVlWLNEMWYfI9BVpWMauI//SVfzOkRcq9x9VSg5ZwedAH+Nchmxo/Gk
- YIxsVmI8DBSydcf43DiXYshHR4aW/HmHYzkUHcNU3pRvTXyjl94OSvRUgK5VUAk32qul
- 8HAnczYjOWLcRIgxdlL9perDmITfZ6yuRWeB4=
+ d=linaro.org; s=google; t=1732891668; x=1733496468; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JVdDTznftY0MFtNMazEI8OUGmsYrwC3NO7GV6GFWTDo=;
+ b=kSt4Gqr3S0eABXqP552RfB4Ot/TR90ju/gjn/pTVz+Q63/LbnmZlmX3OGnENxWGRnB
+ c8d3sNpH5/JBXt3aU9fRzMXE6CmC8n0iNHywmucSpu1bCDkZKqdcRNU3CxbUGB69FA/M
+ phpV6kDXwZvZ5QEsBJpIk6UEEhycO7vMOWv+5gYXlWmfm5VQyC/CGbHltguiFt/lWhSo
+ Wi82/305xPTmp18Gc9AzadixFCIJTJUVdISwWV0CeZ8yCiw0gVtCe0hYbwaNFbiXPV1e
+ o8OmKwWmKzQlkqAs/nydAcJbZ0Ua9T5fl6oZCviI3hLk5MOajd64qexQBfld8hemlnG6
+ ElBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732890977; x=1733495777;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NZsvLbjCuyaTTiNH5VVBcnOfljUyKrBTlFmgc8K+q/Q=;
- b=lKERn9/66LuqBNOjgpsd5Dc5ZmpEy5eu6oI+oqSH5RcFR+wih/HWRDCNBghRGUC6ao
- QzD+CaVlJgzp/QLizIf1J3mLk9hZcfWg/KWW0YfQ4X+QUCanIzt2LNy86l7uMN1udpMX
- 2n6a6RYOy2Gd3OZzuRkZIMqDe3OrxEoQCxvEAVFmIt6QILehiMNvnmroB0XNh7/AteT6
- +YY7UdXN770QGsHtLSe2fQho4UXBZ2aF7rN82Fj4+EJL1ab5T4Lgj0PmprsDwNJx+lo2
- sqp6n0q5gqPkKAqS7JwzQG5VsOGXREUJ5G0s+1SauLvl2BTut2e8hBqJXzXGMYtJAZMF
- xQYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhN+xaz8KKTJLjeDfY2TDUoDcJg/YfqPgZJQvcvya2WhtjQHikX4Q+l8wOYzOUbHC3zwc1ux8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJq8tl1n5xBU+IpVZOJXrXfWjuJXp4R13EOcwBdlEbzlwzpukS
- Jc5yaHX1AAEiFGNmVWEOFZ3gGIlNYUIMhMeuLGrb3pmZHpRT5o0ihisIZvnShJ0=
-X-Gm-Gg: ASbGncvYJBS4QIvbisd5YrnREsATLvI6YppE8rfehLnCUXcJzo89sjQEOZQ6YyFdq6I
- sw7aSnQreV05IOvUrs5kTQ0P8AM6E2eU/M/NSlykgqwMIZQVHxJVl9MYFX59/2roNbFbQpKEKgh
- m8+wdWVyQZc+hvOpWgwkBBnFdv9vx4HGdWyqBt70+69cfAIvjWuKERfvsak2Kwo9ClVr3ZCroWs
- wa6tEQmrdSYfxcCMX0RweLCuox4WPljKEpYNus/O78kNKwLnQ==
-X-Google-Smtp-Source: AGHT+IEo7BLC5O+M29p4wi4WxlQlKzIibOxpec3Qsdeg2TeuTh4+YJVczlRS6TIFra3ojpLQ/piOWA==
-X-Received: by 2002:ad4:5ccf:0:b0:6d4:1e43:f3a5 with SMTP id
- 6a1803df08f44-6d864d1abe1mr147383686d6.13.1732890977459; 
- Fri, 29 Nov 2024 06:36:17 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ d=1e100.net; s=20230601; t=1732891668; x=1733496468;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JVdDTznftY0MFtNMazEI8OUGmsYrwC3NO7GV6GFWTDo=;
+ b=aj7UqdrPSFxApg7S48PwH/m/QU+kkFgE3Fc5p6dgjFLpzy57o6iLyRpVi8vcSyzg52
+ 8NknP+0OCfoyjUsq+H3IwN3rwxk+JFDN9Kbnto9xfMYUAcNrtupS/lbfQkBMU5BghX3X
+ 3pPV4gmEBO9hFBjHA7k+lITO/EqLOKG3eoMArK0/hVWpMVWZlLtm2IIAqURocJSpYrWA
+ jIoeFZ0W39vPOvCJowj1XsgpqlcEjb9hDgQoAjQGNZOQeNMbQUf13ewujXKT9m5nJ9Hc
+ 3CWFR0oJq8Hs50ACjMOIF5MB1aXnkQ42hbe85ztjn+GquDn93RcBgKnd4x1his0O5Qaf
+ ZsRA==
+X-Gm-Message-State: AOJu0Yz/TgwxbIreCFtmFlzKzfuCC/SboU3chMAGMUWIV2zjUzLl9Vav
+ 3jZ5o/1b7Mhx1utHNLT4BekjpAy9BcZ8HZ1XncVdjw+H1ktuu9BSTaaQWsfIsxtZ/3vqN/XgYAb
+ oxzU=
+X-Gm-Gg: ASbGncuLJ8ox3eS+EzhlMYrPIdHPMe6unqrB/GoJgcuI4sxFvQ2yQmc2c29csVngOsS
+ YpJ7rHaRRTm6iUPS6HUTxD2rofNBn6JG+61GITlI4UmqE95SbRPNqJ3DUaHCCI28g40EHkwIn89
+ BrZ75XARjUe7/1nfT4Bqa5/WxQ4Yx1MG807Paswfj9eZecZbexv/obEs0FfUULOSwu/4dY9Vp8+
+ kE517cSwezy0Fnze9mOsSYweRh5Nq3fV7yVJo/O0XLSRqjxYDYXRbKh9FM=
+X-Google-Smtp-Source: AGHT+IEpYM7fG0e99kkTSu0fDBwZ+lirvjIZTKkItxDYvarl2o4TcxLEKW4oMTt7yslJPNm5csfrog==
+X-Received: by 2002:a5d:64e7:0:b0:381:f604:3d55 with SMTP id
+ ffacd0b85a97d-385c6ef479dmr10389644f8f.52.1732891668376; 
+ Fri, 29 Nov 2024 06:47:48 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d875195da6sm16787126d6.57.2024.11.29.06.36.16
+ ffacd0b85a97d-385ccd2e1bdsm4760309f8f.9.2024.11.29.06.47.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Nov 2024 06:36:16 -0800 (PST)
-Date: Fri, 29 Nov 2024 08:36:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] Environment: Change reporting "nowhere" as "magic hat"
- to user
-Message-ID: <20241129143614.GK3600562@bill-the-cat>
-References: <20241128151233.1962926-1-alicja.michalska@9elements.com>
- <85619442-4c18-4cec-8176-d7239e023474@linaro.org>
- <CAOMZO5AsTCxvO+QuB7CGPu9nLeNmywo6N4XkNukTWtd7KtDZ6g@mail.gmail.com>
+ Fri, 29 Nov 2024 06:47:48 -0800 (PST)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] net: tftpput: reset timeout_count when an ACK is received
+Date: Fri, 29 Nov 2024 15:47:32 +0100
+Message-ID: <20241129144733.779043-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="31lJPDK4UkmFHzKS"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5AsTCxvO+QuB7CGPu9nLeNmywo6N4XkNukTWtd7KtDZ6g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,57 +101,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+timeout_count is never reset once a tftpput transfer has started. If for
+whatever reason timeouts occur frequently, but the server keeps replying
+nonetheless, the transfer may be needlessly aborted.
 
---31lJPDK4UkmFHzKS
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reset timer_count on reception of an ACK to avoid this situation.
 
-On Fri, Nov 29, 2024 at 08:23:57AM -0300, Fabio Estevam wrote:
-> On Fri, Nov 29, 2024 at 7:35=E2=80=AFAM Andrew Goodbody
-> <andrew.goodbody@linaro.org> wrote:
-> >
-> > On 28/11/2024 15:12, Alicja Michalska wrote:
-> > > Make string more user-friendly
-> >
-> > I disagree. I can make a guess as to what 'Loading Environment from
-> > nowhere' means. To me it suggests that it has not found anywhere
-> > additional to load an environment from. It is a bit awkwardly phrased
-> > but it can be understood and it at least sticks to reality.
-> > As for 'Loading Environment from a magic hat' - I have no idea what that
-> > is trying to convey and that lack of meaning is not, IMO, user-friendly.
->=20
-> I have the same opinion as Andrew.
->=20
-> It is easy to associate "Loading Environment from nowhere... OK" with
-> CONFIG_ENV_IS_NOWHERE=3Dy.
->=20
-> Changing it to 'Loading Environment from a magic hat' will not make
-> things better or clearer, IMHO.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ net/tftp.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Yes. As I mentioned on IRC, there's one match for \"nowhere in the
-sources and it's in env/nowhere.c so it's easy to see where that line
-comes from.
+diff --git a/net/tftp.c b/net/tftp.c
+index 704b20b4ff8..8d54a83d9c2 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -478,6 +478,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 	case TFTP_ACK:
+ #ifdef CONFIG_CMD_TFTPPUT
+ 		if (tftp_put_active) {
++			timeout_count = 0;
+ 			if (tftp_put_final_block_sent) {
+ 				tftp_complete();
+ 			} else {
+-- 
+2.43.0
 
---=20
-Tom
-
---31lJPDK4UkmFHzKS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdJ0VoACgkQFHw5/5Y0
-tyx1Xgv+KIugw4X6kMA7c0Qyjd1qeTAqUVLHY7bIYxM/oYV8YBXvCuMLN3BdMjvu
-20+rbLd6PG6LKwIcyJU2cfydN8wDzMURnayXRE74JLtLerbO8aHtj+YJqYkxqFC5
-aogOwg0hy7vU7TYyEV/HTVxLVunvH+iElbDiXRuFYxvR8OD2H+5SR9G5uYb686DK
-BpASTpkF293MUgBS7cWi2iSHEJXn4RV1TS5rFdbcX5Y+QUFtTMVQteH4RohBAXJD
-J48MaHlrAZueaXA/5JM5Re5ZCbJRthuFgPzUXsJ7kHzDOGNFmIMQ1b4NBaWuKEtZ
-mEvGR7NBEneCfkRVI7Y3goL/IZBUAGgI4DvPPTiK4gSZ9nFMiWEtA7qXoTysf8Ef
-o3NbG+UhsO6saQpyiOk+jbRoXv61bLLkA0r3wFJDi/I2am+EADci8lMdofVNWh/I
-8ccAsDjDsf2t8peJW1viCFajAQbPd7eaDFYbYPTu7mRiR4kFIwaxVdEMSB0OqpfL
-sL5DMMck
-=OLYn
------END PGP SIGNATURE-----
-
---31lJPDK4UkmFHzKS--
