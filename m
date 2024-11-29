@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85743D6EC00
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 11:03:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E4AD6EBFF
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 11:03:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1D9E89040;
-	Fri, 29 Nov 2024 12:03:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E88F893F5;
+	Fri, 29 Nov 2024 12:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cEnV6aFk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v+0oH1sJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 870FE893C9; Fri, 29 Nov 2024 12:03:41 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3DFB88F20
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:03:38 +0100 (CET)
+ id 38D05893F4; Fri, 29 Nov 2024 12:03:43 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 25267893C7
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:03:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATB3aI91305337
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 29 Nov 2024 05:03:37 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ATB3ddF078701;
+ Fri, 29 Nov 2024 05:03:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732878217;
- bh=STInHqjEVV9e5QaIpgG7epr4QN2UV6ESGotYxLyALKs=;
- h=From:To:CC:Subject:Date;
- b=cEnV6aFksZPm0iDMyKyi04b+N+csY1rl8ZAHESyg0swqDB4a9U8LbBABLaeqKZYVu
- ZiqlF+v9Rl3yc2sM2YilyLy2/K2QLyEg2buJecuf7ZihasRk15WCjV+p1H2LifC+Xy
- V5R2Y9petqcsTg+n5bzP1Xk8jqsjgdCqCP2jiMN0=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATB3aWE015910
+ s=ti-com-17Q1; t=1732878219;
+ bh=mkCcK1u3b8rmO5nImT3A2uotZYVG56+C9zKFOyaIg2E=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=v+0oH1sJaRbIu7Mvr7tGFVoSBwCTHD2931S6tNnVBMGwZTrlJIrdDhJgHvHGxH4q4
+ 7nqJeajmq8cwDpDKujsYlaWucnOEfroo4CH3PJJlTANG+/Tx3bhBDFSH5LW8eNE4Jv
+ /qSjOnlGokGxAGgpztxXfHuQZ28aTuw/r8gMWmM8=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATB3drr010025
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 Nov 2024 05:03:36 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Nov 2024 05:03:36 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ Fri, 29 Nov 2024 05:03:39 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE105.ent.ti.com
  (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
+ Nov 2024 05:03:39 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Nov 2024 05:03:36 -0600
+ Frontend Transport; Fri, 29 Nov 2024 05:03:39 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATB3Xdg086529;
- Fri, 29 Nov 2024 05:03:34 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATB3Xdh086529;
+ Fri, 29 Nov 2024 05:03:37 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>, <m-chawdhry@ti.com>, <vaishnav.a@ti.com>,
  <j-choudhary@ti.com>, <b-padhi@ti.com>
 CC: <u-kumar1@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH 0/2] configs: Enable CMD_NFS by default
-Date: Fri, 29 Nov 2024 16:33:31 +0530
-Message-ID: <20241129110333.444270-1-n-francis@ti.com>
+Subject: [PATCH 1/2] board: ti: common: Kconfig: Add CMD_NFS
+Date: Fri, 29 Nov 2024 16:33:32 +0530
+Message-ID: <20241129110333.444270-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241129110333.444270-1-n-francis@ti.com>
+References: <20241129110333.444270-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -79,21 +80,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the NFS command across all platforms to allow network booting via
-the NFS. Clean up the J7 configs to use TI_COMMON_CMD_OPTIONS.
+Add CMD_NFS to list of configs implied by CONFIG_TI_COMMON_CMD_OPTIONS.
+This allows network booting via the NFS protocol from the U-Boot prompt.
 
-Neha Malcom Francis (2):
-  board: ti: common: Kconfig: Add CMD_NFS
-  configs: j7*: Enable TI_COMMON_CMD_OPTIONS
+Fixes: 10de12570799 ("disable NFS support by default")
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ board/ti/common/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
- board/ti/common/Kconfig          | 1 +
- configs/j7200_evm_a72_defconfig  | 8 +-------
- configs/j721e_evm_a72_defconfig  | 8 +-------
- configs/j721s2_evm_a72_defconfig | 8 +-------
- configs/j722s_evm_a53_defconfig  | 8 +-------
- configs/j784s4_evm_a72_defconfig | 8 ++------
- 6 files changed, 7 insertions(+), 34 deletions(-)
-
+diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+index de44e4de211..821f02b09fc 100644
+--- a/board/ti/common/Kconfig
++++ b/board/ti/common/Kconfig
+@@ -41,6 +41,7 @@ config TI_COMMON_CMD_OPTIONS
+ 	imply CMD_I2C
+ 	imply CMD_MII
+ 	imply CMD_MMC
++	imply CMD_NFS
+ 	imply CMD_PART
+ 	imply CMD_PING
+ 	imply CMD_PMIC if DM_PMIC
 -- 
 2.34.1
 
