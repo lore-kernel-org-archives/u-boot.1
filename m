@@ -4,50 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 545A5D6EC04
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02032D6EC05
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:47:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 329598943E;
+	by phobos.denx.de (Postfix) with ESMTP id 8555A89448;
 	Fri, 29 Nov 2024 13:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FKgWNqww";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sIGfKSlT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6218B8921B; Fri, 29 Nov 2024 12:32:34 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 285BC891AB
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:32 +0100 (CET)
+ id 7D869893F8; Fri, 29 Nov 2024 12:32:38 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 739DA89392
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBWHRQ083575;
- Fri, 29 Nov 2024 05:32:17 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBWMwi891954
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 29 Nov 2024 05:32:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732879937;
- bh=//Zx1RfHK6xbLGgvOHKxijgJTAyUS4BF34JRueMkqEQ=;
+ s=ti-com-17Q1; t=1732879943;
+ bh=VwpYhGm3xAy8ldNn/hOwXg5oSgw15dqX3PgeBqGnZ0A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FKgWNqwwFwvK3M3BJx6Xo9sjtjQ5VWbJ0I9tSbOJ8HLqGTCBMVwKveag9m/Iym5jg
- w3SxgYoqLz+881J5VzcmCfbNfAfEg5ErYfZfTtLchp4AYhTuZSIP+tl0yWOvhxQswD
- D7KQwjoUR+c6yJjcAmzYDLj8lptn+VAzTawuxXNY=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBWHel040889;
- Fri, 29 Nov 2024 05:32:17 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ b=sIGfKSlT9L4pqSL3BT6PhlxYYkYFjaUz1OdrjQ1VDbDeP4+B0iJdIo+PozFKMTvuL
+ YlUfHfjsj/OILZLGrwaJ4VH0I+jYFsLQF2umsyeMPh4h9w7QXuvPtms6Qku897VHfr
+ Bp2oeVV5KteYgfJBlQrwpCYWvnIYUMoo8YY4q45Y=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBWM6l025724
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 29 Nov 2024 05:32:22 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Nov 2024 05:32:17 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 05:32:22 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Nov 2024 05:32:17 -0600
+ Frontend Transport; Fri, 29 Nov 2024 05:32:22 -0600
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabU106135;
- Fri, 29 Nov 2024 05:32:12 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabV106135;
+ Fri, 29 Nov 2024 05:32:17 -0600
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <marex@denx.de>, <jonas@kwiboo.se>, <kever.yang@rock-chips.com>,
@@ -57,10 +59,10 @@ To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <ilias.apalodimas@linaro.org>, <afd@ti.com>, <nm@ti.com>,
  <avromanov@salutedevices.com>, <michael@amarulasolutions.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 7/8] configs: j7200_evm_*_defconfig: Add configs for
- Hyperflash boot
-Date: Fri, 29 Nov 2024 17:01:35 +0530
-Message-ID: <20241129113136.383277-8-a-dutta@ti.com>
+Subject: [PATCH 8/8] mtd: Kconfig: Change HBMC driver's dependency to
+ MULTIPLEXER and MUX_MMIO
+Date: Fri, 29 Nov 2024 17:01:36 +0530
+Message-ID: <20241129113136.383277-9-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241129113136.383277-1-a-dutta@ti.com>
 References: <20241129113136.383277-1-a-dutta@ti.com>
@@ -85,88 +87,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vaishnav Achath <vaishnav.a@ti.com>
+The HBMC_AM654 driver was dependent on SYSCON because syscon APIs were
+being used to select the multiplexer state. Change the dependency to
+MULTIPLEXER and MUX_MMIO because mux APIs are now being used to
+select mux state.
 
-Kernel commit dbb124cf6888 ("configs: j7200: Remove HBMC_AM654
-config") removed the HBMC_AM654 config because hbmc was broken
-in u-boot. Hence, add the missing configs necessary to re-enable
-Hyperflash boot.
-
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- configs/j7200_evm_a72_defconfig | 4 +++-
- configs/j7200_evm_r5_defconfig  | 4 ++++
- configs/j721e_evm_r5_defconfig  | 2 +-
- 3 files changed, 8 insertions(+), 2 deletions(-)
+ drivers/mtd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index eb6203f2b4..d6b44967fe 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -137,11 +137,13 @@ CONFIG_MMC_SDHCI_AM654=y
- CONFIG_MTD=y
- CONFIG_DM_MTD=y
- CONFIG_MTD_NOR_FLASH=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
- CONFIG_FLASH_SHOW_PROGRESS=0
- CONFIG_CFI_FLASH=y
- CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
- CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
-+CONFIG_HBMC_AM654=y
- CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-@@ -152,7 +154,7 @@ CONFIG_SPI_FLASH_S28HX_T=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_MULTIPLEXER=y
--CONFIG_MUX_MMIO=y
-+CONFIG_SPL_MUX_MMIO=y
- CONFIG_PHY_TI_DP83869=y
- CONFIG_PHY_FIXED=y
- CONFIG_TI_AM65_CPSW_NUSS=y
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index f036a6fd46..57a8ffce05 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -110,11 +110,13 @@ CONFIG_MMC_SDHCI_AM654=y
- CONFIG_MTD=y
- CONFIG_DM_MTD=y
- CONFIG_MTD_NOR_FLASH=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
- CONFIG_FLASH_SHOW_PROGRESS=0
- CONFIG_CFI_FLASH=y
- CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
- CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
-+CONFIG_HBMC_AM654=y
- CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-@@ -122,6 +124,8 @@ CONFIG_SPI_FLASH_SOFT_RESET=y
- CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
- CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_SPI_FLASH_S28HX_T=y
-+CONFIG_MULTIPLEXER=y
-+CONFIG_SPL_MUX_MMIO=y
- CONFIG_PINCTRL=y
- # CONFIG_PINCTRL_GENERIC is not set
- CONFIG_SPL_PINCTRL=y
-diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-index a593fed50a..9d767d7cda 100644
---- a/configs/j721e_evm_r5_defconfig
-+++ b/configs/j721e_evm_r5_defconfig
-@@ -137,7 +137,7 @@ CONFIG_SPI_FLASH_S28HX_T=y
- CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_SPI_FLASH_MT35XU=y
- CONFIG_MULTIPLEXER=y
--CONFIG_MUX_MMIO=y
-+CONFIG_SPL_MUX_MMIO=y
- CONFIG_PINCTRL=y
- # CONFIG_PINCTRL_GENERIC is not set
- CONFIG_SPL_PINCTRL=y
+diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+index 3764e2567c..678bbde89e 100644
+--- a/drivers/mtd/Kconfig
++++ b/drivers/mtd/Kconfig
+@@ -202,7 +202,7 @@ config RENESAS_RPC_HF
+ 
+ config HBMC_AM654
+ 	bool "HyperBus controller driver for AM65x SoC"
+-	depends on SYSCON
++	depends on MULTIPLEXER && MUX_MMIO
+ 	help
+ 	 This is the driver for HyperBus controller on TI's AM65x and
+ 	 other SoCs
 -- 
 2.34.1
 
