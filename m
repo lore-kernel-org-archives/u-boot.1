@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C5DBD6EC05
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0140CD6EC05
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEBCC892D9;
-	Fri, 29 Nov 2024 13:45:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3670889409;
+	Fri, 29 Nov 2024 13:45:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XD9EJMdj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mmiRtwCK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23D7789392; Fri, 29 Nov 2024 12:32:04 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E512893C9
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:00 +0100 (CET)
+ id 09B6A891AB; Fri, 29 Nov 2024 12:32:09 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C80D58921B
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVmmn083517;
- Fri, 29 Nov 2024 05:31:48 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBVqX7891922
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 29 Nov 2024 05:31:52 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732879908;
- bh=+AvxZz/v9FTR24u1wwgIHmUO+UDHmta+q2aXQO16iu0=;
+ s=ti-com-17Q1; t=1732879912;
+ bh=UCrLnweZsO5Q8yYDaD5ekiu+JBplj2t4MPuhCurzPXQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=XD9EJMdjs4Lickn+HaZ0QzgrU9Rs025OnHEJwYeaatKn/BeFRBXBta5TYK40WtCQg
- zIH+jl22Uvbck5/y0EAPeOMji+xjWktpA/6lbh9rXmjAiCbDxaGpWM51J9HnEoqq+K
- eMh2kSoMTTzHje1td8UG8RwgPsj3wWzrRKXJ48Gk=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBVmBd029568
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 Nov 2024 05:31:48 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ b=mmiRtwCKRy9F3e//JzTSy0TeUAwW8SfhAtOSW8eQ2Gwm4qVlHcJE/vj6CBrAgP6z9
+ 1PP5cTGUOmrKltKRKn1F0+iUu0QFva5QW8DXysRqOvEvPWHXgiJVacxsilXpjJRKLQ
+ idrx7raCd6Z3MaAIbdxcg0qCaMYFnGGVyEamuTPc=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVqUS040662;
+ Fri, 29 Nov 2024 05:31:52 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Nov 2024 05:31:46 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2024 05:31:52 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Nov 2024 05:31:46 -0600
+ Frontend Transport; Fri, 29 Nov 2024 05:31:51 -0600
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabO106135;
- Fri, 29 Nov 2024 05:31:42 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabP106135;
+ Fri, 29 Nov 2024 05:31:47 -0600
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <marex@denx.de>, <jonas@kwiboo.se>, <kever.yang@rock-chips.com>,
@@ -58,9 +58,9 @@ To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
  <ilias.apalodimas@linaro.org>, <afd@ti.com>, <nm@ti.com>,
  <avromanov@salutedevices.com>, <michael@amarulasolutions.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 1/8] mux: Makefile: Add config for mux drivers
-Date: Fri, 29 Nov 2024 17:01:29 +0530
-Message-ID: <20241129113136.383277-2-a-dutta@ti.com>
+Subject: [PATCH 2/8] mtd: HBMC-AM654: Changed syscon API to mux APIs
+Date: Fri, 29 Nov 2024 17:01:30 +0530
+Message-ID: <20241129113136.383277-3-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241129113136.383277-1-a-dutta@ti.com>
 References: <20241129113136.383277-1-a-dutta@ti.com>
@@ -85,25 +85,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add config required to build mmio-mux driver and dependencies.
+The syscon APIs were used for selecting the state of the mux
+device because the mmio-mux driver in u-boot did not support
+the mux functionality when the parent device is not a syscon.
+Change to mux APIs which utilizes the reg-mux driver to select the
+state of the multiplexer.
 
 Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- drivers/Makefile | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/mtd/hbmc-am654.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/Makefile b/drivers/Makefile
-index 9440af1b09..0e1f58c515 100644
---- a/drivers/Makefile
-+++ b/drivers/Makefile
-@@ -21,6 +21,7 @@ obj-$(CONFIG_$(PHASE_)INPUT) += input/
- obj-$(CONFIG_$(PHASE_)LED) += led/
- obj-$(CONFIG_$(PHASE_)MMC) += mmc/
- obj-y += mtd/
-+obj-$(CONFIG_MULTIPLEXER) += mux/
- obj-$(CONFIG_$(PHASE_)ETH) += net/
- obj-$(CONFIG_$(PHASE_)PCH) += pch/
- obj-$(CONFIG_$(PHASE_)PCI) += pci/
+diff --git a/drivers/mtd/hbmc-am654.c b/drivers/mtd/hbmc-am654.c
+index 599beda30d..98988a8e24 100644
+--- a/drivers/mtd/hbmc-am654.c
++++ b/drivers/mtd/hbmc-am654.c
+@@ -5,8 +5,8 @@
+ 
+ #include <asm/io.h>
+ #include <dm.h>
++#include <mux.h>
+ #include <regmap.h>
+-#include <syscon.h>
+ #include <dm/device_compat.h>
+ 
+ #define FSS_SYSC_REG	0x4
+@@ -52,9 +52,13 @@ static int am654_hyperbus_calibrate(struct udevice *dev)
+ 
+ static int am654_select_hbmc(struct udevice *dev)
+ {
+-	struct regmap *regmap = syscon_get_regmap(dev_get_parent(dev));
++	struct mux_control *mux_ctl;
++	int ret;
+ 
+-	return regmap_update_bits(regmap, FSS_SYSC_REG, 0x2, 0x2);
++	ret = mux_get_by_index(dev, 0, &mux_ctl);
++	if (!ret)
++		ret = mux_control_select(mux_ctl, 1);
++	return ret;
+ }
+ 
+ static int am654_hbmc_bind(struct udevice *dev)
 -- 
 2.34.1
 
