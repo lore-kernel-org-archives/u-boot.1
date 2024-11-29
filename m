@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90521D70E1A
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 05:38:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBE7D70E1A
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 05:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E88D893C4;
-	Fri, 29 Nov 2024 06:38:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 06E26893E1;
+	Fri, 29 Nov 2024 06:38:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GkwQ1xrE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MLhsP6z/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BD1F893C8; Fri, 29 Nov 2024 06:38:03 +0100 (CET)
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com
- [IPv6:2607:f8b0:4864:20::544])
+ id 359D3893C9; Fri, 29 Nov 2024 06:38:09 +0100 (CET)
+Received: from mail-pg1-x541.google.com (mail-pg1-x541.google.com
+ [IPv6:2607:f8b0:4864:20::541])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E04D3893C2
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:37:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B5B689397
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 06:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pericycle.cc@gmail.com
-Received: by mail-pg1-x544.google.com with SMTP id
- 41be03b00d2f7-7f71f2b136eso1003412a12.1
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 21:37:59 -0800 (PST)
+Received: by mail-pg1-x541.google.com with SMTP id
+ 41be03b00d2f7-7ee51d9ae30so945331a12.1
+ for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 21:38:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732858678; x=1733463478; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1732858685; x=1733463485; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eN4BjG/o4OWK1t9ASHM3/KYmYPvEgtKCftxBlO9di+I=;
- b=GkwQ1xrEP2KUhwYhX/y85ezCI5+kDSl1aG7MA8GXGRCpgG1kZTldFlVnwpSHUvh8ug
- k5RzxLiuMwa65coEU5BLoPhqOPHKuUfeG429Qd/Rkmo94jdgOSLGugtlHtXDy1haKslC
- pJeEoHjIXYo4irzxOSCOcRx4hE5VkTMuhxLFdmTiQitDWaJhTTIKNasiimYfy7xcwu1W
- fjGfehFA6Y3TktktwvBdzbUozaH+mBrdhKgOJ/wiaacNRZNMW2Bbgt9cODtUcbFl0T/s
- btTGlChWiF7dyjllDI7CgJZzN7S+MTcfXuF/MvM6i3zJCl+ttCXPBqUNrngwP1L7zRmx
- XkRw==
+ :reply-to; bh=s9tWdz5r/MITqNGdkcRM9SGUuwaAVL+KJ8WBJVMshkY=;
+ b=MLhsP6z/58ISe0jEWiRcI7cT3+LKlV6VIF7Zisi/nNx9+VtE+4tEAh902/68TNzjyd
+ nwrmmQRGB/pPd1F1zmnKQ5dA087SkpGSzJVHs/9BovChhvMFyvKECKRmOT36ltS7yR49
+ MzmGX2OotD7jXnT8z9oSCsHM7QASVQVHf07DO65Rdr1vmlT/B4Tvbw6W7ZzGQEYQ+iqz
+ e0S4XLvQKgp3+GbUHZzXovpVtX7jUsFaGpRL/4qudACn5FfBXCCZ6AbUad5hLJvVbTmx
+ ZxlTs6kXPd+BFI9UKujb4IVBQFPp9E7tDF+RkZT8XQKGjn9C4AZWKeVezUg9N/C1NN4j
+ tBnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732858678; x=1733463478;
+ d=1e100.net; s=20230601; t=1732858685; x=1733463485;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eN4BjG/o4OWK1t9ASHM3/KYmYPvEgtKCftxBlO9di+I=;
- b=TdImajScoy4FiOK3QSrYE1nSv1VzJ4F7MIIKgsZ8SZMXvzoRaVwCjaKVp3Hi4i4sUC
- k3fQyGQ4FMFO4Ga8f+ZyIc1JioxC6k6k7FHEUwIQLeuiAjpdU5wdmGN/BBPVrxcBoJLA
- u1AhtYUe6nx7HNL3i4Qgm/cGGBhUPuMtm4J95vJwXyvGSF8gwGrOl8cqKZvUDq9ZmwJQ
- 3ZOEDuDalCKBgfwUblN1W6QOY1rcKJMJqNSYXwiQ4IqEk0K2e6f63dAeI+fVF2NtFCcC
- yWOCuW5KUnh0FBtQq9ZEXyaW6YDmYIyjs3QS7mrWuSc/rKouQ8X+kmkdq73wqOAOwL7t
- XCpg==
-X-Gm-Message-State: AOJu0YxMzmjU2mTgu+gp8wz36y7Z4tpCT42CJ0fvCS6WV7ixW2cCJ2XV
- QHFt/SZli8NogO2sSQ8blsJ3FngmxauUQdybeJ1nBeFEmW49MipD
-X-Gm-Gg: ASbGncsqH4FDG+2aPvsAe1XRo2aDhRwrByN2LPiQ0e4wFSKEHimv2e4xkA/WKPWG/1s
- gYHX9dMFx+o6AijQX7Y9dN8ORYPuTtD7tDl2K7GkMRWL30VUakh4nv9/A9t206mY62xfX97KWa2
- aOtYUoxN61KXNHRgEdEdLY+BVaIkL5XaG2ItNooDXqlaP/XvIGGcVb8vQMJiUUxhUVHwHCzZi0D
- sIZYKzzpD6pLaxu7WJMvcNKyHLFd5W1ZdwMBW6eIbxM/BN2i7Mr8bPw2M2BZGMBGwH1dZwnjcER
- piSr6s6fKLrnsHkgMxI=
-X-Google-Smtp-Source: AGHT+IELBK1Jh/Xkc9/ZQurAA03a/KmEF18Mateu9lP9+QH74ZvDd6nNGyoKJ/ulfF/N6CEwLE4VqA==
-X-Received: by 2002:a05:6a21:2d84:b0:1d9:18af:d150 with SMTP id
- adf61e73a8af0-1e0e0b51457mr14839166637.21.1732858678211; 
- Thu, 28 Nov 2024 21:37:58 -0800 (PST)
+ bh=s9tWdz5r/MITqNGdkcRM9SGUuwaAVL+KJ8WBJVMshkY=;
+ b=nLXo61sRlmQor9keo3/Ah7h51/ISQKwhCUl6WIAJ2SYdwBpYW0XvCPiGt2jP3/9l51
+ 01R1Wd7A7tWm3fWsTGL9CPOe5BqKNpnliByV6myHUUOm7WcNMOPtXLx7zMzZG6IvaD3m
+ 93gjJXB2dOJ5+1uRZlBUUnj12mepbmN0meoQ8QAuhiv6ydZ35YJd+LpX9gCC6ZyUu/dQ
+ 0St7VqdwvkbWYN4p+ZqfRVVBuGIFP85wDnq70lkFIKY41dsCngmjU1jXorK2Sqox5jab
+ S64VnmOfChrule8na9utssDVpz/o1H6IxMoCkFVd3NNvZR5Uwd6hb6UJjX6B5HcZEKTF
+ fuYA==
+X-Gm-Message-State: AOJu0YzbtE8Her+bHACC+n2Ggn4ZRciiXMuCxB5Wrt5A/8rwWLTyPlc9
+ ngjvWkgeCdw2U/1kmbHrRPnhRtYN0+pO3QZji/7etK9TFoVAFqhW
+X-Gm-Gg: ASbGncsuxcSDepTtr14lLAGk5r0KYzMEHbc7jYOstk84UA+0EbUvQu66sgidhJxwtk/
+ UnyYfO72l4einmmv2dViaN9BtbgwZC5d0UoF3kYIID/s8SlU6Zei7zXV4ZKZWnPAfXeFLlldjFk
+ /C7LKTo+0uAtwGSwbjKKgTkhfNogsnr/sIeN+ZM/Co/e9i7x39l65heJM6XTxthrtjaSUUDxbFl
+ 7DLM7lyIxUZWsmWs8yIcZZood4yYClPPstGKpV7a1r107gCAd5MplzNOV3WN74xl5rHYi4ZqMRI
+ qbK/4MRg2bVedhKT75Q=
+X-Google-Smtp-Source: AGHT+IE0pgWMhWvIgqrNVUl/pFj8bPr3kN/SMgMD3oFXML64mZQKfb8eF+d1MiWa+Xjgy8N0kfeHXw==
+X-Received: by 2002:a05:6a20:3944:b0:1e0:d8c1:cfe2 with SMTP id
+ adf61e73a8af0-1e0e0b5d87cmr15283371637.34.1732858684928; 
+ Thu, 28 Nov 2024 21:38:04 -0800 (PST)
 Received: from per1cycle.per1cycle (n220246100016.netvigator.com.
  [220.246.100.16]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215218f2345sm22901415ad.17.2024.11.28.21.37.51
+ d9443c01a7336-215218f2345sm22901415ad.17.2024.11.28.21.37.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Nov 2024 21:37:57 -0800 (PST)
+ Thu, 28 Nov 2024 21:38:04 -0800 (PST)
 From: Huan Zhou <pericycle.cc@gmail.com>
-Date: Fri, 29 Nov 2024 13:37:39 +0800
-Subject: [PATCH v4 1/2] riscv: spacemit: bananapi_f3: initial support added
+Date: Fri, 29 Nov 2024 13:37:40 +0800
+Subject: [PATCH v4 2/2] doc: spacemit: bananapi_f3: document Banana Pi F3 board
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241129-pickup-bpif3-v4-1-e99fabf66e33@gmail.com>
+Message-Id: <20241129-pickup-bpif3-v4-2-e99fabf66e33@gmail.com>
 References: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
 In-Reply-To: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
 To: u-boot@lists.denx.de
@@ -94,11 +94,11 @@ Cc: Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>,
  Huan Zhou <pericycle.cc@gmail.com>, 
  Kongyang Liu <seashell11234455@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732858662; l=24804;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732858662; l=4185;
  i=pericycle.cc@gmail.com; s=20241109; h=from:subject:message-id;
- bh=MTWnqLzFnt6g1L4L8fIzhXlTTU9PiUsgzWIViWKCxpg=;
- b=fc0bflbSztWunqMolAZb25pbQb1siJmTYALelhDjrT7olwFpd5FSnKvyA894/NLbHcnp3njOW
- tLNgx30Zvt1Cvydu7oqCyumXpKL3CRTyh0Os2t5mouYRC74n/D8Z1oT
+ bh=pRHUgMDJyOToy6Hk9m5NCMIx/mqzn1/b9pJSk31LboM=;
+ b=z4LDkU5TH3cRxRqIdL8P1uEzaahhD8DQtW03hST5HL945G9osyVgCaW211+WOhgWPzEddFywW
+ yw8MhBu+5CEAZdW70wRSzzzDsswKZCwe7rXqlBaLURBeHGZ2Hcb32Zd
 X-Developer-Key: i=pericycle.cc@gmail.com; a=ed25519;
  pk=Wd3eEYWh1pNETTTXjX4aeanCWrr201iLaYYW5G1BdbU=
 X-BeenThere: u-boot@lists.denx.de
@@ -119,795 +119,134 @@ X-Virus-Status: Clean
 
 From: Kongyang Liu <seashell11234455@gmail.com>
 
-Add basic support for SpacemiT's Banana Pi F3 board.
-Update the k1.dtsi align with mainline.
-Note that the device tree files follow the mainline Linux source[1].
-
-[1]. https://patches.linaro.org/project/linux-serial/patch/20240730-k1-01-basic-dt-v5-8-98263aae83be@gentoo.org/
+Add document for Banana Pi F3 board which based on SpacemiT's K1 SoC.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
 ---
- arch/riscv/Kconfig                     |   5 +
- arch/riscv/cpu/k1/Kconfig              |  18 ++
- arch/riscv/cpu/k1/Makefile             |   6 +
- arch/riscv/cpu/k1/cpu.c                |   9 +
- arch/riscv/cpu/k1/dram.c               |  54 ++++
- arch/riscv/dts/Makefile                |   1 +
- arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
- arch/riscv/dts/k1.dtsi                 | 459 +++++++++++++++++++++++++++++++++
- board/spacemit/bananapi-f3/Kconfig     |  25 ++
- board/spacemit/bananapi-f3/MAINTAINERS |   6 +
- board/spacemit/bananapi-f3/Makefile    |   5 +
- board/spacemit/bananapi-f3/board.c     |   9 +
- configs/bananapi-f3_defconfig          |  20 ++
- include/configs/bananapi-f3.h          |  13 +
- 14 files changed, 655 insertions(+)
+ doc/board/index.rst                |  1 +
+ doc/board/spacemit/bananapi-f3.rst | 86 ++++++++++++++++++++++++++++++++++++++
+ doc/board/spacemit/index.rst       |  8 ++++
+ 3 files changed, 95 insertions(+)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index fa3b016c52728862019c426f031262c40901ee51..bf810735aa3349e511b461a89e1833948711f5c3 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -11,6 +11,9 @@ choice
- config TARGET_ANDES_AE350
- 	bool "Support Andes ae350"
- 
-+config TARGET_BANANAPI_F3
-+	bool "Support BananaPi F3 Board"
-+
- config TARGET_MICROCHIP_ICICLE
- 	bool "Support Microchip PolarFire-SoC Icicle Board"
- 
-@@ -88,6 +91,7 @@ source "board/sifive/unleashed/Kconfig"
- source "board/sifive/unmatched/Kconfig"
- source "board/sipeed/maix/Kconfig"
- source "board/sophgo/milkv_duo/Kconfig"
-+source "board/spacemit/bananapi-f3/Kconfig"
- source "board/starfive/visionfive2/Kconfig"
- source "board/thead/th1520_lpi4a/Kconfig"
- source "board/xilinx/mbv/Kconfig"
-@@ -99,6 +103,7 @@ source "arch/riscv/cpu/fu540/Kconfig"
- source "arch/riscv/cpu/fu740/Kconfig"
- source "arch/riscv/cpu/generic/Kconfig"
- source "arch/riscv/cpu/jh7110/Kconfig"
-+source "arch/riscv/cpu/k1/Kconfig"
- 
- # architecture-specific options below
- 
-diff --git a/arch/riscv/cpu/k1/Kconfig b/arch/riscv/cpu/k1/Kconfig
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 417c128c7af6ad2267ef1bc743c7f10ae70b6de7..367da2d62316d4cab25ecc53f852ef742eba13dd 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -51,6 +51,7 @@ Board-specific doc
+    sipeed/index
+    socionext/index
+    sophgo/index
++   spacemit/index
+    st/index
+    starfive/index
+    ste/index
+diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
 new file mode 100644
-index 0000000000000000000000000000000000000000..d9cd8dce96426bb4cbe9ff38385a4c66116fe341
+index 0000000000000000000000000000000000000000..1e6d6ef19be7e25684966bd4a727bd21b147330a
 --- /dev/null
-+++ b/arch/riscv/cpu/k1/Kconfig
-@@ -0,0 +1,18 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (C) 2024, Kongyang Liu <seashell11234455@gmail.com>
++++ b/doc/board/spacemit/bananapi-f3.rst
+@@ -0,0 +1,86 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
 +
-+config SPACEMIT_K1
-+	bool
-+	select BINMAN
-+	select ARCH_EARLY_INIT_R
-+	select SYS_CACHE_SHIFT_6
-+	imply CPU
-+	imply CPU_RISCV
-+	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
-+	imply RISCV_ACLINT if RISCV_MMODE
-+	imply SPL_RISCV_ACLINT if SPL_RISCV_MMODE
-+	imply CMD_CPU
-+	imply SPL_CPU
-+	imply SPL_OPENSBI
-+	imply SPL_LOAD_FIT
-diff --git a/arch/riscv/cpu/k1/Makefile b/arch/riscv/cpu/k1/Makefile
++Banana Pi F3
++============
++
++Building
++~~~~~~~~
++1. Install the spacemit riscv cross compile toolchain_, or skip it if riscv toolchain is installed.
++
++.. _toolchain: https://archive.spacemit.com/toolchain/
++
++2. Setup cross compilation environment variable:
++
++.. code-block:: console
++
++   export CROSS_COMPILE=<riscv64 toolchain prefix, e.g /opt/spacemit/bin/riscv64-unknown-linux-gnu->
++
++3. Before building U-Boot, OpenSBI should be built first. OpenSBI can be
++built for SpacemiT K1 SoC as below:
++
++.. code-block:: console
++
++   git clone https://github.com/cyyself/opensbi -b k1-opensbi
++   cd opensbi
++   make PLATFORM=generic
++
++4. Then build U-Boot as following:
++
++.. code-block:: console
++
++   cd <U-Boot-dir>
++   make bananapi-f3_defconfig
++   make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
++
++This will generate u-boot.itb
++
++Booting
++~~~~~~~
++Actually, we can replace the uboot part from bianbu linux which is the bsp_ to validate this patch,
++use `balena etcher` to burn the bianbu-minimal.img to the sd card, 
++and replace the /dev/sdx4 where places the uboot_ with the `u-boot.itb` generated from this patch.
++
++.. _bsp: https://archive.spacemit.com/image/k1/version/bianbu/v2.0/
++.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-firmware-layout
++
++Sample boot log from Banana Pi F3 board
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++.. code-block:: none
++
++   try sd...
++   bm:3
++   j...
++
++   U-Boot SPL 2022.10spacemit-dirty (Oct 21 2024 - 09:01:13 +0000)
++   [   0.279] DDR type LPDDR4X
++   [   0.292] lpddr4_silicon_init consume 13ms
++   [   0.293] Change DDR data rate to 2400MT/s
++   [   0.430] ## Checking hash(es) for config conf-1 ... OK
++   [   0.432] ## Checking hash(es) for Image opensbi ... OK
++   [   0.437] ## Checking hash(es) for Image uboot ... OK
++   [   0.443] ## Checking hash(es) for Image fdt-1 ... OK
++   [   0.488] ## Checking hash(es) for config config_1 ... OK
++   [   0.490] ## Checking hash(es) for Image opensbi ... crc32+ OK
++
++
++   U-Boot 2024.10-rc4-00462-g5b138cfcc587-dirty (Nov 28 2024 - 14:56:49 +0800)
++
++   DRAM:  4 GiB
++   Core:  19 devices, 8 uclasses, devicetree: separate
++   Loading Environment from nowhere... OK
++   In:    serial@d4017000
++   Out:   serial@d4017000
++   Err:   serial@d4017000
++   Net:   No ethernet found.
++   => cpu list
++   0: cpu@0      spacemit,x60
++   1: cpu@1      spacemit,x60
++   2: cpu@2      spacemit,x60
++   3: cpu@3      spacemit,x60
++   4: cpu@4      spacemit,x60
++   5: cpu@5      spacemit,x60
++   6: cpu@6      spacemit,x60
++   7: cpu@7      spacemit,x60
++   => test
++   => 
++
+diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
 new file mode 100644
-index 0000000000000000000000000000000000000000..bad4f4cf46fb6eb44053dc52df1837b58046c745
+index 0000000000000000000000000000000000000000..3fb7d804ac8fc8dd4c7ee67ffc877f9ad323162d
 --- /dev/null
-+++ b/arch/riscv/cpu/k1/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+
-+obj-y += dram.o
-+obj-y += cpu.o
-diff --git a/arch/riscv/cpu/k1/cpu.c b/arch/riscv/cpu/k1/cpu.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..41a4a1b95e6e4b6dd1580b5f714107cac6c1dc02
---- /dev/null
-+++ b/arch/riscv/cpu/k1/cpu.c
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ */
-+
-+int cleanup_before_linux(void)
-+{
-+	return 0;
-+}
-diff --git a/arch/riscv/cpu/k1/dram.c b/arch/riscv/cpu/k1/dram.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..c477c15cbfb19f0e3a0ee72985b602f5bda352d7
---- /dev/null
-+++ b/arch/riscv/cpu/k1/dram.c
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ */
-+
-+#include <asm/global_data.h>
-+#include <config.h>
-+#include <fdt_support.h>
-+#include <linux/sizes.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
-+{
-+	gd->ram_base = CFG_SYS_SDRAM_BASE;
-+	/* TODO get ram size from ddr controller */
-+	gd->ram_size = SZ_4G;
-+	return 0;
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
-+	gd->bd->bi_dram[0].size = min_t(phys_size_t, gd->ram_size, SZ_2G);
-+
-+	if (gd->ram_size > SZ_2G && CONFIG_NR_DRAM_BANKS > 1) {
-+		gd->bd->bi_dram[1].start = 0x100000000;
-+		gd->bd->bi_dram[1].size = gd->ram_size - SZ_2G;
-+	}
-+
-+	return 0;
-+}
-+
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+	if (gd->ram_size > SZ_2G)
-+		return SZ_2G;
-+
-+	return gd->ram_size;
-+}
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	u64 start[CONFIG_NR_DRAM_BANKS];
-+	u64 size[CONFIG_NR_DRAM_BANKS];
-+	int i;
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		start[i] = gd->bd->bi_dram[i].start;
-+		size[i] = gd->bd->bi_dram[i].size;
-+	}
-+
-+	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
-+}
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index 17cda483e128996bb944f5a2b9b7676d32e45ae5..71267f96f80214e8e4b11970a5a4a79e537bf633 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -1,6 +1,7 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
- dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
-+dtb-$(CONFIG_TARGET_BANANAPI_F3) += k1-bananapi-f3.dtb
- dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
- dtb-$(CONFIG_TARGET_MILKV_DUO) += cv1800b-milkv-duo.dtb
- dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
-diff --git a/arch/riscv/dts/k1-bananapi-f3.dts b/arch/riscv/dts/k1-bananapi-f3.dts
-new file mode 100644
-index 0000000000000000000000000000000000000000..d2486f70906143ad1f2bde753f12dea5bab2e5ab
---- /dev/null
-+++ b/arch/riscv/dts/k1-bananapi-f3.dts
-@@ -0,0 +1,25 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
-+ */
-+
-+#include "k1.dtsi"
-+#include "binman.dtsi"
-+
-+/ {
-+	model = "Banana Pi BPI-F3";
-+	compatible = "bananapi,bpi-f3", "spacemit,k1";
-+
-+	chosen {
-+		stdout-path = "serial0";
-+	};
-+
-+	memory@0 {
-+		device_type = "memory";
-+		reg = <0x00000000 0x00000000 0x00000000 0x80000000>;
-+	};
-+};
-+
-+&uart0 {
-+	status = "okay";
-+};
-diff --git a/arch/riscv/dts/k1.dtsi b/arch/riscv/dts/k1.dtsi
-new file mode 100644
-index 0000000000000000000000000000000000000000..514be453dbaf6713cdf4ad5a5d653488297ebb83
---- /dev/null
-+++ b/arch/riscv/dts/k1.dtsi
-@@ -0,0 +1,459 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright (C) 2024 Yangyu Chen <cyy@cyyself.name>
-+ */
-+
-+/dts-v1/;
-+/ {
-+	#address-cells = <2>;
-+	#size-cells = <2>;
-+	model = "SpacemiT K1";
-+	compatible = "spacemit,k1";
-+
-+	aliases {
-+		serial0 = &uart0;
-+		serial1 = &uart2;
-+		serial2 = &uart3;
-+		serial3 = &uart4;
-+		serial4 = &uart5;
-+		serial5 = &uart6;
-+		serial6 = &uart7;
-+		serial7 = &uart8;
-+		serial8 = &uart9;
-+	};
-+
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		timebase-frequency = <24000000>;
-+
-+		cpu-map {
-+			cluster0 {
-+				core0 {
-+					cpu = <&cpu_0>;
-+				};
-+				core1 {
-+					cpu = <&cpu_1>;
-+				};
-+				core2 {
-+					cpu = <&cpu_2>;
-+				};
-+				core3 {
-+					cpu = <&cpu_3>;
-+				};
-+			};
-+
-+			cluster1 {
-+				core0 {
-+					cpu = <&cpu_4>;
-+				};
-+				core1 {
-+					cpu = <&cpu_5>;
-+				};
-+				core2 {
-+					cpu = <&cpu_6>;
-+				};
-+				core3 {
-+					cpu = <&cpu_7>;
-+				};
-+			};
-+		};
-+
-+		cpu_0: cpu@0 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <0>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster0_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu0_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_1: cpu@1 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <1>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster0_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu1_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_2: cpu@2 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <2>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster0_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu2_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_3: cpu@3 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <3>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster0_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu3_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_4: cpu@4 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <4>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster1_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu4_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_5: cpu@5 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <5>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster1_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu5_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_6: cpu@6 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <6>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster1_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu6_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cpu_7: cpu@7 {
-+			compatible = "spacemit,x60", "riscv";
-+			device_type = "cpu";
-+			reg = <7>;
-+			riscv,isa = "rv64imafdcv_zicbom_zicbop_zicboz_zicntr_zicond_zicsr_zifencei_zihintpause_zihpm_zfh_zba_zbb_zbc_zbs_zkt_zvfh_zvkt_sscofpmf_sstc_svinval_svnapot_svpbmt";
-+			riscv,isa-base = "rv64i";
-+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "v", "zicbom",
-+					       "zicbop", "zicboz", "zicntr", "zicond", "zicsr",
-+					       "zifencei", "zihintpause", "zihpm", "zfh", "zba",
-+					       "zbb", "zbc", "zbs", "zkt", "zvfh", "zvkt",
-+					       "sscofpmf", "sstc", "svinval", "svnapot", "svpbmt";
-+			riscv,cbom-block-size = <64>;
-+			riscv,cbop-block-size = <64>;
-+			riscv,cboz-block-size = <64>;
-+			i-cache-block-size = <64>;
-+			i-cache-size = <32768>;
-+			i-cache-sets = <128>;
-+			d-cache-block-size = <64>;
-+			d-cache-size = <32768>;
-+			d-cache-sets = <128>;
-+			next-level-cache = <&cluster1_l2_cache>;
-+			mmu-type = "riscv,sv39";
-+
-+			cpu7_intc: interrupt-controller {
-+				compatible = "riscv,cpu-intc";
-+				interrupt-controller;
-+				#interrupt-cells = <1>;
-+			};
-+		};
-+
-+		cluster0_l2_cache: l2-cache0 {
-+			compatible = "cache";
-+			cache-block-size = <64>;
-+			cache-level = <2>;
-+			cache-size = <524288>;
-+			cache-sets = <512>;
-+			cache-unified;
-+		};
-+
-+		cluster1_l2_cache: l2-cache1 {
-+			compatible = "cache";
-+			cache-block-size = <64>;
-+			cache-level = <2>;
-+			cache-size = <524288>;
-+			cache-sets = <512>;
-+			cache-unified;
-+		};
-+	};
-+
-+	soc {
-+		compatible = "simple-bus";
-+		interrupt-parent = <&plic>;
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		dma-noncoherent;
-+		ranges;
-+
-+		uart0: serial@d4017000 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017000 0x0 0x100>;
-+			interrupts = <42>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart2: serial@d4017100 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017100 0x0 0x100>;
-+			interrupts = <44>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart3: serial@d4017200 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017200 0x0 0x100>;
-+			interrupts = <45>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart4: serial@d4017300 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017300 0x0 0x100>;
-+			interrupts = <46>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart5: serial@d4017400 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017400 0x0 0x100>;
-+			interrupts = <47>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart6: serial@d4017500 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017500 0x0 0x100>;
-+			interrupts = <48>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart7: serial@d4017600 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017600 0x0 0x100>;
-+			interrupts = <49>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart8: serial@d4017700 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017700 0x0 0x100>;
-+			interrupts = <50>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		uart9: serial@d4017800 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xd4017800 0x0 0x100>;
-+			interrupts = <51>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "disabled";
-+		};
-+
-+		plic: interrupt-controller@e0000000 {
-+			compatible = "spacemit,k1-plic", "sifive,plic-1.0.0";
-+			reg = <0x0 0xe0000000 0x0 0x4000000>;
-+			interrupts-extended = <&cpu0_intc 11>, <&cpu0_intc 9>,
-+					      <&cpu1_intc 11>, <&cpu1_intc 9>,
-+					      <&cpu2_intc 11>, <&cpu2_intc 9>,
-+					      <&cpu3_intc 11>, <&cpu3_intc 9>,
-+					      <&cpu4_intc 11>, <&cpu4_intc 9>,
-+					      <&cpu5_intc 11>, <&cpu5_intc 9>,
-+					      <&cpu6_intc 11>, <&cpu6_intc 9>,
-+					      <&cpu7_intc 11>, <&cpu7_intc 9>;
-+			interrupt-controller;
-+			#address-cells = <0>;
-+			#interrupt-cells = <1>;
-+			riscv,ndev = <159>;
-+		};
-+
-+		clint: timer@e4000000 {
-+			compatible = "spacemit,k1-clint", "sifive,clint0";
-+			reg = <0x0 0xe4000000 0x0 0x10000>;
-+			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>,
-+					      <&cpu1_intc 3>, <&cpu1_intc 7>,
-+					      <&cpu2_intc 3>, <&cpu2_intc 7>,
-+					      <&cpu3_intc 3>, <&cpu3_intc 7>,
-+					      <&cpu4_intc 3>, <&cpu4_intc 7>,
-+					      <&cpu5_intc 3>, <&cpu5_intc 7>,
-+					      <&cpu6_intc 3>, <&cpu6_intc 7>,
-+					      <&cpu7_intc 3>, <&cpu7_intc 7>;
-+		};
-+
-+		sec_uart1: serial@f0612000 {
-+			compatible = "spacemit,k1-uart", "snps,dw-apb-uart";
-+			reg = <0x0 0xf0612000 0x0 0x100>;
-+			interrupts = <43>;
-+			clock-frequency = <14857000>;
-+			reg-shift = <2>;
-+			reg-io-width = <4>;
-+			status = "reserved"; /* for TEE usage */
-+		};
-+	};
-+};
-\ No newline at end of file
-diff --git a/board/spacemit/bananapi-f3/Kconfig b/board/spacemit/bananapi-f3/Kconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..f89fa9af2c7d92e87722a54c4df9216d76376de9
---- /dev/null
-+++ b/board/spacemit/bananapi-f3/Kconfig
-@@ -0,0 +1,25 @@
-+if TARGET_BANANAPI_F3
-+
-+config SYS_BOARD
-+	default "bananapi-f3"
-+
-+config SYS_VENDOR
-+	default "spacemit"
-+
-+config SYS_CPU
-+	default "k1"
-+
-+config SYS_CONFIG_NAME
-+	default "bananapi-f3"
-+
-+config TEXT_BASE
-+	default 0x00200000
-+
-+config SPL_OPENSBI_LOAD_ADDR
-+	default 0x00000000
-+
-+config BOARD_SPECIFIC_OPTIONS
-+	def_bool y
-+	select SPACEMIT_K1
-+
-+endif
-diff --git a/board/spacemit/bananapi-f3/MAINTAINERS b/board/spacemit/bananapi-f3/MAINTAINERS
-new file mode 100644
-index 0000000000000000000000000000000000000000..131bad03181021bb10b8f2189f00870f45f6dac1
---- /dev/null
-+++ b/board/spacemit/bananapi-f3/MAINTAINERS
-@@ -0,0 +1,6 @@
-+BananaPi F3
-+M:	Huan Zhou <pericycle.cc@@gmail.com>
-+S:	Maintained
-+F:	board/spacemit/bananapi-f3/
-+F:	configs/bananapi-f3_defconfig
-+F:	doc/board/spacemit/bananapi-f3.rst
-diff --git a/board/spacemit/bananapi-f3/Makefile b/board/spacemit/bananapi-f3/Makefile
-new file mode 100644
-index 0000000000000000000000000000000000000000..2168698402b6d1d26988ca4e3a8e55367db51532
---- /dev/null
-+++ b/board/spacemit/bananapi-f3/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+
-+obj-y := board.o
-diff --git a/board/spacemit/bananapi-f3/board.c b/board/spacemit/bananapi-f3/board.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..2631cdd49e0eb4afde0efadb2f3014fd623f78f2
---- /dev/null
-+++ b/board/spacemit/bananapi-f3/board.c
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ */
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-diff --git a/configs/bananapi-f3_defconfig b/configs/bananapi-f3_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..6363620208757df185e3a11ee1260eb57256ac68
---- /dev/null
-+++ b/configs/bananapi-f3_defconfig
-@@ -0,0 +1,20 @@
-+CONFIG_RISCV=y
-+CONFIG_SYS_MALLOC_LEN=0x1000000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x1000000
-+CONFIG_DEFAULT_DEVICE_TREE="k1-bananapi-f3"
-+CONFIG_SYS_LOAD_ADDR=0x200000
-+CONFIG_TARGET_BANANAPI_F3=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_FIT=y
-+CONFIG_SYS_BOOTM_LEN=0xa000000
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_SYS_CBSIZE=256
-+CONFIG_SYS_PBSIZE=276
-+CONFIG_HUSH_PARSER=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_SYS_NS16550=y
-+CONFIG_SYS_NS16550_MEM32=y
-diff --git a/include/configs/bananapi-f3.h b/include/configs/bananapi-f3.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..aecf69cd4cf8ddaea7dee57bf1a8ce8dc5db513d
---- /dev/null
-+++ b/include/configs/bananapi-f3.h
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+/*
-+ * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-+ *
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#define CFG_SYS_SDRAM_BASE         0x0
-+#define CFG_SYS_NS16550_IER        0x40
-+
-+#endif /* __CONFIG_H */
++++ b/doc/board/spacemit/index.rst
+@@ -0,0 +1,8 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++SpacemiT
++========
++.. toctree::
++   :maxdepth: 1
++
++   bananapi-f3
 
 -- 
 2.39.5
