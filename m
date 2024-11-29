@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46FD1D72A11
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 20:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092A8D72A11
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 20:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8120E89411;
+	by phobos.denx.de (Postfix) with ESMTP id D6C2E89489;
 	Fri, 29 Nov 2024 21:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UAfddUUD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Oud5go9q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 825F98948B; Fri, 29 Nov 2024 20:42:40 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 80E1789248; Fri, 29 Nov 2024 20:42:42 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70A7B89463
+ by phobos.denx.de (Postfix) with ESMTPS id ADB9C89486
  for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 20:42:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id BA1925C0540;
+ by dfw.source.kernel.org (Postfix) with ESMTP id BD22B5C5D70;
  Fri, 29 Nov 2024 19:41:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4C31BC4CECF;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 57D40C4CED2;
  Fri, 29 Nov 2024 19:42:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1732909356;
- bh=5p1ZuMH4hjGy0QxNBSAhRF0kND0CdqEMCGSoiIiObDY=;
- h=From:Subject:Date:To:Cc:Reply-To:From;
- b=UAfddUUDIAcUgkOW2nPFY5ObOeOvBmDeNFiuK+uhojDexZrQGagtXZj5X51isb85m
- yiGpWzrbiFyg/3hJ+D816QhGTSmpnyhQt31wm5siSs5/E3yFBC1efqsKfgZfMB7utY
- 61b6k0q5+zI8UOipqO1vP1M4xw4g2jpEEr3oriRBmSJUJBDBMgsggPhWkbmDmG7YOl
- rF/CVDn8iFT2wjMU8YA8a67N97SSoYmZ+JvF8rs37f6NFRr5zHW+otZ0FtRSOFrqKu
- WFqYblZ/3k7vfxa7eE+yjGSCNVgKK7VfuALxSzXZ69y0u0KHUlDwlhf9X+oy8gY7u5
- fZs00/cDpnBDg==
+ bh=ddXzY+N/WtEAvyi8VxpzCOdjXAbcXGZTwj/7I9K/EB8=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=Oud5go9qXJ/RlXukQ6JNQFZHeBxTHPp2AX25e6VFkAeb+HcDKZR0JVCnN3vMHTcUw
+ stcrbWRkTj/u2QGbyVoZ4H2LDZSe4AHL5ZCO6km/pE6VeUclwxuTU0bfBA/lv58on+
+ uGL83fjP0cXlPARMncMB3rNyv27OvPo4zU+9A8Ai7S/EatwQRu0bWf41nBsqCCxPNk
+ HhSHxnCNIxLHEx7U2nvGaS6hMlnjoWTC2p6VmsrdyJqxR7bJl7aCJLCk6Hi6E+pRLp
+ WFn/LNUBdE1/eOpYuMRKgCb+rKx1RvE5ACE3qvMwNHI3IUdfWWxoVmSZp3wM05PDzw
+ HwpVZ+kGvUxmQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 3600FD729FE;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 474AED729FD;
  Fri, 29 Nov 2024 19:42:36 +0000 (UTC)
 From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
  <devnull+j.ne.posteo.net@kernel.org>
-Subject: [PATCH 0/2] Minor typo fixes
-Date: Fri, 29 Nov 2024 20:42:27 +0100
-Message-Id: <20241129-typo-v1-0-1ac3fef74eee@posteo.net>
+Date: Fri, 29 Nov 2024 20:42:28 +0100
+Subject: [PATCH 1/2] clk: mpc83xx: Fix typo in "Coherent System Bus"
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIACMZSmcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxNDQyNL3ZLKgnxdyxSTFJNEC/PEZLNUJaDSgqLUtMwKsDHRsbW1AFt66id
- WAAAA
-X-Change-ID: 20241129-typo-9d4d4a87ac6e
+Message-Id: <20241129-typo-v1-1-1ac3fef74eee@posteo.net>
+References: <20241129-typo-v1-0-1ac3fef74eee@posteo.net>
+In-Reply-To: <20241129-typo-v1-0-1ac3fef74eee@posteo.net>
 To: Mario Six <mario.six@gdsys.cc>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1732909355; l=519;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1732909355; l=748;
  i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=5p1ZuMH4hjGy0QxNBSAhRF0kND0CdqEMCGSoiIiObDY=;
- b=a3E0EblwADltd9wOWEAmEirDDjTsCVKYSoLVvmqAL7uuP8Kz2LfHIrhHm1di94w79HSQtZfE/
- 5+LeV3JfetJAFN1lAsprMqW++5VFc69wF5v7veQoiJhsI7/e9Mhh6xd
+ bh=d1Imfeaz4mmEu1sdX3Ph06IdWoxZEdhIx3m0qbtgCfM=;
+ b=LQ5Kp2MuI9bS+EQwehlTjN/qI/Cgl/84DfOtQp51ryVLtEq48CKlSeVvf9iE+VG6gzvzydwDk
+ EwTbbh8p9YJAoVH6l3sLegMdY6WAefyy+t83arkOHhP4vR5atsPbIK9
 X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
  pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
 X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
@@ -87,23 +86,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patchset includes two small typo fixes.
+From: "J. Neuschäfer" <j.ne@posteo.net>
+
+Cosmetic change.
 
 Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
-J. Neuschäfer (2):
-      clk: mpc83xx: Fix typo in "Coherent System Bus"
-      doc: sending_patches: Fix spelling of "its"
+ drivers/clk/mpc83xx_clk.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- doc/develop/sending_patches.rst | 2 +-
- drivers/clk/mpc83xx_clk.h       | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
----
-base-commit: 62224280d9e89648ae90346c0aede76f9b7e7610
-change-id: 20241129-typo-9d4d4a87ac6e
+diff --git a/drivers/clk/mpc83xx_clk.h b/drivers/clk/mpc83xx_clk.h
+index c06a51ecd43a426e8ecd4e99a3f8ff3e902f9106..6b74fc5f16b613cec4fbc654644835fbc0dfe3eb 100644
+--- a/drivers/clk/mpc83xx_clk.h
++++ b/drivers/clk/mpc83xx_clk.h
+@@ -321,7 +321,7 @@ static inline u32 get_pci_sync_in(immap_t *im)
+ }
+ 
+ /**
+- * get_csb_clk() - Read the CSB (Coheren System Bus) clock speed
++ * get_csb_clk() - Read the CSB (Coherent System Bus) clock speed
+  * @im: Pointer to the MPC83xx main register map in question
+  *
+  * Return: The CSB clock speed value as a 32-bit number.
 
-Best regards,
 -- 
-J. Neuschäfer <j.ne@posteo.net>
+2.45.2
 
 
