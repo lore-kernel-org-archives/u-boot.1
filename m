@@ -4,80 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD01D6EBE2
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 07:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55E53D6EBEC
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 08:22:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01C558938D;
-	Fri, 29 Nov 2024 08:12:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FF2489380;
+	Fri, 29 Nov 2024 09:22:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PyfA39xS";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1732868549;
+	bh=ktH1DlIv95GWU3LSfUxViQA/waVRcXS/b/uRWij9ekE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=wxTh1N4P24jUFlvNwkEh7OZSGzes1bnGRE3cpR8B2XdDLSZ5bMPQ+3jxqdOCGF9ar
+	 ExzhIxaw8V9CZ8ecywWHDWMH9Ow0d+c7G3xWx6zBbz1e6Pcyo19m0k+c9cLRaRh5nd
+	 SOP67PCzD2OjtyCjnHl9paSzLEL/KmeHLKBScnNEk3SHmjJ/tGSwd8WRVp5vlIQsma
+	 E1BlL0Gpfv0zampR9zzMd4slK4VNIL7B+Eo6XZ22JvB2tzmq5P9hMRDwCYxgZVRZOf
+	 sRsw3iONTD/SKquAtcYmbmA9Bb/zRYZReaNzEq1ZgndgWCBFBcNzhb9jX+AWe27NWe
+	 3Bi3hgfcCDxrA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C4E289383; Fri, 29 Nov 2024 08:12:33 +0100 (CET)
-Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
- [IPv6:2607:f8b0:4864:20::e31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2B93289382; Fri, 29 Nov 2024 09:22:28 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB6698938D
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 08:12:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFADB8937E
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 09:22:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-4af58808485so397529137.3
- for <u-boot@lists.denx.de>; Thu, 28 Nov 2024 23:12:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732864350; x=1733469150; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1iPiEUqnOQlFWseu56TchibAwQ+GQQUKZZE/wydrlZM=;
- b=PyfA39xS/vub816u/7++gp5O9Fz7KHae6o1QYCRt+0mGVYRQmnoXJzrkMuO81PQMY7
- kOC8tF6sbnuB9Bg773l6AQ7YrXqAxRzDTx/A/N1PqvgsqG2yQ/QX5SB8vr9o5YJEC+Sa
- idMmdQ3N7RHo3FPg1UoM4DILiTvAWjvKB7Ju7MRo7MZpMVyRx6YQgminnCVvyjI/uLow
- oJu+MHVJrZKkQd29DtUAfFcUtLNha1xMZp5xaRUyue1XSe/X8wqPlJYdKLXI1I40KxUl
- g6JvEvCf3IffcO+ysmrGAw79llJya7A4NkgxKkCQjHxhF+5V2B39E41qhvpLiYAzxzmY
- +FIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732864350; x=1733469150;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1iPiEUqnOQlFWseu56TchibAwQ+GQQUKZZE/wydrlZM=;
- b=JjCd9m7aFAvcEt+LQCfvoiBEeHNjXm166pZM5veXqo8SdPWTEKrcmQ+YIHxuu0VnYW
- BuyQnOvLlT6Lu790XvSqKX+08ksdRCCG5JlD1ke3us5GjASlnFb19QMhtYzKvxBiQDF0
- +wBPWjnkySDnzf5o0i4JPO8FTIpFsdUwzbT0oJgRrBIJua3W1W/BAiS+PyBycNp9l5q3
- yietuWPrDI7SDfO+lR9jc1GqweO3yTnsyegiKcHOQUtm9iuK3cSJsctnLKNmQVNIKwNW
- vRttiFT16ktIekExz8aivVtWZBt31UC51FiVIxrTN9nbwhD0tpjxjntpEtTme9onKh5W
- v5kA==
-X-Gm-Message-State: AOJu0YzclTQOBm2lLSwHzIk8IozOlnDbMqYUYh3n7n9+OmwBS+Cci5Zq
- HdVkXZHnx88qWb+fLRvCOhiesMt7YAShZg+clQ1Q+BnpcrtcUF1Efpo4JWcIaKaK/pnrsRjXwAD
- +Dt7VLCWhkMs9NtA86ael5L/smbCxNKuULG9+fw==
-X-Gm-Gg: ASbGncsXrva6fj1E2CBLRIroe9+b96in1Zp+U96lc+2caUeUG/1CjGJIYFY2+34m8sQ
- YZxAz8eOhW7T0BKg4zF2y4OvMB1WUkEdy
-X-Google-Smtp-Source: AGHT+IFtFQUffdjv/sZaG3/AVcLIY0phOLJ9ePbVOS6f00Rih0njlMLpBezE60M7kJ4DlsC0D0D33PKqt6kwaGmjo6M=
-X-Received: by 2002:a05:6102:c04:b0:4ad:5940:340e with SMTP id
- ada2fe7eead31-4af44a47b37mr12598459137.21.1732864349769; Thu, 28 Nov 2024
- 23:12:29 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Y05l32NVjz9sV4;
+ Fri, 29 Nov 2024 09:22:23 +0100 (CET)
+Message-ID: <8d3fe6b1-7465-4632-8af6-d058f87e6a78@denx.de>
+Date: Fri, 29 Nov 2024 09:22:22 +0100
 MIME-Version: 1.0
-References: <20241105230724.159755-1-marex@denx.de>
-In-Reply-To: <20241105230724.159755-1-marex@denx.de>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 29 Nov 2024 12:42:18 +0530
-Message-ID: <CAFA6WYME8D9WkC_0gDLT2LKOPk4EXULKgxtdniVKTme5j+uMag@mail.gmail.com>
-Subject: Re: [PATCH 1/2] ARM: dts: imx6dl: Add support for i.MX6DL DHCOM SoM
- on PDK2 carrier board
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, 
- Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Shawn Guo <shawnguo@kernel.org>, 
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Fabio Estevam <festevam@denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] board: solidrun: clearfog: enable ddr odt0 on write for
+ both chip-select
+To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241127-a388-sr-som-odt-v1-1-ad51f46a6e9a@solid-run.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20241127-a388-sr-som-odt-v1-1-ad51f46a6e9a@solid-run.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4Y05l32NVjz9sV4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,76 +71,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On 27.11.24 13:32, Josua Mayer wrote:
+> Enabling ODT is required to suppress reflection of the data signal on
+> DDR write operation. SolidRun Armada 388 SoM only connects M_ODT[0] even
+> when both chip-select are used.
+> 
+> Enable ODT[0] for both chip-select during write only.
+> 
+> Original work by Baruch Siach [1] and Chris Packham [2].
+> 
+> [1] https://github.com/SolidRun/u-boot-armada38x/commit/aba763a611e69fbcc4e229659da9d84f16b39814
+> [2] https://github.com/SolidRun/u-boot-armada38x/commit/dbaf09590df9add19e738d2de03c0f2d0d8f5433
+> 
+> Signed-off-by: Josua Mayer <josua@solid-run.com>
 
-On Wed, 6 Nov 2024 at 04:37, Marek Vasut <marex@denx.de> wrote:
->
-> Add support for the DH electronics i.MX6DL DHCOM SoM and a PDK2 evaluation
-> board. The evaluation board features three serial ports, USB OTG, USB host
-> with an USB hub, Fast or Gigabit ethernet, eMMC, uSD, SD, analog audio,
-> PCIe and HDMI video output.
->
-> All of the aforementioned features except for mSATA are supported, mSATA
-> is not available on i.MX6DL and is only available on DHCOM populated with
-> i.MX6Q SoC which is already supported upstream.
->
-> Backport from linux-next commit
-> c3f5d76a6e03 ("ARM: dts: imx6dl: Add support for i.MX6DL DHCOM SoM on PDK2 carrier board")
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> Reviewed-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> Signed-off-by: Shawn Guo <shawnguo@kernel.org>
+Reviewed-by: Stefan Roese <sr@denx.de>
+
+Thanks,
+Stefan
+
 > ---
-> Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
-> Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> Cc: Fabio Estevam <festevam@denx.de>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
+>   board/solidrun/clearfog/clearfog.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/board/solidrun/clearfog/clearfog.c b/board/solidrun/clearfog/clearfog.c
+> index 2dbd071abd9f29cee97fb813a67d0190a620bd32..67b60d2e7b43331383b6a01b13693b29b21129be 100644
+> --- a/board/solidrun/clearfog/clearfog.c
+> +++ b/board/solidrun/clearfog/clearfog.c
+> @@ -161,7 +161,7 @@ static struct mv_ddr_topology_map board_topology_map = {
+>   	{0},				/* timing parameters */
+>   	{ {0} },			/* electrical configuration */
+>   	{0,},				/* electrical parameters */
+> -	0,				/* ODT configuration */
+> +	0x30000,			/* ODT configuration */
+>   	0x3,				/* clock enable mask */
+>   };
+>   
+> 
 > ---
->  .../src/arm/nxp/imx/imx6dl-dhcom-pdk2.dts     | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 dts/upstream/src/arm/nxp/imx/imx6dl-dhcom-pdk2.dts
->
+> base-commit: 3881c6b90350b0b04085ad46ef64989b43967eef
+> change-id: 20241127-a388-sr-som-odt-89f8dd6b6410
+> 
+> Best regards,
 
-I didn't realize earlier that this patch is directly modifying
-dts/upstream subtree. Modifying the subtree is likely going to cause
-conflicts with the next subtree pull. It looks like this board is
-targeted for v6.13 release. Let's see if we get lucky with automerge
-being successful for this one but let's try to rather use cherry pick
-or wait for the board support to land in devicetree-rebasing tree. You
-can maintain U-Boot DTS for the time being.
+Viele Grüße,
+Stefan Roese
 
--Sumit
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 
-> diff --git a/dts/upstream/src/arm/nxp/imx/imx6dl-dhcom-pdk2.dts b/dts/upstream/src/arm/nxp/imx/imx6dl-dhcom-pdk2.dts
-> new file mode 100644
-> index 00000000000..38235925257
-> --- /dev/null
-> +++ b/dts/upstream/src/arm/nxp/imx/imx6dl-dhcom-pdk2.dts
-> @@ -0,0 +1,20 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-> + *
-> + * DHCOM iMX6 variant:
-> + * DHCM-iMX6DL-C080-R102-F0819-E-SD-RTC-T-HS-I-01D2
-> + * DHCOM PCB number: 493-400 or newer
-> + * PDK2 PCB number: 516-400 or newer
-> + */
-> +/dts-v1/;
-> +
-> +#include "imx6dl.dtsi"
-> +#include "imx6qdl-dhcom-som.dtsi"
-> +#include "imx6qdl-dhcom-pdk2.dtsi"
-> +
-> +/ {
-> +       model = "DH electronics i.MX6DL DHCOM on Premium Developer Kit (2)";
-> +       compatible = "dh,imx6dl-dhcom-pdk2", "dh,imx6dl-dhcom-som",
-> +                    "fsl,imx6dl";
-> +};
-> --
-> 2.45.2
->
