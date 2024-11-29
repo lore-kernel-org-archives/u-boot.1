@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCA0D729E9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 16:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE47D729E9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 16:35:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 122C88941F;
-	Fri, 29 Nov 2024 17:34:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BA90891F5;
+	Fri, 29 Nov 2024 17:35:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nive3GeR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Obn3FFIJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B03B289454; Fri, 29 Nov 2024 17:34:05 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id EFF4E891F5; Fri, 29 Nov 2024 17:35:21 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9578689364
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 17:34:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCCB7891CF
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 17:35:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-46686a258f7so16974211cf.1
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 08:34:02 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfddb70965so2386397a12.0
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 08:35:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1732898041; x=1733502841; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hv8y0tI4+r1tEcQKiDhqTRWOpRqsV1hYc+tS6o+KrnI=;
- b=nive3GeRi7zBnKnp6WZGR2iUYZ8ZL22VBbjxYrYKOPdkk4gQnWyltuWQI5cnRyYChh
- lU/qJz+8ZTUATVtDnRix/1MmMIPKzMsDj0WGdHLNstbqs7iyhnO1dMMlNwcYsrxhUMUp
- 2pjNxhcCXo8zUruBv5VwaixkwlHvtzxmwxHT8=
+ d=linaro.org; s=google; t=1732898119; x=1733502919; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fU90U3F47CumcRAOvrvxLDb55n8icxq6eKeukvJX0Ts=;
+ b=Obn3FFIJznTRm3qD9e/jU5nEumsU8Zf9K/TFq5HP40ALMqEVcq/3N3V4BUBnAD09pC
+ 2tapxqXAxqpSUr0cSJSAda26NSJVr+cZaop/XZicr9nkT32dUJ91/g3ZM0FubvWs55Qc
+ FgjZH5UWWbDrHl1TVVmWK/gSvFwm0RwerGjwSjTL8npNaBPaFh9tT1ILWKtsUUSeqQTW
+ DIgKJgKxPbD4QFSv1Ddi7nPr467VGudOGzfyi+NIdAC8DwQmpG13u/6QhUZ2AiuvyV3d
+ feHLM0vVNpIHT5xyDxdpRxwyiWwi6htbIJhFBheQlpXDWk4vP/uG/TPd6F6y0Ft9ZL21
+ XlwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732898041; x=1733502841;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hv8y0tI4+r1tEcQKiDhqTRWOpRqsV1hYc+tS6o+KrnI=;
- b=txBTT5vfbLnrWHOKUt/ECAcb+R6F0+ifTjnHxsVqUGMwJoNuPOPQrAm3saHrnwoBMo
- HOf3YxqEaorYE+BhhADi6gCxdlit6X4Clu243+RGLAtN8/dQVlguGftE4+oTMmA+fhjq
- 0ZAspXRcYrQbvy8FYhTRlzxeMpEZX9W+z3GrqoYvtOC7REisUXxZeXjyUCwL6xi9TI0i
- AAIyumVO2xMX8p21XkPwZOe8V1P6yKi23vjt9Taors+xPyXM1V1BPoN7eAB+MK/3j+GL
- PGjppwCSnTliE6SiZPfYI2WAkCAFZr64HurArj20JRMTJ5g70fHGW84s7edjKEGDmLin
- 2ZhQ==
-X-Gm-Message-State: AOJu0YwWG62C4M9ycMYqihSaU9cVAU7+4V9BGC1Wr7ulMrcw0FJ2+hbi
- 3sZZgpdBJ6zfezrciXLppx3EXqULAWUu5Zx13kw2NbRRzp9t7JwzbW/Sy1+GOK0=
-X-Gm-Gg: ASbGncsiOK+ly6KXj8A65Je19IkwaUluCFJ/Q2ZHWWVcw56IEBZMYWfUShSdOHA91Um
- aM+DRz5hq8dWlBQpJLUHMxK6xhUa06VrEd1tdBaXIg2zVeZ/FLR/WWFZ9pMBIqKnLVST5sbTkid
- 2pLIhsAuvuNZVHSBeujviNT2dnIG/gzMU9k9/vthcqRV71vAAaXKp7VpkY9JFMOfTeCUo65aTd8
- ETmvr+15v2Yz02XhC1efaiCC5UK8eQo5cuOvWrngMHLXjEnAA==
-X-Google-Smtp-Source: AGHT+IEcIeKWcXOrFP1NVWGoARcE/XC87zNfqpRwhHK7KPh8LInlKmKKSVsRlxwM/QHcPaRDWwRp2A==
-X-Received: by 2002:a05:622a:5b96:b0:466:c7c5:644a with SMTP id
- d75a77b69052e-466c7c5886dmr89790301cf.40.1732898041238; 
- Fri, 29 Nov 2024 08:34:01 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466c421e323sm18352521cf.59.2024.11.29.08.33.59
+ d=1e100.net; s=20230601; t=1732898119; x=1733502919;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fU90U3F47CumcRAOvrvxLDb55n8icxq6eKeukvJX0Ts=;
+ b=hhnUJzxmOvsDtdjU0URXaEhzK8cIEZyez905c1MRX4qzcUxHr/KIgc1SmBOKc/pMyX
+ n2QsriXKKuU1gZ2W0cRp1WYZhwE7HInSK4ZEypUbB+FnwcLl0y+qKS6Lz38tWXb685B/
+ jpcZ++tsVas7gzcESbe8ZiIwytKqS/uXJgsY+AtqkgjM6F3fHLnCl0wP/dhV/Wj1cL4W
+ bTRYKeJQ84LgB58Sy2cOn0fGFyQBEUPNLxbnesuyC2P+z8s/g6qpwnPOnIlmUL4gVCes
+ W1dOO4c/xFP6OKjLVibAFasLN1HFDZLEHxQ6K5lF6oRvQ6+jbafiJd3G8B7L3ibu9f+w
+ W/JA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUIPk+fxon8+BuquhWuEjOxtNQLpeeJ/GPTn/bETpaKmzATzq/f/GHdGspytABx0d//kWwxeuE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxs1WmXsFcCK857hK3nN3sMYFR9IGp4wF1m8iooYyRfu6apmiDW
+ vSr7KZoGH2e3aiByrae47FTgNVrWXiGJN8rHbDacHEE0yKkTrRAd+2clZkqNbNM=
+X-Gm-Gg: ASbGncuYhjxl4HE1dbmISIPFjRJAe7OkZ96AsulOAO93jTGpZUzqlbFJz4r6Mt/Bpbc
+ naN79+s3d/jvLVQEFsWQiPw0xOZjMLBJXl6bj9DJVVQ3OLLdT/CRk75lUK+FA3Th93HW1TMX1xp
+ yL8RHGHtamVbyQUWE3dj5CIWog0Px96/1JZHmGWZci1aoEuhwkBXKYab5INFVoYrLHx3UUYm8QA
+ KWuO+poxFJh96o5p+yAfYOPcssQkeUWxOug3WwcVNKd8PFEC4yx61dF574CuECNx5pBqN+LuM6a
+ JFmtnqFIcvw0oRAgOzkPaKPhtA==
+X-Google-Smtp-Source: AGHT+IHay+xhKR65W4Oz4WjhYumGgz1+kYIsqxHdsiGdMTe6J6uxPZRaNED4SSO1WCz5/A8yaBfAyg==
+X-Received: by 2002:a05:6402:5113:b0:5cb:dfd8:464d with SMTP id
+ 4fb4d7f45d1cf-5d080c5ac36mr12098711a12.28.1732898119187; 
+ Fri, 29 Nov 2024 08:35:19 -0800 (PST)
+Received: from localhost.localdomain (ppp089210064034.access.hol.gr.
+ [89.210.64.34]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa5996c1945sm188254466b.19.2024.11.29.08.35.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Nov 2024 08:34:00 -0800 (PST)
-Date: Fri, 29 Nov 2024 10:33:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Subject: Re: [PATCH v2] test/cmd/wget.c: move net_test_wget() to the cmd test
- suite
-Message-ID: <20241129163357.GM3600562@bill-the-cat>
-References: <20241115164514.2186763-1-jerome.forissier@linaro.org>
- <20241119155939.GA3493897@bill-the-cat>
- <37f469bc-5610-401d-81c1-1e2a99ababdb@linaro.org>
+ Fri, 29 Nov 2024 08:35:18 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Add U-Boot memory to the EFI memory map
+Date: Fri, 29 Nov 2024 18:35:10 +0200
+Message-ID: <20241129163511.767015-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EjMtJ24aHFKJL6Pk"
-Content-Disposition: inline
-In-Reply-To: <37f469bc-5610-401d-81c1-1e2a99ababdb@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,103 +97,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This code was removed when the EFI subsystem started using LMB calls for
+the reservations. In hindsight it unearthed two problems.
 
---EjMtJ24aHFKJL6Pk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The e820 code is adding u-boot memory as EfiReservedMemory while it
+should look at what LMB added and decide instead of blindly overwriting
+it. Thew reason this worked is that we marked that code properly late,
+when the EFI came up. But now with the LMB changes, the EFI map gets
+added first and the e820 code overwrites it.
 
-On Thu, Nov 28, 2024 at 04:37:13PM +0100, Jerome Forissier wrote:
->=20
->=20
-> On 11/19/24 16:59, Tom Rini wrote:
-> > On Fri, Nov 15, 2024 at 05:45:14PM +0100, Jerome Forissier wrote:
-> >=20
-> >> Since net_test_wget() is testing a command and is in test/cmd it should
-> >> be in the 'cmd' test suite, not 'lib'.
-> >>
-> >> Saving and restoring the values of the environment variables that the
-> >> test manipulates is necessary to avoid a regression when running the
-> >> whole ut test suite. A minimal reproducer is:
-> >>
-> >>  $ ./u-boot -T -c "ut cmd net_test_wget; ut dm dm_test_eth_act" | \
-> >>      grep -E "(Test:|Failures:)"
-> >>
-> >> Reported-by: Simon Glass <sjg@chromium.org>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  test/cmd/wget.c | 12 ++++++++++--
-> >>  1 file changed, 10 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-> >> index fe26fee54c9..7570c065a10 100644
-> >> --- a/test/cmd/wget.c
-> >> +++ b/test/cmd/wget.c
-> >> @@ -19,7 +19,7 @@
-> >>  #include <dm/test.h>
-> >>  #include <dm/device-internal.h>
-> >>  #include <dm/uclass-internal.h>
-> >> -#include <test/lib.h>
-> >> +#include <test/cmd.h>
-> >>  #include <test/test.h>
-> >>  #include <test/ut.h>
-> >> =20
-> >> @@ -206,6 +206,10 @@ static int sb_http_handler(struct udevice *dev, v=
-oid *packet,
-> >> =20
-> >>  static int net_test_wget(struct unit_test_state *uts)
-> >>  {
-> >> +	char *prev_ethact =3D env_get("ethact");
-> >> +	char *prev_ethrotate =3D env_get("ethrotate");
-> >> +	char *prev_loadaddr =3D env_get("loadaddr");
-> >> +
-> >>  	sandbox_eth_set_tx_handler(0, sb_http_handler);
-> >>  	sandbox_eth_set_priv(0, uts);
-> >> =20
-> >> @@ -223,6 +227,10 @@ static int net_test_wget(struct unit_test_state *=
-uts)
-> >>  	ut_assert_nextline("md5 for 00020000 ... 0002001f =3D=3D> 234af48e94=
-b0085060249ecb5942ab57");
-> >>  	ut_assert_console_end();
-> >> =20
-> >> +	env_set("ethact", prev_ethact);
-> >> +	env_set("ethrotate", prev_ethrotate);
-> >> +	env_set("loadaddr", prev_loadaddr);
-> >> +
-> >>  	return 0;
-> >>  }
-> >> -LIB_TEST(net_test_wget, UTF_CONSOLE);
-> >> +CMD_TEST(net_test_wget, UTF_CONSOLE);
-> >=20
-> > I don't know why / how, but now this causes the "hash" unit test to
-> > fail, in both Azure and GitLab.
->=20
-> CI passed on https://github.com/u-boot/u-boot/pull/700. How do I reproduce
-> the problem?
+The second problem is that we never mark SetVirtualAddressMap as runtime
+code, which we should according to the spec. Until we fix this this hack
+can't go away, at least for architectures that *need* to call SVAM.
+More specifically x86 which currently requires SVAM, sets the NX bit for
+pages not marked as *_CODE. So unless we do that late, it will crash
+trying to execute from non-executable memory.
 
-Sigh. I think we managed to hit one of those bugs that disappears when
-we re-order objects slightly. This is also passing for me now, so I'll
-apply this later today.
+Notably arm64 disables it explicitly if the VA space is > 48bits, so
+doesn't suffer from any of these problems.
 
---=20
-Tom
+This doesn't really deserve a fixes tag, since it brings back a hack to
+rememdy a sitation that was wrong long before that commit, but in case
+anyone hits the same bug ...
 
---EjMtJ24aHFKJL6Pk
-Content-Type: application/pgp-signature; name="signature.asc"
+Fixes: commit a68c9ac5d8af ("efi_memory: do not add U-Boot memory to the memory map"
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_memory.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index e493934c7131..edd7da7d8c6e 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -814,7 +814,16 @@ static void add_u_boot_and_runtime(void)
+ {
+ 	unsigned long runtime_start, runtime_end, runtime_pages;
+ 	unsigned long runtime_mask = EFI_PAGE_MASK;
+-
++	unsigned long uboot_start, uboot_pages;
++	unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
++
++	/* Add U-Boot */
++	uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
++		       uboot_stack_size) & ~EFI_PAGE_MASK;
++	uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
++		       uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
++	efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
++			      false);
+ #if defined(__aarch64__)
+ 	/*
+ 	 * Runtime Services must be 64KiB aligned according to the
+-- 
+2.45.2
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdJ7O0ACgkQFHw5/5Y0
-tyyuHgv9EBEeZ1x/4EQKVcUgl18F/illsV6+ckcOinOOzudDOZ+pb9U8rjhw9izz
-8uDghyqsp7UAD2ow8Xl/2HcPelZINwDfwdot6hLLy1uSZMGFnC3LiwHdASLevx7y
-2id/aZDRRXan9yZiSVLMuoQ0jM+/IE6KApVc6rZSx+tyla5uRzAUYYQKcJoemTCq
-EJ7US+aF2GC/11mVlRgGHQiBWsNTpjxXuuupLn4MhARxrg2qHyBvnN5z8zl2Wxb9
-hK4nh0Etb+kcGeQ7ikvFRXIhWD/RCB5gjbNe5ZfAFyxZQH0uj7AwWa7hArBW2DIA
-VLO4LgL2q0hAcXEFGqQlwWqTUa82xQN1iLYiRw7uHpiZCrGlzrYq/Pqd7ffIkG3n
-HA8N6zEXqdOjQXOLRCz2BDn/hUdPCo3zoo49DFSqGBlA4vjwlsIzAZdT4RQ33ur5
-EMRxsEEAdc0XZiuEJLDgvMK7mQtjGlNxG4cT/mfmMrrh5Fv9RmOzAhFTXrAQgY1T
-ikDqhqLe
-=6MG2
------END PGP SIGNATURE-----
-
---EjMtJ24aHFKJL6Pk--
