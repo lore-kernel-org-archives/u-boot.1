@@ -4,63 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B91D6EC04
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D4D4D6EC04
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94BED893F6;
-	Fri, 29 Nov 2024 13:28:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0115C893F7;
+	Fri, 29 Nov 2024 13:29:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pMMOnWyB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0OMYTa+T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67D34893F7; Fri, 29 Nov 2024 13:28:48 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D4CEA893F7; Fri, 29 Nov 2024 13:29:11 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62EA88942A
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 13:28:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id C8D5089023
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 13:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E13F75C5CF6;
- Fri, 29 Nov 2024 12:27:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C050C4CECF;
- Fri, 29 Nov 2024 12:28:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1732883322;
- bh=OoaotXaNQ/9nnTG1JSszs8xdXcdzAzgrVA2+uIdHDyI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=pMMOnWyB7SrUNgpknJp56icRiHIVzwSD7OzKUr0kzxZ0M1EtFJqCiYf8jyMrRLS3w
- DHQIGhEE9iZ8LnmGy5IlczrC1QrSC/C0bomzLkefJj1/A/X767mvyC3aj06a8yptMa
- gZqXbbumH83pFfybFC60FhOIXhFbFUBZiKj597FuGtOcWjHL2WY/ipM2onSrXNSJDn
- klCpwVDgXHjNwYxBX/wBX50E8WkEw8oxT8hUqTdU96/HlW/QWA8QbwPfVHCOdIjw88
- e6vF+sYNUKexpPRrDRo5EVK/soTVIHoojblijWhMGi2UZPQ251IgYYOHKrZYRfBP3M
- e3znScKBAM3FQ==
-Message-ID: <84c24040-5311-469f-8ba7-470280604245@kernel.org>
-Date: Fri, 29 Nov 2024 14:28:36 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=20631dcf42=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4ATB2nta002512;
+ Fri, 29 Nov 2024 13:29:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ HzkbsdOOTWj9BL8qFslAJEsDYMDdrMOchPbq/RFJtz8=; b=0OMYTa+TP+lcPdjo
+ sUiZK4j5KQS4FETDZqXUyvjO2lipmnMit5p03cgMdY+KaAvLuGA0o/BryLCU5zq3
+ A9UtmhWjbAi58A0c6PUG+4lRynwmiK78rvspw+7LhA6HMZJauOrYID5YWjkVA0Dh
+ d3/UolCsym9JiDQKyuT5SVBF2PFCtyErGCvIhTtyQ272C25mAa3T0Ilfc1Wjvc8k
+ 9RNlwdAJGryuUR2J4QZ110XZgu9L5+AtEIkfwq/Hf5Mqc3O5XvTe+ZWbBt2rOd9A
+ hpasfH98TQs9M3yAygFvqX721CNdTmbFWCXWqZYgBUdUF2zPohWf7US6fNodTpyt
+ UlRDhQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4367199nwm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 29 Nov 2024 13:29:07 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 56EFE40048;
+ Fri, 29 Nov 2024 13:28:08 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6067028C110;
+ Fri, 29 Nov 2024 13:27:21 +0100 (CET)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 29 Nov
+ 2024 13:27:21 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 4/6] configs: stm32mp13: enable CONFIG_SYS_64BIT_LBA
+Date: Fri, 29 Nov 2024 13:27:09 +0100
+Message-ID: <20241129122711.411917-5-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20241129122711.411917-1-patrice.chotard@foss.st.com>
+References: <20241129122711.411917-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] usb: dwc3-generic: set "mode" based on caller of
- dwc3_generic_probe()
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
- trini@konsulko.com, marex@denx.de, hnagalla@ti.com,
- mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, jan.kiszka@siemens.com, jonas@kwiboo.se,
- j-humphreys@ti.com, nm@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de, srk@ti.com
-References: <20241126120322.1760862-1-s-vadapalli@ti.com>
- <20241126120322.1760862-2-s-vadapalli@ti.com>
- <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
- <252751ec-2000-43bd-a9e3-fc0b53362baf@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <252751ec-2000-43bd-a9e3-fc0b53362baf@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,164 +91,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c, in init_device(),
+in case of RAW_IMAGE, part->size = block_dev->lba * block_dev->blksz.
 
+  _ part->size is declared as u64.
+  _ block_dev->lba is declared as lbaint_t which is uint64_t
+    if CONFIG_SYS_64BIT_LBA is enable, otherwise ulong.
+  _ block_dev->blksz is declared as unsigned long.
 
-On 28/11/2024 19:20, Siddharth Vadapalli wrote:
-> Hello Roger,
-> 
-> On 28-11-2024 18:40, Roger Quadros wrote:
->>
->>
->> On 26/11/2024 14:03, Siddharth Vadapalli wrote:
->>> There are only two callers of "dwc3_generic_probe()", namely:
->>> 1. dwc3_generic_peripheral_probe()
->>> 2. dwc3_generic_host_probe()
->>> Currently, the "mode" is set based on the device-tree node of the
->>> platform device. Also, the DWC3 core doesn't support updating the "mode"
->>> dynamically at runtime if it is set to "OTG", i.e. "OTG" is treated as a
->>> separate mode in itself, rather than being treated as a mode which should
->>> eventually lead to "host"/"peripheral".
->>>
->>> Given that the callers of "dwc3_generic_probe()" clarify the expected
->>> "mode" of the USB Controller, use that "mode" instead of the one
->>> specified in the device-tree. This shall allow the USB Controller to
->>> function both as a "Host" and as a "Peripheral" when the "mode" is "otg"
->>> in the device-tree, based on the caller of "dwc3_generic_probe()".
->>>
->>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->>> ---
->>>  drivers/usb/dwc3/dwc3-generic.c | 9 +++++----
->>
->> TI AM62a is not even using this driver so how did you test this?
->> Did I miss a DT patch?
-> 
-> USB DFU boot utilizes this driver when the "dr_mode" is set to "otg" in
-> the device-tree for AM62A. This driver is invoked both for the host and
-> device commands corresponding to USB. I came up with this patch while
-> trying to enable USB DFU boot on AM62A with "dr_mode" as "otg" in the
-> device-tree. Additionally, USB DFU boot works on AM62A with the change
-> made by this patch and it doesn't work without this change. I have
-> traced the call sequence to see that the driver is probed and have come
-> up with the change performed in this patch on the basis of this observation.
-> 
+For example, in case block_dev->lba = 0x1dacc00, block_dev->blksz = 0x200
+then part->size 0x5980000 which is incorrect as both are declared as ulong.
 
-Although the glue driver portion of the dwc3-generic driver is not used by AM62
-it still uses the generic_probe() portion via
-U_BOOT_DRIVER(dwc3_generic_host) and U_BOOT_DRIVER(dwc3_generic_peripheral)
+To fix this overflow issue, enable CONFIG_SYS_64BIT_LBA, block_dev->lba is
+then declared as uint64_t and part->size get the correct value 0x3b5980000.
 
-here is the dm tree output on am62-sk after executing "usb start" command.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
+ configs/stm32mp13_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
- simple_bus    5  [ + ]   dwc3-am62             |   |-- dwc3-usb@f900000
- usb_gadget    0  [   ]   dwc3-generic-periphe  |   |   |-- usb@31000000
- usb           0  [ + ]   xhci-dwc3             |   |   `-- usb@31000000
- usb_hub       0  [ + ]   usb_hub               |   |       `-- usb_hub
- simple_bus    6  [ + ]   dwc3-am62             |   |-- dwc3-usb@f910000
- usb           1  [   ]   dwc3-generic-host     |   |   |-- usb@31100000
- usb           1  [ + ]   xhci-dwc3             |   |   `-- usb@31100000
- usb_hub       1  [ + ]   usb_hub               |   |       `-- usb_hub
-
-what is strange is that even though usb@31000000 is configured as
-"peripheral" (in k3-am625-sk-u-boot.dtsi), xhci-dwc3 and usb_hub drivers
-are still initialized for it.
-
->>
->>>  1 file changed, 5 insertions(+), 4 deletions(-)
->>>
->>> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
->>> index 2ab41cbae45..55e62b35c61 100644
->>> --- a/drivers/usb/dwc3/dwc3-generic.c
->>> +++ b/drivers/usb/dwc3/dwc3-generic.c
->>> @@ -51,7 +51,8 @@ struct dwc3_generic_host_priv {
->>>  };
->>>  
->>>  static int dwc3_generic_probe(struct udevice *dev,
->>> -			      struct dwc3_generic_priv *priv)
->>> +			      struct dwc3_generic_priv *priv,
->>> +			      enum usb_dr_mode mode)
->>>  {
->>>  	int rc;
->>>  	struct dwc3_generic_plat *plat = dev_get_plat(dev);
->>> @@ -62,7 +63,7 @@ static int dwc3_generic_probe(struct udevice *dev,
->>>  
->>>  	dwc3->dev = dev;
->>>  	dwc3->maximum_speed = plat->maximum_speed;
->>> -	dwc3->dr_mode = plat->dr_mode;
->>> +	dwc3->dr_mode = mode;
->>
->> if platform supported mode was "host" only or "peripheral" only
->> then you shouldn't we prevent from using the other role?
-> 
-> Yes, but that check doesn't exist prior to this patch either. Platform
-> could support only "host" mode as specified by "dr_mode", but if the
-> user runs a command for device mode it will lead to
-> "dwc3_generic_peripheral_probe" in this driver. On the other hand, if
-> the check does exist outside this driver, then it doesn't have to be
-> checked within "dwc3_generic_probe". There are only two callers of
-> "dwc3_generic_probe", both of which are in this driver, and both of
-> which unconditionally invoke "dwc3_generic_probe".
-> 
-> However, I agree that having a check here will help. I will update this
-> patch to add the check to confirm if there is a conflict with what the
-> platform supports, though this doesn't seem to be the case with the
-> existing code.
->>
->> In u-boot shell, if user starts Host driver first and then starts peripheral driver
->> how does it work?
->> Did you test this case?
-> 
-> I didn't test the case where both are used. I validated that peripheral
-> mode works across various stages of boot with "otg" mode via USB DFU
-> boot. This isn't the case without this patch.
-> 
-> If we forget the reason that this patch is introduced and take a moment
-> to analyze the existing code prior to this patch, we see that:
-> 1. Both dwc3_generic_peripheral_probe() and dwc3_generic_host_probe()
-> invoke dwc3_generic_probe().
-> 2. dwc3_generic_probe() sets the role based on the role specified in the/
-> device-tree and not what the caller wants the role to be.
-> This seems to be strange to me considering that dwc3_generic_probe()
-> simply proceeds to configure without comparing the role supported by the
-> platform with the role requested by the caller.
-> 
-> So even if we entirely forget the "otg" fix being attempted by this
-> patch, the same patch is fixing something else i.e. ensuring that
-> dwc3_generic_probe() does what the caller wants it to do by using the
-> role that the caller expects. Isn't it incorrect that the existing code
-> might end up with:
-> a) Caller being dwc3_generic_host_probe() with dr_mode being set to
-> "peripheral" within dwc3_generic_probe() based on the device-tree and
-> proceeding to configure the controller
-
-Maye this is the reason why host controller is initialized for peripheral
-only port in the dm tree output I listed above. This needs to be fixed.
-
-> b) Caller being dwc3_generic_peripheral_probe() with dr_mode being set
-> to "host" within dwc3_generic_probe() based on the device-tree and
-> proceeding to configure the controller.
-
-This too needs to be fixed.
-
-> Shouldn't this inconsistency be fixed? This patch fixes that by setting
-> dr_mode to what the caller expects. However, based on your suggestion, I
-> agree that there should have been a check within dwc3_generic_probe() to
-> ensure that the platform supports what the caller is requesting. I will
-> update this patch by adding the check.
-
-Apart from the platform supported mode check when not "otg", if platform
-supports "otg" we need to check and prevent role setting if hardware is
-not in the correct state based on connected USB cable.
-i.e. if host mode cable is used then prevent it from running as a peripheral.
-if peripheral mode cable is used then prevent it from running as a host.
-(based on ID status?)
-
-> 
-> Please let me know what you think.
-> 
-> [...]
-> 
-
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index 7f705808089..e4c92e851e1 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -54,6 +54,7 @@ CONFIG_SYS_MMC_ENV_DEV=-1
+ CONFIG_ENV_MMC_USE_DT=y
+ CONFIG_BUTTON=y
+ CONFIG_BUTTON_GPIO=y
++CONFIG_SYS_64BIT_LBA=y
+ CONFIG_CLK_SCMI=y
+ CONFIG_SET_DFU_ALT_INFO=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
 -- 
-cheers,
--roger
+2.25.1
 
