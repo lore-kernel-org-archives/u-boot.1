@@ -4,54 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DCCFD70E06
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 02:42:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EAF2D70E0B
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 03:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E9158903C;
-	Fri, 29 Nov 2024 03:42:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D61FE89353;
+	Fri, 29 Nov 2024 04:22:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1732848160;
-	bh=1kdYEACPPtD9I+sD5s7NdmIAh4jLNHZvTsGaZG3waIo=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=xTiHpibb05bFSeRDB/TmORMDn0BzidqoEECGZJ3zyD2IBi3PmXeccCJm5JBVVW3hk
-	 LPMp8xn4REyjnnwc2J4iIPYVZo+EoyjVuc22YY1bPgdcmQTsjZjLBDGg5uMBTdnx/6
-	 Ff3U99Gi4EJwu+4uRDi4/d7iu4bHk2cAF9LhnudqpJDHWC2vE4gAfrgb8ihp05gP6F
-	 HQiHcHaxE5oArXD9EjA7JBJZVHBkEBEokQ0kpJVepQ3CbWwsUfYCZtE1tCS6nUikh7
-	 2DJdcxCysOeO1tITH7ABIuvAXp8+/UATN/blXoUryBQUzasYobKNWtv2Za3eaPMvCR
-	 jU2Ds9XTLpJBA==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XDcKESCy";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7229489361; Fri, 29 Nov 2024 04:22:59 +0100 (CET)
+Received: from mail-m12767.qiye.163.com (mail-m12767.qiye.163.com
+ [115.236.127.67])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DBE1B88FDE;
- Fri, 29 Nov 2024 03:42:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1732848158;
- bh=1kdYEACPPtD9I+sD5s7NdmIAh4jLNHZvTsGaZG3waIo=;
- h=From:To:Cc:Subject:Date:From;
- b=IEas/FT4Gaz+RphGNaYcChH/JhY/QzyZy7Za7FyesWFfvH5+rusQODzDVzqrrTeGq
- fbhOWQkh589+HqQ4SJfAFh5TcXNSTvu+LSWhiv0ryBX610sqfqTYuQom6dkFHFVhJP
- f0B/hPKJsghkVBCWBWgaOUGl7Wf6pJOd5eywa0u8xR6FmLLd94PkbO50wTMnCOmBuF
- pN6k187EaJlbRqPeYqBcGBjR5+EQ/sJ2Vo2USaBjkFG0FMol1p2IZEEJiEG1UWQHs5
- WTzlz4E0vVgBQ2TGIRDEg5TFo3ioi7EJx0jZFF6Qjm24yVFciMbz8U2O5ZkV7NBlNg
- W/mh3GNbLRogg==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] ARM: imx: Replace YModem with SDP on Data Modul i.MX8M
- Mini eDM SBC SPL
-Date: Fri, 29 Nov 2024 03:41:47 +0100
-Message-ID: <20241129024218.337845-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ by phobos.denx.de (Postfix) with ESMTPS id 712BE892C6
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 04:22:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [172.16.12.67] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 42c719fe;
+ Fri, 29 Nov 2024 11:22:50 +0800 (GMT+08:00)
+Message-ID: <35abc74c-0936-40db-b574-da3bec78bea5@rock-chips.com>
+Date: Fri, 29 Nov 2024 11:22:50 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] efi_stub: Sync the debug UART definition like other
+ platform
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20241128114737.1.I9eac706713ffc05dccc51ad3d60833a179c9e83d@changeid>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkNCSFZDSRhMTUNOGh1CGR9WFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSUhCSE
+ JVSktLVUpCS0tZBg++
+X-HM-Tid: 0a9375f154aa03afkunm42c719fe
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PUk6Ghw4DTIuFRoQDBwiVhYt
+ QxAaFExVSlVKTEhJQ05LTkxKSE1KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQ0tCNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=XDcKESCy/O1ME+RH0ZT0i61fVEfFZnZ6oipcq2herlPI01RliV6M1LBWz9ArJaaPsYJPuHCLwpCV1R60zGSuYkDhbu0EL4IK+8xLV9CsUqFgCJ93Gw2PVEM2pw0+KDVa2c8ZSAjlPCJ06A3atqQAsLbJHs4AM1pmJs/zC5iLaxs=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=KLrzpkC1KZoeL54hmVglq78q/S3JW4iD+FSN6oBJAG8=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,111 +75,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The YModem support in SPL was never really used on this device,
-the SDP support is much more convenient on i.MX8M Mini based
-hardware. Replace the YModem support with SDP support.
+Hi Tom, Simon,
 
-The SDP can be utilized by forcing the board into SDP boot mode
-by grounding test point right next to silkscreen label U30, and
-then by using mfgtools 'uuu -brun spl flash.bin' once the device
-enumerates on host system USB bus. The SDP capable USB port is
-available on the USB micro-B port on the base board.
+     With these two patches, I didn't see error report in efi_stub for 
+disable DEBUG_UART,
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-NOTE: Would be nice to have in v2025.01
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Drop the SPL YMODEM from defconfig
----
- arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi | 9 +++++++++
- board/data_modul/imx8mm_edm_sbc/spl.c              | 6 ++++--
- configs/imx8mm_data_modul_edm_sbc_defconfig        | 7 ++++++-
- 3 files changed, 19 insertions(+), 3 deletions(-)
+but I still get CI build error below, but I can't identify what's the 
+problem, could you help to take a look:
 
-diff --git a/arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi b/arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi
-index fb6951026d9..f5e98bf7487 100644
---- a/arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi
-@@ -145,8 +145,17 @@
- 	bootph-pre-ram;
- };
- 
-+&usbmisc1 {
-+	bootph-pre-ram;
-+};
-+
-+&usbphynop1 {
-+	bootph-pre-ram;
-+};
-+
- &usbotg1 {
- 	dr_mode = "peripheral";
-+	bootph-pre-ram;
- };
- 
- &usdhc2 {
-diff --git a/board/data_modul/imx8mm_edm_sbc/spl.c b/board/data_modul/imx8mm_edm_sbc/spl.c
-index 17aafd719c9..a9ef049652a 100644
---- a/board/data_modul/imx8mm_edm_sbc/spl.c
-+++ b/board/data_modul/imx8mm_edm_sbc/spl.c
-@@ -61,8 +61,10 @@ int spl_board_boot_device(enum boot_device boot_dev_spl)
- {
- 	if (boot_dev_spl == MMC3_BOOT)
- 		return BOOT_DEVICE_MMC2;	/* eMMC */
--	else
-+	else if (boot_dev_spl == MMC2_BOOT)
- 		return BOOT_DEVICE_MMC1;	/* SD */
-+	else
-+		return BOOT_DEVICE_BOARD;
- }
- 
- void board_boot_order(u32 *spl_boot_list)
-@@ -76,7 +78,7 @@ void board_boot_order(u32 *spl_boot_list)
- 	else
- 		spl_boot_list[1] = BOOT_DEVICE_MMC1;	/* SD */
- 
--	spl_boot_list[2] = BOOT_DEVICE_UART;	/* YModem */
-+	spl_boot_list[2] = BOOT_DEVICE_BOARD;	/* SDP */
- 	spl_boot_list[3] = BOOT_DEVICE_NONE;
- }
- 
-diff --git a/configs/imx8mm_data_modul_edm_sbc_defconfig b/configs/imx8mm_data_modul_edm_sbc_defconfig
-index 7c9d4ee1844..518243e6513 100644
---- a/configs/imx8mm_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mm_data_modul_edm_sbc_defconfig
-@@ -12,17 +12,22 @@ CONFIG_DM_REGULATOR_BD71837=y
- CONFIG_IMX_CONFIG="board/data_modul/imx8mm_edm_sbc/imximage.cfg"
- CONFIG_PHYLIB=y
- CONFIG_PREBOOT="run dmo_preboot"
-+CONFIG_SDP_LOADADDR=0x60000000
- CONFIG_SPL_BSS_MAX_SIZE=0x2000
- CONFIG_SPL_BSS_START_ADDR=0x910000
-+CONFIG_SPL_MAX_SIZE=0x30000
- CONFIG_SPL_CLK_IMX8MM=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x42200000
- CONFIG_SPL_DM_PMIC_BD71837=y
- CONFIG_SPL_DM_REGULATOR_BD71837=y
-+CONFIG_SPL_DM_USB=y
- CONFIG_SPL_LEGACY_IMAGE_CRC_CHECK=y
- CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
- CONFIG_SPL_TEXT_BASE=0x7E1000
--CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_SPL_USB_SDP_SUPPORT=y
- CONFIG_SYS_LOAD_ADDR=0x60000000
--- 
-2.45.2
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/jobs/963215
 
+
+Thanks,
+
+- Kever
+
+On 2024/11/28 11:47, Kever Yang wrote:
+> The debug UART interface is available when CONFIG_DEBUG_UART is defined,
+> sync with the other platforms to use the same definition.
+>
+> Signed-off-by: Kever Yang <kever.yang@rock-chips.com>
+> ---
+>
+>   lib/efi/efi_stub.c | 16 ++++++++++------
+>   1 file changed, 10 insertions(+), 6 deletions(-)
+>
+> diff --git a/lib/efi/efi_stub.c b/lib/efi/efi_stub.c
+> index 40fc29d9adf..5179c5b2c09 100644
+> --- a/lib/efi/efi_stub.c
+> +++ b/lib/efi/efi_stub.c
+> @@ -9,7 +9,6 @@
+>    * EFI application. It can be built either in 32-bit or 64-bit mode.
+>    */
+>   
+> -#include <debug_uart.h>
+>   #include <efi.h>
+>   #include <efi_api.h>
+>   #include <errno.h>
+> @@ -55,10 +54,6 @@ struct __packed desctab_info {
+>    * considering if we start needing more U-Boot functionality. Note that we
+>    * could then move get_codeseg32() to arch/x86/cpu/cpu.c.
+>    */
+> -void _debug_uart_init(void)
+> -{
+> -}
+> -
+>   void putc(const char ch)
+>   {
+>   	struct efi_priv *priv = efi_get_priv();
+> @@ -83,12 +78,21 @@ void puts(const char *str)
+>   		putc(*str++);
+>   }
+>   
+> -static void _debug_uart_putc(int ch)
+> +#ifdef CONFIG_DEBUG_UART
+> +
+> +#include <debug_uart.h>
+> +
+> +void _debug_uart_init(void)
+> +{
+> +}
+> +
+> +static inline void _debug_uart_putc(int ch)
+>   {
+>   	putc(ch);
+>   }
+>   
+>   DEBUG_UART_FUNCS
+> +#endif
+>   
+>   void *memcpy(void *dest, const void *src, size_t size)
+>   {
