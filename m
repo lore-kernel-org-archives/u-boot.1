@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CB2DD70E01
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 00:14:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AA6D70DFA
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 00:14:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D592989426;
-	Fri, 29 Nov 2024 01:14:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 778E589678;
+	Fri, 29 Nov 2024 01:14:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1732839266;
-	bh=Gf6oPdHbbnY4gX8I63pcQBD7S8xoRyqCOU0wJP57jmY=;
+	bh=2l1dVSzofJdWYVQlcdVJVMrQqJa4NuDwIUPpE0RI3tU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=shylyxswkd8Rojb6bsgKPK266DaUAUK2Xm7LR3080/YCKnFQKDwV20CeHcxM3MiPQ
-	 So0S6boP3fHk3oTfKbpXCC52DCc7glkoLYds7X6PWeUIK1kGFvhf+7Rfz4Qmub7jJo
-	 p1oj40C4in60c5drxn19U3YL1OIaHAVItq7dyhnf8/Zlza6+NlrY52bPwS/h2Hgcau
-	 kByj2wHceLQ8u0bu49qgTBKLNMGGUHknE0WGyp51/7KTejn7lWb1PtBv7Ovh9ZCQhq
-	 FWKqgv3tMd7vORqRKYvzfu7t4XAjrms+GUO5GEcFuw/nQPlZxkUh/qLKcB5/AFkSxs
-	 06iGwfTlDTHMg==
+	b=UJz9WDUl8ecI2LyWc5b6k4z67zcTUqp8pX/2TMt5dL7kxW2FBT1oWieIQlQ43KGHa
+	 1rYp9EWfZbamdlWARsbb+fDRKJE4DtQYZ33snLKYQmULHr6XJGzPNEserzHu3P4scK
+	 gMjJg7LdNrFt4lAPseFyUYYIsFQGPT4SwlqR38gsjnZmWnvPO58YJWNtYOKV66Mj4M
+	 H87/z3hgNYdo0ewtEQG5qizXq32st847eF1+R1ZQ6Ii1BsnSmYwumAzFWfm8Brb1Wi
+	 TPFnAUrpHEMS9+6W3t7EmEr3b3FRsURMfg0rbBuSj56KEzRE3WIe4nvwERY+Ei5OvF
+	 Y5+oT9tPmACfA==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BD77B89493;
- Fri, 29 Nov 2024 01:14:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 329B58949D;
+ Fri, 29 Nov 2024 01:14:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1732839264;
- bh=Gf6oPdHbbnY4gX8I63pcQBD7S8xoRyqCOU0wJP57jmY=;
+ bh=2l1dVSzofJdWYVQlcdVJVMrQqJa4NuDwIUPpE0RI3tU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=zAYq3ehd1hcZj3IXY2IaLY3idgGk8ZRwZIjNsbfqbfAF2t72HOHp9jS9W4HysH1Vh
- w93z2jxRWTlWESwWeMPD4ikUKxHNmi+y33LTad+fble1og02BB9VHQBvZ0JUMovzo+
- cDG31gDtkIaE3T4oc7E7CB1j1oqeQsl8IbmV3oqi3QndIQ6yLaEmqAFzb9oAj5lC9w
- 7v/8oZEdusthLxCKqcMINoDAHPxCa2wMqzWDTSNu/sazpY/bzB+C1sl9X2nEVkklCP
- 3HXvfL/+4sOGGQbjONuLOusLLpMJqqMnkCkhQJWd4iw9wJduijbJIZiBsVeqagPIph
- s+4Vh5BkdoXIg==
+ b=0SUaqMbaijgali2EA/3laFAiN/kXm7PqOaC6D4CzoGcLhoRxiLTQruQLLxQt7PBB6
+ xk7FbIxAObS/EdaPaAJcH0OgdSSo+v414J37WfGNyT/rWHim6BniDdKMA6ChYaQBUw
+ 7bHdk7OmLDJ9Sthtnwr8pbnzIo2NdlgVKCaxXXooTfOvP7P7YiGP7XjYmzJT4SlimC
+ vVMjq2+TrErYFz66LUx46wSlCdYk59sDEb3PZZSLueh860AR/KVMaC66QVoXQkqHsD
+ x2L+2OW89mQW2llpDD9ITwjtyzwq0DZHeqMXi47ksUQ+hTJNUuZfsU+BE9os9gRlE3
+ N9csVFaopytuA==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -46,10 +46,10 @@ Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
  Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 2/4] ARM: dts: imx: Pick safe DRAM size on failure on Data
+Subject: [PATCH v2 3/4] ARM: imx: Perform plain boot in altbootcmd on Data
  Modul i.MX8M Mini/Plus eDM SBC
-Date: Fri, 29 Nov 2024 01:13:54 +0100
-Message-ID: <20241129001409.218850-2-marex@denx.de>
+Date: Fri, 29 Nov 2024 01:13:55 +0100
+Message-ID: <20241129001409.218850-3-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241129001409.218850-1-marex@denx.de>
 References: <20241129001409.218850-1-marex@denx.de>
@@ -71,10 +71,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case gpio_request_list_by_name_nodev() in board dmo_get_memcfg()
-returns error code, pick a safe default DRAM configuration instead
-of bailing out with some sort of hang() or panic(). The BIT(2)|BIT(0)
-strap option is the lowest known option of 2 GiB , use that.
+The current A/B switching preparatory altbootcmd is confusing
+to users, replace it with plain 'run bootcmd' which can be
+replaced by proper A/B switching altbootcmd when the matching
+updater is added on top of the platform. By default, keep the
+boot counter incrementing, but do not do any A/B partition
+switching.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -91,23 +93,36 @@ NOTE: For v2025.01
 ---
 V2: No change
 ---
- board/data_modul/common/common.c | 3 +++
- 1 file changed, 3 insertions(+)
+ include/configs/imx8mm_data_modul_edm_sbc.h | 2 +-
+ include/configs/imx8mp_data_modul_edm_sbc.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/data_modul/common/common.c b/board/data_modul/common/common.c
-index b5f83908771..9e35dc5d6cb 100644
---- a/board/data_modul/common/common.c
-+++ b/board/data_modul/common/common.c
-@@ -47,6 +47,9 @@ u8 dmo_get_memcfg(void)
- 					      "dmo,ram-coding-gpios",
- 					      gpio, ARRAY_SIZE(gpio),
- 					      GPIOD_IS_IN);
-+	if (ret < 0)
-+		return BIT(2) | BIT(0);
-+
- 	for (i = 0; i < ret; i++)
- 		memcfg |= !!dm_gpio_get_value(&(gpio[i])) << i;
+diff --git a/include/configs/imx8mm_data_modul_edm_sbc.h b/include/configs/imx8mm_data_modul_edm_sbc.h
+index d323f84ac7a..57ecb5e2190 100644
+--- a/include/configs/imx8mm_data_modul_edm_sbc.h
++++ b/include/configs/imx8mm_data_modul_edm_sbc.h
+@@ -34,7 +34,7 @@
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
  
+ #define CFG_EXTRA_ENV_SETTINGS						\
+-	"altbootcmd=setenv devpart 2 && run bootcmd ; reset\0"		\
++	"altbootcmd=run bootcmd\0"					\
+ 	"bootlimit=3\0"							\
+ 	"devtype=mmc\0"							\
+ 	"devpart=1\0"							\
+diff --git a/include/configs/imx8mp_data_modul_edm_sbc.h b/include/configs/imx8mp_data_modul_edm_sbc.h
+index f953847ce05..de5bdd30e18 100644
+--- a/include/configs/imx8mp_data_modul_edm_sbc.h
++++ b/include/configs/imx8mp_data_modul_edm_sbc.h
+@@ -24,7 +24,7 @@
+ #define FEC_QUIRK_ENET_MAC
+ 
+ #define CFG_EXTRA_ENV_SETTINGS						\
+-	"altbootcmd=setenv devpart 2 && run bootcmd ; reset\0"		\
++	"altbootcmd=run bootcmd\0"					\
+ 	"bootlimit=3\0"							\
+ 	"devtype=mmc\0"							\
+ 	"devpart=1\0"							\
 -- 
 2.45.2
 
