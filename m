@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02032D6EC05
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A92FD6EC05
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 12:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8555A89448;
-	Fri, 29 Nov 2024 13:45:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E833D8944D;
+	Fri, 29 Nov 2024 13:46:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sIGfKSlT";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="wiyUyPWO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D869893F8; Fri, 29 Nov 2024 12:32:38 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 739DA89392
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 12:32:36 +0100 (CET)
+ id 7866689235; Fri, 29 Nov 2024 13:46:18 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 768BB89445
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 13:46:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBWMwi891954
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 29 Nov 2024 05:32:23 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1732879943;
- bh=VwpYhGm3xAy8ldNn/hOwXg5oSgw15dqX3PgeBqGnZ0A=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=sIGfKSlT9L4pqSL3BT6PhlxYYkYFjaUz1OdrjQ1VDbDeP4+B0iJdIo+PozFKMTvuL
- YlUfHfjsj/OILZLGrwaJ4VH0I+jYFsLQF2umsyeMPh4h9w7QXuvPtms6Qku897VHfr
- Bp2oeVV5KteYgfJBlQrwpCYWvnIYUMoo8YY4q45Y=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ATBWM6l025724
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 Nov 2024 05:32:22 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 29
- Nov 2024 05:32:22 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 29 Nov 2024 05:32:22 -0600
-Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ATBVabV106135;
- Fri, 29 Nov 2024 05:32:17 -0600
-From: Anurag Dutta <a-dutta@ti.com>
-To: <trini@konsulko.com>, <a-dutta@ti.com>, <sjg@chromium.org>,
- <marex@denx.de>, <jonas@kwiboo.se>, <kever.yang@rock-chips.com>,
- <william.zhang@broadcom.com>, <a-limaye@ti.com>, <u-kumar1@ti.com>,
- <vaishnav.a@ti.com>, <sumit.garg@linaro.org>,
- <quentin.schulz@cherry.de>, <p-mantena@ti.com>,
- <ilias.apalodimas@linaro.org>, <afd@ti.com>, <nm@ti.com>,
- <avromanov@salutedevices.com>, <michael@amarulasolutions.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH 8/8] mtd: Kconfig: Change HBMC driver's dependency to
- MULTIPLEXER and MUX_MMIO
-Date: Fri, 29 Nov 2024 17:01:36 +0530
-Message-ID: <20241129113136.383277-9-a-dutta@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241129113136.383277-1-a-dutta@ti.com>
-References: <20241129113136.383277-1-a-dutta@ti.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=20631dcf42=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4ATB2lH3002458;
+ Fri, 29 Nov 2024 13:46:11 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=GJU9RKCgIKiiO+SCBcvWA+
+ GMavOa6SleRwhZP2y7ra8=; b=wiyUyPWOI24pzUwfbX/ItiRZVC2XDBlQ/9d5bv
+ T1rG5TTu4EmUBOAejYaRWjNEiwQXgoIuh/GwCJW7U5SUqlxI8FtCJxyhudOjx+yw
+ V+/eV9AhZCDPSyZPfVbQ1efMKTBn8CZHMCJabP8xFQ2JvdumexaeW3Y0ki+Q71MT
+ C+WIeS0c5R9d8UxJ74BNw2vJhFEbuFmf1vKjcaxFA16LlZYvDzrTCt0j8TG+9XO+
+ QJBxxru2JR0h1LKKXfvHpEHFfvm+kk5whZTnQbe4Mpi5+lZ4FoCyxAi3m/B6EoZE
+ 1qDOFHQZz5mq8+1HKmjgnyna1rkTL6Q5knCECsY273yfxP+g==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4367199rk4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 29 Nov 2024 13:46:11 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 101CE40048;
+ Fri, 29 Nov 2024 13:45:00 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D6A6828FB21;
+ Fri, 29 Nov 2024 13:44:25 +0100 (CET)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 29 Nov
+ 2024 13:44:25 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>, Marek Vasut
+ <marex@denx.de>, Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] power: regulator: replace some debug() by dev_dbg/err()
+Date: Fri, 29 Nov 2024 13:44:22 +0100
+Message-ID: <20241129124422.435998-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Fri, 29 Nov 2024 13:45:54 +0100
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,29 +89,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The HBMC_AM654 driver was dependent on SYSCON because syscon APIs were
-being used to select the multiplexer state. Change the dependency to
-MULTIPLEXER and MUX_MMIO because mux APIs are now being used to
-select mux state.
+Replace some debug() by dev_dbg() when dev variable
+is available/valid.
 
-Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+To ease debugging, use dev_err() instead of dev_dbg() for
+alerting when regulator has nonunique value.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- drivers/mtd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-index 3764e2567c..678bbde89e 100644
---- a/drivers/mtd/Kconfig
-+++ b/drivers/mtd/Kconfig
-@@ -202,7 +202,7 @@ config RENESAS_RPC_HF
+ drivers/power/regulator/regulator-uclass.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index decd0802c84..aa6918ef50a 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -9,6 +9,7 @@
+ #include <errno.h>
+ #include <dm.h>
+ #include <log.h>
++#include <dm/device_compat.h>
+ #include <dm/uclass-internal.h>
+ #include <linux/delay.h>
+ #include <power/pmic.h>
+@@ -43,8 +44,8 @@ static void regulator_set_value_ramp_delay(struct udevice *dev, int old_uV,
+ {
+ 	int delay = DIV_ROUND_UP(abs(new_uV - old_uV), ramp_delay);
  
- config HBMC_AM654
- 	bool "HyperBus controller driver for AM65x SoC"
--	depends on SYSCON
-+	depends on MULTIPLEXER && MUX_MMIO
- 	help
- 	 This is the driver for HyperBus controller on TI's AM65x and
- 	 other SoCs
+-	debug("regulator %s: delay %u us (%d uV -> %d uV)\n", dev->name, delay,
+-	      old_uV, new_uV);
++	dev_dbg(dev, "regulator %s: delay %u us (%d uV -> %d uV)\n", dev->name, delay,
++		old_uV, new_uV);
+ 
+ 	udelay(delay);
+ }
+@@ -263,7 +264,7 @@ int regulator_get_by_platname(const char *plat_name, struct udevice **devp)
+ 	for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
+ 	     ret = uclass_find_next_device(&dev)) {
+ 		if (ret) {
+-			debug("regulator %s, ret=%d\n", dev->name, ret);
++			dev_dbg(dev, "regulator %s, ret=%d\n", dev->name, ret);
+ 			continue;
+ 		}
+ 
+@@ -439,16 +440,16 @@ static int regulator_post_bind(struct udevice *dev)
+ 	/* Regulator's mandatory constraint */
+ 	uc_pdata->name = dev_read_string(dev, property);
+ 	if (!uc_pdata->name) {
+-		debug("%s: dev '%s' has no property '%s'\n",
+-		      __func__, dev->name, property);
++		dev_dbg(dev, "%s: dev '%s' has no property '%s'\n",
++			__func__, dev->name, property);
+ 		uc_pdata->name = dev_read_name(dev);
+ 		if (!uc_pdata->name)
+ 			return -EINVAL;
+ 	}
+ 
+ 	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
+-		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+-		      property, dev->name, uc_pdata->name);
++		dev_err(dev, "'%s' of dev: '%s', has nonunique value: '%s\n",
++			property, dev->name, uc_pdata->name);
+ 		return -EINVAL;
+ 	}
+ 
 -- 
-2.34.1
+2.25.1
 
