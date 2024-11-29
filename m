@@ -4,91 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8A5D6EBF2
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 10:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC014D6EBF7
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 10:23:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95B31893C6;
-	Fri, 29 Nov 2024 11:03:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F8DD89382;
+	Fri, 29 Nov 2024 11:23:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="mgi7wcMb";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Vyrn8+l0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9789A893D8; Fri, 29 Nov 2024 11:03:55 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id D5D3B893D8; Fri, 29 Nov 2024 11:23:08 +0100 (CET)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2060b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2405::60b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70BAD89215
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 11:03:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 47C3D8922D
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 11:23:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eabachinin@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 12DAB120012;
- Fri, 29 Nov 2024 13:03:48 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 12DAB120012
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1732874628;
- bh=1zuIVY+TW3YnwxHFd0RiFq/9h5dWgP12ldjQ10OGG0Q=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=mgi7wcMbNlIR1SDS91sIZixr8dtV1Weli9MPDnqvz7yks/Tl3+C/TEft1AR8PWYUU
- MUvS8rG1zETjh3LrFN+EZvxsMak5g6o3IheYiI2olW8VZGJLh/PsXbW8kJDH/MwKiQ
- 8ae45hllHj4m1PywfS4f8LqF1q3fMmtrM7UxDZmVQskDFYWsfa9F8FU/mXDHNVHq+O
- nzx7QZLkM1CjYUG33qT6HESmXI3JSUssOJlG38UGtceu2vkuxfpTNn2nI0/T23sKRx
- J8W7rYtS4t7aR4lDuoUc4iIBTu15Gn3W66GVQYHfEgDekJqtQ42oMBB9ooRrUWRUNx
- fybO46TaT7EMQ==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 29 Nov 2024 13:03:47 +0300 (MSK)
-Date: Fri, 29 Nov 2024 13:03:47 +0300
-From: Evgeny Bachinin <eabachinin@salutedevices.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Peter Robinson
- <pbrobinson@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, "Rasmus
- Villemoes" <rasmus.villemoes@prevas.dk>, Evgeny Bachinin
- <EABachinin@salutedevices.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] common: relocate fdt_blob in global_data for
- FDTSRC_EMBED case
-Message-ID: <35slrpavqjk23bsybse752vmwsjqzk3ej6stozo3gtlbpe5pfg@3rytobz4ewik>
-References: <20241125-of_embed_fdt_blob_garbage-v1-1-faa78e2e1ee9@salutedevices.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=VV8rfKkD42qfJD9mUUSiIAKkEg7lAD615h+LjwHMufMJQu+kP6HLfMLa+Zm6GOoaDTbR8msFOpapbzWwqZQfkjJuvrPoro5PnPDYSeRnIYUSsQEDrVcifrZF0hv9hWUhnl43rw+D+bKSp964bSHJz3EbDFxE+34IdV+WahjAr4gt7sjWMn8DTr+KjqgYUGCXiUvb1KnZdMV8f/I7K4907sFQvDje0U2i62HMgGaWOquELVEjHq6Z/+Y6SxHedCDFndFoNNbc4uQM0bnTN5QiuXPgWihoHeUEOO07VCZ+AANcLFfFAIVYJFd0feWVFjViuKgfbYIj4ZlTg25g7So/gA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lZdfxHOGE721W1xdZkbUh2+5Vqt9pEluSseSe7qBve4=;
+ b=DtoHmgs94v9WZdhbE2A4QhjYPavv2yGdCS3C/2TS2c/UzsAp4lQ4wMtiqwakz+On+69gDoJDs/e3aL+f/5jeYwDwCI74UG8ziKyUhSQOZoyyE2u0l5H6qvPILghp52tgVLRmmbTbX0NFV5SG1mhZHk+pTkOZ9tzNvbWqvIAaV5WoCfosSTgQQpTGUtqOpIfagZdF9caQVPAhEX0W6N8v32VBoZ+XBO7Zsv2I1qpFfQSUslyayuV+PBr/AOYhTBNsu+eSckfJH54wn/DZ810f9LU6BLbTMoDWud7Zck+OIIGrD4scX1WdFFZggaTxqPLSP8AD5c/wMa6Ru6lGnUvV/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lZdfxHOGE721W1xdZkbUh2+5Vqt9pEluSseSe7qBve4=;
+ b=Vyrn8+l0lFZ8eLV+wpPE7aG7VAk5tgdzzN83CJpvYxnTmnf1lzmAEcuu52MPmMw4gVvhZK9W5BHNQQ4oiuw/ylBb5uv+0dFwgPv2IJNH9mbF5Qw1LX0zUA2l0jJXuLHmwCqNBFKU6YDKiajJCS012wGyvakawAB5Rf0VksbxFkU=
+Received: from MW4PR03CA0206.namprd03.prod.outlook.com (2603:10b6:303:b8::31)
+ by SJ0PR12MB6991.namprd12.prod.outlook.com (2603:10b6:a03:47c::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.13; Fri, 29 Nov
+ 2024 10:23:02 +0000
+Received: from CO1PEPF000044F8.namprd21.prod.outlook.com
+ (2603:10b6:303:b8:cafe::9) by MW4PR03CA0206.outlook.office365.com
+ (2603:10b6:303:b8::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.13 via Frontend Transport; Fri,
+ 29 Nov 2024 10:23:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1PEPF000044F8.mail.protection.outlook.com (10.167.241.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8230.0 via Frontend Transport; Fri, 29 Nov 2024 10:23:02 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 29 Nov
+ 2024 04:22:59 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 29 Nov 2024 04:22:55 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>, <j-humphreys@ti.com>
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
+ <caleb.connolly@linaro.org>, <sjg@chromium.org>,
+ <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
+ <quentin.schulz@cherry.de>, <tudor.ambarus@linaro.org>,
+ <Takahiro.Kuwano@infineon.com>, <p-mantena@ti.com>, <git@amd.com>, "Ashok
+ Reddy Soma" <ashok.reddy.soma@amd.com>
+Subject: [PATCH v2] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
+ flashes
+Date: Fri, 29 Nov 2024 15:52:48 +0530
+Message-ID: <20241129102248.670635-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20241125-of_embed_fdt_blob_garbage-v1-1-faa78e2e1ee9@salutedevices.com>
-User-Agent: NeoMutt/20231006
-X-Originating-IP: [79.139.251.228]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 189493 [Nov 29 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 44 0.3.44
- 5149b91aab9eaefa5f6630aab0c7a7210c633ab6, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- salutedevices.com:7.1.1; github.com:7.1.1; 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/11/29 08:43:00
-X-KSMG-LinksScanning: Clean, bases: 2024/11/29 08:43:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/11/29 07:52:00 #26914637
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F8:EE_|SJ0PR12MB6991:EE_
+X-MS-Office365-Filtering-Correlation-Id: 56513ec0-ed26-4555-d677-08dd105fce18
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|7416014|36860700013|1800799024|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GScaFWyBMfNdewft6hDaIz6HgbY8bRv4GbLomqzgLcYzca8OKiknCnzlcZ6L?=
+ =?us-ascii?Q?INsy1STZpEGpiv8S6RUwAxuApfDZvlED1CPP6Gne7Ob3RexMS30tKclNNKMC?=
+ =?us-ascii?Q?aEj58imt9tAMPHKgHIRLG0e6gM4gq4WrEQHbrSR3I+TH3TmHOSKdM//kTQRQ?=
+ =?us-ascii?Q?m8jhFDeNi5obHxVYROiezYw0miu1v6MrLUxnyfsWFE0c5p8G3UPFjIe+SPXP?=
+ =?us-ascii?Q?iLzG9Q+Xar+f11EgS2aCBJouit4ITzxy6FYpYVS1NnGl+AHFP75oR5aOzPPf?=
+ =?us-ascii?Q?FQhYKQeH+mtni8eYV7oU7cYPgILT3D9FXFQK2YGDnoEeGicYlrW7sfWjQpCe?=
+ =?us-ascii?Q?3SVN5N21Uz9SQQYv/Uf7mUmdGufvGU4lPMDlI5LQq2qOUq9AIMOyywpGIfgF?=
+ =?us-ascii?Q?k5iS3hndKBtEuTGxmlkcoy5ks9+wY4RI20TU3GM9cJQGIgYfjtQujAsZRZx+?=
+ =?us-ascii?Q?GMm2D/uJwu65e3358pJoh7Io5BG0Zq6KqXg6RKLxBY6HIEJcv0BQ+k3n19wW?=
+ =?us-ascii?Q?GjwMtk1jj4EmA1pbyIkv/pYoH5Gfrhku8N5DqimRVaM//x93K+9OVSwlKxa1?=
+ =?us-ascii?Q?m7Ar62oPJyOBjHyWk4sHRiNjFPjRoQW+rnYP5hPefRvG1oYRve831Xuz7/cg?=
+ =?us-ascii?Q?dathR6M48UDQER9qd4Sc2CJhQ86+rblP/limUVt3yd0SiJRPmZqxAqIxc9BQ?=
+ =?us-ascii?Q?kN+ZA4wBqUPMsHHQUdSYyRztPtSk6x/H1LJs7pc9Y2W2+YHMTzPgp+IwMyNT?=
+ =?us-ascii?Q?raI4lUEhOJuokvPMCTXlXqKQvJzdH4A1okwDd3auqq8O9VEKsbxnuuLu3cGt?=
+ =?us-ascii?Q?mpYjUHUKNdMTjwd8YuucaAgksLFq/KYJysdIXcl2fhty1rR9M6Zx93ZqVulG?=
+ =?us-ascii?Q?k4GD3/cYeRKiMI47WzoBeJY8EmkE8p02czZ0dyTHSLCROuBm1uI3oqd4Yf9Z?=
+ =?us-ascii?Q?E5SrZ7QOlN4nTn5ltMhcSD/z8Cae6qFhbLK8WhHyt/BwkHxXxwxkmE+Xf+6/?=
+ =?us-ascii?Q?RxVCKvDJKz2ZmnDPPlb1u6aXqIPAVeJQgKrsy64tE97DK1zfjOFy50bfyhHB?=
+ =?us-ascii?Q?9/nCVG/I+KC/0rAKfU1t27Bo7l+yctmpxOTfS5cVy9p04jW+TB00rEmECocq?=
+ =?us-ascii?Q?wlYy/O37n+WT07rsQH6RKDH8mPXadP94PZm90WSWyjvyhrbhKemLPzUA9Ht7?=
+ =?us-ascii?Q?C1Cg+2KZyUbnH65NYVuQots1bHPz+DjC+p3nfWNCUcj1sTrXwHxfxVYLG0sC?=
+ =?us-ascii?Q?7uU+R1ZrPnaCc7cxwiznpMtSEku5254Vp8Tbyg46gPy13AiKl5OvVLTkLlZy?=
+ =?us-ascii?Q?F4ITNS1emi3VvJFg2qB2eE9WCo0QhLrXwDqh9G3TqkderD7fpQ++qGS+Hpga?=
+ =?us-ascii?Q?u9I+f94CGFrlILDRRBjmvfo5ntD9658M3v/xPjzrJxq1NNFaLtb1RbfZbx/G?=
+ =?us-ascii?Q?RfNN9Sf4OVORENILNY1+khIx+X4kAhLq?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(36860700013)(1800799024)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Nov 2024 10:23:02.0431 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56513ec0-ed26-4555-d677-08dd105fce18
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F8.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6991
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,252 +152,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello, dear reviewers!
+Enable mt35xu512aba_fixups for all mt35 series flashes to work
+in DTR mode, and return after nor->fixups is updated, otherwise
+it will get overwritten with macronix_octal_fixups.
+This flash works in DTR mode only if CONFIG_SPI_FLASH_MT35XU
+is enabled and SPI_NOR_OCTAL_DTR_READ flag is set in id table.
 
-It was my 1st attempt to use b4-tool and it did not list all relevant
-reviewers.
+Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+Changes in v2:
+- Removed the SPI_XFER_SET_DDR flag.
+---
+ drivers/mtd/spi/spi-nor-core.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-So, let me manually CC relevant stakeholders/maintainers.
-Please, take a look on the fix of bug/vulnerability
-
-P.S. If you wish, advise me, please, whether I need to re-send with
-updated CC list or just publish v2.
-
-On Mon, Nov 25, 2024 at 12:15:07PM +0300, Evgeny Bachinin wrote:
-> Patch resolves two kind of bugs, one of which is vulnerability related
-> to KASLR.
-> 
-> === Issue briefly ===
-> 
->   Working with FDT (via non-relocated gd::fdt_blob) from inside bootm
-> command may lead to the reading the garbage instead of FDT nodes. And
-> this can result in various side-effects depending on DTS nodes, being
-> parsed during bootm.
-> 
->   But below is my specific story how I faced with this issue due to
-> MESON_RNG probing failure.
-> 
-> === Bugs description ===
-> 
-> 1) Bug is revealed on:
-> * configuration below
-> * U-boot 2024.10 - f919c3a889f ("Prepare v2024.10")
-> 
->   It seems, the following patch is a trigger:
-> ea955eea4f ("fdt: automatically add /chosen/kaslr-seed if DM_RNG is enabled")
-> 
->   Generally, CONFIG_OF_EMBED=y & CONFIG_RNG_MESON=y are the most
-> valuable ones for reproducing the issue.
-> ```
->   CONFIG_ARCH_FIXUP_FDT_MEMORY=y
->   CONFIG_CMD_FDT=y
->   CONFIG_DEFAULT_FDT_FILE=""
->   CONFIG_FDT_64BIT=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_CONTROL=y
->   CONFIG_OF_EMBED=y
->   CONFIG_OF_LIBFDT_ASSUME_MASK=0x0
->   CONFIG_OF_LIBFDT_OVERLAY=y
->   CONFIG_OF_LIBFDT=y
->   CONFIG_OF_LIST="meson-axg-our-device-name"
->   CONFIG_OF_REAL=y
->   CONFIG_OF_TRANSLATE=y
->   CONFIG_SUPPORT_OF_CONTROL=y
->   CONFIG_SYS_FDT_PAD=0x3000
->   CONFIG_TOOLS_OF_LIBFDT=y
-> 
->   CONFIG_DM_RNG=y
->   CONFIG_RNG_MESON=y
-> ```
-> 
-> 2) Due to CONFIG_OF_EMBED, the DTS is embedded into U-boot ELF and
-> accessible via __dtb_dt_begin symbol.
-> 
->   On early boot stage (board_f.c) the fdtdec_setup() is called only
-> once before U-boot's relocation into top of RAM. fdtdec_setup()
-> initializes gd::fdt_blob for FDTSRC_EMBED case:
-> ```
->   gd->fdt_blob = dtb_dt_embedded();
->   gd->fdt_src = FDTSRC_EMBED;
-> ```
-> 
-> 3) Then reloc_fdt() is called in board_f.c
-> 
->   But due to CONFIG_OF_EMBED=y the reloc_fdt() does not update
-> gd::fdt_blob value (strictly speaking, it is impossible for
-> CONFIG_OF_EMBED=y, because U-boot ELF has not been relocated yet
-> at this moment).
-> 
->   As a result after relocation we get fdt_blob, pointing to DTS address
-> before relocation:
-> ```
->    # bdinfo
->   <...>
->   relocaddr = 0x000000000fedf000
->   reloc off = 0x000000000eedf000
->   <...>
->   fdt_blob = 0x010ce6c0 << points to __dtb_dt_begin before relocation
->   new_fdt = 0x0000000000000000  << empty erroneously
->   fdt_size = 0x0000000000000000 << zero erroneously
-> ```
-> 
-> 4) During bootm command (according to our ITS-config file) the Linux
-> is loaded into 0x01080000 (which is very close to fdt_blob addr
-> 0x010ce6c0).
-> ```
->   ## Loading kernel from FIT Image at 04000000 ...
->      Trying 'kernel' kernel subimage
->        <...>
->        Load Address: 0x01080000
-> ```
-> 
->   So Linux image overwrites the gd::fdt_blob memory location
-> in RAM (0x010ce6c0).
-> 
-> 5) Issue:
-> 
->   Hence any manipulation with DTS (say, via FDT API) inside
-> implementation of bootm command leads to accessing the fdt_blob area
-> with garbage, that can lead to two situations:
-> 
-> 5.1) Abort.
-> 
->   Call to fdt_off_dt_struct() from fdt_next_tag() :: fdt_offset_ptr()::
-> fdt_offset_ptr_() returns with garbage, that leads to tagp value
-> being out of RAM top addr (256 Mb in our board), causing the abort:
-> ```
->   Boot cmd: bootm 0x4000000#boot_evt1
->   bootm_run_states()
->   <...>
->   image_setup_libfdt()
->    fdt_chosen()
->     fdt_kaslrseed()
->      uclass_get_device()
->       uclass_get_device_tail()
->        device_probe()
->         device_of_to_plat()
->         meson_rng_of_to_plat()
->          clk_get_by_name_optional()
->           clk_get_by_name()
->            clk_get_by_name_nodev()
->             ofnode_stringlist_search()
->              fdt_stringlist_search()
->               fdt_getprop()
->                fdt_get_property_namelen_()
->                 fdt_first_property_offset()
->                  fdt_check_node_offset_()
->                   fdt_next_tag():
->                     ```
->                       tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
->                     ```
->                   fdt_next_tag() tagp:0x22890766
->                   fdt_next_tag() ram_top:0x10000000 (tagp OUT of RAM)
->   "Synchronous Abort" handler, esr 0x96000010, far 0x22890766
->   elr: 000000000108be24 lr : 000000000108be24 (reloc)
->   elr: 000000000ff6fe24 lr : 000000000ff6fe24
->   x0 : 0000000000000041 x1 : 0000000000000000
->   x2 : 000000000ff3b57c x3 : 0000000000000012
->   x4 : 000000000ded2ad5 x5 : 0000000000000020
->   x6 : 00000000ffffffe8 x7 : 000000000ded2f40
->   x8 : 00000000ffffffd8 x9 : 000000000000000d
->   x10: 0000000000000006 x11: 000000000001869f
->   x12: 000000000fffffff x13: 000000000fffffff
->   x14: 0000000000000000 x15: 000000000ded2abb
->   x16: 000000000ff3b080 x17: 0000000000000001
->   x18: 000000000ded3dc0 x19: 0000000022890766
->   x20: 00000000010cb0f0 x21: 00000000000015e4
->   x22: 000000000ff8f4d8 x23: 000000000000000b
->   x24: 000000000ded2fbc x25: 000000000ffe2000
->   x22: 000000000ff8f4d8 x23: 000000000000000b
->   x24: 000000000ded2fbc x25: 000000000ffe2000
->   x26: 000000000ffe2000 x27: 000000000000000b
->   x28: 000000000ff9cf2d x29: 000000000ded2f40
-> 
->   Code: aa1603e1 91197484 52801742 94004de8 (b9400276)
-> ```
-> 
-> 5.2) Vulnerability situation "KASLR is disabled".
-> 
-> Almost the same as in (5.1), but 2 situations happen (depending on
-> the value of garbage):
->   * call to fdt_offset_ptr_() :: fdt_off_dt_struct(fdt)
->     returns not so big garbage, leading to tagp, being inside RAM.
->   * or calculations of absoffset inside fdt_offset_ptr() leads to
->     failure of the one of if() conditions with NULL as retval.
-> 
->   Result is fdt_next_tag() interprets the tagp as FDT_END. And we are
-> returning from our callstack via functions' error paths, leading to
-> "No RNG device" and "KASLR disabled due to lack of seed":
-> ```
->   fdt_kaslrseed()
->    uclass_get_device()
->    <...>
->     device_probe()
->      device_of_to_plat()
->       meson_rng_of_to_plat()
->        clk_get_by_name()
->         clk_get_by_name_nodev()
->         <...>
->          fdt_stringlist_search()
->           fdt_getprop()
->            fdt_get_property_namelen_()
->             fdt_first_property_offset()
->              fdt_check_node_offset_()
->               fdt_next_tag():
->                 ```
->                   tagp = fdt_offset_ptr(fdt, offset, FDT_TAGSIZE);
->                 ```
->               fdt_next_tag() tagp:0000000001890677
->               fdt_next_tag() ram_top:0x10000000 (tagp is inside RAM)
->       uclass_get_device_tail():486 device_probe() ret:-22
->   No RNG device
->  Starting kernel ...
-> 
->   [ 0.000000] Linux version 6.9.12
->   [ 0.000000] KASLR disabled due to lack of seed
-> ```
-> 
-> Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
-> ---
-> Tested:
-> * on board with Amlogic AXG SoC.
-> * on sandbox: make sure that certain code from patch is called (of
->   course, when CONFIG_OF_EMBED=y)
-> * U-boot CI: https://github.com/u-boot/u-boot/pull/698/checks
-> ---
->  common/board_r.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
-> 
-> diff --git a/common/board_r.c b/common/board_r.c
-> index 62228a723e12f8742437acae380e82f79903a8f5..88dc756b2a5e5a44f55f9b0fd012adc798a8afdb 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -152,6 +152,15 @@ static int initr_reloc_global_data(void)
->  	 */
->  	gd->env_addr += gd->reloc_off;
->  #endif
-> +
-> +	/*
-> +	 * For CONFIG_OF_EMBED case the FDT is embedded into ELF, available by
-> +	 * __dtb_dt_begin. After U-boot ELF self-relocation to RAM top address
-> +	 * it is worth to update fdt_blob in global_data
-> +	 */
-> +	if (IS_ENABLED(CONFIG_OF_EMBED))
-> +		gd->fdt_blob = dtb_dt_embedded();
-> +
->  #ifdef CONFIG_EFI_LOADER
->  	/*
->  	 * On the ARM architecture gd is mapped to a fixed register (r9 or x18).
-> 
-> ---
-> base-commit: cca05617a8f585f3a98a8fa82f75cc68a530d771
-> change-id: 20241119-of_embed_fdt_blob_garbage-ea729a8236e1
-> 
-> Best regards,
-> -- 
-> Evgeny Bachinin <EABachinin@salutedevices.com>
-> 
-
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index ec841fb13b..96f749f7a8 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -4404,8 +4404,13 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ #endif
+ 
+ #ifdef CONFIG_SPI_FLASH_MT35XU
+-	if (!strcmp(nor->info->name, "mt35xu512aba"))
++	if (!strcmp(nor->info->name, "mt35xu512aba") ||
++	    !strcmp(nor->info->name, "mt35xl512aba") ||
++	    !strcmp(nor->info->name, "mt35xu01g") ||
++	    !strcmp(nor->info->name, "mt35xu02g")) {
+ 		nor->fixups = &mt35xu512aba_fixups;
++		return;
++	}
+ #endif
+ 
+ #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
 -- 
-Best Regards,
-Evgeny Bachinin
+2.34.1
+
