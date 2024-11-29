@@ -4,138 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC014D6EBF7
-	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 10:23:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC29D6EBF7
+	for <u-boot@archiver.kernel.org>; Fri, 29 Nov 2024 10:35:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F8DD89382;
-	Fri, 29 Nov 2024 11:23:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DE5BB89293;
+	Fri, 29 Nov 2024 11:35:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Vyrn8+l0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j+xk8nR1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5D3B893D8; Fri, 29 Nov 2024 11:23:08 +0100 (CET)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2405::60b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 12BFB892A1; Fri, 29 Nov 2024 11:35:36 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47C3D8922D
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 11:23:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAA8E8928C
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 11:35:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VV8rfKkD42qfJD9mUUSiIAKkEg7lAD615h+LjwHMufMJQu+kP6HLfMLa+Zm6GOoaDTbR8msFOpapbzWwqZQfkjJuvrPoro5PnPDYSeRnIYUSsQEDrVcifrZF0hv9hWUhnl43rw+D+bKSp964bSHJz3EbDFxE+34IdV+WahjAr4gt7sjWMn8DTr+KjqgYUGCXiUvb1KnZdMV8f/I7K4907sFQvDje0U2i62HMgGaWOquELVEjHq6Z/+Y6SxHedCDFndFoNNbc4uQM0bnTN5QiuXPgWihoHeUEOO07VCZ+AANcLFfFAIVYJFd0feWVFjViuKgfbYIj4ZlTg25g7So/gA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lZdfxHOGE721W1xdZkbUh2+5Vqt9pEluSseSe7qBve4=;
- b=DtoHmgs94v9WZdhbE2A4QhjYPavv2yGdCS3C/2TS2c/UzsAp4lQ4wMtiqwakz+On+69gDoJDs/e3aL+f/5jeYwDwCI74UG8ziKyUhSQOZoyyE2u0l5H6qvPILghp52tgVLRmmbTbX0NFV5SG1mhZHk+pTkOZ9tzNvbWqvIAaV5WoCfosSTgQQpTGUtqOpIfagZdF9caQVPAhEX0W6N8v32VBoZ+XBO7Zsv2I1qpFfQSUslyayuV+PBr/AOYhTBNsu+eSckfJH54wn/DZ810f9LU6BLbTMoDWud7Zck+OIIGrD4scX1WdFFZggaTxqPLSP8AD5c/wMa6Ru6lGnUvV/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lZdfxHOGE721W1xdZkbUh2+5Vqt9pEluSseSe7qBve4=;
- b=Vyrn8+l0lFZ8eLV+wpPE7aG7VAk5tgdzzN83CJpvYxnTmnf1lzmAEcuu52MPmMw4gVvhZK9W5BHNQQ4oiuw/ylBb5uv+0dFwgPv2IJNH9mbF5Qw1LX0zUA2l0jJXuLHmwCqNBFKU6YDKiajJCS012wGyvakawAB5Rf0VksbxFkU=
-Received: from MW4PR03CA0206.namprd03.prod.outlook.com (2603:10b6:303:b8::31)
- by SJ0PR12MB6991.namprd12.prod.outlook.com (2603:10b6:a03:47c::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.13; Fri, 29 Nov
- 2024 10:23:02 +0000
-Received: from CO1PEPF000044F8.namprd21.prod.outlook.com
- (2603:10b6:303:b8:cafe::9) by MW4PR03CA0206.outlook.office365.com
- (2603:10b6:303:b8::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.13 via Frontend Transport; Fri,
- 29 Nov 2024 10:23:02 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CO1PEPF000044F8.mail.protection.outlook.com (10.167.241.198) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.0 via Frontend Transport; Fri, 29 Nov 2024 10:23:02 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 29 Nov
- 2024 04:22:59 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Fri, 29 Nov 2024 04:22:55 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>, <j-humphreys@ti.com>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <tudor.ambarus@linaro.org>,
- <Takahiro.Kuwano@infineon.com>, <p-mantena@ti.com>, <git@amd.com>, "Ashok
- Reddy Soma" <ashok.reddy.soma@amd.com>
-Subject: [PATCH v2] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
- flashes
-Date: Fri, 29 Nov 2024 15:52:48 +0530
-Message-ID: <20241129102248.670635-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-434a2033562so15558875e9.1
+ for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 02:35:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732876533; x=1733481333; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=tNZZ78U8zz+RBxTFGavWAPvKBajiAS/sZfmF9zj+TqU=;
+ b=j+xk8nR1vxdnuNTXQh8uGcOgwvqag1Qq65cM6tQfByiXDOFfK7I3+Mfef96r2reWz+
+ 7wf2hExDMXSAATLMU+K5YOQSyurzCvY2RzjC9e0/yGRBR5mK8WFCX4MR5+Q5uNWK1Ixo
+ gheN47HTe18Ul0jcHheNPKw3Y98NJnCpFA5VHRztJYkQuQwnmcK3dGnsTF3ESgJBK6ni
+ /Sib83r+sQ++6OaUITIf9sjgxbKXRuIYEXCaq+mYXN0/T2aV25fUxtDpF4GWGsAZjf9h
+ PK1yMAH2rEBaoVLMNM6PkyzSrqNJXoApkC7ZXmMCzYYHkzV6cjUSy9UwYDz/xPaC90nQ
+ 3KJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732876533; x=1733481333;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=tNZZ78U8zz+RBxTFGavWAPvKBajiAS/sZfmF9zj+TqU=;
+ b=nGOvhWQUtbY/WM828HoAJrJIBb+1uUcqs9QOsIxI7EkfnQxvhEJe4sthxd5Zec1wMO
+ QPEa1i7d+Hzv+hvgffNi/nl+eElgpezv3mV04w7UNuZxaRNi01fZx+Lno6y8YdATC5qZ
+ 4MK2N9ur/IouEaUTsMZBVounBGYp1H1xo7tZpLcaX+GvznyZIOo3u2B5Sqz2hN8Z3/VA
+ iZnV3RHZOhYNvnnxUBFVq7dnk8OGxVl0P2qLVSIOc4mfwiV4Dgwnea+xq1/S4I4i6zg1
+ 6WoNpVpPdl8ke8gIyXoFbbSEhjcMOilqwuuOTPR0/+HnLzI2juq2hGVzoi8Wf37GbjK+
+ wlKg==
+X-Gm-Message-State: AOJu0Yx88mSp+evGvTUlZJ42L3OrJgT8T9iqMOKlM0IH8I7DTCY4qXDz
+ SbT359wkDEir7U1r1W62xz7pldR+k92HGUUQOg3rwbmEVZuUoWt18CkcJswJJVl/koOoQ8ktKr9
+ bLro=
+X-Gm-Gg: ASbGncsY6XdBf0ROQ8FOMvbPdBKxQzniiGPQLyEXhf01CcwUHp9ZjXIJw5ZfOS8wmk6
+ h+CWUmUu6+0LNNcrNyafGogLQj82XGz/e8Tc9Lqz0u5E8SXCxhH/V5yF2cgA85vjDuY2FERgEiD
+ wl7Q4B55OIJlXqBGY63HG4S2xvbl8B53ttZk4M6QC86EerB00MYZWjIwc60/P9fybuDHO2Sv/kB
+ N5TXY34eiUlm4am/dbCoquBn+jZd2HBxBpzZ4z8FDEC21kIDSn4NIjtS1kPS8Xev4VvZdwVZv5N
+ 1OStkZlBYLvi3m3QuFcHFl+TuSw=
+X-Google-Smtp-Source: AGHT+IHUe/g+7JgI/N8QWN6JnNd951nU2pV1QgSF1xmxxG34+Eh84jM257pdAwlAkKeydfWr8eAKCg==
+X-Received: by 2002:a05:600c:5101:b0:434:9dfe:20e6 with SMTP id
+ 5b1f17b1804b1-434a9df71c6mr89078875e9.23.1732876533237; 
+ Fri, 29 Nov 2024 02:35:33 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:f16:2001:b150:7c3f:abc:d9eb?
+ ([2a0a:ef40:f16:2001:b150:7c3f:abc:d9eb])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-385deeb6acdsm1351285f8f.81.2024.11.29.02.35.32
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 29 Nov 2024 02:35:32 -0800 (PST)
+Message-ID: <85619442-4c18-4cec-8176-d7239e023474@linaro.org>
+Date: Fri, 29 Nov 2024 10:35:32 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044F8:EE_|SJ0PR12MB6991:EE_
-X-MS-Office365-Filtering-Correlation-Id: 56513ec0-ed26-4555-d677-08dd105fce18
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GScaFWyBMfNdewft6hDaIz6HgbY8bRv4GbLomqzgLcYzca8OKiknCnzlcZ6L?=
- =?us-ascii?Q?INsy1STZpEGpiv8S6RUwAxuApfDZvlED1CPP6Gne7Ob3RexMS30tKclNNKMC?=
- =?us-ascii?Q?aEj58imt9tAMPHKgHIRLG0e6gM4gq4WrEQHbrSR3I+TH3TmHOSKdM//kTQRQ?=
- =?us-ascii?Q?m8jhFDeNi5obHxVYROiezYw0miu1v6MrLUxnyfsWFE0c5p8G3UPFjIe+SPXP?=
- =?us-ascii?Q?iLzG9Q+Xar+f11EgS2aCBJouit4ITzxy6FYpYVS1NnGl+AHFP75oR5aOzPPf?=
- =?us-ascii?Q?FQhYKQeH+mtni8eYV7oU7cYPgILT3D9FXFQK2YGDnoEeGicYlrW7sfWjQpCe?=
- =?us-ascii?Q?3SVN5N21Uz9SQQYv/Uf7mUmdGufvGU4lPMDlI5LQq2qOUq9AIMOyywpGIfgF?=
- =?us-ascii?Q?k5iS3hndKBtEuTGxmlkcoy5ks9+wY4RI20TU3GM9cJQGIgYfjtQujAsZRZx+?=
- =?us-ascii?Q?GMm2D/uJwu65e3358pJoh7Io5BG0Zq6KqXg6RKLxBY6HIEJcv0BQ+k3n19wW?=
- =?us-ascii?Q?GjwMtk1jj4EmA1pbyIkv/pYoH5Gfrhku8N5DqimRVaM//x93K+9OVSwlKxa1?=
- =?us-ascii?Q?m7Ar62oPJyOBjHyWk4sHRiNjFPjRoQW+rnYP5hPefRvG1oYRve831Xuz7/cg?=
- =?us-ascii?Q?dathR6M48UDQER9qd4Sc2CJhQ86+rblP/limUVt3yd0SiJRPmZqxAqIxc9BQ?=
- =?us-ascii?Q?kN+ZA4wBqUPMsHHQUdSYyRztPtSk6x/H1LJs7pc9Y2W2+YHMTzPgp+IwMyNT?=
- =?us-ascii?Q?raI4lUEhOJuokvPMCTXlXqKQvJzdH4A1okwDd3auqq8O9VEKsbxnuuLu3cGt?=
- =?us-ascii?Q?mpYjUHUKNdMTjwd8YuucaAgksLFq/KYJysdIXcl2fhty1rR9M6Zx93ZqVulG?=
- =?us-ascii?Q?k4GD3/cYeRKiMI47WzoBeJY8EmkE8p02czZ0dyTHSLCROuBm1uI3oqd4Yf9Z?=
- =?us-ascii?Q?E5SrZ7QOlN4nTn5ltMhcSD/z8Cae6qFhbLK8WhHyt/BwkHxXxwxkmE+Xf+6/?=
- =?us-ascii?Q?RxVCKvDJKz2ZmnDPPlb1u6aXqIPAVeJQgKrsy64tE97DK1zfjOFy50bfyhHB?=
- =?us-ascii?Q?9/nCVG/I+KC/0rAKfU1t27Bo7l+yctmpxOTfS5cVy9p04jW+TB00rEmECocq?=
- =?us-ascii?Q?wlYy/O37n+WT07rsQH6RKDH8mPXadP94PZm90WSWyjvyhrbhKemLPzUA9Ht7?=
- =?us-ascii?Q?C1Cg+2KZyUbnH65NYVuQots1bHPz+DjC+p3nfWNCUcj1sTrXwHxfxVYLG0sC?=
- =?us-ascii?Q?7uU+R1ZrPnaCc7cxwiznpMtSEku5254Vp8Tbyg46gPy13AiKl5OvVLTkLlZy?=
- =?us-ascii?Q?F4ITNS1emi3VvJFg2qB2eE9WCo0QhLrXwDqh9G3TqkderD7fpQ++qGS+Hpga?=
- =?us-ascii?Q?u9I+f94CGFrlILDRRBjmvfo5ntD9658M3v/xPjzrJxq1NNFaLtb1RbfZbx/G?=
- =?us-ascii?Q?RfNN9Sf4OVORENILNY1+khIx+X4kAhLq?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(36860700013)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Nov 2024 10:23:02.0431 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 56513ec0-ed26-4555-d677-08dd105fce18
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F8.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6991
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Environment: Change reporting "nowhere" as "magic hat" to
+ user
+To: u-boot@lists.denx.de
+References: <20241128151233.1962926-1-alicja.michalska@9elements.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20241128151233.1962926-1-alicja.michalska@9elements.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,40 +101,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable mt35xu512aba_fixups for all mt35 series flashes to work
-in DTR mode, and return after nor->fixups is updated, otherwise
-it will get overwritten with macronix_octal_fixups.
-This flash works in DTR mode only if CONFIG_SPI_FLASH_MT35XU
-is enabled and SPI_NOR_OCTAL_DTR_READ flag is set in id table.
+On 28/11/2024 15:12, Alicja Michalska wrote:
+> Make string more user-friendly
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
-Changes in v2:
-- Removed the SPI_XFER_SET_DDR flag.
----
- drivers/mtd/spi/spi-nor-core.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+I disagree. I can make a guess as to what 'Loading Environment from 
+nowhere' means. To me it suggests that it has not found anywhere 
+additional to load an environment from. It is a bit awkwardly phrased 
+but it can be understood and it at least sticks to reality.
+As for 'Loading Environment from a magic hat' - I have no idea what that 
+is trying to convey and that lack of meaning is not, IMO, user-friendly.
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index ec841fb13b..96f749f7a8 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -4404,8 +4404,13 @@ void spi_nor_set_fixups(struct spi_nor *nor)
- #endif
- 
- #ifdef CONFIG_SPI_FLASH_MT35XU
--	if (!strcmp(nor->info->name, "mt35xu512aba"))
-+	if (!strcmp(nor->info->name, "mt35xu512aba") ||
-+	    !strcmp(nor->info->name, "mt35xl512aba") ||
-+	    !strcmp(nor->info->name, "mt35xu01g") ||
-+	    !strcmp(nor->info->name, "mt35xu02g")) {
- 		nor->fixups = &mt35xu512aba_fixups;
-+		return;
-+	}
- #endif
- 
- #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
--- 
-2.34.1
+Andrew
+
+> Signed-off-by: Alicja Michalska <alicja.michalska@9elements.com>
+> ---
+>   doc/arch/sandbox/sandbox.rst       | 2 +-
+>   doc/board/emulation/qemu-x86.rst   | 2 +-
+>   doc/board/sophgo/milkv_duo.rst     | 2 +-
+>   doc/board/starfive/visionfive2.rst | 2 +-
+>   doc/develop/uefi/u-boot_on_efi.rst | 2 +-
+>   env/nowhere.c                      | 2 +-
+>   test/py/tests/test_env.py          | 4 ++--
+>   7 files changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
+> index a8b0d7f039..d88f05285e 100644
+> --- a/doc/arch/sandbox/sandbox.rst
+> +++ b/doc/arch/sandbox/sandbox.rst
+> @@ -469,7 +469,7 @@ Here is an example trace::
+>      Address in environment is	02:00:11:22:33:44
+>      Core:  103 devices, 51 uclasses, devicetree: board
+>      MMC:
+> -   Loading Environment from nowhere... OK
+> +   Loading Environment from a magic hat... OK
+>      In:    serial,cros-ec-keyb,usbkbd
+>      Out:   serial,vidconsole
+>      Err:   serial,vidconsole
+> diff --git a/doc/board/emulation/qemu-x86.rst b/doc/board/emulation/qemu-x86.rst
+> index c604e42990..06e9dcd999 100644
+> --- a/doc/board/emulation/qemu-x86.rst
+> +++ b/doc/board/emulation/qemu-x86.rst
+> @@ -142,7 +142,7 @@ The output will be something like this::
+>      CPU:   QEMU Virtual CPU version 2.5+
+>      DRAM:  8 GiB
+>      Core:  20 devices, 13 uclasses, devicetree: separate
+> -   Loading Environment from nowhere... OK
+> +   Loading Environment from a magic hat... OK
+>      Model: QEMU x86 (I440FX)
+>      Net:   e1000: 52:54:00:12:34:56
+>             eth0: e1000#0
+> diff --git a/doc/board/sophgo/milkv_duo.rst b/doc/board/sophgo/milkv_duo.rst
+> index cb2ed1ad98..243468bf10 100644
+> --- a/doc/board/sophgo/milkv_duo.rst
+> +++ b/doc/board/sophgo/milkv_duo.rst
+> @@ -53,7 +53,7 @@ Sample boot log from Milk-V Duo board
+>   
+>      DRAM:  63.3 MiB
+>      Core:  10 devices, 8 uclasses, devicetree: separate
+> -   Loading Environment from nowhere... OK
+> +   Loading Environment from a magic hat... OK
+>      In:    serial@4140000
+>      Out:   serial@4140000
+>      Err:   serial@4140000
+> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
+> index 2c68df3ce4..7a926dc021 100644
+> --- a/doc/board/starfive/visionfive2.rst
+> +++ b/doc/board/starfive/visionfive2.rst
+> @@ -209,7 +209,7 @@ Sample boot log from StarFive VisionFive2 board
+>   	DRAM:  8 GiB
+>   	Core:  107 devices, 18 uclasses, devicetree: separate
+>   	MMC:   mmc@16010000: 0, mmc@16020000: 1
+> -	Loading Environment from nowhere... OK
+> +	Loading Environment from a magic hat... OK
+>   	In:    serial@10000000
+>   	Out:   serial@10000000
+>   	Err:   serial@10000000
+> diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
+> index 245b4af1fa..dbc2b74c6e 100644
+> --- a/doc/develop/uefi/u-boot_on_efi.rst
+> +++ b/doc/develop/uefi/u-boot_on_efi.rst
+> @@ -230,7 +230,7 @@ This shows running with serial enabled (see `include/configs/efi-x86_app.h`)::
+>      DRAM:  32 MiB
+>       0: efi_media_0  PciRoot(0x0)/Pci(0x3,0x0)/Sata(0x0,0xFFFF,0x0)
+>       1: <partition>  PciRoot(0x0)/Pci(0x3,0x0)/Sata(0x0,0xFFFF,0x0)/HD(1,GPT,0FFD5E61-3B0C-4326-8049-BDCDC910AF72,0x800,0xB000)
+> -   Loading Environment from nowhere... OK
+> +   Loading Environment from a magic hat... OK
+>      Model: EFI x86 Application
+>      Hit any key to stop autoboot:  0
+>   
+> diff --git a/env/nowhere.c b/env/nowhere.c
+> index 6b9b6e2fe0..63fc4647f6 100644
+> --- a/env/nowhere.c
+> +++ b/env/nowhere.c
+> @@ -45,5 +45,5 @@ U_BOOT_ENV_LOCATION(nowhere) = {
+>   	.location	= ENVL_NOWHERE,
+>   	.init		= env_nowhere_init,
+>   	.load		= env_nowhere_load,
+> -	ENV_NAME("nowhere")
+> +	ENV_NAME("a magic hat")
+>   };
+> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+> index 4471db7d9c..3cd06c5c90 100644
+> --- a/test/py/tests/test_env.py
+> +++ b/test/py/tests/test_env.py
+> @@ -527,10 +527,10 @@ def test_env_ext4(state_test_env):
+>   
+>           # restore env location: NOWHERE (prio 0 in sandbox)
+>           response = c.run_command('env select nowhere')
+> -        assert 'Select Environment on nowhere: OK' in response
+> +        assert 'Select Environment from a magic hat: OK' in response
+>   
+>           response = c.run_command('env load')
+> -        assert 'Loading Environment from nowhere... OK' in response
+> +        assert 'Loading Environment from a magic hat... OK' in response
+>   
+>           response = c.run_command('env info')
+>           assert 'env_valid = invalid' in response
 
