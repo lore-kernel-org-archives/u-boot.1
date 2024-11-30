@@ -4,75 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92341D7360A
-	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 20:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC1D4D7360A
+	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 20:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E998D888D5;
-	Sat, 30 Nov 2024 21:24:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 51DCC88ECB;
+	Sat, 30 Nov 2024 21:25:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QCUh/2dk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nCy1RHu3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2958D8855C; Sat, 30 Nov 2024 21:24:53 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id DFE8688E4B; Sat, 30 Nov 2024 21:25:09 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A12BA88E4B
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 21:24:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8079288A9D
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 21:25:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d0c7c8cd6cso1527501a12.0
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 12:24:45 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-aa549d9dffdso445101266b.2
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 12:25:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732998285; x=1733603085; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1732998307; x=1733603107; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t2zymNZFGsDmmfnBtDwzAF+EcReF+m94LJ/quZT818Y=;
- b=QCUh/2dke61A/O8+T5MGjoymSYD+A1AWOd7MqNVCckYrdgnsWsp7oNNdoyXlcitr9+
- eFtUdVANB4ws/pgSxhBQ5IEYH+y1aUo9ohkp1haON+FSBGbIvnSZm09FKqKK/g66XRiZ
- 6zp61X5guX0EmW8qdFoIMTerAbmWer9RWuQTE=
+ bh=U1m0DXKbvegctlr9YEvSkhD6FfXF9A5IMSfTkVp0cGU=;
+ b=nCy1RHu3rwiFK6FRY5HIA1+YYHjgVXp0/6Z0FCXWTOKhKWSnGtM/NXOPsHpSaMVbd9
+ 1198t0OW6g3jVR+4/N9eHE6W9X0WpHrLqpyzywNzX1P9M0sQK14KnoeIy8Bcd0lVHtGU
+ pK444MNl0+iDzmQOXDVrsKtdViJ+u3WWObv7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732998285; x=1733603085;
+ d=1e100.net; s=20230601; t=1732998307; x=1733603107;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t2zymNZFGsDmmfnBtDwzAF+EcReF+m94LJ/quZT818Y=;
- b=BPjzg5Eh2+HfGGH42hol2spRmBm/pvC8X6lqaj5rKDhuKlZF6QGQDs0UOykie3Nh8f
- 6MbyHY2GsmlzNmERJvK6EADdGczPwLc82hiGIQpH6vjjOilmNGtafwB9LOb+daAAFH5/
- mq8EBBmqDeUMub5Xou+VvEbFwrSCVSe9D1ZiLT3rbEP+uRB0V1lJ4ZiUOhBtyHY+ACPv
- FzspyRtVxAmNkf528wdwyarOn2l4crsxlY85uqWNahXypI3b0tlpStCp/qjwQfS2/yLm
- nBIrUGTXiktRtjg1qeGocUxhkt7Bl5voh+VG9sysLoNivER+8mhQwi/OyiARGByVpI0P
- 07Rw==
+ bh=U1m0DXKbvegctlr9YEvSkhD6FfXF9A5IMSfTkVp0cGU=;
+ b=UMGebDm+XDRZrF3QkRfl5Lb4DgsTqyr6JcLbP5BKSIQ3aAEkYDWaJGpz3EAd3LcUWV
+ d4lS0yw0scySKTFrUyawpEhUpayfI12SFsBVdef2Nxd2MqX9Te6cBC/UUjpaeP6zLbEC
+ lxi2lUngpuLYBTqdo6xkbjAErFQ0qJUIDnDnlK/tS+W0qPbn7ZphbSRqbA4oXf3eRvwH
+ Pp8yJ51IbQg73aIFJepbXZadK5P2BwtMYKIMlguiic2UVIOEBM4cAVJY5+fCbESeNx1p
+ KbOcIw0qflVuth4WuDE5FHjvxEVf5dJtln8PUTEa+hOIktuQ9Oxd6JctkggSoXXgHlGv
+ MtRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmLSGiOQRd/gzZmnvCzXQEAzU7sX2dQpna3v9dU0KO0wx080JeF7LAQQUCA5nxSmt1/8cAzGA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYXJuMVBgb3nLd2L4JqzL6/0PujMaOrbYNx3YQ9HHqtew8FkHH
- 112C5WsNaCyrwp55DnZcAQcxHmcOiAXb/x7Xsuq4mdJhh3vh470und/nIPq+AM1LHvo8nH2L9Li
- X/GLPp+91eivirjcnnyWbbTdHpgdnqm2OVBi9
-X-Gm-Gg: ASbGncvvt0oSvcLGkcwDsPl/7GdS8dnZuBzWI9mRJBCXtIA2ImpaA38+ndjrJchHe7Z
- O6IUnDBRBmjHNOyZ4D4O8d6/7q8hGR7s=
-X-Google-Smtp-Source: AGHT+IF252P27Sm6s5gIkeTSJLD0Umc1H7Q7hmKqupk7UBoDplVA863lv/8T8R3MXI7Zvlx1/91th2901rlnKG1tkX8=
-X-Received: by 2002:a17:907:7758:b0:a9e:85f8:2a3a with SMTP id
- a640c23a62f3a-aa59450670amr1505271166b.2.1732998284926; Sat, 30 Nov 2024
- 12:24:44 -0800 (PST)
+ AJvYcCXPNKt6opGcvUYHQX2C4lTDjoSEW9wpR33DAalDOY+P69eEquQmdN7IdotLoN3/sU8JExVHlZc=@lists.denx.de
+X-Gm-Message-State: AOJu0YyGx5iMU+Nzg81vQgLJXKyqPlWM1ENJ7Y2O4yrGHurTTaLn6s/n
+ ODmm6gqFHfIFuAEDu5d6IZtZFuSZtGEEPVDHeWJDb8BsI2GWgPuURE3yWveGSfiD46NFyG4cYOk
+ 9h98Qzd3/DJDkBKtDq+/ncw6BElkB6gyFWN1h
+X-Gm-Gg: ASbGncs8Yr2/+s+dgRF35oaQkXb8d0ClieNy9jHshJ/GCN0hbXiCI2UBrp0UZ73zRlb
+ wKuwr3Q0DBvoiI7d8qGSHUSncX80va+w=
+X-Google-Smtp-Source: AGHT+IGXuyiZK+6hpnGXaIUIwWLuKnyJtR1MlQ6X5zUdF9LE+eVnjpvTI3jeM55CcCw9yIC22G9ZruJBDv7KACKVNqg=
+X-Received: by 2002:a17:906:8453:b0:aa5:4d26:8e52 with SMTP id
+ a640c23a62f3a-aa581058831mr1544247766b.47.1732998306832; Sat, 30 Nov 2024
+ 12:25:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20241127172247.1488685-1-trini@konsulko.com>
- <20241127172247.1488685-2-trini@konsulko.com>
- <55538d09-dd9f-424e-9600-a7d94172e216@gmx.de>
- <CAFLszTjDpZYcAoWNetOsyD1SNCob9rx2w530K2oVGiRCNFUy8w@mail.gmail.com>
- <20241127211427.GD3600562@bill-the-cat>
-In-Reply-To: <20241127211427.GD3600562@bill-the-cat>
+References: <d415c887-bb0c-47e8-bfd4-d0049f596367@gmx.de>
+ <CAFLszTiOp56JkV1u5qOdJUYH2vJ5YHWwpBUmhb8WWiNs2S0B+w@mail.gmail.com>
+ <20241126155508.GR3600562@bill-the-cat>
+ <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
+ <20241126223332.GV3600562@bill-the-cat>
+ <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
+ <20241126233218.GW3600562@bill-the-cat>
+ <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+ <20241127141532.GZ3600562@bill-the-cat>
+ <CAFLszTg8L4A0oGLh=K5kc8hR_E+LxFYeC_vNHMZDbV_+ZT8Btg@mail.gmail.com>
+ <20241127221059.GE3600562@bill-the-cat>
+In-Reply-To: <20241127221059.GE3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 30 Nov 2024 13:24:33 -0700
-Message-ID: <CAFLszThgX9PnzSNmxXDBz1j61Fu-4eCpT8cR2MC809UJaSJ1UA@mail.gmail.com>
-Subject: Re: [v6 01/12] sandbox: efi_loader: Correct use of addresses as
- pointers
+Date: Sat, 30 Nov 2024 13:24:54 -0700
+Message-ID: <CAFLszTiP3ika=dGQ9pX3btdY7CWB-n3AsqaSa4DZRPJj9fs0Hg@mail.gmail.com>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,168 +103,162 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 27 Nov 2024 at 14:14, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 27 Nov 2024 at 15:11, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Nov 27, 2024 at 02:09:42PM -0700, Simon Glass wrote:
-> > Hi Heinrich,
+> On Wed, Nov 27, 2024 at 07:56:11AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Wed, 27 Nov 2024 at 11:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > On Wed, 27 Nov 2024 at 07:15, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On 27.11.24 18:17, Tom Rini wrote:
-> > > > From: Simon Glass <sjg@chromium.org>
+> > > On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
+> > > > Hi,
 > > > >
-> > > > The cache-flush function is incorrect which causes a crash in the
-> > > > remoteproc tests with arm64.
+> > > > On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
+> > > > > > On 11/26/24 23:33, Tom Rini wrote:
+> > > > > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+> > > > > > > > > > Hi Heinrich,
+> > > > > > > > > >
+> > > > > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > > > > > > > > > Exported functions should be documented in the header file, not the
+> > > > > > > > > > > > implementation. We tend to make such updates on a piecemeal basis to
+> > > > > > > > > > > > avoid a 'flag day'. Move some comments related to memory allocation to
+> > > > > > > > > > > > follow the convention.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > >
+> > > > > > > > > > > Please, have a look at this line in doc/
+> > > > > > > > > > >
+> > > > > > > > > > > doc/api/efi.rst:78:
+> > > > > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
+> > > > > > > > > >
+> > > > > > > > > > Hmm, we should not add C files as then we end up with all sorts of
+> > > > > > > > > > internal functions, like checksum(). The help is a bit of a mess on
+> > > > > > > > > > that page IMO and it could use an index at the top or side.
+> > > > > > > > >
+> > > > > > > > > Why? Looking at the linux kernel (where we borrow this framework from
+> > > > > > > > > and lots of developers expect to follow that style) it's extremely
+> > > > > > > > > common to kernel-doc C files. I don't see why documenting internal
+> > > > > > > > > functions (which should be clear as being internal) is a problem.
+> > > > > > > >
+> > > > > > > > It depends what you mean by docs. U-Boot puts the documentation for
+> > > > > > > > exported functions in header files.
+> > > > > > >
+> > > > > > > I'm sorry, that's a circular definition. And no, there is not a hard and
+> > > > > > > fast rule that we only put kernel-doc style comments in header files
+> > > > > > > (which are consumed by other files and tooling to generate
+> > > > > > > documentation).
+> > > > > > >
+> > > > > > > > Putting docs in C files clutters the docs with internal
+> > > > > > > > implementations, when most people just want to see the API. The way
+> > > > > > > > U-Boot does things, it is easy to see the internal (implementation)
+> > > > > > > > docs by looking at the C code and the external functions by looking at
+> > > > > > > > the header files.
+> > > > > > >
+> > > > > > > Or it makes things harder to understand because the human readable
+> > > > > > > documentation for a given function is separate from the file the
+> > > > > > > implements the function. This is possibly why in the linux kernel, where
+> > > > > > > we borrow "kernel-doc" from, documentation is frequently in the C file
+> > > > > > > which is then included in Documentation files (the type you objected to
+> > > > > > > in the start of this patch) which include additional human-readable
+> > > > > > > explanation of the intention and usage of the API in question.
+> > > > > > >
+> > > > > >
+> > > > > > For static functions we will continue to have function documentation in
+> > > > > > the C files and not in the headers. I personally never looked up the API
+> > > > > > documentation in the HTML docs but always in the source.
 > > > >
-> > > > Fix both problems by using map_sysmem() to convert an address to a
-> > > > pointer and map_to_sysmem() to convert a pointer to an address.
+> > > > Same here.
 > > > >
-> > > > Also update the image-loader's cache-flushing logic.
+> > > > > >
+> > > > > > I am not opposed against moving the EFI function documentation into the
+> > > > > > header files. But we should update doc/develop/efi.rst accordingly in
+> > > > > > the same patch series. This is missing here.
 > > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Fixes: 3286d223fd7 ("sandbox: implement invalidate_icache_all()")
-> > > > Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > > > OK
 > > > >
-> > > > Changes in v6:
-> > > > - Re-introduce
+> > > > >
+> > > > > My point is that the linux kernel is about 60% C files and 40% header
+> > > > > files being kernel-doc'd in to documentation files and so "U-Boot
+> > > > > doesn't put documentation in to C files" seems like the wrong approach.
 > > > >
-> > > > Changes in v2:
-> > > > - Drop message about EFI_LOADER
+> > > > U-Boot tries to document functions in header files. At the risk of
+> > > > making a blanket statement with thousands of counter-examples, that is
+> > > > not so much the case in Linux.
 > > > >
-> > > >   arch/sandbox/cpu/cache.c              |  8 +++++++-
-> > > >   drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
-> > > >   lib/efi_loader/efi_image_loader.c     |  3 ++-
-> > > >   3 files changed, 20 insertions(+), 9 deletions(-)
-> > > > ---
-> > > >   arch/sandbox/cpu/cache.c              |  8 +++++++-
-> > > >   drivers/remoteproc/rproc-elf-loader.c | 18 +++++++++++-------
-> > > >   lib/efi_loader/efi_image_loader.c     |  3 ++-
-> > > >   3 files changed, 20 insertions(+), 9 deletions(-)
-> > > >
-> > > > diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
-> > > > index c8a5e64214b6..96b3da47e8ed 100644
-> > > > --- a/arch/sandbox/cpu/cache.c
-> > > > +++ b/arch/sandbox/cpu/cache.c
-> > > > @@ -4,12 +4,18 @@
-> > > >    */
-> > > >
-> > > >   #include <cpu_func.h>
-> > > > +#include <mapmem.h>
-> > > >   #include <asm/state.h>
-> > > >
-> > > >   void flush_cache(unsigned long addr, unsigned long size)
-> > > >   {
-> > > > +     void *ptr;
-> > > > +
-> > > > +     ptr = map_sysmem(addr, size);
-> > > > +
-> > > >       /* Clang uses (char *) parameters, GCC (void *) */
-> > > > -     __builtin___clear_cache((void *)addr, (void *)(addr + size));
-> > > > +     __builtin___clear_cache(map_sysmem(addr, size), ptr + size);
-> > > > +     unmap_sysmem(ptr);
-> > > >   }
-> > > >
-> > > >   void invalidate_icache_all(void)
-> > > > diff --git a/drivers/remoteproc/rproc-elf-loader.c b/drivers/remoteproc/rproc-elf-loader.c
-> > > > index ab1836b3f078..0b3941b7798d 100644
-> > > > --- a/drivers/remoteproc/rproc-elf-loader.c
-> > > > +++ b/drivers/remoteproc/rproc-elf-loader.c
-> > > > @@ -6,6 +6,7 @@
-> > > >   #include <dm.h>
-> > > >   #include <elf.h>
-> > > >   #include <log.h>
-> > > > +#include <mapmem.h>
-> > > >   #include <remoteproc.h>
-> > > >   #include <asm/cache.h>
-> > > >   #include <dm/device_compat.h>
-> > > > @@ -180,6 +181,7 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
-> > > >       for (i = 0; i < ehdr->e_phnum; i++, phdr++) {
-> > > >               void *dst = (void *)(uintptr_t)phdr->p_paddr;
-> > > >               void *src = (void *)addr + phdr->p_offset;
-> > > > +             ulong dst_addr;
-> > > >
-> > > >               if (phdr->p_type != PT_LOAD)
-> > > >                       continue;
-> > > > @@ -195,10 +197,11 @@ int rproc_elf32_load_image(struct udevice *dev, unsigned long addr, ulong size)
-> > > >               if (phdr->p_filesz != phdr->p_memsz)
-> > > >                       memset(dst + phdr->p_filesz, 0x00,
-> > > >                              phdr->p_memsz - phdr->p_filesz);
-> > > > -             flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
-> > > > -                         roundup((unsigned long)dst + phdr->p_filesz,
-> > > > +             dst_addr = map_to_sysmem(dst);
-> > > > +             flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-> > > > +                         roundup(dst_addr + phdr->p_filesz,
-> > > >                                   ARCH_DMA_MINALIGN) -
-> > > > -                         rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-> > > > +                         rounddown(dst_addr, ARCH_DMA_MINALIGN));
-> > > >       }
-> > > >
-> > > >       return 0;
-> > > > @@ -377,6 +380,7 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
-> > > >       const struct dm_rproc_ops *ops;
-> > > >       Elf32_Shdr *shdr;
-> > > >       void *src, *dst;
-> > > > +     ulong dst_addr;
-> > > >
-> > > >       shdr = rproc_elf32_find_rsc_table(dev, fw_addr, fw_size);
-> > > >       if (!shdr)
-> > > > @@ -398,10 +402,10 @@ int rproc_elf32_load_rsc_table(struct udevice *dev, ulong fw_addr,
-> > > >               (ulong)dst, *rsc_size);
-> > > >
-> > > >       memcpy(dst, src, *rsc_size);
-> > > > -     flush_cache(rounddown((unsigned long)dst, ARCH_DMA_MINALIGN),
-> > > > -                 roundup((unsigned long)dst + *rsc_size,
-> > > > -                         ARCH_DMA_MINALIGN) -
-> > > > -                 rounddown((unsigned long)dst, ARCH_DMA_MINALIGN));
-> > > > +     dst_addr = map_to_sysmem(dst);
-> > > > +     flush_cache(rounddown(dst_addr, ARCH_DMA_MINALIGN),
-> > > > +                 roundup(dst_addr + *rsc_size, ARCH_DMA_MINALIGN) -
-> > > > +                 rounddown(dst_addr, ARCH_DMA_MINALIGN));
-> > > >
-> > > >       return 0;
-> > > >   }
-> > > > diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_image_loader.c
-> > > > index 0ddf69a09183..bb58cf1badb7 100644
-> > > > --- a/lib/efi_loader/efi_image_loader.c
-> > > > +++ b/lib/efi_loader/efi_image_loader.c
-> > > > @@ -13,6 +13,7 @@
-> > > >   #include <efi_loader.h>
-> > > >   #include <log.h>
-> > > >   #include <malloc.h>
-> > > > +#include <mapmem.h>
-> > > >   #include <pe.h>
-> > > >   #include <sort.h>
-> > > >   #include <crypto/mscode.h>
-> > > > @@ -977,7 +978,7 @@ efi_status_t efi_load_pe(struct efi_loaded_image_obj *handle,
-> > > >       }
-> > > >
-> > > >       /* Flush cache */
-> > > > -     flush_cache((ulong)efi_reloc,
-> > > > +     flush_cache(map_to_sysmem(efi_reloc),
-> > > >                   ALIGN(virt_size, EFI_CACHELINE_SIZE));
+> > > > To a large extent, people developing features in U-Boot rely on the
+> > > > header files to see what functions they can call. With the
+> > > > documentation there, they often don't need to look at the source. I
+> > > > certainly don't, unless the header-file comment is inadequate.
 > > >
-> > > It would be nice if we could be consistent:
-> > >
-> > > include/cpu_func.h:66:
-> > > void flush_cache(unsigned long addr, unsigned long size);
-> > >
-> > > arch/arc/lib/cache.c:773:
-> > > void flush_cache(unsigned long start, unsigned long size)
-> > >
-> > > arch/sandbox/cpu/cache.c:9:
-> > > void flush_cache(unsigned long addr, unsigned long size)
+> > > I think this is a case of what you do, rather than what everyone else
+> > > does.
 > >
-> > Patches are welcome :-)
-> >
-> > They should all be ulong
+> > That's not my reading of the source tree.
 >
-> Please note that they are all consistent in prototypes and
-> functionality. arc just says "start" rather than "addr" and everyone
-> uses them in the same way. The issue, as the Fixes tag shows, is that
-> sandbox's isn't complete.
+> So, if we call this point 1 for a moment.
+>
+> > The file we are talking about has some comments in the header and some
+> > in the source file. When you use an lsp client, it doesn't know what
+> > to do.
+>
+> Sounds like a bad client? Because again, we should be following the
+> kernel here.
+>
+> > > We want to be more like the linux kernel here, rather than less
+> > > like the linux kernel, given the number of kernel people also working
+> > > here. If Heinrich is fine with re-arranging everything, OK. But I think
+> > > documentation with the code makes it less likely to get out of date,
+> > > both in terms of intentional changes and bug fixes.
+> >
+> > I am not suggesting separating documentation from code. I agree that
+> > makes no sense. What I have consistently done (and asked for in
+> > reviews) is:
+> >
+> > - exported functions are documented next to their prototype in the header
+> > - static functions are documented next to their implementation
+>
+> So going back to point 1 now, yes. This is what I'm saying. Your
+> preference, expressed through reviews and telling people to change when
+> they do it other ways, is where the current situation comes from.
+>
+> > This makes it easy to read the header file and see what the module is
+> > doing, without having to dive into the implementation, which could be
+> > 1000 lines or more. It also makes for more useful kerneldoc, IMO,
+> > since we are showing functions which are exported and therefore more
+> > useful for development. Adding the entire C code of U-Boot into
+> > kerneldoc seems like a bad use of space.
+>
+> Um, I don't follow you here. If the code doesn't have kerneldoc
+> comments, it's not included. I just made a silly test with a change to
+> include/clk.h. It's not included in the output. And "the code might be
+> so big it needs refactoring" is not a good excuse.
 
-I wasn't suggesting you change this patch, just suggesting what
-Heinrich might do if he wants to send a separate patch.
+Yes, I see that static functions don't appear by default, so adding C
+files doesn't necessarily result in functions appearing in the doc
+output.
+
+>
+> The kernel is inconsistent here. The first example I went to look for of
+> something that uses both C and header files in a document was
+> Documentation/admin-guide/pstore-blk.rst and both fs/pstore/blk.c and
+> include/linux/pstore_blk.h are kernel-doc'd in and the header describes
+> a public function of the C file while the C file describes other
+> functions too.
+
+Yes, pstore docs seems like a nice way to do things, for docs.
+
+For people working on the code base, I strongly believe that exported
+functions and structs are the main way to understand how to use a
+subsystem, so their docs should be in the header file.
 
 Regards,
 Simon
