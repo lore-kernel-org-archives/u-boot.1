@@ -4,80 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B222D73618
-	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 23:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7F90D7361D
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 03:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C88E898B2;
-	Sun,  1 Dec 2024 00:37:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B395F892FD;
+	Sun,  1 Dec 2024 04:06:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=qrv-systems.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MMH3A3HX";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06ADE896BC; Sun,  1 Dec 2024 00:37:43 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4BB9289615; Sat, 30 Nov 2024 21:56:54 +0100 (CET)
+Received: from mr6.vodafonemail.de (mr6.vodafonemail.de [145.253.228.166])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0CFE898D8
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 00:37:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C62989437
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 21:56:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=qrv-systems.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6d87a55bc50so19427816d6.3
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 15:37:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733009860; x=1733614660; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E6UnLP5A7FpOMVs97zd8Sb5kTw1PVE3+NZ7y3M32P9E=;
- b=MMH3A3HXDEs/tXjZoUA3eXik44x9+XOMru9pyvNiJQsscM7Pj9/klUJ0MxN7VPzzyc
- JP/AFSefVypGLhRp5U+iJTFoqD0m1u88iebsoYoIWI/jtIYTVHDsxbJOPX40ScCqtCgJ
- EaGb5yK+PS0Q6WVTMwPcOApHouvalKg1iORJI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733009860; x=1733614660;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E6UnLP5A7FpOMVs97zd8Sb5kTw1PVE3+NZ7y3M32P9E=;
- b=JSxfWq0htWlKB2RtwYqPFO3fc0bn3+4/vUswhADqi/9YGG57hNgdN2853vhnRE/S0B
- TSF9sQjugMJgjxMO0ApFMKagEuqO+qn3BpelzPjeEqBIFY24Rc1II9/EEPL8jGvGOMov
- IyrAzOsy5ooJEHIUjSaw6Il9W0UikVyUNk/G53rxySHZx8aEacuY65jdg8mNkcmolwaf
- +BtJLYhhE2I/rRdqe6jnLKw6l71qPu1rwcK9W/MLse5/XHvaygi5rrCdWhE2ywXDEjTk
- De2gqEjdmgh0Lt2rlVn8yklUlfQ8ASR1kY/7nP63+h+xLOhu9o/TRgLWIarRvSWZYizS
- lAWA==
-X-Gm-Message-State: AOJu0YxhN785T6YWf1fkM03BnIf/zu2TzmOCQju36yBdAi5qFkpERz4j
- 7PDGSiaceuhc2hKghjQYKr84sEqvoyvzc8nrKk03Gjg74we+0tSZj7/NRPdpmHN/HSzrpthj+H1
- HPGc=
-X-Gm-Gg: ASbGncsaqCpwTNFR1cszWDXad3JDD+foTHLYbDoURQU1MYvdJfZ6GH+CafcCGuMVJrR
- LIXzeBKYlQmuatGbEgCn4M7EmrCkzxuqLgJoER1DmlhXnBjVjOHyX/+0ePY4FbpGYSFywruSiFX
- pFe9KZwhSfKhPqwozOJXlYHJ96jxrR2HolyTFB+C+7fK3BWpKPIZFlBj1dkm1aEaXMPPApvFRuA
- 3dN7wGs3t9Cxzii1GxQaNNKV3T/+3LJSwonIch/+VDG0D2C
-X-Google-Smtp-Source: AGHT+IH89FLVqWbBajONMqPsLYttrzDMrLUG3aOqSqfCPWuPdaLvsBBNcUguzJAvRj+EsSkQXKjAtg==
-X-Received: by 2002:a05:6214:20c6:b0:6d4:1dc0:2623 with SMTP id
- 6a1803df08f44-6d864dd30a1mr280457386d6.32.1733009859803; 
- Sat, 30 Nov 2024 15:37:39 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.30.219]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d89b158778sm5725926d6.96.2024.11.30.15.37.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 Nov 2024 15:37:39 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-Cc: Shengzhou Liu <Shengzhou.Liu@nxp.com>
-In-Reply-To: <20241125093700.1135929-1-ravi@prevas.dk>
-References: <20241125093700.1135929-1-ravi@prevas.dk>
-Subject: Re: [PATCH] powerpc/t2080qds: remove spurious x permission from
- README file
-Message-Id: <173300985811.2282108.921632527262120314.b4-ty@konsulko.com>
-Date: Sat, 30 Nov 2024 17:37:38 -0600
+ spf=pass smtp.mailfrom=yuriz@vodafonemail.de
+Received: from smtp.vodafone.de (unknown [10.0.0.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by mr6.vodafonemail.de (Postfix) with ESMTPS id 4Y12R75sdNz1y1V;
+ Sat, 30 Nov 2024 20:56:51 +0000 (UTC)
+Received: from tachyon.qrv-systems.net
+ (ip-095-222-025-162.um34.pools.vodafone-ip.de [95.222.25.162])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.vodafone.de (Postfix) with ESMTPSA id 4Y12R03Tsxz924J;
+ Sat, 30 Nov 2024 20:56:41 +0000 (UTC)
+Received: by tachyon.qrv-systems.net (Postfix, from userid 516)
+ id ED4A32E01AC; Sat, 30 Nov 2024 21:56:40 +0100 (CET)
+From: Yuri Zaporozhets <yuriz@qrv-systems.net>
+To: u-boot@lists.denx.de
+Cc: Yuri Zaporozhets <yuriz@qrv-systems.net>
+Subject: [PATCH] bios_emulator: fix incorrect printing of address in "call
+ near immediate"
+Date: Sat, 30 Nov 2024 21:56:25 +0100
+Message-Id: <20241130205625.24668-1-yuriz@qrv-systems.net>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+X-purgate-type: clean
+X-purgate: clean
+X-purgate-size: 1189
+X-purgate-ID: 155817::1733000207-31790462-49501709/0/0
+X-Mailman-Approved-At: Sun, 01 Dec 2024 04:06:04 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,16 +68,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 10:37:00 +0100, Rasmus Villemoes wrote:
+In the x86emuOp_call_near_IMM() function the address of CALL is
+printed incorrectly when jumping backwards. For example, the correct
+disassemble of the bytes below would be:
 
-> It doesn't make sense for a README file to be executable. Remove that
-> bit.
-> 
-> 
+0000E8DE  E8DBFF            call 0xe8bc
 
-Applied to u-boot/master, thanks!
+(verified by ndisasm). But instead the address is printed as "ffffe8bc".
+That's because of the following macro:
 
+    DECODE_PRINTF2("%04x\n", ip);
+
+while it should be
+
+    DECODE_PRINTF2("%04x\n", (u16)ip);
+
+Signed-off-by: Yuri Zaporozhets <yuriz@qrv-systems.net>
+---
+ drivers/bios_emulator/x86emu/ops.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/bios_emulator/x86emu/ops.c b/drivers/bios_emulator/x86emu/ops.c
+index 57422ec3d4..31b52df9bf 100644
+--- a/drivers/bios_emulator/x86emu/ops.c
++++ b/drivers/bios_emulator/x86emu/ops.c
+@@ -4200,7 +4200,7 @@ void x86emuOp_call_near_IMM(u8 X86EMU_UNUSED(op1))
+ 	DECODE_PRINTF("CALL\t");
+ 	ip = (s16) fetch_word_imm();
+ 	ip += (s16) M.x86.R_IP;	   /* CHECK SIGN */
+-	DECODE_PRINTF2("%04x\n", ip);
++	DECODE_PRINTF2("%04x\n", (u16)ip);
+ 	CALL_TRACE(M.x86.saved_cs, M.x86.saved_ip, M.x86.R_CS, ip, "");
+     TRACE_AND_STEP();
+     push_word(M.x86.R_IP);
 -- 
-Tom
-
+2.39.5
 
