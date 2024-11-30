@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F42D73606
-	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 16:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE60D7360B
+	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 16:24:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7287C89645;
-	Sat, 30 Nov 2024 17:23:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 093D589665;
+	Sat, 30 Nov 2024 17:24:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="brYBOmT3";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kTLMOEfY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0626D8964B; Sat, 30 Nov 2024 17:23:53 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 402ED8965E; Sat, 30 Nov 2024 17:24:29 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7392E89642
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 17:23:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 192D4898AB
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 17:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa53a971480so413071666b.1
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 08:23:50 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa52bb7beceso313097366b.3
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 08:24:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1732983830; x=1733588630; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1732983864; x=1733588664; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p5p5r1QxiZzG9FhQTzFwbGgh/19FbmBIrNGfIQfDpHk=;
- b=brYBOmT31hzTU+VXmqFL/BMTJvYO7mwCfb2NJ3AyGb2cq7hMNiiWs/JgaeexUGMU6c
- F7f/9NAfvlixes2O2xQyaR2ObajQCtHin+aFp6tLGHFOtJNO+Lp05xHiIIYLA5JTce8o
- 2z5tB6KUGwEQLdvWrhQZyyzm9dGhxPVZ4rb2U=
+ bh=4lAl0l9BnBzcGcc0rid0dZSYEDLOaPZ7GCy7bxPrVy8=;
+ b=kTLMOEfYxLdGbLygsGRA1+5HSekPxlm0LizyM8HCvq5ZgsF93dRyyx11h7/Clg6+W/
+ m14NvQiamVV0UlaCg8S4QTRb6vPaXfye9gNNpMYVfeMeigvMDt4tWiEq7G9U1YBsc+Bx
+ a3zZ+h/9JA83XmzqnN7rpY67jc74PxL26lRI0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732983830; x=1733588630;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1732983864; x=1733588664;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=p5p5r1QxiZzG9FhQTzFwbGgh/19FbmBIrNGfIQfDpHk=;
- b=vZOf0HW6VnAijtflv9ljABfYX6l4xNSweL5KaHYPjAq5CUZJduSE4RnkMnAk/M5gJZ
- TF7yVErjWOf7IRIIdhgeX5SB/Q8ybM5fmj4ghN7XxhRAaFQqyhnO9aWo+ZA0ZMibverP
- zB7siVrCZ4O96LvJP6Iud3CAmdSE77cl13kOfR2WM4naQRbsYiwtkUJYX4q7PrkAXmbU
- k8UFIK6bimUxNvsLJBvR/zApbqrPh0J4Qa2nZZcSzQFDoIqZPijVrkGAKr18aHOLqyNI
- LRaDXahXgSRtRk1IfpYhw4MpSbgnYHDA15hinGNCuWOaBhVIoLeua1U/mZQtdfEaGMey
- 6i4g==
-X-Gm-Message-State: AOJu0YwYd83+shcXUC3FyJ1c97rjjtDy/IsH/yeomNd1ztEk7CBvbY5t
- gch10JPLpcGD5EQLcTzJBmr8jO7+XYHv7W6b2lRcCXLcOluz5vDVylPERo6Fcfezcj0Ku7SLKtZ
- gCotn61yvlDp+Z8nw1Pm2zig94YklMGSBdlF2
-X-Gm-Gg: ASbGncv+ZIRQIh+gb5afrs5Hq8kqq0JeoFA+UDEtks8v1aZC87LQhMZmhuqQR4WZ3Pz
- ckSnm+386yDYlKF+As7JbA4m5eU2EbY0=
-X-Google-Smtp-Source: AGHT+IGnAsU1fhFwXOZxfvCkwalZFU4hE/HHOuWAcI/0TrwPPjKBQ+IEX0mi+OKmUudfLYLdNbos4LMieiOJ7G4cDRs=
-X-Received: by 2002:a17:907:7713:b0:aa5:cec:d504 with SMTP id
- a640c23a62f3a-aa580f57d8dmr1453206566b.30.1732983829615; Sat, 30 Nov 2024
- 08:23:49 -0800 (PST)
+ bh=4lAl0l9BnBzcGcc0rid0dZSYEDLOaPZ7GCy7bxPrVy8=;
+ b=XUqo6NnLu5kXwL1vTvz0MrrAbt3pAvyE9ZxmvwEpfPTy7Iubqy+h+5AwUfazQZ0nLp
+ eGBLMdZ+i+bl+SHFaNqNwSKuzCluHjQsaSWl80z160SmSxO1vP5Dohl7X0zXUy9xaci0
+ Omqk5c9AVRBV78u7V4QYl+rVBeCJUqgJslYcRJ0MIpj+QWIz/Mx3adso/hfoOSI0Pm4B
+ MSKBPcmk1Kv+4AbPPngE0C40ER6nVIQ3ZWUwyiGHCNScJRjdQTXion3A7WwK4WJ5Pcw8
+ MZhXEXLlYgGE4CblqdINhOA/xDi593mPWunoAdXdLH9pGn9ufm/Yx/vAXjS50QA+GMGX
+ 7OWw==
+X-Gm-Message-State: AOJu0Yy3IodNjZkui6A3F1LQBsCF/EPN6p1tkxSde5gy2G8I7fzwTzWb
+ ORtkpaaG9f5uK77l9U1wMV9BV+MXoTmVlvs8vxD/TdSY/UEoH6FfaYCNJkD0t6Ip3mAx+X28BS8
+ kcjrYhMwJUZBPURQniOweap7Ije/H+L9QIsRX
+X-Gm-Gg: ASbGncvwIjOMyQoiT4EY7bfLx8ENmMWnolzIEANNLj+59vw1Y1eawgN2Zbqrj0VMuWg
+ 8muRKngibv6/yYJpUfuV7EIjrhxGGWb0=
+X-Google-Smtp-Source: AGHT+IF2i4hDsvicX2oqBFSrxZgI+4sG1qzC9IujOGR5jCDWnND14wpeZsR8V5hjK+zYu5Uko+ikXPiYUU+REeD6V70=
+X-Received: by 2002:a17:907:6d19:b0:a99:eb94:3e37 with SMTP id
+ a640c23a62f3a-aa5810634f8mr1693252966b.58.1732983864432; Sat, 30 Nov 2024
+ 08:24:24 -0800 (PST)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Sat, 30 Nov 2024 08:24:23 -0800
 MIME-Version: 1.0
-References: <20241128160011.780550-1-sjg@chromium.org>
- <20241128170148.GF3600562@bill-the-cat>
-In-Reply-To: <20241128170148.GF3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 30 Nov 2024 09:23:38 -0700
-Message-ID: <CAFLszTiBVSesnU456t0rko6W_vEy+BtR-zQfhuoVs-Q1pHC1uQ@mail.gmail.com>
+In-Reply-To: <CAFLszTiBVSesnU456t0rko6W_vEy+BtR-zQfhuoVs-Q1pHC1uQ@mail.gmail.com>
+References: <CAFLszTiBVSesnU456t0rko6W_vEy+BtR-zQfhuoVs-Q1pHC1uQ@mail.gmail.com>
+ <20241128160011.780550-1-sjg@chromium.org>
+ <20241128170148.GF3600562@bill-the-cat>
+Date: Sat, 30 Nov 2024 08:24:23 -0800
+X-Google-Sender-Auth: pD9B88yPK3Ag4fHLZ-CgMkugr74
+Message-ID: <CAFLszTgPhq6vQQ_gZ6MAjA_jn0vxBGUx-tZmAE+KEN+rH+3Cgg@mail.gmail.com>
 Subject: Re: [PATCH] CI: Add gitlab tags to builds which can use all CPUs
-To: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -143,3 +148,5 @@ Simon
 
 [1] CAHFG_=USRrEytULOdnezrCmeAcV_KGO7M=ieWCoi1mCzHwmHRQ@mail.gmail.com/
 https://lore.kernel.org/u-boot/CAPnjgZ0Gj==Q-YOU+EoD=s3h25Waw5EYa0DEOD_comoAy_bRMw@mail.gmail.com/
+
+Applied to ci, thanks!
