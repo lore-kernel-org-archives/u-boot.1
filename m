@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04B8FD735F3
-	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 06:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E1AD735FE
+	for <u-boot@archiver.kernel.org>; Sat, 30 Nov 2024 11:01:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB52F89435;
-	Sat, 30 Nov 2024 07:14:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C5C9988F45;
+	Sat, 30 Nov 2024 12:01:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WpoPPhGK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A2ofPqUm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 136DE894A5; Sat, 30 Nov 2024 07:14:05 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 0DD9C8945B; Sat, 30 Nov 2024 12:01:52 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DE4589270
- for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 07:14:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4752688F24
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 12:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-6eeca49d8baso20164157b3.0
- for <u-boot@lists.denx.de>; Fri, 29 Nov 2024 22:14:01 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-215666ea06aso1329295ad.0
+ for <u-boot@lists.denx.de>; Sat, 30 Nov 2024 03:01:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732947240; x=1733552040; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TZvH2tpUI/7nlkMQTQgLKkfPGdHNy6OspG9aCogtJzM=;
- b=WpoPPhGKp9eNH38mT7KNMbIRBHwNGO6RJnvY3dJ1kXoNrh+4bVZcU3J6hP01N0aU0W
- s5SCNDS7SEfBwqfNlxQhSYdaf6f+uJi6iNvQRU1/0UnhnBHYhvstm+7P5XD7y5S8rbLI
- hCobLiOqKit9eHiBdiY9wtIEL5mRWZYy0C0QDtWTK0Mi8nXNGyH7Vnm/v1PrGuGr0UUL
- /A2Sv3wH+jTWpJahNzUeJw5rdLTnT/Tyv9Xg792o3qnBCoAR5h4SK62WnOd5lCQamUUI
- kBGiGNpOo//2xNJaVaMHl7z4gBgcEczmCiQWFD8+8Ddm87e0FjswNTVSaX196GFYWz6u
- T8Tg==
+ d=gmail.com; s=20230601; t=1732964508; x=1733569308; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8X7pHcN6AgMrb7+wXSYzp7N/hLPXxoAFPu9nHYCzXqs=;
+ b=A2ofPqUmnL2Vp28luvOJKe6/flaAGlvJZrRryGUHrqDhSTw3l1MlrBHgO6meJSw2B/
+ srivzZyjxS9LKd0qVYXzio2xnlHiCzdDtha9PXbwI5yvTgPbIyAfaKZHduC76pfbYWHv
+ Ql9QNWWqYQYkwoCYS5HBa4nLnIG+9kN3TDS3mDkTWCyDEav27xEpYgSXXqmEH5XL4WeR
+ 0ZR6inH+G/M1Coy//2eqdgg6gzAOqVmkXq01KfI2ZUf7+gbA1ae4ezIIAJHfiMrobJPG
+ LwFz72pSzZihvTedeW4Z+pFex+Z921AIfpdX+kjI/Kzn1nZT2QNOXxFywXHD5OEYHCjA
+ E5wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732947240; x=1733552040;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1732964508; x=1733569308;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TZvH2tpUI/7nlkMQTQgLKkfPGdHNy6OspG9aCogtJzM=;
- b=qxSy2CgSD+zUxfcQJOm+tgwzovwxLZmI6Fdrt+6w8CnISusyP/kc46jeALCv2aIsxF
- hQ+XXDyMrAngF1jsxlHPVXCN6uCWejb/tyX3+B/gkD+2wswiJi8JLwGL1+ohKl1oPHBF
- sjauV1wf0lB4Ze5KWn6EfywPFtM6qyGYifL6/ZLr/z8yhbFuuV5mXTXdFv5f8D/9LKdr
- o7ttkoyYUFB0Yf1Gt88DlpjH1D1l3xlDSmVUj9Uyv8v+IhLevc5iWg89e5sbwQDzEJ8t
- h5qDzQnAn3PuhLbaMUWT2ku4zLu55NdfQtUNcMj/DC+e/CyCZ8ow6n0AhtemyrVKARBU
- dnGQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXSNhKuSGbNkab0tPBJ4oTqpQPdouSE+0Sfuy/Py02dW8MwwPrjgoaUoWDou7iXHQovPMOdnTo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz02Ol3fimpC3aMKyRdUQU/cbhn97FNkFN0pbtyVjZUeWghML84
- 8HX1vMoyGMLX3ScaMKBEX1jfGTMfmVlMbOAcZ3ORypOAHwx38XaW541P/1CIaaUGfpxBrVQzV/Z
- thOf0ldM29MY1/R652tfRaKpUhwXMa+u7ZQeEIg==
-X-Gm-Gg: ASbGncsXHcGt3pwfrhsaI9ikHCSM6ph/IXyjJ/vr2sBwghKrMWETimfr4ePiRUm/Zup
- 1CtnDnxwexi2nZ0bZIOuS7QXXeKorvQ==
-X-Google-Smtp-Source: AGHT+IE2OHG41XurFiL8SFqh4gUZIQc/pq4CQRRDs/qlvCZX0gEubYwOObU6LC9fn7urz0tbk7ocvhfY40Pbhqlp6dU=
-X-Received: by 2002:a05:690c:4883:b0:6e2:fcb5:52fa with SMTP id
- 00721157ae682-6ef4a0fe282mr97742507b3.9.1732947239807; Fri, 29 Nov 2024
- 22:13:59 -0800 (PST)
+ bh=8X7pHcN6AgMrb7+wXSYzp7N/hLPXxoAFPu9nHYCzXqs=;
+ b=TyXQVR0NIJasaza0UqLlBUxmCIBgRRx8DNpjPRON+9PDv2cYB9cVdTxgoGt1zsmXP1
+ 1FqME0RYg3VWwwoYOkSEKc8csFeqfKBvEtdykrIb44tcSY9kTrvq9n1u1JquY6LW66Iu
+ bmuzSwOaPFgKjFTfszVy5uWCFHz4qEtU5NcoC7+bcuqm+Ut/abgaroCR8Yx0vasNnMpJ
+ HoEImwoZ1+6GQE+oXXb7v2mnrrGePGJITGsI17RBveq7Gha6NeAxHK9yMcsGTw+ZzoKV
+ 9gtRk7ZikMwOTFStnjtouBLuCeZWQPf0sP+aDdPbXbpwr6J1NFUDsbwOwUi1s5zA6pYf
+ sfPQ==
+X-Gm-Message-State: AOJu0YxfgAhCg+4rwe5u92hfQaseymK424b/8Hvvby2EnTN6VHjam+pg
+ 02JZHzHN7/MowzadLOwRdg+veSlSK/hUoXKPboMk31psvQDh3sv3Qn8O1A==
+X-Gm-Gg: ASbGncuoq528xMtPzvSp4tGko9sT86dPw77D9eWTvLpLKVPlTKvvh9z+XBw/885kdmp
+ ktjN+Kr9vg17USqP9cbTVoosUdJXWBREpPm5G3XDa1RIWoH9+iPAW0w0HMMNKl8IOpRt6TSXKh+
+ GTyrLkKo7wLQdJagL5X9j4A+ehseFj/M6lFtw5VpC0e7ScROR3efL7b8qWDPNYTfOlRUUxdb5Pn
+ J8NQ0YtDiLv9hVXEiHXKh+fy0YKmRdr9ZR9mE7nEKA1W3WeKu8mCQDO+2ymBxWC
+X-Google-Smtp-Source: AGHT+IEiVp0XoGXOKMAU4VoE+b0NrXTQJVxVpMTHJuUBzsBg5wCkfToLuSdGmGgMg5HMdTLsvVuynw==
+X-Received: by 2002:a17:903:41c2:b0:215:5a82:3f99 with SMTP id
+ d9443c01a7336-2155a8241a6mr30579785ad.22.1732964507626; 
+ Sat, 30 Nov 2024 03:01:47 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:369b:92c1:68b8:393d])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21521969fb7sm44341025ad.155.2024.11.30.03.01.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 30 Nov 2024 03:01:46 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20241130
+Date: Sat, 30 Nov 2024 08:01:43 -0300
+Message-Id: <20241130110143.318222-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241129170814.768438-1-ilias.apalodimas@linaro.org>
- <CADg8p97prO=W-Qx2vqwZCnHFXhLvw2dy69UEB9f2rMH3CNZpPw@mail.gmail.com>
- <CAFLszTixsaUG1LeyWycdER5tU_=9tUpLMt0XZ78P4p8kH03iRw@mail.gmail.com>
- <CAFLszThi51_bB8821kTdk7txP6z+0RpaQ47BFb=UTBkK4Ohpxw@mail.gmail.com>
- <20241130034217.GO3600562@bill-the-cat>
-In-Reply-To: <20241130034217.GO3600562@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 30 Nov 2024 08:13:24 +0200
-Message-ID: <CAC_iWjJPQ9xUY40xsNHZ-7htwm=2uh3YtvWJK=YEjgeA5nyLJw@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: Add U-Boot memory to the EFI memory map
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- xypron.glpk@gmx.de, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,112 +92,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Tom,
 
-On Sat, 30 Nov 2024 at 05:42, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Nov 29, 2024 at 04:27:40PM -0700, Simon Glass wrote:
-> > (Sorry, that was supposed to be sent to Ilias)
-> >
-> > - Simon
-> >
-> > On Fri, 29 Nov 2024 at 15:26, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Fri, 29 Nov 2024 at 10:26, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > On Fri, 29 Nov 2024 at 22:38, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > This reverts commit ("commit a68c9ac5d8af ("efi_memory: do not add U-Boot memory to the memory map")
-> > > > > This code was removed when the EFI subsystem started using LMB calls for
-> > > > > the reservations. In hindsight it unearthed two problems.
-> > > > >
-> > > > > The e820 code is adding u-boot memory as EfiReservedMemory while it
-> > > > > should look at what LMB added and decide instead of blindly overwriting
-> > > > > it. The reason this worked is that we marked that code properly late,
-> > > > > when the EFI came up. But now with the LMB changes, the EFI map gets
-> > > > > added first and the e820 code overwrites it.
-> > > > >
-> > > > > The second problem is that we never mark SetVirtualAddressMap as runtime
-> > > > > code, which we should according to the spec. Until we fix this the
-> > > > > current hack can't go away, at least for architectures that *need* to
-> > > > > call SVAM.
-> > > > >
-> > > > > More specifically x86 currently requires SVAM and sets the NX bit for
-> > > > > pages not marked as *_CODE. So unless we do that late, it will crash
-> > > > > trying to execute from non-executable memory. It's also worth noting
-> > > > > that x86 calls SVAM late in the boot, so this will work until someone
-> > > > > decides to overwrite/use BootServicesData from the OS.
-> > > > >
-> > > > > Notably arm64 disables it explicitly if the VA space is > 48bits, so
-> > > > > doesn't suffer from any of these problems.
-> > > > >
-> > > > > This doesn't really deserve a fixes tag, since it brings back a hack to
-> > > > > remedy a situation that was wrong long before that commit, but in case
-> > > > > anyone hits the same bug ...
-> > > > > Simon sent the original revert in the link, but we need a proper
-> > > > > justification for it.
-> > > > >
-> > > > > Link: https://lore.kernel.org/u-boot/20241112131830.576864-1-sjg@chromium.org/
-> > > > > Fixes: commit a68c9ac5d8af ("efi_memory: do not add U-Boot memory to the memory map")
-> > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > ---
-> > > >
-> > > > Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > >
-> > > > Like you mention in the commit message, I don't think it warrants a Fixes tag.
-> > > >
-> > > > -sughosh
-> > > >
-> > > > > Apologies for sending v2 so fast but we need this in for the release
-> > > > > Changes since v1:
-> > > > > - reword the commit message and fix spelling
-> > > > >
-> > > > >  lib/efi_loader/efi_memory.c | 11 ++++++++++-
-> > > > >  1 file changed, 10 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > > > > index e493934c7131..edd7da7d8c6e 100644
-> > > > > --- a/lib/efi_loader/efi_memory.c
-> > > > > +++ b/lib/efi_loader/efi_memory.c
-> > > > > @@ -814,7 +814,16 @@ static void add_u_boot_and_runtime(void)
-> > > > >  {
-> > > > >         unsigned long runtime_start, runtime_end, runtime_pages;
-> > > > >         unsigned long runtime_mask = EFI_PAGE_MASK;
-> > > > > -
-> > > > > +       unsigned long uboot_start, uboot_pages;
-> > > > > +       unsigned long uboot_stack_size = CONFIG_STACK_SIZE;
-> > > > > +
-> > > > > +       /* Add U-Boot */
-> > > > > +       uboot_start = ((uintptr_t)map_sysmem(gd->start_addr_sp, 0) -
-> > > > > +                      uboot_stack_size) & ~EFI_PAGE_MASK;
-> > > > > +       uboot_pages = ((uintptr_t)map_sysmem(gd->ram_top - 1, 0) -
-> > > > > +                      uboot_start + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT;
-> > > > > +       efi_add_memory_map_pg(uboot_start, uboot_pages, EFI_BOOT_SERVICES_CODE,
-> > > > > +                             false);
-> > > > >  #if defined(__aarch64__)
-> > > > >         /*
-> > > > >          * Runtime Services must be 64KiB aligned according to the
-> > > > > --
-> > > > > 2.45.2
-> > > > >
-> > >
-> > > Thank you for digging into this. It is helpful to add more things to
-> > > the commit message, but please redo your patch with a 'git revert' so
-> > > we get the correct subject and body, as my patch did.
->
-> I don't have a preference about the subject, but the body above is
-> correct. It says "This reverts commit ..." and then explains _why_ we
-> need to revert it.
+Please pull from u-boot-imx/master, thanks.
 
-Yes, we agree and although we are in bikeshedding territory now, I
-don't mind sending a new one with a changed subject. Just let me know.
-In any case feel free to merge this as
-Revert "efi_memory: do not add U-Boot memory to the memory map"
+The following changes since commit b51b97e9be1c0674345497a173e7b693866985f3:
 
-Cheers
-/Ilias
-> --
-> Tom
+  Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2024-11-27 07:34:17 -0600)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20241130
+
+for you to fetch changes up to 4835efca7a004fab62853f3e6bbd2854d1df503b:
+
+  ARM: dts: imx: Enable PCIe and NVMe on Data Modul i.MX8M Mini eDM SBC (2024-11-29 09:20:47 -0300)
+
+u-boot-imx-master-20241130
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23643
+
+- Make DRAM coding GPIOs available before relocation on Data Modul
+i.MX8M Mini/Plus eDM SBC because the DRAM configuration GPIO straps must be
+accessible in SPL and before
+relocation because the GPIOs are sampled both in U-Boot SPL as well as early
+on in U-Boot proper.
+- Pick safe DRAM size on failure on Data Modul i.MX8M Mini/Plus eDM SBC instead
+of failing with hang() or panic().
+- Replace YModem with SDP on Data Modul i.MX8M Mini eDM SBC SPL since SDP
+is much more flexible.
+- Deduplicate Data Modul i.MX8M eDM SBC defconfigs.
+- Perform plain boot in altbootcmd on Data Modul i.MX8M Mini/Plus eDM SBC.
+----------------------------------------------------------------
+Marek Vasut (6):
+      ARM: dts: imx: Make DRAM coding GPIOs available before relocation on Data Modul i.MX8M Mini/Plus eDM SBC
+      ARM: dts: imx: Pick safe DRAM size on failure on Data Modul i.MX8M Mini/Plus eDM SBC
+      ARM: imx: Perform plain boot in altbootcmd on Data Modul i.MX8M Mini/Plus eDM SBC
+      ARM: imx: Deduplicate Data Modul i.MX8M eDM SBC defconfigs
+      ARM: imx: Replace YModem with SDP on Data Modul i.MX8M Mini eDM SBC SPL
+      ARM: dts: imx: Enable PCIe and NVMe on Data Modul i.MX8M Mini eDM SBC
+
+ arch/arm/dts/imx8mm-data-modul-edm-sbc-u-boot.dtsi |  25 ++
+ arch/arm/dts/imx8mp-data-modul-edm-sbc-u-boot.dtsi |   2 +
+ board/data_modul/common/common.c                   |   3 +
+ board/data_modul/imx8mm_edm_sbc/spl.c              |   6 +-
+ configs/imx8m_data_modul.config                    | 221 ++++++++++++++++
+ configs/imx8mm_data_modul_edm_sbc_defconfig        | 267 +++----------------
+ configs/imx8mp_data_modul_edm_sbc_defconfig        | 291 +++------------------
+ include/configs/imx8mm_data_modul_edm_sbc.h        |   2 +-
+ include/configs/imx8mp_data_modul_edm_sbc.h        |   2 +-
+ 9 files changed, 326 insertions(+), 493 deletions(-)
+ create mode 100644 configs/imx8m_data_modul.config
