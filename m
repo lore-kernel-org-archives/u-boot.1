@@ -4,89 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DADFD49779
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF03D4977B
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 17:16:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1DD894C0;
-	Sun,  1 Dec 2024 17:48:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 14CA58917A;
+	Sun,  1 Dec 2024 18:16:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NeQMbIsC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qtq0jhU3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFC4C89515; Sun,  1 Dec 2024 17:48:21 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 162D588DDD; Sun,  1 Dec 2024 15:43:01 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14F6589137
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 17:48:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 174C28912B
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 15:42:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-46101120e70so29949301cf.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 08:48:15 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-84197c469cfso105412539f.3
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 06:42:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733071694; x=1733676494; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lSZlxTDzYcr4AehiRRBM5x6VQ7ZAy8WGraz3qal+T3M=;
- b=NeQMbIsCMSvLbGtb7x2JwMe6H6x+j73EpPgtJ6q13rXXUNkbL+kTRJXUPw2ZofT/Kg
- Ksy+r4ejMmL6jqqkng6lVrijpAgPbAJBMGILGULjP5Meol0kshDg0OzWWz0huKX4C9vQ
- zhSCeRuBLikte5uKSYJqZw3Uwbpr26ZCfTq0g=
+ d=chromium.org; s=google; t=1733064169; x=1733668969; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7GlhtUW98LWibsgqEumMxFcYaXCFPVLCF9AXXPK+p6A=;
+ b=Qtq0jhU3QrbZ5VziSmfs1QccxwcfNQNmor35xN8mKfbjTXMRdP4wia8f8gwjVnQw4u
+ WO3itTi/r5Zy/09+qd1Oqx86iTm5MZFD1iOIaa/BORwBRbigRviF14lhS3qSAaeDUB6y
+ E7zvJcE6lY3nWWEXHQDvzBd7asOtVpCdMlTq8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733071694; x=1733676494;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lSZlxTDzYcr4AehiRRBM5x6VQ7ZAy8WGraz3qal+T3M=;
- b=UZ0t2PjG4wSLpTBvSnfn5agObjNf8geuzAQTPXnLfSb919wqK13HfDg1sZ1dwuWkcZ
- qMpes7HzR0WHnJqUgDAEX4dSrmwE+LuAjUAUH+/42PGKbaCsdAmZBCkQYR4eA3khfrOQ
- 8U2GSY8nyyscoyjQWxL6JlB2fm3xsUQdaEuHB6AdPoz0YRqrzxfX/OxKtwDwe7JwXUwq
- B4Czmca/5ZEPMtpas1XnGjyxB6ojB1cte1+k/EFQH/P1Ia9bfSEXi0X8fc0ZbIIMNopE
- hYTfBgaREe6kEQovEL1OFPrxejqWE/1C3z/6v2SBalZeoy017Go8iGfWZyf7UvmVq69d
- +kKw==
-X-Gm-Message-State: AOJu0YxXraaFDdnUH/YyYfp20OurDObfOtQe4lNprMHRvmGMkFIOxC5u
- A5vKZVU34SrWXBmEMHj62EuJGtj9qzQyxW5INwjLV6znE+TI5mKQLOfvJccc3fs=
-X-Gm-Gg: ASbGncuq7cVSRhFk57SdFFWPOTusECzNUtZMo325O3Hi8HjRbGHwBKV/c086Kwg5wOF
- hLkRZcPx0ep4gTtwyRKSM/kpQG8TgNiuuQXt/SzrXHkFz3UsD29t9mCWp+YtTDS5SbAHtbTCWnw
- vBLrgv/9nIq/zMeWoPfwigm5i/BHO10H3Nw1SURrz8nD5E1bsakhnvVGo+S7qFdyhbCaS0y95WA
- 5402S/Wh9qh2KTqNxTIB9QUmd90mdareX79VkrmMjyq0XadBQ==
-X-Google-Smtp-Source: AGHT+IFx/liXOTS27NmFa8CvxskZVpJANjR+dwSaezW4zACzVYxBuT68w8QawTloPkxgcqwEBe34aQ==
-X-Received: by 2002:a05:622a:353:b0:460:e63c:8f6d with SMTP id
- d75a77b69052e-466b36938d8mr405083431cf.39.1733071694664; 
- Sun, 01 Dec 2024 08:48:14 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466c407cf18sm39192231cf.43.2024.12.01.08.48.12
+ d=1e100.net; s=20230601; t=1733064169; x=1733668969;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7GlhtUW98LWibsgqEumMxFcYaXCFPVLCF9AXXPK+p6A=;
+ b=T22FMiTZVzinvMMoyjbJIFA5GNG6lDQHtREXEuNF1+1ebxxoyI/+hHa+6YVGdwiaIP
+ NDvUUQ4IuF9iq+vDCqxot4seHuzZ8aA7/vteWAZDU6nAvy4JDJiAJigsUHkN/X+pUHV9
+ 0yageq3on4sAvLvxlZlVtvbvpmNHU0gv+N2pfcFvxHqyDV3MjWadi6/Wh2S6jIBQ6n62
+ na+u8bpNc5PfgaHFVAhlhVOfv1WcNuGRWCIhoRIKmGEXq1ORUtIoo2uProXRZNw9E+T5
+ 3f6YQt/LZvTIb532tKy7cggggyudZU685Cm6LdwF8pEihKt90tOW2huYVPB60Z5krJZH
+ s8tg==
+X-Gm-Message-State: AOJu0Yyvr9Ko+xYKXSzl16ygEwsfPSNp0qqS4xlSbzT2BykR6hdjehS/
+ hCEvkrFw1h8/fJCMNcmnQZKg9Iu/5i471QId6cQgMVsY13vpW1X6zmbddvPrVUmueO6s0HLcgFc
+ =
+X-Gm-Gg: ASbGncvT+UIemQfZQ4wtTIa6W8HdVUgvg+gjQahdmLxoNduQIYgvh1BS+ECBY7UOZft
+ +OWvA3ghGhCSAf9L6EJCoXz4yjLwmPuGSrkBYytlG/kI1ETwi2HLXyBqNuff6WB5mSL7DjAxUTq
+ +w0Z5IRKwEzACXkqK/Pd9sAmvwiHt9dQ60SqprEMhArBP3g3i/MaMNoGb5ywdlC6udmpoYqy051
+ cpqw7oKHWkjKB1CizyQ8cffaRf+VYEIAYdiXIg9uAUO
+X-Google-Smtp-Source: AGHT+IGQVNHgXsYsTV09vH7Og3kDTu6vU/IxP1cPbEZtSiMrOZMgAeUMdjgfBxE4dgdsXgLcljiAXQ==
+X-Received: by 2002:a05:6602:140f:b0:841:a80a:f536 with SMTP id
+ ca18e2360f4ac-843ed0253e2mr2151063639f.14.1733064168900; 
+ Sun, 01 Dec 2024 06:42:48 -0800 (PST)
+Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-84405ec8755sm160826839f.17.2024.12.01.06.42.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 08:48:13 -0800 (PST)
-Date: Sun, 1 Dec 2024 10:48:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sun, 01 Dec 2024 06:42:47 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek Vasut <marex@denx.de>, Paul Barker <paul.barker.ct@bp.renesas.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
  This contributor prefers not to receive mails <noreply@example.com>,
  mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 5/8] fdt: Allow the devicetree to come from a bloblist
-Message-ID: <20241201164810.GT3600562@bill-the-cat>
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-6-sjg@chromium.org>
+Subject: [PATCH 0/8] Reverts and fixes for board failures
+Date: Sun,  1 Dec 2024 07:42:28 -0700
+Message-ID: <20241201144240.1664398-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kydu8/VAnFJyV7Ue"
-Content-Disposition: inline
-In-Reply-To: <20241201144240.1664398-6-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 01 Dec 2024 18:16:49 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,73 +117,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series collects together a set of reverts and fixes to get most of
+the boards in the sjg lab running again.
 
---kydu8/VAnFJyV7Ue
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Unfortunately three of them have developed a failure which requires more
+diagnosis, as it may just be a hardware failure.
 
-On Sun, Dec 01, 2024 at 07:42:33AM -0700, Simon Glass wrote:
-> Standard passage provides for a bloblist to be passed from one firmware
-> phase to the next. That can be used to pass the devicetree along as well.
-> Add an option to support this.
->=20
-> Tests for this will be added as part of the Universal Payload work.
->=20
-> Note: This is the correct way to deal with bloblist, since it allows
-> boards to choose whether they want to use the devicetree from there, or
-> not.
->=20
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20231226094625.221=
-671-1-sjg@chromium.org/
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20231228133654.235=
-6023-1-sjg@chromium.org/
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20231228194725.248=
-2268-1-sjg@chromium.org/
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20240104014919.413=
-568-1-sjg@chromium.org/
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20230921015730.151=
-1373-31-sjg@chromium.org/
-> Link: https://patchwork.ozlabs.org/project/uboot/patch/20230830180524.315=
-916-31-sjg@chromium.org/
+For coral, the TPM tests fail, but the board is working, so this can be
+dealt with separately.
 
-You should
-%s#https://patchwork.ozlabs.org/project/uboot/patch#https://lore.kernel.org=
-/u-boot
-all of these Links, aside from shorter, it's on much more broadly
-distributed infrastructure. And this is a general comment as well.
+One remaining issue is that I am not sure what happens if two people try
+to run tests at the same time. Tests run as the same user so I need to
+investigate how that is handled.
 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  common/bloblist.c                  |  1 +
->  doc/develop/devicetree/control.rst |  3 ++
->  dts/Kconfig                        |  8 ++++++
->  include/fdtdec.h                   |  3 +-
->  lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
->  5 files changed, 46 insertions(+), 13 deletions(-)
 
-The rest of this, I need to think on.
+Simon Glass (8):
+  CI: Drop extra condition for sjg lab
+  Revert "power: regulator: Trigger probe of regulators which are
+    always-on or boot-on"
+  Revert "fdt: Correct condition for bloblist existing"
+  Revert "fdt: Allow the devicetree to come from a bloblist"
+  fdt: Allow the devicetree to come from a bloblist
+  binman: Avoid skipping binman_init()
+  Revert "global_data: Drop spl_handoff"
+  CI: Drop broken boards from sjg lab
 
---=20
-Tom
+ .gitlab-ci.yml                             | 41 +++++++++--------
+ arch/x86/cpu/intel_common/cpu_from_spl.c   |  4 +-
+ arch/x86/lib/fsp2/fsp_dram.c               |  4 +-
+ cmd/sb.c                                   |  6 +--
+ common/bloblist.c                          |  1 +
+ common/board_f.c                           | 12 +++++
+ common/init/handoff.c                      | 12 -----
+ doc/develop/devicetree/control.rst         |  6 +--
+ drivers/clk/rockchip/clk_rk3399.c          |  3 +-
+ drivers/power/regulator/regulator-uclass.c | 22 +++------
+ dts/Kconfig                                |  8 ++++
+ include/asm-generic/global_data.h          |  6 +++
+ include/fdtdec.h                           |  3 +-
+ include/handoff.h                          |  7 ---
+ lib/binman.c                               |  1 -
+ lib/fdtdec.c                               | 53 ++++++++--------------
+ test/dm/regulator.c                        |  6 ++-
+ 17 files changed, 91 insertions(+), 104 deletions(-)
 
---kydu8/VAnFJyV7Ue
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.43.0
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdMk0oACgkQFHw5/5Y0
-tyyo7gv/emCB5dty4z99sL3ucQaXHjk/bdxYL1fY0BYThVcEGJ82Mw1wodPTx/4g
-QUQiiJd1OYiiwUgLlwf3a7wKN2/o0tS6weYBXQv8yKNTwCWlcSJtWhHVBPp1gpYh
-YPmRuQy5G4A8FVfaZ0LBcunvLE4cd6oPzVltCCp3PTa0HgwyN4zqaX1cfTMyG7nK
-5zPKA+WVIA5Yk7WmA+x8nK7I88rYH0DgEZdZaJUEx/H4iWg4ZXmPGC3QfzCBl1WY
-9yunUv4lf7ILAnGRp4oB6NHPEj/oet1xE34BeOqhITtr0LqZvH5+BHUskIx4Swmu
-Joj9UzC95NWeBCJ9ovzNKBDeBDqtk9p24uWh8nM7Ie3hifj9a5kQBBSBnLT5wWA5
-DFVlzWoWoB5plYRsnrkS90wtWk+srkcdFywHYWxaWRDRIhjfO575sx3jSFJw0WYB
-Yr8cy/+Vuop+ClzsNDlFMPexGwMcgwNcgqFx3QApkdcaGFOIzTxuUUHy9ilQUpmP
-N3NEXmoZ
-=GYgV
------END PGP SIGNATURE-----
-
---kydu8/VAnFJyV7Ue--
