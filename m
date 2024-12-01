@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD35D49776
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4736D49771
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5595989471;
-	Sun,  1 Dec 2024 16:25:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21C0D89613;
+	Sun,  1 Dec 2024 16:25:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BqWMz1hl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gxr0ceJ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C7D3894AD; Sun,  1 Dec 2024 16:25:29 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 0FD2089610; Sun,  1 Dec 2024 16:25:52 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8234689432
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2685A893C2
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-84198253284so111248239f.3
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:23 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-841aa93433aso109740739f.0
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066721; x=1733671521; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066747; x=1733671547; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tw/Po+MoVeCInPVatEY5bglYg4JQ8jM92Mt/Y0ope/E=;
- b=BqWMz1hlW3PyPluYJo9T9SK7Vu4E3zCzRazrVP337Vg6/vEcVIsVqYao3G40vvfHaT
- uBsEr7+AXilo4W3xN9eYOW3HmvstfXx3hxaNL0lmBJkguxTHSXtopGGcqG4dY7wBr5Ap
- HV++0LLIZDTOwThi7GLSJ8OZTwp39tlZxBwaU=
+ bh=G8jc5CRegbUmx/vnisYl4VtZDIY1pXlrRot/VyiKtAs=;
+ b=gxr0ceJ2gHTWsa5B+YHS/YIe48m4ZSoNZh6zdN4ofbEVAcSCTimmuw1H+fXeiwrZ68
+ wKM0LtuWYxPG3FPNBmqSujaW4xt2d/75GwAuQpo4FTxvidJvytH7oL2nueoNI76x77Kc
+ 7xsIlOZpUiKMgBM8jMbgBxeEsUmFg9Mt/H7hA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066721; x=1733671521;
+ d=1e100.net; s=20230601; t=1733066747; x=1733671547;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Tw/Po+MoVeCInPVatEY5bglYg4JQ8jM92Mt/Y0ope/E=;
- b=ZRHP23GBxzeY3ZcRcz71C04zwv+xKT+0+3j+p05ctI8kc6dZJiGRfLLXKVMYzxOSiZ
- Eo4S/ri8V0i8izmWzhWTvqKbG8YrY3vcwafBG2ijAwZGktqJWZwQ0XJC52RT6L2DxBvd
- tZP5mJ9dLMOrggUcfBaZOPqtRTAyDJ5cJH2LVal/O10OwF341IbLtlVHfvHWrIFUCtXG
- J2J/XsjOP2nwLjQqP7lGe/KjyOl+csWJk4SXwSPsZNO4GpAFLaZvAMraEM4zyDJlZ3Uq
- 1SgUnQ6oAF6pzBM/kDj1qL9fRuVyZusMU61j+BKisvNsvLKy9j3zU8RGc4bk0hEJXf4s
- 4QUg==
-X-Gm-Message-State: AOJu0YwRY/9X/ZkWAxTR5T4nHSKaitdPilUoE+ihT/AqYS5EJz6DBQfs
- 8TTtOVOMnKwiZJ0ScWCV0+hpCeoTE6D1J0ZW7KQUfehp3EjcKwwEjLKWytiMBGxtqV7FRfY+4TA
+ bh=G8jc5CRegbUmx/vnisYl4VtZDIY1pXlrRot/VyiKtAs=;
+ b=Xv856tkCbz7/qVQUT8IUCHJTq395bM43Qm8y0bEahMsuzAgvDdcQlHPuQYOxWSSFDg
+ PCpWBShg8akhqIgUHKN4IAYDNw7sDnkX7rFu/aXXGkHkRiup6nYboAbEpR9awWceg6S7
+ U9qDuWuF1Xvxc6UwsP885kNK7+xrd/BREZ1/ZrZWEHc6TyWdk7jjvrcsyfYzdoKxAKCf
+ uBDsXD52S2QDfue7M8Cea9JSPs4FNaZErPd+9np1cuvl2Qadm6dzIOFuvcOgvMTCoMyk
+ Ay8fxqx1byvvia4zs7A11VXAXZs6wCsGD4RKOf/ZBU+4C6qtgpBO+84k+h9eqagJrl25
+ FI/g==
+X-Gm-Message-State: AOJu0Yyo3UEGNHttgNBgs2v/gmj1gAbMtqwVeg0HwbhnDBA4teBFzBxh
+ 7BpuFTd7B6VJZkJ9ieDzXo/mujaFXTgnlRoIEftynPc+ewdpDLxrl8zT/wNckrvmmmJAaAFOd74
  =
-X-Gm-Gg: ASbGncuyMSYIQU5yyVx9McuRypwx7RolnbgI5lZ4hrb6HiqGYrsPijobzG5/9LOCHwh
- P8rICVjbV2gxCuEpGKWjqobZtA2uCKgexvWqUJonAGoS8hDZBpHqAv/0D1NTBwG8t7sEuQCAj/m
- 0/XSOz9rcTDYdrMXoD77B8l1ejArsCGg4w4a5xoGelgjh35AvZXQSFU19ZNl5H/o1UF8TYygiZx
- 2CgSrU5furqX67cQ86LCTS/Qu5QZdoS0gwzWvFiioiD
-X-Google-Smtp-Source: AGHT+IGXdkV1woFOtHGW7qrxQP4xlRTfR6YCGqY9RFcBcYaY2JGMmGrqkBfQBYzvi1GKnKHBzRsRfQ==
-X-Received: by 2002:a05:6602:140f:b0:841:9516:4e2e with SMTP id
- ca18e2360f4ac-843ed0b7569mr1821978839f.11.1733066721469; 
- Sun, 01 Dec 2024 07:25:21 -0800 (PST)
+X-Gm-Gg: ASbGncvbmZdX0Bi21HIFPsaS9SLbsI0tCWyCCDXYKggaZab6T0/PZlDgiK9wxdZn3Uo
+ UcR3q2vaPWq1G8PNaz5pLNVVmFG/n+y2LbkkNLMDxywYpPSaVf6X/fSc4YPrNpi9kh91aZaergm
+ 4icpGM9VxJ7laiJyuByoRE7YG63N+SBwSSdJ0v88SEqw1f0I7DKJ6t06+YFIFTZ+YUqVzTrvXR2
+ l+6h4j9y01ohjIf/lgyJ+4ekvzFqDtD7hHM2uCR7KSO
+X-Google-Smtp-Source: AGHT+IFCND154UfA67YpeGGBwCoJKGqQ/Nys4ElI/sgCyAwNsgBHcjfJn+JhIRPF4o6/3nCaXZXhcA==
+X-Received: by 2002:a05:6602:610c:b0:843:daae:e16d with SMTP id
+ ca18e2360f4ac-843ecf9e2f4mr1823081239f.6.1733066747420; 
+ Sun, 01 Dec 2024 07:25:47 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.19
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:25:20 -0800 (PST)
+ Sun, 01 Dec 2024 07:25:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 03/25] efi_loader: Drop extra brackets in
- efi_mem_carve_out()
-Date: Sun,  1 Dec 2024 08:24:22 -0700
-Message-ID: <20241201152505.1666789-4-sjg@chromium.org>
+Subject: [PATCH v4 12/25] efi_loader: Drop reserved from priv_mem_desc
+Date: Sun,  1 Dec 2024 08:24:31 -0700
+Message-ID: <20241201152505.1666789-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
 References: <20241201152505.1666789-1-sjg@chromium.org>
@@ -95,34 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify a few expressions in this function.
+This field is not used. Drop it and set the value to 0 when the
+memory-map is requested.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_memory.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ lib/efi_loader/efi_memory.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index f1154f73e05..3b1c7528e92 100644
+index 518b8cff61d..81e40fc923d 100644
 --- a/lib/efi_loader/efi_memory.c
 +++ b/lib/efi_loader/efi_memory.c
-@@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 			     (carve_desc->num_pages << EFI_PAGE_SHIFT);
+@@ -35,7 +35,6 @@ efi_uintn_t efi_memory_map_key;
+  * internal format is converted to the external struct efi_mem_desc format.
+  *
+  * @type (enum efi_memory_type): EFI memory-type
+- * @reserved: unused
+  * @physical_start: Start address of region in physical memory
+  * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
+  *	bytes)
+@@ -43,7 +42,6 @@ efi_uintn_t efi_memory_map_key;
+  */
+ struct priv_mem_desc {
+ 	u32 type;
+-	u32 reserved;
+ 	efi_physical_addr_t physical_start;
+ 	u64 num_pages;
+ 	u64 attribute;
+@@ -705,7 +703,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+ 	memory_map = &memory_map[map_entries - 1];
+ 	list_for_each_entry(lmem, &efi_mem, link) {
+ 		memory_map->type = lmem->desc.type;
+-		memory_map->reserved = lmem->desc.reserved;
++		memory_map->reserved = 0;
+ 		memory_map->physical_start = lmem->desc.physical_start;
  
- 	/* check whether we're overlapping */
--	if ((carve_end <= map_start) || (carve_start >= map_end))
-+	if (carve_end <= map_start || carve_start >= map_end)
- 		return EFI_CARVE_NO_OVERLAP;
- 
- 	/* We're overlapping with non-RAM, warn the caller if desired */
--	if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-+	if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
- 		return EFI_CARVE_OVERLAPS_NONRAM;
- 
- 	/* Sanitize carve_start and carve_end to lie within our bounds */
+ 		/* virtual and physical are always the same */
 -- 
 2.43.0
 
