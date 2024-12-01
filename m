@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A896D49771
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16690D49779
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A7F7895C7;
-	Sun,  1 Dec 2024 16:25:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C148B894B8;
+	Sun,  1 Dec 2024 16:25:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G31fFpfC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nAGC0rUm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C010894E5; Sun,  1 Dec 2024 16:25:49 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id C882389462; Sun,  1 Dec 2024 16:25:39 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B07C6893C4
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69B518945C
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-8418ecda126so108319339f.3
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:46 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-84386a6669bso139509139f.3
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066744; x=1733671544; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066735; x=1733671535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HqEkALkswr4a5Dgw0P2U4FBtOSFQXhxN38YBTciQcPA=;
- b=G31fFpfC6KeME8St6YGQwCssFYIc7vNZKhTEDr3zb0p/H2biOs3BgTl7RoYelfRyKs
- WX+znqorst8ZoWpXg7y1Emy3W0oS+8VOORIYvl6RV4gxXc+HLfl7DOHpVd9SQj72hnDm
- wQQ0N+tTXLVVS+Yz5nvXSdy423TbS1/O44phs=
+ bh=DmHlpcCp6GCqh3b1woYvfhLdcOPBlyNsqlhmP4GLQNQ=;
+ b=nAGC0rUmB+S/ivv3pYXYmyCSFe3ZZcVofBgPoyMAL/x9uTMpvZ5uJeLpZLxDlhq7Yu
+ XRpgNDa+79Y0zSbncfH6JFqW7Yc9Z+VVIbp2st2Bu2X+ZMU0d9mhXORNf/7ZlK+luJuZ
+ rZKEvUdAkRWUbMuUWU0We7aZtEwhyNrxNOoTo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066744; x=1733671544;
+ d=1e100.net; s=20230601; t=1733066735; x=1733671535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HqEkALkswr4a5Dgw0P2U4FBtOSFQXhxN38YBTciQcPA=;
- b=COE0o26iKJC1awxVSF1ES4PTi3o3uTJK9GScdWj4aTDew3Eo2SMGMicIN8M9BD09/A
- dzm/SmKwAFnuvSjZpsP57jiamRFmfnHDheMF3D24+GRed/+Fmu5vgDEKwa9BEPAtc9O9
- i4RNazNbehvBIflDGjIHBFTE9XheNnO8cu3veYO+FkT5vqIDnrCvvJ+OlK01yZBuuu6x
- VRwxxHT3ags+170WQHZ9DBxdBNYT+Lh5yqyHp9ulCHa88fdKvtykvXCio6aifm21yD2S
- /G4xV8UvBWVKBO7Ybqv+zPoEvS++8PVe4GmexuRREnSY5xnk+a+Z5GAuxzYGW4oqNWUX
- kgPA==
-X-Gm-Message-State: AOJu0YwhHc6/9j9K9U57wli78ZNXRzpxwusHk8sMSWJ2rrwOdbbyFkF/
- T18m7iFgyhBiKbGSq8k0eRln9usW39ZR6wsRuT2zX7fT9upnvZRAcXn90FRLLzn8wxAS69o/hDQ
+ bh=DmHlpcCp6GCqh3b1woYvfhLdcOPBlyNsqlhmP4GLQNQ=;
+ b=HMDOYkrKjULxB7t875LjzRXGiNedvTYOXc6EahRtqGiUvME+VqzpQZ72ljIR0YHpUC
+ IMvXQU0oaTMDtwiv/6EOLtdEqALZn/yUjyqdnT4DpySbYY/68/2cp0sg/lK4TnkCCLNE
+ KDq/o5GZNqDyc4OPJMb/sJ40ihPf9FV3VXuWzaq5if9CFiqxzogsQpkvEXVYnLZDZB5D
+ XhcZYAutHlvpjZ1xblsjyGxadcauQgU2uJDkVGse9S8q5VuLDiaSkfHhD6B95+u05hJ2
+ Tf2FqUl6W34zHLn6dUXk0Du0lQ0bzi7cD/GbnewxdpsjiVv/1ktiA3iTlGRjS2Q59vMb
+ 4RDQ==
+X-Gm-Message-State: AOJu0YyzazcOQuCMKncQWR+4ha8N9NOG23tncYshslU2GAD0TXm5EkGv
+ ja+E/2tSbSTolMh7U5JbPwG909zgYgvoP5uYSZkLg3i9/HF7yRs8AYYH1eR3wYbzsVbs/ZaWNEE
  =
-X-Gm-Gg: ASbGncvUYutUpnL0+NsgsxODbzJjOF7PAmEgiDupT7Q5+yi6UoinYMJFJom1eT33wfk
- XwtgD6Ss7fH/C5jVe8Ikdw39mbgIurVI6OrR03zMau25TVPlwdC28zU6PSHut/6tTc/5mTS0CCT
- il6k3VA1OpwfK7vDmVCRPVBmOW5JH7bUEIJgGpzh8MWCf4QlkmmfS97mEdZaOBtYo/W9juJrDzD
- JM8PxyVnpHzZ6+EyzBvPTVoLnDZfntlY49qHAbkfewO
-X-Google-Smtp-Source: AGHT+IGLZyXr5RXm+xBB2WfmM1f00iLop5BA9J8unpDeps3EVBMMkGKCqXdsRVpElXbDth3MOHrg9Q==
-X-Received: by 2002:a05:6602:1485:b0:83a:bd82:78e with SMTP id
- ca18e2360f4ac-843ed0d5db1mr1773591639f.13.1733066744570; 
- Sun, 01 Dec 2024 07:25:44 -0800 (PST)
+X-Gm-Gg: ASbGnctnT8Vf2Hf3QGYC++rcQ3LxmgQjC+oqC8gPGuMtjjVXx+H02PXJmx6tI7jlrvH
+ ECncEEcYPWF0kq+BVCWUOOA91CuxhAj693Jg81is27hs7UbTwcbh5cY47lZO7rFLGPRjwFSdiAf
+ hWvaZZjWFnTv28zh/D/UMk4RuCM0p/d5OvWwR/QUQDOwkPCKtxJCiWmPaOuw6lViZRxhrcV4AmV
+ 8ULbUV123v+ZVGk0EhxF9bJfy5IVjd6MwFlYzjMIHWI
+X-Google-Smtp-Source: AGHT+IEbxmIBD4hdYnayPCQjKxCQlrOwM8gprNqCbt6wyqPZ6tzjADbF0UpBeHhgmLZ8Isrenrv1MA==
+X-Received: by 2002:a05:6602:3f93:b0:835:3ffe:fe31 with SMTP id
+ ca18e2360f4ac-843ecffe1b2mr1766828639f.8.1733066735737; 
+ Sun, 01 Dec 2024 07:25:35 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.42
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:25:43 -0800 (PST)
+ Sun, 01 Dec 2024 07:25:35 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 11/25] efi_loader: Drop virtual_start from priv_mem_desc
-Date: Sun,  1 Dec 2024 08:24:30 -0700
-Message-ID: <20241201152505.1666789-12-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v4 08/25] doc: efi: Add the EFI-loader API documentation
+Date: Sun,  1 Dec 2024 08:24:27 -0700
+Message-ID: <20241201152505.1666789-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
 References: <20241201152505.1666789-1-sjg@chromium.org>
@@ -94,80 +95,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This field is always the same as physical_start, so keeping track of it
-separately is unnecessary and confusing. Drop it.
+Bring in the documentation from the efi_loader.h header file, so we can
+see the API defined there.
+
+Fix efi_alloc() to avoid a warning.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- lib/efi_loader/efi_memory.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+Changes in v3:
+- Put the header-file in its own section
 
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 9e4158edfaf..518b8cff61d 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -37,7 +37,6 @@ efi_uintn_t efi_memory_map_key;
-  * @type (enum efi_memory_type): EFI memory-type
-  * @reserved: unused
-  * @physical_start: Start address of region in physical memory
-- * @virtual_start: Start address of region in physical memory
-  * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
-  *	bytes)
-  * @attribute: Memory attributes (see EFI_MEMORY...)
-@@ -46,7 +45,6 @@ struct priv_mem_desc {
- 	u32 type;
- 	u32 reserved;
- 	efi_physical_addr_t physical_start;
--	efi_virtual_addr_t virtual_start;
- 	u64 num_pages;
- 	u64 attribute;
- };
-@@ -187,7 +185,6 @@ static void efi_mem_sort(void)
- 				pages = cur->num_pages;
- 				prev->num_pages += pages;
- 				prev->physical_start -= pages << EFI_PAGE_SHIFT;
--				prev->virtual_start -= pages << EFI_PAGE_SHIFT;
- 				list_del(&lmem->link);
- 				free(lmem);
+Changes in v2:
+- Add new patch to add the EFI-loader API documentation
+
+ doc/api/efi.rst      | 6 ++++++
+ include/efi_loader.h | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/doc/api/efi.rst b/doc/api/efi.rst
+index 43d6f936fb0..49814bcf5ea 100644
+--- a/doc/api/efi.rst
++++ b/doc/api/efi.rst
+@@ -54,6 +54,12 @@ drivers, handles, loaded images, and the memory map).
+ .. kernel-doc:: cmd/efidebug.c
+    :internal:
  
-@@ -255,7 +252,6 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 			free(map);
- 		} else {
- 			map->desc.physical_start = carve_end;
--			map->desc.virtual_start = carve_end;
- 			map->desc.num_pages = (map_end - carve_end)
- 					      >> EFI_PAGE_SHIFT;
- 		}
-@@ -276,7 +272,6 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
- 		return EFI_CARVE_OUT_OF_RESOURCES;
- 	newmap->desc = map->desc;
- 	newmap->desc.physical_start = carve_start;
--	newmap->desc.virtual_start = carve_start;
- 	newmap->desc.num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
- 	/* Insert before current entry (descending address order) */
- 	list_add_tail(&newmap->link, &map->link);
-@@ -313,7 +308,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 		return EFI_OUT_OF_RESOURCES;
- 	newlist->desc.type = mem_type;
- 	newlist->desc.physical_start = start;
--	newlist->desc.virtual_start = start;
- 	newlist->desc.num_pages = pages;
- 
- 	switch (mem_type) {
-@@ -713,7 +707,9 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
- 		memory_map->type = lmem->desc.type;
- 		memory_map->reserved = lmem->desc.reserved;
- 		memory_map->physical_start = lmem->desc.physical_start;
--		memory_map->virtual_start = lmem->desc.virtual_start;
++Overall API
++-----------
 +
-+		/* virtual and physical are always the same */
-+		memory_map->virtual_start = lmem->desc.physical_start;
- 		memory_map->num_pages = lmem->desc.num_pages;
- 		memory_map->attribute = lmem->desc.attribute;
- 		memory_map--;
++.. kernel-doc:: include/efi_loader.h
++   :internal:
++
+ Initialization of the UEFI sub-system
+ -------------------------------------
+ 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 00a1259c006..3f75f2efcb6 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -764,7 +764,7 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+  *
+  * Allocate memory from pool and zero it out.
+  *
+- * @size:	number of bytes to allocate
++ * @len:	number of bytes to allocate
+  * Return:	pointer to allocated memory or NULL
+  */
+ void *efi_alloc(size_t len);
 -- 
 2.43.0
 
