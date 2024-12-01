@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2038DD4977C
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5817ED4977B
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:40:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2AC089720;
-	Sun,  1 Dec 2024 17:15:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D477088E00;
+	Sun,  1 Dec 2024 17:40:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S1fIGIMJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/iySBYs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 845988971F; Sun,  1 Dec 2024 17:15:22 +0100 (CET)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 2BECF89137; Sun,  1 Dec 2024 17:40:29 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F7D789748
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 17:15:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 538E088DED
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 17:40:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-724f41d550cso1949868b3a.2
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 08:15:16 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-4668486dec2so25355221cf.3
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 08:40:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733069715; x=1733674515; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8Iaw6siymtTyvi3tG4KsmaPaSng5o1AoXYFtFQOIFtg=;
- b=S1fIGIMJA3gC6Riawd9boNllGQuMfE1Dwil+6UgRHbbwUrOzA528yfZn2981JlOqZk
- 8u7Q7u2ZdC31M8oDD2UW6RiUHGmCm9Mma69xJb95s9ACJR3s0S8NeMDV1H1f4O/M8F8g
- VVqyRBgeAv7BOaOrv+x9XEZ8U8iAhUzbUqBuI=
+ d=konsulko.com; s=google; t=1733071222; x=1733676022; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wdy/LVWy/z2hafsaahrpjdMEqYuzu3f96I7LluCipL8=;
+ b=X/iySBYsP3eMg6o2YLqt74kOKdade+NXpKHnOgdzAbWDL+ncWpOIS2r6V54q6oqoHs
+ AXt0RFlsDHU3H0AATIwr0yWfo/2vWdz9U4p3isJr/hYKRd2IBuzoxhQm+VtxBYC3pWfJ
+ U3kqXA1oWcn4ZD38xzlIm2sRKpMCrUgoaCkHQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733069715; x=1733674515;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8Iaw6siymtTyvi3tG4KsmaPaSng5o1AoXYFtFQOIFtg=;
- b=WVs3NVauqGBueURSrt8z/9OVv4D09onqFv50DFcF+O1IKBiQa6w6Hfb+3iQCgd8QmY
- sZaJrY+e3Ik8gs6xeo8gCOmJRSBGRpRxD9g9Oxp38LHZM7Xb8dZ3pLWK6MZtkWG8eoKP
- jvqElMT71LoRGL9WysvuF12SugxtISkl3KgtZDOJSINdSKeS/sMC+0PzFHnVMhJjkp5m
- L72DB9NuTKA1mqIgGRlorIHCs/d/qrVHy5uB7D23hA0ZmyAWh3k0AQi20M/wb6R1ncq1
- 5oQSpdMXQMhiqqyQct9S6gMM2KGolNgcuUANtd1wdQpB0PUiowIkmBzmZ+BOKdZaqED6
- LBCQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVqVvv73RVdgUU9N9uOyFOSi42/ClOb8kpy2whXvBsbTB/7bkkpn1a1ppAPWj+JdMqdMHFybHk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaleEMcztmDhvhpSbzquX0r+swAxttNRyYLjs9DLhS4tgx/TjS
- 7t6a8jrRKsmQwQ7vfweabXBXde7GThOdU5STUHeIhZdatFwmPMLWrt/wLc3++vNGa128cRYbg5M
- FqL0TD50X4G5Wre1Nwb7716JKAqGqRVqJQ11kr1/HDUPW8Cw=
-X-Gm-Gg: ASbGncscojiW8cF6NuxWVnf5IOoAZKW1j3k1psQH18ULcLRc/IbpkGlqei6O2VylWag
- hJgUYB8km1ei07nvSCoPhGmoiugC1Mw==
-X-Google-Smtp-Source: AGHT+IGLZL9yvuRgt37MDkWzVu4Vzlhcvk8wbMA9HsEk6DPNUVFUbVfd5Sy4C3G3bsqqv9Iea71ycqBpCqgpJWGYIQU=
-X-Received: by 2002:a17:902:f650:b0:215:3e1a:11c8 with SMTP id
- d9443c01a7336-2153e1a1684mr155073735ad.14.1733069715128; Sun, 01 Dec 2024
- 08:15:15 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733071222; x=1733676022;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Wdy/LVWy/z2hafsaahrpjdMEqYuzu3f96I7LluCipL8=;
+ b=iGRFX1+lStzKT3HJ9FwwgRjRsJmAKepUnb2iS3aa8zTVlM+0OrJYaUGdMRVl0MDA0T
+ w54KIm8eI+Ow/lWr1cSEProKJes/RmEB6oSKQy37rr6WK7wiJ+/b/3RUY6Jd0DdcoTpy
+ 5befD7/ZGbYr3TmleMnd+exvBDgnTg0OL5VMmSNJFz+3/S3o11OjMISNfkWTbDWwfYL1
+ d8ETgOp3X9m8P0qklHwAaw9EY2nfqtPC7PbgnyyhqcVSz2NVh2+L+Ak4IB2j5JCwikRI
+ RkjeFdre23q3zhMKk05fIrX7ubf5LguGTMLtr5MpuloHYBaYCh3xLdNuNVKvhpA/EU2g
+ YPYg==
+X-Gm-Message-State: AOJu0Yycg8aAoov8fg9FMBqfniCAfdVqhkiKEWRvRzD8AEMp6zReBZ3N
+ OT+Q4yVPEFkieDeElhkkJOvUrElIkJyf6PJAr/gveSQTSpQPl2K5tG+hftehwak=
+X-Gm-Gg: ASbGncvWbSQwlkaGObs8LGhrJaYZ2hnkrnWuyWd8XbrihJbKuwmiKRRjEVkzbSFD8KD
+ MUdaspIt9grFwMUjB9A4EsDvOzVKwGqM5mHms8T4Ao0tk4xuATJWHDoiygxM/ThN2aR38vpoOf6
+ Rm75pvMitvfTA5Yr1Dz3nyBEDMAd+teOyoJOAqjFkPLPbbGnnP1Fc5EshfgVu3CdWPoh+RbHVvB
+ xmHb4RDrWI4MQWMWWXreVjn7kHMiIhcycvZkIsvb7RXyn0cKA==
+X-Google-Smtp-Source: AGHT+IHeD6xWWgbqY0SXQ/XYjyMkXd+4Oqp5OrCvoHn5LETBrVFZjvht6N9v1FTFgENKCc8DlHLnmA==
+X-Received: by 2002:a05:622a:5d0:b0:466:9a2d:7c20 with SMTP id
+ d75a77b69052e-466b34df56cmr278891831cf.20.1733071222038; 
+ Sun, 01 Dec 2024 08:40:22 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-466c421e42fsm38933911cf.70.2024.12.01.08.40.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 01 Dec 2024 08:40:20 -0800 (PST)
+Date: Sun, 1 Dec 2024 10:40:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH 1/8] CI: Drop extra condition for sjg lab
+Message-ID: <20241201164017.GS3600562@bill-the-cat>
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-2-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-11-mjg59@srcf.ucam.org>
- <b79cd88a-4346-444d-979c-8eb2ed913d5e@gmx.de>
-In-Reply-To: <b79cd88a-4346-444d-979c-8eb2ed913d5e@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Dec 2024 09:14:23 -0700
-Message-ID: <CAFLszTgZKx_rT5K9Y5WSy31buXJV_c9g0fA40f76Dnnjp_ix+Q@mail.gmail.com>
-Subject: Re: [PATCH 10/10] Add command to set an environment variable to an
- EFI variable
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Matthew Garrett <mjg59@srcf.ucam.org>, u-boot@lists.denx.de, 
- Matthew Garrett <mgarrett@aurora.tech>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="khcUZUpX3dsMCNOM"
+Content-Disposition: inline
+In-Reply-To: <20241201144240.1664398-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,138 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Sun, 24 Nov 2024 at 08:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11/23/24 20:55, Matthew Garrett wrote:
-> > From: Matthew Garrett <mgarrett@aurora.tech>
-> >
-> > We may want to make things conditional on EFI variable state
-> >
-> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
-> > ---
-> >
-> >   cmd/Kconfig     |   4 ++
-> >   cmd/Makefile    |   1 +
-> >   cmd/efigetenv.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++
-> >   3 files changed, 138 insertions(+)
-> >   create mode 100644 cmd/efigetenv.c
-> >
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 33bf3d1ad39..118fb721081 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -752,6 +752,10 @@ config CMD_NVEDIT_SELECT
-> >       help
-> >         Select the compiled-in persistent storage of environment variables.
-> >
-> > +config CMD_EFI_GET_ENV
-> > +     bool "efi get env"
-> > +     help
-> > +       Set an environment variable to the contents of an EFI variable
-> >   endmenu
-> >
-> >   menu "Memory commands"
-> > diff --git a/cmd/Makefile b/cmd/Makefile
-> > index 38cb7a4aea5..0507c204c0e 100644
-> > --- a/cmd/Makefile
-> > +++ b/cmd/Makefile
-> > @@ -69,6 +69,7 @@ obj-$(CONFIG_CMD_EEPROM) += eeprom.o
-> >   obj-$(CONFIG_EFI) += efi.o efi_common.o
-> >   obj-$(CONFIG_CMD_EFIDEBUG) += efidebug.o efi_common.o
-> >   obj-$(CONFIG_CMD_EFICONFIG) += eficonfig.o
-> > +obj-$(CONFIG_CMD_EFI_GET_ENV) += efigetenv.o
-> >   ifdef CONFIG_CMD_EFICONFIG
-> >   ifdef CONFIG_EFI_MM_COMM_TEE
-> >   obj-$(CONFIG_EFI_SECURE_BOOT) += eficonfig_sbkey.o
-> > diff --git a/cmd/efigetenv.c b/cmd/efigetenv.c
-> > new file mode 100644
-> > index 00000000000..5284ee92d6c
-> > --- /dev/null
-> > +++ b/cmd/efigetenv.c
-> > @@ -0,0 +1,133 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +#include <charset.h>
-> > +#include <command.h>
-> > +#include <efi_loader.h>
-> > +#include <efi_variable.h>
-> > +#include <env.h>
-> > +#include <hexdump.h>
-> > +#include <malloc.h>
-> > +#include <uuid.h>
-> > +
-> > +/* Set a U-Boot environment variable to the contents of a UEFI variable */
-> > +int do_efi_get_env(struct cmd_tbl *cmdtb, int flat, int argc, char *const argv[])
-> > +{
-> > +     u16 *var_name = NULL;
-> > +     char *strdata = NULL;
-> > +     efi_uintn_t size = 0;
-> > +     bool var_content_is_utf16_string = false;
-> > +     efi_status_t ret;
-> > +     efi_guid_t guid;
-> > +     u8 *data = NULL;
-> > +     u32 attributes;
-> > +     size_t len;
-> > +     u64 time;
-> > +     u16 *p;
-> > +
-> > +     ret = efi_init_obj_list();
-> > +     if (ret != EFI_SUCCESS) {
-> > +             printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > +                    ret & ~EFI_ERROR_MASK);
-> > +             return CMD_RET_FAILURE;
-> > +     }
-> > +
-> > +     argv++;
-> > +     argc--;
-> > +
-> > +     if (argc != 3 && argc != 4)
-> > +             return CMD_RET_USAGE;
-> > +
-> > +     if (argc == 4) {
-> > +             if (strcmp(argv[0], "-s"))
-> > +                     return CMD_RET_USAGE;
-> > +             var_content_is_utf16_string = true;
-> > +             argv++;
-> > +             argc--;
-> > +     }
-> > +
-> > +     len = utf8_utf16_strnlen(argv[0], strlen(argv[0]));
-> > +     var_name = malloc((len + 1) * 2);
-> > +     if (!var_name) {
-> > +             printf("## Out of memory\n");
-> > +             return CMD_RET_FAILURE;
-> > +     }
-> > +     p = var_name;
-> > +     utf8_utf16_strncpy(&p, argv[0], len + 1);
-> > +
-> > +     if (uuid_str_to_bin(argv[1], guid.b, UUID_STR_FORMAT_GUID)) {
-> > +             ret = CMD_RET_USAGE;
-> > +             goto out;
-> > +     }
-> > +
-> > +     ret = efi_get_variable_int(var_name, &guid, &attributes, &size, data,
-> > +                                &time);
-> > +     if (ret == EFI_BUFFER_TOO_SMALL) {
-> > +             data = malloc(size);
-> > +             if (!data) {
-> > +                     printf("## Out of memory\n");
-> > +                     ret = CMD_RET_FAILURE;
-> > +                     goto out;
-> > +             }
-> > +             ret = efi_get_variable_int(var_name, &guid, &attributes,
-> > +                                        &size, data, &time);
->
-> This duplicates code in efi_dump_single_var(), do_efi_capsule_res(),
-> get_dp_device() and others.
->
-> We should carve out a function.
+--khcUZUpX3dsMCNOM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That can come later. In general there are EFI_LOADER functions which
-could be useful in lib/efi/
+On Sun, Dec 01, 2024 at 07:42:29AM -0700, Simon Glass wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> The rules part of the template makes sure that this doesn't run until
+> specifically requested. Drop the check in the script itself, so it is
+> possible to trigger a run manually without re-pushing the tree.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+You don't need to re-push, you can just manually re-run the pipeline and
+set the variable to 1 on the webpage.
+
+--=20
+Tom
+
+--khcUZUpX3dsMCNOM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdMkW0ACgkQFHw5/5Y0
+tywzJgv/dgQ65fumiWEkDYSWaHmpGold6YbXpaMH8LZPhkFF4pYhdEpGW5TUjaG3
+0LrDIx/s7Y3q4x4HyWYgFWndZwmZHGCTrkm1YBdioc/jjLcJ3LxXV4dX953IS83Z
+yJmGlgInMMcI5Tsu3t14WDZFni0jGfd6s4GN5tydhZ4A4MEHqznaEE+YI3CeqpV5
+4bNgHxCE9pV/dnSYXeaJ0o91jH0Mofm3A/WAK1FZmtwRLscSKamUR31B0ujDU5WJ
+L+lTNkvLbmFTMkcpJ3g08QBktns6mDApHyv6LQ24m++xzUZ+jf0L7UTfqm+jldsO
+grTsdnZIQp7vWjotwae4IYlKwcne+8vYl6G1eFHda4wbQI4C46Vry+0hjUQ08gvk
+bXF+MLSAbgPxWGDqlxWZl4JF2n96rfHHHcgGohVzGOdKxPd6UTAZyA8N0RVbEJen
++N5ibN36Dk9VVQ1RuD6A60uednpwZIP+RTM1JF6XziJHiFrLUuKVOjbCXUVnaZfO
+gb3D+gYQ
+=GXy3
+-----END PGP SIGNATURE-----
+
+--khcUZUpX3dsMCNOM--
