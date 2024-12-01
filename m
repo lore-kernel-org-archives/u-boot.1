@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A16FD49773
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 14:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F62D49771
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 14:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169DD8914D;
-	Sun,  1 Dec 2024 15:43:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C2C988D9B;
+	Sun,  1 Dec 2024 15:43:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="al+3ifXi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hv8oeH0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FF4189137; Sun,  1 Dec 2024 15:43:02 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id F42048917A; Sun,  1 Dec 2024 15:43:00 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2A8189124
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 15:42:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D897489138
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 15:42:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-843e9db3e65so109675539f.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 06:42:56 -0800 (PST)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-841a9366b5eso126295539f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 06:42:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733064175; x=1733668975; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733064172; x=1733668972; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aeDuaiVAnOayNdGxnyyqA4Br37CMDrOVGCFZ5dDy/V4=;
- b=al+3ifXi+gBmmaCr9ok0noDJU5GnprbuoaaXjodpgsf2DlHe69ibF4fyAF3EYnLjad
- wUpSDopA3QnIo8aXt1U9U2Vq9b9Uv8eAt7hrlmNnsLE+i6ScE+ama7ml9ClETE85Icmz
- zRk/TZlmIKV/PYJYV098pmwDuVzGeB3DQYCz4=
+ bh=/GUSoa0MbwfeKBhqACZgORI3pbZBAHDdWKYcftxoFgE=;
+ b=Hv8oeH0lFsEAi0gyRNFg5falbKMiC6Ygdy9iBCaLP6fTw5dlpOKPckAj+MYzs58syy
+ /jyySlDAnhrvuPHvIa194sRkGwZpYmUhy4j6OtRTmPGcwuQEqGbvCWR9XIij0NdVHVqE
+ 0XzNbFCUSIrNC+yijAePssn0SGAThQz/XGMiw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733064175; x=1733668975;
+ d=1e100.net; s=20230601; t=1733064172; x=1733668972;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aeDuaiVAnOayNdGxnyyqA4Br37CMDrOVGCFZ5dDy/V4=;
- b=lKkw3vpSSPADhKrODT9SXU/VLeiFIBmgvnC3a68ZoipgwX9UPMx4VVc3kcK5M3abmW
- MoBuncywske+QGSvhVR20nO+5ar9bc4m8VMG6Z9JM4/xSFafea14Ix32ziLu8yrma/2U
- Z0fUksxA5w0FvbRfS9dbCnz25naXi3x3pgDptfxZetJGSrpo2+tpLKmw8efZGZuHZJTR
- gy61dnwsJgUzGEI5C5V9iB1J1jN8y5M769515vAsFQmkFgvmcxpqM+otUsDQApSTn8JA
- 9dK5CzPjxuS4JkFRGqEw/totdfoLomPzSAwAtKML8QqGegcUyelCpN5hWUaIIltvskt1
- +AKw==
-X-Gm-Message-State: AOJu0YxfXIZhCfjzYUgiJcIDGsVTBlT2Yc04Biaf6bamtv0HxC4jM0Cf
- NJZu4/3UY5zD3xvDKnryFc7cogR8gZD0JVhgUv/VXmXlF/uT+6uBdym3m4WFNvNdV2PaZC2iFZA
+ bh=/GUSoa0MbwfeKBhqACZgORI3pbZBAHDdWKYcftxoFgE=;
+ b=ZwinS6U1qoQgRLZAjvQUuaMnXf+ExU/LHIOUvjSRYq7LA3cMNxOVBBu1eK6ENDuVXm
+ QrFGDpQSTzuu1umAnDg7+O/T6SfFuKg2KlZsN/GaJM2s7HF8262Z9sqoc7nCqV5lGkaJ
+ 5t6oopc9CIr5IzXYdANys5y4tAsBomi7bWDY4anSIOWUf/XFOtFdBv+ldI57tVOj1hWj
+ aaVQAOvdq3aiD+IjFXgFwE9T5DG8X42sigMmRXbVs6UbEzT7TPHxkvq5rWKt7MH7y1Ah
+ fgOjAs5bE5iwnlV/Y/tp51p1vIxtqxf+qdR1U5C2HsTnGUAmN/gAXSTmzAl4COFiU9s5
+ zcdQ==
+X-Gm-Message-State: AOJu0YxRGp2Rrq/2YeaRqP4MzHsa41Ao8Kb5P649fFLo13optyvCxxIj
+ M3NI4CAAMYXkOv+T3jV5Mpvh+C51JKRT0n49EdTT1Shj7cwSGxxnDtaTwkidLWkk/aA9JCpLAeU
  =
-X-Gm-Gg: ASbGnctiJc8BvbpOsgcidgnYvYnsMKqlEJJmXRNvcdf84JIEPEAXsADMamTF/HqnHs9
- kYABOEJxpjldj8COSR3DTOJuHCY0vIqNW+D862Tu65WzEVS7B2LLi/WxY5x+c0Jt9LhG9E4qNIP
- vukoSvXAiCXLQ+A/BzkjaQv4pjImN9n5Mu5dNFgMgrxyzsI1jyydvv+mIC+z3Wa9KVGodbO7Fsi
- M6UxqgV5Nci20F2tU46+d/INqy/D7vcIB4Jxpgjz9Xe
-X-Google-Smtp-Source: AGHT+IEfHN+BiC1A2axOkWXi1eJ3kIL3KTOJ6nOlz29dP+6yi3cVfs/BDxVASd5PDmnUblgLeUxyJA==
-X-Received: by 2002:a05:6602:6d05:b0:83b:5306:d24d with SMTP id
- ca18e2360f4ac-844015352b5mr1459479039f.6.1733064174789; 
- Sun, 01 Dec 2024 06:42:54 -0800 (PST)
+X-Gm-Gg: ASbGncu8s+Qa0KF9q4IOVuFVPI708RUi9gW+CWTmUt5f9l1LLvjMuBpjCJvefsj9LUf
+ CMF+BewX56Tbxg2t0tHOgcO9ueCBJlvcxYTjs7B/Ja+X9GofL1vZVH2zORIFHoik5M8qGo9AGzq
+ OktIirT0gtr74z/hiA2EOjhthhazNiJS16z0/lA7X17j4kVqmM0T/zB3obqBjEjoVM5ykbVJ33l
+ pN3CZ7mnGhvZtG3DU3EPiczxTQQwMQNsSVTXAk7T+32
+X-Google-Smtp-Source: AGHT+IG7g2ih3hJrz7SoactmFJD6OJskoFx++kqM5a2NOGOV8cVR/84f5fpPgps3gXO2Ee0Rfx5J+Q==
+X-Received: by 2002:a05:6602:6d8c:b0:82a:9cab:9be1 with SMTP id
+ ca18e2360f4ac-843ecffc113mr1955316239f.12.1733064172613; 
+ Sun, 01 Dec 2024 06:42:52 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405ec8755sm160826839f.17.2024.12.01.06.42.53
+ ca18e2360f4ac-84405ec8755sm160826839f.17.2024.12.01.06.42.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 06:42:54 -0800 (PST)
+ Sun, 01 Dec 2024 06:42:50 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marex@denx.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 2/8] Revert "power: regulator: Trigger probe of regulators
- which are always-on or boot-on"
-Date: Sun,  1 Dec 2024 07:42:30 -0700
-Message-ID: <20241201144240.1664398-3-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 1/8] CI: Drop extra condition for sjg lab
+Date: Sun,  1 Dec 2024 07:42:29 -0700
+Message-ID: <20241201144240.1664398-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241201144240.1664398-1-sjg@chromium.org>
 References: <20241201144240.1664398-1-sjg@chromium.org>
@@ -95,126 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unfortunately this commit causes a problem on nyan-big:
-
-   U-Boot SPL 2024.10-rc6-00632-g51c4679d2f84 (Nov 30 2024 - 13:28:40 -0700)
-   Trying to boot from RAM
-
-   U-Boot 2024.10-rc6-00632-g51c4679d2f84 (Nov 30 2024 - 13:28:40 -0700)
-
-   SoC: tegra124
-   Reset cause: POR
-   Model: Acer Chromebook 13 CB5-311
-   Board: Google/NVIDIA Nyan-big, ID: -2
-   DRAM:  2 GiB
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   Unknown PLL id 14
-   failed to read ID1 register: -121
-   failed to read ID: -121
-   initcall failed at call 810029c8 (err=-121: Remote I/O error)
-   ### ERROR ### Please RESET the board ###
-
-This reverts commit 51c4679d2f848e91b4a0cf867a426ffe5bb094b2.
-
-Tweak a few tests also, so they continue to pass.
+The rules part of the template makes sure that this doesn't run until
+specifically requested. Drop the check in the script itself, so it is
+possible to trigger a run manually without re-pushing the tree.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/power/regulator/regulator-uclass.c | 22 +++++++---------------
- test/dm/regulator.c                        |  6 ++++--
- 2 files changed, 11 insertions(+), 17 deletions(-)
+ .gitlab-ci.yml | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index decd0802c84..3da7c09ef14 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -433,8 +433,6 @@ static int regulator_post_bind(struct udevice *dev)
- 	const char *property = "regulator-name";
- 
- 	uc_pdata = dev_get_uclass_plat(dev);
--	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
--	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
- 
- 	/* Regulator's mandatory constraint */
- 	uc_pdata->name = dev_read_string(dev, property);
-@@ -446,21 +444,13 @@ static int regulator_post_bind(struct udevice *dev)
- 			return -EINVAL;
- 	}
- 
--	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
--		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
--		      property, dev->name, uc_pdata->name);
--		return -EINVAL;
--	}
-+	if (regulator_name_is_unique(dev, uc_pdata->name))
-+		return 0;
- 
--	/*
--	 * In case the regulator has regulator-always-on or
--	 * regulator-boot-on DT property, trigger probe() to
--	 * configure its default state during startup.
--	 */
--	if (uc_pdata->always_on || uc_pdata->boot_on)
--		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-+	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-+	      property, dev->name, uc_pdata->name);
- 
--	return 0;
-+	return -EINVAL;
- }
- 
- static int regulator_pre_probe(struct udevice *dev)
-@@ -483,6 +473,8 @@ static int regulator_pre_probe(struct udevice *dev)
- 						-ENODATA);
- 	uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
- 						-ENODATA);
-+	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
-+	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
- 	uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
- 						    0);
- 	uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
-diff --git a/test/dm/regulator.c b/test/dm/regulator.c
-index 449748ad52f..59cdd6a3e98 100644
---- a/test/dm/regulator.c
-+++ b/test/dm/regulator.c
-@@ -186,7 +186,8 @@ int dm_test_power_regulator_set_enable_if_allowed(struct unit_test_state *uts)
- 
- 	/* Get BUCK1 - always on regulator */
- 	platname = regulator_names[BUCK1][PLATNAME];
--	ut_asserteq(-EALREADY, regulator_autoset_by_name(platname, &dev_autoset));
-+	ut_asserteq(-EALREADY,
-+		    regulator_autoset_by_name(platname, &dev_autoset));
- 	ut_assertok(regulator_get_by_platname(platname, &dev));
- 
- 	/* Try disabling always-on regulator */
-@@ -288,7 +289,8 @@ static int dm_test_power_regulator_autoset(struct unit_test_state *uts)
- 	 * Expected output state: uV=1200000; uA=200000; output enabled
- 	 */
- 	platname = regulator_names[BUCK1][PLATNAME];
--	ut_asserteq(-EALREADY, regulator_autoset_by_name(platname, &dev_autoset));
-+	ut_asserteq(-EALREADY,
-+		    regulator_autoset_by_name(platname, &dev_autoset));
- 
- 	/* Check, that the returned device is proper */
- 	ut_assertok(regulator_get_by_platname(platname, &dev));
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 2164ad79a72..9f0b8a1a058 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -534,9 +534,6 @@ coreboot test.py:
+       allow_failure: true
+   tags: [ 'lab' ]
+   script:
+-    - if [[ -z "${SJG_LAB}" ]]; then
+-        exit 0;
+-      fi
+     # Environment:
+     #   SRC  - source tree
+     #   OUT  - output directory for builds
 -- 
 2.43.0
 
