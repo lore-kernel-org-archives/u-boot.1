@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47140D49780
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 18:51:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BD1D4977B
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 18:51:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B625A8944E;
-	Sun,  1 Dec 2024 19:51:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 188AE8947A;
+	Sun,  1 Dec 2024 19:51:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="n7Q2plvN";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vk/8Afo1";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="e8vj2giH";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kH+yyP8E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 105CA8946A; Sun,  1 Dec 2024 19:51:26 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id B69238946A; Sun,  1 Dec 2024 19:51:27 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7495489442
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 19:51:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3E338945A
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 19:51:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y1bbv21Fkz9sqs;
- Sun,  1 Dec 2024 19:51:23 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Y1bbt40hwz9sJ6;
+ Sun,  1 Dec 2024 19:51:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733079083;
+ s=mail20150812; t=1733079082;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Mg5o5cHTMAWPbmMnEnpzE8FdXZW2Q9BuMPHcpruCAWk=;
- b=n7Q2plvNKwxIVbWlB/ppxxd1Ak+96v0c5iXax+Ok/G+uLpx2TlkvPmnBq6MBUc7U9AUu4t
- yEAbM1TVsGw9+0o8qQzTfO2VLLmlD9lf0thbCUkiNBpgx9LpKENNcKS6GRCqcp4zUGavZC
- JDPBLMKMxbRQTaS6zUVxyi5EvBgHmkSi+B+vYCuPZFu6Bg3nfs45/pZFB3eYOslFs7DoMg
- 9szOdyfIfMSLsjP1Y/LhJF4q3HhMtz4MFgKALH9uBThEwC9uTbmeJLpZBv88xLeB6of1EA
- JpCfLAe5i4ZimlJddwO2HfOgKKCldyuw+sLEFHq1EyWifxQpS1jUOKlTnRzAZA==
-Message-ID: <36028a23-4880-4271-8ff7-3bce92999271@mailbox.org>
+ bh=c6H0N6WHKcPtgosDaVqjaQsKmb4drcnr3uM+SvfKQJg=;
+ b=e8vj2giH93BqkoJoD7ypm2XaBcjPSRmJuGgi6fXJTLMmNuw/5/+bK/CzAaQaBhW4Z/TFBB
+ G2cQ6ewSqFfbyP6w7buBG3vreRBLllNItLHvEwZQg3kqnYuISgMybusc/SqFECE/OEEouE
+ C10ZZ/VPfWx9Akgfn53Y86gD4pJYVufa2jDl7csiymezOs7E1fSOtFfR0ODvdO3nzWJRwr
+ 913OPtqIJHqL6YbOclPb2zk8P+gmzw+QZHwemqpLF90PgEiw1ivoMOpYvoCsi6ZBtCjC3I
+ l+WL8KttpRccXaLd15GmOXktPba8sLMEyASW6Z12yur6q0JHaJSQeQQsttTvrg==
+Message-ID: <17cde70a-c85c-47c0-86ac-b22473004426@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733079081;
+ s=mail20150812; t=1733079080;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Mg5o5cHTMAWPbmMnEnpzE8FdXZW2Q9BuMPHcpruCAWk=;
- b=Vk/8Afo1ulBXNLECX2kE7jo3A0KiFFk4SOoU4W2tOQKKj+VLM2PPYqUb1NaZ+FL6wDM+ld
- ilB/nWK+ht+MD9LE1bhbqhRW+/ypVy2JD4ip2dDwREUCcc9e2sSLzoMbuONl6tRp+6+SSo
- DDWoFju7BKMcdQy1okC6Dfsg3rlkkJ/Uaj+NOeTR6NMv3u9HVebsfFm1QJ/NSGA0AyEn4+
- yjUFJSZQ3E21fakOlu+M2X8KusxTMV2iuZwZZwbKJfqS89SiulugS3bx2TnByusJVjBAI4
- ukFdQiNAyNwZwzCfc7mKRBY4kvHjeMgsbVkESWzR/3lPx6NzyfJFn079xFY16A==
-Date: Sun, 1 Dec 2024 19:49:17 +0100
+ bh=c6H0N6WHKcPtgosDaVqjaQsKmb4drcnr3uM+SvfKQJg=;
+ b=kH+yyP8EuUWQcHGxEqCFr7PeWB8qZSHHp0OGjKU70mslWQtxW7VdCS51CdFT7+KdJngPrh
+ 9/d6Wd5mS/ca7DIa1LKvIkh1Kj1twVdL/4ocj8dm0LY+nzJ4j4ri37gYrkTB6KcdpwgVce
+ 8/que0ZE0aEqByRYe+rfGgDzx35eQgBj/gFOV2KbCQ0Rtdu4V3LWuLdb97WJQ8ifTDNfAu
+ 4j5jorSlVzzb43Ks5maw/4NMMVCKaMnuYjMaAn63Qu6nv3e0M1ZWOroVPai4aK5FUWz4MY
+ OjcPMZr9F3LsgO4i7vfDyCgnj0opki+eIS9/wxqt72E1gnX6CZj3ofyKlcCQ1w==
+Date: Sun, 1 Dec 2024 19:48:06 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] pinctrl: rzg2l: Support 2.5V PVDD for Ethernet
- interfaces
+Subject: Re: [PATCH v2] net: ravb: Simplify max-speed handling in
+ ravb_of_to_plat
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+References: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8x4edcntefgsznjks75ozom4hafe11gw
-X-MBO-RS-ID: a3fad82889f2cb541cb
+X-MBO-RS-META: z3mttzbutarhmsoqeia8rwfwo15qc3mp
+X-MBO-RS-ID: 7edf7bda9ab27ea5e05
+X-Rspamd-Queue-Id: 4Y1bbt40hwz9sJ6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,17 +93,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/20/24 10:48 AM, Paul Barker wrote:
-> The Ethenet interfaces on the Renesas RZ/G2L SoC family can operate at
-> multiple power supply voltages: 3.3V (default value), 2.5V and 1.8V.
-> 
-> rzg2l_pinconf_set() is extended to support the 2.5V setting, with a
-> check to ensure this is only used on Ethernet interfaces as it is not
-> supported on the SD & QSPI interfaces.
-> 
-> While we're modifying rzg2l_pinconf_set(), drop the unnecessary default
-> value for pwr_reg as it is set in every branch of the following if
-> condition.
+On 11/20/24 10:49 AM, Paul Barker wrote:
+> We can call dev_read_u32_default() instead of calling fdt_getprop() then
+> fdt32_to_cpu().
 > 
 > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Applied to sh/master, thanks.
