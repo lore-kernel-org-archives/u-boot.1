@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1990DD49771
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDD9D49779
 	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:49:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 126DD8962A;
-	Sun,  1 Dec 2024 16:28:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5904289462;
+	Sun,  1 Dec 2024 16:25:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dG+rJh9M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FkyqxRdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C385889621; Sun,  1 Dec 2024 16:28:28 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 557AA89462; Sun,  1 Dec 2024 16:25:39 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6CC68947E
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:28:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42676894B8
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3a790d6e782so14476535ab.2
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:28:24 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-843df3c4390so110569239f.3
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066903; x=1733671703; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066730; x=1733671530; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q2LqPv014y4s1wGwJyI2v2gsP8yl7TTG1JhCd8sfcM8=;
- b=dG+rJh9MQiIaOhZdLeT8imuuBpBhPu3Rm0gmDkCFj6Ajp/n2Dqul1AIz8PD2QvWZkb
- K7Q19tYnM/8bP3RHP/4O+bK3wSVrUvT+WYkfEpRHfQiRr6bWBsJhI/RrEjgNuQijiDPJ
- hFECFjs2dXOefwaJpJb7sqmPnCKnYBywkhsi8=
+ bh=0t66g8LAv1EmnxyTwTdw0yEyu+xBUYw0xy3tZOoHWU4=;
+ b=FkyqxRdzc2W0TmjJHO9vOvkZbUNTQ8CdetY1ddW6y2u9k9/amBA4yek2QZlXFp/D1G
+ f3pXmeMtEFgZTzZ9NZ7kx1zefSIrzGK/50LoFN/1zR+M0Oi1lL0yR+CFG2oWrntkMlvE
+ W0XbsgUcBzQ0ztI6C895vDT9tPEZp3dM/fBi4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066903; x=1733671703;
+ d=1e100.net; s=20230601; t=1733066730; x=1733671530;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q2LqPv014y4s1wGwJyI2v2gsP8yl7TTG1JhCd8sfcM8=;
- b=KKqqC8eSNvx798C4I6xoNPUVMMrJ84UfwxIpezLTxjMbfSBp3vJWPft0PwVV92MyxJ
- y0RIkx9tOd13gEBFCoV7TbHM8qcMRldpzs1MDBAlSUveoo5B54Z8IiQ2Bv6GgcaxvQca
- KUt5w6c8AUI0PJnRVbWtpIe7RYJX6jTka6TPURsEM4zZ1MmZeRMLGdqTVOF1Y5aJd7gM
- gB1X3TjYFPQ9MNRKP0k/KVoDUbfrgkYr1rhSc8gsbVavbAg3ixnVaVSkOFqZynxoc/Y4
- GwkGOX1HkMkroZe7yIPg1kC3TxvTE63hkkae4oAA4aPEj/86eWgP75hkNTP8u4qft/36
- k9Yg==
-X-Gm-Message-State: AOJu0YxjjEZj1/ut/K/+9er0SMmDdCVz1o5Vpi/5KCjI2QOU/8eVmajP
- yyTqeZ1GIGL2KT8O4ou0bpqBxEYm4JGtJl3ifcyEjp89hbTReJbXsFsJSa/EiB/TZj+mO4FILSk
+ bh=0t66g8LAv1EmnxyTwTdw0yEyu+xBUYw0xy3tZOoHWU4=;
+ b=BJxV+k7Jn4/z8PEUpuuO+chUYIFY1WgWPercixYdYKzImhpuxEUGgOWhUIE7aZeOk6
+ qJahDcXl2gufJTNUor723/7mLqzQSfmp24mmqv3ba82mhVHlUqOSiGxOQyFW5RhcQGnH
+ Webx6IgP7IiYtUT1YpXch4k0GU2PxokmPgUGIS6S5SUM1cSRqAYOSbnKX8vxyYP8hyno
+ VqLMx8r9SveAUJuBVrypAW+Qh1UP5SshYN2ieHJ7kS8EzNjtPypw8tlbwtFeSk7oIihc
+ Yk1E1ztuINXdBoVuhdQa8rC/+dKPqqI/U0DlYu5DpYo69lkj8alQOKMO1VR76J5RVIdH
+ WafA==
+X-Gm-Message-State: AOJu0Yy+EbX5+3BryhgRAa8TWAorf8h1s/Mu5fnUIN8Bxl1HDH1fsGIq
+ UzYOoqeQfqDbN7v9Lsk45+oJvlmOb47mcMtW+TLSgDMhtqQ3IhMLqG6+c+b+JGG/OeE6+HIVQdo
  =
-X-Gm-Gg: ASbGncvuNpgOJigUoKBtFfelq0dxBCHc9H/DXa10VggvMwm5Q1GLMC1ULIZmBTtV76r
- sQiE+RxACYK8yVvPfbUIg8KpbWYjnJw9/e2EGd4/3I5YRlYweHyTfVcxurrmVYhdw2nZ8Me1eab
- 54Qm9aoq8dDBVmwMzz/W4mNrvXknOvaHR9d6W3UXAikBw/SsJzNcTNJGssWa44p1uxAAIYakZgu
- ONxhD0skHBVdhgEUP7RB6wM/cQrUcydqJ6RKqCpdOgm
-X-Google-Smtp-Source: AGHT+IGUny+L+MS+u+TIEPsfZMdTnBadT0IC5TYI8qU0Tl32xE44gwBM3mroaymBnjjDfawPxkGt6Q==
-X-Received: by 2002:a92:ca0e:0:b0:3a7:c378:3bab with SMTP id
- e9e14a558f8ab-3a7c5445d3amr208009425ab.0.1733066903193; 
- Sun, 01 Dec 2024 07:28:23 -0800 (PST)
+X-Gm-Gg: ASbGnctgFb9Uo6KQzvAOmzzFBU+v1szxU7uVz7vko0mJ/oyKvcA6NCLjyasL04kiMH2
+ 4p/89NqzVVHuVwo60yP1q603K3ep6K5PwHohZCyqX9MVK+nAfF7kSAGzUlql1yH62yqdIpM0aml
+ drIgeJKcC6EPmHxFx3dSb8K7xHcvpU0QiU4S6FSLGRPV+Qp4LpfOO1RqdCeEI0giEjsY6utTayQ
+ Mls1jRRgANdtAlfEAHpUe+/GyHDeDOlBK1bHuOG6EZd
+X-Google-Smtp-Source: AGHT+IHtb5NwUe34ligdXYV3o5e3y4rak8iwniqCs9lE2BY7dDqu3TKsetno2kmSdhyiRJk3wnWQ9w==
+X-Received: by 2002:a05:6602:1695:b0:842:ff2d:c3bb with SMTP id
+ ca18e2360f4ac-843ecfffb7bmr2189501339f.6.1733066730519; 
+ Sun, 01 Dec 2024 07:25:30 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e230dcb33esm1690307173.57.2024.12.01.07.28.21
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:28:22 -0800 (PST)
+ Sun, 01 Dec 2024 07:25:29 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: [PATCH v5 1/9] kernel: Document ALIGN macros
-Date: Sun,  1 Dec 2024 08:28:03 -0700
-Message-ID: <20241201152815.1668093-2-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 06/25] efi_loader: Update startimage_exit self-test to
+ check error
+Date: Sun,  1 Dec 2024 08:24:25 -0700
+Message-ID: <20241201152505.1666789-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241201152815.1668093-1-sjg@chromium.org>
-References: <20241201152815.1668093-1-sjg@chromium.org>
+In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
+References: <20241201152505.1666789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,62 +94,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add comments for these macros, so it is clear what they do.
+Check for an error returned from the decompress() function, just in
+case.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-Changes in v5:
-- Use kerneldoc style for macros
+(no changes since v1)
 
- include/linux/kernel.h | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+ lib/efi_selftest/efi_selftest_startimage_exit.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/kernel.h b/include/linux/kernel.h
-index 9467edd65ab..08388f922be 100644
---- a/include/linux/kernel.h
-+++ b/include/linux/kernel.h
-@@ -35,9 +35,40 @@
- 
- #define REPEAT_BYTE(x)	((~0ul / 0xff) * (x))
- 
-+/**
-+ * ALIGN() - Rounds a value up to a given alignment
-+ *
-+ * @x: value to be rounded up
-+ * @a: alignment factor. @a must be a power of two
-+ * Return: lowest value >= @x which is a multiple of @a
-+ *
-+ * For example ALIGN(0x123, 8) == 0x128
-+ */
- #define ALIGN(x,a)		__ALIGN_MASK((x),(typeof(x))(a)-1)
+diff --git a/lib/efi_selftest/efi_selftest_startimage_exit.c b/lib/efi_selftest/efi_selftest_startimage_exit.c
+index b65a10b7a4b..8d119f054c5 100644
+--- a/lib/efi_selftest/efi_selftest_startimage_exit.c
++++ b/lib/efi_selftest/efi_selftest_startimage_exit.c
+@@ -84,13 +84,15 @@ static efi_status_t decompress(u8 **image)
+ static int setup(const efi_handle_t handle,
+ 		 const struct efi_system_table *systable)
+ {
++	efi_status_t ret;
 +
-+/**
-+ * ALIGN_DOWN() - Rounds a value down to a given alignment
-+ *
-+ * @x: value to be rounded down
-+ * @a: alignment factor. @a must be a power of two
-+ * Return: highest value <= @x which is a multiple of @a
-+ *
-+ * For example ALIGN_DOWN(0x123, 8) == 0x120
-+ * ALIGN_DOWN(0x120, 16) == 0x120
-+ */
- #define ALIGN_DOWN(x, a)	ALIGN((x) - ((a) - 1), (a))
-+
-+/**
-+ * __ALIGN_MASK() - Rounds a value up to a given alignment-mask
-+ *
-+ * @x: value to be rounded up
-+ * @mask: mask to apply, must be one less than a power of two
-+ * Return: lowest value >= @x where the bits set in @mask are 0
-+ *
-+ * For example __ALIGN_MASK(0x123, 0xf) == 0x130
-+ */
- #define __ALIGN_MASK(x,mask)	(((x)+(mask))&~(mask))
-+
- #define PTR_ALIGN(p, a)		((typeof(p))ALIGN((unsigned long)(p), (a)))
- #define IS_ALIGNED(x, a)		(((x) & ((typeof(x))(a) - 1)) == 0)
+ 	image_handle = handle;
+ 	boottime = systable->boottime;
  
+ 	/* Load the application image into memory */
+-	decompress(&image);
++	ret = decompress(&image);
+ 
+-	return EFI_ST_SUCCESS;
++	return ret;
+ }
+ 
+ /*
 -- 
 2.43.0
 
