@@ -4,99 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71C5AD49775
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698B0D49775
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:23:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D769789428;
-	Sun,  1 Dec 2024 16:07:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E1BFA89137;
+	Sun,  1 Dec 2024 16:23:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lk1h8xEi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mM5URMxd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 360E689428; Sun,  1 Dec 2024 16:07:34 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id CA2A38917A; Sun,  1 Dec 2024 16:23:08 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE31088D36
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:07:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E5EA89189
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:23:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-53e0844ee50so236420e87.0
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:07:31 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0bfa52bd9so2226639a12.2
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:23:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733065651; x=1733670451; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=55/XRxyBKljg6iz7/3C2zM1nzU2A3rLFYIWJYNtmWBY=;
- b=Lk1h8xEitBg0C5E2V1PGJBZVYwHVHIJFCc6g9+g2MaGIiPPiG7hZwuJbaiU1j13LtX
- rx5nJLP2j43HkoBmZMQ/O5j8hLc3nEIopqmZJ1toz9DTtW5bHDf0tN4b0O5aaPdYh2UA
- t3QFSKsqjQgeeG1aS0a8ZNYMjeVt/eMZDIghDzK6w3XlMKzeEDR5lEELi1HNno0AICJm
- pllyPJ/GJknW/EtpamFcvv5xxLRGz+xPyxbdoPLYaJ0o5fumLcgsekveuRrPGshkVztJ
- +1HrE1sW06NXUbHskEYC8cQjZelcCyLsjNojsP7S2uFzEtGEo+05b8627H5gDZOZvOqF
- 25fg==
+ d=chromium.org; s=google; t=1733066585; x=1733671385; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vk5K/ukMpmKgugUeX47T42GzqdfZyaxB7x8BKGmVpP8=;
+ b=mM5URMxd9iGT/VmBTYb8FWvugArNVbpJmwn9txoPlUorW8Ky/W3cVVvSERX0knY0O4
+ G4jOnqcW8fhjgo5MKJaqpz0D4vaqi156FVV8ZnJ2SaWG46HLE27t/JoUCct25tUzsf10
+ CAcHiBQhNCa6KajDHYK0gIoJBhgMDS1jnygmU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733065651; x=1733670451;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=55/XRxyBKljg6iz7/3C2zM1nzU2A3rLFYIWJYNtmWBY=;
- b=ZIFxBCAbuH/k5QHdi2quXH5UpLtsrm2P6YcH/oWBEbPclNTTQNu87jNMzLl+IxvVtb
- lOTn08MqSRgHkTGM5cBLp5x7QBvYWgur0MWj/O27tPn9zl5MlnGsMTkOgqRr3Bhvr520
- 6wDfbTiw+Xjwp8SUn0l3NbWOxZWjn9qw15uw00/CHxWVEVA9BklNrb13iWVzG0h/tdD3
- NpE243KCO8rX9Y4le1FB3yQe3duL/OZ6E6/x8vJ+hwn2pyUFugrgT/PkPJID5txIzziN
- HWrEFpGr/M15Fi0EHpmF0TM2fe2W+0uPD33Wt4hj9MbFdyFwvSxwlTBdQ97FaWU2DJBS
- qb8A==
+ d=1e100.net; s=20230601; t=1733066585; x=1733671385;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vk5K/ukMpmKgugUeX47T42GzqdfZyaxB7x8BKGmVpP8=;
+ b=FW9VarP8qcE6tPiQK4KXG5PyXCYXZWfAo0WuK6Bk7lK3Xgg1zBUd2OOtVvIl9wzCCr
+ caCFVT+QjyiBJYJgSRduFur3HTswToK33XsbvYHVNUIXrquVRbsd1e39y5V9ivDFaxGE
+ 6jOS+wmo7zexDv+Pa9skXJ1X4MnKB+Y7kMNnEohouSboUlXEvl2dHvRa00siuA8ojpSv
+ ZUynxSlc6iFdjfdsSnth5Jhdz6KU4lIMwMrsoA38EtIMRIOWDNHKmb0UDiZqGTvENbj9
+ f4a0OQom0hQXpdFVDtP9tUf7GJzuywotNatfD9DUBIerWTgfdXLxdIFqplTVfjNyFd6I
+ vYHw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoF2s78nelbzn9Jx1QGp+mI13wJZ0k+xO86iG8wZDStAdLIiitNY15cIHwy3/4A1io/Y0glR8=@lists.denx.de
-X-Gm-Message-State: AOJu0YykT7P1KdxnPrRJ2IpmKuK6kU6RlyaCS3C74j60Bi423ZjIzu+F
- EPm+KDwHwi30bUaNwXKSVMXFxkgqlVPE3pbJejRwjk6YiaT3s9D3
-X-Gm-Gg: ASbGncsIjLQNMd1eiKZzWkb7N5ZXyI1eWjwyPmaiPEmJoYZ9vDl4abpR4q6MRKPJBjo
- fIR4wOkypoTJuOTwz+Hu8PRBKtoqVoHxsaxGT/pO+gLU884Ku4degOAQp8Xgjy5+OZmFVXbx9Jl
- 8mGd510nUVK2Iv6QIoD2NiAnbQioZ4mxat3lCLxQfgbtVAEp7s19/zDE+AlfiV8B1e9nnraqJET
- fkj07h6/hjk9amVQ4Hyge4ewNNY13XfLqYoLaXeHEhV5ZkmYBBbpJzQWSDSOSafQZ7pT/7X
-X-Google-Smtp-Source: AGHT+IECqXRFhBD/Ih10hLoswku/pOX1O2lVCy4aGe1u4lEvM4w8V3lJ+j5DBvS/97AWdefR6fLHBQ==
-X-Received: by 2002:a05:6512:3a87:b0:53d:dd09:124a with SMTP id
- 2adb3069b0e04-53df00a9835mr10894062e87.8.1733065650999; 
- Sun, 01 Dec 2024 07:07:30 -0800 (PST)
-Received: from wpc.. (host-93-124-60-94.dsl.sura.ru. [93.124.60.94])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53df646f1a7sm1101120e87.165.2024.12.01.07.07.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:07:30 -0800 (PST)
-From: bigunclemax@gmail.com
-To: 
-Cc: bigunclemax@gmail.com, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Greg Malysa <greg.malysa@timesys.com>,
- Kongyang Liu <seashell11234455@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
- Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 3/3] configs: th1520_lpi4a: enable mmc controller support
-Date: Sun,  1 Dec 2024 18:06:56 +0300
-Message-ID: <20241201150704.44462-4-bigunclemax@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241201150704.44462-1-bigunclemax@gmail.com>
-References: <20241201150704.44462-1-bigunclemax@gmail.com>
+ AJvYcCUkp9vBbt25KsTb+qoEm7HYz32pm2wdjXaj8sc7723TKO4JMkowEHFh50LafjhWz2wCG7gKKC4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwhYmtb5gd5dHL+HQBm9Gh9RYbQ+HCVtABUW95lo/xM+wHVzlBW
+ iaGNkQOJoSBlLMvKMzeiqC8Msw5597QBTtnuAdJEvEFxuzQFi6CA34IB8Q8otQJnoNvgLK3nydX
+ JQwOlJnGksr6VenLyIHJLRN9IcUkeYtacJ5zxPAQCPKl9SUE=
+X-Gm-Gg: ASbGnct3EJuSHtVuvyB4E4tQ4e+no8Jq+PL3cEIOxjtvDvOcyMgK2ezh/6KYjBk+9VL
+ tuwWjbsrT5wdm/ea284lmRjJb/SRgMQ==
+X-Google-Smtp-Source: AGHT+IG5TzwNTWOHYCHZC00gHuneIdVSkBR9OYHpvZY2+8EiMTvSmZTBlllCZrnMQZD5IdFSbIHMCuMcmsGy+UW5mbI=
+X-Received: by 2002:a17:907:9389:b0:aa5:b3b:4d7f with SMTP id
+ a640c23a62f3a-aa581055411mr1427090166b.41.1733066585245; Sun, 01 Dec 2024
+ 07:23:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-3-sjg@chromium.org>
+ <CAPVz0n0RGrgUSrNzyT16FKMBcqYs00qb+3jEHsq4tiYyWGR-Nw@mail.gmail.com>
+ <65cef924-a16a-4af1-819c-a15410d92f4c@denx.de>
+In-Reply-To: <65cef924-a16a-4af1-819c-a15410d92f4c@denx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 1 Dec 2024 08:22:53 -0700
+Message-ID: <CAFLszTg1Na9ziMv4J1Pb9vjw=fYPh+RLGvT-KyYcjGEEonGk2Q@mail.gmail.com>
+Subject: Re: [PATCH 2/8] Revert "power: regulator: Trigger probe of regulators
+ which are always-on or boot-on"
+To: Marek Vasut <marex@denx.de>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,47 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maksim Kiselev <bigunclemax@gmail.com>
+Hi Svyatoslav,
 
-Enable driver for DesignWare MSHC. TH1520 supports all
-speed modes up to HS400ES and UHS SDR105.
+On Sun, 1 Dec 2024 at 08:20, Marek Vasut <marex@denx.de> wrote:
+>
+> On 12/1/24 4:05 PM, Svyatoslav Ryhel wrote:
+>
+> [...]
+>
+> >> @@ -288,7 +289,8 @@ static int dm_test_power_regulator_autoset(struct unit_test_state *uts)
+> >>           * Expected output state: uV=1200000; uA=200000; output enabled
+> >>           */
+> >>          platname = regulator_names[BUCK1][PLATNAME];
+> >> -       ut_asserteq(-EALREADY, regulator_autoset_by_name(platname, &dev_autoset));
+> >> +       ut_asserteq(-EALREADY,
+> >> +                   regulator_autoset_by_name(platname, &dev_autoset));
+> >>
+> >>          /* Check, that the returned device is proper */
+> >>          ut_assertok(regulator_get_by_platname(platname, &dev));
+> >> --
+> >> 2.43.0
+> >>
+> >
+> > It seems that I have found a fix for this issue. Simon, please test
+> > this commit https://gitlab.com/clamor-s/u-boot/-/commit/6149722aa48f84d9ea037ae990141a231106244e
+>
+> So this regulator problem was a tegra platform specific issue after all.
+>
+> Nice find, thanks !
 
-Also enable ADMA and mmc command.
+That's great! Are you planning to send a patch?
 
-Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
----
- configs/th1520_lpi4a_defconfig | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
-
-diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
-index 3b6ff62ee1..d13c97463a 100644
---- a/configs/th1520_lpi4a_defconfig
-+++ b/configs/th1520_lpi4a_defconfig
-@@ -54,6 +54,8 @@ CONFIG_CMD_BOOTMENU=y
- CONFIG_CMD_GPIO=y
- # CONFIG_CMD_LOADB is not set
- # CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_MMC=y
-+CONFIG_MMC_SPEED_MODE_SET=y
- # CONFIG_CMD_ITEST is not set
- # CONFIG_CMD_SOURCE is not set
- # CONFIG_CMD_SETEXPR is not set
-@@ -66,7 +68,14 @@ CONFIG_NO_NET=y
- CONFIG_DWAPB_GPIO=y
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
--# CONFIG_DM_MMC is not set
-+CONFIG_MMC=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_SNPS=y
- # CONFIG_MTD is not set
- # CONFIG_POWER is not set
- CONFIG_SYS_NS16550=y
--- 
-2.45.2
-
+Regards,
+Simon
