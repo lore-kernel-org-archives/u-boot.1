@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA5D7D49771
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBA0D49776
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4512A89152;
-	Sun,  1 Dec 2024 16:25:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DED3E8947A;
+	Sun,  1 Dec 2024 16:25:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I8Sh4oG7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KThUb/ir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAEF888D51; Sun,  1 Dec 2024 16:25:20 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 8762789451; Sun,  1 Dec 2024 16:25:25 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3673A89152
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 751B8893C2
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:25:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-841d8dec20aso109250339f.3
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:15 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-8418ecda128so123063339f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:25:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066713; x=1733671513; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oASMrZE/d2+f/x3zd6ht0UrOiLv/lZINQf12jsojx+g=;
- b=I8Sh4oG7SB4Gw1BITXVp15RpjXVK1SQTfUuYcheSBHhxDIHE68pD0XKoqH81l2QrQO
- Pb4Tofg/g/qkWLqSgQEAYngX5PW+VldNXCJ5RUOXRFr+gdbdjTbB6J8NRJqLvY+q5xNH
- 19ECgXHnWw9ZLtBNTH4aH62tnIAvZLq8j5S14=
+ d=chromium.org; s=google; t=1733066716; x=1733671516; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/bRHVKrPOkEX2Rw9G+S474MWrSTyLblFxrC/konpWvc=;
+ b=KThUb/irWkyb4AVWU0OUwIDY0CXoK8jxxVKoLU2J107kSEAMblKeFIbLkItfG3PvpY
+ 4SDCfqHrmAkWbVIPciBJoXOVR9SBu/R+w//jhdAIYFTDouzyVxnMX1kYJF0MCVLy5UrP
+ /pr9cuverDXvUm7uD1x0ATbAf2UCVcPv4VY78=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066713; x=1733671513;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oASMrZE/d2+f/x3zd6ht0UrOiLv/lZINQf12jsojx+g=;
- b=tve+3y7OPlKTNtQOIeFo7JH6WFccEc3+CW2JtVkTDVZf69F3+X+kBJ5iaPq4EHDOHm
- RO8WZjLyhiwDm3azE+dl3i+qE2tyaP19jN+THLn2ct3CsvCvr9V6WeBFIgnUDzzkooox
- OSM+vBUKk0mkqmrxK49GKwy2nDRqUVxi8QKv82ejSB6rtm1sZvUESTo0vCjk0LFwwuKa
- 3LAl+0A93qcti8yExZtIak1OhiBlFH3vPNULGrUts5PVYU83AgdN0gy5J35NJmhtgQ3l
- arLAq1w55BdApnasK0IapkUCvG5+YaZWFFEcrlj0yK1i806EPgM9N0WMGBft3PybOLP6
- Luyw==
-X-Gm-Message-State: AOJu0YyCtwsnkbwaPHSwVmK27fgiyeA4jolLyp4b5WuBoqNNgxEuhKdX
- ixahLSzbw6+GRJPFl3ET2V3NbddTwVRhbzTV0CYhq92tClb5ur1p4myw8QC26T6GMakZCPe5CN4
+ d=1e100.net; s=20230601; t=1733066716; x=1733671516;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/bRHVKrPOkEX2Rw9G+S474MWrSTyLblFxrC/konpWvc=;
+ b=kKPBFYlXDjAdAoG7WUfDFtpQ3ru7VzZaVAJGRnkjPKqi2O8y2o2/MM8nj1sHBT6qRy
+ ui0Nb9aCqLq8vmhWNlf6NqdCXvtNv3UBktJpPM0rt290duHxpmUmbQRZJdT92YZF54OW
+ dIxOTbIYvx7dddBPiYntM/c/OdTiSLGxqNMkuHstRq1N7uCF/FCo2/+ym70aNLOpFynU
+ 76rYCSC+76dkSztfSbYGiEJm+Lg7mZbHe5t2maCJNBMJFhWctNlAkJFUe64z2LSonhtI
+ S5YZhd8uC+65sqAJXPn9WeYLi+9nbzp++x8H6WA87uTS0QToYtNrWek2CM4kszsNH3tQ
+ qVwA==
+X-Gm-Message-State: AOJu0Yy4Dw13Rp30QLhQg8YlbFurKYQElu4JaFxpBEyWV83NTqRpIWsg
+ YzJKNM8+gzInoDyEuGslVLejcg3ftgu5ONkFCcixzIa7JhEI8jefKp9w+/pcW4nn1FlVc5wPF9k
  =
-X-Gm-Gg: ASbGnctvAeQVViCStZJQdkTqtbegTqnOPMJzXXD/5AYv2r0SYGDvtRh8qyg43ZtUmGT
- 5rW3dzeBlLKDzLMf7J3GWtLOFF5+o8pa4AIrNs1X0X4VFygAkcdkr2nHhVl0oB/+n/GYU3n/4gB
- M61h7900mU2jUpck1zWa16essFPQcXFOStW75Trsw4+X38fJCUWz1WbH0+uiAi4G7iX7QcwslJR
- 8+cf0pA+mEB+0jcpoRIVc1lEu//tsqzKBW4vM4Ur+nP
-X-Google-Smtp-Source: AGHT+IFYbQz/IKJTSh7Kc6B/UhgOXLgNGZlqT00awLQykXHU5f+UPYbZdji2JOwvkWkknrCXJo/A7g==
-X-Received: by 2002:a05:6602:6412:b0:82c:d768:aa4d with SMTP id
- ca18e2360f4ac-843ecff43bemr2059943339f.9.1733066713401; 
- Sun, 01 Dec 2024 07:25:13 -0800 (PST)
+X-Gm-Gg: ASbGncs+68qfRw5qpWqknKhF3Qex+DI5Gc7xFafw+cbMUtR6B1nvaCbSy2tMJwVKwrJ
+ kTE38EPNe2kwx54kBdH7o4NjjmtszXmO/EMnIazdHO/7HwycaRaPW4uKHhaiAqDyd6dp0IejcFW
+ 3OEj8ZIGVLt6CVqGYBzmoZxIv1bMwfRq9+yU1wxYT3KDSvmi1vkmJ2/tCt4Dp4txM7AJzlP6DAA
+ hGcFHNZ01+mNivGDWf53cY1Rb6JBtbZulIMtxWw2x6q
+X-Google-Smtp-Source: AGHT+IHLtIU/awzaUx/eQ1YmWRDrsgQ2VF2hbzgnSqGCxDyFKYPF7GoY0qnOMYGWNapE7oInauZdBQ==
+X-Received: by 2002:a05:6602:6412:b0:837:7e21:1688 with SMTP id
+ ca18e2360f4ac-843ed09db55mr1899466639f.11.1733066716187; 
+ Sun, 01 Dec 2024 07:25:16 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.10
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.25.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:25:11 -0800 (PST)
+ Sun, 01 Dec 2024 07:25:15 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Janne Grunau <j@jannau.net>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Matthias Brugger <mbrugger@suse.com>, Moritz Fischer <moritzf@google.com>,
- Patrick Wildt <pwildt@google.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Stefan Roese <sr@denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v4 00/25] efi: Tidy up confusion between pointers and addresses
-Date: Sun,  1 Dec 2024 08:24:19 -0700
-Message-ID: <20241201152505.1666789-1-sjg@chromium.org>
+Subject: [PATCH v4 01/25] efi: Define fields in struct efi_mem_desc
+Date: Sun,  1 Dec 2024 08:24:20 -0700
+Message-ID: <20241201152505.1666789-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
+References: <20241201152505.1666789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,103 +96,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI-loader implementation converts things back and forth between
-addresses and pointers, with not much consistency in how this is done.
+There is quite a bit of confusion in the EFI code as to whether a field
+contains an address or a pointer. As a first step towards resolving
+this, document the memory-descriptor struct, indicating that it holds
+pointers, not addresses.
 
-Within most of U-Boot a pointer is a void * and an address is a ulong
+Dro the same for efi_add_memory_map() as it is widely used, as well as
+efi_add_memory_map_pg() which is only used by lmb
 
-This convention is very helpful, since it is obvious in common code as
-to whether you need to call map_sysmem() and friends, or not.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-As part of cleaning up the EFI memory-management, I found it almost
-impossible to know in some cases whether something is an address or a
-pointer. I decided to give up on that and come back to it when this is
-resolved.
-
-This series starts applying the normal ulong/void * convention to the
-EFI_loader code, so making things easier to follow. For now, u64 is
-often used instead of ulong, but the effect is the same.
-
-The main changes are:
-- Rather than using the external struct efi_mem_desc data-structure for
-  internal bookkeeping, create a new one, so it can have different
-  semantics
-- Within efi_memory.c addresses are used, rather than addresses
-  masquerading as pointers. The conversions are done in efi_boottime
-
-Link: https://lore.kernel.org/u-boot/20240725135629.3505072-1-sjg@chromium.org/
-
-Changes in v4:
-- Add new patch to show the address for pool allocations
-- Combine the various pointer-to-address patches into one
+(no changes since v3)
 
 Changes in v3:
 - Adjust comments
-- Show the returned address rather than the pointer
-- Put the header-file in its own section
-- Add comment to struct efi_device_path_memory
-- Use a pointer for the values in struct efi_device_path_memory
 
 Changes in v2:
 - Fix missing @
 - Note that this holds pointers, not addresses
-- Add a new patch with comments where incorrect addresses are used
-- Use EFI_PRINT() instead of log_debug()
-- Rebase on early patch
-- Add new patch to add the EFI-loader API documentation
-- Drop the changes to the boottime API
-- Add new patch to use a separate stuct for memory nodes
-- Drop patch 'Convert efi_get_memory_map() to return pointers'
-- Drop patch 'efi_loader: Make more use of ulong'
-- Significantly expand and redirect the series
 
-Simon Glass (25):
-  efi: Define fields in struct efi_mem_desc
-  efi_loader: Fix typos in enum efi_allocate_type
-  efi_loader: Drop extra brackets in efi_mem_carve_out()
-  efi_loader: Add comments where incorrect addresses are used
-  efi_loader: Show the resulting memory address from an alloc
-  efi_loader: Update startimage_exit self-test to check error
-  efi_loader: Move some memory-function comments to header
-  doc: efi: Add the EFI-loader API documentation
-  efi_loader: Use the enum for memory type
-  efi_loader: Use a separate struct for memory nodes
-  efi_loader: Drop virtual_start from priv_mem_desc
-  efi_loader: Drop reserved from priv_mem_desc
-  efi_loader: Use the enum for the memory type in priv_mem_desc
-  efi_loader: Avoid assigning desc in efi_mem_carve_out()
-  efi_loader: Move struct efi_mem_list fields together
-  efi_loader: Rename struct efi_mem_list to mem_node
-  efi_loader: Rename physical_start to base
-  efi_loader: Use correct type in efi_add_runtime_mmio()
-  efi_loader: Show the address for pool allocations
-  efi_loader: Don't try to add sandbox runtime code
-  efi_loader: Update to use addresses internally
-  efi_loader: Correct address-usage in copy_fdt()
-  efi_loader: Drop comments about incorrect addresses
-  efi_bootmgr: Avoid casts in try_load_from_uri_path()
-  efi_loader: Simplify efi_dp_from_mem()
+ include/efi.h               | 21 +++++++++++++++++++++
+ include/efi_loader.h        |  6 ++++--
+ lib/efi_loader/efi_memory.c |  4 +++-
+ 3 files changed, 28 insertions(+), 3 deletions(-)
 
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |   2 +-
- arch/arm/mach-bcm283x/reset.c                 |   2 +-
- doc/api/efi.rst                               |   6 +
- include/efi.h                                 |  23 +-
- include/efi_api.h                             |  10 +
- include/efi_loader.h                          | 102 ++++--
- lib/efi_loader/efi_bootbin.c                  |   3 +-
- lib/efi_loader/efi_bootmgr.c                  |  10 +-
- lib/efi_loader/efi_boottime.c                 |  53 ++-
- lib/efi_loader/efi_device_path.c              |  18 +-
- lib/efi_loader/efi_dt_fixup.c                 |   4 -
- lib/efi_loader/efi_helper.c                   |   4 +-
- lib/efi_loader/efi_image_loader.c             |   3 +-
- lib/efi_loader/efi_memory.c                   | 301 +++++++-----------
- lib/efi_loader/efi_runtime.c                  |   7 +-
- lib/efi_loader/efi_var_mem.c                  |   6 +-
- .../efi_selftest_startimage_exit.c            |   6 +-
- lib/lmb.c                                     |  10 +-
- 18 files changed, 313 insertions(+), 257 deletions(-)
-
+diff --git a/include/efi.h b/include/efi.h
+index c559fda3004..348ff9efd16 100644
+--- a/include/efi.h
++++ b/include/efi.h
+@@ -273,6 +273,27 @@ enum efi_memory_type {
+ #define EFI_PAGE_SIZE		(1ULL << EFI_PAGE_SHIFT)
+ #define EFI_PAGE_MASK		(EFI_PAGE_SIZE - 1)
+ 
++/**
++ * struct efi_mem_desc - defines an EFI memory record
++ *
++ * This field implements the EFI_MEMORY_DESCRIPTOR type of the UEFI
++ * specification.
++ *
++ * Note that this struct is for use outside U-Boot, so the two 'start' fields
++ * are pointers, not addresses. Use map_to_sysmem() to convert to an address, so
++ * that sandbox operates correctly.
++ *
++ * @type (enum efi_memory_type): EFI memory-type
++ * @reserved: unused
++ * @physical_start: Start address of region in physical memory
++ * @virtual_start: Start address of region in virtual memory, which will be the
++ *	same as @physical_start before where both addresses will always be the
++ *	same before SetVirtualMemoryMap() is called as the UEFI specification
++ *	requires identity mapping.
++ * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
++ *	bytes)
++ * @attribute: Memory attributes (see EFI_MEMORY_...)
++ */
+ struct efi_mem_desc {
+ 	u32 type;
+ 	u32 reserved;
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 39809eac1bc..ee0cdd36500 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -788,8 +788,10 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+ /**
+  * efi_add_memory_map_pg() - add pages to the memory map
+  *
+- * @start:			start address, must be a multiple of
+- *				EFI_PAGE_SIZE
++ * @start: start address, must be a multiple of EFI_PAGE_SIZE. Note that this
++ * is actually a pointer provided as an integer. To pass in an address, pass
++ * in (ulong)map_to_sysmem(addr)
++ *
+  * @pages:			number of pages to add
+  * @memory_type:		type of memory added
+  * @overlap_conventional:	region may only overlap free(conventional)
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index e493934c713..f1154f73e05 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -384,7 +384,9 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+ /**
+  * efi_add_memory_map() - add memory area to the memory map
+  *
+- * @start:		start address of the memory area
++ * @start:		start address of the memory area. Note that this is
++ *			actually a pointer provided as an integer. To pass in
++ *			an address, pass in (ulong)map_to_sysmem(addr)
+  * @size:		length in bytes of the memory area
+  * @memory_type:	type of memory added
+  *
 -- 
 2.43.0
 
