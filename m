@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B27CCD49776
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7FD5D49771
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BD77896F4;
-	Sun,  1 Dec 2024 16:28:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3193B893C2;
+	Sun,  1 Dec 2024 16:26:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iEPpafX+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jqFBe7Ya";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 972C588D51; Sun,  1 Dec 2024 16:28:32 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id B695A893D1; Sun,  1 Dec 2024 16:26:25 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2B9089287
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:28:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B8FB8914D
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:26:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3a7dcbdf1cdso17220415ab.3
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:28:29 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-841a7ae8d8aso125222639f.1
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:26:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066908; x=1733671708; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066778; x=1733671578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Cxs9CvHA67qnbSJ+RVjAHysx1cn5wr2i8qZEopG9XHE=;
- b=iEPpafX+lhMIbWla83tRU6Jz9qvTkDiTK5w1fMqJ4oz7O0XI/T/vr0il+yUktbEdEb
- x1fUmVrqVsxwP6wrCg4HLUvFI2FgZW67sJEks2iwpzhnKmSxLgvSmHSBW7RPY8fXJ+H5
- 8otPOChrd7cGAsZceME0gswhi4L3r7Q4QErJU=
+ bh=fFfL0SuD818sNDgskQmzQ+Yqs0cttN0sMzc7o6oenWc=;
+ b=jqFBe7YasLIZx4CJzFBUtSC0jOjznb6iah+VqmKx/WvU3CIH9qhNHN0s4I8TYVXx7/
+ NkGpK9s9wuyJJzgEfoHqmxdKIMA8/OnWfYyMQEtSuxU0As2XzAK3YDDVD/MruXVVG1EF
+ Kn7tTneYQ4/Q/KDgOqu1BvrkxPj0WaCT/F77c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066908; x=1733671708;
+ d=1e100.net; s=20230601; t=1733066778; x=1733671578;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Cxs9CvHA67qnbSJ+RVjAHysx1cn5wr2i8qZEopG9XHE=;
- b=wBLfzlhx0owj0XIg+2J6zAWbhgZ9uhFJGkoDX5G5Coy8Sga9GiCfSyITqRBlaH1EB3
- JSdQ+wXbIupK8QQJI3qqpaKsLtLBfWKRTx1JxNa6En8DFaIHRUywDW20St1WSU3+aQPL
- gqdsOnu0nA3N33zCB8IlqYrpW/bb1ou3zvTt54Rl/t4o9kUMTc1wa69NaLGvzByAtkZ9
- cJYWpwDKG9Bdn+GnCqWY+xUKjaPBKE/Ywn4mqo1PReCJJraS24EllQ13IEVMx+myYXBD
- PJiZO5Hvv95xNjpvWU1NEgD/j60+1k+HpQG7/RPwSzfrAwU/731X7FkUYdQdt/KBdkkG
- 4g6A==
-X-Gm-Message-State: AOJu0Yy18yjvYPtnz1TIN4hperfwIWQYiOfCujpyzmHLzRX6+GNF4v7X
- MnonkpAQBcE6Yl0ZaQ/mPGFTOIpmglLLPS85EPuhPDNLt0fbzMFn7YtInbAKD5U2jQuHJOSIsxs
+ bh=fFfL0SuD818sNDgskQmzQ+Yqs0cttN0sMzc7o6oenWc=;
+ b=KARujUYwLH2+DLhO65zF5Oj+/voR6a1ae4CdhffQE1VyjYDGbNnZMIAkb/M/uSXhJC
+ mjFqAakVpbiY8OQsC/WlH71Lgpvs4N1ewWA0M+1owQcQD5ORsfmf0bfnNVDkWVFL9M0g
+ ziE5LlJz5R2WFIoosxLdYGypg3XAxshcK9ia1nGtcdPtDoAvehASdX4OzbR1cOwvC8f5
+ 8B2raxndMKu9CJdcIxyzszC95hJiE1F1u/Tw3M/s1Wo4rivfD219RvvPpwuUnsjzLCEL
+ OzRRXV/9mmubskAt3pBY7VThph7FYQVG1xyzyB8kxfLKABrB4oVvQVYfepGoCG+zEtvF
+ 8riA==
+X-Gm-Message-State: AOJu0YxoXIx77HtclboATV1HZ4uHpL1eUfi91VNBteZbIWaT138Sa24B
+ RqveMeecXFgYPoMtENeLnt1g8xEyTi5OmKQ9YyCDOx0oMSuYgjG3OZrBIQwS6RoSZgp7158K4fc
  =
-X-Gm-Gg: ASbGncveWbiMEvpa0pPegaZcyRMSYxARJx/lkOj4ODAzu4D0fyi9Z7ai6zPMBs8IWyW
- x3Bkzp0l5Fmk4DX0V85sPd+9iLXAN6fsNZhs1oT1YWPmUxqN18yn8iNIX1lDggjb6cqmMGa22p3
- 3skDRUUmsxMnvYLyTHZCTBoUzj2Mnp7V81JYANsTCCzGNN0R/82VH7NTwSudMMq/wA9xGqOEf58
- KoGJtNzW36rejiXK7UTGvjOdC5Axzm1hZSR4rWxPyAm
-X-Google-Smtp-Source: AGHT+IFzTMGzR9nucDipcQaSOm2QVlHz8P1RrQOQ/pSX/gBg9XMfZEuxn8I8s239IVzOePhrzeAl/A==
-X-Received: by 2002:a05:6e02:2164:b0:3a7:6e72:fbb3 with SMTP id
- e9e14a558f8ab-3a7c5525433mr174592805ab.4.1733066907917; 
- Sun, 01 Dec 2024 07:28:27 -0800 (PST)
+X-Gm-Gg: ASbGnct26fm1VTllYnEvqaszv03n49OaNlYsQiFt6rKHB7gd3CO7w3IriMoo3T2PNc+
+ vTkTH0JzG5rc9ZumtSCvadI+j137yqVuEuvgzb9INfsUxswC025NPopzxdHzfHzcdDvruk8jAjs
+ Ix7SvZVMSex7Id3VqG/YD6KDbAmavrqfOLuxwDgT3CtcIi1anBy7NVIlVYyIU8nVbvFC921yEmp
+ T8rMJSoDN2n1A8+h8qExEjbvX9+h+BtG9OT1c6wQLoz
+X-Google-Smtp-Source: AGHT+IFzM5hncQarBdc9rVVL4jI0zvHOYO9bhW2W8p+QrqeJCN47qCgaWxfisWgTwpdxV08QkK1ZUw==
+X-Received: by 2002:a05:6602:6c15:b0:843:e30e:9893 with SMTP id
+ ca18e2360f4ac-843ed0d5663mr2082973739f.12.1733066778021; 
+ Sun, 01 Dec 2024 07:26:18 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e230dcb33esm1690307173.57.2024.12.01.07.28.26
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.26.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:28:27 -0800 (PST)
+ Sun, 01 Dec 2024 07:26:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v5 4/9] board_f: Rename reserve_stack_aligned()
-Date: Sun,  1 Dec 2024 08:28:06 -0700
-Message-ID: <20241201152815.1668093-5-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 24/25] efi_bootmgr: Avoid casts in try_load_from_uri_path()
+Date: Sun,  1 Dec 2024 08:24:43 -0700
+Message-ID: <20241201152505.1666789-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241201152815.1668093-1-sjg@chromium.org>
-References: <20241201152815.1668093-1-sjg@chromium.org>
+In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
+References: <20241201152505.1666789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,84 +95,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most of the calls to this function have nothing to do with the stack.
-Rename the function to avoid confusion.
+Update this function to use map_sysmem() so that it can work correctly
+on sandbox
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/board_f.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 677e37d93c0..3532ffec46f 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -492,7 +492,7 @@ static int reserve_uboot(void)
-  * ref = x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
-  *     = ARMv8 Instruction Set Overview: quad word, 16 bytes
-  */
--static unsigned long reserve_stack_aligned(size_t size)
-+static unsigned long reserve_aligned(size_t size)
- {
- 	return ALIGN_DOWN(gd->start_addr_sp - size, 16);
- }
-@@ -522,7 +522,7 @@ static int reserve_noncached(void)
- /* reserve memory for malloc() area */
- static int reserve_malloc(void)
- {
--	gd->start_addr_sp = reserve_stack_aligned(TOTAL_MALLOC_LEN);
-+	gd->start_addr_sp = reserve_aligned(TOTAL_MALLOC_LEN);
- 	debug("Reserving %dk for malloc() at: %08lx\n",
- 	      TOTAL_MALLOC_LEN >> 10, gd->start_addr_sp);
- #ifdef CONFIG_SYS_NONCACHED_MEMORY
-@@ -536,7 +536,7 @@ static int reserve_malloc(void)
- static int reserve_board(void)
- {
- 	if (!gd->bd) {
--		gd->start_addr_sp = reserve_stack_aligned(sizeof(struct bd_info));
-+		gd->start_addr_sp = reserve_aligned(sizeof(struct bd_info));
- 		gd->bd = (struct bd_info *)map_sysmem(gd->start_addr_sp,
- 						      sizeof(struct bd_info));
- 		memset(gd->bd, '\0', sizeof(struct bd_info));
-@@ -548,7 +548,7 @@ static int reserve_board(void)
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 9383adbd958..98799aead84 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -498,6 +498,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	 * If the file is PE-COFF image, load the downloaded file.
+ 	 */
+ 	uri_len = strlen(uridp->uri);
++	source_buffer = map_sysmem(image_addr, image_size);
+ 	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+ 	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+ 		ret = prepare_loaded_image(lo_label, image_addr, image_size,
+@@ -507,21 +508,19 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
  
- static int reserve_global_data(void)
- {
--	gd->start_addr_sp = reserve_stack_aligned(sizeof(gd_t));
-+	gd->start_addr_sp = reserve_aligned(sizeof(gd_t));
- 	gd->new_gd = (gd_t *)map_sysmem(gd->start_addr_sp, sizeof(gd_t));
- 	debug("Reserving %zu Bytes for Global Data at: %08lx\n",
- 	      sizeof(gd_t), gd->start_addr_sp);
-@@ -567,7 +567,7 @@ static int reserve_fdt(void)
- 			gd->boardf->fdt_size =
- 				ALIGN(fdt_totalsize(gd->fdt_blob), 32);
+ 		source_buffer = NULL;
+ 		source_size = 0;
+-
+-	/* TODO(sjg): This does not work on sandbox */
+-	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
++	} else if (efi_check_pe(source_buffer, image_size, NULL) ==
++			EFI_SUCCESS) {
+ 		/*
+ 		 * loaded_dp must exist until efi application returns,
+ 		 * will be freed in return_to_efibootmgr event callback.
+ 		 */
+ 		loaded_dp = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+-					    (uintptr_t)image_addr, image_size);
++					    image_addr, image_size);
+ 		ret = efi_install_multiple_protocol_interfaces(
+ 			&mem_handle, &efi_guid_device_path, loaded_dp, NULL);
+ 		if (ret != EFI_SUCCESS)
+ 			goto err;
  
--			gd->start_addr_sp = reserve_stack_aligned(
-+			gd->start_addr_sp = reserve_aligned(
- 				gd->boardf->fdt_size);
- 			gd->boardf->new_fdt = map_sysmem(gd->start_addr_sp,
- 							 gd->boardf->fdt_size);
-@@ -584,7 +584,7 @@ static int reserve_bootstage(void)
- #ifdef CONFIG_BOOTSTAGE
- 	int size = bootstage_get_size(true);
- 
--	gd->start_addr_sp = reserve_stack_aligned(size);
-+	gd->start_addr_sp = reserve_aligned(size);
- 	gd->boardf->new_bootstage = map_sysmem(gd->start_addr_sp, size);
- 	debug("Reserving %#x Bytes for bootstage at: %08lx\n", size,
- 	      gd->start_addr_sp);
-@@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
- static int reserve_stacks(void)
- {
- 	/* make stack pointer 16-byte aligned */
--	gd->start_addr_sp = reserve_stack_aligned(0);
-+	gd->start_addr_sp = reserve_aligned(0);
- 
- 	/*
- 	 * let the architecture-specific code tailor gd->start_addr_sp and
+-		source_buffer = (void *)image_addr;
+ 		source_size = image_size;
+ 	} else {
+ 		log_err("Error: file type is not supported\n");
 -- 
 2.43.0
 
