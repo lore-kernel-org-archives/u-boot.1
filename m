@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 126E2D49776
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A978ED49779
 	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CBF489718;
-	Sun,  1 Dec 2024 16:28:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A58C7896A9;
+	Sun,  1 Dec 2024 16:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LVkTzwkU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VIgKbbfm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1426A8914D; Sun,  1 Dec 2024 16:28:34 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id F2DC98966F; Sun,  1 Dec 2024 16:26:14 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 289EC895B1
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:28:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 85B5E8948A
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:26:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a777fd574bso12590855ab.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:28:28 -0800 (PST)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-84198253240so123486339f.0
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:26:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066906; x=1733671706; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066767; x=1733671567; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OK6BVB/zrKgFQRIoVG4HZsXvxHAkWPaelfh4X4dXF0A=;
- b=LVkTzwkUkVe6NE5UlUbCkoYDcyPCzxWFdMb9ykNVQf//1odMDmrQE0b36GpA9lGR9h
- 2WOIWN9XsYcsBxw+P6TYj6ofSv4/01ZgZgRx00llLCEUZNxT2xZunYuXwkC3PN2Gzzw1
- eDTvCZ8Z4ikBNlyRGvcs0uLPwtyj4ekagJKpM=
+ bh=c8jkRDaqIvlr/a/jLQOYzRFeKLCLagEcpHQivrCeYqc=;
+ b=VIgKbbfmFBtn0gt31sIcPMDdFuvQzbKqrprPevSHL9Ta+PCFY/cZpYI0WeUGkhEtYy
+ I5QhXuhmB7hM6tGS70TyiLCwq+wKkGROyc3K5ejVm3FxKtEHOCTM0qFSow5ubtcM6R9s
+ RFuoj3Cz+9DzxmrxSgfF5+66jA/3z2m3H0V5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066906; x=1733671706;
+ d=1e100.net; s=20230601; t=1733066767; x=1733671567;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OK6BVB/zrKgFQRIoVG4HZsXvxHAkWPaelfh4X4dXF0A=;
- b=X6H/qoPyU28Jf2mNvGDSXA8plX0e3COBTIj44Bo+ze37ndE0qCpWRcClKNqCxUjfpm
- iSOhPwwY9LTvRQxauoTXHae5meYKAhnfujsrPjdSG9JTGAE3pWkqulMcOQ3P9NxpvZ5C
- PCH2kzXssBwFYdrlV11lrUsK7fzEZtwdUfmNjKv0MdsAz7SixWztyXuzq7jf4ULmlj4J
- bvwhfRA2HOvWNE6hf8PPrSmF9VM8nbWGR47PvU0HjRheicETonTK5IIoC4dutqPEp96E
- LeL2/1mctJwR/1ll5V5rFIca1+Dbs55Apx3qIcyvIZU2B+VADx+ARIUF6E2dOyq/6upl
- 7O1Q==
-X-Gm-Message-State: AOJu0YxpMRuMS1xrcN1jVPfveVPL3qFpr80IxELO4IuA90308dlmJgXA
- 1WsdEn7HpkxeBSG75jsggOUYNVjV35xZ/smUxEmiAVjtqWqyODdXZ52vID7OprYkHYCk9ziHxO8
+ bh=c8jkRDaqIvlr/a/jLQOYzRFeKLCLagEcpHQivrCeYqc=;
+ b=fIJi9BS/hLBFkOGRjOFKW5TNsY/hUFSnebXUiLjNSDQC9l1LeoQDtqJ5qwcdBAmpgr
+ ybZ3YkLR/ONsIoz/6YUvjmTGGBWUprpEIbs1giKi/VBvORiXCPNSfTkfsZiX6NWle20s
+ YQ2Kas7mBiElXZB7rHCN3riZSkfa7Ws+RY6UjWNkH1vgrm05JuCRXLStdZMv7Eoe2opl
+ 3uQwjceo+nlM+oxhPaQcPcIl9XCETQwyeASkVKt65m2zI7TIT8BjnKo9TS2aCB6iWTFT
+ e6VHf/GNcqA0LZhgy5hox20Oto0pIm+VcC3xbVspucc6Lfk6f7ybtTewuOBplzMtnXbS
+ RA3Q==
+X-Gm-Message-State: AOJu0YxdlyAo/WuniKj7EnykeSKPgxrc+XjYCF1i49U7AapP63MQcZ6i
+ IYQc+ZnXtUICm5qPNXxct7qFFBD8WJCGa/9Kndc0hc+AX3lW+pyT3PlFI22lPp/oWpnE7Pg+yBw
  =
-X-Gm-Gg: ASbGncsLTPiRTd17MqbCmH96B26jnN3xtgGGCXdwo2FTt/x+Yh+rvm4Z86agKomY5wI
- YmG0gPTpbMTEwrGRCHO4S+Q15GuTuRZ0I7iA4nYXaZOH5h9C0D+wJMRLNTZ2BDJHISoqtrCGR4x
- 2bK7DDlkatm0b8C9iJZ8dGXvtQjLpliiPK3r0O0oONI4OloEBqAyODdlAYVox5nQ7O2qOVUbLnU
- xSjHJG4skP3XukvpE0w647dr+N3Q7gYvVq7Yv2jvQdf
-X-Google-Smtp-Source: AGHT+IHqOb/jyT0A12KBc1GBn+EXF4yQvAsgyXeTVn9R2ZCcyL7wKymzwNNDV6moNVS0EO8kC1kdLQ==
-X-Received: by 2002:a05:6e02:3193:b0:3a7:d7dd:e709 with SMTP id
- e9e14a558f8ab-3a7d7dde903mr104765665ab.7.1733066906323; 
- Sun, 01 Dec 2024 07:28:26 -0800 (PST)
+X-Gm-Gg: ASbGncs5Av9JFqQztgWhY8yZ4z5XjtUViCY0kL+fMP65xHxuYO0HJ2kNKDkkm2LZAq9
+ knYQRGyEGgu5F3uih2K/3BT+gdrkBcPs/uHAVdBLWvyKa3imjBSe0z8gPuQW4BPPoWVTzwYvp86
+ WqVrHl88nw6KnfVzoR4WLIl5kGTNbJxSMfEsJQHcZ6c49DBfUnE2K8dxrWIMFDm7eYpnzJ8qc69
+ G7J6a8f6cgtEjzdyhRlcqiQTh4fQBd4kSKMfWusXkI/
+X-Google-Smtp-Source: AGHT+IFYoeLUGt8HPdz6rmhXcFrYVWG0qsz902zyeV7sTGD2x5GNny9bHdBM3Mv6Ptx33bsdOBUVag==
+X-Received: by 2002:a05:6602:342a:b0:835:4cb5:4fa7 with SMTP id
+ ca18e2360f4ac-843ed09db4amr2276187839f.12.1733066767026; 
+ Sun, 01 Dec 2024 07:26:07 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e230dcb33esm1690307173.57.2024.12.01.07.28.24
+ ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.26.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:28:25 -0800 (PST)
+ Sun, 01 Dec 2024 07:26:06 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>, Raymond Mao <raymond.mao@linaro.org>,
- Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v5 3/9] board_f: Correct stack reservation
-Date: Sun,  1 Dec 2024 08:28:05 -0700
-Message-ID: <20241201152815.1668093-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 20/25] efi_loader: Don't try to add sandbox runtime code
+Date: Sun,  1 Dec 2024 08:24:39 -0700
+Message-ID: <20241201152505.1666789-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241201152815.1668093-1-sjg@chromium.org>
-References: <20241201152815.1668093-1-sjg@chromium.org>
+In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
+References: <20241201152505.1666789-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,34 +94,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The reserve_stack_aligned() function already ensures that the resulting
-address is aligned to a 16-byte boundary. The comment seems to suggest
-that 16 is passed reserve_stack_aligned() to make it aligned.
+This cannot work since the code is not present in the emulated memory.
+In any case, sandbox cannot make use of the runtime code.
 
-Change the value to 0, since the stack can start at the current address,
-if it is suitably aligned already.
+For now, just drop it from sandbox. We can always adjust things to copy
+it into memory, if needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/board_f.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/efi_loader/efi_memory.c | 26 ++++++++++++++++----------
+ 1 file changed, 16 insertions(+), 10 deletions(-)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 98dc2591e1d..677e37d93c0 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
- static int reserve_stacks(void)
- {
- 	/* make stack pointer 16-byte aligned */
--	gd->start_addr_sp = reserve_stack_aligned(16);
-+	gd->start_addr_sp = reserve_stack_aligned(0);
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 89f22388fc4..b3ba67413ee 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -769,16 +769,22 @@ static void add_u_boot_and_runtime(void)
+ 	runtime_mask = SZ_64K - 1;
+ #endif
  
- 	/*
- 	 * let the architecture-specific code tailor gd->start_addr_sp and
+-	/*
+-	 * Add Runtime Services. We mark surrounding boottime code as runtime as
+-	 * well to fulfill the runtime alignment constraints but avoid padding.
+-	 */
+-	runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
+-	runtime_end = (uintptr_t)__efi_runtime_stop;
+-	runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+-	runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+-	efi_add_memory_map_pg(runtime_start, runtime_pages,
+-			      EFI_RUNTIME_SERVICES_CODE, false);
++	if (!IS_ENABLED(CONFIG_SANDBOX)) {
++		/*
++		 * Add Runtime Services. We mark surrounding boottime code as
++		 * runtime as well to fulfill the runtime alignment constraints
++		 * but avoid padding.
++		 *
++		 * This is not enabled for sandbox, since we cannot map the
++		 * sandbox code into emulated SDRAM
++		 */
++		runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
++		runtime_end = (uintptr_t)__efi_runtime_stop;
++		runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
++		runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
++		efi_add_memory_map_pg(runtime_start, runtime_pages,
++				      EFI_RUNTIME_SERVICES_CODE, false);
++	}
+ }
+ 
+ int efi_memory_init(void)
 -- 
 2.43.0
 
