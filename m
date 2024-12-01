@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6F1D49776
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:41:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D50D49771
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B342F896EB;
-	Sun,  1 Dec 2024 16:28:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BFFB896E6;
+	Sun,  1 Dec 2024 16:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nmXJTX4E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fVFZ07Rq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 858BE89729; Sun,  1 Dec 2024 16:28:38 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 741D88914D; Sun,  1 Dec 2024 16:28:45 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF47896E2
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:28:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BBFD8971F
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:28:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3a790d6e782so14476955ab.2
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:28:32 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a7750318a2so24772685ab.2
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:28:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066911; x=1733671711; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733066914; x=1733671714; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LIJCXgp8Z96ZAtTXuge3Be8jxZciTsWJJ7T70uUax5E=;
- b=nmXJTX4ERiDdtRO7m/OaRADP0Xs0Hr1ZMYYquAxZGku2UBrPvN4msfmd+cujIWbvTi
- L3eMs3oSSSDHip7dIePavUa0v9CwO3OTV7JEgjnUn2dpnWSKfj6IyNRZAvdGjYeqrmVJ
- 71KpY0oulXxEZn/JL8TyadkkztcRxIOk0uT1E=
+ bh=WXe/Q3J5sVWhLKNCsv87QQ3az8P0CzvYXx2tqnMWTvs=;
+ b=fVFZ07Rqtttsp/o0i1Zln4hWEV+cUJLZKYzOtG7L8pjBKHHwzzwO1FH2Pu+nNticuV
+ aDjaSfYNTZLztszTa61lH+Dk7xOVQ61J4DQcC30851zfyVY57T4iGdF+X9QlkF2XDrt8
+ qFRFB+/tBTZW9Rxq3qjuhbsP/fTLNXc3NQbBg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066911; x=1733671711;
+ d=1e100.net; s=20230601; t=1733066914; x=1733671714;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LIJCXgp8Z96ZAtTXuge3Be8jxZciTsWJJ7T70uUax5E=;
- b=DaVhUvRxTUq3i5xpj8MimEJpg81UO783/ts1Bwc29Tfbby0VqIudpZvAXNR49M24Gw
- r4Xy1pqOg/a+Pkj2w7dbPTEljEyDFC/qq91plnKlMh1z1hhBgXaYfXBllDlyz+o/a5Tz
- 5moT/K/IAaeRMTp/7dkkSnDpMghfNRLaMBu47JehTHWP3yjEECRsb7fCthKzCcsIjtzB
- 5lk0/XVgH1lP7R/wEec8IvbZiE5ktsaqDJRxeqf9YvtCRlAqFtkqx4K+D/Ruz0A2kdoZ
- ++l/GcV9+C4KrzYGOrB5Dm1LFcMqcRI5Jg6yZ3UD/8mJZsv89UWLkmaBpBek8Oxy6ZbT
- smJA==
-X-Gm-Message-State: AOJu0Yz4vduI4xy72/j4JzK1Eu6JeiTHviCTH4R99IlhgupBbvWF/kJY
- tOre4oK60t/SbA8IJA93fzn3aUSexe2SNaDXVZWeohb6gPN+dD7J91p6sssXyWPhOkM1JfW6LeE
+ bh=WXe/Q3J5sVWhLKNCsv87QQ3az8P0CzvYXx2tqnMWTvs=;
+ b=CM0vgziYmucLpcKEJmBLwf0HayxlRn9OlUGVgHObqJdViCEU4HJqS9nRJ30qql9JAw
+ +2Jge3vaOpSUqhVXVQqjcKPZT5Hmv2QsU6zrP07xfi1843vXMH8YWTbiTiA2tS/Y4/FI
+ 1q4pNYbEGtvNdKth7tVUBh1+bUNtspgDMHd3Y8WfrPzKn+RdHOCh0SvmYY4Z9K+vD2lY
+ A9V8JrhAjw+gTPjraenUQ7xC6Ku5aadGHUNLhfl4ttbDTwoR4FxKjESZAyWeHuph/MKP
+ wQEJjzbjWfesxf+2ACbZjQtFvpguLWladlEu5C4rZOsfTViHGGsdvV5O6M0Pe2RD8KRd
+ f5cw==
+X-Gm-Message-State: AOJu0Yynf5Jikn54JX5owMF5zFqw02sHqN1UMpEWK8STv+m5AWHbvvPX
+ 4GTwX4KcG2O+xhU9Rx6N/IIy2LCCiCxRirukDnpHVB6RZiTMPQMtNrj14dfnZxCfqaW8UGlpBl4
  =
-X-Gm-Gg: ASbGnctbx1mhEd4YENSwLIIuGzbBrF3WXgCbEQYM7z0AFVcMywiBgQ9ravvUhf6JISq
- olDBweRLcDwRGH5mTNLJg/nFXszMUR3L35aKcUTB9XJGIIGDhe+8JqJvekYfU8MQzcx9EQs72hj
- ttEOlXGe3Jk+tZZPH56MPgKatXXpJPM3mKldAbL+CjM9rBGhFkhdbbywe2chybYrinGemRL8siV
- 3Vx9tJIkL+YL2Cfdn6YKp/OLtNPlMK/muHjgGq9UPuq
-X-Google-Smtp-Source: AGHT+IH2kA9LUNPNOZBJUEQHWDDSKPoIppRExQAQexJcew/J+/QfkTc+msReWmprNwGkUMbdESq4zg==
-X-Received: by 2002:a05:6e02:1c2c:b0:3a7:1c51:f83d with SMTP id
- e9e14a558f8ab-3a7c55d6900mr186977815ab.18.1733066911102; 
- Sun, 01 Dec 2024 07:28:31 -0800 (PST)
+X-Gm-Gg: ASbGnctE85t1ija8QzuK9NpZzdLyzKY0WRbyhqWamSVUQNkcaJIYoQcjftmDgjvosBE
+ 3Jg7H4ZractoTIOWc5FtaXZSqhFBrDrP8NpmSC3/rh8PNnWpvIzAA6irpTv56xUXiT5ESVtuSiU
+ 1kdYwgMRdHIKb7Oj3VKTc405/BGwl6rKzEJ+lvohelckahum8EAsP9aseTdIJzpY5xDLsNZt24r
+ 8mSWA4a6oykRza+NOKLz+/ZeAGLsFvUOu1Q0WT+BWYg
+X-Google-Smtp-Source: AGHT+IGUZYrJlSRcnlt6fZrLwa+X6cOHMSgOlbGau3n7/Xz+yLFp6QjXWNy0PyZpAb3lxtalhZU/xw==
+X-Received: by 2002:a05:6e02:1aaf:b0:3a6:b783:3c06 with SMTP id
+ e9e14a558f8ab-3a7c55d6a17mr200330385ab.19.1733066914033; 
+ Sun, 01 Dec 2024 07:28:34 -0800 (PST)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e230dcb33esm1690307173.57.2024.12.01.07.28.29
+ 8926c6da1cb9f-4e230dcb33esm1690307173.57.2024.12.01.07.28.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:28:30 -0800 (PST)
+ Sun, 01 Dec 2024 07:28:33 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Moritz Fischer <moritzf@google.com>
-Subject: [PATCH v5 6/9] efi: Show the location of the bounce buffer when
- debugging
-Date: Sun,  1 Dec 2024 08:28:08 -0700
-Message-ID: <20241201152815.1668093-7-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v5 8/9] efi: Reserve some memory for initial use
+Date: Sun,  1 Dec 2024 08:28:10 -0700
+Message-ID: <20241201152815.1668093-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241201152815.1668093-1-sjg@chromium.org>
 References: <20241201152815.1668093-1-sjg@chromium.org>
@@ -96,107 +97,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is
-still needed and 24 boards (lx2160ardb_tfa_stmm,
-lx2162aqds_tfa_SECURE_BOOT and the like) use it.
+The 'point of cooperation' is where U-Boot starts allowing EFI to use
+memory outside of the U-Boot region. Until that point, it is desirable
+to keep more below U-Boot free for loading images.
 
-This feature uses EFI page allocation to create a 64MB buffer 'in space'
-without any knowledge of where boards intend to load their images. This
-may result in image corruption or other problems.
-
-For example, if the feature is enabled on qemu_arm64 it puts the EFI
-bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
-1088MB. The kernel is probably smaller than 27MB but the buffer does
-overlap the ramdisk.
-
-The solution is probably to use BOUNCE_BUFFER instead, with the EFI
-version being dropped. For now, show the address of the EFI bounce
-buffer so people have a better chance to debug any problem.
+Reserve a small region for this purpose.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-In response to questions on how to show this problem:
 
-First, add CONFIG_EFI_LOADER_BOUNCE_BUFFER=y to
-configs/qemu_arm64_defconfig and build
+(no changes since v1)
 
-Then, to run:
-qemu-system-aarch64 -machine virt -nographic -cpu cortex-a57 \
-   -bios u-boot.bin
+ include/asm-generic/global_data.h |  6 ++++++
+ lib/efi_loader/efi_memory.c       | 21 +++++++++++++++++++++
+ test/py/tests/test_event_dump.py  |  1 +
+ 3 files changed, 28 insertions(+)
 
-U-Boot 2024.10-00809-gae29e5f76e4a-dirty (Oct 11 2024 - 11:48:46 -0600)
-
-DRAM:  128 MiB
-Core:  51 devices, 14 uclasses, devicetree: board
-Flash: 64 MiB
-Loading Environment from Flash... *** Warning - bad CRC, using default environment
-
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-No USB controllers found
-Net:   eth0: virtio-net#32
-
-starting USB...
-No USB controllers found
-Hit any key to stop autoboot:  0
-=> bootefi hello
-Enabling coop memory
-No EFI system partition
-No EFI system partition
-Failed to persist EFI variables
-Missing TPMv2 device for EFI_TCG_PROTOCOL
-Missing RNG device for EFI_RNG_PROTOCOL
-Warning: EFI bounce buffer 000000004157f000-000000004557f000
-Not loaded from disk
-Booting /MemoryMapped(0x0,0x47763730,0x31b0)
-EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
-EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
-Hello, world!
-Running on UEFI 2.10
-Firmware vendor: Das U-Boot
-Firmware revision: 20241000
-Have device tree
-Load options: <none>
-File path: <none>
-Boot device: /MemoryMapped(0x0,0x47763730,0x31b0)
-=> print kernel_addr_r
-kernel_addr_r=0x40400000
-=> print ramdisk_addr_r
-ramdisk_addr_r=0x44000000
-=>
-
-The EFI bounce buffer overlaps with the ramdisk.
-
-Changes in v5:
-- Drop the word 'warning'
-
-Changes in v4:
-- Reword the commit message since this feature is needed
-
- lib/efi_loader/efi_bootbin.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index 7e7a6bf31aa..9a880251b47 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -208,6 +208,15 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
- 		return -1;
- 	}
- 
-+#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-+	/*
-+	 * Add a warning about this buffer, since it may conflict with other
-+	 * things
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index 26277b93976..5df3cdd419d 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -442,6 +442,12 @@ struct global_data {
+ 	 */
+ 	struct upl *upl;
+ #endif
++#if CONFIG_IS_ENABLED(EFI_LOADER)
++	/**
++	 * @efi_region: Start of EFI's early-memory region
 +	 */
-+	log_debug("EFI bounce buffer %p-%p\n", efi_bounce_buffer,
-+		  efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
++	ulong efi_region;
 +#endif
+ };
+ #ifndef DO_DEPS_ONLY
+ static_assert(sizeof(struct global_data) == GD_SIZE);
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index 76cf908c2de..344656c4eb0 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -26,6 +26,12 @@ DECLARE_GLOBAL_DATA_PTR;
+ /* Magic number identifying memory allocated from pool */
+ #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+ 
++/*
++ * Amount of memory to reserve for EFI before relocation. This must be a
++ * multiple of EFI_PAGE_SIZE
++ */
++#define EFI_EARLY_REGION_SIZE	SZ_256K
 +
- 	ret = efi_install_fdt(fdt);
- 	if (ret != EFI_SUCCESS)
- 		return ret;
+ efi_uintn_t efi_memory_map_key;
+ 
+ /**
+@@ -844,3 +850,18 @@ int efi_memory_init(void)
+ 
+ 	return 0;
+ }
++
++static int reserve_efi_region(void)
++{
++	/*
++	 * Reserve some memory for EFI. Since pool allocations consume 4KB each
++	 * and there are three allocations, allow 16KB of memory, enough for
++	 * four. This can be increased as needed.
++	 */
++	gd->efi_region = ALIGN_DOWN(gd->start_addr_sp - EFI_EARLY_REGION_SIZE,
++				    SZ_4K);
++	gd->start_addr_sp = gd->efi_region;
++
++	return 0;
++}
++EVENT_SPY_SIMPLE(EVT_RESERVE, reserve_efi_region);
+diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+index 45143c1c7d9..cc802583d3c 100644
+--- a/test/py/tests/test_event_dump.py
++++ b/test/py/tests/test_event_dump.py
+@@ -21,5 +21,6 @@ EVT_FT_FIXUP          bootmeth_vbe_simple_ft_fixup    .*boot/vbe_simple_os.c:.*
+ EVT_LAST_STAGE_INIT   alloc_write_acpi_tables         .*lib/acpi/acpi_table.c:.*
+ EVT_LAST_STAGE_INIT   install_smbios_table            .*lib/efi_loader/efi_smbios.c:.*
+ EVT_MISC_INIT_F       sandbox_early_getopt_check      .*arch/sandbox/cpu/start.c:.*
++EVT_RESERVE           reserve_efi_region              .*lib/efi_loader/efi_memory.c:.*
+ EVT_TEST              h_adder_simple                  .*test/common/event.c:'''
+     assert re.match(expect, out, re.MULTILINE) is not None
 -- 
 2.43.0
 
