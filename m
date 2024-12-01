@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61378D49775
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71C5AD49775
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:08:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 820678914D;
+	by phobos.denx.de (Postfix) with ESMTP id D769789428;
 	Sun,  1 Dec 2024 16:07:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="If7z0SQ7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lk1h8xEi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16D9F89428; Sun,  1 Dec 2024 16:07:34 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 360E689428; Sun,  1 Dec 2024 16:07:34 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD91888D3C
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:07:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE31088D36
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bigunclemax@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-53df1e0641fso3765955e87.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:07:28 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-53e0844ee50so236420e87.0
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:07:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733065648; x=1733670448; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733065651; x=1733670451; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QwJc1/NFbm6ZlSJcRwTKaXmlWWOb38U8nBnnuqkMe40=;
- b=If7z0SQ7MUst5gaBlKIFRZdSF65Len9aMjGa4jCLfFXpg1469FuhvNTbtE5c25ZMRl
- Ii2hLdG2tkLSoNXvfNiAzBxc6w2TZUI/u6Rf6q9vm20nawE43XUUQ2m5gopPEQiYkX3m
- x+bhBd8zYiDqkIbH67FtijTd4v7ZeNxs4W9o5LQsq1l8A+WjifAaVydlYmBG+saBFUWy
- It8E0lx3URAdvyieAFKFs4i3T/s7TMHVFnsofYlt1JOqb1MISZfFP7KNRPueLxxxwDQG
- lcfjfXzKLE/3zBTJDDwXjceDtylP/zSsG/ZYVaWJ9jET/Y3Bg72lyZpryPIeeP48drdy
- ID+A==
+ bh=55/XRxyBKljg6iz7/3C2zM1nzU2A3rLFYIWJYNtmWBY=;
+ b=Lk1h8xEitBg0C5E2V1PGJBZVYwHVHIJFCc6g9+g2MaGIiPPiG7hZwuJbaiU1j13LtX
+ rx5nJLP2j43HkoBmZMQ/O5j8hLc3nEIopqmZJ1toz9DTtW5bHDf0tN4b0O5aaPdYh2UA
+ t3QFSKsqjQgeeG1aS0a8ZNYMjeVt/eMZDIghDzK6w3XlMKzeEDR5lEELi1HNno0AICJm
+ pllyPJ/GJknW/EtpamFcvv5xxLRGz+xPyxbdoPLYaJ0o5fumLcgsekveuRrPGshkVztJ
+ +1HrE1sW06NXUbHskEYC8cQjZelcCyLsjNojsP7S2uFzEtGEo+05b8627H5gDZOZvOqF
+ 25fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733065648; x=1733670448;
+ d=1e100.net; s=20230601; t=1733065651; x=1733670451;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QwJc1/NFbm6ZlSJcRwTKaXmlWWOb38U8nBnnuqkMe40=;
- b=Go1Oy0KyyPhJphjmfMzyvsyBnZwvJu+kR+xM+VImXBOUvTXj3L3p6XbCLZ2FOvmtm+
- ToJhs+SZxywl7k7l9FnoYZYUx3+B0EI+AmTW/RnkBNGVhTFMjnOjNB82Pet7pC+z/0Bp
- ACuhrmycsGVe9sEasshKeegd8zPhAve5rm0lz03wUa8+1Sdi/298i5tdRwEkV7LGNxpE
- J21Feez/yrTonlMQGH/uZtnWzQmloL2XaKw5gJP7J68/tr6yuEVNl64HmuH2Z3o6jflp
- o32PyBMC5fZeHxlLG2LQ6PcTNUK460QSd0zvwjlugpjZv/vAIOghzhcC0/0aBVK6E/vD
- bEPw==
+ bh=55/XRxyBKljg6iz7/3C2zM1nzU2A3rLFYIWJYNtmWBY=;
+ b=ZIFxBCAbuH/k5QHdi2quXH5UpLtsrm2P6YcH/oWBEbPclNTTQNu87jNMzLl+IxvVtb
+ lOTn08MqSRgHkTGM5cBLp5x7QBvYWgur0MWj/O27tPn9zl5MlnGsMTkOgqRr3Bhvr520
+ 6wDfbTiw+Xjwp8SUn0l3NbWOxZWjn9qw15uw00/CHxWVEVA9BklNrb13iWVzG0h/tdD3
+ NpE243KCO8rX9Y4le1FB3yQe3duL/OZ6E6/x8vJ+hwn2pyUFugrgT/PkPJID5txIzziN
+ HWrEFpGr/M15Fi0EHpmF0TM2fe2W+0uPD33Wt4hj9MbFdyFwvSxwlTBdQ97FaWU2DJBS
+ qb8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9HjjQnEWZcjvybTVJdFqV3YnI1mox9J9Vv6wlspgNjIREc03hlx2TAWbyo9Z/do6fP6KVSHc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwjdufGN1kRDxWnLcLQ/FhqP7QFRcdqOcYGxdlyWnCW8SpbJk+x
- g1KVS9AiTLzfkPaLMPMpLHXJs0yTfruarmv1zuVhTdssnQZLQKmE
-X-Gm-Gg: ASbGncuHNt25uY+4iwJffp7+o6WN6KioCEHg4KNZ678X7snR5+8C8l33AGG5C5afKik
- dxVDobhJzXJUVfg7OzG4sfJiN5R9oKTuc5NhVLt/EqHE94N4x1YAD9cp1SqbVc0Guy6g25GvMrg
- KDb9k2uJekRXoFU3XhK6B87fya25zfl1AMD1brydQ5L37IQIa4Y3SOvx/Ltvmxx5TU1rW42NK1u
- r9mBroFU6yBVwguJEjRhBNYWVRVYxybwBrfJQIclU4w84w+hOtyNSAZwdJEr/FWPlnUJqjl
-X-Google-Smtp-Source: AGHT+IHmmHLhLBjXBAL2L3Gh+OigcsooXLoBa5xa4iAPJION468RoyiWPruJ0NOcPZTaiB0LSzP1RQ==
-X-Received: by 2002:a05:6512:b0b:b0:539:e85f:ba98 with SMTP id
- 2adb3069b0e04-53df01126a8mr10423054e87.56.1733065647668; 
- Sun, 01 Dec 2024 07:07:27 -0800 (PST)
+ AJvYcCWoF2s78nelbzn9Jx1QGp+mI13wJZ0k+xO86iG8wZDStAdLIiitNY15cIHwy3/4A1io/Y0glR8=@lists.denx.de
+X-Gm-Message-State: AOJu0YykT7P1KdxnPrRJ2IpmKuK6kU6RlyaCS3C74j60Bi423ZjIzu+F
+ EPm+KDwHwi30bUaNwXKSVMXFxkgqlVPE3pbJejRwjk6YiaT3s9D3
+X-Gm-Gg: ASbGncsIjLQNMd1eiKZzWkb7N5ZXyI1eWjwyPmaiPEmJoYZ9vDl4abpR4q6MRKPJBjo
+ fIR4wOkypoTJuOTwz+Hu8PRBKtoqVoHxsaxGT/pO+gLU884Ku4degOAQp8Xgjy5+OZmFVXbx9Jl
+ 8mGd510nUVK2Iv6QIoD2NiAnbQioZ4mxat3lCLxQfgbtVAEp7s19/zDE+AlfiV8B1e9nnraqJET
+ fkj07h6/hjk9amVQ4Hyge4ewNNY13XfLqYoLaXeHEhV5ZkmYBBbpJzQWSDSOSafQZ7pT/7X
+X-Google-Smtp-Source: AGHT+IECqXRFhBD/Ih10hLoswku/pOX1O2lVCy4aGe1u4lEvM4w8V3lJ+j5DBvS/97AWdefR6fLHBQ==
+X-Received: by 2002:a05:6512:3a87:b0:53d:dd09:124a with SMTP id
+ 2adb3069b0e04-53df00a9835mr10894062e87.8.1733065650999; 
+ Sun, 01 Dec 2024 07:07:30 -0800 (PST)
 Received: from wpc.. (host-93-124-60-94.dsl.sura.ru. [93.124.60.94])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53df646f1a7sm1101120e87.165.2024.12.01.07.07.25
+ 2adb3069b0e04-53df646f1a7sm1101120e87.165.2024.12.01.07.07.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:07:26 -0800 (PST)
+ Sun, 01 Dec 2024 07:07:30 -0800 (PST)
 From: bigunclemax@gmail.com
 To: 
 Cc: bigunclemax@gmail.com, Rick Chen <rick@andestech.com>,
@@ -77,21 +77,21 @@ Cc: bigunclemax@gmail.com, Rick Chen <rick@andestech.com>,
  Wei Fu <wefu@redhat.com>, Yixun Lan <dlan@gentoo.org>,
  Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Greg Malysa <greg.malysa@timesys.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Kongyang Liu <seashell11234455@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Linus Walleij <linus.walleij@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jonas Karlman <jonas@kwiboo.se>,
- Wei Liang Lim <weiliang.lim@starfivetech.com>,
- Kuan Lim Lee <kuanlim.lee@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 2/3] riscv: dts: t-head: Add sdhci and emmc nodes
-Date: Sun,  1 Dec 2024 18:06:55 +0300
-Message-ID: <20241201150704.44462-3-bigunclemax@gmail.com>
+ Greg Malysa <greg.malysa@timesys.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 3/3] configs: th1520_lpi4a: enable mmc controller support
+Date: Sun,  1 Dec 2024 18:06:56 +0300
+Message-ID: <20241201150704.44462-4-bigunclemax@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241201150704.44462-1-bigunclemax@gmail.com>
 References: <20241201150704.44462-1-bigunclemax@gmail.com>
@@ -115,93 +115,45 @@ X-Virus-Status: Clean
 
 From: Maksim Kiselev <bigunclemax@gmail.com>
 
-Add SDHCI and EMMC controlles nodes on TH-1520 SoC. And enable them for
-Lichee module 4A.
+Enable driver for DesignWare MSHC. TH1520 supports all
+speed modes up to HS400ES and UHS SDR105.
+
+Also enable ADMA and mmc command.
 
 Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
 ---
- arch/riscv/dts/th1520-lichee-module-4a.dtsi | 18 +++++++++++
- arch/riscv/dts/th1520.dtsi                  | 34 +++++++++++++++++++++
- 2 files changed, 52 insertions(+)
+ configs/th1520_lpi4a_defconfig | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/arch/riscv/dts/th1520-lichee-module-4a.dtsi b/arch/riscv/dts/th1520-lichee-module-4a.dtsi
-index dc00e3dfa0..86a81bdcf7 100644
---- a/arch/riscv/dts/th1520-lichee-module-4a.dtsi
-+++ b/arch/riscv/dts/th1520-lichee-module-4a.dtsi
-@@ -32,3 +32,21 @@
- &uart_sclk {
- 	clock-frequency = <100000000>;
- };
-+
-+&emmc {
-+	bus-width = <8>;
-+	max-frequency = <198000000>;
-+	mmc-ddr-1_8v;
-+	mmc-hs400-1_8v;
-+	mmc-hs400-enhanced-strobe;
-+	non-removable;
-+	no-sdio;
-+	no-sd;
-+	status = "okay";
-+};
-+
-+&sdio0 {
-+	bus-width = <4>;
-+	max-frequency = <198000000>;
-+	status = "okay";
-+};
-diff --git a/arch/riscv/dts/th1520.dtsi b/arch/riscv/dts/th1520.dtsi
-index d68c446a6b..9378de89c5 100644
---- a/arch/riscv/dts/th1520.dtsi
-+++ b/arch/riscv/dts/th1520.dtsi
-@@ -141,6 +141,13 @@
- 		#clock-cells = <0>;
- 	};
- 
-+	sdhci_clk: sdhci-clock {
-+		compatible = "fixed-clock";
-+		clock-frequency = <198000000>;
-+		clock-output-names = "sdhci_clk";
-+		#clock-cells = <0>;
-+	};
-+
- 	soc {
- 		compatible = "simple-bus";
- 		interrupt-parent = <&plic>;
-@@ -206,6 +213,33 @@
- 			status = "disabled";
- 		};
- 
-+		emmc: mmc@ffe7080000 {
-+			compatible = "thead,th1520-dwcmshc";
-+			reg = <0xff 0xe7080000 0x0 0x10000>;
-+			interrupts = <62 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&sdhci_clk>;
-+			clock-names = "core";
-+			status = "disabled";
-+		};
-+
-+		sdio0: mmc@ffe7090000 {
-+			compatible = "thead,th1520-dwcmshc";
-+			reg = <0xff 0xe7090000 0x0 0x10000>;
-+			interrupts = <64 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&sdhci_clk>;
-+			clock-names = "core";
-+			status = "disabled";
-+		};
-+
-+		sdio1: mmc@ffe70a0000 {
-+			compatible = "thead,th1520-dwcmshc";
-+			reg = <0xff 0xe70a0000 0x0 0x10000>;
-+			interrupts = <71 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&sdhci_clk>;
-+			clock-names = "core";
-+			status = "disabled";
-+		};
-+
- 		uart1: serial@ffe7f00000 {
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0xff 0xe7f00000 0x0 0x100>;
+diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
+index 3b6ff62ee1..d13c97463a 100644
+--- a/configs/th1520_lpi4a_defconfig
++++ b/configs/th1520_lpi4a_defconfig
+@@ -54,6 +54,8 @@ CONFIG_CMD_BOOTMENU=y
+ CONFIG_CMD_GPIO=y
+ # CONFIG_CMD_LOADB is not set
+ # CONFIG_CMD_LOADS is not set
++CONFIG_CMD_MMC=y
++CONFIG_MMC_SPEED_MODE_SET=y
+ # CONFIG_CMD_ITEST is not set
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+@@ -66,7 +68,14 @@ CONFIG_NO_NET=y
+ CONFIG_DWAPB_GPIO=y
+ # CONFIG_I2C is not set
+ # CONFIG_INPUT is not set
+-# CONFIG_DM_MMC is not set
++CONFIG_MMC=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_SNPS=y
+ # CONFIG_MTD is not set
+ # CONFIG_POWER is not set
+ CONFIG_SYS_NS16550=y
 -- 
 2.45.2
 
