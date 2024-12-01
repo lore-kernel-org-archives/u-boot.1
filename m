@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB127D49780
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 18:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92831D4977B
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 18:45:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDE2288CA0;
-	Sun,  1 Dec 2024 19:45:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4283188D4F;
+	Sun,  1 Dec 2024 19:45:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1733078713;
-	bh=fTgUOBJfedgXEWBomwpoLwjXwQyqQna+ZdWsjZQb0iU=;
+	s=phobos-20191101; t=1733078715;
+	bh=qtzmSK2d7/zU7G+l+Fol35zBf4YjuFfezIoRhVGfxgc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=XtkLwtq+0l3VUmdOK3e+b2aut8iAv0urjM7Blb+cqxx4OQYAHaPJa3mXCPT67Jzmx
-	 1SlgHhGtBbA4+jA0nU1y2iWHCiA5G0/NQCCi0DnHfOBlWBO7Eljp4eg7BWIHunP90v
-	 xYKasZVY80r6QVS9LnJOUADSdCr9S1aWk6fVTPv0RAEJZlFUQJJnnk9bGuaQyu4HUt
-	 dHjG7Zha/Yp0+RBuldzrMpSptSU4/8HeJ54bVdNKKqjgZJ/8gtPpefoGi1ydoCoIqL
-	 5prjH20/M7sTyP6SAGnH5gwJmCwEFterkEvvWYjJ8Fz1UmQlR7YPOxRGzP2BNopyoB
-	 RRPC6vGRCGjtQ==
+	b=V5fBsKyY6/4ci/ZKIij/kVtWby3qFrxZFshnuH4s4Jwj95Nx6MSCIG2xtMSqmfhTB
+	 0BBOp4NTHr5UDOaWNZET7FWRRLtUOfPUG+ZqDOaftxe0oOHIuJ35YkQSrxo6y3BuYc
+	 0pgFpR3fRgWrHdQcoHgnfNLuRPFsX3v5Hl2gN9R/Nb1Sgait/Fr/XIhuhmtE+rDmb6
+	 c0blHBbjHCF4ZcTb4FxVpxT30dPDSopQp5FgrabvChCVTA8I2pfGn3BxPOE2qHF1Lu
+	 9KF0MimDcU/KwdL/Qhp04Blk7/vAVEZj3+/vpHmFOWy1R2MTB//SW2i/0VzufjYtJ/
+	 DzhC6BUHRPQvg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DC90B88B58;
- Sun,  1 Dec 2024 19:45:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id B617788B64;
+ Sun,  1 Dec 2024 19:45:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1733078712;
- bh=fTgUOBJfedgXEWBomwpoLwjXwQyqQna+ZdWsjZQb0iU=;
+ s=phobos-20191101; t=1733078713;
+ bh=qtzmSK2d7/zU7G+l+Fol35zBf4YjuFfezIoRhVGfxgc=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=swYIn1gOAmoXbqfilXKV/0lZCVLs5Pa1PXZQWnQDyo63DNwhI8zISzwSZmEeLJo8q
- Eywvy29aNuKrY8o6zK92B9V8kRsYKlTIJY2/b0GDbF595LbPMuCBlCRwOuTzaf3VZt
- i4KdlLIT0avwkKzZQ1zsSfU9C2tg3WaioQOU990BOcf8F7qzJF/3ECT293hZMJo3io
- 0abfzxperC1vGoB5NvjmIrS2v2NOnWqkWdu6PY/fkNd/k9zU7lkV8mH3YhkjK8ezO1
- M0ZMCy1zcZdbs7GXiTzDsRXwzrdvPxH2rucvp7wl+xY9BhPqAoAbD//QTxVDGN2S3X
- jK/NrxvFVV6Qw==
-Message-ID: <3f220d59-c44a-4472-8abd-a091563d7ea8@denx.de>
-Date: Sun, 1 Dec 2024 19:18:10 +0100
+ b=jcJ6Yl/yz0D5fz11e4jHqn4fs36huQva5ZWuJnOx+L/KRGlsRCPsTA9VpwgohK+KN
+ mlvHD6d4mFXPcsanccYLnn2wubWg86Jv3WU37EsFriX54HaEWvbKkrWFj92s0nS/Yb
+ Kxb+8QMIhoivYA7tzyk8dtm4tMMjsFJT8lydfi5S3uw97DNBqaBCWSN/QY9BzC5Ovj
+ MTKaa1BB+s3lVgE55sb7dT7BCipCJuhAFDWaI8QOpvU4Nv/4aPPEStcRauyS5JGQGX
+ GQiNzBvjnnfAviOo1KCwM3SI5+swZpESeCKlBKta0gpTXxojYT0oDPafwPx0yCJnc8
+ KV9DaLQpbNuog==
+Message-ID: <3b1359d9-2be2-452f-be56-b7ac2c4b50d7@denx.de>
+Date: Sun, 1 Dec 2024 19:20:31 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 1/4] arm64: dts: imx8mp: Add aliases for the access to
- the EEPROM ID page node
+Subject: Re: [PATCH V4 3/4] board: dhelectronics: Sync env variable
+ dh_som_serial_number with SN
 To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
  u-boot@lists.denx.de
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
  Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
 References: <20241128142020.35386-1-cniedermaier@dh-electronics.com>
- <20241128142020.35386-2-cniedermaier@dh-electronics.com>
+ <20241128142020.35386-4-cniedermaier@dh-electronics.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241128142020.35386-2-cniedermaier@dh-electronics.com>
+In-Reply-To: <20241128142020.35386-4-cniedermaier@dh-electronics.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,10 +74,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/28/24 3:20 PM, Christoph Niedermaier wrote:
-> The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
-> that contains an additional write-lockable page called ID page. Add
-> aliases eeprom0wl and eeprom1wl for the access to the EEPROM ID
-> page node.
+> The env variable "SN" is used to store the serial number on DH electronics
+> SoMs. New SoMs will use the variable "dh_som_serial_number". To ensure
+> compatibility, these env variables are synchronized. This is achieved
+> using callback functions.
 > 
 > Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 > ---
@@ -87,4 +87,11 @@ On 11/28/24 3:20 PM, Christoph Niedermaier wrote:
 > Cc: Stefano Babic <sbabic@denx.de>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@dh-electronics.com
-Reviewed-by: Marek Vasut <marex@denx.de>
+> ---
+> V3: - Add this patch to the series
+> V4: - Remove the recursion prevention from the callback functions
+>        => The recursion prevention will be generally solved in the
+>           callback function call in a separate patch
+This has to be the last patch because it only works correctly with the 
+last patch applied. If the ordering is not correct, git bisect will not 
+work correctly either.
