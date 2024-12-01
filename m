@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE4AD49771
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878B0D49779
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D94D8960E;
-	Sun,  1 Dec 2024 17:13:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08F6E8966F;
+	Sun,  1 Dec 2024 17:13:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ho/bd+id";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iG1Bqyuz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 831A189491; Sun,  1 Dec 2024 17:13:23 +0100 (CET)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 1CB6D89491; Sun,  1 Dec 2024 17:13:24 +0100 (CET)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57DB0896E4
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 17:13:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14C5D89615
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 17:13:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-724e6c53fe2so2463332b3a.3
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 08:13:20 -0800 (PST)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7250844b0ecso2746462b3a.1
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 08:13:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733069599; x=1733674399; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733069596; x=1733674396; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JV0iehQ/fcKcgLDDz4WRVP+2gJnwuWSdtpiPc1w/pAM=;
- b=ho/bd+idc6Bnfn0+3OM7u2zlBto7C0gu+C9v34uvynegl9tUig1IF4LTAqyjCTLIFj
- 7wpKk+rzdFtm4Si1scrJJrd9Lw5TPstc4tq0mG1/EZxtrwFWabqKGWhyA7+0sof+aROG
- UwVZlMWMT1rTVymybUYd52LNs/4aLGrF6tuhE=
+ bh=TZOuowSXBc06uIWsjo1LV2J/D1m80+FMWKzR8oAR+1k=;
+ b=iG1BqyuzvkDhjhQVlTBoSRDkbFeTlCmnofALysTC43MCz4DTO7/qzwkoDSGUtYpz8z
+ 6DHeiZ84/d9iK6kvkFAcWbQ1mhNhivbjzwnhBYCJFNFpPwwb/5Sxy1pvmdxSuDFs8ez1
+ HOpBENUZJcvUqWOuI0qJPubN++EVU1+cTFwU8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733069599; x=1733674399;
+ d=1e100.net; s=20230601; t=1733069596; x=1733674396;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JV0iehQ/fcKcgLDDz4WRVP+2gJnwuWSdtpiPc1w/pAM=;
- b=wF1dodESJeBu9/iOiKvyIrNnENpXooEgkgJ/NiUhHt5D6Vaa8y0JPEchFDJrYVchPf
- EUn6GpCt/8v/rWAAJHi8KFLZVFjmZb05i7yim08XcnxzUnLFVBhudKHXe9BWTL7sTlZo
- Xx8QUbT/R8tImVZfKTp5ML5sAFgKEVifzOJk78lnAPDHc8G0zJtDMb7/ugo2sTCe2qBb
- VaZDeIjn2ZTTarVjgbXN9c5PoAPrArW+nNvpmP+sIiDl5GlL0eUWUAyaNNjlhCLuYQBZ
- 8LUIlN/pdX4KPuGNucE3I3GBgOCnZYkhr8wpXIravc9915dJwSwqSY3c8fELEiGs8U1K
- 4aig==
-X-Gm-Message-State: AOJu0YxYmguxuIRSTcuS2DcSY2sasV9H/W5RVHHwoW5tsrm6zUv3dz3W
- tGuhLI96E3N1agGMMpawYtmM9pgsgH4pV+6OO2G5tn8cJZXl9X6/lwu9wr5hJnfcpWBomJabUME
- pMV/vdaH6oJOyCWRNxoOpq5MhKB/HuX0vQEbf
-X-Gm-Gg: ASbGncu1TXwrfspKn7smHo3anM9qo8IC8uof06u8ZhK6KustB13ofkbeMWDMJ1pFvDD
- Rd9RciSTbIyWPN/Vz2nm2DNvAkjK/vA==
-X-Google-Smtp-Source: AGHT+IEAGJfJWFTErCywkWm6+K4mvsP897mDMSCzt3gGnNwcMzXhCrIHLPAQkzKyTNmpMbqnt7+xUIvl2thDSuP29yk=
-X-Received: by 2002:a17:90b:1d11:b0:2ee:8008:b583 with SMTP id
- 98e67ed59e1d1-2ee8008b80bmr9626350a91.16.1733069597493; Sun, 01 Dec 2024
- 08:13:17 -0800 (PST)
+ bh=TZOuowSXBc06uIWsjo1LV2J/D1m80+FMWKzR8oAR+1k=;
+ b=oBEflAQRcxyS9q6h+htIodPfsQEJ0/SDY724MVTqg6hZi+eiLjt+zoY/XQM5nCI+0W
+ roAcTSRf2lMWvxuEuzbLBTjCGLvPf+aECccQpvD3D4PwEkC1a6t3ao1X2c69GZF1yf1l
+ N0sm1n8AGwgA+NeFjsiMFA+wsgqYmvZ4xLYXbAzrnjXV/+sLvc8L1eTosyBp4ptmeyHg
+ r/B1YoTgzHVPp+lXm49v+pLmeY2V5UnodBJn7GQ5zAahU+15Ulbuiv7RuEPUQ2yriLdC
+ od4AdxyWEiI+eAX6KPMH6C8ERB/FQTc1ljVOOVKb+DaUF36ADjHN729HrLVAZITMcK/U
+ 89mw==
+X-Gm-Message-State: AOJu0YysxWfSSUobgOurAbXOH8bd90jNv12E6eCBjV1uXb2sw8yVQPIE
+ odzacoostW2DZRZ8jlKmerSEO98+R4BAOHzSk7t5Msjs42Sdwx8Q0X03caOEymL4OO/8h6/lVO2
+ AIAGLpSdrYUETWATzGl8GrpjNJ8gu9+dS9G//
+X-Gm-Gg: ASbGncsfNZHQ/EDvPpcw0r2uGjPJ0/2RhxI0Dz0eL36cHr2uO5HEA1AqH9LYVRKBEIP
+ f85khIv0SpneFCjuZZiX7by6b+H0dtw==
+X-Google-Smtp-Source: AGHT+IHB2EAgXQo5+GqYTe4TYS73hoeOYPxJ9wCFE+zCT6AP5RYu7N+6hN8jcVPR6uqU+lUuU5Z3GKKmaDkgW/Ls8V8=
+X-Received: by 2002:a17:90b:2882:b0:2ea:4e67:5642 with SMTP id
+ 98e67ed59e1d1-2ee097e33abmr25336866a91.33.1733069596577; Sun, 01 Dec 2024
+ 08:13:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-6-mjg59@srcf.ucam.org>
-In-Reply-To: <20241123195616.305687-6-mjg59@srcf.ucam.org>
+ <20241123195616.305687-5-mjg59@srcf.ucam.org>
+In-Reply-To: <20241123195616.305687-5-mjg59@srcf.ucam.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Dec 2024 09:12:44 -0700
-Message-ID: <CAFLszTjCwT9+4KskDDjBYGB=04OTq5BwSyHBG+_Q-s=us_eGow@mail.gmail.com>
-Subject: Re: [PATCH 05/10] Add EFI network driver
+Date: Sun, 1 Dec 2024 09:12:41 -0700
+Message-ID: <CAFLszTge=ZUqn6WbC-ys-qfrc+8=0pJyJTMKCsrLC4ZzMQ62Hw@mail.gmail.com>
+Subject: Re: [PATCH 04/10] Hook up EFI env variable support in the EFI app
 To: Matthew Garrett <mjg59@srcf.ucam.org>
 Cc: u-boot@lists.denx.de, Matthew Garrett <mgarrett@aurora.tech>, 
- Boon Khai Ng <boon.khai.ng@intel.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>, 
- Christophe ROULLIER <christophe.roullier@foss.st.com>,
- Gabor Juhos <j4g8y7@gmail.com>, 
- Hanyuan Zhao <hanyuan-z@qq.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janis Danisevskis <jdanisevskis@aurora.tech>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Philip Oberfichtner <pro@denx.de>, Ramon Fried <rfried.dev@gmail.com>, 
- Robert Marko <robert.marko@sartura.hr>, Romain Naour <romain.naour@smile.fr>, 
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,25 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Matthew,
+
 On Sat, 23 Nov 2024 at 12:57, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
 >
 > From: Matthew Garrett <mgarrett@aurora.tech>
 >
-> Add a driver that makes use of the UEFI Simple Network Protocol to
-> support network access when using the UEFI app implementation, and hook
-> up the app code to instantiate it for probed devices.
+> Add simple support for accessing EFI variables when in EFI app mode
 >
 > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
 > ---
 >
->  drivers/net/Kconfig    |   7 +++
->  drivers/net/Makefile   |   1 +
->  drivers/net/efi_net.c  | 110 +++++++++++++++++++++++++++++++++++++++++
->  include/efi.h          |  12 +++++
->  lib/efi/efi_app_init.c |  67 +++++++++++++++++++++++++
->  5 files changed, 197 insertions(+)
->  create mode 100644 drivers/net/efi_net.c
+>  cmd/Kconfig        |  2 +-
+>  lib/efi/Makefile   |  2 +-
+>  lib/efi/efi_app.c  |  5 +++++
+>  lib/efi/efi_vars.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 51 insertions(+), 2 deletions(-)
+>  create mode 100644 lib/efi/efi_vars.c
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-You don't need to include config.h anymore
+Again this needs doc/ and test/env
+
+Regards,
+Simon
