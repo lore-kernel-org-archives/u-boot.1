@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A73D4977B
-	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 15:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2587D49776
+	for <u-boot@archiver.kernel.org>; Sun,  1 Dec 2024 16:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FCF8894C6;
-	Sun,  1 Dec 2024 16:26:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C92DD8925A;
+	Sun,  1 Dec 2024 16:50:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jNId5sTF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XKly9wQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F03B4894C6; Sun,  1 Dec 2024 16:26:19 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 5FC3E885F7; Sun,  1 Dec 2024 16:49:57 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 862588914D
- for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:26:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F83F88D36
+ for <u-boot@lists.denx.de>; Sun,  1 Dec 2024 16:49:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-841acc8151aso121998839f.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:26:14 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so620405166b.0
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 07:49:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733066773; x=1733671573; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1733068187; x=1733672987; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Cr3TbyOKsaJHJwF4eb0+e2EVFJfcg0y4Ei6vq3EwSpE=;
- b=jNId5sTFvPn5Hk4KMacRISo4bw73+dX8rg3cAlouMO1fwi9LpGk4Yban0dVWZ+r+zO
- jG3O2XidDkjck0Rps2yaxVHNBe06ukZnGSBoZa6VoocBPm/fXFYCvHeg1RyDJMKcPEqA
- qmH88rNvU22NS7wxJZOGQHygugfaCEBTwgmsI=
+ bh=5JIAOf31AVRejDwZlAcGkjtTAfw10aFBxH5pYFliIuw=;
+ b=XKly9wQ2vkmM1j2mo9/A9wzVz3mf2sxQZ98ReddiF5CiEd5kbLvTlCdtrZTkXxd57P
+ DVWXUvsrNDyh7P/3eG/tjHxU9wXVW1F1/VcFCQ13x9Vpf8sLQEWoauq5aqppMUnCwWtB
+ fkrTlb24WRxfHJ4REV/Kdq+PM1+a6mC2rR/Iw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733066773; x=1733671573;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1733068187; x=1733672987;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Cr3TbyOKsaJHJwF4eb0+e2EVFJfcg0y4Ei6vq3EwSpE=;
- b=jcU9A5DMaMvDOYvCGvUluLd0NDGEUUXLdxuUz1dWdaNYQ0IoOcbaJxPgnA0/6SUmaP
- lzqEQ2LjswNJX3j5qzzmcfh5UXAAUsa7VeeZGpKzzLN1ETlXTzTXhYH9UFPRND8KRawv
- 9+yhs2xb1rs8fKUpo8fG0M99UwFQ5l2iTOHJz35egedjfNkCaFI2XQCoSEmLKU+h3j8a
- nxG6U6L5cmo2fq0FsI14YWn0NFd+2C2sRqDI57WyENp/4NwJTOoM6OugOMkRj6Y/M/Fn
- QObemj9+mt6qkXaqLt5Y0sujMmIlH7L1XQzmoLqvvdnn4INe7J/OkzLLDQxPTEml+yzW
- q/oQ==
-X-Gm-Message-State: AOJu0YzfPo1zPMJ29QcNiOnRI1hVAU7hrvWGInpBCeuL1oqvw9PsGdWM
- hgLqe03dt/xuIQj9oIbFs3o6/UNbJdd8mqgOkfUGF1jVFK+m0MQIs39HOQFqYQX7Xx+LJaPa1tw
- =
-X-Gm-Gg: ASbGnctTYmmsX0WrhUHYMpMU6K38Usf8va0TYLHMfIDc2tJ8j+FJQwNOs4otMhgeNFb
- hDBDOrHLIF67AEWbScRCGwdQ9Ssnz0sgGIgjjYnAMvo3i1lKKbcFXltRHcICBEsrqP9o9+Kn1aq
- GbZUD4XN6wqSBvmRvMP/1BLhEFKydxdGqswYn88OHVvgCoRm5Caz/uc6vobc8YeCqiU8ZgYgBPZ
- hNPFkl6K2qqtWZHEqwodMtzB98I00rYEdQPrshZ0Mc+
-X-Google-Smtp-Source: AGHT+IEb8KPDzD5iEHOyyNpog4Fs5ImgGzIUPc1S5Oibm9JfRTs57AkpFkFpYr4yeNMys+p9mPTIWg==
-X-Received: by 2002:a05:6602:164a:b0:841:9b5c:cfb3 with SMTP id
- ca18e2360f4ac-843ecfc90b1mr1601739839f.10.1733066772860; 
- Sun, 01 Dec 2024 07:26:12 -0800 (PST)
-Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405ec8d88sm159755239f.19.2024.12.01.07.26.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 07:26:11 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 22/25] efi_loader: Correct address-usage in copy_fdt()
-Date: Sun,  1 Dec 2024 08:24:41 -0700
-Message-ID: <20241201152505.1666789-23-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241201152505.1666789-1-sjg@chromium.org>
-References: <20241201152505.1666789-1-sjg@chromium.org>
+ bh=5JIAOf31AVRejDwZlAcGkjtTAfw10aFBxH5pYFliIuw=;
+ b=WO/fmirmiN0YMxBpu/l7v9tXJMKPKrNkGx1iO2pX6xT7OE/aoAdrHkOguJnJ0I+4q1
+ 2H0FRMbAfSRd49+52LLYy0XcwihFd+Ea9waav6NfI1iZwY8BidGbG3e9e0pka2VTHo0W
+ 9upFq0V40HDQ+npWSVRy6m3ESNlX7RTh9TBHhY89r36zsBa9iyoCed7a6cmpnGVbX5ZE
+ CsnIiZWwM/zDleQ9ATGat796E3SxO+WcVWFx9QEid1InWNSXFll492h4fnZ/+yPITohu
+ C96BmE/JcKddLuTdc+00I9M/0DK8pq/41vFezSBA+Fuv0oRCFW+JotWhwdD1kT0eHCkt
+ iQyw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUInJnhFppqN7+vKZmUuB2XZfx7Ze1NFvx1p42pmJF19S3V04IO8t3IeNy2VpVInkoPTPFTn14=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFofx3jJSn6SBfWzhq8XIHGWXxVm+UuzT/u3EAZ8O4YuKRXBGd
+ Yx+ViKeWG0+L5voBZ47pBCDI83QTrKeUWv2JVqpU0AtzOy4Psor6Xvrjf+/Z1AHFqR6VF+4ZN1J
+ yK0qn8tEZFYkKLZGhprTBtFFiQ9vT30Q8p+rs
+X-Gm-Gg: ASbGncsGyMxsZZrjYNQuXtB/n/IQLv4ZrVAI9yilL3wfIyA9I0PeB4cC3nmCehbaY/s
+ DyNR85BxklmlVS2qaV5UH+nKlrwChiA==
+X-Google-Smtp-Source: AGHT+IEn9htTjbgxlA2XomBae+/iTcK7p/P5c31yu88oxqdGXl3ldn6HJjPK/n3yMcUb7lXPlbgv2B+gWldb/fSw4pU=
+X-Received: by 2002:a17:906:4c1:b0:aa5:c9f4:7bb9 with SMTP id
+ a640c23a62f3a-aa5c9f4b3e6mr332655066b.35.1733068187411; Sun, 01 Dec 2024
+ 07:49:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-3-sjg@chromium.org>
+ <CAPVz0n0RGrgUSrNzyT16FKMBcqYs00qb+3jEHsq4tiYyWGR-Nw@mail.gmail.com>
+ <65cef924-a16a-4af1-819c-a15410d92f4c@denx.de>
+ <CAFLszTg1Na9ziMv4J1Pb9vjw=fYPh+RLGvT-KyYcjGEEonGk2Q@mail.gmail.com>
+ <CAPVz0n25b5fQcmp-wW1AmUNtcVXjzNvTHSbjK-wn_p6jpDRzMQ@mail.gmail.com>
+In-Reply-To: <CAPVz0n25b5fQcmp-wW1AmUNtcVXjzNvTHSbjK-wn_p6jpDRzMQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 1 Dec 2024 08:49:35 -0700
+Message-ID: <CAFLszThvnBaOvqNPOxXKHtZy2rwcHAxU+RgOw6dHGmzWOZ4_8A@mail.gmail.com>
+Subject: Re: [PATCH 2/8] Revert "power: regulator: Trigger probe of regulators
+ which are always-on or boot-on"
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,35 +96,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update this function to work correctly with sandbox
+Hi Svyatoslav,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Sun, 1 Dec 2024 at 08:24, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+>
+> =D0=BD=D0=B4, 1 =D0=B3=D1=80=D1=83=D0=B4. 2024=E2=80=AF=D1=80. =D0=BE 17:=
+23 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > Hi Svyatoslav,
+> >
+> > On Sun, 1 Dec 2024 at 08:20, Marek Vasut <marex@denx.de> wrote:
+> > >
+> > > On 12/1/24 4:05 PM, Svyatoslav Ryhel wrote:
+> > >
+> > > [...]
+> > >
+> > > >> @@ -288,7 +289,8 @@ static int dm_test_power_regulator_autoset(str=
+uct unit_test_state *uts)
+> > > >>           * Expected output state: uV=3D1200000; uA=3D200000; outp=
+ut enabled
+> > > >>           */
+> > > >>          platname =3D regulator_names[BUCK1][PLATNAME];
+> > > >> -       ut_asserteq(-EALREADY, regulator_autoset_by_name(platname,=
+ &dev_autoset));
+> > > >> +       ut_asserteq(-EALREADY,
+> > > >> +                   regulator_autoset_by_name(platname, &dev_autos=
+et));
+> > > >>
+> > > >>          /* Check, that the returned device is proper */
+> > > >>          ut_assertok(regulator_get_by_platname(platname, &dev));
+> > > >> --
+> > > >> 2.43.0
+> > > >>
+> > > >
+> > > > It seems that I have found a fix for this issue. Simon, please test
+> > > > this commit https://gitlab.com/clamor-s/u-boot/-/commit/6149722aa48=
+f84d9ea037ae990141a231106244e
+> > >
+> > > So this regulator problem was a tegra platform specific issue after a=
+ll.
+> > >
+> > > Nice find, thanks !
+> >
+> > That's great! Are you planning to send a patch?
+> >
+> > Regards,
+> > Simon
+>
+> I planned pull it directly via tegra custodian tree as an important
+> fix. Please confirm if it fixes Nyan. Thanks
 
-(no changes since v1)
+You should send a patch since pull requests cannot contain patches
+that have not been posted :-)
 
- lib/efi_loader/efi_helper.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+If it has been posted, please can you send the link and I will test it.
 
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index fd89ef6036f..72902a5ade3 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -486,12 +486,11 @@ static efi_status_t copy_fdt(void **fdtp)
- 		log_err("Failed to reserve space for FDT\n");
- 		goto done;
- 	}
--	/* TODO(sjg): This does not work on sandbox */
--	new_fdt = (void *)(uintptr_t)new_fdt_addr;
-+	new_fdt = map_sysmem(new_fdt_addr, fdt_size);
- 	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
- 	fdt_set_totalsize(new_fdt, fdt_size);
- 
--	*fdtp = (void *)(uintptr_t)new_fdt_addr;
-+	*fdtp = new_fdt;
- done:
- 	return ret;
- }
--- 
-2.43.0
-
+Regards,
+Simon
