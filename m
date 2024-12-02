@@ -4,109 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A21D78313
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 12:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32E26D78316
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 12:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E8A88906C;
-	Mon,  2 Dec 2024 13:35:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 63843890BC;
+	Mon,  2 Dec 2024 13:53:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JE1qa9H7";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="J/6Jhnfq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07A5C8916D; Mon,  2 Dec 2024 01:12:23 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1A23089100; Mon,  2 Dec 2024 13:53:42 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2060d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::60d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A792489137
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 01:12:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B83688FED
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 13:53:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aa53ebdf3caso713753766b.2
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 16:12:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733098340; x=1733703140; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HNLumPvGFMp+WtK7Ol6vQL9ilUWl5EmhkXrYwyDx/U4=;
- b=JE1qa9H7MrV/OdxZIADTOz/w95cIyaeSqnAz0rNFeglZIqHqmVaOeLedkx6TjNS1Z4
- kVCUpTVOfsexPoD5dWkJlS2weS0Ym64Sqm+KQKi/GbbQlbjsNWEsW1Vj1qdYp3oMwnpb
- RnR3sqBaFW2ezBB1k9sTVCf40EfCgmhqrrPLk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733098340; x=1733703140;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HNLumPvGFMp+WtK7Ol6vQL9ilUWl5EmhkXrYwyDx/U4=;
- b=OCQvqoyXHeL6nc0CNNwkeavTC5A4XmBhIWUKD8dwXlsWSJEs1uw4quX9NcpFEo9x2n
- nD9izgV4/1pbKWFOY4XKIbDe1U4YZt6Tm1yxyj3TJgDnUZY4mp0+wtPUJavkKQ7wFfAT
- qbeV6AJHaCTJFBpQuYy6I7S8LtNO/jAkahEhZybBJzHmo72p+tjgf7kf9qu6LK5gUo78
- njOjZ8gAZM09vbO679z03U6NpB1L2AzKqgNWypwIjtQnSjM8T+zaia4GD7oLGVlG8K4B
- D9RExRT0CEKv9sJUyE0NGlmyvQfZ1FFFHwMabo1CUZZ/WWfPGlFSZqAKQKlS9L03lNRz
- uWig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkAjET8sToiszU+4Cg+Zz0HqlqbKZcYwBNacaGza+9s+uAaPwBGVkgdzgdcjT+9WkHZpBDyr4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxfm4ANZr63L1UqbuaC4ZQFbRspjTpC1HWioARYjtKfxpBZSzWq
- /htTWPPeb4Bj7Wosfz4Q6Ly1bEW4ta5bUg4aJCPaqeJtpA3GeVU1R8mdaX12VAZFs2h7qtWxX8X
- sxfmSsl/l90iFMsnwshzk3CuUa5C9oKBuw1Di
-X-Gm-Gg: ASbGncsaF1AUzKs8GSsohXx999E2+Vd+1F8cp3yRMwkOuVnKkFHneigecAln6OHpQLm
- 7Agt4upvFZUBcZ/unL0luV08/sr7URiA=
-X-Google-Smtp-Source: AGHT+IGsKatNTIgjJm2rR6LiB6j87lws2jEflrn7A0psjawIcPhJOw+KFudJsZwbXDRdFjFfUooh5TbBluRR8YNbL0M=
-X-Received: by 2002:a17:907:7802:b0:a9e:441c:f729 with SMTP id
- a640c23a62f3a-aa580b2e09dmr2329934466b.0.1733098339955; Sun, 01 Dec 2024
- 16:12:19 -0800 (PST)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MW/ZmXvBEbnM7AtixOEHXrFXIUWATZAn1Zx2DfRJNM7jKBkgcjix8EHHjc0FdkSSqtpOCv8aZxfart8XcXll6Hiv1QTarGeRevPSh2blsJpTlt/PMrSfd2IFeZo8yM4HXNNamnFlRfPDSBFOzljO5YsJe+RACCNTVFdQxBg+q297x/pS4dQ98OmGI5k9mbA/fdRzFDqZq6GlDd/ZyaWgLgFtPEI9MgSB47HP3PkGYnjifMwmTt/0Qm4poG+NF2VggJwot7ZKM62lOKApfmAvRRNYk/2aU6duwPEOKN6UJ1gF+olL9WBV1qjAXoE81YDG0d3HIJqRhYfujsTm1FzB7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=DPKhGbccg83kFyrqrh6bKSaW5ZbkNMOB2kEJyRAVKgQ=;
+ b=qKydnPxd9a6Ii1JVLSTRYj7/cetEtSaTCzPAe1sSTCPXs+GoancgKkW4FHu33rv9Y8uYxJjWHmto/HlvMk5J60H+XSaLVYgYiGaNZgRovD+9bjfrEjXKXHdWFr502uT88UJguJpngTKKbvI+dpu6xGQ35f7genGnn+BdhpMLf9c0k4eDB6hzt4kD/2z0AV4v7Z/QsuWAzjn29BRLkbd4tPDUIqTCWP4oljDvCyoNtOMy3L6pz32+sWaQTCHceajbdkt+RDpPyeMb5YXK2JCIh74L3p2sgoqI+cCPQtYzUKjCUEOFkN9vgjlXFOKcrrs91p7kLzup+xZsD9+Ea7O5eA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=DPKhGbccg83kFyrqrh6bKSaW5ZbkNMOB2kEJyRAVKgQ=;
+ b=J/6Jhnfq7+tUIT7CaScRrRhbmVI9XtKMupqieQxrsqBnmkMOY5jYYOkfSSObdz8yHw42hR83qFg2Bn7ZXSaBZSfs6oHvSKsa0t7u4DuLKB3ZQJpNp3Ldano4j8ASP7dn3iCCo2rN2AFuuPdwOGqlpyiLpc1h0+BTprq5DchyDow=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VE1PR04MB7326.eurprd04.prod.outlook.com (2603:10a6:800:1b0::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Mon, 2 Dec
+ 2024 12:53:32 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8207.017; Mon, 2 Dec 2024
+ 12:53:32 +0000
+Message-ID: <a38319c5-7981-447b-9075-d56151bd8c71@cherry.de>
+Date: Mon, 2 Dec 2024 13:53:31 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: coolpi: Fix document style
+To: Andy Yan <andyshrk@163.com>, kever.yang@rock-chips.com
+Cc: u-boot@lists.denx.de
+References: <20241202120355.1132320-1-andyshrk@163.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241202120355.1132320-1-andyshrk@163.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0205.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a5::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20241028124815.47262-1-sjg@chromium.org>
- <CAC_iWjKtaN54B98OKbkoXkC_GmKJ=x+M4=UY_O6roSOpZaDxag@mail.gmail.com>
- <CAFLszTj9Dc-uF=GjSyxTue5Sw3ohUnDaAnAc5sz2dxfQ3gEuxw@mail.gmail.com>
- <CAC_iWjJkAfJHp_NDXJMfNPe7OhBp6B_WBMxvwU_qHU5tamm6ZA@mail.gmail.com>
- <CAFLszTiL88dHANMHo1bK2Uj5K1-7B56_Uk8keSQTo6FUfUoOVQ@mail.gmail.com>
- <CAC_iWjJOFv1v5VPoJ2UEu1YR84i1GUdB7tEng-uqgZ+6o_XWZw@mail.gmail.com>
- <CAFLszThCONSk2v30pGDGyGjz9mz2X0mtpqGCWSZJdbAuDaT0bw@mail.gmail.com>
- <CAC_iWj+g1nMA1DrWjguP=YiQhKOmyGKyu233Eb6Zjcv0x4yatA@mail.gmail.com>
- <20241120180633.GE3600562@bill-the-cat>
- <ED2EDEA3-44B9-48BC-9531-FE061A18F6D8@gmx.de>
- <CAFLszTgRUZsno=faHpch2bJ_7=8QOAvTOMeJgCpZtTZthp5vKA@mail.gmail.com>
-In-Reply-To: <CAFLszTgRUZsno=faHpch2bJ_7=8QOAvTOMeJgCpZtTZthp5vKA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Dec 2024 17:12:08 -0700
-Message-ID: <CAFLszTgE_HZEbG7B09_oo=XfugvH07ix=_0eoSGaEQ+KhyA4Qw@mail.gmail.com>
-Subject: Re: [PATCH 00/15] efi_loader: Add support for logging to a buffer
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Igor Prusov <ivprusov@salutedevices.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Levi Yun <yeoreum.yun@arm.com>, Marek Vasut <marex@denx.de>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sean Anderson <seanga2@gmail.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Wei Ming Chen <jj251510319013@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 02 Dec 2024 13:35:10 +0100
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VE1PR04MB7326:EE_
+X-MS-Office365-Filtering-Correlation-Id: b3bf437f-f0f9-4d07-0939-08dd12d053ca
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cWEvUGF4N1NWNHdmd0YzbENma29wd3d6TGYvazJkNlFIaTZSblR5NnJuc2pl?=
+ =?utf-8?B?aFN2WWVwMVpibllyVTZwMVp5aDkxbmVLZFo2QURYTG9sVXZISHBmYlFGQm9Z?=
+ =?utf-8?B?eUp4MXljeHRmMExJQ1Y5SGQxUWFuSFdoK3QzNlN0MzN6S2VDcXNDUk12a2Fu?=
+ =?utf-8?B?RnRhUXdrTlZOb3drM1R2ZVNHbEQrTWxqaU9EdWVtdVFwUFM2Y3h1OWFBS3BF?=
+ =?utf-8?B?NUR0V0lFclJMQ01PdmZVcXNGekhEanJkcEV2a0pSQUUvSTBoajAzVGRxY09M?=
+ =?utf-8?B?dTBUT2ZXRk5NR3hSUGZISS9obE04QjZjSWhrWDMzdUEzcmJwV2hZd253TUNk?=
+ =?utf-8?B?RDJmcTlkRDZXQ3RPYWtiWEF0Z2xhQmwwQ3hTa2kwU1dXb0ViekFjdXkrQ3pz?=
+ =?utf-8?B?UGI4cHVSQkZoTXYrY0dCYmpCcHc1K1N2Q0pNeFhNSmFqSzkxWXhmVkxhNTZT?=
+ =?utf-8?B?NzB0dFVjdXUvOUdkYW1PTXU0anNhZ0JyWGs0ZFFQSmZ3ZXJ0ajFZVUhMaVlL?=
+ =?utf-8?B?T1ZsclRzV0wzcHRFN1hpNEdMcTA3SkhiczRuSWRXUzdPVEV3eHJEemVDUndz?=
+ =?utf-8?B?RENIb1l3UHpBanczNnBySURzSTVMblA4bkxPZTF0dTQrdzFiMnRLOTBmeVp1?=
+ =?utf-8?B?Y0s1cHhhWGhVYVpQZDNGZEx1OFNHbzM0dmtIZkczdmthTU1odEtxWU1YTVYw?=
+ =?utf-8?B?Q3QxUGw4UTBSRTQ0U1V3UEtjYlpMYmczWFRiY3M3cXhoN2t4MHdqMENPM0Mx?=
+ =?utf-8?B?WjRqR3pSN3dPZUdzbk9FcFBlU1Q4eU5NTytVcEo1MUttKzNFa1kvenFNL3dn?=
+ =?utf-8?B?b3htYU9BZmlVUjZWd1Nyc2VveE1rQ0IvSGhaRk5wNXNIMkhFRkg0ek1tUCsw?=
+ =?utf-8?B?NS83RitaUXllOTRjOXl1SC9CK2RBM0hVQXZoQkdVUjBXRWNReG9TdGNReEx1?=
+ =?utf-8?B?d2RyZU1VYjlRbzBLbitPcXd2MXFrdDZhcDlra2FlUU05bGNkZWVkZ0tJU1FJ?=
+ =?utf-8?B?SHAwV0YrZmY4ZCtOWjJSTnBYSW8zRWtCdVZzdnQ5dEpSK2VkTGZORGt5RkEw?=
+ =?utf-8?B?N0JHRWh2Wi9SbDdiUzZwZFRiTVF2ZzFvVTFMN2l1N2YvaXYzNTVQVXdGZ09C?=
+ =?utf-8?B?bDVBZkUrL1ZEamE1NWhSV0prTVpxS2VhNmNjY1JiRnpvdlJ6bjNKbkxNa1pz?=
+ =?utf-8?B?a3N4ek1mUllpL1g4eDVsUmkrQlZCdlQzcGVHK0E3dlU5M2pqUUZUUi9tVUJR?=
+ =?utf-8?B?dUk0MWlkMXMzYWhxb3BpalNXRlYzaCtHdHM2Q1NjZi80SmRmVFAwSUprcUJF?=
+ =?utf-8?B?MEN3R1Z2aE9VNTJldE1QckRHaFRYNXo3YytwaU1WY3hSd0lhN25ZZ0l4M21M?=
+ =?utf-8?B?dythaklEQ05OL3ZwNzQzdjdGYjFkcWJFN1FxZWRYUUd3NFlzZjhJc2FtSE9p?=
+ =?utf-8?B?cnRIR05VMVlNZWxGWWxYMmtaQVBTUnYvWU1XU0NYcCtQTFpoSXZONTBtUTEz?=
+ =?utf-8?B?cHgrR09XRWMxRVNNMFp3ZGN1S2sxWUlXMVMwYzV5UlpBSmFLOENQTERlMUpz?=
+ =?utf-8?B?TGVhM2ZDbEVyOWpHbllETldDbmtaUnJGbnQ5NDhQTDJrZlVIc292d2FPVEZt?=
+ =?utf-8?B?a0p2TFdwdGx6dkQwYWtjL1pCQjBJNVlYYjN0dDRqcEtHQ3c4K1ZPUThGL2N6?=
+ =?utf-8?B?UVlvczdkdnFjdGpqSEZieHlqeGFFSTFxbWpObzlEb1RZRWdLcmhXNGpDbVlW?=
+ =?utf-8?B?WGlJTktlU2I3Y3hxTklDR21YVExkM0xGTHpZTys5YjlOVkdGN011aUtqdVBG?=
+ =?utf-8?B?a0czUUVyT3RjOUtiMk4zUT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dm9tNit2dnhCVkFCRUNOeXNETzE4NGg3Z0FCRzZrTW1CZS8xdEU5a1FYZ1pH?=
+ =?utf-8?B?LytmdXp3QkIrMmg5eUxReXRFUi9pbXdjOXV5RTVLVi8vYXpqYnFZaXJsNjkw?=
+ =?utf-8?B?bnc5dE9lTUpNa3ZNN3JDVytQMERSbXBIY1c2c0xMclJvak9iYzFvME41dWpN?=
+ =?utf-8?B?S0xBbG9CWWU4Z1ZxRXBvbFFkWWhvT0RoSVNYbzJwdGRNd3kxZXFjRTJacWJ2?=
+ =?utf-8?B?SzAwdzI4WkpzRDl0N2EyQm9EMmZ5dU5RajVIKzc5N0tFeWR1L2xaL3hFMjZI?=
+ =?utf-8?B?VVMvN0dkZVM0Sng1N2hJTlhESWxMOHdtRVdBTHh0T2dvMlduZG4wU2NrdTVV?=
+ =?utf-8?B?Qm9SVDRCMVl5cUN2dFFUYVd3dTkxeEEzeVF5bEtzY1h3SFpUUWtyOVZ0VTc1?=
+ =?utf-8?B?RXBHSmNjNzRjZllqZGpha1hFdnVBRUI0dUEyb1V6N1IrWXJOVDJLQjZZZjJ6?=
+ =?utf-8?B?Skx1elJ6UWMrWUFQUmhBZkYrL2x2YzViNVpyRVVXTzRqbXMrNFg5YUN3cUtX?=
+ =?utf-8?B?VDNLQ2Z6MndIelMvclBFUUxOWXBiakdqREhPSDI1bGVuK28wcUFGOWgyNTZt?=
+ =?utf-8?B?L1dmc1k2SHU1Ymk4MEZnd1lXVTBRS2JScXNOUStxeEJwSkgrQmF2V1ZLK0dO?=
+ =?utf-8?B?dUlQUmZ1RWdCV1JrS2wrYVJQaytXQllkclR4a0p1MHZtaXdSZUlmV3BTTnpr?=
+ =?utf-8?B?QlVpTWY3aE9MK284NTFXcForMisra3hhMFEzRWliMy9qRlVFR0t4TmFZS0Zu?=
+ =?utf-8?B?Mks4QWd0d1NsU0hBcnptQjVDMHRrV0ZPaHZsWE4vbG5QYnFRL0UzbExXS0Rq?=
+ =?utf-8?B?cnZ6Y3pMNDBFK0VCa1p1b2o4OUN6ZXdna0QvMWZ1aHhsTXhSUlhvTGpHaVJa?=
+ =?utf-8?B?bWx3cEpiM3BhbUt2K0ZFUDhlSTZHclA1OXE1RllOWVFvVWtmNXhzR3ZmZGFo?=
+ =?utf-8?B?UnNmS2l2dEw5VlVZcURSWGF5dlc3OUI1NGFJdjVIYzhGYUZSN0c3a1hGNlIv?=
+ =?utf-8?B?VUFFMHlxbDRsSGVFNnd1RmdvNjRIRmJpK0EzVTMwS0c2U3VOYTBpcENPRzkz?=
+ =?utf-8?B?TERpMDRjRW1CVnZZUDdmUHFtVm5Dckx6TDNpWGI3dkFXREJoSmtzcVVHc0lR?=
+ =?utf-8?B?dzNDTE91VWp1UWZSRFJKUUM0V2Z4clJiSzFwRjA0Si9LdCs1c2xwVi9CWXE0?=
+ =?utf-8?B?dFpEQ0ZwSkd4enJDaEZYcGIvaEREMkc2aHpNZnNuY1J0NVpwR2kvUjF2STNm?=
+ =?utf-8?B?NVZUcThBYkc1dzZQU1c3NW81dk0xU1loWXF2WWdOTTF5MlluemtjZHhDbDcv?=
+ =?utf-8?B?MDRxbGVvaGpza1MvQ2JqdkkxTWYvcmpqeWp4RjdGVmdpN1Q4amlXYW5CQ0Nn?=
+ =?utf-8?B?UWM4ZGhMYzJPSEpZaDFyVnIzcmpKbmhrd1NZeG1jZ3RvRnU2OFpFZ1JDS1pv?=
+ =?utf-8?B?aGRFYU9GMFE2Ym5xMTU2NHB1MFZVT2oxUDF0NytJZzNFWUlKYVRseXE1Qk5P?=
+ =?utf-8?B?eUxidUdiM1laQzhnRVlJcDhmUzBLMzl0UFZ0VDR4ODA5NVl1Y2dLdlAxbmQ2?=
+ =?utf-8?B?eDR3V0l5WmloRmpHYTZxcHNZUGlPbHZiZjk5dUwwWE5Ha3Boblp5TlplYjVE?=
+ =?utf-8?B?aWNCb1dvSEdQV1ZkYVk5YzhuOTRaQThwUExmQ3dleUJCZnErcEl1Vm5xQjUr?=
+ =?utf-8?B?ODJIR1I2ZnllUHZrQTlTd1dHNEp5SUppRnhCdUJPSkpJcXMvZVVvdW92akgw?=
+ =?utf-8?B?N1lqOXlhNnpIU0pSYzF4UDlpdzQ1cFB3Y0pkS1JueVRoU0FIck1wazBicENo?=
+ =?utf-8?B?bU8wZXpLdDFQTHFFNTVGWk5IRVVlUnptc1doajd0aU9OcnJ0QjlycnI3U1Ft?=
+ =?utf-8?B?RkxSMTdOVndEVlhiU0EwajRCK1RFaUM4aS9aTmQxMi9zZXBlczh4WldVUW81?=
+ =?utf-8?B?T1dxQWFqRjRtWjhmTHlLL2lURGZNK2xyYUtVVGx5MUh6cWFCQ21xT3FWVFJO?=
+ =?utf-8?B?akF1dXg2ejBVcDFEbEJWLzY0VWQxUnBWTnRRL1A1V0lKMlI0TkwzY0NEbWhF?=
+ =?utf-8?B?SXRWK1E2Qmo1YzRvZjFGSi8zNjE3NGErcnlIdVBmalA4d2lSYWpzMFNHV2R4?=
+ =?utf-8?B?MHlldnZDTng1azVJVXNGU3hIUmRnbm5ucWJ3a2xsVG5DRGNwamlQODBOVGg1?=
+ =?utf-8?B?dkE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3bf437f-f0f9-4d07-0939-08dd12d053ca
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2024 12:53:32.6428 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: HyGMhcMs8Ovd2nFSTdc5Q9mktMgTL4kXKDBmUwhJT7jgBLYgf2FsHruWu+T0tbxrLfOEjQqYkf+rhKZr9RgC0q10cF67+E63tMcZ78GCnAI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7326
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,109 +172,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Andy,
 
-On Wed, 20 Nov 2024 at 19:19, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> On Wed, 20 Nov 2024 at 13:49, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > Am 20. November 2024 19:06:33 MEZ schrieb Tom Rini <trini@konsulko.com>:
-> > >On Wed, Nov 20, 2024 at 05:55:18PM +0200, Ilias Apalodimas wrote:
-> > >> Hi Simon,
-> > >>
-> > >> On Wed, 20 Nov 2024 at 17:37, Simon Glass <sjg@chromium.org> wrote:
-> > >> >
-> > >> > HI Ilias,
-> > >> >
-> > >> > On Fri, 1 Nov 2024 at 05:32, Ilias Apalodimas
-> > >> > <ilias.apalodimas@linaro.org> wrote:
-> > >> > >
-> > >> > > Hi Simon,
-> > >> > >
-> > >> > > On Thu, 31 Oct 2024 at 20:02, Simon Glass <sjg@chromium.org> wrote:
-> > >> > > >
-> > >> > > > Hi Ilias,
-> > >> > > >
-> > >> > > > On Tue, 29 Oct 2024 at 19:32, Ilias Apalodimas
-> > >> > > > <ilias.apalodimas@linaro.org> wrote:
-> > >> > > > >
-> > >> > > > > On Tue, 29 Oct 2024 at 17:45, Simon Glass <sjg@chromium.org> wrote:
-> > >> > > > > >
-> > >> > > > > > Hi Ilias,
-> > >> > > > > >
-> > >> > > > > > On Tue, 29 Oct 2024 at 10:58, Ilias Apalodimas
-> > >> > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > >> > > > > > >
-> > >> > > > > > > Hi Simon,
-> > >> > > > > > >
-> > >> > > > > > > On Mon, 28 Oct 2024 at 14:48, Simon Glass <sjg@chromium.org> wrote:
-> > >> > > > > > > >
-> > >> > > > > > > > It is a bit of a pain to log EFI boot-services calls at present. The
-> > >> > > > > > > > output goes to the console so cannot easily be inspected later. Also it
-> > >> > > > > > > > would be useful to be able to store the log and review it later, perhaps
-> > >> > > > > > > > after something has gone wrong.
-> > >> > > > > > > >
-> > >> > > > > > > > This series makes a start on implementing a log-to-buffer feature. It
-> > >> > > > > > > > provides a simple 'efidebug log' command to inspect the buffer. For now,
-> > >> > > > > > > > only memory allocations are logged.
-> > >> > > > > > >
-> > >> > > > > > > Why is this problem specific to EFI and no U-Boot in general? Do we
-> > >> > > > > > > have a similar machinery for malloc()?
-> > >> > > > > >
-> > >> > > > > > Mostly because an app can make EFI calls and we want to know what they
-> > >> > > > > > are, e.g. to debug them and figure out what might be wrong when
-> > >> > > > > > something doesn't boot.
-> > >> > > > >
-> > >> > > > > EFI_PRINT() has been proven pretty useful for this. I don't personally
-> > >> > > > > see the point of adding ~1300 lines of code to replace a print.
-> > >> > > > > What would make more sense is teach EFI_PRINT to log errors in a buffer.
-> > >> > > >
-> > >> > > > Is that a NAK? Please be clear if you are reviewing the code or just
-> > >> > > > rejecting the whole idea.
-> > >> > >
-> > >> > > For the idea, no. But I don't think what's implemented here is what we want.
-> > >> > >
-> > >> > > To track what EFI services are called, we already have EFI_ENTRY and EFI_EXIT.
-> > >> > > Why don't we instead, add a logging service (and we already have
-> > >> > > ftrace iirc) and plug it in the macros above?
-> > >> > > That would make more sense not to mention way less code.
-> > >> >
-> > >> > I am wanting to programmatically log and manage what EFI_LOADER does,
-> > >> > so that bootstd can present a high-level view of what is going on,
-> > >> > e.g. which protocols are used, how much memory is allocated and where.
-> > >> > So this is not just about logging text output.
-> > >>
-> > >> Why the EFI_LOADER only? Bootstd is supposed to cover more cases, so
-> > >> why not a generic framework for all boot commands?
-> > >
-> > >This feels similar to the point I've made elsewhere in this overarching
-> > >series, why not do this at existing common points in the code path?
-> > >
-> >
-> > The common code point is the log library. Just add an event there for which the test can register a handler.
-> >
-> > With a log event you get:
-> >
-> > function name
-> > source location
-> > message class
-> > message text
-> > message priority
-> >
-> > and all of this with minimal invasiveness.
->
-> OK guys, I think I got the message :-)
->
-> I'm going to apply this to my tree for now. While I'm at it I think it
-> is time to go through my backlog and apply some other things that I'd
-> like in there.
+On 12/2/24 1:03 PM, Andy Yan wrote:
+> Add a blank line after title "Specification:" to
+> make it render correctly html.
+> 
+> And also remove the useless > in bash code block.
+> 
+> Signed-off-by: Andy Yan <andyshrk@163.com>
 
-One point I didn't mention is that this series allows logging of all
-calls, not just the ones that come in from the app. At present there
-are quite a few efi_allocate_pages() calls which are entirely
-internal.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Regards,
-Simon
+Thanks!
+Quentin
