@@ -4,80 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AED8D7830D
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 11:06:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D43D7830E
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 11:58:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E13CC8914C;
-	Mon,  2 Dec 2024 12:06:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DBB5B88FDE;
+	Mon,  2 Dec 2024 12:58:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bPGU/U+m";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="luym7ZaV";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="yK3ng3EC";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="j4/upeFE";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="GnWcnzrS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DB6C89145; Mon,  2 Dec 2024 12:06:39 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 959F68910C; Mon,  2 Dec 2024 12:58:07 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC54789049
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 12:06:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7885A88FD2
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 12:58:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2ffc357ea33so41960571fa.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 03:06:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733137596; x=1733742396; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BmV44aXiIOVawj/hjTon6V4hDjKT/8+tke1JdttvLmY=;
- b=bPGU/U+m97QvPmkOwVvUgELQLoNC25GiEZGNfuZWk/xAhm6dpEhql5LISYeE7i1U3G
- XLUAQq1AIMFMZ3jENkJ3YV6fUTpdm1I0Q4k0UIwjlDwG3nahMuyKMgRjBA6/lQSB7Wd7
- Wrua2NBOJsaqs+r1fbKOGaWcmCSlMoO/jz63eF2scvnBL/XQZzOc5xXPapzUKUPX4Icm
- yKX19dqw6iwk5/vngPxXpGp/XQOOtqW4gDjC3oB0kvBvplPeJw/Z5rMe64eRoQ5w67jk
- RqXIBmTj0oK86Nrd7hWDmqfsDGsu1f2izv9d1zKEa+DX2g5J88WNeunAunlHSPyboJ57
- BRpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733137596; x=1733742396;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BmV44aXiIOVawj/hjTon6V4hDjKT/8+tke1JdttvLmY=;
- b=doSTXxTiDMuMpiQGkrLVCf/LWlbpnmeXaY7d62Vl28ErKay+5jf6Xb076dxlDlaLrD
- wacgJygJtZPm5XTsjcLSW5UYiJFKa5hjLD0kfU+ckQe/f0yHugcb8nzLleP1ha+9vWR/
- T4nzZGG3sHoTohVHmbX7R7geuQgWQ78izte2CySVpn54BW7PU8YjmQU8xV5rTdPLFrZC
- OO16JtvyN3tOyU3LE55so03/VKWeqPBDSYNYC2gIShb7JTKUztbLAYYI9dYwgcRLDTyc
- wxheFB3svHRpo3pvOg7DWadFdlwPEZKiRuHjNJxm+4zY2OJqUmpv9wa0wCQnrSl2NWZb
- pFkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUNJeyNbLLNygKg//rC08wO4j7tBFEzqx1+wwd0e4vTlRd2nAu7XGcitADE2/lX17felG2S9g8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyhONayhZH8Qq2KPRIUvP8mtf2jOyp+mn/AoySe9fNP4052OmvD
- oR31tNFJWMqNA1pAE5XGrJV62MpEWRqs0yCsum7pwMGgpLUHaIymvY//rxrRPaSSB8EwCaJEDET
- 0/xv4/Hbb7b5LKWq5+jVcEAvJSvN9o85L
-X-Gm-Gg: ASbGncuddBcezHaqYKfl4okciH5qAdRtQG7QGCDNoV5rbJLdzze/IsZBaweD8qy58Rt
- ZnugAGHgLP6ugYCVlw/kSV1sY1RGvTSHIPGl1Fx4gD93NApPlEDcxcxTmJHxeM0wfyg==
-X-Google-Smtp-Source: AGHT+IF8pC6Yuab2/ujqNXTL47R4qZOgupgluC/s/DEpJT7uV9XvNVNwE45Erpe59ClZsgv1qEvhmo3GU0Y4gXcJUd8=
-X-Received: by 2002:a05:651c:1b05:b0:2ef:2490:46fb with SMTP id
- 38308e7fff4ca-2ffd60dc647mr104608591fa.37.1733137595720; Mon, 02 Dec 2024
- 03:06:35 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=schwab@suse.de
+Received: from hawking.nue2.suse.org (unknown
+ [IPv6:2a07:de40:a101:3:92b1:1cff:fe69:ddc])
+ by smtp-out1.suse.de (Postfix) with ESMTP id C9D05211BB;
+ Mon,  2 Dec 2024 11:58:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1733140685; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GRb0fGgLKSQs1ADa440iLB2gROiDGTcTDK/kHJRla8Y=;
+ b=luym7ZaVcT2Ex3VoEeoPoxT+Xgf7B0zi7g1C2qM2YRONr9PmaFAZU9u74Ava4Gx10imlK8
+ Mrbr+8mHtoIXaqP5N/MeFLYeqt+6ZUOpq8CgnpxZdM8qJqh0Ep/U27gvb3yIMDE4MG4fLR
+ E04U/bh6eWJU1R19f7G5RsDVj2yxak0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1733140685;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GRb0fGgLKSQs1ADa440iLB2gROiDGTcTDK/kHJRla8Y=;
+ b=yK3ng3ECrepUYO67ar1Nm+exkttO4TlyaxnSIIIxLgbZIBHhMGA8ohGIdWwg8X7/3lQCfl
+ Qsmx4j6U2aEmWjBA==
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b="j4/upeFE";
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=GnWcnzrS
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1733140684; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GRb0fGgLKSQs1ADa440iLB2gROiDGTcTDK/kHJRla8Y=;
+ b=j4/upeFEmrezqykOgyPktPAkYxO8x5HWMCYg+LqxNRo1Xikw/4spspuQ6GJdWa/WX3YVhz
+ G9lmxYSnbZRzEBRiJ7iGw1psecp0AfSlhOCRfzSunuX2/codffvr7sWnf8gI94UVijDqY3
+ Y9LNHDun8D3x9azAM8eeE86WN6g2itg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1733140684;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GRb0fGgLKSQs1ADa440iLB2gROiDGTcTDK/kHJRla8Y=;
+ b=GnWcnzrSXbMuX/pC8E8QcRmZLdlXevv9d75otE+E4KannSSe5ZoTLhc/JwKarivLxwQcI5
+ rcJYOgZVJKNfKkCg==
+Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
+ id B8F7B4A04FA; Mon,  2 Dec 2024 12:58:04 +0100 (CET)
+From: Andreas Schwab <schwab@suse.de>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de,  Heinrich Schuchardt <xypron.glpk@gmx.de>,  E
+ Shattow <lucent@gmail.com>,  Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
+ bank
+In-Reply-To: <20241202070624.1295497-1-sughosh.ganu@linaro.org> (Sughosh
+ Ganu's message of "Mon, 2 Dec 2024 12:36:24 +0530")
+References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
+Date: Mon, 02 Dec 2024 12:58:04 +0100
+Message-ID: <mvmfrn6mh4j.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <mvm8qtnv310.fsf@suse.de>
- <8d4e3685-8082-4b74-828f-05ccee5ac8e0@canonical.com>
- <mvmfrnko8tk.fsf@suse.de> <7610b940-63ae-4b52-a71e-555b2d2db35e@canonical.com>
- <mvmplmaml1p.fsf@suse.de>
-In-Reply-To: <mvmplmaml1p.fsf@suse.de>
-From: E Shattow <lucent@gmail.com>
-Date: Mon, 2 Dec 2024 03:06:24 -0800
-Message-ID: <CANV2PTMtnjf_Q+5Rw8oVUFmr=0w2ZEDaFQsAzL_cvOC0C-LAng@mail.gmail.com>
-Subject: Re: 2025.01-rc2 fails to boot on VisionFive2
-To: Andreas Schwab <schwab@suse.de>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Spamd-Result: default: False [14.32 / 50.00]; SPAM_FLAG(5.00)[];
+ NEURAL_SPAM_LONG(3.50)[1.000]; BAYES_HAM(-3.00)[99.99%];
+ HFILTER_HOSTNAME_UNKNOWN(2.50)[];
+ NEURAL_SPAM_SHORT(2.03)[0.676]; RDNS_NONE(2.00)[];
+ ONCE_RECEIVED(1.20)[];
+ HFILTER_HELO_IP_A(1.00)[hawking.nue2.suse.org];
+ HFILTER_HELO_NORES_A_OR_MX(0.30)[hawking.nue2.suse.org];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ RCVD_NO_TLS_LAST(0.10)[]; MIME_GOOD(-0.10)[text/plain];
+ MX_GOOD(-0.01)[]; MIME_TRACE(0.00)[0:+];
+ DIRECT_TO_MX(0.00)[Gnus/5.13 (Gnus v5.13)]; ARC_NA(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de]; TO_DN_SOME(0.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MID_RHS_MATCH_FROM(0.00)[];
+ DKIM_TRACE(0.00)[suse.de:+]; RCVD_COUNT_ONE(0.00)[1];
+ FREEMAIL_CC(0.00)[lists.denx.de,gmx.de,gmail.com,konsulko.com];
+ RCPT_COUNT_FIVE(0.00)[5]
+X-Spamd-Bar: ++++++++++++++
+X-Rspamd-Queue-Id: C9D05211BB
+X-Rspamd-Action: add header
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Spam: Yes
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,52 +123,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 2, 2024 at 2:33=E2=80=AFAM Andreas Schwab <schwab@suse.de> wrot=
-e:
->
-> On Nov 21 2024, Heinrich Schuchardt wrote:
->
-> > That ls works does not mean that the file system is not corrupted.
->
-> This obviously has nothing to do with the file system:
->
-> StarFive # load mmc 1 0x40200000 efi/boot/bootriscv64.efi
-> 167936 bytes read in 14 ms (11.4 MiB/s)
-> StarFive # load mmc 1 0x100000000 efi/boot/bootriscv64.efi
-> mmc fail to send stop cmd
-> Error reading cluster
-> Failed to load 'efi/boot/bootriscv64.efi'
-> StarFive # load mmc 1 0x40200000 efi/boot/bootriscv64.efi
->  ** fs_devread read error - block
->  ** fs_devread read error - block
-> Can't set block device
->
-> Only a reset can revive the MMC interface.
->
-> --
-> Andreas Schwab, SUSE Labs, schwab@suse.de
-> GPG Key fingerprint =3D 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D=
-7
-> "And now for something completely different."
+On Dez 02 2024, Sughosh Ganu wrote:
 
-Thank you for confirming this Andreas. Can you please test and review
-the patch today from Sughosh?:
+> There are platforms which set the value of ram_top based on certain
+> restrictions that the platform might have in accessing memory above
+> ram_top, even when the memory region is in the same DRAM bank. So,
+> even though the LMB allocator works as expected, when trying to
+> allocate memory above ram_top, prohibit this by marking all memory
+> above ram_top as reserved, even if the said memory region is from the
+> same bank.
 
-https://lore.kernel.org/u-boot/20241202070624.1295497-1-sughosh.ganu@linaro=
-.org/
-( Patchwork for same:
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D434841 )
+This fixes the boot failure on the VisionFive2 board as reported in
+<mvm8qtnv310.fsf@suse.de>.
 
-It can be applied on v2025.01-rc3 and with
-CONFIG_EFI_LOADER_BOUNCE_BUFFER=3Dn
-CONFIG_BOUNCE_BUFFER=3Dn
+Tested-by: Andreas Schwab <schwab@suse.de>
 
-I have been testing with
-CONFIG_BOOTSTD=3Dn
-
-There should be now a success on 4GB+ DRAM VisionFive2 board loading
-some < 1GB data file from mmc to U-Boot address > 4GB.
-
-Please test and reply to Sughosh patch with remarks. Thank you!
-
--E
+-- 
+Andreas Schwab, SUSE Labs, schwab@suse.de
+GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
+"And now for something completely different."
