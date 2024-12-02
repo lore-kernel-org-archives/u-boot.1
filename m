@@ -4,50 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BADDD7830E
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 12:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47F21D78312
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 12:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF0C689009;
-	Mon,  2 Dec 2024 13:04:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F84888C8F;
+	Mon,  2 Dec 2024 13:19:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="Z40F5uft";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="gWygJwHz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EE1089023; Mon,  2 Dec 2024 13:04:12 +0100 (CET)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
- by phobos.denx.de (Postfix) with ESMTP id B77C889009
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 13:04:04 +0100 (CET)
+ id 5BCCA88FDE; Mon,  2 Dec 2024 13:18:59 +0100 (CET)
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+ by phobos.denx.de (Postfix) with ESMTP id B8F7188AAC
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 13:18:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
+ dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-ID:MIME-Version; bh=DEyz5
- MRX0M2979f3rOOMjF5KxZd60HQ1n5a1OSRqFPc=; b=Z40F5uft+D0ckl77Y32WC
- 2zyQmSquXhy2mCkEWUNFCWw7Cd+5IxCvHP1plW7WRojOQfHEO7lcf7z3F7+hRJ3s
- nqAQLBV73b3BU+qdb7078gv/t42+Lkrt53ab9WDJ397UFOYnvMrZZc5NpNnzOiLt
- QvJqPEbsVh/LIxGh88j5OY=
-Received: from ProDesk.. (unknown [58.22.7.114])
- by gzsmtp4 (Coremail) with SMTP id PygvCgBn+cAsok1nLcLRAw--.55772S2;
- Mon, 02 Dec 2024 20:04:00 +0800 (CST)
-From: Andy Yan <andyshrk@163.com>
-To: kever.yang@rock-chips.com
-Cc: u-boot@lists.denx.de,
-	Andy Yan <andyshrk@163.com>
-Subject: [PATCH] doc: coolpi: Fix document style
-Date: Mon,  2 Dec 2024 20:03:53 +0800
-Message-ID: <20241202120355.1132320-1-andyshrk@163.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: PygvCgBn+cAsok1nLcLRAw--.55772S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7WFWfZFWDZFW8GrW5uFW3KFg_yoW8Gw43pw
- 4qkr1UKFykX3y3Xr4jk3WfZrW3Wa97ua4Uury8Ww47JF12vr1q9FZFgrW7t34UWFnFyFn7
- ZrWkKr18Gr4Uu3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUeWlDUUUUU=
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=s3AiCiZxJzPWHeuXEbk+6ZSKBdaSWJFfWl8BdOL7FDs=; b=g
+ WygJwHzwhxm7cmEVzL0AtOYyXpwvSHcobqUyRDxq7dTEt6Yf3Uit/JGzCMD/pXO8
+ ZoxsT1AIOYrG+Liy30Zbx8L6QZovp8H2KLl4g9r9boBR5TzNCiiClgkNTcogeswh
+ gOTmWpKjSFs4tBIxebijZQyV/LAMzQPmhnDCt7R8iQ=
+Received: from andyshrk$163.com ( [58.22.7.114] ) by
+ ajax-webmail-wmsvr-40-118 (Coremail) ; Mon, 2 Dec 2024 20:16:24 +0800 (CST)
 X-Originating-IP: [58.22.7.114]
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiMwCpXmdNndJ+bAAAsz
+Date: Mon, 2 Dec 2024 20:16:24 +0800 (CST)
+From: "Andy Yan" <andyshrk@163.com>
+To: "Patrice CHOTARD" <patrice.chotard@foss.st.com>
+Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, 
+ "Tom Rini" <trini@konsulko.com>, christophe.priouzeau@foss.st.com, 
+ "Patrick DELAUNAY" <patrick.delaunay@foss.st.com>, 
+ etienne.carriere@foss.st.com
+Subject: Re:unable to access 'https://source.denx.de/u-boot/u-boot.git/'
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20240801(9da12a7b)
+ Copyright (c) 2002-2024 www.mailtech.cn 163com
+In-Reply-To: <a7df8a2a-78c8-4542-8af8-dab3c4b59392@foss.st.com>
+References: <a7df8a2a-78c8-4542-8af8-dab3c4b59392@foss.st.com>
+X-NTES-SC: AL_Qu2YAf2fvk8j4iCebelS8zNM9K56MKvt5LljqcQFePgqqTHL3g4cZnlBM0vW6uLS+3R3dw2U4lQgCk5ZXPwW
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+MIME-Version: 1.0
+Message-ID: <22662f2f.bf56.193874ce608.Coremail.andyshrk@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: digvCgC3XxAYpU1niAw1AA--.37985W
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/1tbiMwapXmdNndLDCgACss
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,46 +69,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a blank line after title "Specification:" to
-make it render correctly html.
-
-And also remove the useless > in bash code block.
-
-Signed-off-by: Andy Yan <andyshrk@163.com>
----
-
- doc/board/coolpi/genbook_cm5_rk3588.rst | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/doc/board/coolpi/genbook_cm5_rk3588.rst b/doc/board/coolpi/genbook_cm5_rk3588.rst
-index a02e561051a..cad2a28acbd 100644
---- a/doc/board/coolpi/genbook_cm5_rk3588.rst
-+++ b/doc/board/coolpi/genbook_cm5_rk3588.rst
-@@ -6,6 +6,7 @@ Cool Pi GenBook is a laptop powered by RK3588, it works with a
- carrier board connect with CM5.
- 
- Specification:
-+
- * Rockchip RK3588
- * LPDDR5X 8/32 GB
- * eMMC 64 GB
-@@ -24,11 +25,11 @@ Get the TF-A and DDR init (TPL) binaries
- 
- .. prompt:: bash
- 
--   > cd u-boot
--   > export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
--   > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
--   > make coolpi-genbook-cm5-rk3588_defconfig
--   > make CROSS_COMPILE=aarch64-linux-gnu-
-+   cd u-boot
-+   export ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
-+   export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
-+   make coolpi-genbook-cm5-rk3588_defconfig
-+   make CROSS_COMPILE=aarch64-linux-gnu-
- 
- This will build ``u-boot-rockchip.bin`` for eMMC and ``u-boot-rockchip-spi.bin`` for SPI Nor.
- 
--- 
-2.34.1
-
+CkhpIEFsbO+8jAoKQXQgMjAyNC0xMi0wMiAxNzowODo0OCwgIlBhdHJpY2UgQ0hPVEFSRCIgPHBh
+dHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4gd3JvdGU6Cj5IaSBBbGwKPgo+U2luY2Ugc2V2ZXJh
+bCBkYXlzLCBpdCBzZWVtcyB0aGF0IFUtQm9vdCBnaXQgcmVwb3NpdG9yeSBpcyBub3QgYWNjZXNz
+aWJsZS4KPgo+RmV0Y2hpbmcgb3IgY2xvbmluZyB1LWJvb3QgcmVwbyBsZWFkcyB0byB0aGUgZm9s
+bG93aW5nIGlzc3VlOiAKPgo+Z2l0IGNsb25lIGh0dHBzOi8vc291cmNlLmRlbnguZGUvdS1ib290
+L3UtYm9vdC5naXQKPkNsb25pbmcgaW50byAndS1ib290Jy4uLgo+ZmF0YWw6IHVuYWJsZSB0byBh
+Y2Nlc3MgJ2h0dHBzOi8vc291cmNlLmRlbnguZGUvdS1ib290L3UtYm9vdC5naXQvJzogVGhlIHJl
+cXVlc3RlZCBVUkwgcmV0dXJuZWQgZXJyb3I6IDQwMwoKSSBhbHNvIHNlZSBzaW1pbGFyIGlzc3Vl
+IGZyb20gQ2hpbmEgdGhlc2UgZGF5czoKCmdpdCBmZXRjaCBvcmlnaW4gCmZhdGFsOiB1bmFibGUg
+dG8gYWNjZXNzICdodHRwczovL2dpdGxhYi5kZW54LmRlL3UtYm9vdC91LWJvb3QuZ2l0Lyc6IEZh
+aWxlZCB0byBjb25uZWN0IHRvIHNvdXJjZS5kZW54LmRlIHBvcnQgNDQzIGFmdGVyIDEzNTA0NyBt
+czogQ29ubmVjdGlvbiB0aW1lZCBvdXQKPgo+VGhhbmtzCj5QYXRyaWNlCg==
