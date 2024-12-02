@@ -4,52 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44FD3D7833A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 17:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8401CE69E81
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 19:23:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27026893EC;
-	Mon,  2 Dec 2024 18:31:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id A3ACC8946E;
+	Mon,  2 Dec 2024 20:23:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="f+HVRRHR";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E24A489447; Mon,  2 Dec 2024 18:31:51 +0100 (CET)
-Received: from mx3.securetransport.de (mx3.securetransport.de
- [IPv6:2a01:4f8:c0c:92be::1])
- by phobos.denx.de (Postfix) with ESMTP id AB7598935C
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 18:31:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1733160674;
- bh=GNdnWJw5a4joR5dTLjClQg0GdZGQGG5EQ6o0PcVx2GY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References:From;
- b=f+HVRRHRtUaF78Toj/oApN80hNw4MsUvCHhl5WnLzR+AyXUyRZqff1/PunyVlFk7i
- yitKzu+3h+LVknyWavLBZtQNrYJ0DmTlozbhQ59IfV7pQGGmMBE1UtZ1ifUgk+sSlr
- beG9OH3qopmKl9rjLa3YZx0jwScXHVpcUc/ywn5IDMXLIajxdlLyUIsdNLI+8TzbAe
- cI2ta8gjP/hoYij30yuA7/o0dsBydJ5niypSF9+mHU/FHEv6ToA042f7wiaqb0p9tB
- CXl7aPmkbnya0YSXPLuC5PVDrcE6IIf9LBr41Of8gx6y24d1aKbkQdS/NoSMgA6kpj
- IQieXMIx2z8eg==
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-To: <u-boot@lists.denx.de>
-CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, NXP i.MX U-Boot
- Team <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Fabio Estevam
- <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>
-Subject: [PATCH V5 4/4] board: dhelectronics: Sync env variable
- dh_som_serial_number with SN
-Date: Mon, 2 Dec 2024 18:29:50 +0100
-Message-ID: <20241202172950.35460-5-cniedermaier@dh-electronics.com>
-X-klartext: yes
-In-Reply-To: <20241202172950.35460-1-cniedermaier@dh-electronics.com>
-References: <20241202172950.35460-1-cniedermaier@dh-electronics.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1733167419;
+	bh=UISYFOZ3tyTq8W+k79U07qkjYTqQJg8G6CqsPyCcCD8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DUtmBiB56HeVGQSN/6gtymQ+MxA1aKyG/03G1JMd1Qyc9gFXR8rCcPE5CbJIsb0Go
+	 ZmaO/8lpgqkhO67XGfJUIIdvYZlzCIWTZw/D9KbLKDT0q14vkggPE/4BLeh7pfVm8s
+	 PI9whEla5iJyx6+xKQzlwFGMfb0sTnTW3HX8CUqZvZ48DVK9c/OtQqFybhAGjH3Tsd
+	 peFJuqhyRS6+jY2iSagoEsOLI4TXT+wb2xlUByoq2JhgqpNJP1Btm4SVW3decXH91t
+	 2T8xGr06Ugp3Ked20g0VDu8ofwUjxzQLv2PAd/8DvmAyRo1TMF7K98/i0WvftdezE6
+	 fs2R31jgEcKMQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A3BF589246;
+ Mon,  2 Dec 2024 20:23:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1733167418;
+ bh=UISYFOZ3tyTq8W+k79U07qkjYTqQJg8G6CqsPyCcCD8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=u+n4Jnc8oZKJ7kLdRSQt5RcV6zI8p/nVZj8QjHgZeu0vdor6tlQKY/rLVY7VO7MJa
+ oZCrKMRNdkoJBmX/R1Fj/bQB2ClxkgYtSy/QtqFZFXiWqtMToN+QS8x0WbrQAa1ADz
+ 4h/EqM0mYwjB6AA6/P8LRQI20f1YqRLddPK6XrTXRYHGINrszPd7fQ7K0HOm6zAI7f
+ B80GqaA/zVVnBshFqyx8MCNTGBN6ABeTcKhTwcTwUh6OIBpbWiD8spoBDokqKJFwS3
+ b/86mOEgNq4yDsbkV61XOkCfBOj/4K9GEKiUcQICSZshxH6xOeiudGw+e2qzfqML6J
+ hNK+FIB97OyTA==
+Message-ID: <c2edc02f-8b79-44ec-9a59-e5336d741d1c@denx.de>
+Date: Mon, 2 Dec 2024 20:08:10 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V5 4/4] board: dhelectronics: Sync env variable
+ dh_som_serial_number with SN
+To: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ u-boot@lists.denx.de
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+References: <20241202172950.35460-1-cniedermaier@dh-electronics.com>
+ <20241202172950.35460-5-cniedermaier@dh-electronics.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241202172950.35460-5-cniedermaier@dh-electronics.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,70 +73,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The env variable "SN" is used to store the serial number on DH electronics
-SoMs. New SoMs will use the variable "dh_som_serial_number". To ensure
-compatibility, these env variables are synchronized. This is achieved
-using callback functions.
-
-Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
----
-V3: - Add this patch to the series
-V4: - Remove the recursion prevention from the callback functions
-      => The recursion prevention will be generally solved in the
-         callback function call in a separate patch
-v5: - No functional changes, but changed the order of the patches
----
- board/dhelectronics/common/dh_common.c | 17 +++++++++++++++++
- configs/dhsom.config                   |  1 +
- 2 files changed, 18 insertions(+)
-
-diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-index 6a942909cc..71010803f5 100644
---- a/board/dhelectronics/common/dh_common.c
-+++ b/board/dhelectronics/common/dh_common.c
-@@ -11,6 +11,23 @@
- 
- #include "dh_common.h"
- 
-+static int on_dh_som_serial_number(const char *name, const char *value, enum env_op op,
-+				   int flags)
-+{
-+	env_set("SN", value);
-+	return 0;
-+}
-+
-+U_BOOT_ENV_CALLBACK(dh_som_serial_number, on_dh_som_serial_number);
-+
-+static int on_SN(const char *name, const char *value, enum env_op op, int flags)
-+{
-+	env_set("dh_som_serial_number", value);
-+	return 0;
-+}
-+
-+U_BOOT_ENV_CALLBACK(SN, on_SN);
-+
- bool dh_mac_is_in_env(const char *env)
- {
- 	unsigned char enetaddr[6];
-diff --git a/configs/dhsom.config b/configs/dhsom.config
-index fc76632630..380bedaa5d 100644
---- a/configs/dhsom.config
-+++ b/configs/dhsom.config
-@@ -49,6 +49,7 @@ CONFIG_CMD_UUID=y
- CONFIG_CMD_WGET=y
- CONFIG_CMD_XXD=y
- CONFIG_CRC32_VERIFY=y
-+CONFIG_ENV_CALLBACK_LIST_STATIC="dh_som_serial_number:dh_som_serial_number,SN:SN,"
- CONFIG_HASH_VERIFY=y
- CONFIG_MD5SUM_VERIFY=y
- CONFIG_SHA1SUM_VERIFY=y
--- 
-2.30.2
-
+On 12/2/24 6:29 PM, Christoph Niedermaier wrote:
+> The env variable "SN" is used to store the serial number on DH electronics
+> SoMs. New SoMs will use the variable "dh_som_serial_number". To ensure
+> compatibility, these env variables are synchronized. This is achieved
+> using callback functions.
+> 
+> Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Reviewed-by: Marek Vasut <marex@denx.de>
