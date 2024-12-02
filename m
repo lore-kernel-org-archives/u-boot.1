@@ -4,57 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF740E69E99
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 22:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE9DDE69E9A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 23:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E7D688D3A;
-	Mon,  2 Dec 2024 23:54:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3E71F8951D;
+	Tue,  3 Dec 2024 00:03:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Jw4WS3cF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60BFA8951D; Mon,  2 Dec 2024 23:54:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8C79C89588; Tue,  3 Dec 2024 00:03:48 +0100 (CET)
+Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26B238945A
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 23:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD8F689246
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 00:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=706d=S4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1733180078;
- bh=wU/r6wDw1ESOXaWAAt1ytVCZ4xUxWshVhQxRQr66rQ4=;
- b=Jw4WS3cFE16pcOgKqqdmQiLXfNYk7V4tXR2Ra52x+nKR+z4n2AwkpvANDKBijRtVPyB1xnl9w
- Cg6s3SVJyS/2IuxL3ydwtvvK2LRN+gmpeC27f5dQA4olj9bsc8fXknkfqKjAQUlLn23VtiANuz/
- N2Mh0cuGpLcynDDfTVZmSXdQxRheblBXWLzpJHO9POJ6JOA0nAdjnqEVQuiHOnSVwTXAT6vjSE0
- IO74tWv+b9qC7BsvSh/tOYd+Qx5g9OlEOkLiEIkjxffEX24VlTWeKmFUnPicURh/bCufjrwerFj
- y2XRq9/v1/vb3AmNUt3EmJCGG07NHLz+LvmAXhRff7hA==
-Message-ID: <c92b3450-4b98-4bf3-8078-0caf410403d6@kwiboo.se>
-Date: Mon, 2 Dec 2024 23:54:22 +0100
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip4t1733180590tar4ym2
+X-QQ-Originating-IP: PIW0JxVAi1O8Rwjkaqp8XRwjPbH9SZ3bMbWU42BbJ3M=
+Received: from [IPV6:240f:10b:7440:1:f61a:d8:e ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 03 Dec 2024 07:03:03 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 17368748476962677574
+Message-ID: <D651125F63787803+83f3b9e3-ff88-42d5-a5e5-93144cb4df58@radxa.com>
+Date: Tue, 3 Dec 2024 08:03:03 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] doc: remove redundant Rockchip bindings
-To: Johan Jonker <jbx6244@gmail.com>, kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-References: <71b804a0-ae2a-472c-84c9-ad7c6317e154@gmail.com>
+Subject: Re: [PATCH] rockchip: rk3399-rock-pi-4: Fix Synchronous Abort
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241119001222.3795292-1-jonas@kwiboo.se>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <71b804a0-ae2a-472c-84c9-ad7c6317e154@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20241119001222.3795292-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 674e3aa886eb3674dc8c1f52
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: Nwz8Cs33/Lpr1sVL70qCuy3dkwcIWlas55OOxR7zx0pYF4J0ugVI3x5K
+ sgiZWnFtuthCAk1gp1SMEFdk8SEqHm43pbx5WBKA1Cr5mdrWtSRbhMCPP8ZPjNn8/wuKclQ
+ XwXb/d/YLIPBtFmSdVOHC1BIIapNQh4kMquaq1rne3pp+lbDEqZAOsg/qJyjeRiLjbblNG6
+ j9eyc2TeB+EN8bIPSiLM3ReqbvnVuAedG0WMRcxFqZqFV2vOrbrSOlsjLLHxsMvzClQu/f4
+ MpSqsED5OUrgr8fYaJPW45Ztz+IyqbVUhWKfxFi+MxBxL5reVKlkvhJVnB1BxxcOvJBtOdd
+ MPQNsvWz41RsfnjXLetJqW05P6NCL/ae6lirp5fraqhNaIlfaYc5EjT65hC4G6MxTax0BgO
+ hPOwHfBS7Id28cMnPUdSJTrmcl1eCJIl4SLF9ppLy34YWaXhSlgb0UZtdTxHYuSb6bcCPzx
+ bFa8ejuupJEF7MtE6EOhzXCfn2uzoWYHsLlFTv2LNHc8NU/RVJcrlNnwMHxSQiQST/hJpiJ
+ buGjMp5LwRg1bZvDRDWgrHcwySqWs6Lp9O+4nN0CRbHUYiwG49nXJqn8UqFJOZhauy7MIPT
+ Cw+XC9HW3wsvbIzSqE6IsWcFZ9ouCn3hgWXl240qUCovZ952kRkIqK17hDxhy6lVEqx0Vyt
+ qriwEIqPSoIam9XvSI5KAFvCCbS/1L/OeFydjaLn9Q7piNYBt7T9uSz7dl5r0jzvy2/htGe
+ P88gGM4zMtqGHxYiLQqGcuBxYczgPXfZ3NDY+gEq3GhwRXWGkwOOk3Nh0izsTJz8VEcw/Hc
+ wnvol9IOCksFV+hDfah4ZZ95NlPnj4ey29qesKW8Vvzn3O90kmp1nIy7LFOTMtcyRkAxDjg
+ gYTl8rYeYeogCpqk215tuCl4tUAfjI5Lsi/Bpl2IfE0yiJZfxdmtVg==
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,37 +78,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Hi,
 
-On 2024-11-30 22:18, Johan Jonker wrote:
-> Most Rockchip device tree related bindings are converted to YAML
-> and available in the U-boot /dts/upstream/Bindings/ directory.
-> Remove all redundant U-boot entries.
+On 11/19/24 09:12, Jonas Karlman wrote:
+> After the commit 788cf33315c7 ("efi: add a helper to generate dynamic
+> UUIDs") update_info.num_images must match number of valid update images.
 > 
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> On Rock Pi 4 following Synchronous Abort can be observed due to fw_name
+> being NULL:
+> 
+>    Scanning global bootmeth 'efi_mgr':
+>    "Synchronous Abort" handler, esr 0x96000010, far 0x0
+>    elr: 0000000000200e28 lr : 000000000028adb8 (reloc)
+>    elr: 00000000f3efbe28 lr : 00000000f3f85db8
+>    x0 : 0000000000000000 x1 : ffffffffffffffff
+>    x2 : 0000000000000000 x3 : 000000000000000e
+>    x4 : 0000000000000000 x5 : 00000000f1ef0d78
+>    x6 : 00000000f3fb3b90 x7 : 0000000000000044
+>    x8 : 0000000000000010 x9 : 0000000000000031
+>    x10: 00000000f0ea3fff x11: 00000000f1f29e00
+>    x12: 0000000000000002 x13: fffffffffffff000
+>    x14: 00000000f1f29e00 x15: 0000000000000018
+>    x16: 00000000f3f44f7c x17: 0000000000000000
+>    x18: 00000000f1ef2de0 x19: 00000000f0ea3040
+>    x20: 00000000f3ff53d8 x21: 00000000f3fd0498
+>    x22: 0000000000000000 x23: 00000000f1edb960
+>    x24: 00000000f1edb95f x25: 00000000f1edb990
+>    x26: 00000000f1edb964 x27: 00000000f1edb998
+>    x28: 00000000f1edc1ec x29: 00000000f1edb820
+> 
+>    Code: aa0003e2 d2800000 eb01001f 54000060 (78607843)
+>    Resetting CPU ...
+> 
+>    resetting ...
+> 
+> Fix this by setting update_info.num_images to 0 when no valid update
+> images is added to update_info.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Tested-by: FUKAUMI Naoki <naoki@radxa.com>
+
+thanks!
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
 > ---
->  .../clock/rockchip,rk3188-cru.txt             |  61 -------
->  .../clock/rockchip,rk3288-cru.txt             |  61 -------
->  doc/device-tree-bindings/clock/rockchip.txt   |  77 ---------
->  .../pinctrl/rockchip,pinctrl.txt              | 157 ------------------
->  .../thermal/rockchip-thermal.txt              |  68 --------
->  doc/device-tree-bindings/usb/dwc2.txt         |   4 -
->  .../video/rockchip-lvds.txt                   |  77 ---------
->  7 files changed, 505 deletions(-)
->  delete mode 100644 doc/device-tree-bindings/clock/rockchip,rk3188-cru.txt
->  delete mode 100644 doc/device-tree-bindings/clock/rockchip,rk3288-cru.txt
+>   board/radxa/rockpi4-rk3399/rockpi4-rk3399.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c b/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
+> index fd827467b30a..856b434df36d 100644
+> --- a/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
+> +++ b/board/radxa/rockpi4-rk3399/rockpi4-rk3399.c
+> @@ -52,6 +52,8 @@ void rockchip_capsule_update_board_setup(void)
+>   
+>   		fw_images[0].fw_name = u"ROCKPI4C-IDBLOADER";
+>   		fw_images[1].fw_name = u"ROCKPI4C-UBOOT";
+> +	} else {
+> +		update_info.num_images = 0;
+>   	}
+>   }
+>   #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
 
-The rockchip,rk3288-cru.txt file is also removed in:
-
-rockchip: rk3288: Use rk3288-cru.h from dts/upstream
-https://patchwork.ozlabs.org/project/uboot/patch/20241109210427.884888-4-jonas@kwiboo.se/
-
-Regards,
-Jonas
-
->  delete mode 100644 doc/device-tree-bindings/clock/rockchip.txt
->  delete mode 100644 doc/device-tree-bindings/pinctrl/rockchip,pinctrl.txt
->  delete mode 100644 doc/device-tree-bindings/thermal/rockchip-thermal.txt
->  delete mode 100644 doc/device-tree-bindings/video/rockchip-lvds.txt
-
-[snip]
