@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 564F3D78336
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 16:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F368D78336
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 16:24:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38FD588E3F;
-	Mon,  2 Dec 2024 17:22:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A7D9A88E3F;
+	Mon,  2 Dec 2024 17:24:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kiNTJsXC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fCXQGvWC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA7ED88E63; Mon,  2 Dec 2024 17:22:46 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 562EB88E63; Mon,  2 Dec 2024 17:24:00 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81B7388DE6
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 17:22:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B3A888DE6
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 17:23:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6d8adbda583so4268946d6.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 08:22:44 -0800 (PST)
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-211fb27cc6bso35313725ad.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 08:23:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733156563; x=1733761363; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733156636; x=1733761436; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UWwJsbw9X42sS2z8ME2wue8FcIzfOO0sMRZOt3DZneU=;
- b=kiNTJsXCuK0D85AAmBZ9Yh4WvN8jxM/NUwfdS6uqNqnQq0qh4XF+wCc8oporY35OJp
- gsszltq2YZaxYpnI2eTC9RKCbv3/q/5alRjgrvqmRcYsHvWAbkYYN4ND8CcV1lOKg/Pa
- j8szX0PZ5Ufe9+J7vt59WP7kdS7fQz4/UXoHs=
+ bh=/WshIuQOPdNWZ4TAstBuIE+bSeZD+gVkrPtgGToDeSY=;
+ b=fCXQGvWC8AyRVAmzhLilRVbm/tECc0rnP0KawkC9CbYELRw7KcIVoMnMnjazMO4nRo
+ aV7Ivyzc92Ra6MCKkYr+rs6kJ327NTbZIaqSPMyj086uXthpYjP9Mxn5ed6K2HVTTe79
+ rPcWEzu4YhcEwPYpXkAwzgQgDY1c0hOJqi04bMbmZEytu53aNIkQ5DJ2ry4FpUIPsgd4
+ T02PaGiELW/ejftWHNhFLQtC3tTlZn/bsiaWVoQENNrQF8qqkKhbaXBSq7K+LzQDHkYh
+ aamMGMb1kCxB+8/dvafCh2H5hqJqCp9V6VDuHq12xj5YzE87r3HrmDeZLs7MuNFn/MOY
+ WCZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733156563; x=1733761363;
+ d=1e100.net; s=20230601; t=1733156636; x=1733761436;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UWwJsbw9X42sS2z8ME2wue8FcIzfOO0sMRZOt3DZneU=;
- b=I2Ot03z9w5xKyjVKZHbIYm7x+K/53B1lGZLTqMXw2NBM1RTdi+jYDHt/M4AyMbJwC2
- h1+F0xkZq8TH5cixfZdNZlwxgVguR3tHLTfStaJbaoQcqSYh/Wc/deYLv0syerLCWDmB
- kzWve9WJYGM1sH6wIwymGZPkb0xLowHBlWMuIG+hHcDO30u1VHf0bmSZ2JKYB0TKBD0v
- GsY0pDGfoFW7EKGzi/DrtZ6DaKe8NO7BsgxNi4m1K5pELTdFex02YJUTwcLP8nrHP+dS
- Tlju3OToX7VRQJGBmbX4UbJWUT5um0KG/HDo/t+rtXTy6zSfK6i+lzaVXXwu5cD1VT0B
- xq4Q==
-X-Gm-Message-State: AOJu0YzeRAqCYghjJ6NzMmc/FOJKVUCZpqnmo9mC85KgGCjBjdd/ugc4
- 7220LGyGu6iZR2VehjQd9xuDIGhrNs6JQkz2QDLlROZUR6zxmYyR6BCAT7lo0PA=
-X-Gm-Gg: ASbGncvU6exorDx7pnXhRwnL2HoIJ402LDQbibTj1S+ZEcEj0fqy21rbenD64VYA6QX
- UUEnHNaXf6L8aWLqtvnSCeB8zbRxIbkHFk+8/u0KEMdUX1IKJusrR88BsbW5g7eWP6aL6zEi+3g
- MuqSNPdHEywoiSTHxbcMO7FVRmXLowcTp4ZUEUUYUQXCIiqDqIdkhfCNQC7PmSaWRgDeBKU7Gbl
- R6vkk3dXZu0bQzRJOnR5Fo+F0oZILUp7bWJKu8lH7S/odAgzg==
-X-Google-Smtp-Source: AGHT+IGfLj8R5WCLHLtkjr4lULSMWFaj2sklW51mLCr3J5fy5W8XmVP01OeLlkng9FsM9LAFbvny3Q==
-X-Received: by 2002:a05:6214:485:b0:6d4:4100:75a1 with SMTP id
- 6a1803df08f44-6d864dd3b42mr385180096d6.39.1733156563330; 
- Mon, 02 Dec 2024 08:22:43 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d88d72c0e1sm33683906d6.11.2024.12.02.08.22.41
+ bh=/WshIuQOPdNWZ4TAstBuIE+bSeZD+gVkrPtgGToDeSY=;
+ b=TVmlfyoI83pcXa5tdgEO0oX7k/YtLSgE7Y2e99S1BqbMKzzFg00eT3yaHZsiccYwF+
+ rjeR4fMHnw7szmdZxIW88RwHvlv13kErK3PvVP3UBNQDz6PMYJqNoAZ1HuhW+6qGI7lp
+ ItVntHxcZdZTd/KiTxbSBsjc22DQuesYbUmb6soT9r23fcUv4LXarcY7cxlsQZt8M6C+
+ Rq7lUV02omTZlsyJbPLWkiNn2Q/a9P/AUmimhvO8SqmO1zAp95bynM1W/8J39sQ5BMTf
+ RyjDNFGvQR9zppTURog+R/4XBfzXEsb1hoAtmm6K0sF0eDgvwqhNMn0gE3Ct7YHl+QDS
+ pBRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHc6onFdEKT5801dQlZSTEU+ZdIhMV78lvpGIXj6K/7++DtOs7TcrZVjPvu2wabbTGDkZC53k=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMuqjzu3/q9d9bbtlC/gWMg53uSyAPgNfnmvOnIJp1FQoZKoWn
+ u0hvfANKjELUqXSW8yju4X0He5UT3q5Bb2FbgQ8oSpAJ8YqaniVg
+X-Gm-Gg: ASbGncv73s0zU0i5DCGL2YCpuKCSU4b2r10sIaYAj5ZXxdAslaKQozWqy7rzH6LW4h6
+ pi/QPL5A9tLYLNtTYAu6jDZ8GwH/r8M9OdLUcnUo0oWlDoy4ZH9w4Gk05DJwwPFR1OFLQXSTo+N
+ gDRsl9zVfs+UK2VLSd1d7Kui3u5ckSOmknZfJiHHLKF/QVpTnfQbjBLrgVxFPKQVKWV+OdZvwNJ
+ UqPsibY36bOcfzXf1OIm+dZAkovQKmzlpqqyG0LxJSl6PWX
+X-Google-Smtp-Source: AGHT+IHHF57Tot60y0hhRb+WfLHNilx5uoAtpd0ytrFNYKyEN2KQ9tb6DUV2dlRjD0F087rLlFHhbA==
+X-Received: by 2002:a17:902:d4c7:b0:215:86c2:3fe0 with SMTP id
+ d9443c01a7336-21586c242f4mr77051525ad.38.1733156636404; 
+ Mon, 02 Dec 2024 08:23:56 -0800 (PST)
+Received: from hiago-nb ([67.159.246.222]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-215219c2e31sm79342545ad.251.2024.12.02.08.23.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 08:22:42 -0800 (PST)
-Date: Mon, 2 Dec 2024 10:22:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
- bloblist"
-Message-ID: <20241202162239.GE2457179@bill-the-cat>
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-5-sjg@chromium.org>
- <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
+ Mon, 02 Dec 2024 08:23:55 -0800 (PST)
+Date: Mon, 2 Dec 2024 13:23:52 -0300
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de,
+ Hiago De Franco <hiago.franco@toradex.com>
+Subject: Re: [PATCH] verdin-am62: fix FASTBOOT_BUF_ADDR and FASTBOOT_BUF_SIZE
+Message-ID: <20241202162352.adgpgpxlegpypq72@hiago-nb>
+References: <20241129151257.90607-1-hiagofranco@gmail.com>
+ <20241129160925.GL3600562@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uYH33fdnNehc3PGC"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20241129160925.GL3600562@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,51 +97,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Nov 29, 2024 at 10:09:25AM -0600, Tom Rini wrote:
+> On Fri, Nov 29, 2024 at 12:12:57PM -0300, Hiago De Franco wrote:
+> 
+> > From: Hiago De Franco <hiago.franco@toradex.com>
+> > 
+> > The current value of CONFIG_FASTBOOT_BUF_ADDR is incorrect for hardware
+> > with 512MB and 1GB of RAM. The RAM address ranges for these devices are:
+> > 
+> > - 512MB:
+> >   - Start: 0x80000000
+> >   - End:   0xA0000000
+> > - 1GB:
+> >   - Start: 0x80000000
+> >   - End:   0xC0000000
+> > 
+> > The current buffer address makes fastboot downloads work only on
+> > hardware with 2GB of RAM.
+> > 
+> > To fix this issue:
+> > 1. Lower CONFIG_FASTBOOT_BUF_ADDR to 0x80080000. This places the buffer
+> >    near the beginning of RAM with a 512KB offset, as starting at exactly
+> >    0x80000000 conflicts with the ATF load address. Following
+> >    K3_ATF_LOAD_ADDR configuration, ATF is loaded at 0x80000000:
+> > 
+> >   config K3_ATF_LOAD_ADDR
+> >     hex "Load address of ATF image"
+> >     default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
+> >     default 0x70000000
+> >     help
+> >       The load address for the ATF image. This value is used to build the
+> >       FIT image header that places ATF in memory where it will run.
+> > 
+> > 2. Reduce the size of the download buffer to 128MB, avoiding overlaps
+> >    with RAMDISK_ADDR_R. This is a good enough value for individual
+> >    downloads.
+> > 
+> > Theses changes make fastboot downloads work with 512MB and 1GB devices.
+> > 
+> > Fixes: defe30a78b76 ("verdin-am62: add DFU, USB and UUU fastboot support")
+> > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+> > ---
+> >  configs/verdin-am62_a53_defconfig | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
+> > index 49fb9790e295..6fa1a9d2c552 100644
+> > --- a/configs/verdin-am62_a53_defconfig
+> > +++ b/configs/verdin-am62_a53_defconfig
+> > @@ -122,8 +122,8 @@ CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+> >  CONFIG_DMA_CHANNELS=y
+> >  CONFIG_TI_K3_NAVSS_UDMA=y
+> >  CONFIG_USB_FUNCTION_FASTBOOT=y
+> > -CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
+> > -CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
+> > +CONFIG_FASTBOOT_BUF_ADDR=0x80080000
+> > +CONFIG_FASTBOOT_BUF_SIZE=0x8000000
+> >  CONFIG_FASTBOOT_UUU_SUPPORT=y
+> >  CONFIG_TI_SCI_PROTOCOL=y
+> >  CONFIG_GPIO_HOG=y
+> 
+> Why not 0x88200000 which is what CONFIG_SYS_LOAD_ADDR is?
 
---uYH33fdnNehc3PGC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We were downloading a file at this address, that is why we decided to
+not use it. However it is better to use SYS_LOAD_ADDR and then download
+this file to a different value.
 
-On Mon, Dec 02, 2024 at 09:26:42AM -0500, Raymond Mao wrote:
-> Hi Simon,
->=20
-> On Sun, 1 Dec 2024 at 09:43, Simon Glass <sjg@chromium.org> wrote:
->=20
-> > This stops coral, bob and kevin from booting.
-> >
-> > The correct way to do this was always to use a Kconfig option, so let's
-> > first revert this broken idea.
-> >
-> > OF_BOARD and BLOBLIST should be general and hardware agnostic,
-> do you have more information on why they don't work for a few boards?
-> Maybe the way to handle these logic within certain boards should be
-> changed other than to revert this?
+Thanks Tom, I will send a v2.
 
-Yes, I'd like to understand the whole problem better since we had a
-forever-and-ever thread, compromised to what's in tree now and now you
-want to revert the compromise and bring is back to what was argued
-against for forever-and-ever, at least from a very quick read.
+> 
+> -- 
+> Tom
 
---=20
-Tom
+Cheers,
 
---uYH33fdnNehc3PGC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdN3scACgkQFHw5/5Y0
-tyxmJQv/dDzeq1rd4ZB/g2525lFVsvJ9HOj0VQeXLEphMB61CZA1rMg9dp4M7tqo
-xx1D93EUV/UF48eLqAziLxdN+kFwewKb+a2rZqS3+RURU/Dftr/W7G7at2iE+PHi
-ZmJ8PHRrKHI8FxtLOvpbRH7mlr9bSBWRdp89ri9QdqCS2qZ4DzYd/IpvQUEUoETx
-giAYALY3fKwlZSEC716cOYUoApH8l5brZa5bSkIibbprLSG30kXUraZX0tmUtOa/
-1B02UCEWKFM59dHfmyfLTWeNx+nIKczxs+52A9JMVG9ys28cHN1j0dq5auYaB5Pc
-8wuL+i/3gp8hW9TCG/A9BEwllo1JbwdMlbS7khmrWDF6NZ1krPeWQOeWJUh23C8N
-NQZBB+5oUbdmO406RP57LuXHSRs6Y/yu0C/44cS+amY7tWJGy8s/ch03epYCotvm
-Bk8d4ApO2vvhYStW7ivlGHK2ZT/S/bRmTirdsEF6RPCDc4Ez0AxR1Y3GpDVA2El+
-KIp4f5uv
-=pm9U
------END PGP SIGNATURE-----
-
---uYH33fdnNehc3PGC--
+Hiago.
