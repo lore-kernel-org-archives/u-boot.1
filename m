@@ -4,81 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAEED78333
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 16:49:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE39D78337
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 17:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41C2F88F68;
-	Mon,  2 Dec 2024 17:49:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AC7B088DB1;
+	Mon,  2 Dec 2024 18:17:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LSjtFiXY";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="U3LNcxWp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34DA888FAB; Mon,  2 Dec 2024 17:49:03 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 47FC588FC4; Mon,  2 Dec 2024 18:17:39 +0100 (CET)
+Received: from mx3.securetransport.de (mx3.securetransport.de
+ [IPv6:2a01:4f8:c0c:92be::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE2D488A1C
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 17:49:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47B9588A1B
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 18:17:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5cf6f367f97so5422444a12.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 08:49:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733158140; x=1733762940; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vt0PnmkIMphiTjBL+N3H2AOaivO7CXTNCjhU6ozjhbo=;
- b=LSjtFiXYaetNNj5yitJuDKRAajbNopBygwWU07yvN+XkhMLZfNzL0RJhDgBMdBBxPL
- hxBuq+Buc00DVZeTnp0HdDQc2LledPJTfLb3aJaNDUN31Vq/j1zH76Uf7u0czJyRx1oi
- 6N+rpejlpov/bUHeWy3TdKJ79hi6SR70v47Z88FHj2jWjGeKPvFNp3CWTRC/7LK28eiw
- Ro5WEMW6+7AK4/3IeWBgjzUefzmCOwct7TEohZhugFsW9At3uP+Ve3q1cd3K1y7FLnhS
- slRhvFibrNjBxr72sYTF4r2Gi5ZYosr+qtwumXR+1mkTuar19837h4zMQ9QqMFJAiTt3
- fAFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733158140; x=1733762940;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Vt0PnmkIMphiTjBL+N3H2AOaivO7CXTNCjhU6ozjhbo=;
- b=d2+u3BsaaYUJEtVl+Zo9K3cTqNXf1R/9UKiXmRHqwmPny31X0Rmp4sq7BzbTs1hSet
- F3+zrBL9w8xfiy/bzA7itQv7mWFxE5Env2a+u7D3JkZz5Qb/mZ1RpctfvJhS77dwA8cR
- MVybLY/UaMMsecBK2AeKIYS+TD22hqCkTjbnduR+dUWvgAVtX1M7Y1OwQsUXU/cNBmfb
- 5/lERl1+4tJb0LLFhGfw2Oyc3eOVCdOwYZUjhUxPj0Hf4fm9w/54iJ0ANNLuUZKi3QHl
- vbLO1SI2GEKk+zEeE1DyTnp+aGweErs4nKAz1Geos3MRSQgkRHbczAH0l1R1+WNC7DlP
- DtTQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX0zeu6v7Ooy2JEzNOdRhVncGtcxiDT+HmFmXEuLDIBH2xnCNOALZuevtDpuEv1eqMU9fSdOyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwvY4pW96bpZG1ebHuyc72CKNodB+x/mTi5zNxZYpVMXWwWnmNZ
- VT6vexFaLpZinsDx5dqIWL6WnRillMuDGNkzjb8Eat3vZurzmEDRmoJRrXrpd6Sei0t+df/UeMm
- 4g66ST7S9/0r5L5RBTlyiL9iSH+H0g8tDrgdo2A==
-X-Gm-Gg: ASbGncvRaKzO0Zh4dePPK70et2YGFjzT3N5F4bSIOjQy1Ir5W5T8xZymXBKGPyxWJp8
- PAigcD0n16/T3cF3HlT2JbShx+WkDO8qc
-X-Google-Smtp-Source: AGHT+IElocQhbDg16yPB2qFRilDOjjor8MCQOgYX5A3QdG0v9UTR19PZnn9VTJD48dfWrL7h20C7NZJuc4ESr18Rr1w=
-X-Received: by 2002:a05:6402:3219:b0:5d0:b74f:6422 with SMTP id
- 4fb4d7f45d1cf-5d0b74f66b8mr17219894a12.32.1733158140335; Mon, 02 Dec 2024
- 08:49:00 -0800 (PST)
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1733159848;
+ bh=CB0m+10ZfOqVtuZ98g3XXNzTuWjw1GmA4HGZ0gYoHMk=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=U3LNcxWpCq0DOEZopykFoCpaenB2s+euG5pmPYqRgWxOgLACam1IgHi7aEIWYhBbx
+ 2qQvgtTbPlf7KiJxQ+UbBiSF9Xl5kN02rScrM930SMHpa8fa1t7/kNqcvcHWfTE2iO
+ F0BVKmJ5WcBlsq7bhc8UzBqN1Vuq4Tk6WcKZ/nsTYMCbUdgkecIfwmFY5377xPTW71
+ 28L2Lh9SV1WSguPLnHpZRdfr7EJlN8lLxfm3FEJFh2UDAt/ZRLs4byuFn+F/tgCj9T
+ csHGRo8hb4f9gR3AXECiPHxfzyb5VE7LSEMXVQvtHjWQWZwKJsm6+Syf3FIEaj5NKN
+ NJwNkoGQP4RYw==
+X-secureTransport-forwarded: yes
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
+Subject: RE: [PATCH V4 2/4] arm64: imx8mp: Read values from M24C32-D
+ write-lockable page on DHCOM i.MX8MP
+Thread-Topic: [PATCH V4 2/4] arm64: imx8mp: Read values from M24C32-D
+ write-lockable page on DHCOM i.MX8MP
+Thread-Index: AQHbQaDkhrFsIVpTPEC/70FVRfpllrLRrdQAgAGKgdA=
+Date: Mon, 2 Dec 2024 17:17:26 +0000
+Message-ID: <25004ade364e43ef91736d2e9d178cd8@dh-electronics.com>
+References: <20241128142020.35386-1-cniedermaier@dh-electronics.com>
+ <20241128142020.35386-3-cniedermaier@dh-electronics.com>
+ <f3c84d83-31ff-4408-a733-a97a2219ed33@denx.de>
+In-Reply-To: <f3c84d83-31ff-4408-a733-a97a2219ed33@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
- <mvmfrn6mh4j.fsf@suse.de>
- <CANV2PTNmUp013xDT1bqKYcyo=aP4NXtLN_u01pXmdNM417RygQ@mail.gmail.com>
-In-Reply-To: <CANV2PTNmUp013xDT1bqKYcyo=aP4NXtLN_u01pXmdNM417RygQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 2 Dec 2024 22:18:49 +0530
-Message-ID: <CADg8p971xk8qkeXnM6fSK0iy5UfSd5x8ekNwBL3DAt+hhSM0qA@mail.gmail.com>
-Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
- bank
-To: E Shattow <lucent@gmail.com>
-Cc: Andreas Schwab <schwab@suse.de>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,125 +77,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Dec 2024 at 19:16, E Shattow <lucent@gmail.com> wrote:
->
-> Hi Sughosh, Andreas, et. al
->
-> On Mon, Dec 2, 2024 at 3:58=E2=80=AFAM Andreas Schwab <schwab@suse.de> wr=
-ote:
-> >
-> > On Dez 02 2024, Sughosh Ganu wrote:
-> >
-> > > There are platforms which set the value of ram_top based on certain
-> > > restrictions that the platform might have in accessing memory above
-> > > ram_top, even when the memory region is in the same DRAM bank. So,
-> > > even though the LMB allocator works as expected, when trying to
-> > > allocate memory above ram_top, prohibit this by marking all memory
-> > > above ram_top as reserved, even if the said memory region is from the
-> > > same bank.
-> >
-> > This fixes the boot failure on the VisionFive2 board as reported in
-> > <mvm8qtnv310.fsf@suse.de>.
-> >
-> > Tested-by: Andreas Schwab <schwab@suse.de>
-> >
-> > --
-> > Andreas Schwab, SUSE Labs, schwab@suse.de
-> > GPG Key fingerprint =3D 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B=
-9D7
-> > "And now for something completely different."
->
-> Echoing what Andreas finds in testing, this avoids the platform issue
-> with dw_mmc driver and the visionfive2 board support on 4GB Star64,
-> 4GB Mars CM Lite, and 8GB Mars CM Lite WiFi.
->
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 14b9b8466ff..be168dfb8dc 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -615,6 +615,7 @@ static __maybe_unused void lmb_reserve_common_spl(v=
-oid)
-> >  void lmb_add_memory(void)
-> >  {
-> >   int i;
-> > + phys_addr_t bank_end;
-> >   phys_size_t size;
-> >   u64 ram_top =3D gd->ram_top;
-> >   struct bd_info *bd =3D gd->bd;
-> > @@ -628,6 +629,8 @@ void lmb_add_memory(void)
-> >
-> >   for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> >       size =3D bd->bi_dram[i].size;
-> > +     bank_end =3D bd->bi_dram[i].start + size;
-> > +
->
-> Delete newline? Unless existing style is wrong here.
-
-It's not about style, but the above two lines are more of an
-initialisation within the block, which is the reason for a newline
-here.
-
->
-> >       if (size) {
-> >           lmb_add(bd->bi_dram[i].start, size);
-> >
-> > @@ -639,6 +642,9 @@ void lmb_add_memory(void)
-> >           if (bd->bi_dram[i].start >=3D ram_top)
-> >               lmb_reserve_flags(bd->bi_dram[i].start, size,
-> >                         LMB_NOOVERWRITE);
-> > +         else if (bank_end > ram_top)
-> > +             lmb_reserve_flags(ram_top, bank_end - ram_top,
-> > +                       LMB_NOOVERWRITE);
->
-> Please guard this somehow that it will be enabled per each platform
-> that needs it, and/or give warning when conditions this specific code
-> path is a workaround for are reached that are different than before
-> the patch. Any similar platform-specific memory addressing bug/quirk
-> having previously avoided a trigger will silently continue to work
-> here instead of getting documented; we should at least uncover these
-> assumptions.
-
-Instead of putting some check here, and complicating the code, I would
-say that the board maintainer would know why the ram_top has not been
-put at the top of DRAM memory -- if possible, the ram_top should be
-the highest possible DRAM address. So this is the responsibility of
-the board maintainer instead. Ideally, for a 64 bit machine, like the
-one where you hit this issue, there is no reason for the board to not
-use the highest possible DRAM address as ram_top, unless there is some
-issue, like accessing memory address above a certain value. So, this
-would not be an issue if the board is using the highest possible value
-of memory as ram_top, especially when it comes to a single DRAM bank.
-
->
-> In the theoretical situation where we are to just fix the visionfive2
-> mmc platform specific issue in the dw_mmc driver and not need this
-> workaround code anymore, there's not visibility for us to easily
-> diagnose if a similar assumption or previously un-triggered platform
-> quirk exists elsewhere. There's no warning, and no easy on/off config
-> option to test with and without. The memory rework commit 22f2c9ed9f53
-> is here a useful tool to break and bring attention to assumptions in
-> code and documentation.
-
-Fixing the mmc driver issue may or may not be possible. And if this is
-indeed a fixable issue, then, after fixing the mmc driver, the
-subsequent change should also remove this restriction on the ram_top
-value, which will automatically take care of this restriction.
-
--sughosh
-
->
-> >       }
-> >   }
-> >  }
->
-> CONFIG_EFI_LOADER_BOUNCE_BUFFER=3Dy added to visionfive2 config in
-> 6c791b6646c1 does not make sense to me as when I tested it did not
-> avoid the platform issue. Restricting the memory allocations is an
-> effective workaround to the visionfive2 platform issue. I leave that
-> to the experts if a revert is appropriate given that we have an
-> effective workaround now.
->
-> Thank you Sughosh! This is (meanwhile until more comments and review)
-> a functional workaround.
->
-> Tested-by: E Shattow <lucent@gmail.com>
+RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBTdW5kYXksIERlY2VtYmVy
+IDEsIDIwMjQgNzo0NCBQTQ0KPiBPbiAxMS8yOC8yNCAzOjIwIFBNLCBDaHJpc3RvcGggTmllZGVy
+bWFpZXIgd3JvdGU6DQo+IA0KPiBbLi4uXQ0KPiANCj4+ICsrKyBiL2JvYXJkL2RoZWxlY3Ryb25p
+Y3MvY29tbW9uL2RoX2NvbW1vbi5jDQo+PiBAQCAtNyw2ICs3LDcgQEANCj4+ICAgI2luY2x1ZGUg
+PGRtLmg+DQo+PiAgICNpbmNsdWRlIDxpMmNfZWVwcm9tLmg+DQo+PiAgICNpbmNsdWRlIDxuZXQu
+aD4NCj4+ICsjaW5jbHVkZSA8dS1ib290L2NyYy5oPg0KPj4NCj4+ICAgI2luY2x1ZGUgImRoX2Nv
+bW1vbi5oIg0KPj4NCj4+IEBAIC0zMCw2ICszMSwxNDggQEAgaW50IGRoX2dldF9tYWNfaXNfZW5h
+YmxlZChjb25zdCBjaGFyICphbGlhcykNCj4+ICAgCXJldHVybiAwOw0KPj4gICB9DQo+Pg0KPj4g
+K2ludCBkaF9yZWFkX2VlcHJvbV9pZF9wYWdlKHU4ICplZXByb21fYnVmZmVyLCBjb25zdCBjaGFy
+ICphbGlhcykNCj4+ICt7DQo+PiArCXN0cnVjdCBlZXByb21faWRfcGFnZSAqZWlwID0gKHN0cnVj
+dCBlZXByb21faWRfcGFnZSAqKWVlcHJvbV9idWZmZXI7DQo+PiArCXN0cnVjdCB1ZGV2aWNlICpk
+ZXY7DQo+PiArCXNpemVfdCBwYXlsb2FkX2xlbjsNCj4+ICsJaW50IGVlcHJvbV9zaXplOw0KPj4g
+Kwl1MTYgY3JjMTZfY2FsYzsNCj4+ICsJdTE2IGNyYzE2X2VpcDsNCj4+ICsJdTggY3JjOF9jYWxj
+Ow0KPj4gKwlvZm5vZGUgbm9kZTsNCj4+ICsJaW50IHJldDsNCj4+ICsNCj4+ICsJbm9kZSA9IG9m
+bm9kZV9wYXRoKGFsaWFzKTsNCj4+ICsNCj4+ICsJcmV0ID0gdWNsYXNzX2dldF9kZXZpY2VfYnlf
+b2Zub2RlKFVDTEFTU19JMkNfRUVQUk9NLCBub2RlLCAmZGV2KTsNCj4+ICsJaWYgKHJldCkNCj4+
+ICsJCXJldHVybiByZXQ7DQo+PiArDQo+PiArCWVlcHJvbV9zaXplID0gaTJjX2VlcHJvbV9zaXpl
+KGRldik7DQo+PiArCWlmIChlZXByb21fc2l6ZSA8IDApIHsNCj4+ICsJCXByaW50ZigiJXM6IEVy
+cm9yIGdldHRpbmcgRUVQUk9NIElEIHBhZ2Ugc2l6ZSEgcmV0ID0gJWRcbiIsIF9fZnVuY19fLCBy
+ZXQpOw0KPj4gKwkJcmV0dXJuIGVlcHJvbV9zaXplOw0KPj4gKwl9IGVsc2UgaWYgKGVlcHJvbV9z
+aXplID09IDAgfHwgZWVwcm9tX3NpemUgPiBESF9FRVBST01fSURfUEFHRV9NQVhfU0laRSkgew0K
+PiANCj4gVGhlIGVsc2UgcGFydCBpcyBub3QgbmVjZXNzYXJ5LCB1c2UgcGxhaW46DQo+IA0KPiAu
+Li4NCj4gICAuLi4NCj4gICByZXR1cm4gZWVwcm9tX3NpemU7DQo+IH0NCj4gDQo+IGlmIChlZXBy
+b21fc2l6ZSA9PSAwIHx8IGVlcHJvbV9zaXplID4gREhfRUVQUk9NX0lEX1BBR0VfTUFYX1NJWkUp
+IHsNCj4gLi4uDQoNCkkgd2lsbCBjaGFuZ2UgaXQgaW4gVjUuDQoNCj4+ICsJCWVlcHJvbV9zaXpl
+ID0gREhfRUVQUk9NX0lEX1BBR0VfTUFYX1NJWkU7DQo+PiArCQlwcmludGYoIkdldCBpbnZhbGlk
+IEVFUFJPTSBJRCBwYWdlIHNpemUgJWQgYnl0ZXMhIFRyeSB0byByZWFkICVkIGJ5dGVzLlxuIiwN
+Cj4+ICsJCSAgICAgICBlZXByb21fc2l6ZSwgREhfRUVQUk9NX0lEX1BBR0VfTUFYX1NJWkUpOw0K
+Pj4gKwl9DQo+PiArDQo+PiArCXJldCA9IGkyY19lZXByb21fcmVhZChkZXYsIDB4MCwgZWVwcm9t
+X2J1ZmZlciwgZWVwcm9tX3NpemUpOw0KPj4gKwlpZiAocmV0KSB7DQo+PiArCQlwcmludGYoIiVz
+OiBFcnJvciByZWFkaW5nIEVFUFJPTSBJRCBwYWdlISByZXQgPSAlZFxuIiwgX19mdW5jX18sIHJl
+dCk7DQo+PiArCQlyZXR1cm4gcmV0Ow0KPj4gKwl9DQo+PiArDQo+PiArCS8qIFZhbGlkYXRlIGhl
+YWRlciBJRCAqLw0KPj4gKwlpZiAoZWlwLT5oZHIuaWRbMF0gIT0gJ0QnIHx8IGVpcC0+aGRyLmlk
+WzFdICE9ICdIJyB8fCBlaXAtPmhkci5pZFsyXSAhPSAnRScpIHsNCj4+ICsJCXByaW50ZigiJXM6
+IEVycm9yIHZhbGlkYXRpbmcgaGVhZGVyIElEISAoZ290ICVjJWMlYyAoMHglMDJ4IDB4JTAyeCAw
+eCUwMngpICE9IGV4cGVjdGVkIERIRSlcbiIsDQo+PiArCQkgICAgICAgX19mdW5jX18sIGlzcHJp
+bnQoZWlwLT5oZHIuaWRbMF0pID8gZWlwLT5oZHIuaWRbMF0gOiAnLicsDQo+PiArCQkgICAgICAg
+aXNwcmludChlaXAtPmhkci5pZFsxXSkgPyBlaXAtPmhkci5pZFsxXSA6ICcuJywNCj4+ICsJCSAg
+ICAgICBpc3ByaW50KGVpcC0+aGRyLmlkWzJdKSA/IGVpcC0+aGRyLmlkWzJdIDogJy4nLA0KPj4g
+KwkJICAgICAgIGVpcC0+aGRyLmlkWzBdLCBlaXAtPmhkci5pZFsxXSwgZWlwLT5oZHIuaWRbMl0p
+Ow0KPj4gKwkJcmV0dXJuIC1FSU5WQUw7DQo+PiArCX0NCj4+ICsNCj4+ICsJLyogVmFsaWRhdGUg
+aGVhZGVyIGNoZWNrc3VtICovDQo+PiArCWNyYzhfY2FsYyA9IGNyYzgoMHhmZiwgZWVwcm9tX2J1
+ZmZlciwgb2Zmc2V0b2Yoc3RydWN0IGVlcHJvbV9pZF9wYWdlLCBoZHIuY3JjOF9oZHIpKTsNCj4+
+ICsJaWYgKGVpcC0+aGRyLmNyYzhfaGRyICE9IGNyYzhfY2FsYykgew0KPj4gKwkJcHJpbnRmKCIl
+czogRXJyb3IgdmFsaWRhdGluZyBoZWFkZXIgY2hlY2tzdW0hIChnb3QgMHglMDJ4ICE9IGNhbGMg
+MHglMDJ4KVxuIiwNCj4+ICsJCSAgICAgICBfX2Z1bmNfXywgZWlwLT5oZHIuY3JjOF9oZHIsIGNy
+YzhfY2FsYyk7DQo+PiArCQlyZXR1cm4gLUVJTlZBTDsNCj4+ICsJfQ0KPj4gKw0KPj4gKwkvKg0K
+Pj4gKwkgKiBWYWxpZGF0ZSBoZWFkZXIgdmVyc2lvbg0KPj4gKwkgKiBUaGUgcGF5bG9hZCBpcyBk
+ZWZpbmVkIGJ5IHRoZSB2ZXJzaW9uIHNwZWNpZmllZCBpbiB0aGUgaGVhZGVyLg0KPj4gKwkgKiBD
+dXJyZW50bHkgb25seSB2ZXJzaW9uIDB4MTAgaXMgZGVmaW5lZCwgc28gdGFrZSB0aGUgbGVuZ3Ro
+IG9mDQo+PiArCSAqIHRoZSBvbmx5IGRlZmluZWQgcGF5bG9hZCBhcyB0aGUgcGF5bG9hZCBsZW5n
+dGguDQo+PiArCSAqLw0KPj4gKwlpZiAoZWlwLT5oZHIudmVyc2lvbiA9PSBESF9FRVBST01fSURf
+UEFHRV9WMV8wKSB7DQo+IA0KPiBJbnZlcnQgdGhpcyBjb25kaXRpb25hbDoNCj4gDQo+IC4uLg0K
+PiBpZiAoZWlwLT5oZHIudmVyc2lvbiAhPSBESF9FRVBST01fSURfUEFHRV9WMV8wKSB7DQo+ICAg
+cHJpbnRmKC4uLik7DQo+ICAgcmV0dXJuIC4uLjsNCj4gfQ0KPiANCj4gcGF5bG9hZF9sZW4gPSBz
+aXplb2YoZWlwLT5wbCk7DQo+IC4uLg0KDQpJIHdpbGwgY2hhbmdlIGl0IGluIFY1Lg0KDQo+PiAr
+CQlwYXlsb2FkX2xlbiA9IHNpemVvZihlaXAtPnBsKTsNCj4+ICsJfSBlbHNlIHsNCj4+ICsJCXBy
+aW50ZigiJXM6IEVycm9yIHZhbGlkYXRpbmcgdmVyc2lvbiEgKDB4JTAyWCBpcyBub3Qgc3VwcG9y
+dGVkKVxuIiwNCj4+ICsJCSAgICAgICBfX2Z1bmNfXywgZWlwLT5oZHIudmVyc2lvbik7DQo+PiAr
+CQlyZXR1cm4gLUVJTlZBTDsNCj4+ICsJfQ0KPj4gKw0KPj4gKwkvKiBWYWxpZGF0ZSBwYXlsb2Fk
+IGNoZWNrc3VtICovDQo+PiArCWNyYzE2X2VpcCA9IChlaXAtPmhkci5jcmMxNl9wbFsxXSA8PCA4
+KSB8IGVpcC0+aGRyLmNyYzE2X3BsWzBdOw0KPj4gKwljcmMxNl9jYWxjID0gY3JjMTYoMHhmZmZm
+LCBlZXByb21fYnVmZmVyICsgc2l6ZW9mKGVpcC0+aGRyKSwgcGF5bG9hZF9sZW4pOw0KPj4gKwlp
+ZiAoY3JjMTZfZWlwICE9IGNyYzE2X2NhbGMpIHsNCj4+ICsJCXByaW50ZigiJXM6IEVycm9yIHZh
+bGlkYXRpbmcgZGF0YSBjaGVja3N1bSEgKGdvdCAweCUwMnggIT0gY2FsYyAweCUwMngpXG4iLA0K
+Pj4gKwkJICAgICAgIF9fZnVuY19fLCBjcmMxNl9laXAsIGNyYzE2X2NhbGMpOw0KPj4gKwkJcmV0
+dXJuIC1FSU5WQUw7DQo+PiArCX0NCj4+ICsNCj4+ICsJcmV0dXJuIDA7DQo+PiArfQ0KPiANCj4g
+Wy4uLl0NCg0KVGhhbmtzIGFuZCByZWdhcmRzDQpDaHJpc3RvcGgNCg==
