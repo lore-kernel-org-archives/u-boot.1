@@ -4,88 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F014D78321
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:47:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54AC4D78321
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 14:09:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE24E893E7;
-	Mon,  2 Dec 2024 14:46:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 70AFF8919F;
+	Mon,  2 Dec 2024 15:09:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NYXpuVhc";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KHGKrm0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6474A8927E; Mon,  2 Dec 2024 14:46:10 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0E97F88BFB; Mon,  2 Dec 2024 15:09:27 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2D968917F
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:46:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 516BA8914C
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 15:09:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eabachinin@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id D80A010000D;
- Mon,  2 Dec 2024 16:46:03 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru D80A010000D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1733147163;
- bh=mqB6Dg09F1JSaozJAOqL/x7HwOWYlaOOfzMxSfQe/3w=;
- h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=NYXpuVhcYPWFAxBCzxn6jEHDnqg32uu4YAgHPaREAv7KqhcSZ2qznKmt4AW/TGtTM
- /D8Vb77QhDyila0lOLAopNwjoU2QQhigWkoEQlBZfxx+BH+dLQZupmr3uTFDN2zq+k
- EGawbfSpul1Ll6SbzIJBgXw0XdkEd29fl5Wr8tAy37k9hXvyEIxKTFi+wYd03wDCMA
- Go6rwBP7H1mxDpJA834YYZmoL5kydJO+YN6yoGXnT+ME5suWixWsXyeesnUFmF6OlH
- joO2p0m/fEfHO2+2xZoerSS8ERE2zndllp0THn7aJ/JOmzO+GizULEbrHiHThN1c2t
- 3UZqVjDdG5j5A==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  2 Dec 2024 16:46:03 +0300 (MSK)
-From: Evgeny Bachinin <EABachinin@salutedevices.com>
-Date: Mon, 2 Dec 2024 16:45:26 +0300
-Subject: [PATCH 5/5] sandbox: set retval early in board_fdt_blob_setup()
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id EA2A5A40DA3;
+ Mon,  2 Dec 2024 14:07:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70666C4CED1;
+ Mon,  2 Dec 2024 14:09:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1733148562;
+ bh=QHSeCb8w02Zu+XfB76CIckqpiN3P69pGa88IA4W4Qps=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KHGKrm0xUJiRN7Z5U+YnOCYnAJwWK3vW+9kpdsr6u/PXFzWuVv88qiCvKlITaHQXf
+ r9pbSka38LtKIXDA6Ax4JOMNRKVHPmygNO5h/VsgUbZLFeYViPWKgsxlKuhniXzFZA
+ WvWvZWWZrDCJiPMVHYct6yNImHIG+Y1lexv5aw6P8v9W1aHdDPzPFaSAVUN2A/jGAo
+ FONOzkutXZVxmvuyA9etbbHkazfSJzFP2+RyY2gEFYlwDXF0pz9UKOzC/WhuOicpMC
+ eER676mejfN6vd9ZzHN712NX80lvlA98HW3rSzVBQsibmAzCYt38MDzl/VLkwZQC2U
+ cUEC2fcUBIycg==
+Message-ID: <2b705d26-2ff0-47a2-8db6-d8561a24b567@kernel.org>
+Date: Mon, 2 Dec 2024 16:09:15 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] usb: dwc3-generic: set "mode" based on caller of
+ dwc3_generic_probe()
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: vigneshr@ti.com, bb@ti.com, trini@konsulko.com, marex@denx.de,
+ hnagalla@ti.com, mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, jan.kiszka@siemens.com, jonas@kwiboo.se,
+ j-humphreys@ti.com, nm@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de, srk@ti.com
+References: <20241126120322.1760862-1-s-vadapalli@ti.com>
+ <20241126120322.1760862-2-s-vadapalli@ti.com>
+ <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
+ <252751ec-2000-43bd-a9e3-fc0b53362baf@ti.com>
+ <84c24040-5311-469f-8ba7-470280604245@kernel.org>
+ <i7kcsazysfv5brn5bzgh5yypgr7hl2qndd5aqdrgbkb6ztmvxo@qwuxqa7vm2nt>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <i7kcsazysfv5brn5bzgh5yypgr7hl2qndd5aqdrgbkb6ztmvxo@qwuxqa7vm2nt>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241202-sandbox_repair_of_embed-v1-5-05aff4b0ccf7@salutedevices.com>
-References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
-In-Reply-To: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Heinrich
- Schuchardt" <xypron.glpk@gmx.de>, Raymond Mao <raymond.mao@linaro.org>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, Patrick Rudolph
- <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>, "Francis
- Laniel" <francis.laniel@amarulasolutions.com>
-CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
- <u-boot@lists.denx.de>, Evgeny Bachinin <EABachinin@salutedevices.com>
-X-Mailer: b4 0.14.2
-X-Originating-IP: [172.28.132.49]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 189547 [Dec 02 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 44 0.3.44
- 5149b91aab9eaefa5f6630aab0c7a7210c633ab6,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/12/02 11:33:00 #26927957
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,55 +80,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bug:
-nobody sets 'ret' to non-error value inside board_fdt_blob_setup()
-in case, when gd->fdt_blob has been initialized before calling the
-board_fdt_blob_setup() (say, due to CONFIG_OF_EMBED=y)
 
-Reproduced with CONFIG_OF_EMBED=y && BLOBLIST=n.
-  ```
-    $ ./u-boot
-    initcall: 0000000000078e05 (relocated to 000061138d2c7e05)
-    initcall: 0000000000117b12 (relocated to 000061138d366b12)
-      fdtdec_setup():
-            gd->fdt_blob = dtb_dt_embedded()
-      fdtdec_setup():
-            gd->fdt_blob = board_fdt_blob_setup(&ret);
 
-        board_fdt_blob_setup():380 ret:-2 gd->fdt_blob:0x61138d4db310
-                if (gd->fdt_blob)
-                        return (void *)gd->fdt_blob;
+On 02/12/2024 07:42, Siddharth Vadapalli wrote:
+> On Fri, Nov 29, 2024 at 02:28:36PM +0200, Roger Quadros wrote:
+>>
+>>
+>> On 28/11/2024 19:20, Siddharth Vadapalli wrote:
+> 
+> [...]
+> 
+>>> USB DFU boot utilizes this driver when the "dr_mode" is set to "otg" in
+>>> the device-tree for AM62A. This driver is invoked both for the host and
+>>> device commands corresponding to USB. I came up with this patch while
+>>> trying to enable USB DFU boot on AM62A with "dr_mode" as "otg" in the
+>>> device-tree. Additionally, USB DFU boot works on AM62A with the change
+>>> made by this patch and it doesn't work without this change. I have
+>>> traced the call sequence to see that the driver is probed and have come
+>>> up with the change performed in this patch on the basis of this observation.
+>>>
+>>
+>> Although the glue driver portion of the dwc3-generic driver is not used by AM62
+>> it still uses the generic_probe() portion via
+>> U_BOOT_DRIVER(dwc3_generic_host) and U_BOOT_DRIVER(dwc3_generic_peripheral)
+>>
+>> here is the dm tree output on am62-sk after executing "usb start" command.
+>>
+>>
+>>  simple_bus    5  [ + ]   dwc3-am62             |   |-- dwc3-usb@f900000
+>>  usb_gadget    0  [   ]   dwc3-generic-periphe  |   |   |-- usb@31000000
+>>  usb           0  [ + ]   xhci-dwc3             |   |   `-- usb@31000000
+>>  usb_hub       0  [ + ]   usb_hub               |   |       `-- usb_hub
+>>  simple_bus    6  [ + ]   dwc3-am62             |   |-- dwc3-usb@f910000
+>>  usb           1  [   ]   dwc3-generic-host     |   |   |-- usb@31100000
+>>  usb           1  [ + ]   xhci-dwc3             |   |   `-- usb@31100000
+>>  usb_hub       1  [ + ]   usb_hub               |   |       `-- usb_hub
+>>
+>> what is strange is that even though usb@31000000 is configured as
+>> "peripheral" (in k3-am625-sk-u-boot.dtsi), xhci-dwc3 and usb_hub drivers
+>> are still initialized for it.
+> 
+> CONFIG_OF_UPSTREAM is enabled in am62x_evm_a53_defconfig. So dr_mode
+> might be "otg" as specified in:
+> dts/upstream/src/arm64/ti/k3-am62-main.dtsi
 
-    initcall failed at call 0000000000117b12 (err=-2: No such file \
-       or directory)
-    ### ERROR ### Please RESET the board ###
-  ```
+Not it is not "otg". it is "peripheral". I verified from the generated 
+u-boot.dtb
 
-Patch moves code, zeroizing the 'ret', before checking the fdt_blob.
+Isn't k3-am625-sk-u-boot.dtsi still used even if it is CONFIG_OF_UPSTREAM?
 
-Fixes: d8289e7dfe5 ("sandbox: fdt: Avoid overwriting an existing fdt")
-Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
----
- arch/sandbox/cpu/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> I'm not sure about this however. Additionally, this series isn't required
+> for AM62. DFU Boot works on AM62 without this series as well. This series
+> is required for AM62A.
 
-diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index d1c4dcf0764fb37ec99585a3db16fa34c3a54dac..7e93377e87e75b0fb92a8cf139b4a731a88a6a7b 100644
---- a/arch/sandbox/cpu/cpu.c
-+++ b/arch/sandbox/cpu/cpu.c
-@@ -377,10 +377,10 @@ void *board_fdt_blob_setup(int *ret)
- 	int err;
- 	int fd;
- 
-+	*ret = 0;
- 	if (gd->fdt_blob)
- 		return (void *)gd->fdt_blob;
- 	blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
--	*ret = 0;
- 	if (!state->fdt_fname) {
- 		err = setup_auto_tree(blob);
- 		if (!err)
+It works on am62-sk because USB mode is forced to "peripheral" in
+k3-am625-sk-u-boot.dtsi.
+
+That hack can be removed once your series fixes it the right way.
+
+> 
+> [...]
+> 
+>>> I didn't test the case where both are used. I validated that peripheral
+>>> mode works across various stages of boot with "otg" mode via USB DFU
+>>> boot. This isn't the case without this patch.
+>>>
+>>> If we forget the reason that this patch is introduced and take a moment
+>>> to analyze the existing code prior to this patch, we see that:
+>>> 1. Both dwc3_generic_peripheral_probe() and dwc3_generic_host_probe()
+>>> invoke dwc3_generic_probe().
+>>> 2. dwc3_generic_probe() sets the role based on the role specified in the/
+>>> device-tree and not what the caller wants the role to be.
+>>> This seems to be strange to me considering that dwc3_generic_probe()
+>>> simply proceeds to configure without comparing the role supported by the
+>>> platform with the role requested by the caller.
+>>>
+>>> So even if we entirely forget the "otg" fix being attempted by this
+>>> patch, the same patch is fixing something else i.e. ensuring that
+>>> dwc3_generic_probe() does what the caller wants it to do by using the
+>>> role that the caller expects. Isn't it incorrect that the existing code
+>>> might end up with:
+>>> a) Caller being dwc3_generic_host_probe() with dr_mode being set to
+>>> "peripheral" within dwc3_generic_probe() based on the device-tree and
+>>> proceeding to configure the controller
+>>
+>> Maye this is the reason why host controller is initialized for peripheral
+>> only port in the dm tree output I listed above. This needs to be fixed.
+> 
+> Sure, I will post a patch to do the following:
+> If dr_mode specified in device-tree is "host" then return -EINVAL within
+> dwc3_generic_probe() if the caller is "dwc3_generic_peripheral_probe()".
+> Similarly, if dr_mode specified in the device-tree is "peripheral" then
+> return -EINVAL within dwc3_generic_probe() if the caller is
+> "dwc3_generic_host_probe()". When dr_mode is specified as "otg" in the
+> device-tree, then configure the mode based on the caller of
+> dwc3_generic_probe().
+> 
+> Please let me know if the above implementation is acceptable.
+
+Looks OK to me.
+> 
+>>> b) Caller being dwc3_generic_peripheral_probe() with dr_mode being set
+>>> to "host" within dwc3_generic_probe() based on the device-tree and
+>>> proceeding to configure the controller.
+>>
+>> This too needs to be fixed.
+>>
+>>> Shouldn't this inconsistency be fixed? This patch fixes that by setting
+>>> dr_mode to what the caller expects. However, based on your suggestion, I
+>>> agree that there should have been a check within dwc3_generic_probe() to
+>>> ensure that the platform supports what the caller is requesting. I will
+>>> update this patch by adding the check.
+>>
+>> Apart from the platform supported mode check when not "otg", if platform
+>> supports "otg" we need to check and prevent role setting if hardware is
+>> not in the correct state based on connected USB cable.
+>> i.e. if host mode cable is used then prevent it from running as a peripheral.
+>> if peripheral mode cable is used then prevent it from running as a host.
+>> (based on ID status?)
+> 
+> Yes, I agree that using the ID status to determine the role is accurate.
+> At the same time, I think that in addition to this, if the user runs a
+> command corresponding to "peripheral" mode of operation with the ID
+> status indicating "host", then it will be better to take this
+> inconsistency into account and error out rather than simply proceeding
+> to configure on the basis of the ID status. If you have any feedback,
+> kindly let me know.
+
+The approach looks OK to me.
 
 -- 
-2.34.1
+cheers,
+-roger
 
