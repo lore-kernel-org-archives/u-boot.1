@@ -4,63 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3CAD78337
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 17:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1194DD7833A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 17:31:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4134688DB1;
-	Mon,  2 Dec 2024 18:19:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 71F1688D3A;
+	Mon,  2 Dec 2024 18:31:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="Dd030B/J";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="FZsJN880";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A55288DB1; Mon,  2 Dec 2024 18:19:35 +0100 (CET)
+ id 3746A89377; Mon,  2 Dec 2024 18:31:22 +0100 (CET)
 Received: from mx3.securetransport.de (mx3.securetransport.de
  [IPv6:2a01:4f8:c0c:92be::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A63788A1B
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 18:19:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 8146789378
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 18:31:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1733159967;
- bh=n/2I7/jYotE9tiQTV9B4PMBKLXyNWT+SiNMNsR+cHn0=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=Dd030B/JbWNmRFtcFkLfmrcZpMBiuw2w8gYGZK7JmukpHQIFW2Dm5S1RMAb3B1U9M
- 9c6yVlcHr2vQ+ky8xtF4y++sVGY1VTM1S1Refj15WAiB5K9k3k/FlkwSKIlfl0rjzb
- mc/dqVYeWV7/z7XngTHH+PpOROsBSJgie8c7z5U3m/NbI9CPITuHmrCBAIWQsHEuS7
- H/L8g9WsyyLNLBy3P7fDmcysZ6bl0fOY2N7A3JZiQK3P/NkejUurQ3bt87nnyPZWgI
- bS5NOh3CNxw9aqVU/xV7POVNtJTcaDOVypdCcKSSKZ8n/9v0jqCagicnyAOs46WsjP
- 7pV22rlVKyPRg==
-X-secureTransport-forwarded: yes
+ s=dhelectronicscom; t=1733160672;
+ bh=qN6fYxtz2uwh3hBv3iDqWrZcSY3Raog0FpLJjjSFuCY=;
+ h=From:To:CC:Subject:Date:From;
+ b=FZsJN880E4SVOjLd1pw7UYm8a5xIbpsE2wQ+CGYO5GA5fUZa9jpaXmqDdlXVAht7n
+ lVNahQBZbDmJVCU0zc8VF/aHmh8TLCx1B+5xELSXmPYUr9CAX8SUhJMzwACJIc8QXk
+ 2HbAMyOT65xt1EMphbMC1fFyYGQq6DmrN/IeEsAG4SAvj6QKrRTJ3NN7E1VIJ4+Iym
+ kwmdiTlMMvvXoFYwN3nz4WQ5JqDMd0kIHHeYM7p35YsaQstMwkLHIyUMFWSe/FdOim
+ 7Uy73ICHcd+MsAscLw6ejfXCsVE0Zp9mhsxhpjt0gS0XcnFXOiRWMrI6hrGP3+TrZD
+ Rsrnof2psEaBA==
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Fabio Estevam
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, NXP i.MX U-Boot
+ Team <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Fabio Estevam
  <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
- <trini@konsulko.com>, u-boot <u-boot@dh-electronics.com>
-Subject: RE: [PATCH V4 3/4] board: dhelectronics: Sync env variable
- dh_som_serial_number with SN
-Thread-Topic: [PATCH V4 3/4] board: dhelectronics: Sync env variable
- dh_som_serial_number with SN
-Thread-Index: AQHbQaDkeFNffmy/BUi/IRWuK4THKLLRp2OAgAGRmmA=
-Date: Mon, 2 Dec 2024 17:19:25 +0000
-Message-ID: <98eb09cde471483a9096e211c34f1f02@dh-electronics.com>
-References: <20241128142020.35386-1-cniedermaier@dh-electronics.com>
- <20241128142020.35386-4-cniedermaier@dh-electronics.com>
- <3b1359d9-2be2-452f-be56-b7ac2c4b50d7@denx.de>
-In-Reply-To: <3b1359d9-2be2-452f-be56-b7ac2c4b50d7@denx.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>
+Subject: [PATCH V5 0/4] arm64: imx8mp: Read values from M24C32-D
+ write-lockable page on DHCOM i.MX8MP
+Date: Mon, 2 Dec 2024 18:29:46 +0100
+Message-ID: <20241202172950.35460-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,25 +64,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQpTZW50OiBTdW5kYXksIERlY2VtYmVy
-IDEsIDIwMjQgNzoyMSBQTQ0KPiBPbiAxMS8yOC8yNCAzOjIwIFBNLCBDaHJpc3RvcGggTmllZGVy
-bWFpZXIgd3JvdGU6DQo+PiBUaGUgZW52IHZhcmlhYmxlICJTTiIgaXMgdXNlZCB0byBzdG9yZSB0
-aGUgc2VyaWFsIG51bWJlciBvbiBESCBlbGVjdHJvbmljcw0KPj4gU29Ncy4gTmV3IFNvTXMgd2ls
-bCB1c2UgdGhlIHZhcmlhYmxlICJkaF9zb21fc2VyaWFsX251bWJlciIuIFRvIGVuc3VyZQ0KPj4g
-Y29tcGF0aWJpbGl0eSwgdGhlc2UgZW52IHZhcmlhYmxlcyBhcmUgc3luY2hyb25pemVkLiBUaGlz
-IGlzIGFjaGlldmVkDQo+PiB1c2luZyBjYWxsYmFjayBmdW5jdGlvbnMuDQo+Pg0KPj4gU2lnbmVk
-LW9mZi1ieTogQ2hyaXN0b3BoIE5pZWRlcm1haWVyIDxjbmllZGVybWFpZXJAZGgtZWxlY3Ryb25p
-Y3MuY29tPg0KPj4gLS0tDQo+PiBDYzogIk5YUCBpLk1YIFUtQm9vdCBUZWFtIiA8dWJvb3QtaW14
-QG54cC5jb20+DQo+PiBDYzogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQo+PiBDYzogRmFi
-aW8gRXN0ZXZhbSA8ZmVzdGV2YW1AZ21haWwuY29tPg0KPj4gQ2M6IFN0ZWZhbm8gQmFiaWMgPHNi
-YWJpY0BkZW54LmRlPg0KPj4gQ2M6IFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+DQo+PiBD
-YzogdS1ib290QGRoLWVsZWN0cm9uaWNzLmNvbQ0KPj4gLS0tDQo+PiBWMzogLSBBZGQgdGhpcyBw
-YXRjaCB0byB0aGUgc2VyaWVzDQo+PiBWNDogLSBSZW1vdmUgdGhlIHJlY3Vyc2lvbiBwcmV2ZW50
-aW9uIGZyb20gdGhlIGNhbGxiYWNrIGZ1bmN0aW9ucw0KPj4gICAgICAgID0+IFRoZSByZWN1cnNp
-b24gcHJldmVudGlvbiB3aWxsIGJlIGdlbmVyYWxseSBzb2x2ZWQgaW4gdGhlDQo+PiAgICAgICAg
-ICAgY2FsbGJhY2sgZnVuY3Rpb24gY2FsbCBpbiBhIHNlcGFyYXRlIHBhdGNoDQo+IFRoaXMgaGFz
-IHRvIGJlIHRoZSBsYXN0IHBhdGNoIGJlY2F1c2UgaXQgb25seSB3b3JrcyBjb3JyZWN0bHkgd2l0
-aCB0aGUNCj4gbGFzdCBwYXRjaCBhcHBsaWVkLiBJZiB0aGUgb3JkZXJpbmcgaXMgbm90IGNvcnJl
-Y3QsIGdpdCBiaXNlY3Qgd2lsbCBub3QNCj4gd29yayBjb3JyZWN0bHkgZWl0aGVyLg0KDQpPSywg
-SSB3aWxsIGNoYW5nZSB0aGUgb3JkZXIgb2YgdGhlIGxhc3QgdHdvIHBhdGNoZXMgaW4gVjUuDQoN
-ClRoYW5rcyBhbmQgcmVnYXJkcw0KQ2hyaXN0b3BoDQo=
+The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
+that contains an additional write-lockable page called ID page, which
+is populated with a structure containing ethernet MAC addresses, DH
+item number and DH serial number.
+
+This patch series prepare the device tree of the DHCOM i.MX8MP for
+reading the EEPROM ID page. Add the reading of the content and set the
+correspondent environment variable. It also synchronize two serial
+number environment variable via callback functions and fixing recursive
+calling of them.
+
+To ensure that the environment callback functions work, this patch
+series depends on patch [1].
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20241120160135.28262-1-cniedermaier@dh-electronics.com/
+
+Christoph Niedermaier (4):
+  arm64: dts: imx8mp: Add aliases for the access to the EEPROM ID page
+    node
+  arm64: imx8mp: Read values from M24C32-D write-lockable page on DHCOM
+    i.MX8MP
+  lib: hashtable: Prevent recursive calling of callback functions
+  board: dhelectronics: Sync env variable dh_som_serial_number with SN
+
+ arch/arm/dts/imx8mp-dhcom-u-boot.dtsi         |   2 +
+ board/dhelectronics/common/dh_common.c        | 166 +++++++++++++++++-
+ board/dhelectronics/common/dh_common.h        |  79 ++++++++-
+ .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |  75 +++++++-
+ configs/dhsom.config                          |   1 +
+ lib/hashtable.c                               |  27 ++-
+ 6 files changed, 339 insertions(+), 11 deletions(-)
+
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+-- 
+2.30.2
+
