@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B656DE69E95
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 21:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D535EE69E95
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 22:01:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9CC2894B8;
-	Mon,  2 Dec 2024 22:59:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33A0489492;
+	Mon,  2 Dec 2024 23:01:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="flqPJI9U";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XVTKN5F3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CFE9894F4; Mon,  2 Dec 2024 22:59:31 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 32E6E894B7; Mon,  2 Dec 2024 23:01:06 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27A4894B7
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 22:59:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B1148937E
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 23:01:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3ea427001c5so2597116b6e.3
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 13:59:28 -0800 (PST)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6d88d3d1eb6so28155796d6.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 14:01:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733176767; x=1733781567; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733176863; x=1733781663; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AlSS5n4GlxgbZWUsXsQG1aGflYq3l8SmckozcowTQXY=;
- b=flqPJI9UgPLMblDhGXKcE2NjGrUoIa0vLxy+EJDrbmEpnUeqjuQBP415q8NVvhfONZ
- m6D2hUAISn18UaPwJar9ysZFebUSrBd+ib6H0D0bEsodM9tXbaMvTSJStnWxsbhrBdoP
- 5kr3RRaKaDxkndJQxmQd4TFzrPg31vEJQSJT8=
+ bh=A05u+g1PmaXxuAUl95APw9MVdwH9giE8+k0ht5wltp0=;
+ b=XVTKN5F3vb/zgZ0LFoyokgjgahFahQR5LRjNlPIHVLqiuYOJYu13M1oWm3XoAtTqzY
+ wl7WxINRcrj4ku+YY/J4k1omZXmNPhqX4izBpq3EyBkwY9YpStcjKcnmqC8kwgeSCDfw
+ BnzrA9ZE1L2RuthYih9h8Yq70WSoKerzkAHEE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733176767; x=1733781567;
+ d=1e100.net; s=20230601; t=1733176863; x=1733781663;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AlSS5n4GlxgbZWUsXsQG1aGflYq3l8SmckozcowTQXY=;
- b=KARzN/89gRi2U1vXAEMxXFxUL/r9mxQV7qSLvddQU8vPtUOlYaI5Zwg9LFmr5XCmoz
- qYi4snJYpXGrN1LeYKUrSpujmIv9X1bEsNoxxAlYLNg8ANQ4HvJpCKS8p0OmQqbRR59w
- dsEFCF8BbpfrsyeA0hBlxay5PJzEBNs6lOnw9kT3HkZ9dmYpxzX1BvvgLQSDwLrwzQUi
- wuYjK7QTFKLzl84OwSXiH/mE60MKVsuWBpX/DnV4cS7WdKDRZzcMOlZYmAQNlw53s2pd
- zekGI2ugFT0igM8XoCh10y9sTmp3jeOVZNYi8xtctHHiylw6NfvBPHmY/26mr3911IOl
- +LpA==
-X-Gm-Message-State: AOJu0YyUZSoH1OTIfX/xjUIW39YZ4K7nfP9WVpYzFL8EJp1L7OxlY292
- 4KTF0/6YgxYOn0dtsTd1cZbn+4ENRsI6HOBpvF9Hg1nt6tF8pO3JV2i0K3Ybr5b3C6OrE7pOFlo
- dxNo=
-X-Gm-Gg: ASbGncs5M+k3xB6tlqxfK2AxfL3zou5WNspYySEQW5wOi8YJeuGrsujPNv4SLVJijE3
- RQmrjkDsZiJDPRmMQiPHY4O34IZ1AF16eD4dW3p9s4AaGTB+5qTbfO/vLDHisXiHWNpEjagvzPK
- zhNuomItuq3k6LGwegblzOfSnB6cvp6EBeZ3xiMlwMNf8MHSXKknN4Q9nzJqTYU7ENA4+/1lV+l
- agTo57jpgbogTl6dhoVW7O1mCKZv8yRxn+9LchRdz3J1/2XNQ==
-X-Google-Smtp-Source: AGHT+IGU70TX3HBWw37pqLUC/rLvugNTpynNS45kBxRHyjBML4qxThEeX+Li91JTQ3+XpM63hdkKzA==
-X-Received: by 2002:a05:6808:158f:b0:3e6:19a9:4718 with SMTP id
- 5614622812f47-3ea6dd9fecamr18780798b6e.40.1733176767470; 
- Mon, 02 Dec 2024 13:59:27 -0800 (PST)
+ bh=A05u+g1PmaXxuAUl95APw9MVdwH9giE8+k0ht5wltp0=;
+ b=roPxhfvolAt4jwWYzPrRsuK9DvEGOlGQg6lIAGMX8Q44EQ5wGxEK+V0tODT4qZk0an
+ NGg3vMvbZzrr4Bz2ZpdJ5iEZe+i/YS/Ta37tnY39txmTUnsCosskiNuOQahwaZ0WS7Fr
+ lKzjXcIbQTVTyxpnDLduuyhgZh2iykxZ2tTCuBQqGXHVy+i+nXUmZ8AAwxbtIyr8HzjO
+ vXnF4YdXcdODdPx3hYSuVhHo4KB/9UFVhyNz9lVbTCFbXlfWQOIuM5UQTDvISWeGLaI3
+ HniWNWYmstGnSvD6QNYLdbGsDlYAu6RueATJktvDTWdv2RZR+mfQ+16/o9uSf3E/MCHI
+ iuJw==
+X-Gm-Message-State: AOJu0Yy7+Z32hScJB5h/21t3TXcRKKs83D16+c6thsMmRiDW6ubPGIU6
+ k3J7yGmRAF4wS0pjRA970ddT+qwrf0qEAVAp0OW3uk2g7azCMoOST26oTkteECc=
+X-Gm-Gg: ASbGncsi5z1BQVxOM0g1qHWJbinU9YaPSvoArRBIRecImu37SgTyozyKBbvLExq07pL
+ s/qsSSGBzwszKSe22s4rmFhXyRj2wZIT6cQxY1Acg+5B4ZG1wkdm6F1T2fKLxP5neC+ZA+leQ34
+ aG35kEYBnJ8EC7wElSOM0GapzjlBFZH5N4VV4V8Sny/wH5dJ2t5voZSzyIW6wTaiH74NS/VZ00A
+ YSOEuLgn4JO8FOfuS+9ITCwmZKAGC9+hGfQ069YKcZm2J5AXA==
+X-Google-Smtp-Source: AGHT+IHwPcvjWdZgGFjyuB5h+6wYLnIsYUWdY1K/+pOsTFZKCA+3TynWOy7a6PR7wGPc+ly9h5WJsQ==
+X-Received: by 2002:a05:6214:29e8:b0:6cb:fa3b:d6d1 with SMTP id
+ 6a1803df08f44-6d872957f18mr335152746d6.7.1733176862706; 
+ Mon, 02 Dec 2024 14:01:02 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d898045dcasm29598726d6.102.2024.12.02.13.59.24
+ 6a1803df08f44-6d875221e2csm53562156d6.108.2024.12.02.14.01.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 13:59:26 -0800 (PST)
-Date: Mon, 2 Dec 2024 15:59:22 -0600
+ Mon, 02 Dec 2024 14:01:01 -0800 (PST)
+Date: Mon, 2 Dec 2024 16:00:58 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH v5 3/9] board_f: Correct stack reservation
-Message-ID: <20241202215922.GI2457179@bill-the-cat>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH v5 5/9] efi: Drop the memset() from efi_alloc()
+Message-ID: <20241202220058.GJ2457179@bill-the-cat>
 References: <20241201152815.1668093-1-sjg@chromium.org>
- <20241201152815.1668093-4-sjg@chromium.org>
+ <20241201152815.1668093-6-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="441Bf20LNCT4wp5d"
+ protocol="application/pgp-signature"; boundary="2V3R99cBmld942lD"
 Content-Disposition: inline
-In-Reply-To: <20241201152815.1668093-4-sjg@chromium.org>
+In-Reply-To: <20241201152815.1668093-6-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,81 +100,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---441Bf20LNCT4wp5d
+--2V3R99cBmld942lD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 01, 2024 at 08:28:05AM -0700, Simon Glass wrote:
+On Sun, Dec 01, 2024 at 08:28:07AM -0700, Simon Glass wrote:
 
-> The reserve_stack_aligned() function already ensures that the resulting
-> address is aligned to a 16-byte boundary. The comment seems to suggest
-> that 16 is passed reserve_stack_aligned() to make it aligned.
+> From my inspection none of the users need the memory to be zeroed. It
+> is somewhat unexpected that it does so, since the name gives no clue to
+> this.
 >=20
-> Change the value to 0, since the stack can start at the current address,
-> if it is suitably aligned already.
+> Drop the memset() so that it effectively becomes a wrapper around the
+> normal EFI-pool allocator.
+>=20
+> Another option would be to drop this function and call
+> efi_allocate_pool() directly, but that increase code size a little.
+>=20
+> Move the function comment to the header file like most other exported
+> functions in U-Boot.
+>=20
+> Comments were made in v3 that another project uses memset() when
+> allocating memory, but that is not required by the spec. In any case, as
+> above, from inspection, none of the users need the memory to be zeroed,
+> as they fill the entire region with their own data.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Er:
-/*
- * reserve after start_addr_sp the requested size and make the stack pointer
- * 16-byte aligned, this alignment is needed for cast on the reserved memory
- * ref =3D x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
- *     =3D ARMv8 Instruction Set Overview: quad word, 16 bytes
- */
-static unsigned long reserve_stack_aligned(size_t size)
-{
-        return ALIGN_DOWN(gd->start_addr_sp - size, 16);
-}
-
-is what the code is today.
-
-> ---
->=20
-> (no changes since v1)
->=20
->  common/board_f.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/common/board_f.c b/common/board_f.c
-> index 98dc2591e1d..677e37d93c0 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
->  static int reserve_stacks(void)
->  {
->  	/* make stack pointer 16-byte aligned */
-> -	gd->start_addr_sp =3D reserve_stack_aligned(16);
-> +	gd->start_addr_sp =3D reserve_stack_aligned(0);
-> =20
->  	/*
->  	 * let the architecture-specific code tailor gd->start_addr_sp and
-
-And this is the last call to reserve_stack_aligned(). So, this is going
-to save us between 16 and 0 bytes of memory. If we're going to make a
-change here we need to comment in the code more what we're up to at this
-point, and the commit message should be more authoritatively worded too.
+I thought you agreed to drop this because Heinrich or Ilias was saying
+they'd get the spec clarified to say it should be zeroed?
 
 --=20
 Tom
 
---441Bf20LNCT4wp5d
+--2V3R99cBmld942lD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdOLa8ACgkQFHw5/5Y0
-tywnWAv8CMlcMODovR9fVqHGq90HN1Xcqn9i80witxNPc6k+X7AkCfeUXjHNM79a
-XxAhkj4iU0n2TBbddS/oI6RKmMEUFJwmp1R4ToCwvenyHHpf15+tRzBeseNMPVz0
-Pq/zVxPPTmQHTobWBzbqKLVYk6MzobkR+AH5MyfEEXoUGcBQ2Ete3Yv/pH/lfrwQ
-En4U9FANqPPU7MJI8dr8t6Yez1Z1s4WNQ64iB5vNxKjJqpwYdoAQ4OZ4xED008u2
-5O3Y1/sHtn8fbEPTYBs/YlRc5QaJMPb81DYufZ1W2yzhlmCfPr01IUsJaJz4esAP
-emgL1D1iyZ3QS3dT9BhYz/csX4YAcpZSV70/ZlF7kByxJcSJi8pO8R2gMl29b5qA
-3KF15Oufi3fqI56xpCRzPUgzaaMPG+DTkUJVslYpIdtQ4waEhV1yfIYHPX1C1arK
-ctX1C8k9BLmhWQQhcjEtYD4ETosDifztZgNSGJSkrClSSasTFlPRgO1jvm8kP9ml
-k9c2FJVB
-=MC47
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdOLhoACgkQFHw5/5Y0
+tyy9dAv/VjceJfMOfiYOrou/jfs7JtZR7sRNqcSsdvb0aS7pQNKUxGr0sL7NaL/k
+acGh1gcwdZxPVvG7zWbnpgyRw8xNQwwP3URtpZzsOIhvMVaOOTaI0LHKZYroiQd3
+FM000ntM6NoR+AAlLC++8B/wYgH+CXomR4uoxUFelQdhkRN7KXEU9th4GFl5Ke7o
+PVfzVyynlQl8VPjeeb0eFU8Zxa3i4Ab2Ptoz9Mz6dtz4JGiACGswhx4pmvoXc9of
+pFWQqZlSLsGYUId8N9JGehaQVhxx85FvPBNSzhlJF3T+VCiFMU++EwSiJrPGF703
+3e89sZ2JzaNQL2aaTyu+XQyxSeVU2lIosD85tb0b3Tr5r/wOsny0sO8VPS7oFw66
+J8FJByLTpgWEN1mDiGCo0Z4z2twfqn1OtI+0QLEIRl2IcNX7F3lhGDs3DuNQtgMy
+MMqCMUVogwYts/u3VAN+oECKrBIo28jbbe4ImNhpOtL+4bvQ8M/VHsCO7zfbO6eJ
+Jfld2pnY
+=t+kA
 -----END PGP SIGNATURE-----
 
---441Bf20LNCT4wp5d--
+--2V3R99cBmld942lD--
