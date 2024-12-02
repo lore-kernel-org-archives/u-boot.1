@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9059BD78322
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D936D78321
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEBAC890BC;
-	Mon,  2 Dec 2024 14:39:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C5138890BC;
+	Mon,  2 Dec 2024 14:46:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XgB7OqFe";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="qa8cwxP+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F41F18910C; Mon,  2 Dec 2024 14:39:40 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7744888DDA; Mon,  2 Dec 2024 14:46:08 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4247890BC
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:39:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12655891C3
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:46:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-6ef4a03052cso39903917b3.1
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 05:39:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733146778; x=1733751578; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sphGoItoG6ify7Rr3Nek8Cma/kKF09/eIg0JDvu9Tto=;
- b=XgB7OqFeC9y5XfO5mIotKPuJ34pDqzKdyNeH5ej6pJu6mPmOqNmlCm1WSwk2Rg8sK+
- nd44ikXTQvRJ6JXZfHTst/6r5ThUJIPQO14PLwlgnEoEwEWFz5PCQvwEloA6ZIu2eVO2
- IVjw6DTHC1om7P3V6TXNyv0n95bjbW2BSeAGc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733146778; x=1733751578;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sphGoItoG6ify7Rr3Nek8Cma/kKF09/eIg0JDvu9Tto=;
- b=sPHTscImhIXFrjKzNAXdYTR1//US71kWxOfRNNVppbV8II3r47PEdpy7c0YA/+Dl1I
- bKtAYgVC83k7grtFwtF8JhMmT0zieODQlkSvIWilEh72IIfSJTfvrxyujKMcARf7oCj4
- JrZ2I4LpQngh7bJ94MyumHfy6iX5nF/21NH9Su/vyBm9fqA8nVb6dw76tIeQ4USokTmC
- NJ87+AiRxUqypHTo+PVMVahbgKYA7YU3eQGQvTbwAcq/AiQnLaTyiQwaD7zzOy1fPwK+
- 0UrYSSkoDcnZeC1SzFoD3LTM7iGA84J43hngfx4i165DakqtCZjgzWpbOpijOkzLULS/
- Ot0g==
-X-Gm-Message-State: AOJu0Ywh+OTgI6yru8oNlPWtuk+dYhUMrSHY96XwQ6dApb9W6N+sJy20
- urZx5ypRuI8eEqrY4MwVMIBrSterjICUCyZpKP9ghXUHU88mRkSVpLb4Qt6V5mE=
-X-Gm-Gg: ASbGnctZD+LLM+EyOFIXeB8cDCItaULhyjZ7SHY2w84ltV9mKVtBf+2PJ2PEgsnx/75
- e3IoQwB1DEdU+/QjrnpEpxXDye+TAH3A+TE2SSUgzsmLz5pVHlJpgbw2LHgM89MFkPTpObZnePx
- nlTDnPeA8k6jKhnt6vcwj8HC7C72VfIGOIpY/FnAO3qLPhFZ8iwwJIfUi+dixshCTzTka1sseKG
- u2AqJO8nFRbqK1Uu7LpihE6bA+pnYodeHtcQ9nUbztuiGOcFA==
-X-Google-Smtp-Source: AGHT+IEnczmFKfGq9MrYXnLYidrsns/+liDmEVyVm+dmf14q3F40PhRLNEYSDOSyStVBRAQkbdabqA==
-X-Received: by 2002:a05:690c:6306:b0:6ef:7dde:bdef with SMTP id
- 00721157ae682-6ef7ddec1f3mr71804317b3.23.1733146777744; 
- Mon, 02 Dec 2024 05:39:37 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8a3d2008bsm14616306d6.39.2024.12.02.05.39.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 05:39:37 -0800 (PST)
-Date: Mon, 2 Dec 2024 07:39:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 8/8] CI: Drop broken boards from sjg lab
-Message-ID: <20241202133934.GC2457179@bill-the-cat>
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-9-sjg@chromium.org>
+ spf=pass smtp.mailfrom=eabachinin@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id CF0FC12000C;
+ Mon,  2 Dec 2024 16:46:02 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CF0FC12000C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1733147162;
+ bh=8Ro7XnN8gh4gVLw1OQNMpDcYyQipgXu+JXupCKtt3AM=;
+ h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
+ b=qa8cwxP+OxJ1g6V/56EwW0W+DlFxBGDlG7CN9GSNe7zlBp0zWGZhzIdWIY6oEL46J
+ tj0cvmxgF5+OkY7onmwATC+57LEQGgq8OdaJLl+bzuf+DLKxbmVabq2Gx5abmauQ0e
+ ZbQEN0W7irL66ZiIy9GMLU9YckE+Ri2C9iV6ZFMJmCkmIKuhiNCf+dc+vySEuONEuu
+ ENc5USPvVrb5WvuRoPbWkuFl7cMmXr/rKkNrKOzs60xtuMM40NnNmV3nkrxsqDPOMm
+ hJpg6vo4SIU7BHlWGxMRyJKvZ+pn03eQVz9zXBRXyC8t2Li6DqLs4dwBDSDC4CdEZz
+ CHedLNsknqFQA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon,  2 Dec 2024 16:46:02 +0300 (MSK)
+From: Evgeny Bachinin <EABachinin@salutedevices.com>
+Date: Mon, 2 Dec 2024 16:45:23 +0300
+Subject: [PATCH 2/5] test: sandbox: fix invalid_use_of_IF_ENABLED_INT if
+ BLOBLIST=n
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="y7ufRZ6qBhUhT8qg"
-Content-Disposition: inline
-In-Reply-To: <20241201144240.1664398-9-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20241202-sandbox_repair_of_embed-v1-2-05aff4b0ccf7@salutedevices.com>
+References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
+In-Reply-To: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, "Heinrich
+ Schuchardt" <xypron.glpk@gmx.de>, Raymond Mao <raymond.mao@linaro.org>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, Patrick Rudolph
+ <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>, "Francis
+ Laniel" <francis.laniel@amarulasolutions.com>
+CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
+ <u-boot@lists.denx.de>, Evgeny Bachinin <EABachinin@salutedevices.com>
+X-Mailer: b4 0.14.2
+X-Originating-IP: [172.28.132.49]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 189547 [Dec 02 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 44 0.3.44
+ 5149b91aab9eaefa5f6630aab0c7a7210c633ab6,
+ {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
+ 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/12/02 11:33:00 #26927957
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,42 +103,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
+error:
+```
+ld: /tmp/ccRVty.ltrans40.ltrans.o: in function `lib_test_is_enabled':
+test/lib/kconfig.c:24: undefined reference to \
+                                       `invalid_use_of_IF_ENABLED_INT'
+ld: test/lib/kconfig.c:26: undefined reference to \
+                                `invalid_use_of_CONFIG_IF_ENABLED_INT'
+```
 
---y7ufRZ6qBhUhT8qg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 29784d62ede ("test: Add some tests for kconfig.h")
+Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
+---
+ test/lib/kconfig.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-On Sun, Dec 01, 2024 at 07:42:36AM -0700, Simon Glass wrote:
+diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
+index 0c463bb794a5e1f9f2db995d544bd723f5e59ca0..a3645abf9464785461c7250260c816e6bca03193 100644
+--- a/test/lib/kconfig.c
++++ b/test/lib/kconfig.c
+@@ -21,10 +21,12 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(OF_PLATDATA));
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
+ 
+-	ut_asserteq(0xb000,
+-		    IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED, CONFIG_BLOBLIST_ADDR));
+-	ut_asserteq(0xb000,
+-		    CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED, BLOBLIST_ADDR));
++	if (IS_ENABLED(CONFIG_BLOBLIST)) {
++		ut_asserteq(0xb000, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
++						   CONFIG_BLOBLIST_ADDR));
++		ut_asserteq(0xb000, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
++							  BLOBLIST_ADDR));
++	}
+ 
+ 	/*
+ 	 * This fails if CONFIG_TEST_KCONFIG_ENABLE is not enabled, since the
 
-> Some of the boards have developed problems since the last passing run.
->=20
-> Disable these while diagnosis is ongoing.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+-- 
+2.34.1
 
-I'd rather not merge this since we don't need to pass or run this stage
-by default.
-
---=20
-Tom
-
---y7ufRZ6qBhUhT8qg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdNuJYACgkQFHw5/5Y0
-tyzRnwwAgkVaVDueFy+7iBPdTXwiMOrtlthLt+6ahmSJsrRwQ5sZxr4nmPdiYpzh
-fADmK/JRxwMJNtL2u5L6esqpT+uWb+tY7xIfFqMqBVPMFVX1YqnJikHlLknfxHNI
-WQ9wRQ+K3ia9BV+/xVuIbsautcunlgeODFzwRdOssvNp+/eiX1GGRT6TsrUatq8n
-45xgtz71IIpESWDpXtTeKhjH5d9f1TBRAzX8Ge4hl+atAjwJlkCxwvxbuZ3F2ELa
-LaTnPZaUsXKBjdGckdlkVRKuT9WHVHP9uhWWPJ+RY1R/pZ9838CIpIZULtEURY0k
-iPANn7xeIPWt4Tzhd/PMsJXAwu0sLEp3MK+iHmIdxhpT3DYAH9lvPCuYyr92xIYH
-UFG/nweNKWP7C0llWidze2bJ0EpK/WjLDJAqRmFfkpLZSBMOC52fZ8r62y3X/Z6G
-hhcZL09JfTGwOs2jPA2pG12BVMyhDd+ZU80/OEs1RHZOAUhc5w27BtezjdMhniiz
-/cFSG8Mq
-=6g5Q
------END PGP SIGNATURE-----
-
---y7ufRZ6qBhUhT8qg--
