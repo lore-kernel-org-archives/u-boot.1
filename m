@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B25D7831F
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:32:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE4DCD7831F
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:35:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 902D3890BC;
-	Mon,  2 Dec 2024 14:32:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3ABAF890BC;
+	Mon,  2 Dec 2024 14:35:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nctWMIKV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Yh+o87Cj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 595FE890BC; Mon,  2 Dec 2024 14:32:17 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 145E988F55; Mon,  2 Dec 2024 14:35:15 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B4BE88FD2
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:32:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F641885F7
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:35:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733146329; x=1733751129; i=xypron.glpk@gmx.de;
- bh=OCANU1gIakfCcFeiH2WkF4RDUEDpMOAgspsRR40MIwM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=nctWMIKVlnnrl2Re+VkgLe8UJFcPNnkihJYEoJ0O23sCzcXQdDUs900brGYvLsHc
- CJGCb6aU9zcoxJqYG9FlwcraVnoWqaEMQEv8YZMNIc+HQUTVCdWUn5oELWySNk4zf
- aILmTPgN1Ht0o1ZRgfr6kdcWKrEP4Z8ujj0HzDf3m+vrZ1shEObs3B/CDM9bTbMy1
- Zev2Tnkq1RyjkZSbFhxfaJ37tZxXv6U8iJk/KS9gW8H9G3364tIFySnzST999oB6S
- sWYYc6TFz8lKSDwN/zaR4giKqxEPNXlYtqWvlAMHC7jxZXaWRmnhu9k8aW/tLR0Mo
- lZeUzM1GEufxeTDVQQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPGRz-1t1O3Y1pVN-00Ukdc; Mon, 02
- Dec 2024 14:32:09 +0100
-Message-ID: <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
-Date: Mon, 2 Dec 2024 14:31:15 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b66d55522dso324303385a.1
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 05:35:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1733146511; x=1733751311; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OGNpODrkfBOyKmFHWhUSzuq7U1iHWxgIKoW4QHownS8=;
+ b=Yh+o87CjxXrhrHBthpVx+QkMHmnN50kEtrVDBg2YQx4Sz4mFo6OkhPr+zkAVPIIJ1W
+ VBiHubAZToHbXRx80ScknPQEw68MeEPxf6huA4IPH6Ccj78atxU/I7ZXeenSkQnC2GJo
+ VaK7kx6pj5j8qJHI+K/8uvCPunZTH5FYIKJnE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733146511; x=1733751311;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OGNpODrkfBOyKmFHWhUSzuq7U1iHWxgIKoW4QHownS8=;
+ b=u2Is4qJyhxywqptxcp0ZnpyoRRbTomrCXzS3f8qN+GFVl3hBhjrH1bi8N9sDbp+08Q
+ AM2SIEkWOtwR1eo6p2CcvJA+v/V5P8/XOHGpiK3Y9Mwk+/PoBnAfuU/rrGkC/nLIYrBv
+ MEWpDqKBOnLnmvvqxkW6ys72pgTV2D/Jyw0fYGzmrMtyoe/4RRoakeEHvR41HWexClzP
+ nL2lI8zFTOvgxa/YSYIlrrn2ewRinlPb7xlUhkt1zQAO+Q0cNV3pjJFaAApKyrw0aL5B
+ qzJemr4PyWo0ZYLbq3ykcUeq+dLUdleXW0l4pYJ0YO1XPLZ2KURF3LV5vd7Sld0vTdqj
+ i/Cg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3xA+lakbVpiR/JFQqU4VW0DbEX/a7GuDfaZz2vBmWRlF9B5VuvpMqAg9rt4r8ZsOK2m+b9rU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxLJ13yo5W/8lYJGI279Vf4FJ+KG1AM2ft6pS8QgS+QBTY2177
+ byh99/1ssz2eyRsRrcgAtpkbIUpODAj7tAA50oAMHixjNLwNLWL2bkyQvjXxQNY=
+X-Gm-Gg: ASbGncviFHoW3kOnYfJM/9kE0CDQvkAkBnqBknOqc8uniZXV+a5+D23pPYk8+S491E3
+ ipTi+bS1KoL7ojw5kzP3uOXug7b6NBBabG7C0LNsdxDaQ5wXoBpEKU6ClWXn4GLBnc6hl1bbys+
+ wG23aDtPDc9tYcsK7GJn5A9bC7kif+lfma0EvfGU1DEUBSCo+sap1EC3B04VO3vbX7uV4s0JhOt
+ cpCSKDKEFz4vixwgmgHb3npHrUXtPuJZ9qLik/KIwyi/UkqDw==
+X-Google-Smtp-Source: AGHT+IGuNTanI6/jRzX8vjcoUskmpkM724PGq6FJc2QbmNZ1JruRzIuucwZnBN0birO4c40cme+Faw==
+X-Received: by 2002:ad4:5d4d:0:b0:6d8:8d87:e5b4 with SMTP id
+ 6a1803df08f44-6d88d8807b5mr180695876d6.19.1733146511149; 
+ Mon, 02 Dec 2024 05:35:11 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d883839882sm39670076d6.13.2024.12.02.05.35.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Dec 2024 05:35:10 -0800 (PST)
+Date: Mon, 2 Dec 2024 07:35:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
+Message-ID: <20241202133507.GB2457179@bill-the-cat>
+References: <20241126155508.GR3600562@bill-the-cat>
+ <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
+ <20241126223332.GV3600562@bill-the-cat>
+ <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
+ <20241126233218.GW3600562@bill-the-cat>
+ <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+ <20241127141532.GZ3600562@bill-the-cat>
+ <CAFLszTg8L4A0oGLh=K5kc8hR_E+LxFYeC_vNHMZDbV_+ZT8Btg@mail.gmail.com>
+ <20241127221059.GE3600562@bill-the-cat>
+ <CAFLszTiP3ika=dGQ9pX3btdY7CWB-n3AsqaSa4DZRPJj9fs0Hg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lmb: Fix the allocation of overlapping memory areas with
- !LMB_NONE
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-References: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Hl/rZMBc+CggFdKJxk7WgE8YiipRMq+hGaEBnFjQ9DmXfvHwt/C
- /mchbWQCJMc3oQOBRtPIjDmCQGtAog4/ePMit59sxhRkUmyoED6UrreDKUL5OlUcHFu6b0F
- +0I5if1zs4rWq7tpBCspM63XikFGWJo9Tmw6VUsmMJGUxFjRIQwhTyBtaa+TYacwOuivph3
- bcfQCsVn4SBI+L1o42/kw==
-UI-OutboundReport: notjunk:1;M01:P0:ypMOr6QkQkQ=;ijeWvkekCEXsg8yk6DqAvwX9gig
- QlP5vDXv3mNS1RF/RqOV4+yoj7bFcf0oUZpabi+7/Et4x+uy9j7cQdqVjLTl4uKwyaP/P27T3
- 6yT/yWyBjlLKVM3LnH2PxafaoaBzeJIhc2YoHydrviSFwXH+HoTuO1hun1UbFtOgJAQfDwEUP
- Yn+L4HBMVmcBik/tavKajHCxIN2CFnH/92NB1ElyDmxhTN9Bgp6mIUb6GJLctTZy405IlJK6A
- OTBpIdMeePs1wiFEhDgh1mGybxykpgQPgsm7Ah5FCzVeFKUz9CO0T0uOlrnb+ICbrgsmOGt8V
- JN1sUTaKCU9+3k7xzvY4yy0/sviHmsjoTg4ozPTSahmLKSVT/zoqhkcoqM712u9w4vafnbc8Y
- SQ84hHI8+IW7ogYzDQkQGHJpDnwMhlCEDLqIxtaMbXA2dqOjVntYOelm3NXYSa6R5jkRJrFRy
- F6yGyTd5eMaQphzV12VDGsoPHNS/OQoB55c4BM26dsDSH5eeTKZxKEqiYn5JGDv/UWdyVoRAv
- uCaXSjMkGTaJtkCr10v5qazYkwewDPhxH6Fx92Q7Ajc6MiuPdGEyShkdsxiFImwcxL8CDL+j/
- OzJBHYXWFH6Ndr+ZOxuGvYrH50F6mcmtDiNeA6WMzaaEiF1wPG5NFKQe4SBg+Vk8SuLj4siwW
- AFZYWD4DaldO4ulvPlxquR8Hf+z2IvV5DJvj3HDr1q5u3lW1B1r+q7SqWmvv/Pan+ELnO7enY
- mtNBCF5Y3M9rI6wSkR7EJA1bRDDgZ5rJhRoZW/QlHh3zJhk2/xarD55iE4PcmMA1XCuxQQgrB
- Fq5VJV+xFbTamMeYXuay8J8E68kdEalF5z0Vt0rA14cBBXqKzw7M3HfuFOE9rPvHakE1b7tpQ
- 5P1UbkWMNAjK8x6ThJ0VNqidof5V6O0Yz+T5HVdSuQvksrVq5W8v3BuBBfzfCQUDiD1h8Zivg
- elDcUHD23wb0vjdNTvj8o+nFZQXYo0N/X5cx/bHFJrMEFbyGTHJSBvCHEKJEP80ZrCRmYSiqX
- JRkAvNCmq+wqDmnInzpRCNx5Pjx4o3UnEkoWZ6xfePGSmjlTC4qg+Hyuhf+bud9ZgzBAYPDFD
- 8lFWgVIz3/sqN8Mi7QTHGapQfgntAJ
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p0W6GjN7TU4MZTnD"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiP3ika=dGQ9pX3btdY7CWB-n3AsqaSa4DZRPJj9fs0Hg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,111 +110,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.11.24 12:49, Ilias Apalodimas wrote:
-> At the moment the LMB allocator will return 'success' immediately on two
-> consecutive allocations if the second one is smaller and the flags match
-> without resizing the reserved area.
->
-> This is problematic for two reasons, first of all the new updated
-> allocation won't update the size and we end up holding more memory than
-> needed, but most importantly it breaks the EFI SCT tests since EFI
-> now allocates via LMB.
->
-> More specifically when EFI requests a specific address twice with the
-> EFI_ALLOCATE_ADDRESS flag set, the first allocation will succeed and
-> update the EFI memory map. Due to the LMB behavior the second allocation
-> will also succeed but the address ranges are already in the EFI memory
-> map due the first allocation. EFI will then fail to update the memory ma=
-p,
-> returning EFI_OUT_OF_RESOURCES instead of EFI_NOT_FOUND which break EFI
-> conformance.
->
-> So let's remove the fast check with is problematic anyway and leave LMB
-> resize and calculate address properly. LMB will now
-> - try to resize the reservations for LMB_NONE
-> - return -1 if the memory is not LMB_NONE and already reserved
->
-> The LMB code needs some cleanup in that part, but since we are close to
-> 2025.01 do the easy fix and plan to refactor it later.
-> Also update the dm tests with the new behavior.
->
-> Fixes: commit 22f2c9ed9f53 ("efi: memory: use the LMB API's for allocati=
-ng and freeing memory")
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   lib/lmb.c      |  9 ---------
->   test/lib/lmb.c | 22 +++++++++++++++++++++-
->   2 files changed, 21 insertions(+), 10 deletions(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 14b9b8466ff2..3a765c11bee6 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -201,15 +201,6 @@ static long lmb_add_region_flags(struct alist *lmb_=
-rgn_lst, phys_addr_t base,
->   		phys_addr_t rgnbase =3D rgn[i].base;
->   		phys_size_t rgnsize =3D rgn[i].size;
->   		phys_size_t rgnflags =3D rgn[i].flags;
-> -		phys_addr_t end =3D base + size - 1;
-> -		phys_addr_t rgnend =3D rgnbase + rgnsize - 1;
-> -		if (rgnbase <=3D base && end <=3D rgnend) {
-> -			if (flags =3D=3D rgnflags)
-> -				/* Already have this region, so we're done */
-> -				return 0;
-> -			else
-> -				return -1; /* regions with new flags */
-> -		}
->
->   		ret =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
->   		if (ret > 0) {
-> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> index c917115b7b66..bc44dd21192f 100644
-> --- a/test/lib/lmb.c
-> +++ b/test/lib/lmb.c
-> @@ -529,6 +529,26 @@ static int test_alloc_addr(struct unit_test_state *=
-uts, const phys_addr_t ram)
->   	ret =3D lmb_add(ram, ram_size);
->   	ut_asserteq(ret, 0);
->
-> +	/* Try to allocate a page twice */
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> +	ut_asserteq(b, alloc_addr_a);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(b, 0);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> +	ut_asserteq(b, alloc_addr_a);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x2000, LMB_NONE);
-> +	ut_asserteq(b, alloc_addr_a);
-> +	ret =3D lmb_free(alloc_addr_a, 0x2000);
-> +	ut_asserteq(ret, 0);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(b, alloc_addr_a);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> +	ut_asserteq(b, 0);
-> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(b, 0);
-> +	ret =3D lmb_free(alloc_addr_a, 0x1000);
-> +	ut_asserteq(ret, 0);
-> +
->   	/*  reserve 3 blocks */
->   	ret =3D lmb_reserve(alloc_addr_a, 0x10000);
->   	ut_asserteq(ret, 0);
-> @@ -734,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state=
- *uts)
->
->   	/* reserve again, same flag */
->   	ret =3D lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
-> -	ut_asserteq(ret, 0);
-> +	ut_asserteq(ret, 0xffffffff);
 
-lmb_reserve_flags() should return a long value < 0 on failure. Why do
-you expect 0xffffffff?
+--p0W6GjN7TU4MZTnD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
+On Sat, Nov 30, 2024 at 01:24:54PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 27 Nov 2024 at 15:11, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Nov 27, 2024 at 07:56:11AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 27 Nov 2024 at 07:15, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
+> > > > > Hi,
+> > > > >
+> > > > > On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt w=
+rote:
+> > > > > > > On 11/26/24 23:33, Tom Rini wrote:
+> > > > > > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass w=
+rote:
+> > > > > > > > > > > Hi Heinrich,
+> > > > > > > > > > >
+> > > > > > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xy=
+pron.glpk@gmx.de> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > > > > > > > > > > Exported functions should be documented in the he=
+ader file, not the
+> > > > > > > > > > > > > implementation. We tend to make such updates on a=
+ piecemeal basis to
+> > > > > > > > > > > > > avoid a 'flag day'. Move some comments related to=
+ memory allocation to
+> > > > > > > > > > > > > follow the convention.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > >
+> > > > > > > > > > > > Please, have a look at this line in doc/
+> > > > > > > > > > > >
+> > > > > > > > > > > > doc/api/efi.rst:78:
+> > > > > > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
+> > > > > > > > > > >
+> > > > > > > > > > > Hmm, we should not add C files as then we end up with=
+ all sorts of
+> > > > > > > > > > > internal functions, like checksum(). The help is a bi=
+t of a mess on
+> > > > > > > > > > > that page IMO and it could use an index at the top or=
+ side.
+> > > > > > > > > >
+> > > > > > > > > > Why? Looking at the linux kernel (where we borrow this =
+framework from
+> > > > > > > > > > and lots of developers expect to follow that style) it'=
+s extremely
+> > > > > > > > > > common to kernel-doc C files. I don't see why documenti=
+ng internal
+> > > > > > > > > > functions (which should be clear as being internal) is =
+a problem.
+> > > > > > > > >
+> > > > > > > > > It depends what you mean by docs. U-Boot puts the documen=
+tation for
+> > > > > > > > > exported functions in header files.
+> > > > > > > >
+> > > > > > > > I'm sorry, that's a circular definition. And no, there is n=
+ot a hard and
+> > > > > > > > fast rule that we only put kernel-doc style comments in hea=
+der files
+> > > > > > > > (which are consumed by other files and tooling to generate
+> > > > > > > > documentation).
+> > > > > > > >
+> > > > > > > > > Putting docs in C files clutters the docs with internal
+> > > > > > > > > implementations, when most people just want to see the AP=
+I. The way
+> > > > > > > > > U-Boot does things, it is easy to see the internal (imple=
+mentation)
+> > > > > > > > > docs by looking at the C code and the external functions =
+by looking at
+> > > > > > > > > the header files.
+> > > > > > > >
+> > > > > > > > Or it makes things harder to understand because the human r=
+eadable
+> > > > > > > > documentation for a given function is separate from the fil=
+e the
+> > > > > > > > implements the function. This is possibly why in the linux =
+kernel, where
+> > > > > > > > we borrow "kernel-doc" from, documentation is frequently in=
+ the C file
+> > > > > > > > which is then included in Documentation files (the type you=
+ objected to
+> > > > > > > > in the start of this patch) which include additional human-=
+readable
+> > > > > > > > explanation of the intention and usage of the API in questi=
+on.
+> > > > > > > >
+> > > > > > >
+> > > > > > > For static functions we will continue to have function docume=
+ntation in
+> > > > > > > the C files and not in the headers. I personally never looked=
+ up the API
+> > > > > > > documentation in the HTML docs but always in the source.
+> > > > >
+> > > > > Same here.
+> > > > >
+> > > > > > >
+> > > > > > > I am not opposed against moving the EFI function documentatio=
+n into the
+> > > > > > > header files. But we should update doc/develop/efi.rst accord=
+ingly in
+> > > > > > > the same patch series. This is missing here.
+> > > > >
+> > > > > OK
+> > > > >
+> > > > > >
+> > > > > > My point is that the linux kernel is about 60% C files and 40% =
+header
+> > > > > > files being kernel-doc'd in to documentation files and so "U-Bo=
+ot
+> > > > > > doesn't put documentation in to C files" seems like the wrong a=
+pproach.
+> > > > >
+> > > > > U-Boot tries to document functions in header files. At the risk of
+> > > > > making a blanket statement with thousands of counter-examples, th=
+at is
+> > > > > not so much the case in Linux.
+> > > > >
+> > > > > To a large extent, people developing features in U-Boot rely on t=
+he
+> > > > > header files to see what functions they can call. With the
+> > > > > documentation there, they often don't need to look at the source.=
+ I
+> > > > > certainly don't, unless the header-file comment is inadequate.
+> > > >
+> > > > I think this is a case of what you do, rather than what everyone el=
+se
+> > > > does.
+> > >
+> > > That's not my reading of the source tree.
+> >
+> > So, if we call this point 1 for a moment.
+> >
+> > > The file we are talking about has some comments in the header and some
+> > > in the source file. When you use an lsp client, it doesn't know what
+> > > to do.
+> >
+> > Sounds like a bad client? Because again, we should be following the
+> > kernel here.
+> >
+> > > > We want to be more like the linux kernel here, rather than less
+> > > > like the linux kernel, given the number of kernel people also worki=
+ng
+> > > > here. If Heinrich is fine with re-arranging everything, OK. But I t=
+hink
+> > > > documentation with the code makes it less likely to get out of date,
+> > > > both in terms of intentional changes and bug fixes.
+> > >
+> > > I am not suggesting separating documentation from code. I agree that
+> > > makes no sense. What I have consistently done (and asked for in
+> > > reviews) is:
+> > >
+> > > - exported functions are documented next to their prototype in the he=
+ader
+> > > - static functions are documented next to their implementation
+> >
+> > So going back to point 1 now, yes. This is what I'm saying. Your
+> > preference, expressed through reviews and telling people to change when
+> > they do it other ways, is where the current situation comes from.
+> >
+> > > This makes it easy to read the header file and see what the module is
+> > > doing, without having to dive into the implementation, which could be
+> > > 1000 lines or more. It also makes for more useful kerneldoc, IMO,
+> > > since we are showing functions which are exported and therefore more
+> > > useful for development. Adding the entire C code of U-Boot into
+> > > kerneldoc seems like a bad use of space.
+> >
+> > Um, I don't follow you here. If the code doesn't have kerneldoc
+> > comments, it's not included. I just made a silly test with a change to
+> > include/clk.h. It's not included in the output. And "the code might be
+> > so big it needs refactoring" is not a good excuse.
+>=20
+> Yes, I see that static functions don't appear by default, so adding C
+> files doesn't necessarily result in functions appearing in the doc
+> output.
 
-Heinrich
+Only properly formatted comments are used in documentation, yes. So
+static functions could be, if it was important to do so.
 
->   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
->   		   0, 0, 0, 0);
->
+> > The kernel is inconsistent here. The first example I went to look for of
+> > something that uses both C and header files in a document was
+> > Documentation/admin-guide/pstore-blk.rst and both fs/pstore/blk.c and
+> > include/linux/pstore_blk.h are kernel-doc'd in and the header describes
+> > a public function of the C file while the C file describes other
+> > functions too.
+>=20
+> Yes, pstore docs seems like a nice way to do things, for docs.
+>=20
+> For people working on the code base, I strongly believe that exported
+> functions and structs are the main way to understand how to use a
+> subsystem, so their docs should be in the header file.
 
+Sure. But there is no project-wide rule. I strongly believe that the API
+should be documented alongside of the code so that it doesn't drift
+apart, among other reasons.
+
+--=20
+Tom
+
+--p0W6GjN7TU4MZTnD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdNt4sACgkQFHw5/5Y0
+tywBHwv/VTGJH5rgMOl0FxbxDZaD6ZyqggS/wTy8WM9BPX2skTuRsWTkX/AUS/IV
+3gnN2Lat2/qjj9wtFO8GgqsAjFgmx0Azd7yXw13YQFpQGUmMLp/HrLMPFknYJ/yE
+tJ9VJWW7I8weSGvUw2RCvMa/esoNT07mHcBZrgKTwOGq65ii1QPmZEsmFHrxgJ18
+kVVo5V36dXq/zt13aKRGvdo7zd+hQPsVdSAZHl2nSKSG8WR/LWQgKGyjv3xXqxRI
+hS858PNuSyAG2UTm5cWmy58vx2XNxzcEoyX5B81jeccmtbU6Z/s/8uGF4icLDqX0
+w2S9snSrjtoo4WRPWp67V7aHr8Y6+c3EmomztHoH6leYl8w463x7Qy2sp0qsESqd
+U3qZD+GUHGjHBncsx5bLsrTguKIRy7PvOBN+pv5ihJZ0WMBDbMC1mwnv8x8CacRU
+c2CKviSOCo5xe73St5y2k0Q+GY9tR5pLCmq3aDjWOSAi0R7cdYGwyQG2clhE6ksc
+N3iu5yrx
+=dBzG
+-----END PGP SIGNATURE-----
+
+--p0W6GjN7TU4MZTnD--
