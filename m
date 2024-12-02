@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E82D78321
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 14:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81457D78321
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 14:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C20F89183;
-	Mon,  2 Dec 2024 15:11:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E23AE89336;
+	Mon,  2 Dec 2024 15:16:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f4pm7HAZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aCcuMjfZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA0C78919F; Mon,  2 Dec 2024 15:11:53 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 905AF89330; Mon,  2 Dec 2024 15:16:06 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 489E289100
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 15:11:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03ECA8919F
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 15:16:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6ef6a67834fso20488407b3.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 06:11:51 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d884e8341bso24068556d6.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 06:16:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733148710; x=1733753510; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qg9gkzuIvhDpAeEuuQYmozRPaAjMRHM6x5QhKkh+MyI=;
- b=f4pm7HAZ8A2Mx1M1vjeKBWQRa7Dk++wSJkCNbaid3dVa5cT+hVjOftBqDvI8y2ir4k
- Cw0Qgqus2HhY8OQogLuBBJQotjLHvAYGVD4mH41xp+PH9LfeQEagA7YfmFtIcPed29oX
- hGlqyyqJs/uwBo6tWs+Aoked57q+pKrJ3xPaFmM1Bu5HMFI//g9JJApdoMUlk4FsVaQd
- Ny0FsE02GNWyt6x4JHwC7VFjW6SUlcFzZkS/9gAzRYCoAJ/Y6k1ZOLY/3hOt5WxWYAfm
- LoAas60ad8HQFwe7Pks53STqSqX8mBq+WwPDURhcLDN+y9Mt9+RjAqLF0RJ44fI/r64r
- X0Sg==
+ d=konsulko.com; s=google; t=1733148963; x=1733753763; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GSJsaEjBDivqgeX+Ps8N2v0FRCSpajSJo7XEFdZ3/Wk=;
+ b=aCcuMjfZluYmRRiyE5KMBrAsWcAvXkMRj9PsMmbnM35kBgnKmocJTyS+zOE5SJroHm
+ DWopGiUjqfBx6HS+jZm9SUZoNYMB39VcfuLAfMgpNHL1ZvoQCdexVyixp3Kyu/kH4iSO
+ LAXLHmpdKraryds7uGlDBx09rYN1cPrbPZ0SI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733148710; x=1733753510;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Qg9gkzuIvhDpAeEuuQYmozRPaAjMRHM6x5QhKkh+MyI=;
- b=v0aTc3zUGIsR82Xuo3D0oJdr2V3NdJcVcxAM8EYwKtBzpw+YkfaMjwI80Yp8G+LV3o
- seqn8le1nZQYH35XkRtM7d0sYBZjRxdw+IRyCSqYDa57pztwobVGop1nW5EqpYLGYl41
- gckbd0QVMmuxn17aDM5g+OnxpaOaI0ksdLR7HTy+ihBfwipWJw3c3E+EKvRKIiHPxMw4
- TJwhxTIZFfPKRYbapxeilMRDExVHoUHCY8Fna5zlD8e3rQjxciTOC7qJW4FDZTEPaedq
- DFDf/A2L60F5oLN1pRGW571TMsk6EAww2VC4bxCb4CZmoIOkdSzPEUX9GIaleayzSbHY
- 3E8w==
+ d=1e100.net; s=20230601; t=1733148963; x=1733753763;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GSJsaEjBDivqgeX+Ps8N2v0FRCSpajSJo7XEFdZ3/Wk=;
+ b=SkjO0Ep8sS6fsRrOs/EywYzeB8rmfA1k7mmTMcxCSkipbesvHILcfkNq96DBDVKV7f
+ AeJRQ92tkjgRhIqV09E+UxKBCb9dWjlwmNsgW4b77Ajr9qDfX0BqAzeetU/b+hcp+/Ut
+ 530xD/NP3ySKFmOSDSpgSEEpL/SerDdjuAQMKs16jH7dvauyDaLWjo+H0zJdHNnbFZix
+ v6rFTR/O+inNQbsfs3K2gG3Km8SjiJTPkjgomY5ZGn9L18m/xkkFV8gjoZXbyIOGVDIl
+ hQy5f+L8ky+thp/jlS4XdWEvJapN+gap9AY4OYBm936hWrwzvoSNCzXM7gnjoNCLQ55K
+ PRwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCFZ9kv/yBpmc7tl2iFTH4LfI8P0KnAIrvNsZfyvSuBHjuu3tmIkrOOmbNO5Kvw80Cr6X8B54=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/6h0O9tEJhG77RsRLikZnNDKUyRMVm5nPwoMjvYx7nxUqvUyp
- ltrxFVHi9u4YvhyVlTUPaYAqabbST+JIkNi6aThujfQMUHb9jn2UrRRG0FP0ySgE/MWJh1EQCDt
- DO8IKQ1Jmei52uKPXLzqT5jh0EBiNV1AMgCGPYQ==
-X-Gm-Gg: ASbGnctzlbx/1mgxDOQgRjZjtuC/JLBW/SUkt62KVlsU3BBpNf8plPJNOYBFIzLVKW7
- rYuw5Wqqe6bkNhn7h+jHyJl9pq0esito=
-X-Google-Smtp-Source: AGHT+IH+K0HMdREfXKgYhUuw0ZV+nwgxbmRRcZEfEZ2Ar30XIUQ6o9jBbLz1CKVt6Z0ikMQYXxn5m+ifKHDmrMcTlwc=
-X-Received: by 2002:a05:690c:4a04:b0:6ef:86db:4356 with SMTP id
- 00721157ae682-6ef86db43dbmr55589277b3.18.1733148704253; Mon, 02 Dec 2024
- 06:11:44 -0800 (PST)
+ AJvYcCWyLBS/7waQD8Uit5tOh2NwvKT9vObjOAu6k7wOiTFX8gzzzra0EwvJ+JKZ2j6Klmg9TlN6NPE=@lists.denx.de
+X-Gm-Message-State: AOJu0YznheVRzlNSv2mjTl6OEkpI/ZUCboeMg1pHgEOf6wST24qLgLv9
+ Ysjp3oEnWfdZFr+jORiB+P0hCZtMKwNWZegYgqAYxjPgNdhwZybuzWLb1YbWDlc=
+X-Gm-Gg: ASbGncsb9igm8MfLW0p0nQ25c/EK27yThZYChPOgvaSd2DRbcvLDfUWbrO92tI2nHwo
+ 8vIXjwmbdWDc9rz6lyt4lAgKCPq+wBccI05N5VAIAVP+ib+cKEC2z3145ZBVa+0kD6UZkwwT8m4
+ 5v/TgtSaNBzd84A0V/FTKmTgLFo8KigHIzGflEv1dnaZL6vhMhwlJMPcyIUYRNuSwjtXp80gfF/
+ DtVBn9QTxm6Utw96L+kbO3FjNltptIZQO4NwQn04gNYGQlShg==
+X-Google-Smtp-Source: AGHT+IEoi8/r6kDG4x0QBmso55RJGJu9rQq1FWnGk9pcJjUPqpW7uVZ2NvY4avhMd6y91V58PWlOxg==
+X-Received: by 2002:a05:6214:626:b0:6d8:b3a7:75a0 with SMTP id
+ 6a1803df08f44-6d8b3a779f3mr1811496d6.47.1733148962584; 
+ Mon, 02 Dec 2024 06:16:02 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6849b90bfsm406447985a.108.2024.12.02.06.16.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Dec 2024 06:16:02 -0800 (PST)
+Date: Mon, 2 Dec 2024 08:15:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v2 0/7] efi_loader: Add support for logging to a buffer
+Message-ID: <20241202141558.GD2457179@bill-the-cat>
+References: <20241202001243.1283274-1-sjg@chromium.org>
+ <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
 MIME-Version: 1.0
-References: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
- <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
-In-Reply-To: <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 2 Dec 2024 16:11:08 +0200
-Message-ID: <CAC_iWj+wTMO8ceVy8b_nx2vQO+srfuK1JsdvMXc_pn_rL7VtFQ@mail.gmail.com>
-Subject: Re: [PATCH] lmb: Fix the allocation of overlapping memory areas with
- !LMB_NONE
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lfSdiiiFYjn1vfgh"
+Content-Disposition: inline
+In-Reply-To: <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,114 +98,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Dec 2024 at 15:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 28.11.24 12:49, Ilias Apalodimas wrote:
-> > At the moment the LMB allocator will return 'success' immediately on two
-> > consecutive allocations if the second one is smaller and the flags match
-> > without resizing the reserved area.
-> >
-> > This is problematic for two reasons, first of all the new updated
-> > allocation won't update the size and we end up holding more memory than
-> > needed, but most importantly it breaks the EFI SCT tests since EFI
-> > now allocates via LMB.
-> >
-> > More specifically when EFI requests a specific address twice with the
-> > EFI_ALLOCATE_ADDRESS flag set, the first allocation will succeed and
-> > update the EFI memory map. Due to the LMB behavior the second allocation
-> > will also succeed but the address ranges are already in the EFI memory
-> > map due the first allocation. EFI will then fail to update the memory map,
-> > returning EFI_OUT_OF_RESOURCES instead of EFI_NOT_FOUND which break EFI
-> > conformance.
-> >
-> > So let's remove the fast check with is problematic anyway and leave LMB
-> > resize and calculate address properly. LMB will now
-> > - try to resize the reservations for LMB_NONE
-> > - return -1 if the memory is not LMB_NONE and already reserved
-> >
-> > The LMB code needs some cleanup in that part, but since we are close to
-> > 2025.01 do the easy fix and plan to refactor it later.
-> > Also update the dm tests with the new behavior.
-> >
-> > Fixes: commit 22f2c9ed9f53 ("efi: memory: use the LMB API's for allocating and freeing memory")
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   lib/lmb.c      |  9 ---------
-> >   test/lib/lmb.c | 22 +++++++++++++++++++++-
-> >   2 files changed, 21 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 14b9b8466ff2..3a765c11bee6 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -201,15 +201,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
-> >               phys_addr_t rgnbase = rgn[i].base;
-> >               phys_size_t rgnsize = rgn[i].size;
-> >               phys_size_t rgnflags = rgn[i].flags;
-> > -             phys_addr_t end = base + size - 1;
-> > -             phys_addr_t rgnend = rgnbase + rgnsize - 1;
-> > -             if (rgnbase <= base && end <= rgnend) {
-> > -                     if (flags == rgnflags)
-> > -                             /* Already have this region, so we're done */
-> > -                             return 0;
-> > -                     else
-> > -                             return -1; /* regions with new flags */
-> > -             }
-> >
-> >               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> >               if (ret > 0) {
-> > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> > index c917115b7b66..bc44dd21192f 100644
-> > --- a/test/lib/lmb.c
-> > +++ b/test/lib/lmb.c
-> > @@ -529,6 +529,26 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
-> >       ret = lmb_add(ram, ram_size);
-> >       ut_asserteq(ret, 0);
-> >
-> > +     /* Try to allocate a page twice */
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> > +     ut_asserteq(b, alloc_addr_a);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> > +     ut_asserteq(b, 0);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> > +     ut_asserteq(b, alloc_addr_a);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x2000, LMB_NONE);
-> > +     ut_asserteq(b, alloc_addr_a);
-> > +     ret = lmb_free(alloc_addr_a, 0x2000);
-> > +     ut_asserteq(ret, 0);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> > +     ut_asserteq(b, alloc_addr_a);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
-> > +     ut_asserteq(b, 0);
-> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> > +     ut_asserteq(b, 0);
-> > +     ret = lmb_free(alloc_addr_a, 0x1000);
-> > +     ut_asserteq(ret, 0);
-> > +
-> >       /*  reserve 3 blocks */
-> >       ret = lmb_reserve(alloc_addr_a, 0x10000);
-> >       ut_asserteq(ret, 0);
-> > @@ -734,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
-> >
-> >       /* reserve again, same flag */
-> >       ret = lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
-> > -     ut_asserteq(ret, 0);
-> > +     ut_asserteq(ret, 0xffffffff);
->
-> lmb_reserve_flags() should return a long value < 0 on failure. Why do
-> you expect 0xffffffff?
 
-lmb_alloc_addr_flags has  a phys_addr_t (unsigned long), I can rewrite
-this as ut_asserteq(ret, -1); which is probably correct for 32/64bit
+--lfSdiiiFYjn1vfgh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Cheers
-/Ilias
->
-> Best regards
->
-> Heinrich
->
-> >       ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
-> >                  0, 0, 0, 0);
+On Mon, Dec 02, 2024 at 01:24:27AM +0100, Heinrich Schuchardt wrote:
+> Am 2. Dezember 2024 01:12:36 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >It is a bit of a pain to log EFI boot-services calls at present. The
+> >output goes to the console so cannot easily be inspected later. Also it
+> >would be useful to be able to store the log and review it later, perhaps
+> >after something has gone wrong.
 > >
->
+> >This series makes a start on implementing a log-to-buffer feature. It
+> >provides a simple 'efidebug log' command to inspect the buffer. For now,
+> >only memory allocations are logged.
+>=20
+> In my previous review I suggested to move your work to the level of the l=
+ogging library lib/log.c.
+>=20
+> Why are you reiterating your series without exposing why an EFI specific =
+solution. should be desireable?
+
+Even with
+https://lore.kernel.org/u-boot/CAFLszTgE_HZEbG7B09_oo=3DXfugvH07ix=3D_0eoSG=
+aEQ+KhyA4Qw@mail.gmail.com/
+it is unclear why this patch series rather than either/both:
+- Expand CONFIG_LOG to have a "file" or "bloblist" option
+- Use CONFIG_TRACE
+
+Do not match your needs. Especially the second option.
+
+--=20
+Tom
+
+--lfSdiiiFYjn1vfgh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdNwRoACgkQFHw5/5Y0
+tyzdlwv8C7u6Y5osdpIVrtJjcT13A9HjrsSVtMjP+4zPe4/PEKexCib6CqyeNFDA
+sW6zradTcfM2TmeD3UrgDAQ8IFck1bDvSrrtHp3mLqTea1IyFUIJ5fIwgChOH0bZ
+eH5JCNjt9U3pOfEMK2eouNbewQFqq9zTl9mow2smEXnsJJxhHaK1si16PaVghVA9
+Nj3AJNmaLnd2bdJ7t+tGz5FcA1sp2k1GAZdmPPlLQ1yhrUsDnu7pun+5sSHmVhAO
+DGc0xlmofAa8dOasEp7uP5VxUvrx+URAt8WbqQao5w3AU+o4myZ1sI58H+q9r1sB
+N5WszPxPnHuSN19jOtM03NRUAvwCr2vakZb2yOKscjgIiP2x3+5iGCiCS1fyHsUK
+MAmZ9HblY/l74FQlhdh+fRGSuQ2kE9r8IppSQX9oQssSRI3ajROTC39k84NvtzNd
+5qmaNhNsd2+G0yu5iBnWWOqRApVrRbEicKrBwNGxwve3ZYvn4Qefz3b7HAFwvyYy
+lE0f2K91
+=zfUg
+-----END PGP SIGNATURE-----
+
+--lfSdiiiFYjn1vfgh--
