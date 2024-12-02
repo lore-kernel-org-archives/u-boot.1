@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E02CD7831E
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:27:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32B25D7831F
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 13:32:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB0F688DB1;
-	Mon,  2 Dec 2024 14:27:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 902D3890BC;
+	Mon,  2 Dec 2024 14:32:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hj8fRFi0";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nctWMIKV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A33D88E33; Mon,  2 Dec 2024 14:27:47 +0100 (CET)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 595FE890BC; Mon,  2 Dec 2024 14:32:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E0C988969
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:27:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B4BE88FD2
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 14:32:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-466897883dcso41643831cf.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 05:27:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733146064; x=1733750864; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=17sErm0M1wVxrsEiojMlD2DL0pmZah+q4STAf6AFDPo=;
- b=Hj8fRFi0vUbpKW4xLoc/jEBXSneQhALoSftZ5UgUVyPgHjcVG/Zadg4H9YNUmGxsFH
- +KbmPi4ahk3JdQEI8AEuWXGkDoRAd2S1js9IXcdo3dJc3AEmgFil1m53kXEzjuQ6iCre
- fv0QB3IaaJj3oq+xExf78BtIi5fVJNLT5k2sM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733146064; x=1733750864;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=17sErm0M1wVxrsEiojMlD2DL0pmZah+q4STAf6AFDPo=;
- b=IiQF36Z2gjvfcrem1hYkowxpy49GRK3I5T+2qf/GOEXDV23tc6kGrO6gENytPqYKcj
- SZuFxoHSGPtkb9mMGebnlM7cSZu33WboVWPp2PTYFVPN1eHFArs+GphtJtbcMkxzDq1k
- 3AWZi1hR4/mVTPynScIFxLjgCB+tJyTcZjG1GTfHAuTYJJmJgkHIV5mqoRUPAXE18g8X
- QfByLlNmpE9zgVnZKqn0IhfO3EI3wOD0U/cswRwwsoBiShW7KAZZP5PtnMp3El8ic0CX
- +nIHzQORISoroPZAWszI2GqCPZ0+4b6ZN+jIXcXIobLG25vHtwBGbipVa0ripTi1uBwL
- ykbw==
-X-Gm-Message-State: AOJu0Yxz/nuLu6wpU3wUoyFkbEQsyAb5yQAG3u18DY2adlxlg5ckPOYe
- B82Gs4g5Wf6wQbQIMFFKnExh/+pQjIDT2CVqz8VjMpn5leFvn5S2XQmSJzJNewg=
-X-Gm-Gg: ASbGncs78sAbVVZNyJeZZBqxVEBsJ33dJqqzai7wRF2bQWwhQvR5I7sFA/dDtBlL0f0
- U9fw4JDEUfYSSbJS9DBOUN8//BkKKAIYnkAdPISShAi9MD/VgXIXAAA/qasN1T5s+895KM7ZTP1
- 6B4FuhfZawVPUmDQg+7ZzXQ0lngBP20o4aXp/KkrC3riF5s+UaN3dIyxXwur2OnBKIkktgcLhRj
- s3+rvEsu68zdXPg+jSdzawM1GlzPDWHac7UD4Re+iX6IRPVxw==
-X-Google-Smtp-Source: AGHT+IHfngvjMJK3KFc+pMGmcnuCjaBTYw0RRnlPZkq0X+CC1hZ2CLhDplp9M1uAgPk4K1uSDM6tzw==
-X-Received: by 2002:a05:622a:5c17:b0:466:9615:b21 with SMTP id
- d75a77b69052e-466b32e095emr358504821cf.0.1733146063851; 
- Mon, 02 Dec 2024 05:27:43 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466c421e466sm48327681cf.65.2024.12.02.05.27.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 05:27:42 -0800 (PST)
-Date: Mon, 2 Dec 2024 07:27:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andy Yan <andyshrk@163.com>, Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- christophe.priouzeau@foss.st.com,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- etienne.carriere@foss.st.com
-Subject: Re: unable to access 'https://source.denx.de/u-boot/u-boot.git/'
-Message-ID: <20241202132739.GV3600562@bill-the-cat>
-References: <a7df8a2a-78c8-4542-8af8-dab3c4b59392@foss.st.com>
- <22662f2f.bf56.193874ce608.Coremail.andyshrk@163.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733146329; x=1733751129; i=xypron.glpk@gmx.de;
+ bh=OCANU1gIakfCcFeiH2WkF4RDUEDpMOAgspsRR40MIwM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=nctWMIKVlnnrl2Re+VkgLe8UJFcPNnkihJYEoJ0O23sCzcXQdDUs900brGYvLsHc
+ CJGCb6aU9zcoxJqYG9FlwcraVnoWqaEMQEv8YZMNIc+HQUTVCdWUn5oELWySNk4zf
+ aILmTPgN1Ht0o1ZRgfr6kdcWKrEP4Z8ujj0HzDf3m+vrZ1shEObs3B/CDM9bTbMy1
+ Zev2Tnkq1RyjkZSbFhxfaJ37tZxXv6U8iJk/KS9gW8H9G3364tIFySnzST999oB6S
+ sWYYc6TFz8lKSDwN/zaR4giKqxEPNXlYtqWvlAMHC7jxZXaWRmnhu9k8aW/tLR0Mo
+ lZeUzM1GEufxeTDVQQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPGRz-1t1O3Y1pVN-00Ukdc; Mon, 02
+ Dec 2024 14:32:09 +0100
+Message-ID: <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
+Date: Mon, 2 Dec 2024 14:31:15 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uaJm6KkIVNNcz3E5"
-Content-Disposition: inline
-In-Reply-To: <22662f2f.bf56.193874ce608.Coremail.andyshrk@163.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lmb: Fix the allocation of overlapping memory areas with
+ !LMB_NONE
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+References: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Hl/rZMBc+CggFdKJxk7WgE8YiipRMq+hGaEBnFjQ9DmXfvHwt/C
+ /mchbWQCJMc3oQOBRtPIjDmCQGtAog4/ePMit59sxhRkUmyoED6UrreDKUL5OlUcHFu6b0F
+ +0I5if1zs4rWq7tpBCspM63XikFGWJo9Tmw6VUsmMJGUxFjRIQwhTyBtaa+TYacwOuivph3
+ bcfQCsVn4SBI+L1o42/kw==
+UI-OutboundReport: notjunk:1;M01:P0:ypMOr6QkQkQ=;ijeWvkekCEXsg8yk6DqAvwX9gig
+ QlP5vDXv3mNS1RF/RqOV4+yoj7bFcf0oUZpabi+7/Et4x+uy9j7cQdqVjLTl4uKwyaP/P27T3
+ 6yT/yWyBjlLKVM3LnH2PxafaoaBzeJIhc2YoHydrviSFwXH+HoTuO1hun1UbFtOgJAQfDwEUP
+ Yn+L4HBMVmcBik/tavKajHCxIN2CFnH/92NB1ElyDmxhTN9Bgp6mIUb6GJLctTZy405IlJK6A
+ OTBpIdMeePs1wiFEhDgh1mGybxykpgQPgsm7Ah5FCzVeFKUz9CO0T0uOlrnb+ICbrgsmOGt8V
+ JN1sUTaKCU9+3k7xzvY4yy0/sviHmsjoTg4ozPTSahmLKSVT/zoqhkcoqM712u9w4vafnbc8Y
+ SQ84hHI8+IW7ogYzDQkQGHJpDnwMhlCEDLqIxtaMbXA2dqOjVntYOelm3NXYSa6R5jkRJrFRy
+ F6yGyTd5eMaQphzV12VDGsoPHNS/OQoB55c4BM26dsDSH5eeTKZxKEqiYn5JGDv/UWdyVoRAv
+ uCaXSjMkGTaJtkCr10v5qazYkwewDPhxH6Fx92Q7Ajc6MiuPdGEyShkdsxiFImwcxL8CDL+j/
+ OzJBHYXWFH6Ndr+ZOxuGvYrH50F6mcmtDiNeA6WMzaaEiF1wPG5NFKQe4SBg+Vk8SuLj4siwW
+ AFZYWD4DaldO4ulvPlxquR8Hf+z2IvV5DJvj3HDr1q5u3lW1B1r+q7SqWmvv/Pan+ELnO7enY
+ mtNBCF5Y3M9rI6wSkR7EJA1bRDDgZ5rJhRoZW/QlHh3zJhk2/xarD55iE4PcmMA1XCuxQQgrB
+ Fq5VJV+xFbTamMeYXuay8J8E68kdEalF5z0Vt0rA14cBBXqKzw7M3HfuFOE9rPvHakE1b7tpQ
+ 5P1UbkWMNAjK8x6ThJ0VNqidof5V6O0Yz+T5HVdSuQvksrVq5W8v3BuBBfzfCQUDiD1h8Zivg
+ elDcUHD23wb0vjdNTvj8o+nFZQXYo0N/X5cx/bHFJrMEFbyGTHJSBvCHEKJEP80ZrCRmYSiqX
+ JRkAvNCmq+wqDmnInzpRCNx5Pjx4o3UnEkoWZ6xfePGSmjlTC4qg+Hyuhf+bud9ZgzBAYPDFD
+ 8lFWgVIz3/sqN8Mi7QTHGapQfgntAJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,65 +96,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 28.11.24 12:49, Ilias Apalodimas wrote:
+> At the moment the LMB allocator will return 'success' immediately on two
+> consecutive allocations if the second one is smaller and the flags match
+> without resizing the reserved area.
+>
+> This is problematic for two reasons, first of all the new updated
+> allocation won't update the size and we end up holding more memory than
+> needed, but most importantly it breaks the EFI SCT tests since EFI
+> now allocates via LMB.
+>
+> More specifically when EFI requests a specific address twice with the
+> EFI_ALLOCATE_ADDRESS flag set, the first allocation will succeed and
+> update the EFI memory map. Due to the LMB behavior the second allocation
+> will also succeed but the address ranges are already in the EFI memory
+> map due the first allocation. EFI will then fail to update the memory ma=
+p,
+> returning EFI_OUT_OF_RESOURCES instead of EFI_NOT_FOUND which break EFI
+> conformance.
+>
+> So let's remove the fast check with is problematic anyway and leave LMB
+> resize and calculate address properly. LMB will now
+> - try to resize the reservations for LMB_NONE
+> - return -1 if the memory is not LMB_NONE and already reserved
+>
+> The LMB code needs some cleanup in that part, but since we are close to
+> 2025.01 do the easy fix and plan to refactor it later.
+> Also update the dm tests with the new behavior.
+>
+> Fixes: commit 22f2c9ed9f53 ("efi: memory: use the LMB API's for allocati=
+ng and freeing memory")
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   lib/lmb.c      |  9 ---------
+>   test/lib/lmb.c | 22 +++++++++++++++++++++-
+>   2 files changed, 21 insertions(+), 10 deletions(-)
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 14b9b8466ff2..3a765c11bee6 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -201,15 +201,6 @@ static long lmb_add_region_flags(struct alist *lmb_=
+rgn_lst, phys_addr_t base,
+>   		phys_addr_t rgnbase =3D rgn[i].base;
+>   		phys_size_t rgnsize =3D rgn[i].size;
+>   		phys_size_t rgnflags =3D rgn[i].flags;
+> -		phys_addr_t end =3D base + size - 1;
+> -		phys_addr_t rgnend =3D rgnbase + rgnsize - 1;
+> -		if (rgnbase <=3D base && end <=3D rgnend) {
+> -			if (flags =3D=3D rgnflags)
+> -				/* Already have this region, so we're done */
+> -				return 0;
+> -			else
+> -				return -1; /* regions with new flags */
+> -		}
+>
+>   		ret =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+>   		if (ret > 0) {
+> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> index c917115b7b66..bc44dd21192f 100644
+> --- a/test/lib/lmb.c
+> +++ b/test/lib/lmb.c
+> @@ -529,6 +529,26 @@ static int test_alloc_addr(struct unit_test_state *=
+uts, const phys_addr_t ram)
+>   	ret =3D lmb_add(ram, ram_size);
+>   	ut_asserteq(ret, 0);
+>
+> +	/* Try to allocate a page twice */
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> +	ut_asserteq(b, alloc_addr_a);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> +	ut_asserteq(b, 0);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> +	ut_asserteq(b, alloc_addr_a);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x2000, LMB_NONE);
+> +	ut_asserteq(b, alloc_addr_a);
+> +	ret =3D lmb_free(alloc_addr_a, 0x2000);
+> +	ut_asserteq(ret, 0);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> +	ut_asserteq(b, alloc_addr_a);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> +	ut_asserteq(b, 0);
+> +	b =3D lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> +	ut_asserteq(b, 0);
+> +	ret =3D lmb_free(alloc_addr_a, 0x1000);
+> +	ut_asserteq(ret, 0);
+> +
+>   	/*  reserve 3 blocks */
+>   	ret =3D lmb_reserve(alloc_addr_a, 0x10000);
+>   	ut_asserteq(ret, 0);
+> @@ -734,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state=
+ *uts)
+>
+>   	/* reserve again, same flag */
+>   	ret =3D lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
+> -	ut_asserteq(ret, 0);
+> +	ut_asserteq(ret, 0xffffffff);
 
---uaJm6KkIVNNcz3E5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+lmb_reserve_flags() should return a long value < 0 on failure. Why do
+you expect 0xffffffff?
 
-On Mon, Dec 02, 2024 at 08:16:24PM +0800, Andy Yan wrote:
->=20
-> Hi All=EF=BC=8C
->=20
-> At 2024-12-02 17:08:48, "Patrice CHOTARD" <patrice.chotard@foss.st.com> w=
-rote:
-> >Hi All
-> >
-> >Since several days, it seems that U-Boot git repository is not accessibl=
-e.
-> >
-> >Fetching or cloning u-boot repo leads to the following issue:=20
-> >
-> >git clone https://source.denx.de/u-boot/u-boot.git
-> >Cloning into 'u-boot'...
-> >fatal: unable to access 'https://source.denx.de/u-boot/u-boot.git/': The=
- requested URL returned error: 403
->=20
-> I also see similar issue from China these days:
->=20
-> git fetch origin=20
-> fatal: unable to access 'https://gitlab.denx.de/u-boot/u-boot.git/': Fail=
-ed to connect to source.denx.de port 443 after 135047 ms: Connection timed =
-out
+Best regards
 
-So, the problem we've been having for a few weeks now is that a number
-of crawlers have been scraping source.denx.de (and ignoring robots.txt)
-excessively and making the server unusable for anyone much of the time.
-The only solution thus far has been to implement some region-based
-blocks, and see what the fall-out becomes. Andy, in your case it's
-probably best to switch to https://github.com/u-boot/u-boot as that's
-kept in-sync. Patrice, I'll follow-up off-list to see what needs to be
-allow-listed for the ST team to access things.
+Heinrich
 
---=20
-Tom
+>   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
+>   		   0, 0, 0, 0);
+>
 
---uaJm6KkIVNNcz3E5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdNtb8ACgkQFHw5/5Y0
-tyy9Xgv+K8h6ShLEFExF0iX+Sjs+BeK2MgVkMwRIaqrbRulKcShUqEi+B4cLv1Ni
-Xy2VL0hxMfBcVZ8xLKGZlLDf8IpfZfDSfqGc9bRAdRqLy5iAyCeehcW7ntnv3QvK
-3q65MU+jpWH7Df6LITyeVMgC8dFIUysQLceSAO9/FT44eg2cNI5AnAXzIBBbKhn3
-99Byo2pi47T+Us0R3pQoATS2ooZEmKibjtzUNMpqHUFt40KTEbBP8zYJ+jpuyT/B
-qRLFbAPlVL39761ySg2HSuObW5MsPZh7EZC54+3UPxz4UB8Qq6Pu6KFdyzxnOu1f
-+w37J/E1PD62tfBlbEktrwB++fP9G3avZNxkDf6tcO5+vP9ZR3O/pSjrn2oybkMQ
-6zDFAaJOaDZ7rpGOqEFj2j7292Pr+Uc67CoZWoywK4CLz2JlRyvrrMv/yCv/vAWb
-QzCW5qtcNYSviXjFZYM8hFUjqBIw+MtJOm/3njddfWlLASy/3syxyg9PHFqDwexj
-E1K7RISk
-=Zd/w
------END PGP SIGNATURE-----
-
---uaJm6KkIVNNcz3E5--
