@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59185D4978F
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 00:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D07D4978F
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 00:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09272893D1;
-	Mon,  2 Dec 2024 01:13:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ACF26893C9;
+	Mon,  2 Dec 2024 01:13:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e2cLilKc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bvghjVvF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4665893C2; Mon,  2 Dec 2024 01:13:06 +0100 (CET)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id B82CE8916D; Mon,  2 Dec 2024 01:13:09 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424C189287
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 01:13:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C924893BF
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 01:13:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-29e579b9e9aso417350fac.1
- for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 16:13:04 -0800 (PST)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3ea462a98b9so1870900b6e.0
+ for <u-boot@lists.denx.de>; Sun, 01 Dec 2024 16:13:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733098382; x=1733703182; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733098385; x=1733703185; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YNFYBLMMFtd+kDaZu/Ddn0FHK964vmgYubl++Id4OlQ=;
- b=e2cLilKcrK14/g1Lg1hE4oXyZ4nRz6CVJvRUK8KFtTiWlqrLi3aDNEvp0c9sTA0+9y
- pwszF3VUhOxI2XptGLozYIkUaNpW76L6vQGQqL61CwFqwTX5GD34V3Tpj7KtY46nTFFQ
- nCm53iPIr2kSjfnsEBiqWNm3+ksAjuJb9qiVI=
+ bh=Pd58uXNLqjp5bBdpbCaSuvMYjG54PksUIKSeIZTNMXY=;
+ b=bvghjVvF9cHiIi1LzA3lQlTe28bgbP/A/VwGODMF5fCfDri+njggDKlXbNuwSZmYoF
+ vhys1C6Y5WP2rfSjiTMSHMnLLi0WNfhmCeKjut7YRWYP8ghwHR9+Wl0j3saOQW4A5wEF
+ 5WeBfKbpKvLPiqDvZXVPI4PR+HJKeFqJoruvw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733098382; x=1733703182;
+ d=1e100.net; s=20230601; t=1733098385; x=1733703185;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YNFYBLMMFtd+kDaZu/Ddn0FHK964vmgYubl++Id4OlQ=;
- b=xEfzxMF3fUpAXVmtflgbtG2mAALHatV8dMPi31bt/Y2EiSuAaqcXhePGNaUHe9w3oo
- bnm4RDI6lFyPtTjJ44J7eRBsCLFnCuRwcKrw53GknfWK3EfzLMLW5T+bQK1dKbcLAR0t
- ufMDx8gglSIVGVwrj6gYd9pn5op9aFefWbz0i2OrBPzTr8licLye8zbyOyyPxxyq2M+I
- HBnRHLlz8HQrL1cfnXfavbL7yh9iornwSNTmnz62q+g/kduDFpzYozaRzBtt8oxdAG3+
- rjiz4X538DiqrzzvRm+iBpyTpKuqNGyJoHN94jefvK9cSBHBIgSpAp4/gTAQ4xgyk/Uf
- ZBNQ==
-X-Gm-Message-State: AOJu0YypYDC2lQHj/wbxYT1QG+iP0aIvh0+alXd0hdTPgxx2MGzn6Swg
- IHRRzxhLofGmEPL+GaVnhorexR174Vv/H5gbzx7Fn+JUzR+aKaPe33BWMg2/vnUsYl4r6ofvvWA
+ bh=Pd58uXNLqjp5bBdpbCaSuvMYjG54PksUIKSeIZTNMXY=;
+ b=BecrtxCy5tfZTJD+GWSYj9FXcve+CDVQvS/d0/UFXXJOlBC2RM9nMPBRKCi5o3NbaR
+ mnM7Cck/x4gkjXkutgDHDZAJ4uYTwS6zAnuupChwsZKYi2YfaC2Km5Rcj0YX2pT5iTaM
+ y5qdG9HJIMIKRe7bGPCPJ4bUH4gYJtDhirZJK2JlNJeZNfXOs+//Qz/3DYtusBDBS/sG
+ DE/XzZfH5nyuSSuuejhbZeASTI7ft4TBbuxC3dOlCcEpODqLDuRoxjLCmnDiWmWrr6AU
+ VEIUVjW/4yaY+TvvxeA6efJ4DrXw20trxLXmekCJJ5OdaJePUQ9EQyOWM9FsAWOarUs/
+ /SJQ==
+X-Gm-Message-State: AOJu0YzhweDxQA85G84iMvte5J1KhAG7gMA9VbfI3Bv77TB9U/9s9l8h
+ sGRka1/MKgqdLjOQtZk0fHayFDSaVutsgeZOBJcD31C5CiS2t5Zv2iRSoupXlbxB6NtIm237VtI
  =
-X-Gm-Gg: ASbGncu8b4iEyZ5/F6bjvgNX8WC1K6vSorL++lkMQBc0VYJvpi5Hvxt9fSM03fYlrZK
- 0Khk7ae4+npJfjP1klARBoPuNOFQ1YztoBfgRmVAwG59S7kcmq/ZjhG7Y0PGqpswCc6SuPQXTCg
- c60tHGhXo/cnXKMcyo6iUQ5K9Lb2G9pUqL5n6cj8fUxkrClRoGysUZPlzhe0AK4ysyi8cpjsvVr
- Lg7K0pvPgaKVvT/G6cwA2XMrRmytJpidr8MZkOC9xq2xQ==
-X-Google-Smtp-Source: AGHT+IE8KKGZPR833J6wU6+yp3ybxt2OZrK/ZxRf1hpzpmQZN5OkuaZq3CGRlL3dcm0cL8/lLRanRg==
-X-Received: by 2002:a05:6870:a7a1:b0:296:7b65:2fac with SMTP id
- 586e51a60fabf-29dc3fa25b4mr15238089fac.3.1733098382046; 
- Sun, 01 Dec 2024 16:13:02 -0800 (PST)
+X-Gm-Gg: ASbGnctQJA9hunTy8kX7nVyr1rLW2Cd5V+7BqNK4BuL50W2DDan8x5AsQeKI5c/KpWY
+ o0IqJxvEW2wEgy6jh/6A79ceFCoVdgtpn/GBCFj9sXX8ojylYN2xN5Bs8czUlNz94t8BvYgT0zq
+ kzlRETq/GO95qF3yX+ndotMPlNFqzyJPTgK787+piYc/LmpfeC4a9h2UsPAVsznXHDHdRgHJfBo
+ q/onbfa8CoTXjuHCYWHZO1OvTatilcCszOCBi2I1Vsg7Q==
+X-Google-Smtp-Source: AGHT+IHfNW59Ebg4jDnxqXwBPVF/6CT6RzDEZQ4jhOoGooVE6acC8g8qUq0VSig4oca/IWjSbnpIiQ==
+X-Received: by 2002:a05:6808:19a6:b0:3e6:f30:f8ba with SMTP id
+ 5614622812f47-3ea6dd47ab5mr16092341b6e.29.1733098385498; 
+ Sun, 01 Dec 2024 16:13:05 -0800 (PST)
 Received: from chromium.org ([50.190.87.202]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-29e6ef90f5dsm14615fac.51.2024.12.01.16.12.58
+ 586e51a60fabf-29e6ef90f5dsm14615fac.51.2024.12.01.16.13.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Dec 2024 16:13:00 -0800 (PST)
+ Sun, 01 Dec 2024 16:13:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 4/7] efi_loader: Add a command to show the EFI log
-Date: Sun,  1 Dec 2024 17:12:40 -0700
-Message-Id: <20241202001243.1283274-5-sjg@chromium.org>
+Subject: [PATCH v2 5/7] test: efi_loader: Add a simple test for the EFI log
+Date: Sun,  1 Dec 2024 17:12:41 -0700
+Message-Id: <20241202001243.1283274-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241202001243.1283274-1-sjg@chromium.org>
 References: <20241202001243.1283274-1-sjg@chromium.org>
@@ -93,244 +93,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a simple command which lists the log. Avoid creating any new records
-when this command is invoked.
+Create a test which does some sample calls and checks the output.
+
+Expand the size of the sandbox bloblist to accommodate the log.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/efidebug.c             |  53 +++++++++++++++---
- doc/usage/cmd/efidebug.rst | 109 +++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst        |   1 +
- 3 files changed, 155 insertions(+), 8 deletions(-)
- create mode 100644 doc/usage/cmd/efidebug.rst
+ MAINTAINERS               |  1 +
+ configs/sandbox_defconfig |  3 +++
+ lib/efi_loader/efi_log.c  |  7 +++---
+ test/lib/Makefile         |  1 +
+ test/lib/efi_log.c        | 49 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 57 insertions(+), 4 deletions(-)
+ create mode 100644 test/lib/efi_log.c
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 02f1e080e88..89bef0c9c1d 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -10,6 +10,7 @@
- #include <dm/device.h>
- #include <efi_dt_fixup.h>
- #include <efi_load_initrd.h>
-+#include <efi_log.h>
- #include <efi_loader.h>
- #include <efi_rng.h>
- #include <efi_variable.h>
-@@ -532,6 +533,33 @@ static int do_efi_show_defaults(struct cmd_tbl *cmdtp, int flag,
- 	return CMD_RET_SUCCESS;
- }
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 890ca4290d3..5e795ce9a4b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1080,6 +1080,7 @@ M:	Simon Glass <sjg@chromium.org>
+ S:	Maintained
+ F:	include/efi_log.h
+ F:	lib/efi_loader/efi_log.c
++F:	test/lib/efi_log.c
  
-+/**
-+ * do_efi_show_log() - show UEFI log of boot-services calls
-+ *
-+ * @cmdtp:	Command table
-+ * @flag:	Command flag
-+ * @argc:	Number of arguments
-+ * @argv:	Argument array
-+ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
-+ *
-+ * Implement efidebug "log" sub-command.
-+ * Show UEFI log records.
-+ */
-+static int do_efi_show_log(struct cmd_tbl *cmdtp, int flag,
-+			   int argc, char *const argv[])
-+{
-+	if (!IS_ENABLED(CONFIG_EFI_LOG)) {
-+		printf("Please enable CONFIG_EFI_LOG to use the log\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	if (efi_log_show()) {
-+		printf("Failed\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
- static const char * const efi_mem_type_string[] = {
- 	[EFI_RESERVED_MEMORY_TYPE] = "RESERVED",
- 	[EFI_LOADER_CODE] = "LOADER CODE",
-@@ -1586,6 +1614,7 @@ static struct cmd_tbl cmd_efidebug_sub[] = {
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(images, CONFIG_SYS_MAXARGS, 1, do_efi_show_images,
- 			 "", ""),
-+	U_BOOT_CMD_MKENT(log, CONFIG_SYS_MAXARGS, 1, do_efi_show_log, "", ""),
- 	U_BOOT_CMD_MKENT(memmap, CONFIG_SYS_MAXARGS, 1, do_efi_show_memmap,
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(tables, CONFIG_SYS_MAXARGS, 1, do_efi_show_tables,
-@@ -1620,19 +1649,25 @@ static int do_efidebug(struct cmd_tbl *cmdtp, int flag,
+ EFI PAYLOAD
+ M:	Heinrich Schuchardt <xypron.glpk@gmx.de>
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 718e4a8283c..3c5954b6c7f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -17,6 +17,7 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_CAPSULE_AUTHENTICATE=y
+ CONFIG_EFI_CAPSULE_CRT_FILE="board/sandbox/capsule_pub_key_good.crt"
++CONFIG_EFI_LOG=y
+ CONFIG_BUTTON_CMD=y
+ CONFIG_FIT=y
+ CONFIG_FIT_RSASSA_PSS=y
+@@ -50,6 +51,7 @@ CONFIG_LOG_DEFAULT_LEVEL=6
+ CONFIG_LOGF_FUNC=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_STACKPROTECTOR=y
++CONFIG_BLOBLIST_SIZE_RELOC=0x5000
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_LICENSE=y
+ CONFIG_CMD_SMBIOS=y
+@@ -71,6 +73,7 @@ CONFIG_CMD_NVEDIT_LOAD=y
+ CONFIG_CMD_NVEDIT_SELECT=y
+ CONFIG_LOOPW=y
+ CONFIG_CMD_MD5SUM=y
++CONFIG_CMD_MEMINFO=y
+ CONFIG_CMD_MEM_SEARCH=y
+ CONFIG_CMD_MX_CYCLIC=y
+ CONFIG_CMD_MEMTEST=y
+diff --git a/lib/efi_loader/efi_log.c b/lib/efi_loader/efi_log.c
+index 01e495d3995..780860d8b2f 100644
+--- a/lib/efi_loader/efi_log.c
++++ b/lib/efi_loader/efi_log.c
+@@ -129,6 +129,7 @@ int efi_logs_testing(enum efil_test_t enum_val, efi_uintn_t int_val,
+ 	if (ret < 0)
+ 		return ret;
  
- 	argc--; argv++;
- 
--	/* Initialize UEFI drivers */
--	r = efi_init_obj_list();
--	if (r != EFI_SUCCESS) {
--		printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--		       r & ~EFI_ERROR_MASK);
--		return CMD_RET_FAILURE;
--	}
--
- 	cp = find_cmd_tbl(argv[0], cmd_efidebug_sub,
- 			  ARRAY_SIZE(cmd_efidebug_sub));
- 	if (!cp)
- 		return CMD_RET_USAGE;
- 
-+	/*
-+	 * Calling efi_init_obj_list() can add log records, so avoid it if just
-+	 * showing the log
-+	 */
-+	if (cp->cmd != do_efi_show_log) {
-+		/* Initialize UEFI drivers */
-+		r = efi_init_obj_list();
-+		if (r != EFI_SUCCESS) {
-+			printf("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-+			       r & ~EFI_ERROR_MASK);
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+
- 	return cp->cmd(cmdtp, flag, argc, argv);
- }
- 
-@@ -1680,6 +1715,8 @@ U_BOOT_LONGHELP(efidebug,
- 	"  - show default EFI filename and PXE architecture\n"
- 	"efidebug images\n"
- 	"  - show loaded images\n"
-+	"efidebug log\n"
-+	"  - show UEFI log\n"
- 	"efidebug memmap\n"
- 	"  - show UEFI memory map\n"
- 	"efidebug tables\n"
-diff --git a/doc/usage/cmd/efidebug.rst b/doc/usage/cmd/efidebug.rst
++	rec->enum_val = enum_val;
+ 	rec->int_val = int_val;
+ 	rec->buffer = buffer;
+ 	rec->memory = memory;
+@@ -194,10 +195,8 @@ void show_rec(int seq, struct efil_rec_hdr *rec_hdr)
+ 		show_addr("buf", map_to_sysmem(rec->buffer));
+ 		show_addr("mem", map_to_sysmem(rec->memory));
+ 		if (rec_hdr->ended) {
+-			show_addr("*buf",
+-				  (ulong)map_to_sysmem((void *)rec->e_buffer));
+-			show_addr("*mem",
+-				  (ulong)rec->e_memory);
++			show_addr("*buf", (ulong)map_to_sysmem(rec->e_buffer));
++			show_addr("*mem", (ulong)rec->e_memory);
+ 			show_ret(rec_hdr->e_ret);
+ 		}
+ 	}
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index f516d001747..3556c4d199c 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -11,6 +11,7 @@ obj-y += abuf.o
+ obj-y += alist.o
+ obj-$(CONFIG_EFI_LOADER) += efi_device_path.o
+ obj-$(CONFIG_EFI_SECURE_BOOT) += efi_image_region.o
++obj-$(CONFIG_EFI_LOG) += efi_log.o
+ obj-y += hexdump.o
+ obj-$(CONFIG_SANDBOX) += kconfig.o
+ obj-y += lmb.o
+diff --git a/test/lib/efi_log.c b/test/lib/efi_log.c
 new file mode 100644
-index 00000000000..5eca4079f82
+index 00000000000..414b7081bd9
 --- /dev/null
-+++ b/doc/usage/cmd/efidebug.rst
-@@ -0,0 +1,109 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright 2024 Google LLC
-+.. Written by Simon Glass <sjg@chromium.org>
++++ b/test/lib/efi_log.c
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2024 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
 +
-+.. index::
-+   single: efidebug (command)
++#include <efi_log.h>
++#include <mapmem.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+efidebug command
-+================
++/* basic test of logging */
++static int lib_test_efi_log_base(struct unit_test_state *uts)
++{
++	void **buf = map_sysmem(0x1000, 0);
++	u64 *addr = map_sysmem(0x1010, 0);
++	int ofs1, ofs2;
 +
-+Synopsis
-+--------
++	ut_assertok(efi_log_reset());
 +
-+::
++	ofs1 = efi_logs_testing(EFI_LOG_TEST0, 123, &buf[0], &addr[0]);
 +
-+    efidebug log
++	ofs2 = efi_logs_testing(EFI_LOG_TEST1, 456, &buf[1], &addr[1]);
 +
-+Description
-+-----------
++	/* simulate an EFI call setting the return values */
++	addr[0] = 0x100;
++	buf[0] = map_sysmem(0x1100, 0);
++	addr[1] = 0x200;
++	buf[1] = map_sysmem(0x1200, 0);
 +
-+The *efidebug* command provides access to debugging features for the EFI-loader
-+subsystem.
++	ut_assertok(efi_loge_testing(ofs2, EFI_LOAD_ERROR));
++	ut_assertok(efi_loge_testing(ofs1, EFI_SUCCESS));
 +
-+Only one of the subcommands are documented at present.
++	ut_assertok(efi_log_show());
++	ut_assert_nextline("EFI log (size 98)");
++	ut_assert_nextline(
++		"  0      testing test0 int 7b/123 buf 1000 mem 1010 *buf 1100 *mem 100 ret OK");
++	ut_assert_nextline(
++		"  1      testing test1 int 1c8/456 buf 1008 mem 1018 *buf 1200 *mem 200 ret load");
++	ut_assert_nextline("2 records");
++	ut_assert_console_end();
 +
-+efidebug log
-+~~~~~~~~~~~~
++	unmap_sysmem(buf);
++	unmap_sysmem(addr);
 +
-+This shows a log of EFI boot-services calls which have been handled since U-Boot
-+started. This can be useful to see what the app is doing, or even what U-Boot
-+itself has called.
-+
-+
-+Example
-+-------
-+
-+This shows checking the log, then using 'efidebug tables' to fully set up the
-+EFI-loader subsystem, then checking the log again::
-+
-+    => efidebug log
-+    EFI log (size 158)
-+    0   alloc_pool bt-data size 33/51 buf 7fffd8448ad0 *buf 7c20010 ret OK
-+    1  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a80 *mem 7c20000 ret OK
-+    2   alloc_pool bt-data size 60/96 buf 7fffd8448ac0 *buf 7c1f010 ret OK
-+    3  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a60 *mem 7c1f000 ret OK
-+    4   alloc_pool bt-data size 60/96 buf 7fffd8448ac0 *buf 7c1e010 ret OK
-+    5  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a60 *mem 7c1e000 ret OK
-+    6 records
-+    => efidebug tables
-+    efi_var_to_file() Cannot persist EFI variables without system partition
-+    0000000017bfc010  36122546-f7ef-4c8f-bd9b-eb8525b50c0b  EFI Conformance Profiles Table
-+    0000000017bd4010  b122a263-3661-4f68-9929-78f8b0d62180  EFI System Resource Table
-+    0000000017bd8010  1e2ed096-30e2-4254-bd89-863bbef82325  TCG2 Final Events Table
-+    0000000017bd6010  eb66918a-7eef-402a-842e-931d21c38ae9  Runtime properties
-+    0000000008c49000  8868e871-e4f1-11d3-bc22-0080c73c8881  ACPI table
-+    0000000018c5b000  f2fd1544-9794-4a2c-992e-e5bbcf20e394  SMBIOS3 table
-+    => efidebug log
-+    EFI log (size a20)
-+    0   alloc_pool bt-data size 33/51 buf 7fffd8448ad0 *buf 7c20010 ret OK
-+    1  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a80 *mem 7c20000 ret OK
-+    2   alloc_pool bt-data size 60/96 buf 7fffd8448ac0 *buf 7c1f010 ret OK
-+    3  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a60 *mem 7c1f000 ret OK
-+    4   alloc_pool bt-data size 60/96 buf 7fffd8448ac0 *buf 7c1e010 ret OK
-+    5  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448a60 *mem 7c1e000 ret OK
-+    6  alloc_pages any-pages rt-data pgs 20/32 mem 7fffd8448838 *mem 7bfe000 ret OK
-+    7   alloc_pool rt-data size 60/96 buf 7fffd84487e0 *buf 7bfd010 ret OK
-+    8  alloc_pages any-pages rt-data pgs 1 mem 7fffd8448780 *mem 7bfd000 ret OK
-+    9   alloc_pool rt-data size 180/384 buf 56f190ffd890 *buf 7bfc010 ret OK
-+    10  alloc_pages any-pages rt-data pgs 1 mem 7fffd8448800 *mem 7bfc000 ret OK
-+    11   alloc_pool bt-data size 4 buf 7fffd8448840 *buf 7bfb010 ret OK
-+    12  alloc_pages any-pages bt-data pgs 1 mem 7fffd84487f0 *mem 7bfb000 ret OK
-+    13   alloc_pool bt-data size 10/16 buf 7fffd8448728 *buf 7bfa010 ret OK
-+    14  alloc_pages any-pages bt-data pgs 1 mem 7fffd84486d0 *mem 7bfa000 ret OK
-+    15   alloc_pool bt-data size 60/96 buf 7fffd84487e0 *buf 7bf9010 ret OK
-+    16  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448780 *mem 7bf9000 ret OK
-+    17   alloc_pool bt-data size 10000/65536 buf 56f19100fae0 *buf 7be8010 ret OK
-+    18  alloc_pages any-pages bt-data pgs 11/17 mem 7fffd84487d0 *mem 7be8000 ret OK
-+    19   alloc_pool acpi-nvs size 10000/65536 buf 56f19100fae8 *buf 7bd7010 ret OK
-+    20  alloc_pages any-pages acpi-nvs pgs 11/17 mem 7fffd84487d0 *mem 7bd7000 ret OK
-+    21   alloc_pool bt-data size 60/96 buf 7fffd84487d0 *buf 7bd6010 ret OK
-+    22  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448770 *mem 7bd6000 ret OK
-+    23   alloc_pool rt-data size 8 buf 7fffd8448818 *buf 7bd5010 ret OK
-+    24  alloc_pages any-pages rt-data pgs 1 mem 7fffd84487c0 *mem 7bd5000 ret OK
-+    25   alloc_pool bt-data size 8 buf 7fffd8448360 *buf 7bd4010 ret OK
-+    26  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448160 *mem 7bd4000 ret OK
-+    27   alloc_pool bt-data size f0/240 buf 7fffd8448378 *buf 7bd3010 ret OK
-+    28  alloc_pages any-pages bt-data pgs 1 mem 7fffd84482d0 *mem 7bd3000 ret OK
-+    29    free_pool buf 7bd3010 ret OK
-+    30   free_pages mem 7bd3000 pag 1 ret OK
-+    31   alloc_pool bt-data size 60/96 buf 7fffd84482d8 *buf 7bd3010 ret OK
-+    32  alloc_pages any-pages bt-data pgs 1 mem 7fffd8448280 *mem 7bd3000 ret OK
-+    33    free_pool buf 7bfa010 ret OK
-+    34   free_pages mem 7bfa000 pag 1 ret OK
-+    35   alloc_pool bt-data size f0/240 buf 7fffd8448380 *buf 7bfa010 ret OK
-+    36  alloc_pages any-pages bt-data pgs 1 mem 7fffd84482d0 *mem 7bfa000 ret OK
-+    37    free_pool buf 7bfa010 ret OK
-+    38   free_pages mem 7bfa000 pag 1 ret OK
-+    39    free_pool buf 7bd4010 ret OK
-+    40   free_pages mem 7bd4000 pag 1 ret OK
-+    41   alloc_pool bt-data size 61/97 buf 7fffd8448810 *buf 7bfa010 ret OK
-+    42  alloc_pages any-pages bt-data pgs 1 mem 7fffd84487c0 *mem 7bfa000 ret OK
-+    43   alloc_pool bt-data size 60/96 buf 7fffd8448800 *buf 7bd4010 ret OK
-+    44  alloc_pages any-pages bt-data pgs 1 mem 7fffd84487a0 *mem 7bd4000 ret OK
-+    45   alloc_pool bt-data size 60/96 buf 7fffd8448800 *buf 7bd2010 ret OK
-+    46  alloc_pages any-pages bt-data pgs 1 mem 7fffd84487a0 *mem 7bd2000 ret OK
-+    47   alloc_pool bt-data size 60/96 buf 7fffd8448810 *buf 7bd1010 ret OK
-+    48  alloc_pages any-pages bt-data pgs 1 mem 7fffd84487b0 *mem 7bd1000 ret OK
-+    49 records
-+    =>
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index cb7a23f1170..d070b9fba1f 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -60,6 +60,7 @@ Shell commands
-    cmd/echo
-    cmd/efi
-    cmd/eficonfig
-+   cmd/efidebug
-    cmd/env
-    cmd/event
-    cmd/exception
++	return 0;
++}
++LIB_TEST(lib_test_efi_log_base, UTF_CONSOLE);
 -- 
 2.34.1
 
