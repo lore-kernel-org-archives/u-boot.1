@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54AC4D78321
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 14:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E82D78321
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 14:11:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70AFF8919F;
-	Mon,  2 Dec 2024 15:09:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C20F89183;
+	Mon,  2 Dec 2024 15:11:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KHGKrm0x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f4pm7HAZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E97F88BFB; Mon,  2 Dec 2024 15:09:27 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA0C78919F; Mon,  2 Dec 2024 15:11:53 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 516BA8914C
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 15:09:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 489E289100
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 15:11:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id EA2A5A40DA3;
- Mon,  2 Dec 2024 14:07:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 70666C4CED1;
- Mon,  2 Dec 2024 14:09:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733148562;
- bh=QHSeCb8w02Zu+XfB76CIckqpiN3P69pGa88IA4W4Qps=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KHGKrm0xUJiRN7Z5U+YnOCYnAJwWK3vW+9kpdsr6u/PXFzWuVv88qiCvKlITaHQXf
- r9pbSka38LtKIXDA6Ax4JOMNRKVHPmygNO5h/VsgUbZLFeYViPWKgsxlKuhniXzFZA
- WvWvZWWZrDCJiPMVHYct6yNImHIG+Y1lexv5aw6P8v9W1aHdDPzPFaSAVUN2A/jGAo
- FONOzkutXZVxmvuyA9etbbHkazfSJzFP2+RyY2gEFYlwDXF0pz9UKOzC/WhuOicpMC
- eER676mejfN6vd9ZzHN712NX80lvlA98HW3rSzVBQsibmAzCYt38MDzl/VLkwZQC2U
- cUEC2fcUBIycg==
-Message-ID: <2b705d26-2ff0-47a2-8db6-d8561a24b567@kernel.org>
-Date: Mon, 2 Dec 2024 16:09:15 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6ef6a67834fso20488407b3.2
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 06:11:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733148710; x=1733753510; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qg9gkzuIvhDpAeEuuQYmozRPaAjMRHM6x5QhKkh+MyI=;
+ b=f4pm7HAZ8A2Mx1M1vjeKBWQRa7Dk++wSJkCNbaid3dVa5cT+hVjOftBqDvI8y2ir4k
+ Cw0Qgqus2HhY8OQogLuBBJQotjLHvAYGVD4mH41xp+PH9LfeQEagA7YfmFtIcPed29oX
+ hGlqyyqJs/uwBo6tWs+Aoked57q+pKrJ3xPaFmM1Bu5HMFI//g9JJApdoMUlk4FsVaQd
+ Ny0FsE02GNWyt6x4JHwC7VFjW6SUlcFzZkS/9gAzRYCoAJ/Y6k1ZOLY/3hOt5WxWYAfm
+ LoAas60ad8HQFwe7Pks53STqSqX8mBq+WwPDURhcLDN+y9Mt9+RjAqLF0RJ44fI/r64r
+ X0Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733148710; x=1733753510;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Qg9gkzuIvhDpAeEuuQYmozRPaAjMRHM6x5QhKkh+MyI=;
+ b=v0aTc3zUGIsR82Xuo3D0oJdr2V3NdJcVcxAM8EYwKtBzpw+YkfaMjwI80Yp8G+LV3o
+ seqn8le1nZQYH35XkRtM7d0sYBZjRxdw+IRyCSqYDa57pztwobVGop1nW5EqpYLGYl41
+ gckbd0QVMmuxn17aDM5g+OnxpaOaI0ksdLR7HTy+ihBfwipWJw3c3E+EKvRKIiHPxMw4
+ TJwhxTIZFfPKRYbapxeilMRDExVHoUHCY8Fna5zlD8e3rQjxciTOC7qJW4FDZTEPaedq
+ DFDf/A2L60F5oLN1pRGW571TMsk6EAww2VC4bxCb4CZmoIOkdSzPEUX9GIaleayzSbHY
+ 3E8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCFZ9kv/yBpmc7tl2iFTH4LfI8P0KnAIrvNsZfyvSuBHjuu3tmIkrOOmbNO5Kvw80Cr6X8B54=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/6h0O9tEJhG77RsRLikZnNDKUyRMVm5nPwoMjvYx7nxUqvUyp
+ ltrxFVHi9u4YvhyVlTUPaYAqabbST+JIkNi6aThujfQMUHb9jn2UrRRG0FP0ySgE/MWJh1EQCDt
+ DO8IKQ1Jmei52uKPXLzqT5jh0EBiNV1AMgCGPYQ==
+X-Gm-Gg: ASbGnctzlbx/1mgxDOQgRjZjtuC/JLBW/SUkt62KVlsU3BBpNf8plPJNOYBFIzLVKW7
+ rYuw5Wqqe6bkNhn7h+jHyJl9pq0esito=
+X-Google-Smtp-Source: AGHT+IH+K0HMdREfXKgYhUuw0ZV+nwgxbmRRcZEfEZ2Ar30XIUQ6o9jBbLz1CKVt6Z0ikMQYXxn5m+ifKHDmrMcTlwc=
+X-Received: by 2002:a05:690c:4a04:b0:6ef:86db:4356 with SMTP id
+ 00721157ae682-6ef86db43dbmr55589277b3.18.1733148704253; Mon, 02 Dec 2024
+ 06:11:44 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] usb: dwc3-generic: set "mode" based on caller of
- dwc3_generic_probe()
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: vigneshr@ti.com, bb@ti.com, trini@konsulko.com, marex@denx.de,
- hnagalla@ti.com, mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, jan.kiszka@siemens.com, jonas@kwiboo.se,
- j-humphreys@ti.com, nm@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, srk@ti.com
-References: <20241126120322.1760862-1-s-vadapalli@ti.com>
- <20241126120322.1760862-2-s-vadapalli@ti.com>
- <f4c4cb82-0e8c-49a1-aff0-2c539f15047d@kernel.org>
- <252751ec-2000-43bd-a9e3-fc0b53362baf@ti.com>
- <84c24040-5311-469f-8ba7-470280604245@kernel.org>
- <i7kcsazysfv5brn5bzgh5yypgr7hl2qndd5aqdrgbkb6ztmvxo@qwuxqa7vm2nt>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <i7kcsazysfv5brn5bzgh5yypgr7hl2qndd5aqdrgbkb6ztmvxo@qwuxqa7vm2nt>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20241128114926.458728-1-ilias.apalodimas@linaro.org>
+ <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
+In-Reply-To: <58f70517-8ed4-40df-ab36-7f5595ff1e71@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 2 Dec 2024 16:11:08 +0200
+Message-ID: <CAC_iWj+wTMO8ceVy8b_nx2vQO+srfuK1JsdvMXc_pn_rL7VtFQ@mail.gmail.com>
+Subject: Re: [PATCH] lmb: Fix the allocation of overlapping memory areas with
+ !LMB_NONE
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,136 +93,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 2 Dec 2024 at 15:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 28.11.24 12:49, Ilias Apalodimas wrote:
+> > At the moment the LMB allocator will return 'success' immediately on two
+> > consecutive allocations if the second one is smaller and the flags match
+> > without resizing the reserved area.
+> >
+> > This is problematic for two reasons, first of all the new updated
+> > allocation won't update the size and we end up holding more memory than
+> > needed, but most importantly it breaks the EFI SCT tests since EFI
+> > now allocates via LMB.
+> >
+> > More specifically when EFI requests a specific address twice with the
+> > EFI_ALLOCATE_ADDRESS flag set, the first allocation will succeed and
+> > update the EFI memory map. Due to the LMB behavior the second allocation
+> > will also succeed but the address ranges are already in the EFI memory
+> > map due the first allocation. EFI will then fail to update the memory map,
+> > returning EFI_OUT_OF_RESOURCES instead of EFI_NOT_FOUND which break EFI
+> > conformance.
+> >
+> > So let's remove the fast check with is problematic anyway and leave LMB
+> > resize and calculate address properly. LMB will now
+> > - try to resize the reservations for LMB_NONE
+> > - return -1 if the memory is not LMB_NONE and already reserved
+> >
+> > The LMB code needs some cleanup in that part, but since we are close to
+> > 2025.01 do the easy fix and plan to refactor it later.
+> > Also update the dm tests with the new behavior.
+> >
+> > Fixes: commit 22f2c9ed9f53 ("efi: memory: use the LMB API's for allocating and freeing memory")
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   lib/lmb.c      |  9 ---------
+> >   test/lib/lmb.c | 22 +++++++++++++++++++++-
+> >   2 files changed, 21 insertions(+), 10 deletions(-)
+> >
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 14b9b8466ff2..3a765c11bee6 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -201,15 +201,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+> >               phys_addr_t rgnbase = rgn[i].base;
+> >               phys_size_t rgnsize = rgn[i].size;
+> >               phys_size_t rgnflags = rgn[i].flags;
+> > -             phys_addr_t end = base + size - 1;
+> > -             phys_addr_t rgnend = rgnbase + rgnsize - 1;
+> > -             if (rgnbase <= base && end <= rgnend) {
+> > -                     if (flags == rgnflags)
+> > -                             /* Already have this region, so we're done */
+> > -                             return 0;
+> > -                     else
+> > -                             return -1; /* regions with new flags */
+> > -             }
+> >
+> >               ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+> >               if (ret > 0) {
+> > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> > index c917115b7b66..bc44dd21192f 100644
+> > --- a/test/lib/lmb.c
+> > +++ b/test/lib/lmb.c
+> > @@ -529,6 +529,26 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
+> >       ret = lmb_add(ram, ram_size);
+> >       ut_asserteq(ret, 0);
+> >
+> > +     /* Try to allocate a page twice */
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> > +     ut_asserteq(b, alloc_addr_a);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> > +     ut_asserteq(b, 0);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> > +     ut_asserteq(b, alloc_addr_a);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x2000, LMB_NONE);
+> > +     ut_asserteq(b, alloc_addr_a);
+> > +     ret = lmb_free(alloc_addr_a, 0x2000);
+> > +     ut_asserteq(ret, 0);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> > +     ut_asserteq(b, alloc_addr_a);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NONE);
+> > +     ut_asserteq(b, 0);
+> > +     b = lmb_alloc_addr_flags(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
+> > +     ut_asserteq(b, 0);
+> > +     ret = lmb_free(alloc_addr_a, 0x1000);
+> > +     ut_asserteq(ret, 0);
+> > +
+> >       /*  reserve 3 blocks */
+> >       ret = lmb_reserve(alloc_addr_a, 0x10000);
+> >       ut_asserteq(ret, 0);
+> > @@ -734,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+> >
+> >       /* reserve again, same flag */
+> >       ret = lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
+> > -     ut_asserteq(ret, 0);
+> > +     ut_asserteq(ret, 0xffffffff);
+>
+> lmb_reserve_flags() should return a long value < 0 on failure. Why do
+> you expect 0xffffffff?
 
+lmb_alloc_addr_flags has  a phys_addr_t (unsigned long), I can rewrite
+this as ut_asserteq(ret, -1); which is probably correct for 32/64bit
 
-On 02/12/2024 07:42, Siddharth Vadapalli wrote:
-> On Fri, Nov 29, 2024 at 02:28:36PM +0200, Roger Quadros wrote:
->>
->>
->> On 28/11/2024 19:20, Siddharth Vadapalli wrote:
-> 
-> [...]
-> 
->>> USB DFU boot utilizes this driver when the "dr_mode" is set to "otg" in
->>> the device-tree for AM62A. This driver is invoked both for the host and
->>> device commands corresponding to USB. I came up with this patch while
->>> trying to enable USB DFU boot on AM62A with "dr_mode" as "otg" in the
->>> device-tree. Additionally, USB DFU boot works on AM62A with the change
->>> made by this patch and it doesn't work without this change. I have
->>> traced the call sequence to see that the driver is probed and have come
->>> up with the change performed in this patch on the basis of this observation.
->>>
->>
->> Although the glue driver portion of the dwc3-generic driver is not used by AM62
->> it still uses the generic_probe() portion via
->> U_BOOT_DRIVER(dwc3_generic_host) and U_BOOT_DRIVER(dwc3_generic_peripheral)
->>
->> here is the dm tree output on am62-sk after executing "usb start" command.
->>
->>
->>  simple_bus    5  [ + ]   dwc3-am62             |   |-- dwc3-usb@f900000
->>  usb_gadget    0  [   ]   dwc3-generic-periphe  |   |   |-- usb@31000000
->>  usb           0  [ + ]   xhci-dwc3             |   |   `-- usb@31000000
->>  usb_hub       0  [ + ]   usb_hub               |   |       `-- usb_hub
->>  simple_bus    6  [ + ]   dwc3-am62             |   |-- dwc3-usb@f910000
->>  usb           1  [   ]   dwc3-generic-host     |   |   |-- usb@31100000
->>  usb           1  [ + ]   xhci-dwc3             |   |   `-- usb@31100000
->>  usb_hub       1  [ + ]   usb_hub               |   |       `-- usb_hub
->>
->> what is strange is that even though usb@31000000 is configured as
->> "peripheral" (in k3-am625-sk-u-boot.dtsi), xhci-dwc3 and usb_hub drivers
->> are still initialized for it.
-> 
-> CONFIG_OF_UPSTREAM is enabled in am62x_evm_a53_defconfig. So dr_mode
-> might be "otg" as specified in:
-> dts/upstream/src/arm64/ti/k3-am62-main.dtsi
-
-Not it is not "otg". it is "peripheral". I verified from the generated 
-u-boot.dtb
-
-Isn't k3-am625-sk-u-boot.dtsi still used even if it is CONFIG_OF_UPSTREAM?
-
-> I'm not sure about this however. Additionally, this series isn't required
-> for AM62. DFU Boot works on AM62 without this series as well. This series
-> is required for AM62A.
-
-It works on am62-sk because USB mode is forced to "peripheral" in
-k3-am625-sk-u-boot.dtsi.
-
-That hack can be removed once your series fixes it the right way.
-
-> 
-> [...]
-> 
->>> I didn't test the case where both are used. I validated that peripheral
->>> mode works across various stages of boot with "otg" mode via USB DFU
->>> boot. This isn't the case without this patch.
->>>
->>> If we forget the reason that this patch is introduced and take a moment
->>> to analyze the existing code prior to this patch, we see that:
->>> 1. Both dwc3_generic_peripheral_probe() and dwc3_generic_host_probe()
->>> invoke dwc3_generic_probe().
->>> 2. dwc3_generic_probe() sets the role based on the role specified in the/
->>> device-tree and not what the caller wants the role to be.
->>> This seems to be strange to me considering that dwc3_generic_probe()
->>> simply proceeds to configure without comparing the role supported by the
->>> platform with the role requested by the caller.
->>>
->>> So even if we entirely forget the "otg" fix being attempted by this
->>> patch, the same patch is fixing something else i.e. ensuring that
->>> dwc3_generic_probe() does what the caller wants it to do by using the
->>> role that the caller expects. Isn't it incorrect that the existing code
->>> might end up with:
->>> a) Caller being dwc3_generic_host_probe() with dr_mode being set to
->>> "peripheral" within dwc3_generic_probe() based on the device-tree and
->>> proceeding to configure the controller
->>
->> Maye this is the reason why host controller is initialized for peripheral
->> only port in the dm tree output I listed above. This needs to be fixed.
-> 
-> Sure, I will post a patch to do the following:
-> If dr_mode specified in device-tree is "host" then return -EINVAL within
-> dwc3_generic_probe() if the caller is "dwc3_generic_peripheral_probe()".
-> Similarly, if dr_mode specified in the device-tree is "peripheral" then
-> return -EINVAL within dwc3_generic_probe() if the caller is
-> "dwc3_generic_host_probe()". When dr_mode is specified as "otg" in the
-> device-tree, then configure the mode based on the caller of
-> dwc3_generic_probe().
-> 
-> Please let me know if the above implementation is acceptable.
-
-Looks OK to me.
-> 
->>> b) Caller being dwc3_generic_peripheral_probe() with dr_mode being set
->>> to "host" within dwc3_generic_probe() based on the device-tree and
->>> proceeding to configure the controller.
->>
->> This too needs to be fixed.
->>
->>> Shouldn't this inconsistency be fixed? This patch fixes that by setting
->>> dr_mode to what the caller expects. However, based on your suggestion, I
->>> agree that there should have been a check within dwc3_generic_probe() to
->>> ensure that the platform supports what the caller is requesting. I will
->>> update this patch by adding the check.
->>
->> Apart from the platform supported mode check when not "otg", if platform
->> supports "otg" we need to check and prevent role setting if hardware is
->> not in the correct state based on connected USB cable.
->> i.e. if host mode cable is used then prevent it from running as a peripheral.
->> if peripheral mode cable is used then prevent it from running as a host.
->> (based on ID status?)
-> 
-> Yes, I agree that using the ID status to determine the role is accurate.
-> At the same time, I think that in addition to this, if the user runs a
-> command corresponding to "peripheral" mode of operation with the ID
-> status indicating "host", then it will be better to take this
-> inconsistency into account and error out rather than simply proceeding
-> to configure on the basis of the ID status. If you have any feedback,
-> kindly let me know.
-
-The approach looks OK to me.
-
--- 
-cheers,
--roger
-
+Cheers
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+> >       ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
+> >                  0, 0, 0, 0);
+> >
+>
