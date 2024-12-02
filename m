@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F368D78336
-	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 16:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAEED78333
+	for <u-boot@archiver.kernel.org>; Mon,  2 Dec 2024 16:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7D9A88E3F;
-	Mon,  2 Dec 2024 17:24:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 41C2F88F68;
+	Mon,  2 Dec 2024 17:49:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fCXQGvWC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LSjtFiXY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 562EB88E63; Mon,  2 Dec 2024 17:24:00 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 34DA888FAB; Mon,  2 Dec 2024 17:49:03 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B3A888DE6
- for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 17:23:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE2D488A1C
+ for <u-boot@lists.denx.de>; Mon,  2 Dec 2024 17:49:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hiagofranco@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-211fb27cc6bso35313725ad.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 08:23:57 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf6f367f97so5422444a12.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 08:49:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733156636; x=1733761436; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/WshIuQOPdNWZ4TAstBuIE+bSeZD+gVkrPtgGToDeSY=;
- b=fCXQGvWC8AyRVAmzhLilRVbm/tECc0rnP0KawkC9CbYELRw7KcIVoMnMnjazMO4nRo
- aV7Ivyzc92Ra6MCKkYr+rs6kJ327NTbZIaqSPMyj086uXthpYjP9Mxn5ed6K2HVTTe79
- rPcWEzu4YhcEwPYpXkAwzgQgDY1c0hOJqi04bMbmZEytu53aNIkQ5DJ2ry4FpUIPsgd4
- T02PaGiELW/ejftWHNhFLQtC3tTlZn/bsiaWVoQENNrQF8qqkKhbaXBSq7K+LzQDHkYh
- aamMGMb1kCxB+8/dvafCh2H5hqJqCp9V6VDuHq12xj5YzE87r3HrmDeZLs7MuNFn/MOY
- WCZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733156636; x=1733761436;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1733158140; x=1733762940; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/WshIuQOPdNWZ4TAstBuIE+bSeZD+gVkrPtgGToDeSY=;
- b=TVmlfyoI83pcXa5tdgEO0oX7k/YtLSgE7Y2e99S1BqbMKzzFg00eT3yaHZsiccYwF+
- rjeR4fMHnw7szmdZxIW88RwHvlv13kErK3PvVP3UBNQDz6PMYJqNoAZ1HuhW+6qGI7lp
- ItVntHxcZdZTd/KiTxbSBsjc22DQuesYbUmb6soT9r23fcUv4LXarcY7cxlsQZt8M6C+
- Rq7lUV02omTZlsyJbPLWkiNn2Q/a9P/AUmimhvO8SqmO1zAp95bynM1W/8J39sQ5BMTf
- RyjDNFGvQR9zppTURog+R/4XBfzXEsb1hoAtmm6K0sF0eDgvwqhNMn0gE3Ct7YHl+QDS
- pBRw==
+ bh=Vt0PnmkIMphiTjBL+N3H2AOaivO7CXTNCjhU6ozjhbo=;
+ b=LSjtFiXYaetNNj5yitJuDKRAajbNopBygwWU07yvN+XkhMLZfNzL0RJhDgBMdBBxPL
+ hxBuq+Buc00DVZeTnp0HdDQc2LledPJTfLb3aJaNDUN31Vq/j1zH76Uf7u0czJyRx1oi
+ 6N+rpejlpov/bUHeWy3TdKJ79hi6SR70v47Z88FHj2jWjGeKPvFNp3CWTRC/7LK28eiw
+ Ro5WEMW6+7AK4/3IeWBgjzUefzmCOwct7TEohZhugFsW9At3uP+Ve3q1cd3K1y7FLnhS
+ slRhvFibrNjBxr72sYTF4r2Gi5ZYosr+qtwumXR+1mkTuar19837h4zMQ9QqMFJAiTt3
+ fAFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733158140; x=1733762940;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Vt0PnmkIMphiTjBL+N3H2AOaivO7CXTNCjhU6ozjhbo=;
+ b=d2+u3BsaaYUJEtVl+Zo9K3cTqNXf1R/9UKiXmRHqwmPny31X0Rmp4sq7BzbTs1hSet
+ F3+zrBL9w8xfiy/bzA7itQv7mWFxE5Env2a+u7D3JkZz5Qb/mZ1RpctfvJhS77dwA8cR
+ MVybLY/UaMMsecBK2AeKIYS+TD22hqCkTjbnduR+dUWvgAVtX1M7Y1OwQsUXU/cNBmfb
+ 5/lERl1+4tJb0LLFhGfw2Oyc3eOVCdOwYZUjhUxPj0Hf4fm9w/54iJ0ANNLuUZKi3QHl
+ vbLO1SI2GEKk+zEeE1DyTnp+aGweErs4nKAz1Geos3MRSQgkRHbczAH0l1R1+WNC7DlP
+ DtTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWHc6onFdEKT5801dQlZSTEU+ZdIhMV78lvpGIXj6K/7++DtOs7TcrZVjPvu2wabbTGDkZC53k=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMuqjzu3/q9d9bbtlC/gWMg53uSyAPgNfnmvOnIJp1FQoZKoWn
- u0hvfANKjELUqXSW8yju4X0He5UT3q5Bb2FbgQ8oSpAJ8YqaniVg
-X-Gm-Gg: ASbGncv73s0zU0i5DCGL2YCpuKCSU4b2r10sIaYAj5ZXxdAslaKQozWqy7rzH6LW4h6
- pi/QPL5A9tLYLNtTYAu6jDZ8GwH/r8M9OdLUcnUo0oWlDoy4ZH9w4Gk05DJwwPFR1OFLQXSTo+N
- gDRsl9zVfs+UK2VLSd1d7Kui3u5ckSOmknZfJiHHLKF/QVpTnfQbjBLrgVxFPKQVKWV+OdZvwNJ
- UqPsibY36bOcfzXf1OIm+dZAkovQKmzlpqqyG0LxJSl6PWX
-X-Google-Smtp-Source: AGHT+IHHF57Tot60y0hhRb+WfLHNilx5uoAtpd0ytrFNYKyEN2KQ9tb6DUV2dlRjD0F087rLlFHhbA==
-X-Received: by 2002:a17:902:d4c7:b0:215:86c2:3fe0 with SMTP id
- d9443c01a7336-21586c242f4mr77051525ad.38.1733156636404; 
- Mon, 02 Dec 2024 08:23:56 -0800 (PST)
-Received: from hiago-nb ([67.159.246.222]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215219c2e31sm79342545ad.251.2024.12.02.08.23.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 08:23:55 -0800 (PST)
-Date: Mon, 2 Dec 2024 13:23:52 -0300
-From: Hiago De Franco <hiagofranco@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de,
- Hiago De Franco <hiago.franco@toradex.com>
-Subject: Re: [PATCH] verdin-am62: fix FASTBOOT_BUF_ADDR and FASTBOOT_BUF_SIZE
-Message-ID: <20241202162352.adgpgpxlegpypq72@hiago-nb>
-References: <20241129151257.90607-1-hiagofranco@gmail.com>
- <20241129160925.GL3600562@bill-the-cat>
+ AJvYcCX0zeu6v7Ooy2JEzNOdRhVncGtcxiDT+HmFmXEuLDIBH2xnCNOALZuevtDpuEv1eqMU9fSdOyA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvY4pW96bpZG1ebHuyc72CKNodB+x/mTi5zNxZYpVMXWwWnmNZ
+ VT6vexFaLpZinsDx5dqIWL6WnRillMuDGNkzjb8Eat3vZurzmEDRmoJRrXrpd6Sei0t+df/UeMm
+ 4g66ST7S9/0r5L5RBTlyiL9iSH+H0g8tDrgdo2A==
+X-Gm-Gg: ASbGncvRaKzO0Zh4dePPK70et2YGFjzT3N5F4bSIOjQy1Ir5W5T8xZymXBKGPyxWJp8
+ PAigcD0n16/T3cF3HlT2JbShx+WkDO8qc
+X-Google-Smtp-Source: AGHT+IElocQhbDg16yPB2qFRilDOjjor8MCQOgYX5A3QdG0v9UTR19PZnn9VTJD48dfWrL7h20C7NZJuc4ESr18Rr1w=
+X-Received: by 2002:a05:6402:3219:b0:5d0:b74f:6422 with SMTP id
+ 4fb4d7f45d1cf-5d0b74f66b8mr17219894a12.32.1733158140335; Mon, 02 Dec 2024
+ 08:49:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20241129160925.GL3600562@bill-the-cat>
+References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
+ <mvmfrn6mh4j.fsf@suse.de>
+ <CANV2PTNmUp013xDT1bqKYcyo=aP4NXtLN_u01pXmdNM417RygQ@mail.gmail.com>
+In-Reply-To: <CANV2PTNmUp013xDT1bqKYcyo=aP4NXtLN_u01pXmdNM417RygQ@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 2 Dec 2024 22:18:49 +0530
+Message-ID: <CADg8p971xk8qkeXnM6fSK0iy5UfSd5x8ekNwBL3DAt+hhSM0qA@mail.gmail.com>
+Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
+ bank
+To: E Shattow <lucent@gmail.com>
+Cc: Andreas Schwab <schwab@suse.de>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,78 +95,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 29, 2024 at 10:09:25AM -0600, Tom Rini wrote:
-> On Fri, Nov 29, 2024 at 12:12:57PM -0300, Hiago De Franco wrote:
-> 
-> > From: Hiago De Franco <hiago.franco@toradex.com>
-> > 
-> > The current value of CONFIG_FASTBOOT_BUF_ADDR is incorrect for hardware
-> > with 512MB and 1GB of RAM. The RAM address ranges for these devices are:
-> > 
-> > - 512MB:
-> >   - Start: 0x80000000
-> >   - End:   0xA0000000
-> > - 1GB:
-> >   - Start: 0x80000000
-> >   - End:   0xC0000000
-> > 
-> > The current buffer address makes fastboot downloads work only on
-> > hardware with 2GB of RAM.
-> > 
-> > To fix this issue:
-> > 1. Lower CONFIG_FASTBOOT_BUF_ADDR to 0x80080000. This places the buffer
-> >    near the beginning of RAM with a 512KB offset, as starting at exactly
-> >    0x80000000 conflicts with the ATF load address. Following
-> >    K3_ATF_LOAD_ADDR configuration, ATF is loaded at 0x80000000:
-> > 
-> >   config K3_ATF_LOAD_ADDR
-> >     hex "Load address of ATF image"
-> >     default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
-> >     default 0x70000000
-> >     help
-> >       The load address for the ATF image. This value is used to build the
-> >       FIT image header that places ATF in memory where it will run.
-> > 
-> > 2. Reduce the size of the download buffer to 128MB, avoiding overlaps
-> >    with RAMDISK_ADDR_R. This is a good enough value for individual
-> >    downloads.
-> > 
-> > Theses changes make fastboot downloads work with 512MB and 1GB devices.
-> > 
-> > Fixes: defe30a78b76 ("verdin-am62: add DFU, USB and UUU fastboot support")
-> > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
-> > ---
-> >  configs/verdin-am62_a53_defconfig | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/configs/verdin-am62_a53_defconfig b/configs/verdin-am62_a53_defconfig
-> > index 49fb9790e295..6fa1a9d2c552 100644
-> > --- a/configs/verdin-am62_a53_defconfig
-> > +++ b/configs/verdin-am62_a53_defconfig
-> > @@ -122,8 +122,8 @@ CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
-> >  CONFIG_DMA_CHANNELS=y
-> >  CONFIG_TI_K3_NAVSS_UDMA=y
-> >  CONFIG_USB_FUNCTION_FASTBOOT=y
-> > -CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
-> > -CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
-> > +CONFIG_FASTBOOT_BUF_ADDR=0x80080000
-> > +CONFIG_FASTBOOT_BUF_SIZE=0x8000000
-> >  CONFIG_FASTBOOT_UUU_SUPPORT=y
-> >  CONFIG_TI_SCI_PROTOCOL=y
-> >  CONFIG_GPIO_HOG=y
-> 
-> Why not 0x88200000 which is what CONFIG_SYS_LOAD_ADDR is?
+On Mon, 2 Dec 2024 at 19:16, E Shattow <lucent@gmail.com> wrote:
+>
+> Hi Sughosh, Andreas, et. al
+>
+> On Mon, Dec 2, 2024 at 3:58=E2=80=AFAM Andreas Schwab <schwab@suse.de> wr=
+ote:
+> >
+> > On Dez 02 2024, Sughosh Ganu wrote:
+> >
+> > > There are platforms which set the value of ram_top based on certain
+> > > restrictions that the platform might have in accessing memory above
+> > > ram_top, even when the memory region is in the same DRAM bank. So,
+> > > even though the LMB allocator works as expected, when trying to
+> > > allocate memory above ram_top, prohibit this by marking all memory
+> > > above ram_top as reserved, even if the said memory region is from the
+> > > same bank.
+> >
+> > This fixes the boot failure on the VisionFive2 board as reported in
+> > <mvm8qtnv310.fsf@suse.de>.
+> >
+> > Tested-by: Andreas Schwab <schwab@suse.de>
+> >
+> > --
+> > Andreas Schwab, SUSE Labs, schwab@suse.de
+> > GPG Key fingerprint =3D 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B=
+9D7
+> > "And now for something completely different."
+>
+> Echoing what Andreas finds in testing, this avoids the platform issue
+> with dw_mmc driver and the visionfive2 board support on 4GB Star64,
+> 4GB Mars CM Lite, and 8GB Mars CM Lite WiFi.
+>
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 14b9b8466ff..be168dfb8dc 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -615,6 +615,7 @@ static __maybe_unused void lmb_reserve_common_spl(v=
+oid)
+> >  void lmb_add_memory(void)
+> >  {
+> >   int i;
+> > + phys_addr_t bank_end;
+> >   phys_size_t size;
+> >   u64 ram_top =3D gd->ram_top;
+> >   struct bd_info *bd =3D gd->bd;
+> > @@ -628,6 +629,8 @@ void lmb_add_memory(void)
+> >
+> >   for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> >       size =3D bd->bi_dram[i].size;
+> > +     bank_end =3D bd->bi_dram[i].start + size;
+> > +
+>
+> Delete newline? Unless existing style is wrong here.
 
-We were downloading a file at this address, that is why we decided to
-not use it. However it is better to use SYS_LOAD_ADDR and then download
-this file to a different value.
+It's not about style, but the above two lines are more of an
+initialisation within the block, which is the reason for a newline
+here.
 
-Thanks Tom, I will send a v2.
+>
+> >       if (size) {
+> >           lmb_add(bd->bi_dram[i].start, size);
+> >
+> > @@ -639,6 +642,9 @@ void lmb_add_memory(void)
+> >           if (bd->bi_dram[i].start >=3D ram_top)
+> >               lmb_reserve_flags(bd->bi_dram[i].start, size,
+> >                         LMB_NOOVERWRITE);
+> > +         else if (bank_end > ram_top)
+> > +             lmb_reserve_flags(ram_top, bank_end - ram_top,
+> > +                       LMB_NOOVERWRITE);
+>
+> Please guard this somehow that it will be enabled per each platform
+> that needs it, and/or give warning when conditions this specific code
+> path is a workaround for are reached that are different than before
+> the patch. Any similar platform-specific memory addressing bug/quirk
+> having previously avoided a trigger will silently continue to work
+> here instead of getting documented; we should at least uncover these
+> assumptions.
 
-> 
-> -- 
-> Tom
+Instead of putting some check here, and complicating the code, I would
+say that the board maintainer would know why the ram_top has not been
+put at the top of DRAM memory -- if possible, the ram_top should be
+the highest possible DRAM address. So this is the responsibility of
+the board maintainer instead. Ideally, for a 64 bit machine, like the
+one where you hit this issue, there is no reason for the board to not
+use the highest possible DRAM address as ram_top, unless there is some
+issue, like accessing memory address above a certain value. So, this
+would not be an issue if the board is using the highest possible value
+of memory as ram_top, especially when it comes to a single DRAM bank.
 
-Cheers,
+>
+> In the theoretical situation where we are to just fix the visionfive2
+> mmc platform specific issue in the dw_mmc driver and not need this
+> workaround code anymore, there's not visibility for us to easily
+> diagnose if a similar assumption or previously un-triggered platform
+> quirk exists elsewhere. There's no warning, and no easy on/off config
+> option to test with and without. The memory rework commit 22f2c9ed9f53
+> is here a useful tool to break and bring attention to assumptions in
+> code and documentation.
 
-Hiago.
+Fixing the mmc driver issue may or may not be possible. And if this is
+indeed a fixable issue, then, after fixing the mmc driver, the
+subsequent change should also remove this restriction on the ram_top
+value, which will automatically take care of this restriction.
+
+-sughosh
+
+>
+> >       }
+> >   }
+> >  }
+>
+> CONFIG_EFI_LOADER_BOUNCE_BUFFER=3Dy added to visionfive2 config in
+> 6c791b6646c1 does not make sense to me as when I tested it did not
+> avoid the platform issue. Restricting the memory allocations is an
+> effective workaround to the visionfive2 platform issue. I leave that
+> to the experts if a revert is appropriate given that we have an
+> effective workaround now.
+>
+> Thank you Sughosh! This is (meanwhile until more comments and review)
+> a functional workaround.
+>
+> Tested-by: E Shattow <lucent@gmail.com>
