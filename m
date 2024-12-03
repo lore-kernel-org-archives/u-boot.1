@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37777E6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:23:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 934CEE6C5E4
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:23:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C060F89562;
-	Tue,  3 Dec 2024 01:23:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 26E818953B;
+	Tue,  3 Dec 2024 01:23:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cXiX8c84";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BH2LOiNg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93EB4895D7; Tue,  3 Dec 2024 01:23:21 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id D88D288A0A; Tue,  3 Dec 2024 01:23:39 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98768895B1
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:23:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E11AC895A9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:23:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5d0cfb9fecaso3783598a12.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:23:19 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aa520699becso800160966b.1
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:23:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185399; x=1733790199; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733185417; x=1733790217; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WZ0O7/kJaOI0fUiS2+Jtxgenj0UH2PBZrDJ0m7IBCa8=;
- b=cXiX8c84MAqoa+y+KK4Os4VuAumxokyU6WtyM6nlZYMjeJpMslsmCnWMT8TyF66Hpv
- QMZRrNo2OF2UZmYiXdT01CoaYKd27FoleAPuiNmjEtwK0yb8fbMu+jCFdXzL/iZp96VJ
- Y3y35mmgRS8Fs0JNWh0sE5Dyhrm3johZsd2Z8=
+ bh=Z1MWdOQGHlQJ9JfKU7IyAnYi7CBbrzqyEocSpIiQUzk=;
+ b=BH2LOiNgZN3CwmDOcTej9gC0idGemfF2gHNlI1PClMB7coVamA5TAfkZALMRXNK+UA
+ G6t9g5/ticVIKGCdr9KDK5Yge4ZaD+EpwnaY0/kJKkp9/PBpT28crMI9AO47dtZ9y6xc
+ Er3tcwmJW08G7qZvxHB0IJlOYDreAReH0Vtno=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185399; x=1733790199;
+ d=1e100.net; s=20230601; t=1733185417; x=1733790217;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WZ0O7/kJaOI0fUiS2+Jtxgenj0UH2PBZrDJ0m7IBCa8=;
- b=G6qE17NC4itEIcXaEKR+uNeGSi0qMv4or3WLP3lHpAURge79J6a3x5/pAkDrzYNT+9
- Vo3TpuE9PsJzZFzd3bt//oz2qf+KT83+LjsVdjVMElndFjhZ84WXaZYj0U79h2Q8RaBx
- znzHB2BqYZlDt6FFc5YigdN8VD+44dVCRzbRlX8ubSSHKJ5jSQghdT4hBVnW8EweyThW
- e+JSZEI8ZFIMmckpgj53g/N5TxqtZsSdmUATg4n2ppF9ZkEKiFOFnAzGo445bwexREfh
- kwKmCmLGiHIZOmp+ax5UJfBq+AQUp8u0wCpEMzDzxvlDTdW0mJqBHsJ5TfFqO5LyG7Aj
- 7bEw==
-X-Gm-Message-State: AOJu0YyuoUyEmh/CQggu7tHj3ijS/Sq53Rt3IsZlhlRgBXkWth1VaiNe
- a1gTKkOrJR1RSRDqUqTDHHdTlL2OmgbFcszYRZxSRqwCaEDlUo6yB6fhegcJbtJcF/wd22dYTfF
- 970aZWqwIHY4ifegFV0nCoE3PLA9FtzlPbTi5
-X-Gm-Gg: ASbGnct07JGzvBuvy9zvM583JYYs4vkD3jPn1Tb9oukTeTQINIpJGVRoLQeFxSkHhTu
- 5g/1Lj5JT88k6EL72W1KC/yN9fSep/rYi
-X-Google-Smtp-Source: AGHT+IHY6/diMdMtWvNNsWUuzm2BFJdwAdbvIO2nsCH0QwOPAUQJQSNdHy6Q6M0sTRRuJG+Mro/lMzcL5zjc4ojhbQw=
-X-Received: by 2002:a17:906:2932:b0:aa5:1ef5:261e with SMTP id
- a640c23a62f3a-aa5f7d4ed45mr17589166b.17.1733185399142; Mon, 02 Dec 2024
- 16:23:19 -0800 (PST)
+ bh=Z1MWdOQGHlQJ9JfKU7IyAnYi7CBbrzqyEocSpIiQUzk=;
+ b=EuI61UqkWGzokRdgzLpD3P0rzx9aM1X/PmLmIOZPlQl6fUR5lYgspDX5N59KKH3Zic
+ BeWapPGRgKxsNqmVcu6D2WywL32zRZyBssh8zCwzDVA1sRoO5zkaG7YNVE7JLN0hrTtx
+ PUEySA0Hyy1TzhqPETETf4ySRWJvQyAH/PhIzj5IQzA//YmRuPXUuv++0TY0YIfDnK8t
+ yUofzPIdmZynoVHWrHPllSimGDdf1fgza8lohSDDRmS5p/gEHRyDBgQ1Bl45LqHbqOeB
+ NAiolyKG6CM3ot8+AoURE/lSyJmc3Ebmtte1QFftPX2fpr09QCt/c/HQSq3VkU14HpOJ
+ +xmA==
+X-Gm-Message-State: AOJu0YxEbQOz/HBMWkGa5yD33Q/AgOmYPyxY2upvQW5UEQiU8HnGflgJ
+ S7TPrls8o/Bocv+XMffGXw9eteeSFp6wmFscrnVy3dmn7TmLCvfY3an9HRroUin7mu8A7Q0gfcI
+ 9zgYpXgbieHUL1N/N7m4XAXb2wwFk5ygV3UkSaXJ+8bYGYh8=
+X-Gm-Gg: ASbGnctyckfhlqlYd+u8fD1B35ILpVlKRANa6bcNsr79H5mqIom2XKqpQuv0Cs5Kz7z
+ YWfv2VXOl0EZrZ9j7loaN06HMJh32Uf61
+X-Google-Smtp-Source: AGHT+IHARuPQXed7kA1vndQ075hUqCsdsZcgCXaYK92is4JPqrPWP9tj5rfjFdPWTWJkPnj1U8ke/LqqvtOx/XbNnVc=
+X-Received: by 2002:a17:907:770c:b0:aa5:14a8:f6d9 with SMTP id
+ a640c23a62f3a-aa5f7d4dbb1mr18137066b.14.1733185417358; Mon, 02 Dec 2024
+ 16:23:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201152815.1668093-1-sjg@chromium.org>
- <20241201152815.1668093-6-sjg@chromium.org>
- <20241202220058.GJ2457179@bill-the-cat>
-In-Reply-To: <20241202220058.GJ2457179@bill-the-cat>
+References: <20241202001243.1283274-1-sjg@chromium.org>
+ <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
+In-Reply-To: <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:23:07 -0700
-Message-ID: <CAFLszTj0avcstecn0Q25U3URXucX-ZPsKHbLmm=5=_iHJ4bjSw@mail.gmail.com>
-Subject: Re: [PATCH v5 5/9] efi: Drop the memset() from efi_alloc()
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Date: Mon, 2 Dec 2024 17:23:26 -0700
+Message-ID: <CAFLszTi0SQft1EUh4GYrkcC3F+r_s9h2PcMWWUjtGTVSLAUkhA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] efi_loader: Add support for logging to a buffer
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,39 +85,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Mon, 2 Dec 2024 at 15:01, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 1 Dec 2024 at 17:24, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Sun, Dec 01, 2024 at 08:28:07AM -0700, Simon Glass wrote:
+> Am 2. Dezember 2024 01:12:36 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >It is a bit of a pain to log EFI boot-services calls at present. The
+> >output goes to the console so cannot easily be inspected later. Also it
+> >would be useful to be able to store the log and review it later, perhaps
+> >after something has gone wrong.
+> >
+> >This series makes a start on implementing a log-to-buffer feature. It
+> >provides a simple 'efidebug log' command to inspect the buffer. For now,
+> >only memory allocations are logged.
 >
-> > From my inspection none of the users need the memory to be zeroed. It
-> > is somewhat unexpected that it does so, since the name gives no clue to
-> > this.
-> >
-> > Drop the memset() so that it effectively becomes a wrapper around the
-> > normal EFI-pool allocator.
-> >
-> > Another option would be to drop this function and call
-> > efi_allocate_pool() directly, but that increase code size a little.
-> >
-> > Move the function comment to the header file like most other exported
-> > functions in U-Boot.
-> >
-> > Comments were made in v3 that another project uses memset() when
-> > allocating memory, but that is not required by the spec. In any case, as
-> > above, from inspection, none of the users need the memory to be zeroed,
-> > as they fill the entire region with their own data.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
->
-> I thought you agreed to drop this because Heinrich or Ilias was saying
-> they'd get the spec clarified to say it should be zeroed?
+> In my previous review I suggested to move your work to the level of the logging library lib/log.c.
 
-The other option is to put a 'z' on the end. Heinrich mentioned that
-Tianocore zeros memory in an equivalent call, but that doesn't make
-any sense to me, sorry. At present I suspect we are masking bugs, but
-it's hard to be sure. I'll figure it out eventually, I suspect....
+Well, we could do that, if we actually have a need for programmatic
+logging of other subsystems.
+
+>
+> Why are you reiterating your series without exposing why an EFI specific solution. should be desireable?
+
+I don't see that need yet, or at least, not for the purpose I am
+heading towards. In any case, we can easily refactor the code later if
+it is needed. For now I believe that this logging feature will help to
+tame some of the troubles we have.
+
+[..]
 
 Regards,
 Simon
