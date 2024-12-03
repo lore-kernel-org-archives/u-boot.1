@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7030AE74AC8
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0F8E74AC8
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:45:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDAB1896C3;
-	Tue,  3 Dec 2024 20:45:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63E968967D;
+	Tue,  3 Dec 2024 20:45:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l2+Pklhb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hBsp3FIK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F22FD8968D; Tue,  3 Dec 2024 20:45:39 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id B279989185; Tue,  3 Dec 2024 20:45:54 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0371D8967C
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:45:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B90C8967D
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:45:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2ee8aa26415so2830955a91.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:45:36 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2ee709715d9so3179505a91.3
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:45:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733255135; x=1733859935; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733255151; x=1733859951; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8BVf6XMlGKcPnU6pKx2ODsHQgnwhqxeA3mAlXbWgK/c=;
- b=l2+Pklhb71Vogk+pWbMRaH/dMAb4qZoqcQ0xWgGnd0TGU3+GOd0rfsa4fgzDCkEy1q
- ghvEMIHOsT+QSGP0IvTNaF7Sp6T1E5vgWobl4Rmig3IX18sY5PqMSBM+pT1FkEW7yZch
- OHVvLMgJ5cQh28KuT4L0UKs+exC012PuVm/aQ=
+ bh=g/wwKnHlrrhFtggrRgH7Jk+wNOQK0l75ifLc8O43KmE=;
+ b=hBsp3FIKdAcPn2yKMGvrOG3VmN0ZflvegK+4Cuv805sHJnnNrkBDvNeCxpialuH5LE
+ s5Wfr8j1yW+Lqq2hz31VNYzylkdW4MrTV+000NGCn+5q76nTTaYjqcpT70GYh5ZemTlQ
+ ZMkkpUIE+OAYHzhl1qSMXpsIcV904cFSl8DZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733255135; x=1733859935;
+ d=1e100.net; s=20230601; t=1733255151; x=1733859951;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8BVf6XMlGKcPnU6pKx2ODsHQgnwhqxeA3mAlXbWgK/c=;
- b=DsYgdZWbKRyNzQnHV1rxH2+NFYMy4LGbhUuBrVcxE21qdeJHVJbX4iu782FymmWak0
- ww5qDGjqXUGeMsWODIsYfhtJxxvBDN73raZLCnXc+Eg2EuHTWTBu3MjUhpGQXvTay1Yg
- UUrR+W/tXCZ6qoRu305RR0gvbnHP42jtRj0wFHhXroWZyu2/KTx3AMmOhbKPg0ua2iR1
- wNvP0opLxGqoeiWyNMrcrQ2YN9bNLtBzQVoQNhrKYPkkUcCabG/PXcQGKNc5Tbh2UWMS
- DB7Gn9IQGJthvJdc+eh+zjSZvhm/ucE+rtJ/2TUY9kIKyr7HoLTym7qMKhZFuc/omW/c
- Wg1w==
-X-Gm-Message-State: AOJu0YwxoBEV/mYOl0IhivYnimAQMxp/o1lo0gVkmaUQCpYkzlnEAw63
- cyMKqEeJfPmkBHvxfXZKF5gCrNZIG7mFcnOtCLAxsYRjtf+G6Tvyo29r3F57/GBydzlfS2PKlaD
- uicYVQyvfcej1HHLWmNZmjrxzF+rGN54rUg0o
-X-Gm-Gg: ASbGncufO8CTjdzIx9fcYL2ULo1N+SQCS71XCM3/h7Y5HtQsxOnWhpAI6tz9YeKQTTd
- U0qPZhMfTY8XfIMTR2Igs0J6jXtx6yA/m
-X-Google-Smtp-Source: AGHT+IFjxDgmYhq84oPIe0A4BvWe1jXd3WNTQcD8uAMnUPebn8aJEOOoi73az5B3OrmOQVnBpc7H5jECtyxmvBpDpwE=
-X-Received: by 2002:a17:90b:3803:b0:2ee:edae:75e with SMTP id
- 98e67ed59e1d1-2ef011eb672mr4586883a91.13.1733255135582; Tue, 03 Dec 2024
- 11:45:35 -0800 (PST)
+ bh=g/wwKnHlrrhFtggrRgH7Jk+wNOQK0l75ifLc8O43KmE=;
+ b=si+/xk/tMb8LANZIBzZgHFOljMPFGtGVW+MR1NLS2T9zl/UshX1QCZ1FyAIIDKZWpp
+ dmGiRvzFvsTCO8KpI8ArvKLO55iRMLVj5Gk4+f3PwDrluPyo3yGJatLcuiqiglTqKhEI
+ EqmU+GscBn1PTsYS4RNNkUC6zYRZvCA7D+AK9wNlNxEGpS3WDAbZ0DpXP21t4n9CRPbK
+ pTnb2sdnVE7eaKr9ihFKilhzJaZu5+LdQvwYya+m+EPZROkmwbl1YmZ/jTdi2BsbEm7h
+ /iFpwD1w4KJ7cTYFuDxqmKKdIZLN8OyeKDtQnn8MnwlmTzZp14bMtlKrlSYFdiil1aPP
+ 0a5Q==
+X-Gm-Message-State: AOJu0Yz2gICL0wEQXf3nWEa1C/a5gmHtuWXiO8u3r8MjBLkAXsyWjdnW
+ YeWpIlS/RLHyUlStjT4CJah/AnZ4XGhICLr8s0Ydd4jwwzrZJRlx/QMyFESl1m+YjjEw+zIvYM8
+ rk180PLNj5pRcZ1i1iRH8acnF7KZV/QUEQSou
+X-Gm-Gg: ASbGnctmARoSmnggnP57vCyihR/quqUZyOfEP3XxIWs5pT9frTGAQa8h16+u/fuO3XC
+ uJBiO8DKgZouIjdwaKakWMgKPAt9sW9Ew
+X-Google-Smtp-Source: AGHT+IHZ0zdfwBBxuaEVB10xARpqRxTh0WdAntvSxgiDiyPImLMBtUn+UXS37kZ1vMxfLsf7e3KURfRvieIK6dUliiU=
+X-Received: by 2002:a17:90b:4fca:b0:2eb:140d:f6df with SMTP id
+ 98e67ed59e1d1-2ef011e6829mr4695467a91.1.1733255150810; Tue, 03 Dec 2024
+ 11:45:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-6-sjg@chromium.org>
- <20241201164810.GT3600562@bill-the-cat>
-In-Reply-To: <20241201164810.GT3600562@bill-the-cat>
+References: <20241201152505.1666789-1-sjg@chromium.org>
+ <20241201152505.1666789-4-sjg@chromium.org>
+ <20241202201641.GF2457179@bill-the-cat>
+ <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
+ <20241203003719.GN2457179@bill-the-cat>
+ <CAFLszTh91eW5yQgQHLDVfe67GYw_f9-jzWmdu9pDTaEvNEG2Bg@mail.gmail.com>
+ <20241203140400.GU2457179@bill-the-cat>
+ <CAFLszTjFta03nSumT595tGYitx9JmuQv-F7og_Kr4LkH=zA-Mw@mail.gmail.com>
+ <20241203160258.GX2457179@bill-the-cat>
+In-Reply-To: <20241203160258.GX2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 12:45:12 -0700
-Message-ID: <CAFLszTiLxRdLZb3mykH6L5DLQwL2N+-TiKAzH+aDtGpWa4O46g@mail.gmail.com>
-Subject: Re: [PATCH 5/8] fdt: Allow the devicetree to come from a bloblist
+Date: Tue, 3 Dec 2024 12:45:31 -0700
+Message-ID: <CAFLszThtuv6DcsLM=TaGtUuS+0HH+yWCu5aah=E572dC+stCsQ@mail.gmail.com>
+Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
+ efi_mem_carve_out()
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, 
- Jerry Van Baren <vanbaren@cideas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marex@denx.de>, Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- mason1920 <mason1920@use.startmail.com>
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,47 +97,90 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sun, 1 Dec 2024 at 09:48, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 3 Dec 2024 at 09:03, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Dec 01, 2024 at 07:42:33AM -0700, Simon Glass wrote:
-> > Standard passage provides for a bloblist to be passed from one firmware
-> > phase to the next. That can be used to pass the devicetree along as well.
-> > Add an option to support this.
+> On Tue, Dec 03, 2024 at 08:53:31AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Tests for this will be added as part of the Universal Payload work.
+> > On Tue, 3 Dec 2024 at 07:04, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Dec 03, 2024 at 06:46:11AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 2 Dec 2024 at 17:37, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Dec 02, 2024 at 05:24:35PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
+> > > > > > > > Simplify a few expressions in this function.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > > (no changes since v1)
+> > > > > > > >
+> > > > > > > >  lib/efi_loader/efi_memory.c | 4 ++--
+> > > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > > > > > > >
+> > > > > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > > > > > > index f1154f73e05..3b1c7528e92 100644
+> > > > > > > > --- a/lib/efi_loader/efi_memory.c
+> > > > > > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > > > > > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+> > > > > > > >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
+> > > > > > > >
+> > > > > > > >       /* check whether we're overlapping */
+> > > > > > > > -     if ((carve_end <= map_start) || (carve_start >= map_end))
+> > > > > > > > +     if (carve_end <= map_start || carve_start >= map_end)
+> > > > > > > >               return EFI_CARVE_NO_OVERLAP;
+> > > > > > > >
+> > > > > > > >       /* We're overlapping with non-RAM, warn the caller if desired */
+> > > > > > > > -     if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
+> > > > > > > > +     if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
+> > > > > > > >               return EFI_CARVE_OVERLAPS_NONRAM;
+> > > > > > > >
+> > > > > > > >       /* Sanitize carve_start and carve_end to lie within our bounds */
+> > > > > > >
+> > > > > > > As I believe was mentioned in a previous iteration, please drop this as
+> > > > > > > they aren't excessive generates a compiler warning, merely for
+> > > > > > > clarification and should be kept.
+> > > > > >
+> > > > > > I did this patch because checkpatch complained and I am changing these lines.
+> > > > >
+> > > > > And checkpatch is not the authority, it's guidelines.
+> > > >
+> > > > Agreed.
+> > > >
+> > > > > I believe the
+> > > > > review comments are "no, these should stay". Please drop this patch.
+> > > >
+> > > > Just so I can figure out what to do here, are you saying:
+> > > > - merge this patch in with the one that produces a checkpatch warning
+> > > > (i.e. remove brackets so resolve warning), or
+> > > > - drop this patch and ignore the checkpatch warning in the result
+> > >
+> > > Yes, please just drop this patch, I only look at ERROR from checkpatch
+> > > when merging things and then it's a matter of what the error is.
+> > >
+> > > > I don't really mind about this, obviously. But as I suspect this
+> > > > series is not going to be applied to your tree anyway, I'll await
+> > > > events.
+> > >
+> > > Yes, if you're not going to be addressing most of the comments you get
+> > > this is going to linger in, well, whatever it is you plan to be doing
+> > > exactly.
 > >
-> > Note: This is the correct way to deal with bloblist, since it allows
-> > boards to choose whether they want to use the devicetree from there, or
-> > not.
-> >
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20231226094625.221671-1-sjg@chromium.org/
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20231228133654.2356023-1-sjg@chromium.org/
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20231228194725.2482268-1-sjg@chromium.org/
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20240104014919.413568-1-sjg@chromium.org/
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20230921015730.1511373-31-sjg@chromium.org/
-> > Link: https://patchwork.ozlabs.org/project/uboot/patch/20230830180524.315916-31-sjg@chromium.org/
+> > I am keen to address comments, so long as they are about the code,
+> > rather than 'we don't want this patch'.
 >
-> You should
-> %s#https://patchwork.ozlabs.org/project/uboot/patch#https://lore.kernel.org/u-boot
-> all of these Links, aside from shorter, it's on much more broadly
-> distributed infrastructure. And this is a general comment as well.
->
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  common/bloblist.c                  |  1 +
-> >  doc/develop/devicetree/control.rst |  3 ++
-> >  dts/Kconfig                        |  8 ++++++
-> >  include/fdtdec.h                   |  3 +-
-> >  lib/fdtdec.c                       | 44 ++++++++++++++++++++++--------
-> >  5 files changed, 46 insertions(+), 13 deletions(-)
->
-> The rest of this, I need to think on.
+> We don't want this patch because the parenthesis do make reviewing the
+> code and order of operations clearer. This was the previous feedback.
 
-It sounds like you have thought about this, and come to the conclusion
-that the reverts are not going in. So, for simplicity I'll leave this
-patch as is and make a note to use 'lore' in future. I wonder if there
-is an easy way to convert between lore and patchwork?
+Given that this whole series is being rejected, I don't think this
+feedback is critical.
 
 Regards,
-Simon
+SImon
