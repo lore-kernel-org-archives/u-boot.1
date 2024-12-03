@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0077DE77160
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:52:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38993E77160
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:52:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B85918967A;
-	Wed,  4 Dec 2024 00:48:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A91189730;
+	Wed,  4 Dec 2024 00:48:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B8Yz/73S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fDXCsdy5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD1E98971E; Wed,  4 Dec 2024 00:48:02 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 1B04089730; Wed,  4 Dec 2024 00:48:04 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BED5689326
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D48A18967D
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:48:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-841a6af60e9so195404039f.0
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:58 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-841a7ae8d8aso239353639f.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:48:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733269677; x=1733874477; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733269680; x=1733874480; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gJBXxx6HiH+i0BZSnr8Ya1lsr37IE/0m9bFoPHC8N64=;
- b=B8Yz/73S42+npaOgvO2VaNbGt3T1o4U1BCvg/EZayagIKfoy4HTNyj64zs5bAizHM/
- QtidehPzhPXocUab0lMp8EIjUF5TFFbr9HXvDf3z2Z2KOsjmIugpU1XMiTqPgCA5aWws
- 2NuWuKKbGEIGO2daO7HVy6OBuWZWFvm5O0Vdk=
+ bh=2vYAECU28AEurSs1P/vzovd1fibvOs8JYUmQjJ2pZRg=;
+ b=fDXCsdy5W+HVOnCuxfTSH7usX/6DKRx5Zaon5kVelEsbM5rcJL1TdN9fg4Sh5hSJwR
+ MGikDhXkIIFfzRsirL2QyUJYXseE7N1UWzWMSrE5ft179wU913JFnkmEdb5QWIO3MRfd
+ w3wVaEm8bMV94eAzWUl/9nPKLSV4nssU3wB3o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733269677; x=1733874477;
+ d=1e100.net; s=20230601; t=1733269680; x=1733874480;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gJBXxx6HiH+i0BZSnr8Ya1lsr37IE/0m9bFoPHC8N64=;
- b=JSqE0zStzgxcAAkjid63vJHCk7yH/0gEYnridXC6+lRJrieuTggth9Qu+d+4z3yvRd
- Nkr6clpE8TyNXvFvLyYlubtijyvUio/1kvC6jMPniJSjxatqadpIa3GFjECV04ElsOTG
- bbIN3Mqi6RtfHQU4ojtGsfX7GD02KtxtHLRev83kVfmMbOmy2N/9qKY926y5ox8bnduc
- 0q4TKHas+uAAXDPDCB0KyfQunacJFgXMZ3XKpYcgbwI8XDpaya8jnW9h57pNFfuTNd+r
- cYrwhHZBWxCdHMj+0XG9yeN3pquaDjeA56x+J/fqktDy9v+dgFCGX9OcaqmBm4s4/RF4
- c/KQ==
-X-Gm-Message-State: AOJu0Yxznpp0c9x2j9kCIGlRhjWNlJQYbDBScVaTa4r9dA5oFeF3ys3a
- boZwZFKeQAERMhILIBIAg+yg2Y68u973VpwYQVy3q72wXlCYwXMU3P/HLyhP2cBKl4KHY6SJhqs
+ bh=2vYAECU28AEurSs1P/vzovd1fibvOs8JYUmQjJ2pZRg=;
+ b=rA0jnfarW5lGhFIFuuEsKIGkSV1Ex5Xy0FgPcxdrF/NIIp0CThVz2tH3s2Gs2592yo
+ 5FN2U4LZKDAT1gZnVMFfH/C7y1IEhXrg+OAkpWX/57M48CNyy3UcBOvPIzK3DihN0bWf
+ ZrmiD9kYVCR2lWElKOnhh+79jUjsdKfD7scGBEr5jwOY3M3RDEBpxvc0gKjkDoWqspDc
+ vnoL0R9XJrV71zTbvlPFepva3bSevhn7IkBxZnTVg5VBBvcJSZXgVbhExHUAHr4DExOa
+ Dx9yb41PHw6xmc9SOORkNRDGgfF7l4akYAwwdPPKH7E7MRy9FCFPdGvxlQJkTDEO49Bq
+ Q+2w==
+X-Gm-Message-State: AOJu0YzL9zh2G8Q6m44hzCIVMWx/7DzSGwehCWdDwm9qU5gfz9UnwFcy
+ q/E5QgmWeKLGgf+NvmfjTl2c12AtbRtde1G0k3wT0taFPf3gEu2pSSXU5IDpHJUpd7npeOMuObY
  =
-X-Gm-Gg: ASbGnctPOU00WTZQ75f1jPh/j0lPC/uX8H5ujm3Kic92byZxCNELJAZotdPuEzSOxM2
- gswemnjcY3otcaYoYlgQ8kXpYcIcFlrpyeALi6uYQTzQke4I07dUdJKOorrx8//8tr5tRHe+iBb
- eXmHiZgnqjFQ/bbqxGYSdGTGn8kyOf9iig65iGr4RPTmc75DhbP0zEBH7ed0petYKlVeMkcRXxd
- 79pXcVP+gUqF1+bj9In5bzHJ25nokkeSMQJWlMQ0Gz+So2Yb7x8wdFrPjAVn73JFk4ZnZDCuxfG
- YSx5WChlqOI=
-X-Google-Smtp-Source: AGHT+IHiORxr/Z/1u2saGFSNISskG8wpAHs6CuMv+W5yn7P8usSaWRwYNJPQRDhVvK0dlJwayXrjXw==
-X-Received: by 2002:a05:6602:3416:b0:83a:639b:bc44 with SMTP id
- ca18e2360f4ac-8445b543803mr511826239f.3.1733269676943; 
- Tue, 03 Dec 2024 15:47:56 -0800 (PST)
+X-Gm-Gg: ASbGnctnPEVy3Plh7Unvqvymhnl2RkXDQKFpc9sR8oneTXXAz4pvnksUFjnfxR5y1AP
+ PaRwxcLvySLNrz4wMVnyHop6TcBBsoJvkWOOKy/8VXAAgu8Nia92t6bFmQ12/zn/aocv1HWqaik
+ SrRKyRltMiDocOh2MgQVzW6frZkWcjjgrXFCFzxzE1UW07vqMl/NQEDPkEGDpM2ty01XN3KXR3q
+ LUhbcZOd9RqaoBfBFtqo8EJj1lRMSq0QWbqVMVsb66lgxO1+NyHcuZH+LYvS2FVPhtFzZd9+yLo
+ vicBa/oh4e4=
+X-Google-Smtp-Source: AGHT+IHdmqewrk0VOTnb+A90b9N5yLKDmU9nn3e98tXgR7qmhaBDQWjkRl54H4OVSJ/Sh4jQnlzJ9g==
+X-Received: by 2002:a05:6602:6d0e:b0:83a:b188:7a4d with SMTP id
+ ca18e2360f4ac-8445b42ff3cmr567457639f.0.1733269680099; 
+ Tue, 03 Dec 2024 15:48:00 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.54
+ ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:47:55 -0800 (PST)
+ Tue, 03 Dec 2024 15:47:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>, Martyn Welch <martyn.welch@collabora.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH v2 37/41] bootstd: Update extlinux and pxe to allow boot
- interruption
-Date: Tue,  3 Dec 2024 16:45:55 -0700
-Message-Id: <20241203234559.2938192-38-sjg@chromium.org>
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v2 38/41] pxe: Collect the FDT in the bootflow
+Date: Tue,  3 Dec 2024 16:45:56 -0700
+Message-Id: <20241203234559.2938192-39-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203234559.2938192-1-sjg@chromium.org>
 References: <20241203234559.2938192-1-sjg@chromium.org>
@@ -101,199 +101,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful to be able to inspect things before the OS is actually
-booted, perhaps to check that all is well or to adjust the kernel
-command-line. Implement the 'read_all()' method to allow this.
-
-Provide a simple test to check that the images are found.
-
-For now it is not possible to actually continue the uninterrupted boot,
-without re-reading all the images.
+Move processing of the FDT so that it happens before booting. Add a test
+to check that the FDT is now visible.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootmeth_extlinux.c | 10 ++++++++++
- boot/bootmeth_pxe.c      | 10 ++++++++++
- boot/ext_pxe_common.c    | 23 +++++++++++++++++++--
- include/extlinux.h       | 11 ++++++++++
- test/boot/bootflow.c     | 43 ++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 95 insertions(+), 2 deletions(-)
+ boot/pxe_utils.c     | 22 +++++++++++++---------
+ test/boot/bootflow.c |  6 +++++-
+ 2 files changed, 18 insertions(+), 10 deletions(-)
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index b29e07788b3..e866cf06152 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -145,6 +145,13 @@ static int extlinux_local_boot(struct udevice *dev, struct bootflow *bflow)
- 	return extlinux_boot(dev, bflow, extlinux_getfile);
- }
- 
-+#if CONFIG_IS_ENABLED(BOOTSTD_FULL)
-+static int extlinux_local_read_all(struct udevice *dev, struct bootflow *bflow)
-+{
-+	return extlinux_read_all(dev, bflow, extlinux_getfile);
-+}
-+#endif
-+
- static int extlinux_bootmeth_bind(struct udevice *dev)
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 3531ab1c71a..053fdcbb6e7 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -578,26 +578,23 @@ static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
+  * @initrd_filesize: String containing initrd size (only used if
+  *	@initrd_addr_str)
+  * @initrd_str: initrd string to process (only used if @initrd_addr_str)
++ * @conf_fdt: string containing the FDT address
+  * Return: does not return on success, or returns 0 if the boot command
+  * returned, or -ve error value on error
+  */
+ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+ 			  char *kernel_addr, char *initrd_addr_str,
+-			  char *initrd_filesize, char *initrd_str)
++			  char *initrd_filesize, char *initrd_str,
++			  const char *conf_fdt)
  {
- 	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-@@ -162,6 +169,9 @@ static struct bootmeth_ops extlinux_bootmeth_ops = {
- 	.read_file	= bootmeth_common_read_file,
- 	.boot		= extlinux_local_boot,
- 	.set_property	= extlinux_set_property,
-+#if CONFIG_IS_ENABLED(BOOTSTD_FULL)
-+	.read_all	= extlinux_local_read_all,
-+#endif
- };
+ 	struct bootm_info bmi;
+ 	ulong kernel_addr_r;
++	int ret = 0;
+ 	void *buf;
+-	int ret;
  
- static const struct udevice_id extlinux_bootmeth_ids[] = {
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 6ecf81d7878..a4dd48a7010 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -142,6 +142,13 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- 	return extlinux_boot(dev, bflow, extlinux_pxe_getfile);
- }
+ 	bootm_init(&bmi);
  
-+#if CONFIG_IS_ENABLED(BOOTSTD_FULL)
-+static int extlinux_pxe_read_all(struct udevice *dev, struct bootflow *bflow)
-+{
-+	return extlinux_read_all(dev, bflow, extlinux_pxe_getfile);
-+}
-+#endif
-+
- static int extlinux_bootmeth_pxe_bind(struct udevice *dev)
- {
- 	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-@@ -158,6 +165,9 @@ static struct bootmeth_ops extlinux_bootmeth_pxe_ops = {
- 	.read_file	= extlinux_pxe_read_file,
- 	.boot		= extlinux_pxe_boot,
- 	.set_property	= extlinux_set_property,
-+#if CONFIG_IS_ENABLED(BOOTSTD_FULL)
-+	.read_all	= extlinux_pxe_read_all,
-+#endif
- };
+-	bmi.conf_fdt = env_get("fdt_addr_r");
+-
+-	ret = label_process_fdt(ctx, label, kernel_addr, &bmi.conf_fdt);
+-	if (ret)
+-		return ret;
+-
++	bmi.conf_fdt = conf_fdt;
+ 	bmi.addr_img = kernel_addr;
+ 	bootm_x86_set(&bmi, bzimage_addr, hextoul(kernel_addr, NULL));
  
- static const struct udevice_id extlinux_bootmeth_pxe_ids[] = {
-diff --git a/boot/ext_pxe_common.c b/boot/ext_pxe_common.c
-index 7b9c41b5f77..c7f690dee17 100644
---- a/boot/ext_pxe_common.c
-+++ b/boot/ext_pxe_common.c
-@@ -75,8 +75,8 @@ int extlinux_set_property(struct udevice *dev, const char *property,
- 	return 0;
- }
- 
--int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
--		  pxe_getfile_func getfile)
-+static int extlinux_process(struct udevice *dev, struct bootflow *bflow,
-+			    pxe_getfile_func getfile, bool no_boot)
- {
- 	struct extlinux_plat *plat = dev_get_plat(dev);
- 	ulong addr;
-@@ -91,6 +91,7 @@ int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
- 			    bflow->fname, false, plat->use_fallback, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
-+	plat->ctx.no_boot = no_boot;
- 
- 	ret = pxe_process(&plat->ctx, addr, false);
- 	if (ret)
-@@ -98,3 +99,21 @@ int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
- 
- 	return 0;
- }
-+
-+int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
-+		  pxe_getfile_func getfile)
-+{
-+	return extlinux_process(dev, bflow, getfile, false);
-+}
-+
-+int extlinux_read_all(struct udevice *dev, struct bootflow *bflow,
-+		      pxe_getfile_func getfile)
-+{
+@@ -678,6 +675,8 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 	char mac_str[29] = "";
+ 	char ip_str[68] = "";
+ 	char *fit_addr = NULL;
++	const char *conf_fdt;
 +	int ret;
-+
-+	ret = extlinux_process(dev, bflow, getfile, true);
-+	if (ret)
-+		return log_msg_ret("era", -EINVAL);
-+
-+	return 0;
-+}
-diff --git a/include/extlinux.h b/include/extlinux.h
-index 69781e666c3..ab93761c54c 100644
---- a/include/extlinux.h
-+++ b/include/extlinux.h
-@@ -60,4 +60,15 @@ int extlinux_set_property(struct udevice *dev, const char *property,
- int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
- 		  pxe_getfile_func getfile);
  
-+/**
-+ * extlinux_read_all() - read all files for a bootflow
-+ *
-+ * @dev: Bootmethod device to boot
-+ * @bflow: Bootflow to read
-+ * @getfile: Function to use to read files
-+ * Return: 0 if OK, -EIO on I/O error, other -ve on other error
-+ */
-+int extlinux_read_all(struct udevice *dev, struct bootflow *bflow,
-+		      pxe_getfile_func getfile);
+ 	label_print(label);
+ 
+@@ -782,11 +781,16 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 		printf("append: %s\n", finalbootargs);
+ 	}
+ 
++	conf_fdt = env_get("fdt_addr_r");
++	ret = label_process_fdt(ctx, label, kernel_addr, &conf_fdt);
++	if (ret)
++		return ret;
 +
- #endif
+ 	if (ctx->no_boot)
+ 		return 0;
+ 
+ 	label_run_boot(ctx, label, kernel_addr, initrd_addr_str,
+-		       initrd_filesize, initrd_str);
++		       initrd_filesize, initrd_str, conf_fdt);
+ 	/* ignore the error value since we are going to fail anyway */
+ 
+ cleanup:
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index f7d12765928..ef8c0c1bbaa 100644
+index ef8c0c1bbaa..640a7cdb7c9 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -1433,3 +1433,46 @@ static int bootstd_adhoc(struct unit_test_state *uts)
+@@ -1459,7 +1459,7 @@ static int bootflow_scan_extlinux(struct unit_test_state *uts)
+ 		"ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB",
+ 		bflow->cmdline);
+ 
+-	ut_asserteq(3, bflow->images.count);
++	ut_asserteq(4, bflow->images.count);
+ 
+ 	/* check each image */
+ 	img = alist_get(&bflow->images, 0, struct bootflow_img);
+@@ -1473,6 +1473,10 @@ static int bootflow_scan_extlinux(struct unit_test_state *uts)
+ 	ut_asserteq(IH_TYPE_RAMDISK, img->type);
+ 	ut_asserteq(0x2000000, img->addr);	/* ramdisk_addr_r */
+ 
++	img = alist_get(&bflow->images, 3, struct bootflow_img);
++	ut_asserteq(IH_TYPE_FLATDT, img->type);
++	ut_asserteq(0xc00000, img->addr);	/* fdt_addr_r */
++
  	return 0;
  }
- BOOTSTD_TEST(bootstd_adhoc, UTF_CONSOLE);
-+
-+/* Check scanning extlinux, adjusting cmdline and booting */
-+static int bootflow_scan_extlinux(struct unit_test_state *uts)
-+{
-+	const struct bootflow_img *img;
-+	struct bootstd_priv *std;
-+	struct bootflow *bflow;
-+
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_console_end();
-+	ut_assertok(bootstd_get_priv(&std));
-+
-+	ut_asserteq(1, std->bootflows.count);
-+
-+	bflow = alist_getw(&std->bootflows, 0, struct bootflow);
-+	std->cur_bootflow = bflow;
-+
-+	/* read all the images, but don't actually boot */
-+	ut_assertok(inject_response(uts));
-+	ut_assertok(bootflow_read_all(bflow));
-+
-+	/* check that the command line is now present */
-+	ut_asserteq_str(
-+		"ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB",
-+		bflow->cmdline);
-+
-+	ut_asserteq(3, bflow->images.count);
-+
-+	/* check each image */
-+	img = alist_get(&bflow->images, 0, struct bootflow_img);
-+	ut_asserteq_strn("# extlinux.conf", map_sysmem(img->addr, 0));
-+
-+	img = alist_get(&bflow->images, 1, struct bootflow_img);
-+	ut_asserteq(IH_TYPE_KERNEL, img->type);
-+	ut_asserteq(0x1000000, img->addr);	/* kernel_addr_r */
-+
-+	img = alist_get(&bflow->images, 2, struct bootflow_img);
-+	ut_asserteq(IH_TYPE_RAMDISK, img->type);
-+	ut_asserteq(0x2000000, img->addr);	/* ramdisk_addr_r */
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_scan_extlinux, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ BOOTSTD_TEST(bootflow_scan_extlinux, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.34.1
 
