@@ -4,78 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD7AE6C5E3
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:20:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BE4E6C5E3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EB99895EC;
-	Tue,  3 Dec 2024 01:20:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 62E9F895AF;
+	Tue,  3 Dec 2024 01:20:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PQBlZ5LJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ya8kUQBw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B38F8895A9; Tue,  3 Dec 2024 01:20:34 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id D596D895CE; Tue,  3 Dec 2024 01:20:47 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74708895B9
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:20:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B723D895DC
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:20:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa55da18f89so743967466b.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:20:32 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0ac27b412so4321281a12.1
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:20:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185232; x=1733790032; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lBHeFqeuepA8wtOMgLftMdsPDKoA9F/+WYORnNMw6is=;
- b=PQBlZ5LJcPEnyNdHHfiaFEC2zDuj+aLUbcDpf5SUa0EJd/xskPolrheBYr8e+3Vmfd
- TMyC3O7OcclQ0JjvG9zaLYlTbAZs4LSsHCPQfQSTUIkFSxfn6PXrfexDNtp+pw4Q5cEB
- 0Ep34Fkj8ZvElJlnZupxJv+wSwvm3F6lGxmo8=
+ d=chromium.org; s=google; t=1733185243; x=1733790043; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q59djy4cEyr9rnTbZmAERXrqfITbcLmh6wAsbCgGO80=;
+ b=Ya8kUQBwI83VWbc9SW+ywFVL7l5HBeKOIlxFUkwH/r5fxK9zgE04C9slGaqRSOTNa7
+ 9gotVULJJPN4LC9cPDx5ldRQMIsXfVmQ17blkpKJsRdoA0W6Xq/URV/UUxUK8pn/72Js
+ oAYC/vWvSIdrpZ6cQwbdJdqiU23lVwc6g8dfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185232; x=1733790032;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lBHeFqeuepA8wtOMgLftMdsPDKoA9F/+WYORnNMw6is=;
- b=M48bIZ3w8MYR3CoxL06Kw2CrwQrTYCyQaW4UNAYQRwYA9D93ib7cYNe2r6eQeRwnAm
- FRB9AQiuvx1sKBrQVHQQOMTbXbucqe3dLLC/bWJkgNMLSMcxjsp6aPD0LC/AHkPQOnq+
- ciOctT1NpUkpbaVaeCcS0g2uHGdkrb6BQ9+lAWq/J3u/EDQ2lRPmlJCed0CVdf+XG7yH
- 1bYJVW3zu9Y7OCStCYXbN2qOxjA/U1g6UAWoikU25gAJ7KAMmMYXG246iePI9Q3yNB6X
- pOXlAuXAF6QoK+pMeTi3F/Xjngts5UK54Vvq2/fal/18dlF4KvxECLZ6Cls3ytT1JbEx
- ahfg==
+ d=1e100.net; s=20230601; t=1733185243; x=1733790043;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q59djy4cEyr9rnTbZmAERXrqfITbcLmh6wAsbCgGO80=;
+ b=unQGnmFGvl4jK23FAGym8cRGuE1c1FeLGSrJy6lQY9f5rMFO8rmSbr0AlSEqeZQpXU
+ GpqJDPpbdnk6rH9hCTkbM7ThjMU0OL9tEd5b1teO1kxYoljY1H93r9ceXw5zLClbYWZL
+ UKy0s63NurlVhpSp0GHTUrLINnwinZalL1JZt3wls88DyVymC8T09sMe5ttAZnLDcnka
+ Y8ODJ8kuBR3OMeCcQVbvvac8PG880lNBfr0I12oZkFe2me0Gx8I8DG+OYYaVFXh5/Yml
+ 3k2Sx5S23p13njiQgEaAcK/ExQHMf6TItqcml9ERMFIsY7qepe2JLh88J2pEoLug91q9
+ unhg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0cpyc/63p1h12lzUwcsKM1TBoyr9tS626INW37MSm3+y400Kdrse01IQsD3VKIkcid1dQKYo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMaDX18WO9Mf3yNXfxSqGz1gbsf2qu2Kn5ZE6iL6Dr7Y1gw6wi
- s2/n08TjMxbdPS+xwUM06dvbDFXfW8CVIj9eNrot3uswTrA/0QU3uWigMpEuIg3gcCL9RGc8oiS
- 0Fw0H04hfImZKVLq3tJxtH3YzzyWHKs14SLFI
-X-Gm-Gg: ASbGncuyM9wldRBRtb/T0XQVSdeESFpGDwTni+pfAiKk+GgpW40825uCYoyZdaLmdDK
- SotnZYXGeU7obbr4Zv298XDzvOGZ8Wtrt
-X-Google-Smtp-Source: AGHT+IFoGA8tIYFTX4dHMAuZclsq/XBhqDoEAEmkqbtAwMXTx2BrE/XkivvZsr4D2MccCrysvBKEoN2pS9tYrWFCyUc=
-X-Received: by 2002:a17:906:3d32:b0:aa4:9ab1:19d5 with SMTP id
- a640c23a62f3a-aa5f7eefba8mr14929566b.42.1733185231887; Mon, 02 Dec 2024
- 16:20:31 -0800 (PST)
+ AJvYcCVvyWNpROeI6HApj/4Z9CkUgsyF8dP3E3sOnkWFx8JuwEjW2KECRaQiMC26d4LISNsnh46Qk3Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBE9S06l6CRdifOceNNjqsgANRKoeMm7wjKi5iG9oZmD9L0X5t
+ E3jOPz2IhoeDmBu7sZ4nTRVRvgn4RVJ3RF7S7Pczi10Pg2uEhVq9XwB9GA/aakYJXT6JL0XsbqB
+ ay3A2ZXDj4FAdeoFmbYkNF8sMm4vzEWm116JYDpSqglYcGUY=
+X-Gm-Gg: ASbGncv06ZDbncb/ms7yCAkYwZZP/tTCoWgF/R6QCtWrzRJzXbzRUzW2in7hvslzyKJ
+ Glph4swmE9FfFXP4bQSaeWKph/2ZEoJTr
+X-Google-Smtp-Source: AGHT+IF1giljEAxPh4ylmdcbU9fsHvEr7unKgDja1+2lAP2J0HtpVxW1eRnDcg9MrrCaoOJxLb4MG99yu3LSuGl0UZY=
+X-Received: by 2002:a17:907:7841:b0:a9f:4f7:f064 with SMTP id
+ a640c23a62f3a-aa5f7cc2a04mr17770466b.3.1733185243191; Mon, 02 Dec 2024
+ 16:20:43 -0800 (PST)
 MIME-Version: 1.0
-References: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
- <20241128-bootconfig-v1-2-0e63a5dae82c@baylibre.com>
- <CAFLszTgFBtQBiC_Hd9gjUJa26aFFXLGuuvJ5gVDLEaKH-SV-dg@mail.gmail.com>
- <991937a4-9bcb-43f8-99d9-013d0c9d2dff@baylibre.com>
-In-Reply-To: <991937a4-9bcb-43f8-99d9-013d0c9d2dff@baylibre.com>
+References: <20241126155508.GR3600562@bill-the-cat>
+ <CAFLszThjgZtYrc707w8D+PZULJQB8qpNxgDYnAV+UoNebaPm8g@mail.gmail.com>
+ <20241126223332.GV3600562@bill-the-cat>
+ <aa7134ee-97dc-4fcc-b739-0f97e57817fd@gmx.de>
+ <20241126233218.GW3600562@bill-the-cat>
+ <CAFLszTi1A_672F68q5DYJW2g0T+LGZJcBwSVysXJD7+xG=Shbw@mail.gmail.com>
+ <20241127141532.GZ3600562@bill-the-cat>
+ <CAFLszTg8L4A0oGLh=K5kc8hR_E+LxFYeC_vNHMZDbV_+ZT8Btg@mail.gmail.com>
+ <20241127221059.GE3600562@bill-the-cat>
+ <CAFLszTiP3ika=dGQ9pX3btdY7CWB-n3AsqaSa4DZRPJj9fs0Hg@mail.gmail.com>
+ <20241202133507.GB2457179@bill-the-cat>
+In-Reply-To: <20241202133507.GB2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:20:20 -0700
-Message-ID: <CAFLszTjY8YUhY5ZowWN0BgCK4tis8TJKJhX-n=d=MwFynq0E7g@mail.gmail.com>
-Subject: Re: [PATCH 2/2] boot: android: Add bootconfig support
-To: Guillaume LA ROQUE <glaroque@baylibre.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Date: Mon, 2 Dec 2024 17:20:31 -0700
+Message-ID: <CAFLszTi2g6a9HZNsrMGKiegQSQCLUsJEccHv2OR2DPvb7sXtDA@mail.gmail.com>
+Subject: Re: [PATCH 05/13] efi_loader: Move some memory-function comments to
+ header
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,59 +101,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
+Hi Tom,
 
-On Mon, 2 Dec 2024 at 01:03, Guillaume LA ROQUE <glaroque@baylibre.com> wro=
-te:
+On Mon, 2 Dec 2024 at 06:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi,
->
-> Le 30/11/2024 =C3=A0 21:24, Simon Glass a =C3=A9crit :
-> > Hi Guillaume,
+> On Sat, Nov 30, 2024 at 01:24:54PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Thu, 28 Nov 2024 at 03:15, Guillaume La Roque <glaroque@baylibre.com=
-> wrote:
-> >> For android vendor boot image version 4 bootconfig is mandatory.[1]
-> >>
-> >> In the android_image_get_ramdisk function, after copying both vendor a=
-nd
-> >> boot ramdisks, we extract all androidboot.* entries from the kernel
-> >> command line. These entries are added to the bootconfig section.
-> >> We then update the sizes of the ramdisk and bootconfig.
-> >> Finally, all androidboot.* entries are removed from the kernel command
-> >> line.
-> >>
-> >> [1] https://source.android.com/docs/core/architecture/partitions/vendo=
-r-boot-partitions#vendor-boot-partition-v4
-> >> Co-developed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> >> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
-> >> ---
-> >>   boot/image-android.c | 29 +++++++++++++++++++++++++++++
-> >>   1 file changed, 29 insertions(+)
-> >>
-> > I am not seeing any tests for this code. Can you please update the
-> > test to cover this?
-> i don't know if it's possible with test framework in uboot, to validate
-> bootconfig raw partition is reading by android kernel. i don't really
-> know how i can do this , if you can say me if it's something possible or
-> not .
-
-We don't have a way to boot a kernel (yet), but we do have tests that
-check things are correct - e.g. bootflow_android() - and after a
-'fake' boot - e.g. bootflow_scan_boot()
-
+> > On Wed, 27 Nov 2024 at 15:11, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Nov 27, 2024 at 07:56:11AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 27 Nov 2024 at 07:15, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Nov 27, 2024 at 06:07:58AM -0700, Simon Glass wrote:
+> > > > > > Hi,
+> > > > > >
+> > > > > > On Tue, 26 Nov 2024 at 16:32, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Tue, Nov 26, 2024 at 11:50:40PM +0100, Heinrich Schuchardt wrote:
+> > > > > > > > On 11/26/24 23:33, Tom Rini wrote:
+> > > > > > > > > On Tue, Nov 26, 2024 at 01:04:25PM -0700, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Tue, 26 Nov 2024 at 08:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Tue, Nov 26, 2024 at 08:37:33AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > Hi Heinrich,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Tue, 26 Nov 2024 at 02:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On 25.11.24 21:44, Simon Glass wrote:
+> > > > > > > > > > > > > > Exported functions should be documented in the header file, not the
+> > > > > > > > > > > > > > implementation. We tend to make such updates on a piecemeal basis to
+> > > > > > > > > > > > > > avoid a 'flag day'. Move some comments related to memory allocation to
+> > > > > > > > > > > > > > follow the convention.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Please, have a look at this line in doc/
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > doc/api/efi.rst:78:
+> > > > > > > > > > > > > .. kernel-doc:: lib/efi_loader/efi_memory.c
+> > > > > > > > > > > >
+> > > > > > > > > > > > Hmm, we should not add C files as then we end up with all sorts of
+> > > > > > > > > > > > internal functions, like checksum(). The help is a bit of a mess on
+> > > > > > > > > > > > that page IMO and it could use an index at the top or side.
+> > > > > > > > > > >
+> > > > > > > > > > > Why? Looking at the linux kernel (where we borrow this framework from
+> > > > > > > > > > > and lots of developers expect to follow that style) it's extremely
+> > > > > > > > > > > common to kernel-doc C files. I don't see why documenting internal
+> > > > > > > > > > > functions (which should be clear as being internal) is a problem.
+> > > > > > > > > >
+> > > > > > > > > > It depends what you mean by docs. U-Boot puts the documentation for
+> > > > > > > > > > exported functions in header files.
+> > > > > > > > >
+> > > > > > > > > I'm sorry, that's a circular definition. And no, there is not a hard and
+> > > > > > > > > fast rule that we only put kernel-doc style comments in header files
+> > > > > > > > > (which are consumed by other files and tooling to generate
+> > > > > > > > > documentation).
+> > > > > > > > >
+> > > > > > > > > > Putting docs in C files clutters the docs with internal
+> > > > > > > > > > implementations, when most people just want to see the API. The way
+> > > > > > > > > > U-Boot does things, it is easy to see the internal (implementation)
+> > > > > > > > > > docs by looking at the C code and the external functions by looking at
+> > > > > > > > > > the header files.
+> > > > > > > > >
+> > > > > > > > > Or it makes things harder to understand because the human readable
+> > > > > > > > > documentation for a given function is separate from the file the
+> > > > > > > > > implements the function. This is possibly why in the linux kernel, where
+> > > > > > > > > we borrow "kernel-doc" from, documentation is frequently in the C file
+> > > > > > > > > which is then included in Documentation files (the type you objected to
+> > > > > > > > > in the start of this patch) which include additional human-readable
+> > > > > > > > > explanation of the intention and usage of the API in question.
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > For static functions we will continue to have function documentation in
+> > > > > > > > the C files and not in the headers. I personally never looked up the API
+> > > > > > > > documentation in the HTML docs but always in the source.
+> > > > > >
+> > > > > > Same here.
+> > > > > >
+> > > > > > > >
+> > > > > > > > I am not opposed against moving the EFI function documentation into the
+> > > > > > > > header files. But we should update doc/develop/efi.rst accordingly in
+> > > > > > > > the same patch series. This is missing here.
+> > > > > >
+> > > > > > OK
+> > > > > >
+> > > > > > >
+> > > > > > > My point is that the linux kernel is about 60% C files and 40% header
+> > > > > > > files being kernel-doc'd in to documentation files and so "U-Boot
+> > > > > > > doesn't put documentation in to C files" seems like the wrong approach.
+> > > > > >
+> > > > > > U-Boot tries to document functions in header files. At the risk of
+> > > > > > making a blanket statement with thousands of counter-examples, that is
+> > > > > > not so much the case in Linux.
+> > > > > >
+> > > > > > To a large extent, people developing features in U-Boot rely on the
+> > > > > > header files to see what functions they can call. With the
+> > > > > > documentation there, they often don't need to look at the source. I
+> > > > > > certainly don't, unless the header-file comment is inadequate.
+> > > > >
+> > > > > I think this is a case of what you do, rather than what everyone else
+> > > > > does.
+> > > >
+> > > > That's not my reading of the source tree.
+> > >
+> > > So, if we call this point 1 for a moment.
+> > >
+> > > > The file we are talking about has some comments in the header and some
+> > > > in the source file. When you use an lsp client, it doesn't know what
+> > > > to do.
+> > >
+> > > Sounds like a bad client? Because again, we should be following the
+> > > kernel here.
+> > >
+> > > > > We want to be more like the linux kernel here, rather than less
+> > > > > like the linux kernel, given the number of kernel people also working
+> > > > > here. If Heinrich is fine with re-arranging everything, OK. But I think
+> > > > > documentation with the code makes it less likely to get out of date,
+> > > > > both in terms of intentional changes and bug fixes.
+> > > >
+> > > > I am not suggesting separating documentation from code. I agree that
+> > > > makes no sense. What I have consistently done (and asked for in
+> > > > reviews) is:
+> > > >
+> > > > - exported functions are documented next to their prototype in the header
+> > > > - static functions are documented next to their implementation
+> > >
+> > > So going back to point 1 now, yes. This is what I'm saying. Your
+> > > preference, expressed through reviews and telling people to change when
+> > > they do it other ways, is where the current situation comes from.
+> > >
+> > > > This makes it easy to read the header file and see what the module is
+> > > > doing, without having to dive into the implementation, which could be
+> > > > 1000 lines or more. It also makes for more useful kerneldoc, IMO,
+> > > > since we are showing functions which are exported and therefore more
+> > > > useful for development. Adding the entire C code of U-Boot into
+> > > > kerneldoc seems like a bad use of space.
+> > >
+> > > Um, I don't follow you here. If the code doesn't have kerneldoc
+> > > comments, it's not included. I just made a silly test with a change to
+> > > include/clk.h. It's not included in the output. And "the code might be
+> > > so big it needs refactoring" is not a good excuse.
+> >
+> > Yes, I see that static functions don't appear by default, so adding C
+> > files doesn't necessarily result in functions appearing in the doc
+> > output.
 >
-> for kernel command line part is it possible to read it in test to check
-> if we find some androidboot.* entry ?
+> Only properly formatted comments are used in documentation, yes. So
+> static functions could be, if it was important to do so.
+>
+> > > The kernel is inconsistent here. The first example I went to look for of
+> > > something that uses both C and header files in a document was
+> > > Documentation/admin-guide/pstore-blk.rst and both fs/pstore/blk.c and
+> > > include/linux/pstore_blk.h are kernel-doc'd in and the header describes
+> > > a public function of the C file while the C file describes other
+> > > functions too.
+> >
+> > Yes, pstore docs seems like a nice way to do things, for docs.
+> >
+> > For people working on the code base, I strongly believe that exported
+> > functions and structs are the main way to understand how to use a
+> > subsystem, so their docs should be in the header file.
+>
+> Sure. But there is no project-wide rule. I strongly believe that the API
+> should be documented alongside of the code so that it doesn't drift
+> apart, among other reasons.
 
-There is test/boot/bootm.c which checks the cmdline. A small amount of
-refactoring was used to allow this.
-
-My suggestion here is to write a sandbox test which 'fake'-boots the
-Android kernel, similar to bootflow_android() but with a
-'bootflow_boot()', then at the end of the test you can check various
-things.
+Again we are reaching the limits of email, I fear, as I am not
+suggesting that we document the API somewhere other than in the code.
+It is just that the API should be in the header file, next to the
+function it relates to. It can't drift apart, since the header-file
+must match the C function, or it won't compile.
 
 Regards,
 Simon
