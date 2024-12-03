@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDBAE64A8A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 13:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E332E64A8F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 13:28:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 074AB88875;
-	Tue,  3 Dec 2024 14:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A9D6889198;
+	Tue,  3 Dec 2024 14:28:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z4TxXTIM";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="stLiM+oQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 664FC8964B; Tue,  3 Dec 2024 14:17:24 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D178888F2E; Tue,  3 Dec 2024 14:28:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F150885F7
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 14:17:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C41518939E
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 14:28:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-6ef60e500d7so36049847b3.0
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 05:17:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733231841; x=1733836641; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vS8+TUDkFDIwF+lbZ0k+xRCBj6HIal7KvPXad/qxdLA=;
- b=Z4TxXTIM7WtdYPZIHZy9KuCAQXUJQQgg2nJtDGL0/UsYWQZp24YQKAXiFmTOjHU62V
- z7dVHxdkrIohvQdGuC093eE03wuFqXLGvXzP0yl0x2Qn4UUUwzYeDWFi+c7F9PJ8l5UZ
- AX8FMa1lmBywVJ0sKKYrw35hIj+iP9kcaAIYtVKqQUt+Yo+AAWXCZbAK8uiTyxgMDBpL
- nRxnsQlTQVbJtQAvx0VY8GftxicCGmDQ+jCR87k8USdP+hcPWdkqGwrC9pJU71YhKb6Q
- p2/PnFrtdrDFETP0w4r2w6nDZ/CGg89VjIWnCIOtoS7Qyhqgq9dpllHk6Fh/dPZLFh3z
- TLMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733231841; x=1733836641;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vS8+TUDkFDIwF+lbZ0k+xRCBj6HIal7KvPXad/qxdLA=;
- b=Kx7YfoIF0yfxyPIXjlOT8DxTRbHNMI4wNzl7sOuqH9gvXWOI7HGvyq4I3HArtmrCaY
- l2guyUBTaYSJ6XBF1274/F8cTQSoSxp/F+4p8cVoqBwpei6dRuNfvSMdzkKjEAlNkSHH
- 4s2T/QMSJHs9+3rCcEh41Ju2xNU1cokvqcLCk9cmuBlX626aKzSvLeGo+RpMRqaB1H31
- UKMM3PV5ZUrLPY4RtRzIKLjUSBDAFUkJ8sVY3VIYtQhmq5oC6D7R1qCWVOt344m4yGlL
- TJ5WDBfn50BQUs52IzGNciv2HsnrNszWOGGzNyzhYaLNeLkkvMX5gIaXGYA+N8WYFVj1
- j/Uw==
-X-Gm-Message-State: AOJu0YzU34icGmXYAPUmnP/NQIW0NeNPmQQHD69I+9wSkLZem1wnWc2Y
- HqNcxMOzhAjPKUgP7wm8g58zssNYQN4BBMj68n2NT2UiJ4VURGPDBBb9B8F/o5Q0HHEJO+WM9Dh
- hT4kQlonYzv1BFl/mLngqoW6OT0jTDABvdj5TpG/EToWi3gCWntI=
-X-Gm-Gg: ASbGncs38mdzJY9CDL6Tv4BINmIQD5UwHeCfCEfo+kyNKcn8ZNOkmlaXv8O/I4uI78V
- luSLYqgQioe6TaIgFSxAwzfFWEK9OUV4=
-X-Google-Smtp-Source: AGHT+IHenYJmcsVthm0ADmwmCQ+Qsc/6qB+ImtRfWJSx80/8RRX71Z1WBSbFJzTtGIsJC6bHP4nY0sUB6QRYNYMa770=
-X-Received: by 2002:a05:690c:6886:b0:6ef:4fba:8151 with SMTP id
- 00721157ae682-6efacf5b7b0mr28366117b3.19.1733231840911; Tue, 03 Dec 2024
- 05:17:20 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733232495; x=1733837295; i=xypron.glpk@gmx.de;
+ bh=wYYynlgkmg440lK8rusT5hfwBUf60VtMjy8C7GiVrF8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=stLiM+oQXo8SJPFsWASSGut+s/UFJG1Gv2+i72ZEU+OYEvPLINNsAJSux57wclg7
+ QOYRZJ6ITgdTIWMlhH0YqJiDVhYL0q2zkQzxkMUHhabk3hd71E74ALZc4S0Zp7vLp
+ Qm2BzMcnkdA3YAZZBneiVK9Vsq9g9fYZqG7f5mY+96C7WOqFUsDPiNyLXBkFdzKGy
+ UBUddeOy12+8WNDRQF8SyNpKWhDoN/kEQzifq7h8uHie03exBuGqJqciNokvLPVX5
+ y1YLccAneBcaCEvbU3pEgc2bbn55SLA6yDldBAV4IfPZSmI0Ird1kT+7hj5fCgG8y
+ 0mgvcD5i52NvaHI0uQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MA7GM-1tOYXl2CCY-001bhY; Tue, 03
+ Dec 2024 14:28:15 +0100
+Message-ID: <e9b219d1-0e94-4596-9fca-f34cd174edd8@gmx.de>
+Date: Tue, 3 Dec 2024 14:28:14 +0100
 MIME-Version: 1.0
-References: <20241128144416.604126-1-adrianox@gmail.com>
- <20241128144416.604126-8-adrianox@gmail.com>
-In-Reply-To: <20241128144416.604126-8-adrianox@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 3 Dec 2024 15:16:45 +0200
-Message-ID: <CAC_iWjJAKSRGaD0P_S+F40h=Lm-pR10-pRLb_watBz0v9xapqw@mail.gmail.com>
-Subject: Re: [PATCH v6 07/14] efi_loader: device_path: add support for HTTP
- device path
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smbios: address build warning
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+References: <20241203134257.5067-1-peng.fan@oss.nxp.com>
+ <9211f24f-d406-4d57-820f-f5814fcd061b@gmx.de>
+ <PAXPR04MB8459658B4CAE851F480965DD88362@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <PAXPR04MB8459658B4CAE851F480965DD88362@PAXPR04MB8459.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:vKuXqrAGyGUhmm5OIlWsOzQ/AcM8uqvLYZ0dlqhtOAM3Qa+r9t/
+ g5GDS85Mc0oxHOQdmxAR5lQBSdspxK8UY5pMpIbyAUwuCI5h0GJ7pP42klWqxpwCTq8Riq8
+ 0CpT8xuxwVuago75gPSiBm2/GXBsUOrm6D2vkxCHvgKbRorlkywmE2rKsM3zWYDiK1Oq1T9
+ alMpMOhCc4LKOwswfTSGw==
+UI-OutboundReport: notjunk:1;M01:P0:YkKXRqynDrU=;oKlpTABjxBdm3Avfn525p1hGR+L
+ PVNLbiFfOG6xLKwiGe3MXyByd6UxQTfrfhByxMxXWHNi3F+OhFwz0TcfAM1c4aJFJTKf0gTlm
+ oY/TM7+vNFRsmrKNtK2qE4GVPRrlrs2x7Jc6h94tS8yqIVqScaL96PEHQrsxHVN2oNaY7sGGU
+ OJ7wZ7+RHWY4QL8B+ppdNdubhJfSo2oHHtdGeP5M7VAY5zhdL267B2M80Iv9/mPk+G5Bj43db
+ yaB7ri+WvJT09ttQrcPIA4DiZIoIZtsTQZAMqNnVhCcfPpJHTWo1RlyrqGUCGaPJl5H+XAHwZ
+ QT1qu8lO4O6yfmuQT1EYQvoZT9fC3wWRFiN33xB2zixhPs9v5RKCPr5Ni2k/wuRCT5r/kx3fF
+ rHHFouuMTYUjDLifIl2gz1ZMttRUbjh9BbUo1MXR29eSL6xGvawPpCzmgkYeTckofxPHFPhL7
+ ejflUNRhf3HC6naw6uf52ZzVnzr8oV/d/5lk4sYuVKt3Hay0tswU+u4Y2JC7I5vkr+XMgvbaP
+ xAHn6FsOJr7kX/2u8HQkMFx+bozptarfE/uhvMVR20kXOBliGo6RN6/r89QjvZxIqV4DS2Rx5
+ PraUy1hpOZU+46uKiwjWVIQicp4m+uTW/YXTWWIGN9Ab4b7VrayYKDXxPmOk4uVJ23nrY1xvw
+ sMOXGvgIlx983u8nZggnfnRkhzqzlQ5OU86OXowPZei4xT2y207EfoF+38PRtLS265ckGmJVL
+ MfVzMMeTuXnNPpQgNWl6XxLiiGqLIKmTE7u0yATAb//YaCd+QIuT++MZIe3bpGuZFAtmQ75Ky
+ 44JjXdWoP83p9VJZXPFz0xCNID389XVb/bzFiW8Ibug6r3rTe6kPeWg2H2TqwtDGb0P1euCXe
+ aiLq8i5ueeTgQOfa5b7NLS3abShNbT1PgTLqY8P27xfG+q2wVznAP9aXA/RGtPGPTSQWlSLwf
+ KuAqCZPGzZOB8cH2hKLhiYJQh3dJ8x+9IxNV8dWuySrNCi+Pddsp+rYsLizilelsQ8Um9nKVD
+ jd6xkFqA6UNk3SJFMzFYnfuHGns0LzXnkObhSQH10S0iAK553zeTYiwm75Mg88nBJ4yKD39Ja
+ ZA0Uwalp6gv+yNlO4ahw308/FRBV8Z
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,108 +99,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 28 Nov 2024 at 16:44, Adriano Cordova <adrianox@gmail.com> wrote:
+On 03.12.24 14:16, Peng Fan wrote:
+>> Subject: Re: [PATCH] smbios: address build warning
+>>
+>> On 03.12.24 14:42, Peng Fan (OSS) wrote:
+>>> From: Peng Fan <peng.fan@nxp.com>
+>>>
+>>> include display_options.h to address build warning:
+>>
+>> build warning occurring with CONFIG_LOG=3Dy
+>>
+>>> lib/smbios.c: In function =E2=80=98smbios_update_version=E2=80=99:
+>>> lib/smbios.c:305:9: warning: implicit declaration of function
+>> =E2=80=98print_buffer=E2=80=99
+>>> [-Wimplicit-function-declaration]
+>>>            print_buffer((ulong)ptr, ptr, 1, old_len + 1, 0);
+>>>            ^~~~~~~~~~~~
+>>>
+>>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+>>
+>> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>
 >
-> Add efi_dp_from_http to form a device path from HTTP. The
-> device path is the concatenation of the device path returned
-> by efi_dp_from_ipv4 together with an URI node and an END node.
+> Thanks, please let me know whether I need to post V2
+> to update commit log to include
+> "build warning occurring with CONFIG_LOG=3Dy", or
+> Maintainers could help update when apply the patch.
 >
-> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/efi_loader.h             |  1 +
->  lib/efi_loader/efi_device_path.c | 64 ++++++++++++++++++++++++++++++++
->  2 files changed, 65 insertions(+)
+> Thanks,
+> Peng.
+
+To me the patch is ok as is.
+I was just wondering, why we did not see the issue in CI.
+
+Best regards
+
+Heinrich
+
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 612bc42816..96b204dfc3 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -872,6 +872,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part);
->  struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
->                                          const char *path);
->  struct efi_device_path *efi_dp_from_eth(void);
-> +struct efi_device_path *efi_dp_from_http(const char *server);
->  struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
->                                         uint64_t start_address,
->                                         size_t size);
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> index 6fcbc91e0b..a6d4300686 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -1021,6 +1021,70 @@ static struct efi_device_path *efi_dp_from_ipv4(struct efi_ipv4_address *ip,
->         return dp2;
->  }
->
-> +/**
-> + * efi_dp_from_http() - set device path from http
-> + *
-> + * Set the device path to an IPv4 path as provided by efi_dp_from_ipv4
-> + * concatenated with a device path of subtype DEVICE_PATH_SUB_TYPE_MSG_URI,
-> + * and an END node.
-> + *
-> + * @server:    URI of remote server
-> + * Return:     pointer to HTTP device path, NULL on error
-> + */
-> +struct efi_device_path *efi_dp_from_http(const char *server)
-> +{
-> +       struct efi_device_path *dp1, *dp2;
-> +       struct efi_device_path_uri *uridp;
-> +       efi_uintn_t uridp_len;
-> +       char *pos;
-> +       char tmp[128];
-> +       struct efi_ipv4_address ip;
-> +       struct efi_ipv4_address mask;
-> +
-> +       if ((server && strlen("http://") + strlen(server) + 1  > sizeof(tmp)) ||
-> +           (!server && IS_ENABLED(CONFIG_NET_LWIP)))
-> +               return NULL;
-> +
-> +       efi_net_get_addr(&ip, &mask, NULL);
-> +
-> +       dp1 = efi_dp_from_ipv4(&ip, &mask, NULL);
-> +       if (!dp1)
-> +               return NULL;
-> +
-> +       strcpy(tmp, "http://");
-> +
-> +       if (server) {
-> +               strlcat(tmp, server, sizeof(tmp));
-> +#if !IS_ENABLED(CONFIG_NET_LWIP)
-> +       }
-> +       else {
-> +               ip_to_string(net_server_ip, tmp + strlen("http://"));
-> +#endif
-> +       }
-> +
-> +       uridp_len = sizeof(struct efi_device_path) + strlen(tmp) + 1;
-> +       uridp = efi_alloc(uridp_len + sizeof(END));
-> +       if (!uridp) {
-> +               log_err("Out of memory\n");
-> +               return NULL;
-> +       }
-> +       uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-> +       uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-> +       uridp->dp.length = uridp_len;
-> +       debug("device path: setting uri device path to %s\n", tmp);
-> +       memcpy(uridp->uri, tmp, strlen(tmp) + 1);
-> +
-> +       pos = (char *)uridp + uridp_len;
-> +       memcpy(pos, &END, sizeof(END));
-> +
-> +       dp2 = efi_dp_concat(dp1, (const struct efi_device_path *)uridp, 0);
-> +
-> +       efi_free_pool(uridp);
-> +       efi_free_pool(dp1);
-> +
-> +       return dp2;
-> +}
-> +
->  /* Construct a device-path for memory-mapped image */
->  struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
->                                         uint64_t start_address,
-> --
-> 2.43.0
+>>> ---
+>>>    lib/smbios.c | 1 +
+>>>    1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/lib/smbios.c b/lib/smbios.c index
+>>> a36d4b4e54a..defb6b42f45 100644
+>>> --- a/lib/smbios.c
+>>> +++ b/lib/smbios.c
+>>> @@ -7,6 +7,7 @@
+>>>
+>>>    #define LOG_CATEGORY	LOGC_BOARD
+>>>
+>>> +#include <display_options.h>
+>>>    #include <dm.h>
+>>>    #include <env.h>
+>>>    #include <linux/stringify.h>
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
