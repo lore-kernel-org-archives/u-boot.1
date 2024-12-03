@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8069E6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:24:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15711E6C5E3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85EF288A0A;
-	Tue,  3 Dec 2024 01:24:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 96E3A895CF;
+	Tue,  3 Dec 2024 01:34:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YblkvxlL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rHnN2Ogy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93F9789288; Tue,  3 Dec 2024 01:24:49 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 00D398957F; Tue,  3 Dec 2024 01:34:29 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A2A088717
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:24:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7415E89588
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:34:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa543c4db92so717596566b.0
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:24:47 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6d3e9e854b8so53500496d6.1
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:34:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185487; x=1733790287; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SpkNVWo3XpcDdpNggop1I51dlSbBrchvWP+RFjYa/8g=;
- b=YblkvxlLhS2naH1gzXOrX8Pi+hxNQj9gQGsCmcuSLrWwAGZB+efvqmWDNUH+Ya6gZV
- PNHYpNSfxN3RwiNHEc3bSRhrFux3QHRdvOGf/Zq9Ttlor4FFwyOhERKJ0zt7LGV2Cgyx
- 5vYS/RzNYaK5tXpmsqa16uez55g8i1+N4M++c=
+ d=konsulko.com; s=google; t=1733186065; x=1733790865; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NfZYsxWlWlmcTqJUqXW4Eo8/vCkVtNE2gbtU4uVWMQg=;
+ b=rHnN2OgyPLVyJsE7ZxeC7IAx3ubYaYp1UBG+6uMKe1OhS1UF6tJvMLuE7GvgS1wDRA
+ y3TA/t2hGJX1qnqwc63S70v6IKsZ6HjqtiVtj7LxQCcUNbOvpPouZJoaCmciUY3DuSsN
+ fGapb51LQgTRNQlytaKsnROon9SAmGOVM21xE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185487; x=1733790287;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SpkNVWo3XpcDdpNggop1I51dlSbBrchvWP+RFjYa/8g=;
- b=r3ga2sRqBOyBZloiO9TjI+BgKcyQT/A4Dt0JgJ4aLtnTW+1tZUJcg5Eha9Qtco6ZOj
- jqlA4SnTr/C03G/YsNgqygYXNGpd+7gI0OFMP49LGstKn4/G2ONe9WS12MngrhJY7HQP
- Sev0V0XHzRBG4DjMUYp+E3s5cj6jkR0QWZzgpwL31pzedyuIGMLQKvmMjzoZ6n2xH3CT
- zVGanFOiLmUCqVbGqdbClTn2kWNcw+/I+anTPAIkXAX2Sa/ckNsNrOwpYDNkTdoDd3hH
- J3VpPbjl29ZppRNrDuv7QflPNDEngQjgleY5pBeSqx6iD7S5cTB+A1b9NoqZgIe/iNFP
- XoSA==
-X-Gm-Message-State: AOJu0YzOkYlFy1gTX8Lj/7e81S7JVyG5LRGoPlQtYXj5/aWC8zfoCQF4
- l0hiHiQ/j/335ES6GB9Gv8qG6XdTPkTEU1GjpXm/saWc+cN/0J4WGX+8Lh3m6q+ZDoGjWS9Vre+
- FWtrF8FIIPGPZU67N/mMYHTNFPFJ818MH6WF1bK3oEsciYBk=
-X-Gm-Gg: ASbGncs+vIY8w5xNZzgO4+SFp5yw0H8ZCRdKzWf2M54oL5A/H1O7yAy7hdqWLoppuXh
- o2pG3kFe/11yCVDySTNYSsEQ/nu3yh+NR
-X-Google-Smtp-Source: AGHT+IHtrYmwTJccnWlEgtULEGKET2xfrVfldAmeEhftEqkH3HfhOAQyCyRFABsB5xpe9w34g/z5vlkKVENKTpm8tzM=
-X-Received: by 2002:a17:906:2932:b0:aa5:1ef5:261e with SMTP id
- a640c23a62f3a-aa5f7d4ed45mr17827766b.17.1733185487096; Mon, 02 Dec 2024
- 16:24:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733186065; x=1733790865;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NfZYsxWlWlmcTqJUqXW4Eo8/vCkVtNE2gbtU4uVWMQg=;
+ b=GjhLr018xkDsQhcgY3PIC05kfVIswSFTrVhvHU8Qgd5oGlG0aSHp9PGrqpaY85LpDu
+ uMaWu7D2QhZ0OmTPph06Y3l4LDtEIDi2egnE+kg4ipxj70JpB5GarP7MA4pX+8NFT2Jq
+ moM24IPXkRsy7N2XR84Xvyje4O0RQE3YYpQgswWOcM973/9BpoGHJZmJyVjdC+YOb9my
+ 4zT3oVRwq5cII7lUvfL/J/MaK58s4ck//ewfFf5Km5Rbx27aogpb/7BzyvAHRrb4coYA
+ Yli1zPKwKcffu2eunjpdtVcXLTG8AQgzL+Gqy45HTvgWqYMJEAAWFDMx31hCi2saUdrY
+ 7Zaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzIZ1kJ/C37I83F5Z5RrJM+LSSC9UI9yxlDhW3l9nZuV+cu+zyLJJLaes+J5crLtI9yW1XxgQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YxgVjnzSZGBeCXopjubBShipBgnWHjab3YBFgwl6B5l84J1fCXG
+ xyqWX+7tOFnfyZgKsb1ITxLg09taZ/TObu13kWOVTHiRvsU8YtAjxdbHBpOnvjc=
+X-Gm-Gg: ASbGncsEoIFMcFX2GlWZDJqouJ037fssUdoEWgHlh/gxpcU6Gr+GD0JlkimzINuCyIX
+ xpNnVCv1AZgfs3an1qG5HU5rLRdrMU3yL0UPV++Xph+CCvUT396REaT5bdPvCML+wG0xPdeT6wA
+ cGwfD44HXz5itkugwqUOAr6XMuyHbDIRCM76k290oonYUlbnuhdRiZDy8zgl4jHVAUspbe9KKec
+ oZ9nNufuBHFV82ly8kvTZCfEsJr4CGqD1BHkS0ewgWv0iB/7Q==
+X-Google-Smtp-Source: AGHT+IGm7Otr3rRzzwEaDsPgnW4Z1gL2LZ4hY+hGebuvTdwCiJ9JTTmNdRXKK+mNiF5ao+1U0l/BjQ==
+X-Received: by 2002:a05:6214:c84:b0:6d8:b81c:ecc1 with SMTP id
+ 6a1803df08f44-6d8b927a529mr6279056d6.13.1733186065324; 
+ Mon, 02 Dec 2024 16:34:25 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b684921605sm461344985a.25.2024.12.02.16.34.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Dec 2024 16:34:24 -0800 (PST)
+Date: Mon, 2 Dec 2024 18:34:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Guillaume LA ROQUE <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] boot: android: Add bootconfig support
+Message-ID: <20241203003421.GK2457179@bill-the-cat>
+References: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
+ <20241128-bootconfig-v1-2-0e63a5dae82c@baylibre.com>
+ <CAFLszTgFBtQBiC_Hd9gjUJa26aFFXLGuuvJ5gVDLEaKH-SV-dg@mail.gmail.com>
+ <991937a4-9bcb-43f8-99d9-013d0c9d2dff@baylibre.com>
+ <CAFLszTjY8YUhY5ZowWN0BgCK4tis8TJKJhX-n=d=MwFynq0E7g@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-4-sjg@chromium.org>
- <20241202201641.GF2457179@bill-the-cat>
-In-Reply-To: <20241202201641.GF2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:24:35 -0700
-Message-ID: <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
-Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
- efi_mem_carve_out()
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ep4pbrPTHi9f+mbh"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjY8YUhY5ZowWN0BgCK4tis8TJKJhX-n=d=MwFynq0E7g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,45 +101,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
-> > Simplify a few expressions in this function.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  lib/efi_loader/efi_memory.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index f1154f73e05..3b1c7528e92 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
-> >
-> >       /* check whether we're overlapping */
-> > -     if ((carve_end <= map_start) || (carve_start >= map_end))
-> > +     if (carve_end <= map_start || carve_start >= map_end)
-> >               return EFI_CARVE_NO_OVERLAP;
-> >
-> >       /* We're overlapping with non-RAM, warn the caller if desired */
-> > -     if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-> > +     if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
-> >               return EFI_CARVE_OVERLAPS_NONRAM;
-> >
-> >       /* Sanitize carve_start and carve_end to lie within our bounds */
->
-> As I believe was mentioned in a previous iteration, please drop this as
-> they aren't excessive generates a compiler warning, merely for
-> clarification and should be kept.
+--ep4pbrPTHi9f+mbh
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I did this patch because checkpatch complained and I am changing these lines.
+On Mon, Dec 02, 2024 at 05:20:20PM -0700, Simon Glass wrote:
+> Hi Guillaume,
+>=20
+> On Mon, 2 Dec 2024 at 01:03, Guillaume LA ROQUE <glaroque@baylibre.com> w=
+rote:
+> >
+> > Hi,
+> >
+> > Le 30/11/2024 =E0 21:24, Simon Glass a =E9crit :
+> > > Hi Guillaume,
+> > >
+> > > On Thu, 28 Nov 2024 at 03:15, Guillaume La Roque <glaroque@baylibre.c=
+om> wrote:
+> > >> For android vendor boot image version 4 bootconfig is mandatory.[1]
+> > >>
+> > >> In the android_image_get_ramdisk function, after copying both vendor=
+ and
+> > >> boot ramdisks, we extract all androidboot.* entries from the kernel
+> > >> command line. These entries are added to the bootconfig section.
+> > >> We then update the sizes of the ramdisk and bootconfig.
+> > >> Finally, all androidboot.* entries are removed from the kernel comma=
+nd
+> > >> line.
+> > >>
+> > >> [1] https://source.android.com/docs/core/architecture/partitions/ven=
+dor-boot-partitions#vendor-boot-partition-v4
+> > >> Co-developed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> > >> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+> > >> ---
+> > >>   boot/image-android.c | 29 +++++++++++++++++++++++++++++
+> > >>   1 file changed, 29 insertions(+)
+> > >>
+> > > I am not seeing any tests for this code. Can you please update the
+> > > test to cover this?
+> > i don't know if it's possible with test framework in uboot, to validate
+> > bootconfig raw partition is reading by android kernel. i don't really
+> > know how i can do this , if you can say me if it's something possible or
+> > not .
+>=20
+> We don't have a way to boot a kernel (yet), but we do have tests that
+> check things are correct - e.g. bootflow_android() - and after a
+> 'fake' boot - e.g. bootflow_scan_boot()
 
-Regards,
-Simon
+We already have a test that boots the kernel, test/py/tests/test_net_boot.py
+
+--=20
+Tom
+
+--ep4pbrPTHi9f+mbh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdOUgoACgkQFHw5/5Y0
+tyxSQwwAlYAV1SL2WfoJBHLdxVhPywHmYuam2/VX+d9T9lN8ULJiUxtafwtguAuo
+YRiddvvPACyUxjV8V+ncxUTGAdHO8y3VUe9i33F+tT5kW0Z3AUKLCDM4d0cqlYwV
+GBbdJA71qW1/TBRR5uru8KhYlVVY7y3DUHEmqv0jdg4W2Lpq5hDXuAo6loWubNXm
+uy9AcB9o21Wdm0g9cJKHZ0sFqD/ykfNOxjT/7asL0HspgbYkKL+lUMnGflKiXGbg
++Cl56sb/8F+DO0Dydp6iAAeCwHSUckKt8ZkgGyO8pWSmVq1Pvxxv1RFgUvS7kgle
+bcVBq/7h7VrVhkW0JQqeOwUTuJcBqCFP0itIQTr7GCxUzIUA/qdwJ9nu7/RCufyP
+fuHZZAoG9SAkBMytktjcjt8KbyxyhFLw4qzD6AyMcWxH0jagFfeVDTOBtZZ9nK0j
+JCagERwyGG0YyURpyhekhKO/M0oI1g6WIzx6bImQKRLDgRZylxA+02ndOJlBrxvu
+DAN24g+p
+=WLcS
+-----END PGP SIGNATURE-----
+
+--ep4pbrPTHi9f+mbh--
