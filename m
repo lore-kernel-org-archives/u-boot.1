@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153B1E64A80
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 11:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 431FFE64A80
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 11:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F34589345;
-	Tue,  3 Dec 2024 12:47:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A395089647;
+	Tue,  3 Dec 2024 12:48:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="h5X21bfA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YT9v92E1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E606A8963B; Tue,  3 Dec 2024 12:47:01 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id A16F58964B; Tue,  3 Dec 2024 12:48:46 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD9AD89048
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 12:46:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C4D989048
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 12:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733226415; x=1733831215; i=xypron.glpk@gmx.de;
- bh=K09qpVjSXvUAbK2WcEwIDZ+G/kxvlVDH6HBro/f5n54=;
+ s=s31663417; t=1733226520; x=1733831320; i=xypron.glpk@gmx.de;
+ bh=NIuWhH1kjsVW4F5zaWfEhikgx1yd8wzb7fAF6FucZMk=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=h5X21bfAeDvTEHDgMofpDXcrb7POh3U5Po9LNkn0EL4ZtlMu3FJaiTAXJRGzQTI3
- IihULtbhEXSPYD8FoWOjyLE7IOEnkoKXEaXpK7uz7Zs8pTPQzHogptbnX6BkF6xIw
- 8Vehm1YaoSorGBl+UL2sWeTP+n6MB+i1OnMToFL4sSjN1L3oZsPeU9kWkSdMluwjO
- 0EyMvqoZgEq/xLQUIdyb9GqW3FBd35Pcwe99ObDzPlHLsnX+xBUr17/4tzyJnlTJF
- fmUGRMBzwO4v9QtahC2AJXdXmLEINRIYrZWEgTISiK9LAdgiiriHzXIcT7v9QfJ4c
- HS6jgK2z6X6QpxiE8g==
+ b=YT9v92E1JreJscgysv6KwcIOzKlVfxPxqXKTCDo7LENA9wlFPdHpWsCJ7qEvZZgF
+ zQ7OAVUtc54KSZzsiUDcsQcbmvZQsFeMpgTPspEkvhpcySl2fM3XuqQrexpNDI9UB
+ mxwqz+9DhaO+MJsIFLh8oqty13g3JGT3w3UyOfIiiHC0kDMka3x4F9axnYsKXCVyn
+ +Frs5mqv3kbRaSqWNZ5dy0BQp6HyY20v6h3DOEfscTvhgOlFvLIouXOj4v93T/ud0
+ 8woB56bDCNLZssRxvze3FnBfL0hvkIQUJC4JB/AgAirJ2nIW++wsqhMlzgw0HhdAK
+ vp89yOkgPzzRTrUJgQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7sHy-1tMIzE43wQ-006PgJ; Tue, 03
- Dec 2024 12:46:55 +0100
-Message-ID: <c8982185-bbb6-4d50-84d0-771af91bdb02@gmx.de>
-Date: Tue, 3 Dec 2024 12:46:54 +0100
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MxlzC-1taNkM0Rd0-014JVh; Tue, 03
+ Dec 2024 12:48:40 +0100
+Message-ID: <a8a92ac4-ce81-4b5f-82c6-ba2ec4a343d3@gmx.de>
+Date: Tue, 3 Dec 2024 12:48:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 08/14] efi_loader: net: set EFI bootdevice device path
- to HTTP when loaded from wget
+Subject: Re: [PATCH v6 09/14] efi_loader: net: add support to send http
+ requests and parse http headers
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
  jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
  u-boot@lists.denx.de
 References: <20241128144416.604126-1-adrianox@gmail.com>
- <20241128144416.604126-9-adrianox@gmail.com>
+ <20241128144416.604126-10-adrianox@gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241128144416.604126-9-adrianox@gmail.com>
+In-Reply-To: <20241128144416.604126-10-adrianox@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:N/atH9tya/Qk2dBUqq/GHddiOx7h4F36TATB6KURpaCgDGOOkpa
- yEwUGz9eVoisdZRc3IHhR8YixuIEWMk5w+0WCov8i5wTFz+cV2I7oi2FPc35gIBJ9S7137E
- 0Y4fJJaBN9p+qjxiqIIyZqOqS4VF7GxtIY1wOvYeYUFppHvW2B7F8rNm5Vrv3t0Y6JLuo/i
- WwaGi56FpmGwrNC+/U9dg==
-UI-OutboundReport: notjunk:1;M01:P0:W7ZIoncNzmM=;gpGGWmpQQbuzWwQN8tOl2MRYsig
- /gB1SX5XGn3ISsLDn0DBdH9CVAHeWhxYwJ1AqT6IXjZ8dbqWKne9P2lauo1AsqKl0vDCrmczl
- Ng8bH7o9Gp5XMjsy9Hqz8tfFPHvXK+I231Rgs/UbFKtCYOZfbrN8AkOUKUxILdZ0GS4HrMc+J
- NWPlaYFetU1NY8XR77zQe7ngRznRIP8Smy3ldznKqr588PBxWFH8PX2HNPcbx+tgTfkIxjUye
- I2nOSvsiHa7KcdyShR1HcV1o7lCxX81KSokTC5nGRYLoRqAthNsaTYbUmbQC88YCiFyVglPuI
- iRv+Bdg1BCs1ga6fVzVtFYxqNHd3M+lmTQBsU7kmIChxxQcBvw4sQ0OveYju7HRk5J52l0HoS
- JaKiS1bG2hmfY3I3CNzJJDuhlK9AHkZyMq9yTwWR49wc//VZyXQQkolOObcvMz6hTBBMUTLou
- kgDxStSX6PX3KIMGNUQ5H315VrPhC3LyeribGExTftWJXaNSFDK0czXbiwdHUUAG6hD/vpJba
- z1NOmG2ALIusMYM6OvbGq9Yb1X7oneH3LeTiXLekj/5eWUfbXHdXQW4EuY1/RVevcMY/sSyE1
- RBzb7gbr2E9Z/djEMBDFsyuqj5Crk7TqDj5L6hDIkyVRCl2U5YNmgaQo6zIIph1eRQEPG0krQ
- y9Za9G3D0WchT9ysktGJkP89ueoJX62tmiB5m6UzBhn2pS5k0kdiwyTZN+Ud7D7u0/3LMyg4X
- yagUv+vpMjjIg30BeTglowezctVjLdoTW8IUweke+nImFRPblA1SSSBYET46NGaSdm3e3VzJT
- BPtosTT5r6xlVVw0PfTtRlFZ1GQkXq9bFJC2guF9F5Y+P86aCK70Alj4Cog5UxyXJ2Ii5Z7v9
- silBZkOPH8fmK0FmA7lRIhimWKKNNgZe+REPrtWJ1+erKzvREzCPPsOISuyyX16ZZw/dP/YP0
- PvBrvrKPX2WQluwxyIocWvJ8sw7vZCZed/PQFA5yiM8m0oxgoLx7PXO6AW8OiTlj9KoPXmOF5
- ELPYGSKbOrQNKbGqVmASRfiBpX2mbJ1keis5U0e8YFz45tidgQnGx9nEPkzvTpZwaWFXUwwmJ
- pHaxMhgGiHbbzFFTkIHjdL61TjqvAI
+X-Provags-ID: V03:K1:+SdkEPbszK9r6Lx8Q2PK/fR4CUXgrMwOrd510KeTz+QjFqrPWoc
+ 4cVyqcEvSh24M/GkRkrCjoFeWpHUqqxJR8k1FARzZVFFkNUoDL1PMTQnKK9fzgtAC93DGnE
+ X0aGNJb5pdREp2ZjTbiaMcdQXCaFeLztP/vKhEbQxY653uMf20bGRVv3ltgbNadDH1TgMxb
+ l+W9SmnqZ75OFicsrXM4w==
+UI-OutboundReport: notjunk:1;M01:P0:y9vqHssIhhQ=;h2M7aHkYDFxhV960kikGPob0/hn
+ Ilzm7Z3ZznYJhMSI1PKk5WI+s/hHftVwsDK471tSrnYUlZoXUC04goI4wknVmEAEPpqtqShKV
+ +N1SatbMjmnvjoxjH2cUAPWYSAr2aBwew4yBgh5ZsoMFgS+QB7rh7U0hjyBJZu7oy8K4PMQgA
+ jrqJ4pHYsJxDBQBcFHwGcfmK8sLIp6cz+294Kiq+ZGp2D5tuYhKgonxzdRO7lxCHfoR4YHsmE
+ leRcoS+u3KtMgTs0zCF9OJK15NfXkZrDKIwEKJhJ72xntAMb9Za1WI5ZAUUMpdOqGN16xjlaW
+ yGGJVF5BFxNqCVEzpKY5BGG56K16mY3Ss8fNgeWzZUEvPnG2A2LhTzCW8jOVLvjU/YASZmOnD
+ reld4NWVGmVEoCQVUSKlfQx3NauiW/aaA8ruHdXvyMERAXzANVC2zhneKBbHtTntoOfy+rVoA
+ Z3KjuGFLjVjiAGGKEajL2+OKOdS57PXppQoLL01TKkKk3T37NN4TjCsQJwD6UuTi7vSj/uWaV
+ ZJIcSOUD9d1GdfCNXVHQ1alWrIXPZl5Z2VoJlIHmb1E3g5XyBdMrEKZ5WQE/n+QH8yhYIIl9X
+ 2dmk4kyLtslnhJO9DHNI74ybHL47wGNw5daFMI798TLhYto2VHWGYQQpw2Og6V2yfde9wc/VX
+ ytmqPyiG79lJMnMHUaiVKJBxIjs5ijHZGwEfNPzMydPTOfBZ7pbt41MqFUVCgnEvBcCvFDnQi
+ M+1SGHN70CUbjLBkdI4nQ8gzBM7W4kFs6+7ZoTNc7OG7Rd2edksWEt5c/1J9vsNQn3KLLeYc/
+ yyzNJagGb5pnEKbcSHJEUTEXT+TwftmplKvM5b6bPTuByKgDhNZFkx1CS6RKxTNuCv/d8V+PZ
+ geC8leFpCoSzOcboSyZy46F8+buKGge2VcQOGypB9WidyKSlyMbZkZtY6v8nYi6NGcqjB7S5A
+ FvJPbYJcGhDsk+o7/Ll71b5pMZsMm8/j9mnBUYV+vd8ZimN/B8AUYSw3ATrB2KTkkxh57GqYM
+ c/rMleefd2sPGVOpbjrah1vBzHtid8LInXaYO68yp2Rwog/iKogfFLDq0YNvaI7cpE5Sl000T
+ QuBwqwVaBRgepr5EZEN+8uNBpORQhr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,262 +98,258 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28.11.24 15:44, Adriano Cordova wrote:
-> Set the device path of the efi boot device to an HTTP device path
-> (as formed by efi_dp_from_http) when the next boot stage is loaded
-> using wget (i.e., when wget is used with wget_info.set_bootdev=3D1).
+> Add network-stack agnostic way to send an http request and
+> parse http headers from efi drivers. This uses wget as a
+> backend and communicates with it via efi_wget_info.
 >
-> When loaded from HTTP, the device path should account for it so that
-> the next boot stage is aware (e.g. grub only loads its http stack if
-> it itself was loaded from http, and it checks this from its device path)=
-.
+> The function efi_net_do_request allocates a buffer on behalf of an
+> efi application using efi_alloc and passes it to wget to receive
+> the data. If the method is GET and the buffer is too small, it
+> re-allocates the buffer based on the last received Content-Length
+> header and tries again. If the method is HEAD it just issues one
+> request. So issuing a HEAD request (to update Content-Length) and
+> then a GET request is preferred but not required.
+>
+> The function efi_net_parse_headers parses a raw buffer containing
+> an http header into an array of EFI specific 'http_header' structs.
 >
 > Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 > ---
-> Changes in v6:
-> - Add error handling to efi_net_set_dp and put it inside efi_set_bootdev=
-,
->    reducing the number of calls to efi functions outside efi code.
-> - Free net_dp before an update
-> - Complete documentation for efi_net_get_dp. Error handling: returns NUL=
-L on error
-> Changes in v5:
-> - Add description of net_dp
-> - Change a void** for an efi_device_path**
-> (no changes since v2)
 >
->   include/efi_loader.h             |  5 +++
->   lib/efi_loader/efi_bootbin.c     | 40 +++++++++++++----------
->   lib/efi_loader/efi_device_path.c |  5 +--
->   lib/efi_loader/efi_net.c         | 55 +++++++++++++++++++++++++++++++-
->   net/lwip/wget.c                  |  5 ++-
->   net/wget.c                       |  2 +-
->   6 files changed, 89 insertions(+), 23 deletions(-)
+> (no changes since v4)
+>
+> Changes in v4:
+> - Remove void* casts
+> - Add documentation
+>
+> Changes in v3:
+> - Add a struct wget_http_info efi_wget_info for efi_net to pass to wget
+>    when issuing wget requests, instead of using the old wget_info (see v=
+2
+>    of the series 'wget: Expose wget to applications').
+> - Let a pointer to the http status code be passed to efi_net_do_request
+>    for it to fill it for the client after a request.
+>   include/efi_loader.h     |  13 ++++
+>   lib/efi_loader/efi_net.c | 155 +++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 168 insertions(+)
 >
 > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 96b204dfc3..0da0248db4 100644
+> index 0da0248db4..b6f865ca76 100644
 > --- a/include/efi_loader.h
 > +++ b/include/efi_loader.h
-> @@ -126,6 +126,10 @@ static inline void efi_set_bootdev(const char *dev,=
- const char *devnr,
->   #endif
+> @@ -16,6 +16,7 @@
+>   #include <image.h>
+>   #include <pe.h>
+>   #include <linux/list.h>
+> +#include <linux/sizes.h>
+>   #include <linux/oid_registry.h>
 >
->   #if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
-> +/* Call this to update the current device path of the efi net device */
-> +efi_status_t efi_net_set_dp(const char *dev, const char *server);
-> +/* Call this to get the current device path of the efi net device */
-> +void efi_net_get_dp(struct efi_device_path **dp);
->   void efi_net_get_addr(struct efi_ipv4_address *ip,
+>   struct blk_desc;
+> @@ -136,6 +137,18 @@ void efi_net_get_addr(struct efi_ipv4_address *ip,
+>   void efi_net_set_addr(struct efi_ipv4_address *ip,
 >   		      struct efi_ipv4_address *mask,
 >   		      struct efi_ipv4_address *gw);
-> @@ -133,6 +137,7 @@ void efi_net_set_addr(struct efi_ipv4_address *ip,
->   		      struct efi_ipv4_address *mask,
->   		      struct efi_ipv4_address *gw);
+> +efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, v=
+oid **buffer,
+> +				u32 *status_code, ulong *file_size, char *headers_buffer);
+> +#define MAX_HTTP_HEADERS_SIZE SZ_64K
+> +#define MAX_HTTP_HEADERS 100
+> +#define MAX_HTTP_HEADER_NAME 128
+> +#define MAX_HTTP_HEADER_VALUE 512
+> +struct http_header {
+> +	uchar name[MAX_HTTP_HEADER_NAME];
+> +	uchar value[MAX_HTTP_HEADER_VALUE];
+> +};
+> +
+> +void efi_net_parse_headers(ulong *num_headers, struct http_header *head=
+ers);
 >   #else
-> +static inline void efi_net_get_dp(struct efi_device_path **dp) { }
+>   static inline void efi_net_get_dp(struct efi_device_path **dp) { }
 >   static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
->   				     struct efi_ipv4_address *mask,
->   				     struct efi_ipv4_address *gw) { }
-> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> index a87006b3c0..f8d3ee0bcf 100644
-> --- a/lib/efi_loader/efi_bootbin.c
-> +++ b/lib/efi_loader/efi_bootbin.c
-> @@ -93,24 +93,32 @@ void efi_set_bootdev(const char *dev, const char *de=
-vnr, const char *path,
->   	image_addr =3D buffer;
->   	image_size =3D buffer_size;
->
-> +#if IS_ENABLED(CONFIG_NETDEVICES)
-> +	ret =3D efi_net_set_dp(dev, devnr);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +#endif
-> +
->   	ret =3D efi_dp_from_name(dev, devnr, path, &device, &image);
-> -	if (ret =3D=3D EFI_SUCCESS) {
-> -		bootefi_device_path =3D device;
-> -		if (image) {
-> -			/* FIXME: image should not contain device */
-> -			struct efi_device_path *image_tmp =3D image;
-> -
-> -			efi_dp_split_file_path(image, &device, &image);
-> -			efi_free_pool(image_tmp);
-> -		}
-> -		bootefi_image_path =3D image;
-> -		log_debug("- boot device %pD\n", device);
-> -		if (image)
-> -			log_debug("- image %pD\n", image);
-> -	} else {
-> -		log_debug("- efi_dp_from_name() failed, err=3D%lx\n", ret);
-> -		efi_clear_bootdev();
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +
-> +	bootefi_device_path =3D device;
-> +	if (image) {
-> +		/* FIXME: image should not contain device */
-> +		struct efi_device_path *image_tmp =3D image;
-> +
-> +		efi_dp_split_file_path(image, &device, &image);
-> +		efi_free_pool(image_tmp);
->   	}
-> +	bootefi_image_path =3D image;
-> +	log_debug("- boot device %pD\n", device);
-> +	if (image)
-> +		log_debug("- image %pD\n", image);
-> +	return;
-> +error:
-> +	log_debug("- efi_dp_from_name() failed, err=3D%lx\n", ret);
-> +	efi_clear_bootdev();
->   }
->
->   /**
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index a6d4300686..5eae6fd39c 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -1185,8 +1185,9 @@ efi_status_t efi_dp_from_name(const char *dev, con=
-st char *devnr,
->
->   		dp =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
->   				     (uintptr_t)image_addr, image_size);
-> -	} else if (IS_ENABLED(CONFIG_NETDEVICES) && !strcmp(dev, "Net")) {
-> -		dp =3D efi_dp_from_eth();
-> +	} else if (IS_ENABLED(CONFIG_NETDEVICES) &&
-> +		   (!strcmp(dev, "Net") || !strcmp(dev, "Http"))) {
-> +		efi_net_get_dp(&dp);
->   	} else if (!strcmp(dev, "Uart")) {
->   		dp =3D efi_dp_from_uart();
->   	} else {
 > diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 3491d4c481..e8af2e3d95 100644
+> index e8af2e3d95..368f62c5b2 100644
 > --- a/lib/efi_loader/efi_net.c
 > +++ b/lib/efi_loader/efi_net.c
-> @@ -16,6 +16,7 @@
->    */
+> @@ -17,6 +17,7 @@
 >
 >   #include <efi_loader.h>
-> +#include <dm.h>
+>   #include <dm.h>
+> +#include <linux/sizes.h>
 >   #include <malloc.h>
 >   #include <vsprintf.h>
 >   #include <net.h>
-> @@ -32,6 +33,13 @@ static int rx_packet_idx;
->   static int rx_packet_num;
->   static struct efi_net_obj *netobj;
+> @@ -40,6 +41,12 @@ static struct efi_net_obj *netobj;
+>    */
+>   static struct efi_device_path *net_dp;
 >
-> +/*
-> + * The current network device path. This device path is updated when a =
-new
-> + * bootfile is downloaded from the network. If then the bootfile is loa=
-ded
-> + * as an efi image, net_dp is passed as the device path of the loaded i=
-mage.
-> + */
-> +static struct efi_device_path *net_dp;
+> +static struct wget_http_info efi_wget_info =3D {
+> +	.set_bootdev =3D false,
+> +	.check_buffer_size =3D true,
+> +
+> +};
 > +
 >   /*
 >    * The notification function of this event is called in every timer cy=
 cle
 >    * to check if a new network packet has been received.
-> @@ -902,8 +910,10 @@ efi_status_t efi_net_register(void)
->   			     &netobj->net);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> +	if (!net_dp)
-> +		efi_net_set_dp("Net", NULL);
->   	r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> -			     efi_dp_from_eth());
-> +			     net_dp);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
->   	r =3D efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_g=
-uid,
-> @@ -999,6 +1009,49 @@ out_of_resources:
->   	return EFI_OUT_OF_RESOURCES;
+> @@ -1175,3 +1182,151 @@ void efi_net_set_addr(struct efi_ipv4_address *i=
+p,
+>   		memcpy(&net_netmask, mask, sizeof(*mask));
+>   #endif
 >   }
->
+> +
 > +/**
-> + * efi_net_set_dp() - set device path of efi net device
+> + * efi_net_set_buffer() - allocate a buffer of min 64K
 > + *
-> + * This gets called to update the device path when a new boot
-> + * file is downloaded
-> + *
-> + * @dev:	dev to set the device path from
-> + * @server:	remote server address
+> + * @buffer:	allocated buffer
+> + * @size:	desired buffer size
 > + * Return:	status code
 > + */
-> +efi_status_t efi_net_set_dp(const char *dev, const char *server)
+> +static efi_status_t efi_net_set_buffer(void **buffer, size_t size)
 > +{
-> +	efi_free_pool(net_dp);
+> +	efi_status_t ret =3D EFI_SUCCESS;
 > +
-> +	net_dp =3D NULL;
-> +	if (!strcmp(dev, "Net"))
-> +		net_dp =3D efi_dp_from_eth();
-> +	else if (!strcmp(dev, "Http"))
-> +		net_dp =3D efi_dp_from_http(server);
+> +	if (size < SZ_64K)
+> +		size =3D SZ_64K;
 > +
-> +	if (!net_dp)
-> +		return EFI_OUT_OF_RESOURCES;
+> +	efi_free_pool(*buffer);
 > +
-> +	return EFI_SUCCESS;
+> +	*buffer =3D efi_alloc(size);
+> +	if (!*buffer)
+> +		ret =3D EFI_OUT_OF_RESOURCES;
+> +
+> +	efi_wget_info.buffer_size =3D (ulong)size;
+> +
+> +	return ret;
 > +}
 > +
 > +/**
-> + * efi_net_get_dp() - get device path of efi net device
+> + * efi_net_parse_headers() - parse HTTP headers
 > + *
-> + * Produce a copy of the current device path
+> + * Parses the raw buffer efi_wget_info.headers into an array headers
+> + * of efi structs http_headers. The array should be at least
+> + * MAX_HTTP_HEADERS long.
 > + *
-> + * @dp:		copy of the current device path, or NULL on error
+> + * @num_headers:	number of headers
+> + * @headers:		caller provided array of struct http_headers
 > + */
-> +void efi_net_get_dp(struct efi_device_path **dp)
+> +void efi_net_parse_headers(ulong *num_headers, struct http_header *head=
+ers)
 > +{
-> +	if (!dp)
+> +	if (!num_headers || !headers)
 > +		return;
-> +	if (!net_dp)
-> +		efi_net_set_dp("Net", NULL);
-> +	if (net_dp)
-> +		*dp =3D efi_dp_dup(net_dp);
+> +
+> +	// Populate info with http headers.
+> +	*num_headers =3D 0;
+> +	const uchar *line_start =3D efi_wget_info.headers;
+> +	const uchar *line_end;
+> +	ulong count;
+> +	struct http_header *current_header;
+> +	const uchar *separator;
+> +	size_t name_length, value_length;
+> +
+> +	// Skip the first line (request or status line)
+> +	line_end =3D strstr(line_start, "\r\n");
+> +
+> +	if (line_end)
+> +		line_start =3D line_end + 2;
+> +
+> +	while ((line_end =3D strstr(line_start, "\r\n")) !=3D NULL) {
+> +		count =3D *num_headers;
+> +		if (line_start =3D=3D line_end || count >=3D MAX_HTTP_HEADERS)
+> +			break;
+> +		current_header =3D headers + count;
+> +		separator =3D strchr(line_start, ':');
+> +		if (separator) {
+> +			name_length =3D separator - line_start;
+> +			++separator;
+> +			while (*separator =3D=3D ' ')
+> +				++separator;
+> +			value_length =3D line_end - separator;
+> +			if (name_length < MAX_HTTP_HEADER_NAME &&
+> +			    value_length < MAX_HTTP_HEADER_VALUE) {
+> +				strncpy(current_header->name, line_start, name_length);
+> +				current_header->name[name_length] =3D '\0';
+> +				strncpy(current_header->value, separator, value_length);
+> +				current_header->value[value_length] =3D '\0';
+> +				(*num_headers)++;
+> +			}
+> +		}
+> +		line_start =3D line_end + 2;
+> +	}
 > +}
 > +
->   /**
->    * efi_net_get_addr() - get IP address information
->    *
-> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-> index 2becb02f7b..fcc0e62512 100644
-> --- a/net/lwip/wget.c
-> +++ b/net/lwip/wget.c
-> @@ -260,10 +260,9 @@ static void httpc_result_cb(void *arg, httpc_result=
-_t httpc_result,
->   	printf("%u bytes transferred in %lu ms (", rx_content_len, elapsed);
->   	print_size(rx_content_len / elapsed * 1000, "/s)\n");
->   	printf("Bytes transferred =3D %lu (%lx hex)\n", ctx->size, ctx->size)=
-;
-> -	if (wget_info->set_bootdev) {
-> -		efi_set_bootdev("Net", "", ctx->path, map_sysmem(ctx->saved_daddr, 0)=
-,
-> +	if (wget_info->set_bootdev)
-> +		efi_set_bootdev("Http", ctx->server_name, ctx->path, map_sysmem(ctx->=
-saved_daddr, 0),
->   				rx_content_len);
-> -	}
->   	wget_lwip_set_file_size(rx_content_len);
->   	if (env_set_hex("filesize", rx_content_len) ||
->   	    env_set_hex("fileaddr", ctx->saved_daddr)) {
-> diff --git a/net/wget.c b/net/wget.c
-> index f3b43b06b8..d338eaf4ef 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -447,7 +447,7 @@ static void wget_handler(uchar *pkt, u16 dport,
->   		net_set_state(wget_loop_state);
->   		wget_info->file_size =3D net_boot_file_size;
->   		if (wget_info->method =3D=3D WGET_HTTP_METHOD_GET && wget_info->set_=
-bootdev) {
-> -			efi_set_bootdev("Net", "", image_url,
-> +			efi_set_bootdev("Http", NULL, image_url,
->   					map_sysmem(image_load_addr, 0),
->   					net_boot_file_size);
->   			env_set_hex("filesize", net_boot_file_size);
+> +/**
+> + * efi_net_do_request() - issue an HTTP request using wget
+> + *
+> + * @url:		url
+> + * @method:		HTTP method
+> + * @buffer:		data buffer
+> + * @status_code:	HTTP status code
+> + * @file_size:		file size in bytes
+> + * @headers_buffer:	headers buffer
+> + * Return:		status code
+> + */
+> +efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, v=
+oid **buffer,
+> +				u32 *status_code, ulong *file_size, char *headers_buffer)
+> +{
+> +	efi_status_t ret =3D EFI_SUCCESS;
+> +	int wget_ret;
+> +	static bool last_head;
+> +
+> +	if (!buffer || !file_size)
+> +		return EFI_ABORTED;
+> +
+> +	efi_wget_info.method =3D (enum wget_http_method)method;
+> +	efi_wget_info.headers =3D headers_buffer;
+> +
+> +	switch (method) {
+> +	case HTTP_METHOD_GET:
+> +		ret =3D efi_net_set_buffer(buffer, last_head ? (size_t)efi_wget_info.=
+hdr_cont_len : 0);
+> +		if (ret !=3D EFI_SUCCESS)
+> +			goto out;
+> +		wget_ret =3D wget_request((ulong)*buffer, url, &efi_wget_info);
+> +		if ((ulong)efi_wget_info.hdr_cont_len > efi_wget_info.buffer_size) {
+> +			// Try again with updated buffer size
+> +			ret =3D efi_net_set_buffer(buffer, (size_t)efi_wget_info.hdr_cont_le=
+n);
+> +			if (ret !=3D EFI_SUCCESS)
+> +				goto out;
+> +			if (wget_request((ulong)*buffer, url, &efi_wget_info)) {
+> +				efi_free_pool(*buffer);
+> +				ret =3D EFI_DEVICE_ERROR;
+> +				goto out;
+> +			}
+> +		} else if (wget_ret) {
+> +			efi_free_pool(*buffer);
+> +			ret =3D EFI_DEVICE_ERROR;
+> +			goto out;
+> +		}
+> +		// Pass the actual number of received bytes to the application
+> +		*file_size =3D efi_wget_info.file_size;
+> +		*status_code =3D efi_wget_info.status_code;
+> +		last_head =3D false;
+> +		break;
+> +	case HTTP_METHOD_HEAD:
+> +		ret =3D efi_net_set_buffer(buffer, 0);
+> +		if (ret !=3D EFI_SUCCESS)
+> +			goto out;
+> +		wget_request((ulong)*buffer, url, &efi_wget_info);
+> +		*file_size =3D 0;
+> +		*status_code =3D efi_wget_info.status_code;
+> +		last_head =3D true;
+> +		break;
+> +	default:
+> +		ret =3D EFI_UNSUPPORTED;
+> +		break;
+> +	}
+> +
+> +out:
+> +	return ret;
+> +}
 
