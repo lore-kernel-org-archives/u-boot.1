@@ -4,93 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C76FE64AAE
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 14:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068DBE64AAE
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 14:04:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7BBB895C7;
-	Tue,  3 Dec 2024 15:01:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70374895C7;
+	Tue,  3 Dec 2024 15:04:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C43fgNZG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cAsrq2uV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A58AA8961F; Tue,  3 Dec 2024 15:01:40 +0100 (CET)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 9BA978950E; Tue,  3 Dec 2024 15:04:07 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 466D38950E
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 15:01:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 68B108961F
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 15:04:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7e6cbf6cd1dso2959051a12.3
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 06:01:38 -0800 (PST)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7b667e13949so314575885a.3
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 06:04:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733234497; x=1733839297; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733234644; x=1733839444; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FZgznSSTpc8xdGHNN6198I6RMz0o9riaM8ue1jnMA4Q=;
- b=C43fgNZG18ruX04Eh6c8nzmJ1bYfrCGlFXXPiHHUAMFYooaQf4uU3oyw2Pn5vv9Tsg
- JU9eoP4KxLTTmzL40Rne3yb1pSDw4ZJhAuL7XzFPPlZmyAkY8lTSjycaZAacjRERNvwr
- RgN4EwyhfUpGu6uOTjWscExxASr+GczsRE32I=
+ bh=SF37y2BuIwPMago7cEaXFREZD/yFjtOxTaOVXsPR/Zs=;
+ b=cAsrq2uVUL1PRzj1WwcLHYyr7aODcgT0s6P/zywgr3qN3CD8aJljKGwdroEyKfH5UN
+ XfZgifk4q52tk+ML02Cq+NEntKFmBiESUqBpkmTVmSIdrAXY0CASlTxrN+KWN0dcCaMd
+ sgiSdgCGYo+H537PQOnLvKlZb6zGhjxmzQSQ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733234497; x=1733839297;
+ d=1e100.net; s=20230601; t=1733234644; x=1733839444;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FZgznSSTpc8xdGHNN6198I6RMz0o9riaM8ue1jnMA4Q=;
- b=Vv4MRTyXMPSiLMyZPV07x1FJZ35dK/j2/sYYMpJaHqwZmb5BG0rbG/x5jA5rJsLJt7
- RTEGB4LCzDesDVvVSlsNPhiUM8bk/Ag0N2VBznw1H+J8NFx/iX1ugGMUzPJ6w/fsPRC4
- 9GtTCvnoI10F9X8PxVPsEVHF4gNRKYLTy/SdRcxWv2hjJ7BUZ+BXW2tjOP3i5MpyZClJ
- nOAIDgdeCK7mrkJ3cpR/Rh9an5AUtiowFQiK18HYgUtveGZqSObFBUgYx0wxKvWFc0zp
- /gMeR4SddPkXExpRDQCj5thKQp8Or9jX/6OW/ojik6Aq6klGNTJluq+SxxtAkBNBlM0j
- obtQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXgVyHAbABEUBPZPO709DvVp3GoW62OlxqcqQE+ufzQjkBBBJ3r3D05iccYcAqjPVBMOv982H0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy1uZrEcxYAYnh/+TuCQIbGzVdrytdBO8A0VuXB/a+Zk691ccbL
- kyoTGTdbFLVABYVDj4xDAE1m2yI0y2biiz+bISzj4i38EFhVhMnBA6qubN303hc=
-X-Gm-Gg: ASbGncuvzKHWBHVImVQGD74ZxO++fz8rRpw6mdBk1Naj3QkkwKxefCKcUPVqAmLzxvM
- e2+RYyx6d8CelDsrOxbdbqyzKAv9sYYou0Rj+jDkzQhpxUlPMvCXfqMr9cc5yf0jkExmExIcoGe
- 7/LCGZezND8ruB21C/tzmmKpbJYQkbyZ7LUTqMZtR+3UqcFBLfKVcPKKz86tD5uFNLfyD/w7zbV
- O9G4rl9NQVy1+cmgFjMl8AFbkCXB7Pr/Z5UH94SZKxARM0u1g==
-X-Google-Smtp-Source: AGHT+IGqfswO0Bl6jK1ChVtydmYx3ugoW6OnNtpNkQObUO+/vbMB2ie89sEb0dg16gBdJ6PVENBjJQ==
-X-Received: by 2002:a05:6a21:3290:b0:1e1:6249:a4f4 with SMTP id
- adf61e73a8af0-1e16bee151fmr651430637.33.1733234496742; 
- Tue, 03 Dec 2024 06:01:36 -0800 (PST)
+ bh=SF37y2BuIwPMago7cEaXFREZD/yFjtOxTaOVXsPR/Zs=;
+ b=c0NcspaMczlfPLnNq0msCLOFhtJ6/ON9Ks7Wm2/I9Gj7ncl7TWO/bhbGYUx1FjzfB9
+ KdkrrCUKlvb2T0PD6gvPs/Hox8XgJe+pV2rgrUW/6oa1ZNt8GM8/Zx114cybKfVLLRDP
+ uMoZBSYy9le0L6PncMhMytMHHHkhubJ7i1V1LVmfSI4qsCucqGYvbLWDUjadoXuIUC5Y
+ L4dDDXiDC+xe1ZCUxFvioVzpCkL2iaIYcc3ajOCYcOnbQx22qOC9+AkMJ7iK273ZO800
+ SNt9Z8u00ds7I4WoFspUf1o3RiW4eNrdMPVjY2MpLFCPdAFXWPxQrhNk5UHto4Ho7xDI
+ UAIg==
+X-Gm-Message-State: AOJu0YyPg/IyUKVj/sRijZeqaz1ZMOPxITMI/DQF4mJXdcqG9ha7BBKP
+ rJ12/+24dccR6VgjfdxIjnJqiIVzJxu4Juj/612+fFN86Kqjp6eTN4eWVrXwdTc=
+X-Gm-Gg: ASbGncuacL0D6quAq4vRbCCddGnNJJAbd62M3lWGEhZ59LEDdWq9CL/1xLgi/ry4mMT
+ lxDkjC787P5PQU58iK+QQJdv0YZlQXH1kvr/TBROBJulVxomO5etc7CxN4TIzCLN2Mnwnpx+zVj
+ sJZBAgUdtEhs/eOoPKMKiwxaUrBJT0iiYS5dy91IukTIk9NxmI2Mnx7NZA1qDmtRcYNMv33rMQH
+ cQP58RRyq6YPQGhDgqRV2CvXONSA0VoU3LmPOK/1xb+3IaaQQ==
+X-Google-Smtp-Source: AGHT+IE3jmXB68l433ggvUnOwlX6PTAzU+B5tc1xYYmZ1em/n7awAjJ5ncysUjtkXyaV437VFBwcqQ==
+X-Received: by 2002:a05:620a:8018:b0:7b1:64fa:3696 with SMTP id
+ af79cd13be357-7b6a61cdcf2mr315568885a.51.1733234643997; 
+ Tue, 03 Dec 2024 06:04:03 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466c4055023sm61321411cf.12.2024.12.03.06.01.35
+ af79cd13be357-7b6849217e9sm510574985a.23.2024.12.03.06.04.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 06:01:36 -0800 (PST)
-Date: Tue, 3 Dec 2024 08:01:33 -0600
+ Tue, 03 Dec 2024 06:04:03 -0800 (PST)
+Date: Tue, 3 Dec 2024 08:04:00 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>
-Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
- bloblist"
-Message-ID: <20241203140133.GT2457179@bill-the-cat>
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-5-sjg@chromium.org>
- <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
- <20241202162239.GE2457179@bill-the-cat>
- <CAFLszTjvnyE4vFQ=Z=Ma1bOjH_Z4JEdUWM51Vc_nRmSUkRzF4Q@mail.gmail.com>
- <20241203005541.GP2457179@bill-the-cat>
- <CAFLszTi6koMMr0ggVLxKQK5LCBv+hCunewacBxDAZYH+rERGiw@mail.gmail.com>
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
+ efi_mem_carve_out()
+Message-ID: <20241203140400.GU2457179@bill-the-cat>
+References: <20241201152505.1666789-1-sjg@chromium.org>
+ <20241201152505.1666789-4-sjg@chromium.org>
+ <20241202201641.GF2457179@bill-the-cat>
+ <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
+ <20241203003719.GN2457179@bill-the-cat>
+ <CAFLszTh91eW5yQgQHLDVfe67GYw_f9-jzWmdu9pDTaEvNEG2Bg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FqMqKh8sVXMtf/Om"
+ protocol="application/pgp-signature"; boundary="EWUfStHpTBPay4A8"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTi6koMMr0ggVLxKQK5LCBv+hCunewacBxDAZYH+rERGiw@mail.gmail.com>
+In-Reply-To: <CAFLszTh91eW5yQgQHLDVfe67GYw_f9-jzWmdu9pDTaEvNEG2Bg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,100 +103,109 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FqMqKh8sVXMtf/Om
+--EWUfStHpTBPay4A8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 03, 2024 at 06:46:27AM -0700, Simon Glass wrote:
+On Tue, Dec 03, 2024 at 06:46:11AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Mon, 2 Dec 2024 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 2 Dec 2024 at 17:37, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Mon, Dec 02, 2024 at 05:22:35PM -0700, Simon Glass wrote:
+> > On Mon, Dec 02, 2024 at 05:24:35PM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Mon, 2 Dec 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
+> > > On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Mon, Dec 02, 2024 at 09:26:42AM -0500, Raymond Mao wrote:
-> > > > > Hi Simon,
+> > > > On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
+> > > > > Simplify a few expressions in this function.
 > > > > >
-> > > > > On Sun, 1 Dec 2024 at 09:43, Simon Glass <sjg@chromium.org> wrote:
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
 > > > > >
-> > > > > > This stops coral, bob and kevin from booting.
-> > > > > >
-> > > > > > The correct way to do this was always to use a Kconfig option, =
-so let's
-> > > > > > first revert this broken idea.
-> > > > > >
-> > > > > > OF_BOARD and BLOBLIST should be general and hardware agnostic,
-> > > > > do you have more information on why they don't work for a few boa=
-rds?
-> > > > > Maybe the way to handle these logic within certain boards should =
-be
-> > > > > changed other than to revert this?
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  lib/efi_loader/efi_memory.c | 4 ++--
+> > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > > > >
+> > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_mem=
+ory.c
+> > > > > index f1154f73e05..3b1c7528e92 100644
+> > > > > --- a/lib/efi_loader/efi_memory.c
+> > > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem=
+_list *map,
+> > > > >                            (carve_desc->num_pages << EFI_PAGE_SHI=
+FT);
+> > > > >
+> > > > >       /* check whether we're overlapping */
+> > > > > -     if ((carve_end <=3D map_start) || (carve_start >=3D map_end=
+))
+> > > > > +     if (carve_end <=3D map_start || carve_start >=3D map_end)
+> > > > >               return EFI_CARVE_NO_OVERLAP;
+> > > > >
+> > > > >       /* We're overlapping with non-RAM, warn the caller if desir=
+ed */
+> > > > > -     if (overlap_conventional && (map_desc->type !=3D EFI_CONVEN=
+TIONAL_MEMORY))
+> > > > > +     if (overlap_conventional && map_desc->type !=3D EFI_CONVENT=
+IONAL_MEMORY)
+> > > > >               return EFI_CARVE_OVERLAPS_NONRAM;
+> > > > >
+> > > > >       /* Sanitize carve_start and carve_end to lie within our bou=
+nds */
 > > > >
-> > > > Yes, I'd like to understand the whole problem better since we had a
-> > > > forever-and-ever thread, compromised to what's in tree now and now =
-you
-> > > > want to revert the compromise and bring is back to what was argued
-> > > > against for forever-and-ever, at least from a very quick read.
+> > > > As I believe was mentioned in a previous iteration, please drop thi=
+s as
+> > > > they aren't excessive generates a compiler warning, merely for
+> > > > clarification and should be kept.
 > > >
-> > > I'm sorry but I believe I have explained the problem in that forever
-> > > and-ever thread, so I don't really want to re-run it. It may be that I
-> > > was right all along?
+> > > I did this patch because checkpatch complained and I am changing thes=
+e lines.
 > >
-> > Or maybe your use case is still badly explained, and your changes will
-> > instead break other platforms.
-> >
-> > > Raymond, I cannot pass the DT in the bloblist from TPL to SPL on x86.
-> > > There is not enough cache-as-RAM, for a start. Plus the DT is in the
-> > > memory-mapped SPI flash, so it makes no sense...
-> >
-> > DT using x86 is a pretty odd case. I don't recall if you mentioned that
-> > before, and it's likely everyone else assumed you were talking about
-> > something more standard. Of course, you're listing one x86 platform and
-> > two ARM platforms as needing this change. Non-chromebook Rockchip isn't
-> > generally broken (or several other people would be complaining).
-> >
-> > So something that may or may not be explained in the longer older
-> > threads is how the firmware in these platforms are doing anything with
-> > the device tree?
-> >
-> > But, the biggest problem I see with this portion of the series is that
-> > patch #4 is 'Revert "fdt: Allow the devicetree to come from a bloblist"'
-> > and patch #5 is "fdt: Allow the devicetree to come from a bloblist".
-> > What you need to do instead is squash all 3 of these in to one commit
-> > and then write a new message that explains what exactly you are
-> > changing, and why, instead of making someone else do that in order to
-> > review  your changes here.
+> > And checkpatch is not the authority, it's guidelines.
 >=20
-> As I said, I do not wish to go through all of that again. It is still
-> a bad memory every though it was a year ago. I would like to build on
-> what I have here, to resolve any future breakages.
+> Agreed.
+>=20
+> > I believe the
+> > review comments are "no, these should stay". Please drop this patch.
+>=20
+> Just so I can figure out what to do here, are you saying:
+> - merge this patch in with the one that produces a checkpatch warning
+> (i.e. remove brackets so resolve warning), or
+> - drop this patch and ignore the checkpatch warning in the result
 
-Sure, then you need to post something that's reviewable, like I
-suggested.
+Yes, please just drop this patch, I only look at ERROR from checkpatch
+when merging things and then it's a matter of what the error is.
+
+> I don't really mind about this, obviously. But as I suspect this
+> series is not going to be applied to your tree anyway, I'll await
+> events.
+
+Yes, if you're not going to be addressing most of the comments you get
+this is going to linger in, well, whatever it is you plan to be doing
+exactly.
 
 --=20
 Tom
 
---FqMqKh8sVXMtf/Om
+--EWUfStHpTBPay4A8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdPDz0ACgkQFHw5/5Y0
-tyxn0gv/WEOuRey48+JWR5cpeC4yflYrchjSX/sutSHyhVfcDMRv4V2WgipkalY5
-KGjMWBbrfFs0H1HQEC1TtJw3l9rUB/sbOpMPn+I4DwirdLt5K2VRm+K0ZguDKy6Z
-XYRExb0HQMm1rqtVcR+zHTO9OOYFFPgyEgYcJVIbtgBFd+sEshpqQTgxX44uMqx4
-rIOZ4i7t0eiR2BCifr+x0dsSUIXyxfAq4mvG2MWfpz7E4BEb7ejOCwi7xdrSbSi/
-3COFn6VWGt4D2fJwQNQweCLJa2sN769JIC3i6BTGG94SBQaMBU4Cpc+wrm6z6Uxp
-pVhDP9ulNYzlyD1zOVEPTMGEG0oD5Ng1VxNK/yZ2AxJ0OKU+8vTcC1ZdmQmbuAze
-VLH9hXmh1X3dLjEs6U+Hk7vrUcuhBizc1RGu8ellfPqM+7dg6KWy7Te8iyG/y0fH
-ATHvZkeYZ1kYyp3VxSkC1aMZ/yFmfxey2lD1ThDKDF/+YPcQxevOZJ+UPbXh77Rw
-29m+92RA
-=pMAd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdPD9AACgkQFHw5/5Y0
+tyzYQAv+JDUWS5M0MDudHvn3GUsezv6XCQQbwKixLEOZGXnMBZFp0VEpQJPh+BjC
+G7dcadSLqGfZvwq58cxNJafKU0lOlBF4mdYypbgsRJ9Vb4786MqnZhkHKt1luBlN
+QuIcP3zH3asxK1DyfG2wW3EbQGo84pMuCMGw5gog7/f/+kGa0Po0sqVffoz00kCu
+OeV0gXbo+ghqMEI152UwBd+kn8ep9u1ts5uZ3Wy9BXMkd2qtILY6HTDQdIvB49hq
+okyYtYfsukY6lXAOsXOK8d1umo+BY2K2hP3z9E34Wq1JFS88jMNenb/gMvEi9XQD
+T4CqY6eQZ+nP0TBT72hAflMMWOvDLLQ167/qm8kZA+XYoJg7+K78kzz7LCPrqtTG
+Ggm1utV3onxMt0ayjMHTbY5XxUwy0GBiaCNn5EbwGvjkBZ3sj89zfDYCha0DrSdT
+eXbSDax98WwN8GElhl4UpepYWqqoy8u6+ryYqoY4GNc6KI4TW66CAcgbStYzSCeo
+6mEeBANZ
+=icHP
 -----END PGP SIGNATURE-----
 
---FqMqKh8sVXMtf/Om--
+--EWUfStHpTBPay4A8--
