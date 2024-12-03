@@ -4,44 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3555FE74AC3
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A64E74AC3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8BC889677;
-	Tue,  3 Dec 2024 17:36:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 45E46894D9;
+	Tue,  3 Dec 2024 17:37:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DmjX4BJq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4D1489651; Tue,  3 Dec 2024 17:36:30 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A2AEA893A9
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:36:28 +0100 (CET)
+ id 80E24894D9; Tue,  3 Dec 2024 17:37:49 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FC388916B
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:37:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0DC70143D;
- Tue,  3 Dec 2024 08:36:56 -0800 (PST)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B3EDC3F71E;
- Tue,  3 Dec 2024 08:36:25 -0800 (PST)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 4/4] efi: add helper functions to insert pmem node for DT
- fixup
-Date: Tue,  3 Dec 2024 22:06:05 +0530
-Message-Id: <20241203163605.1482152-5-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
-References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so296565566b.0
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 08:37:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1733243867; x=1733848667; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HLUzvHIja2ZsSXRBZMBCi9VBdboAPhkXsmj3wY/5dls=;
+ b=DmjX4BJqNm/Mh9vqhwf9rnxucCm4Vxt9V3gesynppayaiV2NKUNcQBP9JFkDxRLpP3
+ S6D2wuNyrjWN2ZIIEhVxEFZLSKYVL1HDuNTVde++SqOOHV4vfl1z/hS8lXtViZkStFmH
+ 3ARZ6YKPHsEu75nOrxHdeo1JYiJYaNYnzbx60=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733243867; x=1733848667;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HLUzvHIja2ZsSXRBZMBCi9VBdboAPhkXsmj3wY/5dls=;
+ b=q+XigojHA/mMHcKhq07+Zkqw7Jbttevc1XlgmCqi2HJwktrtUp29wcpUxvD7a+Zslc
+ Cv257Ikk2BbSYJcJLglzudwZBmomIbuwEJBXl7ty7rrhCPNMC14IXsVvo6qxz1LQmRqt
+ M+9Ce2U2GWIKiqCyqUFjei8ALGUSPD0IA4mf/GXK8e0yoOlLycCVInaT+NxgW7pgAaxa
+ ZjErWvkBKWd2pTAKjRxqfblaj5IHfvBWWKcxO6g30UqfkMzlJZ7aaWETfrVLRZD7ZP8O
+ Hnrv4AAreeKsG8PyIpg9psqQf5i/Ewwr4ymlznilMZCVdOCYeNBumG6DHpwWqQ3RovRt
+ TeeQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfv3ppqzidy4S8ACQmQ4XofS9nE+N5hednKGpTgm3AUU+e5kXmGQ9q5CniiRAU7DQi4Q6DlHc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJ2s4LFNGYMZ0vtQT/FyOK6aT9MvfLbylf435B5QNgz3l8Mwr4
+ rTro5k95gf/WGi3Lz8QHv9bCeK1RdLSz4gIDEHIuZykKhOM9aV+i/Kjt2Hr66yVR6y2qFVLm+s9
+ xiyK19VLYqQD5CFd3gM8TWaHI1vi2/cielkC3
+X-Gm-Gg: ASbGncvqFjqwmE+T8C6hAlkboaMY+2Ovn01+xxNu49iqOzJkrpHEs7xTURHxbprHMio
+ IODuVfiYd7RT4V2zx1iePL+M8zzB1hfEm
+X-Google-Smtp-Source: AGHT+IEiEvMLytusK3tZBfFutKzx1B4QRq6tlX6BbX6xQM/LNHK7vbGTKV//mnBktWXPqZq8Em++pa7s7O8KFbn85ps=
+X-Received: by 2002:a17:907:7758:b0:aa5:630d:7de0 with SMTP id
+ a640c23a62f3a-aa6018d8978mr106803766b.44.1733243866729; Tue, 03 Dec 2024
+ 08:37:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-5-sjg@chromium.org>
+ <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
+ <20241202162239.GE2457179@bill-the-cat>
+ <CAFLszTjvnyE4vFQ=Z=Ma1bOjH_Z4JEdUWM51Vc_nRmSUkRzF4Q@mail.gmail.com>
+ <20241203005541.GP2457179@bill-the-cat>
+ <CAFLszTi6koMMr0ggVLxKQK5LCBv+hCunewacBxDAZYH+rERGiw@mail.gmail.com>
+ <20241203140133.GT2457179@bill-the-cat>
+ <CAFLszThLAYQfMxE_fVuTYX57vNBfi0PyvBzuUGCw0_1EsXk7ag@mail.gmail.com>
+ <20241203160131.GW2457179@bill-the-cat>
+In-Reply-To: <20241203160131.GW2457179@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 3 Dec 2024 09:37:34 -0700
+Message-ID: <CAFLszTgx6BacGQyiMOoCzYDM3vsOBgfr2XbzBEsNOZ_Gzj3=ig@mail.gmail.com>
+Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
+ bloblist"
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,161 +101,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the iso installer image at some location in
-memory which needs to be reserved in the devicetree as persistent
-memory (pmem). Add helper functions which add this pmem node when the
-EFI_DT_FIXUP protocol's fixup callback is invoked.
+Hi Tom,
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Changes since V1:
-* Use log_err() to print the error message in image_setup_libfdt()
-* Remove "ERROR:" from the error print in image_setup_libfdt()
+If you like, you can apply the reverts first, since they break boards.
+That should not be controversial, particularly as I explained at the
+time that this was likely to cause problems.
 
- boot/image-fdt.c             |  9 +++++++++
- include/efi_loader.h         | 17 +++++++++++++++++
- lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
- lib/efi_loader/efi_helper.c  | 12 ++++++++++++
- 4 files changed, 59 insertions(+)
+Then you can leave the discussion on OF_BLOBLIST open.
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 3d5b6f9e2dc..de479d3ffa0 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-+#include <efi_loader.h>
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-@@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
- 
-+	if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret) {
-+			log_err("HTTP boot pmem fixup failed\n");
-+			goto err;
-+		}
-+	}
-+
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 24e40799eee..87b9a6e4da0 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, int *index);
- efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
- 				    efi_guid_t *guid);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-+ *
-+ * @fdt:	Pointer to the devicetree
-+ *
-+ * Return:	0 on success, negative on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- /**
-  * efi_size_in_pages() - convert size in bytes to size in pages
-  *
-@@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
- 				  void *load_options);
- efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
- 
-+/**
-+ * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-+ *
-+ * @fdt:	Pointer to the DT blob
-+ * Return:	status code
-+ */
-+efi_status_t efi_bootmgr_pmem_setup(void *fdt);
-+
- /**
-  * struct efi_image_regions - A list of memory regions
-  *
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index b906e53e26e..db4eb6a7376 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -41,6 +41,8 @@ struct uridp_context {
- 	efi_handle_t mem_handle;
- };
- 
-+static struct uridp_context *uctx;
-+
- const efi_guid_t efi_guid_bootmenu_auto_generated =
- 		EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
- 
-@@ -427,6 +429,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
- 
- 	efi_free_pool(ctx->loaded_dp);
- 	free(ctx);
-+	uctx = NULL;
- 
- 	return ret == EFI_SUCCESS ? ret2 : ret;
- }
-@@ -447,6 +450,23 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
- 	EFI_EXIT(ret);
- }
- 
-+/**
-+ * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
-+ *
-+ * @fdt:	Pointer to the DT blob
-+ * Return:	status code
-+ */
-+efi_status_t efi_bootmgr_pmem_setup(void *fdt)
-+{
-+	if (!uctx) {
-+		log_warning("No EFI HTTP boot context found\n");
-+		return EFI_SUCCESS;
-+	}
-+
-+	return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size) ?
-+		EFI_SUCCESS : EFI_INVALID_PARAMETER;
-+}
-+
- /**
-  * try_load_from_uri_path() - Handle the URI device path
-  *
-@@ -476,6 +496,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	if (!ctx)
- 		return EFI_OUT_OF_RESOURCES;
- 
-+	uctx = ctx;
- 	s = env_get("loadaddr");
- 	if (!s) {
- 		log_err("Error: loadaddr is not set\n");
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index bf96f61d3d0..6fae37ad617 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -313,6 +313,18 @@ int efi_unlink_dev(efi_handle_t handle)
- 	return 0;
- }
- 
-+/**
-+ * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
-+ *
-+ * @fdt:	Pointer to the devicetree
-+ *
-+ * Return:	0 on success, negative on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+	return efi_bootmgr_pmem_setup(fdt) == EFI_SUCCESS ? 0 : -1;
-+}
-+
- static int u16_tohex(u16 c)
- {
- 	if (c >= '0' && c <= '9')
--- 
-2.34.1
+Just a thought.
 
+Regards,
+Simon
+
+On Tue, 3 Dec 2024 at 09:01, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Dec 03, 2024 at 08:53:27AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 3 Dec 2024 at 07:01, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Dec 03, 2024 at 06:46:27AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 2 Dec 2024 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Dec 02, 2024 at 05:22:35PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 2 Dec 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Dec 02, 2024 at 09:26:42AM -0500, Raymond Mao wrote:
+> > > > > > > > Hi Simon,
+> > > > > > > >
+> > > > > > > > On Sun, 1 Dec 2024 at 09:43, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > >
+> > > > > > > > > This stops coral, bob and kevin from booting.
+> > > > > > > > >
+> > > > > > > > > The correct way to do this was always to use a Kconfig option, so let's
+> > > > > > > > > first revert this broken idea.
+> > > > > > > > >
+> > > > > > > > > OF_BOARD and BLOBLIST should be general and hardware agnostic,
+> > > > > > > > do you have more information on why they don't work for a few boards?
+> > > > > > > > Maybe the way to handle these logic within certain boards should be
+> > > > > > > > changed other than to revert this?
+> > > > > > >
+> > > > > > > Yes, I'd like to understand the whole problem better since we had a
+> > > > > > > forever-and-ever thread, compromised to what's in tree now and now you
+> > > > > > > want to revert the compromise and bring is back to what was argued
+> > > > > > > against for forever-and-ever, at least from a very quick read.
+> > > > > >
+> > > > > > I'm sorry but I believe I have explained the problem in that forever
+> > > > > > and-ever thread, so I don't really want to re-run it. It may be that I
+> > > > > > was right all along?
+> > > > >
+> > > > > Or maybe your use case is still badly explained, and your changes will
+> > > > > instead break other platforms.
+> > > > >
+> > > > > > Raymond, I cannot pass the DT in the bloblist from TPL to SPL on x86.
+> > > > > > There is not enough cache-as-RAM, for a start. Plus the DT is in the
+> > > > > > memory-mapped SPI flash, so it makes no sense...
+> > > > >
+> > > > > DT using x86 is a pretty odd case. I don't recall if you mentioned that
+> > > > > before, and it's likely everyone else assumed you were talking about
+> > > > > something more standard. Of course, you're listing one x86 platform and
+> > > > > two ARM platforms as needing this change. Non-chromebook Rockchip isn't
+> > > > > generally broken (or several other people would be complaining).
+> > > > >
+> > > > > So something that may or may not be explained in the longer older
+> > > > > threads is how the firmware in these platforms are doing anything with
+> > > > > the device tree?
+> > > > >
+> > > > > But, the biggest problem I see with this portion of the series is that
+> > > > > patch #4 is 'Revert "fdt: Allow the devicetree to come from a bloblist"'
+> > > > > and patch #5 is "fdt: Allow the devicetree to come from a bloblist".
+> > > > > What you need to do instead is squash all 3 of these in to one commit
+> > > > > and then write a new message that explains what exactly you are
+> > > > > changing, and why, instead of making someone else do that in order to
+> > > > > review  your changes here.
+> > > >
+> > > > As I said, I do not wish to go through all of that again. It is still
+> > > > a bad memory every though it was a year ago. I would like to build on
+> > > > what I have here, to resolve any future breakages.
+> > >
+> > > Sure, then you need to post something that's reviewable, like I
+> > > suggested.
+> >
+> > It is quite reviewable. It is just a revert. I am not expecting you or
+> > Linaro to agree with it, but I am confident it is correct.
+>
+> It's _not_ at all reviewable. Again, you're reverting two commits, and
+> then introducing a new commit with the same title as the previous
+> revert. I'm not even sure there's a difference in the commit messages.
+>
+> --
+> Tom
