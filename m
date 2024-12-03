@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD10E77166
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F4D5E77160
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:51:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A06D9896B5;
-	Wed,  4 Dec 2024 00:47:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 518A689717;
+	Wed,  4 Dec 2024 00:47:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EL6abuMW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J5cUBYqv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B62A89696; Wed,  4 Dec 2024 00:47:52 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id AF2FB89712; Wed,  4 Dec 2024 00:47:54 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49911896E9
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 888B68967A
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-84198253281so216052239f.0
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:50 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-83eb38883b5so210385639f.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733269668; x=1733874468; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733269671; x=1733874471; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KlzJGU4+LZ7F0oEmRxjQ2/0xIF3Ehh/AF5D318jSqeg=;
- b=EL6abuMWqof9P92aPvHz0RSf/QsaGDAqNeoiRFZ6XFj2yMfjbbat8fWOdXGQiur4nV
- 4mnGJeH68JzM9QrdcIiILauJz1TigiUpuB23FGAxgcekkQBA3LFq3/U905jPFTbFyqhV
- RhQyLDFwzZEMuARm49P2Y3zcYl3jd+cBJYK2U=
+ bh=UoWeoek1tAJaSsy88HsYiS60U4m3iWD9z9iWtihJc0A=;
+ b=J5cUBYqv1EEQIJmP7YcuAMgh9Hun/03NvDeuLG3UDSFgV+XFBDeBC5a2WXiWR7Em9a
+ KI8sf6qLJCi3WC7rCnWswyL8GhDYVDCmwBJSJQQlzWzodeR2jLDWbwSKj1knm4woHHbe
+ xkAWFJOZNhIaGFmN3u0jm3zRGptPBO2F6Wgdw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733269668; x=1733874468;
+ d=1e100.net; s=20230601; t=1733269671; x=1733874471;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KlzJGU4+LZ7F0oEmRxjQ2/0xIF3Ehh/AF5D318jSqeg=;
- b=onHyo/QKFbhmku9VX9XAhk7p23QNT7M8ggizl90f6SlTLhz2lrukkEuHLVynoMtbVj
- wD4YeQD6tzyNuVYKanOiOPKWsiXuFzH0Nfx1qOVmSVCEd5bVqvgGjHRtAh3MwhfM7xi/
- ksR2HhwAZw9P43MT96IS5d1t/osZ97E7WV2pN6MLnmm8rScwfVvmmBGsgBamUCjdDYuf
- 6RQYzxFyLyVYPoOcKdg+E31Z1IkIrHWxufhMUISnQzGCp1IWFN8+KSquqGOK9ZxIHNRp
- KgSznt8pAloONb3x4EZkkSkMvaStHGpEOP2olsO62E9jBJl6wHFTjxVypDz0j3E9lwUi
- oRvw==
-X-Gm-Message-State: AOJu0YxzV7uhJmGptFuP8+ZLgRI8cl0vB03p9aww+xKf8CPg1lf2reeX
- U3Hfdv2XuzTizIz8h3AJtP1rlfDSbpt/wCeg/t+BP/XBf/9opowPcdmQYVQYFOF7eU0yDaRWscQ
+ bh=UoWeoek1tAJaSsy88HsYiS60U4m3iWD9z9iWtihJc0A=;
+ b=Yxh510hl1l1RfkLeejyzprznZwD018jm+ogNj5HiedCGUNE5qYCXeT2CUQ0uaEpo8+
+ KhKJpGGiceX/2u4LZDbPFlQnZHzb8LFK6X+tKbCowUBjgEO+Goee4lV5KRUyvc2uAjik
+ oVm51zj6SQ57N6qXXHS+1+i4SXky/dfGClHzdkqpRJefTn1OULxGmV1lnB6Yrtzcr91n
+ LLZRDLDef35TJo3yeikFIKlRhV2JB3il2HvZvFVIZ+zrfAJfspgg9KcVW62GsvAbaJ2g
+ 5tc1BlL88eK+mVBokEXQ3DHAFCb78kHcNeb5XkXXk8FJHy26+BmMxoDZLzJHwzq5pYBG
+ 6hTg==
+X-Gm-Message-State: AOJu0YzV5GJpQX7KQa2jA7kjmdk32UgabeKJKhr/7ysZYsK47xJ5zDZX
+ f786JUy0HukqUlk3eshsWtlr7AZUVZqjJ+X1kVpPniDMyxeqIxduhBYmQD8fP0N+JaI50YDqsQE
  =
-X-Gm-Gg: ASbGncuj5XDvv7K6+9zMUOd8MRj/zcnZDlbV5NbFhbq2Dz0XF5eV+vaOiRBZlkvdjFe
- P2KBB71+SpKIehGGhBL6OaA1d8Cm+FhmEWApbPqnxYmCN8rPE+QcnJhrQiHPjRDis9aYVJoaWIR
- syV7O06qTcVy5q3VLFK22PCPX10VSD0iCeT181P5dPvNaZbRPs51VSgQoWHUy8ZJNItYZD/VMFA
- 3lOnX5reSSEGrRNvUOKO6l5n+F/N1hc1Ekq7aPezoCjlRDoKSjRINeGKZSbmU00nQuwe28Vqwup
- aMB6oaGLobc=
-X-Google-Smtp-Source: AGHT+IF0KyOARW/5gpbmzWx6kMjm81WO0ubfCa8uHcFaTwl/6gNf2ynOetzElEhky0+y18fEZppo9g==
-X-Received: by 2002:a05:6602:2d94:b0:834:f2d5:c758 with SMTP id
- ca18e2360f4ac-8445b5e23bamr490771439f.13.1733269668602; 
- Tue, 03 Dec 2024 15:47:48 -0800 (PST)
+X-Gm-Gg: ASbGncvEPXvMIY4sr5rJ6yH3qnyTMyYKjEz6k3Wa2KQFpKEChUhOxWYR5ctPp1x72QB
+ moOtE9de8jEOLCjunuYOESqpMiDT4+bOeMYRoV2NjWuYuFjv0h/zLYdgYp+wKlFqk6edGaUlFXd
+ ActRZd7dRQ4W89BtZkNjjLyWPiazMtsu/hf+wa07bT0gIglBPxzz3HQfXfKVTFHJn7KvUwntirK
+ nvnTrou3T0AkXSmef5oPuE/ooGIdWcY5j8Hbt1m6RIoK2meP/2Jb8V5CiE7f1W27h282ZWKP1Fn
+ EJp3q8CIa7E=
+X-Google-Smtp-Source: AGHT+IEst/rxjkmK/AMQefmA5duoVdSP89ppJY9mPmQRaiICs+wRK56iVRRMHfcv8Xnu/d0rBd5IOQ==
+X-Received: by 2002:a05:6602:2cc5:b0:83d:ff89:218c with SMTP id
+ ca18e2360f4ac-8445b574071mr546501439f.7.1733269670856; 
+ Tue, 03 Dec 2024 15:47:50 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.45
+ ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:47:47 -0800 (PST)
+ Tue, 03 Dec 2024 15:47:49 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -73,9 +73,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v2 34/41] bootmeth_pxe: Implement the fallback option
-Date: Tue,  3 Dec 2024 16:45:52 -0700
-Message-Id: <20241203234559.2938192-35-sjg@chromium.org>
+Subject: [PATCH v2 35/41] bootmeth_pxe: Drop the driver-private data
+Date: Tue,  3 Dec 2024 16:45:53 -0700
+Message-Id: <20241203234559.2938192-36-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203234559.2938192-1-sjg@chromium.org>
 References: <20241203234559.2938192-1-sjg@chromium.org>
@@ -97,56 +97,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide this feature in PXE, so that it matches extlinux. Use plat data
-for this, just like extlinux.
+Since this driver's plat-data already contains a PXE context, use that.
+Drop the priv-data. Use the extlinux_info which is in there, as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootmeth_pxe.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ boot/bootmeth_pxe.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index f2b9ffaae89..6b3cb3c4b91 100644
+index 6b3cb3c4b91..a9608edcef9 100644
 --- a/boot/bootmeth_pxe.c
 +++ b/boot/bootmeth_pxe.c
-@@ -139,16 +139,16 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- 
+@@ -140,7 +140,7 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
  static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
  {
-+	struct extlinux_plat *plat = dev_get_plat(dev);
- 	struct pxe_context *ctx = dev_get_priv(dev);
--	struct extlinux_info info;
+ 	struct extlinux_plat *plat = dev_get_plat(dev);
+-	struct pxe_context *ctx = dev_get_priv(dev);
++	struct pxe_context *ctx = &plat->ctx;
  	ulong addr;
  	int ret;
  
- 	addr = map_to_sysmem(bflow->buf);
--	info.dev = dev;
--	info.bflow = bflow;
--	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &info, false,
--			    bflow->subdir, false, false, bflow);
-+	plat->info.dev = dev;
-+	plat->info.bflow = bflow;
-+	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &plat->info, false,
-+			    bflow->subdir, false, plat->use_fallback, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
-@@ -174,6 +174,7 @@ static struct bootmeth_ops extlinux_bootmeth_pxe_ops = {
- 	.read_bootflow	= extlinux_pxe_read_bootflow,
- 	.read_file	= extlinux_pxe_read_file,
- 	.boot		= extlinux_pxe_boot,
-+	.set_property	= extlinux_set_property,
- };
- 
- static const struct udevice_id extlinux_bootmeth_pxe_ids[] = {
-@@ -188,4 +189,5 @@ U_BOOT_DRIVER(bootmeth_zpxe) = {
+@@ -188,6 +188,5 @@ U_BOOT_DRIVER(bootmeth_zpxe) = {
+ 	.of_match	= extlinux_bootmeth_pxe_ids,
  	.ops		= &extlinux_bootmeth_pxe_ops,
  	.bind		= extlinux_bootmeth_pxe_bind,
- 	.priv_auto	= sizeof(struct pxe_context),
-+	.plat_auto	= sizeof(struct extlinux_plat)
+-	.priv_auto	= sizeof(struct pxe_context),
+ 	.plat_auto	= sizeof(struct extlinux_plat)
  };
 -- 
 2.34.1
