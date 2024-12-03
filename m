@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE1AE74AC1
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 15:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59925E74AC0
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 15:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E83F893D9;
-	Tue,  3 Dec 2024 16:53:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA8DE893DB;
+	Tue,  3 Dec 2024 16:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZYSavcHV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M/YyG2yL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53AB7893DB; Tue,  3 Dec 2024 16:53:31 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 97F26893D6; Tue,  3 Dec 2024 16:53:41 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1CF2893D6
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 16:53:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77877894D9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 16:53:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5cf9ef18ae9so11763750a12.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 07:53:28 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-53de92be287so8474496e87.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 07:53:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733241208; x=1733846008; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733241219; x=1733846019; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j0dW9kAlqqzDfUQL6MUfD7XN+NJkaK7f8u59kYOwrB8=;
- b=ZYSavcHVCBX2dxPi13E0+QrLUdV4FSU5La5F1xG8PJbUFGd2lG5dmQwrDJ3ma8kw9M
- +bl3MskrVhLYHZ3WyOD7xLZIpA7tzomjra7uzCD52cco3QfXfANlgewRre7CJS1ErfxU
- 0lygNiLvYGW7HoRNdHUA+iaYWyKXV0ZLrRWFw=
+ bh=CdYdHmZfn6nVc8kwIG1MUEUoG4HxQf27LihD0+cevfQ=;
+ b=M/YyG2yLl9z4auhdHQ0+EOedIo0xVBzYvydgTJS6e7kgREpaVuGn3e7fypzyjtytlH
+ yj51y86aCkptsmb67wAC8uV1O8AX/Zlf/3fVus50v2FdFQQHaDCtieT+U8jNF9Tfid1I
+ Q+OpL4HcXd1kTMjAuwMcIp1bP8P9U3DOru5es=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733241208; x=1733846008;
+ d=1e100.net; s=20230601; t=1733241219; x=1733846019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=j0dW9kAlqqzDfUQL6MUfD7XN+NJkaK7f8u59kYOwrB8=;
- b=g1yvt+rUFf5tkpkMEFxeSwQhNxaRicE7gK/yppnDSzU+Fuw9PKxycbgZ5aeGGT+fk4
- JeiKQXHdG4aFSdCgI7POqQOhokvgKu6G66XLAnNdvXDv9VgwXZFc8zvBw74CDeMhy/Rz
- OxNCwJrF+7bSSaBV9FT1D+YO9r26tRT10Ee+gtZ76f/VpQb5k+nLX5NqxS9/5bDT19xc
- kET/IkURpHIpgQzFLS3e5cPttNLhIfS/J9ZzVKcw4xAvkvWWTmsGCRvi08oXQtpknlbX
- eRE7Kde336/64PWmMgQnvFZpNWlnxHVl5Z903tH5TyT2epXuCVvo9Bx3FvHLMspg1WfH
- h6Sw==
+ bh=CdYdHmZfn6nVc8kwIG1MUEUoG4HxQf27LihD0+cevfQ=;
+ b=gKH1N+LiZ/C5ixKbOEIey6hbQbU1Rqrs/lspVqafUmwTQ3n9HC9Mb4aov1Z6hYR66P
+ 0kEfujE698PTEjndnbh/4hoNev9bM+l9YhUDADN/6XwvT+5iwe43hw6VRICM90HxFQ3s
+ WX2DMMTFYHPW0LRhk/oS/CyxMIsB/SFUQ+28mLSBsbTQpZ9GGHIkTaSzDmPN6R7rCfB8
+ /k73N6hLBvN4pGN86XTqyCT538zM4oktykjqe+EKVHKW8i5CQpKWZ2C0E9975iKxGino
+ h/7nilm0kcC29cuHVnZ65vXTLBLxlzaJWQ9dKmHCa7Iu/H+0mnH1DCw/Iedf5lD5j9DM
+ YXBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVBW52eUGBbuKSXmyINwhTFiFuwXpXrxiRtHb6bXlT2x4DKIG/ah6+A9IPjyImeaj19NOtaShA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxmpvGi7bJdeGXdWgboJXB63H0sLxhd3ShgETKGfDen4xEbODU1
- XFlKrTnp9dfJ1vOMKADjfdsMQ9UNmb6IFfkTPBQpUMjZAEEaO8eqh4mFordaDrDYG3gtmzKUyS4
- hGYD0fZZXV5xDgloRSS9Q92VjqSba8mVhEIYp
-X-Gm-Gg: ASbGnctdoMXcDWM4p675QrjgrHhvvXt99dp6Nte2mloCBYHQ5Iv3gPdmapkh3c32meO
- V/PWKA8kJ4ufa4fgpY5IO6GvvqR+Y0W7V
-X-Google-Smtp-Source: AGHT+IF9RRrkUZ3s6/nhfl8QMy66OEjqvC44FLJ+PHlj88A6b49PoALVYwR9J4gKnKpwRNOGZnh+RA/Yr5cptiGtpXg=
-X-Received: by 2002:a17:907:3e83:b0:a9a:662f:ff4a with SMTP id
- a640c23a62f3a-aa59431fad7mr2920082966b.0.1733241207777; Tue, 03 Dec 2024
- 07:53:27 -0800 (PST)
+ AJvYcCVIeAtq5i2OrkYCSUjwKiIWRPzvKBzdU/5xOlAls2rCtesi7gcFt3OLBi3RIuuNuStHQ2z5uz0=@lists.denx.de
+X-Gm-Message-State: AOJu0YycDbS0DPxcnWiGsNo1cBakGonIaMK+5iWjgHWFRz4CMv9Fks8d
+ j4N1eD3CqCmewe/9Z9leezdndH11JKRCbpqD3WG8S6V0UJH+Tp2Ypg+DzML4rnrd/2MMizc4EvE
+ qnqigfV4fHplhimbWkn4Sqfr7B4qbEbTJ/BgMZ0niR1wLZd8=
+X-Gm-Gg: ASbGncvCJ9nK21X52CFxhsI+c/y0Egixk7rUvDo5PzZvSGqggYvAuCcp1jTHZlYsEIx
+ NUn8LHTkHMUvHJSXwPqa9ljzCGtwvGLyF
+X-Google-Smtp-Source: AGHT+IEm8WGVzhHGLrCYgnrPn/9BXrTR9ZvIEXVHqb8SAkOqtGEuISKx00NFEGQlz3WhSv0vTB7euW5gN/AQMYrH5/A=
+X-Received: by 2002:a05:6512:400e:b0:53d:e324:11d8 with SMTP id
+ 2adb3069b0e04-53e129ff095mr2472705e87.18.1733241218713; Tue, 03 Dec 2024
+ 07:53:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-10-sjg@chromium.org>
- <20c4487c-f908-40ef-be05-1ac7eb7e8be6@gmx.de>
-In-Reply-To: <20c4487c-f908-40ef-be05-1ac7eb7e8be6@gmx.de>
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-5-sjg@chromium.org>
+ <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
+ <20241202162239.GE2457179@bill-the-cat>
+ <CAFLszTjvnyE4vFQ=Z=Ma1bOjH_Z4JEdUWM51Vc_nRmSUkRzF4Q@mail.gmail.com>
+ <20241203005541.GP2457179@bill-the-cat>
+ <CAFLszTi6koMMr0ggVLxKQK5LCBv+hCunewacBxDAZYH+rERGiw@mail.gmail.com>
+ <20241203140133.GT2457179@bill-the-cat>
+In-Reply-To: <20241203140133.GT2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 08:53:16 -0700
-Message-ID: <CAFLszTgs9i4yrL8=YZvh91urYisj0s_ukH+vVGyWWBSULe71Dw@mail.gmail.com>
-Subject: Re: [PATCH v4 09/25] efi_loader: Use the enum for memory type
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>,
+Date: Tue, 3 Dec 2024 08:53:27 -0700
+Message-ID: <CAFLszThLAYQfMxE_fVuTYX57vNBfi0PyvBzuUGCw0_1EsXk7ag@mail.gmail.com>
+Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
+ bloblist"
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
- Moritz Fischer <moritzf@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,34 +99,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Tue, 3 Dec 2024 at 07:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 3 Dec 2024 at 07:01, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 01.12.24 16:24, Simon Glass wrote:
-> > Rather than an integer, it is better to use the enum provided, when
-> > referring to an EFI memory-type. Update existing uses.
+> On Tue, Dec 03, 2024 at 06:46:27AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Call the value 'mem_type' consistently. Fix up one instance of
-> > upper-case hex.
+> > On Mon, 2 Dec 2024 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Dec 02, 2024 at 05:22:35PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Mon, 2 Dec 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Dec 02, 2024 at 09:26:42AM -0500, Raymond Mao wrote:
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On Sun, 1 Dec 2024 at 09:43, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > > This stops coral, bob and kevin from booting.
+> > > > > > >
+> > > > > > > The correct way to do this was always to use a Kconfig option, so let's
+> > > > > > > first revert this broken idea.
+> > > > > > >
+> > > > > > > OF_BOARD and BLOBLIST should be general and hardware agnostic,
+> > > > > > do you have more information on why they don't work for a few boards?
+> > > > > > Maybe the way to handle these logic within certain boards should be
+> > > > > > changed other than to revert this?
+> > > > >
+> > > > > Yes, I'd like to understand the whole problem better since we had a
+> > > > > forever-and-ever thread, compromised to what's in tree now and now you
+> > > > > want to revert the compromise and bring is back to what was argued
+> > > > > against for forever-and-ever, at least from a very quick read.
+> > > >
+> > > > I'm sorry but I believe I have explained the problem in that forever
+> > > > and-ever thread, so I don't really want to re-run it. It may be that I
+> > > > was right all along?
+> > >
+> > > Or maybe your use case is still badly explained, and your changes will
+> > > instead break other platforms.
+> > >
+> > > > Raymond, I cannot pass the DT in the bloblist from TPL to SPL on x86.
+> > > > There is not enough cache-as-RAM, for a start. Plus the DT is in the
+> > > > memory-mapped SPI flash, so it makes no sense...
+> > >
+> > > DT using x86 is a pretty odd case. I don't recall if you mentioned that
+> > > before, and it's likely everyone else assumed you were talking about
+> > > something more standard. Of course, you're listing one x86 platform and
+> > > two ARM platforms as needing this change. Non-chromebook Rockchip isn't
+> > > generally broken (or several other people would be complaining).
+> > >
+> > > So something that may or may not be explained in the longer older
+> > > threads is how the firmware in these platforms are doing anything with
+> > > the device tree?
+> > >
+> > > But, the biggest problem I see with this portion of the series is that
+> > > patch #4 is 'Revert "fdt: Allow the devicetree to come from a bloblist"'
+> > > and patch #5 is "fdt: Allow the devicetree to come from a bloblist".
+> > > What you need to do instead is squash all 3 of these in to one commit
+> > > and then write a new message that explains what exactly you are
+> > > changing, and why, instead of making someone else do that in order to
+> > > review  your changes here.
 > >
-> > Fix up the calls in struct efi_boot_services so that they use the same
-> > enum, adding the missing parameter names and enum efi_allocate_type.
-> >
-> > While we are here, rename the 'memory' parameter to 'memoryp' so that it
-> > is clear it is a return value.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > As I said, I do not wish to go through all of that again. It is still
+> > a bad memory every though it was a year ago. I would like to build on
+> > what I have here, to resolve any future breakages.
 >
-> Simon, I have no clue why you keep ignoring reviews.
-> This is just annoying and won't lead to merging patches.
+> Sure, then you need to post something that's reviewable, like I
+> suggested.
 
-I got your feedback on [1] and incorporated it in v2 onwards. Did you notice?
-
->
-> NAK
+It is quite reviewable. It is just a revert. I am not expecting you or
+Linaro to agree with it, but I am confident it is correct.
 
 Regards,
 Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20241125204456.1525752-7-sjg@chromium.org/
