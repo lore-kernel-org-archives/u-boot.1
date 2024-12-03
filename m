@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3157CE64A8A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 12:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B98FEE64A8A
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 12:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3EED893AE;
-	Tue,  3 Dec 2024 13:55:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 309FF893AE;
+	Tue,  3 Dec 2024 13:57:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kRL3nxpb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cjbyK0nB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 520D5893A9; Tue,  3 Dec 2024 13:55:43 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 45971893AE; Tue,  3 Dec 2024 13:57:44 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09BA9893AE
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 13:55:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 363A7893A9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 13:57:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-724f0f6300aso6093705b3a.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 04:55:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733230539; x=1733835339; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TbXr7szp6IEr2WIJwA7TzRYFJPW40UtO5THuG2yv9YM=;
- b=kRL3nxpb+VbUpEyffIwld3JZ1du/EAn8aJgmnbjRbP416epI0XmNeyUV9ljSJTK42Q
- s0mLWjvKtk6yNxt7ir+7TCupjQK8PDXxNpN5NVLgrEk/YjOtBYBjSgrXSN4ifwxroFHJ
- ymU5SzTowd0ZCNstfVYfYKOWnDXKq5OsacpTFltGGiP5L21IhcpVobZqZskc4tEiQtVL
- Ynq2kCAo3d4LRHaa59DO1BxXIF8ISmF3oGQTmzf3YQuo+oGQz+itWwiL6z7lBAzNeDCW
- eq74JnvHlS0V+qzmSSQW7e9A7qC4y5MH+SFLHHi09ccvun1WZk3FXYyId9f2FKAbsyR8
- cLIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733230539; x=1733835339;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TbXr7szp6IEr2WIJwA7TzRYFJPW40UtO5THuG2yv9YM=;
- b=R9PqewTMlSFrnM5J431AffB0HmqNBjQw1zO/uheP+U6rfg0PrbLxdeCPXNWrlA0peO
- kmm5GDX+c/0vcaSIYiZSq91mMeYMs8/Sdz2aWR+xvm5sVGsgEfjFySbxO7bh2ourpAnw
- W36fGgvaB9RDDugkQLoFfluOAG28q2ZbNwkNJfpuvJo4iClVguOeePxQcPB4DdAdCns1
- 635CM6mpMkCO0bYDed/kv7Tna859NnIqW33y4iWn5vF/+CqfnySjGVcGTVh7xiliYgFW
- s01PlLIBqNSz5WnHI/n+uPA6RnByHJQ9jSZGRTuPrPOvFdDbpMf19CocGsM4Ns5D3vgM
- MzWg==
-X-Gm-Message-State: AOJu0Yw1xIOETeFbA74fI2R2pqQ8gCcRXTXC3pArX5cTa8gq0wvnpUj6
- PteMDHhLk7YziZggfF26LL+yWCe1yJRYdNdH1CeqhjEI+JCr2L7nuEkpMGyjzcg=
-X-Gm-Gg: ASbGncvJVHSHtMh3bivwGPkP/IYfbkwASggH/a6rV76rB70w1m24kEzupnqqqrj6rFn
- 6TVlEGzq+YRHNF9rlmzrF6anmhCgOpvxmXsTFROxXEppmQWmyL8o1wKwsHO3GGG+dHhx+cyZAw6
- wk+l5Trs02c/0pU0rNL1ks0dc2WfKa33frmWECuIz2E3MHO8EKtQgRT6yB51JwVKIZbotb1fxhU
- KO3qGDyQO4FMpiVu6Z5/a391TzxkfUqJWpLg6aEt+s=
-X-Google-Smtp-Source: AGHT+IH52EQgPDZMD0yv+Vz4xl/CTUzLUMxQ3AFFbyOcT/EOlOXSFm8AN2mVjkYNZlzuYaj7cBdC7Q==
-X-Received: by 2002:a05:6a00:4fca:b0:71e:6b8:2f4a with SMTP id
- d2e1a72fcca58-7257fa77515mr2484737b3a.12.1733230539337; 
- Tue, 03 Dec 2024 04:55:39 -0800 (PST)
-Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72541761474sm10327467b3a.32.2024.12.03.04.55.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 04:55:39 -0800 (PST)
-From: Adriano Cordova <adrianox@gmail.com>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v3] lwip: wget: pass port and server_name via wget_ctx
-Date: Tue,  3 Dec 2024 09:55:34 -0300
-Message-ID: <20241203125534.1582903-1-adrianox@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733230656; x=1733835456; i=xypron.glpk@gmx.de;
+ bh=o71KygkpF0CCz9b90Qn0yECEBeBHO5BIgbUY+J053CA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=cjbyK0nB7Jx8f7VpamCHYLDNcNwk28L1DcveIvxpxOj4nyrnB6pRrJX0UAGmZI34
+ HMiKJsoEQAOKA4kncZgNqSvO7beOLApgL/bLut0/tuKumDXi5tOUzyf5XWwWZK/2h
+ +2rG89sroa53IUchkZOhfjaxZvQyqbIf2zyU+DN1CVgVp64o/icrW1SEHRPJyAzU/
+ V09YPP8SjKA60zufPJ8FDBBaK+eFzBIUxWBuMgWcQl8uI6UIngvEMxho36cQJTzOy
+ 6qMyJkiZYlMNFw8XAcEukEsUiknf0onZgik4sLI5HzkYnvTPQi9G3xIScZ3tcvstX
+ jheFX7rZkRISO52CIg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4hvb-1thBEV1B39-010NXR; Tue, 03
+ Dec 2024 13:57:36 +0100
+Message-ID: <9211f24f-d406-4d57-820f-f5814fcd061b@gmx.de>
+Date: Tue, 3 Dec 2024 13:57:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smbios: address build warning
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>
+References: <20241203134257.5067-1-peng.fan@oss.nxp.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241203134257.5067-1-peng.fan@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:3aChp7bQlitCBMKqdly7S/ldP3VrO4BF/IebF5NYsdw6Y/bY0RA
+ fc5yeFDfQxXAIIH+LiWfGocSB1jGalkKFxwsdtqcMpnvQ4/a5wM5YmGiTLeXujxE5ZeDAxt
+ /rwhKx+Gl16664PN2kZn8uyYcz6aXlgcUvotRywkoZHBnv07LAQ9TbcUkgugvta3w81D5hF
+ XiVikCOnagL7IJaj0lVMQ==
+UI-OutboundReport: notjunk:1;M01:P0:smbEQ3Jmdvw=;haTS8ivNbIhOsG26ErCGastJeh1
+ 1ngyDgc+4le8Oway1adEylVk6BhTYy8rq9TFrs5Cf5RpGRSXCp1tYuC/PYBdYapOzUJ9mp9CZ
+ +fCd7BqoPE3hyd9cg/UzCTB7t2OMwDs2tT5L9JZDIK9JD4wWmjTBMWZIA8rTA7OmRw2WjQtJ0
+ FFDeLbMr9ImB2O9Y+dXPCchMowHfvmyHlvVW9sHBLu2OrL669bA5lQZ3VpNF3uQRUPW6Dwcf0
+ osR0aE1gF4x9ixalx1pDdB36iS+twMPOdacQc2IHr0mZEejrBhznSwnu4dvHF0rtL1wtnz0Tl
+ M+rOHV1ZpLXJ1Ohrc4cJ8su4APs8zlvTwmknTDk5+TYLSwapTFX7j2o16qiF+bdBTblquh6Jb
+ 9opfoY3LYx2X8x6JdrsbnDLIPuqKCZL3zLTG3vwKumNq/RNGeoP0mdvyJTIJVWPIuHZRRuhKj
+ 8KYtpkz98opW3lPOib6go1KSo9sKAjh8SAYcDnxAJt+2cYHpjjq6cb6WEVlPRqnhl6Jv8NFP1
+ UaMvXWKXOCFdIWCHrWFIQUf15LdLDEmU/zwXzyfZQG2Wq2U93E4msNBLmfCWsQnjeq0jzHlw9
+ LH1J83xfYaKyDeD02fharmqsJSNqALKEYWEjLrQJws2Wz5jgPZSI4ZxqbBBj7QkwM+OhrfYfm
+ pJvDqg1qqx2PtUiHLraj8i4Xu+2d3GRvhwwATD+5vn6shfPPukFISvwG6E9RHWp1hCL9HgOHa
+ cRuJ9UDJlD1d4NHhW4AFDmdiBxNX3t/1aWnL2RhFRz/MKspmgfpucBbvqIVCu15yEWoVuFGow
+ pV7UdH6YosHCjUeYdDlIUKzJnOdChIznx9L62T01uzYI6f/yPn8uk7xRwPYPnD0h85G9gyWc7
+ aQ3UPq5pXIEsfaRzkahuUezedkRTneaTmPEe8i3qzgBomWHKs4+CRulEiP6G+0UoLchV69gFl
+ xlbzq1TWj8iZEotNchwg0FyXYQfgdRd7Iu+TK98GEhXZ9PRLX0CzbgvmB6ha7rFV64obYgHKZ
+ d6HVjXyAVMHvLZ42o4M9pqSpitmLz6dwqE8KjBwa1+e7AJzBt0eDt2ogJ4lH5f0B8UZw/P9Bn
+ 01i8l+GG+oqG+3Hawgi8Vv27NgEPLs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,58 +96,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-  Commit 5907c81 ("net: lwip: Enable https:// support for wget") was not
-  correctly rebased on top of the changes introduced by Commit 6cc4d04
-  ("net/lwip: wget: put server_name and port into wget_ctx") in next.
-  This commit re-applies a  couple of lines from 6cc4d04.
+On 03.12.24 14:42, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> include display_options.h to address build warning:
 
-  Fixes: Commit 5907c81 ("net: lwip: Enable https:// support for wget")
+build warning occurring with CONFIG_LOG=3Dy
 
-Signed-off-by: Adriano Cordova <adrianox@gmail.com>
----
-Changes in v3: there was still another server_name to be replaced by ctx.server_name
-Changes in v2: changed commit name
- net/lwip/wget.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+> lib/smbios.c: In function =E2=80=98smbios_update_version=E2=80=99:
+> lib/smbios.c:305:9: warning: implicit declaration of function =E2=80=98p=
+rint_buffer=E2=80=99
+> [-Wimplicit-function-declaration]
+>           print_buffer((ulong)ptr, ptr, 1, old_len + 1, 0);
+>           ^~~~~~~~~~~~
+>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index af48d741a4..3d02f26c09 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -288,7 +288,6 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
- 
- static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- {
--	char server_name[SERVER_NAME_SIZE];
- #if defined CONFIG_WGET_HTTPS
- 	altcp_allocator_t tls_allocator;
- #endif
-@@ -297,7 +296,6 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	struct netif *netif;
- 	struct wget_ctx ctx;
- 	char *path;
--	u16 port;
- 	bool is_https;
- 
- 	ctx.daddr = dst_addr;
-@@ -307,7 +305,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	ctx.prevsize = 0;
- 	ctx.start_time = 0;
- 
--	if (parse_url(uri, server_name, &port, &path, &is_https))
-+	if (parse_url(uri, ctx.server_name, &ctx.port, &path, &is_https))
- 		return CMD_RET_USAGE;
- 
- 	netif = net_lwip_new_netif(udev);
-@@ -319,7 +317,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	if (is_https) {
- 		tls_allocator.alloc = &altcp_tls_alloc;
- 		tls_allocator.arg =
--			altcp_tls_create_config_client(NULL, 0, server_name);
-+			altcp_tls_create_config_client(NULL, 0, ctx.server_name);
- 
- 		if (!tls_allocator.arg) {
- 			log_err("error: Cannot create a TLS connection\n");
--- 
-2.43.0
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> ---
+>   lib/smbios.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index a36d4b4e54a..defb6b42f45 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -7,6 +7,7 @@
+>
+>   #define LOG_CATEGORY	LOGC_BOARD
+>
+> +#include <display_options.h>
+>   #include <dm.h>
+>   #include <env.h>
+>   #include <linux/stringify.h>
 
