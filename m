@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B251E77166
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D6B8E77160
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:52:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF72F8973F;
-	Wed,  4 Dec 2024 00:48:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A79689684;
+	Wed,  4 Dec 2024 00:48:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="km+qA9nm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kFFPzT99";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AF2E89734; Wed,  4 Dec 2024 00:48:10 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id C78B78967D; Wed,  4 Dec 2024 00:48:13 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BCA18967D
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:48:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A1A489684
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:48:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-8418a2f596fso199892439f.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:48:08 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-84198253281so216059739f.0
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733269686; x=1733874486; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733269690; x=1733874490; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YJL4HiTJ1SC4AIkNl6lQjH+Cq4cPjeb6520ASidXSys=;
- b=km+qA9nmxxE6XrbFst50WVxQeFZkkW6q8slHXMZ05GySFSEXFdYw8noFXNNSThLsKZ
- gp4iLg+Xmj0YU2K0M5aLXXqoWZuVS3zvIuuGOfkojRF7hm7IMHUhpOKa3BYgXLYZQazw
- UfX48zZC95aDxylnX1AvcmjGS4lFF/HO3oN0s=
+ bh=Ly3TgyVogkDmuhzy2M7jKm3e/Z7ibEWqnc6664ySZAY=;
+ b=kFFPzT99Vz2e1ovjqI0zO+xkrmds7St7yglSogubnRY3taxvVckQaMd5M77toc/NKO
+ 8L8YuTv+VA4tRU3Z+dEhwYQFgFRsApwbSLZYae/ugEyy2I1pFOgHdjus68mtTX7xJmjc
+ 9wB/GV+0wwjbXJuO+GqZn9K1Ni1AjYuyopwFc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733269686; x=1733874486;
+ d=1e100.net; s=20230601; t=1733269690; x=1733874490;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YJL4HiTJ1SC4AIkNl6lQjH+Cq4cPjeb6520ASidXSys=;
- b=EiCjnVGPeROLAMGJdMhdDRbN5+oGPeeJdC0VIYXJKVNMZO4Q19soAxENRFRbXSF2hQ
- d9x39DaQaYhe0hX2TxaXwALoBjun2NhbvbOtzezj1akRqf9j9scy92Oum24PSSmUXyZk
- 2PmQI8yOf0a88jQa5C0RWpiCZJmDqrfDb3y9p/ilENtqLsJ8IoB6giHlJsujAjrs/LT7
- ClGiCkDe8YgNV9UnOGW5oy5Kt/5TxcYAUX0jWeW3zw7hbPHSl2Zmncn++bRWxJ+sXHAv
- fyd7Frc3e1XEFqQCkqfiQdSiBJd3rMHJIHKudpEFHKVckWUH5zcWpEWZyn3luW8TWejd
- jHYQ==
-X-Gm-Message-State: AOJu0Yy5FruTGxe2h7n9Sb9miYkIpzn6gDyPfnoUb5JVL85OLO8Insul
- c7sg7QY41QaYvnoycHmxpSFDCHmvUyUrBhkwR198LrIKbwtm4XaA9QgX1ie6SYGG5DNVnaOD+PI
+ bh=Ly3TgyVogkDmuhzy2M7jKm3e/Z7ibEWqnc6664ySZAY=;
+ b=Q4YknYJPJ/u6NpxTtNkSpRtgDd6b9+dPkBYmKNGF1Lgf0sos49u41ILzzWgta/HLNH
+ lZc1HOzOY0VRratTjECX7T6GfWRLNptabj24QmCNoMUCgdV+pJIG9s0gOY3NXvoodzyy
+ XCdACyWQqp9uFigFqj0CHgA3geCuB4E8KMy98QfBuF9dO7ZzVu2rXJzbjshsnM1iCV/7
+ 4xyD0su/twkrSpJwujz1T4ePXqR8R/fOFs1rVVVRCvyhWytaK9SjcjmMqG5UCXRsUwnt
+ 48CqS7X3pzqQqFh8X1G5UnBVRld6M8YbVxZB9Slo8gpb5o8LOl8EuuhgwmJ6Wpb8eu1e
+ H6mw==
+X-Gm-Message-State: AOJu0YzMSuU14nY/Ft3Vf5W0nLzimQ9B0TXIxI7UaCCzKhe0cfEZVtr4
+ zdBFr4BYF+acxKpHmUMs+q3qj6U4v2Lca/5FVKmvIjOiGuZHsglLtIpQep/wyrYGwafrsF+v3Vk
  =
-X-Gm-Gg: ASbGncthFuIkLL8ZVPUowgOmSDd/oen1f15PFNjCZCKVesjipTSIlJqYszY8W8MyULm
- aLKVpkXDPML3BbeJ6ClQ/KhuOBbAQhiKY/q+gRIOMNWyt4/C3dOA4NKPMvyQMthBcfjBHF+U82L
- sRz9Hb9HZAsJCNDwPtEPIJcc/ElBiSHEKNMIekVAMS+W4aHyuj+8VP3Pl39n8gMLLB+iX3k68k8
- 31IYRYCIcR0EwnLvyfZ4C7pb0neHleeW8J6rUeu+RkRaUWt1QjpTfSmdLNJGqmB1vi54tzupzPb
- FQNYngjg1oE=
-X-Google-Smtp-Source: AGHT+IEjjqiWgM2tFWvdfDH8Iz5gM7ZVgFu/I2d5dlCIoodAFnY1osytVO6g+BEKqtNXjbCQjplZ1A==
-X-Received: by 2002:a05:6602:6013:b0:83a:ab63:20b with SMTP id
- ca18e2360f4ac-8445b556cf6mr547693739f.4.1733269686457; 
- Tue, 03 Dec 2024 15:48:06 -0800 (PST)
+X-Gm-Gg: ASbGnctP9mybdNaqJ4X4IGxMbQVl5h7uybTWJFI7+goS9I6uLFbzfb3imgHOufTR1Wp
+ KzZIhwT7FisCz2kAgPgZWVbVBs7H6JZ+ZZs4t/d3vZrh70cRYcOUrDTEe0EzHDlT4A7+WZ3RzpC
+ mCUxkmn469qAz9/7dDEMQNrPJi23X4NSeodIW+qNIJh+sNMOG12vHZ7oB9dmgiYbKnGK4MBuWfZ
+ G2W8iWhhzFUcV55mXurApnqFN7PI9Z7j+DOYu6EZ2skyHjaJMoNTpkRxy7njBOfmVDHX3rmwSgX
+ 2hRoiEnM4Xo=
+X-Google-Smtp-Source: AGHT+IE3ETBox0vN+J9ONVwnmbkGYXzLYKC1iy2rGKEt7QqXC0EMWUo1iSYnLwA6E7SK3CXfiOmaTg==
+X-Received: by 2002:a05:6602:1695:b0:83d:e526:fde7 with SMTP id
+ ca18e2360f4ac-8445b551c71mr630329439f.6.1733269689708; 
+ Tue, 03 Dec 2024 15:48:09 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.48.03
+ ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.48.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:48:04 -0800 (PST)
+ Tue, 03 Dec 2024 15:48:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v2 40/41] pxe_utils: Refactor to separate reading from booting
-Date: Tue,  3 Dec 2024 16:45:58 -0700
-Message-Id: <20241203234559.2938192-41-sjg@chromium.org>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v2 41/41] bootmeth_extlinux: Refactor extlinux to split boot
+Date: Tue,  3 Dec 2024 16:45:59 -0700
+Message-Id: <20241203234559.2938192-42-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203234559.2938192-1-sjg@chromium.org>
 References: <20241203234559.2938192-1-sjg@chromium.org>
@@ -97,190 +98,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful to be able to select a bootflow and read its images,
-without actually doing the boot. This allows adjusting the bootargs, for
-example.
+Add a new extlinux_setup() function which sets things up so that the
+bootflow can either be booted, or just probed.
 
-Provide support for this in the pxe_utils module, by adding a 'probe'
-method which selects a label and saves its settings, so it can be booted
-later, if desired.
+Provide a readall() method so that images can be read into memory,
+without booting the OS. Adjust the boot() method so that it can boot,
+after any changes have been made by the user.
+
+Update the test to change the bootargs and check that they are booted
+with the changes intact.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/pxe_utils.c    | 72 +++++++++++++++++++++++++++++++++++++++++----
- include/pxe_utils.h | 41 ++++++++++++++++++++++++++
- 2 files changed, 108 insertions(+), 5 deletions(-)
+ boot/ext_pxe_common.c | 47 ++++++++++++++++++++++++++++---------------
+ test/boot/bootflow.c  | 24 ++++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 16 deletions(-)
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 1468a8e8498..a76fa68f832 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -796,8 +796,31 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 	if (ctx->bflow)
- 		ctx->bflow->fdt_addr = hextoul(conf_fdt, NULL);
- 
--	if (ctx->no_boot)
-+	if (IS_ENABLED(CONFIG_BOOTSTD_FULL) && ctx->no_boot) {
-+		ctx->label = label;
-+		ctx->kernel_addr = strdup(kernel_addr);
-+		if (initrd_addr_str) {
-+			ctx->initrd_addr_str = strdup(initrd_addr_str);
-+			ctx->initrd_filesize = strdup(initrd_filesize);
-+			ctx->initrd_str = strdup(initrd_str);
-+		}
-+		ctx->conf_fdt = strdup(conf_fdt);
-+		log_debug("Saving label '%s':\n", label->name);
-+		log_debug("- kernel_addr '%s' conf_fdt '%s'\n",
-+			  ctx->kernel_addr, ctx->conf_fdt);
-+		if (initrd_addr_str) {
-+			log_debug("- initrd addr '%s' filesize '%s' str '%s'\n",
-+				  ctx->initrd_addr_str, ctx->initrd_filesize,
-+				  ctx->initrd_str);
-+		}
-+		if (!ctx->kernel_addr || !ctx->conf_fdt ||
-+		    (initrd_addr_str && (!ctx->initrd_addr_str ||
-+		     !ctx->initrd_filesize || !ctx->initrd_str))) {
-+			printf("malloc fail (saving label)\n");
-+			return 1;
-+		}
- 		return 0;
-+	}
- 
- 	label_run_boot(ctx, label, kernel_addr, initrd_addr_str,
- 		       initrd_filesize, initrd_str, conf_fdt);
-@@ -1689,18 +1712,29 @@ void pxe_destroy_ctx(struct pxe_context *ctx)
- 	free(ctx->bootdir);
+diff --git a/boot/ext_pxe_common.c b/boot/ext_pxe_common.c
+index c7f690dee17..7fdd3d98834 100644
+--- a/boot/ext_pxe_common.c
++++ b/boot/ext_pxe_common.c
+@@ -75,27 +75,19 @@ int extlinux_set_property(struct udevice *dev, const char *property,
+ 	return 0;
  }
  
--int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
-+struct pxe_menu *pxe_prepare(struct pxe_context *ctx, ulong pxefile_addr_r,
-+			     bool prompt)
+-static int extlinux_process(struct udevice *dev, struct bootflow *bflow,
+-			    pxe_getfile_func getfile, bool no_boot)
++static int extlinux_setup(struct udevice *dev, struct bootflow *bflow,
++			  pxe_getfile_func getfile, struct pxe_context *ctx)
  {
- 	struct pxe_menu *cfg;
+ 	struct extlinux_plat *plat = dev_get_plat(dev);
+-	ulong addr;
+ 	int ret;
  
- 	cfg = parse_pxefile(ctx, pxefile_addr_r);
- 	if (!cfg) {
- 		printf("Error parsing config file\n");
--		return 1;
-+		return NULL;
- 	}
+-	addr = map_to_sysmem(bflow->buf);
+-
+ 	plat->info.dev = dev;
+ 	plat->info.bflow = bflow;
  
--	if (prompt)
--		cfg->prompt = 1;
-+	cfg->prompt = prompt;
-+
-+	return cfg;
-+}
-+
-+int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
-+{
-+	struct pxe_menu *cfg;
-+
-+	cfg = pxe_prepare(ctx, pxefile_addr_r, prompt);
-+	if (!cfg)
-+		return 1;
- 
- 	handle_pxe_menu(ctx, cfg);
- 
-@@ -1708,3 +1742,31 @@ int pxe_process(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
+-	ret = pxe_setup_ctx(&plat->ctx, getfile, &plat->info, true,
+-			    bflow->fname, false, plat->use_fallback, bflow);
+-	if (ret)
+-		return log_msg_ret("ctx", -EINVAL);
+-	plat->ctx.no_boot = no_boot;
+-
+-	ret = pxe_process(&plat->ctx, addr, false);
++	ret = pxe_setup_ctx(ctx, getfile, &plat->info, true, bflow->fname,
++			    false, plat->use_fallback, bflow);
+ 	if (ret)
+-		return log_msg_ret("bread", -EINVAL);
++		return log_msg_ret("ctx", ret);
  
  	return 0;
  }
-+
-+int pxe_probe(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt)
-+{
-+	ctx->cfg = pxe_prepare(ctx, pxefile_addr_r, prompt);
-+	if (!ctx->cfg)
-+		return -EINVAL;
-+	ctx->no_boot = true;
-+
-+	handle_pxe_menu(ctx, ctx->cfg);
-+
-+	return 0;
-+}
-+
-+int pxe_do_boot(struct pxe_context *ctx)
-+{
+@@ -103,17 +95,40 @@ static int extlinux_process(struct udevice *dev, struct bootflow *bflow,
+ int extlinux_boot(struct udevice *dev, struct bootflow *bflow,
+ 		  pxe_getfile_func getfile)
+ {
+-	return extlinux_process(dev, bflow, getfile, false);
++	struct extlinux_plat *plat = dev_get_plat(dev);
++	ulong addr;
 +	int ret;
 +
-+	if (!ctx->label)
-+		return log_msg_ret("pxb", -ENOENT);
-+
-+	ret = label_run_boot(ctx, ctx->label, ctx->kernel_addr,
-+			     ctx->initrd_addr_str, ctx->initrd_filesize,
-+			     ctx->initrd_str, ctx->conf_fdt);
++	/* if we have already selected a label, just boot it */
++	if (plat->ctx.label) {
++		ret = pxe_do_boot(&plat->ctx);
++	} else {
++		ret = extlinux_setup(dev, bflow, getfile, &plat->ctx);
++		if (ret)
++			return log_msg_ret("elb", ret);
++		addr = map_to_sysmem(bflow->buf);
++		ret = pxe_process(&plat->ctx, addr, false);
++	}
 +	if (ret)
-+		return log_msg_ret("lrb", ret);
++		return log_msg_ret("elb", -EFAULT);
 +
 +	return 0;
-+}
-diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index beadd221475..6425e349d19 100644
---- a/include/pxe_utils.h
-+++ b/include/pxe_utils.h
-@@ -111,6 +111,16 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
-  *	"default" option as default
-  * @no_boot: Stop show of actually booting and just return
-  * @bflow: Bootflow being booted, or NULL if none (must be valid if @no_boot)
-+ * @cfg: PXE menu (NULL if not yet probed)
-+ *
-+ * The following are only used when probing for a label
-+ * @label: Label to process
-+ * @kernel_addr: String containing kernel address (cannot be NULL)
-+ * @initrd_addr_str: String containing initaddr address (NULL if none)
-+ * @initrd_filesize: String containing initrd size (only used if
-+ *	@initrd_addr_str)
-+ * @initrd_str: initrd string to process (only used if @initrd_addr_str)
-+ * @conf_fdt: string containing the FDT address
-  */
- struct pxe_context {
- 	/**
-@@ -133,6 +143,15 @@ struct pxe_context {
- 	bool use_fallback;
- 	bool no_boot;
+ }
+ 
+ int extlinux_read_all(struct udevice *dev, struct bootflow *bflow,
+ 		      pxe_getfile_func getfile)
+ {
++	struct extlinux_plat *plat = dev_get_plat(dev);
++	ulong addr;
+ 	int ret;
+ 
+-	ret = extlinux_process(dev, bflow, getfile, true);
++	ret = extlinux_setup(dev, bflow, getfile, &plat->ctx);
++	if (ret)
++		return log_msg_ret("era", ret);
++	addr = map_to_sysmem(bflow->buf);
++	ret = pxe_probe(&plat->ctx, addr, false);
+ 	if (ret)
+-		return log_msg_ret("era", -EINVAL);
++		return log_msg_ret("elb", -EFAULT);
+ 
+ 	return 0;
+ }
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 640a7cdb7c9..35580cee90c 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -21,6 +21,7 @@
+ #endif
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
++#include <linux/libfdt.h>
+ #include <test/suites.h>
+ #include <test/ut.h>
+ #include "bootstd_common.h"
+@@ -1440,6 +1441,9 @@ static int bootflow_scan_extlinux(struct unit_test_state *uts)
+ 	const struct bootflow_img *img;
+ 	struct bootstd_priv *std;
  	struct bootflow *bflow;
-+	struct pxe_menu *cfg;
-+
-+	/* information on the selected label to boot */
-+	struct pxe_label *label;
-+	char *kernel_addr;
-+	char *initrd_addr_str;
-+	char *initrd_filesize;
-+	char *initrd_str;
-+	char *conf_fdt;
- };
++	const char *cline;
++	const void *fdt;
++	int node;
  
- /**
-@@ -283,4 +302,26 @@ int pxe_get_file_size(ulong *sizep);
-  */
- int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6);
+ 	ut_assertok(run_command("bootflow scan", 0));
+ 	ut_assert_console_end();
+@@ -1477,6 +1481,26 @@ static int bootflow_scan_extlinux(struct unit_test_state *uts)
+ 	ut_asserteq(IH_TYPE_FLATDT, img->type);
+ 	ut_asserteq(0xc00000, img->addr);	/* fdt_addr_r */
  
-+/**
-+ * pxe_probe() - Process a PXE file to find the label to boot
-+ *
-+ * This fills in the label, etc. fields in @ctx, assuming it funds something to
-+ * boot. Then pxe_do_boot() can be called to boot it.
-+ *
-+ * @ctx: PXE context created with pxe_setup_ctx()
-+ * @pxefile_addr_r: Address to load file
-+ * @prompt: Force a prompt for the user
-+ * Return: 0 if OK, -ve on error
-+ */
-+int pxe_probe(struct pxe_context *ctx, ulong pxefile_addr_r, bool prompt);
++	/* adjust the command line */
++	ut_assertok(run_command("bootflow cmdline set root /dev/mmc2", 0));
 +
-+/**
-+ * pxe_do_boot() - Boot the selected label
-+ *
-+ * This boots the label discovered by pxe_probe()
-+ *
-+ * Return: Does not return, on success, otherwise returns a -ve error code
-+ */
-+int pxe_do_boot(struct pxe_context *ctx);
++	ut_asserteq(-EFAULT, bootflow_boot(bflow));
++	ut_assert_skip_to_line("sandbox: continuing, as we cannot run Linux");
++	ut_assert_console_end();
 +
- #endif /* __PXE_UTILS_H */
++	/* check that the images were not loaded again */
++	ut_asserteq(4, bflow->images.count);
++
++	/* check the cmdline in the booted FDT */
++	fdt = working_fdt;
++	node = fdt_subnode_offset(fdt, 0, "chosen");
++	ut_assert(node > 0);
++	cline = fdt_getprop(fdt, node, "bootargs", 0);
++	ut_assertnonnull(cline);
++	ut_asserteq_str(
++		"ro root=/dev/mmc2 rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB",
++		bflow->cmdline);
++
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootflow_scan_extlinux, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.34.1
 
