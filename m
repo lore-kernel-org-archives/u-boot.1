@@ -4,114 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45599E6C60B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 06:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9FFE6C611
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 07:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8442988E32;
-	Tue,  3 Dec 2024 07:39:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 41D1E895BD;
+	Tue,  3 Dec 2024 08:42:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="jOGnC8Ab";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="avJ6VIwe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87EA488E2B; Tue,  3 Dec 2024 07:39:52 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E09ED895CE; Tue,  3 Dec 2024 08:42:41 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8D4388E32
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 07:39:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65F95895AF
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 08:42:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mk7.kang@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20241203063945epoutp02feb1bf6833e8f66adf07025e81b30159~Nl3rwE-PT2586025860epoutp02O
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 06:39:45 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20241203063945epoutp02feb1bf6833e8f66adf07025e81b30159~Nl3rwE-PT2586025860epoutp02O
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733207985;
- bh=wVSkATdjErVDMoqftw8NnlVXP+qOO398kjCuo7xVhdE=;
- h=From:To:Subject:Date:References:From;
- b=jOGnC8AbnJFecZ5eNfdcBg33JhUKUhaV43Kkmi7njvqf7bRdSEC4/X+6dI5tluTPC
- roQFAU/PRjuPNTMLbSzXweyBZsE9zqVknHveJUe+nHL0Zbxzk4WT2yYd5RGpgSnl+i
- HVmgcHFz41CcgkArg+MQvb+kt7U0Gj9pPqRsYVgs=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20241203063945epcas1p183b0e1a8e66b64cfc9fb1d3612975e17~Nl3rdSsbr0601106011epcas1p1j;
- Tue,  3 Dec 2024 06:39:45 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.241]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Y2WGm467Gz4x9Pr; Tue,  3 Dec
- 2024 06:39:44 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 50.F0.31735.0B7AE476; Tue,  3 Dec 2024 15:39:44 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20241203063944epcas1p45e5c757403cd06ebd265a93e7fdbbeff~Nl3qPXGCa2170821708epcas1p47;
- Tue,  3 Dec 2024 06:39:44 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20241203063944epsmtrp1cd195f6134f7b352f94fba2e06ec8aec~Nl3qOzJve3252232522epsmtrp11;
- Tue,  3 Dec 2024 06:39:44 +0000 (GMT)
-X-AuditID: b6c32a4c-ac3ff70000007bf7-c9-674ea7b09b71
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 22.8C.18949.0B7AE476; Tue,  3 Dec 2024 15:39:44 +0900 (KST)
-Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241203063944epsmtip1baae5cb26119d569827e9458a7d9c191~Nl3qEqOxR3258232582epsmtip1N;
- Tue,  3 Dec 2024 06:39:44 +0000 (GMT)
-From: "Minkyu Kang" <mk7.kang@samsung.com>
-To: <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Please pull u-boot-samsung master
-Date: Tue, 3 Dec 2024 15:39:43 +0900
-Message-ID: <24da01db454e$23517c30$69f47490$@samsung.com>
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa578d10d50so837925666b.1
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 23:42:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1733211759; x=1733816559;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g8z3zuvykAfp23Y8YXq36Zrs+BfKbey40UdjymsO/2w=;
+ b=avJ6VIweD3axTjlweowgQmSKN+SCO+rMFG1eMugH/KX/BIZ1lAOUKxc1pBBh2N3JJv
+ KrCED8FCaSJEjyxITRm3wyb+XMuK6yCDPyNBzrtys1YsUFPtAe+B89speNjhWer4E+dg
+ YP+fzynE80/vYi8U6FAiY8XU7IwPXYfa1kyWVw1Nw39ID4zddZm3RW0RNt+O5k/JOMWx
+ yd48ilZTybh7vymryylj3MX6FIrhpkCUoC5RRofhz3TDqH956cx2aXh0dOygUizsUWv9
+ mEc/9wp6Z3eVr0F175huBgXpW14XEwUiPMbO6OLDsBItLLqJBumwK6WiPT9NOfoFpatx
+ n7FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733211759; x=1733816559;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=g8z3zuvykAfp23Y8YXq36Zrs+BfKbey40UdjymsO/2w=;
+ b=H26ytIRTplpw0aL/JjS4wTPEqgyNMIwycVqpyrXj0idRu6ZGTyPnlkJKvEWaATkeMZ
+ kQDYHMHXh12XJDjOzjCvdiLZGanIZphzoWqJC6mY0W44Y0kADjxZ6XI+vGKMEbnw3DDa
+ crOcgS6bPcJ8C2R4gr3JIQ1YehFRtZarfgHczXSu2NEjCCsNAnt38yZ99fPGm96AkwMx
+ Y2xQj2KH8+b5tt66G6F7/OSqUrth729gq83AXvPyJGRNka23rVLZPbX4+rLW4d11QmBh
+ e/KeJ9mzS/DNZtGFRYKEd0VxaSXom8RgfHaYSvw5FkiMlFUzzgLevp/jTfKJJK76/vvw
+ 0EIw==
+X-Gm-Message-State: AOJu0Yy+hUZpboiqYtriliwit2vlG0I3sCQZZW7N3xfqjaTKGVvieFF7
+ OB+WxG417MjAbeQustHYh9LvSucSLdeYNSDiTm1ZOqlRemTbZfmpORPtRI9XkJxURznZkPHwGnP
+ iNA==
+X-Gm-Gg: ASbGnct0A3xsANqbEFZfHyF9rRS6zpvr4p0ilXYfeo440lVnreCSS11VC+fxPE/bBBq
+ DqIbTI2NR1apNGFCXyERWJOLWfSHR1EqzY8nnt12YmfmPyyNabEPEBAk31w+P9OHQNBN7U3ti7j
+ XYBKDV9cNGwR+n9IVaas2ysG0UUGUOueM/pC17em+/V9BpypX9ql3qdpfOKfMM2Js69DRUVTARh
+ 4ctTgYkW+TJZb7l4R07eKq5cbFliHQGLb5aAyxvxKT37HRCV69PcBEjuXjCMJ0VEQ==
+X-Google-Smtp-Source: AGHT+IGLTS70V65r3OFWgZKmKyLPE9BgtkwRbjD0+ioLKFX/ICzy7ZJgFDOiTdGLCRdRaT/n3Dcflw==
+X-Received: by 2002:a17:906:2921:b0:aa5:c3d3:3249 with SMTP id
+ a640c23a62f3a-aa5f7f2cc03mr121595566b.54.1733211758727; 
+ Mon, 02 Dec 2024 23:42:38 -0800 (PST)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa5999032c1sm581779366b.133.2024.12.02.23.42.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Dec 2024 23:42:38 -0800 (PST)
+Message-ID: <d28b39e9-2ba0-4581-830e-8b6f8ec9989d@monstr.eu>
+Date: Tue, 3 Dec 2024 08:42:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] xilinx patches for v2025.04-rc1
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AdtFTgM67oENYUCVTqqQeXuU+w7JYg==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrJKsWRmVeSWpSXmKPExsWy7bCmvu6G5X7pBr8WKlhMnbSZ3eLt3k52
- ByaPVwdWsXucvbODMYApKtsmIzUxJbVIITUvOT8lMy/dVsk7ON453tTMwFDX0NLCXEkhLzE3
- 1VbJxSdA1y0zB2i+kkJZYk4pUCggsbhYSd/Opii/tCRVISO/uMRWKbUgJafArECvODG3uDQv
- XS8vtcTK0MDAyBSoMCE748/Wh0wFl9kr7k+dy9zAOJ2ti5GTQ0LARGLLvb2sXYxcHEICexgl
- bm7aygzhfGKUmDplJlTmG6NEV8dnZpiW/TsXMEIk9jJKrNn8gQ3Cec4o0Xt5HiNIFZuAlsTf
- hedZQWwRAQOJLQd3gNnCQPFfF56BLWcRUJF4c+QSUD0HB6+ApcS79xIgYV4BQYmTM5+wgNjM
- AvIS29/OgVqsIPHz6TKokXoSR3qOMELUiEjM7myDqtnGLvGnywjCdpG49ncFO4QtLPHq+BYo
- W0riZX8bO8jNEgKTGSUmLXrGCOGsZ5Q4POsDI0SVscTN9RtYQY5jFtCUWL9LH2IZn8S7rz1g
- YQkBXomONiGIaiWJAxcOQHVKSMy+vp0VwvaQOPFwMti7QgKxEl9WzmSZwCg/C8mbs5C8OQvJ
- O7MQFi9gZFnFKJVaUJybnppsWGCom5daDo/l5PzcTYzgNKfls4Px+/q/eocYmTgYDzFKcDAr
- ifAuX++dLsSbklhZlVqUH19UmpNafIjRFBj2E5mlRJPzgYk2ryTe0MTSwMTMyMTC2NLYTEmc
- 98yVslQhgfTEktTs1NSC1CKYPiYOTqkGpo4Z0pXfOhVupxdfFK1Y/nhhg/ZKAe3CKmPmPV4V
- D87H2uQKnuItlmXN/8duurDs6BIvybg7L1kCN+W+zfrtX3xC76ZftXWEqqjx1X0Xd26/+6Cp
- c9fn/H0X71Qdff9t9U+7+zJPKib+MOS42xl7KcoyLz3/EbdacO8M6dmzpzat/dCgHLw1i3P2
- 9fs9k9eGPzJTnNX5TWG6xhHLrmezkz90tPNeKJYqSu7pWa3uEFL04YjkZlWmz4uTd0Z2P+NI
- T/Jd1P3v5e3IFYUfFsieCvsut8LEKMelZaVy59yty7Q3zu6asP3jJWbWPP7vbwJeaDUYuW8t
- v8HUfbX+7Cm35RFnihcv01rndtH7+4L+3UosxRmJhlrMRcWJAGbxCvj8AwAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWy7bCSnO6G5X7pBtsWcVtMnbSZ3eLt3k52
- ByaPVwdWsXucvbODMYApissmJTUnsyy1SN8ugSvjz9aHTAWX2SvuT53L3MA4na2LkZNDQsBE
- Yv/OBYxdjFwcQgK7GSWm969ihEhISEyafYGpi5EDyBaWOHy4GKLmKaPE+W/97CA1bAJaEn8X
- nmcFsUUEjCRaN3QygdjCQPFfF56BLWARUJF4c+QSI8gcXgFLiXfvJUDCvAKCEidnPmEBCTML
- 6Em0bQTbyiwgL7H97RxmiAsUJH4+XQY1XU/iSM8RqBoRidmdbcwTGAVmIZk0C2HSLCSTZiHp
- WMDIsopRMrWgODc9t9iwwCgvtVyvODG3uDQvXS85P3cTIzhgtbR2MO5Z9UHvECMTB+MhRgkO
- ZiUR3uXrvdOFeFMSK6tSi/Lji0pzUosPMUpzsCiJ83573ZsiJJCeWJKanZpakFoEk2Xi4JRq
- YAp0n3BaW/bryZyMtedOdacckp0YmbAv3/NcSvyZJ3vll801NDmw1eu2/NUj8QWNKgen6nW4
- i6tsb5qcG17ov9uy73Km+u53ed8y9TzlHiYerbnw3ro0RrdvlswFATVW/zmLhWaGBD1xnZDx
- PbPgrnmceobh1aspMlqp85hi01QmvDQztHGo+bzx1kIuTsWwu6F9v6cFLec3PHmeu4FJeoX0
- u/o0CZlJca150j2fy8S3PpkbZxApE782Zv9rz9eXFWbc2/blYPuvTyFbOaaodre+PLA2sHqz
- 1D/1F8dbjqzzDjN59bdy8itZ/m/XhFa0zm/aq3rv84sgkc9P1YOa/v0QnSdZF7Mg7ernGb79
- C5VYijMSDbWYi4oTAR5L9gnHAgAA
-X-CMS-MailID: 20241203063944epcas1p45e5c757403cd06ebd265a93e7fdbbeff
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241203063944epcas1p45e5c757403cd06ebd265a93e7fdbbeff
-References: <CGME20241203063944epcas1p45e5c757403cd06ebd265a93e7fdbbeff@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,35 +96,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi Tom,
 
-The following changes since commit 56accc56b9aab87ef4809ccc588e1257969cd271:
-
-  bios_emulator: fix first argument of pci_{read,write}_config_* function
-calls (2024-11-04 18:01:58 -0600)
-
-are available in the git repository at:
-
-  git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
-
-for you to fetch changes up to 0bbc17f06bf3ecee019090b76c8c20480516945e:
-
-  configs: e850-96: Disable PSCI reset (2024-12-03 15:14:53 +0900)
-
-----------------------------------------------------------------
-Henrik Grimler (1):
-      pinctrl: exynos: fix type of count integer
-
-Sam Protsenko (2):
-      arm: dts: e850-96: Remove TRNG node from appended dts
-      configs: e850-96: Disable PSCI reset
-
- arch/arm/dts/exynos850-e850-96-u-boot.dtsi | 11 -----------
- configs/e850-96_defconfig                  |  2 ++
- drivers/pinctrl/exynos/pinctrl-exynos.c    |  4 ++--
- 3 files changed, 4 insertions(+), 13 deletions(-)
+please pull these patches to your next branch. The biggest change is to start to 
+use binman instead of arch/arm/mach-zynqmp/mkimage_fit_atf.sh script.
 
 Thanks,
-Minkyu Kang.
+Michal
 
+The following changes since commit 62224280d9e89648ae90346c0aede76f9b7e7610:
 
+   Merge tag 'u-boot-dfu-next-20241126' of 
+https://source.denx.de/u-boot/custodians/u-boot-dfu into next (2024-11-26 
+10:50:05 -0600)
+
+are available in the Git repository at:
+
+   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2025.04-rc1
+
+for you to fetch changes up to 46097afc70352ce5dc0caa8f95b74cba1e00af9b:
+
+   arm64: zynqmp: Update the usb5744 hub node as per binding (2024-11-29 
+13:22:16 +0100)
+
+----------------------------------------------------------------
+AMD/Xilinx changes for v2025.04-rc1
+
+binman:
+- Separate binman description from main DT
+
+zynqmp:
+- Enable binman for ZynqMP platforms
+- DT sync with Linux v6.12
+- Update usb5744 hub for SOMs
+
+common:
+- Drop SPL_FIT_GENERATOR support
+
+versal2
+- Enable OPTEE layers
+
+ospi:
+- Refactor the flash reset functionality
+
+pytest:
+- Fix tcminit mode handling
+
+----------------------------------------------------------------
+Love Kumar (1):
+       test/py: zynqmp_rpu: Fix tcminit mode value
+
+Marek Vasut (1):
+       Makefile: Drop SPL_FIT_GENERATOR support
+
+Michal Simek (8):
+       binman: Add option for pointing to separate description
+       common: binman: Calling initr_binman() when BINMAN_FDT
+       arm64: zynqmp: Describe empty binman node
+       arm64: zynqmp: Add binman description for SOM
+       arm64: zynqmp: Generate u-boot.itb and QSPI image via binman
+       arm64: zynqmp: Remove mkimage fit script
+       arm64: zynqmp: Also generate images with single DT
+       arm64: zynqmp: Sync with v6.12 kernel
+
+Venkatesh Yadav Abbarapu (4):
+       configs: zynqmp_kria: Enable the USB onboard hub
+       configs: versal2: Enable OPTEE support
+       cadence_qspi: Refactor the flash reset functionality
+       arm64: zynqmp: Update the usb5744 hub node as per binding
+
+  Makefile                                         |  29 +--
+  arch/arm/Kconfig                                 |   1 +
+  arch/arm/dts/Makefile                            |   3 +
+  arch/arm/dts/zynqmp-binman-mini.dts              |  10 +
+  arch/arm/dts/zynqmp-binman-som.dts               | 225 ++++++++++++++++++
+  arch/arm/dts/zynqmp-binman.dts                   | 206 +++++++++++++++++
+  arch/arm/dts/zynqmp-clk-ccf.dtsi                 |  16 ++
+  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso           |  37 +--
+  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso           |  67 ++++--
+  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso           |  68 ++++--
+  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso           |  24 +-
+  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso           |  33 ++-
+  arch/arm/dts/zynqmp-sm-k26-revA.dts              |   2 +-
+  arch/arm/dts/zynqmp-smk-k26-revA.dts             |   2 +-
+  arch/arm/dts/zynqmp-u-boot.dtsi                  |  11 +
+  arch/arm/dts/zynqmp-zcu102-revA.dts              |   1 +
+  arch/arm/dts/zynqmp-zcu1275-revA.dts             |   3 +-
+  arch/arm/dts/zynqmp.dtsi                         |  44 +++-
+  arch/arm/mach-zynqmp/Kconfig                     |  14 ++
+  arch/arm/mach-zynqmp/mkimage_fit_atf.sh          | 240 --------------------
+  boot/Kconfig                                     |  15 --
+  common/board_r.c                                 |   7 +-
+  configs/amd_versal2_virt_defconfig               |   3 +
+  configs/xilinx_zynqmp_kria_defconfig             |   4 +
+  configs/xilinx_zynqmp_mini_defconfig             |   2 +
+  configs/xilinx_zynqmp_mini_emmc0_defconfig       |   3 +
+  configs/xilinx_zynqmp_mini_emmc1_defconfig       |   3 +
+  configs/xilinx_zynqmp_mini_nand_defconfig        |   2 +
+  configs/xilinx_zynqmp_mini_nand_single_defconfig |   2 +
+  configs/xilinx_zynqmp_mini_qspi_defconfig        |   3 +
+  configs/xilinx_zynqmp_virt_defconfig             |   3 +
+  doc/usage/fit/howto.rst                          |   4 -
+  drivers/spi/cadence_ospi_versal.c                |  45 +---
+  drivers/spi/cadence_qspi.c                       |   6 +-
+  lib/Kconfig                                      |   9 +
+  test/py/tests/test_zynqmp_rpu.py                 |  84 ++++---
+  36 files changed, 791 insertions(+), 440 deletions(-)
+  create mode 100644 arch/arm/dts/zynqmp-binman-mini.dts
+  create mode 100644 arch/arm/dts/zynqmp-binman-som.dts
+  create mode 100644 arch/arm/dts/zynqmp-binman.dts
+  create mode 100644 arch/arm/dts/zynqmp-u-boot.dtsi
+  delete mode 100755 arch/arm/mach-zynqmp/mkimage_fit_atf.sh
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
