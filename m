@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDDAE74AC1
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D4AE74AC2
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:31:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B9E188EA8;
-	Tue,  3 Dec 2024 17:13:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AA91B893F9;
+	Tue,  3 Dec 2024 17:31:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dn+6mUWA";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FB6588E6F; Tue,  3 Dec 2024 17:13:45 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1733243464;
+	bh=uHg6a0CKwhk31d9naAs5Bd5d5yea3R1O8WtzJTqifQA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=p3EwMuEO18AtRK24FV55ZMugmBbC/4gvcDqHJ6y9hGvdQyCSyBR5llJSS62IZ5R2c
+	 aTtmXwv0KcwGABjvoIdiyLVT0Pq+mYBksHgHu7u9r4KQnb0W9gZDOTQnXmIgakzlIE
+	 +kzEDEtVsyVkf3E8oGWL7SijTqRYikADgazyhlVVaHQxmoCsFzI62GHFeObCLXLsbn
+	 PL5cXIArCcrLwn9zUcYvwoH4TvLRKe8b103zfmmdrhRY5boeCaVmou/wULSghPAj/b
+	 3yrp9qcDXooxIcvwsBq6+Y6yrJ+flneNISDyBqpxCBlGRlu6sUa4Y9xRiPRodarU6A
+	 +Yb8Sj/4Gpqpw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 407B2893D6
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:13:43 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5ceb03aadb1so6811757a12.0
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 08:13:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733242423; x=1733847223; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cKsOx1urn+2JQO0EPZ3H4Hcl2nAYRVvr8/ZVUkKMYaE=;
- b=Dn+6mUWAH6B2KDWVAOPo+10fbAyqxOe0YctjDnWpGYbUhiBxh2fypHtwfa+2FrWWh4
- F7ulzX+orTcACZWi+LQWxh5i1KGg0TmjOXViw8MVAfhrByNXYWo33k1gqvo4Rd8D1uXM
- 5HMBibrNvslU1YKaygtjqFp82Zclo0ufTXwphqsp8ti/bIe2mZK8/1VM5f1ciuG0XXnM
- HINpyfSUG6GFB+SIUMpt6t2ql1lOQ4sx40me8kBzRF2iZKxZRWBUO8wA2LDTe0szU2ds
- QBB+sx8SWitodV636cKLfhWWyC7OU7M+YEWeDsU3rMiIRKlTCT3g/ZagaylKNVFyk8R+
- O5vQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733242423; x=1733847223;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cKsOx1urn+2JQO0EPZ3H4Hcl2nAYRVvr8/ZVUkKMYaE=;
- b=YMwvaOpG31jykdNuYSvV4IflNcQR9ugei4P1WqwMMpiklUxRzRvL2l58FL4KrOL0Mu
- A0KrapM/lOcQc1spIgUvFnPj7nDLNKOMgBZ9qmIzklcFziYJTvRmsdHnJLDtxe0A4uPZ
- nebOC8fHkkCMHOlXkM5u0nOcYL+vMxYQy3dpZx2A++i07QdRf37GMDg09ydloSG4sA9c
- vz2rFULAv4AGgMG7Qc1jjTyYaR/DbhZtRTZu4ssDx9JOTW+G/vZzjy1nx6MamjEUrgeV
- /TY/XMmFD6LypsSu98HWDT1Ne3CIoZKYsGL1uLv2JsPqngQMvc4O7xCMgvektqpfXBkC
- Fxpw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIZnxHw7B5dCeJp6vam/23HhRWGUrIxVB72R2YuqIhai3ax8e9y2MAHWYHy1VY7Qs4tkN6hPI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKXkTtYKKR6YrlUOX+UtsH/DL8wKrKIkCMuvJYBIvusf3sPJD8
- 992otdkxGeNlbHgBo1kgI/k42Sm0W0cazwZMrbgoawhi5JGUwnq2QhRoE2d4wj8=
-X-Gm-Gg: ASbGnctevksvNH4EIQUe42yXRXmLRXDmRlm+99XFh+OMJ5wtb62EEorDoRnENGs0xDk
- DnU2f3ZHmJRocoHOaRTamywT3fRrMEH2q2x/zApvwXlepnmZpTqwDdQDICluQQG73vwfaqfV7Wf
- 9lXJ3byFyQUHZJgxzkoUxiTfz79BuTsa/d6fX0w3cAsKCyvip/7kkYKQyEOeSNzKElg3zkwnkMp
- ZoAqaAjEI5a4MwBNxpHFeVm5v5Nyoa9UcOwtzdFUnE9REa0ZYpsSVE8/oqiFXV+uomj8PRTHTXB
- Ja5QfN7RmtTb26P9fdwd/dUbJMs=
-X-Google-Smtp-Source: AGHT+IF/Wuw2282yq+iq2nhYmFqJJ+yvj5FyHiR/8rYaXwOAJnl1Ur+9jiHxI86BmzTtkG/M2rgJaw==
-X-Received: by 2002:a05:6402:378a:b0:5cf:c0d2:698 with SMTP id
- 4fb4d7f45d1cf-5d10cb5baf9mr3129039a12.18.1733242422579; 
- Tue, 03 Dec 2024 08:13:42 -0800 (PST)
-Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
- [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d0e04ec755sm3139262a12.62.2024.12.03.08.13.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 08:13:42 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: Check for a valid fw_name before auto generating
- GUIDs
-Date: Tue,  3 Dec 2024 18:13:37 +0200
-Message-ID: <20241203161338.1814537-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B8FA78926A;
+ Tue,  3 Dec 2024 17:31:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1733243464;
+ bh=uHg6a0CKwhk31d9naAs5Bd5d5yea3R1O8WtzJTqifQA=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=PyxCE1OXPb/5bRWSNTrSr1O60M1i3wRIuFTrqqLoFY2jMDr11iBOO+TMXVMoLYoCm
+ IXRUsJ9AJC4Tr4HoHNrS65i1sw57ZxfN0SRyDc47DrI9FMciPjsvxtD6eYMnuDBWym
+ 89KQHNKzq/M+KqdzOfLhOiOwflRUcIm9cWitgNaSDCEMuMR/wxaLoW1yza2aWns+I3
+ i2i5Q/3P+9qFKbz9itFB9t1ePGinfrQubI53yCrwapuP6nh16OMBs0brXA+0zMJWkX
+ NZeAvqjvQVamVVqs3xOzuZgJuApl+KHESvShxx3N8brRqjOslc87sPokushhDmX9pw
+ Q6mwEN+Qxqdww==
+Message-ID: <05739e08-f83e-48db-9c83-cf93f394bb6b@denx.de>
+Date: Tue, 3 Dec 2024 17:24:10 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: onboard-hub: Update the bind function based on
+ "peer_hub" property
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
+References: <20241203044950.119197-1-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20241203044950.119197-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,34 +69,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The gen_v5_guid() is a void and does no error checking with pointers
-being available etc. Instead it expects all things to be in place to
-generate GUIDs. If a board capsule definition is buggy and does not
-define the firmware names when enabling capsule updates, the board will
-crash trying to bring up the EFI subsystem.
+On 12/3/24 5:49 AM, Venkatesh Yadav Abbarapu wrote:
+> Add the bool variable "peer_hub" and set this only for the
+> hubs which have the "peer-hub" property in their DT nodes.
+> Skip the bind function for usb hubs which don't have "peer-hub"
+> property.
+> 
+> Fixes: 57e30b09fc ("usb: onboard-hub: Bail out if peer hub is already probed")
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   common/usb_onboard_hub.c | 8 ++++++++
+>   1 file changed, 8 insertions(+)
+> 
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> index 6f28036e09..0a8fac38ee 100644
+> --- a/common/usb_onboard_hub.c
+> +++ b/common/usb_onboard_hub.c
+> @@ -26,6 +26,7 @@ struct onboard_hub {
+>   
+>   struct onboard_hub_data {
+>   	unsigned long reset_us;
+> +	bool peer_hub;
+>   	unsigned long power_on_delay_us;
 
-Check for a valid firmware name before generating GUIDs.
+Move the bool here , so it is not between the two delay descriptors.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_firmware.c | 4 ++++
- 1 file changed, 4 insertions(+)
+>   	int (*init)(struct udevice *dev);
+>   };
+> @@ -178,10 +179,15 @@ err:
+>   
+>   static int usb_onboard_hub_bind(struct udevice *dev)
+>   {
+> +	struct onboard_hub_data *data =
+> +		(struct onboard_hub_data *)dev_get_driver_data(dev);
 
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 6650c2b8071d..112775daf4c3 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -281,6 +281,10 @@ static efi_status_t efi_gen_capsule_guids(void)
- 	}
+Is the cast necessary ?
 
- 	for (i = 0; i < update_info.num_images; i++) {
-+		if (!fw_array[i].fw_name) {
-+			log_err("fw_name is not defined. Not generating capsule GUIDs\n");
-+			return EFI_INVALID_PARAMETER;
-+		}
- 		gen_v5_guid(&namespace,
- 			    &fw_array[i].image_type_id,
- 			    compatible, strlen(compatible),
--
-2.45.2
-
+[...]
