@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FE34E74AC2
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3555FE74AC3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73A6B89588;
-	Tue,  3 Dec 2024 17:36:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8BC889677;
+	Tue,  3 Dec 2024 17:36:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B966893A9; Tue,  3 Dec 2024 17:36:28 +0100 (CET)
+ id E4D1489651; Tue,  3 Dec 2024 17:36:30 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B729389538
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:36:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id A2AEA893A9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:36:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2B183FEC;
- Tue,  3 Dec 2024 08:36:53 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0DC70143D;
+ Tue,  3 Dec 2024 08:36:56 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D35AD3F71E;
- Tue,  3 Dec 2024 08:36:22 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B3EDC3F71E;
+ Tue,  3 Dec 2024 08:36:25 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -33,9 +33,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 3/4] efi_loader: preserve installer images in pmem
-Date: Tue,  3 Dec 2024 22:06:04 +0530
-Message-Id: <20241203163605.1482152-4-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 4/4] efi: add helper functions to insert pmem node for DT
+ fixup
+Date: Tue,  3 Dec 2024 22:06:05 +0530
+Message-Id: <20241203163605.1482152-5-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
 References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
@@ -57,93 +58,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+The EFI HTTP boot puts the iso installer image at some location in
+memory which needs to be reserved in the devicetree as persistent
+memory (pmem). Add helper functions which add this pmem node when the
+EFI_DT_FIXUP protocol's fixup callback is invoked.
 
-One of the problems OS installers face, when running in EFI, is that
-the mounted ISO after calling ExitBootServices goes away. For some
-distros this is a problem since they rely on finding some core packages
-before continuing the installation. Distros have works around this --
-e.g Fedora has a special kernel command line parameter called
-inst.stage2 [0].
-
-ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
-don't have anything in place for DTs. Linux and device trees have support
-for persistent memory devices.
-
-It's worth noting that for linux to instantiate the /dev/pmemX device,
-the memory described in the pmem node has to be omitted from the EFI
-memory map we hand over to the OS if ZONE_DEVICES and SPARSEMEM is
-enabled. With those enabled the pmem driver ends up calling
-devm_memremap_pages() instead of devm_memremap(). The latter works
-whether the memory is omitted or marked as reserved, but mapping pages
-only works if the memory is omitted.
-
-On top of that, depending on how the kernel is configured, that memory
-area must be page aligned or 2MB aligned. PowerPC is an exception here
-and requires 16MB alignment, but since we don't have EFI support for
-it, limit the alignment to 2MB.
-
-Ensure that the ISO image is 2MB aligned and remove the region
-occupied by the image from the EFI memory map.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
-Changes since V1: None
+Changes since V1:
+* Use log_err() to print the error message in image_setup_libfdt()
+* Remove "ERROR:" from the error print in image_setup_libfdt()
 
- lib/efi_loader/efi_bootmgr.c | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
+ boot/image-fdt.c             |  9 +++++++++
+ include/efi_loader.h         | 17 +++++++++++++++++
+ lib/efi_loader/efi_bootmgr.c | 21 +++++++++++++++++++++
+ lib/efi_loader/efi_helper.c  | 12 ++++++++++++
+ 4 files changed, 59 insertions(+)
 
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 3d5b6f9e2dc..de479d3ffa0 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <fdt_support.h>
+ #include <fdtdec.h>
++#include <efi_loader.h>
+ #include <env.h>
+ #include <errno.h>
+ #include <image.h>
+@@ -648,6 +649,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
+ 	if (!ft_verify_fdt(blob))
+ 		goto err;
+ 
++	if (CONFIG_IS_ENABLED(EFI_HTTP_BOOT)) {
++		fdt_ret = fdt_efi_pmem_setup(blob);
++		if (fdt_ret) {
++			log_err("HTTP boot pmem fixup failed\n");
++			goto err;
++		}
++	}
++
+ 	/* after here we are using a livetree */
+ 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
+ 		struct event_ft_fixup fixup;
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 24e40799eee..87b9a6e4da0 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -748,6 +748,15 @@ bool efi_varname_is_load_option(u16 *var_name16, int *index);
+ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+ 				    efi_guid_t *guid);
+ 
++/**
++ * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
++ *
++ * @fdt:	Pointer to the devicetree
++ *
++ * Return:	0 on success, negative on failure
++ */
++int fdt_efi_pmem_setup(void *fdt);
++
+ /**
+  * efi_size_in_pages() - convert size in bytes to size in pages
+  *
+@@ -964,6 +973,14 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
+ 				  void *load_options);
+ efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
+ 
++/**
++ * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
++ *
++ * @fdt:	Pointer to the DT blob
++ * Return:	status code
++ */
++efi_status_t efi_bootmgr_pmem_setup(void *fdt);
++
+ /**
+  * struct efi_image_regions - A list of memory regions
+  *
 diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 8c51a6ef2ed..b906e53e26e 100644
+index b906e53e26e..db4eb6a7376 100644
 --- a/lib/efi_loader/efi_bootmgr.c
 +++ b/lib/efi_loader/efi_bootmgr.c
-@@ -18,6 +18,8 @@
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <asm/unaligned.h>
-+#include <linux/kernel.h>
-+#include <linux/sizes.h>
+@@ -41,6 +41,8 @@ struct uridp_context {
+ 	efi_handle_t mem_handle;
+ };
  
- static const struct efi_boot_services *bs;
- static const struct efi_runtime_services *rs;
-@@ -362,13 +364,16 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 	}
++static struct uridp_context *uctx;
++
+ const efi_guid_t efi_guid_bootmenu_auto_generated =
+ 		EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
  
- 	/*
--	 * TODO: expose the ramdisk to OS.
--	 * Need to pass the ramdisk information by the architecture-specific
--	 * methods such as 'pmem' device-tree node.
-+	 * Linux supports 'pmem' which allows OS installers to find, reclaim
-+	 * the mounted images and continue the installation since the contents
-+	 * of the pmem region are treated as local media.
-+	 *
-+	 * The memory regions used for it needs to be carved out of the EFI
-+	 * memory map.
- 	 */
--	ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
-+	ret = efi_remove_memory_map(addr, size, EFI_CONVENTIONAL_MEMORY);
- 	if (ret != EFI_SUCCESS) {
--		log_err("Memory reservation failed\n");
-+		log_err("Failed to reserve memory\n");
- 		goto err;
- 	}
+@@ -427,6 +429,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
  
-@@ -490,6 +495,13 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 		ret = EFI_INVALID_PARAMETER;
- 		goto err;
- 	}
-+	/*
-+	 * Depending on the kernel configuration, pmem memory area must be page
-+	 * aligned or 2MB aligned. PowerPC is an exception here and requires
-+	 * 16MB alignment, but since we don't have EFI support for it, limit
-+	 * the alignment to 2MB.
-+	 */
-+	image_size = ALIGN(image_size, SZ_2M);
+ 	efi_free_pool(ctx->loaded_dp);
+ 	free(ctx);
++	uctx = NULL;
  
- 	/*
- 	 * If the file extension is ".iso" or ".img", mount it and try to load
+ 	return ret == EFI_SUCCESS ? ret2 : ret;
+ }
+@@ -447,6 +450,23 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
+ 	EFI_EXIT(ret);
+ }
+ 
++/**
++ * efi_bootmgr_pmem_setup() - Put a pmem node for UEFI HTTP installers
++ *
++ * @fdt:	Pointer to the DT blob
++ * Return:	status code
++ */
++efi_status_t efi_bootmgr_pmem_setup(void *fdt)
++{
++	if (!uctx) {
++		log_warning("No EFI HTTP boot context found\n");
++		return EFI_SUCCESS;
++	}
++
++	return !fdt_fixup_pmem_region(fdt, uctx->image_addr, uctx->image_size) ?
++		EFI_SUCCESS : EFI_INVALID_PARAMETER;
++}
++
+ /**
+  * try_load_from_uri_path() - Handle the URI device path
+  *
+@@ -476,6 +496,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	if (!ctx)
+ 		return EFI_OUT_OF_RESOURCES;
+ 
++	uctx = ctx;
+ 	s = env_get("loadaddr");
+ 	if (!s) {
+ 		log_err("Error: loadaddr is not set\n");
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index bf96f61d3d0..6fae37ad617 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -313,6 +313,18 @@ int efi_unlink_dev(efi_handle_t handle)
+ 	return 0;
+ }
+ 
++/**
++ * fdt_efi_pmem_setup() - Setup the pmem node in the devicetree
++ *
++ * @fdt:	Pointer to the devicetree
++ *
++ * Return:	0 on success, negative on failure
++ */
++int fdt_efi_pmem_setup(void *fdt)
++{
++	return efi_bootmgr_pmem_setup(fdt) == EFI_SUCCESS ? 0 : -1;
++}
++
+ static int u16_tohex(u16 c)
+ {
+ 	if (c >= '0' && c <= '9')
 -- 
 2.34.1
 
