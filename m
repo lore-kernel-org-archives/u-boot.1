@@ -4,54 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051E8E74ADD
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 21:47:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24917E69EBD
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 22:01:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B97D8958D;
-	Tue,  3 Dec 2024 22:47:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 72FFA893DB;
+	Tue,  3 Dec 2024 23:01:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fn7dM5Y0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LkFWv3Z4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27E128964B; Tue,  3 Dec 2024 22:47:34 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 28826895BD; Tue,  3 Dec 2024 23:01:13 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AA4288EAB
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 22:47:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E58A48931C
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 23:01:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=218d=S5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1733262443;
- bh=7nbAGwKNR8oggvGm/m28E9FMouPUuYm1eGJcj5QtrIw=;
- b=fn7dM5Y0DirbPWTeK+ZVOLGyPqrWdIWz3gP1PC7/gcfeqjdX0BP5K0vEtdQyMmd/UIo1hnp+a
- uiyLBDAxtR95K2MfGg4vrJD9mcSLrWcsKb9SOYC/JQMr2vM6xqDzbPV53EcE0j/FDbivxazQ1si
- tWbVKPPq0BFxd69M+H1F3jKi343e0+duipENrpDGJHaI+iUfkhEkaf6Ug9QsVKEE9OsEK5t6/Ua
- nhwaerjbenRWBPtVsWhcASkbs222SnK6Ev8Q6HiTA3LToEKkpimEJWLc2hqdTZw6Y3lIaq6ySFs
- sFqogCVneH80Oe+32fTKXtNnZKMmBZx2GGjczEJYuaRQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw revision
-Date: Tue,  3 Dec 2024 21:47:08 +0000
-Message-ID: <20241203214711.1011176-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6d87f00f786so56038356d6.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 14:01:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1733263270; x=1733868070; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fS48inAF5tjGCr0eel7f2UK/q5lKk4SJKeDh29LBnes=;
+ b=LkFWv3Z4Yoq0EJyC0c+1uvn/JZ0tk2E/CyMqBpDRpdgjVbfNpHnrX2U8aWbRCBGTyH
+ dzGjEbYz2m2sJXWzRT4+SYfXryQjsUeCiHKjjbq1q3I3QwP7TPzfS3j9lZmdhLeWMLZY
+ fGg36TNqBwrH7AaT8Q3qF7pq1KNvPYWl54ev0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733263270; x=1733868070;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fS48inAF5tjGCr0eel7f2UK/q5lKk4SJKeDh29LBnes=;
+ b=OtKt6x3GHPeUHelUSb1LJSapQ8AUkUWahkKjtUdnOuRAYW+Wv6nUYzIhpM4G7t9P1K
+ 20DkOxslJcd8D2IELS0dTfFD3aSICVKeZgvJej1kK0xCQgLcVzb2dBh3BExd5h/Zsu3J
+ v7qAFT0KblAhScoCOWRqqEgbCifk60pVWid8QZysKH2pCEO58KpsI+f5DF6N4qVlqmqw
+ DgMpTOu4gGCT5e95GzwPNKLG3qCy2A6d5GHgo2mFKDd8hP8XWPeSrn7+exQ8YcjAX9oc
+ wVUX7xrCh+HU2pW4z77pZcjb3fwZTFmYkHC9YYL5PAUMCKQE149GjuVHdM5rTVW6CTAf
+ Eb0g==
+X-Gm-Message-State: AOJu0YwidwFPzdFg36jEz8JR+0z8nDqViskdVHYLFkglT+jcife0E40I
+ mNZHoHfNlnaTo4LWc8C6Rxr8Tqj+ZAqK1UPgbcWAB1x/G8oAV4sdST7QoznsZfg=
+X-Gm-Gg: ASbGncusY/cRIEbxM+krwyR8cQGZbArj8qgJRMu5CuLtudqfhyfnxS+lHLjLcSMBtDV
+ MXqNopvBtkgz0ZEQ3kYSevXf8WzK9bRErQTD0SQBtu6turZxxg0BopojQu4LMtF2Wr0RKaE1dI8
+ gukYAAUMIwRK9KEWEqOgk3XksZd735tojpUxbjMl+JPXDiZZWr1t3zWjwMTIu9/R5cqWwclE0sI
+ YxIWT6WhWHwH+ZEPXPpVjyYCPsFQF6hdnJspBrr5376UeTNGQ==
+X-Google-Smtp-Source: AGHT+IEpQrzIdqIBgkOE7wo9wEd6e+KB7wvBupTt4GajrwajDERxZP/WDn4gM4HeGMYLq9iTRehY5w==
+X-Received: by 2002:a05:6214:c82:b0:6cb:d4e6:2507 with SMTP id
+ 6a1803df08f44-6d8b738ae51mr65766696d6.22.1733263269154; 
+ Tue, 03 Dec 2024 14:01:09 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6849b7215sm549606785a.106.2024.12.03.14.01.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Dec 2024 14:01:08 -0800 (PST)
+Date: Tue, 3 Dec 2024 16:01:05 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Rufus Segar <rufus.segar@carallon.com>
+Cc: u-boot@lists.denx.de, Mario Six <mario.six@gdsys.cc>,
+ Phil Edworthy <PHIL.EDWORTHY@renesas.com>
+Subject: Re: [PATCH] Revert "net: phy: marvell 88e151x: Fix handling of bare
+ RGMII interface type"
+Message-ID: <20241203220105.GB2457179@bill-the-cat>
+References: <7b204be7-53e8-401d-bed3-f47a3e23bd1d@carallon.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 674f7c691d07da1904df6d9c
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="51qnjqyBejZjLNAe"
+Content-Disposition: inline
+In-Reply-To: <7b204be7-53e8-401d-bed3-f47a3e23bd1d@carallon.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,116 +95,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
-driver set PWREN high in dwmci_init().
 
-However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
-sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
+--51qnjqyBejZjLNAe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Upstream linux-rockchip maintainer tree has merged a patch "arm64: dts:
-rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards" for v6.14 to
-fix this issue.
+On Tue, Dec 03, 2024 at 02:45:36PM +0000, Rufus Segar wrote:
 
-Add the upstream vmmc-supply regulator in board u-boot.dtsi and enable
-required Kconfig options to set GPIO4_D6 low to fix reading sdmmc on
-v1.1 hw revision.
+> From 2f97d889cecfa2ba06652469765f31c70a68e867 Mon Sep 17 00:00:00 2001
+> From: Rufus Segar <rufuss@carallon.com>
+> Date: Tue, 3 Dec 2024 14:35:10 +0000
+> Subject: [PATCH] Revert "net: phy: marvell 88e151x: Fix handling of bare =
+RGMII interface type"
+>=20
+> This reverts commit 431be621c6cbc72efd1d45fa36686a682cbb470a.
+>=20
+> This change is erroneous, the RX/TX delay should only be added when in
+> RGMII-ID mode. RGMII mode should have no RX/TX delay.
+> ---
+>  drivers/net/phy/marvell.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/net/phy/marvell.c b/drivers/net/phy/marvell.c
+> index b0a0b7fcb3..08608a99b9 100644
+> --- a/drivers/net/phy/marvell.c
+> +++ b/drivers/net/phy/marvell.c
+> @@ -461,9 +461,7 @@ static int m88e151x_config(struct phy_device *phydev)
+> =20
+>  		reg =3D phy_read(phydev, MDIO_DEVAD_NONE, MIIM_88E151x_PHY_MSCR);
+>  		reg &=3D ~MIIM_88E151x_RGMII_RXTX_DELAY;
+> -		if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII ||
+> -		    phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID)
+> +		if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID)
+>  			reg |=3D MIIM_88E151x_RGMII_RXTX_DELAY;
+>  		else if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_RXID)
+>  			reg |=3D MIIM_88E151x_RGMII_RX_DELAY;
 
-The regulator-3v3-vcc-sd and sdmmc-2030 nodes along with the vmmc-supply
-prop can be dropped once dts/upstream sync v6.14 DTs.
+Please provide more details and ideally links to relevant documentation
+as to why a 6 year old commit that itself says it's fixing a use case is
+wrong, thanks.
 
-Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 43 +++++++++++++++++++++++++
- configs/rock-s0-rk3308_defconfig        |  2 ++
- 2 files changed, 45 insertions(+)
+--=20
+Tom
 
-diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-index dd4cb8660b8d..3b849280c4ad 100644
---- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-+++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-@@ -2,11 +2,50 @@
- 
- #include "rk3308-u-boot.dtsi"
- 
-+/ {
-+	/*
-+	 * HW revision prior to v1.2 must pull GPIO4_D6 low to access sdmmc.
-+	 * This is modeled as an always-on active low fixed regulator.
-+	 */
-+	vcc_sd: regulator-3v3-vcc-sd {
-+		compatible = "regulator-fixed";
-+		gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_LOW>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&sdmmc_2030>;
-+		regulator-name = "vcc_sd";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc_io>;
-+	};
-+};
-+
- &emmc_pwren {
- 	bootph-pre-ram;
- 	bootph-some-ram;
- };
- 
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl {
-+	sdmmc {
-+		sdmmc_2030: sdmmc-2030 {
-+			rockchip,pins = <4 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+};
-+
-+&sdmmc {
-+	vmmc-supply = <&vcc_sd>;
-+};
-+
-+&sdmmc_2030 {
-+	bootph-pre-ram;
-+};
-+
- &uart0 {
- 	bootph-all;
- 	clock-frequency = <24000000>;
-@@ -17,6 +56,10 @@
- 	bootph-pre-ram;
- };
- 
-+&vcc_sd {
-+	bootph-pre-ram;
-+};
-+
- &vdd_core {
- 	regulator-init-microvolt = <1015000>;
- };
-diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-index 0a46e7bb1871..063e0b921d73 100644
---- a/configs/rock-s0-rk3308_defconfig
-+++ b/configs/rock-s0-rk3308_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
-@@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
- CONFIG_BAUDRATE=1500000
--- 
-2.47.1
+--51qnjqyBejZjLNAe
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdPf5YACgkQFHw5/5Y0
+tyztrwwAprP9D0ltJrpUGQ7016gypMytGTaaH0r9ehjRqNp5Jj1ELyO6X/a3uLfv
+UF8WnlPWWsSpPvdXQFX3EVwXLxwMoEISseKmxk9Tye4Gh/xYMUjOtMZtzVo9dlUn
+C8+bXter1+bq+eiSyF9oDveHrnZsAHgzmcrYdZrn51Q4OqlaFG3zjJWv3rPnNXAX
+VPqmYLtDD9mMXhz2QKXUnUxlsBIDnhKBfB5Zki28zIXA3y0N8+DivVpAnS6oVeYx
+qwFvQSrzkMSbrIlL+mwOIPR8VreL1D36EnK78+lwevw3YzHWIm68bNBU+gagXyyj
+0xnf1Yn/8MwsEz5Y/APQgJAOJVXZhYznFjCnosBGDswq7Ia0fAfOtlvuF/BEqRSQ
+UkJ3A5ORGLjBHQi/Ep72IdSyViuMrxN22OqQiR82fbzATa2m9lo+Airm+JROHqqB
+a7xkyyLmVTBMqaxJ9Euh3kLNhgwhyyLJ1hrTJdm3oNZjWdOTOrdk78bzXrTqNDjT
+4aqSpmwh
+=yF6B
+-----END PGP SIGNATURE-----
+
+--51qnjqyBejZjLNAe--
