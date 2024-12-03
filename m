@@ -4,164 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A64EE69E88
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 10:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 781DFE69EA6
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 10:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFC738964B;
-	Tue,  3 Dec 2024 11:17:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A7082893E8;
+	Tue,  3 Dec 2024 11:51:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="SB/zWHqd";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TRuxqRq8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 422A38964A; Tue,  3 Dec 2024 11:17:53 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2062f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::62f])
+ id 83B87892DA; Tue,  3 Dec 2024 11:51:57 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EABF589650
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 11:17:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 5DA7889481
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 11:51:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kOcfyIfaew8b0Nc+OG6YYMAWOLkkcjV7c/JhxI/p4wT35YzQd5Y3hxdqsuuAoI6Gzqsut5Hw/Ul+a9gGVBVIYLUsIbscS67RhBHY3qvoDPRVhN/6kEDTMhAUaH2WFLXWe5b3ZdVm58Ko3kBqqS06ro9V4A90MSA3S3v51/rJ378GrwaeXcRaHmjR0iFyMrpFwm7vLN0yYp8a2huJYPkkG9tzEj2jjtsvqfY+bpMWdpzJb37NHPXbBIrn7/h0j2jyYrpzC5h02sKw7DJ4/vKTFtQLgd3XBJ4j0krCPSWrRXN/s8KFoqfcbCFxu4J3faH+iSEhsP3K0/zBodhTw3nv1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=40oVyX3E9JQuPlkHZHa35OcJMZExk5u2IkNxhEQAn6Q=;
- b=f12lUM6vqUwNq5qcB4m8M26dsG4M6acaAP8NPFapeDfvmPuV3pwxFdfhtSPfy9pWjTqXl7FvVDFtmKoySfPxJdsEYNrK81AP+anmiIwMfI1b3wcSGpGJu5FVved0UPsvtgCdujTeMCydNZs3/XIhzWjaHbMY+vsjRZ/NlQZoyqAbiIEOz1CjSLCUMrUpXuLGhbz1cSvb69tBgNgqrV54Tt5JBILhXwnlqUbQxBAACgllRXN+alOQ5gM6eP/T5MU6iNVGZOPL7z+mp8tz/XWy7Gx0FsSC3/ledXwUR4hOGgJANVR3fSf5rC1rgLO76rHcrYQljcLAa3MNKJVxbLWWXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=40oVyX3E9JQuPlkHZHa35OcJMZExk5u2IkNxhEQAn6Q=;
- b=SB/zWHqd4aw2mRLGyXDr+3AncWXJGnbFlUxuucwWtQvoP3d83hhViNyxt5BhsmOKIc0sEew3PAYeMmfU8K1KgMwzpw9MosKAk0guHrf9fgJivaz1dW5j0HUZXQnIUftl7ceA21pil1bS9fLYX5/vLxcTtknIiEFPsMsxtoE5oxQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GVXPR04MB10612.eurprd04.prod.outlook.com (2603:10a6:150:225::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Tue, 3 Dec
- 2024 10:17:49 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8207.017; Tue, 3 Dec 2024
- 10:17:49 +0000
-Message-ID: <20df012d-5917-4e5d-8920-cff7b92c86f0@cherry.de>
-Date: Tue, 3 Dec 2024 11:17:48 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] power: regulator: replace dev_dbg() by dev_err()
- in regulator_post_bind()
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20241203100611.354468-1-patrice.chotard@foss.st.com>
- <20241203100611.354468-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20241203100611.354468-2-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0035.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::11) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733223111; x=1733827911; i=xypron.glpk@gmx.de;
+ bh=AeHmI5Eos9XNI5Hmp30ltSTN3jjVCwU6ye4gX/11XkA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=TRuxqRq8kjIh2lDGMFRYfMG6jxdkai4gsk4LLMH8Gu/ZRy917H8hLkMogrbBJLRo
+ bhP2FeGozdJcrxcvmA8L9FWCzRSEwcMdyj7QBEsdg+zx7PCFoy2wbUr2ls8owm8I0
+ wiz5SGlxMqigJI1eobULc3KwVVuKh2w/cN8bZa4PSfZEwDSFyD4FUxtXha3MqgS+i
+ XFAamFDMql+xpKBl9iAFZRbSlnZR1eqldJ7fgavH0UxDu8ynDsCvwXM8R0TSZhYAh
+ yVu/7GknSPXVxf0NnixEUMQlFzFvjruYbf06ih6pl0U0YBzLQEjqWXlwrkDHdzPod
+ hN1102jiNihjKSW74w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MIwz4-1sy10f0zQA-00RyDg; Tue, 03
+ Dec 2024 11:51:51 +0100
+Message-ID: <bd88b800-a650-4512-843f-9ac4436169e5@gmx.de>
+Date: Tue, 3 Dec 2024 11:51:46 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB10612:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c8ee352-acc4-44e8-77ea-08dd1383bd38
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NEZMTHZidk9IZC9QaHBCamJOeFd0SlFyLzlkNHNHSHd0QnJvZ0s5STFrZzlC?=
- =?utf-8?B?NEdQTGtuU2NCMWNBRFlmcGhMeDlRWmVZRWdCWHpyYUU0VHZBT3hvN0NYdG9T?=
- =?utf-8?B?UDFGMVU0bEs3Y3hsbEpGVkRBMDFVR0w3dktlMW1OOWVKbngwUlZURXdxOHlS?=
- =?utf-8?B?ck81dUgxK201TWVRZUdGK3V5VDNvSmQ2QmRJeEtHVGZwVGdVcGk1RnVPS25r?=
- =?utf-8?B?MlMrbDEwMjFTcHVVaHkvNHg1cDZQQ0l3THdXaTJIcnZyQnhiZjlxcTczM3U1?=
- =?utf-8?B?Q2RtZGtzekhFb0l4ci96dzYzRTQ4ZnE3TzNWeWJrYzlwV2RKWkk2d1h0SEpl?=
- =?utf-8?B?ZXArWTdBa1doVjdEWmRLcHVBaWN6VEp5QzdMTStCbUR0bWJ2Z2h0OXRlZnVi?=
- =?utf-8?B?cXRCazRmd3JYSEhLaGQ1eGdIZ3V5MUQ0TVY3ZHNjTFFlKzBmWlo2SDdFQWNv?=
- =?utf-8?B?ZUpZaEpBRDAvcDZRaUJqSjBZU1N4OXBsVnJ0a1ZjOVVDM1dhSDk4S3lLSFNO?=
- =?utf-8?B?YVp4NDQ4RGtwY2JWTDM4R0grYmpsQkhYUkpwL0ZuQUw4VU1aNm9vSTZaeGpV?=
- =?utf-8?B?T3BZUk5hdFZzd09SZzNmVWQ4WUo3eFNWK2VObzdQbWpuSnIzNjBqc3pjV0k5?=
- =?utf-8?B?OW45WDluemQxbm13cHY5elI1c1liaFJVSHpNcmRBNGowT2dkOVBKZEVqbWtH?=
- =?utf-8?B?WFdCVzd1S0ZyZG1PWEU5Zm9lSjZTZzN3UVlmUURhRDE0dkxyZ0hlcUw5bW9B?=
- =?utf-8?B?VUNIZGtoWVVDTUVVdTA3RGRDNnZBaExDdXU5Y0VYMWd3emZiMndpVDFuYWlz?=
- =?utf-8?B?Ym5wNmgvK1dQZGpLZG52dVdwbW1RamZUaUdONUZBa25WWVVGbVc0YUZ0STNr?=
- =?utf-8?B?cG11UG00TUVuenpDeUdmMnZDS290K0YzeDhrZkdoVHZpL2g0K2lRV0RlYVpS?=
- =?utf-8?B?YS9PaHRaek1NMm8yUmY5TENETEc5T1lVNWtweEdITDlBK1ZuaTBMaElEcnVk?=
- =?utf-8?B?VStGeHI4TVMySDFGZzEwZUMrT0M0akZSeGNOdjdvcEw5WHBIQXNxVzJ3ZjZZ?=
- =?utf-8?B?bFBuM0M2SGhsbXFWeWoyQnVrdE1LZm9TdDQyRGdzcVdHOE1pWWNZSTJFVjNn?=
- =?utf-8?B?N2E2eHlBL3RxL0FsRnZzQkNlbDgwL0ZXK2RjdGw0R0tJQWptYmpPM0NXdmxW?=
- =?utf-8?B?bEtkQTJBNlBSNVh5eGZ6cWNrTlM2OEg4aXJ4RThhZUEraDltTnR0R3JRdDda?=
- =?utf-8?B?aWZDa3BkL0I0SVBTYzFBa1J3dE9YOU52QjRaTGl6K1NwbW01S3ZnQmZKcWtS?=
- =?utf-8?B?ZHU3VXZ0c25kWE1uRDhHRVlOdS9ob1J3THlHcUt1aVdJOFR5MlVTVDN6MmF1?=
- =?utf-8?B?VjdKL24wVEpsZyszTW50UTNVU3hFR2lTUUJxMC9HSHVXVzFUWDQvQW9Ia2ND?=
- =?utf-8?B?b0hJYjExa3VVdnpxRlc1NU9KSis2ck4vanFuTjlKSHNxdDFDbm8ybWRqQ2Rm?=
- =?utf-8?B?VEpESFVrUGk2V2tPdzRCMTI5NEZSc2ZtZFJiZkxBUjlmbklyQnV3LzhQNzdC?=
- =?utf-8?B?TUZlMjlhRnpabW5sWmxEN0x4OFdDNkczVE91THl6NzF3Zk0yV2w1OGJ0R29a?=
- =?utf-8?B?aE9LbzlPcmlwOXNWSWZIZUJGSUpZS2dUam9YWmxXR3ZXU2pTZ1N1UGxCaDRD?=
- =?utf-8?B?eUdQTzBHV0pxUTFMNll0NXpBVFFEVjdsa3VKMUhmc05FT3hpeDF3ZXVpYnlz?=
- =?utf-8?B?ckxCd2NqcS93Y3NzOHNOK3czeEFiNnpRS2R1c1JDY0NDSHg3akkvRXRBNVli?=
- =?utf-8?B?WkpkckFtcnBtVWl6b2NTZz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dUxEaXdsRVZENmJ5NVhhUnFTWGE3NW40UEdpVzAxeU5yVjJsSXJraVRUQ1Rs?=
- =?utf-8?B?Y09POTZ6S1JIRGpKL3FtOTZYVnkyQnc5VHNybHdoSCtPdFhTR1F1S3gxWGc5?=
- =?utf-8?B?UVJTclZPTWRFQjdJcG5MWWJUYkdOY0d1U3ZUWDZpbC9SVlVHa0MwNDFUK2h1?=
- =?utf-8?B?KzJWQUt2b2pWV2tUcC90MG5aSmJDRlYxd1VSanV4KzllTzdseGpYa05GR1da?=
- =?utf-8?B?UFFUWGYxTXdRcFBIT3N0ZC9icDh2SFM4RzFneTUwL293RVYyRStCUzQ1QVUv?=
- =?utf-8?B?SmJJUzl3OXA1TE9tYk80Rmp4R2ljOS9FNGdaV0JTdjM1N0lsaVg0ellmbytL?=
- =?utf-8?B?cVBmY2F0cG9SamNoQ1JkYUZuSUVWNHUyTlEwVmhmRjR0Y0lGeDhFSlFnaTZp?=
- =?utf-8?B?UjJvRk9xcUwyWVZ4bFJGeVppaDVJd3B6S1FER2NuRzNwU0JZSEpPU0pyVlhn?=
- =?utf-8?B?MGMyWWV0Rm92TUlZTmx2SkJLZ1JjWTlSYTBNTG8yK1BiZ01YenEzME1BRGg5?=
- =?utf-8?B?RUk3M0c0eThRT2ZETUlud2tFMVhhdDI5L2VzZVFRQTcwb0psbk9VemhyamRF?=
- =?utf-8?B?WFFKdERxR3IxQldSOERrajhEaG00NlA2NHZWcWlZeHJRenl2WG1MZTE1TVBK?=
- =?utf-8?B?S1ZyRm1BRmJNZTdUbG1JWGJocDhCTUdGUEVqMnVIMzFnYUpJTWg4aEQ0bU95?=
- =?utf-8?B?N1k4ZlpEdW9xV2dwSy8waldqVnFqQjJndDY1amllWXorY3RzUXMvRWhudy83?=
- =?utf-8?B?NGJrZFJKNnliNzdmQVFFM3RQOWhIa1hvMDZsN0lpUWtFdDdHTEZmVkhXRHRO?=
- =?utf-8?B?UFVRUzNyeCtFcVc1MlJDeXI1QlZsWXpzazlGbUFnNjhjNjU3NGowdTRERm9u?=
- =?utf-8?B?anZYVVkrRW5qTkdTdVZkNXBKaG00ay83Qk9RT3RtNzBPMjhoK2hFWnBGSCtk?=
- =?utf-8?B?WkNPK3dacEt0RXNZR25BdFhFNmtkcEJYTlhvaGc5dkhRdnQ3TGtheGNPU1Bw?=
- =?utf-8?B?N3BFb3g5UWFJTkNWUTZVZUVDQkQwM0hDZzFyc2JVSm9XdElrU0Y4cmRnc2dE?=
- =?utf-8?B?aGhlMFV2ZWdURTBpSTdrYXhrRWt0TzZ0OTF6ZzRxdHcyMnVlVmt4R0NSUk9D?=
- =?utf-8?B?U00xeTRXOW1rdkpaN09QanRxVVlUT1BlMUlmRTdNODZKam5EQ3RjKzBSWmRI?=
- =?utf-8?B?MVcvai9kbmg4R1EyT0FFMUNqUDZwdzZQUTkzNUI2UGU5NXJaOGdyZVVPanpT?=
- =?utf-8?B?amFJaFcwVi9pVStlUDJsc3h4MS94b2VGdWlzQVBJZEgxbS92dFJaMURnSks0?=
- =?utf-8?B?bExCYUt3SlFzWktUOC9QWlNibDQ4MFpWQUpOdDVaL0JjWGlTNjRpNVdHdGpi?=
- =?utf-8?B?b2w2QXh3SWJXc1FKd1BCL04zcGFROEdYNEdCZ3djMGlKckpWRXlqZDM5UTJM?=
- =?utf-8?B?S2JxTnI4Qm5Na2ZhREMzclNGcUZYdmtEYy9uRTUzNURWUUlxT1N6c05nNVNG?=
- =?utf-8?B?N2NWVWZXM2Y3NEhTVHRCTjZpYkN2bjRQWmJXeWQ3VW5ib2pRQzlueExWWDBp?=
- =?utf-8?B?MXpSK0JQelVTcEhtVnEvN0hDK3VJZ0lMR1NnZGhXME0wWDJnV1NFSGJRNlJy?=
- =?utf-8?B?bUEyUlgzTlU0YlF1VHZZUnZWeGhCWU02Yjh5SVUzOGZ3b0VmTUpwanBaeWgx?=
- =?utf-8?B?UXVEN3prREtIZVdrTmxEWEt4Ty9ZU3VoZmRwc0hIS0NKdVE4NTZzOVdOMThi?=
- =?utf-8?B?Y2s3WTVjOTFlSkV3Sjhxb3RzUFV0azB3ZG05YjhPU3pGekRyN1I3RVl6UTc3?=
- =?utf-8?B?K1FiclFrUndka1dJdXRhUkUya1FLYVdSZTRwTE45c0t4RStiOWg3ellUNzdi?=
- =?utf-8?B?em5ITjBFVXZ6bTZnOWxRY1dvNnhGRk5BWVhna0tQMVBmQzNwWSt0NkhsWHFC?=
- =?utf-8?B?ei80RWdGaUJhZjVPK3dUdkFybUF3YTlHR0c5dlhVdklpbGZaSXlUL05mVDNY?=
- =?utf-8?B?K2dOaFlEeHBwZTlUM0NJU2hiUEJ2ZExTQVNUcTJTcjZGOStsaXdKY1ZtMTgy?=
- =?utf-8?B?dU96MW9xMHY4c3F1Ym54R2ZXS1d5UmxmNDJNWTlVZExMaDduQ3F1d2RkYnFL?=
- =?utf-8?B?UVhmZXJ0YmtpRnRUWTZGYVF6dlJHdXVXcE9UNk02OXkwWHU1OTErK1dpM0tH?=
- =?utf-8?B?SFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c8ee352-acc4-44e8-77ea-08dd1383bd38
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 10:17:49.4464 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sZPWVUDRnG28zRqZbHQD3fpcCtys3KiVAwW5OnUmE7osoGFF2t+cBrn8nTXzrgOcPvLi33IeXWMX9JaaV9O5/qToNcCOfWq5nitxA8Nhzyk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10612
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 06/14] efi_loader: efi_net: add efi_net_set_addr,
+ efi_net_get_addr
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
+References: <20241128144416.604126-1-adrianox@gmail.com>
+ <20241128144416.604126-7-adrianox@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241128144416.604126-7-adrianox@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cqqmtUAxTLM91FG8SdlkH2YW9nvZnklal7DJp6tN4GK7VnMluFe
+ wvTSxutOzn8xSS+SK00iB4yZ+T6jTbk3BGsVqsi8ThoikkCWiBzL3PkOoNFpFmekpnOaiJH
+ huU9K2ZTmhHpzwBlEFjhX6DyNhIkO9DyFXUo823iG7hTtSjNHA6I2Em8RSAPnOzogPrDsHz
+ hImWzYpX3DBjx2XEe+MlA==
+UI-OutboundReport: notjunk:1;M01:P0:mM3CpH3Kz1c=;AgQHPS1qx9EHjmD7IriolfhD8AA
+ Svrw6uwyxPDVtQK2+A1+5TsVxk4y1Br6VlL2GeqTE3ZNLX5vNRIsAUwT95i90cyGycZQuZo8S
+ 0n6vGy9G9gaZKEOHV5N/pWML0UnB1tAm21EGbNIlk2pIXx6nGNPUaofCQ7Spxy7U+CZJcWE0p
+ b3LMe6UMoyjmah5RhVu3JV9GA2ZkhPb1O5bDcRmCFlYGWSepgZpmb1PwWJSxByyLnTc7jFqiJ
+ LeYOTEhEvXFrhFfKSTSFADe6RhvgkULs1e18fR2vuwwcdbpSBOZbZxIixPw03b398tY8sAj48
+ P0Jm6Z04sbTzCVJyluo0P8DAba9iwfsG2RDjjgjCIumi6GWR5jUkTW59yiQbPPiQEgmLB3fZn
+ sYN+A8xYC7bPq8X+sjNG3c6NOXtoJ4I+okM+j7ThfsGEMrLBLiyA3jct+2eBxBMWZdM/bQX0C
+ C0VL47gy6x85bEAjJZ6VBy0KlNu653v7eyhfAJ/nQoT6vzowpT2oCYNDiFEwJrkefHFwPzOJW
+ qmA8kS60ydnlnuVl6bsFETkkH2iBUYncERQS/HmsxL51yg+hhIUXGF5yn+Vxcg25r1Xnuk6RB
+ +covCK9j+ZbDKUcJEXeAFQ69uiMgyDgLGyuR1zjDNcHfYtJbgFX9fqR3wcFB27M1suX9q4BIP
+ 9f5ANvQWX4gjeN/hF5yFBTgYeOwdyb0HzsSNMJfoRrtr+nr2yAjIZD1pzLsFoTXsMavlpM/Sx
+ pEm1zrYHMSubjze4dqJRgiJwEtIaey+g6drqoi02eMyqVREl0J6cW6zB+OqkUhHw0bwkU42UQ
+ 5n48Q1LttQwzNnEMKyG1PGhcrWy/zRPajnW8O9A0UBKM2qtj+qesAiWFBVbo4GJvQZeDUT1Kw
+ UwcTNRBn5QdMcFspfm0PdX5CA40+iSOY2v0cDBvwuTa7uBFwvtEle2l+cS5+HjFHYjvABwGrB
+ rsiqF89UHzoPSTQJA2Qj67tkpdJu+MVcn4h0/eaB7qSzgJir6qLtjGsPWyXuYX/5KA+SJ5POS
+ cVktV9n+UyEksQFKzIN1pPUOW/9vYN741O5GjPmDooFuJs5Mx0QVWVr34xuzEOKXr9rk2h0+e
+ HVK8vM/e5+f4djBoD17tuGVky/xT7H
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,16 +97,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Patrice,
+On 28.11.24 15:44, Adriano Cordova wrote:
+> Add the functions efi_net_set_addr and  efi_net_get_addr to set
+> and get the ip address from efi code in a network agnostic way.
+> This could also go in net_common, or be compiled conditionally
+> for each network stack.
+>
+> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
+> ---
+> (no changes since v5)
+> Changes in v5:
+> - When possible use sizeof in memcpy instead of hardcoded value
+>
+> Changes in v4:
+>   - Removed unnecessary casts
+>   - Changed char *ipstr by char ipstr[].
+>
+> (no changes since v2)
+>   include/efi_loader.h     |  16 +++++
+>   lib/efi_loader/efi_net.c | 125 +++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 141 insertions(+)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 39809eac1b..612bc42816 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -125,6 +125,22 @@ static inline void efi_set_bootdev(const char *dev,=
+ const char *devnr,
+>   				   size_t buffer_size) { }
+>   #endif
+>
+> +#if CONFIG_IS_ENABLED(NETDEVICES) && CONFIG_IS_ENABLED(EFI_LOADER)
+> +void efi_net_get_addr(struct efi_ipv4_address *ip,
+> +		      struct efi_ipv4_address *mask,
+> +		      struct efi_ipv4_address *gw);
+> +void efi_net_set_addr(struct efi_ipv4_address *ip,
+> +		      struct efi_ipv4_address *mask,
+> +		      struct efi_ipv4_address *gw);
+> +#else
+> +static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
+> +				     struct efi_ipv4_address *mask,
+> +				     struct efi_ipv4_address *gw) { }
+> +static inline void efi_net_set_addr(struct efi_ipv4_address *ip,
+> +				     struct efi_ipv4_address *mask,
+> +				     struct efi_ipv4_address *gw) { }
+> +#endif
+> +
+>   /* Maximum number of configuration tables */
+>   #define EFI_MAX_CONFIGURATION_TABLES 16
+>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index 7cd536705f..3491d4c481 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -17,6 +17,7 @@
+>
+>   #include <efi_loader.h>
+>   #include <malloc.h>
+> +#include <vsprintf.h>
+>   #include <net.h>
+>
+>   static const efi_guid_t efi_net_guid =3D EFI_SIMPLE_NETWORK_PROTOCOL_G=
+UID;
+> @@ -997,3 +998,127 @@ out_of_resources:
+>   	printf("ERROR: Out of memory\n");
+>   	return EFI_OUT_OF_RESOURCES;
+>   }
+> +
+> +/**
+> + * efi_net_get_addr() - get IP address information
+> + *
+> + * Copy the current IP address, mask, and gateway into the
+> + * efi_ipv4_address structs pointed to by ip, mask and gw,
+> + * respectively.
+> + *
+> + * @ip:		pointer to an efi_ipv4_address struct to
+> + *		be filled with the current IP address
+> + * @mask:	pointer to an efi_ipv4_address struct to
+> + *		be filled with the current network mask
+> + * @gw:		pointer to an efi_ipv4_address struct to be
+> + *		filled with the current network gateway
+> + */
+> +void efi_net_get_addr(struct efi_ipv4_address *ip,
+> +		      struct efi_ipv4_address *mask,
+> +		      struct efi_ipv4_address *gw)
+> +{
+> +#ifdef CONFIG_NET_LWIP
+> +	char ipstr[] =3D "ipaddr\0\0";
+> +	char maskstr[] =3D "netmask\0\0";
+> +	char gwstr[] =3D "gatewayip\0\0";
+> +	int idx;
+> +	struct in_addr tmp;
+> +	char *env;
+> +
+> +	idx =3D dev_seq(eth_get_dev());
+> +
+> +	if (idx < 0 || idx > 99) {
+> +		log_err("unexpected idx %d\n", idx);
+> +		return;
+> +	}
+> +
+> +	if (idx) {
+> +		sprintf(ipstr, "ipaddr%d", idx);
+> +		sprintf(maskstr, "netmask%d", idx);
+> +		sprintf(gwstr, "gatewayip%d", idx);
+> +	}
+> +
+> +	env =3D env_get(ipstr);
+> +	if (env && ip) {
+> +		tmp =3D string_to_ip(env);
+> +		memcpy(ip, &tmp, sizeof(tmp));
+> +	}
+> +
+> +	env =3D env_get(maskstr);
+> +	if (env && mask) {
+> +		tmp =3D string_to_ip(env);
+> +		memcpy(mask, &tmp, sizeof(tmp));
+> +	}
+> +	env =3D env_get(gwstr);
+> +	if (env && gw) {
+> +		tmp =3D string_to_ip(env);
+> +		memcpy(gw, &tmp, sizeof(tmp));
+> +	}
+> +#else
+> +	if (ip)
+> +		memcpy(ip, &net_ip, sizeof(net_ip));
+> +	if (mask)
+> +		memcpy(mask, &net_netmask, sizeof(net_netmask));
+> +#endif
+> +}
+> +
+> +/**
+> + * efi_net_set_addr() - set IP address information
+> + *
+> + * Set the current IP address, mask, and gateway to the
+> + * efi_ipv4_address structs pointed to by ip, mask and gw,
+> + * respectively.
+> + *
+> + * @ip:		pointer to new IP address
+> + * @mask:	pointer to new network mask to set
+> + * @gw:		pointer to new network gateway
+> + */
+> +void efi_net_set_addr(struct efi_ipv4_address *ip,
+> +		      struct efi_ipv4_address *mask,
+> +		      struct efi_ipv4_address *gw)
+> +{
+> +#ifdef CONFIG_NET_LWIP
+> +	char ipstr[] =3D "ipaddr\0\0";
+> +	char maskstr[] =3D "netmask\0\0";
+> +	char gwstr[] =3D "gatewayip\0\0";
+> +	int idx;
+> +	struct in_addr *addr;
+> +	char tmp[46];
+> +
+> +	idx =3D dev_seq(eth_get_dev());
+> +
+> +	if (idx < 0 || idx > 99) {
+> +		log_err("unexpected idx %d\n", idx);
+> +		return;
+> +	}
 
-On 12/3/24 11:06 AM, Patrice Chotard wrote:
-> To ease debugging, use dev_err() instead of dev_dbg() for
-> alerting when regulator has nonunique value.
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
+The same logic can be found in LWIP's dhcp_loop(), get_udev_ipv4_info().
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+After this series I think it is time to carve it out into a function.
 
-Thanks!
-Quentin
+It is unclear to me form where the idx > 99 in the LWIP stack is
+derived. struct udevice device defines seq_ as integer.
+
+> +
+> +	if (idx) {
+> +		sprintf(ipstr, "ipaddr%d", idx);
+> +		sprintf(maskstr, "netmask%d", idx);
+> +		sprintf(gwstr, "gatewayip%d", idx);
+
+@Jerome,
+
+The usage of environment variables ipaddr#, netmask#, gatewayip# by the
+LWIP stack should be documented in doc/usage/environment.rst. Could you,
+please, provide a patch.
+
+For this patch
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +	}
+> +
+> +	if (ip) {
+> +		addr =3D (struct in_addr *)ip;
+> +		ip_to_string(*addr, tmp);
+> +		env_set(ipstr, tmp);
+> +	}
+> +
+> +	if (mask) {
+> +		addr =3D (struct in_addr *)mask;
+> +		ip_to_string(*addr, tmp);
+> +		env_set(maskstr, tmp);
+> +	}
+> +
+> +	if (gw) {
+> +		addr =3D (struct in_addr *)gw;
+> +		ip_to_string(*addr, tmp);
+> +		env_set(gwstr, tmp);
+> +	}
+> +#else
+> +	if (ip)
+> +		memcpy(&net_ip, ip, sizeof(*ip));
+> +	if (mask)
+> +		memcpy(&net_netmask, mask, sizeof(*mask));
+> +#endif
+> +}
+
