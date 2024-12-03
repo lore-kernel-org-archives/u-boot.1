@@ -4,89 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E144E77160
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4361BE77166
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:50:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDE58896F8;
-	Wed,  4 Dec 2024 00:47:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C7B689707;
+	Wed,  4 Dec 2024 00:47:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KDMz6JaU";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="GVyZ+IPR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAEA188F55; Wed,  4 Dec 2024 00:47:34 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F08DE896F8; Wed,  4 Dec 2024 00:47:35 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3745F896E9
+ by phobos.denx.de (Postfix) with ESMTPS id 4F3F6896F4
  for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-8419ef7c2d8so203500839f.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733269650; x=1733874450; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
- b=KDMz6JaUczN0iK51mSoN/ehVpqyyhwJXTS1SkKPsAzKQNS5l2P0PsFgdTNTbpBIiV4
- hxCa5mRzPFgfQoPXwpNKB7ddG8kUe9J0T/uvbII3RYpuZL9mGIqFhXzNOTDFInuF6rHE
- cteLOS13jFLLLc2ZK9EN1D+fbCIVHJ+odq4z4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733269650; x=1733874450;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
- b=I6fdTsL9E2QikqBQD6pNTq5z9Xf84/QOcyQVD1Nr+QTsTHZds/i7aDk01+AQK4nNTW
- mFOyWuCOJBBFQqyN/MrIvSLAZl5/uq/rhef4cOEMGeU45pVJZAKoWEKca/oRuEMp8TxH
- 2AngCQdibwFtb2L70kIAZTb3EU8/gQK81DnTtaej7CJgwm0BjSj6lrkKHJtDZsBfnjWG
- s8aE2JXUSvYgaYfnwAg8nMNJoHSnTC8s+BzUJSMPLhjOHawOsrdN4PYrAcFf5+6Z1uV6
- tSiumoWjb77mEHoBqebIqDhlMsSBPT/mL3eXE5jZS/s0Va3N08WcJcW/tl7G/9z3bFd4
- /AQw==
-X-Gm-Message-State: AOJu0Yy8X3U5GiMpMEYsz44P96e0eTJETaOu1UyBnWbuPDMBtQLxlLu4
- mACHVgDrJBlYJA+eHW4AquG6lj5O6XFxMIbPx2jPZAsu4YazHNSs56hhHQVJorAUTrTb/8m3uBk
- =
-X-Gm-Gg: ASbGncvql1v7Uf6Jai+l7kHx7YfwA+Zt5qaXapDsdZ8lfXWnhMwl5Qzk9qWIYztlRqs
- gYHNR/qgHq/n4s6WYeIBWEDse41nuIV6YRaVHtoXA2rgyHtSHCqbjY5zElE65FYAOoLX54UBR05
- g3GvqiNJV91JKfCSagVtmWH9Uq6JRXU7QbwhhdVXh/gRgeSLAAn0PMtXmSlieFQokvE0IQgy05p
- LEiGt9QruVSVLyZWpPEOMoYJmYCwncTuPdfzejNa6MZSIK8UeubWoMHtTzbO1sq32ZEdFduKpJ8
- TyScC9aQcck=
-X-Google-Smtp-Source: AGHT+IH0fLA2G6d3e7Cbk5GWKL/oIxaPmom87Esve5fJaEOb3x9JYe3k8V/YgukIjyP3ZhY4LlcgLQ==
-X-Received: by 2002:a05:6602:6c14:b0:843:e4df:8a51 with SMTP id
- ca18e2360f4ac-8445b5cbee8mr584012739f.11.1733269650434; 
- Tue, 03 Dec 2024 15:47:30 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:47:29 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH v2 28/41] pxe: Record the bootflow in the PXE context
-Date: Tue,  3 Dec 2024 16:45:46 -0700
-Message-Id: <20241203234559.2938192-29-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241203234559.2938192-1-sjg@chromium.org>
-References: <20241203234559.2938192-1-sjg@chromium.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234728epoutp01ea4c11d6122fa06cfe4f68c33263de73~Nz4-6lrb42527625276epoutp01n
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20241203234728epoutp01ea4c11d6122fa06cfe4f68c33263de73~Nz4-6lrb42527625276epoutp01n
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1733269648;
+ bh=BAYsOryYOnm8EOwjb/qKaFG34Y5ViExcdV1aJYC9z58=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=GVyZ+IPRiSs3c3nhVfeIH0hDQ2GKO1k3gdigxIQtwy0mJnd/Wye4Y/2l2A+FvZUOb
+ wVj7C5zFYrAmYcZ7I8Z4E4WuJdavkE5G20PzMR0SyZyEC9coMjE+3PElVVWnlHYnXw
+ eScoLvV6or7R86UNMx1vyagqn+QlOMaSQUNCOQs8=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234728epcas1p3a66bdf8f3f088281ed1f906c4ffbb94c~Nz4-YRy9E2556425564epcas1p3T;
+ Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
+Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.236]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4Y2y4b5FrWz4x9Pp; Tue,  3 Dec
+ 2024 23:47:27 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ FD.84.31735.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959~Nz4_Y77OE2779727797epcas1p3F;
+ Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234727epsmtrp29156ab8561db99fdc06f99f849ce0993~Nz4_YEvQD1788017880epsmtrp2n;
+ Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
+X-AuditID: b6c32a4c-ac3ff70000007bf7-55-674f988f8ab9
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 28.7A.18729.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20241203234726epsmtip163c81ad828f5931774e165aef28eb782~Nz4_GR1I11695216952epsmtip1v;
+ Tue,  3 Dec 2024 23:47:26 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Patrice Chotard'" <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+Cc: "'Patrick DELAUNAY'" <patrick.delaunay@foss.st.com>, "'U-Boot STM32'"
+ <uboot-stm32@st-md-mailman.stormreply.com>, "'Jonas Karlman'"
+ <jonas@kwiboo.se>, "'Marek Vasut'" <marex@denx.de>, "'Quentin Schulz'"
+ <quentin.schulz@cherry.de>, "'Simon Glass'" <sjg@chromium.org>, "'Tom Rini'"
+ <trini@konsulko.com>
+In-Reply-To: <20241203100611.354468-2-patrice.chotard@foss.st.com>
+Subject: RE: [PATCH v2 2/2] power: regulator: replace dev_dbg() by dev_err()
+ in regulator_post_bind()
+Date: Wed, 4 Dec 2024 08:47:26 +0900
+Message-ID: <000101db45dd$b54ddef0$1fe99cd0$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQHJXg/s3915w2qFAukO13E/llQlpwJ7XfgCA01hB8OyyrlHUA==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCJsWRmVeSWpSXmKPExsWy7bCmgW7/DP90g7+fVCxOvrnKYvGmrZHR
+ 4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
+ WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEdUtk1GamJKapFCal5yfkpmXrqtkndwvHO8
+ qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0H1KCmWJOaVAoYDE4mIlfTubovzSklSFjPziElul
+ 1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMO39OsBTs5a34fmc5YwPjGu4uRk4OCQET
+ iel72lm6GLk4hAT2MEqsOvkIyvnEKPG18y0rhPONUeLb32XsMC297zqgqvYySmxcsJkJwnnJ
+ KHG0cykLSBWbgJ7E/0ULmUFsEQF/ieeTZzCCFDEL7GCS2PZlJViCU8BJYtXXt2wgtrBAusTc
+ qQvBmlkEVCR2/L8HZvMKWEqs+L+YEWK1gsTPp8tYIYY6STT+/goWZxYQkZjd2cYMskBCoJdD
+ 4lhPMytEg4vEyTfXoJqFJV4d3wL1g5TE53d72SAamhklli45yArh9DBK/Gu4zgZRZSyxf+lk
+ oOc4gFZoSqzfpQ+xjU/i3dceVpCwhACvREebEES1isSl1y+ZYObfffIfqsRDYus0DkgInWWU
+ 6Dh/l2kCo/wsJHfPQliwgJFpFaNUakFxbnpqsmGBoW5eajk8QpPzczcxgpOnls8Oxu/r/+od
+ YmTiYDzEKMHBrCTCu3y9d7oQb0piZVVqUX58UWlOavEhRlNgaE5klhJNzgem77ySeEMTSwMT
+ MyNjEwtDM0Mlcd4zV8pShQTSE0tSs1NTC1KLYPqYODilGpikNk3IWzdP5PI/Y783vR/2HN52
+ 9Pan1iWiUluLWvq87vzvedoRXy7+7cJlqY7HUwTn+GzMZXu+5fD2Cd/X3p9p8b7sufTpwH/R
+ QnliDjMEdnYvlXwkWNizYhZbx+9zVhEtC++Wfc59cs7MfO6ybvMakb/b+LU/HXwZE2zVtD12
+ f8fCMuGX85ec57WIOym9uXtiDb+qcavsxkcTA9seG/AGTSvoNuKa+4rb8Mtvx8QPP7/n5Z6d
+ GhZftTmmPzJcTKb3di53pfff/2yzVThce77fu7Nzyv76ZK2vIsvO8N+0CN25pOWvp8DqROb3
+ bfoFimuN1/N938yVK9ZyOHR5teDjTl2hmbm/Ap7PXTBBOMdEiaU4I9FQi7moOBEABNnK3CcE
+ AAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKLMWRmVeSWpSXmKPExsWy7bCSnG7/DP90g4fLWS1OvrnKYvGmrZHR
+ 4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
+ WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEcUl01Kak5mWWqRvl0CV8adPydYCvbyVny/
+ s5yxgXENdxcjJ4eEgIlE77sOli5GLg4hgd2MEs1tH9kgElISn59OBbI5gGxhicOHiyFqnjNK
+ nJ0ziRmkhk1AT+L/ooVgtoiAv8TzyTMYQYqYBfYwSVxu+soO0XGSUeLuyWfsIFWcAk4Sq76+
+ BdsgLJAqcXbLXlYQm0VARWLH/3ssIDavgKXEiv+LGSGuUJD4+XQZK8QGJ4nG31/B4swCIhKz
+ O9uYJzAKzELiLmBkXMUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJERzyWpo7GLev+qB3
+ iJGJg/EQowQHs5II7/L13ulCvCmJlVWpRfnxRaU5qcWHGKU5WJTEecVf9KYICaQnlqRmp6YW
+ pBbBZJk4OKUamKxdujPCFPx+xxrdmrW91itzo37sE4/Lx93cNVeLCLTXcK++wjZHy8Uwm8Wj
+ cO4B0YhtnILWejX/d727OvlucOe553M3rJmwdU7Ei9gvan6/OYt/yArycqS0+/zZcVJ3RVFe
+ 6+wLr92P/shKKBPiOmuX4bFudwFTjXtI46GPu3t7HZfoNcgXm/4XCb7ZMK9cnZOtW/rIf+bt
+ Vj/td9r2VCpu/8gkKOL/5IvD34mH/2y6H1fOY2X6w8J1XuKeyMy8cibdopSkbyfPneaas3ct
+ xwmurmdXHGUrVfl3FcjcviH+5vChOvHPVdlhk6X5BP9tr/ynZr6PW/Hng+NG0bnf1stxWfXt
+ kVJvPrZ+mvQkJZbijERDLeai4kQANBSjrugCAAA=
+X-CMS-MailID: 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8
+References: <20241203100611.354468-1-patrice.chotard@foss.st.com>
+ <CGME20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8@epcas1p3.samsung.com>
+ <20241203100611.354468-2-patrice.chotard@foss.st.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,141 +138,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present the only option with PXE is to boot it and see what happens.
 
-Provide a bootflow, when available, so that PXE will eventually be able
-to add some useful information to it.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> -----Original Message-----
+> From: Patrice Chotard <patrice.chotard@foss.st.com>
+> Sent: Tuesday, December 3, 2024 7:06 PM
+> To: u-boot@lists.denx.de
+> Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>; Patrick DELAUNAY <patrick.delaunay@foss.st.com>; U-
+> Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>; Jonas
+> Karlman <jonas@kwiboo.se>; Marek Vasut <marex@denx.de>; Quentin Schulz <quentin.schulz@cherry.de>;
+> Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>
+> Subject: [PATCH v2 2/2] power: regulator: replace dev_dbg() by dev_err() in regulator_post_bind()
+>
+> To ease debugging, use dev_err() instead of dev_dbg() for
+> alerting when regulator has nonunique value.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-(no changes since v1)
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
- boot/bootmeth_extlinux.c | 2 +-
- boot/bootmeth_pxe.c      | 2 +-
- boot/pxe_utils.c         | 3 ++-
- cmd/pxe.c                | 4 ++--
- cmd/sysboot.c            | 2 +-
- include/pxe_utils.h      | 5 ++++-
- 6 files changed, 11 insertions(+), 7 deletions(-)
+Best Regards,
+Jaehoon Chung
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index 4adcaf5654a..569f9d760bf 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -188,7 +188,7 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
- 	plat = dev_get_plat(dev);
- 
- 	ret = pxe_setup_ctx(&ctx, extlinux_getfile, &info, true, bflow->fname,
--			    false, plat->use_fallback);
-+			    false, plat->use_fallback, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 59ebf1be83a..f2b9ffaae89 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -148,7 +148,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- 	info.dev = dev;
- 	info.bflow = bflow;
- 	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &info, false,
--			    bflow->subdir, false, false);
-+			    bflow->subdir, false, false, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index b4aa284b1ee..f7bbc1527af 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -1632,7 +1632,7 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
- 
- int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 		  void *userdata, bool allow_abs_path, const char *bootfile,
--		  bool use_ipv6, bool use_fallback)
-+		  bool use_ipv6, bool use_fallback, struct bootflow *bflow)
- {
- 	const char *last_slash;
- 	size_t path_len = 0;
-@@ -1643,6 +1643,7 @@ int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 	ctx->allow_abs_path = allow_abs_path;
- 	ctx->use_ipv6 = use_ipv6;
- 	ctx->use_fallback = use_fallback;
-+	ctx->bflow = bflow;
- 
- 	/* figure out the boot directory, if there is one */
- 	if (bootfile && strlen(bootfile) >= MAX_TFTP_PATH_LEN)
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 530d5d9c35b..7728949d14b 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -130,7 +130,7 @@ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
- 	int i;
- 
- 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
--			  use_ipv6, false))
-+			  use_ipv6, false, NULL))
- 		return -ENOMEM;
- 
- 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
-@@ -280,7 +280,7 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	}
- 
- 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
--			  use_ipv6, false)) {
-+			  use_ipv6, false, NULL)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-index 6e899f381ec..384d5e15e3d 100644
---- a/cmd/sysboot.c
-+++ b/cmd/sysboot.c
-@@ -106,7 +106,7 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (pxe_setup_ctx(&ctx, sysboot_read_file, &info, true, filename, false,
--			  false)) {
-+			  false, NULL)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index fb057442d5d..e8e03430a81 100644
---- a/include/pxe_utils.h
-+++ b/include/pxe_utils.h
-@@ -109,6 +109,7 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
-  * @use_ipv6: TRUE : use IPv6 addressing, FALSE : use IPv4 addressing
-  * @use_fallback: TRUE : use "fallback" option as default, FALSE : use
-  *	"default" option as default
-+ * @bflow: Bootflow being booted, or NULL if none
-  */
- struct pxe_context {
- 	/**
-@@ -129,6 +130,7 @@ struct pxe_context {
- 	ulong pxe_file_size;
- 	bool use_ipv6;
- 	bool use_fallback;
-+	struct bootflow *bflow;
- };
- 
- /**
-@@ -231,12 +233,13 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
-  *                       other choice be selected
-  *                FALSE : Use "default" option should no other choice be
-  *                        selected
-+ * @bflow: Bootflow to update, NULL if none
-  * Return: 0 if OK, -ENOMEM if out of memory, -E2BIG if bootfile is larger than
-  *	MAX_TFTP_PATH_LEN bytes
-  */
- int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 		  void *userdata, bool allow_abs_path, const char *bootfile,
--		  bool use_ipv6, bool use_fallback);
-+		  bool use_ipv6, bool use_fallback, struct bootflow *bflow);
- 
- /**
-  * pxe_destroy_ctx() - Destroy a PXE context
--- 
-2.34.1
+>
+> ---
+>
+> Changes in v2:
+>   - split initial patch into 2 commits to separate dev_dbg() and
+>     dev_err() migration.
+>
+>  drivers/power/regulator/regulator-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+> index 80ea5e65d48..09567eb9dbb 100644
+> --- a/drivers/power/regulator/regulator-uclass.c
+> +++ b/drivers/power/regulator/regulator-uclass.c
+> @@ -446,7 +446,7 @@ static int regulator_post_bind(struct udevice *dev)
+>  	}
+>
+>  	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
+> -		dev_dbg(dev, "'%s' has nonunique value: '%s\n",
+> +		dev_err(dev, "'%s' has nonunique value: '%s\n",
+>  			property, uc_pdata->name);
+>  		return -EINVAL;
+>  	}
+> --
+> 2.25.1
+
+
 
