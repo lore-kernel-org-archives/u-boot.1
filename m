@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC752E6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:35:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50C23E6C5E3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:37:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 575EF895D2;
-	Tue,  3 Dec 2024 01:35:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1BD4885F4;
+	Tue,  3 Dec 2024 01:37:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tRCyMeXU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f2rTIbSA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64A3289588; Tue,  3 Dec 2024 01:35:45 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 9D21B89505; Tue,  3 Dec 2024 01:37:26 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43ED887F3B
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:35:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7413787F3B
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:37:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-4667931f14bso51897021cf.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:35:43 -0800 (PST)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6d884e8341bso27687606d6.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:37:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733186142; x=1733790942; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733186243; x=1733791043; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uoGOwUXFXHT/f5Yw1MP6xq/5SCk5kdZm4AYbVQXSom8=;
- b=tRCyMeXUnMFHHzrQTHLz9+X0/1ewWu1f4Ptb0vfLaRU4/5g4u01zUy87LaWGhzPe+d
- jPukB+clCTPmrh1tf0mgli2WlDF4XLqso9wH84zAlendcFLSQzs/fpQaspPxK2vKZ1/A
- n/i0uz8enZT8rthwBQ1ALnucNq6EcT/aMhLPg=
+ bh=TvOZGe+ezty32S7oQ5pG3hLdFGi9p+BVJLhcwTSfm5s=;
+ b=f2rTIbSAg8MC6emLqbaMIucZrgvJvWiiIW8SgV3BX4UQiAPwO3jdyAc42iFbYqUz3e
+ H1ehT2jwp8xH65CfWEmKvcvdUZuVWdLDbN6KJpgsFtqw1cY58NmJ3AqVZJg7SwqlWB30
+ 4qStyJGtigNO48o1nV/c7J/ATjAyCF+8AMwCY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733186142; x=1733790942;
+ d=1e100.net; s=20230601; t=1733186243; x=1733791043;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uoGOwUXFXHT/f5Yw1MP6xq/5SCk5kdZm4AYbVQXSom8=;
- b=quv1I+3miLNaPst9zshrcGZbzGA7P+X9ZKNmLQNTLiSLu8VTpUo/RXsIIVxO+b86/x
- rKHpLHY2ZNpuK7Fj9+7ZtNh3b+oH6aFH/adxpo759j9mfW7WzPWR33oQM/8rULh2yUiu
- BkyTzORuoUhRxEk2P/4QZxBxsKRUJhOSxCv1PU+zC9IlWo86Th2qyA7QRyjSOpPgzYXz
- EQoY+BKe5IeSDN2xfGS6/mnsOumy8TRXXay4SpFnIuxB3i4cTg5jOF5WEXQaZdRqrr1W
- WVf02qYcYbFw18lAFcg/4BWFJFWhjjYzcT0n9xxafKPYRTAuUqlD9NRUTJg5Ug03mmAu
- oB0Q==
-X-Gm-Message-State: AOJu0YxD5bvYnqEeTyE39qxFeEchiBcEsQpzk/H9wyU0rD2GqjUkgs3f
- 342rjuDLCOT+i1m+Ou4NILte7B9dD3fTs6LWe1DW7JiAyu2U9weBdNfHu0+Hi8U=
-X-Gm-Gg: ASbGncveS6Vpj8eKFnn6JT/MsT5S/RHdo3uDHgHVRAXUBpjzsu9DYtAZQjW0uTnDLpE
- vXOok29r/uJHZ3KJYQ7RiGzrRVBpycgI1YX0aGkAXSdzIX2rLbTop8FldVrGbaKotd1Njqbepdd
- Z6mKiIBFwGNZrLQQHbE9bb5CLyAWlRp1Z9xU25OoNU/csEzYVnqXBEFCHqEwUGqPw1MI2L6MxZW
- d3ucTynUwsN2wW3zTAgvHVIPpRpnsDisEoWNOzaAl0TlKhItQ==
-X-Google-Smtp-Source: AGHT+IFipYsdIMoSaLcrp8N5N8b3Li9zB9GmHSHtc5f5cscrhtOkXh7SuZ9gxdtRKru3TdhecwbTeg==
-X-Received: by 2002:a05:622a:8d:b0:466:9938:91f3 with SMTP id
- d75a77b69052e-4670c73aa94mr6307161cf.49.1733186142139; 
- Mon, 02 Dec 2024 16:35:42 -0800 (PST)
+ bh=TvOZGe+ezty32S7oQ5pG3hLdFGi9p+BVJLhcwTSfm5s=;
+ b=sMFgi5pZUZjWlmcS+0/kFR3XZLbuCyhwXDn1w0X4E20Ig1yZjekFWuQsFIpcma4J5j
+ 3pKVINEsH2dQJpYAOYHirWEL8QuPzkyLFUq8Fu8UnVZNeqcn/l/PAjbfpbrgyvNr0oUs
+ MfHwMem5h8fPyIG2pkYjKN9YePGxnV1sKuvgQ64scf++XORH1Z/76HTF9b0c6MgDt1mt
+ 7XJMG+aMRJYfKvskwe0fIJUw1a1mCKqWUVomye8VqB8fiMIM/lM5/XWZKAw1kL3ma8tL
+ 8MCfoF29sQ88TuUMmPEs698LsHcMjEE9S3W+zYlTdaEq/6Da0VB3S5ixrGaxsrOciuUv
+ oDvw==
+X-Gm-Message-State: AOJu0YzEr2a0BIaRwWmZRG/iKx5YaacwW1DcmQcrv+mGSqxlbIwG40BE
+ djlxSHXpfxgrMFciSRbon8MX2p3vFVRYUQ8nrtMT+5IiO39RLaPMcfqu61PaLT0=
+X-Gm-Gg: ASbGncvgmnEtB6HBLzKzDt5Nt4zotzV9Tzcod7CBjw6rk5QFtmzTvi76/x7+QZIzZ0L
+ SQ3GO2S+P/bF62Yy8odHT6zby6e/rYR3pUPyXwymHeC1ih8hR/B9lxBVqoqGlzdde2ay+g38NHf
+ 8u73mUBPL7v2WHYvfOedvKwRk5Pgx6X3hOuB+O7veRaR6NiXJ9wwb3WwHESma6qT75dFNXmsWWK
+ xEovX/mV19azNbbrDdsIgzSsy/zCefRQCAw3/zCx2LyZJ7rVg==
+X-Google-Smtp-Source: AGHT+IE35JzNfwbPeFKK4c/PGHyQyH10E2mPWUJQvxAJmCOSlgJcr9p2osLwWuwOh+PmfzT1zCIKwQ==
+X-Received: by 2002:a05:6214:f0a:b0:6d8:b3a7:75a0 with SMTP id
+ 6a1803df08f44-6d8b74331a6mr12957676d6.47.1733186243390; 
+ Mon, 02 Dec 2024 16:37:23 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-466c407daa8sm54980881cf.50.2024.12.02.16.35.39
+ 6a1803df08f44-6d8a7548521sm18192366d6.89.2024.12.02.16.37.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 16:35:41 -0800 (PST)
-Date: Mon, 2 Dec 2024 18:35:38 -0600
+ Mon, 02 Dec 2024 16:37:22 -0800 (PST)
+Date: Mon, 2 Dec 2024 18:37:19 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 1/8] CI: Drop extra condition for sjg lab
-Message-ID: <20241203003538.GM2457179@bill-the-cat>
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-2-sjg@chromium.org>
- <20241201164017.GS3600562@bill-the-cat>
- <CAFLszTj=8ux3kjM-gCa+MZrOja-Qh+VLYoB0VKRy3gabv5pqmQ@mail.gmail.com>
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
+ efi_mem_carve_out()
+Message-ID: <20241203003719.GN2457179@bill-the-cat>
+References: <20241201152505.1666789-1-sjg@chromium.org>
+ <20241201152505.1666789-4-sjg@chromium.org>
+ <20241202201641.GF2457179@bill-the-cat>
+ <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7llD9OtUCCU8mGz8"
+ protocol="application/pgp-signature"; boundary="3OxD1syY8HrZ2o+z"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTj=8ux3kjM-gCa+MZrOja-Qh+VLYoB0VKRy3gabv5pqmQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,52 +101,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7llD9OtUCCU8mGz8
+--3OxD1syY8HrZ2o+z
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 02, 2024 at 05:20:12PM -0700, Simon Glass wrote:
+On Mon, Dec 02, 2024 at 05:24:35PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sun, 1 Dec 2024 at 09:40, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sun, Dec 01, 2024 at 07:42:29AM -0700, Simon Glass wrote:
-> >
-> > > The rules part of the template makes sure that this doesn't run until
-> > > specifically requested. Drop the check in the script itself, so it is
-> > > possible to trigger a run manually without re-pushing the tree.
+> > On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
+> > > Simplify a few expressions in this function.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v1)
+> > >
+> > >  lib/efi_loader/efi_memory.c | 4 ++--
+> > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > index f1154f73e05..3b1c7528e92 100644
+> > > --- a/lib/efi_loader/efi_memory.c
+> > > +++ b/lib/efi_loader/efi_memory.c
+> > > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_lis=
+t *map,
+> > >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
+> > >
+> > >       /* check whether we're overlapping */
+> > > -     if ((carve_end <=3D map_start) || (carve_start >=3D map_end))
+> > > +     if (carve_end <=3D map_start || carve_start >=3D map_end)
+> > >               return EFI_CARVE_NO_OVERLAP;
+> > >
+> > >       /* We're overlapping with non-RAM, warn the caller if desired */
+> > > -     if (overlap_conventional && (map_desc->type !=3D EFI_CONVENTION=
+AL_MEMORY))
+> > > +     if (overlap_conventional && map_desc->type !=3D EFI_CONVENTIONA=
+L_MEMORY)
+> > >               return EFI_CARVE_OVERLAPS_NONRAM;
+> > >
+> > >       /* Sanitize carve_start and carve_end to lie within our bounds =
+*/
 > >
-> > You don't need to re-push, you can just manually re-run the pipeline and
-> > set the variable to 1 on the webpage.
+> > As I believe was mentioned in a previous iteration, please drop this as
+> > they aren't excessive generates a compiler warning, merely for
+> > clarification and should be kept.
 >=20
-> OK, well I don't want to have to do that :-)
->=20
-> Are you wanting me to change the commit message?
+> I did this patch because checkpatch complained and I am changing these li=
+nes.
 
-No, please drop it, it's not required.
+And checkpatch is not the authority, it's guidelines. I believe the
+review comments are "no, these should stay". Please drop this patch.
 
 --=20
 Tom
 
---7llD9OtUCCU8mGz8
+--3OxD1syY8HrZ2o+z
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdOUlkACgkQFHw5/5Y0
-tyzA4gv+Jv/JYgB7sKxcsGzttowd0/Ep14wxJTyG2r7ik3fGWZL/sKWBV2Lx3ia2
-Gq7oRYUXWuHTt9e8pGFeaPjn56a5T9hfeuuyvNiJ22nbuCZlodxjv457saDOpZgY
-xCsQjo7JpLeq1C/fQqkWhO0H4B9nuBZhnMFHrqFgqUvPGmm9btB3Ow6citpEUY4o
-c38d1eQqFmfJVXgXjgQ75NEug6xPAmyIdmUNw9ZSfYjG54iODAfW2+8Y8fgESTfl
-ofSKApYj/dRwvVmfY4MKpy6xgTSTImXQzCTBQwUqur4iiZLzL5VONmk+rY8AHv15
-WFigw9guTQHBFH6CgRNnAer9mTXL4ravPk6YXefokp0WtwMOJzhdECwJFGfrtUpC
-bSfdLBvhGfgfagUWBuzjnSWf49YYA/EasKRZEerSYJcAGu3avHS6DOn+QoG5y1pA
-rImEKtD8e1u/NfzgGZ7SIoCncfsy4QKBXCVuZEC17TXnexQdnk/tbaJSEXlLF0ep
-GoDYTzAb
-=Dx0O
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdOUr8ACgkQFHw5/5Y0
+tyztrAwAqwrZZw6bFOeaXEFizlli7kefeLXRTkdz5sqeaGPdcpZ7kB/SU1O9VkBj
+BNF5NskBfdBnq8JWU0uSAghLvMyCoQJ3Om+tmz2kgJbwZ9b6gAoRgGz9vj+K+XsV
+fMt3GzSwykUVK6V7NWH6LzsFSCi4mEBVsJFnzC+wBnwM1ZQHz1KoKOezqcq7rA1N
+jd54Kdgbxk6KKB/+9fBge8BrHUhVcJmMEvA+YpYV4Jl2z4M0dy+A+kBl/zUCLsye
+tD+I3njnF8+apF3n/08Fdq4vfYQl+zG4us1Wa6PCC24mo8lkIQXlETJ5Rn86w9Ge
+TouRlMbrGXEjnJ6etLACTolW1002fiJdMC1JXcz8Rtra6G1/NYQXy8fWny/LzM8q
+xIOeTcvQmERpT3VOPgyQIYFONFiikGMFVyNTKiiaGDRw0kSNzEyPskt5zYyI8j4S
+9j50aTWRvt2qXUgSZA5prijK8k1DLQHI0Z9GlTxwJ2t7yX+nBJOgzQbBESPqCy05
+aauhUWZU
+=vHo8
 -----END PGP SIGNATURE-----
 
---7llD9OtUCCU8mGz8--
+--3OxD1syY8HrZ2o+z--
