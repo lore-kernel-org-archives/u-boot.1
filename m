@@ -4,73 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE0DDE74AD6
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 20:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051E8E74ADD
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 21:47:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F43B89534;
-	Tue,  3 Dec 2024 21:57:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B97D8958D;
+	Tue,  3 Dec 2024 22:47:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="av4o5+/b";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fn7dM5Y0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8740089534; Tue,  3 Dec 2024 21:57:45 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 27E128964B; Tue,  3 Dec 2024 22:47:34 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8360489662
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 21:57:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8AA4288EAB
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 22:47:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 4A0D4A40C4F;
- Tue,  3 Dec 2024 20:55:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C426C4CECF;
- Tue,  3 Dec 2024 20:57:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733259462;
- bh=Xqk/BqHln+FZYvFZeoovpaqzJvda0u2XbYEVg57+fzo=;
- h=From:Date:Subject:To:Cc:From;
- b=av4o5+/b7fNpBI9uyyIkTN7tCCA99uc5ibSUfwEuhivjL5h77RwiqGbgus99mn1br
- XStOAtp8t9Uy56vd8QqQnGuOLZLCyaGWiz86B9+R8p+M4hl/iV2orX1Xik9iyOXN3e
- P80SrGx7KJG1v0azeXRAppd2FsAgFjCxG0wAlYklHWmH9A7BUHrZkSE9J8S16kreXO
- 10VBRk52VsKv5domJT63THnAUAqFLJ1pgQjMcnOHLBjKTK2r7ho5o6ynJwdst4+ojb
- L9rzJduD/TkEOuTApKJOMt150KhZRgJTZqGukh/Eh/FI+suKADR2bXHeUVBfsVscUQ
- byzWE73DcFUPw==
-From: Roger Quadros <rogerq@kernel.org>
-Date: Tue, 03 Dec 2024 22:57:36 +0200
-Subject: [PATCH] phy: don't spam console if phys property is absent in
- device node
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=218d=S5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1733262443;
+ bh=7nbAGwKNR8oggvGm/m28E9FMouPUuYm1eGJcj5QtrIw=;
+ b=fn7dM5Y0DirbPWTeK+ZVOLGyPqrWdIWz3gP1PC7/gcfeqjdX0BP5K0vEtdQyMmd/UIo1hnp+a
+ uiyLBDAxtR95K2MfGg4vrJD9mcSLrWcsKb9SOYC/JQMr2vM6xqDzbPV53EcE0j/FDbivxazQ1si
+ tWbVKPPq0BFxd69M+H1F3jKi343e0+duipENrpDGJHaI+iUfkhEkaf6Ug9QsVKEE9OsEK5t6/Ua
+ nhwaerjbenRWBPtVsWhcASkbs222SnK6Ev8Q6HiTA3LToEKkpimEJWLc2hqdTZw6Y3lIaq6ySFs
+ sFqogCVneH80Oe+32fTKXtNnZKMmBZx2GGjczEJYuaRQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw revision
+Date: Tue,  3 Dec 2024 21:47:08 +0000
+Message-ID: <20241203214711.1011176-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241203-nophys-v1-1-a5fdbccd2af9@kernel.org>
-X-B4-Tracking: v=1; b=H4sIAL9wT2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxNDIwNj3bz8gozKYl2DJFNjyxRDC+NEQzMloOKCotS0zAqwQdGxtbUA3Ul
- 1eVgAAAA=
-To: Tom Rini <trini@konsulko.com>, vigneshr@ti.com, nm@ti.com
-Cc: j-humphreys@ti.com, srk@ti.com, s-vadapalli@ti.com, 
- u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1003; i=rogerq@kernel.org;
- h=from:subject:message-id; bh=Xqk/BqHln+FZYvFZeoovpaqzJvda0u2XbYEVg57+fzo=;
- b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBnT3DDIGoBjFpRsOnHhvHt/wjjDNuabxGZkmA1b
- 8/Ji5Q/SNSJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZ09wwwAKCRDSWmvTvnYw
- k6eyD/9e8nTh9yXUewU4drpA5btzCpu9h3o2aNWHjgseVB7butFSOEDRFIpgeKZeL5WyC9JOLK9
- 0hU4mCSsAZLcOhjfBe0tiARMHwgkNBxHHgqF8CnXWE48knqI8o+Mm2R2baK9HNCsbROo7/EId83
- PCuaLUVX2v92sGeXLOdmSv2RLg1ps7xUMksks6ujNPy8AZQVZLJY1MsglmcPQ0BNNl7KVm1TIgJ
- 3PCOrSgJ2TfGN7GR3wJWFieos9y4ElJI4qa4f2HVYR1tJH3chaAIjmolJvSy1Gic5zSrgRWeg4j
- i0UQMQqILFIXssu/adiHS0nv3kRH95Ce3Zo+cH+WkZT7dnsva+sESYx7/4uZVYGFJJcpNN/0PZX
- IQ5d/+WVafK7JfbjlN4AzTselH/52ebCyj76+cNtdBHpqifxiWZ2Hc7pmxBMeRddb5C2u9s3i94
- DK7ROvviRaXEEE+FlODfryocfRVnNbDPKxhuwDVDB+ziNxTBaYbnNIyInxuEmsugfhZt23JTy1J
- LEdFI1fA68yVr02lv6hL2z9O/k3u7kSuAXRmKPWzefboKdy+kLi+rmNPVKKlh4PX698hjOk2EdZ
- X9wM6O0VdhclWJcrF2Z23xkta9BKWNPbWrP4VR3AiaIRhVWkA7CpDiqrpGRzVIWsUv1u+rrA1gd
- uDwni+56U8O5ChA==
-X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
- fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 674f7c691d07da1904df6d9c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,36 +68,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In generic_phy_get_bulk(), if 'phys' property is absent in
-the device node then it is not an error condition.
+BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
+driver set PWREN high in dwmci_init().
 
-Change print message verbosity to debug to avoid spamming
-console in such cases.
+However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
+sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
 
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
+Upstream linux-rockchip maintainer tree has merged a patch "arm64: dts:
+rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards" for v6.14 to
+fix this issue.
+
+Add the upstream vmmc-supply regulator in board u-boot.dtsi and enable
+required Kconfig options to set GPIO4_D6 low to fix reading sdmmc on
+v1.1 hw revision.
+
+The regulator-3v3-vcc-sd and sdmmc-2030 nodes along with the vmmc-supply
+prop can be dropped once dts/upstream sync v6.14 DTs.
+
+Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/phy/phy-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 43 +++++++++++++++++++++++++
+ configs/rock-s0-rk3308_defconfig        |  2 ++
+ 2 files changed, 45 insertions(+)
 
-diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
-index 777d952b041..714be123856 100644
---- a/drivers/phy/phy-uclass.c
-+++ b/drivers/phy/phy-uclass.c
-@@ -415,7 +415,7 @@ int generic_phy_get_bulk(struct udevice *dev, struct phy_bulk *bulk)
- 	if (!dev_read_prop(dev, "phys", NULL)) {
- 		phydev = dev->parent;
- 		if (!dev_read_prop(phydev, "phys", NULL)) {
--			pr_err("%s : no phys property\n", __func__);
-+			pr_debug("%s : no phys property\n", __func__);
- 			return 0;
- 		}
- 	}
-
----
-base-commit: 3073246d1be682071d8b3d07d06c2484907aed60
-change-id: 20241203-nophys-0b539d183a16
-
-Best regards,
+diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+index dd4cb8660b8d..3b849280c4ad 100644
+--- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
++++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+@@ -2,11 +2,50 @@
+ 
+ #include "rk3308-u-boot.dtsi"
+ 
++/ {
++	/*
++	 * HW revision prior to v1.2 must pull GPIO4_D6 low to access sdmmc.
++	 * This is modeled as an always-on active low fixed regulator.
++	 */
++	vcc_sd: regulator-3v3-vcc-sd {
++		compatible = "regulator-fixed";
++		gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&sdmmc_2030>;
++		regulator-name = "vcc_sd";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		vin-supply = <&vcc_io>;
++	};
++};
++
+ &emmc_pwren {
+ 	bootph-pre-ram;
+ 	bootph-some-ram;
+ };
+ 
++&gpio4 {
++	bootph-pre-ram;
++};
++
++&pinctrl {
++	sdmmc {
++		sdmmc_2030: sdmmc-2030 {
++			rockchip,pins = <4 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++};
++
++&sdmmc {
++	vmmc-supply = <&vcc_sd>;
++};
++
++&sdmmc_2030 {
++	bootph-pre-ram;
++};
++
+ &uart0 {
+ 	bootph-all;
+ 	clock-frequency = <24000000>;
+@@ -17,6 +56,10 @@
+ 	bootph-pre-ram;
+ };
+ 
++&vcc_sd {
++	bootph-pre-ram;
++};
++
+ &vdd_core {
+ 	regulator-init-microvolt = <1015000>;
+ };
+diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
+index 0a46e7bb1871..063e0b921d73 100644
+--- a/configs/rock-s0-rk3308_defconfig
++++ b/configs/rock-s0-rk3308_defconfig
+@@ -2,6 +2,7 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SPL_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3308=y
+@@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PINCTRL=y
+ CONFIG_REGULATOR_PWM=y
+ CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_RAM=y
+ CONFIG_BAUDRATE=1500000
 -- 
-Roger Quadros <rogerq@kernel.org>
+2.47.1
 
