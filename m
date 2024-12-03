@@ -4,54 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF6D1E74AC3
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:31:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00373E74AC3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 16:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7701A895CE;
-	Tue,  3 Dec 2024 17:31:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 45B4D893E6;
+	Tue,  3 Dec 2024 17:36:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1733243466;
-	bh=sVK3b4jnuxsTh+W0jAWvuhkPjIRwFPBDeDwHQtEmSKo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=L1V86/KRE6CnKY/nE2fqbstJe/KDY1UfdINZGPCw0rvVcrheuAuVqsfiIu4M/wQml
-	 UbiT4Pk9gx6Z/xySYB2Vyfr7rRbUT4okNk3VVRUU2E5Iq92Wjfg7S+An6Jo1bW1lFQ
-	 XRcGWNo+GjRhbWWtjpWwXZ5NvYtsNj3iGmjjDrgNR3+NUqL4Bfshr56EaI/FFckM0I
-	 bArwVTVjSLW1u+isK2K2An+QxY5tct5Pl+msz8k+EniHkRnkB88pARvp/lZze5s0k5
-	 GMgFC2UkD3uPBXZQk0jQdnlLpPPYKK/qcet8whYMVWcr8XtkJSKUshOXOz3GMBBYh1
-	 g04hzn/XF0f/g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 082F5894D9;
- Tue,  3 Dec 2024 17:31:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1733243465;
- bh=sVK3b4jnuxsTh+W0jAWvuhkPjIRwFPBDeDwHQtEmSKo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=sMVW3kHZ9Sb/7D+t65ktogEBqS6oEBMKpfVM1LsoKdIguz/X/o3zNBNheQWBCXxGO
- z7zZIp8gkMwZetsh3fNC12BMuGigKmnM4lbd+KIoscl/d3Y5zuMs6YIwEViMZsiJHr
- VPkFPDXEWlVjK+F90+qmy5xhAnwedjMw9M9V0Z7JDc4Iu55c4PUmLJlrABlRg/RaJm
- wFxyKmg2WfAPHosex7kfdjhGNnmQLp6cayydE3I5/WT/ijiBrWXE94o9jWQnQN9ivy
- xYqyUatc5hYx/zXbjUOfR42TlMpLE8oNkPzL41y4A9r1ey8NJjgAlzQg+UEk5AmBKd
- h+UwnQgoLL4Pg==
-Message-ID: <aeb6e6aa-9d65-4a23-9a0a-63fd920af856@denx.de>
-Date: Tue, 3 Dec 2024 17:25:46 +0100
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5795B893E6; Tue,  3 Dec 2024 17:36:19 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 34BBF893A9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 17:36:17 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8A549FEC;
+ Tue,  3 Dec 2024 08:36:44 -0800 (PST)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7C62D3F71E;
+ Tue,  3 Dec 2024 08:36:14 -0800 (PST)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/4] Add pmem node for preserving distro ISO's
+Date: Tue,  3 Dec 2024 22:06:01 +0530
+Message-Id: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dwmac_socfpga: Add RGMII-ID support
-To: Rufus Segar <rufus.segar@carallon.com>, u-boot@lists.denx.de
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-References: <fb698f79-3b93-4e03-b582-c6a80b827318@carallon.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <fb698f79-3b93-4e03-b582-c6a80b827318@carallon.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,9 +54,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/3/24 3:30 PM, Rufus Segar wrote:
 
-The patch is valid, but please use git send-email to submit the patch.
-Also, add Signed-off-by line ($ git commit --amend -s).
+When installing a distro via EFI HTTP boot some OS installers expect
+the .iso image to be preserved and treat it as a "CDROM" to install
+packages.
 
-Thanks
+This is problematic in EFI, since U-Boot mounts the image, starts the
+installer, and eventually calls ExitBootServices. At that point the
+image U-Boot mounted disappears. Some distros don't care and download
+the missing packages from a web archive, while others halt the
+installation complaining they can't find certain packages.
+
+If the firmware uses ACPI, this is supported by using NFIT which
+provides NVDIMM ramdisks to the OS and preserves the image.
+We don't have anything in place for Device Trees though. Since DT
+supports persistent memory nodes (pmem) use those and preserve the
+.iso for installers.
+
+The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
+live server ISO, or a Rocky Linux ISO. The installation would fail
+with the failure to locate certain packages.
+
+
+Changes since V1:
+* s/ommit/remove in the commit message
+* s/rfom/from in the commit message
+* Add a period at the end of the sentence in the commit message
+* Use log_err() to print the error message in image_setup_libfdt()
+* Remove "ERROR:" from the error print in image_setup_libfdt()
+
+
+Ilias Apalodimas (2):
+  efi_loader: add a function to remove memory from the EFI map
+  efi_loader: preserve installer images in pmem
+
+Masahisa Kojima (1):
+  fdt: add support for adding pmem nodes
+
+Sughosh Ganu (1):
+  efi: add helper functions to insert pmem node for DT fixup
+
+ boot/fdt_support.c           | 41 +++++++++++++++++++++++++++--
+ boot/image-fdt.c             |  9 +++++++
+ include/efi_loader.h         | 28 +++++++++++++++++---
+ include/fdt_support.h        | 13 +++++++++
+ lib/efi_loader/efi_bootmgr.c | 43 ++++++++++++++++++++++++++----
+ lib/efi_loader/efi_helper.c  | 12 +++++++++
+ lib/efi_loader/efi_memory.c  | 51 +++++++++++++++++++++++++++---------
+ lib/lmb.c                    |  4 +--
+ 8 files changed, 175 insertions(+), 26 deletions(-)
+
+-- 
+2.34.1
+
+
