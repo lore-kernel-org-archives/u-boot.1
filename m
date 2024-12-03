@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0F8E74AC8
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:45:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7264FE74ACA
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:46:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63E968967D;
-	Tue,  3 Dec 2024 20:45:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3F87896AD;
+	Tue,  3 Dec 2024 20:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hBsp3FIK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MWrMICjG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B279989185; Tue,  3 Dec 2024 20:45:54 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id D8237896DE; Tue,  3 Dec 2024 20:46:00 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B90C8967D
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:45:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33C26896AD
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2ee709715d9so3179505a91.3
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:45:52 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ee397a82f6so4339693a91.2
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:45:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733255151; x=1733859951; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733255157; x=1733859957; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g/wwKnHlrrhFtggrRgH7Jk+wNOQK0l75ifLc8O43KmE=;
- b=hBsp3FIKdAcPn2yKMGvrOG3VmN0ZflvegK+4Cuv805sHJnnNrkBDvNeCxpialuH5LE
- s5Wfr8j1yW+Lqq2hz31VNYzylkdW4MrTV+000NGCn+5q76nTTaYjqcpT70GYh5ZemTlQ
- ZMkkpUIE+OAYHzhl1qSMXpsIcV904cFSl8DZE=
+ bh=bdig8EuLunQR4emhUXsMYqQllPYB2LxBfBt1XvhiEnQ=;
+ b=MWrMICjGkJqqA8bqq5BlIuRZOutw8VIvHoy6024F+/gAVYQyWhyASVPmbZnSCOcuTe
+ AYO1ewcbId6BV6FD/FI2DFXDFUsnlVPY09YlCwROmtM477RWnXed9ZJsM07tTNp998eB
+ bIC8g8NqNyhgOHXllRSx9ScMq7pYbYpKjS4To=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733255151; x=1733859951;
+ d=1e100.net; s=20230601; t=1733255157; x=1733859957;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g/wwKnHlrrhFtggrRgH7Jk+wNOQK0l75ifLc8O43KmE=;
- b=si+/xk/tMb8LANZIBzZgHFOljMPFGtGVW+MR1NLS2T9zl/UshX1QCZ1FyAIIDKZWpp
- dmGiRvzFvsTCO8KpI8ArvKLO55iRMLVj5Gk4+f3PwDrluPyo3yGJatLcuiqiglTqKhEI
- EqmU+GscBn1PTsYS4RNNkUC6zYRZvCA7D+AK9wNlNxEGpS3WDAbZ0DpXP21t4n9CRPbK
- pTnb2sdnVE7eaKr9ihFKilhzJaZu5+LdQvwYya+m+EPZROkmwbl1YmZ/jTdi2BsbEm7h
- /iFpwD1w4KJ7cTYFuDxqmKKdIZLN8OyeKDtQnn8MnwlmTzZp14bMtlKrlSYFdiil1aPP
- 0a5Q==
-X-Gm-Message-State: AOJu0Yz2gICL0wEQXf3nWEa1C/a5gmHtuWXiO8u3r8MjBLkAXsyWjdnW
- YeWpIlS/RLHyUlStjT4CJah/AnZ4XGhICLr8s0Ydd4jwwzrZJRlx/QMyFESl1m+YjjEw+zIvYM8
- rk180PLNj5pRcZ1i1iRH8acnF7KZV/QUEQSou
-X-Gm-Gg: ASbGnctmARoSmnggnP57vCyihR/quqUZyOfEP3XxIWs5pT9frTGAQa8h16+u/fuO3XC
- uJBiO8DKgZouIjdwaKakWMgKPAt9sW9Ew
-X-Google-Smtp-Source: AGHT+IHZ0zdfwBBxuaEVB10xARpqRxTh0WdAntvSxgiDiyPImLMBtUn+UXS37kZ1vMxfLsf7e3KURfRvieIK6dUliiU=
-X-Received: by 2002:a17:90b:4fca:b0:2eb:140d:f6df with SMTP id
- 98e67ed59e1d1-2ef011e6829mr4695467a91.1.1733255150810; Tue, 03 Dec 2024
- 11:45:50 -0800 (PST)
+ bh=bdig8EuLunQR4emhUXsMYqQllPYB2LxBfBt1XvhiEnQ=;
+ b=QyW+YN1YIlxCvH5V1omyvty/4z7Mz84xIhZ9z7j/Kq2kDK/hDhMZlnPnGI7hsDHSU5
+ EXFOIbVQKoyjKkPXF56CpUKaXeUXyniXAQtM4vOW8U92cVCJ1HkGwtXbuL+A1sY7QoXk
+ 8nj58kbtGpM7HowBJddwuVOsUtugp3fU5PuVmQ1cWnyL+Tn2o0+I+0Dl+HvKDQWl+D8v
+ zMwmZfZvpoyfe1dHW9naUFSWp8BLXDRILTiKp1OyK/VKEPEbvh4JiQRqPZXeNEYDLF2q
+ j1rcwt/is/b328FXFSVHY1diiXNOO9hvrFcuZ0Cn3kS2hHtMkJiUt/WnkA/nkfQkXa0v
+ nyKw==
+X-Gm-Message-State: AOJu0YymheEvo7cewPKU7CusTfHQH1rEt/2y5rlKkT5BldJZCxoL617J
+ SgIBTZE17dz607w8nVcYlsoToCnCyn3IDcr7GqMQsTBK/GIBbttXye9TVIxCL7LH7Zp5OgJ5JrJ
+ YdlJSg/WWLJ20n4e3xzC+A5Xw4stUZ2DNi6yF
+X-Gm-Gg: ASbGnctWgGtyM6ZXZOLtKiia1i/VKh6/DFwNcXW9V+i7IXmWLSO93SH0hWkGj0PVMtI
+ wBBdptauDwK7soUK8wPL1bEhKYVSnhm4O
+X-Google-Smtp-Source: AGHT+IEY7OnspM9X4Ap9lVRjBTtYtQAAWcDF4j0v2MhQiKw1y9hTgziLQCSssvZ8KelewgFuveNs9Sl0qwTmEGXORYU=
+X-Received: by 2002:a17:90b:4b83:b0:2ee:535f:ac27 with SMTP id
+ 98e67ed59e1d1-2ef01272aa3mr5138620a91.33.1733255156740; Tue, 03 Dec 2024
+ 11:45:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-4-sjg@chromium.org>
- <20241202201641.GF2457179@bill-the-cat>
- <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
- <20241203003719.GN2457179@bill-the-cat>
- <CAFLszTh91eW5yQgQHLDVfe67GYw_f9-jzWmdu9pDTaEvNEG2Bg@mail.gmail.com>
- <20241203140400.GU2457179@bill-the-cat>
- <CAFLszTjFta03nSumT595tGYitx9JmuQv-F7og_Kr4LkH=zA-Mw@mail.gmail.com>
- <20241203160258.GX2457179@bill-the-cat>
-In-Reply-To: <20241203160258.GX2457179@bill-the-cat>
+References: <20241201152815.1668093-1-sjg@chromium.org>
+ <20241201152815.1668093-4-sjg@chromium.org>
+ <20241202215922.GI2457179@bill-the-cat>
+ <CAFLszTgfPnJCi=Q+-ROMd2dU_z49C2h4wHgmFrq80TQ0kD_BFA@mail.gmail.com>
+ <20241203140026.GS2457179@bill-the-cat>
+In-Reply-To: <20241203140026.GS2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 12:45:31 -0700
-Message-ID: <CAFLszThtuv6DcsLM=TaGtUuS+0HH+yWCu5aah=E572dC+stCsQ@mail.gmail.com>
-Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
- efi_mem_carve_out()
+Date: Tue, 3 Dec 2024 12:45:37 -0700
+Message-ID: <CAFLszThwNBRhrg8QjERSzzmff-rnFGFf0PrTY3Um=zeLO40iLw@mail.gmail.com>
+Subject: Re: [PATCH v5 3/9] board_f: Correct stack reservation
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, 
+ This contributor prefers not to receive mails <noreply@example.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,90 +96,89 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 3 Dec 2024 at 09:03, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 3 Dec 2024 at 07:00, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Dec 03, 2024 at 08:53:31AM -0700, Simon Glass wrote:
+> On Tue, Dec 03, 2024 at 06:53:55AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 3 Dec 2024 at 07:04, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 2 Dec 2024 at 14:59, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Tue, Dec 03, 2024 at 06:46:11AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 2 Dec 2024 at 17:37, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Dec 02, 2024 at 05:24:35PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
-> > > > > > > > Simplify a few expressions in this function.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > (no changes since v1)
-> > > > > > > >
-> > > > > > > >  lib/efi_loader/efi_memory.c | 4 ++--
-> > > > > > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > > > > > >
-> > > > > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > > > > > > > index f1154f73e05..3b1c7528e92 100644
-> > > > > > > > --- a/lib/efi_loader/efi_memory.c
-> > > > > > > > +++ b/lib/efi_loader/efi_memory.c
-> > > > > > > > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> > > > > > > >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
-> > > > > > > >
-> > > > > > > >       /* check whether we're overlapping */
-> > > > > > > > -     if ((carve_end <= map_start) || (carve_start >= map_end))
-> > > > > > > > +     if (carve_end <= map_start || carve_start >= map_end)
-> > > > > > > >               return EFI_CARVE_NO_OVERLAP;
-> > > > > > > >
-> > > > > > > >       /* We're overlapping with non-RAM, warn the caller if desired */
-> > > > > > > > -     if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
-> > > > > > > > +     if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
-> > > > > > > >               return EFI_CARVE_OVERLAPS_NONRAM;
-> > > > > > > >
-> > > > > > > >       /* Sanitize carve_start and carve_end to lie within our bounds */
-> > > > > > >
-> > > > > > > As I believe was mentioned in a previous iteration, please drop this as
-> > > > > > > they aren't excessive generates a compiler warning, merely for
-> > > > > > > clarification and should be kept.
-> > > > > >
-> > > > > > I did this patch because checkpatch complained and I am changing these lines.
-> > > > >
-> > > > > And checkpatch is not the authority, it's guidelines.
-> > > >
-> > > > Agreed.
-> > > >
-> > > > > I believe the
-> > > > > review comments are "no, these should stay". Please drop this patch.
-> > > >
-> > > > Just so I can figure out what to do here, are you saying:
-> > > > - merge this patch in with the one that produces a checkpatch warning
-> > > > (i.e. remove brackets so resolve warning), or
-> > > > - drop this patch and ignore the checkpatch warning in the result
+> > > On Sun, Dec 01, 2024 at 08:28:05AM -0700, Simon Glass wrote:
 > > >
-> > > Yes, please just drop this patch, I only look at ERROR from checkpatch
-> > > when merging things and then it's a matter of what the error is.
+> > > > The reserve_stack_aligned() function already ensures that the resulting
+> > > > address is aligned to a 16-byte boundary. The comment seems to suggest
+> > > > that 16 is passed reserve_stack_aligned() to make it aligned.
+> > > >
+> > > > Change the value to 0, since the stack can start at the current address,
+> > > > if it is suitably aligned already.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > >
-> > > > I don't really mind about this, obviously. But as I suspect this
-> > > > series is not going to be applied to your tree anyway, I'll await
-> > > > events.
+> > > Er:
+> > > /*
+> > >  * reserve after start_addr_sp the requested size and make the stack pointer
+> > >  * 16-byte aligned, this alignment is needed for cast on the reserved memory
+> > >  * ref = x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
+> > >  *     = ARMv8 Instruction Set Overview: quad word, 16 bytes
+> > >  */
+> > > static unsigned long reserve_stack_aligned(size_t size)
+> > > {
+> > >         return ALIGN_DOWN(gd->start_addr_sp - size, 16);
+> > > }
 > > >
-> > > Yes, if you're not going to be addressing most of the comments you get
-> > > this is going to linger in, well, whatever it is you plan to be doing
-> > > exactly.
+> > > is what the code is today.
+> > >
+> > > > ---
+> > > >
+> > > > (no changes since v1)
+> > > >
+> > > >  common/board_f.c | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/common/board_f.c b/common/board_f.c
+> > > > index 98dc2591e1d..677e37d93c0 100644
+> > > > --- a/common/board_f.c
+> > > > +++ b/common/board_f.c
+> > > > @@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
+> > > >  static int reserve_stacks(void)
+> > > >  {
+> > > >       /* make stack pointer 16-byte aligned */
+> > > > -     gd->start_addr_sp = reserve_stack_aligned(16);
+> > > > +     gd->start_addr_sp = reserve_stack_aligned(0);
+> > > >
+> > > >       /*
+> > > >        * let the architecture-specific code tailor gd->start_addr_sp and
+> > >
+> > > And this is the last call to reserve_stack_aligned(). So, this is going
+> > > to save us between 16 and 0 bytes of memory. If we're going to make a
+> > > change here we need to comment in the code more what we're up to at this
+> > > point, and the commit message should be more authoritatively worded too.
 > >
-> > I am keen to address comments, so long as they are about the code,
-> > rather than 'we don't want this patch'.
+> > So, other than that, what do you think? Should I respin it? Note that
+> > this is part of a series which I doubt will be applied to your tree.
 >
-> We don't want this patch because the parenthesis do make reviewing the
-> code and order of operations clearer. This was the previous feedback.
+> I mean, yes, I've given you review comments. If you want this applied to
+> mainline someday then you need to address them.
+>
+> > It would be nice if other archs could weigh in, but I see that I have
+> > not copied them. Still, the current code is confusing (in that the
+> > comment doesn't match the code), so we can likely figure this out in
+> > -next
+>
+> Yes, my comment was that you need to make the comment match the code and
+> expand upon the common since I expect it's been that way for a decade+
+> at this point.
+>
+> > Heinrich expressed some concerns with RISC-V, but there doesn't seem
+> > to be any breakage in CI. meminfo reports that the devicetree is above
+> > the stack and it semes intact:
+>
+> Yes, I too was concerned about why exactly we're changing something here
+> with a commit message that sounds unsure if it's correct to make these
+> changes, only probably correct.
 
-Given that this whole series is being rejected, I don't think this
-feedback is critical.
+OK, it is true I was hoping for some comments. Unfortunately the code
+has been there forever. But I'll reword it to be more assertive.
 
 Regards,
-SImon
+Simon
