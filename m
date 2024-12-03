@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B8BE6C5F5
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 03:12:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 761CAE6C5F5
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 03:12:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17B1B89624;
+	by phobos.denx.de (Postfix) with ESMTP id 683898962E;
 	Tue,  3 Dec 2024 04:11:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF72B89610; Tue,  3 Dec 2024 04:06:06 +0100 (CET)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20707.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::707])
+ id EF9E68960B; Tue,  3 Dec 2024 04:06:06 +0100 (CET)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on2071a.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::71a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD377895F2
+ by phobos.denx.de (Postfix) with ESMTPS id D8B9988E3F
  for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 04:06:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hal.feng@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UqpGK6qR4nxzi5uDbymgr1rOGbfl0IVPCrs+oIftcHOzEWlhrtm8SonjqC7tKHKSx2dTyJBYBGVQXAF9Y9N+eXxwierrpHOAA5noF4TWKo48SQopcAiJ0GYnHmljgER73uxsv8z7KMJ/6x2lZGt/UxfH2bZB3vGwUGTIBCKLZg1Q8szd90fipgxeSZcmrbyLVOLrnVAoDy8+bePEVN0fN8YXUs7hkNTBLvEFn6/1rPe4HZHMsYd9FGAfBjAEo45n+VYdEO3/oA2UAnNqQqDRTDLcrwmY3I2L3zmn5nheqXhD2dsrcTaFc+ojdDSiaAiG8gTksZPt3LuesNPeD6kq7w==
+ b=XNoOmNy9ikYDBtXxKJPkC3PjZ7F/g9fxwYClxEwsYknwFT7BqGpFoJ423PGiilrNKKGjEKbQpyqGRpNoWzdmA3LyQZkmfM02s8SUSi0guLLQ921s3oPifxeJl7BlofsdbmXwChCjhKTJREekMkeR4jXik+qL4KuJXuNdXatS/Nf8Hx1FMRJQc2iO+yaEiLtkh52rfesPIWx3NhVcbqwroXdYQFOFXBebmuyJfOqJqN4zvwZ/ZbfvNcr5+FmsWazCNlReubPnMrXPD5zwWnO2vh717IafXvmI/O/fEq7Ko7LCCgRHDONnbRIz+OM0DTD6P4warchjXOa5lBL3WHd2/A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wR5RK2vRO3EI164i5HQGn0RyIpgJJDn7xbmn/adoyq4=;
- b=GLlZC0e67PgY9wodfgaG5pdAagHkcsKOtHXlzSLGBpmLOUycTpZUFvOczNmKn1kzwlvIsjAQJPVZkATfCXLTAbSqVdJHz/7XwKlmQHKkFbzTmhOrD2mvY+cyiA0Tr22r/YcBt0uUk0U/xSYHs2CnvZ0kK0ztDV+W3vklP+aZ9N1Swhb7KTxsxt8YRsKIwC1yDBjEwYVYY5ZlCwu3JM/J4h01Tca9iF6TAyNVp77NowVxVr94YBrM7mUik248vw/ImzpN//4kuRX5G3AjTthunf5oGLRVRjk4ZT5SzXPfVWge94FC2+UWVO5mHGz/ZuXz80eaFmkAQRLcoiB2pgRglg==
+ bh=GJj8xDVhJZMwrvXOFmLNuUFxFv07Dm+AYRTvMJ4dmoc=;
+ b=KsB6LvQAHgJZCEGbs7BtgAdzr1z1HW03H0N7gnaQVI2hJ2apwp3dmoc6A8TQQeggWTCUgejVDGhphdqOdXUknuliRbfgqtaqYD7hQnFL0kagI61niAOcwWdmArtzi7paJT1sxkQZutp0B73Uxldwjl+3KO0KWu0Up86v7GrEwC3O0nsc1U26gDMJSDqYu2MM+ib+1ECuoN0SMMspomV8cRgrUNaXHPvU9JKD73evhGawdKDyG2crjTDbV5rGFaRctoSOeUnVIvLo8bOeU1AuXEwlNP5Owjzw/2rAtOwvB+vbRu24Z6S2zqFP275P+ewsaugCeCnpRIY6zesmlROtgA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=starfivetech.com;
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1259.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:12::11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.14; Tue, 3 Dec
- 2024 03:06:24 +0000
+ (2406:e500:c550:7::14) by ZQ2PR01MB1180.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:12::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.15; Tue, 3 Dec
+ 2024 03:06:25 +0000
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7%7]) with mapi id 15.20.8207.010; Tue, 3 Dec 2024
- 03:06:24 +0000
+ 03:06:25 +0000
 From: Hal Feng <hal.feng@starfivetech.com>
 To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
@@ -54,10 +54,10 @@ To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
 Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH v7 05/12] riscv: dts: jh7110: Move common code to the new
- jh7110-common-u-boot.dtsi
-Date: Tue,  3 Dec 2024 11:04:23 +0800
-Message-ID: <20241203030430.26089-6-hal.feng@starfivetech.com>
+Subject: [PATCH v7 06/12] riscv: dts: jh7110: Add u-boot device tree for
+ JH7110 based boards
+Date: Tue,  3 Dec 2024 11:04:24 +0800
+Message-ID: <20241203030430.26089-7-hal.feng@starfivetech.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20241203030430.26089-1-hal.feng@starfivetech.com>
 References: <20241203030430.26089-1-hal.feng@starfivetech.com>
@@ -68,56 +68,56 @@ X-ClientProxiedBy: ZQ0PR01CA0013.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:7::14)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1259:EE_
-X-MS-Office365-Filtering-Correlation-Id: 189a8b38-76c4-4208-cf11-08dd1347785b
+X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1180:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a494d6c-faf9-48f2-6a06-08dd134778f3
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|7416014|52116014|1800799024|366016|41320700013|921020|38350700014;
-X-Microsoft-Antispam-Message-Info: 4ecqrAQfAFgWm1bfMlR0vHhQXIxtoBCYQzBiVax9IbaQvo2o/caWE6uKIv6+iOgVICfAOg4j+yn+1XY7yhz8BgHOEvH4C/Dgo2pqMsUbyzV1LdbQTi38AM6hT8lFBsENEUpd5F2q2++/gVzw+k5EG6RnJe+sqx7O/v+NhNDVmRQWIealrDajAxd+LFdEeArq9Q6VN+mqfjthj9cshIJ1AFBHrWd/64RCFk/VTFnCgEHCyEwVOsFJkic+pQ4/hUohWuyOdJkyaNuzNitni4QbfNRHkh7vZQgtW4q6/SPVGTbL/fGCAGqHe9yRvkyQtwi0ayVEJWkSHHQytyUCGYorSmrTpsiKRH5+vieM1LiMhlfQAjs0siaAMZY/YDGS8mV9j5waqCkJD3d1EBKMrdja13TaJXU/aYGZ/jxh8xz+2LYUF76/0NfU8opormlC2yDbCeUYaWG9MsHcmWZfa05iS7mr8rY63wQ5XGSuVtBirdnEP2lRv04C4UDwAtnbNd5XaBXxv8HoR0MjTYlEYKCcQF4oZ5aYXkz0BNAdduFamkEn/Je87Qb5YBOe0/wcd0M9qEEcRkgc8zn0MxbkLdETWoILLWWIb+TTLTtCv48+Kt/paA0zJmeArIEOUjU7zZzkNnRg/HDL6fVR+RbIXUC1Fw==
+ ARA:13230040|52116014|7416014|1800799024|366016|41320700013|921020|38350700014;
+X-Microsoft-Antispam-Message-Info: gVRybdB7wI1MECz0hw3CFPFcTT/wdWpuPE8FAUzbqgGAEIcv/wyfZihuZskA3qG0unpfQybwiQHGyjrVzCUNEBWhP6Uh5jnNHf0XRBajXWgL9vDBmrSHuankb1ym3doR4Gm8sNlfgoa4oBwW1D8RlQHOpi8cd4vUqlpVq/ZxF6/n+xW9GbshGJ7Uxp1Ol+34Sucdjq8y1lC/siSLBL+NsHGyX1CInTwDyTpQTuQgs8h73iYsx9js0SwxMUeq5muaQBhvDiJUE2VLPVdwpc5pJeCqGphGBS0xtLqCxbMfRbgO5CfHv7gk/mDvsS0rO7I1MNWLhbyPUuMi8A6cmO2JTwoOGFn7+ya0SUZjfij8fu/KMSinKyJLnGXNFUz3TYP97gFBOeWeSQdXdn6cQzT87/6T8cItzrAS7OseEJy8Zy1cA6u5wA9jl6esIH2iCh9+9TXuV8gIrtBkVAS2vUtpuwbpmTOF6IJLV6OQMCdukcVzAjwbqBGEBEBr0BShGVhn7gwqHKHppp8QlDqcczwmdGygnLEe0AyICV59lHjBPpTmnqFwq5U+mCGQm0ip28G+EKb4vqU2O3AHUlARO7/qQLRkcDtbXLS7A2k39zbe5lbW0QC3yc/aHPAPYxciMiuF13nnnnPxE8ibzplO5g69lw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
- SFS:(13230040)(7416014)(52116014)(1800799024)(366016)(41320700013)(921020)(38350700014);
+ SFS:(13230040)(52116014)(7416014)(1800799024)(366016)(41320700013)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?H8YtCbh75XC46LOa2s8bLm2OKPi9kVnPHZOR1fmdq3flOdQUIbHqaHY48Owp?=
- =?us-ascii?Q?5Gb+lf8AHPY2It8VQM72op1gLNLI2wBkPUaif8SdJAPjXkBOZzlvW/7IifsM?=
- =?us-ascii?Q?gHwXxNJtLTBLPGQTBGUpk05ww6vCCXmFxSlxrYoIG5L1CEg1Hevk7CUBqORy?=
- =?us-ascii?Q?cx9KgfpD+Iq3hClGwXCmY1kaR9Pi+W/dOOJ+fmHg9JGI74C4hAfeN2SCQx1S?=
- =?us-ascii?Q?hJ4jd51jqrIWexSquqv/XcgPHOCnpYzKrqHTBXajyAUtNY+MDDGp26mM1Net?=
- =?us-ascii?Q?MOYeecLbyjptQMRyGiC6UhXJXjybbF16070+tZA0JxAg7BZiWThHR+0VEezu?=
- =?us-ascii?Q?XYdVB10LRr0Wa7DLGWhbQ/y/l1BIobZC+FVdkRnxoVT2YyZFl23o86XqhyNp?=
- =?us-ascii?Q?g5pubK+9wDYKZC1VgVnx0tiLPMpxHVncrkPrXOSPFAMXAhUy1+IWA7tEAsNi?=
- =?us-ascii?Q?Xc1xVX14JwxQbaM/EfQ87Jq19l86FVtV1KxgtlN4iruGzNaX+D5fX1rVksde?=
- =?us-ascii?Q?++QYjqFuQ2xSO82EFiCrvuQBkTQxG/I5vlEkZWKiOjH/gumXhMXmIn4hliro?=
- =?us-ascii?Q?7+3cfnfu5TZbFZ9rG9kPfceWhLyrlBakWgyqDjpINebdyMDp/KOuDuQQIZRQ?=
- =?us-ascii?Q?ECbc7iIz93nEtk0lZlZQtn0zIUcrKLcNlVIBwijIrcZNKp/Xn8LgnZerH3dt?=
- =?us-ascii?Q?MavMuKfQWkW/hCgbhJkZCN9Hf3wpwvOYfqK9QZ4CvdeyhaJkrXIBl8SjdPqB?=
- =?us-ascii?Q?8RtNT5kbSt+4vvLGgSq7ejjtnZ0w7lMZNVMnigOXSDdt35xn3LAJAwC4/TKh?=
- =?us-ascii?Q?OnEEdO3yJBZfzlCMs3+OqhP1BS6kbh6H9M/6qVY8pqMOK7kHEJPPXPgAhPib?=
- =?us-ascii?Q?V65n0pRRuXuzStKgV7YZ3OkMTvC9ESQxZfZegNzSlTERoYDNgNLupjp2BT7Z?=
- =?us-ascii?Q?54NiRoRk+rk6tgohiOYmLNNSGLuvq/OepJePdTj2j+Hni//zmBkTEHz59aBI?=
- =?us-ascii?Q?WBVWPZXGH+9RW21uIzPErZXudRn/hfqmJ8vxqhtI0alfB9dF/plwDpLUN+Yb?=
- =?us-ascii?Q?COsbG+HVTf3Bs+Mp3L8hs6xHYJgCNvS/takn/KXGojuTANZlgUeXlLaDhCdF?=
- =?us-ascii?Q?Xb5Fd3Tr/wK+sYzhLJQlnvY4obbsKffIPpfCMul1AGGTbJBNIcOQzvrSMVqK?=
- =?us-ascii?Q?vV1M5yTUAd0vGSxe8P1GTLCh6cv5Wv0RyWuwocC1AhZmnTbhhyGKpls+t24D?=
- =?us-ascii?Q?TeixNaDwQX0NEHoLcuex26KisBGEe0N8+LUQcJEiHdYnsYee4sjJ7yIVYyj7?=
- =?us-ascii?Q?yksMyfI5X3VaiaTfR4VTbmMYX99v0JZq/AukdhF9/CTBk/RoF75W9GrmW0l7?=
- =?us-ascii?Q?dIRJY19C3oVF6kG1KffW6hXUsttnQlyJzrvY8yDPWv7V5ghIfYHQVAMa/HgK?=
- =?us-ascii?Q?fzEhPoln7CnzNCFuvyVgajrWYVkC9weIgYkloLWRvhA8j8dCeRL9vaBwu6AV?=
- =?us-ascii?Q?CePVEWFySvbIe5AaDlP9AloIO0/o1dsLOFzr+923pWQiYoQ7ulXFzAUqsjj5?=
- =?us-ascii?Q?+wPg6N4XadI6Dn/8u7BhQcoiiHrAd8Gw9QABq4wUcfbdlD4QCpyXtXiCuA8c?=
- =?us-ascii?Q?Xw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Hy0uParymOt8zqj7ozVyLK6glgsDmg3Elw8SIYepCj2Hv/KGEfhga+O8Km72?=
+ =?us-ascii?Q?Y8t9M3/htBv8Y+f+maeX+Jgw1rMOxlgq8tM9wJmDrbE8eMRJvNGLD1IcJ+cg?=
+ =?us-ascii?Q?67YGTF3K5J8dj5N+r3JL3WFfRvXWknGWjMJpSFYQNT6IrcC8thgHsdAx9rxr?=
+ =?us-ascii?Q?2+3lAJsQc8VseeMvYM0bRzSo4yYPkmsOy4KeJ0b3KILOkcL6EAFZNI8aL3u9?=
+ =?us-ascii?Q?/INujBLw7Cn93fT4ti6tx1GlbN9k9QPeh+dgk4jjHzp3kcTBtHfWbXVM5edw?=
+ =?us-ascii?Q?pw2AqEdOhi+/CVBgjjAtNdWWPZLsgC+hLFY8UkbsVQnt5Lz3CQ7BzlmwG5bA?=
+ =?us-ascii?Q?NeMWqGpvuIbpN3aL/YKH17KCda8J8ySTBcLlLrsGI8noica1OcaFfbeph3WT?=
+ =?us-ascii?Q?byt07F5f6NQwoIATp1VqQu681rItiG5YGvsS9fyCXLJawAPD97x+kwy9eR8N?=
+ =?us-ascii?Q?kpPUtT2IY5REUYTXILhW7PwJcwtYHVqk8/9ZLZNs1gKxg+9jjrSvhQ/Q4Ydg?=
+ =?us-ascii?Q?YGKs5wg9A/T4ZognKl65vZo6SkubGARP7rsDI+0ORgXq1InrDqb3k40IniP3?=
+ =?us-ascii?Q?Nk/wR9z2GXI4jgBrv/XtWqS1nY9/sO7D5RwYEXpUBlaE3SSfxHKm/nlp4Vp5?=
+ =?us-ascii?Q?HOo1AADz8fGJqKNDgBI1nb/M/J/xTmZUjFGIODfTGAgHWHMosFb5R4OiYuzH?=
+ =?us-ascii?Q?zAxmzmYO+ePL+0mldJ5z4mEI9dXTfdj4y7VDT06P6FTOf4eBVOWcIEj6JvuK?=
+ =?us-ascii?Q?kJrgdW2Avi/SM7QQlAulacXwe25lwbhiqIUBOdPIcTege+wofxtNBrXzIlo7?=
+ =?us-ascii?Q?hyD9VanIsYVFcoFCTVbW6JWT93GEHc4gThriDgbPnme72DprZU6TssEy7iuY?=
+ =?us-ascii?Q?NpGhUc4t/jhugNVHUcpzuBwOhMvbt5QvCUhY9LMdKzcIIhS3aAJqM3Gj/6pD?=
+ =?us-ascii?Q?NHUPBzv/EBsrT4TrDIUYRZOaU4Yl5xMW4xIeReSaDAGIiI3jg6coq3tnhpMs?=
+ =?us-ascii?Q?6pUakB+Azrlq+34VhvcFVSFZ3Gc4G+k1gBzae0bR0aGqGgujFCsRDOSdz376?=
+ =?us-ascii?Q?bZeAtS4y90WBER5Ebc2NY1RD8Zqj1sCspXwwXgCZ1Qt4FfyeRWXKV6Ngivh7?=
+ =?us-ascii?Q?BFAcaiEyZ9+n7BI7BtI8Jhd7a3VbuHJsN6BRZ2Wi/+335llWKdegs5NJp3GZ?=
+ =?us-ascii?Q?/y52Mz4EJxYBSpuQij9uAJ7EtW9Jas0AwnpzoinVJBhOHrvVH8kuRg1p+HHY?=
+ =?us-ascii?Q?40qeTpAL66s9J8As3x8DIT8NjHbf5KP+bVzXOGxzFzrNlOGsC4hKDcuHwpE4?=
+ =?us-ascii?Q?IGlzoz2OWSjd60EJFmKe/SlhsiFFhh66AfkvigTcPhMlgYfPQ5RL/ELxsr4g?=
+ =?us-ascii?Q?WI61Hs1cM94tTJuLR7uagHKAgxFlLJxSphKxrsihOjooANdg+z4+9+DBjHw8?=
+ =?us-ascii?Q?xemjog4rzLutAYEk7EYMVF2jpu39iomMjf2yQNP5FO7YAdbzUgkGLVOmMUyg?=
+ =?us-ascii?Q?tK2Y+1o59nshPqyy7mz2baiLu18q+TpK8F3Q0bstchO0hcUIDIZmddwuDc9f?=
+ =?us-ascii?Q?zYRZd6Xc+eo9czBbuXaaxBeR617jNaRxUqoZ4MeNbcHGVNP7PXHB8ZL+6tO9?=
+ =?us-ascii?Q?qA=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 189a8b38-76c4-4208-cf11-08dd1347785b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a494d6c-faf9-48f2-6a06-08dd134778f3
 X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 03:06:24.0505 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 03:06:25.0380 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: L9xra9YrvjhEuGT7/C1ZL+us1evz/A66I0jn7FUnmu7ZC3e6qO+ApA1GDcoZwa4YnDZ2cgGn7nQkFxymK+RGXI2kP69N6eN4J4PxTWrpXoI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1259
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6a5XqbxbjiKs96dvoevNroc8hKZPIqVhxry/GC3b3/giZXb5Re9eTFIXNV0aRM2kD1Mhj6pFJ8fHYUccp8g2UvHLnPEJbDiLw2iG+fGDAOw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1180
 X-Mailman-Approved-At: Tue, 03 Dec 2024 04:11:50 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -135,312 +135,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To support JH7110 based boards besides v1.3B,
-add a common dtsi and add common code to it.
+To support the other JH7110 based boards, add u-boot
+device tree for them.
 
 Tested-by: Anand Moon <linux.amoon@gmail.com>
 Tested-by: E Shattow <lucent@gmail.com>
 Reviewed-by: E Shattow <lucent@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: H Bell <dmoo_dv@protonmail.com>
 Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 ---
- arch/riscv/dts/jh7110-common-u-boot.dtsi      | 142 ++++++++++++++++++
- ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi | 138 +----------------
- 2 files changed, 143 insertions(+), 137 deletions(-)
- create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+ arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi                | 6 ++++++
+ arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi             | 6 ++++++
+ .../dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi      | 6 ++++++
+ 3 files changed, 18 insertions(+)
+ create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+ create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+ create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
 
-diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi b/arch/riscv/dts/jh7110-common-u-boot.dtsi
+diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
 new file mode 100644
-index 0000000000..7953459e67
+index 0000000000..9df1e5db55
 --- /dev/null
-+++ b/arch/riscv/dts/jh7110-common-u-boot.dtsi
-@@ -0,0 +1,142 @@
++++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+@@ -0,0 +1,6 @@
 +// SPDX-License-Identifier: GPL-2.0 OR MIT
 +/*
-+ * Copyright (C) 2023 StarFive Technology Co., Ltd.
++ * Copyright (C) 2024 StarFive Technology Co., Ltd.
 + */
 +
-+#include "binman.dtsi"
-+#include "jh7110-u-boot.dtsi"
-+/ {
-+	aliases {
-+		spi0 = &qspi;
-+	};
++#include "jh7110-common-u-boot.dtsi"
+diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+new file mode 100644
+index 0000000000..9df1e5db55
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2024 StarFive Technology Co., Ltd.
++ */
 +
-+	chosen {
-+		bootph-pre-ram;
-+	};
++#include "jh7110-common-u-boot.dtsi"
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+new file mode 100644
+index 0000000000..9df1e5db55
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+@@ -0,0 +1,6 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2024 StarFive Technology Co., Ltd.
++ */
 +
-+	firmware {
-+		spi0 = &qspi;
-+		bootph-pre-ram;
-+	};
-+
-+	config {
-+		bootph-pre-ram;
-+		u-boot,spl-payload-offset = <0x100000>;
-+	};
-+
-+	memory@40000000 {
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&uart0 {
-+	bootph-pre-ram;
-+	reg-offset = <0>;
-+	current-speed = <115200>;
-+	clock-frequency = <24000000>;
-+};
-+
-+&mmc0 {
-+	bootph-pre-ram;
-+};
-+
-+&mmc1 {
-+	bootph-pre-ram;
-+};
-+
-+&qspi {
-+	bootph-pre-ram;
-+	spi-max-frequency = <250000000>;
-+
-+	flash@0 {
-+		bootph-pre-ram;
-+		/delete-property/ cdns,read-delay;
-+		spi-max-frequency = <100000000>;
-+	};
-+};
-+
-+&syscrg {
-+	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
-+			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
-+			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
-+			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
-+	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
-+				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
-+				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
-+				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
-+	assigned-clock-rates = <0>, <0>, <0>, <0>;
-+};
-+
-+&sysgpio {
-+	bootph-pre-ram;
-+};
-+
-+&mmc0_pins {
-+	bootph-pre-ram;
-+	rst-pins {
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&mmc1_pins {
-+	bootph-pre-ram;
-+	clk-pins {
-+		bootph-pre-ram;
-+	};
-+
-+	mmc-pins {
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&i2c5_pins {
-+	bootph-pre-ram;
-+	i2c-pins {
-+		bootph-pre-ram;
-+	};
-+};
-+
-+&i2c5 {
-+	bootph-pre-ram;
-+	eeprom@50 {
-+		bootph-pre-ram;
-+		compatible = "atmel,24c04";
-+		reg = <0x50>;
-+		pagesize = <16>;
-+	};
-+};
-+
-+&binman {
-+	itb {
-+		fit {
-+			images {
-+				fdt-1 {
-+					description = "NAME";
-+					load = <0x40400000>;
-+					compression = "none";
-+
-+					uboot_fdt_blob: blob-ext {
-+						filename = "u-boot.dtb";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				conf-1 {
-+					fdt = "fdt-1";
-+				};
-+			};
-+		};
-+	};
-+
-+	spl-img {
-+		filename = "spl/u-boot-spl.bin.normal.out";
-+
-+		mkimage {
-+			args = "-T sfspl";
-+
-+			u-boot-spl {
-+			};
-+		};
-+	};
-+};
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
-index 7953459e67..e6bc6630dc 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
-@@ -3,140 +3,4 @@
-  * Copyright (C) 2023 StarFive Technology Co., Ltd.
-  */
- 
--#include "binman.dtsi"
--#include "jh7110-u-boot.dtsi"
--/ {
--	aliases {
--		spi0 = &qspi;
--	};
--
--	chosen {
--		bootph-pre-ram;
--	};
--
--	firmware {
--		spi0 = &qspi;
--		bootph-pre-ram;
--	};
--
--	config {
--		bootph-pre-ram;
--		u-boot,spl-payload-offset = <0x100000>;
--	};
--
--	memory@40000000 {
--		bootph-pre-ram;
--	};
--};
--
--&uart0 {
--	bootph-pre-ram;
--	reg-offset = <0>;
--	current-speed = <115200>;
--	clock-frequency = <24000000>;
--};
--
--&mmc0 {
--	bootph-pre-ram;
--};
--
--&mmc1 {
--	bootph-pre-ram;
--};
--
--&qspi {
--	bootph-pre-ram;
--	spi-max-frequency = <250000000>;
--
--	flash@0 {
--		bootph-pre-ram;
--		/delete-property/ cdns,read-delay;
--		spi-max-frequency = <100000000>;
--	};
--};
--
--&syscrg {
--	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
--			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
--			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
--			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
--	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
--				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
--				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
--				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
--	assigned-clock-rates = <0>, <0>, <0>, <0>;
--};
--
--&sysgpio {
--	bootph-pre-ram;
--};
--
--&mmc0_pins {
--	bootph-pre-ram;
--	rst-pins {
--		bootph-pre-ram;
--	};
--};
--
--&mmc1_pins {
--	bootph-pre-ram;
--	clk-pins {
--		bootph-pre-ram;
--	};
--
--	mmc-pins {
--		bootph-pre-ram;
--	};
--};
--
--&i2c5_pins {
--	bootph-pre-ram;
--	i2c-pins {
--		bootph-pre-ram;
--	};
--};
--
--&i2c5 {
--	bootph-pre-ram;
--	eeprom@50 {
--		bootph-pre-ram;
--		compatible = "atmel,24c04";
--		reg = <0x50>;
--		pagesize = <16>;
--	};
--};
--
--&binman {
--	itb {
--		fit {
--			images {
--				fdt-1 {
--					description = "NAME";
--					load = <0x40400000>;
--					compression = "none";
--
--					uboot_fdt_blob: blob-ext {
--						filename = "u-boot.dtb";
--					};
--				};
--			};
--
--			configurations {
--				conf-1 {
--					fdt = "fdt-1";
--				};
--			};
--		};
--	};
--
--	spl-img {
--		filename = "spl/u-boot-spl.bin.normal.out";
--
--		mkimage {
--			args = "-T sfspl";
--
--			u-boot-spl {
--			};
--		};
--	};
--};
 +#include "jh7110-common-u-boot.dtsi"
 -- 
 2.43.2
