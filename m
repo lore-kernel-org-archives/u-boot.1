@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC26DE6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37777E6C5E4
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:23:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D4A3895AF;
-	Tue,  3 Dec 2024 01:22:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C060F89562;
+	Tue,  3 Dec 2024 01:23:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UxlMIt3H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cXiX8c84";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E52F895B1; Tue,  3 Dec 2024 01:22:59 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 93EB4895D7; Tue,  3 Dec 2024 01:23:21 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30CA789288
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:22:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98768895B1
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:23:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa51b8c5f4dso707161966b.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:22:57 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0cfb9fecaso3783598a12.2
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:23:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185377; x=1733790177; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733185399; x=1733790199; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+OTsSeDeyrEkOs9n+nUpbUpkm2O0pjEeItKvcVHrMp4=;
- b=UxlMIt3HKVlkgStHMQrSGxZkQYWE2q/fCxH+YLnAG4V4YaLYZhbKAQkOt/h0QoEGXe
- BgZ5N0/Y7p9cRzIWd/hOzgHnVVoywGB5tlTFTD4cIGvAC28y2totwRj8Vqy70acPWb9u
- rlbvRpgwNGjBNmWoJhNOvLZHuH1MhPIUIVHSo=
+ bh=WZ0O7/kJaOI0fUiS2+Jtxgenj0UH2PBZrDJ0m7IBCa8=;
+ b=cXiX8c84MAqoa+y+KK4Os4VuAumxokyU6WtyM6nlZYMjeJpMslsmCnWMT8TyF66Hpv
+ QMZRrNo2OF2UZmYiXdT01CoaYKd27FoleAPuiNmjEtwK0yb8fbMu+jCFdXzL/iZp96VJ
+ Y3y35mmgRS8Fs0JNWh0sE5Dyhrm3johZsd2Z8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185377; x=1733790177;
+ d=1e100.net; s=20230601; t=1733185399; x=1733790199;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+OTsSeDeyrEkOs9n+nUpbUpkm2O0pjEeItKvcVHrMp4=;
- b=tcSn9unBohmVzULdQGOq7IcEPy5Zn/igmSV2nGaLmHDrwwxHBkA8rvXcZgJDBq1vzq
- NxWV05i98G+aMIVjKxvpcRHQAYKXBXk9ruzbsbFC+mS43ub6NQcTzrU2RuwAUkUkNe8z
- ovTPEfgmkg4gj/j3kzzd4/w27+WC43BlZIVnqeRpGMg8SMcksyAB/6vL4STJzxKAE0OT
- CcbCDWz+tyJx7uj+LNUlqt+WLpB4AKvUHEj4H5xdtiLk5a2D45l8mOi91zPUuIucafEq
- Kjh1oD+zf+Ijdz+EYw7/QEKLFOCfGQJ432TWJfYpbCKwcLgqKmCc+Z6zZu2pKDjw/Tg1
- WhQw==
-X-Gm-Message-State: AOJu0YwirxBpKgaQSw+IWpAIqYlMZcjJuClIslkg4fdqT4OPUD/8XpML
- h0TmrIVWCpRhwQLprZsClsria8oSwmlfLJCZLwL5NPP1nVaINqfbJkzpHMVcs2Ij8k6PfY8f1Mp
- 6aJIP3V9Dco/OCNsw6ZE4MDnl/UaymzAsponm
-X-Gm-Gg: ASbGncts/tafV0XWO/QEqeVFEuq/BSO/NpEAOTRo90N7YwhA2a7Kq/uT8+V8FiHkleJ
- +jiIyHvjE5PdiMKbEDtpK/tj0H+myn/ym
-X-Google-Smtp-Source: AGHT+IEpJabBxq709o1cm7dlrSQC11SjtxHL8vJxTZBkYcdplwC/bEKrcp/3HsJarBxuDTeSLA6pXCDO98moWZavdZc=
-X-Received: by 2002:a17:906:3150:b0:a77:c30c:341 with SMTP id
- a640c23a62f3a-aa5f7ab6bc2mr18104766b.0.1733185376771; Mon, 02 Dec 2024
- 16:22:56 -0800 (PST)
+ bh=WZ0O7/kJaOI0fUiS2+Jtxgenj0UH2PBZrDJ0m7IBCa8=;
+ b=G6qE17NC4itEIcXaEKR+uNeGSi0qMv4or3WLP3lHpAURge79J6a3x5/pAkDrzYNT+9
+ Vo3TpuE9PsJzZFzd3bt//oz2qf+KT83+LjsVdjVMElndFjhZ84WXaZYj0U79h2Q8RaBx
+ znzHB2BqYZlDt6FFc5YigdN8VD+44dVCRzbRlX8ubSSHKJ5jSQghdT4hBVnW8EweyThW
+ e+JSZEI8ZFIMmckpgj53g/N5TxqtZsSdmUATg4n2ppF9ZkEKiFOFnAzGo445bwexREfh
+ kwKmCmLGiHIZOmp+ax5UJfBq+AQUp8u0wCpEMzDzxvlDTdW0mJqBHsJ5TfFqO5LyG7Aj
+ 7bEw==
+X-Gm-Message-State: AOJu0YyuoUyEmh/CQggu7tHj3ijS/Sq53Rt3IsZlhlRgBXkWth1VaiNe
+ a1gTKkOrJR1RSRDqUqTDHHdTlL2OmgbFcszYRZxSRqwCaEDlUo6yB6fhegcJbtJcF/wd22dYTfF
+ 970aZWqwIHY4ifegFV0nCoE3PLA9FtzlPbTi5
+X-Gm-Gg: ASbGnct07JGzvBuvy9zvM583JYYs4vkD3jPn1Tb9oukTeTQINIpJGVRoLQeFxSkHhTu
+ 5g/1Lj5JT88k6EL72W1KC/yN9fSep/rYi
+X-Google-Smtp-Source: AGHT+IHY6/diMdMtWvNNsWUuzm2BFJdwAdbvIO2nsCH0QwOPAUQJQSNdHy6Q6M0sTRRuJG+Mro/lMzcL5zjc4ojhbQw=
+X-Received: by 2002:a17:906:2932:b0:aa5:1ef5:261e with SMTP id
+ a640c23a62f3a-aa5f7d4ed45mr17589166b.17.1733185399142; Mon, 02 Dec 2024
+ 16:23:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-5-sjg@chromium.org>
- <20241202201832.GH2457179@bill-the-cat>
-In-Reply-To: <20241202201832.GH2457179@bill-the-cat>
+References: <20241201152815.1668093-1-sjg@chromium.org>
+ <20241201152815.1668093-6-sjg@chromium.org>
+ <20241202220058.GJ2457179@bill-the-cat>
+In-Reply-To: <20241202220058.GJ2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:22:44 -0700
-Message-ID: <CAFLszTitE4Gq+LUEm64ro2eL4_VME+gDh7s2jEnBTmVvkgX9sg@mail.gmail.com>
-Subject: Re: [PATCH v4 04/25] efi_loader: Add comments where incorrect
- addresses are used
+Date: Mon, 2 Dec 2024 17:23:07 -0700
+Message-ID: <CAFLszTj0avcstecn0Q25U3URXucX-ZPsKHbLmm=5=_iHJ4bjSw@mail.gmail.com>
+Subject: Re: [PATCH v5 5/9] efi: Drop the memset() from efi_alloc()
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,29 +92,37 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 2 Dec 2024 at 13:18, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 2 Dec 2024 at 15:01, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Dec 01, 2024 at 08:24:23AM -0700, Simon Glass wrote:
+> On Sun, Dec 01, 2024 at 08:28:07AM -0700, Simon Glass wrote:
 >
-> > Some functions are passing addresses instead of pointers to the
-> > efi_add_memory_map() function. This confusion is understandable since
-> > the function arguments indicate an address.
+> > From my inspection none of the users need the memory to be zeroed. It
+> > is somewhat unexpected that it does so, since the name gives no clue to
+> > this.
 > >
-> > Make a note of the 8 places where there are problems, which would break
-> > usage in sandbox tests.
+> > Drop the memset() so that it effectively becomes a wrapper around the
+> > normal EFI-pool allocator.
 > >
-> > Future work will resolve these problems.
+> > Another option would be to drop this function and call
+> > efi_allocate_pool() directly, but that increase code size a little.
+> >
+> > Move the function comment to the header file like most other exported
+> > functions in U-Boot.
+> >
+> > Comments were made in v3 that another project uses memset() when
+> > allocating memory, but that is not required by the spec. In any case, as
+> > above, from inspection, none of the users need the memory to be zeroed,
+> > as they fill the entire region with their own data.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> Please just resolve these rather than introducing a patch to then fix
-> them later. This is something that should have been fixup'd before
-> posting. Thanks.
+> I thought you agreed to drop this because Heinrich or Ilias was saying
+> they'd get the spec clarified to say it should be zeroed?
 
-That was deliberate, as I wanted people to see the problems. It will
-save discussion on later patches where the problems are fixed, if we
-can agree that these are actual problems. If people are happy to add
-review tags to the later patches then I'm happy to redo it.
+The other option is to put a 'z' on the end. Heinrich mentioned that
+Tianocore zeros memory in an equivalent call, but that doesn't make
+any sense to me, sorry. At present I suspect we are masking bugs, but
+it's hard to be sure. I'll figure it out eventually, I suspect....
 
 Regards,
 Simon
