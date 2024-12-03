@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91AFAE77166
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:49:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 107A9E77166
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 23:49:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1EDF896F9;
-	Wed,  4 Dec 2024 00:47:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B80389692;
+	Wed,  4 Dec 2024 00:47:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K4I3w6br";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BTGv8hiE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DADE78967C; Wed,  4 Dec 2024 00:47:20 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 1C8C888F55; Wed,  4 Dec 2024 00:47:23 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A23C3896E9
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA77896E9
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:47:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3a7def51c9cso15738695ab.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:18 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-841acc8151aso216494639f.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 15:47:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733269636; x=1733874436; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733269639; x=1733874439; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1iSLRxEmx5EzvBCuLgq4Mu5ho7dzmKpouUz9dyWfVWU=;
- b=K4I3w6brLq/6glMVAm/+TZbennxJ4G7cgMzNJwwceHZkv159mKf63ymz9y+4MqfVHd
- Voy0maP8J0yyro3t6hYZx/h9DFWjQ9+Ja7zPiMcJcnH6KMzUf7lBZFgmkC63d/P5h+YK
- Q2XnGVn6oSZAPLh9xo/YIQ6zCswkVttnFv0W4=
+ bh=95iUHcKaIvde41hMaQPreEKC3EfpLOe5YPuaL6m3KN8=;
+ b=BTGv8hiEnOOd81eLSzurYqrsOrOPZHJuAWurLbidDTTOcWtliBk5iPAW/r7S31rf5h
+ pN0Kl59yuDpqqZNbVk/NeAmNDYKq9ZefAdU7kqFdt6Lznl6NIghVlGKy7q32fJK/xu+q
+ vW99YlFk9pXxBgBMw5HQUUUrI9WztJlEEypcU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733269636; x=1733874436;
+ d=1e100.net; s=20230601; t=1733269639; x=1733874439;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1iSLRxEmx5EzvBCuLgq4Mu5ho7dzmKpouUz9dyWfVWU=;
- b=eBIk/SM1B/xSdvaYIHME/TS6Tjpc2ZNQGW98Bzjbyb7eayVtGaikx7xBuxo3rHoRNl
- sa4lWW+u5f1oYZZmTBM22+tL+apqmQZvIQ3n2tAmbZTKVP6jOAR/QRx79rYtZXM4IbeS
- b3d3axyimV1leHhj02IGnfm2vJgT13DflaO9lAraGQsd1qa/R5cIY6wz8mo0/MS4I5Tl
- jKZVWqgqk8Gm+VrZvnYigucqTbjZ39yF6BmaFkTq+FUgB+/rBVEYs8cbrWDqBjiSDD6W
- ZwoMGWIbQT70dht04pTu9pRZQPKp+u74p4SW1QAnIY0oE2DLP1ctYLBlWH52/DuBTc1L
- EC7w==
-X-Gm-Message-State: AOJu0YxgUjRs+nZh2PtPItj8kq2zXVKe0qZFypT1W/sr3PaDXGvM2M+y
- slv1xIyrDhWsgRX7yZ/wN17A1LE22U1Kl5lkBPzkheAVvK0llawagg7+6Y0/ThRz/bIc92s4R9M
+ bh=95iUHcKaIvde41hMaQPreEKC3EfpLOe5YPuaL6m3KN8=;
+ b=YLjGUB+Y1H0V5aIH/YPIIjrOvS67R0qczjg472BWtQPbqE2S7zHKggQC0LdmbrVdzX
+ qKVA+N1opHXbeQhjiHbKdNKS44w/Y2NoEO5vBRJ9mp5FgOyFumFlJ3nKHWXlepPOeBVh
+ o940HCgQACySBE3CneLWbZZFvFtRlLIBM7uhjQ+zdhVTxyA7a8DNP8opdr8tO37g8OSP
+ 5r4QTS+VMbIAbFlkofLO6vTAqijwZDweUz8eDKemJ5xEl4fFf46yl1/ZQT22XwC6QEWc
+ E765+JTig4+epHhJ2tLaYl8FaYsx78Tczg+5tRQPIQEbH/InEWFME2IF5298+Hpp+ri/
+ Wf9Q==
+X-Gm-Message-State: AOJu0YzCxxnuB4addoDHnxsi5bw7OOyIpS1fU3ewt+fuVyRanISUPRD5
+ kVURsjryXGsaLTVc8lYxR0uxbMUW5s4yx0VJ8gCv/KwGo9XA1PnGMd9ONWYzC7llsf59cZl0WhY
  =
-X-Gm-Gg: ASbGnctZL8tm/G640FaGWZEMVfa3AazmsNeyLYm/PeG2KZcvalahM1LgPF5RTqV4ROm
- 8zyLg9jHH8So2BnpGBKj9KPXpJu2NNCkfRIAv5IxCrIX1iu0c6V2ryDkmAQnMYY0ksEY3CjAosE
- m7sQKZjZaq0RqGFC5cZWqPEkPBF21/eSXiwZdseRAhERM3gdh1QUJuXIb3dHEZnqUOJO8ppnZWp
- 21zVwtkwn4d4MnpKcvnMIOAAEOuRiwjMn+oTLwbzfVTPzNolDs5kxcUiPXqFLzUknaDcSnR/9wf
- qLueM6fFmQc=
-X-Google-Smtp-Source: AGHT+IGE0FthsmM8l/AQ9J5GeFI3WXwUcBXe8+ZtMza9S39Udi0Nbvb1YEHtVvy7a/NDg56ose65ig==
-X-Received: by 2002:a05:6602:6b19:b0:842:ff2d:c3bb with SMTP id
- ca18e2360f4ac-8445b55af5fmr539375039f.6.1733269636312; 
- Tue, 03 Dec 2024 15:47:16 -0800 (PST)
+X-Gm-Gg: ASbGncun7KQc1Zu/l/iruvnjUmVcLu6L6R3xtQWvGqyempnM+MdlabPtmBxZZ8kn6Pi
+ ukUH3n3XDOnP06ZiHfKkg013DNcZAECZLfoDBKDoL/DA+zyHZEQOwMgzKPUpWgKAHK8R5gztYAB
+ eliQ9Cogrz7uPYRQ1VLL0NJjZY9BbEifofaKukkVMUr8gLQbcAT7ZFJWURsDvnEXkpkRSWoGMQX
+ d/pE4KCyHM777YG4d6YB2nf4mYy+Ini0stQfbTDSdDm/zUEyfRilPB0CD09GDIRK2vJUQkb7x3t
+ BJ1+5P8OLus=
+X-Google-Smtp-Source: AGHT+IGFLq1UpuQonFZpqlQjaOoqz8oZM3WhUSgORxAH1T16y12Lm8sBEH6IYfA1srhGyMa4yi1pgA==
+X-Received: by 2002:a05:6602:29c8:b0:841:95b5:8944 with SMTP id
+ ca18e2360f4ac-8445b5e2776mr559172239f.15.1733269639254; 
+ Tue, 03 Dec 2024 15:47:19 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.13
+ ca18e2360f4ac-84405faf14fsm282349939f.42.2024.12.03.15.47.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:47:14 -0800 (PST)
+ Tue, 03 Dec 2024 15:47:17 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Adriano Cordova <adrianox@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 23/41] net: Refactor part of netboot_common() into a
- function
-Date: Tue,  3 Dec 2024 16:45:41 -0700
-Message-Id: <20241203234559.2938192-24-sjg@chromium.org>
+Subject: [PATCH v2 24/41] net: Drop #ifdef in parse_args()
+Date: Tue,  3 Dec 2024 16:45:42 -0700
+Message-Id: <20241203234559.2938192-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241203234559.2938192-1-sjg@chromium.org>
 References: <20241203234559.2938192-1-sjg@chromium.org>
@@ -99,118 +98,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the core code for starting an netboot operation into a separate
-function, so that we can (with additional work) move towards calling it
-from outside the file.
+Use IS_ENABLED() to avoid an extra build path.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- cmd/net.c | 62 +++++++++++++++++++++++++++++++++++++++++--------------
- 1 file changed, 46 insertions(+), 16 deletions(-)
+ cmd/net.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
 diff --git a/cmd/net.c b/cmd/net.c
-index 572fa75a72f..f980448e0ef 100644
+index f980448e0ef..6d1c6374f76 100644
 --- a/cmd/net.c
 +++ b/cmd/net.c
-@@ -382,11 +382,50 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
- 	return 0;
- }
- 
-+static int netboot_run_(enum proto_t proto, ulong addr, const char *fname,
-+			ulong size, bool fname_explicit, bool ipv6)
-+{
-+	int ret;
-+
-+	bootstage_mark(BOOTSTAGE_ID_NET_START);
-+
-+	/*
-+	 * For now we use the global variables as that is the only way to
-+	 * control the network stack. At some point, perhaps, the state could be
-+	 * in a struct
-+	 */
-+	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-+		image_save_addr = addr;
-+	else
-+		image_load_addr = addr;
-+
-+	net_boot_file_name_explicit = fname_explicit;
-+	copy_filename(net_boot_file_name, fname, sizeof(net_boot_file_name));
-+	if (IS_ENABLED(CONFIG_IPV6))
-+		use_ip6 = ipv6;
-+	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
-+		image_save_addr = addr;
-+		image_save_size = size;
-+	} else {
-+		image_load_addr = addr;
-+	}
-+
-+	ret = net_loop(proto);
-+	if (ret < 0) {
-+		bootstage_error(BOOTSTAGE_ID_NET_NETLOOP_OK);
-+		return ret;
-+	}
-+	bootstage_mark(BOOTSTAGE_ID_NET_NETLOOP_OK);
-+
-+	return 0;
-+}
-+
- static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- 			  char *const argv[])
- {
-+	ulong addr, save_size;
-+	bool fname_explicit;
- 	const char *fname;
--	ulong addr;
- 	char *s;
- 	int   rcode = 0;
- 	int   size;
-@@ -410,22 +449,17 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
+@@ -368,13 +368,13 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
  		}
+ 		break;
+ 
+-#ifdef CONFIG_CMD_TFTPPUT
+ 	case 4:
+-		if (parse_addr_size(argv, addrp, sizep))
+-			return 1;
+-		*fnamep = argv[3];
+-		break;
+-#endif
++		if (IS_ENABLED(CONFIG_CMD_TFTPPUT)) {
++			if (parse_addr_size(argv, addrp, sizep))
++				return 1;
++			*fnamep = argv[3];
++			break;
++		}
+ 	default:
+ 		return 1;
  	}
- 
--	if (parse_args(proto, argc, argv, &fname, &addr, &image_save_size)) {
-+	if (parse_args(proto, argc, argv, &fname, &addr, &save_size)) {
- 		bootstage_error(BOOTSTAGE_ID_NET_START);
- 		return CMD_RET_USAGE;
- 	}
--	if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
--		image_save_addr = addr;
--	else
--		image_load_addr = addr;
- 
- 	if (fname) {
--		net_boot_file_name_explicit = true;
-+		fname_explicit = true;
- 	} else {
--		net_boot_file_name_explicit = false;
-+		fname_explicit = false;
- 		fname = env_get("bootfile");
- 	}
--	copy_filename(net_boot_file_name, fname, sizeof(net_boot_file_name));
- 
- 	if (IS_ENABLED(CONFIG_IPV6) && !use_ip6) {
- 		char *s, *e;
-@@ -440,14 +474,10 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- 		}
- 	}
- 
--	bootstage_mark(BOOTSTAGE_ID_NET_START);
--
--	size = net_loop(proto);
--	if (size < 0) {
--		bootstage_error(BOOTSTAGE_ID_NET_NETLOOP_OK);
-+	size = netboot_run_(proto, addr, fname, save_size, fname_explicit,
-+			    use_ip6);
-+	if (size < 0)
- 		return CMD_RET_FAILURE;
--	}
--	bootstage_mark(BOOTSTAGE_ID_NET_NETLOOP_OK);
- 
- 	/* net_loop ok, update environment */
- 	netboot_update_env();
 -- 
 2.34.1
 
