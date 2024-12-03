@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F50E6C5EE
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 03:12:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43719E6C5F5
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 03:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5ABE8963B;
-	Tue,  3 Dec 2024 04:11:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0EF968964A;
+	Tue,  3 Dec 2024 04:11:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7602189613; Tue,  3 Dec 2024 04:06:07 +0100 (CET)
+ id B78DF89617; Tue,  3 Dec 2024 04:06:07 +0100 (CET)
 Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
  (mail-sh0chn02on2071a.outbound.protection.partner.outlook.cn
  [IPv6:2406:e500:4420:2::71a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E1668952F
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 04:06:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 770DC895FC
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 04:06:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=hal.feng@starfivetech.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TaYKHwj+3QjNpYTamk1NgRnyrzTmB/Peb4i6HFsCIhJHHaSY1i/qQVSVpwlZJe6e1Q5e7fZNb/s7wA36mYnCZn9sZyNYy+zQl0IHML288CGYbYlsEgUXI1Yz21WMHDPyAzdVs8EdwDlOtsOciHXDYNIaaTw1RngE3X0MufSUiIVI0Inz4b4JgFhgwkobPS3bQp8ceq2MxuWJBQy5yixcy4Tccf0jRlG3xuah5EwHzHO9kLFlf+cnWl94kJ1/GonfNlrDpmszBAax0Jxgca3hrTY94cdWggJ7eI1w3+0mMloNfzB+apXE0jgffO3WBW7UgwpjF50PellP+AVdVfDRhQ==
+ b=hVit7nfSK+xW74UJaMkjBdvFbL+wVvQhz18u4irtuFKBVyY+To0qHoIIAnnwS7NHL2LOReq/nstboyaev/oZgsdXO1fCPfP0D35eIcW8akGL+DWJR6+2HY9CsuYxQFWdQpDDoMdj/nhV30dklRMzKUm0XdgEAhL04lB4dsCclukeUu5uMd8L1aLGeKa3xL9GtooW6jDhtq3iSFtHpYUz84qsrToF9yoxz8DdxtD5CnWXr8BUajGFtqdUshC6NxCtbvaU6oGmrvaAbIcSz5AqKOpAttKzrRH+qDeBnQphiGf+Az6QrGV/0MEK4Ft9KNHUq42ugl5mtQAXPnE5Nvi6fQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+NlBIVXLE/bkEHEsznHrCuo+1uDPO/ybOuD+Es2gRYs=;
- b=nTchYakTXbXeeG633jutbEInwjJxza8w37SnHKYAIWvtrKpSPERWvuNQlcZZKox1Bd4bTK+6nW1394KObcSBHkBpO15l8jXbQ28O5MlKyPHsaWP0T7ceGnK/GwLG5qro3PmK50/W9XegV0Md5drGI6+oFLKbbURWa7vuVpvZLF0P3dNlBo6wfXaDad+b1RUZrqYgZT05K6+IXohCcxaMyOS3TOk8P84u0DbASMoVt7I7Zmv/O2RACKlwEUGIc4dEIM4pWbjAGKcjy7b/cqb4o6bEayjAxgzl/7lyLx0PQy9qSXUej1mEmpk9q/fpsQM++B/HtN+ff2j8A05J75/n5A==
+ bh=agswTGsNWw/lFEda9W0e8bCFGQpen07619X6C0/7Npc=;
+ b=DuWXre7MzHIDhyPpaCiz0OWSJuB/1VBjQVHCLrfdOSJ1creggg+9AzQOkeX6K+IzHbB+q8abzLyrJjQPTBxI3ZfP+C8Ueto9YKHe0YeZiLF+b4iFWozR+LgnB0CbBlErV+VgPJSk8ixR9lp5GcQXYJIboTt9P510Btvz05PiG0cYYCbN9sXTY1mSKYH80tfcQnE0fzcpNTVQnCa01fuJbW7CDh1vwejxAsiRsFrU62ofgvHNXLb7nfQT9apuvYczSHSW06E1eFrbRNjneiZzkZFcd4u5S0EZv1z26o0Umw1OKr9YU7jyE0Z14qAwRdAol1y6py6Db193UJpaKtGOTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=starfivetech.com; dmarc=pass action=none
  header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
@@ -40,11 +40,11 @@ Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:7::14) by ZQ2PR01MB1180.CHNPR01.prod.partner.outlook.cn
  (2406:e500:c550:12::10) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.15; Tue, 3 Dec
- 2024 03:06:27 +0000
+ 2024 03:06:26 +0000
 Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
  ([fe80::2595:ef4d:fae:37d7%7]) with mapi id 15.20.8207.010; Tue, 3 Dec 2024
- 03:06:27 +0000
+ 03:06:26 +0000
 From: Hal Feng <hal.feng@starfivetech.com>
 To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>,
@@ -54,10 +54,10 @@ To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
 Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH v7 08/12] configs: visionfive2: Enable MULTI_DTB_FIT for
- JH7110 based board DT
-Date: Tue,  3 Dec 2024 11:04:26 +0800
-Message-ID: <20241203030430.26089-9-hal.feng@starfivetech.com>
+Subject: [PATCH v7 07/12] board: starfive: spl: Drop the unneeded DT
+ modification code
+Date: Tue,  3 Dec 2024 11:04:25 +0800
+Message-ID: <20241203030430.26089-8-hal.feng@starfivetech.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20241203030430.26089-1-hal.feng@starfivetech.com>
 References: <20241203030430.26089-1-hal.feng@starfivetech.com>
@@ -69,54 +69,54 @@ X-ClientProxiedBy: ZQ0PR01CA0013.CHNPR01.prod.partner.outlook.cn
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1180:EE_
-X-MS-Office365-Filtering-Correlation-Id: 932b2056-0b67-4855-beee-08dd13477a25
+X-MS-Office365-Filtering-Correlation-Id: 8e486c3a-f8a8-48fe-cd15-08dd1347798b
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|7416014|1800799024|366016|41320700013|921020|38350700014;
-X-Microsoft-Antispam-Message-Info: rpWYwTJlfhWH2F3Fe+LqudGbHmdyVIIqMq4SNg+Ag6CxejVdu4bUZMWqVXMggwhsEa7Lj3+asQOpNK4XXPYiULOgu7csQS3Fdip60AWufRmkjd9YhtU4oELzCAZZ2kIeLqOkDCWrZ2TXoqOKm3jF8+FNEyWS/3XpvAwv9CNXfJGmJlr5mHRziJnTH3Pf3zVTBUl6LpvOjjlkfOYTrEsJK8c10mwx+eyIj7SnFmHHah6AsPqmBIlSPQFzZTxDIMVo+JnevvxoMhglP3caa41sDfj4h104dl0Q+Og+m9+CJjOiAWAAXmW6JY3O2ynDjYXJ7iGkpRgPYnsJoyYM0hyg6EPo2Pa5wZIsjHCpUPmAqPn+AJToEgb2xHnTGFOGNGkq2xAkihTo0NPtIQucLebJNraFwPgC04IVZzN9N+/j2/79eN3fk+wIu4QfM5ocYx2HaZtB+bAkaBvH4l1Y61F1SzpQIAOQhmuYJimWn9DfM2zOzTt4wbRB05qtC8TuoBE2h0OeGCS6e83RmP8w5i5kT6X4TJkO689TJg8cuQw7lLfSNV86Gd3b0UJ5KJ36K+eaUBdU35zBFlFQBF7fOEYGuecQ7+7y/evhWMlCT78uJTw3tBHBkuLQ0kKzqJuGV1FAUfCbF//jpAL5OlFaXrM7Hw==
+X-Microsoft-Antispam-Message-Info: e44Lm9a578k/aLzFkGowxZfZ62D+/EBt6HKQmMlwC13IVtH/xUGJ2C+LEd3HKmgedp9mBr13Ir+3UC4VTlECe4qWlvUj9PtF+5kEQq+WYi6ZcjQvFLQZMIYGvNaPxDCHT0O/sDeWCRC1ZRooi7CK5gB93JLEMN53tgdoXNEe0xZNMopcVoaBe9sqA3VLFr03mNbdrc/F4/OIlfi+8qEMYVm+p1zfxRkJqtwwrokU9mcItE8/JnXYB2+bVaa9IQsxhGGiIxGjVBuFEFeyJ5BU/sjp71E1pRSdhWtje7+rApWLCghjX7BPoBRoxIU0gGxlSliqu/w5URLzX6db9HwZAtWQD9wlPpcHEDurJoQmFmRgipPpzDNUwHmDi2bK9Fhdfv0LPJ/wA8RBdTw+bEt2Ruv/dPCajc5J4gdQDbseDPbOAj5RP/7DMu8kDYN/eFXVbKSAoW9uYpQAmvi0IaCpfWUdUHM5yHAK5EhTtIqeauGS/AoQYd36TwleHtdGBGTPoKqA4QQHVVqdzYHfqIMbAFEoUfafDxBSmPrD2XxHX9qHXIgUZCwwVpD4XhO7XAL9LZRlMQo0NWJ9zcNbx89KjL90mK0RtzctssgIVAlIX2kw4YakzQx2RNxaFGNTFv4kiR6dOUpZ96wb8eX1lLwDZg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
  CAT:NONE;
  SFS:(13230040)(52116014)(7416014)(1800799024)(366016)(41320700013)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?o0k14BMxCxaN1gqCCXtlae8XYNA4dMZ+GBRzk20tM7Io+QeHzaIq1oWQDmGm?=
- =?us-ascii?Q?FZpSAV9WeCJariragp/hkX3QYsPffN6Xg6oVxu7MHAEn7G1OmKSjfY0054Pm?=
- =?us-ascii?Q?+ERkDesZvE/DxjXRsxxTiexeajFqAcKeMBs2AdynmyxN3mCDb2YPLp9YtPTj?=
- =?us-ascii?Q?LU+Xd8TYz7MRYn1EpOwsvnqv1m4c05aCSSiG8XXvByy7GXYxjmeZEhnB2cY+?=
- =?us-ascii?Q?6tmQ9O7qpa0eXOO/fdalY4Zuv+hmQwRmysn+IVYKWqrMd7VHLEpnXCy6fKql?=
- =?us-ascii?Q?TV/X7Djd/YrdBm/KF6tbZIwjw2l+Xe3EBng9OVVq8zyR3a1l89+AeTPTQduC?=
- =?us-ascii?Q?vp8X/bDI9d2X1dFvjduKGUQ6Lq7uB+Pa9uUbpmwaximF12OMUf2EEaQmcFVB?=
- =?us-ascii?Q?OqnXRvY3pkpxYxRC/D48aaNtAZ9uNvqgZqdfAfzv3DwIXjxlpUt1eVO2OjnO?=
- =?us-ascii?Q?mEGMLzYE7VlrZJtS42IlR7vPWcXXXLTpFIa0LNkPqNGv/6i3yihxIYDpiWuG?=
- =?us-ascii?Q?86fRknuFMFMCUMlbZ69uXBDRRzftakUGQQhSH/c1a0OAHNFd6/46OsCUeyrW?=
- =?us-ascii?Q?7MEq4YG1KJsU7+j4XbkY8qHt8ci5ov2yWSes5DYtAmk5XwY3S2tguRKcI4Bh?=
- =?us-ascii?Q?H5FQfKB/kofx56sF1q7tvwAfSv4JKqx4OIqoAubMdjfHz17QdG+Jknc5U4ex?=
- =?us-ascii?Q?u7SeBSBlUsPVq00SBSNYO0HQePOjwrChxCnEEatU5fgxWkHsDMyYishq7ohR?=
- =?us-ascii?Q?QgeQ/rqO0TbmSr/xBFS/M30NlBJVZtcLtqXtoTgMgNN6L2ptzItO/Qn/xhBW?=
- =?us-ascii?Q?v/O1GNDvhKO6Gb8ceoK6Esy3fqckZmamf3sJ8JACwaUjSuJdT39Sn8JcQxu2?=
- =?us-ascii?Q?/qylCX2easGf0gt4MqolNw5h6daK+AELhIgPIWVpoR6h4BiFWmvsKBc+FAH4?=
- =?us-ascii?Q?ZBIX9lFevGD+p7Ebm0eCmfvUfpQboVgho2FuWCyDGKTYeLak8sA09K+WVNHz?=
- =?us-ascii?Q?obWIKvdedBNBrdYjRC6C3UcACEdjZJNqvumuIxmZorBfWU73Oq/uZCT5Kom8?=
- =?us-ascii?Q?z1SwsCgi73DLQo+K1sTDwdpKH2uGftuGj0gQTCs1i8kAKv/s6pecnwGHsIST?=
- =?us-ascii?Q?Qbox8MzT2oWziV+EJG6KmOdAVUXgFqKhv5hf60LuzVCoIy7Cd/ExCwZG1It7?=
- =?us-ascii?Q?cRJTmzv93lMYv5rEdL8tXEc2lIoAqEyrbo8mC48z49uFZvKAn1DiHtgOUZZg?=
- =?us-ascii?Q?UQiadXce1S//RXg0s8qEiJT/UrJ9A1csOV9WmGuleAx5CUyWcw0G+8jMyNfN?=
- =?us-ascii?Q?Lb5dakaP96+dGmlnBUBPlsZHhp584JjPBBeIOC9Mxon5JHDfkpRzdUD2u3da?=
- =?us-ascii?Q?18qv0mpIj8znSuaII3Jtd9o4KQmrwJoSG4vLNn4L7KVlqKweVpxOMHwI3euz?=
- =?us-ascii?Q?nduH9NoNZX/UuW7skRto7DYFQi+JDPA6lBTkFhNpBB/hkqteOLNYHvogE72F?=
- =?us-ascii?Q?kcP1mlMDSRWZVKqC5I3EvkdlK1QPi9D+y3ogiqYHox2vhGlJD3lHfzZ+OlOj?=
- =?us-ascii?Q?K+LCvh4kgQ5qTjraCbd4ae2eGt0gVfyDlprc+FuKRjzzPSUpLnW1un3tGE/R?=
- =?us-ascii?Q?kQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?55ixOC0F7FP2y5oWlISKqT3RMiMaNH7NtrAB2pLxFT7PW1sJtxCC2/2FYptD?=
+ =?us-ascii?Q?RRJPGqk1igIlFrNiFIoD8nMJq6j1nSgr5njnUE67ubbdvgd+DrQK6ni+MQkX?=
+ =?us-ascii?Q?I1ULefcuiO5ZmPoyL3O9Sx6H8CVAVm5a7ioj4YUmeJEx3Sutye/yRA1V13Lf?=
+ =?us-ascii?Q?IKDqhDVIE/uxlflz7ekGLBbOKguY34JaQmI5eeCgjUpccpX0SwQ545G12ppM?=
+ =?us-ascii?Q?dG4gNKFvBGMdVyT86ULsJd+fttOGvC0/zXTurUD2kqEqXW6fS7PjAhLvupkZ?=
+ =?us-ascii?Q?w4f6Ed5pdp2FJ0I+IuVXreMKUAX7jxahAwDBomF3ur1UjMw/CN3qJwoGifJ6?=
+ =?us-ascii?Q?HscB7nq+FVim5Ecat9nDXVGtWdIsVrASeU57CT3j557r8GKHL0QfSoo3w0XR?=
+ =?us-ascii?Q?0frcgbdKwzvFze7l1rxSYcW7B/htmVgyiSa/V08g6iqmGWI68uz4OLJMbGsl?=
+ =?us-ascii?Q?fGgX8UqbwUc+ziYdYDbRaoqUGlZpXpK5QKbOZyRtdEUHUBLWx+P79LsGchhe?=
+ =?us-ascii?Q?hxEvx9yO3+UCFd1yAS9/yCGLFYSpOYjzR8JM5ZqvLqngJNf0B4L++pEBJXdy?=
+ =?us-ascii?Q?1PvJrcNplOCQEprVHlj/Xz91g4+8aQ5l9emx3c8NdJZnvS23k7pJvIpN4Utg?=
+ =?us-ascii?Q?9j3YBar/cSGD/tSoYulFiCxEGHj+PyIXlIB43OxympCKlouZ51OaIbd1TRdI?=
+ =?us-ascii?Q?ORUxZCk1auWNECmXZ5KXWldIPJ2g4a8q/MwQCSwn3Ro7ROCQUUtDc6W1I3ze?=
+ =?us-ascii?Q?GO5a8NQfAGWHmG2gUKfLmLce5aCUFs0Ya8Le547rlGt6z6F5oQ4cUqjYZpHT?=
+ =?us-ascii?Q?v6K/x9rY/OjPsOUNEzFXYtourIgwQe7cHX7HlawSyd38pF7ExQO79hEZsxOU?=
+ =?us-ascii?Q?3EYQNfeQstYNuwHOvdKuKKx153picWezF6mgg7+BuzvEchWdHM3qnCL8EKJ4?=
+ =?us-ascii?Q?orwHbWrSbiqIg02rdBfd35/l+5XYSsydV5U/GX5SdpEml1T2ZVp/CqLBEfXU?=
+ =?us-ascii?Q?3CR0H/qCD6xpV1OAWcYN/4NFpQ7o+miosr/VXXAOUVQa7MUexDuCVWsBppts?=
+ =?us-ascii?Q?vN/vf6K7CWdsm5dr5x5wHpHJrUYf8XzEMafAN17DU1xnT3D7EypuOUgy2DLM?=
+ =?us-ascii?Q?MYqfqq9/Xek/S7s8VTv3gKV/rRFhWpYosWFtMhrM4cviqQhCSV4E179ZcL6t?=
+ =?us-ascii?Q?9cWPmKwJJ/1lCRMZmuNVshFcoIsUWC4KUMeXlI4AmJNui8sLo6j8Lwy0hvXu?=
+ =?us-ascii?Q?1qWKbR9G+oW4aHnbBwPvbIbwS/bOpm3nBZQfUJnbBUnYZRKBde9y6YvmjXFQ?=
+ =?us-ascii?Q?9TcLc18bVXSerKY6W+phb5YLaYcFVTy1NkZEcfnRnlYRBawq/m2VXaMh8Tfk?=
+ =?us-ascii?Q?yrrzyWIb0bFiKbvbL/jIh0a3zVBmcOUGoDU4HsPkL6rq3nujwyBW5vf5Ty1K?=
+ =?us-ascii?Q?/kfdt1Ptsp5kjnrYfQZrVuEpxyrdTMqY87R3eDGaKPpTeslkMIbBQTMLyJrx?=
+ =?us-ascii?Q?kS1ypKEweyWNB8syuoBBfHj7QtMY/6dWhDF1jPP3graqAui5oMNc+Kwhi52j?=
+ =?us-ascii?Q?GoK5PaZuenI8Ngkqh8kXJ0CKk1S2KfzMkJpKqmwBdOstGn3ysF+rjHBCZY+a?=
+ =?us-ascii?Q?jA=3D=3D?=
 X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 932b2056-0b67-4855-beee-08dd13477a25
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8e486c3a-f8a8-48fe-cd15-08dd1347798b
 X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 03:06:27.0130 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 03:06:26.0565 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m07iHUkH+pQnCo75sZrZ4uKo2dER3yXI1zbTErsHnimBIYNlJhy5sSlVPKVLSkm/oSk46q4PWYhrsgcSbbe1nDQf+DN9Mg1CFiLnStngpnc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: JclsM94uJVNOgDIhV6ZWUDgGLyYvFUd/2Ou61reX6I0tRO/yegzfVvmZf8XRqnFZLkkWmYcCJ72jX1Q7oYmhDZprAdCMIhU9c0uclaOzJJM=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1180
 X-Mailman-Approved-At: Tue, 03 Dec 2024 04:11:50 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -135,29 +135,384 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So JH7110 based boards can select their own DT at runtime.
+As OF_UPSTREAM is implemented, these code are redundant.
 
 Tested-by: Anand Moon <linux.amoon@gmail.com>
 Tested-by: E Shattow <lucent@gmail.com>
-Reviewed-by: E Shattow <lucent@gmail.com>
 Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 ---
- configs/starfive_visionfive2_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ board/starfive/visionfive2/spl.c | 356 -------------------------------
+ 1 file changed, 356 deletions(-)
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 3385c25b3f..b19931fb0a 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -82,6 +82,8 @@ CONFIG_CMD_WDT=y
- CONFIG_CMD_TFTPPUT=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_OF_BOARD=y
-+CONFIG_OF_LIST="starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
-+CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SECT_SIZE_AUTO=y
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 3fd535e7cf..38132ecccd 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -20,364 +20,8 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define JH7110_CLK_CPU_ROOT_SHIFT		24
+ #define JH7110_CLK_CPU_ROOT_MASK		GENMASK(29, 24)
+ 
+-struct starfive_vf2_pro {
+-	const char *path;
+-	const char *name;
+-	const char *value;
+-};
+-
+-static const struct starfive_vf2_pro milk_v_mars[] = {
+-	{"/soc/ethernet@16030000", "starfive,tx-use-rgmii-clk", NULL},
+-	{"/soc/ethernet@16040000", "starfive,tx-use-rgmii-clk", NULL},
+-
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-adj-enabled", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-100-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-1000-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-clk-drv-microamp", "3970"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-data-drv-microamp", "2910"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"rx-internal-delay-ps", "1500"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"tx-internal-delay-ps", "1500"},
+-};
+-
+-static const struct starfive_vf2_pro starfive_vera[] = {
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0", "rx-internal-delay-ps",
+-		"1900"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0", "tx-internal-delay-ps",
+-		"1350"}
+-};
+-
+-static const struct starfive_vf2_pro starfive_verb[] = {
+-	{"/soc/ethernet@16030000", "starfive,tx-use-rgmii-clk", NULL},
+-	{"/soc/ethernet@16040000", "starfive,tx-use-rgmii-clk", NULL},
+-
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-adj-enabled", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-100-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-1000-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-clk-drv-microamp", "3970"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-data-drv-microamp", "2910"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"rx-internal-delay-ps", "1500"},
+-
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,tx-clk-adj-enabled", NULL},
+-	{ "/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,tx-clk-100-inverted", NULL},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,rx-clk-drv-microamp", "3970"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,rx-data-drv-microamp", "2910"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"rx-internal-delay-ps", "0"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"tx-internal-delay-ps", "0"},
+-};
+-
+-static const struct starfive_vf2_pro star64_pine64[] = {
+-	{"/soc/ethernet@16030000", "starfive,tx-use-rgmii-clk", NULL},
+-	{"/soc/ethernet@16040000", "starfive,tx-use-rgmii-clk", NULL},
+-
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-adj-enabled", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-10-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-100-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,tx-clk-1000-inverted", NULL},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-clk-drv-microamp", "2910"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"motorcomm,rx-data-drv-microamp", "2910"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"rx-internal-delay-ps", "1900"},
+-	{"/soc/ethernet@16030000/mdio/ethernet-phy@0",
+-		"tx-internal-delay-ps", "1500"},
+-
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,tx-clk-adj-enabled", NULL},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,tx-clk-10-inverted", NULL},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,tx-clk-100-inverted", NULL},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,rx-clk-drv-microamp", "2910"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"motorcomm,rx-data-drv-microamp", "2910"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"rx-internal-delay-ps", "0"},
+-	{"/soc/ethernet@16040000/mdio/ethernet-phy@1",
+-		"tx-internal-delay-ps", "300"},
+-};
+-
+-void spl_fdt_fixup_mars(void *fdt)
+-{
+-	static const char compat[] = "milkv,mars\0starfive,jh7110";
+-	u32 phandle;
+-	u8 i;
+-	int offset;
+-	int ret;
+-
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+-			   "Milk-V Mars");
+-
+-	/* gmac0 */
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@17000000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16030000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_AONCLK_GMAC0_TX);
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_AONCLK_GMAC0_RMII_RTX);
+-
+-	/* gmac1 */
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/soc/ethernet@16040000"),
+-			   "status", "disabled");
+-
+-	for (i = 0; i < ARRAY_SIZE(milk_v_mars); i++) {
+-		offset = fdt_path_offset(fdt, milk_v_mars[i].path);
+-
+-		if (milk_v_mars[i].value)
+-			ret = fdt_setprop_u32(fdt, offset, milk_v_mars[i].name,
+-					      dectoul(milk_v_mars[i].value, NULL));
+-		else
+-			ret = fdt_setprop_empty(fdt, offset, milk_v_mars[i].name);
+-
+-		if (ret) {
+-			pr_err("%s set prop %s fail.\n", __func__, milk_v_mars[i].name);
+-				break;
+-		}
+-	}
+-}
+-
+-void spl_fdt_fixup_mars_cm(void *fdt)
+-{
+-	const char *compat;
+-	const char *model;
+-	int compat_size;
+-
+-	spl_fdt_fixup_mars(fdt);
+-
+-	if (!get_mmc_size_from_eeprom()) {
+-		int offset;
+-		static const char
+-		compat_cm_lite[] = "milkv,mars-cm-lite\0starfive,jh7110";
+-
+-		model = "Milk-V Mars CM Lite";
+-		compat = compat_cm_lite;
+-		compat_size = sizeof(compat_cm_lite);
+-
+-		offset = fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/mmc0-pins-rest");
+-		/* GPIOMUX(22, GPOUT_SYS_SDIO0_RST, GPOEN_ENABLE, GPI_NONE) */
+-		fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+-	} else {
+-		static const char
+-		compat_cm[] = "milkv,mars-cm\0starfive,jh7110";
+-
+-		model = "Milk-V Mars CM";
+-		compat = compat_cm;
+-		compat_size = sizeof(compat_cm);
+-	}
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"),
+-		    "compatible", compat, compat_size);
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model);
+-}
+-
+-void spl_fdt_fixup_version_a(void *fdt)
+-{
+-	static const char compat[] = "starfive,visionfive-2-v1.2a\0starfive,jh7110";
+-	u32 phandle;
+-	u8 i;
+-	int offset;
+-	int ret;
+-
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+-			   "StarFive VisionFive 2 v1.2A");
+-
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@13020000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16040000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_GMAC1_TX);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_GMAC1_RX);
+-
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_SYSCLK_GMAC1_RMII_RTX);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_SYSCLK_GMAC1_RMII_RTX);
+-
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/soc/ethernet@16040000"),
+-			   "phy-mode", "rmii");
+-
+-	for (i = 0; i < ARRAY_SIZE(starfive_vera); i++) {
+-		offset = fdt_path_offset(fdt, starfive_vera[i].path);
+-
+-		if (starfive_vera[i].value)
+-			ret = fdt_setprop_u32(fdt, offset,  starfive_vera[i].name,
+-					      dectoul(starfive_vera[i].value, NULL));
+-		else
+-			ret = fdt_setprop_empty(fdt, offset, starfive_vera[i].name);
+-
+-		if (ret) {
+-			pr_err("%s set prop %s fail.\n", __func__, starfive_vera[i].name);
+-				break;
+-		}
+-	}
+-}
+-
+-void spl_fdt_fixup_version_b(void *fdt)
+-{
+-	static const char compat[] = "starfive,visionfive-2-v1.3b\0starfive,jh7110";
+-	u32 phandle;
+-	u8 i;
+-	int offset;
+-	int ret;
+-
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+-			   "StarFive VisionFive 2 v1.3B");
+-
+-	/* gmac0 */
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@17000000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16030000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_AONCLK_GMAC0_TX);
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_AONCLK_GMAC0_RMII_RTX);
+-
+-	/* gmac1 */
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@13020000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16040000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_GMAC1_TX);
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_SYSCLK_GMAC1_RMII_RTX);
+-
+-	for (i = 0; i < ARRAY_SIZE(starfive_verb); i++) {
+-		offset = fdt_path_offset(fdt, starfive_verb[i].path);
+-
+-		if (starfive_verb[i].value)
+-			ret = fdt_setprop_u32(fdt, offset,  starfive_verb[i].name,
+-					      dectoul(starfive_verb[i].value, NULL));
+-		else
+-			ret = fdt_setprop_empty(fdt, offset, starfive_verb[i].name);
+-
+-		if (ret) {
+-			pr_err("%s set prop %s fail.\n", __func__, starfive_verb[i].name);
+-				break;
+-		}
+-	}
+-}
+-
+-void spl_fdt_fixup_star64(void *fdt)
+-{
+-	static const char compat[] = "pine64,star64\0starfive,jh7110";
+-	u32 phandle;
+-	u8 i;
+-	int offset;
+-	int ret;
+-
+-	fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat, sizeof(compat));
+-	fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model",
+-			   "Pine64 Star64");
+-
+-	/* gmac0 */
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@17000000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16030000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_AONCLK_GMAC0_TX);
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_AONCLK_GMAC0_RMII_RTX);
+-
+-	/* gmac1 */
+-	offset = fdt_path_offset(fdt, "/soc/clock-controller@13020000");
+-	phandle = fdt_get_phandle(fdt, offset);
+-	offset = fdt_path_offset(fdt, "/soc/ethernet@16040000");
+-
+-	fdt_setprop_u32(fdt, offset, "assigned-clocks", phandle);
+-	fdt_appendprop_u32(fdt, offset, "assigned-clocks", JH7110_SYSCLK_GMAC1_TX);
+-	fdt_setprop_u32(fdt, offset,  "assigned-clock-parents", phandle);
+-	fdt_appendprop_u32(fdt, offset,  "assigned-clock-parents",
+-			   JH7110_SYSCLK_GMAC1_RMII_RTX);
+-
+-	for (i = 0; i < ARRAY_SIZE(star64_pine64); i++) {
+-		offset = fdt_path_offset(fdt, star64_pine64[i].path);
+-
+-		if (star64_pine64[i].value)
+-			ret = fdt_setprop_u32(fdt, offset,  star64_pine64[i].name,
+-					      dectoul(star64_pine64[i].value, NULL));
+-		else
+-			ret = fdt_setprop_empty(fdt, offset, star64_pine64[i].name);
+-
+-		if (ret) {
+-			pr_err("%s set prop %s fail.\n", __func__, star64_pine64[i].name);
+-				break;
+-		}
+-	}
+-}
+-
+ void spl_perform_fixups(struct spl_image_info *spl_image)
+ {
+-	u8 version;
+-	const char *product_id;
+-
+-	product_id = get_product_id_from_eeprom();
+-	if (!product_id) {
+-		pr_err("Can't read EEPROM\n");
+-		return;
+-	}
+-	if (!strncmp(product_id, "MARC", 4)) {
+-		spl_fdt_fixup_mars_cm(spl_image->fdt_addr);
+-	} else if (!strncmp(product_id, "MARS", 4)) {
+-		spl_fdt_fixup_mars(spl_image->fdt_addr);
+-	} else if (!strncmp(product_id, "VF7110", 6)) {
+-		version = get_pcb_revision_from_eeprom();
+-		switch (version) {
+-		case 'a':
+-		case 'A':
+-			spl_fdt_fixup_version_a(spl_image->fdt_addr);
+-			break;
+-
+-		case 'b':
+-		case 'B':
+-		default:
+-			spl_fdt_fixup_version_b(spl_image->fdt_addr);
+-		break;
+-		};
+-	} else if (!strncmp(product_id, "STAR64", 6)) {
+-		spl_fdt_fixup_star64(spl_image->fdt_addr);
+-	} else {
+-		pr_err("Unknown product %s\n", product_id);
+-	};
+-
+ 	/* Update the memory size which read from eeprom or DT */
+ 	fdt_fixup_memory(spl_image->fdt_addr, 0x40000000, gd->ram_size);
+ }
 -- 
 2.43.2
 
