@@ -4,84 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BDFE64AB4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 14:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C14E64AB5
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 14:37:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 474D2895C7;
-	Tue,  3 Dec 2024 15:33:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 099A58961F;
+	Tue,  3 Dec 2024 15:37:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FGOKXTP7";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="amqBXzYF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CABB3893CB; Tue,  3 Dec 2024 15:33:13 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 682EB895F3; Tue,  3 Dec 2024 15:37:50 +0100 (CET)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47FDF89328
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 15:33:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33CC588E31
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 15:37:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733236380; x=1733841180; i=xypron.glpk@gmx.de;
- bh=oJ9ID/40+1CoQy+4+EcX+ZzU0dwUJ5IbQduRMZo/1yM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=FGOKXTP7Ljjt5JJ9y48QLHyNOQhU+HwYkRAxamZfCDIcm6AxxhWsbPGH6AYVsDQZ
- NNX6eO/bjKqmgLAYKULValcwgGwlswSvCy0ZzoCs5XUgJJ8cAkrPrI53GLgmKnUH4
- Vs6jRvQKiYEynsnFsB3V6Rjp0svgeuRPBGsiyXgVkO4atyzayjmH0UyGEpL9pRqN0
- 6Wbh7fjfi+t3PVupl+/NC2QsEiBDkHJ08y1nXI5J2hqWniKodOx7yTtBU+/3sUq+R
- +9VfCAdOwzguMpppXrYujg7Ivmkj3tP1O7fcI+9Pnjl1MGA3Z3hHaA6vqjHw/LMF3
- kRdwGITD5VEUUtfapA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MbzuB-1tnhAp04AJ-00cAYa; Tue, 03
- Dec 2024 15:33:00 +0100
-Message-ID: <20c4487c-f908-40ef-be05-1ac7eb7e8be6@gmx.de>
-Date: Tue, 3 Dec 2024 15:32:59 +0100
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rtIVimJzSHsGHW99HPYVpCFIVbx59+t5eSFhenluWe37FSvy5ZIDqStcBto1ZJ234IlOhKhGKDcrlcIMYKEYlHujtywBgPsDjkxWS1Iom0ZB0fYGlMu/vwGsoZnFTrc9NPKZKvFETNOfs3naovYgSD9U6u7VAL+KCwDdyPE7eQyofFCvFUHH6sJHwU8VAG4oTn5bgOcZd2a/F+HacaoMxBVNXEZWkWhPaMW4AP4u7VrHHOgA0PIO09JoHmxp0cRfgccLHIw05mB3Sbu6YiMDnWnBh1vJATAQ+MeBHf/Bmrzs1DM2y5lP5bwahA4OUNhHH2bNPQFQy2Ck055nWkjntA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EMuDnhOLJFH/0DUe68ENlcZteb3LzHCEeY4llQOxJ5M=;
+ b=a23qlH/EqgkbFBeS4b6WRktYYa+B0Tq2JpIvmSuc2nojOZ8RNBuZu9nMm1x+L1CXluyVv8TxtahZCFIA6H9l0NKVfbAFxXV+rgGJpYKCdQMw3hQae17F/NnT2VoMn9+yjiHALGkU5MoUL7ncjWjTls+A4WEK5FnS/hu7fd8W8TuEMMBdjrE4qXBiIhxDUBXPlyqlQo8VLmeZhdwfhReT76p21c34HUGzfNnQx7zYyhncu34/7VBQyzln37kx1w9lpJWgne/yX6kp9bbarUhA5nUy7MN9QFEMiaYQFyxjKh6idofrbzt6JQ7aI2YCZXIGOkvBxoLqtmCsjJC3JgqydQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EMuDnhOLJFH/0DUe68ENlcZteb3LzHCEeY4llQOxJ5M=;
+ b=amqBXzYF2yEctsgYsSwysaSARe2rnZq2LwkFJIAnHMv3x+kKR6wUECp/rbUkv/S5g6A9UXus9JHAgHtKtOaCPYPo4ISAIzEnUI8Qbp7M+DVkpaH1BtjFhRvagAlM4e66jCa1MAEYzSCaAVgO+cw5b9OFro0ZpmszNbQyNyztlvxw5Eud8eiFo8psalEFB7B141cB6GoKsmdssbbTxlac1/hCAFnmBB/4dCjjG96cAXZmEKBakWLqZIc+1mrhsFImA/rtvh4MxdU2hQ6lOCAsh0sIjkb8HaxKLF7miSWi7NgNmdx+zpmFEeEtGZ1/HgzWKTnvKMpJH9KUZctWbChbzA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB7541.eurprd04.prod.outlook.com (2603:10a6:20b:29a::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.19; Tue, 3 Dec
+ 2024 14:37:44 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8207.017; Tue, 3 Dec 2024
+ 14:37:44 +0000
+From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Subject: [PATCH 00/11] imx: add i.MX91 and 11x11-EVK support
+Date: Tue, 03 Dec 2024 23:42:43 +0800
+Message-Id: <20241203-imx91-v1-0-48d2eaa4519e@nxp.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPMmT2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxNDQ2MD3czcCktDXcuUVFMji0TDRJM0IyWg2oKi1LTMCrA50bG1tQCNcHJ
+ XVwAAAA==
+X-Change-ID: 20241130-imx91-9de528a1a4f2
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+X-Mailer: b4 0.14.2
+X-ClientProxiedBy: JH0PR01CA0025.apcprd01.prod.exchangelabs.com
+ (2603:1096:990:5a::19) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 09/25] efi_loader: Use the enum for memory type
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>,
- Moritz Fischer <moritzf@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-10-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241201152505.1666789-10-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:FuB9SpxtsnLUc/YvZ04Ndj9naafiSVrhi5idt3jw0Mwzd5hA07h
- hscNtXHds9nG9JocxtDud2a1mGSauWJFPZkwc4qEy8xWA2GyrjvT+ql26Dp+BcB4bnRTjNU
- a6nG8TAc9Zl21uCfnqy1jJQaABXEK1IuCFUEwRE9vexwpFBHpSwuEu4Y14lrFk9/C2+5LgH
- QZP+wyt012fHTm663LZvA==
-UI-OutboundReport: notjunk:1;M01:P0:z0KBbbTn1FM=;hbZ5PusaCzGRwHlBngDM5Qd6CQy
- OZEeNBs4Kkkcy4gNTIcmmHJ0PJale/YCAFwuNufnIiiNi4v8ZTCzprhwJjqOF4fwBqydTtLDv
- 7+LLAaRtL+mFtlCbZvzR0EvExdzYkqGE7mm8vPbbsWndorM216FbiWvaSVqqf18Wy0aP7mqb9
- Kd6zV6Gmbt3yz8y4UNxKerIP57ffEcZMTL94V2nc2Gpx4xjkydUmrLxSNyLTnzU0utAP3Oz7z
- gIeHP2GRDv7kNhYOnLA2D2fqC4dCliVHyGFi6NwlDRmDyGuDtV0BX8a/SeGrBmxDz/3+M0Pz+
- HnAuep1o0rfqBg0of3ekXy/Nk4gAPJOcsviDyRvfuskzy0iVyU/76k7dN/CPxwgjK//Dgmh/h
- Y/yFE241l84RYvpK6tM5Kg0lQB0Wx+XO3APpNkRqOmTFRGH7reo2XMeNvZ5xFjRKBmJ7y1ojy
- 7Hak4SUMBUZrsOzA0CAIt0EgchwzfP5ur2juc0ue8TiKFwk9DjMlRjbY4EH3MKPVaKxz17mjK
- dxUM4pTj5WJixv5b933lgxdHO/q5ja+opfpq5ajP+OfhA4NKpmKE08uZ8+8/2ERzrU3FPiJfH
- p5QcHZU+qRC0eauff1C7IGUUF/zY0qKwnwNZp8cxzDbsp7YZ+unim0dXloEpXCDepd8HuRyOi
- S0tT7VGd+hwdc2S85dKV9KkmtduKB6HD8xnL/O5DU/d5lBbh7CbzP5Hr9gesCmoZYppDUDd6z
- /HqklLFAqTNykrnjELQ8kAat6vU5MDpqiScYvqoeq1iFkfbD98mVxTAda60OZw+JkM4ni0aF0
- q5nwu7YASBB7gLATXvh7u8m5vpy6Ol0g3IV5Fm5xyfZI6SzarUBdBDwcgfq/ADU+ViJmo3lPX
- GlCUMin6v4q7BrCmT7uKpib8jWbsxBWBP/qLYnpfzFql3ofVmFhZwI4PGUqZ5lBy8avZLCpMF
- tBOgnwRt7ZNs9xvKDFElTUCzcGLcEVBYc0kzP7N9UjTF6kqcqrjbc/7L1pdn2Ga/qIGxmjnaS
- vufrdVSHlIZuclADyfKIyfCbeN6afJV751YjY5V3UTRURFUaKWlf+5J6t/3rmM1Wz0djEaL/h
- 5ykCvmDWiTRwOeqo+DpYLXfNx+xG2b
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AS8PR04MB7541:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3a2e2b27-1abe-4dea-315e-08dd13a80cb5
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?L1FDTncrVlZPZTJXTVc4V3VkUngzVnRMVkhiME1LWmZVZk94RFpmMkJEYjMx?=
+ =?utf-8?B?QjR2b2VBSm8xTUhMY2Qzc254M1FIWFIwUStRT2RGQ3pFQlUxTXBPOW1XUXJj?=
+ =?utf-8?B?N0xRbzdEclRIYXJHaFFTVGFFakRZZXFNT3B2NDRPZ1Nld2RmdlhHNnVNdzBB?=
+ =?utf-8?B?Ym8veEt0V0c1Ymx4eUJvTDlBb1Y0cjB4WXJqVEJlR1Uza2UvZ0ZjUDIxcEtk?=
+ =?utf-8?B?R29QYmtVUEtyMEtQdERCWFVQWFlMR2U1dksvZGx5dVNNOXpLaE0rV1NISEdq?=
+ =?utf-8?B?QWxxdHkySi9BNkJ4QWRoVFdRcVpXRzgxc1VGTEJIN3FyN2M0Tjc4QzFaMmtR?=
+ =?utf-8?B?LzFrUVJpdnFLMC9QTzFHUHNQOEVnWjFxMnVDcWZ1VERzNzFzb0hHMjNDalNB?=
+ =?utf-8?B?Z2VTdkRWK2NXVmxzNHYxMFgvekd5c09QdUlieW9jQXU1bUpncXh0N0RIZUJ1?=
+ =?utf-8?B?eXBRVFdzOC9LOVJXczlReEpMbmFVYkREUmwxTkF3WDJPL1cwS0ZsY015RmdD?=
+ =?utf-8?B?NzdVQW5TbnJXM24wa3RaSlhiaHlPL0IzenBKR2hkUVViejQvNVFlcU0xeHlQ?=
+ =?utf-8?B?bmU5NmVubGZZelVsL1ROZTZXVWQrR2RHQ3lyVk93QjhkbGREcitUNCtWN3Rz?=
+ =?utf-8?B?cWh6enJOK1loQU9OK1ZINHZKM1BIUU1wclUwNmNULzdsS3lNM2xUbVFpUmRW?=
+ =?utf-8?B?bngvUmY3ZGQzV05YSHNRa3FaQ3c5T3FnYlg0a0Z6RE94OWlPOXpueWZuN0J0?=
+ =?utf-8?B?dXJMYXhNdGlTVldxOXRGU3FPTjlEcnordEo4dG5OZkVoeGJlRm5KcTc4Vk41?=
+ =?utf-8?B?aXBqQ2wyWlU2TTF6NFcrVU0rZ0R6Qit6QTNmVU9SZGl1Y2NRUkorSlFKZDNM?=
+ =?utf-8?B?NTZaR3BpN1pCNnFtOFpUMWlLY0hWSzdRRE9PUHJHdDJWd0RnMWM5TVVEaHor?=
+ =?utf-8?B?TVlRdG1XNC9TVTJndFlnZWttNkN6aG5rSWxhQVkyNGRQajdrNmNJeWV1bjFU?=
+ =?utf-8?B?cHI3eTg3dWs0VlBQWlNCVDc1STR6aEhFSTZtVWI3Z0JsYTNvZlU0NGxqdGR0?=
+ =?utf-8?B?RHh0YlFYdGMxL05VakM4VXl1a0p6aU45cHg1ek1kY2Rab09Rekh5YmpzMnJ5?=
+ =?utf-8?B?OHJYTlRjYm9XZjg5T1NVT1ZFejIrMFh3QUdzWGoyTW5JanVLRWp5R3o1Z2pZ?=
+ =?utf-8?B?aGNjR2VRS1U4bzZEKzZDbVAybDlTSlRKbWJPZDVZOTVmSFlOSEVQNWVpS2dP?=
+ =?utf-8?B?WFI5Sjgya2pPNFNSL0pmbHNDVXVROTloTnFOblpFY3FWcnMraEpCSXhDb0Jt?=
+ =?utf-8?B?TVFaaGd4cUVmOEZ6cU1qdEN1U1NnUmJUR05JbXFkaXpZNlJ6cVhVRHh4d0tl?=
+ =?utf-8?B?enMvOG5EZXRLTzJjSEFudjFjaEFQVUd6ZVFsa3lSaW02cERrNk42emJELytn?=
+ =?utf-8?B?U2xyUHNtNzhNcmh3ckN5SGd6VjloSHluZHVHRkhoWlNYeEM1U0JwMHRBRnUx?=
+ =?utf-8?B?bHpGNWRScE9yRko1V2xEcnRXM1RtS2ZHWUlDUWhVRHEvdHI5ZzcxSzQxaFc3?=
+ =?utf-8?B?ZTNKWFNCNmF4cFc0QzN6R1dmSDVUZFF0NzhMc1VvZVg3Z3NFandPa3pwbytv?=
+ =?utf-8?B?UjBRelVSL0N2UjQ4QThaT0dNcmxoTjhlNTkza3Q2SENtdm5ZNHU5TjFGb1hh?=
+ =?utf-8?B?NUNoYytCSmtmS3JPTnFhdllrUjZHRGFuWkgrU2dxUmJvWXF1c2c2Z2pzbXBC?=
+ =?utf-8?B?UkQwYklNT3VlR1F3Z0NWRmtTcnVPck9wOHFkc2VPMnhjTHZudmk4WUE3V0NV?=
+ =?utf-8?B?bXVCR1FGUWZJZTZuRmFLYmpUUGw1d2dndFcxV01lTUdDdHZIQ0wxa2lSc2JC?=
+ =?utf-8?B?N25JK1VLRHZCZE5PUWV0ZHV0R3U2TEJDMllMWXhuMHo3eFE9PQ==?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QWlFVkgrbk45MG5pLzMwT0VObC9qSFExakdOZ0JUOXhWdGFIV0dMV280U1dF?=
+ =?utf-8?B?M3BCSjNpbGFWWW1Na0cyRS9yTVlaVEppeU5EQlNMUjA2MlFORjlGT3pqbjVM?=
+ =?utf-8?B?ZUdVdWwyZUk3enp6WUd2MDNXYUUxSmdkdFVIWnhJQVJNdU9CaFludjRCRFNw?=
+ =?utf-8?B?ckdvbXFvdlNNYUFraFZCNHMxT0kwaG9QaUpvUUo1dzhkcEZpUWtqQVZUa0Er?=
+ =?utf-8?B?RXpOSGpzeEMwVHhRT1ZXS2picDlhaG9UdXRaZUxyOUppRERjeU4zSkw1SWFD?=
+ =?utf-8?B?Vk54VzZSM0hicEFQTEU1SWNiQ2lpNmVPS0t3c3crQWdYM2gzdVJRc0NyemVo?=
+ =?utf-8?B?Ty9YWjBDeDVVc1NJN01MRE5yZnEyY1dzaG5TWlJGUHpuYmhzSkthV3VmMTk3?=
+ =?utf-8?B?K0J4bG5DWnJnYVJyUWNSSmN5UXY5Q25TUmwzVXZyeXQ0Nkcyek1qRHh0OGVW?=
+ =?utf-8?B?b0xjUjVFeE1RUXFWRW84ZlUvMW91NzRwSFZqTGpGOEtDajlHZFFCWU1RVkY2?=
+ =?utf-8?B?WFphZ1FDL2c0UTZCaHd6UU5vVHE4SmR2QmdmWHhGSWc4Q3hLdmsvbG9tMXRR?=
+ =?utf-8?B?dTh4UE9zS1MwbW9WNkN2T3NpY08zZlZVdHpkY0JWVGVNdGkzdjBmRk9JNEJK?=
+ =?utf-8?B?eHJBbklvK0JzSGwxOFZtTmY2VUVzMTlqbm9vVDZBc2RNaWNXN3N1VU9RTC9h?=
+ =?utf-8?B?dFIrY2ZzNGd1cTNzRHNYZ3ZCaUdJM0JhLzNkdlB1OWlnQU9Cd1QrSnd0eDVx?=
+ =?utf-8?B?RjZwRWZyZEJ6MGxpSTNKQkFnSnFmNko0UFJmNjQ1dElBTjdvSjN3RzhEMXN1?=
+ =?utf-8?B?UzhHMllzckFMYjczQVBHUHJCandlOG9zUlo2WlVQN2NqQktTd01XL1RDUklW?=
+ =?utf-8?B?YVhGNGxHRFphM01iNXBLWGhrRjFCZ3cwNEVnUEpNakVmdnFwdzFkZWhuSTBo?=
+ =?utf-8?B?N3pvOTg0SC9JOHRKc3BnYTdPblpCeFlOMHZReGluSEpoMzVmQzA3a2taV2hq?=
+ =?utf-8?B?ZDFNWWlEZVFvQU12ODJ1Mnd3T2NmRHdyMGZRNUdXOWNILzR4UDdoR1Z4VGhi?=
+ =?utf-8?B?WTJNWWpWSU9CV1hUN1ptN1Q2bloxVWVqNmt3U000d0NUWTZoYVpNVnJnZVg0?=
+ =?utf-8?B?TW1Jc2kwdnR6VUZmUWdiY2ZQRVhmR2hnL1dlREJkUno5MXBJdTl2UldmakQw?=
+ =?utf-8?B?akpZMmIzN2d0eWdvMXRRRUdObnVvTlg1MlNkeHkxVlMzL3VIdTVONDc4ZGg4?=
+ =?utf-8?B?OGVvNzBSYkRyRGhwUU8zM3I4Z0RPSjFiRVlTT2RQaWp5WWxnd2ZEQ1pwTVla?=
+ =?utf-8?B?R1BPM0dOdjVuSFRnNnpsbXloMm9mVmx4U3krMWtRTng5bFRVZ2ptdWJ6RE1j?=
+ =?utf-8?B?alU0Z3BPQWNDWGlVaFpJbFJpMnh5QWN5SUo2U1ZPcjdXUXp3RWpGbFJqYmZs?=
+ =?utf-8?B?cG5yMHJTVEt3Z2w0ZTliQUtLbEJEcFVsRStyem8yQmRPU0VMSUNVd1pEK1NR?=
+ =?utf-8?B?V3hiVFlGZUFuL3doSlpuUHZ6Rm9QTStPaFh3SExwS1JpZ2NBSUxqMGh0VFZJ?=
+ =?utf-8?B?OWE5TWJqNDhlei9tdXFkcERlWm1SZVNOZ3Bta056aUJPN1BqRkF1T2Jud3Uv?=
+ =?utf-8?B?cHI2K0x3NXF1YThhMGh0dCs3dkFFMm4xSnJycDB0a29sTnRzYWdSQkdkcDJF?=
+ =?utf-8?B?UStnRGRrbTBLS2xuL3BpSVFqMm5qQmVXWGFnUjRhS3FGMUtVQWtmMFBtRDA2?=
+ =?utf-8?B?RFhLZ3lzMHc1SWdoaVBGaWZKdnI3bUNoSUgwdEFQa0NWNWUvQjR2cEwrY0NS?=
+ =?utf-8?B?TXFIRWNnQkNTYTAyMFlWYVovOE5KdXdFcWlrM2dnOU1xbHIreUh2S25ScGNy?=
+ =?utf-8?B?S2ZFWWtTMG1LSFAxanJOKzhWVVZQeXJ3NThuWDh3SnRwU0pHYlBNZCtDOWtS?=
+ =?utf-8?B?Tyt1VEhSaERBSFlSQmhMc3N0Rmp1TEVKemIxR012MG1pd01VOFFydVJBT3M5?=
+ =?utf-8?B?UFBMMVJIUndjMjVvNW5xWUN2L1RSSk5BS09zM3g2aFp6UVNCRXBHL3kwU05a?=
+ =?utf-8?B?MlZUZC80ZHM4bWoxTGFzTjdsc3NmNzRzMmJhamlxQkNIYklmTW1uMUR2NzMw?=
+ =?utf-8?Q?pKr6pGN/XdhkZOoGrmiMeC2xO?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3a2e2b27-1abe-4dea-315e-08dd13a80cb5
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2024 14:37:44.7939 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FbV+5HO4M0dvOn3khWY9ON5IlPEZLHgVmdZu/aWlPobXdaySPnnReDjJ/yDl7V9StVp4cEhwIc8K0tXTYJExcw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7541
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,390 +179,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.12.24 16:24, Simon Glass wrote:
-> Rather than an integer, it is better to use the enum provided, when
-> referring to an EFI memory-type. Update existing uses.
->
-> Call the value 'mem_type' consistently. Fix up one instance of
-> upper-case hex.
->
-> Fix up the calls in struct efi_boot_services so that they use the same
-> enum, adding the missing parameter names and enum efi_allocate_type.
->
-> While we are here, rename the 'memory' parameter to 'memoryp' so that it
-> is clear it is a return value.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+iMX91 is reduced part from iMX93 with part number with some IPs removed
+[1]. The i.MX 91 family features an Cortex-A55 running at up to 1.4GHz,
+and supports for LPDDR4 memory.
 
-Simon, I have no clue why you keep ignoring reviews.
-This is just annoying and won't lead to merging patches.
+Patch 1-4 are fixes when developing i.MX91 support.
+Patch 5-11 are to support i.MX91 and 11x11-EVK.
 
-NAK
+CI: https://dev.azure.com/pengfan/uboot-ci/_build/results?buildId=4
 
-Best regards
+Bootlog:
 
-Heinrich
+U-Boot SPL 2025.01-rc3-00092-gc065e3b6a3ec-dirty (Dec 03 2024 - 18:24:41 +0800)
+PMIC: Nominal Voltage Mode
+DDR: 2400MTS
+Normal Boot
+Trying to boot from BOOTROM
+Boot Stage: Primary boot
+image offset 0x8000, pagesize 0x200, ivt offset 0x0
+Load image from 0x4b800 by ROM_API
+NOTICE:  TRDC init done
+NOTICE:  BL31: v2.10.0  (release):lf-6.6.36-2.1.0-rc3-dirty
+NOTICE:  BL31: Built : 13:31:37, Dec  2 2024
 
+U-Boot 2025.01-rc3-00092-gc065e3b6a3ec-dirty (Dec 03 2024 - 18:24:41 +0800)
 
-> ---
->
-> (no changes since v2)
->
-> Changes in v2:
-> - Drop the changes to the boottime API
->
->   include/efi_loader.h             | 29 ++++++++++----------
->   lib/efi_loader/efi_boottime.c    | 12 ++++-----
->   lib/efi_loader/efi_device_path.c |  4 +--
->   lib/efi_loader/efi_memory.c      | 46 +++++++++++++++++---------------
->   4 files changed, 47 insertions(+), 44 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 3f75f2efcb6..a7228672f27 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -773,24 +773,25 @@ void *efi_alloc(size_t len);
->    * efi_alloc_aligned_pages() - allocate aligned memory pages
->    *
->    * @len:		len in bytes
-> - * @memory_type:	usage type of the allocated memory
-> + * @mem_type:		usage type of the allocated memory
->    * @align:		alignment in bytes
->    * Return:		aligned memory or NULL
->    */
-> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
-> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
-> +			      size_t align);
->
->   /**
->    * efi_allocate_pages - allocate memory pages
->    *
->    * @type:		type of allocation to be performed
-> - * @memory_type:	usage type of the allocated memory
-> + * @mem_type:		usage type of the allocated memory
->    * @pages:		number of pages to be allocated
-> - * @memory:		returns a pointer to the allocated memory
-> + * @memoryp:		returns a pointer to the allocated memory
->    * Return:		status code
->    */
->   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> -				enum efi_memory_type memory_type,
-> -				efi_uintn_t pages, uint64_t *memory);
-> +				enum efi_memory_type mem_type,
-> +				efi_uintn_t pages, uint64_t *memoryp);
->
->   /**
->    * efi_free_pages() - free memory pages
-> @@ -804,12 +805,12 @@ efi_status_t efi_free_pages(uint64_t memory, efi_u=
-intn_t pages);
->   /**
->    * efi_allocate_pool - allocate memory from pool
->    *
-> - * @pool_type:	type of the pool from which memory is to be allocated
-> + * @mem_type:	memory type of the pool from which memory is to be alloca=
-ted
->    * @size:	number of bytes to be allocated
->    * @buffer:	allocated memory
->    * Return:	status code
->    */
-> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type,
-> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type,
->   			       efi_uintn_t size, void **buffer);
->
->   /**
-> @@ -837,14 +838,14 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memor=
-y_map_size,
->    *			actually a pointer provided as an integer. To pass in
->    *			an address, pass in (ulong)map_to_sysmem(addr)
->    * @size:		length in bytes of the memory area
-> - * @memory_type:	type of memory added
-> - *
-> + * @mem_type:		EFI type of memory added
->    * Return:		status code
->    *
->    * This function automatically aligns the start and size of the memory=
- area
->    * to EFI_PAGE_SIZE.
->    */
-> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
-> +efi_status_t efi_add_memory_map(u64 start, u64 size,
-> +				enum efi_memory_type mem_type);
->
->   /**
->    * efi_add_memory_map_pg() - add pages to the memory map
-> @@ -854,13 +855,13 @@ efi_status_t efi_add_memory_map(u64 start, u64 siz=
-e, int memory_type);
->    * in (ulong)map_to_sysmem(addr)
->    *
->    * @pages:			number of pages to add
-> - * @memory_type:		EFI type of memory added
-> + * @mem_type:		EFI type of memory added
->    * @overlap_conventional:	region may only overlap free(conventional)
->    *				memory
->    * Return:			status code
->    */
->   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> +				   enum efi_memory_type mem_type,
->   				   bool overlap_conventional);
->
->   /* Called by board init to initialize the EFI drivers */
-> @@ -919,7 +920,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_=
-desc *desc, int part);
->   struct efi_device_path *efi_dp_from_file(const struct efi_device_path =
-*dp,
->   					 const char *path);
->   struct efi_device_path *efi_dp_from_eth(void);
-> -struct efi_device_path *efi_dp_from_mem(uint32_t mem_type,
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
->   					uint64_t start_address,
->   					size_t size);
->   /* Determine the last device path node that is not the end node. */
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index f27b3827ed2..334a4d64b3f 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -415,9 +415,9 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old_t=
-pl)
->   /**
->    * efi_allocate_pages_ext() - allocate memory pages
->    * @type:        type of allocation to be performed
-> - * @memory_type: usage type of the allocated memory
-> + * @mem_type:    usage type of the allocated memory
->    * @pages:       number of pages to be allocated
-> - * @memory:      allocated memory
-> + * @memoryp:     allocated memory
->    *
->    * This function implements the AllocatePages service.
->    *
-> @@ -426,14 +426,14 @@ static void EFIAPI efi_restore_tpl(efi_uintn_t old=
-_tpl)
->    *
->    * Return: status code
->    */
-> -static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int memory_=
-type,
-> +static efi_status_t EFIAPI efi_allocate_pages_ext(int type, int mem_typ=
-e,
->   						  efi_uintn_t pages,
-> -						  uint64_t *memory)
-> +						  uint64_t *memoryp)
->   {
->   	efi_status_t r;
->
-> -	EFI_ENTRY("%d, %d, 0x%zx, %p", type, memory_type, pages, memory);
-> -	r =3D efi_allocate_pages(type, memory_type, pages, memory);
-> +	EFI_ENTRY("%d, %d, 0x%zx, %p", type, mem_type, pages, memoryp);
-> +	r =3D efi_allocate_pages(type, mem_type, pages, memoryp);
->   	return EFI_EXIT(r);
->   }
->
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
-e_path.c
-> index ee387e1dfd4..9c8cd35b97b 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -975,7 +975,7 @@ struct efi_device_path __maybe_unused *efi_dp_from_e=
-th(void)
->   }
->
->   /* Construct a device-path for memory-mapped image */
-> -struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
-> +struct efi_device_path *efi_dp_from_mem(enum efi_memory_type mem_type,
->   					uint64_t start_address,
->   					size_t size)
->   {
-> @@ -990,7 +990,7 @@ struct efi_device_path *efi_dp_from_mem(uint32_t mem=
-ory_type,
->   	mdp->dp.type =3D DEVICE_PATH_TYPE_HARDWARE_DEVICE;
->   	mdp->dp.sub_type =3D DEVICE_PATH_SUB_TYPE_MEMORY;
->   	mdp->dp.length =3D sizeof(*mdp);
-> -	mdp->memory_type =3D memory_type;
-> +	mdp->memory_type =3D mem_type;
->   	mdp->start_address =3D start_address;
->   	mdp->end_address =3D start_address + size;
->   	buf =3D &mdp[1];
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 9d0f27dbb3e..3cece51f030 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -258,7 +258,7 @@ static s64 efi_mem_carve_out(struct efi_mem_list *ma=
-p,
->   }
->
->   efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
-> -				   int memory_type,
-> +				   enum efi_memory_type mem_type,
->   				   bool overlap_conventional)
->   {
->   	struct efi_mem_list *lmem;
-> @@ -268,10 +268,10 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	struct efi_event *evt;
->
->   	EFI_PRINT("%s: 0x%llx 0x%llx %d %s\n", __func__,
-> -		  start, pages, memory_type, overlap_conventional ?
-> +		  start, pages, mem_type, overlap_conventional ?
->   		  "yes" : "no");
->
-> -	if (memory_type >=3D EFI_MAX_MEMORY_TYPE)
-> +	if (mem_type >=3D EFI_MAX_MEMORY_TYPE)
->   		return EFI_INVALID_PARAMETER;
->
->   	if (!pages)
-> @@ -281,12 +281,12 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	newlist =3D calloc(1, sizeof(*newlist));
->   	if (!newlist)
->   		return EFI_OUT_OF_RESOURCES;
-> -	newlist->desc.type =3D memory_type;
-> +	newlist->desc.type =3D mem_type;
->   	newlist->desc.physical_start =3D start;
->   	newlist->desc.virtual_start =3D start;
->   	newlist->desc.num_pages =3D pages;
->
-> -	switch (memory_type) {
-> +	switch (mem_type) {
->   	case EFI_RUNTIME_SERVICES_CODE:
->   	case EFI_RUNTIME_SERVICES_DATA:
->   		newlist->desc.attribute =3D EFI_MEMORY_WB | EFI_MEMORY_RUNTIME;
-> @@ -370,14 +370,15 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 =
-pages,
->   	return EFI_SUCCESS;
->   }
->
-> -efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
-> +efi_status_t efi_add_memory_map(u64 start, u64 size,
-> +				enum efi_memory_type mem_type)
->   {
->   	u64 pages;
->
->   	pages =3D efi_size_in_pages(size + (start & EFI_PAGE_MASK));
->   	start &=3D ~EFI_PAGE_MASK;
->
-> -	return efi_add_memory_map_pg(start, pages, memory_type, false);
-> +	return efi_add_memory_map_pg(start, pages, mem_type, false);
->   }
->
->   /**
-> @@ -416,8 +417,8 @@ static efi_status_t efi_check_allocated(u64 addr, bo=
-ol must_be_allocated)
->   }
->
->   efi_status_t efi_allocate_pages(enum efi_allocate_type type,
-> -				enum efi_memory_type memory_type,
-> -				efi_uintn_t pages, uint64_t *memory)
-> +				enum efi_memory_type mem_type,
-> +				efi_uintn_t pages, uint64_t *memoryp)
->   {
->   	u64 efi_addr, len;
->   	uint flags;
-> @@ -425,10 +426,9 @@ efi_status_t efi_allocate_pages(enum efi_allocate_t=
-ype type,
->   	phys_addr_t addr;
->
->   	/* Check import parameters */
-> -	if (memory_type >=3D EFI_PERSISTENT_MEMORY_TYPE &&
-> -	    memory_type <=3D 0x6FFFFFFF)
-> +	if (mem_type >=3D EFI_PERSISTENT_MEMORY_TYPE && mem_type <=3D 0x6fffff=
-ff)
->   		return EFI_INVALID_PARAMETER;
-> -	if (!memory)
-> +	if (!memoryp)
->   		return EFI_INVALID_PARAMETER;
->   	len =3D (u64)pages << EFI_PAGE_SHIFT;
->   	/* Catch possible overflow on 64bit systems */
-> @@ -447,17 +447,17 @@ efi_status_t efi_allocate_pages(enum efi_allocate_=
-type type,
->   		break;
->   	case EFI_ALLOCATE_MAX_ADDRESS:
->   		/* Max address */
-> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
-> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
->   		addr =3D (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, addr,
->   						 flags);
->   		if (!addr)
->   			return EFI_OUT_OF_RESOURCES;
->   		break;
->   	case EFI_ALLOCATE_ADDRESS:
-> -		if (*memory & EFI_PAGE_MASK)
-> +		if (*memoryp & EFI_PAGE_MASK)
->   			return EFI_NOT_FOUND;
->
-> -		addr =3D map_to_sysmem((void *)(uintptr_t)*memory);
-> +		addr =3D map_to_sysmem((void *)(uintptr_t)*memoryp);
->   		addr =3D (u64)lmb_alloc_addr_flags(addr, len, flags);
->   		if (!addr)
->   			return EFI_NOT_FOUND;
-> @@ -469,7 +469,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->
->   	efi_addr =3D (u64)(uintptr_t)map_sysmem(addr, 0);
->   	/* Reserve that map in our memory maps */
-> -	ret =3D efi_add_memory_map_pg(efi_addr, pages, memory_type, true);
-> +	ret =3D efi_add_memory_map_pg(efi_addr, pages, mem_type, true);
->   	if (ret !=3D EFI_SUCCESS) {
->   		/* Map would overlap, bail out */
->   		lmb_free_flags(addr, (u64)pages << EFI_PAGE_SHIFT, flags);
-> @@ -477,7 +477,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_ty=
-pe type,
->   		return  EFI_OUT_OF_RESOURCES;
->   	}
->
-> -	*memory =3D efi_addr;
-> +	*memoryp =3D efi_addr;
->
->   	return EFI_SUCCESS;
->   }
-> @@ -515,7 +515,8 @@ efi_status_t efi_free_pages(uint64_t memory, efi_uin=
-tn_t pages)
->   	return ret;
->   }
->
-> -void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> +void *efi_alloc_aligned_pages(u64 len, enum efi_memory_type mem_type,
-> +			      size_t align)
->   {
->   	u64 req_pages =3D efi_size_in_pages(len);
->   	u64 true_pages =3D req_pages + efi_size_in_pages(align) - 1;
-> @@ -533,12 +534,12 @@ void *efi_alloc_aligned_pages(u64 len, int memory_=
-type, size_t align)
->   		return NULL;
->
->   	if (align < EFI_PAGE_SIZE) {
-> -		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
-> +		r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
->   				       req_pages, &mem);
->   		return (r =3D=3D EFI_SUCCESS) ? (void *)(uintptr_t)mem : NULL;
->   	}
->
-> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, memory_type,
-> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type,
->   			       true_pages, &mem);
->   	if (r !=3D EFI_SUCCESS)
->   		return NULL;
-> @@ -559,7 +560,8 @@ void *efi_alloc_aligned_pages(u64 len, int memory_ty=
-pe, size_t align)
->   	return (void *)(uintptr_t)aligned_mem;
->   }
->
-> -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uint=
-n_t size, void **buffer)
-> +efi_status_t efi_allocate_pool(enum efi_memory_type mem_type, efi_uintn=
-_t size,
-> +			       void **buffer)
->   {
->   	efi_status_t r;
->   	u64 addr;
-> @@ -575,7 +577,7 @@ efi_status_t efi_allocate_pool(enum efi_memory_type =
-pool_type, efi_uintn_t size,
->   		return EFI_SUCCESS;
->   	}
->
-> -	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> +	r =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, mem_type, num_pages,
->   			       &addr);
->   	if (r =3D=3D EFI_SUCCESS) {
->   		alloc =3D (struct efi_pool_allocation *)(uintptr_t)addr;
+Reset Status: POR
+
+CPU:   NXP i.MX91(31) Rev1.0 A55 at 1400 MHz
+CPU:   Consumer temperature grade  (0C to 95C)
+Model: NXP i.MX91 11X11 EVK board
+DRAM:  2 GiB
+Core:  216 devices, 24 uclasses, devicetree: separate
+WDT:   Started watchdog@42490000 with servicing every 1000ms (40s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Reading from MMC(1)... *** Warning - bad CRC, using default environment
+
+In:    serial@44380000
+Out:   serial@44380000
+Err:   serial@44380000
+
+BuildInfo:
+  - ELE firmware version 2.0.0-64d8ef47
+
+switch to partitions #0, OK
+mmc1 is current device
+Net:
+Warning: ethernet@428a0000 (eth1) using random MAC address - 62:b9:61:81:d0:f8
+eth1: ethernet@428a0000 [PRIME]
+Hit any key to stop autoboot:  0
+
+[1] https://www.nxp.com/products/processors-and-microcontrollers/arm-processors/i-mx-applications-processors/i-mx-9-processors/secure-energy-efficient-i-mx-91-family-brings-essential-linux-capabilities-for-thousands-of-edge-applications:i.MX91
+
+Signed-off-by: Peng Fan <peng.fan@nxp.com>
+---
+Peng Fan (8):
+      gpio: imx_rgpio2p: Move 8ulp_data to data section
+      imx9: trdc: correct DEBUG usage
+      imx9: gpio: include types.h header
+      imx: Add iMX91 support
+      clk: imx93: support i.MX91
+      pinctrl: imx93: support i.MX91
+      arm64: dts: add NXP i.MX91 device tree
+      imx: Support i.MX91 11x11 EVK board
+
+Ye Li (3):
+      imx93: Update 9x9 part fuses checking
+      clk: imx: clk-fracn-gppll: Add new PLL rate
+      ddr: imx: Add new rates for i.MX91
+
+ arch/arm/dts/imx91-11x11-evk-u-boot.dtsi           |  195 ++
+ arch/arm/dts/imx91-u-boot.dtsi                     |   92 +
+ arch/arm/include/asm/arch-imx/cpu.h                |    5 +
+ arch/arm/include/asm/arch-imx9/clock.h             |    7 +
+ arch/arm/include/asm/arch-imx9/gpio.h              |    2 +
+ arch/arm/include/asm/arch-imx9/imx91_pins.h        |  770 ++++++++
+ arch/arm/include/asm/mach-imx/iomux-v3.h           |    2 +-
+ arch/arm/include/asm/mach-imx/sys_proto.h          |    6 +
+ arch/arm/mach-imx/imx9/Kconfig                     |   13 +
+ arch/arm/mach-imx/imx9/clock.c                     |   37 +-
+ arch/arm/mach-imx/imx9/container.cfg               |    6 +-
+ arch/arm/mach-imx/imx9/imximage.cfg                |    6 +-
+ arch/arm/mach-imx/imx9/soc.c                       |   47 +-
+ arch/arm/mach-imx/imx9/trdc.c                      |    2 +-
+ board/freescale/imx91_evk/Kconfig                  |   19 +
+ board/freescale/imx91_evk/MAINTAINERS              |    7 +
+ board/freescale/imx91_evk/Makefile                 |   16 +
+ board/freescale/imx91_evk/imx91_evk.c              |   33 +
+ board/freescale/imx91_evk/imx91_evk.env            |   63 +
+ board/freescale/imx91_evk/lpddr4_timing_1600mts.c  | 1995 ++++++++++++++++++++
+ .../imx91_evk/lpddr4_timing_1600mts_ecc.c          | 1995 ++++++++++++++++++++
+ board/freescale/imx91_evk/lpddr4_timing_2400mts.c  | 1995 ++++++++++++++++++++
+ .../imx91_evk/lpddr4_timing_2400mts_ecc.c          | 1995 ++++++++++++++++++++
+ board/freescale/imx91_evk/spl.c                    |  167 ++
+ configs/imx91_11x11_evk_defconfig                  |  145 ++
+ configs/imx91_11x11_evk_inline_ecc_defconfig       |  146 ++
+ doc/board/nxp/imx91_11x11_evk.rst                  |   70 +
+ doc/board/nxp/index.rst                            |    1 +
+ drivers/clk/imx/clk-fracn-gppll.c                  |    5 +-
+ drivers/clk/imx/clk-imx93.c                        |   52 +-
+ drivers/cpu/imx8_cpu.c                             |   10 +
+ drivers/ddr/imx/phy/ddrphy_utils.c                 |    8 +
+ drivers/gpio/imx_rgpio2p.c                         |    2 +-
+ drivers/pinctrl/nxp/pinctrl-imx93.c                |    1 +
+ .../include/dt-bindings/clock/imx93-clock.h        |    6 +-
+ .../src/arm64/freescale/imx91-11x11-evk.dts        |  875 +++++++++
+ dts/upstream/src/arm64/freescale/imx91-pinfunc.h   |  770 ++++++++
+ dts/upstream/src/arm64/freescale/imx91.dtsi        |   70 +
+ include/configs/imx91_evk.h                        |   21 +
+ 39 files changed, 11617 insertions(+), 40 deletions(-)
+---
+base-commit: 98dd010b311e68b8398428cadf56a6381f7de202
+change-id: 20241130-imx91-9de528a1a4f2
+
+Best regards,
+-- 
+Peng Fan <peng.fan@nxp.com>
 
