@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A56E6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BD7AE6C5E3
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:20:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2A558958B;
-	Tue,  3 Dec 2024 01:20:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0EB99895EC;
+	Tue,  3 Dec 2024 01:20:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CdyKUmej";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PQBlZ5LJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D1188A0A; Tue,  3 Dec 2024 01:20:27 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id B38F8895A9; Tue,  3 Dec 2024 01:20:34 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A439E8953B
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:20:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74708895B9
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:20:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d0bdeb0419so3872424a12.1
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:20:25 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa55da18f89so743967466b.0
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:20:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185225; x=1733790025; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=77lDfkVfo4kJjoL6MsAUXaQTK2sR+PJf7QJ62Gk9dUk=;
- b=CdyKUmejaeDrruAOk2mdk/+IRL6bKxjsw0/ezQnjIBjEeLfmLXW+042JlYlb8Sbz0N
- 76j9wokpO54Y+ZFxo4sQL3PoG3B6yRZCag+t1RN5vvAsm3m+PA6hfdD7PmQT/0MdKZVu
- ZyNOv5tXv1jLd9Y2PjlRYwZxkoo0TJljwfKU8=
+ d=chromium.org; s=google; t=1733185232; x=1733790032; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lBHeFqeuepA8wtOMgLftMdsPDKoA9F/+WYORnNMw6is=;
+ b=PQBlZ5LJcPEnyNdHHfiaFEC2zDuj+aLUbcDpf5SUa0EJd/xskPolrheBYr8e+3Vmfd
+ TMyC3O7OcclQ0JjvG9zaLYlTbAZs4LSsHCPQfQSTUIkFSxfn6PXrfexDNtp+pw4Q5cEB
+ 0Ep34Fkj8ZvElJlnZupxJv+wSwvm3F6lGxmo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185225; x=1733790025;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=77lDfkVfo4kJjoL6MsAUXaQTK2sR+PJf7QJ62Gk9dUk=;
- b=nHxA7cIOd0SEqcibHvaYrGCTLdQwM0+zt5N3SGNuMWaEL+C1FgCvOSRmo2qWeZNSxT
- URAYPn4iXLGcaO+uU6RrFEzyoFBuZ+U64e63P1Dku6Ug+FcGxsYHH+9pSdaMHLDDD9nO
- wG3x9+YX0pugCtMzWL9M/QFsLyEs6iy5SV/5JpPfK5wWDKPs1EDawVOO0W3nc0PoYh2c
- vD/XpD3Q1yyt7lTq43saV33tf+3MKitRNA26QbpPlVQqhRCpLNsvy4t30HDkQ5K6kioO
- 8WzWDUSfb6k03hF49keXEIYTElXKs+EJfY2e/TtiegK2vmQsLHMnDTxmCEfSzQTpALb2
- IvKg==
-X-Gm-Message-State: AOJu0YyGAoRkgSgC6nVf6SkQ6nxw7+KR/xQ2G9/+eEEMZ/wc1q1tXD/U
- vWIoBJC4VJ8B8NIjfQubOdmrNEYyhZ9Yr6BC0w61HzYY+9FPP1IChU//AHvUfr2kXPsUCaEKuWV
- 9JvUKadx/WTrSbhAX2fPmbgLT5DKro4tf2u3e
-X-Gm-Gg: ASbGncsLlvGgrI5rNbLanwcNxZeHnxNuGvwFgcsq/QyoVGD/k/TbBDVBA7QpS7rrvm6
- X6yOng4eyhDftZ8il+8hT6ih4+0ORMbJE
-X-Google-Smtp-Source: AGHT+IGWQ0jnWO0ntayV87dBLemewpRzLsFrmmJgJ1p4llOwSsLmbajp/S+EDDytiev/U5SgN+7vwSZxHNdhCl0MlPc=
-X-Received: by 2002:a17:906:1baa:b0:aa5:427e:6af4 with SMTP id
- a640c23a62f3a-aa5f7f0affamr16870066b.47.1733185225153; Mon, 02 Dec 2024
- 16:20:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733185232; x=1733790032;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lBHeFqeuepA8wtOMgLftMdsPDKoA9F/+WYORnNMw6is=;
+ b=M48bIZ3w8MYR3CoxL06Kw2CrwQrTYCyQaW4UNAYQRwYA9D93ib7cYNe2r6eQeRwnAm
+ FRB9AQiuvx1sKBrQVHQQOMTbXbucqe3dLLC/bWJkgNMLSMcxjsp6aPD0LC/AHkPQOnq+
+ ciOctT1NpUkpbaVaeCcS0g2uHGdkrb6BQ9+lAWq/J3u/EDQ2lRPmlJCed0CVdf+XG7yH
+ 1bYJVW3zu9Y7OCStCYXbN2qOxjA/U1g6UAWoikU25gAJ7KAMmMYXG246iePI9Q3yNB6X
+ pOXlAuXAF6QoK+pMeTi3F/Xjngts5UK54Vvq2/fal/18dlF4KvxECLZ6Cls3ytT1JbEx
+ ahfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0cpyc/63p1h12lzUwcsKM1TBoyr9tS626INW37MSm3+y400Kdrse01IQsD3VKIkcid1dQKYo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMaDX18WO9Mf3yNXfxSqGz1gbsf2qu2Kn5ZE6iL6Dr7Y1gw6wi
+ s2/n08TjMxbdPS+xwUM06dvbDFXfW8CVIj9eNrot3uswTrA/0QU3uWigMpEuIg3gcCL9RGc8oiS
+ 0Fw0H04hfImZKVLq3tJxtH3YzzyWHKs14SLFI
+X-Gm-Gg: ASbGncuyM9wldRBRtb/T0XQVSdeESFpGDwTni+pfAiKk+GgpW40825uCYoyZdaLmdDK
+ SotnZYXGeU7obbr4Zv298XDzvOGZ8Wtrt
+X-Google-Smtp-Source: AGHT+IFoGA8tIYFTX4dHMAuZclsq/XBhqDoEAEmkqbtAwMXTx2BrE/XkivvZsr4D2MccCrysvBKEoN2pS9tYrWFCyUc=
+X-Received: by 2002:a17:906:3d32:b0:aa4:9ab1:19d5 with SMTP id
+ a640c23a62f3a-aa5f7eefba8mr14929566b.42.1733185231887; Mon, 02 Dec 2024
+ 16:20:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <20241201144240.1664398-2-sjg@chromium.org>
- <20241201164017.GS3600562@bill-the-cat>
-In-Reply-To: <20241201164017.GS3600562@bill-the-cat>
+References: <20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com>
+ <20241128-bootconfig-v1-2-0e63a5dae82c@baylibre.com>
+ <CAFLszTgFBtQBiC_Hd9gjUJa26aFFXLGuuvJ5gVDLEaKH-SV-dg@mail.gmail.com>
+ <991937a4-9bcb-43f8-99d9-013d0c9d2dff@baylibre.com>
+In-Reply-To: <991937a4-9bcb-43f8-99d9-013d0c9d2dff@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:20:12 -0700
-Message-ID: <CAFLszTj=8ux3kjM-gCa+MZrOja-Qh+VLYoB0VKRy3gabv5pqmQ@mail.gmail.com>
-Subject: Re: [PATCH 1/8] CI: Drop extra condition for sjg lab
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sumit Garg <sumit.garg@linaro.org>
+Date: Mon, 2 Dec 2024 17:20:20 -0700
+Message-ID: <CAFLszTjY8YUhY5ZowWN0BgCK4tis8TJKJhX-n=d=MwFynq0E7g@mail.gmail.com>
+Subject: Re: [PATCH 2/2] boot: android: Add bootconfig support
+To: Guillaume LA ROQUE <glaroque@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,24 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Guillaume,
 
-On Sun, 1 Dec 2024 at 09:40, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 2 Dec 2024 at 01:03, Guillaume LA ROQUE <glaroque@baylibre.com> wro=
+te:
 >
-> On Sun, Dec 01, 2024 at 07:42:29AM -0700, Simon Glass wrote:
+> Hi,
 >
-> > The rules part of the template makes sure that this doesn't run until
-> > specifically requested. Drop the check in the script itself, so it is
-> > possible to trigger a run manually without re-pushing the tree.
+> Le 30/11/2024 =C3=A0 21:24, Simon Glass a =C3=A9crit :
+> > Hi Guillaume,
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > On Thu, 28 Nov 2024 at 03:15, Guillaume La Roque <glaroque@baylibre.com=
+> wrote:
+> >> For android vendor boot image version 4 bootconfig is mandatory.[1]
+> >>
+> >> In the android_image_get_ramdisk function, after copying both vendor a=
+nd
+> >> boot ramdisks, we extract all androidboot.* entries from the kernel
+> >> command line. These entries are added to the bootconfig section.
+> >> We then update the sizes of the ramdisk and bootconfig.
+> >> Finally, all androidboot.* entries are removed from the kernel command
+> >> line.
+> >>
+> >> [1] https://source.android.com/docs/core/architecture/partitions/vendo=
+r-boot-partitions#vendor-boot-partition-v4
+> >> Co-developed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> >> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+> >> ---
+> >>   boot/image-android.c | 29 +++++++++++++++++++++++++++++
+> >>   1 file changed, 29 insertions(+)
+> >>
+> > I am not seeing any tests for this code. Can you please update the
+> > test to cover this?
+> i don't know if it's possible with test framework in uboot, to validate
+> bootconfig raw partition is reading by android kernel. i don't really
+> know how i can do this , if you can say me if it's something possible or
+> not .
+
+We don't have a way to boot a kernel (yet), but we do have tests that
+check things are correct - e.g. bootflow_android() - and after a
+'fake' boot - e.g. bootflow_scan_boot()
+
 >
-> You don't need to re-push, you can just manually re-run the pipeline and
-> set the variable to 1 on the webpage.
+> for kernel command line part is it possible to read it in test to check
+> if we find some androidboot.* entry ?
 
-OK, well I don't want to have to do that :-)
+There is test/boot/bootm.c which checks the cmdline. A small amount of
+refactoring was used to allow this.
 
-Are you wanting me to change the commit message?
+My suggestion here is to write a sandbox test which 'fake'-boots the
+Android kernel, similar to bootflow_android() but with a
+'bootflow_boot()', then at the end of the test you can check various
+things.
 
 Regards,
 Simon
