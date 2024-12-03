@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A3DE64AA6
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 13:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DA32E64AA9
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 13:46:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6C388E5C;
-	Tue,  3 Dec 2024 14:46:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DEF4F89328;
+	Tue,  3 Dec 2024 14:46:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dZcLbhYN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a/Trvk+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D50D689328; Tue,  3 Dec 2024 14:46:12 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 496A389588; Tue,  3 Dec 2024 14:46:26 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73E1388E35
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 14:46:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3504E88E35
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 14:46:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d0cd67766aso4379522a12.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 05:46:10 -0800 (PST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ffdbc0c103so78056821fa.3
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 05:46:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733233570; x=1733838370; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733233583; x=1733838383; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VegB6AnyX3sIhO3CScGa8b4ip1xSPOR1W+T/QbgZato=;
- b=dZcLbhYN2K4mhsldcojMODzZH3DXtD5OihpR7e/pAQIR/q1mm1SJZnv+X9v4VFIMr0
- c0zrUihSibY+1KhM6PztcS4nzQIqWIwUBpcQd3VC2jA0K4iwtnJlaZG2mAy9RPOL9jt+
- VZ12AjxHoY/qxhP7WA7CKfStNBGjM81sjyQHI=
+ bh=R0wAnEwdMnxyHJzABkOiE8zDCFF3KyF2/iKS6fntt+k=;
+ b=a/Trvk+Oh/d4nejgCuWNiimWEnC4oD1kYDw1+9Pm8oXDbBZbItXyqTeJnYcd5xXzYV
+ z9HeeNne5u1N9Xp496Elgkc+eieYsvu4uX7iCuM8Va+inl7kJWDACkdKoyXQIhdJWqEq
+ Cjb2fXyhxTLKotItrfb8i69FVovxbFgm67PwM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733233570; x=1733838370;
+ d=1e100.net; s=20230601; t=1733233583; x=1733838383;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VegB6AnyX3sIhO3CScGa8b4ip1xSPOR1W+T/QbgZato=;
- b=SXlyBNCaqvnEBaVwTZCZWc4bPw/twCti0qY5dxO7o3wzhPZ+1AzXFR1P+g3oQSg4cU
- Ubumd7QyJ2qdAoy0SjO4AH4CjND2sMeexpkttSlWw2pggkn4XTxXbtutd++woaI/bEvH
- YTierUyzBdKTu3C8yVDo3H6Z07ftT4aj1lPcmYErleCxPFIl6EBienIGSwO2k1Wgov0f
- /fl2LQEALzZWTQMAAebxPufGCWfWgV7hSRpL3zDg/vuSMi0VuPv00aiZlbps6oP3jhQH
- cPjeECSryzNkISspTxfnuJuMi+q714dBFx7K/4neYRMOXfcqDmY/hD2no5RHyVfnJzH4
- Oqig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUI333/6Fg7ZHmQYYzCe8O3skOlxg6SXI+j5TMqMJNUccapwt5nQjFRxns8VwKh++/SDDdLEuM=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgJZmbA5iidNq1NxEJ4BTuX+URZgapEWtq4GhT6YDvL8Opy8U6
- lYk27Ht5cZDgh49i1tgt2g9eQtoC++7Hk3ODTHzZABiyqGnOwPoewAHkyePl0RiB2T+J8xparGy
- dQNNZGFhAFml48Xd5EMBIGjtBvMnoE4r5EBAz
-X-Gm-Gg: ASbGncunTrc3X+qtqRNlHjoE+GE7BuhoPW4EDyc8mOErI5RWdINij8VU3JibfNjdove
- 3Y8e1Ta3oHSNLCpC6eVHLdIePtJh4vy4r
-X-Google-Smtp-Source: AGHT+IFXu3a2BmSGMDsdhONTPgvZjYS2VXEXWq5PY5bllKHghjK7O64zdhWW6BixtoounL2fV5teYwKP1mHFUjzeK2w=
-X-Received: by 2002:a17:906:cca:b0:a9a:c651:e7d9 with SMTP id
- a640c23a62f3a-aa5f7f006e4mr150793766b.46.1733233569875; Tue, 03 Dec 2024
- 05:46:09 -0800 (PST)
+ bh=R0wAnEwdMnxyHJzABkOiE8zDCFF3KyF2/iKS6fntt+k=;
+ b=Jd5QJNqQuOvxzn+8JsEnioxBdKcxTiQpgjFo00t0K5pKVQXrMMj+PB3kAFpoD8OrcH
+ bGLpPlMC+JDKiDqbTkzA9xzoLRCGan74T/50Yu2EoN+xrfcWBuSsJKlldPkzLHIpnPwK
+ 6hW9RkcCM2I9aDnO/ZZgoQvaWwTu0yC0PGAt6SXc8OiIDFQqv3RORdMdtryK1tu7jYpQ
+ CZ3noAyS6Y/UdX1rNfFvvZGCL6Yih9gJkI8QNflAGjmhghrZd0lMWFYksiXcCPQTUH4c
+ 6XQOZDzyckEYy0/4uatWfPfGc8wXiCQ4yd+HQZSPKetByhOPH743vc1j+boS/U4d3PnG
+ On1g==
+X-Gm-Message-State: AOJu0YxwI3ETRx1G4DcX5yAWPrO8coDPBJtw9f012JdFjywy87pv8+UY
+ zGa7vbKJUuSaX3WALNF0HZ4eTFkBHRtnRXHIEnk0ZUQJ9N4hqDBD1R/uQJO8YRdzwF99WO5jjRB
+ YilDngEvWHM/LrIkgCAZh3c4xXD5QznOGHRk39F0TUOIJjmY=
+X-Gm-Gg: ASbGncsmyBWtxnMC3ZcMIcF5ChbqejG5AnUc44K8oDdchYSDGjmIqog3RafbVTQrTbv
+ D3iKmqNyZ+BZet7hqKxqcnxoOtCO5PxvA
+X-Google-Smtp-Source: AGHT+IGU7HlQSrEJgJP7o40EePyDpZliI8abuMUGl0+K6KRsveJ0yLs3H19D+c1rxDdzl7hN+uN7BxtfQqE5hWx/Z88=
+X-Received: by 2002:a2e:a5c1:0:b0:2ff:95d7:9ed2 with SMTP id
+ 38308e7fff4ca-30009cfed00mr25983721fa.32.1733233583493; Tue, 03 Dec 2024
+ 05:46:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20241201152505.1666789-1-sjg@chromium.org>
- <20241201152505.1666789-5-sjg@chromium.org>
- <20241202201832.GH2457179@bill-the-cat>
- <CAFLszTitE4Gq+LUEm64ro2eL4_VME+gDh7s2jEnBTmVvkgX9sg@mail.gmail.com>
- <CAC_iWjLex4Z41CDpx4u07XeCYgjB7H+Ynd8aQYL-wruH7yRmQA@mail.gmail.com>
-In-Reply-To: <CAC_iWjLex4Z41CDpx4u07XeCYgjB7H+Ynd8aQYL-wruH7yRmQA@mail.gmail.com>
+ <20241201152505.1666789-4-sjg@chromium.org>
+ <20241202201641.GF2457179@bill-the-cat>
+ <CAFLszTjji7SwxEHYcw6dQdJA__epJ_CpqvOeEVR0AVP_gJUR+A@mail.gmail.com>
+ <20241203003719.GN2457179@bill-the-cat>
+In-Reply-To: <20241203003719.GN2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 06:45:58 -0700
-Message-ID: <CAFLszTiMi89uydJUmDg740opTJXm0YJ8WUQ5aJPwxPnb+9EGMw@mail.gmail.com>
-Subject: Re: [PATCH v4 04/25] efi_loader: Add comments where incorrect
- addresses are used
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
+Date: Tue, 3 Dec 2024 06:46:11 -0700
+Message-ID: <CAFLszTh91eW5yQgQHLDVfe67GYw_f9-jzWmdu9pDTaEvNEG2Bg@mail.gmail.com>
+Subject: Re: [PATCH v4 03/25] efi_loader: Drop extra brackets in
+ efi_mem_carve_out()
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -95,64 +91,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Tue, 3 Dec 2024 at 01:49, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Mon, 2 Dec 2024 at 17:37, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On Tue, 3 Dec 2024 at 02:22, Simon Glass <sjg@chromium.org> wrote:
-> >
+> On Mon, Dec 02, 2024 at 05:24:35PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 2 Dec 2024 at 13:18, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 2 Dec 2024 at 13:16, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sun, Dec 01, 2024 at 08:24:23AM -0700, Simon Glass wrote:
-> > >
-> > > > Some functions are passing addresses instead of pointers to the
-> > > > efi_add_memory_map() function. This confusion is understandable since
-> > > > the function arguments indicate an address.
-> > > >
-> > > > Make a note of the 8 places where there are problems, which would break
-> > > > usage in sandbox tests.
-> > > >
-> > > > Future work will resolve these problems.
+> > > On Sun, Dec 01, 2024 at 08:24:22AM -0700, Simon Glass wrote:
+> > > > Simplify a few expressions in this function.
 > > > >
 > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > (no changes since v1)
+> > > >
+> > > >  lib/efi_loader/efi_memory.c | 4 ++--
+> > > >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > > >
+> > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > > index f1154f73e05..3b1c7528e92 100644
+> > > > --- a/lib/efi_loader/efi_memory.c
+> > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > @@ -206,11 +206,11 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+> > > >                            (carve_desc->num_pages << EFI_PAGE_SHIFT);
+> > > >
+> > > >       /* check whether we're overlapping */
+> > > > -     if ((carve_end <= map_start) || (carve_start >= map_end))
+> > > > +     if (carve_end <= map_start || carve_start >= map_end)
+> > > >               return EFI_CARVE_NO_OVERLAP;
+> > > >
+> > > >       /* We're overlapping with non-RAM, warn the caller if desired */
+> > > > -     if (overlap_conventional && (map_desc->type != EFI_CONVENTIONAL_MEMORY))
+> > > > +     if (overlap_conventional && map_desc->type != EFI_CONVENTIONAL_MEMORY)
+> > > >               return EFI_CARVE_OVERLAPS_NONRAM;
+> > > >
+> > > >       /* Sanitize carve_start and carve_end to lie within our bounds */
 > > >
-> > > Please just resolve these rather than introducing a patch to then fix
-> > > them later. This is something that should have been fixup'd before
-> > > posting. Thanks.
+> > > As I believe was mentioned in a previous iteration, please drop this as
+> > > they aren't excessive generates a compiler warning, merely for
+> > > clarification and should be kept.
 > >
-> > That was deliberate, as I wanted people to see the problems. It will
-> > save discussion on later patches where the problems are fixed, if we
-> > can agree that these are actual problems. If people are happy to add
-> > review tags to the later patches then I'm happy to redo it.
+> > I did this patch because checkpatch complained and I am changing these lines.
 >
-> I am pretty sure Heinrich has repeated this in the past. Why do we
-> have to sprinkle around map_sysmem/unmap sysmem for sandbox?
-> Polluting the entire u-boot to support a special platform is less than
-> ideal. Why can't sandbox limit this internally and do whatever
-> mappings it needs when it receives an address?
+> And checkpatch is not the authority, it's guidelines.
 
-Tom, I suppose I have made my point.
+Agreed.
 
-Ilias, this is documented at [1] and has been the same for 10 years.
+> I believe the
+> review comments are "no, these should stay". Please drop this patch.
 
-See for example the 'md' command, do_mem_md(), which shows how 'md 0'
-is implemented in sandbox.
+Just so I can figure out what to do here, are you saying:
+- merge this patch in with the one that produces a checkpatch warning
+(i.e. remove brackets so resolve warning), or
+- drop this patch and ignore the checkpatch warning in the result
 
-As I have mentioned before, the nice thing is that you can easily make
-code work with sandbox just by converting casts from
-address-to-pointer into map_sysmem().
-
-Back to this series, if you look at efi_allocate_pages() you'll
-currently see three calls (two map_to_sysmem() one map_sysmem(), but
-now, with this series, there is none. It also makes it a lot easier to
-understand what is going on, IMO.
+I don't really mind about this, obviously. But as I suspect this
+series is not going to be applied to your tree anyway, I'll await
+events.
 
 Regards,
 Simon
-
-[1] https://docs.u-boot.org/en/latest/arch/sandbox/sandbox.html#memory-emulation
