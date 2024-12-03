@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2609FE6C5E4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:21:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 830B3E6C5E4
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 00:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4F168948B;
-	Tue,  3 Dec 2024 01:21:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 204FE88AAC;
+	Tue,  3 Dec 2024 01:22:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eAVFEC1M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BpOVW5rn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2AC089288; Tue,  3 Dec 2024 01:21:19 +0100 (CET)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 26CEC88A0A; Tue,  3 Dec 2024 01:22:51 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71B198948B
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:21:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC1E28958B
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 01:22:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2ffc1009a06so71917821fa.2
- for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:21:17 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aaddeso6146981a12.2
+ for <u-boot@lists.denx.de>; Mon, 02 Dec 2024 16:22:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733185277; x=1733790077; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733185368; x=1733790168; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UAha07xtD0lDdXvf+jfRrvF8ogI+yUwVWKrQE38G5k4=;
- b=eAVFEC1MzveOfimlWO0ZG4VJkXqio0H1xEDhpk6Aa+9mUOynPc4TZwwhQWXPv/hRfO
- JOgtpLMwKkNoAELGoXb9bifKyhZ5jgFry3rFp604aHHcFMtJokE/SO/rbSg8GT5q5z8M
- FX4hVAJyp30PDG8RYvVA9SZRbHUt3F8kaWdK4=
+ bh=vsnd9B8he1/jslioYgL6SpdZPXDGAXkjvnzIncotbZs=;
+ b=BpOVW5rnfK2SIisEPrmoqXj3PsB6qVrlm9cYJ4oe6Pt81KvzO3qAUyR1gZ2ODTYdZd
+ OaMeW/PBGo1aiU1ZVPaIb3B9tJ+7YUZPrzhArms0jrzVu2yIKC2lDm57yxNGU46Q5HD0
+ QdVWCtKUsttXY3+QllutFvNwDfFuRyNF30lGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733185277; x=1733790077;
+ d=1e100.net; s=20230601; t=1733185368; x=1733790168;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UAha07xtD0lDdXvf+jfRrvF8ogI+yUwVWKrQE38G5k4=;
- b=Ky5xJN0PI+TcS726arqd/CVF1znHlR7lKeWmlq8McEXeTdP7dPnesEf8sJDusFXlTX
- 8BeEcKcKGEjuNkroIZWY+SLrI5/+7hFHvG0/ACGQ1gugaeXS/y3lTuZZslhuYIxb4er4
- Wye2dsAqFbwUTdh5HYDCs7MJaeVTfXQSfQ28TdceKlapVvdzP0WR/EKXU+BDuz27hdWq
- bRbNF6KAE9Rfa/35xbLsqa90qDyACXPJL7qO/qQTEHbGyPvqnMVmH04scA9uBUYTxCYY
- +GtwBufUApz/3RkPlTlPTYtmEPUR4CO2jfume4WZKMqpwcGC5ySsgCdNNyg+EWeFlDaV
- Odnw==
+ bh=vsnd9B8he1/jslioYgL6SpdZPXDGAXkjvnzIncotbZs=;
+ b=u8neE2vCXX1Djty/kVgC+jnHDvcnpip9FVLiN5yGzJekpT4phnCy6BkMh8IO/B+bGW
+ ERGEE2wLBmcOzNjef5RkbO2llThCct5mvhV1kLWeZBrCrbr8vGHdeKm60lI83mCtx/49
+ aroFLR2tT+Fw6W42LZBWnHMOdpXp7kovGjWMnExb8F66j+tzvGUlDclmzmTYFP9Q7pQw
+ Jvr011EiQv6ewb15O54DMJvTVIbk6wLtKFlUdZ3sJe/IT9c9Ar+y9bX4eX60hhP3M7F6
+ 8UvkFGM7AGfMabEDog5FhiN9cIo03jHKsciJdi64VMbOgRFdTJlHYQBZgyoTmoQp5gpH
+ xn/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBzpTQFtAb3ZKvor+MuZX+w1FYf7b9VIQaWdmosIp1RAlkb1PpEa4fot7Lqyc3POH5x25gK5o=@lists.denx.de
-X-Gm-Message-State: AOJu0YzhnIaPt7q5LNxH2g62ME1urywygJuuhWOkEBwmkGIB4krp7ntH
- 4A/C4mfwjIKGXBYDfuU3n4a3ReQUvT4FlOz3vKNT2eqX3JbuU61gWhZEZUha3cvpjV5XqIQSA9I
- Br+L42nQ4hSo9Epwz6Sa8MuhomDiSNKI1L4bs
-X-Gm-Gg: ASbGncs/0BC6u5aVmKbC5XOmZ7g2PHHavCgwPUPG79hN7v53l51qfBnGpoc3qcJee/0
- 7qAzkaiy5oSZtB0KFRHEkMQDVvNfNtWCf
-X-Google-Smtp-Source: AGHT+IEAAEWR8Jh0dMbrbDSSV76D4JQai/7LDImCDQmlqp4V3Qywgw2kh5ErWystVT5AHoQchI4eaIwtuS4zOq96iQk=
-X-Received: by 2002:a05:651c:502:b0:2fb:3960:9671 with SMTP id
- 38308e7fff4ca-30009c923a9mr4149291fa.15.1733185276529; Mon, 02 Dec 2024
- 16:21:16 -0800 (PST)
+ AJvYcCW8taeCk1MjwKiWvg9VCGKZsEctinK85UF5ja7uMPv7qkdYCcV56ghF4dyhF/nPvqCMaeELHF8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzi4Ah6r/Z3kb9VMusZdlJWtSwCKD+QZAENCPCt8DhTJphIAl0S
+ nrcKnEeHWx1Q4R1JtwB5wff4gKHgpqx4FGqIFdwi9gEcrSXPxnXhWwSfeAw2yWjepv+st2eJ+sX
+ ZRCEP+10h20pqsvOvG2l97fsBO/UnGOUqlyt9
+X-Gm-Gg: ASbGncuIzk/tUO73+hwAIA/Xs4vSoQwZgDRmi9bt0tAcy1Ht0ahZdlbLU9/M0BrNlKY
+ 8hG6Ul5tsVXUeeFrSYbdgrn5iOwtOmiT1
+X-Google-Smtp-Source: AGHT+IGC3reEkHjAcEZd8uhOW6lhVXtYLius1UZZUvQU4RffFarUiLUqlXJs+R7mL+gf0avOj3T+DqCO152hzyncHBk=
+X-Received: by 2002:a17:906:4c2:b0:aa5:50b6:a600 with SMTP id
+ a640c23a62f3a-aa5f7eefc64mr15065366b.44.1733185368330; Mon, 02 Dec 2024
+ 16:22:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20241202001243.1283274-1-sjg@chromium.org>
- <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
- <20241202141558.GD2457179@bill-the-cat>
-In-Reply-To: <20241202141558.GD2457179@bill-the-cat>
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-5-sjg@chromium.org>
+ <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
+ <20241202162239.GE2457179@bill-the-cat>
+In-Reply-To: <20241202162239.GE2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Dec 2024 17:21:05 -0700
-Message-ID: <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] efi_loader: Add support for logging to a buffer
+Date: Mon, 2 Dec 2024 17:22:35 -0700
+Message-ID: <CAFLszTjvnyE4vFQ=Z=Ma1bOjH_Z4JEdUWM51Vc_nRmSUkRzF4Q@mail.gmail.com>
+Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
+ bloblist"
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,46 +97,44 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 2 Dec 2024 at 07:16, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 2 Dec 2024 at 09:22, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Dec 02, 2024 at 01:24:27AM +0100, Heinrich Schuchardt wrote:
-> > Am 2. Dezember 2024 01:12:36 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > >It is a bit of a pain to log EFI boot-services calls at present. The
-> > >output goes to the console so cannot easily be inspected later. Also it
-> > >would be useful to be able to store the log and review it later, perhaps
-> > >after something has gone wrong.
+> On Mon, Dec 02, 2024 at 09:26:42AM -0500, Raymond Mao wrote:
+> > Hi Simon,
+> >
+> > On Sun, 1 Dec 2024 at 09:43, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > > This stops coral, bob and kevin from booting.
 > > >
-> > >This series makes a start on implementing a log-to-buffer feature. It
-> > >provides a simple 'efidebug log' command to inspect the buffer. For now,
-> > >only memory allocations are logged.
-> >
-> > In my previous review I suggested to move your work to the level of the logging library lib/log.c.
-> >
-> > Why are you reiterating your series without exposing why an EFI specific solution. should be desireable?
+> > > The correct way to do this was always to use a Kconfig option, so let's
+> > > first revert this broken idea.
+> > >
+> > > OF_BOARD and BLOBLIST should be general and hardware agnostic,
+> > do you have more information on why they don't work for a few boards?
+> > Maybe the way to handle these logic within certain boards should be
+> > changed other than to revert this?
 >
-> Even with
-> https://lore.kernel.org/u-boot/CAFLszTgE_HZEbG7B09_oo=XfugvH07ix=_0eoSGaEQ+KhyA4Qw@mail.gmail.com/
-> it is unclear why this patch series rather than either/both:
-> - Expand CONFIG_LOG to have a "file" or "bloblist" option
-> - Use CONFIG_TRACE
->
-> Do not match your needs. Especially the second option.
+> Yes, I'd like to understand the whole problem better since we had a
+> forever-and-ever thread, compromised to what's in tree now and now you
+> want to revert the compromise and bring is back to what was argued
+> against for forever-and-ever, at least from a very quick read.
 
-From my side I'd like to change the conversation a little, to how to
-land code, rather than why we should bother. "Code needs to land"
-should be the motto. If someone has taken the time to create
-something, our bias should be towards getting it in, with sufficient
-changes to make it fit the project. There are cases where something is
-just a bad idea, or should be done another way, but for people working
-on major features or changes, biasing towards not landing the code is
-just going to make them go elsewhere.
+I'm sorry but I believe I have explained the problem in that forever
+and-ever thread, so I don't really want to re-run it. It may be that I
+was right all along?
 
-CONFIG_LOG with a bloblist option would be a great idea, but it's hard
-to programmatically scan text...plus only the external call sites are
-actually logged.
-CONFIG_TRACE - ick, you want me to write a test which does a trace and
-then scans it to see what happened? The trace doesn't even include
-function arguments...
+Raymond, I cannot pass the DT in the bloblist from TPL to SPL on x86.
+There is not enough cache-as-RAM, for a start. Plus the DT is in the
+memory-mapped SPI flash, so it makes no sense...
+
+The primary issue here (I believe) is the Linaro idea that U-Boot
+should not have its own devicetree, because there is always a prior
+stage of closed-source firmware (e.g. TF-A*). Perhaps I am wrong about
+that, but that is the way I understand it now, as it explains why
+OF_BLOBLIST caused such friction.
 
 Regards,
 Simon
+
+* I've seen quite a few vendor-specific source trees and none has been
+upstreamed
