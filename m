@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7264FE74ACA
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDAEE74ACA
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:46:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3F87896AD;
-	Tue,  3 Dec 2024 20:46:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B80289634;
+	Tue,  3 Dec 2024 20:46:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MWrMICjG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jp7DrOzq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8237896DE; Tue,  3 Dec 2024 20:46:00 +0100 (CET)
+ id 1C87B88BFB; Tue,  3 Dec 2024 20:46:41 +0100 (CET)
 Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
  [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33C26896AD
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:45:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D79C989634
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:46:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2ee397a82f6so4339693a91.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:45:58 -0800 (PST)
+ 98e67ed59e1d1-2e56750bb0dso4412571a91.0
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:46:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733255157; x=1733859957; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733255197; x=1733859997; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bdig8EuLunQR4emhUXsMYqQllPYB2LxBfBt1XvhiEnQ=;
- b=MWrMICjGkJqqA8bqq5BlIuRZOutw8VIvHoy6024F+/gAVYQyWhyASVPmbZnSCOcuTe
- AYO1ewcbId6BV6FD/FI2DFXDFUsnlVPY09YlCwROmtM477RWnXed9ZJsM07tTNp998eB
- bIC8g8NqNyhgOHXllRSx9ScMq7pYbYpKjS4To=
+ bh=W4dDcFRi9TMtQePwTEZKn7EN2iWPam1RJ/Wu9pQEF3c=;
+ b=Jp7DrOzqODooqcfe7dLUooFB/7ErNUnu2Kfgwei8zhCTEpvpyVXBac8cfYD2NZhzSl
+ c3xqpO96Yr/3eHl7MvvRwqLf4U/5BNtT19FKZhsnGOPFWFNv+c2J3IhmTOR7R2nUGJeK
+ +HJHGDiMB7xxmXoRoJmiH1HeH5OXDIkYT6Mxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733255157; x=1733859957;
+ d=1e100.net; s=20230601; t=1733255197; x=1733859997;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bdig8EuLunQR4emhUXsMYqQllPYB2LxBfBt1XvhiEnQ=;
- b=QyW+YN1YIlxCvH5V1omyvty/4z7Mz84xIhZ9z7j/Kq2kDK/hDhMZlnPnGI7hsDHSU5
- EXFOIbVQKoyjKkPXF56CpUKaXeUXyniXAQtM4vOW8U92cVCJ1HkGwtXbuL+A1sY7QoXk
- 8nj58kbtGpM7HowBJddwuVOsUtugp3fU5PuVmQ1cWnyL+Tn2o0+I+0Dl+HvKDQWl+D8v
- zMwmZfZvpoyfe1dHW9naUFSWp8BLXDRILTiKp1OyK/VKEPEbvh4JiQRqPZXeNEYDLF2q
- j1rcwt/is/b328FXFSVHY1diiXNOO9hvrFcuZ0Cn3kS2hHtMkJiUt/WnkA/nkfQkXa0v
- nyKw==
-X-Gm-Message-State: AOJu0YymheEvo7cewPKU7CusTfHQH1rEt/2y5rlKkT5BldJZCxoL617J
- SgIBTZE17dz607w8nVcYlsoToCnCyn3IDcr7GqMQsTBK/GIBbttXye9TVIxCL7LH7Zp5OgJ5JrJ
- YdlJSg/WWLJ20n4e3xzC+A5Xw4stUZ2DNi6yF
-X-Gm-Gg: ASbGnctWgGtyM6ZXZOLtKiia1i/VKh6/DFwNcXW9V+i7IXmWLSO93SH0hWkGj0PVMtI
- wBBdptauDwK7soUK8wPL1bEhKYVSnhm4O
-X-Google-Smtp-Source: AGHT+IEY7OnspM9X4Ap9lVRjBTtYtQAAWcDF4j0v2MhQiKw1y9hTgziLQCSssvZ8KelewgFuveNs9Sl0qwTmEGXORYU=
-X-Received: by 2002:a17:90b:4b83:b0:2ee:535f:ac27 with SMTP id
- 98e67ed59e1d1-2ef01272aa3mr5138620a91.33.1733255156740; Tue, 03 Dec 2024
- 11:45:56 -0800 (PST)
+ bh=W4dDcFRi9TMtQePwTEZKn7EN2iWPam1RJ/Wu9pQEF3c=;
+ b=FSa2aXVRYHLuif04QWK3IwvYcXAXiVoeEevzApOy7Wc/WPNTx4J3gI65QISMFke7pj
+ yRTg/YHcs623pY2n9MyCVVoAA6WlXarWDE5UUz/QqyH41hUVZtG/w2r+PFkMFrLZq9kv
+ Y4Ptww/mN0qJnk+erM0IP9HxfXBFd21FZC0kKF1VHjNAhpasrAU7G0+JYMW4wFf6UX3j
+ cuAlxW3+jjqF0BZ7hZo87s91siCfyfjRy8YbqQreupYeXfaLfUqdY2VWYKm/tCCaDgbZ
+ Ya5ivPpE2U+Ibj092YQblkMD8WfqZaIwO/Xydy5Fmkzq8xbgc2901lp8TgYfIqj453nq
+ uH5w==
+X-Gm-Message-State: AOJu0Yx+oLwyg8WWo1rftCClP2ioxWmKWj5R3ZGcPQCvjFfeE+q0NYT4
+ ZsmySIms9Ik9TGViHpIDxV4WhwaL/tIwhGPYW1iRp19Eg69KRYR6Rcqf9W2pCTOib8O7CdP4RgW
+ FBn3UEiU0AhFhvFWXvn8MnsSu+kHMdLuXY6IW
+X-Gm-Gg: ASbGncthJU68W7HY8azklnpyWAI5ggkKeRIWy3QGnKamZXhfOwMsg9Fj0FoiM8ej4Ud
+ GYX1wckxboWyxxvL3fdLAFBE7U6soOoG7
+X-Google-Smtp-Source: AGHT+IGFFAdyiTvWljgpEqDmrxGGfieRXwNylcl4KKvutnkx8+PFQOUHQm9ZUGyQLZRGJZk+jj6GfezPmg7PWoWuKDw=
+X-Received: by 2002:a17:90b:52c4:b0:2ee:8e75:4aeb with SMTP id
+ 98e67ed59e1d1-2ef0121357amr5667377a91.17.1733255197498; Tue, 03 Dec 2024
+ 11:46:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20241201152815.1668093-1-sjg@chromium.org>
- <20241201152815.1668093-4-sjg@chromium.org>
- <20241202215922.GI2457179@bill-the-cat>
- <CAFLszTgfPnJCi=Q+-ROMd2dU_z49C2h4wHgmFrq80TQ0kD_BFA@mail.gmail.com>
- <20241203140026.GS2457179@bill-the-cat>
-In-Reply-To: <20241203140026.GS2457179@bill-the-cat>
+References: <20241102221737.547938-1-sjg@chromium.org>
+ <20241102221737.547938-9-sjg@chromium.org>
+ <e27167fa-5d65-40b4-92d7-27bfcba1e2b3@foss.st.com>
+In-Reply-To: <e27167fa-5d65-40b4-92d7-27bfcba1e2b3@foss.st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 12:45:37 -0700
-Message-ID: <CAFLszThwNBRhrg8QjERSzzmff-rnFGFf0PrTY3Um=zeLO40iLw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/9] board_f: Correct stack reservation
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, Jonas Karlman <jonas@kwiboo.se>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, 
- This contributor prefers not to receive mails <noreply@example.com>
+Date: Tue, 3 Dec 2024 12:45:58 -0700
+Message-ID: <CAFLszTgAjrEUhS4s669W7-BVYTKDJC3uVCM+o=Uo9AgSg8t1_w@mail.gmail.com>
+Subject: Re: [PATCH v3 08/25] st: stm32f429: Drop old LED code
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,91 +88,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 3 Dec 2024 at 07:00, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 12 Nov 2024 at 04:20, Patrick DELAUNAY
+<patrick.delaunay@foss.st.com> wrote:
 >
-> On Tue, Dec 03, 2024 at 06:53:55AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> Hi,
+>
+> On 11/2/24 23:17, Simon Glass wrote:
+> > This predates the LED framework, so drop it.
 > >
-> > On Mon, 2 Dec 2024 at 14:59, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Dec 01, 2024 at 08:28:05AM -0700, Simon Glass wrote:
-> > >
-> > > > The reserve_stack_aligned() function already ensures that the resulting
-> > > > address is aligned to a 16-byte boundary. The comment seems to suggest
-> > > > that 16 is passed reserve_stack_aligned() to make it aligned.
-> > > >
-> > > > Change the value to 0, since the stack can start at the current address,
-> > > > if it is suitably aligned already.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > Er:
-> > > /*
-> > >  * reserve after start_addr_sp the requested size and make the stack pointer
-> > >  * 16-byte aligned, this alignment is needed for cast on the reserved memory
-> > >  * ref = x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
-> > >  *     = ARMv8 Instruction Set Overview: quad word, 16 bytes
-> > >  */
-> > > static unsigned long reserve_stack_aligned(size_t size)
-> > > {
-> > >         return ALIGN_DOWN(gd->start_addr_sp - size, 16);
-> > > }
-> > >
-> > > is what the code is today.
-> > >
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  common/board_f.c | 2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/common/board_f.c b/common/board_f.c
-> > > > index 98dc2591e1d..677e37d93c0 100644
-> > > > --- a/common/board_f.c
-> > > > +++ b/common/board_f.c
-> > > > @@ -601,7 +601,7 @@ __weak int arch_reserve_stacks(void)
-> > > >  static int reserve_stacks(void)
-> > > >  {
-> > > >       /* make stack pointer 16-byte aligned */
-> > > > -     gd->start_addr_sp = reserve_stack_aligned(16);
-> > > > +     gd->start_addr_sp = reserve_stack_aligned(0);
-> > > >
-> > > >       /*
-> > > >        * let the architecture-specific code tailor gd->start_addr_sp and
-> > >
-> > > And this is the last call to reserve_stack_aligned(). So, this is going
-> > > to save us between 16 and 0 bytes of memory. If we're going to make a
-> > > change here we need to comment in the code more what we're up to at this
-> > > point, and the commit message should be more authoritatively worded too.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > So, other than that, what do you think? Should I respin it? Note that
-> > this is part of a series which I doubt will be applied to your tree.
+> > (no changes since v1)
+> >
+> >   board/st/stm32f429-discovery/Makefile |  1 -
+> >   board/st/stm32f429-discovery/led.c    | 39 ---------------------------
+> >   2 files changed, 40 deletions(-)
+> >   delete mode 100644 board/st/stm32f429-discovery/led.c
+> >
+> >
+> Thanks
 >
-> I mean, yes, I've given you review comments. If you want this applied to
-> mainline someday then you need to address them.
+> for information LEDs are also defined in device tree:
+> arch/arm/dts/stm32f429-disco.dts
 >
-> > It would be nice if other archs could weigh in, but I see that I have
-> > not copied them. Still, the current code is confusing (in that the
-> > comment doesn't match the code), so we can likely figure this out in
-> > -next
+>      leds {
+>          compatible = "gpio-leds";
+>          led-red {
+>              gpios = <&gpiog 14 0>;
+>          };
+>          led-green {
+>              gpios = <&gpiog 13 0>;
+>              linux,default-trigger = "heartbeat";
+>          };
+>      };
 >
-> Yes, my comment was that you need to make the comment match the code and
-> expand upon the common since I expect it's been that way for a decade+
-> at this point.
 >
-> > Heinrich expressed some concerns with RISC-V, but there doesn't seem
-> > to be any breakage in CI. meminfo reports that the devicetree is above
-> > the stack and it semes intact:
+> but today the CONFIG_LED_GPIO=y is missing in
+> configs/stm32f429-discovery_defconfig
 >
-> Yes, I too was concerned about why exactly we're changing something here
-> with a commit message that sounds unsure if it's correct to make these
-> changes, only probably correct.
+> to restore the LED support on this board
+>
+>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>
 
-OK, it is true I was hoping for some comments. Unfortunately the code
-has been there forever. But I'll reword it to be more assertive.
-
-Regards,
-Simon
+Applied to ci/master, thanks!
