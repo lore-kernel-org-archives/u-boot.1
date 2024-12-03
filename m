@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 197BCE74ACA
-	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F2F0E74ACA
+	for <u-boot@archiver.kernel.org>; Tue,  3 Dec 2024 19:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EF2B89666;
-	Tue,  3 Dec 2024 20:39:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E4E178966D;
+	Tue,  3 Dec 2024 20:39:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OIsJicU7";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TmqcJ8aw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8634E89185; Tue,  3 Dec 2024 20:39:21 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id BCA018966B; Tue,  3 Dec 2024 20:39:23 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37D8C88E42
- for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:39:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BFA8188E42
+ for <u-boot@lists.denx.de>; Tue,  3 Dec 2024 20:39:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa520699becso951259366b.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:39:19 -0800 (PST)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-53df6322ea7so10388743e87.0
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 11:39:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733254759; x=1733859559; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733254761; x=1733859561; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W3VQ/qQVivQQ5MqIoUl8jrxnJdmyxWnHQgwXzvp31NY=;
- b=OIsJicU7Ap7TDpJ02HHwOX68kCvs5PI/Gnu9bvTpRcSWP5+dOjtYYWTH6Icts4mIw/
- i/537978arMPXurWWuKU6DIOruHZrJG3aG59icXtHPTF5Bp0MIbxKsxySv6bRtcdCsTk
- +hFCCj7BBcEaCNvANMgJAnf6KPKhOdyjNjfZw=
+ bh=n11NXlMcj0zu0knAl5jcTICmrMAD2itsUgpCyU0bcoM=;
+ b=TmqcJ8aw64vDasjGf4HgfMUVVc9PxeqUxxk/g9Jk5wJbE/r/LMEfJ/bB32Wbep7XRf
+ r24MpwNR7bKTjbBibf+YTuBcRg+uDBcsF2xbrkrskqPnx8lafGjGIXj7xqxxhiW8coii
+ c1EsnbKLnfoBvNSTKPuCJSi/O1w04KWQj7LNQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733254759; x=1733859559;
+ d=1e100.net; s=20230601; t=1733254761; x=1733859561;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W3VQ/qQVivQQ5MqIoUl8jrxnJdmyxWnHQgwXzvp31NY=;
- b=VWsqqhSOgTrAeNRtacOkXyuGyJdxUxbZmbasnegIBp/1z5fHdXx0WWwQmCVCA5Iz/4
- Cy/nUjsQyuhR++y7YmQklxhyetK4iQ73oFrdBkmsEEwtydFvPbO4wcB4g2QXAy08VtsC
- ovsXda8pPCdO5i5/uW96SX5P+hb9V2Pp4ME9gOYHVjZKy8WeOj2Xcr2io5bkF5JyH+ae
- yoElDvIE79figBQYVMtThEt133v9+YzBqqjj+ZRLOhCJsheBam5Fy5RcZdBf7unENIvr
- 3SdCtF/DPbWjavujw2cROIJaR2yueT/t5da7cSyCseCKlMg3LOEI7X4/IJcWfrxFckSq
- a7qg==
+ bh=n11NXlMcj0zu0knAl5jcTICmrMAD2itsUgpCyU0bcoM=;
+ b=LmLvIUQFGPCoWmVwcDz2j8TPbJr6BdlJla18PHSP5QXT4Z92IsJago/73AJcS7J9z2
+ wiWIsm6ipsB/yE/GwZr/k7X0ESq6CeREcF6mWHwwviCOlvF5qt93x+PnwBAVVTJlkrQo
+ zOuW2U3vHQDD5vUAM2SpKFFIWGFf9Ezd1p/b4cnVyuk90GAY+AZMRdiCJKLMh35uaoKc
+ 0Jcva/qgtedYBSX57meyExJ5NGWB9TTjxZrfJFJzLeZX/9lcRqAdTBMTUKv1NnumZkF2
+ XqR09fXyAETF4Bhl8tiwiNXA2vGt0h4tGU7WILN8EPpFbbd88c61ngKjWPDR4x7sUMOF
+ EMBA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEuogY3KEQ7+UvJqzWAr3huQzXkDRhnuJFu/KWjiSR9+xn9tyIYZPaw3t81o0cYxbUXbus8CU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzc4VwQlika+yvlLsTm7RNGcEonbQ/xQVXzbal2OABUrycoL1+6
- Tr/qg84WXOVshI0+eb7YaMsWpBI7hLd0BWgHmVdg8JydfuilYcrHy3nLE/cJ+xvMTp4Moq/zQse
- ELPfyD/20ipnEzIbIZTUqHePFhCRed/CJWnra
-X-Gm-Gg: ASbGncv4jjIdy2SE7Tctz7qZnfh+/HN4ZRVFqCxPEKyk4FhMZxPOgiUJNo2jR4MYbG0
- 0qn8Yhn9AOJqRZiRaK2L5dFhnyFUkcZKt
-X-Google-Smtp-Source: AGHT+IFqlJ/26SO+idSBQ3NpZr/USh67qyGn4SHTr8kuoEpVdREpg7vyu0/agZOX/AJ5ILPR8+npMUtXzq57GFAILSg=
-X-Received: by 2002:a17:906:ee89:b0:aa5:3ce5:1e2b with SMTP id
- a640c23a62f3a-aa5f7f2fb1cmr373962366b.60.1733254758615; Tue, 03 Dec 2024
- 11:39:18 -0800 (PST)
+ AJvYcCU1VS+M8qwI1CrMOdm0nD3pbyygeYsWJs2k6wmb14AgYXpjrid8KPW/BeQGw5FoA9omVfx8/VM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzt4gYtyp1wGG8EEaDcwVOswG9jkXNFHJcLY44gY0QET7Vz2T6c
+ QLBzlzCHfT4bppqBneMxg7ZGAtJTv+bvWpVlmCsqjOBsxdnoNvMqQsw8rQbzVqHY4Fv1T9DZZMG
+ g2GdMSz8AlDao2F8skQAPnuLMXe/O6JHCbKsZ2FRQoVS9M30=
+X-Gm-Gg: ASbGncsbX6dFn12cDG9xTyCfcR2E6ssJF1+ntUkH3FCNGg4V4VEiBnKO2fATm+ezh9j
+ UsXj10ADVIOY3VwiZBfTJ9bZvAdSb2Lk6
+X-Google-Smtp-Source: AGHT+IHwBlhV+qkCdzit+L3T2uc8B0Z1n18aXMtqrBj5iSU1PLcri2jLgJK0lb6TeHLW9FkFs0koRv+II1GdQ8IECeg=
+X-Received: by 2002:a05:6512:1189:b0:53d:eef7:a017 with SMTP id
+ 2adb3069b0e04-53e129ff019mr3888750e87.15.1733254761054; Tue, 03 Dec 2024
+ 11:39:21 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 3 Dec 2024 19:39:17 +0000
+ HTTPREST; Tue, 3 Dec 2024 19:39:20 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241103003322.626036-26-sjg@chromium.org>
-References: <20241103003322.626036-26-sjg@chromium.org>
+In-Reply-To: <20241103003322.626036-25-sjg@chromium.org>
+References: <20241103003322.626036-25-sjg@chromium.org>
  <20241103003322.626036-1-sjg@chromium.org>
-Date: Tue, 3 Dec 2024 19:39:17 +0000
-X-Google-Sender-Auth: S45jMxZ3WbjTVCsoisC44C2taMI
-Message-ID: <CAFLszTgXmZwYnCsX4kp6TfAGFBxsg0JkJBZ9ZSBg_wi-RNzrKQ@mail.gmail.com>
-Subject: Re: [PATCH v3 25/25] doc: Add devicetree bindings for options
+Date: Tue, 3 Dec 2024 19:39:20 +0000
+X-Google-Sender-Auth: 9Wm1dmlkKj2-Pd8aWzJYghCXDlo
+Message-ID: <CAFLszThON0yUQ9aT0Kk0koT8MTpRhOB_sXtUCUCdx7qOVe34Vw@mail.gmail.com>
+Subject: Re: [PATCH v3 24/25] led: Drop status_led header file
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,25 +90,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of U-Boot's options have made it upstream, so bring in the binding
-file.
-
-This is taken from dt-schema commit c9b4797
+This is not needed anymore. Drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Enable LED on the 5 affected platforms
-- Reorder patches for bisectability
-- Add dt-schema bindings for LED
-
- doc/device-tree-bindings/options.yaml        |  79 +++++++++++
- doc/device-tree-bindings/options/u-boot.yaml | 136 +++++++++++++++++++
- 2 files changed, 215 insertions(+)
- create mode 100644 doc/device-tree-bindings/options.yaml
- create mode 100644 doc/device-tree-bindings/options/u-boot.yaml
+ include/status_led.h | 104 -------------------------------------------
+ 1 file changed, 104 deletions(-)
+ delete mode 100644 include/status_led.h
 
 Applied to ci/master, thanks!
