@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B9AE7716E
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 12:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EB77E7716B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 13:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A32F896E8;
-	Wed,  4 Dec 2024 13:53:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4EA3289407;
+	Wed,  4 Dec 2024 14:37:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="sDDM5nrM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fSfRA9hy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38166896E8; Wed,  4 Dec 2024 13:53:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C99896BA
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:53:20 +0100 (CET)
+ id 66BFB887D1; Wed,  4 Dec 2024 14:37:55 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 253AF89407
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 14:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733316797; x=1733921597; i=xypron.glpk@gmx.de;
- bh=iR7IGu2IWicyz1c1XCityGOYzrPBsPKX2unsU/q8biU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=sDDM5nrMR7XnVtwxR3r/0hI/j7JXHhy4jNysgp8HJphiJpcK1/kxzOWj50pHwqfj
- fSvZE9CjZbGNs3glBDFD1J6htADcO6N7dBMvpCxmenTp9OX7QZFDEE5Vn/3esA7EB
- cufIkjx/ZMAK8MRXY7XuhpuXNI6VD/M7iT9Nb6Y7h+KLkxj6BKTcSANsnLlzTV4PQ
- fNXMDK3fT/mI1NMAwDF7CfzrZ/3+G7fopBwSMwiYZ+3ToAw6Zty1JjuO1a283i91P
- SSb3Z26YWdMuFSS8JGQHZrsCgijBafd5s0FLtRmxo8qo7XiwnjODVsZR1F7LvbVxD
- b+ksu7BKzKjnWLOtoQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzFx-1t1QcO2Ymf-00URHE; Wed, 04
- Dec 2024 13:53:17 +0100
-Message-ID: <08f00178-cbba-44f1-b9d0-170963b31940@gmx.de>
-Date: Wed, 4 Dec 2024 13:53:16 +0100
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B4Dbjd52050048
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 4 Dec 2024 07:37:45 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1733319465;
+ bh=Rtrn3IudEUWENjG3O8hAow5MgJ/w3z9krB6vJpbbrMM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=fSfRA9hylZqjCYD3+vEiWItZ2N9V407UMUkA/q3RuA0Gk6RfOxnPn0tD1FWbPpzx5
+ yFDbr/iSkf/3uuPBV8UBdC8Vo3CRJZCYNP88drguh75HgHifiIf5ws3j9lyz93N7cq
+ 0cYnX8YnNJAq7jSnvXt98lnGXsM1Os7zQ3abNK6g=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B4DbjTr007942
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 4 Dec 2024 07:37:45 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Dec 2024 07:37:44 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Dec 2024 07:37:44 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B4DbhIl113234;
+ Wed, 4 Dec 2024 07:37:44 -0600
+Date: Wed, 4 Dec 2024 19:07:43 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
+ <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
+ <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
+ <j-humphreys@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH v2 1/2] usb: dwc3-generic: set "mode" based on caller of
+ dwc3_generic_probe()
+Message-ID: <ftdjegd5mctcn3ndvgrl4apyxkzms7hxivxlyjcrk4qrmvsx7r@og3t7eyyhmkt>
+References: <20241203093748.138260-1-s-vadapalli@ti.com>
+ <20241203093748.138260-2-s-vadapalli@ti.com>
+ <9254b268-2336-48ca-91de-9da34a93b467@kernel.org>
+ <6hohujytkznjcemgu2cjhk2x5pxw7euwzojbt6ktji2yp6zft2@i77rsmzwfgj5>
+ <5bd5c98c-530b-4f05-9fbc-e2d867be920a@kernel.org>
+ <dj32jyfvxsds6wsax4tk7kw75zfiutggd5gfbwpklym7gifjih@awk6aerfjwl2>
+ <6b4cb5ed-3d19-4fb2-aba7-90f0a0f4f4f0@kernel.org>
+ <4cgkdnpdn7j5tnfwvvskm3ltiqfnp5lx5gc5hwcrsljpg4bdin@hpkkswe4dej6>
+ <9a69d8ae-221b-4d46-9b4c-7df0bd6fc0af@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [NEXT] Pull request efi-next-2024-12-04
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:M0d44QnbJcQZS2R65Vk6kHfRYgkgxPP86Holcmt6jXqgubCTDZJ
- GTJfaXUnZxRaS2w58bMHtY8XKgvF8lg39jZ2BjSuPjc3g/6IkJBjWaRre2tlB6PxgiT/Mba
- u7HXDhwMTm81cwn1bYxlrp5GXpqp7YJ3Huasq/DILhpsOoetuk7EPvQcN6Mu7x/WN+xgClZ
- BbEmo57uQRcjbTthR23ow==
-UI-OutboundReport: notjunk:1;M01:P0:UKf9OC4O1gI=;O0SU61oCKdUHE71KFiV0cRPzDXF
- iexWeJiOwKz8Re037Y4H0lcTVbuFFsO1p/XIv8yUhyfRpLEhHN+z4goE6GPgu1LT5VmK3RMzW
- nMRdsdIjb9KCpG3nm7Jz6k6DDh/mudAWpdXGc/2xumLqF5HKjY+ooyNFZyHH5ZoHr1jTZ3rMh
- anICLSezqnP+eVh+185qR1AA6/DoQ7Lbmulm5gn9YgN59joo5pVOutQQQF/aW6Muh3FgNjdkv
- uftr90/PefStkbWwccksba1/cuYlw2K+7EpZhPGzwrowzJ48KUBL7fpKd/CtTPieluusCxztC
- /iryKQOZoIW0Fs3Sxo8ZWx7DLEpyuQe25jpv0+tPbboYrt+sdkaCW2/wtFVZuGwQwinH3YT+r
- m8gbWIaUVfMzTY58HvFEdifNTgx63rpbMI2s0XBOy4PqlQOAIDIh2gK9q3eLIw1B0NA3DDD53
- Pi0TVFP7RVn9gTOkIwJWaqIed6aFXy/qCUJB42rKtGyO8OA2oHCpGHpLSwBPft+Gc5A/Q7sie
- vR3tdLuS7A/rr8Nbe/BGlkhniknJohuliRJvuGjG+NzRy0tqHjiDlavQ7uDpYJFE0Dxhnpote
- wIib8RZOU0V/CWFy5g1nvDNn4l/26upJpGFEycvgsbIMoqgu5GiMdXkIoyBaiQOYKEDNXaowz
- H+G/BU8y3JwUjTjArqPeW98saqcqE0Oeqp3gLG5nxLjg6LYJDXDzekMguxcOtpYd0qcWG4y1y
- 16t37u/BlUS3JktsVAYRKULdtF/tcQUrRu6UauthhKCckdif8EvdQWAmtF8Ttj58acFz9nO1l
- YZPr4aFvqMh3kL6bz+azBeb1RQIv93z6jM1gYqdyReHZNETPr/gCOqk1hvWlqmQ+FpEuE7H6c
- hvZrRYHKU1hGPbNcZnbPFpho1OxvhFP5+d+1b6eNSTJcEI/vE2uZfOH8v+OOXq8PONleavX0B
- tVycnkLFAgbXc8Kf0DAsX/AYpgCR7y+dQzsQFurFAMM5IlA6Pa64brda051XzQZP4Vo77LHyD
- 4C0m0vNaoT64nw/XbHhZ4scogBDBds0MMyA52MYixwPQfPcahsCePUVsTPWYVdxZ6q/zSzvQo
- a4E1Q4w4GLpL7VEOPfGEmzo+Ji1M8K
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <9a69d8ae-221b-4d46-9b4c-7df0bd6fc0af@kernel.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,104 +92,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Wed, Dec 04, 2024 at 02:34:56PM +0200, Roger Quadros wrote:
+> 
+> 
+> On 04/12/2024 12:05, Siddharth Vadapalli wrote:
 
-The following changes since commit df863c4aa30ee4e624058f64132b7243c6370ef=
-5:
+[...]
 
-   Merge tag 'xilinx-for-v2025.04-rc1' of
-https://gitlab.denx.de/u-boot/custodians/u-boot-microblaze into next
-(2024-12-03 15:51:56 -0600)
+> > Why not do what this patch does? What is the issue with the current
+> > patch (apart from the checks, which I could retain as well if others
+> > wish so)? The caller clearly mentions the expected role, so why not use
+> > that?
+> 
+> Because the patch is more complicated than it needs to be, now that we know:
+> 1) generic_host_probe() will only be called when dr_mode is "host",
+> 2) generic_peripheral_probe() will only be called when dr_mode is "peripheral"
+> or "otg".
+> 
+> The problem case is generic_peripheral_probe() being called with when
+> dr_mode is "otg".
 
-are available in the Git repository at:
+We can also be sure that generic_periperhal_probe() expects dr_mode to
+be "peripheral" only and not "otg". So why not fix it at the root, which
+is what this patch does? Independent of the issue, is the following a
+valid use-case?
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-next-2024-12-04
+generic_peripheral_probe() with plat->dr_mode = "otg" and hence
+generic_probe() using "otg" rather than "peripheral"
+as is the case now. Is this resulting in something functional for other
+users of the USB Designware Controller? If the user requests "peripheral"
+mode of operation, will "otg" meet the user's requirement? If yes, I have
+no further objections. Irrespective of this, if you believe that the fix
+should be in the core as you indicated below, please feel free to post
+the patch.
 
-for you to fetch changes up to 6caec797d5c453ccba5eeb0bc9194c5939094cb4:
+> 
+> Another alternative could be to override dr_mode to "peripheral" if
+> it was "otg" in dwc3_generic_probe before calling dwc3_init() but
+> I don't prefer that as we are loosing platform information here
+> and it will have to be reverted when dual-role support is added in core.c.
+> 
+> So better to deal with this in core.c and add a note why we are doing it.
+> 
 
-   efi_selftest: add test for IPv4 Config2 protocol (2024-12-04 12:24:38
-+0100)
+[...]
 
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23707
-
-=2D---------------------------------------------------------------
-Pull request efi-next-2024-12-04
-
-With this pull request support for the EFI_HTTP_PROTOCOL and
-EFI_IP4_CONFIG2 protocols are added. This allows EFI applications
-to load files via HTTP.
-
-UEFI:
-       add efi_dp_from_ipv4 function
-       add efi_net_set_addr, efi_net_get_addr functions
-       add support for HTTP device path
-       set EFI bootdevice device path to HTTP when loaded from wget
-       add support to send http requests and parse http headers
-       provide EFI_IP4_CONFIG2_PROTOCOL
-       provide EFI_HTTP_PROTOCOL
-       support IPv4() in device path to text protocol
-       provide unit tests for the HTTP and IPv4 Config2 protocols
-
-Network:
-       zero terminate string with headers in wget_fill_info()
-       zero terminate string with headers in wget_lwip_fill_info()
-       pass port and server_name via wget_ctx in lwIP network stack
-       let wget_with_dns work with dns disabled
-
-Others:
-       Add HTTP and IPV4 Config II protocols to UUID library functions.
-
-=2D---------------------------------------------------------------
-Adriano Cordova (14):
-       lwip: wget: pass port and server_name via wget_ctx
-       net-lwip: zero terminate string with headers in wget_lwip_fill_info=
-()
-       net: wget: let wget_with_dns work with dns disabled
-       efi_loader: device_path: add definition of
-DEVICE_PATH_SUB_TYPE_MSG_IPV4
-       efi_loader: device_path: add efi_dp_from_ipv4
-       efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
-       efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
-       efi_loader: device_path: add support for HTTP device path
-       efi_loader: net: set EFI bootdevice device path to HTTP when
-loaded from wget
-       efi_loader: net: add support to send http requests and parse http
-headers
-       efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
-       efi_loader: efi_net: add EFI_HTTP_PROTOCOL
-       efi_selftest: add test for HTTP protocol
-       efi_selftest: add test for IPv4 Config2 protocol
-
-Heinrich Schuchardt (3):
-       net: zero terminate string with headers in wget_fill_info()
-       efi_loader: add IPv4() to device path to text protocol
-       lib: uuid: display HTTP and IPV4 Config II protocols
-
-  include/efi_api.h                        | 220 +++++++++++++
-  include/efi_loader.h                     |  41 +++
-  include/net-common.h                     |   7 +-
-  lib/efi_loader/Kconfig                   |  17 +
-  lib/efi_loader/Makefile                  |   2 +
-  lib/efi_loader/efi_bootbin.c             |  42 ++-
-  lib/efi_loader/efi_bootmgr.c             |   2 +-
-  lib/efi_loader/efi_device_path.c         | 116 ++++++-
-  lib/efi_loader/efi_device_path_to_text.c |  23 ++
-  lib/efi_loader/efi_http.c                | 548
-+++++++++++++++++++++++++++++++
-  lib/efi_loader/efi_ipconfig.c            | 214 ++++++++++++
-  lib/efi_loader/efi_net.c                 | 371 ++++++++++++++++++++-
-  lib/efi_selftest/Makefile                |   2 +
-  lib/efi_selftest/efi_selftest_http.c     | 321 ++++++++++++++++++
-  lib/efi_selftest/efi_selftest_ipconfig.c | 176 ++++++++++
-  lib/uuid.c                               |  14 +
-  net/lwip/wget.c                          |  24 +-
-  net/net-common.c                         |   2 +-
-  net/wget.c                               |  45 ++-
-  19 files changed, 2131 insertions(+), 56 deletions(-)
-  create mode 100644 lib/efi_loader/efi_http.c
-  create mode 100644 lib/efi_loader/efi_ipconfig.c
-  create mode 100644 lib/efi_selftest/efi_selftest_http.c
-  create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
-
+Regards,
+Siddharth.
