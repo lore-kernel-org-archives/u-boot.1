@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4A0E7716B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 10:05:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A657E7716B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 10:11:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3BF5890A8;
-	Wed,  4 Dec 2024 11:05:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C055289383;
+	Wed,  4 Dec 2024 11:11:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="twbRJiGo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="t2RFR3/a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4019B8967A; Wed,  4 Dec 2024 11:05:28 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DD5C88E35
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 11:05:25 +0100 (CET)
+ id 903D38962C; Wed,  4 Dec 2024 11:11:13 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7226D891B1
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 11:11:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B4A5Fit1586975
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 4 Dec 2024 04:05:15 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733306715;
- bh=3cZ7nKXxir7V69D+BOfD8eG/8hhOnui2SkA4H39ydks=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=twbRJiGo+TDafpZk+hkkiAj7Cq5noGvOyZbbUfoCbeKicLKA7tawQ5yIy068jh3ws
- N/gRsFPLzFQRgP9PIWOMZl2EAA/jM/R6ZsWvMtkmj+uEwOKDVd7ymIOZ9ouFbPoyuP
- D2vaiSjGnwFUabjYNNLfp6OkAPTk0H2ABJEsZOX4=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B4A5FJA004774
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Dec 2024 04:05:15 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Dec 2024 04:05:14 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Dec 2024 04:05:14 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B4A5DHh115266;
- Wed, 4 Dec 2024 04:05:13 -0600
-Date: Wed, 4 Dec 2024 15:35:12 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Roger Quadros <rogerq@kernel.org>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
- <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
- <j-humphreys@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH v2 1/2] usb: dwc3-generic: set "mode" based on caller of
- dwc3_generic_probe()
-Message-ID: <4cgkdnpdn7j5tnfwvvskm3ltiqfnp5lx5gc5hwcrsljpg4bdin@hpkkswe4dej6>
-References: <20241203093748.138260-1-s-vadapalli@ti.com>
- <20241203093748.138260-2-s-vadapalli@ti.com>
- <9254b268-2336-48ca-91de-9da34a93b467@kernel.org>
- <6hohujytkznjcemgu2cjhk2x5pxw7euwzojbt6ktji2yp6zft2@i77rsmzwfgj5>
- <5bd5c98c-530b-4f05-9fbc-e2d867be920a@kernel.org>
- <dj32jyfvxsds6wsax4tk7kw75zfiutggd5gfbwpklym7gifjih@awk6aerfjwl2>
- <6b4cb5ed-3d19-4fb2-aba7-90f0a0f4f4f0@kernel.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733307066; x=1733911866; i=xypron.glpk@gmx.de;
+ bh=CGFIcYaqbMVURpPsqxHZc30Q7YDqWmdyvWGU4MrZtnc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=t2RFR3/aKtIy0/R1ut6Q67BL+dphg5fiiPF5/zMSZx6aKc5jkT/6r3PBJ4IUVPQc
+ 1OO+kBLNKDMzjkL1mrw6JOpNUwMjAi5epZwA5coWUWzdzm7JTpbXDu4ff17wzSxGB
+ I6LjkqgCCJWJfOygYLqHbMMsQbBpIZCWOVaJSfBIRtzfEKYcD27LGwbVNKQTeImY+
+ qyjSxMx/Am0806hvAQOuHKckW32tCdup9QfcLHF6s270Eze5s+lgGywsyhYEbxO0t
+ lfX4pnjQVWpxIINpJ8Ugl7gFG6qXHEerr7cL+ArDU1OolvFio4mZyww9n96macjkx
+ uSn+C3bZB6MlrlGwYg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M59C2-1tJsoI2Whg-008opM; Wed, 04
+ Dec 2024 11:11:06 +0100
+Message-ID: <4492be69-8655-4391-8a44-3b4cb682c3ec@gmx.de>
+Date: Wed, 4 Dec 2024 11:11:00 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <6b4cb5ed-3d19-4fb2-aba7-90f0a0f4f4f0@kernel.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: fix pe reloc pointer overrun
+To: Aleksandar Gerasimovski <Aleksandar.Gerasimovski@belden.com>
+References: <SA1PR18MB56923B0952E67CC949A90A02992A2@SA1PR18MB5692.namprd18.prod.outlook.com>
+Content-Language: en-US
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <SA1PR18MB56923B0952E67CC949A90A02992A2@SA1PR18MB5692.namprd18.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:u3HbbsNXaCQb3u2gntA+auTp+Y7WWfVJJKt7ditIeluxtIb2MCe
+ Lut/LZgtt67kvesm56fnlKljWmdsQGXq62JxlIQuWxzF2k9/0BvyR4AfGFu22gYvTjyLDk1
+ ocRKD61xlz6MesOZgdlhJfqugjfXcPSgwYJUFAq0N7RhrMFf6flZy1kTcRj3BUlELy6qfcO
+ ymNLsSHIIVyWvKuDujljQ==
+UI-OutboundReport: notjunk:1;M01:P0:XWllKRlTmzU=;E2AQBXH7y8IaOAGhgveKxnOb4J+
+ cU3/cyOz2orcFdjnxWdtThxrKuPMCuWF4SFS6XVMU0xAiPfwK+QDTG6L9EWveurAkr8uNBpRL
+ CDfPZxsGE6+zIzrp8mKOxA/rL4GRmarOnabSaMBjjusNe17bS/YHoGk/DnAt+oOGIUP520tlm
+ QlGw3iI0CSBd9o3IbYfQuv8L3rCednzw3Z5WVhSNbghHy9Gw3lRBLlQLuEACDG4NRSbEuXOWC
+ oW5BqS6WvQcRlxVyYa4psV5gkMmMmUtymC2PxBKDiSuBp9VFNKrlIA73WI9PRcxA36CCnoSKI
+ fbJ6oBeuq+U6SBxHYUwy+AMpKyd+XrVGtZxlvSPlvsYISBL1cTbcmaWzX55cnn6uiw50cZprx
+ /SgbgzRbWYaN0qrSKtaYwPm489WRZv8vAHayTiSGGpcluAiWFnCw3c+nscEQaWUw0/8sbv7mc
+ aN9ReQdpzWmNomhpr+oFyBmuHazcTRvhFXAMhF7NU1X4hJh8t1hRbyGY4ycIxTUHU8QGMx0jM
+ cm5E66JldxZh/7fMU5dqABUJTWlwBFFv2D3qMHGHXPa8rv5Ug2UujiIi62Xlx5Snwv5qUMUC4
+ 58Kr4d0hXlTOLNSsdgWgDdmQ2m68VbSfB4qCeqDPhlQq1MQGlnauYJOiq0tkLD9AJiTOHTZBV
+ WWPn1T8iGdybtTRdiJOcjyjfp5IEGpx1rDn5AVFQRViNvrd1xZV341lT2OLTaShBKgux4Qg8k
+ +bQvT0JEcEcItjHq0426jlWW8wxxW2nQLmSL/spUQW4qX6eO4tLJiBCJ2CCx+0qh8A0YO25ve
+ Yn5kULz0Cs2gPGUtxxe473mW/28QmaoqGBkEkSBVAnwDTvvymnO/AKCn6G1AVUrFQ3d1kNMLH
+ QucK4PuzlM8tZKGinTlzbTZo8uXBTpgqJQiLYPSUUJi91ThRHsTvismgaBWRTZJOTRm2gtwg4
+ /PsSmvJGdD/B5l+zBpX8dFtvVYWN0eiaIdxeULRclIHRy8TwNnBOVijW4g7580+Zh4gaiguGR
+ UYXAKu8rTPdqTql7NcjL6uu0y/FMKDTlYv3rFW8Wm6wtlPlExABWZRS8otOIxH4+2QmLs3vpb
+ oKv4mLC7NhnKPuJxvqpTcGPmmDG1Tu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,141 +94,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 04, 2024 at 11:57:14AM +0200, Roger Quadros wrote:
-> 
-> 
-> On 04/12/2024 09:47, Siddharth Vadapalli wrote:
-> > On Wed, Dec 04, 2024 at 09:32:23AM +0200, Roger Quadros wrote:
-> >>
-> >>
-> >> On 04/12/2024 07:16, Siddharth Vadapalli wrote:
-> >>> On Tue, Dec 03, 2024 at 09:23:11PM +0200, Roger Quadros wrote:
-> > 
-> > [...]
-> > 
-> >>>>> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> >>>>> @@ -51,7 +51,8 @@ struct dwc3_generic_host_priv {
-> >>>>>  };
-> >>>>>  
-> >>>>>  static int dwc3_generic_probe(struct udevice *dev,
-> >>>>> -			      struct dwc3_generic_priv *priv)
-> >>>>> +			      struct dwc3_generic_priv *priv,
-> >>>>> +			      enum usb_dr_mode mode)
-> >>>>
-> >>>> This is not necessary as dwc3_generic_host_probe will only be
-> >>>> registered if dr_mode == "host" and dwc3_generic_peripheral_probe
-> >>>> will only be registered if dr_mode == "host" or "peripheral"
-> >>>
-> >>> But I don't see it happening that way. dwc3_generic_host_probe() or
-> >>> dwc3_generic_peripheral_probe() seem to be invoked based on the command
-> >>> executed - USB Host command will trigger generic_host_probe() while USB
-> >>> Device/Gadget command will trigger generic_peripheral_probe().
-> >>>
-> >>
-> >> But, when dr_mode is "otg" generic host driver is *not* bound to the
-> >> DWC3 device. So dwc3_generic_host_probe() will never be called for it.
-> > 
-> > In USB DFU boot, "dwc3_generic_peripheral_boot()" is invoked. Please
-> > test it out on AM625-SK. I was able to observe this on AM62A7-SK.
-> 
-> We do want dwc3_generic_peripheral_boot() to be invoked with dr_mode is "otg".
-> As we still do not support dual-role switching in u-boot.
-> 
-> And you need that for DFU as well. Did I miss something?
+On 29.11.24 22:09, Aleksandar Gerasimovski wrote:
+> The fix provided by 997fc12ec91 is actually introducing
+> a buffer overrun, and the overrun is effective if the
+> memory after the reloc section is not zeroed.
+> Probably that's why this bug is not always noticeable.
+>
+> The problem is that 8-bytes 'rel' pointer can be 4-bytes aligned
+> according to the PE Format, so the actual relocate function can
+> take values after the reloc section.
 
-You were mentioning that "dwc3_generic_host_probe()" will not be called,
-but that is unrelated to the issue. I was pointing out that
-"dwc3_generic_peripheral_probe()" is invoked, with plat->dr_mode set to
-"otg" which currently results in PRTCAPDIR set to 11b which results in
-the issue. So the patch aims to address this by setting mode based on
-caller rather than using what is mentioned in the device-tree. This
-should be in sync when "dr_mode" is either "host"/"peripheral", but in
-the case of "otg", we run into issues which is fixed by this patch.
+Sections have to be at least 512 bytes aligned. The file alignment
+cannot be smaller the 512 bytes either.
 
-[...]
+Hence for a valid EFI binary the value of "rel" when entering
+efi_loader_relocate() will always be at least 512 aligned.
 
-> >>> 2. dr_mode = "otg" results in the "PRTCAPDIR" field of the "GCTL"
-> >>> register of the USB Controller being set to 11b. According to the
-> >>> datasheet of the Designware USB Dual Role Controller, "PRTCAPDIR"
-> >>> should never be set to any value other than 01b (Host) and 10b (Device).
-> >>> Quoting the datasheet:
-> >>> "Programming this field with random data causes the controller
-> >>> to keep toggling between the host mode and the device mode."
-> >>>
-> >>> Therefore, in order to avoid programming 11b in "PRTCAPDIR", and, given
-> >>> that the caller specifies the intended role, rather than simply using
-> >>> the "dr_mode" property to set the role, set the role on the basis of the
-> >>> caller (intended role) and the device-tree (platform support).
-> >>> ----------------------------------------------------------------------------
-> >>>
-> >>> Point #2 above is the main reason why dr_mode cannot be set to "otg" in
-> >>> dwc3_generic_probe(). The only difference now is that the check can be
-> >>> dropped as you have indicated, so the last paragraph above will change
-> >>
-> >> Finally we are at the root of the problem. But the solution is not to
-> >> change the dr_mode but instead handle it correctly in dwc3_core_init_mode()
-> >>
-> >> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> >> index a35b8c2f646..7f42b6e62c6 100644
-> >> --- a/drivers/usb/dwc3/core.c
-> >> +++ b/drivers/usb/dwc3/core.c
-> >> @@ -752,13 +752,8 @@ static int dwc3_core_init_mode(struct dwc3 *dwc)
-> >>  		}
-> >>  		break;
-> >>  	case USB_DR_MODE_OTG:
-> >> -		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_OTG);
-> >> -		ret = dwc3_host_init(dwc);
-> >> -		if (ret) {
-> >> -			dev_err(dwc->dev, "failed to initialize host\n");
-> >> -			return ret;
-> >> -		}
-> >> -
-> >> +		/* We don't support dual-role so restrict to Device mode */
-> >> +		dwc3_set_mode(dwc, DWC3_GCTL_PRTCAP_DEVICE);
-> > 
-> > But is this acceptable? Why not default to Host? I went through a series
-> 
-> I will let others chime in if it is acceptable or not.
-> 
-> > Why not default to host? 
-> 
-> Because we don't bind the generic_host driver at all when dr_mode = "otg".
-> So XHCI driver will not be probed and host mode will not function.
-> 
-> > I went through a series
-> > for defaulting OTG to Device for the Cadence Controller which was
-> > objected at:
-> > https://lore.kernel.org/r/62c5fe13-7f0e-e736-273e-31a8bbddbf13@kernel.org/
-> > with the suggestion to use the cable to determine the role.
-> > 
-> 
-> dual-role is a new feature for this driver in u-boot which can be added
-> in the future if needed.
-> The current problem is to get DFU/device mode to work when dr_mode is "otg".
-> 
-> As the dwc3-generic driver only registers the device controller when
-> dr_mode is "otg" I don't see any other neater way to fix it than to
-> limit the controller to device mode if dr_mode is "otg".
+>
+> One example is the following dump from the reloc section:
+>    bce26000: 3000 0000 000c 0000 0000 0000 0000 0000
+>    bce26010: 7c00 9340 67e0 f900 1c00 0ea1 a400 0f20
 
-Why not do what this patch does? What is the issue with the current
-patch (apart from the checks, which I could retain as well if others
-wish so)? The caller clearly mentions the expected role, so why not use
-that?
+Please, provide an example image for download to give the full picture.
 
-> 
-> The only only other driver calling dwc3_init() is dwc3-layerscape.c. whose
-> commit log states
-> "OTG mode is not supported yet. The dr_mode in the devicetree will either
->  have to be set to peripheral or host."
-> 
-> Or you can go all the way and get the dual-role mode working the right way
-> where you check user request along with cable status and allow/prevent a
-> certain role.
+>
+> This section has two relocations at offset bce26008 and bce2600a,
+> however the given size (rel_size) for this relocation is 16-bytes
 
-The current patch seems to be an intermediate solution (actually, it
-might be what should have been done when the code was first introduced
-itself. Why use plat->dr_mode at all, except maybe to check if the
-platform supports what is requested by the caller?)
+The value of "rel_size" used to calculate "end" is not the size of a
+relocation but the size of the relocation table.
 
-Regards,
-Siddharth.
+The PE-COFF specification describes:
+
+"SizeOfRawData
+
+The size of the section (for object files) or the size of the
+initialized data on disk (for image files). For executable images, this
+must be a multiple of FileAlignment from the optional header. If this is
+less than VirtualSize, the remainder of the section is zero-filled."
+
+The situation above cannot occur if you follow the specification and
+zero fill the raw data up to SizeOfRawData which is a multiple of 512.
+
+> and this is coming form the efi image Misc.VirtualSize, so in this
+> case the 'reloc' pointer ends at affset bce2600c and is taken as
+> valid and this is where the overflow is.
+>
+> In our system we see this problem when we are starting the
+> Boot Guard efi image.
+>
+> This patch is fixing the overrun while preserving the fix done
+> by 997fc12ec91.
+
+Before 997fc12ec91 we had "rel < end - 1".
+
+With "rel + 1 < end" you are not preserving the change but reverting it.
+
+Best regards
+
+Heinrich
+
+>
+> Signed-off-by: Aleksandar Gerasimovski <aleksandar.gerasimovski@belden.c=
+om>
+> ---
+>   lib/efi_loader/efi_image_loader.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_imag=
+e_loader.c
+> index 0ddf69a091..04075d83cb 100644
+> --- a/lib/efi_loader/efi_image_loader.c
+> +++ b/lib/efi_loader/efi_image_loader.c
+> @@ -121,7 +121,7 @@ static efi_status_t efi_loader_relocate(const IMAGE_=
+BASE_RELOCATION *rel,
+>                  return EFI_SUCCESS;
+>
+>          end =3D (const IMAGE_BASE_RELOCATION *)((const char *)rel + rel=
+_size);
+> -       while (rel < end && rel->SizeOfBlock) {
+> +       while (rel + 1 < end && rel->SizeOfBlock) {
+>                  const uint16_t *relocs =3D (const uint16_t *)(rel + 1);
+>                  i =3D (rel->SizeOfBlock - sizeof(*rel)) / sizeof(uint16=
+_t);
+>                  while (i--) {
+> --
+> 2.34.1
+>
+> **********************************************************************
+> DISCLAIMER:
+> Privileged and/or Confidential information may be contained in this mess=
+age. If you are not the addressee of this message, you may not copy, use o=
+r deliver this message to anyone. In such event, you should destroy the me=
+ssage and kindly notify the sender by reply e-mail. It is understood that =
+opinions or conclusions that do not relate to the official business of the=
+ company are neither given nor endorsed by the company. Thank You.
+
