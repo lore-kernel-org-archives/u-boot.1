@@ -4,80 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC31E7716B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 12:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD2CDE7716E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 12:29:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CF389221;
-	Wed,  4 Dec 2024 13:10:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 23BEC8917D;
+	Wed,  4 Dec 2024 13:29:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ezsSeALj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e+P52DKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C601F8926D; Wed,  4 Dec 2024 13:10:35 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B04F38917D; Wed,  4 Dec 2024 13:29:37 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57B8C88C98
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:10:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FFB888E31
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:29:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733314226; x=1733919026; i=xypron.glpk@gmx.de;
- bh=gnUOcsYaI4G5egFQ1XdC3qaRUiXebLiqxNP0FMiB5v8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=ezsSeALjnwJ/iPiAqjzEkwbIk3q8IqvGu9Q5r8ARsj7NodWTJc5xhjuN/jUxNAAh
- Dt09J+qp5M1WSRA5Pe6uBp+qU0blAp4F43DX2FG2fe84KnBSy/yAx3biyfHIEbWGi
- RCCJxFEl6a4kRjMmfvttz4gFfGIu0RQhFdZawwDRWDIlM2Bj/tqTLQXVvWBYjkRFs
- hiScWKXzD1FQdswhFVg0Eeu592+UjhDowhoO3+JvTxOzjSwunoBaFqTOrW0fqMq1H
- 2UGCWwEzdZtRfS8DQH3jjsPw2CJdcmj5uemYbyE00hHxXsdg4bjQEMzAz6lHioQF5
- GO+rp22VVKHZRVNm4A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mg6Zq-1trc3o2BdG-00mn3o; Wed, 04
- Dec 2024 13:10:26 +0100
-Message-ID: <8910d434-2d77-425f-aa81-8eb803078aef@gmx.de>
-Date: Wed, 4 Dec 2024 13:10:19 +0100
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-432d86a3085so57019995e9.2
+ for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 04:29:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733315375; x=1733920175; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=bgSEycTJe8ZZe2YXh+I7WdbPSWJd25/r4ZhvaxFT3CA=;
+ b=e+P52DKN+zQk8EX6+nPTBDVpKkbLTssEEytQ415U4zTvk4azkmmXuhMQzAseNRxAKo
+ hZsXwvQcAwbzjBrGs652p7sZ404mDUIxLn+iWF6gybQ42BzkxwLLDFcQUn3JyLLlHhWR
+ oxzsGq479Ls36HbbbL0ZaCQaakLxrzfZMWI4KnuhAXsFqYlwKmPzuRw+Lg0JNCCpYmLa
+ UQH8ezIOptvB5dHZ6hNsi658BxYDkn+gBOkasJYikaoQumMRp9MhDYVPXfvj0X0jnuRc
+ qZuf1I/c2m37Hph7aeTf2jtXl0zt0ekih17oDyEafqlSkFGfHgYoo/hNE0G2PxEmqlLZ
+ XY6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733315375; x=1733920175;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=bgSEycTJe8ZZe2YXh+I7WdbPSWJd25/r4ZhvaxFT3CA=;
+ b=HBlf1VSi7a4dmZOqvtO67z3xhp4CWmtYcW8hWiDmct4B+tSF/nPyzmeNkBkQZ/E0C9
+ 9nu1viYLAcdq8cULPrbrr81pc0ZHLxnsPLKmOK5ys0pCWV4oYaPYWSvbLK82PJRWz3TA
+ FHPo3zp+iZWkKcfRACBuCEsphrZ6OYUPK3uDVKb67TnLRnHbgoOs1/9SuFOpEK+bdkdH
+ FSTNxU9+hWltW/Zagn2f7/o9KYGpIw2JX5F/Dse8WL4GdhCInnrFvyPo+s395dzqiwHM
+ aIbW45viZHtEzG/nO5+qIQGDbnyeSlw1uZvUl3dicxkgyFA01fTyZCIHhuNz4zhhsn9Q
+ 4LFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXOe56OUWSXwgNuZkY6NO1AiUWkxAnAY6VPnphgQJtYJYkRNsRBF1IjZeuUoLo5Alj6z+scWtM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyR7gavi77nZ70WT2+Df7BcvE18MtfKx9RWqwf9/hyXz/ow1FSb
+ TqvXuxjyctIlVxevWoH0lgtQNSOziTelXSYSPRpgcE44ZzlhoaSLS6WQUmitQxA=
+X-Gm-Gg: ASbGnctdCrMVFSie5WUp//vyJldvRL81qIeukqlLuiOsXxosY1NCWk4yOVMsUfa0vMp
+ tRX+EJuUAFC8sYUEZiGc6QqGjL6Ga/YBuj9QpMMp6c/iON3HQiZIY3wQ9RIa9Yep1rL1ljJwjTw
+ 1FqBOsqP3oOURAoHQ/JClqSGTPHe6YfrduTKhvhcdbi1wytcoPVo3INDjzd1ExdrCqwIWxnmOur
+ IVRnvf1E81RAg+5+JkbhvY6cZgqGLHjlH/uGLab6rVWneNQsDaw3aPJKLDe/BWXmBoQCKgTZvmv
+ LA2jibEaLtQWdo6sfS3Va018
+X-Google-Smtp-Source: AGHT+IHTbke5Wr4COwzTCx8K/1Y4N4DnasjhkrkQwUL0ZO+nMWn1er8889S5rkE2Tb7UwUhCQIxK6A==
+X-Received: by 2002:a5d:64c5:0:b0:385:dffb:4d70 with SMTP id
+ ffacd0b85a97d-385fd435fb7mr5388417f8f.54.1733315374912; 
+ Wed, 04 Dec 2024 04:29:34 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:740:b323:3531:5c75?
+ ([2a01:e0a:982:cbb0:740:b323:3531:5c75])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-385e1824ec4sm13761157f8f.108.2024.12.04.04.29.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Dec 2024 04:29:34 -0800 (PST)
+Message-ID: <2015391d-5196-4860-817f-a7ef317b980c@linaro.org>
+Date: Wed, 4 Dec 2024 13:29:33 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andy Yan <andyshrk@163.com>,
- =?UTF-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [MASTER] Pull-request efi-2025-01-rc4
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 0/6] ufs: core: initial cleanup and defines sync with
+ Linux v6.12
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Cc: michal.simek@amd.com, marek.vasut+renesas@mailbox.org,
+ bmeng.cn@gmail.com, venkatesh.abbarapu@amd.com, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+References: <20241120-topic-ufs-cleanup-v1-0-a5cef54b1cdc@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20241120-topic-ufs-cleanup-v1-0-a5cef54b1cdc@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:eLgojZNERYo6HxL80fRBwd6aTt816/UAOrEs7zQd8ElcFyZdk11
- BMyRS6sGKPn8LuMyJUNqswFr4/RioPYBPfwPGNIF9CC1E0QG7HvP2sDvH1+8gMIZ3QiiiQs
- QvlwA8sVPlZ4P3L/GpD1HkMwEfg0eOsdjU99GGnWYEngBgakgStUobKOhS4Zwqa5SHpmXZl
- ZMVqHo/z1GDfdBXVn406Q==
-UI-OutboundReport: notjunk:1;M01:P0:isDTeEC2cZw=;ldwjqTSVeLJSnWQwXiETJbl/OhA
- Cr9Mh4c7Li8eCr8r+aCiBRDe0pPXitoyGXZHkMRg/c9OZVoY1jvjVpWZLW6J7kUrRPgtsXy3W
- VaElHqUJAXGXXM3d/ve8cakwlA8C5FJhlMCTFlcBXCPwyw5QQhqpj7oj8PvmUtRwPG2wT8fDg
- A7Mwz71gV80Bq9VkhG7WVs/P5X02zWbFuoAXAmVx0CQjG86kwSfLsrL1NFpgkDrzv5MivRcyL
- 5UXhgj0J5QFjpC3hUlNMdVPncqJZCLVt6YLQX77HL9OnZKrqUxvzxQyMv0iiHVFzUcKkzp3ys
- wIDXEIjZ5HUAn/LrThcMwV1ubPrJGUberLfvFbj7KSv9Jv79JslwvacpAmZ3O22lqpb1rPiZB
- sBHD3DD6sp5qm8GVbp7hNC/LOaiVkjRMqbNKdY6NyqbDgWByrunpD85TI+BnHnyGACLZPLOEw
- UbuerW3VxFJ4cpenjlwB3wOhQ9sF4vPjcswKgp2ylesp8znIl8dzOlN6TqZaYSioL6CSwArZA
- 3u67S8BMIF9S6CWeOEjE/LECyokZX+X40TCsqKV7WBhZAhg9/0xZGajTToFhJB85HdI/3zm0O
- UUefbzVPRRpd5CV9ZmXH+wN9NcTSiIvGrXNbpkCicAS+7015k09rlm4PRt7yLGO2rEAdZyK5V
- 7G0gjIbFGGlptAe8REsUks4AClgaiORCcYxrRVMhl9wejbWvckQEKWnzFrCh1y41c2BZeWQFS
- cRTzodKcB5xD7wO825xODzeBiF2xo4y6NoDazqJ2u5nJK8XqpHHuP2G1qMz2v8z6hnkDceNBu
- rcYOtAumYgbuK8d+xUf7LseUwTyxD3NqokcEGtJs44EPZtX6zcYXiBTSioss0uEUhmbjZ40hJ
- on7Gap5sI041+rTOO5Ec0XYtPkJBuvRR5HAHzSToGFF2vjqPwjglsFgUukmnO7umOILha7CCX
- Nb/+EE+bJDkwxiUs/pDBHaHhecpsyHmoSByf632CDfaGSE1Ul2jx9CE4gHjokcuhjtz8pLYEa
- Nl4kp3I/9WZc/zd+8+5y9S3CBLNPFaaQOYLRaRX8HFyLsOT4SEbXtMWL+NEozDgL8IyzLBE0W
- 0c/sWFyy/3e1KwVW66Q9AK1rfB9Sao
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,119 +126,46 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi,
 
-The following changes since commit f96e5133184aac377b54bd61f8abf78710f2ee5=
-6:
+On 20/11/2024 10:22, Neil Armstrong wrote:
+> This serie fixes the build and checkpatch warnings, and
+> does a split of the ufs.h into a separate ufshci.h which
+> helps syndhronizing the defines from Linux v6.12.
+> 
+> No functional changes intended, tests on hardware
+> are welcome.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Neil Armstrong (6):
+>        ufs: core: include missing include/ufs.h
+>        ufs: core: mark unexported functions as static
+>        ufs: core: cosmetic fixups
+>        ufs: core: move ufshci defines in a separate header
+>        ufs: core: sync unipro.h with Linux v6.12
+>        ufs: core: sync ufshci.h with Linux v6.12
 
-   Merge branch 'master' of
-https://gitlab.denx.de/u-boot/custodians/u-boot-samsung (2024-12-03
-12:37:20 -0600)
+Gentle ping, could you have a quick look ?
 
-are available in the Git repository at:
+Thanks,
+Neil
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2025-01-rc4
-
-for you to fetch changes up to 657310322e5893d0b1bbba002fbe59b318062192:
-
-   doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayipN
-(2024-12-04 11:26:34 +0100)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23706
-
-=2D---------------------------------------------------------------
-Pull-request efi-2025-01-rc4
-
-With the move to bootstd booting via the EFI boot manager stopped to
-consider all block devices due to missing probing.
-
-With this pull request probing of all bootdevs before running the boot
-manager is achieved. Prerequisite changes are needed to pass the CI.
-
-       efi_loader: simplify efi_disk_rw_blocks()
-       test: fix test_extension.py
-       configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
-       CI: xilinx_versal_virt: disable USB_DWC3
-       net: eth_bootdev_hunt() should not run DHCP
-       cmd: bootmenu: add parameter -e for UEFI boot options
-       efi_loader: run bootdev_hunt() to find ESP
-
-Further UEFI changes:
-
-       Avoid writing message in Exit() boot service
-       Update startimage_exit self-test to check error
-       Don't warn if the TCG2 FinalEvents table is not installed
-
-Documentation changes:
-
-       cmd: bootmenu typo 'read'
-       clk: mpc83xx: Fix typo in "Coherent System Bus"
-       efi_loader: Fix typos in enum efi_allocate_type
-       doc: sending_patches: Fix spelling of "its"
-       doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayi=
-pN
-       doc: board: theobroma-systems: fix feature list in introductions
-
-=2D---------------------------------------------------------------
-Andy Yan (1):
-       doc: coolpi: Fix document style
-
-Heinrich Schuchardt (9):
-       efi_loader: simplify efi_disk_rw_blocks()
-       test: fix test_extension.py
-       configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
-       CI: xilinx_versal_virt: disable USB_DWC3
-       net: eth_bootdev_hunt() should not run DHCP
-       cmd: bootmenu: add parameter -e for UEFI boot options
-       efi_loader: run bootdev_hunt() to find ESP
-       cmd: bootmenu typo 'read'
-       efi_loader: avoid writing message in Exit() boot service
-
-Ilias Apalodimas (1):
-       efi_loader: Don't warn if the TCG2 FinalEvents table is not install=
-ed
-
-J. Neusch=C3=A4fer (2):
-       clk: mpc83xx: Fix typo in "Coherent System Bus"
-       doc: sending_patches: Fix spelling of "its"
-
-Jerome Forissier (1):
-       doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayi=
-pN
-
-Quentin Schulz (1):
-       doc: board: theobroma-systems: fix feature list in introductions
-
-Simon Glass (2):
-       efi_loader: Fix typos in enum efi_allocate_type
-       efi_loader: Update startimage_exit self-test to check error
-
-  .azure-pipelines.yml                            |  1 +
-  .gitlab-ci.yml                                  |  1 +
-  cmd/bootmenu.c                                  | 41
-+++++++++++++++++++------
-  configs/sandbox_defconfig                       |  1 -
-  doc/board/coolpi/genbook_cm5_rk3588.rst         | 11 ++++---
-  doc/board/theobroma-systems/puma_rk3399.rst     |  1 +
-  doc/board/theobroma-systems/tiger_rk3588.rst    |  7 +++++
-  doc/develop/sending_patches.rst                 |  2 +-
-  doc/usage/cmd/bootmenu.rst                      | 13 ++++++--
-  doc/usage/environment.rst                       | 31 ++++++++++---------
-  drivers/clk/mpc83xx_clk.h                       |  2 +-
-  include/efi.h                                   |  2 +-
-  lib/efi_loader/efi_boottime.c                   |  7 ++---
-  lib/efi_loader/efi_disk.c                       |  8 ++---
-  lib/efi_loader/efi_setup.c                      |  8 +++++
-  lib/efi_loader/efi_tcg2.c                       |  2 +-
-  lib/efi_selftest/efi_selftest_startimage_exit.c |  6 ++--
-  net/eth_bootdev.c                               | 30 ++++++++++--------
-  test/py/tests/test_extension.py                 |  4 ++-
-  19 files changed, 116 insertions(+), 62 deletions(-)
+> 
+>   drivers/ufs/ufs.c    |  43 +++--
+>   drivers/ufs/ufs.h    | 335 +-----------------------------------
+>   drivers/ufs/ufshci.h | 469 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>   drivers/ufs/unipro.h | 128 ++++++++------
+>   4 files changed, 571 insertions(+), 404 deletions(-)
+> ---
+> base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
+> change-id: 20241120-topic-ufs-cleanup-23671e3fc9e9
+> 
+> Best regards,
 
