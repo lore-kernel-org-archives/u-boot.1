@@ -4,112 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41627E7716D
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 09:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0594E7716D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 09:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4170989229;
-	Wed,  4 Dec 2024 10:10:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B24A9896B5;
+	Wed,  4 Dec 2024 10:34:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="psSzib+Q";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="L97jJQbS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45D3E893BC; Wed,  4 Dec 2024 10:10:20 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 85686893A3; Wed,  4 Dec 2024 10:34:17 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1282A89229
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 10:10:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62C0F8967A
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 10:34:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4EC813F31C
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 09:10:14 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 73E6740CE3
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 09:34:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1733303414;
- bh=DgbGzpC36gBuwzcA57UWoC3CfidfbamYG04XMFa/2cI=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ s=20210705; t=1733304854;
+ bh=Hi8nrJIAqrK9WxG1WILDXQLarCrcCACXf73qNwb7lT0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
  In-Reply-To:Content-Type;
- b=psSzib+Qx9iT0x8oytS4Uf2LfNEnUokXEtgMur7bXux7yVb9r+41mGzP11w8hEBPU
- 8kVx+27+r1JVf2xie9Yh6fcC7foZ/t+vJzE8gLF3x5oUKVbzX7RqxF6sg45hJR+5Kb
- mP3YwbBKYSgwreHS5kzrXS3+pi7skVkG+3NSvXXHsVOuccBxNaSl7faPJB3i5DxMo1
- 13SmP3wz3jsgrOJ3wHM9sje1BZEM0Samrt7QoaUo/8NvVxI+1jXK3054ThFYNdukXv
- SOJPAROehu4niM+nsz9+2nYbULs7+Txfl7hdblW/wT8z7xcsUaD9DCjO3PsnC8tqby
- p7Q6KLo8uAAIg==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-385eb060d4fso317150f8f.1
- for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 01:10:14 -0800 (PST)
+ b=L97jJQbSZkS7gPMdMfTKEXplYiTO9KUktDUDVv3F+xQW+LHtvaBxAl5lm30N/RZYR
+ kBCPInvNd1oEIybW+zc8EJGwVbnDGLmneQXpwM/pfWvWZDMam/UiQzjkC1jmZfLxcW
+ 9WxHHU3OLyYBHINQZ8597BA8BPA0Y8QtjNRgSsyxCEG4vurJJ8rguyF0T7twmAo8IZ
+ 0mEmmgoG3NCwze9Y4tg3YiO1bKzTC0/hneq8YaNcNDbaDAc4nKJOTskferpeqbUfTz
+ FLueSWCaA7IZlV+orH2TTPP7mtjvmfFMvHxEB/8XG/bqBjtuI/yqFNksAYwT3/4pCC
+ 6J9g0eu04qBhA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-385d7d51ac8so3043882f8f.1
+ for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 01:34:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733303414; x=1733908214;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1733304854; x=1733909654;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DgbGzpC36gBuwzcA57UWoC3CfidfbamYG04XMFa/2cI=;
- b=LECEGQGZn0byVX4khsmqkhD40UCwtOdbQmj46jqZcspV4EBubpJagrWIAm2NBLid+6
- d1bmkgZmbXK7gXQM6fKPwPhEQpqG5FZg3dtjrv3K8/Dqc3cxi/DE90cv/rNsEf+4Y2O8
- HUqVI4sLeTSLBWJVQ35d7yTXl46wCpuvyAgTjx4MxwCzqjdlrop3e3nofB9aa06KKE8l
- 2nELfvvKz6N8Jq9vAfqFSSRu4e2KtoxOOAhdy/2pPG7CvFQ900Ql4gffgJkb61SKEY5P
- Yt0s3oJXYZ9tPC56Lx885QaO+Ko2X4z/nF+R+nSC7L8Yqqof8lu9+YFx3XAOeKdwM3Pj
- PH2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKVx8BrY8GXsaVgz6W5Nh3hIh/vueH7WDg3ZAGqdBcOI/+qEfdkdnDldr85wAxhqrl2vXRD7M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2k9WIA+ERboUaoAAiY2N0fQggKDkb7QKBLZuxEknztc/xiDAw
- hMDJawdhrBG/PR9dxNKadHjQkOWYb7sbjb4iTAc9/zlZqObe8O8JhjKLueo+b2+MeTV9MeucUtr
- kxSOF/60knEfY07K7KBk7SzbTP7kXW0K7bX8d1ltZvinZJepT5Ed9lE/dnaKKRWsMptk=
-X-Gm-Gg: ASbGncvYnEaQVhmid/pd4R63O+RLE2CYYdjZRQsCsvnMf7j7vj/8id1/MsaNuyK2tOw
- Ou3cUJFkxbfjkHDSIsJ/LAJDTriHAoEcGnDmb/4gBQNEUYm9u2557maimvfzSn+T+Z1W5+i/CWG
- g6kPF+8f54uVIUtA92IfzUTNZmJgd6uXKgdSlYJBuin+fZkFHuBVdusDgbkuotkXUvZoYdSdzMh
- Z0aB85A+RYJdw5HbkitSfzwmJjMLgUYk/wX5D/VT6KcfeKK7TUxWqP9mQWKtg2EZ1zmlvjcJqUo
- 7LCJGE0rug6lAIkuZaqQ3AWSAuirttRaUBoOFDrS
-X-Received: by 2002:a5d:5c05:0:b0:385:d7f9:f15f with SMTP id
- ffacd0b85a97d-385d7f9f229mr21135068f8f.19.1733303413792; 
- Wed, 04 Dec 2024 01:10:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFZNdwiwS/xZpSXH2xmqm8hYxUj0LvrYF6S7vsG8Q7gUMkXhk4BpXjcOMgEJf8BGOTJy0I6Xw==
-X-Received: by 2002:a5d:5c05:0:b0:385:d7f9:f15f with SMTP id
- ffacd0b85a97d-385d7f9f229mr21135043f8f.19.1733303413356; 
- Wed, 04 Dec 2024 01:10:13 -0800 (PST)
+ bh=Hi8nrJIAqrK9WxG1WILDXQLarCrcCACXf73qNwb7lT0=;
+ b=BlpCLCrquoK3GcM+QJPHK9lS+hoX2UOp4aXMKyMpetumgYkfjAxQPwtNiHIffziO7/
+ dUkZFjS+rK1ZXcVnNiu3i5izquz3SSd6voXR18bagbH+MqbYSPIotx7k0SbDbVa5/A/W
+ fn/0mi8XM3cJuVHpAKaM29hcweFk3iPUyC3nv+f/5JoqovBPAO6zowOfwCYiCwOlJByA
+ s8ts/DoBswuIz2uWN/1xI26cof0xm86ssKO89YB7RuXbL2RBllHpJLleUe9zOeVf+iFb
+ L8tC2XfwC2g8ZSfXRmqTwLbC9ZL8s2VxLy/VXw3tXNWub86g2KjDI4fa1OhuR1ZTiHMD
+ mjgA==
+X-Gm-Message-State: AOJu0YwZa4zsGNDG0VZVYO3JBfl18gPIOovXi+29EKpAaFmf3TFOsbSf
+ aCkBdfIonxLI8XGltllBxUSlUpgThRV0H06LeaaNi8ArZ2Ywg3OkyolQGt0wnTxXdGVVTlVAxhj
+ GBNcUYLK3wb/UYfeLPSCn7108+53sLuUwXczo/4mkYZ1QhLj0P0rKVjDGoefK7vY7jlw=
+X-Gm-Gg: ASbGnct3LiG9bPNn0v+wh76bnjOpp2pYLTU2DlV47NC+W2c9Az5cAS5H75kOX+ptNNz
+ FZnkgL6hHTU8EOjPA6pQWHv1/p2sN8klxyA+lFRP8GJqYFFzv7NzNuHGU8RPBXgq6/eKtuh3OMy
+ C7+dkEFoF6qu4pTwgdIqq5qwW4hD0qnMkT6klVkShOVfBc6++pEnlWe/avywjLmborDyv16BXPH
+ IxRKt8kUWGN1TYRtZYjpwZNyH61/Uq0qa7QbRUKS+tN4FzX4LQIlb7vCqexUj5UeX0vDut5Egl3
+ g8Uel7NBrFBnzp7yFOCeswSUdAWwB54DfXNqQXq2
+X-Received: by 2002:a5d:5f45:0:b0:385:e4a7:def9 with SMTP id
+ ffacd0b85a97d-385fd532811mr4171106f8f.50.1733304853934; 
+ Wed, 04 Dec 2024 01:34:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHHUxflqK3O4cwjfHSwbyg/wgc2gsYekk7SoXA162wAJHzvkFVcSXsd8+pSb6sFSqN8J2vBDg==
+X-Received: by 2002:a5d:5f45:0:b0:385:e4a7:def9 with SMTP id
+ ffacd0b85a97d-385fd532811mr4171080f8f.50.1733304853567; 
+ Wed, 04 Dec 2024 01:34:13 -0800 (PST)
 Received: from ?IPV6:2a02:3035:6e0:9b8a:adf8:337c:7d0b:35d9?
  ([2a02:3035:6e0:9b8a:adf8:337c:7d0b:35d9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434d52cbefasm17716285e9.43.2024.12.04.01.10.11
+ ffacd0b85a97d-385e4617a61sm12290929f8f.3.2024.12.04.01.34.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Dec 2024 01:10:12 -0800 (PST)
-Message-ID: <02a3fcf7-bdc7-4d44-9d0e-1a05bd5216a8@canonical.com>
-Date: Wed, 4 Dec 2024 10:10:09 +0100
+ Wed, 04 Dec 2024 01:34:12 -0800 (PST)
+Message-ID: <5b3c6ca3-c49c-490b-81b3-0b243bfa7af9@canonical.com>
+Date: Wed, 4 Dec 2024 10:34:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] net: eth_bootdev_hunt() should not run DHCP
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Weijie Gao <weijie.gao@mediatek.com>, Daniel Golle <daniel@makrotopia.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, u-boot@lists.denx.de
-References: <20241127070631.16412-1-heinrich.schuchardt@canonical.com>
- <20241127070631.16412-5-heinrich.schuchardt@canonical.com>
- <CAFLszTjWzN0xmyCeMQEirNuhUQvAAjYUz+SaPTozy-+FFQJ_1w@mail.gmail.com>
- <df1e66dd-7b69-4d28-baef-8e992778d5c2@canonical.com>
- <CAFLszTiS-2MCZih4CzM-3YjgvX0MraxvY_thSDdHVy0_T_do3Q@mail.gmail.com>
+Subject: Re: [PATCH] Add cross compile dependecy info for ARMv7
+To: Peter Polgar <ppeter.bme@gmail.com>
+References: <CAF2BDb_g8385y8WpAw0epu-oSE5Wx2Nab0NvQ1mf+=hOVowZmg@mail.gmail.com>
 Content-Language: en-US
+Cc: u-boot@lists.denx.de
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTiS-2MCZih4CzM-3YjgvX0MraxvY_thSDdHVy0_T_do3Q@mail.gmail.com>
+In-Reply-To: <CAF2BDb_g8385y8WpAw0epu-oSE5Wx2Nab0NvQ1mf+=hOVowZmg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -128,153 +109,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.11.24 15:14, Simon Glass wrote:
-> Hi Heinrich,
+On 28.11.24 17:48, Peter Polgar wrote:
+> This commit adds info about the needed package to cross compile
+> U-Boot to ARMv7 (32 bit) architecture on Debian based distros.
+> ---
+>   doc/build/gcc.rst | 12 ++++++++++++
+>   1 file changed, 12 insertions(+)
 > 
-> On Wed, 27 Nov 2024 at 07:00, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> On 27.11.24 14:07, Simon Glass wrote:
->>> Hi Heinrich,
->>>
->>> On Wed, 27 Nov 2024 at 00:07, Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>>
->>>> Currently when booting dhcp_run() may be executed multiple times:
->>>> once in eth_bootdev_hunt() and once in the network booting bootmeth.
->>>>
->>>> We need to call eth_bootdev_hunt() when setting up the EFI sub-system to
->>>> supply the simple network protocol. We don't need an IP address set up.
->>>>
->>>> We can reduce the bootime by not executing dhcp_run() in
->>>> eth_bootdev_hunt().
->>>>
->>>> Furthermore eth_bootdev_hunt() with autostart=yes leads on the legacy
->>>> network statck leads to downloading a file via TFTP and to booting the
->>>
->>> spelling
-
-I will handle that in my pull request.
-
->>>
->>>> downloaded file.
->>>
->>> I have now found the feature you're referring to - the calls to
->>> env_get_autostart(). Perhaps we can remove this feature? It seems
->>> pretty old and I don't see boards using it.
-
-Commands controlled by autostart include bootelf, dhcp, tftboot.
-
-For tftpboot autostart=no makes sense if you may want to download 
-multiple files (kernel, initrd, dtb) before booting or the downloaded 
-file is a firmware upgrade.
-
-But for PXE booting you will need autostart=yes. Many routers allow 
-recovery via TFTP.
-
-For bootelf autostart=no leads to only checking the file in memory but 
-not actually booting.
-
-I don't think that we can simply remove the setting looking at the 
-diverse use cases.
-
->>>
->>> That feature stops bootstd working properly.
->>>
->>> But if we don't remove it, we need to disable autostart in dhcp_run(),
->>> since in that case it does not behave correctly. I can do a patch for
->>> that if needed.
-
-That change can be implemented separately from this patch series.
-
->>>
->>>>
->>>> Instead of running dchp_run() just check that there is a network device
->>>> in eth_bootdev_hunt().
->>>>
->>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
->>>> v2:
->>>>           reword the commit message
->>>> ---
->>>>    net/eth_bootdev.c | 30 ++++++++++++++++++------------
->>>>    1 file changed, 18 insertions(+), 12 deletions(-)
->>>>
->>>> diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
->>>> index 6ee54e3c790..b0fca6e8313 100644
->>>> --- a/net/eth_bootdev.c
->>>> +++ b/net/eth_bootdev.c
->>>> @@ -64,9 +64,23 @@ static int eth_bootdev_bind(struct udevice *dev)
->>>>           return 0;
->>>>    }
->>>>
->>>> +/**
->>>> + * eth_bootdev_hunt() - probe all network devices
->>>> + *
->>>> + * Network devices can also come from USB, but that is a higher
->>>> + * priority (BOOTDEVP_5_SCAN_SLOW) than network, so it should have been
->>>> + * enumerated already. If something like 'bootflow scan dhcp' is used,
->>>> + * then the user will need to run 'usb start' first.
->>>> + *
->>>> + * @info:      info structure describing this hunter
->>>> + * @show:      true to show information from the hunter
->>>> + *
->>>> + * Return:     0 if device found, -EINVAL otherwise
->>>> + */
->>>>    static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
->>>>    {
->>>>           int ret;
->>>> +       struct udevice *dev = NULL;
->>>>
->>>>           if (!test_eth_enabled())
->>>>                   return 0;
->>>> @@ -78,19 +92,11 @@ static int eth_bootdev_hunt(struct bootdev_hunter *info, bool show)
->>>>                           log_warning("Failed to init PCI (%dE)\n", ret);
->>>>           }
->>>>
->>>> -       /*
->>>> -        * Ethernet devices can also come from USB, but that is a higher
->>>> -        * priority (BOOTDEVP_5_SCAN_SLOW) than ethernet, so it should have been
->>>> -        * enumerated already. If something like 'bootflow scan dhcp' is used
->>>> -        * then the user will need to run 'usb start' first.
->>>> -        */
->>>
->>> Please keep this comment
->>
->> I have moved the comment to the function description. See above. I think
->> that is the adequate place.
->>
->>>
->>>> -       if (IS_ENABLED(CONFIG_CMD_DHCP)) {
->>>> -               ret = dhcp_run(0, NULL, false);
->>>> -               if (ret)
->>>> -                       return -EINVAL;
->>>> -       }
->>>> +       ret = -EINVAL;
->>>> +       uclass_foreach_dev_probe(UCLASS_ETH, dev)
->>>> +               ret = 0;
->>>
->>> There is a uclass_probe_all() function.
->>>
->>> My suggestion from the original series was to just do the dhcp once.
->>>
->>> How does probing the ethernet devices actually help EFI? It is not
->>> needed for bootstd, since it probes any devices it uses.
->>
->> bootstd is not the only way to start an EFI application, you could use
->> bootefi or bootm.
+> diff --git a/doc/build/gcc.rst b/doc/build/gcc.rst
+> index d8fcfdc4bf..c552e7b590 100644
+> --- a/doc/build/gcc.rst
+> +++ b/doc/build/gcc.rst
+> @@ -19,6 +19,12 @@ You could install GCC and the GCC cross compiler
+> for the ARMv8 architecture with
 > 
-> That's fine, but I'm just trying to understand what probing does, in
-> this particular case. Doesn't EFI probe a device before it uses it? I
-> think I am just missing some context.
+>       sudo apt-get install gcc gcc-aarch64-linux-gnu
+> 
+> +For the ARMv7 architecture (32 bit)  use the below command instead
+> +
+> +.. code-block:: bash
+> +
+> +    sudo apt-get install gcc crossbuild-essential-armhf
 
-EFI block devices will not even exist if not probed. See function 
-efi_disk_probe().
+crossbuild-essential-armhf depends on
+gcc-arm-linux-gnueabihf gcc:armhf, g++-arm-linux-gnueabihf, g++:armhf, 
+dpkg-cross
 
-For network devices I would like to change the code in a similar fashion 
-in future to make all network devices available in the EFI sub-system.
+But gcc-arm-linux-gnueabi is all you need for cross-compiling 32-bit ARM 
+U-Boot.
+
+Adding an example for every architecture seems too much to me.
+
+Can't we simply update this sentence pointing out the the arm 
+cross-compiler has a suffix.
+
+"On Debian based systems the cross compiler packages are named
+gcc-<architecture>-linux-gnu".
+
+E.g. add
+
+"gcc-arm-linux-gnueabi is the 32-bit ARM cross-compiler package."
+
+> +
+>   Depending on the build targets further packages maybe needed
+> 
+>   .. code-block:: bash
+> @@ -118,6 +124,12 @@ Assuming cross compiling on Debian for ARMv8 this would be
+> 
+>       CROSS_COMPILE=aarch64-linux-gnu- make
+> 
+> +Also on Debian but for ARMv7 it would be
+> +
+> +.. code-block:: bash
+> +
+> +    CROSS_COMPILE=arm-linux-gnueabihf- make
+
+U-Boot supports  ARM SoCs prior to ARMv7. U-Boot doesn't use floating 
+point. So arm-linux-gnueabi is the right choice for all 32-bit ARM boards.
 
 Best regards
 
 Heinrich
+
+> +
+>   Out-of-tree building
+>   ~~~~~~~~~~~~~~~~~~~~
+> 
+
