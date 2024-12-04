@@ -4,133 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075C1E7716D
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 07:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F62E7716B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 07:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 635AC8910E;
-	Wed,  4 Dec 2024 08:25:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E558988C98;
+	Wed,  4 Dec 2024 08:28:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QlNU6XWB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QqhiE/JU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8460288875; Wed,  4 Dec 2024 08:25:39 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::624])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A61098910E; Wed,  4 Dec 2024 08:28:27 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAC258950F
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 08:25:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 381E788730
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 08:28:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hKOtysMoJAIzHLNEXdw6M0f0ih2cbvVLasr4JCnDEBpUe1kXAzklyrb0N2SbsNKeY+0zdt+m2hje9J6LshJR6S/dUk3EJQw6kx/D7nxil3moPwSmppEwbb1BzKx+/r5w0yIwKcFbBFAFVvfKe+JneZDL161Kh45lVJTEmKUxDLxcsvqamwpp0aUu3OFlwpzB10jngXbecwqLQTEeoTQNS/qfWMtAupIinmOgRr1Js4Z05LMu3opDlJvpYMvbNF8q4rBwAitoUsWj8HySEDE12H/u95rZgVBQ6UUyeU7iZBCPnlLsLvYYAuTgGj06IkeLBLqxSygMEYJBB2dKd1tYEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vmSsb845To7VvN2YW0j4ep2/Ig1amV3XOLopWPWqSJ0=;
- b=euTjsDKcnknBepV/gY/GYmwNVe6Q5YXeuPFTKMVOjkj6emvW1hSzPjHE0Od/962TMrE5pOdZbdzp7r8zlBlBg9C9A2xm/ULgHmYhB42nm0/0XjC1BCP89nvyqvzOrJbluGOIeGl4pjKQFErYfphRyuK90p9sDFjyIyxug0FXVXWf9WQnAXkxsJREKRWItknW4TsgGMeeS27NzFRag2+MRxUC+1qxVM+yF2o0GycRBwISv98tL+x4O5OV+F/jd8vIf2ScX6hKss9vkYVXD0oV6zl4GLWVpLxBTI/eLP394bVQT8HymHx3bQB7xMXHm2mIPAkDw1C0TNg6cClOqm1uNQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vmSsb845To7VvN2YW0j4ep2/Ig1amV3XOLopWPWqSJ0=;
- b=QlNU6XWBN7502780ZPlKrll69BIu31KC5bqu+ydGd0cDXUA9pIeUWJs8G2DADmlrW8+QRaZhRcMl2knlsabrEz2vM9luD3qQ9b+W+KeFTQKVB7lPRP3XP/Yl9TJ1h0boNIyTsSd4ie+ZKseG6y4TJFwhXp8Dgtlvf0BfC25UsNw=
-Received: from BL1PR13CA0315.namprd13.prod.outlook.com (2603:10b6:208:2c1::20)
- by SJ2PR12MB9115.namprd12.prod.outlook.com (2603:10b6:a03:55c::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.19; Wed, 4 Dec
- 2024 07:25:31 +0000
-Received: from BN3PEPF0000B370.namprd21.prod.outlook.com
- (2603:10b6:208:2c1:cafe::eb) by BL1PR13CA0315.outlook.office365.com
- (2603:10b6:208:2c1::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.7 via Frontend Transport; Wed, 4
- Dec 2024 07:25:31 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BN3PEPF0000B370.mail.protection.outlook.com (10.167.243.167) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.1 via Frontend Transport; Wed, 4 Dec 2024 07:25:31 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Dec
- 2024 01:25:29 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 4 Dec 2024 01:25:27 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>, <patrice.chotard@foss.st.com>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-Subject: [PATCH v3] usb: onboard-hub: Update the bind function based on
- peer-hub property
-Date: Wed, 4 Dec 2024 12:55:20 +0530
-Message-ID: <20241204072520.213949-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0e75335e3so4046129a12.3
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 23:28:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733297305; x=1733902105; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aWdZ7FYEBhPuv5cTef4iXakw0ISBv6kVF3GF5GfSre8=;
+ b=QqhiE/JU2SkdCZWhNYn9tPygcTjocE0Zq2ik5aRFV9sA0SZIu8zhUVtwc/x9mcs78Y
+ kO2qcaRX9/fRxqiC8pY3wjR3NKcEr+0MNbt6G3PZ7CO73FS+WlSVDYic5ruVlOJ9Tt5W
+ 7N15gJnw75hl0fNlQVGR4ZwT7gisyIkkWBy7XMLrjiH0AgqCmp8S52mnUdn9bd1LNCus
+ zIfxcIO38NTUwA6pfxjD1T2o7Sen2FV1eIisB+/MunU9sMPULuScaDWu21wD6NlXemTt
+ RZ26TQ/hpkiHMBYmeoUKm2uVAMaTlIZUxNQjBN8QKC2UjADGNd1ko1udmmQHiJsUF5QF
+ lTLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733297305; x=1733902105;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aWdZ7FYEBhPuv5cTef4iXakw0ISBv6kVF3GF5GfSre8=;
+ b=KipLvwfhUOXyOBcjK2Bh4Se2EQlFlaaINK4231Z+cowT42NbZ8AdE6ESLtLSzjAxX/
+ oHVD7ZFfMdgkPqRzylCEFYeeYFyFbEokgbFZd90+Z8PhLQ17XKxKAhGt9Olw/MstFY6v
+ QHX7GqpOdlnhRB5ILyPTG3/+Ljr2cxwLQ6i6SfInv/5ywbUWsuaXyTCCMXxnhWf46HES
+ //6QIz1edTaMCYQagK4uVGNzOXOt91PbnEKEkN4yL0jhkzTynPj+mnFnB5/UkBKNmEJm
+ yPN4wjXTkh80UycXEpVRN3cqm2fxOC5gYOC7NDW2VXxjgnNGdSi4IZ3AFhvFAMnNCKSp
+ mn6g==
+X-Gm-Message-State: AOJu0YxVEbt28vdBscyNT3QtbIUCuaNkbtxQjIaTSBa3O2qSn3x5f3FT
+ A9auDxLGvY7nm0jXt0Ks2agRVyD7OdsIWACLdCzj+DgvJEvRl3A1Grr47HQbLEDDOKPpnJe9XWi
+ 3D3JF6X48wdWkjPSfCTNJZbVkmZU8nZUG0k13yNOAU23nvXmzxO4=
+X-Gm-Gg: ASbGncsSc4BUyiDYZKNwEo0jNPOj+DvISQdboGNiJHHiXkYMTa4ROCgeLUBDRbEMq8X
+ owaSsMHMN+Hv+0rUqWekpFOyHfNx8fB63
+X-Google-Smtp-Source: AGHT+IHc1UOVPCAd62LE7xKoxqrj7V/BcwE/C+OIqvCvhGnoU+xWB7SzLCHefdcZi4ZaHYgxisSAz2EQbULXuMfNdpo=
+X-Received: by 2002:a05:6402:34cb:b0:5d0:e568:7ba1 with SMTP id
+ 4fb4d7f45d1cf-5d10cb984e6mr4758021a12.30.1733297304565; Tue, 03 Dec 2024
+ 23:28:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B370:EE_|SJ2PR12MB9115:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2732aa75-7f40-4b8f-efcd-08dd1434d5ab
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9TixkHoytN0uu/RXpn1Jkf20/NpjtrreYLSQlo8bslRV99+BUCNjgbeFarQp?=
- =?us-ascii?Q?NHrEY4EKmcs26fISlg2ImQkAAnHYpRks21lM6Hl42mTD7owtlpVIiNxWP3GM?=
- =?us-ascii?Q?VUCHxbCamGyyqawOAixRoId0Rm2M3gmjlyEGBi1S6JThjZRZweN0FkudE93b?=
- =?us-ascii?Q?mlIVoj+hwf18tRr1Wbmc1y8KYD8V9xZVtN5O0cZ5RVF/DUb2uFESrK3jjUox?=
- =?us-ascii?Q?SImTkKgX46HN9DARxwUbPbPGNgmogfG7kEh29nOCPNdLjHbW+ivcwy9B+wMr?=
- =?us-ascii?Q?84M5EwHxSxaxtUYgDvFnCE2USzHw5ZJq7ESlkjx9P8aHytmKslYXghaa0nJC?=
- =?us-ascii?Q?ITgzitod7thoSfRXjb6bpbOWzioGzFWEmYYddUaHx3yoCQe+xIXP15SQ+Ei4?=
- =?us-ascii?Q?mB/d/wTFXYYsI7YF9z2/ogzXTF3TWNps3e4w1/byA8O84OuVN+j4pJ8KnDCy?=
- =?us-ascii?Q?ilNfjP6TvarW48oK40xnw5uN8RO672GnpxX461M6w8JXzeO3Aj9ZMwm6HC3E?=
- =?us-ascii?Q?vnq2TnTlo+vOeA1pUDilDIqoP4RN6/Avc/6gAaxXsgM4ehfhOOQqZ7iEOTRv?=
- =?us-ascii?Q?PEPQp2f3PDabjRjGWRZnd2DUW6QcCvMfxFUtcH/LHxeZZnD6wluWhwNhPX8J?=
- =?us-ascii?Q?6iK2S/o/hLdsRyd7BLeP+aw/KSvpxTST0DvEgJuZeneODaVi15FuCHU+2oum?=
- =?us-ascii?Q?Akq1Stg5EqAqx8O6F9FrmhLEl5WOcglgbvdJX63V8TgAEZyDV0azTHOiKm09?=
- =?us-ascii?Q?2ZYHD7SZl6xb+a1JdD1g/diqEHQkvE6TvZNnEZIQDXUVh/wTpj+hJj+M2YSy?=
- =?us-ascii?Q?wKv1QGBBmbPTfPIU0d/INdGbWfAzjnmqNToH50rwP+Ho+nIgNKRxq4YsbAtd?=
- =?us-ascii?Q?1oZp2wzB1ycFlgGZ1hkpnrBbmbxxJunbf9woylVdROP+ffYdgj4MXXIexujd?=
- =?us-ascii?Q?av4M3RB+WBB3szX6M8ohkQuorFtZHE+F+UyaVWWImaCdCq/UlG0t2+P7V/Qd?=
- =?us-ascii?Q?o9JQmKCZQpn8gwRsgRaSHm5USMzrJsQjfR75Pi8ij4Spdjp0uCGiyLbv3f2u?=
- =?us-ascii?Q?lakXOwgDFTxAo4yTH/4u5ceoGaivELJt8rk8yP7SGLCblq9c9YV5oiHNl0Kp?=
- =?us-ascii?Q?TyQVt3lIs4cBwClUXs1ONGyVWM9Kn4fmSRxFDR5dPl3V9lETEy7wNcfPq5RF?=
- =?us-ascii?Q?NMdG7mVsmJ7isHjDupZdT7GmOXVrLIdHFukwRkbWH01JKqm7MI+Gp0/Fz7md?=
- =?us-ascii?Q?WQFnY/uAuvN/o6PZTlQCwYd6Rb0Gf6OmfFUY68m2Ae6ai/m4d279XPedVw56?=
- =?us-ascii?Q?Svb3HfRzaa46vKU4KWOIXE3LDwR4s1jLOJJWUijdn9LLSnkeAyYMyzscf/k6?=
- =?us-ascii?Q?EnpVbN0cDIFQsVWXKduHUExTsFbgKIEx4c1A7LOJkgUfTrQqyywOxbPzp8u9?=
- =?us-ascii?Q?aRQzaMK5J/Vq99Xz5J6rmJ163u9qd6eE?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 07:25:31.1523 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2732aa75-7f40-4b8f-efcd-08dd1434d5ab
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B370.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9115
+References: <20241203163605.1482152-1-sughosh.ganu@linaro.org>
+ <20241203163605.1482152-2-sughosh.ganu@linaro.org>
+ <CAFLszTgyOvi-DvBqLzD_n7UqTUxZo98G9RGddkMpcrXaYzJfpg@mail.gmail.com>
+In-Reply-To: <CAFLszTgyOvi-DvBqLzD_n7UqTUxZo98G9RGddkMpcrXaYzJfpg@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 4 Dec 2024 12:58:13 +0530
+Message-ID: <CADg8p96DCmjyCJM1XA9wjAUgfWavKCY5D6ko+Cz8dYkoDtq6Ng@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] fdt: add support for adding pmem nodes
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,38 +92,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the "peer-hub" property is optional, don't error out just
-skip the bind function.
+On Wed, 4 Dec 2024 at 01:15, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Tue, 3 Dec 2024 at 09:36, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > From: Masahisa Kojima <kojima.masahisa@socionext.com>
+> >
+> > One of the problems OS installers face, when running in EFI, is that
+> > the mounted ISO after calling ExitBootServices goes away. For some
+> > distros this is a problem since they rely on finding some core packages
+> > before continuing the installation. Distros have works around this --
+> > e.g Fedora has a special kernel command line parameter called
+> > inst.stage2 [0].
+> >
+> > ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
+> > don't have anything in place for DTs. Linux and device trees have support
+> > for persistent memory devices. So add a function that can inject a pmem
+> > node in a DT, so we can use it when launhing OS installers with EFI.
+> >
+> > [0]
+> > https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
+> >
+> > Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1: None
+> >
+> >  boot/fdt_support.c    | 41 +++++++++++++++++++++++++++++++++++++++--
+> >  include/fdt_support.h | 13 +++++++++++++
+> >  2 files changed, 52 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+> > index 2392027d40b..61f725389b7 100644
+> > --- a/boot/fdt_support.c
+> > +++ b/boot/fdt_support.c
+> > @@ -18,6 +18,7 @@
+> >  #include <dm/ofnode.h>
+> >  #include <linux/ctype.h>
+> >  #include <linux/types.h>
+> > +#include <linux/sizes.h>
+> >  #include <asm/global_data.h>
+> >  #include <asm/unaligned.h>
+> >  #include <linux/libfdt.h>
+> > @@ -463,7 +464,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
+> >         do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
+> >  }
+> >
+> > -#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
+> >  /*
+> >   * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
+> >   */
+> > @@ -491,7 +491,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
+> >
+> >         return p - (char *)buf;
+> >  }
+> > -
+> > +#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
+> >  #if CONFIG_NR_DRAM_BANKS > 4
+> >  #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
+> >  #else
+> > @@ -2221,3 +2221,40 @@ int fdt_valid(struct fdt_header **blobp)
+> >         }
+> >         return 1;
+> >  }
+> > +
+> > +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
+> > +{
+> > +       u64 pmem_start[2] = { 0 };
+> > +       u64 pmem_size[2] = { 0 };
+> > +       char pmem_node[32] = {0};
+> > +       int nodeoffset, len;
+> > +       int err;
+> > +       u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
+> > +
+> > +       if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
+> > +               printf("Start and end address needs at 2MB alignment\n");
+> > +               return -1;
+> > +       }
+> > +       snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
+> > +       nodeoffset = fdt_find_or_add_subnode(blob, 0, pmem_node);
+> > +       if (nodeoffset < 0)
+> > +               return nodeoffset;
+> > +
+> > +       err = fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-region");
+> > +       if (err)
+> > +               return err;
+> > +       err = fdt_setprop_empty(blob, nodeoffset, "volatile");
+> > +       if (err)
+> > +               return err;
+>
+> I believe I asked this already, but is it possible to use the ofnode
+> interface, instead of adding more and more code which we need to
+> migrate later?
 
-Fixes: 57e30b09fc ("usb: onboard-hub: Bail out if peer hub is already probed")
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
-Changes in v2:
-- Removed the peer_hub variable and used the return value.
-Changes in v3:
-- Removed the else condition.
----
- common/usb_onboard_hub.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+I had spent some time understanding what exactly is happening with the
+livetree code. I had responded to you earlier [1] as to why I don't
+think using livetree would be a good fit for this use case.
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 6f28036e09..7fe62b043e 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -183,7 +183,12 @@ static int usb_onboard_hub_bind(struct udevice *dev)
- 	int ret, off;
- 
- 	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
--	if (ret)  {
-+	if (ret == -ENOENT) {
-+		dev_dbg(dev, "peer-hub property not present\n");
-+		return 0;
-+	}
-+
-+	if (ret) {
- 		dev_err(dev, "peer-hub not specified\n");
- 		return ret;
- 	}
--- 
-2.34.1
+-sughosh
 
+[1] - https://lists.denx.de/pipermail/u-boot/2024-December/573556.html
+
+>
+> > +       pmem_start[0] = addr;
+> > +       pmem_size[0] = size;
+> > +       len = fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
+> > +       err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
+> > +       if (err < 0) {
+> > +               printf("WARNING: could not set pmem %s %s.\n", "reg",
+> > +                      fdt_strerror(err));
+> > +               return err;
+> > +       }
+> > +
+> > +       return 0;
+> > +}
+> > diff --git a/include/fdt_support.h b/include/fdt_support.h
+> > index 9447a64e060..980feb27d27 100644
+> > --- a/include/fdt_support.h
+> > +++ b/include/fdt_support.h
+> > @@ -474,4 +474,17 @@ void fdt_fixup_pstore(void *blob);
+> >   */
+> >  int fdt_kaslrseed(void *blob, bool overwrite);
+> >
+> > +/**
+> > + * fdt_fixup_pmem_region() - add a pmem node on the device tree
+> > + *
+> > + * This functions injects a pmem node to the device tree. Usually
+> > + * used with EFI installers to preserve installer images
+> > + *
+> > + * @blob:      device tree provided by caller
+> > + * @addr:      start address of the pmem node
+> > + * @size:      size of the memory of the pmem node
+> > + * Return:     0 on success or < 0 on failure
+> > + */
+> > +int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
+> > +
+> >  #endif /* ifndef __FDT_SUPPORT_H */
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
