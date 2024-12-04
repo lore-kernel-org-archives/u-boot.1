@@ -4,84 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D1DE7716B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 16:03:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C6DE77170
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 16:18:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D02578904E;
-	Wed,  4 Dec 2024 17:03:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8152C89421;
+	Wed,  4 Dec 2024 17:18:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KTueMnGX";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="p0gPwzuZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E7708909B; Wed,  4 Dec 2024 17:03:36 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D1895895FD; Wed,  4 Dec 2024 17:18:29 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20716.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::716])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3BFD888BE
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 17:03:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D3B88917D
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 17:18:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-4668486df76so63457041cf.3
- for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 08:03:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733328212; x=1733933012; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bDF9jRAay6c2juIjz+Y84Gbh61VskZk4++xLt8k69QQ=;
- b=KTueMnGXI4/7Rp+9K0qWD1ukIpRxuULcn/bRvR1TxSe7SU35jSmJBaFqt+vOwu/XD5
- sDAkK4itUpbgV1V3zpCdpoZiuP/MpJ01W6dCLRz1+zXZiaGQG8OQMhnGnj0UdhFoiDfW
- f/kSwNwU3F1IOqehHo1w2Fqde0xZgVlBjSXe0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733328212; x=1733933012;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bDF9jRAay6c2juIjz+Y84Gbh61VskZk4++xLt8k69QQ=;
- b=jWBDt6FP9qNa18LNTA6o13WNDGDzvRoU4rZXxYCBjFzgU0JCdcjWCxgpRTanYbGBhk
- fYQLygFb50JX9SSTDupHOyXQoEim426BkKPkRYlZ1xSqJWSHcl/imyyNgAmh+311owjX
- LGfKpdP8nUC8CJtS2kppRRwsCgbfBdx7ydoCM7nGRgZ6/v4q2tM4HndAK6nz28ZYdjH3
- 9Jw/ttH16VZo3x3Q2zmeesEjpSiIE0Vf5M9KmWsdXl2BB7euR5CVnAf+sAnF0h22F5+G
- 8/SNXs3xnz7aOdVFPgTIyqOGgFve43DSXl6X42KNlJeFBzYAglaEDf6rjBNVAIqKrhYV
- hd/g==
-X-Gm-Message-State: AOJu0YxB1Y7Pq5d9IgLvi9NJs9tZ/EtcfJSC2Rf0d/iutWSiCuiRaOF/
- p6DWB5rO+ceUCYeunZywNYzpmP2zP6TXz41vVthdQgSmQTJ6J+6QOLotEfxzTOU=
-X-Gm-Gg: ASbGncsjZvyTX2SI0XPeo9xQEi5+GKqOSvWxARnmkfEcaXbDwgsZz7myRzqanBwXcbf
- u5qfkQMz2ROPCgkUQc5SidCqvdDql0jOWohgBtpUbGa7Q+EyJjLT81gwVpHuZwFuiluQ38PEnZ8
- 0ZDLMRErZFTKslgrgqN8AXA7xFPXibB5DaFv0rca1otz7cOGtRpPQbkLBcVsenIj3DGehKgUfrv
- 6a7dMhFOvFWoeffLrltSknoDQDy34eszPdiCkBab6mPk8rAuw==
-X-Google-Smtp-Source: AGHT+IF1n0c7Vb3kkSX0ZRTc+uENCYQNUzkshsBrNjBDLz50U/bcfjFC3lIxLjyBpNsuOWh6g6cYjA==
-X-Received: by 2002:a05:620a:454a:b0:7b1:51e9:ed77 with SMTP id
- af79cd13be357-7b6ababe984mr698609085a.10.1733328212350; 
- Wed, 04 Dec 2024 08:03:32 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b6849c3ff2sm621412185a.116.2024.12.04.08.03.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Dec 2024 08:03:31 -0800 (PST)
-Date: Wed, 4 Dec 2024 10:03:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=BS00JMnrvQ7m9bTZvvP0F0Sm8d3wN+IKPlPWE9EMKA0lqWLrDypiXnl7tbwXoYgs56SCVj1fWHZZ3oJHKI+9nynZneoem6acc5MVXoLeuXB1At3cMuWqEewJEiJRyd8jNNKT+ksXS82PHMACvK//IqiHDLK4HdDu37x+9Nff/fEFEEfLwm2gr3BJkub0zvNWkIPC4FdnM/6BMuF1f18YsJTE2sjsUxE9tpk3qacM+u0MtcqD6+R2wmIwCq4gPJrpfuacl0+5VcxvQRJMKffQdkLvBxb4T6g/tpNhVpN37wTgptUP/fq8pZpxKbTPC1+alwuTaG/7gaZPZBCx5YwajA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=H8JyEzZmBiDuTYzkNnEZqqben11GYx6O5ZxlEnDBswU=;
+ b=kxL+/agtKvmi8kHnDtzK/iesp8VUOOjhzXXoHYw/TqK1LyzzMQ0IQZJzwmnEVXXgBlZKD1CrFlG0/1tbSZ8kwHo4KTTSyCNOMCohGYhmbyspeSrpU0HoKYd+GyqFel4+yRCwouc6M5ov2iUutiXBli7EO6bHMkcDFOcqjgIfdzIEjtgG96S1txhTWwSlVWAvUM7aED3pixHAjfFLX5d4vbeBVGIAD/69K6PE+enVRAaAlBTC0AS74UzE833OH0XscIIQWp9ZTKsmTvmDpT85I7dpO/YWXxtfky6PAeUDj1i3nZu+lYywqLO1QnCwgcdBboTVvmfbohTc3R0nCH+pyw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=H8JyEzZmBiDuTYzkNnEZqqben11GYx6O5ZxlEnDBswU=;
+ b=p0gPwzuZXyrnpJTKY5yXtUdsD+d/el+TT6l3NM3rKu6HcdKdZiAT9xMCvmjnRYkR4fwHJjxa3Xh1ZQntj41t9MKVYrxN5NEvR33jves/i43SHkiywTs7AbuXNkgDtoZjUBUjUS8FsHNw4A3RmyplelZ0bHuPRlmT50/WR7+v3UWU3gvQO/qiEVV5CXJYOhd+M/JmzuL+nudTvYVdNX5vm20KtCbAq4WDXulqLAzrO9ez36/6YRqfCGZg95PYyYz/ziEPKQnAO3alyD0TvTSe8t0kPgAfc+RZYq4sHrSBchTYPEwYzpfrkcitYcYUa5g+lDzNnjxRAggnQYDI22kqvg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by DU0PR08MB9155.eurprd08.prod.outlook.com (2603:10a6:10:416::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.10; Wed, 4 Dec
+ 2024 16:18:24 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8230.010; Wed, 4 Dec 2024
+ 16:18:24 +0000
+Message-ID: <4e5687a2-8a86-45b4-a1c2-c160d1319c0f@iopsys.eu>
+Date: Wed, 4 Dec 2024 19:18:21 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: tftpboot: clear timeout_count on every successful
+ block
+To: Simon Glass <sjg@chromium.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andy Yan <andyshrk@163.com>,
- =?iso-8859-1?Q?J=2E_Neusch=E4fer?= <j.ne@posteo.net>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [MASTER] Pull-request efi-2025-01-rc4
-Message-ID: <20241204160328.GF2457179@bill-the-cat>
-References: <8910d434-2d77-425f-aa81-8eb803078aef@gmx.de>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+References: <20241203232732.2680178-1-mikhail.kshevetskiy@iopsys.eu>
+ <CAFLszTj8SfbNs3Qn+cdC98JjoDE0St8HuRaXLF8+MxFCC07TXA@mail.gmail.com>
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Content-Language: en-US, ru-RU
+In-Reply-To: <CAFLszTj8SfbNs3Qn+cdC98JjoDE0St8HuRaXLF8+MxFCC07TXA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: GV3P280CA0062.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:a::18) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sqTU2mrZUm/HdDcU"
-Content-Disposition: inline
-In-Reply-To: <8910d434-2d77-425f-aa81-8eb803078aef@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9155:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f2710fa-c47a-402c-bfcf-08dd147f46be
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eTBkY00xdVVRd1pOL0kxRE52Yk1pWkpOMVJ2b0RVSW44TjBGYmh6eW8yYVor?=
+ =?utf-8?B?UkowWm9Jc0EzT0dDaXRKbnEyWmtCY2pLaFdOcFRDQ1dkNWtoYzhTYXpNb3lN?=
+ =?utf-8?B?SUgwMnBBVDVoTDJ5MXY3Vk9YN1dETjk3d1pvWmpxTlhsTWlVblJvS21hUnI5?=
+ =?utf-8?B?aDZGRStIRC9mUWFhbFhQdkMvSU5ROVVEeDJHTllMa2N4ajMza1RRRHJTdmRs?=
+ =?utf-8?B?QXdsUGRqQ1MyZmRaWEpQbjhQT0wxOU5RR3U2SlJNcGR6MTBPVXpQODh3a0w4?=
+ =?utf-8?B?VkZ0Ujc0T0lhUWhRd0JMVzB3QWFkRytxSFdHOStablZ0SVNOM0U3VWdRdmlH?=
+ =?utf-8?B?aU5BZWxmZXJ5VUNxUVcyWnN5OVpGaUZRb1crZCthTnF1enBySmFsN3pnNnoz?=
+ =?utf-8?B?aWJydzk5Q0c1Ri8zQmltL2lQZzd3cjN6bXVTcFpiTlRBcDZhaWFqVytmczRP?=
+ =?utf-8?B?NEpJay8vYThtMngzaExjTHNIOCs2Vnh3UmRjYStJamROdG5pcDFkSml5R29G?=
+ =?utf-8?B?VW9oZ0cxa1BSanFiaWlPem00TStSNDcxMnhFY212SnFQamtkU0RnMnBUMGM1?=
+ =?utf-8?B?cXYwNEhmWGI0Ykd0RGVad0poM01FK2xxTklvMUtvNXZ0YncvdTFYd1NUVFRz?=
+ =?utf-8?B?cldBc1laVHNac2xvaEl1Z3AvOGRaVzFrSDZVU1JUWUJPMkh3MUlIbCs1bTFP?=
+ =?utf-8?B?d3V3OENocktvdU5ZemdheHFOZUVQS09DOUM5SmtCN1QyTjJVVFNOL3k4bzky?=
+ =?utf-8?B?OS93NFlIZnBhWTgvQTZhQXA2NVZWTW5Ya2xnb2kwRnQ0S2lxWXYyVSswMVZV?=
+ =?utf-8?B?bmlVaVA5Wmw3aGl0NUtjYXVjSHBGdlRtZzMzY251Q2lvN3pHSkh4d2dFK2Ni?=
+ =?utf-8?B?Lys5Wm8vc0FFN0NIdk9zK001MHNaMTJsVjh3dVQ3N1Mxb3IySWVhc3VZaCtV?=
+ =?utf-8?B?RzlDUkxjWVJZei8wcDI4alJDd0ZNaDVGeFIyQ004TUQ4S0wzY25Ra3U4clVP?=
+ =?utf-8?B?aXM1R0loT21aOEZSYWQrZEIzcHExRHRuZndHSS9PWisrSHVOeTJyTVU2cTFh?=
+ =?utf-8?B?eVFhcDlvL0UzdzJhOTB3dkJQOVBDa0pxMTJXQk9MWll2ZVRIcjR1bVdwR21n?=
+ =?utf-8?B?S0tHNkc5NUFSbTEvUzJyc2tCNUNVMW5uUDdvclZpNVNYNVdqSUVNYWMxQWU0?=
+ =?utf-8?B?SjJYQVVvbWdjQlNhbVY4bkduOWpyUHYxTXhpUlYxTi9IZjhJOG5YTVljZ2Z2?=
+ =?utf-8?B?dVJkU3BvbThLaEJ1bFQvQmJyL3FrdE45bDdxZjNWREI5Vy9NdDdYUEJBMWs4?=
+ =?utf-8?B?b3FvSWRKOFR3MHE4S09LREhBRjhsRFFRc2ZGcWV1RmttY0d5UEY1MDRoUno4?=
+ =?utf-8?B?U3dQMU5wUkRtZmptVEsxR3JxaVFURWVad2J4U0VvV3BIRDQ4YStDczJ4cm9y?=
+ =?utf-8?B?OHBxR2RlZUtDRU9uQUhOUE53UFV2MTRxK3dxMmYzeGFXUlhxdWxMWlNsaG4x?=
+ =?utf-8?B?TVhFWlFKczJPQmt2elRtVlBqbW1KeXBnZWM5cUNnenNnTkFxN2MzT1R4SDQ4?=
+ =?utf-8?B?T3puOWNBeC9RUEkvVGFhSnRZSWw1eUxneEwyWit2Q2xrSDcxbkhWNGtzY2Zr?=
+ =?utf-8?B?dmhEWUhCTEl5VXZDUWRtNDNZSlhVb1NwQVN3TlQxdjdXS3EvSXBNRWZaZHdl?=
+ =?utf-8?B?d2NNSEhybW01UERmYlUrYkpkQ1U0cldnK0RQZjRZbXg5UjZwdlcxMUdnQ0E1?=
+ =?utf-8?B?dHNWa2U3T1VxSzZrYVFaTVdwVFpEN2phZ3psU1pPM2hqb3h3UGZiM2dPUlg0?=
+ =?utf-8?B?c2JGUUF2U1RJQzNOMlZmdz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c2YvMU1RZ0taUVMvT0pSdDNkdlJnMTFRZ20yamI1UlZJaVhWdWloMHJPaXlG?=
+ =?utf-8?B?by9FVVFSSjhXeXVkeDA0Vy9mRnE1ZDBDUm92Z3RFOGp1OGlFVzJQdDdlODRz?=
+ =?utf-8?B?ZGxUM2RBMVBPQStLbTV2NjhBR3ZBYVl6ZnZjcEVVZmxoeCt6Q1VYZklja3hF?=
+ =?utf-8?B?UUZpV1Rsb0VLNjBMMGZ4UmlnMzJGSXh1cGNYZmp6Zm05QUVDMXl0TVlScjVG?=
+ =?utf-8?B?cDVKZWJVZ3hnbGYzMFFvYWNkbFA5R2s5Rk1TMGdVN0MvUnRZMllzZG0ydGN0?=
+ =?utf-8?B?YkErMldBd3dRQ0Y4NzdnL2I1MWg2WTF1dmdraDJacHljbzlGeGxDS1UzT0Jl?=
+ =?utf-8?B?dkFtN0hONGpadmNHMk1XTW9GTjlPdGYrbk16VnVaV1lORDEzSU9WMEFYVHRw?=
+ =?utf-8?B?V1crK3ZzWm9jM3VNZDF5dlJpWkQ3emxqenZudXZnL2Y5VjVLY0FhQmp6NHc1?=
+ =?utf-8?B?SFQwWlRwYlkzTU82ZVVPemc4ay9zSGJuQnhma2Z1dGllSkxnTXpNcGdVeUk0?=
+ =?utf-8?B?VTBoVzY5eGxsSGZhRGZ3czlMekdnMFlMZy9OZVF6emptczllbStHUE1lbGI2?=
+ =?utf-8?B?bkpiZ0lCeU1kdkJYYThPWUF0aE5OQ0sxLzFIdUNvSE11ZlQxS0YyM0tWQTEz?=
+ =?utf-8?B?L3lFUnJFYUFHSUZ5a0NRU2VaUjQ4bXFkNUlsM0F0emZBWVJDWVpuOVAwTW1F?=
+ =?utf-8?B?NEVjdFJOL0VYL3VHZDBPZnNCbytzeXdhaHdCSFF0R0F5OVgwOEdGZWVGSW0w?=
+ =?utf-8?B?REZOWFl2bDZ0TmpmRWdHcHE2M0E3VUt0blJpNXpTck9iT3RWL295SnRncnd5?=
+ =?utf-8?B?dXpNR1hqZ3V2YW0wVjltVytmWWZjUHhRSitMOUhzaFNyU2NMZVUwVzREZzZ4?=
+ =?utf-8?B?bHpxUGZ1Z1pEcmhwUVpkaDI5Nk1HUjFCbXFxdnBiT0pEakdkWFI4YTBjMTB0?=
+ =?utf-8?B?VVdYM2Z6RERzV1JHblM0eVN4RE1WWW5yWTRVUmxuRHUzamFiWk9VSExXZ0hD?=
+ =?utf-8?B?Y05HT3plN2QrcWFBcnRYVThPQ1N2VFdkNTRFTjV2TXFsKytGNTVLQitXdVVs?=
+ =?utf-8?B?YUtOTmZFaERIa0NwZ1VrQURsRFdTWEtOOWIveENaWU1EYlo2RHUrUmM3V002?=
+ =?utf-8?B?VDQzdVhnOXBHZytyK05lUFFRTmJWa3JCbzRRd29lWG9TczljVU82cGkyMWVF?=
+ =?utf-8?B?K3ArUEgrdjlVQkgwZFpSZ1A4aTErMU9JWXdNZjhkWjZETGJ6NW9aNUY0YnJ1?=
+ =?utf-8?B?bldwYVBxc1BOZm1MTW5pTnd3U1RJcEE2dEhJVVdFQUZ6bklCNFdKRk5QL2U5?=
+ =?utf-8?B?NGt5cUxYcjRFZEM5SEI3RW9MeldNRXo1dWNvYytnNU1xRk81bE02RExGY2VF?=
+ =?utf-8?B?VWNDcFc1NUFwUjllNTRWcW9Xc3VVZWRNOGx2MkFjekNGSnhXc0RkbitsbTEv?=
+ =?utf-8?B?STJYdFdyVWVWY0lkcjM1OGhCYURmTnBET0ZsN0NqMk5yaXJLelhTaVRuZnRo?=
+ =?utf-8?B?eFZxbUFBOWREY0JCZDJBT1Z5VEhlVlpTWlBoRy9GdkJUVWVkclhrYy9QZnRK?=
+ =?utf-8?B?N3Z5NHBKS0t1bU43dFFwdkdueVc1ZTczdjVKMFFlMWdaRnpmU3VOTlo5a3pI?=
+ =?utf-8?B?NGk5cjYzRDNjclVlL1VtZzlDYTZuNzlBNmsySHVMSnRRZ3VIYkFob1hxd0Fa?=
+ =?utf-8?B?aEk5MHdxdlFJNmFCZDRjbWx5UWUyWUdvSzhsMmRsZFY3M1JsQy80UUlVYkFK?=
+ =?utf-8?B?RFYrM2ZFcmErQ2pDRnl5aXZFS1ljWTNMUVNPaklYY2JGS0w3U1lXS2dyVXk0?=
+ =?utf-8?B?c20rQ3dHT2VlWlNBYks2V1h3aytjQ3B4d3k0R1BuaURUYmtsWjZCLzFtRUpE?=
+ =?utf-8?B?ZWE2VVVFYzFYZDdnSmU5ekUrS3lQcUgwOVFWbmJ1TFAxSFU2OG00Y0xzTWl0?=
+ =?utf-8?B?VDhGQzlraFZ5YWJQbkg5V2tZK1RKUGtxMXZnd0dwYStrNUpxdDlGaHFVaW1G?=
+ =?utf-8?B?YWFCajFnYmxVOUozL1k1ZXpZREJuR2JSRGVGMldoc1JaQ1JrSjltRGI0b0hK?=
+ =?utf-8?B?dkVxUytEUCtUczVFcXlKZGRRSUpyditCb2xZQWV0THdGb2JZMVgrMGJEVE5O?=
+ =?utf-8?B?WjRkOEQrQjV6R3RqdndZQUtmRklSQ3BxTXRGNDR1bWNLYXFhTlljVnJpVUl3?=
+ =?utf-8?Q?cs5ci1ovw/6a6Zyc9GB26e8=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f2710fa-c47a-402c-bfcf-08dd147f46be
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 16:18:24.2193 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1pwJ0kGf+hMywYYXLd7+7P+MF7k77kzYskInIzRe/rvpln6C9Ngkj/qiJIGK4ZG9Tpn/TwDsOcVyJ9ZqeSpMYOMjG2sRBJNuB8+gE2qF+f8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9155
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,95 +181,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sqTU2mrZUm/HdDcU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 04.12.2024 18:13, Simon Glass wrote:
+> Hi Mikhail,
+>
+> On Tue, 3 Dec 2024 at 16:27, Mikhail Kshevetskiy
+> <mikhail.kshevetskiy@iopsys.eu> wrote:
+>> timeout_count is never reset once a tftpboot transfer has started. If for
+>> whatever reason timeouts occur frequently, but the server keeps replying
+>> nonetheless, the transfer may be needlessly aborted.
+>>
+>> Reset timer_count on every successful block to avoid this situation.
+>>
+>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+>> ---
+>>  net/tftp.c | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+> What is the impact of this change?
 
-On Wed, Dec 04, 2024 at 01:10:19PM +0100, Heinrich Schuchardt wrote:
-> Dear Tom,
->=20
-> The following changes since commit f96e5133184aac377b54bd61f8abf78710f2ee=
-56:
->=20
->   Merge branch 'master' of
-> https://gitlab.denx.de/u-boot/custodians/u-boot-samsung (2024-12-03
-> 12:37:20 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2025-01-rc4
->=20
-> for you to fetch changes up to 657310322e5893d0b1bbba002fbe59b318062192:
->=20
->   doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayipN
-> (2024-12-04 11:26:34 +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23706
->=20
-> ----------------------------------------------------------------
-> Pull-request efi-2025-01-rc4
->=20
-> With the move to bootstd booting via the EFI boot manager stopped to
-> consider all block devices due to missing probing.
->=20
-> With this pull request probing of all bootdevs before running the boot
-> manager is achieved. Prerequisite changes are needed to pass the CI.
->=20
->       efi_loader: simplify efi_disk_rw_blocks()
->       test: fix test_extension.py
->       configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
->       CI: xilinx_versal_virt: disable USB_DWC3
->       net: eth_bootdev_hunt() should not run DHCP
->       cmd: bootmenu: add parameter -e for UEFI boot options
->       efi_loader: run bootdev_hunt() to find ESP
->=20
-> Further UEFI changes:
->=20
->       Avoid writing message in Exit() boot service
->       Update startimage_exit self-test to check error
->       Don't warn if the TCG2 FinalEvents table is not installed
->=20
-> Documentation changes:
->=20
->       cmd: bootmenu typo 'read'
->       clk: mpc83xx: Fix typo in "Coherent System Bus"
->       efi_loader: Fix typos in enum efi_allocate_type
->       doc: sending_patches: Fix spelling of "its"
->       doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayi=
-pN
->       doc: board: theobroma-systems: fix feature list in introductions
+If less than timeout_count_max issues appeared between arriving of two
+data blocks -- the transfer will be continued. This greatly increase
+chances to successfully download file if a lot of transfer timeout happens.
 
-We're about a month from release, and given upcoming holidays for many
-people, about to enter a period of less testing of changes probably as
-well. With that, the documentation changes are fine. I believe we need
-those "Further UEFI changes" as well to fix regressions. But for ESP
-changes, I think for v2025.01 if there's specific platforms always
-getting things wrong now they can use PREBOOT to init / probe the
-required subsystems, and boards / distributions can do similar, in their
-bootcmd, yes?
+From the other side the transfer may becomes very slow (if timeouts will be
+after each packet).
 
---=20
-Tom
+This may looks unrealistic, but we have a number of devices with Airoha chips
+(mips, mipsel, arm, aarch64) that sometimes acts like stated above (a timeout
+arises very often, but some packets flows normally). It's a rare issue, but
+sometimes happens :-( We don't know a reason yet.
 
---sqTU2mrZUm/HdDcU
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdQfUgACgkQFHw5/5Y0
-tyxEWgwAqL9vVm0Hh1jlxvsSdYTiN0Gno+lsTk22pztqX0N/T++NHUMv7DEg2xYo
-VGeMDyDJb0YdHtad8mbu+f13RV2mgG3kzHM6uO94bsxVW4WZRAOoD6IYFMktUMCU
-GHLPo8HiZdWa/swHkjCSMYa3skV32F6jveuef450Ui1Ndx9go8Uz1Ffpamx0jeua
-jSJ9YSqJ5MM12+SqxS2tSY/pak18TBpfzY11pGeu8Nm8SkrkHGVB5tHlYCz6D1oA
-po85ZpKDFhjnc95NT8gOtRiZCyhc5Rxjp3ibim/gusRnwAf/BYA3Zebs1m/TBK5N
-1yOka73SR7wfj48cSvNQM+9Ac4ufbQaYSIp7MRy+rFk0sl8kCo5Mgn/cvOe53pcB
-xjvIXWerfJ+ZkKPt382drghUMTDVyoKwgAOgru7rVWW7Ldi82yXa6hJh7798FBn/
-JNvFg5BZB2YGKowgiXbXa6AEwc34lZAVy6PFfedCG6ZJQN90lZl+Nh0l7A31cpip
-pQATPagb
-=3agt
------END PGP SIGNATURE-----
-
---sqTU2mrZUm/HdDcU--
+>> diff --git a/net/tftp.c b/net/tftp.c
+>> index 704b20b4ff8..8f948204a6f 100644
+>> --- a/net/tftp.c
+>> +++ b/net/tftp.c
+>> @@ -498,6 +498,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+>>                                                 tftp_state = STATE_DATA;
+>>                                                 tftp_remote_port = src;
+>>                                         }
+>> +                                       timeout_count = 0;
+>>                                         tftp_send(); /* Send next data block */
+>>                                 }
+>>                         }
+>> @@ -657,6 +658,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+>>                         net_set_state(NETLOOP_FAIL);
+>>                         break;
+>>                 }
+>> +               timeout_count = 0;
+>>
+>>                 if (len < tftp_block_size) {
+>>                         tftp_send();
+>> --
+>> 2.45.2
+>>
+> Regards,
+> Simon
