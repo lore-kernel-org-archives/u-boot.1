@@ -4,166 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C6DE77170
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 16:18:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD8B5E7716D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 16:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8152C89421;
-	Wed,  4 Dec 2024 17:18:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id 2575F8964E;
+	Wed,  4 Dec 2024 17:27:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="p0gPwzuZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BP82nFWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1895895FD; Wed,  4 Dec 2024 17:18:29 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20716.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::716])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80669896BA; Wed,  4 Dec 2024 17:27:14 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D3B88917D
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 17:18:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B91789433
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 17:27:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BS00JMnrvQ7m9bTZvvP0F0Sm8d3wN+IKPlPWE9EMKA0lqWLrDypiXnl7tbwXoYgs56SCVj1fWHZZ3oJHKI+9nynZneoem6acc5MVXoLeuXB1At3cMuWqEewJEiJRyd8jNNKT+ksXS82PHMACvK//IqiHDLK4HdDu37x+9Nff/fEFEEfLwm2gr3BJkub0zvNWkIPC4FdnM/6BMuF1f18YsJTE2sjsUxE9tpk3qacM+u0MtcqD6+R2wmIwCq4gPJrpfuacl0+5VcxvQRJMKffQdkLvBxb4T6g/tpNhVpN37wTgptUP/fq8pZpxKbTPC1+alwuTaG/7gaZPZBCx5YwajA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H8JyEzZmBiDuTYzkNnEZqqben11GYx6O5ZxlEnDBswU=;
- b=kxL+/agtKvmi8kHnDtzK/iesp8VUOOjhzXXoHYw/TqK1LyzzMQ0IQZJzwmnEVXXgBlZKD1CrFlG0/1tbSZ8kwHo4KTTSyCNOMCohGYhmbyspeSrpU0HoKYd+GyqFel4+yRCwouc6M5ov2iUutiXBli7EO6bHMkcDFOcqjgIfdzIEjtgG96S1txhTWwSlVWAvUM7aED3pixHAjfFLX5d4vbeBVGIAD/69K6PE+enVRAaAlBTC0AS74UzE833OH0XscIIQWp9ZTKsmTvmDpT85I7dpO/YWXxtfky6PAeUDj1i3nZu+lYywqLO1QnCwgcdBboTVvmfbohTc3R0nCH+pyw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H8JyEzZmBiDuTYzkNnEZqqben11GYx6O5ZxlEnDBswU=;
- b=p0gPwzuZXyrnpJTKY5yXtUdsD+d/el+TT6l3NM3rKu6HcdKdZiAT9xMCvmjnRYkR4fwHJjxa3Xh1ZQntj41t9MKVYrxN5NEvR33jves/i43SHkiywTs7AbuXNkgDtoZjUBUjUS8FsHNw4A3RmyplelZ0bHuPRlmT50/WR7+v3UWU3gvQO/qiEVV5CXJYOhd+M/JmzuL+nudTvYVdNX5vm20KtCbAq4WDXulqLAzrO9ez36/6YRqfCGZg95PYyYz/ziEPKQnAO3alyD0TvTSe8t0kPgAfc+RZYq4sHrSBchTYPEwYzpfrkcitYcYUa5g+lDzNnjxRAggnQYDI22kqvg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by DU0PR08MB9155.eurprd08.prod.outlook.com (2603:10a6:10:416::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.10; Wed, 4 Dec
- 2024 16:18:24 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.8230.010; Wed, 4 Dec 2024
- 16:18:24 +0000
-Message-ID: <4e5687a2-8a86-45b4-a1c2-c160d1319c0f@iopsys.eu>
-Date: Wed, 4 Dec 2024 19:18:21 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: tftpboot: clear timeout_count on every successful
- block
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-466847440a6so44070201cf.2
+ for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 08:27:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1733329631; x=1733934431; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VfNQGD+Uad2LzgWDsGZokU42q5Vm3QMWSo28mZV5dgM=;
+ b=BP82nFWHvgCU10UJEO/vnJyDeDY+FgDtVtGldOVNnf5IiB8CygMf7lTj13TDvxYPVD
+ tg2ZQXTp7mp4T7GJaX8pc9YBxWjUkwrKxXbQ/U6w+YWjQIxlVVkfRmoXucAf4qYPA1+i
+ JbGkxONiLl9k6bvIFBgfQT/wW0ERqvhocwANw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733329631; x=1733934431;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VfNQGD+Uad2LzgWDsGZokU42q5Vm3QMWSo28mZV5dgM=;
+ b=Dhg4lrhaOaYsrS79qJwJ628FBf5kL1BykYCekWpnKNKguOQa0E5HAUQg6GVBUHp4Jv
+ 3mqjGRvamrlUJbIhLqZznwo2vpI08yCFqX7Xf9kmT3LNn1CHtKeU3v7IawQNtME1N3Ct
+ +QWTiSaEo4oOuu2qYrSTHYS6LERHb2QmAvt1EKSctCwyxuhHm/d/+c+92eOyLaKkDy7m
+ u1yeCBPAXfiWEFlBc+gA0DiVP5pO1RgLmKyUHQTzW8zsrPWjbDVEWahqZT7j7Q0u4sH4
+ u6PS+PqPMdTwuWCz5WBg4XRFPH+6QKN/ZtXUjYQB1GaWQ63O6/6drMiMOKcqeGGEZCIq
+ pzJQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUWltcHQS3Wz7EHDBzD2XFvldzDnuo9h1lgm3bhCWJT8fpzHUmGEoaGWX2F1kp2bBpt87I18l8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxepbSWxicKKAIAIKJKOMf77TWlbfQZoLz9PX9dVqrgy1/gxgF2
+ Ev/Ie+J6Q/Dtn/8EaKcKYnxNWjwZtN4UcH142EejFhuBDYmGdvShAYCo0mxzqi+ydN8XvWVjkiG
+ vOIw=
+X-Gm-Gg: ASbGnct4tNKTSQK39UGaKLLcs5CmsyKkRorVNAMiAo0pfpj+qgrqpZGRAj2tcq4TaaJ
+ p9QZ1eRjsEJwNaTlqhjPEjSbZ+PFZSMbqDsjmsgbr0PsY3IyVSiCchJJl8W1C5zZCopmegfFS0E
+ 6fpASb1Wh/O5KV2Uo759ZMdt2j7P5eH1SxmyeSSe+PIm5k6PnkhuTZMRO18Po7OC1MAjSqMOTTD
+ IMx6w26ktm2hEGKFpP5RX39o8hhcirxlgL1q7gRiXzc2y4dpg==
+X-Google-Smtp-Source: AGHT+IFTKMrrzqdEiqvBHlGkSnEPSoDhSyak8mvDJQqs28pXmSgr6Fi8Xm4tRBTAud1A02/gyRDozw==
+X-Received: by 2002:a05:622a:1984:b0:466:948e:beec with SMTP id
+ d75a77b69052e-4670c38fb9emr122391861cf.39.1733329630875; 
+ Wed, 04 Dec 2024 08:27:10 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-466c407c56asm75295301cf.37.2024.12.04.08.27.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Dec 2024 08:27:10 -0800 (PST)
+Date: Wed, 4 Dec 2024 10:27:07 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-References: <20241203232732.2680178-1-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszTj8SfbNs3Qn+cdC98JjoDE0St8HuRaXLF8+MxFCC07TXA@mail.gmail.com>
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US, ru-RU
-In-Reply-To: <CAFLszTj8SfbNs3Qn+cdC98JjoDE0St8HuRaXLF8+MxFCC07TXA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: GV3P280CA0062.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:150:a::18) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: Applying patches to mainline (Was: Re: [PATCH v2 0/7]
+ efi_loader: Add support for logging to a buffer)
+Message-ID: <20241204162707.GG2457179@bill-the-cat>
+References: <20241202001243.1283274-1-sjg@chromium.org>
+ <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
+ <20241202141558.GD2457179@bill-the-cat>
+ <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
+ <20241204012907.GD2457179@bill-the-cat>
+ <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9155:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f2710fa-c47a-402c-bfcf-08dd147f46be
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eTBkY00xdVVRd1pOL0kxRE52Yk1pWkpOMVJ2b0RVSW44TjBGYmh6eW8yYVor?=
- =?utf-8?B?UkowWm9Jc0EzT0dDaXRKbnEyWmtCY2pLaFdOcFRDQ1dkNWtoYzhTYXpNb3lN?=
- =?utf-8?B?SUgwMnBBVDVoTDJ5MXY3Vk9YN1dETjk3d1pvWmpxTlhsTWlVblJvS21hUnI5?=
- =?utf-8?B?aDZGRStIRC9mUWFhbFhQdkMvSU5ROVVEeDJHTllMa2N4ajMza1RRRHJTdmRs?=
- =?utf-8?B?QXdsUGRqQ1MyZmRaWEpQbjhQT0wxOU5RR3U2SlJNcGR6MTBPVXpQODh3a0w4?=
- =?utf-8?B?VkZ0Ujc0T0lhUWhRd0JMVzB3QWFkRytxSFdHOStablZ0SVNOM0U3VWdRdmlH?=
- =?utf-8?B?aU5BZWxmZXJ5VUNxUVcyWnN5OVpGaUZRb1crZCthTnF1enBySmFsN3pnNnoz?=
- =?utf-8?B?aWJydzk5Q0c1Ri8zQmltL2lQZzd3cjN6bXVTcFpiTlRBcDZhaWFqVytmczRP?=
- =?utf-8?B?NEpJay8vYThtMngzaExjTHNIOCs2Vnh3UmRjYStJamROdG5pcDFkSml5R29G?=
- =?utf-8?B?VW9oZ0cxa1BSanFiaWlPem00TStSNDcxMnhFY212SnFQamtkU0RnMnBUMGM1?=
- =?utf-8?B?cXYwNEhmWGI0Ykd0RGVad0poM01FK2xxTklvMUtvNXZ0YncvdTFYd1NUVFRz?=
- =?utf-8?B?cldBc1laVHNac2xvaEl1Z3AvOGRaVzFrSDZVU1JUWUJPMkh3MUlIbCs1bTFP?=
- =?utf-8?B?d3V3OENocktvdU5ZemdheHFOZUVQS09DOUM5SmtCN1QyTjJVVFNOL3k4bzky?=
- =?utf-8?B?OS93NFlIZnBhWTgvQTZhQXA2NVZWTW5Ya2xnb2kwRnQ0S2lxWXYyVSswMVZV?=
- =?utf-8?B?bmlVaVA5Wmw3aGl0NUtjYXVjSHBGdlRtZzMzY251Q2lvN3pHSkh4d2dFK2Ni?=
- =?utf-8?B?Lys5Wm8vc0FFN0NIdk9zK001MHNaMTJsVjh3dVQ3N1Mxb3IySWVhc3VZaCtV?=
- =?utf-8?B?RzlDUkxjWVJZei8wcDI4alJDd0ZNaDVGeFIyQ004TUQ4S0wzY25Ra3U4clVP?=
- =?utf-8?B?aXM1R0loT21aOEZSYWQrZEIzcHExRHRuZndHSS9PWisrSHVOeTJyTVU2cTFh?=
- =?utf-8?B?eVFhcDlvL0UzdzJhOTB3dkJQOVBDa0pxMTJXQk9MWll2ZVRIcjR1bVdwR21n?=
- =?utf-8?B?S0tHNkc5NUFSbTEvUzJyc2tCNUNVMW5uUDdvclZpNVNYNVdqSUVNYWMxQWU0?=
- =?utf-8?B?SjJYQVVvbWdjQlNhbVY4bkduOWpyUHYxTXhpUlYxTi9IZjhJOG5YTVljZ2Z2?=
- =?utf-8?B?dVJkU3BvbThLaEJ1bFQvQmJyL3FrdE45bDdxZjNWREI5Vy9NdDdYUEJBMWs4?=
- =?utf-8?B?b3FvSWRKOFR3MHE4S09LREhBRjhsRFFRc2ZGcWV1RmttY0d5UEY1MDRoUno4?=
- =?utf-8?B?U3dQMU5wUkRtZmptVEsxR3JxaVFURWVad2J4U0VvV3BIRDQ4YStDczJ4cm9y?=
- =?utf-8?B?OHBxR2RlZUtDRU9uQUhOUE53UFV2MTRxK3dxMmYzeGFXUlhxdWxMWlNsaG4x?=
- =?utf-8?B?TVhFWlFKczJPQmt2elRtVlBqbW1KeXBnZWM5cUNnenNnTkFxN2MzT1R4SDQ4?=
- =?utf-8?B?T3puOWNBeC9RUEkvVGFhSnRZSWw1eUxneEwyWit2Q2xrSDcxbkhWNGtzY2Zr?=
- =?utf-8?B?dmhEWUhCTEl5VXZDUWRtNDNZSlhVb1NwQVN3TlQxdjdXS3EvSXBNRWZaZHdl?=
- =?utf-8?B?d2NNSEhybW01UERmYlUrYkpkQ1U0cldnK0RQZjRZbXg5UjZwdlcxMUdnQ0E1?=
- =?utf-8?B?dHNWa2U3T1VxSzZrYVFaTVdwVFpEN2phZ3psU1pPM2hqb3h3UGZiM2dPUlg0?=
- =?utf-8?B?c2JGUUF2U1RJQzNOMlZmdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c2YvMU1RZ0taUVMvT0pSdDNkdlJnMTFRZ20yamI1UlZJaVhWdWloMHJPaXlG?=
- =?utf-8?B?by9FVVFSSjhXeXVkeDA0Vy9mRnE1ZDBDUm92Z3RFOGp1OGlFVzJQdDdlODRz?=
- =?utf-8?B?ZGxUM2RBMVBPQStLbTV2NjhBR3ZBYVl6ZnZjcEVVZmxoeCt6Q1VYZklja3hF?=
- =?utf-8?B?UUZpV1Rsb0VLNjBMMGZ4UmlnMzJGSXh1cGNYZmp6Zm05QUVDMXl0TVlScjVG?=
- =?utf-8?B?cDVKZWJVZ3hnbGYzMFFvYWNkbFA5R2s5Rk1TMGdVN0MvUnRZMllzZG0ydGN0?=
- =?utf-8?B?YkErMldBd3dRQ0Y4NzdnL2I1MWg2WTF1dmdraDJacHljbzlGeGxDS1UzT0Jl?=
- =?utf-8?B?dkFtN0hONGpadmNHMk1XTW9GTjlPdGYrbk16VnVaV1lORDEzSU9WMEFYVHRw?=
- =?utf-8?B?V1crK3ZzWm9jM3VNZDF5dlJpWkQ3emxqenZudXZnL2Y5VjVLY0FhQmp6NHc1?=
- =?utf-8?B?SFQwWlRwYlkzTU82ZVVPemc4ay9zSGJuQnhma2Z1dGllSkxnTXpNcGdVeUk0?=
- =?utf-8?B?VTBoVzY5eGxsSGZhRGZ3czlMekdnMFlMZy9OZVF6emptczllbStHUE1lbGI2?=
- =?utf-8?B?bkpiZ0lCeU1kdkJYYThPWUF0aE5OQ0sxLzFIdUNvSE11ZlQxS0YyM0tWQTEz?=
- =?utf-8?B?L3lFUnJFYUFHSUZ5a0NRU2VaUjQ4bXFkNUlsM0F0emZBWVJDWVpuOVAwTW1F?=
- =?utf-8?B?NEVjdFJOL0VYL3VHZDBPZnNCbytzeXdhaHdCSFF0R0F5OVgwOEdGZWVGSW0w?=
- =?utf-8?B?REZOWFl2bDZ0TmpmRWdHcHE2M0E3VUt0blJpNXpTck9iT3RWL295SnRncnd5?=
- =?utf-8?B?dXpNR1hqZ3V2YW0wVjltVytmWWZjUHhRSitMOUhzaFNyU2NMZVUwVzREZzZ4?=
- =?utf-8?B?bHpxUGZ1Z1pEcmhwUVpkaDI5Nk1HUjFCbXFxdnBiT0pEakdkWFI4YTBjMTB0?=
- =?utf-8?B?VVdYM2Z6RERzV1JHblM0eVN4RE1WWW5yWTRVUmxuRHUzamFiWk9VSExXZ0hD?=
- =?utf-8?B?Y05HT3plN2QrcWFBcnRYVThPQ1N2VFdkNTRFTjV2TXFsKytGNTVLQitXdVVs?=
- =?utf-8?B?YUtOTmZFaERIa0NwZ1VrQURsRFdTWEtOOWIveENaWU1EYlo2RHUrUmM3V002?=
- =?utf-8?B?VDQzdVhnOXBHZytyK05lUFFRTmJWa3JCbzRRd29lWG9TczljVU82cGkyMWVF?=
- =?utf-8?B?K3ArUEgrdjlVQkgwZFpSZ1A4aTErMU9JWXdNZjhkWjZETGJ6NW9aNUY0YnJ1?=
- =?utf-8?B?bldwYVBxc1BOZm1MTW5pTnd3U1RJcEE2dEhJVVdFQUZ6bklCNFdKRk5QL2U5?=
- =?utf-8?B?NGt5cUxYcjRFZEM5SEI3RW9MeldNRXo1dWNvYytnNU1xRk81bE02RExGY2VF?=
- =?utf-8?B?VWNDcFc1NUFwUjllNTRWcW9Xc3VVZWRNOGx2MkFjekNGSnhXc0RkbitsbTEv?=
- =?utf-8?B?STJYdFdyVWVWY0lkcjM1OGhCYURmTnBET0ZsN0NqMk5yaXJLelhTaVRuZnRo?=
- =?utf-8?B?eFZxbUFBOWREY0JCZDJBT1Z5VEhlVlpTWlBoRy9GdkJUVWVkclhrYy9QZnRK?=
- =?utf-8?B?N3Z5NHBKS0t1bU43dFFwdkdueVc1ZTczdjVKMFFlMWdaRnpmU3VOTlo5a3pI?=
- =?utf-8?B?NGk5cjYzRDNjclVlL1VtZzlDYTZuNzlBNmsySHVMSnRRZ3VIYkFob1hxd0Fa?=
- =?utf-8?B?aEk5MHdxdlFJNmFCZDRjbWx5UWUyWUdvSzhsMmRsZFY3M1JsQy80UUlVYkFK?=
- =?utf-8?B?RFYrM2ZFcmErQ2pDRnl5aXZFS1ljWTNMUVNPaklYY2JGS0w3U1lXS2dyVXk0?=
- =?utf-8?B?c20rQ3dHT2VlWlNBYks2V1h3aytjQ3B4d3k0R1BuaURUYmtsWjZCLzFtRUpE?=
- =?utf-8?B?ZWE2VVVFYzFYZDdnSmU5ekUrS3lQcUgwOVFWbmJ1TFAxSFU2OG00Y0xzTWl0?=
- =?utf-8?B?VDhGQzlraFZ5YWJQbkg5V2tZK1RKUGtxMXZnd0dwYStrNUpxdDlGaHFVaW1G?=
- =?utf-8?B?YWFCajFnYmxVOUozL1k1ZXpZREJuR2JSRGVGMldoc1JaQ1JrSjltRGI0b0hK?=
- =?utf-8?B?dkVxUytEUCtUczVFcXlKZGRRSUpyditCb2xZQWV0THdGb2JZMVgrMGJEVE5O?=
- =?utf-8?B?WjRkOEQrQjV6R3RqdndZQUtmRklSQ3BxTXRGNDR1bWNLYXFhTlljVnJpVUl3?=
- =?utf-8?Q?cs5ci1ovw/6a6Zyc9GB26e8=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f2710fa-c47a-402c-bfcf-08dd147f46be
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2024 16:18:24.2193 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1pwJ0kGf+hMywYYXLd7+7P+MF7k77kzYskInIzRe/rvpln6C9Ngkj/qiJIGK4ZG9Tpn/TwDsOcVyJ9ZqeSpMYOMjG2sRBJNuB8+gE2qF+f8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9155
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d1jGug9VV/YT3WnS"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,59 +105,107 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 04.12.2024 18:13, Simon Glass wrote:
-> Hi Mikhail,
->
-> On Tue, 3 Dec 2024 at 16:27, Mikhail Kshevetskiy
-> <mikhail.kshevetskiy@iopsys.eu> wrote:
->> timeout_count is never reset once a tftpboot transfer has started. If for
->> whatever reason timeouts occur frequently, but the server keeps replying
->> nonetheless, the transfer may be needlessly aborted.
->>
->> Reset timer_count on every successful block to avoid this situation.
->>
->> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
->> ---
->>  net/tftp.c | 2 ++
->>  1 file changed, 2 insertions(+)
->>
-> What is the impact of this change?
+--d1jGug9VV/YT3WnS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-If less than timeout_count_max issues appeared between arriving of two
-data blocks -- the transfer will be continued. This greatly increase
-chances to successfully download file if a lot of transfer timeout happens.
+On Wed, Dec 04, 2024 at 08:13:04AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 3 Dec 2024 at 18:29, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Dec 02, 2024 at 05:21:05PM -0700, Simon Glass wrote:
+> >
+> > > From my side I'd like to change the conversation a little, to how to
+> > > land code, rather than why we should bother. "Code needs to land"
+> > > should be the motto. If someone has taken the time to create
+> > > something, our bias should be towards getting it in, with sufficient
+> > > changes to make it fit the project. There are cases where something is
+> > > just a bad idea, or should be done another way, but for people working
+> > > on major features or changes, biasing towards not landing the code is
+> > > just going to make them go elsewhere.
+> >
+> > This is the wrong approach I believe. The goal has always been and
+> > continues to be to have reviewed (whenever possible, our developer
+> > community is small) incremental change over time.
+>=20
+> Yes, I agree with that, but it isn't what I said.
 
-From the other side the transfer may becomes very slow (if timeouts will be
-after each packet).
+I don't know how else to interpret "Code needs to land". I'm not sure
+what reviewed patches we have that are outstanding, but also not fairly
+new. We do have patches outstanding, in general. Much of those fall in
+to the categories of:
+- Custodian is active, but also very busy (virtually everyone is a
+  volunteer so I have a hard time getting forceful with people that have
+  a large queue).
+- Custodian isn't active / no direct custodian and the code hasn't been
+  reviewed by anyone else.
 
-This may looks unrealistic, but we have a number of devices with Airoha chips
-(mips, mipsel, arm, aarch64) that sometimes acts like stated above (a timeout
-arises very often, but some packets flows normally). It's a rare issue, but
-sometimes happens :-( We don't know a reason yet.
+> > Just because something
+> > has been posted a number of times does not mean it's ready to be merged.
+>=20
+> I didn't say that either.
 
+It's an impression you give however when you repost a series less than a
+day after last posting, without addressing all of the feedback.
 
->> diff --git a/net/tftp.c b/net/tftp.c
->> index 704b20b4ff8..8f948204a6f 100644
->> --- a/net/tftp.c
->> +++ b/net/tftp.c
->> @@ -498,6 +498,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
->>                                                 tftp_state = STATE_DATA;
->>                                                 tftp_remote_port = src;
->>                                         }
->> +                                       timeout_count = 0;
->>                                         tftp_send(); /* Send next data block */
->>                                 }
->>                         }
->> @@ -657,6 +658,7 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
->>                         net_set_state(NETLOOP_FAIL);
->>                         break;
->>                 }
->> +               timeout_count = 0;
->>
->>                 if (len < tftp_block_size) {
->>                         tftp_send();
->> --
->> 2.45.2
->>
-> Regards,
-> Simon
+> > Your challenge today is that on patchwork you have over 150 patches
+> > covering a wide variety of topics and of which many series have
+> > technically-merited feedback that needs to be addressed in a technical
+> > manner.
+>=20
+> By my count I have about 10 series in progress, with a small number of
+> patches (< 10?) with pending feedback
+
+I'm not sure about that less than 10 number, in part because it's hard
+to keep track of which feedback was applied, and which not. And part
+because some of those series are places where I told you I'm unsure
+about the core concept but you asked and I'm giving you leeway to show
+me the end result.
+
+> that isn't effectively just a
+> NAK.
+
+To be clear, "just a NAK" isn't the whole story. Those NAKs come with
+technical rationales and requests. But maybe they're just lost in the
+volume of emails you have in some cases. I know for example I mentioned
+a few times and places that we have tests today for booting the OS, when
+you mention that we need to add a test for booting the OS. We need to
+expand that test, yes.
+
+> It isn't a particularly large number, if you add up the patches I
+> do in each cycle. It is in the nature of development and code review
+> that things are often not right the first time, or someone else has
+> another perspective, so I cannot see how this can be reduced.
+
+The easy way to reduce it would be to go from 10 series in progress to 1
+series in progress, and finish that before picking up series number 2,
+and so on. And then in the future, stop when you have more than 2 or 3
+in progress at once.
+
+But really, it feels like "Code needs to land" is another way of saying
+"Just a NAK should be ignored".
+
+--=20
+Tom
+
+--d1jGug9VV/YT3WnS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdQgtcACgkQFHw5/5Y0
+tyyoNwv/baESsygJ7z1kRgd13hWq8KmGK3z6qDBvc1ukuQOnOxZmDzhCYdn6J1rN
+rnv0fkPAOvlfS71S2IgAKN5VKDVeGd5FJdny48z5u6fOxwXFevIOHMW4dh1RSTMv
++nxnwG7syj5M6v2wy6328Tgnk8HcAtQMGwQ2WXCX5jpXbZy5HY1hylgzTX/yNl+J
+7YItvOhSChKmOo+PmIPhD7KLSD5a3QkpVf79pqWzjQkpa3UgAd14DBI/0bJ4hrv+
+njfMH9V0e5pPRsT7fIt3yODtFnBwzsBDyOUgwlDnGVSldC91HiWa+sgK5MqPeUbU
+Va7a5NCOKdrnBbwVTPzx3+qLwm6qPBS8OtkZYZKP/cuVG3eiaAj8f19FCiUDojj4
+wDotg84s7CVGuRhHIlmmtMaDwb96wUaLCn0/zfXcBYFjY4xkzRbyVi4We7LlMf6w
+0xOHSsqC/yVJlY6VGFQH2Za2gAV3UKrx34rUsUTe4T2s9a8qygwA8Kqg7vBidGP1
+B69YHG2z
+=zYsH
+-----END PGP SIGNATURE-----
+
+--d1jGug9VV/YT3WnS--
