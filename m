@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 566ECE7716C
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 03:07:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F24FE7716C
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 03:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3906A8951C;
-	Wed,  4 Dec 2024 04:06:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95A898969F;
+	Wed,  4 Dec 2024 04:06:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BwreypjH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WIs12Ki1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6D89896A3; Wed,  4 Dec 2024 04:06:11 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id C31A1896A5; Wed,  4 Dec 2024 04:06:13 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF8A289251
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 04:06:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5474589698
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 04:06:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-725935d001cso2473b3a.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 19:06:08 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-215770613dbso26127855ad.2
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 19:06:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733281567; x=1733886367; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733281570; x=1733886370; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KFNqRGFIPnFkEsG7vH2xii3paSQbgD8h8fUnbv4f9dg=;
- b=BwreypjHFzSjtSIlMkx3qbWbzNo8dVIgEd7yAv/fVLg2O4PEa7Ux2S0ugP75snoHrP
- gPhtxZt49pNyVd5XaphtIhJ2RdtoocHga6gHjGwY9r/gQ5ufvs/vMRXENO4Kj1JOEq9l
- 6VkS+TDxV+tfXRSNTrUODFKnSI52/x+omsdrThtBi/6AN7AFLBrVLIIvGHf3/lmRpx94
- JeX+aoCcBEP6P+wwyqZE4girJLv3LwCm9qrU3PdkOXNHy0aFERsLEZWwSfMRvDsGRtzE
- 7xjHUHVQ07gMk8uttXB0wCjoBrTFY8U8y7VWFdBHeafiOzSosYRg3JWCTaX6MhwfbvdD
- bJfw==
+ bh=L6ugXOMTLHo44jlCyUIaCZBdEXvWd8GzgyF2Z/XCRM0=;
+ b=WIs12Ki1HbQC1ntBUtPvYh+0Vc0tWLT4DXK8PAuXm6w8mpTGx/aqeiCdBks2H26ZBx
+ DU/wrJCOEK8POEJpalh/YFVNVNeq4X8NPRu+GtHmP/8tW5kHksSQG5hVU0AvILXfZ9rm
+ U/P1XnBN3ym682SThWgYq6X+DT7AoLOzocoFUBey/z+kj7gaSI8nikPQc9rhxG6tnk3/
+ JSfeLfQqmTpcwxQ7hqeLD4fcXY91JrFckXFbz55XvIv8ryxU4Dw1APEZtIkusqCy+jN5
+ j+6ldwcXYUSO9RzikKNZP177wU0cNeAMzeLMioQYnuWl+aXgEdX1+bX4jDa8UInD2ffn
+ wfJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733281567; x=1733886367;
+ d=1e100.net; s=20230601; t=1733281570; x=1733886370;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KFNqRGFIPnFkEsG7vH2xii3paSQbgD8h8fUnbv4f9dg=;
- b=CsNsmffaGiGNiNpactMjCYYyds4gNovKY8LTBWYnX8OM4uvHvW9p4ouBWHIutQptUV
- yGaOJsMOX9EWnKEVsl3tc4q/atzuAGhOOfQ5f+5s1yt398yVXo7cP7Hrp7Aot2+Vzgpo
- F8asVn87Qr7MiinxOgau3R2eykFfT0SNaqL16QFCHd4ff15hBOAeLbqSGz4mG+1su8DQ
- /IjutLlpnrcHGZFY1Ax5oIhwbyBkZZi3fZfQz0Cl4r7SVM03CWsFNkXuzl161PQU7aRM
- j9XQTAxvmTejd9IjFZTGsciRbOlXqkoUGYFvnsYOIXg+ITqP33R5L3u0xeZWt/mCVfPA
- maUQ==
-X-Gm-Message-State: AOJu0YwF/VZnloUqmlSMA3SPRHEeey8VuLizkTdoKKid4MPb5Xf5Mcns
- extL8uP7yA/Duq6Wl0hE5+53nnbZJDA6rf8wwZi94j64gMzBGJ7peN9nhOdHkAs=
-X-Gm-Gg: ASbGncuwssWD88sN2kJkhM7iriI/JfuTqEWU2YU77NRk6hducjsgbEyzBTk70qEiR2I
- zQ9nQxX/k/WUZVBfjgY8gN6hkcD7ZiNw1TaYKwDH+B4BTcIEiGlVpERLCdUFyan71er7/fWwOWs
- T1765VvTcp2jiOzLFDGCw2+9CKkkzQn6vpPwbbBEf5oOZW+vgdPmFVndFf1jSOMZiAC6lNFTRaB
- U3iz4kyK0anmP609nuP5oiKgnirZ8iSwNGjWjEli/M=
-X-Google-Smtp-Source: AGHT+IFKCWUCguGK+F4zwwaXmvihkqmzz04mZiHMfbOnT1SO1h+pdI/jH7TUCZmKXO2RW1TV3aZcgg==
-X-Received: by 2002:a17:902:d4c3:b0:215:72a7:f38c with SMTP id
- d9443c01a7336-215bd0eea49mr60625735ad.25.1733281567343; 
- Tue, 03 Dec 2024 19:06:07 -0800 (PST)
+ bh=L6ugXOMTLHo44jlCyUIaCZBdEXvWd8GzgyF2Z/XCRM0=;
+ b=eFF0ELg/vGDu6OtCrQEty+Q9qLIJcjqYjwVnLXXJTgXM0CNe7E/cFctlipMUnb5QRF
+ BVtetqjN7194o5Nho/UavTsP1zpYEOpqblp/XSpva558LbBGXEQnf0+phB3VtEBLe21l
+ OJ0fjQdtUws+XtCQjObdjJTsFN9KfrKlo81POXYtra3LOFvyAhnRG6KFI50ovDyliKL3
+ 3AzbX6vpnhMMtEGtBQ20y1EphUDvadYGq6lZNj/fR8Dzy3yYi2STHtbG0rWnvB5Fd6Rg
+ FO88CigmcvKt6Ls+JKm5yVznlTDGnRocAnwBdKa1rped7ffSZKZLap8f5oZ2TBCLilru
+ sPng==
+X-Gm-Message-State: AOJu0Yyr0xSptDcjuxnFnnTV0r8clriN6qVE2zX9kNi2GQUkriE374oG
+ A2enX0X00qp5yBho7I/CHwfd9hTdxkF7uM9ZSWxEWq2vI+B/AUqjS30wshlX6y4=
+X-Gm-Gg: ASbGnctM5Rci2e1lDOT2MD41xkidWckYOiH7YgxOXVgU+nKliRvhr2L1+ULG9JnRnSB
+ YEtLAqkXjEMZWz9O9hx2JEqo4spiT3DLI2mQKd9UWcsd2aILYkBKjctJdSRU8+KnHLFp02WFTXw
+ n3csWW+q8pFuVNCpe68l7KEWPD16IGv0gSm/LITo4mlaPJMmZzOCBfPr3If2POtd+VdWRRqJz6A
+ jfP08yeIPSAWfj3BSt9Wh+Eqcg344nlxtjX2pB/bEw=
+X-Google-Smtp-Source: AGHT+IG23h+J2waHJaj0Z0V5xRor7cnf/oM8NwIrwppNf1HfbvONk5cxmejH8tztwA7NPiihF9AT/g==
+X-Received: by 2002:a17:902:ce82:b0:211:2b2:2086 with SMTP id
+ d9443c01a7336-215bd174c21mr62955385ad.49.1733281569801; 
+ Tue, 03 Dec 2024 19:06:09 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215714b4f77sm56196335ad.202.2024.12.03.19.06.05
+ d9443c01a7336-215714b4f77sm56196335ad.202.2024.12.03.19.06.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 19:06:07 -0800 (PST)
+ Tue, 03 Dec 2024 19:06:09 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v7 13/14] efi_selftest: add test for HTTP protocol
-Date: Wed,  4 Dec 2024 00:05:28 -0300
-Message-ID: <20241204030530.2099776-13-adrianox@gmail.com>
+Subject: [PATCH v7 14/14] efi_selftest: add test for IPv4 Config2 protocol
+Date: Wed,  4 Dec 2024 00:05:29 -0300
+Message-ID: <20241204030530.2099776-14-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241204030530.2099776-1-adrianox@gmail.com>
 References: <20241204030530.2099776-1-adrianox@gmail.com>
@@ -96,8 +96,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for the EFI_HTTP_PROTOCOL and
-EFI_SEVICE_BINDING_PROTOCOL.
+Add a test for the EFI_IP4_CONFIG2_PROTOCOL. The test sets the ip
+policy to static, adds an ip address, and then reads the current
+ip address and checks for it to be the same as the one that was set.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
 ---
@@ -105,43 +106,40 @@ Changes in v7:
 - Fixed sizeof() calls when possible
 - When setting up the test, check if any handle was found before looping
   through the handles.
+(no changes since v4)
+Changes in v4:
+- Removed unnecessary void* casts
 
 (no changes since v2)
- lib/efi_selftest/Makefile            |   2 +-
- lib/efi_selftest/efi_selftest_http.c | 321 +++++++++++++++++++++++++++
- 2 files changed, 322 insertions(+), 1 deletion(-)
- create mode 100644 lib/efi_selftest/efi_selftest_http.c
+ lib/efi_selftest/Makefile                |   2 +
+ lib/efi_selftest/efi_selftest_ipconfig.c | 176 +++++++++++++++++++++++
+ 2 files changed, 178 insertions(+)
+ create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
 
 diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
-index 414701893f..140c08effc 100644
+index 140c08effc..17fbfad116 100644
 --- a/lib/efi_selftest/Makefile
 +++ b/lib/efi_selftest/Makefile
-@@ -52,7 +52,7 @@ efi_selftest_watchdog.o
- 
+@@ -53,6 +53,8 @@ efi_selftest_watchdog.o
  obj-$(CONFIG_EFI_ECPT) += efi_selftest_ecpt.o
  obj-$(CONFIG_NETDEVICES) += efi_selftest_snp.o
--
-+obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
+ obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_http.o
++obj-$(CONFIG_EFI_HTTP_PROTOCOL) += efi_selftest_ipconfig.o
++
  obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_selftest_devicepath.o
  obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) += \
  efi_selftest_unicode_collation.o
-diff --git a/lib/efi_selftest/efi_selftest_http.c b/lib/efi_selftest/efi_selftest_http.c
+diff --git a/lib/efi_selftest/efi_selftest_ipconfig.c b/lib/efi_selftest/efi_selftest_ipconfig.c
 new file mode 100644
-index 0000000000..b63c401f05
+index 0000000000..8d594f5e19
 --- /dev/null
-+++ b/lib/efi_selftest/efi_selftest_http.c
-@@ -0,0 +1,321 @@
++++ b/lib/efi_selftest/efi_selftest_ipconfig.c
+@@ -0,0 +1,176 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * efi_selftest_http
++ * efi_selftest_ipconfig
 + *
-+ * This unit test covers the IPv4 Config2 Protocol, Http Service Binding Protocol,
-+ * and Http Protocol.
-+ *
-+ * An Http HEAD and an Http GET request are sent to the same destination. The test
-+ * is successful if the HEAD request gets a response with a valid Content-Length header
-+ * and the subsequent GET request receives the amount of bytes informed by the previous
-+ * Content-Length header.
++ * This unit test covers the IPv4 Config2 Protocol.
 + *
 + */
 +
@@ -151,19 +149,13 @@ index 0000000000..b63c401f05
 +
 +static struct efi_boot_services *boottime;
 +
-+static struct efi_http_protocol *http;
-+static struct efi_service_binding_protocol *http_service;
 +static struct efi_ip4_config2_protocol *ip4_config2;
-+static efi_handle_t http_protocol_handle;
-+
-+static const efi_guid_t efi_http_guid = EFI_HTTP_PROTOCOL_GUID;
-+static const efi_guid_t efi_http_service_binding_guid = EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID;
 +static const efi_guid_t efi_ip4_config2_guid = EFI_IP4_CONFIG2_PROTOCOL_GUID;
-+static int callback_done;
 +
 +/*
 + * Setup unit test.
 + *
++ * Open IPv4 Config2 protocol
 + *
 + * @handle:	handle of the loaded image
 + * @systable:	system table
@@ -176,8 +168,6 @@ index 0000000000..b63c401f05
 +	efi_handle_t *net_handle;
 +	efi_uintn_t num_handles;
 +	efi_handle_t *handles;
-+	struct efi_http_config_data http_config;
-+	struct efi_httpv4_access_point ipv4_node;
 +
 +	boottime = systable->boottime;
 +
@@ -196,52 +186,15 @@ index 0000000000..b63c401f05
 +					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
 +		if (ret != EFI_SUCCESS || !ip4_config2)
 +			continue;
-+		ret = boottime->open_protocol(*net_handle,
-+					      &efi_http_service_binding_guid,
-+					      (void **)&http_service, 0, 0,
-+					      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+		if (ret != EFI_SUCCESS || !http_service)
-+			continue;
-+		break; // Get first handle that supports both protocols
++		break; // Get first handle that supports ipv4
 +	}
 +
-+	if (!ip4_config2 || !http_service) {
-+		efi_st_error("Failed to open ipv4 config2 or http service binding protocol\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	http_protocol_handle = NULL;
-+	ret = http_service->create_child(http_service, &http_protocol_handle);
-+	if (ret != EFI_SUCCESS || !http_protocol_handle) {
-+		efi_st_error("Failed to create an http service instance\n");
-+		return EFI_ST_FAILURE;
-+	}
-+
-+	ret = boottime->open_protocol(http_protocol_handle, &efi_http_guid,
-+				      (void **)&http, 0, 0, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS || !http) {
-+		efi_st_error("Failed to open http protocol\n");
-+		return EFI_ST_FAILURE;
-+	}
-+	efi_st_printf("HTTP Service Binding: child created successfully\n");
-+
-+	http_config.http_version = HTTPVERSION11;
-+	http_config.is_ipv6 = false;
-+	http_config.access_point.ipv4_node = &ipv4_node;
-+	ipv4_node.use_default_address = true;
-+
-+	ret = http->configure(http, &http_config);
-+	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to configure http instance\n");
++	if (!ip4_config2) {
++		efi_st_error("Failed to open ipv4 config2 protocol\n");
 +		return EFI_ST_FAILURE;
 +	}
 +
 +	return EFI_ST_SUCCESS;
-+}
-+
-+void EFIAPI efi_test_http_callback(struct efi_event *event, void *context)
-+{
-+	callback_done = 1;
 +}
 +
 +/*
@@ -253,163 +206,82 @@ index 0000000000..b63c401f05
 +static int execute(void)
 +{
 +	efi_status_t ret;
-+	struct efi_http_request_data request_data;
-+	struct efi_http_message request_message;
-+	struct efi_http_token request_token;
-+	struct efi_http_response_data response_data;
-+	struct efi_http_message response_message;
-+	struct efi_http_token response_token;
-+	enum efi_http_status_code status_code;
-+	void *response_buffer;
-+	efi_uintn_t len, sum;
-+	char *url = "http://example.com/";
-+	u16 url_16[64];
-+	u16 *tmp;
++	enum efi_ip4_config2_policy policy;
++	efi_uintn_t data_size;
++	struct efi_ip4_config2_manual_address manual_address;
++	struct efi_ip4_config2_manual_address orig_address;
++	u8 netmask[] = {255, 255, 255, 0};
++	u8 ip[] = {10, 0, 0, 1};
 +
 +	/* Setup may have failed */
-+	if (!ip4_config2 || !http) {
-+		efi_st_error("Cannot proceed with test after setup failure\n");
++	if (!ip4_config2) {
++		efi_st_error("Setup failure, cannot proceed with test\n");
 +		return EFI_ST_FAILURE;
 +	}
 +
-+	tmp = url_16;
-+	utf8_utf16_strcpy(&tmp, url);
-+	request_data.url = url_16;
-+	request_data.method = HTTP_METHOD_GET;
-+
-+	request_message.data.request = &request_data;
-+	request_message.header_count = 3;
-+	request_message.body_length = 0;
-+	request_message.body = NULL;
-+
-+	/* request token */
-+	request_token.event = NULL;
-+	request_token.status = EFI_NOT_READY;
-+	request_token.message = &request_message;
-+	callback_done = 0;
-+	ret = boottime->create_event(EVT_NOTIFY_SIGNAL,
-+			TPL_CALLBACK,
-+			efi_test_http_callback,
-+			NULL,
-+			&request_token.event);
-+
++	/* Set policy to static */
++	policy = EFI_IP4_CONFIG2_POLICY_STATIC;
++	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_POLICY,
++			      sizeof(policy), (void *)&policy);
 +	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed to create request event\n");
++		efi_st_error("Failed to set policy\n");
 +		return EFI_ST_FAILURE;
 +	}
 +
-+	ret = http->request(http, &request_token);
-+
++	/* Save original ip address and netmask */
++	data_size = sizeof(manual_address);
++	ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
++			      &data_size, &orig_address);
 +	if (ret != EFI_SUCCESS) {
-+		boottime->close_event(request_token.event);
-+		efi_st_printf("Failed to proceed with the http request\n");
-+		return EFI_ST_SUCCESS;
-+	}
-+
-+	while (!callback_done)
-+		http->poll(http);
-+
-+	response_data.status_code = HTTP_STATUS_UNSUPPORTED_STATUS;
-+	response_message.data.response = &response_data;
-+	response_message.header_count = 0;
-+	response_message.headers = NULL;
-+	response_message.body_length = 0;
-+	response_message.body = NULL;
-+	response_token.event = NULL;
-+
-+	ret = boottime->create_event(EVT_NOTIFY_SIGNAL,
-+			TPL_CALLBACK,
-+			efi_test_http_callback,
-+			NULL,
-+			&response_token.event);
-+
-+	if (ret != EFI_SUCCESS) {
-+		boottime->close_event(request_token.event);
-+		efi_st_error("Failed to create response event\n");
++		efi_st_error("Failed to save original ip address and netmask\n");
 +		return EFI_ST_FAILURE;
 +	}
 +
-+	response_token.status = EFI_SUCCESS;
-+	response_token.message = &response_message;
-+
-+	callback_done = 0;
-+	ret = http->response(http, &response_token);
-+
++	/* Set static ip and netmask */
++	memcpy(&manual_address.address, ip,
++	       sizeof(struct efi_ipv4_address));
++	memcpy(&manual_address.subnet_mask, netmask,
++	       sizeof(struct efi_ipv4_address));
++	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
++			      sizeof(manual_address), &manual_address);
 +	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed http first response\n");
-+		goto fail;
++		efi_st_error("Failed to get ip address and netmask\n");
++		return EFI_ST_FAILURE;
 +	}
 +
-+	while (!callback_done)
-+		http->poll(http);
-+
-+	if (response_message.data.response->status_code != HTTP_STATUS_200_OK) {
-+		status_code = response_message.data.response->status_code;
-+		if (status_code == HTTP_STATUS_404_NOT_FOUND) {
-+			efi_st_error("File not found\n");
-+		} else {
-+			efi_st_error("Bad http status %d\n",
-+				     response_message.data.response->status_code);
-+		}
-+		goto fail_free_hdr;
++	/* Try to set interface info, this should fail */
++	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO, 0, NULL);
++	if (ret == EFI_SUCCESS) {
++		efi_st_error("Interface info is read-only\n");
++		return EFI_ST_FAILURE;
 +	}
 +
-+	ret = boottime->allocate_pool(EFI_LOADER_CODE, response_message.body_length,
-+				      &response_buffer);
++	/* Get ip address and netmask and check that they match with the previously set ones */
++	data_size = sizeof(manual_address);
++	ret = ip4_config2->get_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
++			      &data_size, &manual_address);
 +	if (ret != EFI_SUCCESS) {
-+		efi_st_error("Failed allocating response buffer\n");
-+		goto fail_free_hdr;
++		efi_st_error("Failed to get ip address and netmask\n");
++		return EFI_ST_FAILURE;
++	}
++	if (memcmp(ip, &manual_address.address,
++		   sizeof(struct efi_ipv4_address)) ||
++	    memcmp(netmask, &manual_address.subnet_mask,
++		   sizeof(struct efi_ipv4_address))) {
++		efi_st_error("Ip address mismatch\n");
++		return EFI_ST_FAILURE;
 +	}
 +
-+	len = response_message.body_length;
-+	sum = 0;
-+	while (len) {
-+		response_message.data.response = NULL;
-+		response_message.header_count = 0;
-+		response_message.headers = NULL;
-+		response_message.body_length = len;
-+		response_message.body = response_buffer + sum;
-+
-+		response_token.message = &response_message;
-+		response_token.status = EFI_NOT_READY;
-+
-+		callback_done = 0;
-+		ret = http->response(http, &response_token);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("Failed http second response\n");
-+			goto fail_free_buf;
-+		}
-+
-+		while (!callback_done)
-+			http->poll(http);
-+
-+		if (!response_message.body_length)
-+			break;
-+
-+		len -= response_message.body_length;
-+		sum += response_message.body_length;
++	/* Restore original ip address and netmask */
++	ret = ip4_config2->set_data(ip4_config2, EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS,
++			      sizeof(orig_address), &orig_address);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("Failed to restore original ip address and netmask\n");
++		return EFI_ST_FAILURE;
 +	}
 +
-+	if (len)
-+		goto fail_free_buf;
-+
-+	boottime->free_pool(response_buffer);
-+	if (response_message.headers)
-+		boottime->free_pool(response_message.headers);
-+	boottime->close_event(request_token.event);
-+	boottime->close_event(response_token.event);
-+	efi_st_printf("Efi Http request executed successfully\n");
++	efi_st_printf("Efi ipconfig test execute succeeded\n");
 +	return EFI_ST_SUCCESS;
-+
-+fail_free_buf:
-+	boottime->free_pool(response_buffer);
-+fail_free_hdr:
-+	if (response_message.headers)
-+		boottime->free_pool(response_message.headers);
-+fail:
-+	boottime->close_event(request_token.event);
-+	boottime->close_event(response_token.event);
-+	return EFI_ST_FAILURE;
 +}
 +
 +/*
@@ -419,26 +291,13 @@ index 0000000000..b63c401f05
 + */
 +static int teardown(void)
 +{
-+	efi_status_t ret;
 +	int exit_status = EFI_ST_SUCCESS;
-+
-+	if (!http_service || !http_protocol_handle) {
-+		efi_st_error("No handles to destroy http instance");
-+		exit_status = EFI_ST_FAILURE;
-+	} else {
-+		ret = http_service->destroy_child(http_service, http_protocol_handle);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("Failed to destroy http instance");
-+			exit_status = EFI_ST_FAILURE;
-+		}
-+		efi_st_printf("HTTP Service Binding: child destroyed successfully\n");
-+	}
 +
 +	return exit_status;
 +}
 +
-+EFI_UNIT_TEST(http) = {
-+	.name = "http protocol",
++EFI_UNIT_TEST(ipconfig) = {
++	.name = "IPv4 config2 protocol",
 +	.phase = EFI_EXECUTE_BEFORE_BOOTTIME_EXIT,
 +	.setup = setup,
 +	.execute = execute,
