@@ -4,99 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 655EFE77160
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 00:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81ADEE77166
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 00:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B69A28966B;
-	Wed,  4 Dec 2024 01:12:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BB84E88EA3;
+	Wed,  4 Dec 2024 01:18:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ihFBlR9V";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="XPMultp3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31E918966C; Wed,  4 Dec 2024 01:12:43 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E813D891E4; Wed,  4 Dec 2024 01:18:45 +0100 (CET)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B9C894FB
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 01:12:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C4C188E42
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 01:18:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-466879f84ccso43512411cf.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 16:12:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733271160; x=1733875960; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZXlpizFu0xLiL8SMknMwoEk47IVT5Ihs/L2QSiaBx+4=;
- b=ihFBlR9V9eFhC0GcDUC56MkSJIzZ4a+m/HAOglQJXJlBvNJFVzq8Wxvn+Jw/8/VFjN
- YRTjKWQV7u6sA9AjBsSDy6kgIC6BALvVxMAjpZFVWDz73BZNqFDk4362GT00ObIPkzmI
- Jdjm83N9s6uelb9IgWWm+iVlJQ8EjIX15AOhg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733271160; x=1733875960;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZXlpizFu0xLiL8SMknMwoEk47IVT5Ihs/L2QSiaBx+4=;
- b=SK/57U7NUL0NvPB7CUerVBa7zMBbPfzDkFxCA+yE9nLf5OjhiQoDUsYwekxhu6/Ofn
- lbeYjBWHYG3TFy9qM3jHbFMOPPixjqZbdouSFIMQDVxM2jOW4m5TCY39x3OxwL57tlQ/
- EbvGc+B0mVJx8pev3jRXAtOPi/vfVx+6bmS72A0rge2Vzh1gt9Ygt+VdqnhhUcEPTVGr
- H5TSVd2Kfv8CcN5rTDJWUlkfYxIMo+PFd5pryBhvXs9Wf/Fz4upom8hfCDr9qhU25Yg1
- ZM8PQvv2rAraJtY+j4XWb89qaW7j/usBBHDZJD/XcnF6RFfoD7lauXqlo/AiESp3wNaO
- vv8A==
-X-Gm-Message-State: AOJu0Yy5dP7u7xl0ZS/FJnbTiLQHIUk3S0476Gr5EQUl4i6sjQ/jtsEL
- d+ao9rxG+tpMRkcQFeZzPzEGYNUxyiTVWdkUrW9vqRTPggiGV8JWmt16OiyiI5A=
-X-Gm-Gg: ASbGncs5DSWzvReW9//3yqmpB/HCTEGwZObmzqV8n90A8mAvswEogu5Ijwx2NG1isqH
- n+O5jH8YtU7X3it7YB6XtrwG1VwUwnzCTTkleSVr+r/JRZzVK5HP98VqXav4IKdeYBLB2lcWKIN
- dqD+pEDlQM35dc4ORR37rJLS02wXYs4beRYzP1IPQsY16IJ85t+0H7htdgvMJAXBskGsevEapGj
- vjE9EW/+Q5rTkotueYJDeCklCqL8DY2Y5opZ+p7459kKXBxOQ==
-X-Google-Smtp-Source: AGHT+IEBsoBNC7rYvNAMNt2idaBiwpiwvml9nBg8HV7TjrPjcQRysAQJ9lfBTb0RdxN8Oj3Q9IThBQ==
-X-Received: by 2002:a05:6214:f0a:b0:6d1:87f7:2924 with SMTP id
- 6a1803df08f44-6d8b7431214mr76303606d6.47.1733271159590; 
- Tue, 03 Dec 2024 16:12:39 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d891919b43sm46876496d6.113.2024.12.03.16.12.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 16:12:38 -0800 (PST)
-Date: Tue, 3 Dec 2024 18:12:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v2 00/41] pxe: Support read_all() for extlinux and PXE
-Message-ID: <20241204001234.GC2457179@bill-the-cat>
-References: <20241203234559.2938192-1-sjg@chromium.org>
- <CAFLszThuRngaW_kOTnEakDr6GSRc5TWpy7WT9yvQJmuMP2eUVw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tfJh8EosjMNBhcRP"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThuRngaW_kOTnEakDr6GSRc5TWpy7WT9yvQJmuMP2eUVw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20241204001837epoutp025f758d78d66692d96d2b61ce2f0086eb~N0UMHB5K30160701607epoutp028
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 00:18:37 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20241204001837epoutp025f758d78d66692d96d2b61ce2f0086eb~N0UMHB5K30160701607epoutp028
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1733271517;
+ bh=eK4xCTPZQfT38tH04QaD92MKdrkRFcIuznx1zZz/GC4=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=XPMultp3cvLycyMp2jzE9PuFAAFUENekRU72Wr/aY2AR0/f0xE/MpriuOcJXhjtvj
+ DT2937yOQXK3nwrB1VlewHZAsTLkyQhC+MpprNmh/9F4Rfml0Zfc2FwzLUnsxYnC0r
+ u7jxs+S1ph8uSFzr5W+UNAlL+wWsNTCXyMRixkmo=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20241204001836epcas1p22d672ccb884d784fc74006f8c2ecd13b~N0ULQVePO2605026050epcas1p2N;
+ Wed,  4 Dec 2024 00:18:36 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4Y2ymW3D7fz4x9Pv; Wed,  4 Dec
+ 2024 00:18:35 +0000 (GMT)
+Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
+ epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ A4.18.24218.BDF9F476; Wed,  4 Dec 2024 09:18:35 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20241204001834epcas1p13794d4af1200d70ee4cdb66b5565f9a0~N0UJ2JEXT2406624066epcas1p1L;
+ Wed,  4 Dec 2024 00:18:34 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20241204001834epsmtrp2ad5bb5ec28da1398c5d833a2bc3bed4e~N0UJ0WaQC0327803278epsmtrp2b;
+ Wed,  4 Dec 2024 00:18:34 +0000 (GMT)
+X-AuditID: b6c32a38-580dc70000005e9a-1e-674f9fdb4908
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 7C.3D.18729.ADF9F476; Wed,  4 Dec 2024 09:18:34 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20241204001834epsmtip1d872dc446146ed063f3a772d0fed9fea~N0UJgNXdv1043010430epsmtip1C;
+ Wed,  4 Dec 2024 00:18:34 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: <bigunclemax@gmail.com>
+Cc: "'Rick Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>,
+ "'Tom Rini'" <trini@konsulko.com>, "'Wei Fu'" <wefu@redhat.com>, "'Yixun
+ Lan'" <dlan@gentoo.org>, "'Peng Fan'" <peng.fan@nxp.com>, "'Ilias
+ Apalodimas'" <ilias.apalodimas@linaro.org>, "'Simon Glass'"
+ <sjg@chromium.org>, "'Jerome	Forissier'" <jerome.forissier@linaro.org>,
+ "'Sughosh Ganu'" <sughosh.ganu@linaro.org>, "'Greg Malysa'"
+ <greg.malysa@timesys.com>, "'Linus	Walleij'" <linus.walleij@linaro.org>,
+ "'Raymond Mao'" <raymond.mao@linaro.org>, "'Heinrich Schuchardt'"
+ <xypron.glpk@gmx.de>, "'Kongyang Liu'" <seashell11234455@gmail.com>, "'Marek
+ Vasut'" <marek.vasut+renesas@mailbox.org>, "'Jonas Karlman'"
+ <jonas@kwiboo.se>, "'Wei Liang Lim'" <weiliang.lim@starfivetech.com>, "'Kuan
+ Lim Lee'" <kuanlim.lee@starfivetech.com>, <u-boot@lists.denx.de>
+In-Reply-To: <20241201150704.44462-3-bigunclemax@gmail.com>
+Subject: RE: [PATCH v1 2/3] riscv: dts: t-head: Add sdhci and emmc nodes
+Date: Wed, 4 Dec 2024 09:18:34 +0900
+Message-ID: <000701db45e2$0e92aaa0$2bb7ffe0$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQEKWNLOKvs2bV1RfzKy+BBIXkYaGAIPIOUdAeLYv++0V4I+kA==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA01Te1BUVRjv3Lt7d9dpmTvLEsdlArw5FEw8Fhc8lFSik5dklDEbxzJxh70t
+ xL7aXUCrabYJec0a8rIBRBACCiOSeArsylIqAlY+YI3HFAiByztRnFJi92L13+873/f7fr/v
+ O+fwcdEkIeEnaoyMXiNXUcQGTnO3f2DgUNleZUiGRYyuPm4i0MhwHYZ6l+wcdCLtLxz9dLyS
+ h3pmbnFQdsM8hgr+rsHQ8a+HCbRSe4+LZqZKuWh2qh+gS98u8tD9xmaARge8UWHe9zw025nF
+ Q2nWAg6a7yjhoe7CBYDGbQ7sNQ+6o7cYp0tMv3DoGw9mcLqteIRHLywepu9erOXRV05ex+jh
+ gQ6C7h9uBXRbiQWjz8+1YvS85RZBD/UL6c6WFSzW7e2kbQmMXMHofRlNvFaRqFFGUrvfjNsR
+ FxYeIg2URqCtlK9GrmYiqZ0xsYGvJ6rW5qZ8U+Sq5LWjWLnBQAW/sk2vTTYyvglagzGSYnQK
+ lS5MF2SQqw3JGmWQhjG+JA0JCQ1bKzySlFB+s4Sn+8HjaPO4g2MCk2Q2EPAhKYONvTUgG2zg
+ i8hWAHPrx3hssARgxRdN68F9ADPKq7FswHdRHNcCnGwR2Qlg+R8pbM00gGO96cCZIMgguFpx
+ FndiMekFTz1qcEngZB8BmxbnXQkB+TK0X+13YXeShmNZlS4yh9wM83rOcZ1YSEbAtro7XNar
+ L3w4Uc1lm0bBCUsfx4lxUgxLstJxpwAkcwRw1NSBs4Sd0GY9R7DYHd693MhjsQT+OddJsITP
+ AKz6sovLBmYAH5sG1xlboLUq3zUzTvrD+gvBrJobnFs2c9lVCGFmuoit3gyvO6axJ/1H7qyu
+ m6ZhxWA1YNdlBbC148BJ4FP8P9/F/wmUA6wWPMPoDGolY5DqZP9eZbxW3QBcDz4AtYLS2YUg
+ G8D4wAYgH6fEwpr63UqRUCE/9iGj18bpk1WMwQbC1jaZi0s84rVrP0ZjjJPKIkJk4aFbZEga
+ LqU8hX03UxgRqZQbmSSG0TH6JzyML5CYsLJNRXu9HJdPvSBOSx0PuzB1tpdSDyn8n1uu+S7n
+ 4bHUg4oJzUR0bk6e49kfP+j22VUVvb88I3jp4L4xP7/VfFnaCrDH/lZWpE20PE1MVGGHCoN/
+ naR+T7rXwLy/6S3gOSco+iRKV3DgvZZXT8dQoe7TX3W962VvD/bU197+uHH1RI/6THhspiGp
+ 1Kz/fDqybo/dnNqVIxofbfe5vRzlc+nwflH7o7ZxVfqRfbjVthy9fYcotCGreP6a28/PRwRk
+ un/jl+1t5dzAP/J+kFo5OHvR7pUn+XRrV615QJI7JaDqtl8xcfjnd9WdeefQGy+KKa4sVTfV
+ fFRlMbdsNNbkx2xMBk9RHEOCXBqA6w3yfwBpqAZJeQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrDIsWRmVeSWpSXmKPExsWy7bCSnO6t+f7pBr/Xm1ic+reVzeLunbVM
+ Fqc/3WCx6G35zWxxvnUxu8XJN1dZLLo2vWeymPJnOZNF68o7bBY/Vn1htXjzYi6rxdsXZxkt
+ jq37yG7xbcs2Rot71+Qspk7azG7xdm8nu0XL/iksFu/3zGa3ODz1A6PF40OvmRxEPfacnsXs
+ MbvhIovH5e9vmD12zrrL7vHhY5zHqwOr2D1OTLjE5HHn2h42j7N3djB67Jy9j8lj47sdTB7v
+ 911l87h9ltdj7/YfTAF8UVw2Kak5mWWpRfp2CVwZC67MZi84Ilqx7fFrlgbGZwJdjBwcEgIm
+ Eq/PaXUxcnEICexmlJixuoOti5ETKC4l8fnpVDaIGmGJw4eLIWqeM0q8mzGTGaSGTUBP4v+i
+ hWC2iIC0xLS/mxhBipgF7rBJfPl7mxFu6r/meSwgVZwC1hI3Tp0F6xAW8JB41LmYEcRmEVCR
+ mHRyNSuIzStgKbFz7RNWiCsUJH4+XcYKscFJ4um+M2BzmAVEJGZ3tjFPYBSYhcRdwMi4ilEy
+ taA4Nz232LDAMC+1XK84Mbe4NC9dLzk/dxMjOEK1NHcwbl/1Qe8QIxMH4yFGCQ5mJRHe5eu9
+ 04V4UxIrq1KL8uOLSnNSiw8xSnOwKInzir/oTRESSE8sSc1OTS1ILYLJMnFwSjUwbUxnOcsk
+ v1XM8vSL49Iywr2M/0WbLKX+RL3K0+1lrY41v7pfQKj08B+GJdWXKr60XjjNLKl9MixmbW/4
+ VDnLIPPtf4U/iLFeVj1VEKvJYSGSuWuvyNQ1F9du+/bJ3ZZdbgOHvdA5vl11n3eeLTXZ//lF
+ fIRbt6DPa+0AvX8Tn+qE2PRpq/C0quxYU6996YrnnwTbKwlVa1YwPEk+f+6aW7jpbaPlcRfa
+ jt254LH1t4KTwNvml+E7T8+sK/DZqdB18YR1xMT82pIb816sWyZ39ZJOg0Py3mVnF2598WLN
+ L86yzSsuBPvU6R29nKC0967L3frQpC3zTv495s+uLyMvxdu34eWVGV2qQapG/xfLKLEUZyQa
+ ajEXFScCAF+oHMk/AwAA
+X-CMS-MailID: 20241204001834epcas1p13794d4af1200d70ee4cdb66b5565f9a0
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241201150732epcas1p3d8f36c50d8a0a8c220f63912d3904672
+References: <20241201150704.44462-1-bigunclemax@gmail.com>
+ <CGME20241201150732epcas1p3d8f36c50d8a0a8c220f63912d3904672@epcas1p3.samsung.com>
+ <20241201150704.44462-3-bigunclemax@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,148 +148,108 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tfJh8EosjMNBhcRP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 03, 2024 at 05:03:26PM -0700, Simon Glass wrote:
-> Hi,
->=20
-> On Tue, 3 Dec 2024 at 16:46, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > This series implements read_all() so that it is possible to read all the
-> > files relating to a bootflow, make adjustments and then boot.
-> >
-> > Unfortunately quite a few things stand in the way, so this series
-> > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > required support in pxe_utils and the differing code in the extlinux and
-> > PXE bootmeths. There is very little new code, but quite a lot of
-> > refactoring.
-> >
-> > The bootm, booti and bootz commands have all been refactored previously,
-> > so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> > At the, time, zboot was left alone, since it is x86-specific and a bit
-> > more trouble.
-> >
-> > This series adds a programatic API for zboot and uses the forthcoming
-> > bootstd 'image list' to collect information from an extlinux file. It is
-> > therefore possible to parse the file, load the resulting images and then
-> > examine/adjust the resulting bootflow, before booting.
-> >
-> > The addition of options to extlinux resulted in the PXE and extlinux
-> > bootmeth having slightly different features. This is tidied up in this
-> > series, with common functions for both. This allows the same features
-> > (loading images as a separate step) to be provided for PXE.
-> >
-> > Changes in v2:
-> > - Split out strlcpy() change into new patch
-> > - Move strlcpy() change into an earlier patch
-> > - Fix 'initaddr' typo'
-> > - Rebase on earlier change
-> > - Add new patch to simplify the code reading fdtcontroladdr and fdt_addr
-> >
-> > Simon Glass (41):
-> >   x86: Make do_zboot_states() static
-> >   x86: Rename zboot_run() to zboot_run_args()
-> >   x86: Drop duplicate definition of zimage_dump()
-> >   x86: Move x86 zboot state into struct bootm_info
-> >   x86: Rename state to bmi
-> >   x86: Move the bootm state for zimage into cmd/
-> >   bootstd: Correct display of kernel version
-> >   x86: Drop the unnecessary base_ptr argument to zboot_dump()
-> >   boot: Use strlcpy() in label_boot()
-> >   boot: Split pxe label_boot() into two parts
-> >   boot: Split pxe label_run_boot() into two parts
-> >   boot: Pass just the FDT argument to label_process_fdt()
-> >   bootm: Allow building bootm.c without CONFIG_SYS_BOOTM_LEN
-> >   boot: pxe: Use bootm_...() functions where possible
-> >   pxe_utils: Simplify default fdt in label_run_boot()
-> >   boot: pxe: Refactor label_run_boot() to avoid cmdline
-> >   net: Keep the bootstage functions together
-> >   net: Tidy up the comments to parse_args()
-> >   net: Simplify parse_args()
-> >   net: Return the load address from parse_args()
-> >   net: Return the address and size from parse_addr_size()
-> >   net: Return the size from parse_args()
-> >   net: Refactor part of netboot_common() into a function
-> >   net: Drop #ifdef in parse_args()
-> >   net: Provide a function to run network operations
-> >   boot: Avoid using the cmdline in bootmeth_pxe and pxe cmd
-> >   pxe: Drop the cmdline parameter
-> >   pxe: Record the bootflow in the PXE context
-> >   pxe: Allow skipping the boot
-> >   test: Update bootm test to restore silent_console
-> >   bootmeth_extlinux: Move extlinux_info into plat
-> >   bootmeth_extlinux: Move pxe_context into plat
-> >   bootmeth: Refactor to put options in a common file
-> >   bootmeth_pxe: Implement the fallback option
-> >   bootmeth_pxe: Drop the driver-private data
-> >   bootmeth_extlinux: Move boot code into common file
-> >   bootstd: Update extlinux and pxe to allow boot interruption
-> >   pxe: Collect the FDT in the bootflow
-> >   pxe: Deal with a missing FDT in the bootflow
-> >   pxe_utils: Refactor to separate reading from booting
-> >   bootmeth_extlinux: Refactor extlinux to split boot
-> >
-> >  arch/x86/include/asm/zimage.h |  57 +---
-> >  arch/x86/lib/zimage.c         | 102 ++++---
-> >  boot/Makefile                 |   6 +-
-> >  boot/bootm.c                  |   8 +-
-> >  boot/bootmeth_cros.c          |   6 +-
-> >  boot/bootmeth_extlinux.c      |  97 +------
-> >  boot/bootmeth_pxe.c           |  48 ++--
-> >  boot/ext_pxe_common.c         | 134 +++++++++
-> >  boot/pxe_utils.c              | 507 +++++++++++++++++++++-------------
-> >  cmd/bootflow.c                |   8 +-
-> >  cmd/net.c                     |  92 +++---
-> >  cmd/pxe.c                     |  30 +-
-> >  cmd/sysboot.c                 |   4 +-
-> >  cmd/x86/zboot.c               |  33 ++-
-> >  include/bootm.h               |  63 ++++-
-> >  include/bootmeth.h            |   8 +-
-> >  include/extlinux.h            |  52 +++-
-> >  include/net-common.h          |  30 ++
-> >  include/pxe_utils.h           |  56 +++-
-> >  net/net.c                     |  44 +++
-> >  test/boot/bootflow.c          |  71 +++++
-> >  test/boot/bootm.c             |   7 +
-> >  22 files changed, 957 insertions(+), 506 deletions(-)
-> >  create mode 100644 boot/ext_pxe_common.c
-> >
-> > --
-> > 2.34.1
-> >
->=20
-> Unfortunately it seems there is a bug in here somewhere, in that it
-> prepends the extlinux file's path to any files which are read, at
-> least with pxe. So I am going to need to take another look...
->=20
-> We don't have sandbox tests for this case, unfortunately. At some
-> point we should try to add some.
+> -----Original Message-----
+> From: bigunclemax@gmail.com <bigunclemax@gmail.com>
+> Sent: Monday, December 2, 2024 12:07 AM
+>
+> From: Maksim Kiselev <bigunclemax@gmail.com>
+>
+> Add SDHCI and EMMC controlles nodes on TH-1520 SoC. And enable them for
+> Lichee module 4A.
+>
+> Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
 
-Does the pxelinux test not catch the problem? If not, that would be
-where to start expanding perhaps.
+Reviewed-by: Jaehoon Chung <jh80.chung>
 
---=20
-Tom
+Best Regards,
+Jaehoon Chung
 
---tfJh8EosjMNBhcRP
-Content-Type: application/pgp-signature; name="signature.asc"
+> ---
+>  arch/riscv/dts/th1520-lichee-module-4a.dtsi | 18 +++++++++++
+>  arch/riscv/dts/th1520.dtsi                  | 34 +++++++++++++++++++++
+>  2 files changed, 52 insertions(+)
+>
+> diff --git a/arch/riscv/dts/th1520-lichee-module-4a.dtsi b/arch/riscv/dts/th1520-lichee-module-4a.dtsi
+> index dc00e3dfa0..86a81bdcf7 100644
+> --- a/arch/riscv/dts/th1520-lichee-module-4a.dtsi
+> +++ b/arch/riscv/dts/th1520-lichee-module-4a.dtsi
+> @@ -32,3 +32,21 @@
+>  &uart_sclk {
+>  	clock-frequency = <100000000>;
+>  };
+> +
+> +&emmc {
+> +	bus-width = <8>;
+> +	max-frequency = <198000000>;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs400-1_8v;
+> +	mmc-hs400-enhanced-strobe;
+> +	non-removable;
+> +	no-sdio;
+> +	no-sd;
+> +	status = "okay";
+> +};
+> +
+> +&sdio0 {
+> +	bus-width = <4>;
+> +	max-frequency = <198000000>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/riscv/dts/th1520.dtsi b/arch/riscv/dts/th1520.dtsi
+> index d68c446a6b..9378de89c5 100644
+> --- a/arch/riscv/dts/th1520.dtsi
+> +++ b/arch/riscv/dts/th1520.dtsi
+> @@ -141,6 +141,13 @@
+>  		#clock-cells = <0>;
+>  	};
+>
+> +	sdhci_clk: sdhci-clock {
+> +		compatible = "fixed-clock";
+> +		clock-frequency = <198000000>;
+> +		clock-output-names = "sdhci_clk";
+> +		#clock-cells = <0>;
+> +	};
+> +
+>  	soc {
+>  		compatible = "simple-bus";
+>  		interrupt-parent = <&plic>;
+> @@ -206,6 +213,33 @@
+>  			status = "disabled";
+>  		};
+>
+> +		emmc: mmc@ffe7080000 {
+> +			compatible = "thead,th1520-dwcmshc";
+> +			reg = <0xff 0xe7080000 0x0 0x10000>;
+> +			interrupts = <62 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&sdhci_clk>;
+> +			clock-names = "core";
+> +			status = "disabled";
+> +		};
+> +
+> +		sdio0: mmc@ffe7090000 {
+> +			compatible = "thead,th1520-dwcmshc";
+> +			reg = <0xff 0xe7090000 0x0 0x10000>;
+> +			interrupts = <64 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&sdhci_clk>;
+> +			clock-names = "core";
+> +			status = "disabled";
+> +		};
+> +
+> +		sdio1: mmc@ffe70a0000 {
+> +			compatible = "thead,th1520-dwcmshc";
+> +			reg = <0xff 0xe70a0000 0x0 0x10000>;
+> +			interrupts = <71 IRQ_TYPE_LEVEL_HIGH>;
+> +			clocks = <&sdhci_clk>;
+> +			clock-names = "core";
+> +			status = "disabled";
+> +		};
+> +
+>  		uart1: serial@ffe7f00000 {
+>  			compatible = "snps,dw-apb-uart";
+>  			reg = <0xff 0xe7f00000 0x0 0x100>;
+> --
+> 2.45.2
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdPnm4ACgkQFHw5/5Y0
-tyyWMgv8DJ/R3AQKahgHHO1hU4FAOhAOL7cDFCPV6cWB9p6sR5EzukDc6dGJyhj9
-IGzM3bxzHjgz1eu5nxytrR8tzOyeHqh18p0oae/cBk+P32k403PjdJlO6eWgGd8F
-bkLGDqFoWZPVo2tpGMdo9bGGAh0VHFYHD3EMvFYe9afCQb0ZqbWj7YF/mNs36UME
-m4vMwsYSW2q9N358znmqRvxFxzTy0zbFaC5+1dbjTyQZ5tInCtQvk8tMY0HsAuIU
-IZI4UnlXIh0yZK3YV38L0h9K5Vwu6tLUF29AjWINhg3Ojjo/yggesCF3C5ze4U3L
-kiz2Gd49wfHghUuOE4R2+MedHeFbs/Q463ZjL1OAYdHnrDTrK2jXwYo7TP6uo7oA
-deXIgDUXFSAZqYS9KuSIiQ0G8eJRUepHXxj+z7ZdsnlEgO6yGHKevsIVBkyXEhBY
-pj2nLJuz27VDTFGwxRL5YSjm8PyLkJ7hWFgv3SfLdttGuIJvA9n78qSAM85EnLRm
-VLDMVk0l
-=k9h3
------END PGP SIGNATURE-----
 
---tfJh8EosjMNBhcRP--
