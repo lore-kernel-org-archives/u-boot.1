@@ -4,77 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D6A3E7716E
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 15:00:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5723BE7716B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 15:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 691D588E50;
-	Wed,  4 Dec 2024 16:00:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DD9D4896BF;
+	Wed,  4 Dec 2024 16:01:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LemvDKcp";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MFLkgnNS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 990E68917D; Wed,  4 Dec 2024 16:00:32 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 07D9B896DF; Wed,  4 Dec 2024 16:01:54 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9021E88D3A
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 16:00:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15DF288E50
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 16:01:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4B4F0Hx3065492;
- Wed, 4 Dec 2024 09:00:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733324417;
- bh=3PnseGOxzQlz+c+hvniynAEG3FbrVDyMN2R/12ml0/Y=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=LemvDKcp6pHzSgFgi693a42I/zGcablSJxHTyRsDyO/b0UiKtXD1PbNwFtcVA6694
- w3dGaFMMQSpA4XEa8INVTsS1pEwvQXTzM7lmGcuLNaRHGJAlHfhCzeSs7nb/ry1SIu
- w4yvQtdIq4+fD30eVOh2bjxHb2FxofB8nmqtA49c=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B4F0HuY072991;
- Wed, 4 Dec 2024 09:00:17 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Dec 2024 09:00:16 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Dec 2024 09:00:16 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B4F0F5F056386;
- Wed, 4 Dec 2024 09:00:16 -0600
-Date: Wed, 4 Dec 2024 20:30:15 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Roger Quadros <rogerq@kernel.org>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <marex@denx.de>, <hnagalla@ti.com>,
- <mkorpershoek@baylibre.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <jan.kiszka@siemens.com>,
- <j-humphreys@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH v2 1/2] usb: dwc3-generic: set "mode" based on caller of
- dwc3_generic_probe()
-Message-ID: <qf4urghmxyaxjzeurgtsiry625ibwcdspqx3v6fyfg6cek2cgo@txc6qzsw34pg>
-References: <20241203093748.138260-2-s-vadapalli@ti.com>
- <9254b268-2336-48ca-91de-9da34a93b467@kernel.org>
- <6hohujytkznjcemgu2cjhk2x5pxw7euwzojbt6ktji2yp6zft2@i77rsmzwfgj5>
- <5bd5c98c-530b-4f05-9fbc-e2d867be920a@kernel.org>
- <dj32jyfvxsds6wsax4tk7kw75zfiutggd5gfbwpklym7gifjih@awk6aerfjwl2>
- <6b4cb5ed-3d19-4fb2-aba7-90f0a0f4f4f0@kernel.org>
- <4cgkdnpdn7j5tnfwvvskm3ltiqfnp5lx5gc5hwcrsljpg4bdin@hpkkswe4dej6>
- <9a69d8ae-221b-4d46-9b4c-7df0bd6fc0af@kernel.org>
- <ftdjegd5mctcn3ndvgrl4apyxkzms7hxivxlyjcrk4qrmvsx7r@og3t7eyyhmkt>
- <97c32006-1607-45f8-a51b-a67892742f55@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=234f=S6=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1733324504;
+ bh=T2D+GvR0Xs1Uf4tkg0KIwASXrWEheyZNl1veOo/5m3o=;
+ b=MFLkgnNSAva5CMBW9xs4PQHmUSvdBE7nq1Ejg79oK454++shF60rTOXz5wxk6kOGUZbquoNq5
+ TZVND3iMhplAcdePhTqXbA+rWbuKutlpPAkBiP5bA7LVqpVyooe7I46ZFWBG7je5aIS1sjlo5IX
+ hVlalhof35eBy+Xkz6eW0Tg4arKdRI2ukf394TlCKRYUk4COlRancVt/nN584f6t3MakoekcxZi
+ HLcR5kHm/csTB6gAo6oJg+lZkAEUO/B4iNIp+m7bidPEZHVjtLceEix02+4y8/mZhbt35RdHdBJ
+ TRD3FHEHpr89lvCCV06b7+2SFHZYomdCFlo0CxYUJxFA==
+Message-ID: <2cca538b-c568-464e-b4f0-4c0bba553d58@kwiboo.se>
+Date: Wed, 4 Dec 2024 16:01:37 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <97c32006-1607-45f8-a51b-a67892742f55@kernel.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [MASTER] Pull-request efi-2025-01-rc4
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andy Yan <andyshrk@163.com>,
+ =?UTF-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+References: <8910d434-2d77-425f-aa81-8eb803078aef@gmx.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <8910d434-2d77-425f-aa81-8eb803078aef@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-ForwardEmail-ID: 67506ed629932d4adc2ad572
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,98 +75,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 04, 2024 at 04:36:53PM +0200, Roger Quadros wrote:
-> 
-> 
-> On 04/12/2024 15:37, Siddharth Vadapalli wrote:
-> > On Wed, Dec 04, 2024 at 02:34:56PM +0200, Roger Quadros wrote:
-> >>
-> >>
-> >> On 04/12/2024 12:05, Siddharth Vadapalli wrote:
-> > 
-> > [...]
-> > 
-> >>> Why not do what this patch does? What is the issue with the current
-> >>> patch (apart from the checks, which I could retain as well if others
-> >>> wish so)? The caller clearly mentions the expected role, so why not use
-> >>> that?
-> >>
-> >> Because the patch is more complicated than it needs to be, now that we know:
-> >> 1) generic_host_probe() will only be called when dr_mode is "host",
-> >> 2) generic_peripheral_probe() will only be called when dr_mode is "peripheral"
-> >> or "otg".
-> >>
-> >> The problem case is generic_peripheral_probe() being called with when
-> >> dr_mode is "otg".
-> > 
-> > We can also be sure that generic_periperhal_probe() expects dr_mode to
-> > be "peripheral" only and not "otg". So why not fix it at the root, which
-> 
-> generic_peripheral_probe() expects nothing from dr_mode.
-> It just expects the USB controller to work in peripheral mode.
+Hi Heinrich,
 
-Yes. So configuring the USB controller for peripheral mode of operation
-should be fine, in which case, irrespective of what "dr_mode" says,
-using "peripheral" should enable the desired functionality.
-
+On 2024-12-04 13:10, Heinrich Schuchardt wrote:
+> Dear Tom,
 > 
-> dr_mode is just a reflection of platform/device-tree dr_mode. Let's keep it
-> that way and not abuse dr_mode to "peripheral" when it is actually "otg".
-
-I am not asking to change what the device-tree has. I am asking the need
-to use "otg" as specified in the device-tree when in U-Boot, we cannot
-switch between Host and Peripheral dynamically using "otg". At the end
-of the day, there is no "generic_otg_probe()" which could enable such
-functionality. So I fail to understand why configuring the controller
-for "peripheral" mode as requested by "generic_peripheral_probe()" is
-equivalent to abusing the device-tree.
-
+> The following changes since commit f96e5133184aac377b54bd61f8abf78710f2ee56:
 > 
-> > is what this patch does? Independent of the issue, is the following a
-> > valid use-case?
-> > 
-> > generic_peripheral_probe() with plat->dr_mode = "otg" and hence
-> > generic_probe() using "otg" rather than "peripheral"
+>    Merge branch 'master' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-samsung (2024-12-03
+> 12:37:20 -0600)
 > 
-> It is a valid use case. The Platform says that the port is "otg"
-> i.e. (plat->dr_mode ="otg")
-> and the user says he wants to use it as peripheral
-> i.e. (by invoking generic_peripheral_probe())
-> Don't you see this as valid.
-
-Does peripheral mode work when user sets "otg" in the device-tree?
-Clearly it doesn't and hence this patch. Linux supports "otg" mode in
-the sense that we can switch between "host" and "peripheral". U-Boot on
-the other hand cannot even enable "peripheral" functionality when
-dr_mode is "otg" in the device-tree, let alone switching roles.
-
+> are available in the Git repository at:
 > 
-> > as is the case now. Is this resulting in something functional for other
-> > users of the USB Designware Controller? If the user requests "peripheral"
-> > mode of operation, will "otg" meet the user's requirement? If yes, I have
-> > no further objections. Irrespective of this, if you believe that the fix
-> > should be in the core as you indicated below, please feel free to post
-> > the patch.
+>    https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2025-01-rc4
 > 
-> Let's look at this from the other way around.
-> Why do you not agree that the fix should be in core.c and abusing dr_mode
-> is the correct way to go?
+> for you to fetch changes up to 657310322e5893d0b1bbba002fbe59b318062192:
+> 
+>    doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayipN
+> (2024-12-04 11:26:34 +0100)
+> 
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23706
+> 
+> ----------------------------------------------------------------
+> Pull-request efi-2025-01-rc4
+> 
+> With the move to bootstd booting via the EFI boot manager stopped to
+> consider all block devices due to missing probing.
+> 
+> With this pull request probing of all bootdevs before running the boot
+> manager is achieved. Prerequisite changes are needed to pass the CI.
+> 
+>        efi_loader: simplify efi_disk_rw_blocks()
+>        test: fix test_extension.py
+>        configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+>        CI: xilinx_versal_virt: disable USB_DWC3
+>        net: eth_bootdev_hunt() should not run DHCP
+>        cmd: bootmenu: add parameter -e for UEFI boot options
+>        efi_loader: run bootdev_hunt() to find ESP
 
-Isn't "otg" meant to convey that the role isn't fixed and can be
-switched? So how is hard-coding it to "peripheral", not considered as
-abusing the core? I don't intend to argue any further. I probably
-shouldn't have looked at other discussions on the mailing list regarding
-hard-coding "otg" as "peripheral" being incorrect. I should have simply
-posted the PRTCAPDIR fix in the core, instead of trying to come up with
-an acceptable fix. It is only because I felt that it didn't seem acceptable
-that I spent time finding out this inconsistency in "dwc3_generic_probe"
-where configuring the controller for "otg" mode as indicated by
-plat->dr_mode when the caller is "generic_peripheral_probe()" is somehow
-supposed to work in U-Boot where there is no OTG state machine.
+As pointed out in v1 of this patch, this cause a serious slowed down
+boot for bootstd boards using scripts and extlinux boot due to usb and
+pci being initialized before boot_targets order is considered.
 
-If the fix in the core is the right way to go, please post the patch. I
-only wanted to make USB DFU boot functional on AM62A and didn't want to
-end up in an argument while doing so.
+With this merged we probably need to disable BOOTMETH_EFI_BOOTMGR for
+bootstd/Rockchip. Seem very late in release to merge this big change!
 
 Regards,
-Siddharth.
+Jonas
+
+> 
+> Further UEFI changes:
+> 
+>        Avoid writing message in Exit() boot service
+>        Update startimage_exit self-test to check error
+>        Don't warn if the TCG2 FinalEvents table is not installed
+> 
+> Documentation changes:
+> 
+>        cmd: bootmenu typo 'read'
+>        clk: mpc83xx: Fix typo in "Coherent System Bus"
+>        efi_loader: Fix typos in enum efi_allocate_type
+>        doc: sending_patches: Fix spelling of "its"
+>        doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayipN
+>        doc: board: theobroma-systems: fix feature list in introductions
+> 
+> ----------------------------------------------------------------
+> Andy Yan (1):
+>        doc: coolpi: Fix document style
+> 
+> Heinrich Schuchardt (9):
+>        efi_loader: simplify efi_disk_rw_blocks()
+>        test: fix test_extension.py
+>        configs: sandbox_deconfig: remove CONFIG_AMIGA_PARTITION
+>        CI: xilinx_versal_virt: disable USB_DWC3
+>        net: eth_bootdev_hunt() should not run DHCP
+>        cmd: bootmenu: add parameter -e for UEFI boot options
+>        efi_loader: run bootdev_hunt() to find ESP
+>        cmd: bootmenu typo 'read'
+>        efi_loader: avoid writing message in Exit() boot service
+> 
+> Ilias Apalodimas (1):
+>        efi_loader: Don't warn if the TCG2 FinalEvents table is not installed
+> 
+> J. Neuschäfer (2):
+>        clk: mpc83xx: Fix typo in "Coherent System Bus"
+>        doc: sending_patches: Fix spelling of "its"
+> 
+> Jerome Forissier (1):
+>        doc: environment: NET_LWIP dhcp sets ipaddrN, netmaskN and gatewayipN
+> 
+> Quentin Schulz (1):
+>        doc: board: theobroma-systems: fix feature list in introductions
+> 
+> Simon Glass (2):
+>        efi_loader: Fix typos in enum efi_allocate_type
+>        efi_loader: Update startimage_exit self-test to check error
+> 
+>   .azure-pipelines.yml                            |  1 +
+>   .gitlab-ci.yml                                  |  1 +
+>   cmd/bootmenu.c                                  | 41
+> +++++++++++++++++++------
+>   configs/sandbox_defconfig                       |  1 -
+>   doc/board/coolpi/genbook_cm5_rk3588.rst         | 11 ++++---
+>   doc/board/theobroma-systems/puma_rk3399.rst     |  1 +
+>   doc/board/theobroma-systems/tiger_rk3588.rst    |  7 +++++
+>   doc/develop/sending_patches.rst                 |  2 +-
+>   doc/usage/cmd/bootmenu.rst                      | 13 ++++++--
+>   doc/usage/environment.rst                       | 31 ++++++++++---------
+>   drivers/clk/mpc83xx_clk.h                       |  2 +-
+>   include/efi.h                                   |  2 +-
+>   lib/efi_loader/efi_boottime.c                   |  7 ++---
+>   lib/efi_loader/efi_disk.c                       |  8 ++---
+>   lib/efi_loader/efi_setup.c                      |  8 +++++
+>   lib/efi_loader/efi_tcg2.c                       |  2 +-
+>   lib/efi_selftest/efi_selftest_startimage_exit.c |  6 ++--
+>   net/eth_bootdev.c                               | 30 ++++++++++--------
+>   test/py/tests/test_extension.py                 |  4 ++-
+>   19 files changed, 116 insertions(+), 62 deletions(-)
+> 
+
