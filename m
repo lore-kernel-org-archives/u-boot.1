@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED48E7716B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 03:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9DFE7716C
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 03:07:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 974F189414;
-	Wed,  4 Dec 2024 04:06:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F272789685;
+	Wed,  4 Dec 2024 04:06:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f8fQZNQ9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gWSBqzuU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101B789697; Wed,  4 Dec 2024 04:06:02 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id 4521789671; Wed,  4 Dec 2024 04:06:04 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9822D8968D
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 04:05:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1AE189696
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 04:06:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-215853ed047so34614145ad.2
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 19:05:59 -0800 (PST)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-215bd2c32a6so14786415ad.1
+ for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 19:06:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733281558; x=1733886358; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733281560; x=1733886360; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3x5OVYRl6FeBiVwZ7VJXvp6xfxKBwJi4FlxTk0JgeLY=;
- b=f8fQZNQ9yGST8FtC6aRCNx3bD5VOXoa0ZRDFjgZztz/Pe8hMYV0dn2c3sXB9H3D6kz
- yqx50U0nsoE1HExMAZF1gm35v5DE7Zc0X9xb5x5t1TzfKeeZcQH4vEaeTW3mfIH4EDyt
- QSP/+mDuOxiPOutGopfDiYafXSs6+1apxUCUF8oeoUoXI9LopnJXAvxlK7qqKpt9jIup
- fa/kPEmwJRynt9yrg77xsrWyhbODzLpgBdgl9yD6pb8/v/nQUXnied8gwW7nw/Hzl4Oh
- oBCxLcM7ipIL3+6OwnDJjjTZNWjlDvA04HRBl6TPKmjiiUzAnXOXRDZsTwWOK7Uirkd9
- m6Ww==
+ bh=jl3TnI2kFSQfDCwqm7TwWiQmokTU0sPKpMNMzIpyrww=;
+ b=gWSBqzuU8SEkilkq1IrGX2DDoRWwmATCwbCiawwmCA8+0xyh/6k9F8KoWGFeOe1d4q
+ zEG2Q6kbyK/mpnZMO3bMXTtqoRNQ5CtBxwnbqCQjIg2Bkp0ypTrzpEmJ1dinXJ4oSKoi
+ QEmI7XYmj6qcqocu48MCjPajGyylyxZk7JW5T8XO6ee/X1uW/cbWSxPg/FfGyBsK55pO
+ F0Nm9C3eJERDocwtda+V+Lb22MGefkzsfHfOXNxtWJcPINdlOFh/lpq6G8ztQcU7G711
+ GR9B1lFaiUZa6LQn3FZttswyAV2F8GdhZDACwNCMoNWpYtz68TfyLlrsGQOVL0ZLb9iQ
+ HnTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733281558; x=1733886358;
+ d=1e100.net; s=20230601; t=1733281560; x=1733886360;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3x5OVYRl6FeBiVwZ7VJXvp6xfxKBwJi4FlxTk0JgeLY=;
- b=j1bEy82KprqbBIIXozU906QHHk07kCC0sFlGr6CyNXYCX19Qw9C90UuWPtY0l6xd03
- KzvCWmOrgFeID3wvU6AkcZnt0K00Bj//vB0vdumwgwTyyU5LXcrP0b+r9jv4I1KFkivx
- J6qcD8r9rJpB139h6jMUoK6N2pFRK0AtlNKssETgbTo5ii8Pikq1jGc568PX8eEh8/Zy
- ijrECxXWas74sy4N9BhKItryUYAD270/c4hSN/GVCwEiMQL0MhJTRmFH2jPG7uc/UQQR
- aMchzc6/+5TyH0LWq5ZwVE6Qg+FXoCVveS4L8F2D63Jy6o0vPjSo6cl89wiAMq+ZBTWa
- 1zSQ==
-X-Gm-Message-State: AOJu0YzSVBaWO++R3t1NkfL4RjrblPJeWDA6b44i3uOoDv+lnjuy67dA
- 5Npm/TLUR14ueO9QONh+PV4c+ysr/qHvcqL6lLPAQQ+PxcVzhHj4FBA0Rsliggg=
-X-Gm-Gg: ASbGncvbQt9K8RrcdsnrkCJtt22OSoDZdEkAvE+Lx7u1GGy/V7Qd2cNpY7I3mGOqIlN
- JbtpSzeWt+eCsnNICDEeIrRVFPC+pRXtJ/SMmDvBW1xHnF0VgzEF+rKPO7uYgerQVHBNipiW80l
- BZ0OLk2vSx9XyAF/eAr9kHaoAVli/azi6I2/IzY8YAy4qldEdxjyEpPuV8kxof46zpZZ9TNNyqZ
- 26SnLXB0qF9FpVMHdOMqUf6HXLsR2wrcjBYEY+fknk=
-X-Google-Smtp-Source: AGHT+IH+YZDbQewtmyDYkZm7JjSF6CnvNZnNUiv9FKtHVyWSegajc9Hyz+5a/x1eb6XAEBgSdphyeQ==
-X-Received: by 2002:a17:902:da84:b0:215:aa88:e153 with SMTP id
- d9443c01a7336-215bd1a0fd6mr58824805ad.56.1733281558138; 
- Tue, 03 Dec 2024 19:05:58 -0800 (PST)
+ bh=jl3TnI2kFSQfDCwqm7TwWiQmokTU0sPKpMNMzIpyrww=;
+ b=be1auqXc7i9DXTHsZkPI7zLUIfNsasOKeJnlop7kG0Glbn9+G2z+Sjpnlzd3U+h72N
+ gOi54QW2QBgT3xl+Y9WpBqdX7ZcXoNLN2fP9G9o+j2H5vNCzVgT0F+FoaueBWUI1Fj8j
+ ia72ihu/aPo/lFSqp6uDZXkKBKwXNecfi25AORETL4LE/vXTuGbFcvrVRUHyTA+0srlD
+ RnFfeJDlgLDpliz3CW+qkHJ25Zk8s4LVdvXzgze/E5zCbXRoxp5QoLBkdK9sN7duWtDi
+ u4NH9LetYInh4FXSUQQcYcJo62bj0JakdX6Hlk6Z73TF4mrmuxtotW+7gp1fpAw07ubW
+ h3Cw==
+X-Gm-Message-State: AOJu0Ywu9q1+3W/pa/t8x1n0v3OkrOZkU4zdCKEQGbI3/VC6QDN1H+VM
+ saK0EOSYcYItKbBn8qcT/vxwUFWkCbQsWmU5XPyHJ71Ut1+n8pKS51ChyWXb3rI=
+X-Gm-Gg: ASbGnctPBil/r7hXoRqtgPKu8KNI8HFVOYxYksMtQ/VEg+Ud7CosKRydiIWIEOfY4tY
+ GKPtIaHy5RdC5z1lI8Am4745kijCUAaDcI6sBcMPiZcqCK3Xcziia5kLB+7ebrxRVemXj0r4YuZ
+ /5HeiFgStAxoP8tG8aBOsjeF2W6fbisapt2CCf0+o2xhVO/uO4S6p8LDzbmjI+Xr0uEAX3FW0gs
+ IKVLY2egKwTqNltC0PBXRns6JUfmF720S+Idv4Jqlg=
+X-Google-Smtp-Source: AGHT+IG2Wn86DVNhKvcpDm1Ctxl0srxbZ6PoK64W4pwosYqnBns8uxtrLzf8mz8XFdOVoNqm1ygxdw==
+X-Received: by 2002:a17:902:f64e:b0:215:aece:ed63 with SMTP id
+ d9443c01a7336-215bd169072mr62781995ad.44.1733281560155; 
+ Tue, 03 Dec 2024 19:06:00 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215714b4f77sm56196335ad.202.2024.12.03.19.05.56
+ d9443c01a7336-215714b4f77sm56196335ad.202.2024.12.03.19.05.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 19:05:57 -0800 (PST)
+ Tue, 03 Dec 2024 19:05:59 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v7 09/14] efi_loader: net: add support to send http requests
- and parse http headers
-Date: Wed,  4 Dec 2024 00:05:24 -0300
-Message-ID: <20241204030530.2099776-9-adrianox@gmail.com>
+Subject: [PATCH v7 10/14] efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+Date: Wed,  4 Dec 2024 00:05:25 -0300
+Message-ID: <20241204030530.2099776-10-adrianox@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241204030530.2099776-1-adrianox@gmail.com>
 References: <20241204030530.2099776-1-adrianox@gmail.com>
@@ -97,249 +96,340 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add network-stack agnostic way to send an http request and
-parse http headers from efi drivers. This uses wget as a
-backend and communicates with it via efi_wget_info.
-
-The function efi_net_do_request allocates a buffer on behalf of an
-efi application using efi_alloc and passes it to wget to receive
-the data. If the method is GET and the buffer is too small, it
-re-allocates the buffer based on the last received Content-Length
-header and tries again. If the method is HEAD it just issues one
-request. So issuing a HEAD request (to update Content-Length) and
-then a GET request is preferred but not required.
-
-The function efi_net_parse_headers parses a raw buffer containing
-an http header into an array of EFI specific 'http_header' structs.
+Add an implementation of the EFI_IP4_CONFIG2_PROTOCOL. The protocol
+is attached to the handle of the efi network device. This is the same
+handle where snp and pxe are attached to.
 
 Signed-off-by: Adriano Cordova <adrianox@gmail.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
-
+Changes in v7:
+- Changed some EFI_INVALID_PARAMETER for EFI_BAD_BUFFER_SIZE
 (no changes since v4)
-
 Changes in v4:
-- Remove void* casts
-- Add documentation
-
-Changes in v3:
-- Add a struct wget_http_info efi_wget_info for efi_net to pass to wget
-  when issuing wget requests, instead of using the old wget_info (see v2
-  of the series 'wget: Expose wget to applications').
-- Let a pointer to the http status code be passed to efi_net_do_request
-  for it to fill it for the client after a request.
- include/efi_loader.h     |  13 ++++
- lib/efi_loader/efi_net.c | 155 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 168 insertions(+)
+ - efi_ipconfig.c is compiled if ARCH_QEMU || SANDBOX
+ - An #ifdef changed to IF_ENABLED
+ - Removed a log_err
+ - Reworked sanity checks in efi_ip4_config2_set_data
+ 
+ include/efi_loader.h          |   3 +
+ lib/efi_loader/Kconfig        |   9 ++
+ lib/efi_loader/Makefile       |   1 +
+ lib/efi_loader/efi_ipconfig.c | 214 ++++++++++++++++++++++++++++++++++
+ lib/efi_loader/efi_net.c      |  20 +++-
+ 5 files changed, 242 insertions(+), 5 deletions(-)
+ create mode 100644 lib/efi_loader/efi_ipconfig.c
 
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 0da0248db4..b6f865ca76 100644
+index b6f865ca76..9be09a799b 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
-@@ -16,6 +16,7 @@
- #include <image.h>
- #include <pe.h>
- #include <linux/list.h>
-+#include <linux/sizes.h>
- #include <linux/oid_registry.h>
+@@ -626,6 +626,9 @@ int efi_disk_create_partitions(efi_handle_t parent, struct blk_desc *desc,
+ efi_status_t efi_gop_register(void);
+ /* Called by bootefi to make the network interface available */
+ efi_status_t efi_net_register(void);
++/* Called by efi_net_register to make the ip4 config2 protocol available */
++efi_status_t efi_ipconfig_register(const efi_handle_t handle,
++				   struct efi_ip4_config2_protocol *ip4config);
+ /* Called by bootefi to make the watchdog available */
+ efi_status_t efi_watchdog_register(void);
+ efi_status_t efi_initrd_register(void);
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index d93f28b842..0b932df85c 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -476,6 +476,15 @@ config EFI_RISCV_BOOT_PROTOCOL
+ 	  replace the transfer via the device-tree. The latter is not
+ 	  possible on systems using ACPI.
  
- struct blk_desc;
-@@ -136,6 +137,18 @@ void efi_net_get_addr(struct efi_ipv4_address *ip,
- void efi_net_set_addr(struct efi_ipv4_address *ip,
- 		      struct efi_ipv4_address *mask,
- 		      struct efi_ipv4_address *gw);
-+efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buffer,
-+				u32 *status_code, ulong *file_size, char *headers_buffer);
-+#define MAX_HTTP_HEADERS_SIZE SZ_64K
-+#define MAX_HTTP_HEADERS 100
-+#define MAX_HTTP_HEADER_NAME 128
-+#define MAX_HTTP_HEADER_VALUE 512
-+struct http_header {
-+	uchar name[MAX_HTTP_HEADER_NAME];
-+	uchar value[MAX_HTTP_HEADER_VALUE];
-+};
++config EFI_IP4_CONFIG2_PROTOCOL
++	bool "EFI_IP4_CONFIG2_PROTOCOL support"
++	default y if ARCH_QEMU || SANDBOX
++	depends on NET || NET_LWIP
++	help
++	  Provides an implementation of the EFI_IP4_CONFIG2_PROTOCOL, this
++	  protocol can be used to set and get the current ip address and
++	  other network information.
 +
-+void efi_net_parse_headers(ulong *num_headers, struct http_header *headers);
- #else
- static inline void efi_net_get_dp(struct efi_device_path **dp) { }
- static inline void efi_net_get_addr(struct efi_ipv4_address *ip,
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index e8af2e3d95..368f62c5b2 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -17,6 +17,7 @@
+ endmenu
  
- #include <efi_loader.h>
- #include <dm.h>
-+#include <linux/sizes.h>
- #include <malloc.h>
- #include <vsprintf.h>
- #include <net.h>
-@@ -40,6 +41,12 @@ static struct efi_net_obj *netobj;
-  */
- static struct efi_device_path *net_dp;
- 
-+static struct wget_http_info efi_wget_info = {
-+	.set_bootdev = false,
-+	.check_buffer_size = true,
-+
-+};
-+
- /*
-  * The notification function of this event is called in every timer cycle
-  * to check if a new network packet has been received.
-@@ -1175,3 +1182,151 @@ void efi_net_set_addr(struct efi_ipv4_address *ip,
- 		memcpy(&net_netmask, mask, sizeof(*mask));
- #endif
- }
-+
-+/**
-+ * efi_net_set_buffer() - allocate a buffer of min 64K
+ menu "Misc options"
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 87131ab911..30cd1de9d6 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -59,6 +59,7 @@ obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
+ obj-$(CONFIG_VIDEO) += efi_gop.o
+ obj-$(CONFIG_BLK) += efi_disk.o
+ obj-$(CONFIG_NETDEVICES) += efi_net.o
++obj-$(CONFIG_EFI_IP4_CONFIG2_PROTOCOL) += efi_ipconfig.o
+ obj-$(CONFIG_ACPI) += efi_acpi.o
+ obj-$(CONFIG_SMBIOS) += efi_smbios.o
+ obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
+diff --git a/lib/efi_loader/efi_ipconfig.c b/lib/efi_loader/efi_ipconfig.c
+new file mode 100644
+index 0000000000..0b247a4c02
+--- /dev/null
++++ b/lib/efi_loader/efi_ipconfig.c
+@@ -0,0 +1,214 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Implementation of EFI_IP4_CONFIG2_PROTOCOL
 + *
-+ * @buffer:	allocated buffer
-+ * @size:	desired buffer size
-+ * Return:	status code
 + */
-+static efi_status_t efi_net_set_buffer(void **buffer, size_t size)
-+{
-+	efi_status_t ret = EFI_SUCCESS;
 +
-+	if (size < SZ_64K)
-+		size = SZ_64K;
++#include <efi_loader.h>
++#include <image.h>
++#include <malloc.h>
++#include <mapmem.h>
++#include <net.h>
 +
-+	efi_free_pool(*buffer);
++static const efi_guid_t efi_ip4_config2_guid = EFI_IP4_CONFIG2_PROTOCOL_GUID;
 +
-+	*buffer = efi_alloc(size);
-+	if (!*buffer)
-+		ret = EFI_OUT_OF_RESOURCES;
++struct efi_ip4_config2_manual_address current_http_ip;
++static enum efi_ip4_config2_policy current_policy;
++static char current_mac_addr[32];
 +
-+	efi_wget_info.buffer_size = (ulong)size;
++/* EFI_IP4_CONFIG2_PROTOCOL */
 +
-+	return ret;
-+}
-+
-+/**
-+ * efi_net_parse_headers() - parse HTTP headers
++/*
++ * efi_ip4_config2_set_data() -  Set the configuration for the EFI IPv4 network
++ * stack running on the communication device
 + *
-+ * Parses the raw buffer efi_wget_info.headers into an array headers
-+ * of efi structs http_headers. The array should be at least
-+ * MAX_HTTP_HEADERS long.
++ * This function implements EFI_IP4_CONFIG2_PROTOCOL.SetData()
++ * See the Unified Extensible Firmware Interface
++ * (UEFI) specification for details.
 + *
-+ * @num_headers:	number of headers
-+ * @headers:		caller provided array of struct http_headers
-+ */
-+void efi_net_parse_headers(ulong *num_headers, struct http_header *headers)
-+{
-+	if (!num_headers || !headers)
-+		return;
-+
-+	// Populate info with http headers.
-+	*num_headers = 0;
-+	const uchar *line_start = efi_wget_info.headers;
-+	const uchar *line_end;
-+	ulong count;
-+	struct http_header *current_header;
-+	const uchar *separator;
-+	size_t name_length, value_length;
-+
-+	// Skip the first line (request or status line)
-+	line_end = strstr(line_start, "\r\n");
-+
-+	if (line_end)
-+		line_start = line_end + 2;
-+
-+	while ((line_end = strstr(line_start, "\r\n")) != NULL) {
-+		count = *num_headers;
-+		if (line_start == line_end || count >= MAX_HTTP_HEADERS)
-+			break;
-+		current_header = headers + count;
-+		separator = strchr(line_start, ':');
-+		if (separator) {
-+			name_length = separator - line_start;
-+			++separator;
-+			while (*separator == ' ')
-+				++separator;
-+			value_length = line_end - separator;
-+			if (name_length < MAX_HTTP_HEADER_NAME &&
-+			    value_length < MAX_HTTP_HEADER_VALUE) {
-+				strncpy(current_header->name, line_start, name_length);
-+				current_header->name[name_length] = '\0';
-+				strncpy(current_header->value, separator, value_length);
-+				current_header->value[value_length] = '\0';
-+				(*num_headers)++;
-+			}
-+		}
-+		line_start = line_end + 2;
-+	}
-+}
-+
-+/**
-+ * efi_net_do_request() - issue an HTTP request using wget
-+ *
-+ * @url:		url
-+ * @method:		HTTP method
-+ * @buffer:		data buffer
-+ * @status_code:	HTTP status code
-+ * @file_size:		file size in bytes
-+ * @headers_buffer:	headers buffer
++ * @this:		pointer to the protocol instance
++ * @data_type:		the type of data to set
++ * @data_size:		size of the buffer pointed to by data in bytes
++ * @data:		the data buffer to set
 + * Return:		status code
 + */
-+efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buffer,
-+				u32 *status_code, ulong *file_size, char *headers_buffer)
++static efi_status_t EFIAPI efi_ip4_config2_set_data(struct efi_ip4_config2_protocol *this,
++						    enum efi_ip4_config2_data_type data_type,
++						    efi_uintn_t data_size,
++						    void *data)
 +{
++	EFI_ENTRY("%p, %d, %zu, %p", this, data_type, data_size, data);
 +	efi_status_t ret = EFI_SUCCESS;
-+	int wget_ret;
-+	static bool last_head;
 +
-+	if (!buffer || !file_size)
-+		return EFI_ABORTED;
++	if (!this || (data && !data_size) || (!data && data_size))
++		return EFI_EXIT(EFI_INVALID_PARAMETER);
 +
-+	efi_wget_info.method = (enum wget_http_method)method;
-+	efi_wget_info.headers = headers_buffer;
-+
-+	switch (method) {
-+	case HTTP_METHOD_GET:
-+		ret = efi_net_set_buffer(buffer, last_head ? (size_t)efi_wget_info.hdr_cont_len : 0);
-+		if (ret != EFI_SUCCESS)
-+			goto out;
-+		wget_ret = wget_request((ulong)*buffer, url, &efi_wget_info);
-+		if ((ulong)efi_wget_info.hdr_cont_len > efi_wget_info.buffer_size) {
-+			// Try again with updated buffer size
-+			ret = efi_net_set_buffer(buffer, (size_t)efi_wget_info.hdr_cont_len);
-+			if (ret != EFI_SUCCESS)
-+				goto out;
-+			if (wget_request((ulong)*buffer, url, &efi_wget_info)) {
-+				efi_free_pool(*buffer);
-+				ret = EFI_DEVICE_ERROR;
-+				goto out;
-+			}
-+		} else if (wget_ret) {
-+			efi_free_pool(*buffer);
-+			ret = EFI_DEVICE_ERROR;
-+			goto out;
++	switch (data_type) {
++	case EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO:
++		return EFI_EXIT(EFI_WRITE_PROTECTED);
++	case EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS:
++		if (current_policy != EFI_IP4_CONFIG2_POLICY_STATIC)
++			return EFI_EXIT(EFI_WRITE_PROTECTED);
++		if (!data_size && !data) {
++			memset((void *)&current_http_ip, 0,
++			       sizeof(current_http_ip));
++			return EFI_EXIT(EFI_SUCCESS);
 +		}
-+		// Pass the actual number of received bytes to the application
-+		*file_size = efi_wget_info.file_size;
-+		*status_code = efi_wget_info.status_code;
-+		last_head = false;
-+		break;
-+	case HTTP_METHOD_HEAD:
-+		ret = efi_net_set_buffer(buffer, 0);
-+		if (ret != EFI_SUCCESS)
-+			goto out;
-+		wget_request((ulong)*buffer, url, &efi_wget_info);
-+		*file_size = 0;
-+		*status_code = efi_wget_info.status_code;
-+		last_head = true;
-+		break;
++		if (data && data_size == sizeof(struct efi_ip4_config2_manual_address)) {
++			memcpy((void *)&current_http_ip, data,
++			       sizeof(struct efi_ip4_config2_manual_address));
++			efi_net_set_addr(&current_http_ip.address,
++					 &current_http_ip.subnet_mask, NULL);
++			return EFI_EXIT(EFI_SUCCESS);
++		}
++		return EFI_EXIT(EFI_BAD_BUFFER_SIZE);
++	case EFI_IP4_CONFIG2_DATA_TYPE_POLICY:
++		if (data && data_size == sizeof(enum efi_ip4_config2_policy)) {
++			current_policy = *(enum efi_ip4_config2_policy *)data;
++			return EFI_EXIT(EFI_SUCCESS);
++		}
++		return EFI_EXIT(EFI_BAD_BUFFER_SIZE);
++
 +	default:
-+		ret = EFI_UNSUPPORTED;
-+		break;
++		return EFI_EXIT(EFI_UNSUPPORTED);
 +	}
 +
-+out:
-+	return ret;
++	return EFI_EXIT(ret);
 +}
++
++/*
++ * efi_ip4_config2_get_data() -  Get the configuration for the EFI IPv4 network
++ * stack running on the communication device
++ *
++ * This function implements EFI_IP4_CONFIG2_PROTOCOL.GetData()
++ * See the Unified Extensible Firmware Interface
++ * (UEFI) specification for details.
++ *
++ * @this:		pointer to the protocol instance
++ * @data_type:		the type of data to get
++ * @data_size:		size
++ * @data:		the data buffer
++ * Return:		status code
++ */
++static efi_status_t EFIAPI efi_ip4_config2_get_data(struct efi_ip4_config2_protocol *this,
++						    enum efi_ip4_config2_data_type data_type,
++						    efi_uintn_t *data_size,
++						    void *data)
++{
++	EFI_ENTRY("%p, %d, %p, %p", this, data_type, data_size, data);
++
++	efi_status_t ret = EFI_SUCCESS;
++	struct efi_ip4_config2_interface_info *info;
++	int tmp;
++
++	if (!this || !data_size)
++		return EFI_EXIT(EFI_INVALID_PARAMETER);
++
++	if (*data_size && !data)
++		return EFI_EXIT(EFI_INVALID_PARAMETER);
++
++	tmp = sizeof(struct efi_ip4_config2_interface_info) + sizeof(struct efi_ip4_route_table);
++
++	switch (data_type) {
++	case EFI_IP4_CONFIG2_DATA_TYPE_INTERFACEINFO:
++		if (*data_size < tmp) {
++			*data_size = tmp;
++			return EFI_EXIT(EFI_BUFFER_TOO_SMALL);
++		}
++
++		info = (struct efi_ip4_config2_interface_info *)data;
++		memset(info, 0, sizeof(*info));
++
++		info->hw_address_size = 6;
++		memcpy(info->hw_address.mac_addr, current_mac_addr, 6);
++		// Set the route table size
++
++		info->route_table_size = 0;
++		break;
++	case EFI_IP4_CONFIG2_DATA_TYPE_MANUAL_ADDRESS:
++		if (*data_size < sizeof(struct efi_ip4_config2_manual_address)) {
++			*data_size = sizeof(struct efi_ip4_config2_manual_address);
++			return EFI_EXIT(EFI_BUFFER_TOO_SMALL);
++		}
++
++		efi_net_get_addr(&current_http_ip.address, &current_http_ip.subnet_mask, NULL);
++		memcpy(data, (void *)&current_http_ip,
++		       sizeof(struct efi_ip4_config2_manual_address));
++
++		break;
++	default:
++		return EFI_EXIT(EFI_NOT_FOUND);
++	}
++	return EFI_EXIT(ret);
++}
++
++/*
++ * efi_ip4_config2_register_notify() -  Register an event that is to be signaled whenever
++ * a configuration process on the specified configuration
++ * data is done
++ *
++ * This function implements EFI_IP4_CONFIG2_PROTOCOL.RegisterDataNotify()
++ * See the Unified Extensible Firmware Interface
++ * (UEFI) specification for details.
++ *
++ * @this:		pointer to the protocol instance
++ * @data_type:		the type of data to register the event for
++ * @event:		the event to register
++ * Return:		status code
++ */
++static efi_status_t EFIAPI efi_ip4_config2_register_notify(struct efi_ip4_config2_protocol *this,
++							   enum efi_ip4_config2_data_type data_type,
++							   struct efi_event *event)
++{
++	EFI_ENTRY("%p, %d, %p", this, data_type, event);
++
++	return EFI_EXIT(EFI_UNSUPPORTED);
++}
++
++/*
++ * efi_ip4_config2_unregister_notify() -  Remove a previously registered eventfor
++ * the specified configuration data
++ *
++ * This function implements EFI_IP4_CONFIG2_PROTOCOL.UnregisterDataNotify()
++ * See the Unified Extensible Firmware Interface
++ * (UEFI) specification for details.
++ *
++ * @this:		pointer to the protocol instance
++ * @data_type:		the type of data to remove the event for
++ * @event:		the event to unregister
++ * Return:		status code
++ */
++static efi_status_t EFIAPI efi_ip4_config2_unregister_notify(struct efi_ip4_config2_protocol *this,
++							     enum efi_ip4_config2_data_type data_type,
++							     struct efi_event *event)
++{
++	EFI_ENTRY("%p, %d, %p", this, data_type, event);
++
++	return EFI_EXIT(EFI_UNSUPPORTED);
++}
++
++/**
++ * efi_ipconfig_register() - register the ip4_config2 protocol
++ *
++ */
++efi_status_t efi_ipconfig_register(const efi_handle_t handle,
++				   struct efi_ip4_config2_protocol *ip4config)
++{
++	efi_status_t r = EFI_SUCCESS;
++
++	r = efi_add_protocol(handle, &efi_ip4_config2_guid,
++			     ip4config);
++	if (r != EFI_SUCCESS) {
++		log_err("ERROR: Failure to add protocol\n");
++		return r;
++	}
++
++	memcpy(current_mac_addr, eth_get_ethaddr(), 6);
++
++	ip4config->set_data = efi_ip4_config2_set_data;
++	ip4config->get_data = efi_ip4_config2_get_data;
++	ip4config->register_data_notify = efi_ip4_config2_register_notify;
++	ip4config->unregister_data_notify = efi_ip4_config2_unregister_notify;
++
++	return EFI_SUCCESS;
++}
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index 368f62c5b2..916c15999e 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -60,11 +60,12 @@ static struct efi_event *wait_for_packet;
+ /**
+  * struct efi_net_obj - EFI object representing a network interface
+  *
+- * @header:	EFI object header
+- * @net:	simple network protocol interface
+- * @net_mode:	status of the network interface
+- * @pxe:	PXE base code protocol interface
+- * @pxe_mode:	status of the PXE base code protocol
++ * @header:			EFI object header
++ * @net:			simple network protocol interface
++ * @net_mode:			status of the network interface
++ * @pxe:			PXE base code protocol interface
++ * @pxe_mode:			status of the PXE base code protocol
++ * @ip4_config2:		IP4 Config2 protocol interface
+  */
+ struct efi_net_obj {
+ 	struct efi_object header;
+@@ -72,6 +73,9 @@ struct efi_net_obj {
+ 	struct efi_simple_network_mode net_mode;
+ 	struct efi_pxe_base_code_protocol pxe;
+ 	struct efi_pxe_mode pxe_mode;
++#if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
++	struct efi_ip4_config2_protocol ip4_config2;
++#endif
+ };
+ 
+ /*
+@@ -999,6 +1003,12 @@ efi_status_t efi_net_register(void)
+ 		return r;
+ 	}
+ 
++#if IS_ENABLED(CONFIG_EFI_IP4_CONFIG2_PROTOCOL)
++	r = efi_ipconfig_register(&netobj->header, &netobj->ip4_config2);
++	if (r != EFI_SUCCESS)
++		goto failure_to_add_protocol;
++#endif
++
+ 	return EFI_SUCCESS;
+ failure_to_add_protocol:
+ 	printf("ERROR: Failure to add protocol\n");
 -- 
 2.43.0
 
