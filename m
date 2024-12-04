@@ -4,89 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC8CE77169
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 00:37:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3ABE77160
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 00:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C52F893DB;
-	Wed,  4 Dec 2024 01:37:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0E42B8940F;
+	Wed,  4 Dec 2024 01:58:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gentoo.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N1ROwt5o";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37750893FD; Wed,  4 Dec 2024 01:37:40 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2AEF389420; Wed,  4 Dec 2024 01:58:24 +0100 (CET)
+Received: from smtp.gentoo.org (woodpecker.gentoo.org [140.211.166.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0829E89351
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 01:37:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 165FA88FAF
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 01:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9f1c590ecdso1046901066b.1
- for <u-boot@lists.denx.de>; Tue, 03 Dec 2024 16:37:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733272657; x=1733877457; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yc92wA0hvao66+GZnCx2mV+tRgJs6zauJOxWzPFRg38=;
- b=N1ROwt5ohKw0Xh2ZmtoUcPhUVWMWgOfDqEAwennzdJwxgqebIBKEw4qjFLiFIeoG7y
- /SnM35ptTXRi+EuuhwKZZkJiJG/fD1DFEqniNpTaTOOF3AaZg6AImb0laFRuGOKdlCmO
- zoCyLeRkScOStOBBh+JmZaT1xreF2NVyjjGbY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733272657; x=1733877457;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yc92wA0hvao66+GZnCx2mV+tRgJs6zauJOxWzPFRg38=;
- b=rdMRstjhA34ZwYajP1sl/BkNLhOXk5NN+O05LIQAsAS5wYzZjWASHhzzXgQXz8BbhP
- AyRrO38bm6pMxOG2CuDRAoc1HaPcyCMoHKE4T001LncTKWI1gBBiL6u0p3KRHvmb2GBm
- Tzr6BqeKKVsNuyNrmr1TKuDsU1EmEyemJaar7pnm7vZ3HlYMuX6slKpLaehkBRP1zqQA
- 0QHHw2fQmsKG3CvjD+ZisfOBo4EccyRUV3RM1tZKQJw1vz46E6H0gh8byLsTTiCBUVXm
- nmVBf2I3QOMyZUp+RKPMMYK+rEsh5+oElzO5Aaw0KGoV82ihhxfad0u5fPi1licS8OP6
- 53JQ==
-X-Gm-Message-State: AOJu0YyTyUoVo8uxoH3TNY98DxFKQX4q+07Qx5UkESdMdlXr44MF8Lob
- QvC+MDkEjK8eZcGuMa55mWcdSiskq6K3BhdY17+UEB9rO/ge0BD2OjgWim0pJd1GbZqAGWntQTY
- 5qRfA0XUuj5VD4stZ0kjx1Vlfuei+51Nn8DPa
-X-Gm-Gg: ASbGncsBLiWocgiByeO5bHqe0TtPkwBkEu7Niy/UQjL/6f8ymFGsW65t2/RO07KC/aS
- Uga/2jP+572EJHzYhrZpPZ7i722ca+y+I
-X-Google-Smtp-Source: AGHT+IGSfeScGcDNasFSKpaAW/dNDydO65EBguOnVaZBxECFxcj66xTQ8OOuOxTKKjg3aWrEVDQijj4oNN5J1TYobFI=
-X-Received: by 2002:a17:906:1db1:b0:aa5:3853:553f with SMTP id
- a640c23a62f3a-aa5f7dc91d5mr355152366b.32.1733272657431; Tue, 03 Dec 2024
- 16:37:37 -0800 (PST)
-MIME-Version: 1.0
-References: <20241203234559.2938192-1-sjg@chromium.org>
- <CAFLszThuRngaW_kOTnEakDr6GSRc5TWpy7WT9yvQJmuMP2eUVw@mail.gmail.com>
- <20241204001234.GC2457179@bill-the-cat>
-In-Reply-To: <20241204001234.GC2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Dec 2024 17:37:25 -0700
-Message-ID: <CAFLszTi9cF-1NVPm8FqWdmiyAuKTJERzxgbCq=YXDX5zY=MgWQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/41] pxe: Support read_all() for extlinux and PXE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
+ dmarc=fail (p=none dis=none) header.from=gentoo.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dlan@gentoo.org
+Date: Wed, 4 Dec 2024 08:58:08 +0800
+From: Yixun Lan <dlan@gentoo.org>
+To: Marcel Ziswiler <marcel@ziswiler.com>
+Cc: Huan Zhou <pericycle.cc@gmail.com>, u-boot@lists.denx.de,
+ Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+ Jonas =?utf-8?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Padmarao Begari <padmarao.begari@microchip.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Kongyang Liu <seashell11234455@gmail.com>
+Subject: Re: [PATCH v4 2/2] doc: spacemit: bananapi_f3: document Banana Pi F3
+ board
+Message-ID: <20241204005808-GYA559515@gentoo>
+References: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
+ <20241129-pickup-bpif3-v4-2-e99fabf66e33@gmail.com>
+ <ad100a4f673759559a6047083713d379847894cb.camel@ziswiler.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ad100a4f673759559a6047083713d379847894cb.camel@ziswiler.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,131 +66,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marcel, Huan
 
-On Tue, 3 Dec 2024 at 17:12, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Dec 03, 2024 at 05:03:26PM -0700, Simon Glass wrote:
-> > Hi,
-> >
-> > On Tue, 3 Dec 2024 at 16:46, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > This series implements read_all() so that it is possible to read all the
-> > > files relating to a bootflow, make adjustments and then boot.
-> > >
-> > > Unfortunately quite a few things stand in the way, so this series
-> > > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > > required support in pxe_utils and the differing code in the extlinux and
-> > > PXE bootmeths. There is very little new code, but quite a lot of
-> > > refactoring.
-> > >
-> > > The bootm, booti and bootz commands have all been refactored previously,
-> > > so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> > > At the, time, zboot was left alone, since it is x86-specific and a bit
-> > > more trouble.
-> > >
-> > > This series adds a programatic API for zboot and uses the forthcoming
-> > > bootstd 'image list' to collect information from an extlinux file. It is
-> > > therefore possible to parse the file, load the resulting images and then
-> > > examine/adjust the resulting bootflow, before booting.
-> > >
-> > > The addition of options to extlinux resulted in the PXE and extlinux
-> > > bootmeth having slightly different features. This is tidied up in this
-> > > series, with common functions for both. This allows the same features
-> > > (loading images as a separate step) to be provided for PXE.
-> > >
-> > > Changes in v2:
-> > > - Split out strlcpy() change into new patch
-> > > - Move strlcpy() change into an earlier patch
-> > > - Fix 'initaddr' typo'
-> > > - Rebase on earlier change
-> > > - Add new patch to simplify the code reading fdtcontroladdr and fdt_addr
-> > >
-> > > Simon Glass (41):
-> > >   x86: Make do_zboot_states() static
-> > >   x86: Rename zboot_run() to zboot_run_args()
-> > >   x86: Drop duplicate definition of zimage_dump()
-> > >   x86: Move x86 zboot state into struct bootm_info
-> > >   x86: Rename state to bmi
-> > >   x86: Move the bootm state for zimage into cmd/
-> > >   bootstd: Correct display of kernel version
-> > >   x86: Drop the unnecessary base_ptr argument to zboot_dump()
-> > >   boot: Use strlcpy() in label_boot()
-> > >   boot: Split pxe label_boot() into two parts
-> > >   boot: Split pxe label_run_boot() into two parts
-> > >   boot: Pass just the FDT argument to label_process_fdt()
-> > >   bootm: Allow building bootm.c without CONFIG_SYS_BOOTM_LEN
-> > >   boot: pxe: Use bootm_...() functions where possible
-> > >   pxe_utils: Simplify default fdt in label_run_boot()
-> > >   boot: pxe: Refactor label_run_boot() to avoid cmdline
-> > >   net: Keep the bootstage functions together
-> > >   net: Tidy up the comments to parse_args()
-> > >   net: Simplify parse_args()
-> > >   net: Return the load address from parse_args()
-> > >   net: Return the address and size from parse_addr_size()
-> > >   net: Return the size from parse_args()
-> > >   net: Refactor part of netboot_common() into a function
-> > >   net: Drop #ifdef in parse_args()
-> > >   net: Provide a function to run network operations
-> > >   boot: Avoid using the cmdline in bootmeth_pxe and pxe cmd
-> > >   pxe: Drop the cmdline parameter
-> > >   pxe: Record the bootflow in the PXE context
-> > >   pxe: Allow skipping the boot
-> > >   test: Update bootm test to restore silent_console
-> > >   bootmeth_extlinux: Move extlinux_info into plat
-> > >   bootmeth_extlinux: Move pxe_context into plat
-> > >   bootmeth: Refactor to put options in a common file
-> > >   bootmeth_pxe: Implement the fallback option
-> > >   bootmeth_pxe: Drop the driver-private data
-> > >   bootmeth_extlinux: Move boot code into common file
-> > >   bootstd: Update extlinux and pxe to allow boot interruption
-> > >   pxe: Collect the FDT in the bootflow
-> > >   pxe: Deal with a missing FDT in the bootflow
-> > >   pxe_utils: Refactor to separate reading from booting
-> > >   bootmeth_extlinux: Refactor extlinux to split boot
-> > >
-> > >  arch/x86/include/asm/zimage.h |  57 +---
-> > >  arch/x86/lib/zimage.c         | 102 ++++---
-> > >  boot/Makefile                 |   6 +-
-> > >  boot/bootm.c                  |   8 +-
-> > >  boot/bootmeth_cros.c          |   6 +-
-> > >  boot/bootmeth_extlinux.c      |  97 +------
-> > >  boot/bootmeth_pxe.c           |  48 ++--
-> > >  boot/ext_pxe_common.c         | 134 +++++++++
-> > >  boot/pxe_utils.c              | 507 +++++++++++++++++++++-------------
-> > >  cmd/bootflow.c                |   8 +-
-> > >  cmd/net.c                     |  92 +++---
-> > >  cmd/pxe.c                     |  30 +-
-> > >  cmd/sysboot.c                 |   4 +-
-> > >  cmd/x86/zboot.c               |  33 ++-
-> > >  include/bootm.h               |  63 ++++-
-> > >  include/bootmeth.h            |   8 +-
-> > >  include/extlinux.h            |  52 +++-
-> > >  include/net-common.h          |  30 ++
-> > >  include/pxe_utils.h           |  56 +++-
-> > >  net/net.c                     |  44 +++
-> > >  test/boot/bootflow.c          |  71 +++++
-> > >  test/boot/bootm.c             |   7 +
-> > >  22 files changed, 957 insertions(+), 506 deletions(-)
-> > >  create mode 100644 boot/ext_pxe_common.c
-> > >
-> > > --
-> > > 2.34.1
-> > >
-> >
-> > Unfortunately it seems there is a bug in here somewhere, in that it
-> > prepends the extlinux file's path to any files which are read, at
-> > least with pxe. So I am going to need to take another look...
-> >
-> > We don't have sandbox tests for this case, unfortunately. At some
-> > point we should try to add some.
->
-> Does the pxelinux test not catch the problem? If not, that would be
-> where to start expanding perhaps.
+On 18:52 Tue 03 Dec     , Marcel Ziswiler wrote:
+> Hi Huan Zhou 
+> 
+> On Fri, 2024-11-29 at 13:37 +0800, Huan Zhou wrote:
+> > From: Kongyang Liu <seashell11234455@gmail.com>
+> > 
+> > Add document for Banana Pi F3 board which based on SpacemiT's K1 SoC.
+> > 
+> > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> > Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
+> > ---
+> >  doc/board/index.rst                |  1 +
+> >  doc/board/spacemit/bananapi-f3.rst | 86 ++++++++++++++++++++++++++++++++++++++
+> >  doc/board/spacemit/index.rst       |  8 ++++
+> >  3 files changed, 95 insertions(+)
+> > 
+> > diff --git a/doc/board/index.rst b/doc/board/index.rst
+> > index 417c128c7af6ad2267ef1bc743c7f10ae70b6de7..367da2d62316d4cab25ecc53f852ef742eba13dd 100644
+> > --- a/doc/board/index.rst
+> > +++ b/doc/board/index.rst
+> > @@ -51,6 +51,7 @@ Board-specific doc
+> >     sipeed/index
+> >     socionext/index
+> >     sophgo/index
+> > +   spacemit/index
+> >     st/index
+> >     starfive/index
+> >     ste/index
+> > diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
+> > new file mode 100644
+> > index 0000000000000000000000000000000000000000..1e6d6ef19be7e25684966bd4a727bd21b147330a
+> > --- /dev/null
+> > +++ b/doc/board/spacemit/bananapi-f3.rst
+> > @@ -0,0 +1,86 @@
+> > +.. SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +Banana Pi F3
+> 
+> Officially they call it Banana Pi BPI-F3.
+> 
+> > +============
+> > +
+> > +Building
+> > +~~~~~~~~
+> > +1. Install the spacemit riscv cross compile toolchain_, or skip it if riscv toolchain is installed.
+> 
+> I would not use a specific such toolchain but rather a regular RISC-V one e.g.
+> 
+> https://github.com/riscv-collab/riscv-gnu-toolchain
+> 
 
-Right...it needs a little more work, but for now I'll have to fix the
-bug, as it's already 41 patches. I might be able to add a smaller
-test, will see.
+I think any riscv toolchain should work fine here, as I'm using Gentoo specific riscv toolchain..
+so consider it's merely an example provided to demonstrate whole process working
 
-Regards,
-Simon
+> > +
+> > +.. _toolchain: https://archive.spacemit.com/toolchain/
+> > +
+> > +2. Setup cross compilation environment variable:
+> > +
+> > +.. code-block:: console
+> > +
+> > +   export CROSS_COMPILE=<riscv64 toolchain prefix, e.g /opt/spacemit/bin/riscv64-unknown-linux-gnu->
+> > +
+> > +3. Before building U-Boot, OpenSBI should be built first. OpenSBI can be
+> > +built for SpacemiT K1 SoC as below:
+> > +
+> > +.. code-block:: console
+> > +
+> > +   git clone https://github.com/cyyself/opensbi -b k1-opensbi
+> > +   cd opensbi
+> > +   make PLATFORM=generic
+> 
+> What speaks against using regular master opensbi?
+> 
+no idea if master of opensbi would work here, we can certainly try..
+but I think it's another story, as we are focusing on mainlining uboot
+
+FWIK, this branch is generally same version as vendor opensbi, but slightly
+ rebase to more recent opensbi version
+
+> > +
+> > +4. Then build U-Boot as following:
+> > +
+> > +.. code-block:: console
+> > +
+> > +   cd <U-Boot-dir>
+> > +   make bananapi-f3_defconfig
+> > +   make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
+> > +
+> > +This will generate u-boot.itb
+> > +
+> > +Booting
+> > +~~~~~~~
+> > +Actually, we can replace the uboot part from bianbu linux which is the bsp_ to validate this patch,
+> > +use `balena etcher` to burn the bianbu-minimal.img to the sd card, 
+> 
+> trailing whitespace
+> 
+> > +and replace the /dev/sdx4 where places the uboot_ with the `u-boot.itb` generated from this patch.
+> > +
+> > +.. _bsp: https://archive.spacemit.com/image/k1/version/bianbu/v2.0/
+> > +.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-firmware-layout
+> > +
+> > +Sample boot log from Banana Pi F3 board
+> 
+> BPI-F3
+> 
+> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > +.. code-block:: none
+> > +
+> > +   try sd...
+> > +   bm:3
+> > +   j...
+> > +
+> > +   U-Boot SPL 2022.10spacemit-dirty (Oct 21 2024 - 09:01:13 +0000)
+> > +   [   0.279] DDR type LPDDR4X
+> > +   [   0.292] lpddr4_silicon_init consume 13ms
+> > +   [   0.293] Change DDR data rate to 2400MT/s
+> > +   [   0.430] ## Checking hash(es) for config conf-1 ... OK
+> > +   [   0.432] ## Checking hash(es) for Image opensbi ... OK
+> > +   [   0.437] ## Checking hash(es) for Image uboot ... OK
+> > +   [   0.443] ## Checking hash(es) for Image fdt-1 ... OK
+> > +   [   0.488] ## Checking hash(es) for config config_1 ... OK
+> > +   [   0.490] ## Checking hash(es) for Image opensbi ... crc32+ OK
+> > +
+> > +
+> > +   U-Boot 2024.10-rc4-00462-g5b138cfcc587-dirty (Nov 28 2024 - 14:56:49 +0800)
+> > +
+> > +   DRAM:  4 GiB
+> 
+> I guess it does not yet detect the amount of RAM available.
+> 
+I would be fine with this, as currently the memory size is hardcoded,
+we should work on follow-up patch to auto probe DDR size, and corret it
+
+> > +   Core:  19 devices, 8 uclasses, devicetree: separate
+> > +   Loading Environment from nowhere... OK
+> > +   In:    serial@d4017000
+> > +   Out:   serial@d4017000
+> > +   Err:   serial@d4017000
+> > +   Net:   No ethernet found.
+> > +   => cpu list
+> > +   0: cpu@0      spacemit,x60
+> > +   1: cpu@1      spacemit,x60
+> > +   2: cpu@2      spacemit,x60
+> > +   3: cpu@3      spacemit,x60
+> > +   4: cpu@4      spacemit,x60
+> > +   5: cpu@5      spacemit,x60
+> > +   6: cpu@6      spacemit,x60
+> > +   7: cpu@7      spacemit,x60
+> > +   => test
+> > +   => 
+> 
+> trailing whitespace
+> 
+> > +
+> > diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
+> > new file mode 100644
+> > index 0000000000000000000000000000000000000000..3fb7d804ac8fc8dd4c7ee67ffc877f9ad323162d
+> > --- /dev/null
+> > +++ b/doc/board/spacemit/index.rst
+> > @@ -0,0 +1,8 @@
+> > +.. SPDX-License-Identifier: GPL-2.0-or-later
+> > +
+> > +SpacemiT
+> > +========
+> > +.. toctree::
+> > +   :maxdepth: 1
+> > +
+> > +   bananapi-f3
+> > 
+> 
+> new blank line at EOF
+> 
+> Cheers
+> 
+> Marcel
+
+-- 
+Yixun Lan (dlan)
+Gentoo Linux Developer
+GPG Key ID AABEFD55
