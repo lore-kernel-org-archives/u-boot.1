@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD1D8E7716E
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 12:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B9AE7716E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 12:53:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ACD2896BA;
-	Wed,  4 Dec 2024 13:47:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A32F896E8;
+	Wed,  4 Dec 2024 13:53:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="prEJZ3A0";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="sDDM5nrM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5EC0896DC; Wed,  4 Dec 2024 13:47:57 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 38166896E8; Wed,  4 Dec 2024 13:53:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFE3C893DB
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:47:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2C99896BA
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:53:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733316469; x=1733921269; i=xypron.glpk@gmx.de;
- bh=/Y0zhX2wObs1OS+bVNcgFeVk1v7l7nIOBSsVO7vjKfE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=prEJZ3A08IZ/0cbx2VyCm5XCZhMoT6h43p2qr9oWMGoHHXh9mW01ovs8SsI4cch2
- HRDqrax2EHZB+PDr1qScghMVtsfMPUCb5bLVF2GQ8jxv/pOv4Omg37e7eFGKcNhgx
- U+FGqfb/Zkp//ut97ihQVSnYkYEAJYbR1yDo/dl+s4OP5r2XTlHEe6L4CEWyJ/H5S
- /w4obpce0RZHS2eMIGxrKTjMErivcxcC332EXB1ufGTmHeuEnNZrOAPzwR+aL9JaG
- n5t0HkFhw9Fl9LhqbgINWiuJMciH3nHALUhq+b9o/qgIdyvtQ13SQ1opw2qL4nvS0
- wN24h6GNzPJvDqtuwA==
+ s=s31663417; t=1733316797; x=1733921597; i=xypron.glpk@gmx.de;
+ bh=iR7IGu2IWicyz1c1XCityGOYzrPBsPKX2unsU/q8biU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=sDDM5nrMR7XnVtwxR3r/0hI/j7JXHhy4jNysgp8HJphiJpcK1/kxzOWj50pHwqfj
+ fSvZE9CjZbGNs3glBDFD1J6htADcO6N7dBMvpCxmenTp9OX7QZFDEE5Vn/3esA7EB
+ cufIkjx/ZMAK8MRXY7XuhpuXNI6VD/M7iT9Nb6Y7h+KLkxj6BKTcSANsnLlzTV4PQ
+ fNXMDK3fT/mI1NMAwDF7CfzrZ/3+G7fopBwSMwiYZ+3ToAw6Zty1JjuO1a283i91P
+ SSb3Z26YWdMuFSS8JGQHZrsCgijBafd5s0FLtRmxo8qo7XiwnjODVsZR1F7LvbVxD
+ b+ksu7BKzKjnWLOtoQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M42nY-1tIonF2zbc-001RCW; Wed, 04
- Dec 2024 13:47:49 +0100
-Message-ID: <c65feed8-a92d-4ea2-8e59-61a3460616f1@gmx.de>
-Date: Wed, 4 Dec 2024 13:47:48 +0100
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzFx-1t1QcO2Ymf-00URHE; Wed, 04
+ Dec 2024 13:53:17 +0100
+Message-ID: <08f00178-cbba-44f1-b9d0-170963b31940@gmx.de>
+Date: Wed, 4 Dec 2024 13:53:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Check for a valid fw_name before auto
- generating GUIDs
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20241203161338.1814537-1-ilias.apalodimas@linaro.org>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241203161338.1814537-1-ilias.apalodimas@linaro.org>
+Subject: [NEXT] Pull request efi-next-2024-12-04
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:r05K8lsJo5RmPqjq/MHSjnEoQCl/faY25ptnXs3hOiiBPnIyPnL
- jRZL01anpuhSsILB7sCuvLIUHtwwPGNz1OfoGrpkIe2gzBcFHfhM0nEHO1P6izh+8maSYWn
- 4vZ2O4IMhosAMvlXk2bsM2H5fxm5CF7U+QGy5zgo1aAXIP5KTfGIklc5wyScrheOBv/kn5m
- BV57STuj0lYc2MP9lrSJg==
-UI-OutboundReport: notjunk:1;M01:P0:yWL44QAIQCU=;P2e0f4Og7YYPyar2ZxLWBhqhz+f
- kPScsq//TxRxCaMTGyQK9dqx2GBETIXxmQa3eBpFNX0afq7+QYxRwVtWYUQmxqgp2Lf3Dulqf
- m57x1OuH8N3fZWUrvFBVKobArtkIr17iG7P4wJQXQ4rZsI++B0vn/iqnUchcVP8QasigyGhJe
- 5buH4S887iVbkCXBH/Np/4Z5H3CqL2TkNMRLBVBaLp7zKsD/z5bIxHbT52zwt2JoiwVV27ihx
- rWcoEKAczrliafT/aHWEuEoL23pt1ukfGRnRZBj+wSYCx7KtXhYTCUxkelx8ewfEXIb4OTbFe
- orSRhMeYK6gKuhGyopA+bQJZDZSRQnK7bzODF6ZpZzN4El4lI1S2TsBtyW3FTio6+5XG7dFvP
- lqXf6Uy6MBaIeXSrEg847pwNemso6DbNhNgiERdbRz/zB68sN6+2Z9Nj0/Iw8rFgY5e1BHs6q
- nTWACZ5fFb9T+9ewk2ukOY3/O9RB993P4zNwpy8U5dNkBMedHXKjCcP4SV/qisel5lQWVTys1
- IghGWQnqi76zlzXnAcjwc0OSjrqcFD69fAfaCG5zjR0GeMrx+oQt2+eOcq+tNF5FP/ykXSFwX
- MqfkWuMM7lpMJyv7QHOv24Ar/jnDNRu/w/iKCqkgitTaMEjBulOIK1o8WaoNRmQPSQDAHUXUp
- e55SgfNGS3v0T0tj3dWYA7iU989iAG35T75kvRAODfPbbGWD28I72FF0U7EQ3AtoBWFWuCwrd
- w8yA1+IIlL2rzzruF71IeNQCP11rb4yZBaA0dZuYCvClQP7sqLm4hauYGjGWkO5wGVCR23mfz
- vOeYQ4crCbyvOE0FVay09M3Fx1EbGOf3/DUCxEV4Sg/zwZnZ+fcLpLZ7LJQ/S9kR79XVs1KtY
- BXkzPsnP8MggQGTdasFdM50yHG26vs/1b13kTtediqkhX8e+xnwwrUrLC1aybejiLzg8NVzsd
- RmqNS814dpgVFsF5cYjBoZkQzWEf0RMMjDYEsLag6hLv6MPQNlym9nmT8sjdkbctmlQwLQt7V
- JQdv9TtSsZgu03+Lc5nUdncJ9bw+cXYuiXMY5EGWNeQ0jk1xlC7Se7F+68NqVpnIOaCbYvZJM
- 9vyqlhRcPMd06iTCDgCaIpwsaVjRvI
+X-Provags-ID: V03:K1:M0d44QnbJcQZS2R65Vk6kHfRYgkgxPP86Holcmt6jXqgubCTDZJ
+ GTJfaXUnZxRaS2w58bMHtY8XKgvF8lg39jZ2BjSuPjc3g/6IkJBjWaRre2tlB6PxgiT/Mba
+ u7HXDhwMTm81cwn1bYxlrp5GXpqp7YJ3Huasq/DILhpsOoetuk7EPvQcN6Mu7x/WN+xgClZ
+ BbEmo57uQRcjbTthR23ow==
+UI-OutboundReport: notjunk:1;M01:P0:UKf9OC4O1gI=;O0SU61oCKdUHE71KFiV0cRPzDXF
+ iexWeJiOwKz8Re037Y4H0lcTVbuFFsO1p/XIv8yUhyfRpLEhHN+z4goE6GPgu1LT5VmK3RMzW
+ nMRdsdIjb9KCpG3nm7Jz6k6DDh/mudAWpdXGc/2xumLqF5HKjY+ooyNFZyHH5ZoHr1jTZ3rMh
+ anICLSezqnP+eVh+185qR1AA6/DoQ7Lbmulm5gn9YgN59joo5pVOutQQQF/aW6Muh3FgNjdkv
+ uftr90/PefStkbWwccksba1/cuYlw2K+7EpZhPGzwrowzJ48KUBL7fpKd/CtTPieluusCxztC
+ /iryKQOZoIW0Fs3Sxo8ZWx7DLEpyuQe25jpv0+tPbboYrt+sdkaCW2/wtFVZuGwQwinH3YT+r
+ m8gbWIaUVfMzTY58HvFEdifNTgx63rpbMI2s0XBOy4PqlQOAIDIh2gK9q3eLIw1B0NA3DDD53
+ Pi0TVFP7RVn9gTOkIwJWaqIed6aFXy/qCUJB42rKtGyO8OA2oHCpGHpLSwBPft+Gc5A/Q7sie
+ vR3tdLuS7A/rr8Nbe/BGlkhniknJohuliRJvuGjG+NzRy0tqHjiDlavQ7uDpYJFE0Dxhnpote
+ wIib8RZOU0V/CWFy5g1nvDNn4l/26upJpGFEycvgsbIMoqgu5GiMdXkIoyBaiQOYKEDNXaowz
+ H+G/BU8y3JwUjTjArqPeW98saqcqE0Oeqp3gLG5nxLjg6LYJDXDzekMguxcOtpYd0qcWG4y1y
+ 16t37u/BlUS3JktsVAYRKULdtF/tcQUrRu6UauthhKCckdif8EvdQWAmtF8Ttj58acFz9nO1l
+ YZPr4aFvqMh3kL6bz+azBeb1RQIv93z6jM1gYqdyReHZNETPr/gCOqk1hvWlqmQ+FpEuE7H6c
+ hvZrRYHKU1hGPbNcZnbPFpho1OxvhFP5+d+1b6eNSTJcEI/vE2uZfOH8v+OOXq8PONleavX0B
+ tVycnkLFAgbXc8Kf0DAsX/AYpgCR7y+dQzsQFurFAMM5IlA6Pa64brda051XzQZP4Vo77LHyD
+ 4C0m0vNaoT64nw/XbHhZ4scogBDBds0MMyA52MYixwPQfPcahsCePUVsTPWYVdxZ6q/zSzvQo
+ a4E1Q4w4GLpL7VEOPfGEmzo+Ji1M8K
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +92,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/3/24 17:13, Ilias Apalodimas wrote:
-> The gen_v5_guid() is a void and does no error checking with pointers
-> being available etc. Instead it expects all things to be in place to
-> generate GUIDs. If a board capsule definition is buggy and does not
-> define the firmware names when enabling capsule updates, the board will
-> crash trying to bring up the EFI subsystem.
->
-> Check for a valid firmware name before generating GUIDs.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Dear Tom,
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+The following changes since commit df863c4aa30ee4e624058f64132b7243c6370ef=
+5:
 
-> ---
->   lib/efi_loader/efi_firmware.c | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware=
-.c
-> index 6650c2b8071d..112775daf4c3 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -281,6 +281,10 @@ static efi_status_t efi_gen_capsule_guids(void)
->   	}
->
->   	for (i =3D 0; i < update_info.num_images; i++) {
-> +		if (!fw_array[i].fw_name) {
-> +			log_err("fw_name is not defined. Not generating capsule GUIDs\n");
-> +			return EFI_INVALID_PARAMETER;
-> +		}
->   		gen_v5_guid(&namespace,
->   			    &fw_array[i].image_type_id,
->   			    compatible, strlen(compatible),
-> -
-> 2.45.2
->
+   Merge tag 'xilinx-for-v2025.04-rc1' of
+https://gitlab.denx.de/u-boot/custodians/u-boot-microblaze into next
+(2024-12-03 15:51:56 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-next-2024-12-04
+
+for you to fetch changes up to 6caec797d5c453ccba5eeb0bc9194c5939094cb4:
+
+   efi_selftest: add test for IPv4 Config2 protocol (2024-12-04 12:24:38
++0100)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23707
+
+=2D---------------------------------------------------------------
+Pull request efi-next-2024-12-04
+
+With this pull request support for the EFI_HTTP_PROTOCOL and
+EFI_IP4_CONFIG2 protocols are added. This allows EFI applications
+to load files via HTTP.
+
+UEFI:
+       add efi_dp_from_ipv4 function
+       add efi_net_set_addr, efi_net_get_addr functions
+       add support for HTTP device path
+       set EFI bootdevice device path to HTTP when loaded from wget
+       add support to send http requests and parse http headers
+       provide EFI_IP4_CONFIG2_PROTOCOL
+       provide EFI_HTTP_PROTOCOL
+       support IPv4() in device path to text protocol
+       provide unit tests for the HTTP and IPv4 Config2 protocols
+
+Network:
+       zero terminate string with headers in wget_fill_info()
+       zero terminate string with headers in wget_lwip_fill_info()
+       pass port and server_name via wget_ctx in lwIP network stack
+       let wget_with_dns work with dns disabled
+
+Others:
+       Add HTTP and IPV4 Config II protocols to UUID library functions.
+
+=2D---------------------------------------------------------------
+Adriano Cordova (14):
+       lwip: wget: pass port and server_name via wget_ctx
+       net-lwip: zero terminate string with headers in wget_lwip_fill_info=
+()
+       net: wget: let wget_with_dns work with dns disabled
+       efi_loader: device_path: add definition of
+DEVICE_PATH_SUB_TYPE_MSG_IPV4
+       efi_loader: device_path: add efi_dp_from_ipv4
+       efi_api: add definitions for HTTP and IP4_CONFIG2 protocols
+       efi_loader: efi_net: add efi_net_set_addr, efi_net_get_addr
+       efi_loader: device_path: add support for HTTP device path
+       efi_loader: net: set EFI bootdevice device path to HTTP when
+loaded from wget
+       efi_loader: net: add support to send http requests and parse http
+headers
+       efi_loader: efi_net: add EFI_IP4_CONFIG2_PROTOCOL
+       efi_loader: efi_net: add EFI_HTTP_PROTOCOL
+       efi_selftest: add test for HTTP protocol
+       efi_selftest: add test for IPv4 Config2 protocol
+
+Heinrich Schuchardt (3):
+       net: zero terminate string with headers in wget_fill_info()
+       efi_loader: add IPv4() to device path to text protocol
+       lib: uuid: display HTTP and IPV4 Config II protocols
+
+  include/efi_api.h                        | 220 +++++++++++++
+  include/efi_loader.h                     |  41 +++
+  include/net-common.h                     |   7 +-
+  lib/efi_loader/Kconfig                   |  17 +
+  lib/efi_loader/Makefile                  |   2 +
+  lib/efi_loader/efi_bootbin.c             |  42 ++-
+  lib/efi_loader/efi_bootmgr.c             |   2 +-
+  lib/efi_loader/efi_device_path.c         | 116 ++++++-
+  lib/efi_loader/efi_device_path_to_text.c |  23 ++
+  lib/efi_loader/efi_http.c                | 548
++++++++++++++++++++++++++++++++
+  lib/efi_loader/efi_ipconfig.c            | 214 ++++++++++++
+  lib/efi_loader/efi_net.c                 | 371 ++++++++++++++++++++-
+  lib/efi_selftest/Makefile                |   2 +
+  lib/efi_selftest/efi_selftest_http.c     | 321 ++++++++++++++++++
+  lib/efi_selftest/efi_selftest_ipconfig.c | 176 ++++++++++
+  lib/uuid.c                               |  14 +
+  net/lwip/wget.c                          |  24 +-
+  net/net-common.c                         |   2 +-
+  net/wget.c                               |  45 ++-
+  19 files changed, 2131 insertions(+), 56 deletions(-)
+  create mode 100644 lib/efi_loader/efi_http.c
+  create mode 100644 lib/efi_loader/efi_ipconfig.c
+  create mode 100644 lib/efi_selftest/efi_selftest_http.c
+  create mode 100644 lib/efi_selftest/efi_selftest_ipconfig.c
 
