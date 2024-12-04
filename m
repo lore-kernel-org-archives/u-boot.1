@@ -4,99 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76CAFE77170
-	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 13:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138E3E7716E
+	for <u-boot@archiver.kernel.org>; Wed,  4 Dec 2024 14:37:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC68289409;
-	Wed,  4 Dec 2024 14:44:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 323B08943E;
+	Wed,  4 Dec 2024 15:37:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oVeQAg0q";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZYQ9DI/8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F343896D2; Wed,  4 Dec 2024 14:44:19 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 3173B8936B; Wed,  4 Dec 2024 15:37:04 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FC1C88D3A
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 14:44:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 191158943E
+ for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 15:37:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DC14E3F5AA
- for <u-boot@lists.denx.de>; Wed,  4 Dec 2024 13:44:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1733319853;
- bh=Z7WQmt4pPixP2gEfkhEIkw1RDhS1gTplUgj0MpyS1c4=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=oVeQAg0q2cq48lZTuJCTBYBnCWdwbSiB/uK4bzhJlwVXk/2N3nnpxT6yyt1yn2JI9
- yy1IPaWoVrzvpE8Y8SC+11KVES0GjnyDUtSJ8YIa8wSyu+0UBnaU+pjgPMCohdwkTt
- 3yGltCv3l+Xc5G28YgoJ7s267lihbEtoVWoQyvlmXn8du5vLMvQdGf3q4ZXnAptaLu
- blGz48/va38K3IvSIlPF3R1M1xDLzLrG/VJRGosM46UqeaFyB41GdtLEbO72+uhNJC
- kUg600Ydh0gz8/2llPj5MSvEvooT9mzrz0S+hxMzJ33oEihnl+SKY9OubjZPB+ZdNL
- 6YPWECssKnP6Q==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-434941aa9c2so38925365e9.3
- for <u-boot@lists.denx.de>; Wed, 04 Dec 2024 05:44:13 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733319853; x=1733924653;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Z7WQmt4pPixP2gEfkhEIkw1RDhS1gTplUgj0MpyS1c4=;
- b=fmVVUPxrFiX+se18nH4gJxqCmfLMQIO+TTkFyiw/q2heROtjHfu+7vy8o2AhZO191z
- ty9x2yS8qe88Yb/Yq7nyqE/PvRGpQAniJly5wlqzPq3b9v7PjxStyhDFelY1vQDBY1A+
- CFmzPyt8Om6AVKt1vVfwtmNhs7ZFEMOWr5jW6IUSZ9BLdAlbRMrDiYys8hnHQYDXpSy5
- pz1VwOjkxVNXgUvhWs63z0XB4R++3HtHGbZuzxMZqM4BaJ2o28z3mFu8UqXjGxQ/ODWy
- fTMrhQd7qYZEDeIG9iEbnsngRpIA88eBKGoEHPDOcVZaWmJbrAzBrHQSs8VnwpfGdX2E
- OWBw==
-X-Gm-Message-State: AOJu0YySoBsO/nOGOjG3V9lnB/+6PC2rvC7ISBqXwPX1MqIKRnRjG02+
- oTlnB1x1Bx5StflDDyt+DbgXDZZY/kPv+aSriEMoWSImgoXsbGayQ6uQoEYA1iFZUoZlomcIgKa
- v86RvO46gp5HlIr+KranpL9sXpnf+xAnDTMqqJvE4BTrz3iJltYpdzJ33miCTJIVSB7w=
-X-Gm-Gg: ASbGncvChSWYyCGzmr3MpQ8nqHVzTg1cWd2d+f6jDkeAlVcGnchQ95dZwVVFUxso9Qn
- xg92JHxDrFzQNIp0n9ncLuCeIuaykPFIDrJfBy4NNnaPeYx12HOxcH6xET0pzSb+j/9DQe/Inp4
- 5EWOJhYKCCwCnMoBNRMtBhYxeq9RBjZg0+RLUd/45uhh1Gviide1qp+D/oPAo8ygI2jtBoQyIqT
- yQaZbPm2NuQKAbwHT4LHYKskzGJ9EwA+UPlZPT9jffR/89uknV56rajF8RdecJuc8UjxfbaS/44
- 4B3I410yU2LZJ84/uiLLy3NsQrzCsp/jNYNWAzgqiusihjU=
-X-Received: by 2002:a05:6000:156e:b0:385:fa2e:a33e with SMTP id
- ffacd0b85a97d-38607c0e1e7mr3724474f8f.43.1733319853414; 
- Wed, 04 Dec 2024 05:44:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGYYUrhtRHQQFcPraKwpEJ74bbMwSzxIZ2yyXi8hJBMWU5dGSuUI82BgJPfcxVUOomhxbYg8g==
-X-Received: by 2002:a05:6000:156e:b0:385:fa2e:a33e with SMTP id
- ffacd0b85a97d-38607c0e1e7mr3724452f8f.43.1733319853078; 
- Wed, 04 Dec 2024 05:44:13 -0800 (PST)
-Received: from [192.168.123.161]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-385e32ee381sm13466018f8f.76.2024.12.04.05.44.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Dec 2024 05:44:12 -0800 (PST)
-Message-ID: <32a48cf9-93e1-4002-9b91-666a66b0098a@canonical.com>
-Date: Wed, 4 Dec 2024 14:44:11 +0100
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id B30225C6147;
+ Wed,  4 Dec 2024 14:36:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56DFEC4CECD;
+ Wed,  4 Dec 2024 14:36:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1733323019;
+ bh=7y0krhgtpmy1Og8JBFqDNd6Rlbn1zacHJjqxcFmz3AQ=;
+ h=Date:From:Subject:To:Cc:References:In-Reply-To:From;
+ b=ZYQ9DI/8bQDHHNuHjVB06+v0pW+qMYvtdCSbTUwfd7pE7EBxEAaQWKJbFM+I39KhG
+ D+VX7wBc3agAKChVhLLvuSkI5R2PQu/zbshUpl5KP3XW0EUmrQySq9wV1zB+YqiQXY
+ X4JWO4IuIDcVcDEfvtm0pHCFqDc2xrAnaMSEAlf2mcnxF7cqviMeExwU8E5P6I2IAe
+ Jae8W+j2p6Ic6FabFkDIfOP5cv6Nln/RyQlweihyXCiIyy+g6jP58C1afwTi8Lqzc+
+ hcOHL4KH5ffvGa9TPGd+FXoeyLRMzSgEc5hJQnikMqv4/uzEuvmS4sU+4U5DkktA7d
+ R9EbmAxtVn5Nw==
+Message-ID: <97c32006-1607-45f8-a51b-a67892742f55@kernel.org>
+Date: Wed, 4 Dec 2024 16:36:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] examples: use QEMU compatible LOAD_ADDR on 32-bit ARM
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20241123084853.59252-1-heinrich.schuchardt@canonical.com>
- <20241123152447.GZ3600562@bill-the-cat>
- <CAM=mAO=zNaaBMFzcqyek8OTZfLbD26gw+OMH2eB8dMgYJXfa5g@mail.gmail.com>
- <20241123225541.GA3600562@bill-the-cat>
- <69ff1a82-e887-4950-bd06-c8e16f776f8a@canonical.com>
- <20241123231418.GB3600562@bill-the-cat>
+From: Roger Quadros <rogerq@kernel.org>
+Subject: Re: [PATCH v2 1/2] usb: dwc3-generic: set "mode" based on caller of
+ dwc3_generic_probe()
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: vigneshr@ti.com, bb@ti.com, trini@konsulko.com, marex@denx.de,
+ hnagalla@ti.com, mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, jan.kiszka@siemens.com, j-humphreys@ti.com,
+ nm@ti.com, u-boot@lists.denx.de, srk@ti.com
+References: <20241203093748.138260-1-s-vadapalli@ti.com>
+ <20241203093748.138260-2-s-vadapalli@ti.com>
+ <9254b268-2336-48ca-91de-9da34a93b467@kernel.org>
+ <6hohujytkznjcemgu2cjhk2x5pxw7euwzojbt6ktji2yp6zft2@i77rsmzwfgj5>
+ <5bd5c98c-530b-4f05-9fbc-e2d867be920a@kernel.org>
+ <dj32jyfvxsds6wsax4tk7kw75zfiutggd5gfbwpklym7gifjih@awk6aerfjwl2>
+ <6b4cb5ed-3d19-4fb2-aba7-90f0a0f4f4f0@kernel.org>
+ <4cgkdnpdn7j5tnfwvvskm3ltiqfnp5lx5gc5hwcrsljpg4bdin@hpkkswe4dej6>
+ <9a69d8ae-221b-4d46-9b4c-7df0bd6fc0af@kernel.org>
+ <ftdjegd5mctcn3ndvgrl4apyxkzms7hxivxlyjcrk4qrmvsx7r@og3t7eyyhmkt>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20241123231418.GB3600562@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <ftdjegd5mctcn3ndvgrl4apyxkzms7hxivxlyjcrk4qrmvsx7r@og3t7eyyhmkt>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -114,69 +82,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/24/24 00:14, Tom Rini wrote:
-> On Sat, Nov 23, 2024 at 11:59:36PM +0100, Heinrich Schuchardt wrote:
->> On 11/23/24 23:55, Tom Rini wrote:
->>> On Sat, Nov 23, 2024 at 07:23:35PM +0100, Heinrich Schuchardt wrote:
->>>> Tom Rini <trini@konsulko.com> schrieb am Sa., 23. Nov. 2024, 16:24:
->>>>
->>>>> On Sat, Nov 23, 2024 at 09:48:53AM +0100, Heinrich Schuchardt wrote:
->>>>>> On many 32-bit ARM boards including QEMU memory starts at 0x40000000.
->>>>>
->>>>>>
->>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>>>> ---
->>>>>>    examples/api/Makefile | 4 ----
->>>>>>    1 file changed, 4 deletions(-)
->>>>>>
->>>>>> diff --git a/examples/api/Makefile b/examples/api/Makefile
->>>>>> index 722c7e45904..f0f107562f1 100644
->>>>>> --- a/examples/api/Makefile
->>>>>> +++ b/examples/api/Makefile
->>>>>> @@ -9,11 +9,7 @@ ifeq ($(ARCH),powerpc)
->>>>>>    LOAD_ADDR = 0x40000
->>>>>>    endif
->>>>>>    ifeq ($(ARCH),arm)
->>>>>> -ifdef CONFIG_64BIT
->>>>>>    LOAD_ADDR = 0x40400000
->>>>>> -else
->>>>>> -LOAD_ADDR = 0x1000000
->>>>>> -endif
->>>>>>    endif
->>>>>>    ifeq ($(ARCH),mips)
->>>>>>    ifdef CONFIG_64BIT
->>>>>
->>>>> If we're going to start cleaning this area up and expecting it to work
->>>>> more broadly, is there a reason we can't use CONFIG_SYS_LOAD_ADDR or
->>>>> CONFIG_STANDALONE_LOAD_ADDR here?
->>>>>
->>>>
->>>> loadaddr == CONFIG_SYS_LOAD_ADDR on RISC-V QEMU. Command bootelf did not
->>>> work for me, if the ELF binary had been loaded to its LOAD_ADDR.
->>>>
->>>> I did not investigate yet why bootelf fails in this case.
->>>
->>> The examples, broadly speaking, do not run out of the box since they
->>> assume an address to be loaded in to memory at and run from, rather than
->>> a Kconfig entry. The next problem for RISC-V is that, well, there's no
->>> api/api_platform-riscv.c file (and forever ago I steered people away
+
+
+On 04/12/2024 15:37, Siddharth Vadapalli wrote:
+> On Wed, Dec 04, 2024 at 02:34:56PM +0200, Roger Quadros wrote:
 >>
->> https://patchwork.ozlabs.org/project/uboot/patch/20241123084754.59182-2-heinrich.schuchardt@canonical.com/
 >>
->> provides api_platform.c for RISC-V. This patch is only about ARM.
+>> On 04/12/2024 12:05, Siddharth Vadapalli wrote:
 > 
-> Yeah. For everyone we need to move this to Kconfig and it should likely
-> be STANDALONE_LOAD_ADDR being re-used and not a new symbol. Hard coded
-> might-work addresses are a leftover of pre-Kconfig days.
+> [...]
 > 
+>>> Why not do what this patch does? What is the issue with the current
+>>> patch (apart from the checks, which I could retain as well if others
+>>> wish so)? The caller clearly mentions the expected role, so why not use
+>>> that?
+>>
+>> Because the patch is more complicated than it needs to be, now that we know:
+>> 1) generic_host_probe() will only be called when dr_mode is "host",
+>> 2) generic_peripheral_probe() will only be called when dr_mode is "peripheral"
+>> or "otg".
+>>
+>> The problem case is generic_peripheral_probe() being called with when
+>> dr_mode is "otg".
+> 
+> We can also be sure that generic_periperhal_probe() expects dr_mode to
+> be "peripheral" only and not "otg". So why not fix it at the root, which
 
-The following seems to work in the Makefile:
+generic_peripheral_probe() expects nothing from dr_mode.
+It just expects the USB controller to work in peripheral mode.
 
-LOAD_ADDR:=${shell printf 0x%X $$(( $(CONFIG_SYS_LOAD_ADDR) + 0x3000000 ))}
+dr_mode is just a reflection of platform/device-tree dr_mode. Let's keep it
+that way and not abuse dr_mode to "peripheral" when it is actually "otg".
 
-I just need to check which offset to use.
+> is what this patch does? Independent of the issue, is the following a
+> valid use-case?
+> 
+> generic_peripheral_probe() with plat->dr_mode = "otg" and hence
+> generic_probe() using "otg" rather than "peripheral"
 
-Best regards
+It is a valid use case. The Platform says that the port is "otg"
+i.e. (plat->dr_mode ="otg")
+and the user says he wants to use it as peripheral
+i.e. (by invoking generic_peripheral_probe())
+Don't you see this as valid.
 
-Heinrich
+> as is the case now. Is this resulting in something functional for other
+> users of the USB Designware Controller? If the user requests "peripheral"
+> mode of operation, will "otg" meet the user's requirement? If yes, I have
+> no further objections. Irrespective of this, if you believe that the fix
+> should be in the core as you indicated below, please feel free to post
+> the patch.
+
+Let's look at this from the other way around.
+Why do you not agree that the fix should be in core.c and abusing dr_mode
+is the correct way to go?
+
+> 
+>>
+>> Another alternative could be to override dr_mode to "peripheral" if
+>> it was "otg" in dwc3_generic_probe before calling dwc3_init() but
+>> I don't prefer that as we are loosing platform information here
+>> and it will have to be reverted when dual-role support is added in core.c.
+>>
+>> So better to deal with this in core.c and add a note why we are doing it.
+>>
+> 
+> [...]
+> 
+> Regards,
+> Siddharth.
+
+-- 
+cheers,
+-roger
 
