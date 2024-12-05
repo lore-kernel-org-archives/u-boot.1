@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80742E77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94666E7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD19A8949D;
-	Thu,  5 Dec 2024 10:24:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 309778919A;
+	Thu,  5 Dec 2024 10:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Qa3+R9cN";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="QM0aaQQT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91EE88EF7; Thu,  5 Dec 2024 10:24:57 +0100 (CET)
+ id A415989497; Thu,  5 Dec 2024 10:25:00 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F9F589499
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0364C88EF7
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390693; x=1764926693;
+ t=1733390698; x=1764926698;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=qkfbHla2Gl+pR5l5Fi/xM3dRsvaJ376SILegr4fAYzM=;
- b=Qa3+R9cNc11WdRMMaWPBE1o9+ew1In+ZFhSkZNnma1Ujzl5UirqSl6U3
- /gb3AHsICi1EJ62vaekDISv9+fz6nfxBKxkIVG2lrVN/Stxv4+/y9U1pA
- TAlav1zR8FdASckPvN2s7OyjQK1fbVang0kVNUxcDPijvqeMviOaTnla5
- zVd1SORURIArpS3ht+2PN6vWFtA2W+s7ceOyB1FRpmbwcGVpL7bAnkV9k
- LoNaqbxDnn0+8sWeClaZNDXK9QxsM4+N5XZjNRSAA+lj3w8rpiMf+ILB0
- NOH2rnhobKe6G4sEQrgzofqlh2+9w04MHQV/2bqZxPnvM0DlYAGq+9106 Q==;
-X-CSE-ConnectionGUID: Y7kFf1esSn6vzScQt/9D7Q==
-X-CSE-MsgGUID: cBO11k8dRtGO41P/W2Jf3w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610391"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610391"
+ bh=CmloqA78abXHt45BvMWNdZj2Y4X71ER3jLIp+u2uUx4=;
+ b=QM0aaQQTqhRAMAoT1blEa6HrVbI5s1MDg9E+b/d5mt6uEN+OCssBkEoX
+ G24CnJQrAKGbJvU+H5EP2iPVq8pr5leQzjS1FP8PR2L0bQNIzL2FkQC8l
+ koy2B8LSDQXjFAXsF2svaFT+E4noYAmeanS1dVgCX1PVRzlzXIwrwgKzu
+ 6h4BAi2OWd+1HDUDgGrmKs6NUwl+3hC+nT98/JoYF4UzJ+7RzfT3+tAxT
+ waBzhZodgS4m1rQCSwJ1JZpRTiQTXCqLb+Iiu9+ExN2fy6ZJcnVA8Bth7
+ nrgK7u3ytm9gDX8UFFcONP4hUypM+397acefQiwKbl2QNI0UNufUSVXaD g==;
+X-CSE-ConnectionGUID: hI3O06bkQv2DGkWiVkZyQg==
+X-CSE-MsgGUID: pRBo4NEbS0+Bf/SeAIiI9Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610402"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610402"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:24:52 -0800
-X-CSE-ConnectionGUID: Y/qw7FWBTP+0YczJSRJ8/Q==
-X-CSE-MsgGUID: DLodAnIpS8CVVw9YHup6EA==
+ 05 Dec 2024 01:24:57 -0800
+X-CSE-ConnectionGUID: zShVQe1vTSSW/2inF9thBg==
+X-CSE-MsgGUID: IwUMtmKRTZatFzNrG98I1w==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122080"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122090"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:48 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:53 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 16/19] drivers: mtd: nand: spl: Add support for nand SPL
- load image
-Date: Thu,  5 Dec 2024 17:23:12 +0800
-Message-Id: <20241205092315.25060-17-dinesh.maniyam@intel.com>
+Subject: [resend v2 17/19] drivers: mtd: nand: Enabled Kconfig and Makefile
+ for Cadence-SPL
+Date: Thu,  5 Dec 2024 17:23:13 +0800
+Message-Id: <20241205092315.25060-18-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,86 +95,50 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Add support for spl nand to load binary image from NAND
-to RAM. Leverage the existing nand_spl_load_image from nand_spl_loaders.c
+Enable the Kconfig and Makefile for the Cadence-Nand
+SPL support in agilex5 family device.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
-- Leverage the existing nand_spl_load_image from nand_spl_loaders.c
 ---
 ---
- drivers/mtd/nand/raw/cadence_spl.c | 59 ++++++++++++++++++++++++++++++
- 1 file changed, 59 insertions(+)
- create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
+ drivers/mtd/nand/raw/Kconfig  | 7 +++++++
+ drivers/mtd/nand/raw/Makefile | 1 +
+ 2 files changed, 8 insertions(+)
 
-diff --git a/drivers/mtd/nand/raw/cadence_spl.c b/drivers/mtd/nand/raw/cadence_spl.c
-new file mode 100644
-index 0000000000..682ce2c512
---- /dev/null
-+++ b/drivers/mtd/nand/raw/cadence_spl.c
-@@ -0,0 +1,59 @@
-+// SPDX-License-Identifier:     GPL-2.0
-+/*
-+ * Copyright (C) 2024 Intel Corporation <www.intel.com> 
-+ */
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 709c85c6e5..a9515c7b74 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -801,6 +801,13 @@ config SPL_NAND_AM33XX_BCH
+ 	  so those platforms should use CONFIG_SPL_NAND_SIMPLE for enabling
+ 	  SPL-NAND driver with software ECC correction support.
+ 
++config SPL_NAND_CADENCE
++	bool "Support Cadence NAND controller for SPL"
++	depends on SPL_NAND_SUPPORT
++	help
++	  This is a small implementation of the Cadence NAND controller
++	  for use on SPL.
 +
-+#include <cadence-nand.h>
-+#include <dm.h>
-+#include <hang.h>
-+#include <nand.h>
-+#include <system-constants.h>
-+
-+/* Unselect after operation */
-+void nand_deselect(void)
-+{
-+	struct mtd_info *mtd;
-+	struct nand_chip *chip;
-+
-+	mtd = get_nand_dev_by_index(nand_curr_device);
-+	if (!mtd)
-+		hang();
-+	chip = mtd_to_nand(mtd);
-+
-+	if (chip->select_chip)
-+		chip->select_chip(mtd, -1);
-+}
-+
-+static int nand_is_bad_block(int block)
-+{
-+	struct mtd_info *mtd;
-+	struct nand_chip *chip;
-+	loff_t ofs = block * CONFIG_SYS_NAND_BLOCK_SIZE;
-+
-+	mtd = get_nand_dev_by_index(nand_curr_device);
-+	if (!mtd)
-+		hang();
-+	chip = mtd_to_nand(mtd);
-+
-+	return chip->block_bad(mtd, ofs);
-+}
-+
-+static int nand_read_page(int block, int page, uchar *dst)
-+{
-+	struct mtd_info *mtd;
-+	int page_addr = block * SYS_NAND_BLOCK_PAGES + page;
-+	loff_t ofs = page_addr * CONFIG_SYS_NAND_PAGE_SIZE;
-+	int ret;
-+	size_t len = CONFIG_SYS_NAND_PAGE_SIZE;
-+
-+	mtd = get_nand_dev_by_index(nand_curr_device);
-+	if (!mtd)
-+		hang();
-+
-+	ret = nand_read(mtd, ofs, &len, dst);
-+	if (ret)
-+		printf("nand_read failed %d\n", ret);
-+
-+	return ret;
-+}
-+#include "nand_spl_loaders.c"
+ config SPL_NAND_DENALI
+ 	bool "Support Denali NAND controller for SPL"
+ 	depends on SPL_NAND_SUPPORT
+diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
+index 4ad1a2037f..58fde3272f 100644
+--- a/drivers/mtd/nand/raw/Makefile
++++ b/drivers/mtd/nand/raw/Makefile
+@@ -10,6 +10,7 @@ NORMAL_DRIVERS=y
+ endif
+ 
+ obj-$(CONFIG_SPL_NAND_AM33XX_BCH) += am335x_spl_bch.o
++obj-$(CONFIG_SPL_NAND_CADENCE) += cadence_spl.o
+ obj-$(CONFIG_SPL_NAND_DENALI) += denali_spl.o
+ obj-$(CONFIG_SPL_NAND_SIMPLE) += nand_spl_simple.o
+ obj-$(CONFIG_SPL_NAND_LOAD) += nand_spl_load.o
 -- 
 2.19.0
 
