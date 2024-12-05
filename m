@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7AB2E7716E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 21:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04916E7716E
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 21:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E20B48919B;
-	Thu,  5 Dec 2024 22:14:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 859078952A;
+	Thu,  5 Dec 2024 22:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bcVcTLNn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p5zTtca+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E2A78952A; Thu,  5 Dec 2024 22:14:18 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 90AC88955E; Thu,  5 Dec 2024 22:14:54 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E86DE8907B
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 22:14:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 931A5894F9
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 22:14:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-434ab938e37so9802345e9.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 13:14:15 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4349e1467fbso9901915e9.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 13:14:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733433255; x=1734038055; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733433292; x=1734038092; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=uWF2XwhYnF9NFc8RtT3fCpEm4M1OS5EQbwKivMSAuvg=;
- b=bcVcTLNnKKMaWaKqoSl2DBvxgtzp9NrTqBvVDlKaqTwevP1wP7+ntu0VwoJ2H442GE
- F2O7iDqOBjuWjQmeJLhIqaqj07OsImyGW/h3gVaq+vkc29b2P5KBzzf4wfxMba+L0Mbx
- 9OxmHihFqHutcpTPWjkQ85x1/YUPVZoKlySUUnYT7Wt50QJle0MN8jAH/T0hB+SriKXp
- IoL5am7xunuhE3ku+ojAe1oojIbILYv1WrxwGvXTQw7DcngVpBrzWulU4zVkbVrFF++2
- SqZqQlBGqylX6VO6ICAsg98TF0IcsJsrVyWz1a/w/zHmVY2kqLkRj1N2A6khjNYGT1QY
- jc6Q==
+ bh=BfRlEP9BWxZ8CSWbn5Gz18aq8rE2bifcU/9CiyIlO1E=;
+ b=p5zTtca+vP+BdBgwUNbc3yXms/4lBmmUkKfTQMpY1di6i7TMBtTGf0G366rnXMkDxk
+ SgZPkPbw2ZoKMDWuvn/8FdSdV2SBaoE7szAauAXgvVtiILT9+WQNqRlDAsaXYCnv/edi
+ rtWHB/73RB8blJKKupxJsXpiBUr5zrVpJ1AudY8PSvAGtzTthTZAzIKT7UxreXICq8tN
+ RFcyKXgfmaeuO/s3sTuE/GANAJYBodi8YX2nu52429yADgVSxvMvimMA6jXRw3cWkHHq
+ T+i0pfM7nwNQjvCgGXBzBXfKSUyDRdTZaybPQBXDEaonItWGCcKoE2WT4Wj2JDWJiY3Z
+ I5pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733433255; x=1734038055;
+ d=1e100.net; s=20230601; t=1733433292; x=1734038092;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uWF2XwhYnF9NFc8RtT3fCpEm4M1OS5EQbwKivMSAuvg=;
- b=iMFYi4Q4hHXqM8Y3jWwb6p/0s50sFOZ6KXMuj1UTSTbVrV4fShwEtElrQoHybaqIDW
- aMpVwE53+VL7Wh4y69CMWSyuB1PuxbVn+NhjMx15M0BnyuqAogBXjBcPxaNuEf1q6nHj
- DZ22ozqlB0IMYZOjEJ2UzjsdcBLA1eu1jAw6BC9ooVmc6jCvzsuf3dSCoh+fUIfJYJNZ
- huhGOF+/GUUcXD+OVN+eGRnR2DVKM5kNxvRDX5t8k6Nbzq1sAmWCe4kgH6JIfz6AzxpC
- NowTsTyLKVspM2aURVAW3sduKl/Xf8qtJ75EuYaDMQP1MK/74WY/7ylc2q41kHgzf2WW
- Lt1Q==
+ bh=BfRlEP9BWxZ8CSWbn5Gz18aq8rE2bifcU/9CiyIlO1E=;
+ b=MvfJ458UJXkKRW8alhQLNXxtRG4VgYvj3MaOZqdNl6lp1peQG0louhW8kEAoeZu5sc
+ 3I12XXyKdAOsTAZ54N1wvuHhE7mCdFRJcOpKwZZJs2HIqYT3cFAAzKaXaS7cc53St5kv
+ IuqAZO0h7GWOKfPNp6XATS0sdq8nhBCrvBGtDIYovmaO88k0w/ssFqenqN85tHzu+FBN
+ L2ZzzPBoOPloNseV193E/SEn3ShfF2HEd2xEHT+V8fQdWl40aImMoyJvXzwNE8pj1bqO
+ 7urSLFIDnyO1hFOUV6FU5vdL+nmeL1ZJlHxDw4NLPfbkCmGy7rEVhccW7pITK/aE7Vpd
+ hsUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2mQZtimtImNVSWZM7ERLLIAnoIW/3ySyJLVqMWsmFY1chzfFLXuKkGi9mBbPI/EqPcjRYgPM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyRqo2mGgQ9fvDaoE4zouPCNPxLdnZTF+ldMS3bZxPuOPRWcn3r
- X5hkI0EzovzZs4aosneTza+vgpiYJeJdb7m704srvnSfCJWrwjyzmG9VOQf7rnU=
-X-Gm-Gg: ASbGncv5Nf2qjksJCQQBZHlHGfRQLR6jIqzq8J4peKIN57YBydQ30J61BgK53p+gKw0
- sNfw6QQDAYdYjriQX7dMEUmL+MAHubuhlU8puQFfASGI39+puj+0so6iBwWkaDBqA+DNM0l2prK
- WpNsNkzB28+zGfSyWRt7kB63HldgRUQcfVYXNqO5iQ2BtjzO7C07OWxZn1e+LmEP6o5XYqLWNAT
- Q/TT9eacr1tARhrIKL3EbPyHNnVKIPqtn9znFglMWtdBA4Hpljunu2qOR3Gb17VERBFlhGHxKbv
- WwjXQWqJWBZHAVlt8dJjoBYmBn2irw==
-X-Google-Smtp-Source: AGHT+IECWzkZi0yuS7Ve8Mt4DNaJLfdRr6oIPkvXfqLBxlL1IPobYKhwekXhK4wre8Wg6ok6NEo/TA==
-X-Received: by 2002:a05:600c:3ca3:b0:434:a367:2bd9 with SMTP id
- 5b1f17b1804b1-434ddeb6731mr6628815e9.14.1733433255306; 
- Thu, 05 Dec 2024 13:14:15 -0800 (PST)
+ AJvYcCV8wE/2tzCGMShoJH6KW5HWzxWS9a7AVbDWueY5F6o4vAPkmhyx+yptR4VU5Dh6PwTokkfwl40=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6aWynzNy9Mv4qsVDJoBxZ0OM33bBthMvH8cJvB5NqHdnsbGF6
+ 8bAQYIgDxnR7QRsszP8tRFnAW+Y+GP/bW4DId1hMiGxl0cMln7x38LAjvah3Xtw=
+X-Gm-Gg: ASbGnct83D+ORgjQfPHjwIvNQbIMSiIWV25tZzksdatz1LJjOoOYBI7UJTPtEyQw1C/
+ gWhWGA8G7b4nfowGzV699bscKjrCSJfNTS9tjV23h/Aqp6bSztagzaYsIvqKKuJxyneJHLx4Y0r
+ r13vO2yhorzOfDiex22bTYgFJs2gRw87oQjyTL3E4ScVBjChrPWlWjV1BZKv1F4bYFy37wfScVx
+ yQAv/t8OdrnCMwcOrgOOW0du4rZBOzHi3SX+n/fSLymvGwYKvtg32ppjlHFYcNhLiIB5amvglw4
+ 1m2pOI4z5nZ2GC6/amUURgi1Baap+A==
+X-Google-Smtp-Source: AGHT+IHC3JLoQ1rVuWASxw82PIQP/CNBxbyJVhQld2Kzx403YGZu3TgNyyu1blrs+h2UIH3b306HlA==
+X-Received: by 2002:a05:600c:1d85:b0:434:9fb5:fddd with SMTP id
+ 5b1f17b1804b1-434ddecfeb0mr5872025e9.23.1733433292090; 
+ Thu, 05 Dec 2024 13:14:52 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:4d66:aea6:b365:82f1?
  ([2a01:e0a:3cb:7bb0:4d66:aea6:b365:82f1])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434d04defb7sm77800045e9.0.2024.12.05.13.14.14
+ 5b1f17b1804b1-434da119abbsm37728825e9.43.2024.12.05.13.14.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Dec 2024 13:14:15 -0800 (PST)
-Message-ID: <319aa51a-04cb-4d0b-a2f5-ce16a0db4d06@linaro.org>
-Date: Thu, 5 Dec 2024 22:14:14 +0100
+ Thu, 05 Dec 2024 13:14:51 -0800 (PST)
+Message-ID: <74a3c413-4ab1-4c49-8bec-fdec66010ec7@linaro.org>
+Date: Thu, 5 Dec 2024 22:14:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] net: lwip: check if network device is available in
- do_dhcp
+Subject: Re: [PATCH 1/1] net: lwip: do not return CMD_RET_USAGE if no interface
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
+References: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,46 +105,30 @@ X-Virus-Status: Clean
 
 
 
-On 12/5/24 20:17, Heinrich Schuchardt wrote:
-> eth_get_dev() returns NULL if no network device is available.
-> Not checking the return value leads to a crash when the device
-> pointer is dereferenced.
+On 12/5/24 20:32, Heinrich Schuchardt wrote:
+> If the dns command cannot find a network interface, we should return
+> CMD_RETFAIURE and not -1 (CMD_RET_USAGE).
+
+CMD_RET_FAILURE
+
 > 
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  net/lwip/dhcp.c | 10 +++++++++-
->  1 file changed, 9 insertions(+), 1 deletion(-)
+>  net/lwip/dns.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
-> index 9b882cf5b87..e7d9147455c 100644
-> --- a/net/lwip/dhcp.c
-> +++ b/net/lwip/dhcp.c
-> @@ -3,6 +3,7 @@
+> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+> index 4b937feaee1..1de63c9998b 100644
+> --- a/net/lwip/dns.c
+> +++ b/net/lwip/dns.c
+> @@ -56,7 +56,7 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
 >  
->  #include <command.h>
->  #include <console.h>
-> +#include <log.h>
->  #include <dm/device.h>
->  #include <linux/delay.h>
->  #include <linux/errno.h>
-> @@ -112,10 +113,17 @@ static int dhcp_loop(struct udevice *udev)
->  int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->  {
->  	int ret;
-> +	struct udevice *dev;
->  
->  	eth_set_current();
->  
-> -	ret = dhcp_loop(eth_get_dev());
-> +	dev = eth_get_dev();
-> +	if (!dev) {
-> +		log_err("No network device\n");
+>  	netif = net_lwip_new_netif(udev);
+>  	if (!netif)
+> -		return -1;
 > +		return CMD_RET_FAILURE;
-> +	}
-> +
-> +	ret = dhcp_loop(dev);
->  	if (ret)
->  		return ret;
+>  
+>  	dns_init();
 >  
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
