@@ -4,50 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2BBFE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5532CE77173
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:58:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20DBA89512;
-	Thu,  5 Dec 2024 19:57:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92A1589523;
+	Thu,  5 Dec 2024 19:58:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11AF98950D; Thu,  5 Dec 2024 19:57:04 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id B191889524
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:57:00 +0100 (CET)
+ id 92D1689523; Thu,  5 Dec 2024 19:58:45 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id DFE4B89528
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:58:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: hsup+96UTiuhSoieJu8GBg==
-X-CSE-MsgGUID: gu0jEg8lRcWetCSBJrj9mA==
+X-CSE-ConnectionGUID: q8aDW5xQR4+DycAKZoYS9A==
+X-CSE-MsgGUID: GjqPMb3dQE2Os4Hk5N8ltg==
 X-IronPort-AV: E=Sophos;i="6.12,211,1728918000"; 
- d="asc'?scan'208";a="231009525"
+ d="asc'?scan'208";a="227032862"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 06 Dec 2024 03:56:58 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 03:58:41 +0900
 Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id A82E14061976;
- Fri,  6 Dec 2024 03:56:56 +0900 (JST)
-Message-ID: <4ac15e06-46de-4d7d-8e82-83d6c0627776@bp.renesas.com>
-Date: Thu, 5 Dec 2024 18:56:55 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 62B7F4061964;
+ Fri,  6 Dec 2024 03:58:28 +0900 (JST)
+Message-ID: <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
+Date: Thu, 5 Dec 2024 18:58:27 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] net: phy: Port set/clear bits from Linux
+Subject: Re: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
 Content-Language: en-GB
-To: Quentin Schulz <quentin.schulz@cherry.de>,
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
- <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
+ <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
+ <3cc475db-8546-4855-991c-5e678bef0fef@cherry.de>
+ <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
+In-Reply-To: <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------nT2K0a4Zf0g94E40GStpIAE7"
+ boundary="------------pzjYGGpLE3kz834MAnQO5LRT"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,95 +68,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------nT2K0a4Zf0g94E40GStpIAE7
-Content-Type: multipart/mixed; boundary="------------B0BtaVdfozhRNfCcz2DolwL0";
+--------------pzjYGGpLE3kz834MAnQO5LRT
+Content-Type: multipart/mixed; boundary="------------rMvlaK8udDzC7CJvg8QVnmOl";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Quentin Schulz <quentin.schulz@cherry.de>,
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-Message-ID: <4ac15e06-46de-4d7d-8e82-83d6c0627776@bp.renesas.com>
-Subject: Re: [PATCH v2 1/4] net: phy: Port set/clear bits from Linux
+Message-ID: <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
+Subject: Re: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
 References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
- <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
-In-Reply-To: <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
+ <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
+ <3cc475db-8546-4855-991c-5e678bef0fef@cherry.de>
+ <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
+In-Reply-To: <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
 
---------------B0BtaVdfozhRNfCcz2DolwL0
-Content-Type: multipart/mixed; boundary="------------ttAWW9AUBS70Osjrj0QlDPOx"
+--------------rMvlaK8udDzC7CJvg8QVnmOl
+Content-Type: multipart/mixed; boundary="------------KXunpHuGed2JMPkCSxEgn7lB"
 
---------------ttAWW9AUBS70Osjrj0QlDPOx
+--------------KXunpHuGed2JMPkCSxEgn7lB
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 25/11/2024 16:42, Quentin Schulz wrote:
-> Hi Paul,
->=20
-> On 11/20/24 10:49 AM, Paul Barker wrote:
->> To simply porting phy drivers from Linux to U-Boot, define
->> phy_set_bits() and phy_clear_bits() functions with a similar API to
->> those used in Linux.
->>
->> The U-Boot versions of these functions include the `devad` argument
->> which is not present in the Linux versions, to keep them aligned with
->> the other phy functions in U-Boot.
->>
->> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Changes v1->v2:
->>    - Split out of series adding RZ/G2L Ethernet support [1]
->>    - Added Marek's Reviewed-by tag
->>
->> [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@b=
-p.renesas.com/
->>
->>   include/phy.h | 22 ++++++++++++++++++++++
->>   1 file changed, 22 insertions(+)
->>
->> diff --git a/include/phy.h b/include/phy.h
->> index 36785031eeb0..510b0a21831b 100644
->> --- a/include/phy.h
->> +++ b/include/phy.h
->> @@ -333,6 +333,28 @@ int gen10g_startup(struct phy_device *phydev);
->>   int gen10g_shutdown(struct phy_device *phydev);
->>   int gen10g_discover_mmds(struct phy_device *phydev);
->>  =20
->> +/**
->> + * phy_set_bits - Convenience function for setting bits in a PHY regi=
-ster
->> + * @phydev: the phy_device struct
->=20
-> Please document devad parameter here as well?
+Hi Marek, Quentin,
 
-Ah, I forgot to add devad to the documentation comment when I added it
-to the function signature. I'll do that for v3.
-
+On 01/12/2024 18:57, Marek Vasut wrote:
+> On 11/25/24 6:23 PM, Quentin Schulz wrote:
 >=20
->> + * @regnum: register number to write
->> + * @val: bits to set
->> + */
->> +static inline int phy_set_bits(struct phy_device *phydev, int devad, =
-u32 regnum, u16 val)
->> +{
->> +	return phy_modify(phydev, devad, regnum, 0, val);
->> +}
->> +
->> +/**
->> + * phy_clear_bits - Convenience function for clearing bits in a PHY r=
-egister
->> + * @phydev: the phy_device struct
+> [...]
 >=20
-> Please document devad parameter here as well?
+>>> @@ -446,6 +474,10 @@ static int ksz9131_config(struct phy_device *phy=
+dev)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 return ret;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0 ret =3D ksz9131_led_errata(phydev);
+>>> +=C2=A0=C2=A0=C2=A0 if (ret < 0)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>>> +
+>>
+>> This seems to work but is happening a bit late.
+>>
+>> Indeed, I need something to call the network stack for this to be=20
+>> happening. Meaning until I e.g. run `dhcp` in the CLI, the LED is stil=
+l=20
+>> following the bad behavior.
+>>
+>> I assume we cannot use the probe() callback for writing to registers?
+> I'm afraid there is an inconsistency between U-Boot MAC drivers and whe=
+n=20
+> they configure the PHY. This is well visible on MX8MP, which has both=20
+> FEC and EQoS/DWMAC MACs and they behave differently in this aspect. The=
+=20
+> question is, whether it makes sense to initialize the PHY before the MA=
+C=20
+> has been used, probably no, because that brings up hardware and adds to=
+=20
+> boot time. But at least aligning the behavior of the various MAC driver=
+s=20
+> would be nice.
 
-As above.
+Is there anything we can do in this driver to fix this?
 
-Thanks for the review!
+Or should we merge this as-is and improve the MAC drivers later?
+
+Thanks,
 
 --=20
 Paul Barker
---------------ttAWW9AUBS70Osjrj0QlDPOx
+
+--------------KXunpHuGed2JMPkCSxEgn7lB
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -217,21 +204,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------ttAWW9AUBS70Osjrj0QlDPOx--
+--------------KXunpHuGed2JMPkCSxEgn7lB--
 
---------------B0BtaVdfozhRNfCcz2DolwL0--
+--------------rMvlaK8udDzC7CJvg8QVnmOl--
 
---------------nT2K0a4Zf0g94E40GStpIAE7
+--------------pzjYGGpLE3kz834MAnQO5LRT
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H3dwUDAAAAAAAKCRDbaV4Vf/JGvTTh
-AP9dREasM7aZlyzCZuBrmKG3b9FN2183hqO/OcMWkaeWDwEA6a85X6Gpp6DHUsyGvJ9dQFmvr43G
-uE25/U6VSbpRGww=
-=a5FL
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H30wUDAAAAAAAKCRDbaV4Vf/JGvbsB
+AP9Ue65lNMNZ12idaP/hFV027eDE7v2f6vbijd+1Yk5CbwD+PnW/OTEGdOSfInzqZqHGzvGNNxo9
+G6g2EUmWwEx3NgQ=
+=jUUf
 -----END PGP SIGNATURE-----
 
---------------nT2K0a4Zf0g94E40GStpIAE7--
+--------------pzjYGGpLE3kz834MAnQO5LRT--
