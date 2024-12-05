@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4D3EE7716E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D43BE77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:58:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CAEF89578;
-	Thu,  5 Dec 2024 20:56:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ABCAD895B7;
+	Thu,  5 Dec 2024 20:56:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SiwKID08";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K8YYTSxQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B9BE89530; Thu,  5 Dec 2024 20:56:13 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 6BB22895B7; Thu,  5 Dec 2024 20:56:16 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA4289530
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:56:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 770FF895A4
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa1e6ecd353so201835966b.1
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:56:11 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aa545dc7105so230903266b.3
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:56:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733428571; x=1734033371; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733428574; x=1734033374; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dI3/YWF0X0e7oLFtzVB711xg+G2du/o5Hj7PHmE5Jkg=;
- b=SiwKID08f9M6j8P+062H0KG4GgB1E9TEekBOGqNM/uxeaBLEcg4pd40UywlrSliQOD
- bUEXj3ourNy4KqjG9mAeqNaTUYrOnLKw4EQiaJy5Btg08CFlO8yC4rnh2qSBkcKeopuT
- a+R2rRInUS3s3xFcKkQ+NhPphTd5kiICZZtQY=
+ bh=FfwcOrGv05upYwthJ/DTisZ2sdz3y8RXMeoxzJnh4D0=;
+ b=K8YYTSxQivtDIB7gqQWSNMWL8EmM37gc/NhseYIv3s1hsRue3/vEVY0stxubFH4vAu
+ V9xQnpPAI4BQSKLtcxZbskG0gZCTjTAovufd+nWzPIZm2+u8QA6S8Hlstg2XNyKillPI
+ GEwkkepivhvhpst8J5XIKqPee0R9192znVQVw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733428571; x=1734033371;
+ d=1e100.net; s=20230601; t=1733428574; x=1734033374;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dI3/YWF0X0e7oLFtzVB711xg+G2du/o5Hj7PHmE5Jkg=;
- b=c4MRffY4pv+YaDyVKZxvAys6jfk0tqfwUB/3myPlyhY3Qw0hR8m6FrjAS65jF3y4Jf
- cY9CnkAs4NODBECaGSb3/osi1NKcAGrbHUmFihT8dx4SU+hWlr+Hz9ueGtylY8Z+BhHI
- ezWY7W78w8YEkaW9fxiopV+MGFpFkB8MX/Wgaybh2fmST3/UOREKMx9DNcTQXyqj1gss
- gig1h0O5MTqhMsTkf7d32imXs5pE8/zFX736nMDHuxkDJifWqjORQCSsleC7xmUq9fyY
- LijFjZmVSGZMjauRkZJ75IAEy1QcOrgvyEKY34xfZDKUjDB/mogQtYNS1ePQfpro6j4Y
- /Lzg==
+ bh=FfwcOrGv05upYwthJ/DTisZ2sdz3y8RXMeoxzJnh4D0=;
+ b=qt/dLGE7pdeMoai6hgPAnWA7XDVtOTKuZdSG1b5tjf9N2Mr6pfzthzJPSj7izxPINV
+ vNW7GHWJukBo40iBHjSXAORdT4OWwwmvaH986pikttulqI3lWVUu7x10keo1OAQnAdEU
+ e1MlJOhpslAV3pTl/jPadDdg3aeqTzVqXUstogvOOKKP2fJh6II6B4aaBxG+0U/bd3Cz
+ WoJgVu43Io4Hh6NoRhfXoza5siEKR2jQg7rVnNryK8d07ImvUGTxJ0LO7pobhO/4Ovpo
+ YOJtKf8Dva6HiUJL83bGGizwhGMCmCMgSlWW1kuFJ4bt5gdo3XEIsgRYY8TuMcgjfmR/
+ F1rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV49C3YEhGflwKGhhW2r5ycZxi3OTvxKkSGPFdHtxdTUbLLRJF8mgruqISi8aQ+zEWHtvncoP8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCgP7+ug6+XFy6x4Py/0L1iT8PiOKiP+K260tztEYya7IcVLtF
- IlpMDD0kl83TABf+UglQCoaZSfcKLUCPRZ48c2rdhlOIQkev2SgeUZrKBtq6PLFHtZ89GYwjeIi
- 9xroubyqUSEtLqawmZj5uRw1AH/y/xBJ5U9Aq
-X-Gm-Gg: ASbGncsY4K9U3VtLhMBEyMc6eRzexy6uVvKDcv0SWE9+Iu1Hdka5MXCx00Fu5IfVTHh
- 12L06ORo3zvpdazjFFjLHvEIWXpOy5GyN
-X-Google-Smtp-Source: AGHT+IFOCR2ugkfatyHkKDQRRTD5vs+w0TTyGlYs+NuWNZrG/Pccki4aKeNtNcPTtdYsvKuBZG9J9GLg8q8Mgn4QtU8=
-X-Received: by 2002:a05:6402:4495:b0:5d0:d3eb:a78f with SMTP id
- 4fb4d7f45d1cf-5d3be46606emr958034a12.0.1733428570741; Thu, 05 Dec 2024
- 11:56:10 -0800 (PST)
+ AJvYcCU2cUVsfMtw1O50+UjX9wKgBetkaAzuzAyJwQNzQnuffpMbQhLkK2+bUcHsNFsx6C5BNyVnKus=@lists.denx.de
+X-Gm-Message-State: AOJu0YyIWBZ++rmQV8EgQmpJGfq/1mCEkTAlsdOsh/rxhJJZ7ZCsS6wN
+ NIGKtpJpUgdh6AnR2sbNj57kq0wsLfGSZeikS2olwGyWxeWcAD0CP+P8Y/1xK/m61GCPeGOcmlt
+ pD9jpzeEsgmreq0Joeopv50GutLtpcOGOyR7T
+X-Gm-Gg: ASbGncvRBVjwmixJoMnjrHAzihyhvIgnGfOYJ6eWVujo3GrlW6oxHwPrAzBz6HuyWLI
+ nm2RScZBixOLrR0hQL13p1cnS+Jxvwodr
+X-Google-Smtp-Source: AGHT+IEKWg1U0NV6JqxkJyUWrpbgM7i3SA5DliDv6dTzIbK/MhgxdUSO9ldCpJIDgbV1u/iGGmp8y3TaX3d1MYLL6lI=
+X-Received: by 2002:a17:907:1dcf:b0:aa5:2706:c3f with SMTP id
+ a640c23a62f3a-aa63a21b6d4mr13379366b.47.1733428573989; Thu, 05 Dec 2024
+ 11:56:13 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 5 Dec 2024 13:56:08 -0600
+ HTTPREST; Thu, 5 Dec 2024 11:56:10 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241115231926.211999-4-sjg@chromium.org>
-References: <20241115231926.211999-4-sjg@chromium.org>
+In-Reply-To: <20241115231926.211999-3-sjg@chromium.org>
+References: <20241115231926.211999-3-sjg@chromium.org>
  <20241115231926.211999-1-sjg@chromium.org>
-Date: Thu, 5 Dec 2024 13:56:08 -0600
-X-Google-Sender-Auth: zhjYQeOULWzNcgXpnz0VGl-nkp4
-Message-ID: <CAFLszThvHoKgrLeNp9jQxU3E65v4q-Wn+23DHjs3Ry9tWto+aw@mail.gmail.com>
-Subject: Re: [PATCH v4 03/19] bootstd: Add a function to get bootstd only if
- available
+Date: Thu, 5 Dec 2024 11:56:10 -0800
+X-Google-Sender-Auth: 6VEpYwAfM7Mx3cOsFJuiHVIWUUQ
+Message-ID: <CAFLszThf4fZTX8TDHQs=7PMyam4dg8NEr08Tbfy1cPR_5e+NCg@mail.gmail.com>
+Subject: Re: [PATCH v4 02/19] bootstd: Move bootflow-clearing to bootstd
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Peter Robinson <pbrobinson@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Nam Cao <namcao@linutronix.de>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -92,16 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a function which is safe to call in the 'unbind' path, which
-returns the bootstd priv data if available.
+This relates to more than just the bootdev, since there is a global list
+of bootflows. Move the function to the bootstd file and rename it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
 (no changes since v1)
 
- boot/bootstd-uclass.c | 11 +++++++++++
- include/bootstd.h     | 17 +++++++++++++++++
- 2 files changed, 28 insertions(+)
+ boot/bootdev-uclass.c | 19 +++++--------------
+ boot/bootstd-uclass.c | 15 +++++++++++++++
+ cmd/bootflow.c        |  2 +-
+ include/bootdev.h     | 10 ----------
+ include/bootstd.h     | 10 ++++++++++
+ 5 files changed, 31 insertions(+), 25 deletions(-)
 
 Applied to ci/master, thanks!
