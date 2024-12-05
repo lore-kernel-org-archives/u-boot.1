@@ -4,79 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DDCE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20CEE7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0FF8893F6;
-	Thu,  5 Dec 2024 10:25:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 47FED8934C;
+	Thu,  5 Dec 2024 10:36:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Sjalfjy+";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="Ywmuto0p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C0EC893F7; Thu,  5 Dec 2024 10:25:10 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 28D4489435; Thu,  5 Dec 2024 10:36:44 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF1BC893F6
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:25:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3BB7890D5
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:36:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390708; x=1764926708;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ItxIl1cgdEkODNGQk2jMBUDG7XpgBleEhDNocV/busI=;
- b=Sjalfjy+qG742m08X2oTndf/0vyetzy8tzosHZFF6M1tB+f2jfFMx8mj
- CT8Pp+3Z0RxmSv3aoNSgVr1Mi07bQW/YmAwZ7sTgVbrLaZlsAzchLvUDU
- PNbqbDqGGt4HYRB//Z4Mv3yKe82nn0sGb4QY1PU8pdNUhAS0A8WMtLzGc
- TqNDZgQqwCDL6uM9Z5FiE+onpxM/3bQcs6t4eKBOt2tyZfcmrgEHPWKmE
- 1j6nWJOZ8eJle8N8lYpg1nEfoJpKJlJF5jTSp59ZJnf4hOY9kTOBpPS5i
- 3ULGdyV/WvdI1UdtT+QRYwtNwwgjuNYnDRe7tZc60HmaNnoXkXXfoVB0s A==;
-X-CSE-ConnectionGUID: JK8qBKsTQqK5KcIIlP5nrw==
-X-CSE-MsgGUID: zcmLpwXYTcmZjB5jlT4BBA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610424"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610424"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:25:07 -0800
-X-CSE-ConnectionGUID: 7FRSzwCBSDesYcpEs2oSzw==
-X-CSE-MsgGUID: BlhfymURSyyYHD2cXAV0pg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122169"
-Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:25:03 -0800
-From: dinesh.maniyam@intel.com
-To: u-boot@lists.denx.de
-Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Alexander Dahl <ada@thorsis.com>,
- William Zhang <william.zhang@broadcom.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Tingting Meng <tingting.meng@intel.com>,
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
- Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
- Alif <alif.zakuan.yuslaimi@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>,
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 19/19] drivers: mtd: nand: Kconfig: Enabled self-init for
- cdns-nand SPL
-Date: Thu,  5 Dec 2024 17:23:15 +0800
-Message-Id: <20241205092315.25060-20-dinesh.maniyam@intel.com>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
-References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (31-10-206-125.static.upc.ch [31.10.206.125])
+ by mail11.truemail.it (Postfix) with ESMTPA id D82562062C;
+ Thu,  5 Dec 2024 10:36:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1733391401;
+ bh=Ov5EJnTguuqR6Ky1EY7xTiB+g8rACDRPt8e8LuFfIOg=; h=From:To:Subject;
+ b=Ywmuto0pnLoVZe9+7QPMF5hRuX49NhysaGw+UO9CtPZiPqklK6D8v7bllP5St93jS
+ MZeH87W9Aph2gHF//rCJ2SRCBvzSpAuZHIADtD6WAJrS9ddnEyiPD8kaPmZV8nRylE
+ mal43ttVxXhLTqK6ON3HG7wHUg2PNvRUkoU7lPmsUlxUzrQnG0ZL0P5/0r9YMfYD0r
+ y+Lp0jz32dzNQ5biAAiSOKBkCimq1EXXKcU06Il9e4cUkh1Ezr89GFElql2MaUGyWN
+ wy5fSbE0ywJrwWT/q/N3B7RbdvBJUJpFPqBzOeZA0ABlV7MX2kO4eDW93m3oj0HVtz
+ OzTbouDDpd79g==
+Date: Thu, 5 Dec 2024 10:36:36 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Hiago De Franco <hiagofranco@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Hiago De Franco <hiago.franco@toradex.com>
+Subject: Re: [PATCH v2] verdin-am62: fix FASTBOOT_BUF_ADDR and
+ FASTBOOT_BUF_SIZE
+Message-ID: <20241205093636.GA16759@francesco-nb>
+References: <20241203123302.298188-1-hiagofranco@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241203123302.298188-1-hiagofranco@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,32 +67,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+On Tue, Dec 03, 2024 at 09:33:02AM -0300, Hiago De Franco wrote:
+> From: Hiago De Franco <hiago.franco@toradex.com>
+> 
+> The current value of CONFIG_FASTBOOT_BUF_ADDR is incorrect for hardware
+> with 512MB and 1GB of RAM. The RAM address ranges for these devices are:
+> 
+> - 512MB:
+>   - Start: 0x80000000
+>   - End:   0xA0000000
+> - 1GB:
+>   - Start: 0x80000000
+>   - End:   0xC0000000
+> 
+> The current buffer address makes fastboot downloads work only on
+> hardware with 2GB of RAM.
+> 
+> To fix this issue:
+> 1. Lower CONFIG_FASTBOOT_BUF_ADDR to 0x88200000. This makes the buffer
+>    to be equal ot CONFIG_SYS_LOAD_ADDR, which is a safe address to
+>    download files using fastboot.
+> 
+> 2. Reduce the size of the download buffer to 128MB, avoiding overlaps
+>    with RAMDISK_ADDR_R. This is a good enough value for individual
+>    downloads.
+> 
+> These changes make fastboot downloads work with 512MB and 1GB devices.
+> 
+> Fixes: defe30a78b76 ("verdin-am62: add DFU, USB and UUU fastboot support")
+> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 
-Enable SPL_SYS_NAND_SELF_INIT for Cadence NAND SPL.
-
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-
----
-v2:
-- remove the "this patch is to" commit phrases
----
----
- drivers/mtd/nand/raw/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 90f8f4b688..32444c2468 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -211,6 +211,7 @@ config NAND_CADENCE
- 	bool "Support Cadence NAND controller as a DT device"
- 	depends on OF_CONTROL && DM_MTD
- 	select SYS_NAND_SELF_INIT
-+	select SPL_SYS_NAND_SELF_INIT
- 	imply CMD_NAND
- 	help
- 	  Enable the driver for NAND flash on platforms using a Cadence NAND
--- 
-2.19.0
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 
