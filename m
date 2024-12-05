@@ -4,86 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28E4E77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37110E77173
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:55:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87C20894F9;
-	Thu,  5 Dec 2024 19:06:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A55B18950D;
+	Thu,  5 Dec 2024 19:55:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ln7PqMoB";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B78EF89506; Thu,  5 Dec 2024 19:06:39 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9474B891B1
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:06:37 +0100 (CET)
+ id 84537894F9; Thu,  5 Dec 2024 19:55:16 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 4893389512
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:55:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733421991; x=1734026791; i=xypron.glpk@gmx.de;
- bh=GyyhQJ3H11CULzdh7V/SW3k0ipAQUsX7uTk+IgeScdc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=ln7PqMoBhHqbhamEh7R9hcyXVmA5KQkhZw+iMlvClAnloRfExcXSbr4D5pP/r7LS
- iuSZ1jddipDPMOZ21gml+69/anKYq8QrbdIdHfLJn6j43U424LQdDsEo9kO66sM8o
- gA2wdvFpmv+IJiKEtMT9pMId160RAITLQOrMTsjJTgmA4VkZDV1UzsWBw22JQT+Bi
- 7CwVHhyATsmyVg/UGK/3SqfTCSSahX5uYXyyj96fw6RWNceZakRTmQ5UouqDy16ZK
- ENkCgsF3aJr9g1eMk9Oh9ABHp7sZ/6iT92KIgL3mTyZx7hNOvBvRLxU+G+U8fYnMG
- Wyu/4/LErQS6VPod4Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Ml6qC-1u4Nh51GpQ-00kcuk; Thu, 05
- Dec 2024 19:06:31 +0100
-Message-ID: <a6650f01-b3c5-4a16-863f-33e441ef6e44@gmx.de>
-Date: Thu, 5 Dec 2024 19:06:30 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: fDcYQkc9TPur6/PFzpnHgQ==
+X-CSE-MsgGUID: pirbqJT7RAich9I0u5rDtw==
+X-IronPort-AV: E=Sophos;i="6.12,211,1728918000"; 
+ d="asc'?scan'208";a="227032735"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 03:55:10 +0900
+Received: from [10.226.92.29] (unknown [10.226.92.29])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 57FCF4009439;
+ Fri,  6 Dec 2024 03:55:08 +0900 (JST)
+Message-ID: <11d1e214-704d-4e6a-9687-9a2117fc769c@bp.renesas.com>
+Date: Thu, 5 Dec 2024 18:55:06 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 08/14] efi_loader: net: set EFI bootdevice device path
- to HTTP when loaded from wget
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- Tom Rini <trini@konsulko.com>
-References: <20241204030530.2099776-1-adrianox@gmail.com>
- <20241204030530.2099776-8-adrianox@gmail.com>
- <20241205013018.GA1377816@bill-the-cat>
- <38d341ba-7690-496e-bace-60604219f174@gmx.de>
- <20241205151924.GL2457179@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241205151924.GL2457179@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nY8o7ZFATariaDiqnyf13omkQ2B+ocRkCriTj5LGwlkBHCNPR4A
- tB6xvGW3PvwgrHq0zri+ua9MDt5qpbR+Xid2Ry4KqRfqWqU45/AXcw0XuTUlySNW15d/1Jg
- QSu5uuRpznxvUPEo+Yuw8y2JnHEX5erWqDIi0EHGgWBiQL8rBo/Ozwf87HuinqxLb9pIyjk
- RO6ja/590fEbqjL5mQ6JQ==
-UI-OutboundReport: notjunk:1;M01:P0:YcD00wyTlVk=;EvUu+77/PTn7nC79q4K1dV0c0GZ
- j7zf+pgSLEzl0foZ0XUOcC9WhVlXOIkls6waf+t0kj8jzhAfNC//x7kPpnKbC1mpZgp5iSoAz
- Qag8F/PVZEb61jneEVaD3hhkrW7wyetmd/kPdZ1q8b4rA9qrurAlMjpjmSxQOpYepfZbMIatZ
- +rFmLQz1wJRTRnroHbytrelbsPhMkPwVL/9WAYAouGeLljfC1P9w1C+DEUTT4o1/wtwPcxZlu
- ny2mVTfkZbLudB6Iox0/4Craa771l47KKsVjE+uHtkyRIa6HG1SF+tEZozhe5dFUOluXdyaFa
- zrU5eGz4AvWK6+Blkp+FcWbefDhbZuBW475N7Ca2LCxxe+vzJRnsF4kglu0HVuFdE/5bhMo98
- VWyKsJzuviq7wwqB5ZkM6w+e0EdjhInES2trgJhugGXeIyj4pFnegwWtmftI4cUQJDHvO/I/D
- IClLD9duuAItAo0E0mSZx0rWhrmRujv1KHdEF/5axTlTvyhZm+PtcjWnGSwD63pxRu/IQ82i6
- hfZoT4JPF7zMimp02kPhNGk2IhSWoOdoAv2NvYbshBkZ9WZBItvE9BYv1akeFCYETJ2RHJ/7u
- vTNXQ7q9UDY8MkwCgJxnyMydzsWwvTtfzqRba7EmP9jY8/bJ8qnT19GFTy1B/tKRCEb/JoNnn
- aUFRV2Vb6JlYooYqvUyOlVShUoV4Bvyt9x37wSWIg3w/lvCjLUDpXOu1o38fhpktS+1JkPs3m
- PKtO7l6AhENFJ11Qzum2VaiG4sBK5gTJIj3+ahH7b06Jlv1m11swLa95Rx/KIa5szMXKKE8lX
- al5bifWKhCAZsepiK4MOo0ADDBsSxcJG/jpTudCF/uKwulZDjpx/sG8Xi2IpX0c0U8wgQvMm8
- v4QETqjfSfbUtUlAbWWe4V4nfG4QxKRUd0gBdITgHLQPGM4xyjVtjRbx+wXBguBlUvaRbdkyp
- CWgfFKz2naLrpOCgZkUhCXcJ0JMOZ4rCuo87Xh33xczEwKRdPsOersebuQp7mgcOEBfh6azjd
- tJykzB2pvS+m8WkRK5Vm6yFqln2R3fs0P4WGPQecJ2/90b88GjiipQrz1txvvUo8GzDsNSte1
- 5FjIkmor5cO/Wc8vT+XxSeuVoOF06b
+Subject: Re: [PATCH v2] net: ravb: Simplify max-speed handling in
+ ravb_of_to_plat
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
+ <17cde70a-c85c-47c0-86ac-b22473004426@mailbox.org>
+ <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------0WmoRPq5mWz71C30W3uoCENm"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,161 +66,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 05.12.24 16:19, Tom Rini wrote:
-> On Thu, Dec 05, 2024 at 10:00:11AM +0100, Heinrich Schuchardt wrote:
->> On 05.12.24 02:30, Tom Rini wrote:
->>> On Wed, Dec 04, 2024 at 12:05:23AM -0300, Adriano Cordova wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------0WmoRPq5mWz71C30W3uoCENm
+Content-Type: multipart/mixed; boundary="------------sHWnqTjw77x6cOhr0xpCphTO";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@lists.denx.de
+Message-ID: <11d1e214-704d-4e6a-9687-9a2117fc769c@bp.renesas.com>
+Subject: Re: [PATCH v2] net: ravb: Simplify max-speed handling in
+ ravb_of_to_plat
+References: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
+ <17cde70a-c85c-47c0-86ac-b22473004426@mailbox.org>
+ <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+In-Reply-To: <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+
+--------------sHWnqTjw77x6cOhr0xpCphTO
+Content-Type: multipart/mixed; boundary="------------bIdkbFzbnNcPdlmBSoEusgRD"
+
+--------------bIdkbFzbnNcPdlmBSoEusgRD
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi Marek,
+
+On 01/12/2024 21:08, Marek Vasut wrote:
+> On 12/1/24 7:48 PM, Marek Vasut wrote:
+>> On 11/20/24 10:49 AM, Paul Barker wrote:
+>>> We can call dev_read_u32_default() instead of calling fdt_getprop() t=
+hen
+>>> fdt32_to_cpu().
 >>>
->>>> Set the device path of the efi boot device to an HTTP device path
->>>> (as formed by efi_dp_from_http) when the next boot stage is loaded
->>>> using wget (i.e., when wget is used with wget_info.set_bootdev=3D1).
->>>>
->>>> When loaded from HTTP, the device path should account for it so that
->>>> the next boot stage is aware (e.g. grub only loads its http stack if
->>>> it itself was loaded from http, and it checks this from its device pa=
-th).
->>>>
->>>> Signed-off-by: Adriano Cordova <adrianox@gmail.com>
->>>> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->>>
->>> I know this is applied now, but after re-checking some things in one o=
-f
->>> my labs, this breaks test_efi_helloworld_builtin on rpi_3 at least (an=
-d
->>> possibly others). There is no output from "bootefi hello".
->>>
->>
->> Hello Tom,
->>
->> None of the Raspberry Pi 3 related defconfigs enables bootefi hello:
->>
->> rpi_3_32b_defconfig # CONFIG_CMD_BOOTEFI_HELLO is not set
->> rpi_3_defconfig # CONFIG_CMD_BOOTEFI_HELLO is not set
->> rpi_3_b_plus_defconfig # CONFIG_CMD_BOOTEFI_HELLO is not set
->> rpi_arm64_defconfig # CONFIG_CMD_BOOTEFI_HELLO is not set
->>
->> Which configuration have you been testing?
->>
->> Please, supply the .config and the related test log.
->>
->> I just tested pinea64-lts_defconfig with CONFIG_CMD_BOOTEFI_HELLO=3Dy a=
-nd get
->>
->> =3D> bootefi hello
->> Card did not respond to voltage select! : -110
->> Booting /MemoryMapped(0x0,0xbdfbe9b0,0xbdfc1b60)
->> Hello, world!
->> Running on UEFI 2.10
->> Firmware vendor: Das U-Boot
->> Firmware revision: 20250100
->> Have device tree
->> Load options: <none>
->> File path: <none>
->> Boot device: /MemoryMapped(0x0,0xbdfbe9b0,0xbdfc1b60)
->>
->> So there seems to be no generic problem.
->
-> For testing as much as possible, I do enable a number of additional
-> options (as well as building them with clang). In this case, please try
-> also enabling CONFIG_CMD_WGET. I've narrowed my config changes down to
-> adding both CONFIG_CMD_BOOTEFI_HELLO=3Dy and CONFIG_CMD_WGET=3Dy to
-> rpi_3_defconfig which results in:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D test session starts =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> platform linux -- Python 3.11.2, pytest-6.2.5, py-1.11.0, pluggy-0.13.0
-> rootdir: /home/trini/u-boot/u-boot/test/py, configfile: pytest.ini
-> plugins: forked-1.6.0, xdist-2.5.0
-> collected 478 items / 424 deselected / 54 selected
->
-> test/py/tests/test_efi_fit.py s                                         =
- [  1%]
-> test/py/tests/test_efi_loader.py .....F
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> _________________________ test_efi_helloworld_builtin __________________=
-________
-> test/py/tests/test_efi_loader.py:208: in test_efi_helloworld_builtin
->      assert expected_text in output
-> E   AssertionError: assert 'Hello, world' in ''
-> ----------------------------- Captured stdout call ---------------------=
---------
-> U-Boot> bootefi hello
-> U-Boot>
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> SKIPPED [1] test/py/conftest.py:620: .config feature "fit" not enabled
-> FAILED test/py/tests/test_efi_loader.py::test_efi_helloworld_builtin - A=
-ssert...
-> !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!=
-!!!!!!!!
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D 1 failed, 5 passed, 1 skipped, 424 des=
-elected in 27.01s =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
+>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> Applied to sh/master, thanks.
+>=20
+> I think this one triggers some build failure --=20
+> https://source.denx.de/u-boot/custodians/u-boot-sh/-/pipelines/23670 --=
+=20
+> https://source.denx.de/u-boot/custodians/u-boot-sh/-/jobs/965285 on=20
+> these boards:
+>=20
+> rzg2_beacon hihope_rzg2 r8a77995_draak r8a77970_eagle r8a77990_ebisu=20
+> r8a779a0_falcon r8a779h0_grayhawk rcar3_salvator-x rcar3_ulcb=20
+> r8a77970_v3msk r8a779g0_whitehawk silinux_ek874
+>=20
+> You need to drop the *cell variable. I've fixed that up and retriggered=
+=20
+> a build, I hope that's OK?
 
-Hello Adriano,
+Apologies, I missed that cell was still defined but now unused. Thanks
+for fixing it up.
 
-The following command sequence reproduces the problem on my Raspberry Pi 3=
-:
+--=20
+Paul Barker
+--------------bIdkbFzbnNcPdlmBSoEusgRD
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-U-Boot> setenv autoload no
-U-Boot> dhcp
-lan78xx_eth Waiting for PHY auto negotiation to complete...... done
-BOOTP broadcast 1
-DHCP client bound to address 192.168.1.83 (109 ms)
-U-Boot> setenv autoload yes
-U-Boot> tftpboot 192.168.1.2:/arm64/helloworld.efi
-lan78xx_eth Waiting for PHY auto negotiation to complete...... done
-Using lan78xx_eth device
-TFTP from server 192.168.1.2; our IP address is 192.168.103.83
-Filename '/arm64/helloworld.efi'.
-Load address: 0x1000000
-Loading: ##################################################  4.4 KiB
-          198.2 KiB/s
-done
-Bytes transferred =3D 4480 (1180 hex)
-U-Boot> bootefi $loadaddr
-Card did not respond to voltage select! : -110
-Booting /\arm64\helloworld.efi
-Hello, world!
-Running on UEFI 2.:
-Have device tree
-Load options: <none>
-U-Boot> wget 192.168.1.2:/hweb/arm64/helloworld.efi
-lan78xx_eth Waiting for PHY auto negotiation to complete...... done
-HTTP/1.1 200 OK
-Packets received 7, Transfer Successful
-Bytes transferred =3D 4480 (1180 hex)
-U-Boot> bootefi $loadaddr
-Booting /\hweb\arm64\helloworld.efi
-Hello, world!
-Running on UEFI 2.:
-Have device tree
-Load options: <none>
-U-Boot> bootefi hello
-U-Boot>
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-I was not able to reproduce the problem with only TFTP or only wget.
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
 
-qemu_arm64_defconfig shows the same issue.
+--------------bIdkbFzbnNcPdlmBSoEusgRD--
 
-efi_install_multiple_protocol_interfaces() called in efi_run_image()
-returns EFI_ALREADY_STARTED.
+--------------sHWnqTjw77x6cOhr0xpCphTO--
 
-With a debug message enabled we get this output:
+--------------0WmoRPq5mWz71C30W3uoCENm
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Path /MemoryMapped(0x0,0x7f762d10,0x7f765ec0) already installed
+-----BEGIN PGP SIGNATURE-----
 
-We have to these things to check:
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H3CgUDAAAAAAAKCRDbaV4Vf/JGvRKm
+AP9IZ/C8HVL43WOrQxzqpdw5FzyWkIoI1pvPvsnt/WyupAD8CH5xwUHAfFrnYzvIZ+h8V4OA8Utz
+bDOPrwY+X6WM+w0=
+=5edE
+-----END PGP SIGNATURE-----
 
-* Why do we miss to uninstall the memory device-path when executing
-'bootefi $loadaddr'?
-* Why do we generate a memory device-path for either TFTP or wget?
-
-Best regards
-
-Heinrich
+--------------0WmoRPq5mWz71C30W3uoCENm--
