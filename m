@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A9FE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F96AE77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7E1889526;
-	Thu,  5 Dec 2024 18:57:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0442C894BD;
+	Thu,  5 Dec 2024 18:58:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TFv6l9iP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YQc37z7c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FEBE89518; Thu,  5 Dec 2024 18:57:56 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id B68AD8953D; Thu,  5 Dec 2024 18:57:58 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23B4389517
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:57:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1283894BD
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:57:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d0d32cd31aso1393171a12.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:57:53 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a9a68480164so154128066b.3
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:57:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733421472; x=1734026272; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733421476; x=1734026276; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZlfeXdF6CNaurgBWO4UitHe0M419ZUJtBBiOpPXtW2E=;
- b=TFv6l9iPuxWQ86NcHogpERxouodWig+qR1JrB83S6dDylS54zdcvU7STwKhaK/bUtm
- L3QObmSLfWsWNvJ6FJUWPF2e+zo7mzHt1hQF4yf8Bn4mCrkv+EA0M5VITEk2JhOj6qG1
- JME7xMibOUIbY0q4G7dVqJaJjy2BJuapSPRTc=
+ bh=n/5wyvk8NHLhumZQrtCNKLwXbvh0LeW6wkxLzacjHTM=;
+ b=YQc37z7ckpW3gtKfdM8zSZ4snGQBfPTpvKqPP8jpR8n88/sgM1e/4klP271cVPP0cM
+ KMKbd920LhL3vtzrgk98RFiJSNahPQFjeTZpjQxmDOh6JULUFwjxBampY0EbZTeCPhYa
+ rUW1c3bOuKRVV1lVfpU72e+6H63aE/rhE1OSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733421472; x=1734026272;
+ d=1e100.net; s=20230601; t=1733421476; x=1734026276;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZlfeXdF6CNaurgBWO4UitHe0M419ZUJtBBiOpPXtW2E=;
- b=t8WWTLy3Mla1G/N96ox9fFW/XwPirFVxGAX6k84U9U1uqHXOXZv8UmQQYltIlT26fL
- qgEa5PmEidZmoUnN7NJU3LppN68rkqQExyeg07u2IpJwwuC/D7+2r3UymvRoRTMndUqH
- Xrhh4wXjn+K8xm/S5AKgmaTmUI/KlWzojGAmvNOp3xZjuJwxhDLV+PrFppCvWQPN7h26
- B2Rdll2yqdGaYifVWSHv0U+fg9hS0r7SugiyXJEbNDZwuIHOsNmf39XP+n4QYKECFd4i
- /NlmFOlGqCjGkBfMPRU8YSp+GvQD54rEQUElnyXu4vp3/pQhgNhSCI0t3/iIpSArDD9A
- 0lQg==
-X-Gm-Message-State: AOJu0YzZdZrJbssBs+NuiYwLcdA9WMRgERYr2F6Vn2P4B4nJTsHedpDc
- gJ3dPAIBqN0NrtzeoTPGiqXPOAQzUUX6sXFctkDbCebNZD7yTexrpOWMKy6R622CfChWFPoDXIO
- U+SEDbNDKnRvlyU7GqEjR2SVXN61Fw1fJmL6S
-X-Gm-Gg: ASbGncuOnwHARyASVqbvF9rogoBLtonk9qvdn+w5rFtXXafPLWyR5LwQ5Jh89kXqpMR
- 9npidSIzC62T47ZwX0Mlbd9po/mKLFWzL
-X-Google-Smtp-Source: AGHT+IFWHfIEbvy+aTNKPvCBbbPEJrC9uNPWxQOzMfXdCeSWrlEU/zlkB+2o0Y3dzCq7jXnFYjcV0kvJ/9KLy0N9ihE=
-X-Received: by 2002:a05:6402:35d1:b0:5d0:d786:b894 with SMTP id
- 4fb4d7f45d1cf-5d10cb80107mr19697020a12.26.1733421472554; Thu, 05 Dec 2024
- 09:57:52 -0800 (PST)
+ bh=n/5wyvk8NHLhumZQrtCNKLwXbvh0LeW6wkxLzacjHTM=;
+ b=E8J3pCV6ccaxZbcbw4YzNO4ndSDYUr4tJ4x8/21i4uuIF2xUG4Y+fYfek8MMsZ/sPG
+ EZ+i6om+QkBHAxINXgJVqox4A29uFqZvS1+JGfTsUAZORehMilJe5KunRomWMQZcvQYu
+ K3Ir+Cd0vSca+SVMg5R7eSRrfaqJIv781Kv8yWDFXn49O6vKWm3hHhHyjR27I+Yrfhwh
+ 5fHylKy/f20QdQEu7TU/kw9PHKSPS9cA5Mf4x5EF0jdNs+dGBwLV7AU/3CzJN5tXyAVe
+ aMSBhU6rvdNk4NS7dhIrOlbXtVDk+l0XYMBQLoxxSZJlSUuUqhUVGXhGQsMPQGPm4JLC
+ 07Rw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWbq7xLMUt9xWftM+We9SHEXeYkVhfqlm7IOQ5azLJtb3xzXt5/CUJbMQ5COcqWrQsLYZk5Eyw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGOMEmOaP4EZxqzhxCky9lXSDfsZtpmsX1hSjJSeQU4zDqdk62
+ o/3tp6nVPBbX79bHsPqMt2+DOZoaZCe19sm6Rli9gbJkKA01NiUvuG4IiTEWe23EQLWEkETFKCi
+ tF75nDdPc0PwwVx0pJwPWgnfahlbWduu3H4kV
+X-Gm-Gg: ASbGncsmhbRdK1Ef8Z5RwssEGPOMPuENeedGZrsVozuojFmjBHvd1MrV07Mfcv8n0am
+ bUMa713iiLB48rUhoGmUZeuX91De/0PPA
+X-Google-Smtp-Source: AGHT+IEoRFqtgP08qxIApgoZBWaTSFZNy0qWepxXOD3IZaCmWhm5ow8eOwql1OKHkmbAIQUf4qIbVatK+hCt54KBFQY=
+X-Received: by 2002:a17:907:948f:b0:aa5:308c:3489 with SMTP id
+ a640c23a62f3a-aa5f7f4a73emr1184413266b.58.1733421476282; Thu, 05 Dec 2024
+ 09:57:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20241203234559.2938192-1-sjg@chromium.org>
- <CAFLszThuRngaW_kOTnEakDr6GSRc5TWpy7WT9yvQJmuMP2eUVw@mail.gmail.com>
- <20241204001234.GC2457179@bill-the-cat>
- <CAFLszTi9cF-1NVPm8FqWdmiyAuKTJERzxgbCq=YXDX5zY=MgWQ@mail.gmail.com>
-In-Reply-To: <CAFLszTi9cF-1NVPm8FqWdmiyAuKTJERzxgbCq=YXDX5zY=MgWQ@mail.gmail.com>
+References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
+ <20241205-ge-mainline-display-support-v2-2-4683bb4388dc@bootlin.com>
+In-Reply-To: <20241205-ge-mainline-display-support-v2-2-4683bb4388dc@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 5 Dec 2024 10:57:40 -0700
-Message-ID: <CAFLszTiX0XWR5b43DFFJ_AMJKRjfTgpQ02+e6w0Tykc2Jog6_w@mail.gmail.com>
-Subject: Re: [PATCH v2 00/41] pxe: Support read_all() for extlinux and PXE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Adriano Cordova <adrianox@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Date: Thu, 5 Dec 2024 10:57:42 -0700
+Message-ID: <CAFLszTh6CB-UbtkSjfvcmR8qAV9aq34p-OXhdOQ1sidzgj_NOg@mail.gmail.com>
+Subject: Re: [PATCH v2 02/13] dm: core: Add a helper to retrieve devices
+ through graph endpoints
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,139 +93,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 3 Dec 2024 at 17:37, Simon Glass <sjg@chromium.org> wrote:
+On Thu, 5 Dec 2024 at 06:54, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 >
-> Hi Tom,
+> There are already several helpers to find a udevice based on its
+> position in a device tree, like getting a child or a node pointed by a
+> phandle, but there was no support for graph endpoints, which are very
+> common in display pipelines.
 >
-> On Tue, 3 Dec 2024 at 17:12, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Dec 03, 2024 at 05:03:26PM -0700, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On Tue, 3 Dec 2024 at 16:46, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > This series implements read_all() so that it is possible to read all the
-> > > > files relating to a bootflow, make adjustments and then boot.
-> > > >
-> > > > Unfortunately quite a few things stand in the way, so this series
-> > > > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > > > required support in pxe_utils and the differing code in the extlinux and
-> > > > PXE bootmeths. There is very little new code, but quite a lot of
-> > > > refactoring.
-> > > >
-> > > > The bootm, booti and bootz commands have all been refactored previously,
-> > > > so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> > > > At the, time, zboot was left alone, since it is x86-specific and a bit
-> > > > more trouble.
-> > > >
-> > > > This series adds a programatic API for zboot and uses the forthcoming
-> > > > bootstd 'image list' to collect information from an extlinux file. It is
-> > > > therefore possible to parse the file, load the resulting images and then
-> > > > examine/adjust the resulting bootflow, before booting.
-> > > >
-> > > > The addition of options to extlinux resulted in the PXE and extlinux
-> > > > bootmeth having slightly different features. This is tidied up in this
-> > > > series, with common functions for both. This allows the same features
-> > > > (loading images as a separate step) to be provided for PXE.
-> > > >
-> > > > Changes in v2:
-> > > > - Split out strlcpy() change into new patch
-> > > > - Move strlcpy() change into an earlier patch
-> > > > - Fix 'initaddr' typo'
-> > > > - Rebase on earlier change
-> > > > - Add new patch to simplify the code reading fdtcontroladdr and fdt_addr
-> > > >
-> > > > Simon Glass (41):
-> > > >   x86: Make do_zboot_states() static
-> > > >   x86: Rename zboot_run() to zboot_run_args()
-> > > >   x86: Drop duplicate definition of zimage_dump()
-> > > >   x86: Move x86 zboot state into struct bootm_info
-> > > >   x86: Rename state to bmi
-> > > >   x86: Move the bootm state for zimage into cmd/
-> > > >   bootstd: Correct display of kernel version
-> > > >   x86: Drop the unnecessary base_ptr argument to zboot_dump()
-> > > >   boot: Use strlcpy() in label_boot()
-> > > >   boot: Split pxe label_boot() into two parts
-> > > >   boot: Split pxe label_run_boot() into two parts
-> > > >   boot: Pass just the FDT argument to label_process_fdt()
-> > > >   bootm: Allow building bootm.c without CONFIG_SYS_BOOTM_LEN
-> > > >   boot: pxe: Use bootm_...() functions where possible
-> > > >   pxe_utils: Simplify default fdt in label_run_boot()
-> > > >   boot: pxe: Refactor label_run_boot() to avoid cmdline
-> > > >   net: Keep the bootstage functions together
-> > > >   net: Tidy up the comments to parse_args()
-> > > >   net: Simplify parse_args()
-> > > >   net: Return the load address from parse_args()
-> > > >   net: Return the address and size from parse_addr_size()
-> > > >   net: Return the size from parse_args()
-> > > >   net: Refactor part of netboot_common() into a function
-> > > >   net: Drop #ifdef in parse_args()
-> > > >   net: Provide a function to run network operations
-> > > >   boot: Avoid using the cmdline in bootmeth_pxe and pxe cmd
-> > > >   pxe: Drop the cmdline parameter
-> > > >   pxe: Record the bootflow in the PXE context
-> > > >   pxe: Allow skipping the boot
-> > > >   test: Update bootm test to restore silent_console
-> > > >   bootmeth_extlinux: Move extlinux_info into plat
-> > > >   bootmeth_extlinux: Move pxe_context into plat
-> > > >   bootmeth: Refactor to put options in a common file
-> > > >   bootmeth_pxe: Implement the fallback option
-> > > >   bootmeth_pxe: Drop the driver-private data
-> > > >   bootmeth_extlinux: Move boot code into common file
-> > > >   bootstd: Update extlinux and pxe to allow boot interruption
-> > > >   pxe: Collect the FDT in the bootflow
-> > > >   pxe: Deal with a missing FDT in the bootflow
-> > > >   pxe_utils: Refactor to separate reading from booting
-> > > >   bootmeth_extlinux: Refactor extlinux to split boot
-> > > >
-> > > >  arch/x86/include/asm/zimage.h |  57 +---
-> > > >  arch/x86/lib/zimage.c         | 102 ++++---
-> > > >  boot/Makefile                 |   6 +-
-> > > >  boot/bootm.c                  |   8 +-
-> > > >  boot/bootmeth_cros.c          |   6 +-
-> > > >  boot/bootmeth_extlinux.c      |  97 +------
-> > > >  boot/bootmeth_pxe.c           |  48 ++--
-> > > >  boot/ext_pxe_common.c         | 134 +++++++++
-> > > >  boot/pxe_utils.c              | 507 +++++++++++++++++++++-------------
-> > > >  cmd/bootflow.c                |   8 +-
-> > > >  cmd/net.c                     |  92 +++---
-> > > >  cmd/pxe.c                     |  30 +-
-> > > >  cmd/sysboot.c                 |   4 +-
-> > > >  cmd/x86/zboot.c               |  33 ++-
-> > > >  include/bootm.h               |  63 ++++-
-> > > >  include/bootmeth.h            |   8 +-
-> > > >  include/extlinux.h            |  52 +++-
-> > > >  include/net-common.h          |  30 ++
-> > > >  include/pxe_utils.h           |  56 +++-
-> > > >  net/net.c                     |  44 +++
-> > > >  test/boot/bootflow.c          |  71 +++++
-> > > >  test/boot/bootm.c             |   7 +
-> > > >  22 files changed, 957 insertions(+), 506 deletions(-)
-> > > >  create mode 100644 boot/ext_pxe_common.c
-> > > >
-> > > > --
-> > > > 2.34.1
-> > > >
-> > >
-> > > Unfortunately it seems there is a bug in here somewhere, in that it
-> > > prepends the extlinux file's path to any files which are read, at
-> > > least with pxe. So I am going to need to take another look...
-> > >
-> > > We don't have sandbox tests for this case, unfortunately. At some
-> > > point we should try to add some.
-> >
-> > Does the pxelinux test not catch the problem? If not, that would be
-> > where to start expanding perhaps.
+> Add a new helper, named uclass_get_device_by_endpoint() which enters the
+> child graph reprensentation, looks for a specific port, then follows the
+> remote endpoint, and finally retrieves the first parent of the given
+> uclass_id.
 >
-> Right...it needs a little more work, but for now I'll have to fix the
-> bug, as it's already 41 patches. I might be able to add a smaller
-> test, will see.
+> This is a very handy and straightforward way to get a bridge or a panel
+> handle.
+>
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+>  drivers/core/uclass.c | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>  include/dm/uclass.h   | 21 +++++++++++++++++
+>  2 files changed, 83 insertions(+)
 
-It turned out to be a boolean which needs a different value between
-extlinux and PXE. I didn't notice it at first. So I'll send this
-series once it passes CI
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
