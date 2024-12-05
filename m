@@ -4,89 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FF4FE7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7BB6E7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 10:38:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 930E38934C;
-	Thu,  5 Dec 2024 10:41:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id EB45A89408;
+	Thu,  5 Dec 2024 11:38:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="E3LM/HfX";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ShqSRH7Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 644938919B; Thu,  5 Dec 2024 10:41:48 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A6533893F6; Thu,  5 Dec 2024 11:38:33 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20630.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::630])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59D9589440
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:41:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3DE4089401
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 11:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2ee51c5f000so531036a91.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 01:41:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1733391703; x=1733996503;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=45wZkAlo0LDBzG9YP3v1FQ6jAG7RdgIFAGvr6tJhO7c=;
- b=E3LM/HfXtmFGDEW/oWZmFrWoNRx3c+j7t04tmJ1SqqtDvXXW8GJXMBUmGZdqf+Ty6Y
- rEQ+2ddKtv4iXs+HVAtodYgVsCoDjh0nqfVNJejQGskACuV+cfOlIod8RHctx0Ea+mVs
- AW1KYMs5RKEn/0mWJSau2fbF7e65AXVC80ceg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733391703; x=1733996503;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=45wZkAlo0LDBzG9YP3v1FQ6jAG7RdgIFAGvr6tJhO7c=;
- b=Helzz47U7hc3rojakCfrk91CJF8teIabDPd9LUCe/j9SE1LDqEve0OenU7suNTDymv
- rt7RFs7HjdUe61fEHVEQ7Mkn5JFbPU5IIoieo2KLPYdMrX2YWFaAnu77YyjXy4cmRBDN
- kIqu85zfKyE+j+rYcuuyUPOVtlPm9ws2DOCnZxeTdEaOqu2Of0r+V4ak558Wb0psMPzt
- wmX13LYudXYC4jiC4Yr+cI2jl1GVc7I/VsxuW1YpukqcGUTVcpTJeHS0X4XCi+1j3cYP
- DoZsW5FyfhCkTHjyTXzBStw14wZ1ohlL+AK/v6IF2L/jWTUlhB97lxxJ6jHsAuTz6lAq
- 9P/A==
-X-Gm-Message-State: AOJu0YyAHuHlCMQ/N3WJAsSVdD5MxwpYdaHdaQbD1flsX/tzp+rq5AYI
- peKPfjFlXSNtDWmVyVk2RsaKvHSQcEhHfr2FH4BFH9+ta3LRywGw6/seMARTaVE94qT+I1/nmRE
- 1N9kqstM00NhEmRY2fJKurkYUw3SX2tGaJxyQOeu4P0fJSHVV
-X-Gm-Gg: ASbGnctVtN1xg7rPODsE/44/15CHXKMAqs4VTjzyAwUVXSSI456p+0jM9Fh4TPMldeq
- hTRMHIO1bSTwPct/1RanUhmsQ2hZYRjDhBlFVmt/4TtRW8AaAEfsv6Hn90pseP3a0sFw=
-X-Google-Smtp-Source: AGHT+IHeu/IIJ/6rcTmkksMFERSveWjETE5DjCe8pgLyeidftpB9Zjq2ZngkLjfGURZ63QrsYzPxPWOs9/RaL4550Lw=
-X-Received: by 2002:a17:90b:17c9:b0:2ee:6e22:bfd0 with SMTP id
- 98e67ed59e1d1-2ef1ce997f8mr9548675a91.21.1733391702753; Thu, 05 Dec 2024
- 01:41:42 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e4NUShI9y2DJLNZqO/Jv3T4oN3nNZ5SqlyEJuxDnJQAYig8g69jhyLuKUgAdelC1of3AR4NePQfVSY5LSZpo6lJ9U8S/PAs4AesnTHCK2AW6mDcj2NLFlhY2T4WYN5qaiJytNCoM0QZ6FYxknrPY3bBxfJeXcC8TvsmFM5EP+WyB/k4aBr6Iw/7g8fdVdls7fylOGGAi13utfvHC20H0ry8+6DyS0ZKSs5OZes6EB6CPVs2MDRRttkpzC8JvJY3AxddLBaDK4gfA09wjxiKVg2XDr24iDXJn1+zdou6PrmAv0+ko+NdHQae9nXgzlJinpR7eYdd6ELQuVIggvZNbSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9F8vX6dJjv2rRbiGu5SdzD0LnLaSlBno51TlhR4frS8=;
+ b=SI9ztZW52Jog1spUX/TROVkzZ1eQHuBKgpWbsMrl8Iep6jATQYlpvuY35Kx7NTlHZm2iu9bsu0Hd9TukK2uU6i5GJ2PmCdS3aIQmA90uvHKGjbmrtB95EFPCPvXZRG891CDMpeCHAFqZWiFEI8e1DGzrXgrWi2/MfLpyTmfcBeDPGB5OPFAhBb+kotqy75fmVEbOY6PVPP6ltIqaWYQx5A+sPskKnahTYPgtE40GAy1sl5uYDeX/FhHGUuVfPSkpDjzW5fWcZMUlw3F6Fer+vHuUy4eilU1i9uV8feykbbDUMQbh5336pVSoSmJek9iInZtxxDxlWvkWrBa4k5q6HQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9F8vX6dJjv2rRbiGu5SdzD0LnLaSlBno51TlhR4frS8=;
+ b=ShqSRH7Qc+1Jbg92vVgntsTtpdLjiLZ9IMeJQRbbOI0LTuocmIIV0e/VLRKz7XYxKhA6idMwDhuo4TXWUGC/Fvmvdf19mSC9q82zTXeYmLrC969xUSM1uUkJqTfnhXf4Dp4jD/1wWPZ6xwju7bgXkqTILzM2R59fwUqN6AUptHM=
+Received: from BN6PR17CA0056.namprd17.prod.outlook.com (2603:10b6:405:75::45)
+ by DS0PR12MB6533.namprd12.prod.outlook.com (2603:10b6:8:c2::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8207.18; Thu, 5 Dec
+ 2024 10:38:27 +0000
+Received: from BN1PEPF00006003.namprd05.prod.outlook.com
+ (2603:10b6:405:75:cafe::eb) by BN6PR17CA0056.outlook.office365.com
+ (2603:10b6:405:75::45) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8207.18 via Frontend Transport; Thu,
+ 5 Dec 2024 10:38:26 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BN1PEPF00006003.mail.protection.outlook.com (10.167.243.235) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8230.7 via Frontend Transport; Thu, 5 Dec 2024 10:38:26 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 5 Dec
+ 2024 04:38:23 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, T Karthik Reddy
+ <t.karthik.reddy@xilinx.com>, Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>
+Subject: [PATCH 1/2] arm64: versal: Wire SPIs for dfu_alt_info variable
+ generation
+Date: Thu, 5 Dec 2024 11:38:15 +0100
+Message-ID: <67ff88c8c7186138353c0b74ed37a318fb4b199e.1733395093.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
- <20241205092315.25060-15-dinesh.maniyam@intel.com>
- <BL1PR11MB53660F0C5BE89BE5CEE5FBA982302@BL1PR11MB5366.namprd11.prod.outlook.com>
-In-Reply-To: <BL1PR11MB53660F0C5BE89BE5CEE5FBA982302@BL1PR11MB5366.namprd11.prod.outlook.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 5 Dec 2024 10:41:17 +0100
-Message-ID: <CAOf5uwk102CGq243krXHOjLkSFwPq7RPH8wdWk5Arg5SEaGFtg@mail.gmail.com>
-Subject: Re: [resend v2 14/19] configs: nand2_defconfig: Enable configs for
- nand boot
-To: "Maniyam, Dinesh" <dinesh.maniyam@intel.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>, Marek <marex@denx.de>, 
- Simon <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>, 
- Alexander Dahl <ada@thorsis.com>, William Zhang <william.zhang@broadcom.com>, 
- Igor Prusov <ivprusov@salutedevices.com>, "Meng,
- Tingting" <tingting.meng@intel.com>, 
- "Chee, Tien Fong" <tien.fong.chee@intel.com>, "Hea,
- Kok Kiang" <kok.kiang.hea@intel.com>, 
- "Ng, Boon Khai" <boon.khai.ng@intel.com>, 
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>, 
- "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>, 
- "Lim, Jit Loon" <jit.loon.lim@intel.com>, "Tang,
- Sieu Mun" <sieu.mun.tang@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2447; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=LZvVQ7hA7UtVBJRU0Oe52UIF2nA00miZivqBgsn49rQ=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvTAphmVr329FL/O3jFZhl/T2Kb4coP1HuPVocnf0lZvv
+ /qlZpdYRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZiIFSPD/Ix9rAXpXD/b13i6
+ JT9v9Xn412ziP4b5vj/abbtmrPoRtez/rTMP7X1N3W3yAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006003:EE_|DS0PR12MB6533:EE_
+X-MS-Office365-Filtering-Correlation-Id: cafca134-6893-4702-e92e-08dd1518f3a7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|36860700013|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?WbJTayksBywWdZ5XJQM0GQwv2TNtM3tzhpJ555WRWyJof2kK2bJNY6omBuaZ?=
+ =?us-ascii?Q?mFtTQYzYOERqYdVhdJ/077xEfaFoN7Nxflb9+AIy8U0TOROqjTkp7bxJFaeH?=
+ =?us-ascii?Q?CPKqxSUh+WkF7i3P+rCUmz0mKEUzbhi00rKc9YREt85F4kXFo1B+CS59rVnm?=
+ =?us-ascii?Q?ztHIkpsQVdl0lUWyAYJWa1wbvNNNvvLhtdA0sxW6tACvfYHwvXdlRwT+X4s8?=
+ =?us-ascii?Q?WAXKFTHqMTYV+gBIGPmvjzLIsyQ5ACm/mzP/r+BsIKWX5woG4p9ztuRJKqzK?=
+ =?us-ascii?Q?AMuHGc576+A3GGCdAPyis3Z1un7nuwZmueXKr8ofn8Te1eV2peHSIZd2+6QL?=
+ =?us-ascii?Q?DQImdBwfzrRsdPW8jkVhbMPtI8r+mCphSDO3cJkYLRUHMVMGmXO+qXyQm5aw?=
+ =?us-ascii?Q?+kO81mK+yagQis96t2dJU9LSxsZMtF4LokFKTq3VQBUXzwTMpBPSdfAwDpf/?=
+ =?us-ascii?Q?a+9g3JOxvpQui/VQ8gEzvG0oV4EO0TtxZZP7VoFvnjySu644PQKA71kziqKa?=
+ =?us-ascii?Q?eDD3ocu3z75Oi8S7KsPKx3mvn+BrkugbflCDOVxtcFf/zpfl6V5BIv5majw/?=
+ =?us-ascii?Q?KWQqz0gcpUhdGTzAamd69BqsRHG2L23GCQE3ToNS1jCpbgUUkx36/dBtpNHe?=
+ =?us-ascii?Q?qqkdXlPAaWVbv0O1AaV/4PjF+OrO+PttItCJO2oKHN7tvtLN5WkJWxIYEMoU?=
+ =?us-ascii?Q?GdaDpBdW+R2+rhPN1Q4h9Hir4BQfetZ4na1BEOt+pT08ZyDAfA5I0tsyBrK6?=
+ =?us-ascii?Q?3BSzOqenEF6+rrNg/ELipK5wr5gqyFMuK1HzrmbwWI4TXgg27rh2l/k/XBna?=
+ =?us-ascii?Q?XdnCHKWvE4L8EKemrH2vLkY3Ab7hblgBSa+PXVJhVV5Wlopk8bEgsLi38+3b?=
+ =?us-ascii?Q?Ygtm+8BQ3hPdp7JJ1RiY4M29ZstM2ECepyH01vfrvCn9j1Vzvmk0jBIRYDHW?=
+ =?us-ascii?Q?gKlV3f2tOJevk4egCNEh81bfKUXM/uitnQd8o761q4qbdjONE5DMNUr7C8nh?=
+ =?us-ascii?Q?om29fcHUz2cVLF1+HgV8/dE1W4MLiKgREnnyoNoRWBsnzpIU/uS8RSxnWRq/?=
+ =?us-ascii?Q?qzrLKuZbknPi24jwDaRbGWXWTx/qn0qIDIqv0p7bNM7l7UNgm5lXwPm0lPgh?=
+ =?us-ascii?Q?JkLBVQoBktmU9IrTaIlvnfA1wgTYGTBSpyb5V7mXPAAFdEGUgAdfAbn//8xC?=
+ =?us-ascii?Q?2UBVkfIb905TQdb33WsshRJqlN7KjHSiCHKc/R4J8VIaHUeT7AnYRl64OVN+?=
+ =?us-ascii?Q?ptkZ3USIUU4Wcu464JvlOY5gZ6iPZvrGlZnP9dxJTIb1bLVMBX/rE+81ZlTd?=
+ =?us-ascii?Q?fJsia85lV2Qa7Ffx7a/GAoOQn0EicJGi/X+9nCYWnIbzETt0RL94ETOMzVBd?=
+ =?us-ascii?Q?VmjU295bkLwAmYRBXwZkFmqNvXUITkEg6hOMxevxmEAdDKvVSdkKsoNce5ux?=
+ =?us-ascii?Q?uv6exl7uS2ePqBlo/7PP1Qd/GjJhVP5a?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2024 10:38:26.6963 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cafca134-6893-4702-e92e-08dd1518f3a7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00006003.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6533
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,123 +153,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Enable automatic dfu_alt_info variable generation based on MTD partition.
 
-Il gio 5 dic 2024, 10:36 Maniyam, Dinesh <dinesh.maniyam@intel.com> ha
-scritto:
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
->
->
-> > -----Original Message-----
-> > From: Maniyam, Dinesh <dinesh.maniyam@intel.com>
-> > Sent: Thursday, 5 December 2024 5:23 pm
-> > To: u-boot@lists.denx.de
-> > Cc: Marek <marex@denx.de>; Simon <simon.k.r.goldschmidt@gmail.com>; Tom
-> > Rini <trini@konsulko.com>; Dario Binacchi
-> > <dario.binacchi@amarulasolutions.com>; Michael Trimarchi
-> > <michael@amarulasolutions.com>; Johan Jonker <jbx6244@gmail.com>; Michal
-> > Simek <michal.simek@amd.com>; Arseniy Krasnov
-> > <avkrasnov@salutedevices.com>; Alexander Dahl <ada@thorsis.com>; William
-> > Zhang <william.zhang@broadcom.com>; Igor Prusov
-> > <ivprusov@salutedevices.com>; Meng, Tingting <tingting.meng@intel.com>;
-> > Chee, Tien Fong <tien.fong.chee@intel.com>; Hea, Kok Kiang
-> > <kok.kiang.hea@intel.com>; Maniyam, Dinesh <dinesh.maniyam@intel.com>;
-> > Ng, Boon Khai <boon.khai.ng@intel.com>; Yuslaimi, Alif Zakuan
-> > <alif.zakuan.yuslaimi@intel.com>; Zamri, Muhammad Hazim Izzat
-> > <muhammad.hazim.izzat.zamri@intel.com>; Lim, Jit Loon
-> > <jit.loon.lim@intel.com>; Tang, Sieu Mun <sieu.mun.tang@intel.com>
-> > Subject: [resend v2 14/19] configs: nand2_defconfig: Enable configs for
-> nand boot
-> >
-> > From: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> >
-> > Enable configs for nand boot.
-> >
-> > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> >
-> > ---
-> > v2:
-> > - remove the "this patch is to" commit phrases
-> > - using #include mechanism to keep track of the variant
-> > - add maintainer
-> > ---
-> > ---
-> >  board/intel/agilex5-socdk/MAINTAINERS   |  2 ++
-> >  configs/socfpga_agilex5_nand2_defconfig | 33 +++++++++++++++++++++++++
-> >  2 files changed, 35 insertions(+)
-> >  create mode 100644 configs/socfpga_agilex5_nand2_defconfig
-> >
-> > diff --git a/board/intel/agilex5-socdk/MAINTAINERS b/board/intel/agilex5-
-> > socdk/MAINTAINERS
-> > index b696f788c8..30d8815d20 100644
-> > --- a/board/intel/agilex5-socdk/MAINTAINERS
-> > +++ b/board/intel/agilex5-socdk/MAINTAINERS
-> > @@ -2,7 +2,9 @@ SOCFPGA BOARD
-> >  M:   Tien Fong Chee <tien.fong.chee@intel.com>
-> >  M:   Teik Heng Chong <teik.heng.chong@intel.com>
-> >  M:   Jit Loon Lim <jit.loon.lim@intel.com>
-> > +M:   Dinesh Maniyam <dinesh.maniyam@intel.com>
-> >  S:   Maintained
-> >  F:   board/intel/agilex5-socdk/
-> >  F:   include/configs/socfpga_agilex5_socdk.h
-> >  F:   configs/socfpga_agilex5_defconfig
-> > +F:   configs/socfpga_agilex5_nand2_defconfig
-> > diff --git a/configs/socfpga_agilex5_nand2_defconfig
-> > b/configs/socfpga_agilex5_nand2_defconfig
-> > new file mode 100644
-> > index 0000000000..3bfe6270fd
-> > --- /dev/null
-> > +++ b/configs/socfpga_agilex5_nand2_defconfig
-> > @@ -0,0 +1,33 @@
-> > +#include <configs/socfpga_agilex5_defconfig>
-> > +
-> > +CONFIG_ARM=y
-> > +CONFIG_ARCH_SOCFPGA=y
-> > +CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk"
-> > +CONFIG_OF_UPSTREAM=y
-> > +CONFIG_BOOTARGS="earlycon panic=-1 root=${nandroot} rw rootwait
-> > rootfstype=ubifs ubi.mtd=1"
-> > +CONFIG_TARGET_SOCFPGA_AGILEX5_NAND2=y
-> > +CONFIG_PHY_CADENCE_COMBOPHY=n
-> > +CONFIG_SPL_PHY_CADENCE_COMBOPHY=n
-> > +# CONFIG_MMC_DW is not set
-> > +CONFIG_SPL_MTD=y
-> > +CONFIG_CMD_NAND_TRIMFFS=y
-> > +CONFIG_CMD_NAND_LOCK_UNLOCK=y
-> > +CONFIG_SPL_MTD_SUPPORT=y
-> > +CONFIG_MTDIDS_DEFAULT="nand0=10b80000.nand.0"
-> > +CONFIG_MTDPARTS_DEFAULT="mtdparts=10b80000.nand.0:2m(u-boot),-
-> > (root)"
-> > +CONFIG_CMD_UBIFS=y
-> > +CONFIG_MTD_UBI=y
-> > +CONFIG_MTD_UBI_WL_THRESHOLD=4096
-> > +CONFIG_MTD_UBI_BEB_LIMIT=20
-> > +CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
-> > +CONFIG_SYS_NAND_U_BOOT_OFFS=0x0
-> > +CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND=0x100000
-> > +CONFIG_UBI_SILENCE_MSG=y
-> > +CONFIG_MTD_RAW_NAND=y
-> > +CONFIG_NAND_CADENCE=y
-> > +CONFIG_SPL_NAND_SUPPORT=y
-> > +CONFIG_SPL_NAND_FRAMEWORK=y
-> > +CONFIG_SPL_NAND_CADENCE=y
-> > +CONFIG_SYS_NAND_ONFI_DETECTION=y
-> > +CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
-> > +CONFIG_SYS_NAND_PAGE_SIZE=0x800
-> > --
-> > 2.19.0
->
-> Hi Michael,
->
-> Please guide me through the process to run the CI in github.
->
+ board/xilinx/versal/board.c          | 41 ++++++++++++++++++++++++++++
+ configs/xilinx_versal_virt_defconfig |  1 +
+ 2 files changed, 42 insertions(+)
 
-I will do it for you and send some instructions today.
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index fd5c6ced7956..964a779b5f19 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -14,6 +14,7 @@
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <mmc.h>
++#include <mtd.h>
+ #include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+@@ -346,6 +347,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 
+ #define DFU_ALT_BUF_LEN		SZ_1K
+ 
++static void mtd_found_part(u32 *base, u32 *size)
++{
++	struct mtd_info *part, *mtd;
++
++	mtd_probe_devices();
++
++	mtd = get_mtd_device_nm("nor0");
++	if (!IS_ERR_OR_NULL(mtd)) {
++		list_for_each_entry(part, &mtd->partitions, node) {
++			debug("0x%012llx-0x%012llx : \"%s\"\n",
++			      part->offset, part->offset + part->size,
++			      part->name);
++
++			if (*base >= part->offset &&
++			    *base < part->offset + part->size) {
++				debug("Found my partition: %d/%s\n",
++				      part->index, part->name);
++				*base = part->offset;
++				*size = part->size;
++				break;
++			}
++		}
++	}
++}
++
+ void set_dfu_alt_info(char *interface, char *devstr)
+ {
+ 	int bootseq = 0, len = 0;
+@@ -371,6 +397,21 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".bin fat %d 1",
+ 			       bootseq);
+ 		break;
++	case QSPI_MODE_24BIT:
++	case QSPI_MODE_32BIT:
++	case OSPI_MODE:
++		{
++			u32 base = 0;
++			u32 size = 0x1500000;
++			u32 limit = size;
++
++			mtd_found_part(&base, &limit);
++
++			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
++					"sf 0:0=boot.bin raw 0x%x 0x%x",
++					base, limit);
++		}
++		break;
+ 	default:
+ 		return;
+ 	}
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index c8f166c12218..fb757c1067d0 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -83,6 +83,7 @@ CONFIG_CLK_VERSAL=y
+ CONFIG_DFU_TIMEOUT=y
+ CONFIG_DFU_MMC=y
+ CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+ CONFIG_ARM_FFA_TRANSPORT=y
+ CONFIG_FPGA_XILINX=y
+-- 
+2.43.0
 
-Sorry for delay. I was busy ;)
-
-Michael
-
->
-> Thanks.
->
