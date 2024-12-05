@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 101C4E7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C780E77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7363A892F0;
-	Thu,  5 Dec 2024 10:24:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C65DC8949E;
+	Thu,  5 Dec 2024 10:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="OCzTlOVI";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Ds14Aywy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3EC38940D; Thu,  5 Dec 2024 10:24:19 +0100 (CET)
+ id C9C308949D; Thu,  5 Dec 2024 10:24:24 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 587F489361
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5903189411
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390657; x=1764926657;
+ t=1733390662; x=1764926662;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Pb+MxktatSNPQtDqa7JHsn2RB/N5AGJBVg4C4ZzSu80=;
- b=OCzTlOVIDmpJ9fC30mhtWYf5CApOmuM6QdRO9du0McMJdEuE05zbCtEP
- i46urwv7/HMu1QvWZI0099+Eh7QuFbDDRVHxmX5WeDkMUO7EvxU6cc6ND
- wxX+NbQN3mfbkt5rwLF1U+y/d+6KO2Sz8O8nG1XwK5TE+7MxNRWIZgI+n
- l02hrf+pFMB9iyjbPAZuSvb4Yua8ccok4IsQ81BDpWg1jqbSMff7LLKTr
- OlQd6I/OR+lW55ooESyM11TEtGaSxL2uGEBEj+7Mh74mJbLd8KCFKSrDL
- GU6rF1DbCRMBFARwZyKS41BYILIBTr9Is6XVeEPH051NI7J9eq4c+c1VB g==;
-X-CSE-ConnectionGUID: VyvA2zSuQzCBockd3UpAtw==
-X-CSE-MsgGUID: klpAkZhYS/mWEYtLQoUFhQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610285"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610285"
+ bh=1x/U2o5k7Fvmkdn+00sG9PWE+AgosUm0hEOoHzKdSiw=;
+ b=Ds14AywyqPUSC7vwOaieRhiRO4D+qtEigBto1iB96qJeecuN9Zq6wmjD
+ DS5DjJEuABiSgjjfKs3+B1zVWqQI4zlA64sQEOU4ncXg2C3rdcay/Fz8i
+ Uq3GFnopN9+4S3+g/Pmj+nZtLXg6vgQ8O2QXfXne5Crk5OOKxuXZB+Y29
+ zaXhE2cTMIQlNiv/GWq6fpQuMz1iS+pVMmyE77moFrs6Qrun07hI4ad6f
+ qz4XwN3GPcxIHNG+TXz68GcTHJLTB+w0Z81lZiOPl8yo6HCRIOJa9z/Ox
+ tXFFUyFHblwPB5faM2n9xs4FkJK5Fp1WmwnCzV5Sx65ob0Z+mOQ4DBQKe Q==;
+X-CSE-ConnectionGUID: vWFI4Q5nTui5IQYb+OrVeQ==
+X-CSE-MsgGUID: c44ayMqlRc2xyQeA5qU/7Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610301"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610301"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:24:17 -0800
-X-CSE-ConnectionGUID: OHMjkKLrStiWKY/cIKJz3A==
-X-CSE-MsgGUID: iQJ7zDptQOG1N8WtLu9+5A==
+ 05 Dec 2024 01:24:22 -0800
+X-CSE-ConnectionGUID: i4Y9yZ+WQuyP0EVTZtAHDA==
+X-CSE-MsgGUID: CaRIrDb7TIu9VCIzxU75Ew==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94121887"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94121902"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:12 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:17 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 09/19] drivers: mtd: nand: cadence: Support cmd
- SET_FEATURES & GET_FEATURES
-Date: Thu,  5 Dec 2024 17:23:05 +0800
-Message-Id: <20241205092315.25060-10-dinesh.maniyam@intel.com>
+Subject: [resend v2 10/19] drivers: mtd: nand: cadence: Flush & invalidate dma
+ descriptor
+Date: Thu,  5 Dec 2024 17:23:06 +0800
+Message-Id: <20241205092315.25060-11-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,76 +95,48 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Support NAND_CMD_SET_FEATURES & NAND_CMD_GET_FEATURES.
-These commands is one of the basic commands of NAND. The parameters get
-from these commands will be used to set timing mode
-of NAND data interface.
+Ensure ddr memory is updated with the data from dcache.
+This would help to ensure cdma always reading the latest dma descriptor
+from ddr memory.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
+- add support for invalidate cache
 ---
 ---
- drivers/mtd/nand/raw/cadence_nand.c | 30 +++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+ drivers/mtd/nand/raw/cadence_nand.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
 diff --git a/drivers/mtd/nand/raw/cadence_nand.c b/drivers/mtd/nand/raw/cadence_nand.c
-index 74926560ad..895ee77320 100644
+index 895ee77320..ed93296ba8 100644
 --- a/drivers/mtd/nand/raw/cadence_nand.c
 +++ b/drivers/mtd/nand/raw/cadence_nand.c
-@@ -2010,6 +2010,29 @@ static int cadence_nand_reset(struct mtd_info *mtd, unsigned int command)
- 	return 0;
+@@ -430,6 +430,10 @@ cadence_nand_cdma_desc_prepare(struct cadence_nand_info *cadence,
+ 
+ 	cdma_desc->command_type = ctype;
+ 	cdma_desc->ctrl_data_ptr = ctrl_data_ptr;
++
++	flush_cache((dma_addr_t)cadence->cdma_desc,
++		    ROUND(sizeof(struct cadence_nand_cdma_desc),
++			  ARCH_DMA_MINALIGN));
  }
  
-+static int cadence_nand_features(struct mtd_info *mtd, u8 offset_in_page, u32 command)
-+{
-+	struct nand_chip *chip = mtd_to_nand(mtd);
-+	int ret = 0;
-+
-+	ret = cadence_nand_cmd_opcode(chip, command);
-+	if (ret)
-+		return ret;
-+
-+	ret = cadence_nand_cmd_address(chip, ONE_CYCLE, &offset_in_page);
-+	if (ret)
-+		return ret;
-+
-+	if (command == NAND_CMD_GET_FEATURES)
-+		ret = cadence_nand_cmd_data(chip, ONFI_SUBFEATURE_PARAM_LEN,
-+					    GCMD_DIR_READ);
-+	else
-+		ret = cadence_nand_cmd_data(chip, ONFI_SUBFEATURE_PARAM_LEN,
-+					    GCMD_DIR_WRITE);
-+
-+	return ret;
-+}
-+
- static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
- 				 int offset_in_page, int page)
- {
-@@ -2034,6 +2057,11 @@ static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
- 	case NAND_CMD_RESET:
- 		ret = cadence_nand_reset(mtd, command);
- 		break;
-+
-+	case NAND_CMD_SET_FEATURES:
-+	case NAND_CMD_GET_FEATURES:
-+		ret = cadence_nand_features(mtd, offset_in_page, command);
-+		break;
- 	/*
- 	 * ecc will override other command for read, write and erase
- 	 */
-@@ -2076,6 +2104,8 @@ static u8 cadence_nand_read_byte(struct mtd_info *mtd)
- 			size = 8;
- 		else if (cadence->cmd == NAND_CMD_PARAM)
- 			size = sizeof(struct nand_jedec_params);
-+		else if (cadence->cmd == NAND_CMD_GET_FEATURES)
-+			size = ONFI_SUBFEATURE_PARAM_LEN;
+ static u8 cadence_nand_check_desc_error(struct cadence_nand_info *cadence,
+@@ -457,6 +461,11 @@ static int cadence_nand_cdma_finish(struct cadence_nand_info *cadence)
+ 	struct cadence_nand_cdma_desc *desc_ptr = cadence->cdma_desc;
+ 	u8 status = STAT_BUSY;
  
- 		cadence_nand_read_buf(mtd, &cadence->buf[0], size);
- 	}
++	invalidate_dcache_range((dma_addr_t)cadence->cdma_desc,
++				(dma_addr_t)cadence->cdma_desc +
++				ROUND(sizeof(struct cadence_nand_cdma_desc),
++				      ARCH_DMA_MINALIGN));
++
+ 	if (desc_ptr->status & CDMA_CS_FAIL) {
+ 		status = cadence_nand_check_desc_error(cadence,
+ 						       desc_ptr->status);
 -- 
 2.19.0
 
