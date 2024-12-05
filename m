@@ -4,174 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE537E77171
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 08:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DDFE7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 08:34:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29369891B1;
-	Thu,  5 Dec 2024 09:15:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 92DFE891B1;
+	Thu,  5 Dec 2024 09:34:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MNVh5KPY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="r7/Egkuk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D66CA891C4; Thu,  5 Dec 2024 09:15:24 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::612])
+ id EC582891E1; Thu,  5 Dec 2024 09:34:50 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A866891B0
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 09:15:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2ED38916E
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 09:34:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vvHMdJRH8yZSiZEDn25uQ6h6ZRLM7TIvoa9xD9QqNx0D3NbYJcMOjq5MZSWAVACnoJXmSi/lE5nMKEjinIh5QXX+Dvxtov4/9l+UMdFoGN1wH5Kgu4loDeGRmJxsIKwzZpNh86jcRwC97TqfNlEiI+ciXRV88rNbanK4GvO3wlOr/3sBbcujnyV93BoSjtOd4IG98ovtLjrDxVZTNXLU+JFiYu8r+kk63B8DAPJLrHowttLyx+4RoFT5bOHmLM1Jhtniicd1VNX6YKAM4J5ruXcVPSl7/03ufKqmG1Euyav/BnAtuThzNDjN6xRabVjJoa5crSH4sFaL3opXNzsuCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D4rwnO27G9h+atFY+MA0PK5wMXT0kggyAGaryPIp+Bk=;
- b=S5+efYhT32KprkVDc3W/dzUHPRzloBcqkQJHgMfPtOzWm+q+mMVq2np4HPxpcZqtfWMNcAlMtrXAGvWcJ1N9QxJb30EgZotpwwEj8crgBs6nCr81oJf3V5UIEocdCKgEtYyVDuYVTfXgo0ky9N/OUERVw7Hnf6py/kqJFNh3dhOe3kmlYGC9cwSWRXDEC+MDDCwAsEGzk5USSIRD303cHunZ8Zii2wQ8J/7KJkW4qsLUl9HSW3MT0uqeUlgqWoakOKYI+cB9GBX/VgbntAxnO50hhn6Nt8ECBgG8ASY4suKIMighrBrAV7DWAw7YGB92PYTZ0PIg3ejvvOzXcZw6ZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D4rwnO27G9h+atFY+MA0PK5wMXT0kggyAGaryPIp+Bk=;
- b=MNVh5KPYiYPwHVtmNDG+yzabIwW2fqCBSm7Mx8qMn61WaJW+YskM45jhkNgQZr5vz5zungR3d/WAHtovFtHxLpk3exRTI2OS/OgQXrOQJGYnJF0otfwQquseR9nqvwfsT1VQelg9lEpWPPZx5eIH/ThNXEQxSgLOhAZ8/4tH6zA=
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
- by DM6PR12MB4338.namprd12.prod.outlook.com (2603:10b6:5:2a2::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.12; Thu, 5 Dec
- 2024 08:15:15 +0000
-Received: from SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
- ([fe80::dbf9:f1d1:7c67:f88c%4]) with mapi id 15.20.8207.017; Thu, 5 Dec 2024
- 08:15:15 +0000
-From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-To: Tudor Ambarus <tudor.ambarus@linaro.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "j-humphreys@ti.com" <j-humphreys@ti.com>
-CC: "Simek, Michal" <michal.simek@amd.com>, "jagan@amarulasolutions.com"
- <jagan@amarulasolutions.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
- "u-kumar1@ti.com" <u-kumar1@ti.com>, "trini@konsulko.com"
- <trini@konsulko.com>, "seanga2@gmail.com" <seanga2@gmail.com>,
- "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>, "sjg@chromium.org"
- <sjg@chromium.org>, "william.zhang@broadcom.com"
- <william.zhang@broadcom.com>, "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
- "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
-Subject: RE: [PATCH v2] mtd: spi-nor: Enable mt35xu512aba_fixups for all
- mt35xx flashes
-Thread-Topic: [PATCH v2] mtd: spi-nor: Enable mt35xu512aba_fixups for all
- mt35xx flashes
-Thread-Index: AQHbRs5Q31mSoP8Makufz6zCdH/DNbLXRw0AgAAEyjA=
-Date: Thu, 5 Dec 2024 08:15:15 +0000
-Message-ID: <SA1PR12MB86970F2A723136A967B1633698302@SA1PR12MB8697.namprd12.prod.outlook.com>
-References: <20241205042919.297068-1-venkatesh.abbarapu@amd.com>
- <19873424-f054-45d5-ba3e-9fb484ceb6e1@linaro.org>
-In-Reply-To: <19873424-f054-45d5-ba3e-9fb484ceb6e1@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|DM6PR12MB4338:EE_
-x-ms-office365-filtering-correlation-id: 15da5cb9-b881-4c09-f46e-08dd1504f2c5
-x-ld-processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|366016|7416014|376014|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?R3cwbCtOSEZHTURJdC85YjBKeUNTSVpRQ1g5Y3NHcFdBUldsRU9hQlZGYkxZ?=
- =?utf-8?B?UG1kZyt5WXRZajFWN25FdWp5VzVodm1IN3RXd0w3U3BxcmMyVDl5SDdSOEFk?=
- =?utf-8?B?WFc4Q0FuVW00OVMrUmIza0ZoQjIyNUxHZE05QlpweFF2Uk41QXp1MTgvTERx?=
- =?utf-8?B?MXVVSXRQRHB6Ulk2cmFUYjdia2dEc0M2YXFPNnRveXJtdml3cHFJSUtYdmkz?=
- =?utf-8?B?SmNrejRPTmJ1a0VweHAvMlh3RmVpdzRsTUZtd1dlampaanRTc3k3SWxKaTZy?=
- =?utf-8?B?RVl0aWZqcU83QzZaNkk3YlNvbW9Mek9aSm1wQVoxc25teCtDTVFRWFFNd2Z4?=
- =?utf-8?B?WEovRVVVY29WMVVYQlJkL0VlbW5tL1NubGN4bWZhQythekpWcmVxVGFVaENz?=
- =?utf-8?B?c3pDcGZObXYyVnllNTBPaFV6bit6T3ZpMHc5YXVIWG9ZWTBPNTJyYUZnYkI0?=
- =?utf-8?B?Z2g1cHJrbEltOUVQNERsbFpxVVdnOTN0d1o4Sjc3cWRVSDlEQkE1WTBQcUJB?=
- =?utf-8?B?NmV1MXJyakEwSnZsWFVPaHpFTWhvNjhFc3ZXWUd4Z2JSMDRYa2Z3cTBSMFNi?=
- =?utf-8?B?cGgxSHhXdjBSNVN2OUIvNDc1VUlVTFVSbEhwaFE5NkZuWmt5ejdGOHV1STlt?=
- =?utf-8?B?dnRFeVlkYXFWNmoyQVR4Z1VLNjdUMFpMcDhzdlBES2p4NkFDd2lQWkUvRVd2?=
- =?utf-8?B?cTBlb2dIeTVCR1dCNDVTd25pZ09sZU5KaGxoQVJvVEpZemh6YmpsWitCMXFQ?=
- =?utf-8?B?b3Ava1JkbTZsVnlLYU9aTnhVaEdkTXJhL2ZXb1U1c09QRW8zSXNTMHJaa2hq?=
- =?utf-8?B?MDdRRUZJcVlrZDhMSlFQVDlydDJlT001YXMweXNoWXBaeW8vZ24wcVNDaEt1?=
- =?utf-8?B?Q3NaVVppcHR4YnVEL0ZwWmJVMkJ5a0wwczNzVE92VEFscGhJSDNiNFVIcng4?=
- =?utf-8?B?V0l1YTdheDZwQXpvdGg3SmE5WHY5UkE0MDg0anNxTTB5YTY1bElUU0VwSmU5?=
- =?utf-8?B?WU9wN2huNCtFaTZLazNKWjhjMU9rZU1IY01UWk9tcXpSK00vSDdaTEd6T1Vr?=
- =?utf-8?B?UWRmVUMva1RUTG5MK1Y3SzVXdUl2TFRTQ0k5ZFN4akwyZ3NWcVpXTHduV1Qy?=
- =?utf-8?B?ZVNac201WW9LUWhhU1RTSzBXQ2VVT1JpTGdQaFI1UjdkYVFHY3ZKVGFYQ01I?=
- =?utf-8?B?b2o5Y1VsSEhqakVyL1FIbFBhc3BVcGtJZWhnK2tEdXlCRHJYQmVVRjQxaEVh?=
- =?utf-8?B?OXhOVXB4MWlCZG9kVk9mRVluT1Q4R0hsbUVLMUp0QU1ZdlloNHh6L1Y3RnhV?=
- =?utf-8?B?K0FQTDJSVm1WQTNkWUpLQmtweWdLUjROa0w1Q3pLV3A1YzdoOHYrSkxLTjNt?=
- =?utf-8?B?RkNTVmJ5bXVhdTczc1E2UEFFZ1NXNm5rUTNuYWUwQTR0ODlvODQ4dk1BWG93?=
- =?utf-8?B?a0szejJiYm5URWNaeEJVQnhVR3V2bnk3VExlaTd4KzFDWlpBMlEwSElnaExs?=
- =?utf-8?B?K2VvWldjRjJIYnVvOUVoN2lMMmN4Qm9xM1lKOEY5bWVKdElaWUVXZ3N5dm8v?=
- =?utf-8?B?dXlMcm14UHRxKzNSWXF4N2tVS1Nycm1WajhBVitidTNRUW8rSFVLMFJGc2xT?=
- =?utf-8?B?N0VtcW80WmQ3bmhwMWVVb0ZRTnhTMHRlT25MTHpoa2ZObU9vdGwrOUZKck54?=
- =?utf-8?B?elFGR3loaUI0SmczTWd2TUxvTWtESFo2dEZkY0JIRFpqRmZqMEUxSjV0SU9O?=
- =?utf-8?B?T0Y0VVpuSjRCc25ROHZab2FWbjM5UUc2K3lNd1pwMTgzalVDWVJyTUh4V3VQ?=
- =?utf-8?B?RUdTYm9SdGJBL1c5MmRYdz09?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(7416014)(376014)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dWxTVjd6MnJnbG4rVytWdExFVUkwRFBVbmNTYllZeWJNdWpCb2hodlBsVlpK?=
- =?utf-8?B?ZHB6M3RNYXBzYnRQMHpuTUxWODRBQm5LNStHMk1UY3dwbTBUTFF5SVFoZEJ0?=
- =?utf-8?B?SjNVbFZ4UUl3cUJTdFlxSEswRW5EWFhDS2RjZVIwYUFHSS9wSCt1VzQvVVNL?=
- =?utf-8?B?cWUwRlRwZTNqREpnMEduYkRKOWVuQVJONG53Vy84NTcraFVqb3o3NEF4ZXR3?=
- =?utf-8?B?dDJtUFdNM3dwaDVxM3Q1YzNuR01zVFIvbnlrd3hwZHo3WUl5c2RsaVdQZVN3?=
- =?utf-8?B?SVN6dTdMbUgza043WGtLb3ZaeENGVnZtdUJYSFZRN2VobE5rcWZra3NjNjRy?=
- =?utf-8?B?QlBFalRWZzhaQWYxMG5hWk9DZk5wNW9ESnQ5eDNqazMyVW41UjJqOEJYNEMz?=
- =?utf-8?B?Sm9FblVoWlNxa0FSTTYvem1PbDJmcHYyNWZaaVM0aFh1QmxGRjYrNk9Fbnl1?=
- =?utf-8?B?YTFEb3gvcUJOUTR2cnZ5V0MwSzdwUHprcmtkS1V3ZU9LaTRaSEhGa0puWUVJ?=
- =?utf-8?B?VlZQTTN3NHlGaDBzdHlxcUttTkYrdU1XMEI3NGVSdHlZeVg0RkFyUms0Tzkr?=
- =?utf-8?B?QTJMdzBGY1RScVYxNVRWeWtJYStacVRvOW9qck4rdnJiTWdZc1UyOHdidHQ0?=
- =?utf-8?B?alZWRE1DWXk1citvcC9lbmN5bzZ2dGtkdnBSM2k2TmRUZmlCYUZoOFBZWmtp?=
- =?utf-8?B?RFZHeElaeDFhcUx1OGF6aTJlSkdnd0Q3YkxNajlZRlMxYXJmU1k3VWR6bEsz?=
- =?utf-8?B?R1JUbmJoaldpWkpERTBvREdFT2pYOUtnWjl6ZmM3NEtPc1NFNy9SWldhUDJ2?=
- =?utf-8?B?RXlOZHVDV0tkQm9mUDBxTTdUTGpRS1NMN2VWWG9EY0M5NHoxU2ZDQUpqWmRN?=
- =?utf-8?B?OVFBc3I3bXVua2pGK2hXT3VQWEhOU2N4RElpL3dsLzJMT0U2dHBORW9hQWZz?=
- =?utf-8?B?Tk84WTAzOGR0SjI0ZmowVE5PQm1uU3pRZ3hkTGtSSkkwNGtkdFF1eXh5OW5Y?=
- =?utf-8?B?TDdkZEFzZHVZcW1RSjk2eXlvazNZdVFYSU9CekZ6ZUdUQ2M3VlBrdUg5R0tJ?=
- =?utf-8?B?cmc0OWdUMFdjV1E0Njc0RG1adDFjNzk0aHdlNEVsUUdrVVRJSVRUT0pWQll1?=
- =?utf-8?B?eFVjeEU5NkpmTzg0QllHc09nNGdVMGNtUmRyeTl5cTErQ1M4VlhKODEzaFlo?=
- =?utf-8?B?ZkVPV0hwU0dab0JVemdBa2laeFBpRDg5QmUrbzRnb0pubjRCSy9sUXlTbDFv?=
- =?utf-8?B?VTFDTVBFY2pRZmdNVXFBakRwSFIyd0hOMlk3cWRZNjlTTTlvbVViYzJWUU8r?=
- =?utf-8?B?bkl1dmF2ZFR6SkxjQUFESWs1VEh1VjJVc3JNalJ5dFFBa0xVSHdrT1dWWHI3?=
- =?utf-8?B?cFk3VUhad2xVTkNURWV5dUhseEw5eDduencrdFR6dmNCWHZLa2E2UytpTGxT?=
- =?utf-8?B?WkVwNWNPMVhUamo4dnhXSWxhcnN3cW1FUTBabDFjZ1pRbTdaS2JCeWkvejFV?=
- =?utf-8?B?YWxIcEhpT0NzS2ovWWo3ZU1IQ3NRVXgxSE1lN0lSZG05VWtjUWlRa05nYXli?=
- =?utf-8?B?eE1sT21CTnMxcnoxMnpVclJQTURQY3ZUakZ1L09KNnlxNGdseGhKZklMWGl2?=
- =?utf-8?B?ZmR4Uk15WHpMV0pidjFaWm1uSVZRaTNreVdMUGlKZHlpbmlJN1FSUHVwT01a?=
- =?utf-8?B?TTN6SWNvWGVXWHY5M2ZrdHF1TEgzalMvMEZSeGgrN21Ja2lYRmhwNzBud0dw?=
- =?utf-8?B?N2lCMzNEL1JNZ29kREJabkJCTTZLR2FGUWlUOUIrUUxpTFVtNXc3YkloeVJX?=
- =?utf-8?B?UU5wVjFZNi9nMHhFYnFjbDNNNXh1Wmh6ZUJLOCtJUGZqd3VPK2NVajBnL2s3?=
- =?utf-8?B?OXV3b3F3ZWMyanFIRTNSaUplMTgrRXJWSEtNMW5CaUs5ODlZb2k0cXFrUkFE?=
- =?utf-8?B?Q1R4Y2FuVy8xYkJqdmNiemhzUkZCaGh6KzRhQkdMQkNDcENyNzRZcVU0Nndl?=
- =?utf-8?B?cHRpV0IrcmNRNEw3b3kyVzRRZEpvZDJJdGNYclVHRnRBUGxZWkR1N0tEMnlF?=
- =?utf-8?B?RkpWaFpNdEUrV3d4NlgrNEdiOFJBVklFV29wWFVMcWNmdC9ZK0U5TlhSQWhm?=
- =?utf-8?Q?zXEw=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733387683; x=1733992483; i=xypron.glpk@gmx.de;
+ bh=NSrS+Z/P6eeQhDgUJ8nWF0ESHbsGNEj+83boJEZLWKw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=r7/EgkukpceBRfH3p97+R0R9CW1rxpodf+hfeK1Fupm6dQt8qzDDn37BERQwrAJt
+ PBfhTAnCU2keTuGwBhB2Ge1TNTdpe41KRuTiUwiX5M+DP3lmvwoVnNAEgKd6rJET8
+ /8imSD5YgAAL6gU9HynU9+qmI/ZE8Ll3EdP/UWl2fApNxYQvB+buhIqEshKctHkya
+ YisKklSjhoxBg4o+uuvDYxy/Mo3m17MYQlWftZR1wneNOEmX4i7CHG0dJouWiYPx9
+ gGQh8qWeYeOvTPr9cR7610chsDPHHYWBWXUYTn6bYhHT82PJKf+3YD37gaQQErDCo
+ 2smWQ434X3bROaw8tw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNt0C-1szH9n1aBc-00PgQA; Thu, 05
+ Dec 2024 09:34:43 +0100
+Message-ID: <899c2551-a0ae-4183-aad0-7adebcd5f84d@gmx.de>
+Date: Thu, 5 Dec 2024 09:34:39 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15da5cb9-b881-4c09-f46e-08dd1504f2c5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Dec 2024 08:15:15.3344 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jx0e/mYe3F30nSAhFUr9mIrTTva6WQR6eyVfJhdeeizfG26BMvwSzILXsC1jpB0YkhztV5fi1bqv92GukRZ5/g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4338
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: fix pe reloc pointer overrun
+To: Aleksandar Gerasimovski <Aleksandar.Gerasimovski@belden.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <SA1PR18MB56923B0952E67CC949A90A02992A2@SA1PR18MB5692.namprd18.prod.outlook.com>
+ <4492be69-8655-4391-8a44-3b4cb682c3ec@gmx.de>
+ <SA1PR18MB56923C88AAAC2CEEC6AA869099302@SA1PR18MB5692.namprd18.prod.outlook.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <SA1PR18MB56923C88AAAC2CEEC6AA869099302@SA1PR18MB5692.namprd18.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:UOpzfzQUxNRUqRK7sxIFJqHC75VoHfp1Y+g5HSkzAZT60qugiS1
+ aUkLDhk31c6HDcGlu8s+thFiCfJakaTlRrjVxvHPRNdX1zffkwdLIsmhG65t6iNF7sFLTEB
+ nKjI5ITyKHWC1g14wuEnjfxuyrDTg4RgoOZhetX7FpwLJgbuTIUUkCgedbfoPNTXx4CDyL+
+ HLe+NEtuY8gSY0j08+T2w==
+UI-OutboundReport: notjunk:1;M01:P0:CYf1JmSgnYE=;ugUIYy+Q0QHNuSAL4I9fHd9NyrH
+ 6eFUkAUurD9E5Bf6H3pqfnL3DleJivVzlJsOUAzBRwJm10Uo1C3FzQZZO+O6n8v88mRWokM/Q
+ HsPhz1oTmDhD0N6UlESLmcaFT8M4ifQwdRb4xc5iWQbCanTTm7a9Kk+ybhSNs2vB6h5Aw4M8l
+ 3s02FAyi1W1SGzP8PvueJkwLLccUbS6+djUbn8yO47KGS4gIU5IGu2RmQ1eqvpqN4qmVcjvyy
+ lyxg79JVr1TJIiDp1XFpHa51JHrtYjTx4vIOaO/SMnIvg30FSpdtyeBv2CQqhkpYOCwgXlbnu
+ cvw+dvKMgu7m+UW4vMSiK9qpjehzr4Eb4ZRqz/m/Ra9bdV+60/nSva33/YKaGwsel8R+1cu4B
+ 7JjECS9yWHM+J+CXIjCDnZutsIKk96wRVeBh4+/aYgyor685MDg4aBI8vhWylk9nn1ch9T/Lk
+ qr6HCVWNix8h02iM1/kvJZ0zo63B9bzU9L8qFPK/HF4/BN0ja5OxC6xaRC5IUCODHp5Vn/3bq
+ RRWZIUr8Qko0BDVqiYn4BHoCTTd3f+jS9Oubi8cwteJ0h59lEzml7P960QaDDWIRZ+YZT0BAg
+ 1essGduQ1YWcjn2bTatHZM+2NxxT+o55iVPrr5AzCoPWiRJznGfa1EUouElKqOjpqXgrVMuv2
+ mos8pEDguh8B7QUOcNYRFBbf5In5VdKH7se+OIVqctfn2hNApO1YHwDAcIHuXLfoJe9y7IvKE
+ CBoinWkW8zWY0GBDelhCOBbD1VXMrETPk8wt0YXbJSPR/SaHeyKo8FydTOSlx1OTK5ylEfmt9
+ 88HVVnIACrB4tNdqodXAb5v+rMvXthijlkxwpmd7vPjc0h/Ei/a1fOrNDldwn5iDaDun7sr/D
+ 53VfZ4O9Mck4Acobj2KnvEBXJyUndS+b/M8C6KSRm2ymzdpL2APz+Th2Ibx320dWPF9YJCIOu
+ CebpQ9I6GjU4xf/fsv7e+2yrg8ZdiY+4sPonuQAmYNrCaPcm9w/cSNkQsh5t8vpM6RZhLuLDM
+ tRYyfw9TUzz+ev+qfN8AJRRv4tF/F+Rh7TqJRnu/gACwdlbHCj3V3Mk3Qv8uAXkR9mv/I/RtW
+ MCTN1OFHEQNcTcLLfsv90gtQtdaYQZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,32 +96,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogVHVkb3IgQW1iYXJ1cyA8
-dHVkb3IuYW1iYXJ1c0BsaW5hcm8ub3JnPg0KPiBTZW50OiBUaHVyc2RheSwgRGVjZW1iZXIgNSwg
-MjAyNCAxOjIwIFBNDQo+IFRvOiBBYmJhcmFwdSwgVmVua2F0ZXNoIDx2ZW5rYXRlc2guYWJiYXJh
-cHVAYW1kLmNvbT47IHUtYm9vdEBsaXN0cy5kZW54LmRlOw0KPiBqLWh1bXBocmV5c0B0aS5jb20N
-Cj4gQ2M6IFNpbWVrLCBNaWNoYWwgPG1pY2hhbC5zaW1la0BhbWQuY29tPjsgamFnYW5AYW1hcnVs
-YXNvbHV0aW9ucy5jb207DQo+IHZpZ25lc2hyQHRpLmNvbTsgdS1rdW1hcjFAdGkuY29tOyB0cmlu
-aUBrb25zdWxrby5jb207IHNlYW5nYTJAZ21haWwuY29tOw0KPiBjYWxlYi5jb25ub2xseUBsaW5h
-cm8ub3JnOyBzamdAY2hyb21pdW0ub3JnOyB3aWxsaWFtLnpoYW5nQGJyb2FkY29tLmNvbTsNCj4g
-c3RlZmFuX2JAcG9zdGVvLm5ldDsgcXVlbnRpbi5zY2h1bHpAY2hlcnJ5LmRlOyBUYWthaGlyby5L
-dXdhbm9AaW5maW5lb24uY29tOw0KPiBwLW1hbnRlbmFAdGkuY29tOyBnaXQgKEFNRC1YaWxpbngp
-IDxnaXRAYW1kLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2Ml0gbXRkOiBzcGktbm9yOiBF
-bmFibGUgbXQzNXh1NTEyYWJhX2ZpeHVwcyBmb3IgYWxsIG10MzV4eA0KPiBmbGFzaGVzDQo+IA0K
-PiANCj4gDQo+IE9uIDEyLzUvMjQgNDoyOSBBTSwgVmVua2F0ZXNoIFlhZGF2IEFiYmFyYXB1IHdy
-b3RlOg0KPiA+IEFkZCBTUElfTk9SX09DVEFMX0RUUl9SRUFEIGZsYWdzIHRvIG1pY3JvbiBmbGFz
-aGVzIG10MzV4dTAxZyBhbmQNCj4gPiBtdDM1eHUwMmcuIEFsc28gbW92ZSB0aGVtIHVuZGVyIENP
-TkZJR19TUElfRkxBU0hfTVQzNVhVIGNvbmZpZywgc28NCj4gPiB0aGF0IGluIGRyaXZlciBtdDM1
-eHU1MTJhYmFfZml4dXBzIHdpbGwgYmUgYXBwbGllZC4NCj4gDQo+IFdoeT8gV2hhdCBwcm9ibGVt
-IGFyZSB5b3UgdHJ5aW5nIHRvIHNvbHZlPyBTaG91bGQgd2UgaGF2ZSBhIGZpeGVzIHRhZz8NCg0K
-VGhlc2UgdHdvIGZsYXNoZXMgbXQzNXh1MDFnIGFuZCBtdDM1eHUwMmcgc3VwcG9ydCBEVFIsIHNv
-IHVwZGF0ZWQgdGhlIGZsYWcgU1BJX05PUl9PQ1RBTF9EVFJfUkVBRCB3aGljaCBpbiB0dXJuIHVz
-ZXMgdGhpcyBzcGlfbm9yX21pY3Jvbl9vY3RhbF9kdHJfZW5hYmxlLg0KQWRkaW5nIHRoZSBzdXBw
-b3J0LCBub3QgZml4aW5nIGFueXRoaW5nLg0KTGV0IG1lIGtub3cgaWYgYW55dGhpbmcgbWlzc2lu
-ZyBmcm9tIG15IHNpZGUuDQoNCj4gV2h5IGRpZG4ndCB5b3Ugc3BsaXQgdGhlc2UgMiBjaGFuZ2Vz
-IGluIDIgZGVkaWNhdGVkIHBhdGNoZXM/DQpTdXJlLiBXaWxsIHNwbGl0IHRvIHR3byBzZXBhcmF0
-ZSBwYXRjaGVzLg0KDQpUaGFua3MNClZlbmthdGVzaA0KPiANCj4gUGxlYXNlIHJlYWQgdGhlIGZv
-bGxvd2luZyBiZWZvcmUgc3VibWl0dGluZyB2MzoNCj4gaHR0cHM6Ly9kb2NzLnUtYm9vdC5vcmcv
-ZW4vbGF0ZXN0L2RldmVsb3Avc2VuZGluZ19wYXRjaGVzLmh0bWwNCj4gaHR0cHM6Ly93d3cua2Vy
-bmVsLm9yZy9kb2MvaHRtbC9sYXRlc3QvcHJvY2Vzcy9zdWJtaXR0aW5nLXBhdGNoZXMuaHRtbCNk
-ZXNjcmliZS0NCj4geW91ci1jaGFuZ2VzDQo=
+On 05.12.24 09:13, Aleksandar Gerasimovski wrote:
+> Thanks for the replay,
+>
+>> Sections have to be at least 512 bytes aligned. The file alignment
+>> cannot be smaller the 512 bytes either.
+>
+>> Hence for a valid EFI binary the value of "rel" when entering
+>> efi_loader_relocate() will always be at least 512 aligned.
+>
+> That's not what I see in the case that I try to explain, because
+> the sec->Misc.VirtualSize virtual size is 16 bytes for this section .
+>
+>> The situation above cannot occur if you follow the specification and
+>> zero fill the raw data up to SizeOfRawData which is a multiple of 512.
+>
+> Correct, I see in the efi_load_pe code that section will be zeroed
+> If sec->Misc.VirtualSize is bigger then sec->SizeOfRawData, but
+> this is not a case for our image it's oposite.
+> I can also confirm that in the real image the section is zeroed up to
+> sec->SizeOfRawData, but the problem is that only the sec->Misc.VirtualSi=
+ze
+> (that is 16 bytes for my image) is copied to the "efi_reloc" location.
+>
+> I'm far from really understanding the PE format, actually this is first
+> time to deal with this and efi boot on Linux, however our EFI image is
+> generated with a "standard" tools like  bg_gen_unified_kernel by our
+> yocto based distro generator, so in any case I see a nasty bug.
+> Even if the image is wrong it should be rejected earlier and not overflo=
+wing
+> even overwriting the u-boot code. It's a vulnerability.
+>
+>> Please, provide an example image for download to give the full picture.
+>
+> I must think how to do that, where I could upload?
+>
+>> With "rel + 1 < end" you are not preserving the change but reverting it=
+.
+>
+> Well, this is the tricky part, in my understanding not because rel is mo=
+ving
+> by 2 bytes down in the loop.
+>
+> I'm trying to describe the problem again, let's say in my image the prob=
+lematic section
+> is generated with sec->Misc.VirtualSize =3D 16 and sec->SizeOfRawData =
+=3D 512, what will be
+> provided to the efi_loader_relocate in this case is rel_size of 16 and o=
+nly 16 bytes will
+> be copied to efi_reloc location (see the " Load sections into RAM" logic=
+ in efi_load_pe),
+> so the content of the RAM after efi_reloc + 16 stays unknown:
+> bce26000: 3000 0000 000c 0000 0000 0000 0000 0000 -> reloc section
+> bce26010: 7c00 9340 67e0 f900 1c00 0ea1 a400 0f20 -> random content
+>
+> So efi_loader_relocate gets rel_size of 16 bytes for reloc section of 12=
+ bytes,
+> and this will overflow.
+
+If VirtualSize =3D 16, then the reloc section has 16 bytes and not 12.
+
+A section size of less than 512 is invalid anyway.
+
+Something is wrong with the tooling that you use to create the EFI binary.
+
+>
+> When I'm writing this, I'm thinking isn't then rel_size problem as well,
+> that is 16 bytes in this case?
+>
+> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Sent: Mittwoch, 4. Dezember 2024 11:11
+> To: Aleksandar Gerasimovski <Aleksandar.Gerasimovski@belden.com>
+> Cc: u-boot@lists.denx.de; Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Subject: Re: [PATCH] efi_loader: fix pe reloc pointer overrun
+>
+>
+> On 29.11.24 22:09, Aleksandar Gerasimovski wrote:
+>> The fix provided by 997fc12ec91 is actually introducing
+>> a buffer overrun, and the overrun is effective if the
+>> memory after the reloc section is not zeroed.
+>> Probably that's why this bug is not always noticeable.
+>>
+>> The problem is that 8-bytes 'rel' pointer can be 4-bytes aligned
+>> according to the PE Format, so the actual relocate function can
+>> take values after the reloc section.
+>
+> Sections have to be at least 512 bytes aligned. The file alignment
+> cannot be smaller the 512 bytes either.
+>
+> Hence for a valid EFI binary the value of "rel" when entering
+> efi_loader_relocate() will always be at least 512 aligned.
+>
+>>
+>> One example is the following dump from the reloc section:
+>>     bce26000: 3000 0000 000c 0000 0000 0000 0000 0000
+>>     bce26010: 7c00 9340 67e0 f900 1c00 0ea1 a400 0f20
+>
+> Please, provide an example image for download to give the full picture.
+>
+>>
+>> This section has two relocations at offset bce26008 and bce2600a,
+
+Starting at bce26008 you have eight zero bytes with this structure:
+
+typedef struct _IMAGE_BASE_RELOCATION
+{
+         uint32_t VirtualAddress;
+         uint32_t SizeOfBlock;
+         /* WORD TypeOffset[1]; */
+} IMAGE_BASE_RELOCATION,*PIMAGE_BASE_RELOCATION;
+
+The loop stops if rel->SizeOfBlock =3D=3D 0.
+
+"two relocations at offset bce26008 and bce2600a" cannot be true.
+
+Best regards
+
+Heinrich
+
+>> however the given size (rel_size) for this relocation is 16-bytes
+>
+> The value of "rel_size" used to calculate "end" is not the size of a
+> relocation but the size of the relocation table.
+>
+> The PE-COFF specification describes:
+>
+> "SizeOfRawData
+>
+> The size of the section (for object files) or the size of the
+> initialized data on disk (for image files). For executable images, this
+> must be a multiple of FileAlignment from the optional header. If this is
+> less than VirtualSize, the remainder of the section is zero-filled."
+>
+> The situation above cannot occur if you follow the specification and
+> zero fill the raw data up to SizeOfRawData which is a multiple of 512.
+>
+>> and this is coming form the efi image Misc.VirtualSize, so in this
+>> case the 'reloc' pointer ends at affset bce2600c and is taken as
+>> valid and this is where the overflow is.
+>>
+>> In our system we see this problem when we are starting the
+>> Boot Guard efi image.
+>>
+>> This patch is fixing the overrun while preserving the fix done
+>> by 997fc12ec91.
+>
+> Before 997fc12ec91 we had "rel < end - 1".
+>
+> With "rel + 1 < end" you are not preserving the change but reverting it.
+>
+> Best regards
+>
+> Heinrich
+>
+>>
+>> Signed-off-by: Aleksandar Gerasimovski <mailto:aleksandar.gerasimovski@=
+belden.com>
+>> ---
+>>    lib/efi_loader/efi_image_loader.c | 2 +-
+>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/lib/efi_loader/efi_image_loader.c b/lib/efi_loader/efi_ima=
+ge_loader.c
+>> index 0ddf69a091..04075d83cb 100644
+>> --- a/lib/efi_loader/efi_image_loader.c
+>> +++ b/lib/efi_loader/efi_image_loader.c
+>> @@ -121,7 +121,7 @@ static efi_status_t efi_loader_relocate(const IMAGE=
+_BASE_RELOCATION *rel,
+>>                   return EFI_SUCCESS;
+>>
+>>           end =3D (const IMAGE_BASE_RELOCATION *)((const char *)rel + r=
+el_size);
+>> -       while (rel < end && rel->SizeOfBlock) {
+>> +       while (rel + 1 < end && rel->SizeOfBlock) {
+>>                   const uint16_t *relocs =3D (const uint16_t *)(rel + 1=
+);
+>>                   i =3D (rel->SizeOfBlock - sizeof(*rel)) / sizeof(uint=
+16_t);
+>>                   while (i--) {
+>> --
+>> 2.34.1
+>>
+>> **********************************************************************
+>> DISCLAIMER:
+>> Privileged and/or Confidential information may be contained in this mes=
+sage. If you are not the addressee of this message, you may not copy, use =
+or deliver this message to anyone. In such event, you should destroy the m=
+essage and kindly notify the sender by reply e-mail. It is understood that=
+ opinions or conclusions that do not relate to the official business of th=
+e company are neither given nor endorsed by the company. Thank You.
+>
+>
+> **********************************************************************
+> DISCLAIMER:
+> Privileged and/or Confidential information may be contained in this mess=
+age. If you are not the addressee of this message, you may not copy, use o=
+r deliver this message to anyone. In such event, you should destroy the me=
+ssage and kindly notify the sender by reply e-mail. It is understood that =
+opinions or conclusions that do not relate to the official business of the=
+ company are neither given nor endorsed by the company. Thank You.
+
