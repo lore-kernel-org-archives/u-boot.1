@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F96AE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CA48E7716E
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0442C894BD;
-	Thu,  5 Dec 2024 18:58:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 53A0F89523;
+	Thu,  5 Dec 2024 18:58:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YQc37z7c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ioSLYfQd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B68AD8953D; Thu,  5 Dec 2024 18:57:58 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id C3C1989338; Thu,  5 Dec 2024 18:58:03 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1283894BD
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:57:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8AA689523
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:58:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9a68480164so154128066b.3
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:57:56 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa62f1d2b21so93195366b.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:58:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733421476; x=1734026276; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733421481; x=1734026281; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n/5wyvk8NHLhumZQrtCNKLwXbvh0LeW6wkxLzacjHTM=;
- b=YQc37z7ckpW3gtKfdM8zSZ4snGQBfPTpvKqPP8jpR8n88/sgM1e/4klP271cVPP0cM
- KMKbd920LhL3vtzrgk98RFiJSNahPQFjeTZpjQxmDOh6JULUFwjxBampY0EbZTeCPhYa
- rUW1c3bOuKRVV1lVfpU72e+6H63aE/rhE1OSU=
+ bh=MvcL0WuAN4wSQHIX4G+ZqU5fKEZeBBkSkKim/K1RSPw=;
+ b=ioSLYfQdHjiBX9kx9HqHCuJqHZKSkCXDJRIwC/32E2RXujUr5tLo8qO/y767qCZ74j
+ hk3b0CUbANwG8FFmjErM+FsvH9hbNxbYV9SWMrSDYGODA/ysbl5L8pLLaeNAoMtLmH/z
+ YqCq/1O7lWJCzQddNvtGJYzfpilQAPHMQhiYo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733421476; x=1734026276;
+ d=1e100.net; s=20230601; t=1733421481; x=1734026281;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n/5wyvk8NHLhumZQrtCNKLwXbvh0LeW6wkxLzacjHTM=;
- b=E8J3pCV6ccaxZbcbw4YzNO4ndSDYUr4tJ4x8/21i4uuIF2xUG4Y+fYfek8MMsZ/sPG
- EZ+i6om+QkBHAxINXgJVqox4A29uFqZvS1+JGfTsUAZORehMilJe5KunRomWMQZcvQYu
- K3Ir+Cd0vSca+SVMg5R7eSRrfaqJIv781Kv8yWDFXn49O6vKWm3hHhHyjR27I+Yrfhwh
- 5fHylKy/f20QdQEu7TU/kw9PHKSPS9cA5Mf4x5EF0jdNs+dGBwLV7AU/3CzJN5tXyAVe
- aMSBhU6rvdNk4NS7dhIrOlbXtVDk+l0XYMBQLoxxSZJlSUuUqhUVGXhGQsMPQGPm4JLC
- 07Rw==
+ bh=MvcL0WuAN4wSQHIX4G+ZqU5fKEZeBBkSkKim/K1RSPw=;
+ b=uZBi9h1T4LWGF2niB2pBrz/COvTVb+Lv0cpqpLULKAxJLhPzAauln4hEFjvejAZQ/0
+ +31OsOxim05a3MtYi4jttFbiRUZfVXalDXLP+gt3ECJzcFyaDbVrmzx96F+FSwQknz7X
+ 4jmVMGi/hkTdb8r/5PTF9LDEjNIoMuSaesPvdwxnXyrBKqQJ3mRJp3BLnf5nZd6jDEFY
+ 9zxIwYZGZY2OgCUD4aBxxkud35Lt2nY8T6yosWCGfyiAjZ6dtSdBhaa+pCS2lWgpF3cy
+ a5NSNL5ilyyZUvD5OmVhuBMa7sbRRIuhHljO9n4FtDjsSy5Tpv3iFP3bpvMY/NNn14VI
+ QYNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWbq7xLMUt9xWftM+We9SHEXeYkVhfqlm7IOQ5azLJtb3xzXt5/CUJbMQ5COcqWrQsLYZk5Eyw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzGOMEmOaP4EZxqzhxCky9lXSDfsZtpmsX1hSjJSeQU4zDqdk62
- o/3tp6nVPBbX79bHsPqMt2+DOZoaZCe19sm6Rli9gbJkKA01NiUvuG4IiTEWe23EQLWEkETFKCi
- tF75nDdPc0PwwVx0pJwPWgnfahlbWduu3H4kV
-X-Gm-Gg: ASbGncsmhbRdK1Ef8Z5RwssEGPOMPuENeedGZrsVozuojFmjBHvd1MrV07Mfcv8n0am
- bUMa713iiLB48rUhoGmUZeuX91De/0PPA
-X-Google-Smtp-Source: AGHT+IEoRFqtgP08qxIApgoZBWaTSFZNy0qWepxXOD3IZaCmWhm5ow8eOwql1OKHkmbAIQUf4qIbVatK+hCt54KBFQY=
-X-Received: by 2002:a17:907:948f:b0:aa5:308c:3489 with SMTP id
- a640c23a62f3a-aa5f7f4a73emr1184413266b.58.1733421476282; Thu, 05 Dec 2024
- 09:57:56 -0800 (PST)
+ AJvYcCUk+z3xOlMjaGsmkR/kh8c1lz6Xm7hbJKNHFjJnT5vDbifDpRgA2+FLDw1cJYjL63vzjUdJE7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXsZXAiwFOlkDylRr8pp4zEALJA6OajEMgDMB6JgcsQ+I+C4c5
+ ZtRDfJfEwbBbUZblumcgBFAGFy69Zwi+MXFYDR10D+exGBtE2kh5MyFfAhojljXV0vR6ZP7yAFR
+ HP+DNHomBdXF1jDVjbN9A/Ebx1Kv2yS+SvgFC
+X-Gm-Gg: ASbGnctMHBHm3qcfbc2oDBqwgJOre/XEsd8Eg8Dd6UkIIhObGBQm+W8NS/NWkJjCyyG
+ 8ffJmXCHdXi15eAyi4RK1fdzEDIH1gGPp
+X-Google-Smtp-Source: AGHT+IFw7rMuCzmIeCsWS7RBfjro2Jj/oySSWM7fp0TQmNEDfyNyIfhSAu+3qNHgm3K2oOjgSJWEWtBZ4IbrrElSmPs=
+X-Received: by 2002:a17:907:784a:b0:aa6:291d:a3de with SMTP id
+ a640c23a62f3a-aa6291da469mr216866966b.18.1733421481356; Thu, 05 Dec 2024
+ 09:58:01 -0800 (PST)
 MIME-Version: 1.0
 References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
- <20241205-ge-mainline-display-support-v2-2-4683bb4388dc@bootlin.com>
-In-Reply-To: <20241205-ge-mainline-display-support-v2-2-4683bb4388dc@bootlin.com>
+ <20241205-ge-mainline-display-support-v2-4-4683bb4388dc@bootlin.com>
+In-Reply-To: <20241205-ge-mainline-display-support-v2-4-4683bb4388dc@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 5 Dec 2024 10:57:42 -0700
-Message-ID: <CAFLszTh6CB-UbtkSjfvcmR8qAV9aq34p-OXhdOQ1sidzgj_NOg@mail.gmail.com>
-Subject: Re: [PATCH v2 02/13] dm: core: Add a helper to retrieve devices
- through graph endpoints
+Date: Thu, 5 Dec 2024 10:57:46 -0700
+Message-ID: <CAFLszTik989_5fxTKzTQVp0ykB-fJiJiOcG_Hk+yZ_7owRJ2wQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/13] test: dm: test-fdt: Add checks for
+ uclass_get_device_by_endpoint()
 To: Miquel Raynal <miquel.raynal@bootlin.com>
 Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -95,23 +95,15 @@ X-Virus-Status: Clean
 
 On Thu, 5 Dec 2024 at 06:54, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 >
-> There are already several helpers to find a udevice based on its
-> position in a device tree, like getting a child or a node pointed by a
-> phandle, but there was no support for graph endpoints, which are very
-> common in display pipelines.
+> This is a new DM core helper. There is now a graph endpoint
+> representation in the sandbox test DTS, so we can just use it to verify
+> the helper proper behavior.
 >
-> Add a new helper, named uclass_get_device_by_endpoint() which enters the
-> child graph reprensentation, looks for a specific port, then follows the
-> remote endpoint, and finally retrieves the first parent of the given
-> uclass_id.
->
-> This is a very handy and straightforward way to get a bridge or a panel
-> handle.
->
+> Suggested-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 > ---
->  drivers/core/uclass.c | 62 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  include/dm/uclass.h   | 21 +++++++++++++++++
->  2 files changed, 83 insertions(+)
+>  test/dm/test-fdt.c | 20 +++++++++++++++++++-
+>  1 file changed, 19 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
