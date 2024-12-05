@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80F3E7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F87E77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28E7689282;
-	Thu,  5 Dec 2024 10:24:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 78CB789187;
+	Thu,  5 Dec 2024 10:24:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="AsV9xffm";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gvVAUYUP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C9678870D; Thu,  5 Dec 2024 10:24:47 +0100 (CET)
+ id 985438878A; Thu,  5 Dec 2024 10:24:51 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 588FE894A3
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5438C88E50
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390683; x=1764926683;
+ t=1733390688; x=1764926688;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=DQDs0BjuLdDaXgLGg41GJY/mvM6b/YR24aI/IEKATUo=;
- b=AsV9xffmqs8u0vGo2FP7AYmaNnPlSp8hkbvZDujXB/4po9z1gmayvaAH
- bZC2vxRcPv9sA7TLVanNEKlNXRQ8/Nb4Bhi52UbdTGBvDtGRwmHYU6x+B
- oLbyCPfglkl/zOdQW3Q726tFJPwwQRmbe12YT1nUGf2fV8pCmLnNPj1uq
- M8CRyhXyptAJ2WV0b1Yvdnxz2+k4gsrOk1cxO2IMKW/gEZJBtrtDnxBlM
- tIHUpeTnL/VL2YJcTtcfNTuOAk0Q5Z/DNOil55PpNQLEBcJTH/1MKHvtT
- wgWNT9ix0vWIIx78WurbdUmBj2LRT6qafHxKeWTEXzMww2YPzAhNmw8k5 w==;
-X-CSE-ConnectionGUID: ow1KoxdtSuS8Op2loFoPyA==
-X-CSE-MsgGUID: ydS6kXfZRjOR1FsorfiUsg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610365"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610365"
+ bh=RZx80rVoyEEEzFZFsGLiXY6f3B2V/hL7slOSGD3CSRU=;
+ b=gvVAUYUPNeLKw5EBmuCnSd9W5C4h16e5WhkZEpq/BdJ2W4Cgq6NykXgy
+ O/SGDSGP3VFYdTXp5oRWQSf8D6IZqrspBac4FEP9exQWIbCicrWOVEesm
+ 8u2W7Kk3YaVv5PuCICtmRpuTeFC33ToxOahqrwO0LYjQTcyvfzqa2eB4T
+ QwOiOdwSdRNDz+K+oSblQrDkH6B8B+acwvzxK3YOmlu5wcjFUrWTWD7Jh
+ oFfAQ1McyGX0eJcVwaPIkVn9VP6hGGOYPq3APxHqmizhfBXdao8yIfs1P
+ AkdozzosDfh+a8F+7MZoUp9HkhhAT0pUUw91vhQYyGL0mpEEp+yhVIm+q A==;
+X-CSE-ConnectionGUID: Q1SZg83ARvaxTvkSB18ong==
+X-CSE-MsgGUID: 7tr56DXmQeC9SgPBH5/ORQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610377"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610377"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:24:43 -0800
-X-CSE-ConnectionGUID: UhB4ZlUlRyGq4UeU5TYobQ==
-X-CSE-MsgGUID: il+ZkpzMR1mniIqyPfmBeA==
+ 05 Dec 2024 01:24:48 -0800
+X-CSE-ConnectionGUID: 67OeiC90RnOZ4X8YhtPJqw==
+X-CSE-MsgGUID: n/i75yMlQDqPCM1AKFV5vw==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122026"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122038"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:38 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:43 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 14/19] configs: nand2_defconfig: Enable configs for nand
- boot
-Date: Thu,  5 Dec 2024 17:23:10 +0800
-Message-Id: <20241205092315.25060-15-dinesh.maniyam@intel.com>
+Subject: [resend v2 15/19] drivers: mtd: nand: base: Add support for Hardware
+ ECC for check bad block
+Date: Thu,  5 Dec 2024 17:23:11 +0800
+Message-Id: <20241205092315.25060-16-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,75 +95,157 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Enable configs for nand boot.
+Leverage linux code to support hardware ECC interface
+to verify nand bad block.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
-- using #include mechanism to keep track of the variant
-- add maintainer
 ---
 ---
- board/intel/agilex5-socdk/MAINTAINERS   |  2 ++
- configs/socfpga_agilex5_nand2_defconfig | 33 +++++++++++++++++++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 configs/socfpga_agilex5_nand2_defconfig
+ drivers/mtd/nand/raw/nand_base.c | 71 +++++++++++++++++++++-----------
+ include/linux/mtd/rawnand.h      | 13 ++++++
+ 2 files changed, 60 insertions(+), 24 deletions(-)
 
-diff --git a/board/intel/agilex5-socdk/MAINTAINERS b/board/intel/agilex5-socdk/MAINTAINERS
-index b696f788c8..30d8815d20 100644
---- a/board/intel/agilex5-socdk/MAINTAINERS
-+++ b/board/intel/agilex5-socdk/MAINTAINERS
-@@ -2,7 +2,9 @@ SOCFPGA BOARD
- M:	Tien Fong Chee <tien.fong.chee@intel.com>
- M:	Teik Heng Chong <teik.heng.chong@intel.com>
- M:	Jit Loon Lim <jit.loon.lim@intel.com>
-+M:	Dinesh Maniyam <dinesh.maniyam@intel.com>
- S:	Maintained
- F:	board/intel/agilex5-socdk/
- F:	include/configs/socfpga_agilex5_socdk.h
- F:	configs/socfpga_agilex5_defconfig
-+F:	configs/socfpga_agilex5_nand2_defconfig
-diff --git a/configs/socfpga_agilex5_nand2_defconfig b/configs/socfpga_agilex5_nand2_defconfig
-new file mode 100644
-index 0000000000..3bfe6270fd
---- /dev/null
-+++ b/configs/socfpga_agilex5_nand2_defconfig
-@@ -0,0 +1,33 @@
-+#include <configs/socfpga_agilex5_defconfig>
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index 4401bdcdb9..9b1b2d1f85 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -9,6 +9,8 @@
+  *  Copyright (C) 2000 Steven J. Hill (sjhill@realitydiluted.com)
+  *		  2002-2006 Thomas Gleixner (tglx@linutronix.de)
+  *
++ *  Copyright (C) 2024 Intel Corporation <www.intel.com>
++ *
+  *  Credits:
+  *	David Woodhouse for adding multichip support
+  *
+@@ -306,6 +308,35 @@ void nand_read_buf16(struct mtd_info *mtd, uint8_t *buf, int len)
+ 	ioread16_rep(chip->IO_ADDR_R, p, len >> 1);
+ }
+ 
++/*
++ * nand_bbm_get_next_page - Get the next page for bad block markers
++ * @chip: The NAND chip
++ * @page: First page to start checking for bad block marker usage
++ *
++ * Returns an integer that corresponds to the page offset within a block, for
++ * a page that is used to store bad block markers. If no more pages are
++ * available, -EINVAL is returned.
++ */
++int nand_bbm_get_next_page(struct nand_chip *chip, int page)
++{
++	struct mtd_info *mtd = nand_to_mtd(chip);
++	int last_page = ((mtd->erasesize - mtd->writesize) >>
++			 chip->page_shift) & chip->pagemask;
++	unsigned int bbm_flags = NAND_BBM_FIRSTPAGE | NAND_BBM_SECONDPAGE
++		| NAND_BBM_LASTPAGE;
 +
-+CONFIG_ARM=y
-+CONFIG_ARCH_SOCFPGA=y
-+CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk"
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_BOOTARGS="earlycon panic=-1 root=${nandroot} rw rootwait rootfstype=ubifs ubi.mtd=1"
-+CONFIG_TARGET_SOCFPGA_AGILEX5_NAND2=y
-+CONFIG_PHY_CADENCE_COMBOPHY=n
-+CONFIG_SPL_PHY_CADENCE_COMBOPHY=n
-+# CONFIG_MMC_DW is not set
-+CONFIG_SPL_MTD=y
-+CONFIG_CMD_NAND_TRIMFFS=y
-+CONFIG_CMD_NAND_LOCK_UNLOCK=y
-+CONFIG_SPL_MTD_SUPPORT=y
-+CONFIG_MTDIDS_DEFAULT="nand0=10b80000.nand.0"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=10b80000.nand.0:2m(u-boot),-(root)"
-+CONFIG_CMD_UBIFS=y
-+CONFIG_MTD_UBI=y
-+CONFIG_MTD_UBI_WL_THRESHOLD=4096
-+CONFIG_MTD_UBI_BEB_LIMIT=20
-+CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
-+CONFIG_SYS_NAND_U_BOOT_OFFS=0x0
-+CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND=0x100000
-+CONFIG_UBI_SILENCE_MSG=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_NAND_CADENCE=y
-+CONFIG_SPL_NAND_SUPPORT=y
-+CONFIG_SPL_NAND_FRAMEWORK=y
-+CONFIG_SPL_NAND_CADENCE=y
-+CONFIG_SYS_NAND_ONFI_DETECTION=y
-+CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
-+CONFIG_SYS_NAND_PAGE_SIZE=0x800
++	if (page == 0 && !(chip->options & bbm_flags))
++		return 0;
++	if (page == 0 && chip->options & NAND_BBM_FIRSTPAGE)
++		return 0;
++	if (page <= 1 && chip->options & NAND_BBM_SECONDPAGE)
++		return 1;
++	if (page <= last_page && chip->options & NAND_BBM_LASTPAGE)
++		return last_page;
++
++	return -EINVAL;
++}
++
+ /**
+  * nand_block_bad - [DEFAULT] Read bad block marker from the chip
+  * @mtd: MTD device structure
+@@ -315,40 +346,32 @@ void nand_read_buf16(struct mtd_info *mtd, uint8_t *buf, int len)
+  */
+ static int nand_block_bad(struct mtd_info *mtd, loff_t ofs)
+ {
+-	int page, res = 0, i = 0;
+ 	struct nand_chip *chip = mtd_to_nand(mtd);
+-	u16 bad;
++	int first_page, page_offset;
++	int res;
++	u8 bad;
+ 
+-	if (chip->bbt_options & NAND_BBT_SCANLASTPAGE)
+-		ofs += mtd->erasesize - mtd->writesize;
++	first_page = (int)(ofs >> chip->page_shift) & chip->pagemask;
++	page_offset = nand_bbm_get_next_page(chip, 0);
+ 
+-	page = (int)(ofs >> chip->page_shift) & chip->pagemask;
++	while (page_offset >= 0) {
++		res = chip->ecc.read_oob(mtd, chip, first_page + page_offset);
++		if (res < 0)
++			return res;
+ 
+-	do {
+-		if (chip->options & NAND_BUSWIDTH_16) {
+-			chip->cmdfunc(mtd, NAND_CMD_READOOB,
+-					chip->badblockpos & 0xFE, page);
+-			bad = cpu_to_le16(chip->read_word(mtd));
+-			if (chip->badblockpos & 0x1)
+-				bad >>= 8;
+-			else
+-				bad &= 0xFF;
+-		} else {
+-			chip->cmdfunc(mtd, NAND_CMD_READOOB, chip->badblockpos,
+-					page);
+-			bad = chip->read_byte(mtd);
+-		}
++		bad = chip->oob_poi[chip->badblockpos];
+ 
+ 		if (likely(chip->badblockbits == 8))
+ 			res = bad != 0xFF;
+ 		else
+ 			res = hweight8(bad) < chip->badblockbits;
+-		ofs += mtd->writesize;
+-		page = (int)(ofs >> chip->page_shift) & chip->pagemask;
+-		i++;
+-	} while (!res && i < 2 && (chip->bbt_options & NAND_BBT_SCAN2NDPAGE));
++		if (res)
++			return res;
+ 
+-	return res;
++		page_offset = nand_bbm_get_next_page(chip, page_offset + 1);
++	}
++
++	return 0;
+ }
+ 
+ /**
+diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+index 14f93dab0a..35eb3b5678 100644
+--- a/include/linux/mtd/rawnand.h
++++ b/include/linux/mtd/rawnand.h
+@@ -4,6 +4,8 @@
+  *                        Steven J. Hill <sjhill@realitydiluted.com>
+  *		          Thomas Gleixner <tglx@linutronix.de>
+  *
++ *  Copyright (C) 2024 Intel Corporation <www.intel.com>
++ *
+  * Info:
+  *	Contains standard defines and IDs for NAND flash devices
+  *
+@@ -131,6 +133,17 @@ void nand_wait_ready(struct mtd_info *mtd);
+ 
+ #define NAND_DATA_IFACE_CHECK_ONLY	-1
+ 
++/*
++ * There are different places where the manufacturer stores the factory bad
++ * block markers.
++ *
++ * Position within the block: Each of these pages needs to be checked for a
++ * bad block marking pattern.
++ */
++#define NAND_BBM_FIRSTPAGE	BIT(24)
++#define NAND_BBM_SECONDPAGE	BIT(25)
++#define NAND_BBM_LASTPAGE	BIT(26)
++
+ /*
+  * Constants for ECC_MODES
+  */
 -- 
 2.19.0
 
