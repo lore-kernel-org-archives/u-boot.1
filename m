@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C780E77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4067BE77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C65DC8949E;
-	Thu,  5 Dec 2024 10:24:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21251892A0;
+	Thu,  5 Dec 2024 10:24:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Ds14Aywy";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="PJHqQ1+o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9C308949D; Thu,  5 Dec 2024 10:24:24 +0100 (CET)
+ id 98480892A0; Thu,  5 Dec 2024 10:24:30 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5903189411
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35DF189282
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390662; x=1764926662;
+ t=1733390667; x=1764926667;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=1x/U2o5k7Fvmkdn+00sG9PWE+AgosUm0hEOoHzKdSiw=;
- b=Ds14AywyqPUSC7vwOaieRhiRO4D+qtEigBto1iB96qJeecuN9Zq6wmjD
- DS5DjJEuABiSgjjfKs3+B1zVWqQI4zlA64sQEOU4ncXg2C3rdcay/Fz8i
- Uq3GFnopN9+4S3+g/Pmj+nZtLXg6vgQ8O2QXfXne5Crk5OOKxuXZB+Y29
- zaXhE2cTMIQlNiv/GWq6fpQuMz1iS+pVMmyE77moFrs6Qrun07hI4ad6f
- qz4XwN3GPcxIHNG+TXz68GcTHJLTB+w0Z81lZiOPl8yo6HCRIOJa9z/Ox
- tXFFUyFHblwPB5faM2n9xs4FkJK5Fp1WmwnCzV5Sx65ob0Z+mOQ4DBQKe Q==;
-X-CSE-ConnectionGUID: vWFI4Q5nTui5IQYb+OrVeQ==
-X-CSE-MsgGUID: c44ayMqlRc2xyQeA5qU/7Q==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610301"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610301"
+ bh=jjnoqrIX6D0/8/v3hVgDf+gxx7CUs0wt7XK0lAMCG8k=;
+ b=PJHqQ1+ojj0QBm2m2pOUvyUNoMPIiu3gGpTZXWZMOdFF/cEt0MDYATIL
+ qgSR8KQKF4YHp8fTmAuyB5Ikw8rVNg//6fyzq+R1flkm2J/5WPOm3vJDZ
+ N3NgwkSSDmflRm9G8eewBGuQ1W5aHujvQYNhhL/J6FXB2pf7W3FoGojCU
+ CAzMIZq7PqwxPmTkjJqeqgICPOgmHNfCrrBsx7LN4qabyvaKjXdpLUe9Y
+ sJEWM0lo/UCKTIdPVHPDaj9KWrDrmLnH8lj7+8z80TdEvwSeJRo1f4Czy
+ Hwosi9LaHxCKIzV8epg8uH/8MKhQjCa4fzRjuoOCPS68opvIZLBth7wXy g==;
+X-CSE-ConnectionGUID: 8cNO4EpwQfuHwu2LIxzPhg==
+X-CSE-MsgGUID: dT2G+g7uT0eI/vLLCxX0OA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610321"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610321"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:24:22 -0800
-X-CSE-ConnectionGUID: i4Y9yZ+WQuyP0EVTZtAHDA==
-X-CSE-MsgGUID: CaRIrDb7TIu9VCIzxU75Ew==
+ 05 Dec 2024 01:24:26 -0800
+X-CSE-ConnectionGUID: fwYOdYBLRNmVdIpTaVKuYA==
+X-CSE-MsgGUID: CoocjhJGRCSYmzcJG5O9CQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94121902"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94121927"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:17 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:22 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 10/19] drivers: mtd: nand: cadence: Flush & invalidate dma
- descriptor
-Date: Thu,  5 Dec 2024 17:23:06 +0800
-Message-Id: <20241205092315.25060-11-dinesh.maniyam@intel.com>
+Subject: [resend v2 11/19] drivers: mtd: nand: cadence: Poll for desc complete
+ status
+Date: Thu,  5 Dec 2024 17:23:07 +0800
+Message-Id: <20241205092315.25060-12-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,48 +95,47 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Ensure ddr memory is updated with the data from dcache.
-This would help to ensure cdma always reading the latest dma descriptor
-from ddr memory.
+Poll for thread complete status to ensure the
+descriptor processing is complete. If complete then can ensure
+controller already update the descriptor status.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
-- add support for invalidate cache
 ---
 ---
  drivers/mtd/nand/raw/cadence_nand.c | 9 +++++++++
  1 file changed, 9 insertions(+)
 
 diff --git a/drivers/mtd/nand/raw/cadence_nand.c b/drivers/mtd/nand/raw/cadence_nand.c
-index 895ee77320..ed93296ba8 100644
+index ed93296ba8..c1bfa46daf 100644
 --- a/drivers/mtd/nand/raw/cadence_nand.c
 +++ b/drivers/mtd/nand/raw/cadence_nand.c
-@@ -430,6 +430,10 @@ cadence_nand_cdma_desc_prepare(struct cadence_nand_info *cadence,
+@@ -520,6 +520,7 @@ cadence_nand_cdma_send_and_wait(struct cadence_nand_info *cadence,
+ {
+ 	struct cadence_nand_irq_status irq_mask, irq_status = {0};
+ 	int status;
++	u32 val;
  
- 	cdma_desc->command_type = ctype;
- 	cdma_desc->ctrl_data_ptr = ctrl_data_ptr;
+ 	irq_mask.trd_status = BIT(thread);
+ 	irq_mask.trd_error = BIT(thread);
+@@ -531,6 +532,14 @@ cadence_nand_cdma_send_and_wait(struct cadence_nand_info *cadence,
+ 	if (status)
+ 		return status;
+ 
++	/* Make sure the descriptor processing is complete */
++	status = readl_poll_timeout(cadence->reg + TRD_COMP_INT_STATUS, val,
++				    (val & BIT(thread)), TIMEOUT_US);
++	if (status) {
++		pr_err("cmd thread completion timeout!\n");
++		return status;
++	}
 +
-+	flush_cache((dma_addr_t)cadence->cdma_desc,
-+		    ROUND(sizeof(struct cadence_nand_cdma_desc),
-+			  ARCH_DMA_MINALIGN));
- }
+ 	cadence_nand_wait_for_irq(cadence, &irq_mask, &irq_status);
  
- static u8 cadence_nand_check_desc_error(struct cadence_nand_info *cadence,
-@@ -457,6 +461,11 @@ static int cadence_nand_cdma_finish(struct cadence_nand_info *cadence)
- 	struct cadence_nand_cdma_desc *desc_ptr = cadence->cdma_desc;
- 	u8 status = STAT_BUSY;
- 
-+	invalidate_dcache_range((dma_addr_t)cadence->cdma_desc,
-+				(dma_addr_t)cadence->cdma_desc +
-+				ROUND(sizeof(struct cadence_nand_cdma_desc),
-+				      ARCH_DMA_MINALIGN));
-+
- 	if (desc_ptr->status & CDMA_CS_FAIL) {
- 		status = cadence_nand_check_desc_error(cadence,
- 						       desc_ptr->status);
+ 	if (irq_status.status == 0 && irq_status.trd_status == 0 &&
 -- 
 2.19.0
 
