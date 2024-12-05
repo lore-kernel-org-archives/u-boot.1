@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CF5E7716D
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BEFAE7716D
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:08:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FE1C8901D;
+	by phobos.denx.de (Postfix) with ESMTP id D867C894DC;
 	Thu,  5 Dec 2024 14:07:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="DnbgIrRO";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="fE8xmLHJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1F9E89265; Thu,  5 Dec 2024 04:56:42 +0100 (CET)
+ id 950358942A; Thu,  5 Dec 2024 04:57:18 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85C0189335
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 04:56:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 13CA289265
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 04:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=muhammad.hazim.izzat.zamri@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733371000; x=1764907000;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=nxwLProWCzWF4dqOtKWf4ryyPj0u+kaUu1MYlyNU394=;
- b=DnbgIrROQ7NXPxWPr5031JlfVNKi23sJDsHs15ygBJNeQXf25n7bBnSM
- WT0VVfyN7GIqm//a8FmbgG25SVnUxgCgHXlSmwXtVhVFEHfDX2WfXGYz2
- EfmYCEAwLyZz+ihvUqHk6nIh5sc62zGTiHraKU+j6j4AYPNxaUsALdR6b
- oeA6SHSIPrnuz7VDegffldHY0FHSF3MDnH3JPlYfHXaqD0zL+lpadZuLn
- P9QF2zYEm43/ucVlobcdLrycFfdG9EzUepvaDOeQFJzNwdl3FEhyMwXdz
- uDERT4TfhB3HGT+pvAwIG1B/n/f3oHfJoe5k6e+xBUeqBAVkZsMdixzZf g==;
-X-CSE-ConnectionGUID: uhRXuD2kRwKWEhJWYup1IQ==
-X-CSE-MsgGUID: TW1RKUXpQEOBXFTd8aTW9w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="51080285"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="51080285"
+ t=1733371035; x=1764907035;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=OxGNn54TtdxhngWSsqY33daXderu4QPYPiTZ/o2bZLM=;
+ b=fE8xmLHJDUfNxqO3WljUU1fJfMR2e+EIxfZu7jB3uszx/aNfth6d2tFr
+ jlwOYQPKMOx0vcg6qJ+SmxScOnRx1OXu71LIVUAMiilN+DEOArvGZUd2l
+ tbhUjpBjQCTo9OLgp/KALyhorPYiL2cIwZyHwX1Ijl2MXZrF/Tf2LGkVI
+ ABHBi0EvtxLV++oYmVMzXyN7FZfGCWuveCZRN6Nm0rRvbXObf/q3ivQ0r
+ kP6OAy+v0iPqHYLoFWQO6Wjz+goRO/FvXiPvOhOHs9XaXssd10SofG4jz
+ 63J3nNH+wEr7b0DvAU9ECdnqW9FsRJ04iY/J2sdyEFdzpAKZzjUXQjFaR g==;
+X-CSE-ConnectionGUID: CxZq5ltFRWqN0Swhbd6f+g==
+X-CSE-MsgGUID: Hb8m/WybT0aSS326Mu+7CA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="51080336"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="51080336"
 Received: from fmviesa008.fm.intel.com ([10.60.135.148])
  by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Dec 2024 19:56:37 -0800
-X-CSE-ConnectionGUID: l5GcJ6+pTyqj8tGo8QLQ+Q==
-X-CSE-MsgGUID: 9y/JrDV0TaSruQX8WGhddA==
+ 04 Dec 2024 19:57:13 -0800
+X-CSE-ConnectionGUID: z+fbBH0+RGe42Khtb0kguw==
+X-CSE-MsgGUID: 9K/OE+3oS+2lHjFMBkJUKQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94154076"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94154100"
 Received: from apgcp0d540112.png.altera.com ([10.244.77.34])
- by fmviesa008.fm.intel.com with ESMTP; 04 Dec 2024 19:56:33 -0800
+ by fmviesa008.fm.intel.com with ESMTP; 04 Dec 2024 19:57:10 -0800
 From: muhammad.hazim.izzat.zamri@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -60,10 +60,13 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [PATCH v1 0/1] SoCFPGA: Add watchdog mode setting for Agilex 5
-Date: Thu,  5 Dec 2024 11:55:59 +0800
-Message-Id: <20241205035600.10545-1-muhammad.hazim.izzat.zamri@intel.com>
+Subject: [PATCH v1 1/1] arm: socfpga:agilex5: Fix system manager watchdog mode
+ setting
+Date: Thu,  5 Dec 2024 11:56:00 +0800
+Message-Id: <20241205035600.10545-2-muhammad.hazim.izzat.zamri@intel.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20241205035600.10545-1-muhammad.hazim.izzat.zamri@intel.com>
+References: <20241205035600.10545-1-muhammad.hazim.izzat.zamri@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 05 Dec 2024 14:07:50 +0100
@@ -85,19 +88,28 @@ X-Virus-Status: Clean
 
 From: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
 
-This patch is to introduce another watchdog mode setting in Agilex 5
-as additional watchdog4 has been introduced. This is to enable
-the debug mode when the CPU is paused by the user.
+This commit is to fix the system manager watchdog mode setting to support
+until mode_4 for Agilex5. This changes can refer to system manager register
+map on wddbg fields.
 
-This patch has been tested on Agilex 5 devkit with QSPI boot (UBI/UBIFS)
-and RAM boot (TFTP & ARM DS debugger).
-
-Muhammad Hazim Izzat Zamri (1):
-  arm: socfpga:agilex5: Fix system manager watchdog mode setting
-
+Signed-off-by: Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@intel.com>
+---
  arch/arm/mach-socfpga/include/mach/system_manager_soc64.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+index b1ef4a70641..670aa3cc07e 100644
+--- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
++++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+@@ -182,7 +182,7 @@ void populate_sysmgr_pinmux(void);
+ 
+ #define SYSMGR_DMAPERIPH_ALL_NS		0xFFFFFFFF
+ 
+-#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0x0F0F0F0F
++#define SYSMGR_WDDBG_PAUSE_ALL_CPU	0xFF0F0F0F
+ 
+ #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X)
+ #define	SYSMGR_SOC64_DDR_MODE_MSK	BIT(0)
 -- 
 2.25.1
 
