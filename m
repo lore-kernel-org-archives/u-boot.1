@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F49E77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80F3E7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:25:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7971894AB;
-	Thu,  5 Dec 2024 10:24:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28E7689282;
+	Thu,  5 Dec 2024 10:24:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="c31yb5sV";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="AsV9xffm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF8CC89338; Thu,  5 Dec 2024 10:24:42 +0100 (CET)
+ id 4C9678870D; Thu,  5 Dec 2024 10:24:47 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FE89892B5
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 588FE894A3
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:24:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390680; x=1764926680;
+ t=1733390683; x=1764926683;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=EVzPCcETdd4wNKE669MHKnm9JEoy+IIcbAEGlyy8CeM=;
- b=c31yb5sVirSogIsY6NJVIatHt2Dbypkg5iuVLcWksAcVT4GP5PZ0Hebv
- zCnglTpU89nW1+Q5x1tZIwfGUFkErBAZ59v1ovs3AIVCkCr3Jul09514D
- iu51oOZM/S0J49N1LAP7wV0Px+q1wgxHs5cyBtz1i2KYQRhEIC6gu+GFh
- 3V0/jC4I+VDERwyd6KdMPSCm897fDthiPcqOg8uM+q9YGGMPBT5LTgP2S
- +IDMGIaa/n4bgL+7RPy2k0L5Mo6nFnvaCg85o56q/NanMvYrxoANx10wE
- O7AmOCk6nhKCwaLehWtbEU95pUyO9WnrAqumtuuiuXEKemkZIXBswl/Jc A==;
-X-CSE-ConnectionGUID: j0jRaEizTdyCXf83phm2Ug==
-X-CSE-MsgGUID: esmvS2SwSK+9ZbuuZcjh/w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610346"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610346"
+ bh=DQDs0BjuLdDaXgLGg41GJY/mvM6b/YR24aI/IEKATUo=;
+ b=AsV9xffmqs8u0vGo2FP7AYmaNnPlSp8hkbvZDujXB/4po9z1gmayvaAH
+ bZC2vxRcPv9sA7TLVanNEKlNXRQ8/Nb4Bhi52UbdTGBvDtGRwmHYU6x+B
+ oLbyCPfglkl/zOdQW3Q726tFJPwwQRmbe12YT1nUGf2fV8pCmLnNPj1uq
+ M8CRyhXyptAJ2WV0b1Yvdnxz2+k4gsrOk1cxO2IMKW/gEZJBtrtDnxBlM
+ tIHUpeTnL/VL2YJcTtcfNTuOAk0Q5Z/DNOil55PpNQLEBcJTH/1MKHvtT
+ wgWNT9ix0vWIIx78WurbdUmBj2LRT6qafHxKeWTEXzMww2YPzAhNmw8k5 w==;
+X-CSE-ConnectionGUID: ow1KoxdtSuS8Op2loFoPyA==
+X-CSE-MsgGUID: ydS6kXfZRjOR1FsorfiUsg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610365"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610365"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:24:38 -0800
-X-CSE-ConnectionGUID: 0PU8QTqwR7mko4Q7ofcNbw==
-X-CSE-MsgGUID: 2ekcSbnrT9GbgXTF6UJHpg==
+ 05 Dec 2024 01:24:43 -0800
+X-CSE-ConnectionGUID: UhB4ZlUlRyGq4UeU5TYobQ==
+X-CSE-MsgGUID: il+ZkpzMR1mniIqyPfmBeA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94121998"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122026"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:32 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:38 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 13/19] drivers: nand: Enabled Kconfig and Makefile for
- cdns-nand
-Date: Thu,  5 Dec 2024 17:23:09 +0800
-Message-Id: <20241205092315.25060-14-dinesh.maniyam@intel.com>
+Subject: [resend v2 14/19] configs: nand2_defconfig: Enable configs for nand
+ boot
+Date: Thu,  5 Dec 2024 17:23:10 +0800
+Message-Id: <20241205092315.25060-15-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,52 +95,75 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Enable the Kconfig and Makefile for the
-Cadence NAND driver for the agilex5 family device.
+Enable configs for nand boot.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
+- using #include mechanism to keep track of the variant
+- add maintainer
 ---
 ---
- drivers/mtd/nand/raw/Kconfig  | 9 +++++++++
- drivers/mtd/nand/raw/Makefile | 1 +
- 2 files changed, 10 insertions(+)
+ board/intel/agilex5-socdk/MAINTAINERS   |  2 ++
+ configs/socfpga_agilex5_nand2_defconfig | 33 +++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 configs/socfpga_agilex5_nand2_defconfig
 
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 9f3f1267cb..709c85c6e5 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -207,6 +207,15 @@ config SPL_NAND_LOAD
- 	def_bool y
- 	depends on NAND_DAVINCI && ARCH_DAVINCI && SPL_NAND_SUPPORT
- 
-+config NAND_CADENCE
-+	bool "Support Cadence NAND controller as a DT device"
-+	depends on OF_CONTROL && DM_MTD
-+	select SYS_NAND_SELF_INIT
-+	imply CMD_NAND
-+	help
-+	  Enable the driver for NAND flash on platforms using a Cadence NAND
-+	  controller as a DT device.
+diff --git a/board/intel/agilex5-socdk/MAINTAINERS b/board/intel/agilex5-socdk/MAINTAINERS
+index b696f788c8..30d8815d20 100644
+--- a/board/intel/agilex5-socdk/MAINTAINERS
++++ b/board/intel/agilex5-socdk/MAINTAINERS
+@@ -2,7 +2,9 @@ SOCFPGA BOARD
+ M:	Tien Fong Chee <tien.fong.chee@intel.com>
+ M:	Teik Heng Chong <teik.heng.chong@intel.com>
+ M:	Jit Loon Lim <jit.loon.lim@intel.com>
++M:	Dinesh Maniyam <dinesh.maniyam@intel.com>
+ S:	Maintained
+ F:	board/intel/agilex5-socdk/
+ F:	include/configs/socfpga_agilex5_socdk.h
+ F:	configs/socfpga_agilex5_defconfig
++F:	configs/socfpga_agilex5_nand2_defconfig
+diff --git a/configs/socfpga_agilex5_nand2_defconfig b/configs/socfpga_agilex5_nand2_defconfig
+new file mode 100644
+index 0000000000..3bfe6270fd
+--- /dev/null
++++ b/configs/socfpga_agilex5_nand2_defconfig
+@@ -0,0 +1,33 @@
++#include <configs/socfpga_agilex5_defconfig>
 +
- config NAND_DENALI
- 	bool
- 	select SYS_NAND_SELF_INIT
-diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
-index 46fead6fa4..4ad1a2037f 100644
---- a/drivers/mtd/nand/raw/Makefile
-+++ b/drivers/mtd/nand/raw/Makefile
-@@ -51,6 +51,7 @@ obj-$(CONFIG_NAND_ATMEL) += atmel_nand.o
- obj-$(CONFIG_DM_NAND_ATMEL) += atmel/
- obj-$(CONFIG_NAND_ARASAN) += arasan_nfc.o
- obj-$(CONFIG_NAND_BRCMNAND) += brcmnand/
-+obj-$(CONFIG_NAND_CADENCE) += cadence_nand.o
- obj-$(CONFIG_NAND_DAVINCI) += davinci_nand.o
- obj-$(CONFIG_NAND_DENALI) += denali.o
- obj-$(CONFIG_NAND_DENALI_DT) += denali_dt.o
++CONFIG_ARM=y
++CONFIG_ARCH_SOCFPGA=y
++CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk"
++CONFIG_OF_UPSTREAM=y
++CONFIG_BOOTARGS="earlycon panic=-1 root=${nandroot} rw rootwait rootfstype=ubifs ubi.mtd=1"
++CONFIG_TARGET_SOCFPGA_AGILEX5_NAND2=y
++CONFIG_PHY_CADENCE_COMBOPHY=n
++CONFIG_SPL_PHY_CADENCE_COMBOPHY=n
++# CONFIG_MMC_DW is not set
++CONFIG_SPL_MTD=y
++CONFIG_CMD_NAND_TRIMFFS=y
++CONFIG_CMD_NAND_LOCK_UNLOCK=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_MTDIDS_DEFAULT="nand0=10b80000.nand.0"
++CONFIG_MTDPARTS_DEFAULT="mtdparts=10b80000.nand.0:2m(u-boot),-(root)"
++CONFIG_CMD_UBIFS=y
++CONFIG_MTD_UBI=y
++CONFIG_MTD_UBI_WL_THRESHOLD=4096
++CONFIG_MTD_UBI_BEB_LIMIT=20
++CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
++CONFIG_SYS_NAND_U_BOOT_OFFS=0x0
++CONFIG_SYS_NAND_U_BOOT_OFFS_REDUND=0x100000
++CONFIG_UBI_SILENCE_MSG=y
++CONFIG_MTD_RAW_NAND=y
++CONFIG_NAND_CADENCE=y
++CONFIG_SPL_NAND_SUPPORT=y
++CONFIG_SPL_NAND_FRAMEWORK=y
++CONFIG_SPL_NAND_CADENCE=y
++CONFIG_SYS_NAND_ONFI_DETECTION=y
++CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
++CONFIG_SYS_NAND_PAGE_SIZE=0x800
 -- 
 2.19.0
 
