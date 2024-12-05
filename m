@@ -4,50 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72629E7716E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCCFEE7716E
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:12:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E985894FD;
-	Thu,  5 Dec 2024 20:00:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33727894EA;
+	Thu,  5 Dec 2024 20:12:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B2508950D; Thu,  5 Dec 2024 20:00:28 +0100 (CET)
+ id 9513789512; Thu,  5 Dec 2024 20:12:48 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 105D48952A
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:00:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 1F27A894EA
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:12:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: uVjAIXNfSkaJEaTOoZP+xw==
-X-CSE-MsgGUID: LJEaNO8BTE21iT9srE25pg==
+X-CSE-ConnectionGUID: /9qjOBG6TTedGL3q58ULYA==
+X-CSE-MsgGUID: hAbGChT6Q1qMgwgKZ2wrOQ==
 X-IronPort-AV: E=Sophos;i="6.12,211,1728918000"; 
- d="asc'?scan'208";a="227032931"
+ d="asc'?scan'208";a="227033655"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 04:00:23 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 04:12:43 +0900
 Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 69C614062E03;
- Fri,  6 Dec 2024 04:00:04 +0900 (JST)
-Message-ID: <810d3a9d-f5ed-4b60-a5a9-1ea95ce3c6be@bp.renesas.com>
-Date: Thu, 5 Dec 2024 19:00:03 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 1BD744068419;
+ Fri,  6 Dec 2024 04:12:28 +0900 (JST)
+Message-ID: <dfffeed9-af65-4739-b01a-361dfed24c10@bp.renesas.com>
+Date: Thu, 5 Dec 2024 19:12:27 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
+Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
 Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
- <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
- <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
+ <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+ <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
+In-Reply-To: <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------dcfXCDvaH0xNRzj68rb6giXF"
+ boundary="------------lTTH0pFN1Hr1cnWvdlnmoHOk"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,164 +69,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------dcfXCDvaH0xNRzj68rb6giXF
-Content-Type: multipart/mixed; boundary="------------s00QrMViwaJ7dqoVuklJI89j";
+--------------lTTH0pFN1Hr1cnWvdlnmoHOk
+Content-Type: multipart/mixed; boundary="------------1QTURhB7tVuTE1G0dERr44Bh";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
-Message-ID: <810d3a9d-f5ed-4b60-a5a9-1ea95ce3c6be@bp.renesas.com>
-Subject: Re: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
-References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
- <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
- <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
-In-Reply-To: <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
+Message-ID: <dfffeed9-af65-4739-b01a-361dfed24c10@bp.renesas.com>
+Subject: Re: [PATCH 09/14] net: ravb: Support up to two instances
+References: <20241024152448.102-1-paul.barker.ct@bp.renesas.com>
+ <20241024152448.102-10-paul.barker.ct@bp.renesas.com>
+ <9bd496f2-7765-4067-bbc6-36b355107af3@mailbox.org>
+ <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
+In-Reply-To: <a7d6a116-704c-4d48-a018-ce1da4fedee5@bp.renesas.com>
 
---------------s00QrMViwaJ7dqoVuklJI89j
-Content-Type: multipart/mixed; boundary="------------wywGFkwIU0ms3cZI4EvwRdD1"
+--------------1QTURhB7tVuTE1G0dERr44Bh
+Content-Type: multipart/mixed; boundary="------------HkwwfT0pUoQIdNCL6UH0n0K4"
 
---------------wywGFkwIU0ms3cZI4EvwRdD1
+--------------HkwwfT0pUoQIdNCL6UH0n0K4
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 01/12/2024 18:50, Marek Vasut wrote:
-> On 11/20/24 10:48 AM, Paul Barker wrote:
->> On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
->> signal is selectable to support an Ethernet PHY operating in either MI=
-I
->> or RGMII mode. By default, the signal is configured as an input and MI=
-I
->> mode is supported. The ETH_MODE register can be modified to configure
->> this signal as an output to support RGMII mode.
->>
->> As this signal is be default an input, and can optionally be switched =
-to
->> an output, it maps neatly onto an `output-enable` property in the devi=
-ce
->> tree.
->>
->> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->> ---
->> Changes v1->v2:
->>    - Split out of series adding RZ/G2L Ethernet support [1]
->>
->> [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@b=
-p.renesas.com/
->>
->>   drivers/pinctrl/renesas/rzg2l-pfc.c | 31 +++++++++++++++++++++++++++=
---
->>   include/renesas/rzg2l-pfc.h         |  2 ++
->>   2 files changed, 31 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/ren=
-esas/rzg2l-pfc.c
->> index 0098e2d52d57..af371bd0ff1e 100644
->> --- a/drivers/pinctrl/renesas/rzg2l-pfc.c
->> +++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
->> @@ -180,7 +180,7 @@ static const u32 r9a07g044_gpio_configs[] =3D {
->>   	RZG2L_GPIO_PORT_PACK(3, 0x21, RZG2L_MPXED_PIN_FUNCS),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x22, RZG2L_MPXED_PIN_FUNCS),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x23, RZG2L_MPXED_PIN_FUNCS),
->> -	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
-MC_ETH0)),
->> +	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
-MC_ETH0) | PIN_CFG_OEN),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x25, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x26, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x27, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->> @@ -189,7 +189,7 @@ static const u32 r9a07g044_gpio_configs[] =3D {
->>   	RZG2L_GPIO_PORT_PACK(2, 0x2a, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x2b, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x2c, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH0)),
->> -	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
-MC_ETH1)),
->> +	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
-MC_ETH1) | PIN_CFG_OEN),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x2e, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH1)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x2f, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH1)),
->>   	RZG2L_GPIO_PORT_PACK(2, 0x30, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
-VMC_ETH1)),
->> @@ -449,6 +449,32 @@ static int rzg2l_pinconf_set(struct udevice *dev,=
- unsigned int pin_selector,
->>   		break;
->>   	}
->>  =20
->> +	case PIN_CONFIG_OUTPUT_ENABLE: {
->> +		u8 ch;
->> +
->> +		if (!(cfg & PIN_CFG_OEN)) {
->> +			dev_err(dev, "pin does not support OEN\n");
->> +			return -EINVAL;
->> +		}
->> +
->> +		/*
->> +		 * We can determine which Ethernet interface we're dealing with fro=
-m
->> +		 * the caps.
->> +		 */
->> +		if (cfg & PIN_CFG_IO_VMC_ETH0)
->> +			ch =3D 0;
->> +		else /* PIN_CFG_IO_VMC_ETH1 */
->> +			ch =3D 1;
->> +
->> +		dev_dbg(dev, "set ETH%u TXC OEN=3D%u\n", ch, argument);
->> +		if (argument)
->> +			clrbits_8(data->base + ETH_MODE, BIT(ch));
->> +		else
->> +			setbits_8(data->base + ETH_MODE, BIT(ch));
->> +
->> +		break;
->> +	}
->> +
->>   	default:
->>   		dev_err(dev, "Invalid pinconf parameter\n");
->>   		return -EOPNOTSUPP;
->> @@ -542,6 +568,7 @@ static int rzg2l_get_pin_muxing(struct udevice *de=
-v, unsigned int selector,
->>  =20
->>   static const struct pinconf_param rzg2l_pinconf_params[] =3D {
->>   	{ "input-enable",	PIN_CONFIG_INPUT_ENABLE,	1 },
->> +	{ "output-enable",	PIN_CONFIG_OUTPUT_ENABLE,	1 },
->>   	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	3300 /* mV */ },
->>   };
->>  =20
->> diff --git a/include/renesas/rzg2l-pfc.h b/include/renesas/rzg2l-pfc.h=
+Hi Marek,
 
->> index d1015b1d2ac1..36fa8da8e2e4 100644
->> --- a/include/renesas/rzg2l-pfc.h
->> +++ b/include/renesas/rzg2l-pfc.h
->> @@ -22,6 +22,7 @@
->>   #define PIN_CFG_FILONOFF		BIT(10)
->>   #define PIN_CFG_FILNUM			BIT(11)
->>   #define PIN_CFG_FILCLKSEL		BIT(12)
->> +#define PIN_CFG_OEN			BIT(13)
->>  =20
->>   #define RZG2L_MPXED_PIN_FUNCS		(PIN_CFG_IOLH_A | \
->>   					 PIN_CFG_SR | \
->> @@ -79,6 +80,7 @@
->>   #define SD_CH(n)		(0x3000 + (n) * 4)
->>   #define ETH_POC(ch)		(0x300c + (ch) * 4)
->>   #define QSPI			0x3008
->> +#define ETH_MODE		(0x3018)
-> Parenthesis unnecessary around the 0x3018 , I can fix it while applying=
-?
+On 28/10/2024 09:50, Paul Barker wrote:
+> On 27/10/2024 16:25, Marek Vasut wrote:
+>> On 10/24/24 5:24 PM, Paul Barker wrote:
+>>>   int ravb_of_to_plat(struct udevice *dev)
+>>>   {
+>>>   	struct eth_pdata *pdata =3D dev_get_plat(dev);
+>>> -	const fdt32_t *cell;
+>>> +
+>>> +	if (bb_miiphy_index >=3D bb_miiphy_buses_num) {
+>>> +		dev_err(dev, "ravb driver supports only 1 or 2 devices!\n");
+>> Hmmmm, I really do not like this, can we make this dynamic ?
+>>
+>> Unless you want to take a look at this yourself, I can add it into my =
+todo ?
+>=20
+> I think the real solution here would be to separate the bb_miiphy
+> operations from the bus instance, so we would have something like:
+>=20
+>     struct bb_miiphy_bus {
+>         struct bb_miiphy_ops *ops;
+>         void *priv;
+>     };
+>=20
+>     struct bb_miiphy_ops {
+>         int (*init)(struct bb_miiphy_bus *bus);
+>         int (*mdio_active)(struct bb_miiphy_bus *bus);
+>         int (*mdio_tristate)(struct bb_miiphy_bus *bus);
+>         int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
+>         int (*get_mdio)(struct bb_miiphy_bus *bus, int *v);
+>         int (*set_mdc)(struct bb_miiphy_bus *bus, int v);
+>         int (*delay)(struct bb_miiphy_bus *bus);
+>     };
+>=20
+>     int bb_miiphy_bus_register(const char *name,
+>                                struct bb_miiphy_ops *ops,
+> 			       void *priv);
+>=20
+> Where drivers will call `bb_miiphy_bus_register()` from the probe
+> function, it will create a `struct bb_miiphy_bus` instance and a
+> `struct mii_dev` instance then call `mdio_register()`. The driver can
+> then support an arbitrary number of MDIO busses from a single constant
+> `struct bb_miiphy_ops` instance.
+>=20
+> The bb_miiphy_getbus() function should be dropped from miiphy.c.
+> Instead, the priv pointer in the `struct mii_dev` instance can point to=
 
-Thanks for fixing this up!
+> the appropriate `struct bb_miiphy_bus` instance.
+>=20
+> It looks like all users of CONFIG_BITBANGMII also set
+> CONFIG_BITBANGMII_MULTI, and there don't seem to be any targets that
+> define the macros documented in README.bitbangMII (lines 15-22). So, we=
+
+> can drop the non-BITBANGMII_MULTI code from miiphybb.c and simplify
+> things a lot.
+>=20
+> That's non-trivial but it's not a huge set of changes, maybe something
+> we could target for v2024.04?
+
+We've got several of the other patches from this series merged now after
+v2 so I'm coming back to this one. I think we should take this patch
+as-is and then follow up with general improvements to the bb_miiphy
+support. Are you happy with that? If so I will re-send it along with a
+re-worked version of patch 11 from this series (net: ravb: Add RZ/G2L
+Support).
+
+Thanks,
 
 --=20
 Paul Barker
-
---------------wywGFkwIU0ms3cZI4EvwRdD1
+--------------HkwwfT0pUoQIdNCL6UH0n0K4
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -286,21 +230,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------wywGFkwIU0ms3cZI4EvwRdD1--
+--------------HkwwfT0pUoQIdNCL6UH0n0K4--
 
---------------s00QrMViwaJ7dqoVuklJI89j--
+--------------1QTURhB7tVuTE1G0dERr44Bh--
 
---------------dcfXCDvaH0xNRzj68rb6giXF
+--------------lTTH0pFN1Hr1cnWvdlnmoHOk
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H4MwUDAAAAAAAKCRDbaV4Vf/JGvXkQ
-AP0Uirv2szUjxWArmMgSfVEnAwjlYPLPezYhgfSTwu824AEAkm6KkKZ6ZQ4fXg4DlA2Ro4uQ0nzm
-MkEiFPhihBvNDw8=
-=5sG3
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H7GwUDAAAAAAAKCRDbaV4Vf/JGvZkq
+AP9uJf4aG1SvVIdJAOApizHub3mpBpkVQVGw/YbkwKDuYgEAy8lsusDJgWqoZnMY3UboFqtFm0i5
+fDRXcHzhp2ASkQs=
+=/W/e
 -----END PGP SIGNATURE-----
 
---------------dcfXCDvaH0xNRzj68rb6giXF--
+--------------lTTH0pFN1Hr1cnWvdlnmoHOk--
