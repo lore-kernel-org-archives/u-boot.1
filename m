@@ -4,52 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37110E77173
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2BBFE77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A55B18950D;
-	Thu,  5 Dec 2024 19:55:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20DBA89512;
+	Thu,  5 Dec 2024 19:57:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84537894F9; Thu,  5 Dec 2024 19:55:16 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 4893389512
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:55:12 +0100 (CET)
+ id 11AF98950D; Thu,  5 Dec 2024 19:57:04 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id B191889524
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:57:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: fDcYQkc9TPur6/PFzpnHgQ==
-X-CSE-MsgGUID: pirbqJT7RAich9I0u5rDtw==
+X-CSE-ConnectionGUID: hsup+96UTiuhSoieJu8GBg==
+X-CSE-MsgGUID: gu0jEg8lRcWetCSBJrj9mA==
 X-IronPort-AV: E=Sophos;i="6.12,211,1728918000"; 
- d="asc'?scan'208";a="227032735"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 03:55:10 +0900
+ d="asc'?scan'208";a="231009525"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 06 Dec 2024 03:56:58 +0900
 Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 57FCF4009439;
- Fri,  6 Dec 2024 03:55:08 +0900 (JST)
-Message-ID: <11d1e214-704d-4e6a-9687-9a2117fc769c@bp.renesas.com>
-Date: Thu, 5 Dec 2024 18:55:06 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id A82E14061976;
+ Fri,  6 Dec 2024 03:56:56 +0900 (JST)
+Message-ID: <4ac15e06-46de-4d7d-8e82-83d6c0627776@bp.renesas.com>
+Date: Thu, 5 Dec 2024 18:56:55 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] net: ravb: Simplify max-speed handling in
- ravb_of_to_plat
-To: Marek Vasut <marek.vasut@mailbox.org>,
+Subject: Re: [PATCH v2 1/4] net: phy: Port set/clear bits from Linux
+Content-Language: en-GB
+To: Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-References: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
- <17cde70a-c85c-47c0-86ac-b22473004426@mailbox.org>
- <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
-Content-Language: en-GB
+References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
+ <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+In-Reply-To: <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------0WmoRPq5mWz71C30W3uoCENm"
+ boundary="------------nT2K0a4Zf0g94E40GStpIAE7"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,63 +65,95 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0WmoRPq5mWz71C30W3uoCENm
-Content-Type: multipart/mixed; boundary="------------sHWnqTjw77x6cOhr0xpCphTO";
+--------------nT2K0a4Zf0g94E40GStpIAE7
+Content-Type: multipart/mixed; boundary="------------B0BtaVdfozhRNfCcz2DolwL0";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
+To: Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-Message-ID: <11d1e214-704d-4e6a-9687-9a2117fc769c@bp.renesas.com>
-Subject: Re: [PATCH v2] net: ravb: Simplify max-speed handling in
- ravb_of_to_plat
-References: <20241120094939.129-1-paul.barker.ct@bp.renesas.com>
- <17cde70a-c85c-47c0-86ac-b22473004426@mailbox.org>
- <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
-In-Reply-To: <ca0d025b-0ffe-4640-b6cb-58403e427fdd@mailbox.org>
+Message-ID: <4ac15e06-46de-4d7d-8e82-83d6c0627776@bp.renesas.com>
+Subject: Re: [PATCH v2 1/4] net: phy: Port set/clear bits from Linux
+References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
+ <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
+In-Reply-To: <e895243b-7ee2-460a-97ec-a5e003bc6d2a@cherry.de>
 
---------------sHWnqTjw77x6cOhr0xpCphTO
-Content-Type: multipart/mixed; boundary="------------bIdkbFzbnNcPdlmBSoEusgRD"
+--------------B0BtaVdfozhRNfCcz2DolwL0
+Content-Type: multipart/mixed; boundary="------------ttAWW9AUBS70Osjrj0QlDPOx"
 
---------------bIdkbFzbnNcPdlmBSoEusgRD
+--------------ttAWW9AUBS70Osjrj0QlDPOx
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Marek,
+On 25/11/2024 16:42, Quentin Schulz wrote:
+> Hi Paul,
+>=20
+> On 11/20/24 10:49 AM, Paul Barker wrote:
+>> To simply porting phy drivers from Linux to U-Boot, define
+>> phy_set_bits() and phy_clear_bits() functions with a similar API to
+>> those used in Linux.
+>>
+>> The U-Boot versions of these functions include the `devad` argument
+>> which is not present in the Linux versions, to keep them aligned with
+>> the other phy functions in U-Boot.
+>>
+>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Changes v1->v2:
+>>    - Split out of series adding RZ/G2L Ethernet support [1]
+>>    - Added Marek's Reviewed-by tag
+>>
+>> [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@b=
+p.renesas.com/
+>>
+>>   include/phy.h | 22 ++++++++++++++++++++++
+>>   1 file changed, 22 insertions(+)
+>>
+>> diff --git a/include/phy.h b/include/phy.h
+>> index 36785031eeb0..510b0a21831b 100644
+>> --- a/include/phy.h
+>> +++ b/include/phy.h
+>> @@ -333,6 +333,28 @@ int gen10g_startup(struct phy_device *phydev);
+>>   int gen10g_shutdown(struct phy_device *phydev);
+>>   int gen10g_discover_mmds(struct phy_device *phydev);
+>>  =20
+>> +/**
+>> + * phy_set_bits - Convenience function for setting bits in a PHY regi=
+ster
+>> + * @phydev: the phy_device struct
+>=20
+> Please document devad parameter here as well?
 
-On 01/12/2024 21:08, Marek Vasut wrote:
-> On 12/1/24 7:48 PM, Marek Vasut wrote:
->> On 11/20/24 10:49 AM, Paul Barker wrote:
->>> We can call dev_read_u32_default() instead of calling fdt_getprop() t=
-hen
->>> fdt32_to_cpu().
->>>
->>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
->>> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> Applied to sh/master, thanks.
->=20
-> I think this one triggers some build failure --=20
-> https://source.denx.de/u-boot/custodians/u-boot-sh/-/pipelines/23670 --=
-=20
-> https://source.denx.de/u-boot/custodians/u-boot-sh/-/jobs/965285 on=20
-> these boards:
->=20
-> rzg2_beacon hihope_rzg2 r8a77995_draak r8a77970_eagle r8a77990_ebisu=20
-> r8a779a0_falcon r8a779h0_grayhawk rcar3_salvator-x rcar3_ulcb=20
-> r8a77970_v3msk r8a779g0_whitehawk silinux_ek874
->=20
-> You need to drop the *cell variable. I've fixed that up and retriggered=
-=20
-> a build, I hope that's OK?
+Ah, I forgot to add devad to the documentation comment when I added it
+to the function signature. I'll do that for v3.
 
-Apologies, I missed that cell was still defined but now unused. Thanks
-for fixing it up.
+>=20
+>> + * @regnum: register number to write
+>> + * @val: bits to set
+>> + */
+>> +static inline int phy_set_bits(struct phy_device *phydev, int devad, =
+u32 regnum, u16 val)
+>> +{
+>> +	return phy_modify(phydev, devad, regnum, 0, val);
+>> +}
+>> +
+>> +/**
+>> + * phy_clear_bits - Convenience function for clearing bits in a PHY r=
+egister
+>> + * @phydev: the phy_device struct
+>=20
+> Please document devad parameter here as well?
+
+As above.
+
+Thanks for the review!
 
 --=20
 Paul Barker
---------------bIdkbFzbnNcPdlmBSoEusgRD
+--------------ttAWW9AUBS70Osjrj0QlDPOx
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -187,21 +217,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------bIdkbFzbnNcPdlmBSoEusgRD--
+--------------ttAWW9AUBS70Osjrj0QlDPOx--
 
---------------sHWnqTjw77x6cOhr0xpCphTO--
+--------------B0BtaVdfozhRNfCcz2DolwL0--
 
---------------0WmoRPq5mWz71C30W3uoCENm
+--------------nT2K0a4Zf0g94E40GStpIAE7
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H3CgUDAAAAAAAKCRDbaV4Vf/JGvRKm
-AP9IZ/C8HVL43WOrQxzqpdw5FzyWkIoI1pvPvsnt/WyupAD8CH5xwUHAfFrnYzvIZ+h8V4OA8Utz
-bDOPrwY+X6WM+w0=
-=5edE
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H3dwUDAAAAAAAKCRDbaV4Vf/JGvTTh
+AP9dREasM7aZlyzCZuBrmKG3b9FN2183hqO/OcMWkaeWDwEA6a85X6Gpp6DHUsyGvJ9dQFmvr43G
+uE25/U6VSbpRGww=
+=a5FL
 -----END PGP SIGNATURE-----
 
---------------0WmoRPq5mWz71C30W3uoCENm--
+--------------nT2K0a4Zf0g94E40GStpIAE7--
