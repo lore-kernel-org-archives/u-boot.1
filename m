@@ -4,68 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D9BE7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97A2DE7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:30:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC1BF88D56;
-	Thu,  5 Dec 2024 14:29:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65AFF894D6;
+	Thu,  5 Dec 2024 14:30:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3oblo5LG";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="w79HKH2S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0717088D56; Thu,  5 Dec 2024 14:29:50 +0100 (CET)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::62c])
+ id 8C63F89495; Thu,  5 Dec 2024 14:30:00 +0100 (CET)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:240a::616])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41210887D1
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 14:29:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75456894E7
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 14:29:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kqg548x2hoHbsetvaHFw8FXVLfH6zasr63qSrjpwnYMkQVPGHrBde+GQfByzlt/rCnjZP2hkZxmddlv3izTACDOMn7oCJK5qQmJbeHURBx9WRhPs0sr3Ca/D89PYA56B/23ZMzo91XgVIBiwccfazM0jJkt6Uan8UpNRt38Glg9Drll2YbsYpYz7lEXVZ/0QCp9E1LMZUyUV+ApVSNwynFVFj5azeIy6edH24zshqrOE8Md8arMKxPs/1KB9tD3fxUrLMOfyUMY+UFUkNX+qgtJ2Edmn+jPMyOwBcHDAmbpclNqH+VZpoJ022clVdXqHzJpbCT1Z+cjnxJ4z/8UXhw==
+ b=XDOTFeymSwolT4QCmQcd1qjFhWgju5lzaFiGFEi7IJNlfzu9J9/LLrjTKL8pwywaIoLghGW7l1TPrY2brhULaHje35kEemlm5I7mu7Sw8TwIvfM0WytyzyrERt2mxLMIkpBY0FuxILi9D8gKDdM3Wwh60N1+6wuB3pP7PpxfcrM8sOuO4cvbneKocqfxMzHLrSQJCptSErgPUTOkH8P/5VLFtfsncOA+sRsFD5hJG5TL9jlqTnpA2rzxAR/Sxj+xMblW4qYx7WDHvt9Qj7zdTmnFriYihfTfrH8harqLCB09V780tsSEa/Gjmisd9FcPuQ1LcYfwvw0D48ERQs7Lzw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1/9uVZmZzmHWRVxDN3lbeZDabx+d0kN+xbyFei6UxiI=;
- b=Mfp7jSvPjiowHth+J1GZIj/6TOEg8BpY6Gz9R/h9nRXgX1du4pmls5smg+tSst4TsPaiKwE0ReNdDHq49dsZJtItOtOTssK/mO+EHbnMokzSRxgL8kXj5hi2C0ooKrkUgDjLSSdg0ETV3Lt5WbZGb8XXLJv5BZM6nqPudZn9h2XmjWG2lUET+GVO7GQXGaPVZoqxQIbuIt9I1VbjgeetUvCFmxUyszH3ZMsPlgBlDaE3pO4hwaFU+pMc5Y81hFIXM/EyIY1tQPVHX2CP54lyeTiPWetXdUUGcn+gpsAVEeyLATXAYkFSnl6LLhUsmeRmbNHNnbM7PtZe+N6nt8PJmQ==
+ bh=n0ZPKUejxK51fV658h2xnGLh8minD6jISGOsd914Izg=;
+ b=yJ3WNCCvjPiQmhy1m8cIfYDlZV4Ac42sEI9aw4+pJxaAm6iaAoU7u9whs6gRq59W39aSZiSZavnrphhKeWsnMP/ao1+mBF37u5AdjrA26+hHTbHoX6/Z9x/N/DoBXjBixOMdLwHArfOBcj0yhMkambVPJJ7AElO83JUIF+anl0mU4NqWIzgFZqRM5EHQvA5pXPSuai1oUg34JpRrD9pwfxPWgWZcg2F/At04AtBhQeCJTPuTojL9so0FA/2P368Jn6CP0IIIXGwRgiEiJGSOahguhZJX/NbwEiJiFf2TNnlnv6UNgYPpEIrcyoBbXGhfp/QxtboulL14/SBRToQ7dw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1/9uVZmZzmHWRVxDN3lbeZDabx+d0kN+xbyFei6UxiI=;
- b=3oblo5LG4+CAXyK7+vBbLPee3Z25s3xRoUNPLZq9P788Q3To13WA7YAhtZYtPHUjpnG0Jj31O+BVlsYMG1fFvtBN0NJ7vAgTU0aSnNXHDf+aPKfNl6KXarOyCa4XEDanCxgyFX3+lCMFJ9spSUSgZjTVd0kDot3shR824eiUR28=
+ bh=n0ZPKUejxK51fV658h2xnGLh8minD6jISGOsd914Izg=;
+ b=w79HKH2SJFOxTdu4o9tY6YRRAV3UBvogrIAe+DgEf0221jPrMogRlOhKd9QWTlNucE0tA9YcYDObXi8bywpyiMOkFotG5kZ5gH/RQolomJe0R+s1qQQ25JvItQNK5MDO3tqJOyokwz5CC1J3ZUfsfPfXBtouNKEq+FS4xmY8aao=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by SN7PR12MB8172.namprd12.prod.outlook.com (2603:10b6:806:352::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.11; Thu, 5 Dec
- 2024 13:29:43 +0000
+ 2024 13:29:50 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.8207.017; Thu, 5 Dec 2024
- 13:29:43 +0000
-Message-ID: <9aab45f7-d99c-433d-b774-6b4f03d1ae79@amd.com>
-Date: Thu, 5 Dec 2024 14:29:32 +0100
+ 13:29:50 +0000
+Message-ID: <6b4f4934-ed39-441e-961c-2e3b63b032f7@amd.com>
+Date: Thu, 5 Dec 2024 14:29:47 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Sync with v6.12 kernel
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Manikanta Guntupalli <manikanta.guntupalli@amd.com>,
- Paul Alvin <alvin.paulp@amd.com>, Srinivas Goud <srinivas.goud@amd.com>,
- Tanmay Shah <tanmay.shah@amd.com>, Tom Rini <trini@konsulko.com>,
- Vishal Patel <vishal.patel@amd.com>
-References: <cf37760117765c4cece94736dc2a7b583d5987de.1732805351.git.michal.simek@amd.com>
+Subject: Re: [PATCH v2] arm64: zynqmp: Update the usb5744 hub node as per
+ binding
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: git@amd.com
+References: <20241129110631.672637-1-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -110,7 +106,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <cf37760117765c4cece94736dc2a7b583d5987de.1732805351.git.michal.simek@amd.com>
+In-Reply-To: <20241129110631.672637-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: FR5P281CA0046.DEUP281.PROD.OUTLOOK.COM
@@ -119,90 +115,90 @@ X-ClientProxiedBy: FR5P281CA0046.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SN7PR12MB8172:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6012b790-96af-478b-c4df-08dd1530e0df
+X-MS-Office365-Filtering-Correlation-Id: 46471930-e321-46ee-9472-08dd1530e52e
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?c1ZFWXVNRXFVcTlSeWh5Qms1TXlmbTFuN2wzbitnUFI4MlhveCtLVGs2cU1l?=
- =?utf-8?B?eHFzOUlPV21tQ29XR1VrNklrR25tU1ppS0thOHpya3NGZ1dKQnNXeVBBR3hQ?=
- =?utf-8?B?ZExUM3RoNXpZVTVPdzl1RlQrVlNxVCsyZ0dVS0VMLzduQXlsRGR4TnZpVmtR?=
- =?utf-8?B?YnNWVmVtRTRFQ0FkSnNrRm5UTTRhNzlUbzFCUXdMVDFnaE9vKzBLdmlFSnRI?=
- =?utf-8?B?N29RcmtPeDd6bHk0eUxPa0d4YUdoUENTU2RuMTlmNFVrbVRMQ3Vtekhjb0kw?=
- =?utf-8?B?L2x4eldzNVZZRTdqNEVNemJGWWNZc2lqZk1PeExCNVV3NE84cExrNCtGc0Zq?=
- =?utf-8?B?aDNqNmRCOC8wajkvZUJaQzhuMFJCZXV4UkRUeFRNaHdLVEM1WjNmcFE4dlEv?=
- =?utf-8?B?aGZiNVluM0VYTDdtR2RRRTRMeDRlbjZyZWVsZkJNUmdaYUZrVGxFRjF6bEt1?=
- =?utf-8?B?bERWOEpKVUxuN0pqMDZsVEtHRDEzeE8wWm1yNmxEUURvZHh4SEd4eUR4cW40?=
- =?utf-8?B?WnB4ZFNOWDhFZkRDbWZMTkIrWWtIajQ5VjRWTVd6SEt5aTV6SG1mL29mTm5k?=
- =?utf-8?B?NWoyQkY3WGdvWWR1R2dRQ1B3QlYyb294NndPcFptdG1aRTdMMyszQkU1Vmo2?=
- =?utf-8?B?cGVzbS9TN2cvYWw3UitDdUhGc01LV2REa3BSL3FVd1FETW1mRGIvbXAzYnQw?=
- =?utf-8?B?UndjME04dlkyM1dVbkdjeDV1cjAvVVFHQ2ZHLzNwWGhsN0RzeEVkYXBhMGt5?=
- =?utf-8?B?VSt4ejlUNngyRy9Ua1Z4dFlBOEgwUURwcTk0NXhNMHlkc3FtbmRiajR3Yi9s?=
- =?utf-8?B?cnd0c0VBUUEyQXNQbnlrQ09zVGRKUW9qLy9tZzZ2dUM3SGZIWW8vaWxNTlJJ?=
- =?utf-8?B?TVF4ZldxSG8rN1RlWmdMMm1BUDRFd2tZdWZXT2Jmbm5kd1ZsQWM1Uy9mV0tC?=
- =?utf-8?B?S0xhUFZNeDVod1F1bFZzRzlwQ2Q4ZHpDM1ppTklrZkRicXB0MmtKazQrZ1lS?=
- =?utf-8?B?RXdwSTJoelJMRVY2aWpBMWYxNUZkYUpRN1RiUUphak4rYnFSOEJJT3NzUVJh?=
- =?utf-8?B?RFNKR29QbFVMREcyNUZRa0ZVUm5TTzVJdHQrQnhISG8yOHdLcUFiNjg2TDRr?=
- =?utf-8?B?Q2cxSTVSOUtxSmZ5NEdYaXMzdFhMdmVoUUVqeHMrVnBjL1NMSHQreGVxZm5q?=
- =?utf-8?B?MlVQTXZhK0dWaWtRUDFDSW85d0NhcTNYUEZMWnBxR0RBRzZlRDVjcEtnZFRT?=
- =?utf-8?B?NUNnNGdLQ1IvNUJZWmxCUzF5TVRTMm12NEJzYlQwb3Fkbnc5SWhNdE9EaERj?=
- =?utf-8?B?NGZDNFBvcm9mdFBVaVN3a3RTeDJjRDlBQTB1VVBCYTRSZEVkT212MW0vWEhV?=
- =?utf-8?B?RHlOL2krS0ovaUUzdGk2NExHYUdIQ2VrTFNmRHhFUjJUKzMxQi9kVmdGYUM4?=
- =?utf-8?B?bHVqNVoxbDJ5YlMvQk93QWh0REp2MmtFK0NZNk5tc21iTjFOZlk1ckJTMHJF?=
- =?utf-8?B?a20xd1J3Y3o4RlhMTlZYNm9zNEZUaFN6NlpGZFFpZkRqcEhDOXFaVXBBOGE3?=
- =?utf-8?B?dWRJNEhHTHJOeVhIVWJvQU10RzZ0V2luQjJmR0tnTDdFc2dkNG1CNXdtYVZ3?=
- =?utf-8?B?S3VpY05LdTBlNUhzT3Uzckw4ekx6ZFRUWmJVRVFPVmRYaTg2U1UzRFZMQ3pz?=
- =?utf-8?B?a0F2MTRTVnZLWVI2KzhTYzhza2hjbE5aZC9PUTF1VjNJSWEzdG9sSThqUGtI?=
- =?utf-8?B?OVJvK3hwcGsxVVgvVEhtQUl5ekZvOXRyWnZidURTdWVQTytsVVZnSVZ5ZVgr?=
- =?utf-8?B?OHpGZS9seXVwblJyb2o5UT09?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?c0hFWEtiRG1vMXlabHNoajIyRjBXQTBvQU8wZllWOElKWnBFQmtQTDdVTFRV?=
+ =?utf-8?B?UHQydTNYYnpTeWtJNFdDem14MTM5OXkrOUZBbVk5eGdvOUZmb0JFMnE3NGlw?=
+ =?utf-8?B?TzVSVTJJWVRvRjVLL1BoeDc4VXdpcUhnbVNDT3ZRZWJySDllWEM3d1NmbS9u?=
+ =?utf-8?B?ZzQrNHpBT1pMUHlIYzNmTjBKeTJ6T0lFbFBlMHJyOVVHdVptSXNyK0VtTWt4?=
+ =?utf-8?B?SjlSL2MwbU8yWm9xRWlRMmlIYnZ3OWNncWRaT1F1YkZGdDlRekV1TXRHLzF2?=
+ =?utf-8?B?RGYrRlM3b2V3MWJiM1h0RDJlckxOYjkzY3I4SmcvTnFrQ0RPQkZlZ2hYVzlU?=
+ =?utf-8?B?dy80VWlQbXdHdzBOSFVmOWF2OFRKQ3BEbnlmaldlTERZUFRScHNrdHg0VUpl?=
+ =?utf-8?B?cGFocTc0VTVwSXpYT09FL0cyQVZ4QnFpclRnc0pveGlVekdTZittRHNDOGZu?=
+ =?utf-8?B?MHo3Ni9mQ2JwY0VNbFQ2ZlVVS1pvc1NuaTRzZ2xBaWcwQjFKd2FwTFJqSTJp?=
+ =?utf-8?B?WmRJNWo0bjQyOER4Vy9CYzZlelJIZ3ZtY0I5UVlqRlNBTTlMUVF0cWpJeTJn?=
+ =?utf-8?B?U1kzTmZseXhVcVplaWdFbmgvKzlTVDc0UEwrTm5paS9CRXpQWWtaQzhrODBB?=
+ =?utf-8?B?V1orMzdYcFhSU2NFSUN6bXBqaGUyWTlMQ0VZZ2J0bmkxc0hoUnBjSllDRW1M?=
+ =?utf-8?B?YmMvSW5wUWhKVXY2Nk5lYjRkeFRCMGZkeGpWVWVlVlR3dEhUSWtoU0ZmY21W?=
+ =?utf-8?B?TkZ4Z1FFWUtUcTI4UmwxbjkyMmFOQkswcDdsOU9vZ3ExNDB1M3NFS2xzWmpV?=
+ =?utf-8?B?RCtvYVFyT1JTT1RpMjcrL25MNGd0aVRBY2ZoKzd6VUVzeU9WcWx3QmdTUjM4?=
+ =?utf-8?B?bWxxeGQxZU9LaStuL2ZySXhGV001YzgvMC9WUlJoZjE2a3REUDFpMGF2QVBp?=
+ =?utf-8?B?MXk3Q2xvTjR5bWIzQ2pJc3pmNjRSRUxpRWYyd1UrOERZaTNRQk9FQkZqbklR?=
+ =?utf-8?B?cVFzdUN6N3V2TWt5MnY5b3dVOEwzWUxmMG5BWGV2SWx6SmtpMXY0YXUrM09r?=
+ =?utf-8?B?eVQvT1lMYWZtb01ET3JtVFJCb29XM3JRMW9GTzQ1WExCc0Q2WlhYSzZWcmFJ?=
+ =?utf-8?B?ZWNXb1NOMVBNZGxXTTgwUkF6UTFEbHRsbm1pMTlWcCtDY2JDMFdtS1pPM3Bw?=
+ =?utf-8?B?bXlCN1RvOVNWSnlaMXc4RmJPWkJhY256Q1hhcGluYm85ejFwVk52Umk4S2FG?=
+ =?utf-8?B?NEw0bE5RRkFhaXp0NjBBN3ArdFF3d1NzbGZFZ1FwNjZ6SXBMdkFhT2p6NUJk?=
+ =?utf-8?B?Tzd3MzB6VjlPUFVpZndRTjJWa1FJVDhFYWNDL01HVjcvdFQ2SytBM1Z3bEph?=
+ =?utf-8?B?QzROeHNvUmU5UXdGK2dxdC9sRW9OYXdranhBeFpZU3ROV09wcGdoc3NZOEQy?=
+ =?utf-8?B?Y2ZQTGdzbGpzdEpxVStWZDBGYWpVd2xWeVFINFpYa04xUjd6bHF3R1VNY3N4?=
+ =?utf-8?B?VjFUd0Zqa1I0RnJNK3dhU1dwZGxjZWlZM0w3UWo0UUdVQ29iUUplWVJpK2Q5?=
+ =?utf-8?B?TURIdkx2K0hRcEVXZy8xamxwZm9LU2NMQTcrOTBpN3NEb1M1M0RSK3lpMFNm?=
+ =?utf-8?B?TGU4bzNPTDZUNFNIdkE3eDdpYlJxcUdXc3VlQVFsUmNsTUs1eDd0Sm84MTdu?=
+ =?utf-8?B?a25mN2lRbXhRS0oyZTVoT3QzS0lmZUE4d0VOOHhDYk5yM0J1TFAvRFZDN3Z1?=
+ =?utf-8?Q?aTxt11lMg9/BmlFLUo=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?c3U3aUVqOVZ3cG9FTkQrTFkyUkpFbEZEMWR6K0lzQzBFMUd3UU8rZktOblB5?=
- =?utf-8?B?UkpiREdoemxhRmE1UTY4b29kV29GOUhQN3ZTZ2s1WmZrZGNzUjZNOGN5MTNM?=
- =?utf-8?B?MGVmSCs1OWNudWVydlhydklPaUpkZUQxZDlhUTVNM2lIaXlNRDlhcVdCYVRB?=
- =?utf-8?B?ZTd3MURGdFZ3NTA1VDhtS245RkVCZm5IU3dJYXpWRFJIR2RKZnFaUTVwdmEy?=
- =?utf-8?B?cFJJTDZUZmxDNUM1MFJranQvYVhjTG9kelppdHpjL0Nob0gwMzViN2JxT2pu?=
- =?utf-8?B?UmpqZG1wZWpZaEZnb3AzaFl1TklXd2RtTlQrUDl0aVRWR21xb2hCL3k4dFI4?=
- =?utf-8?B?TlJMUndIOHkxSlFHeWZkUzdTOVBDYWxwY0xXcEhVZVNGb3dXVEJwYTNRcmk5?=
- =?utf-8?B?dGFCMXI4a3NDRVBNZTlwQUFLMTQrdE9EeWRUdno4aXRtRVcvMFBJTzZJWGxp?=
- =?utf-8?B?a3d4L3E3eDQ4VG1VcjA3alpyOWdlRlVtN3JxZkJpam5UcnlnenVZeHJadG1W?=
- =?utf-8?B?ZzhmUjJ4RGsvbnhhaElvMlJaYkNmYWVqelUrdlYwM1hqTWJESnRNelZIeXdv?=
- =?utf-8?B?VTk1R2cyUlhqdmlHNlRzNm9NZnFGNEIrdEpqeHV3VEo2M0FGRE05eEJaUDdW?=
- =?utf-8?B?UG94aWFLQzlXSlBDTXF3bDJXZGkrZ0pwb3I3Zjh4ditvb0ZsNXVQNEV3V3Jo?=
- =?utf-8?B?b01uQXhYS1R0bll6cksvaU1lYlFRT2FTTHNlQ0RsMWRuWlBMQ3RyTUtrQ25D?=
- =?utf-8?B?cHZGWlBlWHVETDFIdkpTNXdyMmFJM2Z5Q3VjREdrMldBM1VMYUlWU0lYczNH?=
- =?utf-8?B?d21EbWx1Qjc0TDZDZEN2OHUrT1huUTUyazNwQUZROVBzUVRTNFFNYldMVmxa?=
- =?utf-8?B?cDdUL1ppa2NHZHBORXBrUTgyWDFZbnlLdlArcS9SazRCRFlURm9RWVQxZ3Yw?=
- =?utf-8?B?Kzd1TTE0QlFnVmticW1xUWkzUEI5REhPVDRhTEk4NnVxdzUvclllZzQ3c25S?=
- =?utf-8?B?MERXc2d3dTBkMXpOeWNtYWFFak1BMy9Vbnk2UEw5SEtmT3R4c0hvRnZhWDI5?=
- =?utf-8?B?dmNzaVliSHVkem5qSmV0WFdyZkNDcnE1RXlrSFFhbnJwcEhTTlRuU1BhS1I2?=
- =?utf-8?B?YitGTmpHMk1RRGU5MlRId2hCMmRoY1hTeE9Bdmd6cFlJWlJpcnJuOEw4ODFM?=
- =?utf-8?B?N0UwWXJBTVVsSkl0LzAzNWxQaCt2NTFFSlRqUG9MZjBSRGpyTTcwQWIxN2o0?=
- =?utf-8?B?K253dTAzNjVVZkpPNEJ0WGNENG96Qmk2Um1aNFowbmpZYXFlVVpYUytvLzY2?=
- =?utf-8?B?eWk4RjRtY2ZaRU90bzRldWVoYkVnVVJCaS96elJMQ1dXNDZzeThhTVc5SUNM?=
- =?utf-8?B?d1RHZG8vdHluM2w4bTlsWjV0YWdlS0xXOWFxOHJ2cDdEWDFqK1ZsajlSZ0pF?=
- =?utf-8?B?ZUQ0TUsxWXpMM1R1Q1hYbGRsTFJkd1ZNV0ZrNUZFUGFMOVZ1dC9kTExlWHN5?=
- =?utf-8?B?Ukk4QmZPaThLQSthY3BhOWJlTE02eFlIblVFdCtaK3k0dkZNcm14SnlxN0F4?=
- =?utf-8?B?alJDRmloZUc3eFp1bWZRRUxXRS9XWlV3NnhRZ1Uxc0lTM09ZcE11OWV4NFkv?=
- =?utf-8?B?WjVxYnhHYlhPazFWUTVZUHI0ZW9kYmsvNVZzTWFNS1g4R3NOQkFrWTdsM1FF?=
- =?utf-8?B?ZGMvdXNpNUxmaGpZaWE3QnFjUVNMZndNWWcrWGE2aE44b0xYeGsrM2tTRXlj?=
- =?utf-8?B?NXIyalRuSUp3MzN3eEUzYkxsQjZ6b05VazU1K3B0ZDdPSUFPb091RjUyQkZQ?=
- =?utf-8?B?ZWgwYWlOVC9CWlMwb2pRTC9HOW1tSmpVWmZraHRKTEJsODRMU0tCWTRyQlhp?=
- =?utf-8?B?Q2xkNGZGdHY4ajBSU0oyUFl2SUdyanloNTJGSVJwM1pCVnRINllRWi9Wa0NF?=
- =?utf-8?B?dTUyRUE3WHFrdktETHJXNVpQWGZ0U053bVpmNmVVZ01WRjlPbEhvNDJ3Ui95?=
- =?utf-8?B?SnB3bTFNZGE2OHZIYnVTV1lYN0V1YzA1ME9kbFpERElJY2VZVlJYLzVOaHBz?=
- =?utf-8?B?ZHcrclZxdGJaQVpnbmRJUDAwU0dwakxJQlE4R01ESEdiWndrYWNsV2lia3kx?=
- =?utf-8?Q?geCyLZzT9yYu+lH+Sy13qtUnN?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b3JtNWE1WEpsdEJxOWd2VTNOUlQ0YmZJZVRlQXNielFoclRJVGNFc0o5Um83?=
+ =?utf-8?B?M1RMNHo4b2ZCdFZzNXIvYlVuV2tWK08yRWhITFdOTnBqSk84dVNVQ2JkdUVj?=
+ =?utf-8?B?QXg3WHRzVW1HOThldHRFZmE0WGFmSEJ0ekN6a2xFQ1dZY0Z0MFF2Q2dmTHBo?=
+ =?utf-8?B?dzY2YU9aTE03d2ZwZzRScnBLMUdsWU5vd1NVUktzS0lpMXdUNzNucVdoRFov?=
+ =?utf-8?B?WWxvWFlLMHNzRXJodnJDZ2o1TGF3YXd4YlNTRnhRVWYvc3ZheUVhNlBhV0lt?=
+ =?utf-8?B?ZFpqTlBDdjBZdkZadzVNb0I3R09nT3ZkVk9NcHBFVTlhTmNGZDVtd2lBNFN6?=
+ =?utf-8?B?M1VxejJNUXM5OFBFVFZBSDJObFA3ZzBYdUgzOGdhME5KU2ZXYzNmbEg4NndY?=
+ =?utf-8?B?Y3l6ak1oandSVWJJTDBBazRlZzUzM1hXVzZkcFB0dERRNFBuU1ZMREo2MW9F?=
+ =?utf-8?B?RkQ0a1ZsZVFWQTRFOExwY2VRemhSaWc0WHpPdCtjdjJmdmRQZjZkZy94b0p3?=
+ =?utf-8?B?a2R6cUQvNnBJNFFZMlYvL1pUbSsvZ0tvSGN6VUV1N1Jzdlk4SzhSbmVPNmx0?=
+ =?utf-8?B?ekRBTnB6ZEhrWXlJWXBFSUtSTmVOV1plc0lrRFhpL01HajNad2F2Q0xhTlFW?=
+ =?utf-8?B?ZjV0Z3FQRWN4c1BmRklZWjBjWlpwcTg1WmdtVGR0bGhHU1ViN0t0bVVpRWFT?=
+ =?utf-8?B?T1hhVmN4cHIwYUloQkhTSlRMbDZNcmV4OHArV01HR3V0cm4ybHpOb21KNGtN?=
+ =?utf-8?B?dG4vZFByNUNyd1BWY2Joa3A2V0FSVTZsNHBjbFZUdzRkVUw4cXdWODNYc1Az?=
+ =?utf-8?B?dTd6MWFmYUVMcTJtSjFXSEg5bG50NUpyVVpoNUREZGFkemttREJEcDFIRUhu?=
+ =?utf-8?B?SlVxaEJrUndrOUxDRG1pUFhud1V0dEhsR0M5dUpUdHlmOFF4WTZSL3NVc2Nn?=
+ =?utf-8?B?US9Wb0F2bXo0c2xyWTNoZ3FFMjZialVjM3BKWGdsNGVlcW5KcGMrY1VZck1q?=
+ =?utf-8?B?dDZYclVTc2E2OXpxNUgzd21rOUx1LzdqWFVybFRPUlBnMFA4cDR2Q3RtVmJO?=
+ =?utf-8?B?WXQrZDA2dlRWaVZQWVJwdFlBbnI0aUg4N1NHYTBuRElwS2trdDF3bjVUWEtw?=
+ =?utf-8?B?K3h0RTRnWVRPNjJxc0ZUUlJmeU16VHV6SnlUZjFOdUpkamVVUVBxNTlrR0d5?=
+ =?utf-8?B?eXhaQnZaRWtCd1RkRS93QWd3N0prUnIrNHZ3QnRQNGlYK20vR1ErcEZYMWlV?=
+ =?utf-8?B?cjFwS2NxMHdyR05iYnJDQkpOZmI0SHZSbkZydXlMVmlkVXczRXBndVB5YXhj?=
+ =?utf-8?B?eHQrTEJQaXJBVEJIYVlqakpNdzBGYUlZZkVrUEdVZzV2VllNdjZHbmZoakNK?=
+ =?utf-8?B?QVNINW04S1R3OVhRS2hFNkc3WEk4VGRvSU8ySE9KYm15ckVLSFFVN2RqQTJF?=
+ =?utf-8?B?Y0F5aDBMZzVQSW1lSkpOWFE5ajBKT1FCUHRnS3c5V0JXb3pPS2dKeXc1aDlw?=
+ =?utf-8?B?MkVHUVhuN2tncVl6YW95Z1NheGlFNEtjSzNyUm4vcGJ3NHhyTndPRHAvTUtl?=
+ =?utf-8?B?VFR6TVBEbnVWZWZMM09xRXZMVVNGVVFUckFsS3NabFc4TWM4UXRUN3ZxQjVl?=
+ =?utf-8?B?MjdUOCszN3pBanROZ2hHYUhkWUNxWDhlK2FhcjQwWUNkZzJ3ZnE4V000N2Fr?=
+ =?utf-8?B?T29hdnA1U3NlR0h4YmkwTWlnblhWMXNBdjAwNTJkVEZZNk1LbFB6T2xqbG91?=
+ =?utf-8?B?dUJvZi9CaFowc3BoR3lNUnh4a0ltWmJZVW1wK0ZkdXErakhBQ3FRMGxlcTcx?=
+ =?utf-8?B?Vzd3OXZSamxMeXZHcllONWxvNDBVNmEvbG45ZUdPR1d5Yi9pUzNPOGtBRmFW?=
+ =?utf-8?B?YU5YT0ZTZlpvcWZJczV2MDdCQ0Jna082blFSZ0ZOMnhUMU0vam0xQWR3K3BL?=
+ =?utf-8?B?QXpudng1OUVkU250dHlNcVV1SWdxS0I3dVJJZGI4RFY1YWR5dGtxV2djVG0w?=
+ =?utf-8?B?ZmdxOGN5cnRwVzBDRGwvZEROM3N1Lzd3NUJGT2lxcGlxdllzVDdzV2tFMy9L?=
+ =?utf-8?B?U0VDcVRQczVCQUl4RHBtWkNKTTBsQXUydExacWtwcnJzV3RnU1ZRakVFRnJ2?=
+ =?utf-8?Q?79uwGMiLjbm7u7HNZ6RxK981X?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6012b790-96af-478b-c4df-08dd1530e0df
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46471930-e321-46ee-9472-08dd1530e52e
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2024 13:29:43.5925 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Dec 2024 13:29:50.5131 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9QWZJtmKoxTZ3xjppmcOEIkSPDton4rs1cM6akczwg8lFu1V5rHBiljDdv0BVN4X
+X-MS-Exchange-CrossTenant-UserPrincipalName: AqY/9kpmbd2lvhvUhoxSENxjusiEZ/FAVMHtkllbaPSAqfGqlkn2PIEzCCK0Kk1E
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8172
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -222,201 +218,412 @@ X-Virus-Status: Clean
 
 
 
-On 11/28/24 15:49, Michal Simek wrote:
-> Sync zynqmp* DTS files with v6.12 Linux kernel.
+On 11/29/24 12:06, Venkatesh Yadav Abbarapu wrote:
+> Updating the usb5744 hub node as per the latest upstream DT binding
+> https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/
+> tree/Documentation/devicetree/bindings/usb/microchip,usb5744.yaml?h=v6.8.8
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> Acked-by: Michal Simek <michal.simek@amd.com>
 > ---
-> 
-> Hope that we get soon to be able to enable OF_UPSTREAM instead.
+> Changes in v2:
+> - Updated the hub node for KD board.
+> - Removed the #if code.
 > ---
->   arch/arm/dts/zynqmp-clk-ccf.dtsi     | 16 ++++++++++
->   arch/arm/dts/zynqmp-sm-k26-revA.dts  |  2 +-
->   arch/arm/dts/zynqmp-smk-k26-revA.dts |  2 +-
->   arch/arm/dts/zynqmp-zcu102-revA.dts  |  1 +
->   arch/arm/dts/zynqmp-zcu1275-revA.dts |  3 +-
->   arch/arm/dts/zynqmp.dtsi             | 44 +++++++++++++++++++++++-----
->   6 files changed, 57 insertions(+), 11 deletions(-)
+>   arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 37 +++++++++-----
+>   arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 67 ++++++++++++++++++-------
+>   arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 68 ++++++++++++++++++--------
+>   arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 24 ++++++---
+>   arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 33 +++++++++----
+>   5 files changed, 162 insertions(+), 67 deletions(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-clk-ccf.dtsi b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> index dd4569e7bd95..60d1b1acf9a0 100644
-> --- a/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> +++ b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> @@ -70,6 +70,22 @@
->   	clocks = <&zynqmp_clk ACPU>;
->   };
->   
-> +&cpu0_debug {
-> +	clocks = <&zynqmp_clk DBF_FPD>;
-> +};
-> +
-> +&cpu1_debug {
-> +	clocks = <&zynqmp_clk DBF_FPD>;
-> +};
-> +
-> +&cpu2_debug {
-> +	clocks = <&zynqmp_clk DBF_FPD>;
-> +};
-> +
-> +&cpu3_debug {
-> +	clocks = <&zynqmp_clk DBF_FPD>;
-> +};
-> +
->   &fpd_dma_chan1 {
->   	clocks = <&zynqmp_clk GDMA_REF>, <&zynqmp_clk LPD_LSBUS>;
->   };
-> diff --git a/arch/arm/dts/zynqmp-sm-k26-revA.dts b/arch/arm/dts/zynqmp-sm-k26-revA.dts
-> index 8c43ade94053..620f5185cc46 100644
-> --- a/arch/arm/dts/zynqmp-sm-k26-revA.dts
-> +++ b/arch/arm/dts/zynqmp-sm-k26-revA.dts
-> @@ -3,7 +3,7 @@
->    * dts file for Xilinx ZynqMP SM-K26 rev2/1/B/A
->    *
->    * (C) Copyright 2020 - 2021, Xilinx, Inc.
-> - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2023 - 2024, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    */
-> diff --git a/arch/arm/dts/zynqmp-smk-k26-revA.dts b/arch/arm/dts/zynqmp-smk-k26-revA.dts
-> index 719a4e49b574..b804abe89d1d 100644
-> --- a/arch/arm/dts/zynqmp-smk-k26-revA.dts
-> +++ b/arch/arm/dts/zynqmp-smk-k26-revA.dts
-> @@ -3,7 +3,7 @@
->    * dts file for Xilinx ZynqMP SMK-K26 rev2/1/B/A
->    *
->    * (C) Copyright 2020 - 2021, Xilinx, Inc.
-> - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2023 - 2024, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    */
-> diff --git a/arch/arm/dts/zynqmp-zcu102-revA.dts b/arch/arm/dts/zynqmp-zcu102-revA.dts
-> index 3132fa533b8e..dd63d22f45e7 100644
-> --- a/arch/arm/dts/zynqmp-zcu102-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu102-revA.dts
-> @@ -960,6 +960,7 @@
->   
->   &pcie {
->   	status = "okay";
-> +	phys = <&psgtr 0 PHY_TYPE_PCIE 0 0>;
->   };
->   
->   &psgtr {
-> diff --git a/arch/arm/dts/zynqmp-zcu1275-revA.dts b/arch/arm/dts/zynqmp-zcu1275-revA.dts
-> index 095c972f1322..b75b2a796eb3 100644
-> --- a/arch/arm/dts/zynqmp-zcu1275-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu1275-revA.dts
-> @@ -15,8 +15,7 @@
->   
->   / {
->   	model = "ZynqMP ZCU1275 RevA";
-> -	compatible = "xlnx,zynqmp-zcu1275-revA", "xlnx,zynqmp-zcu1275",
-> -		     "xlnx,zynqmp";
-> +	compatible = "xlnx,zynqmp-zcu1275-revA", "xlnx,zynqmp-zcu1275", "xlnx,zynqmp";
->   
->   	aliases {
->   		serial0 = &uart0;
-> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-> index 6a29f6101534..70ca5e6379fc 100644
-> --- a/arch/arm/dts/zynqmp.dtsi
-> +++ b/arch/arm/dts/zynqmp.dtsi
-> @@ -168,8 +168,8 @@
->   		bootph-all;
+> diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+> index 4de29d5d3f..d56e863ce1 100644
+> --- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+> @@ -80,7 +80,10 @@
+>   				  "", "";
 >   	};
 >   
-> -	pmu: pmu {
-> -		compatible = "arm,armv8-pmuv3";
-> +	pmu {
-> +		compatible = "arm,cortex-a53-pmu";
->   		interrupt-parent = <&gic>;
->   		interrupts = <GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>,
->   			     <GIC_SPI 144 IRQ_TYPE_LEVEL_HIGH>,
-> @@ -441,6 +441,34 @@
->   			};
+> -	/* usb5744@2d */
+> +	hub: usb-hub@2d { /* u36 */
+> +		compatible = "microchip,usb5744";
+> +		reg = <0x2d>;
+> +	};
+>   };
+>   
+>   /* USB 3.0 */
+> @@ -99,18 +102,6 @@
+>   	phys = <&psgtr 2 PHY_TYPE_USB3 0 2>;
+>   	reset-gpios = <&slg7xl45106 0 GPIO_ACTIVE_LOW>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -#if 0
+> -	usbhub0: usb-hub { /* u36 */
+> -		i2c-bus = <&i2c1>;
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> -	};
+> -
+> -	usb2244: usb-sd { /* u41 */
+> -		compatible = "microchip,usb2244";
+> -		reset-gpios = <&slg7xl45106 2 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_0 {
+> @@ -118,6 +109,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub_3_0>;
+> +		i2c-bus = <&hub>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub_2_0>;
+> +		i2c-bus = <&hub>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &gem1 { /* mdio mio50/51 */
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> index 6349a0e108..9d0c0c2885 100644
+> --- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> @@ -105,11 +105,19 @@
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
+>   			reg = <0>;
+> +			hub_1: usb-hub@2d {
+> +				compatible = "microchip,usb5744";
+> +				reg = <0x2d>;
+> +			};
 >   		};
->   
-> +		cpu0_debug: debug@fec10000 {
-> +			compatible = "arm,coresight-cpu-debug", "arm,primecell";
-> +			reg = <0x0 0xfec10000 0x0 0x1000>;
-> +			clock-names = "apb_pclk";
-> +			cpu = <&cpu0>;
-> +		};
-> +
-> +		cpu1_debug: debug@fed10000 {
-> +			compatible = "arm,coresight-cpu-debug", "arm,primecell";
-> +			reg = <0x0 0xfed10000 0x0 0x1000>;
-> +			clock-names = "apb_pclk";
-> +			cpu = <&cpu1>;
-> +		};
-> +
-> +		cpu2_debug: debug@fee10000 {
-> +			compatible = "arm,coresight-cpu-debug", "arm,primecell";
-> +			reg = <0x0 0xfee10000 0x0 0x1000>;
-> +			clock-names = "apb_pclk";
-> +			cpu = <&cpu2>;
-> +		};
-> +
-> +		cpu3_debug: debug@fef10000 {
-> +			compatible = "arm,coresight-cpu-debug", "arm,primecell";
-> +			reg = <0x0 0xfef10000 0x0 0x1000>;
-> +			clock-names = "apb_pclk";
-> +			cpu = <&cpu3>;
-> +		};
-> +
->   		/* GDMA */
->   		fpd_dma_chan1: dma-controller@fd500000 {
->   			status = "disabled";
-> @@ -885,7 +913,6 @@
->   			power-domains = <&zynqmp_firmware PD_SATA>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_SATA>;
->   			/* iommus = <&smmu 0x4c0>, <&smmu 0x4c1>, <&smmu 0x4c2>, <&smmu 0x4c3>; */
-> -			/* dma-coherent; */
+>   		usbhub_i2c1: i2c@1 {
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
+>   			reg = <1>;
+> +			hub_2: usb-hub@2d {
+> +				compatible = "microchip,usb5744";
+> +				reg = <0x2d>;
+> +			};
 >   		};
+>   		/* Bus 2/3 are not connected */
+>   	};
+> @@ -145,18 +153,6 @@
+>   	phys = <&psgtr 2 PHY_TYPE_USB3 0 2>;
+>   	reset-gpios = <&slg7xl45106 0 GPIO_ACTIVE_LOW>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -#if 0
+> -	usbhub0: usb-hub { /* u43 */
+> -		i2c-bus = <&usbhub_i2c0>;
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> -	};
+> -
+> -	usb2244: usb-sd { /* u38 */
+> -		compatible = "microchip,usb2244";
+> -		reset-gpios = <&slg7xl45106 2 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
 >   
->   		sdhci0: mmc@ff160000 {
-> @@ -1065,9 +1092,9 @@
->   					     <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 75 IRQ_TYPE_LEVEL_HIGH>;
-> +				clock-names = "ref";
->   				/* iommus = <&smmu 0x860>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
-> -				clock-names = "ref";
->   				snps,resume-hs-terminations;
->   				/* dma-coherent; */
->   			};
-> @@ -1097,9 +1124,9 @@
->   					     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>;
-> +				clock-names = "ref";
->   				/* iommus = <&smmu 0x861>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
-> -				clock-names = "ref";
->   				snps,resume-hs-terminations;
->   				/* dma-coherent; */
->   			};
-> @@ -1176,11 +1203,14 @@
->   				      "dp_vtc_pixel_clk_in";
->   			power-domains = <&zynqmp_firmware PD_DP>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_DP>;
-> -			dma-names = "vid0", "vid1", "vid2", "gfx0";
-> +			dma-names = "vid0", "vid1", "vid2", "gfx0",
-> +				    "aud0", "aud1";
->   			dmas = <&zynqmp_dpdma ZYNQMP_DPDMA_VIDEO0>,
->   			       <&zynqmp_dpdma ZYNQMP_DPDMA_VIDEO1>,
->   			       <&zynqmp_dpdma ZYNQMP_DPDMA_VIDEO2>,
-> -			       <&zynqmp_dpdma ZYNQMP_DPDMA_GRAPHICS>;
-> +			       <&zynqmp_dpdma ZYNQMP_DPDMA_GRAPHICS>,
-> +			       <&zynqmp_dpdma ZYNQMP_DPDMA_AUDIO0>,
-> +			       <&zynqmp_dpdma ZYNQMP_DPDMA_AUDIO1>;
+>   &dwc3_0 {
+> @@ -164,6 +160,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub_3_0>;
+> +		i2c-bus = <&hub_1>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub_2_0>;
+> +		i2c-bus = <&hub_1>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
 >   
->   			ports {
->   				#address-cells = <1>;
+>   &usb1 { /* mio64 - mio75 */
+> @@ -174,13 +190,6 @@
+>   	phys = <&psgtr 3 PHY_TYPE_USB3 1 2>;
+>   	reset-gpios = <&slg7xl45106 1 GPIO_ACTIVE_LOW>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -#if 0
+> -	usbhub1: usb-hub { /* u84 */
+> -		i2c-bus = <&usbhub_i2c1>;
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_1 {
+> @@ -188,6 +197,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub1_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub1_3_0>;
+> +		i2c-bus = <&hub_2>;
+> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub1_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub1_2_0>;
+> +		i2c-bus = <&hub_2>;
+> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &gem0 { /* mdio mio50/51 */
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+> index b0d737d3ca..0d915d496c 100644
+> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+> @@ -117,11 +117,19 @@
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
+>   			reg = <0>;
+> +			hub_1: usb-hub@2d {
+> +				compatible = "microchip,usb5744";
+> +				reg = <0x2d>;
+> +			};
+>   		};
+>   		usbhub_i2c1: i2c@1 {
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
+>   			reg = <1>;
+> +			hub_2: usb-hub@2d {
+> +				compatible = "microchip,usb5744";
+> +				reg = <0x2d>;
+> +			};
+>   		};
+>   		/* Bus 2/3 are not connected */
+>   	};
+> @@ -165,18 +173,6 @@
+>   	phys = <&psgtr 2 PHY_TYPE_USB3 0 2>;
+>   	reset-gpios = <&slg7xl45106 0 GPIO_ACTIVE_LOW>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -#if 0
+> -	usbhub0: usb-hub { /* u43 */
+> -		i2c-bus = <&usbhub_i2c0>;
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> -	};
+> -
+> -	usb2244: usb-sd { /* u38 */
+> -		compatible = "microchip,usb2244";
+> -		reset-gpios = <&slg7xl45106 2 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_0 {
+> @@ -184,6 +180,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub_3_0>;
+> +		i2c-bus = <&hub_1>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub_2_0>;
+> +		i2c-bus = <&hub_1>;
+> +		reset-gpios = <&slg7xl45106 3 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &usb1 { /* mio64 - mio75 */
+> @@ -194,14 +210,6 @@
+>   	phys = <&psgtr 3 PHY_TYPE_USB3 1 2>;
+>   	reset-gpios = <&slg7xl45106 1 GPIO_ACTIVE_LOW>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -
+> -#if 0
+> -	usbhub1: usb-hub { /* u84 */
+> -		i2c-bus = <&usbhub_i2c1>;
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_1 {
+> @@ -209,6 +217,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub1_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub1_3_0>;
+> +		i2c-bus = <&hub_2>;
+> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub1_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub1_2_0>;
+> +		i2c-bus = <&hub_2>;
+> +		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &gem0 { /* mdio mio50/51 */
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> index 561b546e37..a98a888d13 100644
+> --- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> @@ -129,12 +129,6 @@
+>   	pinctrl-0 = <&pinctrl_usb0_default>;
+>   	phy-names = "usb3-phy";
+>   	phys = <&psgtr 2 PHY_TYPE_USB3 0 1>;
+> -#if 0
+> -	usbhub: usb5744 { /* u43 */
+> -		compatible = "microchip,usb5744";
+> -		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_0 {
+> @@ -142,6 +136,24 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub_3_0>;
+> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub_2_0>;
+> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &sdhci1 { /* on CC with tuned parameters */
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> index 64683e0ccb..7490efea98 100644
+> --- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> @@ -92,7 +92,10 @@
+>   		label = "ina260-u14";
+>   		reg = <0x40>;
+>   	};
+> -	/* u43 - 0x2d - USB hub */
+> +	hub: usb-hub@2d {
+> +		compatible = "microchip,usb5744";
+> +		reg = <0x2d>;
+> +	};
+>   	/* u27 - 0xe0 - STDP4320 DP/HDMI splitter */
+>   };
+>   
+> @@ -131,14 +134,6 @@
+>   	phy-names = "usb3-phy";
+>   	phys = <&psgtr 2 PHY_TYPE_USB3 0 1>;
+>   	assigned-clock-rates = <250000000>, <20000000>;
+> -#if 0
+> -	usb5744: usb-hub { /* u43 */
+> -		status = "okay";
+> -		compatible = "microchip,usb5744";
+> -		i2c-bus = <&i2c1>;
+> -		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> -	};
+> -#endif
+>   };
+>   
+>   &dwc3_0 {
+> @@ -146,6 +141,26 @@
+>   	dr_mode = "host";
+>   	snps,usb3_lpm_capable;
+>   	maximum-speed = "super-speed";
+> +	#address-cells = <1>;
+> +	#size-cells = <0>;
+> +
+> +	/* 2.0 hub on port 1 */
+> +	hub_2_0: hub@1 {
+> +		compatible = "usb424,2744";
+> +		reg = <1>;
+> +		peer-hub = <&hub_3_0>;
+> +		i2c-bus = <&hub>;
+> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	/* 3.0 hub on port 2 */
+> +	hub_3_0: hub@2 {
+> +		compatible = "usb424,5744";
+> +		reg = <2>;
+> +		peer-hub = <&hub_2_0>;
+> +		i2c-bus = <&hub>;
+> +		reset-gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+> +	};
+>   };
+>   
+>   &sdhci1 { /* on CC with tuned parameters */
 
-This patch has been already applied to Tom's next branch.
+This has been applied already.
 
-Thanks,
-Michal
+M
 
