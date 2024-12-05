@@ -4,53 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5532CE77173
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 18:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72629E7716E
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:00:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92A1589523;
-	Thu,  5 Dec 2024 19:58:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E985894FD;
+	Thu,  5 Dec 2024 20:00:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92D1689523; Thu,  5 Dec 2024 19:58:45 +0100 (CET)
+ id 2B2508950D; Thu,  5 Dec 2024 20:00:28 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id DFE4B89528
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 19:58:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 105D48952A
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:00:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: q8aDW5xQR4+DycAKZoYS9A==
-X-CSE-MsgGUID: GjqPMb3dQE2Os4Hk5N8ltg==
+X-CSE-ConnectionGUID: uVjAIXNfSkaJEaTOoZP+xw==
+X-CSE-MsgGUID: LJEaNO8BTE21iT9srE25pg==
 X-IronPort-AV: E=Sophos;i="6.12,211,1728918000"; 
- d="asc'?scan'208";a="227032862"
+ d="asc'?scan'208";a="227032931"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 03:58:41 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 06 Dec 2024 04:00:23 +0900
 Received: from [10.226.92.29] (unknown [10.226.92.29])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 62B7F4061964;
- Fri,  6 Dec 2024 03:58:28 +0900 (JST)
-Message-ID: <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
-Date: Thu, 5 Dec 2024 18:58:27 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 69C614062E03;
+ Fri,  6 Dec 2024 04:00:04 +0900 (JST)
+Message-ID: <810d3a9d-f5ed-4b60-a5a9-1ea95ce3c6be@bp.renesas.com>
+Date: Thu, 5 Dec 2024 19:00:03 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
+Subject: Re: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de
-References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
- <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
- <3cc475db-8546-4855-991c-5e678bef0fef@cherry.de>
- <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
+References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+ <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
+ <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
+In-Reply-To: <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------pzjYGGpLE3kz834MAnQO5LRT"
+ boundary="------------dcfXCDvaH0xNRzj68rb6giXF"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,79 +65,164 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------pzjYGGpLE3kz834MAnQO5LRT
-Content-Type: multipart/mixed; boundary="------------rMvlaK8udDzC7CJvg8QVnmOl";
+--------------dcfXCDvaH0xNRzj68rb6giXF
+Content-Type: multipart/mixed; boundary="------------s00QrMViwaJ7dqoVuklJI89j";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de
-Message-ID: <413c1e5d-8e8a-4d12-9e50-bc22816a89f1@bp.renesas.com>
-Subject: Re: [PATCH v2 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
-References: <20241120094903.94-1-paul.barker.ct@bp.renesas.com>
- <20241120094903.94-2-paul.barker.ct@bp.renesas.com>
- <3cc475db-8546-4855-991c-5e678bef0fef@cherry.de>
- <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
-In-Reply-To: <ce662fc7-da77-46a3-9f34-081b3377cac4@mailbox.org>
+Message-ID: <810d3a9d-f5ed-4b60-a5a9-1ea95ce3c6be@bp.renesas.com>
+Subject: Re: [PATCH v2 2/3] pinctrl: rzg2l: Support Ethernet TXC output enable
+References: <20241120094830.71-1-paul.barker.ct@bp.renesas.com>
+ <20241120094830.71-2-paul.barker.ct@bp.renesas.com>
+ <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
+In-Reply-To: <8dd0b366-6e6b-4e6a-87d2-5a8d204c7732@mailbox.org>
 
---------------rMvlaK8udDzC7CJvg8QVnmOl
-Content-Type: multipart/mixed; boundary="------------KXunpHuGed2JMPkCSxEgn7lB"
+--------------s00QrMViwaJ7dqoVuklJI89j
+Content-Type: multipart/mixed; boundary="------------wywGFkwIU0ms3cZI4EvwRdD1"
 
---------------KXunpHuGed2JMPkCSxEgn7lB
+--------------wywGFkwIU0ms3cZI4EvwRdD1
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Marek, Quentin,
-
-On 01/12/2024 18:57, Marek Vasut wrote:
-> On 11/25/24 6:23 PM, Quentin Schulz wrote:
->=20
-> [...]
->=20
->>> @@ -446,6 +474,10 @@ static int ksz9131_config(struct phy_device *phy=
-dev)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 return ret;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>> +=C2=A0=C2=A0=C2=A0 ret =3D ksz9131_led_errata(phydev);
->>> +=C2=A0=C2=A0=C2=A0 if (ret < 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
->>> +
+On 01/12/2024 18:50, Marek Vasut wrote:
+> On 11/20/24 10:48 AM, Paul Barker wrote:
+>> On the RZ/G2L SoC family, the direction of the Ethernet TXC/TX_CLK
+>> signal is selectable to support an Ethernet PHY operating in either MI=
+I
+>> or RGMII mode. By default, the signal is configured as an input and MI=
+I
+>> mode is supported. The ETH_MODE register can be modified to configure
+>> this signal as an output to support RGMII mode.
 >>
->> This seems to work but is happening a bit late.
+>> As this signal is be default an input, and can optionally be switched =
+to
+>> an output, it maps neatly onto an `output-enable` property in the devi=
+ce
+>> tree.
 >>
->> Indeed, I need something to call the network stack for this to be=20
->> happening. Meaning until I e.g. run `dhcp` in the CLI, the LED is stil=
-l=20
->> following the bad behavior.
+>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> ---
+>> Changes v1->v2:
+>>    - Split out of series adding RZ/G2L Ethernet support [1]
 >>
->> I assume we cannot use the probe() callback for writing to registers?
-> I'm afraid there is an inconsistency between U-Boot MAC drivers and whe=
-n=20
-> they configure the PHY. This is well visible on MX8MP, which has both=20
-> FEC and EQoS/DWMAC MACs and they behave differently in this aspect. The=
-=20
-> question is, whether it makes sense to initialize the PHY before the MA=
-C=20
-> has been used, probably no, because that brings up hardware and adds to=
-=20
-> boot time. But at least aligning the behavior of the various MAC driver=
-s=20
-> would be nice.
+>> [1]: https://lore.kernel.org/all/20241024152448.102-1-paul.barker.ct@b=
+p.renesas.com/
+>>
+>>   drivers/pinctrl/renesas/rzg2l-pfc.c | 31 +++++++++++++++++++++++++++=
+--
+>>   include/renesas/rzg2l-pfc.h         |  2 ++
+>>   2 files changed, 31 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/pinctrl/renesas/rzg2l-pfc.c b/drivers/pinctrl/ren=
+esas/rzg2l-pfc.c
+>> index 0098e2d52d57..af371bd0ff1e 100644
+>> --- a/drivers/pinctrl/renesas/rzg2l-pfc.c
+>> +++ b/drivers/pinctrl/renesas/rzg2l-pfc.c
+>> @@ -180,7 +180,7 @@ static const u32 r9a07g044_gpio_configs[] =3D {
+>>   	RZG2L_GPIO_PORT_PACK(3, 0x21, RZG2L_MPXED_PIN_FUNCS),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x22, RZG2L_MPXED_PIN_FUNCS),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x23, RZG2L_MPXED_PIN_FUNCS),
+>> -	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
+MC_ETH0)),
+>> +	RZG2L_GPIO_PORT_PACK(3, 0x24, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
+MC_ETH0) | PIN_CFG_OEN),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x25, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x26, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x27, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>> @@ -189,7 +189,7 @@ static const u32 r9a07g044_gpio_configs[] =3D {
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x2a, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x2b, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x2c, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH0)),
+>> -	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
+MC_ETH1)),
+>> +	RZG2L_GPIO_PORT_PACK(2, 0x2d, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_V=
+MC_ETH1) | PIN_CFG_OEN),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x2e, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH1)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x2f, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH1)),
+>>   	RZG2L_GPIO_PORT_PACK(2, 0x30, RZG2L_MPXED_ETH_PIN_FUNCS(PIN_CFG_IO_=
+VMC_ETH1)),
+>> @@ -449,6 +449,32 @@ static int rzg2l_pinconf_set(struct udevice *dev,=
+ unsigned int pin_selector,
+>>   		break;
+>>   	}
+>>  =20
+>> +	case PIN_CONFIG_OUTPUT_ENABLE: {
+>> +		u8 ch;
+>> +
+>> +		if (!(cfg & PIN_CFG_OEN)) {
+>> +			dev_err(dev, "pin does not support OEN\n");
+>> +			return -EINVAL;
+>> +		}
+>> +
+>> +		/*
+>> +		 * We can determine which Ethernet interface we're dealing with fro=
+m
+>> +		 * the caps.
+>> +		 */
+>> +		if (cfg & PIN_CFG_IO_VMC_ETH0)
+>> +			ch =3D 0;
+>> +		else /* PIN_CFG_IO_VMC_ETH1 */
+>> +			ch =3D 1;
+>> +
+>> +		dev_dbg(dev, "set ETH%u TXC OEN=3D%u\n", ch, argument);
+>> +		if (argument)
+>> +			clrbits_8(data->base + ETH_MODE, BIT(ch));
+>> +		else
+>> +			setbits_8(data->base + ETH_MODE, BIT(ch));
+>> +
+>> +		break;
+>> +	}
+>> +
+>>   	default:
+>>   		dev_err(dev, "Invalid pinconf parameter\n");
+>>   		return -EOPNOTSUPP;
+>> @@ -542,6 +568,7 @@ static int rzg2l_get_pin_muxing(struct udevice *de=
+v, unsigned int selector,
+>>  =20
+>>   static const struct pinconf_param rzg2l_pinconf_params[] =3D {
+>>   	{ "input-enable",	PIN_CONFIG_INPUT_ENABLE,	1 },
+>> +	{ "output-enable",	PIN_CONFIG_OUTPUT_ENABLE,	1 },
+>>   	{ "power-source",	PIN_CONFIG_POWER_SOURCE,	3300 /* mV */ },
+>>   };
+>>  =20
+>> diff --git a/include/renesas/rzg2l-pfc.h b/include/renesas/rzg2l-pfc.h=
 
-Is there anything we can do in this driver to fix this?
+>> index d1015b1d2ac1..36fa8da8e2e4 100644
+>> --- a/include/renesas/rzg2l-pfc.h
+>> +++ b/include/renesas/rzg2l-pfc.h
+>> @@ -22,6 +22,7 @@
+>>   #define PIN_CFG_FILONOFF		BIT(10)
+>>   #define PIN_CFG_FILNUM			BIT(11)
+>>   #define PIN_CFG_FILCLKSEL		BIT(12)
+>> +#define PIN_CFG_OEN			BIT(13)
+>>  =20
+>>   #define RZG2L_MPXED_PIN_FUNCS		(PIN_CFG_IOLH_A | \
+>>   					 PIN_CFG_SR | \
+>> @@ -79,6 +80,7 @@
+>>   #define SD_CH(n)		(0x3000 + (n) * 4)
+>>   #define ETH_POC(ch)		(0x300c + (ch) * 4)
+>>   #define QSPI			0x3008
+>> +#define ETH_MODE		(0x3018)
+> Parenthesis unnecessary around the 0x3018 , I can fix it while applying=
+?
 
-Or should we merge this as-is and improve the MAC drivers later?
-
-Thanks,
+Thanks for fixing this up!
 
 --=20
 Paul Barker
 
---------------KXunpHuGed2JMPkCSxEgn7lB
+--------------wywGFkwIU0ms3cZI4EvwRdD1
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -204,21 +286,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------KXunpHuGed2JMPkCSxEgn7lB--
+--------------wywGFkwIU0ms3cZI4EvwRdD1--
 
---------------rMvlaK8udDzC7CJvg8QVnmOl--
+--------------s00QrMViwaJ7dqoVuklJI89j--
 
---------------pzjYGGpLE3kz834MAnQO5LRT
+--------------dcfXCDvaH0xNRzj68rb6giXF
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H30wUDAAAAAAAKCRDbaV4Vf/JGvbsB
-AP9Ue65lNMNZ12idaP/hFV027eDE7v2f6vbijd+1Yk5CbwD+PnW/OTEGdOSfInzqZqHGzvGNNxo9
-G6g2EUmWwEx3NgQ=
-=jUUf
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1H4MwUDAAAAAAAKCRDbaV4Vf/JGvXkQ
+AP0Uirv2szUjxWArmMgSfVEnAwjlYPLPezYhgfSTwu824AEAkm6KkKZ6ZQ4fXg4DlA2Ro4uQ0nzm
+MkEiFPhihBvNDw8=
+=5sG3
 -----END PGP SIGNATURE-----
 
---------------pzjYGGpLE3kz834MAnQO5LRT--
+--------------dcfXCDvaH0xNRzj68rb6giXF--
