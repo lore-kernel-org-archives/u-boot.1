@@ -4,80 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63808E77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:58:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A701BE7716E
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 20:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F32348955B;
-	Thu,  5 Dec 2024 20:56:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id DDE128922D;
+	Thu,  5 Dec 2024 21:30:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iMSb0AS6";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HS3dKWFf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0330989530; Thu,  5 Dec 2024 20:56:20 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6C028952B; Thu,  5 Dec 2024 21:30:41 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B6E4895C2
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:56:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ECBE8903C
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 21:30:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa629402b53so150901266b.3
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:56:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733428577; x=1734033377; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=P/CjWu0N4PSye4/emCQ6eM7YDsohhoO8BrHzsivkMYs=;
- b=iMSb0AS6gds8OatuxvZuGeOc1yJ2lPvb2hjLWEOTnKELJuQZuMrQPOWzRECm6MJZ04
- 5N1VSs56ryYXx6jUgL3GWjSdepKXf8DtDBWTQZu5bN7lnZw9yeHEecFhpCJjny4pHx4m
- TwMySvryRuMkfqiVYqkfPbXLCKVg2GapPAWCw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733428577; x=1734033377;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P/CjWu0N4PSye4/emCQ6eM7YDsohhoO8BrHzsivkMYs=;
- b=NrUQptM2d2k8UuA0zrkrOekKMNTEARSUZfEyg3mWKQGGl2zkj4z2pSTMI4k3yPbhLy
- bSf63bTkXP+ZTlQuPkUrRxx84oAu6+OiNUV6QHISR0G7OOY4iET5tXCTdQOqNvoSzP0S
- r6yloEs11FM6wq1v+eHijtf5dGjUm3WLujVR5sLLp91rweO8kIk8xj9Yd211p8+9OwBM
- SBTbtscJs+WLCllsaaLDIbMkWjwJ9s/FQwEawShkzPhN0y4aqRw7wt6IRavhN5Cs8iAk
- Y3gKqyYpGJV7dS3+J2yBS02hdsrsMn/WstK6MD/PjhbUmuOWrquILc3qvBBD8lWjU0u1
- C6oQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVRgGzBl1unRMhFp3Z8dH1wC2aYwdBQ6Snm5wTsKbmlnTSmi5y0HCYpjqr835fJj0fxVFslv8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJhFN/+LUJ3hlZvKvTDYWD2Yr1ebteEUg1DrSvch0Jmc/oA0Cf
- B9YPU1QCv2L7yf+JRHAkvZq60mXgYoZHUfhvf7IUTlft145BONjILI8UWBORepdyMDETowhCZ2z
- DoHs1gnwaRyCWnNU1dAfWoe7yp2JfdzdZZXke
-X-Gm-Gg: ASbGncs0J/rKg1Sg86uLtatJsFq6lScngyKMImXQ+3eYqQqFvuRIVAhSiHu7YY6qSr/
- 0mPn0j3HIugjnSQx9RdE7wsygVklQDiEr
-X-Google-Smtp-Source: AGHT+IG4ckycNkITHFgESjkU4JX2e19Rg2qODJwyOxuS2OuHs0f8QNksf8jcYDJoTys0gSKFgiBGd2GmHjJ3q6HMjAo=
-X-Received: by 2002:a17:906:31cb:b0:aa6:2c53:aee7 with SMTP id
- a640c23a62f3a-aa63a242a80mr6609866b.49.1733428577514; Thu, 05 Dec 2024
- 11:56:17 -0800 (PST)
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 5 Dec 2024 13:56:14 -0600
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-111-009.46.114.pool.telefonica.de
+ [46.114.111.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 72E643F0C6; 
+ Thu,  5 Dec 2024 20:30:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1733430637;
+ bh=lOBKkI2XpLjPRAHzP3J7VBxx0ZxezjicccKE4v8tOfA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=HS3dKWFfczYv0dae1o+Zm3PtkqcpCoAL+uz81lh8B+2IcHp1txFauqy1kfj/Bo/Xd
+ BO3g3VMgukmxBNe1Til4iLUYXi4fs5/PFLsDUdXYOHqBwIIJ7kbmskzMY6VZZkKOmM
+ aTME4HRgevGcMpu6BvvVD2+FxNM9c4/Rhudsl+0YPVHkdJ0Lhgu1eXnSH/Jv0Wr2mh
+ V1UQ9/G3HqfOQXHr7mGOwqS8vyBwp/+l7ymYbdS/L3BERcWnxrd3lIIDu7IF7ELgBs
+ N4WOROO3oGHlNMCif1EAtPe3K/4bXTkyHV2at06c21q16ikFNK4i3L4UP7Hd+MbaLj
+ VmXsJVCx0fDKg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] rtc: CONFIGS_RTC_PL031 must depend on CONFIGS_DM_RTC
+Date: Thu,  5 Dec 2024 21:30:33 +0100
+Message-ID: <20241205203033.42915-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241115231926.211999-2-sjg@chromium.org>
-References: <20241115231926.211999-2-sjg@chromium.org>
- <20241115231926.211999-1-sjg@chromium.org>
-Date: Thu, 5 Dec 2024 13:56:14 -0600
-X-Google-Sender-Auth: uhpqyiO7rErQwtW0-zJBgm2ucvU
-Message-ID: <CAFLszTg0UpVKOdfKXAi-f+tbPZBJ_hKOqt2j3AoQBZjzSHU4nQ@mail.gmail.com>
-Subject: Re: [PATCH v4 01/19] bootstd: Move bootflow-adding to bootstd
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Nam Cao <namcao@linutronix.de>, Peter Robinson <pbrobinson@gmail.com>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,19 +69,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This relates to more than just the bootdev, since there is a global list
-of bootflows. Move the function to the bootstd file and rename it.
+Building qemu_arm64_defconfig with CONFIGS_DM_RTC=n and CONFIGS_RTC_PL031=y
+leads to a build failure.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+ drivers/rtc/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-(no changes since v1)
+diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
+index 7fc53a6d61e..9c2d1398247 100644
+--- a/drivers/rtc/Kconfig
++++ b/drivers/rtc/Kconfig
+@@ -203,6 +203,7 @@ config RTC_RX8025
+ 
+ config RTC_PL031
+ 	bool "Enable ARM AMBA PL031 RTC driver"
++	depends on DM_RTC
+ 	help
+ 	  The ARM PrimeCell Real Time Clock (PL031) is an optional SoC
+ 	  peripheral based on the Advanced Microcontroller Bus Architecture
+-- 
+2.45.2
 
- boot/bootdev-uclass.c | 25 -------------------------
- boot/bootstd-uclass.c | 25 +++++++++++++++++++++++++
- cmd/bootflow.c        |  2 +-
- include/bootdev.h     | 15 ---------------
- include/bootstd.h     | 17 +++++++++++++++++
- 5 files changed, 43 insertions(+), 41 deletions(-)
-
-Applied to ci/master, thanks!
