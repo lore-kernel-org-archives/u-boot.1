@@ -4,93 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA67E7716E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F58E77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2B638952C;
-	Thu,  5 Dec 2024 20:55:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F183C89544;
+	Thu,  5 Dec 2024 20:55:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XV/+KVuc";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FBeoKuPy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A31A28952C; Thu,  5 Dec 2024 20:55:18 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 48A4389541; Thu,  5 Dec 2024 20:55:22 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 996F989541
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:55:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A1D98903B
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-aa5f1909d6fso260859366b.3
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:55:16 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9a0ef5179dso160416666b.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:55:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733428516; x=1734033316; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733428520; x=1734033320; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XW0n/SB60v3gLw+dorwR/1zjPxvYzrLWrq/L0ztbi1g=;
- b=XV/+KVucHWLy1x/SaXPUHkQVodHKS+8SOFc2pR6Gs6amArGXMwE10p7zmWqjsi4lJ2
- yz2SEK8Zgw/QA1RZ3HDNNO+e74WJMj23EQMrPI9cVQSpzgELVsb/MFQ3kkLDh7j0CLcS
- 9QaQxSMxgqOR6YLwex6tlJhxaKpm7eqm47RHg=
+ bh=sShuCtIsdz3oQ2zKsnWV3C8yobzCXoRtjhIZLe8eMLo=;
+ b=FBeoKuPyRN6VEjmdt7W8yerWe/dBLbHpFXUPqvgk/eOtbm/SWvfvcuFsdjlWIZcsnl
+ CiI9hypAxELPWRQv2x+3wxWTG82j5ZZKNJo98G2XQXr5F8WyfXfqHsr8jnxejbn5fEfy
+ e2thBuGeAzG+VKI94cB24R4FdN82Dfu5jy5Mg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733428516; x=1734033316;
+ d=1e100.net; s=20230601; t=1733428520; x=1734033320;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XW0n/SB60v3gLw+dorwR/1zjPxvYzrLWrq/L0ztbi1g=;
- b=ZWhnUNFfMme+vFd2rb1crbBuA19UKXdQ6384IfMLE9sAnYtGFqjYYfkUy3jW81mHYO
- 7FcSCI4EXFHFEJQBHowQMfnx5qgTUywX1Z0NRHFQG+DLIUh8bgpO06WGBWN4aaj+2e6m
- zpQFYv9sZa/k/YlKsNLaYj6kF1FyMKuCKAmKkAlpS6VWG4TQ7D2/7T4a2Uq6P0B7JiIL
- 1uCrqYusEZ8vIM8/1w/yL6uRhWZBaHLMd7gJTAD0IVd4buLJlBIFfZVQPxRSFabYs/Wm
- jR44IJG+YfUumYMMd+uwIZXPF1gRDOsv3IfDa54ZAOaf54c1LZi2eDirW2QP+IFkVRXo
- uzFQ==
+ bh=sShuCtIsdz3oQ2zKsnWV3C8yobzCXoRtjhIZLe8eMLo=;
+ b=XmrF9olw/dOexMlHUPKcKBWv+Mx23qlTv5BTpmGH9QkEERBaUYUyBlorHsHAX1zjuF
+ TvArYO9xzOmmx//aNkLzz54ZPG6vD4XFruZaewBQF1KHo3WMCToLpIOQv+wtC11AvNcI
+ sDmjt1hI4FPX8QDQ10fv0157nS2/n+PlilBZksBqF1x8e5I3t1Xf2CpU3fluz/PpuGYt
+ k9muGM+mvL1z2U/5jZYPqph1VwqwqMWd4FI11Nlc1chESfVlKVeJLVF+1XeNsoWOS0aO
+ +9JrezCsqt4ixC+7Sq4UdKGoJbsKZWKH05STeaemfvBxZD5oiDOHsHmAHU9vkVp/2O18
+ rsOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQxcARD/Q5QOXIHjhtcx9t3sPh9BFnfULsafTKTeekWggCT8+gNrqoIgilWIxiNSHC0nSRp5w=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx2Oedk4jgHio8tDg0QB4kBndZgF2khSfiYDqa+TFDizuRpXa/R
- t4nEQAC13GeXa3aZKbR70TDM0eSOieQ76S6g7KZmxETpNFvO78mqQ9V538qAv+2OLmRh8XqxQe4
- qWwmexZEl2cV7BDX2D0O5KbrfaEghOKJ7zBCC
-X-Gm-Gg: ASbGncskV/P24rmCqg70NmIzdQqj+7/3TvxfIJeRSuFwZ8OOR8phe8d+WNG7wCNofM+
- TRZZvQbrCjJh+9Sgyy8BkaZfeVVJLl9Sx
-X-Google-Smtp-Source: AGHT+IGngCIFeyYt/crnNlkn1DeRqjRGUXZ9v4GzOvHYds0fwrSK55HkOG+5vbXUeK31D1WZ6n4HUdQzDUQ8Duij0OY=
-X-Received: by 2002:a17:906:328b:b0:aa5:3979:cb3d with SMTP id
- a640c23a62f3a-aa63a080181mr11487466b.26.1733428516061; Thu, 05 Dec 2024
- 11:55:16 -0800 (PST)
+ AJvYcCXjrjhf2JwYjaoy2lLJpFIe8MFfC1BMDtUbxlLi8MoW/zLN59rejr94yzIIUO4VWVVtWonaeDA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlNVklAzd0enDHtkJC726KZswQ8yzUxicopY5dWbGIRCyiVkHy
+ z3c9pH7Q2N8BwtOyh6u+oZYAB9BY9ix/5Qj6QayV+9QcGM3wi+AQgXASM0oNBsZyVU/8uKvA8yu
+ hckRM3GHzWypXWT61kpPHMUP3WyWucKgGzpvj
+X-Gm-Gg: ASbGnctdwnm43arM0/xu/ODT2xO0/hJcT0LUqM7IBjJXCS5bEZN2Qi9RVD/h5VmxsBR
+ 4lukhWh3byy+BNCrl2weUOYhTurlxqzR8
+X-Google-Smtp-Source: AGHT+IGHx5xvOFT/OHKPh01M7NYsPXO5ODz3pNSvbOV3+WaeXwjcRWkekXoPVesutIDGZHcF5ymd2d3O8NDZF3P9w1A=
+X-Received: by 2002:a17:907:7802:b0:aa5:1ef5:261f with SMTP id
+ a640c23a62f3a-aa639ff6e4amr9858166b.15.1733428519887; Thu, 05 Dec 2024
+ 11:55:19 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 5 Dec 2024 11:55:14 -0800
+ HTTPREST; Thu, 5 Dec 2024 13:55:16 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTh8PCDM5P7TWPfSYnEcC4hNiQyP4HpyzLZermSNnt+e5w@mail.gmail.com>
-References: <CAFLszTh8PCDM5P7TWPfSYnEcC4hNiQyP4HpyzLZermSNnt+e5w@mail.gmail.com>
- <20241201144240.1664398-5-sjg@chromium.org>
- <CAEfUkUKGKMb3rXS7sSDQnPTHs2iOcYFN8zbViajjDSp+aHzXZQ@mail.gmail.com>
- <20241202162239.GE2457179@bill-the-cat>
- <CAFLszTjvnyE4vFQ=Z=Ma1bOjH_Z4JEdUWM51Vc_nRmSUkRzF4Q@mail.gmail.com>
- <20241203005541.GP2457179@bill-the-cat>
- <CAFLszTi6koMMr0ggVLxKQK5LCBv+hCunewacBxDAZYH+rERGiw@mail.gmail.com>
- <20241203140133.GT2457179@bill-the-cat>
- <CAFLszThLAYQfMxE_fVuTYX57vNBfi0PyvBzuUGCw0_1EsXk7ag@mail.gmail.com>
- <20241203160131.GW2457179@bill-the-cat>
- <CAFLszTgx6BacGQyiMOoCzYDM3vsOBgfr2XbzBEsNOZ_Gzj3=ig@mail.gmail.com>
- <20241203165132.GY2457179@bill-the-cat>
- <CAFLszTiEk64zKzVEK06diR8=expsWWqxjV_Jx8FQ+RwpiSBjsg@mail.gmail.com>
-Date: Thu, 5 Dec 2024 11:55:14 -0800
-X-Google-Sender-Auth: YQd2U0bbn668kg6SK9Ee0fmgV7k
-Message-ID: <CAFLszTigBn4Z_EbWSS_6hODdB3KFoJWwd26HV0wqV5j5uKFyeQ@mail.gmail.com>
-Subject: Re: [PATCH 4/8] Revert "fdt: Allow the devicetree to come from a
- bloblist"
+In-Reply-To: <20241201144240.1664398-4-sjg@chromium.org>
+References: <20241201144240.1664398-4-sjg@chromium.org>
+ <20241201144240.1664398-1-sjg@chromium.org>
+Date: Thu, 5 Dec 2024 13:55:16 -0600
+X-Google-Sender-Auth: yobsh4wSUGNj--fRhUDdXKsQB5U
+Message-ID: <CAFLszTg2Fhmx3z4uVFCs5ykqnKX6eP66tFOUfi=uSuL31MkPEA@mail.gmail.com>
+Subject: Re: [PATCH 3/8] Revert "fdt: Correct condition for bloblist existing"
 To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
+Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@linaro.org>, mason1920 <mason1920@use.startmail.com>, 
- Tom Rini <trini@konsulko.com>
+ Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,57 +94,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This was a work-around and it isn't effective, since bob and kevin are
+still broken. Drop it.
 
-On Tue, 3 Dec 2024 at 12:45, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Tom,
->
-> On Tue, 3 Dec 2024 at 09:51, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Dec 03, 2024 at 09:37:34AM -0700, Simon Glass wrote:
-> >
-> > > Hi Tom,
-> > >
-> > > If you like, you can apply the reverts first, since they break boards.
-> > > That should not be controversial, particularly as I explained at the
-> > > time that this was likely to cause problems.
-> > >
-> > > Then you can leave the discussion on OF_BLOBLIST open.
-> > >
-> > > Just a thought.
-> >
-> > Absolutely not. Again, 70fe23859437ffe4efe0793423937d8b78ebf9d6 says:
-> > "Standard passage provides for a bloblist to be passed from one firmware
-> > phase to the next. That can be used to pass the devicetree along as well.
-> > Add an option to support this.
-> >
-> > Tests for this will be added as part of the Universal Payload work."
-> >
-> > And your new patch says exactly the same thing, but then:
-> > "Note: This is the correct way to deal with bloblist, since it allows
-> > boards to choose whether they want to use the devicetree from there, or
-> > not." and a large number of patchwork links. And after squashing the
-> > three commits together to see what's being changed, yes, you're
-> > rewriting a whole bunch of the logic without any explanation of why. It
-> > seems to fix 3 Chromebooks and isn't tested on anything else. This is
-> > why I'm saying it's unreviewable.
-> >
-> > So no, at the moment I'm inclined to wait for further reports of
-> > problems, and we're coming up on a year since 70fe23859437 was merged,
-> > before making any sort of last-minute change here.
->
-> OK, thanks for confirming that.
+This reverts commit cafde93ec02d654a092ee5b3fd0ed706347a9744.
 
-We could of course imply OF_BLOBLIST which would still allow my boards
-to work, by disabling it.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The opposition to this patch is mystifying to me, particularly as it
-seems like a clear mess-up.
-
-I'll apply this to my tree for now. It is certainly correct.
-
-Regards,
-Simon
+ lib/fdtdec.c | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
 
 Applied to ci/master, thanks!
