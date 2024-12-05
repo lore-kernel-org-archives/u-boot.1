@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE54E7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:56:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613C3E7716D
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19B6A87BF4;
+	by phobos.denx.de (Postfix) with ESMTP id 7932C89508;
 	Thu,  5 Dec 2024 14:54:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QLqsGLfN";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WeL2pAAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AA6289546; Thu,  5 Dec 2024 14:54:57 +0100 (CET)
+ id DFA5D89282; Thu,  5 Dec 2024 14:54:57 +0100 (CET)
 Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::222])
+ [217.70.183.194])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8BDE88F2E
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 14:54:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 986B689282
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 14:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id E5ADA4000E;
- Thu,  5 Dec 2024 13:54:50 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id A31ED40006;
+ Thu,  5 Dec 2024 13:54:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1733406891;
+ t=1733406892;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=sKzEI+4lFVeAzTubVcpWYbQsh+vM5mmClmBBrKRYL3U=;
- b=QLqsGLfNwK9R67uDpSvhzu73MvDO1TSxl/V0+cECvHoU9++r/DVgY00KiUc1eui825NDLh
- nke41DnDZEuONnO2fw9CLzCNLmxG5PdqvlpdiwRQq9iiLhZAalktVYFzzeFFKApK7xIRWi
- v+L30OECvjJx/k0i8Ffs3ASAcdaLP4ReXZ/fpQEenvrQlk2i6AHKV+C3gF+JW2RX28PhQ+
- GHQasaAjY1nLnwMHClEsydLt2h8GK7uRSm7+GiUwAJVFNlV3RbgmiPMQAfbe0h+eEm3CA2
- 22wUtLN3GAuW53DNmKQFcKLEZ31Q71nTj0IkHo6vtAYckKMy/WXaH8ZF1XQeZQ==
+ bh=yjmhB0sgRhopLMS87VnB4pZYaHqN8RnOMqpF8vV95i0=;
+ b=WeL2pAAJ7MXCMZI6PLHEpYAKW3OYrrlYiELhQCZQPOvDp4XIM4pzz05NPCFftpDTkV0dWs
+ ZW+LLtZ3NcR9IBQz8uk9bYjWL0E4KAWntJi4EMcq0DbYJDizCTCRw7jrYE6gVqFYLyu/wy
+ vnfCGpsvBi6Gq9esfP321KrUkcqVOQWssNFlHhHokWjnj80YvSOAa1/pme+6ukdqbwbbdv
+ lz/CQ6KSy0YpCOJq77X6NtppCFBsq5uf3grLmagicefvN4FF3DWGYtLBSpu8ABvEixsNXB
+ QNU8+kcRYZDFT77ffxzU3hLLKJakCcgsF1hGlcuxIVvqvY7upnCDewKcqufBSQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
-Date: Thu, 05 Dec 2024 14:54:17 +0100
-Subject: [PATCH v2 11/13] video: imx: Add LDB driver
+Date: Thu, 05 Dec 2024 14:54:18 +0100
+Subject: [PATCH v2 12/13] video: imx: Add LCDIF driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241205-ge-mainline-display-support-v2-11-4683bb4388dc@bootlin.com>
+Message-Id: <20241205-ge-mainline-display-support-v2-12-4683bb4388dc@bootlin.com>
 References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
 In-Reply-To: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
 To: Fabio Estevam <festevam@gmail.com>
@@ -76,308 +76,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the LVDS Display Bridge (LDB) found on i.MX8MP.
+Add support for the LCD interfaces (LCDIF1/2). When probed, these
+interfaces request numerous clocks and power domains, attach the bridge
+and look for a panel in order to retrieve its capabilities and
+properties.
 
-When attached, the bridge driver looks for panels connected to one of
-its two outputs and adapts its own configuration to use them. There is
-currently no support for merged/split displays.
-
-Note regarding the clock configuration:
-The LDB output clock should be absolutely identical to the LCDIF output
-clock so both blocks can talk to each other synchronously. However, the
-LDB clock has an internal divisor of 7 (respectively 3.5 in dual
-configuration) which means the LDB input clock must be explicitly set
-once we know the configuration.
-
-This driver was tested on i.MX8MP using a single panel connected to the
-LVDS2 interface.
+There is a similar existing driver in the upper folder for other i.MX
+targets, I discovered this driver a bit late. It is not targeting the
+i.MX8MP and I have no idea how different can the LCDIF be on this SoC,
+but I did not manage to get it work, especially because it is not fully
+compliant with the device-model, especially on the clocks/power
+management side which is all ad-hoc. This is normal though, it was
+contributed more than ten years ago.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- drivers/video/imx/Kconfig  |   6 ++
+ drivers/video/imx/Kconfig  |   3 +
  drivers/video/imx/Makefile |   1 +
- drivers/video/imx/ldb.c    | 251 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 258 insertions(+)
+ drivers/video/imx/lcdif.c  | 314 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 318 insertions(+)
 
 diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index 34e8b640595b85678e386a3a251340031780a72e..c5cd2fecf780b62c0264b9627137517388aae1ab 100644
+index c5cd2fecf780b62c0264b9627137517388aae1ab..12f11c2eea8c98cc341448923c80919afbceed46 100644
 --- a/drivers/video/imx/Kconfig
 +++ b/drivers/video/imx/Kconfig
-@@ -13,3 +13,9 @@ config IMX_VIDEO_SKIP
- config IMX_HDMI
- 	bool "Enable HDMI support in IPUv3"
- 	depends on VIDEO_IPUV3
+@@ -19,3 +19,6 @@ config IMX_LDB
+ 	depends on VIDEO_BRIDGE
+ 	help
+ 	  Support for i.MX8MP DPI-to-LVDS on-SoC encoder.
 +
-+config IMX_LDB
-+	bool "Freescale i.MX8MP LDB bridge"
-+	depends on VIDEO_BRIDGE
-+	help
-+	  Support for i.MX8MP DPI-to-LVDS on-SoC encoder.
++config IMX_LCDIF
++	bool "i.MX LCDIFv3 LCD controller"
 diff --git a/drivers/video/imx/Makefile b/drivers/video/imx/Makefile
-index 46cc44d64b00959fb3880c7befb04a1ebdda1143..8d106589b7544ef9694613a2284e2fbfb564cf63 100644
+index 8d106589b7544ef9694613a2284e2fbfb564cf63..1edf5a6bdf0c3afb218fbcd81384c7c277ca6b28 100644
 --- a/drivers/video/imx/Makefile
 +++ b/drivers/video/imx/Makefile
-@@ -4,3 +4,4 @@
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+@@ -5,3 +5,4 @@
  
  obj-$(CONFIG_VIDEO_IPUV3) += mxc_ipuv3_fb.o ipu_common.o ipu_disp.o
-+obj-$(CONFIG_IMX_LDB) += ldb.o
-diff --git a/drivers/video/imx/ldb.c b/drivers/video/imx/ldb.c
+ obj-$(CONFIG_IMX_LDB) += ldb.o
++obj-$(CONFIG_IMX_LCDIF) += lcdif.o
+diff --git a/drivers/video/imx/lcdif.c b/drivers/video/imx/lcdif.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..10be4421cb57ee8e1ab68eaf7568bc955d31e241
+index 0000000000000000000000000000000000000000..eb677e84a5e11c8fa2b66973fb3529dd9d2c797b
 --- /dev/null
-+++ b/drivers/video/imx/ldb.c
-@@ -0,0 +1,251 @@
++++ b/drivers/video/imx/lcdif.c
+@@ -0,0 +1,314 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Derived work from:
-+ *   Philippe Cornu <philippe.cornu@st.com>
-+ *   Yannick Fertre <yannick.fertre@st.com>
++ * i.MX8 LCD interface driver inspired from the Linux driver
++ * Copyright 2019 NXP
++ * Copyright 2024 Bootlin
 + * Adapted by Miquel Raynal <miquel.raynal@bootlin.com>
 + */
 +
-+#define LOG_CATEGORY UCLASS_VIDEO_BRIDGE
-+
++#include <asm/io.h>
++#include <asm/mach-imx/dma.h>
 +#include <clk.h>
 +#include <dm.h>
-+#include <log.h>
 +#include <panel.h>
++#include <power-domain.h>
++#include <video.h>
 +#include <video_bridge.h>
-+#include <asm/io.h>
 +#include <linux/delay.h>
 +
-+#define LDB_CTRL_CH0_ENABLE BIT(0)
-+#define LDB_CTRL_CH1_ENABLE BIT(2)
-+#define LDB_CTRL_CH0_DATA_WIDTH BIT(5)
-+#define LDB_CTRL_CH0_BIT_MAPPING BIT(6)
-+#define LDB_CTRL_CH1_DATA_WIDTH BIT(7)
-+#define LDB_CTRL_CH1_BIT_MAPPING BIT(8)
-+#define LDB_CTRL_DI0_VSYNC_POLARITY BIT(9)
-+#define LDB_CTRL_DI1_VSYNC_POLARITY BIT(10)
++#include "../videomodes.h"
 +
-+#define LVDS_CTRL_CH0_EN BIT(0)
-+#define LVDS_CTRL_CH1_EN BIT(1)
-+#define LVDS_CTRL_VBG_EN BIT(2)
-+#define LVDS_CTRL_PRE_EMPH_EN BIT(4)
-+#define LVDS_CTRL_PRE_EMPH_ADJ(n) (((n) & 0x7) << 5)
-+#define LVDS_CTRL_CC_ADJ(n) (((n) & 0x7) << 11)
++#define LCDIFV3_CTRL 0x0
++#define LCDIFV3_CTRL_SET 0x4
++#define LCDIFV3_CTRL_CLR 0x8
++#define   CTRL_INV_HS BIT(0)
++#define   CTRL_INV_VS BIT(1)
++#define   CTRL_INV_DE BIT(2)
++#define   CTRL_INV_PXCK BIT(3)
++#define   CTRL_CLK_GATE BIT(30)
++#define   CTRL_SW_RESET BIT(31)
 +
-+struct imx_ldb_priv {
-+	struct clk ldb_clk;
-+	void __iomem *ldb_ctrl;
-+	void __iomem *lvds_ctrl;
-+	struct udevice *lvds1;
-+	struct udevice *lvds2;
++#define LCDIFV3_DISP_PARA 0x10
++#define   DISP_PARA_DISP_MODE_NORMAL 0
++#define   DISP_PARA_LINE_PATTERN_RGB_YUV 0
++#define   DISP_PARA_DISP_ON BIT(31)
++
++#define LCDIFV3_DISP_SIZE 0x14
++#define   DISP_SIZE_DELTA_X(x) ((x) & 0xffff)
++#define   DISP_SIZE_DELTA_Y(x) ((x) << 16)
++
++#define LCDIFV3_HSYN_PARA 0x18
++#define   HSYN_PARA_FP_H(x) ((x) & 0xffff)
++#define   HSYN_PARA_BP_H(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_PARA 0x1C
++#define   VSYN_PARA_FP_V(x) ((x) & 0xffff)
++#define   VSYN_PARA_BP_V(x) ((x) << 16)
++
++#define LCDIFV3_VSYN_HSYN_WIDTH 0x20
++#define   VSYN_HSYN_PW_H(x) ((x) & 0xffff)
++#define   VSYN_HSYN_PW_V(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_1 0x200
++#define   CTRLDESCL0_1_WIDTH(x) ((x) & 0xffff)
++#define   CTRLDESCL0_1_HEIGHT(x) ((x) << 16)
++
++#define LCDIFV3_CTRLDESCL0_3 0x208
++#define   CTRLDESCL0_3_PITCH(x) ((x) & 0xFFFF)
++
++#define LCDIFV3_CTRLDESCL_LOW0_4 0x20C
++#define LCDIFV3_CTRLDESCL_HIGH0_4 0x210
++
++#define LCDIFV3_CTRLDESCL0_5 0x214
++#define   CTRLDESCL0_5_YUV_FORMAT(x) (((x) & 0x3) << 14)
++#define   CTRLDESCL0_5_BPP(x) (((x) & 0xf) << 24)
++#define     BPP32_ARGB8888 0x9
++#define   CTRLDESCL0_5_SHADOW_LOAD_EN BIT(30)
++#define   CTRLDESCL0_5_EN BIT(31)
++
++struct lcdifv3_priv {
++	void __iomem *base;
++	struct clk pix_clk;
++	struct power_domain pd;
++	struct udevice *panel;
++	struct udevice *bridge;
 +};
 +
-+static int imx_ldb_set_backlight(struct udevice *dev, int percent)
++static void lcdifv3_set_mode(struct lcdifv3_priv *priv,
++			     struct display_timing *timings)
 +{
-+	struct imx_ldb_priv *priv = dev_get_priv(dev);
-+	int ret;
++	u32 reg;
 +
-+	if (priv->lvds1) {
-+		ret = panel_enable_backlight(priv->lvds1);
-+		if (ret) {
-+			debug("ldb: Cannot enable lvds1 backlight\n");
-+			return ret;
-+		}
++	writel(DISP_SIZE_DELTA_X(timings->hactive.typ) |
++	       DISP_SIZE_DELTA_Y(timings->vactive.typ),
++	       priv->base + LCDIFV3_DISP_SIZE);
 +
-+		ret = panel_set_backlight(priv->lvds1, percent);
-+		if (ret)
-+			return ret;
-+	}
++	writel(HSYN_PARA_FP_H(timings->hfront_porch.typ) |
++	       HSYN_PARA_BP_H(timings->hback_porch.typ),
++	       priv->base + LCDIFV3_HSYN_PARA);
 +
-+	if (priv->lvds2) {
-+		ret = panel_enable_backlight(priv->lvds2);
-+		if (ret) {
-+			debug("ldb: Cannot enable lvds2 backlight\n");
-+			return ret;
-+		}
++	writel(VSYN_PARA_BP_V(timings->vback_porch.typ) |
++	       VSYN_PARA_FP_V(timings->vfront_porch.typ),
++	       priv->base + LCDIFV3_VSYN_PARA);
 +
-+		ret = panel_set_backlight(priv->lvds2, percent);
-+		if (ret)
-+			return ret;
-+	}
++	writel(VSYN_HSYN_PW_H(timings->hsync_len.typ) |
++	       VSYN_HSYN_PW_V(timings->vsync_len.typ),
++	       priv->base + LCDIFV3_VSYN_HSYN_WIDTH);
++
++	writel(CTRLDESCL0_1_WIDTH(timings->hactive.typ) |
++	       CTRLDESCL0_1_HEIGHT(timings->vactive.typ),
++	       priv->base + LCDIFV3_CTRLDESCL0_1);
++
++	if (timings->flags & DISPLAY_FLAGS_HSYNC_LOW)
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_HS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_VSYNC_LOW)
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_VS, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_DE, priv->base + LCDIFV3_CTRL_CLR);
++
++	if (timings->flags & DISPLAY_FLAGS_PIXDATA_POSEDGE)
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_SET);
++	else
++		writel(CTRL_INV_PXCK, priv->base + LCDIFV3_CTRL_CLR);
++
++	writel(0, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg &= ~(CTRLDESCL0_5_BPP(0xf) | CTRLDESCL0_5_YUV_FORMAT(0x3));
++	reg |= CTRLDESCL0_5_BPP(BPP32_ARGB8888);
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static void lcdifv3_enable_controller(struct lcdifv3_priv *priv)
++{
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_DISP_PARA);
++	reg |= DISP_PARA_DISP_ON;
++	writel(reg, priv->base + LCDIFV3_DISP_PARA);
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
++}
++
++static int lcdifv3_video_sync(struct udevice *dev)
++{
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	u32 reg;
++
++	reg = readl(priv->base + LCDIFV3_CTRLDESCL0_5);
++	reg |= CTRLDESCL0_5_SHADOW_LOAD_EN;
++	writel(reg, priv->base + LCDIFV3_CTRLDESCL0_5);
 +
 +	return 0;
 +}
 +
-+static int imx_ldb_of_to_plat(struct udevice *dev)
++static void lcdifv3_init(struct udevice *dev, struct display_timing *timings)
 +{
-+	struct imx_ldb_priv *priv = dev_get_priv(dev);
-+	int ret;
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
 +
-+	uclass_get_device_by_endpoint(UCLASS_PANEL, dev, 1, &priv->lvds1);
-+	uclass_get_device_by_endpoint(UCLASS_PANEL, dev, 2, &priv->lvds2);
-+	if (!priv->lvds1 && !priv->lvds2) {
-+		debug("ldb: No remote panel for '%s' (ret=%d)\n",
-+		      dev_read_name(dev), ret);
-+		return ret;
-+	}
++	clk_set_rate(&priv->pix_clk, timings->pixelclock.typ);
 +
-+	return 0;
++	writel(CTRL_SW_RESET | CTRL_CLK_GATE, priv->base + LCDIFV3_CTRL_CLR);
++	udelay(10);
++
++	lcdifv3_set_mode(priv, timings);
++
++	writel(plat->base & 0xFFFFFFFF, priv->base + LCDIFV3_CTRLDESCL_LOW0_4);
++	writel(plat->base >> 32, priv->base + LCDIFV3_CTRLDESCL_HIGH0_4);
++
++	writel(CTRLDESCL0_3_PITCH(timings->hactive.typ * 4), /* 32bpp */
++	       priv->base + LCDIFV3_CTRLDESCL0_3);
++
++	lcdifv3_enable_controller(priv);
 +}
 +
-+/* The block has a mysterious x7 internal divisor (x3.5 in dual configuration) */
-+#define IMX_LDB_INTERNAL_DIVISOR(x) (((x) * 70) / 10)
-+#define IMX_LDB_INTERNAL_DIVISOR_DUAL(x) (((x) * 35) / 10)
-+
-+static ulong imx_ldb_input_rate(struct imx_ldb_priv *priv,
-+				struct display_timing *timings)
++static int lcdifv3_video_probe(struct udevice *dev)
 +{
-+	ulong target_rate = timings->pixelclock.typ;
-+
-+	if (priv->lvds1 && priv->lvds2)
-+		return IMX_LDB_INTERNAL_DIVISOR_DUAL(target_rate);
-+
-+	return IMX_LDB_INTERNAL_DIVISOR(target_rate);
-+}
-+
-+static int imx_ldb_attach(struct udevice *dev)
-+{
-+	struct imx_ldb_priv *priv = dev_get_priv(dev);
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct lcdifv3_priv *priv = dev_get_priv(dev);
++	struct clk axi_clk, disp_axi_clk;
 +	struct display_timing timings;
-+	bool format_jeida = false;
-+	bool format_24bpp = true;
-+	u32 ldb_ctrl = 0, lvds_ctrl;
-+	ulong ldb_rate;
++	u32 fb_start, fb_end;
 +	int ret;
 +
-+	/* TODO: update the 24bpp/jeida booleans with proper checks when they
-+	 * will be supported.
-+	 */
-+	if (priv->lvds1) {
-+		ret = panel_get_display_timing(priv->lvds1, &timings);
-+		if (ret) {
-+			ret = ofnode_decode_display_timing(dev_ofnode(priv->lvds1),
-+							   0, &timings);
-+			if (ret) {
-+				printf("Cannot decode lvds1 timings (%d)\n", ret);
-+				return ret;
-+			}
-+		}
-+
-+		ldb_ctrl |= LDB_CTRL_CH0_ENABLE;
-+		if (format_24bpp)
-+			ldb_ctrl |= LDB_CTRL_CH0_DATA_WIDTH;
-+		if (format_jeida)
-+			ldb_ctrl |= LDB_CTRL_CH0_BIT_MAPPING;
-+		if (timings.flags & DISPLAY_FLAGS_VSYNC_HIGH)
-+			ldb_ctrl |= LDB_CTRL_DI0_VSYNC_POLARITY;
-+	}
-+
-+	if (priv->lvds2) {
-+		ret = panel_get_display_timing(priv->lvds2, &timings);
-+		if (ret) {
-+			ret = ofnode_decode_display_timing(dev_ofnode(priv->lvds2),
-+							   0, &timings);
-+			if (ret) {
-+				printf("Cannot decode lvds2 timings (%d)\n", ret);
-+				return ret;
-+			}
-+		}
-+
-+		ldb_ctrl |= LDB_CTRL_CH1_ENABLE;
-+		if (format_24bpp)
-+			ldb_ctrl |= LDB_CTRL_CH1_DATA_WIDTH;
-+		if (format_jeida)
-+			ldb_ctrl |= LDB_CTRL_CH1_BIT_MAPPING;
-+		if (timings.flags & DISPLAY_FLAGS_VSYNC_HIGH)
-+			ldb_ctrl |= LDB_CTRL_DI1_VSYNC_POLARITY;
-+	}
-+
-+	/*
-+	 * Not all pixel clocks will work, as the final rate (after internal
-+	 * integer division) should be identical to the LCDIF clock, otherwise
-+	 * the rendering will appear resized/shimmering.
-+	 */
-+	ldb_rate = imx_ldb_input_rate(priv, &timings);
-+	clk_set_rate(&priv->ldb_clk, ldb_rate);
-+
-+	writel(ldb_ctrl, priv->ldb_ctrl);
-+
-+	lvds_ctrl = LVDS_CTRL_CC_ADJ(2) | LVDS_CTRL_PRE_EMPH_EN |
-+		    LVDS_CTRL_PRE_EMPH_ADJ(3) | LVDS_CTRL_VBG_EN;
-+	writel(lvds_ctrl, priv->lvds_ctrl);
-+
-+	/* Wait for VBG to stabilize. */
-+	udelay(15);
-+
-+	if (priv->lvds1)
-+		lvds_ctrl |= LVDS_CTRL_CH0_EN;
-+	if (priv->lvds2)
-+		lvds_ctrl |= LVDS_CTRL_CH1_EN;
-+
-+	writel(lvds_ctrl, priv->lvds_ctrl);
-+
-+	return 0;
-+}
-+
-+static int imx_ldb_probe(struct udevice *dev)
-+{
-+	struct imx_ldb_priv *priv = dev_get_priv(dev);
-+	struct udevice *parent = dev_get_parent(dev);
-+	fdt_addr_t parent_addr, child_addr;
-+	int ret;
-+
-+	ret = clk_get_by_name(dev, "ldb", &priv->ldb_clk);
++	ret = power_domain_get(dev, &priv->pd);
 +	if (ret < 0)
 +		return ret;
 +
-+	parent_addr = dev_read_addr(parent);
-+	if (parent_addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
++	ret = clk_get_by_name(dev, "pix", &priv->pix_clk);
++	if (ret < 0)
++		return ret;
 +
-+	child_addr = dev_read_addr_name(dev, "ldb");
-+	if (child_addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
++	ret = clk_get_by_name(dev, "axi", &axi_clk);
++	if (ret < 0)
++		return ret;
 +
-+	priv->ldb_ctrl = map_physmem(parent_addr + child_addr, 0, MAP_NOCACHE);
-+	if (!priv->ldb_ctrl)
-+		return -EINVAL;
++	ret = clk_get_by_name(dev, "disp_axi", &disp_axi_clk);
++	if (ret < 0)
++		return ret;
 +
-+	child_addr = dev_read_addr_name(dev, "lvds");
-+	if (child_addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	priv->lvds_ctrl = map_physmem(parent_addr + child_addr, 0, MAP_NOCACHE);
-+	if (!priv->lvds_ctrl)
-+		return -EINVAL;
-+
-+	ret = clk_enable(&priv->ldb_clk);
++	ret = power_domain_on(&priv->pd);
 +	if (ret)
 +		return ret;
 +
-+	ret = video_bridge_set_active(dev, true);
++	ret = clk_enable(&priv->pix_clk);
 +	if (ret)
-+		goto dis_clk;
++		goto dis_pd;
++
++	ret = clk_enable(&axi_clk);
++	if (ret)
++		goto dis_pix_clk;
++
++	ret = clk_enable(&disp_axi_clk);
++	if (ret)
++		goto dis_axi_clk;
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base) {
++		ret = -EINVAL;
++		goto dis_clks;
++	}
++
++	/* Attach bridge */
++	ret = uclass_get_device_by_endpoint(UCLASS_VIDEO_BRIDGE, dev,
++					    0, &priv->bridge);
++	if (ret)
++		goto dis_clks;
++
++	ret = video_bridge_attach(priv->bridge);
++	if (ret)
++		goto dis_clks;
++
++	ret = video_bridge_set_backlight(priv->bridge, 80);
++	if (ret)
++		goto dis_clks;
++
++	/* Attach panels */
++	ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++					    1, &priv->panel);
++	if (ret) {
++		ret = uclass_get_device_by_endpoint(UCLASS_PANEL, priv->bridge,
++						    2, &priv->panel);
++		if (ret)
++			goto dis_clks;
++	}
++
++	ret = panel_get_display_timing(priv->panel, &timings);
++	if (ret) {
++		ret = ofnode_decode_display_timing(dev_ofnode(priv->panel),
++						   0, &timings);
++		if (ret) {
++			printf("Cannot decode panel timings (%d)\n", ret);
++			goto dis_clks;
++		}
++	}
++
++	lcdifv3_init(dev, &timings);
++
++	/* Only support 32bpp for now */
++	uc_priv->bpix = VIDEO_BPP32;
++	uc_priv->xsize = timings.hactive.typ;
++	uc_priv->ysize = timings.vactive.typ;
++
++	/* Enable dcache for the frame buffer */
++	fb_start = plat->base & ~(MMU_SECTION_SIZE - 1);
++	fb_end = ALIGN(plat->base + plat->size, 1 << MMU_SECTION_SHIFT);
++	mmu_set_region_dcache_behaviour(fb_start, fb_end - fb_start,
++					DCACHE_WRITEBACK);
++	video_set_flush_dcache(dev, true);
 +
 +	return 0;
 +
-+dis_clk:
-+	clk_disable(&priv->ldb_clk);
++dis_clks:
++	clk_disable(&disp_axi_clk);
++dis_axi_clk:
++	clk_disable(&axi_clk);
++dis_pix_clk:
++	clk_disable(&priv->pix_clk);
++dis_pd:
++	power_domain_off(&priv->pd);
 +
 +	return ret;
 +}
 +
-+struct video_bridge_ops imx_ldb_ops = {
-+	.attach = imx_ldb_attach,
-+	.set_backlight	= imx_ldb_set_backlight,
-+};
++static int lcdifv3_video_bind(struct udevice *dev)
++{
++	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 +
-+static const struct udevice_id imx_ldb_ids[] = {
-+	{ .compatible = "fsl,imx8mp-ldb"},
++	/* Max size supported by LCDIF */
++	plat->size = 1920 * 1080 * VNBYTES(VIDEO_BPP32);
++
++	return 0;
++}
++
++static const struct udevice_id lcdifv3_video_ids[] = {
++	{ .compatible = "fsl,imx8mp-lcdif" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(imx_ldb) = {
-+	.name = "imx-lvds-display-bridge",
-+	.id = UCLASS_VIDEO_BRIDGE,
-+	.of_match = imx_ldb_ids,
-+	.probe = imx_ldb_probe,
-+	.of_to_plat = imx_ldb_of_to_plat,
-+	.ops = &imx_ldb_ops,
-+	.priv_auto = sizeof(struct imx_ldb_priv),
++static struct video_ops lcdifv3_video_ops = {
++	.video_sync = lcdifv3_video_sync,
++};
++
++U_BOOT_DRIVER(lcdifv3_video) = {
++	.name = "lcdif",
++	.id = UCLASS_VIDEO,
++	.of_match = lcdifv3_video_ids,
++	.bind = lcdifv3_video_bind,
++	.ops = &lcdifv3_video_ops,
++	.probe = lcdifv3_video_probe,
++	.priv_auto = sizeof(struct lcdifv3_priv),
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
 +};
 
 -- 
