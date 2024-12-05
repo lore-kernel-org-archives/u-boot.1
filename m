@@ -4,180 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD003E7716D
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:08:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C21CEE7716C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 13:09:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AE8B8950D;
+	by phobos.denx.de (Postfix) with ESMTP id 774C88951B;
 	Thu,  5 Dec 2024 14:07:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=belden.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=rohde-schwarz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=belden.com header.i=@belden.com header.b="O24uaQsy";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 727BB8922D; Thu,  5 Dec 2024 09:59:03 +0100 (CET)
-Received: from mx0a-00015a02.pphosted.com (mx0a-00015a02.pphosted.com
- [205.220.166.249])
+ id 36FB9807F4; Thu,  5 Dec 2024 11:29:50 +0100 (CET)
+Received: from mail02.rohde-schwarz.com (mail02.rohde-schwarz.com
+ [80.246.32.97])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E9D891B1
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 09:59:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=belden.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4A7858916E
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 11:29:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=rohde-schwarz.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=2069ae05f3=aleksandar.gerasimovski@belden.com
-Received: from pps.filterd (m0264209.ppops.net [127.0.0.1])
- by mx0a-00015a02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B580rnP024117;
- Thu, 5 Dec 2024 03:58:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=belden.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=podpps1; bh=il
- KmBiyiceKhFkmM3mIk3BQ04VbxxCWe38bLK7IRCHo=; b=O24uaQsyqvc6NHu2nR
- H2+KStVBEHmGs0/XCbtjStbYDlee9pND8n47yde4FWImzoDw8CVpQmvwxJ1oDLMO
- WXC8Zgh2Wr8FW2i4+RbpRLlRQkozluexhAp0ZI56FlPklVFT71C4Pwc6+9sVK7+2
- rjt8/o7MnjldV3Ml0gRrSnV0GQ1ZkPKWKEIoQsjUMccAORkOolUFeB6JYUkS07Df
- /Eby62LFMwVfF5y8/1lwivgzuh+H9Gu3VXzQFprQ8kOb0Q01tXnlKUTaIvG1CcF/
- qCKkTWkuRpCnzTifviJkncSmT7BFA5Lrhcq3o9ZbtNAiCBUNa9a600ZsL2h8EHE7
- pFBQ==
-Received: from nam12-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam12lp2049.outbound.protection.outlook.com [104.47.66.49])
- by mx0a-00015a02.pphosted.com (PPS) with ESMTPS id 438u5p0jg1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 05 Dec 2024 03:58:55 -0500 (EST)
-Received: from SA1PR18MB5692.namprd18.prod.outlook.com (2603:10b6:806:3a8::9)
- by MW3PR18MB3548.namprd18.prod.outlook.com (2603:10b6:303:5d::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.12; Thu, 5 Dec
- 2024 08:58:50 +0000
-Received: from SA1PR18MB5692.namprd18.prod.outlook.com
- ([fe80::1b82:7cf8:55cf:35e3]) by SA1PR18MB5692.namprd18.prod.outlook.com
- ([fe80::1b82:7cf8:55cf:35e3%6]) with mapi id 15.20.8230.010; Thu, 5 Dec 2024
- 08:58:50 +0000
-From: Aleksandar Gerasimovski <Aleksandar.Gerasimovski@belden.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: RE: [PATCH] efi_loader: fix pe reloc pointer overrun
-Thread-Topic: [PATCH] efi_loader: fix pe reloc pointer overrun
-Thread-Index: AdtCoPWUQwb/C4wbSaqkqwl7mK5ZdgDk9ukAACwSYAAAAtrLgAAAJ4/A
-Date: Thu, 5 Dec 2024 08:58:50 +0000
-Message-ID: <SA1PR18MB56925D9B47E8DA4746A02ABC99302@SA1PR18MB5692.namprd18.prod.outlook.com>
-References: <SA1PR18MB56923B0952E67CC949A90A02992A2@SA1PR18MB5692.namprd18.prod.outlook.com>
- <4492be69-8655-4391-8a44-3b4cb682c3ec@gmx.de>
- <SA1PR18MB56923C88AAAC2CEEC6AA869099302@SA1PR18MB5692.namprd18.prod.outlook.com>
- <899c2551-a0ae-4183-aad0-7adebcd5f84d@gmx.de>
-In-Reply-To: <899c2551-a0ae-4183-aad0-7adebcd5f84d@gmx.de>
-Accept-Language: en-US
-Content-Language: en-US
+ smtp.mailfrom=dominik.wernberger@rohde-schwarz.com
+Received: from securemail-mu-h4.rohde-schwarz.com (10.0.19.146) by
+ mail02.rohde-schwarz.com (172.21.64.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.34; Thu, 5 Dec 2024 11:29:46 +0100
+Subject: RE: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issues
+MIME-Version: 1.0
+Received: from GMU452.rsint.net ([10.0.225.105])
+ by gmu812.rsint.net (Totemo SMTP Server) with SMTP ID 55;
+ Thu, 5 Dec 2024 10:29:46 +0000 (GMT)
+Received: from GMU505.rsint.net (10.0.225.37) by GMU452.rsint.net
+ (10.0.225.105) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 5 Dec
+ 2024 11:29:46 +0100
+Received: from GMU503.rsint.net (10.0.225.35) by GMU505.rsint.net
+ (10.0.225.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.34; Thu, 5 Dec
+ 2024 11:29:44 +0100
+Received: from GMU503.rsint.net ([fe80::957e:76:e488:c60d]) by
+ GMU503.rsint.net ([fe80::957e:76:e488:c60d%4]) with mapi id 15.02.1258.034;
+ Thu, 5 Dec 2024 11:29:44 +0100
+From: Dominik Wernberger <dominik.wernberger@rohde-schwarz.com>
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+CC: "git (AMD-Xilinx)" <git@amd.com>, "jagan@amarulasolutions.com"
+ <jagan@amarulasolutions.com>, "Simek, Michal" <michal.simek@amd.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "vigneshr@ti.com" <vigneshr@ti.com>
+Thread-Index: AQHbRXsBTPOsIZkzX0+IzpDqBwarvrLUceCggAKkPICAAFTigA==
+Date: Thu, 5 Dec 2024 10:29:44 +0000
+Message-ID: <a28aea4246294415aa83ec8ebd21c697@rohde-schwarz.com>
+References: <db4086b015cc48f2ad9d9bfe97b338d9@rohde-schwarz.com>
+ <SA1PR12MB8697341C5E1388097FD7BEB198362@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <a76c728a613d48c9b7ba9d1b0059b013@rohde-schwarz.com>
+ <SA1PR12MB86978FF17D7727A821B0381D98302@SA1PR12MB8697.namprd12.prod.outlook.com>
+In-Reply-To: <SA1PR12MB86978FF17D7727A821B0381D98302@SA1PR12MB8697.namprd12.prod.outlook.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR18MB5692:EE_|MW3PR18MB3548:EE_
-x-ms-office365-filtering-correlation-id: 54669f10-7932-464a-c760-08dd150b0991
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?TDNrVXMwS05QeUhySVhKNXBJMGpYMjIzVUx5NVQ3ZDZUQVN6L0NKZHdSeVN5?=
- =?utf-8?B?ZFJXRUtuTU9SR2VTRTc2dmw2Uk84VnZlNFdpT0QyUGdlb3RKQ3F3VFNITmhH?=
- =?utf-8?B?V3B4QTVObmJWL2hsTTdWZkpueDlYdVlPaGozdVU5M016RVFDYytwcFdMMkZx?=
- =?utf-8?B?NDZVZE1qMVkzeGpyYUt6NDZmVEh1UTZ5d281cjRVY1NlVmxWVEtFbjFYOUlH?=
- =?utf-8?B?VGVLTTRZVWRrU1F0aU16eTFpVHM0NWJtaXQvdzdIMjlNdEFZREgwa0Rnb0du?=
- =?utf-8?B?OGYxR1NEbk9CS3krSjJtdk1WVXNUbmRJMFhnakE5bGpKNElJeXdPU0dvdTRY?=
- =?utf-8?B?aDdyV2t0Umt1aytSaVh4ZjV2TjAwaWFYNk9JMVhxd3N3dkU4UGFjWVoyYjVU?=
- =?utf-8?B?dlByaHBBNzJBNlpNVituS3h2MUVUeWUyUXJOdm5Xc3JVcUN5cWlOaVcvOVhy?=
- =?utf-8?B?SktRWmVUazdBeVp4eElvc3M3L3VRQlFoKzZpZjd1bnNkT3NVb283ODB4b0Ru?=
- =?utf-8?B?ZEFKWVNUeEw5Skpud2ZBRlBqRFZpSlFvU1lwaUNvc21aWm5EU294REg2Rndm?=
- =?utf-8?B?NlU2Q0cxVkhlVUFjNnhzU1B0SE9hRytldWY3WUovQ0YzbFFaZnVzbGdhR0py?=
- =?utf-8?B?Y0hnYWg0TEpxM3Fyb2VlK01oUVRRNEgvTnZIU3Zzb2JISUNmVEFLM1NmOFBJ?=
- =?utf-8?B?RmV1Vmg0ZEt6VXU1Mm15VlRWK1ZuS2Z0ZldNcFRtbGlxT3JkbTM5VENObHk2?=
- =?utf-8?B?eGJlUVVvRTRBK1BoRUhBalpvT0VXdFNJclVYVFllcktqMTRBUmt0QzhEaFRS?=
- =?utf-8?B?U0ZHVGJKbWhac1R1blpTRXBheHdBOW9pZUR5SHl2NWVUWVpWdWk0WXZHQlZt?=
- =?utf-8?B?dnQ3UUp3c0ZxZUtsU2xoL3JiREZ2bUh0MkxSKzJ2Uzcrb2NHbmZ4K1A5ckI4?=
- =?utf-8?B?MnR0ZVVEV1hHQm1JWFhUYUxLYW5JNUlBTjh2R0J3RDJnTlgzMTlTVUo2TTNP?=
- =?utf-8?B?QVZQeWt1ZmlaVWpqWVBRb0hGNUU3ODN1MCtiYnhPK1MwVUFHNkFFN0pZVUVs?=
- =?utf-8?B?bWVXWTRkQVI3NmJOdmQrQzBxbzNKd1JpM2ljQWlmN3A4ZVhoUlErZ25wS2Vj?=
- =?utf-8?B?NE1kMU1wY212aUJMQk5KZHZhMXhRbGZNcXg0TityaVdlcm0rbjNZQ3hrMDc4?=
- =?utf-8?B?NE9oUklYSForVHU3bTNJKzIvUWxLNCs1bDRvR1pIQVExWUNvOE4yZExXWVZt?=
- =?utf-8?B?c2FFVmh1SDBmSDFacnYxbkU2UlVab21iVFBLNzFvd2hkaS9SaWcwYWFSN1M0?=
- =?utf-8?B?K3VMVHowN3ZnSzJROHNqMEZNUUtKNmIxU0hLSHhEdlhpclRkd2VieWRpSWdt?=
- =?utf-8?B?QlpscHJ2WmI1N3JWNS85TFFESEZkN2ZyWFJXZDRZNlV2RTdlazVXdEZwUXZm?=
- =?utf-8?B?dGZpUkZPVitwL01tc3FuZ25DVlFobG01bGtrU0ExSFlwR0krY1Y1Q3JYQ1NH?=
- =?utf-8?B?T2Ntdjd2T2JUV3F3SE4vWXBSYUtYdjlQL2xoVXhyVWdtblN5aGJKOEdUZDI0?=
- =?utf-8?B?cGJ6Wjl3OE5hb3UzeXpiNXFtOWJ2by9YVEQvdCt2U0pocDZlOHlQNXQ3Mngv?=
- =?utf-8?B?VUpacldUejErbnU2YnBYMUtROVRJb0VhMjdOaFhLdnh0MzJrNWdHb2JHU3lv?=
- =?utf-8?B?eGJLNy83c0N6N2I5NzZGNEpSK0FjOWFlaDV5dkszaDYyTXFFWmhhNWdrOGF6?=
- =?utf-8?B?Q2FSYy9PcHl2ZEFPYUtJNVkvVFN5L2dQK3BMdlFOeDJ4bzUvYnl5S0RrVjh4?=
- =?utf-8?B?bXNaSkZsRDE0QVV4aXA5b1gySXJIaDV5UFc4QVB5SmhPTkI0NG8zaXByM0VN?=
- =?utf-8?B?OGRMU3VjWUpYYzdYaXU2OXpjMFcyLzRWdm44bFY1MHp3UUE9PQ==?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA1PR18MB5692.namprd18.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NjFla2QzcHBEVHdvd0E0T2Z0THcvbkgvMllCY3p5cjBaMnlQa296MXJGbHVw?=
- =?utf-8?B?djZnZEtUcDhMRHdTeER1TUNpVWhxQW84SW1YQUdLUnBtZWhsNDBmSi82c1py?=
- =?utf-8?B?aktHaW5DdkVTZlVpK2VuaVdXQ0MxNDE5bmNaUExzcGhRWGlWaEppcXNpVHdr?=
- =?utf-8?B?ekZYQ3daS1FUbGpXaTFDMnNJZ3lXdDhPU3lGUDc5ZCtFWk9US05mRDFhSm5i?=
- =?utf-8?B?Um1hSFg2MnNHSW9uMDJNaUNoNGE5bk81RHkyRXlKWUhvbkRlTU1oMWpuV2tz?=
- =?utf-8?B?ZU01cnNVbzc2Nk9KZFJZV3NtR3EweGVRTUZHb0dNY0hIem9NTzhLaERYSUFG?=
- =?utf-8?B?SkFvZ3JyeDFXK0xzZHp1dlJRYTdrZU9NU1JvRWdQcThhc3FQTWRkVDl0N2sx?=
- =?utf-8?B?RkpXVXJtcURMcHM3SVRwT0ZHQUEzT3FBekpxRFEreXRoZ1hFU2dDdWROVERx?=
- =?utf-8?B?ZExwSUVxZURPYm1TQkVmc3hWOUVLSUxYWjlhUUVFWk8xSjFUL1R1UjJLSWpi?=
- =?utf-8?B?RTJ0VmYvT3VFcW1iNmN0aGZsRnFKV0NjWkc1Tm8wZ3pYMXpyODdGcTA4MjlH?=
- =?utf-8?B?bXhSdkdqa1o0d2xhVGJVOGp1cDRRd0Z3ZG5SVTdQLzM0RnlPS1J1VkNsN3E1?=
- =?utf-8?B?Y0d3SkFKVHdwV1Z6bzJKc3NsWFlpaTI4bXRvU29pZWlZUFdnNENUd2p6c0d6?=
- =?utf-8?B?M2xQYVBxUGFicVVSOGZCNW9Qb3FNZkdwbGc1R1paNmlqTUpGc0VZQ1FIZnVa?=
- =?utf-8?B?dGdBSlhwSk5hbnRtc1l1bFp4alRYM0dQaWcwV2czZWdBeWFhMkhLUUR0bkhz?=
- =?utf-8?B?YkRmaHZDU0RuRnVhU210NHIxR3hvODl2aklKdS9ZUklwelgzdkw3czAvTzZB?=
- =?utf-8?B?a1N4REZyRmgrSUNHeDVqSEE4OWcvbXRZTXgwd0JmNlhuU2VIU0RrS0tVV1ZT?=
- =?utf-8?B?K0p2S1pNV3ZZRnh3bEw3ZFpMbjV3SDdFdHkzdDNuU2haQXRra3llNEcreDEz?=
- =?utf-8?B?aE1hVXlyMStScnlWYkxUbURRQnIwaGd6ZE9QUWR6Z0drbmJNbFRMZSs3S0tJ?=
- =?utf-8?B?M1RCNm9BYkh0MUdRTlZSZ0x5MVRUejNyV0ZRSUFaVUlnMjZuQ0JNcGR2K2lM?=
- =?utf-8?B?Um5TWUJCU29rYnlGWUxFOVFDMjZ2VFRCNEZ0bHRLNmNDK1ltYSt1NHJLV2Y4?=
- =?utf-8?B?VnNyNm9oVmVSYjRsYW1WN3FEcVNBQXczQk96bnRlRjdEVXZlZWVldFREL3RX?=
- =?utf-8?B?R2xSUk9mZFhTYmJIOG9GSnhZckR1anZxN0svL2VaTS93aUVhaGF6Z1VsS3Qy?=
- =?utf-8?B?VFoxcnM3NVdZbkFDT2VQSDBESTcrdE1kWVpLTjJRZkxCbEhhV2I3aHdOOGMv?=
- =?utf-8?B?ZndzZkY4YWRSVXlhNHREcXpuanUxNzRnRnNYc3JTdEVFc2FrNVcwMngrdkY1?=
- =?utf-8?B?anZuWSt3RjlsMUFPYi8wVzdtQitvOXllKzBwV014VzlPY0dSQzIrUWZYbm9N?=
- =?utf-8?B?YlF2UFBqd1ZScm11U2JJOFA5dUw5a3FvL2laMXg5K2tIeE5OVDVOL0h3Z1do?=
- =?utf-8?B?QWpLaEdnS3djd1VnaGNtbk1RREVocDI3MDZPK25uM2RVSnNKQ201RGJTZ2ZD?=
- =?utf-8?B?UTg5bmV3VFVaMVd1dDFRclhuVHRVbmpuSTEzZXdydTd2M1dSWDhQVGw2bG5U?=
- =?utf-8?B?bGNNMXhoL1h1dmdFZmZwWjRNY2xwZmE2WFRGd05pT0xDbTJRa3d3RGhKRzda?=
- =?utf-8?B?ZHIyTDZoZ1A0N21jSFlMQ1VMWTBZdmU0VFNQN04ra3ljaEJVQkt4V0drZEVL?=
- =?utf-8?B?c1NqRDc0NlBudmF1WjkzOHd0SHJHdFExUkhucDFFbklodlpCdnF3RWxvNVdI?=
- =?utf-8?B?M3NUZUJseERIZGU1aFR1a0RmRFJiQUxTSllZVEJPVHdHYnoxMzBoRWIreW1n?=
- =?utf-8?B?Yi9pdXU4aTFTaG9jV0FyUExuWjZaejE0VkF2REdtbHBsbUt5L1BQZFp0c05k?=
- =?utf-8?B?bVBWZXcvbERlUVRKM2NYN0pxWEcwODhxQjNKc0x0LzdBNk1LUFlJU3p6OERQ?=
- =?utf-8?B?R1Ircm0rOE00d1FGakdNRGIzZklIUjc2U2lYbDFjeDVFcVVaN1Iyd2w0K3Jj?=
- =?utf-8?B?MjFHZEl5N2RZUDM2RVhjK2FQN3oycEVVbXdDSHptNXJsdGFVQ1NtY0tIcWUy?=
- =?utf-8?B?dXc9PQ==?=
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: GggoCspnZrByFrTPq750Leu+i1rYzi/hNfygsEhCrBIBgfRyXXRI8Crt4y/zOwG9STJ3m0Qlf1eOcXMwzuSBM/BbMUvbu+IDfm4sXl024kKt5C5+WT2WZHUnLeXCaRBNLxdhqn5m3x6SsSW35geBU7Tkz7Usg1u8utiVKIE9zH8e12VZaXGGhaG08CyxARI0wG897clC3IkuRmMp8dn5U430MlxVPdSB7aCILkN7y1XLN92zgv/XAtFZ2qGIL6H6Nw/kTIt+5iGeHexPd5stuwRKumcdBZpkBcDCNeA9XSVgvDyO6f6W7g+8S+gR2s7EEnffs2j97yHcYgi2y/3zu2gbHbm5SLGgfaE4Nz7+a8xA0Rel1TI1cSvET2hrd//LWLuCbN4wcAFSuBS/2uCxoIvvraQuS6HNpnrCFX3yE2spSoZChEzsbWWNY392u4cbyMcQNRvfoYlfnWw9U5G2DQFvZYfWmhrDbx/d6vlV36ucreLexRYXhrPP5Uqwqo+4ogHBM6ozv1TUyPNYDhyom4aLR7LSUtY/n1cc2y+FWRPtV5rQdl0vP9QLtJ3Rc/gXyAYpK4QvkKXLt2Gtlh3IjKDYhhUvK/VXBOmZJzAUDbkihru4ajrZfIzyzO3EmhoA7TSwp17vieQ9UO+F51Fa9A==
-X-OriginatorOrg: belden.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR18MB5692.namprd18.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54669f10-7932-464a-c760-08dd150b0991
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Dec 2024 08:58:50.5305 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0f7367b1-44f7-45a7-bb10-563965c5f2e5
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: uLnc+d3yXRYuQxXMPlLX42ii53nQ1Y263hYEPfsC7RVpB+gROHi8/VRv4Yl4LhhI7I+DgcfUXeIqCHeor6WPf+czFufbryJCyA9PyDYczE+N/8ruza2Kh7FfQ/URLRrH
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR18MB3548
-X-Proofpoint-GUID: RDn1UQIUdfkshci2-AGCG-LEW5lrH3Tb
-X-Proofpoint-ORIG-GUID: RDn1UQIUdfkshci2-AGCG-LEW5lrH3Tb
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1011 spamscore=0
- mlxscore=0 priorityscore=1501 adultscore=0 bulkscore=0 mlxlogscore=999
- impostorscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2412050063
-X-Proofpoint-TriggeredRule: module.spam.rule.outbound_notspam
-Content-Type: text/plain; charset="utf-8"
+x-originating-ip: [10.0.9.40]
+X-IQAV: YES
+thread-topic: RE: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issues
+ /cr/
+X-rus_sensitivity: 20
+msip_labels: MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_Enabled=true;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_SetDate=2024-12-05T11:29:45Z;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_Method=Privileged;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_Name=COMPANY RESTRICTED -
+ BUSINESS USE;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_SiteId=74bddbd9-705c-456e-aabd-99beb719a2b2;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_ActionId=6120cf0a-b2bc-438e-8b4b-106b503b180c;
+ MSIP_Label_ae9ac9c2-fcd2-4d0b-8613-b7f540967ed5_ContentBits=1
+X-GBS-PROC: IpRT1ZRqwE39V7vTte9LV5LerUM2DsmPSiWqplELFPLAQJuI8o7qiEl5I1biWj6JgGjoAXXNICzxaKU+84B2sRGFhJwFkAcg7FvFJ9nP6Qo3QpxlgLu4RMPJrno6zBKg
+X-GBS-PROCJOB: 8pILBwVkttT+b4l8w187zLc6YwKw7k9gGkYPqVyNLuY5L88N+jCFUffCwETiRjuc
 X-Mailman-Approved-At: Thu, 05 Dec 2024 14:07:50 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -194,175 +96,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiBJZiBWaXJ0dWFsU2l6ZSA9IDE2LCB0aGVuIHRoZSByZWxvYyBzZWN0aW9uIGhhcyAxNiBieXRl
-cyBhbmQgbm90IDEyLg0KPiBBIHNlY3Rpb24gc2l6ZSBvZiBsZXNzIHRoYW4gNTEyIGlzIGludmFs
-aWQgYW55d2F5Lg0KPiBTb21ldGhpbmcgaXMgd3Jvbmcgd2l0aCB0aGUgdG9vbGluZyB0aGF0IHlv
-dSB1c2UgdG8gY3JlYXRlIHRoZSBFRkkgYmluYXJ5Lg0KVGhpcyBpcyB2YWxpZCBwb2ludCwgd2Ug
-d2lsbCBmb2xsb3cgdGhhdCB0cmFjayBhcyB3ZWxsLCBidXQgYXQgdGhlIGVuZCBpcyBhIGJvb3Qt
-Z3VhcmQNCmVmaSBiaW5hcnkuDQoNCj4gdHlwZWRlZiBzdHJ1Y3QgX0lNQUdFX0JBU0VfUkVMT0NB
-VElPTg0KPiB7DQo+ICAgICAgICAgdWludDMyX3QgVmlydHVhbEFkZHJlc3M7DQo+ICAgICAgICB1
-aW50MzJfdCBTaXplT2ZCbG9jazsgPiAgICAgDQo+IC8qIFdPUkQgVHlwZU9mZnNldFsxXTsgKi8N
-Cj4gfSBJTUFHRV9CQVNFX1JFTE9DQVRJT04sKlBJTUFHRV9CQVNFX1JFTE9DQVRJT047DQoNCj4g
-VGhlIGxvb3Agc3RvcHMgaWYgcmVsLT5TaXplT2ZCbG9jayA9PSAwLg0KDQpDb3JyZWN0LCBidXQg
-bG9vayBob3cgdGhlIHJlbCBwb2ludGVyIGlzIG1vdmluZyBmb3IgMiBieXRlczoNCmNvbnN0IHVp
-bnQxNl90ICpyZWxvY3MgPSAoY29uc3QgdWludDE2X3QgKikocmVsICsgMSk7DQouLi4NCnJlbCA9
-IChjb25zdCBJTUFHRV9CQVNFX1JFTE9DQVRJT04gKilyZWxvY3M7DQoNCkFuZCBpdCBlbmRzIGF0
-IGJjZTI2MDBjLCBhbmQgdGhlbiB0YWtlcyA3YzAwIDkzNDAgZm9yIHNpemUgOyApDQoNCj4gInR3
-byByZWxvY2F0aW9ucyBhdCBvZmZzZXQgYmNlMjYwMDggYW5kIGJjZTI2MDBhIiBjYW5ub3QgYmUg
-dHJ1ZS4NCg0KVGhpcyBJIHJlYWxseSBkb24ndCBrbm93LCB5ZXMgd2UgbmVlZCB0byBmb2xsb3cg
-d2l0aCB0aGUgdG9sbGluZy4NCkluIGFueSBjYXNlIHRoaXMgaW1hZ2UgaG93ZXZlciBpcyBnZW5l
-cmF0ZWQgaXMgbGV0IHRvIHJ1biB0byB0aGUgcG9pbnQgd2hlbg0KaXQgYnJlYWsgdGhlIHUtYm9v
-dCwgdGhlIGltYWdlIG11c3QgYmUgYXQgbGVhc3QgcmVqZWN0ZWQgZWFybGllci4NCg0KUmVnYXJk
-cywNCkFsZWtzYW5kYXINCg0KRnJvbTogSGVpbnJpY2ggU2NodWNoYXJkdCA8eHlwcm9uLmdscGtA
-Z214LmRlPiANClNlbnQ6IERvbm5lcnN0YWcsIDUuIERlemVtYmVyIDIwMjQgMDk6MzUNClRvOiBB
-bGVrc2FuZGFyIEdlcmFzaW1vdnNraSA8QWxla3NhbmRhci5HZXJhc2ltb3Zza2lAYmVsZGVuLmNv
-bT4NCkNjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgSWxpYXMgQXBhbG9kaW1hcyA8aWxpYXMuYXBh
-bG9kaW1hc0BsaW5hcm8ub3JnPg0KU3ViamVjdDogUmU6IFtQQVRDSF0gZWZpX2xvYWRlcjogZml4
-IHBlIHJlbG9jIHBvaW50ZXIgb3ZlcnJ1bg0KDQpPbiAwNS4xMi4yNCAwOToxMywgQWxla3NhbmRh
-ciBHZXJhc2ltb3Zza2kgd3JvdGU6DQo+IFRoYW5rcyBmb3IgdGhlIHJlcGxheSwNCj4NCj4+IFNl
-Y3Rpb25zIGhhdmUgdG8gYmUgYXQgbGVhc3QgNTEyIGJ5dGVzIGFsaWduZWQuIFRoZSBmaWxlIGFs
-aWdubWVudA0KPj4gY2Fubm90IGJlIHNtYWxsZXIgdGhlIDUxMiBieXRlcyBlaXRoZXIuDQo+DQo+
-PiBIZW5jZSBmb3IgYSB2YWxpZCBFRkkgYmluYXJ5IHRoZSB2YWx1ZSBvZiAicmVsIiB3aGVuIGVu
-dGVyaW5nDQo+PiBlZmlfbG9hZGVyX3JlbG9jYXRlKCkgd2lsbCBhbHdheXMgYmUgYXQgbGVhc3Qg
-NTEyIGFsaWduZWQuDQo+DQo+IFRoYXQncyBub3Qgd2hhdCBJIHNlZSBpbiB0aGUgY2FzZSB0aGF0
-IEkgdHJ5IHRvIGV4cGxhaW4sIGJlY2F1c2UNCj4gdGhlIHNlYy0+TWlzYy5WaXJ0dWFsU2l6ZSB2
-aXJ0dWFsIHNpemUgaXMgMTYgYnl0ZXMgZm9yIHRoaXMgc2VjdGlvbiAuDQo+DQo+PiBUaGUgc2l0
-dWF0aW9uIGFib3ZlIGNhbm5vdCBvY2N1ciBpZiB5b3UgZm9sbG93IHRoZSBzcGVjaWZpY2F0aW9u
-IGFuZA0KPj4gemVybyBmaWxsIHRoZSByYXcgZGF0YSB1cCB0byBTaXplT2ZSYXdEYXRhIHdoaWNo
-IGlzIGEgbXVsdGlwbGUgb2YgNTEyLg0KPg0KPiBDb3JyZWN0LCBJIHNlZSBpbiB0aGUgZWZpX2xv
-YWRfcGUgY29kZSB0aGF0IHNlY3Rpb24gd2lsbCBiZSB6ZXJvZWQNCj4gSWYgc2VjLT5NaXNjLlZp
-cnR1YWxTaXplIGlzIGJpZ2dlciB0aGVuIHNlYy0+U2l6ZU9mUmF3RGF0YSwgYnV0DQo+IHRoaXMg
-aXMgbm90IGEgY2FzZSBmb3Igb3VyIGltYWdlIGl0J3Mgb3Bvc2l0ZS4NCj4gSSBjYW4gYWxzbyBj
-b25maXJtIHRoYXQgaW4gdGhlIHJlYWwgaW1hZ2UgdGhlIHNlY3Rpb24gaXMgemVyb2VkIHVwIHRv
-DQo+IHNlYy0+U2l6ZU9mUmF3RGF0YSwgYnV0IHRoZSBwcm9ibGVtIGlzIHRoYXQgb25seSB0aGUg
-c2VjLT5NaXNjLlZpcnR1YWxTaXplDQo+ICh0aGF0IGlzIDE2IGJ5dGVzIGZvciBteSBpbWFnZSkg
-aXMgY29waWVkIHRvIHRoZSAiZWZpX3JlbG9jIiBsb2NhdGlvbi4NCj4NCj4gSSdtIGZhciBmcm9t
-IHJlYWxseSB1bmRlcnN0YW5kaW5nIHRoZSBQRSBmb3JtYXQsIGFjdHVhbGx5IHRoaXMgaXMgZmly
-c3QNCj4gdGltZSB0byBkZWFsIHdpdGggdGhpcyBhbmQgZWZpIGJvb3Qgb24gTGludXgsIGhvd2V2
-ZXIgb3VyIEVGSSBpbWFnZSBpcw0KPiBnZW5lcmF0ZWQgd2l0aCBhICJzdGFuZGFyZCIgdG9vbHMg
-bGlrZSAgYmdfZ2VuX3VuaWZpZWRfa2VybmVsIGJ5IG91cg0KPiB5b2N0byBiYXNlZCBkaXN0cm8g
-Z2VuZXJhdG9yLCBzbyBpbiBhbnkgY2FzZSBJIHNlZSBhIG5hc3R5IGJ1Zy4NCj4gRXZlbiBpZiB0
-aGUgaW1hZ2UgaXMgd3JvbmcgaXQgc2hvdWxkIGJlIHJlamVjdGVkIGVhcmxpZXIgYW5kIG5vdCBv
-dmVyZmxvd2luZw0KPiBldmVuIG92ZXJ3cml0aW5nIHRoZSB1LWJvb3QgY29kZS4gSXQncyBhIHZ1
-bG5lcmFiaWxpdHkuDQo+DQo+PiBQbGVhc2UsIHByb3ZpZGUgYW4gZXhhbXBsZSBpbWFnZSBmb3Ig
-ZG93bmxvYWQgdG8gZ2l2ZSB0aGUgZnVsbCBwaWN0dXJlLg0KPg0KPiBJIG11c3QgdGhpbmsgaG93
-IHRvIGRvIHRoYXQsIHdoZXJlIEkgY291bGQgdXBsb2FkPw0KPg0KPj4gV2l0aCAicmVsICsgMSA8
-IGVuZCIgeW91IGFyZSBub3QgcHJlc2VydmluZyB0aGUgY2hhbmdlIGJ1dCByZXZlcnRpbmcgaXQu
-DQo+DQo+IFdlbGwsIHRoaXMgaXMgdGhlIHRyaWNreSBwYXJ0LCBpbiBteSB1bmRlcnN0YW5kaW5n
-IG5vdCBiZWNhdXNlIHJlbCBpcyBtb3ZpbmcNCj4gYnkgMiBieXRlcyBkb3duIGluIHRoZSBsb29w
-Lg0KPg0KPiBJJ20gdHJ5aW5nIHRvIGRlc2NyaWJlIHRoZSBwcm9ibGVtIGFnYWluLCBsZXQncyBz
-YXkgaW4gbXkgaW1hZ2UgdGhlIHByb2JsZW1hdGljIHNlY3Rpb24NCj4gaXMgZ2VuZXJhdGVkIHdp
-dGggc2VjLT5NaXNjLlZpcnR1YWxTaXplID0gMTYgYW5kIHNlYy0+U2l6ZU9mUmF3RGF0YSA9IDUx
-Miwgd2hhdCB3aWxsIGJlDQo+IHByb3ZpZGVkIHRvIHRoZSBlZmlfbG9hZGVyX3JlbG9jYXRlIGlu
-IHRoaXMgY2FzZSBpcyByZWxfc2l6ZSBvZiAxNiBhbmQgb25seSAxNiBieXRlcyB3aWxsDQo+IGJl
-IGNvcGllZCB0byBlZmlfcmVsb2MgbG9jYXRpb24gKHNlZSB0aGUgIiBMb2FkIHNlY3Rpb25zIGlu
-dG8gUkFNIiBsb2dpYyBpbiBlZmlfbG9hZF9wZSksDQo+IHNvIHRoZSBjb250ZW50IG9mIHRoZSBS
-QU0gYWZ0ZXIgZWZpX3JlbG9jICsgMTYgc3RheXMgdW5rbm93bjoNCj4gYmNlMjYwMDA6IDMwMDAg
-MDAwMCAwMDBjIDAwMDAgMDAwMCAwMDAwIDAwMDAgMDAwMCAtPiByZWxvYyBzZWN0aW9uDQo+IGJj
-ZTI2MDEwOiA3YzAwIDkzNDAgNjdlMCBmOTAwIDFjMDAgMGVhMSBhNDAwIDBmMjAgLT4gcmFuZG9t
-IGNvbnRlbnQNCj4NCj4gU28gZWZpX2xvYWRlcl9yZWxvY2F0ZSBnZXRzIHJlbF9zaXplIG9mIDE2
-IGJ5dGVzIGZvciByZWxvYyBzZWN0aW9uIG9mIDEyIGJ5dGVzLA0KPiBhbmQgdGhpcyB3aWxsIG92
-ZXJmbG93Lg0KDQpJZiBWaXJ0dWFsU2l6ZSA9IDE2LCB0aGVuIHRoZSByZWxvYyBzZWN0aW9uIGhh
-cyAxNiBieXRlcyBhbmQgbm90IDEyLg0KDQpBIHNlY3Rpb24gc2l6ZSBvZiBsZXNzIHRoYW4gNTEy
-IGlzIGludmFsaWQgYW55d2F5Lg0KDQpTb21ldGhpbmcgaXMgd3Jvbmcgd2l0aCB0aGUgdG9vbGlu
-ZyB0aGF0IHlvdSB1c2UgdG8gY3JlYXRlIHRoZSBFRkkgYmluYXJ5Lg0KDQo+DQo+IFdoZW4gSSdt
-IHdyaXRpbmcgdGhpcywgSSdtIHRoaW5raW5nIGlzbid0IHRoZW4gcmVsX3NpemUgcHJvYmxlbSBh
-cyB3ZWxsLA0KPiB0aGF0IGlzIDE2IGJ5dGVzIGluIHRoaXMgY2FzZT8NCj4NCj4gRnJvbTogSGVp
-bnJpY2ggU2NodWNoYXJkdCA8bWFpbHRvOnh5cHJvbi5nbHBrQGdteC5kZT4NCj4gU2VudDogTWl0
-dHdvY2gsIDQuIERlemVtYmVyIDIwMjQgMTE6MTENCj4gVG86IEFsZWtzYW5kYXIgR2VyYXNpbW92
-c2tpIDxtYWlsdG86QWxla3NhbmRhci5HZXJhc2ltb3Zza2lAYmVsZGVuLmNvbT4NCj4gQ2M6IG1h
-aWx0bzp1LWJvb3RAbGlzdHMuZGVueC5kZTsgSWxpYXMgQXBhbG9kaW1hcyA8bWFpbHRvOmlsaWFz
-LmFwYWxvZGltYXNAbGluYXJvLm9yZz4NCj4gU3ViamVjdDogUmU6IFtQQVRDSF0gZWZpX2xvYWRl
-cjogZml4IHBlIHJlbG9jIHBvaW50ZXIgb3ZlcnJ1bg0KPg0KPg0KPiBPbiAyOS4xMS4yNCAyMjow
-OSwgQWxla3NhbmRhciBHZXJhc2ltb3Zza2kgd3JvdGU6DQo+PiBUaGUgZml4IHByb3ZpZGVkIGJ5
-IDk5N2ZjMTJlYzkxIGlzIGFjdHVhbGx5IGludHJvZHVjaW5nDQo+PiBhIGJ1ZmZlciBvdmVycnVu
-LCBhbmQgdGhlIG92ZXJydW4gaXMgZWZmZWN0aXZlIGlmIHRoZQ0KPj4gbWVtb3J5IGFmdGVyIHRo
-ZSByZWxvYyBzZWN0aW9uIGlzIG5vdCB6ZXJvZWQuDQo+PiBQcm9iYWJseSB0aGF0J3Mgd2h5IHRo
-aXMgYnVnIGlzIG5vdCBhbHdheXMgbm90aWNlYWJsZS4NCj4+DQo+PiBUaGUgcHJvYmxlbSBpcyB0
-aGF0IDgtYnl0ZXMgJ3JlbCcgcG9pbnRlciBjYW4gYmUgNC1ieXRlcyBhbGlnbmVkDQo+PiBhY2Nv
-cmRpbmcgdG8gdGhlIFBFIEZvcm1hdCwgc28gdGhlIGFjdHVhbCByZWxvY2F0ZSBmdW5jdGlvbiBj
-YW4NCj4+IHRha2UgdmFsdWVzIGFmdGVyIHRoZSByZWxvYyBzZWN0aW9uLg0KPg0KPiBTZWN0aW9u
-cyBoYXZlIHRvIGJlIGF0IGxlYXN0IDUxMiBieXRlcyBhbGlnbmVkLiBUaGUgZmlsZSBhbGlnbm1l
-bnQNCj4gY2Fubm90IGJlIHNtYWxsZXIgdGhlIDUxMiBieXRlcyBlaXRoZXIuDQo+DQo+IEhlbmNl
-IGZvciBhIHZhbGlkIEVGSSBiaW5hcnkgdGhlIHZhbHVlIG9mICJyZWwiIHdoZW4gZW50ZXJpbmcN
-Cj4gZWZpX2xvYWRlcl9yZWxvY2F0ZSgpIHdpbGwgYWx3YXlzIGJlIGF0IGxlYXN0IDUxMiBhbGln
-bmVkLg0KPg0KPj4NCj4+IE9uZSBleGFtcGxlIGlzIHRoZSBmb2xsb3dpbmcgZHVtcCBmcm9tIHRo
-ZSByZWxvYyBzZWN0aW9uOg0KPj4gICAgIGJjZTI2MDAwOiAzMDAwIDAwMDAgMDAwYyAwMDAwIDAw
-MDAgMDAwMCAwMDAwIDAwMDANCj4+ICAgICBiY2UyNjAxMDogN2MwMCA5MzQwIDY3ZTAgZjkwMCAx
-YzAwIDBlYTEgYTQwMCAwZjIwDQo+DQo+IFBsZWFzZSwgcHJvdmlkZSBhbiBleGFtcGxlIGltYWdl
-IGZvciBkb3dubG9hZCB0byBnaXZlIHRoZSBmdWxsIHBpY3R1cmUuDQo+DQo+Pg0KPj4gVGhpcyBz
-ZWN0aW9uIGhhcyB0d28gcmVsb2NhdGlvbnMgYXQgb2Zmc2V0IGJjZTI2MDA4IGFuZCBiY2UyNjAw
-YSwNCg0KU3RhcnRpbmcgYXQgYmNlMjYwMDggeW91IGhhdmUgZWlnaHQgemVybyBieXRlcyB3aXRo
-IHRoaXMgc3RydWN0dXJlOg0KDQp0eXBlZGVmIHN0cnVjdCBfSU1BR0VfQkFTRV9SRUxPQ0FUSU9O
-DQp7DQogICAgICAgICB1aW50MzJfdCBWaXJ0dWFsQWRkcmVzczsNCiAgICAgICAgIHVpbnQzMl90
-IFNpemVPZkJsb2NrOw0KICAgICAgICAgLyogV09SRCBUeXBlT2Zmc2V0WzFdOyAqLw0KfSBJTUFH
-RV9CQVNFX1JFTE9DQVRJT04sKlBJTUFHRV9CQVNFX1JFTE9DQVRJT047DQoNClRoZSBsb29wIHN0
-b3BzIGlmIHJlbC0+U2l6ZU9mQmxvY2sgPT0gMC4NCg0KInR3byByZWxvY2F0aW9ucyBhdCBvZmZz
-ZXQgYmNlMjYwMDggYW5kIGJjZTI2MDBhIiBjYW5ub3QgYmUgdHJ1ZS4NCg0KQmVzdCByZWdhcmRz
-DQoNCkhlaW5yaWNoDQoNCj4+IGhvd2V2ZXIgdGhlIGdpdmVuIHNpemUgKHJlbF9zaXplKSBmb3Ig
-dGhpcyByZWxvY2F0aW9uIGlzIDE2LWJ5dGVzDQo+DQo+IFRoZSB2YWx1ZSBvZiAicmVsX3NpemUi
-IHVzZWQgdG8gY2FsY3VsYXRlICJlbmQiIGlzIG5vdCB0aGUgc2l6ZSBvZiBhDQo+IHJlbG9jYXRp
-b24gYnV0IHRoZSBzaXplIG9mIHRoZSByZWxvY2F0aW9uIHRhYmxlLg0KPg0KPiBUaGUgUEUtQ09G
-RiBzcGVjaWZpY2F0aW9uIGRlc2NyaWJlczoNCj4NCj4gIlNpemVPZlJhd0RhdGENCj4NCj4gVGhl
-IHNpemUgb2YgdGhlIHNlY3Rpb24gKGZvciBvYmplY3QgZmlsZXMpIG9yIHRoZSBzaXplIG9mIHRo
-ZQ0KPiBpbml0aWFsaXplZCBkYXRhIG9uIGRpc2sgKGZvciBpbWFnZSBmaWxlcykuIEZvciBleGVj
-dXRhYmxlIGltYWdlcywgdGhpcw0KPiBtdXN0IGJlIGEgbXVsdGlwbGUgb2YgRmlsZUFsaWdubWVu
-dCBmcm9tIHRoZSBvcHRpb25hbCBoZWFkZXIuIElmIHRoaXMgaXMNCj4gbGVzcyB0aGFuIFZpcnR1
-YWxTaXplLCB0aGUgcmVtYWluZGVyIG9mIHRoZSBzZWN0aW9uIGlzIHplcm8tZmlsbGVkLiINCj4N
-Cj4gVGhlIHNpdHVhdGlvbiBhYm92ZSBjYW5ub3Qgb2NjdXIgaWYgeW91IGZvbGxvdyB0aGUgc3Bl
-Y2lmaWNhdGlvbiBhbmQNCj4gemVybyBmaWxsIHRoZSByYXcgZGF0YSB1cCB0byBTaXplT2ZSYXdE
-YXRhIHdoaWNoIGlzIGEgbXVsdGlwbGUgb2YgNTEyLg0KPg0KPj4gYW5kIHRoaXMgaXMgY29taW5n
-IGZvcm0gdGhlIGVmaSBpbWFnZSBNaXNjLlZpcnR1YWxTaXplLCBzbyBpbiB0aGlzDQo+PiBjYXNl
-IHRoZSAncmVsb2MnIHBvaW50ZXIgZW5kcyBhdCBhZmZzZXQgYmNlMjYwMGMgYW5kIGlzIHRha2Vu
-IGFzDQo+PiB2YWxpZCBhbmQgdGhpcyBpcyB3aGVyZSB0aGUgb3ZlcmZsb3cgaXMuDQo+Pg0KPj4g
-SW4gb3VyIHN5c3RlbSB3ZSBzZWUgdGhpcyBwcm9ibGVtIHdoZW4gd2UgYXJlIHN0YXJ0aW5nIHRo
-ZQ0KPj4gQm9vdCBHdWFyZCBlZmkgaW1hZ2UuDQo+Pg0KPj4gVGhpcyBwYXRjaCBpcyBmaXhpbmcg
-dGhlIG92ZXJydW4gd2hpbGUgcHJlc2VydmluZyB0aGUgZml4IGRvbmUNCj4+IGJ5IDk5N2ZjMTJl
-YzkxLg0KPg0KPiBCZWZvcmUgOTk3ZmMxMmVjOTEgd2UgaGFkICJyZWwgPCBlbmQgLSAxIi4NCj4N
-Cj4gV2l0aCAicmVsICsgMSA8IGVuZCIgeW91IGFyZSBub3QgcHJlc2VydmluZyB0aGUgY2hhbmdl
-IGJ1dCByZXZlcnRpbmcgaXQuDQo+DQo+IEJlc3QgcmVnYXJkcw0KPg0KPiBIZWlucmljaA0KPg0K
-Pj4NCj4+IFNpZ25lZC1vZmYtYnk6IEFsZWtzYW5kYXIgR2VyYXNpbW92c2tpIDxtYWlsdG86YWxl
-a3NhbmRhci5nZXJhc2ltb3Zza2lAYmVsZGVuLmNvbT4NCj4+IC0tLQ0KPj4gICAgbGliL2VmaV9s
-b2FkZXIvZWZpX2ltYWdlX2xvYWRlci5jIHwgMiArLQ0KPj4gICAgMSBmaWxlIGNoYW5nZWQsIDEg
-aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2xpYi9lZmlf
-bG9hZGVyL2VmaV9pbWFnZV9sb2FkZXIuYyBiL2xpYi9lZmlfbG9hZGVyL2VmaV9pbWFnZV9sb2Fk
-ZXIuYw0KPj4gaW5kZXggMGRkZjY5YTA5MS4uMDQwNzVkODNjYiAxMDA2NDQNCj4+IC0tLSBhL2xp
-Yi9lZmlfbG9hZGVyL2VmaV9pbWFnZV9sb2FkZXIuYw0KPj4gKysrIGIvbGliL2VmaV9sb2FkZXIv
-ZWZpX2ltYWdlX2xvYWRlci5jDQo+PiBAQCAtMTIxLDcgKzEyMSw3IEBAIHN0YXRpYyBlZmlfc3Rh
-dHVzX3QgZWZpX2xvYWRlcl9yZWxvY2F0ZShjb25zdCBJTUFHRV9CQVNFX1JFTE9DQVRJT04gKnJl
-bCwNCj4+ICAgICAgICAgICAgICAgICAgIHJldHVybiBFRklfU1VDQ0VTUzsNCj4+DQo+PiAgICAg
-ICAgICAgZW5kID0gKGNvbnN0IElNQUdFX0JBU0VfUkVMT0NBVElPTiAqKSgoY29uc3QgY2hhciAq
-KXJlbCArIHJlbF9zaXplKTsNCj4+IC0gICAgICAgd2hpbGUgKHJlbCA8IGVuZCAmJiByZWwtPlNp
-emVPZkJsb2NrKSB7DQo+PiArICAgICAgIHdoaWxlIChyZWwgKyAxIDwgZW5kICYmIHJlbC0+U2l6
-ZU9mQmxvY2spIHsNCj4+ICAgICAgICAgICAgICAgICAgIGNvbnN0IHVpbnQxNl90ICpyZWxvY3Mg
-PSAoY29uc3QgdWludDE2X3QgKikocmVsICsgMSk7DQo+PiAgICAgICAgICAgICAgICAgICBpID0g
-KHJlbC0+U2l6ZU9mQmxvY2sgLSBzaXplb2YoKnJlbCkpIC8gc2l6ZW9mKHVpbnQxNl90KTsNCj4+
-ICAgICAgICAgICAgICAgICAgIHdoaWxlIChpLS0pIHsNCj4+IC0tDQo+PiAyLjM0LjENCj4+DQo+
-PiAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqDQo+PiBESVNDTEFJTUVSOg0KPj4gUHJpdmlsZWdlZCBhbmQvb3IgQ29u
-ZmlkZW50aWFsIGluZm9ybWF0aW9uIG1heSBiZSBjb250YWluZWQgaW4gdGhpcyBtZXNzYWdlLiBJ
-ZiB5b3UgYXJlIG5vdCB0aGUgYWRkcmVzc2VlIG9mIHRoaXMgbWVzc2FnZSwgeW91IG1heSBub3Qg
-Y29weSwgdXNlIG9yIGRlbGl2ZXIgdGhpcyBtZXNzYWdlIHRvIGFueW9uZS4gSW4gc3VjaCBldmVu
-dCwgeW91IHNob3VsZCBkZXN0cm95IHRoZSBtZXNzYWdlIGFuZCBraW5kbHkgbm90aWZ5IHRoZSBz
-ZW5kZXIgYnkgcmVwbHkgZS1tYWlsLiBJdCBpcyB1bmRlcnN0b29kIHRoYXQgb3BpbmlvbnMgb3Ig
-Y29uY2x1c2lvbnMgdGhhdCBkbyBub3QgcmVsYXRlIHRvIHRoZSBvZmZpY2lhbCBidXNpbmVzcyBv
-ZiB0aGUgY29tcGFueSBhcmUgbmVpdGhlciBnaXZlbiBub3IgZW5kb3JzZWQgYnkgdGhlIGNvbXBh
-bnkuIFRoYW5rIFlvdS4NCj4NCj4NCj4gKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKg0KPiBESVNDTEFJTUVSOg0KPiBQ
-cml2aWxlZ2VkIGFuZC9vciBDb25maWRlbnRpYWwgaW5mb3JtYXRpb24gbWF5IGJlIGNvbnRhaW5l
-ZCBpbiB0aGlzIG1lc3NhZ2UuIElmIHlvdSBhcmUgbm90IHRoZSBhZGRyZXNzZWUgb2YgdGhpcyBt
-ZXNzYWdlLCB5b3UgbWF5IG5vdCBjb3B5LCB1c2Ugb3IgZGVsaXZlciB0aGlzIG1lc3NhZ2UgdG8g
-YW55b25lLiBJbiBzdWNoIGV2ZW50LCB5b3Ugc2hvdWxkIGRlc3Ryb3kgdGhlIG1lc3NhZ2UgYW5k
-IGtpbmRseSBub3RpZnkgdGhlIHNlbmRlciBieSByZXBseSBlLW1haWwuIEl0IGlzIHVuZGVyc3Rv
-b2QgdGhhdCBvcGluaW9ucyBvciBjb25jbHVzaW9ucyB0aGF0IGRvIG5vdCByZWxhdGUgdG8gdGhl
-IG9mZmljaWFsIGJ1c2luZXNzIG9mIHRoZSBjb21wYW55IGFyZSBuZWl0aGVyIGdpdmVuIG5vciBl
-bmRvcnNlZCBieSB0aGUgY29tcGFueS4gVGhhbmsgWW91Lg0KDQoKKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKgpESVND
-TEFJTUVSOgpQcml2aWxlZ2VkIGFuZC9vciBDb25maWRlbnRpYWwgaW5mb3JtYXRpb24gbWF5IGJl
-IGNvbnRhaW5lZCBpbiB0aGlzIG1lc3NhZ2UuIElmIHlvdSBhcmUgbm90IHRoZSBhZGRyZXNzZWUg
-b2YgdGhpcyBtZXNzYWdlLCB5b3UgbWF5IG5vdCBjb3B5LCB1c2Ugb3IgZGVsaXZlciB0aGlzIG1l
-c3NhZ2UgdG8gYW55b25lLiBJbiBzdWNoIGV2ZW50LCB5b3Ugc2hvdWxkIGRlc3Ryb3kgdGhlIG1l
-c3NhZ2UgYW5kIGtpbmRseSBub3RpZnkgdGhlIHNlbmRlciBieSByZXBseSBlLW1haWwuIEl0IGlz
-IHVuZGVyc3Rvb2QgdGhhdCBvcGluaW9ucyBvciBjb25jbHVzaW9ucyB0aGF0IGRvIG5vdCByZWxh
-dGUgdG8gdGhlIG9mZmljaWFsIGJ1c2luZXNzIG9mIHRoZSBjb21wYW55IGFyZSBuZWl0aGVyIGdp
-dmVuIG5vciBlbmRvcnNlZCBieSB0aGUgY29tcGFueS4gVGhhbmsgWW91Lgo=
+Hi Venkatesh,
+
+I applied your attached patch to v2025.01-rc3 (commit 3073246d1be682071d8b3=
+d07d06c2484907aed60)
+and confirm that your patch resolves my Flash erase issue. The following co=
+mmands now work correctly.
+
+sf probe
+sf test 0 100000
+
+Just for clarification, were you able to reproduce the original issue on yo=
+ur side?
+
+Thank you very much!
+
+Best Regards
+
+Dominik
+
+From: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>
+Sent: Thursday, December 5, 2024 6:46 AM
+To: Wernberger Dominik (1GS4) <dominik.wernberger@rohde-schwarz.com>
+Cc: git (AMD-Xilinx) <git@amd.com>; jagan@amarulasolutions.com; Simek, Mich=
+al <michal.simek@amd.com>; trini@konsulko.com; u-boot@lists.denx.de; vignes=
+hr@ti.com
+Subject: *EXT* RE: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issue=
+s
+
+Hi Dominik,
+I have tried on the zc706 board and didn=E2=80=99t see any issues with the =
+parallel configuration.
+This is the upstream commit f96e5133184aac377b54bd61f8abf78710f2ee56 + patc=
+h attached
+Zynq> sf probe 0 0 0
+SF: Detected n25q512ax3 with page size 512 Bytes, erase size 128 KiB, total=
+ 128 MiB
+Verified with the below tests and didn=E2=80=99t see any issue.
+Log:
+U-Boot 2025.01-rc3-00046-gf96e5133184a-dirty (Dec 04 2024 - 19:50:42 +0530)
+
+CPU:   Zynq 7z045
+Silicon: v3.1
+Model: Xilinx ZC706 board
+DRAM:  ECC disabled 1 GiB
+jedec_spi_nor flash@0: has no valid 'reg' property (0)
+Core:  31 devices, 19 uclasses, devicetree: board
+Flash: 0 Bytes
+NAND:  0 MiB
+MMC:   mmc@e0100000: 0
+Loading Environment from nowhere... OK
+In:    serial@e0001000
+Out:   serial@e0001000
+Err:   serial@e0001000
+Net:
+ZYNQ GEM: e000b000, mdio bus e000b000, phyaddr 7, interface rgmii-id
+
+Warning: ethernet@e000b000 (eth0) using random MAC address - b6:69:a8:60:e2=
+:de
+eth0: ethernet@e000b000
+Hit any key to stop autoboot:  0
+Zynq> sf probe 0 0 0
+SF: Detected n25q512ax3 with page size 512 Bytes, erase size 128 KiB, total=
+ 128 MiB
+Zynq> time sf erase 0x0 0x2000000;mw.b 0x8000 aabbccdd 0x2000000;time sf wr=
+ite 0x8000 0x0 0x2000000;mw.b 0x8008000 0x0 0x2000000;time sf read 0x800800=
+0 0x0 0x2000000;cmp.b 0x8000 0x8008000 0x2000000
+SF: 33554432 bytes @ 0x0 Erased: OK
+
+time: 3 minutes, 37.604 seconds
+device 0 offset 0x0, size 0x2000000
+SF: 33554432 bytes @ 0x0 Written: OK
+
+time: 47.074 seconds
+device 0 offset 0x0, size 0x2000000
+SF: 33554432 bytes @ 0x0 Read: OK
+
+time: 5.411 seconds
+Total of 33554432 byte(s) were the same
+Zynq> time sf erase 0x0 0x4000000; mw.b 0x10000000 dd 0x4000000; time sf wr=
+ite 0x10000000 0x0 0x4000000; mw.b 0x20000000 0x0 0x4000000; time sf read 0=
+x20000000 0x0 0x4000000; cmp.b 0x10000000 0x20000000 0x4000000
+SF: 67108864 bytes @ 0x0 Erased: OK
+
+time: 6 minutes, 45.941 seconds
+device 0 offset 0x0, size 0x4000000
+SF: 67108864 bytes @ 0x0 Written: OK
+
+time: 1 minutes, 34.443 seconds
+device 0 offset 0x0, size 0x4000000
+SF: 67108864 bytes @ 0x0 Read: OK
+
+time: 10.821 seconds
+Total of 67108864 byte(s) were the same
+Zynq> time sf erase 0x0 0x8000000;mw.b 0x8000 aabbccdd 0x8000000;time sf wr=
+ite 0x8000 0x0 0x8000000;mw.b 0x8008000 0x0 0x8000000;time sf read 0x800800=
+0 0x0 0x8000000;cmp.b 0x8000 0x8008000 0x8000000
+SF: 134217728 bytes @ 0x0 Erased: OK
+
+time: 12 minutes, 50.601 seconds
+device 0 whole chip
+SF: 134217728 bytes @ 0x0 Written: OK
+
+time: 3 minutes, 6.852 seconds
+device 0 whole chip
+SF: 134217728 bytes @ 0x0 Read: OK
+
+time: 21.643 seconds
+Total of 134217728 byte(s) were the same
+Zynq>
+
+Let me know if you have any questions.
+
+Thanks
+Venkatesh
+
+From: Dominik Wernberger <dominik.wernberger@rohde-schwarz.com<mailto:domin=
+ik.wernberger@rohde-schwarz.com>>
+Sent: Tuesday, December 3, 2024 5:57 PM
+To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com<mailto:venkatesh.abbara=
+pu@amd.com>>
+Cc: git (AMD-Xilinx) <git@amd.com<mailto:git@amd.com>>; jagan@amarulasoluti=
+ons.com<mailto:jagan@amarulasolutions.com>; Simek, Michal <michal.simek@amd=
+.com<mailto:michal.simek@amd.com>>; trini@konsulko.com<mailto:trini@konsulk=
+o.com>; u-boot@lists.denx.de<mailto:u-boot@lists.denx.de>; vigneshr@ti.com<=
+mailto:vigneshr@ti.com>
+Subject: RE: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issues
+
+Hi Venkatesh,
+
+Thanks for such a fast response.
+
+Running =E2=80=98sf probe=E2=80=99 gives:
+Flash: SF: Detected n25q256a with page size 512 Bytes, erase size 128 KiB, =
+total 128 MiB
+
+To be correct we use 2x MT25QL256ABA1EW9 [1, 2] which is basically the same=
+ as the n25q256a reported by sf.
+In defconfig I=E2=80=99ve specified CONFIG_ENV_SECT_SIZE=3D0x00040000 which=
+ is divided by 2 in parallel memories
+logic [3], resulting in the 128 KiB per Flash chip.
+
+If you need any further information, please let me know.
+
+[1] https://www.micron.com/products/storage/nor-flash/serial-nor/part-catal=
+og/part-detail/mt25ql256aba1ew9-0sit
+[2] https://xonstorage.blob.core.windows.net/pdf/micron_mt25ql256aba1ew90si=
+t_apr22_xonlink.pdf
+[3] https://lore.kernel.org/all/20240926045508.1492638-3-venkatesh.abbarapu=
+@amd.com/
+
+BR
+Dominik
+
+From: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com<mailto:venkatesh.abba=
+rapu@amd.com>>
+Sent: Tuesday, December 3, 2024 1:01 PM
+To: Wernberger Dominik (1GS4) <dominik.wernberger@rohde-schwarz.com<mailto:=
+dominik.wernberger@rohde-schwarz.com>>
+Cc: git (AMD-Xilinx) <git@amd.com<mailto:git@amd.com>>; jagan@amarulasoluti=
+ons.com<mailto:jagan@amarulasolutions.com>; Simek, Michal <michal.simek@amd=
+.com<mailto:michal.simek@amd.com>>; trini@konsulko.com<mailto:trini@konsulk=
+o.com>; u-boot@lists.denx.de<mailto:u-boot@lists.denx.de>; vigneshr@ti.com<=
+mailto:vigneshr@ti.com>
+Subject: *EXT* RE: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issue=
+s
+
+Hi Dominik,
+Could you please let me know the details of the flash? I will check from my=
+ side.
+
+Thanks
+Venkatesh
+From: Dominik Wernberger <dominik.wernberger@rohde-schwarz.com<mailto:domin=
+ik.wernberger@rohde-schwarz.com>>
+Sent: Tuesday, December 3, 2024 5:21 PM
+To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com<mailto:venkatesh.abbara=
+pu@amd.com>>
+Cc: git (AMD-Xilinx) <git@amd.com<mailto:git@amd.com>>; jagan@amarulasoluti=
+ons.com<mailto:jagan@amarulasolutions.com>; Simek, Michal <michal.simek@amd=
+.com<mailto:michal.simek@amd.com>>; trini@konsulko.com<mailto:trini@konsulk=
+o.com>; u-boot@lists.denx.de<mailto:u-boot@lists.denx.de>; vigneshr@ti.com<=
+mailto:vigneshr@ti.com>
+Subject: Re: [PATCH] mtd: spi-nor: Fix the qspi parallel memory issues
+
+Hello Venkatesh,
+
+Is there any news on the status of this patch? I'm working with a Zynq 7z02=
+0 system where 2 Flashes
+operate in parallel QSPI mode. This patch is essential for the correct Flas=
+h erase in U-Boot v2025.01-rc3.
+
+Without this patch Flash erase fails on every second multiple of Flash eras=
+e section size (FESS). Failing
+means that the Flash erase is not initiated or successful. I.e., the Flash =
+section is not altered.
+
+For example, lets assume a FESS with 0x20000 (128 kiB).
+
+sf test 00000 20000 # Works
+sf test 20000 20000 # Fails
+sf test 40000 20000 # Works
+sf test 60000 20000 # Fails
+# ...
+
+Note that executing
+
+sf erase 20000 20000
+SF: 131072 bytes @ 0x20000 Erased: OK
+
+shows OK even though the Flash sector were not erased.
+
+In case you have any new/rebased patches you want me to test, I would be ha=
+ppy to do so. I'm looking
+forward getting this patch into mainline U-Boot.
+
+Best Regards,
+
+Dominik
+
+
+Content provided within this e-mail including any attachments, is for the u=
+se of the intended recipients and may contain Rohde & Schwarz company restr=
+icted information. Any unauthorized use, disclosure, or distribution of thi=
+s communication in whole or in part is strictly prohibited. If you are not =
+the intended recipient, please notify the sender by reply email or by telep=
+hone and delete the communication in its entirety.
+
+
+Content provided within this e-mail including any attachments, is for the u=
+se of the intended recipients and may contain Rohde & Schwarz company restr=
+icted information. Any unauthorized use, disclosure, or distribution of thi=
+s communication in whole or in part is strictly prohibited. If you are not =
+the intended recipient, please notify the sender by reply email or by telep=
+hone and delete the communication in its entirety.
+
+
+
+Content provided within this e-mail including any attachments, is for the u=
+se of the intended recipients and may contain Rohde & Schwarz company restr=
+icted information. Any unauthorized use, disclosure, or distribution of thi=
+s communication in whole or in part is strictly prohibited. If you are not =
+the intended recipient, please notify the sender by reply email or by telep=
+hone and delete the communication in its entirety.
