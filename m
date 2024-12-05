@@ -4,57 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADC8BE7716E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCB4E77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 19:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FD0A88B4B;
-	Thu,  5 Dec 2024 20:33:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 09CDF8919B;
+	Thu,  5 Dec 2024 20:55:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Lj1ZxLP0";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dLHl/qMo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E5828903B; Thu,  5 Dec 2024 20:33:01 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AD1F18907B; Thu,  5 Dec 2024 20:55:12 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CF2787BF4
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:32:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0A798903B
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 20:55:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A92FE3FC13; 
- Thu,  5 Dec 2024 19:32:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1733427179;
- bh=1MmRnaFtSzHU9xwcfsQDaUQxUN4gN3FQKkm2eio8Gl4=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Lj1ZxLP05GHh5UxUdcqIIjQYC+Ae5ZJZqE3Vuo/Cd9sM/bkmuoLZ6gmjn5kHgk9Q1
- l3VALsvIF/kvB10vEi1CM31OEzldF4B5RuA2LS//rv8e61CQNvhv0kxdJMz3EM31/9
- HTzEQiZqylHudlRK0ASn0ud5QMJ4cOry7qq6oBglyZBUXODTkkxKWrHKKdMCR3mrEZ
- 1EaV3Z9B6t9CWrLtjxxnNmQV2koYoyooToqfkH7mWjYbGiYbuiVqtklQm1ycnzkaMQ
- zJ3mSbdZIkI3tEc+06991x05JpCX5dCmMIbXywR65skHbAIKB06P8cccocPeIaYAbH
- FsdGdkoMEsTyg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] net: lwip: do not return CMD_RET_USAGE if no interface
-Date: Thu,  5 Dec 2024 20:32:53 +0100
-Message-ID: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3ab136815so598540a12.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 11:55:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1733428510; x=1734033310; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WTKTi/y157uB6rWGpNXBF+Pbcl792MNf4ePdSW5C3/Y=;
+ b=dLHl/qMoKvXrs1v5vZDit9qYNC0voOoziv74s4gcZ8516qEPFYK3WtcGQ2DpBCu6bm
+ CjLt5daJtuJGLD+EgBmMnc2PV77BFeo24J/2+Fm8sTqAZpOcEiwLt7sCNKjM+CzE24Am
+ uEXfF/mLFGRUOFgLENcbAvYICuBgNhlT+1euk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733428510; x=1734033310;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WTKTi/y157uB6rWGpNXBF+Pbcl792MNf4ePdSW5C3/Y=;
+ b=ZyxSOQzVPQAjDbcEzGAiWd6kmZsOwLc3UzjRrfpgCHttdVqT7WkxkoUuDhmkg+fuz1
+ 3kCv8lK7ajZ0FM7Dqyb388uLj0ApXgx/cgFFPHSNr0RuYJIrO/D9H9JGgO66F6bAVw2j
+ QetUnwZ5vg+Qkqgelmbhlw9w6pm9fRzhUNViF8y6MrmP0ewenKx24gJQTYGKycvUazvi
+ z+NzmIRwOozu+rPuuOshf48jCX1aplrUvyeWqsnKtoHd+9aP53og6ElVBQgz5JlAO3JT
+ A2EV1G7XkWKQm8FRi/qK+ZaKawkdPeM0mLKbLA0MCfegXlhGHXwGdROKXhh3Wk7qwgXA
+ 122A==
+X-Gm-Message-State: AOJu0Yz5Oaot9tK6CCb2hJiVQgX4NPR9hPL0sI1tDeJlKsxC53MNfYOY
+ bKia1EyRs2db+HCVp1YgOe/HeJYw5uBe2NXgGosEwT+jKv9wdWRzoKfpEs7jCgSXNkdqeXJUD44
+ qDGaGXC9TczXJJ3yW8oO5qt/e6/uYs6M+tFicNgdIOR+w7gQ=
+X-Gm-Gg: ASbGnctMXK5W6ZRy9VFfrj/SNOr9A6raXrPQWK3YeJXA6Cn+qqrecKKoe4pVSlGGwTk
+ 0WP4nQ4QTLPU4BKTWJpxrHSABl7Ww8P/R
+X-Google-Smtp-Source: AGHT+IHlSLrsPwTbEqEpyKosb5Og4TWcYWU7NmhJwY6pPHEYX1QaoqAGo15rYOZt5cJSMqtlJkgtMAxm/LKxUGCWkM0=
+X-Received: by 2002:a17:907:2716:b0:aa5:3e46:96f6 with SMTP id
+ a640c23a62f3a-aa63a1877ddmr6450866b.31.1733428510114; Thu, 05 Dec 2024
+ 11:55:10 -0800 (PST)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 5 Dec 2024 13:55:09 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20241202133934.GC2457179@bill-the-cat>
+References: <20241202133934.GC2457179@bill-the-cat>
+ <20241201144240.1664398-1-sjg@chromium.org>
+ <20241201144240.1664398-9-sjg@chromium.org>
+Date: Thu, 5 Dec 2024 13:55:09 -0600
+X-Google-Sender-Auth: wTq5gxg9VwnLnTZK8R_IZnJQyYY
+Message-ID: <CAFLszThSruWSi+AevAHPDg=oYQvk9twE8ua5vabRvYpJ=5vZrw@mail.gmail.com>
+Subject: Re: [PATCH 8/8] CI: Drop broken boards from sjg lab
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,27 +93,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the dns command cannot find a network interface, we should return
-CMD_RETFAIURE and not -1 (CMD_RET_USAGE).
+On Sun, Dec 01, 2024 at 07:42:36AM -0700, Simon Glass wrote:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- net/lwip/dns.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Some of the boards have developed problems since the last passing run.
+>
+> Disable these while diagnosis is ongoing.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/net/lwip/dns.c b/net/lwip/dns.c
-index 4b937feaee1..1de63c9998b 100644
---- a/net/lwip/dns.c
-+++ b/net/lwip/dns.c
-@@ -56,7 +56,7 @@ static int dns_loop(struct udevice *udev, const char *name, const char *var)
- 
- 	netif = net_lwip_new_netif(udev);
- 	if (!netif)
--		return -1;
-+		return CMD_RET_FAILURE;
- 
- 	dns_init();
- 
+I'd rather not merge this since we don't need to pass or run this stage
+by default.
+
 -- 
-2.45.2
+Tom
 
+Applied to ci/master, thanks!
