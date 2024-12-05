@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A00BE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81D0FE77178
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:14:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82393892C6;
-	Thu,  5 Dec 2024 18:12:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CC0B8760C;
+	Thu,  5 Dec 2024 18:14:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k5M4RqHl";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z3nSAuKi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD8E89405; Thu,  5 Dec 2024 18:12:08 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 1B2E488E35; Thu,  5 Dec 2024 18:14:49 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A0DD892C6
- for <u-boot+nodisclaimer@lists.denx.de>; Thu,  5 Dec 2024 18:12:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A68B87042
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu,  5 Dec 2024 18:14:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7fd23d9160dso181412a12.2
- for <u-boot+nodisclaimer@lists.denx.de>; Thu, 05 Dec 2024 09:12:06 -0800 (PST)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2eed82ca5b4so1042539a91.2
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 05 Dec 2024 09:14:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733418724; x=1734023524; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733418885; x=1734023685; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vTiuCccWybKS09VDDj+6SmzjRXT4OE9rrAiVg7miLv8=;
- b=k5M4RqHln+pc1eK74q8z7BrqioTAPTygqA01PqxmJj8qwe+L23YgPc8FQjlU/fUz5z
- fX3TB1XzmlWli4BSfdrqO9HACURfXHnmRe5FTHZLc87kVjXNHIPmTqfTtLGw16/bD9cz
- tOJi9SSuLDZhpWGQZgLKi3EskX0S79xKxPCHOIuwVfiPR/8//AxckL9323i51cK4gcwx
- W8sp3pKMWAXfq7d15lyO7wh0sq5SewZkWxKom8mQBQ4xuNVfgpEPPGw13aP3pSRVArRK
- BHt84/u1dScQh7nMMzuUf6/uH4yr2NjCg0BSIdOYusZ6DoTxjvEnEhkSnJg9UOA0sZj1
- aTmA==
+ bh=Vc1UiEHVA9HFsrkI4+iAdb8714z9QtbOBjSist+ALiI=;
+ b=z3nSAuKi1dN7/IgWQvuxYe6Dg6v7eThrRyVL6zTNQFRl7GLlWMwFqDDAZXifGLH9WE
+ MXGC8FDXGnpQhh7Bso5ZDobgfFP4EWfw33dRN0owLA8PUbSTQgZVD3dGtbJkxXt2PjzH
+ A5RLVyuxUt7N0kn9wAsV8+bjqNZU4DF85+IAKF848ikR1FQHnhNOc1VCca/NNttUMXe4
+ 89uih02kP++8kCI0Y9G0kdxP/l39kCEoPG37tzzGUuUzha9lv8J0cq3gv/PFCBs+uD6T
+ EWjDNUFciiLaeSNj203IWKLPFa8d6CkW9yXm7I69Bbo2bqSIp7CFo+cQJvrf2O5kKDKh
+ 9bmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733418724; x=1734023524;
+ d=1e100.net; s=20230601; t=1733418885; x=1734023685;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vTiuCccWybKS09VDDj+6SmzjRXT4OE9rrAiVg7miLv8=;
- b=pNtMeNvZxrN6xSu9LWLiiH7jH//RfoDxtaDaMrc9NnFaicAuPp8k/7Kt5gRCwUPoef
- qlkdAiczcAWtgOfk6fN9w3ZqbxInptVAQLvPnJYjXtlJv8NU1pX5rojpGn2DyYYLYN4G
- 5wBQM9NHuy8QyJuU/h0Z4zrGQlr1CHZ8FPS60BRjuaB0jWFE+rPsQHaa35QeNJSru+D9
- mglv/b6BhznHOA1FinQLqWGd6/RZj2B2aoOkKEy9BlxHySWRQt6M1yrxxo5x14x/fJlY
- azck2wKqSwc1JOIaqCfW2K0byKSM1+lW70zlI++zdKEwaCxVvsPyMkgYdfUvI4MvM5xD
- dOxA==
+ bh=Vc1UiEHVA9HFsrkI4+iAdb8714z9QtbOBjSist+ALiI=;
+ b=LoX7pl6Yly1C+lWS8nBL7Mt1vi++Vt1JHlRLtLnJBmRAZRH7dgXOyIcJukprKCX0eb
+ nZg3CCCxpIjGiygqAcjx6KuzJL+ZDjuf51c9U9DfkkctW2esFRa90EpFHZbyoedO3+uP
+ txwowZ0NiE3oP7DzHz1yAsPOkwV6tKdJxUZso9xMBu1UN7J7V3MKVO3GYPw323BYTUT5
+ zAfJuyBmBjGsMrEoQqKDWvPXjlyTEfT751/yFVmxkEyVNPBjQt3p1pIK3RZokC5W1VgJ
+ nIRlWaT+Vleaj2eFISA2AMZJquhfAzs8LpEiqhCEbyBr2fJptA4bVZ+IvGA02L45eKuX
+ RRJQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVZk6GRilq6oqYEsy/GsSgj4+FrMS9Orik4hNyKxnA6H1PVDJ9cx0hQzsoeAt/OhjkN3GG+yN8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRqD+buV56RmFUkiaiykXYVme/V8BhPrjF5T+Gli3dYu06O0y7
- EFPu/OGj2Y9bsdgBW6OwzabTGU7VOdhEG9aRM9KNcHExAFt9raUfm4s7VUKU5hVMX5P/Q6j3vb/
- 0k/CbaEZLrb2CUmGWbfpXffKlppW9qGV2C3/PozJvPFmQMogXaPo=
-X-Gm-Gg: ASbGncsNnyzgADuKDN5LdkaxsQYEaqMUeStohYJwCJzijC5PuINgpqY3obwWNNCQtzU
- T7xqxDF3Dcl6v1taQjJH16lsSg9AqhLn6HmWwC7m4hd17aA4Xov31zZnyj3co21xb
-X-Google-Smtp-Source: AGHT+IG9OPY79E2ktUFKtG1v0gmbR3Lyx9qVJCclk+4KRNVkDm/JVMI9Efg54z/AeL5FD1ATcz5j95D0hbSiUjwBN4k=
-X-Received: by 2002:a17:90b:47:b0:2ee:8ea0:6b9c with SMTP id
- 98e67ed59e1d1-2ef011fbab1mr19181628a91.12.1733418724621; Thu, 05 Dec 2024
- 09:12:04 -0800 (PST)
+ AJvYcCUXJ10k8Cn7h6Uu0TPfN8z9GSG3llserJ6UJo0wmr3XcBQxYAm53RmBENbVQkDAH6FtHWGCkDY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzEnx7Qla0IOTAGcMWQH9mEHdW+m+UXsrEMiHXKR/P0hUPi35MP
+ OVzTZ4R+ax6JxjnN37CdOI4idDNIdOjRq2QmSEcmkZ3wxblOn+94dXIks6mNhr0sKi7WqczwMEh
+ SJseP9JbHS/uRCFmGZuQFgVXh+F73z1vwIIl3NA==
+X-Gm-Gg: ASbGncugkA/3vVxgrGX/WPpfwvrnVKCJGCGcwqYz86tCJ9ik+2PhKD90NkmabUIFBRx
+ 288O3sstT0gX0Hez8iRXcI0HlYtiv3H1zhc0DAqaBfQjmpYgIbZp5Ek1B7C8lVx+Q
+X-Google-Smtp-Source: AGHT+IG4oAMSWU0bGGkuNTq8RVbPfZ4eWLXryuPZ3TN+Yvzlb8/PQ4TXsMM3c3bvOCruznqgqZ2M8CRSrif87z1y458=
+X-Received: by 2002:a17:90b:3ecb:b0:2ee:863e:9fff with SMTP id
+ 98e67ed59e1d1-2ef011fc655mr17446673a91.10.1733418880550; Thu, 05 Dec 2024
+ 09:14:40 -0800 (PST)
 MIME-Version: 1.0
 References: <20241204175437.185449-1-philippe.reynes@softathome.com>
- <20241204175437.185449-3-philippe.reynes@softathome.com>
-In-Reply-To: <20241204175437.185449-3-philippe.reynes@softathome.com>
+ <20241204175437.185449-4-philippe.reynes@softathome.com>
+In-Reply-To: <20241204175437.185449-4-philippe.reynes@softathome.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 5 Dec 2024 12:11:53 -0500
-Message-ID: <CAEfUkU+peqy0T9mhA++xhrm+6x-_pogkLr_DE2C-yb6QiZkRUw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] lib: sha256: add feature sha256_hmac
+Date: Thu, 5 Dec 2024 12:14:29 -0500
+Message-ID: <CAEfUkUJKCVAOS_SjTjQNKhxPqLhUr5AjryJ9krzKWbTZG=LX8A@mail.gmail.com>
+Subject: Re: [PATCH v2 3/5] test: lib: add test for sha256_hamc
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
  u-boot+nodisclaimer@lists.denx.de
@@ -94,94 +94,150 @@ X-Virus-Status: Clean
 
 Hi Philippe,
 
+Typo  "sha256_hamc" in the subject line.
+
 On Wed, 4 Dec 2024 at 12:54, Philippe Reynes <philippe.reynes@softathome.com>
 wrote:
 
-> Adds the support of the hmac based on sha256.
-> This implementation is based on rfc2104.
+> Adds a test for the function sha256_hmac
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
->  include/u-boot/sha256.h |  4 ++++
->  lib/mbedtls/sha256.c    | 38 ++++++++++++++++++++++++++++++++++++++
->  2 files changed, 42 insertions(+)
+>  test/lib/Makefile           |   1 +
+>  test/lib/test_sha256_hmac.c | 108 ++++++++++++++++++++++++++++++++++++
+>  2 files changed, 109 insertions(+)
+>  create mode 100644 test/lib/test_sha256_hmac.c
 >
-> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-> index b58d5b58d39..77dbcd4553a 100644
-> --- a/include/u-boot/sha256.h
-> +++ b/include/u-boot/sha256.h
-> @@ -44,4 +44,8 @@ void sha256_finish(sha256_context * ctx, uint8_t
-> digest[SHA256_SUM_LEN]);
->  void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
->                 unsigned char *output, unsigned int chunk_sz);
->
-> +void sha256_hmac(const unsigned char *key, int keylen,
-> +                const unsigned char *input, unsigned int ilen,
-> +                unsigned char *output);
+> diff --git a/test/lib/Makefile b/test/lib/Makefile
+> index f516d001747..5aad81d5a8a 100644
+> --- a/test/lib/Makefile
+> +++ b/test/lib/Makefile
+> @@ -24,6 +24,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
+>  obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+>  obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+>  obj-$(CONFIG_AES) += test_aes.o
+> +obj-$(CONFIG_SHA256_MBEDTLS) += test_sha256_hmac.o
+>  obj-$(CONFIG_GETOPT) += getopt.o
+>  obj-$(CONFIG_CRC8) += test_crc8.o
+>  obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
+> diff --git a/test/lib/test_sha256_hmac.c b/test/lib/test_sha256_hmac.c
+> new file mode 100644
+> index 00000000000..473922bd9b0
+> --- /dev/null
+> +++ b/test/lib/test_sha256_hmac.c
+> @@ -0,0 +1,108 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
+> + *
+> + * Unit tests for sha256_hmac functions
+> + */
 > +
->
-Shall we have an inline function for the case if mbedtls is not enabled?
-
-
->  #endif /* _SHA256_H */
-> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
-> index 24aa58fa674..1b9fc1a8503 100644
-> --- a/lib/mbedtls/sha256.c
-> +++ b/lib/mbedtls/sha256.c
-> @@ -8,6 +8,7 @@
->  #ifndef USE_HOSTCC
->  #include <cyclic.h>
->  #endif /* USE_HOSTCC */
-> +#include <string.h>
->  #include <u-boot/sha256.h>
->
->  const u8 sha256_der_prefix[SHA256_DER_LEN] = {
-> @@ -60,3 +61,40 @@ void sha256_csum_wd(const unsigned char *input,
-> unsigned int ilen,
->
->         sha256_finish(&ctx, output);
->  }
+> +#include <command.h>
+> +#include <test/lib.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +#include <u-boot/sha256.h>
 > +
-> +void sha256_hmac(const unsigned char *key, int keylen,
-> +                const unsigned char *input, unsigned int ilen,
-> +                unsigned char *output)
+> +struct test_sha256_hmac_s {
+> +       unsigned char *key;
+> +       int keylen;
+> +       unsigned char *input;
+> +       int ilen;
+> +       unsigned char *expected;
+> +};
+> +
+> +/*
+> + * data comes from:
+> + * https://datatracker.ietf.org/doc/html/rfc4231
+> + */
+> +static unsigned char key_test1[] = {
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
+> +
+> +static unsigned char input_test1[] = {
+> +       0x48, 0x69, 0x20, 0x54, 0x68, 0x65, 0x72, 0x65 };
+> +
+> +static unsigned char expected_test1[] = {
+> +       0xb0, 0x34, 0x4c, 0x61, 0xd8, 0xdb, 0x38, 0x53,
+> +       0x5c, 0xa8, 0xaf, 0xce, 0xaf, 0x0b, 0xf1, 0x2b,
+> +       0x88, 0x1d, 0xc2, 0x00, 0xc9, 0x83, 0x3d, 0xa7,
+> +       0x26, 0xe9, 0x37, 0x6c, 0x2e, 0x32, 0xcf, 0xf7 };
+> +
+> +static unsigned char key_test2[] = { 0x4a, 0x65, 0x66, 0x65 };
+> +
+> +static unsigned char input_test2[] = {
+> +       0x77, 0x68, 0x61, 0x74, 0x20, 0x64, 0x6f, 0x20,
+> +       0x79, 0x61, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20,
+> +       0x66, 0x6f, 0x72, 0x20, 0x6e, 0x6f, 0x74, 0x68,
+> +       0x69, 0x6e, 0x67, 0x3f };
+> +
+> +static unsigned char expected_test2[] = {
+> +       0x5b, 0xdc, 0xc1, 0x46, 0xbf, 0x60, 0x75, 0x4e,
+> +       0x6a, 0x04, 0x24, 0x26, 0x08, 0x95, 0x75, 0xc7,
+> +       0x5a, 0x00, 0x3f, 0x08, 0x9d, 0x27, 0x39, 0x83,
+> +       0x9d, 0xec, 0x58, 0xb9, 0x64, 0xec, 0x38, 0x43 };
+> +
+> +static struct test_sha256_hmac_s test_sha256_hmac[] = {
+> +       {
+> +               .key = key_test1,
+> +               .keylen = sizeof(key_test1),
+> +               .input = input_test1,
+> +               .ilen = sizeof(input_test1),
+> +               .expected = expected_test1,
+> +       },
+> +       {
+> +               .key = key_test2,
+> +               .keylen = sizeof(key_test2),
+> +               .input = input_test2,
+> +               .ilen = sizeof(input_test2),
+> +               .expected = expected_test2,
+> +       },
+> +};
+> +
+> +static int _lib_test_sha256_hmac_run(struct unit_test_state *uts,
+> +                                    unsigned char *key, int keylen,
+> +                                    unsigned char *input, int ilen,
+> +                                    unsigned char *expected)
 > +{
-> +       int i;
-> +       sha256_context ctx;
-> +       unsigned char k_ipad[64];
-> +       unsigned char k_opad[64];
-> +       unsigned char tmpbuf[32];
+> +       unsigned char output[32];
 > +
-> +       memset(k_ipad, 0x36, 64);
-> +       memset(k_opad, 0x5C, 64);
+> +       sha256_hmac(key, keylen, input, ilen, output);
+> +       ut_asserteq_mem(expected, output, 32);
 > +
-> +       for (i = 0; i < keylen; i++) {
-> +               if (i >= 64)
+> +       return 0;
+> +}
+> +
+> +static int lib_test_sha256_hmac_run(struct unit_test_state *uts,
+> +                                   struct test_sha256_hmac_s *test)
+> +{
+> +       unsigned char *key = test->key;
+> +       int keylen = test->keylen;
+> +       unsigned char *input = test->input;
+> +       int ilen = test->ilen;
+> +       unsigned char *expected = test->expected;
+> +
+> +       return _lib_test_sha256_hmac_run(uts, key, keylen, input, ilen,
+> expected);
+> +}
+> +
+> +static int lib_test_sha256_hmac(struct unit_test_state *uts)
+> +{
+> +       int i, ret = 0;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(test_sha256_hmac); i++) {
+> +               ret = lib_test_sha256_hmac_run(uts, &test_sha256_hmac[i]);
+> +               if (ret)
 > +                       break;
-> +
-> +               k_ipad[i] ^= key[i];
-> +               k_opad[i] ^= key[i];
 > +       }
 > +
-> +       sha256_starts(&ctx);
-> +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
-> +       sha256_update(&ctx, input, ilen);
-> +       sha256_finish(&ctx, tmpbuf);
-> +
-> +       sha256_starts(&ctx);
-> +       sha256_update(&ctx, k_opad, sizeof(k_opad));
-> +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
-> +       sha256_finish(&ctx, output);
-> +
-> +       memset(k_ipad, 0, sizeof(k_ipad));
-> +       memset(k_opad, 0, sizeof(k_opad));
-> +       memset(tmpbuf, 0, sizeof(tmpbuf));
-> +       memset(&ctx, 0, sizeof(sha256_context));
+> +       return ret;
 > +}
+> +
+> +LIB_TEST(lib_test_sha256_hmac, 0);
+> --
+> 2.25.1
 >
-
-This function seems to be generic and should be located in lib instead of
-lib/mbedtls.
 
 Regards,
 Raymond
