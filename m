@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6643EE77170
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:57:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD7D5E77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 17:57:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34EBA89522;
-	Thu,  5 Dec 2024 18:57:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C12189521;
+	Thu,  5 Dec 2024 18:57:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MWs1OHLg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ilu+S066";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BF8889507; Thu,  5 Dec 2024 18:57:05 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id C7CFF8950A; Thu,  5 Dec 2024 18:57:08 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39A158950C
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:57:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 684DD8950B
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 18:57:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa55da18f89so172029066b.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:57:02 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aa636f6f0efso12261766b.0
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 09:57:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733421422; x=1734026222; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733421426; x=1734026226; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r5cQpoTor0NSZr/ObViTok5f5NqSHNIffKHlB1b1MSk=;
- b=MWs1OHLgbRmdS5YqEKS6i0NIxpnX4bKKxHiO39rixLsdVp446wb7ke6RVFHeAnylBp
- Q+f0SCTYoMtjWcMB9sHPH1zCghq08WEBZI432FELa6D9dbLum9tPp9BXrx8oVegUHfnf
- pe6QT89KI8jOl5pZ3xT4LRN/YWActS54xfMTY=
+ bh=2njd+BGevlmW0sc8joePL51eK8snEuUUyu0ygMNW5PQ=;
+ b=ilu+S0666gPfN93vVh3JpnsQxtHSoROKVzVaAX6dZdobvcX9N+u3HDbqRUCMJlB7WS
+ PpNaUo1dQSkcERUFcy6PfuhDuSs/ZK0K4dQv0f1yZ5EwgCDvz11XHXWFfURthvzqwDiD
+ oYhPQYZrJ+CDrU40dL6k8FSDFghyTTYdwLfgg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733421422; x=1734026222;
+ d=1e100.net; s=20230601; t=1733421426; x=1734026226;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r5cQpoTor0NSZr/ObViTok5f5NqSHNIffKHlB1b1MSk=;
- b=Yt2CEIGENK0WLSt9LQXsqeGuVlgIU2sWZthC6P/oNxyRkEH+qTCdctKefMYYP/bdA/
- sfoNf0qxbHuHoSQXyysmVjR0nFjq0e7gB9LHBb6JLLJRTM+8Q3xvwRTu9dffwjzpymB+
- bLOXf1+fNOGOHMSaUxPto+rKK1b6wzVd3HeGQlANHt5rQVeHSxoy7AD8odh0+//JauwZ
- TMGx+Qa/B8uR2cxcljRcHfLrvMtp20UlkUok649a9b3Yyw3Mn8ZPc23UpmQv3PHAH2eT
- imu9I54b++bXGVHUtx+XNQUjDQdKPQm/SkHq9sJ/ePdZ5OedeWiXpmfvDEuf83PxnpJ4
- NwKg==
+ bh=2njd+BGevlmW0sc8joePL51eK8snEuUUyu0ygMNW5PQ=;
+ b=dIKugklPyni2eHArjTBKAzfV12wiMbH9pvXpc1YFmcnD9IVbLP5yFo2VuJsMLaz13K
+ BZZP8YnGqnjbAzoMH0tpiJ2++raG0ETxD/xHpMw35GAy1hptfNFlSx0/d0IzR/LM3cjL
+ /gSGyTa0D2Zz8MFhsEjq4a2jUwOgy7unpImJ1I5Dp6rL9b+dH+5PfVxhGB1BAblTjlcO
+ MQ5oOMvGgUbK/AsrtvYGxuIRq4kOTp5Y1tDPU9KAGyyBVmk050OQZKu6DsP8D0YBNW7g
+ aLuJ1b1efZpHvmQQFX+LD8u76ThVtSzjQl0q3QTEnJZ4MRLxPSVX7UVBhgcp1ON6iZ/y
+ UlJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWR6W3X0ZW6T4nsY4M1XhOp+A1WBiv1HvwYEL+2BuD8D71IbKWBKrT8yd2DNCoHP0uZziC7j/E=@lists.denx.de
-X-Gm-Message-State: AOJu0YwWyivxIY+94dUNFNp3B+RNZ4qLIxv65MEEkYJIG1hWOgEc+4yu
- Co1EyBq9EvSc9xOMsGqmhDIvLGkEnFD2zIPqkkAiPpt8s1WQ0ikaTFjKfEDbsvvIYUp+bxhw7J6
- bTKzPNnqk1Qp5eYo8CgZ2wLUywpuUKXv6RNpq
-X-Gm-Gg: ASbGncuerQzdG0p7hUroZgGpS0JTbMpC6p/RrtlX7oeqszo5vnZPJ/IvGqLAB8wB1hS
- o6/RaIogzQ1+15DefHBh6tBfhKv2gFMSL
-X-Google-Smtp-Source: AGHT+IFNtJpF9KWCD1TRyxjZpRqSlUWyJd6UxQ1A+vuqhKhQoo2zGTJYdqaoMofiR+qK50CnUL1NjZz0hX7adid2dfo=
-X-Received: by 2002:a17:907:a08:b0:a9a:835b:fc8e with SMTP id
- a640c23a62f3a-aa5f7f3c3dfmr1107180166b.54.1733421421559; Thu, 05 Dec 2024
- 09:57:01 -0800 (PST)
+ AJvYcCXms3CY2bxxjEbU6Lt39r6hc+NUA8RoP/UYpZ+dB7HEBbv1XSLP6ZdC+qOsAQTscO8L8TwylRo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4jTrbyYFqkPYkJSHKZf110+6DOUZ59xFMDOX1y/onfM4c/JZi
+ RRNdH/wIbe2zy9bVYktpfnLyEcVFjkHgQLARKLsEMkFNRJUxp9p/cm1WJdJQQY6A95lTZpQqk0f
+ p+smY3qknXRfnZg/ZXlHEpuVadH9vjHiV/K7p
+X-Gm-Gg: ASbGncvTnlBDNiH+1eySRbTGJP2cBxm1KF4A6ovHzHpAmCURPAikONDWlQvNnZdU3y4
+ uwC9R58xYziipwAwA8gQfxx1c1HCv3SCv
+X-Google-Smtp-Source: AGHT+IGZ+Cx1gBdXatlJOnCSFvGK4zIziXsFCeGHeZ2+0a7qcMi1m3f7LUdXoezWubKUrrE4AFCQP71rWBS/5BlU8gI=
+X-Received: by 2002:a17:906:310a:b0:aa6:30e1:d84d with SMTP id
+ a640c23a62f3a-aa630e1e4f1mr110802866b.41.1733421425886; Thu, 05 Dec 2024
+ 09:57:05 -0800 (PST)
 MIME-Version: 1.0
 References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
- <20241205-ge-mainline-display-support-v2-1-4683bb4388dc@bootlin.com>
-In-Reply-To: <20241205-ge-mainline-display-support-v2-1-4683bb4388dc@bootlin.com>
+ <20241205-ge-mainline-display-support-v2-3-4683bb4388dc@bootlin.com>
+In-Reply-To: <20241205-ge-mainline-display-support-v2-3-4683bb4388dc@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 5 Dec 2024 10:56:48 -0700
-Message-ID: <CAFLszThc2fKdDdcmZcaiQmJ3dooNepbcCmJrbDhmvNG8CmNxQg@mail.gmail.com>
-Subject: Re: [PATCH v2 01/13] dm: doc: Fix example
+Date: Thu, 5 Dec 2024 10:56:50 -0700
+Message-ID: <CAFLszTiqm=bfpb5N_Q9r7Q49nHTR03vKSzP1vwoGfMgewQpw2g@mail.gmail.com>
+Subject: Re: [PATCH v2 03/13] sandbox: Add a fake display controller and link
+ it to the panel
 To: Miquel Raynal <miquel.raynal@bootlin.com>
 Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
@@ -94,13 +95,18 @@ X-Virus-Status: Clean
 
 On Thu, 5 Dec 2024 at 06:54, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 >
-> `.priv_data_size` does not exist. I believe the actual structure member
-> was supposed to be `.priv_auto`.
+> Use a graph endpoint representation for that in order to test a new core
+> DM helper going through these properties.
+>
+> Display pipelines typically include graph endpoints, but the helper is
+> generic and would work with any device type. We do not bother with
+> creating a display controller dummy driver but instead use the default
+> testing placeholder compatible.
 >
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 > ---
->  doc/develop/driver-model/design.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/sandbox/dts/test.dts | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
