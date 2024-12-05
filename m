@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEEB8E7716C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DDCE77170
+	for <u-boot@archiver.kernel.org>; Thu,  5 Dec 2024 09:26:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BC15894B3;
-	Thu,  5 Dec 2024 10:25:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0FF8893F6;
+	Thu,  5 Dec 2024 10:25:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="aNyCYJw5";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="Sjalfjy+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71AD1894CC; Thu,  5 Dec 2024 10:25:05 +0100 (CET)
+ id 2C0EC893F7; Thu,  5 Dec 2024 10:25:10 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 034BB89499
- for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:25:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF1BC893F6
+ for <u-boot@lists.denx.de>; Thu,  5 Dec 2024 10:25:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1733390703; x=1764926703;
+ t=1733390708; x=1764926708;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=DE6lgqPvm01IWd1xDpucr8PnqoMQ7iAcnt9EXXLmgL8=;
- b=aNyCYJw5zz2A6Nxi7hXWTlb7JY1r5u+aeG/v+xsgMWW1CZO5rE2jXMht
- jcpoPwA5/zvj/nwlOWCzGtIV9aY9FtTYGwEe/Iih9+i95YYobl9BXYb8/
- KVPxLY//P0xJPagAJJ8KWEZYxi59DqbU8T0i7DinysA0TjhSqQtsJ9hJm
- 5e+1evaiFilAX+mSiPmUOw7MfXqTFLnahGXkgjGuuTvNRgJR+6D8ggDlE
- p8eH1Dz+9ur0Jv4eVLH9VcFNZqreRGBO7Vhn0/PoWgFmOEAYQ+lIcWhGG
- 8ua474vn7YoWn08OlIy5Rr1MkOK6ZHU4pJkBCYNblD89glMcwhkw4r81n A==;
-X-CSE-ConnectionGUID: YPEqZPoySqm3iW2c6G98GA==
-X-CSE-MsgGUID: r2++VqxRS7eN6gB2SM7UoA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610414"
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610414"
+ bh=ItxIl1cgdEkODNGQk2jMBUDG7XpgBleEhDNocV/busI=;
+ b=Sjalfjy+qG742m08X2oTndf/0vyetzy8tzosHZFF6M1tB+f2jfFMx8mj
+ CT8Pp+3Z0RxmSv3aoNSgVr1Mi07bQW/YmAwZ7sTgVbrLaZlsAzchLvUDU
+ PNbqbDqGGt4HYRB//Z4Mv3yKe82nn0sGb4QY1PU8pdNUhAS0A8WMtLzGc
+ TqNDZgQqwCDL6uM9Z5FiE+onpxM/3bQcs6t4eKBOt2tyZfcmrgEHPWKmE
+ 1j6nWJOZ8eJle8N8lYpg1nEfoJpKJlJF5jTSp59ZJnf4hOY9kTOBpPS5i
+ 3ULGdyV/WvdI1UdtT+QRYwtNwwgjuNYnDRe7tZc60HmaNnoXkXXfoVB0s A==;
+X-CSE-ConnectionGUID: JK8qBKsTQqK5KcIIlP5nrw==
+X-CSE-MsgGUID: zcmLpwXYTcmZjB5jlT4BBA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11276"; a="33610424"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="33610424"
 Received: from orviesa006.jf.intel.com ([10.64.159.146])
  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Dec 2024 01:25:02 -0800
-X-CSE-ConnectionGUID: GXzT2iBSRTO8oqWSzNHteQ==
-X-CSE-MsgGUID: SVfmldgGQKWwTcfSD3L+YQ==
+ 05 Dec 2024 01:25:07 -0800
+X-CSE-ConnectionGUID: 7FRSzwCBSDesYcpEs2oSzw==
+X-CSE-MsgGUID: BlhfymURSyyYHD2cXAV0pg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122143"
+X-IronPort-AV: E=Sophos;i="6.12,209,1728975600"; d="scan'208";a="94122169"
 Received: from apgcp0d551111.png.altera.com ([10.244.77.49])
- by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:24:58 -0800
+ by orviesa006.jf.intel.com with ESMTP; 05 Dec 2024 01:25:03 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v2 18/19] drivers: mtd: nand: Kconfig: Remove
- SYS_NAND_BLOCK_SIZE dependency
-Date: Thu,  5 Dec 2024 17:23:14 +0800
-Message-Id: <20241205092315.25060-19-dinesh.maniyam@intel.com>
+Subject: [resend v2 19/19] drivers: mtd: nand: Kconfig: Enabled self-init for
+ cdns-nand SPL
+Date: Thu,  5 Dec 2024 17:23:15 +0800
+Message-Id: <20241205092315.25060-20-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20241205092315.25060-1-dinesh.maniyam@intel.com>
 References: <20241205092315.25060-1-dinesh.maniyam@intel.com>
@@ -95,9 +95,7 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Remove SYS_NAND_BLOCK_SIZE dependency for cadence NAND.
-This config is not needed as the driver will send command read
-parameter page to identify the NAND block size during initialization.
+Enable SPL_SYS_NAND_SELF_INIT for Cadence NAND SPL.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
@@ -106,22 +104,21 @@ v2:
 - remove the "this patch is to" commit phrases
 ---
 ---
- drivers/mtd/nand/raw/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mtd/nand/raw/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index a9515c7b74..90f8f4b688 100644
+index 90f8f4b688..32444c2468 100644
 --- a/drivers/mtd/nand/raw/Kconfig
 +++ b/drivers/mtd/nand/raw/Kconfig
-@@ -680,7 +680,7 @@ config SYS_NAND_BLOCK_SIZE
- 	depends on ARCH_SUNXI || SPL_NAND_SUPPORT || TPL_NAND_SUPPORT || \
- 		MVEBU_SPL_BOOT_DEVICE_NAND
- 	depends on !NAND_MXS && !NAND_DENALI_DT && !NAND_LPC32XX_MLC && \
--		!NAND_FSL_IFC && !NAND_MT7621
-+		!NAND_FSL_IFC && !NAND_MT7621 && !NAND_CADENCE
+@@ -211,6 +211,7 @@ config NAND_CADENCE
+ 	bool "Support Cadence NAND controller as a DT device"
+ 	depends on OF_CONTROL && DM_MTD
+ 	select SYS_NAND_SELF_INIT
++	select SPL_SYS_NAND_SELF_INIT
+ 	imply CMD_NAND
  	help
- 	  Number of data bytes in one eraseblock for the NAND chip on the
- 	  board. This is the multiple of NAND_PAGE_SIZE and the number of
+ 	  Enable the driver for NAND flash on platforms using a Cadence NAND
 -- 
 2.19.0
 
