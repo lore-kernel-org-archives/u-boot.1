@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2457CE7716E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94864E77170
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2411989619;
-	Fri,  6 Dec 2024 03:37:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 729D98965E;
+	Fri,  6 Dec 2024 03:37:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CHgqYQQN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jz/HMdVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA0789690; Fri,  6 Dec 2024 03:37:05 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 6D9B0896CC; Fri,  6 Dec 2024 03:37:07 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8327689633
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:37:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A98C8965E
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:37:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-843df3c4390so50367039f.3
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:37:02 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3a7a46ca756so5313435ab.0
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733452620; x=1734057420; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733452623; x=1734057423; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OSy+fxsRG0mtEIT0uW+SL5I6nQiQ4mlB3+Rx4El2O3M=;
- b=CHgqYQQNTwDNLUYWKe9ClpkVI8xmJVrymtj4PvtzYihsSC8zLUcQ123Z04e42BfSy9
- hxNvkgTr2ccjHWkoYSSxHe+43NrgyrW6Sk8Dv/hkoBhxzWM1vAGUN76yvVmpSAr1RhhK
- /UbevbznLFLZZ2w8zpYQUK8M+LYuRhXBf3QXs=
+ bh=Ze9Dvt2bKqftKJfhqMb0dV2ed/94BZjckOFVhk80tm4=;
+ b=jz/HMdVA3sM14Nttzy/l5GCVQAsI1+w4Lt0D72yYi2cKG3dVK61T8mxE9wYEVc2ImR
+ Xh/dFd8tsp3HXMYc8fyozDeDsaKfyyRCP2bKLTtOghqH4oY8wlFyJc/sspQ5abfDudyW
+ mUmWApgAqL2puxy15nI9SjK+msMAKr1GpIxz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733452620; x=1734057420;
+ d=1e100.net; s=20230601; t=1733452623; x=1734057423;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OSy+fxsRG0mtEIT0uW+SL5I6nQiQ4mlB3+Rx4El2O3M=;
- b=uXEzfWFRvhkTj8VlxgnVVBR1jkvj1oGDuzWKttNqsORETPw6cLc8cNoPd2svlbiGAX
- DO30YmZf2CaV3RakkYyI1lw5BKaDk0mJ86Ilso/A1OqqGTluVlhS3PbegFS6bWiapFLM
- Xmknx5BEPdMIpWoZzuIclrxV4X/85kC9+jh2NlHj5Bt0Z0LXdqlGO0gS7iOszNSaGWh/
- fGA5oKnrqwq16oAeTinxLybW/EoaWjZNoeebsaNoigrTzWyRA1Xlz07VOU9kzkol8H7x
- KuhCdQtMSugP930EorbL1GjdUws4404jndJoz1mSl08a4HVnnlBDRnHRCXs8xQEii8Ot
- wQ6A==
-X-Gm-Message-State: AOJu0YyOV1Tp0FuGdkpcRk5yX30Jl0x1UcHHQ7bTwi12MNxB87uKuFxo
- W3fcRMC2V4M2p/zevFjS8DAKqAxnJheX15gC9iwAtVl3uDD7f3bzLXShzGojJdUrytjgS8cf1Ww
+ bh=Ze9Dvt2bKqftKJfhqMb0dV2ed/94BZjckOFVhk80tm4=;
+ b=mBx15zUwtuIiehR0TvxOA0Q1vWVOGfpSKyWagoMTKOXi+/799Y5RvxcGBnOCufOhE8
+ rUrniMHoYoZXt22JS1WEAaWpU0Zm4MMIGceo7D08Dvwc6WxSMUMMMytJxTAWHoseNCRv
+ 0/tsfD+fMozaKS4WP5yUWmvryhQKsYbVuCL0IiFWBBbXYa4/nQXifacjzGE6eZYpRe+m
+ FLcwso01LfSAmIEWJJlr7Vl1YZtkbmkvnAZZBAdTA2ayoW4GFa3XdmJgymvoU2Dy/sEK
+ avyERgrvTFvSqHyg2v7HtMny3Vou74IgK+ZZeIMTTbjjmvECoKPBTHiw41l2RnnLyc76
+ A2cA==
+X-Gm-Message-State: AOJu0YzwYmVS++JtAnFJxCUwY+dL82gaeAS9Rox2LWqg08d/krGKiUL3
+ qO6pz2EFfk7lAishJ/eXrEZvKhPm3LBZaZE75LTcj00TODycF4HYAhYiCL5mlmSydAY4ksjU/Uc
  =
-X-Gm-Gg: ASbGnctUAUs+9yFpqnNXKzQKPOo43kb2tnnqO2inFN5N5deEncicqbHXz4Bj4K5R1SB
- Ad/QyjVL6sWOU7NvZhx//wyyyi6+E0j5X8gbGk/mv0IigOZZcf7VHKskqc9u6cWUwJAEsk/2bnc
- Ie4BfmB+cbM7A4Q/eBlvf0I1646a5+ufI4HQhmJ1IhEY/+U9x100l8FL+wiV4+3q+IMh21KyvVA
- mNpHDHzhojepjKWSfUAPBZOGIpVDftSEumxb79GvRDANLkxytEQc7q26x2+sAcCuSDeByfFicWk
- OxxP04ijveE=
-X-Google-Smtp-Source: AGHT+IGNLTaTHyGda/iP/7V1Z2vJEcfBk9jGy7s3JlqMyj8u3GINBrWQOysBiVidzcXwhpvFrh5eww==
-X-Received: by 2002:a05:6602:1610:b0:83a:d039:a721 with SMTP id
- ca18e2360f4ac-8447e24216emr188461839f.8.1733452620355; 
- Thu, 05 Dec 2024 18:37:00 -0800 (PST)
+X-Gm-Gg: ASbGncsaUbu+KpdCR2hSd1ikxf3gCRXV1vOuZvIi2MpPeSsGaHJoAbuiK0DylDCsag6
+ GKGNXplbA5rDAwDe8I6InbcQjIPL0jrqXlWnWJRMMOKYX+3xSFiqHd4JEsaScnopvEO8iCwxNq4
+ H3baXBGAkI8v9Ht3Dh/WeB6VCzYsXSbEpW5ifcjNiXAnAtSDjlt/j1oo9lH67mlIEN4GLPUc6Qg
+ nPuPkLiVyrQi7vaDG/HuyTUj6Oz8Z0uir0jU8o2QWXPsTcvk/bmoeYeJ2o53d6zFBurxHYQ4Xj5
+ 3ZJVHehbPCQ=
+X-Google-Smtp-Source: AGHT+IGHSf0x2NRnxjbV5y0UOJ6LoR42S/Q8J3O+ViVYkg9dFFJHRWFmHysMIRyKcBN0wElAidNJRw==
+X-Received: by 2002:a05:6e02:1a66:b0:3a7:7ee3:10a2 with SMTP id
+ e9e14a558f8ab-3a811e27d9bmr23533645ab.19.1733452623381; 
+ Thu, 05 Dec 2024 18:37:03 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.36.59
+ 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.37.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Dec 2024 18:36:59 -0800 (PST)
+ Thu, 05 Dec 2024 18:37:02 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -73,9 +73,10 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH v3 11/46] boot: Split pxe label_run_boot() into two parts
-Date: Thu,  5 Dec 2024 19:35:50 -0700
-Message-Id: <20241206023626.2456858-12-sjg@chromium.org>
+Subject: [PATCH v3 12/46] boot: Pass just the FDT argument to
+ label_process_fdt()
+Date: Thu,  5 Dec 2024 19:35:51 -0700
+Message-Id: <20241206023626.2456858-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 References: <20241206023626.2456858-1-sjg@chromium.org>
@@ -97,145 +98,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is quite long. Split out the FDT processing into its own
-function.
-
-Add a function comment for the new label_process_fdt() function.
+Since this function only adjusts one element of the bootm command, pass
+just that. This will make it easier to refactor things to remove the
+bootm command.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Rebase on earlier change
-
- boot/pxe_utils.c | 100 ++++++++++++++++++++++++++++-------------------
- 1 file changed, 60 insertions(+), 40 deletions(-)
+ boot/pxe_utils.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index fd1a09225e1..a14b4eb54c2 100644
+index a14b4eb54c2..2ada5c4aaac 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -432,51 +432,37 @@ skip_overlay:
- }
- #endif
- 
--/**
-- * label_run_boot() - Set up the FDT and call the appropriate bootm/z/i command
-+/*
-+ * label_process_fdt() - Process FDT for the label
-  *
+@@ -438,7 +438,7 @@ skip_overlay:
   * @ctx: PXE context
   * @label: Label to process
-- * @kernel_addr: String containing kernel address (cannot be NULL)
-- * @initrd_addr_str: String containing initrd address (NULL if none)
-- * @initrd_filesize: String containing initrd size (only used if
-- *	@initrd_addr_str)
-- * @initrd_str: initrd string to process (only used if @initrd_addr_str)
-- * Return: does not return on success, or returns 0 if the boot command
-- * returned, or -ve error value on error
-+ * @kernel_addr: String containing kernel address
-+ * @bootm_argv: bootm arguments to fill in (this only adjusts @bootm_argv[3])
-+ * Return: 0 if OK, -ENOMEM if out of memory, -ENOENT if FDT file could not be
-+ *	loaded
-+ *
-+ * fdt usage is optional:
-+ * It handles the following scenarios.
-+ *
-+ * Scenario 1: If fdt_addr_r specified and "fdt" or "fdtdir" label is
-+ * defined in pxe file, retrieve fdt blob from server. Pass fdt_addr_r to
-+ * bootm, and adjust argc appropriately.
-+ *
-+ * If retrieve fails and no exact fdt blob is specified in pxe file with
-+ * "fdt" label, try Scenario 2.
-+ *
-+ * Scenario 2: If there is an fdt_addr specified, pass it along to
-+ * bootm, and adjust argc appropriately.
-+ *
-+ * Scenario 3: If there is an fdtcontroladdr specified, pass it along to
-+ * bootm, and adjust argc appropriately, unless the image type is fitImage.
-+ *
-+ * Scenario 4: fdt blob is not available.
+  * @kernel_addr: String containing kernel address
+- * @bootm_argv: bootm arguments to fill in (this only adjusts @bootm_argv[3])
++ * @fdt_argp: bootm argument to fill in, for FDT
+  * Return: 0 if OK, -ENOMEM if out of memory, -ENOENT if FDT file could not be
+  *	loaded
+  *
+@@ -461,13 +461,13 @@ skip_overlay:
+  * Scenario 4: fdt blob is not available.
   */
--static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
--			  char *kernel_addr, char *initrd_addr_str,
--			  char *initrd_filesize, char *initrd_str)
-+static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
-+			     char *kernel_addr, char *bootm_argv[])
+ static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
+-			     char *kernel_addr, char *bootm_argv[])
++			     char *kernel_addr, char **fdt_argp)
  {
--	char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
--	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
--	ulong kernel_addr_r;
--	int bootm_argc = 2;
--	int zboot_argc = 3;
--	void *buf;
--
--	/*
--	 * fdt usage is optional:
--	 * It handles the following scenarios.
--	 *
--	 * Scenario 1: If fdt_addr_r specified and "fdt" or "fdtdir" label is
--	 * defined in pxe file, retrieve fdt blob from server. Pass fdt_addr_r to
--	 * bootm, and adjust argc appropriately.
--	 *
--	 * If retrieve fails and no exact fdt blob is specified in pxe file with
--	 * "fdt" label, try Scenario 2.
--	 *
--	 * Scenario 2: If there is an fdt_addr specified, pass it along to
--	 * bootm, and adjust argc appropriately.
--	 *
--	 * Scenario 3: If there is an fdtcontroladdr specified, pass it along to
--	 * bootm, and adjust argc appropriately, unless the image type is fitImage.
--	 *
--	 * Scenario 4: fdt blob is not available.
--	 */
--	bootm_argv[3] = env_get("fdt_addr_r");
--
  	/* For FIT, the label can be identical to kernel one */
  	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
- 		bootm_argv[3] = kernel_addr;
-@@ -578,6 +564,40 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+-		bootm_argv[3] = kernel_addr;
++		*fdt_argp = kernel_addr;
+ 	/* if fdt label is defined then get fdt from server */
+-	} else if (bootm_argv[3]) {
++	} else if (*fdt_argp) {
+ 		char *fdtfile = NULL;
+ 		char *fdtfilefree = NULL;
+ 
+@@ -538,7 +538,7 @@ static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
+ 
+ 			free(fdtfilefree);
+ 			if (err < 0) {
+-				bootm_argv[3] = NULL;
++				*fdt_argp = NULL;
+ 
+ 				if (label->fdt) {
+ 					printf("Skipping %s for failure retrieving FDT\n",
+@@ -560,7 +560,7 @@ static int label_process_fdt(struct pxe_context *ctx, struct pxe_label *label,
+ 				label_boot_fdtoverlay(ctx, label);
+ #endif
+ 		} else {
+-			bootm_argv[3] = NULL;
++			*fdt_argp = NULL;
  		}
  	}
  
-+	return 0;
-+}
-+
-+/**
-+ * label_run_boot() - Set up the FDT and call the appropriate bootm/z/i command
-+ *
-+ * @ctx: PXE context
-+ * @label: Label to process
-+ * @kernel_addr: String containing kernel address (cannot be NULL)
-+ * @initrd_addr_str: String containing initrd address (NULL if none)
-+ * @initrd_filesize: String containing initrd size (only used if
-+ *	@initrd_addr_str)
-+ * @initrd_str: initrd string to process (only used if @initrd_addr_str)
-+ * Return: does not return on success, or returns 0 if the boot command
-+ * returned, or -ve error value on error
-+ */
-+static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
-+			  char *kernel_addr, char *initrd_addr_str,
-+			  char *initrd_filesize, char *initrd_str)
-+{
-+	char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
-+	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
-+	ulong kernel_addr_r;
-+	int bootm_argc = 2;
-+	int zboot_argc = 3;
-+	void *buf;
-+	int ret;
-+
-+	bootm_argv[3] = env_get("fdt_addr_r");
-+
-+	ret = label_process_fdt(ctx, label, kernel_addr, bootm_argv);
-+	if (ret)
-+		return ret;
-+
- 	bootm_argv[1] = kernel_addr;
- 	zboot_argv[1] = kernel_addr;
+@@ -594,7 +594,7 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+ 
+ 	bootm_argv[3] = env_get("fdt_addr_r");
+ 
+-	ret = label_process_fdt(ctx, label, kernel_addr, bootm_argv);
++	ret = label_process_fdt(ctx, label, kernel_addr, &bootm_argv[3]);
+ 	if (ret)
+ 		return ret;
  
 -- 
 2.34.1
