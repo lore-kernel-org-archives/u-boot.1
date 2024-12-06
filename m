@@ -4,103 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E8BCE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 16:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB278E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 16:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643A489616;
-	Fri,  6 Dec 2024 17:39:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FF4689622;
+	Fri,  6 Dec 2024 17:45:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TrRmE0QO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gaEOYUI9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C817989622; Fri,  6 Dec 2024 17:39:39 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id ACE7B89616; Fri,  6 Dec 2024 17:45:23 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB61888E41
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 17:39:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDB2689622
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 17:45:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46727cc31ecso21697251cf.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 08:39:36 -0800 (PST)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-46686a258f7so28460141cf.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 08:45:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733503176; x=1734107976; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733503520; x=1734108320; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6XwsIsYx+lCjIGoZ9wo3ImEreZ1W5Nu1OSK4u1mpYsQ=;
- b=TrRmE0QOm0M8RmCh7qgwv3BMI4jCASjsqKzRBDVQ4JlRdnFGNvIRPhOcNpPlsQKVzB
- TDwq1i0gftjl9RHhl/6pAjz3fROdd7jPlTgAfyiDjDb9gl7jWf3HUW5PqaIF3LNEBFbC
- Gvu7p1aNiaw/cGcm9cqmWbM6MKgHphT2IW6wo=
+ bh=guq8yUIqHleUOiRGyHV4ThvLD/c6RF+c5INLI3aCNk4=;
+ b=gaEOYUI9EXoHPevK3c1keYDafGBEQlDK6yoGfDujJKo7dZuVP7/66ZkTqDbHQHgqNu
+ lZ0rU5P1a+HhwflHrUVh42xujgNN85Ri8KVqcHLDPwm/6LQi3PaflhfgRb1t6XPJi+Pk
+ PSlynsXucMJFJxZorIa8hJVJCiQUqms1YH7tQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733503176; x=1734107976;
+ d=1e100.net; s=20230601; t=1733503520; x=1734108320;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6XwsIsYx+lCjIGoZ9wo3ImEreZ1W5Nu1OSK4u1mpYsQ=;
- b=iieelAfe2+cP//TJF+xDt3Aow52u52hAPjtKSJhLN0Zs+YXryL6IXvfoslH0F2oSG/
- SnTmPN6zAXkvvN/H7JF7Mt7PupKh1Ki4JpPHgXuphEwKg+41+TAMUwI4sr/HwRvl1RMv
- aB1ZmDZrG8iRQddKs3Z+zJfZYpTZ5ezQwqJgtJi/HLunt64IQ2+d3BCN1EKonkgk/dmw
- BIZ4RF/5Axd4T/KefovjNocKHLGnxPLkq1+KLRNQl7L47JoyknSrhyE1rKVimVUkv0ik
- 51dFhxZ8sbiYIiICPYGdmHxvMlC3VSspfdI/pWLvaHdxkFZI42/Q/Aib1G1EbfGhv4NV
- orFg==
+ bh=guq8yUIqHleUOiRGyHV4ThvLD/c6RF+c5INLI3aCNk4=;
+ b=XTJTZxbmgcymwrIZxVJyUySJ8cp/s6rLxCrFydhTXBeU5TMYQWeefUyHv0R7+3eZDk
+ wQ5VLW20b90tvCc++5Prrjh8l1AGv7bZgJJTF5GJ75owoZWiIAVLcX2BA2ZsJB8OOXYL
+ 0pzV/uI0fuQ1/pDF/DdKogIFRIoURdkB0OSlO3sifOdj6kSuTHC8gVFTqDLlSP42vRK4
+ TkihCeo2IgCq5wpiZT982pODn1coyAniBmq2aljxaogNX/oPC0RI7CpkkguDuo1hDRI2
+ QMmTcWjRPuMXzw9j6wLEkY5ePeI8of64UyIOZLPRoRUTAgEl3cXDI3Rcrx3LsTLOa+eS
+ eyng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMW98raKkekKMFhT9btUrZKccXbGUspgzaOMMR+gCeHFBMGJG8Jul+x3hmCAo7LWLeIUB0ZZY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRtUCTfI4dE0/QDhzeAzna1oVpAWDj1fo5XB+LMrwx/R0Once2
- +ZGDGaS21yOw79zvg7iBj2I8bCy+Y24yYqtcMfF0aLHAScaDNQ3eBxxuVEKdlNM=
-X-Gm-Gg: ASbGncsNXuT2BYtsUlM+CFzOf1hZupAH69K+U0CD7YZi+kdNI9hiLj81Y/9cr7Ka+5v
- myOF/GsOPfd4bLwG5apszTzC9x53KKsV0l6ucoKgJtTJJDGe8xCiYUE76GQ6hpqZ6DKfjKXt/O/
- aydQkVfz0Zz1psMRDO0ZicVV4wqCEUps4tirYxkINJYMu3HWMbIZs7bhCQGVxfaBPTp8q72ZOqr
- 8ts6/8+EuVWbOOnvQbE/sZgPrOqYTL64lPD/dig1QYPmWGqmg==
-X-Google-Smtp-Source: AGHT+IERZi2SuY8EZV8fx6YRiqhe0xejjoXya9lXzqKgM64Tb2QeMK/E3xSazs/g9I9YdIfx/jx1aA==
-X-Received: by 2002:ac8:59d5:0:b0:466:aa1b:1cfd with SMTP id
- d75a77b69052e-46734cb539bmr61486161cf.15.1733503175660; 
- Fri, 06 Dec 2024 08:39:35 -0800 (PST)
+ AJvYcCU3U1vJm8n6rADu+SBtfSvGpUifZnFF7LthQB7U1llsH5PHd4J3qate1tYVr8YQoTtmuwzyPTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQdeknnUjLJuuc5rW03QIcYppwbU6GnCpOv31f4QZMoSJqHn/6
+ 7okjW02QVy6+87/zmYz3ZMitfQPOihzNLDMNzYR0yWkE7FoLJqXCdmMhDE6LVps=
+X-Gm-Gg: ASbGncsdEDQzvUJThcN79tJiBJfp55E2FGdrGA+Z0TCprzT3IMWjc+wwjDTwaMkAWBf
+ eGKxHj50IPDK0T34WMJ/1gL/T/mSZxTSsKuM9mQwYFA7UPxEp9s916sqWDDQitbL1LEpSxt972N
+ VeipKzkiHijYeYVfugZDB/KPFxShEM3Sz3LN8fGvkU1Q/LvE7Zm3v7hn0vZXqBDmB2kN1+4Hi4Z
+ w3pOMaxtu4idZSVNUuBloPUe0BOfYDpymHBd0hxJz5qXtDlTg==
+X-Google-Smtp-Source: AGHT+IFVTwzeoYPOM2KfM5Vx9l9D16Lk3hiGsS7/p0LVZCXv0tKMPy7GWtRf8n+046hX0qHFc5b8EQ==
+X-Received: by 2002:a05:622a:191a:b0:466:9e24:1a5f with SMTP id
+ d75a77b69052e-46734f87dfemr64913791cf.42.1733503519693; 
+ Fri, 06 Dec 2024 08:45:19 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467296ca681sm22555851cf.24.2024.12.06.08.39.32
+ d75a77b69052e-467297c94edsm22641361cf.76.2024.12.06.08.45.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 08:39:34 -0800 (PST)
-Date: Fri, 6 Dec 2024 10:39:31 -0600
+ Fri, 06 Dec 2024 08:45:18 -0800 (PST)
+Date: Fri, 6 Dec 2024 10:45:14 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
-Cc: Jon Humphreys <j-humphreys@ti.com>, Marek Vasut <marek.vasut@mailbox.org>,
- "Simek, Michal" <michal.simek@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Michael Walle <mwalle@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories
- support in QSPI driver"
-Message-ID: <20241206163931.GS2457179@bill-the-cat>
-References: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
- <86ses458k3.fsf@udb0321960.dhcp.ti.com>
- <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
- <86pln759j9.fsf@udb0321960.dhcp.ti.com>
- <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
- <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
- <865xny69y1.fsf@udb0321960.dhcp.ti.com>
- <SA1PR12MB86974AC7EFCCBD7AE99FDD3E98302@SA1PR12MB8697.namprd12.prod.outlook.com>
- <8634j15t1y.fsf@udb0321960.dhcp.ti.com>
- <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Billy Tsai <billy_tsai@aspeedtech.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Ye Li <ye.li@nxp.com>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Jim Liu <jim.t90615@gmail.com>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/2] gpio: add PMIC_GPIO Kconfig option
+Message-ID: <20241206164514.GT2457179@bill-the-cat>
+References: <20241206154050.48353-1-clamor95@gmail.com>
+ <20241206154050.48353-2-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="alfT6XMccdNcK5wJ"
+ protocol="application/pgp-signature"; boundary="gSfK2grivXnaxtwk"
 Content-Disposition: inline
-In-Reply-To: <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
+In-Reply-To: <20241206154050.48353-2-clamor95@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -119,211 +106,69 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---alfT6XMccdNcK5wJ
+--gSfK2grivXnaxtwk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 06, 2024 at 09:46:08AM +0000, Abbarapu, Venkatesh wrote:
->=20
->=20
-> > -----Original Message-----
-> > From: Jon Humphreys <j-humphreys@ti.com>
-> > Sent: Friday, December 6, 2024 10:04 AM
-> > To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; Marek Vasut
-> > <marek.vasut@mailbox.org>; Simek, Michal <michal.simek@amd.com>; u-
-> > boot@lists.denx.de; Tom Rini <trini@konsulko.com>
-> > Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
-> > <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
-> > Michael Walle <mwalle@kernel.org>; Patrice Chotard
-> > <patrice.chotard@foss.st.com>; Patrick Delaunay <patrick.delaunay@foss.=
-st.com>;
-> > Pratyush Yadav <p.yadav@ti.com>; Quentin Schulz <quentin.schulz@cherry.=
-de>;
-> > Sean Anderson <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>;
-> > Takahiro Kuwano <Takahiro.Kuwano@infineon.com>; Tudor Ambarus
-> > <tudor.ambarus@linaro.org>; uboot-stm32@st-md-mailman.stormreply.com
-> > Subject: RE: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories =
-support in
-> > QSPI driver"
-> >=20
-> > "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com> writes:
-> >=20
-> > > Hi,
-> > >
-> > >> -----Original Message-----
-> > >> From: Jon Humphreys <j-humphreys@ti.com>
-> > >> Sent: Thursday, December 5, 2024 9:47 AM
-> > >> To: Marek Vasut <marek.vasut@mailbox.org>; Simek, Michal
-> > >> <michal.simek@amd.com>; u-boot@lists.denx.de; Tom Rini
-> > >> <trini@konsulko.com>
-> > >> Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
-> > >> <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
-> > >> Michael Walle <mwalle@kernel.org>; Patrice Chotard
-> > >> <patrice.chotard@foss.st.com>; Patrick Delaunay
-> > >> <patrick.delaunay@foss.st.com>; Pratyush Yadav <p.yadav@ti.com>;
-> > >> Quentin Schulz <quentin.schulz@cherry.de>; Sean Anderson
-> > >> <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Takahiro Kuwano
-> > >> <Takahiro.Kuwano@infineon.com>; Tudor Ambarus
-> > >> <tudor.ambarus@linaro.org>; Abbarapu, Venkatesh
-> > >> <venkatesh.abbarapu@amd.com>;
-> > >> uboot-stm32@st-md-mailman.stormreply.com
-> > >> Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
-> > >> memories support in QSPI driver"
-> > >>
-> > >> Jon Humphreys <j-humphreys@ti.com> writes:
-> > >>
-> > >> > Marek Vasut <marek.vasut@mailbox.org> writes:
-> > >> >
-> > >> >> On 11/7/24 4:49 PM, Jon Humphreys wrote:
-> > >> >>> Marek Vasut <marek.vasut@mailbox.org> writes:
-> > >> >>>
-> > >> >>>> On 11/6/24 10:58 PM, Jon Humphreys wrote:
-> > >> >>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
-> > >> >>>>>
-> > >> >>>>>> On 11/6/24 8:18 PM, Jon Humphreys wrote:
-> > >> >>>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
-> > >> >>>>>>>
-> > >> >>>>>>>> On 10/23/24 10:17 AM, Michal Simek wrote:
-> > >> >>>>>>>>>
-> > >> >>>>>>>>>
-> > >> >>>>>>>>> On 10/22/24 23:06, Marek Vasut wrote:
-> > >> >>>>>>>>>> This reverts commit
-> > 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
-> > >> >>>>>>>>>>
-> > >> >>>>>>>>>> This parallel/stacked support breaks basic SPI NOR
-> > >> >>>>>>>>>> support, e.g. this no longer works:
-> > >> >>>>>>>>>>
-> > >> >>>>>>>>>> =3D> sf probe && sf update 0x50000000 0 0x160000
-> > >> >>>>>>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase
-> > >> >>>>>>>>>> size
-> > >> >>>>>>>>>> 256 KiB, total 64 MiB device 0 offset 0x0, size 0x160000
-> > >> >>>>>>>>>> SPI flash failed in read step
-> > >> >>>>>>>>>
-> > >> >>>>>>>>> Reverting everything seems to me too much. Tom has tested
-> > >> >>>>>>>>> it on his HW and didn't see any issue. That's why better to
-> > >> >>>>>>>>> look at code which is causing this.
-> > >> >>>>>>>>> You are reverting everything but likely there is specific
-> > >> >>>>>>>>> patch which is causing this. Which one is it?
-> > >> >>>>>>>>> Which board was used for your testing? Likely we don't have
-> > >> >>>>>>>>> access to
-> > >> it.
-> > >> >>>>>>>>> Is there any QEMU available which can be used for debuggin=
-g?
-> > >> >>>>>>>>
-> > >> >>>>>>>> The testcase including the exact SPI NOR model is above.
-> > >> >>>>>>>>
-> > >> >>>>>>>> iMX6 with w25q16dw seems to be broken too.
-> > >> >>>>>>>>
-> > >> >>>>>>>> Basically every board I have access no longer has a working
-> > >> >>>>>>>> "sf probe ; sf update" combination ... so yeah, this means
-> > >> >>>>>>>> this patchset is fundamentally broken.
-> > >> >>>>>>>>
-> > >> >>>>>>>
-> > >> >>>>>>> I can also confirm that the patch series:
-> > >> >>>>>>>
-> > >> >>>>>>> f8efc68b30e Merge patch series "spi-nor: Add parallel and
-> > >> >>>>>>> stacked memories support"
-> > >> >>>>>>>
-> > >> >>>>>>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-
-> > AM62P:
-> > >> >>>>>>>
-> > >> >>>>>>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13
-> > >> >>>>>>> -0600)
-> > >> >>>>>>>
-> > >> >>>>>>> SoC:   AM62X SR1.0 HS-FS
-> > >> >>>>>>> Model: Texas Instruments AM625 SK ...
-> > >> >>>>>>> Hit any key to stop autoboot:  0 =3D> sf probe && sf update
-> > >> >>>>>>> ${loadaddr} 0x400000 0x10
-> > >> >>>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size
-> > >> >>>>>>> 256 KiB, total 64 MiB device 0 offset 0x400000, size 0x10 SPI
-> > >> >>>>>>> flash failed in read step =3D>
-> > >> >>>>>> Sigh ... can you please test current u-boot/master and see if
-> > >> >>>>>> the error is fixed there ?
-> > >> >>>>>>
-> > >> >>>>>
-> > >> >>>>> Yes I had verified it also fails against master, although the
-> > >> >>>>> behavior was a bit different.  The .'s below are our DMA engine
-> > >> >>>>> waiting
-> > >> indefinitely.
-> > >> >>>>>
-> > >> >>>>> =3D> sf probe && sf update ${loadaddr} 0x400000 0x10
-> > >> >>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256
-> > >> >>>>> KiB, total 64 MiB device 0 offset 0x400000, size 0x10
-> > >> >>>>> .....................................................
-> > >> >>>>>
-> > >> >>>>> I have not investigated further.
-> > >> >>>>
-> > >> >>>> Can you try and run some 'git bisect' to find out exactly which
-> > >> >>>> commit broke your use case ? There is a bunch of fixes for the
-> > >> >>>> worst breakage that landed recently, but clearly there is more.
-> > >> >>>>
-> > >> >>>> Full revert seems increasingly appealing ...
-> > >> >>>
-> > >> >>> commit 5d40b3d384d
-> > >> >> So there is still something broken in that specific commit that I
-> > >> >> missed when removing the defects ? Sigh ... can you try to narrow=
- it down ?
-> > >> >
-> > >> > Hi Marek, I tried to narrow the changes in commit
-> > >> > 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 a bit by first applying
-> > >> > all of the changes in the .h files, and then for spi-nor-core.c,
-> > >> > only applying changes per function. The only function change that
-> > >> > causes errors was spi_nor_read(). With the changes in
-> > >> > spi_nor_read() in commit
-> > >> > 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 applied to the prior
-> > >> > commit fbe16bc2801, did I get:
-> > >> >
-> > >> > =3D> sf probe && sf update ${loadaddr} 0x400000 0x10
-> > >> > SF: Detected s28hs512t with page size 256 Bytes, erase size 256
-> > >> > KiB, total 64 MiB device 0 offset 0x400000, size 0x10 SPI flash
-> > >> > failed in read step
-> > >> >
-> > >>
-> > >> Hi all.  What is the status of addressing the failures introduced by
-> > >> this patchset?  I tried building from u-boot next and still see the =
-failure.
-> > >>
-> > >> Marek, was the isolation of changes I performed above helpful in
-> > >> understanding the failure?
-> > >>
-> > >
-> > > Can you try by applying this change
-> > > https://lore.kernel.org/u-boot/20241118090544.21956-1-venkatesh.abbara
-> > > pu@amd.com/
-> > >
-> >=20
-> > Hi Venkatesh, the patch seems to remove the issue I was seeing.
-> >=20
-> > Thanks
-> > Jon
->=20
-> Hi Humphreys,
-> Thank you for confirming that the patch worked and resolved the issue.
+On Fri, Dec 06, 2024 at 05:40:49PM +0200, Svyatoslav Ryhel wrote:
 
-OK, but going back to the patch in question, Tudor has requested
-changes. When can we expect a v2 that addresses those, so that Jon and
-Marek can also confirm their platforms work? Thanks.
+> Add more generic Kconfig option to be enabled by the PMIC drivers
+> which do not have dedicated GPIO node and use same phandle to refer
+> to both core driver and GPIO child.
+>=20
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/gpio/Kconfig       | 8 ++++++++
+>  drivers/gpio/gpio-uclass.c | 2 +-
+>  2 files changed, 9 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+> index 92a8597420a..b7a3dd7b221 100644
+> --- a/drivers/gpio/Kconfig
+> +++ b/drivers/gpio/Kconfig
+> @@ -255,6 +255,7 @@ config MAX7320_GPIO
+>  config MAX77663_GPIO
+>  	bool "MAX77663 GPIO cell of PMIC driver"
+>  	depends on DM_GPIO && DM_PMIC_MAX77663
+> +	select PMIC_GPIO
+>  	help
+>  	  GPIO driver for MAX77663 PMIC from Maxim Semiconductor.
+>  	  MAX77663 PMIC has 8 pins that can be configured as GPIOs
+> @@ -474,6 +475,13 @@ config PIC32_GPIO
+>  	help
+>  	  Say yes here to support Microchip PIC32 GPIOs.
+> =20
+> +config PMIC_GPIO
+> +	bool "PMIC without exposed GPIO node"
+> +	depends on DM_GPIO
+> +	help
+> +	  Choose this option if your PMIC does not have dedicated GPIO node
+> +	  and phandle of the PMIC itself is used as a GPIO phandle.
+
+We shouldn't prompt for this, and instead select it (like you do above)
+when required. So please drop the prompt text and change the help to
+star with "Select this option ..." thanks!
 
 --=20
 Tom
 
---alfT6XMccdNcK5wJ
+--gSfK2grivXnaxtwk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTKL8ACgkQFHw5/5Y0
-tyy9Jwv+PcWpv69r+9w3rNbBnJBc/qlRHyvg6CHPr474Xl8V64V2WttFIBXfG+MP
-Nej6iAla3lA/ihp2ZuS9dAuXyY600sWGXKUEqrQpzKALse6knwvQjR5JBmR13J9A
-1yY385ajXfnYu28HsuPYGsckdLRdKpdpIlaQQqxK+B2wEAYvMtazcnmcFEbxCPAS
-3srlhtB4o8tO9yvGGo+6invXd4E9/gExDfWWT4d3r8KqIWys9+IRSZzXl35N2kg/
-5qMwPtpAmPdYO7kvbFyhXvnk3MibsLPTAN6IVWs46RJ4sj1AVet/ufOoRLb96uQE
-kUTA5e7tUPJSpVCX2qKFwrwsowtrSH3XaLX3WZbeBcuwH+DJIM13WVnDIBY2mae7
-JQ6EzuK/ai79MDjCrp3LRvLBewAwDJrdtc/mUn3aDb6ehcNPpP/vC5sIHNMFvDBo
-0TDHHl0rkuM30B1sQ+H53DCRQZLZ9MyHRA/ZNcWpmwUPBZKEFp84onRxqnar+nML
-MRA1OwvO
-=5V6T
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTKhoACgkQFHw5/5Y0
+tywVIwv7BdFZNDZUoeorNB6ERsZuAA6M8DE1ZtWRJetWopj7kcOxkrGQxcJHW7rz
+fIpg1MDrMpmZVvX1hEr3PiNE59lb0RTQmr8F2wzquPWAu5bvuzUKuU/cJoG9IaQ7
+TmKjSo1Vr+pkFXPG6z+x2Kmf4nOASgpm4NVNs/OMIHPByi2NlNqGd9eiwVW4Lpo4
+alRvtj99un6QCDRuibqsD/THlHknO326o6CwJVMVFp/g8h/cYdveLh3QRqslE6BX
+HrTXLKrxfIeiER8ox3DdgmPnY+Umpml7/kKPgVSIBtFXISEGW5YvN/Pu5S8s+okK
+BKxPlmGqdYWzcY7A/n+i/9ULte4X/8cXSicR0+r3bznSDVfBoO2i4wjqRdtAPRty
+/yI6DsdLrJ9bqZCgQEN6PUVsVaQS7VX733n+L+ugsnY1HI7gr1yt78fle0mmbCLi
+cXUBcD77EZjs2xHXfSUrNd3MY+gh1DiCjged8sBIB48iWSSdyY5Erry5dV4QR72+
+v93gRNVO
+=w9CN
 -----END PGP SIGNATURE-----
 
---alfT6XMccdNcK5wJ--
+--gSfK2grivXnaxtwk--
