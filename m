@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C254DE77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B90AE7717B
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E74889730;
-	Fri,  6 Dec 2024 20:16:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BFF689735;
+	Fri,  6 Dec 2024 20:16:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XGmI5u1/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SGtVEHGE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A328989739; Fri,  6 Dec 2024 20:16:41 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 3C8828974C; Fri,  6 Dec 2024 20:16:47 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60771896EE
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:16:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 076A088F0C
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2ee8647dbb9so1983448a91.2
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:16:39 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2ee8aa26415so2090021a91.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:16:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512598; x=1734117398; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733512603; x=1734117403; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rS1w1a1RvyayukZSC+zJ3nCnyNBpUdTbWg9Uy+IWrNo=;
- b=XGmI5u1/RSmAeqGTb6R5WdEsA3phKEPFimluJli3n4uLAys1V2oFyqUEfyOdZv2crS
- Tpj6iX25JKT5dEr5YR6ABjEIwiSxZ/+vpGYaPqmbhFXaSzBsYLxr7ONVOhsamYZeH4DL
- ERrB/aklGVy0rIYgTS9CfAYJXa5IQYApHks3U=
+ bh=fgX1qk/kbyxeWxISZF0oskLsZLObWrA0Dfm+ctBdmoE=;
+ b=SGtVEHGEFJgqxH8ypSLV4WbwOx358zs5ekOC8PrCC+Y8Irf6/hLO/CrC6Gy3zI6K2V
+ m8wH6xwj5O3VW8GcfbCwjn6LYU6mSEKdaRfqmLXqSLzbmNmxuk36nx/RJ4tJyw1pvyKJ
+ Afg9spQjwgBmujZiuB7xLX3jFPVuHm9mTDcec=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512598; x=1734117398;
+ d=1e100.net; s=20230601; t=1733512603; x=1734117403;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rS1w1a1RvyayukZSC+zJ3nCnyNBpUdTbWg9Uy+IWrNo=;
- b=BYmaH5ATfh24Xg9Ti3zR4UMWXLGc7Lf1lGXhY1Gg29PgBFyNFEvcqHZ+N2dW6a9ewL
- +T1rDc0kLabiZNTrr0ibBSS150TRNgKW+LC8AKc5vW4My9FoC//NZ9sKAuomsvPh0io2
- O0WaRHj0dhlE1t0rHyuR75uJzQ8L5MRAaJAfZiE/EeWqzgDBSdWbCXigdSFaonFpJKyF
- Nhv3Hby1mmfeEgf2WaLD7Q9yMIW/Gb3kIYUJ80Ias/Q5Qg5DTN6FYC62suMUQYE+6DKl
- s0A+4hIAwlPMFMvjHwwf4EXWg5OO9kQNJorktR3VefHDYLD85LP8DZuMHj9qLAHvuo91
- Kcyg==
-X-Gm-Message-State: AOJu0YwdD0HSiemApNTtjIR5t4KU4ryC8u9cBv8K3yGmvzFzKM8E8hAC
- NdqBST7pqx0yaC1sqnEsJg771HPkansuefgjGzRFZ8qhIDFONFHEoRZO2wIZx5n8crijvedSesA
- zl1x9xOhXdrucL/6UdQcL0hb/ocuzsZJNB2q0
-X-Gm-Gg: ASbGncuoaW2zstSbbmkgU/j+jSiRRs7z+1TOUd3JeKy9T5x3OM2a/OE0Ilw3IHDyE2X
- PUFvDQYNygbt+RB44K3+b0PoE5bu5a2Dc
-X-Google-Smtp-Source: AGHT+IERzT4xEMO3Paf/pFm/bLmVv7nYwXwTOCOCn2o5TOq+S7tH7der0VLwuwLLVwpU0C+2cQZuNjV/3TocmkQmGgo=
-X-Received: by 2002:a17:90a:c106:b0:2ee:f076:20f1 with SMTP id
- 98e67ed59e1d1-2ef69199e7dmr5733133a91.0.1733512597999; Fri, 06 Dec 2024
- 11:16:37 -0800 (PST)
+ bh=fgX1qk/kbyxeWxISZF0oskLsZLObWrA0Dfm+ctBdmoE=;
+ b=qSw39u+NHGNyjQQoMLBuLYy2egQZDdExoBey1zVQcfkFfXvIUrjP2Y9cAWGgATHwtm
+ 7e3R079tuDK4GT8ji72gdsuuL3UKvWTL4mQpFRCNDbpYW2Yqcp/DTnSoqvob1347sSEC
+ exPoOEQ5Pf2YZ3xrejh7lEZklsgfGLHvpx/5ANNx6CzmB/dHfECb8ltz83oSHjORpZX8
+ aEDUrQ395ZEB8GU5bVZGpvsaxB59tx+/HtDQNU5VxRwqPrPEBGaT11vZbgvyEn288VZz
+ /6Ouh+ECUZ/eCyVMSFzto6WBYg6pIdR0b1NVx1W9JsOq0tHTQovmd7FaQxCxKnRVC4nn
+ 55Gg==
+X-Gm-Message-State: AOJu0YyhFx96Mt+PMnFIBle1wK1XjGrSArHQcUAaSC7L2isSqCIfVcoQ
+ uU+pqR2kLUF0IKglAlcmJT/ddwbvQ6wtoWW4W/UIXYKG8PogNpOW+RHM0e/DUyiSKfFzS2b+qlE
+ 9FZpB2vPnbnBwhTTxWzw2KEmBdmyNy+Rn5vCq
+X-Gm-Gg: ASbGncuKEwSAdJyGp+5coXxaL+fzo52/KJGAQhpMMWdahPbtyzatvebehrQumzqPuXi
+ eSnr3lcAmAKXBOyqSlyD0PAqvSa8ku0iS
+X-Google-Smtp-Source: AGHT+IE9if/aUNC2onrXfoT3IPAZ1eEGjI+T7FE/PReNnuBN2nV5NFnyUOWnTZSDo7D/NUNyIFZdHfnrBh13RaI6aXY=
+X-Received: by 2002:a17:90b:33c4:b0:2ee:d433:7c54 with SMTP id
+ 98e67ed59e1d1-2ef6a6be862mr5299591a91.19.1733512603688; Fri, 06 Dec 2024
+ 11:16:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
+ <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:16:06 -0700
-Message-ID: <CAFLszTixC5R7uZMt5ZXDH0HxAV5HCPui9QV7Z-FkixE_3jV-ow@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] aes: Allow to store randomly generated IV in the
- FIT
+Date: Fri, 6 Dec 2024 12:16:11 -0700
+Message-ID: <CAFLszTji=8atrVcZg9yz4dZdghq5YOcno8r5yNN3jsJZgcujaw@mail.gmail.com>
+Subject: Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data
+ encrypted by mkimage
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
 Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com, 
  al.kochet@gmail.com
@@ -88,19 +89,22 @@ X-Virus-Status: Clean
 On Mon, 25 Nov 2024 at 10:47, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> When the initialisation vector is randomly generated, its value shall be
-> stored in the FIT together with the encrypted data. The changes allow to
-> store the IV in the FIT also in the case where the key is not stored in
-> the DTB but retrieved somewhere else at runtime.
+> Test the property 'fit,encrypt' to encrypt FIT data.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
 > Changes for v4:
-> - Add a function comment for add_cipher_data()
+> - Update the tests to use 'fit,encrypt'
 >
->  include/image.h       | 15 +++++++++++++++
->  lib/aes/aes-encrypt.c |  7 +++++++
->  tools/image-host.c    |  2 +-
->  3 files changed, 23 insertions(+), 1 deletion(-)
+>  tools/binman/ftest.py                         |  45 +++++++++++++++
+>  tools/binman/test/343_fit_encrypt_data.dts    |  53 ++++++++++++++++++
+>  .../test/344_fit_encrypt_data_no_key.dts      |  53 ++++++++++++++++++
+>  tools/binman/test/aes256.bin                  | Bin 0 -> 32 bytes
+>  4 files changed, 151 insertions(+)
+>  create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
+>  create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
+>  create mode 100644 tools/binman/test/aes256.bin
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+BTW you could use tools.read_file() as well
