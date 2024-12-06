@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0FBE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C68E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:30:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C19F98971E;
-	Fri,  6 Dec 2024 18:19:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A77BA89622;
+	Fri,  6 Dec 2024 18:30:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VJaN8f4d";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LEASU2eU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58F1A89373; Fri,  6 Dec 2024 18:19:00 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 6C34989627; Fri,  6 Dec 2024 18:30:08 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F9D589736
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:18:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50E6589535
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:30:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-21577f65bdeso19733105ad.0
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 09:18:57 -0800 (PST)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-385ef8b64b3so1884300f8f.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 09:30:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733505536; x=1734110336; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xIOPoE/Vrg7UJNzD1lAnsdaAGdI60hCrSeNBj/hliHo=;
- b=VJaN8f4ddNDDs9H+aPyEQ+jzpsrRqGZV2klevUGS//LzNcFNyEVcmLIU6WUQKZWnM9
- C1bPPMRPERmrLCNTwr17una9fU5z40K4I85mWU1eFO115Fol3frLzq2FCJJpBB2SwZiM
- SAV7D31Bp7w909MlCFkwl7yxB6dhPGL/th71sp2KFZIAzto1hUI6DzUl1w7rQee1Y37L
- PzISeFKEIWhZ0qgUjonIcifOq/50CSGkyjnbIjlncO7A24vfKXKQFFXEwgID3G89x/N7
- XSuwCrPv46xUGJ6PQErPIMwou5a3qfyjVg0W5CQBjHf2nvCfo2sKLZzZZwkTzPxY7Rmi
- BHnw==
+ d=gmail.com; s=20230601; t=1733506205; x=1734111005; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=o8DEeyNyCGr7evEv4zdu5qmCS+4ppsBVk398uqUMh9s=;
+ b=LEASU2eUyDRXfzmVdUE4qPry6G8sj7oSmEZfKJV1ykLB/KKjXP4y8yIF80pDO2OKIn
+ mFIaOTf7GR2Q6cpdfpW53kPtxKLDovag6/iPMj06G/1XG+0QzyiYihm0bOTnF5OvfW8G
+ vjurgwU8uQeAHtfpk3aMpDzDIGeDc+NtcXCLCemalOwmyWThza7txCwXKNdo/8Cdx8i3
+ A2+1ouzFUTXQM1Leh/3vsGYB1YQgSz/ZDxhI9sW/tMKekCKzacHQPNdQgo0kIN8iJC4L
+ eJ91/1jHxMu9QwrAr8p4aNk1Ft2hrVKthfD6Nkta6YbbyYqeIC84P6E79BQBTh63Reud
+ vSIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733505536; x=1734110336;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xIOPoE/Vrg7UJNzD1lAnsdaAGdI60hCrSeNBj/hliHo=;
- b=C40b239hV6IeFdNG9Xt9NSAjVTkRenlWMPDZLZFduhNxPazp/qNoGSTTUAFbo/6PKa
- R7zxYg/hsG5HhOEOCcCCFPObybVLW7OUDg6PSUJVion4tnRt+YWV0JjtIEey96ethIqo
- 5Jc3A+ztqO7dwVba4lALW20zt2aQU/ir4icRcRXvmhRcI68mv2aiVsaaH5BzkOQhdoCC
- VDnZuK6jNsIFzVaQradlkLCX8DnWeOqxRDq10YRb97hcVbJF3dGKpeZfGn5OF6WBmTkW
- 80NZApKMsEiIWPs1HLB1AL8SZig9PC8BkFXbknrqpQdGaUFyTNmx3NxfTVS9qe4S9rw7
- AXxg==
-X-Gm-Message-State: AOJu0Yza0ywNzaQ8Gm3qhY9k+vKHWjRlPDoJpy3lTA9sDgh0c4q5VzUE
- PkUKe5agfLFvJ1ovsaJ4STFDOavckQT9OgyfXNnDXbmndlp4PCdV3QD4lfaheGA=
-X-Gm-Gg: ASbGncsnQ59dVEMoDX+KB+I9aRXTLCkfAJtoo9DWUaF3kVdqSsTSZ1VHmEqgr8uW5C2
- eujNP0HeDYRRivw8eY0AbF54oeEmDtEqi9TakXu4ZNA/cnlsKcIGaBtE0WSSsqFQPYtJQmtXA8j
- 13OnPwHYhUHXZt0wVZzd6mbrAMispY81XMxs/qiRq/kbLua5+vZbSSfIAAZMxoBGygXbJ3KHeSI
- W7KFroIDLb9NYdY3kzes3/XBdy0u3tr5Z7QlgUgUvA+dPZB2T+e6lIRLg==
-X-Google-Smtp-Source: AGHT+IHaldVPEFeWpnAO+3f1Ho9lWwKfHdDT8mHBK7+fuB4hYNa3bdmIEC4mv3CEf/woJ+FAU/NtZg==
-X-Received: by 2002:a17:903:2309:b0:215:beb2:1039 with SMTP id
- d9443c01a7336-215f3c56b8cmr131325145ad.4.1733505535695; 
- Fri, 06 Dec 2024 09:18:55 -0800 (PST)
-Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215f8f263b9sm30970025ad.226.2024.12.06.09.18.53
+ d=1e100.net; s=20230601; t=1733506205; x=1734111005;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o8DEeyNyCGr7evEv4zdu5qmCS+4ppsBVk398uqUMh9s=;
+ b=AGDgq4H2J0jYnyGttgkJv63O4goM0x9f74cMauXst/8l+brWNBxXE2icKRx5UpyRUQ
+ IG7JFLT9vblGkuoEyfLNy4N9b1WpSXl9a/fEzMAWSEU95N7z6J6x3DD794SqVElkKUPI
+ VHNj2W9B5OeT2k3ywpoOotCx21lgbiSgpi0c12plKY75Zi7ryB7wKniqf8uU6OmqeEra
+ s/AQd60P2zVjyuqUoiKDpnpHmbxQ8oxe7gZMx6ogTsnmZq9eDE+m5Ze1oFNHRuR2FPDI
+ jOgkZl4ynKA1qOx2Xx4LIFvPNl/ugkBhO/vaHb//kKtxS2OuUN9TuH2b2QWLTNZlOfgo
+ oTsw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZZyxW5LkOt6C3/JJxi7Y0t6iXwA2bMu9zta75Hf7PzSoZWlP1LwLBKvBHSm4FsUUVwP/zCGM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUEx9tBg4926GxJ1is3WHxp5ero1jNKoJOLS1jH5KwXNcGfgAt
+ gSZV2QQvjKrm7dKN0QVIMyt/sRUAwz7K1wGLkzcvm0TjFMsZpnb+
+X-Gm-Gg: ASbGncvc3NWz1HKpk95yZghjfGvbWeHtD40aWgu8vtS6H772KXhFYAWiUdc5zVfvag2
+ tqnOZ6h68BYjUFOJXgF/iqM+IRioRRfut3U4ZY5e99orEVHS99xE0C61FOjQQserbhgidX5E/oT
+ qcmFyRBFuI31QHGx1yOKbo4WvRUGvGWKgQZU36iDPJ5IYBXTONipvYaM6/wNTiGQE+Un4bmnwjn
+ dnOEx4kSi4wwoN4JsyhW34M+T4daqZlRtNaKBb8MHSpZQIXYbVsmSKjQi5EohxXsCFOELtkDEIl
+ nztPJQ==
+X-Google-Smtp-Source: AGHT+IE+CdlB/kyPtXTUoUrs+WZ6tBe3x7rwInLjYwSxB3GSrXpZ5tiYpIsHEEOZHmlor72FJeM/xA==
+X-Received: by 2002:a5d:5f8c:0:b0:385:ea11:dd92 with SMTP id
+ ffacd0b85a97d-3862b34e410mr3035515f8f.15.1733506204479; 
+ Fri, 06 Dec 2024 09:30:04 -0800 (PST)
+Received: from Ansuel-XPS. (93-34-91-161.ip49.fastwebnet.it. [93.34.91.161])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3862e767db6sm1530235f8f.26.2024.12.06.09.30.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 09:18:55 -0800 (PST)
-From: Adriano Cordova <adrianox@gmail.com>
-X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH v2 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-Date: Fri,  6 Dec 2024 14:18:35 -0300
-Message-ID: <20241206171835.2403418-3-adriano.cordova@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241206171835.2403418-1-adriano.cordova@canonical.com>
-References: <20241206171835.2403418-1-adriano.cordova@canonical.com>
+ Fri, 06 Dec 2024 09:30:03 -0800 (PST)
+Message-ID: <6753349b.5d0a0220.d8cca.5513@mx.google.com>
+X-Google-Original-Message-ID: <Z1M0mLpg6dHi6N81@Ansuel-XPS.>
+Date: Fri, 6 Dec 2024 18:30:00 +0100
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/8] led: update LED boot/activity to new property
+ implementation
+References: <20241110115054.2555-1-ansuelsmth@gmail.com>
+ <20241113180059.GV3600562@bill-the-cat>
+ <67350b1d.5d0a0220.2d4a95.bc9a@mx.google.com>
+ <20241123024113.GM3600562@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241123024113.GM3600562@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,110 +110,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit fixes an use after free introduced in Commit e55a4acb54
-(" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-from wget"). The logic in efi_net_set_dp is reworked so that when the
-function is invoked it not only changes the value of the static variable
-net_dp (this is how the function was implemented in e55a4acb54) but also
-updates the protocol interface of the device path protocol in case efi
-has started.
+On Fri, Nov 22, 2024 at 08:41:13PM -0600, Tom Rini wrote:
+> On Wed, Nov 13, 2024 at 09:24:59PM +0100, Christian Marangi wrote:
+> > On Wed, Nov 13, 2024 at 12:00:59PM -0600, Tom Rini wrote:
+> > > On Sun, Nov 10, 2024 at 12:50:19PM +0100, Christian Marangi wrote:
+> > > 
+> > > > This series is split in 2 part.
+> > > > 
+> > > > While adapting the LED boot and activity code to the new property
+> > > > accepted by Rob in dt-schema repository, a big BUG was discovered.
+> > > > 
+> > > > The reason wasn't clear at start and took me some days to figure it
+> > > > out.
+> > > > 
+> > > > This was triggered by adding a new phandle in the test.dts to
+> > > > introduce test for the new OPs.
+> > > > 
+> > > > This single addition caused the sandbox CI test to fail in the
+> > > > dm_test_ofnode_phandle_ot test.
+> > > > 
+> > > > This doesn't make sense as reverting the change made the CI test
+> > > > to correctly finish. Also moving the uboot node down
+> > > > after the first phandle (in test.dts the gpio one) also made
+> > > > the CI test to correctly finish.
+> > > > 
+> > > > A little bit of searching and debugging made me realize the
+> > > > parse phandle OPs didn't support other.dts at all and they
+> > > > were still referencing phandle index from test.dts.
+> > > > (more info in the related commit)
+> > > > 
+> > > > In short the test was broken all along and was working by
+> > > > pure luck. The first 4 patch address and fix the problem for good.
+> > > > 
+> > > > The other 4 patch expand and address the property change for
+> > > > LED boot/activity.
+> > > > 
+> > > > Posting in a single series as changes are trivial and just
+> > > > to speedup review process. (and also because the second
+> > > > part depends on the first)
+> > > > 
+> > > > All CI tested with azure pipeline.
+> > > > 
+> > > > Changes v2:
+> > > > - Fix handling of flat tree for phandle
+> > > > - Fix test and other.dts changes
+> > > > 
+> > > > Christian Marangi (8):
+> > > >   dm: core: implement oftree variant of parse_phandle OPs
+> > > >   test: dm: fix broken dm_test_ofnode_phandle_ot and get_by_phandle_ot
+> > > >   dm: core: implement ofnode/tree_parse_phandle() helper
+> > > >   test: dm: Expand dm_test_ofnode_phandle(_ot) with new
+> > > >     ofnode/tree_parse_phandle
+> > > >   dm: core: implement phandle ofnode_options helper
+> > > >   test: dm: Add test for ofnode options phandle helper
+> > > >   led: update LED boot/activity to new property implementation
+> > > >   test: dm: Update test for LED activity and boot
+> > > > 
+> > > >  arch/sandbox/dts/other.dts |  31 ++++++++-
+> > > >  arch/sandbox/dts/test.dts  |  16 +++--
+> > > >  drivers/core/of_access.c   |  61 ++++++++++++-----
+> > > >  drivers/core/ofnode.c      | 124 ++++++++++++++++++++++++++++++++-
+> > > >  drivers/led/led-uclass.c   |  30 +++++---
+> > > >  include/dm/of_access.h     |  86 +++++++++++++++++++++++
+> > > >  include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++
+> > > >  test/dm/led.c              |  18 +++--
+> > > >  test/dm/ofnode.c           | 136 ++++++++++++++++++++++++++++++++-----
+> > > >  9 files changed, 551 insertions(+), 58 deletions(-)
+> > > 
+> > > My main issue with the series is a lack of documentation updates, as the
+> > > biggest challenge thus far has been that for example Peter couldn't
+> > > figure out how to make use of this on PinePhone. We generate
+> > > documentation today based on include/led.h for this API, yes? Thanks.
+> > > 
+> > 
+> > Hi Tom,
+> > 
+> > actually quite the oppisite, led.h describe how these works and was
+> > instructed to first have the options property merged in dt-schema. [1]
+> > 
+> > Here we have all the option documented under a yaml.
+> > 
+> > I notice there is a series from Simon that is also pushing a .yaml
+> > here locally in U-Boot and I was waiting for that to be merged to also
+> > include the additional entry there.
+> > 
+> > Also led.h description and API have info on where to look about the
+> > handling of /options/u-boot/
+> > 
+> > I feel the main problem with documentation is currently the fact that we
+> > are migrating to a more robust schema and people are used to using Doc
+> > directory? Anyway happy to get any hint on how to improve this.
+> > 
+> > [1] https://github.com/devicetree-org/dt-schema
+> 
+> So Peter, does this bring you what you were asking for in terms of
+> details, or can you explain what's still missing from your point of
+> view? Thanks!
+> 
 
-Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path to HTTP when loaded from wget")
-Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
----
-Changes in v2: use reinstall_protocol_interface() and new_net_dp in the body of efi_net_set_dp()
+Hi Tom,
 
- lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++------
- 1 file changed, 52 insertions(+), 9 deletions(-)
+any idea how to improve this and get it trought?
 
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 67593ef50c..ac8e54639b 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
- 			     &netobj->net);
- 	if (r != EFI_SUCCESS)
- 		goto failure_to_add_protocol;
--	if (!net_dp)
--		efi_net_set_dp("Net", NULL);
--	r = efi_add_protocol(&netobj->header, &efi_guid_device_path,
--			     net_dp);
-+
-+	if (net_dp)
-+		r = efi_add_protocol(&netobj->header, &efi_guid_device_path,
-+			       net_dp);
-+	else
-+		r = efi_net_set_dp("Net", NULL);
- 	if (r != EFI_SUCCESS)
- 		goto failure_to_add_protocol;
-+
- 	r = efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_guid,
- 			     &netobj->pxe);
- 	if (r != EFI_SUCCESS)
-@@ -1055,18 +1058,58 @@ out_of_resources:
-  */
- efi_status_t efi_net_set_dp(const char *dev, const char *server)
- {
--	efi_free_pool(net_dp);
-+	efi_status_t ret;
-+	struct efi_handler *phandler;
-+	struct efi_device_path *old_net_dp, *new_net_dp;
- 
--	net_dp = NULL;
-+	old_net_dp = net_dp;
-+	new_net_dp = NULL;
- 	if (!strcmp(dev, "Net"))
--		net_dp = efi_dp_from_eth();
-+		new_net_dp = efi_dp_from_eth();
- 	else if (!strcmp(dev, "Http"))
--		net_dp = efi_dp_from_http(server);
-+		new_net_dp = efi_dp_from_http(server);
- 
--	if (!net_dp)
-+	if (!new_net_dp) {
- 		return EFI_OUT_OF_RESOURCES;
-+	}
-+
-+	// If netobj is not started yet, end here.
-+	if (!netobj) {
-+		goto exit;
-+	}
-+
-+	phandler = NULL;
-+	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler);
-+
-+	// If the device path protocol is not yet installed, install it
-+	if (!phandler)
-+		goto add;
-+
-+	// If it is already installed, try to update it
-+	ret = efi_reinstall_protocol_interface(&netobj->header, &efi_guid_device_path,
-+					       old_net_dp, new_net_dp);
-+	if (ret != EFI_SUCCESS)
-+		goto error;
-+
-+	net_dp = new_net_dp;
-+	efi_free_pool(old_net_dp);
- 
- 	return EFI_SUCCESS;
-+add:
-+	ret = efi_add_protocol(&netobj->header, &efi_guid_device_path,
-+			       new_net_dp);
-+	if (ret != EFI_SUCCESS)
-+		goto error;
-+exit:
-+	net_dp = new_net_dp;
-+	efi_free_pool(old_net_dp);
-+
-+	return ret;
-+error:
-+	// Failed, restore
-+	efi_free_pool(new_net_dp);
-+	
-+	return ret;
- }
- 
- /**
 -- 
-2.43.0
-
+	Ansuel
