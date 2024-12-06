@@ -4,60 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4A7E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 09:17:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DB4E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 09:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2D05891EA;
-	Fri,  6 Dec 2024 10:17:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D336389627;
+	Fri,  6 Dec 2024 10:39:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EJWt+R9w";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dxZ9U6jQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5748A891AD; Fri,  6 Dec 2024 10:17:38 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F7FC8938E
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 10:17:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ id 8489389639; Fri,  6 Dec 2024 10:39:04 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46F0089498
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 10:39:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 90A6EA43F29;
- Fri,  6 Dec 2024 09:15:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE545C4CED1;
- Fri,  6 Dec 2024 09:17:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733476653;
- bh=8NHzPYFLR00+B5T3h51UHiu0LKrH2TO6mkMX9dcDTGU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=EJWt+R9wiwe1b874il8NEYwcatKcos26wgrUFqLqyHfdvhVQG9vdOybepoS/XV7NO
- yTRK3Ut8kkEZRM6YY2OYC3eZbBlZWNiT1qWK9+NmH+PpWOrhZTXZaSN5rcIHmbh/Br
- 3VpoYBJ8ljzmlyNqGNNM/rQddI8km68hvPkE1ers5oz8AxPGSEmZn4UqwmHrVCSeyT
- Hf2ud/iQA8J2i6Yy6MA+oR3dQHDdqKcL+eZ6BEz23kGokoesB0BxiHHVsRxJ7ytPlq
- QBFbrAWuAOhWnN0Hhqrfseru+FongikkkBxKkEcvYPKzo65wxZKpM8+SWyhNAFdpky
- kkPrhza7sL48Q==
-Message-ID: <d103c8e4-d599-4c75-9239-11e7e8adf6e9@kernel.org>
-Date: Fri, 6 Dec 2024 11:17:28 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B69cr3t2056725
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 6 Dec 2024 03:38:53 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1733477933;
+ bh=AK0Az5h+1siTuhbKNERoO+q7BeU884KhY/1RTFFMJCU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=dxZ9U6jQf4hTUga9KnlFOl94TOilHBLVASIrgl27O4w9w/BjWyEiLfdzrylFpT2/H
+ aCn71X9WPP4UCazDll0r510ifwsx7X3wqUeylmnaZFxzgcRzhA0nZ48U2KOKonxRyc
+ 24rDuOpmKgcKz2/rFW+o+tROUztRkLNYMdtW56KM=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B69crqL092514;
+ Fri, 6 Dec 2024 03:38:53 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
+ Dec 2024 03:38:53 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 6 Dec 2024 03:38:53 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B69cqau118823;
+ Fri, 6 Dec 2024 03:38:53 -0600
+Date: Fri, 6 Dec 2024 15:08:51 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Sjoerd Simons
+ <sjoerd@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, <marex@denx.de>,
+ <vigneshr@ti.com>, <nm@ti.com>, <j-humphreys@ti.com>, <srk@ti.com>,
+ <u-boot@lists.denx.de>
 Subject: Re: [PATCH] configs: am62x_evm_*: Fix USB DFU configuration
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, Martyn Welch <martyn.welch@collabora.com>, 
- Sjoerd Simons <sjoerd@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, marex@denx.de,
- vigneshr@ti.com, nm@ti.com, j-humphreys@ti.com, srk@ti.com,
- u-boot@lists.denx.de
+Message-ID: <bxy6wjdqspy7n5yaqy2lgelxfl6ldtgwkfube7vxpe7ektwldr@npg574indxwk>
 References: <20241203-am62-usb-xhci-v1-1-a791cb914186@kernel.org>
  <unf757pwgah5ylkcfdumtdo5zs2ny3nxct5u26t6up7aldqim2@mxhhtb53gw4x>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <unf757pwgah5ylkcfdumtdo5zs2ny3nxct5u26t6up7aldqim2@mxhhtb53gw4x>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <d103c8e4-d599-4c75-9239-11e7e8adf6e9@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <d103c8e4-d599-4c75-9239-11e7e8adf6e9@kernel.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,131 +85,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Siddharth,
-
-On 06/12/2024 09:19, Siddharth Vadapalli wrote:
-> On Tue, Dec 03, 2024 at 10:40:29PM +0200, Roger Quadros wrote:
+On Fri, Dec 06, 2024 at 11:17:28AM +0200, Roger Quadros wrote:
+> Hello Siddharth,
 > 
-> Hello Roger,
+> On 06/12/2024 09:19, Siddharth Vadapalli wrote:
+
+[...]
+
+> > While this fixes the issue, I am wondering if the issue lies elsewhere.
+> > In U-Boot, the compatible "snps,dwc3" is associated with:
+> > drivers/usb/host/xhci-dwc3.c
+> > while in Linux, the compatible "snps,dwc3" is associated with:
+> > drivers/usb/dwc3/core.c
+> > 
+> > So there seem to be two alternatives that I could think of:
+> > 1. Modify U-Boot to match Linux in the sense that we associate
+> > "snps,dwc3" with drivers/usb/dwc3/core.c in U-Boot.
 > 
->> CONFIG_USB_XHCI_DWC3 is not required for AM62x as the XHCI
->> driver is registered through the dwc3-generic driver.
->>
->> CONFIG_USB_XHCI_DWC3 causes problems by hijacking the
->> USB controller even if it is not set for Host mode in
->> device tree.
->>
->> 'dm tree' output after 'usb start' is fixed from
->>
->>  simple_bus    5  [ + ]   dwc3-am62             |   |-- dwc3-usb@f900000
->>  usb_gadget    0  [   ]   dwc3-generic-periphe  |   |   |-- usb@31000000
->>  usb           0  [ + ]   xhci-dwc3             |   |   `-- usb@31000000
->>  usb_hub       0  [ + ]   usb_hub               |   |       `-- usb_hub
->>  simple_bus    6  [ + ]   dwc3-am62             |   |-- dwc3-usb@f910000
->>  usb           1  [ + ]   dwc3-generic-host     |   |   |-- usb@31100000
->>  usb_hub       1  [ + ]   usb_hub               |   |   |   `-- usb_hub
->>  usb           1  [ + ]   xhci-dwc3             |   |   `-- usb@31100000
->>  usb_hub       2  [ + ]   usb_hub               |   |       `-- usb_hub
->>
->> [notice that 'xhci-dwc3' and 'usb_hub' drivers are probed
->>  for both USB instances although the first instance
->>  is supposed to be 'peripheral' only]
->>
->> to
->>
->>  simple_bus    5  [   ]   dwc3-am62             |   |-- dwc3-usb@f900000
->>  usb_gadget    0  [   ]   dwc3-generic-periphe  |   |   `-- usb@31000000
->>  simple_bus    6  [ + ]   dwc3-am62             |   |-- dwc3-usb@f910000
->>  usb           1  [ + ]   dwc3-generic-host     |   |   `-- usb@31100000
->>  usb_hub       0  [ + ]   usb_hub               |   |       `-- usb_hub
+> Many platforms (grep for CONFIG_USB_XHCI_DWC3
+> in configs/) use xhci-dwc3 to get Host mode working
+> without the need for core.c. Maybe it was more simpler that way?
+> Also see USB_XHCI_DWC3_OF_SIMPLE.
 > 
-> While this fixes the issue, I am wondering if the issue lies elsewhere.
-> In U-Boot, the compatible "snps,dwc3" is associated with:
-> drivers/usb/host/xhci-dwc3.c
-> while in Linux, the compatible "snps,dwc3" is associated with:
-> drivers/usb/dwc3/core.c
-> 
-> So there seem to be two alternatives that I could think of:
-> 1. Modify U-Boot to match Linux in the sense that we associate
-> "snps,dwc3" with drivers/usb/dwc3/core.c in U-Boot.
+> So if we drop "snps,dwc3" from xhci-dwc3, we will have to ensure each
+> and every platform works.
 
-Many platforms (grep for CONFIG_USB_XHCI_DWC3
-in configs/) use xhci-dwc3 to get Host mode working
-without the need for core.c. Maybe it was more simpler that way?
-Also see USB_XHCI_DWC3_OF_SIMPLE.
-
-So if we drop "snps,dwc3" from xhci-dwc3, we will have to ensure each
-and every platform works.
-
-> 2. With the understanding that "dr_mode" doesn't have to be host/otg for
-> the compatible "snps,dwc3" which is tied to drivers/usb/host/xhci-dwc3.c,
-> do the following to exit probe when "dr_mode" is "peripheral":
-> -------------------------------------------------------------------------
-> diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
-> index e3e0ceff43e..edfd7b97a73 100644
-> --- a/drivers/usb/host/xhci-dwc3.c
-> +++ b/drivers/usb/host/xhci-dwc3.c
-> @@ -208,6 +208,8 @@ static int xhci_dwc3_probe(struct udevice *dev)
->         writel(reg, &dwc3_reg->g_usb2phycfg[0]);
-> 
->         dr_mode = usb_get_dr_mode(dev_ofnode(dev));
-> +       if (dr_mode == USB_DR_MODE_PERIPHERAL)
-> +               return -ENODEV;
->         if (dr_mode == USB_DR_MODE_OTG &&
->             dev_read_bool(dev, "usb-role-switch")) {
->                 dr_mode = usb_get_role_switch_default_mode(dev_ofnode(dev));
-> -------------------------------------------------------------------------
-> which will still show "xhci-dwc3" in the output of "dm tree" after "usb
-> start", but the driver won't be probed (absence of "+" in the "Probed"
-> column of "dm tree" output).
-
-I agree with your second proposal.
-But it is a separate bug (in xhci-dwc3 driver) which also
-fixes the issue this patch is fixing.
-
-Regardless, I think both fixes should go in.
-
-Could you please send a patch to fix xhci-dwc3? Thanks!
+Yes, that will require significant effort and testing.
 
 > 
-> I just wanted to point this out as a possible fix for other scenarios.
-> Disabling "CONFIG_USB_XHCI_DWC3" seems to be the best choice in the
-> current scenario (i.e. it shouldn't have been set in "USB DFU" fragment
-> to begin with).
+> > 2. With the understanding that "dr_mode" doesn't have to be host/otg for
+> > the compatible "snps,dwc3" which is tied to drivers/usb/host/xhci-dwc3.c,
+> > do the following to exit probe when "dr_mode" is "peripheral":
+> > -------------------------------------------------------------------------
+> > diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+> > index e3e0ceff43e..edfd7b97a73 100644
+> > --- a/drivers/usb/host/xhci-dwc3.c
+> > +++ b/drivers/usb/host/xhci-dwc3.c
+> > @@ -208,6 +208,8 @@ static int xhci_dwc3_probe(struct udevice *dev)
+> >         writel(reg, &dwc3_reg->g_usb2phycfg[0]);
+> > 
+> >         dr_mode = usb_get_dr_mode(dev_ofnode(dev));
+> > +       if (dr_mode == USB_DR_MODE_PERIPHERAL)
+> > +               return -ENODEV;
+> >         if (dr_mode == USB_DR_MODE_OTG &&
+> >             dev_read_bool(dev, "usb-role-switch")) {
+> >                 dr_mode = usb_get_role_switch_default_mode(dev_ofnode(dev));
+> > -------------------------------------------------------------------------
+> > which will still show "xhci-dwc3" in the output of "dm tree" after "usb
+> > start", but the driver won't be probed (absence of "+" in the "Probed"
+> > column of "dm tree" output).
 > 
->>
->> Fixes: dfc2dff5a844 ("configs: am62x_evm_*: Enable USB and DFU support")
->> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> I agree with your second proposal.
+> But it is a separate bug (in xhci-dwc3 driver) which also
+> fixes the issue this patch is fixing.
 > 
-> Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> Regardless, I think both fixes should go in.
 > 
->> ---
->>  configs/am62x_a53_usbdfu.config | 1 -
->>  1 file changed, 1 deletion(-)
->>
->> diff --git a/configs/am62x_a53_usbdfu.config b/configs/am62x_a53_usbdfu.config
->> index 3a19cf23287..0d3c6df1e73 100644
->> --- a/configs/am62x_a53_usbdfu.config
->> +++ b/configs/am62x_a53_usbdfu.config
->> @@ -16,7 +16,6 @@ CONFIG_USB=y
->>  CONFIG_DM_USB_GADGET=y
->>  CONFIG_SPL_DM_USB_GADGET=y
->>  CONFIG_USB_XHCI_HCD=y
->> -CONFIG_USB_XHCI_DWC3=y
->>  CONFIG_USB_DWC3=y
->>  CONFIG_USB_DWC3_GENERIC=y
->>  CONFIG_SPL_USB_DWC3_GENERIC=y
->>
->> ---
->> base-commit: 3073246d1be682071d8b3d07d06c2484907aed60
->> change-id: 20241203-am62-usb-xhci-be62bc9584c9
->>
->> Best regards,
->> -- 
->> Roger Quadros <rogerq@kernel.org>
->>
+> Could you please send a patch to fix xhci-dwc3? Thanks!
 
--- 
-cheers,
--roger
+Sure. Thank you for reviewing the suggestions and sharing your feedback.
 
+Regards,
+Siddharth.
