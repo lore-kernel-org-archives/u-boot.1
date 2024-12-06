@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6A8E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:00:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA7DE77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:09:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69D868914F;
-	Fri,  6 Dec 2024 15:59:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 720048962E;
+	Fri,  6 Dec 2024 16:09:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fuEZDNT4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EbybdVgf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CBA386DBD; Fri,  6 Dec 2024 15:59:51 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3A7CC89622; Fri,  6 Dec 2024 16:09:34 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F099588F92
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:59:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB04489637
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:09:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733497183; x=1734101983; i=xypron.glpk@gmx.de;
- bh=VMDrCCUTTxNwpWVsoU8V9N5UMtmpkrNhXKb0do94sJk=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=fuEZDNT4AL+Xv1C6mjGQaZ1rX429vES0Gf+fo64IVgUadSCWof31DWRu4Hxs1FO4
- gqtPtvI1Px+PwrvP7ndJYnQGiEkJEkduyW6DP75VDeh/so9t9fVa5xzGTR6yrEwEw
- 8FdcCH7k3oi3TKIXM1/45O9AR8LetUTtjIMXewMZmyaVLesD0Uo19pglAX37pz8Dk
- 1rT5kyfNmGni0Ydae+wQPcr2YuaJsKRpz5B+IRYzS0mqWF+9MZD8HqYMRxH/4TCdv
- JxzqNTLTPMuACZOstRtuH4T2aAbwONQMIYEK2uJb1t3ACy9qufABEB7z2wLCNDojn
- tyXevjXF0H4cjM/ULw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MjS9I-1u3PHh19pq-00fqMt; Fri, 06
- Dec 2024 15:59:43 +0100
-Message-ID: <2d449f38-9e3b-4b09-82d3-4c9457290564@gmx.de>
-Date: Fri, 6 Dec 2024 15:59:42 +0100
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-434a95095efso19742245e9.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:09:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733497771; x=1734102571; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1RuEBLdI8jRsO1+jShht2b7UDWbNxN7lhsFz/SrQWD0=;
+ b=EbybdVgf4AdAjs5iP28GVfKRdXAQDbl35sP/qBuoBViJa0PW4UDDH6CcLL9nsx75rp
+ mBMZzbxY8BYW9/PjUbNSAE5R9m8+zhbgU2yDXdj6YZ7WW8ixNOL5EsNxPzFHbdGHsMh0
+ tYQS4KSlxP8DzzGsvN/A+jbBlDRGQ7x5qYzSQ7Rb+tcz/ZTb0pVGeTSV5K109D2CGkET
+ JIqbBRMyAM9xtO1g7zyF38mn6mE87gEp81FG1SFKxLDAvSXeHUvD/NVBAl5LFqRfxvd/
+ 3erZHdK8eV1BaY4pyochYWaGhRjDdJ6eEiyI9vbPdZLPHTfl8qLFDgrIbTRxsqrbziq4
+ J0bA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733497771; x=1734102571;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1RuEBLdI8jRsO1+jShht2b7UDWbNxN7lhsFz/SrQWD0=;
+ b=l7nSr0zmKA2vFhuYB7N9JOlQ5d03HEYq0my8qO3Fp1rxA5kLO+vp45O7wfrUhCgU2x
+ J1QFvDPtk1sGZ1hMaxDOes8NUTPu33UOSykYpvxn17e8bWmdgkK/4DXEBfX6Eaj4m8lm
+ L+6eoBwGMAOEYPxRDCgsHw3/NaGYP4itQYJej4rIyUWzlTJlZwRjFhiA8WVl0nXXs6yH
+ Og/uHxLdojyi4dU8QmyjEOZXVgAJEAjRvFtLw+mINY9pEIUEQLbqXD5W5TKzhTRc7Il1
+ hJgGQ8dATBEhEDDpB1WMM/8REuT/fF68GHG3xtOI3SOQOve0wHwQVfwl/9piQtM3Cv8N
+ 42Eg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUnmE9kCCqJrkCo83diZvtg3oa9kfAOhK5PLyVxcy/joP3jEwZ05tI5eQBq5Z9gIxOIHcVbS+k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRsJU0e5gqXnNAUAHrpH0sWLCse3LPFV+QvhRFHStKCo9PFwMn
+ kMI1ZpMulicb9wTL+VHRFRUWpb1exMQDAzB5SHq0m7KzkQLHKik6luc0eFSei5HWyKrjV5CZUD1
+ 5Nr/T+P3Z2QKso0X1waJm+flXs/M=
+X-Gm-Gg: ASbGncuydKBxmcNC+TmpMh2h0BUweINCTwc6g7RGlzve0LPJgGwWJ31WIoaH4ptWUfA
+ w5TGcPadTFMNMma58zePOhPTQFOz0mdmL
+X-Google-Smtp-Source: AGHT+IHJ2n7WaRQK7TI8Q24U0jxBQKBkYF45PCbNYTMfCMdPJGkLCyJYBQQ5BYDvWc2Rz7ogj+IrkTxy2uWlanrl7ac=
+X-Received: by 2002:a05:6000:2cb:b0:385:f79d:2196 with SMTP id
+ ffacd0b85a97d-3862a8b4394mr3135767f8f.13.1733497770715; Fri, 06 Dec 2024
+ 07:09:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-To: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>
-References: <20241206122714.2365114-1-adriano.cordova@canonical.com>
- <20241206122714.2365114-3-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206122714.2365114-3-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20241206060115.4346-1-clamor95@gmail.com>
+ <20241206060115.4346-2-clamor95@gmail.com>
+ <20241206142052.GQ2457179@bill-the-cat>
+In-Reply-To: <20241206142052.GQ2457179@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 6 Dec 2024 17:09:19 +0200
+Message-ID: <CAPVz0n2mXefetq38_W-Xo8-2xTKUqxLXjz1MupmdaL8brnayxA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] driver: clk: tegra: init basic clocks on probe
+To: Tom Rini <trini@konsulko.com>
+Cc: Thierry Reding <treding@nvidia.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:2QxpkJeRrgp19C0efkPzQofya/MI8Yk7mDqfOAvg1UWpHJ3i+TB
- y8xACIE5djs9dKT+Hs1/mwQ43rmWSROioTg1Up6GeXhyGWnJ8aWU4jnTF1v2RMNduOyBXDz
- 4wzcMIkBxr6Nmjw28RXlvFX32MLkN4Ho1yj4MOini+X8pXvACm457hZe30+wTipNppHXi3H
- NySi14MJdfViN1qXWYJgQ==
-UI-OutboundReport: notjunk:1;M01:P0:9Jd/BlwrNdw=;1VFUmCjJVOJOKihZLpfZ/aCLkrk
- xsagqQn8I8BIHibOJ12SaAK0aLwE5hC3gIgri2SOSTwhLfxY6lE+dGxCX4GjRGi24OLyqZ+h5
- gXoSox1djOWlZ1JPuutIMP0P5isDaUYNjkRcel7u+TXx3pZh6QFm8Iru3lkVMvuS455YykEuH
- nm9VGLCEK8Y7ocwMd8TLiPXdp+gnP9bCfYhqh9BjXzIbNQSJkdNy99FqUdvQCU92Y0dqlwQVL
- LJbO50gqGYHZYz+6nDaWGrOdiIzIwPK3Sa5z7bFhTAIcmdBKEavayyp85A3i9zYYzkNhADHh8
- 1Uol9eEc6jshuRha4vtkHHNKyj6q0hhxXCO4fC/6L1ENXP/fJTqJ9z2JQR4AKt2o7mvl/IOla
- nLBRR0H6warAh9TJAv8AK43FMv+MaUh0gO8QxEvM+YKz1BojiLhmItC/LMHWYZPBeuIS3QVwD
- t5TNCzKspKuinOPj8gIt0h10XfR26TCnEum5bpIbfwZAYl+y33rPFOc1CK4KyfJZoic/6BNG9
- tm34l6geoAr1TQFA5i5yD4Xe/Oz69FaO50HZnytqCgxgDXj3B+f63IjeagJAS7aXgxOgZIjtq
- HWt02xBhryz3TZCRiTwa0F96mxmFdhrzW43/dvMy+98wfQtv+Du4v6dbG1vMXKHmFN/67doUi
- h/nCKb2UUcvSV6mqXO4DkZyoHMjJAQdyXcEsQGL/GNlIhTksD9YOKvd5ei7pc7jDWO+C2Vp0h
- 2kyrGU2tgOrl+ZR0v0AMvaX6KXz12Hv8zyJUDtbzfj6KgqIpNXTkU5wIbXfF/sFa3rAps5VAr
- i7ei2J/fZSed7Sf0wWwGDt+a+QKiFFYZ4xzqqPHKU1PSrtyXINz6C7bmKtuFBXPJWOk61lXEp
- Y77iXcW+cSJMXlZctrloLFvBUopWy9ZdgQUUXydbJhTtAXNJM+KHgcy2xYx874PruVRHtLSee
- 2gTxNnvKn0qRYErOuZnD4Mqgw02MLiAFPzxfHpSYx6Z0QGcjNrM1kGZJObYRDDw42cHU1OZaL
- dN1cOhtKYf8JokE+Yqv66QpadORUgzbcx6DgzVMkn1JGyQHDs2K3847DmAxMBORLa4S9Mv8G6
- VrMogZjncwucYx0FQ3Xnocwuk7AXzO
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,143 +95,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/6/24 13:27, Adriano Cordova wrote:
-> This commit fixes an use after free introduced in Commit e55a4acb54
-> (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-> from wget"). The logic in efi_net_set_dp is reworked so that when the
-> function is invoked it not only changes the value of the static variable
-> net_dp (this is how the function was implemented in e55a4acb54) but also
-> updates the protocol interface of the device path protocol in case efi
-> has started.
+=D0=BF=D1=82, 6 =D0=B3=D1=80=D1=83=D0=B4. 2024=E2=80=AF=D1=80. =D0=BE 16:20=
+ Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path to=
- HTTP when loaded from wget")
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> ---
->   lib/efi_loader/efi_net.c | 53 +++++++++++++++++++++++++++++++++++-----
->   1 file changed, 47 insertions(+), 6 deletions(-)
+> On Fri, Dec 06, 2024 at 08:01:15AM +0200, Svyatoslav Ryhel wrote:
 >
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 67593ef50c..1e87cd7be6 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
->   			     &netobj->net);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> -	if (!net_dp)
-> -		efi_net_set_dp("Net", NULL);
-> -	r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> -			     net_dp);
-> +
-> +	if (net_dp)
-> +		r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       net_dp);
-> +	else
-> +		r =3D efi_net_set_dp("Net", NULL);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> +
->   	r =3D efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_g=
-uid,
->   			     &netobj->pxe);
->   	if (r !=3D EFI_SUCCESS)
-> @@ -1055,18 +1058,56 @@ out_of_resources:
->    */
->   efi_status_t efi_net_set_dp(const char *dev, const char *server)
->   {
-> -	efi_free_pool(net_dp);
-> +	efi_status_t ret;
-> +	struct efi_handler *phandler;
-> +	struct efi_device_path *old_net_dp;
+> > In case DM drivers probe earlier than board clock setup is done
+> > init of basic clocks should be done in CAR driver probe as well.
+> > Add it to avoid possible clock related problems.
+> >
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > ---
+> >  drivers/clk/tegra/tegra-car-clk.c | 3 +++
+> >  1 file changed, 3 insertions(+)
+> >
+> > diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/tegr=
+a-car-clk.c
+> > index 9078253d100..4f8405328a3 100644
+> > --- a/drivers/clk/tegra/tegra-car-clk.c
+> > +++ b/drivers/clk/tegra/tegra-car-clk.c
+> > @@ -111,6 +111,9 @@ static int tegra_car_clk_probe(struct udevice *dev)
+> >  {
+> >       debug("%s(dev=3D%p)\n", __func__, dev);
+> >
+> > +     clock_init();
+> > +     clock_verify();
+> > +
+> >       return 0;
+> >  }
+> >
 >
-> +	old_net_dp =3D net_dp;
->   	net_dp =3D NULL;
->   	if (!strcmp(dev, "Net"))
->   		net_dp =3D efi_dp_from_eth();
->   	else if (!strcmp(dev, "Http"))
->   		net_dp =3D efi_dp_from_http(server);
+> Is this called before arch/arm/mach-tegra/board2.c::board_init()?
+> Thanks.
 >
-> -	if (!net_dp)
-> +	if (!net_dp) {
-> +		net_dp =3D old_net_dp;
->   		return EFI_OUT_OF_RESOURCES;
-> +	}
-> +
-> +	if (!netobj)
-> +		return EFI_SUCCESS;
-> +
-> +	phandler =3D NULL;
-> +	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler)=
-;
-> +
-> +	if (!phandler)
-> +		goto add;
-> +
-> +	if (phandler->protocol_interface !=3D old_net_dp) {
-> +		ret =3D EFI_DEVICE_ERROR;
-> +		goto error;
-> +	}
+> --
+> Tom
 
-This is not an error condition. Some other code may have changed the
-device-path. We must not free what we haven't allocated. But we should
-still try to replace it.
-
-So can we have a logic like:
-
-old_dp =3D net_dp;
-
-new_dp =3D ...
-
-OpenProtocol(handle, GUID, &old_dp, NULL, NULL,
-EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-
-if (!efi_dp_match(old_dp, new_dp) {
-	FreePool(new_dp);
-	return EFI_SUCCESS;
-}
-
-ret =3D ReinstallProtocolInterface(handle, GUID, old_dp, new_dp);
-
-if (ret =3D=3D EFI_SUCCESS) {
-	FreePool(net_dp)
-} else {
-      FreePool(new_dp);
-}
-
-return ret;
-
-Best regards
-
-Heinrich
-
-
-> +
-> +	ret =3D efi_reinstall_protocol_interface(&netobj->header, &efi_guid_de=
-vice_path,
-> +					       old_net_dp, net_dp);
-> +	if (ret !=3D EFI_SUCCESS)
-
-Can net_dp be freed if an error occurred?
-
-> +		return ret;
-> +
-> +	efi_free_pool(old_net_dp);
->
->   	return EFI_SUCCESS;
-> +add:
-> +	ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       net_dp);
-> +	if (ret =3D=3D EFI_SUCCESS) {
-> +		efi_free_pool(old_net_dp);
-> +		return ret;
-> +	}
-> +error:
-> +	// Failed, restore
-> +	efi_free_pool(net_dp);
-> +	net_dp =3D old_net_dp;
-> +	return ret;
->   }
->
->   /**
-
+It does if the device uses pmic with dm driver and has any of pmic
+regulators set as always-on or boot-on
