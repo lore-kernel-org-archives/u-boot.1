@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AA8E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B7D2E77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:33:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FFD38959D;
-	Fri,  6 Dec 2024 16:33:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A4A8E89613;
+	Fri,  6 Dec 2024 16:33:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Od5g+w77";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q/3qpgCu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EEAB8914F; Fri,  6 Dec 2024 16:33:10 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 3BCAF8964B; Fri,  6 Dec 2024 16:33:19 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66FA08959D
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:33:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 500D489655
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:33:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2ee6c2d6db0so1979829a91.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:33:08 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2ee51c5f000so1625955a91.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:33:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733499187; x=1734103987; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733499194; x=1734103994; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lBjXc//uc41Ai7ggdD7KWQhE0twBXJ1oaKEH4Pwoyto=;
- b=Od5g+w77hb8O1Po+nJ93Ozu/RhzItfSc37RMLLfjFP8aRNNzvHfHfJas7VoQ1v/6Bb
- ABykrj4DW/8O7xticJK9QYSEiZp9yd0rxfm3k1TTXIBuUty2CoLIm3h/ftEHAdz02UhN
- icOybv5p+OzKm0pfIe9x3BZIe0OKTEb1sVFl0=
+ bh=tAeKiWAQtTt1MzuXbSt+hVIo9bRXCmwHvQHagsaxSIA=;
+ b=Q/3qpgCuLokvjknXKBD/Wph6LRqf/NlQrVsu/VE/x6yu7l+xTE2c1VgQEGhPhw6s44
+ GKr6atNAUmjjSAPeI77F74RWKzk1Htbnc5HVdtWGocMCLTwmTB3x0hxRRevMSGb8hgff
+ Rh4pLl0F5zYsLfT/kcIEk8uDq2Vd91swvJzYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733499187; x=1734103987;
+ d=1e100.net; s=20230601; t=1733499194; x=1734103994;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lBjXc//uc41Ai7ggdD7KWQhE0twBXJ1oaKEH4Pwoyto=;
- b=OmrG5er5IygPf3HvWluiVhAEL6s1SD9h5AvymSG31VwFxJBgD9Ki8Tnqz2m4C7OnRY
- aUcQZNb6A2YfjZHjeF1o6y0jMur8frRd+tIvbz+azWl7EQRTIUYnjb9pGd9BN7oqFMCs
- Ppyx97KahAo0fCOEIeFMAF0lfiWnyX4JBiDVQWkWffUEUiWjd41KwDkuwS124+yT+dXR
- dw85nF7aZdixfTiincs8doN84mkKrzTHAgCUgUpKwI4wCZN7iJgG4+m7E7rXCxUazGNE
- fpmv0jY1bX9JYs8uFvTqqEAmNC/jeWk/K1fokiq2SI8NCNH8/m6M+nh+sPFscLa1cvq8
- wjyA==
-X-Gm-Message-State: AOJu0Yy7QZf4k2zhZgNGBC7bm+yB1SWsv2JqFH4nTuKYRO+lKHif+Ati
- 3JOK113cu8EXp3w8KKGvWeDBB6tQl47tyRM/Hxqg7ZcwF1mcCD6tRQG+Mjy1iMuYnz31iztZn8u
- mvMK0z7a1vRKMjs4UOKHj7FlchYXBlyigSI3h
-X-Gm-Gg: ASbGnctmItCg7kKYArA6jq46LzNcFU5rXa4hSV7ko8sfMz1l93E8FhflgKcM8pKraR3
- GdqCpMPR0+pUMyv/783b6KZrBhZH38IP1
-X-Google-Smtp-Source: AGHT+IECiO3sJ/DKQsNv9wYm0xrMbhjnX1IuS9dRDluq7gpapufkda/6st85chOm8CGX0e9sjIz8NSq8KkZCp8zRiAY=
-X-Received: by 2002:a17:90b:3bce:b0:2ee:acb4:fee0 with SMTP id
- 98e67ed59e1d1-2ef69e1279bmr6130986a91.16.1733499186915; Fri, 06 Dec 2024
- 07:33:06 -0800 (PST)
+ bh=tAeKiWAQtTt1MzuXbSt+hVIo9bRXCmwHvQHagsaxSIA=;
+ b=Wo1aTSuMTPlUMgGPPEcCEg8u8TXDP4A4g/wqD2x+3QCEGygkFa8tPEnJe7f58P9x66
+ M7vmuJH6uQQhGFS7Y8C+O3vcVdb9JnUKzyU5XWvosi8IfkqB7V15GYgFDG/tdpcDdNEV
+ 24/6quNUNZ98Icpm9PMLRLQj6mhGjgOgGMH7iFS6iZm6YuRJh5Ed9j3x3umZqncviMbJ
+ mcJ9avMMZCUQzWInEWb+T4MVof2ms0eUciYbJZtpR/lrzXFpFOAGRur9hCA2jcvNmi1Q
+ P07PZQzrxbbsg+JxG+3g4mBDdnXpVSTTN8ZerskUf7srTJrdltXG6sxUL78lCu32YQ1L
+ 0joA==
+X-Gm-Message-State: AOJu0YwDeUwaVQrUjjOv36hXec0im6GxzC/lesJurE0JYNWX/yfQDkbA
+ cc0+1xWF04rRumFj8UWKqcxez58rWvuG1iKeJDaAyeoA5wJX95VvUUeBEMzgpjYcINzQ8ge4rTy
+ ibsTi4O1MccqEvAFpsgtX3/AsMKsrE4cBsRh4hQV6xy5K2UA=
+X-Gm-Gg: ASbGnctaTlWMwY0fj+JZKYSlF6qIqmdkpAXebh4IH5tLmoJjA3gfOKF8963hrVS8A1d
+ Nxab9Qt3BY8uEsjaK0uKIH+MSfTNYTvCcPK9G
+X-Google-Smtp-Source: AGHT+IGgb0zzulEY4Y58jZxNo6pOt5Z7A0ko1d3qH9SquOmHcZqomjelyzeJLQGaP0thG+Ks6Z6eEfa6U1baoFydBVQ=
+X-Received: by 2002:a17:90b:5204:b0:2ee:d371:3227 with SMTP id
+ 98e67ed59e1d1-2ef6a6bdc2amr6020204a91.17.1733499193905; Fri, 06 Dec 2024
+ 07:33:13 -0800 (PST)
 MIME-Version: 1.0
 References: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
+ <20241125175111.1181749-2-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241125175111.1181749-2-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 08:32:49 -0700
-Message-ID: <CAFLszTghdnYM0_FuSMCcT+_Jgtbi0=1CtAeQKfnHe+ONnUxfYA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] tools: dtoc: Allow passing optional input
- directories
+Date: Fri, 6 Dec 2024 08:32:53 -0700
+Message-ID: <CAFLszTi-0uJFjaEcM8bpuHCjTbM5p_GDyqvrLDVyrFOSFm2hrA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] tools: binman: Pass a list of input directory to
+ EnsureCompiled()
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
 Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
 Content-Type: text/plain; charset="UTF-8"
@@ -87,51 +88,64 @@ X-Virus-Status: Clean
 On Mon, 25 Nov 2024 at 10:51, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> An optional list of input directories can be passed to EnsureCompiled() which
-> allows to pass a list of directories where input files can be searched.
+> Input directories can be passed to binman using the '-I' option and those
+> input directories are now also passed to 'dtc' when run by binman.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
 > Changes for v2:
-> - Use 'None' instead of a list as a default argument for EnsureCompiled()
+> - No change
 >
->  tools/dtoc/fdt_util.py | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  tools/binman/control.py | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
+indirs would be a better name, but the comment makes it clear enough
 
+
+> diff --git a/tools/binman/control.py b/tools/binman/control.py
+> index 542c2b4564..e73c598298 100644
+> --- a/tools/binman/control.py
+> +++ b/tools/binman/control.py
+> @@ -526,7 +526,7 @@ def _RemoveTemplates(parent):
+>          if node.name.startswith('template'):
+>              node.Delete()
 >
-> diff --git a/tools/dtoc/fdt_util.py b/tools/dtoc/fdt_util.py
-> index f1f70568cf..d5ecc4207d 100644
-> --- a/tools/dtoc/fdt_util.py
-> +++ b/tools/dtoc/fdt_util.py
-> @@ -55,7 +55,7 @@ def fdt_cells_to_cpu(val, cells):
->          out = out << 32 | fdt32_to_cpu(val[1])
->      return out
+> -def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded):
+> +def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded, indir):
+>      """Prepare the images to be processed and select the device tree
 >
-> -def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
-> +def EnsureCompiled(fname, tmpdir=None, capture_stderr=False, indir=None):
->      """Compile an fdt .dts source file into a .dtb binary blob if needed.
->
->      Args:
-> @@ -63,6 +63,7 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
->              left alone
->          tmpdir: Temporary directory for output files, or None to use the
->              tools-module output directory
+>      This function:
+> @@ -543,6 +543,7 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded):
+>          use_expanded: True to use expanded versions of entries, if available.
+>              So if 'u-boot' is called for, we use 'u-boot-expanded' instead. This
+>              is needed if update_fdt is True (although tests may disable it)
 > +        indir: List of directories where input files can be found
 >
 >      Returns:
->          Filename of resulting .dtb file
-> @@ -79,6 +80,8 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
->          dtb_output = tools.get_output_filename('source.dtb')
+>          OrderedDict of images:
+> @@ -558,7 +559,9 @@ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded):
+>      # Get the device tree ready by compiling it and copying the compiled
+>      # output into a file in our output directly. Then scan it for use
+>      # in binman.
+> -    dtb_fname = fdt_util.EnsureCompiled(dtb_fname)
+> +    if indir is None:
+> +        indir = []
+> +    dtb_fname = fdt_util.EnsureCompiled(dtb_fname, indir=indir)
+>      fname = tools.get_output_filename('u-boot.dtb.out')
+>      tools.write_file(fname, tools.read_file(dtb_fname))
+>      dtb = fdt.FdtScan(fname)
+> @@ -846,7 +849,7 @@ def Binman(args):
+>              state.SetThreads(args.threads)
 >
->      search_paths = [os.path.join(os.getcwd(), 'include')]
-> +    if indir is not None:
-> +        search_paths += indir
->      root, _ = os.path.splitext(fname)
->      cc, args = tools.get_target_compile_tool('cc')
->      args += ['-E', '-P', '-x', 'assembler-with-cpp', '-D__ASSEMBLY__']
+>              images = PrepareImagesAndDtbs(dtb_fname, args.image,
+> -                                          args.update_fdt, use_expanded)
+> +                                          args.update_fdt, use_expanded, args.indir)
+>
+>              if args.test_section_timeout:
+>                  # Set the first image to timeout, used in testThreadTimeout()
 > --
 > 2.43.0
 >
