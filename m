@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CACCE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB025E77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDCDA89655;
-	Fri,  6 Dec 2024 16:32:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A53D89613;
+	Fri,  6 Dec 2024 16:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ircZk1r8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ea7xzMov";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBBA389644; Fri,  6 Dec 2024 16:32:03 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 94C1489645; Fri,  6 Dec 2024 16:32:04 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F55B89613
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:31:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 532988964B
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:32:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2ee989553c1so1918067a91.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:31:55 -0800 (PST)
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2ee8647dbb9so1796452a91.2
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:32:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733499113; x=1734103913; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733499121; x=1734103921; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EK4+6zO8peDj7Vwzy5mhK8Fr2TN/2br2pqDXmAuZBK8=;
- b=ircZk1r8fe6t1SJt8usqCzaCTTCt9bXovA2vgAWCs6eiQ9A83H7+tuz/LDQvaNf8S+
- aK0GWSPUNYpurlES4kTDX+8h2x8Ot0FvDAQ0La/XsOchs4YpNCQh49hHXkbnNEge/iPD
- 1w40Mwe0xgWHuVuNJ57m3xWW0fFTjJXBn7EVE=
+ bh=WDvNzuYtwhOF9jrd5OGuGf5gr+oFvLH9RATqDn4cSTY=;
+ b=ea7xzMovLGK+uPvp4NfQgNSTxso+hJ1GKBeSiDqRQxPyKMdNrINu5HErQuStwNddav
+ omB9wSRdYQj2A0Q223Z35mPJm8M8MAr7imekQLJhstrUAfd26wBwEeydZgBO7v2khFOh
+ RB0WwZKsA2GLsEoWyA1uv9T+ocjuTfFhhu2B4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733499113; x=1734103913;
+ d=1e100.net; s=20230601; t=1733499121; x=1734103921;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EK4+6zO8peDj7Vwzy5mhK8Fr2TN/2br2pqDXmAuZBK8=;
- b=iEQQ5EvxCaA4qPHxPYcJdFMZK9O94IhkASnLZlwbiYh7gyGERXn7nVY+/svglmk4L7
- gvKYmKc+4PQPgv8DwTligupupdwq+1qW2Yl6gzDO2niDaebo4EhOdZ4kAxvS6qtpfd6c
- GPEMHfaB3Mg0TZJLtyvrEqiGuFqOOX4Cn4cS3ebfZtLrFlBNQgwXyZVtWWUGUamz+sTF
- ccHfoEnYyGOyXi8N1Z0Rl9bpsz8xJBS3Rbb9u8RsOg7iWVECwuOAvlOQ8W34L3N+TO70
- W1t2g1A3lHa4Z/RRT1FMMUc+rrawQrZy1OpO+5ldJL7WZX31MR9wkMmTGtE7A+UXniKI
- NcvQ==
+ bh=WDvNzuYtwhOF9jrd5OGuGf5gr+oFvLH9RATqDn4cSTY=;
+ b=MQ3xftuQVOeJXwMF6KXJN7NSS6JCjmbXuMdI/kA7/BkZjly1IW9ojUu15MITVtdb2L
+ 6ApVnnOC0BwftnyJOzn/iJO30HI+UgOgFMGOjVPVJmCZL7/Lmc6xp640UgCbTApS/vz/
+ Y4xey/PIjhxIh4S6FgoGuxmw+BdqDcJj5BZ1ZOcY+/m+gVIxyTdmWD23+2wjCEu/r5kn
+ TIgippWhhrXwMn1G2DxFiDCcmAXMR02m357oULEvsGYPMSdFVsNsyr6i/D+lZ9aQR/ZW
+ Cog8k5V9xbHT6J5b25wScgKl6Hs11Ltr9qAjJkL60iEcPWcllWU7/YYVQuwlhodYowtk
+ zSsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOKXDJKJ3x9lQXRzRpYozOS+f+PSxM8+2xE6sJB6smzIVfibOqcOmipx4hUTIY0nrTpRfBPAg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6J8V6Tt/E1mCr2x93na7IPxi/bjUEapryXMvUoYZ3i7Eib6jn
- wof10N8giOhAaNEk7NJKn1x7ylJQzsNFwNsQblmflMrtV1B/tblqpnYp2gdUlS2LxW1ZVkzLZXf
- btwWx0uW4H3jxTMK7gpFEcj/H1BzxsZJa9YuL
-X-Gm-Gg: ASbGncuJXq5fHGuI9BOlBfHD/QBzI8KFX7dJb/xYf42t/3J5RPtVAYtFFbn68aKq9Oo
- 7zwYAA6UwbKgGBI9v2qC2Tl9d0tqA/ALv
-X-Google-Smtp-Source: AGHT+IEHHcsHqJvxiw/50obReIDqM4UcVk3SQiiHWRAEU9+yuHcgDwejuLpcilx/hA2yyRr537SS0JHX64E39bdfkDs=
-X-Received: by 2002:a17:90a:e710:b0:2ee:b0b0:8e02 with SMTP id
- 98e67ed59e1d1-2ef6ab103bcmr5162164a91.28.1733499113739; Fri, 06 Dec 2024
- 07:31:53 -0800 (PST)
+ AJvYcCXYt1m6MeJhwCmSNx1oeOoI++ewgBuUH/ihNjaA5IVR0H1l+LbsaT47U1kQ8YvkznpQ0+C+muk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyTLjm8M3cB4aakRcbqc3IC94CBNxNIP4DLmrCCFOTwLYcUu5jJ
+ fpYHWursyYHKrJLbGl+5iYTiX0LgT3gQwKEQozdXkgToYWvtuSIDiAtFTbF5NaUxObU7PhvT0VY
+ xao1ZfEV/Um0jteAU2+03S30EbTBzMlWkpMVE
+X-Gm-Gg: ASbGnct2sa4eoeVfJ3Jw3hSVLnIl/Ducikb2b+nd/UgYr3DQgKx0SjD5OMAWsaYfzMd
+ CvgLmZRiZvLiV6osAZkIQjZpXyarGDQuW
+X-Google-Smtp-Source: AGHT+IE4qvDNq5ZeCIn04rywJhOV/WySle2t6amikCo1ctrMq4c/cEtwrOoxcoQqR/RMDuXdWc6HEsGvhyfxSKSdiFA=
+X-Received: by 2002:a17:90b:2f86:b0:2ee:c457:bf83 with SMTP id
+ 98e67ed59e1d1-2ef6a6c1400mr4136989a91.19.1733499120898; Fri, 06 Dec 2024
+ 07:32:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
- <20241202-sandbox_repair_of_embed-v1-5-05aff4b0ccf7@salutedevices.com>
-In-Reply-To: <20241202-sandbox_repair_of_embed-v1-5-05aff4b0ccf7@salutedevices.com>
+ <20241202-sandbox_repair_of_embed-v1-1-05aff4b0ccf7@salutedevices.com>
+In-Reply-To: <20241202-sandbox_repair_of_embed-v1-1-05aff4b0ccf7@salutedevices.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 08:31:36 -0700
-Message-ID: <CAFLszTj7psRzUuKfq+bMKeAsZS2xbox263sk=EAvOGKH+Z781A@mail.gmail.com>
-Subject: Re: [PATCH 5/5] sandbox: set retval early in board_fdt_blob_setup()
+Date: Fri, 6 Dec 2024 08:31:17 -0700
+Message-ID: <CAFLszTjs+RYUk9jGMtWArrSC=OEdxM7RXb2QCVWS0fWXdrtyyA@mail.gmail.com>
+Subject: Re: [PATCH 1/5] sandbox: fix bloblist_finish() linker error if
+ BLOBLIST=n
 To: Evgeny Bachinin <EABachinin@salutedevices.com>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Raymond Mao <raymond.mao@linaro.org>,
@@ -91,69 +92,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Evgeny,
-
 On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
 <EABachinin@salutedevices.com> wrote:
 >
-> Bug:
-> nobody sets 'ret' to non-error value inside board_fdt_blob_setup()
-> in case, when gd->fdt_blob has been initialized before calling the
-> board_fdt_blob_setup() (say, due to CONFIG_OF_EMBED=y)
+> Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
+> error:
+> ```
+> ld: /tmp/ccwtRVty.ltrans0.ltrans.o: in function `state_uninit':
+> arch/sandbox/cpu/state.c:508: undefined reference to `bloblist_finish'
+> ```
 >
-> Reproduced with CONFIG_OF_EMBED=y && BLOBLIST=n.
->   ```
->     $ ./u-boot
->     initcall: 0000000000078e05 (relocated to 000061138d2c7e05)
->     initcall: 0000000000117b12 (relocated to 000061138d366b12)
->       fdtdec_setup():
->             gd->fdt_blob = dtb_dt_embedded()
->       fdtdec_setup():
->             gd->fdt_blob = board_fdt_blob_setup(&ret);
->
->         board_fdt_blob_setup():380 ret:-2 gd->fdt_blob:0x61138d4db310
->                 if (gd->fdt_blob)
->                         return (void *)gd->fdt_blob;
->
->     initcall failed at call 0000000000117b12 (err=-2: No such file \
->        or directory)
->     ### ERROR ### Please RESET the board ###
->   ```
->
-> Patch moves code, zeroizing the 'ret', before checking the fdt_blob.
->
-> Fixes: d8289e7dfe5 ("sandbox: fdt: Avoid overwriting an existing fdt")
+> Fixes: 1c52fcca72b ("sandbox: Write out bloblist when exiting")
 > Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
 > ---
->  arch/sandbox/cpu/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-> index d1c4dcf0764fb37ec99585a3db16fa34c3a54dac..7e93377e87e75b0fb92a8cf139b4a731a88a6a7b 100644
-> --- a/arch/sandbox/cpu/cpu.c
-> +++ b/arch/sandbox/cpu/cpu.c
-> @@ -377,10 +377,10 @@ void *board_fdt_blob_setup(int *ret)
->         int err;
->         int fd;
->
-> +       *ret = 0;
->         if (gd->fdt_blob)
->                 return (void *)gd->fdt_blob;
->         blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
-> -       *ret = 0;
->         if (!state->fdt_fname) {
->                 err = setup_auto_tree(blob);
->                 if (!err)
->
-> --
-> 2.34.1
+>  include/bloblist.h | 7 +++++++
+>  1 file changed, 7 insertions(+)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But note for the future we have:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20241102174944.412088-2-sjg@chromium.org/
-
-Regards,
-Simon
