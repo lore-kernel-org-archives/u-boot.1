@@ -4,94 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BFFE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:41:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D24BCE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 680858913C;
-	Fri,  6 Dec 2024 20:41:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37BFC8913C;
+	Fri,  6 Dec 2024 20:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lZzCMFM9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TM1KrtZv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47A8489082; Fri,  6 Dec 2024 20:41:40 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id B503E89065; Fri,  6 Dec 2024 20:49:23 +0100 (CET)
+Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
+ [IPv6:2607:f8b0:4864:20::92a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE71F8913C
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:41:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E8988913C
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:49:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6d87fffeb13so15803046d6.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:41:37 -0800 (PST)
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-85c4b4cf73aso200407241.2
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:49:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733514096; x=1734118896; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733514560; x=1734119360; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Px/pqQHqo/YXyXx8t6YiwZsBJpoIlExHOUp3oqQs2Vk=;
- b=lZzCMFM9lQO3dPY37j72VznGyKWKeJBwWIX0XaQfdWRZ62q789bJnSAoomEwJsjcgF
- P/wBXnuRKSYdWUkk0r6tsmja65Izn6w1sJdnmHGk0U1Acq6BHTXAJIzPJw2/D179/AkV
- RWo98+M7RaEFAbIwfhv8Pt5+jdtVyDCM0Y6aI=
+ bh=zOJ3E9JTk/x7JubGp8mtbEwa4WbsUIJw0Rgd4MsstO4=;
+ b=TM1KrtZvHfUSx0ufyyMrGqRrX9UtKKlhP4AZhfzPply8f94ccMEhyqWPay58RlQ3b0
+ hK5/Fkm2A6VIXQNFJ2MLOc/70eyPSGrymmP5ICT3x7we0rYPqU2m4RvZqBUREwvBYOZv
+ OlcG0xvs39ZOoj4Q84q6FEvxOUf0qM0VaDQao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733514096; x=1734118896;
+ d=1e100.net; s=20230601; t=1733514560; x=1734119360;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Px/pqQHqo/YXyXx8t6YiwZsBJpoIlExHOUp3oqQs2Vk=;
- b=d4l7slVCVfi0WJVmKTewqT1fSrBbgB4/ysaR+gEyloUEDN4+yit8Pdz8bziM4BgK7k
- zCxkF+o/AAalyzkGksLbtnBRzMBYcbElQPtmALqumafipjq7b2YnPSNtiv6eKVCMdv6G
- Sw8IqfrYcWF0yO3UsVd13P0ccejrDG1abTAP40HCOZdKGm5SwuVK0R887zRcL+dcm8Ek
- dW8cvlKijEyDsUoNmDXhPWTHpAU9Ci3sJVV9EWAkXUJykyF9USFZMi0pr2n/BQNqRQCA
- C8WMvhlBwh9swb7f3THIyJb0m/2eGbLpJFfToRVnii5lA0gfWyfg0dwXKMWATo/F75YD
- K0SA==
-X-Gm-Message-State: AOJu0Yxlt8cdJSXLc+NzyMlL9xNm2Mc+KGJW4D7HEHgDEv1HRJ6EkrRY
- hTcuPj7rFGP+qjBVF5wUh5dRFzAVuOBdeIOHdjmAkow7pxNps24cTMqPI3egR6A=
-X-Gm-Gg: ASbGncvnJuegVH63iRKl844qrGjEXJEpXosu+JC3VTrlM5sQJtUKS1QFfKSC15J2PGS
- othgyFY8/x2JUdagi/Z0m5MUwNvQ9vtSg5XN1pMsAoC5//j9FAWwJd6IeZHa50+Gzrg53JIqKUp
- OSQrQas5HEflQ1hjreBo+bbFOIn9cv4T2qEN5u1hMoPKHXUlTagWvq1EOpqGGY8teqv2LS88qM/
- xYNAXb12qkFUuRa2Am6+OfDnHrxvPonTgrdrDxHiyxBTaSWtg==
-X-Google-Smtp-Source: AGHT+IE3If1KECt6gfuyOY3Ny9oKT6kYPP8fb7UpPO94b3Mwajp73ELdm0ab41ysEjpNQyKTHRMihw==
-X-Received: by 2002:a05:6214:2506:b0:6d8:88fc:c0f4 with SMTP id
- 6a1803df08f44-6d8e73c0d71mr63819676d6.33.1733514096390; 
- Fri, 06 Dec 2024 11:41:36 -0800 (PST)
+ bh=zOJ3E9JTk/x7JubGp8mtbEwa4WbsUIJw0Rgd4MsstO4=;
+ b=oYTp0e4rmNeT/H1+HQ42HMTDSE8hsyrcqPbFbyS8vU1hkupyRO0Km1jP8CMaFPwLy/
+ cy6E6O344k7JvsYYCEDtyi5MoacrH6yo8Ns/QO2EaOh8RuTIdBOZOvQx+LVs8W0Vn+V3
+ Vn9ZapQYsXwoej3KajhqzF+UI4JxWTzSn8Osl5anAF58eGni2lNz2fQNxOjR7COzxL91
+ +6wmQGhYAXBr4UdP4AenYgDCFq4e4RYRQGn9HoF1w/Zt+ezMClgREWBd610mn8XXqMcQ
+ +jd3gBVN6W6XjeED2PF7+utEMViNbflctFtNAMuezxL34GuDeuj7ZmLzQJlL3Z2WQnYy
+ Xqhw==
+X-Gm-Message-State: AOJu0YwfE1MSwsXdL7N5AOgOQeE+sorYT+Ma3w5MYQ+wvBp8p+gFHypy
+ St4v+9BRjXGjsWX5PYE+W3bzSeQdLnHIlToDl9qNmVuf3XEvAQS/qBCZ+AFH1ME=
+X-Gm-Gg: ASbGncuXSOT0JfO82FwiZcvj1cCkfy50IyeN3b3iE0md9BfOVuLeZXFWLJRzPZ/SSWA
+ XJCtZfsLZoeu2APRFNP5PUcRjXa4jWbi/rw7uZ0VocSZDekHkOGhVnFMSeE8kZyVhqz/32k35ng
+ v0bdIsIe7Pz0d5yz7kD3WeHoWCu8cbdTyi/anOr6Tn2v4M/v3fEhDlu3JcsHd8UxiphwTnB/cEK
+ G+m5iw6bc/dKYSQBBOVpHtYAOhG5fnnrK95G83mg5aAC6U0lQ==
+X-Google-Smtp-Source: AGHT+IE1c8l7Cikc0ozz1W2MrD/7faB7obZPTXbZGTzcRZHIq+yTg+PzicFK6DoDfeDUqd3gbYYvNg==
+X-Received: by 2002:a05:6102:292b:b0:4af:c24c:1a5e with SMTP id
+ ada2fe7eead31-4afcaa1008bmr5449742137.5.1733514560250; 
+ Fri, 06 Dec 2024 11:49:20 -0800 (PST)
 Received: from bill-the-cat ([187.144.30.219])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8edb76ce7sm9262906d6.90.2024.12.06.11.41.32
+ af79cd13be357-7b6b5a83cd7sm204131885a.93.2024.12.06.11.49.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 11:41:35 -0800 (PST)
-Date: Fri, 6 Dec 2024 13:41:30 -0600
+ Fri, 06 Dec 2024 11:49:19 -0800 (PST)
+Date: Fri, 6 Dec 2024 13:49:15 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Ivan T. Ivanov" <iivanov@suse.de>, Jan Kiszka <jan.kiszka@siemens.com>,
- Jerry Van Baren <vanbaren@cideas.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>,
  Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
- Matthias Brugger <mbrugger@suse.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
  This contributor prefers not to receive mails <noreply@example.com>
-Subject: Re: [PATCH 0/3] rpi: Tidy up booting
-Message-ID: <20241206194130.GX2457179@bill-the-cat>
+Subject: Re: [PATCH 2/3] fdt: Allow expanding the devicetree during relocation
+Message-ID: <20241206194915.GY2457179@bill-the-cat>
 References: <20241206131113.2865416-1-sjg@chromium.org>
- <20241206140852.GO2457179@bill-the-cat>
- <CAFLszTizXjXnc_P3RHpxbKj5qoEfW_Swrc6V6v6dS7kFUqH9CA@mail.gmail.com>
+ <20241206131113.2865416-3-sjg@chromium.org>
+ <20241206141310.GP2457179@bill-the-cat>
+ <CAFLszThS0mDMe=ujRDPFDDrhM_9p=o=v5oBbpsQTAbDNfU5Qpg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="00HQBNTEf1279WQT"
+ protocol="application/pgp-signature"; boundary="MBJwl60CjXfUv7H5"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTizXjXnc_P3RHpxbKj5qoEfW_Swrc6V6v6dS7kFUqH9CA@mail.gmail.com>
+In-Reply-To: <CAFLszThS0mDMe=ujRDPFDDrhM_9p=o=v5oBbpsQTAbDNfU5Qpg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,89 +106,109 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---00HQBNTEf1279WQT
+--MBJwl60CjXfUv7H5
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 06, 2024 at 12:17:49PM -0700, Simon Glass wrote:
+On Fri, Dec 06, 2024 at 12:18:07PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Fri, 6 Dec 2024 at 07:08, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, 6 Dec 2024 at 07:13, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, Dec 06, 2024 at 06:11:10AM -0700, Simon Glass wrote:
+> > On Fri, Dec 06, 2024 at 06:11:12AM -0700, Simon Glass wrote:
 > >
-> > > This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
-> > > ramdisk, by expanding the available space.
+> > [snip]
+> > > A comment in that function says that we assume there is space after t=
+he
+> > > existing fdt to use for padding, with the padding size set to
+> > > CONFIG_SYS_FDT_PAD
 > > >
-> > > It also tidies up some strange behaviour with the provided FDT, where=
- a
-> > > separate pointer is maintained to it, even though U-Boot has copied it
-> > > and placed it in its own space. This avoids strange bugs where it
-> > > accidentally gets overwritten when loading a file into memory.
-> > >
-> > >
-> > > Simon Glass (3):
-> > >   rpi: Update environment to support booti and large initrd
-> > >   fdt: Allow expanding the devicetree during relocation
-> > >   rpi: Use the U-Boot control FDT for fdt_addr
-> > >
-> > >  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
-> > >  board/raspberrypi/rpi/rpi.env | 10 ++++++----
-> > >  common/board_f.c              |  6 ++++--
-> > >  dts/Kconfig                   | 11 +++++++++++
-> > >  4 files changed, 29 insertions(+), 18 deletions(-)
+> > > However, there is no guarantee that this space is available. If using
+> > > the control FDT, then global_data is immediately above it, so expandi=
+ng
+> > > the FDT and adding FDT properties will cause U-Boot to fail.
 > >
-> > My feedback here is the same feedback I gave the last person that wanted
-> > to update the Pi addresses, and I forget if they came back and did that
-> > (and it's in Peter / Matthias' queue) or not. Disabling device tree
-> > relocation is a bug and must be removed.
-> >
-> > After that, given the range of memory sizes available on Pi platforms,
-> > allocating the kernel / initrd / kernel decompression buffer at run
-> > time, ala mach-apple would make life easier in the long run.
+> > This sounds like a generic issue and should be fixed outside of a "Pi"
+> > series.
 >=20
-> Yes, of course, but for now, this resolves the problem and I don't
-> believe it creates any other problem.
+> Yes and I know you keep asking for multiple smaller series, but I've
+> explained that keeping track of all that for months at a time is too
+> challenging for me.
 
-Yes. I think you missed that:
-https://patchwork.ozlabs.org/project/uboot/patch/20240723193430.3050251-1-w=
-alter.lozano@collabora.com/
-is also outstanding and should solve the problem.
+Yes, and it's also too challenging to review for the rest of us.
 
-> The solution should not be board-specific though. Once I have the
-> bootstd files stuff is finished, I believe that bootstd will be able
-> to do this and I plan to do this. Then the variables will be unused
-> for rpi and we can just drop them for any bootstd boards.
+> > > diff --git a/dts/Kconfig b/dts/Kconfig
+> > > index 41a758e83a6..360611edd01 100644
+> > > --- a/dts/Kconfig
+> > > +++ b/dts/Kconfig
+> > > @@ -219,6 +219,17 @@ config OF_OMIT_DTB
+> > >         This is used for boards which normally provide a devicetree v=
+ia a
+> > >         runtime mechanism (such as OF_BOARD), to avoid confusion.
+> > >
+> > > +config OF_EXPAND
+> > > +     hex # "Amount to allow the control FDT to expand"
+> >
+> > No "# ..." because the help explains what to do here, if needed.
 >=20
-> As of now, we have 390 boards using bootstd and 381 using distro
-> scripts, so it is progress!
+> OK
+>=20
+> >
+> > > +     default SYS_FDT_PAD if OF_LIBFDT
+> > > +     default 0
+> >
+> > A "default 0" is almost always wrong.
+>=20
+> In this case it is correct, since it means not to add any extra space
+> for the FDT.
 
-Yes, it will be interesting to see what the future holds, and any of the
-solutions handle some of the trickier corner cases that lead to the
-current situation. Or perhaps the best outcome is that in current times,
-those corner cases don't really appear anymore (with 512MiB DDR being
-the lower bound for example on all the Pi families).
+Which is still wrong? Because we don't allow for this particular device
+tree in memory to be read-only and so the question is "Do you want to
+break things on some platforms or not?".
+
+> > > +     help
+> > > +       Some boards make use of the control FDT to boot an OS, thus w=
+hen
+> > > +       image_setup_libfdt() adds extra things to the end of the FDT,=
+ there
+> > > +       needs to be enough space.
+> > > +
+> > > +       Set this to the number of bytes of extra space required for t=
+he FDT.
+> >
+> > We should just use SYS_FDT_PAD directly and not add a new option.
+>=20
+> I thought I read somewhere that fdt_high =3D=3D -1 should not be used. So
+> for most boards, this padding is not needed?
+
+That's also true, and gets back to why putting multiple patches in a
+single series is a Bad Idea. The function in question isn't doing some
+check for if we've disabled device tree relocation for the OS, it's
+early on, it's reserving our control fdt, yes? And then the problem ends
+up being later on, we use the control fdt for the OS, and modify it, but
+haven't ensured there's enough space for said modifications to not stomp
+on something else? That is a much bigger generic problem, no?
 
 --=20
 Tom
 
---00HQBNTEf1279WQT
+--MBJwl60CjXfUv7H5
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTU2MACgkQFHw5/5Y0
-tyx9iAv8DGzaaox5oJcHOAviRbGSVTUQbT4NMMvTGDLCC5L0WJpFyDIPB8YHLDzD
-nYmKbTQbowJzZam3xgonwMXkt6+rN4Uf2xcyLAwq+aNiJqPtnrWSO8PCp2uHMl8M
-miU6svtWNjlM6rTNHPiUjBslo1PYsYae/wg7vqPuPKjIXTRSQaqaU7SFYShDYahL
-H1sJHIn82rgNL/Q6fEGXHHZikLjLBxbEYnjsDTz8pqyjm15LqdJtoCq9xEwDi3po
-zq5KUj3ZsOXn6P10bNVUrJBYhko9xys/0PHMmhnSzJMBr99RV4xsI0M35Lky/5Qh
-/R+SZEcCngrslgyboM5PDTkcwl5rZu20jWFlPWVi2RQhcDTDK4PAuYRjAUZHqDG7
-/BSEGzUOBt+iSKQekhAZPSJJ5s75G0CHqS1wOM76VJbEut+7UwUNMN8HNCtVDMla
-1A63Z7PVvR6oGpYsvlrK+pJu/YILigCmOjHLYwydKIcAgO2vHLnjcDXoFx23Va4q
-B3lUsKPD
-=6Uu8
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTVTsACgkQFHw5/5Y0
+tyzOsQwArNCqAyUULiI6hAZnq1bluvZz9SpK3dhWRMAFriv7aEITQrBZnraxC2BF
+2/vRmOsRBPNr5xuIrkMwZ5L9hXoQR1A3R9jLIfX+2N1gPslGvr3it/k1ljg5V8Y6
+dcZfmmJ/E9IqTXEtzdh1iIdz3FCo5H0ZiXp2tQQdG2e2Ij00LHbLKlSf4uLML7HK
+wjSAS8iZlQcXIMZA9YNJ4K53GMETIp1yj9nv2DIPL9BrlmU1XZFdzxBGXarfOkvI
+Uu9dxpilbamOpPwgjJGjV+enM6q5EF9lYlM09MQatOqVvuDbqx/CduAv8YCJZNJS
+FEImuypZpYoX/yYUbclcnWs6MZuwajCp9H8h462E8QPOmbMseNP+vY8Rg9NXMR9K
+qBX1ei3i2hddX4RdkRBWeON41e4NAKpyUuQQIgkG9gR6cZ2AWC0FcXdaq5jLIHms
+ZmeN5pkounlpGaWz7pq1OQsLSi5Ux4TmJOK6Vm3wGLpES91DW++oLV/WJttcGA2J
+uuiy/oaw
+=HYfV
 -----END PGP SIGNATURE-----
 
---00HQBNTEf1279WQT--
+--MBJwl60CjXfUv7H5--
