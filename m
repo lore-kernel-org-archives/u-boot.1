@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C907E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45FFE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E69E889616;
-	Fri,  6 Dec 2024 15:21:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 147E78960E;
+	Fri,  6 Dec 2024 15:33:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U/14k9Ft";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="scoev6m8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 393BE89627; Fri,  6 Dec 2024 15:20:59 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id D5F5C89615; Fri,  6 Dec 2024 15:33:35 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14B8089616
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:20:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B16AA8960D
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:33:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-46684744070so19827481cf.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 06:20:57 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-434a2033562so20510905e9.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 06:33:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733494856; x=1734099656; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lB5BfI5UxoymgGW3UhWGsvWOGWiYriA94+VvQ3kTl+4=;
- b=U/14k9FthPBd7B2CkjHDJvHiMgJ+75INq7z7RU6dnaYotP9e36qofhAywzfm37PyYl
- 65NzMNSrOCWvPDap35keY3DiaJHRpdbgVAjrSrKusv8DKWwNbnh2uW9V+bD+7bOrv/xm
- SDqeZ2IQlxr0oTnfbFoOB/n4SKCvffXBWXgB4=
+ d=linaro.org; s=google; t=1733495613; x=1734100413; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WUq4UbIDjYyZPh6PWYxrWkO+INO9wLZ94vRtt/L9bSc=;
+ b=scoev6m8Mf5MvgeC7nXZV3m4/t9pevwQOxs7pfCzUgyJ451HbiuWMoArcXe7x5o3TZ
+ YDqVyVLKgfONWdjAs/13AvadJoqQnh8Cb4TLb3afNuHMugxlK/xd0p0tCCEfoZCR7XPJ
+ 6E9LBDWQXEMSlEh1YMvGIYQPz4k0PEKpfcPYsxcZRyvLILruZcS9IH8753FW0ggqdrgs
+ 5F/6LIB9yK4AWqKioWeynbVialY2Iq2FJQI2hdPvaBvH0nAcrWLIzxWyBi/5N+DOnpxh
+ xNFuL8BGQXmnsMbgmhzIoFBjcZ36ghycP11Wvnx3rZsOvNp8FVEaw88gdnjYBk80RlfJ
+ YjEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733494856; x=1734099656;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lB5BfI5UxoymgGW3UhWGsvWOGWiYriA94+VvQ3kTl+4=;
- b=hAldcZvRDR8hpX1E/Kkvp3kwYGLqVhoAJHsDWwPxvPvNQa+4graJ3ehb2UeurfEVgI
- wgzgEwGAJ7HOdTyPEOgaU/2DumEAvoNpVduBRFjfzmmWIv+w0BNgaafvzNU9KBQ1XtNL
- 5laMbH/iMQbKcuhglwqY/KbGT/QSQkPalhe8Jp3qp7u2DrMAPr5K1uc7ng2a9NlElqY7
- 2Iv2JVbHgV5Go+yre8X5JNsV2s1NylmgUWxoDovw35i8snQj8wfMWWLHB4ExADh53zD0
- PwiYFBBj7kN8lDA/LHmW9LROAYiCS7q+i8yrxO3y1gYWlrBnfFyA1CzmcSLd+xkEEeac
- G+Jg==
+ d=1e100.net; s=20230601; t=1733495613; x=1734100413;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WUq4UbIDjYyZPh6PWYxrWkO+INO9wLZ94vRtt/L9bSc=;
+ b=Fan13Njw1kBvCYh54UtQfAyWbJ0M76lCDz6t5GEw1ekkaBuweqwG6z9iddE60dAMoR
+ 3MYshqZEZrbXNRjdAW98pTMHk5tZB0HUbsdo8kWyJyFP2JuZ2MyiY3R4gfbuPYI9b9iw
+ hD87kcJoy/ANfI/c6xTUWEVspyD0RYgHJVZf+VVCGYfxhAaR/scC38gCctb6pa8vJAHW
+ BeaaCtRV01hku9WhnJagx6Z8Xsro6FnTG+5RujbdrO7YmGVqFqEEc5ph2h9AdrTLrDRI
+ 5eSevTFZFXtwxFFPcfXSBL1VsnZ1bp2ANUycsKiJRHA87//mqWZ6zMtv18Vm7whTcCSR
+ /BuQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKeHPEXnHQMrGxHAnZhegNEYaafMlT4oQdnw5q+t7eboFKiDJhdgk5cLMxfnvxmt6uvCTsAE4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTZ8r3T4imQMVM23+BBXEoiVlauQpOiXo+m5Z3VAsuS1o9id2y
- 2+vpGHLIbbqUXZFhj9mD79C6GYwOsDH5up91miPS2p6i7bHU33MRfde8WWqJdrA=
-X-Gm-Gg: ASbGncsomCEHlh3Bg8+1ZfGCVHqPsUU9TU4GGOOvAB1pzZH/P3CalIZd4pQ6CXj8bR2
- veirNyV9JObzSNPNloRdiYIb96TeDtEnawPytHw5TksniMsJpLYP2qb+hF19GrRwxb2qd0/4Mao
- FtUjVzhU8hQ6akSjpDQbc3haHCa7aYefp6hMpVefOoTaIdgTRsw4w13pIFQuZGplATjMYmyueHZ
- nOTF1tKzdQVgfwcC8VJsTwwd/ddNZzfj5UmtpvIrdKO9SI7sQ==
-X-Google-Smtp-Source: AGHT+IFaJdwuntNImHq+Jq6nVHtyC6jkat1GEeJDhhe3xpUX0ONvKYxPcyn6kYPo68PXt4gXQEl9zQ==
-X-Received: by 2002:ac8:57c8:0:b0:460:ad8e:f5ae with SMTP id
- d75a77b69052e-46734cac040mr69930201cf.19.1733494855889; 
- Fri, 06 Dec 2024 06:20:55 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
+ AJvYcCW23Z4DNjwIia/cg1PuGYmxd7SUBh9wiRgrEycPVvL/UGBOPSat+2Y1ARHHTvLfSSZ3YvwV1ek=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0n8ev1F4zFaI0AyuP5EY+zDa4UeUmxE+r58T/YS+aF2HBn69H
+ DBAgPpVpg9CAKOMNaGOKnWvsz2AYZrABbb3Y4kr9Mi6j2wby7npOCDOBf6cI+A8=
+X-Gm-Gg: ASbGncvGGM/Gj+70qPwFvJo6D67g42T3NSJuiTuYwQORw22P/j9tO6sSIpG6N95TOCR
+ KkAwCoAjq1aYrw/7IeUnfpQThuUdR786qTOd1sYrfQVB2KH3bcbA19JsJSIiUIP2tUSx4KLmgQw
+ KAbpXGG7IAademVNb2ig4oKTYqykLkhylRIOqnE5dPkwDDa3M9uffDJQ2/AlAKx0g44dU3yoQob
+ VJ9M0hfc3EG5J0eJZNZCchOEWhvpZ9PyoFwv7kfAUe2vZp+JgCeObnB1lXGY/d7J0m2tdTxoH31
+ BZpj8+ITrr8m6HmM7ygoku0YJDg=
+X-Google-Smtp-Source: AGHT+IGce93v4m5FjfLzgOzDVv6w5OivFXzqqNMi03s7/x8J4I9mb/o/vrWpmO0qR14kR2WjGCAFaA==
+X-Received: by 2002:a05:600c:4f86:b0:434:a902:415b with SMTP id
+ 5b1f17b1804b1-434ddeb5523mr33035405e9.10.1733495613077; 
+ Fri, 06 Dec 2024 06:33:33 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:59a:bb7b:8cad:cb79?
+ ([2a01:e0a:3cb:7bb0:59a:bb7b:8cad:cb79])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467297c239dsm21193851cf.77.2024.12.06.06.20.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 06:20:55 -0800 (PST)
-Date: Fri, 6 Dec 2024 08:20:52 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] driver: clk: tegra: init basic clocks on probe
-Message-ID: <20241206142052.GQ2457179@bill-the-cat>
-References: <20241206060115.4346-1-clamor95@gmail.com>
- <20241206060115.4346-2-clamor95@gmail.com>
+ ffacd0b85a97d-386219096cdsm4777173f8f.81.2024.12.06.06.33.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Dec 2024 06:33:32 -0800 (PST)
+Message-ID: <43c4500c-be1b-4def-bdec-cf1c5ee48e33@linaro.org>
+Date: Fri, 6 Dec 2024 15:33:32 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="adpNmvmc/+i34C5q"
-Content-Disposition: inline
-In-Reply-To: <20241206060115.4346-2-clamor95@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mbedtls: remove MBEDTLS_HAVE_TIME
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>, Javier Tia <javier.tia@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+References: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,60 +104,64 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---adpNmvmc/+i34C5q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 06, 2024 at 08:01:15AM +0200, Svyatoslav Ryhel wrote:
-
-> In case DM drivers probe earlier than board clock setup is done
-> init of basic clocks should be done in CAR driver probe as well.
-> Add it to avoid possible clock related problems.
->=20
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+On 12/6/24 11:56, Ilias Apalodimas wrote:
+> When MbedTLS TLS features were added MBEDTLS_HAVE_TIME was defined as part
+> of enabling https:// support. However that pointed to the wrong function
+> which could crash if it received a NULL pointer.
+> 
+> Looking closer that function is not really needed, as it only seems to
+> increase the RNG entropy by using 4b of the current time and date. 
+> The reason that was enabled is that lwIP was unconditionally requiring it,
+> although it's configurable and can be turned off.
+> 
+> Since lwIP doesn't use that field anywhere else, make it conditional and
+> disable it from our config.
+> 
+> Fixes: commit a564f5094f62 ("mbedtls: Enable TLS 1.2 support")
+> Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
->  drivers/clk/tegra/tegra-car-clk.c | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/tegra-=
-car-clk.c
-> index 9078253d100..4f8405328a3 100644
-> --- a/drivers/clk/tegra/tegra-car-clk.c
-> +++ b/drivers/clk/tegra/tegra-car-clk.c
-> @@ -111,6 +111,9 @@ static int tegra_car_clk_probe(struct udevice *dev)
->  {
->  	debug("%s(dev=3D%p)\n", __func__, dev);
-> =20
-> +	clock_init();
-> +	clock_verify();
-> +
->  	return 0;
->  }
-> =20
+>  lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c | 2 ++
+>  lib/mbedtls/mbedtls_def_config.h                     | 3 ---
+>  2 files changed, 2 insertions(+), 3 deletions(-)
+> 
+> diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> index 6643b05ee94d..46421588fef8 100644
+> --- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> +++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> @@ -692,7 +692,9 @@ altcp_tls_set_session(struct altcp_pcb *conn, struct altcp_tls_session *session)
+>    if (session && conn && conn->state) {
+>      altcp_mbedtls_state_t *state = (altcp_mbedtls_state_t *)conn->state;
+>      int ret = -1;
+> +#ifdef MBEDTLS_HAVE_TIME
+>      if (session->data.MBEDTLS_PRIVATE(start))
+> +#endif
 
-Is this called before arch/arm/mach-tegra/board2.c::board_init()?
-Thanks.
+Should this part be sent upstream? Maybe as a followup patch in [1]?
 
---=20
-Tom
+[1] https://github.com/lwip-tcpip/lwip/pull/47
 
---adpNmvmc/+i34C5q
-Content-Type: application/pgp-signature; name="signature.asc"
+>        ret = mbedtls_ssl_set_session(&state->ssl_context, &session->data);
+>      return ret < 0 ? ERR_VAL : ERR_OK;
+>    }
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+> index d27f017d0847..1d2314e90e4d 100644
+> --- a/lib/mbedtls/mbedtls_def_config.h
+> +++ b/lib/mbedtls/mbedtls_def_config.h
+> @@ -92,9 +92,6 @@
+>  
+>  /* Generic options */
+>  #define MBEDTLS_ENTROPY_HARDWARE_ALT
+> -#define MBEDTLS_HAVE_TIME
+> -#define MBEDTLS_PLATFORM_MS_TIME_ALT
+> -#define MBEDTLS_PLATFORM_TIME_MACRO rtc_mktime
+>  #define MBEDTLS_PLATFORM_C
+>  #define MBEDTLS_SSL_CLI_C
+>  #define MBEDTLS_SSL_TLS_C
 
------BEGIN PGP SIGNATURE-----
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTCEQACgkQFHw5/5Y0
-tyzhwQv/VeoMu/0BmvFvIuG8irZDrEB8PsywE93wxioLhCvt7ucAukd0INLb/MT+
-a4+V+atmmsNMo6OWpX/BeHzPBJRjWSVJUB5+nWNAYu10MD5o4k3sqXmxqAHT0/fj
-g5VZGMFMkTv91XUqOXqAsubmpAvLMF18+Bj3ZMK4vTrcf3wKbOH1vC9KDLxW7L9E
-kJ7GsJFx7x9IOsYLY3VKOPCw0xP8ayUY6NKyM/oO8Ou6PTEhdAGn8jidYLfZSZ0v
-BGFPplGBsdzREGKkKSMX6WNXe2IaV6/UqiTIscm7IeS6YKHsCvfEdX/Fc+mhXAGf
-JuQQ1lbQmOfIdaQoBZzfOMn6iAEd+BzHX0edoahJhCKTgzQOcVT9cms+rtlYeAIx
-F8CXZZBvVfjvUgjRFo0PFZhvG6Nkaxc9vfHXw768D9ZbjkxMUk8EdG907WhN3+9Y
-wQylaPVMYVlU7cf58yy6OOLzaijg51LgE66v89YMpfKYiu/E7p87zUDQBvUu27Bw
-AE5Ml2cx
-=a3vt
------END PGP SIGNATURE-----
-
---adpNmvmc/+i34C5q--
+Thanks,
+-- 
+Jerome
