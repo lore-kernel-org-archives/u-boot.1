@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B27BE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 05:49:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B534E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 06:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DECF8954C;
-	Fri,  6 Dec 2024 06:49:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6044B89540;
+	Fri,  6 Dec 2024 07:01:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q8AbsldA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HnY6EER1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4105289579; Fri,  6 Dec 2024 06:49:02 +0100 (CET)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
+ id 2D738895BD; Fri,  6 Dec 2024 07:01:53 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0477389540
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 06:48:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E547389358
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 07:01:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-4afa4094708so407217137.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 21:48:59 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2ffdbc0c103so15196221fa.3
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 22:01:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733464139; x=1734068939; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l8wgtpYj+eilLVa6PJvff9JzDdtxa2RSjFt/AZ9XTZQ=;
- b=Q8AbsldArpOGkKjAUZpzG9FdZYDUQehnNtCjF1ZxPApBRZYZZ6SKoT2fltGd4lPK1c
- V222Jld3hz6erw0gRVCQUDU5j+Zik1cL/ou90FrbLUo86bjmQyqoB9LewjF4fxHMLm7p
- nAwgschIY7XZSOsjhnTuTt9Nlz1cryKkBVyf+4SIDY6t+nTXOCVRzFbLorCyJ5WLBj2u
- u6kKVkN5GmjVLyfeGtUcEsf3PRrSn5KAsG5od8DfC1DaC90pCj2WU9kUqqWfIc1R36TM
- d3S+4tExLaDMCEYfda1gxOIdH4a5w4hvJxRQs2AiTAC2Q26tmRXb7iJ2vJdl3noI+hr2
- JJdg==
+ d=gmail.com; s=20230601; t=1733464910; x=1734069710; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hSw72IHHFDalv6w3ydEFNq9Y4HY7XokYzjT0mKEDFxs=;
+ b=HnY6EER1TKUI4m2Un+JDQxieghaqRwrKgKh92TAiDGlLLs6cHK4KkwMGA1wK97negc
+ XxLJ1s6fttY2oyzMiX5+jpitvzjS5dkz93oAR5VkNGkuwuZV8XgMJT8r3aqFUhsACmyT
+ JFfN8dhGNgiVkQPtIFigSQZOmuQJdDTT9lgrQaBH0kLwtrXzC475ZKe3Hy2P1DonVLjZ
+ Ox3Tvso1OuzY+YlsgdESwyHmnIVeT/ijxE66ynTk3U/WqYFEHfOj+/wNqP/w648/wr2c
+ F/wOxoazT/4niGakpoLGqkqR2qBz0FTszBjN9qPulE9AwS9RWjNDJXMmvbq/zHTJWCuf
+ VeUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733464139; x=1734068939;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l8wgtpYj+eilLVa6PJvff9JzDdtxa2RSjFt/AZ9XTZQ=;
- b=KfA33rCOc3jVqRvetX9h2P60Ok8nK0vn6yaxQX2MueRZcMVEMrxIUe/DxifpXOGR7B
- SaQ1lo0b94bpqr2xsnhjxmISj6UJYvDIiLumQHwy0Ku3aZPFucFsMK5o35G2PngxEF6V
- 8ImUwI2taCdytLEMv1aOlUa9FhmBmliAIG5ILzDGKQKovrkWcXTXSMDfVujhkt3mM3Iw
- GUC1puj/ITZnTT3Qdpqw4dzHByfaQuqLxHKmXQHcSorXpR96iJyUehiV697ZFSPYCMVt
- TRBoerwgPeOuHbKpx2mZMh84p9d+Mw55vXo5Rd/1sYZEZZ1hi6g4fpV0JuMCF+hlqzuZ
- FEUA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVl0M9dk3YpKs5Pg13syi7tKj2lbqB+nfJjuZkLrhLwfRKISIT5rsub0AJhRwUo8kBFy7wc5Lg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwCg9dZg5xHhm7EBN9ZfekIzwBOOzr8jw68u7bZs1g+9jQI5nZX
- bX2vEhWV/VlCR6OHN/VuQodnx+PFLi3CkYOtBhLzX/vEJ1hOnL2+lO9T2KsinOkrwGnarjUjTwD
- nc6X2BanKKfBYYfWusGdUV1x4R++swKN2mR1I6g==
-X-Gm-Gg: ASbGnctXSTzmSEMr7cbtnoBeJG7immsuyM42DFh7R3N0cXqyRJNVALhdSmRlj2N/PcA
- vxFP+dNbYdZBfeuKtZS+6AOmFPIAez2x1
-X-Google-Smtp-Source: AGHT+IGmFXTaiYfeKCAFLZEAxN6wIzkJpyEcFNyO2jbtJos9KYjb3BHcKkxt+NoaJ/hgJe2O+4F5SU7Uxkz/f4FVZ7Y=
-X-Received: by 2002:a05:6102:6c8:b0:4af:aa56:8065 with SMTP id
- ada2fe7eead31-4afca7372bbmr2597783137.0.1733464138793; Thu, 05 Dec 2024
- 21:48:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733464910; x=1734069710;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hSw72IHHFDalv6w3ydEFNq9Y4HY7XokYzjT0mKEDFxs=;
+ b=OhOU6zYBv2wmsFD01RoN7EQD8TIGua44/YVEdzyI5ocIno8c0mzBeu0GrS7YLVm+rS
+ vDvkHeca676KfuWGW7VdpIsTlVqDWjlYVh/HrxvnT33NXevXkMihqBm1kqV6PdZYqhLT
+ XkgofhtALam68CAf6mQoNJfPcjRQ+E419lTGy0X5jZeUIvx2m8Zp+c1d/vq8zdSvyO8W
+ ahmiWxwaeA7VkCEbz16wavVwHRMrAX5XTFdUrhqytHgvd720gn9/Y1N18rMTUsvkNLGe
+ eHNF42OHxbW+jon3ffmScGZ0j+lBcZM0Amdd7hDdC5CcbgamGGj1YXS7F8jWzBta/mJq
+ Dy1w==
+X-Gm-Message-State: AOJu0Yz4yNpnEXeFEgWp3NSqSUZOp9jGWSyqj4ieHOcPM7nf+xABS65P
+ HBKqHgYUa2zAGCnAFOiPH8KYhKo90j4XmWSrJ14/7NrZE92BjSlv
+X-Gm-Gg: ASbGncsZz4ho0Ox+5y+roA1amOq+K89lZfTV4aDpT2x0TuVSchMGi9fGdc7v/qCAz5n
+ KvC3uoPdN1cwZwAt2sAYcRgaTjPEhkTBXPtqv6g1cyYQNl9OotjqRgy4Nn3jDtE6ZGnpbT34gbC
+ xPYf8JI501ADk0s9LL2VZTFFrKtNVXjylq4zK2uSL8XT4ym1l8exBfhrbaYeehafX7c7pXrX1Ad
+ vvn3o4LFhKi1HRJebFSHrSoJK8Ml1lhjCP4+WRx
+X-Google-Smtp-Source: AGHT+IFYW8s6m5kDPv/lVIxxWTHC8GYqZGOaiSHfG0GRNv9mr1HZJ92iO6E0gGQzOsPsMr2nqY8vMw==
+X-Received: by 2002:a05:651c:19a5:b0:2ff:c8a1:c4c9 with SMTP id
+ 38308e7fff4ca-3002f62f8damr4217521fa.1.1733464909849; 
+ Thu, 05 Dec 2024 22:01:49 -0800 (PST)
+Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-30020e20e23sm3890941fa.88.2024.12.05.22.01.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Dec 2024 22:01:49 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/1] Tegra: fix clock init
+Date: Fri,  6 Dec 2024 08:01:14 +0200
+Message-ID: <20241206060115.4346-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241205-upstream-dts-v1-1-5a6bf6ccdfc4@posteo.net>
-In-Reply-To: <20241205-upstream-dts-v1-1-5a6bf6ccdfc4@posteo.net>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 6 Dec 2024 11:18:47 +0530
-Message-ID: <CAFA6WYPQg6Z7vZZf17sS-C99oDs8dsBjuCbENv0pGTdrW3b_Ew@mail.gmail.com>
-Subject: Re: [PATCH] powerpc: Support using upstream devicetrees
-To: j.ne@posteo.net
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,48 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 5 Dec 2024 at 22:52, J. Neusch=C3=A4fer via B4 Relay
-<devnull+j.ne.posteo.net@kernel.org> wrote:
->
-> From: "J. Neusch=C3=A4fer" <j.ne@posteo.net>
->
-> For new PowerPC developments, it will be useful to borrow devicetrees
-> from Linux. This patch makes it possible.
->
-> Signed-off-by: J. Neusch=C3=A4fer <j.ne@posteo.net>
-> ---
-> This may seem hypothetical, but I'm working on a new U-Boot port for a
-> PowerPC board.
-> ---
->  dts/upstream/src/powerpc/Makefile | 6 ++++++
->  1 file changed, 6 insertions(+)
->
+This should fix https://lore.kernel.org/all/20241201164810.GT3600562@bill-the-cat/T/#m2b62b471fd37e4c9725c98547e2a919cf11db5e5
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Svyatoslav Ryhel (1):
+  driver: clk: tegra: init basic clocks on probe
 
--Sumit
+ drivers/clk/tegra/tegra-car-clk.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> diff --git a/dts/upstream/src/powerpc/Makefile b/dts/upstream/src/powerpc=
-/Makefile
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..721ec5cb229e2a8ae57e90c94=
-07f86054fcb7ad9
-> --- /dev/null
-> +++ b/dts/upstream/src/powerpc/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +include $(srctree)/scripts/Makefile.dts
-> +
-> +# Add any required device tree compiler flags here
-> +DTC_FLAGS +=3D
->
-> ---
-> base-commit: 98dd010b311e68b8398428cadf56a6381f7de202
-> change-id: 20241129-upstream-dts-9a1eb4524b53
->
-> Best regards,
-> --
-> J. Neusch=C3=A4fer <j.ne@posteo.net>
->
->
+-- 
+2.43.0
+
