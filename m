@@ -4,73 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA803E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:40:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90086E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3445789535;
-	Fri,  6 Dec 2024 18:40:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BBB118973F;
+	Fri,  6 Dec 2024 18:57:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WoEQe8Kz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eFSzWVrX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C55D889622; Fri,  6 Dec 2024 18:40:07 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9644489737; Fri,  6 Dec 2024 18:57:03 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F31DA89471
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:40:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AD348974C
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:56:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4B6He30t056403;
- Fri, 6 Dec 2024 11:40:03 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733506803;
- bh=cGDaeymX2BDjdxlA8EflwIZxrl2q7lLn0lda+kkJs3w=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=WoEQe8Kz8m9b8peP3GKRk0PFqRgMoWCXVh+I2xKXraJ0TjGFZPepDNR0OWqYe1lBE
- RL7C8bkTccOM6RilV94rgtz/O96/fksiEF5MYNZL4HiSyRP492Nd0ZOrqhQdIt51kE
- oqWzHUwZ/wmwRZ58zzcp+HPzK+pKBdqpsSib54cg=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B6He2bX079570
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 6 Dec 2024 11:40:02 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
- Dec 2024 11:40:01 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 6 Dec 2024 11:40:01 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B6He13q088315;
- Fri, 6 Dec 2024 11:40:01 -0600
-Date: Fri, 6 Dec 2024 11:40:01 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-CC: Neha Malcom Francis <n-francis@ti.com>, Santhosh Kumar K <s-k6@ti.com>,
- <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>,
- <u-kumar1@ti.com>, <vigneshr@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 2/8] ram: k3-ddrss: Add
- k3_ddrss_ddr_bank_base_size_calc() to solve 'calculations restricted to 32
- bits' issue
-Message-ID: <20241206174001.3ekkbiicjojlqggz@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20241021044024.835846-1-s-k6@ti.com>
- <20241021044024.835846-3-s-k6@ti.com>
- <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
- <92a86113-f2b3-4b1a-942d-792aaf63a34d@ti.com>
- <20241024161958.hxbtvbeaf52zsblc@bryanbrattlof.com>
- <b7dc8b69-cb3d-433a-adef-56e54e8db275@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b65db9b69fso110576285a.2
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 09:56:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1733507806; x=1734112606; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SDOyeK6PNzGuyMQ3UD7z5pJdIN3xuR0qYgJqltuf3zI=;
+ b=eFSzWVrX4EiWxn84ld19Jp8oVPr0X8YLh9V9xCIzkqbStfA6i1T0Dd4KA4jto4SeWU
+ vj9imrVsibVwGRTTcqyDdpbYM0eNXEg48GJ88A7QNBfEMcObAviQepSfg76NBUI6SYbW
+ bUSZEocEbAN0axIA81afKphy7beyMxxhd0BNI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733507806; x=1734112606;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SDOyeK6PNzGuyMQ3UD7z5pJdIN3xuR0qYgJqltuf3zI=;
+ b=kJNhNuhC3Nqz3xLYUNG9AJL0dZ39eYEIukLVx/gb2YywWuKRWvXQ7cpQbULl8P2PWb
+ hn7kofE91F4TikawvT93/C+U/c+S0LN56I+taKEveuSIJ00bCBDVwGc73+Qt74X0QXob
+ dRhRjeKNhT8Ou2z7Jye0PSxrVusfEkAV2SaocRLhRwmvh+Fx4nnIRovQ6eqcR7FGsWqg
+ Orw2MKDSt4dkb1JP+OkkezNc/KvXkFnhkYjOXV+XwJk+EN2GpsGCcUaUWa8fTGmDAe3w
+ satYv9s81yrK8CdhpRx32q129NcSyRNb8k7e312/pbXNHe5kfK/ML0bQSb/U94Cxf2Nk
+ I8nA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWP+UDB1ycM+RY4O4dJpq8TUns0PB7shWyVspJ4o5fYHWYQtq2IqeRyzn2cwxJSpYgn5x6pp80=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRvwVQyPvWa1pl9T5Q/DRJah7+qXyQsWX8k7qQziZr1sVTyrq/
+ 5hTX66yI1L8YP3KN4bvFKdMOI+aVBuz7F1zcUHjw0cqW+h+W0CyPONbYS8ocVKM=
+X-Gm-Gg: ASbGncvuarsGDj91uE/FkBql/3Uaxc3lu5yC+4AehS5XJN8U2BdffzrEW3Qk1eh2RUd
+ Zxm3GL/rvfmxRT1Lm1JURBbxIy+tRw5QQQrSP09hA0eWg2UCRBXF24zC+Xkr3CVP5uXKPltrDNm
+ k1/oTZcsIRRX3meDIeVEcYrfWcSMPmpiIcFpB9rbnU7yXArk2rGPi613HFA1kOk6GLpwiVdwi57
+ kmrFjaGXhZArF4GJn77QXgpb1VSnbxVqYeXx63TvvkUkHXsMA==
+X-Google-Smtp-Source: AGHT+IHU2gc6SMYVNUNAyqbYlgDE+KgdYz8TYbyXtF9oXB2W9+4iF0gTYwi41J9Gnk7p/IybplpxQg==
+X-Received: by 2002:a05:620a:1a05:b0:7b6:6e3f:49d1 with SMTP id
+ af79cd13be357-7b6bcafa407mr434851185a.32.1733507806339; 
+ Fri, 06 Dec 2024 09:56:46 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6b5a9e5f3sm194628085a.116.2024.12.06.09.56.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Dec 2024 09:56:45 -0800 (PST)
+Date: Fri, 6 Dec 2024 11:56:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/8] led: update LED boot/activity to new property
+ implementation
+Message-ID: <20241206175642.GV2457179@bill-the-cat>
+References: <20241110115054.2555-1-ansuelsmth@gmail.com>
+ <20241113180059.GV3600562@bill-the-cat>
+ <67350b1d.5d0a0220.2d4a95.bc9a@mx.google.com>
+ <20241123024113.GM3600562@bill-the-cat>
+ <6753349b.5d0a0220.d8cca.5513@mx.google.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MjCxCmlJnCdb754J"
 Content-Disposition: inline
-In-Reply-To: <b7dc8b69-cb3d-433a-adef-56e54e8db275@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+In-Reply-To: <6753349b.5d0a0220.d8cca.5513@mx.google.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,186 +108,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On December  6, 2024 thus sayeth Wadim Egorov:
-> Am 24.10.24 um 18:19 schrieb Bryan Brattlof:
-> > On October 24, 2024 thus sayeth Neha Malcom Francis:
-> > > Hi Bryan
-> > > 
-> > > On 23/10/24 20:09, Bryan Brattlof wrote:
-> > > > On October 21, 2024 thus sayeth Santhosh Kumar K:
-> > > > > As R5 is a 32 bit processor, the RAM banks' base and size calculation
-> > > > > is restricted to 32 bits, which results in wrong values if bank's base
-> > > > > is greater than 32 bits or bank's size is greater than or equal to 4GB.
-> > > > > 
-> > > > > So, add k3_ddrss_ddr_bank_base_size_calc() to get the base address and
-> > > > > size of RAM's banks from the device tree memory node, and store in a
-> > > > > 64 bit device private data which can be used for ECC reserved memory
-> > > > > calculation, Setting ECC range and Fixing up bank size in device tree
-> > > > > when ECC is enabled.
-> > > > > 
-> > > > > Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
-> > > > > ---
-> > > > >    drivers/ram/k3-ddrss/k3-ddrss.c | 72 ++++++++++++++++++++++++++-------
-> > > > >    1 file changed, 57 insertions(+), 15 deletions(-)
-> > > > > 
-> > > > > diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > > > index f2ab8cf2b49b..bd6783ebc2cd 100644
-> > > > > --- a/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > > > +++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-> > > > > @@ -147,6 +147,9 @@ struct k3_ddrss_desc {
-> > > > >    	struct k3_ddrss_ecc_region ecc_regions[K3_DDRSS_MAX_ECC_REGIONS];
-> > > > >    	u64 ecc_reserved_space;
-> > > > >    	bool ti_ecc_enabled;
-> > > > > +	unsigned long long ddr_bank_base[CONFIG_NR_DRAM_BANKS];
-> > > > > +	unsigned long long ddr_bank_size[CONFIG_NR_DRAM_BANKS];
-> > > > > +	unsigned long long ddr_ram_size;
-> > > > 
-> > > > Should we use the u64 typedef here?
-> > > > 
-> > > > >    };
-> > > > >    struct reginitdata {
-> > > > > @@ -668,11 +671,54 @@ static void k3_ddrss_lpddr4_preload_full_mem(struct k3_ddrss_desc *ddrss,
-> > > > >    	printf("ECC: priming DDR completed in %lu msec\n", get_timer(done));
-> > > > >    }
-> > > > > +static void k3_ddrss_ddr_bank_base_size_calc(struct k3_ddrss_desc *ddrss)
-> > > > > +{
-> > > > > +	int bank, na, ns, len, parent;
-> > > > > +	const fdt32_t *ptr, *end;
-> > > > > +
-> > > > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > > > +		ddrss->ddr_bank_base[bank] = 0;
-> > > > > +		ddrss->ddr_bank_size[bank] = 0;
-> > > > > +	}
-> > > > > +
-> > > > > +	ofnode mem = ofnode_null();
-> > > > > +
-> > > > > +	do {
-> > > > > +		mem = ofnode_by_prop_value(mem, "device_type", "memory", 7);
-> > > > > +	} while (!ofnode_is_enabled(mem));
-> > > > > +
-> > > > > +	const void *fdt = ofnode_to_fdt(mem);
-> > > > > +	int node = ofnode_to_offset(mem);
-> > > > > +	const char *property = "reg";
-> > > > > +
-> > > > > +	parent = fdt_parent_offset(fdt, node);
-> > > > > +	na = fdt_address_cells(fdt, parent);
-> > > > > +	ns = fdt_size_cells(fdt, parent);
-> > > > > +	ptr = fdt_getprop(fdt, node, property, &len);
-> > > > > +	end = ptr + len / sizeof(*ptr);
-> > > > > +
-> > > > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > > > +		if (ptr + na + ns <= end) {
-> > > > > +			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
-> > > > > +				ddrss->ddr_bank_base[bank] = fdt_translate_address(fdt, node, ptr);
-> > > > > +			else
-> > > > > +				ddrss->ddr_bank_base[bank] = fdtdec_get_number(ptr, na);
-> > > > > +
-> > > > > +			ddrss->ddr_bank_size[bank] = fdtdec_get_number(&ptr[na], ns);
-> > > > > +		}
-> > > > > +
-> > > > > +		ptr += na + ns;
-> > > > > +	}
-> > > > > +
-> > > > > +	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++)
-> > > > > +		ddrss->ddr_ram_size += ddrss->ddr_bank_size[bank];
-> > > > > +}
-> > > > > +
-> > > > >    static void k3_ddrss_lpddr4_ecc_calc_reserved_mem(struct k3_ddrss_desc *ddrss)
-> > > > >    {
-> > > > >    	fdtdec_setup_mem_size_base_lowest();
-> > > > > -	ddrss->ecc_reserved_space = gd->ram_size;
-> > > > > +	ddrss->ecc_reserved_space = ddrss->ddr_ram_size;
-> > > > >    	do_div(ddrss->ecc_reserved_space, 9);
-> > > > >    	/* Round to clean number */
-> > > > > @@ -696,7 +742,7 @@ static void k3_ddrss_lpddr4_ecc_init(struct k3_ddrss_desc *ddrss)
-> > > > >    	/* Preload the full memory with 0's using the BIST engine of
-> > > > >    	 * the LPDDR4 controller.
-> > > > >    	 */
-> > > > > -	k3_ddrss_lpddr4_preload_full_mem(ddrss, gd->ram_size, 0);
-> > > > > +	k3_ddrss_lpddr4_preload_full_mem(ddrss, ddrss->ddr_ram_size, 0);
-> > > > >    	/* Clear Error Count Register */
-> > > > >    	writel(0x1, base + DDRSS_ECC_1B_ERR_CNT_REG);
-> > > > > @@ -741,6 +787,8 @@ static int k3_ddrss_probe(struct udevice *dev)
-> > > > >    	k3_lpddr4_start(ddrss);
-> > > > > +	k3_ddrss_ddr_bank_base_size_calc(ddrss);
-> > > > > +
-> > > > >    	if (ddrss->ti_ecc_enabled) {
-> > > > >    		if (!ddrss->ddrss_ss_cfg) {
-> > > > >    			printf("%s: ss_cfg is required if ecc is enabled but not provided.",
-> > > > > @@ -761,30 +809,24 @@ static int k3_ddrss_probe(struct udevice *dev)
-> > > > >    int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
-> > > > >    {
-> > > > > -	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
-> > > > > -	u64 start[CONFIG_NR_DRAM_BANKS];
-> > > > > -	u64 size[CONFIG_NR_DRAM_BANKS];
-> > > > >    	int bank;
-> > > > > +	struct k3_ddrss_desc *ddrss = dev_get_priv(dev);
-> > > > >    	if (ddrss->ecc_reserved_space == 0)
-> > > > >    		return 0;
-> > > > >    	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
-> > > > > -		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
-> > > > > -			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
-> > > > > -			bd->bi_dram[bank].size = 0;
-> > > > > +		if (ddrss->ecc_reserved_space > ddrss->ddr_bank_size[bank]) {
-> > > > > +			ddrss->ecc_reserved_space -= ddrss->ddr_bank_size[bank];
-> > > > > +			ddrss->ddr_bank_size[bank] = 0;
-> > > > >    		} else {
-> > > > > -			bd->bi_dram[bank].size -= ddrss->ecc_reserved_space;
-> > > > > +			ddrss->ddr_bank_size[bank] -= ddrss->ecc_reserved_space;
-> > > > >    			break;
-> > > > >    		}
-> > > > >    	}
-> > > > > -	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > > > > -		start[bank] =  bd->bi_dram[bank].start;
-> > > > > -		size[bank] = bd->bi_dram[bank].size;
-> > > > > -	}
-> > > > > -
-> > > > > -	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
-> > > > > +	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
-> > > > > +				      ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
-> > > > >    }
-> > > > 
-> > > > Have we looked into passing this information via the global data pointer
-> > > > rather than fixing up the device tree on each boot phase?
-> > > > 
-> > > >       https://patchwork.ozlabs.org/project/uboot/patch/20180926215520.87168-23-sjg@chromium.org/
-> > > > 
-> > > > I don't see a clear path to pass GD from SPL to SPL but there is a TPL
-> > > > to SPL which I think we should be able to copy.
-> > > 
-> > > But we also make use of this to fix up the device tree that passes onto
-> > > kernel as well, I need to look into this patch though. But from a first
-> > > glance looks like we will be able to pass on the information from SPL->SPL
-> > > (with modification as you said) and SPL->U-Boot but U-Boot->Kernel would
-> > > still require this function to be present.
-> 
-> Just came across this series again and noticed that this will be a bit
-> tricky with boards detecting RAM at runtime.
-> 
-> Updating the memory node with detected RAM size prio to DDR driver probing
-> should be no problem. But the next stages will need to update u-boot's and
-> Linux memory nodes too. Unfortunately, we do not have the data at this stage
-> which tells us how much space was reserved for ECC.
-> 
 
-I agree. We'll need to prototype this out real quick but my goal is to 
-set the gd->ram_size in the R5 SPL that we can then pass GD to each boot 
-phase. What I haven't looked into is what other drivers will break :)
+--MjCxCmlJnCdb754J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> It would be best to do the memory setup for GD or memory node once and have
-> other stages reuse it.
-> 
-> Right now I have no idea how my board should be aware of the reserved ecc
-> memory in u-boot. Any suggestions?
-> 
+On Fri, Dec 06, 2024 at 06:30:00PM +0100, Christian Marangi wrote:
+> On Fri, Nov 22, 2024 at 08:41:13PM -0600, Tom Rini wrote:
+> > On Wed, Nov 13, 2024 at 09:24:59PM +0100, Christian Marangi wrote:
+> > > On Wed, Nov 13, 2024 at 12:00:59PM -0600, Tom Rini wrote:
+> > > > On Sun, Nov 10, 2024 at 12:50:19PM +0100, Christian Marangi wrote:
+> > > >=20
+> > > > > This series is split in 2 part.
+> > > > >=20
+> > > > > While adapting the LED boot and activity code to the new property
+> > > > > accepted by Rob in dt-schema repository, a big BUG was discovered.
+> > > > >=20
+> > > > > The reason wasn't clear at start and took me some days to figure =
+it
+> > > > > out.
+> > > > >=20
+> > > > > This was triggered by adding a new phandle in the test.dts to
+> > > > > introduce test for the new OPs.
+> > > > >=20
+> > > > > This single addition caused the sandbox CI test to fail in the
+> > > > > dm_test_ofnode_phandle_ot test.
+> > > > >=20
+> > > > > This doesn't make sense as reverting the change made the CI test
+> > > > > to correctly finish. Also moving the uboot node down
+> > > > > after the first phandle (in test.dts the gpio one) also made
+> > > > > the CI test to correctly finish.
+> > > > >=20
+> > > > > A little bit of searching and debugging made me realize the
+> > > > > parse phandle OPs didn't support other.dts at all and they
+> > > > > were still referencing phandle index from test.dts.
+> > > > > (more info in the related commit)
+> > > > >=20
+> > > > > In short the test was broken all along and was working by
+> > > > > pure luck. The first 4 patch address and fix the problem for good.
+> > > > >=20
+> > > > > The other 4 patch expand and address the property change for
+> > > > > LED boot/activity.
+> > > > >=20
+> > > > > Posting in a single series as changes are trivial and just
+> > > > > to speedup review process. (and also because the second
+> > > > > part depends on the first)
+> > > > >=20
+> > > > > All CI tested with azure pipeline.
+> > > > >=20
+> > > > > Changes v2:
+> > > > > - Fix handling of flat tree for phandle
+> > > > > - Fix test and other.dts changes
+> > > > >=20
+> > > > > Christian Marangi (8):
+> > > > >   dm: core: implement oftree variant of parse_phandle OPs
+> > > > >   test: dm: fix broken dm_test_ofnode_phandle_ot and get_by_phand=
+le_ot
+> > > > >   dm: core: implement ofnode/tree_parse_phandle() helper
+> > > > >   test: dm: Expand dm_test_ofnode_phandle(_ot) with new
+> > > > >     ofnode/tree_parse_phandle
+> > > > >   dm: core: implement phandle ofnode_options helper
+> > > > >   test: dm: Add test for ofnode options phandle helper
+> > > > >   led: update LED boot/activity to new property implementation
+> > > > >   test: dm: Update test for LED activity and boot
+> > > > >=20
+> > > > >  arch/sandbox/dts/other.dts |  31 ++++++++-
+> > > > >  arch/sandbox/dts/test.dts  |  16 +++--
+> > > > >  drivers/core/of_access.c   |  61 ++++++++++++-----
+> > > > >  drivers/core/ofnode.c      | 124 +++++++++++++++++++++++++++++++=
++-
+> > > > >  drivers/led/led-uclass.c   |  30 +++++---
+> > > > >  include/dm/of_access.h     |  86 +++++++++++++++++++++++
+> > > > >  include/dm/ofnode.h        | 107 +++++++++++++++++++++++++++++
+> > > > >  test/dm/led.c              |  18 +++--
+> > > > >  test/dm/ofnode.c           | 136 +++++++++++++++++++++++++++++++=
++-----
+> > > > >  9 files changed, 551 insertions(+), 58 deletions(-)
+> > > >=20
+> > > > My main issue with the series is a lack of documentation updates, a=
+s the
+> > > > biggest challenge thus far has been that for example Peter couldn't
+> > > > figure out how to make use of this on PinePhone. We generate
+> > > > documentation today based on include/led.h for this API, yes? Thank=
+s.
+> > > >=20
+> > >=20
+> > > Hi Tom,
+> > >=20
+> > > actually quite the oppisite, led.h describe how these works and was
+> > > instructed to first have the options property merged in dt-schema. [1]
+> > >=20
+> > > Here we have all the option documented under a yaml.
+> > >=20
+> > > I notice there is a series from Simon that is also pushing a .yaml
+> > > here locally in U-Boot and I was waiting for that to be merged to also
+> > > include the additional entry there.
+> > >=20
+> > > Also led.h description and API have info on where to look about the
+> > > handling of /options/u-boot/
+> > >=20
+> > > I feel the main problem with documentation is currently the fact that=
+ we
+> > > are migrating to a more robust schema and people are used to using Doc
+> > > directory? Anyway happy to get any hint on how to improve this.
+> > >=20
+> > > [1] https://github.com/devicetree-org/dt-schema
+> >=20
+> > So Peter, does this bring you what you were asking for in terms of
+> > details, or can you explain what's still missing from your point of
+> > view? Thanks!
+> >=20
+>=20
+> Hi Tom,
+>=20
+> any idea how to improve this and get it trought?
 
-I don't have a solution to this either. My only thought would be to look 
-at the controller to see if it has ECC enabled and take 8/9s of the 
-total capacity.
+I'll pick this up for -next soon, thanks.
 
-I'm not a huge fan of that as well as it's kinda opaque. It's much more 
-clean to let the R5 SPL do this and pass the info along all the way to 
-the kernel.
+--=20
+Tom
 
-~Bryan
+--MjCxCmlJnCdb754J
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTOtYACgkQFHw5/5Y0
+tyy9VAwAuhM0D659zXwLhPwJCIWQRKHklGV7xgFc5F7C90M/Nu+1u47biXa1nAOn
+t+1Qu+pjMcA5mHM7DJOx+MqFJkNfTUy3QxIfQO6SPFAUEuVjgLQ6Cb2gVeYZ2ycv
+Z4QA8Q691Moi/htHjy+mK0VUx6n2/yyPpyExq4WnSKhNRbNnIuHeaCc9cHtK0TKO
+4GcvEVRvuIUQymgb7Q00z9mic+oUKZKDSChpew0TpZay2+khQ1gFr56s5OWO4CWT
+L1ZjFiSP8SfBDKCIC0rk2cbifQPu7e5tUKk4WHyEjPlxip9UJkO4y3AAPgwl9K0O
+nfckqZX2yerVQoB3mKN7Ekd9k8YJmulxB7EobvliEjAU+KL+nCH3FXzpdq6JMB9S
+L+UQ3cghI62lO6Qio/S7xpWLJ7muKgez1k8GJoz6T+wqwUppxwVNo7m8VKAvmC9n
++G9x7GaGdYPR4RlL8nwY3mRKtiH3DCak7LY9QWmM1dVHgjQT4bpOD3VuCxTfgSsD
+6zdh/rZp
+=1xI7
+-----END PGP SIGNATURE-----
+
+--MjCxCmlJnCdb754J--
