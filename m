@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD45E7716E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C6CE77170
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:36:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B013B89622;
-	Fri,  6 Dec 2024 03:36:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 08F4B8951F;
+	Fri,  6 Dec 2024 03:36:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JscjGxcK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G74DK4et";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31476895E2; Fri,  6 Dec 2024 03:36:40 +0100 (CET)
+ id 521D18951F; Fri,  6 Dec 2024 03:36:42 +0100 (CET)
 Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
  [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD388918C
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:36:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20D21895DE
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-843e546c7f0so59042639f.1
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:36:37 -0800 (PST)
+ ca18e2360f4ac-84198252db1so56440339f.0
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:36:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733452596; x=1734057396; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733452598; x=1734057398; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u+zZG6fLQOAfN627Etd1WaVgdXszogCdbESqGfPpazw=;
- b=JscjGxcKPMG075iXdXLyBI98mBiEeKusajhi9mUWlLJHm5HANEpefPZb5bmLL9HDP4
- kg0I3PK+tQPt5lf6BhxvXkiWcha3L4VcgvCR2q+NRl5top8cUNrutSIsDvwlZ1onShyB
- pn7DYiZtYa4H7osOh/Th5STwH1n2DCXU3kstA=
+ bh=pSi9T0jwsyOTf7U8m2OZryThc774EjL0fNn9zqgfeG4=;
+ b=G74DK4etDCTRHOeCLbx2XNELT4P00jE6jkbCChBuEps0bykWIB8SIzEfGrMMj8e1f+
+ 2SLGTd4y0bTsBXAMYadrGTEzFa2y78LMKHU5/8NlaamXVpDwEK0bVOzrW6MYETg7FUj1
+ qG8wZyOXdXXfm/m11SVU+IbusY4dL3Uz2NeTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733452596; x=1734057396;
+ d=1e100.net; s=20230601; t=1733452598; x=1734057398;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u+zZG6fLQOAfN627Etd1WaVgdXszogCdbESqGfPpazw=;
- b=wlvs0OqowS+0J5Y9HRoKPTIJDoj7U1TYlnDD/JCFsHp6h6lKSue5Am32uRWqXXgKwO
- RzRMhKDDotMjUPyWHt3Dr9MgHqOSY7OX9HqHtQhd/a/2dfD3KigdTqWZy+5olvp9fNy4
- E/Hw+uZ5C0csV75rZ6ErAhT41kXHJVDr2UMXzbfzM+pJInDUjfy8m4s6jnLogMVmlvBq
- U9LKTDubvUwI/3+fWuejxQzH0/TUcoO0GHstD/NXJ462/xf8dakTFyfkJg9VAHqGVYcF
- JsyKtySVxCHPCgyQ5Or0CoERQfsxqp7/w5OWpk1luwo3Ah3j/mA0WkYr0tegYfEMM2b5
- pRtQ==
-X-Gm-Message-State: AOJu0YzRm63+RbSOMUpfeYrYx87PpKxx+W18mMPTurEfRcnhqYVEyjHZ
- h0gpOpRDaiYYUmT9sBsxVCDVi22X5o8iRE6KQpv4H+11dnMT/sQk3my2+uaRr8B6cFYRORM1Px8
+ bh=pSi9T0jwsyOTf7U8m2OZryThc774EjL0fNn9zqgfeG4=;
+ b=NdnhApIr6lKrYmjqxrIwCBsmo2Wj7sLXjjRhKdEUBw0RTY9hYowQJrMT3cO9IZtZXj
+ wsoxZpfWDBm5oI/NZN5r62QcAvkQEwyZHJLMPnSRSfDAzH0Jjyf/Vkde6BqMU3UXR/aC
+ 1zlYdyEAo4BhhXUUJaap3PbjGtZU+nFdzV4dtDrsF1hL/4sv2FB2axgNFarUxQKdPN/S
+ XPLHh8vCs8BFin4t8FJVe05W911diRnxMFZqnbbBG5BJyttkHOpAe35+lHbxM/VpXXk6
+ OGMnQChJ1hRLkZRzrYtryGGqzA5hyw0/Z1NVuk44YNDC1/2u7htTmpH44c7Oxqg2zBtF
+ hc5g==
+X-Gm-Message-State: AOJu0Yy3fsaTxW1ZqP5MgT2lUFdegUPoOrhEDQdUM34h35w/Rm9uZies
+ ZQcDZFVE9Ij+eDE5guoBdQuQotd37fZZIem6r1II5iZh0yFvjNIB0GcLCJ34iek3q8zSmUnW+5Y
  =
-X-Gm-Gg: ASbGncuWcX8k+NnmYSMhwAczVz6vE+dAnlQgCzIgE1poNVF7qsZz6xKx+VbuUpi6VMg
- OBhXYAUvQX6pQ/CtAWwarDv37bL5gqgySLzaXSyEmJEGKU1ZOeqKmVtJ0ucI1ruKpShjGRykiD+
- Tx4QyXNC4Y7wo3yio+PfDCkcJo8UqeW6sSBZ/ywXf1aRikrSPrrqTWeDPPh9odJXkfuIjpJi426
- c7iVVtA3vIzFJnGid7/alp/q3RWxs16EqDb/HNGpCw77+jN1a51vy3nuCKXUeLcZNBV7iek+9QO
- LXovBs/RB2o=
-X-Google-Smtp-Source: AGHT+IFG7pibK61Kjd8AVdxw7LHwubOAqIltuCSYH0BeQ0d7caLZljL0pyoG45pm7X8mrenapdMiBw==
-X-Received: by 2002:a05:6602:6d14:b0:83a:bd82:78e with SMTP id
- ca18e2360f4ac-8447e2d8b94mr227365139f.13.1733452596211; 
- Thu, 05 Dec 2024 18:36:36 -0800 (PST)
+X-Gm-Gg: ASbGncud0PLRFezPaUuBnP7kIcQLTyNOBAdb3ilnfCZJXHX+4kjgx2SZpMbnGLNATLU
+ XiQwPVKjnLE2CifjOSAYCe04qBYoaMAHRa2SG40sHVLDA3sWF2nPVz3gcZqQ4kRbM6qrpooDH0L
+ Lwh6A7CIfllK1F0Nhusjj8WCFgMrXRxAOrFvNZCbkHu9Vb01pdQ17BK1xH83p8R7KMJqZbh9WNJ
+ u8A3s30t9lup95gNfgfvQ8a3bhoCPelB6PK/tZTWjI1DwGm0xXEHt2vNvdFMaAmSgKSGYOpRqqs
+ fB/T/7iPxgw=
+X-Google-Smtp-Source: AGHT+IHU+BBBOYQVwqo7Fjx+arNg7r5PgAyRP/6UcrtrJkzG+KeOvz+p7pq2cileNDRiUxU8sytR3A==
+X-Received: by 2002:a6b:6210:0:b0:844:2ef3:a95a with SMTP id
+ ca18e2360f4ac-84471100818mr569072039f.7.1733452598353; 
+ Thu, 05 Dec 2024 18:36:38 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.36.33
+ 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.36.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Dec 2024 18:36:34 -0800 (PST)
+ Thu, 05 Dec 2024 18:36:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v3 01/46] x86: Make do_zboot_states() static
-Date: Thu,  5 Dec 2024 19:35:40 -0700
-Message-Id: <20241206023626.2456858-2-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v3 02/46] x86: Rename zboot_run() to zboot_run_args()
+Date: Thu,  5 Dec 2024 19:35:41 -0700
+Message-Id: <20241206023626.2456858-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 References: <20241206023626.2456858-1-sjg@chromium.org>
@@ -94,32 +96,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is only called within zboot.c so make the function
-private.
+Rename this function so we can (later) create a zboot_run() function
+which looks the same as bootm_run()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/x86/zboot.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/lib/zimage.c | 4 ++--
+ boot/bootmeth_cros.c  | 6 +++---
+ include/bootm.h       | 6 +++---
+ 3 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
-index 94e602b8a5b..3035172352a 100644
---- a/cmd/x86/zboot.c
-+++ b/cmd/x86/zboot.c
-@@ -119,8 +119,8 @@ U_BOOT_SUBCMDS(zboot,
- 	U_BOOT_CMD_MKENT(dump, 2, 1, do_zboot_dump, "", ""),
- )
+diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
+index 73a21bc8f03..53fc81f57a2 100644
+--- a/arch/x86/lib/zimage.c
++++ b/arch/x86/lib/zimage.c
+@@ -436,8 +436,8 @@ int zboot_go(void)
+ 	return ret;
+ }
  
--int do_zboot_states(struct cmd_tbl *cmdtp, int flag, int argc,
--		    char *const argv[], int state_mask)
-+static int do_zboot_states(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[], int state_mask)
+-int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
+-	      ulong base, char *cmdline)
++int zboot_run_args(ulong addr, ulong size, ulong initrd, ulong initrd_size,
++		   ulong base, char *cmdline)
  {
- 	int ret = 0;
+ 	int ret;
  
+diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
+index c7b862e512a..ea4c9ed830f 100644
+--- a/boot/bootmeth_cros.c
++++ b/boot/bootmeth_cros.c
+@@ -446,9 +446,9 @@ static int cros_boot(struct udevice *dev, struct bootflow *bflow)
+ 	}
+ 
+ 	if (IS_ENABLED(CONFIG_X86)) {
+-		ret = zboot_run(map_to_sysmem(bflow->buf), bflow->size, 0, 0,
+-				map_to_sysmem(bflow->x86_setup),
+-				bflow->cmdline);
++		ret = zboot_run_args(map_to_sysmem(bflow->buf), bflow->size, 0,
++				     0, map_to_sysmem(bflow->x86_setup),
++				     bflow->cmdline);
+ 	} else {
+ 		ret = bootm_boot_start(map_to_sysmem(bflow->buf),
+ 				       bflow->cmdline);
+diff --git a/include/bootm.h b/include/bootm.h
+index 61160705215..154fb98cfcd 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -273,7 +273,7 @@ int bootm_process_cmdline(char *buf, int maxlen, int flags);
+ int bootm_process_cmdline_env(int flags);
+ 
+ /**
+- * zboot_run() - Run through the various steps to boot a zimage
++ * zboot_run_args() - Run through the various steps to boot a zimage
+  *
+  * Boot a zimage, given the component parts
+  *
+@@ -289,8 +289,8 @@ int bootm_process_cmdline_env(int flags);
+  *	to use for booting
+  * Return: -EFAULT on error (normally it does not return)
+  */
+-int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
+-	      ulong base, char *cmdline);
++int zboot_run_args(ulong addr, ulong size, ulong initrd, ulong initrd_size,
++		   ulong base, char *cmdline);
+ 
+ /*
+  * zimage_get_kernel_version() - Get the version string from a kernel
 -- 
 2.34.1
 
