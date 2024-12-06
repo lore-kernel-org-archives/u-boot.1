@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 117E4E77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 22:56:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69EE8E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 22:56:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97B9989434;
-	Fri,  6 Dec 2024 23:56:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00F3A88815;
+	Fri,  6 Dec 2024 23:56:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jHOtf/rL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xh5QNdv5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C96358870D; Fri,  6 Dec 2024 23:56:20 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 361EB8870D; Fri,  6 Dec 2024 23:56:35 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A4F889434
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 23:56:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2D5D88815
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 23:56:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4667931f14bso39701431cf.2
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 14:56:18 -0800 (PST)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-46684744070so24779451cf.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 14:56:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733525777; x=1734130577; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733525791; x=1734130591; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jdv6GWWQ2zq/8W5Fdi6oxeWrdHVlmKoKAmCJAGw4+xI=;
- b=jHOtf/rLGl5eFO1Qtjp7hn0IhsL8eLzgQCcmIMIo0I0vJdS68+0/sdip85YeJry8Ia
- d2qkJ9+SiXBXI4jS+kkdECivgzIcQSTVjBAw6FS6jAYG1rxtEan0KJWl/g04dbUffecJ
- 01jImrvwpHQnnqvydXcdv6Oa9J/F9kMnzZ3OVCJJev9t13psFx9iM0zUQJQP29h1oKbh
- zAUSnvclWbqo8VJxRc63ltgF8OmpmZrrD1pllrR0i2XtX185f9aei9nSOHxREJtfqri1
- V4hTLd+/1xax2JJgq2zvjd51lvBug/idxWQfTH8HkKmjRWWy9LTvCJqE3hMCLzyQIE9z
- d5sw==
+ bh=9dVPNhcK14F0dg2tmjpO+O+DWZ588ltnGQ5/nwjH4/w=;
+ b=Xh5QNdv5kwspQm7TGX6X1i09sFv8ab+KSntD0UruJcIZ8vvfzsR4BM0kw5aAMPCfpP
+ h9LZ80v+cYCE5UVWvO9MXkcyoLI6htPSB7ecn95fvutd5+lH3qjmYJinQ71ICuZQTlfr
+ RSRPWTYxqfbxXVeGbwyqoWIPaBCM8CtEQSqClHdYl08wI/3PlD0EnhNh+ZBHEhNEUHwW
+ lMchYVYBKbbN5b28eKbNYVOo9KYVPLciwNsaSdu/z3Z1tkOuG6LTGRTp8kL/awsxbjea
+ xkGzP3FtrnebrbFRDDbne+yI1mZ9qW6y8xY65yCWRMRH9zyAoXTtHzV/Y0GeQCUjOdgD
+ QnOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733525777; x=1734130577;
+ d=1e100.net; s=20230601; t=1733525791; x=1734130591;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jdv6GWWQ2zq/8W5Fdi6oxeWrdHVlmKoKAmCJAGw4+xI=;
- b=Uns+THNUgaoL+iPmQu/RXEIz9eCjy2M0NRqW/XeWoO51cqMsyP4K+zU8EvKKnUs6Is
- q4oDektx17fG7rk33VUD0S1EWxDyywEGFZA7JnTY2sg/7bi6B9ctixZAaYs424MivuFL
- ed/1NXkuapcsTpFjTRvtTKMA4I+VLnFmvFL2IV5jJS4R8aEyIAPU0zegCIWt2BSbX6an
- ve4PJ/rW1gt5Vg5Fygco7b8d0hkh5agvTSXsKr5Ud6MNe7ohZc0SLQ/o97M47Be4Aerz
- 6vYL6b7cnLOUc2+uEr9b20f/qFJbYzc/T7ccMQVLDPfCKWxommEOIKqE/GIjKDrKQjgK
- DZlA==
-X-Gm-Message-State: AOJu0YzV7/3lfiUXeMzxMInCBbNamJKZMjdiVTRsaHGMvZpinHCYlSF1
- BSTpFVkQsDFBxz5M96UiqIcmBUk45N1mudrBa8gmzmwnZn41vUDOotGXD6IDCGwcGGleSzySChg
- T
-X-Gm-Gg: ASbGncvmnSidcVDmFeT+2EBV520x5nRXX4M56Zv7NhcMbbuLLFS2Dtl1+vkqeZ7Jk7K
- JYg7PUfHQG5PCVwRmUuKeYdTA39e94lRGQ7h11C+XSm26eliUsyyskgp4EyqPm/qQAnUN4s5gzO
- 3uSWyYsnDRGw/wNGmRpH3LvsH+y4umonx2GT+mOM9oc286472odNbpObELu49z1BgnKImByzqR1
- Nv5EdTSds46wnCJtGiNB1xeqZy2jMuxFKWMQIOSy7Qu45Cjbouw4aRB1HNNGQlXPH4LMR1qJYHU
- er3AWbr7MA7lGipq6r18ctwAdPQtg+YFN5Sl0djmhVqxeoKX
-X-Google-Smtp-Source: AGHT+IHY0579k+qXjRcSzHVLzAIgUmyd7StV2XpkfgXQ8k0CqV1Vxr6AR2cGflnljZdH3xYzwe4t9w==
-X-Received: by 2002:a05:622a:148b:b0:466:afc3:d649 with SMTP id
- d75a77b69052e-46734e67705mr79271681cf.36.1733525777043; 
- Fri, 06 Dec 2024 14:56:17 -0800 (PST)
+ bh=9dVPNhcK14F0dg2tmjpO+O+DWZ588ltnGQ5/nwjH4/w=;
+ b=oSHbjSI9c9Yb3dD4J9CEXrBeXioDC/sxkHknpBVg1hGfF/DSVNw1YndnO2u9OibRo/
+ 7BQDevcjcg67N3DYG5FFMhyiPd4+vj4+pMFMQoeGzc9kttDXhP/Qvba23rHSm3aFtgss
+ uBIJy0aXFGfhckxYRliSH9ieyUnEW2xDOWHQ/VDjzW2Qqg1Wdtf2FuZ7R1ez9Qg2lTUD
+ Zr4cKOfobpfLdwBmfPGN1ACnfovVT5zMYyRyNf831kICw1jRva3gFuA6J1EOY+R2tKT6
+ Yfez3uZ58cf/MNk7zBIyDgFwpRdP5MwapPIVNiPSylASOkvHVBkw93o+l4yHgtHSdT/N
+ Tbww==
+X-Gm-Message-State: AOJu0YwGTGWaqi6TzfAcqlXZalPKhFO2a2E7BeUDQD5zaG2EqQM39uqA
+ 5aa1rTLxq37ubXCyvCQwx5GAX4ICGaFd3aP9boTGOofY/OFlqiOGjndxwIdaVqGcfdUMit6XTdP
+ g
+X-Gm-Gg: ASbGncvCkkhuFtu/NuO1BdwZ0meS3aYNmZ97jxeoJ0wEYDMnWq7zbGw6lLVcx9aoUge
+ ULRuWuXYDmJn9fa4QA/0K/J+ADMh0xaCgTUhvsifUDZ95Wbwk+XfclIXPVXC/PCIK+dxw3ygQIw
+ LhBnVKn+McY/6GoBfcOn239F0cClgfAvD+uudxvovTv02fUy5jKtUqDxFkr5nEAlNHutlXIHBAv
+ JXT7POCiOLQ1Z/238Oue28JOFUMrrwxeKhpTdbeBcZxlnus3YgiS8ryBPswoZefECy2wM0j8ohY
+ Ff8uY5TrIXquPf1VwLs/cHexrPOQJFPv4vCmDWn4boIYtx4/
+X-Google-Smtp-Source: AGHT+IHPTKAaL/o3j1pSPjKrgX7Co0La2SEHDQSx9cu3JVbSFyBDOA0CEc2iMoJ/xxaPs5fuEwgyNA==
+X-Received: by 2002:ac8:7d91:0:b0:466:9d0e:1920 with SMTP id
+ d75a77b69052e-46734cd37ccmr92303471cf.24.1733525791166; 
+ Fri, 06 Dec 2024 14:56:31 -0800 (PST)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467296d4d7dsm26080871cf.34.2024.12.06.14.56.14
+ d75a77b69052e-467296d4d7dsm26080871cf.34.2024.12.06.14.56.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 14:56:15 -0800 (PST)
+ Fri, 06 Dec 2024 14:56:29 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Stefan Roese <sr@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
- Jonas Karlman <jonas@kwiboo.se>,
+ Alexander Gendin <agendin@matrox.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Wan Yee Lau <wan.yee.lau@intel.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Michal Simek <michal.simek@amd.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v3 06/10] smbios: add detailed smbios information
-Date: Fri,  6 Dec 2024 14:54:23 -0800
-Message-Id: <20241206225438.13866-7-raymond.mao@linaro.org>
+Subject: [PATCH v3 07/10] armv8: Add arch-specific sysinfo platform driver
+Date: Fri,  6 Dec 2024 14:54:24 -0800
+Message-Id: <20241206225438.13866-8-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241206225438.13866-1-raymond.mao@linaro.org>
 References: <20241206225438.13866-1-raymond.mao@linaro.org>
@@ -112,296 +112,331 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add detailed SMBIOS information as following:
-1. Missing fields in Type #3 and #4
-2. Type #7
-
-Add support to dynamic length of contained object handles and
-elements.
-
-As SMBIOS is a fundamental feature which is enabled for all
-boards, in order to avoid increasing rom size, all detailed SMBIOS
-information is under kconfig GENERATE_SMBIOS_TABLE_VERBOSE.
-Board maintainers can determine whether to select this feature.
+Add sysinfo platform driver for all armv8 platforms to retrieve
+hardware information on processor and cache.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
+Changes in v2
+- Combine with #8(v1) patch.
+- Remove the handling of the common strings and values.
 Changes in v3
-- Initial patch.
+- None.
 
- lib/smbios.c | 203 ++++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 202 insertions(+), 1 deletion(-)
+ arch/arm/cpu/armv8/Makefile  |   2 +
+ arch/arm/cpu/armv8/sysinfo.c | 292 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 294 insertions(+)
+ create mode 100644 arch/arm/cpu/armv8/sysinfo.c
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index e8089e91523..203ed6d78b0 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -528,6 +528,8 @@ static int smbios_write_type3(ulong *current, int handle,
- 	int len = sizeof(*t);
- 	u8 *eos_addr;
- 	size_t elem_size = 0;
-+	__maybe_unused u8 *elem_addr;
-+	__maybe_unused u8 *sku_num_addr;
- 
- 	/*
- 	 * reserve the space for the dynamic bytes of contained elements.
-@@ -540,7 +542,10 @@ static int smbios_write_type3(ulong *current, int handle,
- 	t = map_sysmem(*current, len);
- 	memset(t, 0, len);
- 	fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
--
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	elem_addr = (u8 *)t + offsetof(struct smbios_type3, sku_number);
-+	sku_num_addr = elem_addr + elem_size;
-+#endif
- 	/* eos is at the end of the structure */
- 	eos_addr = (u8 *)t + len - sizeof(t->eos);
- 	smbios_set_eos(ctx, eos_addr);
-@@ -564,6 +569,32 @@ static int smbios_write_type3(ulong *current, int handle,
- 					       SYSID_SM_ENCLOSURE_SECURITY,
- 					       SMBIOS_SECURITY_UNKNOWN);
- 
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	t->version = smbios_add_prop_si(ctx, "version",
-+					SYSID_SM_ENCLOSURE_VERSION, NULL);
-+	t->serial_number = smbios_add_prop_si(ctx, "serial",
-+					      SYSID_SM_ENCLOSURE_SERIAL, NULL);
-+	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
-+						 SYSID_SM_BASEBOARD_ASSET_TAG,
-+						 NULL);
-+	t->oem_defined = smbios_get_val_si(ctx, "oem-defined",
-+					   SYSID_SM_ENCLOSURE_OEM, 0);
-+	t->height = smbios_get_val_si(ctx, "height",
-+				      SYSID_SM_ENCLOSURE_HEIGHT, 0);
-+	t->number_of_power_cords =
-+		smbios_get_val_si(ctx, "number-of-power-cords",
-+				  SYSID_SM_ENCLOSURE_POWCORE_NUM, 0);
+diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
+index 2e71ff2dc97..b4126c61df1 100644
+--- a/arch/arm/cpu/armv8/Makefile
++++ b/arch/arm/cpu/armv8/Makefile
+@@ -46,3 +46,5 @@ obj-$(CONFIG_TARGET_BCMNS3) += bcmns3/
+ obj-$(CONFIG_XEN) += xen/
+ obj-$(CONFIG_ARMV8_CE_SHA1) += sha1_ce_glue.o sha1_ce_core.o
+ obj-$(CONFIG_ARMV8_CE_SHA256) += sha256_ce_glue.o sha256_ce_core.o
++
++obj-$(CONFIG_SYSINFO_SMBIOS) += sysinfo.o
+diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
+new file mode 100644
+index 00000000000..850142da37d
+--- /dev/null
++++ b/arch/arm/cpu/armv8/sysinfo.c
+@@ -0,0 +1,292 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#include <dm.h>
++#include <smbios_plat.h>
++#include <stdio.h>
++#include <sysinfo.h>
++
++union ccsidr_el1 {
++	struct {
++		u64 linesize:3;
++		u64 associativity:10;
++		u64 numsets:15;
++		u64 unknown:4;
++		u64 reserved:32;
++	} no_ccidx;
++	struct {
++		u64 linesize:3;
++		u64 associativity:21;
++		u64 reserved1:8;
++		u64 numsets:24;
++		u64 reserved2:8;
++	} ccidx_aarch64;
++	struct {
++		u64 linesize:3;
++		u64 associativity:21;
++		u64 reserved:8;
++		u64 unallocated:32;
++	} ccidx_aarch32;
++	u64 data;
++};
++
++union midr_el1 {
++	struct {
++		u64 revision:4;
++		u64 partnum:12;
++		u64 architecture:4;
++		u64 variant:4;
++		u64 implementer:8;
++		u64 reserved:32;
++	} fields;
++	u64 data;
++};
++
++enum {
++	CACHE_NONE,
++	CACHE_INST_ONLY,
++	CACHE_DATA_ONLY,
++	CACHE_INST_WITH_DATA,
++	CACHE_UNIFIED,
++};
++
++enum {
++	CACHE_ASSOC_DIRECT_MAPPED = 1,
++	CACHE_ASSOC_2WAY = 2,
++	CACHE_ASSOC_4WAY = 4,
++	CACHE_ASSOC_8WAY = 8,
++	CACHE_ASSOC_16WAY = 16,
++	CACHE_ASSOC_12WAY = 12,
++	CACHE_ASSOC_24WAY = 24,
++	CACHE_ASSOC_32WAY = 32,
++	CACHE_ASSOC_48WAY = 48,
++	CACHE_ASSOC_64WAY = 64,
++	CACHE_ASSOC_20WAY = 20,
++};
++
++enum {
++	VENDOR_RESERVED = 0,
++	VENDOR_ARM = 0x41,
++	VENDOR_BROADCOM = 0x42,
++	VENDOR_CAVIUM = 0x43,
++	VENDOR_DEC = 0x44,
++	VENDOR_FUJITSU = 0x46,
++	VENDOR_INFINEON = 0x49,
++	VENDOR_FREESCALE = 0x4d,
++	VENDOR_NVIDIA = 0x4e,
++	VENDOR_AMCC = 0x50,
++	VENDOR_QUALCOMM = 0x51,
++	VENDOR_MARVELL = 0x56,
++	VENDOR_INTEL = 0x69,
++	VENDOR_AMPERE = 0xc0,
++};
++
++/*
++ * TODO:
++ * To support ARMv8.3, we need to read "CCIDX, bits [23:20]" from
++ * ID_AA64MMFR2_EL1 to get the format of CCSIDR_EL1:
++ *
++ * 0b0000 - 32-bit format implemented for all levels of the CCSIDR_EL1.
++ * 0b0001 - 64-bit format implemented for all levels of the CCSIDR_EL1.
++ *
++ * Here we assume to use CCSIDR_EL1 in no CCIDX layout:
++ * NumSets, bits [27:13]: (Number of sets in cache) - 1
++ * Associativity, bits [12:3]: (Associativity of cache) - 1
++ * LineSize, bits [2:0]: (Log2(Number of bytes in cache line)) - 4
++ */
++int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
++{
++	u64 clidr_el1;
++	u32 csselr_el1;
++	u32 num_sets;
++	union ccsidr_el1 creg;
++	int cache_type;
++
++	sysinfo_cache_info_default(cinfo);
++
++	/* Read CLIDR_EL1 */
++	asm volatile("mrs %0, clidr_el1" : "=r" (clidr_el1));
++	debug("CLIDR_EL1: 0x%llx\n", clidr_el1);
++
++	cache_type = (clidr_el1 >> (3 * level)) & 0x7;
++	if (cache_type == CACHE_NONE) /* level does not exist */
++		return -1;
++
++	switch (cache_type) {
++	case CACHE_INST_ONLY:
++		cinfo->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_INST;
++		break;
++	case CACHE_DATA_ONLY:
++		cinfo->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_DATA;
++		break;
++	case CACHE_UNIFIED:
++		cinfo->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_UNIFIED;
++		break;
++	case CACHE_INST_WITH_DATA:
++		cinfo->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_OTHER;
++		break;
++	default:
++		cinfo->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN;
++		break;
++	}
++
++	/* Select cache level */
++	csselr_el1 = (level << 1);
++	asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
++
++	/* Read CCSIDR_EL1 */
++	asm volatile("mrs %0, ccsidr_el1" : "=r" (creg.data));
++	debug("CCSIDR_EL1 (Level %d): 0x%llx\n", level + 1, creg.data);
++
++	/* Extract cache size and associativity */
++	cinfo->line_size = 1 << (creg.no_ccidx.linesize + 4);
++
++	/* Map the associativity value */
++	switch (creg.no_ccidx.associativity + 1) {
++	case CACHE_ASSOC_DIRECT_MAPPED:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_DMAPPED;
++		break;
++	case CACHE_ASSOC_2WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_2WAY;
++		break;
++	case CACHE_ASSOC_4WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_4WAY;
++		break;
++	case CACHE_ASSOC_8WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_8WAY;
++		break;
++	case CACHE_ASSOC_16WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_16WAY;
++		break;
++	case CACHE_ASSOC_12WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_12WAY;
++		break;
++	case CACHE_ASSOC_24WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_24WAY;
++		break;
++	case CACHE_ASSOC_32WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_32WAY;
++		break;
++	case CACHE_ASSOC_48WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_48WAY;
++		break;
++	case CACHE_ASSOC_64WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_64WAY;
++		break;
++	case CACHE_ASSOC_20WAY:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_20WAY;
++		break;
++	default:
++		cinfo->associativity = SMBIOS_CACHE_ASSOC_UNKNOWN;
++		break;
++	}
++
++	num_sets = creg.no_ccidx.numsets + 1;
++	/* Size in KB */
++	cinfo->max_size = (cinfo->associativity * num_sets * cinfo->line_size) /
++			  1024;
++
++	debug("L%d Cache:\n", level + 1);
++	debug("Number of bytes in cache line:%u\n", cinfo->line_size);
++	debug("Associativity of cache:%u\n", cinfo->associativity);
++	debug("Number of sets in cache:%u\n", num_sets);
++	debug("Cache size in KB:%u\n", cinfo->max_size);
++
++	cinfo->inst_size = cinfo->max_size;
 +
 +	/*
-+	 * TODO: Populate the Contained Element Record if they exist
-+	 * t->element_count = <element_num>;
-+	 * t->element_record_length = <element_len>;
++	 * Below fields with common values are placed under DT smbios node
++	 * socket-design, config
++	 * Other fields are typically specific to the implementation of the ARM
++	 * processor by the silicon vendor:
++	 * supp_sram_type, curr_sram_type, speed, err_corr_type
 +	 */
 +
-+	*sku_num_addr =	smbios_add_prop_si(ctx, "sku", SYSID_SM_ENCLOSURE_SKU,
-+					   NULL);
-+#endif
-+
- 	len = t->hdr.length + smbios_string_table_len(ctx);
- 	*current += len;
- 	unmap_sysmem(t);
-@@ -577,6 +608,8 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
- 	u16 processor_family = SMBIOS_PROCESSOR_FAMILY_UNKNOWN;
- 	const char *vendor = NULL;
- 	const char *name = NULL;
-+	__maybe_unused void *id_data = NULL;
-+	__maybe_unused size_t id_size = 0;
- 
- #ifdef CONFIG_CPU
- 	char processor_name[49];
-@@ -617,6 +650,16 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
- 	t->processor_version = smbios_add_prop_si(ctx, "version",
- 						  SYSID_SM_PROCESSOR_VERSION,
- 						  name);
-+
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	if (t->processor_id[0] || t->processor_id[1] ||
-+	    sysinfo_get_data(ctx->dev, SYSID_SM_PROCESSOR_ID, &id_data,
-+			     &id_size))
-+		return;
-+
-+	if (id_data && id_size == sizeof(t->processor_id))
-+		memcpy((u8 *)t->processor_id, id_data, id_size);
-+#endif
- }
- 
- static int smbios_write_type4(ulong *current, int handle,
-@@ -624,6 +667,8 @@ static int smbios_write_type4(ulong *current, int handle,
- {
- 	struct smbios_type4 *t;
- 	int len = sizeof(*t);
-+	__maybe_unused void *hdl;
-+	__maybe_unused size_t hdl_size;
- 
- 	t = map_sysmem(*current, len);
- 	memset(t, 0, len);
-@@ -647,6 +692,60 @@ static int smbios_write_type4(ulong *current, int handle,
- 	t->l2_cache_handle = SMBIOS_CACHE_HANDLE_NONE;
- 	t->l3_cache_handle = SMBIOS_CACHE_HANDLE_NONE;
- 
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	t->voltage = smbios_get_val_si(ctx, "voltage",
-+				       SYSID_SM_PROCESSOR_VOLTAGE, 0);
-+	t->external_clock = smbios_get_val_si(ctx, "external-clock",
-+					      SYSID_SM_PROCESSOR_EXT_CLOCK, 0);
-+	t->max_speed = smbios_get_val_si(ctx, "max-speed",
-+					 SYSID_SM_PROCESSOR_MAX_SPEED, 0);
-+	t->current_speed = smbios_get_val_si(ctx, "current-speed",
-+					     SYSID_SM_PROCESSOR_CUR_SPEED, 0);
-+
-+	/* Read the cache handles */
-+	if (!sysinfo_get_data(ctx->dev, SYSID_SM_CACHE_HANDLE, &hdl,
-+			      &hdl_size) &&
-+	    (hdl_size == SYSINFO_CACHE_LVL_MAX * sizeof(u16))) {
-+		u16 *handle = (u16 *)hdl;
-+
-+		if (*handle)
-+			t->l1_cache_handle = *handle;
-+
-+		handle++;
-+		if (*handle)
-+			t->l2_cache_handle = *handle;
-+
-+		handle++;
-+		if (*handle)
-+			t->l3_cache_handle = *handle;
-+	}
-+
-+	t->serial_number = smbios_add_prop_si(ctx, "serial",
-+					      SYSID_SM_PROCESSOR_SN, NULL);
-+	t->asset_tag = smbios_add_prop_si(ctx, "asset-tag",
-+					  SYSID_SM_PROCESSOR_ASSET_TAG, NULL);
-+	t->part_number = smbios_add_prop_si(ctx, "part-number",
-+					    SYSID_SM_PROCESSOR_PN, NULL);
-+	t->core_count =	smbios_get_val_si(ctx, "core-count",
-+					  SYSID_SM_PROCESSOR_CORE_CNT, 0);
-+	t->core_enabled = smbios_get_val_si(ctx, "core-enabled",
-+					    SYSID_SM_PROCESSOR_CORE_EN, 0);
-+	t->thread_count = smbios_get_val_si(ctx, "thread-count",
-+					    SYSID_SM_PROCESSOR_THREAD_CNT, 0);
-+	t->processor_characteristics =
-+		smbios_get_val_si(ctx, "characteristics",
-+				  SYSID_SM_PROCESSOR_CHARA,
-+				  SMBIOS_PROCESSOR_UND);
-+	t->core_count2 = smbios_get_val_si(ctx, "core-count2",
-+					   SYSID_SM_PROCESSOR_CORE_CNT2, 0);
-+	t->core_enabled2 = smbios_get_val_si(ctx, "core-enabled2",
-+					     SYSID_SM_PROCESSOR_CORE_EN2, 0);
-+	t->thread_count2 = smbios_get_val_si(ctx, "thread-count2",
-+					     SYSID_SM_PROCESSOR_THREAD_CNT2, 0);
-+	t->thread_enabled = smbios_get_val_si(ctx, "thread-enabled",
-+					      SYSID_SM_PROCESSOR_THREAD_EN, 0);
-+#endif
-+
- 	len = t->hdr.length + smbios_string_table_len(ctx);
- 	*current += len;
- 	unmap_sysmem(t);
-@@ -654,6 +753,104 @@ static int smbios_write_type4(ulong *current, int handle,
- 	return len;
- }
- 
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+
-+static int smbios_write_type7_1level(ulong *current, int handle,
-+				     struct smbios_ctx *ctx, int level)
-+{
-+	struct smbios_type7 *t;
-+	int len = sizeof(*t);
-+	void *hdl;
-+	size_t hdl_size;
-+
-+	t = map_sysmem(*current, len);
-+	memset(t, 0, len);
-+	fill_smbios_header(t, SMBIOS_CACHE_INFORMATION, len, handle);
-+	smbios_set_eos(ctx, t->eos);
-+
-+	t->socket_design = smbios_add_prop_si(ctx, "socket-design",
-+					      SYSID_SM_CACHE_SOCKET + level,
-+					      NULL);
-+	t->config.data = smbios_get_val_si(ctx, "config",
-+					   SYSID_SM_CACHE_CONFIG + level,
-+					   (level - 1) | SMBIOS_CACHE_OP_UND);
-+	t->max_size.data = smbios_get_val_si(ctx, "max-size",
-+					     SYSID_SM_CACHE_MAX_SIZE + level,
-+					     0);
-+	t->inst_size.data = smbios_get_val_si(ctx, "installed-size",
-+					      SYSID_SM_CACHE_INST_SIZE + level,
-+					      0);
-+	t->supp_sram_type.data =
-+		smbios_get_val_si(ctx, "supported-sram-type",
-+				  SYSID_SM_CACHE_SUPSRAM_TYPE + level,
-+				  SMBIOS_CACHE_SRAM_TYPE_UNKNOWN);
-+	t->curr_sram_type.data =
-+		smbios_get_val_si(ctx, "current-sram-type",
-+				  SYSID_SM_CACHE_CURSRAM_TYPE + level,
-+				  SMBIOS_CACHE_SRAM_TYPE_UNKNOWN);
-+	t->speed = smbios_get_val_si(ctx, "speed", SYSID_SM_CACHE_SPEED + level,
-+				     0);
-+	t->err_corr_type = smbios_get_val_si(ctx, "error-correction-type",
-+					     SYSID_SM_CACHE_ERRCOR_TYPE + level,
-+					     SMBIOS_CACHE_ERRCORR_UNKNOWN);
-+	t->sys_cache_type =
-+		smbios_get_val_si(ctx, "system-cache-type",
-+				  SYSID_SM_CACHE_SCACHE_TYPE + level,
-+				  SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN);
-+	t->associativity = smbios_get_val_si(ctx, "associativity",
-+					     SYSID_SM_CACHE_ASSOC + level,
-+					     SMBIOS_CACHE_ASSOC_UNKNOWN);
-+	t->max_size2.data = smbios_get_val_si(ctx, "max-size2",
-+					      SYSID_SM_CACHE_MAX_SIZE2 + level,
-+					      0);
-+	t->inst_size2.data =
-+		smbios_get_val_si(ctx, "installed-size2",
-+				  SYSID_SM_CACHE_INST_SIZE2 + level, 0);
-+
-+	/* Save the cache handles */
-+	if (!sysinfo_get_data(ctx->dev, SYSID_SM_CACHE_HANDLE, &hdl,
-+			      &hdl_size)) {
-+		if (hdl_size == SYSINFO_CACHE_LVL_MAX * sizeof(u16))
-+			*((u16 *)hdl + level) = handle;
-+	}
-+
-+	len = t->hdr.length + smbios_string_table_len(ctx);
-+	*current += len;
-+	unmap_sysmem(t);
-+
-+	return len;
++	return 0;
 +}
 +
-+static int smbios_write_type7(ulong *current, int handle,
-+			      struct smbios_ctx *ctx)
++int sysinfo_get_processor_info(struct processor_info *pinfo)
 +{
-+	int len = 0;
-+	int i, level;
-+	ofnode parent = ctx->node;
-+	struct smbios_ctx ctx_bak;
++	u64 mpidr, core_count;
++	union midr_el1 midr;
 +
-+	memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
++	/* Read the MIDR_EL1 register */
++	asm volatile("mrs %0, MIDR_EL1" : "=r"(midr.data));
++	/* Read the MPIDR_EL1 register */
++	asm volatile("mrs %0, MPIDR_EL1" : "=r"(mpidr));
 +
-+	/* Get the number of level */
-+	level =	smbios_get_val_si(ctx, NULL, SYSID_SM_CACHE_LEVEL, 0);
-+	if (level >= SYSINFO_CACHE_LVL_MAX) /* Error, return 0-length */
-+		return 0;
++	debug("MIDR: 0x%016llx\n", midr.data);
++	debug("MPIDR: 0x%016llx\n", mpidr);
++	debug("CPU Implementer: 0x%02x\n", midr.fields.implementer);
 +
-+	for (i = 0; i <= level; i++) {
-+		char buf[9] = "";
-+
-+		if (!snprintf(buf, sizeof(buf), "l%d-cache", i + 1))
-+			return 0;
-+		ctx->subnode_name = buf;
-+		ctx->node = ofnode_find_subnode(parent, ctx->subnode_name);
-+		len += smbios_write_type7_1level(current, handle++, ctx, i);
-+		memcpy(ctx, &ctx_bak, sizeof(*ctx));
++	switch (midr.fields.implementer) {
++	case VENDOR_ARM:
++		pinfo->manufacturer = "ARM Limited";
++		break;
++	case VENDOR_BROADCOM:
++		pinfo->manufacturer = "Broadcom Corporation";
++		break;
++	case VENDOR_CAVIUM:
++		pinfo->manufacturer = "Cavium Inc";
++		break;
++	case VENDOR_DEC:
++		pinfo->manufacturer = "Digital Equipment Corporation";
++		break;
++	case VENDOR_FUJITSU:
++		pinfo->manufacturer = "Fujitsu Ltd";
++		break;
++	case VENDOR_INFINEON:
++		pinfo->manufacturer = "Infineon Technologies AG";
++		break;
++	case VENDOR_FREESCALE:
++		pinfo->manufacturer = "Freescale Semiconductor Inc";
++		break;
++	case VENDOR_NVIDIA:
++		pinfo->manufacturer = "NVIDIA Corporation";
++		break;
++	case VENDOR_AMCC:
++		pinfo->manufacturer =
++			"Applied Micro Circuits Corporation";
++		break;
++	case VENDOR_QUALCOMM:
++		pinfo->manufacturer = "Qualcomm Inc";
++		break;
++	case VENDOR_MARVELL:
++		pinfo->manufacturer = "Marvell International Ltd";
++		break;
++	case VENDOR_INTEL:
++		pinfo->manufacturer = "Intel Corporation";
++		break;
++	case VENDOR_AMPERE:
++		pinfo->manufacturer = "Ampere Computing";
++		break;
++	default:
++		pinfo->manufacturer = "Unknown";
++		break;
 +	}
-+	return len;
++	debug("CPU part number: 0x%x\n", midr.fields.partnum);
++	debug("CPU revision: 0x%x\n", midr.fields.revision);
++	debug("CPU architecture: 0x%x\n", midr.fields.architecture);
++	debug("CPU variant: 0x%x\n", midr.fields.variant);
++
++	/* Extract number of cores */
++	core_count = (mpidr >> 0) & 0xFF;
++	pinfo->core_count = core_count + 1;
++	debug("CPU Core Count: %d\n", pinfo->core_count);
++
++	pinfo->core_enabled = pinfo->core_count;
++	pinfo->characteristics = SMBIOS_PROCESSOR_64BIT |
++		SMBIOS_PROCESSOR_ARM64_SOCID;
++	if (pinfo->core_count > 1)
++		pinfo->characteristics |= SMBIOS_PROCESSOR_MULTICORE;
++
++	/*
++	 * Below fields with common values are placed under DT smbios node
++	 * version, processor-type, processor-status, upgrade, family2,
++	 * socket-design, serial, asset-tag, part-number
++	 */
++
++	return 0;
 +}
-+
-+#endif /* #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE) */
-+
- static int smbios_write_type32(ulong *current, int handle,
- 			       struct smbios_ctx *ctx)
- {
-@@ -693,6 +890,10 @@ static struct smbios_write_method smbios_write_funcs[] = {
- 	{ smbios_write_type2, "baseboard", },
- 	/* Type 3 must immediately follow type 2 due to chassis handle. */
- 	{ smbios_write_type3, "chassis", },
-+#if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
-+	/* Type 7 must ahead of type 4 to get cache handles. */
-+	{ smbios_write_type7, "cache", },
-+#endif
- 	{ smbios_write_type4, "processor"},
- 	{ smbios_write_type32, },
- 	{ smbios_write_type127 },
 -- 
 2.25.1
 
