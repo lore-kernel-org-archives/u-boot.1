@@ -4,165 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5267E77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 13:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E068E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 13:28:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AB7A890D9;
-	Fri,  6 Dec 2024 14:19:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id 810D0890D9;
+	Fri,  6 Dec 2024 14:28:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="mHdpiBhl";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="jfpGENhS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C76F895EC; Fri,  6 Dec 2024 14:19:44 +0100 (CET)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
+ id 70EB78927A; Fri,  6 Dec 2024 14:28:36 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::626])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C326E88E0A
- for <u-boot+nodisclaimer@lists.denx.de>; Fri,  6 Dec 2024 14:19:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id DBEB388CEA
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 14:28:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=IPdabc59Wtbl1hyCzpk3AnKYABuI7HrN7eP72ZkOw0JRNAwP9iHQsACq02ZHBAor/r8YDXZFFvli7K7XR8zOE2Ta0IDlhX0jxRkENsk1fAzzlsuMobOTEvRv5RML4ho+/FcpfphXhh2dgoMvgur7ZlzWhBIfou2JgU/Ok2VlC5nMyZWtUCAUIPN8U995i6LRsEQhElGfl7Sigl2/HypxinFyE3E5YpXiFTsFt8tKpYlciXaqL4A2hghlNu56qT66bX78ncrjM4A1230vi7vDk5WQva4ZINqU8Vs2wZ7BpT2e24+XngNRgLFre+jNJ2mhEzLXTgfDB2EK1g2njoL8LQ==
+ b=v5pcqkqnEGnAttKK70Fga9radGljbACLzwjnDcHhU6HqbXdJXUiDdR2+sQscLb4f2nO3l8sbn0/Bdz9eISMh0auvSzRDhp10wyJz+Y5vvVJ9zIWNIxUrDwMM7p+CxrKkeSEoPc9yu+PHIcuv7VAkQjgD5Fw4HTeTbyJ77nlYzjHXOCYMYnnwtMr8cnDGVYZXkqDHDKu2PkAWzyLb5veZ3r1DntvhqEGqxrMAXZfNpLFql2covwOAWXq+tGlKlqtwWSnwAekXzd2iG2pBKDhsLJ//bumbWYnBmY+I1EGHUiO2GKyCMOdKLi0xJ7fZCOd8Z3/LlrbHS2f4U32hGKr1zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rHlq9GS9sv0nPXQHzqzlnzivLlbgN9sLB5Pw9YqZ7xM=;
- b=XxROBIGvNwkoGcEYyd1nzX0/cPzcPKnpa4TI8pGIIytFdpxhx9jBbPPCNkZkHDX1xAEWqk5TUg5O6n1tzhFVc/1Rcmznbm2Vj4dbWaWmayVO6RBv332cfLUrHO3JsHLkWh7BoyGeBrVtsLjZUj+l6NlKl/ZK6OedqOSuMTZQ2fsX6HVdZW/kwF0b7/ngC22UL7Op/oWDKdePGqz0rfOZ+hy+2yAPPBcgwyAmjMbiiJEA7y+DllconLz+YsZndfnIZlR8z3xGMyDW4jUuoZZdf9+SRS4maiuoelZerxNen0bPwjNok1B0yzOU6k0KDDy03gGjC5eMN9dYO5dNR+KKiA==
+ bh=SneTejwqzKIsnzvk8h6LNhIQNp/JkRWnbD7GQh2/gTI=;
+ b=UaekYw7NeLSdabwtC29TaL0E5hfRrhRlEixjPqNV2sAZnHBSC3Kpz1arRo/TdubBSXNlg+7QoqabbalcrL9lgsv3mMCjLwG1Nv8odkP9iksIW/2cu91A8NoHNXgmxnX/QPu1NiWqVOUTzCT6vDS8g3XNhHvAwSm+joCcd+GcrmMJokYlaPmVtiAvYYDK4fFYY7MNxQjcXWJM1v0o9FlbuWH1N5yEVwL8+MjF29x8CE8feFCSYs8exhxBZRT3mGdgZ/wxZHPGujV93RFn5s2nrkpcUSkSgHI4nbJCl7OYi5xARj9GZOXXmI3tqi3oKjiywptj/n062g3phFis45N83g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=softathome.com; dmarc=pass action=none
- header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rHlq9GS9sv0nPXQHzqzlnzivLlbgN9sLB5Pw9YqZ7xM=;
- b=mHdpiBhlNfoc9cjuW5SXqRYuJdYmOD2Xk3SRJ3YMQIxKwMiGw7B9B0D3oQ483/k8p3rwyrnRfvfbfHCpDEWKt2obUAzixwTjpCi1H+OU2I1g6FYaZRI6Gz73BbX3AsPLj+QLFNaeI0cUCWIQRnDUvXr3PaNwPzcRKA8MqkXFmI2UeAxbn09mvQG2M8TB27ZpaU6pH/dqL7+xJxsZCtS5Py8fOq34cRwEWBOMCSDunxFR1FAPzSAOR//8iEaTYM3mA5XaFD8tdaEcJSbrkb7BWsSBBXXpKY32IHsH4m99zPKhSz2aUJseqAgJ/Yrh74TmkkcMjoI5cLCBpjSsno4kPQ==
+ bh=SneTejwqzKIsnzvk8h6LNhIQNp/JkRWnbD7GQh2/gTI=;
+ b=jfpGENhS50m3upt6A5j3XhG4dPT1zGpaqRx1hpDbkCrUmbdGCey1Dgo8KXuRy7HZtKXvJbsxyEFvdsj0z+nquj6YJXSTCb9UGnnHXES2aUn8/ApmbQAcp6uDV0WXaqbHQ3bo5Q03a/AJmny6J48xyykJmLLr2UdLTt/yMybcMnw=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=softathome.com;
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
- by PASP264MB5201.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:43b::10) with
- Microsoft SMTP Server (version=TLS1_2,
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
+ by AM9PR04MB7539.eurprd04.prod.outlook.com (2603:10a6:20b:2da::14)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.12; Fri, 6 Dec
- 2024 13:19:38 +0000
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::28e7:f006:fbc2:3f27]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::28e7:f006:fbc2:3f27%6]) with mapi id 15.20.8230.010; Fri, 6 Dec 2024
- 13:19:38 +0000
-Message-ID: <a40f5c90-9884-4733-818a-bed01b5de099@softathome.com>
-Date: Fri, 6 Dec 2024 14:19:37 +0100
+ 2024 13:28:31 +0000
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea%5]) with mapi id 15.20.8230.010; Fri, 6 Dec 2024
+ 13:28:31 +0000
+Message-ID: <47438e01-90c7-4f17-9434-71869349ddca@cherry.de>
+Date: Fri, 6 Dec 2024 14:28:29 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] test: lib: add test for sha256_hamc
-To: raymond.mao+nodisclaimer@linaro.org
-Cc: sjg+nodisclaimer@chromium.org, u-boot+nodisclaimer@lists.denx.de
-References: <20241204175437.185449-1-philippe.reynes@softathome.com>
- <20241204175437.185449-4-philippe.reynes@softathome.com>
- <CAEfUkUJKCVAOS_SjTjQNKhxPqLhUr5AjryJ9krzKWbTZG=LX8A@mail.gmail.com>
+Subject: Re: [PATCH v2] board: rockchip: add Khadas Edge2 RK3588 board
+To: Jacobe Zang <jacobe.zang@wesion.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de, nick@khadas.com
+References: <20241204-edge2-v2-1-1dc26b9209df@wesion.com>
 Content-Language: en-US
-From: Philippe REYNES <philippe.reynes@softathome.com>
-In-Reply-To: <CAEfUkUJKCVAOS_SjTjQNKhxPqLhUr5AjryJ9krzKWbTZG=LX8A@mail.gmail.com>
-X-ClientProxiedBy: PA7P264CA0103.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:348::11) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1d0::9)
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241204-edge2-v2-1-1dc26b9209df@wesion.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: WA1P291CA0014.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::22) To AM9PR04MB8906.eurprd04.prod.outlook.com
+ (2603:10a6:20b:409::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PASP264MB5201:EE_
-X-MS-Office365-Filtering-Correlation-Id: c63de4de-ae42-471b-0de2-08dd15f8a2dd
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|AM9PR04MB7539:EE_
+X-MS-Office365-Filtering-Correlation-Id: 346f7771-4131-40f6-4c95-08dd15f9e022
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|10070799003|8096899003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVgvUHB6bVhWaldjbHVtd1RsZXdhNHlEbTBNczE2VHM2N2tsOWhPcmRwNTAv?=
- =?utf-8?B?cElUT2x2OEErN1hGZVRHZzNOWTg5MmE0Y1dyKzNjRU1EMzA1VmRJUy9LRm9j?=
- =?utf-8?B?b1hXVkVmckQvdXg0dGh4c3lMNHI4ekNkZUl6bkFVZFlSd2M4QmF4Rkl6U0pk?=
- =?utf-8?B?QU5RbjJjb3h2WHAxbFhMc2d1REkvcHkvc2JzQ29FVXZvWFc0UzZLN1Awd0hy?=
- =?utf-8?B?b0RTWjVQWkJUTHZkZmpYMlRTQm52NmhuN3h6SUNZZHhTTEg1ZXh6R3R6TkJJ?=
- =?utf-8?B?K1lLSkVTSm9uVGs5clFjeUU3OG11bWdFaVlMQzMwWXl1WWRyZWxNQTQrVDhQ?=
- =?utf-8?B?MXBWam5ucFBQeXNCWENCeVRHSzNCdkJQaDM0RUh0NDVyNVdsZ0poRlZNVytj?=
- =?utf-8?B?VnBPUkxoaXdWRnlyU0lBN1ZCTnYxeEM4OGNlb3ZCcldHd3RPU0E1Ry9EMUtV?=
- =?utf-8?B?WlR5WFJyK3dtb0tkWEFad2dsZElDVnJTRFdmV3dJUFFacDZKRVFUU1RZWEtL?=
- =?utf-8?B?NEViN3BOYjM3Zm9xZEYvcUd5MTlQeCtUR214ZkpxcGJXNmRzRXFjMXkyMUVi?=
- =?utf-8?B?bzI3UXEvK3J4a0lYdEtJYlhWOWd2MFJyck9BbkhqSlQ2ZTJqM3ZlTy96VjRj?=
- =?utf-8?B?dHVnZzRZbGtpRmk5bnVINXZWQ3Ezclc4bkVMeTBXUUxkUERsVjNZWEZEUmM0?=
- =?utf-8?B?a1FRZm44UzdGeWREYW9OdGFzUU50ZVZnZURCWS9zQmkvcjgxOU84RlhYQkVP?=
- =?utf-8?B?RERsUGdkSzgxMnBub3RRRXNFSnFsbXQzWmp1c011Z3lia1dNMGF3WEw1Nld1?=
- =?utf-8?B?YjdzRU1xMnBoQmtMbkxERXNPYUFrM1Q3VUgzU3owNXBRdlpRaFdueGIva2pB?=
- =?utf-8?B?OEtqclhGa3ZjNXBUU2c2R2RGbExGWGZBYjdCMDM5dFh1c3ZXVjhZVVRoNmFz?=
- =?utf-8?B?UHl5MzF6YXJtRkZ5SzRpay95bEM5TVN6V2ljREpEMENBOUR6elpmc1J0RWM1?=
- =?utf-8?B?L2gxSzd2ODlEdVdEWDJ1d0NCRStoNjFFdkg3T2VtM3daN0VUdmN3WEhPbG5z?=
- =?utf-8?B?eGxNKzdrQnNkZlBtM0NKMVBNZ25RQjVBTUhybFM2SEJFdzRJY3dlUkgzTXBE?=
- =?utf-8?B?cjNvL2ptSjJ5U1BTb1RIRlQxRW9EdTR5UzBLb283dkZEZkZIVU1nV1IvUkJt?=
- =?utf-8?B?MkVDTFN5NWR3aHNBa3Q2dGxJcXpaVUl4S2dtQ2hjTUtSbnN2eVcrMWNVNFo2?=
- =?utf-8?B?ZktZRFlVSTBxWklhNGZXRE4rbzdEcS81Y3NLQ2RVeE0xQ25ac3VIdzB4d3Fr?=
- =?utf-8?B?bjhwVnJSSjc2VnF2T0lCOUVPNnpIelFrRnlpY3ZoaUJXMXZ0blh5R3hwREZl?=
- =?utf-8?B?a2l6c28zN1BkaFBoL1VyeEFPQ1VRSEt5czUyK00yQ3FhZ2JiL0dDWjRaMXBa?=
- =?utf-8?B?YWJ6R3F6MEpwTnNMN0g0cWhOekNTVHIyV3hVWUVkTFkyZUlHVFVxUldYUkFR?=
- =?utf-8?B?cGVPaGFOYWtsWEpsWGswRWZBa2NMd2ZMQXdKeGV2ZjlYY004VkgzOEl0TkNo?=
- =?utf-8?B?Rmh4Q014SHNZaUNkRHJ4MzNiUmJhUFFrbDBKV3ptUmoyS1psazlSTWVKK3cz?=
- =?utf-8?B?ekFNVnpqVisrbmxJa2JyVmF2dFJHb0dEcjBxTUQ2M2w3NWVEUkJRZXU1Y2k4?=
- =?utf-8?B?VmxySSsyOWdQbVB5VnppSldlVkpZWmUxeUdjb3J5QWlzNVhFZ0tvY0xNOWUv?=
- =?utf-8?B?dzV4bndJVk45cEk1M3pEd2VBYkNPbXl0VmhlblJYeGxnVFBXYmoyczhOMzRh?=
- =?utf-8?B?dHRkcDNLMkhkMDBrTWtmdz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?M0JreWRGTnE1UUhFekJqMlJyNFBDeFZHdWJ4SmJoQ3B6ZnRyMlRLOEtXbXlV?=
+ =?utf-8?B?M1E3L0lydFEwZDdiYnhRalljVk1tT1JnRkF2dk0xWjFOd3gyWVdpT1RWNE4x?=
+ =?utf-8?B?Uko0TEdsTUdpdUlaMnVwa2pwT1RRazV3ZE1MQUdIWUxyQ20xY2FjS2ZYbTBh?=
+ =?utf-8?B?T1FEQ3hnMVQ3YzZ4UzNTNG9tYlJjcWhTSWFiZm10L0xFdysyZFp1TVBEVFI2?=
+ =?utf-8?B?WXltLzl4WnZOcXAwdkh2N2xndXIyWmIyYVBQanlmMTFlTmFTTEpNeTF2OE1Q?=
+ =?utf-8?B?dGZOam9XbUhhZHZDRkxxRGRmT09od0wyTXdZR1RQVnVJOXNmK1J2RVM1dVhJ?=
+ =?utf-8?B?WlBQWHRXN3lDeFc5ZnRObFpuZEYzSEpPQXlFNlZIWUJWc3MvVUZXK3p5eWc0?=
+ =?utf-8?B?c1prdEU2TVR6cHJqWGlqcjg3MEtna3Y5NWhaL3RuVkIrOGhncFpMYVhFc0x5?=
+ =?utf-8?B?dU85eVdmSGpwOTcrQjdtK0dLcUZKQ2NtSGZxS2hMZW5QLzZidVR1alVVRkVX?=
+ =?utf-8?B?UmYzK3dZM2NML0NPejdJVGJSSFNGNis0amhrNlM1SHZhODhENW1JSnJHU2Ez?=
+ =?utf-8?B?eDB6RUFsVm9VOVd1T0gxWURkUHl6Y3BPZjc0N1MzeW81akhwYTF1cXRPL2Iy?=
+ =?utf-8?B?THJNZE5xaTdQYWVmUW9CWU1yc1Zzd2JQYjYzVjZxRDlGWWJ4UXR5K0kzU2d3?=
+ =?utf-8?B?RmxJaE9WQWhOWlVuMEZwallybEl3K1VrV2ozR2hGaUQ0b1ZUeTJld2JxeVRK?=
+ =?utf-8?B?SS9LUlZnOFlLaW5YMUcrZlgrV2x5K251cWdseXNNVWpyd0hueUVmaExFejd2?=
+ =?utf-8?B?YlgyeitpUmdZVXVHYjFlSWloL2VQZW8vSmxOZ0VIaXdWNGFhbG5OWlVKdzQ4?=
+ =?utf-8?B?c1YxR0JhbkY2OHVVK0g0UXZJUTBLY2xvc29zYmRLZ0dqeUpVRXdoblpiVXdw?=
+ =?utf-8?B?Nmw5dnZLVVJHSzA1K0kwa21mcUExTjBERnRoYmtVaUdXTmlJWUJWR2tNZlFm?=
+ =?utf-8?B?VUh0bHhGbWJGRE5mUTdHZ09IWWEyRlZ5ZzBqVjBFRHU4ZlNmTGFLVGFzTGQ0?=
+ =?utf-8?B?a09Ia1YyMW9qYmQ4Vmp2R0VHdVdjU2RicGtUSlo1NXRFU1Y5c1BtZVF2TEF2?=
+ =?utf-8?B?VUpjYjN5WmY0S1c0cEFzQWFtWGg1eDZxK0ZZSThrQTVNRVgvaDBYdmo3MUNr?=
+ =?utf-8?B?NVQzMzc2Q255Q1kwVUJZRjRneGVBWUMzSFROZTRValV2TEdaVVc1K1JPTGxm?=
+ =?utf-8?B?YjJienp2d2xMQy9aZE9UN1hsam5XK2ZKeW0ySFl3Z3FIMVBLM0h1eUo4Zlhl?=
+ =?utf-8?B?UkQ1b1pSLzVZRDMzeVNuRWpINmxPTjRMTG10ZXlOay9RVlE4VWlmUlIwY1V0?=
+ =?utf-8?B?ZkE1S3pGOWhyTkVCNlNtQ1RPOTFTc1NJcTlkNXBKRUw3WEd5UW5yVnJvcHFC?=
+ =?utf-8?B?akNJZWtsUnZLN1JMdHFIRW9KVVpjME8zOXJQQ1NHNkZrWFBqb1dGN0dwUW5X?=
+ =?utf-8?B?V1RNWEtGYXFHc0dmR1g0YWkrVVBkdGJOUlBJbm9PUEdrTkxuYXdPbmUvWURM?=
+ =?utf-8?B?QjZJaXpZL2EvUWJ1dkpHTDJTZDJ2ZzFxNHBvL3lEWkcyWUI2SHQweTZFRldV?=
+ =?utf-8?B?dVJVZUF4U1pKRlM5bFpGb0dwdWwyUW9uVkIzNU5FQzRxUDh1SWt6MmtNVXFG?=
+ =?utf-8?B?alVvdm54cG43Q2xrRVZxUHBVMHo4S1pMa2NjMlVQOGsvSC9BcCtLSmZxUERx?=
+ =?utf-8?B?OUVhd3lJRytnL1gxa0c2L3dLR0J3cVFzdmNLMFQ5ZG43eVQwdGIzc3RlZTlD?=
+ =?utf-8?Q?qNm6SqKQ6CoGM+Zulym/X+TDbsO9qdKBPYL7c=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(10070799003)(8096899003); DIR:OUT;
- SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGxyUisxYzNvdXZxM3R4R05aR0kxRSs3R01pWFAvR1FFRFZnbnpvQ0lseFBK?=
- =?utf-8?B?dWJKU0VYS05YQS9OWVYrSndRVFE1amg1VStxWEoxQi80L3FHeVhKb2I4bUVX?=
- =?utf-8?B?S0pyNjBHdjJGZG4rTEtTeWNrcVpLSHZlK3JUV0ZrOSt1UTRyakhjWWRhT1dh?=
- =?utf-8?B?MzV6NE1ZVXBFdzFHcVArWGY2T01HbzJIbE9hOW9sWFJNRTYrcVB5WTh3amxu?=
- =?utf-8?B?djR5Z2pjdGo4TElZYlVBVW13TURzYzBsUzc1ZlBkRUc0UFQ0YWhtOHF0WjFL?=
- =?utf-8?B?V1JOTm56b1JlVEVkQWFBVWYzMTJLaE1QNzlaUDM5dkF5WXJTN3dBNWhFTEpq?=
- =?utf-8?B?Z0grZ3B2M05Ld3RQUmg0bFlObDJiNTgyL242cXNSVFhwS3doZzQ5Z3M3Nzdj?=
- =?utf-8?B?dGxYY1JnSUdrbFg1T3RZNDdrMlEya3FmdCtUT2NvRkJRWnNMc0xRazRZSjhY?=
- =?utf-8?B?b2JlUWVKdjVqTjNOQUc1NDZnOFU0dzJRTFE3dXpiSk1sZjJMVEJFbHd1a21E?=
- =?utf-8?B?Z3VJQW5HLzhyM2h2aWlIWW41REI1Qk4xMDRETnBDRytXbUY2ZGFFSWZCeUNi?=
- =?utf-8?B?RTZBVzZVNUw1dGNsQTc4b2piNjlneTJGejg2WVRlYlovV1Rlc0h4cFU3bS9Y?=
- =?utf-8?B?VDdnN0RWbVQrRzdmakU4RGtPVFRzaC90TWJ1R3NiblcyMDZNN1JHRWFQVzFB?=
- =?utf-8?B?elI2QUxHTlIwc2Q0YXkzamtKd0FDbXM0Ym93a1hZMDdteDdSSE5DZlQvSGdz?=
- =?utf-8?B?V0lYSVJsNHFNRmNhT2N4bWNNN1luSzZhZlV4QkppNCtabVpITkFHOS9DNnE2?=
- =?utf-8?B?L2lUeVlSYnNiUjBROUhvMVAwYTYrem5IVG5sZ1g2TVZPL2t0Y0h1cHJXaWwv?=
- =?utf-8?B?ZnlGaWVpeG5sUnlBWFBLS2VIc0JwRWhUd0x4UFhUa29haklnS0NRUUYwMnJq?=
- =?utf-8?B?MDNCM2lqdWJ1QURKeEluMXN5Y3dXcW90RDBkOWZORG5mRGkrMTlicWxmaU5o?=
- =?utf-8?B?b0N0eHVVT0FseDR5RXVZUXpIaTNpbW01akZkTURkTUFlVVpQTzUrRC9hblpO?=
- =?utf-8?B?NG9CSldNUldqNmVZd1czeWIzZUwwSkEvZG1vamtQUFdoV1BSOGlaZWJNU2xK?=
- =?utf-8?B?YjJDQnVJeFdGRWN5NkJZallpblRXWmhGNkh3TVhoaEdEOWlQVzd6ZUV2MWg2?=
- =?utf-8?B?RG1SblRLQ0p6TGdtRTBtQk1Mc2d0N1lxK1AyaitIR2l5TDh1TGRMaVg3SEFK?=
- =?utf-8?B?dzRvdXE5UG1nQVhrK1I0ajVGdlF2L1Q3WGxkV1pxbzNROUcvSUllZHZNaFNr?=
- =?utf-8?B?YkR4alR6K3dsWlZqNmlpdEZ4Ni9qZmhPNHM0M1E1RUxFNGRrMDVlaUlJVzdz?=
- =?utf-8?B?TXhLdXNTVlZzMlljNit0U0Q4MmRuRERpOWxSOHlIVlBWZE0zL1F2VHNvRTZq?=
- =?utf-8?B?OFk4d0ljTFZiLy85S2IxUDdYM3J1Rk5nby9jMTIrQ0pxQ1NsMDU2OWhKTHc4?=
- =?utf-8?B?UDZsWFpxNnpRblNLbnY3RkMrTG56WjVuVjJ4ODJDOWRFeXRJcmxoc0RWUjlO?=
- =?utf-8?B?b2xpSnFUSWpKb29yUTdacDZpUjFhSGZQWTlBV2tyUWl5aytnUk5hc0lMSmpi?=
- =?utf-8?B?MzlOUWpNSFpqbmFoRzJBV3NSTi9GYXFPNnBWTnllZWFFVDhSTHdzUk1ZRWxx?=
- =?utf-8?B?WWl0ZnJEeWRuTE1UTEJuVUdSUnUvQVpPWmlsK3EwWHF5eUZ1YU8xekdGbFY0?=
- =?utf-8?B?T0czNlVQb3JVUXlDalM0Sk5aclA1b3hmdUxqYmE0Wldja0ZoU0tGV3VpK3Jn?=
- =?utf-8?B?aVZrSDB0TWxma1JKNG93YjVITnBjbmp0UW1UWmF5elAwL2J3b1lua05HcUtG?=
- =?utf-8?B?MFg0eUlyRGNWcFRvWldCTDgrOWZ1eHBudktvUzZ5ZUxBaHQ0WkxOa0JlRmdK?=
- =?utf-8?B?ZUt3VXByZE5uaGZ1SFZZMm9rWjdlemVpSGJlTGZzOWZqbWd3NW9LcGZGdjRC?=
- =?utf-8?B?bU8xT3RKbTAyWXlXS1dpZkFCVDZHT010enBEWE5PZXkzL1FXUTlOOUdrbGti?=
- =?utf-8?B?QnNnMVNMOURZdHN6NVJ6WU1wdXJoajkydXlwV2kycVA0ZkRXM2JVZ2h3aS9j?=
- =?utf-8?B?OGNReHRIdDIvRXQzL0wyVVo1cFRsN1JhVUE0UmJkUWtXVVZrZmJqR3N6TlpY?=
- =?utf-8?B?VGhYU0hnb0lCZlN4SFgzbVVDRDJ2bUFuaVF0Z2NSQy91WTdvbS90ZDZZalBS?=
- =?utf-8?B?elBqcFkxb3ZqSWlQTXowai81NVRnPT0=?=
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c63de4de-ae42-471b-0de2-08dd15f8a2dd
-X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MWtPdVBaVEpsdC8zczVicmNVUncwM1RGRVdkc0xORG1ZZDl2b0ZmMzFvZ3BS?=
+ =?utf-8?B?enlCNGtHRFJFclpjeTZ0L0h6VDZVRGdaWlNscTVqNEw4cTEyemRBbkJLenF1?=
+ =?utf-8?B?aVMwbCtQaFRieWpOTzE0R3VoUlRoV2hJSzN2azJVTmJwa2JDcUx5b2YrbDh4?=
+ =?utf-8?B?MFJnV3NGaU5iY0NXWDBnWHduN3Zud2JRelpFRjdLWU1Rbm5pZkMzTFJrTms0?=
+ =?utf-8?B?c3VrTVVjY3JlbWpERFBpNG9LbUdjVXBxTlZLTWlDM2RUU0VOazFWTFU5Tmha?=
+ =?utf-8?B?UTl0VHQ4MU55dDhBKzhucXpjdXJhWUhnUlphcVlDazdBaFJZSUYvZW16eEdC?=
+ =?utf-8?B?MHk4Sis2S2RDZGFZQk02NWptRlRTcVhST3huUFRtUDFkOTFXcFJHWTlXek9y?=
+ =?utf-8?B?T200d0dXUFVsL1ptODl0b01Eb3ZONmZzWnVKc3JLbWFrMkZmTjBVUEFrNHlC?=
+ =?utf-8?B?bHdTOWhUUWE5SVhBRkRCbVhEMGZNU1QxanNWeUc0dlgrUUVqVEJGNm82Vm9p?=
+ =?utf-8?B?eStRZGxmUVl0SG8wOWtuUmdpeDFxNXBEM3lPSkZGOFE1cmFpOGEvSXErN2Q2?=
+ =?utf-8?B?VXpHb2VuZmg3bWNESEVVcUNmbHhoTDBBU2lSU0lEL1NMeXc5Z2orUWNacTNo?=
+ =?utf-8?B?dTJuV3lNTGNmZkRXNHp3dDh0d25VVUVaS2xodEpPcEdFRExYMFVmY0VmRmps?=
+ =?utf-8?B?MkZHazV6SjF1elcrelJhNCszNWdEU21XZm9GaDRuWXI2b0huNjkrcDl2QWhD?=
+ =?utf-8?B?bjE4M2hNMm9SNjU0czM5QmJhN0YyU0VDelJOVUx4Qk5yOGZYZkdRSHRUNCt1?=
+ =?utf-8?B?Vy96YnhTN1VGOEU0UTI2b2kvTWZpc1pvbklyQlJnc3ZXYWxHUkpjL1hybUoy?=
+ =?utf-8?B?OHRiT2VqZmQyMUZncWEzNzROZ0ZwRElwQlNPUnUvY1prU051cjJJekJxend6?=
+ =?utf-8?B?dVhWRUtNTkFoZzNGNFRoaExLS0kxVGZwaEF1SFJTUGxJVzAyNnR0OWVUWFl3?=
+ =?utf-8?B?bEJNazR2UEpVSnVYWEplVGt5NXhWRFZKdTBvR3o0QVlKUlc5WllGZ2xSTFNH?=
+ =?utf-8?B?SHZNU09aOC9LaCt4SDhLNS9ZTFdzQjR4VkpZSWx3bldlYStvc3BTTHFWTXRn?=
+ =?utf-8?B?UStBMG5odWNhNjZNcCs2TUc2akdSbUJUSTJ5OVA4MlpXVU5qR3YxZmNhdlF6?=
+ =?utf-8?B?YUhGd0p1OSs5MWdNWEJyZHZ6VTVuTG1lc0VZZHlIWjF0V3M5NmM2eS9yZ09V?=
+ =?utf-8?B?N1NCd1NVRU1PeDdRZC8zWWF2U3d6SEtqaXZnMmxZb2RGdXJGRzBjNDlqNElU?=
+ =?utf-8?B?VWxQdG0vTElmN1NCSmxxNmtoNEJURFpYWW9JOGVqT09RL0NKWEpWaGo3c3Uw?=
+ =?utf-8?B?QktoZmxPMHRVVi9XWXFrTGJad2lBaS9DK0F6anRBUVlscFhzL1ZaVDVnZUZh?=
+ =?utf-8?B?OStDVTFqdUhBRjBtcE85dzg2MHI1eXBWalkwVjBTUy9NbVNCT09PNmVvNmJu?=
+ =?utf-8?B?ZWxNNVNVbVREbk1VRXZ5S0kxSU5UbW1GREh1Zk9jMnBybENWTU1HTnRCRkZB?=
+ =?utf-8?B?eG1jTEY1M25nZU9yWWhPZ0Q5RVdvSSs4OG02Y0F4NjJ4NlBRUnJzNjZNbXRN?=
+ =?utf-8?B?UHB0cG9VMG45aGdud0VVWTJsVENHYTR2SXN3dnRmenhERmZHcWJweTc1aklQ?=
+ =?utf-8?B?TTdieHNkNTZzL1BKcC8reVltQjVSUU12UVFJTnVCNTV6MEFxc0dQbHZwcnRN?=
+ =?utf-8?B?ZFJmaC9nR3V3S1dvc1ZKY3lkNTlSNEJQQUZoQ0lwN0dTN1RzankrZkh6UE1B?=
+ =?utf-8?B?OURiTGRWOGpUV2dUakI2QmN0N1ZxS1dJNXE0bm1HVmx5RTF6YkhwMjEybEE4?=
+ =?utf-8?B?c3pEOG1FVW1tQ0Y3c2FDWjI2b3hyc0t3OWREZVloRDVIb0pzc0JTV2lWeEZG?=
+ =?utf-8?B?WVoxUzJPYWtyTTFmRDNnblN0bGpmSGdCaS81VFhGTlJtVERxUEoyS00yTXdG?=
+ =?utf-8?B?SWszRnJtbGxnZStDb1p0THBjKytySlh6N1ZOaFo3aWZCZCtEdzhoWnlEN09N?=
+ =?utf-8?B?US8wVnd5RmEzbFpkV2tLNWdrK3R3OGNkSFR2bGlmNWlXOGtnUFZhdlFST1Zj?=
+ =?utf-8?B?cGNLV21Ia1kza3VlVDRqU3dlYStuZ2hyb3VNcHZMeC80d1dsK0k0dnJXQzEx?=
+ =?utf-8?B?SWc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 346f7771-4131-40f6-4c95-08dd15f9e022
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2024 13:19:38.6541 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2024 13:28:30.9828 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1XfIc/YUXgV6kovYYI/bKyJj26icV3E7FB2Emnz631XqpbeCovMmR7J/ZBV9r6CBv2qGBe9HxsittSwkxZob+YfPKC7OzXowIXxIR6dMxIQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB5201
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-MS-Exchange-CrossTenant-UserPrincipalName: j9mA8+E/5b2BbnKCjm+SHH9ds7JAgJ+oMZjfTLGdO/SL2BdvG/ppoMaP0pCfz5z8NKnXfZDJWC8IuHXLlxh3h1WrTb2d7yLZlAdlV5j6Oqc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7539
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,174 +173,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Jacobe,
 
+On 12/4/24 10:45 AM, Jacobe Zang wrote:
+> [You don't often get email from jacobe.zang@wesion.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> Khadas Edge2 is a Rockchip RK3588S based SBC (Single Board Computer)
+> by Khadas.
+> 
+> There are tree variants depending on the DRAM size : 8G and 16G.
 
-Le 05/12/2024 à 18:14, Raymond Mao a écrit :
->
-> *This Mail comes from Outside of SoftAtHome: *Do not answer, click 
-> links or open attachments unless you recognize the sender and know the 
-> content is safe.**
->
-> Hi Philippe,
->
-> Typo  "sha256_hamc" in the subject line.
->
+What's the third variant :)?
 
-thanks a lot, I will fix it in v3
+> 
+> Specification:
+> 
+>      Rockchip RK3588S SoC
+>      4x ARM Cortex-A76, 4x ARM Cortex-A55
+>      8/16GB memory LPDDR4x
+>      Mali G610MP4 GPU
+>      3x MIPI CSI 4x lanes
+>      2x MIPI-DSI DPHY 4x lanes
+>      32/64GB eMMC
+>      1x USB 2.0, 1x USB 3.0, 2x USB-Type-C
+>      1x HDMI 2.1 output, 1x DP 1.4 output
+>      USB PD over USB Type-C
+> 
+> Kernel commit:
+> 04d552993522 ("arm64: dts: rockchip: Add Khadas edge2 board")
+> 
+> Signed-off-by: Jacobe Zang <jacobe.zang@wesion.com>
+> ---
+> Add support for Khadas Edge2
+> ---
+> Changes in v2:
+> - defconfig: Update defconfig made from upstream
 
+How did you generate the defconfig?
 
-> On Wed, 4 Dec 2024 at 12:54, Philippe Reynes 
-> <philippe.reynes@softathome.com> wrote:
->
->     Adds a test for the function sha256_hmac
->
->     Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
->     ---
->      test/lib/Makefile           |   1 +
->      test/lib/test_sha256_hmac.c | 108
->     ++++++++++++++++++++++++++++++++++++
->      2 files changed, 109 insertions(+)
->      create mode 100644 test/lib/test_sha256_hmac.c
->
->     diff --git a/test/lib/Makefile b/test/lib/Makefile
->     index f516d001747..5aad81d5a8a 100644
->     --- a/test/lib/Makefile
->     +++ b/test/lib/Makefile
->     @@ -24,6 +24,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
->      obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
->      obj-$(CONFIG_UT_LIB_RSA) += rsa.o
->      obj-$(CONFIG_AES) += test_aes.o
->     +obj-$(CONFIG_SHA256_MBEDTLS) += test_sha256_hmac.o
->      obj-$(CONFIG_GETOPT) += getopt.o
->      obj-$(CONFIG_CRC8) += test_crc8.o
->      obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
->     diff --git a/test/lib/test_sha256_hmac.c b/test/lib/test_sha256_hmac.c
->     new file mode 100644
->     index 00000000000..473922bd9b0
->     --- /dev/null
->     +++ b/test/lib/test_sha256_hmac.c
->     @@ -0,0 +1,108 @@
->     +// SPDX-License-Identifier: GPL-2.0+
->     +/*
->     + * Copyright (c) 2024 Philippe Reynes
->     <philippe.reynes@softathome.com>
->     + *
->     + * Unit tests for sha256_hmac functions
->     + */
->     +
->     +#include <command.h>
->     +#include <test/lib.h>
->     +#include <test/test.h>
->     +#include <test/ut.h>
->     +#include <u-boot/sha256.h>
->     +
->     +struct test_sha256_hmac_s {
->     +       unsigned char *key;
->     +       int keylen;
->     +       unsigned char *input;
->     +       int ilen;
->     +       unsigned char *expected;
->     +};
->     +
->     +/*
->     + * data comes from:
->     + * https://datatracker.ietf.org/doc/html/rfc4231
->     <https://datatracker.ietf.org/doc/html/rfc4231>
->     + */
->     +static unsigned char key_test1[] = {
->     +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
->     +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
->     +
->     +static unsigned char input_test1[] = {
->     +       0x48, 0x69, 0x20, 0x54, 0x68, 0x65, 0x72, 0x65 };
->     +
->     +static unsigned char expected_test1[] = {
->     +       0xb0, 0x34, 0x4c, 0x61, 0xd8, 0xdb, 0x38, 0x53,
->     +       0x5c, 0xa8, 0xaf, 0xce, 0xaf, 0x0b, 0xf1, 0x2b,
->     +       0x88, 0x1d, 0xc2, 0x00, 0xc9, 0x83, 0x3d, 0xa7,
->     +       0x26, 0xe9, 0x37, 0x6c, 0x2e, 0x32, 0xcf, 0xf7 };
->     +
->     +static unsigned char key_test2[] = { 0x4a, 0x65, 0x66, 0x65 };
->     +
->     +static unsigned char input_test2[] = {
->     +       0x77, 0x68, 0x61, 0x74, 0x20, 0x64, 0x6f, 0x20,
->     +       0x79, 0x61, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20,
->     +       0x66, 0x6f, 0x72, 0x20, 0x6e, 0x6f, 0x74, 0x68,
->     +       0x69, 0x6e, 0x67, 0x3f };
->     +
->     +static unsigned char expected_test2[] = {
->     +       0x5b, 0xdc, 0xc1, 0x46, 0xbf, 0x60, 0x75, 0x4e,
->     +       0x6a, 0x04, 0x24, 0x26, 0x08, 0x95, 0x75, 0xc7,
->     +       0x5a, 0x00, 0x3f, 0x08, 0x9d, 0x27, 0x39, 0x83,
->     +       0x9d, 0xec, 0x58, 0xb9, 0x64, 0xec, 0x38, 0x43 };
->     +
->     +static struct test_sha256_hmac_s test_sha256_hmac[] = {
->     +       {
->     +               .key = key_test1,
->     +               .keylen = sizeof(key_test1),
->     +               .input = input_test1,
->     +               .ilen = sizeof(input_test1),
->     +               .expected = expected_test1,
->     +       },
->     +       {
->     +               .key = key_test2,
->     +               .keylen = sizeof(key_test2),
->     +               .input = input_test2,
->     +               .ilen = sizeof(input_test2),
->     +               .expected = expected_test2,
->     +       },
->     +};
->     +
->     +static int _lib_test_sha256_hmac_run(struct unit_test_state *uts,
->     +                                    unsigned char *key, int keylen,
->     +                                    unsigned char *input, int ilen,
->     +                                    unsigned char *expected)
->     +{
->     +       unsigned char output[32];
->     +
->     +       sha256_hmac(key, keylen, input, ilen, output);
->     +       ut_asserteq_mem(expected, output, 32);
->     +
->     +       return 0;
->     +}
->     +
->     +static int lib_test_sha256_hmac_run(struct unit_test_state *uts,
->     +                                   struct test_sha256_hmac_s *test)
->     +{
->     +       unsigned char *key = test->key;
->     +       int keylen = test->keylen;
->     +       unsigned char *input = test->input;
->     +       int ilen = test->ilen;
->     +       unsigned char *expected = test->expected;
->     +
->     +       return _lib_test_sha256_hmac_run(uts, key, keylen, input,
->     ilen, expected);
->     +}
->     +
->     +static int lib_test_sha256_hmac(struct unit_test_state *uts)
->     +{
->     +       int i, ret = 0;
->     +
->     +       for (i = 0; i < ARRAY_SIZE(test_sha256_hmac); i++) {
->     +               ret = lib_test_sha256_hmac_run(uts,
->     &test_sha256_hmac[i]);
->     +               if (ret)
->     +                       break;
->     +       }
->     +
->     +       return ret;
->     +}
->     +
->     +LIB_TEST(lib_test_sha256_hmac, 0);
->     -- 
->     2.25.1
->
->
-> Regards,
-> Raymond
+I applied your patch and ran make khadas-edge2-rk3588s_defconfig 
+followed by make savedefconfig and they are different enough to make me 
+suspicious of how this defconfig was generated?
 
+> - Link to v1: https://lore.kernel.org/r/20241119-edge2-v1-1-b10c5d7626ca@wesion.com
+> ---
+>   arch/arm/mach-rockchip/rk3588/Kconfig         |  23 ++++
+>   board/khadas/khadas-edge2-rk3588s/Kconfig     |  12 +++
+>   board/khadas/khadas-edge2-rk3588s/MAINTAINERS |   6 ++
+>   configs/khadas-edge2-rk3588s_defconfig        | 146 ++++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst               |   1 +
+>   include/configs/khadas-edge2-rk3588s.h        |  15 +++
+>   6 files changed, 203 insertions(+)
+> 
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index b5a0e624a53..7d817e7f1bd 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -74,6 +74,28 @@ config TARGET_JAGUAR_RK3588
+>                - fan controller (AMC6821 emulation)
+>              * 80-pin Mezzanine connector
+> 
+> +config TARGET_KHADAS_EDGE2_RK3588
+> +       bool "Khadas Edge2 RK3588 board"
+> +       select BOARD_LATE_INIT
+> +       help
+> +         Khadas Edge2 is a Rockchip RK3588S based SBC (Single Board Computer)
+> +         by Khadas.
+> +
+> +         There are tree variants depending on the DRAM size : 8G and 16G.
+> +
 
-Regards,
+If there's a third variant, please make it explicit as well here.
 
-Philippe
+> +         Specification:
+> +
+> +         Rockchip RK3588S SoC
+> +         4x ARM Cortex-A76, 4x ARM Cortex-A55
+> +         8/16GB memory LPDDR4x
+> +         Mali G610MP4 GPU
+> +         3x MIPI CSI 4x lanes
+> +         2x MIPI-DSI DPHY 4x lanes
+> +         32/64GB eMMC
+> +         1x USB 2.0, 1x USB 3.0, 2x USB-Type-C
+> +         1x HDMI 2.1 output, 1x DP 1.4 output
+> +         USB PD over USB Type-C
+> +
+>   config TARGET_NANOPCT6_RK3588
+>          bool "FriendlyElec NanoPC-T6 RK3588 board"
+>          select BOARD_LATE_INIT
+> @@ -393,6 +415,7 @@ source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
+>   source "board/friendlyelec/nanopi-r6s-rk3588s/Kconfig"
+>   source "board/hardkernel/odroid_m2/Kconfig"
+>   source "board/indiedroid/nova/Kconfig"
+> +source "board/khadas/khadas-edge2-rk3588s/Kconfig"
+>   source "board/pine64/quartzpro64-rk3588/Kconfig"
+>   source "board/turing/turing-rk1-rk3588/Kconfig"
+>   source "board/radxa/rock5a-rk3588s/Kconfig"
+> diff --git a/board/khadas/khadas-edge2-rk3588s/Kconfig b/board/khadas/khadas-edge2-rk3588s/Kconfig
+> new file mode 100644
+> index 00000000000..dd7b6cd8054
+> --- /dev/null
+> +++ b/board/khadas/khadas-edge2-rk3588s/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_KHADAS_EDGE2_RK3588
+> +
+> +config SYS_BOARD
+> +       default "khadas-edge2-rk3588s"
+> +
+> +config SYS_VENDOR
+> +       default "khadas"
+> +
+> +config SYS_CONFIG_NAME
+> +       default "khadas-edge2-rk3588s"
+> +
+> +endif
+> diff --git a/board/khadas/khadas-edge2-rk3588s/MAINTAINERS b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> new file mode 100644
+> index 00000000000..3f16923b0f2
+> --- /dev/null
+> +++ b/board/khadas/khadas-edge2-rk3588s/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +KHADAS-EDGE2-RK3588S
+> +M:     Jacobe Zang <jacobe.zang@wesion.com>
+> +S:     Maintained
+> +F:     configs/khadas-edge2-rk3588s_defconfig
+> +F:     include/configs/khadas-edge2-rk3588s.h
+> +F:     dts/upstream/src/arm64/rockchip/rk3588s-khadas-edge2.dts
+> \ No newline at end of file
+> diff --git a/configs/khadas-edge2-rk3588s_defconfig b/configs/khadas-edge2-rk3588s_defconfig
+> new file mode 100644
+> index 00000000000..bc9e8f39ec5
+> --- /dev/null
+> +++ b/configs/khadas-edge2-rk3588s_defconfig
+> @@ -0,0 +1,146 @@
+
+The board seems to have an SPI-NOR flash. If it can boot from it, you 
+probably want to enable
+
+CONFIG_ROCKCHIP_SPI_IMAGE=y
+
+to generate u-boot-rockchip-spi.bin?
+
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-khadas-edge2"
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SYS_MALLOC_F_LEN=0x80000
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_KHADAS_EDGE2_RK3588=y
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-khadas-edge2.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SEPARATE_BSS=y
+> +CONFIG_SPL_MMC_WRITE=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SYS_PROMPT="kedge2# "
+> +CONFIG_AUTOBOOT_KEYED=y
+> +CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot\n"
+> +CONFIG_AUTOBOOT_STOP_STR=" "
+> +CONFIG_CMD_BOOTZ=y
+
+Can one really use bootz for Aarch64 images?
+
+Otherwise the rest of the defconfig looks pretty similar to the rock5b 
+defconfig so I guess this is fine.
+
+I'm very surprised there's no -u-boot.dtsi file though. You may want to 
+check that everything that can be used in SPL/TPL makes it in the 
+respective DT (spl/u-boot-spl.dtb and tpl/u-boot-tpl.dtb). E.g. if you 
+want to be able to fallback to SPI-NOR for U-Boot proper when booting 
+from eMMC/SD card, you would need everything related to the SPI 
+controller the flash is routed to (as well as the pinmux, pinconf, 
+regulators, etc...) be present in the TPL/SPL DT. Nothing we cannot 
+improve in later commits though, so not necessarily a blocker.
+
+Cheers,
+Quentin
