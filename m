@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97E3E77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F570E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643BE8972B;
-	Fri,  6 Dec 2024 20:20:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B7AF38973B;
+	Fri,  6 Dec 2024 20:20:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fWSZrWu6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H6PZNyen";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95C5189744; Fri,  6 Dec 2024 20:20:13 +0100 (CET)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 45E208974F; Fri,  6 Dec 2024 20:20:23 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C4048972B
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:20:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F4D78974B
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:20:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2ee51c5f000so1796144a91.0
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:20:10 -0800 (PST)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2ee50ffcf14so2947432a91.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:20:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512809; x=1734117609; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733512817; x=1734117617; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=V2ufDWwgHzlD3wLy1rMje9eGuuR6oXSAjZUbDfR3gZ8=;
- b=fWSZrWu6vCRFueRUcxSjeCjcNlL6Pr+gJXdWKRu0pfJohIIXcKkU1KzPcqqGI0Q7Be
- ygdu9eZslzLMkbClBPlgz+9Z0JrUl+l+8iKdtqIqMuq4Iscf+mbBVkwMr06ozxErhwwR
- 1fv8OuXzjVtzghTsvWZPRNG2cMvX4uymjGtjs=
+ bh=L4mSb3XAlPUmmS+sN2yrN5I3zlIbTTBKvTf9qFJvyMk=;
+ b=H6PZNyenoi7pSDu7OmnG1HSIOeAW/cNID+ujZLbwTszUNrYkvNoq3mhGqy5LCd4yS5
+ MvdAj+sEBcQSXbaBr3n03zno+eqcwzaQCfZJL5QDu9hQMgKyc8y25pEv5xwbi4atV7ts
+ FpWv7m5NoZaV7gkCKX5/+cya4PVftS71cqzGQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512809; x=1734117609;
+ d=1e100.net; s=20230601; t=1733512817; x=1734117617;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=V2ufDWwgHzlD3wLy1rMje9eGuuR6oXSAjZUbDfR3gZ8=;
- b=HgMspwmJ+MJb2kZpGJd/JhGKH8ijBe+9hZaOpX5ahgMj/gs595ALBBj2HJNGtlCl4E
- IrT73KhKWByzJXQOYypM0hI8n1r5Q3gwWpPJS80ZgAaeUy/EBd9j/ixHn7Wn1Z8SodtL
- moewYY5RU0KXmwWCnQNGebsfDclDcw3Q3vn9E7ybU4r6YtZX4R/TtB8hACCrzDg9k/d4
- PeS/db7bmKGfi6fvhid/zUZQ7JyYFaKXa44FFaWIGjIdbId/YBj8Kvhoh2ZRAQqGhZJR
- bvXsYV6mECoCiIf78PJots+JMs+rsSEgpQMYU61whwgR8fO4yVGBPkCZwQZO/zoxOcx6
- i6QQ==
-X-Gm-Message-State: AOJu0YziZmDBHDSyKYP2r2wyiN1NUep03g4Z/TYp96vM+n7xvv3VikFA
- BvreF91pzkUyk2Xiiam7iT/k6INl0aCsk5slMJ/hKjsUgFc4TOcwL5YtRptGEU3bSIzZQPXKIKA
- yu1ZwRI8RxdACL+f+gJFr/4iB6p8WAzcnEgc3
-X-Gm-Gg: ASbGncsjh5TmE9SINfElwkF4KqvVhF+XncYc+51dvwGC0p2MHo6TvIbA4FM4dCgNHr4
- TwjwloAj3eBegSC1eXZXaE2hfw8DguWjg
-X-Google-Smtp-Source: AGHT+IG3TS4J0isE72Tu6xAjUy6u5V6xJR+kBVSLftemnI2I7WN/rGFoUXvBr4ybOd3cTXIkyNiBwjw9tePj6PW1yB4=
-X-Received: by 2002:a17:90b:4c07:b0:2ee:d024:e4f7 with SMTP id
- 98e67ed59e1d1-2ef6919952fmr7155111a91.0.1733512809081; Fri, 06 Dec 2024
- 11:20:09 -0800 (PST)
+ bh=L4mSb3XAlPUmmS+sN2yrN5I3zlIbTTBKvTf9qFJvyMk=;
+ b=QsljJ2Fk4pdS3iSx5uF1WuDePRgvkDL5ReU6v3xMW5XeF1R3ScLcS4EV1CjAUlwtFj
+ +oHdeps3GTpiSIdQSQ6MWdXxk+FN2tH2qUgHFLbmoPaLjyqfk8PO44+eBITH1YjiwE09
+ AjprjeFOA/nY9PFrY+eAKRHQw9JTcZ+4qZyj6a4n2cyYj84wBU580Pol+uWe3gm3dD4a
+ FDL8nqg+I2g3ka9c196E+bv8QRdeFJC2wWKgZ71N+VzNtRxkfKLWcnJJb4k/ihUvaH8p
+ 1DZYp0CCGdO/OI8aSXtV25brfWrLpb24OcdhxzS4BFix82wpZ2XQvOyh/7Mm5zWd7Bwx
+ aS5g==
+X-Gm-Message-State: AOJu0Yyxv8hmtoprkZE9ECLDp1Bi2t5od7mZOkTKQW8kxBAAZAU7EH/8
+ 5ZtxcL1g2O2q4zKCUXKSm+JmWxmRNF0Vu494R9tKPRPRy6wPVkgUe91rr+jjU2uaZliW3NNvFAx
+ tP37S38cRtVgq2ghpeFtzsLBy70G9tFB2BMcy
+X-Gm-Gg: ASbGncvIhO8krv/kHsgBlsIjprIkACez2MFVS0mYJXyT81SBWwgvSB3QH/pYK79ACkZ
+ 8GYrqXu9zPpyWpP1sRtL8SQ0f+UKsjXKO
+X-Google-Smtp-Source: AGHT+IHZs2ohtSJoNdBzWsi3Tq+b6CNx6DLAVEsaQwz8HmdtUrapT/IWKNSaRTzpOKIr28qsU0N8xF6Lw3PZDj9Xb7s=
+X-Received: by 2002:a17:90b:3890:b0:2ee:aafe:f098 with SMTP id
+ 98e67ed59e1d1-2ef41be38a5mr12484772a91.5.1733512816929; Fri, 06 Dec 2024
+ 11:20:16 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1730452668.git.michal.simek@amd.com>
- <14d874ad4568fa8e3178e893224fecc5c676f04c.1730452668.git.michal.simek@amd.com>
-In-Reply-To: <14d874ad4568fa8e3178e893224fecc5c676f04c.1730452668.git.michal.simek@amd.com>
+ <35bc47a4a4799c5f5dbea56a45340a2810538330.1730452668.git.michal.simek@amd.com>
+In-Reply-To: <35bc47a4a4799c5f5dbea56a45340a2810538330.1730452668.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:19:45 -0700
-Message-ID: <CAFLszTge5q1QOasLZQwcfnt+0EUZ538X_te=QBRwaFHc5c=mhg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/7] arm64: zynqmp: Describe empty binman node
+Date: Fri, 6 Dec 2024 12:19:49 -0700
+Message-ID: <CAFLszTgQRxwiRbVto=zqAVVW=NEc0d+=qBQeODTd+Zs-BLGpbg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] arm64: zynqmp: Add binman description for SOM
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com, 
- Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, 
+ Adam Ford <aford173@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Charlie Johnston <charlie.johnston@loftorbital.com>, 
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Fabio Estevam <festevam@denx.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, Sean Anderson <seanga2@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Prasad Kummari <prasad.kummari@amd.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, 
  Tony Dinh <mibodhi@gmail.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"
@@ -97,181 +102,360 @@ X-Virus-Status: Clean
 
 On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
 >
-> For enabling binman by default there is a need to have at least empty node
-> present that's why create -u-boot.dtsi with empty node to cover all ZynqMP
-> platforms.
+> There is necessary to do some steps to compose boot images. These steps
+> were in scripts in layers for a while. That's why introduce description via
+> binman to simplify wiring and remove all scripting around.
+> This should make sure that everybody is up2date with the latest versions.
+>
+> The first step is to create fit image with DTBs with descriptions in
+> configuration node which is written as regular expression to match all SOM
+> versions.
+> Description is there for k24 and k26 in spite of low level psu_init
+> configuration is different. The reason is that it goes to u-boot.itb image
+> which is the same for k24 and k26.
+> u-boot.itb is another image which is generated. It is normally generated
+> via arch/arm/mach-zynqmp/mkimage_fit_atf.sh but this script is supposed to
+> be deprecated.
+> FIT image by purpose is using 64bit addresses to have default option to
+> move images to high DDR (above 4GB). TF-A and TEE are optional components
+> but in the most cases TF-A is present all the time and TEE(OP-TEE) is used
+> by some configurations too.
+>
+> 3rd generated image is boot.bin with updated user field which contains
+> version number. This image can be used with updated Image Selector
+> which supports A/B update mechanisms with rollback protection.
+>
+> 4th image is image.bin which binary file which contains boot.bin and
+> u-boot.itb together and can be programmed via origin Image Selector.
+> This image can be also used for creating one capsule which contains both
+> boot images (in SPL boot flow).
 >
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 >
 > Changes in v2:
-> - new patch
+> - Align fit,fdt-list-val to have shorter lines
+> - Add reference to defconfig
+> - Rename zynqmp-som-binman.dts to zynqmp-binman-som.dts
+> - Use conf instead of config
+> - Change image name from image.bin to qspi.bin
+> - Remove RFC
+> - Change default addresses for BL31/BL32
 >
->  arch/arm/dts/Makefile                            |  1 +
->  arch/arm/dts/zynqmp-binman-mini.dts              | 10 ++++++++++
->  arch/arm/dts/zynqmp-u-boot.dtsi                  | 11 +++++++++++
->  configs/xilinx_zynqmp_mini_defconfig             |  2 ++
->  configs/xilinx_zynqmp_mini_emmc0_defconfig       |  3 +++
->  configs/xilinx_zynqmp_mini_emmc1_defconfig       |  3 +++
->  configs/xilinx_zynqmp_mini_nand_defconfig        |  2 ++
->  configs/xilinx_zynqmp_mini_nand_single_defconfig |  2 ++
->  configs/xilinx_zynqmp_mini_qspi_defconfig        |  3 +++
->  9 files changed, 37 insertions(+)
->  create mode 100644 arch/arm/dts/zynqmp-binman-mini.dts
->  create mode 100644 arch/arm/dts/zynqmp-u-boot.dtsi
+>  arch/arm/Kconfig                     |   1 +
+>  arch/arm/dts/Makefile                |   1 +
+>  arch/arm/dts/zynqmp-binman-som.dts   | 225 +++++++++++++++++++++++++++
+>  arch/arm/mach-zynqmp/Kconfig         |  14 ++
+>  configs/xilinx_zynqmp_kria_defconfig |   3 +
+>  5 files changed, 244 insertions(+)
+>  create mode 100644 arch/arm/dts/zynqmp-binman-som.dts
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 787f983ffd46..bbf04f301188 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1324,6 +1324,7 @@ config ARCH_ZYNQMP_R5
+>  config ARCH_ZYNQMP
+>         bool "Xilinx ZynqMP based platform"
+>         select ARM64
+> +       select BINMAN
+>         select CLK
+>         select DM
+>         select DEBUG_UART_BOARD_INIT if SPL && DEBUG_UART
 > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index aeccfa93fc53..253d883d6156 100644
+> index 253d883d6156..5d28a17b8b8c 100644
 > --- a/arch/arm/dts/Makefile
 > +++ b/arch/arm/dts/Makefile
-> @@ -274,6 +274,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
->         zynqmp-mini-qspi-x1-stacked.dtb         \
->         zynqmp-mini-qspi-x2-single.dtb          \
->         zynqmp-mini-qspi-x2-stacked.dtb         \
-> +       zynqmp-binman-mini.dtb                  \
->         zynqmp-sc-revB.dtb                      \
->         zynqmp-sc-revC.dtb                      \
->         zynqmp-sm-k24-revA.dtb                  \
-> diff --git a/arch/arm/dts/zynqmp-binman-mini.dts b/arch/arm/dts/zynqmp-binman-mini.dts
+> @@ -370,6 +370,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k24-revA-sck-kv-g-revB.dtb
+>  dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-smk-k24-revA-sck-kv-g-revB.dtb
+>  dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-sm-k24-revA-sck-kr-g-revB.dtb
+>  dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-smk-k24-revA-sck-kr-g-revB.dtb
+> +dtb-$(CONFIG_ARCH_ZYNQMP) += zynqmp-binman-som.dtb
+>
+>  dtb-$(CONFIG_ARCH_VERSAL) += \
+>         versal-mini.dtb \
+> diff --git a/arch/arm/dts/zynqmp-binman-som.dts b/arch/arm/dts/zynqmp-binman-som.dts
 > new file mode 100644
-> index 000000000000..8f3d18ef394b
+> index 000000000000..3d9d8476c98e
 > --- /dev/null
-> +++ b/arch/arm/dts/zynqmp-binman-mini.dts
-> @@ -0,0 +1,10 @@
+> +++ b/arch/arm/dts/zynqmp-binman-som.dts
+> @@ -0,0 +1,225 @@
 > +// SPDX-License-Identifier: GPL-2.0
 > +/*
+> + * dts file for Xilinx ZynqMP SOMs (k24/k26)
+> + *
 > + * (C) Copyright 2024, Advanced Micro Devices, Inc.
 > + *
 > + * Michal Simek <michal.simek@amd.com>
 > + */
+> +
+> +#include <config.h>
 > +
 > +/dts-v1/;
-> +
-> +#include "zynqmp-u-boot.dtsi"
-> diff --git a/arch/arm/dts/zynqmp-u-boot.dtsi b/arch/arm/dts/zynqmp-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..9a7527ed5a10
-> --- /dev/null
-> +++ b/arch/arm/dts/zynqmp-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * (C) Copyright 2024, Advanced Micro Devices, Inc.
-> + *
-> + * Michal Simek <michal.simek@amd.com>
-> + */
-> +
 > +/ {
 > +       binman: binman {
+> +               multiple-images;
+> +               fit-dtb.blob {
+> +                       filename = "fit-dtb.blob";
+> +                       pad-byte = <0>;
+> +                       fit {
+> +                               fit,align = <0x8>;
+> +                               fit,external-offset = <0x0>;
+> +                               description = "DTBs for SOMs+CCs";
+> +                               fit,fdt-list-val = "zynqmp-smk-k26-revA", "zynqmp-smk-k26-revA-sck-kr-g-revA",
+> +                                               "zynqmp-smk-k26-revA-sck-kr-g-revB", "zynqmp-smk-k26-revA-sck-kv-g-revA",
+> +                                               "zynqmp-smk-k26-revA-sck-kv-g-revB", "zynqmp-sm-k26-revA-sck-kv-g-revA",
+> +                                               "zynqmp-sm-k26-revA-sck-kv-g-revB", "zynqmp-sm-k26-revA-sck-kr-g-revB",
+> +                                               "zynqmp-smk-k24-revA-sck-kd-g-revA", "zynqmp-smk-k24-revA-sck-kv-g-revB",
+> +                                               "zynqmp-smk-k24-revA-sck-kr-g-revB", "zynqmp-sm-k24-revA-sck-kd-g-revA",
+> +                                               "zynqmp-sm-k24-revA-sck-kv-g-revB", "zynqmp-sm-k24-revA-sck-kr-g-revB";
+> +
+> +                               images {
+> +                                       @fdt-SEQ {
+> +                                               description = "NAME";
+> +                                               type = "flat_dt";
+> +                                               arch = "arm64";
+> +                                               compression = "none";
+> +                                               hash-1 {
+> +                                                       algo = "md5";
+> +                                               };
+> +                                       };
+> +                               };
+> +                               configurations {
+> +                                       default = "conf-1";
+> +                                       conf-1 {
+> +                                               description = "SOM itself";
+> +                                               fdt = "fdt-1";
+> +                                       };
+> +                                       conf-2 {
+> +                                               description = "zynqmp-smk-k26-.*-sck-kr-g-revA";
+> +                                               fdt = "fdt-2";
+> +                                       };
+> +                                       conf-3 {
+> +                                               description = "zynqmp-smk-k26-.*-sck-kr-g-.*";
+> +                                               fdt = "fdt-3";
+> +                                       };
+> +                                       conf-4 {
+> +                                               description = "zynqmp-smk-k26-.*-sck-kv-g-rev[AZ]";
+> +                                               fdt = "fdt-4";
+> +                                       };
+> +                                       conf-5 {
+> +                                               description = "zynqmp-smk-k26-.*-sck-kv-g-.*";
+> +                                               fdt = "fdt-5";
+> +                                       };
+> +                                       conf-6 {
+> +                                               description = "zynqmp-sm-k26-.*-sck-kv-g-rev[AZ]";
+> +                                               fdt = "fdt-6";
+> +                                       };
+> +                                       conf-7 {
+> +                                               description = "zynqmp-sm-k26-.*-sck-kv-g-.*";
+> +                                               fdt = "fdt-7";
+> +                                       };
+> +                                       conf-8 {
+> +                                               description = "zynqmp-sm-k26-.*-sck-kr-g-.*";
+> +                                               fdt = "fdt-8";
+> +                                       };
+> +                                       conf-9 {
+> +                                               description = "zynqmp-smk-k24-.*-sck-kd-g-.*";
+> +                                               fdt = "fdt-9";
+> +                                       };
+> +                                       conf-10 {
+> +                                               description = "zynqmp-smk-k24-.*-sck-kv-g-.*";
+> +                                               fdt = "fdt-10";
+> +                                       };
+> +                                       conf-11 {
+> +                                               description = "zynqmp-smk-k24-.*-sck-kr-g-.*";
+> +                                               fdt = "fdt-11";
+> +                                       };
+> +                                       conf-12 {
+> +                                               description = "zynqmp-sm-k24-.*-sck-kd-g-.*";
+> +                                               fdt = "fdt-12";
+> +                                       };
+> +                                       conf-13 {
+> +                                               description = "zynqmp-sm-k24-.*-sck-kv-g-.*";
+> +                                               fdt = "fdt-13";
+> +                                       };
+> +                                       conf-14 {
+> +                                               description = "zynqmp-sm-k24-.*-sck-kr-g-.*";
+> +                                               fdt = "fdt-14";
+> +                                       };
+> +                               };
+> +                       };
+> +               };
+> +
+> +               /* u-boot.itb generation in a static way */
+> +               itb {
+> +                       filename = "u-boot.itb";
+> +                       pad-byte = <0>;
+> +
+> +                       fit {
+> +                               description = "Configuration for Xilinx ZynqMP SoC";
+> +                               fit,align = <0x8>;
+> +                               fit,external-offset = <0x0>;
+> +                               images {
+> +                                       uboot {
+> +                                               description = "U-Boot (64-bit)";
+> +                                               type = "firmware";
+> +                                               os = "u-boot";
+> +                                               arch = "arm64";
+> +                                               compression = "none";
+> +                                               load = /bits/ 64 <CONFIG_TEXT_BASE>;
+> +                                               entry = /bits/ 64 <CONFIG_TEXT_BASE>;
+> +                                               hash {
+> +                                                       algo = "md5";
+> +                                               };
+> +                                               u-boot-nodtb {
+> +                                               };
+> +                                       };
+> +                                       atf {
+> +                                               description = "Trusted Firmware-A";
+> +                                               type = "firmware";
+> +                                               os = "arm-trusted-firmware";
+> +                                               arch = "arm64";
+> +                                               compression = "none";
+> +                                               load = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
+> +                                               entry = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
+> +                                               hash {
+> +                                                       algo = "md5";
+> +                                               };
+> +                                               atf-bl31 {
+> +                                                       optional;
+> +                                               };
+> +                                       };
+> +                                       tee {
+> +                                               description = "OP-TEE";
+> +                                               type = "tee";
+> +                                               arch = "arm64";
+> +                                               compression = "none";
+> +                                               os = "tee";
+> +                                               load = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
+> +                                               entry = /bits/ 64 <CONFIG_BL31_LOAD_ADDR>;
+> +                                               tee-os {
+> +                                                       optional;
+> +                                               };
+> +                                       };
+> +                                       fdt {
+> +                                               description = "Multi DTB fit image";
+> +                                               type = "flat_dt";
+> +                                               arch = "arm64";
+> +                                               compression = "none";
+> +                                               load = <0x0 0x100000>;
+> +                                               hash {
+> +                                                       algo = "md5";
+> +                                               };
+> +                                               fdt-blob {
+> +                                                       filename = "fit-dtb.blob";
+> +                                                       type = "blob-ext";
+> +                                               };
+> +                                       };
+> +                               };
+> +                               configurations {
+> +                                       default = "conf-1";
+> +                                       conf-1 {
+> +                                               description = "Multi DTB with TF-A/TEE";
+> +                                               firmware = "atf";
+> +                                               loadables = "tee", "uboot", "fdt";
+> +                                       };
+> +                               };
+> +                       };
+> +               };
+> +
+> +               /* boot.bin generated with version string inside */
+> +               bootimage {
+> +                       filename = "boot.bin";
+> +                       pad-byte = <0>;
+> +
+> +                       blob-ext@1 {
+> +                               offset = <0x0>;
+> +                               filename = "spl/boot.bin";
+> +                       };
+> +                       /* Optional version string at offset 0x70 */
+> +                       blob-ext@2 {
+> +                               offset = <0x70>;
+> +                               filename = "version.bin";
+> +                               overlap;
+> +                               optional;
+> +                       };
+> +                       /* Optional version string at offset 0x94 */
+> +                       blob-ext@3 {
+> +                               offset = <0x94>;
+> +                               filename = "version.bin";
+> +                               overlap;
+> +                               optional;
+> +                       };
+> +               };
+> +
+> +#ifdef CONFIG_SYS_SPI_U_BOOT_OFFS
+> +               /* Full QSPI image for recovery app */
+> +               image {
+> +                       filename = "qspi.bin";
+> +                       pad-byte = <0>;
+> +
+> +                       blob-ext@1 {
+> +                               offset = <0x0>;
+> +                               filename = "boot.bin";
+> +                       };
+> +                       blob-ext@2 {
+> +                               offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +                               filename = "u-boot.itb";
+> +                       };
+> +                       fdtmap {
+> +                       };
+> +               };
+> +#endif
 > +       };
 > +};
-> diff --git a/configs/xilinx_zynqmp_mini_defconfig b/configs/xilinx_zynqmp_mini_defconfig
-> index 7aab69c9e46b..f0af27bbd4e6 100644
-> --- a/configs/xilinx_zynqmp_mini_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_defconfig
-> @@ -59,6 +59,8 @@ CONFIG_NO_NET=y
->  # CONFIG_DM_MAILBOX is not set
->  # CONFIG_MMC is not set
->  CONFIG_ARM_DCC=y
-> +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
->  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
-> diff --git a/configs/xilinx_zynqmp_mini_emmc0_defconfig b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> index c56b1e830d67..9b3ab06f7c00 100644
-> --- a/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-> @@ -28,6 +28,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
->  # CONFIG_BOARD_LATE_INIT is not set
+> diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
+> index aea13622b68a..92d61e84319d 100644
+> --- a/arch/arm/mach-zynqmp/Kconfig
+> +++ b/arch/arm/mach-zynqmp/Kconfig
+> @@ -132,6 +132,20 @@ config SPL_ZYNQMP_RESTORE_JTAG
+>           even if no eFuses were burnt. This option restores the interface if
+>           possible.
+>
+> +config BL31_LOAD_ADDR
+> +       hex "Load address of BL31 image (mostly TF-A)"
+> +       default 0xfffea000
+> +       help
+> +         The load address for the BL31 image. This value is used to build the
+> +         FIT image header that places BL31 in memory where it will run.
+> +
+> +config BL32_LOAD_ADDR
+> +       hex "Load address of BL32 image (mostly secure OS)"
+> +       default 0
+> +       help
+> +         The load address for the BL32 image. This value is used to build the
+> +         FIT image header that places BL32 in memory where it will run.
+> +
+>  config ZYNQ_SDHCI_MAX_FREQ
+>         default 200000000
+>
+> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+> index 5757a0c9be9b..6d66a9423797 100644
+> --- a/configs/xilinx_zynqmp_kria_defconfig
+> +++ b/configs/xilinx_zynqmp_kria_defconfig
+> @@ -47,6 +47,7 @@ CONFIG_SYS_PBSIZE=2073
+>  CONFIG_BOARD_EARLY_INIT_R=y
 >  CONFIG_CLOCKS=y
 >  CONFIG_SPL_MAX_SIZE=0x40000
 > +# CONFIG_SPL_BINMAN_SYMBOLS is not set
 >  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_SPL_SYS_MALLOC=y
->  CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> @@ -73,6 +74,8 @@ CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_ZYNQ=y
->  CONFIG_ARM_DCC=y
+>  CONFIG_SPL_FS_LOAD_KERNEL_NAME=""
+>  CONFIG_SPL_FS_LOAD_ARGS_NAME=""
+> @@ -224,6 +225,8 @@ CONFIG_VIDEO_ZYNQMP_DPSUB=y
+>  CONFIG_VIRTIO_MMIO=y
+>  CONFIG_VIRTIO_NET=y
+>  CONFIG_VIRTIO_BLK=y
 > +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
+> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
 >  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
-> diff --git a/configs/xilinx_zynqmp_mini_emmc1_defconfig b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> index a8dbf0056da3..3b088c5002a7 100644
-> --- a/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-> @@ -28,6 +28,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
->  # CONFIG_BOARD_LATE_INIT is not set
->  CONFIG_CLOCKS=y
->  CONFIG_SPL_MAX_SIZE=0x40000
-> +# CONFIG_SPL_BINMAN_SYMBOLS is not set
->  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_SPL_SYS_MALLOC=y
->  CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> @@ -73,6 +74,8 @@ CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_ZYNQ=y
->  CONFIG_ARM_DCC=y
-> +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
->  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
-> diff --git a/configs/xilinx_zynqmp_mini_nand_defconfig b/configs/xilinx_zynqmp_mini_nand_defconfig
-> index ba8f02c5b11d..83bd3c9a5345 100644
-> --- a/configs/xilinx_zynqmp_mini_nand_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_nand_defconfig
-> @@ -59,6 +59,8 @@ CONFIG_NAND_ARASAN=y
->  CONFIG_SYS_NAND_ONFI_DETECTION=y
->  CONFIG_SYS_NAND_MAX_CHIPS=2
->  CONFIG_ARM_DCC=y
-> +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
->  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
-> diff --git a/configs/xilinx_zynqmp_mini_nand_single_defconfig b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> index a8a0055f2e5b..fea0c6e08415 100644
-> --- a/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_nand_single_defconfig
-> @@ -58,6 +58,8 @@ CONFIG_MTD_RAW_NAND=y
->  CONFIG_NAND_ARASAN=y
->  CONFIG_SYS_NAND_ONFI_DETECTION=y
->  CONFIG_ARM_DCC=y
-> +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
->  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
-> diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
-> index c08b10c6944f..39e50ff8c4f8 100644
-> --- a/configs/xilinx_zynqmp_mini_qspi_defconfig
-> +++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
-> @@ -31,6 +31,7 @@ CONFIG_LOGLEVEL=0
->  # CONFIG_BOARD_LATE_INIT is not set
->  CONFIG_CLOCKS=y
->  CONFIG_SPL_MAX_SIZE=0x40000
-> +# CONFIG_SPL_BINMAN_SYMBOLS is not set
->  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_SPL_SYS_MALLOC=y
->  CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> @@ -91,6 +92,8 @@ CONFIG_SPI_FLASH_WINBOND=y
->  CONFIG_ARM_DCC=y
->  CONFIG_SPI=y
->  CONFIG_ZYNQMP_GQSPI=y
-> +# CONFIG_BINMAN_FDT is not set
-> +CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-mini.dtb"
->  CONFIG_PANIC_HANG=y
->  # CONFIG_GZIP is not set
->  # CONFIG_LMB is not set
+>  CONFIG_TPM=y
+>  CONFIG_SPL_GZIP=y
 > --
 > 2.43.0
 >
