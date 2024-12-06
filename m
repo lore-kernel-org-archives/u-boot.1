@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C9DE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 10:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FD7E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 10:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C7DA8965E;
-	Fri,  6 Dec 2024 11:29:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 10C65895EC;
+	Fri,  6 Dec 2024 11:57:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NHZlFvH0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ImoSy8Je";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B71A6895EC; Fri,  6 Dec 2024 11:29:42 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 8E2DB895F2; Fri,  6 Dec 2024 11:57:01 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86682895AE
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 11:29:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61D728959D
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 11:56:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-385dbf79881so1869625f8f.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 02:29:40 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ff976ab0edso19794811fa.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 02:56:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733480980; x=1734085780; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733482618; x=1734087418; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9ezEE8iaDRygXpYAczBJSbU/+xaXpWW4zLER8KWegIk=;
- b=NHZlFvH0YQjxgDiRcAkeeHmnfPiXIBqHgI8f8GhpaUGbW58Tv0y/oeQwuI9JXCkMYc
- ZqZ3n31UmvNBPWdRTYS2Zrz2TN6MJiIwsl0waE4WdmZt0Y3tmb/ZnF7QSCQBUtTev77A
- Emux/wliOncH8eJiD5Ftm/bFhu1OI0eB2JxdMb1d0QGgRX0CQ+zpQ9OLzUfr7AzyLy9c
- YtV6MXK2FzLQ4pDn40cD7FkKECoV6mxq+KCvetz1GzwjuoJMpt2rg7hCCePCQnnPl3q3
- yP/tpYKPwjCloafshCaU5ASuctJoYatwtYOGYzm67jc5dtWNbOIAgZvh6sc72zjvC9XJ
- lg7A==
+ bh=pMvTPhjmXRzGTI9tmyvCZUg2ccsy+mpJ4BCTUvwFVeY=;
+ b=ImoSy8Jez4W5T/GKyrpiUeN0oFyVzdB8WR9kfLbs/Q6Q219wAkLuag+KnrxGgFx31w
+ +WcfDYX/NVwyRAUQ64Ok1/kDjojUMp8DmBiVHF/k3cY8BeqjoBuVRGWw7wnU2xUcyXtf
+ 5JJs1N0mefo4v8OPXvrOYmihFL22PROEzuoRAd3tO4YnrReg+ZZ2562f7ZqgHPKFhmWN
+ pHAbtBr63X2NWXKWuM7rDw+yDUpJDYdesF9pQ8cgtNI/gv5tHrLP3F5Zg4lrwaE84Qq+
+ nTySYOpSSD4WDnTf5eA/5LrGy3FqTHYGlvAYvNsacrBLkYmKg48EJxZJKmoIwDn3avxl
+ yO2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733480980; x=1734085780;
+ d=1e100.net; s=20230601; t=1733482618; x=1734087418;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9ezEE8iaDRygXpYAczBJSbU/+xaXpWW4zLER8KWegIk=;
- b=n5fmV9mCm0poA3S1x/mHI0+xErxl/LQ+0zqoJwQVFI8I9c8Cv6kgsRCcRfXDPtaa9a
- /i5fvAI9qf85VYPRE/WTjJ27Q5RUuzkvWPkplnTTvvYDcgecIeijLJbQC76kauhCYo+8
- 3UBQFeGgKKsF+iqz65Yxexvh4ojBnvvnzV+w0moh0DV8tMI9bUWjMMOqwiJwyCoB42O9
- LdldxkQmKX77XyGz45HadhVtvRsIB2L9LBsiRrvtQ4rWNcSSgrM1BF9GbVLW0z4QF4/D
- KGRhNi4DTpKDp+Ec68l8/o7vYSIcn4kjxqw+x+l+9yzqKpbeg86aR6yFYZuYEct0JuZh
- wKIg==
-X-Gm-Message-State: AOJu0Ywiyf96OppNOJA6fG/IyusteExQ+auQ/KxcG1cGcIdjIRRUfFRv
- oa7FJXcKWSEAJQt4nATvx0oJYolUdHXM4H85E3Ouqx/3ySVKo0u4th9hNYZddS2nrxiTXZcZJh+
- 7N54=
-X-Gm-Gg: ASbGncv1hJ8TcQLE1pO1NqkNQyWV2MHv0r4yRvCyqyFSxrF+DAHBRSS1jfqO+qReoAr
- NixOIR2aAf5XyTCHTeYUHDYeAp4OSEct2oEA/+ItFUMSYkMXpeyDzi+gLhxwuUtXaJA3i/8IHHi
- v/BnCaSo4ks2vXhlw2pzR4uqfHUEbltlr/kwNZMBAUemvl/AP6yIdmCC13VvHoWtg9TTejkC8mm
- PaVwYjTA/du9w772Zo3QHKNb1njYnZCLiMr81MyvDGoGaCon5YRyaiaV/s=
-X-Google-Smtp-Source: AGHT+IGh2NCoGeHF6F/6QKtty4qW55AYOZp1chBxDr0A9qvr/5Tq0W1gZQS7loi1t4zIi3tsVz7LnA==
-X-Received: by 2002:a5d:6d01:0:b0:385:fb40:e571 with SMTP id
- ffacd0b85a97d-3862a7720bamr2215523f8f.6.1733480979734; 
- Fri, 06 Dec 2024 02:29:39 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:7bf2:dbba:fd8f:cf0b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3861f59cc47sm4225958f8f.37.2024.12.06.02.29.39
+ bh=pMvTPhjmXRzGTI9tmyvCZUg2ccsy+mpJ4BCTUvwFVeY=;
+ b=fV+HA6iQU/vUSdFIQ9uJTxiigr9Rk2g+uTemdSQPi6DRSoq5/sRx+3arlz8+COeMbJ
+ jykb9Mjhk01lKJXCRUU8dNULKl2IKWo9gToITIObHo+ObCEeQYmxgHW+jIB9UdCUQH8I
+ PeP7uQYrRve4XzYbk9fHXFYhLm4FPBJ4qkaVqDbefYcQOhXtoj5UYtCZ0gdZSa/bz1S3
+ yQNSWJkhV0bqJ+io/gkPvv8CQ9D5mc+KY8278AnX7IzADmSk463c0t9kim819Khp/om/
+ GXRz73JMIz3Poi0VtG6fTH1f3agGbPhRzkRQ9AA41Uiy2wpjsOJQk6IMOPTNt/WkSS8q
+ xooQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlKD3NyA3+7Eqt71NI42VLCJLHISO0YNUs5bpgj18W5sX4Ywr+jgTIU76Cx+aNVZmP7vrrVMw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJtLEtzOZgfDBYmRN0M/DAAXWty1pndQQU3ACRdmW4wPqOtUfq
+ XckLPAhW208tMa4V30pykJqZMjN9sW3w2QUTBBF7Se+9sch6NgifZPqmrSuMLXU=
+X-Gm-Gg: ASbGncuckNM3KYMQVtp/UqrAPghQblU6o2vRnue7IhCUG8GJxSGfIgCYbKM9GF4UKZm
+ MBZ2ipBA55r7nciBjspHDR6cqHwKia78OQo1uILlCUqkkCQYV1eJjaehyEkNhvs2Dx+OBnNwCeE
+ W4gvR89IHRo5Kv8sJDiZvCKIeT/KdJDHUDmgi1r10+kQeB5PxHJ/LUfMB+xGaPH7rYrkbYFHGTy
+ QsTJi9wbiqhO/N/PS9VvHLEOe/U3Q1xPO8jWPdl21UfSDpcRx6unrWoScdb2f4zwQUnd3ZFTxwD
+ iiww8rSj8nexg6Utu8CqjaEbTt4=
+X-Google-Smtp-Source: AGHT+IF7Sd0xzLzB5dlU5aQQGHbyfITEaiawHn7/Iml5sIO1Q5x55aLZTEiH6MYhTVPdG8I9zVQWvg==
+X-Received: by 2002:a05:651c:19a5:b0:300:eb1:a4f3 with SMTP id
+ 38308e7fff4ca-3002f8df262mr12298121fa.14.1733482618215; 
+ Fri, 06 Dec 2024 02:56:58 -0800 (PST)
+Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
+ [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d14c64b48dsm1978810a12.51.2024.12.06.02.56.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 02:29:39 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
+ Fri, 06 Dec 2024 02:56:57 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH] trace: add support for "trace clear"
-Date: Fri,  6 Dec 2024 11:29:16 +0100
-Message-ID: <20241206102917.1095207-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH] mbedtls: remove MBEDTLS_HAVE_TIME
+Date: Fri,  6 Dec 2024 12:56:45 +0200
+Message-ID: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,151 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement a "trace clear" command to delete the currently accumulated
-trace data. This comes handy when someone needs to trace a particular
-command. For example:
+When MbedTLS TLS features were added MBEDTLS_HAVE_TIME was defined as part
+of enabling https:// support. However that pointed to the wrong function
+which could crash if it received a NULL pointer.
 
-  => trace clear; dhcp; trace pause
-  => trace stats
-  => trace calls 0x02100000 0x10000000
-  => tftpput $profbase $profoffset 192.168.0.16:trace.bin
+Looking closer that function is not really needed, as it only seems to
+increase the RNG entropy by using 4b of the current time and date. 
+The reason that was enabled is that lwIP was unconditionally requiring it,
+although it's configurable and can be turned off.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Since lwIP doesn't use that field anywhere else, make it conditional and
+disable it from our config.
+
+Fixes: commit a564f5094f62 ("mbedtls: Enable TLS 1.2 support")
+Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- cmd/trace.c     | 13 ++++++++++++-
- include/trace.h |  2 ++
- lib/trace.c     | 47 +++++++++++++++++++++++++++++++++--------------
- 3 files changed, 47 insertions(+), 15 deletions(-)
+ lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c | 2 ++
+ lib/mbedtls/mbedtls_def_config.h                     | 3 ---
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/trace.c b/cmd/trace.c
-index 937e6a682ad..e95ac7ca9da 100644
---- a/cmd/trace.c
-+++ b/cmd/trace.c
-@@ -87,8 +87,18 @@ int do_trace(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		trace_set_enabled(0);
- 		break;
- 	case 'c':
--		if (create_call_list(argc, argv))
-+		switch (*(cmd + 1)) {
-+		case 'a':
-+			if (create_call_list(argc, argv))
-+				return cmd_usage(cmdtp);
-+			break;
-+		case 'l':
-+			if (trace_clear())
-+				return CMD_RET_FAILURE;
-+			break;
-+		default:
- 			return cmd_usage(cmdtp);
-+		}
- 		break;
- 	case 'r':
- 		trace_set_enabled(1);
-@@ -113,6 +123,7 @@ U_BOOT_CMD(
- 	"stats                        - display tracing statistics\n"
- 	"trace pause                        - pause tracing\n"
- 	"trace resume                       - resume tracing\n"
-+	"trace clear                        - clear traces\n"
- 	"trace funclist [<addr> <size>]     - dump function list into buffer\n"
- 	"trace calls  [<addr> <size>]       "
- 		"- dump function call trace into buffer"
-diff --git a/include/trace.h b/include/trace.h
-index 763d6d1255a..782eaae2fc2 100644
---- a/include/trace.h
-+++ b/include/trace.h
-@@ -100,6 +100,8 @@ void trace_set_enabled(int enabled);
+diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+index 6643b05ee94d..46421588fef8 100644
+--- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
++++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+@@ -692,7 +692,9 @@ altcp_tls_set_session(struct altcp_pcb *conn, struct altcp_tls_session *session)
+   if (session && conn && conn->state) {
+     altcp_mbedtls_state_t *state = (altcp_mbedtls_state_t *)conn->state;
+     int ret = -1;
++#ifdef MBEDTLS_HAVE_TIME
+     if (session->data.MBEDTLS_PRIVATE(start))
++#endif
+       ret = mbedtls_ssl_set_session(&state->ssl_context, &session->data);
+     return ret < 0 ? ERR_VAL : ERR_OK;
+   }
+diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+index d27f017d0847..1d2314e90e4d 100644
+--- a/lib/mbedtls/mbedtls_def_config.h
++++ b/lib/mbedtls/mbedtls_def_config.h
+@@ -92,9 +92,6 @@
  
- int trace_early_init(void);
- 
-+int trace_clear(void);
-+
- /**
-  * Init the trace system
-  *
-diff --git a/lib/trace.c b/lib/trace.c
-index cabbe47b58a..def9f912c92 100644
---- a/lib/trace.c
-+++ b/lib/trace.c
-@@ -351,14 +351,8 @@ static int get_func_count(void)
- 	return gd->mon_len / FUNC_SITE_SIZE;
- }
- 
--/**
-- * trace_init() - initialize the tracing system and enable it
-- *
-- * @buff:	Pointer to trace buffer
-- * @buff_size:	Size of trace buffer
-- * Return:	0 if ok
-- */
--int notrace trace_init(void *buff, size_t buff_size)
-+static int notrace trace_init_(void *buff, size_t buff_size, bool copy_early,
-+			       bool enable)
- {
- 	int func_count = get_func_count();
- 	size_t needed;
-@@ -368,7 +362,7 @@ int notrace trace_init(void *buff, size_t buff_size)
- 		return func_count;
- 	trace_save_gd();
- 
--	if (!was_disabled) {
-+	if (copy_early) {
- #ifdef CONFIG_TRACE_EARLY
- 		ulong used, count;
- 		char *end;
-@@ -394,9 +388,6 @@ int notrace trace_init(void *buff, size_t buff_size)
- 		}
- 		puts("\n");
- 		memcpy(buff, hdr, used);
--#else
--		puts("trace: already enabled\n");
--		return -EALREADY;
- #endif
- 	}
- 	hdr = (struct trace_hdr *)buff;
-@@ -419,13 +410,41 @@ int notrace trace_init(void *buff, size_t buff_size)
- 	hdr->ftrace_size = (buff_size - needed) / sizeof(*hdr->ftrace);
- 	hdr->depth_limit = CONFIG_TRACE_CALL_DEPTH_LIMIT;
- 
--	puts("trace: enabled\n");
--	trace_enabled = 1;
-+	printf("trace: initialized, %senabled\n", enable ? "" : "not ");
-+	trace_enabled = enable;
- 	trace_inited = 1;
- 
- 	return 0;
- }
- 
-+/**
-+ * trace_init() - initialize the tracing system and enable it
-+ *
-+ * @buff:	Pointer to trace buffer
-+ * @buff_size:	Size of trace buffer
-+ * Return:	0 if ok
-+ */
-+int notrace trace_init(void *buff, size_t buff_size)
-+{
-+	/* If traces are enabled already, we may have early traces to copy */
-+	return trace_init_(buff, buff_size, trace_enabled, true);
-+}
-+
-+/**
-+ * trace_clear() - clear accumulated traced data
-+ *
-+ * May be called with tracing enabled or disabled.
-+ */
-+int notrace trace_clear(void)
-+{
-+	bool was_enabled = trace_enabled;
-+
-+	if (trace_enabled)
-+		trace_enabled = 0;
-+	return trace_init_(gd->trace_buff, CONFIG_TRACE_BUFFER_SIZE,
-+			   false, was_enabled);
-+}
-+
- #ifdef CONFIG_TRACE_EARLY
- /**
-  * trace_early_init() - initialize the tracing system for early tracing
+ /* Generic options */
+ #define MBEDTLS_ENTROPY_HARDWARE_ALT
+-#define MBEDTLS_HAVE_TIME
+-#define MBEDTLS_PLATFORM_MS_TIME_ALT
+-#define MBEDTLS_PLATFORM_TIME_MACRO rtc_mktime
+ #define MBEDTLS_PLATFORM_C
+ #define MBEDTLS_SSL_CLI_C
+ #define MBEDTLS_SSL_TLS_C
 -- 
-2.43.0
+2.45.2
 
