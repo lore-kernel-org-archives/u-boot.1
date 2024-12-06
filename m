@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B4FE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 977DBE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:31:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEF0E8962F;
-	Fri,  6 Dec 2024 16:31:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 292BD8963B;
+	Fri,  6 Dec 2024 16:31:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NbcdZ0m8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zr5ZDzUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E4CF89638; Fri,  6 Dec 2024 16:31:36 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id E3D7889642; Fri,  6 Dec 2024 16:31:50 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EE328962F
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:31:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D12089613
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:31:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5cecbddb574so2535220a12.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:31:34 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2ee51c5f000so1624659a91.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:31:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733499094; x=1734103894; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733499105; x=1734103905; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SAVRH3JKUe+yTGkkCUJbbULNfuUE5Z2JVJwWjwVOn8w=;
- b=NbcdZ0m8npWO3Jtv4Aj8pRqu1FyxIO5w4FABgtnuIloef82ENZUr+Ezq+eKCq/Febv
- p1Gb8vOOf65s6aVZWgEpdncWzaNHhnQP8VEEESsWq/3pZhpDL245whx6cJ7TFPyUFJJ/
- FMWwwcVi9h0Q77T+XjN5APEGum+QZLjx+HbQw=
+ bh=FWgDfJYQ4ZgxO4FfWo1bhFY05FLzHGRGqH7hvPnF9KI=;
+ b=Zr5ZDzUX4WnXKuA6eExZu/2Jhvf9gKhez+aDGVhFeNjKPfL5I5/3p6wClBG8LOyivL
+ q0YzbrEbR1aJcw1qhLs0ey8SW7IwnqvAbaCWNxSAe6m5uKLng43aFgO0qpNgTJftMWBG
+ piZZRKfx/qjW6r+vszzAOWeIMGTvi2e1JLe1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733499094; x=1734103894;
+ d=1e100.net; s=20230601; t=1733499105; x=1734103905;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SAVRH3JKUe+yTGkkCUJbbULNfuUE5Z2JVJwWjwVOn8w=;
- b=KzWkOtfr6v3Itzx4NpygljAQyhXQR4QFVepvQawAp/4v7TIu9XFtyqaADtJchSjyV7
- Tfh6X3hzd9WhI2zKO8qj3UMiqRFUOUt7XkSKEBu6YLdNLTOSD5pZaPdSYheNKSQfesZT
- leR3loh0ZYJTPpLZ+EJd+2K/vSBWXU+2BEzwZ5Ph+5Gbj+c5W1vtrezwzJ5BRCQjgXbb
- PYob3mf9f4YvnABhLKaXP6iWZB+z7sGBnc9evVQCq1CfqQiLixlAp1C7K2S0v0Z5zbW7
- CB2vUOyLylILw69UZt038MnK4DSVPmP1Lls5HHljg0VcdkSSqvFK7lrlU3fEpNmHhWWv
- LRJg==
+ bh=FWgDfJYQ4ZgxO4FfWo1bhFY05FLzHGRGqH7hvPnF9KI=;
+ b=cInveA9L6tiAKRoEMy66TwRUuclRu0b1CK2hN43/FdoWbKuRadEMDn9HzwF0gxZt5u
+ QJynL8YtcbXamCpCA23tQjJA9wiwKtdqd6l/2pfI6PvwBTA+BhwrAORY42oRBLx81JW8
+ d5ymvM3SnpzfAaTej75uGMayRnwZMA8VrfevrotlSukijIL4KaQFwQXNpz09D1xyPVpB
+ /o8d+gXkQjpE7rMEwvSMx0dzu6a72wCg3uHrGhG03gD6L0DePl9TWdCvOtwEI+a120Xc
+ 0RLqvA7G4IcA4xsJBXyF1TGxL5LNcweaG5x7/rPItVfg49ystwlPDZwHzxdlqpOxfbS2
+ rqtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7F1tWOAkEPZ6fwVuM26zRwegIb+cnvKZBQnGkSKv3PIGyXI1EcNho/IQ4UaSAfeSIZuvLdHs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwO5TepvZA9zrECIfksW0TeBjcIrfiAEJiyjEIhnO87KpbNcMot
- FRltjuo8sFMvB0wGgKUZsDPTCvvBREut21W1C+Y60P+v/YWDEkUDBk9tulWbj6V4wD+pLdp8Wc+
- GFz1ff07m7r3N8PixU0plEjNFI+Q1GwXSbCLg
-X-Gm-Gg: ASbGncsvj96TcLlx4LvgSMuX9sNzid2jG74agcEudkNsRTSs2uo87J8aO0BHPUrZszO
- Dn9TUeEKQneKYSpc2LblPCXx8t6XTkwTI
-X-Google-Smtp-Source: AGHT+IFFjJhsBrcpp1GM2fKfx5MH85/IiaQ7Z3ybB+pLTFr+bZCAQt66M3QiDUYzbCwKBiZ5U8DTLvFXE6Y1LRbHbtY=
-X-Received: by 2002:a17:907:774b:b0:aa5:2ef2:58bb with SMTP id
- a640c23a62f3a-aa639bf9d65mr245858266b.0.1733499093968; Fri, 06 Dec 2024
- 07:31:33 -0800 (PST)
+ AJvYcCVZE2vRD4R3goVThJcMGnefPadm5Y2eAUGmwA+Fm4KMJa471mDcVBIeQMM/BGL6it8RHkeZYSc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9mMkXFBgddX/NYq24+DBYUW0zoYHgbtOPJ7SMntf6mYsVeh1Y
+ PWq9Upk/JX5O5ZOp7T7XGZ9kXP878xhnF9N6mS64NKwHd7E9SkxCAdCtx8xe7KvqFcPpXaCALoF
+ l9dO/nPwQNceFUPALwwmNfuGviDUEE0ACfNio
+X-Gm-Gg: ASbGnct35eQ4VJSuONjDyD56W94+xGaEnzFDtqzJok6a5WpL9Xn8UrZ8goDqvrxwIzC
+ uwbgEu7clBQ6ddv7wxG2WB/z4O+Mf53EG
+X-Google-Smtp-Source: AGHT+IFRF5odmfVtdXHrD+VvN5UZRv4egP20TLzyxOlQPNkA1RLUW5YBZj/sPJIMc49Q1DOTHMpn9rn/N6Nmz8SjTQI=
+X-Received: by 2002:a17:90b:544f:b0:2ea:4578:46d8 with SMTP id
+ 98e67ed59e1d1-2ef69e15501mr5717416a91.9.1733499104902; Fri, 06 Dec 2024
+ 07:31:44 -0800 (PST)
 MIME-Version: 1.0
 References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
- <20241202-sandbox_repair_of_embed-v1-2-05aff4b0ccf7@salutedevices.com>
-In-Reply-To: <20241202-sandbox_repair_of_embed-v1-2-05aff4b0ccf7@salutedevices.com>
+ <20241202-sandbox_repair_of_embed-v1-3-05aff4b0ccf7@salutedevices.com>
+In-Reply-To: <20241202-sandbox_repair_of_embed-v1-3-05aff4b0ccf7@salutedevices.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 08:31:18 -0700
-Message-ID: <CAFLszThrHw1cN37+U=UBBSgsRt3v9aqDqO=NpYMq0JROGzWfoA@mail.gmail.com>
-Subject: Re: [PATCH 2/5] test: sandbox: fix invalid_use_of_IF_ENABLED_INT if
+Date: Fri, 6 Dec 2024 08:31:20 -0700
+Message-ID: <CAFLszTjJHY6s2W0rTsOp2DJRQcF1ODOLQF90-fuHgjS-r_JvAA@mail.gmail.com>
+Subject: Re: [PATCH 3/5] test: sandbox: fix link error with do_ut_bloblist if
  BLOBLIST=n
 To: Evgeny Bachinin <EABachinin@salutedevices.com>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -98,46 +98,35 @@ On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
 > Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
 > error:
 > ```
-> ld: /tmp/ccRVty.ltrans40.ltrans.o: in function `lib_test_is_enabled':
-> test/lib/kconfig.c:24: undefined reference to \
->                                        `invalid_use_of_IF_ENABLED_INT'
-> ld: test/lib/kconfig.c:26: undefined reference to \
->                                 `invalid_use_of_CONFIG_IF_ENABLED_INT'
+> ld: /tmp/ccwtRVty.ltrans28.ltrans.o:(.data.rel+0x4b0): undefined \
+>                                          reference to `do_ut_bloblist'
 > ```
 >
-> Fixes: 29784d62ede ("test: Add some tests for kconfig.h")
+> Fixes: 6ea5df39e8d ("test: Only enable bloblist test when supported")
 > Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
 > ---
->  test/lib/kconfig.c | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
-
-This defeats the test, of course, but I suppose that is fine.
+>  test/cmd_ut.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
 >
-> diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
-> index 0c463bb794a5e1f9f2db995d544bd723f5e59ca0..a3645abf9464785461c7250260c816e6bca03193 100644
-> --- a/test/lib/kconfig.c
-> +++ b/test/lib/kconfig.c
-> @@ -21,10 +21,12 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
->         ut_asserteq(0, CONFIG_IS_ENABLED(OF_PLATDATA));
->         ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
->
-> -       ut_asserteq(0xb000,
-> -                   IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED, CONFIG_BLOBLIST_ADDR));
-> -       ut_asserteq(0xb000,
-> -                   CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED, BLOBLIST_ADDR));
-> +       if (IS_ENABLED(CONFIG_BLOBLIST)) {
-> +               ut_asserteq(0xb000, IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> +                                                  CONFIG_BLOBLIST_ADDR));
-> +               ut_asserteq(0xb000, CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED,
-> +                                                         BLOBLIST_ADDR));
-> +       }
->
->         /*
->          * This fails if CONFIG_TEST_KCONFIG_ENABLE is not enabled, since the
+> diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+> index 195b7ea50accde470a739771e058c1d664df3f0b..842c2c3e7f65eb9fe017fa1949eb2390be171487 100644
+> --- a/test/cmd_ut.c
+> +++ b/test/cmd_ut.c
+> @@ -104,8 +104,10 @@ static struct cmd_tbl cmd_ut_sub[] = {
+>                          "", ""),
+>  #endif
+>  #ifdef CONFIG_SANDBOX
+> +#if CONFIG_IS_ENABLED(BLOBLIST)
+>         U_BOOT_CMD_MKENT(bloblist, CONFIG_SYS_MAXARGS, 1, do_ut_bloblist,
+>                          "", ""),
+> +#endif
+>         U_BOOT_CMD_MKENT(bootm, CONFIG_SYS_MAXARGS, 1, do_ut_bootm, "", ""),
+>  #endif
+>  #ifdef CONFIG_CMD_ADDRMAP
 >
 > --
 > 2.34.1
