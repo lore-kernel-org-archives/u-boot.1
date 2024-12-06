@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63480E7716E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA446E7716E
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:41:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7876F89771;
-	Fri,  6 Dec 2024 03:37:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC0CB896C7;
+	Fri,  6 Dec 2024 03:38:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHsh5ucF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IKUZeAa6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35EBC89639; Fri,  6 Dec 2024 03:37:58 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id C3E7389772; Fri,  6 Dec 2024 03:38:03 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D68AB89756
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:37:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3819A89753
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:37:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-84198253281so100260239f.0
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:37:55 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-843e9db3e65so61427139f.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:37:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733452673; x=1734057473; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733452676; x=1734057476; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4QbQTnlorlo8HeLSxopeHPSZBzVoPlqaLk5bDAWwbqc=;
- b=YHsh5ucFG0KN+sLx7xACK5DgltLYPOW9caCYnfJgmz8pE6atQ1iY/xeHg9lkQlojR6
- U8XJ/YAhHfKBNp9G6kDoaXeaxh62Gaf+W0NQhsugMRu1k1AipdpVvWRL6zHK54wfH/YT
- Rrp+VUTHgO+6mtXSwdevNz4FLhFWp3ZXtkM30=
+ bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
+ b=IKUZeAa6Bkp30V4/5JkOuoWE8uMNeoVKJ7pP1Eiy7nmAy1g8UQ2xX3/5DoVo9kckrF
+ /4mNe9AWJ7J7EVb/LJf4RQg5B2MYGegd2uGDZ35CoUVrMLQkI4yvtwAPLnM9LumRSTGj
+ o36MLEnJaXtB0NDzAyasnVaRsXffc+uvcPetU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733452673; x=1734057473;
+ d=1e100.net; s=20230601; t=1733452676; x=1734057476;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4QbQTnlorlo8HeLSxopeHPSZBzVoPlqaLk5bDAWwbqc=;
- b=j8tQHGGfjs86BnQ7E1qj+mysh87ae0aIG06Fw9W0i1bmPtcPu/FdXevmHMCzO2FXcL
- AVzpF8p+E1Y6Pastn6yw6NLOm9wPLcXZE0i4Kn6kl6BfcjbZffPtH1Pnx6ovILxn13l0
- VQioMG2aPyQQugu281TqPQ/Ip4+9l0NAqmIuTqI7B4e8NiSlvvEwyEWaBCG1UotEiquS
- 3VNDuTqVpDcnekQMFe/CtS7O9wjOigbSJZJV3bljIuxdmmSP2T38ufoea1WqgRo1rr49
- HYHWxvBSOwA8PAKqRlKonE6jksy6++ltyMyysLOyGDSpHNHurFETAua807vQ4/6NqkTP
- v3XQ==
-X-Gm-Message-State: AOJu0Yz2IWKzeEnZx9jvXEZuIfImRzz4rZF7DgMDGLQvy247/OBMGKKC
- 3cukeXVW2Icc6V9YClgNDYsI3dIUbplkSlEmC1RX+0bLW6ty1VknirYIvEv/Hnq3xKaNT71tMJQ
+ bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
+ b=qHeJySz7JrJVI+aZdelE3RxMtvXk4lds2ZXZ7X4G+oianw1YxH/rmPoAmWOj2cG13x
+ 1kPNzZn/gc335dur8GKd0mYwO1ETWgzR7H0D03rAOYhjKWyG9CXoZwo2R6LrpguHoj6c
+ JWswGPSpcF6j41EsM7LKlAQcPGDmd8LAmwEHQYWMwjkt/eilkw2qpeXT/At/lvktjMVo
+ GoWgTL3Fb2khd3Q2ADTj7UUZwLWaLGBSoheaofWy7qIDMSbznrICzcsy9T8qi7S8hQz9
+ /kuXGz1In6w8lQXQyRsebGNycT0UJTJem+zeA0NM8sYQeiOTlu7K3ABNJk+57bXpY9ZS
+ THpg==
+X-Gm-Message-State: AOJu0YyZQA8jMmthhH7VvFPKws/rH0prCxN8PuKPw73Dzy3NbP8timab
+ vng3m3eyLvz5xJpjr5yTQqK7afkC/y6PQ/GtIDnpTm4nbOOsPK/g13qZXBYqRIDNFbpH3TW3kfA
  =
-X-Gm-Gg: ASbGnct9icQXj+nv9VntMtl9eg4wCZguYm1fbCaqby3zRljVRCM8mn12aEafR+URyek
- 5u3kca/ukgL93vWORx9BYl5tG6IoFZTEFH+DtgRCFWC54FLqAZyjsUGDNE3jnRm1vc4AFZZleXO
- kmktkWamXG7B3yM0m8zDO1xz9SzATs4nlkkJzeO94nHU/8f8EKYP0mUgmPkPYWRglFr9KGbm19F
- ZXSlhUX4vPdbUkKoN/RSsGRpsAByhgkTWUAOdk0TgyUk6bXknAo+f73xzYyE9UJRbmXbOmmgbVn
- b9JIPAEycV4=
-X-Google-Smtp-Source: AGHT+IHoZkOS0gnDni07tJa9ec7SrFDGxcpxgJfKWrf7gmntnACC4PmdwPsnpyHZfqvH1UF7vN/ijg==
-X-Received: by 2002:a05:6602:15ca:b0:843:e9a6:fd1 with SMTP id
- ca18e2360f4ac-8447e1f99ffmr191865439f.1.1733452673443; 
- Thu, 05 Dec 2024 18:37:53 -0800 (PST)
+X-Gm-Gg: ASbGnct0Jh/LhWUNf89k2I32xd97mpGYWM060jCrgHnsxoiLoof/RBzGxy8094dHK02
+ UusSF6dacF2TaT2+7usa5dob/R0wW3H3isCVW3QxSZaVPOL8Ys4UxcEn0UlPuwElA9Z1ARs+rlc
+ 4ji07g9O8zM7KUuArlNOZrv8mFipWgO3N4KbzmojG3tvcqmmd8uerRxrSgfLWAI3vyHroXiNF3i
+ 6Pe6s/44dJUtUrGPpgw7+dUT3ExptoMzfQHAoKH2gORA9vklgqpNKNipxv841+DVmdtED0Agiip
+ hrzeHXxy5m4=
+X-Google-Smtp-Source: AGHT+IEwguCQ5mmqxKh9KYqML6VaTpKl+6VPWvp6T7XoIojxt29os0VI7L+/3Or4dAbHEiwp/v6XXQ==
+X-Received: by 2002:a6b:6210:0:b0:844:2ef3:a95a with SMTP id
+ ca18e2360f4ac-84471100818mr569269539f.7.1733452676433; 
+ Thu, 05 Dec 2024 18:37:56 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.37.52
+ 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.37.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Dec 2024 18:37:52 -0800 (PST)
+ Thu, 05 Dec 2024 18:37:55 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
@@ -78,9 +78,9 @@ Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 31/46] pxe: Drop the cmdline parameter
-Date: Thu,  5 Dec 2024 19:36:10 -0700
-Message-Id: <20241206023626.2456858-32-sjg@chromium.org>
+Subject: [PATCH v3 32/46] pxe: Record the bootflow in the PXE context
+Date: Thu,  5 Dec 2024 19:36:11 -0700
+Message-Id: <20241206023626.2456858-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 References: <20241206023626.2456858-1-sjg@chromium.org>
@@ -102,188 +102,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that PXE can operate without the command line, drop the parameter
-throughout the code.
+At present the only option with PXE is to boot it and see what happens.
+
+Provide a bootflow, when available, so that PXE will eventually be able
+to add some useful information to it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootmeth_extlinux.c |  5 ++---
- boot/bootmeth_pxe.c      |  4 +---
- boot/pxe_utils.c         |  8 +++-----
- cmd/pxe.c                |  9 ++++-----
- cmd/sysboot.c            |  4 ++--
- include/extlinux.h       |  1 -
- include/pxe_utils.h      | 10 +++-------
- 7 files changed, 15 insertions(+), 26 deletions(-)
+ boot/bootmeth_extlinux.c | 2 +-
+ boot/bootmeth_pxe.c      | 2 +-
+ boot/pxe_utils.c         | 3 ++-
+ cmd/pxe.c                | 4 ++--
+ cmd/sysboot.c            | 2 +-
+ include/pxe_utils.h      | 5 ++++-
+ 6 files changed, 11 insertions(+), 7 deletions(-)
 
 diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index 17c6cebd2f4..4adcaf5654a 100644
+index 4adcaf5654a..569f9d760bf 100644
 --- a/boot/bootmeth_extlinux.c
 +++ b/boot/bootmeth_extlinux.c
-@@ -175,7 +175,6 @@ static int extlinux_read_bootflow(struct udevice *dev, struct bootflow *bflow)
- 
- static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
- {
--	struct cmd_tbl cmdtp = {};	/* dummy */
- 	struct pxe_context ctx;
- 	struct extlinux_info info;
- 	struct extlinux_plat *plat;
-@@ -188,8 +187,8 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
- 
+@@ -188,7 +188,7 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
  	plat = dev_get_plat(dev);
  
--	ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
--			    bflow->fname, false, plat->use_fallback);
-+	ret = pxe_setup_ctx(&ctx, extlinux_getfile, &info, true, bflow->fname,
-+			    false, plat->use_fallback);
+ 	ret = pxe_setup_ctx(&ctx, extlinux_getfile, &info, true, bflow->fname,
+-			    false, plat->use_fallback);
++			    false, plat->use_fallback, bflow);
  	if (ret)
  		return log_msg_ret("ctx", -EINVAL);
  
 diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index c6a132b8de2..59ebf1be83a 100644
+index 59ebf1be83a..f2b9ffaae89 100644
 --- a/boot/bootmeth_pxe.c
 +++ b/boot/bootmeth_pxe.c
-@@ -140,7 +140,6 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- {
- 	struct pxe_context *ctx = dev_get_priv(dev);
--	struct cmd_tbl cmdtp = {};	/* dummy */
- 	struct extlinux_info info;
- 	ulong addr;
- 	int ret;
-@@ -148,8 +147,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- 	addr = map_to_sysmem(bflow->buf);
+@@ -148,7 +148,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
  	info.dev = dev;
  	info.bflow = bflow;
--	info.cmdtp = &cmdtp;
--	ret = pxe_setup_ctx(ctx, &cmdtp, extlinux_pxe_getfile, &info, false,
-+	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &info, false,
- 			    bflow->subdir, false, false);
+ 	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &info, false,
+-			    bflow->subdir, false, false);
++			    bflow->subdir, false, false, bflow);
  	if (ret)
  		return log_msg_ret("ctx", -EINVAL);
+ 
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index a91372407eb..b4aa284b1ee 100644
+index b4aa284b1ee..f7bbc1527af 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -1630,16 +1630,14 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
- 	boot_unattempted_labels(ctx, cfg);
- }
+@@ -1632,7 +1632,7 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
  
--int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
--		  pxe_getfile_func getfile, void *userdata,
--		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
--		  bool use_fallback)
-+int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
-+		  void *userdata, bool allow_abs_path, const char *bootfile,
-+		  bool use_ipv6, bool use_fallback)
+ int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
+ 		  void *userdata, bool allow_abs_path, const char *bootfile,
+-		  bool use_ipv6, bool use_fallback)
++		  bool use_ipv6, bool use_fallback, struct bootflow *bflow)
  {
  	const char *last_slash;
  	size_t path_len = 0;
- 
- 	memset(ctx, '\0', sizeof(*ctx));
--	ctx->cmdtp = cmdtp;
- 	ctx->getfile = getfile;
- 	ctx->userdata = userdata;
+@@ -1643,6 +1643,7 @@ int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
  	ctx->allow_abs_path = allow_abs_path;
+ 	ctx->use_ipv6 = use_ipv6;
+ 	ctx->use_fallback = use_fallback;
++	ctx->bflow = bflow;
+ 
+ 	/* figure out the boot directory, if there is one */
+ 	if (bootfile && strlen(bootfile) >= MAX_TFTP_PATH_LEN)
 diff --git a/cmd/pxe.c b/cmd/pxe.c
-index c69b8130423..530d5d9c35b 100644
+index 530d5d9c35b..7728949d14b 100644
 --- a/cmd/pxe.c
 +++ b/cmd/pxe.c
-@@ -126,12 +126,11 @@ static int pxe_ipaddr_paths(struct pxe_context *ctx, unsigned long pxefile_addr_
- 
- int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
- {
--	struct cmd_tbl cmdtp[] = {};	/* dummy */
- 	struct pxe_context ctx;
+@@ -130,7 +130,7 @@ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
  	int i;
  
--	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
--			  env_get("bootfile"), use_ipv6, false))
-+	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
-+			  use_ipv6, false))
+ 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
+-			  use_ipv6, false))
++			  use_ipv6, false, NULL))
  		return -ENOMEM;
  
  	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
-@@ -280,8 +279,8 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return 1;
+@@ -280,7 +280,7 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  	}
  
--	if (pxe_setup_ctx(&ctx, cmdtp, do_get_tftp, NULL, false,
--			  env_get("bootfile"), use_ipv6, false)) {
-+	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
-+			  use_ipv6, false)) {
+ 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
+-			  use_ipv6, false)) {
++			  use_ipv6, false, NULL)) {
  		printf("Out of memory\n");
  		return CMD_RET_FAILURE;
  	}
 diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-index 93d4a400830..6e899f381ec 100644
+index 6e899f381ec..384d5e15e3d 100644
 --- a/cmd/sysboot.c
 +++ b/cmd/sysboot.c
-@@ -105,8 +105,8 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return 1;
+@@ -106,7 +106,7 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
  	}
  
--	if (pxe_setup_ctx(&ctx, cmdtp, sysboot_read_file, &info, true,
--			  filename, false, false)) {
-+	if (pxe_setup_ctx(&ctx, sysboot_read_file, &info, true, filename, false,
-+			  false)) {
+ 	if (pxe_setup_ctx(&ctx, sysboot_read_file, &info, true, filename, false,
+-			  false)) {
++			  false, NULL)) {
  		printf("Out of memory\n");
  		return CMD_RET_FAILURE;
  	}
-diff --git a/include/extlinux.h b/include/extlinux.h
-index 721ba46371c..6747fe01dda 100644
---- a/include/extlinux.h
-+++ b/include/extlinux.h
-@@ -18,7 +18,6 @@
- struct extlinux_info {
- 	struct udevice *dev;
- 	struct bootflow *bflow;
--	struct cmd_tbl *cmdtp;
- };
- 
- #endif
 diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index 0378f2889f7..fb057442d5d 100644
+index fb057442d5d..e8e03430a81 100644
 --- a/include/pxe_utils.h
 +++ b/include/pxe_utils.h
-@@ -100,7 +100,6 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
- /**
-  * struct pxe_context - context information for PXE parsing
-  *
-- * @cmdtp: Pointer to command table to use when calling other commands
-  * @getfile: Function called by PXE to read a file
-  * @userdata: Data the caller requires for @getfile
-  * @allow_abs_path: true to allow absolute paths
-@@ -112,7 +111,6 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
+@@ -109,6 +109,7 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
+  * @use_ipv6: TRUE : use IPv6 addressing, FALSE : use IPv4 addressing
+  * @use_fallback: TRUE : use "fallback" option as default, FALSE : use
   *	"default" option as default
++ * @bflow: Bootflow being booted, or NULL if none
   */
  struct pxe_context {
--	struct cmd_tbl *cmdtp;
  	/**
- 	 * getfile() - read a file
- 	 *
-@@ -222,7 +220,6 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
-  * pxe_setup_ctx() - Setup a new PXE context
-  *
-  * @ctx: Context to set up
-- * @cmdtp: Command table entry which started this action
-  * @getfile: Function to call to read a file
-  * @userdata: Data the caller requires for @getfile - stored in ctx->userdata
-  * @allow_abs_path: true to allow absolute paths
-@@ -237,10 +234,9 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
+@@ -129,6 +130,7 @@ struct pxe_context {
+ 	ulong pxe_file_size;
+ 	bool use_ipv6;
+ 	bool use_fallback;
++	struct bootflow *bflow;
+ };
+ 
+ /**
+@@ -231,12 +233,13 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
+  *                       other choice be selected
+  *                FALSE : Use "default" option should no other choice be
+  *                        selected
++ * @bflow: Bootflow to update, NULL if none
   * Return: 0 if OK, -ENOMEM if out of memory, -E2BIG if bootfile is larger than
   *	MAX_TFTP_PATH_LEN bytes
   */
--int pxe_setup_ctx(struct pxe_context *ctx, struct cmd_tbl *cmdtp,
--		  pxe_getfile_func getfile, void *userdata,
--		  bool allow_abs_path, const char *bootfile, bool use_ipv6,
--		  bool use_fallback);
-+int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
-+		  void *userdata, bool allow_abs_path, const char *bootfile,
-+		  bool use_ipv6, bool use_fallback);
+ int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
+ 		  void *userdata, bool allow_abs_path, const char *bootfile,
+-		  bool use_ipv6, bool use_fallback);
++		  bool use_ipv6, bool use_fallback, struct bootflow *bflow);
  
  /**
   * pxe_destroy_ctx() - Destroy a PXE context
