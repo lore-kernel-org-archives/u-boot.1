@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B46E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32139E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:22:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B8A989173;
-	Fri,  6 Dec 2024 16:15:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A55CF8937D;
+	Fri,  6 Dec 2024 16:22:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m5ws4mXr";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cmpEevyW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77F358960E; Fri,  6 Dec 2024 16:15:43 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 9D41F8959D; Fri,  6 Dec 2024 16:22:02 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5FE189173
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:15:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F268932B
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri,  6 Dec 2024 16:22:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-466966d8dbaso24731711cf.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:15:40 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-724d23df764so2194368b3a.1
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri, 06 Dec 2024 07:21:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733498139; x=1734102939; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nO+LEufgWrmznI+XACugkgEAFTUlBR9WfByMkZtrA7Q=;
- b=m5ws4mXrvnfTVudLPD21VofzxCyOGP7uWiw0wi+FN6QZOJ0tswaGcGZY0sht3O2gLS
- 5sCpUgXkHV52kb1kUJYv5zbAT2/GfKwwHg3SEuhrzeI9Ane7cGe5twbkwohTXwh5l3ss
- CBqJTOsxSDzHLWJMlxbAs5ixiERPQcCt5QiBM=
+ d=linaro.org; s=google; t=1733498518; x=1734103318; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QWX9qVxJIex9KmXnEjR/fx+LU8npYj2ZTwl8CMrqU4I=;
+ b=cmpEevyWyHPim3Zyo9YGV7Kliy6I0qbu4B6xhCk3kG47KdXTmnkp54MJK/xvCjw6Kf
+ VRxBxU5bqDtg7xDFoFut85ou2/OIr/kmz/0xsuc2QivnKhOnlnr+CbKb3I6UaybAIEj6
+ tnLxZXEDtW97jMD2IYfRL7rOTzbrjs7oBXdIJCm5EgbPEBQb70SGVX7oNUMf/eykDb2x
+ 8o9xq9zQPj6uiG7q893es3+ft8yaQhPcMgrKkBW7uqwL1rP3+A60cbCZj34kRLwaDaNv
+ QWv/1dDvBvmZ2Qaf8V3vMwXQEcH+LJn4KTccF45ew0sm/xkb+aRtuSiV1P98GGDAg+nV
+ MbmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733498139; x=1734102939;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nO+LEufgWrmznI+XACugkgEAFTUlBR9WfByMkZtrA7Q=;
- b=k4jthYyqslTMUogwNGdsqwwOvPKV1dactQhE6D/Q/BcmiyT1iqIv1QeakRvrdRDAMC
- f+8zkXNsSz82gnD/iWgc6lM7VAiXGTU/Rk37bk+fsyA7uaaj9Fe2WsCRZABXnBnN3rOU
- O2evC3Tk+RxXAKP4Kj/ZsfcosYoBF3KAqMlS54+5pF1FPK47zpO/Uou4JH0tsjJHDPAe
- yIpvvAjeT7MQO8e4ULov7GQ0Vl62ITkQb4kb65p4Og2yQv0Srls85DcoB1TqyIsn5G73
- t2BzQ8I98PinXKQhEsbms56pABuXFdDFU+avc/XSU5lNrm/8KTaYCmDecZOmxQcr0y4a
- jBGA==
+ d=1e100.net; s=20230601; t=1733498518; x=1734103318;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QWX9qVxJIex9KmXnEjR/fx+LU8npYj2ZTwl8CMrqU4I=;
+ b=TkJMvUG3sYPHYLrdS+BUJUOwy9f7jIDTS3lV6dx2i15BDRlLo8dhtkaMdrnku3BZIk
+ J4d/oOTMVhsgPiV9XZfVzCWGCJ6iTRkKfMKv/gclO4UsfHQtjNHGhGt+ors5IL6L4ybG
+ aRYbuPa5RYkXHlfIEmvlyUqX/dAmVq2Vaq/KTWvi+HDsXBqI/Tp/l08H8mfEjyTIuE8v
+ X8xlZ4eosY0NwiYHlCkP13Yr5/QzhCAJlJROPtuqDlMa4s1t01Frs4yD5PuQLXPtD5cc
+ uQkg3QAl0zndDTTujEUXAsIjMUbDlQta0wzY6ivdPlUWsgVN6/jLs/95/aC0KHutGtkr
+ Ltjw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVR0tSqGFWTctCbJ6hMVuC6acrPzGD7vpN/tW+y8G9I+BDXAqQ8AZaG2Qbo4ddEsmMFUtV+aP8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxsKbiBdyxdYWuF6U27tDoth+YPrQgEHQ3WCpgWstkM4pQZDDie
- Xj6Tj/Hy1DryVKxiPf2x7/0qDgl3Frgvda+nVaWYHGRkQaB2D6j0OWXhI0oze1o=
-X-Gm-Gg: ASbGncs7ah5GkvCexD1Kq6QH3FcE7E2GEA6xWqZ9/IgzOsFOXk/f8ZA/L2MrETnCpL6
- 1gLQ+EihOug9BstL2Pb+sawlZ0T/wMvv7L2olCKPjiWoZjI/hHh22X+uVaxdUBW5bGlS7oGrJCE
- WJOqXic/FuEorMwibFC+cyJwnaUrnWzK0xywYRndb/MsnrWlA5rvzitHsEinIIYkul5CnfM6XD+
- YVCe5mc+FOI9wkWDbw/+z6KxTAjW2Z0KtTUc+EupnfNxx7fCQ==
-X-Google-Smtp-Source: AGHT+IHc5pnpPPoXMm4o7+mXIswyAdXU4N0yZ3647VG4gKbeS3otP+buZlFJ8euKxfvdzXU1D7yMoQ==
-X-Received: by 2002:a05:6214:b6b:b0:6d8:81cd:a0ce with SMTP id
- 6a1803df08f44-6d8e71e7a1amr44522096d6.43.1733498139645; 
- Fri, 06 Dec 2024 07:15:39 -0800 (PST)
-Received: from bill-the-cat ([187.144.30.219])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8da9feab9sm19750856d6.71.2024.12.06.07.15.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 07:15:38 -0800 (PST)
-Date: Fri, 6 Dec 2024 09:15:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] driver: clk: tegra: init basic clocks on probe
-Message-ID: <20241206151536.GR2457179@bill-the-cat>
-References: <20241206060115.4346-1-clamor95@gmail.com>
- <20241206060115.4346-2-clamor95@gmail.com>
- <20241206142052.GQ2457179@bill-the-cat>
- <CAPVz0n2mXefetq38_W-Xo8-2xTKUqxLXjz1MupmdaL8brnayxA@mail.gmail.com>
+ AJvYcCWAHsMjoMoZWOgIpzrF0QaSpmCjA/2TquLFxoEG+pVDWshcENeNmww2TOmxLWH1PstUf/F+DB0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJBPDd/Z9LRpj07/Eyj3+jRgStGxJx44+PGz+4S1RqNVIaWXX6
+ ynvhl976Q3+0UcXW+CY0Af5VFs1ik/JIPaqpMNI0gN1m1LWxR4W9KtmQnF4UW6U7CTDQ2ISw/JC
+ RCLtJg6o8JmLYSY5TsBlFdrW+NrVatu7KXEubwg==
+X-Gm-Gg: ASbGnctrwMqvEUo/gI/QEGNOW9saT7FrTGnuZxEwiDHkwdS1jom0xU2rxfYCNWqTrrY
+ /P7G96U83S/7Hqgv9aRrGHqduosNln+mxYcjDc6+wMELbduikZwiClH49/BODT01i
+X-Google-Smtp-Source: AGHT+IHe7nE+L+/gLWVo1nzCQ4FQ2Fff/1NfSIzrS3CZ1RLGiaykyoSWADonfr0exDJuY5wikhwhcusG0OSvFAqc4NM=
+X-Received: by 2002:a05:6a00:4613:b0:725:a39e:ae1f with SMTP id
+ d2e1a72fcca58-725b813e1d6mr5070323b3a.12.1733498518482; Fri, 06 Dec 2024
+ 07:21:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1wbAVP8rwj4E6vmx"
-Content-Disposition: inline
-In-Reply-To: <CAPVz0n2mXefetq38_W-Xo8-2xTKUqxLXjz1MupmdaL8brnayxA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241204175437.185449-1-philippe.reynes@softathome.com>
+ <20241204175437.185449-3-philippe.reynes@softathome.com>
+ <CAEfUkU+peqy0T9mhA++xhrm+6x-_pogkLr_DE2C-yb6QiZkRUw@mail.gmail.com>
+ <e0a7bcbd-7804-4d50-8d04-95f60cee99f7@softathome.com>
+In-Reply-To: <e0a7bcbd-7804-4d50-8d04-95f60cee99f7@softathome.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 6 Dec 2024 10:21:44 -0500
+Message-ID: <CAEfUkULHtHFQ1d+6RsRRPB1U_aP44pMsQfBpt765m8Tae06FPg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] lib: sha256: add feature sha256_hmac
+To: Philippe REYNES <philippe.reynes@softathome.com>
+Cc: raymond.mao+nodisclaimer@linaro.org, sjg+nodisclaimer@chromium.org, 
+ u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,71 +95,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---1wbAVP8rwj4E6vmx
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 6 Dec 2024 at 08:11, Philippe REYNES <philippe.reynes@softathome.co=
+m>
+wrote:
 
-On Fri, Dec 06, 2024 at 05:09:19PM +0200, Svyatoslav Ryhel wrote:
-> =D0=BF=D1=82, 6 =D0=B3=D1=80=D1=83=D0=B4. 2024=E2=80=AF=D1=80. =D0=BE 16:=
-20 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > On Fri, Dec 06, 2024 at 08:01:15AM +0200, Svyatoslav Ryhel wrote:
-> >
-> > > In case DM drivers probe earlier than board clock setup is done
-> > > init of basic clocks should be done in CAR driver probe as well.
-> > > Add it to avoid possible clock related problems.
-> > >
-> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > ---
-> > >  drivers/clk/tegra/tegra-car-clk.c | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/te=
-gra-car-clk.c
-> > > index 9078253d100..4f8405328a3 100644
-> > > --- a/drivers/clk/tegra/tegra-car-clk.c
-> > > +++ b/drivers/clk/tegra/tegra-car-clk.c
-> > > @@ -111,6 +111,9 @@ static int tegra_car_clk_probe(struct udevice *de=
-v)
-> > >  {
-> > >       debug("%s(dev=3D%p)\n", __func__, dev);
-> > >
-> > > +     clock_init();
-> > > +     clock_verify();
-> > > +
-> > >       return 0;
-> > >  }
-> > >
-> >
-> > Is this called before arch/arm/mach-tegra/board2.c::board_init()?
-> > Thanks.
->=20
-> It does if the device uses pmic with dm driver and has any of pmic
-> regulators set as always-on or boot-on
+> Hi Raymond,
+> Le 05/12/2024 =C3=A0 18:11, Raymond Mao a =C3=A9crit :
+>
+>
+>
+> *This Mail comes from Outside of SoftAtHome: *Do not answer, click links
+> or open attachments unless you recognize the sender and know the content =
+is
+> safe.
+> Hi Philippe,
+>
+> On Wed, 4 Dec 2024 at 12:54, Philippe Reynes <
+> philippe.reynes@softathome.com> wrote:
+>
+>> Adds the support of the hmac based on sha256.
+>> This implementation is based on rfc2104.
+>>
+>> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+>> ---
+>>  include/u-boot/sha256.h |  4 ++++
+>>  lib/mbedtls/sha256.c    | 38 ++++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 42 insertions(+)
+>>
+>> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+>> index b58d5b58d39..77dbcd4553a 100644
+>> --- a/include/u-boot/sha256.h
+>> +++ b/include/u-boot/sha256.h
+>> @@ -44,4 +44,8 @@ void sha256_finish(sha256_context * ctx, uint8_t
+>> digest[SHA256_SUM_LEN]);
+>>  void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+>>                 unsigned char *output, unsigned int chunk_sz);
+>>
+>> +void sha256_hmac(const unsigned char *key, int keylen,
+>> +                const unsigned char *input, unsigned int ilen,
+>> +                unsigned char *output);
+>> +
+>>
+> Shall we have an inline function for the case if mbedtls is not enabled?
+>
+>
+> you're right, I should manage the case where mbedtls is not enabled.
+> But with you're feedback below, the function hmac is always defined (with
+> or without mbedtls).
+>
+>
+>
+>
+>>  #endif /* _SHA256_H */
+>> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+>> index 24aa58fa674..1b9fc1a8503 100644
+>> --- a/lib/mbedtls/sha256.c
+>> +++ b/lib/mbedtls/sha256.c
+>> @@ -8,6 +8,7 @@
+>>  #ifndef USE_HOSTCC
+>>  #include <cyclic.h>
+>>  #endif /* USE_HOSTCC */
+>> +#include <string.h>
+>>  #include <u-boot/sha256.h>
+>>
+>>  const u8 sha256_der_prefix[SHA256_DER_LEN] =3D {
+>> @@ -60,3 +61,40 @@ void sha256_csum_wd(const unsigned char *input,
+>> unsigned int ilen,
+>>
+>>         sha256_finish(&ctx, output);
+>>  }
+>> +
+>> +void sha256_hmac(const unsigned char *key, int keylen,
+>> +                const unsigned char *input, unsigned int ilen,
+>> +                unsigned char *output)
+>> +{
+>> +       int i;
+>> +       sha256_context ctx;
+>> +       unsigned char k_ipad[64];
+>> +       unsigned char k_opad[64];
+>> +       unsigned char tmpbuf[32];
+>> +
+>> +       memset(k_ipad, 0x36, 64);
+>> +       memset(k_opad, 0x5C, 64);
+>> +
+>> +       for (i =3D 0; i < keylen; i++) {
+>> +               if (i >=3D 64)
+>> +                       break;
+>> +
+>> +               k_ipad[i] ^=3D key[i];
+>> +               k_opad[i] ^=3D key[i];
+>> +       }
+>> +
+>> +       sha256_starts(&ctx);
+>> +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
+>> +       sha256_update(&ctx, input, ilen);
+>> +       sha256_finish(&ctx, tmpbuf);
+>> +
+>> +       sha256_starts(&ctx);
+>> +       sha256_update(&ctx, k_opad, sizeof(k_opad));
+>> +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
+>> +       sha256_finish(&ctx, output);
+>> +
+>> +       memset(k_ipad, 0, sizeof(k_ipad));
+>> +       memset(k_opad, 0, sizeof(k_opad));
+>> +       memset(tmpbuf, 0, sizeof(tmpbuf));
+>> +       memset(&ctx, 0, sizeof(sha256_context));
+>> +}
+>>
+>
+> This function seems to be generic and should be located in lib instead of
+> lib/mbedtls.
+>
+>
+> I have looked the function sha256_csum_wd and I have seen that this
+> function
+> is defined twice, in the file lib/sha256.c and in lib/mbedtls/sha256.c. I
+> have done
+> the same to have the support of sha256_hmac with or without mbedtls.
+> But I think that we should avoid to duplicate code, and we should clean i=
+t.
+>
 
-Ah, OK. I'll wait and see what Simon has to say next, thanks.
+Yes, common functions like sha256_csum_wd and sha256_hmac should be
+moved to a new file (e.g. sha256_common.c?) that can be used both enabling/
+disabling mbedtls.
 
---=20
-Tom
-
---1wbAVP8rwj4E6vmx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTFRAACgkQFHw5/5Y0
-tywUBAv/XW4agf8/4pb9OziVy+SPSERHEeGpS4KxpZ8HpdXl+29tS7+yr47mEem8
-Xped5DkzLqQpK/z0kbAY7h+CvuQEb6IoT+dJtgaoA79G1JKYNhIFGfBDGd8L8OxO
-NB7MybUsoHPlMx6Rn8ROR1cYobnQAlvpCSf0TCfERZUEsiojrCkgmh0APXw+Urmn
-TQYrnNxTXEndZMyLeQGRhlqAjs7qcbjPYY4ZZtCUx0CY1DpAiEaYDRMsDhlAwjHb
-YsQ6TCRzW/gMaBSXll9EL2JVOYX7HJHnkQCs1Lp5ISLVzB2ZUGSH7wgoTlKaIyXh
-dE3MDlEZIIe+cuzftDFIR0a/dmVmuBykaDCFpDIzjrw+TOiWRwYBof2Uz+s47bYQ
-KtS8Iu5utncE4Q6hmdI3ITcoipeIBxb2WUi5DbFlWA5fcYI5FuZXgz05lkptH7es
-h2rBccRBeBVkw5C3L1nxEwhGiCEwluRPX1e+VDa3qDe/aCIpECxfVgCGi4a0ZT5a
-x8ud2/oM
-=/Jq5
------END PGP SIGNATURE-----
-
---1wbAVP8rwj4E6vmx--
+Regards,
+Raymond
