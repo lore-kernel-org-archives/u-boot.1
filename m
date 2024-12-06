@@ -4,165 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB502E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9795E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BBBE8932B;
-	Fri,  6 Dec 2024 15:00:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
+	by phobos.denx.de (Postfix) with ESMTP id C9B1E89608;
+	Fri,  6 Dec 2024 15:09:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="LcHHyPTM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GVw+zXOU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 789E889581; Fri,  6 Dec 2024 15:00:37 +0100 (CET)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A327689610; Fri,  6 Dec 2024 15:09:01 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45DE789274
- for <u-boot+nodisclaimer@lists.denx.de>; Fri,  6 Dec 2024 15:00:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=softathome.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5CCD189608
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:08:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=philippe.reynes@softathome.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=bgb8gFeRP+IpFmEmOyUz08s5n40cgKi6o8+RpYaBXy7Q317aGTbhDwWo1mSWE3vQTeSaLHGKL1PUclEp9lFYUpAYpgffRi8ycVxiwHGOzSO0hy2sPzvkCi3Drg7rhljjAkfIquES5PnHLM3+4X9rKUPm44c6X61KkHYHXSay4xo+0UDgfYGDbtBBaX7qJTZmtEG36R88dZMqfp9kvB/5XrEGANxdOb6H2olJyWOB9qV7wsFN+xSoCADOyQ0BBj7iYu2H8BYLoFNXi67nvKTDLFcBbOSULd4OOVw+nKLXvg7EkXDzOxDqhxcdagvcL5vmqnzx3sDVBzFMu5u2iL4wsw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZqF5SFX1XX0wPQySJQVSITgJcZjU3aOegYQgi2GajYc=;
- b=t8/F6+VtY1NiLdmWUmQk9PPprUtRBljx65hIwKqgd/E+hd0uja9wBKdzXMxQA+bVIgjaZwHxTL08jwQiQBk1V6uHMKIo9KqRVB5PRFUjfcv97uTr+WvWjODH6nfmLkwGi5mROCwXdih+IyZnEhgJy3obUAD/soLDbpG8tWcfkAVxqnyc75zrVicYsRuYNXhy9/mE88/JoZkKFT5J5Fi+Sl6Dgzt8DIKCfPsc+5ij3YRZKh6tcnNI835/yjcbwcj9MXCNYkMJVGPHmY5AnDcFdIs6AZAGt0Wa7adz2L40H0sKCgPXcDcsJIXCbUXb84Kfx1gyniGax4V8W0RcDFsVSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=softathome.com; dmarc=pass action=none
- header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6d8918ec243so21595976d6.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 06:08:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZqF5SFX1XX0wPQySJQVSITgJcZjU3aOegYQgi2GajYc=;
- b=LcHHyPTMAOXpY13m/cbwuK6UjLJfdi1JlaD6JuJ8iNMy6bfuir3sJvYxgs4CPSnQnEarbA3Vm4UoCFvyJ2mxWOHQYyMeoifZDV4ndWTZe30qDMJPSHYrxe4iDFQ4OTFjrvXt98S9HiV1Wmd8vDGWi/MP+cHAOb+abSntdzkGK6qAj5X1j/ZdKciG4lmSFWnZd+/yzjGW7PKuUcej98PMkItxpMS2U5fGwYUxE/aoSoqDNaDJm8GcrOOYu5DEYDdp2NjP/h5d6HukJ6l3hjf81+PiGUbPu/7FrK3QZzf/vMGl5+Mp5DtUlI8IBcwW0CfQUhLlhCAYZSPaEQViWf+uEA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=softathome.com;
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
- by PASP264MB5902.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:49f::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.12; Fri, 6 Dec
- 2024 14:00:33 +0000
-Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::28e7:f006:fbc2:3f27]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- ([fe80::28e7:f006:fbc2:3f27%6]) with mapi id 15.20.8230.010; Fri, 6 Dec 2024
- 14:00:33 +0000
-Message-ID: <86e4f4c0-8214-447f-9b9f-5749b79b3f56@softathome.com>
-Date: Fri, 6 Dec 2024 15:00:31 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] lib: mbedtls: sha256: add support of key derivation
-To: raymond.mao+nodisclaimer@linaro.org
-Cc: sjg+nodisclaimer@chromium.org, u-boot+nodisclaimer@lists.denx.de
-References: <20241204175437.185449-1-philippe.reynes@softathome.com>
- <20241204175437.185449-5-philippe.reynes@softathome.com>
- <CAEfUkUL=wrwVbVO9ke-XAfK+4qMro-wNCyxaUg-GzaN-5T4R8Q@mail.gmail.com>
-Content-Language: en-US
-From: Philippe REYNES <philippe.reynes@softathome.com>
-In-Reply-To: <CAEfUkUL=wrwVbVO9ke-XAfK+4qMro-wNCyxaUg-GzaN-5T4R8Q@mail.gmail.com>
-X-ClientProxiedBy: PAZP264CA0105.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1fb::14) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1d0::9)
+ d=konsulko.com; s=google; t=1733494138; x=1734098938; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nF9UhGhtb77M+wgVGpfXaldb1p7+8qAXraHzfJWvTq4=;
+ b=GVw+zXOUSCIAap3OfJk5/6sCQQZahIY0jHuBKJvS3gy9Iir2pJtp3vFXYvuwnKg6JY
+ RNC6FJ8NBUShEL5ozUko8aUj/oJW/O/74VHuNMgnLgG0NWg8ah6LUCG7LFugbklkjHeY
+ niBBLdKkL6f53lEVfPKX8eEggFvk/mEY7fYGQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733494138; x=1734098938;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nF9UhGhtb77M+wgVGpfXaldb1p7+8qAXraHzfJWvTq4=;
+ b=CewOMGuzKeXW8lRMCOixrsQ2FTEPUUdn17HpFScFKA+PoHYV03kSyRChXo6VFvD6Dv
+ ajgCJOsHzO1diyK/OkI3RHUfgd4N1CY//MEHRx/ONa3N4atmSWLAuHJP4herTOZ4mMXj
+ rX/yyyMs9gwEpXjyLnmDPxprIVBbp55qf+iyXwzelG6YyWo1YPtRukWF3efS8Cc6/EKy
+ 7wheSpWad/WkMI2zGVuUROcMAq1Pm0U6lY/FkibIwbtIz+NDCGqqci9Ivs5ueRxe8wud
+ 2Bjnd9T5hfUbJivEQk5n/2gJL2e4VSfpL+C6uKqgKD/6MVisTPI80sqIqkigN333ArL1
+ CWMQ==
+X-Gm-Message-State: AOJu0Yzih4lkI9HG89uAdKgnay+9Y6Sfglkv2Q6cCdjbTXGSy9AOURUF
+ c1d/lu6xy4DOcl62i2Khgf503mcDtmT4zT0Y7llipGINZQUxpDYYPpQfDXBfrgo=
+X-Gm-Gg: ASbGncsdF5mXnIygeq1IngMMosB0IF8wJeq8Svijumqn2bVuB7mEjPBMZ886XrE9Tzv
+ A9/UkoyKZQD8QG4waRHFu+9wjY5Lp/cVb3wPwNJ+gQRjD0xaGKCda1WknbnwLbl7mGDLjnPqgM+
+ w/i4LEWSvqSjpGhy3NyfrwS90WLCg02I6Abt3aR1NoODmpH4VQcAkqWOAUQsqYQXWHQWxstGK9S
+ 3Pv7XVseYZs8Chj13mOcs56WQg3SblrtBin5QGMIuQGOI8iAw==
+X-Google-Smtp-Source: AGHT+IHO2w8A5ok4c4ff9TftGQSprmqtV3xQdjWjnIRWjbwP5SFjU3rJ9aVyEY/E7N3iE5H/uOBxIQ==
+X-Received: by 2002:a05:6214:cc9:b0:6d8:7e5d:ef1c with SMTP id
+ 6a1803df08f44-6d8e7125be2mr50639896d6.21.1733494138139; 
+ Fri, 06 Dec 2024 06:08:58 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d8da9fe7f5sm19124126d6.80.2024.12.06.06.08.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Dec 2024 06:08:57 -0800 (PST)
+Date: Fri, 6 Dec 2024 08:08:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH 0/3] rpi: Tidy up booting
+Message-ID: <20241206140852.GO2457179@bill-the-cat>
+References: <20241206131113.2865416-1-sjg@chromium.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PASP264MB5902:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1d8e94c-a834-40dd-0f50-08dd15fe59d9
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|10070799003|1800799024|366016|8096899003; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aWM4LzU4SDlTejZEbVhnc0pqYkJVYi9YcDcveE1jbmZwWWpDWnc4WG5INFk5?=
- =?utf-8?B?Mk54UUtkMU4wN0swVVYzRFdLeWg1V2ZVbHU2WUo5akNQenAvV09lVG1sTExB?=
- =?utf-8?B?MExGR1dNeVZ3RWU4c1lkYzFIL1FHa2lIODlMSFBCUG9kOFZWVjlVTTl1SVNs?=
- =?utf-8?B?RlhQNWd1TDZOTTd5bFNUbG5JcHBJN2RpQ2NnZzhvUUY1UkFCK2M0R3dJK2Jy?=
- =?utf-8?B?RE56dGRiZklxMWcwOExUaDBzL25UTFFMUmsreXI4cHBBc1VuWDFrT3ZGa1Fh?=
- =?utf-8?B?cVVsLzJLNnhkYjB4TUFOaWpGakZhZmF3bzZHVERpNS9lZzNKQnlDSEk4aEVk?=
- =?utf-8?B?akozRnpuaC9yR1ZuUEtjdnZUSjJlNklJQ3V5VkdkN1lvZWVpbDUydHAxZ0FL?=
- =?utf-8?B?S2Vqby9QeHlYZEJIbXJwZHJYM2dyQThaT2RkUXFvZ01QVGVRV0FhK2hMSmFB?=
- =?utf-8?B?YnNFY2tGVjF2cmQ1bjVCZTdWVWYwMzN1eXNjd0d4ckxGTm0rUUo0N0VrTEpr?=
- =?utf-8?B?ZUYxMm5QUnlZSjFBMHNWY0RRYzZ0UUhqZFd3Q1dMOU1CTG5EcnZiQnMrZWxJ?=
- =?utf-8?B?YUJVbTlYMythakpJdTE1cFZvaHVTbWRHQUloUVpRcmcwVXI2TlBCMFJ4Nnhm?=
- =?utf-8?B?c2lnMElRNWhSRVpORG1mSVo5bTNNQm85WUJnMlhuRk5QelhyTTIzdGpYNjVu?=
- =?utf-8?B?M3JzN256a0tkeVZPRlc2UzJMTnhaWEdhajcxRVFFaS9mZVBZM1F0MXpyRVdL?=
- =?utf-8?B?SXd1emxDVVZBVmZNR1BpcGNLRzdtczk0SFI0MVJjSUVRWTgraUVvd0FEbXl5?=
- =?utf-8?B?Rko1OUlFbUtURE5rKy9kaFFUTk44V25QZE5hc1ZDN2xnWGxZUU14TU1XL1Qy?=
- =?utf-8?B?Y1RDL0tZa3RSU1Z1Rlg2T1pLOE5wazhPNUdSZkJZWjljWFJjRW1xMndJby8z?=
- =?utf-8?B?RE01ZUFWTVl5UFB5QnlDV1dUTEhxSko1V2N2cVFJcTZ4WThCVG42NDZPOUF6?=
- =?utf-8?B?dTBzVG0xVjlvanBMK1dsRmNZcWVSMThjbjhsdEp0L1ZjblZGT1ZQbmxpankw?=
- =?utf-8?B?ZXhTOFNOTnNZaExFUllab0kyNG1wNC9PU1ZSRUlCaGJjeHlFWTcwN2pjOXJT?=
- =?utf-8?B?c0VCem4xL2JlQ3VldnBDd0lKUVoyT2loTFdyTXd0QU53d2tRQWJDVTBOYlM3?=
- =?utf-8?B?RUl3UTM4R2lKelo0eWEva1MxZWhHMXFHczZ4dUZLUGdORXVMaHIzYThITi9z?=
- =?utf-8?B?MFl3ZWpUSldiYXFta09jUXRwL25oMlNtNVpPc3JFMUNQaGgrcUU2NC85YUMr?=
- =?utf-8?B?UklSTCs3ZVVlRE5XNnNtcUZ1M2JSTnV0c3JUTWloYUJONW1PRGJUMGlQaHFQ?=
- =?utf-8?B?R2dsOUxqUjJSN1EwUEJ1N1hmT0FiSmY0RXZMV1c0aHlvM0ErMG1lTXBmY3ln?=
- =?utf-8?B?Yk84RWJPOTdlRmh5Z0t6cWpPMlF0ZUxIajMzYmhzU1VUVXlaZTJ1VjlFVjBD?=
- =?utf-8?B?d3cyOG5aeWs1bU9yZVo3YlNkMnBJOUE5R3FGcmZwNFU3RnFCZ3l3bWJ1ckZh?=
- =?utf-8?B?UGJpVU5PYmtVTzZ4alVNOTlZd0g5cWRNR0NoelRueFFBZzVNSEhNMW9tM3U1?=
- =?utf-8?B?VklScmIxSWV3anRDL0xFamwwczc4NU9BZHZPQ0xoM2N2VUhVcDZqNW0yK0Ja?=
- =?utf-8?B?S0NJcklpRXErbVVNYTRwSlVnejNTWWhFZXVUeURNUGNUam5CZ044Q2k2cjBU?=
- =?utf-8?B?b0hlTis5STR6NnlEcnZtckUzZDQvdkE0WFVkSHk0VnlocFFVYUlrc2JQK1Bn?=
- =?utf-8?B?c0o4UG1QUlpJM1RzVXhuQT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(8096899003); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NHRvZytwbDBEUXpZb1lTM0lCczBacTNLVFJoRnlXcE82UkFDbXkxQ2h2aGdr?=
- =?utf-8?B?cHNySkFWS2s3VzJXZU5uVjhXaGx6K1pWSUZZR0dTOG15MnV1bGdyY2pPSVdr?=
- =?utf-8?B?UnhVaXpIYjh0NnNQYzNDTU5FcWNoYkJHSEpJT052bDBUbEIzdUdGS0thRDJo?=
- =?utf-8?B?OUUxOGdRaXR6Y3JnNzRWVEVjWDdKS2RJWmYzMllBN0dCdFYwbXFHUk0ycUt3?=
- =?utf-8?B?R0F5Y005aWR6L3FuaW5JdHAwcUF6VWJjZFkrNnZQd1dNUlFoeWhCS2d3L2Ir?=
- =?utf-8?B?TGtrdEE4YWxjTGQ5SWtvbWJGMjNrTE4rZzlpaG1ZbkxxZjBkazY3SVpyZFdR?=
- =?utf-8?B?a24zazVzWm9mZW9EMGg1dlRETGlBbWdVaG1oaWxsS0dib1NpeUVoWnFYZ2o3?=
- =?utf-8?B?b3EyelpkRS9GYWNhcW1qODczT3dKYk00NGRvMVovbWZOTnRTc0ZpcVJHVmZQ?=
- =?utf-8?B?S3RlWStJK1pSOFJZNHBSeUx1b1J4biszYmp2S2xSM1pYd1Y0Wk41azFFMEdZ?=
- =?utf-8?B?MmhhMEZNWThkUlgzOGEveE55L0w1K3E5OGdNQ09oNlJZSzdKOW14YXFONmtS?=
- =?utf-8?B?SExXemNZMHZTczRTblV2ejRDQ3gwQVFFRks2YmUxbS9velN1SWFHVXE3RGVX?=
- =?utf-8?B?b1lnZ1pBbnJRUDc3TkUyOXhjSXpIT0o4SlpwZWxPenkwQjNqUTkvY0dwMnJX?=
- =?utf-8?B?K0JJVWQxdVJ1azZZelFRY1daWHd5ZEhUd29vTDAwSDQ0WmpIVUVQT3dlczlt?=
- =?utf-8?B?Nk5TOEJOZTE2Vi9vMkcyeENPSzdOYzg4MTJyL1lDaTVnbHhYQ1JPRnMzT2ox?=
- =?utf-8?B?RnJmbGJTZVU0SWY3WkJjSG1UdnVCcyt2VVo3TnQyZDdvdXFKb0NjME0zQ09C?=
- =?utf-8?B?SVBXZ3VnVTNMU3pPalduOXJDNEtldkZYSTNIY0UxWTFaQVNQRXlUczIzTnp5?=
- =?utf-8?B?clRoNzJjSFdYTGJZR1BLQzZlUUxlOHU5b0NBU1k3NGRXZXhKdHFFdU5aQloz?=
- =?utf-8?B?ZXh3ZjN5S0RGRzJRakFRNDB2cm9tSUZlM0pheG5UNjNhb0oreVBTajRCQ3dn?=
- =?utf-8?B?YlFSbnRrSnd6ajhyRjlqZTJTR3FSNTUyNlEwdkJxMFpYZ01XVEEzM3lsREhG?=
- =?utf-8?B?bUlkNFR2Z2kyeHJWaEQ0blNpZE1ZMHYzK09KMFpuYUVkS0dlU1NGdUdxYk9o?=
- =?utf-8?B?M08zZk5kMklERUxrR0FiS0pZMnhPeCtQRTFUWTJseWZJUEExTXFsUEIzaHZ5?=
- =?utf-8?B?RTFGMzBzTEd0bzdUUWhhOXNqRVI5MHFYN0F4VGg4cHk0Vlh3UFZSSFFjVWda?=
- =?utf-8?B?eUVWeFgya0hsOUZEQXpYT2ZKdCswWWNZem1UYnM4QjVNTEV1ckpJd3BnS2Uy?=
- =?utf-8?B?R1RtUUN0QjJYOVJ5OFI3a1h0dHhJQk9iZ0JmSER1MldCTTYxbitBNHRBVGhR?=
- =?utf-8?B?MVhCaTUybGExcnFTeGdMYitpaXRaKzRyMWJvck0xejZKS0hVaXE4TlJtM1h2?=
- =?utf-8?B?RjBlbXhiTUdIeEVnS2RKelp5Z0pqaFA5VGoyOUJoeVlrcmZzTUNvcUtjQm5t?=
- =?utf-8?B?a05hSS9DQmZaV2JhcEVqV2V3eUlKZHpXSDZyK0dkeG9LN3d1VUN3Q1VheHE5?=
- =?utf-8?B?T0ZiMytCdWxvTU5EZExZZC9FM1ErZDY2QjN2V0V5aU5uV1phWVZqV3JQMHBh?=
- =?utf-8?B?VTdXNnUvdm1BQ2M0RUFFb05rMmYrYnMrY3VZYzlndDhkWUVQOE1nQ0VIVFI1?=
- =?utf-8?B?WUZlVTdIVkZrcnRNV3VWUk5Bc2hYRlIyTUwyaWtYN2hNSGZzWUczNlh5bTFq?=
- =?utf-8?B?WGhsSWNtbWZ0U1dYK0crQVp1YVpVSjBqTWw4L2FnMjBlVW9XR253SHF3S1JI?=
- =?utf-8?B?VUlqWUw4dzJndWZGY2hNUDIvNlRHSnlpTDVJbVFYNENNRTB4Z1ozTW54blAv?=
- =?utf-8?B?OEtpc2oxc3k5ME4xc0dndEZSYS9MQXdoRWxSS0xGaUNVdTVtc3VrMHdENUtC?=
- =?utf-8?B?TzlmaThkUnQ2NkhZYUpsMGxZdGUwRFpvcExrWFBHTHg1aGRUNVVwR1FzcWJE?=
- =?utf-8?B?ZGJqTmh6OUc4NFRMZFFrelQxbjZ1bWZtZ0R6aktCZnN4VDFIU09UWkNWUXg4?=
- =?utf-8?B?eWs5TWZZbi9ta0sxQTd4aGFCbVZqVjBDOFBONHVHczRqQnFaTGdJdUFUWGZ6?=
- =?utf-8?B?M0xmZTQrOTJSSGN0a24zMk9zQ1JpS2dNRXNFN3RDY1FxUzR6YVY2MjVqYkJv?=
- =?utf-8?B?WEtFRk83ZG9VaUo3b2JRdktHTWNnPT0=?=
-X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1d8e94c-a834-40dd-0f50-08dd15fe59d9
-X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2024 14:00:33.2532 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fIsQey4el6h5S50xiEvfGzXbt/C3fWwGaI3iti6EThCziWBfI9RUd+9Ni3aRHlzmfItxlayEhygD68rb9e2odpqC+AXj1A4G3URZKWm4ekQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB5902
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OfMUtPZOxik/FOvQ"
+Content-Disposition: inline
+In-Reply-To: <20241206131113.2865416-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,95 +107,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
 
-Le 05/12/2024 à 18:18, Raymond Mao a écrit :
->
-> *This Mail comes from Outside of SoftAtHome: *Do not answer, click 
-> links or open attachments unless you recognize the sender and know the 
-> content is safe.**
->
-> Hi Philippe,
->
-> On Wed, 4 Dec 2024 at 12:54, Philippe Reynes 
-> <philippe.reynes@softathome.com> wrote:
->
->     Adds the support of key derivation using the scheme hkdf.
->     This scheme is defined in rfc5869.
->
->     Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
->     ---
->      include/u-boot/sha256.h |  5 +++++
->      lib/mbedtls/sha256.c    | 18 ++++++++++++++++++
->      2 files changed, 23 insertions(+)
->
->     diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
->     index 77dbcd4553a..0a6e309e3ab 100644
->     --- a/include/u-boot/sha256.h
->     +++ b/include/u-boot/sha256.h
->     @@ -48,4 +48,9 @@ void sha256_hmac(const unsigned char *key, int
->     keylen,
->                      const unsigned char *input, unsigned int ilen,
->                      unsigned char *output);
->
->     +int sha256_hkdf(const unsigned char *salt, int saltlen,
->     +               const unsigned char *ikm, int ikmlen,
->     +               const unsigned char *info, int infolen,
->     +               unsigned char *output, int outputlen);
->     +
->
-> An inline function is needed when the build options are not fulfilled.
-Ah yes, I forgot to manage the case where sha256_hkdf is not provided.
-I will be fixed in v3.
+--OfMUtPZOxik/FOvQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Dec 06, 2024 at 06:11:10AM -0700, Simon Glass wrote:
 
->      #endif /* _SHA256_H */
->     diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
->     index 1b9fc1a8503..c38e3e5818c 100644
->     --- a/lib/mbedtls/sha256.c
->     +++ b/lib/mbedtls/sha256.c
->     @@ -11,6 +11,9 @@
->      #include <string.h>
->      #include <u-boot/sha256.h>
->
->     +#include <mbedtls/md.h>
->     +#include <mbedtls/hkdf.h>
->     +
->      const u8 sha256_der_prefix[SHA256_DER_LEN] = {
->             0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
->             0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
->     @@ -98,3 +101,18 @@ void sha256_hmac(const unsigned char *key, int
->     keylen,
->             memset(tmpbuf, 0, sizeof(tmpbuf));
->             memset(&ctx, 0, sizeof(sha256_context));
->      }
->     +
->     +int sha256_hkdf(const unsigned char *salt, int saltlen,
->     +               const unsigned char *ikm, int ikmlen,
->     +               const unsigned char *info, int infolen,
->     +               unsigned char *output, int outputlen)
->     +{
->     +       const mbedtls_md_info_t *md;
->     +
->     +       md = mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
->     +
->     +       return mbedtls_hkdf(md, salt, saltlen,
->     +                           ikm, ikmlen,
->     +                           info, infolen,
->     +                           output, outputlen);
->     +}
->
-> Missing `#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)`.
+> This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+> ramdisk, by expanding the available space.
+>=20
+> It also tidies up some strange behaviour with the provided FDT, where a
+> separate pointer is maintained to it, even though U-Boot has copied it
+> and placed it in its own space. This avoids strange bugs where it
+> accidentally gets overwritten when loading a file into memory.
+>=20
+>=20
+> Simon Glass (3):
+>   rpi: Update environment to support booti and large initrd
+>   fdt: Allow expanding the devicetree during relocation
+>   rpi: Use the U-Boot control FDT for fdt_addr
+>=20
+>  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
+>  board/raspberrypi/rpi/rpi.env | 10 ++++++----
+>  common/board_f.c              |  6 ++++--
+>  dts/Kconfig                   | 11 +++++++++++
+>  4 files changed, 29 insertions(+), 18 deletions(-)
 
+My feedback here is the same feedback I gave the last person that wanted
+to update the Pi addresses, and I forget if they came back and did that
+(and it's in Peter / Matthias' queue) or not. Disabling device tree
+relocation is a bug and must be removed.
 
-Again, you're right, I forgot this #if ...
-I add it in the new version v3
+After that, given the range of memory sizes available on Pi platforms,
+allocating the kernel / initrd / kernel decompression buffer at run
+time, ala mach-apple would make life easier in the long run.
 
+--=20
+Tom
 
->
-> Regards,
-> Raymond
+--OfMUtPZOxik/FOvQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Philippe
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTBXAACgkQFHw5/5Y0
+tyzUjwv9EyBlav+nhnSDElsvI/Y/EVsOy/jACfi7lBH38jwkguOOtXKutJE9FW8s
+kjRMDx5DqUOvVYEFwSUcgq/XYTdpi5ZoOCfcVrCpZ+u8OpZ7dD5TKwYR3/UKa889
+9qrLMbABhBk4kWpI67syRBpVWAZLuh9+e2oAXcnL0TyD8cwBYK/BmD8+CQj0bBg/
+rUkfA9FNeWMi0hcUbxvcBTy0/W3LNOKwkZnZJiVubPnRpWKDffn9z5U1MMdrc6pn
+y/QNyGO+jckEdQDfTdEFjgzeXnC4qAjw3u8vBrVTFoyajrPr1Pv54X+S/F58B6R6
+qPyNh2aS6bhOiKjJ2napdjvfWVLios5zDFb5zABUQ/gU8WWdBfaELCgTacVvRqPE
+9pKgBe5VlO7irvseB97RRKm6yhigNi+vZ7j5ZlYbxTg+73PuEXMczdM/DM7v1XKB
+SFasjxTINLac2sKLNNkx8Xt9C1qTHQe0FaSaxim7vNIhqwCLmSVrGb07PBMb9cP+
+xWacyhUC
+=lWxm
+-----END PGP SIGNATURE-----
+
+--OfMUtPZOxik/FOvQ--
