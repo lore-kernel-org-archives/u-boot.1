@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF8AE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:17:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F478E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:18:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F648974F;
-	Fri,  6 Dec 2024 20:17:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA38F8921B;
+	Fri,  6 Dec 2024 20:18:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n0v0dZDR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZX9hzswi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AEED89376; Fri,  6 Dec 2024 20:17:54 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 262E388F0C; Fri,  6 Dec 2024 20:18:06 +0100 (CET)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 846358921B
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:17:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8DE28921B
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7fd21e4a9c0so1588856a12.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:17:51 -0800 (PST)
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-7fbd9be84bdso2364454a12.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:18:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512670; x=1734117470; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733512682; x=1734117482; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t/w3Ktjts7jc/rvxgeZsT32WDRW0mA2lkiErzlKCmbY=;
- b=n0v0dZDR0uoX5EfYFXSTnhlzlfQ2mEaZt1SPwJogh5GiP9kxJSYqWhWwdeIoePOeBE
- 1DjkIFHUaDefomJKS8Htmx2EDw4PfZDdP8PKNQog1YlGpTOaa+cKI1b4aL9HM4nWge2D
- fwuwDCGG44SPkzt9Fp1CmV4JWC3ge5mzaMJQk=
+ bh=/3ywdM7yXh6y/8i5MleNnrOMBhbaUzzsHnExLeIf7ZE=;
+ b=ZX9hzswiRZ2vt73FZQZ9l7MV79QVZcR0vFHpnSGI0BCNNeQk3QZmsVWUE7dDbAaqGl
+ A+WOc+VudUD41bmqGScvNTJJvg3FCOCp2uxyb0zZip89GXJmtyJSmzNevtW6uZXDlItq
+ qaSfbpewKZNpmQZxCPIRXgfC1wBu+N3aeR08s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512670; x=1734117470;
+ d=1e100.net; s=20230601; t=1733512682; x=1734117482;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t/w3Ktjts7jc/rvxgeZsT32WDRW0mA2lkiErzlKCmbY=;
- b=cpwFA4s7+r9ZxYiw57MxPGwdfcrzGmMFHNGGtIb9Ozj3JkxZWRnHTbJC8UagYiq9KS
- LLpc/0rDG87r4F2sefRVD3p+JrrrjgfnVdRYdS8aoK/CO3DGFJ5zgbggT+ToDf/t1FA4
- X68GoTGnJz8t2d/SUEcbRThV8ziV/U0bdu/HiWt6ew+I9tXPhvbpC7Tk8m6gghNMwCoF
- lX5B4udQvBDoJCsAbwY7J2oDQRAKPhoxPUW6/9Rtp0M05J4qR5vCEBvX0PQFrO03DsMv
- NR1LMYTbjs256qUlLbCyN4+YYoVYs/pmkbbAzYYVkG0c1WkiVeBhd8hhEtqWekJdJC3w
- G1mg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUc54tAOq1nwiblFV+xMzM5xrv8dnux1e3oJap5sQPnqbTO1tHQqAbsI8zjufVce9fJ9hdrgw0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwhepDIaZrPY+PCZ65vsU7FxsCMeHBDHhnV/hC/oPNo2kVf1UE0
- K3k9NrJwg+5tALbVBpMnMwIDE7PH1LAbOyc6dM5SgenlFWSrE6vyap9yEYrvsD/KxBpsybZzQ3b
- NeA+05JSA+5lxuI0UrnCkzQrot45CLrhP8P+m
-X-Gm-Gg: ASbGncsqaCHIggRLtjCvg2JDQWbanbMWGapghYgd9UfA0FKKjp6t3paBT8Dqxi+eM8X
- zAoWljJHBSYlcttRwpgnmBInfjjyMWQsd
-X-Google-Smtp-Source: AGHT+IGt6lF9R8acuAdfHCDq5FQ+Mpfu2XSUbWnCEii8NScgZZYr80aHN7fPekfGMWWPOQvTIQBm4Ba8kE+ORRD+96U=
-X-Received: by 2002:a17:90b:54c8:b0:2ef:2d9f:8e55 with SMTP id
- 98e67ed59e1d1-2ef6a6c11d3mr6174956a91.17.1733512670055; Fri, 06 Dec 2024
- 11:17:50 -0800 (PST)
+ bh=/3ywdM7yXh6y/8i5MleNnrOMBhbaUzzsHnExLeIf7ZE=;
+ b=Zb2vm2i1d43NxjNV4EBk7ASQS3hOXwwuax0TSvqiGjIJfQVH931CeWrIZ6BkY65iQA
+ DXIgf+1TDRdM1ilAcncfbOJ3MHqLClxnIcLX+8Yu2jozBT6UPxHV9C+A83WXa92tM8VL
+ gcMJxUdWl6I7gB8c1QiYXeVJrLTbm0m3Y8Gut/8kQqEpuhuNVZ2K4HCq3DbyOi2ZpopG
+ 0r6J9BapuFcx7Gmeqo7sC55YwmAQoBX3v5bwRG5HOJBnEu7/W9VTqO9gXVmOQrAkxtTv
+ YfyVlZ+9WmGV0HoT1MbHjD9NTwe3xk5d/nDLaaF6gC1ZFU85MhGbJJ6q00nWekxY8uNY
+ PAHA==
+X-Gm-Message-State: AOJu0Yw5RTXDFWbJTmLzRusIO8t1Hg3T6am9SHgKGxnFU6uFaacv41LD
+ ETjA+3Vvyx9FD742rZpzec/RzMu6N6jyfSjyBUybN4hx7BZaWz4/PlZ5kqgeGoUbxNDaoxjOxbf
+ 98KsTw/aB7ON43Um/IQcf/Rmt8YTM5HkLrFQx
+X-Gm-Gg: ASbGncvg8U2DuCB3Yo1mqF7foTzypsZrIrembqi0uLHhJF+kdr117YCCOrzwxq/BEQA
+ FwRz2jyG3UU3vTBOuilyBw8XTD3Ytmqnl
+X-Google-Smtp-Source: AGHT+IEquHeYGIsNOSSpIXJTLJX2oMdq/YUCDE9QrwWP1YA634YstBuN1bQtYhtzcZ6l1azrMXO5A+pvyP0fmS++VSY=
+X-Received: by 2002:a17:90b:520b:b0:2ea:712d:9a82 with SMTP id
+ 98e67ed59e1d1-2ef6ab10483mr6707964a91.29.1733512682489; Fri, 06 Dec 2024
+ 11:18:02 -0800 (PST)
 MIME-Version: 1.0
-References: <de1b8dbabd5ab7f20d7aac217ec4f5074d39f1da.1728462767.git.michal.simek@amd.com>
- <CAFLszTh6s5n4nzC7UKhFnQuXFOucGA6amjN1eV4NqwjV6-NEeQ@mail.gmail.com>
- <1048553d-4818-4aba-8bd1-c958dc0b7c5e@amd.com>
- <178d29b0-d82c-4b18-a3ed-3d46dcc02446@amd.com>
- <20241101135220.GJ3600562@bill-the-cat>
- <CAFLszTgSX1cn1y3C=QHuVfvVr4486ezaFAL4pmdPAvi6m==Lcg@mail.gmail.com>
- <c5b1aabb-c9e5-42b8-a73e-1ddab887a774@amd.com>
-In-Reply-To: <c5b1aabb-c9e5-42b8-a73e-1ddab887a774@amd.com>
+References: <20241206131113.2865416-1-sjg@chromium.org>
+ <20241206140852.GO2457179@bill-the-cat>
+In-Reply-To: <20241206140852.GO2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:17:31 -0700
-Message-ID: <CAFLszTij49uGbacoUaqP315OZRO_JvHY5yLuAdKEuV3WeO2GFQ@mail.gmail.com>
-Subject: Re: [RFC PATCH] zynqmp: Add binman description for SOM
-To: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, git@xilinx.com, 
- neal.frager@amd.com, Charlie Johnston <charlie.johnston@loftorbital.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tony Dinh <mibodhi@gmail.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Date: Fri, 6 Dec 2024 12:17:49 -0700
+Message-ID: <CAFLszTizXjXnc_P3RHpxbKj5qoEfW_Swrc6V6v6dS7kFUqH9CA@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rpi: Tidy up booting
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,112 +98,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Tom,
 
-On Mon, 4 Nov 2024 at 01:32, Michal Simek <michal.simek@amd.com> wrote:
+On Fri, 6 Dec 2024 at 07:08, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Fri, Dec 06, 2024 at 06:11:10AM -0700, Simon Glass wrote:
 >
-> On 11/2/24 17:28, Simon Glass wrote:
-> > Hi Michal,
+> > This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+> > ramdisk, by expanding the available space.
 > >
-> > On Fri, 1 Nov 2024 at 14:52, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Fri, Nov 01, 2024 at 02:09:38PM +0100, Michal Simek wrote:
-> >>> Hi Simon,
-> >>>
-> >>> On 11/1/24 09:27, Michal Simek wrote:
-> >>>>
-> >>>>
-> >>>> On 10/31/24 19:03, Simon Glass wrote:
-> >>>>> Hi Michal,
-> >>>>>
-> >>>>> On Wed, 9 Oct 2024 at 10:33, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>>>
-> >>>>>> There is necessary to do some steps to compose boot images. These steps
-> >>>>>> were in scripts in layers for a while. That's why introduce description via
-> >>>>>> binman to simplify wiring and remove all scripting around.
-> >>>>>> This should make sure that everybody is up2date with the latest versions.
-> >>>>>>
-> >>>>>> The first step is to create fit image with DTBs with descriptions in
-> >>>>>> configuration node which is written as regular expression to match all SOM
-> >>>>>> versions.
-> >>>>>> Description is there for k24 and k26 in spite of low level psu_init
-> >>>>>> configuration is different. The reason is that it goes to u-boot.itb image
-> >>>>>> which is the same for k24 and k26.
-> >>>>>> u-boot.itb is another image which is generated. It is normally generated
-> >>>>>> via arch/arm/mach-zynqmp/mkimage_fit_atf.sh but this script is supposed to
-> >>>>>> be deprecated.
-> >>>>>> FIT image by purpose is using 64bit addresses to have default option to
-> >>>>>> move images to high DDR (above 4GB). TF-A and TEE are optional components
-> >>>>>> but in the most cases TF-A is present all the time and TEE(OP-TEE) is used
-> >>>>>> by some configurations too.
-> >>>>>>
-> >>>>>> 3rd generated image is boot.bin with updated user field which contains
-> >>>>>> version number. This image can be used with updated Image Selector
-> >>>>>> which supports A/B update mechanisms with rollback protection.
-> >>>>>>
-> >>>>>> 4th image is image.bin which binary file which contains boot.bin and
-> >>>>>> u-boot.itb together and can be programmed via origin Image Selector.
-> >>>>>> This image can be also used for creating one capsule which contains both
-> >>>>>> boot images (in SPL boot flow).
-> >>>>>>
-> >>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>>>>> ---
-> >>>>>>
-> >>>>>> Currently I have this for testing purpose only to find missing bits and
-> >>>>>> pieces in binman for cases I want to support.
-> >>>>>>
-> >>>>>> This patch depends on
-> >>>>>> https://lore.kernel.org/r/ fbed0251437b61a2f7a85596d7403b5b9c8237c1.1728306322.git.michal.simek@amd.com
-> >>>>>>
-> >>>>>> ---
-> >>>>>>    arch/arm/dts/Makefile                |   1 +
-> >>>>>>    arch/arm/dts/zynqmp-som-binman.dts   | 224 +++++++++++++++++++++++++++
-> >>>>>>    arch/arm/mach-zynqmp/Kconfig         |  17 ++
-> >>>>>>    configs/xilinx_zynqmp_kria_defconfig |   2 +
-> >>>>>>    4 files changed, 244 insertions(+)
-> >>>>>>    create mode 100644 arch/arm/dts/zynqmp-som-binman.dts
-> >>>>>
-> >>>>> I'm pleased to see this. My only suggestion is to use '/bits/ 64'
-> >>>>> instead of the macros, for 64-bit values.
-> >>>>
-> >>>> When I was playing with it some time ago it didn't work but it works now
-> >>>> that's why no issue with it.
-> >>>
-> >>> One more thing on this one. I pretty much dislike that images are generated
-> >>> to u-boot root folder. Isn't there a way that they will be written to
-> >>> separate folder (deploy for example)?
-> >>
-> >> Or perhaps $(obj) ?
+> > It also tidies up some strange behaviour with the provided FDT, where a
+> > separate pointer is maintained to it, even though U-Boot has copied it
+> > and placed it in its own space. This avoids strange bugs where it
+> > accidentally gets overwritten when loading a file into memory.
 > >
-> > Yes $(obj) is where they end up today. I consider output files from
-> > binman to be on the same level as other files created by the build.
-> > Then again, it does end up a bit of a mess, when mixed with the output
-> > files.
->
-> Some cleanup would be good. I remember a lot of discussion about if people
-> should be using u-boot or u-boot.elf. Answer was simple but if output images are
-> in separate folder it would IMHO better to understand.
->
-> > I am not keen on 'deploy' as it nothing is being deployed - also it
-> > sounds like a satellite or military attack.
->
-> No problem with different name.
->
 > >
-> > One long-standing issue is that intermediate files are created in the
-> > same directory. Perhaps we could put those in a binman-tmp directory?
-> > They are necessary when things go wrong, but don't need to be used all
-> > the time.
+> > Simon Glass (3):
+> >   rpi: Update environment to support booti and large initrd
+> >   fdt: Allow expanding the devicetree during relocation
+> >   rpi: Use the U-Boot control FDT for fdt_addr
+> >
+> >  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
+> >  board/raspberrypi/rpi/rpi.env | 10 ++++++----
+> >  common/board_f.c              |  6 ++++--
+> >  dts/Kconfig                   | 11 +++++++++++
+> >  4 files changed, 29 insertions(+), 18 deletions(-)
 >
-> +1
+> My feedback here is the same feedback I gave the last person that wanted
+> to update the Pi addresses, and I forget if they came back and did that
+> (and it's in Peter / Matthias' queue) or not. Disabling device tree
+> relocation is a bug and must be removed.
 >
-> But I think we should try to move also that images which users should be using
-> to separate folder completely. Again it doesn't need to be done by default but a
-> way to configure it would be good.
+> After that, given the range of memory sizes available on Pi platforms,
+> allocating the kernel / initrd / kernel decompression buffer at run
+> time, ala mach-apple would make life easier in the long run.
 
-Perhaps file an issue for this? I haven't got to it yet.
+Yes, of course, but for now, this resolves the problem and I don't
+believe it creates any other problem.
+
+The solution should not be board-specific though. Once I have the
+bootstd files stuff is finished, I believe that bootstd will be able
+to do this and I plan to do this. Then the variables will be unused
+for rpi and we can just drop them for any bootstd boards.
+
+As of now, we have 390 boards using bootstd and 381 using distro
+scripts, so it is progress!
 
 Regards,
 Simon
