@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91940E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:31:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F0CE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 17:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E768963C;
-	Fri,  6 Dec 2024 18:31:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63C1689535;
+	Fri,  6 Dec 2024 18:31:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iLT792D1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IMRIZHuh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DC9589622; Fri,  6 Dec 2024 18:31:01 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 1C621894F2; Fri,  6 Dec 2024 18:31:04 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2291489620
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:30:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4BB189620
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 18:31:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2ee67e9287fso2014048a91.0
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 09:30:59 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ee8647dbb9so1903055a91.2
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 09:31:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733506257; x=1734111057; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=09AL/nhQljpT5PpLlh+vPEPvtTHRLiKj7ughjVtCGIc=;
- b=iLT792D1U+IFXXx/GSCvkw8uGUPEDo8I83+lUT6cRFpxbBq8b0BXWIM6ha1dLwvn8X
- v51WfyLxNCk0nawloohO3OwVf+Gq6yK5Mu9Kl3+fT3h5u53EJb5+nXO2T1QVSW8XWaIb
- m/Jw7eoEHnO1YBVM/72ahQRToAxYgzf/BLZVZvxxKsQCo3kua+n3gWoDIknCKufOjSbt
- BW9BevJ5QFTbhYJnWVoODKa/HeoqcR58456hOCLZNuJjAVcLo6AqXSg50QOztawm9uaW
- r/mc0p+Qoj/JM+9w+NWAWZk9iCCHIz5gkpB/afxn6fO9WY8LD1xxLPoMVAlCZTRSbm8M
- 55cg==
+ d=gmail.com; s=20230601; t=1733506260; x=1734111060; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qOQBipDm6oVcroQ2BZ0+jkSu5LIEWDy0IMHPFcDIbDw=;
+ b=IMRIZHuhqAxRLeCEeVmBHlzKZbgIMV+DjZiyYTwO+hxzpiH+b60wigIZKfMQ1K+3lP
+ NFPFP80mRVdXlpoR0XIxsysKlxeqNXxThVsHsuh0Yan02ZEkG4a+FG8S8hEpaakMWptY
+ +oN8Ji6z9u8lCWQr5NZYR9404YZ8ICYQ3PDLIx5yr3cmg90CyQfbNV9s6G6czWLYFgH1
+ UHsiRNCwSP5hfumpSewuggtDYOG1kDqSW7zIua4gGEYb0sThrr6bM6kZLV44hBYvH3vj
+ 7pXDfVg0t2nCyJxxbSExrQkUVE2T4FovRdzEUPl7jexq7g87nTbWq2sE1IJK/9THM4FH
+ i0ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733506257; x=1734111057;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=09AL/nhQljpT5PpLlh+vPEPvtTHRLiKj7ughjVtCGIc=;
- b=N0Juy/ETtheVfMHeGf9Ha/OImc1njpu1I/JnN/7WHKVcSGxbsQFrreBo96yQYhgWqO
- aaiU41iIw0JtGi8tPVu+kCtaHthVuPaEMghEPQ8kBUIwmWTNmNCA8++JS5NB20j73sW+
- maj7T3aOD93OQX3HutpIpQE+8uQj/0e5yAA3+6X5QbuQ60lgRcDniKRJzYHADGAHAN0m
- XsK7v1+DvfN9L7URDlc7KtmSAs5Fpn0divZNn2ONUvQrijO6PKUWAQAkmxxjaC/sW5qL
- f3/6POLZbyRpmrOc/YStsslNVzI5EWteu2T8MfeEb664ysZ8qajyj8K17r0zERSWSwcs
- UbSQ==
-X-Gm-Message-State: AOJu0YzlAim6cbFokqDXb9zi2lXrDl6ps51uiQ3AWJeihYGUUzC9NOmh
- abwQomuAzOedUlb94+YQAMB1QmzS83y/961UXamnbXcGRoF8PMSxb2QTZnPNVhA=
-X-Gm-Gg: ASbGncs8Y106pcrdMfGa2eVvZrmkXjwxV1rIfXKoBYupV3p3Nre2SOOKhQhv4t+Mvhv
- p5C3TU4bI2gIa+4QvY2D83xa0//jjBjjJdwJAzKPIXsAU5Rp1jKBLBMv52k8fOkVru6e3KtTNvu
- IuqQoJ3X3RdPJX0AXR2xXcMb0LuRinZvBTpZNbs0W9+PToPPhLR1wYpTzmcL+uNLkRFdjCIZtj3
- yiKheL9S8y6Zo3eOvU5sn69P/QY2cgc6DZB9V9FlC0shEdhuRDo8ub1SxiX2w==
-X-Google-Smtp-Source: AGHT+IGltS4CgqGs3AInSnp8fDmazJU/7ch+DTXyMuqk5ME4aa+ihGelcN7mvcxyLXYUFB459n2OsA==
-X-Received: by 2002:a17:90b:1f90:b0:2ee:8427:4b02 with SMTP id
- 98e67ed59e1d1-2ef6ab0cf87mr4589895a91.28.1733506257598; 
- Fri, 06 Dec 2024 09:30:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733506260; x=1734111060;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qOQBipDm6oVcroQ2BZ0+jkSu5LIEWDy0IMHPFcDIbDw=;
+ b=KRBYDjy792pmkwF3+jBPnDhHREzup+N8ROTfJqY30ABsCafF0zWDr1EF6kA2kwOjey
+ sIpvfok+1j9Vsrha+M+B8Q4yYNNzvC62FlbcRsW5mIVwymZQhpR5hFCNLenf3Fhi8wb0
+ V1/A12mkGWnpKThz7W6EsEY88xYthnijIz54l8yd5NQutA5lUjMSU6dnt75qd7Ao8Hzn
+ TDaM8ZqTzJrN/mTC8Qk1c48AF/Yg0re+Gf9dl0CtQEiSNASC6PuNXsCTFBw5Gfamf+yE
+ Zpss2NXnwfa8pHKEUeqlRTfVMuxNuJ7lhKKAbdpZuRdZPzJquAUcKPJMvWsz73H8ATX6
+ We4w==
+X-Gm-Message-State: AOJu0YyHarrW1LCIB4KHOk446pU7kkSLPVc+EQhpPfv2bRob2mJifcmO
+ BA+u1lgajEqYQi2Qqk2Rslxg9cj0elyHq8lvq8UyfvK5mCQR2XYVrEgnItgOd8c=
+X-Gm-Gg: ASbGnculyi4dlp2+Qe2hPi9ct/HUR4BBxJVqW1TE79v4GzG/LmB4XDpQFoAbQQBIVqf
+ TFoqgPPJ9qzwnzlt5gfh5Am90TEZMVHyDagxUGFEp14cbFfasiG9KgWTXpjmRlWr1vEeQjFJWE/
+ M8JmmRXl6SfjJmDGMHr89NBMxMnyDtmLQPcSUYaSSKucEvA3ZAK9MXxgzLyOyrNZrqO/RS7uZDG
+ +nWppaIpwov++DSpD7O0j1mchjEtFUSNr9OuYNKGKo1LNfLt8LGQ7gM8A==
+X-Google-Smtp-Source: AGHT+IGs6bmiynsWjSowK/JLBUDXXyqOPMjsRU29/H6j1V9NSSzrICBKKPbcxFu7YjoXNnbPxQkMAQ==
+X-Received: by 2002:a17:90a:d44c:b0:2ee:92bd:3a6 with SMTP id
+ 98e67ed59e1d1-2ef6ab0d2admr4372180a91.25.1733506260277; 
+ Fri, 06 Dec 2024 09:31:00 -0800 (PST)
 Received: from adriano.. ([191.119.55.5]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ef31715ba8sm4810162a91.13.2024.12.06.09.30.55
+ 98e67ed59e1d1-2ef31715ba8sm4810162a91.13.2024.12.06.09.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 09:30:57 -0800 (PST)
+ Fri, 06 Dec 2024 09:30:59 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 0/2] efi_loader: efi_setup: Add efi_start_obj_list() and use
- it to set PXE IP address
-Date: Fri,  6 Dec 2024 14:30:31 -0300
-Message-ID: <20241206173033.2403998-1-adriano.cordova@canonical.com>
+Subject: [PATCH 1/2] efi_loader: efi_setup: Add efi_start_obj_list() to
+ efi_setup.c
+Date: Fri,  6 Dec 2024 14:30:32 -0300
+Message-ID: <20241206173033.2403998-2-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241206173033.2403998-1-adriano.cordova@canonical.com>
+References: <20241206173033.2403998-1-adriano.cordova@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,15 +115,64 @@ for efi net were created in 1., the ip was hardcoded there.
 In this example, another possibility would be to make a callback for ip
 address changes to go all the way up to efi_net.
 
-Adriano Cordova (2):
-  efi_loader: efi_setup: Add efi_start_obj_list() to efi_setup.c
-  efi_loader: efi_net: Add efi_net_start() to efi_net.c
+Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+---
+ lib/efi_loader/efi_setup.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
- include/efi_loader.h       |  1 +
- lib/efi_loader/efi_net.c   | 31 ++++++++++++++++++++++++-------
- lib/efi_loader/efi_setup.c | 24 +++++++++++++++++++++++-
- 3 files changed, 48 insertions(+), 8 deletions(-)
-
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index aa59bc7779..164586742a 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -12,6 +12,7 @@
+ #include <log.h>
+ #include <asm-generic/unaligned.h>
+ 
++#define OBJ_LIST_INITIALIZED 0
+ #define OBJ_LIST_NOT_INITIALIZED 1
+ 
+ efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+@@ -208,6 +209,18 @@ out:
+ 	return -1;
+ }
+ 
++/**
++ * efi_start_obj_list() - Start EFI object list
++ *
++ * Return:	status code
++ */
++static efi_status_t efi_start_obj_list(void)
++{
++	efi_status_t ret = EFI_SUCCESS;
++
++	return ret;
++}
++
+ /**
+  * efi_init_obj_list() - Initialize and populate EFI object list
+  *
+@@ -217,7 +230,9 @@ efi_status_t efi_init_obj_list(void)
+ {
+ 	efi_status_t ret = EFI_SUCCESS;
+ 
+-	/* Initialize once only */
++	/* Initialize only once, but start every time if correctly initialized*/
++	if (efi_obj_list_initialized == OBJ_LIST_INITIALIZED)
++		return efi_start_obj_list();
+ 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+ 		return efi_obj_list_initialized;
+ 
+@@ -349,6 +364,10 @@ efi_status_t efi_init_obj_list(void)
+ 	if (IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK) &&
+ 	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
+ 		ret = efi_launch_capsules();
++	if (ret != EFI_SUCCESS)
++		goto out;
++
++	ret = efi_start_obj_list();
+ out:
+ 	efi_obj_list_initialized = ret;
+ 	return ret;
 -- 
 2.43.0
 
