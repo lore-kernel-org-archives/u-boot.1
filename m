@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36A3E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 13:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB875E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 13:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53E6589576;
-	Fri,  6 Dec 2024 14:11:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B67F68962E;
+	Fri,  6 Dec 2024 14:11:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T9AuzRzf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZWIxeE6j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7B388907B; Fri,  6 Dec 2024 14:11:22 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 60BA7895F2; Fri,  6 Dec 2024 14:11:28 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A72FC895D7
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 14:11:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DCB1895F2
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 14:11:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-84198252db1so68707939f.0
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 05:11:20 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-843d7f16827so74070939f.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 05:11:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733490679; x=1734095479; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rKVIVQDu9wtBXrtcZqoiGQaFKlIjDFp1m4cxORzQb2c=;
- b=T9AuzRzfGgM/5MPBrPLtofnscFweplnqIAs9lR5MjPJkf3iCTv2KJ+ntlUipsTOUY4
- 5PfmkQAip+od9nvzJC5RJGlV4Mvlg+afx6bxWliCZLljdJPVlUOXHxKlEh4oCHVNEvhp
- /UbGz9x8qvjY1QmAfMbrTD6M1900czq7aiplk=
+ d=chromium.org; s=google; t=1733490683; x=1734095483; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ggZiT9aCUMlarsD7cvbxnKda73uyIyI2Mmdn28P6ouM=;
+ b=ZWIxeE6jltSbKHdCGaDUXSvzFAoKAVw7p09ECnZxz90dBBNEON8mWaY51cm4RPMtH8
+ XpOv5CZialeBOtSVJy4lWylUBsYFxx/yHeZz4n+0LKrssoZQ9QuKyu+5Ekq1wS1WFRya
+ Fbcm1MJZFIQrm7CayZxL+0goNwqPtM4E7nMNM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733490679; x=1734095479;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rKVIVQDu9wtBXrtcZqoiGQaFKlIjDFp1m4cxORzQb2c=;
- b=DK/6BpLglfcfaM7V/gBZKRPc2xuVVnHNIVUDyo+ktoQkheRnBSpm+B4JfW6c/yCWP4
- UZYLJJAIOwxsrsKPzA84I8bVFgwcIq75DA/ujQY7mmqJuhPIN6b1+e6p15N3I82Uc4DE
- kJuwFVHvmnj/J1wUL5dAeQY0KhMUyTBek2nbCI7GzWXAINV6H2P8Kzi65X2KhEWbEsjf
- kTgH0Ltqn9jl5Iot6z/9XOOY0+dc079lP9OAX/3/kWVSLhj8aX7Igw3tW+NQfmlQzIgB
- Sv+d/hMyS2w6ENjcBVP666x7HsiN21W87WNyugMAjBXiLbGz0ucn4FEopVvydJ9mHpkx
- p9vQ==
-X-Gm-Message-State: AOJu0YxPVa/dIAtfAkXJ304rfldImBjonq5z4L5Z9K+3r+/V0KKavlFu
- Kmu+kuWA+tA4+Oiw14n3jcvXMsjRe/xe9dpaOOasgdDj9JV3IRTIKHF+r3aIERYSMdx/4xvlgAM
+ d=1e100.net; s=20230601; t=1733490683; x=1734095483;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ggZiT9aCUMlarsD7cvbxnKda73uyIyI2Mmdn28P6ouM=;
+ b=kZbCcTFDAMsK/vHGfghgkHZVlTlJN9WnDs2c+NTDhwJ/Vlu8bNQ9bsLHmqO0FT8TZ/
+ Vugkyx5QK/tVOKb67Mim+ZM4z/uwpHHDLk72ESlYUId2+FsAa/QeiRwkd94Y3Ae+RXsU
+ BM+UtSZQdyjygFpqP/ZKMVICWhynNWy1p6dAEjRrwwkE+06v5mDEHTC7GQkwE5wFNLkP
+ ckNNh9Yor0My+MJerJ1YOYxbBp1gSj+HZQgS7OX17vAL3WAmbj8bgu28nfOfqCBa9Phb
+ 1MnRfO5jeLJZE9DiRBsIWeieK65LTqBRdxYG0bp+92jueCJK+YeJ7NV1/FdYVWmIHCD/
+ jYOA==
+X-Gm-Message-State: AOJu0Yx1Q87/j96e5IF5+E8Kb7dXMgGsCBDZ5bJ1plRDDzrT4aYzXSsc
+ vWP+cnbbKpZ66YCoUXHJS7Ic728wH2fI2rd02jIk2PAzBkNtg5MGCk9sJGOnvBD90iPBPwYm4SM
  =
-X-Gm-Gg: ASbGncsr4TpPWrJgHj+KQqqZYt+q5L5bg0kD645XLMXBVvlTI6Rvb+pCt6aueSKzuU9
- HB6m+Jl1iSHEW34oesVIiCYjR8MXjsKF3P9JjNfP8NLcEDWOdMwlDqXwric/31SABtLC/HyLlu3
- adqUuOg2aIBoCaQ2Fxuj7z9ETR0HBCeJLAuzdKT7NxMDDKKtBvy7blF6WvnspLTI/I2uLVQ4Ds8
- g+IEHOfsTNZ8KYx6gpnrtbcBY/nettNG/kXEgJDJEX0qg792JEnMooOswirzDUBCgdybdjR0vdC
- /Gy0+SmKzSA=
-X-Google-Smtp-Source: AGHT+IHWlk2KGyZPId4sdMGPawFvW+o1MC+RBm/phBKyFR7YDf2EDnNFWeJkwqDmJ4XhLGZY+AxZeQ==
-X-Received: by 2002:a05:6602:27c9:b0:841:8345:5eed with SMTP id
- ca18e2360f4ac-8447de2d901mr309193039f.0.1733490678829; 
- Fri, 06 Dec 2024 05:11:18 -0800 (PST)
+X-Gm-Gg: ASbGncuaUUuYAowT5or/vNGI5v5A78to0HP4s3w0gM6UQBSzvikuh7qcuLWqE6lYIgl
+ ESBFX/FWkerKEWMzQoXCDw/pGU1vwRv22ec6BUOBd4+QqcvWrjMF5RYqLPm2Wgs9BgDjWETlXHw
+ X6s6KCtkm4wMWOy8XV1VO3G9UpGjg8ZPvWIG5vgSU/hrheC8opQHqWtSafD9uiRSNKTkE83PKN/
+ ZTwNLDIAwr7m9eOA9mBWH17dhuTO56qDcAWi+o7kIQ9BS1YZAg9xts2vu5txRnUQoUg7LjPdMnk
+ irVtoMjndJw=
+X-Google-Smtp-Source: AGHT+IFacTANFtHPd/GdAfpkJ4gUvfeabEo0JHK6+cJwo6hODWCpecaVxuDSONeaVmKAImewj/0Pzw==
+X-Received: by 2002:a05:6602:2b84:b0:83d:e5e8:6fcd with SMTP id
+ ca18e2360f4ac-8447e2f3afbmr406608839f.15.1733490683417; 
+ Fri, 06 Dec 2024 05:11:23 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84473a5b3b9sm97382639f.35.2024.12.06.05.11.15
+ ca18e2360f4ac-84473a5b3b9sm97382639f.35.2024.12.06.05.11.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 05:11:17 -0800 (PST)
+ Fri, 06 Dec 2024 05:11:22 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Ivan T. Ivanov" <iivanov@suse.de>, Jan Kiszka <jan.kiszka@siemens.com>,
- Jerry Van Baren <vanbaren@cideas.com>, Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marex@denx.de>, Matthias Brugger <mbrugger@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/3] rpi: Tidy up booting
-Date: Fri,  6 Dec 2024 06:11:10 -0700
-Message-Id: <20241206131113.2865416-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] rpi: Update environment to support booti and large initrd
+Date: Fri,  6 Dec 2024 06:11:11 -0700
+Message-Id: <20241206131113.2865416-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241206131113.2865416-1-sjg@chromium.org>
+References: <20241206131113.2865416-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,26 +95,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
-ramdisk, by expanding the available space.
+The existing values don't provide for decompressing an arm64 boot-image.
+Add those values and move things apart a bit so that a 50MB kernel can be
+accomodated.
 
-It also tidies up some strange behaviour with the provided FDT, where a
-separate pointer is maintained to it, even though U-Boot has copied it
-and placed it in its own space. This avoids strange bugs where it
-accidentally gets overwritten when loading a file into memory.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-
-Simon Glass (3):
-  rpi: Update environment to support booti and large initrd
-  fdt: Allow expanding the devicetree during relocation
-  rpi: Use the U-Boot control FDT for fdt_addr
-
- board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
  board/raspberrypi/rpi/rpi.env | 10 ++++++----
- common/board_f.c              |  6 ++++--
- dts/Kconfig                   | 11 +++++++++++
- 4 files changed, 29 insertions(+), 18 deletions(-)
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
+diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+index 30228285edd..d26e451cf7b 100644
+--- a/board/raspberrypi/rpi/rpi.env
++++ b/board/raspberrypi/rpi/rpi.env
+@@ -69,9 +69,11 @@ fdt_high=ffffffff
+ initrd_high=ffffffff
+ #endif
+ kernel_addr_r=0x00080000
+-scriptaddr=0x02400000
+-pxefile_addr_r=0x02500000
+-fdt_addr_r=0x02600000
+-ramdisk_addr_r=0x02700000
++kernel_comp_addr_r=0x02000000
++kernel_comp_size=0x02000000
++scriptaddr=0x05400000
++pxefile_addr_r=0x05500000
++fdt_addr_r=0x05600000
++ramdisk_addr_r=0x05700000
+ 
+ boot_targets=mmc usb pxe dhcp
 -- 
 2.34.1
 
