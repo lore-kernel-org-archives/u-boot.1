@@ -4,98 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9047E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 22:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A86E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 23:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4147688815;
-	Fri,  6 Dec 2024 23:57:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D175F88E78;
+	Sat,  7 Dec 2024 00:05:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jn0BpVjI";
+	dkim=pass (2048-bit key; unprotected) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="oVkS0H+p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08EEB8870D; Fri,  6 Dec 2024 23:57:18 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D61A088815
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 23:57:15 +0100 (CET)
+ id 6CC1F88E00; Sat,  7 Dec 2024 00:05:50 +0100 (CET)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
+ by phobos.denx.de (Postfix) with ESMTP id 34CB088D72
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 00:05:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-46686a258c2so24064311cf.2
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 14:57:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733525834; x=1734130634; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jPouc1XXuLoKka/JGIsG0i0OsBuMBfzWPvr2c1bXqVo=;
- b=jn0BpVjIgS6CAthqzPaV4O+/VYQFQ+Fdhq5Xz1kO9g8le/9vfrXY9K07/9uB1ZQN96
- Wp2PTldSizAqML9XbZG7MB7C0MDFuIHPxKLlhGJ+W+YdLlQ7I5lb+1RXR4xDpMEtlHJK
- rbIik7Uqtq0YQ8tMqITSkVZdyrEq4eLJ2kRBG05otixhegX2MQ2cNsLJdLsI0Ju834qs
- 6aOECjY38CITuZWgGI30dlGom3Uj0bxCSrtzzT71pHtxZpHTjInbr0hEYOWoksdgQKPI
- m6bCOSxsW6WIvsjfMRFEnRDACnZGp/n1C1FdueCfec1/UYAFMvaUDpk0stOi8eK4BV2Z
- jNbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733525834; x=1734130634;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jPouc1XXuLoKka/JGIsG0i0OsBuMBfzWPvr2c1bXqVo=;
- b=pN3++U9ueTUzl/nU0ddPbqLUL0P5YK3nJMZCkN7/xNe700xWl6EWZC+S8w9lRfzFvS
- 4RDpB6LfdyfJNnD/blPQxlKFhs7v0bca1MdiyWRmYUng8TNYzFa6ufqPBPMbOjn+eUwg
- uWAY5DFaQmNpN1tA1SGl9sc/sw20YtS4X21jap6Ux52tTRSN4SfKlnrOln+sFPpmaEji
- DKveeCwF3+nrwfxZTtCcTGKxeQkG9KLjFtCRk6AfaSftDegZG2DUF7P/qDckA1/U8+Kl
- kH1KN76F8BJsPU+oMoHh6a1xw6zAssHRoLVA3s/flP8yrw/MM9RoGrrE9nbAXOGDA5Ic
- hBJQ==
-X-Gm-Message-State: AOJu0Yyo86DUtuhgRp91PDiKFZWZhYlRHzhpLl/xx2B/3KiWLIhDuFNZ
- jhpk46gfNqygXWFPcs0Wch/L5F6QGiV/ALAuZGl4lKbyOE7MvHbUoC6PFfJnLsN3PTPm1dHnbDT
- h
-X-Gm-Gg: ASbGncu7kNIU0U09IrbZFQf1yHG/bKY+Xsheh3f98spY0VeJMJobYYxInqzJBWUkq8z
- PBYfEgrbZHT0LQwUq7zCTkZIgxWqQhatPid2HcvwcmLQ7klLjYCT0uCZMKueTyyAsYVz+aiKzcT
- CN/u6YJi09CY1opkluMCcgdy5qYrJY/ig1iiScW9AYqYZrBXH6zWjQb5B7SJzZ5IVjsQ4rNfME0
- g5EbtMpJiMK6L9CnlxnF9F/r/SgjiISlApat3eMfbEuAuAYVXe+sbWgPyhJjP1m78tjL61nqxdq
- xqwzwZFnq1XLGd8m/80AOzyd3zWhOLFWMN08i4IIDx/G6MaI
-X-Google-Smtp-Source: AGHT+IEhDxFIPFb/ASICwDnqtziL/KN3aDeNnVSJn8e57LldEyytlQpZUshkZBBtgDxEKuzGoWQP9A==
-X-Received: by 2002:ac8:5d12:0:b0:466:a254:7341 with SMTP id
- d75a77b69052e-46734cc4565mr85789161cf.17.1733525833114; 
- Fri, 06 Dec 2024 14:57:13 -0800 (PST)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467296d4d7dsm26080871cf.34.2024.12.06.14.57.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 14:57:12 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Stefan Roese <sr@denx.de>, Alexander Gendin <agendin@matrox.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Jonas Karlman <jonas@kwiboo.se>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Michal Simek <michal.simek@amd.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v3 10/10] configs: Enable sysinfo for QEMU Arm64
-Date: Fri,  6 Dec 2024 14:54:27 -0800
-Message-Id: <20241206225438.13866-11-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241206225438.13866-1-raymond.mao@linaro.org>
-References: <20241206225438.13866-1-raymond.mao@linaro.org>
+ spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1733526342;
+ bh=d22WiQmm6xP9A9SSjfFus87LYErCxtAPlyV7pZnbA20=;
+ h=From:To:CC:Subject:Date:From;
+ b=oVkS0H+pbeY1BnU08RgXv9M21xyA8/38fT/lfeXyTYaPrm5EntQpfyPoF1a/Y9YCT
+ Fv5U2GSTMnW0szQbolb1bfSvhd9qr3fDlWXwKevpxmvHUr79AEC3QmoEPgk/nrAn0S
+ GdEsppCz7o5s7XnxWpaMa5bRTTN4tVPHyxjYt+spDTm4RTcA1UYgOGMe5e/9WrLUiv
+ qC8j5NdwxCzNSOlrc2C1QNX+NGo1D09zSHTIKqLhMts7VvQcpMV0UTDt6p6Z/cQiLR
+ /Bl1v4jCSJmQNEYg7dJ6QU6apEWVKdQoYStWvy4k5zKWHz3WFs+I/SU2QV/NehHKhS
+ wmexP48mqsaRg==
+From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+To: <u-boot@lists.denx.de>
+CC: Christoph Niedermaier <cniedermaier@dh-electronics.com>, NXP i.MX U-Boot
+ Team <uboot-imx@nxp.com>, Marek Vasut <marex@denx.de>, Fabio Estevam
+ <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>
+Subject: [PATCH V6 0/4] arm64: imx8mp: Read values from M24C32-D
+ write-lockable page on DHCOM i.MX8MP
+Date: Sat, 7 Dec 2024 00:04:16 +0100
+Message-ID: <20241206230420.54704-1-cniedermaier@dh-electronics.com>
+X-klartext: yes
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,52 +63,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable sysinfo smbios by default for arm64.
-When SYSINFO_SMBIOS is enabled, disable QFW_SMBIOS.
+The new i.MX8M Plus DHCOM rev.200 is populated with M24C32-D EEPROM
+that contains an additional write-lockable page called ID page, which
+is populated with a structure containing ethernet MAC addresses, DH
+item number and DH serial number.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This patch series prepare the device tree of the DHCOM i.MX8MP for
+reading the EEPROM ID page. Add the reading of the content and set the
+correspondent environment variable. It also synchronize two serial
+number environment variable via callback functions and fixing recursive
+calling of them.
+
+To ensure that the environment callback functions work, this patch
+series depends on patch [1].
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20241120160135.28262-1-cniedermaier@dh-electronics.com/
+
+Christoph Niedermaier (4):
+  arm64: dts: imx8mp: Add aliases for the access to the EEPROM ID page
+    node
+  arm64: imx8mp: Read values from M24C32-D write-lockable page on DHCOM
+    i.MX8MP
+  lib: hashtable: Prevent recursive calling of callback functions
+  board: dhelectronics: Sync env variable dh_som_serial_number with SN
+
+ arch/arm/dts/imx8mp-dhcom-u-boot.dtsi         |   2 +
+ board/dhelectronics/common/dh_common.c        | 166 +++++++++++++++++-
+ board/dhelectronics/common/dh_common.h        |  79 ++++++++-
+ board/dhelectronics/dh_imx6/dh_imx6.c         |   4 +-
+ .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |  75 +++++++-
+ configs/dhsom.config                          |   1 +
+ lib/hashtable.c                               |  27 ++-
+ 7 files changed, 341 insertions(+), 13 deletions(-)
+
+Signed-off-by: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 ---
-Changes in v2
-- None.
-Changes in v3
-- add CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE
-
- configs/qemu_arm64_defconfig | 3 +++
- drivers/misc/Kconfig         | 2 +-
- 2 files changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 8dffb91e93b..31656699d82 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -62,6 +62,8 @@ CONFIG_PCIE_ECAM_GENERIC=y
- CONFIG_SCSI=y
- CONFIG_DEBUG_UART_PL011=y
- CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
- CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_PSCI=y
-@@ -71,3 +73,4 @@ CONFIG_USB_EHCI_PCI=y
- CONFIG_SEMIHOSTING=y
- CONFIG_MBEDTLS_LIB=y
- CONFIG_TPM=y
-+CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 6009d55f400..da84b35e804 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -568,7 +568,7 @@ config QFW_MMIO
- config QFW_SMBIOS
- 	bool
- 	default y
--	depends on QFW && SMBIOS && !SANDBOX
-+	depends on QFW && SMBIOS && !SANDBOX && !SYSINFO_SMBIOS
- 	help
- 	  Hidden option to read SMBIOS tables from QEMU.
- 
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
 -- 
-2.25.1
+2.30.2
 
