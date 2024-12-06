@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB025E77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07AA8E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 15:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A53D89613;
-	Fri,  6 Dec 2024 16:32:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FFD38959D;
+	Fri,  6 Dec 2024 16:33:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ea7xzMov";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Od5g+w77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94C1489645; Fri,  6 Dec 2024 16:32:04 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 9EEAB8914F; Fri,  6 Dec 2024 16:33:10 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 532988964B
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:32:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66FA08959D
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 16:33:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2ee8647dbb9so1796452a91.2
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:32:02 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ee6c2d6db0so1979829a91.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 07:33:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733499121; x=1734103921; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733499187; x=1734103987; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WDvNzuYtwhOF9jrd5OGuGf5gr+oFvLH9RATqDn4cSTY=;
- b=ea7xzMovLGK+uPvp4NfQgNSTxso+hJ1GKBeSiDqRQxPyKMdNrINu5HErQuStwNddav
- omB9wSRdYQj2A0Q223Z35mPJm8M8MAr7imekQLJhstrUAfd26wBwEeydZgBO7v2khFOh
- RB0WwZKsA2GLsEoWyA1uv9T+ocjuTfFhhu2B4=
+ bh=lBjXc//uc41Ai7ggdD7KWQhE0twBXJ1oaKEH4Pwoyto=;
+ b=Od5g+w77hb8O1Po+nJ93Ozu/RhzItfSc37RMLLfjFP8aRNNzvHfHfJas7VoQ1v/6Bb
+ ABykrj4DW/8O7xticJK9QYSEiZp9yd0rxfm3k1TTXIBuUty2CoLIm3h/ftEHAdz02UhN
+ icOybv5p+OzKm0pfIe9x3BZIe0OKTEb1sVFl0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733499121; x=1734103921;
+ d=1e100.net; s=20230601; t=1733499187; x=1734103987;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WDvNzuYtwhOF9jrd5OGuGf5gr+oFvLH9RATqDn4cSTY=;
- b=MQ3xftuQVOeJXwMF6KXJN7NSS6JCjmbXuMdI/kA7/BkZjly1IW9ojUu15MITVtdb2L
- 6ApVnnOC0BwftnyJOzn/iJO30HI+UgOgFMGOjVPVJmCZL7/Lmc6xp640UgCbTApS/vz/
- Y4xey/PIjhxIh4S6FgoGuxmw+BdqDcJj5BZ1ZOcY+/m+gVIxyTdmWD23+2wjCEu/r5kn
- TIgippWhhrXwMn1G2DxFiDCcmAXMR02m357oULEvsGYPMSdFVsNsyr6i/D+lZ9aQR/ZW
- Cog8k5V9xbHT6J5b25wScgKl6Hs11Ltr9qAjJkL60iEcPWcllWU7/YYVQuwlhodYowtk
- zSsA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYt1m6MeJhwCmSNx1oeOoI++ewgBuUH/ihNjaA5IVR0H1l+LbsaT47U1kQ8YvkznpQ0+C+muk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTLjm8M3cB4aakRcbqc3IC94CBNxNIP4DLmrCCFOTwLYcUu5jJ
- fpYHWursyYHKrJLbGl+5iYTiX0LgT3gQwKEQozdXkgToYWvtuSIDiAtFTbF5NaUxObU7PhvT0VY
- xao1ZfEV/Um0jteAU2+03S30EbTBzMlWkpMVE
-X-Gm-Gg: ASbGnct2sa4eoeVfJ3Jw3hSVLnIl/Ducikb2b+nd/UgYr3DQgKx0SjD5OMAWsaYfzMd
- CvgLmZRiZvLiV6osAZkIQjZpXyarGDQuW
-X-Google-Smtp-Source: AGHT+IE4qvDNq5ZeCIn04rywJhOV/WySle2t6amikCo1ctrMq4c/cEtwrOoxcoQqR/RMDuXdWc6HEsGvhyfxSKSdiFA=
-X-Received: by 2002:a17:90b:2f86:b0:2ee:c457:bf83 with SMTP id
- 98e67ed59e1d1-2ef6a6c1400mr4136989a91.19.1733499120898; Fri, 06 Dec 2024
- 07:32:00 -0800 (PST)
+ bh=lBjXc//uc41Ai7ggdD7KWQhE0twBXJ1oaKEH4Pwoyto=;
+ b=OmrG5er5IygPf3HvWluiVhAEL6s1SD9h5AvymSG31VwFxJBgD9Ki8Tnqz2m4C7OnRY
+ aUcQZNb6A2YfjZHjeF1o6y0jMur8frRd+tIvbz+azWl7EQRTIUYnjb9pGd9BN7oqFMCs
+ Ppyx97KahAo0fCOEIeFMAF0lfiWnyX4JBiDVQWkWffUEUiWjd41KwDkuwS124+yT+dXR
+ dw85nF7aZdixfTiincs8doN84mkKrzTHAgCUgUpKwI4wCZN7iJgG4+m7E7rXCxUazGNE
+ fpmv0jY1bX9JYs8uFvTqqEAmNC/jeWk/K1fokiq2SI8NCNH8/m6M+nh+sPFscLa1cvq8
+ wjyA==
+X-Gm-Message-State: AOJu0Yy7QZf4k2zhZgNGBC7bm+yB1SWsv2JqFH4nTuKYRO+lKHif+Ati
+ 3JOK113cu8EXp3w8KKGvWeDBB6tQl47tyRM/Hxqg7ZcwF1mcCD6tRQG+Mjy1iMuYnz31iztZn8u
+ mvMK0z7a1vRKMjs4UOKHj7FlchYXBlyigSI3h
+X-Gm-Gg: ASbGnctmItCg7kKYArA6jq46LzNcFU5rXa4hSV7ko8sfMz1l93E8FhflgKcM8pKraR3
+ GdqCpMPR0+pUMyv/783b6KZrBhZH38IP1
+X-Google-Smtp-Source: AGHT+IECiO3sJ/DKQsNv9wYm0xrMbhjnX1IuS9dRDluq7gpapufkda/6st85chOm8CGX0e9sjIz8NSq8KkZCp8zRiAY=
+X-Received: by 2002:a17:90b:3bce:b0:2ee:acb4:fee0 with SMTP id
+ 98e67ed59e1d1-2ef69e1279bmr6130986a91.16.1733499186915; Fri, 06 Dec 2024
+ 07:33:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
- <20241202-sandbox_repair_of_embed-v1-1-05aff4b0ccf7@salutedevices.com>
-In-Reply-To: <20241202-sandbox_repair_of_embed-v1-1-05aff4b0ccf7@salutedevices.com>
+References: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241125175111.1181749-1-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 08:31:17 -0700
-Message-ID: <CAFLszTjs+RYUk9jGMtWArrSC=OEdxM7RXb2QCVWS0fWXdrtyyA@mail.gmail.com>
-Subject: Re: [PATCH 1/5] sandbox: fix bloblist_finish() linker error if
- BLOBLIST=n
-To: Evgeny Bachinin <EABachinin@salutedevices.com>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, kernel@salutedevices.com,
- evgen89bachinin@gmail.com, u-boot@lists.denx.de
+Date: Fri, 6 Dec 2024 08:32:49 -0700
+Message-ID: <CAFLszTghdnYM0_FuSMCcT+_Jgtbi0=1CtAeQKfnHe+ONnUxfYA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] tools: dtoc: Allow passing optional input
+ directories
+To: Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,21 +84,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
-<EABachinin@salutedevices.com> wrote:
+On Mon, 25 Nov 2024 at 10:51, Paul HENRYS
+<paul.henrys_ext@softathome.com> wrote:
 >
-> Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
-> error:
-> ```
-> ld: /tmp/ccwtRVty.ltrans0.ltrans.o: in function `state_uninit':
-> arch/sandbox/cpu/state.c:508: undefined reference to `bloblist_finish'
-> ```
+> An optional list of input directories can be passed to EnsureCompiled() which
+> allows to pass a list of directories where input files can be searched.
 >
-> Fixes: 1c52fcca72b ("sandbox: Write out bloblist when exiting")
-> Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
+> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
->  include/bloblist.h | 7 +++++++
->  1 file changed, 7 insertions(+)
+> Changes for v2:
+> - Use 'None' instead of a list as a default argument for EnsureCompiled()
 >
+>  tools/dtoc/fdt_util.py | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+>
+> diff --git a/tools/dtoc/fdt_util.py b/tools/dtoc/fdt_util.py
+> index f1f70568cf..d5ecc4207d 100644
+> --- a/tools/dtoc/fdt_util.py
+> +++ b/tools/dtoc/fdt_util.py
+> @@ -55,7 +55,7 @@ def fdt_cells_to_cpu(val, cells):
+>          out = out << 32 | fdt32_to_cpu(val[1])
+>      return out
+>
+> -def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
+> +def EnsureCompiled(fname, tmpdir=None, capture_stderr=False, indir=None):
+>      """Compile an fdt .dts source file into a .dtb binary blob if needed.
+>
+>      Args:
+> @@ -63,6 +63,7 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
+>              left alone
+>          tmpdir: Temporary directory for output files, or None to use the
+>              tools-module output directory
+> +        indir: List of directories where input files can be found
+>
+>      Returns:
+>          Filename of resulting .dtb file
+> @@ -79,6 +80,8 @@ def EnsureCompiled(fname, tmpdir=None, capture_stderr=False):
+>          dtb_output = tools.get_output_filename('source.dtb')
+>
+>      search_paths = [os.path.join(os.getcwd(), 'include')]
+> +    if indir is not None:
+> +        search_paths += indir
+>      root, _ = os.path.splitext(fname)
+>      cc, args = tools.get_target_compile_tool('cc')
+>      args += ['-E', '-P', '-x', 'assembler-with-cpp', '-D__ASSEMBLY__']
+> --
+> 2.43.0
+>
