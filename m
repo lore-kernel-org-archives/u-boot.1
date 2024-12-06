@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0224E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EE07E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4760E89738;
-	Fri,  6 Dec 2024 20:18:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B3CFC8921B;
+	Fri,  6 Dec 2024 20:19:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hXM1TFIp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AtvsYVJA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BA9789376; Fri,  6 Dec 2024 20:18:25 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 3EAE189376; Fri,  6 Dec 2024 20:19:57 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3ED4088F0C
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:18:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D852488F20
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:19:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7fc99fc2b16so1966101a12.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:18:22 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2eb1433958dso1780680a91.2
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:19:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512701; x=1734117501; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733512793; x=1734117593; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JquK5fJPgHmOq/D8FiaOJIQB5aB3ewVidsfvoGCxH5Y=;
- b=hXM1TFIpK9fXwfIgcGci4iPv+97Q8VX98XsqD9wDGwkskbV3SuPFTrmcH9kGOHeGes
- q3biYTSaB2cgSe/lgVlIMvKrdQCK04dnWV3a1AHr5wvNg6dgbRCSg0UcpAJzxnsIeH+M
- uZh6I4Q9S2NH9dd1bNccjuXIzfR0Ollnmzxdc=
+ bh=p6p9GSGRQhVCsoRZUetwjbChqGnC48yxIZeC8knmh8s=;
+ b=AtvsYVJAIOmMK8lsf/ulO3eWBAF5B/r9EZb3IH04GNsUPQXhsEgpNHztsjDgbo8Qnz
+ UnFmiwvMwO8yEZgIhlKumcXSjbUh1120t0J2ZoEWqq439TneMQQHWMHYAvbdLKdADr+y
+ UlXVWX8eQeqDIoMG4xW3JWkI1xliTEJJOwL3E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512701; x=1734117501;
+ d=1e100.net; s=20230601; t=1733512793; x=1734117593;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JquK5fJPgHmOq/D8FiaOJIQB5aB3ewVidsfvoGCxH5Y=;
- b=Sqb7a976+srbA1qhRoeNbEWRbqDfUB3sQ5TpCKHJUFjSLgUqFBg3J4mbKcghKGjm+G
- WePDVX5MsZej5miVCSp9afJruOGVEkEBKpPhMoY69NYzRJBB8IA3HFaF5ANomaYXYj4J
- Qv4UrMpPZfiqsc1f77P5ys6rtoRbokV9WmDPZnkQe8fS1ogK/yNhso+xCRyLyj5wSCSf
- anjCR/E/YEcrI9DDyKHnERj62jhLFyDSDgiq0KfervMxF0tRKrPZm6qbRVugMUHbr+ap
- KV0i06VwpsKaQ266J7GEMn009DszkKCWYZOm0/WJhJIHY/8JqVQQhTD9Cinms1/tPXCW
- f+Ig==
-X-Gm-Message-State: AOJu0Yy0LjSEyx2h+ya56HkfUhHDyKDe1zoRoBr4AxFXSfDUug2wIw2H
- TMHEtKyFqUcHPZr0b7hpCKRfkZKojV2a9dN/bVbAhNuuhtzGZouJF6l0FgyJ7SYIp5lNKRaMzA3
- JcZULtdl1CVFQuZ5OblcXVvTIGd55sqIZ7Z60
-X-Gm-Gg: ASbGnctaaqgLX76uXV9KhRb11UFG2rsL7akueEM539pzdPgIROHQRf3u0Nl0S8Uzsat
- vbtPTMww2YFPhPfViuU67g4Rezk0oJpkX
-X-Google-Smtp-Source: AGHT+IHeXtTrok6ZlxVqZeTAXuzz+rZHmsQxcwk5Y+9oNg2Ntc59wzts73DvIwFl7aOBfRh+x5HTIB/DtHa8gxPejvY=
-X-Received: by 2002:a17:90b:2544:b0:2ee:c918:cd42 with SMTP id
- 98e67ed59e1d1-2ef6a6c11b1mr4765641a91.22.1733512700850; Fri, 06 Dec 2024
- 11:18:20 -0800 (PST)
+ bh=p6p9GSGRQhVCsoRZUetwjbChqGnC48yxIZeC8knmh8s=;
+ b=iuUWsuBEUQ4jtDHmBCHZDA+itTEUapJMjoNovofkW16LA7JNSJe+b9T7pGDKy1vEu6
+ UBzsXi2BlTg2QFNZSZgE8HfnjLhMnYzv2h/Lml3v8kvVxVa6m126Hwl7hF7vJAMK/snT
+ mnTVgzIXBktYvofx2WpNtB9QBlg9ej8ZBkFvfReZlHmlWUVxQIPP8OqevU05LepYO3U+
+ fMUmJaEnZOE4YZsmXpwYIKBzobhWlQ3WiLIo9fLVhW8owaNR1Ajm1RcEMveJoUAL/sKe
+ JmdZgUrtEZKiUjDfkebCRwTdAGRBnnyEMJkfMZJV7CkDnFyu5ZIUZLxpaRyzvQOVJgjy
+ V8Cg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2V7uzk7blVy7wFZ/7keOx3WF+cHausbeyV5oDKqc3E2mZUcL/BnG/XTXLb9X5UVxHLwfcBx4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyjwHJ7jKSvfPDHVmrBNk7H0shV/bZsZdwcFPtWvOcz3O7wJi6x
+ WpBjNJLBu9Buo5aW0u+uhNCG74FfIJZ+8OGU/jdPesjKXI9ECaRlFKnxc+wBdWSyLxxuUECKAla
+ S2c7h/a7PfoVPx9U9rtyJavG9jMfKfEAS5545GwEXovAb6N4=
+X-Gm-Gg: ASbGncvLtNiQyLP/+xo/SCbXf9f3WKSD7r2QA69nCFF1c0cc9l8R/TfyiLWhysse6eg
+ mFlzwRxFydmb5Ya7552j23Wyal4Pf0Plv
+X-Google-Smtp-Source: AGHT+IE3mq9mdaGwsH9wR1Y8ZSjg+GUH0lxZLVy/uyNEPgyfHKSezYPaFJ4cOTwWj9RwDBDrMmky+uLNy/T4V5hMXoA=
+X-Received: by 2002:a17:90b:1e43:b0:2ee:8008:b583 with SMTP id
+ 98e67ed59e1d1-2ef69fffa82mr6959616a91.16.1733512793422; Fri, 06 Dec 2024
+ 11:19:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20241206131113.2865416-1-sjg@chromium.org>
- <20241206131113.2865416-3-sjg@chromium.org>
- <20241206141310.GP2457179@bill-the-cat>
-In-Reply-To: <20241206141310.GP2457179@bill-the-cat>
+References: <20241202001243.1283274-1-sjg@chromium.org>
+ <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
+ <20241202141558.GD2457179@bill-the-cat>
+ <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
+ <20241204012907.GD2457179@bill-the-cat>
+ <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
+ <20241204162707.GG2457179@bill-the-cat>
+In-Reply-To: <20241204162707.GG2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:18:07 -0700
-Message-ID: <CAFLszThS0mDMe=ujRDPFDDrhM_9p=o=v5oBbpsQTAbDNfU5Qpg@mail.gmail.com>
-Subject: Re: [PATCH 2/3] fdt: Allow expanding the devicetree during relocation
+Date: Fri, 6 Dec 2024 12:19:38 -0700
+Message-ID: <CAFLszTjs7taGs5LjiZ4XBgkJtjK_Db7ZiWwbpW6Kzz_tFjo=Rw@mail.gmail.com>
+Subject: Re: Applying patches to mainline (Was: Re: [PATCH v2 0/7] efi_loader:
+ Add support for logging to a buffer)
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, Sumit Garg <sumit.garg@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,63 +96,111 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 6 Dec 2024 at 07:13, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 4 Dec 2024 at 09:27, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Dec 06, 2024 at 06:11:12AM -0700, Simon Glass wrote:
->
-> [snip]
-> > A comment in that function says that we assume there is space after the
-> > existing fdt to use for padding, with the padding size set to
-> > CONFIG_SYS_FDT_PAD
+> On Wed, Dec 04, 2024 at 08:13:04AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > However, there is no guarantee that this space is available. If using
-> > the control FDT, then global_data is immediately above it, so expanding
-> > the FDT and adding FDT properties will cause U-Boot to fail.
->
-> This sounds like a generic issue and should be fixed outside of a "Pi"
-> series.
-
-Yes and I know you keep asking for multiple smaller series, but I've
-explained that keeping track of all that for months at a time is too
-challenging for me.
-
->
-> > diff --git a/dts/Kconfig b/dts/Kconfig
-> > index 41a758e83a6..360611edd01 100644
-> > --- a/dts/Kconfig
-> > +++ b/dts/Kconfig
-> > @@ -219,6 +219,17 @@ config OF_OMIT_DTB
-> >         This is used for boards which normally provide a devicetree via a
-> >         runtime mechanism (such as OF_BOARD), to avoid confusion.
+> > On Tue, 3 Dec 2024 at 18:29, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Dec 02, 2024 at 05:21:05PM -0700, Simon Glass wrote:
+> > >
+> > > > From my side I'd like to change the conversation a little, to how to
+> > > > land code, rather than why we should bother. "Code needs to land"
+> > > > should be the motto. If someone has taken the time to create
+> > > > something, our bias should be towards getting it in, with sufficient
+> > > > changes to make it fit the project. There are cases where something is
+> > > > just a bad idea, or should be done another way, but for people working
+> > > > on major features or changes, biasing towards not landing the code is
+> > > > just going to make them go elsewhere.
+> > >
+> > > This is the wrong approach I believe. The goal has always been and
+> > > continues to be to have reviewed (whenever possible, our developer
+> > > community is small) incremental change over time.
 > >
-> > +config OF_EXPAND
-> > +     hex # "Amount to allow the control FDT to expand"
+> > Yes, I agree with that, but it isn't what I said.
 >
-> No "# ..." because the help explains what to do here, if needed.
+> I don't know how else to interpret "Code needs to land". I'm not sure
+> what reviewed patches we have that are outstanding, but also not fairly
+> new. We do have patches outstanding, in general. Much of those fall in
+> to the categories of:
+> - Custodian is active, but also very busy (virtually everyone is a
+>   volunteer so I have a hard time getting forceful with people that have
+>   a large queue).
+> - Custodian isn't active / no direct custodian and the code hasn't been
+>   reviewed by anyone else.
+
+Here's my intention with 'code needs to land': to bias against people
+saying "I don't like this; I don't care about your use case; please go
+away"
+
+>
+> > > Just because something
+> > > has been posted a number of times does not mean it's ready to be merged.
+> >
+> > I didn't say that either.
+>
+> It's an impression you give however when you repost a series less than a
+> day after last posting, without addressing all of the feedback.
+
+I'm going to ignore that comment as it is not helpful and
+mischaracterises my contributions.
+
+>
+> > > Your challenge today is that on patchwork you have over 150 patches
+> > > covering a wide variety of topics and of which many series have
+> > > technically-merited feedback that needs to be addressed in a technical
+> > > manner.
+> >
+> > By my count I have about 10 series in progress, with a small number of
+> > patches (< 10?) with pending feedback
+>
+> I'm not sure about that less than 10 number, in part because it's hard
+> to keep track of which feedback was applied, and which not. And part
+> because some of those series are places where I told you I'm unsure
+> about the core concept but you asked and I'm giving you leeway to show
+> me the end result.
 
 OK
 
 >
-> > +     default SYS_FDT_PAD if OF_LIBFDT
-> > +     default 0
+> > that isn't effectively just a
+> > NAK.
 >
-> A "default 0" is almost always wrong.
+> To be clear, "just a NAK" isn't the whole story. Those NAKs come with
+> technical rationales and requests. But maybe they're just lost in the
+> volume of emails you have in some cases. I know for example I mentioned
+> a few times and places that we have tests today for booting the OS, when
+> you mention that we need to add a test for booting the OS. We need to
+> expand that test, yes.
 
-In this case it is correct, since it means not to add any extra space
-for the FDT.
+If you look at the OF_BLOBLIST thing, it is basically a NAK. I don't
+see any other way to interpret it,. So several boards in my lab have
+been broken for a year.
 
 >
-> > +     help
-> > +       Some boards make use of the control FDT to boot an OS, thus when
-> > +       image_setup_libfdt() adds extra things to the end of the FDT, there
-> > +       needs to be enough space.
-> > +
-> > +       Set this to the number of bytes of extra space required for the FDT.
+> > It isn't a particularly large number, if you add up the patches I
+> > do in each cycle. It is in the nature of development and code review
+> > that things are often not right the first time, or someone else has
+> > another perspective, so I cannot see how this can be reduced.
 >
-> We should just use SYS_FDT_PAD directly and not add a new option.
+> The easy way to reduce it would be to go from 10 series in progress to 1
+> series in progress, and finish that before picking up series number 2,
+> and so on. And then in the future, stop when you have more than 2 or 3
+> in progress at once.
 
-I thought I read somewhere that fdt_high == -1 should not be used. So
-for most boards, this padding is not needed?
+That's obviously not practical for the amount I am contributing and
+the length of time it takes us to get things in. I hope it isn't a
+serious suggestion!
+
+>
+> But really, it feels like "Code needs to land" is another way of saying
+> "Just a NAK should be ignored".
+
+Yes, a bias more towards that would be more healthy IMO. A NAK needs
+to come with a full understanding of the use case, an alternative way
+to meet the use case, once that doesn't involve boiling the Pacific
+Ocean.
 
 Regards,
 Simon
