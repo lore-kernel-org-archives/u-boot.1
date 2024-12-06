@@ -4,84 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9362E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:37:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8EDE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 14:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1AF8960E;
-	Fri,  6 Dec 2024 15:37:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 84B3B89615;
+	Fri,  6 Dec 2024 15:38:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GdKHPnnO";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="W0SCLFVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0040089615; Fri,  6 Dec 2024 15:37:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C14758960D; Fri,  6 Dec 2024 15:38:08 +0100 (CET)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [217.70.183.201])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EACA58960D
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:37:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 998E189627
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 15:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733495847; x=1734100647; i=xypron.glpk@gmx.de;
- bh=V6cvehP5HAGAssABIdrheIYczdTKpgn3/4GnNbx1n+w=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=GdKHPnnOgi0uZqnb4UhW8UdxFWKww676QGgAEyRA4IVuOoVkekTAbJAEtdxnT8en
- 6xWviz6DBNiGBeuP/9ZIVm0hAM+hqrgh3+IgbfWEm0HKZ9Vshh6IDuRbVvl6+PGj8
- IvaseyrYlSlGTy7H6HSymND34gbpeC0/6mZSTvLRb5AlGxyyAuh9V+S6d8PtEzbGu
- mW76tldeCfISPpg4I9T1oeT8R4z9Wxn4HRFnsNVwV2UyOOhXiorW2GjycS9jSdziZ
- aQsE7/J4jRV42nSCjoYIoBty2J8dshaBI5szjIaoIL6vVYu8JObsEKfpSN+EpZ038
- Di88gCuEpOkb3Jw4Hw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTAFh-1tDL8S33xn-00Kkk7; Fri, 06
- Dec 2024 15:37:27 +0100
-Message-ID: <de3b7e8c-9029-4d56-a272-41ca9e4de929@gmx.de>
-Date: Fri, 6 Dec 2024 15:37:26 +0100
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 78B911BF203;
+ Fri,  6 Dec 2024 14:38:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1733495886;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=XOOKypnVomaBNW7RZqIpSOZfmZj23WKekFUa/J/aGpY=;
+ b=W0SCLFVrh09lNboDztbE+O6+REBdNAxt2HIDv88Ebdu8Uw3qTkh5cvBxLZSZgOH0+CfER7
+ oYWyq7p1Y8QweOprfFIZLvb+lfGv9f3vTuU4J6YKVYj+KSYsge+LPzKNmChmgNWIDttJnO
+ sRL8qLkdC1lRcs/cNi0J9bZe+rkWAvQabFkaKVIlB88CvC9OEK7DFcKcp/TaB3o/8g3DpL
+ Vwsv1jrCFUmVvAmfNxn4IWVvYl+4N5SOIj+z7tL5JtG4Ko2mueo7uTI/5EVaEmsMUnhyeE
+ t8/kjNUVOTstDAo7E2RNIn1DF76tR1TWN2gYsIgqklKiNU4gSA1A2sZs9SEjMQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Fabio Estevam <festevam@gmail.com>,  Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,  Anatolij Gustschin
+ <agust@denx.de>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v2 05/13] power-domain: Add refcounting
+In-Reply-To: <CAFLszTjaqOYJnoJ+DZh+BrREKsyenAT-mwkp=+9k4wyc6zHYUw@mail.gmail.com>
+ (Simon Glass's message of "Thu, 5 Dec 2024 10:56:44 -0700")
+References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
+ <20241205-ge-mainline-display-support-v2-5-4683bb4388dc@bootlin.com>
+ <CAFLszTjaqOYJnoJ+DZh+BrREKsyenAT-mwkp=+9k4wyc6zHYUw@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Fri, 06 Dec 2024 15:38:05 +0100
+Message-ID: <871pykop0y.fsf@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] efi_loader: Expose efi_reinstall_protocol_interface
- in efi_loader.h
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
- u-boot@lists.denx.de
-References: <20241206122714.2365114-1-adriano.cordova@canonical.com>
- <20241206122714.2365114-2-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206122714.2365114-2-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:GNDgV/mHth3pxrXBjvQ7i+dz1ex9hHH19B8YzI98E3/7EN2sRey
- AhDy//gH9Q4i0lJK4CTmPUbmH1uhVTJPcW88mdnaHf12Rq4234S3aitwGdoCt8VKk0MRabv
- 24sE3SrHUw/3YSFSEmvwwCdcl9j9Uw/RkSuVWj4cVfIg3FYNeUOBa2GCVD0sheJo6mnm0WL
- r/0Cp1wPf69pzBrnlebXg==
-UI-OutboundReport: notjunk:1;M01:P0:VfKtdlu/Pd4=;bMdMRAiH6oFWTGdp0hAoqU6eZk4
- EfZP28fWtpXS13K8TdPJl1DI2g8Nbnpj/Sp8YmQScdAJ1gWZe3Lte44T1iTLfTCsEahFNealh
- N0i+iXXnB4e9+yKj8O9SoDR+GgwL61cnuNz7Udrml5X9bt4ea2T30YmeDYiWmZM/IGBznLBAp
- 6ewTt90V7eB3BUqjmNDTN9xQydfKvaUioxXk03Ij4SlM18B5Ra6cxlRklo1L6nieu0AAtpfq4
- JXlHvyLQigeF9FwTWFMIOjMUgz1NiByoDtyOH2JwnIB/BBs3ksbCiqh5us8kzQIPn6Nibhp5l
- qBwH2Uiu3/mqL8RVg9RnWr+zoGeNAdCBC+t9XjlsgNv+taEP5vZ8DB6p/fLrCmJ99jKcWvHVr
- GegkhHgFKpOvDT/XUV4ehE7B9WwAafFoSYQozAH8hnreCNyNYNYBA4lIvsxy+OXEuaws4ozoO
- fZ9AV9a/LUhyMoCxgy/0mizbz6HrtOmaBkcF/B5Sf753Ag7dosZJj0sEHDcx/48n2ipH83q6X
- ve772ypxpHGbwa60PUgwFOzdvmkoRQ09Pv6wguMPkdJCmSaK600uTDfJedYfyl++Hk/+uIIOQ
- MMNeWIJSV3oUxoNeYrv+nnwb5Ik4GFM4H85Hvbb6TgCYTnN6eESkzXbUFaQBBGU5c5suVhdg2
- /remcR+ZPG/p7JtBK/8J5Ngec3spdQRRxXgwRDd5u/R1YuH59FEh5OXOd/HZoSLTBhovUbYud
- UeVKvCYTVQ+m3OZgei58xmWWyk32rkA8MfccQ92venOuY5mwjpKjmN/wg1aS3PRW1ZgaUJoTD
- nfNdpUEgbIp0Yj3d4NItq/4MGHWGbDsONG1iSshIjmPCaz3n6frzIhkylZ/rWicpLD9vjdR0P
- ObE02+JahpWjN/EHHnYTXCo0f0XKmf4AOxcd2/8GDrBzVewI8OfUENRnp/UfTGJWYHk6bviB5
- ZHycfN2nbUboE3E28ontIaNOB24dHGDaAocCy4IPeGzH50ZYPogylYRhSbRv4GVxrqE7xOt7P
- XiXqt35QxsLln/jLRkAiJUNQWnF1Fbgrnk0M8GRffyqdRQPtyHW37xdpTsbX2sEeRx7cb/sSc
- wo1alHR4ZBpCu1Qfz2YVWU0DGRx6uP
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,51 +79,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/6/24 13:27, Adriano Cordova wrote:
+Hello Simon,
 
-It is preferable to have a commit message explaining why this change is
-made.
+On 05/12/2024 at 10:56:44 -07, Simon Glass <sjg@chromium.org> wrote:
 
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-
-Otherwise
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-> ---
->   include/efi_loader.h          | 5 +++++
->   lib/efi_loader/efi_boottime.c | 2 +-
->   2 files changed, 6 insertions(+), 1 deletion(-)
+> Hi Miquel,
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 9afbec35eb..0d858c1e12 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -711,6 +711,11 @@ efi_status_t efi_search_protocol(const efi_handle_t=
- handle,
->   efi_status_t efi_add_protocol(const efi_handle_t handle,
->   			      const efi_guid_t *protocol,
->   			      void *protocol_interface);
-> +/* Reinstall a protocol on a handle */
-> +efi_status_t EFIAPI efi_reinstall_protocol_interface(
-> +			efi_handle_t handle,
-> +			const efi_guid_t *protocol,
-> +			void *old_interface, void *new_interface);
->   /* Open protocol */
->   efi_status_t efi_protocol_open(struct efi_handler *handler,
->   			       void **protocol_interface, void *agent_handle,
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 080e7f78ae..58716fa795 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -3733,7 +3733,7 @@ out:
->    *
->    * Return: status code
->    */
-> -static efi_status_t EFIAPI efi_reinstall_protocol_interface(
-> +efi_status_t EFIAPI efi_reinstall_protocol_interface(
->   			efi_handle_t handle, const efi_guid_t *protocol,
->   			void *old_interface, void *new_interface)
->   {
+> On Thu, 5 Dec 2024 at 06:54, Miquel Raynal <miquel.raynal@bootlin.com> wr=
+ote:
+>>
+>> It is very surprising that such an uclass, specifically designed to
+>> handle resources that may be shared by different devices, is not keeping
+>> the count of the number of times a power domain has been
+>> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+>> several times.
+>>
+>> Doing this causes troubles on eg. i.MX8MP because disabling power
+>> domains can be done in a recursive loops were the same power domain
+>> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+>> timings to respect and it is easy to produce a race condition that puts
+>> the power domains in an unstable state, leading to ADB400 errors and
+>> later crashes in Linux.
+>>
+>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>> ---
+>>  drivers/power/domain/power-domain-uclass.c | 37 +++++++++++++++++++++++=
++++++--
+>>  include/power-domain.h                     |  4 ++--
+>>  2 files changed, 37 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/drivers/power/domain/power-domain-uclass.c b/drivers/power/=
+domain/power-domain-uclass.c
+>> index 938bd8cbc9ffd1ba2109d702f886b6a99288d063..55a3d95d83c5aaac31acbd87=
+7199c87f8f6fb880 100644
+>> --- a/drivers/power/domain/power-domain-uclass.c
+>> +++ b/drivers/power/domain/power-domain-uclass.c
+>> @@ -12,6 +12,10 @@
+>>  #include <power-domain-uclass.h>
+>>  #include <dm/device-internal.h>
+>>
+>> +struct power_domain_priv {
+>> +       int on_count;
+>> +};
+>> +
+>>  static inline struct power_domain_ops *power_domain_dev_ops(struct udev=
+ice *dev)
+>>  {
+>>         return (struct power_domain_ops *)dev->driver->ops;
+>> @@ -110,19 +114,47 @@ int power_domain_free(struct power_domain *power_d=
+omain)
+>>  int power_domain_on(struct power_domain *power_domain)
+>>  {
+>>         struct power_domain_ops *ops =3D power_domain_dev_ops(power_doma=
+in->dev);
+>> +       struct power_domain_priv *priv =3D dev_get_uclass_priv(power_dom=
+ain->dev);
+>> +       int ret;
+>>
+>>         debug("%s(power_domain=3D%p)\n", __func__, power_domain);
+>>
+>> -       return ops->on ? ops->on(power_domain) : 0;
+>> +       if (priv->on_count++ > 0)
+>> +               return 0;
+>
+> -EALREADY - see drivers/power/regulator/regulator-uclass.c
 
+Actually I don't see the point in returning this? What is the purpose?
+Users should not care nor know about this, it is all internal to the
+uclass, we do _not_ want users to mess with this.
+
+If someone ever needs it, they can add a layer of "hiding" for all users
+but them, but as said just above, I really think it is a bad idea to
+propagate this outside of the uclass.
+
+(same in the _off path).
+
+Thanks,
+Miqu=C3=A8l
