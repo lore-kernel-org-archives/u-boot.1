@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E74A1E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 10:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1B5E77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 10:26:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D36A89639;
-	Fri,  6 Dec 2024 11:11:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 08544895D8;
+	Fri,  6 Dec 2024 11:26:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="haTWOL7a";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EUda8RlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47F538959E; Fri,  6 Dec 2024 11:11:53 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 15C6E895EC; Fri,  6 Dec 2024 11:26:43 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B5C589639
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 11:11:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C867895AE
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 11:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-385de59c1a0so1299225f8f.2
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 02:11:51 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d123ac1c3cso2029841a12.0
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 02:26:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733479910; x=1734084710; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=R98GsG67+HMTQ9F16JpjpCdLaj8drkClLDgQ9RibUZo=;
- b=haTWOL7aR+eeQlRm5cEmHIv0TQNpCDB2PGvH9de1nPjoJts0EukbeVETkg1KCDJe4L
- bnXnm10z91ZdiFsoVpocuGJBD0dCYOEIl5o6SuShgbdDQ/slfgigjJj0gn4NMCIVUTfq
- KBDlP9FEGt+ugkACYpC+kypG+xiP521/9CucRY6xA+ICH34nibY70nhpmHVND1ridxGx
- 4NBO/d69+MHcN+T7DXcyqd67u5UnL2Wyrix5nC1AppV/R5Q7nl7jW8WgHn63IxjcCGmO
- H/l73qHysaY5+lH5CCqwYCb1e8BSoTuZwWQqBMPp6wUlfJCOs1ePWPAS2DrAciPYiVA+
- AO8g==
+ d=gmail.com; s=20230601; t=1733480800; x=1734085600; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wbkH4RCm+gz++FZ/258sv0My7+DQU1Xuw6Jj/pudXj4=;
+ b=EUda8RlHm6VRkDKaAzI08Mf/Pqwv2i2JDJQBJmR+Tyx+r0sEo+2Am0CvM9iWk6+nuc
+ CdFb1p1wD4Kw5eOtgYstUu59PkVOaMozHdMT8LtL/Yu1/peepQW3USNpvlIBxGYDz41c
+ 5qpaZSVrsZPhdGHoCEuju+pr0sGC2x7OJNk43OiItCZF8985+RK4+ZZZ252KJy97R/NX
+ 9yCqzlpIZbGpuGg4z+WB3BvczrgrGoCZ6BleOBC7Jt4UIoXDunUcgAzdJlh7o/5mKOHI
+ HM3ZVeRfqYC+MB6k+gP+nKI+W+uH/z2rT/4S5RQk0B1yv413H/wym/VHpxUgU/tBySHL
+ m1Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733479910; x=1734084710;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733480800; x=1734085600;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=R98GsG67+HMTQ9F16JpjpCdLaj8drkClLDgQ9RibUZo=;
- b=ci4xNaEecSWSD9GWAcUobhuRDdsWb4Kq/jsdmNeW+DEmdlnRLzt5bzKbc1jHCxfJST
- 3pqT2ni3y4AzbU+S5dZt81EEhZOZYYX2Rk8twCfBJALkckRpOdiHcY27jqu/4EEWUlAc
- WVd4skP1y4hNPPPtuKN3X+XPoaiDMBHkPPnevwmnGX8kjCt5CtNIWHg4z6orHzRuUyw0
- amjI3HO7rPPKT5u5nxQ8B+j1Zifj7gC9nh8jBSi9tj7TNywpjoDEbgrUFBycvbITKlSM
- ptProhNt8iXBVQ2zHV9Ckr7sjmqVi5Gu43gJ99Nr6MRzB8cbC95f8deJw/YY3hx/GXqh
- 7wug==
-X-Gm-Message-State: AOJu0YzHr0lgEkhW2JULsLxkbzClU+92Q4UqAarKavGKoDGDYeKodLch
- PdMPq49e9DNEPSQbXLzmcSkb4FalCwvuAcbGedN3+tw/mJ3XVDHPxkLgm5p2OVx6uU5pQAuq1d0
- sgms=
-X-Gm-Gg: ASbGncsuXi324yPzweEOY67RnUb2e6i9TiOE4YbPneSBVaMy7S+O6dB9srpuQ318gFf
- r4fxQk/Ue6SpDArWjDYf/9lZySgn3nFeIcI9MYK0R1GEVB0OJRSLfo8Jsr6cyz9O2jVI0nP3pxf
- GrZaLw6Kp9ZsrVw0lTjCmhw3deiaO/AsI4e1bwYpp5iUvqKEeklHfxkxXIjcEwZ5OyAm+NwdB/d
- dsTDxC8mLVL2e1+Wd8gTDNLS0dTfmx30C4+Eb9wUHwh3u0NKYdqJL+ZrRs=
-X-Google-Smtp-Source: AGHT+IHOyHsLYDc4IBjb8F0bWXhDLt7VK38dZ/CeYJBybKnXFRsS98//fiCcpnwmiAp0z2cQ1Ufavg==
-X-Received: by 2002:a05:6000:1846:b0:385:e0d6:fb6e with SMTP id
- ffacd0b85a97d-3862b3d0a4amr1755965f8f.37.1733479910409; 
- Fri, 06 Dec 2024 02:11:50 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:7bf2:dbba:fd8f:cf0b])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3862190966bsm4290154f8f.75.2024.12.06.02.11.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 02:11:49 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH] trace: proftool: dump-ftrace should write funcgraph times in
- ns not us
-Date: Fri,  6 Dec 2024 11:11:31 +0100
-Message-ID: <20241206101132.1094545-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ bh=wbkH4RCm+gz++FZ/258sv0My7+DQU1Xuw6Jj/pudXj4=;
+ b=p4x26S2JKLHTs1Rld1TuldQlwQQQ9dF2Kfy/d1TXSasJuyumrouS6Hwwo1m9jVIE5K
+ 5bvzAPvMl6sSxy20IShjAinlIc574d5VXzvIhevdAq8sNfsWh1e92w/UMUZlB674j7ns
+ IYCKCZhVgDyMzlBMOTUaTYfQZUQoTChqIY5bJ/Sdqq9ysYg8UuhkgDLhVNYKAvn+l81G
+ wIsmwZ+5dVqyDwgslggfopYU0kBJY9g2GEpO36E+a9UXMgfX4F49UpDMThrtkAsJaV2I
+ /ZM4SrKzTl/lIGg84VHUIS8KcRS5ova5NJEh8KwQHmkOgeiJsUkoRUFyTGMixE1br47O
+ XZwg==
+X-Gm-Message-State: AOJu0YzqnWmg68gjJyPBEzZNSaOtSG4N/d1PrK5G4+hP3yxSIR6wm0pw
+ XLGunHBq04CS4Oy6FaDF0J1K8OfRWt3cH+zbt/ldVF0TmZiln5yB+eUae5ZjOkaX9LPWWWjLkrl
+ 5SvW2p4T0FdKJHK8Z2bc0+h6pPQE=
+X-Gm-Gg: ASbGncunSq8NwxRkaI7Bu7fvzJBQq7rHr+K0vwyhyupRBXCkkxAfVm2KsJ9rUenYVwB
+ WcuhiMQVwNYa1WYHnjCEh4mA0oqtNpHDJikI=
+X-Google-Smtp-Source: AGHT+IEQ5oP9TwN/CmSkp7WL+BbbUB845max383oRcjtp2EnEO/78DMI5jwGSlngVTg08LNrH7fp5HaaKBzJyazSwgo=
+X-Received: by 2002:a05:6402:5411:b0:5d0:8889:de02 with SMTP id
+ 4fb4d7f45d1cf-5d3be7ab92dmr1865471a12.22.1733480800367; Fri, 06 Dec 2024
+ 02:26:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241103003322.626036-1-sjg@chromium.org>
+ <20241103003322.626036-6-sjg@chromium.org>
+ <CAFLszTiAW3w1m2c0t0B3VzJpgkuFWcs-vMP-iPu0yj92GbFBog@mail.gmail.com>
+In-Reply-To: <CAFLszTiAW3w1m2c0t0B3VzJpgkuFWcs-vMP-iPu0yj92GbFBog@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 6 Dec 2024 10:26:29 +0000
+Message-ID: <CALeDE9P6GWKVbvjhDemz5DtbrtUsamy1UL8W0chAKHih5SJ7qQ@mail.gmail.com>
+Subject: Re: [PATCH v3 05/25] led: Drop LED_STATUS_BOARD_SPECIFIC
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Doug Zobel <douglas.zobel@climate.com>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,58 +95,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When converting a U-Boot trace records file to ftrace function graph
-format for use by trace-cmd ('proftool -f funcgraph dump-ftrace'), the
-time associated to each function is incorrectly saved in microseconds
-instead of nanoseconds. Multuply the value by 1000 to fix the issue.
+On Tue, 3 Dec 2024 at 19:48, Simon Glass <sjg@chromium.org> wrote:
 
-With this change, the trace-cmd output looks consistent. Here is an
-example with udelay(25) added to mem_malloc_init() as a test case:
+> On Sat, 2 Nov 2024 at 18:35, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > This is not used by any board and there is a driver model version of
+> > LEDs. Drop it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  cmd/legacy_led.c     | 40 ----------------------------------------
+> >  drivers/led/Kconfig  |  6 ------
+> >  include/status_led.h | 13 +------------
+> >  3 files changed, 1 insertion(+), 58 deletions(-)
+>
+> Applied to ci/master, thanks!
+>
 
- $ ./tools/proftool -m System.map -t /tmp/trace.bin -f funcgraph \
-                    dump-ftrace -o /tmp/trace.dat
- $ trace-cmd report  /tmp/trace.dat >/tmp/trace.log
- $ vi /tmp/trace.log
- [...]
- u-boot-1     [000]     6.719659: funcgraph_entry:                   |    mem_malloc_init() {
- u-boot-1     [000]     6.719659: funcgraph_entry:                   |      udelay() {
- u-boot-1     [000]     6.719660: funcgraph_entry:                   |        schedule() {
- u-boot-1     [000]     6.719660: funcgraph_entry:                   |          cyclic_run() {
- u-boot-1     [000]     6.719660: funcgraph_entry:        1.000 us   |            cyclic_get_list();
- u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |            }
- u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |          }
- u-boot-1     [000]     6.719661: funcgraph_entry:                   |        __udelay() {
- u-boot-1     [000]     6.719662: funcgraph_entry:        0.000 us   |          usec_to_tick();
- u-boot-1     [000]     6.719687: funcgraph_exit:       + 26.000 us  |          }
- u-boot-1     [000]     6.719687: funcgraph_exit:       + 28.000 us  |        }
- u-boot-1     [000]     6.719687: funcgraph_entry:      # 37971.000 us |      memset();
- u-boot-1     [000]     6.757658: funcgraph_exit:       # 37999.000 us |      }
- u-boot-1     [000]     6.757658: funcgraph_exit:       # 38000.000 us |    }
-
-In the above dump, the udelay() call is reported as taking 26 us which
-is consistent with the timestamps (6.719687 - 6.719659 = 0.000026).
-Without this patch we would have "0.026 us" instead of "+ 26.000 us".
-
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- tools/proftool.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/tools/proftool.c b/tools/proftool.c
-index c2e38099354..af2cdb6d584 100644
---- a/tools/proftool.c
-+++ b/tools/proftool.c
-@@ -1456,8 +1456,8 @@ static int write_pages(struct twriter *tw, enum out_format_t out_format,
- 				}
- 				tw->ptr += tputl(fout, 0);	/* overrun */
- 				tw->ptr += tputq(fout, 0);	/* calltime */
--				/* rettime */
--				tw->ptr += tputq(fout, func_duration);
-+				/* rettime (nanoseconds) */
-+				tw->ptr += tputq(fout, func_duration * 1000);
- 			}
- 		}
- 
--- 
-2.43.0
-
+Why is this being applied via a ci branch? I don't think that is
+appropriate!!!
