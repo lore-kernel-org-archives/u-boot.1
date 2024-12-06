@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEFEE77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:17:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC9E3E77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:17:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3FD989376;
-	Fri,  6 Dec 2024 20:17:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 478D78971C;
+	Fri,  6 Dec 2024 20:17:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cixFeKCI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eBZFayYw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08BB28971C; Fri,  6 Dec 2024 20:17:29 +0100 (CET)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id CA184896EE; Fri,  6 Dec 2024 20:17:47 +0100 (CET)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C449C88F0C
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:17:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 954CB8921B
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:17:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-7258bce5289so2003508b3a.0
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:17:26 -0800 (PST)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-7fc8f0598cdso2840655a12.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:17:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512645; x=1734117445; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733512664; x=1734117464; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vVTwZY6DdwiJvvXdb2iHwHGFx6Q7H1OypfronoaJrnU=;
- b=cixFeKCICAWcRZ1E+ZRT8B9Y44PDTx0I5ESLQ5SXJaHEsR0s5AEa7ocQEmLrauc8s+
- GQ/RT+kZpkOdGkos2RJndkzFHK/XHEJ8dgeZrvYs86a00smkCvHwVw0xqax5WJfVqnWT
- W8+2TtHHJho3TWTIeL6/FAvT84Xg1n7+uE4Oo=
+ bh=hEVIDf2ArseCyx+qsrbqJwmc7mEHJV4yMGEW1vekbcU=;
+ b=eBZFayYwQ45zyUWO9dIcSYjEe+GFpTi7g07mok7Fv6jvVoBgGFomKjRGaOO99nHrsq
+ VWuQ5T85xeF4A63WyeOkjlpqQYiRB3Xe6wxbVwTlnKSi4js0VkpbzmNvN7yJnix9mh80
+ 1DncGKmE0XRDTLmp/vKJwWeVwPY/bgDjETHaM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512645; x=1734117445;
+ d=1e100.net; s=20230601; t=1733512664; x=1734117464;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vVTwZY6DdwiJvvXdb2iHwHGFx6Q7H1OypfronoaJrnU=;
- b=GfoC0d3a3Y1l/yMnI8Nqv1QIbV3EovRdCUWtySEJvCryEpfBRRwmO3Xs8PdG3mc3ff
- qBMdXrWG0XPTagEDDHtYFn/Q2SWTlBARZjs0ndWuS+TCru1uluWJnBP3V3GswZIpFbX1
- ygJfFOZYtu1qPngFE9531hcB0wnj6Ogwbm2vmePOEzf1ShZ6JMi1ViEu30shqIsjdXe4
- kEPii3RWgTBxP4jXj4jn9IIdSHkWB2bX+ZzNMDwe9FVwjglxUR86Malcwtj9s2zg3WD4
- 5RvtewNPQT4yDTfFSDsRyr575nRjEXvkfEJHMFyU8HEdwaAc0bWKgs7FyBDmaQ42B43A
- 6txQ==
-X-Gm-Message-State: AOJu0Ywtyw3NtUHwP2XUmpzLJ03X/SROUCv3gTGwMri3nzS6th/Btz/J
- 4k2XDHH/Q7+5d7tFwRo+yL/xHlTOgl+gNXWr9bEzJ6k8W/vwKg7mIWyHLRRqb7wdfZLT059LyzC
- RNZo5xw6qewALXD/64/MXZbaE7UjVK3+/neOX
-X-Gm-Gg: ASbGncs6bSRbwUSQFGbSP4pP3diBqbcY3j8Tmoo4HIFW06xFbN2iiAzguFZD/dbYpPb
- hQG6QhaKbIKpT77DC3ZcpyS7bfSq6ZdfaYViW
-X-Google-Smtp-Source: AGHT+IFVZ7Cm3heQVth24ySOD/RpAQUXiHT60ehs4aSEtfklJ6UCqMenOSHkdyyOeffzIbm/57wBQRAX9Hv6E6y03dQ=
-X-Received: by 2002:a17:90b:5204:b0:2ee:d371:3227 with SMTP id
- 98e67ed59e1d1-2ef6a6bdc2amr7187193a91.17.1733512645420; Fri, 06 Dec 2024
- 11:17:25 -0800 (PST)
+ bh=hEVIDf2ArseCyx+qsrbqJwmc7mEHJV4yMGEW1vekbcU=;
+ b=IB1u+IRjWzcyI/qybGt4AzQ8+VO0yh4fdH/mwAk93OeVgqg3VyIUiyGCA0KZAqURic
+ WqV5JLPlvjFpsTHVb0oF9YPh28Gxqyspzve+TY3uJ+C5aAHz1RShPljnVUygdXoC9H1I
+ anO/hchkn9LOpnvkuSOnLpIU1QeCd0PvG24hLJ6VsBbVCD5cPfBmuXILUYlOnDi5bhXh
+ 3f5t+itpKLqfzobOr7ZqIJWSRKZgVxoDiGMzFR5GXNC5syv8mEw62xXFXAYf+QsoWGwT
+ ZI53iXK6vuzUdl94auNqdSN/Zmwj9Iul9jw5eG+wby26u8UKMb4RHDVbrRtTOFiScS7a
+ mzqw==
+X-Gm-Message-State: AOJu0YwHZeJheOzXJDbD1kt9u31ur4ClQ6tZJRE70059NWIa9lrNJkJa
+ 3x7mjRt6WSoe+W/KW1eYkk/TeHtYGjoPRagTGP7VDwCPz3zRppiPJQIwinVn94uzNDPpxWsIH9J
+ /kM7R0eEClyRJJahmz3Xo9icExaKJjtOX6vKW
+X-Gm-Gg: ASbGncsI9GwQhAgweKENWxhfEbNoZb009atCRklDwN6jh9y8QBA2F/guZ7yQfG2BNIO
+ a/FtlzVhzB0NR6+pcb+l+SQljnwEx107F
+X-Google-Smtp-Source: AGHT+IGsqz2M54IwO7wvX+dxZRYoA9Fz2Cd4zu1awE7s2joL0CXZnQuVjmJ07VcQe3sSS0WYetVWQlwjEgF/2lhQFzM=
+X-Received: by 2002:a17:90b:33c6:b0:2ee:edae:775 with SMTP id
+ 98e67ed59e1d1-2ef68c88ef7mr6511534a91.3.1733512664159; Fri, 06 Dec 2024
+ 11:17:44 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1730452668.git.michal.simek@amd.com>
- <22109373594b6a5d1110be9420ccd8fbb93a61d3.1730452668.git.michal.simek@amd.com>
-In-Reply-To: <22109373594b6a5d1110be9420ccd8fbb93a61d3.1730452668.git.michal.simek@amd.com>
+ <f1379d2587f9bf279a7a75c318aabbc1b35ee0c6.1730452668.git.michal.simek@amd.com>
+In-Reply-To: <f1379d2587f9bf279a7a75c318aabbc1b35ee0c6.1730452668.git.michal.simek@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:16:34 -0700
-Message-ID: <CAFLszThwL6i7XT6hey4QE87wfGkq=Et0TjzH+kgQjPUZzvYRQg@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] Makefile: Drop SPL_FIT_GENERATOR support
+Date: Fri, 6 Dec 2024 12:17:29 -0700
+Message-ID: <CAFLszTjaY1i2D6PsL9fc_DJRsX5XwMdmHZ5Pq2AXpNS00L_t3w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] binman: Add option for pointing to separate
+ description
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com, 
- Marek Vasut <marex@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
- Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>, 
+ Marek Vasut <marex@denx.de>, Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -89,29 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michal,
+
 On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
 >
-> From: Marek Vasut <marex@denx.de>
+> Adding binman node with target images description can be unwanted feature
+> but as of today there is no way to disable it.
+> Also on size constrained systems it is not useful to add binman description
+> to DTB.
+> Introduce BINMAN_DTB Kconfig symbol which allows separate DTB for target
+> from DTB for binman itself.
 >
-> The SPL_FIT_GENERATOR is long superseded by binman, drop SPL_FIT_GENERATOR
-> support as there are no more users.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 >
 > Changes in v2:
-> - Rebase on the top of my series which do conversion to binman
-> - Taken from git with all tags
+> - Change subject, align commit message
+> - binman - rename variable
+> - Use relative path
+> - Use separate variable in makefile to also handle empty string and default
+>   to u-boot.dtb
 >
->  Makefile                | 18 ------------------
->  boot/Kconfig            | 14 --------------
->  doc/usage/fit/howto.rst |  4 ----
->  3 files changed, 36 deletions(-)
+>  Makefile    | 11 ++++++++++-
+>  lib/Kconfig |  9 +++++++++
+>  2 files changed, 19 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Thanks!
+This seems OK for now, and unblocks the migration.
+
+Longer term, I would rather have a way to tell binman to remove the
+description, as mentioned.
