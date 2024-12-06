@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214B8E77179
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B08CE77173
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 19:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 916298973E;
-	Fri,  6 Dec 2024 20:16:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E3EBD89376;
+	Fri,  6 Dec 2024 20:16:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NlouOcuB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GbH6nFsV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D56B8973E; Fri,  6 Dec 2024 20:16:30 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 18EE6896EE; Fri,  6 Dec 2024 20:16:36 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C922A88F0C
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:16:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B3288F0C
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 20:16:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2ee74291415so1777584a91.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:16:27 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2ee989553c1so2109487a91.3
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 11:16:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733512586; x=1734117386; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Uq6MnTcwxxwYNxfdraUSYgvDaC+4Xbsswg2/D/P8fGk=;
- b=NlouOcuB6yn4ATTc62vQ9pzqvnuevdCsUhSMLvY1MV3yTVMqoOczIcLxz31Z6v6VF7
- hKep+MLVRo4RXNO9aeEbxyagnK8AB5k8UW23yO0Djp+ifk5ifTIYP2bPv3Z6e1e1NeQY
- 1GNM60RZVjyb47pAk4YTUMRTeMg18Q9qxqjqk=
+ d=chromium.org; s=google; t=1733512592; x=1734117392; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=E0yox1t8mQ7IZ/vkjFo5933/djM+TCAVn4hMhDx2v3o=;
+ b=GbH6nFsVOicpdJM7YphF//Ye5ER4AA55ifMKxXzoCv9qe0Zg4/o8Of4FbdwUaJAh3s
+ EkHaeNS6BjCJILlu15O6dnYeDVCIetuV+bZoEUboxgZRs3emRXPJvh8ElaMYGHcqQMrA
+ QEjjNp4QDDK+UiAJzP/9yBXFkPrwwZLDykIi8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733512586; x=1734117386;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Uq6MnTcwxxwYNxfdraUSYgvDaC+4Xbsswg2/D/P8fGk=;
- b=p1pf1Bmwwr2zIBRmb8tP6G6z4gp78fGrG7TIeI6MeMmh/5oPnXPJto8OXngu6VpHer
- GMvWOfr97ZSQTnblXifY6Q7wTpGTb+4KF1TE2UjgClggFzxTnMAdsnAAwhhuvI8GxI9g
- xqgpwv3nPERuYvP1pF8xLfe/L1abqq+kJfAkiiDTxvqYOVy8B3PjJewpWBC9ggoyfrcD
- +SaxNpqRxSY6pYi4tZNhWrM3f1i9PCYW3P2y0HC1ZzS1x8QPrPJPcIqPT5cPtSaKHqBI
- NZG5BcpAg1RgimgdYGpR00GeHFWASJr7t0HGQQIH+3FUg3IS44iEA0w6d5Ougg5Msh3Y
- nIgw==
-X-Gm-Message-State: AOJu0Yz/sxMPAf44e/zp/7+615icqD5XAT9hictuAZf6wV4z/H/yUht6
- Wph8eK2fqchJ7J9tfV6SSYM7zY0PZHTaJqfmG5dgCIKcpWtd4WW5moSCoPVCsvdMnaVfKtaUlGi
- t7LxeQKqPiLyfPn5Fjv32A9gSo/3trwaSMCHk
-X-Gm-Gg: ASbGncvxQrK12F8HVWwqjCo7wJwrdHkey7Au1igG06J0SepBrJCBQaAtAM3+7PlHVIc
- nGse5BdfCI2akHi6roaRLFqoQLmdKxywl
-X-Google-Smtp-Source: AGHT+IHc3ZzP/yGs94XNsp0eNMxpdHJ94GSffOLwzQW+VE+hDorxlxQl/p5cCv9eiMOZFNy/3g4mcIs34tSRARLIP0E=
-X-Received: by 2002:a17:90b:2d43:b0:2ee:ba84:5cac with SMTP id
- 98e67ed59e1d1-2ef6955f863mr6520398a91.7.1733512586352; Fri, 06 Dec 2024
- 11:16:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733512592; x=1734117392;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E0yox1t8mQ7IZ/vkjFo5933/djM+TCAVn4hMhDx2v3o=;
+ b=ivq2VE0p3DWphmi/agZJ7i4Yu6OeT0W28ooo5+eSd0suGpkFNhX/hA5dYn9aKInkIJ
+ edhCiKPtm5n6D15c66Ls0juYiNnUQbIjMskRkDk9IyhyybvZl88y+mQQgqM/Vg3QD865
+ SLrWl9oqS4H01DQXRLqrALWu121JFondBjPBfqjJrEzzPY47pxGQhKzqoPTc7vkEoSX8
+ SPuliK6BJ3S+BEXbMBZmuKTGhYXPKbfxkp2aBMegewJAh+BLKyBMaXpOeKW5QRe8Yx8F
+ ppYFyrjt25NJa5S47LCVlQBN4IB75Ey3wBJ2vB3WxuwODtwJFAvEOpq5askT1phvVKS2
+ kfiw==
+X-Gm-Message-State: AOJu0YywqKH+RhfsuMdb+REO55B0mFhZ0C9TVcnMKLaXK/ojKQQG3v/D
+ l4XKZoRy2WpfFGLI9PcJQBTrpkqbxFIMcQWypVgQXYZICd7OUQpjgj1RRlnfub0AedmKXFauA4O
+ Oktzj/44FztYXcbQnaEHk95LhbIQaPqULsnRVTB5v+BQUnts=
+X-Gm-Gg: ASbGncvuVmpssysELc2vT2kxlR8+HxAdP1fITWKA+IwLqBQzt/aconwffK8EiCubQ0q
+ S9BLf+dgh9Bku37AzwhN9SzvxVZObO5Wp
+X-Google-Smtp-Source: AGHT+IH2z8TpHaiB8I1FGzXrAbhAUrJVi7DMB30CZ+3pF/CPESV+BxiMy5D02KrNQE8qAzztEWF/P8LS1RDFiVwc8/M=
+X-Received: by 2002:a17:90b:2744:b0:2ea:77d9:6345 with SMTP id
+ 98e67ed59e1d1-2ef6a6c10d9mr5927437a91.22.1733512592446; Fri, 06 Dec 2024
+ 11:16:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
- <20241125174717.1181452-2-paul.henrys_ext@softathome.com>
-In-Reply-To: <20241125174717.1181452-2-paul.henrys_ext@softathome.com>
+References: <20241125175421.1181907-1-paul.henrys_ext@softathome.com>
+In-Reply-To: <20241125175421.1181907-1-paul.henrys_ext@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 12:16:08 -0700
-Message-ID: <CAFLszTjp7Y6xwNQXcakuS2V3hN-ELhdQ+CqF4BOCvHB_uw3j3A@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] tools: binman: add 'fit, encrypt' property to pass
- keys directory to mkimage
+Date: Fri, 6 Dec 2024 12:16:10 -0700
+Message-ID: <CAFLszTh782uOFHJjf69QmH0WovHuef-bG03T6+sM=miGVhxwww@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] tools: binman: etype: Allow to replace 'NAME' in
+ node names
 To: Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com, 
- al.kochet@gmail.com
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,59 +84,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Nov 2024 at 10:47, Paul HENRYS
+Hi Paul,
+
+On Mon, 25 Nov 2024 at 10:54, Paul HENRYS
 <paul.henrys_ext@softathome.com> wrote:
 >
-> mkimage can be used for both signing the FIT or encrypt its content and t=
-he
-> option '-k' can be used to pass a directory where both signing and encryp=
-tion
-> keys can be retrieved. Adding 'fit,encrypt' property to the 'fit' node, l=
-eads to
-> try to find keys directory among binman include directories.
-> _get_priv_keys_dir() is renamed as _get_keys_dir() and adapted to support=
- both
-> signing and encryption nodes in the FIT.
+> This change allows to replace both 'SEQ' and 'NAME' keywords by respectively a
+> sequence number and the name of the FDT to provide more flexibility in the node
+> name for the device trees included in the FIT.
 >
 > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 > ---
-> Changes for v4:
-> - Add 'fit,encrypt' property to enable encryption in FIT
-> - Remove the previous implementation to have a common property to pass th=
-e keys
->   directory to mkimage for both signing and encrypting the FIT
-> - Update the entries.rst file
+> Changes for v2:
+> - Add a test
+> - Add support to replace DEFAULT-NAME
+> - Update entries.rst
 >
-> Reacting to Alexander's message pointing at Simon's previous message in A=
-ugust, speaking about entryargs. At my level, it doesn't really matter whet=
-her a specific directory is specified or if it comes from one of the binman=
- input directories and Alexander's implementation, that retrieves the signi=
-ng keys from one of the binman input directory is handy for that.
-> On my side, it would sufficient to retrieve the ciphering keys from one o=
-f binman input directories, like for the signing keys but with the current =
-implementation, I would need to add the property 'fit,sign' which is a bit =
-counterintuitive. 'fit-keys-directory' might also not be right, it could be=
- something like 'fit,keys'. What I meant is that afaiu, 'fit,sign' is not a=
- property that will enable the signature but provides the keys directories =
-to mkimage. Signing the FIT data is based on the presence of 'signature' no=
-des in the ITS. The same is true for the encryption with mkimage but with '=
-cipher' nodes.
+>  tools/binman/entries.rst               | 18 ++++++++
+>  tools/binman/etype/fit.py              | 20 +++++++++
+>  tools/binman/ftest.py                  | 61 ++++++++++++++++++--------
+>  tools/binman/test/345_fit_fdt_name.dts | 58 ++++++++++++++++++++++++
+>  4 files changed, 138 insertions(+), 19 deletions(-)
+>  create mode 100644 tools/binman/test/345_fit_fdt_name.dts
 >
-> Regarding the other entryargs for signing with binman, this is another wa=
-y of signing any piece of data (file, binary blob...) which globally signs =
-the data and prepends a header. When using the FIT embedded signature, that=
- does not sign all FIT metadata, I guess it's better to keep it in mkimage,=
- which is the tool generating the FIT.
->
-> I am pushing here a v4, where I add a property 'fit,encrypt' that does th=
-e same than 'fit,sign', passing the option '-k' to mkimage. That might help=
- our discussions because I am a bit confuse at the moment on the approach t=
-o be taken. Thx for your help.
->
->
->  tools/binman/btool/mkimage.py |  8 ++++----
->  tools/binman/entries.rst      |  7 +++++++
->  tools/binman/etype/fit.py     | 25 ++++++++++++++++++-------
->  3 files changed, 29 insertions(+), 11 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Note that entries.rst needs to be updated whenever the docs for an
+entry type change.
