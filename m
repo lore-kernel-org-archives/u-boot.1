@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9720E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 23:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC878E77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 23:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB15089100;
-	Sat,  7 Dec 2024 00:44:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6528A89124;
+	Sat,  7 Dec 2024 00:44:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AJZjz65M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LrGD8Vbv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EECD89124; Sat,  7 Dec 2024 00:44:03 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id A58718961C; Sat,  7 Dec 2024 00:44:09 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A728890D9
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 00:44:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A60089451
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 00:44:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa63dbda904so245140766b.3
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 15:44:00 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-aa63dbda904so245150166b.3
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 15:44:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733528639; x=1734133439; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733528646; x=1734133446; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/yUWgOU8PGJBtgV1sgH8hyftJoIhotkTvo96ff1hKNU=;
- b=AJZjz65MMAnT8LXcdWkoJrfmc8a9Ad3RCnAA9tJQ9x8mL477kjPK8kqDiP3dFEJxO6
- tq+6r6evm/O72d5J6W7dpdqeGUW1p35TgbDscPSKLGXHzfl+xSJgmShk4RVVyk5qbycC
- XH71XzbnrCDn5e8qfD6CGJ7KK+ia/1ergvYdQ=
+ bh=HoTntMNmjiJVNs86f5Iz0dgprVn8XC+nDOZF6E3kCsY=;
+ b=LrGD8Vbve4iNnKLzj4vLyOoa1fWOBzTb3FrrzSXvftmsnpaKMmahiosc7sj805YP3x
+ kwbupm2V6WsuIFEsUdU0xfWUAFnnwGimszSkKOO3BtzS7B2mmSG6Ftf5EylKrTuglWdE
+ nTryqENKaO27eumODUWq2pSGUVPvFM2Sg48LA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733528639; x=1734133439;
+ d=1e100.net; s=20230601; t=1733528646; x=1734133446;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/yUWgOU8PGJBtgV1sgH8hyftJoIhotkTvo96ff1hKNU=;
- b=aifEhgHDmP2q/jgkUGoBgi9jZwYiHl/A7Ea6L80qVzB9ELZDtLSMwybIXY3G1kTqLb
- NdNQ9EnTsHf5ZpEW9GWdNO94tuphaqa8a8AxIrwP/ACXxTF5iaCTsAWDg1YOHAuGXZ54
- LV8LMc+ZpTzNT1sVB3BrkeHHcFao2Z4Tkp4/xYRFFP60ne51fJ1fZtEl87nvE714w5Es
- Fsx02iWu/gN2vVqEJ1/7y9YvbH5ngdh2RhdXFoMUeVYga4VdekaaG6emPk8z/zU5XUke
- 2bojP4bzHNiOVMqONDMdMuPSl3mtihVI9hNHlWZN7T9T0DdkLKucAGa2oJ2+0Eb1F7qn
- OuSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZe2zcoin8Eg1i2U+nRC02FvKuq7wRe0Rrh5A6SZGa/j2VCz9E//GvyerbcmICSA1mDTHDVI8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1xa9Mh4RwbYPP0iYMhwJqih/X2e5xOvLeJID7IMdDBAbkR7n8
- 8A1QTjhYt3zPhF8p8vdxN6Kn6zHnZlYPymkqhf+P3YnCPZk0316xA/PgTLScXDx5kaP6To2Rl21
- 1MKaY5+fVeb8TKKohsVG3fg4XHxcjcauYymU7
-X-Gm-Gg: ASbGncuocD2HXMPSBH+0K6d18OVoSTU5iMs9hgb22axOh+obCqSpzA4Ja3pBSZqhwNz
- ofSFFS+9nAKbBB9gTaQFyt2nAPzL/1BU3
-X-Google-Smtp-Source: AGHT+IE5BQUiwL+OglCi/9/alVZK72tekXrkmt7xFYybwYmN5cbujiizETz5OkB75eAlCxSQBUxEM9tnPSyay2MWr0s=
-X-Received: by 2002:a17:906:9895:b0:aa6:2987:9a48 with SMTP id
- a640c23a62f3a-aa639fa52f4mr434470166b.1.1733528639315; Fri, 06 Dec 2024
- 15:43:59 -0800 (PST)
+ bh=HoTntMNmjiJVNs86f5Iz0dgprVn8XC+nDOZF6E3kCsY=;
+ b=jmEjLkYJC2msPBEEMxAxxBc2XTVVopqDp72NfAiLC7Hix7xaAx3X4u99/Dhz9l6fVA
+ eH40nYyzn8RA8Mw94hSXfy74FPK6eIfxyKBJblc+Ej0+AHVY+n3Rea9JuOuQVib2TGwe
+ JFMOh0p0QxCjgHUOhqEZRgufP6oWOQ2Vmx54pf5zi+bCRTuAWBTbVSUHMv51J4mJumaA
+ YcemUVbXPF2ANQzWpY2mE0pU/dWsc8Rn+Hmjh7Lpehw3ZLXfiAj5U8O+QLTpPP7ShbMl
+ UgJFpM8JGDDlUE9aSITri7EwwRJjbcTQlof4UY4TPFVVhc4UuOGKdzImWS0+xKnS3kns
+ nj9Q==
+X-Gm-Message-State: AOJu0YzKVZGgSQaji63oWgWDgHE+d6fExbFmX4MrqP1OS00MI68/rXug
+ GNsuUynV+Duvl1gGtBVbrSC4gJODcj6/3OzDC8OwY5VOhsxj/EPrPaseFKbbk6drOZcD8J8BcIN
+ 3oJL4Pm/vK54FBZ6yHHQXcIaE5jYnQXf18clI
+X-Gm-Gg: ASbGncsj5elHWkvqXccXrxJgGsvz6QyHFWcrFFyiR5CzkcovbLLj78zt5gRq4e/YqOS
+ jzqTYWZmgcIVxFz8AdGgYvFvNE4pn2Ws1
+X-Google-Smtp-Source: AGHT+IG1EAiwgyAhqFJadewnX3a2ZrNY7sYubeEMzMMDtCWv1Kqp/HqkxhDY2wJ5dyBdaHRhp8aAWrAc3GFtJDV+Cbk=
+X-Received: by 2002:a17:906:2189:b0:aa6:143e:12a with SMTP id
+ a640c23a62f3a-aa639fa4855mr434947266b.2.1733528645578; Fri, 06 Dec 2024
+ 15:44:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20241202001243.1283274-1-sjg@chromium.org>
- <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
- <20241202141558.GD2457179@bill-the-cat>
- <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
- <20241204012907.GD2457179@bill-the-cat>
- <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
- <20241204162707.GG2457179@bill-the-cat>
- <CAFLszTjs7taGs5LjiZ4XBgkJtjK_Db7ZiWwbpW6Kzz_tFjo=Rw@mail.gmail.com>
- <20241206201236.GA2457179@bill-the-cat>
-In-Reply-To: <20241206201236.GA2457179@bill-the-cat>
+References: <20241022200543.116343-1-raymond.mao@linaro.org>
+ <20241022200543.116343-4-raymond.mao@linaro.org>
+ <CAFLszTjNB+JZZdKShy6JkR69E2WJE-g=OapC3oThPeT1jLS-zA@mail.gmail.com>
+ <CAEfUkUJGLatGxwyHLzH87-0Sq9JLreyHVvEVkwZCxcfx8r1Hcg@mail.gmail.com>
+ <CAFLszTgG9ec-gZe5hf+CQ3TczXV0QFADEAkN0za1+dbXANarNw@mail.gmail.com>
+ <CAEfUkULF5CGhjDoZznOtSTv4PDn57nScCf379VMk23Vt1p154w@mail.gmail.com>
+In-Reply-To: <CAEfUkULF5CGhjDoZznOtSTv4PDn57nScCf379VMk23Vt1p154w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Dec 2024 16:43:47 -0700
-Message-ID: <CAFLszTg2Y13iUsL7EHcw=8cKY_ii==ANoG-ztpS0Y5eMc_UKow@mail.gmail.com>
-Subject: Re: Applying patches to mainline (Was: Re: [PATCH v2 0/7] efi_loader:
- Add support for logging to a buffer)
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 6 Dec 2024 16:43:54 -0700
+Message-ID: <CAFLszTjeb2pL+cytmkbnJyWAFxGGWO0yS9YA1rA6uEpV4Pgv+Q@mail.gmail.com>
+Subject: Re: [PATCH v2 3/8] sysinfo: Add sysinfo driver and data structure for
+ smbios
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,219 +102,631 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Raymond,
 
-On Fri, 6 Dec 2024 at 13:12, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 6 Dec 2024 at 08:54, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> On Fri, Dec 06, 2024 at 12:19:38PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 4 Dec 2024 at 09:27, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Dec 04, 2024 at 08:13:04AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 3 Dec 2024 at 18:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Dec 02, 2024 at 05:21:05PM -0700, Simon Glass wrote:
-> > > > >
-> > > > > > From my side I'd like to change the conversation a little, to how to
-> > > > > > land code, rather than why we should bother. "Code needs to land"
-> > > > > > should be the motto. If someone has taken the time to create
-> > > > > > something, our bias should be towards getting it in, with sufficient
-> > > > > > changes to make it fit the project. There are cases where something is
-> > > > > > just a bad idea, or should be done another way, but for people working
-> > > > > > on major features or changes, biasing towards not landing the code is
-> > > > > > just going to make them go elsewhere.
-> > > > >
-> > > > > This is the wrong approach I believe. The goal has always been and
-> > > > > continues to be to have reviewed (whenever possible, our developer
-> > > > > community is small) incremental change over time.
-> > > >
-> > > > Yes, I agree with that, but it isn't what I said.
-> > >
-> > > I don't know how else to interpret "Code needs to land". I'm not sure
-> > > what reviewed patches we have that are outstanding, but also not fairly
-> > > new. We do have patches outstanding, in general. Much of those fall in
-> > > to the categories of:
-> > > - Custodian is active, but also very busy (virtually everyone is a
-> > >   volunteer so I have a hard time getting forceful with people that have
-> > >   a large queue).
-> > > - Custodian isn't active / no direct custodian and the code hasn't been
-> > >   reviewed by anyone else.
-> >
-> > Here's my intention with 'code needs to land': to bias against people
-> > saying "I don't like this; I don't care about your use case; please go
-> > away"
+> Hi Simon,
 >
-> To me that applies an arbitrary nature to patches being rejected, which
-> I do not see as being the case.
->
-> > > > > Just because something
-> > > > > has been posted a number of times does not mean it's ready to be merged.
-> > > >
-> > > > I didn't say that either.
-> > >
-> > > It's an impression you give however when you repost a series less than a
-> > > day after last posting, without addressing all of the feedback.
-> >
-> > I'm going to ignore that comment as it is not helpful and
-> > mischaracterises my contributions.
->
-> I stand by it, and will let others judge if that's the impression they
-> have, or not.
+> On Fri, 6 Dec 2024 at 10:31, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Thu, 5 Dec 2024 at 10:28, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Hi Simon,
+>> >
+>> > On Mon, 28 Oct 2024 at 13:04, Simon Glass <sjg@chromium.org> wrote:
+>> >>
+>> >> Hi Raymond,
+>> >>
+>> >> On Tue, 22 Oct 2024 at 22:06, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >> >
+>> >> > Add sysinfo driver to retrieve smbios information (Type 4 and 7).
+>> >> > So that the smbios library can use it for getting values from the
+>> >> > hardware platform instead of device tree.
+>> >> >
+>> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> >> > ---
+>> >> > Changes in v2
+>> >> > - Move the changes to smbios.c instead of creating new file.
+>> >> > - Move the headfile to include dir.
+>> >> > - Combine with #6(v1) patch.
+>> >> > - Clean-up the private data structures.
+>> >> > - Clean-up the operations of the strings and common values.
+>> >> >
+>> >> >  drivers/sysinfo/smbios.c | 228 +++++++++++++++++++++++++++++++++++++++
+>> >> >  include/smbios.h         |  60 +++++++++++
+>> >> >  include/smbios_plat.h    |  79 ++++++++++++++
+>> >> >  include/sysinfo.h        |  95 +++++++++++++++-
+>> >> >  4 files changed, 461 insertions(+), 1 deletion(-)
+>> >> >  create mode 100644 include/smbios_plat.h
+>> >> >
+>> >> > diff --git a/drivers/sysinfo/smbios.c b/drivers/sysinfo/smbios.c
+>> >> > index a7ac8e3f072..3980845b3ba 100644
+>> >> > --- a/drivers/sysinfo/smbios.c
+>> >> > +++ b/drivers/sysinfo/smbios.c
+>> >> > @@ -5,14 +5,240 @@
+>> >> >   */
+>> >> >
+>> >> >  #include <dm.h>
+>> >> > +#include <smbios_plat.h>
+>> >> >  #include <sysinfo.h>
+>> >> >
+>> >> > +/* platform information storage */
+>> >> > +struct processor_info processor_info;
+>> >> > +struct cache_info cache_info[SYSINFO_CACHE_LVL_MAX];
+>> >> > +struct sysinfo_plat sysinfo_smbios_p = {
+>> >> > +       /* Processor Information */
+>> >> > +       .processor = &processor_info,
+>> >> > +       /* Cache Information */
+>> >> > +       .cache = &cache_info[0],
+>> >> > +};
+>> >> > +
+>> >> > +/* structure for smbios private data storage */
+>> >> > +struct sysinfo_plat_priv {
+>> >> > +       struct processor_info *t4;
+>> >> > +       struct smbios_type7 t7[SYSINFO_CACHE_LVL_MAX];
+>> >> > +       u16 cache_handles[SYSINFO_CACHE_LVL_MAX];
+>> >> > +       u8 cache_level;
+>> >> > +};
+>> >> > +
+>> >> > +static void smbios_cache_info_dump(struct smbios_type7 *cache_info)
+>> >> > +{
+>> >> > +       log_debug("SMBIOS Type 7 (Cache Information):\n");
+>> >> > +       log_debug("Cache Configuration: 0x%04x\n", cache_info->config.data);
+>> >> > +       log_debug("Maximum Cache Size: %u KB\n", cache_info->max_size.data);
+>> >> > +       log_debug("Installed Size: %u KB\n", cache_info->inst_size.data);
+>> >> > +       log_debug("Supported SRAM Type: 0x%04x\n",
+>> >>
+>> >> %#04x
+>> >>
+>> >> > +                 cache_info->supp_sram_type.data);
+>> >> > +       log_debug("Current SRAM Type: 0x%04x\n",
+>> >> > +                 cache_info->curr_sram_type.data);
+>> >> > +       log_debug("Cache Speed: %u\n", cache_info->speed);
+>> >> > +       log_debug("Error Correction Type: %u\n", cache_info->err_corr_type);
+>> >> > +       log_debug("System Cache Type: %u\n", cache_info->sys_cache_type);
+>> >> > +       log_debug("Associativity: %u\n", cache_info->associativity);
+>> >> > +       log_debug("Maximum Cache Size 2: %u KB\n", cache_info->max_size2.data);
+>> >> > +       log_debug("Installed Cache Size 2: %u KB\n",
+>> >> > +                 cache_info->inst_size2.data);
+>> >> > +}
+>> >> > +
+>> >> > +/* weak function for the platforms not yet supported */
+>> >> > +__weak int sysinfo_get_cache_info(u8 level, struct cache_info *cache_info)
+>> >> > +{
+>> >> > +       return -ENOSYS;
+>> >> > +}
+>> >> > +
+>> >> > +__weak int sysinfo_get_processor_info(struct processor_info *pinfo)
+>> >> > +{
+>> >> > +       return -ENOSYS;
+>> >> > +}
+>> >> > +
+>> >> > +void sysinfo_cache_info_default(struct cache_info *ci)
+>> >> > +{
+>> >> > +       memset(ci, 0, sizeof(*ci));
+>> >> > +       ci->config.data = SMBIOS_CACHE_LOCATE_UNKNOWN | SMBIOS_CACHE_OP_UND;
+>> >> > +       ci->supp_sram_type.fields.unknown = 1;
+>> >> > +       ci->curr_sram_type.fields.unknown = 1;
+>> >> > +       ci->speed = SMBIOS_CACHE_SPEED_UNKNOWN;
+>> >> > +       ci->err_corr_type = SMBIOS_CACHE_ERRCORR_UNKNOWN;
+>> >> > +       ci->cache_type = SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN;
+>> >> > +}
+>> >> > +
+>> >> > +static int sysinfo_plat_detect(struct udevice *dev)
+>> >> > +{
+>> >> > +       return 0;
+>> >> > +}
+>> >> > +
+>> >> > +static int sysinfo_plat_get_str(struct udevice *dev, int id,
+>> >> > +                               size_t size, char *val)
+>> >> > +{
+>> >> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+>> >> > +       const char *str = NULL;
+>> >> > +
+>> >> > +       switch (id) {
+>> >> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT:
+>> >>
+>> >> These are getting too long.
+>> >>
+>> >> How about SYSINFOSM_PROC_MANUF ?
+>> >>
+>> >> We can use SYSINFOSM as short for SYSINFO_ID_SMBIOS
+>> >>
+>> >> > +               str = priv->t4->manufacturer;
+>> >> > +               break;
+>> >> > +       default:
+>> >> > +               break;
+>> >> > +       }
+>> >> > +
+>> >> > +       if (!str)
+>> >> > +               return -ENOSYS;
+>> >> > +
+>> >> > +       strlcpy(val, str, size);
+>> >> > +
+>> >> > +       return 0;
+>> >> > +}
+>> >> > +
+>> >> > +static int sysinfo_plat_get_int(struct udevice *dev, int id, int *val)
+>> >> > +{
+>> >> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+>> >> > +       u8 i;
+>> >> > +
+>> >> > +       if (id >= SYSINFO_ID_SMBIOS_CACHE_INFO_START &&
+>> >> > +           id <= SYSINFO_ID_SMBIOS_CACHE_INFO_END) {
+>> >> > +               /* For smbios type 7 */
+>> >> > +               for (i = 0; i < priv->cache_level; i++) {
+>> >> > +                       switch (id - i) {
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE:
+>> >> > +                               *val = priv->t7[i].max_size.data;
+>> >> > +                               return 0;
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE:
+>> >> > +                               *val = priv->t7[i].inst_size.data;
+>> >> > +                               return 0;
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE:
+>> >> > +                               *val = priv->t7[i].sys_cache_type;
+>> >> > +                               return 0;
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_ASSOC:
+>> >> > +                               *val = priv->t7[i].associativity;
+>> >> > +                               return 0;
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2:
+>> >> > +                               *val = priv->t7[i].max_size2.data;
+>> >> > +                               return 0;
+>> >> > +                       case SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2:
+>> >> > +                               *val = priv->t7[i].inst_size2.data;
+>> >> > +                               return 0;
+>> >> > +                       default:
+>> >> > +                               break;
+>> >> > +                       }
+>> >> > +               }
+>> >> > +               return -ENOSYS;
+>> >> > +       }
+>> >> > +
+>> >> > +       switch (id) {
+>> >> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT:
+>> >> > +               *val = priv->t4->core_count;
+>> >> > +               break;
+>> >> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN:
+>> >> > +               *val = priv->t4->core_enabled;
+>> >> > +               break;
+>> >> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_CHARA:
+>> >> > +               *val = priv->t4->characteristics;
+>> >> > +               break;
+>> >> > +       case SYSINFO_ID_SMBIOS_CACHE_LEVEL:
+>> >> > +               if (!priv->cache_level) /* No cache detected */
+>> >> > +                       return -ENOSYS;
+>> >> > +               *val = priv->cache_level - 1;
+>> >> > +               break;
+>> >> > +       default:
+>> >> > +               return -ENOSYS;
+>> >> > +       }
+>> >> > +
+>> >> > +       return 0;
+>> >> > +}
+>> >> > +
+>> >> > +static int sysinfo_plat_get_data(struct udevice *dev, int id, uchar **buf,
+>> >>
+>> >> How about void **, so we don't need to cast below?
+>> >>
+>> >> > +                                size_t *size)
+>> >> > +{
+>> >> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+>> >> > +
+>> >> > +       switch (id) {
+>> >> > +       case SYSINFO_ID_SMBIOS_PROCESSOR_ID:
+>> >> > +               *buf = (uchar *)priv->t4->id;
+>> >> > +               *size = sizeof(priv->t4->id);
+>> >> > +               break;
+>> >> > +       case SYSINFO_ID_SMBIOS_CACHE_HANDLE:
+>> >> > +               *buf = (uchar *)(&priv->cache_handles[0]);
+>> >>
+>> >> Isn't that the same as:
+>> >>
+>> >>     *buf = (uchar *)&priv->cache_handles;
+>> >>
+>> >> > +               *size = sizeof(priv->cache_handles);
+>> >> > +               break;
+>> >> > +       default:
+>> >> > +               return -EOPNOTSUPP;
+>> >> > +       }
+>> >> > +       return 0;
+>> >> > +}
+>> >> > +
+>> >> > +static int sysinfo_plat_probe(struct udevice *dev)
+>> >> > +{
+>> >> > +       struct sysinfo_plat_priv *priv = dev_get_priv(dev);
+>> >> > +       struct sysinfo_plat *plat = &sysinfo_smbios_p;
+>> >> > +       u8 level;
+>> >> > +
+>> >> > +       if (!sysinfo_get_processor_info(plat->processor))
+>> >> > +               priv->t4 = plat->processor;
+>> >> > +
+>> >> > +       for (level = 0; level < SYSINFO_CACHE_LVL_MAX; level++) {
+>> >> > +               struct cache_info *pcache = plat->cache + level;
+>> >> > +
+>> >> > +               if (sysinfo_get_cache_info(level, pcache))
+>> >> > +                       break; /* no more levels */
+>> >> > +
+>> >> > +               /*
+>> >> > +                * Fill in the SMBIOS type 7 structure,
+>> >> > +                * skip the header members (type, length, handle),
+>> >> > +                * and the ones in DT smbios node.
+>> >> > +                */
+>> >> > +               priv->t7[level].sys_cache_type = pcache->cache_type;
+>> >> > +               priv->t7[level].associativity = pcache->associativity;
+>> >> > +
+>> >> > +               if (pcache->max_size > SMBIOS_CACHE_SIZE_EXT_KB) {
+>> >> > +                       priv->t7[level].max_size.data = 0xFFFF;
+>> >> > +                       priv->t7[level].max_size2.fields.size =
+>> >> > +                               pcache->max_size / 64;
+>> >> > +                       priv->t7[level].max_size2.fields.granu =
+>> >> > +                               SMBIOS_CACHE_GRANU_64K;
+>> >> > +               } else {
+>> >> > +                       priv->t7[level].max_size.fields.size = pcache->max_size;
+>> >> > +                       priv->t7[level].max_size.fields.granu =
+>> >> > +                               SMBIOS_CACHE_GRANU_1K;
+>> >> > +                       priv->t7[level].max_size2.data = 0;
+>> >> > +               }
+>> >> > +               if (pcache->inst_size > SMBIOS_CACHE_SIZE_EXT_KB) {
+>> >> > +                       priv->t7[level].inst_size.data = 0xFFFF;
+>> >> > +                       priv->t7[level].inst_size2.fields.size =
+>> >> > +                               pcache->inst_size / 64;
+>> >> > +                       priv->t7[level].inst_size2.fields.granu =
+>> >> > +                               SMBIOS_CACHE_GRANU_64K;
+>> >> > +               } else {
+>> >> > +                       priv->t7[level].inst_size.fields.size =
+>> >> > +                               pcache->inst_size;
+>> >> > +                       priv->t7[level].inst_size.fields.granu =
+>> >> > +                               SMBIOS_CACHE_GRANU_1K;
+>> >> > +                       priv->t7[level].inst_size2.data = 0;
+>> >> > +               }
+>> >> > +               smbios_cache_info_dump(&priv->t7[level]);
+>> >> > +       }
+>> >> > +       if (!level) /* no cache detected */
+>> >> > +               return -ENOSYS;
+>> >> > +
+>> >> > +       priv->cache_level = level;
+>> >> > +
+>> >> > +       return 0;
+>> >> > +}
+>> >> > +
+>> >> >  static const struct udevice_id sysinfo_smbios_ids[] = {
+>> >> >         { .compatible = "u-boot,sysinfo-smbios" },
+>> >> >         { /* sentinel */ }
+>> >> >  };
+>> >> >
+>> >> >  static const struct sysinfo_ops sysinfo_smbios_ops = {
+>> >> > +       .detect = sysinfo_plat_detect,
+>> >> > +       .get_str = sysinfo_plat_get_str,
+>> >> > +       .get_int = sysinfo_plat_get_int,
+>> >> > +       .get_data = sysinfo_plat_get_data,
+>> >> >  };
+>> >> >
+>> >> >  U_BOOT_DRIVER(sysinfo_smbios) = {
+>> >> > @@ -20,4 +246,6 @@ U_BOOT_DRIVER(sysinfo_smbios) = {
+>> >> >         .id             = UCLASS_SYSINFO,
+>> >> >         .of_match       = sysinfo_smbios_ids,
+>> >> >         .ops            = &sysinfo_smbios_ops,
+>> >> > +       .priv_auto      = sizeof(struct sysinfo_plat_priv),
+>> >> > +       .probe          = sysinfo_plat_probe,
+>> >> >  };
+>> >> > diff --git a/include/smbios.h b/include/smbios.h
+>> >> > index 78fd14d881b..cb4b3e08b3a 100644
+>> >> > --- a/include/smbios.h
+>> >> > +++ b/include/smbios.h
+>> >> > @@ -187,6 +187,66 @@ struct __packed smbios_type4 {
+>> >> >         char eos[SMBIOS_STRUCT_EOS_BYTES];
+>> >> >  };
+>> >> >
+>> >> > +union cache_config {
+>> >> > +       struct {
+>> >> > +               u16 level:3;
+>> >> > +               u16 bsocketed:1;
+>> >> > +               u16 rsvd0:1;
+>> >> > +               u16 locate:2;
+>> >> > +               u16 benabled:1;
+>> >> > +               u16 opmode:2;
+>> >> > +               u16 rsvd1:6;
+>> >> > +       } fields;
+>> >> > +       u16 data;
+>> >> > +};
+>> >> > +
+>> >> > +union cache_size_word {
+>> >> > +       struct {
+>> >> > +               u16 size:15;
+>> >> > +               u16 granu:1;
+>> >> > +       } fields;
+>> >> > +       u16 data;
+>> >> > +};
+>> >> > +
+>> >> > +union cache_size_dword {
+>> >> > +       struct {
+>> >> > +               u32 size:31;
+>> >> > +               u32 granu:1;
+>> >> > +       } fields;
+>> >> > +       u32 data;
+>> >> > +};
+>> >> > +
+>> >> > +union cache_sram_type {
+>> >> > +       struct {
+>> >> > +               u16 other:1;
+>> >> > +               u16 unknown:1;
+>> >> > +               u16 nonburst:1;
+>> >> > +               u16 burst:1;
+>> >> > +               u16 plburst:1;
+>> >> > +               u16 sync:1;
+>> >> > +               u16 async:1;
+>> >> > +               u16 rsvd:9;
+>> >> > +       } fields;
+>> >> > +       u16 data;
+>> >> > +};
+>> >> > +
+>> >> > +struct __packed smbios_type7 {
+>> >> > +       struct smbios_header hdr;
+>> >> > +       u8 socket_design;
+>> >> > +       union cache_config config;
+>> >> > +       union cache_size_word max_size;
+>> >> > +       union cache_size_word inst_size;
+>> >> > +       union cache_sram_type supp_sram_type;
+>> >> > +       union cache_sram_type curr_sram_type;
+>> >> > +       u8 speed;
+>> >> > +       u8 err_corr_type;
+>> >> > +       u8 sys_cache_type;
+>> >> > +       u8 associativity;
+>> >> > +       union cache_size_dword max_size2;
+>> >> > +       union cache_size_dword inst_size2;
+>> >> > +       char eos[SMBIOS_STRUCT_EOS_BYTES];
+>> >> > +};
+>> >> > +
+>> >> >  struct __packed smbios_type32 {
+>> >> >         u8 type;
+>> >> >         u8 length;
+>> >> > diff --git a/include/smbios_plat.h b/include/smbios_plat.h
+>> >> > new file mode 100644
+>> >> > index 00000000000..70089d5a2ba
+>> >> > --- /dev/null
+>> >> > +++ b/include/smbios_plat.h
+>> >> > @@ -0,0 +1,79 @@
+>> >> > +/* SPDX-License-Identifier: GPL-2.0+ */
+>> >> > +/*
+>> >> > + * Copyright (c) 2024 Linaro Limited
+>> >> > + * Author: Raymond Mao <raymond.mao@linaro.org>
+>> >> > + */
+>> >> > +#ifndef __SMBIOS_PLAT_H
+>> >> > +#define __SMBIOS_PLAT_H
+>> >> > +
+>> >> > +#include <smbios.h>
+>> >> > +
+>> >> > +struct cache_info {
+>> >> > +       union cache_config config;
+>> >> > +       union cache_sram_type supp_sram_type;
+>> >> > +       union cache_sram_type curr_sram_type;
+>> >> > +       u32 line_size;
+>> >> > +       u32 associativity;
+>> >> > +       u32 max_size;
+>> >> > +       u32 inst_size;
+>> >> > +       u8 cache_type;
+>> >> > +       u8 speed;
+>> >> > +       u8 err_corr_type;
+>> >> > +       char *socket_design;
+>> >> > +};
+>> >> > +
+>> >> > +struct processor_info {
+>> >> > +       u32 id[2];
+>> >> > +       u16 ext_clock;
+>> >> > +       u16 max_speed;
+>> >> > +       u16 curr_speed;
+>> >> > +       u16 characteristics;
+>> >> > +       u16 family2;
+>> >> > +       u16 core_count2;
+>> >> > +       u16 core_enabled2;
+>> >> > +       u16 thread_count2;
+>> >> > +       u16 thread_enabled;
+>> >> > +       u8 type;
+>> >> > +       u8 family;
+>> >> > +       u8 voltage;
+>> >> > +       u8 status;
+>> >> > +       u8 upgrade;
+>> >> > +       u8 core_count;
+>> >> > +       u8 core_enabled;
+>> >> > +       u8 thread_count;
+>> >> > +       char *socket_design;
+>> >> > +       char *manufacturer;
+>> >> > +       char *version;
+>> >> > +       char *sn;
+>> >> > +       char *asset_tag;
+>> >> > +       char *pn;
+>> >> > +};
+>> >> > +
+>> >> > +struct sysinfo_plat {
+>> >> > +       struct processor_info *processor;
+>> >> > +       struct cache_info *cache;
+>> >> > +       /* add other sysinfo structure here */
+>> >> > +};
+>> >> > +
+>> >> > +#if defined CONFIG_SYSINFO_SMBIOS
+>> >> > +int sysinfo_get_cache_info(u8 level, struct cache_info *cache_info);
+>> >> > +void sysinfo_cache_info_default(struct cache_info *ci);
+>> >> > +int sysinfo_get_processor_info(struct processor_info *pinfo);
+>> >> > +#else
+>> >> > +static inline int sysinfo_get_cache_info(u8 level,
+>> >> > +                                        struct cache_info *cache_info)
+>> >> > +{
+>> >> > +       return -ENOSYS;
+>> >> > +}
+>> >> > +
+>> >> > +static inline void sysinfo_cache_info_default(struct cache_info *ci)
+>> >> > +{
+>> >> > +}
+>> >> > +
+>> >> > +static inline int sysinfo_get_processor_info(struct processor_info *pinfo)
+>> >> > +{
+>> >> > +       return -ENOSYS;
+>> >> > +}
+>> >> > +#endif
+>> >> > +
+>> >> > +#endif /* __SMBIOS_PLAT_H */
+>> >> > diff --git a/include/sysinfo.h b/include/sysinfo.h
+>> >> > index 17b2b9c7111..cb08a691270 100644
+>> >> > --- a/include/sysinfo.h
+>> >> > +++ b/include/sysinfo.h
+>> >> > @@ -11,6 +11,8 @@
+>> >> >
+>> >> >  struct udevice;
+>> >> >
+>> >> > +#define SYSINFO_CACHE_LVL_MAX 3
+>> >> > +
+>> >> >  /*
+>> >> >   * This uclass encapsulates hardware methods to gather information about a
+>> >> >   * sysinfo or a specific device such as hard-wired GPIOs on GPIO expanders,
+>> >> > @@ -42,18 +44,109 @@ struct udevice;
+>> >> >  enum sysinfo_id {
+>> >> >         SYSINFO_ID_NONE,
+>> >> >
+>> >> > -       /* For SMBIOS tables */
+>> >> > +       /* BIOS Information (Type 0) */
+>> >> > +       SYSINFO_ID_SMBIOS_BIOS_VENDOR,
+>> >> > +       SYSINFO_ID_SMBIOS_BIOS_VER,
+>> >> > +       SYSINFO_ID_SMBIOS_BIOS_REL_DATE,
+>> >> > +
+>> >> > +       /* System Information (Type 1) */
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
+>> >> > +       SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP,
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_SKU,
+>> >> >         SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
+>> >> > +
+>> >> > +       /* Baseboard (or Module) Information (Type 2) */
+>> >> >         SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
+>> >> >         SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
+>> >> >         SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
+>> >> >         SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
+>> >> >         SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
+>> >> > +       SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE,
+>> >> > +       SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT,
+>> >> > +       SYSINFO_ID_SMBIOS_BASEBOARD_TYPE,
+>> >> > +       SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_NUM,
+>> >> > +       SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_HANDLE,
+>> >> > +
+>> >> > +       /* System Enclosure or Chassis (Type 3) */
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ASSET_TAG,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_POW,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_OEM,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_CNT,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_LEN,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENTS,
+>> >> > +       SYSINFO_ID_SMBIOS_ENCLOSURE_SKU,
+>> >> > +
+>> >> > +       /* Processor Information (Type 4) */
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_TYPE,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_ID,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_VERSION,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_STATUS,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_SN,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_PN,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CHARA,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2,
+>> >> > +       SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN,
+>> >> > +
+>> >> > +       /*
+>> >> > +        * Cache Information (Type 7)
+>> >> > +        * Each of the id should reserve space for up to
+>> >> > +        * SYSINFO_CACHE_LVL_MAX levels of cache
+>> >> > +        */
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_LEVEL,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_HANDLE,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_INFO_START,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_SOCKET = SYSINFO_ID_SMBIOS_CACHE_INFO_START,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_CONFIG =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_SOCKET + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_CONFIG + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_INST_SIZE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_INST_SIZE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_SUPSRAM_TYPE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_SPEED =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_CURSRAM_TYPE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_SPEED + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_ERRCOR_TYPE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_ASSOC =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_SCACHE_TYPE + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_ASSOC + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_MAX_SIZE2 + SYSINFO_CACHE_LVL_MAX,
+>> >> > +       SYSINFO_ID_SMBIOS_CACHE_INFO_END =
+>> >> > +               SYSINFO_ID_SMBIOS_CACHE_INST_SIZE2 + SYSINFO_CACHE_LVL_MAX - 1,
+>> >> >
+>> >>
+>> >> This seems to be allocating sequential values for each cache? Instead, we should add a 'seq' parameter to get_data()
+>> >>
+>> > Sorry for not responding to this comment, actually I would prefer to use get_str or get_val as it allows
+>> > to check whether values from sysinfo driver are missing and fallback to the value from dt node one by one.
+>>
+>> Yes that is good...I had assumed this was just data, rather than string/int.
+>>
+>> My main point is that we need an indexed lookup, where on SYSINFO_ID
+>> can be used to lookup up multiple values, with an index, since the
+>> scheme in this patch is a little unwieldy.
+>>
+> I understand what you are concerned about.
+> Using a unique id for one value allows each field to independently fallback to the value from the dt node.
+> For the scenario of cache information, the values from each level should be independently retrieved from
+> either sysinfo driver or dt node.
+> But if we group the values from multiple levels using the same id, we lose the independence.
+> The only disadvantage here is some of the SYSINFO_IDs are reserved in an implicit manner which is a
+> trade-off.
 
-I'll put the relevant threads at [1], ditto.
+Could you give an example of what the DT node looks like?
 
->
-> > > > > Your challenge today is that on patchwork you have over 150 patches
-> > > > > covering a wide variety of topics and of which many series have
-> > > > > technically-merited feedback that needs to be addressed in a technical
-> > > > > manner.
-> > > >
-> > > > By my count I have about 10 series in progress, with a small number of
-> > > > patches (< 10?) with pending feedback
-> > >
-> > > I'm not sure about that less than 10 number, in part because it's hard
-> > > to keep track of which feedback was applied, and which not. And part
-> > > because some of those series are places where I told you I'm unsure
-> > > about the core concept but you asked and I'm giving you leeway to show
-> > > me the end result.
-> >
-> > OK
-> >
-> > >
-> > > > that isn't effectively just a
-> > > > NAK.
-> > >
-> > > To be clear, "just a NAK" isn't the whole story. Those NAKs come with
-> > > technical rationales and requests. But maybe they're just lost in the
-> > > volume of emails you have in some cases. I know for example I mentioned
-> > > a few times and places that we have tests today for booting the OS, when
-> > > you mention that we need to add a test for booting the OS. We need to
-> > > expand that test, yes.
-> >
-> > If you look at the OF_BLOBLIST thing, it is basically a NAK. I don't
-> > see any other way to interpret it,. So several boards in my lab have
-> > been broken for a year.
->
-> To be clear, you want to revert:
-> commit 70fe23859437ffe4efe0793423937d8b78ebf9d6
-> Author:     Simon Glass <sjg@chromium.org>
-> AuthorDate: Wed Jan 3 18:49:19 2024 -0700
-> Commit:     Simon Glass <sjg@chromium.org>
-> CommitDate: Sun Jan 7 13:45:07 2024 -0700
->
->     fdt: Allow the devicetree to come from a bloblist
->
->     Standard passage provides for a bloblist to be passed from one firmware
->     phase to the next. That can be used to pass the devicetree along as well.
->     Add an option to support this.
->
->     Tests for this will be added as part of the Universal Payload work.
->
->     Signed-off-by: Simon Glass <sjg@chromium.org>
->     Reviewed-by: Tom Rini <trini@konsulko.com>
->     Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->
-> Which means that you did not test your changes on your hardware at the
-> time? And wish to (seemingly) replace that with an earlier version of
-> the patch which was objected to on technical grounds at the time.
-> Without explaining why the current code does not function on these
-> platforms, only that it does not, for entirely unclear reasons.
+Do we expect to put the cache info in a DT node...I wonder if it might
+be OK to not allow that?
 
-It never worked on my board, though. I spent 6 revisions trying to
-explain that. After number 6 [2] you got in touch and said that I
-needed to rework it, which I dutifully did, in version 7 [3]. I did
-that purely to unblock Raymond's series. I even put that in the patch:
+But if we need it, the proper DT way would be to have a list, e.g.
 
-"The discussion on this was not resolved and is now important due to the
-bloblist series from Raymond. So I am sending it again since I believe
-this is a better starting point than building on OF_BOARD"
+level0 {
+    associativity = ...
+    max-size = ...
+};
+level1 {
+    associativity = ...
+    max-size = ...
+}
 
-Are you now saying I should have refused and argued for another few
-revisions? Patience does have its limits.
-
->
-> So I do not think I've arbitrarily nak'd the revert you posted, I've
-> been asking you to explain why the code doesn't work. And I still don't
-> have an answer as to why after at run time we don't find a valid
-> bloblist here the fall-back use cases aren't functioning. To me that
-> seems like the bug to investigate and explain. Reverting code to find
-> when functionality broke is great, I do it all the time. Saying we need
-> to revert because something broke *without* saying why it broke is a
-> problem.
->
-> > > > It isn't a particularly large number, if you add up the patches I
-> > > > do in each cycle. It is in the nature of development and code review
-> > > > that things are often not right the first time, or someone else has
-> > > > another perspective, so I cannot see how this can be reduced.
-> > >
-> > > The easy way to reduce it would be to go from 10 series in progress to 1
-> > > series in progress, and finish that before picking up series number 2,
-> > > and so on. And then in the future, stop when you have more than 2 or 3
-> > > in progress at once.
-> >
-> > That's obviously not practical for the amount I am contributing and
-> > the length of time it takes us to get things in. I hope it isn't a
-> > serious suggestion!
->
-> It's extremely serious. For example
-> https://patchwork.ozlabs.org/project/uboot/list/?series=435516&state=*
-> is a 46 part patch series that touches 3 or 4 different areas and the
-> only type of review that's feasible is "Does this cause the binary to
-> grow too much? Or in unexpected ways?" And that sets aside that I
-> believe I did ask you to rework "bootm: Allow building bootm.c without
-> CONFIG_SYS_BOOTM_LEN" to refactor things so that SYS_BOOTM_LEN is always
-> defined. That's not even a hard change, I say as someone that had to do
-> that as part of Kconfig migration of oddly (ab)used symbol names.
->
-> But in this case, your series that touch areas of code actively
-> maintained by other people is even more relevant. Whereas areas without
-> other active developers, or where you are the main developer, I can find
-> some smaller limits on what must be reviewed all of your *EFI* has other
-> active developers on it. Who are providing technical feedback, not
-> arbitrary or stylistic feedback. Please be explicit about what you are
-> suggesting in this case, so I do not mischaracterize your intention.
->
-> > > But really, it feels like "Code needs to land" is another way of saying
-> > > "Just a NAK should be ignored".
-> >
-> > Yes, a bias more towards that would be more healthy IMO. A NAK needs
-> > to come with a full understanding of the use case, an alternative way
-> > to meet the use case, once that doesn't involve boiling the Pacific
-> > Ocean.
->
-> As it stands, I do not like to, but sometimes feel I *have*to* break one
-> board to unbreak another board and keep reminding both parties to
-> resolve the issue so no board is broken. There has been, since I have
-> taken over the lead of the project, at least once where I have
-> over-ruled the relevant custodian and that has resulted in the custodian
-> leaving. I both feel that was the right technical call, and regret it
-> came to that, still. I do not want to adopt a more broad use of that
-> policy. The default for absence of agreement must be to try again.
-
-I see that Peter sent a few indignant emails. You can't win.
+Would that work?
 
 Regards,
 Simon
-
->
-> --
-> Tom
-
-[1]
-https://patchwork.ozlabs.org/project/uboot/patch/20230830180524.315916-31-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20230921015730.1511373-31-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20230924192536.1812799-37-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20230926141514.2101787-40-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20231226094625.221671-1-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20231228133654.2356023-1-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20231228194725.2482268-1-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20240104014919.413568-1-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20241201144240.1664398-5-sjg@chromium.org/
-https://patchwork.ozlabs.org/project/uboot/patch/20241201144240.1664398-6-sjg@chromium.org/
-
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20231228194725.2482268-1-sjg@chromium.org/
-
-[3] https://patchwork.ozlabs.org/project/uboot/patch/20240104014919.413568-1-sjg@chromium.org/
