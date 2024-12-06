@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA446E7716E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CC66E77170
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 02:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC0CB896C7;
-	Fri,  6 Dec 2024 03:38:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3398B89774;
+	Fri,  6 Dec 2024 03:38:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IKUZeAa6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lK6/r7ne";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3E7389772; Fri,  6 Dec 2024 03:38:03 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 225DD8975E; Fri,  6 Dec 2024 03:38:07 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3819A89753
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:37:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DBBE8975F
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 03:38:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-843e9db3e65so61427139f.1
- for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:37:58 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-8418f849466so55617039f.1
+ for <u-boot@lists.denx.de>; Thu, 05 Dec 2024 18:38:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733452676; x=1734057476; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733452679; x=1734057479; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
- b=IKUZeAa6Bkp30V4/5JkOuoWE8uMNeoVKJ7pP1Eiy7nmAy1g8UQ2xX3/5DoVo9kckrF
- /4mNe9AWJ7J7EVb/LJf4RQg5B2MYGegd2uGDZ35CoUVrMLQkI4yvtwAPLnM9LumRSTGj
- o36MLEnJaXtB0NDzAyasnVaRsXffc+uvcPetU=
+ bh=ZqrsMmPwPo46XJn92V2eHwp/JJbrP7PGh6pnbvICI1A=;
+ b=lK6/r7neCATuwWtmzNRZdlEIMsSRDN5LAp/rOC+n40bGrn/YK9qAiR8xeU3h24ekB/
+ a/80h5Yh8Yz4OnAcALa3BVJ1yCPXDwyGZT1v32fa9x//JnVqb37D6k7glPkFcSC4stcq
+ 8ThHH95ohiAAmw9ohQIjUQLkyRtPwKi3NqXcQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733452676; x=1734057476;
+ d=1e100.net; s=20230601; t=1733452679; x=1734057479;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5t7xGm9UIfOBvXsTAl+woWHVdKLR0fJi5PGeinfYoeo=;
- b=qHeJySz7JrJVI+aZdelE3RxMtvXk4lds2ZXZ7X4G+oianw1YxH/rmPoAmWOj2cG13x
- 1kPNzZn/gc335dur8GKd0mYwO1ETWgzR7H0D03rAOYhjKWyG9CXoZwo2R6LrpguHoj6c
- JWswGPSpcF6j41EsM7LKlAQcPGDmd8LAmwEHQYWMwjkt/eilkw2qpeXT/At/lvktjMVo
- GoWgTL3Fb2khd3Q2ADTj7UUZwLWaLGBSoheaofWy7qIDMSbznrICzcsy9T8qi7S8hQz9
- /kuXGz1In6w8lQXQyRsebGNycT0UJTJem+zeA0NM8sYQeiOTlu7K3ABNJk+57bXpY9ZS
- THpg==
-X-Gm-Message-State: AOJu0YyZQA8jMmthhH7VvFPKws/rH0prCxN8PuKPw73Dzy3NbP8timab
- vng3m3eyLvz5xJpjr5yTQqK7afkC/y6PQ/GtIDnpTm4nbOOsPK/g13qZXBYqRIDNFbpH3TW3kfA
+ bh=ZqrsMmPwPo46XJn92V2eHwp/JJbrP7PGh6pnbvICI1A=;
+ b=u4I4ltGjhsNcyB7MudjqoYgfQkh5P7vmOXP+IqcW3Rf7vr29MPRxV+X4Yvkmn873lO
+ Alu1ThhYECg1MzvLRSsGPRmRFRUxIeAcEJbB72PrtBuF4EBX9acUs+6+ZFn7dKO3cz3Y
+ bsunI4fwT/BQA2cVdghTFTcWSH/ZpafkVT95USe7YrenbcQK1uDKppJR4RTeDxHz1mTn
+ 0VccSi9X6ultvMXV7qqV0xhnFMjhxMYXH2N81ZD1oPMnDhD/+FdqK4tkP3Hoq2YTv8Hz
+ NYwQQBFzi1KXZg5lJoqvZwVL/JRjVDvXLqOPaSYfs0jsF8cUtXPElz3Gjpi5SN8Vc74n
+ bCaw==
+X-Gm-Message-State: AOJu0YwIgEM+bd7cBZz6dTj1GhpERc5/+heao5fpzPbkQsFqevdi4vr4
+ vWhlUT+oTDXoRw032vbtCrJ1y0bMQL5RGQcjva3jfcEZ84/pD0JwuRrme7OF2iBb85VvxTmkKEM
  =
-X-Gm-Gg: ASbGnct0Jh/LhWUNf89k2I32xd97mpGYWM060jCrgHnsxoiLoof/RBzGxy8094dHK02
- UusSF6dacF2TaT2+7usa5dob/R0wW3H3isCVW3QxSZaVPOL8Ys4UxcEn0UlPuwElA9Z1ARs+rlc
- 4ji07g9O8zM7KUuArlNOZrv8mFipWgO3N4KbzmojG3tvcqmmd8uerRxrSgfLWAI3vyHroXiNF3i
- 6Pe6s/44dJUtUrGPpgw7+dUT3ExptoMzfQHAoKH2gORA9vklgqpNKNipxv841+DVmdtED0Agiip
- hrzeHXxy5m4=
-X-Google-Smtp-Source: AGHT+IEwguCQ5mmqxKh9KYqML6VaTpKl+6VPWvp6T7XoIojxt29os0VI7L+/3Or4dAbHEiwp/v6XXQ==
-X-Received: by 2002:a6b:6210:0:b0:844:2ef3:a95a with SMTP id
- ca18e2360f4ac-84471100818mr569269539f.7.1733452676433; 
- Thu, 05 Dec 2024 18:37:56 -0800 (PST)
+X-Gm-Gg: ASbGnct17qKCtRdqNAGGLlLtXIO6Wp/P2MV0CbbQBaqQ9b42M1VCPeQrI1NFBa4p6zM
+ /zYs+9qyhtO/HAjPlNPQhfTDM7lYIdgSAOhhrMIZNDCD7d19IQF7WDbcbuzq24qgRDuHc7vNfcZ
+ U+TNvDaoERwGpwgmxIiFsypwlIQP53Ol1JB/WvajYQ6qgN1+cb81GVo8X+e+hVuQC84dorUnd9F
+ czcelbUZxGYi+4YsGipt5HBhBgdffINTs/Vxw8xUpLhA8EXSIQrQadR318wpMppbmoZHxT/chCK
+ C2YyqkO4oIo=
+X-Google-Smtp-Source: AGHT+IGMiae/08z5le6251noICsxR9tvxmzrFoKPLN7iwzDO+PFvWT9xXvRq0IdM50ZnLCzl2T6v9A==
+X-Received: by 2002:a05:6602:2b09:b0:841:a9d3:3b30 with SMTP id
+ ca18e2360f4ac-8447e200cdfmr220917439f.1.1733452679302; 
+ Thu, 05 Dec 2024 18:37:59 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.37.53
+ 8926c6da1cb9f-4e2861f51bfsm575506173.112.2024.12.05.18.37.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Dec 2024 18:37:55 -0800 (PST)
+ Thu, 05 Dec 2024 18:37:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 32/46] pxe: Record the bootflow in the PXE context
-Date: Thu,  5 Dec 2024 19:36:11 -0700
-Message-Id: <20241206023626.2456858-33-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v3 33/46] pxe: Allow skipping the boot
+Date: Thu,  5 Dec 2024 19:36:12 -0700
+Message-Id: <20241206023626.2456858-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241206023626.2456858-1-sjg@chromium.org>
 References: <20241206023626.2456858-1-sjg@chromium.org>
@@ -102,141 +97,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present the only option with PXE is to boot it and see what happens.
+Provide a way to skip booting the OS and just return. This will allow
+bootstd to read out useful information.
 
-Provide a bootflow, when available, so that PXE will eventually be able
-to add some useful information to it.
+Add debugging to help figure out the flow.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootmeth_extlinux.c | 2 +-
- boot/bootmeth_pxe.c      | 2 +-
- boot/pxe_utils.c         | 3 ++-
- cmd/pxe.c                | 4 ++--
- cmd/sysboot.c            | 2 +-
- include/pxe_utils.h      | 5 ++++-
- 6 files changed, 11 insertions(+), 7 deletions(-)
+ boot/pxe_utils.c    | 12 ++++++++++--
+ include/pxe_utils.h |  4 +++-
+ 2 files changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-index 4adcaf5654a..569f9d760bf 100644
---- a/boot/bootmeth_extlinux.c
-+++ b/boot/bootmeth_extlinux.c
-@@ -188,7 +188,7 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
- 	plat = dev_get_plat(dev);
- 
- 	ret = pxe_setup_ctx(&ctx, extlinux_getfile, &info, true, bflow->fname,
--			    false, plat->use_fallback);
-+			    false, plat->use_fallback, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 59ebf1be83a..f2b9ffaae89 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -148,7 +148,7 @@ static int extlinux_pxe_boot(struct udevice *dev, struct bootflow *bflow)
- 	info.dev = dev;
- 	info.bflow = bflow;
- 	ret = pxe_setup_ctx(ctx, extlinux_pxe_getfile, &info, false,
--			    bflow->subdir, false, false);
-+			    bflow->subdir, false, false, bflow);
- 	if (ret)
- 		return log_msg_ret("ctx", -EINVAL);
- 
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index b4aa284b1ee..f7bbc1527af 100644
+index f7bbc1527af..3531ab1c71a 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -1632,7 +1632,7 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
- 
- int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 		  void *userdata, bool allow_abs_path, const char *bootfile,
--		  bool use_ipv6, bool use_fallback)
-+		  bool use_ipv6, bool use_fallback, struct bootflow *bflow)
- {
- 	const char *last_slash;
- 	size_t path_len = 0;
-@@ -1643,6 +1643,7 @@ int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 	ctx->allow_abs_path = allow_abs_path;
- 	ctx->use_ipv6 = use_ipv6;
- 	ctx->use_fallback = use_fallback;
-+	ctx->bflow = bflow;
- 
- 	/* figure out the boot directory, if there is one */
- 	if (bootfile && strlen(bootfile) >= MAX_TFTP_PATH_LEN)
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 530d5d9c35b..7728949d14b 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -130,7 +130,7 @@ int pxe_get(ulong pxefile_addr_r, char **bootdirp, ulong *sizep, bool use_ipv6)
- 	int i;
- 
- 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
--			  use_ipv6, false))
-+			  use_ipv6, false, NULL))
- 		return -ENOMEM;
- 
- 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
-@@ -280,7 +280,7 @@ do_pxe_boot(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+@@ -782,6 +782,9 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 		printf("append: %s\n", finalbootargs);
  	}
  
- 	if (pxe_setup_ctx(&ctx, do_get_tftp, NULL, false, env_get("bootfile"),
--			  use_ipv6, false)) {
-+			  use_ipv6, false, NULL)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
- 	}
-diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-index 6e899f381ec..384d5e15e3d 100644
---- a/cmd/sysboot.c
-+++ b/cmd/sysboot.c
-@@ -106,7 +106,7 @@ static int do_sysboot(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
++	if (ctx->no_boot)
++		return 0;
++
+ 	label_run_boot(ctx, label, kernel_addr, initrd_addr_str,
+ 		       initrd_filesize, initrd_str);
+ 	/* ignore the error value since we are going to fail anyway */
+@@ -1566,11 +1569,15 @@ static void boot_unattempted_labels(struct pxe_context *ctx,
+ 	struct list_head *pos;
+ 	struct pxe_label *label;
  
- 	if (pxe_setup_ctx(&ctx, sysboot_read_file, &info, true, filename, false,
--			  false)) {
-+			  false, NULL)) {
- 		printf("Out of memory\n");
- 		return CMD_RET_FAILURE;
++	log_debug("Booting unattempted labels\n");
+ 	list_for_each(pos, &cfg->labels) {
+ 		label = list_entry(pos, struct pxe_label, list);
+ 
+-		if (!label->attempted)
+-			label_boot(ctx, label);
++		if (!label->attempted) {
++			log_debug("attempt: %s\n", label->name);
++			if (!label_boot(ctx, label))
++				return;
++		}
  	}
+ }
+ 
+@@ -1621,6 +1628,7 @@ void handle_pxe_menu(struct pxe_context *ctx, struct pxe_menu *cfg)
+ 
+ 	if (err == 1) {
+ 		err = label_boot(ctx, choice);
++		log_debug("label_boot() returns %d\n", err);
+ 		if (!err)
+ 			return;
+ 	} else if (err != -ENOENT) {
 diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-index fb057442d5d..e8e03430a81 100644
+index e8e03430a81..beadd221475 100644
 --- a/include/pxe_utils.h
 +++ b/include/pxe_utils.h
-@@ -109,6 +109,7 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
+@@ -109,7 +109,8 @@ typedef int (*pxe_getfile_func)(struct pxe_context *ctx, const char *file_path,
   * @use_ipv6: TRUE : use IPv6 addressing, FALSE : use IPv4 addressing
   * @use_fallback: TRUE : use "fallback" option as default, FALSE : use
   *	"default" option as default
-+ * @bflow: Bootflow being booted, or NULL if none
+- * @bflow: Bootflow being booted, or NULL if none
++ * @no_boot: Stop show of actually booting and just return
++ * @bflow: Bootflow being booted, or NULL if none (must be valid if @no_boot)
   */
  struct pxe_context {
  	/**
-@@ -129,6 +130,7 @@ struct pxe_context {
+@@ -130,6 +131,7 @@ struct pxe_context {
  	ulong pxe_file_size;
  	bool use_ipv6;
  	bool use_fallback;
-+	struct bootflow *bflow;
++	bool no_boot;
+ 	struct bootflow *bflow;
  };
  
- /**
-@@ -231,12 +233,13 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len);
-  *                       other choice be selected
-  *                FALSE : Use "default" option should no other choice be
-  *                        selected
-+ * @bflow: Bootflow to update, NULL if none
-  * Return: 0 if OK, -ENOMEM if out of memory, -E2BIG if bootfile is larger than
-  *	MAX_TFTP_PATH_LEN bytes
-  */
- int pxe_setup_ctx(struct pxe_context *ctx, pxe_getfile_func getfile,
- 		  void *userdata, bool allow_abs_path, const char *bootfile,
--		  bool use_ipv6, bool use_fallback);
-+		  bool use_ipv6, bool use_fallback, struct bootflow *bflow);
- 
- /**
-  * pxe_destroy_ctx() - Destroy a PXE context
 -- 
 2.34.1
 
