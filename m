@@ -4,86 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FD7E77173
-	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 10:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D342E77179
+	for <u-boot@archiver.kernel.org>; Fri,  6 Dec 2024 11:04:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10C65895EC;
-	Fri,  6 Dec 2024 11:57:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF6E4895AF;
+	Fri,  6 Dec 2024 12:04:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ImoSy8Je";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f/+GbqqB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E2DB895F2; Fri,  6 Dec 2024 11:57:01 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61D728959D
- for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 11:56:59 +0100 (CET)
+ id 8BB32895D7; Fri,  6 Dec 2024 12:04:41 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EA998959D
+ for <u-boot@lists.denx.de>; Fri,  6 Dec 2024 12:04:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2ff976ab0edso19794811fa.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 02:56:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733482618; x=1734087418; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pMvTPhjmXRzGTI9tmyvCZUg2ccsy+mpJ4BCTUvwFVeY=;
- b=ImoSy8Jez4W5T/GKyrpiUeN0oFyVzdB8WR9kfLbs/Q6Q219wAkLuag+KnrxGgFx31w
- +WcfDYX/NVwyRAUQ64Ok1/kDjojUMp8DmBiVHF/k3cY8BeqjoBuVRGWw7wnU2xUcyXtf
- 5JJs1N0mefo4v8OPXvrOYmihFL22PROEzuoRAd3tO4YnrReg+ZZ2562f7ZqgHPKFhmWN
- pHAbtBr63X2NWXKWuM7rDw+yDUpJDYdesF9pQ8cgtNI/gv5tHrLP3F5Zg4lrwaE84Qq+
- nTySYOpSSD4WDnTf5eA/5LrGy3FqTHYGlvAYvNsacrBLkYmKg48EJxZJKmoIwDn3avxl
- yO2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733482618; x=1734087418;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pMvTPhjmXRzGTI9tmyvCZUg2ccsy+mpJ4BCTUvwFVeY=;
- b=fV+HA6iQU/vUSdFIQ9uJTxiigr9Rk2g+uTemdSQPi6DRSoq5/sRx+3arlz8+COeMbJ
- jykb9Mjhk01lKJXCRUU8dNULKl2IKWo9gToITIObHo+ObCEeQYmxgHW+jIB9UdCUQH8I
- PeP7uQYrRve4XzYbk9fHXFYhLm4FPBJ4qkaVqDbefYcQOhXtoj5UYtCZ0gdZSa/bz1S3
- yQNSWJkhV0bqJ+io/gkPvv8CQ9D5mc+KY8278AnX7IzADmSk463c0t9kim819Khp/om/
- GXRz73JMIz3Poi0VtG6fTH1f3agGbPhRzkRQ9AA41Uiy2wpjsOJQk6IMOPTNt/WkSS8q
- xooQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlKD3NyA3+7Eqt71NI42VLCJLHISO0YNUs5bpgj18W5sX4Ywr+jgTIU76Cx+aNVZmP7vrrVMw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwJtLEtzOZgfDBYmRN0M/DAAXWty1pndQQU3ACRdmW4wPqOtUfq
- XckLPAhW208tMa4V30pykJqZMjN9sW3w2QUTBBF7Se+9sch6NgifZPqmrSuMLXU=
-X-Gm-Gg: ASbGncuckNM3KYMQVtp/UqrAPghQblU6o2vRnue7IhCUG8GJxSGfIgCYbKM9GF4UKZm
- MBZ2ipBA55r7nciBjspHDR6cqHwKia78OQo1uILlCUqkkCQYV1eJjaehyEkNhvs2Dx+OBnNwCeE
- W4gvR89IHRo5Kv8sJDiZvCKIeT/KdJDHUDmgi1r10+kQeB5PxHJ/LUfMB+xGaPH7rYrkbYFHGTy
- QsTJi9wbiqhO/N/PS9VvHLEOe/U3Q1xPO8jWPdl21UfSDpcRx6unrWoScdb2f4zwQUnd3ZFTxwD
- iiww8rSj8nexg6Utu8CqjaEbTt4=
-X-Google-Smtp-Source: AGHT+IF7Sd0xzLzB5dlU5aQQGHbyfITEaiawHn7/Iml5sIO1Q5x55aLZTEiH6MYhTVPdG8I9zVQWvg==
-X-Received: by 2002:a05:651c:19a5:b0:300:eb1:a4f3 with SMTP id
- 38308e7fff4ca-3002f8df262mr12298121fa.14.1733482618215; 
- Fri, 06 Dec 2024 02:56:58 -0800 (PST)
-Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
- [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d14c64b48dsm1978810a12.51.2024.12.06.02.56.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 02:56:57 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] mbedtls: remove MBEDTLS_HAVE_TIME
-Date: Fri,  6 Dec 2024 12:56:45 +0200
-Message-ID: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B6B4SMR1901032
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 6 Dec 2024 05:04:28 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1733483068;
+ bh=P0Vn3+q48t9mo3HVzL8SI+ukRyGyzgFpjSw0ED7479U=;
+ h=From:To:CC:Subject:Date;
+ b=f/+GbqqBW+189Pb6P0TbVMHN653wRT5fGsxgXSpjoJUYRK30x/zXLz/QrCHhamJYX
+ qndussbQsTLlL//yNBHxszgtUruJZYkOGXnSK7gEkZxqoW2S9lLZaoZ8+6n+uaQ3CZ
+ xWCSeMmlSXPXjZzbbgQr/rw1L7DuK5oO3/Dk0UF4=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B6B4SDU022506;
+ Fri, 6 Dec 2024 05:04:28 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
+ Dec 2024 05:04:28 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 6 Dec 2024 05:04:28 -0600
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B6B4P3B042622;
+ Fri, 6 Dec 2024 05:04:25 -0600
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <marex@denx.de>, <bmeng.cn@gmail.com>,
+ <mkorpershoek@baylibre.com>, <rogerq@kernel.org>, <jonas@kwiboo.se>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH] usb: xhci-dwc3: Bail out if "dr_mode" is "peripheral"
+Date: Fri, 6 Dec 2024 16:34:23 +0530
+Message-ID: <20241206110424.897283-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,54 +78,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When MbedTLS TLS features were added MBEDTLS_HAVE_TIME was defined as part
-of enabling https:// support. However that pointed to the wrong function
-which could crash if it received a NULL pointer.
+Since the compatible "snps,dwc3" can be specified in the device-tree for
+the Designware USB Controller configured for not only Host and OTG modes
+of operation, but also for Peripheral mode of operation, bail out if
+"dr_mode" is "peripheral".
 
-Looking closer that function is not really needed, as it only seems to
-increase the RNG entropy by using 4b of the current time and date. 
-The reason that was enabled is that lwIP was unconditionally requiring it,
-although it's configurable and can be turned off.
-
-Since lwIP doesn't use that field anywhere else, make it conditional and
-disable it from our config.
-
-Fixes: commit a564f5094f62 ("mbedtls: Enable TLS 1.2 support")
-Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c | 2 ++
- lib/mbedtls/mbedtls_def_config.h                     | 3 ---
- 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-index 6643b05ee94d..46421588fef8 100644
---- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-+++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-@@ -692,7 +692,9 @@ altcp_tls_set_session(struct altcp_pcb *conn, struct altcp_tls_session *session)
-   if (session && conn && conn->state) {
-     altcp_mbedtls_state_t *state = (altcp_mbedtls_state_t *)conn->state;
-     int ret = -1;
-+#ifdef MBEDTLS_HAVE_TIME
-     if (session->data.MBEDTLS_PRIVATE(start))
-+#endif
-       ret = mbedtls_ssl_set_session(&state->ssl_context, &session->data);
-     return ret < 0 ? ERR_VAL : ERR_OK;
-   }
-diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-index d27f017d0847..1d2314e90e4d 100644
---- a/lib/mbedtls/mbedtls_def_config.h
-+++ b/lib/mbedtls/mbedtls_def_config.h
-@@ -92,9 +92,6 @@
+Hello,
+
+This patch is based on commit
+448add55297 Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-pmic
+of the master branch of U-Boot.
+
+Regards,
+Siddharth.
+
+ drivers/usb/host/xhci-dwc3.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/usb/host/xhci-dwc3.c b/drivers/usb/host/xhci-dwc3.c
+index e3e0ceff43e..7b1311503fe 100644
+--- a/drivers/usb/host/xhci-dwc3.c
++++ b/drivers/usb/host/xhci-dwc3.c
+@@ -208,6 +208,9 @@ static int xhci_dwc3_probe(struct udevice *dev)
+ 	writel(reg, &dwc3_reg->g_usb2phycfg[0]);
  
- /* Generic options */
- #define MBEDTLS_ENTROPY_HARDWARE_ALT
--#define MBEDTLS_HAVE_TIME
--#define MBEDTLS_PLATFORM_MS_TIME_ALT
--#define MBEDTLS_PLATFORM_TIME_MACRO rtc_mktime
- #define MBEDTLS_PLATFORM_C
- #define MBEDTLS_SSL_CLI_C
- #define MBEDTLS_SSL_TLS_C
+ 	dr_mode = usb_get_dr_mode(dev_ofnode(dev));
++	if (dr_mode == USB_DR_MODE_PERIPHERAL)
++		return -ENODEV;
++
+ 	if (dr_mode == USB_DR_MODE_OTG &&
+ 	    dev_read_bool(dev, "usb-role-switch")) {
+ 		dr_mode = usb_get_role_switch_default_mode(dev_ofnode(dev));
 -- 
-2.45.2
+2.43.0
 
