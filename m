@@ -4,80 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C560DE7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D33DBE7717B
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D43DD895A1;
-	Sat,  7 Dec 2024 18:26:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6AC0C891CF;
+	Sat,  7 Dec 2024 18:29:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bVCTKFi4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XdAt6I6g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC146895E4; Sat,  7 Dec 2024 18:26:54 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 1EBD888FB4; Sat,  7 Dec 2024 18:25:58 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88A5A895B7
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5B91891C3
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:25:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-843671e1426so121092339f.0
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:52 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-843df3c4390so97372039f.3
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:25:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733592411; x=1734197211; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ulv0stjlP+4cbSGnOAIl/yn91i+xBY3qRSNdA9wamiI=;
- b=bVCTKFi4tWTS/Bt8K2kU3pEnnyxux6u+AQiLpAf725hvpNhTHLnNV6efCdvhbdx7oF
- mkn1JVKNhsSBdGlMP8RZCy8fjOkW0y9roiV/mQfqJkLTOys9/moSUao/dbFLHqyK4paz
- CIPVgFI9KXbACZAld3pm+jyvQ6O8ZDqBwKOSc=
+ d=chromium.org; s=google; t=1733592354; x=1734197154; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bYgxCXl4/JEP0EgABUd5aUu5aD0xaGG1Be9Dk9/mUDM=;
+ b=XdAt6I6gPt+uEXYnYd984uofaCnBsBjwtGeaq5jRE9lGvdEelpomudlPHIjkeLNX/M
+ jUuzbge+DIdJ6TMe/iodn7LeTxXldpN3RRW+ZX5M35QrYgs5gqY6IOZg8YzEcO23D3NA
+ 1bALLdBsBweJ4jOfWpqqpsje5dcd0TTAlBsak=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733592411; x=1734197211;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ulv0stjlP+4cbSGnOAIl/yn91i+xBY3qRSNdA9wamiI=;
- b=BALUmGBCbQuWtePYTDuQz8ovH21qZ8CXf7olR9PATFAOlxa73YCeOmERTBb76MKrHW
- rdCINQaq6Fve/HRq9XAZKXA3uWDyjf3AEwEtBH7bNgLcM5u047zXTRfYY7Hocmyems1X
- gfVxknFgbZu98L3dneSpZ52/gPlYZ5rUUnp6D6b84EIwutM+ate+TXV/GixiS0NWUFHd
- zgyzpaBKetJWQjxVi9D6WU7D1P2Lr6r7QrH6NLEIi4V5vZsiogCBAUfqXPxXPn/eIMkv
- I2Jx60bEjTMamMYbRrrtJ+oKCZub/b3Lcer+YjIWZw8skweIPRvc0bv6NiGLl5Ncbuyx
- ZYDA==
-X-Gm-Message-State: AOJu0Yyr12N0UpV/OwFOSTbXGYB8ahhqT4Jiww9WqucfrUOkq+xxLYb+
- BI5bcHAYn/N+B3bGOWE9Xi8dLRfWeOKT74AQAauOoy9k3GAuC0hEf1QJE07Pzhtq4a8Psr31ZXY
+ d=1e100.net; s=20230601; t=1733592354; x=1734197154;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bYgxCXl4/JEP0EgABUd5aUu5aD0xaGG1Be9Dk9/mUDM=;
+ b=WmvTiD3fIvKOqFW3YSm6aGyiM28x3VwrnPKMAJFdsN1t+vt5tQOe3ClUnldqmw7Kpa
+ rxPmHger/wZjWi+Bjkw9LhH4jvnnqsz7NB8fuTO3FHHXFFFScFZ/dhTubK6z+MwxT0vs
+ Ws81RNAwsQNA4CcewSI3Gas1wEVeKdWMWMc5zcqbAfmuE4dFgXoxIJvetE3lekXXfrYi
+ fVqL+q8HHWZmsCUFlk016Gg4uCDf76FJWbfmkO+Rc3dK3P8uyYzNlEYWEoUJQAerxgiG
+ lkbofRNG5+hkZa54ILRdqphLTOWzD8Aijs/LEFRSQh9zYxeMvQoIWLXhNqUY4oHP4M8T
+ mUgw==
+X-Gm-Message-State: AOJu0YyN2o8MR/6ne8DvmyzQgzIdwmjahHfXP0TgmBQ3WsnM63ifh3kg
+ UnIddlmYmR2k8GeX9H8xBl/ZtwPJMQKY4dQzUjFCZYOEeihq6wINBxsPMPeTY86GM+2iyqqdhjo
  =
-X-Gm-Gg: ASbGnctOqpKatC6OTWMAus1xsRxOA1CtQ29vsUoEg6Lrv3i3aJV63NXSL/zNO60OG4C
- +3yDs6pB1xx8fiA+jTqmuHUJxJfkEi5GOTREUiIdBuKTOu/cIhRboOGY4X6SQggzdCSricyotfZ
- 2fW2daPzeUFJcCy5IcI9IHBgwJv/7lAqV1ZpKFY2y3R+XR+jWiLltapSC+/tYqIlS+TfbGL2KMx
- 3z+T4lhZeoivbd1Ayi8FjsdZeviUKQe+RuAgt1giC5RuPFrg5sCV/bxHj/oPzMkeZ/wo62jUiKw
- OTAHtIO+Oj0=
-X-Google-Smtp-Source: AGHT+IGAwB4if4TA39HyWqQKQaB4m5w2e0eQLh+1JyIUmu6p3AA+UZazjXs5/RxMWzTIpwjGMz9EfA==
-X-Received: by 2002:a05:6602:2cc5:b0:837:7d54:acf1 with SMTP id
- ca18e2360f4ac-8447e200ademr899665539f.2.1733592410826; 
- Sat, 07 Dec 2024 09:26:50 -0800 (PST)
+X-Gm-Gg: ASbGncsABpUSYa/9WGFm4T+jnldZ2avhmqWMsWCiqciKVAQ7Z4/XRptFKtvPOYdcbED
+ 0wLmj+uG6n7XjwHNBpivc1/tRr/E6v0ucy2DzMBgsPYCh8ca5jRgPmKanzJV+K9ZUba50wcDZ3R
+ EOGH4RjJFi0m5vG17kZSciQ3ofWHFtkr72EInq8jhIisvqUSFmLBrlt11NZ8qSf6vHGq0rgNL+R
+ hqsN4MngyhK48VW5Rr9GLM8hfRuR+02KzbnTqQjdifmd3Lt5XpXlxkWPeeU7HBWbvQ2aMtfG641
+ nroqsN7LWSI=
+X-Google-Smtp-Source: AGHT+IGkeY9VDCbDzIG8+RiMmr8F56Lwv0C2YEAjaPOc93nY0Ya5ByyHkg4Rzr+RiiuN8a5a+e38tg==
+X-Received: by 2002:a05:6602:2b0f:b0:843:eb89:9655 with SMTP id
+ ca18e2360f4ac-8447e35dd97mr838746639f.15.1733592354077; 
+ Sat, 07 Dec 2024 09:25:54 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.49
+ ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.25.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 09:26:49 -0800 (PST)
+ Sat, 07 Dec 2024 09:25:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 19/19] hash: Plumb crc8 into the hash functions
-Date: Sat,  7 Dec 2024 10:24:12 -0700
-Message-Id: <20241207172412.1124558-20-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Anand Moon <linux.amoon@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Dragan Simic <dsimic@manjaro.org>,
+ Gary Bisson <bisson.gary@gmail.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Nam Cao <namcao@linutronix.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 00/19] vbe: Series part E
+Date: Sat,  7 Dec 2024 10:23:53 -0700
+Message-Id: <20241207172412.1124558-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241207172412.1124558-1-sjg@chromium.org>
-References: <20241207172412.1124558-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 07 Dec 2024 18:29:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +119,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an entry for crc8, with watchdog handling.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This includes various patches towards implementing the VBE abrec
+bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
+fatures are available in VPL.
 
 Changes in v3:
+- Add new patch to avoid size growth in spl_mmc_find_device() debug
+- Use strlcpy() instead of strncpy()
 - Rebase to master
 
 Changes in v2:
+- Add field names into the message
+- Fix 'depends on SPL' to depend on TPL
+- Depend on TPL/VPL as well
 - Drop patch 'serial: ns16550: Allow clocks to be missing'
 
- common/hash.c        | 8 ++++++++
- include/u-boot/crc.h | 3 +++
- lib/crc8.c           | 6 ++++++
- 3 files changed, 17 insertions(+)
+Simon Glass (19):
+  spl: mmc: Avoid size growth in spl_mmc_find_device() debug
+  image: Add a prototype for fit_image_get_phase()
+  boot: Allow FIT to fall back from best-match option
+  bootstd: Avoid sprintf() in SPL when creating bootdevs
+  boot: Respect the load_op in fit_image_load()
+  malloc: Show amount of used space when memory runs out
+  malloc: Provide a simple malloc for VPL
+  Support setting a maximum size for the VPL image
+  spl: Report a loader failure
+  spl: Allow serial to be disabled in any XPL phase
+  spl: Support a relocated stack in any XPL phase
+  spl: Drop use of uintptr_t
+  spl: Drop a duplicate variable in boot_from_devices()
+  spl: Add some more debugging to load_simple_fit()
+  spl: lib: Allow for decompression in any SPL build
+  boot: Allow use of FIT in TPL and VPL
+  lib: Allow crc8 in TPL and VPL
+  boot: Imply CRC8 with VBE
+  hash: Plumb crc8 into the hash functions
 
-diff --git a/common/hash.c b/common/hash.c
-index db6925d6782..5d389420eff 100644
---- a/common/hash.c
-+++ b/common/hash.c
-@@ -304,6 +304,14 @@ static struct hash_algo hash_algo[] = {
- 		.hash_update	= hash_update_crc16_ccitt,
- 		.hash_finish	= hash_finish_crc16_ccitt,
- 	},
-+#if CONFIG_IS_ENABLED(CRC8)
-+	{
-+		.name		= "crc8",
-+		.digest_size	= 1,
-+		.chunk_size	= CHUNKSZ_CRC32,
-+		.hash_func_ws	= crc8_wd_buf,
-+	},
-+#endif
- #if CONFIG_IS_ENABLED(CRC32)
- 	{
- 		.name		= "crc32",
-diff --git a/include/u-boot/crc.h b/include/u-boot/crc.h
-index 5174bd7ac41..b2badaf6a97 100644
---- a/include/u-boot/crc.h
-+++ b/include/u-boot/crc.h
-@@ -25,6 +25,9 @@
-  */
- unsigned int crc8(unsigned int crc_start, const unsigned char *vptr, int len);
- 
-+void crc8_wd_buf(const unsigned char *input, unsigned int len,
-+		 unsigned char output[1], unsigned int chunk_sz);
-+
- /* lib/crc16.c - 16 bit CRC with polynomial x^16 + x^15 + x^2 + 1 */
- uint16_t crc16(uint16_t crc, const unsigned char *buffer, size_t len);
- 
-diff --git a/lib/crc8.c b/lib/crc8.c
-index 20d46d16147..811e19917b4 100644
---- a/lib/crc8.c
-+++ b/lib/crc8.c
-@@ -32,3 +32,9 @@ unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
- 
- 	return crc;
- }
-+
-+void crc8_wd_buf(const unsigned char *input, unsigned int len,
-+		 unsigned char output[1], unsigned int chunk_sz)
-+{
-+	*output = crc8(0, input, len);
-+}
+ boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
+ boot/bootdev-uclass.c         | 10 ++++-
+ boot/image-fit.c              | 29 ++++++++------
+ common/hash.c                 |  8 ++++
+ common/malloc_simple.c        |  3 +-
+ common/spl/Kconfig.vpl        | 17 +++++++++
+ common/spl/spl.c              | 15 +++++---
+ common/spl/spl_atf.c          | 36 +++++++++---------
+ common/spl/spl_fit.c          | 12 +++++-
+ common/spl/spl_legacy.c       |  8 ++--
+ common/spl/spl_mmc.c          |  6 ++-
+ configs/sandbox_vpl_defconfig |  2 +
+ include/image.h               | 16 +++++++-
+ include/spl.h                 | 28 +++++++-------
+ include/u-boot/crc.h          |  3 ++
+ lib/Kconfig                   | 53 ++++++++++++++++++++++++++
+ lib/Makefile                  | 12 +++---
+ lib/crc8.c                    |  6 +++
+ 18 files changed, 267 insertions(+), 68 deletions(-)
+
 -- 
 2.34.1
 
