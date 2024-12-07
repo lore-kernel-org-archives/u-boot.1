@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3625CE7717D
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ECEBE7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1521189428;
-	Sat,  7 Dec 2024 18:26:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 748DC89486;
+	Sat,  7 Dec 2024 18:26:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jGrTZqpE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HJmY4rrD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DCD488FB4; Sat,  7 Dec 2024 18:26:21 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 56BB788DC6; Sat,  7 Dec 2024 18:26:24 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E3FF88DC6
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D475893D1
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-8418ecda128so117127539f.2
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:19 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-84183532291so218951539f.2
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733592377; x=1734197177; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733592380; x=1734197180; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6j74QLmzUVfx1nYppzT1UpJ4hWHCPdMUetn6Cp+dtlo=;
- b=jGrTZqpEga4YZJTOJSqnXCwNCXragTJ+397q5LurIa5b+vNupYv9VIXK9BGBSZiaLU
- EMyT+BO1qq+9EcXo56CBpHSL2UD87kbtZz/ZDgp8hS1y+dxdstFENncXsWwKVnFCuldu
- ciVDlQy1P/WGASau+pwKptBa63IWihMxbNdqc=
+ bh=Ke6QYg+xtnB5Mu9yRGp039weqmWxFSs/11iZzqpG0X8=;
+ b=HJmY4rrDWmmxQ8j03C/wCVjpPG+VRthRXvTlR738uhUA+iajgVXWFrMHSSRtsIIiLf
+ rP4acLZmGHEHpDD/FY9Tq+dSxHU1d1X8W1VzHN1qfyR1xUthSmnPv/s+AgstGpFmEMhg
+ okxvlxPQ4/VLgM8OfzGAgs2jWTbL+WchZhTB4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733592377; x=1734197177;
+ d=1e100.net; s=20230601; t=1733592380; x=1734197180;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6j74QLmzUVfx1nYppzT1UpJ4hWHCPdMUetn6Cp+dtlo=;
- b=Or5fn92Yk3uscOFo9Z3HzzdQfbkLqvgqexpyJ7I2wVh3lo5vfRsIr7qKZkWiOly/LA
- Knd1tDHKijc/3EygLd9b3w7b6cxk0fOrUFnCaVnxCl3u5J7nWKuXzZzJnvU0p7W6O1br
- S6uWwo08DRV/paSNrLYCbUI0cBPG4tN83QrD4vw1GAzeb6vJ8kgFh6FRo1DAFZFPAZsh
- gAmhF6Dl6wRU1DAce72jUtKgkAO5E8G26qOL540pe6iv+aVBdkxutCWq6A1ML6qjwlS/
- S35R6rgV5ER2R9pOaxpygT9+vG2wX1jRknRVZXmIBNOrzhZkOsCuVaTmz1blQG+BAMUd
- gwZQ==
-X-Gm-Message-State: AOJu0YxpaJ1EJhzOqSgXTdnPVlA7IBTgCYj/WF2VY80xRH6ihIRdx+lO
- lsx1460EslBjUzcXUh6jEKtK0AIYeC1sOcGikxEQUtr+NJ5xFPF4xdEmydd/eRNeO3UfFK/W7JM
+ bh=Ke6QYg+xtnB5Mu9yRGp039weqmWxFSs/11iZzqpG0X8=;
+ b=o9sXDzeL+mmg1iM5nRO3Xq0vOg4sCo6ze1WDKHztf/cTQZef2oOlqpcxgCAhYch03o
+ 1LrstnfF6VcSxxqZRkAsmfdmSb1j2+OHF8wsl5INJiadF8XTnEA9vWHiVFqy/WBy5QSQ
+ 7yrSU+P+XAsbGzGAWjlgN8hzH2m2rE7iU3BOTxhE8UD03aGOhlIzlnCCq+9CETb/V2nF
+ x9wwz60PQ1xhLQKAFFKm/RkGUa8tUsE61SOBq9KUAMYH6FiKAU29rrI+BldgJDH3qcG3
+ ek4vm36IHrIJpb1EoVx4inm2YSdNa7vWnu4TBdFIOLaqTMb7wpAUGnrcszbTGnzcnzYh
+ oa+Q==
+X-Gm-Message-State: AOJu0Yy0hLkwQiHiJtdQmMZ3DlGOvx+L7mBm4X8zLDQ2f+592j32Au3x
+ HjdvZXxA4woovpKfEGS/LOBXAkVKxogk3uQbHQfrApm1qzr7uRuzNgxk0IcFysWAN+HPDkYw9oQ
  =
-X-Gm-Gg: ASbGncu/oQDqy6OIJNmzTJ8AeV5wXwiJQT9et613djAVD2crcio6kk8ZTKNneqxwN4F
- kpldkq2zFyBZmWKp/E8r0Tyaz1ohP5AHJnWLywXRINgAbuczbCEpPX1oU1jPkfn+O4NCbBthKCv
- JKen2elHek+tzRjRfZuBqnqSZCBbMlBWb0ZA1J/yja1TsiYdtjFmarQps1+ehg6ou/8bu5YyZnc
- jLY9bmMlnl9uJRz8qxKlKz0/6v/fU7dHc99n0uDZPdAky8cevEImTKonioHZLhuY9TW9yllpqZ5
- 5Rv2txPw+pY=
-X-Google-Smtp-Source: AGHT+IET4b4kOyrJ4qvCHRWA3BpXqqiR/z+oH9af3rODXRFhSmeL/MgHmAmnNfQyEi3XOWHGsii8tw==
-X-Received: by 2002:a05:6602:6c02:b0:83a:7a19:1de0 with SMTP id
- ca18e2360f4ac-8447e376d6amr1050976339f.14.1733592377579; 
- Sat, 07 Dec 2024 09:26:17 -0800 (PST)
+X-Gm-Gg: ASbGncvAXkHNdAuRIKYKSQTfiWOpny9qXtbac9gC+CaNdzbFDHOmyhO7evwOyo0uJx8
+ 2/PEqAwApEII8ZwUpfIJbBdBa+7cIxbvKIyFqcDWgU2D1PD3RwVxJHTsiK4P4B0KlKR5DMj+HoA
+ tWhTYGYOFxmPbpTW8NGtVlue7gpyK1M2cdhYdpDN77Z6WoSIzk/lpQQcTrxWmgIkiObQfW9i2GU
+ Do3e9Qnua/fgsYjaHFG+5ktIh6DYC+suODglGtXT2a6S2D8AGd6a32aPgtN/RYeARIK6dX8zkXx
+ 1C+kX+iWRbc=
+X-Google-Smtp-Source: AGHT+IEeJWrZzCHuT5wr+3DP3JjUekiTSQxsPLKzLDB+1qWiWAGeSV5ch2n2TnbLhfvNEy2Cnez1FA==
+X-Received: by 2002:a05:6602:6b19:b0:844:7896:a152 with SMTP id
+ ca18e2360f4ac-8447e296ac9mr933726539f.12.1733592380425; 
+ Sat, 07 Dec 2024 09:26:20 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.15
+ ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 09:26:16 -0800 (PST)
+ Sat, 07 Dec 2024 09:26:19 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Gary Bisson <bisson.gary@gmail.com>,
  Mathieu Othacehe <m.othacehe@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 07/19] malloc: Provide a simple malloc for VPL
-Date: Sat,  7 Dec 2024 10:24:00 -0700
-Message-Id: <20241207172412.1124558-8-sjg@chromium.org>
+Subject: [PATCH v3 08/19] Support setting a maximum size for the VPL image
+Date: Sat,  7 Dec 2024 10:24:01 -0700
+Message-Id: <20241207172412.1124558-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241207172412.1124558-1-sjg@chromium.org>
 References: <20241207172412.1124558-1-sjg@chromium.org>
@@ -95,37 +95,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The VPL phase may want to use the smaller malloc() implementation, so
-add an option for this.
+Add a size limit for VPL, to match those for SPL and TPL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/Kconfig.vpl | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ common/spl/Kconfig.vpl | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
-index d06f36d4ee4..3dc0e95e09f 100644
+index 3dc0e95e09f..eb57dfabea5 100644
 --- a/common/spl/Kconfig.vpl
 +++ b/common/spl/Kconfig.vpl
-@@ -222,6 +222,15 @@ config VPL_SPI_FLASH_SUPPORT
- 	  lines). This enables the drivers in drivers/mtd/spi as part of a
- 	  VPL build. This normally requires VPL_SPI_SUPPORT.
+@@ -237,6 +237,14 @@ config VPL_TEXT_BASE
+ 	help
+ 	  The address in memory that VPL will be running from.
  
-+config VPL_SYS_MALLOC_SIMPLE
-+	bool "Only use malloc_simple functions in the VPL"
-+	default y
++config VPL_MAX_SIZE
++	hex "Maximum size (in bytes) for the VPL stage"
++	default 0x2e000 if ROCKCHIP_RK3399
++	default 0x0
 +	help
-+	  Say Y here to only use the *_simple malloc functions from
-+	  malloc_simple.c, rather then using the versions from dlmalloc.c;
-+	  this will make the VPL binary smaller at the cost of more heap
-+	  usage as the *_simple malloc functions do not re-use free-ed mem.
++	  The maximum size (in bytes) of the TPL stage. This size is determined
++	  by the amount of internal SRAM memory.
 +
- config VPL_TEXT_BASE
- 	hex "VPL Text Base"
- 	default 0x0
+ config VPL_BINMAN_SYMBOLS
+ 	bool "Declare binman symbols in VPL"
+ 	depends on VPL_FRAMEWORK && BINMAN
 -- 
 2.34.1
 
