@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E4A0E7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D90E7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC8AD8919F;
-	Sat,  7 Dec 2024 18:26:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 38B01895A4;
+	Sat,  7 Dec 2024 18:26:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kZfyIXwR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hS/Fu4Lb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B17B89338; Sat,  7 Dec 2024 18:26:41 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 3C30A89578; Sat,  7 Dec 2024 18:26:44 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA1A388DC6
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01B47891CF
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-843e9db3e65so115108339f.1
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:38 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-841a6af60e9so85683639f.0
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733592396; x=1734197196; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733592399; x=1734197199; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7fOVaUbxSDJQRCfCvQ51TYMcbMsmkYpFVeSIAd7BULc=;
- b=kZfyIXwRgIEVOy6M2EK/QHjSAhS079LxWRCzu/zt4uneNrWnJ8fJL4dtryuA6hW+MP
- eoUcP93CRm4bdZPHBVkzSgQEtzyUKPBnRzAA3vNjpQQd0ziveINQBLtXikIU+PbmDBIo
- E7zKsF0lqy0Us9Nt3O0nhaVAn5y8HH7FXbAx4=
+ bh=VcTQ9iLyQK9+908ud8ys7S8cbFtHSipk+qWONY5Ajmw=;
+ b=hS/Fu4Lbd43eURYdRLbWV2uQpRwiCx+/5+R8ptXdXpydPjO72SOVatwZS63jGBkscA
+ UlBjHbxbsoTlVGxzRQiYD59mEMW/RCD/AJ+SZO7QTlEJLSjWR0gAZLQ+nhjUS8HSlWZi
+ LZ09PcNvX+n7bVaXPetA5XnlnvSrRWew9W+GE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733592396; x=1734197196;
+ d=1e100.net; s=20230601; t=1733592399; x=1734197199;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7fOVaUbxSDJQRCfCvQ51TYMcbMsmkYpFVeSIAd7BULc=;
- b=IE6McKi6twfyQtxlxzkOJqMfsCM4QEbk3ihOOAit8PkR6LqiqUFVv9pZVb0o5QSus0
- 62ZzYFJJcu+uadNOLRUp56KcttcNywFDQnEzBmJcowhgdhVPZpWVFYa+hxjqE7cbfLB8
- NB8378bl5crgWgC+JwXwyqsyAjJgRsknR1L0ZHGFnY6Irk09JWysOevUqB2xwXlrTv2N
- qQe0kTnvsLx+1wd3LADC+uD8G9SIX5l2ZWivPmEYaiI7EhfaZx5TlsfXMz4GBKyWSPJG
- zG7wBOH6MDCVNF+K5cTK6nItK1FybGeglo6MB4pdQ1i3LEJgzBMbrqPUltyqXJx6BiHX
- YTVw==
-X-Gm-Message-State: AOJu0YwttIuiyDiXvJ/vXRLMKkHHDIea6qzyzP5FlM3hdQGrODJUzGmU
- YG/SlxXkFOkCvb+SvAJcxT3rUc9VWu92Kw7n3bncjSmZdVL44LB79mPj1RdWgp9VNkmDGOklgE4
+ bh=VcTQ9iLyQK9+908ud8ys7S8cbFtHSipk+qWONY5Ajmw=;
+ b=s/GnSkzRKlPJh9ptNwdoBp1EOzTMIFglA8HKc0PxRhmRRovOaVfgnq2G0PN8AcBjxZ
+ lcfzAZYwRE+JFxGG5eNzzXlDZy3j2g2t9X5K7NRzNj7WEt0MPMOq1x+NTrUCSXwpHVGh
+ eCqK4ZLm6PqS46wICSufWsEfRjpTl3BqbEP4CM7//OlhH/DF1cU4zyzEgk6+ZyfZqMou
+ SEBAL7VTduvGN9+a/7e1U6OL6eBJ6rD/x6noyK2zr9vPhGfBARcbRJf+VIpQ05Ra8kFT
+ m7p7xPdDIW9O2rsU22QSxnb6aFPB/m9KYk69WfPADEjsoOmvXIms/e+G5AMifj48vvq/
+ 1ncA==
+X-Gm-Message-State: AOJu0YwLpwe5SVtcQikZmyUMJIWKdseRjJJue9JynVQQ1P+x/Ohl9Wrt
+ FNzbkecolPPYb+V1T6dCUaUZhOQuChsB0MCDBJg1UR+8jq6ew2L4y75RWI3pzSKW0+vmYtBoIv0
  =
-X-Gm-Gg: ASbGnct37X5roxnX7sQ8EI3ZER5+jF1NVnHuMYZCbVxgeXknsl3TcQtLBhgOOg/V5s1
- NwJXhQXnNPNhPVIgcSz8+Xk/skkmGJMKKbcaukdmWpPu2IzCyovKfODwGWQA4PwtjxNN0s0B7fE
- n/OytDAMN2CQHmCcOEPLakByLdszOALvXOpa3qVap2BXLuQZMosUawwi/HxG4L1euzdykeWax94
- lNFA8vTl5GV7kPCGaZlK1X6R+sVQ02xLcT1/BIbz5OXs/rVlHGDRgHMQaUbdrEyCF2Z6tzOzx0N
- C2U8r10A5IQ=
-X-Google-Smtp-Source: AGHT+IHCwPe1njNqhPQUmFV6SheIl+hLwnw4lM5cf905/6iaobgZhxdxg0sFT8aKjBPJQ3K7oam7Xw==
-X-Received: by 2002:a05:6602:158c:b0:82c:f7b1:a9fb with SMTP id
- ca18e2360f4ac-8447e04ccaemr648923039f.5.1733592396425; 
- Sat, 07 Dec 2024 09:26:36 -0800 (PST)
+X-Gm-Gg: ASbGncsMx9lcVer4HH9sbgyXHyU70VTPpwhjZgUB42AR8aarLhE7s9SJDszfZwRekYF
+ pnbKoLiUtAMWJYBYRBbESTIh9bMtY9lxZIAJVhw6MXBLyfZLCXo7G06gJd9ythYMk1ChYn1oiAc
+ tNzn16i6jV8KJX5WuMvP9OuM0qObuEZhHvKdrsyA7YpvxMeIV6SVA633jz3VCpqrn+5JT+SrWfc
+ ci2WrNnqDfzI1o7qwcizIzhJlgvl2VemirVUTVgSCy7OnM4DQZPTsb+Csyz9LV3dvNYe1g7fx+v
+ d/t9hI/kr44=
+X-Google-Smtp-Source: AGHT+IHFiSC2GFJP164DFLFvXTZMHuBoP41OCT3WByx0sGoAX8rPXJ0U91Ymzo/O764P29dpNbbEYw==
+X-Received: by 2002:a05:6602:2d81:b0:83a:b52b:5cb5 with SMTP id
+ ca18e2360f4ac-8447e223b79mr843387039f.5.1733592399357; 
+ Sat, 07 Dec 2024 09:26:39 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.34
+ ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 09:26:35 -0800 (PST)
+ Sat, 07 Dec 2024 09:26:38 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 14/19] spl: Add some more debugging to load_simple_fit()
-Date: Sat,  7 Dec 2024 10:24:07 -0700
-Message-Id: <20241207172412.1124558-15-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Anand Moon <linux.amoon@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 15/19] spl: lib: Allow for decompression in any SPL build
+Date: Sat,  7 Dec 2024 10:24:08 -0700
+Message-Id: <20241207172412.1124558-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241207172412.1124558-1-sjg@chromium.org>
 References: <20241207172412.1124558-1-sjg@chromium.org>
@@ -94,63 +100,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add debugging of image-loading progress. Fix a stale comment in the
-function comment while we are here.
+Add Kconfig symbols and update the Makefile rules so that decompression
+can be used in TPL and VPL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl_fit.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ lib/Kconfig  | 35 +++++++++++++++++++++++++++++++++++
+ lib/Makefile | 12 ++++++------
+ 2 files changed, 41 insertions(+), 6 deletions(-)
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index ef40a50082c..ac8462577ff 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -190,7 +190,7 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
- /**
-  * load_simple_fit(): load the image described in a certain FIT node
-  * @info:	points to information about the device to load data from
-- * @sector:	the start sector of the FIT image on the device
-+ * @fit_offset:	the offset of the FIT image on the device
-  * @ctx:	points to the FIT context structure
-  * @node:	offset of the DT node describing the image to load (relative
-  *		to @fit)
-@@ -243,11 +243,14 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 	if (!fit_image_get_data_position(fit, node, &offset)) {
- 		external_data = true;
- 	} else if (!fit_image_get_data_offset(fit, node, &offset)) {
-+		log_debug("read offset %x = offset from fit %lx\n",
-+			  offset, (ulong)offset + ctx->ext_data_offset);
- 		offset += ctx->ext_data_offset;
- 		external_data = true;
- 	}
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 56ffdfa1839..3fa580ab1eb 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -832,12 +832,36 @@ config SPL_LZ4
+ 	  fast compression and decompression speed. It belongs to the LZ77
+ 	  family of byte-oriented compression schemes.
  
- 	if (external_data) {
-+		ulong read_offset;
- 		void *src_ptr;
++config TPL_LZ4
++	bool "Enable LZ4 decompression support in TPL"
++	depends on TPL
++	help
++	  This enables support for the LZ4 decompression algorithm in TPL. LZ4
++	  is a lossless data compression algorithm that is focused on
++	  fast compression and decompression speed. It belongs to the LZ77
++	  family of byte-oriented compression schemes.
++
++config VPL_LZ4
++	bool "Enable LZ4 decompression support in VPL"
++	depends on VPL
++	help
++	  This enables support for the LZ4 decompression algorithm in VPL. LZ4
++	  is a lossless data compression algorithm that is focused on
++	  fast compression and decompression speed. It belongs to the LZ77
++	  family of byte-oriented compression schemes.
++
+ config SPL_LZMA
+ 	bool "Enable LZMA decompression support for SPL build"
+ 	depends on SPL
+ 	help
+ 	  This enables support for LZMA compression algorithm for SPL boot.
  
- 		/* External data */
-@@ -270,6 +273,10 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
++config TPL_LZMA
++	bool "Enable LZMA decompression support for TPL build"
++	depends on TPL
++	help
++	  This enables support for LZMA compression algorithm for TPL boot.
++
+ config VPL_LZMA
+ 	bool "Enable LZMA decompression support for VPL build"
+ 	default y if LZMA
+@@ -856,11 +880,22 @@ config SPL_GZIP
+ 	help
+ 	  This enables support for the GZIP compression algorithm for SPL boot.
  
- 		overhead = get_aligned_image_overhead(info, offset);
- 		size = get_aligned_image_size(info, length, offset);
-+		read_offset = fit_offset + get_aligned_image_offset(info,
-+							    offset);
-+		log_debug("reading from offset %x / %lx size %lx to %p: ",
-+			  offset, read_offset, size, src_ptr);
++config TPL_GZIP
++	bool "Enable gzip decompression support for SPL build"
++	select TPL_ZLIB
++	help
++	  This enables support for the GZIP compression algorithm for TPL
++
+ config SPL_ZLIB
+ 	bool
+ 	help
+ 	  This enables compression lib for SPL boot.
  
- 		if (info->read(info,
- 			       fit_offset +
-@@ -336,6 +343,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong fit_offset,
- 		else
- 			image_info->entry_point = FDT_ERROR;
- 	}
-+	log_debug("- done loading\n");
++config TPL_ZLIB
++	bool
++	help
++	  This enables compression lib for TPL
++
+ config SPL_ZSTD
+ 	bool "Enable Zstandard decompression support in SPL"
+ 	depends on SPL
+diff --git a/lib/Makefile b/lib/Makefile
+index dbcfa87ebd6..31cfbb67aa0 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -83,12 +83,12 @@ obj-$(CONFIG_$(XPL_)SHA512_LEGACY) += sha512.o
+ obj-$(CONFIG_CRYPT_PW) += crypt/
+ obj-$(CONFIG_$(XPL_)ASN1_DECODER_LEGACY) += asn1_decoder.o
  
- 	upl_add_image(fit, node, load_addr, length);
+-obj-$(CONFIG_$(XPL_)ZLIB) += zlib/
+-obj-$(CONFIG_$(XPL_)ZSTD) += zstd/
+-obj-$(CONFIG_$(XPL_)GZIP) += gunzip.o
+-obj-$(CONFIG_$(XPL_)LZO) += lzo/
+-obj-$(CONFIG_$(XPL_)LZMA) += lzma/
+-obj-$(CONFIG_$(XPL_)LZ4) += lz4_wrapper.o
++obj-$(CONFIG_$(PHASE_)ZLIB) += zlib/
++obj-$(CONFIG_$(PHASE_)ZSTD) += zstd/
++obj-$(CONFIG_$(PHASE_)GZIP) += gunzip.o
++obj-$(CONFIG_$(PHASE_)LZO) += lzo/
++obj-$(CONFIG_$(PHASE_)LZMA) += lzma/
++obj-$(CONFIG_$(PHASE_)LZ4) += lz4_wrapper.o
+ 
+ obj-$(CONFIG_$(XPL_)LIB_RATIONAL) += rational.o
  
 -- 
 2.34.1
