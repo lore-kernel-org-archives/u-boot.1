@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C41EFE7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 01:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B429E77173
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 01:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3391889170;
-	Sat,  7 Dec 2024 02:03:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9415689575;
+	Sat,  7 Dec 2024 02:03:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JWxSOW+w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LIwPcbSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3CCA89451; Sat,  7 Dec 2024 02:03:13 +0100 (CET)
+ id 43FC489451; Sat,  7 Dec 2024 02:03:15 +0100 (CET)
 Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
  [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92D9489124
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 02:03:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28E258929D
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 02:03:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4668e48963eso25337781cf.1
- for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 17:03:11 -0800 (PST)
+ d75a77b69052e-46695478d03so38795501cf.1
+ for <u-boot@lists.denx.de>; Fri, 06 Dec 2024 17:03:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733533390; x=1734138190; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733533392; x=1734138192; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZwzLO7JlnoMnOU1K63UBFmTgFrV2bgJfZobdbpwoj0g=;
- b=JWxSOW+wddUvmW48TP2fGPsN2TIJrY4C4VNFV09PiRdB97I9d7KxCVx/hRxpEqzmv5
- wZZ43vZlGPBCvGwDz9Z78bbx0FgUApfflGAJtZ2HppQwfqXtm3Pu7xap1978/H290anx
- YPu3jlgThixLhnVmzOr65f5RU0Hw63cWpqGw8=
+ bh=fac36hx8YFll4x8XXGPMBTtX88vlblm25kB1BANZpuE=;
+ b=LIwPcbSVvcGZvIUAk8Dknuqb9Ebg2cfy6pP31MUz23F7JpDUK9zHg/xQpjSeyMeIeh
+ jiZBk2E7S5jFnBdqTR4t5C+HbIU8TMzkHjAaVQiJ9lJCrUIUU6XdSzCmVR1Jko6v+QU3
+ khIlDwl4rn/SdGD7Fn+mtL0JvN2I4ydo3ZAGk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733533390; x=1734138190;
+ d=1e100.net; s=20230601; t=1733533392; x=1734138192;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZwzLO7JlnoMnOU1K63UBFmTgFrV2bgJfZobdbpwoj0g=;
- b=J8tzX8h0E+bsP5hc7/h3+9FiBXmLpQGDU89iPnozHyrIdG8HyjqkWYqnHLo8bjAVIh
- JvmBNM64S1u5gnsfWxWNr7xyvJcWX2B8bFqEgjN04O40+QlNDQg5/EZ/xg7WxaiPkoR/
- KfG1iReW/LYY7zdL1MCgJiwb7nq994M9ay4cFuG86CIsMYq4rNQza9nfnIS/wsLmVNIn
- X3aBTzH+j61t/2IGFeeJf9RSjOIH8AHJuArtdpAa92yEXQMh7MhPgpxaVVzIZAuP8QK9
- MuSbzxAdMvjVl0+g19J+MOIgXPOYAJvKn41eVCZoVBFy2guWBqJKNYjfLuivL+yAerp9
- xA6A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXhUSvUmQlunyzwmxpyk6C3kz2+aqp6A9+ojHFDEtTknDybBYiOZWk+GJwbFFmWte0KZ0NTEp4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywfdr7R6yQvlcg+60Gg8YrijEvwdPtazVf8/ByVjlM4wDVflslB
- O4K9yXu9F0NEUdXojseuUAbLWr1N/iQpV1Sv1Sm+WSqlX1rSo4GMayqAcm5Gpnk=
-X-Gm-Gg: ASbGnctyBg+XdWhmW102TDBfMUyKbQEFK0NhW9drNlD6qyh7SAvd/vjQXwJPcG1gsK1
- 6YeqsQCz9/QpiRrn7PYFIMiBKl9pV908jtnn8Q25/p/FZaOngoeMJN66CAmDtd9VHeM4uaCknLv
- UWufyRHeVBxrpE8Z3XeCgS3xN4LGh4AHbM1+vidsWpTZ/gDj1uMsZbabkBK/u0AISSmSNwfDILg
- 8+cZrbClQ1mbY9mRJF2aGLZ6/4Rtgq8MWDE9LC8xANSDyJzmg==
-X-Google-Smtp-Source: AGHT+IGqgOXeyrCvcPlqNDoReSzm6kEUAaI+epCh8JDGNy1/yfORSrkub+jmrV0ean5loKI89+2wRQ==
-X-Received: by 2002:a05:622a:d07:b0:467:4da0:d988 with SMTP id
- d75a77b69052e-4674da0db21mr5338821cf.19.1733533390338; 
- Fri, 06 Dec 2024 17:03:10 -0800 (PST)
+ bh=fac36hx8YFll4x8XXGPMBTtX88vlblm25kB1BANZpuE=;
+ b=Pe3DK3JslfXZQwVriVyL2kMwHOIC08XP6kLdFbzgBVsqE5ACCILbRlfWxb927jkjq0
+ UFKoYneZi63ImZF4WMHA2pYn26WTODLfICJVeN5q86zJphm//YmH0SnxAm6VGpFZs8my
+ jaijP/8Dqx88iq+842R1Ub+U5NrKMGb7JvxjAzLksit0UKiNqFiWsnzT33ViSFhZgSkk
+ jO7Si4nLUYCZjoOoEi7Oj5fqBIuP8Nuv2jkxIG+X6VMJa3oCPCk5IcWP2CNFDrJTBoRq
+ PMkd+zZGEeE/2zfCcvRE50la+4NYcYXzRAE4KHyZgsLAa6ajxtIL5q5fYFA58hjI4+YU
+ wP+Q==
+X-Gm-Message-State: AOJu0Yy9DNOh5Sv2HGUnCwWyI4bqC3hMLYoxn7BBAMT6r80VkSGQMXti
+ HAfApgfNMKzkjN+6AsvLsidgUseGS9U+HL/c5zw5PXhIBR8GNXtaZKYo0KkZNPOTKrgGhQ0B8Gn
+ N5XU=
+X-Gm-Gg: ASbGncuQsPIQEVULsHP3e7kW+b7N+srmxx8RSV5DZEgMb+5smqAKT2fHKnZFQz21A+a
+ BbVkrjBaM/xd93U9xxuz1qefFFpq4vHtkTUpzESJ6Go2593WE7/+4f2IzqBZ82sK6Paov+/jPCX
+ VTCfCn/x8lwUJsJOMzL4/LCE1ua3duil7Inux4BEq+zd9EAPcu05nip+wzkU0qAmDPvStKXFpxt
+ 9eoI1S2BOzzf1T2PhJokUwiwNw+TZgPjWF0PfkcOlsZP42s2Q==
+X-Google-Smtp-Source: AGHT+IFNQpWMu5g5j4bkE8K7RH+nkQ1tMLU2LqntfwhiMUvteRn/ls0y985OEjl1APTBZOvBnmm3Ow==
+X-Received: by 2002:a05:622a:1314:b0:463:5bd4:59b8 with SMTP id
+ d75a77b69052e-46734e675c7mr85759011cf.40.1733533392155; 
+ Fri, 06 Dec 2024 17:03:12 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.100])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467297cd6a2sm26834331cf.84.2024.12.06.17.03.08
+ d75a77b69052e-467297cd6a2sm26834331cf.84.2024.12.06.17.03.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Dec 2024 17:03:09 -0800 (PST)
+ Fri, 06 Dec 2024 17:03:11 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: =?utf-8?q?Th=C3=A9o_Lebrun?= <theo.lebrun@bootlin.com>
-Cc: =?utf-8?q?Gr=C3=A9gory_Clement?= <gregory.clement@bootlin.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Thomas Richard <thomas.richard@bootlin.com>, 
- Richard Genoud <richard.genoud@bootlin.com>, u-boot@lists.denx.de
-In-Reply-To: <20241115-k3-debug-v1-1-5c1c130b4e2e@bootlin.com>
-References: <20241115-k3-debug-v1-1-5c1c130b4e2e@bootlin.com>
-Subject: Re: [PATCH] ram: k3-ddrss: drop debug() in timing-sensitive sequence
-Message-Id: <173353338813.3658905.7996428053616582513.b4-ty@konsulko.com>
-Date: Fri, 06 Dec 2024 19:03:08 -0600
+To: u-boot@lists.denx.de, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>, 
+ u-boot@dh-electronics.com
+In-Reply-To: <20241120160135.28262-1-cniedermaier@dh-electronics.com>
+References: <20241120160135.28262-1-cniedermaier@dh-electronics.com>
+Subject: Re: [PATCH V2] env: Switch the callback static list to Kconfig
+Message-Id: <173353339058.3658905.15704207788942489481.b4-ty@konsulko.com>
+Date: Fri, 06 Dec 2024 19:03:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,18 +96,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Nov 2024 10:43:15 +0100, Théo Lebrun wrote:
+On Wed, 20 Nov 2024 17:01:35 +0100, Christoph Niedermaier wrote:
 
-> Those debug() calls might be useful, but beware. They can cause the DDR
-> controller to hang if we do not run the sequence quickly enough.
+> Switch the callback static list from the board configuration variable
+> CFG_ENV_CALLBACK_LIST_STATIC to Kconfig CONFIG_ENV_CALLBACK_LIST_STATIC.
 > 
-> They usually are not an issue with upstream U-Boot and the default DDR
-> config, but they have become troublesome with custom DDR configs.
 > 
-> Drop those debug() statements that shouldn't be present in
-> time-sensitive code, to avoid anyone else falling into the trap.
-> 
-> [...]
 
 Applied to u-boot/next, thanks!
 
