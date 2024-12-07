@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128BDE7717D
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 23:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C153E7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 23:43:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30B958919F;
-	Sun,  8 Dec 2024 00:39:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D990389347;
+	Sun,  8 Dec 2024 00:43:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rjs4+nAk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="myh1T6P+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C37989385; Sun,  8 Dec 2024 00:39:30 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 519B5892CD; Sun,  8 Dec 2024 00:43:25 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 428E288E0F
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 00:39:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0AAF89385
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 00:43:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9a977d6cc7so465337166b.3
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 15:39:27 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa679ad4265so7142266b.0
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 15:43:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733614767; x=1734219567; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rYjbIZpVA8hJxq7UpP2Vs2WxhUis/JP500m/KWkpnwE=;
- b=Rjs4+nAkFXsJAy9qLaqdW9JJErq9Q/d49hFb+KDDdhNgkkPekqp4KWriQ6PuObj020
- /8g+ybq7NA45inEU9RXmdDbHGVs/C+qi6hlKSZ5yS4QdPkf0Z0kuVUDlyKFl9Kt+T9VK
- e0MUIhkKB0b1Hy1Jx/ua8HONYPMPnbqFbhG5g=
+ d=chromium.org; s=google; t=1733615002; x=1734219802; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=OJIhuMAWzV8raRAv1jJAZT5DP5cIG7000jONP2NFqBk=;
+ b=myh1T6P++LUKSs0azwa1VTNxrfmLwTP+DIFuseIMFrVgjQp3rTqYgNWY6wtR2FbcUn
+ tWCYuUNjhEBz9CfCQef/FuqFU1wF7PH2RUN43yGYYHxxpgcZxTbbfiY4q/5rHw9GGzev
+ neCNy4qnWYAyxP36l6zvahSMk3a/xn8FhmPqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733614767; x=1734219567;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rYjbIZpVA8hJxq7UpP2Vs2WxhUis/JP500m/KWkpnwE=;
- b=CVOlqokXAre35iZtR/uqP5DAluUITN3/CmDzP7DUPckH+jaw0SfaNzj0jJvlLqGoca
- yun05oNS1PyLQUjoW0vPRheCYp4c2tvBOTjC3612UVebTyMSSTXADFLvlkAc9v3c+Gqe
- bCSdiJK0iM6lHIdxQi41/F/kFHVdS4bYz5Gw8sBGulLdfH7iB2jpZ+wHlzxewNZVdPKs
- PkOjBTqh/wIT6u8muZlATpW0iHRtwpmORExqbnon/MyAAJPTCBXkrXRPOKfXRiGEVDn7
- 8ejTijXt+fl5vrASG28qox8BvBdivl9A112pMZRcE7ScdzfMiIrSz4kZNv4urtYivoMB
- x/KA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZxCn4D/tI4ZW0VRLZWTE+pFcP71IpXgm4EAChFrDdoBZRuEoX9Oxi8tSJt3+WcTt19MVy380=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy96p+43tqi9chrZXx2F6/8XvPgP2P4YtTyFEeSIVNZXm2UMdwn
- LGZai09aesXMVb3Ur8q4IONcopozikuALRSwzggaU4Vk/y0M6Df+GhZRQeEmxLNSXokMXy/A4CT
- LdHHvc7MlGnwP9mQOFTel4vtet0V+nmN8P126
-X-Gm-Gg: ASbGnctl0+ZsJTWDoV7uXBWv8P7+RHe4gq7EvAz1dF3aZJzC6PxFC2QiZMapRtgNkph
- sxE2XcLTDjM0rPzBELg/BWSBd8rACdQDb
-X-Google-Smtp-Source: AGHT+IHxE/X9EVtmgWVtokaVQwmoSVyBfGXm+RmdShtGh38+NwBWDJgZgeHfG+V1XfkAGCAFlStxNO1B2TCsdpMLwqk=
-X-Received: by 2002:a05:6402:458b:b0:5d2:7199:ac2 with SMTP id
- 4fb4d7f45d1cf-5d3be661af9mr18381431a12.2.1733614766654; Sat, 07 Dec 2024
- 15:39:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733615002; x=1734219802;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OJIhuMAWzV8raRAv1jJAZT5DP5cIG7000jONP2NFqBk=;
+ b=RNqSwuOd3QPO9IaQz6/Mpvs1VMvuyrt6Ld81TugW5qN8SOiMl/5/6NIHGI7T5XpHte
+ ipTRZ36ak054CkAVx8atNXaWqEPYKu6n/dmPqBjrBOWhmqZoDrOB7EJt0A9BAmmy5x57
+ mwzQQwIYB8FRHYyvnTqzXY33JWF0KxCVZWZU8dbZ5PPoFFLQKth+p390x8uEjSnAm98t
+ hX/IryiFLSLZYADyWw2R9heHkHQTOuoqCDByGnuPCCnQzNUQBWj79AJrhhwwQmrGWgwU
+ giqZjBKxJ7oxAmLUOnKgNniFp3Bm7dGIs+QtoG2tLTpwFnNmKmigEL2CyiZWN9bcze37
+ 1sCg==
+X-Gm-Message-State: AOJu0Yy9Kus6vumEu3WWxCxhgLzqN04DIr2WEqYHK3ZqiZIfvMVQUzDl
+ FqqhIsM2TLdkLgixxnJ6gH+0I31ra+4O/O5pX4Ey/rX9bWVqfpGMTqp1TK+HFqy0Lgkd4Zf74yf
+ OAJ9BLR+DuXVNj6bFnzU60nP48gLO25Ymj1kaaTz8x600/BxWyA==
+X-Gm-Gg: ASbGncuNgh31TnQyLZr1XCfmN8o68AqEyaQkioOBYGPqVQinPiQYqmJzSmhGgqMKJDy
+ DkrkT0TV4Cn3RZHDnX9V784KWyrvG3ZZV
+X-Google-Smtp-Source: AGHT+IHAMN9I8KQXAfG6e5u6VUP6pyv2OADyqO/u7npItgclDHcsKtlK9yh4KNj4zcb/jlRbovX9KNG8rQyXSs/z1Kg=
+X-Received: by 2002:a17:906:2929:b0:aa5:f2c0:2378 with SMTP id
+ a640c23a62f3a-aa6373a1bf4mr811424866b.13.1733615001794; Sat, 07 Dec 2024
+ 15:43:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20241112135911.630586-1-sjg@chromium.org>
- <20241112135911.630586-2-sjg@chromium.org>
- <1529CE41-E674-400F-BB4E-00C27711F523@gmx.de>
- <20241113005447.GF3600562@bill-the-cat>
- <CAFLszTjk6w0zUGOh+Q_gZGETN8Vu2hqvrdYexeSAkPmMOp5uvQ@mail.gmail.com>
- <20241115151403.GW3600562@bill-the-cat>
-In-Reply-To: <20241115151403.GW3600562@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Dec 2024 16:39:15 -0700
-Message-ID: <CAFLszTin1hYYsa-1-4vMqikxTDD2ksoUEst5nko=oWsAu8cpdQ@mail.gmail.com>
-Subject: Re: [PATCH 01/18] scripts: Add a script for building and booting QEMU
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+Date: Sat, 7 Dec 2024 16:43:10 -0700
+Message-ID: <CAFLszThXbhVtYqi27BtKv6PHwVNnhvwJ5+vKQ_yMMJ33GrYd4g@mail.gmail.com>
+Subject: [PATCH v5 00/13] Add video damage tracking
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Derald Woods <woods.technical@gmail.com>, 
+ Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
+ Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+ Neil Armstrong <neil.armstrong@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,376 +91,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri, 15 Nov 2024 at 08:14, Tom Rini <trini@konsulko.com> wrote:
+On Mon, Aug 21, 2023 at 01:50 PM Alper Nebi Yasak
+<alpernebiyasak@gmail.com> wrote:
 >
-> On Fri, Nov 15, 2024 at 07:21:47AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 12 Nov 2024 at 17:54, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Nov 13, 2024 at 01:49:30AM +0100, Heinrich Schuchardt wrote:
-> > > > Am 12. November 2024 14:58:54 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > > > >It is handy to be able to quickly build and boot a QEMU image for a
-> > > > >particular architecture and distro.
-> > > > >
-> > > > >Add a script for this purpose. It supports only arm and x86 at present.
-> > > > >For distros it only supports Ubuntu. Both 32- and 64-bit builds are
-> > > > >supported.
-> > > > >
-> > > > >Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > >---
-> > > > >
-> > > > > MAINTAINERS                    |   8 ++
-> > > > > doc/board/emulation/index.rst  |   1 +
-> > > > > doc/board/emulation/script.rst |  61 ++++++++++++
-> > > > > scripts/build-qemu.sh          | 175 +++++++++++++++++++++++++++++++++
-> > > > > 4 files changed, 245 insertions(+)
-> > > > > create mode 100644 doc/board/emulation/script.rst
-> > > > > create mode 100755 scripts/build-qemu.sh
-> > > > >
-> > > > >diff --git a/MAINTAINERS b/MAINTAINERS
-> > > > >index 0399ed1dbf6..b45bb96d5a5 100644
-> > > > >--- a/MAINTAINERS
-> > > > >+++ b/MAINTAINERS
-> > > > >@@ -1110,6 +1110,14 @@ F:    tools/efivar.py
-> > > > > F:  tools/file2include.c
-> > > > > F:  tools/mkeficapsule.c
-> > > > >
-> > > > >+EMULATION
-> > > > >+M:  Simon Glass <sjg@chromium.org>
-> > > > >+S:  Maintained
-> > > > >+W:  https://docs.u-boot.org/en/latest/board/emulation/script.html
-> > > > >+F:  configs/qemu_x86*
-> > > > >+F:  doc/board/emulation/script.rst
-> > > > >+F:  scripts/build-qemu.sh
-> > > >
-> > > > Please, avoid misnomers. This script does not build QEMU.
-> > > >
-> > > > >+
-> > > > > ENVIRONMENT
-> > > > > M:  Joe Hershberger <joe.hershberger@ni.com>
-> > > > > S:  Maintained
-> > > > >diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-> > > > >index f8908166276..5a2a00ae225 100644
-> > > > >--- a/doc/board/emulation/index.rst
-> > > > >+++ b/doc/board/emulation/index.rst
-> > > > >@@ -8,6 +8,7 @@ Emulation
-> > > > >
-> > > > >    acpi
-> > > > >    blkdev
-> > > > >+   script
-> > > > >    qemu-arm
-> > > > >    qemu-mips
-> > > > >    qemu-ppce500
-> > > > >diff --git a/doc/board/emulation/script.rst b/doc/board/emulation/script.rst
-> > > >
-> > > > Just another misnomer. This page is not about script.sh.
-> > > >
-> > > > >new file mode 100644
-> > > > >index 00000000000..23981e333cb
-> > > > >--- /dev/null
-> > > > >+++ b/doc/board/emulation/script.rst
-> > > > >@@ -0,0 +1,61 @@
-> > > > >+.. SPDX-License-Identifier: GPL-2.0+
-> > > >
-> > > > This is not a valid SPDX identifier.
-> > > >
-> > > > >+
-> > > > >+Script for building and running
-> > > > >+===============================
-> > > > >+
-> > > > >+You may find the script `scripts/build-qemu.sh` helpful for building and testing
-> > > > >+U-Boot on QEMU.
-> > > > >+
-> > > > >+If uses a environment variables to control how it works:
-> > > > >+
-> > > > >+ubdir
-> > > > >+    base directory for building U-Boot, with each board being in its own
-> > > > >+    subdirectory
-> > > > >+
-> > > > >+imagedir
-> > > > >+    directory containing OS images, containin a subdirectory for each distro
-> > > > >+    type (e.g. ubuntu/
-> > > > >+
-> > > > >+Once configured, you can build and run QEMU for arm64 like this::
-> > > >
-> > > > This downloads the QEMU source and builds it?
-> > > >
-> > > > >+
-> > > > >+    scripts/build-qemu.sh -rsw
-> > > > >+
-> > > > >+No support is currently included for specifying a root disk, so this script can
-> > > > >+only be used to start installers.
-> > > > >+
-> > > > >+Options
-> > > > >+~~~~~~~
-> > > > >+
-> > > > >+Options are available to control the script:
-> > > > >+
-> > > > >+-a <arch>
-> > > > >+    Select architecture (default arm, x86)
-> > > > >+
-> > > > >+-B
-> > > > >+    Don't build; assume a build exists
-> > > > >+
-> > > > >+-k
-> > > > >+    Use kvm - kernel-based Virtual Machine. By default QEMU uses its own
-> > > > >+    emulator
-> > > > >+
-> > > > >+-o <os>
-> > > > >+    Run an Operating System. For now this only supports 'ubuntu'. The name of
-> > > > >+    the OS file must remain unchanged from its standard name on the Ubuntu
-> > > > >+    website.
-> > > >
-> > > > The U-Boot project should remain open to all operating systems. How will this work with OpenBSD?
-> > > >
-> > > > Use the URL of the image as argument.
-> > > >
-> > > > >+
-> > > > >+-r
-> > > > >+    Run QEMU with the image (by default this is not done)
-> > > > >+
-> > > > >+-R
-> > > > >+    Select OS release (e.g. 24.04).
-> > > > >+
-> > > > >+-s
-> > > > >+    Use serial only (no display)
-> > > > >+
-> > > > >+-w
-> > > > >+    Use word version (32-bit). By default, 64-bit is used
-> > > >
-> > > > "word version" is not helpful as explanation.
-> > > >
-> > > > Look at <https://en.m.wikipedia.org/wiki/Word_(computer_architecture)> which says a word is 64 bit on a 64-bit system and 16 bit on a 16-bit system.
-> > > >
-> > > > >+
-> > > > >+.. note::
-> > > > >+
-> > > > >+    Note: For now this is a shell script, but if it expands it might be better
-> > > > >+    as Python, accepting the slower startup.
-> > > > >diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
-> > > > >new file mode 100755
-> > > > >index 00000000000..0ff53593cf9
-> > > > >--- /dev/null
-> > > > >+++ b/scripts/build-qemu.sh
-> > > > >@@ -0,0 +1,175 @@
-> > > > >+#!/bin/bash
-> > > > >+# SPDX-License-Identifier: GPL-2.0+
-> > > >
-> > > > This is not a valid SPDX identifier.
-> > > >
-> > > > >+#
-> > > > >+# Script to build U-Boot suitable for booting with QEMU, possibly running
-> > > > >+# it, possibly with an OS image
-> > > > >+
-> > > > >+# This just an example. It assumes that
-> > > > >+
-> > > > >+# - you build U-Boot in ${ubdir}/<name> where <name> is the U-Boot board config
-> > > > >+# - your OS images are in ${imagedir}/{distroname}/...
-> > > > >+
-> > > > >+# So far the script supports only ARM and x86.
-> > > >
-> > > > Why support obsolete i386 but not riscv64?
-> > > >
-> > > > >+
-> > > > >+set -e
-> > > > >+
-> > > > >+usage() {
-> > > > >+    (
-> > > > >+    if [[ -n "$1" ]]; then
-> > > > >+            echo "$1"
-> > > > >+            echo
-> > > > >+    fi
-> > > > >+    echo "Usage: $0 -aBkrsw"
-> > > > >+    echo
-> > > > >+    echo "   -a   - Select architecture (arm, x86)"
-> > > > >+    echo "   -B   - Don't build; assume a build exists"
-> > > > >+    echo "   -k   - Use kvm (kernel-based Virtual Machine)"
-> > > > >+    echo "   -o   - Run Operating System ('ubuntu' only for now)"
-> > > > >+    echo "   -r   - Run QEMU with the image"
-> > > > >+    echo "   -R   - Select OS release (e.g. 24.04)"
-> > > > >+    echo "   -s   - Use serial only (no display)"
-> > > > >+    echo "   -w   - Use word version (32-bit)" ) >&2
-> > > > >+    exit 1
-> > > > >+}
-> > > > >+
-> > > > >+# Directory tree for OS images
-> > > > >+imagedir=${imagedir-/vid/software/linux}
-> > > > >+
-> > > > >+# architecture (arm or x86)
-> > > > >+arch=arm
-> > > > >+
-> > > > >+# 32- or 64-bit build
-> > > > >+bitness=64
-> > > > >+
-> > > > >+# Build U-Boot
-> > > > >+build=yes
-> > > > >+
-> > > > >+# Extra setings
-> > > > >+extra=
-> > > > >+
-> > > > >+# Operating System to boot (ubuntu)
-> > > > >+os=
-> > > > >+
-> > > > >+release=24.04.1
-> > > > >+
-> > > > >+# run the image with QEMU
-> > > > >+run=
-> > > > >+
-> > > > >+# run QEMU without a display (U-Boot must be set to stdout=serial)
-> > > > >+serial=
-> > > > >+
-> > > > >+# Use kvm
-> > > > >+kvm=
-> > > > >+
-> > > > >+# Set ubdir to the build directory where you build U-Boot out-of-tree
-> > > > >+# We avoid in-tree build because it gets confusing trying different builds
-> > > > >+ubdir=${ubdir-/tmp/b}
-> > > > >+
-> > > > >+while getopts "a:Bko:rR:sw" opt; do
-> > > > >+    case "${opt}" in
-> > > > >+    a)
-> > > > >+            arch=$OPTARG
-> > > > >+            ;;
-> > > > >+    B)
-> > > > >+            build=
-> > > > >+            ;;
-> > > > >+    k)
-> > > > >+            kvm="-enable-kvm"
-> > > > >+            ;;
-> > > > >+    o)
-> > > > >+            os=$OPTARG
-> > > > >+
-> > > > >+            # Expand memory and CPUs
-> > > > >+            extra+=" -m 4G -smp 4"
-> > > > >+            ;;
-> > > > >+    r)
-> > > > >+            run=1
-> > > > >+            ;;
-> > > > >+    R)
-> > > > >+            release=$OPTARG
-> > > > >+            ;;
-> > > > >+    s)
-> > > > >+            serial=1
-> > > > >+            ;;
-> > > > >+    w)
-> > > > >+            bitness=32
-> > > > >+            ;;
-> > > > >+    *)
-> > > > >+            usage
-> > > > >+            ;;
-> > > > >+    esac
-> > > > >+done
-> > > > >+
-> > > > >+# Build U-Boot for the selected board
-> > > > >+build_u_boot() {
-> > > > >+    buildman -w -o $DIR --board $BOARD -I || exit $?
-> > > > >+}
-> > > > >+
-> > > > >+# Run QEMU with U-Boot
-> > > > >+run_qemu() {
-> > > > >+    if [[ -n "${os_image}" ]]; then
-> > > > >+            extra+=" -drive if=virtio,file=${os_image},format=raw,id=hd0"
-> > > > >+    fi
-> > > > >+    if [[ -n "${serial}" ]]; then
-> > > > >+            extra+=" -display none -serial mon:stdio"
-> > > > >+    else
-> > > > >+            extra+=" -serial mon:stdio"
-> > > > >+    fi
-> > > > >+    echo "Running ${qemu} ${extra}"
-> > > > >+    "${qemu}" -bios "$DIR/${BIOS}" \
-> > > > >+            -m 512 \
-> > > >
-> > > > Ubuntu suggests 4 GiB as minimum for a desktop.
-> > > >
-> > > > >+            -nic none \
-> > > >
-> > > > Who wants to run without network?
-> > > > Use the virtio nic.
-> > > >
-> > > > >+            ${kvm} \
-> > > > >+            ${extra}
-> > > > >+}
-> > > > >+
-> > > > >+# Check architecture
-> > > > >+case "${arch}" in
-> > > > >+arm)
-> > > > >+    BOARD="qemu_arm"
-> > > > >+    BIOS="u-boot.bin"
-> > > > >+    qemu=qemu-system-arm
-> > > > >+    extra+=" -machine virt"
-> > > > >+    suffix="arm"
-> > > > >+    if [[ "${bitness}" == "64" ]]; then
-> > > > >+            BOARD="qemu_arm64"
-> > > > >+            qemu=qemu-system-aarch64
-> > > > >+            extra+=" -cpu cortex-a57"
-> > > >
-> > > > That CPU is 12 years old and not all distros are stuck on ARM v8.0. See <https://en.opensuse.org/Arm_architecture_support>.
-> > > >
-> > > > -cpu max works fine with both tcg and kvm.
-> > > >
-> > > > >+            suffix="arm64"
-> > > >
-> > > > >+    fi
-> > > > >+    ;;
-> > > > >+x86)
-> > > > >+    BOARD="qemu-x86"
-> > > > >+    BIOS="u-boot.rom"
-> > > > >+    qemu=qemu-system-i386
-> > > > >+    suffix="i386"
-> > > > >+    if [[ "${bitness}" == "64" ]]; then
-> > > > >+            BOARD="qemu-x86_64"
-> > > > >+            qemu=qemu-system-x86_64
-> > > > >+            suffix="amd64"
-> > > > >+    fi
-> > > > >+    ;;
-> > > > >+*)
-> > > > >+    usage "Unknown architecture '${arch}'"
-> > > > >+esac
-> > > > >+
-> > > > >+# Check OS
-> > > > >+case "${os}" in
-> > > > >+ubuntu)
-> > > > >+    os_image="${imagedir}/${os}/${os}-${release}-desktop-${suffix}.iso"
-> > > >
-> > > > There is no ARM 32-bit Ubuntu desktop. And for i386 there is no image in 24.04.1.
-> > > >
-> > > > Running a foreign architecture desktop with tcg is not enjoyable.
-> > > >
-> > > > For testing U-Boot a server image is all it takes.
-> > >
-> > > And _all_ of this is why I don't want to add a useful personal script
-> > > as an additional tool we support. I've seen how much work goes in to the
-> > > OpenEmbedded runqemu script, we don't have the spare cycles for
-> > > something like that. Doubly so when ultimately I believe we would be
-> > > well served by having a document that says (in much more words) to look
-> > > at u-boot-test-hooks for how to invoke QEMU for a large number of
-> > > architectures and platforms and to then further leverage general QEMU
-> > > tips and guides on how to run an OS of your choice with that.
-> >
-> > I'm not sure it matters that much. Everyone is going to have their
-> > preference as to how this script should look, but no one else has
-> > taken the time to write one...
-> >
-> > People are free to send patches to enhance it. But I believe it is
-> > helpful, e.g. for repeating problems caused by recent lmb patches.
-> >
-> > Re the test hooks, I just get tired of looking them up and trying to
-> > figure out what to do. Every board name and arch is slightly
-> > different. Just a hassle that I don't need.
-> >
-> > We can put it in scripts/contrib if you like.
+> This is a rebase of Alexander Graf's video damage tracking series, with
+> some tests and other changes. The original cover letter is as follows:
 >
-> It's handy to point people to scripts, yes. I frequently point people at
-> my wrappers around buildman for example for "how do I find code bloat?"
-> and similar. But no, I don't think this rises to the level of
-> "scripts/contrib".
+>
+> > This patch set speeds up graphics output on ARM by a factor of 60x.
+> >
+> > On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+> > but need it accessible by the display controller which reads directly
+> > from a later point of consistency. Hence, we flush the frame buffer to
+> > DRAM on every change. The full frame buffer.
+> >
+> > Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+> > that can take a while to flush out. This was reported by Da Xue with grub,
+> > which happily print 1000s of spaces on the screen to draw a menu. Every
+> > printed space triggers a cache flush.
+> >
+> > This patch set implements the easiest mitigation against this problem:
+> > Damage tracking. We remember the lowest common denominator region that was
+> > touched since the last video_sync() call and only flush that. The most
+> > typical writer to the frame buffer is the video console, which always
+> > writes rectangles of characters on the screen and syncs afterwards.
+> >
+> > With this patch set applied, we reduce drawing a large grub menu (with
+> > serial console attached for size information) on an RK3399-ROC system
+> > at 1440p from 55 seconds to less than 1 second.
+> >
+> > Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+> > overhead compared to before as well. So even x86 systems should be faster
+> > with this now :).
+> >
+> >
+> > Alternatives considered:
+> >
+> >   1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+> >      so often. We are missing timers to do this generically.
+> >
+> >   2) Double buffering - We could try to identify whether anything changed
+> >      at all and only draw to the FB if it did. That would require
+> >      maintaining a second buffer that we need to scan.
+> >
+> >   3) Text buffer - Maintain a buffer of all text printed on the screen with
+> >      respective location. Don't write if the old and new character are
+> >      identical. This would limit applicability to text only and is an
+> >      optimization on top of this patch set.
+> >
+> >   4) Hash screen lines - Create a hash (sha256?) over every line when it
+> >      changes. Only flush when it does. I'm not sure if this would waste
+> >      more time, memory and cache than the current approach. It would make
+> >      full screen updates much more expensive.
+>
+>
+> Changes in v5:
+> - Add patch "video: test: Split copy frame buffer check into a function"
+> - Add patch "video: test: Support checking copy frame buffer contents"
+> - Add patch "video: test: Test partial updates of hardware frame buffer"
+> - Use xstart, ystart, xend, yend as names for damage region
+> - Document damage struct and fields in struct video_priv comment
+> - Return void from video_damage()
+> - Fix undeclared priv error in video_sync()
+> - Drop unused headers from video-uclass.c
+> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+> - Call video_damage() also in video_fill_part()
+> - Use met->baseline instead of priv->baseline
+> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+> - Update console_rotate.c video_damage() calls to pass video tests
+> - Remove mention about not having minimal damage for console_rotate.c
+> - Add patch "video: test: Test video damage tracking via vidconsole"
+> - Document new vdev field in struct efi_gop_obj comment
+> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+> - Fix memmove() calls by removing the extra dev argument
+> - Call video_sync() before checking copy_fb in video tests
+> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>
+>
+> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>
+>
+> Changes in v4:
+> - Move damage clear to patch "dm: video: Add damage tracking API"
+> - Simplify first damage logic
+> - Remove VIDEO_DAMAGE default for ARM
+> - Skip damage on EfiBltVideoToBltBuffer
+> - Add patch "video: Always compile cache flushing code"
+> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>
+>
+> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>
+>
+> Changes in v3:
+> - Adapt to always assume DM is used
+> - Adapt to always assume DM is used
+> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>
+>
+> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>
+>
+> Changes in v2:
+> - Remove ifdefs
+> - Fix ranges in truetype target
+> - Limit rotate to necessary damage
+> - Remove ifdefs from gop
+> - Fix dcache range; we were flushing too much before
+> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>
+>
+> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>
+>
+> Alexander Graf (9):
+>   dm: video: Add damage tracking API
+>   dm: video: Add damage notification on display fills
+>   vidconsole: Add damage notifications to all vidconsole drivers
+>   video: Add damage notification on bmp display
+>   efi_loader: GOP: Add damage notification on BLT
+>   video: Only dcache flush damaged lines
+>   video: Use VIDEO_DAMAGE for VIDEO_COPY
+>   video: Always compile cache flushing code
+>   video: Enable VIDEO_DAMAGE for drivers that need it
+>
+>
+> Alper Nebi Yasak (4):
+>   video: test: Split copy frame buffer check into a function
+>   video: test: Support checking copy frame buffer contents
+>   video: test: Test partial updates of hardware frame buffer
+>   video: test: Test video damage tracking via vidconsole
+>
+>
+>  arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>  arch/arm/mach-sunxi/Kconfig       |   1 +
+>  drivers/video/Kconfig             |  26 +++
+>  drivers/video/console_normal.c    |  27 ++--
+>  drivers/video/console_rotate.c    |  94 +++++++----
+>  drivers/video/console_truetype.c  |  37 +++--
+>  drivers/video/exynos/Kconfig      |   1 +
+>  drivers/video/imx/Kconfig         |   1 +
+>  drivers/video/meson/Kconfig       |   1 +
+>  drivers/video/rockchip/Kconfig    |   1 +
+>  drivers/video/stm32/Kconfig       |   1 +
+>  drivers/video/tegra20/Kconfig     |   1 +
+>  drivers/video/tidss/Kconfig       |   1 +
+>  drivers/video/vidconsole-uclass.c |  16 --
+>  drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>  drivers/video/video_bmp.c         |   7 +-
+>  include/video.h                   |  59 +++----
+>  include/video_console.h           |  52 ------
+>  lib/efi_loader/efi_gop.c          |   7 +
+>  test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>  20 files changed, 483 insertions(+), 297 deletions(-)
+>
+>
+>
+> base-commit: 3881c9fbb7fdd98f6eae5cd33f7e9abe9455a585
 
-I find this useful and it makes it easier to report problems with
-booting if we are using the same tool. I plan to add RISC-V at some
-point.
-
-Regards,
-Simon
+Rebased and applied to ci/master, thanks!
