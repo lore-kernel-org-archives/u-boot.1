@@ -4,83 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15092E7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 15:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 603A2E7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 816CD89323;
-	Sat,  7 Dec 2024 16:57:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 80A8D891CF;
+	Sat,  7 Dec 2024 18:26:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fLYjEMaF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OJm2EiaD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 087318941D; Sat,  7 Dec 2024 16:57:18 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 83F32892B8; Sat,  7 Dec 2024 18:26:01 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAF1289376
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 16:57:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D0038919F
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:25:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4668cec51afso23678911cf.3
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 07:57:15 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so226628266b.0
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:25:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733587035; x=1734191835; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZR8aiOFVE1+/IpoS+XezsxSCragxuaAzwaxlOdO9o2I=;
- b=fLYjEMaFeeFks7TEmu2ukQNuUaUQoznZjotlQ4FIcoU2dUiP9kWMiNVnTnITkW/0F7
- 1cfxParFSXEKGDr14I94NqM8vECmiDdNAsNYHS0NLyXRgvv9gEwM+SiCBLHd9xGK0uTn
- JZRX7CWNeHsOWbUbvUeurUOUU+F/X0y5zeVZc=
+ d=chromium.org; s=google; t=1733592358; x=1734197158; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dMawYqpwUhoWJLJRdxXOKmOUNPUGKjbHIi8NxoCsMt8=;
+ b=OJm2EiaDe12l7sig5bLjH22wlGRdHvBEw5IkfrIGNNbseYmPZI6IOnIAZBuSlZ0ie2
+ ZIGO6omeHXzQVDEkKsaWgcArNsRy8S2LXv5zO+3arMNKBFzLruuWXOCu/OXSsM8O878t
+ CSYbanYe/MO6rMczPQOTt9TGMHHu7sDHhiXck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733587035; x=1734191835;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZR8aiOFVE1+/IpoS+XezsxSCragxuaAzwaxlOdO9o2I=;
- b=Ob1r1oPzjrRrzjCgyxbtVMAi8vVtMMk9Bnh4o5GB58W242fcfmwCUi5KOEvcflwCXY
- bc63tntBgU+8jWjE56TcUhvFAjRWe73ZxwJX2cPVEG1tysUMP+/9G5ulzPjT6Oz91PiM
- 8JF1E9OW3yhQcyqG3EoVcFYAjd2NlPc6AXCphMZXRGYe2u1/JVqtq03VfpyYSAv3Ve8/
- NAwKV2Gj0cOCnBTs/5KLIRjzrwRhJgT5xXrFlKC6bm7jQB0e8KUDZ/bepI0eyCn2nbj7
- qszDqXPpJkQEgMncD6vtCq9LFDP/IGInbZRYs6jbIw4fOD5zq8wx/jDs2kizccIZFKzy
- L4vQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBMJ+Nyf0VZr4ZtaBPG3DjF2BMfhsSP0jIyTVEE6sZemf3UHrrqLhUeCDA+Kk5cAervaTRYUc=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywfx6zUj7B/nLhsfr1QbR4pctjCmRWhciDYoJhvDPQYksI0lPsW
- tlBpPR7kH1oJcbUoc8uutMUmZHUO7u6UFD4VrYcMcaQF5EpTr7WTeMCodqHTvsE=
-X-Gm-Gg: ASbGncu23Z+dn1zrzya0Qq6jErCEzVbqyY8R//6Nay3y+0Idof4fxLbwjwnRUVyRhmu
- GSRZPsyqOdOBVtGErWjEvMW+x5DDWHf3dqUBE+MDpwQS9RhyvYTN7x8jFY+RwwrO/0YyxlDXa65
- Vmtha6ioITCwU4UIdN/wtxQhXZylKHoObesnhUr1u+KD8K/Bs5EH8Ng9gbK8PzpelprG7J87KST
- yt9mWTOTm7Ql8OifUaaKa6HM0tM92Fl5aHM4Gf4GR6nd07r9w==
-X-Google-Smtp-Source: AGHT+IFzu/g6dQjDiG2gVtRZknhqNFmZCIKAnF8b+KzkGOmVnJmaK5fSzBN8+0yZ8gtmYydpER3/zg==
-X-Received: by 2002:ac8:59ca:0:b0:458:34fb:5d59 with SMTP id
- d75a77b69052e-46734cf34admr97995401cf.29.1733587034914; 
- Sat, 07 Dec 2024 07:57:14 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.100])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467296d2f15sm32998151cf.35.2024.12.07.07.57.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 07:57:14 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: xypron.glpk@gmx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
-References: <20241206105647.2548249-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] mbedtls: remove MBEDTLS_HAVE_TIME
-Message-Id: <173358703286.3722028.6625552213446208924.b4-ty@konsulko.com>
-Date: Sat, 07 Dec 2024 09:57:12 -0600
+ d=1e100.net; s=20230601; t=1733592358; x=1734197158;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dMawYqpwUhoWJLJRdxXOKmOUNPUGKjbHIi8NxoCsMt8=;
+ b=pOzZX91sbBTQaelTFvt6b47FjMKtPXKwX8ZS8ZcFaplxFfXHv1a8XUNZ9KZ9z79Zvu
+ 69wnJTwW9h+/t5imPV3lzjidlermKrdgXzBP77BayW4ewVpu32hz/14d4WeSr0ZJ8h8j
+ AQLzYe0AxeVmrx2mpxQy9Z/4pfYw1nM7ZSs2bdv+74bssebnJM9cdToh9Xmy67pSkNGF
+ Jk6WB2vFEO3OwgdKhqKerogMIuTeA41vYFguZEzdGD1hlv4V62pPMS4SzBMnnoBV62cx
+ EgvXfaWi2/XqCKPPwA/ILmh5JTH54CYAv2wSakKg+NF2TMALVMY2V53IclNZWMSWpcZC
+ r0qg==
+X-Gm-Message-State: AOJu0YxOIJofi6zpEFyZnHKmYZRSydbmBzIZft0q1B1XzFfiUs6jj6IZ
+ 0jl9+nfYdTsTEAeU4WoTmXU8K5haWTZkbHIT8m47fpeJeOB3WtM46dsk4pPDPiyqH5HXy3LxwKf
+ hY5GmWuVDMkLxZ5fXpbWcUjLn44Sfj5MJY+AL
+X-Gm-Gg: ASbGncvnO7lgrZwETI6/R9T1goNW9eBhFZVaEK2X2Uq+fVNtgcreQ+0SvObHkpytWT6
+ UO1FkUckyQgAVwZjpFW17NpnTcSHNafPx
+X-Google-Smtp-Source: AGHT+IHlrarbe5EtYAXvGUZN27retryEB7I1zSwg0t4+CX3rXw5KBqoUAC084M9uWCyBoOqMFFMz9GqNFl2i+2nslGA=
+X-Received: by 2002:a17:907:9145:b0:aa5:630d:7de0 with SMTP id
+ a640c23a62f3a-aa63a26a7c0mr584478266b.44.1733592357275; Sat, 07 Dec 2024
+ 09:25:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20240920072444.134997-1-sjg@chromium.org>
+ <20240920072444.134997-14-sjg@chromium.org>
+ <20241003215724.GA2107876@bill-the-cat>
+In-Reply-To: <20241003215724.GA2107876@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 7 Dec 2024 10:25:45 -0700
+Message-ID: <CAFLszTiqiODFGn5JfPP_Z-SEX+oC_Y1p1oaOE65PjxW2N-X2sg@mail.gmail.com>
+Subject: Re: [PATCH v2 13/18] mmc: Add more debugging for SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,22 +87,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 06 Dec 2024 12:56:45 +0200, Ilias Apalodimas wrote:
+Hi Tom,
 
-> When MbedTLS TLS features were added MBEDTLS_HAVE_TIME was defined as part
-> of enabling https:// support. However that pointed to the wrong function
-> which could crash if it received a NULL pointer.
-> 
-> Looking closer that function is not really needed, as it only seems to
-> increase the RNG entropy by using 4b of the current time and date.
-> The reason that was enabled is that lwIP was unconditionally requiring it,
-> although it's configurable and can be turned off.
-> 
-> [...]
+On Thu, 3 Oct 2024 at 15:57, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Sep 20, 2024 at 09:24:37AM +0200, Simon Glass wrote:
+>
+> > When MMC booting fails it is sometimes hard to figure out what went
+> > wrong as there is no error code. It isn't even clear which MMC device
+> > was chosen, since SPL can have its own numbering.
+> >
+> > Add some debugging to help with this.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> [snip]
+> > @@ -76,6 +77,12 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
+> >       int ret;
+> >
+> >  #if CONFIG_IS_ENABLED(DM_MMC)
+> > +     struct udevice *dev;
+> > +     struct uclass *uc;
+> > +
+> > +     log_debug("Selecting MMC dev %d; seqs:\n", mmc_dev);
+> > +     uclass_id_foreach_dev(UCLASS_MMC, dev, uc)
+> > +             log_debug("%d: %s\n", dev_seq(dev), dev->name);
+> >       ret = mmc_init_device(mmc_dev);
+> >  #else
+> >       ret = mmc_initialize(NULL);
+>
+> For the record, this change, even with debugging not enabled (and LOG
+> not enabled) is not size change free and does not get optimized away by
+> the compiler. I'm not sure off-hand if there's a clever way to fix that,
+> so I'm not blocking the series on this.
 
-Applied to u-boot/master, thanks!
+Yes, I can depend on _DEBUG so I'll add that patch to the vbe series.
 
--- 
-Tom
-
-
+Regards,
+Simon
