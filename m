@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 016BBE7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 14:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64884E7717B
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 14:52:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27D0E88EC6;
-	Sat,  7 Dec 2024 15:39:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8814488F83;
+	Sat,  7 Dec 2024 15:52:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XEOb4KQW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ExkXv/x+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E509F89049; Sat,  7 Dec 2024 15:39:29 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 320A889049; Sat,  7 Dec 2024 15:52:36 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE1CD88EBA
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 15:39:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5BD888F75
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 15:52:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa66ead88b3so14019366b.0
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 06:39:27 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-84198253284so110402539f.3
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 06:52:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733582367; x=1734187167; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UoNimaVCcCV/MIUXERJyg4GkPJYFYnhhD+hpUBBqNNg=;
- b=XEOb4KQWC2WvaR9sWGCJjb1CntcKK+pui0YcF7PM3HhWCycadJwekavFtzHhd1oz8Z
- u57hIGJfeLYi6jD/9EVSQPYWVMn0vUlUKD+fWlMoZYi3I31wnudOD3yS5k4wp725vLvr
- 3atFMB28vi1iFgYR0ltuAD/MTzzpSZLKPL/ic=
+ d=chromium.org; s=google; t=1733583152; x=1734187952; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3BnRMLPAt+TMus4y+5zK2U1BzvXfuVQ2L1Prxzsr5V4=;
+ b=ExkXv/x+eYxgi5dvgenTTNkfEdrFdnaTM0ryaxEcWcq/S14KKwRkhFJe8vbQxe65fv
+ KIRe6xjlfYTP3iOMl3pXAk+wMn5qC0TTD7KRVChfQhnyEWUWrACUP6j7uT2Z2QV+rYCS
+ uP+xSD1CYIw8CLDsfQyHFfhhBcdkP/VOBzmyI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733582367; x=1734187167;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733583152; x=1734187952;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UoNimaVCcCV/MIUXERJyg4GkPJYFYnhhD+hpUBBqNNg=;
- b=PZE9wHVcgrxNr331u4QOYis4SXbXCTeN6jRNeTzZqL7VIzKiPW3LNlA8YMPTNaB5aO
- VNM0xMceTrAVv4u37+wQwtH1aV/5wO2u5c38hEKysvQY0dDoz/3FJDTmtbNexkhFrDx+
- EgsNsPEhCKMhFiItj+8yMLWLeVJ3LgfZ8oBzfbyrsh2YkiDw2vBr5PJUEyxPNZNTyzu2
- QfbzMNfpc8IPqb5cKPFTlGeVllTh2M6tNQjLOPElJ2Gqd1VnRgM+aDK2HWo02WUpxz1G
- HBc1iqfyFDz7U4jNb7skhRD7Qmrf4GDYTHs0gfrI6AAzvhNxwLCV/s+v/DoD/CziwkHE
- V4Mw==
-X-Gm-Message-State: AOJu0Yy0Esy/+/AkSgBdekwGYfNGIe0ZYhpsu+Xq+fmXbd8Bc5UMViRR
- 3fFq/Lf07LGO2sS6iI9zHM3CMgkTeRQrm1UBkFw1NfNVxZaokrBxib1x+sN9tRm7VUuCKILZ+lo
- DDbNXYhO6qGse2NMxL5KAPBGSgKK1pm7CetiV1I6OG9/C8Wc=
-X-Gm-Gg: ASbGncs+9kz88XdLDWQ2Q+1Q572ufBEEI3rnisTJxyeMOF2jvMUQXlUzlRTmfU2flhy
- oni6dOTTP92kuTbOCW3klEDwhDDGBCjqV
-X-Google-Smtp-Source: AGHT+IEILsp4YCefI3Zsuw2ydCAPnvKwuTwc7zNhtxX6XOckNhZhmmKderEH/4AwAAfpXXnWbPV/V5SX4zz7XSOnj3Y=
-X-Received: by 2002:a17:907:7703:b0:aa5:449e:1a1d with SMTP id
- a640c23a62f3a-aa639fa434cmr621708566b.2.1733582367091; Sat, 07 Dec 2024
- 06:39:27 -0800 (PST)
-MIME-Version: 1.0
-References: <20240920081309.140426-1-sjg@chromium.org>
- <20240920081309.140426-4-sjg@chromium.org>
- <20241004220225.GA2484623@bill-the-cat>
-In-Reply-To: <20241004220225.GA2484623@bill-the-cat>
+ bh=3BnRMLPAt+TMus4y+5zK2U1BzvXfuVQ2L1Prxzsr5V4=;
+ b=A4UrcurgbX3FxAucCC6CLQuxxfD8xGRjKyu3R1u+TTKaVu0bjlGdwzrgktlOApyRFL
+ nxmanBIqdqFzbWyojSH4yAdclPFMqmW9BkD92H0MAEFRykDa6JOZMKlT2PxzW8Tkpgn5
+ cVtCwe2hpv9TvgNP+TmO+tuWR+A7FoI1a3QlhMSOMuJjv/c6H2TAvZLsbABYvSP9qu2B
+ Nk4/3itq+3Au3NnziQC0q5HkKdoDc4hCW62VwfOEQc/i21C1006wJTqwy10AFO2GiXog
+ 3De3KA01m/V+kHim1n/IZ9152WfTC0shug8IyuGWHSCw4l2s6eEzrNqVEfFuxR1jkBXG
+ mf/Q==
+X-Gm-Message-State: AOJu0Yxhd8A7KJ/SHqkGszSVyajzU/XtA3wb8q1QMxsAQBKpo23xo4RV
+ O80F4hJ3iLzpz3FqD1R8zjB7IXgccfgXDjybykjJaSz5/DwCOjA5zBugZwi8F0enngSO6CcqDWk
+ =
+X-Gm-Gg: ASbGncvRtqbXUKxWHgMK+8JtCbHq+FfpcbtiRUEgDw36zJk+7bqK86eCsuq99pFFkPk
+ tsMRWbjb3XaGRudiyaPY8T51wmKKJSOjD2I/1lIe7n1zZUCCyg8Nz3vSIRzmch0gYeVxz306DjX
+ Ef1Od1VYqzJDLjbvTnfMqtuTpX7t57m7yfAfsydq8GDMNTSZq9KWDYNjvQZEB1aM71rqn3xdy5R
+ xVvuSnDCcaz5wTWFPQwioLn1AJJ26zVOam/Zb8ViRBKU+cOiyyf3lsf1XyY6CnL9Qn3E/PeZxEk
+ 1aweeSL8y+4=
+X-Google-Smtp-Source: AGHT+IE6I5rCBF/PhCNPvSyZcQpVGv7MmiDW/sk1O53VLIztAE6hR9kuOy8NWduEL5cGPL/gMaZ2OQ==
+X-Received: by 2002:a05:6e02:219b:b0:3a7:fe47:6228 with SMTP id
+ e9e14a558f8ab-3a811d90261mr91157845ab.6.1733583152024; 
+ Sat, 07 Dec 2024 06:52:32 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e286222bbasm1333371173.149.2024.12.07.06.52.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Dec 2024 06:52:30 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Dec 2024 07:39:15 -0700
-Message-ID: <CAFLszTiabxvQp3xf+=o=Yj_nZ2RZLzgM57qd5t6ozAkOVQG7vg@mail.gmail.com>
-Subject: Re: [PATCH v2 03/18] bootstd: Avoid sprintf() in SPL when creating
- bootdevs
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>, 
- Nam Cao <namcao@linutronix.de>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tony Dinh <mibodhi@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH] boot: Use correct PHASE_ variable for expo
+Date: Sat,  7 Dec 2024 07:52:27 -0700
+Message-Id: <20241207145227.1024491-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,59 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This patch was written before the XPL change-over. Update the Makefile
+condition to the new way.
 
-On Fri, 4 Oct 2024 at 16:02, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Sep 20, 2024 at 10:12:42AM +0200, Simon Glass wrote:
->
-> > The name of the bootdev device is not that important, particular in SPL.
-> > Save a little code space by using a simpler name.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  boot/bootdev-uclass.c | 10 ++++++++--
-> >  1 file changed, 8 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-> > index 807f8dfb064..79d4d990edb 100644
-> > --- a/boot/bootdev-uclass.c
-> > +++ b/boot/bootdev-uclass.c
-> > @@ -16,6 +16,7 @@
-> >  #include <malloc.h>
-> >  #include <part.h>
-> >  #include <sort.h>
-> > +#include <spl.h>
-> >  #include <dm/device-internal.h>
-> >  #include <dm/lists.h>
-> >  #include <dm/uclass-internal.h>
-> > @@ -278,8 +279,13 @@ int bootdev_setup_for_sibling_blk(struct udevice *blk, const char *drv_name)
-> >       int ret, len;
-> >
-> >       len = bootdev_get_suffix_start(blk, ".blk");
-> > -     snprintf(dev_name, sizeof(dev_name), "%.*s.%s", len, blk->name,
-> > -              "bootdev");
-> > +     if (spl_phase() < PHASE_BOARD_R) {
-> > +             strncpy(dev_name, blk->name, sizeof(dev_name) - 5);
-> > +             strcat(dev_name, ".sib");
-> > +     } else {
-> > +             snprintf(dev_name, sizeof(dev_name), "%.*s.%s", len, blk->name,
-> > +                      "bootdev");
-> > +     }
-> >
-> >       parent = dev_get_parent(blk);
-> >       ret = device_find_child_by_name(parent, dev_name, &dev);
->
-> I don't understand this change. In testing, I don't see any size
-> reduction in SPL anywhere (no platforms shrink in SPL for this series)
-> and just size growth in main u-boot in this function. Did the wrong
-> comments get applied to this patch?
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: ae3b5928d61 ("x86: coreboot: Allow building an expo for...")
 
-That's because nothing is using bootstd in SPL (or VPL) yet. We don't
-have to have this change and I can come back to it later, if you like.
+---
 
-Regards,
-Simon
+ boot/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/boot/Makefile b/boot/Makefile
+index b03d628187b..1d7f2a1a24a 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -61,7 +61,7 @@ obj-$(CONFIG_$(PHASE_)LOAD_FIT) += common_fit.o
+ obj-$(CONFIG_$(PHASE_)EXPO) += expo.o scene.o expo_build.o
+ obj-$(CONFIG_$(PHASE_)EXPO) += scene_menu.o scene_textline.o
+ ifdef CONFIG_COREBOOT_SYSINFO
+-obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo_build_cb.o
++obj-$(CONFIG_$(PHASE_)EXPO) += expo_build_cb.o
+ endif
+ 
+ obj-$(CONFIG_$(PHASE_)BOOTMETH_VBE) += vbe.o
+-- 
+2.34.1
+
