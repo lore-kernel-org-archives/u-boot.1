@@ -4,61 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB46E7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 13:25:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 016BBE7717B
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 14:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B6688911A;
-	Sat,  7 Dec 2024 14:25:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 27D0E88EC6;
+	Sat,  7 Dec 2024 15:39:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="WI+cvCDD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XEOb4KQW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1FD389170; Sat,  7 Dec 2024 02:02:45 +0100 (CET)
-Received: from out-188.mta1.migadu.com (out-188.mta1.migadu.com
- [IPv6:2001:41d0:203:375::bc])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E509F89049; Sat,  7 Dec 2024 15:39:29 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4408089124
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 02:02:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id CE1CD88EBA
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 15:39:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-Message-ID: <84f80eb4-9ed4-4fef-8565-80bf0ac0de51@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1733533362;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iKU5jPRY3gNKMykyx8F3F6elxI0ZIOF5jqf7p4NGOQQ=;
- b=WI+cvCDDIA4l0WjQheK6OulvUZmAM6sBOfxR/sVB7hCsOSwqvOo6/DDwhYXCpTyLx3yQhq
- I0x8qUXTkCrc1X8BxAL+YEFR5K2ptjGpPC6UETpKviyDK1NYaYTc9z9MrtDOsKk3sKCbUy
- mfOejBK2Z9zmN4nFl4arQC1hpdPS2RUkWVPfwjJqwiJj+eONZ1+68uaeOe6dIEjqezD1sB
- b5diMFSfnKWMaUmW7xedf37lmp6fetXK8AbZc4ZgvkQ9KrwfLC/IppGDWLL0I3mKgq+/yB
- qxh2333ABuRkw050QGbanr4IDkCASnSw6kyTOYQdTZPPt/0HZxuUgXrrL2wIAQ==
-Date: Sat, 7 Dec 2024 04:02:37 +0300
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-aa66ead88b3so14019366b.0
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 06:39:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1733582367; x=1734187167; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UoNimaVCcCV/MIUXERJyg4GkPJYFYnhhD+hpUBBqNNg=;
+ b=XEOb4KQWC2WvaR9sWGCJjb1CntcKK+pui0YcF7PM3HhWCycadJwekavFtzHhd1oz8Z
+ u57hIGJfeLYi6jD/9EVSQPYWVMn0vUlUKD+fWlMoZYi3I31wnudOD3yS5k4wp725vLvr
+ 3atFMB28vi1iFgYR0ltuAD/MTzzpSZLKPL/ic=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733582367; x=1734187167;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UoNimaVCcCV/MIUXERJyg4GkPJYFYnhhD+hpUBBqNNg=;
+ b=PZE9wHVcgrxNr331u4QOYis4SXbXCTeN6jRNeTzZqL7VIzKiPW3LNlA8YMPTNaB5aO
+ VNM0xMceTrAVv4u37+wQwtH1aV/5wO2u5c38hEKysvQY0dDoz/3FJDTmtbNexkhFrDx+
+ EgsNsPEhCKMhFiItj+8yMLWLeVJ3LgfZ8oBzfbyrsh2YkiDw2vBr5PJUEyxPNZNTyzu2
+ QfbzMNfpc8IPqb5cKPFTlGeVllTh2M6tNQjLOPElJ2Gqd1VnRgM+aDK2HWo02WUpxz1G
+ HBc1iqfyFDz7U4jNb7skhRD7Qmrf4GDYTHs0gfrI6AAzvhNxwLCV/s+v/DoD/CziwkHE
+ V4Mw==
+X-Gm-Message-State: AOJu0Yy0Esy/+/AkSgBdekwGYfNGIe0ZYhpsu+Xq+fmXbd8Bc5UMViRR
+ 3fFq/Lf07LGO2sS6iI9zHM3CMgkTeRQrm1UBkFw1NfNVxZaokrBxib1x+sN9tRm7VUuCKILZ+lo
+ DDbNXYhO6qGse2NMxL5KAPBGSgKK1pm7CetiV1I6OG9/C8Wc=
+X-Gm-Gg: ASbGncs+9kz88XdLDWQ2Q+1Q572ufBEEI3rnisTJxyeMOF2jvMUQXlUzlRTmfU2flhy
+ oni6dOTTP92kuTbOCW3klEDwhDDGBCjqV
+X-Google-Smtp-Source: AGHT+IEILsp4YCefI3Zsuw2ydCAPnvKwuTwc7zNhtxX6XOckNhZhmmKderEH/4AwAAfpXXnWbPV/V5SX4zz7XSOnj3Y=
+X-Received: by 2002:a17:907:7703:b0:aa5:449e:1a1d with SMTP id
+ a640c23a62f3a-aa639fa434cmr621708566b.2.1733582367091; Sat, 07 Dec 2024
+ 06:39:27 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/4] board/qualcomm: introduce phone config
-To: u-boot-qcom@groups.io, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-References: <20241004-qcom-phones-v2-0-c7ab67ac3043@linaro.org>
- <20241004-qcom-phones-v2-1-c7ab67ac3043@linaro.org>
- <d8546140-414d-4dff-ae8b-9ecc9452c17c@devpi.de>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-In-Reply-To: <d8546140-414d-4dff-ae8b-9ecc9452c17c@devpi.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
-X-Mailman-Approved-At: Sat, 07 Dec 2024 14:25:33 +0100
+References: <20240920081309.140426-1-sjg@chromium.org>
+ <20240920081309.140426-4-sjg@chromium.org>
+ <20241004220225.GA2484623@bill-the-cat>
+In-Reply-To: <20241004220225.GA2484623@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 7 Dec 2024 07:39:15 -0700
+Message-ID: <CAFLszTiabxvQp3xf+=o=Yj_nZ2RZLzgM57qd5t6ozAkOVQG7vg@mail.gmail.com>
+Subject: Re: [PATCH v2 03/18] bootstd: Avoid sprintf() in SPL when creating
+ bootdevs
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>, 
+ Nam Cao <namcao@linutronix.de>, 
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
+ Tony Dinh <mibodhi@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,39 +89,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/6/24 19:50, Julius Lehmann wrote:
-> On 04.10.24 14:46, Caleb Connolly wrote:
->> Phones don't have keyboards! Introduce a phone-specific config fragment
->> and associated environment file to make U-Boot more useful on these
->> devices. This allows for navigating via the buttons and enabling
->> various USB gadget modes or displaying info about U-Boot.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   board/qualcomm/qcom-phone.config | 12 ++++++++++
->>   board/qualcomm/qcom-phone.env    | 49 ++++++++++++++++++++++++++++++ 
->> ++++++++++
->>   2 files changed, 61 insertions(+)
->>
->> diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom- 
->> phone.config
->> new file mode 100644
->> index 000000000000..388d4c3e7398
->> --- /dev/null
->> +++ b/board/qualcomm/qcom-phone.config
->> @@ -0,0 +1,12 @@
->> +# Settings for phones
->> +CONFIG_USE_DEFAULT_ENV_FILE=y
->> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/qcom-phone.env"
->> +CONFIG_PANIC_HANG=y
->> +CONFIG_CMD_PAUSE=y
->> +CONFIG_BOOTSTD=y
->> +CONFIG_BOOT_RETRY=y
->> +CONFIG_BOOT_RETRY_TIME=1
->> +CONFIG_BUTTON_REMAP_PHONE_KEYS=y
-> 
-> should also include fastboot, serial gadget and 
-> CONFIG_CMD_USB_MASS_STORAGE. otherwise some menu options wouldn't work.
+Hi Tom,
 
-+1, should probably include CONFIG_USB_FUNCTION_ACM to enable output to 
-usbacm?
+On Fri, 4 Oct 2024 at 16:02, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Sep 20, 2024 at 10:12:42AM +0200, Simon Glass wrote:
+>
+> > The name of the bootdev device is not that important, particular in SPL.
+> > Save a little code space by using a simpler name.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  boot/bootdev-uclass.c | 10 ++++++++--
+> >  1 file changed, 8 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+> > index 807f8dfb064..79d4d990edb 100644
+> > --- a/boot/bootdev-uclass.c
+> > +++ b/boot/bootdev-uclass.c
+> > @@ -16,6 +16,7 @@
+> >  #include <malloc.h>
+> >  #include <part.h>
+> >  #include <sort.h>
+> > +#include <spl.h>
+> >  #include <dm/device-internal.h>
+> >  #include <dm/lists.h>
+> >  #include <dm/uclass-internal.h>
+> > @@ -278,8 +279,13 @@ int bootdev_setup_for_sibling_blk(struct udevice *blk, const char *drv_name)
+> >       int ret, len;
+> >
+> >       len = bootdev_get_suffix_start(blk, ".blk");
+> > -     snprintf(dev_name, sizeof(dev_name), "%.*s.%s", len, blk->name,
+> > -              "bootdev");
+> > +     if (spl_phase() < PHASE_BOARD_R) {
+> > +             strncpy(dev_name, blk->name, sizeof(dev_name) - 5);
+> > +             strcat(dev_name, ".sib");
+> > +     } else {
+> > +             snprintf(dev_name, sizeof(dev_name), "%.*s.%s", len, blk->name,
+> > +                      "bootdev");
+> > +     }
+> >
+> >       parent = dev_get_parent(blk);
+> >       ret = device_find_child_by_name(parent, dev_name, &dev);
+>
+> I don't understand this change. In testing, I don't see any size
+> reduction in SPL anywhere (no platforms shrink in SPL for this series)
+> and just size growth in main u-boot in this function. Did the wrong
+> comments get applied to this patch?
+
+That's because nothing is using bootstd in SPL (or VPL) yet. We don't
+have to have this change and I can come back to it later, if you like.
+
+Regards,
+Simon
