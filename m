@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C7EBE7717D
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 21:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEE9E7717F
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 22:03:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A90688E18;
-	Sat,  7 Dec 2024 22:27:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DEF3588E5C;
+	Sat,  7 Dec 2024 23:03:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KRU48541";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gjcQsZOe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 050B488E39; Sat,  7 Dec 2024 22:27:57 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C552892CD; Sat,  7 Dec 2024 23:03:39 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCD8888E00
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 22:27:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43F8F88C53
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 23:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6c3b1ee59so76631685a.0
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 13:27:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733606873; x=1734211673; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VmjD3rKNxQTmH3OVmGPbisctjXLGDbAbdtDq58Fe2f0=;
- b=KRU48541r/h/IOfhMZaEq/j9hzHeHo8ihseIjvgIETp1f7P5ycZoeH8OL2HGVKcjM8
- EKNdh4zrkLotPhx99XiOlEgZxqkKSYIpvSLXyRp1TM1ZbmupgxwwHm0bIJF8W69WXE1T
- w0mv/xRNVYLkCjaLZjBzZsqLy79aFMu7ZGr98=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733606873; x=1734211673;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VmjD3rKNxQTmH3OVmGPbisctjXLGDbAbdtDq58Fe2f0=;
- b=nlEB8bDAabxqIr7Ozyp60IpkG+XjHLGCZFSPf9lwVrEKSpoKDneb5zhMcQElC2e9ac
- kNkEr9vPBJqiHShIhVryXiC0P9Szao5I9kHx04aqDXp3yW8fyriM7rfLQtCFab/8rTpX
- 8KkIZ5QuTECDDwrtKTayEmvka6HDqwVmHvTCVoBReRR6r8VQUUgG2WdFfEzL5qjPiCjW
- d7u6mF89u/7UNVFxVXAUguVGf50LQABkIRBEIrtJmqg/xkYguNv5oYtuV2mpmmywPINN
- knyZNRESVhaL5+0WO0GBeCznxJVvWdHvN+zDS0+UaJGCgk8gcFyPowytPLTc1CdQT37F
- OMTg==
-X-Gm-Message-State: AOJu0YyZo+wM/NdgGfw/w6ezUR30FWExsMckDOHHVcveEO8rCHGV0mUG
- Sn9fH12JuAi8Zm8jW40jXnVC8tSXBAUuJJAhpsPeqgi7FIghfw2PyULn0bZ156g=
-X-Gm-Gg: ASbGncv6FGR00PVw+q+GLI2Aq2XUOyKOBUdqHvMvhE1qPywml93yBnmMM8nIAKka2sh
- jABphgE5lIv23s4t3lBimBN45nLTJoKP22G9Hk4cio0moe6ZH/wYbkdvrahI0AXi+aPfp1FBM1h
- ESrXhAFUbSv6DW42xtx2jdtxTrpvRRrWb9D08ero3N4UTHVr4v5bFcvsnh8g2PUyAMkD3eBlcPV
- nL5bRnXtcVGpt1nWdCoktPXcv9Zt1WD7u7Y9//uuimyr5dvIig=
-X-Google-Smtp-Source: AGHT+IGXI+BB9JU9YyeOcqujLyuAoS/f/o2FP5mJ+VStuOlYexAnl/nVpeB9Afg/+a+nwJfqgR5qyA==
-X-Received: by 2002:a05:620a:6018:b0:79f:1873:5463 with SMTP id
- af79cd13be357-7b6bcac2222mr1276938685a.6.1733606873531; 
- Sat, 07 Dec 2024 13:27:53 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.100])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8da6b2291sm32563706d6.58.2024.12.07.13.27.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 13:27:52 -0800 (PST)
-Date: Sat, 7 Dec 2024 15:27:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733609015; x=1734213815; i=xypron.glpk@gmx.de;
+ bh=bTnWCc4suYwM3RrHs/nRjX3GaoWZt0dXHmOQ+kifzD4=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=gjcQsZOenvrH0P2AWdZYfMAdvGbEjYQZcGtfT4TKIijlODB6FlEpiyllUjo0j6/Y
+ ZCKkbqChuLQ0aNnDwE8mrXgfp7WhH8zK18p8kNmfGBBiplQEBgTnWFMvR7c1diADN
+ 5eF2OzCxL3Y+6AP/vmU7vg7951hCJZ9/KEs+geGLPaJ586cdIZB82cHY4UmP02Gjr
+ 9obDi3tjuTKrxM/jC7owL/7t5TPU+4naWV0R+J8kUQGV36dbTBlPDtXf4L4WkS4MT
+ nJ8f8rPByVmqD4YIMJ+asu3mja/YMIS6i3z1VLz7eZYsxHzNQ1+WNkMWb9qTPM88r
+ dI7jz9RWiZbpaBvx1A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCKBc-1tTQY91xY2-001hYn; Sat, 07
+ Dec 2024 23:03:35 +0100
+Date: Sat, 07 Dec 2024 23:03:32 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Subject: Re: UEFI messages on startup
-Message-ID: <20241207212749.GF2457179@bill-the-cat>
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241207212749.GF2457179@bill-the-cat>
 References: <CAFLszTgnwTtUdgSHu6-1AC7cFU-oBNSp3oHAFTzisG5LmWs4gQ@mail.gmail.com>
+ <20241207212749.GF2457179@bill-the-cat>
+Message-ID: <638B58C8-3E91-4EE6-96B0-13AC610F42C7@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Rsat3pvSkz82z7IQ"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgnwTtUdgSHu6-1AC7cFU-oBNSp3oHAFTzisG5LmWs4gQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:EfUa4nENpVZWlIvEzTKvctrH7/hS3SrnVAHmVm04Ek3+wpBBLWl
+ DcSOBQOpXeUrvYGWcCNYyD5Kvi4+jFTk8ZzcDXcHqIxC4wfGYQ/gmnUGHj2sHkY6bZ0qHfr
+ LPcD7705Mb7dKNaeOSiDManyNYB3FvZ4ye5+l7Quma9tf4VAvlOLLGtvlVRb+IH0FUo2L3S
+ 7WtCQ7k4YUKA9XuU1LQHA==
+UI-OutboundReport: notjunk:1;M01:P0:epNa3QFFpGE=;HNMPQxoT5N/1ZY7K9xnispFCjlv
+ xOTuhjkelCr0ObF5hlO92eLjO3aX90iaJW3cVcT2Lc8H0HYVdOytYMjTiZjJL4C69VYi/zeV5
+ XWuzRX3vHq2qsRGM0V1j62RGGGSfjaVJ6/H8U3WhKWUoP1n7298wUyeBa05x3HOLk4njR0ur7
+ HapDDKbpYxLc9fBOZYJ2WTG4espOAqHsPW/tG5S8DbXAd/M95+Pyeng6bTnR0XFU/rozr2p5v
+ DuW9jBjxny1ac7Da0odj/jRG8ddgEwIDxkqadFaEFseunTbu+zWWHDoxDcUr0axuYKS7bUfr/
+ SKnulU8cZQ5GXiJHLT7c2yNjBtVMlzXeMX942sMcnWKjT7hK8BtcSh3D2dsvpbA1HKdWRJq2F
+ Ok6yMg/awhChNQwHHsvcorCBsvdgWmy/1ldP+1Y4aj48amWAlvINtbfEe+S+OdVNKG/TtTLEU
+ YLvHJboGj2EW5eiGZ/mzmu0fgxKJuNuRuVxLfp/qM7KkuH3gCH+YSCwsq/yUdG0C3lU090ot5
+ ct8rGnLbHfGffCf4pn4XI8rHH8zrncBEWsa6i3bbCImpDqa87NotqXZkSRrEymtHA/4ywEYGU
+ PDoDUQ9zjAMm0ovVBmbL8kK9C4hfIuwdN0LV9Usz3KqZ7IXFCe2qKxs0xR/wdjECAowY15vwJ
+ E1eI8NAf3ThgV2R+ocFGx4bPYvFiermlIwIUJMZl2/TNj+U6+2FWkhbyuNTd8RCuVuYqddOjH
+ l57IRoDxhfRDsVrN/+S7MeUfVzEL0oGfAUE61kSqRddIalM5UtXp7KsQULrdsvJj/n9Tvlu6w
+ JDuUconIU5TMwcEEKMUEqH7FbHFO9yA4tykyOZEz9QeUL65LfoYgxvLolXd8VDWXasqRu0Xvy
+ ukoEITEjjO6cWLeiRSS+xkqLn95DCc9dwZD0jhRTCpv16c7WbcAjJYe4MRW1w0IQ6FtpHbkhT
+ dPs513+pJsazPQEjijlYY4WWSULBn0vEFqGXKnZxzfXYDJqCCoy63MxjgpFbGnrMss4M3//H3
+ TV14/8yztU8kuhLCQ+VhkIhowFpMeNWflrrn1bXgI5tkQX6ra501NXbw/FmBNiYXjI3dBpfSI
+ SmKyGmc2oX9QKQFEsOJuyauk2IL3bf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,59 +94,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 7=2E Dezember 2024 22:27:49 MEZ schrieb Tom Rini <trini@konsulko=2Ecom>:
+>On Sat, Dec 07, 2024 at 01:48:41PM -0700, Simon Glass wrote:
+>
+>> Hi,
+>>=20
+>> I see these messages on startup with a rpi_4 - what can we do about
+>> this? It happens on every boot=2E
+>>=20
+>> ** File not found ubootefi=2Evar **
+>> Failed to load EFI variables
+>> ** Unable to write file ubootefi=2Evar **
 
---Rsat3pvSkz82z7IQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+No, ESP was found to write ubootefi=2Evar=2E
 
-On Sat, Dec 07, 2024 at 01:48:41PM -0700, Simon Glass wrote:
+>> Failed to persist EFI variables
+>> ** Unable to write file ubootefi=2Evar **
+>> Failed to persist EFI variables
+>> ** Unable to write file ubootefi=2Evar **
+>> Failed to persist EFI variables
+>> ** Unable to write file ubootefi=2Evar **
+>> Failed to persist EFI variables
+>> ** Unable to write file ubootefi=2Evar **
+>> Failed to persist EFI variables
+>> ** Booting bootflow '<NULL>' with efi_mgr
+>> Loading Boot0000 'mmc 0' failed
+>> Loading Boot0001 'usb 0' failed
+>> EFI boot manager: Cannot load any image
+>
 
-> Hi,
->=20
-> I see these messages on startup with a rpi_4 - what can we do about
-> this? It happens on every boot.
->=20
-> ** File not found ubootefi.var **
-> Failed to load EFI variables
-> ** Unable to write file ubootefi.var **
-> Failed to persist EFI variables
-> ** Unable to write file ubootefi.var **
-> Failed to persist EFI variables
-> ** Unable to write file ubootefi.var **
-> Failed to persist EFI variables
-> ** Unable to write file ubootefi.var **
-> Failed to persist EFI variables
-> ** Unable to write file ubootefi.var **
-> Failed to persist EFI variables
-> ** Booting bootflow '<NULL>' with efi_mgr
-> Loading Boot0000 'mmc 0' failed
-> Loading Boot0001 'usb 0' failed
-> EFI boot manager: Cannot load any image
+Neither mmc nor mmc has an ESP with EFI/BOOT/BOOAA64=2EEFI=2E
 
-Please elaborate on what your boot command is and what's on your SD
-card. I don't see that with just "bootflow scan" and I think an older
-Raspbian on the SD card.
+I think these messages should be debug only=2E
 
---=20
-Tom
+Best regards
 
---Rsat3pvSkz82z7IQ
-Content-Type: application/pgp-signature; name="signature.asc"
+Heinrich
 
------BEGIN PGP SIGNATURE-----
+>Please elaborate on what your boot command is and what's on your SD
+>card=2E I don't see that with just "bootflow scan" and I think an older
+>Raspbian on the SD card=2E
+>
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdUvdEACgkQFHw5/5Y0
-tywUzwv/U9JKHTiBQwvaJ/qesKmiEx8tT/v7UIvSY/zrpCMckzEWuUOkJfXm7qGs
-gFi+wDHyYVE0fCREfDN7I9xvtO9o4v29UJo2uGHHLlneZfdeT28CwRy2iUNwTnHO
-HnNbrNxF/2R03bEoxUAq/mNGPPYCnYCDmDJA7hmM9JYJt7g/acRpWa3ygSLkpHik
-SFppNUn4K6sJk0AMTmbqzhVUt9xCwEzHwURX/2iFdMUaTy0i7m5lZ2GB9ZOVVPQa
-1eHZdrY695EKA8xydtBieXNC+rlYZfpXZZctam1akwPnSJVUZuVevH19cSmu1wJi
-DGiQede5BmP6+6EN2U4NimBR+RcHXCx2kcgy0eJpaNtWzu0BgJvDS8Q6HBc881XD
-wEDKHBTOOX+bcQVKphTEkygkiVVGImIrukPpMG/OVNPV1d6v8C/AvonBZqHnEv5T
-1q80IiI7PENVa0sEb890YhbBE1mhHqOgLjc178qmoiDyYVEj7F6t3c7HLRnE6/rs
-TDgJ/ONN
-=hlAq
------END PGP SIGNATURE-----
-
---Rsat3pvSkz82z7IQ--
