@@ -4,76 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C153E7717D
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 23:43:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DE4EE7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 23:51:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D990389347;
-	Sun,  8 Dec 2024 00:43:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D318C893B3;
+	Sun,  8 Dec 2024 00:51:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="myh1T6P+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O/k0cKWy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 519B5892CD; Sun,  8 Dec 2024 00:43:25 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 7B792893C4; Sun,  8 Dec 2024 00:51:49 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0AAF89385
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 00:43:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03D7B8939B
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 00:51:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so7142266b.0
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 15:43:22 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa1e6ecd353so513683766b.1
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 15:51:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733615002; x=1734219802; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=OJIhuMAWzV8raRAv1jJAZT5DP5cIG7000jONP2NFqBk=;
- b=myh1T6P++LUKSs0azwa1VTNxrfmLwTP+DIFuseIMFrVgjQp3rTqYgNWY6wtR2FbcUn
- tWCYuUNjhEBz9CfCQef/FuqFU1wF7PH2RUN43yGYYHxxpgcZxTbbfiY4q/5rHw9GGzev
- neCNy4qnWYAyxP36l6zvahSMk3a/xn8FhmPqI=
+ d=chromium.org; s=google; t=1733615506; x=1734220306; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WcphBQk42TI0Ljxe5NAopPsFK1aiJVYfiEh5oAJOFjY=;
+ b=O/k0cKWyJlrqnoZRt2PRzRHXKecs/Hkyj5K2wk7oeU8/1iONWlRevUFb1aUbW+nofi
+ 4YY6ZUk/XjT3tz3QYpIKyJJhr+UCcy41h47M3UR/sBWsMxh/VN3I+CQ6XdnRDQpBoASJ
+ JGEvD6H8iZnhg2p5v60zMdi2ZJflK0J2tfm88=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733615002; x=1734219802;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OJIhuMAWzV8raRAv1jJAZT5DP5cIG7000jONP2NFqBk=;
- b=RNqSwuOd3QPO9IaQz6/Mpvs1VMvuyrt6Ld81TugW5qN8SOiMl/5/6NIHGI7T5XpHte
- ipTRZ36ak054CkAVx8atNXaWqEPYKu6n/dmPqBjrBOWhmqZoDrOB7EJt0A9BAmmy5x57
- mwzQQwIYB8FRHYyvnTqzXY33JWF0KxCVZWZU8dbZ5PPoFFLQKth+p390x8uEjSnAm98t
- hX/IryiFLSLZYADyWw2R9heHkHQTOuoqCDByGnuPCCnQzNUQBWj79AJrhhwwQmrGWgwU
- giqZjBKxJ7oxAmLUOnKgNniFp3Bm7dGIs+QtoG2tLTpwFnNmKmigEL2CyiZWN9bcze37
- 1sCg==
-X-Gm-Message-State: AOJu0Yy9Kus6vumEu3WWxCxhgLzqN04DIr2WEqYHK3ZqiZIfvMVQUzDl
- FqqhIsM2TLdkLgixxnJ6gH+0I31ra+4O/O5pX4Ey/rX9bWVqfpGMTqp1TK+HFqy0Lgkd4Zf74yf
- OAJ9BLR+DuXVNj6bFnzU60nP48gLO25Ymj1kaaTz8x600/BxWyA==
-X-Gm-Gg: ASbGncuNgh31TnQyLZr1XCfmN8o68AqEyaQkioOBYGPqVQinPiQYqmJzSmhGgqMKJDy
- DkrkT0TV4Cn3RZHDnX9V784KWyrvG3ZZV
-X-Google-Smtp-Source: AGHT+IHAMN9I8KQXAfG6e5u6VUP6pyv2OADyqO/u7npItgclDHcsKtlK9yh4KNj4zcb/jlRbovX9KNG8rQyXSs/z1Kg=
-X-Received: by 2002:a17:906:2929:b0:aa5:f2c0:2378 with SMTP id
- a640c23a62f3a-aa6373a1bf4mr811424866b.13.1733615001794; Sat, 07 Dec 2024
- 15:43:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733615506; x=1734220306;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WcphBQk42TI0Ljxe5NAopPsFK1aiJVYfiEh5oAJOFjY=;
+ b=XP9LgU7zgBBixcCZjF9UyVMFwoIk2ObKJxK1kjn9a0B6KyovTNu1adwzSMDeYwc4Fu
+ +8iH/VNSuvsl/lHiKRV01sbSHxLp4ywmqZXIV5ch25KVh1JjBHJUisgICbQ/6Zr80Xhq
+ tPxqAmaEQQ68JJZ7SsIzp6y+CaQJKNMxsFYFzhI4afJBkSsBSjS59Kr2AlWolzBLwq8j
+ 1DCegjtcH2IjBk8HHmGp5i8v07Nq1L9wH8GL7lHHr3y4NFZ2WDYpPk62+dTW5I83DJ87
+ jtqv+QmBFH+cLMoO3oI1oGNaxqhp4cOTmfv07/0HVMX3JgstG0nGpTcK812QwAk8wwLZ
+ rbKQ==
+X-Gm-Message-State: AOJu0YzWX/avDVlOuOOt8x9Rr6iN08ivAQKiSycxT/ERqLY7OlbzGcAU
+ pkc2Xr5MD3fylzbhhNCo2ECsCd6+EnGZpkf6teU9cC8tP6KLfhZkRHeLR5bngiKcN8SCLIGlsd5
+ SJDOWmePWzJxAc/SCqdJmCmbntzh9WHzxMZ1k
+X-Gm-Gg: ASbGncsc3gMu/vJg1gkeEhK11A+Ipj/c+pv11IcdtQD4TSfFkfPeCSiG1/w1TYAB+s7
+ OH5K4l4k8nZcS/V33uN4w9+2lj0COw7nD
+X-Google-Smtp-Source: AGHT+IEFn7Q/6OZhs5ztYfSOPt7x+c0RaF6hJir8t2TrfM+hQYfyIKgbYszjUO76E1Xz3Q5BVB8DF1s+M3UgzO6wXqE=
+X-Received: by 2002:a05:6402:1913:b0:5d1:1064:326a with SMTP id
+ 4fb4d7f45d1cf-5d3be69a19amr19243269a12.15.1733615506403; Sat, 07 Dec 2024
+ 15:51:46 -0800 (PST)
 MIME-Version: 1.0
+References: <20241206131113.2865416-1-sjg@chromium.org>
+ <20241206140852.GO2457179@bill-the-cat>
+ <CAFLszTizXjXnc_P3RHpxbKj5qoEfW_Swrc6V6v6dS7kFUqH9CA@mail.gmail.com>
+ <20241206194130.GX2457179@bill-the-cat>
+ <CAFLszTjQchtBH+K5rRPdiOGgb1bYq3LFWH8BP7jw+noXEaC0GA@mail.gmail.com>
+ <20241206235233.GB2457179@bill-the-cat>
+ <CAFLszThCR3KG+AVCN_ZeVVmKXverd6g+qNnKrt5YbdTy6jEayg@mail.gmail.com>
+ <20241207000029.GC2457179@bill-the-cat>
+ <CAFLszTiLFe80OQy1q5eVCoZ-v0AhaKUOzdcLsWK9wEwn_SzZ9w@mail.gmail.com>
+ <20241207005246.GD2457179@bill-the-cat>
+In-Reply-To: <20241207005246.GD2457179@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Dec 2024 16:43:10 -0700
-Message-ID: <CAFLszThXbhVtYqi27BtKv6PHwVNnhvwJ5+vKQ_yMMJ33GrYd4g@mail.gmail.com>
-Subject: [PATCH v5 00/13] Add video damage tracking
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- Da Xue <da@libre.computer>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Derald Woods <woods.technical@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, uboot-stm32@st-md-mailman.stormreply.com, 
- Matthias Brugger <mbrugger@suse.com>, u-boot-amlogic@groups.io, 
+Date: Sat, 7 Dec 2024 16:51:34 -0700
+Message-ID: <CAFLszTju5G+icA4aLWWsYTZaEzZp+qUgvgtZ38azndH+A-6Okg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rpi: Tidy up booting
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
+ "Ivan T. Ivanov" <iivanov@suse.de>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ This contributor prefers not to receive mails <noreply@example.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,163 +106,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 21, 2023 at 01:50 PM Alper Nebi Yasak
-<alpernebiyasak@gmail.com> wrote:
->
-> This is a rebase of Alexander Graf's video damage tracking series, with
-> some tests and other changes. The original cover letter is as follows:
->
->
-> > This patch set speeds up graphics output on ARM by a factor of 60x.
-> >
-> > On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
-> > but need it accessible by the display controller which reads directly
-> > from a later point of consistency. Hence, we flush the frame buffer to
-> > DRAM on every change. The full frame buffer.
-> >
-> > Unfortunately, with the advent of 4k displays, we are seeing frame buffers
-> > that can take a while to flush out. This was reported by Da Xue with grub,
-> > which happily print 1000s of spaces on the screen to draw a menu. Every
-> > printed space triggers a cache flush.
-> >
-> > This patch set implements the easiest mitigation against this problem:
-> > Damage tracking. We remember the lowest common denominator region that was
-> > touched since the last video_sync() call and only flush that. The most
-> > typical writer to the frame buffer is the video console, which always
-> > writes rectangles of characters on the screen and syncs afterwards.
-> >
-> > With this patch set applied, we reduce drawing a large grub menu (with
-> > serial console attached for size information) on an RK3399-ROC system
-> > at 1440p from 55 seconds to less than 1 second.
-> >
-> > Version 2 also implements VIDEO_COPY using this mechanism, reducing its
-> > overhead compared to before as well. So even x86 systems should be faster
-> > with this now :).
-> >
-> >
-> > Alternatives considered:
-> >
-> >   1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
-> >      so often. We are missing timers to do this generically.
-> >
-> >   2) Double buffering - We could try to identify whether anything changed
-> >      at all and only draw to the FB if it did. That would require
-> >      maintaining a second buffer that we need to scan.
-> >
-> >   3) Text buffer - Maintain a buffer of all text printed on the screen with
-> >      respective location. Don't write if the old and new character are
-> >      identical. This would limit applicability to text only and is an
-> >      optimization on top of this patch set.
-> >
-> >   4) Hash screen lines - Create a hash (sha256?) over every line when it
-> >      changes. Only flush when it does. I'm not sure if this would waste
-> >      more time, memory and cache than the current approach. It would make
-> >      full screen updates much more expensive.
->
->
-> Changes in v5:
-> - Add patch "video: test: Split copy frame buffer check into a function"
-> - Add patch "video: test: Support checking copy frame buffer contents"
-> - Add patch "video: test: Test partial updates of hardware frame buffer"
-> - Use xstart, ystart, xend, yend as names for damage region
-> - Document damage struct and fields in struct video_priv comment
-> - Return void from video_damage()
-> - Fix undeclared priv error in video_sync()
-> - Drop unused headers from video-uclass.c
-> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
-> - Call video_damage() also in video_fill_part()
-> - Use met->baseline instead of priv->baseline
-> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-> - Update console_rotate.c video_damage() calls to pass video tests
-> - Remove mention about not having minimal damage for console_rotate.c
-> - Add patch "video: test: Test video damage tracking via vidconsole"
-> - Document new vdev field in struct efi_gop_obj comment
-> - Remove video_sync_copy() also from video_fill(), video_fill_part()
-> - Fix memmove() calls by removing the extra dev argument
-> - Call video_sync() before checking copy_fb in video tests
-> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
-> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
->
->
-> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
->
->
-> Changes in v4:
-> - Move damage clear to patch "dm: video: Add damage tracking API"
-> - Simplify first damage logic
-> - Remove VIDEO_DAMAGE default for ARM
-> - Skip damage on EfiBltVideoToBltBuffer
-> - Add patch "video: Always compile cache flushing code"
-> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
->
->
-> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
->
->
-> Changes in v3:
-> - Adapt to always assume DM is used
-> - Adapt to always assume DM is used
-> - Make VIDEO_COPY always select VIDEO_DAMAGE
->
->
-> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
->
->
-> Changes in v2:
-> - Remove ifdefs
-> - Fix ranges in truetype target
-> - Limit rotate to necessary damage
-> - Remove ifdefs from gop
-> - Fix dcache range; we were flushing too much before
-> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->
->
-> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
->
->
-> Alexander Graf (9):
->   dm: video: Add damage tracking API
->   dm: video: Add damage notification on display fills
->   vidconsole: Add damage notifications to all vidconsole drivers
->   video: Add damage notification on bmp display
->   efi_loader: GOP: Add damage notification on BLT
->   video: Only dcache flush damaged lines
->   video: Use VIDEO_DAMAGE for VIDEO_COPY
->   video: Always compile cache flushing code
->   video: Enable VIDEO_DAMAGE for drivers that need it
->
->
-> Alper Nebi Yasak (4):
->   video: test: Split copy frame buffer check into a function
->   video: test: Support checking copy frame buffer contents
->   video: test: Test partial updates of hardware frame buffer
->   video: test: Test video damage tracking via vidconsole
->
->
->  arch/arm/mach-omap2/omap3/Kconfig |   1 +
->  arch/arm/mach-sunxi/Kconfig       |   1 +
->  drivers/video/Kconfig             |  26 +++
->  drivers/video/console_normal.c    |  27 ++--
->  drivers/video/console_rotate.c    |  94 +++++++----
->  drivers/video/console_truetype.c  |  37 +++--
->  drivers/video/exynos/Kconfig      |   1 +
->  drivers/video/imx/Kconfig         |   1 +
->  drivers/video/meson/Kconfig       |   1 +
->  drivers/video/rockchip/Kconfig    |   1 +
->  drivers/video/stm32/Kconfig       |   1 +
->  drivers/video/tegra20/Kconfig     |   1 +
->  drivers/video/tidss/Kconfig       |   1 +
->  drivers/video/vidconsole-uclass.c |  16 --
->  drivers/video/video-uclass.c      | 190 ++++++++++++----------
->  drivers/video/video_bmp.c         |   7 +-
->  include/video.h                   |  59 +++----
->  include/video_console.h           |  52 ------
->  lib/efi_loader/efi_gop.c          |   7 +
->  test/dm/video.c                   | 256 ++++++++++++++++++++++++------
->  20 files changed, 483 insertions(+), 297 deletions(-)
->
->
->
-> base-commit: 3881c9fbb7fdd98f6eae5cd33f7e9abe9455a585
+Hi Tom,
 
-Rebased and applied to ci/master, thanks!
+On Fri, 6 Dec 2024 at 17:52, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Dec 06, 2024 at 05:10:39PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 6 Dec 2024 at 17:00, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Dec 06, 2024 at 04:56:31PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 6 Dec 2024 at 16:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Dec 06, 2024 at 04:41:37PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 6 Dec 2024 at 12:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Dec 06, 2024 at 12:17:49PM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Fri, 6 Dec 2024 at 07:08, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Dec 06, 2024 at 06:11:10AM -0700, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+> > > > > > > > > > ramdisk, by expanding the available space.
+> > > > > > > > > >
+> > > > > > > > > > It also tidies up some strange behaviour with the provided FDT, where a
+> > > > > > > > > > separate pointer is maintained to it, even though U-Boot has copied it
+> > > > > > > > > > and placed it in its own space. This avoids strange bugs where it
+> > > > > > > > > > accidentally gets overwritten when loading a file into memory.
+> > > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > Simon Glass (3):
+> > > > > > > > > >   rpi: Update environment to support booti and large initrd
+> > > > > > > > > >   fdt: Allow expanding the devicetree during relocation
+> > > > > > > > > >   rpi: Use the U-Boot control FDT for fdt_addr
+> > > > > > > > > >
+> > > > > > > > > >  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
+> > > > > > > > > >  board/raspberrypi/rpi/rpi.env | 10 ++++++----
+> > > > > > > > > >  common/board_f.c              |  6 ++++--
+> > > > > > > > > >  dts/Kconfig                   | 11 +++++++++++
+> > > > > > > > > >  4 files changed, 29 insertions(+), 18 deletions(-)
+> > > > > > > > >
+> > > > > > > > > My feedback here is the same feedback I gave the last person that wanted
+> > > > > > > > > to update the Pi addresses, and I forget if they came back and did that
+> > > > > > > > > (and it's in Peter / Matthias' queue) or not. Disabling device tree
+> > > > > > > > > relocation is a bug and must be removed.
+> > > > > > > > >
+> > > > > > > > > After that, given the range of memory sizes available on Pi platforms,
+> > > > > > > > > allocating the kernel / initrd / kernel decompression buffer at run
+> > > > > > > > > time, ala mach-apple would make life easier in the long run.
+> > > > > > > >
+> > > > > > > > Yes, of course, but for now, this resolves the problem and I don't
+> > > > > > > > believe it creates any other problem.
+> > > > > > >
+> > > > > > > Yes. I think you missed that:
+> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20240723193430.3050251-1-walter.lozano@collabora.com/
+> > > > > > > is also outstanding and should solve the problem.
+> > > > > >
+> > > > > > No, it doesn't support decompression, although I have to wonder why
+> > > > > > that patch was never applied.
+> > > > >
+> > > > > See Peter's response elsewhere about having a lot of things to do and
+> > > > > not a lot of time. I know he's intended to pick up and post a Pi PR for
+> > > > > a while.
+> > > >
+> > > > OK, but let's drop that patch since it doesn't support decompression, right?
+> > >
+> > > No? No one has done all of the work required (remove fdt_high /
+> > > initrd_high) and this also solves the larger kernel issue.
+> >
+> > No, that is a separate issue. We need kernel_comp_addr and kernel_comp_size
+>
+> Yes, those are required for automatic decompression, which is handy. But
+> the highest priority is removing fdt_high / initrd_high because those
+> lead to so much time being wasted by everyone. Your time digging in to
+> and making patch #2 for example.
+
+Can you remind me why fdt_high is so bad, or even what it is supposed
+to help with? Perhaps file an issue? I'm not necessarily offering to
+do it, but if I understand it better, then it is more likely that I
+will take it on.
+
+>
+> > > > > > > > The solution should not be board-specific though. Once I have the
+> > > > > > > > bootstd files stuff is finished, I believe that bootstd will be able
+> > > > > > > > to do this and I plan to do this. Then the variables will be unused
+> > > > > > > > for rpi and we can just drop them for any bootstd boards.
+> > > > > > > >
+> > > > > > > > As of now, we have 390 boards using bootstd and 381 using distro
+> > > > > > > > scripts, so it is progress!
+> > > > > > >
+> > > > > > > Yes, it will be interesting to see what the future holds, and any of the
+> > > > > > > solutions handle some of the trickier corner cases that lead to the
+> > > > > > > current situation. Or perhaps the best outcome is that in current times,
+> > > > > > > those corner cases don't really appear anymore (with 512MiB DDR being
+> > > > > > > the lower bound for example on all the Pi families).
+> > > > > >
+> > > > > > Well rpi is a bit unusual...
+> > > > >
+> > > > > Sure, but not in this case? Lots of examples of multiple models with
+> > > > > different memory sizes, and especially with 32bit platforms smaller (by
+> > > > > current standards) overall DDR.
+> > > >
+> > > > I mean in the sense that it puts the devicetree in the middle of RAM.
+> > >
+> > > Which and where? Or do you mean it being exacerbated by disabling
+> > > relocation (which is why I keep going on and on about removing that from
+> > > platforms that do it)? Most platforms will load to the "middle" and
+> > > that's why you must not disable relocation because it's only a problem
+> > > when, well, relocation is disabled and U-Boot says "Gee, you're going to
+> > > break but you told me you want that, so, alright then."
+> >
+> > No, the rpi relocates. I just mean that it puts the DT at about 512MB
+> > in RAM, which is annoying.
+>
+> I guess we've once again lost some details. With fdt_high=0xffffffff we
+> do not relocate the device tree we're going to pass to the OS from
+> wherever it happens to be at the time. That is what I mean by
+> relocation. Looking at a Pi 4 here real quick, it has
+> fdtcontroladdr=3aea8b30. But if you mean fdt_addr, yes, that's around
+> 512MiB (fdt_addr=2eff2d00) and likely the previous stage throwing it
+> there for the OS as a likely always accessible option.
+
+Yes.
+
+Regards,
+SImon
