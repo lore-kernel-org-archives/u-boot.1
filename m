@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5865FE7717B
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D60BE7717D
+	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 17:26:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47FFA89405;
-	Sat,  7 Dec 2024 18:26:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 99F1289376;
+	Sat,  7 Dec 2024 18:26:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V07nc/dP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nMVMDtmy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67E21891C3; Sat,  7 Dec 2024 18:26:06 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 0AD3388FB4; Sat,  7 Dec 2024 18:26:10 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A9E88939B
- for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B70E089428
+ for <u-boot@lists.denx.de>; Sat,  7 Dec 2024 18:26:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-843e9db3e65so115100839f.1
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:04 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-84197c469cfso95432539f.3
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 09:26:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733592362; x=1734197162; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733592366; x=1734197166; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IyZuMFoqZLhbMZy8ftr92p+WXS8xDpo1+GTJBnHgM8k=;
- b=V07nc/dP8VJI2nokwP4F8hrziqdNGl5VRxL9g4LdJjL9OoD6guivwTC0LQalp6vhAz
- sS1gNEdkcWZQ6ccMvRWpLxjvdmLmmHi0VaiybZt0TkKeKdfsVDqMvbuoPDqNGjh9qP/e
- wYaJd3URTUfR52/WGMS75LaabdJfH776OYw6s=
+ bh=2lG7yZEBrm4ZJcy4WFBOngwrT3gczjb1H7yUaUlX1mg=;
+ b=nMVMDtmyxfVM6ZFAg9kt7ejE1H4b/C12QsdP578qUQj8UHPWu4SFJTuNaQqlXv2CYf
+ nLktUwMpB21UUWz1dTpPhSlIdE6A5f/aQ/5dQb+L+becA59bcQbB3OiyvBy5Tdpk2e4V
+ 6uzh8CAWQ2z6Yiw34HIYW8itdMm6p8arRoWIo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733592362; x=1734197162;
+ d=1e100.net; s=20230601; t=1733592366; x=1734197166;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IyZuMFoqZLhbMZy8ftr92p+WXS8xDpo1+GTJBnHgM8k=;
- b=lGgf7yRGmE1AEXJ5BONqeSNXdZtFZ2rkTv9IUjec9nrwvq03/cmdHzqzuf7vPp61aS
- BLqVS6h8WSQMMUwXlOH4MeVKy1YGan2HVOKzzOaf9Ai3oK+izeZbNeb3MLCttAj1ysho
- GR8ia3Yx+GD3doQr81Vfc76nRBzWHjE7JJ6gcf90+7cAeNzDa5nTzHc//FfW4vIGfV4e
- +CH324FRO+GfMsoVlzSJJJGYoOCRJflh0TpMlAC0oar2BpZiKp6DkxEumfKJPHq5azDs
- okOIu60W383ScguU8Kb9iGPevtvfgOJ0RVr0FdQVycLMAA+iW50nXIbEURLAQ6JKZjtV
- qwJA==
-X-Gm-Message-State: AOJu0Yww2vyzdeVEnR1/8uxCicno+uWMYrIrrPLM9DxEWH+lr3L/Dix8
- XYN1sOl4CLIFdmcSLaApoVxjoDqLSuKtA4zJxym/gv/Co7o8bfX+nvvbMO45UM0e5E7f38PViFU
+ bh=2lG7yZEBrm4ZJcy4WFBOngwrT3gczjb1H7yUaUlX1mg=;
+ b=S/TycxnYKPzT9WgO90uLcwywGwiA6eMzv0TX/rrvIUDF+UWiV2+rWgGXz4vgkInXki
+ /RYWTmAtK81+hFimqCrIYXX3qS/kbeM9rBdVfucOAkF2mYY5Das4vnonkzdbzUBLwCew
+ /fYdHEZQ4BTF1Vnvke7+qtTRSFdw2aLffCBgoxwhdh9uPTd/gpy61g2Yu/gJanZyASYw
+ pc/IoFu5eeKwBM/HhVQXlLICHqBL8rUxBdvtjn8ZMT4yjV0QwL0x4EWvTcJO2ywgl99X
+ moDrrp4LoI1hhnPEwimnvFHYcW6uYGNOtBDhSwf/h4So9vPaesmWRvE657zmGuPGUj2/
+ YDbQ==
+X-Gm-Message-State: AOJu0Yy+rIUv7sz+mDtMZM8Cv8uA9njzwm1SrhU/wvOHS16Dw1wZ62dy
+ FoTaQ5DFcbxP1oyTJZsALkwXADPSmd1V5zy0nQiPdiuTkPmq5PDsuh0lJbchXhmn45dkL/3Gskw
  =
-X-Gm-Gg: ASbGnctweJqRBjZDfXW25lEz0JYp5EaWWad/eGkX1UMglt1gaFlBPon9Juauvf2M4Dq
- 6G+LvqmqZCbrXha5Hs5wMQ3ToCTauc7Xnb6qgC0a+rrJ5aBnJDg0CGpDBFNFSu7k+GuZflcvK4K
- jOscaFCn1IRh07lDo3HWIoSvvC9Xsqr2b+csxENo0laJwaoD3BQLM8HOYHdTMUZZCw5vIWc+4WS
- Hx9Qd6S22u7BpsVZ4RPyJOwAFKNBsBluFOYANh8+gJUQMqqnSoc8PsPMJ4vGYdA325kjh0i+JEW
- o81ZaTX/qtc=
-X-Google-Smtp-Source: AGHT+IGP5UIFUJXsnnLqO6cC9dJCIAHLAWYKwBB5FYvivmNGX3/w949lpOxGtryGVrGSbuqfvn8swQ==
-X-Received: by 2002:a05:6602:148e:b0:7f6:8489:2679 with SMTP id
- ca18e2360f4ac-8447e06d784mr744092539f.8.1733592362468; 
- Sat, 07 Dec 2024 09:26:02 -0800 (PST)
+X-Gm-Gg: ASbGncuVnU4960CGXmF3zJIALyCMtEpTqSGVW0IqB8jZgBYaEnwmlfRssW/2afNToDe
+ Wor+6+sKWBqtNJnH5KR2VkO1C4vhVAl2WGKJfBQ0n1UwgYPmCul9NtAre4BDux0jIeUOsf6uSKk
+ f1yO3zCPzD8E1InkmAwCGX0zI5UYpZ9n+u/pUylsoiblNOo6AvYVnXB/GriWqv34doPLBKgUYVo
+ 7M7xfEa3cBpjBjvLuHVfYEVz6Cb+YFhwlRXBhjnxSLtlrSvZZ1TOMCn0BuUGLcbjIcmH54H3QlJ
+ zZzlxUnAPR8=
+X-Google-Smtp-Source: AGHT+IEioTJHp4++UT6L5bgtCBboRRmnelWBnuWirBNx9BthNDfC0Yru3B0iwWrMOf/i59S9aSKAMg==
+X-Received: by 2002:a05:6602:6d01:b0:83a:639b:bc44 with SMTP id
+ ca18e2360f4ac-8447e200059mr709002439f.3.1733592365948; 
+ Sat, 07 Dec 2024 09:26:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.25.59
+ ca18e2360f4ac-84473a7080csm171745739f.45.2024.12.07.09.26.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 09:26:01 -0800 (PST)
+ Sat, 07 Dec 2024 09:26:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+Cc: Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Julien Masson <jmasson@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 02/19] image: Add a prototype for fit_image_get_phase()
-Date: Sat,  7 Dec 2024 10:23:55 -0700
-Message-Id: <20241207172412.1124558-3-sjg@chromium.org>
+Subject: [PATCH v3 03/19] boot: Allow FIT to fall back from best-match option
+Date: Sat,  7 Dec 2024 10:23:56 -0700
+Message-Id: <20241207172412.1124558-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241207172412.1124558-1-sjg@chromium.org>
 References: <20241207172412.1124558-1-sjg@chromium.org>
@@ -99,40 +101,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function exists but is not exported. Add a prototype so it can be
-used elsewhere.
+When the best-match feature fails to find something, use the provided
+config name as a fallback. The allows SPL to select a suitable config
+when best-match is enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/image.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ boot/image-fit.c | 19 ++++++++++---------
+ include/image.h  |  4 +++-
+ 2 files changed, 13 insertions(+), 10 deletions(-)
 
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 7d56f0b5e6e..439ff51edf6 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -1729,13 +1729,13 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 	images_noffset = fdt_path_offset(fit, FIT_IMAGES_PATH);
+ 	if (confs_noffset < 0 || images_noffset < 0) {
+ 		debug("Can't find configurations or images nodes.\n");
+-		return -1;
++		return -EINVAL;
+ 	}
+ 
+ 	fdt_compat = fdt_getprop(fdt, 0, "compatible", &fdt_compat_len);
+ 	if (!fdt_compat) {
+ 		debug("Fdt for comparison has no \"compatible\" property.\n");
+-		return -1;
++		return -ENXIO;
+ 	}
+ 
+ 	/*
+@@ -1812,7 +1812,7 @@ int fit_conf_find_compat(const void *fit, const void *fdt)
+ 	}
+ 	if (!best_match_offset) {
+ 		debug("No match found.\n");
+-		return -1;
++		return -ENOENT;
+ 	}
+ 
+ 	return best_match_offset;
+@@ -2095,17 +2095,18 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 		 * fit_conf_get_node() will try to find default config node
+ 		 */
+ 		bootstage_mark(bootstage_id + BOOTSTAGE_SUB_NO_UNIT_NAME);
+-		if (IS_ENABLED(CONFIG_FIT_BEST_MATCH) && !fit_uname_config) {
+-			cfg_noffset = fit_conf_find_compat(fit, gd_fdt_blob());
+-		} else {
+-			cfg_noffset = fit_conf_get_node(fit, fit_uname_config);
+-		}
+-		if (cfg_noffset < 0) {
++		ret = -ENXIO;
++		if (IS_ENABLED(CONFIG_FIT_BEST_MATCH) && !fit_uname_config)
++			ret = fit_conf_find_compat(fit, gd_fdt_blob());
++		if (ret < 0 && ret != -EINVAL)
++			ret = fit_conf_get_node(fit, fit_uname_config);
++		if (ret < 0) {
+ 			puts("Could not find configuration node\n");
+ 			bootstage_error(bootstage_id +
+ 					BOOTSTAGE_SUB_NO_UNIT_NAME);
+ 			return -ENOENT;
+ 		}
++		cfg_noffset = ret;
+ 
+ 		fit_base_uname_config = fdt_get_name(fit, cfg_noffset, NULL);
+ 		printf("   Using '%s' configuration\n", fit_base_uname_config);
 diff --git a/include/image.h b/include/image.h
-index 9be5acd8158..bb15ef69871 100644
+index bb15ef69871..ab96510f62c 100644
 --- a/include/image.h
 +++ b/include/image.h
-@@ -1171,6 +1171,18 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
- int fit_image_get_data_and_size(const void *fit, int noffset,
- 				const void **data, size_t *size);
+@@ -1411,7 +1411,9 @@ int fit_check_format(const void *fit, ulong size);
+  * copied into the configuration node in the FIT image. This is required to
+  * match configurations with compressed FDTs.
+  *
+- * Returns: offset to the configuration to use if one was found, -1 otherwise
++ * Returns: offset to the configuration to use if one was found, -EINVAL if
++ * there a /configurations or /images node is missing, -ENOENT if no match was
++ * found, -ENXIO if the FDT node has no compatible string
+  */
+ int fit_conf_find_compat(const void *fit, const void *fdt);
  
-+/**
-+ * fit_image_get_phase() - Get the phase from a FIT image
-+ *
-+ * @fit: FIT to read from
-+ * @offset: offset node to read
-+ * @phasep: Returns phase, if any
-+ * Return: 0 if read OK and *phasep is value, -ENOENT if there was no phase
-+ * property in the node, other -ve value on other error
-+ */
-+int fit_image_get_phase(const void *fit, int offset,
-+			enum image_phase_t *phasep);
-+
- /**
-  * fit_get_data_node() - Get verified image data for an image
-  * @fit: Pointer to the FIT format image header
 -- 
 2.34.1
 
