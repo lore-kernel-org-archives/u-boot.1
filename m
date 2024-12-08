@@ -4,116 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE2DE77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 23:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD70E77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 01:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF08C89500;
-	Mon,  9 Dec 2024 00:56:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D15788E2B;
+	Mon,  9 Dec 2024 02:00:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Ul2x2Pan";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YR+eBVI9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CD0B8953F; Mon,  9 Dec 2024 00:56:51 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8A2EF893E8; Sun,  8 Dec 2024 23:10:15 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70F1A893AE
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:56:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C410893B4
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:10:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20241208235644epoutp04e9e9d19c273949df31b56721e1255773~PWPhAUveF0992909929epoutp04G
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:56:44 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20241208235644epoutp04e9e9d19c273949df31b56721e1255773~PWPhAUveF0992909929epoutp04G
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733702204;
- bh=N3Zw31KC/ECBA9q2oWPJ8iRwxDbbY5xW80BKRuCcRtI=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=Ul2x2PansfM1rejokPtkXjcvL8vtTMNUogWTN1VjRDIAYhP1N8Mzl6HxOKucGj7HM
- QNJpKGnG4IA7vWh3TW3KUk5wGgU2WtAt+wrWqke/JiE9h2K9RnwUQCE3B+oaoG2yeV
- amTe5MwjS59dXU4a1z671S83e4CwNp0xshWMBqUM=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20241208235644epcas1p3e2611d254c70517da88a9734063db559~PWPgpJyj32473624736epcas1p35;
- Sun,  8 Dec 2024 23:56:44 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.38.231]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4Y622z0Dfhz4x9Q0; Sun,  8 Dec
- 2024 23:56:43 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 4D.B8.23253.A3236576; Mon,  9 Dec 2024 08:56:42 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20241208235642epcas1p1f0a915078a17f169345cfa67fc204ab7~PWPfC02xq0672306723epcas1p1y;
- Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20241208235642epsmtrp18e258ca7c04aa48fe00ac553d24398a1~PWPfCBe3Q1789517895epsmtrp1X;
- Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
-X-AuditID: b6c32a33-5a18170000005ad5-92-6756323afea7
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D9.28.18949.A3236576; Mon,  9 Dec 2024 08:56:42 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241208235642epsmtip2c9b99fac202187bdbd1b764151ad2a20~PWPe3-eIJ2788527885epsmtip2g;
- Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Marek Vasut'" <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
-Cc: "'Tom Rini'" <trini@konsulko.com>
-In-Reply-To: <20241208220551.204743-6-marek.vasut+renesas@mailbox.org>
-Subject: RE: [PATCH 06/13] mmc: renesas: Fix R-Car spelling
-Date: Mon, 9 Dec 2024 08:56:42 +0900
-Message-ID: <082001db49cc$d47931b0$7d6b9510$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQG7SSyzAYIHjYUOd1obIOVJ/X+H+ALSfQXBAi8ZUAuy9PqMwA==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKKsWRmVeSWpSXmKPExsWy7bCmnq6VUVi6QethK4vWlXfYLKZO2sxu
- 8XZvJ7sDs8erA6vYPc7e2cHosXP2PqYA5qhsm4zUxJTUIoXUvOT8lMy8dFsl7+B453hTMwND
- XUNLC3MlhbzE3FRbJRefAF23zBygTUoKZYk5pUChgMTiYiV9O5ui/NKSVIWM/OISW6XUgpSc
- AtMCveLE3OLSvHS9vNQSK0MDAyNToMKE7Iyrb9eyFlyWqtjZcpa1gfGBaBcjJ4eEgIlEy8b9
- jF2MXBxCAjsYJW5ff84C4XxilLi4q5EVpEpI4BujxIvZFjAdHVdWsEDE9zJKtL9SgLBfMkqc
- OxsMYrMJ6En8X7SQGcQWEfCXaH+7GKieg4NZQFVi1YEIkDCngJvE2knLwMYIC1hLHNl+nQ3E
- ZhFQkdh/YgNYK6+ApcTsc8tYIdYqSPx8CmGLCDhJPFowCcxmFhCRmN3Zxgxys4TAPnaJpdc2
- MkM0uEis2LQSqllY4tXxLewQtpTEy/42doiGZkaJpUsOskI4PYwS/xogzpAQMJbYv3QyE8TV
- mhLrd+lDbOOTePe1hxUkLCHAK9HRJgRRrSJx6fVLJpj5d5/8hyrxkGjvdIeE51VGif7/c1gm
- MMrPQnL3LIQFCxiZVjGKpRYU56anJhsWGMLjMTk/dxMjOH1pGe9gvDz/n94hRiYOxkOMEhzM
- SiK8HN6h6UK8KYmVValF+fFFpTmpxYcYTYEhOZFZSjQ5H5hA80riDU0sDUzMjIxNLAzNDJXE
- ec9cKUsVEkhPLEnNTk0tSC2C6WPi4JRqYOJ5/see2ahhjg6nrYTGdmmD6RfPPJXUeGf0pnk6
- m+Q8vz3rnFv0BGwX379qtTzCY53zHb1y6Z2cfeduzrTdlHXw5/3WxIWtt2ecYPC5nnYqc2ur
- bm3aobZ1Moxsig9z1k2Y2fzmgdjRF/9mOEwIfbU6kpXrQ6BexsytDAVzO/kTAtqWhObkaisJ
- 77P3O8Nkzc+pVn9QrPbLynVGrp/Czj/LMJ16r/ZTx1nujolXl0iHfZw/XfDnDJ+EC7d1ODa/
- Ovi5I+vhuaBX4QnJE86vanl298s55U0eGTKf74g2bFxW0Zf16fJfJcMj5U+W2VxapGCgMFuw
- zmZmT37MG+fPb+7Vfy44wb9drz5Z9rHBuh1KLMUZiYZazEXFiQDJ4X/O6AMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprDLMWRmVeSWpSXmKPExsWy7bCSvK6VUVi6wd9VahatK++wWUydtJnd
- 4u3eTnYHZo9XB1axe5y9s4PRY+fsfUwBzFFcNimpOZllqUX6dglcGVffrmUtuCxVsbPlLGsD
- 4wPRLkZODgkBE4mOKytYuhi5OIQEdjNKTLrXwwiRkJL4/HQqWxcjB5AtLHH4cDFIWEjgOaPE
- iSY9EJtNQE/i/6KFzCC2iIC/RPvbxSwg5cwCqhKrDkRAjLzIKNHytIsNpIZTwE1i7aRlLCC2
- sIC1xJHt18HiLAIqEvtPbACbwytgKTH73DJWiBMUJH4+hbBFBJwkHi2YBGYzC4hIzO5sY57A
- KDALibuAkXEVo2RqQXFuem6xYYFRXmq5XnFibnFpXrpecn7uJkZwAGpp7WDcs+qD3iFGJg7G
- Q4wSHMxKIrwc3qHpQrwpiZVVqUX58UWlOanFhxilOViUxHm/ve5NERJITyxJzU5NLUgtgsky
- cXBKNTB1Kqqen+V47KLh/q5Z9UtnlD5+mfF5pcQ6qUla73QuFm1JdP7/mf3QMf5bcu+nT1q4
- Ya1CmeGZaSWR+ZZB1zl+nyzZF6CmFlpg/UixZ+vnOuNZZ/SrV5jvVyxpn7uL7ejLouBJhzuf
- mAdt+1i53sl515xrK4X3hnHe7nt2oy9sVqPS6R+m5/4fa+L4OYtrutL8izu72M55LfvVtkdj
- +8v/n/N/eKS+Tj37cM6qetePpz94XTnzMLuBX6x4tvsCvquReSkpYqUfl0tc+aP2blJBzGtz
- xVflHAWcqpsEPs8OD3RIfpjLrbpG1PJEx1uVd62RV1z/F2494XWGe0PlCsPtPI+e3eJcLuQy
- /9Bx0UuizkosxRmJhlrMRcWJAKrpPASvAgAA
-X-CMS-MailID: 20241208235642epcas1p1f0a915078a17f169345cfa67fc204ab7
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241208220704epcas1p1ae117a90d00f7067505266712f1e6dcc
-References: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
- <CGME20241208220704epcas1p1ae117a90d00f7067505266712f1e6dcc@epcas1p1.samsung.com>
- <20241208220551.204743-6-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-3003e203acaso13918601fa.1
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 14:10:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733695811; x=1734300611; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UIa7ETMnohITq7Jrx5RjX71qlJsIrY/tZh1gFOMDv/0=;
+ b=YR+eBVI9XcM3tkVgbnpA2aLKR0IV2G/hzTUvYLZPg2KiWx7jOOxqBkPlPfN0MmFxjn
+ QFQB1siZnK1g1ANHZeFapsO+aVp+xmLJxUOI8jBk4w6gXNTaDQrI5QxMSn8lkMxP0R07
+ Lu6Z1p4Fn2FNQb/Q+sMhPa8Kc4WrtBjlt833jEmN/7NoA3pdKZPJKgF5vx316spMkOPK
+ CrV8vrSljwBpLK7mnId2GWS8w4mo/R48hec6p3j5A5wnTQeBhfaY4N4Z81fqIsRl5k9c
+ bPvselWY6oriD24FjsY+F6EG4qjWykwTPuzO63auLtC/tFpUNkS+iSC/x/c20kbS0sxa
+ ypLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733695811; x=1734300611;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UIa7ETMnohITq7Jrx5RjX71qlJsIrY/tZh1gFOMDv/0=;
+ b=tufBMEaJETaFx2InCrswf1J+cphvgenwR1b2pZK6Flpvj8IJLzQ3TMBy2DgIs26KoD
+ AhD4P2a/rPsAdEwa2KAdlwTrNqgE2zCcBSUsrgimlAOzRBiFn8LSSus40dhbwFiZSiFH
+ WqHnW1hk/aYuoIobf8wLPN7i+35WkLQqLFyCUupWguN3mzabTPs067twJNFgp9w60xEb
+ ozZyp4PVmd2xgV1Y5EuHTYrb/gSyzTOqMh5kUrksLqHCoq1bw2VxD2T67CsHBMIpETT2
+ 5AEHAxZLn9BRXeVV/nWOlzsAoBb21Kve9YkLMqmd0TYdoDafi4a/q1nGQzHPDVqryF33
+ I+PQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkurzj7tkQKeJPL2C3c+kkrOBq8AiPCK9L40ZJnZ9abewiDtfg2X5nM/ZxEp9KPfGgkm0DzmY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3SgJ95aOJglPz+YBad2URUlMigTYb8gj2kn+ygwdTttlEZRlV
+ ZORhdA39LG/yMY8A9tSPJOk7dQE60g7OpsApmF5tQ88OuesGSNCmkY9xIWrUY8X1keK8Fx1TAf/
+ SpP2MKOx7di1b0KlnJ0HHH5d6zQU=
+X-Gm-Gg: ASbGncuwxFRs+I1/aB/MFl0kvYgR7AvihEDx9GdxnHE9KJBFDTpAnInIHj3mGkBAWPI
+ nd+Et4DJrSZo36ujWIEcSB8fvsodvdXfViNwX57B9i7TmI5Nqvf+LaEjZH5pjALTt6g==
+X-Google-Smtp-Source: AGHT+IFjwLALmDb1SUUjyaKN5ohlIvvk58T933YofwuvYe+fG4bWemgTq48NWvP+6BUXQ21kH5sJjnGtQPok2ffmbmc=
+X-Received: by 2002:a2e:9fc8:0:b0:302:1d7a:e09 with SMTP id
+ 38308e7fff4ca-3021d7a114bmr9232271fa.31.1733695811027; Sun, 08 Dec 2024
+ 14:10:11 -0800 (PST)
+MIME-Version: 1.0
+References: <20241208091942.47298-1-hal.feng@starfivetech.com>
+In-Reply-To: <20241208091942.47298-1-hal.feng@starfivetech.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 8 Dec 2024 14:09:59 -0800
+Message-ID: <CANV2PTPEmR11GmsSbS=o7MJtvkgYo+99FLzYeo2dFXoOxbXwnA@mail.gmail.com>
+Subject: Re: [PATCH v8 00/12] Support OF_UPSTREAM for StarFive JH7110
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ H Bell <dmoo_dv@protonmail.com>, Conor Dooley <conor.dooley@microchip.com>, 
+ Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 09 Dec 2024 02:00:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -130,83 +99,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Hal, I think this series is now ready for merge to -next
 
+On Sun, Dec 8, 2024 at 1:21=E2=80=AFAM Hal Feng <hal.feng@starfivetech.com>=
+ wrote:
+>
+> This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
+> All the JH7110 based boards can use the DT from upstreaming linux kernel.
+> The v1.3b board device tree is set as the default device tree. Support
+> CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
+> EEPROM information.
+>
+> Note:
+> 1. Mars CM (lite) are missing upstream dts and so are detected but not
+> supported in this series. Users of Mars CM and Mars CM Lite may stay with
+> U-Boot v2024.10 until this is resolved.
+>
+> 2. Property values of node phy0/1, gmac0/1, stmmac_axi_setup for all
+> JH7110 based boards now follow the upstream dts.
+>
+> 3. Set "cdns,read-delay =3D <2>" for qspi flash@0 and this setting will b=
+e
+> synced to Linux later.
+>
+> Changes since v7:
+> - In patch 2, drop "spi-max-frequency" property of qspi, set
 
-> -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Marek Vasut
-> Sent: Monday, December 9, 2024 7:04 AM
-> To: u-boot@lists.denx.de
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>; Tom Rini <trini@konsulko.com>
-> Subject: [PATCH 06/13] mmc: renesas: Fix R-Car spelling
->
-> The correct spelling is R-Car, including the dash, update the usage.
-> Kconfig strings and comment changes only, no functional change.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Patch 2 adds (not drops) "spi-max-frequency" to 100MHz in co-operation with=
+...
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+>   "cdns,read-delay =3D <2>" for flash@0.
 
-Best Regards,
-Jaehoon Chung
+... this change of read-delay =3D 2 cycles. The commit messages are not
+affected and the code is correct. For anyone in future reading this
+cover letter, the intention is to drop both of these properties from
+the u-boot specific dtsi after resolving upstream in Linux devicetree.
 
-> ---
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/mmc/renesas-sdhi.c |  2 +-
->  drivers/mmc/tmio-common.h  | 10 +++++-----
->  2 files changed, 6 insertions(+), 6 deletions(-)
+>   Drop &stmmac_axi_setup &gmac0 &gmac1 property overrides.
+>   Drop the redundant &S7_0 { status =3D "okay"; }.
 >
-> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-> index 92afa6adcda..556f07eaf8f 100644
-> --- a/drivers/mmc/renesas-sdhi.c
-> +++ b/drivers/mmc/renesas-sdhi.c
-> @@ -571,7 +571,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
->  	int i, ret = 0, sret;
->  	u32 caps, reg;
+> Changes since v6:
+> - Drop the "snps,dw-mshc" override of compatible in patch 2, then add
+>   "starfive,jh7110-mmc" compatible in mmc driver to match upstream DT.
+> - Delete newline at end of Mars DT file in patch 5.
+> - Sort OF_LIST in patch 7.
+> - Sort items of images and configurations in patch 8.
 >
-> -	/* Only supported on Renesas RCar */
-> +	/* Only supported on Renesas R-Car */
->  	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
->  		return -EINVAL;
+> Changes since v5:
+> - In patch 2, drop the override of rx-internal-delay-ps on phy0 and phy1.
+> - In patch 5, drop "/delete-property/ motorcomm,tx-clk-10-inverted;" for
+>   Mars network phy0.
+> - In patch 8, rename fdt and conf based on the compatible identifier of
+>   boards.
 >
-> diff --git a/drivers/mmc/tmio-common.h b/drivers/mmc/tmio-common.h
-> index f489fb70766..657aba75148 100644
-> --- a/drivers/mmc/tmio-common.h
-> +++ b/drivers/mmc/tmio-common.h
-> @@ -64,7 +64,7 @@
->  #define   TMIO_SD_CLKCTL_DIV4		BIT(0)	/* SDCLK = CLK / 4 */
->  #define   TMIO_SD_CLKCTL_DIV2		0	/* SDCLK = CLK / 2 */
->  #define   TMIO_SD_CLKCTL_DIV1		BIT(10)	/* SDCLK = CLK */
-> -#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (RCar ver.) */
-> +#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (R-Car ver.) */
->  #define   TMIO_SD_CLKCTL_OFFEN		BIT(9)	/* stop SDCLK when unused */
->  #define   TMIO_SD_CLKCTL_SCLKEN	BIT(8)	/* SDCLK output enable */
->  #define TMIO_SD_SIZE			0x04c	/* block size */
-> @@ -90,7 +90,7 @@
->  #define   TMIO_SD_VOLT_180		(2 << 0)/* 1.8V signal */
->  #define TMIO_SD_DMA_MODE		0x410
->  #define   TMIO_SD_DMA_MODE_DIR_RD	BIT(16)	/* 1: from device, 0: to dev */
-> -#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* RCar, 64bit */
-> +#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* R-Car, 64bit */
->  #define   TMIO_SD_DMA_MODE_ADDR_INC	BIT(0)	/* 1: address inc, 0: fixed */
->  #define TMIO_SD_DMA_CTL		0x414
->  #define   TMIO_SD_DMA_CTL_START	BIT(0)	/* start DMA (auto cleared) */
-> @@ -128,9 +128,9 @@ struct tmio_sd_priv {
->  #define TMIO_SD_CAP_DIV1024		BIT(2)	/* divisor 1024 is available */
->  #define TMIO_SD_CAP_64BIT		BIT(3)	/* Controller is 64bit */
->  #define TMIO_SD_CAP_16BIT		BIT(4)	/* Controller is 16bit */
-> -#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas RCar version of IP */
-> -#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas RCar version of IP */
-> -#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas RCar UHS/SDR modes */
-> +#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas R-Car version of IP */
-> +#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas R-Car version of IP */
-> +#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas R-Car UHS/SDR modes */
->  #define TMIO_SD_CAP_RCAR		\
->  	(TMIO_SD_CAP_RCAR_GEN2 | TMIO_SD_CAP_RCAR_GEN3)
->  	struct udevice *vqmmc_dev;
+> Changes since v4:
+> - Merge patch 2, 3, 5 into patch 1, ensuring git bisect works.
+> - Add a new patch to sort the list of JH7110 imply statements.
+> - Drop the reparent of clock JH7110_AONCLK_APB_FUNC in patch 4, which is
+>   unnecessary and will cause errors in gmac0 initialization.
+>
+> Changes since v3:
+> - Add detection for Milk-V Mars CM (lite) boards in patch 13.
+>
+> Changes since v2:
+> - Drop patch 1, because the riscv of_upstream Makefile is created by Cono=
+r
+>   in commit 239e4705099c.
+> - Drop phy0 rx delay for milkv u-boot dtsi in patch 9.
+> - Add a Fixes tag for patch 13.
+> - In patch 14, the PCB version is only obtained when the product_id is
+>   VF7110. Improve the commit messages.
+>
+> Changes since v1:
+> - Drop patch 12.
+> - Modify patch 11 and add three new patches to support
+>   CONFIG_MULTI_DTB_FIT. The SPL selects the correct U-Boot dtb using the
+>   EEPROM information.
+>
+> History:
+> v7: https://lore.kernel.org/all/20241203030430.26089-1-hal.feng@starfivet=
+ech.com/
+> v6: https://lore.kernel.org/all/20241125003205.75327-1-hal.feng@starfivet=
+ech.com/
+> v5: https://lore.kernel.org/all/20241119020425.51989-1-hal.feng@starfivet=
+ech.com/
+> v4: https://lore.kernel.org/all/20241111020808.38974-1-hal.feng@starfivet=
+ech.com/
+> v3: https://lore.kernel.org/all/20241105034328.56439-1-hal.feng@starfivet=
+ech.com/
+> v2: https://lore.kernel.org/all/20241028015847.42344-1-hal.feng@starfivet=
+ech.com/
+> v1: https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfive=
+tech.com/
+>
+> Hal Feng (12):
+>   dts: starfive: Switch to using upstream DT
+>   riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
+>   mmc: dw_mmc: Add "starfive,jh7110-mmc" compatible to match upstream DT
+>   pcie: starfive: Make the driver compatible with upstream DT
+>   riscv: dts: jh7110: Move common code to the new
+>     jh7110-common-u-boot.dtsi
+>   riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
+>   board: starfive: spl: Drop the unneeded DT modification code
+>   configs: visionfive2: Enable MULTI_DTB_FIT for JH7110 based board DT
+>   riscv: dts: jh7110: Support multiple DTBs in a Fit image
+>   board: starfive: spl: Fix the wrong use of CONFIG_IS_ENABLED()
+>   board: starfive: spl: Support multiple DTBs for JH7110 based boards
+>   riscv: cpu: jh7110: Sort the list of imply statements
+>
+>  arch/riscv/cpu/jh7110/Kconfig                 |  19 +-
+>  arch/riscv/dts/Makefile                       |   1 -
+>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 195 +++++
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |   6 +
+>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
+>  .../jh7110-starfive-visionfive-2-u-boot.dtsi  | 117 ---
+>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
+>  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |   6 +
+>  .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
+>  .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
+>  arch/riscv/dts/jh7110-u-boot.dtsi             |  27 +-
+>  arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
+>  board/starfive/visionfive2/spl.c              | 391 +--------
+>  configs/starfive_visionfive2_defconfig        |   4 +-
+>  drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
+>  drivers/clk/starfive/clk-jh7110.c             |  44 +-
+>  drivers/mmc/snps_dw_mmc.c                     |   1 +
+>  drivers/pci/pcie_starfive_jh7110.c            |  59 +-
+>  .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
+>  .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
+>  20 files changed, 342 insertions(+), 2139 deletions(-)
+>  create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dt=
+si
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
+oot.dtsi
+>  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-b=
+oot.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
+>  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+>  delete mode 100644 arch/riscv/dts/jh7110.dtsi
+>  delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
+>  delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
+>
+>
+> base-commit: 45f05f681224d88d1b170063001b59edc8fc24cf
 > --
-> 2.45.2
+> 2.43.2
+>
 
+If no further code or commit message corrections are requested, then
+let's merge this series to -next
 
-
+-E Shattow
