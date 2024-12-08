@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21661E7717D
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 00:21:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD0B8E7717D
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 00:22:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAD3089486;
-	Sun,  8 Dec 2024 01:21:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36CCB894B8;
+	Sun,  8 Dec 2024 01:21:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oafd8Xnt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R59f8x1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75A84893D4; Sun,  8 Dec 2024 01:21:30 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 9773E8947A; Sun,  8 Dec 2024 01:21:31 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45D55893D2
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 01:21:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C2A4893D1
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 01:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3ea32c929a3so1003188b6e.1
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 16:21:28 -0800 (PST)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-71de02b24cfso268328a34.1
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 16:21:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733617287; x=1734222087; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733617288; x=1734222088; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YIqLi+LU0gMp1928vzjIFNBq6//rtBT59aOVqHfPg8M=;
- b=oafd8XntKIi6xkL7dJBB43DFyQBlbOn5mR7V+2WrLM1v7swT0mWwmQ0vzsBgJzdHBR
- 3yQJdgU5uat6TmeKtCEchVrhRcNMORemlLSBpesO4WVfZagW/VtKpmNsZRY2+W4sCsc7
- xYcR08YZMw0CoTaObwA4DUwvM0Gd6F/aSxWzjR5ROh6Bu4pXPjQk44izgYH93rvElpeQ
- a/A4DLAIpCE1cA2Zrv4cctMQu0kcuUuJCl07ZjjMJXo2UmfQLMn8+3MlSCkNPWnQ7KP7
- Id8d87SuwrTpeYMDHiiH/1wJt4UufgOwxKROqWuG+Scz6KREIsqE6aqJfAirXp1n4v11
- BkoQ==
+ bh=PNCKdtlKp7cJx6A6+2qRAeYNVZFHRjlYGRD8OJC8KOQ=;
+ b=R59f8x1UANRQCCCTYxFLALdf9q+pKFNCcBwMUl1JB4x2r0iDW67pw93XdfVm9P611E
+ eQlaZOc7+fzltsbHmKdk+Pti0wNgt0DgFROUs3U7MDWQUllib3MB/j+4imObfQpH5USj
+ TxqYp/1zj0qJbNESBYawowrT7+7yXw25eVDpO1eFqxTAKNYJ6+DbnOBrl4ZPssxwDTxz
+ /wJo/t51thcINWBVhFklEzggTfm0NHCWe+2td+6kpjq2nUuD1jzw/8ypP0QmJJAgS+rz
+ CeeFFRmFEFtuVqsjV37XvTFKzWl5am47FWKFRxALkh+ZsvjNaqrSoeYult9I3mOrldRZ
+ icjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733617287; x=1734222087;
+ d=1e100.net; s=20230601; t=1733617288; x=1734222088;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YIqLi+LU0gMp1928vzjIFNBq6//rtBT59aOVqHfPg8M=;
- b=NBOg2qYVPbtiTLg45+rqt0dignexnt7zZb43nT3xRZSue9S3OrTM5mZ3knWN2EhYYs
- CX5NS658jrp3hRcUOLotosAV2BvWz2muE5ulo/B27ufomxLHaIoDlLj05OutVobXfqEj
- tCdnXQShE3GctKeniYbbEU8DMgL06WkYZXySdDDxdvleTu6hJjIGf5KH8lVVFqP57FcL
- Pq+rX8/JZ0PYdkp//0xbpv9++thn7D74/pRNgNRrYELaHpmPdHVKM9SmpowleN8hVugo
- zxVJ29UgduvtfKbNST50U3Jd7DdzEKdo4WL7J3ZF5m7Miwu9wt9wzh19c83NpldiAzW0
- oa5g==
+ bh=PNCKdtlKp7cJx6A6+2qRAeYNVZFHRjlYGRD8OJC8KOQ=;
+ b=Z3gtVxrtGhWeDuS2AFcSIhN717P+/7wr3uMm4Tp70sWZ36deANDwCI6uTl6uFqqMay
+ itKbAC2T+FRCjqjUXtAoDT3hKox8gQ9KNANiMHWkLBxAs+Vwl8KGW3H7oIED0/iatYYT
+ ufFksLduG3SakBjLgxLZTrQtIlUl8cvgn+2GZzIsQias/5LTsh6l1NkYI51MewxBM3bO
+ GcuhFqZuQUJdZAPtHC2kRvs2oqL2vDdumCHg8rA6ppqAaJLEcjYqn+w/L2M8WLKFxRd4
+ e5IHXQEd4gjJvM99ay2pde7lG8jG4YJe1RIsEOfqDdzhpXxt6MMpU2Eun6OFto+J01OO
+ GuEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWFrmbXKX0f5glsFuvHlDShdOF6XPuJ/Jd1QhecOOiPd19BH17C+h/F52K1DlpR5U0rYEbC0nE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZWJJuprYT2IDDlCIcY7y+0j9UQaziRzGg9KHzILp/tgKNY+Cv
- Z7jpGAFsK31r66oI9UMl0PDeLrvbXQNeEzBzbVkzPbCFbbnPg2OP3jW7VksP/LA=
-X-Gm-Gg: ASbGncvrnkzYpcj5+7Uwh/nAKBBV6tVOGirHJJrfDfhiAvw0OuHGH7qyvf9z8jAAMfS
- TjcXSX+IrCGQJp86dcenfAN95NbVhHym6Z7irHMitYMIp1YQsWp2P0uMGUkNqc++akhaQruPyz0
- u3PeRj5urrpPPgnn75isfnYIURsfan5YTUnbRBueHLD/4rE+/ro6x84pPhHAfrOkGseVYtZNNao
- 3xRBbofzOzBm5PvCv/ZvVjxBcDdw/E02y9yq/ZV3gKxsdB5j3x4BiM=
-X-Google-Smtp-Source: AGHT+IHY4bu2JMJecjphggw1DozS1wRcLGipB+nst2PzovZJ7NSAv+TYmGWXbE0dD9pyp4qi245+cA==
-X-Received: by 2002:a05:6808:1688:b0:3e7:61f6:811a with SMTP id
- 5614622812f47-3eb19ed2188mr5187222b6e.35.1733617287017; 
- Sat, 07 Dec 2024 16:21:27 -0800 (PST)
+ AJvYcCVaMIo6krC08ZPqrcsGiZV9eZDc1+5rEdsmRvWPZ0q9CUFhiTGcAx3VDxed2CVFtFiPeXo7D7A=@lists.denx.de
+X-Gm-Message-State: AOJu0YygqbbjqpTdijy9fr9AJWRl7OIjV3fo1n+ZZO7E+Ud3OGNJ6DMq
+ Mnq2Np6morftNF6/Pm1HtEEeH862vhvfKqK3FnlRjQp5uDpMF/GNXnHLYW5ObVU=
+X-Gm-Gg: ASbGncvLtnVURd2K8jlo93ZLmyG3c6fJKfBXgzluazVE0ZgWwX2Nm5DpuwXu2X+dY8h
+ CbqaozihfFxSN7QKyZOnLHLchhBaJHVHzBEuW2aV8xikVt0rzYcz27xgYaIYRVGaZQT+QxxtkZA
+ uigQaLIlyiHBhlOUcZPN/x87YavK2OSbvi2DjlZ9BibyPY880oNZ1U5Vh/CslXv5jBEsKNQDs8w
+ kZSPQPdiVGW8hZPloqkTHzt/mcpsefhCQ+mTkcfEssPFbBV38oCxbo=
+X-Google-Smtp-Source: AGHT+IFhNW1F32rATb6Zm4kFasahXc72JNAL1AwFitioNR3dR91NZX3RetR6gFZQXWy37fDzCYxALw==
+X-Received: by 2002:a05:6870:d86:b0:29e:290f:7af4 with SMTP id
+ 586e51a60fabf-29f73860dcemr3991998fac.34.1733617288252; 
+ Sat, 07 Dec 2024 16:21:28 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3eb40c6009esm300705b6e.28.2024.12.07.16.21.26
+ 586e51a60fabf-29f7e411dafsm1161519fac.36.2024.12.07.16.21.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 16:21:26 -0800 (PST)
+ Sat, 07 Dec 2024 16:21:27 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -77,10 +77,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: [PATCH 3/6] lmb: Make const flag_str[] in lmb_print_region_flags()
- more const
-Date: Sat,  7 Dec 2024 18:21:18 -0600
-Message-Id: <20241208002121.31887-4-semen.protsenko@linaro.org>
+Subject: [PATCH 4/6] lmb: Improve coding style
+Date: Sat,  7 Dec 2024 18:21:19 -0600
+Message-Id: <20241208002121.31887-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241208002121.31887-1-semen.protsenko@linaro.org>
 References: <20241208002121.31887-1-semen.protsenko@linaro.org>
@@ -102,30 +101,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-flag_str[] is a pointer to const. Make it also a const pointer. Improve
-a style a bit while a it, to make this line fit 80 characters limit.
-
-No functional change.
+Fix checkpatch warnings. No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- lib/lmb.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ lib/lmb.c | 29 +++++++++++++++++------------
+ 1 file changed, 17 insertions(+), 12 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index ce0dc49345fb..1642ce48bbbd 100644
+index 1642ce48bbbd..8c1c9b0f67c8 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -482,7 +482,8 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 
- static void lmb_print_region_flags(enum lmb_flags flags)
+@@ -57,7 +57,6 @@ static long lmb_regions_overlap(struct alist *lmb_rgn_lst, unsigned long r1,
+ 				unsigned long r2)
  {
--	const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
-+	const char * const flag_str[] = { "none", "no-map", "no-overwrite",
-+					  "no-notify" };
- 	unsigned int pflags = flags &
- 			      (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
+ 	struct lmb_region *rgn = lmb_rgn_lst->data;
+-
+ 	phys_addr_t base1 = rgn[r1].base;
+ 	phys_size_t size1 = rgn[r1].size;
+ 	phys_addr_t base2 = rgn[r2].base;
+@@ -70,11 +69,11 @@ static long lmb_regions_adjacent(struct alist *lmb_rgn_lst, unsigned long r1,
+ 				 unsigned long r2)
+ {
+ 	struct lmb_region *rgn = lmb_rgn_lst->data;
+-
+ 	phys_addr_t base1 = rgn[r1].base;
+ 	phys_size_t size1 = rgn[r1].size;
+ 	phys_addr_t base2 = rgn[r2].base;
+ 	phys_size_t size2 = rgn[r2].size;
++
+ 	return lmb_addrs_adjacent(base1, size1, base2, size2);
+ }
  
+@@ -235,9 +234,9 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 
+ 				coalesced++;
+ 				break;
+-			} else {
+-				return -1;
+ 			}
++
++			return -1;
+ 		}
+ 	}
+ 
+@@ -288,14 +287,17 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 	phys_addr_t end = base + size - 1;
+ 	int i;
+ 
+-	rgnbegin = rgnend = 0; /* supress gcc warnings */
++	/* Suppress GCC warnings */
++	rgnbegin = 0;
++	rgnend = 0;
++
+ 	rgn = lmb_rgn_lst->data;
+ 	/* Find the region where (base, size) belongs to */
+ 	for (i = 0; i < lmb_rgn_lst->count; i++) {
+ 		rgnbegin = rgn[i].base;
+ 		rgnend = rgnbegin + rgn[i].size - 1;
+ 
+-		if ((rgnbegin <= base) && (end <= rgnend))
++		if (rgnbegin <= base && end <= rgnend)
+ 			break;
+ 	}
+ 
+@@ -304,7 +306,7 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 		return -1;
+ 
+ 	/* Check to see if we are removing entire region */
+-	if ((rgnbegin == base) && (rgnend == end)) {
++	if (rgnbegin == base && rgnend == end) {
+ 		lmb_remove_region(lmb_rgn_lst, i);
+ 		return 0;
+ 	}
+@@ -340,6 +342,7 @@ static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 	for (i = 0; i < lmb_rgn_lst->count; i++) {
+ 		phys_addr_t rgnbase = rgn[i].base;
+ 		phys_size_t rgnsize = rgn[i].size;
++
+ 		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
+ 			break;
+ 	}
+@@ -715,7 +718,7 @@ long lmb_reserve(phys_addr_t base, phys_size_t size)
+ }
+ 
+ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+-				    phys_addr_t max_addr, enum lmb_flags flags)
++				   phys_addr_t max_addr, enum lmb_flags flags)
+ {
+ 	int ret;
+ 	long i, rgn;
+@@ -730,16 +733,18 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
+ 
+ 		if (lmbsize < size)
+ 			continue;
+-		if (max_addr == LMB_ALLOC_ANYWHERE)
++
++		if (max_addr == LMB_ALLOC_ANYWHERE) {
+ 			base = lmb_align_down(lmbbase + lmbsize - size, align);
+-		else if (lmbbase < max_addr) {
++		} else if (lmbbase < max_addr) {
+ 			base = lmbbase + lmbsize;
+ 			if (base < lmbbase)
+ 				base = -1;
+ 			base = min(base, max_addr);
+ 			base = lmb_align_down(base - size, align);
+-		} else
++		} else {
+ 			continue;
++		}
+ 
+ 		while (base && lmbbase <= base) {
+ 			rgn = lmb_overlaps_region(&lmb.used_mem, base, size);
+@@ -813,7 +818,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+ }
+ 
+ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+-				    enum lmb_flags flags)
++				   enum lmb_flags flags)
+ {
+ 	long rgn;
+ 	struct lmb_region *lmb_memory = lmb.free_mem.data;
 -- 
 2.39.5
 
