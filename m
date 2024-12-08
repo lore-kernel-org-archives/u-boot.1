@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 171C0E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 06:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C240E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 06:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 735A988DF4;
-	Sun,  8 Dec 2024 07:51:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E0F9C88DFE;
+	Sun,  8 Dec 2024 07:51:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EIq4skHh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZHY5Dlwz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77FC188D7E; Sun,  8 Dec 2024 07:51:02 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 9D7FB88DF4; Sun,  8 Dec 2024 07:51:38 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50B0188DF4
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 07:51:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9BA388DFE
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 07:51:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6ef7f8d4f30so25652417b3.1
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 22:51:00 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6ef7640e484so36588127b3.3
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 22:51:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733640659; x=1734245459; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733640694; x=1734245494; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Wn0luRwaa7kumINkhnK/iLB7gduDw4AT5vAZfnjO9/s=;
- b=EIq4skHhtuWkyJjRO16IV4fPXGxZRgg39H4dyeNMXJlpcoVI6aI6/Tkt7E1uK2P3Bf
- G4fUlv0T+E22M5j/beurNso5OFsGQbpeB1Hgs441CF6haDd7sDG4E3s3IrYwuL8Q0KrA
- 7wRAyTfS6bjb/45nvRO5mFqEysisIbEvhk92sEnEi48Ns5f/U2CFM13ZXhR2eBy9/R06
- OrpNTc6IjNeTlAo48KPEIlz4ukEmTwurmR0sPR+4ccVXEdaENZEa/GqS1inQ/m/3Y/XU
- fepRhFyg5UI6yxpNxr06fRSxlONLoPuOl32adxgncpiAA6AXKM1cqvHosayjMrKub4uD
- kbmQ==
+ bh=eyFqjAR9lEFUAFDoGKTkCEysfdv5dVAuFqiMbMRoK6c=;
+ b=ZHY5Dlwz8QnpO8iWbV4z90pghJC+kLH1BumQWc/DU+ebuUMEXYaSSbWM1i9y+RDf0f
+ gnyK8QUWwcUwc5AxLbmLDalal0B+d4nbPQu1/bghvt9rEmAGmfTSV/yLseCius72tSK2
+ Wkkp1DyZ73mbSVj0wpCMfQsk5iRKjGx/TUTnEXoZLhUZtgzHCHXrrbg9Y+lJk287Zqpb
+ Ucoy+5cKj8XNsnYlWdXxsLjlqrPwwtES0AJu289b8hGWsnW37inRogMl/WRb5rkrptng
+ 8rruTNWLI5pGCPJu8eCnp5Pml3ArjNzhlf/N75nS2Su1LPAlx5sAI4gWitoKf+Lyv4Es
+ UfOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733640659; x=1734245459;
+ d=1e100.net; s=20230601; t=1733640694; x=1734245494;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Wn0luRwaa7kumINkhnK/iLB7gduDw4AT5vAZfnjO9/s=;
- b=Nq0YZF4Kpth/7NxK8Zfe3xkMsRFRIx+Wb2V2UvnkavJuLx/nzqIICTRjKetwVD3eNi
- AhPOnzw+plRUIgxyov9AezY1jqPOdk/L4Ry7ZrZX+t3N3JsZ5pQkYnlIIXGkFRh8ENJo
- 7eXsSwA52nENgq7WSNqDfq6T374+GOIGONUdZafjuC9Z6uZ3rEId/aiOutznbV8eiMHJ
- iETEnepgyUM2pWAQZq/zVi6i2RN33RR3uZi5TrMZ4RNN7PFI/3F+s/YvE5hspbSIub7M
- 028rL7Yoxcp17+mW5suliEBH6QobTAppzBkA0QjsYZJFzw8btvqoBHioE0KS+8NmbxDA
- 9VDg==
+ bh=eyFqjAR9lEFUAFDoGKTkCEysfdv5dVAuFqiMbMRoK6c=;
+ b=hbrpB/Y3dKocxUIOwxkpyHzdAU2IeMl20uhh3lgmE6Lm3ZCaDNdeJVThLIKL0eo2so
+ +7pZhdGl1Fv2SW7jGHjSvpOQSjzXWbrBv9SS/KPXeJjVtomNZeKNMihXPHbzgf1AltJW
+ Nh++BAin5GsY+fdYRP1CchFs/vFE070uHcNEn5uOiILyU85aakXuzex95hMbo/pVsXTd
+ ypOx/6QTkSDK1DrWPIMgCnbnsRlNehuWv9BNYkwre5cEBwSJMW55DS8Nfst3irVvNYPX
+ DhSQH9+wZ2Av302fFIFvhTUfeiTdcr2S1LP9XjYSOTErNAXWnQuqqmaTI49VRuXnbs9Y
+ 96/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVFtLUBS3gcaRxDHnEx0t/kHzbWBVahUAgt5Hz1I9O9EhOIpfbWnxPWE05nuL1sUV19tZITjbA=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywp+HpMER2dH+ZZgtDe4UTfqVTS5KFSj2sky8K+XyKO6RKoeRaP
- OdT2TeCbMC8fodqAtBG2Pz84/xKDqqpGJMVw8+L7KO57pMfQDcMnUfHmXJ9g3aBtupfnHsfaVdu
- Oh2cBQk14gspxBCCjw1lJ/rAsI+nHKTl1zbag9w==
-X-Gm-Gg: ASbGnctLVOFvOAvHbEtzPPyqqLqIJgPqPgjUIpvDdhzaCuAZxj3I0XkHH8lp9PSj1s9
- aepTskF6iQk7yaUFj+mrPgEmRh597uD0=
-X-Google-Smtp-Source: AGHT+IGPwLuQpe/xBnAD5bztsNlnJPM8zDX3yaLRcNXDIjLEvma/Mp96u7cKxnvrfq1uwVUrOoGp0MKkBv6bPoV/LPg=
-X-Received: by 2002:a05:690c:4588:b0:6ef:69b2:eac with SMTP id
- 00721157ae682-6efe3bf54c1mr71115837b3.4.1733640659151; Sat, 07 Dec 2024
- 22:50:59 -0800 (PST)
+ AJvYcCUZGrYtK3Ub9zApY7ndbQuTkuCVXcQ/Jfw1K+AGrDHq9qI+v8SlgLW5QqbckUm+IjabcbqOrb4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyNClLRTH1ryvucbTvoT/+yHD3GymO/opN03FAP60wee/7SRbt7
+ JfWRu/drD0AmstAmlrNPJzb1gwJVxKSLioDZi+8UGHGoR4ZXS8E7F6AbO/5919ysrS+p+wSg+yc
+ qAT7aHsqM6bHMid9pQn9WSdoQCkhtYzVlStK+VQ==
+X-Gm-Gg: ASbGnctN6vx6FhjFA+l0wB+S1TcYdlxNBqnBlUBjOylOmYOmvtllmagd1DSFr1MFOgE
+ S9XvzKQ3/6G4izW8eNtaGTIEdCSWhySU=
+X-Google-Smtp-Source: AGHT+IGnrcQAZkBjVmJB3KZyzfYcKGPiXam6iLUI+4WwhMPNSLLIRq7bo3RoETABZbeEtF4OJ+ixOhMHUz2otg49i2E=
+X-Received: by 2002:a05:690c:6a07:b0:6ef:4696:f1cc with SMTP id
+ 00721157ae682-6efe3c0da35mr81697927b3.22.1733640694657; Sat, 07 Dec 2024
+ 22:51:34 -0800 (PST)
 MIME-Version: 1.0
 References: <20241208002121.31887-1-semen.protsenko@linaro.org>
- <20241208002121.31887-2-semen.protsenko@linaro.org>
-In-Reply-To: <20241208002121.31887-2-semen.protsenko@linaro.org>
+ <20241208002121.31887-4-semen.protsenko@linaro.org>
+In-Reply-To: <20241208002121.31887-4-semen.protsenko@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 8 Dec 2024 08:50:23 +0200
-Message-ID: <CAC_iWjJjm-vYnvn3_nW5Jeaae_Ep_fAi9QsjGVC4hRb2QKMCLQ@mail.gmail.com>
-Subject: Re: [PATCH 1/6] lmb: Fix flags data type in lmb_add_region_flags()
+Date: Sun, 8 Dec 2024 08:50:58 +0200
+Message-ID: <CAC_iWj+WpMSTHTwVdqZac_Ko9hx3X0RvyB12zcCktXM9SFe4+Q@mail.gmail.com>
+Subject: Re: [PATCH 3/6] lmb: Make const flag_str[] in lmb_print_region_flags()
+ more const
 To: Sam Protsenko <semen.protsenko@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
@@ -96,37 +97,32 @@ X-Virus-Status: Clean
 
 On Sun, 8 Dec 2024 at 02:21, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> rgnflags variable in lmb_add_region_flags() has incorrect type: it's
-> declared as phys_size_t when it should be enum lmb_flags. That
-> copy-paste mistake was firstly introduced in commit 59c0ea5df33f ("lmb:
-> Add support of flags for no-map properties"), and then copied further
-> into commit ed17a33fed29 ("lmb: make LMB memory map persistent and
-> global"). Fix it by using the correct type to match struct lmb_region
-> field.
+> flag_str[] is a pointer to const. Make it also a const pointer. Improve
+> a style a bit while a it, to make this line fit 80 characters limit.
 >
 > No functional change.
 >
-> Fixes: ed17a33fed29 ("lmb: make LMB memory map persistent and global")
-> Fixes: 59c0ea5df33f ("lmb: Add support of flags for no-map properties")
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->  lib/lmb.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  lib/lmb.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
 > diff --git a/lib/lmb.c b/lib/lmb.c
-> index b03237bc06cb..713f072f75ee 100644
+> index ce0dc49345fb..1642ce48bbbd 100644
 > --- a/lib/lmb.c
 > +++ b/lib/lmb.c
-> @@ -200,7 +200,7 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
->         for (i = 0; i < lmb_rgn_lst->count; i++) {
->                 phys_addr_t rgnbase = rgn[i].base;
->                 phys_size_t rgnsize = rgn[i].size;
-> -               phys_size_t rgnflags = rgn[i].flags;
-> +               enum lmb_flags rgnflags = rgn[i].flags;
+> @@ -482,7 +482,8 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
 >
->                 ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
->                 if (ret > 0) {
+>  static void lmb_print_region_flags(enum lmb_flags flags)
+>  {
+> -       const char *flag_str[] = { "none", "no-map", "no-overwrite", "no-notify" };
+> +       const char * const flag_str[] = { "none", "no-map", "no-overwrite",
+> +                                         "no-notify" };
+>         unsigned int pflags = flags &
+>                               (LMB_NOMAP | LMB_NOOVERWRITE | LMB_NONOTIFY);
+>
 > --
 > 2.39.5
 >
+
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
