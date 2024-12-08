@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C2B0E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72307E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:29:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02B7F895C8;
-	Sun,  8 Dec 2024 16:29:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 72C2A89348;
+	Sun,  8 Dec 2024 16:29:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dz3gPM53";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UELZ6NMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FE64895C8; Sun,  8 Dec 2024 16:29:20 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 54D0989305; Sun,  8 Dec 2024 16:29:25 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A45489305
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 053FF895E0
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa67ac42819so70522266b.0
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:18 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa642e45241so396041266b.1
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733671758; x=1734276558; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733671760; x=1734276560; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g54HaKHlwdKyuMhkj2vPU39NmSp+zxvhgsF/GRpyVjY=;
- b=Dz3gPM53ThGhfMhXQ7feWMXOnTEawLzWZO51YR7OBImTNvzr0EETO1JOv9fcqISY31
- BRae+Wb68MPDkxK/WJ/RO9ghhPDOlCwt76MP0B3Puf3ap+vZuKGEYLyscudC/InC1c0m
- 2SlfCxFmEvCtVJfyK5D/XvXuYKuLVjK8juJFI=
+ bh=3bGfpczyFvrAjrz0iJqwo04sfrtkxE3XaovgqBxulS8=;
+ b=UELZ6NMYpc7pqX2+qacwhiMIMpGxMkGauRxCn1feeRS1+kzwpeqI/z71GsmZ4AHt6d
+ GtPiBWrNSpGoFSr3RjGrp4WN+wpChmI9Me7dlewrmiJzX2FQegtUlFFaIzGBAj1ghdZU
+ tvAgDtb3n2YfeUVGeBxfN3toYbjveBQQlEJeU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733671758; x=1734276558;
+ d=1e100.net; s=20230601; t=1733671760; x=1734276560;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g54HaKHlwdKyuMhkj2vPU39NmSp+zxvhgsF/GRpyVjY=;
- b=YlMEFBiI6rKk1/JoKust4tLWg6YJ6+Nj6RKPiitxH+A6sNEoCClUyBafdVLqz6uyns
- CeFLAYpl5UycDkWGgK5RMSvWdRhZKmSpde1Elkz14XQDyy1b9Dofwh3ph07Er6JZAeFY
- jcSksn4Bqyao8J74xKUksq3ZHyHL0FOUrym3gGKgelW42npd9rq0wMhxJqodvxGZgrFZ
- mZ2x1RZx5qqoUdAo5VHGHGKbT1+cvkZvZ6ojCjS8VcWPBKhOls+82dh5ywkAaZRyGpjz
- cysk7chbyayQ4GZ5q9ZL1SpVxFEex3gyKFzQt3BUGbSBiWR/xDVYLRiOHYPfTpK/xB3F
- KF3A==
-X-Gm-Message-State: AOJu0YwVDyMeColn/nU4SOS4SFuyF9tdgZvy7zjoFN8DZYPQkiUws93A
- vTv8yIfwVBxgKtWTvZJBDS0C7kCrsoVq/cuBe9rnULx5gG9budWeS7rq/7Qj89SZ0zvCR2MI+q7
- rWD/kDjaoHnUf14Y42rlr9EZXAC6U8La80WLQ
-X-Gm-Gg: ASbGncvIjDmkK8pIHgYCNQLSpSkKQLa2TLNjDcgf6ff3VwxjtSAVe49ov1/bML4AYZm
- Sx5cloDboP69Sr39o8Fk92FG3RqBlygxL
-X-Google-Smtp-Source: AGHT+IHlek0gV8BW/2hvwWnjTYfiR2i3Rx3SOHWqj8BrlTvGftH8f5EwhMFnv28+/PY97blaegaRmCyuW68ou/tzgDc=
-X-Received: by 2002:a17:906:314d:b0:aa5:3999:4ac9 with SMTP id
- a640c23a62f3a-aa639fb1585mr765851766b.2.1733671757791; Sun, 08 Dec 2024
- 07:29:17 -0800 (PST)
+ bh=3bGfpczyFvrAjrz0iJqwo04sfrtkxE3XaovgqBxulS8=;
+ b=UgTZT+dEkhvl+EZJ0i2c1nDexq212JYrx0ZcrqpjvHX/gqzzX/9n92zrWRrzULdrbs
+ ox4tUBS3ONzYZgM7MnXLw/Rv8YskEzSyypvYVUILtqTte48kYOf3PxzhOoBw5FfIysGR
+ 5e6cv7O5f327W+DzMD2k1T8yrpZV38A/zy7jc8ZaRwvdBPddfgmK/+Z0n6MAcD4p+R9A
+ FeicBSleS3K09ubNuHr3+kcfOIL9b4ky/TBFgRaBoKKP9TsJW6P1y7NtuNdTTZN1yhvU
+ NA9mxfj8Py7pVSJM/cXi904tl7y+XRcukiebmWlposuoR2wkotg2EanS95zr7tuPFSjV
+ wu3Q==
+X-Gm-Message-State: AOJu0YwJoibcR/69XB7c/ivPBlDRITuzoD/uwxaerUPyRXYVAX9TXgLV
+ 6kbl3HhRCcQoqmbYzpjYUtxZ3Yv1jTIL7iettovX4CMsrmUXsSNbGZP5PZGt9h+iBbOIjVo8JvI
+ 0fRpqP8XakC1Irhiy1WXxyVqF96YAoe6C5W+Qfsq+sIsQqY0=
+X-Gm-Gg: ASbGncs/f/xaN4dC7cs5KVl65hVwIjj0eZGnZTrPKI4WEd/oYMQiPPOztr1RkSMe5/z
+ S5MdrXt2u00ij106HnSfLGTFrTPcFZx4Q
+X-Google-Smtp-Source: AGHT+IFRRkQKswOjuGp0pKyjtUjelKCqW28rIqCM02xZ0G3tx/TgQuw+hKNYdx1qxP9SQxVzpjK3zov13hp7mKb8/3k=
+X-Received: by 2002:a17:907:2918:b0:aa6:873b:ed8a with SMTP id
+ a640c23a62f3a-aa6873bef1dmr69498166b.47.1733671760426; Sun, 08 Dec 2024
+ 07:29:20 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 8 Dec 2024 15:29:16 +0000
+ HTTPREST; Sun, 8 Dec 2024 15:29:19 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTjbB6jmERfTFa6NKuNTHaEs_gchAv616wOWOYZFWPfmhA@mail.gmail.com>
-References: <CAFLszTjbB6jmERfTFa6NKuNTHaEs_gchAv616wOWOYZFWPfmhA@mail.gmail.com>
+In-Reply-To: <CAFLszTjYd-8LueZSaivTeZH0H2==LJLD_DbRuqzNwqR_MphSCA@mail.gmail.com>
+References: <CAFLszTjYd-8LueZSaivTeZH0H2==LJLD_DbRuqzNwqR_MphSCA@mail.gmail.com>
  <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-9-mjg59@srcf.ucam.org>
-Date: Sun, 8 Dec 2024 15:29:16 +0000
-X-Google-Sender-Auth: _Jv_k7fDrPvPNNZb0lscnEtF-hw
-Message-ID: <CAFLszTjPkJA=vMOW154xQwcbCxaz79WqLBfLRtH+QnP6YYekiw@mail.gmail.com>
-Subject: Re: [PATCH 08/10] Use the correct ramdisk address
+ <20241123195616.305687-8-mjg59@srcf.ucam.org>
+Date: Sun, 8 Dec 2024 15:29:19 +0000
+X-Google-Sender-Auth: XMlIp-7jkqAInMSHw-omGXRSVJo
+Message-ID: <CAFLszTh4KbU3+Z6xdJ3xsCzcXb-h1SSUO89qA+NnVzOx2EO1Xw@mail.gmail.com>
+Subject: Re: [PATCH 07/10] Support separate DTB files with the UEFI app
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Matthew Garrett <mgarrett@aurora.tech>, 
- Bin Meng <bmeng.cn@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
  Matthew Garrett <mjg59@srcf.ucam.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -95,18 +101,24 @@ On Sat, 23 Nov 2024 at 12:57, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
 >
 > From: Matthew Garrett <mgarrett@aurora.tech>
 >
-> CONFIG_SYS_BOOT_RAMDISK_HIGH copies the initrd out of the FIT and into
-> correctly aligned RAM, but the addresses used for this are then discarded
-> by the x86 bootm code. Fix that.
+> The UEFI app is an actual executable with things like section headers,
+> so just gluing the DTB onto the end of it won't work. Add an additional
+> section to contain this and allocate some space, and then during build
+> copy the DTB into that section.
 >
 > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
 > ---
 >
->  arch/x86/lib/bootm.c | 11 +++++++++--
->  1 file changed, 9 insertions(+), 2 deletions(-)
+>  Makefile                        | 7 ++++++-
+>  arch/x86/config.mk              | 2 +-
+>  arch/x86/lib/elf_x86_64_efi.lds | 4 ++++
+>  include/asm-generic/sections.h  | 1 +
+>  lib/efi/Makefile                | 2 +-
+>  lib/efi/efi_dtb.S               | 6 ++++++
+>  lib/fdtdec.c                    | 3 +++
+>  7 files changed, 22 insertions(+), 3 deletions(-)
+>  create mode 100644 lib/efi/efi_dtb.S
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-
->
 Applied to ci/master, thanks!
