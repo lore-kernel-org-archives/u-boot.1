@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36E47E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 22:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 317E8E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 23:06:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3800C8961E;
-	Sun,  8 Dec 2024 23:06:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6F05E893E6;
+	Mon,  9 Dec 2024 00:06:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m6qVdUmB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="IlsM6gw/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OMf2W+LU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DACE895DD; Sun,  8 Dec 2024 23:06:32 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D660E89500; Mon,  9 Dec 2024 00:06:46 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F23A1895DA
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:06:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD7AD88DB6
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:06:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y5zbm5QxVz9sp9;
- Sun,  8 Dec 2024 23:06:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733695588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QHjBJwyvVaTLOjkBH3u6ZNFhANFU5NXIcu0MMcPWG60=;
- b=m6qVdUmBzwk7eRmfkuVi0kdCcD0nMjZR/63eCqY/dSbQzZ6/ZrRjkGcbEHMlrA0xAy4xmn
- 60JRDL+X7hbBkjoaYRW+3BJz+Avjd3Zi5haHvA9qF7b2X6HRXpjiuvWcSBRdS0QHMnLRQD
- EE4ZHyWmbMYOnD2dsiPC+og3ZMALz6xtKi6AjZSmEeOIxus1Z0IQ2h7THCppBRla7EClFW
- W741QwhtQuBIcfrVn/1wxsc1RPyEhGYlzX68CPnojR19l4FiWBvhiTtkXjXYQdJiwzutO0
- 4GvrJ/JKtqiCW1tCMPSTSSS9qXFDePGQBRKbvFhIFk6l3JmHw52K0AVQgWH0Ww==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733695586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QHjBJwyvVaTLOjkBH3u6ZNFhANFU5NXIcu0MMcPWG60=;
- b=IlsM6gw/sCj8xWeqhQODKwI/+04PZ6TkNsK83ooUSWghQpnuLUzGY535K/heGBkzVgSOk3
- c0a+Bt6uNz9SzEPI/kGj8y/QBrHauddaUckbs6j3zfXhunPmcJ3jPVycGeEEL/c27w3wGL
- YpggrneEZyXorsSpRmVEM0AHAacPcQrA/2/CjvyEfMANgcKxenvtiqvUIXNERbgWsy+Pfs
- RJdNPXMvRhgLI58mnJ8OM7GukTq/u/sFLefRTlCwwbJ7tT0uJcdr0p65/pAD1nV+SWyu87
- szCprX4TdHmJHI8Qo87d0kDc7tH3HibIdr1lex65lPu2b9qRE5EPwe6KjNOIfg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 13/13] usb: renesas: Fix R-Car spelling
-Date: Sun,  8 Dec 2024 23:04:06 +0100
-Message-ID: <20241208220551.204743-13-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
-References: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d14336f0so3399006a12.3
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 15:06:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1733699204; x=1734304004; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6mcScgX5W+Tf7tTfq14ZkUCxgsvMhhJuG6Ig+GNDTrU=;
+ b=OMf2W+LUXWozLISpje99Zeo2cXR1+dBtMnkyBv+MqqQgE4/0mBEMC41EIufYIOrGnC
+ Bjqhb8hozBLvtYpyCDufRLdc9crb3TyHITBifJgPSk2YoF/S9Gg9iHxEbcF5MCMhZ5QI
+ HG+HjOdeRTvoyQJ6SNMabptYeqQKRB0Rv0UBQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733699204; x=1734304004;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6mcScgX5W+Tf7tTfq14ZkUCxgsvMhhJuG6Ig+GNDTrU=;
+ b=iYn0/YW3idxruYskcSsM1w9vy+1TSgW5Msvy74kCxolbf8ji4jPfnbGZXD/oeDKvqW
+ v0Nr3eUuKwhWLME33c5s+EeyZSDlm9dZOa6+pbWCIY4oT1ckGpZyg0abcozVmbt6/Xp3
+ yt/ERqp/pb4k9NTYsoXYPP6zZag1zUIQMmVOxPXwciX0PIWpvk11teV57kL3F2Y72rDx
+ 8TFwEsDemn6Tsz90uay/m0uD75jOxTQzAFVWX4xH8KbfUDvpejaIqXhKwclm/BYWNFWl
+ QXVeF/wrD/Ti7GlFxVPDxWdb1PbQdfYughgQ1gPI82bFvo0idwKIMn+Gyno5Yyuhed1w
+ LCIw==
+X-Gm-Message-State: AOJu0YzCevicCukFwG0J/EBN3vVPvrkdq4aNpPF5//gdrAR34ynGxLYI
+ vKQeA/GNfkm8Z1gU3/wQ8QLmFGkH5xPfLyOvR6fjXwVQMiBum+o/JFUT80wTg07DjJKPiD1sZ+i
+ mD2oNPri9US59qC7YcQGXjME+ScPNlm3yh3h7
+X-Gm-Gg: ASbGncvi+SCtC255U+Jelm76roS+IbgODyBj1VD+Q8uvD2/wPQqtO2JGzzt9kg50qXX
+ Y1Cz7Iplmk9j6Z+fja8JK6qSwpiMvgH9DQQ==
+X-Google-Smtp-Source: AGHT+IHtds7LJOnp7Gj7KZXfDABN91G8Gc4yZhSvR2Sxh8fIXJSSchk0PxSd/nnmUmQuIDDguvvgOimym8DLy2wSaIY=
+X-Received: by 2002:a05:6402:40c9:b0:5d3:bc1d:e56a with SMTP id
+ 4fb4d7f45d1cf-5d3be6770ddmr9988256a12.8.1733699204106; Sun, 08 Dec 2024
+ 15:06:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: b57wxemq7inj9ecoiuu64cieizkkgs57
-X-MBO-RS-ID: 87bd0f15025e86d565b
+References: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 8 Dec 2024 16:06:31 -0700
+Message-ID: <CAFLszTgEnz51jScGJ5H783bxtKcdd3yP3tEGt4LkRDvMpMEhTw@mail.gmail.com>
+Subject: Re: [PATCH] trace: proftool: dump-ftrace should write funcgraph times
+ in ns not us
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,80 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The correct spelling is R-Car, including the dash, update the usage.
-Kconfig strings and comment changes only, no functional change.
+On Fri, 6 Dec 2024 at 03:11, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> When converting a U-Boot trace records file to ftrace function graph
+> format for use by trace-cmd ('proftool -f funcgraph dump-ftrace'), the
+> time associated to each function is incorrectly saved in microseconds
+> instead of nanoseconds. Multuply the value by 1000 to fix the issue.
+>
+> With this change, the trace-cmd output looks consistent. Here is an
+> example with udelay(25) added to mem_malloc_init() as a test case:
+>
+>  $ ./tools/proftool -m System.map -t /tmp/trace.bin -f funcgraph \
+>                     dump-ftrace -o /tmp/trace.dat
+>  $ trace-cmd report  /tmp/trace.dat >/tmp/trace.log
+>  $ vi /tmp/trace.log
+>  [...]
+>  u-boot-1     [000]     6.719659: funcgraph_entry:                   |    mem_malloc_init() {
+>  u-boot-1     [000]     6.719659: funcgraph_entry:                   |      udelay() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:                   |        schedule() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:                   |          cyclic_run() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:        1.000 us   |            cyclic_get_list();
+>  u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |            }
+>  u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |          }
+>  u-boot-1     [000]     6.719661: funcgraph_entry:                   |        __udelay() {
+>  u-boot-1     [000]     6.719662: funcgraph_entry:        0.000 us   |          usec_to_tick();
+>  u-boot-1     [000]     6.719687: funcgraph_exit:       + 26.000 us  |          }
+>  u-boot-1     [000]     6.719687: funcgraph_exit:       + 28.000 us  |        }
+>  u-boot-1     [000]     6.719687: funcgraph_entry:      # 37971.000 us |      memset();
+>  u-boot-1     [000]     6.757658: funcgraph_exit:       # 37999.000 us |      }
+>  u-boot-1     [000]     6.757658: funcgraph_exit:       # 38000.000 us |    }
+>
+> In the above dump, the udelay() call is reported as taking 26 us which
+> is consistent with the timestamps (6.719687 - 6.719659 = 0.000026).
+> Without this patch we would have "0.026 us" instead of "+ 26.000 us".
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  tools/proftool.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/usb/gadget/Kconfig                   | 4 ++--
- drivers/usb/host/Kconfig                     | 4 ++--
- drivers/usb/host/xhci-rcar-r8a779x_usb3_v3.h | 2 +-
- drivers/usb/host/xhci-rcar.c                 | 2 +-
- 4 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 010084ef7f3..c815764c2bc 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -115,10 +115,10 @@ config USB_GADGET_DWC2_OTG
- 	  USB_GADGET to be enabled.
- 
- config USB_RENESAS_USBHS
--	bool "Renesas RCar USB2.0 HS controller (gadget mode)"
-+	bool "Renesas R-Car USB2.0 HS controller (gadget mode)"
- 	select USB_GADGET_DUALSPEED
- 	help
--	  The Renesas Rcar USB 2.0 high-speed gadget controller
-+	  The Renesas R-Car USB 2.0 high-speed gadget controller
- 	  integrated into Salvator and Kingfisher boards. Select this
- 	  option if you want the driver to operate in Peripheral mode.
- 	  This option requires USB_GADGET to be enabled.
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index bb5893d56db..24786a2bc91 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -103,12 +103,12 @@ config USB_XHCI_PCI
- 	  Enables support for the PCI-based xHCI controller.
- 
- config USB_XHCI_RCAR
--	bool "Renesas RCar USB 3.0 support"
-+	bool "Renesas R-Car USB 3.0 support"
- 	default y
- 	depends on ARCH_RENESAS
- 	help
- 	  Choose this option to add support for USB 3.0 driver on Renesas
--	  RCar Gen3 SoCs.
-+	  R-Car Gen3 SoCs.
- 
- config USB_XHCI_STI
- 	bool "Support for STMicroelectronics STiH407 family on-chip xHCI USB controller"
-diff --git a/drivers/usb/host/xhci-rcar-r8a779x_usb3_v3.h b/drivers/usb/host/xhci-rcar-r8a779x_usb3_v3.h
-index 8db88f0dcfa..7c909b4697a 100644
---- a/drivers/usb/host/xhci-rcar-r8a779x_usb3_v3.h
-+++ b/drivers/usb/host/xhci-rcar-r8a779x_usb3_v3.h
-@@ -1,5 +1,5 @@
- /*
-- * Renesas RCar xHCI controller firmware version 3
-+ * Renesas R-Car xHCI controller firmware version 3
-  *
-  * Copyright (c) 2014, Renesas Electronics Corporation
-  * All rights reserved.
-diff --git a/drivers/usb/host/xhci-rcar.c b/drivers/usb/host/xhci-rcar.c
-index 38c5928faed..b72807053c4 100644
---- a/drivers/usb/host/xhci-rcar.c
-+++ b/drivers/usb/host/xhci-rcar.c
-@@ -2,7 +2,7 @@
- /*
-  * Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
-  *
-- * Renesas RCar USB HOST xHCI Controller
-+ * Renesas R-Car USB HOST xHCI Controller
-  */
- 
- #include <clk.h>
--- 
-2.45.2
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
