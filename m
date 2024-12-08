@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA92E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F9DE7717F
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:30:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40679895E0;
-	Sun,  8 Dec 2024 16:29:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D98A489628;
+	Sun,  8 Dec 2024 16:29:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NAM3Ni4i";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kpK5zgm9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 402F5895DD; Sun,  8 Dec 2024 16:29:34 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 602F889606; Sun,  8 Dec 2024 16:29:37 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CFA289305
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBECF89586
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5d27243ba8bso5002806a12.2
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:32 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f249f3b2so663702a12.3
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733671772; x=1734276572; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733671774; x=1734276574; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=25QmUW80At+6gcTGEcN4tei7cgIJnZuuHjZ1wYstmCs=;
- b=NAM3Ni4ixWK/V0V27JTMQybgpY/+o9cQKQ/WkyS5y38GReiZ1SMXz6g5NxkoDIfKAl
- f3DeCf720AFqAZjIjRE2buDLmryWS2DYr8DML7m7DrrbsGaH/aRjk7vrODSsDNgmxJs0
- WBh19fhiospJcu25aGJrlwFYRXROcfUZgL/8A=
+ bh=zt59CkSzbIYY+cXVdZhjXn1Ao6uzc0LFT4nzTbwgWf0=;
+ b=kpK5zgm9t7WO7Jhb950vNP1nmo+3whdHL0bkHkbiVWNEi0Z2JfQ3RuGGTZeA+rgCd7
+ hnRFUwsYVTwnSQuYxkzI0SXs7Fv4v2vqK36XOBTxdSPPFr5TgqvTIoF0qKgklxewHWlq
+ gECU1jEMbW9jrKkv2a7VUJXKr4HEvtgAxH+ko=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733671772; x=1734276572;
+ d=1e100.net; s=20230601; t=1733671774; x=1734276574;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=25QmUW80At+6gcTGEcN4tei7cgIJnZuuHjZ1wYstmCs=;
- b=p2VW8tl5jDOPpOt/MWEn1111iHSx6hF+/B31WuwEiEIugFUX/ipYHYgPixVyxo3KN2
- M4gN4zwWYXT7K4vG4wxbRfKMRfURuOZ3r/smgCHmms5inB5yOOrx06L8DyajprSaVuVV
- kQgwPrk2hA0srCJFontndk4+GlPEXgbqMhnHqlXVn/bzLlIYKRvraa8icDhARCwLt2Ky
- MpR7jC28K5JZNGQdDGLtz2VnWCKX9CoZL3pttD8kXTJfuyBT8XHGadmQA0o3GXm3ACI0
- WpP8Kam5SkNAQ5eK/k6EOlMFv0H4Xn5MgZlOpUXl3TNHvsBqCWWSQ3gNQiA8oaLCul6E
- BZhw==
-X-Gm-Message-State: AOJu0YzSrOAISAdz4ab/TYQaTbPcNJwjCLaFJqQdiOVKhE4U5xFU7Z/O
- qu9xONzuvl5Jki5Se+DAQ+Qp8vb6Hgs628Y6Q6Wo6j0pYFVLXe5aNsO9aDenKKi9FnKYHhURgIG
- bRSLIwOZxFTnTNU2H4No9JZMiH9IBvma7C4Kt
-X-Gm-Gg: ASbGnctiwRwaLwnEdmvqhlMBjILXL2oDObxl26MVQLnj/1CitSo+cXezUJJRHO+WfP7
- tygSehYhNdK6/QLGaHAcPHwjgyshFASvz
-X-Google-Smtp-Source: AGHT+IEoHMD81jjzoUo+Y344LZFYjXaNncvHIoba1lM+4U0hhwLS2T6QJCrWHMiLPN6DZTgfltnI4jvv8t61AjMPJXc=
-X-Received: by 2002:a05:6402:27c6:b0:5d1:1f1:a283 with SMTP id
- 4fb4d7f45d1cf-5d3be696599mr10879736a12.4.1733671771743; Sun, 08 Dec 2024
- 07:29:31 -0800 (PST)
+ bh=zt59CkSzbIYY+cXVdZhjXn1Ao6uzc0LFT4nzTbwgWf0=;
+ b=aQuoVBTVQOraaS/QYR3Sk9ohvY1eRbAuJQXITpZ6qKwWFMlbD1+759TxgP/R17K+pF
+ 3ngjyUBnUzoZFs/cGJN/ahBgnG06XrHzUgkvtRuGbm4vkJVniiFNeVNqxdDK+LOiVWPX
+ 6JZWHiFFUsoIwP6uG1+qx8Vs+JsKCjmvjYfidbUCpJmcSA1kLo3GDsiNcCDaigqIzRa8
+ 0bg6yQy4O4X38VqU1cI/f083T1FdhyEtEwjKENmfKnDeZQX2FCdc2x99jlVt7mmmTVWt
+ ZQG4eXwCelzcLY/XCCl2mxaxKZR4bqcsjWEzLXPZeGAFZdQhdS+PGfkt7Nbrz2RzEeFj
+ l/ng==
+X-Gm-Message-State: AOJu0YxpLTu+TmW9w5oOditX0xagjeXpUXH/xpjniRz3+ovmtPeATlJ+
+ j7WBBGmTwhrx4VfU5EZZNrYNhtMgCA3P4aDfJAZN9yG5dsFbz6FiH1gTvIkiOLd6ZH9H3ND2pvw
+ oPrvHKAD7HWGy2IXafW7W6E4K/nDG3Jagz4Id
+X-Gm-Gg: ASbGncttRmqKjThHyyDJZvfrzX071h4zXJyGDg7mbanNGWQcL6vKoxWRBsFLpZ0ioP+
+ UjB0z0Cqc9xU66dl++LpDzCsOuj1zGTZ5
+X-Google-Smtp-Source: AGHT+IGKRGf1a0IveLtYcSa1djKwiDGhM6PbklAqt7GGpFChnJF/XjEhwiwqW64hAzPM2nfJmLyBvNJrGjSJZ/N5u+4=
+X-Received: by 2002:a05:6402:540c:b0:5d0:81f5:a398 with SMTP id
+ 4fb4d7f45d1cf-5d3be661893mr22907645a12.1.1733671774301; Sun, 08 Dec 2024
+ 07:29:34 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 8 Dec 2024 15:29:30 +0000
+ HTTPREST; Sun, 8 Dec 2024 15:29:32 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTjUc8acBkRh=1sxtvzO7g2VEYN8bA1r1mTskcHsX7c86Q@mail.gmail.com>
-References: <CAFLszTjUc8acBkRh=1sxtvzO7g2VEYN8bA1r1mTskcHsX7c86Q@mail.gmail.com>
+In-Reply-To: <CAFLszTis_2t=hPC9aVQKMtoy5=OyEDQJDS17hqeJG=U3Qdn1hw@mail.gmail.com>
+References: <CAFLszTis_2t=hPC9aVQKMtoy5=OyEDQJDS17hqeJG=U3Qdn1hw@mail.gmail.com>
  <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-4-mjg59@srcf.ucam.org>
-Date: Sun, 8 Dec 2024 15:29:30 +0000
-X-Google-Sender-Auth: tisagSBD9H6aTw9Vr293Ls7iYFI
-Message-ID: <CAFLszThMLj6YyZ5ffMXXrxfXukGqOxQsY4+zNyN+m2U3JqD1qg@mail.gmail.com>
-Subject: Re: [PATCH 03/10] Add a command to find a load address
+ <20241123195616.305687-3-mjg59@srcf.ucam.org>
+Date: Sun, 8 Dec 2024 15:29:32 +0000
+X-Google-Sender-Auth: 3-0U9YacNq3S3snb3oVLmFnrSUM
+Message-ID: <CAFLszThg78C4Oyp2d6kmP2XahUgv8u6JLhzRH0y0Gf=-Q=YrTA@mail.gmail.com>
+Subject: Re: [PATCH 02/10] Add part_find command
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Matthew Garrett <mgarrett@aurora.tech>, 
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
@@ -96,27 +96,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Nov 2024 at 12:57, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
+Hi Matthew,
+
+On Sat, 23 Nov 2024 at 12:56, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
 >
 > From: Matthew Garrett <mgarrett@aurora.tech>
 >
-> For systems with more complicated firmware, the firmware memory map may
-> vary significantly based on a number of factors. This makes it difficult to
-> pick a hardcoded load address. Add a command for finding an available
-> address with sufficient room to load the provided path.
+> part_find takes a GPT GUID and searches for a partition that matches
+> that. It then sets the target_part environment variable to the media
+> type, device number and partition number that matched, allowing
+> $target_part to be passed directly to bootm and similar commands.
 >
 > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
 > ---
 >
->  cmd/Kconfig     |  7 ++++
->  cmd/Makefile    |  1 +
->  cmd/addr_find.c | 87 +++++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 95 insertions(+)
->  create mode 100644 cmd/addr_find.c
+>  cmd/Kconfig     |  10 ++++
+>  cmd/Makefile    |   1 +
+>  cmd/part_find.c | 156 ++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 167 insertions(+)
+>  create mode 100644 cmd/part_find.c
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-(again, this needs doc/ and test/cmd/...)
+Nits below. This needs an update to doc/usage/cmd/part.rst and a test.
+There is a ChromeOS bootimage used in the bootflow tests which might
+be helpful here, as it uses GPT.
 
 >
 Applied to ci/master, thanks!
