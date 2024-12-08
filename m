@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1185FE77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 19:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A927E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 19:08:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB0098953F;
-	Sun,  8 Dec 2024 20:07:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0AABE8946D;
+	Sun,  8 Dec 2024 20:07:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZQ0Wk0z1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jbVqb/QS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B4B089538; Sun,  8 Dec 2024 20:07:54 +0100 (CET)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id 4995589541; Sun,  8 Dec 2024 20:07:56 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF59D893F9
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 20:07:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CC07894C6
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 20:07:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-4674c597ee5so11776411cf.0
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 11:07:51 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6d8d44e177cso36113216d6.1
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 11:07:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733684871; x=1734289671; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733684872; x=1734289672; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=BhOBV6xNV5M88OaGT4z9V3mdUBnBbaDhiN097MXjuw4=;
- b=ZQ0Wk0z1NBiBPUOO8dTu/IxT+JFsK3yZXs4qPx8b8va4EuKJyVITVDtrh3rN8cmYdY
- eTP8r9orgvTo0tmvh+z3alZWpPJXZL+BzsbnzlpjXR7NQtSgi1SzQaZUGVvv3Ppb3Br7
- b1S0pOJC7pzwjJ4kddCl08QqKquc1ZU1nTSTk=
+ :reply-to; bh=JTosqUnFCY+pSDBdm3SL/jn4jbL4Isft+guQxMhJwfw=;
+ b=jbVqb/QS8iPAnG/Fh3jvergPGOLCXHmL8bvYho3uJtzuYf2asaeY69kGCtUJ7lVcrR
+ ewXZexJ7CU2HV9BAZ8YRUBh+fdb3xEm7/w0ANY49ovwZSkCJYtYxYpUrBseDKe/Gx9Fz
+ fMFdE1VaL9gRXD2PLq8BIMOAFduJ6Jgw9/j/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733684871; x=1734289671;
+ d=1e100.net; s=20230601; t=1733684872; x=1734289672;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BhOBV6xNV5M88OaGT4z9V3mdUBnBbaDhiN097MXjuw4=;
- b=bvrSy14kJP+iCF9vghCn3LAMpx4/a6pwA9Veplja+EZ5YT+BFfCg08jD2VOrdJej+K
- TrarkVkt8YeOJQWJWHK3eNg806GjFb6sdvRTlJmzHSxlSgsWXY5yTALEfypOFfFu/1Ov
- gQMvbrEi0IPiBSqMKSaQffzX0xz7IGGenKXjCfHxJtbF0Z9/2IAEwDfvFJssPtO7Kypy
- 4nWd6UvvVh+1QXpr3a4uCW8qRvg/b86sW3OlxnahC+fHeHAs5ijQLrhpUzX0uOj+VNX1
- b8XbLfzxIZhnWo2Q4F13Gly/IXOiCueu9BBWdtuIfJRDPkVa0K2rS5wE2pzVfYDlWzrP
- GNjw==
-X-Gm-Message-State: AOJu0YwSabRJamf6TraNixPkOtyTv1wwYeK2t+E7tpoajoGTUTwLA0AD
- 1RFWhhPxn2gmhjXKyTz/iFkVskYA23Zgi1k8+e00osQI43IPH/TrcPfRxBYbmo2FEDhlBfpEz77
- +uzk=
-X-Gm-Gg: ASbGncvXQNtkrPdCiBps//4Ieqkdc7Pth9lCIj3VbWjsrlASSEamyzv1HYPmTeY8WY3
- C1LImvXMn3Ifv2HRYAY7PK0XgSpFzznGa3rTrg5cnINpkJYf2Ji00mSBbeUGDrgbiMOb6oxES+k
- Xh/sFgCgWTYeOfRNvZcxLAbVAWsbdbt7u1qj9/u2ErCtLfHsf199n1wKTHGXb8ZU4OK6e8swDE4
- /LqWbHOQoeexLlSWsEQsHeZL0I4nGh83ruGhAIzL/wIAFFjNKmjAcOlrC41owbGvSYeUgjCSw==
-X-Google-Smtp-Source: AGHT+IGNMKY5/CA2Q/OKSSeqUTnCiMMFkDov2dQUjS2n2vpZvDxLJYAnmqu/4PRfcY1cn5W5oMEhMQ==
-X-Received: by 2002:ad4:576f:0:b0:6d8:85f2:c3 with SMTP id
- 6a1803df08f44-6d8e70ce90amr140304976d6.14.1733684870881; 
- Sun, 08 Dec 2024 11:07:50 -0800 (PST)
+ bh=JTosqUnFCY+pSDBdm3SL/jn4jbL4Isft+guQxMhJwfw=;
+ b=Dmw/unxKe3gUirrXpuPcjWwV5ZHRFGchTXm8MtEom3fk85uoA/BsReUkch4L9MN6HI
+ pAnlNsdYNPzurVIaG+w9wxmnvVmHQR0o5uvoyilR4M2cyBe9iBmJA9Pec6sbD71S2DXy
+ Sr4OIgQUDkU9mDIaZtC9LilzVV81lQ281RJ5KZ1zW6+9oUUPCLALLmyOkkgnBoiBH5+q
+ Awy6WjSucQQkf9D2vr14awgBYzo4V6tKE69LRykYN1gIRSsJ8TmHiuivuZ+/SbNSQwXM
+ ZyU/r94hUjhr9j6Za2qo73R/55F+MWsNI+gYn4VISC/1qdekNgnv5IsmuGALFbr706R4
+ xF8A==
+X-Gm-Message-State: AOJu0Yx069NEm7j0mOoUl9Yhhnbf1H000iKGojEc+Ss+zM3Xnq/haMDi
+ YO027YsLcdECMi7uLmRe/u6t7nx/dtf0m+f5QjCBkXOspyZvpko0A8KsjB73fy5kOwnKw8Cd99F
+ TV8E=
+X-Gm-Gg: ASbGncssYQgYnO63NzELBtECCsul0ntqAphwMcVIoh6GqmXtyStBgYIyiUeS/tf9s8I
+ ojs+4PPkiY6Scolp82cA1KlbL2hbDCr+NSifT0LCXb8Ubjs+lSjpPGtJkk5Yjk/Knztlpu4i7e6
+ G5nV1rBaG+lmK5dnmtx50ed6vR4aZM2mZ3R2wriGQURC1TOSsbZfKDYMOmK4k8KpC2JvUdxKHtu
+ 9fHhCKiI7xE6G+13BLMejwcctVRmIyXVJixOkWkXgl1CjFims/fcNzRpKt4395PQXse7KvDuQ==
+X-Google-Smtp-Source: AGHT+IGSohW8qa6aMx9lOcZFRstKEJHPi07lvb/wknNh+BHwYbmx0tenZRVVdXtPH8qGvu+jg4P75A==
+X-Received: by 2002:a05:6214:55c4:b0:6d8:f50e:8036 with SMTP id
+ 6a1803df08f44-6d8f50e8397mr153300386d6.20.1733684872344; 
+ Sun, 08 Dec 2024 11:07:52 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([189.177.125.100])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8da66ddeasm41154076d6.25.2024.12.08.11.07.49
+ 6a1803df08f44-6d8da66ddeasm41154076d6.25.2024.12.08.11.07.51
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Dec 2024 11:07:50 -0800 (PST)
+ Sun, 08 Dec 2024 11:07:51 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 1/9] Docker/CI: Only test Xtensa on amd64 hosts
-Date: Sun,  8 Dec 2024 11:07:24 -0600
-Message-ID: <20241208190741.4192601-2-trini@konsulko.com>
+Subject: [PATCH 2/9] docker: Use ${TCVER} more widely
+Date: Sun,  8 Dec 2024 11:07:25 -0600
+Message-ID: <20241208190741.4192601-3-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241208190741.4192601-1-trini@konsulko.com>
 References: <20241208190741.4192601-1-trini@konsulko.com>
@@ -92,71 +92,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The xtensa architecture is interesting in that the platforms we support
-are only valid on the binary-only toolchains as the DC233C instruction
-set requires those toolchains (and not the FSF instruction set). Only
-install the binary toolchain on amd64 hosts and only run the tests on
-them as well.
+Remove the rest of the places where we hard-code the version of the
+toolchain we're using.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- .gitlab-ci.yml          | 8 +++++++-
- tools/docker/Dockerfile | 4 +++-
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ tools/docker/Dockerfile | 52 ++++++++++++++++++++---------------------
+ 1 file changed, 26 insertions(+), 26 deletions(-)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 57037e243ecb..2671c3bb1061 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -144,12 +144,14 @@ build all PowerPC platforms:
-         exit $ret;
-       fi;
- 
-+# We exclude xtensa here due to not being able to build on aarch64
-+# hosts but covering all platforms in the pytest section.
- build all other platforms:
-   extends: .world_build
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
--      ./tools/buildman/buildman -o /tmp -PEWM -x arm,powerpc || ret=$?;
-+      ./tools/buildman/buildman -o /tmp -PEWM -x arm,powerpc,xtensa || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-         exit $ret;
-@@ -451,6 +453,8 @@ qemu-xtensa-dc233c test.py:
-   variables:
-     TEST_PY_BD: "qemu-xtensa-dc233c"
-     TEST_PY_TEST_SPEC: "not sleep and not efi"
-+  tags:
-+    - all
-   <<: *buildman_and_testpy_dfn
- 
- r2dplus_i82557c test.py:
-@@ -514,6 +518,8 @@ xtfpga test.py:
-     TEST_PY_BD: "xtfpga"
-     TEST_PY_TEST_SPEC: "not sleep"
-     TEST_PY_ID: "--id qemu"
-+  tags:
-+    - all
-   <<: *buildman_and_testpy_dfn
- 
- coreboot test.py:
 diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-index ce1ad7cb23a2..8723834e6e5c 100644
+index 8723834e6e5c..38a9c4b9ec69 100644
 --- a/tools/docker/Dockerfile
 +++ b/tools/docker/Dockerfile
-@@ -320,7 +320,9 @@ RUN virtualenv -p /usr/bin/python3 /tmp/venv && \
+@@ -156,11 +156,11 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+ 	mkdir -p /opt/grub && \
+ 	./configure --target=aarch64 --with-platform=efi \
+ 	CC=gcc \
+-	TARGET_CC=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc \
+-	TARGET_OBJCOPY=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-objcopy \
+-	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-strip \
+-	TARGET_NM=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-nm \
+-	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/aarch64-linux/bin/aarch64-linux-ranlib && \
++	TARGET_CC=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux-gcc \
++	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux-objcopy \
++	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux-strip \
++	TARGET_NM=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux-nm \
++	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux-ranlib && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O arm64-efi -o /opt/grub/grubaa64.efi --prefix= -d \
+ 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
+@@ -170,11 +170,11 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+ 	make clean && \
+ 	./configure --target=arm --with-platform=efi \
+ 	CC=gcc \
+-	TARGET_CC=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc \
+-	TARGET_OBJCOPY=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-objcopy \
+-	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-strip \
+-	TARGET_NM=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-nm \
+-	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ranlib && \
++	TARGET_CC=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-gcc \
++	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-objcopy \
++	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-strip \
++	TARGET_NM=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-nm \
++	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi-ranlib && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O arm-efi -o /opt/grub/grubarm.efi --prefix= -d \
+ 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
+@@ -184,11 +184,11 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+ 	make clean && \
+ 	./configure --target=riscv64 --with-platform=efi \
+ 	CC=gcc \
+-	TARGET_CC=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-gcc \
+-	TARGET_OBJCOPY=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-objcopy \
+-	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-strip \
+-	TARGET_NM=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-nm \
+-	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/riscv64-linux/bin/riscv64-linux-ranlib && \
++	TARGET_CC=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-gcc \
++	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-objcopy \
++	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-strip \
++	TARGET_NM=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-nm \
++	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/riscv64-linux/bin/riscv64-linux-ranlib && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O riscv64-efi -o /opt/grub/grubriscv64.efi --prefix= -d \
+ 	grub-core cat chain configfile echo efinet ext2 fat halt help linux \
+@@ -198,22 +198,22 @@ RUN git clone git://git.savannah.gnu.org/grub.git /tmp/grub && \
+ 	make clean && \
+ 	./configure --target=i386 --with-platform=efi \
+ 	CC=gcc \
+-	TARGET_CC=/opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-gcc \
+-	TARGET_OBJCOPY=/opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-objcopy \
+-	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-strip \
+-	TARGET_NM=/opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-nm \
+-	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/i386-linux/bin/i386-linux-ranlib && \
++	TARGET_CC=/opt/gcc-${TCVER}-nolibc/i386-linux/bin/i386-linux-gcc \
++	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/i386-linux/bin/i386-linux-objcopy \
++	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/i386-linux/bin/i386-linux-strip \
++	TARGET_NM=/opt/gcc-${TCVER}-nolibc/i386-linux/bin/i386-linux-nm \
++	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/i386-linux/bin/i386-linux-ranlib && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O i386-efi -o /opt/grub/grub_x86.efi --prefix= -d \
+ 	grub-core normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd && \
+ 	make clean && \
+ 	./configure --target=x86_64 --with-platform=efi \
+ 	CC=gcc \
+-	TARGET_CC=/opt/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-gcc \
+-	TARGET_OBJCOPY=/opt/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-objcopy \
+-	TARGET_STRIP=/opt/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-strip \
+-	TARGET_NM=/opt/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-nm \
+-	TARGET_RANLIB=/opt/gcc-13.2.0-nolibc/x86_64-linux/bin/x86_64-linux-ranlib && \
++	TARGET_CC=/opt/gcc-${TCVER}-nolibc/x86_64-linux/bin/x86_64-linux-gcc \
++	TARGET_OBJCOPY=/opt/gcc-${TCVER}-nolibc/x86_64-linux/bin/x86_64-linux-objcopy \
++	TARGET_STRIP=/opt/gcc-${TCVER}-nolibc/x86_64-linux/bin/x86_64-linux-strip \
++	TARGET_NM=/opt/gcc-${TCVER}-nolibc/x86_64-linux/bin/x86_64-linux-nm \
++	TARGET_RANLIB=/opt/gcc-${TCVER}-nolibc/x86_64-linux/bin/x86_64-linux-ranlib && \
+ 	make -j$(nproc) && \
+ 	./grub-mkimage -O x86_64-efi -o /opt/grub/grub_x64.efi --prefix= -d \
+ 	grub-core normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd && \
+@@ -319,7 +319,7 @@ RUN virtualenv -p /usr/bin/python3 /tmp/venv && \
+ 
  # Create the buildman config file
  RUN /bin/echo -e "[toolchain]\nroot = /usr" > ~/.buildman
- RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
--RUN /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman;
-+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-+        /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman; \
-+    fi
- RUN /bin/echo -e "\n[toolchain-alias]\nsh = sh2" >> ~/.buildman
- RUN /bin/echo -e "\nx86 = i386" >> ~/.buildman;
- 
+-RUN /bin/echo -e "kernelorg = /opt/gcc-13.2.0-nolibc/*" >> ~/.buildman
++RUN /bin/echo -e "kernelorg = /opt/gcc-${TCVER}-nolibc/*" >> ~/.buildman
+ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
+         /bin/echo -e "\n[toolchain-prefix]\nxtensa = /opt/2020.07/xtensa-dc233c-elf/bin/xtensa-dc233c-elf-" >> ~/.buildman; \
+     fi
 -- 
 2.43.0
 
