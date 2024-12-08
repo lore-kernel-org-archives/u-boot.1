@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 792F1E7717D
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 00:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9920E7717D
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 00:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EF3489405;
+	by phobos.denx.de (Postfix) with ESMTP id 8455F8946E;
 	Sun,  8 Dec 2024 01:21:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Rg6pfSBZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yV1n2JLa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DAFA893DA; Sun,  8 Dec 2024 01:21:29 +0100 (CET)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id E5836893E0; Sun,  8 Dec 2024 01:21:29 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B216B893DF
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 01:21:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F182D893D4
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 01:21:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-71d4ba17cd2so1533925a34.3
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 16:21:25 -0800 (PST)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-71d4e043dd9so848991a34.1
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 16:21:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733617284; x=1734222084; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733617286; x=1734222086; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M67afIA+ajXVHuic4rKlvMMufy/mz8Ysw12A4/NrA5E=;
- b=Rg6pfSBZle2BVPNE9VUGtmlpc9yF5jN7tlo1MI7ZH8dYF2lX1gqnzVKyNxqO7ukuGc
- vzDvn5GI9XFzOKZV95l0ZK68d/cmRNAbeUuiSYWkZx9K29rBoSO5MtcwXKuyDuHOrubZ
- cHqpM/m/NzGSpj2ni5zzuogyjlDZNsT6Z++gDXB2q650BLVB1sDd0A0KkkpjOiHgTta7
- 19cIS6hGUsleHq0PJ/hsuwn6K0PqOyzBlxpJxTyLO1gqctsDqpjN0QB866DGzDHBfuY9
- VbZRMg80T2nscpan9OPZbPogsRK/LHNj2pG3r95ipfBHQoXKMf6xzJNRp0Zfl6JIG3f2
- f3eA==
+ bh=LP7WRT98dGj39h1CiHCmB/n2Zg81Ci8i+gupvmN8tSc=;
+ b=yV1n2JLa1pckJTc0FG9GsWfOJ98rTNyQ/UDgwOvPadgbrUYiPrnY7Q7BQmeh8RyHiM
+ m2CGp2+E4uF9qnULWHMo5MMkpzAmX8ZaaZmHZ7jk+rcWK6yK++fjXx/ZYLgnYutnxuCO
+ Oksy3XyXVBOx1N+qZeCw95TvyDPzf4L7es24G8RK0cdSiq+oos4lvOkwnHojctyl3T6k
+ sRkhZ3G0mRiPejCEyU3fCNYG0XCKN7/rBsAFAUjeaIkuHwrjlccgEurYcpzN7xgnBSKS
+ gpJf52Z/a8UsuS5ky1KvTJttfFfnjsm1ORYvR/XWMgwCx70awWiuIe4O6ybxUB7ZizDD
+ 8oMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733617284; x=1734222084;
+ d=1e100.net; s=20230601; t=1733617286; x=1734222086;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M67afIA+ajXVHuic4rKlvMMufy/mz8Ysw12A4/NrA5E=;
- b=eBj6MPuB1V88sN6tOVkc3//9F/tOPkuY/LpvXPCnmQQd5PZ/13Dwst2xmveA6zxJnv
- 02UyAzun5OUMg9uhk439RkTResaEWOaWlcjRmjX0fkY2ZxtM02djEADN5t19vGLh1CAI
- i1WRtaJ2cpKk+9sKb9Aw5qcG/RZT2tb8U+zSVOJ12ivXLQKa4sdU8y2NMyUw3HvcXWMP
- k9by42Bje9L1g+eY5empODTESkEIKIbFOKnODg6XLOFWjQEh0dJ65W+gSF2o0U5qX/NR
- EwPS2TVm4r9jgIm6AmvchE9Kw64njUWhmMAqA6QM6VWFrTyzjGNrnu8REZQkbvUqBd+D
- z4iA==
+ bh=LP7WRT98dGj39h1CiHCmB/n2Zg81Ci8i+gupvmN8tSc=;
+ b=sOjV6oXUd01lEeO9uYmWnbo0pAIaXXXKJtbjDPIoFFe8ffjn9IKDMn5wSvpVR09oqH
+ ntC7pYXavQwW0ZgGlHxDJQ1Zr7eJ8UNyEyYPg5oevdKq2cKu9qYHSjn6Yy02NCpE6DVH
+ bGMv6R6RX4aHvdSAtJCmjwJ9ZvbyK1SUZRoTQyHmsR9gD+9iwTVPnDsdbyO8wgfG1vIs
+ io25lpm5L9HawABL3grInxGrRdC/nkOkmGVoYdev5DfXBN0EK6zsK5+TmeRpW83ieWC0
+ 5uaNUcYbzjpaSCzX6IgQoxa9zuqzvhUu1pWQQljGzM+KocW44qY0fEKcgaf6Vk95y9Z2
+ 8Uow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCngIRTCjn1jrbZ7/Whi7ZuMyXC3UF5f9IhsUs00Z3giYDgZIVr1/g0w54DMLnnGkfgpub1Kg=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywi4vEajzcerUj1sEdM2z8IzIsUAENbhxscB5J/yLvN+eVMzZGS
- lK2pGNPjfdqWbBFn5ygaK/AW42FLo7mHyVTz677oX/9Xxy581DfF2/1SYiA09LsEY9ew8UkoAFE
- q6BE=
-X-Gm-Gg: ASbGncv2q/Vw75mWf79MNz+hYlii9RvFL8bhWSU8rzomSAbYHgYQO2R5PG9o7dODqJm
- 16h7eF4kZ0ZA1YRQGNdjVeSVqcUepJttYP9Y2T8u91kHLJdySfglW7kdXbyLxnye1A+iuNJ1U4/
- OKm6iHsrnW0lfLIVhVhms4NhY5gguLJtaXp4+vJZEdCoW+7DwR4W3LqxGLm/hHjmAQmkEz/aWGc
- QhSAB6czH1G/7l9enuht6d1qnX7viNS9RxSOiaC9CggOqdCsMFJAcU=
-X-Google-Smtp-Source: AGHT+IGWTcMDH7XBy8ROvQm2/z/5dAI5R/GF+cWH6Q1OFwtvvI+vASJFvjrPOlE9xBMkZESuVrLaww==
-X-Received: by 2002:a05:6830:3101:b0:71d:4105:405e with SMTP id
- 46e09a7af769-71dcf4b43afmr5920685a34.1.1733617284498; 
- Sat, 07 Dec 2024 16:21:24 -0800 (PST)
+ AJvYcCVb88Ocs1rykeWcJXpPFcMTQF6gd2G1458p1635G8MrO9R+PzwwgA/1PG3Q/34Cmmr6Rm5M1NU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0hCAl4ipnrKmUiaIyjLlGG2jMA3Np4PXbV+EtpWxDic9Le3H2
+ dUiP7M2qptVhmQ1Kz43+e+v20b94jXA1Q+X91J23HaM2paqmFaMq+LHUXpK+qtw2jjB0zWZ+rf/
+ 7D0w=
+X-Gm-Gg: ASbGnctTyeOcf0tR6MVL6Go5UIm+cY0kJMWnQqpMoNkK1i/ll3z0/xaD4lk0ZOTiE39
+ hmn1K9fdDQXl8Sj11rC5hIm1M/4XJ5j75+s6/8lNcLJQGQqZGLOe/72wTGGcWggeyenxawwAOGb
+ /iAPoy7Bp3g5v0jPfJcMrCvBFNu1IkG7oX9s5EwRDntpMQUQ9UfPNnP6SRq31OSRPX7wBSNLCU+
+ nsKUVxuFaH/RlijXFuy2FaNCy7VhNz4ApxE7P6PkY+aKNnbxpGxYj0=
+X-Google-Smtp-Source: AGHT+IFagsnLUDT/GXsWdOJkAgvUJI7fbFduSM/w3WXdjzfrv+6GQgaj0FrwWvo4EvRzzwTOqmZARw==
+X-Received: by 2002:a05:6830:25c4:b0:718:1cb6:e593 with SMTP id
+ 46e09a7af769-71dcf5530damr3981015a34.27.1733617285725; 
+ Sat, 07 Dec 2024 16:21:25 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71dc493b033sm1549371a34.8.2024.12.07.16.21.23
+ 46e09a7af769-71dc4951cfdsm1541454a34.28.2024.12.07.16.21.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Dec 2024 16:21:23 -0800 (PST)
+ Sat, 07 Dec 2024 16:21:25 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -78,9 +78,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/6] lmb: Fix flags data type in lmb_add_region_flags()
-Date: Sat,  7 Dec 2024 18:21:16 -0600
-Message-Id: <20241208002121.31887-2-semen.protsenko@linaro.org>
+Subject: [PATCH 2/6] lmb: Return -EEXIST in lmb_add_region_flags() if region
+ already added
+Date: Sat,  7 Dec 2024 18:21:17 -0600
+Message-Id: <20241208002121.31887-3-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241208002121.31887-1-semen.protsenko@linaro.org>
 References: <20241208002121.31887-1-semen.protsenko@linaro.org>
@@ -102,36 +103,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rgnflags variable in lmb_add_region_flags() has incorrect type: it's
-declared as phys_size_t when it should be enum lmb_flags. That
-copy-paste mistake was firstly introduced in commit 59c0ea5df33f ("lmb:
-Add support of flags for no-map properties"), and then copied further
-into commit ed17a33fed29 ("lmb: make LMB memory map persistent and
-global"). Fix it by using the correct type to match struct lmb_region
-field.
+An attempt to add the already added LMB region (with exactly the same
+start address, size and flags) using lmb_add_region_flags() ends up in
+lmb_addrs_overlap() check, which eventually leads to either returning 0
+if 'flags' is LMB_NONE, or -1 otherwise. It makes it impossible for the
+user of this function to catch the case when the region is already added
+and differentiate it from regular errors. That in turn may lead to
+incorrect error handling in the caller code, like reporting misleading
+errors or interrupting the normal code path where it could be treated as
+the normal case. An example is boot_fdt_reserve_region() function, which
+might be called twice (e.g. during board startup in initr_lmb(), and
+then during 'booti' command booting the OS), thus trying to reserve
+exactly the same memory regions described in device tree twice, which
+produces an error message on second call.
 
-No functional change.
+Implement the detection of cases when the already added region is trying
+to be added again, and return -EEXIST error code in case the region
+exists and it's not LMB_NONE; for LMB_NONE return 0, to conform to unit
+tests (specifically test_alloc_addr() in test/lib/lmb.c) and the
+preferred behavior described in commit 1d9aa4a283da ("lmb: Fix the
+allocation of overlapping memory areas with !LMB_NONE"). The change of
+lmb_add_region_flags() return values is described in the table below:
 
-Fixes: ed17a33fed29 ("lmb: make LMB memory map persistent and global")
-Fixes: 59c0ea5df33f ("lmb: Add support of flags for no-map properties")
+    Return case                        Pre-1d9   1d9    New
+    -----------------------------------------------------------
+    Added successfully                    0      0      0
+    Failed to add                         -1     -1     -1
+    Already added, flags == LMB_NONE      0      0      0
+    Already added, flags != LMB_NONE      0      -1     -EEXIST
+
+Rework all affected functions and their documentation. Also fix the
+corresponding unit test which checks reserving the same region with the
+same flags to account for the changed return value.
+
+No functional change is intended (by this patch itself).
+
+Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas with !LMB_NONE")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- lib/lmb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/lmb.c      | 18 ++++++++++++++----
+ test/lib/lmb.c |  2 +-
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index b03237bc06cb..713f072f75ee 100644
+index 713f072f75ee..ce0dc49345fb 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -200,7 +200,7 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
- 	for (i = 0; i < lmb_rgn_lst->count; i++) {
- 		phys_addr_t rgnbase = rgn[i].base;
+@@ -183,8 +183,10 @@ static long lmb_resize_regions(struct alist *lmb_rgn_lst,
+  * the function might resize an already existing region or coalesce two
+  * adjacent regions.
+  *
+- *
+- * Returns: 0 if the region addition successful, -1 on failure
++ * Return:
++ * * %0		- Added successfully, or it's already added (only if LMB_NONE)
++ * * %-EEXIST	- The region is already added, and flags != LMB_NONE
++ * * %-1	- Failure
+  */
+ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 				 phys_size_t size, enum lmb_flags flags)
+@@ -202,6 +204,14 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
  		phys_size_t rgnsize = rgn[i].size;
--		phys_size_t rgnflags = rgn[i].flags;
-+		enum lmb_flags rgnflags = rgn[i].flags;
+ 		enum lmb_flags rgnflags = rgn[i].flags;
  
++		/* Already have this region, so we're done */
++		if (base == rgnbase && size == rgnsize && flags == rgnflags) {
++			if (flags == LMB_NONE)
++				return 0;
++			else
++				return -EEXIST;
++		}
++
  		ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
  		if (ret > 0) {
+ 			if (flags != rgnflags)
+@@ -667,7 +677,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+  *
+  * Free up a region of memory.
+  *
+- * Return: 0 if successful, -1 on failure
++ * Return: 0 if successful, negative error code on failure
+  */
+ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+ 		    uint flags)
+@@ -818,7 +828,7 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+ 				      lmb_memory[rgn].size,
+ 				      base + size - 1, 1)) {
+ 			/* ok, reserve the memory */
+-			if (lmb_reserve_flags(base, size, flags) >= 0)
++			if (!lmb_reserve_flags(base, size, flags))
+ 				return base;
+ 		}
+ 	}
+diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+index 0bd29e2a4fe7..48c3c966f8f2 100644
+--- a/test/lib/lmb.c
++++ b/test/lib/lmb.c
+@@ -754,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+ 
+ 	/* reserve again, same flag */
+ 	ret = lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
+-	ut_asserteq(ret, -1L);
++	ut_asserteq(ret, -EEXIST);
+ 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
+ 		   0, 0, 0, 0);
+ 
 -- 
 2.39.5
 
