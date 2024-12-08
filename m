@@ -4,123 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17A2BE77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 23:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE2DE77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 23:56:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91F62894F7;
-	Mon,  9 Dec 2024 00:56:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF08C89500;
+	Mon,  9 Dec 2024 00:56:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="SwxDwC78";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Ul2x2Pan";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C004889500; Mon,  9 Dec 2024 00:56:34 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id 0CD0B8953F; Mon,  9 Dec 2024 00:56:51 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE35893AE
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:56:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70F1A893AE
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:56:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241208235625epoutp03e8609ac352ebde8c43c09aa0e1871497~PWPPdzOny2968529685epoutp03B
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:56:25 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241208235625epoutp03e8609ac352ebde8c43c09aa0e1871497~PWPPdzOny2968529685epoutp03B
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20241208235644epoutp04e9e9d19c273949df31b56721e1255773~PWPhAUveF0992909929epoutp04G
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:56:44 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20241208235644epoutp04e9e9d19c273949df31b56721e1255773~PWPhAUveF0992909929epoutp04G
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733702186;
- bh=XY0PZaN7cA8MDO+1pRyUZ0qz8FYfyeDv2PXMNOhO2ps=;
+ s=mail20170921; t=1733702204;
+ bh=N3Zw31KC/ECBA9q2oWPJ8iRwxDbbY5xW80BKRuCcRtI=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=SwxDwC78Vy6gj9JdhECDDT4TZS6Ae4R1EDJ3JGLqZ8Xoxae94cmsjcFxtxiMvWw/U
- RtAdf20rRq2kwaF8afJN0k2i/ihbLKHlXHVEwI+dXQNW90Pkj3w3jbE6eNIDPjozG9
- 7Sxl5OE/1pBvC+yKRV0UjCqmi0VnGoCJLg1nKSbM=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20241208235625epcas1p2ff356c95116f985941b77133780575f1~PWPO-6j3j0891708917epcas1p2D;
- Sun,  8 Dec 2024 23:56:25 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.134]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Y622c15Rxz4x9Q3; Sun,  8 Dec
- 2024 23:56:24 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 09.23.24218.72236576; Mon,  9 Dec 2024 08:56:24 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ b=Ul2x2PansfM1rejokPtkXjcvL8vtTMNUogWTN1VjRDIAYhP1N8Mzl6HxOKucGj7HM
+ QNJpKGnG4IA7vWh3TW3KUk5wGgU2WtAt+wrWqke/JiE9h2K9RnwUQCE3B+oaoG2yeV
+ amTe5MwjS59dXU4a1z671S83e4CwNp0xshWMBqUM=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20241208235644epcas1p3e2611d254c70517da88a9734063db559~PWPgpJyj32473624736epcas1p35;
+ Sun,  8 Dec 2024 23:56:44 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.38.231]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Y622z0Dfhz4x9Q0; Sun,  8 Dec
+ 2024 23:56:43 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 4D.B8.23253.A3236576; Mon,  9 Dec 2024 08:56:42 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
  epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20241208235623epcas1p1a89881d132a2b6a02daf19a112013589~PWPNc37oB0167001670epcas1p1P;
- Sun,  8 Dec 2024 23:56:23 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241208235623epsmtrp2a7feefd416446e7b39f0d580c4c1cb80~PWPNcKjAN1244212442epsmtrp2a;
- Sun,  8 Dec 2024 23:56:23 +0000 (GMT)
-X-AuditID: b6c32a38-17b8524000005e9a-99-67563227c364
+ 20241208235642epcas1p1f0a915078a17f169345cfa67fc204ab7~PWPfC02xq0672306723epcas1p1y;
+ Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20241208235642epsmtrp18e258ca7c04aa48fe00ac553d24398a1~PWPfCBe3Q1789517895epsmtrp1X;
+ Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
+X-AuditID: b6c32a33-5a18170000005ad5-92-6756323afea7
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 81.B7.18729.72236576; Mon,  9 Dec 2024 08:56:23 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ D9.28.18949.A3236576; Mon,  9 Dec 2024 08:56:42 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241208235623epsmtip2408eac9ce90400258aeae74938bbd089~PWPNN6OMG3012430124epsmtip2I;
- Sun,  8 Dec 2024 23:56:23 +0000 (GMT)
+ 20241208235642epsmtip2c9b99fac202187bdbd1b764151ad2a20~PWPe3-eIJ2788527885epsmtip2g;
+ Sun,  8 Dec 2024 23:56:42 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Simon Glass'" <sjg@chromium.org>, "'U-Boot Mailing List'"
- <u-boot@lists.denx.de>
-Cc: "'Michael Trimarchi'" <michael@amarulasolutions.com>, "'Peng Fan'"
- <peng.fan@nxp.com>, "'Quentin Schulz'" <quentin.schulz@cherry.de>, "'Sean
- Anderson'" <seanga2@gmail.com>, "'Tim Harvey'" <tharvey@gateworks.com>,
- "'Tom Rini'" <trini@konsulko.com>
-In-Reply-To: <20241207172412.1124558-2-sjg@chromium.org>
-Subject: RE: [PATCH v3 01/19] spl: mmc: Avoid size growth in
- spl_mmc_find_device() debug
-Date: Mon, 9 Dec 2024 08:56:23 +0900
-Message-ID: <081f01db49cc$c934ac30$5b9e0490$@samsung.com>
+To: "'Marek Vasut'" <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>
+Cc: "'Tom Rini'" <trini@konsulko.com>
+In-Reply-To: <20241208220551.204743-6-marek.vasut+renesas@mailbox.org>
+Subject: RE: [PATCH 06/13] mmc: renesas: Fix R-Car spelling
+Date: Mon, 9 Dec 2024 08:56:42 +0900
+Message-ID: <082001db49cc$d47931b0$7d6b9510$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQIvgUKR8EiTaeGdNdHyU6nlmXm9IwGBLAN5AYhxszWyHEn3cA==
+Thread-Index: AQG7SSyzAYIHjYUOd1obIOVJ/X+H+ALSfQXBAi8ZUAuy9PqMwA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupik+LIzCtJLcpLzFFi42LZdljTQFfDKCzdoO8rk8WpxlYWix+rvrBa
- rL+8jd1i670JTBbftmxjtLh44hOzxdRJm9kt3u7tZHfg8Fj78T6rx9unUxg9ZjdcZPE413OX
- zWPnrLvsHq8OrGL3OHtnB6PHxnc7mAI4orJtMlITU1KLFFLzkvNTMvPSbZW8g+Od403NDAx1
- DS0tzJUU8hJzU22VXHwCdN0yc4BuU1IoS8wpBQoFJBYXK+nb2RTll5akKmTkF5fYKqUWpOQU
- mBboFSfmFpfmpevlpZZYGRoYGJkCFSZkZ2xcfYCx4Cxnxe79J1gaGB+zdzFyckgImEhs71/G
- 1sXIxSEksINRYnvXB1YI5xOjxKmPbcwQzjdGiQMru9hgWhbPew9VtZdR4m3HESjnJaPE742d
- TCBVbAJ6Ev8XLQRq5+AQEYiQOHvDD6SGWaCBSWLCmXuMIDWcAhYSqye1gB0iLBAlcfr9cyaQ
- ehYBFYltm/1BwrwClhJ731xlhVisIPHz6TIwW0TASeLz/40sIDazgIjE7E6ISyUEOjkk7nfe
- ZoZocJFY13GQEcIWlnh1fAvU01ISn9/tZYNoaGaUWLrkICuE08Mo8a/hOtSfxhL7l04Gu4hZ
- QFNi/S59iG18Eu++9rCChCUEeCU62oQgqlUkLr1+yQQz/+6T/1BHe0i8f9MNdo+QwE5GiUuX
- ZSYwys9CcvcshAULGJlWMYqlFhTnpqcWGxaYwKMyOT93EyM4UWpZ7GCc+/aD3iFGJg7GQ4wS
- HMxKIrwc3qHpQrwpiZVVqUX58UWlOanFhxhNgQE5kVlKNDkfmKrzSuINTSwNTMyMjE0sDM0M
- lcR5z1wpSxUSSE8sSc1OTS1ILYLpY+LglGpg0rINuqC6YUKA9P/iliCbqozVaw6E1goETz2/
- 3ytI5azskbnmhcdF3MuZv+clzsn49uyFq65veEbQtEf+jZf/zNvExdZWMjG5zDX5934x27BL
- xS8rdu52lQ80m/r2u9HlrarLPwa+azV+P9PoY5i4YeQ+rYtXkk5o3K1+GvMyaJqYe1Hc8r1P
- Gvwn1CldqPv7TVpC9sbN6VVTZ5nd19zekhAXtfnVwV1eZ5yecLzTMPQR3rq4MSN97oWb3Cd+
- G/D9vcUlZBITEdJhxFtxsGDvxxvupQVNnP1ubqeZ1l+9fefmTKkOftuHU1QWch18pXnI9OX1
- wun6hd5vJmdc+Fs5LT9gk7Pa0q1mLpncWkavlViKMxINtZiLihMBDNO90x0EAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrALMWRmVeSWpSXmKPExsWy7bCSvK66UVi6QcsyHYtTja0sFj9WfWG1
- WH95G7vF1nsTmCy+bdnGaHHxxCdmi6mTNrNbvN3bye7A4bH2431Wj7dPpzB6zG64yOJxrucu
- m8fOWXfZPV4dWMXucfbODkaPje92MAVwRHHZpKTmZJalFunbJXBlbFx9gLHgLGfF7v0nWBoY
- H7N3MXJySAiYSCye9561i5GLQ0hgN6PEpXuTWSESUhKfn05l62LkALKFJQ4fLoaoec4o0Xb/
- FVgzm4CexP9FC5lBbBGBCIm5vxYxgRQxC7QwSby9+oEdomMro8TnT9vYQKo4BSwkVk9qAesW
- BurYuPkv2AYWARWJbZv9QcK8ApYSe99chTpCQeLn02WsEAucJD7/38gCYjMLiEjM7mxjnsAo
- MAuJu4CRcRWjZGpBcW56brFhgWFearlecWJucWleul5yfu4mRnCga2nuYNy+6oPeIUYmDsZD
- jBIczEoivBzeoelCvCmJlVWpRfnxRaU5qcWHGKU5WJTEecVf9KYICaQnlqRmp6YWpBbBZJk4
- OKUamA5Wqp+bPaPi+scdIsc7hBquGGaHTtt8vHxhncvZ4i+3jbPrLzDbnf1wpezwGqN3VYt6
- rXN9t+SuU9lzzmff/Zdp9qXqb2Rlt87zfylUbqZy8eSM9LW7fSpi6x5oTbp10jLm08OmW88e
- hk3Ii72w9EmX1MUH9bx1bdIqwge1lp7UfK+5ojn7a4LAiroF9Veu2Jaz8L1cqMY5Z4Hz2Ym1
- L3LvbTFRSZxi57LxmNPskwEzJ2tGdmf9W1nzlWOixcvIpQ5iYdbGi1eHfz1bqvc4eMpVBn+F
- HdGRLy8tv3u3MkjIjnf30V3M7KLPThWLzXK7yZCn9ti68/a+6//m/7T4VvlP2MQt1F4pd/b0
- HR03XjYrsRRnJBpqMRcVJwIA/tPRLuMCAAA=
-X-CMS-MailID: 20241208235623epcas1p1a89881d132a2b6a02daf19a112013589
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKKsWRmVeSWpSXmKPExsWy7bCmnq6VUVi6QethK4vWlXfYLKZO2sxu
+ 8XZvJ7sDs8erA6vYPc7e2cHosXP2PqYA5qhsm4zUxJTUIoXUvOT8lMy8dFsl7+B453hTMwND
+ XUNLC3MlhbzE3FRbJRefAF23zBygTUoKZYk5pUChgMTiYiV9O5ui/NKSVIWM/OISW6XUgpSc
+ AtMCveLE3OLSvHS9vNQSK0MDAyNToMKE7Iyrb9eyFlyWqtjZcpa1gfGBaBcjJ4eEgIlEy8b9
+ jF2MXBxCAjsYJW5ff84C4XxilLi4q5EVpEpI4BujxIvZFjAdHVdWsEDE9zJKtL9SgLBfMkqc
+ OxsMYrMJ6En8X7SQGcQWEfCXaH+7GKieg4NZQFVi1YEIkDCngJvE2knLwMYIC1hLHNl+nQ3E
+ ZhFQkdh/YgNYK6+ApcTsc8tYIdYqSPx8CmGLCDhJPFowCcxmFhCRmN3Zxgxys4TAPnaJpdc2
+ MkM0uEis2LQSqllY4tXxLewQtpTEy/42doiGZkaJpUsOskI4PYwS/xogzpAQMJbYv3QyE8TV
+ mhLrd+lDbOOTePe1hxUkLCHAK9HRJgRRrSJx6fVLJpj5d5/8hyrxkGjvdIeE51VGif7/c1gm
+ MMrPQnL3LIQFCxiZVjGKpRYU56anJhsWGMLjMTk/dxMjOH1pGe9gvDz/n94hRiYOxkOMEhzM
+ SiK8HN6h6UK8KYmVValF+fFFpTmpxYcYTYEhOZFZSjQ5H5hA80riDU0sDUzMjIxNLAzNDJXE
+ ec9cKUsVEkhPLEnNTk0tSC2C6WPi4JRqYOJ5/see2ahhjg6nrYTGdmmD6RfPPJXUeGf0pnk6
+ m+Q8vz3rnFv0BGwX379qtTzCY53zHb1y6Z2cfeduzrTdlHXw5/3WxIWtt2ecYPC5nnYqc2ur
+ bm3aobZ1Moxsig9z1k2Y2fzmgdjRF/9mOEwIfbU6kpXrQ6BexsytDAVzO/kTAtqWhObkaisJ
+ 77P3O8Nkzc+pVn9QrPbLynVGrp/Czj/LMJ16r/ZTx1nujolXl0iHfZw/XfDnDJ+EC7d1ODa/
+ Ovi5I+vhuaBX4QnJE86vanl298s55U0eGTKf74g2bFxW0Zf16fJfJcMj5U+W2VxapGCgMFuw
+ zmZmT37MG+fPb+7Vfy44wb9drz5Z9rHBuh1KLMUZiYZazEXFiQDJ4X/O6AMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprDLMWRmVeSWpSXmKPExsWy7bCSvK6VUVi6wd9VahatK++wWUydtJnd
+ 4u3eTnYHZo9XB1axe5y9s4PRY+fsfUwBzFFcNimpOZllqUX6dglcGVffrmUtuCxVsbPlLGsD
+ 4wPRLkZODgkBE4mOKytYuhi5OIQEdjNKTLrXwwiRkJL4/HQqWxcjB5AtLHH4cDFIWEjgOaPE
+ iSY9EJtNQE/i/6KFzCC2iIC/RPvbxSwg5cwCqhKrDkRAjLzIKNHytIsNpIZTwE1i7aRlLCC2
+ sIC1xJHt18HiLAIqEvtPbACbwytgKTH73DJWiBMUJH4+hbBFBJwkHi2YBGYzC4hIzO5sY57A
+ KDALibuAkXEVo2RqQXFuem6xYYFRXmq5XnFibnFpXrpecn7uJkZwAGpp7WDcs+qD3iFGJg7G
+ Q4wSHMxKIrwc3qHpQrwpiZVVqUX58UWlOanFhxilOViUxHm/ve5NERJITyxJzU5NLUgtgsky
+ cXBKNTB1Kqqen+V47KLh/q5Z9UtnlD5+mfF5pcQ6qUla73QuFm1JdP7/mf3QMf5bcu+nT1q4
+ Ya1CmeGZaSWR+ZZB1zl+nyzZF6CmFlpg/UixZ+vnOuNZZ/SrV5jvVyxpn7uL7ejLouBJhzuf
+ mAdt+1i53sl515xrK4X3hnHe7nt2oy9sVqPS6R+m5/4fa+L4OYtrutL8izu72M55LfvVtkdj
+ +8v/n/N/eKS+Tj37cM6qetePpz94XTnzMLuBX6x4tvsCvquReSkpYqUfl0tc+aP2blJBzGtz
+ xVflHAWcqpsEPs8OD3RIfpjLrbpG1PJEx1uVd62RV1z/F2494XWGe0PlCsPtPI+e3eJcLuQy
+ /9Bx0UuizkosxRmJhlrMRcWJAKrpPASvAgAA
+X-CMS-MailID: 20241208235642epcas1p1f0a915078a17f169345cfa67fc204ab7
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241207172603epcas1p3fac688f374ee3750de1d056a5a92cc91
-References: <20241207172412.1124558-1-sjg@chromium.org>
- <CGME20241207172603epcas1p3fac688f374ee3750de1d056a5a92cc91@epcas1p3.samsung.com>
- <20241207172412.1124558-2-sjg@chromium.org>
+X-CMS-RootMailID: 20241208220704epcas1p1ae117a90d00f7067505266712f1e6dcc
+References: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
+ <CGME20241208220704epcas1p1ae117a90d00f7067505266712f1e6dcc@epcas1p1.samsung.com>
+ <20241208220551.204743-6-marek.vasut+renesas@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,12 +133,16 @@ X-Virus-Status: Clean
 
 
 > -----Original Message-----
-> From: Simon Glass <sjg@chromium.org>
-> Sent: Sunday, December 8, 2024 2:24 AM
-> The for() loop ends up being in the code even if the log_debug() does
-> nothing. Add a condition to fix this.
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Marek Vasut
+> Sent: Monday, December 9, 2024 7:04 AM
+> To: u-boot@lists.denx.de
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>; Tom Rini <trini@konsulko.com>
+> Subject: [PATCH 06/13] mmc: renesas: Fix R-Car spelling
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> The correct spelling is R-Car, including the dash, update the usage.
+> Kconfig strings and comment changes only, no functional change.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -153,32 +150,63 @@ Best Regards,
 Jaehoon Chung
 
 > ---
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/mmc/renesas-sdhi.c |  2 +-
+>  drivers/mmc/tmio-common.h  | 10 +++++-----
+>  2 files changed, 6 insertions(+), 6 deletions(-)
 >
-> Changes in v3:
-> - Add new patch to avoid size growth in spl_mmc_find_device() debug
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 92afa6adcda..556f07eaf8f 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -571,7 +571,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
+>  	int i, ret = 0, sret;
+>  	u32 caps, reg;
 >
->  common/spl/spl_mmc.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
+> -	/* Only supported on Renesas RCar */
+> +	/* Only supported on Renesas R-Car */
+>  	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
+>  		return -EINVAL;
 >
-> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-> index 1f696593216..fe4230170a0 100644
-> --- a/common/spl/spl_mmc.c
-> +++ b/common/spl/spl_mmc.c
-> @@ -81,8 +81,10 @@ static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
->  	struct uclass *uc;
->
->  	log_debug("Selecting MMC dev %d; seqs:\n", mmc_dev);
-> -	uclass_id_foreach_dev(UCLASS_MMC, dev, uc)
-> -		log_debug("%d: %s\n", dev_seq(dev), dev->name);
-> +	if (_LOG_DEBUG) {
-> +		uclass_id_foreach_dev(UCLASS_MMC, dev, uc)
-> +			log_debug("%d: %s\n", dev_seq(dev), dev->name);
-> +	}
->  	ret = mmc_init_device(mmc_dev);
->  #else
->  	ret = mmc_initialize(NULL);
+> diff --git a/drivers/mmc/tmio-common.h b/drivers/mmc/tmio-common.h
+> index f489fb70766..657aba75148 100644
+> --- a/drivers/mmc/tmio-common.h
+> +++ b/drivers/mmc/tmio-common.h
+> @@ -64,7 +64,7 @@
+>  #define   TMIO_SD_CLKCTL_DIV4		BIT(0)	/* SDCLK = CLK / 4 */
+>  #define   TMIO_SD_CLKCTL_DIV2		0	/* SDCLK = CLK / 2 */
+>  #define   TMIO_SD_CLKCTL_DIV1		BIT(10)	/* SDCLK = CLK */
+> -#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (RCar ver.) */
+> +#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (R-Car ver.) */
+>  #define   TMIO_SD_CLKCTL_OFFEN		BIT(9)	/* stop SDCLK when unused */
+>  #define   TMIO_SD_CLKCTL_SCLKEN	BIT(8)	/* SDCLK output enable */
+>  #define TMIO_SD_SIZE			0x04c	/* block size */
+> @@ -90,7 +90,7 @@
+>  #define   TMIO_SD_VOLT_180		(2 << 0)/* 1.8V signal */
+>  #define TMIO_SD_DMA_MODE		0x410
+>  #define   TMIO_SD_DMA_MODE_DIR_RD	BIT(16)	/* 1: from device, 0: to dev */
+> -#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* RCar, 64bit */
+> +#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* R-Car, 64bit */
+>  #define   TMIO_SD_DMA_MODE_ADDR_INC	BIT(0)	/* 1: address inc, 0: fixed */
+>  #define TMIO_SD_DMA_CTL		0x414
+>  #define   TMIO_SD_DMA_CTL_START	BIT(0)	/* start DMA (auto cleared) */
+> @@ -128,9 +128,9 @@ struct tmio_sd_priv {
+>  #define TMIO_SD_CAP_DIV1024		BIT(2)	/* divisor 1024 is available */
+>  #define TMIO_SD_CAP_64BIT		BIT(3)	/* Controller is 64bit */
+>  #define TMIO_SD_CAP_16BIT		BIT(4)	/* Controller is 16bit */
+> -#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas RCar version of IP */
+> -#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas RCar version of IP */
+> -#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas RCar UHS/SDR modes */
+> +#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas R-Car version of IP */
+> +#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas R-Car version of IP */
+> +#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas R-Car UHS/SDR modes */
+>  #define TMIO_SD_CAP_RCAR		\
+>  	(TMIO_SD_CAP_RCAR_GEN2 | TMIO_SD_CAP_RCAR_GEN3)
+>  	struct udevice *vqmmc_dev;
 > --
-> 2.34.1
+> 2.45.2
 
 
 
