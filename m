@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E247E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 14:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C5D8E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A7D78946D;
-	Sun,  8 Dec 2024 15:49:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 41F2D89473;
+	Sun,  8 Dec 2024 16:29:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vjgl16s/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YBpbqtIx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 865DE894B7; Sun,  8 Dec 2024 15:48:59 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id BD26C89541; Sun,  8 Dec 2024 16:29:14 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CD1C88B0A
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 15:48:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5958894B7
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6efa08f91c8so33771107b3.1
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 06:48:57 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9ec267b879so685127166b.2
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733669336; x=1734274136; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1733671752; x=1734276552; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3HcpSMHEoQKOT2K+uVYC7qun4/dwb31bku4hiltljR4=;
- b=Vjgl16s/jNy2WFmr0c1V0RuQ44LmV0L7Ulpr+k6vmqc43XcPTICGDTlUancki6XtHq
- 4MwZbL/Adqsat4t/4X+JDC3pdNIkvJ0R90F5H4GYzDCgq7EyNu6ctZuttkoWT2pWotkc
- bkIqdy0wYugYVeqbCpoEtqkX6+TuBo5rtoKxNRjrE8VLaUXrL0ihdwjX6gUEkLRBJum2
- OreUsN1QgitwrmLTWNY+e/p8QRT1SobfIivricLfwLgpbhspCSx/l8DQiheQQY9XYiVZ
- po9bEqrdihVWm6w4GfIYtDE4+5utjip+IpAH35fwXjv3zuJy9DI5dZkqGmbdz83MjE2r
- diow==
+ bh=Q0qhEGENIR1sSJLu2s5gtvTL8wIIjzO6lmAoVNM/qb0=;
+ b=YBpbqtIxTNPozohZLohMzBvkIM9nGrTp61u6OswJlFkuIK5V22SU07+KIvgNuj5z6X
+ aUJVU9R/vnvCavQIdEcph49WZO/iRjBPGXE/jh3cIDTDMgVSRDXdiTM6xUlUsP04tRhk
+ vflf7Cw2j/Br3JP9i2vp+yY5QF8jLQUOJlXzY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733669336; x=1734274136;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1733671752; x=1734276552;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3HcpSMHEoQKOT2K+uVYC7qun4/dwb31bku4hiltljR4=;
- b=HHu/5k7fTDkyJhX1D5onLzwPCIN6KpOGIQkaBfvwwHmzPIQYA12yYq71qe0lk4NVq7
- ecYeRCVAmfSmmF8NQJceLs0wh9BI86W8lxE/SJqi0qyIQlwzM1wxnDep/bE7b5ZL8mdD
- KCwjUzu7+at2qxOLgrjn9VllfF0V57dU5GPrC94zjWuoetBSz0YbScEbXA5r81xdaGc9
- EyKqvuqXyIrc7mnt0P9RWB8gftjltxVuq9Ddxd57JwvGRfokbTtRQJ9dM+hvGRiMYfS6
- wqVFbgSepjLqyunSHUw6fwZcG1wuzJNn+xYUU+qGnMZdAWldc+tkzfDuc0cYIWP3PrVF
- ls9A==
+ bh=Q0qhEGENIR1sSJLu2s5gtvTL8wIIjzO6lmAoVNM/qb0=;
+ b=Lu1N5Vz7t2BqewLAev/E4sCBlwaH4+2GlA2jhbMdEvTnme2q/9yD+91/B9yECC4iPn
+ oag3/8rjnm/vH1kCGLpflq30UTlgWxT6Y8SrRiprSEPqpll1/gNjjX9/vKlcRQzfMrfe
+ HoI3lUAOAdJzQY0i1dGVGOWTIiNBCQkmo7xiXTcHRy9a6V65yki5gJd7ifjFRNJK2KHf
+ OMpJqBAIyKU8Ych9R09yy88xJeHiJRKdfiTirqjPK8hpIDrZqInoOcRG/bOMfHPTJkRr
+ XS81fRoolLrPJdG9E8Q2mMgh+Qzg24vBKguRLpZBhlb8mL2AF8cm+y/HT7jTN/mUIXXX
+ s9KA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYZoIdKiZ06maIS7HO0fTY1MwTY7tgdZ4A1yNB/oeSh+YMVcLMVDRPHQXJbxuPY3LfjJspU6c=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyEbXp2q/t3nF+VWgB4jMfPE5QMrg4xLl89DBZJXSQBG12W/a5
- rDM/RLagcysuLvREbgXzc+C0g//sa1KLq2JZX4diKpnQp7OAxU/OSrYdsgzsWNcBdA0iM80L9Zt
- o26KsqXaO9nh665x1O0E+8iootYu4/KJTBGFSYA==
-X-Gm-Gg: ASbGncsO4PncTBt2MiMLQysOCktFGi7huhehGcN9nkeKHBb5MnUGO8TdIlYNxtthvpD
- /1RSMA8FBfgtlSLK1AG8dlygDyGt2xzo=
-X-Google-Smtp-Source: AGHT+IEFgoHb3qNsV7wSECjpaEH3q9SZmO15Pj0uTSeYW6kE8o7w2KhTbgKaB37AKlY5SYhedBqBzmY2Re43Df99BEA=
-X-Received: by 2002:a05:690c:62c8:b0:6ef:4ed2:7dfe with SMTP id
- 00721157ae682-6efe3c6c9f6mr107854847b3.31.1733669336062; Sun, 08 Dec 2024
- 06:48:56 -0800 (PST)
+ AJvYcCUOkvfUsUleHptlfzxHLr8IZeQeWsbKuvrFameQsVOMHXvGgHCrdGZ/Z+NMHiGXnYp6Y+oJkTQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCRtLP/CrDN+rZFJOYJ2L189ua4CI6mBjQpkhMH5aGzsd9qus6
+ Uuwdkrh6ulOq8BAFHhZMSILyUOK+AvcJmTG++xeH4IbB/NMsCODo1PIyv1C3AZXkrlQJUUOUoZI
+ B14wkicKfFxwzBMURRl5shf4wu5Bq2IT443hS
+X-Gm-Gg: ASbGncvT70gZpdglXmIGZzPOFUghLmAophGAtBJ096Y46cDOWPjhEID8pRfvwEs/bVK
+ 79dGGED3yj/x3c2L6XhodFdRKL2Ma9l2d
+X-Google-Smtp-Source: AGHT+IGBq9jg/rgqDgnlS26u4gxV0mXSf9ZcCAjf3Z7CAQWf2QRHVo1pQ96OvCwk6rZP7T3JC0uQP0tus3wBNPxcLTo=
+X-Received: by 2002:a17:906:308d:b0:aa6:800a:1291 with SMTP id
+ a640c23a62f3a-aa6800a1bacmr170204866b.7.1733671752236; Sun, 08 Dec 2024
+ 07:29:12 -0800 (PST)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Sun, 8 Dec 2024 07:29:11 -0800
 MIME-Version: 1.0
-References: <20241208105223.2821049-1-ilias.apalodimas@linaro.org>
- <20241208105223.2821049-8-ilias.apalodimas@linaro.org>
- <14396C54-AE97-4D24-878E-16E73E9F0CA8@gmx.de>
- <CAC_iWjLiax+zU_Zb1Loi6Vh2HiepS6nPqFm1jCq3wNPMs_7PUg@mail.gmail.com>
- <CAC_iWjKWRe_HVowzyZ9JLufOxfS2ZXfUJn1c1u-NB_5BPHZsDA@mail.gmail.com>
-In-Reply-To: <CAC_iWjKWRe_HVowzyZ9JLufOxfS2ZXfUJn1c1u-NB_5BPHZsDA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 8 Dec 2024 16:48:20 +0200
-Message-ID: <CAC_iWjJ7DNk+PoORGgmpzYy89BTCcZrH+BaYVh1TMuSD2=gv8w@mail.gmail.com>
-Subject: Re: [RFC PATCH 7/7] lmb: Rename _lmb_alloc_addr_flags()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: trini@konsulko.com, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Peter Korsgaard <peter@korsgaard.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Nam Cao <namcao@linutronix.de>, Janne Grunau <j@jannau.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <CAFLszTgZKx_rT5K9Y5WSy31buXJV_c9g0fA40f76Dnnjp_ix+Q@mail.gmail.com>
+References: <CAFLszTgZKx_rT5K9Y5WSy31buXJV_c9g0fA40f76Dnnjp_ix+Q@mail.gmail.com>
+ <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <20241123195616.305687-11-mjg59@srcf.ucam.org>
+ <b79cd88a-4346-444d-979c-8eb2ed913d5e@gmx.de>
+Date: Sun, 8 Dec 2024 07:29:11 -0800
+X-Google-Sender-Auth: G0whzKtaxHsp5VyfHV7LqJw66O8
+Message-ID: <CAFLszTh-puzSBEGg3ErgCgTGOSfcFSzbT9GGmtSJmYoTVs7tiw@mail.gmail.com>
+Subject: Re: [PATCH 10/10] Add command to set an environment variable to an
+ EFI variable
+To: Simon Glass <sjg@chromium.org>
+Cc: Matthew Garrett <mjg59@srcf.ucam.org>, u-boot@lists.denx.de, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,122 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 8 Dec 2024 at 14:17, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Sun, 8 Dec 2024 at 14:12, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Heinrich
-> >
-> > On Sun, 8 Dec 2024 at 14:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > Am 8. Dezember 2024 11:52:10 MEZ schrieb Ilias Apalodimas <ilias.apalodimas@linaro.org>:
-> > > >After all the cleanups of the previous patches there's not point anymore
-> > > >to define lmb_alloc_addr_flags() and _lmb_alloc_addr_flags().
-> > > >
-> > > >Fix the incocistency of the flags type, which one function was
-> > > >definining as uintn and the other as an enum lmb_flags and rename
-> > > >_lmb_alloc_addr_flags() to lmb_alloc_addr_flags()
-> > > >
-> > > >Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > >---
-> > > > include/lmb.h |  2 +-
-> > > > lib/lmb.c     | 34 ++++++++++++++--------------------
-> > > > 2 files changed, 15 insertions(+), 21 deletions(-)
-> > > >
-> > > >diff --git a/include/lmb.h b/include/lmb.h
-> > > >index a35a69d69f77..4f3c861b15a6 100644
-> > > >--- a/include/lmb.h
-> > > >+++ b/include/lmb.h
-> > > >@@ -111,7 +111,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
-> > > >  * Return: base address on success, 0 on error
-> > > >  */
-> > > > phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-> > > >-                               uint flags);
-> > > >+                               enum lmb_flags flags);
-> > >
-> > > This change implies that flags IS NOT a bitfield. Flags may only hold a SINGLE value from the enum.
-> > >
-> > > This looks wrong looking at the definition of the constants via BIT().
-> > >
-> > > Defining the constants of a bitfield in an enum was wrong (or at best misleading) from the beginning.
-> >
-> > Ah yes correct, I'll just leave it to uint and change the function prototype
->
-> Hmm thinking about it again. Those flags are never used as bitfield.
-> They are always used as discrete values. So I think we should keep it
-> as is
+Hi Heinrich,
 
-Ok, the above is not correct, we do indeed them use as a bitmask. So
-I'll just change the type to unit
-
-Thanks
-/Ilias
+On Sun, 24 Nov 2024 at 08:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Thanks
-> /Ilias
+> On 11/23/24 20:55, Matthew Garrett wrote:
+> > From: Matthew Garrett <mgarrett@aurora.tech>
 > >
-> > Thanks
-> > /Ilias
-> > >
-> > > Best regards
-> > >
-> > > Heinrich
-> > >
-> > > >
-> > > > /**
-> > > >  * lmb_is_reserved_flags() - test if address is in reserved region with flag bits set
-> > > >diff --git a/lib/lmb.c b/lib/lmb.c
-> > > >index c09f1a1277ad..67bde60b74be 100644
-> > > >--- a/lib/lmb.c
-> > > >+++ b/lib/lmb.c
-> > > >@@ -777,8 +777,20 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
-> > > >       return alloc;
-> > > > }
-> > > >
-> > > >-static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-> > > >-                                  enum lmb_flags flags)
-> > > >+/**
-> > > >+ * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
-> > > >+ * @base: Base Address requested
-> > > >+ * @size: Size of the region requested
-> > > >+ * @flags: Memory region attributes to be set
-> > > >+ *
-> > > >+ * Allocate a region of memory with the attributes specified through the
-> > > >+ * parameter. The base parameter is used to specify the base address
-> > > >+ * of the requested region.
-> > > >+ *
-> > > >+ * Return: base address on success, 0 on error
-> > > >+ */
-> > > >+phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-> > > >+                               enum lmb_flags flags)
-> > > > {
-> > > >       long rgn;
-> > > >       struct lmb_region *lmb_memory = lmb.available_mem.data;
-> > > >@@ -802,24 +814,6 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-> > > >       return 0;
-> > > > }
-> > > >
-> > > >-/**
-> > > >- * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
-> > > >- * @base: Base Address requested
-> > > >- * @size: Size of the region requested
-> > > >- * @flags: Memory region attributes to be set
-> > > >- *
-> > > >- * Allocate a region of memory with the attributes specified through the
-> > > >- * parameter. The base parameter is used to specify the base address
-> > > >- * of the requested region.
-> > > >- *
-> > > >- * Return: base address on success, 0 on error
-> > > >- */
-> > > >-phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-> > > >-                               uint flags)
-> > > >-{
-> > > >-      return _lmb_alloc_addr(base, size, flags);
-> > > >-}
-> > > >-
-> > > > /* Return number of bytes from a given address that are free */
-> > > > phys_size_t lmb_get_free_size(phys_addr_t addr)
-> > > > {
-> > >
+> > We may want to make things conditional on EFI variable state
+> >
+> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> > ---
+> >
+> >   cmd/Kconfig     |   4 ++
+> >   cmd/Makefile    |   1 +
+> >   cmd/efigetenv.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 138 insertions(+)
+> >   create mode 100644 cmd/efigetenv.c
+> >
+Applied to ci/master, thanks!
