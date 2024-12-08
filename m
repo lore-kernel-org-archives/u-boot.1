@@ -4,85 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD70E77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 01:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D6BBE77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 01:00:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D15788E2B;
-	Mon,  9 Dec 2024 02:00:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3814D89589;
+	Mon,  9 Dec 2024 02:00:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YR+eBVI9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oL+/QM0S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A2EF893E8; Sun,  8 Dec 2024 23:10:15 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 658D7893E6; Mon,  9 Dec 2024 00:07:41 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C410893B4
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:10:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03F4188DB6
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:07:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-3003e203acaso13918601fa.1
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 14:10:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa662795ca3so191489866b.1
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 15:07:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733695811; x=1734300611; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UIa7ETMnohITq7Jrx5RjX71qlJsIrY/tZh1gFOMDv/0=;
- b=YR+eBVI9XcM3tkVgbnpA2aLKR0IV2G/hzTUvYLZPg2KiWx7jOOxqBkPlPfN0MmFxjn
- QFQB1siZnK1g1ANHZeFapsO+aVp+xmLJxUOI8jBk4w6gXNTaDQrI5QxMSn8lkMxP0R07
- Lu6Z1p4Fn2FNQb/Q+sMhPa8Kc4WrtBjlt833jEmN/7NoA3pdKZPJKgF5vx316spMkOPK
- CrV8vrSljwBpLK7mnId2GWS8w4mo/R48hec6p3j5A5wnTQeBhfaY4N4Z81fqIsRl5k9c
- bPvselWY6oriD24FjsY+F6EG4qjWykwTPuzO63auLtC/tFpUNkS+iSC/x/c20kbS0sxa
- ypLw==
+ d=chromium.org; s=google; t=1733699255; x=1734304055; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GjOfrwTxQv2UKyIoEXNjIxiLN6Uau3JaYhqgRp9QNaE=;
+ b=oL+/QM0SBuHXepPG0KXV4Oco25R40++ejO0XMgHpzVAGFBwrVJcKPSEYg/JSLs2Pho
+ B7RDFIbRL+pLJmerUgePhgN2hVIApn5tP8bfGT/oD3X13ktz7XMkULcQYNBZN65D6/Lk
+ aWGV6Hrxs3V0kjzkgjz38Lv2YHFoP1WbSfWLE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733695811; x=1734300611;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UIa7ETMnohITq7Jrx5RjX71qlJsIrY/tZh1gFOMDv/0=;
- b=tufBMEaJETaFx2InCrswf1J+cphvgenwR1b2pZK6Flpvj8IJLzQ3TMBy2DgIs26KoD
- AhD4P2a/rPsAdEwa2KAdlwTrNqgE2zCcBSUsrgimlAOzRBiFn8LSSus40dhbwFiZSiFH
- WqHnW1hk/aYuoIobf8wLPN7i+35WkLQqLFyCUupWguN3mzabTPs067twJNFgp9w60xEb
- ozZyp4PVmd2xgV1Y5EuHTYrb/gSyzTOqMh5kUrksLqHCoq1bw2VxD2T67CsHBMIpETT2
- 5AEHAxZLn9BRXeVV/nWOlzsAoBb21Kve9YkLMqmd0TYdoDafi4a/q1nGQzHPDVqryF33
- I+PQ==
+ d=1e100.net; s=20230601; t=1733699255; x=1734304055;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GjOfrwTxQv2UKyIoEXNjIxiLN6Uau3JaYhqgRp9QNaE=;
+ b=M4GMFrTzu9p/8SV+Q+8BHpixE7pOMFSe3mFOMtpMxVN0ZRVS/1VcfawDApAJM3eSiy
+ icv+e/IC4V9l4dT1uRA5qFmizfFnDLc0lGYpJt9X23v43wHqh3Jl7lqL4HUQ6Djsf8LX
+ RWmm7HFPIY2XrRv4Pfe3d1SQV/94XMh7sKlnFP8Mscz3nm0EcgXx1yt2rqEqi/Nf3l2v
+ 9xp1cSF+RRbq0Zb1p4xGeu+8ITExFgeHKD2nnektXU2JGLlNBtq4re3LnyuzBE44O64/
+ CTqropogABlz1WKwlnw4dUY8hLRpcPAoGUgGc6n7CUfA3w0qq3UzLPRoXtN4h05lCKO1
+ XZdA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkurzj7tkQKeJPL2C3c+kkrOBq8AiPCK9L40ZJnZ9abewiDtfg2X5nM/ZxEp9KPfGgkm0DzmY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3SgJ95aOJglPz+YBad2URUlMigTYb8gj2kn+ygwdTttlEZRlV
- ZORhdA39LG/yMY8A9tSPJOk7dQE60g7OpsApmF5tQ88OuesGSNCmkY9xIWrUY8X1keK8Fx1TAf/
- SpP2MKOx7di1b0KlnJ0HHH5d6zQU=
-X-Gm-Gg: ASbGncuwxFRs+I1/aB/MFl0kvYgR7AvihEDx9GdxnHE9KJBFDTpAnInIHj3mGkBAWPI
- nd+Et4DJrSZo36ujWIEcSB8fvsodvdXfViNwX57B9i7TmI5Nqvf+LaEjZH5pjALTt6g==
-X-Google-Smtp-Source: AGHT+IFjwLALmDb1SUUjyaKN5ohlIvvk58T933YofwuvYe+fG4bWemgTq48NWvP+6BUXQ21kH5sJjnGtQPok2ffmbmc=
-X-Received: by 2002:a2e:9fc8:0:b0:302:1d7a:e09 with SMTP id
- 38308e7fff4ca-3021d7a114bmr9232271fa.31.1733695811027; Sun, 08 Dec 2024
- 14:10:11 -0800 (PST)
+ AJvYcCX0skwBKfCOJJDHoBBlWyNbV0NEUu+qbXGuthdITTNOJSNkj9Sju8YfVFN4tqr+nU9CcOK/9So=@lists.denx.de
+X-Gm-Message-State: AOJu0YyahulrTVGrLZ0LtSaClCK8iQAoJem/wr9Fok9xqMFpYrIiTlyn
+ 8JBatFVAW28FH+CwJiIHZe/R13/rRw1InPNqarzJ8RbDfQfDuwANu2UJhqJB/MBAmNviwRHAt0S
+ pAqUyeORuQff5hzlilCxpAB5II7FFXXowd72D
+X-Gm-Gg: ASbGncuMYfuuZ85eNry5QGu5trvf/GdQtt9jTbMduKOus6ZObP9N+X1PlKf/4s5b9nB
+ DHRJnBnSbB0G8NtpJ4eP5TpLIyhJdxw==
+X-Google-Smtp-Source: AGHT+IGzsAPkJ3uG7nvNHfYcOlxAWhjPffLKdEG91nhD+EMpLOQJTmMToj3nxL9krU8N+qlv98UFaQO1EDZV4Y1eMXY=
+X-Received: by 2002:a17:907:3a0f:b0:aa6:2b21:ab5b with SMTP id
+ a640c23a62f3a-aa63739e4e9mr1040803566b.12.1733699255382; Sun, 08 Dec 2024
+ 15:07:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20241208091942.47298-1-hal.feng@starfivetech.com>
-In-Reply-To: <20241208091942.47298-1-hal.feng@starfivetech.com>
-From: E Shattow <lucent@gmail.com>
-Date: Sun, 8 Dec 2024 14:09:59 -0800
-Message-ID: <CANV2PTPEmR11GmsSbS=o7MJtvkgYo+99FLzYeo2dFXoOxbXwnA@mail.gmail.com>
-Subject: Re: [PATCH v8 00/12] Support OF_UPSTREAM for StarFive JH7110
-To: Hal Feng <hal.feng@starfivetech.com>
-Cc: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- H Bell <dmoo_dv@protonmail.com>, Conor Dooley <conor.dooley@microchip.com>, 
- Nam Cao <namcao@linutronix.de>, Bo Gan <ganboing@gmail.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- Minda Chen <minda.chen@starfivetech.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <CAFLszThjGaKd3Z8fYaBqANDnyGOtGSF7t-o7B1B70R9q9jYfgA@mail.gmail.com>
+ <CAFLszTitRwZbOMd-a0nQKzkBUg1OorNFrGzsdyZPtV9rdfEnyg@mail.gmail.com>
+ <20241208155123.GG2457179@bill-the-cat>
+In-Reply-To: <20241208155123.GG2457179@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 8 Dec 2024 16:07:22 -0700
+Message-ID: <CAFLszTh=fsR51k-Gew1XKgfFq-WjV1nX4Bvj_VJEqD-BRk7qMQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] Improve UEFI app support
+To: Tom Rini <trini@konsulko.com>
+Cc: Matthew Garrett <mjg59@srcf.ucam.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Boon Khai Ng <boon.khai.ng@intel.com>, Bryan Brattlof <bb@ti.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Christophe ROULLIER <christophe.roullier@foss.st.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Gabor Juhos <j4g8y7@gmail.com>, 
+ Hanyuan Zhao <hanyuan-z@qq.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Philip Oberfichtner <pro@denx.de>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Robert Marko <robert.marko@sartura.hr>, Romain Naour <romain.naour@smile.fr>, 
+ Sam Edwards <CFSworks@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 X-Mailman-Approved-At: Mon, 09 Dec 2024 02:00:16 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,157 +114,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hal, I think this series is now ready for merge to -next
+Hi Tom,
 
-On Sun, Dec 8, 2024 at 1:21=E2=80=AFAM Hal Feng <hal.feng@starfivetech.com>=
- wrote:
+On Sun, Dec 8, 2024, 08:51 Tom Rini <trini@konsulko.com> wrote:
 >
-> This patchset add OF_UPSTREAM support for StarFive JH7110 based boards.
-> All the JH7110 based boards can use the DT from upstreaming linux kernel.
-> The v1.3b board device tree is set as the default device tree. Support
-> CONFIG_MULTI_DTB_FIT and the SPL selects the correct U-Boot dtb using the
-> EEPROM information.
+> On Sun, Dec 08, 2024 at 08:28:42AM -0700, Simon Glass wrote:
+> > Hi,
+> >
+> > On Sun, 1 Dec 2024 at 09:15, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Matthew,
+> > >
+> > > On Sat, 23 Nov 2024 at 12:56, Matthew Garrett <mjg59@srcf.ucam.org>
+wrote:
+> > > >
+> > > > We run a mixed environment including traditional embedded Linux and
+> > > > UEFI. For consistency it's valuable to use U-Boot in both cases,
+but on
+> > > > UEFI systems we want to run the full Linux kernel UEFI boot stub.
+This
+> > > > patchset adds support for that, along with various other
+quality-of-life
+> > > > improvements such as automatically finding partitions based on their
+> > > > GUID, automatic identification of load addresses where the firmware
+has
+> > > > given us constraints, support for EFI variable access in the EFI
+app,
+> > > > drivers for EFI network adapters and TPMs, support for embedding
+DTBs in
+> > > > the EFI app, and a couple of bug fixes.
+> > > >
+> > > >
+> > > > Janis Danisevskis (1):
+> > > >   Fix efi_bind_block.
+> > > >
+> > > > Matthew Garrett (9):
+> > > >   Add EFI handover support to bootm
+> > > >   Add part_find command
+> > > >   Add a command to find a load address
+> > > >   Hook up EFI env variable support in the EFI app
+> > > >   Add EFI network driver
+> > > >   Add UEFI TPM2 driver
+> > > >   Support separate DTB files with the UEFI app
+> > > >   Use the correct ramdisk address
+> > > >   Add command to set an environment variable to an EFI variable
+> > > >
+> > > >  Makefile                        |   7 +-
+> > > >  arch/x86/config.mk              |   2 +-
+> > > >  arch/x86/lib/bootm.c            |  60 ++++++++----
+> > > >  arch/x86/lib/elf_x86_64_efi.lds |   4 +
+> > > >  boot/bootm.c                    |   5 +
+> > > >  cmd/Kconfig                     |  23 ++++-
+> > > >  cmd/Makefile                    |   3 +
+> > > >  cmd/addr_find.c                 |  87 +++++++++++++++++
+> > > >  cmd/efigetenv.c                 | 133 ++++++++++++++++++++++++++
+> > > >  cmd/part_find.c                 | 156
+++++++++++++++++++++++++++++++
+> > > >  drivers/net/Kconfig             |   7 ++
+> > > >  drivers/net/Makefile            |   1 +
+> > > >  drivers/net/efi_net.c           | 110 +++++++++++++++++++++
+> > > >  drivers/tpm/Kconfig             |   7 ++
+> > > >  drivers/tpm/Makefile            |   1 +
+> > > >  drivers/tpm/tpm2_efi.c          |  97 +++++++++++++++++++
+> > > >  include/asm-generic/sections.h  |   1 +
+> > > >  include/bootm.h                 |   6 ++
+> > > >  include/efi.h                   |  24 +++++
+> > > >  include/efi_tcg2.h              |   1 +
+> > > >  lib/efi/Makefile                |   2 +-
+> > > >  lib/efi/efi.c                   |   1 +
+> > > >  lib/efi/efi_app.c               |  41 ++++++++
+> > > >  lib/efi/efi_app_init.c          | 163
+++++++++++++++++++++++++++++++--
+> > > >  lib/efi/efi_dtb.S               |   6 ++
+> > > >  lib/efi/efi_vars.c              |  44 +++++++++
+> > > >  lib/fdtdec.c                    |   3 +
+> > > >  27 files changed, 967 insertions(+), 28 deletions(-)
+> > > >  create mode 100644 cmd/addr_find.c
+> > > >  create mode 100644 cmd/efigetenv.c
+> > > >  create mode 100644 cmd/part_find.c
+> > > >  create mode 100644 drivers/net/efi_net.c
+> > > >  create mode 100644 drivers/tpm/tpm2_efi.c
+> > > >  create mode 100644 lib/efi/efi_dtb.S
+> > > >  create mode 100644 lib/efi/efi_vars.c
+> > > >
+> > > > --
+> > > > 2.47.0
+> > > >
+> > >
+> > > Thank you for sending this and for your interesting talk at plumbers.
+> > > It is a novel approach and potentially provides an alternative to grub
+> > > and EFI_LOADER, etc.
+> > >
+> > > I'd like to try getting this running in CI as we don't have any such
+> > > tests for the app or payload at present.
+> >
+> > I'm planning to pull this in as this seems like an important use case.
+> > I'm not sure how much time Matthew will have for this, and I want to
+> > avoid this series going stale.
+> >
+> > The comments which are not 'why do you want to do this?' are fairly
+> > minor, so I'll send a follow-up to resolve them next week. We should
+> > also think about what code we could move from lib/efi_loader to
+> > lib/efi so we can share it with the app.
+> >
+> > Matthew, thanks again for sending this. if you are planning to do more
+> > here in the short term, please let me know.
 >
-> Note:
-> 1. Mars CM (lite) are missing upstream dts and so are detected but not
-> supported in this series. Users of Mars CM and Mars CM Lite may stay with
-> U-Boot v2024.10 until this is resolved.
->
-> 2. Property values of node phy0/1, gmac0/1, stmmac_axi_setup for all
-> JH7110 based boards now follow the upstream dts.
->
-> 3. Set "cdns,read-delay =3D <2>" for qspi flash@0 and this setting will b=
-e
-> synced to Linux later.
->
-> Changes since v7:
-> - In patch 2, drop "spi-max-frequency" property of qspi, set
+> Please don't grab other peoples patch series and pick them up for your,
+> well, whatever you want to call "ci/master". You can do what you like
+> with patches you wrote but taking submissions from others is just going
+> to confuse the situation as to if you are, or are not, forking the
+> project at this point.
 
-Patch 2 adds (not drops) "spi-max-frequency" to 100MHz in co-operation with=
-...
+This is a special situation as I had requested the series based on a talk
+that I saw. I am interested in building on this work and obviously don't
+want to do it on an out-of-tree basis.
 
->   "cdns,read-delay =3D <2>" for flash@0.
+I have to say I felt quite uncomfortable at the response we gave this new
+contributor. If I had received such a response on my first series to U-Boot
+I would never have come back.
 
-... this change of read-delay =3D 2 cycles. The commit messages are not
-affected and the code is correct. For anyone in future reading this
-cover letter, the intention is to drop both of these properties from
-the u-boot specific dtsi after resolving upstream in Linux devicetree.
+I intend to keep the openness to new ideas in the future.
 
->   Drop &stmmac_axi_setup &gmac0 &gmac1 property overrides.
->   Drop the redundant &S7_0 { status =3D "okay"; }.
->
-> Changes since v6:
-> - Drop the "snps,dw-mshc" override of compatible in patch 2, then add
->   "starfive,jh7110-mmc" compatible in mmc driver to match upstream DT.
-> - Delete newline at end of Mars DT file in patch 5.
-> - Sort OF_LIST in patch 7.
-> - Sort items of images and configurations in patch 8.
->
-> Changes since v5:
-> - In patch 2, drop the override of rx-internal-delay-ps on phy0 and phy1.
-> - In patch 5, drop "/delete-property/ motorcomm,tx-clk-10-inverted;" for
->   Mars network phy0.
-> - In patch 8, rename fdt and conf based on the compatible identifier of
->   boards.
->
-> Changes since v4:
-> - Merge patch 2, 3, 5 into patch 1, ensuring git bisect works.
-> - Add a new patch to sort the list of JH7110 imply statements.
-> - Drop the reparent of clock JH7110_AONCLK_APB_FUNC in patch 4, which is
->   unnecessary and will cause errors in gmac0 initialization.
->
-> Changes since v3:
-> - Add detection for Milk-V Mars CM (lite) boards in patch 13.
->
-> Changes since v2:
-> - Drop patch 1, because the riscv of_upstream Makefile is created by Cono=
-r
->   in commit 239e4705099c.
-> - Drop phy0 rx delay for milkv u-boot dtsi in patch 9.
-> - Add a Fixes tag for patch 13.
-> - In patch 14, the PCB version is only obtained when the product_id is
->   VF7110. Improve the commit messages.
->
-> Changes since v1:
-> - Drop patch 12.
-> - Modify patch 11 and add three new patches to support
->   CONFIG_MULTI_DTB_FIT. The SPL selects the correct U-Boot dtb using the
->   EEPROM information.
->
-> History:
-> v7: https://lore.kernel.org/all/20241203030430.26089-1-hal.feng@starfivet=
-ech.com/
-> v6: https://lore.kernel.org/all/20241125003205.75327-1-hal.feng@starfivet=
-ech.com/
-> v5: https://lore.kernel.org/all/20241119020425.51989-1-hal.feng@starfivet=
-ech.com/
-> v4: https://lore.kernel.org/all/20241111020808.38974-1-hal.feng@starfivet=
-ech.com/
-> v3: https://lore.kernel.org/all/20241105034328.56439-1-hal.feng@starfivet=
-ech.com/
-> v2: https://lore.kernel.org/all/20241028015847.42344-1-hal.feng@starfivet=
-ech.com/
-> v1: https://lore.kernel.org/all/20240930155919.111738-1-hal.feng@starfive=
-tech.com/
->
-> Hal Feng (12):
->   dts: starfive: Switch to using upstream DT
->   riscv: dts: jh7110: Make u-boot device trees adapting to upstream DT
->   mmc: dw_mmc: Add "starfive,jh7110-mmc" compatible to match upstream DT
->   pcie: starfive: Make the driver compatible with upstream DT
->   riscv: dts: jh7110: Move common code to the new
->     jh7110-common-u-boot.dtsi
->   riscv: dts: jh7110: Add u-boot device tree for JH7110 based boards
->   board: starfive: spl: Drop the unneeded DT modification code
->   configs: visionfive2: Enable MULTI_DTB_FIT for JH7110 based board DT
->   riscv: dts: jh7110: Support multiple DTBs in a Fit image
->   board: starfive: spl: Fix the wrong use of CONFIG_IS_ENABLED()
->   board: starfive: spl: Support multiple DTBs for JH7110 based boards
->   riscv: cpu: jh7110: Sort the list of imply statements
->
->  arch/riscv/cpu/jh7110/Kconfig                 |  19 +-
->  arch/riscv/dts/Makefile                       |   1 -
->  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 195 +++++
->  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |   6 +
->  .../dts/jh7110-pine64-star64-u-boot.dtsi      |   6 +
->  .../jh7110-starfive-visionfive-2-u-boot.dtsi  | 117 ---
->  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |   6 +
->  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |   6 +
->  .../dts/jh7110-starfive-visionfive-2.dts      |  11 -
->  .../dts/jh7110-starfive-visionfive-2.dtsi     | 380 ---------
->  arch/riscv/dts/jh7110-u-boot.dtsi             |  27 +-
->  arch/riscv/dts/jh7110.dtsi                    | 761 ------------------
->  board/starfive/visionfive2/spl.c              | 391 +--------
->  configs/starfive_visionfive2_defconfig        |   4 +-
->  drivers/clk/starfive/clk-jh7110-pll.c         |   6 +-
->  drivers/clk/starfive/clk-jh7110.c             |  44 +-
->  drivers/mmc/snps_dw_mmc.c                     |   1 +
->  drivers/pci/pcie_starfive_jh7110.c            |  59 +-
->  .../dt-bindings/clock/starfive,jh7110-crg.h   | 258 ------
->  .../dt-bindings/reset/starfive,jh7110-crg.h   | 183 -----
->  20 files changed, 342 insertions(+), 2139 deletions(-)
->  create mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dt=
-si
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-b=
-oot.dtsi
->  create mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-b=
-oot.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dts
->  delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
->  delete mode 100644 arch/riscv/dts/jh7110.dtsi
->  delete mode 100644 include/dt-bindings/clock/starfive,jh7110-crg.h
->  delete mode 100644 include/dt-bindings/reset/starfive,jh7110-crg.h
->
->
-> base-commit: 45f05f681224d88d1b170063001b59edc8fc24cf
-> --
-> 2.43.2
->
+Re the patchwork thing, it was temporary while I was bringing in the
+series. It should be fixed now.
 
-If no further code or commit message corrections are requested, then
-let's merge this series to -next
-
--E Shattow
+Regards,
+Simon
