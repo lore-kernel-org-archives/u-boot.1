@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD3AE77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 19:09:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03DA7E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 19:09:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A22CD8954F;
-	Sun,  8 Dec 2024 20:08:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1AC6B895DD;
+	Sun,  8 Dec 2024 20:08:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IMraxU+Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pIT/2SO0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5B9B8954B; Sun,  8 Dec 2024 20:08:03 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 231D9893D6; Sun,  8 Dec 2024 20:08:04 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF808893D6
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 20:07:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5D8889541
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 20:08:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6d900c27af7so11267636d6.2
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 11:07:57 -0800 (PST)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-467631f3ae3so1755211cf.0
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 11:08:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733684877; x=1734289677; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733684881; x=1734289681; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bDxMXaH4Y8EfWN3T0ePQlVwNiD+2Wt4L6wbiZh7Go4I=;
- b=IMraxU+YqbteVGSkVbCOW6knSJTF6+CSm4OnLg+/1+K0CX8rBb0UME9c5e4BZQL7ow
- P8I1e6jCxa0TL4E9pBnf2iLKJJkWR0LTnf1Rg6M6D+PccvGHobCbE0rZb/CEtz6Hw35+
- mbkldxJNKe1zpMCCvDYGdVJCoL2PQ+dEGZbGo=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TDvNaabWhKkWhwpY1kPtX3noWnH2Byfq+SHtaSFhw0g=;
+ b=pIT/2SO0Vy3/x+CGDO1xWVdt/D3hzwZjSbcupebtQ7hRUif7e5MKpvAb7eOMVCq36H
+ zcDloGMwum0NfMTpTSUapwWLFbSJ4/NYxyOGWb7JO4ahg01WH0T+x2VSUMQPm+2hqsro
+ G3PvwSFUf0wznExUS22SLV39iwTECdMS1QFIo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733684877; x=1734289677;
+ d=1e100.net; s=20230601; t=1733684881; x=1734289681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bDxMXaH4Y8EfWN3T0ePQlVwNiD+2Wt4L6wbiZh7Go4I=;
- b=Dz0pGrfJa3oeD1VeW3cS3a3qdZ5qxdYMHdEOBs0MkfLOyGJOuRfXaAdtxICOgjNcND
- XEPqL5Bs+2Cd1M3s8Wu7w0SMepxWvQDBlLiGivCwG9ujZqJ4Ga8k0MY1W39WcS0w5q9C
- LyiIaKM8JZdORNeY+UTxmxF/RpeuOjCY0XqGiB8qXA5y2eCdLZ0z7qo6XNwTcgl+AgWg
- A6bIaJGc9h1igS8fMtbi8vpDoXQG1Rf43TjY0FITIHebVutITRkvdcbizihqeO9B2x29
- PBFYk5e+dVYTPDECVxLs4LUiPuzXm2jAaekmcBXUZsfLn/loYuw/R9c2YilNbvqpdUKi
- TXSg==
-X-Gm-Message-State: AOJu0YwXpDM8sw6OeeE2OPnLo6sxw/szzwIFjUX3iyOaB1eSpXQUH22Q
- RBC0BWQzp5EbWWJm5DfWsppio/h+74CJWGfm0U+LJwsUbWuWDF+IsTciI1otKPS2vLbmCpfCu4d
- H4Yg=
-X-Gm-Gg: ASbGncuWy8QcSax5d4YLalLCfS6ZYbhmToXJ6IlJpFnUaM3TcEgBcp3HvP107rYFWme
- Gj1D2A7Su7hQ+IuRFu9V6crVI/4reBkh+xmUR8ljwkZiOsg8cxAcA6+NPg3cwsU0K61C41K3gAs
- vnuiDtKnCJi2wThiSxBYuYW4m5f65lW2DHw03i69ITWrVDcJa0dPN5Ft0xmulccAXtrCpsKSWP7
- a4K+UAkqskVPUz7qMXxiAQchp5Hg9yvvxhY6SMdfdqnN4YivuanKmQ/uws4F4oQpH0/f9AeOQ==
-X-Google-Smtp-Source: AGHT+IGTG8gtIXrWEZ8nC/W3iLlKDrCuvTzClmGQ9075N5iwwcvOJYmyFDzP2axBg9TltbYhl0wwKQ==
-X-Received: by 2002:a05:6214:2681:b0:6d8:9610:a9ff with SMTP id
- 6a1803df08f44-6d8e70ef529mr131783696d6.1.1733684876945; 
- Sun, 08 Dec 2024 11:07:56 -0800 (PST)
+ bh=TDvNaabWhKkWhwpY1kPtX3noWnH2Byfq+SHtaSFhw0g=;
+ b=lGDcx3QY2u8GbK6gYRD8k466fFDTvUi4na1qzeV6cKCHe0SxwoyPoFcK6Yd/qlVogr
+ /899x21fnNuImbGH87MWgvYh757dU9Oww/XVZ9L2N0EjqgtJgDK1q4jdcETF8vMVZsG+
+ feFoL39hQkeswXUJRAjc562FAuBJ6uNJRl3dV8zYvd9O5HtZWwOIuZNZLQnRvX9kfgAf
+ tGTaH9hUIJILPs8WsNbGdyBuhbVIVU0fm2CyaxVVtAQ17DhezDJOuDmZp+YfNOdtEliA
+ N6BJ5sHTkyySDqJAH8x/dYqjM2M3aP3DOFnCP6MPs6Pyl27GR+BNvliwCfsO9qB0x+wf
+ j+yA==
+X-Gm-Message-State: AOJu0Yz3eldoSzzA7XUMMDsAjmAN9Ht0sAh8K8qpGrgI4B0QRNaHyOn5
+ M2X9LJVQzZ+ZFxao+VAY0JgDW2YBTbUtEDwHRfwhxXxybNBOeYE+ucX+7z1TVh0DaAmqk44ugVd
+ i0Bc=
+X-Gm-Gg: ASbGncsWoipQir2LJQ/3JM7uO+IFL+hNR1ghiJVezgombmAh8X1S5vfJ9hd7Kn+up/q
+ EA8VSfbccaVAHbaGKc5L79azZqdxTtiNiteWaI0w9BjaDkKAmA4v5terck0sBWFc2771okUL/PC
+ iMcIiLrIXUvCNqzZmAOUfBDcImMi2u9w3ZcS/Auke2L5JzuJ7K+dcJcKOg7jb7rqJ66yuGdodGj
+ NwTZWX48rEbNYupCpG9U36JLuYruNdSUEaNF0DUtmhH2kuiftcB8ZReZzznLqehgVh+aooy9g==
+X-Google-Smtp-Source: AGHT+IG0TA0qHjnIqVkAYocMoM1wHJHJoimpc3Hx1wfT6/KstVc9EZ/dAvfw065db4zbAUe5ySQ0HA==
+X-Received: by 2002:a05:6214:c82:b0:6d8:96a6:ec27 with SMTP id
+ 6a1803df08f44-6d8e71a62camr161049496d6.35.1733684880870; 
+ Sun, 08 Dec 2024 11:08:00 -0800 (PST)
 Received: from bill-the-cat.tail58a08.ts.net ([189.177.125.100])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8da66ddeasm41154076d6.25.2024.12.08.11.07.55
- for <u-boot@lists.denx.de>
+ 6a1803df08f44-6d8da66ddeasm41154076d6.25.2024.12.08.11.07.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Dec 2024 11:07:56 -0800 (PST)
+ Sun, 08 Dec 2024 11:08:00 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 5/9] Gitlab: Avoid downloading all artifacts in later stages
-Date: Sun,  8 Dec 2024 11:07:28 -0600
-Message-ID: <20241208190741.4192601-6-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 8/9] doc: Expand what we say about building the docker
+ container a bit
+Date: Sun,  8 Dec 2024 11:07:31 -0600
+Message-ID: <20241208190741.4192601-9-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241208190741.4192601-1-trini@konsulko.com>
 References: <20241208190741.4192601-1-trini@konsulko.com>
@@ -92,37 +94,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the test.py stage of the build we mark the pytest results as
-artifacts to save, so that they can be used for reports. This however
-leads to all of the artifacts being downloaded (and then not used) in
-later stages. Optimize this out by using an empty list of dependencies
-here (which is the keyword for which artifacts are needed).
+First, try and be slightly clearer about what "buildx" is with respect
+to the docker build process.
+
+Second, now that we build the container for both amd64 and arm64, we
+should document how to make a docker "builder" that has multiple nodes.
+With this one node should be amd64 and one node arm64, and with
+reasonably fast arm64 hardware this will be much quicker than using
+QEMU.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- .gitlab-ci.yml | 2 ++
- 1 file changed, 2 insertions(+)
+Cc: Simon Glass <sjg@chromium.org>
+---
+ doc/build/docker.rst | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index ae9120655b0c..696d3cb1bd74 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -111,6 +111,7 @@ stages:
+diff --git a/doc/build/docker.rst b/doc/build/docker.rst
+index 5896dd5ac4a6..01ed35050908 100644
+--- a/doc/build/docker.rst
++++ b/doc/build/docker.rst
+@@ -4,21 +4,29 @@ GitLab CI / U-Boot runner container
+ In order to have a reproducible and portable build environment for CI we use a container for building in.  This means that developers can also reproduce the CI environment, to a large degree at least, locally.  This file is located in the tools/docker directory.
  
- build all platforms in a single job:
-   stage: world build
-+  dependencies: []
-   rules:
-     - when: always
-   parallel:
-@@ -521,6 +522,7 @@ coreboot test.py:
-     - if: $SJG_LAB != "1"
-       when: manual
-       allow_failure: true
-+  dependencies: []
-   tags: [ 'lab' ]
-   script:
-     - if [[ -z "${SJG_LAB}" ]]; then
+ The docker image supports both amd64 and arm64. Ensure that the
+-'docker-buildx' Debian package is installed (or the equivalent on another
+-distribution).
++`buildx` Docker CLI plugin is installed. This is often available in your
++distribution via the 'docker-buildx' or 'docker-buildx-plugin' package.
+ 
+ You will need a multi-platform container, otherwise this error is shown::
+ 
+     ERROR: Multi-platform build is not supported for the docker driver.
+     Switch to a different driver, or turn on the containerd image store, and try again.
+ 
+-You can add one with::
++You can add a simple one with::
+ 
+     sudo docker buildx create --name multiarch --driver docker-container --use
+ 
+-Building is supported on both amd64 (i.e. 64-bit x86) and arm64 machines. While
+-both amd64 and arm64 happen in parallel, the non-native part will take
+-considerably longer as it must use QEMU to emulate the foreign code.
++This will result in a builder that will use QEMU for the non-native
++architectures request in a build.  While both amd64 and arm64 happen in
++parallel, the non-native part will take considerably longer as it must use QEMU
++to emulate the foreign code.  An alternative, if you have accesss to reasonably
++fast amd64 (i.e. 64-bit x86) and arm64 machines is::
++
++    sudo docker buildx create --name multiarch-multinode --node localNode --bootstrap --use
++    sudo docker buildx create --name multiarch-multinode --append --node remoteNode --bootstrap ssh://user@host
++
++And this will result in a builder named multiarch-multinode that will build
++each platform natively on each node.
+ 
+ To build the image yourself::
+ 
 -- 
 2.43.0
 
