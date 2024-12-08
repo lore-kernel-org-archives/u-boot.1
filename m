@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DE4EE7717D
-	for <u-boot@archiver.kernel.org>; Sat,  7 Dec 2024 23:51:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9589BE7717D
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 00:21:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D318C893B3;
-	Sun,  8 Dec 2024 00:51:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A64168941D;
+	Sun,  8 Dec 2024 01:21:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O/k0cKWy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ChDzB96v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B792893C4; Sun,  8 Dec 2024 00:51:49 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id BD426893EC; Sun,  8 Dec 2024 01:21:26 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03D7B8939B
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 00:51:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A62D893D1
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 01:21:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa1e6ecd353so513683766b.1
- for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 15:51:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-71ddeb7f85eso132770a34.0
+ for <u-boot@lists.denx.de>; Sat, 07 Dec 2024 16:21:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733615506; x=1734220306; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WcphBQk42TI0Ljxe5NAopPsFK1aiJVYfiEh5oAJOFjY=;
- b=O/k0cKWyJlrqnoZRt2PRzRHXKecs/Hkyj5K2wk7oeU8/1iONWlRevUFb1aUbW+nofi
- 4YY6ZUk/XjT3tz3QYpIKyJJhr+UCcy41h47M3UR/sBWsMxh/VN3I+CQ6XdnRDQpBoASJ
- JGEvD6H8iZnhg2p5v60zMdi2ZJflK0J2tfm88=
+ d=linaro.org; s=google; t=1733617283; x=1734222083; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jiCmhmcXsthYp0scSZafimf3HBulTX/uWaZSdo1OnxQ=;
+ b=ChDzB96vMh7pjmyBvXJm/RPCQwDTJA7Jof9xbO/BI5WuKhTaHEDbVuUIGyIVpajC62
+ 3PhSyuUdN7QGcjWr3MMmGiD1C5EE8z17toVNEyGyuFJ8VyXyrswHl9A9B3m1szMbk74I
+ jBuoLsgGeYForKVDwT9+t5OQHmwPSw05R/u4I4r2M4CGAnrRsHSeCeniSpSXnXVEMseS
+ THPhbEotVRBI5QGOpkZZW5XTnEAdMMpRNNs3M3MTEOfI4FEb10Fg1zGOQ/0gMLq6S9N5
+ mYpQzPe3ypW04dfxOsKolZ3zTCKt4eE0gf1HfLY9zWqtKDjVUX0LW7f589zbpHhy5cRM
+ aEsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733615506; x=1734220306;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733617283; x=1734222083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WcphBQk42TI0Ljxe5NAopPsFK1aiJVYfiEh5oAJOFjY=;
- b=XP9LgU7zgBBixcCZjF9UyVMFwoIk2ObKJxK1kjn9a0B6KyovTNu1adwzSMDeYwc4Fu
- +8iH/VNSuvsl/lHiKRV01sbSHxLp4ywmqZXIV5ch25KVh1JjBHJUisgICbQ/6Zr80Xhq
- tPxqAmaEQQ68JJZ7SsIzp6y+CaQJKNMxsFYFzhI4afJBkSsBSjS59Kr2AlWolzBLwq8j
- 1DCegjtcH2IjBk8HHmGp5i8v07Nq1L9wH8GL7lHHr3y4NFZ2WDYpPk62+dTW5I83DJ87
- jtqv+QmBFH+cLMoO3oI1oGNaxqhp4cOTmfv07/0HVMX3JgstG0nGpTcK812QwAk8wwLZ
- rbKQ==
-X-Gm-Message-State: AOJu0YzWX/avDVlOuOOt8x9Rr6iN08ivAQKiSycxT/ERqLY7OlbzGcAU
- pkc2Xr5MD3fylzbhhNCo2ECsCd6+EnGZpkf6teU9cC8tP6KLfhZkRHeLR5bngiKcN8SCLIGlsd5
- SJDOWmePWzJxAc/SCqdJmCmbntzh9WHzxMZ1k
-X-Gm-Gg: ASbGncsc3gMu/vJg1gkeEhK11A+Ipj/c+pv11IcdtQD4TSfFkfPeCSiG1/w1TYAB+s7
- OH5K4l4k8nZcS/V33uN4w9+2lj0COw7nD
-X-Google-Smtp-Source: AGHT+IEFn7Q/6OZhs5ztYfSOPt7x+c0RaF6hJir8t2TrfM+hQYfyIKgbYszjUO76E1Xz3Q5BVB8DF1s+M3UgzO6wXqE=
-X-Received: by 2002:a05:6402:1913:b0:5d1:1064:326a with SMTP id
- 4fb4d7f45d1cf-5d3be69a19amr19243269a12.15.1733615506403; Sat, 07 Dec 2024
- 15:51:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20241206131113.2865416-1-sjg@chromium.org>
- <20241206140852.GO2457179@bill-the-cat>
- <CAFLszTizXjXnc_P3RHpxbKj5qoEfW_Swrc6V6v6dS7kFUqH9CA@mail.gmail.com>
- <20241206194130.GX2457179@bill-the-cat>
- <CAFLszTjQchtBH+K5rRPdiOGgb1bYq3LFWH8BP7jw+noXEaC0GA@mail.gmail.com>
- <20241206235233.GB2457179@bill-the-cat>
- <CAFLszThCR3KG+AVCN_ZeVVmKXverd6g+qNnKrt5YbdTy6jEayg@mail.gmail.com>
- <20241207000029.GC2457179@bill-the-cat>
- <CAFLszTiLFe80OQy1q5eVCoZ-v0AhaKUOzdcLsWK9wEwn_SzZ9w@mail.gmail.com>
- <20241207005246.GD2457179@bill-the-cat>
-In-Reply-To: <20241207005246.GD2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Dec 2024 16:51:34 -0700
-Message-ID: <CAFLszTju5G+icA4aLWWsYTZaEzZp+qUgvgtZ38azndH+A-6Okg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] rpi: Tidy up booting
+ bh=jiCmhmcXsthYp0scSZafimf3HBulTX/uWaZSdo1OnxQ=;
+ b=df/NHaXCz70p65NuBUiQ2GVnjBm5Pr/nr37nwiCmf6KtmT2a4SAIUuJdej7aIvkKtH
+ oDAlJUUS4bFFuK4CmyZDcntAiwYWphXmMZKEJCCkYMHe40ZklsWglISAx2Ppi3kXWZmC
+ fyP0yTsOnWsqhLmdOxlqCDtxgpNqJnxFXjJZHXgYSRPPopAIs9uH+5k+VbRJ/z1BNre1
+ 85HKcVawS/+8udiqPxhVUuaB6QYY7cDif7LP4fj9X9tiYdEYukHq00V6LuobL9r9ITUY
+ PgMuoKqjw/I7kPleEj9R/fo7zEfe3wTbrN435ZgLD63MzeGhOwpIqkNW3/SPYtVpgBgA
+ Vwiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXtYUG5oYw4B/o/AlHK9qFwI3aLsia5QJMSPu4C/J9RtM91Nil465l/z/aOaza/gWwrKVZDj+0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy13+p4cRXIUCAb6eOJ31dm7hNVq+ys1Q16opmHVtAHbYyMQzhi
+ 7KZtFqgeg5NbtGwvVRmO+bzLoydGri7Rx145CdvbSytJf6B0aJgQOzX4cZoLJKg=
+X-Gm-Gg: ASbGncsoSDQaLK9J83R4GCI+8uV4jijRhlFPEjeyHPZaq+uHGjkO9dis/+2nuQKPZGs
+ 9fHrTV82gokH46e6O9q3CAgPGKyrZuIPMJoeUcoSCTomnXIFWOGMXXtz9ABUPVFdw0tzf2vlw9D
+ TLyr2GVSRx2U7PFTu540S32XhzvD6TAgk2WGpuSZTqjn/5xRlxDJxeNerAM53rimIfHZslUv2rJ
+ AHXYnYKIs10I8CqkNhV+X+jNpgZbKeJErlfCrsp/Nb4k75K0pbe9pw=
+X-Google-Smtp-Source: AGHT+IG2iVtnIYwuG+AhpDm0iTrK6dAc2sK/73s7C1bAA0wd6GLdykdUeRYUWzdJmoeIpJV8G9wQLQ==
+X-Received: by 2002:a05:6830:6112:b0:718:18d6:a447 with SMTP id
+ 46e09a7af769-71dcf544b83mr4126581a34.24.1733617283139; 
+ Sat, 07 Dec 2024 16:21:23 -0800 (PST)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5f27930470fsm1454491eaf.27.2024.12.07.16.21.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Dec 2024 16:21:22 -0800 (PST)
+From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- "Ivan T. Ivanov" <iivanov@suse.de>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Jerry Van Baren <vanbaren@cideas.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
- Matthias Brugger <mbrugger@suse.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>, 
- This contributor prefers not to receive mails <noreply@example.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/6] lmb: Fix reserving the same region multiple times
+Date: Sat,  7 Dec 2024 18:21:15 -0600
+Message-Id: <20241208002121.31887-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,134 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Since commit 1d9aa4a283da ("lmb: Fix the allocation of overlapping
+memory areas with !LMB_NONE") the lmb_add_region_flags() returns -1 when
+the caller tries to add the already existing region with !LMB_NONE
+flags (it was returning 0 before that patch). That causes
+boot_fdt_reserve_region() function to print erroneous error messages
+when it's called consequently more than one time.
 
-On Fri, 6 Dec 2024 at 17:52, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 06, 2024 at 05:10:39PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 6 Dec 2024 at 17:00, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Dec 06, 2024 at 04:56:31PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 6 Dec 2024 at 16:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Dec 06, 2024 at 04:41:37PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 6 Dec 2024 at 12:41, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Dec 06, 2024 at 12:17:49PM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 6 Dec 2024 at 07:08, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Dec 06, 2024 at 06:11:10AM -0700, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
-> > > > > > > > > > ramdisk, by expanding the available space.
-> > > > > > > > > >
-> > > > > > > > > > It also tidies up some strange behaviour with the provided FDT, where a
-> > > > > > > > > > separate pointer is maintained to it, even though U-Boot has copied it
-> > > > > > > > > > and placed it in its own space. This avoids strange bugs where it
-> > > > > > > > > > accidentally gets overwritten when loading a file into memory.
-> > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > Simon Glass (3):
-> > > > > > > > > >   rpi: Update environment to support booti and large initrd
-> > > > > > > > > >   fdt: Allow expanding the devicetree during relocation
-> > > > > > > > > >   rpi: Use the U-Boot control FDT for fdt_addr
-> > > > > > > > > >
-> > > > > > > > > >  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
-> > > > > > > > > >  board/raspberrypi/rpi/rpi.env | 10 ++++++----
-> > > > > > > > > >  common/board_f.c              |  6 ++++--
-> > > > > > > > > >  dts/Kconfig                   | 11 +++++++++++
-> > > > > > > > > >  4 files changed, 29 insertions(+), 18 deletions(-)
-> > > > > > > > >
-> > > > > > > > > My feedback here is the same feedback I gave the last person that wanted
-> > > > > > > > > to update the Pi addresses, and I forget if they came back and did that
-> > > > > > > > > (and it's in Peter / Matthias' queue) or not. Disabling device tree
-> > > > > > > > > relocation is a bug and must be removed.
-> > > > > > > > >
-> > > > > > > > > After that, given the range of memory sizes available on Pi platforms,
-> > > > > > > > > allocating the kernel / initrd / kernel decompression buffer at run
-> > > > > > > > > time, ala mach-apple would make life easier in the long run.
-> > > > > > > >
-> > > > > > > > Yes, of course, but for now, this resolves the problem and I don't
-> > > > > > > > believe it creates any other problem.
-> > > > > > >
-> > > > > > > Yes. I think you missed that:
-> > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20240723193430.3050251-1-walter.lozano@collabora.com/
-> > > > > > > is also outstanding and should solve the problem.
-> > > > > >
-> > > > > > No, it doesn't support decompression, although I have to wonder why
-> > > > > > that patch was never applied.
-> > > > >
-> > > > > See Peter's response elsewhere about having a lot of things to do and
-> > > > > not a lot of time. I know he's intended to pick up and post a Pi PR for
-> > > > > a while.
-> > > >
-> > > > OK, but let's drop that patch since it doesn't support decompression, right?
-> > >
-> > > No? No one has done all of the work required (remove fdt_high /
-> > > initrd_high) and this also solves the larger kernel issue.
-> >
-> > No, that is a separate issue. We need kernel_comp_addr and kernel_comp_size
->
-> Yes, those are required for automatic decompression, which is handy. But
-> the highest priority is removing fdt_high / initrd_high because those
-> lead to so much time being wasted by everyone. Your time digging in to
-> and making patch #2 for example.
+Make lmb_add_region_flags() return -EEXIST when the already added region
+with !LMB_NONE flags is being added, and then check that error code in
+boot_fdt_reserve_region() to avoid printing the misleading error
+messages.
 
-Can you remind me why fdt_high is so bad, or even what it is supposed
-to help with? Perhaps file an issue? I'm not necessarily offering to
-do it, but if I understand it better, then it is more likely that I
-will take it on.
+I didn't want to change lmb_add_region_flags() behavior back to always
+returning 0 on attempts to add already existing regions with !LMB_NONE
+flags, as the unit tests in test/lib/lmb.c would break, and also
+commit 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory
+areas with !LMB_NONE") specifically states that behavior is expected and
+required for efi_allocate_pages() calls with type=EFI_ALLOCATE_ADDRESS.
 
->
-> > > > > > > > The solution should not be board-specific though. Once I have the
-> > > > > > > > bootstd files stuff is finished, I believe that bootstd will be able
-> > > > > > > > to do this and I plan to do this. Then the variables will be unused
-> > > > > > > > for rpi and we can just drop them for any bootstd boards.
-> > > > > > > >
-> > > > > > > > As of now, we have 390 boards using bootstd and 381 using distro
-> > > > > > > > scripts, so it is progress!
-> > > > > > >
-> > > > > > > Yes, it will be interesting to see what the future holds, and any of the
-> > > > > > > solutions handle some of the trickier corner cases that lead to the
-> > > > > > > current situation. Or perhaps the best outcome is that in current times,
-> > > > > > > those corner cases don't really appear anymore (with 512MiB DDR being
-> > > > > > > the lower bound for example on all the Pi families).
-> > > > > >
-> > > > > > Well rpi is a bit unusual...
-> > > > >
-> > > > > Sure, but not in this case? Lots of examples of multiple models with
-> > > > > different memory sizes, and especially with 32bit platforms smaller (by
-> > > > > current standards) overall DDR.
-> > > >
-> > > > I mean in the sense that it puts the devicetree in the middle of RAM.
-> > >
-> > > Which and where? Or do you mean it being exacerbated by disabling
-> > > relocation (which is why I keep going on and on about removing that from
-> > > platforms that do it)? Most platforms will load to the "middle" and
-> > > that's why you must not disable relocation because it's only a problem
-> > > when, well, relocation is disabled and U-Boot says "Gee, you're going to
-> > > break but you told me you want that, so, alright then."
-> >
-> > No, the rpi relocates. I just mean that it puts the DT at about 512MB
-> > in RAM, which is annoying.
->
-> I guess we've once again lost some details. With fdt_high=0xffffffff we
-> do not relocate the device tree we're going to pass to the OS from
-> wherever it happens to be at the time. That is what I mean by
-> relocation. Looking at a Pi 4 here real quick, it has
-> fdtcontroladdr=3aea8b30. But if you mean fdt_addr, yes, that's around
-> 512MiB (fdt_addr=2eff2d00) and likely the previous stage throwing it
-> there for the OS as a likely always accessible option.
+All unit tests pass in sandbox U-Boot, with a small test modification in
+[PATCH 2/6]. I also made a bit of LMB cleanups in this series, while at
+it. Only [PATCH 6/6] introduces an actual functional change.
 
-Yes.
+Sam Protsenko (6):
+  lmb: Fix flags data type in lmb_add_region_flags()
+  lmb: Return -EEXIST in lmb_add_region_flags() if region already added
+  lmb: Make const flag_str[] in lmb_print_region_flags() more const
+  lmb: Improve coding style
+  lmb: Improve kernel-doc comments
+  boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()
 
-Regards,
-SImon
+ boot/image-fdt.c |   2 +-
+ include/lmb.h    | 125 ++++++++++++++++++++++++++++-------------------
+ lib/lmb.c        | 105 +++++++++++++--------------------------
+ test/lib/lmb.c   |   2 +-
+ 4 files changed, 109 insertions(+), 125 deletions(-)
+
+-- 
+2.39.5
+
