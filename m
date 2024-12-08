@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA8C0E7717F
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 22:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19B5E77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 22:07:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29E84895B1;
+	by phobos.denx.de (Postfix) with ESMTP id 91371895B9;
 	Sun,  8 Dec 2024 23:06:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GWNh5PCp";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dn2VE7Ss";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="U7Y1jS6t";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tvwQmTGZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FBB989541; Sun,  8 Dec 2024 23:06:28 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 1B904893AE; Sun,  8 Dec 2024 23:06:29 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 180158954F
+ by phobos.denx.de (Postfix) with ESMTPS id B28D889522
  for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 23:06:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Y5zbj6Gnrz9skk;
- Sun,  8 Dec 2024 23:06:25 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Y5zbk3H93z9shx;
+ Sun,  8 Dec 2024 23:06:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733695585;
+ s=mail20150812; t=1733695586;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ocOqLmMJ/2txrCDIjHPO58KB4ChNdCIaDzrkT16KrJY=;
- b=GWNh5PCpYEGUtN0I2EGd6q9aOGmTnxu0fDEpKuVa2sia5sE66OdhNuVhFOTyJO6ZEixJSe
- tBKriiiey25eZECU8Aq8PxSqnDeK0ES6ZbN00o7L3OyY5VEzkR8cXYCoennV84S7RSnvsa
- IepL6uDFGELiEdp9eydN6541vBS3uZ4ZuFi4EEZWKyXc9xu/s/rQacbEsNVjY+FLWrjCm6
- 46W7GuiI2scwrxykwBEcMjtXK6tZhRFuZA4VHo+fnuZGD67xWEhnDzhiTXyg0PfUM60Pm8
- 6q7dSRe/U81zg53+W13jpmwKSSnMDnK24CdMHjf1aFvDth5+1az18gKb1ImQSg==
+ bh=/TtZlF+hxzthMnV30h7E+zfJOUD1G0KTfI0HaZ63igs=;
+ b=U7Y1jS6tWST+vOXzfEA8YrHkm6JcC8sNZdgVNETAy0CuX0yw7/YDhGgTopDpBz7hQG8Ng9
+ FM1yM/NAhnFG1eja/VKHUstQ1aj7MePlQ5ZDxAj8T03kM0p+AOUopt0QQVe2nJ2umFWTUW
+ DlkBc20Rilg4fMGaa2+YoMHlxFxlT3/qnzUc+IawoHHtgfVyEdfi1T6X27AJggPzPuvcWC
+ Dybsc/22r31Cfh19erIsU9tTbs3ztThS3ah1KsyulPa+EbYQhid6zKpqw1594AdZhRzfLP
+ 1nNHYVKiUqzADQ5c8jDXR5lHNpia4J0TPrjC+TFTm7EZnswaxqGy+ZeB5cLp+g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1733695584;
@@ -52,25 +51,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ocOqLmMJ/2txrCDIjHPO58KB4ChNdCIaDzrkT16KrJY=;
- b=dn2VE7SsAXuvIXMopv3kAuRxad5iwt5ygZynReQw30A+FhNbEBaYGdJxYMBbP9goCaXS9C
- CqViPlzHpSWoIW65wqCT6l5Qb2sy8VX7nDETPFuPm07q7ORactVd2vabVT74AXcGJ6C/An
- o1wYp1Ea/eG1bTUft/P8gkxXdZfbOuWubd2ulbiFvIjELOWqPCuOZtDQjMsUtYd6VkR19W
- zS+hzVqZNwCvO6sZjX73bpvHv46w5ktnWGqIH0l0idhE2aDZ/Cl540aMVTkGU2SEnEuNNt
- 00AX6Uvmq8d3RpHzvXG2aFBtfJu6lyRE+ubA7d7g53szbW9Gd0c08WZwYKGz6A==
+ bh=/TtZlF+hxzthMnV30h7E+zfJOUD1G0KTfI0HaZ63igs=;
+ b=tvwQmTGZy4WBcKcEr6CYqtlhROypw6NS0GAhFmxjn8HmqAewxEid/6AvHD+ExeF2FtgVQr
+ HEpDIcS53nRuDDLESgCz0e7Xewit1fAnOfcPlS7evO2OPR+R7OTobCnPj+mKkLpbsnhdj1
+ 8uXkx5phmF230LRhaSPqXv13Rbg0tjAsYnWeRJl4+JHWn91F4McMOpusY2CJWhOGBZi+/Q
+ D5shiSqq81mFX5wHOorr0x6AhPYBZQEUOSJ6CrJ9iIl4tzQPl3kLenvjVBDWPpkOdadc5H
+ lZxc7O95DEFq0dRcyCW5Nq/pXc3eb/pt+TL6pDLt8pnCLzyZq0rHETdAj6J/8g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 08/13] pci: renesas: Fix R-Car spelling
-Date: Sun,  8 Dec 2024 23:04:01 +0100
-Message-ID: <20241208220551.204743-8-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 09/13] phy: renesas: Fix R-Car spelling
+Date: Sun,  8 Dec 2024 23:04:02 +0100
+Message-ID: <20241208220551.204743-9-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
 References: <20241208220551.204743-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: zxpfsaiwodu5gg7arpribtty73iizkzn
-X-MBO-RS-ID: 291aaa9174fa3569289
-X-Rspamd-Queue-Id: 4Y5zbj6Gnrz9skk
+X-MBO-RS-META: mrwryxx3jkwcsr7f4sxqsrzeineb3zpi
+X-MBO-RS-ID: e30feee4b686a712ab5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +93,34 @@ Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/pci/Kconfig         | 8 ++++----
- drivers/pci/pci-rcar-gen2.c | 2 +-
- drivers/pci/pci-rcar-gen3.c | 2 +-
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ drivers/phy/phy-rcar-gen2.c | 2 +-
+ drivers/phy/phy-rcar-gen3.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pci/Kconfig b/drivers/pci/Kconfig
-index 876a5fa57ee..41901433e8c 100644
---- a/drivers/pci/Kconfig
-+++ b/drivers/pci/Kconfig
-@@ -189,19 +189,19 @@ config PCI_MSC01
- 	depends on TARGET_MALTA
- 
- config PCI_RCAR_GEN2
--	bool "Renesas RCar Gen2 PCIe driver"
-+	bool "Renesas R-Car Gen2 PCIe driver"
- 	depends on RCAR_32
- 	help
- 	  Say Y here if you want to enable PCIe controller support on
--	  Renesas RCar Gen2 SoCs. The PCIe controller on RCar Gen2 is
-+	  Renesas R-Car Gen2 SoCs. The PCIe controller on R-Car Gen2 is
- 	  also used to access EHCI USB controller on the SoC.
- 
- config PCI_RCAR_GEN3
--	bool "Renesas RCar Gen3 PCIe driver"
-+	bool "Renesas R-Car Gen3 PCIe driver"
- 	depends on RCAR_GEN3
- 	help
- 	  Say Y here if you want to enable PCIe controller support on
--	  Renesas RCar Gen3 SoCs.
-+	  Renesas R-Car Gen3 SoCs.
- 
- config PCI_SANDBOX
- 	bool "Sandbox PCI support"
-diff --git a/drivers/pci/pci-rcar-gen2.c b/drivers/pci/pci-rcar-gen2.c
-index 12c31e74087..08d5c4fbb8b 100644
---- a/drivers/pci/pci-rcar-gen2.c
-+++ b/drivers/pci/pci-rcar-gen2.c
+diff --git a/drivers/phy/phy-rcar-gen2.c b/drivers/phy/phy-rcar-gen2.c
+index f9428c7ad12..be736629d51 100644
+--- a/drivers/phy/phy-rcar-gen2.c
++++ b/drivers/phy/phy-rcar-gen2.c
 @@ -1,6 +1,6 @@
  // SPDX-License-Identifier: GPL-2.0
  /*
-- * Renesas RCar Gen2 PCIEC driver
-+ * Renesas R-Car Gen2 PCIEC driver
+- * Renesas RCar Gen2 USB PHY driver
++ * Renesas R-Car Gen2 USB PHY driver
   *
   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
   */
-diff --git a/drivers/pci/pci-rcar-gen3.c b/drivers/pci/pci-rcar-gen3.c
-index 76878246f1e..d4b4037ce19 100644
---- a/drivers/pci/pci-rcar-gen3.c
-+++ b/drivers/pci/pci-rcar-gen3.c
+diff --git a/drivers/phy/phy-rcar-gen3.c b/drivers/phy/phy-rcar-gen3.c
+index b278f995f37..8c004eaf4c6 100644
+--- a/drivers/phy/phy-rcar-gen3.c
++++ b/drivers/phy/phy-rcar-gen3.c
 @@ -1,6 +1,6 @@
  // SPDX-License-Identifier: GPL-2.0
  /*
-- * Renesas RCar Gen3 PCIEC driver
-+ * Renesas R-Car Gen3 PCIEC driver
+- * Renesas RCar Gen3 USB PHY driver
++ * Renesas R-Car Gen3 USB PHY driver
   *
-  * Copyright (C) 2018-2019 Marek Vasut <marek.vasut@gmail.com>
-  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
 -- 
 2.45.2
 
