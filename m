@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C5D8E77173
-	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 591DBE77173
+	for <u-boot@archiver.kernel.org>; Sun,  8 Dec 2024 15:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41F2D89473;
-	Sun,  8 Dec 2024 16:29:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BC97895A0;
+	Sun,  8 Dec 2024 16:29:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YBpbqtIx";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hWPIh1KG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD26C89541; Sun,  8 Dec 2024 16:29:14 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 90D6789555; Sun,  8 Dec 2024 16:29:17 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5958894B7
- for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FC9C89305
+ for <u-boot@lists.denx.de>; Sun,  8 Dec 2024 16:29:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9ec267b879so685127166b.2
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:12 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa650ccbe0eso199969866b.2
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 07:29:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733671752; x=1734276552; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733671755; x=1734276555; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Q0qhEGENIR1sSJLu2s5gtvTL8wIIjzO6lmAoVNM/qb0=;
- b=YBpbqtIxTNPozohZLohMzBvkIM9nGrTp61u6OswJlFkuIK5V22SU07+KIvgNuj5z6X
- aUJVU9R/vnvCavQIdEcph49WZO/iRjBPGXE/jh3cIDTDMgVSRDXdiTM6xUlUsP04tRhk
- vflf7Cw2j/Br3JP9i2vp+yY5QF8jLQUOJlXzY=
+ bh=2vOhacydsoQBkbFRyWj/5vQk4hoVyPgGEWZXYHJZRLI=;
+ b=hWPIh1KGRtWaHG1B0imcINv+RZIoE1Zs1Uonyvwt8pK1VkyErWt2/+DgzueWX3Z61P
+ MdIh0nLrha9rdJlecFxIyTaOo7Tg3/8lIqjdHCC+3F0etky+s0fX3lHXpo/R1qWh8Doo
+ 4/Z7oZOyKfBYUTBD2Pd+xy0Z3yvXR5rr/L7uY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733671752; x=1734276552;
+ d=1e100.net; s=20230601; t=1733671755; x=1734276555;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Q0qhEGENIR1sSJLu2s5gtvTL8wIIjzO6lmAoVNM/qb0=;
- b=Lu1N5Vz7t2BqewLAev/E4sCBlwaH4+2GlA2jhbMdEvTnme2q/9yD+91/B9yECC4iPn
- oag3/8rjnm/vH1kCGLpflq30UTlgWxT6Y8SrRiprSEPqpll1/gNjjX9/vKlcRQzfMrfe
- HoI3lUAOAdJzQY0i1dGVGOWTIiNBCQkmo7xiXTcHRy9a6V65yki5gJd7ifjFRNJK2KHf
- OMpJqBAIyKU8Ych9R09yy88xJeHiJRKdfiTirqjPK8hpIDrZqInoOcRG/bOMfHPTJkRr
- XS81fRoolLrPJdG9E8Q2mMgh+Qzg24vBKguRLpZBhlb8mL2AF8cm+y/HT7jTN/mUIXXX
- s9KA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOkvfUsUleHptlfzxHLr8IZeQeWsbKuvrFameQsVOMHXvGgHCrdGZ/Z+NMHiGXnYp6Y+oJkTQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCRtLP/CrDN+rZFJOYJ2L189ua4CI6mBjQpkhMH5aGzsd9qus6
- Uuwdkrh6ulOq8BAFHhZMSILyUOK+AvcJmTG++xeH4IbB/NMsCODo1PIyv1C3AZXkrlQJUUOUoZI
- B14wkicKfFxwzBMURRl5shf4wu5Bq2IT443hS
-X-Gm-Gg: ASbGncvT70gZpdglXmIGZzPOFUghLmAophGAtBJ096Y46cDOWPjhEID8pRfvwEs/bVK
- 79dGGED3yj/x3c2L6XhodFdRKL2Ma9l2d
-X-Google-Smtp-Source: AGHT+IGBq9jg/rgqDgnlS26u4gxV0mXSf9ZcCAjf3Z7CAQWf2QRHVo1pQ96OvCwk6rZP7T3JC0uQP0tus3wBNPxcLTo=
-X-Received: by 2002:a17:906:308d:b0:aa6:800a:1291 with SMTP id
- a640c23a62f3a-aa6800a1bacmr170204866b.7.1733671752236; Sun, 08 Dec 2024
- 07:29:12 -0800 (PST)
+ bh=2vOhacydsoQBkbFRyWj/5vQk4hoVyPgGEWZXYHJZRLI=;
+ b=NlgUgIJZnSg4jXPaD3vMIS9UujdPreV/xmFfT/z41YIOLyCt6ArUquI8FxUKe3PyYG
+ p1pjmOtimjUSwSmOJ1Vr7EKGITpM3qs62A1sGXFgg96aGRRV+4HTdKvwk1i4+wvs8KeE
+ G1asW2Bpeen6K0UCrB20KW7W+NcmffmmedkX3acZMJS0wTWE9jRKZMwxrDImTbiiWxk2
+ 4HS0qbhk7UUocthEQIPdhd0DZA1Ybd2sE1eDjlvvmlGdiYG6g3VU8lnnxJ79W2xhDdE9
+ LddQ95O2Q8vZX/b7dEXU/AoNlNyCOJ4SsDwLuhDIVu/e9frsRmYdNFX7iprCvnWI3bz3
+ JXZQ==
+X-Gm-Message-State: AOJu0YwCXNl+t0xl4ljEoi1Nilpi1NXeowXGXWV51V2YRA0cNVAzb3mh
+ IMWPJ+qPYZrR7h9/HzwnuEmsgKr1tAOp+RhmIQjc3lTmj5lgympqwOpLdhySldaTAqLdULQcNt3
+ +1JTZ6Fangz9k6XZeDBndnMK01KPQGJtLUpd+
+X-Gm-Gg: ASbGncsVuWgPGShA2GQI+Wce5FtgRo8rSnt5XR4jZUfpPPdLk5QtKGRTea4YfR7T61N
+ QdMWrK7RKVEa33LWAF0EEDlYygOHQyw1z
+X-Google-Smtp-Source: AGHT+IEVfBCuYtGMEdf2mAckVJ6wKZDi9kDZzVQcZvmfPlJB1k1/lsLfAMzdEcJnxHbwZWtSm/r/W3BN0lkF7AE43Z0=
+X-Received: by 2002:a17:907:9145:b0:aa5:630d:7de0 with SMTP id
+ a640c23a62f3a-aa63a26a7c0mr822961466b.44.1733671755018; Sun, 08 Dec 2024
+ 07:29:15 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 8 Dec 2024 07:29:11 -0800
+ HTTPREST; Sun, 8 Dec 2024 15:29:13 +0000
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszTgZKx_rT5K9Y5WSy31buXJV_c9g0fA40f76Dnnjp_ix+Q@mail.gmail.com>
-References: <CAFLszTgZKx_rT5K9Y5WSy31buXJV_c9g0fA40f76Dnnjp_ix+Q@mail.gmail.com>
+In-Reply-To: <CAFLszTguwP-7wAPv32UHvW10ORqtK35ZgiG_GpWiFXW8o1QRMQ@mail.gmail.com>
+References: <CAFLszTguwP-7wAPv32UHvW10ORqtK35ZgiG_GpWiFXW8o1QRMQ@mail.gmail.com>
  <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-11-mjg59@srcf.ucam.org>
- <b79cd88a-4346-444d-979c-8eb2ed913d5e@gmx.de>
-Date: Sun, 8 Dec 2024 07:29:11 -0800
-X-Google-Sender-Auth: G0whzKtaxHsp5VyfHV7LqJw66O8
-Message-ID: <CAFLszTh-puzSBEGg3ErgCgTGOSfcFSzbT9GGmtSJmYoTVs7tiw@mail.gmail.com>
-Subject: Re: [PATCH 10/10] Add command to set an environment variable to an
- EFI variable
+ <20241123195616.305687-10-mjg59@srcf.ucam.org>
+Date: Sun, 8 Dec 2024 15:29:13 +0000
+X-Google-Sender-Auth: nKJKL4MfwyX-4k9gL11Zcst6pEY
+Message-ID: <CAFLszThBM09r2WL2ng-KMEE-4qsKqTQbgTVfJeUkWiEbTcUXBQ@mail.gmail.com>
+Subject: Re: [PATCH 09/10] Fix efi_bind_block.
 To: Simon Glass <sjg@chromium.org>
-Cc: Matthew Garrett <mjg59@srcf.ucam.org>, u-boot@lists.denx.de, 
+Cc: u-boot@lists.denx.de, Janis Danisevskis <jdanisevskis@aurora.tech>, 
  Matthew Garrett <mgarrett@aurora.tech>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Matthew Garrett <mjg59@srcf.ucam.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,22 +92,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Sun, 24 Nov 2024 at 08:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sat, 23 Nov 2024 at 12:57, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
 >
-> On 11/23/24 20:55, Matthew Garrett wrote:
-> > From: Matthew Garrett <mgarrett@aurora.tech>
-> >
-> > We may want to make things conditional on EFI variable state
-> >
-> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
-> > ---
-> >
-> >   cmd/Kconfig     |   4 ++
-> >   cmd/Makefile    |   1 +
-> >   cmd/efigetenv.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++
-> >   3 files changed, 138 insertions(+)
-> >   create mode 100644 cmd/efigetenv.c
-> >
+> From: Janis Danisevskis <jdanisevskis@aurora.tech>
+>
+> efi_bind_block had two issues.
+> 1. A pointer to a the stack was inserted as plat structure and thus used
+> beyond its life time.
+> 2. Only the first segment of the device path was copied into the
+> platfom data structure resulting in an unterminated device path.
+>
+> Signed-off-by: Janis Danisevskis <jdanisevskis@aurora.tech>
+> Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> ---
+>
+>  lib/efi/efi_app_init.c | 29 +++++++++++++++++++++--------
+>  1 file changed, 21 insertions(+), 8 deletions(-)
+>
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
 Applied to ci/master, thanks!
