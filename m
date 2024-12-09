@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7316AE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 12:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8CDE77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 12:20:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1B968912E;
-	Mon,  9 Dec 2024 13:12:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B903D892E6;
+	Mon,  9 Dec 2024 13:20:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GY5c+KGk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LH3qspO7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ED2C892E6; Mon,  9 Dec 2024 13:12:32 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 9B13889318; Mon,  9 Dec 2024 13:20:51 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF15489083
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 13:12:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D767B89207
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 13:20:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2ff976ab0edso42238831fa.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 04:12:29 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-7273967f2f0so268824b3a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 04:20:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733746349; x=1734351149; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XRec3QLoR7QCkmLHhWSEMXvZS4fFJijNQ+Xco6MQUoc=;
- b=GY5c+KGkOKR6KY3hRc3VIxVSZfT7oiEqO+9Qa20HSmXw1uqvX1lR2NEp9Z6QqmE8bB
- juh9i7ZstBbUHkW9Gyuq5H2MDPhLRK9Zofjs/26dKVtcq4cdtvMFpR7BN/2wTioPTIAf
- 2K50Fu6EYtXnKhI7fKEpetRyu+DN6810h9oZ607JWO1+l0vzy9EM9Qct1fHiTuqT9nSI
- BO1gWymSrjOaWAwRElaq+egrdfFTquxSWAkx/O6w/7WBYTqBfqXSkin0+UtAX3cXpaqw
- nKS28hLxUXFrgEq0sa8TvKoJgYlnk3+MY6Cgg+1Wd5th8ei+IpJNTDLJUfBRthO9T2WG
- Cswg==
+ d=gmail.com; s=20230601; t=1733746847; x=1734351647; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kmrArKjLkPRy3wX+YnhRgwa86SWcImB7bN6YGh+Ln0A=;
+ b=LH3qspO7qKp84oAtlLW8lyt5D5VKhYge6AKJyv/fT4JsTn82JReiGipBCrqatq5vCE
+ mQC3Krw10S/w9Ty+EvN9hKjYB7ZmMabI5/FI92pKYX6nQvPt9BW9AnrB5FDILyqPLrjj
+ kb3t8/3JERsJSUbjulthRBwTWhzH7qkdg7hJjdCgyRu3gKITSTztaizfUijhm48V5nU7
+ EhJU1neP6bGzExtesux08VIYcWApO4hToEO5Q3BlXz7T2GPAKE7xvQl0NRJPe8Pmake6
+ qV+uMybnLq2R0qAbV+M11MjvSLvLid2XkX/FVrVwSPwILcrYauTe/8An+xOxgZvZZ5/i
+ H7Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733746349; x=1734351149;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XRec3QLoR7QCkmLHhWSEMXvZS4fFJijNQ+Xco6MQUoc=;
- b=BqT+6lmM7TmS8Y6Vv1Rs61PSjm+oTWL0Ri7pJQvKH4agDPhaFz+qRdPKuVxtn3U7Qt
- Ve8wUJaNeyFfCD8pI0AA/Opsm+n/bfUORbZuxEEVqIHcEtFgqdzW2iOQ/Kto/W4yApBp
- Ei0O7TrgGtU4y3A+WIeziT0yu2lysopHwyC84umcmADkGs8mSUWdow7+RvHL4vKLR9nt
- YeG9gYmM5E4Q1vorSYeDnTKrqDhjQxNJy4jmrAcGXXTwtsu/7P4FHo4ik59i5nmqcywr
- EKrR7ya0NT/tyhY99aao2mC7Uo9KCQVhe5maPlaZGfg8MQCFJXlbdUuXB4FyxzJcvYMm
- kiHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhPT8D+2eBSkgE9vjD8HIgrEYfr0w8vhPDDAuW3LjDeXwHjyXCNo21AQYxsMQsxKXAYcc90jE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTFV6Qad1E3bHbNXZYdm6ol880/qmyuBQS3MYpgLFxindW/Mnl
- 28kTGo5NLu09evHb5zDq8KabrkELFajduMPNi11SVJa1XdLdhNGnNLAsqcZ3Z87hWImvBqouFdG
- o1pm+vMVbhk2UvAI59hj5u9FwxJ0q3bjE
-X-Gm-Gg: ASbGncsoE4SmWyMNGL7QTP1D4EqPD++U3JjV1YAbC1Bs2xebsELWkpNdpAGxW/ppwnm
- UONlanWzS/RXze656VzRJDCiQFZzaCevebnD4UJI/EULJOoMCnMDYMfgS9MN2als=
-X-Google-Smtp-Source: AGHT+IGnregATjbvaHWQY/hb0dtzCzqAWftnnk8W9wQUpcfieuH9mbmPTMmzci8trCXTbsevdR94lGG2sCDmB7zYTYo=
-X-Received: by 2002:a2e:7805:0:b0:300:3307:389d with SMTP id
- 38308e7fff4ca-30033073bd1mr41566441fa.19.1733746348938; Mon, 09 Dec 2024
- 04:12:28 -0800 (PST)
-MIME-Version: 1.0
-References: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
-In-Reply-To: <20241205-ge-mainline-display-support-v2-0-4683bb4388dc@bootlin.com>
+ d=1e100.net; s=20230601; t=1733746847; x=1734351647;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kmrArKjLkPRy3wX+YnhRgwa86SWcImB7bN6YGh+Ln0A=;
+ b=MnLtsbmGveO0z1LkNRLbA61TPDbtTOdWKDLWDWVemKx8UC4ilQVqMs1c+hhk80eQ2N
+ qyVv3OjqngO3X3+aM609IcLdvIpJ5JBStvqM7WZ+BKSQuyOKz8t3mxL+gUzE1OHS5dAk
+ l5SylFPIMFCmoaTxtZK9B1mnHDtSOlbsK4k12j2rWs1pawHZKcLucQZ463SMHAhdACP6
+ C/DawRKR9wxInWY19XqcwTlAxDoChlea/lXEO+0H5jY9HS1UArhatuH3nkb9jfKI5LOJ
+ ZhEcDBaUpQ+lyKfRBG663Kz9BGDeNQFshBLQWDmursjuQ1TGYEO/051JNt89+hU4obON
+ mngQ==
+X-Gm-Message-State: AOJu0YzrsDk+0cz2FnMJk/jsCI4f5HC1/T9456Lmh4SyKYqO3j43ERG2
+ mGfyiD/fU+eZCYHBw41dn/annYLd6uQ296c/aQndmA27vGrbq5Gd50asJg==
+X-Gm-Gg: ASbGncvS/tZDZeoUD7b7MebnQ0tV8XN9WjtuG9gX2f6lXdrM2f34gp9Ge3dY5Nn0Shn
+ r389DLXbjSwy2MGhOZo4ptmR4ktnyseO8x/hp4LAYUqWUUuKo6lprZuERfElf8EN+NH/Srr+yiY
+ W2yj1js1BQfilMo6ZO/BE0AeVRRUue0hIr8UuTq1yuH3GaVpqrKP6XdFaxOw2EXl8ItRTjBf7cp
+ NwFX7f1YzAxcvLhoq5S2TefAyCPptlVY07nCYPpKNnHja/vDKbz++OkAMWOIZYh
+X-Google-Smtp-Source: AGHT+IELSu+sG7IgQHDq0BKeXlxHVvl4+GzdmM+KRHKY2gtfFrxwgjO5SFdx7L6TygGcH1g2ejqt/Q==
+X-Received: by 2002:a05:6a20:3d85:b0:1db:eead:c588 with SMTP id
+ adf61e73a8af0-1e1b1b4e060mr283560637.29.1733746847048; 
+ Mon, 09 Dec 2024 04:20:47 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fdbe:460b:c250:a651])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-725dc0b3ed5sm3352091b3a.87.2024.12.09.04.20.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 04:20:46 -0800 (PST)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 9 Dec 2024 09:12:17 -0300
-Message-ID: <CAOMZO5B=4eoMxxFKieUgXVWMpJOad-V-o+NmG3JhAMFptP4DgQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/13] Add imx8mp video support
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de,
- Ian Ray <ian.ray@gehealthcare.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20241209
+Date: Mon,  9 Dec 2024 09:20:43 -0300
+Message-Id: <20241209122043.1208400-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,27 +92,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+Hi Tom,
 
-On Thu, Dec 5, 2024 at 10:54=E2=80=AFAM Miquel Raynal <miquel.raynal@bootli=
-n.com> wrote:
->
-> In order to display a boot picture or an error message, the i.MX8MP
-> display pipeline must be enabled. The SoC has support for various
-> interfaces (LVDS, HDMI, DSI). The one supported in this series is the
-> standard 4-lane LVDS output. The minimal setup is thus composed of:
-> * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pixel
->   stream
-> * One LVDS Display Bridge (LDB), also named pixel mapper, which receives
->   the pixel stream and route it to one or two (possibly combined) LVDS
->   displays.
-> * All necessary clocks and power controls coming from the MEDIAMIX
->   control block.
+Please pull from u-boot-imx/next, thanks.
 
-There are errors in CI when this series is applied.
+The following changes since commit 39759bf9fe3a5b6d4788164fc046f5f8aee5cbff:
 
-Please take a look at the sandbox test failures:
+  Merge patch series "board: ti: k3-am65: covert last board to OF_UPSTREAM" (2024-12-06 16:39:26 -0600)
 
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23735
+are available in the Git repository at:
 
-Also, please make sure that v3 passes Azure CI tests.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20241209
+
+for you to fetch changes up to 1c9fe756edba755679e8e4dc525d12e7deda3808:
+
+  board: dhelectronics: Sync env variable dh_som_serial_number with SN (2024-12-07 09:07:45 -0300)
+
+u-boot-imx-next-20241209
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23736
+
+- Add support for the NXP i.MX91 EVK board.
+- Improve EEPRON suport on i.MX8MP DHCOM board.
+- Switch phycore_imx8mm to using environment text files and
+improve environment handling.
+----------------------------------------------------------------
+Christoph Niedermaier (4):
+      arm64: dts: imx8mp: Add aliases for the access to the EEPROM ID page node
+      arm64: imx8mp: Read values from M24C32-D write-lockable page on DHCOM i.MX8MP
+      lib: hashtable: Prevent recursive calling of callback functions
+      board: dhelectronics: Sync env variable dh_som_serial_number with SN
+
+Peng Fan (8):
+      gpio: imx_rgpio2p: Move 8ulp_data to data section
+      imx9: trdc: correct DEBUG usage
+      imx9: gpio: include types.h header
+      imx: Add iMX91 support
+      clk: imx93: support i.MX91
+      pinctrl: imx93: support i.MX91
+      arm64: dts: add NXP i.MX91 device tree
+      imx: Support i.MX91 11x11 EVK board
+
+Ye Li (3):
+      imx93: Update 9x9 part fuses checking
+      clk: imx: clk-fracn-gppll: Add new PLL rate
+      ddr: imx: Add new rates for i.MX91
+
+Yunus Bas (3):
+      phycore_imx8mm: Switch to using env text files
+      phycore_imx8mm: Move default bootcmd to board env
+      board: phytec: phycore_imx8mm: Add RAUC boot logic to environment
+
+ arch/arm/dts/imx8mp-dhcom-u-boot.dtsi              |    2 +
+ arch/arm/dts/imx91-11x11-evk-u-boot.dtsi           |  195 ++
+ arch/arm/dts/imx91-u-boot.dtsi                     |   92 +
+ arch/arm/include/asm/arch-imx/cpu.h                |    5 +
+ arch/arm/include/asm/arch-imx9/clock.h             |    7 +
+ arch/arm/include/asm/arch-imx9/gpio.h              |    2 +
+ arch/arm/include/asm/arch-imx9/imx91_pins.h        |  770 ++++++++
+ arch/arm/include/asm/mach-imx/iomux-v3.h           |    2 +-
+ arch/arm/include/asm/mach-imx/sys_proto.h          |    6 +
+ arch/arm/mach-imx/imx9/Kconfig                     |   13 +
+ arch/arm/mach-imx/imx9/clock.c                     |   37 +-
+ arch/arm/mach-imx/imx9/container.cfg               |    6 +-
+ arch/arm/mach-imx/imx9/imximage.cfg                |    6 +-
+ arch/arm/mach-imx/imx9/soc.c                       |   47 +-
+ arch/arm/mach-imx/imx9/trdc.c                      |    2 +-
+ board/dhelectronics/common/dh_common.c             |  166 +-
+ board/dhelectronics/common/dh_common.h             |   79 +-
+ board/dhelectronics/dh_imx6/dh_imx6.c              |    4 +-
+ board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |   75 +-
+ board/freescale/imx91_evk/Kconfig                  |   19 +
+ board/freescale/imx91_evk/MAINTAINERS              |    7 +
+ board/freescale/imx91_evk/Makefile                 |   16 +
+ board/freescale/imx91_evk/imx91_evk.c              |   33 +
+ board/freescale/imx91_evk/imx91_evk.env            |   63 +
+ board/freescale/imx91_evk/lpddr4_timing_1600mts.c  | 1995 ++++++++++++++++++++
+ .../imx91_evk/lpddr4_timing_1600mts_ecc.c          | 1995 ++++++++++++++++++++
+ board/freescale/imx91_evk/lpddr4_timing_2400mts.c  | 1995 ++++++++++++++++++++
+ .../imx91_evk/lpddr4_timing_2400mts_ecc.c          | 1995 ++++++++++++++++++++
+ board/freescale/imx91_evk/spl.c                    |  167 ++
+ board/phytec/phycore_imx8mm/phycore_imx8mm.env     |   65 +
+ configs/dhsom.config                               |    1 +
+ configs/imx91_11x11_evk_defconfig                  |  145 ++
+ configs/imx91_11x11_evk_inline_ecc_defconfig       |  146 ++
+ configs/phycore-imx8mm_defconfig                   |    2 -
+ doc/board/nxp/imx91_11x11_evk.rst                  |   70 +
+ doc/board/nxp/index.rst                            |    1 +
+ drivers/clk/imx/clk-fracn-gppll.c                  |    5 +-
+ drivers/clk/imx/clk-imx93.c                        |   52 +-
+ drivers/cpu/imx8_cpu.c                             |   10 +
+ drivers/ddr/imx/phy/ddrphy_utils.c                 |    8 +
+ drivers/gpio/imx_rgpio2p.c                         |    2 +-
+ drivers/pinctrl/nxp/pinctrl-imx93.c                |    1 +
+ .../include/dt-bindings/clock/imx93-clock.h        |    6 +-
+ .../src/arm64/freescale/imx91-11x11-evk.dts        |  875 +++++++++
+ dts/upstream/src/arm64/freescale/imx91-pinfunc.h   |  770 ++++++++
+ dts/upstream/src/arm64/freescale/imx91.dtsi        |   70 +
+ include/configs/imx91_evk.h                        |   21 +
+ include/configs/phycore_imx8mm.h                   |   46 -
+ lib/hashtable.c                                    |   27 +-
+ 49 files changed, 12023 insertions(+), 101 deletions(-)
+ create mode 100644 arch/arm/dts/imx91-11x11-evk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx91-u-boot.dtsi
+ create mode 100644 arch/arm/include/asm/arch-imx9/imx91_pins.h
+ create mode 100644 board/freescale/imx91_evk/Kconfig
+ create mode 100644 board/freescale/imx91_evk/MAINTAINERS
+ create mode 100644 board/freescale/imx91_evk/Makefile
+ create mode 100644 board/freescale/imx91_evk/imx91_evk.c
+ create mode 100644 board/freescale/imx91_evk/imx91_evk.env
+ create mode 100644 board/freescale/imx91_evk/lpddr4_timing_1600mts.c
+ create mode 100644 board/freescale/imx91_evk/lpddr4_timing_1600mts_ecc.c
+ create mode 100644 board/freescale/imx91_evk/lpddr4_timing_2400mts.c
+ create mode 100644 board/freescale/imx91_evk/lpddr4_timing_2400mts_ecc.c
+ create mode 100644 board/freescale/imx91_evk/spl.c
+ create mode 100644 board/phytec/phycore_imx8mm/phycore_imx8mm.env
+ create mode 100644 configs/imx91_11x11_evk_defconfig
+ create mode 100644 configs/imx91_11x11_evk_inline_ecc_defconfig
+ create mode 100644 doc/board/nxp/imx91_11x11_evk.rst
+ create mode 100644 dts/upstream/src/arm64/freescale/imx91-11x11-evk.dts
+ create mode 100644 dts/upstream/src/arm64/freescale/imx91-pinfunc.h
+ create mode 100644 dts/upstream/src/arm64/freescale/imx91.dtsi
+ create mode 100644 include/configs/imx91_evk.h
