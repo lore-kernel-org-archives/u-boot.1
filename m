@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 632C9E77180
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 13:29:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BBEAE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 13:30:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1CFC88C9C;
-	Mon,  9 Dec 2024 14:29:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C3CE8971E;
+	Mon,  9 Dec 2024 14:30:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ga+cLvH1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HgXU/Ynx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1665A88C9C; Mon,  9 Dec 2024 14:29:50 +0100 (CET)
+ id 6628388EAB; Mon,  9 Dec 2024 14:29:59 +0100 (CET)
 Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
  [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB7C588C94
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 14:29:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D465D89757
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 14:29:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-21619108a6bso19336535ad.3
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 05:29:47 -0800 (PST)
+ d9443c01a7336-2163b0c09afso12625915ad.0
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 05:29:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733750986; x=1734355786; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733750995; x=1734355795; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qP1xONGuXu6sr+4Yac3/mjSw4FMGWKi6eR84S4CEWJ0=;
- b=ga+cLvH1IXmKVg6H3cmnQK+qplqG+N2bRwgI+WjG2YeHwmDvKYOlO3NgCeunbmmXnK
- bTDgaQUgy73+UzlqxZmNAgfkiN19D8wqDAVTP7Kf33yDwK24kR66P3zqnDvt5wd3HerS
- MsZRzBOWRgYQP3H27U1nKNHfZj4a4F4H2eRrc=
+ bh=fOxpn++7dMhnAplA2dpIU7FvZRS/VTMfmXio9Ep6cH8=;
+ b=HgXU/YnxlXgcN1/TxXqkkmiIL/QdQGj4UsEpr1cHMLlsuZj+Jl+dSbPY/NdFof5HN4
+ jrWNSMMyouWKaHx7HlX/ZXoRE6btj/95jkKzRYEdwExYiO7PD/QCdU6He9ZAQ8bz5FAm
+ FPxJ+6cjmo5oqtYK4wuGMubOPOvJM8fFq6ILE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733750986; x=1734355786;
+ d=1e100.net; s=20230601; t=1733750995; x=1734355795;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qP1xONGuXu6sr+4Yac3/mjSw4FMGWKi6eR84S4CEWJ0=;
- b=i+qawsXRuQ/H2e14Ff5U8PK5LSAbdhlbbH0v74qkvOGdFZ0xJKjLWLTNtNmiILw86m
- FfcsfJrIyAj+vi3gGlLgur580Cq9VNwM6+FXCsDw8maDWANIxOh5s4ybKztE3rXYjT3K
- HUpBfhg5s3wcsdodpNm7pKz71SLnCPVbC4e/eCdPYCYraCszUmc+OUDgXAq2vKYVOlV9
- K5tNdO2HMIYakXcOJ/tqTQmf4SRVwnGkjBaQ+emWqkwYqISOHxrLCsHqaIkldHE9uFOi
- vg+OzqiBT674Ec37rWsI3SKKB52Hl4BZ/2/H14ON0XNQ++cKyRuaJYjxXKsPjrvOtKiZ
- sX4g==
-X-Gm-Message-State: AOJu0Yzi9jVgcWN+/qYz3inn391QHJO1YASJ+PWNe+Q9seJuZIhPtR4L
- W8nGII5i+ouOihpeUfX2n392h6UHK7xsLcYytKcH6TIGPnIfZwgDulzaQWjhMnSuDcTAzxJAdjR
- vw6eQU1NXlDpDfpwi43F+RW/KctA51WuHGbFSfQjnYEqEFss=
-X-Gm-Gg: ASbGncvWnub75sy4IJpzV3KhHUBq7FdOoEuABCaVGy5cTyUr0nO2yX/kUMVpaNxoTiU
- yoOo4JOQ4nY0lyOhQ+dHv0vZ2SsGECnhz
-X-Google-Smtp-Source: AGHT+IGByqWjiTe0r27CNuuVywrWH6PvskT5bneCm7gmbZ04VRgfH9qGgdD4itSvk98mJlmB5DIXVWlBzd8PkskVAIU=
-X-Received: by 2002:a17:902:d506:b0:215:6b4c:89fa with SMTP id
- d9443c01a7336-21669fca799mr8378125ad.8.1733750986225; Mon, 09 Dec 2024
- 05:29:46 -0800 (PST)
+ bh=fOxpn++7dMhnAplA2dpIU7FvZRS/VTMfmXio9Ep6cH8=;
+ b=CYZLvDBh2wibiv0I11ma2IMA/m6pGj5sXCtyAlN+20hS+U58rzqIxkkVK0WZAZz6ZU
+ pWNnBir7To/dihW8Z/C9WUHmFEqXNex0F9Le60y2c9CEi2LecVgc6nOOQaaVmp1prmKy
+ Cg8Ww6Fn+DS2BXuU+zvZBto1nhRR0dJzCffZBYMrXwVvTUz0V7hoH7k7G3LiNAvo2giP
+ gwFNZbGa2HMFqRlIO1xI/qT/Z+M3A1I0rcJ+sKMHi5b1W7Ky4JS+PklE+Y7Hn83IS6l8
+ 7DHj2gbZlIJ9tQXQxTA8M5sudtjL24/evPsXOeu1Akhu3A7Px6CuPJ03vNUPKx3yrc7q
+ ghQQ==
+X-Gm-Message-State: AOJu0Yyjf5Sr+9JQk9dfHGUPHb0SPmSqZ5NqbBvTF2cZM37HdTg1aMrS
+ ACcPOVEFkQMuXuYcC6hIYBStj1voOdQbBJj7X7VNrY8wrvYhoBe3NCf/s7R+fbl01rAuB3wI9sh
+ moUdx3mQDUmTx8ch/g+1bnpOBy+jIZ7WHmMJX
+X-Gm-Gg: ASbGnctKVVYRPZeuOz/Emo8/EjlaQAzsqzQiMWgwLFrIUAucGD4F6izuuIvdEXDVON9
+ lDCOLocoNZ2gbIPkTx5UT15Nv4l+wDjXF
+X-Google-Smtp-Source: AGHT+IHZWWxWjqZ0DxYg5+kU2obw5N0ENDQSxGrq5UL31ZGujslwi0Q3fVabtYuHUwDt3lgnKtJc727eQeY3heYDdng=
+X-Received: by 2002:a17:902:f551:b0:216:59ed:1ab0 with SMTP id
+ d9443c01a7336-21659ed1c26mr30426905ad.27.1733750995334; Mon, 09 Dec 2024
+ 05:29:55 -0800 (PST)
 MIME-Version: 1.0
 References: <20241208190741.4192601-1-trini@konsulko.com>
- <20241208190741.4192601-5-trini@konsulko.com>
-In-Reply-To: <20241208190741.4192601-5-trini@konsulko.com>
+ <20241208190741.4192601-7-trini@konsulko.com>
+In-Reply-To: <20241208190741.4192601-7-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Dec 2024 06:29:18 -0700
-Message-ID: <CAFLszTisJrjpjnix5wQsNS6qj3d+fpUxwGz-5bgarMTkAogRaw@mail.gmail.com>
-Subject: Re: [PATCH 4/9] GitLab: Add a default workflow stanza
+Date: Mon, 9 Dec 2024 06:29:21 -0700
+Message-ID: <CAFLszTh00Gv30UE-AikMX6HkhwkMRhbqrSa7Zafji46VmFLRCA@mail.gmail.com>
+Subject: Re: [PATCH 6/9] docker: Ensure we use the cross toolchain for aarch64
+ on arm64
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -84,15 +85,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 8 Dec 2024 at 12:08, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 8 Dec 2024 at 12:09, Tom Rini <trini@konsulko.com> wrote:
 >
-> When validating our current pipeline, a warning is produced about a lack
-> of a default workflow. For how we use it, we can add a simple default of
-> "always".
+> We do not want to use the host toolchain for building our platforms in
+> CI (it is both too old, and would be inconsistent with our CI
+> practices). To do this we need to set the toolchain-prefix so that we
+> don't end up guessing "/opt/.../aarch64-linux-aarch64-linux-" as the
+> prefix.
 >
+> Link: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/32
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->  .gitlab-ci.yml | 4 ++++
->  1 file changed, 4 insertions(+)
+>  tools/docker/Dockerfile | 3 +++
+>  1 file changed, 3 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
