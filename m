@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0768AE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7026CE77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:06:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77DDB896FE;
-	Mon,  9 Dec 2024 16:53:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C433B89533;
+	Mon,  9 Dec 2024 17:06:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lbGYRhkV";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YS018WR0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E039C89700; Mon,  9 Dec 2024 16:53:44 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id F118F89699; Mon,  9 Dec 2024 17:06:30 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A81B8896F9
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:53:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CDF689490
+ for <u-boot+nodisclaimer@lists.denx.de>; Mon,  9 Dec 2024 17:06:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-466879f84ccso35162341cf.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:53:42 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2ee74291415so3246217a91.3
+ for <u-boot+nodisclaimer@lists.denx.de>; Mon, 09 Dec 2024 08:06:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733759621; x=1734364421; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xZ54UMw+ppPf2caIAudhVlIdIHv9jffoGgKG8yM6hRI=;
- b=lbGYRhkV+jPUSc5eQOL3YucX9pXyKfdS6zPH18UnrSo//6mAlziMDm028qD030iTDY
- bQxe7yPhYaJQHCmI/4NCYqoIsMHaGVV8KAlc4hALbwDUTtsojhRdSoD2Qa9N4RcirTsT
- DdQvchd+rROav0xyD+DSQxt1WOzQJzhtp53kE=
+ d=linaro.org; s=google; t=1733760387; x=1734365187; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ru6w6ceDS+R0Fg3VDNsXtjjF+Q3nGucvWG4fuySO6sw=;
+ b=YS018WR0V85CYCX+isiJh3ZTtWXpkk3YBCtbcMKj4xF+YFmXZN+lUNQRlNNEhZwtIe
+ hGS2lIDl54FWqBH/D5CR2JmNrOxhxEcrWINfN6xTpoKjSvhanUnL8xwXTGRMyG1wddcH
+ txUojjT8CMJykRQRJwWeEh5wWDUnvk7LubfQWhG52Kz+Tc/eHI2CAOjLm/jlKvhogk80
+ O2lYlwA1UX3KOPnwsxwwAQBSjyCywAyCVvCKM3hIYRdjxoUyE56DOYl9XqzJ0+k9j8i9
+ xULOLjucVJ+GB6cFNWKdsJiGHl5C4N09XWRzsDVI0rUpqlB+rSx9aWLo7hAxTKiXrynE
+ k5dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733759621; x=1734364421;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xZ54UMw+ppPf2caIAudhVlIdIHv9jffoGgKG8yM6hRI=;
- b=P+gx3XWVQrdCrJi9RsklFosZwFwP1xl8AmzQ3hbYdJPPcDYzHQtNju87IzjhyGImWS
- 2hk05cE9BqVoA0xNoVDEEtbt7e/1hQ/1mDoIDEC5WS3lssCmOTiv4YvXpOisze8nQwcz
- S/SniBHAg+RPlzGiQfP9TcoPxalXjzeTc0zhr5pWvCT/YgwZSyHPMuh4plts5TIrOw4F
- IxiTMBoy5j6E24ueL3jnOiKDfyk/q/jeUIwSc+2thoSFl9NbqqqR7VePyAoVfKX60m/I
- 5NTq9i2aiTaNsrZuOgZ0deIdNYRXleND6PsKIsm41GFw1TfL7oT2FnfVndFYSAcX1gPD
- o7jQ==
-X-Gm-Message-State: AOJu0YzWcOOUBXL0Xy44UJf/AOG4YZSqT1TvrUajRigKgwQpkHRd4KIX
- byiynDLs9ZvIA8Z5p7uT2jtjlj/ckKbW85vFCDcPtah/Bl0LiMUFEshqmmf7Q94=
-X-Gm-Gg: ASbGnctnB9uEhty4DgGVKvM7Vnis8KLTjcYLr8KNVYe27nS2hcdl1SnLkvozoznYvOU
- PCvW97ZGanmR1eYJA6t6dhZyPYa8FOskJiThbMIjt9YQMnKAVAbkHei8JCt/Qsemn9kyTkg8IO6
- G4eXrvzSaK9pgjll+e7GJ7XaNvxXa3OCRzgujQ1HL2k/+AIheeRQrZhkCNQ4aNdXGTczk0MsQQ6
- FoBIolVa5yGxk6rGq90j1M31QPA58PARz26RKQq7xxcQ43/M+8=
-X-Google-Smtp-Source: AGHT+IErDB0mJEKqFYC9fvZh42RZAtGECa/fXbohGoJQ1nAABae7Iq7YmQJxXxRSVt/Yrz5Ciby0aQ==
-X-Received: by 2002:ac8:5fd3:0:b0:467:66e5:71ae with SMTP id
- d75a77b69052e-46766e5741cmr48913771cf.16.1733759621482; 
- Mon, 09 Dec 2024 07:53:41 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.100])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4675fc8fea3sm15382381cf.85.2024.12.09.07.53.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 07:53:40 -0800 (PST)
-Date: Mon, 9 Dec 2024 09:53:38 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/9] Enable arm64 host support in Gitlab
-Message-ID: <20241209155338.GL2457179@bill-the-cat>
-References: <20241208190741.4192601-1-trini@konsulko.com>
- <CAFLszTi4wvZBVVXtx_Gj2mSFy827DUxKtcEOxocT558=XGmQBQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1733760387; x=1734365187;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ru6w6ceDS+R0Fg3VDNsXtjjF+Q3nGucvWG4fuySO6sw=;
+ b=oXcCB3YNu6ZH+6y0SpsXqyJcKTANUc7YelRwOiXG9LIcmiHKWZS9SXFt+lPKKtUEwy
+ E0YzNTzKE8r+qyH+oMj91POc8Tf/gOEuLI5bsgkTa1fgWihrnUgOmkRwk/dRwLOuS050
+ ZZaBgds2NeZwm36eca9IwJkdUP9aze8zKROH/E3fQmXqZnDUdOCwbnQcdUByUWPSsWom
+ ydSuyPMZ3htDH9ASU1xwelOJwO8+Ww3Nkevv5hbZWzCo6J1YWEEcrDUxl6Avhtz78YxN
+ Myi3b4UjUdw8UDXh545OsHidwlh70xnDOl+GGC925Q+L6LxH/kfDbW8GCYDIBuFc374o
+ PXgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFObbLoLpcAwTd8MhYJADbKMq7nEfYAqHnX4mffpfWwePIlcznSePXZ5Z3LJX/VKfoy1/r0V8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+ylogCWzkE4MCDZyzU8k74U+lkhS3q9c4iXyWH4MmF7fUUHmz
+ OAIg40Y/PsMji2rqXe0JI926SpFJ8UuH0GYRLTmHVNnap+xV0Cf8DaeFPCfj00lNlUHvf2NWscI
+ XFTLgeQSRFN9LEzYawDApeC0p0VIefYm+3LZFbGIicd3u2KntMrA=
+X-Gm-Gg: ASbGnct/R2TBpwnfUxszr9QqsRA38E0VM85tB8gNPxNa94aNhtoEnNC6TwoZ6sBrQRN
+ TuJ6z4tTCAovmXDOAwWzro9K172w49MMm8ghS3TzPxQqvrk3Km1W7XV/0w0pr1rTq
+X-Google-Smtp-Source: AGHT+IEGAdw6Bqgr2AT6Ic4YJGRRC9ES6nGK/x6pnK0i308DR0t7jcnjDPSzoPBT9SxFleyGG0sbPhUBGrCp11jR5B0=
+X-Received: by 2002:a17:90b:554e:b0:2ee:97d1:d818 with SMTP id
+ 98e67ed59e1d1-2ef6955f87bmr19383848a91.3.1733760386590; Mon, 09 Dec 2024
+ 08:06:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XLF5KSytR63Drtoj"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTi4wvZBVVXtx_Gj2mSFy827DUxKtcEOxocT558=XGmQBQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241209094159.8355-1-philippe.reynes@softathome.com>
+ <20241209094159.8355-3-philippe.reynes@softathome.com>
+In-Reply-To: <20241209094159.8355-3-philippe.reynes@softathome.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 9 Dec 2024 11:06:15 -0500
+Message-ID: <CAEfUkU+7+mjckwERnr-rk2YO8z+VfT3EJKfNO9nOYHivyi-g=A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/5] lib: sha256: add feature sha256_hmac
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: raymond.mao+nodisclaimer@linaro.org, sjg+nodisclaimer@chromium.org, 
+ u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,79 +92,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---XLF5KSytR63Drtoj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 9 Dec 2024 at 04:42, Philippe Reynes <philippe.reynes@softathome.com>
+wrote:
 
-On Mon, Dec 09, 2024 at 08:00:33AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 8 Dec 2024 at 12:07, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > Hey all,
-> >
-> > First, thanks to Simon Glass and also Linaro, we now have access to a
-> > few fast arm64 host machines in our Gitlab instance, to use as CI
-> > runners. This series finishes the work that I pushed earlier and Simon
-> > had started that enables arm64 hosts to be used for most things now.
-> >
-> > The first notable change, especially if you use this on your own Gitlab
-> > instance is that "DEFAULT_TAG" is now unused and we instead have:
-> > - DEFAULT_ALL_TAG:
-> > - DEFAULT_ARM64_TAG:
-> > - DEFAULT_AMD64_TAG:
-> > - DEFAULT_FAST_AMD64_TAG:
-> >
-> > This lets us say that some jobs can be run on all runners, because they
-> > are small enough that anything we'd connect to CI is fast enough and it
-> > also does not depend on the underlying host architecture. Next we have
-> > tags for any arm64 host, or any amd64 host. Finally, we have a tag for
-> > fast amd64 hosts. What these last three are for is that we have a few
-> > jobs that need to run on amd64 hosts and so we have to restrict them
-> > there, but we also have now reworked the world build jobs to build
-> > (almost) everything in a single job and on the fast amd64 machines this
-> > is still as quick as the old way was, in practice.
-> >
-> > To reach this point, we say that the Xtensa jobs can only run on amd64
-> > hosts. Our targets only work with the binary-only toolchain and so this
-> > is a reasonable limit and we exclude them from the world build jobs. We
-> > also need to deal with ensuring the right toolchain is used regardless
-> > what the host architecture is and that we don't use the host toolchain
-> > by accident. Finally, because some of these changes needed to be worked
-> > out in the linter, fix some of the general warnings that notes as well.
->=20
-> I haven't tried out this series. Does this handle running multiple
-> test.py runs at once? For me that ends up providing a large
-> improvement in CI times (down to about 35 mins with just two fast
-> runners).
+> Adds the support of the hmac based on sha256.
+> This implementation is based on rfc2104.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+>  include/u-boot/sha256.h |  4 ++++
+>  lib/mbedtls/sha256.c    | 38 ++++++++++++++++++++++++++++++++++++++
+>  lib/sha256.c            | 37 +++++++++++++++++++++++++++++++++++++
+>  3 files changed, 79 insertions(+)
+>
+> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+> index 44a9b528b48..2f12275b703 100644
+> --- a/include/u-boot/sha256.h
+> +++ b/include/u-boot/sha256.h
+> @@ -45,4 +45,8 @@ void sha256_finish(sha256_context * ctx, uint8_t
+> digest[SHA256_SUM_LEN]);
+>  void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+>                 unsigned char *output, unsigned int chunk_sz);
+>
+> +void sha256_hmac(const unsigned char *key, int keylen,
+> +                const unsigned char *input, unsigned int ilen,
+> +                unsigned char *output);
+> +
+>  #endif /* _SHA256_H */
+> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+> index 24aa58fa674..1b9fc1a8503 100644
+> --- a/lib/mbedtls/sha256.c
+> +++ b/lib/mbedtls/sha256.c
+> @@ -8,6 +8,7 @@
+>  #ifndef USE_HOSTCC
+>  #include <cyclic.h>
+>  #endif /* USE_HOSTCC */
+> +#include <string.h>
+>  #include <u-boot/sha256.h>
+>
+>  const u8 sha256_der_prefix[SHA256_DER_LEN] = {
+> @@ -60,3 +61,40 @@ void sha256_csum_wd(const unsigned char *input,
+> unsigned int ilen,
+>
+>         sha256_finish(&ctx, output);
+>  }
+> +
+> +void sha256_hmac(const unsigned char *key, int keylen,
+> +                const unsigned char *input, unsigned int ilen,
+> +                unsigned char *output)
+> +{
+> +       int i;
+> +       sha256_context ctx;
+> +       unsigned char k_ipad[64];
+> +       unsigned char k_opad[64];
+> +       unsigned char tmpbuf[32];
+> +
+> +       memset(k_ipad, 0x36, 64);
+> +       memset(k_opad, 0x5C, 64);
+> +
+> +       for (i = 0; i < keylen; i++) {
+> +               if (i >= 64)
+> +                       break;
+> +
+> +               k_ipad[i] ^= key[i];
+> +               k_opad[i] ^= key[i];
+> +       }
+> +
+>
 
-That's a per-runner configuration option and so orthogonal to this
-series. Given the breakdown between "all" jobs and "fast" jobs, throwing
-a bunch of the small and short "all" jobs on a runner also doing a
-world build should just be a few minutes slow down all around and
-overall noise.
+You are assuming that the key length is at most 64 bytes.
+But according to the HMAC specification:
+If the key is longer than the hash block size (64 bytes for SHA256),
+it should be hashed first to produce a shorter key.
+If the key is shorter than 64 bytes, it should be zero-padded to 64 bytes.
 
---=20
-Tom
 
---XLF5KSytR63Drtoj
-Content-Type: application/pgp-signature; name="signature.asc"
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
+> +       sha256_update(&ctx, input, ilen);
+> +       sha256_finish(&ctx, tmpbuf);
+> +
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_opad, sizeof(k_opad));
+> +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
+> +       sha256_finish(&ctx, output);
+> +
+> +       memset(k_ipad, 0, sizeof(k_ipad));
+> +       memset(k_opad, 0, sizeof(k_opad));
+> +       memset(tmpbuf, 0, sizeof(tmpbuf));
+> +       memset(&ctx, 0, sizeof(sha256_context));
+> +}
+> diff --git a/lib/sha256.c b/lib/sha256.c
+> index fb195d988f1..66224c92dd9 100644
+> --- a/lib/sha256.c
+> +++ b/lib/sha256.c
+> @@ -300,3 +300,40 @@ void sha256_csum_wd(const unsigned char *input,
+> unsigned int ilen,
+>
+>         sha256_finish(&ctx, output);
+>  }
+> +
+> +void sha256_hmac(const unsigned char *key, int keylen,
+> +                const unsigned char *input, unsigned int ilen,
+> +                unsigned char *output)
+> +{
+> +       int i;
+> +       sha256_context ctx;
+> +       unsigned char k_ipad[64];
+> +       unsigned char k_opad[64];
+> +       unsigned char tmpbuf[32];
+> +
+> +       memset(k_ipad, 0x36, 64);
+> +       memset(k_opad, 0x5C, 64);
+> +
+> +       for (i = 0; i < keylen; i++) {
+> +               if (i >= 64)
+> +                       break;
+> +
+> +               k_ipad[i] ^= key[i];
+> +               k_opad[i] ^= key[i];
+> +       }
+> +
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
+> +       sha256_update(&ctx, input, ilen);
+> +       sha256_finish(&ctx, tmpbuf);
+> +
+> +       sha256_starts(&ctx);
+> +       sha256_update(&ctx, k_opad, sizeof(k_opad));
+> +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
+> +       sha256_finish(&ctx, output);
+> +
+> +       memset(k_ipad, 0, sizeof(k_ipad));
+> +       memset(k_opad, 0, sizeof(k_opad));
+> +       memset(tmpbuf, 0, sizeof(tmpbuf));
+> +       memset(&ctx, 0, sizeof(sha256_context));
+> +}
+>
 
------BEGIN PGP SIGNATURE-----
+I understand now we have duplicated 'shaX_csum_wd()' under lib and
+lib/mbedtls.
+That is because at the time when MbedTLS was added in, _csum_wd() is the
+only
+duplicated function and it is a trade-off comparing with creating a new
+common
+file for each algorithm.
+But it is not the case if the number of these duplicated functions is
+increasing.
+Do you mind moving them into a common file with the one you created?
+At least for sha256 with this patch I think.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXEoIACgkQFHw5/5Y0
-tyxWIwwAjkJyzRfmQfW9HmYI9lr7y4PvQ8Tp2krq3LfofWnA8wbOTJm7rANOtwxV
-Oub9KXVFMmM5zfyhDPOn1v96dYVITbvoF6B4vbND3XusqCJa+oQcSh66E6hQ+w/6
-1DcPcr7UiKio57Y91uhVhc5NIsraerS6ewwnn1epiNf9IJ/5sT85TrMPOfNWKArA
-pb3ti74+Xg7w/kgPKWLvk7S6G1la5V2YimjWtfDlzmhma6h/y0wDHQuG1NQqFYS7
-/FDWmUZ729J0KYvSabQaUmT9EaPCAduPAGd9ZuFIr28iAs0tqcPgWqUqRceK2uzw
-t7kCG8K/eU19AGtLKlUKP3IoimY2rimUqm+Z3qEg6F72n5yRNI5gQwxXFG3Pif1M
-ckEUFvthiPLIU6Y4TGefzA/1kLaxR9+uVoMCHa8HDgtvbjv2gfx8Hc+2TnULEzA9
-HWGbyqYAxl1vOQYerpApQAPS2qw8diZSEdFp5Wd2QEeNDiNTFO6BZArOod4QwRA4
-DZVpbf+w
-=kLKQ
------END PGP SIGNATURE-----
+Regards,
+Raymond
 
---XLF5KSytR63Drtoj--
+
+> --
+> 2.25.1
+>
+>
