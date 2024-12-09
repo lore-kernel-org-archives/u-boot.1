@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3A7E77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 09:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B6FE77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 09:42:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2C4589665;
-	Mon,  9 Dec 2024 10:42:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 343D189628;
+	Mon,  9 Dec 2024 10:42:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="uFLb0cer";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="CUO6EwTg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C7E08961E; Mon,  9 Dec 2024 10:42:09 +0100 (CET)
-Received: from PA5P264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::])
+ id F371289647; Mon,  9 Dec 2024 10:42:09 +0100 (CET)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D6C689607
+ by phobos.denx.de (Postfix) with ESMTPS id 22AE689618
  for <u-boot+nodisclaimer@lists.denx.de>; Mon,  9 Dec 2024 10:42:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l/cpw063esZLFyOF5NxQLVD7C/4D4xgKax9xXhdXnMEHUJ53I7piNoBHA65FDpXsQk7WtK/SC3t+/nmQvh59xtCDgj1h8ECIZs/2X/grIM2RAtDZCquAG5MpY7D/PQWlVwiGm12vkt75zsLfZea6DOgpwVNHq3tM8NOIL867DhrcWFmUQI958vglsgUWTRHRxn7GomOYpT0ukz7JsoRvhlnuDMO3fJ6c+X07QamZ//XgLvnFPCHnryC4G8D9Ym+JqY/zkp8nmN4DI5HqVeoLiBjDEsrDtA20S1uZIB2yDzKw+cgRJrDoea5RyBGxfwt5iDWyk07kOJxzSQG4fPl+Mg==
+ b=UqcHhaa4FLZgj24KTU8BfZn4nIFO2d0gF9SpPoiTKZxFM1oNXiYzF8JpPectiGdHX6Lr6WD+AsZyHUVg2snMNUzf/WvMgXMZFvtMXv4ghF22wz18RGqCcRRbr6l1TLfBrSVJFlV7TazYn3Lwynsi+hAkS8gM/pMk24jfh90QIcf/LhBWuofd6JnFhyo0vfy7eQNSmwCl1HsgLqWnq/4IM1O0ib1ZwKvwQLZXBd1ug+EO4q5TBlQ84HrVfxa2AQNuc4uNbqEhdGNa7KgmEa9sq6zzHBQKfNkXoTzGxPG5RrwgUgx44MQDzpdfQw+z34O5KAHL1o1HAvbRAb/iVzDOoA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=roOlTR+gb04LPYNMLCJ4j7QZd6snuFqqeyLfsEXyHUc=;
- b=A0RtFPfLpsTrls1RKqOZPlZRWCsXjU0JPmBx15BmGTobZt2cX/5IL31QIkIk8woCuLhaX/1lFAnoO7fjgY93uA6jtfYXy3lR0lZOjPHjfwtHujX7k1988cO2uX9+9vGCMl9Ev+98z6rpu5RJAV60utj7mM58n1MhjpoYx7KW1et6ctfBatW9Bwn6EJPpD/OCrvxi93LwvMY4ircgdH4Rz7s+QGuZNzb/G6Tnepu50ifB9KceB4SwartXVZZD3p0FOsCBaDpQqtqbZK6HyaNllAhA57G+Ece0eGt29I5OTbO3ythFKcmOsEsRfs2dCpP0BLhJtCFexodjM4t6T3zNEw==
+ bh=R8wAdSrH942Xzuz1aid215AUfodXtznRQQPp5CdtC1A=;
+ b=Rv/TL8a9Ho44/HHi8MWwC2j3UXU+tNWHAcGDejJaS+2CsMErm8MqKPx+HO+XSI5j+2M5UmYiHeMOdT1guq8UxHbIUvlmU4qIwzJwM99qTSSJZpQlhGF9edqXewVqnBznY6N3tHPJsqrERNZgSyiZF74yZrIgdPIFt3WsvGJ5OX/G+9ltbDEvlLo6TOMkjO8kaQz1A7A/nfYMMi+VKos9VsxeRbcwS40jQ5I8O+7aEfRnu3ZTATW/6PYbdISyVhfNQV9Rf9nKC8e1Q9NOs76fSiNNJYiJG313mPHHVPggHFXkkj8jk8Oi2dBAmCEr0mV8I1JyuUjAq3tilc5uxtGzBA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,16 +41,16 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=roOlTR+gb04LPYNMLCJ4j7QZd6snuFqqeyLfsEXyHUc=;
- b=uFLb0cerTILBW6ixcO1JCXjb5ZfemtqTwAaEutno+QpHo0CR+UHRYAYRCeNMd1PCtpBZrSl3pJI+9wKbesPdxU1yut6MmW2gAdETt+RiOOpl6hdh9NZZPRi4Agk1dKDiCpMwVJlZk68MUDsmTV8B6beqTHAECuPlek050q4wbHWnAk9fVZ4Q+0uwZNBwOR33ouVYQ+wTiDnD2pCOP5ls08GVSN0EgScJduJrsltGT8XmDBFondGMItLjnQDU7zBGfstzJiumubTtQjkyvML52X36bid2J1mHGsvgFA4u7+y0MPE1EqM8voK2xa8VNWlx0q7bjm58f5sXPUdIybMfAw==
-Received: from MR1P264CA0124.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:50::35)
- by PR1P264MB2278.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1b3::19) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=R8wAdSrH942Xzuz1aid215AUfodXtznRQQPp5CdtC1A=;
+ b=CUO6EwTgU7rTwsCA/6fL+SpQzkW5BxA78e+cLXgL6Rh6z04r3oh4QX1R4eN3xOAy7p559Yrb2Pw8oWPSRyTEAthbMcWfBXPBZbVLoM9v6SFXEH9wK2N+V5ywhAG0BwAZzWkf9wMB45z2oEXzp0BEVWiD1Bz6rWEboKyXMAcQmG774Gak7AR1TTo73nELYUlpA/0O6oMogsKrFCgbGhmT+8BM+2D7+OdKMRsWUzwaGbcmHVhPO+t3nKM4ClSzfE8xgUeUQWC+nQPr2pvw3Dgs7nOF0BTls0C1I7tsJ7tb7MKxZxlUKvy5AHIGxwjPVKzYep1Hqh3/dL36xGYtiLxV+w==
+Received: from PAZP264CA0092.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1fb::22)
+ by PAZP264MB2941.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1e6::15)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.18; Mon, 9 Dec
  2024 09:42:02 +0000
-Received: from MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:50:cafe::56) by MR1P264CA0124.outlook.office365.com
- (2603:10a6:501:50::35) with Microsoft SMTP Server (version=TLS1_3,
+Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1fb:cafe::9e) by PAZP264CA0092.outlook.office365.com
+ (2603:10a6:102:1fb::22) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.15 via Frontend Transport; Mon,
  9 Dec 2024 09:42:02 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D5A.mail.protection.outlook.com (10.167.241.7) with Microsoft
+ PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.7
  via Frontend Transport; Mon, 9 Dec 2024 09:42:01 +0000
 Received: from sah1lpt571.softathome.com (unknown [192.168.72.32])
- by proxy.softathome.com (Postfix) with ESMTPSA id 9C94920345;
+ by proxy.softathome.com (Postfix) with ESMTPSA id B865F1FE96;
  Mon,  9 Dec 2024 10:42:01 +0100 (CET)
 From: Philippe Reynes <philippe.reynes@softathome.com>
 To: raymond.mao+nodisclaimer@linaro.org,
 	sjg+nodisclaimer@chromium.org
 Cc: u-boot+nodisclaimer@lists.denx.de,
  Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v3 4/5] lib: mbedtls: sha256: add support of key derivation
-Date: Mon,  9 Dec 2024 10:41:58 +0100
-Message-Id: <20241209094159.8355-5-philippe.reynes@softathome.com>
+Subject: [PATCH v3 5/5] test: lib: add test for key derivation
+Date: Mon,  9 Dec 2024 10:41:59 +0100
+Message-Id: <20241209094159.8355-6-philippe.reynes@softathome.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20241209094159.8355-1-philippe.reynes@softathome.com>
 References: <20241209094159.8355-1-philippe.reynes@softathome.com>
@@ -82,52 +82,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D5A:EE_|PR1P264MB2278:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|PAZP264MB2941:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: e19959fe-e753-4e79-81c7-08dd1835bbc9
+X-MS-Office365-Filtering-Correlation-Id: 6f4262fe-d351-430a-e388-08dd1835bbd6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?tVFZACESftls2kE3kCaCaYzPiRgYTOKxXETuGxpjA1I1+jxCwC3U1DUnaGKG?=
- =?us-ascii?Q?EwqX+tWC1almgUZ3sXxmopHrcyUiJA26UK+5MVCsKvuJZad9HIrKupJY9dop?=
- =?us-ascii?Q?gObQsyfizECRA+JIykRFnNbXISPSCNKw6zM9pjyEcnseqlS1y8mN1+C4ndPJ?=
- =?us-ascii?Q?ttYDFjSpG3YIIcsZS9s4354xlSaO3MC/A7tUgAnYwpVcJ+MS0338Hs6ywvG1?=
- =?us-ascii?Q?v6u94G8dt6q1975uAlI3jr6CMOwuXHoprY78gMJ2js1WxTvoPIumMt/Wqu4a?=
- =?us-ascii?Q?MQHLa6QKWXw0Ojx6pNrOHGp4r1jgyLepqoSPoV4TCwrgvTdQXsc9J6iXmEx0?=
- =?us-ascii?Q?gy5fyFoQwxYpsPE1i0Ubo364RAePFKVkjz29freB+6yV48WyvUx/slxG9iAi?=
- =?us-ascii?Q?UBtrRqkQLIjqVqHHLN9eXwSSMP33YRl9/aElpHh/j9vkHUokBporUdpnLZym?=
- =?us-ascii?Q?6oN4LKaLmeDyJ1PjVprxx5Crmc7wzVQmfek2/JKD7WkPAN9c94Vlh08+a2BK?=
- =?us-ascii?Q?JBSoyMGuQH8lJQC9wS/+uI/VX7h+jOnGZnLW0zNVbZHAduPNN6SOmaTGybfk?=
- =?us-ascii?Q?ewtufUa3j+EyxZITv0579Wu8c1rCmm2vXau0uycg7BG63s6xyRzOcPYClcPd?=
- =?us-ascii?Q?iIMVvKjtd1KiWPkaLjQD0UuWwCMT1/aAP9VBEdNnpLT8qR1HRz25xyIbvP1F?=
- =?us-ascii?Q?ZTm431J1OddbsOdmK+94uzIXhoGoq/TXGALg7kYY1Cuw4Tt02icBgu0sR/fi?=
- =?us-ascii?Q?mrEMqRet5R4Fax1rX0BIP1mKiNSkwldA03iceGZkSIMVhUTPUkimcNVS397F?=
- =?us-ascii?Q?UUEvTzzaoHDqWAJG53v77O+fk2tnx/WT0D60Oc3mBcUkKmnd4sic4Bsqh2Z8?=
- =?us-ascii?Q?FSqzvhs4067QW92Qtydu5R05+NS0BUa7rawafp++elvyEaH2//79DTIgBk6b?=
- =?us-ascii?Q?H77jA/ySBODrTXbCHHbsE+xPsMB4pOKbhr5wjXOU7B42ixq0g2JhZEaTCEMr?=
- =?us-ascii?Q?bCBuZux935o5ycvXf3vIEETMEaxiDiLGVs4DtIgXhQr2PMRqr9JDVk9CBKHb?=
- =?us-ascii?Q?+8UXwORp1YzR6mQtQbmTCFsitlrhQJZ/Gjgtv3YjK3r2naPUXrKrJHM5IVPq?=
- =?us-ascii?Q?41Mhuf/RUYGfj53xwWUObOI+bG2k79wtk3jTewMVUJjgaOoZDLbFsbvWvAKx?=
- =?us-ascii?Q?0uOJ0DUAgfKSaMVR9pFYAiYO43gBSrPkPqqmXx0AdH8M5lsDBncywf6yZxez?=
- =?us-ascii?Q?VcVaA2TAazzfDxk678MYLYcuwsLO3fLm2QyPXhaLY6AsA63eU6Dvil60VrtP?=
- =?us-ascii?Q?QcPgVwUNQxuue21TXAbKLk42R/AZbVXV2tM5lFdCFXQAFdc41QJnhwHfAV94?=
- =?us-ascii?Q?Hg25CWqkWEO2v5Hc71Y2DpdE2jSRd2yXmxFnYsNnOG9UHCZSD9E3JT+TSCtF?=
- =?us-ascii?Q?PZI7NBTVmHdxHZU32agq3Y32L1l+0hRg?=
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7RXYUEa9BU409HgMR61WjdK162eR16Vw0lELAxs4w2tvCrCZyLaUiGgVatT5?=
+ =?us-ascii?Q?02t6fSnOKBBaMSV03LBStJS+Qj6ssduEKGd31XkkzhvT/f6akKU/Q4RoP+L/?=
+ =?us-ascii?Q?VXvq6Z9Z60X4FSZoOKHSjG7pHdA9vKZ8HQqs4nvggyTvMvbBEgqbDCI+ipAH?=
+ =?us-ascii?Q?B/pIW5m3jWkLGi1q15gJRkWgPrNo8SXAkg9O9Gs1MhxcZQ1RTw16mDIz4KdC?=
+ =?us-ascii?Q?mFJNUrkpNq0UUZMPewkwglSewIZhndJAuou0asO3mrB/8ElhxrNI0g9UKv2X?=
+ =?us-ascii?Q?gkmUzAD9GFuTfr9y69L9yLihPlufA4l9Id++WGzP6tIKTJqgAOAZ2q0Zq3u0?=
+ =?us-ascii?Q?lGcU/hWAQ74FTd/tTRHPd4W1WjohUu6o+OCDn45lzXmd5HjBkG6kdD/rg0Zw?=
+ =?us-ascii?Q?jL6ZTP2aKPsvioxWGVF2hJLp2nmdxAbNSt3SwhNY41LgmqNjdpdNzxnghYgU?=
+ =?us-ascii?Q?2ddK11I9rnmyFn1+7hR/fBKlvbC0S51BRM+RH8eK/+LTQa9AqhRE9dxCycQf?=
+ =?us-ascii?Q?7ia2cy8VmiTWl3QUkS2rGF/4C7kLKx5RxwxOhe/xJg+I5mjVKCbAoTJZJjgb?=
+ =?us-ascii?Q?gy81iIjX+JumUHdXfwB/NgLNe2gS2hs87k4Fp/0F5FM4TL9SBEmrsQMFHhA5?=
+ =?us-ascii?Q?NJjOwAEtESu8wBPTcul37oI6llsXXF/TVexp9JdBCS292UXkxDQEUs5kzUud?=
+ =?us-ascii?Q?BeF9lz0vVNNyKlJFrxZHPAwhHWUpK+hL2Qw7jPCh7vgk4JLIZJmQECeB9vX6?=
+ =?us-ascii?Q?yReJ6vQWn1+MqYJNapUkl85KIL8+y7yCKAwZvB+bZzQ9y+AGoa8Hki8uKRu5?=
+ =?us-ascii?Q?h+CiSAkOGQ3sON7DU1m5sM9Q+T31RqZNNGP24G1n2WQkf5XtHJrtVPdttZOp?=
+ =?us-ascii?Q?YUtjVuFMvTv5lyTM4g6t6ED0YIOoAU8+xa18DRUMmQyiXOBEchCc4m6Ed4K+?=
+ =?us-ascii?Q?13ARcQUxDG0bcxQShf+zpZRRyV81LMxAtV02+turip4I8m9aFeNq3sp5NCyx?=
+ =?us-ascii?Q?B9RQDe4Y01Pn6bxogkfpIfg7oMsPyhSsJZmwbGAMczd/Fn+8e7pq42pldWKs?=
+ =?us-ascii?Q?93c1EX2luLx6LhviWwncSC25LUTY2KVM5we5Gpl92xr6Xb+Zc92E/lPnOxP2?=
+ =?us-ascii?Q?8Trwe3tQj2wp15PuxSv+erIvQOPTAs4IAzBeO4bQ5xn0ejlK7WZZJ3ZYj/t5?=
+ =?us-ascii?Q?BiLuCuFr7JGu0T12B6WygNdm5vx8PQ7nocdG0iSKMsnLR1Qv7xXtrv+8mOCe?=
+ =?us-ascii?Q?65Ujs8abLXpMUW00ZdNKT1IMZFr1aVjM/PJZa2wvytzFHgVJwyM9GSTeIemU?=
+ =?us-ascii?Q?p9Dr1REawL5o+BuIZ5l/7QhgYf7KxmicVF2QtxfBQreDTBdbuS+MdAUbVRV9?=
+ =?us-ascii?Q?o1X6oLtHFebVIs7CfRTDgWKpD7g26HWPVbXD2CziL16ux230DBaB1d7mVTCT?=
+ =?us-ascii?Q?MQQS8dBZgG3uPElEiDOEOwLdswIpHnLj?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 09:42:01.8575 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e19959fe-e753-4e79-81c7-08dd1835bbc9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 09:42:01.9765 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6f4262fe-d351-430a-e388-08dd1835bbd6
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D5A.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR1P264MB2278
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAZP264MB2941
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,68 +144,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adds the support of key derivation using the scheme hkdf.
-This scheme is defined in rfc5869.
+Adds a test for the function sha256_hkdf.
 
 Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
- include/u-boot/sha256.h |  7 +++++++
- lib/mbedtls/sha256.c    | 22 ++++++++++++++++++++++
- 2 files changed, 29 insertions(+)
+ test/lib/Makefile           |   1 +
+ test/lib/test_sha256_hkdf.c | 104 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 105 insertions(+)
+ create mode 100644 test/lib/test_sha256_hkdf.c
 
-diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-index 2f12275b703..5643efcb85c 100644
---- a/include/u-boot/sha256.h
-+++ b/include/u-boot/sha256.h
-@@ -49,4 +49,11 @@ void sha256_hmac(const unsigned char *key, int keylen,
- 		 const unsigned char *input, unsigned int ilen,
- 		 unsigned char *output);
- 
-+#if defined(CONFIG_HKDF_MBEDTLS)
-+int sha256_hkdf(const unsigned char *salt, int saltlen,
-+		const unsigned char *ikm, int ikmlen,
-+		const unsigned char *info, int infolen,
-+		unsigned char *output, int outputlen);
-+#endif
+diff --git a/test/lib/Makefile b/test/lib/Makefile
+index 4c0abcba81a..24ce6ed8f00 100644
+--- a/test/lib/Makefile
++++ b/test/lib/Makefile
+@@ -25,6 +25,7 @@ obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+ obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+ obj-$(CONFIG_AES) += test_aes.o
+ obj-$(CONFIG_SHA256) += test_sha256_hmac.o
++obj-$(CONFIG_HKDF_MBEDTLS) += test_sha256_hkdf.o
+ obj-$(CONFIG_GETOPT) += getopt.o
+ obj-$(CONFIG_CRC8) += test_crc8.o
+ obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
+diff --git a/test/lib/test_sha256_hkdf.c b/test/lib/test_sha256_hkdf.c
+new file mode 100644
+index 00000000000..ca173a13afc
+--- /dev/null
++++ b/test/lib/test_sha256_hkdf.c
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
++ *
++ * Unit tests for sha256_hkdf functions
++ */
 +
- #endif /* _SHA256_H */
-diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
-index 1b9fc1a8503..6e9659d31bb 100644
---- a/lib/mbedtls/sha256.c
-+++ b/lib/mbedtls/sha256.c
-@@ -11,6 +11,11 @@
- #include <string.h>
- #include <u-boot/sha256.h>
- 
-+#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-+#include <mbedtls/md.h>
-+#include <mbedtls/hkdf.h>
-+#endif
++#include <command.h>
++#include <test/lib.h>
++#include <test/test.h>
++#include <test/ut.h>
++#include <u-boot/sha256.h>
 +
- const u8 sha256_der_prefix[SHA256_DER_LEN] = {
- 	0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
- 	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
-@@ -98,3 +103,20 @@ void sha256_hmac(const unsigned char *key, int keylen,
- 	memset(tmpbuf, 0, sizeof(tmpbuf));
- 	memset(&ctx, 0, sizeof(sha256_context));
- }
++struct test_sha256_hkdf_s {
++	unsigned char *salt;
++	int saltlen;
++	unsigned char *ikm;
++	int ikmlen;
++	unsigned char *info;
++	int infolen;
++	unsigned char *expected;
++	int expectedlen;
++};
 +
-+#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-+int sha256_hkdf(const unsigned char *salt, int saltlen,
-+		const unsigned char *ikm, int ikmlen,
-+		const unsigned char *info, int infolen,
-+		unsigned char *output, int outputlen)
++/*
++ * data comes from:
++ * https://www.rfc-editor.org/rfc/rfc5869
++ */
++static unsigned char salt_test1[] = {
++	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
++	0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c };
++
++static unsigned char ikm_test1[] = {
++	0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
++	0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
++
++static unsigned char info_test1[] = {
++	0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9 };
++
++static unsigned char expected_test1[] = {
++	0x3c, 0xb2, 0x5f, 0x25, 0xfa, 0xac, 0xd5, 0x7a,
++	0x90, 0x43, 0x4f, 0x64, 0xd0, 0x36, 0x2f, 0x2a,
++	0x2d, 0x2d, 0x0a, 0x90, 0xcf, 0x1a, 0x5a, 0x4c,
++	0x5d, 0xb0, 0x2d, 0x56, 0xec, 0xc4, 0xc5, 0xbf,
++	0x34, 0x00, 0x72, 0x08, 0xd5, 0xb8, 0x87, 0x18,
++	0x58, 0x65 };
++
++static struct test_sha256_hkdf_s test_sha256_hkdf[] = {
++	{
++		.salt = salt_test1,
++		.saltlen = sizeof(salt_test1),
++		.ikm = ikm_test1,
++		.ikmlen = sizeof(ikm_test1),
++		.info = info_test1,
++		.infolen = sizeof(info_test1),
++		.expected = expected_test1,
++		.expectedlen = sizeof(expected_test1),
++	},
++};
++
++static int _lib_test_sha256_hkdf_run(struct unit_test_state *uts,
++				     unsigned char *salt, int saltlen,
++				     unsigned char *ikm, int ikmlen,
++				     unsigned char *info, int infolen,
++				     unsigned char *expected, int expectedlen)
 +{
-+	const mbedtls_md_info_t *md;
++	unsigned char output[64];
 +
-+	md = mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
++	sha256_hkdf(salt, saltlen, ikm, ikmlen, info, infolen, output, expectedlen);
++	ut_asserteq_mem(expected, output, expectedlen);
 +
-+	return mbedtls_hkdf(md, salt, saltlen,
-+			    ikm, ikmlen,
-+			    info, infolen,
-+			    output, outputlen);
++	return 0;
 +}
-+#endif
++
++static int lib_test_sha256_hkdf_run(struct unit_test_state *uts,
++				    struct test_sha256_hkdf_s *test)
++{
++	unsigned char *salt = test->salt;
++	int saltlen = test->saltlen;
++	unsigned char *ikm = test->ikm;
++	int ikmlen = test->ikmlen;
++	unsigned char *info = test->info;
++	int infolen = test->infolen;
++	unsigned char *expected = test->expected;
++	int expectedlen = test->expectedlen;
++
++	return _lib_test_sha256_hkdf_run(uts, salt, saltlen, ikm, ikmlen,
++					 info, infolen, expected, expectedlen);
++}
++
++static int lib_test_sha256_hkdf(struct unit_test_state *uts)
++{
++	int i, ret = 0;
++
++	for (i = 0; i < ARRAY_SIZE(test_sha256_hkdf); i++) {
++		ret = lib_test_sha256_hkdf_run(uts, &test_sha256_hkdf[i]);
++		if (ret)
++			break;
++	}
++
++	return ret;
++}
++
++LIB_TEST(lib_test_sha256_hkdf, 0);
 -- 
 2.25.1
 
