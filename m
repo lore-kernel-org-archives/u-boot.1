@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5893E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:48:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D36E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:51:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13153896CA;
-	Mon,  9 Dec 2024 16:48:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B3853896FD;
+	Mon,  9 Dec 2024 16:51:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hSg2JEbE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cjPSF4EX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 785A9896E4; Mon,  9 Dec 2024 16:47:59 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id E34B8896FE; Mon,  9 Dec 2024 16:51:34 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51B9F896AA
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:47:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27C5A896F9
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:51:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa69251292dso163131166b.2
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:47:57 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b6dd0347dbso19157085a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:51:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733759277; x=1734364077; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z94qqPWqnzZNAzdrJKNCUpa8PxvA7bvvcAJXQO7dl8A=;
- b=hSg2JEbEyfov5ur9kDojfQPOa6vOGMQYyyByU1H2jYH9Fp/g3TOJ120T7O8UiJcmBa
- N6QUJBXQhADoYmAvV0PrwFBIA2pHQ+0C4tMKc5Fk74lysC1vW5NA+aun9IVz/sVLrJdn
- iiJaTf7aD4LBh0og1jCRrvwYgAf3F76qGvKEE=
+ d=konsulko.com; s=google; t=1733759491; x=1734364291; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yaIlHpVM0IL2rgku/2fLYCWWKrwc5lSbKpy3YlcK/zs=;
+ b=cjPSF4EXyS0W5nuSarpe06wU7WcYJXE5oYV3Vd71konUfk1B4Yku/9Gna6lj1J5pdQ
+ 3meJIa/H5DDAT+Qiqe6CqTJ7xr45sf4dU89s2qma+/mCoHlYPCn83RZStJB6elVgNKri
+ ymjMeYzsbjSUnfk6Ew2I63Fn9ET/9rZMoa5iM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733759277; x=1734364077;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z94qqPWqnzZNAzdrJKNCUpa8PxvA7bvvcAJXQO7dl8A=;
- b=lZv+Zg1VNHnTMnsRpNuy0TFQXV2nEPBH9oPIasn8P3qPvITaKJdMJC5JUpE46+FOfk
- c8vwvQHbM9QnlEFEO4wiK2F4upDutfPnkoMWe8rdyNGb/is+5ulTeozQJL7nxLxYpo9g
- KlP4HQOV2fJUABu61JLAPQaoWK7q3WDQhlqX+pBiMPzBPbi81vH0bdm1GY/4SbgIBYYg
- /MJ1DfxAWwd+tPiH9T6SDFc9zL+An9KfM1ScoLQtDErZTzlyPpKoJIWv5PnXiixAcS8y
- LmwHaif80CEEEPjPfYK/KolTGiMSQ5OityY7kjNcKvz5VzqAKzmQmYFtw4kOwqz+3f39
- pQMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWonffvr/HsxRu1ailSh68qCQ+VVisQght6v78WW5yV2h6r3HG4bIsrBJb+pERQmPFyr4LunDc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxG4jLRygncwxmhCWKskgl8U2A2d2Gf1kmLjzcgnYndoH3jbVXf
- eqC4ggARpD1UMfJDku7LvrPacspVEX2FGIkXSuy4Atg/HH0/LzGkrIzxZvb3Ia9oIjb0Y9H/kr/
- uoFytPojUKVaDUAnnzykm3ySHqECwsl5whGyH
-X-Gm-Gg: ASbGnctrMYHrSjg6PgyPKg60O+TwRskc8MkzNxwkUmNupDpMeg0E6ICPfSPZGFkwj4J
- C8MSx8uusy5i+xqIx8gdor5h0qlsuxSID
-X-Google-Smtp-Source: AGHT+IGcYG0YTWDyvMFOk5JjrOth1JuYRAt89q7w14VSfjluTT3QgZ0WSnX92X8rKYt3zQ4+sVYhU3rpU/FGhkGoDQU=
-X-Received: by 2002:a17:906:4ca:b0:a9a:646e:d2f7 with SMTP id
- a640c23a62f3a-aa63a33b676mr1248600766b.61.1733759276714; Mon, 09 Dec 2024
- 07:47:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733759491; x=1734364291;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yaIlHpVM0IL2rgku/2fLYCWWKrwc5lSbKpy3YlcK/zs=;
+ b=oNOsTRb0RMsYOhhmcmKdy41awIEINnFjp3h9hYnJwscYzl1trEiUBP1buC7PQv5oiJ
+ cujufI2zlFag0SV0an7u6/kH6eJqj8uC4Q0XkGzpkKZ2xXqZ6ndiRH0q2LQn50VmXoOT
+ /akvOynIwk5nbozFtBALqchpJVYdQ7ub0EgUGWYl+ZaDc+UMaKoxqTpW6WKfZZoqo+BT
+ BjjUjjDyZ7IU8Au5Jlyh4jVvDZ9ld/XXiaM6MrUYaM4eAb2shvndNhXtBg7Z8OyT3SyG
+ UyjBVukNu9sbbHc0EYMGaTdhAyJMarOoEXU5EeDyIR988IfdlCc6VTtCWx2WRX7Mt193
+ z3UA==
+X-Gm-Message-State: AOJu0Yzi5rgIwy3kRqa1Z/qMYoEO+NgrZSxJ9iLZc5kJx26NnHoticA6
+ vwX7oZug+AQLZtLrF/AAqOH8hHFWGH9y00i5GzleLhp9pediwnKU6Q4qwgQTPNw=
+X-Gm-Gg: ASbGncuqjP5qIyKDqvgxv+BBG6EZOg7rvEsrrN1hy8TtAR4vVkla+GTQKCOy030/HBU
+ ZEo5xdVpWn6hvIj6uwcbYr5tUBt9rRby8GeVDu6uANUhioXfCDexETg34rch1zuGKH4EsTZzm2y
+ SziZFX6X8GMyHjOEB5DL3s8ldpL4lfciCFjED0V+I9D2ouyEUYk5CjSQLVWCrlY66n4y0FlvMjC
+ 5Pr5VYyCBTaXIGHARQVwK9yw9bMowX9sBSYXE9zq2G8WDyp6u0=
+X-Google-Smtp-Source: AGHT+IFo+8ln7BMWjWV7QkjU5zmIej35KlsLBVuEMvFdAv0Q55ZOgPrz/hP/RjPCZgq1YYTipnBWiA==
+X-Received: by 2002:a05:620a:4084:b0:7b6:d9d2:d265 with SMTP id
+ af79cd13be357-7b6d9d2dd99mr315008085a.57.1733759490973; 
+ Mon, 09 Dec 2024 07:51:30 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.100])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6b5a468b9sm453409085a.13.2024.12.09.07.51.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 07:51:29 -0800 (PST)
+Date: Mon, 9 Dec 2024 09:51:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 3/9] GitLab CI: Make wider use of tags
+Message-ID: <20241209155126.GK2457179@bill-the-cat>
+References: <20241208190741.4192601-1-trini@konsulko.com>
+ <20241208190741.4192601-4-trini@konsulko.com>
+ <CAFLszTjyqf0bctZ0aY2r2+kQD07q1fnJ38E0DjuKcqU9+B6skA@mail.gmail.com>
 MIME-Version: 1.0
-References: <cover.1730452668.git.michal.simek@amd.com>
- <f79dc1fbf796dd5ad290f6080608ee68d7652cfc.1730452668.git.michal.simek@amd.com>
- <CAFLszTiWOdsS8=pm7aSvyC2QYiXbbsciz2yb6s9YPV1FeFFrgg@mail.gmail.com>
- <2ee46698-87c9-47e3-8951-41ac3c50331a@amd.com>
- <20241209153216.GJ2457179@bill-the-cat>
-In-Reply-To: <20241209153216.GJ2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Dec 2024 08:47:45 -0700
-Message-ID: <CAFLszTjb23qYBS2YDWjTJDFtJ2OnZZ5OQG56i9DBu_NeUT=FzQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/7] common: binman: Calling initr_binman() when
- BINMAN_FDT
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com, 
- neal.frager@amd.com, Christian Marangi <ansuelsmth@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="auh+95ugju+eGw6w"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjyqf0bctZ0aY2r2+kQD07q1fnJ38E0DjuKcqU9+B6skA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,95 +95,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Mon, 9 Dec 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Dec 09, 2024 at 04:26:15PM +0100, Michal Simek wrote:
-> >
-> >
-> > On 12/6/24 20:20, Simon Glass wrote:
-> > > On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
-> > > >
-> > > > Calling empty function when BINMAN_FDT is adding +64B for nothing which is
-> > > > not helping on size sensitive configurations as Xilinx mini configurations.
-> > > >
-> > > > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> > > > ---
-> > > >
-> > > > Changes in v2:
-> > > > - new patch
-> > > >
-> > > >  From my perspective there is no reason to call empty function. It is just
-> > > > increase footprint for nothing and we are not far from that limit now.
-> > > >
-> > > > ---
-> > > >   common/board_r.c | 7 +++----
-> > > >   1 file changed, 3 insertions(+), 4 deletions(-)
-> > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > This is a bit odd, though. Do you have LTO enabled?
-> > >
-> >
-> > yes LTO is enabled. And there are other candidates like this.
-> > Is LTO able to fix function arrays which is calling empty function?
-> >
-> > (without this patch)
-> >
-> > 00000000fffc0eb4 <initr_of_live>:
-> >     fffc0eb4:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0eb8:   d65f03c0        ret
-> >
-> > 00000000fffc0ebc <initr_dm_devices>:
-> >     fffc0ebc:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ec0:   d65f03c0        ret
-> >
-> > 00000000fffc0ec4 <initr_bootstage>:
-> >     fffc0ec4:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ec8:   d65f03c0        ret
-> >
-> > 00000000fffc0ecc <power_init_board>:
-> >     fffc0ecc:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ed0:   d65f03c0        ret
-> >
-> > 00000000fffc0ed4 <initr_announce>:
-> >     fffc0ed4:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ed8:   d65f03c0        ret
-> >
-> > 00000000fffc0edc <initr_binman>:
-> >     fffc0edc:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ee0:   d65f03c0        ret
-> >
-> > 00000000fffc0ee4 <initr_status_led>:
-> >     fffc0ee4:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ee8:   d65f03c0        ret
-> >
-> > 00000000fffc0eec <initr_boot_led_blink>:
-> >     fffc0eec:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ef0:   d65f03c0        ret
-> >
-> > 00000000fffc0ef4 <initr_boot_led_on>:
-> >     fffc0ef4:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0ef8:   d65f03c0        ret
-> >
-> > 00000000fffc0efc <initr_lmb>:
-> >     fffc0efc:   52800000        mov     w0, #0x0                        // #0
-> >     fffc0f00:   d65f03c0        ret
->
-> No, but maybe Simon would prefer if we marked all of the could-be-empty
-> functions as __maybe_unused and did:
->         CONFIG_IS_ENABLED(BINMAN_FDT, initr_binman),
-> etc in the list instead?
+--auh+95ugju+eGw6w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes that looks better.
+On Mon, Dec 09, 2024 at 08:00:42AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sun, 8 Dec 2024 at 12:08, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > First, introduce DEFAULT_ALL_TAG, DEFAULT_ARM64_TAG, DEFAULT_AMD64_TAG
+> > and DEFAULT_FAST_AMD64_TAG and remove the previous DEFAULT_TAG (as
+> > anyone making use of that will need to adjust their jobs). This allows
+> > us to say that some jobs can run on amd64 or arm64 hosts under the all
+> > tag, while some jobs must run on amd64 (the Xtensa jobs due to
+> > binary-only toolchains and sandbox for now) Then we rework the world
+> > build stage to only run on our very fast amd64 hosts, or our arm64 hosts
+> > (which are also very fast). This should result in a similar overall
+> > build time but also a much more consistent overall build time as we
+> > won't have the two big world jobs possibly run on our slower build
+> > nodes.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >  .gitlab-ci.yml | 74 ++++++++++++++++++--------------------------------
+> >  1 file changed, 27 insertions(+), 47 deletions(-)
+>=20
+> I'd prefer fast_amd64 to avoid spaces
 
-Michal, see also [1] in case you can work out why it 'stopped
-working'. I could have sworn inlining the function was a win when it
-was applied, but no amount of toolchain juggling could make it be a
-win when I came back to it later.
+I don't see a reason to avoid spaces here.
 
-Regards,
-SImon
+> What is the run time for this new, unified 'world' build? I just
+> wonder whether splitting it might make the runs go faster?
 
-[1] e7f59dea880 Revert "initcall: Move to inline function"
+It's about the same at the worst case of ~40-45min, but it's more
+consistent now, by excluding the older / slower amd64 hosts.
+
+--=20
+Tom
+
+--auh+95ugju+eGw6w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXEfsACgkQFHw5/5Y0
+tyxHIAwAkLF86jQ52f0kb3Ey6Q5pvS9T3oAJjJ7jiJ0uBqPK7a7K0Wovs57sQ9OL
+e2+1Yb6qSoY34bN196BzloJJy5um5Z5jH/kFBCAyv19JQMG9UiIcxmSOvR32e4BO
+Du6l1cJwc2EAMow8wqwh17JpyN1dVLTDYX/BnCaP3PMIMeSCK4np1i/tiFB29+eW
+KBFzZ40HUGzVd5hDCWM2i7cGMTyU9W9QZO0G9chviJiqDkwgRiu9wc+zleJGgHz+
+Bk34f00XV33yqxi+jq/kE1CwFG5GaRTC/bgd6/Go75BsljkcdYtRF5SmRarHchYT
+ieSEP/nwwf61x/vW7vsYTJ+3c7bflSUSnfK/P/48bDPMa6MBD0oFmnFybk3fexzW
+Dsrx4j2mBih3Wo3LL6kjRlYDTwCQfk3DOpX2Bxq4D0+DBY8e6sZOSxURkvQ/g/XB
+bhDJvwNOv7oNnyid16Bs7lmIxCD97Ijfjnm3zmgzvTdkN1gyNRG/NV8JBT23BKx9
+jVZiMu79
+=a/Wi
+-----END PGP SIGNATURE-----
+
+--auh+95ugju+eGw6w--
