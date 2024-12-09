@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9DAE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:15:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B587E77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EADD4896FF;
-	Mon,  9 Dec 2024 17:15:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4609F896ED;
+	Mon,  9 Dec 2024 17:15:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DU1tZz3I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h8vtDUzG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5A6A89710; Mon,  9 Dec 2024 17:15:03 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 3EE6289712; Mon,  9 Dec 2024 17:15:05 +0100 (CET)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DE8889699
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:15:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DCB4F89709
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:15:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-3022598e213so9306481fa.0
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:15:01 -0800 (PST)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-3002c324e7eso33589131fa.3
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:15:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733760900; x=1734365700; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733760902; x=1734365702; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EmZi3iCQTN1BjNX132wUsXSSSN9dPugqOUg4J2p4zB0=;
- b=DU1tZz3I+rXXCi0mwS1mh+26Za6YRt8Yu3+ZQS/an4nQbSkdnYsmqoPBt+yJhjzkag
- ubVHzMcUgL8BIVFScre+q8xIpglJrD93wv8P7ySmINMJO8YcM97mF/ZMGy/CXz8R3wqm
- 2EvkibQ9UQcVwkBlHaMQFWq7E4kFdY/mP19HXogn4+9UJoxkwbZc+LaqPZsrGp+B/QVF
- qxdEIRtaPekiq21555srxLPsawY6wzt4FpQ4cvB/ohfr2S6Q5thFe+fjybVUApptc5/2
- dsv6QgIb+gY0JG3+bWhnRx5UJB9WTT71Cp7ABM7icNkenER2IuubLsQwS9WgTYpxlHId
- v+xg==
+ bh=MyiBLcAxH/nrwTomz8x8G1itGFykJnXiSv8uDLnDlXg=;
+ b=h8vtDUzG3TQAkutc2t+bB3azDAd7v23KDxqPyRz9/O0xRmxiuMedVseqZXX58e6riW
+ mFT/zXX1ZMBg7dFfIirhkHVBNhfdwEuhShf+YYnGlUe7UkJsgoJmkSCEoiZIjEzdhtE8
+ wtZXQ4RYAg4NfHiykK04UnrgGJmmVp9K6Dp8ZHhP/jX8S4jlhCh9MP69ZhDGIDk9Xvp9
+ BZ46gdin7PTJxIZeTNTsh5ODQeo1IKgznguwWeG/PqaFhxrUAwM4HuZgnD2AzDLaeXKy
+ F9jF8x2JVToFjQ1cGZm46MdYDxqjJZYdA0vJmPaaLkRh0MPokCrUPoMXG1A/LA4L/Yc0
+ k2Xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733760900; x=1734365700;
+ d=1e100.net; s=20230601; t=1733760902; x=1734365702;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EmZi3iCQTN1BjNX132wUsXSSSN9dPugqOUg4J2p4zB0=;
- b=Fmx9ADgApf+bsfrOVgQ8G6VUv8FEvcSxjOCh1jqnKxaa+1G1FilhygNu0RnYxRKo4q
- VmdrPJVJIyIRlcfe5OGsMvcU/NeOH93pHpLylIyxOlsnEXkDq16OIZKmc6hdQI/PhMzC
- XIxjFBnfqFElNc/rL2e78agn5K0ackEVlWH8Gnuy7OhNCIrffjIAG4N4bbYltPVIcMsx
- v7NO+NwB89BiiB+wslld0at+h7CnawWr/n3iyTAPdwO5CvSDQ7n3H9z5Y79UqC7bzd2Q
- nNySHhsphLQx+OYB1e883QucL8RUt0/FFzeHgTmPBdzrFgpkrBBWmXdI2Ktt+psPp9U1
- uOiQ==
-X-Gm-Message-State: AOJu0YwVStTkZ1cnqyjTibA/97eeBlhWlxNqWf9PDsya95ylWOwM40wL
- 3BGGsQ3PDZNgugICZK6sENjsRtK8VJD/ggJ2+uCh8+kuDVvXDz/k
-X-Gm-Gg: ASbGncuzMb5G6hcBi4cOVgOVPdl6t0dlTcpBuavaOufbNUfqJ0HJ8n82Zsi2vco5SpX
- OC0zSWrtimhtOdtYA3KI04c7eD7fqU9SQECBW5gIPCCS2xZIiDPfE4X86OR3ZzP+8pxK6jZxfTJ
- q0M0sJmNcKpDf4fQtR7oKVXBRc3e4XqPZ4IgMyeLK5U4HduR58A4kuXCKFlbXkUHx3hxkX/1AMG
- qEHMHIF+NXWr45nXs9KF4MIzZvRia7YPIOoDN6TKw==
-X-Google-Smtp-Source: AGHT+IHaW2Rt6o7dBKItVyMELbTtvrWuDRuSJGGdN4gMZNGR++Gzd1maUl5F5Pln0mKMlzjeXybcRA==
-X-Received: by 2002:a05:651c:996:b0:302:218a:6355 with SMTP id
- 38308e7fff4ca-3022fb46ca0mr3367981fa.13.1733760900187; 
- Mon, 09 Dec 2024 08:15:00 -0800 (PST)
+ bh=MyiBLcAxH/nrwTomz8x8G1itGFykJnXiSv8uDLnDlXg=;
+ b=AgvEyCJQsd4zGxCjEwgw7lbaBpWHEB9VMRNPrQWKv0kDnAl9q93hj3P4mnUO/sJkgF
+ hmOzHi7+fChwva+UEzgQnyS/Xkl1BCEEvc+H6Uzf8v6QwnloI1+6sKt3j1hnL40Qgbjj
+ bLVCLFBwfcjWG3vK5cKPmpCxjdULXg17KXaq52299fSqA36L1EENBdCwUSR+hnfmKxjF
+ ksFIPBnAArdHGxpTDQUz+VsBZs+tvjWBo3QFi26WdQGZVSKPKvClNK2qMOYXPhTPS9wN
+ 8f0TToFi7ANYiAM405cbCjeNxh6oFyhKRhNw93qRKQZhUYLB9Bw67Pf+D/TADQFK1kZi
+ nqAQ==
+X-Gm-Message-State: AOJu0Yy0KbiIZWpKB4KYFCl4T7UH9v7b8ph58U3ExeaLtsLp48tRnyP0
+ f4kumt24zucn3uROYVFq7pU2EOR4jVDuXzhEs4rCcmQMxLKxCpyk
+X-Gm-Gg: ASbGncsfTfYm8Z2yqRYH3un0oTcfQp6hJ4zOZWcG7PK2ZUISCqqYKthGjP1OYzSTo2X
+ 2BmCwVK3WObjsmCgd/dUugdgBBNZjdOB8n68rLrNi6FOy8h1walq6/yNrJ83AT33J99/qbKvhn2
+ r93W8K2ixzbBMHrPmRNq5CmQes3zxy4bagd9+xYmIG82UOEgcboOJa8O6yOhQhjmbZhkY5LS6ms
+ JDzo8fQX1Ky6eWqHsFrSAQm/L3lbypKpUP/9t+WRA==
+X-Google-Smtp-Source: AGHT+IHUEji/Tr7DbkXVb5UgA4/8Mn7bo68CpYR0jz/bapYSj1xsCyHhxz6PQvLgz11DYzywKvcIsg==
+X-Received: by 2002:a05:651c:507:b0:300:2848:fc6d with SMTP id
+ 38308e7fff4ca-3002fd45707mr57561721fa.32.1733760901490; 
+ Mon, 09 Dec 2024 08:15:01 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3021a02d90bsm5940971fa.80.2024.12.09.08.14.58
+ 38308e7fff4ca-3021a02d90bsm5940971fa.80.2024.12.09.08.15.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 08:14:59 -0800 (PST)
+ Mon, 09 Dec 2024 08:15:01 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
  Peter Robinson <pbrobinson@gmail.com>, Heiko Schocher <hs@denx.de>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/3] Revert "drivers: gpio-uclass: support PMIC GPIO
- children"
-Date: Mon,  9 Dec 2024 18:14:32 +0200
-Message-ID: <20241209161434.6563-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/3] pmic: max77663: bind children to parent node
+Date: Mon,  9 Dec 2024 18:14:33 +0200
+Message-ID: <20241209161434.6563-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241209161434.6563-1-clamor95@gmail.com>
 References: <20241209161434.6563-1-clamor95@gmail.com>
@@ -98,51 +97,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Requesting of PMIC's GPIO child should be done by binding
-GPIO driver to PMIC's node is GPIO driver does not have
-its own node.
-
-This reverts commit c03cd98d1a163666b4addcdd9a34fc0c77dfd0a5.
+Bind GPIO and SYSRESET children to parent node since they
+do not have their own nodes in the device tree.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/gpio/gpio-uclass.c | 20 --------------------
- 1 file changed, 20 deletions(-)
+ drivers/power/pmic/max77663.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 0213271e3a6..67fc776cada 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -1142,29 +1142,9 @@ static int gpio_request_tail(int ret, const char *nodename,
- 		ret = uclass_get_device_by_ofnode(UCLASS_GPIO, args->node,
- 						  &desc->dev);
+diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77663.c
+index cf08b6a7e1d..c2a7cbf7e40 100644
+--- a/drivers/power/pmic/max77663.c
++++ b/drivers/power/pmic/max77663.c
+@@ -47,8 +47,9 @@ static int max77663_bind(struct udevice *dev)
+ 	int children, ret;
+ 
+ 	if (IS_ENABLED(CONFIG_SYSRESET_MAX77663)) {
+-		ret = device_bind_driver(dev, MAX77663_RST_DRIVER,
+-					 "sysreset", NULL);
++		ret = device_bind_driver_to_node(dev, MAX77663_RST_DRIVER,
++						 "sysreset", dev_ofnode(dev),
++						 NULL);
  		if (ret) {
--#if CONFIG_IS_ENABLED(MAX77663_GPIO) || CONFIG_IS_ENABLED(PALMAS_GPIO)
--			struct udevice *pmic;
--			ret = uclass_get_device_by_ofnode(UCLASS_PMIC, args->node,
--							  &pmic);
--			if (ret) {
--				log_debug("%s: PMIC device get failed, err %d\n",
--					  __func__, ret);
--				goto err;
--			}
--
--			device_foreach_child(desc->dev, pmic) {
--				if (device_get_uclass_id(desc->dev) == UCLASS_GPIO)
--					break;
--			}
--
--			/* if loop exits without GPIO device return error */
--			if (device_get_uclass_id(desc->dev) != UCLASS_GPIO)
--				goto err;
--#else
- 			debug("%s: uclass_get_device_by_ofnode failed\n",
- 			      __func__);
- 			goto err;
--#endif
- 		}
+ 			log_err("cannot bind SYSRESET (ret = %d)\n", ret);
+ 			return ret;
+@@ -56,8 +57,8 @@ static int max77663_bind(struct udevice *dev)
  	}
- 	ret = gpio_find_and_xlate(desc, args);
+ 
+ 	if (IS_ENABLED(CONFIG_MAX77663_GPIO)) {
+-		ret = device_bind_driver(dev, MAX77663_GPIO_DRIVER,
+-					 "gpio", NULL);
++		ret = device_bind_driver_to_node(dev, MAX77663_GPIO_DRIVER,
++						 "gpio", dev_ofnode(dev), NULL);
+ 		if (ret) {
+ 			log_err("cannot bind GPIOs (ret = %d)\n", ret);
+ 			return ret;
 -- 
 2.43.0
 
