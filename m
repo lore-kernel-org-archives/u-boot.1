@@ -4,100 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D6BBE77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 01:00:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35042E77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 02:00:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3814D89589;
-	Mon,  9 Dec 2024 02:00:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CFBC6895A7;
+	Mon,  9 Dec 2024 03:00:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oL+/QM0S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uav3NMN9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 658D7893E6; Mon,  9 Dec 2024 00:07:41 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id AECED895A7; Mon,  9 Dec 2024 03:00:33 +0100 (CET)
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com
+ [IPv6:2607:f8b0:4864:20::442])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03F4188DB6
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 00:07:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06EDA8954F
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 03:00:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa662795ca3so191489866b.1
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 15:07:35 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pericycle.cc@gmail.com
+Received: by mail-pf1-x442.google.com with SMTP id
+ d2e1a72fcca58-725f2f79ed9so89626b3a.2
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 18:00:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733699255; x=1734304055; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GjOfrwTxQv2UKyIoEXNjIxiLN6Uau3JaYhqgRp9QNaE=;
- b=oL+/QM0SBuHXepPG0KXV4Oco25R40++ejO0XMgHpzVAGFBwrVJcKPSEYg/JSLs2Pho
- B7RDFIbRL+pLJmerUgePhgN2hVIApn5tP8bfGT/oD3X13ktz7XMkULcQYNBZN65D6/Lk
- aWGV6Hrxs3V0kjzkgjz38Lv2YHFoP1WbSfWLE=
+ d=gmail.com; s=20230601; t=1733709629; x=1734314429; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vfQboXlpCt2QrqKPfArkU/rn2vECeqaBR0bl/qiXVvA=;
+ b=Uav3NMN9XG5+NDM8OJocYfRBA5eHjgnF3MSJkC5ykljSDxhVKP6NvME7v0tc4IhghL
+ EYe1RqUrQpnriSsTpCrojK9xIl/c4DF00zYo/EtbH/4xXhrLsNKuW2hKqy3DOOWR/cGO
+ JJB3CWeVJk1L9jhxsE7wRT+C2htf9pm+9vCk7Hnx6LtkaBdbiTriTp2ac0V044LLyn9e
+ ARcyu8D+U/OEstFLljTRwh9H9CgumroRkQ6CDyHyc1/zSeXtUGG8se6NgLqhNMJ/OTxY
+ ZK+0IhyBPWVn/7fI0pH7MzeUylZCAAvbSEoMGY8EVJPuZyFLopPL24PVrsEmHFIhj5JS
+ up/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733699255; x=1734304055;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733709629; x=1734314429;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GjOfrwTxQv2UKyIoEXNjIxiLN6Uau3JaYhqgRp9QNaE=;
- b=M4GMFrTzu9p/8SV+Q+8BHpixE7pOMFSe3mFOMtpMxVN0ZRVS/1VcfawDApAJM3eSiy
- icv+e/IC4V9l4dT1uRA5qFmizfFnDLc0lGYpJt9X23v43wHqh3Jl7lqL4HUQ6Djsf8LX
- RWmm7HFPIY2XrRv4Pfe3d1SQV/94XMh7sKlnFP8Mscz3nm0EcgXx1yt2rqEqi/Nf3l2v
- 9xp1cSF+RRbq0Zb1p4xGeu+8ITExFgeHKD2nnektXU2JGLlNBtq4re3LnyuzBE44O64/
- CTqropogABlz1WKwlnw4dUY8hLRpcPAoGUgGc6n7CUfA3w0qq3UzLPRoXtN4h05lCKO1
- XZdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX0skwBKfCOJJDHoBBlWyNbV0NEUu+qbXGuthdITTNOJSNkj9Sju8YfVFN4tqr+nU9CcOK/9So=@lists.denx.de
-X-Gm-Message-State: AOJu0YyahulrTVGrLZ0LtSaClCK8iQAoJem/wr9Fok9xqMFpYrIiTlyn
- 8JBatFVAW28FH+CwJiIHZe/R13/rRw1InPNqarzJ8RbDfQfDuwANu2UJhqJB/MBAmNviwRHAt0S
- pAqUyeORuQff5hzlilCxpAB5II7FFXXowd72D
-X-Gm-Gg: ASbGncuMYfuuZ85eNry5QGu5trvf/GdQtt9jTbMduKOus6ZObP9N+X1PlKf/4s5b9nB
- DHRJnBnSbB0G8NtpJ4eP5TpLIyhJdxw==
-X-Google-Smtp-Source: AGHT+IGzsAPkJ3uG7nvNHfYcOlxAWhjPffLKdEG91nhD+EMpLOQJTmMToj3nxL9krU8N+qlv98UFaQO1EDZV4Y1eMXY=
-X-Received: by 2002:a17:907:3a0f:b0:aa6:2b21:ab5b with SMTP id
- a640c23a62f3a-aa63739e4e9mr1040803566b.12.1733699255382; Sun, 08 Dec 2024
- 15:07:35 -0800 (PST)
+ bh=vfQboXlpCt2QrqKPfArkU/rn2vECeqaBR0bl/qiXVvA=;
+ b=wEwJB5zrVB+ajnF83kM+42INy5sXEPUcA+keRuALOH8qngPWRP8LJjclr1ZqrFydOY
+ yW71ucmgfFsnpw6Q4t6XGotnx40ulQpLSOmIYF+Ykx3PiMbbiclvkfFn9xq0hbd1wk5m
+ ReYJ189i7HSkhDaPQZFXEgmYfzBo9TyHQhK+iGyn5Uysa7fnti5WueJHqUhnviHwCxpi
+ 1etEueTHPSyB6wVnr2inxCds9jCEQJ5Y0JpXk0d/mbK4A1n9CM7KktZv6J+uqqaoZ9S1
+ r75k7+PA3ZBKlBHIqRvcwjlAnqbjTrN65UYCNxk0M7k1yEIWe/UmRrqQCvPBkhbcFnpb
+ vchw==
+X-Gm-Message-State: AOJu0YySyu21je8DgDJSsOfE9QRglRqKpCxGJhLZoRQ+AugxaFfikZMI
+ 4C9tgnYeJnNUMm0QtBSEAbwuQMdPtNp0EXU7MhRXDDknWTceHHNN
+X-Gm-Gg: ASbGncuhtNjMbAWA0rGHopdulapYMEdEVspyxNncvntpJVz4yPMTO+vNgGs4hVW9ZTG
+ jLXXPrnrKAEaN8i1h3BL8g9gNV/FMRO9nI/07ck8nqG25NtAh1N+FuYXOOHgEfgEZhpDT8JvPSZ
+ ocS2waQF53MQBu6uT7piruP+qXB8vRJXg8ohhRIJd5nuOLhrB+q+Y7A0Ma9vIeVlNNZOEc/d2hI
+ rQwj/qigDmE6vLeUvnhzfK/cXGBQPKlUsfl7Kd9TphBt9Y1KcPqIgpM2mgZvgJAhZlwkfDdH6FR
+ 8Bvm9RdnmqU+NdR3XZRtJ+9jRip3
+X-Google-Smtp-Source: AGHT+IH8/wMyfymPS63Dakd5lcLpsqxbNWzo1JrAXhBzFk0wLFYTXMdPIMtUmIL1Hu5IgzFDmTdk5w==
+X-Received: by 2002:a05:6a00:a90:b0:725:f128:6538 with SMTP id
+ d2e1a72fcca58-725f1286620mr1567950b3a.6.1733709629229; 
+ Sun, 08 Dec 2024 18:00:29 -0800 (PST)
+Received: from per1cycle.per1cycle (36-226-243-111.dynamic-ip.hinet.net.
+ [36.226.243.111]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-725ec7394b0sm921252b3a.43.2024.12.08.18.00.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Dec 2024 18:00:28 -0800 (PST)
+From: Huan Zhou <pericycle.cc@gmail.com>
+Subject: [PATCH v5 0/2] riscv: spacemit: add support for bananapi-f3
+Date: Mon, 09 Dec 2024 10:00:18 +0800
+Message-Id: <20241209-pickup-bpif3-v5-0-92f801b7c6c1@gmail.com>
 MIME-Version: 1.0
-References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <CAFLszThjGaKd3Z8fYaBqANDnyGOtGSF7t-o7B1B70R9q9jYfgA@mail.gmail.com>
- <CAFLszTitRwZbOMd-a0nQKzkBUg1OorNFrGzsdyZPtV9rdfEnyg@mail.gmail.com>
- <20241208155123.GG2457179@bill-the-cat>
-In-Reply-To: <20241208155123.GG2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 8 Dec 2024 16:07:22 -0700
-Message-ID: <CAFLszTh=fsR51k-Gew1XKgfFq-WjV1nX4Bvj_VJEqD-BRk7qMQ@mail.gmail.com>
-Subject: Re: [PATCH 00/10] Improve UEFI app support
-To: Tom Rini <trini@konsulko.com>
-Cc: Matthew Garrett <mjg59@srcf.ucam.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Boon Khai Ng <boon.khai.ng@intel.com>, Bryan Brattlof <bb@ti.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christophe ROULLIER <christophe.roullier@foss.st.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Gabor Juhos <j4g8y7@gmail.com>, 
- Hanyuan Zhao <hanyuan-z@qq.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janis Danisevskis <jdanisevskis@aurora.tech>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
- Matthew Garrett <mgarrett@aurora.tech>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Philip Oberfichtner <pro@denx.de>, 
- Ramon Fried <rfried.dev@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Robert Marko <robert.marko@sartura.hr>, Romain Naour <romain.naour@smile.fr>, 
- Sam Edwards <CFSworks@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-X-Mailman-Approved-At: Mon, 09 Dec 2024 02:00:16 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADJPVmcC/13OzU7EIBSG4VtpWIsBDlCYlfdhXPBzmCHaaYVOo
+ 5n03sWOi9rlR/K8nDupWDJWcurupOCSax6vbainjoSLu56R5tg2EUxIzrmgUw7vt4n6KSegQir
+ nBTPeOkkamQqm/LXlXt8eu+DnrVXnxyPxriIN4zDk+dRJFlpA9baXPnpmU0oOeIyoVYxJW1QRF
+ aAnv61LrvNYvrdLF77F/o6C/0ctnDIqwCljQlDA9ct5cPnjuf26hRbYY3nA0LA1TirDhPO9PWK
+ 5w8IesGwYrU3OJ60RYI/Xdf0BeIdkRm4BAAA=
+X-Change-ID: 20241112-pickup-bpif3-245ab208b9a4
+To: u-boot@lists.denx.de
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
+ Padmarao Begari <padmarao.begari@microchip.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, 
+ Huan Zhou <pericycle.cc@gmail.com>, 
+ Kongyang Liu <seashell11234455@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733709622; l=2859;
+ i=pericycle.cc@gmail.com; s=20241109; h=from:subject:message-id;
+ bh=jnWlOcQNzehpBEsFTrnpdqUXbyDB7xus4yO0rQaMiUE=;
+ b=EJuuB4PEL3TKTHrrKIFckO3St5nf1B93f2WEXWhuRoeoTBKjGAG1hWXbnfxzx62Kmqu2SIqvf
+ UjDJrsqVdPtDG0jpOs45Wau9bT0Ard1fSaln3mQ8fk/8xxtLOCyeGkD
+X-Developer-Key: i=pericycle.cc@gmail.com; a=ed25519;
+ pk=Wd3eEYWh1pNETTTXjX4aeanCWrr201iLaYYW5G1BdbU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,130 +122,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Banana Pi F3 board is a industrial grade RISC-V development board, it
+design with SpacemiT K1 8 core RISC-V chip, CPU integrates 2.0 TOPs AI
+computing power. 4G DDR and 16G eMMC onboard. 2x GbE Ethernet port, 4x USB
+3.0 and PCIe for M.2 interface, support HDMI and Dual MIPI-CSI Camera.
 
-On Sun, Dec 8, 2024, 08:51 Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Dec 08, 2024 at 08:28:42AM -0700, Simon Glass wrote:
-> > Hi,
-> >
-> > On Sun, 1 Dec 2024 at 09:15, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Matthew,
-> > >
-> > > On Sat, 23 Nov 2024 at 12:56, Matthew Garrett <mjg59@srcf.ucam.org>
-wrote:
-> > > >
-> > > > We run a mixed environment including traditional embedded Linux and
-> > > > UEFI. For consistency it's valuable to use U-Boot in both cases,
-but on
-> > > > UEFI systems we want to run the full Linux kernel UEFI boot stub.
-This
-> > > > patchset adds support for that, along with various other
-quality-of-life
-> > > > improvements such as automatically finding partitions based on their
-> > > > GUID, automatic identification of load addresses where the firmware
-has
-> > > > given us constraints, support for EFI variable access in the EFI
-app,
-> > > > drivers for EFI network adapters and TPMs, support for embedding
-DTBs in
-> > > > the EFI app, and a couple of bug fixes.
-> > > >
-> > > >
-> > > > Janis Danisevskis (1):
-> > > >   Fix efi_bind_block.
-> > > >
-> > > > Matthew Garrett (9):
-> > > >   Add EFI handover support to bootm
-> > > >   Add part_find command
-> > > >   Add a command to find a load address
-> > > >   Hook up EFI env variable support in the EFI app
-> > > >   Add EFI network driver
-> > > >   Add UEFI TPM2 driver
-> > > >   Support separate DTB files with the UEFI app
-> > > >   Use the correct ramdisk address
-> > > >   Add command to set an environment variable to an EFI variable
-> > > >
-> > > >  Makefile                        |   7 +-
-> > > >  arch/x86/config.mk              |   2 +-
-> > > >  arch/x86/lib/bootm.c            |  60 ++++++++----
-> > > >  arch/x86/lib/elf_x86_64_efi.lds |   4 +
-> > > >  boot/bootm.c                    |   5 +
-> > > >  cmd/Kconfig                     |  23 ++++-
-> > > >  cmd/Makefile                    |   3 +
-> > > >  cmd/addr_find.c                 |  87 +++++++++++++++++
-> > > >  cmd/efigetenv.c                 | 133 ++++++++++++++++++++++++++
-> > > >  cmd/part_find.c                 | 156
-++++++++++++++++++++++++++++++
-> > > >  drivers/net/Kconfig             |   7 ++
-> > > >  drivers/net/Makefile            |   1 +
-> > > >  drivers/net/efi_net.c           | 110 +++++++++++++++++++++
-> > > >  drivers/tpm/Kconfig             |   7 ++
-> > > >  drivers/tpm/Makefile            |   1 +
-> > > >  drivers/tpm/tpm2_efi.c          |  97 +++++++++++++++++++
-> > > >  include/asm-generic/sections.h  |   1 +
-> > > >  include/bootm.h                 |   6 ++
-> > > >  include/efi.h                   |  24 +++++
-> > > >  include/efi_tcg2.h              |   1 +
-> > > >  lib/efi/Makefile                |   2 +-
-> > > >  lib/efi/efi.c                   |   1 +
-> > > >  lib/efi/efi_app.c               |  41 ++++++++
-> > > >  lib/efi/efi_app_init.c          | 163
-++++++++++++++++++++++++++++++--
-> > > >  lib/efi/efi_dtb.S               |   6 ++
-> > > >  lib/efi/efi_vars.c              |  44 +++++++++
-> > > >  lib/fdtdec.c                    |   3 +
-> > > >  27 files changed, 967 insertions(+), 28 deletions(-)
-> > > >  create mode 100644 cmd/addr_find.c
-> > > >  create mode 100644 cmd/efigetenv.c
-> > > >  create mode 100644 cmd/part_find.c
-> > > >  create mode 100644 drivers/net/efi_net.c
-> > > >  create mode 100644 drivers/tpm/tpm2_efi.c
-> > > >  create mode 100644 lib/efi/efi_dtb.S
-> > > >  create mode 100644 lib/efi/efi_vars.c
-> > > >
-> > > > --
-> > > > 2.47.0
-> > > >
-> > >
-> > > Thank you for sending this and for your interesting talk at plumbers.
-> > > It is a novel approach and potentially provides an alternative to grub
-> > > and EFI_LOADER, etc.
-> > >
-> > > I'd like to try getting this running in CI as we don't have any such
-> > > tests for the app or payload at present.
-> >
-> > I'm planning to pull this in as this seems like an important use case.
-> > I'm not sure how much time Matthew will have for this, and I want to
-> > avoid this series going stale.
-> >
-> > The comments which are not 'why do you want to do this?' are fairly
-> > minor, so I'll send a follow-up to resolve them next week. We should
-> > also think about what code we could move from lib/efi_loader to
-> > lib/efi so we can share it with the app.
-> >
-> > Matthew, thanks again for sending this. if you are planning to do more
-> > here in the short term, please let me know.
->
-> Please don't grab other peoples patch series and pick them up for your,
-> well, whatever you want to call "ci/master". You can do what you like
-> with patches you wrote but taking submissions from others is just going
-> to confuse the situation as to if you are, or are not, forking the
-> project at this point.
+This patch introduces fundamental support for the Banana Pi F3 board,
+encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+operate in serial console mode.
 
-This is a special situation as I had requested the series based on a talk
-that I saw. I am interested in building on this work and obviously don't
-want to do it on an out-of-tree basis.
+Changes in v5:
+- Formal the name from Bananapif3 -> Banana Pi BPI-F3
+- Trailing whitespace
+- New blank line at EOF in spacemit/index.rst
+- Link to v4: https://lore.kernel.org/r/20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com
 
-I have to say I felt quite uncomfortable at the response we gave this new
-contributor. If I had received such a response on my first series to U-Boot
-I would never have come back.
+Changes in v4:
+- Change uart compatible in k1.dtsi in v3, cause related driver in not implemented in u-boot.
+- Update doc, show how to validate the patch.
+- Update maintainer, remove kongyang cause he lefted.
+- Link to v3: https://lore.kernel.org/r/20241114-pickup-bpif3-v3-0-98a45802ab79@gmail.com
 
-I intend to keep the openness to new ideas in the future.
+Changes in v3:
+- Add base commit
+- Clear redifinition warning while building in UART_IIR_ID
+- Change underscore to dash in bananapi*f3
+- Update maintainer
+- link to v2 https://lore.kernel.org/u-boot/20240718043329.1500-1-seashell11234455@gmail.com/
 
-Re the patchwork thing, it was temporary while I was bringing in the
-series. It should be fixed now.
+Changes in v2:
+- Change license to GPL-2.0-or-later
+- Add memory node for dts
+- Add ft_board_setup function for kernel memory init
+- Use default prompt
+- links to v1 https://lore.kernel.org/u-boot/20240714150828.736-1-seashell11234455@gmail.com/
 
-Regards,
-Simon
+Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
+Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+---
+Kongyang Liu (2):
+      riscv: spacemit: bananapi_f3: initial support added
+      doc: spacemit: bananapi_f3: document Banana Pi F3 board
+
+ arch/riscv/Kconfig                     |   5 +
+ arch/riscv/cpu/k1/Kconfig              |  18 ++
+ arch/riscv/cpu/k1/Makefile             |   6 +
+ arch/riscv/cpu/k1/cpu.c                |   9 +
+ arch/riscv/cpu/k1/dram.c               |  54 ++++
+ arch/riscv/dts/Makefile                |   1 +
+ arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
+ arch/riscv/dts/k1.dtsi                 | 459 +++++++++++++++++++++++++++++++++
+ board/spacemit/bananapi-f3/Kconfig     |  25 ++
+ board/spacemit/bananapi-f3/MAINTAINERS |   6 +
+ board/spacemit/bananapi-f3/Makefile    |   5 +
+ board/spacemit/bananapi-f3/board.c     |   9 +
+ configs/bananapi-f3_defconfig          |  20 ++
+ doc/board/index.rst                    |   1 +
+ doc/board/spacemit/bananapi-f3.rst     |  86 ++++++
+ doc/board/spacemit/index.rst           |   9 +
+ include/configs/bananapi-f3.h          |  13 +
+ 17 files changed, 751 insertions(+)
+---
+base-commit: 40c45a57974bdb09fffa31dde65ddf69e5de53eb
+change-id: 20241112-pickup-bpif3-245ab208b9a4
+
+Best regards,
+-- 
+Huan Zhou <pericycle.cc@gmail.com>
+
