@@ -4,139 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AF1E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 09:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9303E77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 09:42:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46972894A2;
-	Mon,  9 Dec 2024 10:11:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 14167895E4;
+	Mon,  9 Dec 2024 10:42:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kpKiifZH";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="cwx7IIIR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16951895E0; Mon,  9 Dec 2024 10:11:15 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20618.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::618])
+ id 623C0895E8; Mon,  9 Dec 2024 10:42:05 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF0FA88CEA
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 10:11:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C4A89367
+ for <u-boot+nodisclaimer@lists.denx.de>; Mon,  9 Dec 2024 10:42:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ke07trjY8wyNO1yDOZLVXCz3huZft9w3i9FyiWrxy4Fh36zlIcIi20Ddt7QbEtrOdV7eCPl8LmkwW+06LJ2qNpYdASA1bnD8lQEDfq1crW2DlyVEtRN2Sa/xWZMUqew4GWbYcl63NFCguJqW0YM9Pcq1k2NSIOVch39Fv3mZho5FJerbrOOWyw/ZcIUs6Y3dLD7pRDQLpwHplNuwy4wUqIQtflI6kgaA+jZBrzpj8uI0zhgPxz88Dc2zuNist1mcjDoDEGKao9GDirQmbUVLxvKYQDoGpmcWAtA4msVAHjXMD7gcpXCSMJhjuXvs0DT8IpA480X/wLQtFzt+Yg6GJA==
+ b=n8zy0wC7PVnji1pfNfblDvBHIr6cTzdrwr0haBzutf0WnUDvFHWeh9UJ7Fr52S5vx+m5JSjB0iPOoRmLUq5UTGDkK2nPXnOJ1ZTe2auG/JNQCwE7hqoOB0BrlXqhQNcPct3ZoBK73fFvw+aPBRXDBgSLG3WUT2i40xH4twzWOk5jGOuZg+GttGTsVj7s0Q6bYSwe/RHO6kro9F3Vjk0t/D5jyEHTzzYU/JDrt7IzBL6nCZO3Fv9WCm6x+T2rHkBxLUetM6stOnJTxYhZI3c8SVEbgYAq0qCqVEE+ePfdiX1Xc1zg1Jn0DcWKi7qgp2vabwR+nKQT9QO5UgxlhDi/lA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ucwsPeZEkyv2I4+f6ggOPvxuXxbcnYD6r4NEkRRa93Y=;
- b=aDzXYHm6ysm3UbJjGgNem/RY6wtaT0JnxIYoCA+1d1zwFqvuEQU1rMrPs/1igyvvk6SGN1oI1aChvbH6xA+MSb5h31ThpUdPpo/oBXZUiy8jpCwXUPyoM9H2DQ8673L/MwEwbRzuf8IcmEY4GZ+Ir39nGYoUGQdb7P4VLr0QVZN+gnqOFyB0jD5wXw/4+vvoeij58hlgAbU5puS6SqH4QJJXKQLohKpTOdUBvdTIrEIv15KnMDZIto0dOmu0Ckmju3Dk7t8WseIAdRNPI5corfzjBRlBiVXWPyxuzzX1x4/pqQwiGBbPCR9Xr0z/jYJVA7iwH5eOflerrAZ9cwGq3w==
+ bh=AlvAmUO9IzAWCCRm4HAcrdboS9jKL/4azhkIWdUtE8w=;
+ b=xCAUGnuQldpqHuucKnrFbEuG8Ykxrgnw21g2WyDbU7flvrCG16owQnmsAH1jdSNW/8tWhkWyoOxLfqtNypxJyfdLWIliwCkGPAzkdRFItqH+kFmjlqyijrxe2oEUiji/TPHIiz1XHrDckQjmr8HdXtRQOd+CuJ50AxWSdhcJMHUsfCJGGKHfIFY927GXHaw/ipqURVKKIXK98RvseY+dMTOuP7yTmM5K3uETW+HMJoFaFaNzN4OLfcNO7kWT9v0gwJwqOo3ekI2y1jDLnfw4LbJDo9XZ4mhrJqjoFVY9KbLc0fkSJZestqHmYFnbM+UVTevAv2EapULDwYSnwus28g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ 149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
+ dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ucwsPeZEkyv2I4+f6ggOPvxuXxbcnYD6r4NEkRRa93Y=;
- b=kpKiifZHGhfZZURU4fzfEtmdRwcraF3Fg32WkI8AyPxQoXtqh8Wiz6G7yZ6RD8NqKpicoRkdvoBOIxcIVaWTok7KuxuC+K1N5y/PxmaX2G3csyvtZk9m6Z0DOzaDXMQy73hfScsxVqVXxZxz+kdN6NxaNZMLp26N7OGOVIjb9Lc=
-Received: from CH0P221CA0041.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::25)
- by MN0PR12MB6077.namprd12.prod.outlook.com (2603:10b6:208:3cb::9)
+ bh=AlvAmUO9IzAWCCRm4HAcrdboS9jKL/4azhkIWdUtE8w=;
+ b=cwx7IIIRRt1glU6fABcMuxxgC5eRBTT/wz465voO2yet/bimWPv6fKp/D3o4coVpcAh2vs89GdOTEMpDFvPERVtwZdy4EoLfak0Yk9Yq9TaliZsX6DfCbu0l338q+AwEYoCsPGa3QrnklbslGmn9+AKCaExRUEzfqCy70muQX3RvJgp3fk6wOvS/xPtWpQbuTPMmz5B5ap393w+Bdoi7Suw8UyNIH3C78lNkan47d7jeUu2cQKTobhyMC1ask59AlTIaTCUCrChkeVZQkUKmAq2brsPHAcNBgSVl3b92exBPCVuO+T/zuw1xiuStaP8GPGx0wtavfObBHXzCDFkOrQ==
+Received: from PR1P264CA0131.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:2ce::16)
+ by PATP264MB5436.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3f8::11)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.18; Mon, 9 Dec
- 2024 09:11:07 +0000
-Received: from DS2PEPF00003445.namprd04.prod.outlook.com
- (2603:10b6:610:11d:cafe::5a) by CH0P221CA0041.outlook.office365.com
- (2603:10b6:610:11d::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.15 via Frontend Transport; Mon,
- 9 Dec 2024 09:11:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF00003445.mail.protection.outlook.com (10.167.17.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.7 via Frontend Transport; Mon, 9 Dec 2024 09:11:07 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Dec
- 2024 03:11:04 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Charlie Johnston <charlie.johnston@loftorbital.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Padmarao Begari <padmarao.begari@amd.com>,
- Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>, "Tom
- Rini" <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: Do not use hardcoded address in
- do_zynqmp_reboot()
-Date: Mon, 9 Dec 2024 10:10:56 +0100
-Message-ID: <3e5c6ea426b81cc73b90e6425764e41a98deb2a6.1733735454.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ 2024 09:42:01 +0000
+Received: from PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:2ce:cafe::a0) by PR1P264CA0131.outlook.office365.com
+ (2603:10a6:102:2ce::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.14 via Frontend Transport; Mon,
+ 9 Dec 2024 09:42:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
+ smtp.mailfrom=softathome.com; dkim=none (message not signed)
+ header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
+Received-SPF: Pass (protection.outlook.com: domain of softathome.com
+ designates 149.6.166.170 as permitted sender)
+ receiver=protection.outlook.com; client-ip=149.6.166.170;
+ helo=proxy.softathome.com; pr=C
+Received: from proxy.softathome.com (149.6.166.170) by
+ PA3PEPF000089BA.mail.protection.outlook.com (10.167.242.22) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.7
+ via Frontend Transport; Mon, 9 Dec 2024 09:42:01 +0000
+Received: from sah1lpt571.softathome.com (unknown [192.168.72.32])
+ by proxy.softathome.com (Postfix) with ESMTPSA id 5224B1FE96;
+ Mon,  9 Dec 2024 10:42:01 +0100 (CET)
+From: Philippe Reynes <philippe.reynes@softathome.com>
+To: raymond.mao+nodisclaimer@linaro.org,
+	sjg+nodisclaimer@chromium.org
+Cc: u-boot+nodisclaimer@lists.denx.de,
+ Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v3 1/5] mbedtls: enable support of hkdf
+Date: Mon,  9 Dec 2024 10:41:55 +0100
+Message-Id: <20241209094159.8355-2-philippe.reynes@softathome.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20241209094159.8355-1-philippe.reynes@softathome.com>
+References: <20241209094159.8355-1-philippe.reynes@softathome.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=895; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=T+6sd4dYG9cZfYJqRCUXXcGiA3Mx/Jdz/RYexq/sBIA=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSwLYr72Z7cudj/ZvaBCQ9mOX5Zb/VVqkty6dFAK0U7x
- ylsHHqMHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAixvMYFrRnWBTMa1/NdENt
- /e2fHz/4Kvz5O5Fhrhzj9MqC1k21Vnv3897o54/gKA4QAgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF00003445:EE_|MN0PR12MB6077:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9bca9b42-8983-4ad7-1649-08dd18316a6a
+X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|PATP264MB5436:EE_
+Content-Type: text/plain
+X-MS-Office365-Filtering-Correlation-Id: 59dfa6a1-5e58-4e47-40eb-08dd1835bb89
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KWtLvABaC/9sA2lTP5djShw+enbPb82iInRvYmm8hcgZier35hqlFQE8bERD?=
- =?us-ascii?Q?nmCNQJOAHpWR289ts6k6MjDlJfJ5VXX9CUirAq6AW7sVNR3mtTlaf++WGUw7?=
- =?us-ascii?Q?qXCGierANmHpNq9VWSuZyyufuHNTam95rjGjPmRjE+3t2gGd6BmP48Se6PNw?=
- =?us-ascii?Q?49HO0XmvqFXQH7BKLakr+e5hAXqP4jUUDEfypb3xCrU2SzoF4ipNnV5zAMo6?=
- =?us-ascii?Q?GpefCXjP5Qmc1nNRGlipwf9I8vnOGn38x0WzawObchZHUxjoC4FIkH2U3NAB?=
- =?us-ascii?Q?lco92T+Av+JNEQKJJJ2Qdse3og1RG3PNYiTc7gAWCvt1xQgDXAH6uVOMSeu0?=
- =?us-ascii?Q?o/hADPATGGIH2nlSzNNfZIwH8U9xiMwOvSFFtEZuIWaCFeI9LYHIDadrx0T+?=
- =?us-ascii?Q?Hqn9DDCqjyqQvIRwnn/ke0mTJ7rimLtddBuulAVXQz/vv7X6YvqgrZprjx8P?=
- =?us-ascii?Q?VV903sgYCaxit/UKrGX0zrNONHuyQebGxXNcX8XKfZ5h+Zh2YKpNU4e4m3Hh?=
- =?us-ascii?Q?rikIFFB8IsF/XT575Nm8YajfS+ml5t7Qh5lSU/dSSCxZ86GUFraXsos0bcr1?=
- =?us-ascii?Q?lbyvpX7x0r0FUbpUZIvDykSDUZrNoqHW8kKPelGiQh6xCeVGFARO53L4VfsS?=
- =?us-ascii?Q?6O3qX82jV/LCANXSmoj5NjBzVbLk9q6pMjK1JgEbSk3oipYa34HgP63Y+O/5?=
- =?us-ascii?Q?W6xcZNY0shRCBvXU7oS1VOtGOz2u6Jniyg3blAun7zWGp6jEl7jlNuSHryqv?=
- =?us-ascii?Q?oeMa3fsFh8EO2GSg3v/3eqXemg6lu3jRlhSjF1cZU/vbk1m0CdVR7yHKiS8l?=
- =?us-ascii?Q?G3nzvCAoee8vmU373qeKRujQW7oYSRx7Q64GTPzKR3rblu9RZDM0uGzGvjwU?=
- =?us-ascii?Q?eZvsn4yVCi/9YN5BRc1BXZzD4wF2qY/vswDn3CuYiplQ7J8dEIJ20ajZeZpy?=
- =?us-ascii?Q?IsCULBbcgtdWwwc+HLcAfxe4D2sbU7uDMAfOQv7CbNoQM4DNYHRrg5LCte6+?=
- =?us-ascii?Q?xqkJnuYdEwd0Hp8pYtyLtTyzWVVr0IwQsuwoakirH1iuJpDi7tEQo9+jGyj7?=
- =?us-ascii?Q?g8SaQVijfvmcrW6smyU0Hjdhiq/8sgN7nqL+gpSv2lh0a9/SrsoZ5VXmdJnp?=
- =?us-ascii?Q?o5A2L4O8JHfdInvjCV+wMefFC32NmhlJCcqWARBU00TXV6qfetInlDFpZD9K?=
- =?us-ascii?Q?Usqu/auEPZKbCEjnShwYeL97NCpfDuxj6k7sgUK+g6lHRKqY2due3dDzt5/S?=
- =?us-ascii?Q?gqoAvTgNC+o8ATdB3yQlKTtsX6dauvTyxrRFT39VBhQYvT+/Yb7gRPy/dCLC?=
- =?us-ascii?Q?nRYw3+ATepqMgAcvnng/TTWzK+PxI0bYgBdlSzvNFL1aY65oPOUZqoUQePia?=
- =?us-ascii?Q?JJeXXqkk4TlBV0hOPjPVBhc2Y5oc1HY4Qfhc9igk929BqpBo8N14R0Nh8WmZ?=
- =?us-ascii?Q?0hhoVLDYY8golphskM5DEnJ0Evy0xj7S?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ ARA:13230040|36860700013|376014|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?YrSyu2Xl6mKJV3hDy/OU3xQ18826PjGRX9G3YF2FULVqfrjBfGZjC3eRNzcI?=
+ =?us-ascii?Q?V4lz3set77qfzPPfdQFQ4nxN/b6mleZYSB2H2eF30pUOS8Dowe1qQ1QfUgEW?=
+ =?us-ascii?Q?F82rn94zWoQP5bnGHMB2kSR5F5uh8aEKUhTL4RLO4yFuiHS+vQ3ny3xHpzy2?=
+ =?us-ascii?Q?zdsgbTTeAlXLVYJhrQNOr+thyT4sbWh8cJuA9D2Vv3xe7qnF4m1GpDffygIA?=
+ =?us-ascii?Q?8Oo2Rp7nz6p9PmWHn0WzJnGzPX1+vSpcZRiwfDaENwfR8N5wYH/G2N9b6jBO?=
+ =?us-ascii?Q?2BUZUV2wz7qieECIi0Aqnni9y8zAgwebpnuWe4E28oAAnSHuATgaC1BEKhf5?=
+ =?us-ascii?Q?tquV6JZFQXnPXzTsXMX//c5ulbZUzIFrBzE89l6JdcROnoJk0XsjJTQzzBFc?=
+ =?us-ascii?Q?hvMa25ZfhGw8vEXoq+eEk6DdkC9WyKD+ylP4Ut9dIKvffok1ksERnxsZ3zB3?=
+ =?us-ascii?Q?/ZmvapCIOiu6pSSNqaq6d1vkpqCkl9LmIZLModzuYlRPV1d3sMzDvum2fgC8?=
+ =?us-ascii?Q?ZqZUec+5PXqNicbE1Zm+kAp1gDyxUihUHQoDYfSyywl3tkcedBL9UB4zzjbW?=
+ =?us-ascii?Q?seV0oa/RWLPZ+8cjcp03H3JCpw4oe9rESPuIbwPqde/7TOYsiFKE4RxjVfqJ?=
+ =?us-ascii?Q?PbmPlr8mH03rdnHnBUQHW05bMkDfjPYHIrU8XxkHt+HtLFAzEdSNWeYOP40i?=
+ =?us-ascii?Q?4joDWR56g7Knj8H5BDYvfXnQlaKTb5FxbKIb7CnLNWdzC6HmCSXbiqnEf47A?=
+ =?us-ascii?Q?QoOHTwdHyXbwOtxY7uvMOtlHjauHnvyE9OnpbwUDW84NEcQ+4xgVgFXky4m6?=
+ =?us-ascii?Q?dXb2gp9sqmkrULMQ3zV/CLz/rr94ZRgiH9Ma1nMq+f9yIgniI5FNQeZpn51l?=
+ =?us-ascii?Q?d4AGpb8xB4Y0R9W4jfLOMUeIscXgrv3HV7oikT26z9+LMLrooa/Pft/I+qDP?=
+ =?us-ascii?Q?JJCzkEkSXcvhjPmDOBYy3Csj7bNfEPChNM4ok16sesfLqCP51VJi2n5Fk70k?=
+ =?us-ascii?Q?FPy10j5VOYJRSYT65oZtC+2KYonnTajPl+2vLOK84VQVBLM5le2EZ7j30JPo?=
+ =?us-ascii?Q?b3pvsoq3pLzAbzWGIEVX6dsZD57Bt2F/eyDKoinmNAHQNxErgUZVx79W5y6I?=
+ =?us-ascii?Q?CvhyD/c4bc2XS+qCLPVDKvKBlzT7504CYI4cqwWrkexInaB9uIb5+1xwmOGn?=
+ =?us-ascii?Q?NAf7uSI3AgQpJSBmXD2YzLg4r5wy/ta72TbfIFzPtvddlm3WGEbKUq/ojhue?=
+ =?us-ascii?Q?6nuPTNtd4m2xL2OyEujCG13ov5w4UookPsFkKmzMxKDYHB52s/lpZkoMQYaj?=
+ =?us-ascii?Q?nFWQv/ESlUI2wwJnlhzpWXnv4wZaMeNc+Y2ROXt6zwIsF3XXFbMdicuqP/Ri?=
+ =?us-ascii?Q?92SRj2SSGGNK4g0fnxyO+8IY0v1CGcjqOqn6Kt/wVdGd7HNMIAd8/fGI+tk0?=
+ =?us-ascii?Q?TUQ6iNW/Bwx2/Qi2NgVm//IgsnQiiL14?=
+X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(376014)(82310400026)(1800799024); DIR:OUT;
  SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 09:11:07.3342 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9bca9b42-8983-4ad7-1649-08dd18316a6a
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF00003445.namprd04.prod.outlook.com
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 09:42:01.4521 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59dfa6a1-5e58-4e47-40eb-08dd1835bb89
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
+ Helo=[proxy.softathome.com]
+X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6077
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PATP264MB5436
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,29 +144,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-multi_boot is already the part of csu_base structure that's why use it
-directly instead of using register offset value.
+Adds the support of key derivation using
+the scheme hkdf.
 
-Fixes: fc001432e5b0 ("arm64: zynqmp: Add u-boot command to boot into recovery image")
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 ---
+ lib/mbedtls/Kconfig              | 14 ++++++++++++++
+ lib/mbedtls/Makefile             |  2 ++
+ lib/mbedtls/mbedtls_def_config.h |  4 ++++
+ 3 files changed, 20 insertions(+)
 
- arch/arm/mach-zynqmp/zynqmp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-zynqmp/zynqmp.c b/arch/arm/mach-zynqmp/zynqmp.c
-index 8ee25e4c3161..3aa218545bba 100644
---- a/arch/arm/mach-zynqmp/zynqmp.c
-+++ b/arch/arm/mach-zynqmp/zynqmp.c
-@@ -349,7 +349,7 @@ static int do_zynqmp_reboot(struct cmd_tbl *cmdtp, int flag,
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 78167ffa252..aa82336ef14 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -297,6 +297,13 @@ config MD5_MBEDTLS
+ 	  This option enables support of hashing using MD5 algorithm
+ 	  with MbedTLS crypto library.
  
- 	multiboot = hextoul(argv[2], NULL);
++config HKDF_MBEDTLS
++	bool "Enable HKDF support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO
++	help
++	  This option enables support of key derivation using HKDF algorithm
++	  with MbedTLS crypto library.
++
+ if SPL
  
--	ret = zynqmp_mmio_write(0xFFCA0010, 0xfff, multiboot);
-+	ret = zynqmp_mmio_write((ulong)&csu_base->multi_boot, 0xfff, multiboot);
- 	if (ret != 0) {
- 		printf("Failed: mmio write\n");
- 		return ret;
+ config SPL_SHA1_MBEDTLS
+@@ -335,6 +342,13 @@ config SPL_MD5_MBEDTLS
+ 	  This option enables support of hashing using MD5 algorithm
+ 	  with MbedTLS crypto library.
+ 
++config SPL_HKDF_MBEDTLS
++	bool "Enable HKDF support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO
++	help
++	  This option enables support of key derivation using HKDF algorithm
++	  with MbedTLS crypto library.
++
+ endif # SPL
+ 
+ endif # MBEDTLS_LIB_CRYPTO
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index ce0a61e4054..e66c2018d97 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -33,6 +33,8 @@ mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/sha256.o
+ mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/sha512.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)HKDF_MBEDTLS) += \
++	$(MBEDTLS_LIB_DIR)/hkdf.o
+ 
+ # MbedTLS X509 library
+ obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+index 1d2314e90e4..fd440c392f9 100644
+--- a/lib/mbedtls/mbedtls_def_config.h
++++ b/lib/mbedtls/mbedtls_def_config.h
+@@ -56,6 +56,10 @@
+ #endif
+ #endif
+ 
++#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
++#define MBEDTLS_HKDF_C
++#endif
++
+ #if defined CONFIG_MBEDTLS_LIB_X509
+ 
+ #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
 -- 
-2.43.0
+2.25.1
 
