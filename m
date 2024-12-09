@@ -4,92 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C94E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 347D2E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:29:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C92089698;
-	Mon,  9 Dec 2024 17:28:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 82B3589711;
+	Mon,  9 Dec 2024 17:29:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MQKP5ID8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PFbmBkDJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30FB1896F9; Mon,  9 Dec 2024 17:28:50 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id EAD2089719; Mon,  9 Dec 2024 17:29:02 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A8CA89490
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:28:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7A928970E
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:29:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-84198252db1so151129439f.0
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:28:47 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3a77bd62fdeso17744025ab.2
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:29:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733761726; x=1734366526; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lNtQmbt5atseoMTBwuE8KywiTNFVdo9upyhbOuwLGSk=;
- b=MQKP5ID84rv/HNfTNWhIQg5K3d3tf55hv/EjQ8MKg24IM9gvI1hRXH/KDQWnwIa8O+
- ARg3FnW8/ea+HaATLdeRgUbFZlaEd7541EAsg9RMYE7ZoyA0xUX8Pi8lp6n7xXlWoP8u
- no/3x+9cpQ590tFXFA6cZLQQMiOz58KAvG0Xg=
+ d=chromium.org; s=google; t=1733761739; x=1734366539; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ebyfpmHDy5VYyKCJw8lLa8EK5OJ3MqWeV1NKRq+33k=;
+ b=PFbmBkDJrmZsOuHgg2hFjA/kTsU6DHuKhklLLOpKk2Ww7I/fm6zxFmQGwnm6H4DZjB
+ 6ju3fwRrAEP5+FhFNTkGpADzdlE1oK3cwUfKPdgR0rD4J4DoCigT13BMA5Zm9kUZVBp2
+ TGOpot3dKIh217XAZMsHb0dP8Fentw76JXy7g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733761726; x=1734366526;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lNtQmbt5atseoMTBwuE8KywiTNFVdo9upyhbOuwLGSk=;
- b=qgOZ5R6ZymsYscom+1ljFbMxFStDOLzrCsSlwOL5BWRfjvAjNk3143RPeU4ypjnJbd
- 6cXruRqB1cRbMg7UHvVnn/5h2+gY8O7M8RbMxkk5RYayoErqI9U+R7UOhrzECTNN2i3Q
- YVAB0xdvpebxQRnQUFsqtGeIXQ0RX3G1rjS9fWQBL9yF2kvbpEJZo/RFArZ4L1nqoYIt
- 4VpchVYq3mIaGyvL8l8quBdeDEPK9k4anNYd3NsU7F/0GARi6xxBKizoT9Z/WMBGM1HA
- QSU6e8+xnbagyyzBSNhrSjfWcfIS8f661kXqxO5+noyUwAihvpfqEJxBz5KCkorfIa2O
- 6lMA==
-X-Gm-Message-State: AOJu0YwJq3i3Vqx+lDM8LOD+lFqI6qH5FqWfJHfHGeQCxHs3CeQqnyEy
- 3AqrA2nN3wsLqv9vNhUgQ3xy/SP+Kc9mI4daOzBtvNOARsGzU5UjZpMhXC25w7HzsJiND/Ji6Hg
+ d=1e100.net; s=20230601; t=1733761739; x=1734366539;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+ebyfpmHDy5VYyKCJw8lLa8EK5OJ3MqWeV1NKRq+33k=;
+ b=nwwDN92iX7+MrG5onSgNWSL+eFP97hT9TDn/kL4iS7U65VXHFUOVSpswhhZDLW5Qd/
+ eZTKAdpMXIR1UJ8FcPkQc9BghwejCN8p35ogzT8zM4e8EV1a7MM7MdtHFptBzBPpWGWN
+ fWOAHK8/ZqmWYRtq7fnWW+bJbTj5HoArBtF+G+IFbtnKh/l3GaHya1MRunVm3ZdJeXug
+ 6NnuY+GHaedOzIBoLnQ/F5+VCgWd+bS/hrxna5i8LWmq0aik8B37OSw2hEygxI5GRfPV
+ EEdxITKPD6hepwm5pJMPKCfjjLAG1+y0j+zzwFli7i6LaqxYmqu1r1T5XiViTm8S690h
+ 8cZA==
+X-Gm-Message-State: AOJu0Yx6E7GUUc71QKlp0MsXNuC+1MQs9YKZcXEIFqcOF81vCld8239t
+ Eza3ZOFUjvdfKLfLV8GhD1S0ZBnQ5DrYwR5ok1jP2MxC3AQi1Qzfjd6qjnNRlgjOkuTLVJjUlgs
  =
-X-Gm-Gg: ASbGnctyUwOAsQF20LH596qhKkI/moKH7+badz+4QfvXn5PIto5c457e8DNRgH8f3rt
- JlWjdSaDv3ixq33+j5FNOJDHHlqrkv3ShD/UNnh9Na0Zqyx2suTfdbys/daJzZFdTHO1gIc/kjN
- SNhbehyi9Ar3ZAlAmSVqnd8IBjDXV5hUJaL1uxoGCsHVSAcfQOtv3ZDMIcMx4JtMhXNRW+byFUQ
- zTJsINEpbH0moGj2TFU0yWKd/jaFZb+ASDMlUusvOOZZRDPFg2olEOFYsUAjwTWhxjBKTSJb63P
- qT++ujEoGAI=
-X-Google-Smtp-Source: AGHT+IHgRa2N0HtTAFwxOusGaaCqVWqrtswVZ5CV9P0kIwC9cMR8W3dLiJb3db/p+7Nxfx1HEWfl2A==
-X-Received: by 2002:a05:6602:6019:b0:844:7896:8cb4 with SMTP id
- ca18e2360f4ac-844b8804d31mr118939f.1.1733761725777; 
- Mon, 09 Dec 2024 08:28:45 -0800 (PST)
+X-Gm-Gg: ASbGncsaMCPXssCeUycJy73ckmY0VVC4q107JB8lC3o0PHgZfmIMhW5Jy17WSoFfq6Y
+ 6vO+LzUPm09cGw3FtL1nusnQTqNMtK4h6wDHu4uLdApfTx/8SqLunMvRWqObW8l3fS2WHhIP+c6
+ fxohpcUI01SYxWu2ZuFOtUIQLPUeOWcYShhZrc+x0FBB9Kez7+auXja8Qn2rr6Uad1NN563mKaW
+ 5K+55oB8ywht3DZYYhPYfmsPhdbDaiXHSWEj9yWFu6/CeX0ibZZ6Jk+kF60rgyjE4CpTNpRw7N/
+ hd77qGFCi5k=
+X-Google-Smtp-Source: AGHT+IGdAPF/pRpmK96kbDlI23LwWNNeKJwSDEeQlo6jYdUWedEK+IeDO+zYA3L440LGYMyThHTtbg==
+X-Received: by 2002:a05:6602:2b85:b0:841:a9d3:3b39 with SMTP id
+ ca18e2360f4ac-8447e21bf9cmr1791536239f.5.1733761728623; 
+ Mon, 09 Dec 2024 08:28:48 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-844737bc549sm272432339f.2.2024.12.09.08.28.42
+ ca18e2360f4ac-844737bc549sm272432339f.2.2024.12.09.08.28.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 08:28:44 -0800 (PST)
+ Mon, 09 Dec 2024 08:28:48 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Matthew Garrett <mgarrett@aurora.tech>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janis Danisevskis <jdanisevskis@aurora.tech>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Tom Rini <trini@konsulko.com>, Wang Jie <dave.wang@rock-chips.com>
-Subject: [PATCH 0/8] efi: Add docs and tests and a few tweaks
-Date: Mon,  9 Dec 2024 09:27:53 -0700
-Message-Id: <20241209162801.288363-1-sjg@chromium.org>
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/8] fdtdec: Correct devicetree symbol for EFI app
+Date: Mon,  9 Dec 2024 09:27:54 -0700
+Message-Id: <20241209162801.288363-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241209162801.288363-1-sjg@chromium.org>
+References: <20241209162801.288363-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,48 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series addresses feedback provided on the original series,
-including:
+This should have a single underscore to match the declaration in
+include/asm-generic/sections.h so fix it.
 
-- adding documentation and tests for the two new commands
-- fixing an issue that somehow didn't fail in CI
-- splitting up a large function into two parts
-- using lmb for the allocation, instead of looking at internal tables
-- dropping use of config.h
+For some reason it was not picked up in CI
 
-Link: https://lore.kernel.org/u-boot/20241123195616.305687-1-mjg59@srcf.ucam.org/
-Link: https://patchwork.ozlabs.org/project/uboot/list/?series=433949&state=*&archive=both
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
+ lib/fdtdec.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Simon Glass (8):
-  fdtdec: Correct devicetree symbol for EFI app
-  part_find: Enable for sandbox and correct radix and calls
-  doc: test: Add docs and test for part_find
-  efi: Drop config.h
-  cmd: Refactor part_find() into separate functions
-  addr_find: Use a simple lmb allocation
-  doc: test: Add docs and test for addr_find
-  efi: Avoid a memory leak in efi_bind_block() on error path
-
- cmd/Kconfig                 |   2 +
- cmd/addr_find.c             |  41 +++-------
- cmd/part_find.c             | 153 ++++++++++++++++++++++--------------
- doc/usage/cmd/addr_find.rst |  63 +++++++++++++++
- doc/usage/cmd/part_find.rst | 119 ++++++++++++++++++++++++++++
- doc/usage/index.rst         |   2 +
- drivers/net/efi_net.c       |   1 -
- drivers/tpm/tpm2_efi.c      |   1 -
- lib/efi/efi_app_init.c      |   4 +-
- lib/fdtdec.c                |   2 +-
- test/cmd/Makefile           |   2 +
- test/cmd/addr_find.c        |  27 +++++++
- test/cmd/part_find.c        |  42 ++++++++++
- 13 files changed, 367 insertions(+), 92 deletions(-)
- create mode 100644 doc/usage/cmd/addr_find.rst
- create mode 100644 doc/usage/cmd/part_find.rst
- create mode 100644 test/cmd/addr_find.c
- create mode 100644 test/cmd/part_find.c
-
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index c1eb1c9f825..e87e537f0c3 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1238,7 +1238,7 @@ static void *fdt_find_separate(void)
+ 		fdt_blob = (ulong *)__bss_end;
+ #elif defined CONFIG_EFI_APP
+ 	/* FDT is in a separate section */
+-	fdt_blob = (ulong *)__dtb;
++	fdt_blob = (ulong *)_dtb;
+ #else
+ 	/* FDT is at end of image */
+ 	fdt_blob = (ulong *)_end;
 -- 
 2.34.1
 
