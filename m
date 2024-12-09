@@ -4,104 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F8A2E77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 02:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8A8E7717F
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 02:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4D39895E3;
-	Mon,  9 Dec 2024 03:00:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AEBD789575;
+	Mon,  9 Dec 2024 03:29:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QWUgBYPy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XxrF1+ud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B6F28954F; Mon,  9 Dec 2024 03:00:48 +0100 (CET)
-Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com
- [IPv6:2607:f8b0:4864:20::442])
+ id ED4C9893A7; Mon,  9 Dec 2024 03:29:02 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 476F7895B1
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 03:00:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CF2D88E51
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 03:29:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pericycle.cc@gmail.com
-Received: by mail-pf1-x442.google.com with SMTP id
- d2e1a72fcca58-7251331e756so4096420b3a.3
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 18:00:45 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa689a37dd4so71269466b.3
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 18:29:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733709644; x=1734314444; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=THnLhthZI81prBNmyCcoBbimwpH77fpTrnnYq1gJbaY=;
- b=QWUgBYPyg9s+r5JIdelIvzLhKbBU5T08VtbInupKgu8Gr4PvNvHD6XjEUVQf0HRgTf
- tOOyX7H633LRAm5FozNv5pUzj7nbXym/+/E9q+wMSFAhqNqsrGx76cnWicDjupO2IOWc
- tGeL0XLr9/KRga8ZBGiWEuc5CmrTgq1RBqxhJG0eooRz8GTVe41Y0Pm1j/U5MK5TXydS
- n5KhJlwZDDGtQlZNdObxB58SR+DeZwh9l3aMrhpraOuL024tHuR7OhqsCNR3Pz8AQwSr
- Bjj90WhH3zxKsaR5IiJMjm7RtZbWsXu9XYI6G+9salhz8DnFPUE8SkjvhtSCwuVH8xPJ
- 1vrg==
+ d=chromium.org; s=google; t=1733711340; x=1734316140; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ky6Xf+uSOjKM4E5bf8dPDDAudiahszEDWCTgt/YiY6w=;
+ b=XxrF1+udw4nsKXeBnRXMXSoJGLUydv2IN2GyZTtN0MoWafrDJAIqzjco1FMX8rgYTw
+ WGi57oKNq4ZXtv2Cf4bY+5YzhTQihC+H69KupmAE0WVFNLiSDhKW0eyLJN9dlZmEBqu9
+ 54yTYkSEhfmojiAN9A/k0GzRYcfiI94gFrGdc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733709644; x=1734314444;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=THnLhthZI81prBNmyCcoBbimwpH77fpTrnnYq1gJbaY=;
- b=ePaSXK12q5sqqqwW06xYczFD/AKdL8FMryCy0KWte3gz03GQz4fAgj5u5LWpOsMPO1
- 48OfKmQbVVn9esL38WFB4RO5mW6eB7Wrom2V/7dF771Vb6e3VewRmDUpHKrOZJqdQ1St
- aN9FK9F7aOfNeJzkyRvy6w0HUL0WS12Zem+Gr7WScuwdSoPUnHnPwKKvHhcmdVbqPt5q
- CPQWB9C+XYDXnVvdA7lhUPWt5BEqfnDKPwSAv/EFJK/ndSQ/A9IwLgCoVXiJQvtbxGlQ
- jNbCErm3+t263177zXrxtZDWe3aQkf+iZmzCy6ZDDd6wZogXSj9nNmps/pRusOL40gSV
- n8rg==
-X-Gm-Message-State: AOJu0YymllBIAFj9SsQasHxX50jjxTfX58pw45ZnuQV29E/frfOyIAyZ
- aoUuwbWg37yS8xKQh+O+JY+ZKz27jUI5uWUtw0pyel3eqmtTHKJr
-X-Gm-Gg: ASbGncvedMhHMqunf9Ah0XepeiDBXdu4qRqoom8Fe84bLkJTfWwz+Xq94ByCSO8BusZ
- pvJlP10CIZmo/YTJd5lFflrfJ5CuavbCf97Tg3Lr39ZDjWW6QUHdoIoi46CMwgQzE11CVTVcUSj
- cwjNmFypqkcbexOJYfZzxv51aW01dndayeTv3L19BD91ePGV5PyGr7duL6FZ4aPF8AU2GrMOt2W
- /CswD/JGqYbZ9Ug8NizSCbvnLy5uxMJ6GSp3ThMheAjNiea4O8ARmexTFPgZHa5nvvMtVftPLo+
- rN1ICtVHXO5JaotuyP22VMq6FVJQ
-X-Google-Smtp-Source: AGHT+IEas+D3mAX7QDzV5Q5izSYUvD7/Qtd7p6u80HZ4QgbqXbrWcz+gZiTjXgySp+TEu8vzM5YN3Q==
-X-Received: by 2002:a05:6a00:1991:b0:725:e015:908d with SMTP id
- d2e1a72fcca58-725e01593e4mr6296311b3a.1.1733709643592; 
- Sun, 08 Dec 2024 18:00:43 -0800 (PST)
-Received: from per1cycle.per1cycle (36-226-243-111.dynamic-ip.hinet.net.
- [36.226.243.111]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-725ec7394b0sm921252b3a.43.2024.12.08.18.00.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Dec 2024 18:00:43 -0800 (PST)
-From: Huan Zhou <pericycle.cc@gmail.com>
-Date: Mon, 09 Dec 2024 10:00:20 +0800
-Subject: [PATCH v5 2/2] doc: spacemit: bananapi_f3: document Banana Pi F3 board
+ d=1e100.net; s=20230601; t=1733711340; x=1734316140;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ky6Xf+uSOjKM4E5bf8dPDDAudiahszEDWCTgt/YiY6w=;
+ b=Ija5Bao49aJw5wVP5BTDBHG4TMUvdZ6qxKrp79vbS8dC/GodeLD43XwTSRpPP+xQgn
+ mjhr7xU9fK3eb6SwDO0cyWbRcBWZKTqc3PaJmxObHu7LIqg1LgPM36UsxYFAN5zFIeLK
+ lXt7UBN25HRTSs9S3WTO0q2zF6hhXa0Ksqet5MgCUo0+Bu3Xlvl9k/a6Iidda/mCsDr2
+ kRLCSgaJxWTIP6mmUF0vv/xmDOb87Qg38eDmVY1Y7WjQSrmw2unRVTBx4ms10RA52VVk
+ 7/shDdFKBFo8+rY9ORuSHow66XVRjRuLththB0hhMDcTbQaUit3hixCNOLzHF3HgYWWN
+ Aa2g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWvqLOt6XC+VDmszaSGq7Ne5Z4BePFHqGxV/EooGycGBnafsfXskvOLJxJzE/sFXK3eEVy00R8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxpqRtrSnRoZipBldMk1juGtQbQLm5xE1/OQmfuy0X+b9//f8yQ
+ 9Gyte98eH5NbGkDpp2wPL4S+F6mXOVPLRRyhns7EWKpgWkUw2ZQkecsrq8U5r0zgPov8GhbmP/y
+ /40rCpGw74URMCttQmBwfhjxWdZi/E2OHNwdM
+X-Gm-Gg: ASbGncvDCNqFgTDyVmnIFg17rpPl4au9Gy8d2r4zrUwGAl0yjXubosR6Xp/U95GS+OX
+ oH7tTZDCA0wCIaAljy9M12G+f9JZfiu+D
+X-Google-Smtp-Source: AGHT+IFIz8LyJIRzH8gl0+jZk5U+cibPA+UgcbwvX/I6D0M8Ys1y5uQqjVgSFEiLmxw+uC88gR47vPX3eCZo/h+35eA=
+X-Received: by 2002:a17:907:7742:b0:aa6:762e:8c1c with SMTP id
+ a640c23a62f3a-aa6762eaa97mr394113666b.48.1733711339867; Sun, 08 Dec 2024
+ 18:28:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241209-pickup-bpif3-v5-2-92f801b7c6c1@gmail.com>
-References: <20241209-pickup-bpif3-v5-0-92f801b7c6c1@gmail.com>
-In-Reply-To: <20241209-pickup-bpif3-v5-0-92f801b7c6c1@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
- Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>, 
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
- Padmarao Begari <padmarao.begari@microchip.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
- Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Yu Chien Peter Lin <peterlin@andestech.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, 
- Kongyang Liu <seashell11234455@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733709622; l=4194;
- i=pericycle.cc@gmail.com; s=20241109; h=from:subject:message-id;
- bh=CCao/sdc77IZK7JcazSa4gfW1HGZMc5Q60ndf+yN+hc=;
- b=QcIwtboNHihUHKnKbPa+GJWpz94TbJtmFSOOwkC9rZM63q3uUGZ59dd6y2sAeQUrsVFapGjcn
- duPeGsa8gg9DMT+zPga18KjMKJpm2IZ8i8Dah5EmHbVssZa1VGQiLdd
-X-Developer-Key: i=pericycle.cc@gmail.com; a=ed25519;
- pk=Wd3eEYWh1pNETTTXjX4aeanCWrr201iLaYYW5G1BdbU=
+References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <20241123195616.305687-10-mjg59@srcf.ucam.org>
+ <CAC_iWj+-wS9Kc4PJCi07q+LuJ172wSD5S4-moEFkst236wOJsg@mail.gmail.com>
+In-Reply-To: <CAC_iWj+-wS9Kc4PJCi07q+LuJ172wSD5S4-moEFkst236wOJsg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 8 Dec 2024 19:28:48 -0700
+Message-ID: <CAFLszTjmP_X-g3n+s+N9H9-g8Y88t-DufgFQ1qgTG4D2-6ktuA@mail.gmail.com>
+Subject: Re: [PATCH 09/10] Fix efi_bind_block.
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Matthew Garrett <mjg59@srcf.ucam.org>, u-boot@lists.denx.de, 
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Matthew Garrett <mgarrett@aurora.tech>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,138 +90,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kongyang Liu <seashell11234455@gmail.com>
+Hi Ilias,
 
-Add document for Banana Pi F3 board which based on SpacemiT's K1 SoC.
+On Mon, 25 Nov 2024 at 06:41, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Matthew, Janis,
+>
+> On Sat, 23 Nov 2024 at 21:57, Matthew Garrett <mjg59@srcf.ucam.org> wrote:
+> >
+> > From: Janis Danisevskis <jdanisevskis@aurora.tech>
+> >
+> > efi_bind_block had two issues.
+> > 1. A pointer to a the stack was inserted as plat structure and thus used
+> > beyond its life time.
+>
+> Yep and I wonder how the device_unbind() code managed to survice since
+> it free that stack allocated memory...
+> Probably never called.
 
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
----
- doc/board/index.rst                |  1 +
- doc/board/spacemit/bananapi-f3.rst | 86 ++++++++++++++++++++++++++++++++++++++
- doc/board/spacemit/index.rst       |  9 ++++
- 3 files changed, 96 insertions(+)
+:-)
 
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index 417c128c7af6ad2267ef1bc743c7f10ae70b6de7..367da2d62316d4cab25ecc53f852ef742eba13dd 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -51,6 +51,7 @@ Board-specific doc
-    sipeed/index
-    socionext/index
-    sophgo/index
-+   spacemit/index
-    st/index
-    starfive/index
-    ste/index
-diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..98a1b1d91daa897508762267e8363e7d98a0c5d0
---- /dev/null
-+++ b/doc/board/spacemit/bananapi-f3.rst
-@@ -0,0 +1,86 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Banana Pi BPI-F3
-+============
-+
-+Building
-+~~~~~~~~
-+1. Install the spacemit riscv cross compile toolchain_, or skip it if riscv toolchain is installed.
-+
-+.. _toolchain: https://archive.spacemit.com/toolchain/
-+
-+2. Setup cross compilation environment variable:
-+
-+.. code-block:: console
-+
-+   export CROSS_COMPILE=<riscv64 toolchain prefix, e.g /opt/spacemit/bin/riscv64-unknown-linux-gnu->
-+
-+3. Before building U-Boot, OpenSBI should be built first. OpenSBI can be
-+built for SpacemiT K1 SoC as below:
-+
-+.. code-block:: console
-+
-+   git clone https://github.com/cyyself/opensbi -b k1-opensbi
-+   cd opensbi
-+   make PLATFORM=generic
-+
-+4. Then build U-Boot as following:
-+
-+.. code-block:: console
-+
-+   cd <U-Boot-dir>
-+   make bananapi-f3_defconfig
-+   make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
-+
-+This will generate u-boot.itb
-+
-+Booting
-+~~~~~~~
-+Actually, we can replace the uboot part from bianbu linux which is the bsp_ to validate this patch,
-+use `balena etcher` to burn the bianbu-minimal.img to the sd card,
-+and replace the /dev/sdx4 where places the uboot_ with the `u-boot.itb` generated from this patch.
-+
-+.. _bsp: https://archive.spacemit.com/image/k1/version/bianbu/v2.0/
-+.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-firmware-layout
-+
-+Sample boot log from Banana Pi BPI-F3 board
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+.. code-block:: none
-+
-+   try sd...
-+   bm:3
-+   j...
-+
-+   U-Boot SPL 2022.10spacemit-dirty (Oct 21 2024 - 09:01:13 +0000)
-+   [   0.279] DDR type LPDDR4X
-+   [   0.292] lpddr4_silicon_init consume 13ms
-+   [   0.293] Change DDR data rate to 2400MT/s
-+   [   0.430] ## Checking hash(es) for config conf-1 ... OK
-+   [   0.432] ## Checking hash(es) for Image opensbi ... OK
-+   [   0.437] ## Checking hash(es) for Image uboot ... OK
-+   [   0.443] ## Checking hash(es) for Image fdt-1 ... OK
-+   [   0.488] ## Checking hash(es) for config config_1 ... OK
-+   [   0.490] ## Checking hash(es) for Image opensbi ... crc32+ OK
-+
-+
-+   U-Boot 2024.10-rc4-00462-g5b138cfcc587-dirty (Nov 28 2024 - 14:56:49 +0800)
-+
-+   DRAM:  4 GiB
-+   Core:  19 devices, 8 uclasses, devicetree: separate
-+   Loading Environment from nowhere... OK
-+   In:    serial@d4017000
-+   Out:   serial@d4017000
-+   Err:   serial@d4017000
-+   Net:   No ethernet found.
-+   => cpu list
-+   0: cpu@0      spacemit,x60
-+   1: cpu@1      spacemit,x60
-+   2: cpu@2      spacemit,x60
-+   3: cpu@3      spacemit,x60
-+   4: cpu@4      spacemit,x60
-+   5: cpu@5      spacemit,x60
-+   6: cpu@6      spacemit,x60
-+   7: cpu@7      spacemit,x60
-+   => test
-+   =>
-+
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..e7d3d94e4599fbeb8da16c8a837e777a0be06227
---- /dev/null
-+++ b/doc/board/spacemit/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+SpacemiT
-+========
-+.. toctree::
-+   :maxdepth: 1
-+
-+   bananapi-f3
-+
+>
+> > 2. Only the first segment of the device path was copied into the
+> > platfom data structure resulting in an unterminated device path.
+> >
+> > Signed-off-by: Janis Danisevskis <jdanisevskis@aurora.tech>
+> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> > ---
+> >
+> >  lib/efi/efi_app_init.c | 29 +++++++++++++++++++++--------
+> >  1 file changed, 21 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/lib/efi/efi_app_init.c b/lib/efi/efi_app_init.c
+> > index 9704020b749..cc91e1d74b8 100644
+> > --- a/lib/efi/efi_app_init.c
+> > +++ b/lib/efi/efi_app_init.c
+> > @@ -19,6 +19,15 @@
+> >
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >
+> > +static size_t device_path_length(const struct efi_device_path *device_path)
+> > +{
+> > +       const struct efi_device_path *d;
+> > +
+> > +       for (d = device_path; d->type != DEVICE_PATH_TYPE_END; d = (void *)d + d->length) {
+> > +       }
+> > +       return (void *)d - (void *)device_path + d->length;
+> > +}
+>
+> We already define efi_dp_size(), you can use that here.
 
--- 
-2.39.5
+Unfortunately that is only available in EFI_LOADER. Should we try to
+split some of the code out to lib/efi ?
 
+>
+> > +
+> >  /**
+> >   * efi_bind_block() - bind a new block device to an EFI device
+> >   *
+> > @@ -39,19 +48,23 @@ int efi_bind_block(efi_handle_t handle, struct efi_block_io *blkio,
+> >                    struct efi_device_path *device_path, int len,
+> >                    struct udevice **devp)
+> >  {
+> > -       struct efi_media_plat plat;
+> > +       struct efi_media_plat *plat;
+> >         struct udevice *dev;
+> >         char name[18];
+> >         int ret;
+> > -
+> > -       plat.handle = handle;
+> > -       plat.blkio = blkio;
+> > -       plat.device_path = malloc(device_path->length);
+> > -       if (!plat.device_path)
+> > +       size_t device_path_len = device_path_length(device_path);
+> > +
+> > +       plat = malloc(sizeof(struct efi_media_plat));
+> > +       if (!plat)
+> > +               return log_msg_ret("plat", -ENOMEM);
+> > +       plat->handle = handle;
+> > +       plat->blkio = blkio;
+> > +       plat->device_path = malloc(device_path_len);
+> > +       if (!plat->device_path)
+>
+> you need to free plat here now
+
+I will send a patch.
+
+>
+> >                 return log_msg_ret("path", -ENOMEM);
+> > -       memcpy(plat.device_path, device_path, device_path->length);
+> > +       memcpy(plat->device_path, device_path, device_path_len);
+> >         ret = device_bind(dm_root(), DM_DRIVER_GET(efi_media), "efi_media",
+> > -                         &plat, ofnode_null(), &dev);
+> > +                         plat, ofnode_null(), &dev);
+> >         if (ret)
+> >                 return log_msg_ret("bind", ret);
+> >
+> > --
+> > 2.47.0
+> >
+
+Regards,
+Simon
