@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D99E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C94E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C665089634;
-	Mon,  9 Dec 2024 17:28:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C92089698;
+	Mon,  9 Dec 2024 17:28:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cRx7MfCG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MQKP5ID8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5272D89490; Mon,  9 Dec 2024 17:28:21 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 30FB1896F9; Mon,  9 Dec 2024 17:28:50 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4AD589698
- for <u-boot+nodisclaimer@lists.denx.de>; Mon,  9 Dec 2024 17:28:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A8CA89490
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:28:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7fc99fc2b16so3346768a12.3
- for <u-boot+nodisclaimer@lists.denx.de>; Mon, 09 Dec 2024 08:28:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-84198252db1so151129439f.0
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:28:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733761697; x=1734366497; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xWD5ioAVVx1mndZLTl1r+xi7b+78Gsv8Ylstt9hGnHs=;
- b=cRx7MfCG3TogiGBs2BD6DBhVCU+7RBneeceuq6rCeXfc3cwj6E30MIwMX3jXsdO+Wa
- fsXhjVoNOtQ9uHKw3F43as0o7/P92J2yo2lUF8SE/43HI2Wa1JdRQjD2WSQPpaFGaW62
- dqNx6U+VclORSY032iE6b4oivVYhH4lpGr0CnQAWPrWwZMR6C+sux7TqzI9krbcTgCz5
- rTi36CWkVc6uhc7B3rhlsAc51El0+fvjMFS224R5OCmuBu7BSXxQqOLjt6KuDfeKLKFM
- 23KLpzXMdWmihwEY7l2xG9W7C9YGiUy+CS8VuRchqh/n4CzOZ133lHcsy5WKmRBi2UyE
- QBiw==
+ d=chromium.org; s=google; t=1733761726; x=1734366526; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lNtQmbt5atseoMTBwuE8KywiTNFVdo9upyhbOuwLGSk=;
+ b=MQKP5ID84rv/HNfTNWhIQg5K3d3tf55hv/EjQ8MKg24IM9gvI1hRXH/KDQWnwIa8O+
+ ARg3FnW8/ea+HaATLdeRgUbFZlaEd7541EAsg9RMYE7ZoyA0xUX8Pi8lp6n7xXlWoP8u
+ no/3x+9cpQ590tFXFA6cZLQQMiOz58KAvG0Xg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733761697; x=1734366497;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733761726; x=1734366526;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xWD5ioAVVx1mndZLTl1r+xi7b+78Gsv8Ylstt9hGnHs=;
- b=E2DehPggxz+DZI6DHX4uMh8Tn3yBdjQF7YbZRRrUS2xZYzbThNq/z3kIEcioJj4XFq
- OgjnC3rPhP3XEzgR9QkieTXlZhCPka/1a0ol70rZHo00qVfKctce8ZtuQaHgjeGm3/tv
- hhCvpw/KCdrJ3GEpdXDMU9+YoUeg/arSKebhR6SrTFUll8XhvQLxe3/7dEGPWovXdiK3
- E44KiDZY41V6+yyHYNlJUcELyrI7ZnT4G0kJ3jUJn/EPl6UViLkck2ZhM7dKWLVOqJjd
- +F+8W1P4zccjObrg+E97m8F/fuafY+xdvY4pq7mv9V/8spP3Lc2zgUjbwsaSO6ggR3QQ
- /CrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXb3gV3lSPS5s1t48i884/+W0DLu4i5jmm9u1t+nSEoIqkHJlrubEMNRUAWPLvTzIkg+hBy1NA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLcZXzZiZUFG+IxUBf8O8WuE4QzHDqtv8hQ4SDxmwdfSSD+ICX
- OfwzK30JKLISd9Bn4GBlpEYYoM8M/6oi5m55Wq0bSRsc+enNzn+EAr6y/z3pbrgN34bJrGgwQcj
- E2O2TYomUJ+0LhFeMtaGSCazucyp7iPQn2QwO1PwldwPGLsmrrUQ=
-X-Gm-Gg: ASbGncs8MtaR8SD1V33Ufwa4F/xvX2TpUHjetCEMTfqyNYBRu8sTltaLWWhGAELFWAQ
- OezFPEliH0NPrAvOeUnABkP8t6+9KW9YhVPIoxOT66LpO/ReIUJHIvhmrJ7lTlhqD
-X-Google-Smtp-Source: AGHT+IGvyHE08OSMHHKXGos8s1JVXS0X89mcrKUbmpqJIXVlRL0lXVOBdKhON/oMr+wrhCX0BPoWA2T8uNrNI/PG+QY=
-X-Received: by 2002:a17:90b:5184:b0:2ea:4c8d:c7a2 with SMTP id
- 98e67ed59e1d1-2ef6ab0d5b6mr19692782a91.24.1733761695662; Mon, 09 Dec 2024
- 08:28:15 -0800 (PST)
+ bh=lNtQmbt5atseoMTBwuE8KywiTNFVdo9upyhbOuwLGSk=;
+ b=qgOZ5R6ZymsYscom+1ljFbMxFStDOLzrCsSlwOL5BWRfjvAjNk3143RPeU4ypjnJbd
+ 6cXruRqB1cRbMg7UHvVnn/5h2+gY8O7M8RbMxkk5RYayoErqI9U+R7UOhrzECTNN2i3Q
+ YVAB0xdvpebxQRnQUFsqtGeIXQ0RX3G1rjS9fWQBL9yF2kvbpEJZo/RFArZ4L1nqoYIt
+ 4VpchVYq3mIaGyvL8l8quBdeDEPK9k4anNYd3NsU7F/0GARi6xxBKizoT9Z/WMBGM1HA
+ QSU6e8+xnbagyyzBSNhrSjfWcfIS8f661kXqxO5+noyUwAihvpfqEJxBz5KCkorfIa2O
+ 6lMA==
+X-Gm-Message-State: AOJu0YwJq3i3Vqx+lDM8LOD+lFqI6qH5FqWfJHfHGeQCxHs3CeQqnyEy
+ 3AqrA2nN3wsLqv9vNhUgQ3xy/SP+Kc9mI4daOzBtvNOARsGzU5UjZpMhXC25w7HzsJiND/Ji6Hg
+ =
+X-Gm-Gg: ASbGnctyUwOAsQF20LH596qhKkI/moKH7+badz+4QfvXn5PIto5c457e8DNRgH8f3rt
+ JlWjdSaDv3ixq33+j5FNOJDHHlqrkv3ShD/UNnh9Na0Zqyx2suTfdbys/daJzZFdTHO1gIc/kjN
+ SNhbehyi9Ar3ZAlAmSVqnd8IBjDXV5hUJaL1uxoGCsHVSAcfQOtv3ZDMIcMx4JtMhXNRW+byFUQ
+ zTJsINEpbH0moGj2TFU0yWKd/jaFZb+ASDMlUusvOOZZRDPFg2olEOFYsUAjwTWhxjBKTSJb63P
+ qT++ujEoGAI=
+X-Google-Smtp-Source: AGHT+IHgRa2N0HtTAFwxOusGaaCqVWqrtswVZ5CV9P0kIwC9cMR8W3dLiJb3db/p+7Nxfx1HEWfl2A==
+X-Received: by 2002:a05:6602:6019:b0:844:7896:8cb4 with SMTP id
+ ca18e2360f4ac-844b8804d31mr118939f.1.1733761725777; 
+ Mon, 09 Dec 2024 08:28:45 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-844737bc549sm272432339f.2.2024.12.09.08.28.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 08:28:44 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Matthew Garrett <mgarrett@aurora.tech>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Tom Rini <trini@konsulko.com>, Wang Jie <dave.wang@rock-chips.com>
+Subject: [PATCH 0/8] efi: Add docs and tests and a few tweaks
+Date: Mon,  9 Dec 2024 09:27:53 -0700
+Message-Id: <20241209162801.288363-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20241209094159.8355-1-philippe.reynes@softathome.com>
- <20241209094159.8355-5-philippe.reynes@softathome.com>
-In-Reply-To: <20241209094159.8355-5-philippe.reynes@softathome.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 9 Dec 2024 11:28:05 -0500
-Message-ID: <CAEfUkUJ7OwWrFpzwMPsf0+iPcDht6iazKHDpStksDCAf3FR03w@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] lib: mbedtls: sha256: add support of key derivation
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: raymond.mao+nodisclaimer@linaro.org, sjg+nodisclaimer@chromium.org, 
- u-boot+nodisclaimer@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,96 +108,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
+This series addresses feedback provided on the original series,
+including:
 
-On Mon, 9 Dec 2024 at 04:42, Philippe Reynes <philippe.reynes@softathome.com>
-wrote:
+- adding documentation and tests for the two new commands
+- fixing an issue that somehow didn't fail in CI
+- splitting up a large function into two parts
+- using lmb for the allocation, instead of looking at internal tables
+- dropping use of config.h
 
-> Adds the support of key derivation using the scheme hkdf.
-> This scheme is defined in rfc5869.
->
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
->  include/u-boot/sha256.h |  7 +++++++
->  lib/mbedtls/sha256.c    | 22 ++++++++++++++++++++++
->  2 files changed, 29 insertions(+)
->
-> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-> index 2f12275b703..5643efcb85c 100644
-> --- a/include/u-boot/sha256.h
-> +++ b/include/u-boot/sha256.h
-> @@ -49,4 +49,11 @@ void sha256_hmac(const unsigned char *key, int keylen,
->                  const unsigned char *input, unsigned int ilen,
->                  unsigned char *output);
->
-> +#if defined(CONFIG_HKDF_MBEDTLS)
-> +int sha256_hkdf(const unsigned char *salt, int saltlen,
-> +               const unsigned char *ikm, int ikmlen,
-> +               const unsigned char *info, int infolen,
-> +               unsigned char *output, int outputlen);
-> +#endif
-> +
->
-
-I think this will be better:
-#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-int sha256_hkdf(const unsigned char *salt, int saltlen,
-                 const unsigned char *ikm, int ikmlen,
-                 const unsigned char *info, int infolen,
-                 unsigned char *output, int outputlen);
-#else
-static inline int sha256_hkdf(const unsigned char __always_unused *salt,
-                int __always_unused saltlen,
-                const unsigned char __always_unused *ikm,
-                int __always_unused ikmlen,
-                const unsigned char __always_unused *info,
-                int __always_unused infolen,
-                unsigned char __always_unused *output,
-                int __always_unused outputlen) {
-        return -EOPNOTSUPP;
-}
-#endif
+Link: https://lore.kernel.org/u-boot/20241123195616.305687-1-mjg59@srcf.ucam.org/
+Link: https://patchwork.ozlabs.org/project/uboot/list/?series=433949&state=*&archive=both
 
 
->  #endif /* _SHA256_H */
-> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
-> index 1b9fc1a8503..6e9659d31bb 100644
-> --- a/lib/mbedtls/sha256.c
-> +++ b/lib/mbedtls/sha256.c
-> @@ -11,6 +11,11 @@
->  #include <string.h>
->  #include <u-boot/sha256.h>
->
-> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-> +#include <mbedtls/md.h>
-> +#include <mbedtls/hkdf.h>
-> +#endif
-> +
->  const u8 sha256_der_prefix[SHA256_DER_LEN] = {
->         0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
->         0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
-> @@ -98,3 +103,20 @@ void sha256_hmac(const unsigned char *key, int keylen,
->         memset(tmpbuf, 0, sizeof(tmpbuf));
->         memset(&ctx, 0, sizeof(sha256_context));
->  }
-> +
-> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-> +int sha256_hkdf(const unsigned char *salt, int saltlen,
-> +               const unsigned char *ikm, int ikmlen,
-> +               const unsigned char *info, int infolen,
-> +               unsigned char *output, int outputlen)
-> +{
-> +       const mbedtls_md_info_t *md;
-> +
-> +       md = mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
-> +
-> +       return mbedtls_hkdf(md, salt, saltlen,
-> +                           ikm, ikmlen,
-> +                           info, infolen,
-> +                           output, outputlen);
-> +}
-> +#endif
-> --
-> 2.25.1
->
->
+Simon Glass (8):
+  fdtdec: Correct devicetree symbol for EFI app
+  part_find: Enable for sandbox and correct radix and calls
+  doc: test: Add docs and test for part_find
+  efi: Drop config.h
+  cmd: Refactor part_find() into separate functions
+  addr_find: Use a simple lmb allocation
+  doc: test: Add docs and test for addr_find
+  efi: Avoid a memory leak in efi_bind_block() on error path
+
+ cmd/Kconfig                 |   2 +
+ cmd/addr_find.c             |  41 +++-------
+ cmd/part_find.c             | 153 ++++++++++++++++++++++--------------
+ doc/usage/cmd/addr_find.rst |  63 +++++++++++++++
+ doc/usage/cmd/part_find.rst | 119 ++++++++++++++++++++++++++++
+ doc/usage/index.rst         |   2 +
+ drivers/net/efi_net.c       |   1 -
+ drivers/tpm/tpm2_efi.c      |   1 -
+ lib/efi/efi_app_init.c      |   4 +-
+ lib/fdtdec.c                |   2 +-
+ test/cmd/Makefile           |   2 +
+ test/cmd/addr_find.c        |  27 +++++++
+ test/cmd/part_find.c        |  42 ++++++++++
+ 13 files changed, 367 insertions(+), 92 deletions(-)
+ create mode 100644 doc/usage/cmd/addr_find.rst
+ create mode 100644 doc/usage/cmd/part_find.rst
+ create mode 100644 test/cmd/addr_find.c
+ create mode 100644 test/cmd/part_find.c
+
+-- 
+2.34.1
+
