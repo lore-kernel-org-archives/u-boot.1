@@ -4,87 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7BEE77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 10:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2515DE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 11:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E33088E2B;
-	Mon,  9 Dec 2024 11:42:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 768BB896A5;
+	Mon,  9 Dec 2024 12:12:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dJDIsLle";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eyzicB/8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB98E88B1C; Mon,  9 Dec 2024 11:42:26 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C57F2893A2; Mon,  9 Dec 2024 12:12:06 +0100 (CET)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20622.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2406::622])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AA8888E2B
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 11:42:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2F5F896B1
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 12:12:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-434a736518eso45225655e9.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 02:42:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733740944; x=1734345744; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8MUUlhbxZSKbZ5Y4YjuKGEGkTz1c6b0smhtsBzPUJYk=;
- b=dJDIsLleEZrfGh0dItvH3k3OLq/VzcN9o9G/nzm8v6vtkU9kxwIdD2Dm2gIwXRPH+L
- yJggdLHYABocuaQSDAJUDwlB5emgrCwzBNa9NBo01wFbVpx4VhSeffYiHFclD4ovPI0F
- /gXwcs2k0B9pxJOTmbkmKD80JrdGytNYC7a9yI7pPLT3p1ELt+8gtpkbxzhY+kR5ATb2
- TGvCEyt9LhhCsn8gnUC5bFO6jaaS78ZMtmBcsOG8UmHPMHPd4f6AvBc2+AS2bYW8xP28
- jF4FKjLL6zWUxZUGjZca6xPKojRMUafmqn42CzQeaDgqlMlGMZ1NY7a00I/Moie5vOS5
- cxgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733740944; x=1734345744;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8MUUlhbxZSKbZ5Y4YjuKGEGkTz1c6b0smhtsBzPUJYk=;
- b=s6yBRgzBWsbsqMo0VsHnreRR7AIdGMOidCGlHIzXiR3kmgH4miwy1b1LQkM1RuSkbe
- 9mys66jS0U1MGrbb+mkLW/i1sifRcgOtlv2qn7CGb9i4MBHAEBK30jSKZQp6bxEQJBJA
- AolxjqKuj5l+ysyypFt9Y490ET6UMh+0yoftEGSU2P4GBmZQtzUrje884x3hozs246mc
- BYCmCtiZVbakgMDNwWKHIhP2h7koWUhx1r5TCAjRe6YYa45dEWLxuAVNUrMkwGSFGOvr
- 1a6W07FRkeKdz9/0Ecr+vTQhUK9kVmmDAnqSB5aPhFIQ5uBKhLMErX/ZoF2iywSxK6yO
- cTKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW8Ij/HNnuRZi+YTv+UgsXLa0WwmoQYI4yF0/QTWJakxbI80lkO7xs+7FazchZYFmrkjspcXMA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yze1VBWc0c0d56ojhsa/3Rz/T9FOwxSASLH9azuDVrh4lTCjArP
- 8N6qwVkoOnGiWde80lgDDu439h3Gt3xj2EAS1w2VTLsVSFqTFdr3wF3nE9V1tCg5r80IufSxl4y
- bx5bYKpOqXVKcWWBmGC5x+5HYo7M=
-X-Gm-Gg: ASbGncuD+lRlkJZU6egn2Y3hz5LKmGRopFGWLJSLHHt6yKSUguwfWraX2fMsZrT9UQS
- LnuN7JDud3xwosVxJyF9mz23DljxkaJWT
-X-Google-Smtp-Source: AGHT+IFcNzCHfd0q1Xv7RUSQ2F4IUP9JyuWiPWjt69vdmB5lRGqKFv+O0XWHKEB/A3BhTZGh01D+QIRS10hAQ+5jwbk=
-X-Received: by 2002:a05:6000:401e:b0:385:e4a7:df09 with SMTP id
- ffacd0b85a97d-3862b3cdcd3mr8981053f8f.44.1733740943708; Mon, 09 Dec 2024
- 02:42:23 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CxnntX+hSW6SbeygiD18ueo3OQKxc0aQ4/0W1/hGb6ZknN3X+4K4p12Ql4xXVUA+zK6k0rxhviQtQDPf6HyKMaITPlxRn41Gsicza3hK65pl17qRQ7PF5bspKBXlPoedryEf9x3g85JjcOpTSB+1o1KF9H6Wwl0H6Qli7sgsnkMrE5qac2ypy59+L/yhQvN+f7eeXGOHdd3BiquJBvMpxysCoWc9YHUwRBVUA3JidVyXahj6IvuTuA/nspMQGD913BgYgL8K6r0YXA/07XdnhN8NP8TMKwmWPsAMvOkb5/wnhFCpz2mh85esSr5X/RTacLoAS6X4pR+tLidsZE0Wpw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8MQV0+HyXrRjH7uamXYmGmNMdh50vqMapjYB9EALZjk=;
+ b=XCY6wpswY3oy5KogMMDJUW9aomZd/1lMD7jD648ly0c8KP+WmheniLPhMOXZAg73gRAaeEIpPj9BbE8uEcqRy8iF41Rem7SyKoooiTEJaUNVYcCed7tPNWEiyEnQdeHmo/HT30Py+aU7WC5V1rUswOQXo9lzrtDDkxKr8jQ0YCYshgusluS3mf/hGHRZ9WAiBerYVhDCoOySSekoOSpX47FsI/6FfX/Ll/2cqYETC1eE96bBL10Yzl+EneZDEyOVjRlOl6gU03J6ExcrvsLOW/i4uXNjYejHE8e5X+w4f4h9xmszCQQMhT7Dw2nyXS2lc9P12klTMpfwgXSUQcnBLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8MQV0+HyXrRjH7uamXYmGmNMdh50vqMapjYB9EALZjk=;
+ b=eyzicB/8V7jO3i1qvB4lf7raoHRRVNkXqaRaxg8JK/kWIUZVBMlabuyWRXqBhuY/8rkyFgSlwkccp6MOx8LcyVNfthG2q+2ADOcy7bUprGq9fVGDjE6fFw/0pt5FUCZRdFST9gtSCx1hhImA3yhdUa91/9tq5JcHbmdNn4QXnuQ=
+Received: from SJ0PR03CA0267.namprd03.prod.outlook.com (2603:10b6:a03:3a0::32)
+ by MW4PR12MB6706.namprd12.prod.outlook.com (2603:10b6:303:1e2::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.17; Mon, 9 Dec
+ 2024 11:12:01 +0000
+Received: from SJ5PEPF000001EE.namprd05.prod.outlook.com
+ (2603:10b6:a03:3a0:cafe::80) by SJ0PR03CA0267.outlook.office365.com
+ (2603:10b6:a03:3a0::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.11 via Frontend Transport; Mon,
+ 9 Dec 2024 11:12:01 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001EE.mail.protection.outlook.com (10.167.242.202) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8230.7 via Frontend Transport; Mon, 9 Dec 2024 11:12:00 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Dec
+ 2024 05:11:57 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Anatolij Gustschin <agust@denx.de>, Peter Robinson <pbrobinson@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] video: zynqmp: Add support for reset
+Date: Mon, 9 Dec 2024 12:11:50 +0100
+Message-ID: <0504474a91a9839828aecd37f8855fd154cdf2e1.1733742708.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241209064413.6282-1-clamor95@gmail.com>
- <20241209064413.6282-3-clamor95@gmail.com>
- <2c6deec8-8145-482f-bbf0-e2efab3dcf74@kwiboo.se>
-In-Reply-To: <2c6deec8-8145-482f-bbf0-e2efab3dcf74@kwiboo.se>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 9 Dec 2024 12:42:12 +0200
-Message-ID: <CAPVz0n2RTFMGqEwJ=eT+=Ub5tp951HxM5DMX2B5agSBYyh0DXw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] gpio: fix request of PMIC GPIO child
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, Billy Tsai <billy_tsai@aspeedtech.com>, 
- Michal Simek <michal.simek@amd.com>, Sumit Garg <sumit.garg@linaro.org>,
- Ye Li <ye.li@nxp.com>, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Jim Liu <jim.t90615@gmail.com>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1167; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=fwA65OK6eGwOVUZ9GctiBTEmgmStFgPZc2XsxhMPR2E=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSwC+WyGwq1JgcZrPN+WiHj6+Tizin0a32M7yXTWVJJf
+ D4br07qiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABMxK2SYZ/HL53/c0ziP73YM
+ R3KzCn+eXVDCyDBX7Phnp/vGeUfkVAL3T4/1Pe20WeAsAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|MW4PR12MB6706:EE_
+X-MS-Office365-Filtering-Correlation-Id: df9e43c9-7ad4-4002-a876-08dd18424dd4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MHDkw3BKZE56KjqTg9EasjKHDyh6Ik3EC9aQxzkLLXNft0wQih9IAM+eh2ag?=
+ =?us-ascii?Q?7TAKK3lOBmm32N88ySyHl4dVG/ohIy/mKGkjVNFWDBsd6GFEGbHhB4ZZ6sts?=
+ =?us-ascii?Q?gPgy7XVZQ+fOPniDZMtOsKE3ZeAS073hZLJXdXJq8nmwTOzjZYfshJrbpXCE?=
+ =?us-ascii?Q?Tuajask25uMObD/Tlbrjb3G5vzPGpp+o3W05fAXDDfIK13sdjVGhOmm76Y1O?=
+ =?us-ascii?Q?ECg1JsAlMTUYj+iqxQefq2mwWj1eMxCB4/4b4o8hhtBZ9rVCM4RKqJr8bV45?=
+ =?us-ascii?Q?t4gwC61DrClrvCUgfqQ/dMoSnZiJjq4g07+zqdgG0rqmJ5/PWuh9HNfOerud?=
+ =?us-ascii?Q?iUVtpe4p6lOM3mqSx+ZAI/XRbeM/9fmfaAYMgny731Fjbs4ALULg2+OZl3ym?=
+ =?us-ascii?Q?PWe6CL8l8fHRgV2bi6JE8pRTiTIlB9SW1bM+2LohO+SQvsaNlGB77BsnVtS2?=
+ =?us-ascii?Q?KNlC7hNtzN5aNZ1UoQAk4Oy3qG9T4xotVLW+04CriJGpVj/5vm7Wb1Su+fec?=
+ =?us-ascii?Q?PBg7YQ3dFEvMoDIC0TxrpkeHjTOR617CxD1ZRiI/KbN0Yfa6p3GH1vTsPl29?=
+ =?us-ascii?Q?hS4cULDZw2ZgD2wVQirC/4MyOnHko99g990eypBpjpQV4DXbi1Xem7tzffj0?=
+ =?us-ascii?Q?dU6Q7dXP9k/xtfWjq8n+h9dJm5JRgwkJTo8fuCcyArTLzej/pteUefn94bX4?=
+ =?us-ascii?Q?ELjaWejL8+S9L+CmsLZLB1liRAvdOGNEok91RPhLjBWpOBwdOKFFp65etQHo?=
+ =?us-ascii?Q?Mb9tyo+7z4gtAkTMQ/9E3ONvYZHrwFJJ+SKOLvMVt2owZdJegLTzzmXJDPRX?=
+ =?us-ascii?Q?VYxs7mILcd+F3SZCE9KFXYUk5j6zLRJ4y89K5DiedOkf4maf7iuaTSzmI8fe?=
+ =?us-ascii?Q?BcA3ijZs9jPTOyqtT7sBr55aaCfDVZxnUSxb1ptpQ9VVjbG3Ldk1NY8aPufW?=
+ =?us-ascii?Q?8Ie75JF8lNRm4LrizYuAUsh9biPF9y05kbT3sjiueZFLmf+7rFXXgA8ViNj9?=
+ =?us-ascii?Q?eTe3O/rH0jYHAiyIDmJjj+QGPqDHuqyzQ6rQ5RtTsQLbZgPJnsR/657nT8XE?=
+ =?us-ascii?Q?yiUnfSpey9ew2NiBZg+6Be6XUr6NHhlJWg2S268TSvplVi0V25eU3BhSum6F?=
+ =?us-ascii?Q?rR9HC6YeMZWpzHgtRohInrXixerytHkwORK5mg9+nOoT6vadBdIV1fr2C0Tu?=
+ =?us-ascii?Q?o6fqzjwEDuie0E7uiq2u8F7MJPZqtERd6mrAAtNfQS8FXTPIWnc+RJxEUZ1/?=
+ =?us-ascii?Q?FbULlGGGKrC++fJtVsFTPgVGRL1SmykA0ItF4uZUZHKnOiT57nhDYSenSwjT?=
+ =?us-ascii?Q?lequl1hwNWpPD4gDcviRzpwslsZt5N+uH5zj5QBf10JSxTULAQjU59W7fhLk?=
+ =?us-ascii?Q?kpsxQSmHJB1LMHgjKGUK2ydrgsp3GUJBmXt505qoBBpiUPnewBPlYdPJHVag?=
+ =?us-ascii?Q?TfOylE88q7yHpDu83sTIVlANuCBRHJuv?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 11:12:00.7606 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: df9e43c9-7ad4-4002-a876-08dd18424dd4
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EE.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6706
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,158 +150,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 9 =D0=B3=D1=80=D1=83=D0=B4. 2024=E2=80=AF=D1=80. =D0=BE 12:11=
- Jonas Karlman <jonas@kwiboo.se> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Svyatoslav,
->
-> On 2024-12-09 07:44, Svyatoslav Ryhel wrote:
-> > If correct PMIC child was found it should be requested as well.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >  drivers/gpio/gpio-uclass.c | 8 ++++++++
-> >  1 file changed, 8 insertions(+)
-> >
-> > diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-> > index e776906fe73..e6c00c48722 100644
-> > --- a/drivers/gpio/gpio-uclass.c
-> > +++ b/drivers/gpio/gpio-uclass.c
-> > @@ -1160,6 +1160,14 @@ static int gpio_request_tail(int ret, const char=
- *nodename,
-> >                       /* if loop exits without GPIO device return error=
- */
-> >                       if (device_get_uclass_id(desc->dev) !=3D UCLASS_G=
-PIO)
-> >                               goto err;
-> > +
-> > +                     ret =3D uclass_get_device_by_name(UCLASS_GPIO, de=
-sc->dev->name,
-> > +                                                     &desc->dev);
-> > +                     if (ret) {
-> > +                             log_debug("%s: getting GPIO device failed=
- %d\n",
-> > +                                       __func__, ret);
-> > +                             goto err;
-> > +                     }
-> >  #else
-> >                       debug("%s: uclass_get_device_by_ofnode failed\n",
-> >                             __func__);
->
-> Instead of extending this PMIC/GPIO workaround maybe it is better to fix
-> the issue at bind time? Look like the max77663 pmic driver use
-> device_bind_driver() instead of device_bind_driver_to_node().
->
+In Kria SOM configuration DP is under reset and access to DP is causing
+hang that's why call reset at probe to avoid this situation.
 
-Actually this is a valid point. Thank you for this suggestion.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> Also palmas gpio driver should not need to be bind, the DTs I can find
-> in tree all have a gpio node with compatible =3D ti,palmas-gpio. Do not
-> really understand why the palmas driver should need this workaround
-> the gpios props seem to bind to &palmas_gpio node in the DTs I checked.
+ drivers/video/zynqmp/zynqmp_dpsub.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-This, on the other hand, will not work since pmic drivers do not
-automatically bind all child nodes, I have checked and gpio driver was
-not bound.
+diff --git a/drivers/video/zynqmp/zynqmp_dpsub.c b/drivers/video/zynqmp/zynqmp_dpsub.c
+index 76abfeac4433..52af23c3c835 100644
+--- a/drivers/video/zynqmp/zynqmp_dpsub.c
++++ b/drivers/video/zynqmp/zynqmp_dpsub.c
+@@ -11,6 +11,7 @@
+ #include <dm.h>
+ #include <errno.h>
+ #include <generic-phy.h>
++#include <reset.h>
+ #include <stdlib.h>
+ #include <video.h>
+ #include <wait_bit.h>
+@@ -2093,10 +2094,15 @@ static int zynqmp_dpsub_probe(struct udevice *dev)
+ {
+ 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+ 	struct zynqmp_dpsub_priv *priv = dev_get_priv(dev);
++	struct reset_ctl_bulk resets;
+ 	struct clk clk;
+ 	int ret;
+ 	int mode = RGBA8888;
+ 
++	ret = reset_get_bulk(dev, &resets);
++	if (!ret)
++		reset_deassert_bulk(&resets);
++
+ 	ret = clk_get_by_name(dev, "dp_apb_clk", &clk);
+ 	if (ret < 0) {
+ 		dev_err(dev, "failed to get clock\n");
+-- 
+2.43.0
 
-> Maybe something like following diff could work for your boards? I.e.
-> revert c03cd98d1a16 ("drivers: gpio-uclass: support PMIC GPIO children")
-> and bind gpio dirver to the pmic node.
->
-> Binding to pmic node should probably only happen if the pmic node has
-> the gpio-controller prop.
->
-> Regards,
-> Jonas
->
-> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-> index 0213271e3a69..67fc776cada2 100644
-> --- a/drivers/gpio/gpio-uclass.c
-> +++ b/drivers/gpio/gpio-uclass.c
-> @@ -1142,29 +1142,9 @@ static int gpio_request_tail(int ret, const char *=
-nodename,
->                 ret =3D uclass_get_device_by_ofnode(UCLASS_GPIO, args->no=
-de,
->                                                   &desc->dev);
->                 if (ret) {
-> -#if CONFIG_IS_ENABLED(MAX77663_GPIO) || CONFIG_IS_ENABLED(PALMAS_GPIO)
-> -                       struct udevice *pmic;
-> -                       ret =3D uclass_get_device_by_ofnode(UCLASS_PMIC, =
-args->node,
-> -                                                         &pmic);
-> -                       if (ret) {
-> -                               log_debug("%s: PMIC device get failed, er=
-r %d\n",
-> -                                         __func__, ret);
-> -                               goto err;
-> -                       }
-> -
-> -                       device_foreach_child(desc->dev, pmic) {
-> -                               if (device_get_uclass_id(desc->dev) =3D=
-=3D UCLASS_GPIO)
-> -                                       break;
-> -                       }
-> -
-> -                       /* if loop exits without GPIO device return error=
- */
-> -                       if (device_get_uclass_id(desc->dev) !=3D UCLASS_G=
-PIO)
-> -                               goto err;
-> -#else
->                         debug("%s: uclass_get_device_by_ofnode failed\n",
->                               __func__);
->                         goto err;
-> -#endif
->                 }
->         }
->         ret =3D gpio_find_and_xlate(desc, args);
-> diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77663.=
-c
-> index cf08b6a7e1df..838eae50740d 100644
-> --- a/drivers/power/pmic/max77663.c
-> +++ b/drivers/power/pmic/max77663.c
-> @@ -56,8 +56,8 @@ static int max77663_bind(struct udevice *dev)
->         }
->
->         if (IS_ENABLED(CONFIG_MAX77663_GPIO)) {
-> -               ret =3D device_bind_driver(dev, MAX77663_GPIO_DRIVER,
-> -                                        "gpio", NULL);
-> +               ret =3D device_bind_driver_to_node(dev, MAX77663_GPIO_DRI=
-VER,
-> +                                                "gpio", dev_ofnode(dev),=
- NULL);
->                 if (ret) {
->                         log_err("cannot bind GPIOs (ret =3D %d)\n", ret);
->                         return ret;
-> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-> index f676bf641694..faa876f4e73d 100644
-> --- a/drivers/power/pmic/palmas.c
-> +++ b/drivers/power/pmic/palmas.c
-> @@ -45,7 +45,6 @@ static int palmas_read(struct udevice *dev, uint reg, u=
-int8_t *buff, int len)
->  static int palmas_bind(struct udevice *dev)
->  {
->         ofnode pmic_node =3D ofnode_null(), regulators_node;
-> -       ofnode subnode, gpio_node;
->         int children, ret;
->
->         if (IS_ENABLED(CONFIG_SYSRESET_PALMAS)) {
-> @@ -57,14 +56,6 @@ static int palmas_bind(struct udevice *dev)
->                 }
->         }
->
-> -       gpio_node =3D ofnode_find_subnode(dev_ofnode(dev), "gpio");
-> -       if (ofnode_valid(gpio_node)) {
-> -               ret =3D device_bind_driver_to_node(dev, PALMAS_GPIO_DRIVE=
-R,
-> -                                                "gpio", gpio_node, NULL)=
-;
-> -               if (ret)
-> -                       log_err("cannot bind GPIOs (ret =3D %d)\n", ret);
-> -       }
-> -
->         dev_for_each_subnode(subnode, dev) {
->                 const char *name;
->                 char *temp;
->
->
