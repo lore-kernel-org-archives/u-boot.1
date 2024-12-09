@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724A7E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:01:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21BDEE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:01:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37F8E89763;
-	Mon,  9 Dec 2024 16:01:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C4DA89774;
+	Mon,  9 Dec 2024 16:01:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TdzegRDR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h7MBsgA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E02C489763; Mon,  9 Dec 2024 16:00:58 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 809C08977F; Mon,  9 Dec 2024 16:01:03 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E956A8976E
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:00:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80DA889772
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:01:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa67af4dc60so218415266b.2
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:00:56 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aa67333f7d2so232514766b.0
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733756456; x=1734361256; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733756461; x=1734361261; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qQW1J42ngwJEIcLGK298OayvnqN4xTnAu1yaz0VqdAY=;
- b=TdzegRDRbTlfXpt7lP4fQ0FxJLl7BlxfhBhEYiHLwx5Lzsj1jGMmvfLbtrsW3V1zZz
- UACozOY/WSE9aJNELVTTDLplLjadj3KxynEUNiD3VzU84dwFYl2UyhkEH7HxJCKbrz7z
- RTb9FKG0cDcbcffsmNmRWyeEeZ1iHeXMSJAB0=
+ bh=+DkGQADpfZriOxtD0wc5LVq/DSV1AnmLC6eNggI45fU=;
+ b=h7MBsgA7mxhpXvLaPXsoR+Meh2bQOClZenq7A52uJcQVwXsajM0hpWPgJQHUVOQlTN
+ Csx5xidUgz59SEzYoKU4die7zATUo0yYtkscxBHjGEFHkEE5RfJ9nX7Q0aT/D0Wd2O3X
+ 832ddz+RHaBEFZMOc/5qEd336IU+XigF1yfOc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733756456; x=1734361256;
+ d=1e100.net; s=20230601; t=1733756461; x=1734361261;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qQW1J42ngwJEIcLGK298OayvnqN4xTnAu1yaz0VqdAY=;
- b=ua1pDnGBzSgJhnPRF6f74sqkBFwNQSEotVi4YdaTHAztp6vgn6Gql53SMJvP8/onve
- EovoVNvB7HCJtIWAg2ESTtm5sCj2g5iZYvoj06VOcEnKTFdrlAeMO22I4RB+xQB/1y5F
- l2P8jqVbpfVnBDO2dskHIeA3zafs8Ql1I5oxqW+bJ3BY92NRaHZOxL5Sc17zPu4eaSUu
- zt04Cz8i2BChyy26t9GWMq5OpyXPzFMYSFaQVP8D+dckKOucOOyHPYsZpKfNZwufQFVQ
- mbxJauZZ7OMRukeMp5N+5YPheRDh1hE7HrcuWYW19DdMyo0LfE3chrZzHzTrbgj5/ANG
- hz1g==
-X-Gm-Message-State: AOJu0YyrTq/qstKNu6rd2Qsqbn+IQuCu6BOsbyf4+RBDcmmpGICxnKuA
- 8NuJQ6JtkSm0+FWuE10N2PFvIvGwWstCGI+wwArHMNpPkYUR1CjRQ/hu/vB2dnI8CNtcs6VL5Ak
- 7yQ+ZakEbC7bXytd3ri9xCyqsKsOunbh8xmDt
-X-Gm-Gg: ASbGncu1ux98aFWeOTPej5U6Q4UW9m/hePX/HgU80/Q5Tbvio1NgbMDAWAsScFP+ae4
- NNGwudypvYX23A+dp4TDrJI81JT37igdl
-X-Google-Smtp-Source: AGHT+IFefZhYooWYaIFnqdIIcuMZWZkDLzGnz4USM0fwkb+YLxw3ZjTrV7AJNU5OyUImRQLwGH6GYrYNvYaIZgo6YMg=
-X-Received: by 2002:a17:907:9507:b0:aa6:9372:cac7 with SMTP id
- a640c23a62f3a-aa69372ce49mr170353066b.31.1733756455923; Mon, 09 Dec 2024
- 07:00:55 -0800 (PST)
+ bh=+DkGQADpfZriOxtD0wc5LVq/DSV1AnmLC6eNggI45fU=;
+ b=dgsNXy9GRQwKC2G95G5OgzadzQNU/a0r4xfocm8vCncliQw5ESAXoA+FQ/Jla3djoZ
+ +7rgqqYMlIbG6xHULowRMUMFzE4dOWyPZI3pMZ0+vfUaxrG4sxwazJ4Dzt+wvlzsJ0if
+ 2FhR7psFmms4AjXW4AmVLKmGLSgy9rO1afDL5OOMcD4FlEC01DPiTltAqWh8I14fiRCO
+ eO8kGfxkfYJGTWWy3rSmJZGdPQgzb6eeIW82nJL4EG+hbP9fChMkT0r2FwwIVJ5M/Txb
+ CV6mWw0ncRorRNkUQyyACLtL/sMRvH1YuihBzIvaIfEhpPqYFLzQPzVrTyWFhBA8d68s
+ 1VYQ==
+X-Gm-Message-State: AOJu0YzN266UIXNIsxxe9jy5olexdrhqXuNcmoxPSNMk82t30sHlrpR0
+ YyQXQ9k7UIeI8JFplGga4AeiT5lJ3WfLjPOq3XKkR0aqgu0ztSPiI+BCJGZcaNYn4KfxUkdoXxt
+ cH3Nvir5OzapFjXNVK8+FM/dmZ4CPEUUbMlr1
+X-Gm-Gg: ASbGnct4Wb5cUkXumROCn9P9e7KbqL0wxetoQQN334X1H9zOWdC14CX8SRiDWdjSue5
+ buj1rFXHakTVQ0OPshKwhSuv7DetCmZS9
+X-Google-Smtp-Source: AGHT+IF2T1qKAhPiPMSSpFrk31T5nDhI7pzX8G06scm39Ztv1rWZNByQYwi4mwYxRKr0lUA+owjSqfdi8NNp77Ai1Vo=
+X-Received: by 2002:a17:906:31c5:b0:aa6:8b4a:46a4 with SMTP id
+ a640c23a62f3a-aa69ce222dbmr73031266b.44.1733756460563; Mon, 09 Dec 2024
+ 07:01:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20241208190741.4192601-1-trini@konsulko.com>
- <20241208190741.4192601-9-trini@konsulko.com>
-In-Reply-To: <20241208190741.4192601-9-trini@konsulko.com>
+ <20241208190741.4192601-4-trini@konsulko.com>
+In-Reply-To: <20241208190741.4192601-4-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Dec 2024 08:00:40 -0700
-Message-ID: <CAFLszTgRqGYZ4GWHyuCnmVVODi3XR9iCdLv-ZZZqFsJ04NgBQA@mail.gmail.com>
-Subject: Re: [PATCH 8/9] doc: Expand what we say about building the docker
- container a bit
+Date: Mon, 9 Dec 2024 08:00:42 -0700
+Message-ID: <CAFLszTjyqf0bctZ0aY2r2+kQD07q1fnJ38E0DjuKcqU9+B6skA@mail.gmail.com>
+Subject: Re: [PATCH 3/9] GitLab CI: Make wider use of tags
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -85,23 +84,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
+
 On Sun, 8 Dec 2024 at 12:08, Tom Rini <trini@konsulko.com> wrote:
 >
-> First, try and be slightly clearer about what "buildx" is with respect
-> to the docker build process.
->
-> Second, now that we build the container for both amd64 and arm64, we
-> should document how to make a docker "builder" that has multiple nodes.
-> With this one node should be amd64 and one node arm64, and with
-> reasonably fast arm64 hardware this will be much quicker than using
-> QEMU.
+> First, introduce DEFAULT_ALL_TAG, DEFAULT_ARM64_TAG, DEFAULT_AMD64_TAG
+> and DEFAULT_FAST_AMD64_TAG and remove the previous DEFAULT_TAG (as
+> anyone making use of that will need to adjust their jobs). This allows
+> us to say that some jobs can run on amd64 or arm64 hosts under the all
+> tag, while some jobs must run on amd64 (the Xtensa jobs due to
+> binary-only toolchains and sandbox for now) Then we rework the world
+> build stage to only run on our very fast amd64 hosts, or our arm64 hosts
+> (which are also very fast). This should result in a similar overall
+> build time but also a much more consistent overall build time as we
+> won't have the two big world jobs possibly run on our slower build
+> nodes.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  doc/build/docker.rst | 20 ++++++++++++++------
->  1 file changed, 14 insertions(+), 6 deletions(-)
->
+>  .gitlab-ci.yml | 74 ++++++++++++++++++--------------------------------
+>  1 file changed, 27 insertions(+), 47 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I'd prefer fast_amd64 to avoid spaces
+
+What is the run time for this new, unified 'world' build? I just
+wonder whether splitting it might make the runs go faster?
+
+Regards,
+SImon
