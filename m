@@ -4,70 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9109FE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AB72E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:09:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11C2089772;
-	Mon,  9 Dec 2024 16:07:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C079889384;
+	Mon,  9 Dec 2024 16:09:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kwWI+VKv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oZCuDu7E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D27F8977B; Mon,  9 Dec 2024 16:07:23 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id EB5DF88E3A; Mon,  9 Dec 2024 16:09:34 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A46089384
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:07:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 821CE89784
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:09:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-434f74e59c7so12843835e9.3
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:07:21 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d0205bd5so3356584a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:09:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733756841; x=1734361641; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zxy/2Cvp+a27itXrH9lZYCzNB7NksP9WbjXRjWDNtEY=;
- b=kwWI+VKvRWLvbgJhIuHE5XIKZyN6oTJLMVdRd4Vo0wkocDPq4KHRjST3cDEyYjjQLa
- avS0GxBVaFcdwea7OWcCaALVEgXCXbsh8VfhKe3v0k7fn/QF9+KfyM4ipdLR6wSgWGfM
- J+jaUqQY5FLQEQXyP3aL6fDDhdv3zGSyfjwF8=
+ d=linaro.org; s=google; t=1733756972; x=1734361772; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bAFSUUQf5iQgXYsS502wlXN2eRIDfd2F/wBAXVWLSlQ=;
+ b=oZCuDu7ENaATT/HKw7xr2cXq4s1RhKu9XsuHmGKPYaOCWX5m8aAy4OBJzohXWzkBtP
+ 60F+DonOVmcbcbRAmwHqJtIljQI+tGeczkdyGMhIFM3IQJeiC3PR7DSTwlpWV1tg6X0b
+ HF7aa4UGfEIsFOaM8LZ1NAnU14z7wvfqeP9Omy3vjPLeLi1wFxZOBRjW/TlsA8GzCM7C
+ 9vRuSblde+hr5L6t1hrdNoxEgmYstyhEKkOvXGYzy7NrwSQULidafgNlbn0OZTScLGmX
+ 19ddOfTh8nfEppY4KX5ip9XjN8MafToLy1ChkSwP/EKmnethj8cE3zVGwAbnMDkNlVnY
+ KqyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733756841; x=1734361641;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zxy/2Cvp+a27itXrH9lZYCzNB7NksP9WbjXRjWDNtEY=;
- b=Y1hck0xL7PXeWsFoThX/El3qYmmWA7neMi5cith0Uzr+XFQyBXAv8CV83sqtUOT7o9
- hWpmJzco2jyh1ATgf56bWJMsNsvLtnID8z+N8+SAhVzxEujq7/7861IWg2fbPuzAZbBi
- VN7KBvvQAuvfjJ3aeomDCy2hO7ahuOxFtTmugbCsQjZe4C3mRIgNmW9R96VaYvTN0l3g
- /NfYOIzmcbTVmHTs6vcd9niiM2mIiq1fVI4YkER/tpvAsV0SqT6yRJxzwcy5S7d5bLyW
- qOYSKIiiivI3tgGOJr56Ul4HMKuV4XlOJq1cnGKwCUXPKWk667EM/zuactYnLGnO8ViP
- BUVg==
-X-Gm-Message-State: AOJu0Yz6G/qUgkaN41r8vNdFET4D4umsdLBmKYG8j/HwL/cuZXzYBJss
- 4tIlYsA2gLTUBt8gzWF9+3OjH7+JrakFo8mFthBxnNjh+NjwomqGNqlHcNq69raYKh6c1xQEo10
- 3goMCim/wnyaPC8cwD85hvg0PgPR7+7qXnGgci1hJIqA0u/8=
-X-Gm-Gg: ASbGncu05XmcgJ3/xmHgW9OsKqOKMrkDVAqNIePFjDq8Gtn6dPdosdgAssBQg9TnYOi
- J3g4nFLYDso2+v4HUBubMBGVbZ9rI2muQ
-X-Google-Smtp-Source: AGHT+IFYNNaqVtM0YQEAZJoDgyUFXklTuZifVJDBkRhPOwDQr2eBVFfqOHW3Vsh+Pf0w2DUHZy06WWRT/8nMODzo+iU=
-X-Received: by 2002:a05:6000:2ad:b0:386:256c:8e59 with SMTP id
- ffacd0b85a97d-386453cf83bmr827413f8f.3.1733756458453; Mon, 09 Dec 2024
- 07:00:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733756972; x=1734361772;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bAFSUUQf5iQgXYsS502wlXN2eRIDfd2F/wBAXVWLSlQ=;
+ b=kE3lKQsHHH6NgRr5PAIUP8kv3DMa/L8TbGsQMyo39ri06k457429bHL9Zxa4QaWxu0
+ AJ+sEBN8703aQp1l0hJ1IFu92IHKwC5F7DKh+aQ16G0SOGTZ1PBXaT3lbYm3FMyyKQSG
+ BtNRYBluzNRRLWy11XG06fsUMyR5SEmm09qQGc+WOdnbqugXzHRU+IdjosiVUIIhlU1W
+ wUCE0bskqlEKJXgKrr1E+qN8UNzVw1eoYlCgnjdcAlDI3Ilea/9yt0DxYUhAxdpSpaXb
+ rvz8VstmYj4MYtH8+/GiO4Tq23a/IILOcEH0D3hmGszZsG+nIwacZGnzSXAZVSOQFBaR
+ 4EdA==
+X-Gm-Message-State: AOJu0YxiDGIl3K54ph0I9y9Ftuk2oAdUhCu91LCarugBRYRmAls/Bqwm
+ CqDrzys3QwPAEwc1P85FqJ9I8fXGJ3tBisRJPcG/Xm2Od15xAZGDM83JUjI4MYLprUmHcB2GXdB
+ PiRo=
+X-Gm-Gg: ASbGnctAAj7vbB7JqxZBmujJ1NCDQaLVayrnHjqGU5W7tfxycqujoeWNuY3BH2L/qlp
+ 8GnYUFneOfE1desgWLk4LtaoWK4XoZFDWH9U1w5DT7mF8KE6YIQVnk/ZxeFrOuRJ+r+y6a5/v8F
+ OX89Lhu7yQ2aBYrcQnCknm2tabrEhk+PFOm1gFh2cog95WJ6daczy4mVgaXTL8BiQ4EiZUnh5Zs
+ 6wdhbuXLawLkr0GMT5VU0D9i19lZJq/xGCgrp3gsFIYZVSc4dOqkF2Mi6HQKwRmUvRBEfe5VpEE
+ Sm3x7FrfcDRVF5x2sdZVT2+qvcI8GrNa
+X-Google-Smtp-Source: AGHT+IEqX4IvRmex5WSJwqtwVWnMzhOm5+8YllbYSQXa/3Bo7jYRzNijhmDwvTBMS/3VPtlyjoiMEg==
+X-Received: by 2002:a05:6402:5215:b0:5d0:bde9:2992 with SMTP id
+ 4fb4d7f45d1cf-5d3be7f04aamr10866304a12.26.1733756971913; 
+ Mon, 09 Dec 2024 07:09:31 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d3ee6ddf5dsm2735891a12.86.2024.12.09.07.09.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Dec 2024 07:09:31 -0800 (PST)
+Message-ID: <5bcf5c84-9d45-4ae1-a3b0-613b800101fa@linaro.org>
+Date: Mon, 9 Dec 2024 16:09:30 +0100
 MIME-Version: 1.0
-References: <20241208190741.4192601-1-trini@konsulko.com>
- <20241208190741.4192601-10-trini@konsulko.com>
-In-Reply-To: <20241208190741.4192601-10-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Dec 2024 08:00:41 -0700
-Message-ID: <CAFLszThrSZbS_FqJ39CrBrtG1repE0bD-MnGOPhh31JPEfEuVw@mail.gmail.com>
-Subject: Re: [PATCH 9/9] docker: Update to latest "Jammy" tag
-To: Tom Rini <trini@konsulko.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] cmd: ufetch: Show CPU architecture under "CPU"
+Content-Language: en-US
+To: j.ne@posteo.net, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+References: <20241205-ufetch-v1-0-df861318bd49@posteo.net>
+ <20241205-ufetch-v1-3-df861318bd49@posteo.net>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20241205-ufetch-v1-3-df861318bd49@posteo.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,15 +101,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 8 Dec 2024 at 12:09, Tom Rini <trini@konsulko.com> wrote:
->
-> Bring us up to the current Ubuntu "Jammy" tag.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  .azure-pipelines.yml    | 2 +-
->  .gitlab-ci.yml          | 2 +-
->  tools/docker/Dockerfile | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
+Thanks for the patch!
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 05/12/2024 19:35, J. Neuschäfer via B4 Relay wrote:
+> From: "J. Neuschäfer" <j.ne@posteo.net>
+> 
+> When looking at ufetch output it isn't immediately obvious which CPU
+> architecture the presented board has. This patch therefore adds the CPU
+> architecture string (for example "powerpc") to the "CPU:" line.
+
+It would be nice to have the proper fancy name, but this is an
+improvement nonetheless.
+> 
+> Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+> ---
+>  cmd/ufetch.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> index 7aed0b447bda104b837d37c6adcbb21b80237aba..0ee50bfb606aa2223072c63cd46b3a70ef5449fd 100644
+> --- a/cmd/ufetch.c
+> +++ b/cmd/ufetch.c
+> @@ -188,7 +188,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+>  				if (ofnode_name_eq(np, "cpu"))
+>  					n_cpus++;
+>  			}
+> -			printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
+> +			printf("CPU: " RESET CONFIG_SYS_ARCH ", %d (1 in use)\n", n_cpus);
+
+This will read like
+
+CPU: arm 4 (1 in use)
+
+which is a bit hard to parse at a glance. How about
+
+CPU: arm [4 cores]
+
+or some other separator between SYS_ARCH and the core count?
+
+Kind regards,
+>  			break;
+>  		case MEMORY:
+>  			for (int j = 0; j < CONFIG_NR_DRAM_BANKS && gd->bd->bi_dram[j].size; j++)
+> 
+
+-- 
+// Caleb (they/them)
+
