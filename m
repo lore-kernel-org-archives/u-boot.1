@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA1C1E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 21:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FDAE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 22:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDF5E88EAB;
-	Mon,  9 Dec 2024 22:39:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 80EE48979C;
+	Mon,  9 Dec 2024 23:09:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PpAQHLjc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Or+wNwRi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C28289420; Mon,  9 Dec 2024 22:08:33 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 024FE897A3; Mon,  9 Dec 2024 23:09:56 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFFF18932E
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 22:08:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F00A89798
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 23:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon.anavi@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4676f1a43dfso6664651cf.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 13:08:30 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4675feed835so14233671cf.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 14:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733778510; x=1734383310; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=OSPu06kKwMljsJtDaDqQdNZuIV6PusENKfLkpYNKRdU=;
- b=PpAQHLjcz6YzmjJkekMRQoOuouXev97OGAO9oFPwExa55BE5N2/fCbFSH6dWZ8tH4j
- icDDvs6E7egjqXgnSceYzcYpntFJyx9kV2daJLJ2F2/JEPL+hr3pCbAwdryAkh27YxMO
- O1UeuNpZ63orU2EVTS0cqKJhp08RPdDSR/OxQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733778510; x=1734383310;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ d=konsulko.com; s=google; t=1733782192; x=1734386992; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
  :from:to:cc:subject:date:message-id:reply-to;
- bh=OSPu06kKwMljsJtDaDqQdNZuIV6PusENKfLkpYNKRdU=;
- b=ah59KjpuX/xSmfSP12Pa88ttIyBS65ot6M4cGmnEHrbr4qcgxel7XDWPGC8D6Tjqzf
- uPum3nW51bsh0cp5X12CRUV0u9QANSy5+F2/+muDNzzK4xYQCFwWanbWSpNG8f3NSanw
- XPD7w5kCiVd0rpHBokkCivuHHYtEqhzClYUBDbj5+5H8A+vZ84ePAT12LHoJjQ9ezZw/
- PaPEkTZGyV55pyKLxY25RDkyePAFcA+qtipf6EnLxMDZGciut9Elp7IQZLsK71GEZqQD
- CJJ/rnzU9og+hYdOsvFWVJWgvaIxcSHZOnsBj3k6xYTm6rTRzn4buVcxlbHZ33F86osc
- 15zw==
-X-Gm-Message-State: AOJu0Yz3bLkbJjMRi8R7JgqzyysLHXs0F4yDQFc7cl2pJt/Q8Z8HJ8bo
- I1F407RMoyAUcgxL2vAAxcCT/ibB9abaQ90RgN3XorVL15IoZvP9pY0VOlWfb4m1Sq+9WAyG8Lq
- e8px+mqhLorjRpUkGGMIH1gxfbRtxlTcL4pwZZw==
-X-Gm-Gg: ASbGncuSoQG9E4d74VzzJSgSIOG2UBBWfQ87/q+y7NBS+ItqiITkXu+rSDR9jeLGw7O
- 4I8wv4iRMmh6KATPQea30LyT0zsocYfE0yxzt
-X-Google-Smtp-Source: AGHT+IHNRDWdaVnmbXaBwfZP1Fq1rdNy0Y3luIvPz9WknUxvzF5KnYHjhXpH4IUe6P+0WLzKCu6RN966e4CYBIaR2Z0=
-X-Received: by 2002:a05:6214:240f:b0:6d8:7a52:5d5 with SMTP id
- 6a1803df08f44-6d9212b7673mr14957126d6.6.1733778509798; Mon, 09 Dec 2024
- 13:08:29 -0800 (PST)
+ bh=PAOR3JYJw/c84Vykg4xfjHz0FExS4WCVxIDjyI6btws=;
+ b=Or+wNwRiHfslfAsoWS95V9usF1a6aYcKRqw/8OccruULZxxtpiAoPo4Yr9Duss2KEZ
+ NabUPZp2HTeNZMiYVSqMyS48qk5RhEo7S3B0XbL3dyRambkQ+3/8yoV3U9jfqwqHbx0j
+ A2+JMXMuCO8DgDbdEFeuQ9o0eyOHSqfTMp+W4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733782192; x=1734386992;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PAOR3JYJw/c84Vykg4xfjHz0FExS4WCVxIDjyI6btws=;
+ b=H2v+UwYdjlMBBWiJUsnt1TfhriwklTenBLFuFQd5/hpA5IYYsNP0v6tY6fU3Y4bcIx
+ S9MOG8zRdAtZieErywXZPY5aCRA25YniSqmvoPnP3masIKYgBT4IJ+XzWsW2YpueAylv
+ saf6HZAYHIhoGcHa2m+PRNF5G4Bv1Lan6dFGNfRSEDB1aP5qZhyjYIkZNBumWaZ/g50M
+ fwLWirN+/4SFJwU0NEpKNDndNWmzajiDujsse9lfbQc4GcaeXHi+602yOfRCEE1XAWOA
+ QNdhvTM8+M/besrNP6ViSWvDgPprh/cqvA8hvjfpcQP+PjFjO0DbaWHjrHo5MQuC0kwT
+ tVwA==
+X-Gm-Message-State: AOJu0YwrCoLubZQ00AGx6J6QHqSqiY9tGOqOl/cfYKUkpT+ZCyakim0k
+ BgAcPAsNtj5HbVdtEVQ64JVlT106uo5q5T7qhSzzY7dTsFlIx4W2Dn6hbdcDKvGyfrar97A3Mkg
+ p4MQ=
+X-Gm-Gg: ASbGnct0zTrR/CfgqfxUpNvCWWc97vTmqwDFHgi615rqedICig0lZfgJuRGPI5SegDF
+ KmLfRvl4mDXFEwjff9fF+h7+O1lB36wYZ1THS7v2RBLOw7mSlETgfVaqTvqVglGNNSLlOJx/cIa
+ 1/f673+2DILnKY9dhK8drIujdZLUcvrQE3ELGSP2hn45ONlbkAX3g9kLejNaX8ZB7kU4fjCWMHM
+ aM3l+uhrH5Icpc8aiRs4LxPTQUgrzIAqdfl/ZcDbYBocR7XEmXk
+X-Google-Smtp-Source: AGHT+IGp11GY2xcGCKYNsZMpoa6PfyP+Lg8r/P7Qz3rTu1daTRH/DRFrl0yaLxrqtpR/yuQaTDqBdw==
+X-Received: by 2002:a05:622a:5d3:b0:467:681c:425c with SMTP id
+ d75a77b69052e-46771eaf019mr34993221cf.1.1733782192048; 
+ Mon, 09 Dec 2024 14:09:52 -0800 (PST)
+Received: from bill-the-cat ([187.144.7.203]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-467557cd7desm25183591cf.27.2024.12.09.14.09.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 14:09:51 -0800 (PST)
+Date: Mon, 9 Dec 2024 16:09:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2025.01-rc4 released
+Message-ID: <20241209220948.GY2457179@bill-the-cat>
 MIME-Version: 1.0
-From: Leon Anavi <leon.anavi@konsulko.com>
-Date: Mon, 9 Dec 2024 23:08:19 +0200
-Message-ID: <CALtQ3O2jF6sEvofpZ+FtJgmgTKZvNRuohnwEtPz4ES0WqtxU5g@mail.gmail.com>
-Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, lhristov@gmail.com
-X-Mailman-Approved-At: Mon, 09 Dec 2024 22:39:47 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qG3fYUqEm1mwNIoy"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,26 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-Commit ffb0294 from 12 November 2023 that simplifies early PMIC setup
-conditions causes issues on Cubieboard 4 and Merrii A80 Optimus with
-Allwinner A80 SoC (sun9i). The commit was introduced with U-Boot 2024.01
-(rc3) and remains as of today. Because of it both of these boards hang at:
+--qG3fYUqEm1mwNIoy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Starting kernel ...
+Hey all,
 
-Older U-Boot versions without this commit work fine. As a temporary
-solution I reverted commit ffb0294 and this way the boards boot
-successfully. I tested this work around on Merrii A80 Optimus with several
-U-Boot versions, including with U-Boot 2024.10.
+Once again it's release day and so here's v2025.01-rc4 and I'll update
+the -next branch soon.
 
-Lazar, a friend who owns Cubieboard 4, also tested and confirmed his board
-boots with U-Boot 2024.10 if this commit has been reverted.
+Right now, in terms of regressions I'm tracking there's the Tegra
+related PMIC issue that Svyatoslav is working on, and seemingly still
+some SPI related issue that we need a hopefully "simple" patch for, so
+that we can unbreak platforms that worked previously. Otherwise we might
+have to revert a bunch of those changes at this point and try again next
+release.
 
-How to fix this? Is there a known configuration that can be added to
-Merrii_A80_Optimus_defconfig and Cubieboard4_defconfig to avoid hanging
-with the existing source code from commit ffb0294 ?
+In terms of a changelog,=20
+git log --merges v2025.01-rc3..v2025.01-rc4
+As always, more details in pull requests (or the tags referenced by
+them) will result in more details here.
 
-Best regards,
-Leon
+At this point we have two more rc releases to go, one on the 23rd and
+one on the 30th, with the final release on the 6th of January, 2025.
+
+Thanks all!
+
+--=20
+Tom
+
+--qG3fYUqEm1mwNIoy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXaqwACgkQFHw5/5Y0
+tywT0gv9GQpGbYhRQwDlRtcc2pMp6iT431M+x2xa/YXhht6s0smtXX5DLig4JOGR
+3HzKPKtIwlmxCqBRT5cRrBGastX9Wj0WImIUdd2qK6ZPP0tT25ftG3fHa9gQUPZs
++OrvEVLPoaok7PKK0LL7y4Gv/dKKMR2PKRBq12ndahlPfJZQgXNf4pvau9JZ9T5a
+WaK7yld2Sko2gdJmuSnIma436XOVBacwCB2lodFPbzZF9uygWhJHfGzuNX+wWXbB
+ZIU2/lhxTUPTfgykz0P+UHUUPdMpsdqKqHwqqrqhAjiiybEeByigjMCnSLGYwN4p
+Vor19lajfvnr2Dr9BVgBO2HwEuIliLyyszmueY4RxeArf25fJW439BIyzLWvdkoH
+Gr5dIeyjIUlsSLT+XXi/26cFKMFJH9vP/qWEg59crgekHSBrMy/J1bwDEqGzzlMd
+UWY07ksAjwvhnVU3snHuDfB2nb2DUWwpeUvh2t28YyGwmoRFAAy+Od02V4K0eei6
+fVAZdrSV
+=VQyM
+-----END PGP SIGNATURE-----
+
+--qG3fYUqEm1mwNIoy--
