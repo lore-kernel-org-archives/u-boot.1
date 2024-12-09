@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025CCE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 19:27:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C0E2E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 19:27:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EFFD88E32;
-	Mon,  9 Dec 2024 20:27:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF2768978D;
+	Mon,  9 Dec 2024 20:27:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FiBLQVG2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VjtvpbTZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8387E89786; Mon,  9 Dec 2024 20:27:33 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id F0F3C89786; Mon,  9 Dec 2024 20:27:41 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71CF188A43
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 20:27:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A804F89798
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 20:27:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa560a65fd6so858995066b.0
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 11:27:31 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa670ffe302so318368666b.2
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 11:27:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733772451; x=1734377251; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733772459; x=1734377259; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dpqSz3jqCaHG/GlnuQN0/AMRlEPfgTkDggcRVikiLQE=;
- b=FiBLQVG2RaPheRzspO52QoSHG8peiwhzU7fOJTRurVB95WGhNynxQdNKVhMlihrKN5
- B23pvMKLbp2tGhBpeTdC0nt4fpQLHGJMFGAhKMc4bPM3Tob3WCKotbILPAjLL9fKXSkP
- IyBjmZZMNcTsgHfws5wSVjusMJNnpPrlE+Vnc=
+ bh=yq6k9hoFgQOzq3UA9Sq9G4/3ZgN3kgv9s4o2wJ8L0d0=;
+ b=VjtvpbTZzXKcI1NcJwgJ02/cCb6EaKdHTa5PhGw2tXTivWi/Lzmac5i+atQN4TrGi1
+ mMC84Ck8SQfHKBEPecYxuWO72NgBZ0peZI1/ZcZSufpLy/m2JlIrjC9kKEpIqCnTsRYh
+ HRntjIt6zy0qVCdH5p6EtQ2dm9SNWXNxwXnTE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733772451; x=1734377251;
+ d=1e100.net; s=20230601; t=1733772459; x=1734377259;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dpqSz3jqCaHG/GlnuQN0/AMRlEPfgTkDggcRVikiLQE=;
- b=qFk0P0ud+naaE75fIHnHiZg6Pti0E109irZz9rDbAn6U88dxgQgONancqRHal2diFW
- 8E0DGRzVS3gV3GPlbgxKyPwx+xgcvrmuSOl7vDyvwJvaKshbfR0PimXAEGFtxJjjlsU5
- MneHbIJMhvZmfh0lXe3BxKnVx4988r29xx0qjV+jAS0R8nqfx3det9B5zOEtfyc7Op20
- 20VtzgMMVPIjD/BX3gJiw+GJv2h3k3I6No5SJ27Oc74zSgT8iKOLKMkZ7FGgjC+mKa+K
- A77/S54kqmXCQQWHQJxqqOYQpkHd3jBA23tihneBxJpXhWX9UuYBV6zsdpKNKyxU5QZa
- 0csg==
-X-Gm-Message-State: AOJu0YwQQLofUlKoCTPat2U370YjXXWulULZ5gfnIEluLulwB2hw988Y
- k7g8KYZBZsv6+w99lhOpKSUehJ3g5MFHo8vMRSXqyIbLOlxVmQA8lNioCHBh3ZQc9y4740gsujO
- V/H6WTh1+eo5rXflPRlBgMT0UDvUnreuk9INO
-X-Gm-Gg: ASbGncs2bhm5GqK9U0/MDjiokg67KpTl9w9N1V0WdHwh8k3EP8CBTvbPOG8LI7d2kuc
- YtxOTVVly49mVnlPyilLvVAYJ2+eMuTNPcns9
-X-Google-Smtp-Source: AGHT+IHtPortlF4JWSzOL9xf8Qep3sh+fqUGE+Xt8/AeKwoxl09E8Nr/PPnjT+dZ75lYMA6fk3zshRYucStU6sL/Om8=
-X-Received: by 2002:a17:907:c26:b0:aa6:1afe:b0a5 with SMTP id
- a640c23a62f3a-aa69ffdad93mr54316266b.2.1733772450851; Mon, 09 Dec 2024
- 11:27:30 -0800 (PST)
+ bh=yq6k9hoFgQOzq3UA9Sq9G4/3ZgN3kgv9s4o2wJ8L0d0=;
+ b=IzkiINXlOQDkcsvY1t8Aj2QoJf5bjMq1en2D3UQ8JbmmSL0RGwkgtr7d9/MMTkfvqp
+ 3idAMY8myNYEANpxBx7/yNRS9TLBy3EUhJnPXb23VspGzNHMITa8Wj4RJt519FStNZqb
+ J/3D+iZCsIRgJtA3/XLTfwGbU8xNrwrb/MGlpHopOX6O3guTf1vSw6t09iDq2L9NaG9M
+ f3drmHVxjr1J/qx39tYXgvge7gsrPAPCsXH+FpIbxyMwwlP5vdew+yPE7Gu7DOVfOsY6
+ cMf7Ul0jSHFRMPo2S47wbPObKw62omwag25iB4Tv7Q7UEAAzJ/Uq5CtPq8+HQpDPzpSv
+ L0Rw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWQ7TaxF91UziH0lZyjtiZlqItjn+3c2QkqZ7k6TOSLdNnLDMcuxYaorq5GSsBGo3jHWU99Xqo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBCXISAAD3ysab8U35FhaT274aczURqjFN6h7kip3+jabz9Y3Y
+ BKeTqCbXwNI3TsdjT7dYj6Jc7A2fg8EiZOcQbChXeVSzuGXgw3e4u5/eWhEFtmxrx3MSNaWZVKd
+ 0F5u8q7ue0bK/aPrqMSTqegkXdCdK3Jzi8eB+
+X-Gm-Gg: ASbGncsXQ6LDTdVuecxtZ0sjf0YB9XBW8VD0jmOuQJSYyJyNzIcA7M/FTFy3BR6Ao2p
+ xarv3FuV7+VeUqoYOIgEtsWJWm8kZbbuU/iMD
+X-Google-Smtp-Source: AGHT+IEYm/kJQRnUiIjavtjwvNi9LcnVnrAVR5rwUJErLXJuC909DrONk2Ni4BwMZBdm0HgfXB/avgIm4l1PSdEqrXg=
+X-Received: by 2002:a17:907:9145:b0:aa6:8f39:5c with SMTP id
+ a640c23a62f3a-aa68f3913c7mr382792566b.17.1733772459133; Mon, 09 Dec 2024
+ 11:27:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20241209182002.671953-1-sjg@chromium.org>
- <20241209182002.671953-6-sjg@chromium.org>
- <20241209190202.GU2457179@bill-the-cat>
-In-Reply-To: <20241209190202.GU2457179@bill-the-cat>
+References: <cover.1730452668.git.michal.simek@amd.com>
+ <f79dc1fbf796dd5ad290f6080608ee68d7652cfc.1730452668.git.michal.simek@amd.com>
+ <CAFLszTiWOdsS8=pm7aSvyC2QYiXbbsciz2yb6s9YPV1FeFFrgg@mail.gmail.com>
+ <2ee46698-87c9-47e3-8951-41ac3c50331a@amd.com>
+ <20241209153216.GJ2457179@bill-the-cat>
+ <CAFLszTjb23qYBS2YDWjTJDFtJ2OnZZ5OQG56i9DBu_NeUT=FzQ@mail.gmail.com>
+ <b5145a88-aea0-43c1-8fa0-fe533bd9d169@amd.com>
+In-Reply-To: <b5145a88-aea0-43c1-8fa0-fe533bd9d169@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Dec 2024 12:27:18 -0700
-Message-ID: <CAFLszTgqahZeBccxEt+DUGy2CivC3ed-v8Dd1qR8SZ2mfyRoow@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] rpi: Use the U-Boot control FDT for fdt_addr
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@wwwdotorg.org>, 
- Stephen Warren <swarren@nvidia.com>, Matthias Brugger <mbrugger@suse.com>, 
- Francois Berder <fberder@outlook.fr>, "Ivan T. Ivanov" <iivanov@suse.de>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Date: Mon, 9 Dec 2024 12:27:27 -0700
+Message-ID: <CAFLszTgR7A5N5NOpE0HX0j-DqQ5QqLR=391Y5tEJ00HPFfshTw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] common: binman: Calling initr_binman() when
+ BINMAN_FDT
+To: Michal Simek <michal.simek@amd.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, git@xilinx.com, 
+ neal.frager@amd.com, Christian Marangi <ansuelsmth@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,104 +97,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI Tom,
+Hi Michal,
 
-On Mon, 9 Dec 2024 at 12:02, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 9 Dec 2024 at 11:34, Michal Simek <michal.simek@amd.com> wrote:
 >
-> On Mon, Dec 09, 2024 at 11:20:01AM -0700, Simon Glass wrote:
 >
-> > The fdt_addr variable is used in extlinux as a fallback devicetree if
-> > none is provided by the boot command.
-> >
-> > The existing mechanism uses the devicetree provided to U-Boot, but in
-> > its original, unrelocated position. For the rpi_4 I am using, this is
-> > at 2b35ef00 which is not a convenient place in memory, if the ramdisk
-> > is large.
-> >
-> > U-Boot already deals with this sort of problem by relocating the FDT
-> > to a safe address.
-> >
-> > So use the control-FDT address instead.
-> >
-> > Remove the existing comment, which is confusing, since the FDT is not
-> > actually passed unmodified to the kernel: U-Boot adds various things
-> > using its FDT-fixup mechanism.
-> >
-> > Note that board_get_usable_ram_top() reduces the RAM top for boards with
-> > less RAM. This behaviour is left unchanged as there is no other
-> > mechanism for U-Boot to handle this.
-> >
-> > In version 2, it incorporates some changes to fdt_addr, etc. suggested
-> > by Tom, as well as adding myself as a maintainer.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v2:
-> > - Drop patch to allow expanding the devicetree during relocation
-> >
-> >  board/raspberrypi/rpi/rpi.c | 20 ++++++++------------
-> >  1 file changed, 8 insertions(+), 12 deletions(-)
-> >
-> > diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> > index 9122f33d88d..8f6ab1b1b9b 100644
-> > --- a/board/raspberrypi/rpi/rpi.c
-> > +++ b/board/raspberrypi/rpi/rpi.c
-> > @@ -3,6 +3,8 @@
-> >   * (C) Copyright 2012-2016 Stephen Warren
-> >   */
-> >
-> > +#define LOG_CATEGORY LOGC_BOARD
-> > +
-> >  #include <config.h>
-> >  #include <dm.h>
-> >  #include <env.h>
-> > @@ -325,19 +327,10 @@ static void set_fdtfile(void)
-> >       env_set("fdtfile", fdtfile);
-> >  }
-> >
-> > -/*
-> > - * If the firmware provided a valid FDT at boot time, let's expose it in
-> > - * ${fdt_addr} so it may be passed unmodified to the kernel.
-> > - */
-> > +/* Allow U-Boot to use its control FDT with extlinux if one is not provided */
-> >  static void set_fdt_addr(void)
-> >  {
-> > -     if (env_get("fdt_addr"))
-> > -             return;
-> > -
-> > -     if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
-> > -             return;
-> > -
-> > -     env_set_hex("fdt_addr", fw_dtb_pointer);
-> > +     env_set_hex("fdt_addr", (ulong)gd->fdt_blob);
-> >  }
-> >
-> >  /*
-> > @@ -572,7 +565,10 @@ int ft_board_setup(void *blob, struct bd_info *bd)
-> >  {
-> >       int node;
-> >
-> > -     update_fdt_from_fw(blob, (void *)fw_dtb_pointer);
-> > +     if (blob == gd->fdt_blob)
-> > +             log_debug("Same FDT: nothing to do\n");
-> > +     else
-> > +             update_fdt_from_fw(blob, (void *)gd->fdt_blob);
-> >
-> >       node = fdt_node_offset_by_compatible(blob, -1, "simple-framebuffer");
-> >       if (node < 0)
 >
-> Have you tested this to make sure that assorted overlays specified in
-> config.txt are still passed on correctly to the kernel? Or do we end up
-> being OK here due to board_fdt_blob_setup() meaning that we set
-> gd->fdt_blob to fw_dtb_pointer much earlier on, and that hook simply
-> didn't exist back in 2016 when commit
-> ade243a211d6 ("rpi: passthrough of the firmware provided FDT blob")
-> introduced some of what you're removing here?
+> On 12/9/24 16:47, Simon Glass wrote:
+> > Hi,
+> >
+> > On Mon, 9 Dec 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Mon, Dec 09, 2024 at 04:26:15PM +0100, Michal Simek wrote:
+> >>>
+> >>>
+> >>> On 12/6/24 20:20, Simon Glass wrote:
+> >>>> On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
+> >>>>>
+> >>>>> Calling empty function when BINMAN_FDT is adding +64B for nothing which is
+> >>>>> not helping on size sensitive configurations as Xilinx mini configurations.
+> >>>>>
+> >>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >>>>> ---
+> >>>>>
+> >>>>> Changes in v2:
+> >>>>> - new patch
+> >>>>>
+> >>>>>   From my perspective there is no reason to call empty function. It is just
+> >>>>> increase footprint for nothing and we are not far from that limit now.
+> >>>>>
+> >>>>> ---
+> >>>>>    common/board_r.c | 7 +++----
+> >>>>>    1 file changed, 3 insertions(+), 4 deletions(-)
+> >>>>
+> >>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>>>
+> >>>> This is a bit odd, though. Do you have LTO enabled?
+> >>>>
+> >>>
+> >>> yes LTO is enabled. And there are other candidates like this.
+> >>> Is LTO able to fix function arrays which is calling empty function?
+> >>>
+> >>> (without this patch)
+> >>>
+> >>> 00000000fffc0eb4 <initr_of_live>:
+> >>>      fffc0eb4:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0eb8:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ebc <initr_dm_devices>:
+> >>>      fffc0ebc:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ec0:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ec4 <initr_bootstage>:
+> >>>      fffc0ec4:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ec8:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ecc <power_init_board>:
+> >>>      fffc0ecc:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ed0:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ed4 <initr_announce>:
+> >>>      fffc0ed4:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ed8:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0edc <initr_binman>:
+> >>>      fffc0edc:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ee0:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ee4 <initr_status_led>:
+> >>>      fffc0ee4:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ee8:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0eec <initr_boot_led_blink>:
+> >>>      fffc0eec:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ef0:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0ef4 <initr_boot_led_on>:
+> >>>      fffc0ef4:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0ef8:   d65f03c0        ret
+> >>>
+> >>> 00000000fffc0efc <initr_lmb>:
+> >>>      fffc0efc:   52800000        mov     w0, #0x0                        // #0
+> >>>      fffc0f00:   d65f03c0        ret
+> >>
+> >> No, but maybe Simon would prefer if we marked all of the could-be-empty
+> >> functions as __maybe_unused and did:
+> >>          CONFIG_IS_ENABLED(BINMAN_FDT, initr_binman),
+> >> etc in the list instead?
+> >
+> > Yes that looks better.
+>
+> But we are talking about using macro inside array at best with using #ifdefs.
+> Or maybe I am not seeing what you are saying.
+>
+> >
+> > Michal, see also [1] in case you can work out why it 'stopped
+> > working'. I could have sworn inlining the function was a win when it
+> > was applied, but no amount of toolchain juggling could make it be a
+> > win when I came back to it later.
+>
+> Are you saying that it worked in past?
 
-No I have not tested what happens with overlays, but I believe they
-are handled by the pre-U-Boot firmware. U-Boot certainly doesn't look
-at the config.txt file.
+I wasn't able to verify that post facto, but I believe I do remember
+checking it at the time. If you read the original commit message:
+
+47870afab92 initcall: Move to inline function
+
+    The board_r init function was complaining that we are looping through
+    an array, calling all our tiny init stubs sequentially via indirect
+    function calls (which can't be speculated, so they are slow).
+
+    The solution to that is pretty easy though. All we need to do is inline
+    the function that loops through the functions and the compiler will
+    automatically convert almost all indirect calls into direct inlined code.
+
+    With this patch, the overall code size drops (by 40 bytes on riscv64)
+    and boot time should become measurably faster for every target.
+
+    Signed-off-by: Alexander Graf <agraf@suse.de>
+
+Despite this hopeful sentiment, I seriously doubt any improvement in boot time.
 
 Regards,
 Simon
