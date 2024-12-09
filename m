@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D36E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0768AE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 15:53:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3853896FD;
-	Mon,  9 Dec 2024 16:51:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77DDB896FE;
+	Mon,  9 Dec 2024 16:53:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cjPSF4EX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lbGYRhkV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E34B8896FE; Mon,  9 Dec 2024 16:51:34 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id E039C89700; Mon,  9 Dec 2024 16:53:44 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27C5A896F9
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:51:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A81B8896F9
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 16:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6dd0347dbso19157085a.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:51:32 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-466879f84ccso35162341cf.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 07:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733759491; x=1734364291; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1733759621; x=1734364421; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yaIlHpVM0IL2rgku/2fLYCWWKrwc5lSbKpy3YlcK/zs=;
- b=cjPSF4EXyS0W5nuSarpe06wU7WcYJXE5oYV3Vd71konUfk1B4Yku/9Gna6lj1J5pdQ
- 3meJIa/H5DDAT+Qiqe6CqTJ7xr45sf4dU89s2qma+/mCoHlYPCn83RZStJB6elVgNKri
- ymjMeYzsbjSUnfk6Ew2I63Fn9ET/9rZMoa5iM=
+ bh=xZ54UMw+ppPf2caIAudhVlIdIHv9jffoGgKG8yM6hRI=;
+ b=lbGYRhkV+jPUSc5eQOL3YucX9pXyKfdS6zPH18UnrSo//6mAlziMDm028qD030iTDY
+ bQxe7yPhYaJQHCmI/4NCYqoIsMHaGVV8KAlc4hALbwDUTtsojhRdSoD2Qa9N4RcirTsT
+ DdQvchd+rROav0xyD+DSQxt1WOzQJzhtp53kE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733759491; x=1734364291;
+ d=1e100.net; s=20230601; t=1733759621; x=1734364421;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yaIlHpVM0IL2rgku/2fLYCWWKrwc5lSbKpy3YlcK/zs=;
- b=oNOsTRb0RMsYOhhmcmKdy41awIEINnFjp3h9hYnJwscYzl1trEiUBP1buC7PQv5oiJ
- cujufI2zlFag0SV0an7u6/kH6eJqj8uC4Q0XkGzpkKZ2xXqZ6ndiRH0q2LQn50VmXoOT
- /akvOynIwk5nbozFtBALqchpJVYdQ7ub0EgUGWYl+ZaDc+UMaKoxqTpW6WKfZZoqo+BT
- BjjUjjDyZ7IU8Au5Jlyh4jVvDZ9ld/XXiaM6MrUYaM4eAb2shvndNhXtBg7Z8OyT3SyG
- UyjBVukNu9sbbHc0EYMGaTdhAyJMarOoEXU5EeDyIR988IfdlCc6VTtCWx2WRX7Mt193
- z3UA==
-X-Gm-Message-State: AOJu0Yzi5rgIwy3kRqa1Z/qMYoEO+NgrZSxJ9iLZc5kJx26NnHoticA6
- vwX7oZug+AQLZtLrF/AAqOH8hHFWGH9y00i5GzleLhp9pediwnKU6Q4qwgQTPNw=
-X-Gm-Gg: ASbGncuqjP5qIyKDqvgxv+BBG6EZOg7rvEsrrN1hy8TtAR4vVkla+GTQKCOy030/HBU
- ZEo5xdVpWn6hvIj6uwcbYr5tUBt9rRby8GeVDu6uANUhioXfCDexETg34rch1zuGKH4EsTZzm2y
- SziZFX6X8GMyHjOEB5DL3s8ldpL4lfciCFjED0V+I9D2ouyEUYk5CjSQLVWCrlY66n4y0FlvMjC
- 5Pr5VYyCBTaXIGHARQVwK9yw9bMowX9sBSYXE9zq2G8WDyp6u0=
-X-Google-Smtp-Source: AGHT+IFo+8ln7BMWjWV7QkjU5zmIej35KlsLBVuEMvFdAv0Q55ZOgPrz/hP/RjPCZgq1YYTipnBWiA==
-X-Received: by 2002:a05:620a:4084:b0:7b6:d9d2:d265 with SMTP id
- af79cd13be357-7b6d9d2dd99mr315008085a.57.1733759490973; 
- Mon, 09 Dec 2024 07:51:30 -0800 (PST)
+ bh=xZ54UMw+ppPf2caIAudhVlIdIHv9jffoGgKG8yM6hRI=;
+ b=P+gx3XWVQrdCrJi9RsklFosZwFwP1xl8AmzQ3hbYdJPPcDYzHQtNju87IzjhyGImWS
+ 2hk05cE9BqVoA0xNoVDEEtbt7e/1hQ/1mDoIDEC5WS3lssCmOTiv4YvXpOisze8nQwcz
+ S/SniBHAg+RPlzGiQfP9TcoPxalXjzeTc0zhr5pWvCT/YgwZSyHPMuh4plts5TIrOw4F
+ IxiTMBoy5j6E24ueL3jnOiKDfyk/q/jeUIwSc+2thoSFl9NbqqqR7VePyAoVfKX60m/I
+ 5NTq9i2aiTaNsrZuOgZ0deIdNYRXleND6PsKIsm41GFw1TfL7oT2FnfVndFYSAcX1gPD
+ o7jQ==
+X-Gm-Message-State: AOJu0YzWcOOUBXL0Xy44UJf/AOG4YZSqT1TvrUajRigKgwQpkHRd4KIX
+ byiynDLs9ZvIA8Z5p7uT2jtjlj/ckKbW85vFCDcPtah/Bl0LiMUFEshqmmf7Q94=
+X-Gm-Gg: ASbGnctnB9uEhty4DgGVKvM7Vnis8KLTjcYLr8KNVYe27nS2hcdl1SnLkvozoznYvOU
+ PCvW97ZGanmR1eYJA6t6dhZyPYa8FOskJiThbMIjt9YQMnKAVAbkHei8JCt/Qsemn9kyTkg8IO6
+ G4eXrvzSaK9pgjll+e7GJ7XaNvxXa3OCRzgujQ1HL2k/+AIheeRQrZhkCNQ4aNdXGTczk0MsQQ6
+ FoBIolVa5yGxk6rGq90j1M31QPA58PARz26RKQq7xxcQ43/M+8=
+X-Google-Smtp-Source: AGHT+IErDB0mJEKqFYC9fvZh42RZAtGECa/fXbohGoJQ1nAABae7Iq7YmQJxXxRSVt/Yrz5Ciby0aQ==
+X-Received: by 2002:ac8:5fd3:0:b0:467:66e5:71ae with SMTP id
+ d75a77b69052e-46766e5741cmr48913771cf.16.1733759621482; 
+ Mon, 09 Dec 2024 07:53:41 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.100])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b6b5a468b9sm453409085a.13.2024.12.09.07.51.29
+ d75a77b69052e-4675fc8fea3sm15382381cf.85.2024.12.09.07.53.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 07:51:29 -0800 (PST)
-Date: Mon, 9 Dec 2024 09:51:26 -0600
+ Mon, 09 Dec 2024 07:53:40 -0800 (PST)
+Date: Mon, 9 Dec 2024 09:53:38 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 3/9] GitLab CI: Make wider use of tags
-Message-ID: <20241209155126.GK2457179@bill-the-cat>
+Subject: Re: [PATCH 0/9] Enable arm64 host support in Gitlab
+Message-ID: <20241209155338.GL2457179@bill-the-cat>
 References: <20241208190741.4192601-1-trini@konsulko.com>
- <20241208190741.4192601-4-trini@konsulko.com>
- <CAFLszTjyqf0bctZ0aY2r2+kQD07q1fnJ38E0DjuKcqU9+B6skA@mail.gmail.com>
+ <CAFLszTi4wvZBVVXtx_Gj2mSFy827DUxKtcEOxocT558=XGmQBQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="auh+95ugju+eGw6w"
+ protocol="application/pgp-signature"; boundary="XLF5KSytR63Drtoj"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjyqf0bctZ0aY2r2+kQD07q1fnJ38E0DjuKcqU9+B6skA@mail.gmail.com>
+In-Reply-To: <CAFLszTi4wvZBVVXtx_Gj2mSFy827DUxKtcEOxocT558=XGmQBQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,62 +95,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---auh+95ugju+eGw6w
+--XLF5KSytR63Drtoj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 09, 2024 at 08:00:42AM -0700, Simon Glass wrote:
+On Mon, Dec 09, 2024 at 08:00:33AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sun, 8 Dec 2024 at 12:08, Tom Rini <trini@konsulko.com> wrote:
+> On Sun, 8 Dec 2024 at 12:07, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > First, introduce DEFAULT_ALL_TAG, DEFAULT_ARM64_TAG, DEFAULT_AMD64_TAG
-> > and DEFAULT_FAST_AMD64_TAG and remove the previous DEFAULT_TAG (as
-> > anyone making use of that will need to adjust their jobs). This allows
-> > us to say that some jobs can run on amd64 or arm64 hosts under the all
-> > tag, while some jobs must run on amd64 (the Xtensa jobs due to
-> > binary-only toolchains and sandbox for now) Then we rework the world
-> > build stage to only run on our very fast amd64 hosts, or our arm64 hosts
-> > (which are also very fast). This should result in a similar overall
-> > build time but also a much more consistent overall build time as we
-> > won't have the two big world jobs possibly run on our slower build
-> > nodes.
+> > Hey all,
 > >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  .gitlab-ci.yml | 74 ++++++++++++++++++--------------------------------
-> >  1 file changed, 27 insertions(+), 47 deletions(-)
+> > First, thanks to Simon Glass and also Linaro, we now have access to a
+> > few fast arm64 host machines in our Gitlab instance, to use as CI
+> > runners. This series finishes the work that I pushed earlier and Simon
+> > had started that enables arm64 hosts to be used for most things now.
+> >
+> > The first notable change, especially if you use this on your own Gitlab
+> > instance is that "DEFAULT_TAG" is now unused and we instead have:
+> > - DEFAULT_ALL_TAG:
+> > - DEFAULT_ARM64_TAG:
+> > - DEFAULT_AMD64_TAG:
+> > - DEFAULT_FAST_AMD64_TAG:
+> >
+> > This lets us say that some jobs can be run on all runners, because they
+> > are small enough that anything we'd connect to CI is fast enough and it
+> > also does not depend on the underlying host architecture. Next we have
+> > tags for any arm64 host, or any amd64 host. Finally, we have a tag for
+> > fast amd64 hosts. What these last three are for is that we have a few
+> > jobs that need to run on amd64 hosts and so we have to restrict them
+> > there, but we also have now reworked the world build jobs to build
+> > (almost) everything in a single job and on the fast amd64 machines this
+> > is still as quick as the old way was, in practice.
+> >
+> > To reach this point, we say that the Xtensa jobs can only run on amd64
+> > hosts. Our targets only work with the binary-only toolchain and so this
+> > is a reasonable limit and we exclude them from the world build jobs. We
+> > also need to deal with ensuring the right toolchain is used regardless
+> > what the host architecture is and that we don't use the host toolchain
+> > by accident. Finally, because some of these changes needed to be worked
+> > out in the linter, fix some of the general warnings that notes as well.
 >=20
-> I'd prefer fast_amd64 to avoid spaces
+> I haven't tried out this series. Does this handle running multiple
+> test.py runs at once? For me that ends up providing a large
+> improvement in CI times (down to about 35 mins with just two fast
+> runners).
 
-I don't see a reason to avoid spaces here.
-
-> What is the run time for this new, unified 'world' build? I just
-> wonder whether splitting it might make the runs go faster?
-
-It's about the same at the worst case of ~40-45min, but it's more
-consistent now, by excluding the older / slower amd64 hosts.
+That's a per-runner configuration option and so orthogonal to this
+series. Given the breakdown between "all" jobs and "fast" jobs, throwing
+a bunch of the small and short "all" jobs on a runner also doing a
+world build should just be a few minutes slow down all around and
+overall noise.
 
 --=20
 Tom
 
---auh+95ugju+eGw6w
+--XLF5KSytR63Drtoj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXEfsACgkQFHw5/5Y0
-tyxHIAwAkLF86jQ52f0kb3Ey6Q5pvS9T3oAJjJ7jiJ0uBqPK7a7K0Wovs57sQ9OL
-e2+1Yb6qSoY34bN196BzloJJy5um5Z5jH/kFBCAyv19JQMG9UiIcxmSOvR32e4BO
-Du6l1cJwc2EAMow8wqwh17JpyN1dVLTDYX/BnCaP3PMIMeSCK4np1i/tiFB29+eW
-KBFzZ40HUGzVd5hDCWM2i7cGMTyU9W9QZO0G9chviJiqDkwgRiu9wc+zleJGgHz+
-Bk34f00XV33yqxi+jq/kE1CwFG5GaRTC/bgd6/Go75BsljkcdYtRF5SmRarHchYT
-ieSEP/nwwf61x/vW7vsYTJ+3c7bflSUSnfK/P/48bDPMa6MBD0oFmnFybk3fexzW
-Dsrx4j2mBih3Wo3LL6kjRlYDTwCQfk3DOpX2Bxq4D0+DBY8e6sZOSxURkvQ/g/XB
-bhDJvwNOv7oNnyid16Bs7lmIxCD97Ijfjnm3zmgzvTdkN1gyNRG/NV8JBT23BKx9
-jVZiMu79
-=a/Wi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXEoIACgkQFHw5/5Y0
+tyxWIwwAjkJyzRfmQfW9HmYI9lr7y4PvQ8Tp2krq3LfofWnA8wbOTJm7rANOtwxV
+Oub9KXVFMmM5zfyhDPOn1v96dYVITbvoF6B4vbND3XusqCJa+oQcSh66E6hQ+w/6
+1DcPcr7UiKio57Y91uhVhc5NIsraerS6ewwnn1epiNf9IJ/5sT85TrMPOfNWKArA
+pb3ti74+Xg7w/kgPKWLvk7S6G1la5V2YimjWtfDlzmhma6h/y0wDHQuG1NQqFYS7
+/FDWmUZ729J0KYvSabQaUmT9EaPCAduPAGd9ZuFIr28iAs0tqcPgWqUqRceK2uzw
+t7kCG8K/eU19AGtLKlUKP3IoimY2rimUqm+Z3qEg6F72n5yRNI5gQwxXFG3Pif1M
+ckEUFvthiPLIU6Y4TGefzA/1kLaxR9+uVoMCHa8HDgtvbjv2gfx8Hc+2TnULEzA9
+HWGbyqYAxl1vOQYerpApQAPS2qw8diZSEdFp5Wd2QEeNDiNTFO6BZArOod4QwRA4
+DZVpbf+w
+=kLKQ
 -----END PGP SIGNATURE-----
 
---auh+95ugju+eGw6w--
+--XLF5KSytR63Drtoj--
