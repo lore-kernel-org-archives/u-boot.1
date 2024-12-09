@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E76E77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 06:44:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F22FCE7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 06:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1133F893A7;
-	Mon,  9 Dec 2024 07:44:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7210B8939E;
+	Mon,  9 Dec 2024 07:44:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bOJ968uN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J5iK4L0f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3014895A7; Mon,  9 Dec 2024 07:44:35 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 072E1893A2; Mon,  9 Dec 2024 07:44:38 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB8698939E
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 07:44:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81FCB893ED
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 07:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-53f22fd6887so1285506e87.2
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 22:44:33 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-53df19bf6a9so4640192e87.1
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 22:44:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733726673; x=1734331473; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bzYV8lcdYv11PVFDPoa3UpY/uWNf7zUVurbtZWCwojM=;
- b=bOJ968uNwDRV/+6UFps1bsfHY3gQGgNV/Nlx2eKWfhmrAU+sHR0+s8sKhDkIjLH7Rv
- QGic2MG47u6FYFLY0plt6XPa7BBF82y7BXX5DoZBuhjcOfahzHOpXv1sbglZflyqUtmo
- 1ns1XEoJeJmDQ+6HUKcWXOZ6eGkYIzP8AxuUpDS8EWMvwRg0gOaQxF2ngEKLF9zEVATl
- mGTSovxKdBLDrBeP0pGJwXzksu6TASN+q5MDIKD2qn4KpSZyd2z+hcOql9F28XFAohJw
- wMRYvrwmHdq0mWqXOALm13niEqxboVCIL1IFlT996PB9rRUpcxwIHVxdIMx3BppD8aej
- 4WaQ==
+ d=gmail.com; s=20230601; t=1733726675; x=1734331475; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=02ykoA1CHSp+J1dasYCFNY3hEXkRu0aL/GnCzNF9r+0=;
+ b=J5iK4L0f9zgg4Cczp3CoVDAk/JbVCGnaLvTaG2mVXJ0hr9p86M7LahFrPXCdjeFN2M
+ Yb+sOGtZByllFMipAtvYXtQS6dJaiCdgjweTe9LYQd6BBvrZ/Hbh0VeUVRYY9hgf9+9u
+ 7efGx5n0pP7WZc7FHrGNmAERo1Dj1tsznGUTtTx2Nx5kH62imuvdzwdw5NR0ysGSDDn/
+ 5G6o+tLirgOT88paIpMsSIGbAiXzN6BRTnnNzuaEiE3NFKmx+PAFD4pR4Up6Uq9lEM+J
+ eVthxwk0CJTizra2Eei3YMVkb+20JuAW9J/gDdDCHxB/f2ZtmaVTneqQD1hHRFyFdioX
+ id9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733726673; x=1734331473;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bzYV8lcdYv11PVFDPoa3UpY/uWNf7zUVurbtZWCwojM=;
- b=iqCREFq/W/c0PpnT0uaxGOF0TXypk0myxK0CLLuaPMjgPpjiAjkoyJ4CxxpLMGsvpk
- F3ZTC7en9RdOBaHFVmhiYKvvtoxUZPbu+I5gIUeOOWjMTYq5BtrjPEyu3qvFeIYYBKNm
- R9Qtyw3ZkfWwqdWkFbP40QAz52sExJ9rAvD9OtiadOreHTCCXWQaQror+NXUGct0e9ZM
- Cr2FbMxKKCAxrXwBch5TsSuLgDUGh7g/BJVLkTlSsHbVbI0AXVsd+hQoJJMyjqaH3q1x
- a1p0RiX6ntT2Q17zikA0FVcWXIm9CO9y4ggNWzZtXQFQTSIXvt67tq+Ai8cMU8FjUSrN
- 9L3A==
-X-Gm-Message-State: AOJu0Ywb65gaPK46+nFlxXwAMtble7kofttuhyb3uzg8nzpJUDXqRHfW
- xwk7lV8MF3CPXarsj3uEiviJyVdHMAa3h/Qo0rCJfnumgqMHSdrY
-X-Gm-Gg: ASbGncusrCmrnqAtN014gpd3PqMb+eBRtsS4qslNx9J0NCAdkmeKQdnErxyeQPsav6Z
- pSbeOYzUc6s3lPogJ6b+09QnthVC2eWuaVcsomXIFamne0m/SoPJUu/qNqkHkTO91d1uBq9cxHy
- v40cblACsa6pYRfIG1wDPNYW1vTB1A/2jmFpKpBRiuOpMClXGX8xnQn8pBAlaA9Jhdpqd5kJWKJ
- q2wrwp22Dk6at2AxBk8icxdDJJBSJKStD7NOVaB
-X-Google-Smtp-Source: AGHT+IGuKFLesa8kwWI7/804RnB89WSOQHp4eiu0HQlOz+y9ImzDPwfqb7DX5/+VNlfsSspA3ln++g==
-X-Received: by 2002:ac2:4e0c:0:b0:53e:1c89:1bad with SMTP id
- 2adb3069b0e04-53e2c2b6f22mr3957455e87.19.1733726672920; 
- Sun, 08 Dec 2024 22:44:32 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733726675; x=1734331475;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=02ykoA1CHSp+J1dasYCFNY3hEXkRu0aL/GnCzNF9r+0=;
+ b=fAusm7X+Wmo41fqS14lZ8th4gTMKYtnFZA+b9xJHW8CWFxVwYrh0PwjKkYSiiXwTwU
+ 92Ab4BPJZPjIEz8OLptvMfpkFsXHnIRFsy/QWhX+KO6+PaWIXRUhwOsrNIGA9DYuvSz+
+ WqrCnOdgdGyFm0ujMODL0OHtaIgPBezr6h1tsSkhUXhHgZ4g8W13/BWEliBgNyHglgzc
+ M0Sjnj6PNInYqvj0USADx1GEmwBordQ47oICKg00B+SYPz9C+BFfQPPF0AegzGyCzKwl
+ okFdxpUZmmWyh0wRgZQXvWxzG9O2NBzg+jfe4mgR7u4qGkbUP4EIrM9IS1DIiC/EoUhh
+ 0neA==
+X-Gm-Message-State: AOJu0YwWJBoh46vQPzImBSVTWU6HvrAoGRXt6PHTzTk9Paat6FDInbV7
+ NYVVHUFbWnuIMEVCrfvLl51gcIjuC1gV/4YTcgMWgAjZ5T6Q31AW
+X-Gm-Gg: ASbGncsoVXYW23ZR3qVenmZJrS3VoKQzzDMk1VDj1Rb4BtbyZipfc5muTf/9JZL22BF
+ svyYCLHV31J+MencDy/7dLkM0SsOXaZZJKRW2aY4nJWuQk6NRLZqZvWEtB2Smgntt62mf/m80IA
+ Bmy3bDTMUyAwX/Y76YAfXzfKzVlffHMc4DNlNPgsb20xhV+JNmPVgwTeuSQCCD+JxpanGa86LlK
+ wxeWQeWdwf4PijTexeh+HLIfgUHIiFbTiw4vfc/
+X-Google-Smtp-Source: AGHT+IFRlObjvcRYPQsPfqiej/QH6IdGgOtg/YakvtYoTAF8dXlMdCEQDS+kwvUPnWx04gXpFkiW2g==
+X-Received: by 2002:a05:6512:124f:b0:540:1e75:4be5 with SMTP id
+ 2adb3069b0e04-5401e754cb9mr1030394e87.46.1733726674624; 
+ Sun, 08 Dec 2024 22:44:34 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53e313bfb40sm951527e87.222.2024.12.08.22.44.31
+ 2adb3069b0e04-53e313bfb40sm951527e87.222.2024.12.08.22.44.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Dec 2024 22:44:32 -0800 (PST)
+ Sun, 08 Dec 2024 22:44:34 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Billy Tsai <billy_tsai@aspeedtech.com>,
@@ -77,10 +78,12 @@ To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Heiko Schocher <hs@denx.de>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/2] GPIO: improve and fix pmic gpios behavior
-Date: Mon,  9 Dec 2024 08:44:10 +0200
-Message-ID: <20241209064413.6282-1-clamor95@gmail.com>
+Subject: [PATCH v2 1/2] gpio: add PMIC_GPIO Kconfig option
+Date: Mon,  9 Dec 2024 08:44:11 +0200
+Message-ID: <20241209064413.6282-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241209064413.6282-1-clamor95@gmail.com>
+References: <20241209064413.6282-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,26 +102,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-First patch makes support of PMIC GPIO children with no dedicated
-GPIO node simpler (just add select PMIC_GPIO to PMIC GPIO driver)
+Add more generic Kconfig option to be enabled by the PMIC drivers
+which do not have dedicated GPIO node and use same phandle to refer
+to both core driver and GPIO child.
 
-Second fixes getting device if correct one was found among PMIC
-children.
-
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes from v1
-- dropped the prompt text
-- changed the help to star with "Select this option ..."
----
+ drivers/gpio/Kconfig       | 8 ++++++++
+ drivers/gpio/gpio-uclass.c | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-Svyatoslav Ryhel (2):
-  gpio: add PMIC_GPIO Kconfig option
-  gpio: fix request of PMIC GPIO child
-
- drivers/gpio/Kconfig       |  8 ++++++++
- drivers/gpio/gpio-uclass.c | 10 +++++++++-
- 2 files changed, 17 insertions(+), 1 deletion(-)
-
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index 92a8597420a..13b7e9a53dd 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -255,6 +255,7 @@ config MAX7320_GPIO
+ config MAX77663_GPIO
+ 	bool "MAX77663 GPIO cell of PMIC driver"
+ 	depends on DM_GPIO && DM_PMIC_MAX77663
++	select PMIC_GPIO
+ 	help
+ 	  GPIO driver for MAX77663 PMIC from Maxim Semiconductor.
+ 	  MAX77663 PMIC has 8 pins that can be configured as GPIOs
+@@ -474,6 +475,13 @@ config PIC32_GPIO
+ 	help
+ 	  Say yes here to support Microchip PIC32 GPIOs.
+ 
++config PMIC_GPIO
++	bool
++	depends on DM_GPIO
++	help
++	  Select this option if your PMIC does not have dedicated GPIO node
++	  and phandle of the PMIC itself is used as a GPIO phandle.
++
+ config OCTEON_GPIO
+ 	bool "Octeon II/III/TX/TX2 GPIO driver"
+ 	depends on DM_GPIO && PCI && (ARCH_OCTEON || ARCH_OCTEONTX || ARCH_OCTEONTX2)
+diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+index 0213271e3a6..e776906fe73 100644
+--- a/drivers/gpio/gpio-uclass.c
++++ b/drivers/gpio/gpio-uclass.c
+@@ -1142,7 +1142,7 @@ static int gpio_request_tail(int ret, const char *nodename,
+ 		ret = uclass_get_device_by_ofnode(UCLASS_GPIO, args->node,
+ 						  &desc->dev);
+ 		if (ret) {
+-#if CONFIG_IS_ENABLED(MAX77663_GPIO) || CONFIG_IS_ENABLED(PALMAS_GPIO)
++#if CONFIG_IS_ENABLED(PMIC_GPIO)
+ 			struct udevice *pmic;
+ 			ret = uclass_get_device_by_ofnode(UCLASS_PMIC, args->node,
+ 							  &pmic);
 -- 
 2.43.0
 
