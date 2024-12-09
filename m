@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9B93E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 12:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA01E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 13:19:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF2CB88D72;
-	Mon,  9 Dec 2024 13:59:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BA5D388FBF;
+	Mon,  9 Dec 2024 14:19:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TjqmZehz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H+mQgryZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D769E893B1; Mon,  9 Dec 2024 13:59:55 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 949F688D72
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 13:59:53 +0100 (CET)
+ id A9846896EE; Mon,  9 Dec 2024 14:19:54 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E85788E3A
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 14:19:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B9CxfLq2768786
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 9 Dec 2024 06:59:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733749181;
- bh=BvAz1fc3FjFIlYOqqNvZEuS0OynAloPPyIWc1aY2vcQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=TjqmZehznyOx7vQOUczPq5KwR7CmICGPNz5kfdYW+hPg31u53njb0mVAirY5xzBMK
- o+72av3Olb4zAP/9jY49OgBAKrGCaDUcFLwUmMLfR+6SL97epSw92p4EjNmCMdZxiE
- RadWCodpm7JQDo2zyYPL9YJHBRG5Im0JP/Ls8M50=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B9Cxf8n061125
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 9 Dec 2024 06:59:41 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
- Dec 2024 06:59:40 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 9 Dec 2024 06:59:40 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B9CxdW4056003;
- Mon, 9 Dec 2024 06:59:40 -0600
-Date: Mon, 9 Dec 2024 18:29:38 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Roger Quadros <rogerq@kernel.org>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
- Martyn Welch <martyn.welch@collabora.com>, Sjoerd Simons
- <sjoerd@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, <marex@denx.de>,
- <vigneshr@ti.com>, <nm@ti.com>, <j-humphreys@ti.com>, <srk@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] configs: am62x_evm_*: Fix USB DFU configuration
-Message-ID: <yjd6rzbuwd7465fv7xuh4d5b457onx3v5hg5cyhmouqbnmtdju@xk5oysy3itlr>
-References: <20241203-am62-usb-xhci-v1-1-a791cb914186@kernel.org>
- <unf757pwgah5ylkcfdumtdo5zs2ny3nxct5u26t6up7aldqim2@mxhhtb53gw4x>
- <d103c8e4-d599-4c75-9239-11e7e8adf6e9@kernel.org>
- <a9c458f8-68e5-448b-9977-e7bf37b00d35@kernel.org>
- <subjsndbckmj5kgcy6dkh4av5abxkeufjqibwjbom267yotj2a@id3kbhlg2dc7>
- <581a7ace-8d42-405f-bba6-755024cd76a3@kernel.org>
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3c0bd1cc4so258885a12.0
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 05:19:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733750391; x=1734355191; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SgDh/5cTQzo88tUiyjlBvetE8KG0+zXC0K/4GGP99Gw=;
+ b=H+mQgryZ0YUVeUBMJ9DsX6Z7PPtlWpuOggAaa5pv3/Dzvj06sowGaz9R2uJzD4hrm5
+ DFgjz1Ml5niAK6TV7aJKgMd5CE0pquFemUL+ITuyMz/C6oh9HvjwiNNj141aigTI1SZp
+ uRZXrJGGtS9fPr4fpnZ3mfjVAigrdHuLBjGGB9JVZSfzjETZ7nJLLXJMS9iNakGTresv
+ 3oaRUEQ63CR3DFcFqvMtc9JOXMRrcxSGaBTks/W2NoumNEMiahAVC7nUbK6+A2y4GwZT
+ +q/C90wRaJn7e7YPrXIJDNaDvztw++TI1y7Bfkohn6eYdJvs0r/rVOonEG6DnbkOuol+
+ QOog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733750391; x=1734355191;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=SgDh/5cTQzo88tUiyjlBvetE8KG0+zXC0K/4GGP99Gw=;
+ b=nF/uxg815JikY+TASUYqzJwEfgpGJpGQ5z/87Q4hMTUkjL4QNXSP2R5yu404f7sIhd
+ 439J82gfbRi0FUqDL8lK34YLWRifDXjh+CfFUO5Lmxycb+khYu44UXhvKQWtSQOGuTEG
+ e1wwshTpQnFt8Z0UqQ9RZEpwR+DNJDje4tsi70mXVmxwQr4k0Rx5WwQi6tUECtdqTuby
+ eVdoy79KKs0unB3rsfPXSfM6EEcoA/Inj4v94CTAMbapX8HgcwDAwcl0CutOMMe3tVuV
+ /RDucTuqgYPPMCwA90q9OFXiXbfSIWAp1GGI4ZfKTGrl6Uc81v+zdP9YCwdxOx4/bXKo
+ BG0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUW09Fx7BaG6mmceSY63zHfKTP48nCdsCXU7fNeQv7S8B/YJb4tgiD654Y9jjJ44bUWJUyRvPI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzPKQX6ligzOjaQIFTC+UH2X8OWCc5jKtok5EPmbwYX2rt+fw9m
+ TqCjE615DJ0i5uuoM4H6Q1PgEqKTrDQzdfWRFXQrjfqLujtYgQMC
+X-Gm-Gg: ASbGncv5wQZbhOGPSLLz3vJb8Bnq4KiWC+zy6V+MFaN2rL3qWJcnFMjEyDk+6ZVMk6b
+ afK9q5B33eEzOEaY97NyUZYAdtFHX4sNeD7HrTADSQ/HSrdBxpzPDcxiR4GqjI9xKa0nzgLY4yU
+ C6iupaoBZzZUsXnD6WDKfLFHHqkIUyRd0hzNJL6eIaiA80gI8WZAVubC5X6i66ohvKSYlNpE7jg
+ xB6O7UWhOqmt66z4zsE3UvlW5i2i16wKadySajc0TIP/jtljJoXv2Iz7eW/LJa/81GHJKutyMnL
+ AtTxKYYTRuCcdQ==
+X-Google-Smtp-Source: AGHT+IHB2OroGDeKbd6uLMAwPcjT/ru9VjCZFYvQdtd8GydSt+RoA1GbExzydqONmUOPrSOoPGVLzQ==
+X-Received: by 2002:a17:907:874a:b0:aa5:3e81:5aa2 with SMTP id
+ a640c23a62f3a-aa639feb836mr496248566b.4.1733750390966; 
+ Mon, 09 Dec 2024 05:19:50 -0800 (PST)
+Received: from ?IPV6:2a02:a449:4071:1:32d0:42ff:fe10:6983?
+ ([2a02:a449:4071:1:32d0:42ff:fe10:6983])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa666fb3effsm339007566b.55.2024.12.09.05.19.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Dec 2024 05:19:50 -0800 (PST)
+Message-ID: <bc076039-33db-4d87-b1bb-d1086c74e563@gmail.com>
+Date: Mon, 9 Dec 2024 14:19:49 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <581a7ace-8d42-405f-bba6-755024cd76a3@kernel.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v1] rockchip: rk3288: use includes from dts/upstream
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,91 +99,474 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 09, 2024 at 02:32:37PM +0200, Roger Quadros wrote:
+The clock and power DT includes for rk3288 are now
+available in the dts/upstream directory, so remove
+the ones that are now redundant. Remove the use of
+non existent SCLK_MAC_PLL id in the clock driver.
 
-Hello Roger,
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
 
-> On 06/12/2024 12:07, Siddharth Vadapalli wrote:
+Changed:
+  This patch does not include the removal of a clock binding
+  as was proposed in an earlier serie elsewhere.
+  For better fit with my other patch serie for binding removal.
 
-[...]
+http://patchwork.ozlabs.org/project/uboot/patch/71b804a0-ae2a-472c-84c9-ad7c6317e154@gmail.com/
+https://patchwork.ozlabs.org/project/uboot/patch/20241109210427.884888-4-jonas@kwiboo.se/
+---
+ drivers/clk/rockchip/clk_rk3288.c        |   8 +-
+ include/dt-bindings/clock/rk3288-cru.h   | 381 -----------------------
+ include/dt-bindings/power/rk3288-power.h |  32 --
+ 3 files changed, 4 insertions(+), 417 deletions(-)
+ delete mode 100644 include/dt-bindings/clock/rk3288-cru.h
+ delete mode 100644 include/dt-bindings/power/rk3288-power.h
 
-> > Looking at the list of compatibles in dwc3-generic.c and focusing on the
-> > compatible "ti,keystone-dwc3", I see that this compatible is present in:
-> > dts/upstream/src/arm/ti/keystone/keystone.dtsi
-> > among other keystone device-tree files. The hierarchy of the nodes and
-> > compatibles for the USB Subsystem and the USB Controller in Keystone is
-> > similar to that of AM62*. The difference however is the following:
-> > A) For non AM62* devices:
-> 
-> note there are 2 cases here:
-> 
-> A1) that enable CONFIG_USB_DWC3_GENERIC
-> 
-> > 	USB Subsystem [Wrapper] driver is dwc3-generic.c
-> Yes.
-> 
-> > 		USB Controller [DWC3] driver is xhci-dwc3.c
-> 
-> No.
-> 
-> Note that none of the platforms that enable CONFIG_USB_DWC3_GENERIC
-> enable CONFIG_USB_XHCI_DWC3. They should not because dwc3-generic.c
-> takes care of registering the XHCI driver via xhci_register/deregister()
+diff --git a/drivers/clk/rockchip/clk_rk3288.c b/drivers/clk/rockchip/clk_rk3288.c
+index 43c44fadbe7a..a4ff1c41abb8 100644
+--- a/drivers/clk/rockchip/clk_rk3288.c
++++ b/drivers/clk/rockchip/clk_rk3288.c
+@@ -903,11 +903,11 @@ static int __maybe_unused rk3288_gmac_set_parent(struct clk *clk, struct clk *pa
+ 	int ret;
 
-Thank you for pointing this out.
+ 	/*
+-	 * If the requested parent is in the same clock-controller and
+-	 * the id is SCLK_MAC_PLL ("mac_pll_src"), switch to the internal
+-	 * clock.
++	 * If the requested parent is in the same clock-controller the
++	 * likely parent is the unexported SCLK_MAC_PLL ("mac_pll_src"),
++	 * switch to the internal clock.
+ 	 */
+-	if ((parent->dev == clk->dev) && (parent->id == SCLK_MAC_PLL)) {
++	if (parent->dev == clk->dev) {
+ 		debug("%s: switching GAMC to SCLK_MAC_PLL\n", __func__);
+ 		rk_clrsetreg(&cru->cru_clksel_con[21], RMII_EXTCLK_MASK, 0);
+ 		return 0;
+diff --git a/include/dt-bindings/clock/rk3288-cru.h b/include/dt-bindings/clock/rk3288-cru.h
+deleted file mode 100644
+index 453f66718c6b..000000000000
+--- a/include/dt-bindings/clock/rk3288-cru.h
++++ /dev/null
+@@ -1,381 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
+-/*
+- * Copyright (c) 2014 MundoReader S.L.
+- * Author: Heiko Stuebner <heiko@sntech.de>
+- */
+-
+-#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3288_H
+-#define _DT_BINDINGS_CLK_ROCKCHIP_RK3288_H
+-
+-/* core clocks */
+-#define PLL_APLL		1
+-#define PLL_DPLL		2
+-#define PLL_CPLL		3
+-#define PLL_GPLL		4
+-#define PLL_NPLL		5
+-#define ARMCLK			6
+-
+-/* sclk gates (special clocks) */
+-#define SCLK_GPU		64
+-#define SCLK_SPI0		65
+-#define SCLK_SPI1		66
+-#define SCLK_SPI2		67
+-#define SCLK_SDMMC		68
+-#define SCLK_SDIO0		69
+-#define SCLK_SDIO1		70
+-#define SCLK_EMMC		71
+-#define SCLK_TSADC		72
+-#define SCLK_SARADC		73
+-#define SCLK_PS2C		74
+-#define SCLK_NANDC0		75
+-#define SCLK_NANDC1		76
+-#define SCLK_UART0		77
+-#define SCLK_UART1		78
+-#define SCLK_UART2		79
+-#define SCLK_UART3		80
+-#define SCLK_UART4		81
+-#define SCLK_I2S0		82
+-#define SCLK_SPDIF		83
+-#define SCLK_SPDIF8CH		84
+-#define SCLK_TIMER0		85
+-#define SCLK_TIMER1		86
+-#define SCLK_TIMER2		87
+-#define SCLK_TIMER3		88
+-#define SCLK_TIMER4		89
+-#define SCLK_TIMER5		90
+-#define SCLK_TIMER6		91
+-#define SCLK_HSADC		92
+-#define SCLK_OTGPHY0		93
+-#define SCLK_OTGPHY1		94
+-#define SCLK_OTGPHY2		95
+-#define SCLK_OTG_ADP		96
+-#define SCLK_HSICPHY480M	97
+-#define SCLK_HSICPHY12M		98
+-#define SCLK_MACREF		99
+-#define SCLK_LCDC_PWM0		100
+-#define SCLK_LCDC_PWM1		101
+-#define SCLK_MAC_RX		102
+-#define SCLK_MAC_TX		103
+-#define SCLK_EDP_24M		104
+-#define SCLK_EDP		105
+-#define SCLK_RGA		106
+-#define SCLK_ISP		107
+-#define SCLK_ISP_JPE		108
+-#define SCLK_HDMI_HDCP		109
+-#define SCLK_HDMI_CEC		110
+-#define SCLK_HEVC_CABAC		111
+-#define SCLK_HEVC_CORE		112
+-#define SCLK_I2S0_OUT		113
+-#define SCLK_SDMMC_DRV		114
+-#define SCLK_SDIO0_DRV		115
+-#define SCLK_SDIO1_DRV		116
+-#define SCLK_EMMC_DRV		117
+-#define SCLK_SDMMC_SAMPLE	118
+-#define SCLK_SDIO0_SAMPLE	119
+-#define SCLK_SDIO1_SAMPLE	120
+-#define SCLK_EMMC_SAMPLE	121
+-#define SCLK_USBPHY480M_SRC	122
+-#define SCLK_PVTM_CORE		123
+-#define SCLK_PVTM_GPU		124
+-#define SCLK_CRYPTO		125
+-#define SCLK_MIPIDSI_24M	126
+-#define SCLK_VIP_OUT		127
+-
+-#define SCLK_MAC_PLL		150
+-#define SCLK_MAC		151
+-#define SCLK_MACREF_OUT		152
+-
+-#define DCLK_VOP0		190
+-#define DCLK_VOP1		191
+-
+-/* aclk gates */
+-#define ACLK_GPU		192
+-#define ACLK_DMAC1		193
+-#define ACLK_DMAC2		194
+-#define ACLK_MMU		195
+-#define ACLK_GMAC		196
+-#define ACLK_VOP0		197
+-#define ACLK_VOP1		198
+-#define ACLK_CRYPTO		199
+-#define ACLK_RGA		200
+-#define ACLK_RGA_NIU		201
+-#define ACLK_IEP		202
+-#define ACLK_VIO0_NIU		203
+-#define ACLK_VIP		204
+-#define ACLK_ISP		205
+-#define ACLK_VIO1_NIU		206
+-#define ACLK_HEVC		207
+-#define ACLK_VCODEC		208
+-#define ACLK_CPU		209
+-#define ACLK_PERI		210
+-
+-/* pclk gates */
+-#define PCLK_GPIO0		320
+-#define PCLK_GPIO1		321
+-#define PCLK_GPIO2		322
+-#define PCLK_GPIO3		323
+-#define PCLK_GPIO4		324
+-#define PCLK_GPIO5		325
+-#define PCLK_GPIO6		326
+-#define PCLK_GPIO7		327
+-#define PCLK_GPIO8		328
+-#define PCLK_GRF		329
+-#define PCLK_SGRF		330
+-#define PCLK_PMU		331
+-#define PCLK_I2C0		332
+-#define PCLK_I2C1		333
+-#define PCLK_I2C2		334
+-#define PCLK_I2C3		335
+-#define PCLK_I2C4		336
+-#define PCLK_I2C5		337
+-#define PCLK_SPI0		338
+-#define PCLK_SPI1		339
+-#define PCLK_SPI2		340
+-#define PCLK_UART0		341
+-#define PCLK_UART1		342
+-#define PCLK_UART2		343
+-#define PCLK_UART3		344
+-#define PCLK_UART4		345
+-#define PCLK_TSADC		346
+-#define PCLK_SARADC		347
+-#define PCLK_SIM		348
+-#define PCLK_GMAC		349
+-#define PCLK_PWM		350
+-#define PCLK_RKPWM		351
+-#define PCLK_PS2C		352
+-#define PCLK_TIMER		353
+-#define PCLK_TZPC		354
+-#define PCLK_EDP_CTRL		355
+-#define PCLK_MIPI_DSI0		356
+-#define PCLK_MIPI_DSI1		357
+-#define PCLK_MIPI_CSI		358
+-#define PCLK_LVDS_PHY		359
+-#define PCLK_HDMI_CTRL		360
+-#define PCLK_VIO2_H2P		361
+-#define PCLK_CPU		362
+-#define PCLK_PERI		363
+-#define PCLK_DDRUPCTL0		364
+-#define PCLK_PUBL0		365
+-#define PCLK_DDRUPCTL1		366
+-#define PCLK_PUBL1		367
+-#define PCLK_WDT		368
+-#define PCLK_EFUSE256		369
+-#define PCLK_EFUSE1024		370
+-#define PCLK_ISP_IN		371
+-
+-/* hclk gates */
+-#define HCLK_GPS		448
+-#define HCLK_OTG0		449
+-#define HCLK_USBHOST0		450
+-#define HCLK_USBHOST1		451
+-#define HCLK_HSIC		452
+-#define HCLK_NANDC0		453
+-#define HCLK_NANDC1		454
+-#define HCLK_TSP		455
+-#define HCLK_SDMMC		456
+-#define HCLK_SDIO0		457
+-#define HCLK_SDIO1		458
+-#define HCLK_EMMC		459
+-#define HCLK_HSADC		460
+-#define HCLK_CRYPTO		461
+-#define HCLK_I2S0		462
+-#define HCLK_SPDIF		463
+-#define HCLK_SPDIF8CH		464
+-#define HCLK_VOP0		465
+-#define HCLK_VOP1		466
+-#define HCLK_ROM		467
+-#define HCLK_IEP		468
+-#define HCLK_ISP		469
+-#define HCLK_RGA		470
+-#define HCLK_VIO_AHB_ARBI	471
+-#define HCLK_VIO_NIU		472
+-#define HCLK_VIP		473
+-#define HCLK_VIO2_H2P		474
+-#define HCLK_HEVC		475
+-#define HCLK_VCODEC		476
+-#define HCLK_CPU		477
+-#define HCLK_PERI		478
+-
+-#define CLK_NR_CLKS		(HCLK_PERI + 1)
+-
+-/* soft-reset indices */
+-#define SRST_CORE0		0
+-#define SRST_CORE1		1
+-#define SRST_CORE2		2
+-#define SRST_CORE3		3
+-#define SRST_CORE0_PO		4
+-#define SRST_CORE1_PO		5
+-#define SRST_CORE2_PO		6
+-#define SRST_CORE3_PO		7
+-#define SRST_PDCORE_STRSYS	8
+-#define SRST_PDBUS_STRSYS	9
+-#define SRST_L2C		10
+-#define SRST_TOPDBG		11
+-#define SRST_CORE0_DBG		12
+-#define SRST_CORE1_DBG		13
+-#define SRST_CORE2_DBG		14
+-#define SRST_CORE3_DBG		15
+-
+-#define SRST_PDBUG_AHB_ARBITOR	16
+-#define SRST_EFUSE256		17
+-#define SRST_DMAC1		18
+-#define SRST_INTMEM		19
+-#define SRST_ROM		20
+-#define SRST_SPDIF8CH		21
+-#define SRST_TIMER		22
+-#define SRST_I2S0		23
+-#define SRST_SPDIF		24
+-#define SRST_TIMER0		25
+-#define SRST_TIMER1		26
+-#define SRST_TIMER2		27
+-#define SRST_TIMER3		28
+-#define SRST_TIMER4		29
+-#define SRST_TIMER5		30
+-#define SRST_EFUSE		31
+-
+-#define SRST_GPIO0		32
+-#define SRST_GPIO1		33
+-#define SRST_GPIO2		34
+-#define SRST_GPIO3		35
+-#define SRST_GPIO4		36
+-#define SRST_GPIO5		37
+-#define SRST_GPIO6		38
+-#define SRST_GPIO7		39
+-#define SRST_GPIO8		40
+-#define SRST_I2C0		42
+-#define SRST_I2C1		43
+-#define SRST_I2C2		44
+-#define SRST_I2C3		45
+-#define SRST_I2C4		46
+-#define SRST_I2C5		47
+-
+-#define SRST_DWPWM		48
+-#define SRST_MMC_PERI		49
+-#define SRST_PERIPH_MMU		50
+-#define SRST_DAP		51
+-#define SRST_DAP_SYS		52
+-#define SRST_TPIU		53
+-#define SRST_PMU_APB		54
+-#define SRST_GRF		55
+-#define SRST_PMU		56
+-#define SRST_PERIPH_AXI		57
+-#define SRST_PERIPH_AHB		58
+-#define SRST_PERIPH_APB		59
+-#define SRST_PERIPH_NIU		60
+-#define SRST_PDPERI_AHB_ARBI	61
+-#define SRST_EMEM		62
+-#define SRST_USB_PERI		63
+-
+-#define SRST_DMAC2		64
+-#define SRST_MAC		66
+-#define SRST_GPS		67
+-#define SRST_RKPWM		69
+-#define SRST_CCP		71
+-#define SRST_USBHOST0		72
+-#define SRST_HSIC		73
+-#define SRST_HSIC_AUX		74
+-#define SRST_HSIC_PHY		75
+-#define SRST_HSADC		76
+-#define SRST_NANDC0		77
+-#define SRST_NANDC1		78
+-
+-#define SRST_TZPC		80
+-#define SRST_SPI0		83
+-#define SRST_SPI1		84
+-#define SRST_SPI2		85
+-#define SRST_SARADC		87
+-#define SRST_PDALIVE_NIU	88
+-#define SRST_PDPMU_INTMEM	89
+-#define SRST_PDPMU_NIU		90
+-#define SRST_SGRF		91
+-
+-#define SRST_VIO_ARBI		96
+-#define SRST_RGA_NIU		97
+-#define SRST_VIO0_NIU_AXI	98
+-#define SRST_VIO_NIU_AHB	99
+-#define SRST_LCDC0_AXI		100
+-#define SRST_LCDC0_AHB		101
+-#define SRST_LCDC0_DCLK		102
+-#define SRST_VIO1_NIU_AXI	103
+-#define SRST_VIP		104
+-#define SRST_RGA_CORE		105
+-#define SRST_IEP_AXI		106
+-#define SRST_IEP_AHB		107
+-#define SRST_RGA_AXI		108
+-#define SRST_RGA_AHB		109
+-#define SRST_ISP		110
+-#define SRST_EDP		111
+-
+-#define SRST_VCODEC_AXI		112
+-#define SRST_VCODEC_AHB		113
+-#define SRST_VIO_H2P		114
+-#define SRST_MIPIDSI0		115
+-#define SRST_MIPIDSI1		116
+-#define SRST_MIPICSI		117
+-#define SRST_LVDS_PHY		118
+-#define SRST_LVDS_CON		119
+-#define SRST_GPU		120
+-#define SRST_HDMI		121
+-#define SRST_CORE_PVTM		124
+-#define SRST_GPU_PVTM		125
+-
+-#define SRST_MMC0		128
+-#define SRST_SDIO0		129
+-#define SRST_SDIO1		130
+-#define SRST_EMMC		131
+-#define SRST_USBOTG_AHB		132
+-#define SRST_USBOTG_PHY		133
+-#define SRST_USBOTG_CON		134
+-#define SRST_USBHOST0_AHB	135
+-#define SRST_USBHOST0_PHY	136
+-#define SRST_USBHOST0_CON	137
+-#define SRST_USBHOST1_AHB	138
+-#define SRST_USBHOST1_PHY	139
+-#define SRST_USBHOST1_CON	140
+-#define SRST_USB_ADP		141
+-#define SRST_ACC_EFUSE		142
+-
+-#define SRST_CORESIGHT		144
+-#define SRST_PD_CORE_AHB_NOC	145
+-#define SRST_PD_CORE_APB_NOC	146
+-#define SRST_PD_CORE_MP_AXI	147
+-#define SRST_GIC		148
+-#define SRST_LCDC_PWM0		149
+-#define SRST_LCDC_PWM1		150
+-#define SRST_VIO0_H2P_BRG	151
+-#define SRST_VIO1_H2P_BRG	152
+-#define SRST_RGA_H2P_BRG	153
+-#define SRST_HEVC		154
+-#define SRST_TSADC		159
+-
+-#define SRST_DDRPHY0		160
+-#define SRST_DDRPHY0_APB	161
+-#define SRST_DDRCTRL0		162
+-#define SRST_DDRCTRL0_APB	163
+-#define SRST_DDRPHY0_CTRL	164
+-#define SRST_DDRPHY1		165
+-#define SRST_DDRPHY1_APB	166
+-#define SRST_DDRCTRL1		167
+-#define SRST_DDRCTRL1_APB	168
+-#define SRST_DDRPHY1_CTRL	169
+-#define SRST_DDRMSCH0		170
+-#define SRST_DDRMSCH1		171
+-#define SRST_CRYPTO		174
+-#define SRST_C2C_HOST		175
+-
+-#define SRST_LCDC1_AXI		176
+-#define SRST_LCDC1_AHB		177
+-#define SRST_LCDC1_DCLK		178
+-#define SRST_UART0		179
+-#define SRST_UART1		180
+-#define SRST_UART2		181
+-#define SRST_UART3		182
+-#define SRST_UART4		183
+-#define SRST_SIMC		186
+-#define SRST_PS2C		187
+-#define SRST_TSP		188
+-#define SRST_TSP_CLKIN0		189
+-#define SRST_TSP_CLKIN1		190
+-#define SRST_TSP_27M		191
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3288-power.h b/include/dt-bindings/power/rk3288-power.h
+deleted file mode 100644
+index f710b56ccd81..000000000000
+--- a/include/dt-bindings/power/rk3288-power.h
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_BINDINGS_POWER_RK3288_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3288_POWER_H__
+-
+-/**
+- * RK3288 Power Domain and Voltage Domain Summary.
+- */
+-
+-/* VD_CORE */
+-#define RK3288_PD_A17_0		0
+-#define RK3288_PD_A17_1		1
+-#define RK3288_PD_A17_2		2
+-#define RK3288_PD_A17_3		3
+-#define RK3288_PD_SCU		4
+-#define RK3288_PD_DEBUG		5
+-#define RK3288_PD_MEM		6
+-
+-/* VD_LOGIC */
+-#define RK3288_PD_BUS		7
+-#define RK3288_PD_PERI		8
+-#define RK3288_PD_VIO		9
+-#define RK3288_PD_ALIVE		10
+-#define RK3288_PD_HEVC		11
+-#define RK3288_PD_VIDEO		12
+-
+-/* VD_GPU */
+-#define RK3288_PD_GPU		13
+-
+-/* VD_PMU */
+-#define RK3288_PD_PMU		14
+-
+-#endif
+--
+2.39.5
 
-> 
-> A2) that don't enable CONFIG_USB_DWC3_GENERIC
-> 
-> These are usually only interested in host mode, they enable
-> CONFIG_USB_XHCI_DWC3 and may also enable CONFIG_USB_XHCI_DWC3_OF_SIMPLE
-> 
-> So  USB Wrapper/glue driver is DWC3_OF_SIMPLE
-> 	USB driver is xhci-dwc3.c
-> 
-> Some platforms have their own glue
-> 	CONFIG_USB_XHCI_STI	dwc3-sti-glue.c
-> 	CONFIG_USB_XHCI_OCTEON	dwc3-octeon-glue.c
-> 
-> > B) For AM62* devices:
-> > 	USB Subsystem [Wrapper] driver is dwc3-am62.c
-> > 	which exposes its own ".glue_configure" callback similar to what
-> > 	is done in dwc3-generic.c for other devices.
-> 
-> The Subsystem driver is still dwc3-generic.c. Glue driver is dwc3-am62.c
-> 
-> > 		USB Controller [DWC3] driver is xhci-dwc3.c
-> 
-> No.
-> We don't require CONFIG_USB_XHCI_DWC3 as XHCI registration is done
-> by dwc3-generic. USB Host driver is USB_XHCI_HCD.
-
-Ok.
-
-> 
-> > So maybe non AM62* devices have:
-> > 	dwc3-generic.c for Subsystem + xhci-dwc3.c for USB Controller
-> > while AM62* devices have:
-> > 	dwc3-am62.c for Subsystem + dwc3-generic.c (neither Subsystem
-> > 	nor Controller?) + xhci-dwc3.c for USB Controller
-> > We could probably end up with the two driver situation similar to non
-> > AM62* devices if we update dwc3-generic.c to handle the configuration
-> > performed by dwc3-am62.c. But that still means we have two drivers:
-> > dwc3-generic.c and xhci-dwc3.c
-> > Maybe viewing the output of "dm tree" on a non AM62* device with both
-> > CONFIG_USB_XHCI_DWC3 and CONFIG_USB_DWC3_GENERIC enabled will let us
-> > know whether that is a valid configuration or not.
-> 
-> Enabling both is an invalid configuration and no config does it. AM62 was
-> doing it wrong and so we fix it with this patch.
-
-Understood. Thank you for explaining. I agree that the fix in this patch
-is correct and your earlier suggestion of Kconfig guards:
-"Maybe we still need some Kconfig guards that prevent both
-CONFIG_USB_XHCI_DWC3 and USB_DWC3_GENERIC to be set together as 2 drivers
-will claim the controller if dr_mode is USB_DR_MODE_OTG or
-USB_DR_MODE_HOST."
-could be implemented in a follow up patch.
-
-Regards,
-Siddharth.
