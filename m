@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF8CE77173
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 06:42:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0E76E77173
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 06:44:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A235893A2;
-	Mon,  9 Dec 2024 07:42:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1133F893A7;
+	Mon,  9 Dec 2024 07:44:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jR/QtXV5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bOJ968uN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98338893A7; Mon,  9 Dec 2024 07:42:24 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id F3014895A7; Mon,  9 Dec 2024 07:44:35 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 131D08939E
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 07:42:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB8698939E
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 07:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e8f64d5dso1976018a12.3
- for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 22:42:22 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-53f22fd6887so1285506e87.2
+ for <u-boot@lists.denx.de>; Sun, 08 Dec 2024 22:44:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733726541; x=1734331341; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EGSdsbGODy3hHPAQWWzs8+9fz00ZoJdu4T45zOZaAag=;
- b=jR/QtXV5+Q0OMrSWLMxQ/Zwmsdx4qqnKpHtTB+mQHQMTzOsq++8FaMPekt6zXP64L8
- iqh+Id9BZMY8QiWKSFHhbMBLd3s4yD9AVklL/G3Q5U5pqdZ7t0pUdyTFZyBqt/0roNG8
- 2UJ8q2qrzxrsJ0l0v2EdbQRW88GsBJ7sqP9Z2+tQNU6AAWiYNAVzJeWoPN3wNhc77zxp
- 4a2FuAUqvgcFT29tdev7puSWKAchIGVL9ZsWX2bXiczvlUfuK6NWc22u3pBPUVvgIMyB
- 0PqZ+SOKMKP7nvzrI7yI2udGSEMuMIiiQ7Kzi3QTitaafZL6QTkOgI2BfkCTN9FFVT55
- 03aA==
+ d=gmail.com; s=20230601; t=1733726673; x=1734331473; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bzYV8lcdYv11PVFDPoa3UpY/uWNf7zUVurbtZWCwojM=;
+ b=bOJ968uNwDRV/+6UFps1bsfHY3gQGgNV/Nlx2eKWfhmrAU+sHR0+s8sKhDkIjLH7Rv
+ QGic2MG47u6FYFLY0plt6XPa7BBF82y7BXX5DoZBuhjcOfahzHOpXv1sbglZflyqUtmo
+ 1ns1XEoJeJmDQ+6HUKcWXOZ6eGkYIzP8AxuUpDS8EWMvwRg0gOaQxF2ngEKLF9zEVATl
+ mGTSovxKdBLDrBeP0pGJwXzksu6TASN+q5MDIKD2qn4KpSZyd2z+hcOql9F28XFAohJw
+ wMRYvrwmHdq0mWqXOALm13niEqxboVCIL1IFlT996PB9rRUpcxwIHVxdIMx3BppD8aej
+ 4WaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733726541; x=1734331341;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EGSdsbGODy3hHPAQWWzs8+9fz00ZoJdu4T45zOZaAag=;
- b=PR+F04GPcVHAhgLuW9D451ZUWE56YnJKUwulOaMJnt4sblQA6oxHVgG1VDo4nfCYP1
- forBX6vGwR3vqerNkMJVIM2hwV5il3wv7P6IWO/+dcbSM5al8mJ1iDNHFW2efVFg1AwN
- 2ZFgy8U52Hm4JwEUrE9Qv//B+KfjlVxi2f+BuHRDhBziTNDqXgCHqK5SK4y/TvscV95X
- //9/n2nrJYw7XSFZJSyVDP0X6J/S8u1N25zhTA7MObw2CvmtDbNdBdSeHKIjuYh5L8Nu
- nxgvR38V1yU7s6tXOklqBZ2ROQhN1faslFFIeUra2VvV/6UUw4rgscMvugHqROcxDs6z
- tzyg==
-X-Gm-Message-State: AOJu0Yxs6iloIgY70vpK1mP4z+CgtU15FHe/vpU3FN/wUCNAsbE8wj+F
- Qc4VqEj87Nj6eBHSs7p4aZHvTT9QRSiZEWpPPAI7+7gXEKeTWJHVPq/qK2NWXDX2Z6qVWd4oKop
- JsYQ03ELZxWtgw98PNzeaM7CadClhSG6Wu/oH3A==
-X-Gm-Gg: ASbGncvThNCHc/Td9Ig17ZE1vSO0RYSaERqpf1YoYZR4LBzNyRxhHQu+O9fdmKiVOBx
- zvwsnYqIO8gG0SiyRKMk/haPdOUgujhg6
-X-Google-Smtp-Source: AGHT+IFyoc4Ca8VWh07RtnHcSEWfdfc481s04GArQcDlRKYy2Mds1wb2tQtYm+zHknW/SPwwG/kChmyhig+XKzn87DI=
-X-Received: by 2002:a05:6402:3891:b0:5d0:e2c8:dc8d with SMTP id
- 4fb4d7f45d1cf-5d3be6b3ab4mr10957074a12.20.1733726541414; Sun, 08 Dec 2024
- 22:42:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733726673; x=1734331473;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bzYV8lcdYv11PVFDPoa3UpY/uWNf7zUVurbtZWCwojM=;
+ b=iqCREFq/W/c0PpnT0uaxGOF0TXypk0myxK0CLLuaPMjgPpjiAjkoyJ4CxxpLMGsvpk
+ F3ZTC7en9RdOBaHFVmhiYKvvtoxUZPbu+I5gIUeOOWjMTYq5BtrjPEyu3qvFeIYYBKNm
+ R9Qtyw3ZkfWwqdWkFbP40QAz52sExJ9rAvD9OtiadOreHTCCXWQaQror+NXUGct0e9ZM
+ Cr2FbMxKKCAxrXwBch5TsSuLgDUGh7g/BJVLkTlSsHbVbI0AXVsd+hQoJJMyjqaH3q1x
+ a1p0RiX6ntT2Q17zikA0FVcWXIm9CO9y4ggNWzZtXQFQTSIXvt67tq+Ai8cMU8FjUSrN
+ 9L3A==
+X-Gm-Message-State: AOJu0Ywb65gaPK46+nFlxXwAMtble7kofttuhyb3uzg8nzpJUDXqRHfW
+ xwk7lV8MF3CPXarsj3uEiviJyVdHMAa3h/Qo0rCJfnumgqMHSdrY
+X-Gm-Gg: ASbGncusrCmrnqAtN014gpd3PqMb+eBRtsS4qslNx9J0NCAdkmeKQdnErxyeQPsav6Z
+ pSbeOYzUc6s3lPogJ6b+09QnthVC2eWuaVcsomXIFamne0m/SoPJUu/qNqkHkTO91d1uBq9cxHy
+ v40cblACsa6pYRfIG1wDPNYW1vTB1A/2jmFpKpBRiuOpMClXGX8xnQn8pBAlaA9Jhdpqd5kJWKJ
+ q2wrwp22Dk6at2AxBk8icxdDJJBSJKStD7NOVaB
+X-Google-Smtp-Source: AGHT+IGuKFLesa8kwWI7/804RnB89WSOQHp4eiu0HQlOz+y9ImzDPwfqb7DX5/+VNlfsSspA3ln++g==
+X-Received: by 2002:ac2:4e0c:0:b0:53e:1c89:1bad with SMTP id
+ 2adb3069b0e04-53e2c2b6f22mr3957455e87.19.1733726672920; 
+ Sun, 08 Dec 2024 22:44:32 -0800 (PST)
+Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-53e313bfb40sm951527e87.222.2024.12.08.22.44.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Dec 2024 22:44:32 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Billy Tsai <billy_tsai@aspeedtech.com>,
+ Michal Simek <michal.simek@amd.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Ye Li <ye.li@nxp.com>, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Jim Liu <jim.t90615@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Heiko Schocher <hs@denx.de>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 0/2] GPIO: improve and fix pmic gpios behavior
+Date: Mon,  9 Dec 2024 08:44:10 +0200
+Message-ID: <20241209064413.6282-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CAPLW+4=qP6pCN0xd9n3U5jBePJk2jEKgixCs1A_uBaDTwFLT4g@mail.gmail.com>
- <CADg8p95bi5G48xZdT9+gqzKEByN4C3ZxfQHNPEaCX=0_559T9w@mail.gmail.com>
- <CAPLW+4nh2kxgV2ri=kkTD6pLjM2--aewZ4kMO8cjagv5OZCXUg@mail.gmail.com>
-In-Reply-To: <CAPLW+4nh2kxgV2ri=kkTD6pLjM2--aewZ4kMO8cjagv5OZCXUg@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 9 Dec 2024 12:12:10 +0530
-Message-ID: <CADg8p94-8GXxWAOkgd1Y7AhXhxPJazy04PSnMrg687VigOZC+Q@mail.gmail.com>
-Subject: Re: [REGRESSION] lmb: add and reserve memory above ram_top
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
- Mark Kettenis <kettenis@openbsd.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,120 +99,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 8 Dec 2024 at 06:49, Sam Protsenko <semen.protsenko@linaro.org> wro=
-te:
->
-> On Thu, Dec 5, 2024 at 11:23=E2=80=AFPM Sughosh Ganu <sughosh.ganu@linaro=
-.org> wrote:
-> >
->
-> [snip]
->
-> > >     ERROR: reserving fdt memory region failed (addr=3Dbab00000
-> > > size=3D5500000 flags=3D2)
-> > >     ERROR: reserving fdt memory region failed (addr=3Df0000000
-> > > size=3D200000 flags=3D4)
-> > >
-> > > It looks like all mentioned error messages are harmless, in a way tha=
-t
-> > > I'm still able to boot Linux, and U-Boot reserved areas still seem to
-> > > exist in 'bdinfo'. But seeing error messages like that is definitely =
-a
-> > > nuisance by itself, and might be an indicator of some actual issues.
-> > > Do you have any remedy for that by chance? Please let me know if you
-> > > need more debug input from my side.
-> >
-> > This seems to be happening because the board is trying to reserve
-> > memory above ram_top with no-map or no-overwrite attributes. To
-> > confirm, you can print the value of ram_top in setup_dest_addr().
-> >
-> > -sughosh
-> >
->
-> Thanks for your input, Sughosh! I did a bit of further analysis, and
-> found the mentioned error message is happening on 3 different
-> occasions. All 3 of them are caused by the recent LMB patches merged
-> in U-Boot/master. They are all probably harmless, but a bit
-> misleading. Also, I'm not sure whether they are actually *causing*
-> those errors, or just revealing some already existing issues.
-> Specifically those 3 occurrences are:
+First patch makes support of PMIC GPIO children with no dedicated
+GPIO node simpler (just add select PMIC_GPIO to PMIC GPIO driver)
 
-Thanks much for your investigation.
+Second fixes getting device if correct one was found among PMIC
+children.
 
->
-> 1. The one reported in this thread. The root cause, like you
-> suggested, is the board trying to reserve the memory above ram_top.
-> It's actually happening in lmb_init(). Details:
->
->   - The 'memory' node from my dts:
->
->         memory@80000000 {
->             device_type =3D "memory";
->             reg =3D <0x0 0x80000000 0x3ab00000>,
->                   <0x0 0xc0000000 0x40000000>,
->                   <0x8 0x80000000 0x80000000>;
->         };
->
->   - Reserved memory chunk: (addr=3Df0000000 size=3D200000 flags=3D4).
->     That's 'ramoops' chunk from the 'reserved-memory' node in my dts.
->   - ram_top (as seen in lmb_init) =3D 0xbab0_0000.
->     That's because my board's dram_init() calls the
-> fdtdec_setup_mem_size_base(), which only takes the first cell from the
-> 'memory' node.
->     Which is 0x8000_0000 ... 0xbab0_0000.
->   - So the reserved memory is above ram_top, as you suggested.
->   - Not sure how to properly fix it though. Maybe I need to "teach"
-> U-Boot to use all 3 chunks from my 'memory' node somehow?
+---
+Changes from v1
+- dropped the prompt text
+- changed the help to star with "Select this option ..."
+---
 
-I think there needs to be a check in the related function to not
-reserve memory regions above ram_top. This wasn't showing up earlier
-because of the local nature of the lmb memory map, but is not the case
-anymore. I have a patch which I am testing currently. Will send it out
-in a day or so.
+Svyatoslav Ryhel (2):
+  gpio: add PMIC_GPIO Kconfig option
+  gpio: fix request of PMIC GPIO child
 
->   - I was able to work-around it by reworking the 'memory' node in my
-> device tree as described in my first message in this thread:
->
->         memory@80000000 {
->             device_type =3D "memory";
->             reg =3D <0x0 0x80000000 0x80000000>,
->                   <0x8 0x80000000 0x80000000>;
->         };
->
-> 2. When booting Linux with 'booti' command, there happens the repeated
-> attempt to reserve all 'reserved-memory' chunks, which were already
-> reserved during the board init, which also leads to similar error
-> messages. I addressed that one (hopefully properly) in my series [1].
-> Please take a look. That one is caused by a combination of these two
-> commits:
->
->   - 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas
-> with !LMB_NONE")
->   - 827dee587b75 ("fdt: lmb: add reserved regions as no-overwrite")
+ drivers/gpio/Kconfig       |  8 ++++++++
+ drivers/gpio/gpio-uclass.c | 10 +++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
-I will try out your patch series on my side and get back.
+-- 
+2.43.0
 
->
-> 3. I noticed another similar error message when running sandbox U-Boot on=
- my PC:
->
->         $ make sandbox_defconfig
->         $ make -j32
->         $ ./u-boot -D
->         ...
->         ERROR: reserving fdt memory region failed (addr=3Dfffe000
-> size=3D2000 flags=3D2)
->
->   Can you please check that one on your U-Boot/master? I was able to
-> narrow it down to commit 6534d26ee9a5 ("lmb: do away with
-> arch_lmb_reserve()"), if that helps.
-
-This is strange. I have not seen this issue with sandbox earlier.
-Might be a regression. Will check. Thanks.
-
--sughosh
-
->
-> Thanks!
->
-> [1] https://lists.denx.de/pipermail/u-boot/2024-December/574308.html
