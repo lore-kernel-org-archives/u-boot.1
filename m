@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E9D6E7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990D1E77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAA2989773;
-	Mon,  9 Dec 2024 17:29:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14AD089719;
+	Mon,  9 Dec 2024 17:29:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J96HZ5ts";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C3asWsdp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83E6D8975B; Mon,  9 Dec 2024 17:29:06 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 8965D89771; Mon,  9 Dec 2024 17:29:07 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FA7489490
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:29:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B65B89712
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-8419d05aa66so320048439f.0
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:29:04 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7265c18d79bso787919b3a.3
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:29:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1733761742; x=1734366542; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8Qs9SIcBbKfDvKMs0ZXh24kVL/iebd0l81OadHoXBWc=;
- b=J96HZ5tsb5MCAAyqQTtBFdd5qaFxhy0nNT3nzkU4ta7SbOERWSoEAFpID+sJxNFO55
- dhSUTSWLzt0T5YSfLSZG6YROVEQnX/xPspHOe1ZuBGBBWSiia3zS2OMSA6DYSoQw4eBS
- Xgt/JAlFDzBXiUBWUlf2M52457AIle/s8nwTY=
+ bh=ZhGXfh8sCV+shY5htSJzBcNLoZUXjrvLLPwCAqFAKrM=;
+ b=C3asWsdp2AiXI1J4X1om2w27lSF7WDup2Z89DUXRj0lwStCLkNrpRzwz9q2mdOs4up
+ l1F6MObKixjXYgZulduXCJixbod4hToRV7Wsb5srKbaKjS09I1c/x3Zsd6Yl852rhs/5
+ 6/oHSaiKhqQWBk0wMnyABq0xkuu5GvoI8v4FM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1733761742; x=1734366542;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8Qs9SIcBbKfDvKMs0ZXh24kVL/iebd0l81OadHoXBWc=;
- b=RO472Mn+1U3BCbY/t8tRypmC0tuOg1Vnb9TdKqRfyWUI9nIwmZ/3SaqhOD8t0BRUnd
- UUBpR+M7ol9tqYZ/zzBSrYbDd5hQyhpxA2lCbl9oesxzuEiLqJf/6s+hAmiJrXtkDovY
- 8wDLM75EQQuJyjyrV2+bZb2aAuTyRJx1OAP0BjjcQY69LcH77fq5hTEoJZor4nDteXO+
- +Q9t8HA4bYFAEdhxUoMU99a9HgZZnt8lCmH7/CpwizRSDMXFwLNsC2h6eaPpm4HH6eyS
- 2sgD5Oud9Ltx49pyFhZG8AJEU69BJes0wFoAaRiVRgu1/hDwDoFYwYu2Bt6WXMVYqb8k
- T+5w==
-X-Gm-Message-State: AOJu0Yx1z9nNtKTNLMHthpXqpJtczcKg4jw1/7Ll+rT6Qhs8WRieqyiw
- PJrir+AUMPVLNpz4hHLVdjqJE/+4PABF571RbQTo1vSBXqIPCjgfZJNl32UrsQq2sA/Wm4SfLbQ
+ bh=ZhGXfh8sCV+shY5htSJzBcNLoZUXjrvLLPwCAqFAKrM=;
+ b=flH7lWbJLI4gTA7oYey+H53ptR2eQmuCHfYVrMszzJMfmyvH4dUHxoa6KksArxsFsC
+ mljRM9ImaKp5rW+P1u6mEFZDAVUe3ctu39MuyjQNgZ0y174YLWcP/E9kJ8oRTrahegyv
+ 0Fw5uH6MsrhwEjL/kXLSQf68PKjhNIEv1RTmdvAt4f3QYmyysprbtDepEdO4ScTCzL8N
+ YHII1VFHO0kZ9XjUJcPaiNfp1eUTHYJxz+O7uewg5I0v9easIb3iyvAN1fzG3i6jUSEo
+ +9Zff8aAJurw2Qjh3VmIPB0+v5BUurVCU8C/s+EVLfFobSNJ0w2gpxvWwLIe+bl7fS3h
+ deYw==
+X-Gm-Message-State: AOJu0Yzr5kjbOK6oSi2nDXzE6gk6DLaLVD6e32acIiRcCdfpFYRM9C3K
+ kAIemeTKVb4/14DbNP2sD6Pq+VeGLo2+/fUKhADPwy6sJDsBmP8N0OcC9mX7nbB13+jeM4YT/Eg
  =
-X-Gm-Gg: ASbGncsccMqq3mJlc8VTywUEWjW/DWEN+DPZ+wdmS/YCakmfgiIGgVru61Kh1WGeTSK
- KUdP7WiIrsD4m1Sger+qtDK3ON4j1JYu0w+KUgH9wFeCoo6OqwziDPKVE7jraaxBFmfQJTdMx9v
- LJor85vu1S1zNQWRR6+1QwU+3rFdULIOaSrw08pdhDQ8lBaJenpq+P4eSkuC7vwPcfyehWW+hV1
- YC+nMZGvrOX0HfkjAUG55UWjYx3LNFsjSpoqtEBL/MyKnfJ7RKcwVUC4VnsxGJefmc6k/k3JKaE
- L+sefpBUnBY=
-X-Google-Smtp-Source: AGHT+IHmcQjL0It5VZ58jd7T8VFjSf+1REDmpBYlbQy+Qc8exKxhGlwNN9UJka5qldX1cMf26VjI7A==
-X-Received: by 2002:a05:6602:14cb:b0:843:ec8f:c84a with SMTP id
- ca18e2360f4ac-8447e244110mr1580343639f.6.1733761742431; 
- Mon, 09 Dec 2024 08:29:02 -0800 (PST)
+X-Gm-Gg: ASbGncsUKIiAEJZEDjZerOuWIHOlaYrsbuMeR1Ox41n61/dqt7QuUQyPrsnBoyEVCbG
+ MjRyIeNkNXWL+P208MGjrOWlHwX0/KITFSDB6J5T8uVn3ldsVk7gqs/I06KBl+2OdojiVNvqms+
+ uUJhLOTzWZERap+v5AxOlZ72Gi65r58j9nm41uYBZtmgCk/VPEtaCx71EOW2AdXkPOmd1vAxHOZ
+ oj0ZEA7MSgPF/x7/oABHTc05QpXzDOTEl5Z3EQ0tuW1sBdFMweSJzseeBjnbtehV3DX8o9U2ZEX
+ J68cgevnXXLBVZI=
+X-Google-Smtp-Source: AGHT+IGSw4hFEBkQX9fXCpdmObEGiujJafcvoAv78Tsa5XQZiOt4Q3o5qIvk9s9tpI3+hOMtgav6yA==
+X-Received: by 2002:a05:6602:3f8d:b0:835:4cb5:4fa7 with SMTP id
+ ca18e2360f4ac-8447e352f4emr1901512539f.12.1733761731726; 
+ Mon, 09 Dec 2024 08:28:51 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-844737bc549sm272432339f.2.2024.12.09.08.28.59
+ ca18e2360f4ac-844737bc549sm272432339f.2.2024.12.09.08.28.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Dec 2024 08:29:00 -0800 (PST)
+ Mon, 09 Dec 2024 08:28:50 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Matthew Garrett <mgarrett@aurora.tech>, Simon Glass <sjg@chromium.org>,
@@ -77,9 +77,9 @@ Cc: Matthew Garrett <mgarrett@aurora.tech>, Simon Glass <sjg@chromium.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 6/8] addr_find: Use a simple lmb allocation
-Date: Mon,  9 Dec 2024 09:27:59 -0700
-Message-Id: <20241209162801.288363-7-sjg@chromium.org>
+Subject: [PATCH 2/8] part_find: Enable for sandbox and correct radix and calls
+Date: Mon,  9 Dec 2024 09:27:55 -0700
+Message-Id: <20241209162801.288363-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241209162801.288363-1-sjg@chromium.org>
 References: <20241209162801.288363-1-sjg@chromium.org>
@@ -101,99 +101,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There should be no need to parse the LMB tables manually. Use the
-allocation-function provided instead. Adjust the argument checks while
-we are here.
+Enable this command for sandbox and the EFI app.
 
-Also enable this command for sandbox and the EFI app, so it is built in
-CI.
+Recent work removed the if_type member. Update the code to use the new
+method for obtaining the interface type.
+
+Use hex so that large partition numbers (>=10) work correctly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/Kconfig     |  1 +
- cmd/addr_find.c | 40 +++++++++++++---------------------------
- 2 files changed, 14 insertions(+), 27 deletions(-)
+ cmd/Kconfig     | 1 +
+ cmd/part_find.c | 4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c8ca55194c0..d4da504bea4 100644
+index 8fc76778d87..c8ca55194c0 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -130,6 +130,7 @@ config CMD_ACPI
+@@ -1552,6 +1552,7 @@ config CMD_PART
+ config CMD_PART_FIND
+ 	bool "part_find"
+ 	depends on PARTITIONS
++	default y if SANDBOX || EFI_APP
+ 	select HAVE_BLOCK_DEVICE
+ 	select PARTITION_UUIDS
+ 	select PARTITION_TYPE_GUID
+diff --git a/cmd/part_find.c b/cmd/part_find.c
+index 8c071d3c374..38919935641 100644
+--- a/cmd/part_find.c
++++ b/cmd/part_find.c
+@@ -107,7 +107,7 @@ static int part_find(int argc, char *const argv[])
+ 								   &loader_part_no)) {
+ 						char env[256];
  
- config CMD_ADDR_FIND
-         bool "addr_find"
-+        default y if SANDBOX || EFI_APP
- 	help
- 	  This command searches for an unused region of address space
- 	  sufficiently large to hold a file. If successful, it sets the
-diff --git a/cmd/addr_find.c b/cmd/addr_find.c
-index b187337d885..2c20b959031 100644
---- a/cmd/addr_find.c
-+++ b/cmd/addr_find.c
-@@ -16,12 +16,13 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- int do_addr_find(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	struct lmb_region *mem, *reserved;
- 	const char *filename;
--	struct lmb lmb;
-+	phys_addr_t start;
- 	loff_t size;
- 	int ret;
--	int i, j;
-+
-+	if (argc < 3)
-+		return CMD_RET_USAGE;
- 
- 	if (!gd->fdt_blob) {
- 		log_err("No FDT setup\n");
-@@ -49,36 +50,21 @@ int do_addr_find(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return CMD_RET_FAILURE;
- 	}
- 
--	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
--	mem = &lmb.memory;
--	reserved = &lmb.reserved;
--
--	for (i = 0; i < mem->cnt; i++) {
--		unsigned long long start, end;
-+	start = lmb_alloc(size, SZ_2M);
-+	if ((long)start < 0) {
-+		log_err("Failed to find enough RAM for 0x%llx bytes\n", size);
- 
--		start = mem->region[i].base;
--		end = mem->region[i].base + mem->region[i].size - 1;
--		if ((start + size) > end)
--			continue;
--		for (j = 0; j < reserved->cnt; j++) {
--			if ((reserved->region[j].base + reserved->region[j].size) < start)
--				continue;
--			if ((start + size) > reserved->region[j].base)
--				start = reserved->region[j].base + reserved->region[j].size;
--		}
--		if ((start + size) <= end) {
--			env_set_hex("loadaddr", start);
--			debug("Set loadaddr to 0x%llx\n", start);
--			return CMD_RET_SUCCESS;
--		}
-+		return CMD_RET_FAILURE;
- 	}
- 
--	log_err("Failed to find enough RAM for 0x%llx bytes\n", size);
--	return CMD_RET_FAILURE;
-+	env_set_hex("loadaddr", start);
-+	debug("Set loadaddr to %llx\n", (u64)start);
-+
-+	return 0;
- }
- 
- U_BOOT_CMD(
--	addr_find, 7, 1, do_addr_find,
-+	addr_find, 4, 1, do_addr_find,
- 	"find a load address suitable for a file",
- 	"<interface> [<dev[:part]>] <filename>\n"
- 	"- find a consecutive region of memory sufficiently large to hold\n"
+-						ret = snprintf(env, sizeof(env), "%s %d:%d", blk_get_if_type_name(desc->if_type), desc->devnum, loader_part_no);
++						ret = snprintf(env, sizeof(env), "%s %x:%x", blk_get_if_type_name(desc->if_type), desc->devnum, loader_part_no);
+ 						if (ret < 0 || ret == sizeof(env))
+ 							return CMD_RET_FAILURE;
+ 						if (env_set("target_part", env))
+@@ -123,7 +123,7 @@ static int part_find(int argc, char *const argv[])
+ 						break;
+ 					if (strcasecmp(argv[1], info.type_guid) == 0) {
+ 						char env[256];
+-						ret = snprintf(env, sizeof(env), "%s %d:%d", blk_get_if_type_name(desc->if_type), desc->devnum, i);
++						ret = snprintf(env, sizeof(env), "%s %x:%x", blk_get_uclass_name(desc->uclass_id), desc->devnum, i);
+ 						if (ret < 0 || ret == sizeof(env))
+ 							return CMD_RET_FAILURE;
+ 						env_set("target_part", env);
 -- 
 2.34.1
 
