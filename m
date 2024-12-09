@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9169E77180
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 23:06:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C3F9E77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 23:27:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E68AB89706;
-	Tue, 10 Dec 2024 00:06:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 05E2089788;
+	Tue, 10 Dec 2024 00:27:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="inFTP4IJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UZLt+Ira";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF68A897A1; Tue, 10 Dec 2024 00:06:02 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 7C93889787; Tue, 10 Dec 2024 00:27:43 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A5AE89706
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 00:06:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64D2F89788
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 00:27:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5cec9609303so5598576a12.1
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 15:06:00 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa696d3901bso198893366b.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 15:27:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733785560; x=1734390360; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733786860; x=1734391660; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TBgilIhc4eFfP5gj2G4KmGy5CJgHCC+206HDHZXZdOk=;
- b=inFTP4IJhhJVkJeTZAZeADlKxPg6KLu2wTZr9xu/qf3KpoqZvDz76HWk2rBLA/agji
- xcRqVbhua6+RhZZpchcQul+yqGeRE4c4sw6tflm3+c+Iw2IebC3Z4XJQ+g8hqvKSZ1iF
- uip4UMTGZoq/dQZRKTkq+YWzDQzMap3py/4TbMYhVan1IrsDNHQqaHwv65F/ESSWKv9Y
- eK5dij126a7QjOB4+K5lB1GXydyicKxcWhc2dbPDYyy/iY2oEYqFP45NarPrlzRYghfb
- pIrLuRW/N08cl0j3MCPfvsP7dluswwEE6gF7eRMOaTWJGizBGWgDKDJHoZWhUHgJikkq
- 4EEQ==
+ bh=inIHLblj2cfy7VzjbV7+PP83QcsA3zrNKOvKbP7Ipmo=;
+ b=UZLt+Iravl6flcNhtJxQ72yZaqJF1ZSaZk+rSqwEL0U71WqqhlvaVT7M4GFL97gGZb
+ hjpob+NyA6FbiRc/0oG8+rESDjxYJhKb9njJHTTpI+MJPWs67KcCySRjBEv8VpEc1gW+
+ m19xXUjf8o2RMGsX4M1+olXzdSITLCW7ca/pU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733785560; x=1734390360;
+ d=1e100.net; s=20230601; t=1733786860; x=1734391660;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TBgilIhc4eFfP5gj2G4KmGy5CJgHCC+206HDHZXZdOk=;
- b=boWQSVjWREYnANJcOjy8lywe7JqmxFCHQ1Aj/hfCjkf53t1CRYxT0ZAIZ75TT+T9B0
- LMFiPetMFFisW4hb7IedxZYeLJL4mY6t3boCkRCUnrceTmOc35P/qUNEG7yiz6hygZum
- cqm0c/q33PTnofcSWFx4a5SndBuuTnJ3pXpe/W2NQbk3WpKGauzk8Yy5FsLKWK93w3T1
- fBC1yadwYmzjEZ5y/XbYT3xCDaMtocZlcVCm+d7/NeaVz9km81QC2F58gaHKKkESMvsb
- qR2bgBAKE11EuXJYJSfJOXD6bW5EG9P2pPcOC1+kI3dPH1jpMIc0uc0n7Jtx27SGa5ug
- TIoQ==
-X-Gm-Message-State: AOJu0Ywj1aW/JXrkBWewtG3kX8XXcmQYoa8+Ii0WY2zOD4tHFeiRC8Y1
- ybOX7iTDE1YY8NZsRpmsEI6sO1jSTWJFlqEAI0mfhveOLazVVN92AeoRT2jjcjenByUu9m4pWmN
- vm22w0NexjsvivvyMANET11+CU3I=
-X-Gm-Gg: ASbGncvtfEs7ojdv/8y6tE1x74ljVeoSO92cPmI/COL0TrMzrKMtxvjiiCd1T5sekzN
- M1TQjJFDGn45iATULgI5O8q9nJp1vqrFmKK8=
-X-Google-Smtp-Source: AGHT+IHrCtR1rNGaOuFRrYgWJNMPSn8vc4zk70CA0pQm+1db1dcaWH9TE6XAsMuJ4tEzqCvGMbiBy8o3agTpxA0Lwp4=
-X-Received: by 2002:a05:6402:321a:b0:5d2:7456:9812 with SMTP id
- 4fb4d7f45d1cf-5d3be7f0584mr14070423a12.22.1733785559914; Mon, 09 Dec 2024
- 15:05:59 -0800 (PST)
+ bh=inIHLblj2cfy7VzjbV7+PP83QcsA3zrNKOvKbP7Ipmo=;
+ b=UduJloA36K+2MUNGohG4/ntNptWlBADMn9qVEE6aqnnviVHy4LHAtM3xz5RmVXcDs7
+ VXr8QVZ5yGahsd1aEwFsTxG3Nx3glJ+6Q7pEovXBQ0bMSymdMyQ6wpmAvq2P3L8CTx+n
+ bat9sefVsWVXylbmUOfq12VsCXfrBt8UMVRssbztgj7k9PI5YoqUqcx/1no5O7s42+xF
+ dp6/9iytk1VeJlobS2DTzFatDgEmS8hxALHFIWzkHhBQIbHsoIleNRmA/FPW4uuS4/kq
+ YJLK8OeUoCmRYgioIDuPzxwBdiI184GBo1pZ7AWFwycK7wl7h8eghHxiplkbtGqcsIP4
+ MtNg==
+X-Gm-Message-State: AOJu0YxqbtmX6c06yLUfqCjmKoQkmj6ioJf/E7UT6SBtFIyDgMdw+25P
+ dYgW3ZYgIJeFAzvpIcCI5rQX2/EPPav8WBn68Ay9OMKEAdr13kzp+gyuDlXfMsEwl8mbBzjS5Yv
+ lmLOp/VbN7GkvaIVtE7UOsuRqa6/t4TgS2V2g
+X-Gm-Gg: ASbGncvjajcrQuPbNhrGFKo0KxjcRwSFARCzdVNFd07L5M3Igc80OQcfH9+fKGU4HJp
+ JXvjck1PYD+Mx7YOLnbB9hF0GjA64hOMUOa6r
+X-Google-Smtp-Source: AGHT+IHxd4L0GMIk0VnWXCG2J1wfPdOpBob2mgzed6Z39ufVKCHZ4fH0/TSaYIHaqvhprntPDYsUX/2JxZ3bAwRnDzc=
+X-Received: by 2002:a17:906:cc2:b0:aa5:27d4:980a with SMTP id
+ a640c23a62f3a-aa63a242b13mr1222436666b.49.1733786859852; Mon, 09 Dec 2024
+ 15:27:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20241209182002.671953-1-sjg@chromium.org>
-In-Reply-To: <20241209182002.671953-1-sjg@chromium.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 9 Dec 2024 23:05:49 +0000
-Message-ID: <CALeDE9O6Z448edqH4MubyB03yqip_c5qrE00_Ynx9mHvrn5dCg@mail.gmail.com>
+ <CALeDE9O6Z448edqH4MubyB03yqip_c5qrE00_Ynx9mHvrn5dCg@mail.gmail.com>
+In-Reply-To: <CALeDE9O6Z448edqH4MubyB03yqip_c5qrE00_Ynx9mHvrn5dCg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 9 Dec 2024 16:27:27 -0700
+Message-ID: <CAFLszTiuUovE8-ex_J7QPAwyWDMpQPwSvQ_kihRZusv5+2m9fQ@mail.gmail.com>
 Subject: Re: [PATCH v2 0/5] rpi: Tidy up booting
-To: Simon Glass <sjg@chromium.org>
+To: Peter Robinson <pbrobinson@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Stephen Warren <swarren@wwwdotorg.org>, 
  Stephen Warren <swarren@nvidia.com>, Matthias Brugger <mbrugger@suse.com>,
@@ -84,7 +81,6 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Robert Marko <robert.marko@sartura.hr>, 
  Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,42 +97,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 9 Dec 2024 at 18:20, Simon Glass <sjg@chromium.org> wrote:
+Hi Peter,
 
-> This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
-> ramdisk, by expanding the available space.
+On Mon, 9 Dec 2024 at 16:06, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
+>
+>
+> On Mon, 9 Dec 2024 at 18:20, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+>> ramdisk, by expanding the available space.
+>
+>
+> What version of the RPi hardware have you tested this on?
 
-What version of the RPi hardware have you tested this on?
+Only rpi_4 and rpi_5
 
+The U-Boot change itself is tested on rpi_0 and rpi_2 but not actually
+booting a kernel[1]. I don't seem to have an rpi_1 in my lab.
 
-> It also tidies up some strange behaviour with the provided FDT, where a
-> separate pointer is maintained to it, even though U-Boot has copied it
-> and placed it in its own space. This avoids strange bugs where it
-> accidentally gets overwritten when loading a file into memory.
 >
-> The patch to expand the devicetree was dropped, meaning that people
-> should be careful to unset fdt_addr in the environment.
->
-> Changes in v2:
-> - Add new patch to make myself an rpi maintainer
-> - Add new patch to set bootm_size
-> - Add new patch to drop fdt_high and initrd_high
-> - Drop patch to allow expanding the devicetree during relocation
->
-> Simon Glass (5):
->   rpi: Add myself to the list of maintainers
->   rpi: Set bootm_size to 512MB
->   rpi: Drop fdt_high and initrd_high
->   rpi: Update environment to support booti and large initrd
->   rpi: Use the U-Boot control FDT for fdt_addr
->
->  MAINTAINERS                   |  1 +
->  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
->  board/raspberrypi/rpi/rpi.env | 24 +++++++++++++-----------
->  3 files changed, 22 insertions(+), 23 deletions(-)
->
-> --
-> 2.34.1
->
->
+>>
+>> It also tidies up some strange behaviour with the provided FDT, where a
+>> separate pointer is maintained to it, even though U-Boot has copied it
+>> and placed it in its own space. This avoids strange bugs where it
+>> accidentally gets overwritten when loading a file into memory.
+>>
+>> The patch to expand the devicetree was dropped, meaning that people
+>> should be careful to unset fdt_addr in the environment.
+>>
+>> Changes in v2:
+>> - Add new patch to make myself an rpi maintainer
+>> - Add new patch to set bootm_size
+>> - Add new patch to drop fdt_high and initrd_high
+>> - Drop patch to allow expanding the devicetree during relocation
+>>
+>> Simon Glass (5):
+>>   rpi: Add myself to the list of maintainers
+>>   rpi: Set bootm_size to 512MB
+>>   rpi: Drop fdt_high and initrd_high
+>>   rpi: Update environment to support booti and large initrd
+>>   rpi: Use the U-Boot control FDT for fdt_addr
+>>
+>>  MAINTAINERS                   |  1 +
+>>  board/raspberrypi/rpi/rpi.c   | 20 ++++++++------------
+>>  board/raspberrypi/rpi/rpi.env | 24 +++++++++++++-----------
+>>  3 files changed, 22 insertions(+), 23 deletions(-)
+>>
+>> --
+>> 2.34.1
+>>
+
+[1] https://ci.u-boot.org/u-boot/u-boot/-/pipelines/82
