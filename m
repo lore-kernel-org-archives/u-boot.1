@@ -4,78 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EB1BE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF22AE77180
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 16:44:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7083E896F2;
-	Mon,  9 Dec 2024 17:37:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 169CE89718;
+	Mon,  9 Dec 2024 17:44:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ILMytbth";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qM/wLZYb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F59E89707; Mon,  9 Dec 2024 17:37:00 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 53C4989724; Mon,  9 Dec 2024 17:44:35 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31EFA89653
- for <u-boot+nodisclaimer@lists.denx.de>; Mon,  9 Dec 2024 17:36:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1014889718
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 17:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2ef28f07dbaso3364507a91.2
- for <u-boot+nodisclaimer@lists.denx.de>; Mon, 09 Dec 2024 08:36:57 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7b6dd0347dbso23952185a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 08:44:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733762215; x=1734367015; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yjjQ6oSWAFMvKMBypJQuZsbZBBQ4nQ054QrbFp18rjY=;
- b=ILMytbth3R5EboGPhrAlVlE+9QTZVGhJ4oRrtHJrJ6HqMP0uanJ24mipgw8CRh0HNT
- WSCPwNSu2qIN5VV5JvieMTdmnthevKUJpZVzfBe2L+lp6eXhxNNebhBSVMEbLx8WQyEq
- Sp/yIrOA4A2Npy0BVkB7OJ+6FILH7Wvv+KCAE7oGcDiOq6QV3Cmr1YWxF4znvzEF2qNS
- 40quiEyGzFhH9xXv6qyWS5cb9/OzwmyQWh1pvYp3ei4HUVnvvc3VlBXdMlHri0inA9ZB
- GGOd0/qfVxxFhh601kFi7nQRyJhrRSSy8ynBfQBWyBqqVx6JlYeOxKcZ4zZchhX9teEo
- aMBA==
+ d=konsulko.com; s=google; t=1733762672; x=1734367472; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MedLX/HTNE00d8lqy8vuwQgUjerVjr7MS5Xz5LkTuWI=;
+ b=qM/wLZYb39GXzMOdYvY7jajxGLazai/KtB3VYE0sMfrGQ9d1NSDOxi+WVdU7XQztNb
+ d38AgaSsCWvmuJpX0rndiE7yNV3c+rpZFB7bp1z5JwRkW2d6JYf61OC7umQG5Zc+EL+a
+ PqQO9U/GrtiU8mT/UATNIK1SqxWY1CMcn2+PU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733762215; x=1734367015;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yjjQ6oSWAFMvKMBypJQuZsbZBBQ4nQ054QrbFp18rjY=;
- b=KSVgD/pZBgtOOhbnj6r1Y1doOwu9FdCVewbzroNE9pUFvLLDcJrNx2ZZQs+Dviz1oB
- knaJlmfu9FGcYmyAdOkRm57ACG9jiUFwlTNmwjkiC5I0LIr4YNQsn2/VhVPqCAO1G1dS
- O9/Yud50fMk4KyQQxipPA4G4FGoHfb1A0yxyxJIbMlKj4B0zkarLsEiTqPMmpguZWV00
- Gfh2ReA2Ld4JcC5LI9X57IgjL7wiuIad+s6YRgwpRZ1bjdX0P6k0vSoKaUTvMqRwwMKN
- zNUv8Pj4ubBn90a+BKGkoUmdccXxiBXToBLVsvk9lXbVf98sGAzKiMs17hroOiwgBevi
- oPhw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWiLI5O+JLZ2byZ3jlUUtiQORR5MzHMTIE15i+qieA/wSYzSvw10PgcSPnUdE7W1boZ7d+0seA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwZuEPsuIckAlW+GA4+Qh0nw9NjGVtDqNfA7LLNYPLWPW4HQV1f
- bDTE78n8ApyIXFYZ+ZvNJOqwakL57Ux/8xskHpVs2UWS4iQQRSHbhsXG+rG2f0iOZFFr2jvEFDa
- 5i6EfE62QUeR5L12hiIAp1lhzlkfJS0NmrrukPg==
-X-Gm-Gg: ASbGncv/5F4gkv9FBb0x/I3hTfDfrlrqFV+P7Z6jKCBJVS8YYfQi3ofF1m1kv5Jp18G
- VV2u0mqiw/c/uFl2QNGSzsgz8wiYCDIVSCxcb0bwNEyKTYf1UCY5EmqatDHDW65VA
-X-Google-Smtp-Source: AGHT+IEevb0sFXE8c8i9TJ793mqQ5cAw6MaKRt+pHy4vSUKMSXqLqkqUdjM34+YCyGwjIkG+K6XkjbH1tPqeiaQq2TU=
-X-Received: by 2002:a17:90b:2e50:b0:2ee:964e:67ce with SMTP id
- 98e67ed59e1d1-2efcf10e982mr1675956a91.3.1733762215535; Mon, 09 Dec 2024
- 08:36:55 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733762672; x=1734367472;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MedLX/HTNE00d8lqy8vuwQgUjerVjr7MS5Xz5LkTuWI=;
+ b=E5uoX6d3gPrLWxbI1kNuoEI5hohKCzK5ZoXXC+kR3p9MXcF9pBItwh3/NjKZgueZ9u
+ MHJxRFfpDbO8itq/2tpr0QhMuI470+kocmaI3RCk31e7szYl/BK1XbIywaJjmIwJB+/p
+ 37THjgnRuGKA+ioafHrb9jrgqag0gErPizN2WihiMd0tZajwWgMJqtxrVrmiSHIAR33v
+ efqcap16IIEQfgXlRLH/j+9Zgp8jIfUmcEZ9egsdPLnwHVtewQjAWDN4BDA4J+eMg4a4
+ CNjy18hxWogKwVqSXjfOBeZcs0dEnt3a3ay32jPdQwNNVTD9iqyI5dOV3Y1101dVCa2u
+ RUwg==
+X-Gm-Message-State: AOJu0Yy837j3OKjAo/vmJfdmlhmMK++AsQx5Jfg51jRiUQ2myRLpeUYX
+ T9gA0Efqdw5YDlLIhhSm1GBoXdCU90SmEvBtidMmoE9fxxuzmR7jY79xUoef0U8=
+X-Gm-Gg: ASbGnctwGF4S/W5pUHLAhWsDJ7TCmncLGuw71lqLR9TwduGtso8eLpTFXoUpz1YzW5c
+ 1ntevVU5uXf1HDdQNYOwVOM3W4+VcydC4OBPvUVnCuvP4k+RrgT+ky8FJvd5cUAIUg+o1b7DdAU
+ FKcgblteNZDfjKj+xds4tlFyK7QGKE0UEnn1VSrLt8EQYxK5KP+orJqlo49jejQPUii3OdPHu+S
+ zuRq8yIVA/oMaglXZCwJ/toiGGB4g/c14erOuQoS6wWmpDA+hFl52E=
+X-Google-Smtp-Source: AGHT+IELbTlTBYGXGUVMuWyV4KIspE+HfjCyTdHdQG8MO5INRMvPXZuBBTTEBMkKreT2eRQcm934SQ==
+X-Received: by 2002:a05:620a:1a90:b0:7b6:d4a2:f11d with SMTP id
+ af79cd13be357-7b6d4a2f300mr630329185a.50.1733762671934; 
+ Mon, 09 Dec 2024 08:44:31 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.100])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6d075d9d7sm169913385a.110.2024.12.09.08.44.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 08:44:31 -0800 (PST)
+Date: Mon, 9 Dec 2024 10:44:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Francois Berder <fberder@outlook.fr>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH 0/3] rpi: Tidy up booting
+Message-ID: <20241209164426.GM2457179@bill-the-cat>
+References: <20241206194130.GX2457179@bill-the-cat>
+ <CAFLszTjQchtBH+K5rRPdiOGgb1bYq3LFWH8BP7jw+noXEaC0GA@mail.gmail.com>
+ <20241206235233.GB2457179@bill-the-cat>
+ <CAFLszThCR3KG+AVCN_ZeVVmKXverd6g+qNnKrt5YbdTy6jEayg@mail.gmail.com>
+ <20241207000029.GC2457179@bill-the-cat>
+ <CAFLszTiLFe80OQy1q5eVCoZ-v0AhaKUOzdcLsWK9wEwn_SzZ9w@mail.gmail.com>
+ <20241207005246.GD2457179@bill-the-cat>
+ <CAFLszTju5G+icA4aLWWsYTZaEzZp+qUgvgtZ38azndH+A-6Okg@mail.gmail.com>
+ <20241208161525.GH2457179@bill-the-cat>
+ <CAFLszTjvozAhrejprXvfoPBKor12p-KZOwvXNHk82Avjp3wYoA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241209094159.8355-1-philippe.reynes@softathome.com>
- <20241209094159.8355-6-philippe.reynes@softathome.com>
-In-Reply-To: <20241209094159.8355-6-philippe.reynes@softathome.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 9 Dec 2024 11:36:45 -0500
-Message-ID: <CAEfUkU+KwcdO5h88YYZYDa-y+XEp9u8b2ufQzY9677Gt0WdwTQ@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] test: lib: add test for key derivation
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: raymond.mao+nodisclaimer@linaro.org, sjg+nodisclaimer@chromium.org, 
- u-boot+nodisclaimer@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4ypYJxAKDBDaU4Bs"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjvozAhrejprXvfoPBKor12p-KZOwvXNHk82Avjp3wYoA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,119 +116,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
 
-On Mon, 9 Dec 2024 at 04:42, Philippe Reynes <philippe.reynes@softathome.com>
-wrote:
+--4ypYJxAKDBDaU4Bs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Adds a test for the function sha256_hkdf.
->
-> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
-> ---
->  test/lib/Makefile           |   1 +
->  test/lib/test_sha256_hkdf.c | 104 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 105 insertions(+)
->  create mode 100644 test/lib/test_sha256_hkdf.c
->
-> diff --git a/test/lib/Makefile b/test/lib/Makefile
-> index 4c0abcba81a..24ce6ed8f00 100644
-> --- a/test/lib/Makefile
-> +++ b/test/lib/Makefile
-> @@ -25,6 +25,7 @@ obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
->  obj-$(CONFIG_UT_LIB_RSA) += rsa.o
->  obj-$(CONFIG_AES) += test_aes.o
->  obj-$(CONFIG_SHA256) += test_sha256_hmac.o
-> +obj-$(CONFIG_HKDF_MBEDTLS) += test_sha256_hkdf.o
->  obj-$(CONFIG_GETOPT) += getopt.o
->  obj-$(CONFIG_CRC8) += test_crc8.o
->  obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
-> diff --git a/test/lib/test_sha256_hkdf.c b/test/lib/test_sha256_hkdf.c
-> new file mode 100644
-> index 00000000000..ca173a13afc
-> --- /dev/null
-> +++ b/test/lib/test_sha256_hkdf.c
-> @@ -0,0 +1,104 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
-> + *
-> + * Unit tests for sha256_hkdf functions
-> + */
-> +
-> +#include <command.h>
-> +#include <test/lib.h>
-> +#include <test/test.h>
-> +#include <test/ut.h>
-> +#include <u-boot/sha256.h>
-> +
-> +struct test_sha256_hkdf_s {
-> +       unsigned char *salt;
-> +       int saltlen;
-> +       unsigned char *ikm;
-> +       int ikmlen;
-> +       unsigned char *info;
-> +       int infolen;
-> +       unsigned char *expected;
-> +       int expectedlen;
-> +};
-> +
-> +/*
-> + * data comes from:
-> + * https://www.rfc-editor.org/rfc/rfc5869
-> + */
-> +static unsigned char salt_test1[] = {
-> +       0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
-> +       0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c };
-> +
-> +static unsigned char ikm_test1[] = {
-> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
-> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
-> +
-> +static unsigned char info_test1[] = {
-> +       0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9 };
-> +
-> +static unsigned char expected_test1[] = {
-> +       0x3c, 0xb2, 0x5f, 0x25, 0xfa, 0xac, 0xd5, 0x7a,
-> +       0x90, 0x43, 0x4f, 0x64, 0xd0, 0x36, 0x2f, 0x2a,
-> +       0x2d, 0x2d, 0x0a, 0x90, 0xcf, 0x1a, 0x5a, 0x4c,
-> +       0x5d, 0xb0, 0x2d, 0x56, 0xec, 0xc4, 0xc5, 0xbf,
-> +       0x34, 0x00, 0x72, 0x08, 0xd5, 0xb8, 0x87, 0x18,
-> +       0x58, 0x65 };
-> +
-> +static struct test_sha256_hkdf_s test_sha256_hkdf[] = {
-> +       {
-> +               .salt = salt_test1,
-> +               .saltlen = sizeof(salt_test1),
-> +               .ikm = ikm_test1,
-> +               .ikmlen = sizeof(ikm_test1),
-> +               .info = info_test1,
-> +               .infolen = sizeof(info_test1),
-> +               .expected = expected_test1,
-> +               .expectedlen = sizeof(expected_test1),
-> +       },
-> +};
-> +
-> +static int _lib_test_sha256_hkdf_run(struct unit_test_state *uts,
-> +                                    unsigned char *salt, int saltlen,
-> +                                    unsigned char *ikm, int ikmlen,
-> +                                    unsigned char *info, int infolen,
-> +                                    unsigned char *expected, int
-> expectedlen)
-> +{
-> +       unsigned char output[64];
-> +
-> +       sha256_hkdf(salt, saltlen, ikm, ikmlen, info, infolen, output,
-> expectedlen);
->
-
-I think we can add a few checkers here:
-
-ut_assert(expectedlen <= sizeof(output));
-int ret = sha256_hkdf(salt, saltlen, ikm, ikmlen, info, infolen, output,
-expectedlen);
-ut_assert(!ret);
+On Sun, Dec 08, 2024 at 04:06:47PM -0700, Simon Glass wrote:
 
 [snip]
+> OK, yes it seems like fdt_high is a hack. But 'git grep fdt_high |grep
+> fffff |wc' shows 74 matches, so it is still there.
 
-Regards,
-Raymond
+Yes, it's something that needs to be done.
+
+> Going back to my patch, do you have any comments about it? I am not
+> about to boil the fdt_high ocean, sorry, but I will happily drop the
+> fdt_high on rpi, since it seems unnecessary, at least for 64-bit
+> kernels. I do see that kernels <4.2 require fdt_high on arm so that
+> the kernel and FDT are within the same 512MB section. Is that still a
+> concern?
+
+I'm not asking you to remove fdt_high from everyone, sorry if I gave
+that impression. For Pi the best option would be to set bootm_size to
+512MB so that everything stays within that area, on all Pis and remove
+fdt_high and initrd_high in all cases there.
+
+> I'll also add myself as a rpi maintainer since the current ones seem
+> pretty busy.
+
+If they agree, sure.
+
+> I am planning to continue with the bootstd work, part of which will be
+> to drop the need for these variables. If there are constraints, we can
+> specify those either in the kernel FIT or in U-Boot's config, and
+> implement them in C code (with tests), not scripts, variables, etc.
+
+At the high level, yes, something like the approach EFI takes where
+there's not a need to relocate things after loading them to memory would
+remove the need for the variables that say where things go specifically,
+and only have the need for knowing what memory the OS will be able to
+see initially.
+
+--=20
+Tom
+
+--4ypYJxAKDBDaU4Bs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdXHmYACgkQFHw5/5Y0
+tywMeQv/XvOqiKD20GaBZTYc0rgrySRspXgIyUzAxcag+qNkFB/h4fXAdKEBx/hB
+gvqw8+W4AH5RLXfzWar2TIXbFm8f/v9SK3ulDiqbqNz6vXBI4A7MOQdlBvNExkBk
+N9UdPLoAwX6zLc6I3D7JQ/I85N1D8YhZkBgvwlDIBA7QaxFZ4HVDLiODLwahUUuM
+j4vFxJ67Iw9+SyihtGqtPVfEwrp9AMKTSPZQCxU5jxxz/Xl5CxcgaSVyGTKFkVm7
+zzZcAWMDNRlb0YVufY71mmeQrEYSkERsxK/FVZ+fpJAHnB+v6loqZCRU3toAlVlz
+faN0ZRxyqdKbIQ/ZiaY2wxMSab1Cw87D/piaLGHJtWU0viukohhEAbRDCKreTuaz
+ZWm6OJfr4Lsj8QRfshY+1ggFdzsS9+8mWKYm+I2fZxwj+WRcDrFwbJyheHaE+km4
+cBoJdfno8lRK6Tp/rUTa+4sCvWeayt+WFSyxmM0tHqOrIFqD1D0KGbaOnnxruCbG
+3SFfZX/L
+=cNew
+-----END PGP SIGNATURE-----
+
+--4ypYJxAKDBDaU4Bs--
