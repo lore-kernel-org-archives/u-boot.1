@@ -4,136 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2515DE7717D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 11:12:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E047E7717D
+	for <u-boot@archiver.kernel.org>; Mon,  9 Dec 2024 11:43:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 768BB896A5;
-	Mon,  9 Dec 2024 12:12:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CA49896B2;
+	Mon,  9 Dec 2024 12:43:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="eyzicB/8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DSxRrXYk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C57F2893A2; Mon,  9 Dec 2024 12:12:06 +0100 (CET)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2406::622])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AAE5E896B3; Mon,  9 Dec 2024 12:43:13 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2F5F896B1
- for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 12:12:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CFB489534
+ for <u-boot@lists.denx.de>; Mon,  9 Dec 2024 12:43:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CxnntX+hSW6SbeygiD18ueo3OQKxc0aQ4/0W1/hGb6ZknN3X+4K4p12Ql4xXVUA+zK6k0rxhviQtQDPf6HyKMaITPlxRn41Gsicza3hK65pl17qRQ7PF5bspKBXlPoedryEf9x3g85JjcOpTSB+1o1KF9H6Wwl0H6Qli7sgsnkMrE5qac2ypy59+L/yhQvN+f7eeXGOHdd3BiquJBvMpxysCoWc9YHUwRBVUA3JidVyXahj6IvuTuA/nspMQGD913BgYgL8K6r0YXA/07XdnhN8NP8TMKwmWPsAMvOkb5/wnhFCpz2mh85esSr5X/RTacLoAS6X4pR+tLidsZE0Wpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8MQV0+HyXrRjH7uamXYmGmNMdh50vqMapjYB9EALZjk=;
- b=XCY6wpswY3oy5KogMMDJUW9aomZd/1lMD7jD648ly0c8KP+WmheniLPhMOXZAg73gRAaeEIpPj9BbE8uEcqRy8iF41Rem7SyKoooiTEJaUNVYcCed7tPNWEiyEnQdeHmo/HT30Py+aU7WC5V1rUswOQXo9lzrtDDkxKr8jQ0YCYshgusluS3mf/hGHRZ9WAiBerYVhDCoOySSekoOSpX47FsI/6FfX/Ll/2cqYETC1eE96bBL10Yzl+EneZDEyOVjRlOl6gU03J6ExcrvsLOW/i4uXNjYejHE8e5X+w4f4h9xmszCQQMhT7Dw2nyXS2lc9P12klTMpfwgXSUQcnBLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8MQV0+HyXrRjH7uamXYmGmNMdh50vqMapjYB9EALZjk=;
- b=eyzicB/8V7jO3i1qvB4lf7raoHRRVNkXqaRaxg8JK/kWIUZVBMlabuyWRXqBhuY/8rkyFgSlwkccp6MOx8LcyVNfthG2q+2ADOcy7bUprGq9fVGDjE6fFw/0pt5FUCZRdFST9gtSCx1hhImA3yhdUa91/9tq5JcHbmdNn4QXnuQ=
-Received: from SJ0PR03CA0267.namprd03.prod.outlook.com (2603:10b6:a03:3a0::32)
- by MW4PR12MB6706.namprd12.prod.outlook.com (2603:10b6:303:1e2::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.17; Mon, 9 Dec
- 2024 11:12:01 +0000
-Received: from SJ5PEPF000001EE.namprd05.prod.outlook.com
- (2603:10b6:a03:3a0:cafe::80) by SJ0PR03CA0267.outlook.office365.com
- (2603:10b6:a03:3a0::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8230.11 via Frontend Transport; Mon,
- 9 Dec 2024 11:12:01 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ5PEPF000001EE.mail.protection.outlook.com (10.167.242.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8230.7 via Frontend Transport; Mon, 9 Dec 2024 11:12:00 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Dec
- 2024 05:11:57 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Anatolij Gustschin <agust@denx.de>, Peter Robinson <pbrobinson@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] video: zynqmp: Add support for reset
-Date: Mon, 9 Dec 2024 12:11:50 +0100
-Message-ID: <0504474a91a9839828aecd37f8855fd154cdf2e1.1733742708.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3d74363cbso3674842a12.2
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 03:43:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733744590; x=1734349390; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hoDxHTvDAss3rfELk7p6q0Sx0mARo9tbI+NPvJd54xY=;
+ b=DSxRrXYkccE0803v5WTsE48WIwzUJROkZsY928xvMIMCJyA8MKU+teWEIohnHxjBiQ
+ hmReNLaJX3a/sBTSBuSq8Zp6J+fowV0RTVC0dr3xTgZDlkI+xkodaAinur0KLZCC2J4d
+ gHQJulHbsnbE36A0adjnnR1YvsowkLyC0J1QQjJuWRxVnvT0s9KYJmZyVzygpNq/om5I
+ M3Ob36iwMu2k1CJMHwXBbwdw5xArdXWu7HAZrPXDpQFZaocH9KlDV+z+ikwU2br/VXjg
+ PQ80b2SWXxCdpcHj0ppadC4CO8nkrxaadj0ZZnSgeQzoabuJ8+1lE8UzU1HbxPdKyL6M
+ i2+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733744590; x=1734349390;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hoDxHTvDAss3rfELk7p6q0Sx0mARo9tbI+NPvJd54xY=;
+ b=lZlNNJEJWeb4GhWV4sFgWR6LtiyzgcFRTkoVhSm1nlQmw6e60u1PRIOn6Ncem8EBwI
+ zb8n6JTimUq+QFZWDmEN97CLAgRjsj8YOHXz5OhbM8yALMKllXkmuyDx1gE1sxCcgywu
+ J5684G2tix6qbuIWJAYeKNBGh8SER1m39K3TNayYJ7vK7jMhS96zvh6Lhv1phCPhZrx0
+ lKguUswP1I5WBMT1P+HEMzJU74F/SQYFimpLHEcKPXkc9jsKTQpZ+PF6BCp7q1uAEgNf
+ A5vF5fZtH5R/uj6JR9FeMSRcoO4Q0wrGIS/nAcE/cEchN9GK4GX80N/r+vsANuU2bOwL
+ k6Ng==
+X-Gm-Message-State: AOJu0Yxrstm8Cxlc6wz3Vio9MurOW9DLI2Q/DW1+LnMfEIUc6sz1gq40
+ x+jKOWFsxLeC7ZQoOJJugahVGDX3MnFIUNG7OU2dDVowyxwjN7H3hzlu/FG66chMPCh8FBeK7g1
+ WTklqV3/hcNCudfPy3XC9Jh5G1RVX3LdmKQMNhw==
+X-Gm-Gg: ASbGnctyuURYf2tBBC/CElTpOjTQJ+lisN0iGUeEf09PAWxzY59mEUz+gmE1QGXkL4c
+ 5Gs+kxr9bS4nCfWwnGn9fkd4Jdsyd1iIx
+X-Google-Smtp-Source: AGHT+IFolKwzEFfdxeZaS3K+1lI9jlnAXaQyb5GlBlBV6Q1jjHkmOtRHDMqq90knIcWvSDarh2Eb/5rQ3QARxjTxHEQ=
+X-Received: by 2002:a05:6402:2689:b0:5cf:e894:8de9 with SMTP id
+ 4fb4d7f45d1cf-5d4184f7b02mr345474a12.3.1733744590568; Mon, 09 Dec 2024
+ 03:43:10 -0800 (PST)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1167; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=fwA65OK6eGwOVUZ9GctiBTEmgmStFgPZc2XsxhMPR2E=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSwC+WyGwq1JgcZrPN+WiHj6+Tizin0a32M7yXTWVJJf
- D4br07qiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABMxK2SYZ/HL53/c0ziP73YM
- R3KzCn+eXVDCyDBX7Phnp/vGeUfkVAL3T4/1Pe20WeAsAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EE:EE_|MW4PR12MB6706:EE_
-X-MS-Office365-Filtering-Correlation-Id: df9e43c9-7ad4-4002-a876-08dd18424dd4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MHDkw3BKZE56KjqTg9EasjKHDyh6Ik3EC9aQxzkLLXNft0wQih9IAM+eh2ag?=
- =?us-ascii?Q?7TAKK3lOBmm32N88ySyHl4dVG/ohIy/mKGkjVNFWDBsd6GFEGbHhB4ZZ6sts?=
- =?us-ascii?Q?gPgy7XVZQ+fOPniDZMtOsKE3ZeAS073hZLJXdXJq8nmwTOzjZYfshJrbpXCE?=
- =?us-ascii?Q?Tuajask25uMObD/Tlbrjb3G5vzPGpp+o3W05fAXDDfIK13sdjVGhOmm76Y1O?=
- =?us-ascii?Q?ECg1JsAlMTUYj+iqxQefq2mwWj1eMxCB4/4b4o8hhtBZ9rVCM4RKqJr8bV45?=
- =?us-ascii?Q?t4gwC61DrClrvCUgfqQ/dMoSnZiJjq4g07+zqdgG0rqmJ5/PWuh9HNfOerud?=
- =?us-ascii?Q?iUVtpe4p6lOM3mqSx+ZAI/XRbeM/9fmfaAYMgny731Fjbs4ALULg2+OZl3ym?=
- =?us-ascii?Q?PWe6CL8l8fHRgV2bi6JE8pRTiTIlB9SW1bM+2LohO+SQvsaNlGB77BsnVtS2?=
- =?us-ascii?Q?KNlC7hNtzN5aNZ1UoQAk4Oy3qG9T4xotVLW+04CriJGpVj/5vm7Wb1Su+fec?=
- =?us-ascii?Q?PBg7YQ3dFEvMoDIC0TxrpkeHjTOR617CxD1ZRiI/KbN0Yfa6p3GH1vTsPl29?=
- =?us-ascii?Q?hS4cULDZw2ZgD2wVQirC/4MyOnHko99g990eypBpjpQV4DXbi1Xem7tzffj0?=
- =?us-ascii?Q?dU6Q7dXP9k/xtfWjq8n+h9dJm5JRgwkJTo8fuCcyArTLzej/pteUefn94bX4?=
- =?us-ascii?Q?ELjaWejL8+S9L+CmsLZLB1liRAvdOGNEok91RPhLjBWpOBwdOKFFp65etQHo?=
- =?us-ascii?Q?Mb9tyo+7z4gtAkTMQ/9E3ONvYZHrwFJJ+SKOLvMVt2owZdJegLTzzmXJDPRX?=
- =?us-ascii?Q?VYxs7mILcd+F3SZCE9KFXYUk5j6zLRJ4y89K5DiedOkf4maf7iuaTSzmI8fe?=
- =?us-ascii?Q?BcA3ijZs9jPTOyqtT7sBr55aaCfDVZxnUSxb1ptpQ9VVjbG3Ldk1NY8aPufW?=
- =?us-ascii?Q?8Ie75JF8lNRm4LrizYuAUsh9biPF9y05kbT3sjiueZFLmf+7rFXXgA8ViNj9?=
- =?us-ascii?Q?eTe3O/rH0jYHAiyIDmJjj+QGPqDHuqyzQ6rQ5RtTsQLbZgPJnsR/657nT8XE?=
- =?us-ascii?Q?yiUnfSpey9ew2NiBZg+6Be6XUr6NHhlJWg2S268TSvplVi0V25eU3BhSum6F?=
- =?us-ascii?Q?rR9HC6YeMZWpzHgtRohInrXixerytHkwORK5mg9+nOoT6vadBdIV1fr2C0Tu?=
- =?us-ascii?Q?o6fqzjwEDuie0E7uiq2u8F7MJPZqtERd6mrAAtNfQS8FXTPIWnc+RJxEUZ1/?=
- =?us-ascii?Q?FbULlGGGKrC++fJtVsFTPgVGRL1SmykA0ItF4uZUZHKnOiT57nhDYSenSwjT?=
- =?us-ascii?Q?lequl1hwNWpPD4gDcviRzpwslsZt5N+uH5zj5QBf10JSxTULAQjU59W7fhLk?=
- =?us-ascii?Q?kpsxQSmHJB1LMHgjKGUK2ydrgsp3GUJBmXt505qoBBpiUPnewBPlYdPJHVag?=
- =?us-ascii?Q?TfOylE88q7yHpDu83sTIVlANuCBRHJuv?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2024 11:12:00.7606 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: df9e43c9-7ad4-4002-a876-08dd18424dd4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EE.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6706
+References: <CAPLW+4=qP6pCN0xd9n3U5jBePJk2jEKgixCs1A_uBaDTwFLT4g@mail.gmail.com>
+ <CADg8p95bi5G48xZdT9+gqzKEByN4C3ZxfQHNPEaCX=0_559T9w@mail.gmail.com>
+ <CAPLW+4nh2kxgV2ri=kkTD6pLjM2--aewZ4kMO8cjagv5OZCXUg@mail.gmail.com>
+ <CADg8p94-8GXxWAOkgd1Y7AhXhxPJazy04PSnMrg687VigOZC+Q@mail.gmail.com>
+In-Reply-To: <CADg8p94-8GXxWAOkgd1Y7AhXhxPJazy04PSnMrg687VigOZC+Q@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 9 Dec 2024 17:12:59 +0530
+Message-ID: <CADg8p97K3jX7-37tLNVb4K208eqnN8agBzhEMEnp2Nn3BqvKuw@mail.gmail.com>
+Subject: Re: [REGRESSION] lmb: add and reserve memory above ram_top
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Mark Kettenis <kettenis@openbsd.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,43 +97,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In Kria SOM configuration DP is under reset and access to DP is causing
-hang that's why call reset at probe to avoid this situation.
+On Mon, 9 Dec 2024 at 12:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Sun, 8 Dec 2024 at 06:49, Sam Protsenko <semen.protsenko@linaro.org> w=
+rote:
+> >
+> > On Thu, Dec 5, 2024 at 11:23=E2=80=AFPM Sughosh Ganu <sughosh.ganu@lina=
+ro.org> wrote:
+> > >
+> >
+> > [snip]
+> >
+> > > >     ERROR: reserving fdt memory region failed (addr=3Dbab00000
+> > > > size=3D5500000 flags=3D2)
+> > > >     ERROR: reserving fdt memory region failed (addr=3Df0000000
+> > > > size=3D200000 flags=3D4)
+> > > >
+> > > > It looks like all mentioned error messages are harmless, in a way t=
+hat
+> > > > I'm still able to boot Linux, and U-Boot reserved areas still seem =
+to
+> > > > exist in 'bdinfo'. But seeing error messages like that is definitel=
+y a
+> > > > nuisance by itself, and might be an indicator of some actual issues=
+.
+> > > > Do you have any remedy for that by chance? Please let me know if yo=
+u
+> > > > need more debug input from my side.
+> > >
+> > > This seems to be happening because the board is trying to reserve
+> > > memory above ram_top with no-map or no-overwrite attributes. To
+> > > confirm, you can print the value of ram_top in setup_dest_addr().
+> > >
+> > > -sughosh
+> > >
+> >
+> > Thanks for your input, Sughosh! I did a bit of further analysis, and
+> > found the mentioned error message is happening on 3 different
+> > occasions. All 3 of them are caused by the recent LMB patches merged
+> > in U-Boot/master. They are all probably harmless, but a bit
+> > misleading. Also, I'm not sure whether they are actually *causing*
+> > those errors, or just revealing some already existing issues.
+> > Specifically those 3 occurrences are:
+>
+> Thanks much for your investigation.
+>
+> >
+> > 1. The one reported in this thread. The root cause, like you
+> > suggested, is the board trying to reserve the memory above ram_top.
+> > It's actually happening in lmb_init(). Details:
+> >
+> >   - The 'memory' node from my dts:
+> >
+> >         memory@80000000 {
+> >             device_type =3D "memory";
+> >             reg =3D <0x0 0x80000000 0x3ab00000>,
+> >                   <0x0 0xc0000000 0x40000000>,
+> >                   <0x8 0x80000000 0x80000000>;
+> >         };
+> >
+> >   - Reserved memory chunk: (addr=3Df0000000 size=3D200000 flags=3D4).
+> >     That's 'ramoops' chunk from the 'reserved-memory' node in my dts.
+> >   - ram_top (as seen in lmb_init) =3D 0xbab0_0000.
+> >     That's because my board's dram_init() calls the
+> > fdtdec_setup_mem_size_base(), which only takes the first cell from the
+> > 'memory' node.
+> >     Which is 0x8000_0000 ... 0xbab0_0000.
+> >   - So the reserved memory is above ram_top, as you suggested.
+> >   - Not sure how to properly fix it though. Maybe I need to "teach"
+> > U-Boot to use all 3 chunks from my 'memory' node somehow?
+>
+> I think there needs to be a check in the related function to not
+> reserve memory regions above ram_top. This wasn't showing up earlier
+> because of the local nature of the lmb memory map, but is not the case
+> anymore. I have a patch which I am testing currently. Will send it out
+> in a day or so.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+This change should not be needed after your series gets applied.
 
- drivers/video/zynqmp/zynqmp_dpsub.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+>
+> >   - I was able to work-around it by reworking the 'memory' node in my
+> > device tree as described in my first message in this thread:
+> >
+> >         memory@80000000 {
+> >             device_type =3D "memory";
+> >             reg =3D <0x0 0x80000000 0x80000000>,
+> >                   <0x8 0x80000000 0x80000000>;
+> >         };
+> >
+> > 2. When booting Linux with 'booti' command, there happens the repeated
+> > attempt to reserve all 'reserved-memory' chunks, which were already
+> > reserved during the board init, which also leads to similar error
+> > messages. I addressed that one (hopefully properly) in my series [1].
+> > Please take a look. That one is caused by a combination of these two
+> > commits:
+> >
+> >   - 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas
+> > with !LMB_NONE")
+> >   - 827dee587b75 ("fdt: lmb: add reserved regions as no-overwrite")
+>
+> I will try out your patch series on my side and get back.
+>
+> >
+> > 3. I noticed another similar error message when running sandbox U-Boot =
+on my PC:
+> >
+> >         $ make sandbox_defconfig
+> >         $ make -j32
+> >         $ ./u-boot -D
+> >         ...
+> >         ERROR: reserving fdt memory region failed (addr=3Dfffe000
+> > size=3D2000 flags=3D2)
+> >
+> >   Can you please check that one on your U-Boot/master? I was able to
+> > narrow it down to commit 6534d26ee9a5 ("lmb: do away with
+> > arch_lmb_reserve()"), if that helps.
+>
+> This is strange. I have not seen this issue with sandbox earlier.
+> Might be a regression. Will check. Thanks.
 
-diff --git a/drivers/video/zynqmp/zynqmp_dpsub.c b/drivers/video/zynqmp/zynqmp_dpsub.c
-index 76abfeac4433..52af23c3c835 100644
---- a/drivers/video/zynqmp/zynqmp_dpsub.c
-+++ b/drivers/video/zynqmp/zynqmp_dpsub.c
-@@ -11,6 +11,7 @@
- #include <dm.h>
- #include <errno.h>
- #include <generic-phy.h>
-+#include <reset.h>
- #include <stdlib.h>
- #include <video.h>
- #include <wait_bit.h>
-@@ -2093,10 +2094,15 @@ static int zynqmp_dpsub_probe(struct udevice *dev)
- {
- 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
- 	struct zynqmp_dpsub_priv *priv = dev_get_priv(dev);
-+	struct reset_ctl_bulk resets;
- 	struct clk clk;
- 	int ret;
- 	int mode = RGBA8888;
- 
-+	ret = reset_get_bulk(dev, &resets);
-+	if (!ret)
-+		reset_deassert_bulk(&resets);
-+
- 	ret = clk_get_by_name(dev, "dp_apb_clk", &clk);
- 	if (ret < 0) {
- 		dev_err(dev, "failed to get clock\n");
--- 
-2.43.0
+Same here. The issue goes away after this series.
 
+-sughosh
+
+>
+> -sughosh
+>
+> >
+> > Thanks!
+> >
+> > [1] https://lists.denx.de/pipermail/u-boot/2024-December/574308.html
