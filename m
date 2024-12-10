@@ -4,121 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF490E77180
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 11:16:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36B1E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 11:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E32C8891E8;
-	Tue, 10 Dec 2024 12:16:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C4C989220;
+	Tue, 10 Dec 2024 12:16:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="lLy+wUqL";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="XZpYZa1A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A29EA89220; Tue, 10 Dec 2024 12:16:41 +0100 (CET)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 25E67892A4; Tue, 10 Dec 2024 12:16:55 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CABD8891C4
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 12:16:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92E2B891C4
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 12:16:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20241210111634epoutp01d4c6438a90284d8c65b703f353d25c83~PzKYAnl-i3259332593epoutp01C
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:16:34 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20241210111634epoutp01d4c6438a90284d8c65b703f353d25c83~PzKYAnl-i3259332593epoutp01C
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111648epoutp0403034c47d338207e667036aae1618830~PzKkZ1S-d2434224342epoutp04d
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:16:48 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20241210111648epoutp0403034c47d338207e667036aae1618830~PzKkZ1S-d2434224342epoutp04d
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733829394;
- bh=0kfzU7hbJPEippuVy3lSbdvdB26aAGE1LB/p4uE1pYU=;
+ s=mail20170921; t=1733829408;
+ bh=+scBT2jxzMQoRKL4UKnas74xENR9jeToo7ikUOop10w=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=lLy+wUqLai9NJhnLpZPvYXG4Drglo7naucZ9hA251VpQwq8e4KYQsE8OGiBktvwAp
- sE0FhiD70xUp9+/LdEsp/kvqImm80/dRPnOfyaWUh7teIjXqeMgBtT0CUKsMFE9tTN
- kwR8fsKdYmgwU6fB2xKiOjj/kODhtgwV2cTgD8Wo=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20241210111634epcas1p40e8140d83068738fc8e0ba91a8f0dcf8~PzKX2w2lU2304823048epcas1p4f;
- Tue, 10 Dec 2024 11:16:34 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.132]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4Y6x4x4M3Pz4x9Pv; Tue, 10 Dec
- 2024 11:16:33 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- E6.F2.23253.11328576; Tue, 10 Dec 2024 20:16:33 +0900 (KST)
+ b=XZpYZa1AMtSP6JL120HTwzy6bvHzI0bYqJjFqZYen7zoNDwLhWaIKP/dRzX/a2W8F
+ Ur+GjL9Yg8W62cOvh3NVA5hIyMNcYjJFVc0wW6q0RQVDxXdJChxfTcEchZ0hG7j4lK
+ VOGz1u1yo5iDC364gK+c3ZXhkvntah6wIo3dHmxI=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111647epcas1p3b5678a4e8390f2e210a15a772f1b3fc0~PzKj6Jl2q3095230952epcas1p3D;
+ Tue, 10 Dec 2024 11:16:47 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.36.132]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4Y6x5B55lGz4x9Q0; Tue, 10 Dec
+ 2024 11:16:46 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 6E.D8.21650.E1328576; Tue, 10 Dec 2024 20:16:46 +0900 (KST)
 Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20241210111633epcas1p3c6494f2b82cc658465e816f06ba8cec2~PzKWie8dZ3095230952epcas1p3a;
- Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20241210111646epcas1p1ec366993a224712e907e7377e0e5dba0~PzKieOIKl1345813458epcas1p1t;
+ Tue, 10 Dec 2024 11:16:46 +0000 (GMT)
 Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
  epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241210111633epsmtrp2f0d91558349fc7dfb3a9973c789df122~PzKWhz2aC2621126211epsmtrp2o;
- Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
-X-AuditID: b6c32a33-5a18170000005ad5-58-675823111fa3
+ 20241210111646epsmtrp28305bd8ac530568e51f9564a0fa1fa2c~PzKidjtMX2621126211epsmtrp2-;
+ Tue, 10 Dec 2024 11:16:46 +0000 (GMT)
+X-AuditID: b6c32a35-093de70000005492-9b-6758231e6b40
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 53.FA.33707.11328576; Tue, 10 Dec 2024 20:16:33 +0900 (KST)
+ 48.FA.33707.E1328576; Tue, 10 Dec 2024 20:16:46 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241210111633epsmtip19a4103ab53ca0aad1548da9922b691ef~PzKWSA7tq1343813438epsmtip1Q;
- Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
+ 20241210111645epsmtip18a72d771f6210a8a177ff7d27466f97e~PzKiSS7Xq1344413444epsmtip1m;
+ Tue, 10 Dec 2024 11:16:45 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Simon Glass'" <sjg@chromium.org>, "'U-Boot Mailing List'"
  <u-boot@lists.denx.de>
 Cc: "'Tom Rini'" <trini@konsulko.com>, "'Stephen Warren'"
  <swarren@wwwdotorg.org>, "'Stephen Warren'" <swarren@nvidia.com>, "'Matthias
  Brugger'" <mbrugger@suse.com>, "'Peter Robinson'" <pbrobinson@gmail.com>
-In-Reply-To: <20241209195528.730260-3-sjg@chromium.org>
-Subject: RE: [PATCH v3 2/5] rpi: Set bootm_size to 512MB
-Date: Tue, 10 Dec 2024 20:16:32 +0900
-Message-ID: <0b9101db4af4$f7f4e8e0$e7debaa0$@samsung.com>
+In-Reply-To: <20241209195528.730260-4-sjg@chromium.org>
+Subject: RE: [PATCH v3 3/5] rpi: Drop fdt_high and initrd_high
+Date: Tue, 10 Dec 2024 20:16:45 +0900
+Message-ID: <0b9201db4af4$ffa59940$fef0cbc0$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHWHE+rJGlG6nTqz0NZt5G0ftzdLQJbrX6/AiSRicKyxa8U0A==
+Thread-Index: AQHWHE+rJGlG6nTqz0NZt5G0ftzdLQFpv2XQALO/Mqay2MVhwA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmga6gckS6wY8GBYsFk5+wWqxbtYbN
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmvq6cckS6QfMDNYsFk5+wWqxbtYbN
  4tuWbYwWN6a3sFq8OtjGYjF10mZ2i7d7O9kd2D1mN1xk8dg56y67x6sDq9g9zt7ZwejR2/yO
  zWP9lqssHhvnhgawR2XbZKQmpqQWKaTmJeenZOal2yp5B8c7x5uaGRjqGlpamCsp5CXmptoq
  ufgE6Lpl5gAdpKRQlphTChQKSCwuVtK3synKLy1JVcjILy6xVUotSMkpMC3QK07MLS7NS9fL
- Sy2xMjQwMDIFKkzIzmg+1stYsIyv4vTDCSwNjHe5uxg5OCQETCRW7LLoYuTiEBLYwSjxadUv
- VgjnE6PE6x+zmeGcCf0L2LsYOcE6Tq/sY4FI7GSUON37CqrqJaPE1L9NLCBVbAJ6Ev8XLWQG
- 2SEiECFx9oYfSJhZ4DKjxLsniSBhTgFziV/fA0FMYQELiXcf+UFMFgFViQPLLUFMXgFLiS0d
- 0hBLFSR+Pl3GCmKLCDhJNOw8yAgxT0Ridmcb2H4JgY/sEpMnHWeFaHCR+N82HcoWlnh1fAvU
- 9VISn9/tZYNoaGaUWLrkICuE08Mo8a/hOhtElbHE/qWTmUCuYBbQlFi/Sx9iG5/Eu689rJCA
- 45XoaBOCqFaRuPT6JRPM/LtP/kPt9ZBoPzUVbK+QwHZg4LSHTmCUn4Xk7lkICxYwMq1iFEst
- KM5NT002LDCEx2Jyfu4mRnAi1DLewXh5/j+9Q4xMHIyHGCU4mJVEeDm8Q9OFeFMSK6tSi/Lj
- i0pzUosPMZoCw3Eis5Rocj4wFeeVxBuaWBqYmBkZm1gYmhkqifOeuVKWKiSQnliSmp2aWpBa
- BNPHxMEp1cAU4O92PGfTnX+X3qaesSutmLqdc/obsQzehbGPpp66836CuP15raMK/QlpUyZV
- LfZ+Hmv5t2R7TVDGBZ8ppzI2Tc8/vnfp4XgNnylL5q0sENX9VPHj5FQegR9GV9Y94eN1Oc6j
- oBjisXnxD8tfix1lMwqny52UyMh4rnRwV5S2c5BNS3t5KMf1chGhck81x7erJJ5HPJDvm5Z5
- +Ma7BSun3W/dN8tp1s03t1g2KunNLp2b08l/4wfnkyuNFToBJTqut37N4Z485+uTA8faHP5t
- kG7atPufrmfUvuAlr4L+ugeuabog8apbRDn0hBOfVkzJ+T1fUh8pMbhb87KohBj++D2pPvnP
- i3x9e5ETZ/MllFiKMxINtZiLihMB/eVyFw0EAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLLMWRmVeSWpSXmKPExsWy7bCSnK6gckS6wfHjXBYLJj9htVi3ag2b
+ Sy2xMjQwMDIFKkzIzmhY/56x4DJPxfxzTxgbGI9zdTFyckgImEj8PXmDtYuRi0NIYAejxM41
+ 19khnE+MEnOfvWKDc57NbmGDaVn7oR+qaiejxI9Zf5khnJeMEtcad7CCVLEJ6En8X7QQKMHB
+ ISIQIXH2hh9ImFngMqPEuyeJIGFOAXOJ3f1JIGFhATuJO8uWgHWyCKhKTFv8BGwXr4ClxLuj
+ /YwQexUkfj5dxgox0UniwVx+iIkiErM728AukBD4yS5xdPtcFoh6F4n3h7YxQ9jCEq+Ob2GH
+ sKUkPr/bywbR0MwosXTJQVYIp4dR4l/DdagvjSX2L53MBLKNWUBTYv0ufYhtfBLvvvaAHSEh
+ wCvR0SYEUa0icen1SyaY+Xef/GeFsD0kVtxfAg2r7YwSM380sk9glJ+F5PBZCBsWMDKtYhRL
+ LSjOTU8tNiwwhMdkcn7uJkZwQtQy3cE48e0HvUOMTByMhxglOJiVRHg5vEPThXhTEiurUovy
+ 44tKc1KLDzGaAkNyIrOUaHI+MCXnlcQbmlgamJgZGZtYGJoZKonznrlSliokkJ5YkpqdmlqQ
+ WgTTx8TBKdXAZK7jNulQSVzSnTMpuSE+S/5pq2n84tE8+D0ziKlrjw2b7Ie8I98zxV0ned6a
+ zyZxjbPr57SSH3uNUh1V1JYwm387XhQsuGFHgM2EuR17/8+eZ2r+saG1xvPc+onrtv0+eH7u
+ 5QeH4y+lx3/y2rBjw6RXHN7dG8vqAs4dZ/tse0xzkr3J/+IbawUE7b8J/Z7yq8TPm3He9g8f
+ uzfHVXk2fbrVO1XN1aw0sHqOCrfeWUvvzsPcSwo4C5reLuxeWqs1YbnH+5JlP+/uPRG695zG
+ /5qTZsyl52P/hnBuu/Dk8MqsQsnN6zsbea9+bX3BrxEec8HddK3075Pb15b4nMw65hLqu+Of
+ 2qvwE6yObBPW71ZiKc5INNRiLipOBACC256qEQQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHLMWRmVeSWpSXmKPExsWy7bCSnK6cckS6wde3LBYLJj9htVi3ag2b
  xbct2xgtbkxvYbV4dbCNxWLqpM3sFm/3drI7sHvMbrjI4rFz1l12j1cHVrF7nL2zg9Gjt/kd
- m8f6LVdZPDbODQ1gj+KySUnNySxLLdK3S+DKaD7Wy1iwjK/i9MMJLA2Md7m7GDk5JARMJE6v
- 7GPpYuTiEBLYzihxbtkmJoiElMTnp1PZuhg5gGxhicOHi0HCQgLPGSU+dnuA2GwCehL/Fy1k
- BrFFBCIk5v5axAQyh1ngOqPEhvNN7BBDNzNKrG9bCDaIU8Bc4tf3QBBTWMBC4t1HfhCTRUBV
- 4sBySxCTV8BSYkuHNMQBChI/ny5jhZjuJNGw8yAjiM0sICIxu7ONeQKjwCwk7gJGxlWMoqkF
- xbnpuckFhnrFibnFpXnpesn5uZsYwSGsFbSDcdn6v3qHGJk4GA8xSnAwK4nwcniHpgvxpiRW
- VqUW5ccXleakFh9ilOZgURLnVc7pTBESSE8sSc1OTS1ILYLJMnFwSjUw+RwMMvHgeJDj19vY
- Ieh3MTTtQGhRrZk618tVJlMv3jBMY/5sdkb5+m+/5QX6P/OXeHKdvRKUnrVLkN//QFBq56s3
- 0163Zhnn7yyXvKXRobi+yjyO+UPkgY2vjnfcaf3476O1LNu7noXejM/E0s04dzxL3nGhJL1W
- 9saVc3N+qPLklk8oYHP1nlZyLa+jVeKpAMeH6RJMoeyiAkt7TGYrKyVdvnZh04VDy2Xu8hev
- Oaza+98jhe+pcnTTr+A+hVghP7k7M7X3PYzyT73au+/VEwvz5WWLpn60272BYzazTdtLldvy
- c9tDrp++z2fEmlR0sPRCA8f6D3wJT1lq7V9ZpqduCBPIDzaJz7xy5LYSS3FGoqEWc1FxIgDQ
- j3cy0AIAAA==
-X-CMS-MailID: 20241210111633epcas1p3c6494f2b82cc658465e816f06ba8cec2
+ m8f6LVdZPDbODQ1gj+KySUnNySxLLdK3S+DKaFj/nrHgMk/F/HNPGBsYj3N1MXJySAiYSKz9
+ 0M8OYgsJbGeU2D5ZAiIuJfH56VS2LkYOIFtY4vDhYoiS54wSzb+VQWw2AT2J/4sWMoPYIgIR
+ EnN/LWLqYuTiYBa4ziix4XwTO4gjJLCZUeLH9EnsIIM4BcwldvcngTQIC9hJ3Fm2hBXEZhFQ
+ lZi2+AkbiM0rYCnx7mg/I8QNChI/ny5jBWkVEXCSeDCXHyTMLCAiMbuzjXkCo8AsJO4CRsZV
+ jKKpBcW56bnJBYZ6xYm5xaV56XrJ+bmbGMFBrBW0g3HZ+r96hxiZOBgPMUpwMCuJ8HJ4h6YL
+ 8aYkVlalFuXHF5XmpBYfYpTmYFES51XO6UwREkhPLEnNTk0tSC2CyTJxcEo1MPU75c5xz/4b
+ 5fDuTI/Y4+aG9G02/x7bzGWc3xvGFrby69zA17GvuHie7LhndpXN4fcZTYOtVzrFGxlNbjid
+ q14/c+efaXOXqzKWuTV89Py4T/6agEi68Im+uw9z2ne6f0jfwvjy/NMtKc//Vj9Q4Y/gOc1V
+ uqMpUsbTX1fsquaX06s/LbMpsbmhpKPcZnV2ySMO77f72JcHRcZxTZIIXamUcK1ba5plqdnH
+ jndB/HdvZ3E6/9+y9sfWqzwcX1c8f5K5MaLMkUvpauo9tV9bQgvOt+26Utvfc1KYQUfjzJ41
+ /wy28vg+2vup0+D498ZpEXNNHy9U2vCu+xDDzpI/TyvapNsfP30fpfHWm+XFpAglluKMREMt
+ 5qLiRABa1ze80QIAAA==
+X-CMS-MailID: 20241210111646epcas1p1ec366993a224712e907e7377e0e5dba0
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241209195605epcas1p233930ab12fd267c75549496e19540e9a
+X-CMS-RootMailID: 20241209195615epcas1p31ff3283b2be65477025a43d02d0ece4d
 References: <20241209195528.730260-1-sjg@chromium.org>
- <CGME20241209195605epcas1p233930ab12fd267c75549496e19540e9a@epcas1p2.samsung.com>
- <20241209195528.730260-3-sjg@chromium.org>
+ <CGME20241209195615epcas1p31ff3283b2be65477025a43d02d0ece4d@epcas1p3.samsung.com>
+ <20241209195528.730260-4-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,48 +144,49 @@ X-Virus-Status: Clean
 > Cc: Tom Rini <trini@konsulko.com>; Stephen Warren <swarren@wwwdotorg.org>; Stephen Warren
 > <swarren@nvidia.com>; Matthias Brugger <mbrugger@suse.com>; Simon Glass <sjg@chromium.org>; Peter
 > Robinson <pbrobinson@gmail.com>
-> Subject: [PATCH v3 2/5] rpi: Set bootm_size to 512MB
+> Subject: [PATCH v3 3/5] rpi: Drop fdt_high and initrd_high
 >
-> Set this option so that all boot images stay within the bottom 512MB of
-> memory. This should allow us to drop the fdt_high and initrd_high
-> options.
+> These are not needed now since there is a bootm_size setting to keep
+> things within the lower part of memory.
+>
+> Drop them.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
 > Suggested-by: Tom Rini <trini@konsulko.com>
 
+
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 Tested-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-
 > ---
 >
-> Changes in v3:
-> - Add to the existing comment block
+> (no changes since v2)
 >
 > Changes in v2:
-> - Add new patch to set bootm_size
+> - Add new patch to drop fdt_high and initrd_high
 >
->  board/raspberrypi/rpi/rpi.env | 5 +++++
->  1 file changed, 5 insertions(+)
+>  board/raspberrypi/rpi/rpi.env | 7 -------
+>  1 file changed, 7 deletions(-)
 >
 > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> index 30228285edd..a327fccc77f 100644
+> index a327fccc77f..9b9fad82828 100644
 > --- a/board/raspberrypi/rpi/rpi.env
 > +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -60,7 +60,12 @@ dfu_alt_info+=zImage fat 0 1
->   * Even with the smallest possible CPU-GPU memory split of the CPU getting
->   * only 64M, the remaining 25M starting at 0x02700000 should allow quite
->   * large initrds before they start colliding with U-Boot.
-> + *
-> + * Limit bootm_size to 512MB so that all boot images stay within the bottom
-> + * 512MB of memory
+> @@ -66,13 +66,6 @@ dfu_alt_info+=zImage fat 0 1
 >   */
-> +bootm_size=0x20000000
-> +
->  #ifdef CONFIG_ARM64
->  fdt_high=ffffffffffffffff
->  initrd_high=ffffffffffffffff
+>  bootm_size=0x20000000
+>
+> -#ifdef CONFIG_ARM64
+> -fdt_high=ffffffffffffffff
+> -initrd_high=ffffffffffffffff
+> -#else
+> -fdt_high=ffffffff
+> -initrd_high=ffffffff
+> -#endif
+>  kernel_addr_r=0x00080000
+>  scriptaddr=0x02400000
+>  pxefile_addr_r=0x02500000
 > --
 > 2.34.1
 
