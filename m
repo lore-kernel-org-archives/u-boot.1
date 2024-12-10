@@ -4,87 +4,185 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47FB5E77181
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 08:21:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 866A0E77180
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 08:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5995897CF;
-	Tue, 10 Dec 2024 09:21:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C056F8914C;
+	Tue, 10 Dec 2024 09:33:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UgaYAUfP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sqfilb3I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36C9F89787; Tue, 10 Dec 2024 09:21:56 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 0D18989169; Tue, 10 Dec 2024 09:33:03 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::601])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 720CF897D2
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 09:21:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A288890DF
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 09:33:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733818909; x=1734423709; i=xypron.glpk@gmx.de;
- bh=7YgYLNBQO4gga7jWXroTI/V7qQ+0B+Yx0H3ZWHu/Rww=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=UgaYAUfP3YMwocgUe8vktxeS/WBzQCwxkVM6im8kwLKMTuAowYtCfpS/712Y2B/5
- UUQJQ61OACq9pu6pkQjftOKpTwoONiYj7nmCn1QcfoFBrQRUlcDnaeZzNlXd+Aemx
- 6dBqcJfgIFaRIhbNmiwdth82bRdwmzOi1w5mA9XF+YaBsySoBDwQQGMDIvMEyzdOV
- ShGu/Wy9RpXBOHUiseiIWvhoG0DmIynJWRpzsQDUNLv8Zp2IEjX/gemLSXXBsTQkP
- 44kjMbb211PkrNqBskHJGQ0ssKADT9IXcX6OD7IPVRf/kuyshi/imj4LZbIkoHwtM
- vbAtUrAiG95ubRFkXA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MGyxX-1tORsU2dqF-00EyCR; Tue, 10
- Dec 2024 09:21:49 +0100
-Message-ID: <c9a76fec-a57e-466c-bdc4-0e18efd09ba0@gmx.de>
-Date: Tue, 10 Dec 2024 09:21:48 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/10] Add part_find command
-To: Matthew Garrett <mjg59@srcf.ucam.org>
-Cc: Matthew Garrett <mgarrett@aurora.tech>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-3-mjg59@srcf.ucam.org>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=GZp4iojY2TUpYwy0ceUOqH1NrfnBMtg3g1YR/u3sxl3Vrw5863P3PKCLvvEPyy9mmfsK2SYlwQfuZhzvwd1VcBtvG32mkaMmkbjsQh3DeDD2L2lHL5H+Imo2fcUCB66kG6alQe02K8SkJlQgURdrtLjQ/TvCBhbxXkPjOzbieP4Gmo5n+DED1/z4+JVRNqxDhecs9uq0o3OQOlcID3DjDGnr76dW/cGIeVy5S7etYKu4Z7unoKJ6uJA87z22yEXe2w/ccq6hIPDjHuXda+V5FIOodVYHr9zoVCZTvFzFltxkneYMihc6Mt6O9AWI5tPgeNWvfRxLkJUSjPXdXg6k9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Kvn/Q3R7R6TT5vkpbSHxQrdbhgsUxKYywWBUukVdRqI=;
+ b=HQPpCqNSOc5XvxhixGNaVqE2h4eI/u5uee5s5h8V1tPPXXdg4evJ3zj9Q4TKSJYIht5y6WWYfGlnXUllYRJBYIoyR6HLzpncYsAqnfk/knPL1HtIjc//qogLCH7zmA3f80Vw9HzjP5YEKXLePYmbpycgJZbwW3rResTdn6C1DOpFKWCcO6c6DbXiinrvYWZSlL1Xx0JzPIFUFlDOliOLcXJoD9zKP6OXYwYegXjspII8hfgxV78BsK3KxaUAQxlW8ytjuuYmWUaZdOPbTm5CT1HSXwvzQaM9zOgEXc/nutqgdTe+EIts4XCNcKR537ppofdnaC3+ZScO+XtUsmAWiQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Kvn/Q3R7R6TT5vkpbSHxQrdbhgsUxKYywWBUukVdRqI=;
+ b=sqfilb3IHGwJu0aWqVeequWJhsfuSoRFyiaGu5HgpIzKb4I/ImeU96jSkGke0PQlHOkk75HqLvJCn88WhSqml1qZGKrquFOFMXOd+6VXwWcfwKxoxQdI/cqzJbUQ+f7N2ruMdT5r1cc6DLSpfJRZzDncJEpeuzxDE/vjbhcQ7IM=
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com (2603:10b6:806:385::10)
+ by CH3PR12MB7763.namprd12.prod.outlook.com (2603:10b6:610:145::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.18; Tue, 10 Dec
+ 2024 08:32:56 +0000
+Received: from SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c]) by SA1PR12MB8697.namprd12.prod.outlook.com
+ ([fe80::dbf9:f1d1:7c67:f88c%4]) with mapi id 15.20.8230.016; Tue, 10 Dec 2024
+ 08:32:56 +0000
+From: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, Tom Rini <trini@konsulko.com>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>
+CC: Jon Humphreys <j-humphreys@ti.com>, "Simek, Michal"
+ <michal.simek@amd.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Andre
+ Przywara <andre.przywara@arm.com>, Ashok Reddy Soma
+ <ashok.reddy.soma@amd.com>, Jagan Teki <jagan@amarulasolutions.com>, Michael
+ Walle <mwalle@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Pratyush Yadav
+ <p.yadav@ti.com>, Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Takahiro Kuwano
+ <Takahiro.Kuwano@infineon.com>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: RE: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories support
+ in QSPI driver"
+Thread-Topic: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories
+ support in QSPI driver"
+Thread-Index: AQHbJMZY/tA7en8DbUuS+Zl7COVM+rKT/mQAgAAGBACAFrNQAIAAGcaAgAAS3QCAAC8HgIAA/EEAgAAESoCABiukAIAlD9cAgAAC7HCAAZQxgIAAVmOggAB0ZICABWkNUIAAVKKAgAADb1A=
+Date: Tue, 10 Dec 2024 08:32:56 +0000
+Message-ID: <SA1PR12MB8697C12328D5809FC74528F5983D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+References: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+ <86ses458k3.fsf@udb0321960.dhcp.ti.com>
+ <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
+ <86pln759j9.fsf@udb0321960.dhcp.ti.com>
+ <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
+ <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+ <865xny69y1.fsf@udb0321960.dhcp.ti.com>
+ <SA1PR12MB86974AC7EFCCBD7AE99FDD3E98302@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <8634j15t1y.fsf@udb0321960.dhcp.ti.com>
+ <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <20241206163931.GS2457179@bill-the-cat>
+ <SA1PR12MB86977B7233CE821D113F369C983D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <ba1bc243-bd1b-4580-ba1b-4f96058f661a@mailbox.org>
+In-Reply-To: <ba1bc243-bd1b-4580-ba1b-4f96058f661a@mailbox.org>
+Accept-Language: en-US
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241123195616.305687-3-mjg59@srcf.ucam.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:MYrjcPaTaJIrfUse6Vu/SwpwysV9vbCUITfWzzynZaLYunqrIn+
- 9yDLNPmudZyaWxMUiOGZKSUMkKSMm1Tmwo2B6nXvJMm0RYI4HsQ2PJ4PKe88Gly1+YdPFdX
- 1sfmGZVzMynpIl8UQCzfYpVUFP9xm7uuAM/k39coqPJ30+utK4v8SN9sYKiJwXQE5+V8gnf
- 5LyEUOMu/LDtGFc/v89IQ==
-UI-OutboundReport: notjunk:1;M01:P0:Q21zAIK//Nw=;j0nq8CJwoZTP57akW4ngV+vzIYG
- PV43VAaIljRCWFRT8qcdr4aXWykAmOrcr2DkXJCE1jfXssLmyJN32yYyN3MU0sulJcrrs6ra3
- N6lD5MBC+VQ5fXUKPQjGnXS/neA4Gnxl1vruaE2mWcfCKWZBGTuBmO7wmhCCs7mYlC1NVIEzF
- DT895ok3d1/uidkJdUDsuNFq4e63FumJ7kljhH7BMumfGRztkfdtTzqTUCwyCSw5nh131DpDd
- +sYhCpvBzJBCvGM8z5247/JQ+9E4KW4dVjIVo5R8B1Sw8CsGXE24cCxY8v4dfS+kxTX2HI6yb
- 1y1k3eRVKsOAJV3Z/d6ouCNd4a8tR38MjVF0OyAaFosggSIkSCRe+CXww3YOhfYUra92IKZ9n
- YLvg+rWJjdGkiHLhnltYHFpTZ+yTs8S7jC/rsAzUVjM3KpsMEmV+/7u/ULiKbFXJtIDJ19qsH
- H5zAi3wF/ieQ+aU3kbFzdX9itUjp92FAGU8GqktoUN1kGMdU7zH+LAg4Dhh0RinXPWLiQJguD
- LX0ohap6fo4WjzA6DlEQT5Omyrz3NJF8eWnlAPS8ywgPdv3s6t3jXDdiCj1P3pWXuY9DNO69E
- TbjdvdH4K9ow/9yxh1ns5A+PVqNCOY7iTKedfLO9llPpIlgyotTCvlvCo6oRJZdE8ir9hOWNK
- CWYUxGmb7mlhI9jEjkM3CCBADEnc6FHMuYEAJwCS3Ri7EspBHy8mpavCtFkjCB1ViSLIRwUTf
- hIk62GJbVYjGnNwiqTcadGjSFSbRQbFTQSWQ3+BV3bw9LENPOTPAmdPm0JVVVEhalPKkZr/jm
- GCzUc/eexeCeRKczwY9ku6W2L1Ac9kBlnCSE+L1GS4MZKpIM+vFA/XdbPoh/cxdwCalPhBgDM
- LC5CqcmNElDLDS+cYI1o9wCxFKDR50GmrJifzb8a+lRkH2bMBeJUxhbeObR6i5CesFXXoxdM0
- eBzITfuKO57LD7menwUUuiXedni59SY3q479jlC9hIR2yqZXKaEhfO0xq/4J2eNssq7AzxPkZ
- he99w/yM9wbqsVg4dXpSBw23H+V9Y85nOwL/yumxJ1zF5BN0ZH2ABfqQbyqvGmGQcUy7902/s
- yho2S1bmL4MBwy0861gyIzoJSRKrKk
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA1PR12MB8697:EE_|CH3PR12MB7763:EE_
+x-ms-office365-filtering-correlation-id: 27a9ee1f-5b7e-47fb-cfb1-08dd18f53f3d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?WWhUakxIamNCYW5QTFNFZXhvczRvU0VaRkJQWG1nQ05BUGNyOG5lWTd4VGFw?=
+ =?utf-8?B?Q3lwSmNyc3hyM0dEajgzQWVNbTI4Zm5jaGlEQ1JmYzkyZGtrRGRDQ1U0NlU4?=
+ =?utf-8?B?cGJ3NVNYVHJUMHgxLzcxcFlSMHN5cE9mT3VRNjNRTjJvWjFMUm5JdVM3dk5H?=
+ =?utf-8?B?SkNkY1BPOEhOSDFTWXVQU1lnSVRzZThSZ3lmUW4yOFlWMzMxWFp0ZEJVQ3hH?=
+ =?utf-8?B?TngyQWJGNmJuZ0twQVBIVGlnRXVzSnRTdjFGaklVT3pQQlJOTk9ObU1CRTBR?=
+ =?utf-8?B?ZWZtT08xUXBpamVyK0laZUJwMVFrQnJJLzJlbEc5c2hETlV4WndXUkRLZkZl?=
+ =?utf-8?B?VTlVdTBDZmpWbFQzK3Rkb09vL1lkVE82aG5oM01KdDhCeXhpSjhBbm56L3RD?=
+ =?utf-8?B?cjdHZ3dvbC81bWlHajVISmdlTjFhWmVNWlhyRmZ1disrRlJXTzZqZFArcVhJ?=
+ =?utf-8?B?NXhUUFlCVkl5N3M4aTczNmp5VHRYL1FUY2FhK1dYTlA4OXhLemNRZ1VNQWo3?=
+ =?utf-8?B?ZzBJYVRSMFNtZlgyZVB1THAyaU91UlZoTi9ZNXlITllhMGRvQnVQWVNERkJW?=
+ =?utf-8?B?MmlMU1hQSFpsRU4zZ1B2QjUxb09LcDBGTUJEL2NPL20yMGVrQUdQVzFmV29F?=
+ =?utf-8?B?TzlXbkdGSlNwNDB4YnBxVmNLc1lRREh1RCsvb1d3OVpOTHdMTXNvcFRwVkl0?=
+ =?utf-8?B?Ti80YWlUbkZKRm9WYTdhOS9KMk5FM3lTR2xNRmwwUXRzWlNtRUJJUG9CZi8x?=
+ =?utf-8?B?NjNOa21sYy9MNlVxTWJ4YkVUMHR2RUF0SElQcHo5Z0dSTk5RUm9vaEhHaWFM?=
+ =?utf-8?B?MldPK09aZGp4bFhrYWhFNXB0RU9OWms4Zy85ZXB2dTRKQ3NibUQzamZwWUV5?=
+ =?utf-8?B?MFd1Tm5abm0xTC9FZ3Q1WEFBQ3lveFhxYmpsRFRtY0NPRmVTRUIyL3Ribng3?=
+ =?utf-8?B?cjhCWi9mSGpRbE9icDY5WnJDMzNpTTJLakhaSzBMRUFFcEsvQnBwcFQ5RFZ6?=
+ =?utf-8?B?ZllpQUt2ZHRESjhWN3d5bVIybytpZ1dsZ1pKSldXdWI2dWpkcnUyT0hVTVlm?=
+ =?utf-8?B?cEJ4M1JlUS9yY1ZsR1ZJUjlzOFY5TXgyTnpsTlZLWUJCYjlLU3NzWm95Q3d4?=
+ =?utf-8?B?Vkh2TWJCeCt6ZnJkcFM5TUlqWlVUYnQvcm5VRFhHdnROUFUvbDg5UlQvWnJ2?=
+ =?utf-8?B?S2hrY3NoNEMyR0NKV1FXcVN0Zzc1MGRTeU9CNW5NVzhONlp4TU9XMnIyZjRN?=
+ =?utf-8?B?OU14NnNKaStnMVdBMVV1emcweWpZMnNQZmdzc1U1N0Y5NER5NTE2OVltZEFw?=
+ =?utf-8?B?QnIyR05waEt5YmJyYmNlWFFSZnJrSWVhWkkzaDlmMXJaOWRLSVV5T0haa3Ri?=
+ =?utf-8?B?TE1iUEozelhZQzJoWWVvV3Y4Q00rVmlJdDFRYUtRcytQcEpocWtCMzdxY2x2?=
+ =?utf-8?B?cDdRT3RqeVQ2UVhNalViaFZyNGk5K2tUYkNpS20vakQyWjh2S0Q0blltKy9O?=
+ =?utf-8?B?bUNHemFUZ0drNlhxSExXOFFjV1Ard1NZZXVXWFF1MkpqVFRDU1dJMEVkQnha?=
+ =?utf-8?B?MGdMVERoVjlvM3pKektPQzI5NHFtTWc0N2hCS1pwTmJ2WGIxREp1MGhEZURH?=
+ =?utf-8?B?dmhqdS9LWG9uN3FrUVNrdmhFRWxscFFHRy9tRS9Ld0pCK2JkWURLMGpQTG0v?=
+ =?utf-8?B?SEpWeG9xYWNXcUhUV0pyOWFEdnMrM1QwNm84ZGpZcEo3OGxWd1I5VFgrSWgx?=
+ =?utf-8?B?TXhsMDlKcWxtL0tIZmFpU2dqUXY3alJieVBDTzdtRnhKQUhtKzRTMDB2ZXU2?=
+ =?utf-8?B?T3FCcVhhdzlJMzlzYW1qQS82UGlmK3lJa0FvdVEwbXVNbk82QW03aEc1Tjcx?=
+ =?utf-8?B?VG80L1RZS2hRK0o3Q2wvZ2plRXhKVE9meVhRK1k4M1UxN3c9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA1PR12MB8697.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZGRoNTdpeEJDVVlidWZScGRPTms5YTVwZEc0WHpzaUM0UjRIbGRSZUQ3cUty?=
+ =?utf-8?B?aHF5ZDZXYnZidFg1V29aOE5oZ2NPUkZJanArcEZld242aEFsRVRvSXdpRUtt?=
+ =?utf-8?B?dmNMNUg2SWlIUFFrWmF5V2Z2czByZ1dvVnBjc1gxbEo3K1dNcWlPUEM0aFRM?=
+ =?utf-8?B?c0U2Q0k4dW5ZcUlPcGxFRnRnc2xlVEdIajIzTktaQWp3emkzZEhuNXdFZkdW?=
+ =?utf-8?B?MjlUNjBYS3pwL1dySitaSlVMY2VTbHZnMHJQaVcvZ3MrK0FBUHFnbGZ2Tm9t?=
+ =?utf-8?B?YTNhbjdSZFlUYmVmc3A5bXRMN05NTE1icWpIdHJBTnJXYmpoZXpMd0Y4ak95?=
+ =?utf-8?B?VmI3Rm0zeXBDUkIvSUJBWFdDR05rUkFvbm4rdVRwWXoveFRQbFp1L1hWb2hj?=
+ =?utf-8?B?YTVWbXlqZHN2aUNsVW41ZjlnbkxLZGlocXdOVFlFcGRobnJ1WFpWMEV2Q2JF?=
+ =?utf-8?B?M25FREFTM0ZqVnRObXVQa3lHZlU0NEVZS3B3WGU1ZXRvZlNUVU9PUDBiQ2dt?=
+ =?utf-8?B?ZTlzQno4MXRVb2krNlFid1pxODZUckRkamo2dld0VEtGci9wZDFSYk9lY1Jj?=
+ =?utf-8?B?SlFlZEFpakRVSlVlMng3VGZyK3QzRDZtZFRZWHdUVnk3YmpFdm1sb2xEd3h5?=
+ =?utf-8?B?NWc0b2RUTnprcFN3Z0pKSk9zekh0WG00bVExNVlXZ0xPbVlUbFJwbi81OEFa?=
+ =?utf-8?B?Z1RqZXBhU3FTOVZhd2QxejJFT1p1REc2eW9CeWQ4SEd5SDRUbXpZNndaM1Bh?=
+ =?utf-8?B?U21BSVVBdjNzemJrRk5TblErUEk3dWlaaTdpei8yOVdQcXZBcU9uR29qbEhs?=
+ =?utf-8?B?cDVmN1d1a0NxRHNLOGRvbGZTdXVINWh1bm1TbzgvcFhUTlh2NU5XNTdwM0My?=
+ =?utf-8?B?azdlNjROWGlnN1ZFODY3S2ljVjF1d05MRkE0U0VCTkg4RDdPdCt6VzdDYkFJ?=
+ =?utf-8?B?VFZ6dDAvTDNmREEwMTlwbTNSZnAwTFp3NjJBeHhBT3FidzRoeGhKK1ZsQXB1?=
+ =?utf-8?B?UU1zUUF1bTFjY1dXaFNzdmJZbXowc3lBRVE3bFZsbHBRRXVyWWk1TjlqK09S?=
+ =?utf-8?B?U2lOU1djUUNnb0JHcVJ0ZjEzT2xnSWNyY2lhSEdXc3NpZ1hhYS9yRWd1bEVa?=
+ =?utf-8?B?UnJLWVVhM3FwR3Q1VXV1VkVZZ2tlQ3piMnBEaERWY1RYNnhpMkZralZMb1pa?=
+ =?utf-8?B?N1JTYi9jeXZmSml6VEM4TWxDWGdQcWh4dTdKMzdBTklrb2c5Tnd1RFdNalZS?=
+ =?utf-8?B?aUgwY1RQT3o0QW45bFpQeTVOVG9Jdk4yRVVMdGZacWV5UFNCWTlHWDBoRStw?=
+ =?utf-8?B?WHk2SjJsNXBSMVdnY1dTbVZUZGliUXpUaldiQW93Q2lqeTRtSkcveUNNRVN6?=
+ =?utf-8?B?c3RJeWxneXRMS1hrUDBZNjh3R1lsOVZ3c1JhS0F6Z1lGeHZnOEE0aW5mc2dw?=
+ =?utf-8?B?Y1pVUlJncmVTcWdIZ3BoM3lBaS9MZU80YkVuTkpMSDV4Q3VPWDJSNXRxWlow?=
+ =?utf-8?B?U1R6QTlWd3h5cDdsa0FQWjlGL2tCMkQzT3hFamlWVEpwNWl5Ukc0VDNoL2pi?=
+ =?utf-8?B?ampXZGsrSmtkQUFvQWdjb1pLRG9nUEh4elZ2VVlzZ0t0eWtZVFZPcVE5YmRr?=
+ =?utf-8?B?dDl1T2VtQWY0K0NMdzk5Z3lucnRyeE9pWEFxbkdhT0phZ1Q2SHRhdjJTR0pI?=
+ =?utf-8?B?UDhtM044bTBPSHM5bkdqZ0xZNVhpTU1NbXR4bGEvZzhjdFFYUmhCR0lNbTA4?=
+ =?utf-8?B?ZWNxSVVKT1pBN21VWTNxQzdaUVZZbC9UQkFBTktDYTlHTnF5dzR5aTllNmor?=
+ =?utf-8?B?OU5kQVJLL256UDRHRlNrWTZKMS9NUlhsdzJwNEZPeHVHeTZpMFNEZHlwOEEv?=
+ =?utf-8?B?SSsrbUUySzI4elk5bmZEWGtaMHQyU1FXZ0xxbHdNMEhZZXNlMUwva1VHVHZ1?=
+ =?utf-8?B?NTZ3anpGSnpyNUNYU1BIYzYxSWZ0NUpPZ2RzZWY0RGVSdnVWL3VYc3RaL09n?=
+ =?utf-8?B?NVprRk5LbFQ2SGIrdjRhV2tpY3lBUnRGVGJnWFp6L2E4Mi85VTBQUEhieW1x?=
+ =?utf-8?B?Y3lkbDdla1o3MjJqTDJQTDFWMzNtS0Jnajl5ck53Mmg4eWppMFdxYUk4VFRY?=
+ =?utf-8?Q?J6ao=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB8697.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27a9ee1f-5b7e-47fb-cfb1-08dd18f53f3d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Dec 2024 08:32:56.3471 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DuPE7GgnSCevTtjdyBkpDkoUikoN7nmI3Nvc2OhEGUmhF/0YL8MlhJ1+osAFgJUO4GWwfiiAf56DPh+9erhNAw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7763
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,229 +199,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23.11.24 20:55, Matthew Garrett wrote:
-> From: Matthew Garrett <mgarrett@aurora.tech>
->
-> part_find takes a GPT GUID and searches for a partition that matches
-> that. It then sets the target_part environment variable to the media
-> type, device number and partition number that matched, allowing
-> $target_part to be passed directly to bootm and similar commands.
->
-> Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
-
-For user to memorize the command it would be preferable to add the
-functionality as sub-command to the existing part command.
-
-Best regards
-
-Heinrich
-
-> ---
->
->   cmd/Kconfig     |  10 ++++
->   cmd/Makefile    |   1 +
->   cmd/part_find.c | 156 ++++++++++++++++++++++++++++++++++++++++++++++++
->   3 files changed, 167 insertions(+)
->   create mode 100644 cmd/part_find.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 1d7ddb4ed36..ee85928ca21 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1529,6 +1529,16 @@ config CMD_PART
->   	  Read and display information about the partition table on
->   	  various media.
->
-> +config CMD_PART_FIND
-> +	bool "part_find"
-> +	depends on PARTITIONS
-> +	select HAVE_BLOCK_DEVICE
-> +	select PARTITION_UUIDS
-> +	select PARTITION_TYPE_GUID
-> +	help
-> +	  Find a partition with a given type GUID and set the target_part
-> +	  environment variable if located.
-> +
->   config CMD_PCI
->   	bool "pci - Access PCI devices"
->   	help
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index d1f369deec0..16fd8dcd723 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -137,6 +137,7 @@ obj-$(CONFIG_CMD_NVEDIT_EFI) +=3D nvedit_efi.o
->   obj-$(CONFIG_CMD_ONENAND) +=3D onenand.o
->   obj-$(CONFIG_CMD_OSD) +=3D osd.o
->   obj-$(CONFIG_CMD_PART) +=3D part.o
-> +obj-$(CONFIG_CMD_PART_FIND) +=3D part_find.o
->   obj-$(CONFIG_CMD_PCAP) +=3D pcap.o
->   ifdef CONFIG_PCI
->   obj-$(CONFIG_CMD_PCI) +=3D pci.o
-> diff --git a/cmd/part_find.c b/cmd/part_find.c
-> new file mode 100644
-> index 00000000000..8c071d3c374
-> --- /dev/null
-> +++ b/cmd/part_find.c
-> @@ -0,0 +1,156 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Aurora Innovation, Inc. Copyright 2022.
-> + *
-> + */
-> +
-> +#include <blk.h>
-> +#include <config.h>
-> +#include <command.h>
-> +#include <dm.h>
-> +#include <env.h>
-> +#include <part.h>
-> +#if defined(CONFIG_EFI) || defined(CONFIG_EFI_APP)
-> +#include <efi.h>
-> +#include <efi_api.h>
-> +
-> +static bool partition_is_on_device(const struct efi_device_path *device=
-,
-> +				   const struct efi_device_path *part,
-> +				   __u32 *part_no)
-> +{
-> +	size_t d_len, p_len;
-> +	const struct efi_device_path *p, *d;
-> +
-> +	for (d =3D device; d->type !=3D DEVICE_PATH_TYPE_END; d =3D (void *)d =
-+ d->length) {
-> +	}
-> +
-> +	d_len =3D (void *)d - (void *)device;
-> +
-> +	for (p =3D part; p->type !=3D DEVICE_PATH_TYPE_END &&
-> +		     !(p->type =3D=3D DEVICE_PATH_TYPE_MEDIA_DEVICE &&
-> +		       p->sub_type =3D=3D DEVICE_PATH_SUB_TYPE_HARD_DRIVE_PATH);
-> +	     p =3D (void *)p + p->length) {
-> +	}
-> +
-> +	if (p->type !=3D DEVICE_PATH_TYPE_MEDIA_DEVICE ||
-> +	    p->sub_type !=3D DEVICE_PATH_SUB_TYPE_HARD_DRIVE_PATH) {
-> +		// Not a partition.
-> +		return false;
-> +	}
-> +
-> +	p_len =3D (void *)p - (void *)part;
-> +
-> +	if (p_len =3D=3D d_len && !memcmp(device, part, p_len)) {
-> +		if (part_no)
-> +			*part_no =3D ((__u32 *)p)[1];
-> +		return true;
-> +	}
-> +	return false;
-> +}
-> +#endif
-> +
-> +static int part_find(int argc, char *const argv[])
-> +{
-> +#if defined(CONFIG_EFI) || defined(CONFIG_EFI_APP)
-> +	efi_guid_t efi_devpath_guid =3D EFI_DEVICE_PATH_PROTOCOL_GUID;
-> +	struct efi_device_path *loaded_image_path =3D NULL;
-> +	struct efi_boot_services *boot =3D efi_get_boot();
-> +	struct efi_priv *priv =3D efi_get_priv();
-> +	bool part_self =3D false;
-> +#endif
-> +	struct driver *d =3D ll_entry_start(struct driver, driver);
-> +	const int n_ents =3D ll_entry_count(struct driver, driver);
-> +	struct disk_partition info;
-> +	struct blk_desc *desc;
-> +	struct driver *entry;
-> +	struct udevice *udev;
-> +	struct uclass *uc;
-> +	int ret;
-> +
-> +	if (argc !=3D 2)
-> +		return CMD_RET_USAGE;
-> +
-> +#if defined(CONFIG_EFI) || defined (CONFIG_EFI_APP)
-> +	part_self =3D !strncmp(argv[1], "self", 6);
-> +	if (part_self) {
-> +		ret =3D boot->handle_protocol(priv->loaded_image->device_handle,
-> +					&efi_devpath_guid,
-> +					(void **)&loaded_image_path);
-> +		if (ret)
-> +			log_warning("failed to get device path for loaded image (ret=3D%d)",=
- ret);
-> +	}
-> +#endif
-> +
-> +	ret =3D uclass_get(UCLASS_BLK, &uc);
-> +	if (ret) {
-> +		puts("Could not get BLK uclass.\n");
-> +		return CMD_RET_FAILURE;
-> +	}
-> +	for (entry =3D d; entry < d + n_ents; entry++) {
-> +		if (entry->id !=3D UCLASS_BLK)
-> +			continue;
-> +		uclass_foreach_dev(udev, uc) {
-> +			int i;
-> +
-> +			if (udev->driver !=3D entry)
-> +				continue;
-> +			desc =3D dev_get_uclass_plat(udev);
-> +#if defined(CONFIG_EFI) || defined(CONFIG_EFI_APP)
-> +			if (part_self) {
-> +				if (desc->if_type =3D=3D IF_TYPE_EFI_MEDIA) {
-> +					struct efi_media_plat *plat =3D
-> +						dev_get_plat(udev->parent);
-> +					__u32 loader_part_no;
-> +
-> +					if (partition_is_on_device(plat->device_path,
-> +								   loaded_image_path,
-> +								   &loader_part_no)) {
-> +						char env[256];
-> +
-> +						ret =3D snprintf(env, sizeof(env), "%s %d:%d", blk_get_if_type_na=
-me(desc->if_type), desc->devnum, loader_part_no);
-> +						if (ret < 0 || ret =3D=3D sizeof(env))
-> +							return CMD_RET_FAILURE;
-> +						if (env_set("target_part", env))
-> +							return CMD_RET_FAILURE;
-> +						return CMD_RET_SUCCESS;
-> +					}
-> +				}
-> +			} else {
-> +#endif
-> +				for (i =3D 1; i <=3D MAX_SEARCH_PARTITIONS; i++) {
-> +					ret =3D part_get_info(desc, i, &info);
-> +					if (ret)
-> +						break;
-> +					if (strcasecmp(argv[1], info.type_guid) =3D=3D 0) {
-> +						char env[256];
-> +						ret =3D snprintf(env, sizeof(env), "%s %d:%d", blk_get_if_type_na=
-me(desc->if_type), desc->devnum, i);
-> +						if (ret < 0 || ret =3D=3D sizeof(env))
-> +							return CMD_RET_FAILURE;
-> +						env_set("target_part", env);
-> +						debug("Setting target_part to %s\n", env);
-> +						return CMD_RET_SUCCESS;
-> +					}
-> +				}
-> +#if defined(CONFIG_EFI) || defined(CONFIG_EFI_APP)
-> +			}
-> +#endif
-> +		}
-> +	}
-> +
-> +	return CMD_RET_FAILURE;
-> +}
-> +
-> +static int do_part_find(struct cmd_tbl *cmdtp, int flag, int argc,
-> +			char *const argv[])
-> +{
-> +	return part_find(argc, argv);
-> +}
-> +
-> +U_BOOT_CMD(
-> +	part_find, 2, 0, do_part_find, "Find a partition",
-> +	"<guid>\n"
-> +	"- Examine the list of known partitions for one that has a type\n"
-> +	"  GUID that matches 'guid', expressed in the standard text format.\n"
-> +	"  If successful, the target_part environment variable will be set\n"
-> +	"  to the corresponding 'interface dev:part'.\n"
-> +);
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWFyZWsgVmFzdXQgPG1h
+cmVrLnZhc3V0QG1haWxib3gub3JnPg0KPiBTZW50OiBUdWVzZGF5LCBEZWNlbWJlciAxMCwgMjAy
+NCAxOjUwIFBNDQo+IFRvOiBBYmJhcmFwdSwgVmVua2F0ZXNoIDx2ZW5rYXRlc2guYWJiYXJhcHVA
+YW1kLmNvbT47IFRvbSBSaW5pDQo+IDx0cmluaUBrb25zdWxrby5jb20+OyBUdWRvciBBbWJhcnVz
+IDx0dWRvci5hbWJhcnVzQGxpbmFyby5vcmc+DQo+IENjOiBKb24gSHVtcGhyZXlzIDxqLWh1bXBo
+cmV5c0B0aS5jb20+OyBTaW1laywgTWljaGFsDQo+IDxtaWNoYWwuc2ltZWtAYW1kLmNvbT47IHUt
+Ym9vdEBsaXN0cy5kZW54LmRlOyBBbmRyZSBQcnp5d2FyYQ0KPiA8YW5kcmUucHJ6eXdhcmFAYXJt
+LmNvbT47IEFzaG9rIFJlZGR5IFNvbWEgPGFzaG9rLnJlZGR5LnNvbWFAYW1kLmNvbT47DQo+IEph
+Z2FuIFRla2kgPGphZ2FuQGFtYXJ1bGFzb2x1dGlvbnMuY29tPjsgTWljaGFlbCBXYWxsZSA8bXdh
+bGxlQGtlcm5lbC5vcmc+Ow0KPiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3Nz
+LnN0LmNvbT47IFBhdHJpY2sgRGVsYXVuYXkNCj4gPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5j
+b20+OyBQcmF0eXVzaCBZYWRhdiA8cC55YWRhdkB0aS5jb20+OyBRdWVudGluDQo+IFNjaHVseiA8
+cXVlbnRpbi5zY2h1bHpAY2hlcnJ5LmRlPjsgU2VhbiBBbmRlcnNvbiA8c2VhbmdhMkBnbWFpbC5j
+b20+Ow0KPiBTaW1vbiBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz47IFRha2FoaXJvIEt1d2Fubw0K
+PiA8VGFrYWhpcm8uS3V3YW5vQGluZmluZW9uLmNvbT47IHVib290LXN0bTMyQHN0LW1kLW1haWxt
+YW4uc3Rvcm1yZXBseS5jb20NCj4gU3ViamVjdDogUmU6IFtQQVRDSCAxLzZdIFJldmVydCAic3Bp
+OiB6eW5xX3FzcGk6IEFkZCBwYXJhbGxlbCBtZW1vcmllcyBzdXBwb3J0IGluDQo+IFFTUEkgZHJp
+dmVyIg0KPiANCj4gT24gMTIvMTAvMjQgNDoyMCBBTSwgQWJiYXJhcHUsIFZlbmthdGVzaCB3cm90
+ZToNCj4gDQo+ID4+PiBIaSBIdW1waHJleXMsDQo+ID4+PiBUaGFuayB5b3UgZm9yIGNvbmZpcm1p
+bmcgdGhhdCB0aGUgcGF0Y2ggd29ya2VkIGFuZCByZXNvbHZlZCB0aGUgaXNzdWUuDQo+ID4+DQo+
+ID4+IE9LLCBidXQgZ29pbmcgYmFjayB0byB0aGUgcGF0Y2ggaW4gcXVlc3Rpb24sIFR1ZG9yIGhh
+cyByZXF1ZXN0ZWQNCj4gPj4gY2hhbmdlcy4gV2hlbiBjYW4gd2UgZXhwZWN0IGEgdjIgdGhhdCBh
+ZGRyZXNzZXMgdGhvc2UsIHNvIHRoYXQgSm9uDQo+ID4+IGFuZCBNYXJlayBjYW4gYWxzbyBjb25m
+aXJtIHRoZWlyIHBsYXRmb3JtcyB3b3JrPyBUaGFua3MuDQo+ID4NCj4gPiBUdWRvciwgRG8geW91
+IHdhbnQgbWUgdG8gaW1wbGVtZW50IHNlcGFyYXRlDQo+IHNwaV9ub3JfZXJhc2UoKS9zcGlfbm9y
+X3JlYWQoKS9zcGlfbm9yX3dyaXRlKCkgZm9yIHRoZSBwYXJhbGxlbC9zdGFja2VkDQo+IGNvbmZp
+Z3VyYXRpb25zPw0KPiA+IE1hcmVrLCBhbnkgc3VnZ2VzdGlvbnMgcmVnYXJkaW5nIHRoaXMgaW1w
+bGVtZW50YXRpb24/DQo+IA0KPiBXaGF0IGRvIHlvdSByZWZlciB0byA/IElzIHRoZXJlIGEgZGlz
+Y3Vzc2lvbiBJIG1pc3NlZCA/DQoNClRoaXMgaXMgcmVnYXJkaW5nIHRoZSBjb21tZW50cyBtZW50
+aW9uZWQgYnkgVHVkb3Igb24gdGhpcyBwYXRjaCANCmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3Ut
+Ym9vdC8yNzczZDE1Ny0yYjc1LTRmZTUtYmYxNi05ZTY5MjdlMGY2ZjRAbGluYXJvLm9yZy8NCg0K
+VGhhbmtzDQpWZW5rYXRlc2gNCj4gDQo+IC0tDQo+IEJlc3QgcmVnYXJkcywNCj4gTWFyZWsgVmFz
+dXQNCg==
