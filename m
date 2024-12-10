@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B851E77180
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 15:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9DADE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D3C98012C;
-	Tue, 10 Dec 2024 16:38:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DC77F8020D;
+	Tue, 10 Dec 2024 17:02:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ls3lAHM0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N8srTBCV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D22D980133; Tue, 10 Dec 2024 16:38:40 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E3348010F
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 16:38:38 +0100 (CET)
+ id 0A9988020E; Tue, 10 Dec 2024 17:02:05 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C5A28020B
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:02:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BAFcaLx2485019
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 10 Dec 2024 09:38:36 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733845116;
- bh=PPcxGd6cTtDb+lI3cPHQsWODN8K3hSbpxOh1oEg2ZCk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Ls3lAHM0e9r0xLC3e8EZkmADacsYNt+dRJ+6B+HZknSyf+3dAR49EH6+Vof63AoUH
- u3oXKTDl6gDGVYTe/GAeORi+QEmRErh0lJoyGIcOrGplu+shdt9QqNCNP5z/DQ14ZK
- n83YufNrLi3U5dHL0c4hA3pjCiIEIa3XmMnsFaHM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BAFcacR027140
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 10 Dec 2024 09:38:36 -0600
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Dec 2024 09:38:35 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Dec 2024 09:38:35 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BAFcVH3111858;
- Tue, 10 Dec 2024 09:38:32 -0600
-Message-ID: <ab7e3013-8d77-479a-a829-12d7e5cdab76@ti.com>
-Date: Tue, 10 Dec 2024 21:08:31 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa692211331so361431166b.1
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:02:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733846522; x=1734451322; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XnFJgCMF2ztKHQ2ghXIErNwhvhxM9H8v7nzAPdWGnHo=;
+ b=N8srTBCVQLAYWE1L27Gy+D7dh7VKxFBg1yUYKAtuf4yPUSMMBbQdt3uPOImIrFIJiA
+ W4+lzb9nQm6XXyR2Q33n51Ibah6zU3I9g13LIpzUBiUC55A5vAJRAbyDsQYx5WZYMyUW
+ zPgh/CLqWta+s6VQPqNEC9KRqYkuhbIqAaESKDSyvSsTS+61oMAt5uz77Haux4N2JAXU
+ SAThiqWekahbX2J33pBauKPNmdfUFKCRG49Mb9qDMOdeKWntdKvmdMKPTRZrNiVbL8fT
+ VjvZhrYs0ywtwdCyW6L6PrF8azCyyxbpeOdlJzOgojuEYvEcihTsV1rGYXITaOvWL0Cc
+ JHUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733846522; x=1734451322;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XnFJgCMF2ztKHQ2ghXIErNwhvhxM9H8v7nzAPdWGnHo=;
+ b=fsHa6Ck1Gn3MdEaD0OgOch16HZ8Hzactcz8lWfNPQ2FX/jk6KpQIF3U7u/15Oj2bih
+ 6wpoIC1E0Ud5teIwyehGEfnlgdGWm/6521AAVvsd5xQdM4NhG/uyX8d9Fhxus1VJeId6
+ KuzCcS6f0LlZOVru6dJ2rixv2VffTJtUPjocZB15BfC9XqXCuYKskfYCUoLKz8YzGos0
+ TR6QP3qcuMbNLhaL4OLpxJtsIoIjSJ/6HNrVu3BNWq9Zf2xyBcloM4xkCuNWaktVoEQ8
+ Nen44yQKv9SJBvTEvUWG029uOoHuwGKaWWa8lwIlCOgtraqVdIJ5P077J28sJk72C7Zk
+ CfGA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW/i53Vm7Zxh/OmdYpqENAAf2FyHcKE/toZSxmXaPywlWVa7T7STCFx2TClY9/J9HNMrJ3nydM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFm8C+XBXW070JOwCBT0nHfnQTpH1LTBuCv6hPCiPbv9H4HQhz
+ hpBDiUryl3e3wZ342fzq+IUOwm4BtiOT4oslC9SHn4RYwujC6n8bVOhScHRsgTw=
+X-Gm-Gg: ASbGncuKy0OCVeGdqt9JRoAQWR7FZIkgB3tBAWlWdW8hnWSzx195q0XClvIjxG/dplP
+ ZO4+zR0Y6OcUQg4mzjumND0F2WtFVPhXobDvioAF+KDaH94c9lLiKx3ryh6nhIlwySGUnxDgtBr
+ hpBZ/yEGA0nvN18DTwV7LwB7wvPAQAb7e/t+xDP9vxBdDeJ2NtV/w+/dqdsfspjL/Lqmkah3mMn
+ RdzV5ahVbPEAPeV9GyjFEFNU8FroPUk5W6FXy3c9whNkKBxALf2oCK70j0QX4GjUhi1vrU7pQF4
+ TI+8/iNgguaJh1kRC+d7oLISTAggoHc=
+X-Google-Smtp-Source: AGHT+IFCJmyv+tce7Y9al6BaKF3VtpPs1dehQLnywCGwoY7UH3szeA45O845WkB6PnVp/rZ1C515FQ==
+X-Received: by 2002:a17:907:7156:b0:aa6:88be:729d with SMTP id
+ a640c23a62f3a-aa6a01c50a9mr331273366b.21.1733846521871; 
+ Tue, 10 Dec 2024 08:02:01 -0800 (PST)
+Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
+ [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa6651c01c5sm534771466b.23.2024.12.10.08.02.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Dec 2024 08:02:01 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Fix section alignment on EFI binaries
+Date: Tue, 10 Dec 2024 18:01:49 +0200
+Message-ID: <20241210160150.244773-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] arm: dts: k3-j722s*: Add overrides specific to OSPI
-To: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <n-francis@ti.com>,
- <vaishnav.a@ti.com>, <s-k6@ti.com>
-References: <20241210135731.1043269-1-p-mantena@ti.com>
- <20241210135731.1043269-5-p-mantena@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20241210135731.1043269-5-p-mantena@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,61 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When creating EFI binaries, the alignment of the text section isn't
+correctly factored in. As a result trying to load signed EFI binaries
+throws an error with:
 
-On 12/10/2024 7:27 PM, Prasanth Babu Mantena wrote:
-> From: Vaishnav Achath <vaishnav.a@ti.com>
->
-> OSPI Booot requires overrides specific to R5 and also
+efi_image_region_add() efi_image_region_add: new region already part of another
+Image not authenticated
 
-Booot to Boot please
+Running the binary through sbverify has a similar warning
+sbverify ./lib/efi_loader/helloworld.efi
+warning: gap in section table:
+    .text   : 0x00001000 - 0x00001c00,
+    .data   : 0x00002000 - 0x00002200,
+gaps in the section table may result in different checksums
+warning: data remaining[7680 vs 12720]: gaps between PE/COFF sections?
+.....
 
+If we include the alignment in the text section, the signed binary boots
+fine, and the relevant sbverify warning goes away
+sbverify ./lib/efi_loader/helloworld.efi
+warning: data remaining[8704 vs 12720]: gaps between PE/COFF sections?
+.....
 
-> to use DMA in R5 SPL stage the DM_TIFS needs to be enabled.
+We should look into the remaining warning at some point as well
+regarding the gaps between PE/COFF sections.
 
-Sorry but, you are not enabling DM_TIFS, rather using it,
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/lib/elf_aarch64_efi.lds | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please update commit message accordingly
+diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
+index 5dd98091698c..e382254a6cf5 100644
+--- a/arch/arm/lib/elf_aarch64_efi.lds
++++ b/arch/arm/lib/elf_aarch64_efi.lds
+@@ -32,9 +32,9 @@ SECTIONS
+ 	.rela.plt : { *(.rela.plt) }
+ 	.rela.got : { *(.rela.got) }
+ 	.rela.data : { *(.rela.data) *(.rela.data*) }
++	. = ALIGN(4096);
+ 	_etext = .;
+ 	_text_size = . - _text;
+-	. = ALIGN(4096);
+ 	.data : {
+ 		_data = .;
+ 		*(.sdata)
+-- 
+2.45.2
 
-
-> Add the corresponding overrides for R5 SPL stage.
->
-> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> ---
->   arch/arm/dts/k3-j722s-evm-u-boot.dtsi |  4 ++++
->   arch/arm/dts/k3-j722s-r5-evm.dts      | 13 +++++++++++++
->   2 files changed, 17 insertions(+)
->
-> diff --git a/arch/arm/dts/k3-j722s-evm-u-boot.dtsi b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
-> index 88c4a72db61..6ae76beea3e 100644
-> --- a/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
-> @@ -16,3 +16,7 @@
->   &dmsc {
->   	bootph-pre-ram;
->   };
-> +
-> +&main_bcdma {
-> +	bootph-pre-ram;
-> +};
-> diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts b/arch/arm/dts/k3-j722s-r5-evm.dts
-> index 1bec997c93c..d797e954f97 100644
-> --- a/arch/arm/dts/k3-j722s-r5-evm.dts
-> +++ b/arch/arm/dts/k3-j722s-r5-evm.dts
-> @@ -81,3 +81,16 @@
->   &wkup_uart0 {
->   	status = "okay";
->   };
-> +
-> +&ospi0 {
-> +	reg = <0x00 0x0fc40000 0x00 0x100>,
-> +	      <0x00 0x60000000 0x00 0x08000000>;
-> +};
-> +
-> +&main_bcdma {
-> +	ti,sci = <&dm_tifs>;
-> +};
-> +
-> +&main_pktdma {
-> +	ti,sci = <&dm_tifs>;
-> +};
