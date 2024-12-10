@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8022CE77180
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 13:58:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D56E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 13:58:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04465894A3;
-	Tue, 10 Dec 2024 14:58:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 61CE48949E;
+	Tue, 10 Dec 2024 14:58:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OuLl6U4Y";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mLRBZhgS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1BDF894AB; Tue, 10 Dec 2024 14:57:58 +0100 (CET)
+ id 8CA3D894B1; Tue, 10 Dec 2024 14:58:04 +0100 (CET)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0C1B894A3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 14:57:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DD2E895B7
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 14:58:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADvsuA2678309
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADvv182678313
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 10 Dec 2024 07:57:54 -0600
+ Tue, 10 Dec 2024 07:57:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733839074;
- bh=5SW9GIWMv2xAiiSMfyLKd59Okwa/PwpVAtN7L5q19VM=;
+ s=ti-com-17Q1; t=1733839077;
+ bh=WBFoqM0AlIajmbV9Z9jlSEl2nLXZcsyhrXGutF1AbXI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OuLl6U4YRAarCm72rE9YuZ7hY6zKap5KWYmyxeu/oMOxqRuOO8uwTln6nunKZTUXR
- MZ2kR2RNN55NheM3WR6+CCUJcMNtUrLeG0RfY8+WtqrE4rnfpvFAM1JZjwx+/xcnHo
- G34KanFwiD1nvBmyZglMO3YOklk6uOqKRd2JfolA=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADvssq050182
+ b=mLRBZhgSBI4avH2ucex+mWKGNVGk9ciEGGa8nMXvMix4yBSFo2PieJfbvzLNeeuHl
+ +B8+Ar9UFTBTIVUMcmbio+prawuSwnIUFGJchpcxta+TpA5I9Ft0KXQyopKvN/UClx
+ rOn/ChvnHwSM7jf27OhXSoankIKUvP0zYcRx0Tw0=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADvvsS075252
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 10 Dec 2024 07:57:54 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 10 Dec 2024 07:57:57 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Dec 2024 07:57:53 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 07:57:56 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Dec 2024 07:57:54 -0600
+ Frontend Transport; Tue, 10 Dec 2024 07:57:57 -0600
 Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
  [172.24.227.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BADvkpE062352;
- Tue, 10 Dec 2024 07:57:51 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BADvkpF062352;
+ Tue, 10 Dec 2024 07:57:54 -0600
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: [PATCH 1/4] mailbox: k3-sec-proxy: Add DM to DMSC communication
- thread for J722S
-Date: Tue, 10 Dec 2024 19:27:28 +0530
-Message-ID: <20241210135731.1043269-2-p-mantena@ti.com>
+Subject: [PATCH 2/4] arm: dts: k3-j722s-r5-evm: Fix DM2TIFS secproxy thread ID
+Date: Tue, 10 Dec 2024 19:27:29 +0530
+Message-ID: <20241210135731.1043269-3-p-mantena@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241210135731.1043269-1-p-mantena@ti.com>
 References: <20241210135731.1043269-1-p-mantena@ti.com>
@@ -84,28 +83,31 @@ X-Virus-Status: Clean
 
 From: Vaishnav Achath <vaishnav.a@ti.com>
 
-J722S R5 SPL uses sec-proxy threads 28 and 29 for communication with
-TIFS. Mark these as valid threads in the driver.
+Fix the DM2TIFS secureproxy thread ID as per the latest TISCI
+documentation for J722S.
+https://software-dl.ti.com/tisci/esd/latest/5_soc_doc/j722s/sec_proxy.html
 
 Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
- drivers/mailbox/k3-sec-proxy.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/k3-j722s-r5-evm.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/mailbox/k3-sec-proxy.c b/drivers/mailbox/k3-sec-proxy.c
-index 5eafe46fd4d..6f5ad37919f 100644
---- a/drivers/mailbox/k3-sec-proxy.c
-+++ b/drivers/mailbox/k3-sec-proxy.c
-@@ -408,7 +408,7 @@ static int k3_sec_proxy_remove(struct udevice *dev)
- 	return 0;
- }
- 
--static const u32 am6x_valid_threads[] = { 0, 1, 4, 5, 6, 7, 8, 9, 11, 12, 13, 20, 21, 22, 23 };
-+static const u32 am6x_valid_threads[] = { 0, 1, 4, 5, 6, 7, 8, 9, 11, 12, 13, 20, 21, 22, 23, 28, 29 };
- 
- static const struct k3_sec_proxy_desc am654_desc = {
- 	.thread_count = 90,
+diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts b/arch/arm/dts/k3-j722s-r5-evm.dts
+index 5e5c2e3111e..1bec997c93c 100644
+--- a/arch/arm/dts/k3-j722s-r5-evm.dts
++++ b/arch/arm/dts/k3-j722s-r5-evm.dts
+@@ -41,8 +41,8 @@
+ 		ti,host-id = <36>;
+ 		ti,secure-host;
+ 		mbox-names = "rx", "tx";
+-		mboxes= <&secure_proxy_main 22>,
+-			<&secure_proxy_main 23>;
++		mboxes= <&secure_proxy_main 28>,
++			<&secure_proxy_main 29>;
+ 		bootph-all;
+ 	};
+ };
 -- 
 2.34.1
 
