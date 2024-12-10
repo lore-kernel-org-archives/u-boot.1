@@ -4,121 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47E6FE77182
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 22:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EDDE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 22:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7BDC800AD;
-	Tue, 10 Dec 2024 23:36:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 278E880212;
+	Tue, 10 Dec 2024 23:38:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="DF6PwMQ2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="STa6Ne55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46DBC800AB; Tue, 10 Dec 2024 23:36:12 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A549E80216; Tue, 10 Dec 2024 23:38:10 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0054E80212
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 23:36:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB57E8020B
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 23:38:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20241210223604epoutp02c0d8cb9da1466b060508bf680b8c13bd~P8bpMAzPH1542215422epoutp02Z
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 22:36:04 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20241210223604epoutp02c0d8cb9da1466b060508bf680b8c13bd~P8bpMAzPH1542215422epoutp02Z
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733870164;
- bh=TVqp1L0TRMtAUWtik9K6F+vFpgjhRvgxXv+I7bgfCpU=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=DF6PwMQ2V6ofVLhmJFMZ/hIG/0bpvp18V6Qn9Qy1ChiNJH4Ssg9HFU2SHuds/smSR
- bfCWZiP4kP/u8wswIHmZpwV+kZ1l2k1ATTjXMQYbfL30jlIGwD9yoR+Yjx/WPc2SIu
- 1EIOa/XoN3VrcDGoR3l4X3JMkE0s9K72c8f2F50Q=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20241210223603epcas1p193c07e612b8dba85131933a436028bd7~P8boggLqr1704817048epcas1p1T;
- Tue, 10 Dec 2024 22:36:03 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.38.237]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4Y7D8x5SNrz4x9Pw; Tue, 10 Dec
- 2024 22:36:01 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- D7.6F.23869.152C8576; Wed, 11 Dec 2024 07:36:01 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20241210223601epcas1p29700f0a9bd234a67e99cced5e9f7d59b~P8bmxi88f2290122901epcas1p2p;
- Tue, 10 Dec 2024 22:36:01 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241210223601epsmtrp29c07a465ffccc0c01c881213ac812047~P8bmwz_1T0216102161epsmtrp2G;
- Tue, 10 Dec 2024 22:36:01 +0000 (GMT)
-X-AuditID: b6c32a36-6f5e970000005d3d-24-6758c251d917
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 15.A9.18949.152C8576; Wed, 11 Dec 2024 07:36:01 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241210223601epsmtip21bbf159d3ff797b05f0ebed912a88717~P8bmiw4WE1533915339epsmtip2k;
- Tue, 10 Dec 2024 22:36:01 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Svyatoslav Ryhel'" <clamor95@gmail.com>, "'Tom Rini'"
- <trini@konsulko.com>, "'Simon Glass'" <sjg@chromium.org>, "'Peter	Robinson'"
- <pbrobinson@gmail.com>, "'Heiko Schocher'" <hs@denx.de>, "'Jonas Karlman'"
- <jonas@kwiboo.se>
-Cc: <u-boot@lists.denx.de>
-In-Reply-To: <20241209161434.6563-4-clamor95@gmail.com>
-Subject: RE: [PATCH v1 3/3] pmic: palmas: bind sysreset to parent node
-Date: Wed, 11 Dec 2024 07:36:00 +0900
-Message-ID: <0bf201db4b53$e3a287d0$aae79770$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHwBcTaW7dMJxSGs0Uxb68V/PRZywGudpzmAi2XiiCyl7uxgA==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrLKsWRmVeSWpSXmKPExsWy7bCmnm7goYh0gyd7tC0O9PcyWuy4c5/Z
- 4uSbqywW61atYbP4tmUbo8XUSZvZLd7u7WR3YPeY3XCRxWPerBMsHjtn3WX3eHVgFbvHiQmX
- mDzO3tnBGMAWlW2TkZqYklqkkJqXnJ+SmZduq+QdHO8cb2pmYKhraGlhrqSQl5ibaqvk4hOg
- 65aZA3SMkkJZYk4pUCggsbhYSd/Opii/tCRVISO/uMRWKbUgJafAtECvODG3uDQvXS8vtcTK
- 0MDAyBSoMCE74/Hk3SwFlzgqjt2ZyNjA+JWti5GTQ0LARGLJ81nsXYxcHEICOxgllh6exgLh
- fGKUaGzZyAThfGOU+Na7mR2m5frDuVAtexklGm6fgXJeMkp8/38OrIpNQE/i/6KFzCAJEYHX
- jBIbZnaygiSYBaQkmk7uYgSxOQXMJR4cmccMYgsLuEn09D8Ci7MIqEpsnbEcyObg4BWwlNh1
- ygdis4LEz6fLwMaICDhJvOs5xQ4xUkRidmcb2C4JgbfsEt0rl0N95yLxdu1aKFtY4tXxLVAv
- SEl8freXDaKhGejrJQdZIZweRol/DdehOowl9i+dzARyBbOApsT6XfoQ2/gk3n3tYQUJSwjw
- SnS0CUFUq0hcev2SCWb+3Sf/WSFsD4nXS9ZDQ2g7o8TW3ycZJzDKz0Jy+CyEDQsYmVYxiqUW
- FOempxYbFhjBIzM5P3cTIzgdapntYJz09oPeIUYmDsZDjBIczEoivBzeoelCvCmJlVWpRfnx
- RaU5qcWHGE2BITmRWUo0OR+YkPNK4g1NLA1MzIyMTSwMzQyVxHnPXClLFRJITyxJzU5NLUgt
- gulj4uCUamBqN1ASmb/6umXeKeGvEcv+bH32d4twx54SwRe6D33Np5l6HX1zwSN4Q6eTI/vb
- NPslyxQeqrtX2m7yiV7MuPKiMBNTQsyB5z7PJPdOeFnuW3GaPzFB4RJ7d7aCxr/qDx8ivOVc
- FPp/128NUOY5FsTeUMQv97u86kLDafY+9aqGKaf2xUys2mbW1BokLfRkmucq02z90Au/9bLn
- +6y6OEGV48wim9h3zMFFpiKJ/xkUPy/YbbZb6dSbudYPBdbc/fnrqcTjJZpb45sNBZSnXIqX
- Exe4fdSgWT3y22pXn66T13Lc9rv+iY2c8eG37pSjx9/vVprP2CEY+OZAe0D1ot9m3O855r7b
- L1R+sij/dIUSS3FGoqEWc1FxIgBt1I2nEAQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPLMWRmVeSWpSXmKPExsWy7bCSvG7goYh0g6UdghYH+nsZLXbcuc9s
- cfLNVRaLdavWsFl827KN0WLqpM3sFm/3drI7sHvMbrjI4jFv1gkWj52z7rJ7vDqwit3jxIRL
- TB5n7+xgDGCL4rJJSc3JLEst0rdL4Mp4PHk3S8EljopjdyYyNjB+Zeti5OSQEDCRuP5wLjuI
- LSSwm1Hi00FZiLiUxOenU4FqOIBsYYnDh4u7GLmASp4zSrxsuc4IUsMmoCfxf9FCZhBbROA9
- o8T2a/ogNjNQb9PJXYwQDZsZJZov3gRbxilgLvHgyDywBmEBN4me/kdgg1gEVCW2zljOCLKM
- V8BSYtcpH4gbFCR+Pl3GCjHfSeJdzyl2iPkiErM725gnMArMQuIuYGRcxSiZWlCcm55bbFhg
- lJdarlecmFtcmpeul5yfu4kRHMZaWjsY96z6oHeIkYmD8RCjBAezkggvh3douhBvSmJlVWpR
- fnxRaU5q8SFGaQ4WJXHeb697U4QE0hNLUrNTUwtSi2CyTBycUg1M/k9q/y29YH0++fPVOEaT
- xb9vhf+b/dOJd03+LaE5W1d/UmS0WyO1eO6zBQUTFzPHmEW8/H3Z/JtsxPZ7Hw//zNDlmKg5
- 5ULo8tCAO59vnHFcKySiFJw1ef/e4xcWh6an/Grj/n3mx1nnBbJ3tqZEFvT12dWkyygbm/00
- c+jc5++k5XK9p4pNuP7coiRh2b2boi/WmoXlzJVI0borEXqrbYkg565Zm0umMTncFNU/+XZN
- 1QPu8OVrXwabl9W6lL51nHdM3G+F/q5zqk9PTg3h/R6TPef1mV2mWd4fF/g9TRPeeuLw/hkd
- 0pe3/Oq+rP9t5oYr55MrFksIZh459/C+cF+Yr0JEo++bLqm7x6VbHJRYijMSDbWYi4oTAdD/
- tobSAgAA
-X-CMS-MailID: 20241210223601epcas1p29700f0a9bd234a67e99cced5e9f7d59b
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241209161507epcas1p42abfc4ea0439fce1f9ed20b21c20e637
-References: <20241209161434.6563-1-clamor95@gmail.com>
- <CGME20241209161507epcas1p42abfc4ea0439fce1f9ed20b21c20e637@epcas1p4.samsung.com>
- <20241209161434.6563-4-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e3c8ae3a3b2so487880276.0
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 14:38:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733870287; x=1734475087; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+nZzKRrZwRnl14IQ+Mvu3vEVwfR4U7hsukW62RX9dvQ=;
+ b=STa6Ne55Xvil0MQnmkRo0qkPdCx0+nPcGt9B/q714SBXnPmC0YalKM60foXxiPo1dl
+ wqBIOU7vzI1+ibY319xuelqEo25TmO7pvjHohn96hVgl/HEp79Aeztcc49ZtqYjYnzTU
+ l8vLvWY5THrIOMSTIVRIzIzWv/o6KpItKJTQz4+fd4bt3uKJvb1kUKAVFWoNc49bFTMR
+ f4Dh1v0e02e/WjbgXDbvaYwwsFsVHL8ws2NCldkAjZX2/WyPDEaZPRLWVMcaur1mHLYr
+ 79iEexIasVfYj6S/z67A04ax0lgIDJNo2NrJBDTANyiXtuMJGYw+0vzUbMKwr3hiKgvu
+ QXFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733870287; x=1734475087;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+nZzKRrZwRnl14IQ+Mvu3vEVwfR4U7hsukW62RX9dvQ=;
+ b=WXj9hmd4re6eM8SsrB1/lQ3xyzbCd/2P4ntJdW842cMkzQkidvv+NHAtH8cQKsccX0
+ lYxwf5/XTUFMBpDvOAcZtZPWVwY9suBA87gawKTCQoy7zJJN9rSv/Ky8wLTYn9H/Eie2
+ joXm+T9hdFBmwrnxM+Dbnk+LVAsFQLXyHGMDBsIZYJHtvJZsnczb1vrh5x6JyWTL1Vg+
+ Kkw/twwYpjectRbEVOkLD1isxbZBHFMmVw+/a2rPzPfPl2dm24ItQhv0aoc4o070Zbss
+ ZQhD8Jsy5XaAXzu/jDH32RtEMhtn9zcV/SNyQra3kQAuiNnY/ngH2Yu+VUxEpkFoSGM6
+ SNvg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZJVLIgAWyOe6eOcNASLtVDeJa54bWUDdckn7zQhnE5abbEzsUWwGFOrPAlDZOT0InBUsE/3o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVh+USbV1RN4UoCDDuyu6J4wbcVnyTa4g+z8MnzEZAKhpT+JZg
+ yfsACko31Ajt9k3LSjVQHYJPgH/e/q5otekcMzW3TQqCYpb/3sgIioPtnUJHY61FTeG8+fru31D
+ kgJ2K+7slNXlvd+XPQWKNA73jedPnpshZyZWQRT07XM/tIM9U1/L62Q==
+X-Gm-Gg: ASbGncsbZ3RA15Qu/FNr0gvRk+ax/0mVXt92PNzv210rB0ZKnQWtdenN5jtEgeTTFoF
+ hK1lbUiluSDlwxXNEWg8iFNYYQxYgVRpJSvI=
+X-Google-Smtp-Source: AGHT+IHANi7vvXY9sehw9DvzP14syJ+xf/vc7abSaruddItZ3gS6wfz+iBK9UEzkjuIcxofQQbLBXtBvaeqzVFGDm3I=
+X-Received: by 2002:a05:6902:1142:b0:e39:8482:5d5f with SMTP id
+ 3f1490d57ef6-e3c8e63d3f0mr869723276.46.1733870286491; Tue, 10 Dec 2024
+ 14:38:06 -0800 (PST)
+MIME-Version: 1.0
+References: <20241208002121.31887-1-semen.protsenko@linaro.org>
+ <20241208002121.31887-6-semen.protsenko@linaro.org>
+ <CAC_iWjKb1N9H3GdkZixbTmwncFj+nhjQKVtRSJdpfbnz49QTtA@mail.gmail.com>
+In-Reply-To: <CAC_iWjKb1N9H3GdkZixbTmwncFj+nhjQKVtRSJdpfbnz49QTtA@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 10 Dec 2024 16:37:55 -0600
+Message-ID: <CAPLW+4nPfwwTagTNq-yQnfePe+N-=pXCZfiW85KEaR1gvQ7=5A@mail.gmail.com>
+Subject: Re: [PATCH 5/6] lmb: Improve kernel-doc comments
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,43 +97,439 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-> -----Original Message-----
-> From: Svyatoslav Ryhel <clamor95@gmail.com>
-> Sent: Tuesday, December 10, 2024 1:15 AM
-> Bind SYSRESET child to parent node since it does not have
-> its own node in the device tree.
+On Sun, Dec 8, 2024 at 12:57=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-
-> ---
->  drivers/power/pmic/palmas.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> There was a discussion recently on whether this should be in the .h or .c
 >
-> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-> index f676bf64169..37d4190fabe 100644
-> --- a/drivers/power/pmic/palmas.c
-> +++ b/drivers/power/pmic/palmas.c
-> @@ -49,8 +49,9 @@ static int palmas_bind(struct udevice *dev)
->  	int children, ret;
+
+Thanks for reviewing this series! As for the comments -- I just
+followed the U-Boot guidelines from doc/develop/codingstyle.rst:
+
+    Non-trivial functions should have a comment which describes what
+    they do. If it is an exported function, put the comment in the
+    header file so the API is in one place. If it is a static function,
+    put it in the C file.
+
+Personally I don't have a strong opinion on this one. I noticed the
+kernel sticks to documenting public APIs in .c files, but U-Boot does
+that in headers instead. In my private projects, I usually provide
+doxy comments in the header for libraries which might be shipped as a
+binary plus the header file, but OTOH for firmwares and other
+self-sustained stuff I stick to kernel style. But in any case, I
+believe if we want change things the other way around, we should
+change the documentation first, and then rework all U-Boot source code
+to conform to that. That's out of scope of this patch, of course. But
+I'll extend the commit message to reflect this discussion and make it
+more clear.
+
+> But I don't really mind as long as we have a common policy
 >
->  	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS)) {
-> -		ret = device_bind_driver(dev, PALMAS_RST_DRIVER,
-> -					 "sysreset", NULL);
-> +		ret = device_bind_driver_to_node(dev, PALMAS_RST_DRIVER,
-> +						 "sysreset", dev_ofnode(dev),
-> +						 NULL);
->  		if (ret) {
->  			log_err("cannot bind SYSRESET (ret = %d)\n", ret);
->  			return ret;
-> --
-> 2.43.0
 
+Agreed, that's the most important thing. It's easy to move things
+around when everything is clean and tidy in the first place.
 
-
+> On Sun, 8 Dec 2024 at 02:21, Sam Protsenko <semen.protsenko@linaro.org> w=
+rote:
+> >
+> > Fix warnings from kernel-doc script. Improve and unify overall style of
+> > kernel-doc comments in lmb source files. Move all kernel-doc comments
+> > for public functions into the header, as recommended in U-Boot
+> > documentation, which also takes care of existing duplication. While at
+> > it, do a bit of cosmetic cleanups as well.
+> >
+> > No functional change.
+> >
+> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > ---
+> >  include/lmb.h | 125 ++++++++++++++++++++++++++++++--------------------
+> >  lib/lmb.c     |  55 ----------------------
+> >  2 files changed, 74 insertions(+), 106 deletions(-)
+> >
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index f221f0cce8f7..03d5fac6aa79 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -1,6 +1,13 @@
+> >  /* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + * Logical memory blocks.
+> > + *
+> > + * Copyright (C) 2001 Peter Bergner, IBM Corp.
+> > + */
+> > +
+> >  #ifndef _LINUX_LMB_H
+> >  #define _LINUX_LMB_H
+> > +
+> >  #ifdef __KERNEL__
+> >
+> >  #include <alist.h>
+> > @@ -8,21 +15,15 @@
+> >  #include <asm/u-boot.h>
+> >  #include <linux/bitops.h>
+> >
+> > -/*
+> > - * Logical memory blocks.
+> > - *
+> > - * Copyright (C) 2001 Peter Bergner, IBM Corp.
+> > - */
+> > -
+> > -#define LMB_ALLOC_ANYWHERE      0
+> > -#define LMB_ALIST_INITIAL_SIZE  4
+> > +#define LMB_ALLOC_ANYWHERE     0
+> > +#define LMB_ALIST_INITIAL_SIZE 4
+> >
+> >  /**
+> > - * enum lmb_flags - definition of memory region attributes
+> > - * @LMB_NONE: no special request
+> > - * @LMB_NOMAP: don't add to mmu configuration
+> > - * @LMB_NOOVERWRITE: the memory region cannot be overwritten/re-reserv=
+ed
+> > - * @LMB_NONOTIFY: do not notify other modules of changes to this memor=
+y region
+> > + * enum lmb_flags - Definition of memory region attributes
+> > + * @LMB_NONE: No special request
+> > + * @LMB_NOMAP: Don't add to MMU configuration
+> > + * @LMB_NOOVERWRITE: The memory region cannot be overwritten/re-reserv=
+ed
+> > + * @LMB_NONOTIFY: Do not notify other modules of changes to this memor=
+y region
+> >   */
+> >  enum lmb_flags {
+> >         LMB_NONE                =3D 0,
+> > @@ -32,11 +33,10 @@ enum lmb_flags {
+> >  };
+> >
+> >  /**
+> > - * struct lmb_region - Description of one region.
+> > - *
+> > - * @base:      Base address of the region.
+> > - * @size:      Size of the region
+> > - * @flags:     memory region attributes
+> > + * struct lmb_region - Description of one region
+> > + * @base: Base address of the region
+> > + * @size: Size of the region
+> > + * @flags: Memory region attributes
+> >   */
+> >  struct lmb_region {
+> >         phys_addr_t base;
+> > @@ -46,10 +46,9 @@ struct lmb_region {
+> >
+> >  /**
+> >   * struct lmb - The LMB structure
+> > - *
+> > - * @free_mem:  List of free memory regions
+> > - * @used_mem:  List of used/reserved memory regions
+> > - * @test:      Is structure being used for LMB tests
+> > + * @free_mem: List of free memory regions
+> > + * @used_mem: List of used/reserved memory regions
+> > + * @test: Is structure being used for LMB tests
+> >   */
+> >  struct lmb {
+> >         struct alist free_mem;
+> > @@ -58,51 +57,77 @@ struct lmb {
+> >  };
+> >
+> >  /**
+> > - * lmb_init() - Initialise the LMB module
+> > + * lmb_init() - Initialise the LMB module.
+> > + *
+> > + * Return: 0 on success, negative error code on failure.
+> >   *
+> >   * Initialise the LMB lists needed for keeping the memory map. There
+> > - * are two lists, in form of alloced list data structure. One for the
+> > + * are two lists, in form of allocated list data structure. One for th=
+e
+> >   * available memory, and one for the used memory. Initialise the two
+> >   * lists as part of board init. Add memory to the available memory
+> >   * list and reserve common areas by adding them to the used memory
+> >   * list.
+> > - *
+> > - * Return: 0 on success, -ve on error
+> >   */
+> >  int lmb_init(void);
+> >
+> >  /**
+> > - * lmb_add_memory() - Add memory range for LMB allocations
+> > + * lmb_add_memory() - Add memory range for LMB allocations.
+> >   *
+> >   * Add the entire available memory range to the pool of memory that
+> >   * can be used by the LMB module for allocations.
+> > - *
+> > - * Return: None
+> >   */
+> >  void lmb_add_memory(void);
+> >
+> >  long lmb_add(phys_addr_t base, phys_size_t size);
+> > -long lmb_reserve(phys_addr_t base, phys_size_t size);
+> > +
+> >  /**
+> > - * lmb_reserve_flags - Reserve one region with a specific flags bitfie=
+ld.
+> > + * lmb_reserve() - Reserve a memory region (with no special flags)
+> > + * @base: Base address of the memory region
+> > + * @size: Size of the memory region
+> >   *
+> > - * @base:      base address of the memory region
+> > - * @size:      size of the memory region
+> > - * @flags:     flags for the memory region
+> > - * Return:     0 if OK, > 0 for coalesced region or a negative error c=
+ode.
+> > + * Return: 0 on success, negative error code on failure.
+> > + */
+> > +long lmb_reserve(phys_addr_t base, phys_size_t size);
+> > +
+> > +/**
+> > + * lmb_reserve_flags() - Reserve one region with a specific flags bitf=
+ield
+> > + * @base: Base address of the memory region
+> > + * @size: Size of the memory region
+> > + * @flags: Flags for the memory region
+> > + *
+> > + * Return:
+> > + * * %0                - Added successfully, or it's already added (on=
+ly if LMB_NONE)
+> > + * * %-EEXIST  - The region is already added, and flags !=3D LMB_NONE
+> > + * * %-1       - Failure
+> >   */
+> >  long lmb_reserve_flags(phys_addr_t base, phys_size_t size,
+> >                        enum lmb_flags flags);
+> > +
+> >  phys_addr_t lmb_alloc(phys_size_t size, ulong align);
+> >  phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t =
+max_addr);
+> >  phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
+> >  phys_size_t lmb_get_free_size(phys_addr_t addr);
+> >
+> > +/**
+> > + * lmb_alloc_base_flags() - Allocate specified memory region with spec=
+ified
+> > + *                         attributes
+> > + * @size: Size of the region requested
+> > + * @align: Alignment of the memory region requested
+> > + * @max_addr: Maximum address of the requested region
+> > + * @flags: Memory region attributes to be set
+> > + *
+> > + * Allocate a region of memory with the attributes specified through t=
+he
+> > + * parameter. The max_addr parameter is used to specify the maximum ad=
+dress
+> > + * below which the requested region should be allocated.
+> > + *
+> > + * Return: Base address on success, 0 on error.
+> > + */
+> >  phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+> >                                  phys_addr_t max_addr, uint flags);
+> >
+> >  /**
+> > - * lmb_alloc_addr_flags() - Allocate specified memory address with spe=
+cified attributes
+> > + * lmb_alloc_addr_flags() - Allocate specified memory address with spe=
+cified
+> > + *                         attributes
+> >   * @base: Base Address requested
+> >   * @size: Size of the region requested
+> >   * @flags: Memory region attributes to be set
+> > @@ -111,20 +136,21 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size=
+, ulong align,
+> >   * parameter. The base parameter is used to specify the base address
+> >   * of the requested region.
+> >   *
+> > - * Return: base address on success, 0 on error
+> > + * Return: Base address on success, 0 on error.
+> >   */
+> >  phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+> >                                  uint flags);
+> >
+> >  /**
+> > - * lmb_is_reserved_flags() - test if address is in reserved region wit=
+h flag bits set
+> > + * lmb_is_reserved_flags() - Test if address is in reserved region wit=
+h flag
+> > + *                          bits set
+> > + * @addr: Address to be tested
+> > + * @flags: Bitmap with bits to be tested
+> >   *
+> >   * The function checks if a reserved region comprising @addr exists wh=
+ich has
+> >   * all flag bits set which are set in @flags.
+> >   *
+> > - * @addr:      address to be tested
+> > - * @flags:     bitmap with bits to be tested
+> > - * Return:     1 if matching reservation exists, 0 otherwise
+> > + * Return: 1 if matching reservation exists, 0 otherwise.
+> >   */
+> >  int lmb_is_reserved_flags(phys_addr_t addr, int flags);
+> >
+> > @@ -134,9 +160,7 @@ int lmb_is_reserved_flags(phys_addr_t addr, int fla=
+gs);
+> >   * @size: Size of the region to be freed
+> >   * @flags: Memory region attributes
+> >   *
+> > - * Free up a region of memory.
+> > - *
+> > - * Return: 0 if successful, -1 on failure
+> > + * Return: 0 on success, negative error code on failure.
+> >   */
+> >  long lmb_free_flags(phys_addr_t base, phys_size_t size, uint flags);
+> >
+> > @@ -160,7 +184,7 @@ static inline int lmb_read_check(phys_addr_t addr, =
+phys_size_t len)
+> >   * io_lmb_setup() - Initialize LMB struct
+> >   * @io_lmb: IO LMB to initialize
+> >   *
+> > - * Returns: 0 on success, negative error code on failure
+> > + * Return: 0 on success, negative error code on failure.
+> >   */
+> >  int io_lmb_setup(struct lmb *io_lmb);
+> >
+> > @@ -178,12 +202,13 @@ void io_lmb_teardown(struct lmb *io_lmb);
+> >   *
+> >   * Add the IOVA space [base, base + size] to be managed by io_lmb.
+> >   *
+> > - * Returns: 0 if the region addition was successful, -1 on failure
+> > + * Return: 0 on success, negative error code on failure.
+> >   */
+> >  long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size=
+);
+> >
+> >  /**
+> > - * io_lmb_alloc() - Allocate specified IO memory address with specifie=
+d alignment
+> > + * io_lmb_alloc() - Allocate specified IO memory address with specifie=
+d
+> > + *                 alignment
+> >   * @io_lmb: LMB to alloc from
+> >   * @size: Size of the region requested
+> >   * @align: Required address and size alignment
+> > @@ -191,7 +216,7 @@ long io_lmb_add(struct lmb *io_lmb, phys_addr_t bas=
+e, phys_size_t size);
+> >   * Allocate a region of IO memory. The base parameter is used to speci=
+fy the
+> >   * base address of the requested region.
+> >   *
+> > - * Return: base IO address on success, 0 on error
+> > + * Return: Base IO address on success, 0 on error.
+> >   */
+> >  phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong a=
+lign);
+> >
+> > @@ -201,9 +226,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_s=
+ize_t size, ulong align);
+> >   * @base: Base Address of region to be freed
+> >   * @size: Size of the region to be freed
+> >   *
+> > - * Free up a region of IOVA space.
+> > - *
+> > - * Return: 0 if successful, -1 on failure
+> > + * Return: 0 on success, negative error code on failure.
+> >   */
+> >  long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t siz=
+e);
+> >
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 8c1c9b0f67c8..eee3bd37d446 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -609,14 +609,6 @@ static __maybe_unused void lmb_reserve_common_spl(=
+void)
+> >         }
+> >  }
+> >
+> > -/**
+> > - * lmb_add_memory() - Add memory range for LMB allocations
+> > - *
+> > - * Add the entire available memory range to the pool of memory that
+> > - * can be used by the LMB module for allocations.
+> > - *
+> > - * Return: None
+> > - */
+> >  void lmb_add_memory(void)
+> >  {
+> >         int i;
+> > @@ -673,16 +665,6 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+> >         return lmb_map_update_notify(base, size, MAP_OP_ADD, LMB_NONE);
+> >  }
+> >
+> > -/**
+> > - * lmb_free_flags() - Free up a region of memory
+> > - * @base: Base Address of region to be freed
+> > - * @size: Size of the region to be freed
+> > - * @flags: Memory region attributes
+> > - *
+> > - * Free up a region of memory.
+> > - *
+> > - * Return: 0 if successful, negative error code on failure
+> > - */
+> >  long lmb_free_flags(phys_addr_t base, phys_size_t size,
+> >                     uint flags)
+> >  {
+> > @@ -790,19 +772,6 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong=
+ align, phys_addr_t max_addr)
+> >         return alloc;
+> >  }
+> >
+> > -/**
+> > - * lmb_alloc_base_flags() - Allocate specified memory region with spec=
+ified attributes
+> > - * @size: Size of the region requested
+> > - * @align: Alignment of the memory region requested
+> > - * @max_addr: Maximum address of the requested region
+> > - * @flags: Memory region attributes to be set
+> > - *
+> > - * Allocate a region of memory with the attributes specified through t=
+he
+> > - * parameter. The max_addr parameter is used to specify the maximum ad=
+dress
+> > - * below which the requested region should be allocated.
+> > - *
+> > - * Return: base address on success, 0 on error
+> > - */
+> >  phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+> >                                  phys_addr_t max_addr, uint flags)
+> >  {
+> > @@ -851,18 +820,6 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_=
+size_t size)
+> >         return _lmb_alloc_addr(base, size, LMB_NONE);
+> >  }
+> >
+> > -/**
+> > - * lmb_alloc_addr_flags() - Allocate specified memory address with spe=
+cified attributes
+> > - * @base: Base Address requested
+> > - * @size: Size of the region requested
+> > - * @flags: Memory region attributes to be set
+> > - *
+> > - * Allocate a region of memory with the attributes specified through t=
+he
+> > - * parameter. The base parameter is used to specify the base address
+> > - * of the requested region.
+> > - *
+> > - * Return: base address on success, 0 on error
+> > - */
+> >  phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+> >                                  uint flags)
+> >  {
+> > @@ -935,18 +892,6 @@ static int lmb_setup(bool test)
+> >         return 0;
+> >  }
+> >
+> > -/**
+> > - * lmb_init() - Initialise the LMB module
+> > - *
+> > - * Initialise the LMB lists needed for keeping the memory map. There
+> > - * are two lists, in form of alloced list data structure. One for the
+> > - * available memory, and one for the used memory. Initialise the two
+> > - * lists as part of board init. Add memory to the available memory
+> > - * list and reserve common areas by adding them to the used memory
+> > - * list.
+> > - *
+> > - * Return: 0 on success, -ve on error
+> > - */
+> >  int lmb_init(void)
+> >  {
+> >         int ret;
+> > --
+> > 2.39.5
+> >
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
