@@ -4,162 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 220DDE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 12:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7A8E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 12:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75FDC88E26;
-	Tue, 10 Dec 2024 13:45:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 45A4C89411;
+	Tue, 10 Dec 2024 13:51:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="bMF1Xhjp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NEa8u6LH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6617988E26; Tue, 10 Dec 2024 13:45:15 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::600])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8BA98897C2; Tue, 10 Dec 2024 07:37:19 +0100 (CET)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14C9B88CA0
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 13:45:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E186892D9
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 07:37:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PJ2akoUVTPdQZe8Vqc8yAZdY/yni1DlZ0qfn2P/voojVl7yCYQgtnTSTxrlh9fAqAo41y1Mc+vcU9XuLHrB2uG6DK92KxLFpo74KJ0oruxEy8bjY0Zryv1WRjVsa/zMMQz9PKz3gf5ZXkX5YHZeCBwOwypsHODDmBI91XcvPO2ficyJ2OxAepreURPRNaGT+vX9xRc1R/HuLRJAmIIhI8ILS78f71UhfTbuLYXaCFuxOxqTdDRUI+Tki5Za3wsh2luFaD0CfU+Lk7Ur1voxGcf4gw5ICphJGEw8ZLvs6/hJDiVJzO96l2TazT6w8p3je/MKgOyznf5PUZhLOHE/fFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sLrY7zf2TlO0LBrALTFgYn/AXQPIPUTmN82JBq72YfA=;
- b=SYmxADNQLOd5rOy9VH8hGyusmTrOC6YUKS+IcTc6o6nySnZhzE2LVn7o3eWpSBwjTqljn1xbEi0q3d8Fm58vLvz0UCvHYbGgDfwM2o/xskZGopZYx4yZkIJWi24nBPrxIFsdiCKWAGjNXNCOUpOb2nsCC/5302a6PPj0r2NlnI8xKapfnxLOhkhsMbA9jX4lGrvyTZZdHdU/JOFmwkjbMJPLpcxUm5lkjcGl+/Lg2h6ztff3lc/kw/EEdCPOqpQHs3qhaIAVxQLrcOXfReoVhZxrPH+mTPO18L7pq4jOm6HY1UkBeaHEAPXZuLCVnfil2V9pIYROYMoQ2IYI6tDzOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sLrY7zf2TlO0LBrALTFgYn/AXQPIPUTmN82JBq72YfA=;
- b=bMF1XhjpPu8PWdXZpw6PIEfuvb2NVhr6uKIjxs5JvgC/Dsvh3Z9zZzh2BfwcxPTpsB3nCyzwfhXDjIYAl+kw3YaCdGFFDvlw0M1nO57SchiyuFvVb7rd2C3N5KsB0uY8d5pxRPehj9ehKSXEjPwKbJ/d4I5i0Q1azwCgtpjUSOz/YxTCesJe8lo1poTTMfQvBNrm47O4PsMI58KDpZ7X4NZL0TkKjeT/OUs2Y360+ivlH21ZJliRA0hp6UM1W2Cnr7g87naUDx+IX8cr3v2ivKSJoEHNfd65eND7ORRXUqYfy264zka7qkNv8VnfjmY87Bnt6taTCTu2maSiTKKyjw==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by VI1PR10MB8183.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1e1::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.12; Tue, 10 Dec
- 2024 12:45:09 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%7]) with mapi id 15.20.8251.008; Tue, 10 Dec 2024
- 12:45:09 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "Kiszka, Jan" <jan.kiszka@siemens.com>, "sr@denx.de" <sr@denx.de>
-Subject: Re: [PATCH] watchdog: rti: support SPL (or re-start)
-Thread-Topic: [PATCH] watchdog: rti: support SPL (or re-start)
-Thread-Index: AQHbMiN/afepKeXbFkeaxjnEDrAYxrLfnmgA
-Date: Tue, 10 Dec 2024 12:45:09 +0000
-Message-ID: <8fd078c8cf006ad6af79180e0fbde1c58957374d.camel@siemens.com>
-References: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
-In-Reply-To: <20241108211506.1348528-1-alexander.sverdlin@siemens.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|VI1PR10MB8183:EE_
-x-ms-office365-filtering-correlation-id: 1c0affdf-9486-4651-f88f-08dd19187b27
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|1800799024|366016|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?T0doQklDdU4rYjloSExYUHNkSmxjL1ZLdlB3QnR6eXhzbGx1VVJkMXAzOHBE?=
- =?utf-8?B?cUZxSXVoMGk1QVM2blozT2p6R2NCNDJKOGNXN1kwVDVCUGVSZThJM1Q5L2ta?=
- =?utf-8?B?OFFwdlhtaUZqb243RHY3RGVXOXZ2SFNDVkgrb2ZiL3J6Mi9ud2syZVNZZGtQ?=
- =?utf-8?B?a3NBZVdSUWJ0NDYzUzlWbkprN2RNMUltWk1mSkphSEVCZW9OM0lNK0pxaWRa?=
- =?utf-8?B?T0piNkI2QTh6TEhzKzhKTXJtRzZoVWR4VW81cWhudDFDS2xBK2hJOXhNVUlY?=
- =?utf-8?B?d2tMS3NBaHMxamFiL3lHL1FoV0hxQmRyOXJYMFc5R2lOYVVTVGRRU0x5K0lj?=
- =?utf-8?B?VTZuY1kyT0ZuS2l5T0JDNXIxNFp3U25nT1dFVk5ndVEra3FPK1N4NzE4c1Yw?=
- =?utf-8?B?Z3llZVZHY0lmVnNlaHJyaWVtaDdzczdHSHVQYVk4ZlRFeGs5YjdKOS9VYVRr?=
- =?utf-8?B?SWdTN2EwbmFwZ1huOVNmeEJMem9QRWVHbkV0SnI2bDA3cmNLQkJERHRyV3du?=
- =?utf-8?B?cWkrTnJLOXJDOHB3Z1B1bFJOWExYdWRmV1d6UHRCcTNES1V6MitER1dLdnJO?=
- =?utf-8?B?ZU9neCt5czVSRzZFWDFBcEgrNGFNb0FPc0VGMkYxRFY5YnI2S1VnQkZuTXEx?=
- =?utf-8?B?ejlLODZYT2VrbCt0bG5aQUFpNzZJKzN3VGxKekNIUlcxT3ZQSWltUjhyRkZ2?=
- =?utf-8?B?bUt3bFFqWFpKdW5pTXJ0clNtM3N6SjBXeDh5TWRLOW9DMW5HZGYwZTN0bGJW?=
- =?utf-8?B?d0Y4U0NSQWVRQ3hCNkxCSGQyYWJUU054MmhJNlRxQjY3eWJDYVRTOGdZY1py?=
- =?utf-8?B?Z1VWNHBhVlFZYmxlV05zVkloLy9hWDc0NE5hdWZYVlVQS2RCV1NrY1lQaGR0?=
- =?utf-8?B?TjhXY3BGQzFWZ2s1TlpLSnk0NDFuOEpvbllGSEFTa1dWNm5jM0xiSlg1QlVF?=
- =?utf-8?B?YmRtM0E3aHk5ZUJlZTJuTkd0TmoreXBBbHpLaEJEejZXMVlqVWZpYVYraXA1?=
- =?utf-8?B?MVVYTVZjdjh1WlFGQzdWQVZBYm9vU3ByS0hNRlRtci84WDcyNk05TmRncElQ?=
- =?utf-8?B?dGFRNkc0TjNlcHZSRzFkYUdpQnk4L3VrZUROTzBBUzV5dXhMb29QMW96NVll?=
- =?utf-8?B?ajVGOEZ1YTF6emtXVm12bllKR01MWE5aZnFvS2J1YW5ERm1nNW9qM2xpVVZK?=
- =?utf-8?B?OGhwdmFqcE11Sk16bmZpRGYzSkU0MFZRQWNXUXZSTjVuSVhxaW41cnVhZ2Fr?=
- =?utf-8?B?bXgyelZHWW5XR0xzcVBWTkhVdjRuei9GY3M1cGVXK1JIaWVFRnFxZEZxMjJn?=
- =?utf-8?B?d1NGVzhReDFZbWxqZFYwRndMSEliQ2xhUzVOL0tRbGkwZlZ1SU91NUlSeWh4?=
- =?utf-8?B?OGo1Nk1FWFllemlidVV2TXdmb3IrYnVhZ05JUjBmdnh1WGFYczdkNlNuRGxT?=
- =?utf-8?B?OHpySVp6cFR4UnpsendqU3kyWDEzN0UvWEFYRjY4MU9SSWlzU3FOUUJPaHRr?=
- =?utf-8?B?VFZhZEVYbUNCUDdCaC9jV0RPQXBzT0FibnlNd2llWXJ4S25qTWNKRWdqcUhY?=
- =?utf-8?B?UFgzbVFGS2JxVm9MQWdOeUV5alB3ejkwOVd0dHBkcnB5dzVFR1JLN0NuS1BK?=
- =?utf-8?B?ZWFLNllaeU1qaWRzZWduTmY5bG5qMHdLYkJ5QkVCREVnUlJIRExMaDhNMHEv?=
- =?utf-8?B?U00zMnllWGcxSkJ5ejhYSGIxVHQrVkV4VE1PVk8yRUwvZWp5Wk9lN1pZRGN3?=
- =?utf-8?B?amk4THhzTGY4Z2ozcUFKSmxqT1VFSkkwTjVIRWg2YW95Z2VzamRHTFBkaFVx?=
- =?utf-8?Q?MKGCx5Htws09wbG3fLqAj6QwQfm3r2a79wGHw=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?QTN5RUlHV25sY0NnMlpqa3dmNUx1LzZjSjZ1Yk9KZG1nVC9ndms5TE1lNUhi?=
- =?utf-8?B?L2t2N1UwcDhHMmlwWUZEQ2dJVlV6dHdMemNMelJuUWdNUi93VlY3QUZGcGwy?=
- =?utf-8?B?K2ZZUlBIUXB1VnZXeXRHYVEwSDR1WVg4OExzdnNFSmFWbHVHVEtQK0xOTk1T?=
- =?utf-8?B?Ykk4RzhBRG1FMWR4TDJLSC84MzNhRjVIMkhIVWczS3hBSGZZS1Jzcys2NjRR?=
- =?utf-8?B?cXdoY0RmRGhOOUJPMGxLeGZTS0MvdXhqMTZzZ3RzQkRuZFRPWW95aW5HNng1?=
- =?utf-8?B?OXJ6UnQ1ZVdRNFlmNisycXRKV2l1UDRVcDU2bkV2cXNSQUhRZ3g2a0lqSnBr?=
- =?utf-8?B?N2JuZTV6NzEwR3l1YjByL0hmV3gzUUdMbE52eFp6eHZYZkwrMG9jMDRzaFZv?=
- =?utf-8?B?YWdsdys3UzZjb2haZU5zeGh1REpQb0JxOTVwZ2ZZTGZzOW1KOUFTbi9NOGhO?=
- =?utf-8?B?bXNLS0VxL24rcTRoSmhJL2wxZEtMQ0lLUmlIRVlLUDlhMVlrWmpOcUl2aVBZ?=
- =?utf-8?B?Z1B2TkZLeGNoUjBLM0wzUGxpRitJVnRnM2w1V3pHa01Ea1UxbUlPVHl2bk44?=
- =?utf-8?B?Z0Q2Umpwc2VHeFlNNURCd0QraXBwblR0UVVrQVVCZHl2MDl0Z2VyYmtKMnZG?=
- =?utf-8?B?cHFnQ0JSZUV3WVdQM0Rxbnk3WUNlMFA4MlluY0trZlMvVUR4OW5JUHdGMlFw?=
- =?utf-8?B?RmJKSVBXaWQ2NUxxeVVTN2k2dXFpQjMwdFpWWVZ1TWRTQ040TWM5S0lyQkhl?=
- =?utf-8?B?TVgzWVJJRGtSbERmTmpiUjNwYzVKVGV1ZEx2YUNTcG1MeFZyUmVYcW9McUFB?=
- =?utf-8?B?Z3ducnBINWlya2FmUmo3YnVJc0poRzRVNXpLb0p3K3RmQW9oOHZIR0F1VWRY?=
- =?utf-8?B?cjJhZnphZXdyVzhXamdjV1lXVTQwTjRLNmVuSnJGVWxZVUN4OHQyS1pzTTJX?=
- =?utf-8?B?NjFubWFVWnFaaDJiNGZINHlHbXpCQmZjZktGbkJwdVk4M1JZNGIxcG50OERZ?=
- =?utf-8?B?dkpzaVBqN0NYMW82TnJPZmxwNURhelBhTmkyNkZkQUNWM1hMckh2bG9BN05l?=
- =?utf-8?B?VmtpTUliNVRxV2hoQnczRFZjRWVRQVpLYklyQVpOb1Fpbk5FOG1adXZjWDhh?=
- =?utf-8?B?NWd0MStYbXFyQ3RQSEkvM00rRm40QWNDamNNcERIL2IwS3Z6UEtjVUFNMDdF?=
- =?utf-8?B?Q1lkNmRyTy9Ibkd5NUZxRmtTOHRobi8rUWk3OGwxL2NIZlB3clJ1QzFLNXd0?=
- =?utf-8?B?N2Z4aG1EeW5ZdkNIRGNLQ0tFaXdJcjNEWjFhKzcvb3I2Y0pjR29GMXEvUnN6?=
- =?utf-8?B?OFJQalh2ZUoxa2NIa2hyQmxNTm0yRFJ1Q0tZQlZCcVp4L1pFYnNzZXhCb1Ju?=
- =?utf-8?B?dlFwTHVKam9SMFlVK0tCdUN1a3cyRkUwSVJ1eXpRQzRmM0JYT0RSNU1lMy9k?=
- =?utf-8?B?NkVSYmlLa1ZOMlBBR2h6Y2ZvK1dmSC96LzdiWU1qM0xoM21pYUN3a0h5TElK?=
- =?utf-8?B?V1R3STRBdGNGNXk0My9ocTRuLzVkM2pDVlZDN0dqOUV3eUJlZ0N0dWpOd1Vj?=
- =?utf-8?B?N0RSVWFDdUVOc0IyWU1aY0s0bG03UmZJYlI3ZHNMYVdrYm8rSnBXeDNQYnF3?=
- =?utf-8?B?ekNlcG5UU08wRy8vb2w2OW93UzBoZ1BrR2Y3OHJnU1ljK3Z1ODVGVHdWQzFv?=
- =?utf-8?B?azdGenovZzNNNUh3SU9iS1I1WEN2blE1elh5V1c2QjRRRkNxMThDLzErUXBt?=
- =?utf-8?B?MTJGL0RCazN6N0swMVR6dm5XYWMxNGFKVDUwdkkwZmF4M3Rwb1ptTmRETjM4?=
- =?utf-8?B?UUdoNlJyYnNhb3NuSEs1TGxYZERDamx6eU13dWMzNHZtSUcwcExFSjRFcDd1?=
- =?utf-8?B?ZXRqMnZTZis4TEVzMDAzMmtEeWV3cm5tTVdtQTdiRkRXQzk0enNPZHBPWjF0?=
- =?utf-8?B?OFFpQ0NRNEVreVJaZEEzWXg3d0hLdVA4elRlUW43T0xVTEJWYjN3d0pWWjlS?=
- =?utf-8?B?dE1WT3RmV3FycmxhU2pBSmlkeXJETC9yc3RTQjNDcWxLTlNOaGZRcGR4T2FW?=
- =?utf-8?B?UEh3bUx5QmZLdW9DRC9GV3BMVlhpdTk5RUNSQTJsbEQ5aWJvU0oyYllBNk9D?=
- =?utf-8?B?bmJxc2xuYUdIengva1F5YUpZQ2drS2VOamFxMmtBSUlYZFo0M2J3RkFEYmla?=
- =?utf-8?Q?a3nfW3t3XXWk4h662DsWesc=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <9513A24EEE94BD47A14ED711B7769602@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7e6cbf6cd1dso2883319a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 22:37:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733812635; x=1734417435; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k583hgjfHDJ5tzWWWzosYA2x1b9nRiqn38S3j4kg96A=;
+ b=NEa8u6LH10/sQdcdFIEoi57yPg68SXL2NirbZCBCYilxxdT0gNUzmZHvBK/Ui4WYtr
+ 4+y/K3MJeqgLoueYYi7Cp7jSBQ8IoehlGJsNA0Ky5fupldj0bwCZZHO68wvby3U1Yqsm
+ OP+/eiC8EeaiEVEmdSqtFug14OqCiLvw928qgmp8zJLkGllYzqzP6hcapy+oOjuVzXR/
+ xxKBTOZZ91vltnK5yFRFn+QMMjI/MdEyk0OdsJXDlD6ANjpAV2UOnL/a99pyO/smH8sQ
+ Csyp72p1qRYAAjEi2/Nw1o/jbjyzQ+TIp2LkvHqwYYfNq6RaGRgsNZyHDdgTnr1RXpu6
+ Kl/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733812635; x=1734417435;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=k583hgjfHDJ5tzWWWzosYA2x1b9nRiqn38S3j4kg96A=;
+ b=sV3rxjV6XvBrC1lb9E4rwteCylG/CHfVfrNli1Uo0/Ctzwg9peG9OsHE/kpgOxlrtu
+ ug83NYFNpXuIYdvrQlrbZ9nACa2qwHXtWXV+3YdaANrVlk9CR85M4VHlfbHnO6KjQtiR
+ 50i+zxbq7CNf37GlJRTOAjVM78RDaG++ZLiqAGrzk0GdVWj379BbNXYs7DQkWrshFLYK
+ PdWqK1c3Ol03Vft43uavyW7d+nrtnvCRL1WDjN+XYvIM0JMDpygrQKANQgLiASMAFWj4
+ uRGuEJI8XnWUP8Im5jrjgUrNeV3SRjEyR7YzasaznAyWLs1yF99AqTS/Yilpf8/Jx3rS
+ 1CVw==
+X-Gm-Message-State: AOJu0YzsIVZhauvyu8CseDBqYk6h7ZuiIbGj9GTaUic+Xg1kLgLzPOYy
+ UZFhX3S97QAdGJG5c0GY/gf/6nSc/IO6XQNyaA2vknE5n1aq82UZ
+X-Gm-Gg: ASbGncsu7epWIIl9uI/dHvxqlyU/J/NNXtQvVYWAjmR8efrCcX4l2ABtd1aohomhPTR
+ H6g5JkU7ABnlimHTIZtKVMa8ic25cPrsPn6s0wg2k73I8NlQOPARu0Wf9pAFUfLSOTzInSVSTyj
+ thRaR3SMBfeHPEqIYmeesattWMwzjiPQKQmIPFqI0pV+QM4tEsPWqfw7ERG24whbuYPJeaeyj9M
+ g5K3gKRenMZMer9Yc7DLzs48vMscs1nmXI7zGIQFKkoyCN4B5YlVXL678qtOtU=
+X-Google-Smtp-Source: AGHT+IG26X3IAb+Hujb42M5Vu4raJC9ggXzGJcTvejTioENcY2Yt0VWIh2oUjP53YhIzGQlaqjdhsA==
+X-Received: by 2002:a05:6a20:8429:b0:1e0:c954:ea85 with SMTP id
+ adf61e73a8af0-1e1870b9335mr26179257637.13.1733812635342; 
+ Mon, 09 Dec 2024 22:37:15 -0800 (PST)
+Received: from cs20-buildserver.. ([180.217.131.171])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7fd47f7b9b5sm3502388a12.12.2024.12.09.22.37.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Dec 2024 22:37:14 -0800 (PST)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com,
+	jim.t90615@gmail.com,
+	trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2] gpio: npcm: Add persist feature to sgpio module
+Date: Tue, 10 Dec 2024 14:35:05 +0800
+Message-Id: <20241210063505.147762-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1c0affdf-9486-4651-f88f-08dd19187b27
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Dec 2024 12:45:09.2381 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xpGiI8tiAsva47rh09nZBozkoPcoT0pdI/AggsvzX0aYKyzDLg4NfJ8A328bFHLI6BCmddbRaGX64LQmi/Ve8wd1MaP/vAkaK/lkUE0a0nY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB8183
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 10 Dec 2024 13:51:03 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,50 +96,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU3RlZmFuIQ0KDQpPbiBGcmksIDIwMjQtMTEtMDggYXQgMjI6MTUgKzAxMDAsIEEuIFN2ZXJk
-bGluIHdyb3RlOg0KPiBGcm9tOiBBbGV4YW5kZXIgU3ZlcmRsaW4gPGFsZXhhbmRlci5zdmVyZGxp
-bkBzaWVtZW5zLmNvbT4NCj4gDQo+IElmIHRoZSBSVEkgd2F0Y2hkb2cgaGFzIGJlZW4gZW5hYmxl
-ZCBpbiBTUEwsIGVuYWJsaW5nIGl0IGluIFUtQm9vdCBwcm9wZXINCj4gZmFpbHMgYmVjYXVzZSBp
-dCBjYW4gb25seSBiZSBlbmFibGVkIG9uY2UgaW4gSFcgYW5kIG5ldmVyIHN0b3BwZWQuIFRoaXMN
-Cj4gaG93ZXZlciBsZWFkcyB0byBhIHNpdHVhdGlvbiB0aGF0IHdkdF9jeWNsaWMoKSB3YXRjaGRv
-ZyB0cmlnZ2VyIGlzIG5vdA0KPiBiZWluZyBzdGFydGVkIGFueSBsb25nZXIgYW5kIHRoZSBXRFQg
-ZmlyZXMgYXQgc29tZSBwb2ludC4NCj4gDQo+IEFsbG93IGZvciBXRFQgcmUtc3RhcnQgYnkgbm90
-IGJhaWxpbmcgb3V0IGlmIHRoZSBbcHJldmlvdXNseV0gY29uZmlndXJlZA0KPiBwZXJpb2QgbWF0
-Y2hlcyB0aGUgb25lIHRvIGJlIGNvbmZpZ3VyZWQuDQo+IA0KPiBFbmFibGluZyBpbiBbQTUzXSBT
-UEwgaGFzIGJlZW4gdGVzdGVkIG9uIEFNNjJ4LWJhc2VkIEhXICh3aGVyZSBbQTUzXSBTUEwgaXMN
-Cj4gcmVzcG9uc2libGUgZm9yIGxvYWRpbmcgUjUgRE0gZmlybXdhcmUgYW5kIG5vdCB0aGlzIGRy
-aXZlcikuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kZXIgU3ZlcmRsaW4gPGFsZXhhbmRl
-ci5zdmVyZGxpbkBzaWVtZW5zLmNvbT4NCg0KSSBzYXcgdGhhdCB0aGlzIHBhdGNoIGhhcyBiZWVu
-IHNldCB0byAiU3VwZXJzZWRlZCIgaW4gdGhlIHBhdGNod29yayBbMV0sDQpidXQgSSdtIG5vdCBz
-dXJlIGJ5IHdoaWNoIHBhdGNoLiBDb3VsZCBpdCBiZSB0aGF0IGl0IGhhcHBlbmVkIGJ5IG1pc3Rh
-a2U/DQoNCk15IG90aGVyIHBhdGNoIGZvciB0aGUgcnRpIHdhdGNoZG9nIFsyXSBpcyBhZGRyZXNz
-aW5nIHNvbWUgdW5yZWxhdGVkIGlzc3VlLi4uDQoNCjEuDQpodHRwczovL3BhdGNod29yay5vemxh
-YnMub3JnL3Byb2plY3QvdWJvb3QvcGF0Y2gvMjAyNDExMDgyMTE1MDYuMTM0ODUyOC0xLWFsZXhh
-bmRlci5zdmVyZGxpbkBzaWVtZW5zLmNvbS8NCg0KMi4NCmh0dHBzOi8vcGF0Y2h3b3JrLm96bGFi
-cy5vcmcvcHJvamVjdC91Ym9vdC9wYXRjaC8yMDI0MTEyMDIyMjQxMi4xODczMzgxLTEtYWxleGFu
-ZGVyLnN2ZXJkbGluQHNpZW1lbnMuY29tLw0KaHR0cHM6Ly9wYXRjaHdvcmsub3psYWJzLm9yZy9w
-cm9qZWN0L3Vib290L3BhdGNoLzIwMjQxMTIxMDgwMzI2LjE5MTMwNjctMS1hbGV4YW5kZXIuc3Zl
-cmRsaW5Ac2llbWVucy5jb20vDQoNCj4gLS0tDQo+IMKgZHJpdmVycy93YXRjaGRvZy9ydGlfd2R0
-LmMgfCAxMyArKysrKysrLS0tLS0tDQo+IMKgMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygr
-KSwgNiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3dhdGNoZG9nL3J0
-aV93ZHQuYyBiL2RyaXZlcnMvd2F0Y2hkb2cvcnRpX3dkdC5jDQo+IGluZGV4IDk5MTY4ZDBjYWQw
-My4uMzIwYzVjYTE5ZTBhIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL3dhdGNoZG9nL3J0aV93ZHQu
-Yw0KPiArKysgYi9kcml2ZXJzL3dhdGNoZG9nL3J0aV93ZHQuYw0KPiBAQCAtMTMxLDE4ICsxMzEs
-MTkgQEAgc3RhdGljIGludCBydGlfd2R0X3N0YXJ0KHN0cnVjdCB1ZGV2aWNlICpkZXYsIHU2NCB0
-aW1lb3V0X21zLCB1bG9uZyBmbGFncykNCj4gwqAJdTMyIHRpbWVyX21hcmdpbjsNCj4gwqAJaW50
-IHJldDsNCj4gwqANCj4gLQlpZiAocmVhZGwocHJpdi0+cmVncyArIFJUSURXRENUUkwpID09IFdE
-RU5BQkxFX0tFWSkNCj4gKwl0aW1lcl9tYXJnaW4gPSB0aW1lb3V0X21zICogcHJpdi0+Y2xrX2h6
-IC8gMTAwMDsNCj4gKwl0aW1lcl9tYXJnaW4gPj49IFdEVF9QUkVMT0FEX1NISUZUOw0KPiArCWlm
-ICh0aW1lcl9tYXJnaW4gPiBXRFRfUFJFTE9BRF9NQVgpDQo+ICsJCXRpbWVyX21hcmdpbiA9IFdE
-VF9QUkVMT0FEX01BWDsNCj4gKw0KPiArCWlmIChyZWFkbChwcml2LT5yZWdzICsgUlRJRFdEQ1RS
-TCkgPT0gV0RFTkFCTEVfS0VZICYmDQo+ICsJwqDCoMKgIHJlYWRsKHByaXYtPnJlZ3MgKyBSVElE
-V0RQUkxEKSAhPSB0aW1lcl9tYXJnaW4pDQo+IMKgCQlyZXR1cm4gLUVCVVNZOw0KPiDCoA0KPiDC
-oAlyZXQgPSBydGlfd2R0X2xvYWRfZncoZGV2KTsNCj4gwqAJaWYgKHJldCA8IDApDQo+IMKgCQly
-ZXR1cm4gcmV0Ow0KPiDCoA0KPiAtCXRpbWVyX21hcmdpbiA9IHRpbWVvdXRfbXMgKiBwcml2LT5j
-bGtfaHogLyAxMDAwOw0KPiAtCXRpbWVyX21hcmdpbiA+Pj0gV0RUX1BSRUxPQURfU0hJRlQ7DQo+
-IC0JaWYgKHRpbWVyX21hcmdpbiA+IFdEVF9QUkVMT0FEX01BWCkNCj4gLQkJdGltZXJfbWFyZ2lu
-ID0gV0RUX1BSRUxPQURfTUFYOw0KPiAtDQo+IMKgCXdyaXRlbCh0aW1lcl9tYXJnaW4sIHByaXYt
-PnJlZ3MgKyBSVElEV0RQUkxEKTsNCj4gwqAJd3JpdGVsKFJUSVdXRFJYX05NSSwgcHJpdi0+cmVn
-cyArIFJUSVdXRFJYQ1RSTCk7DQo+IMKgCXdyaXRlbChSVElXV0RTSVpFXzUwUCwgcHJpdi0+cmVn
-cyArIFJUSVdXRFNJWkVDVFJMKTsNCg0KLS0gDQpBbGV4YW5kZXIgU3ZlcmRsaW4NClNpZW1lbnMg
-QUcNCnd3dy5zaWVtZW5zLmNvbQ0K
+Base on GPIO hog to support sgpio persist enable feature.
+
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+Changes for v2:
+   - rebase to current next and remove common.h
+---
+ drivers/gpio/npcm_sgpio.c | 151 +++++++++++++++++++++++++++++++++-----
+ 1 file changed, 134 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/gpio/npcm_sgpio.c b/drivers/gpio/npcm_sgpio.c
+index 6d73287c0a2..fcc42087d57 100644
+--- a/drivers/gpio/npcm_sgpio.c
++++ b/drivers/gpio/npcm_sgpio.c
+@@ -4,31 +4,47 @@
+  */
+ 
+ #include <dm.h>
++#include <regmap.h>
++#include <syscon.h>
+ #include <asm/gpio.h>
++#include <linux/err.h>
+ #include <linux/io.h>
++#include <asm/arch/rst.h>
+ 
+ #define MAX_NR_HW_SGPIO		64
+-#define	NPCM_CLK_MHZ		8000000
++#define NPCM_SIOX1			24
++#define NPCM_SIOX2			25
+ 
+-#define  NPCM_IOXCFG1		0x2A
+-
+-#define	NPCM_IOXCTS			0x28
+-#define	NPCM_IOXCTS_IOXIF_EN		BIT(7)
+-#define	NPCM_IOXCTS_RD_MODE			GENMASK(2, 1)
++#define	NPCM_IOXCTS						0x28
++#define	NPCM_IOXCTS_IOXIF_EN			BIT(7)
++#define	NPCM_IOXCTS_RD_MODE				GENMASK(2, 1)
+ #define	NPCM_IOXCTS_RD_MODE_PERIODIC	BIT(2)
+ 
++#define NPCM_IOXCFG1		0x2A
+ #define	NPCM_IOXCFG2		0x2B
+ #define	NPCM_IOXCFG2_PORT	GENMASK(3, 0)
+ 
+ #define GPIO_BANK(x)    ((x) / 8)
+ #define GPIO_BIT(x)     ((x) % 8)
+ 
++#define WD0RCR          0x38
++#define WD1RCR          0x3c
++#define WD2RCR          0x40
++#define SWRSTC1         0x44
++#define SWRSTC2         0x48
++#define SWRSTC3         0x4c
++#define TIPRSTC         0x50
++#define CORSTC          0x5c
++
+ struct npcm_sgpio_priv {
+ 	void __iomem *base;
++	struct regmap *rst_regmap;
+ 	u32 nin_sgpio;
+ 	u32 nout_sgpio;
+ 	u32 in_port;
+ 	u32 out_port;
++	u8 persist[8];
++	u8 siox_num;
+ };
+ 
+ struct npcm_sgpio_bank {
+@@ -185,7 +201,13 @@ static int npcm_sgpio_get_value(struct udevice *dev, unsigned int offset)
+ static int npcm_sgpio_set_value(struct udevice *dev, unsigned int offset,
+ 				int value)
+ {
+-	return npcm_sgpio_direction_output(dev, offset, value);
++	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
++	u8 check = priv->persist[GPIO_BANK(offset)];
++
++	if (!!(check & BIT(GPIO_BIT(offset))) == 0)
++		return npcm_sgpio_direction_output(dev, offset, value);
++	else
++		return -EINVAL;
+ }
+ 
+ static int npcm_sgpio_get_function(struct udevice *dev, unsigned int offset)
+@@ -213,12 +235,10 @@ static void npcm_sgpio_setup_enable(struct npcm_sgpio_priv *gpio, bool enable)
+ 	iowrite8(reg, gpio->base + NPCM_IOXCTS);
+ }
+ 
+-static int npcm_sgpio_init_port(struct udevice *dev)
++static void npcm_sgpio_set_port(struct udevice *dev)
+ {
+ 	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
+-	u8 in_port, out_port, set_port, reg, set_clk;
+-
+-	npcm_sgpio_setup_enable(priv, false);
++	u8 in_port, out_port;
+ 
+ 	in_port = GPIO_BANK(priv->nin_sgpio);
+ 	if (GPIO_BIT(priv->nin_sgpio) > 0)
+@@ -230,8 +250,16 @@ static int npcm_sgpio_init_port(struct udevice *dev)
+ 
+ 	priv->in_port = in_port;
+ 	priv->out_port = out_port;
++}
+ 
+-	set_port = (out_port & NPCM_IOXCFG2_PORT) << 4 | (in_port & NPCM_IOXCFG2_PORT);
++static int npcm_sgpio_init_port(struct udevice *dev)
++{
++	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
++	u8 set_port, reg, set_clk;
++
++	npcm_sgpio_setup_enable(priv, false);
++
++	set_port = (priv->out_port & NPCM_IOXCFG2_PORT) << 4 | (priv->in_port & NPCM_IOXCFG2_PORT);
+ 	set_clk = 0x07;
+ 
+ 	iowrite8(set_port, priv->base + NPCM_IOXCFG2);
+@@ -242,6 +270,61 @@ static int npcm_sgpio_init_port(struct udevice *dev)
+ 	return reg == set_port ? 0 : -EINVAL;
+ }
+ 
++static void npcm_sgpio_reset_persist(struct udevice *dev, uint enable)
++{
++	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
++	u8 num;
++
++	if (priv->siox_num == 1)
++		num = NPCM_SIOX2;
++	else
++		num = NPCM_SIOX1;
++
++	if (enable) {
++		regmap_update_bits(priv->rst_regmap, WD0RCR, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, WD1RCR, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, WD2RCR, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, CORSTC, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, SWRSTC1, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, SWRSTC2, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, SWRSTC3, BIT(num), 0);
++		regmap_update_bits(priv->rst_regmap, TIPRSTC, BIT(num), 0);
++	}
++}
++
++static bool is_gpio_persist(struct udevice *dev)
++{
++	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
++	u32 val;
++	int status;
++
++	status = npcm_get_reset_status();
++
++	if (status & PORST)
++		return false;
++	if (status & CORST)
++		regmap_read(priv->rst_regmap, CORSTC, &val);
++	else if (status & WD0RST)
++		regmap_read(priv->rst_regmap, WD0RCR, &val);
++	else if (status & WD1RST)
++		regmap_read(priv->rst_regmap, WD1RCR, &val);
++	else if (status & WD2RST)
++		regmap_read(priv->rst_regmap, WD2RCR, &val);
++	else if (status & SW1RST)
++		regmap_read(priv->rst_regmap, SWRSTC1, &val);
++	else if (status & SW2RST)
++		regmap_read(priv->rst_regmap, SWRSTC2, &val);
++	else if (status & SW3RST)
++		regmap_read(priv->rst_regmap, SWRSTC3, &val);
++	else if (status & TIPRST)
++		regmap_read(priv->rst_regmap, TIPRSTC, &val);
++
++	if (priv->siox_num == 1)
++		return (val && BIT(NPCM_SIOX2));
++	else
++		return (val && BIT(NPCM_SIOX1));
++}
++
+ static const struct dm_gpio_ops npcm_sgpio_ops = {
+ 	.direction_input	= npcm_sgpio_direction_input,
+ 	.direction_output	= npcm_sgpio_direction_output,
+@@ -254,23 +337,57 @@ static int npcm_sgpio_probe(struct udevice *dev)
+ {
+ 	struct npcm_sgpio_priv *priv = dev_get_priv(dev);
+ 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+-	int rc;
++	int rc, i;
++	ofnode node;
++	u32 val[2];
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
++	priv->rst_regmap = syscon_regmap_lookup_by_phandle(dev, "syscon-rst");
++	if (IS_ERR(priv->rst_regmap))
++		return -EINVAL;
++
+ 	ofnode_read_u32(dev_ofnode(dev), "nuvoton,input-ngpios", &priv->nin_sgpio);
+ 	ofnode_read_u32(dev_ofnode(dev), "nuvoton,output-ngpios", &priv->nout_sgpio);
+ 
+ 	if (priv->nin_sgpio > MAX_NR_HW_SGPIO || priv->nout_sgpio > MAX_NR_HW_SGPIO)
+ 		return -EINVAL;
+ 
+-	rc = npcm_sgpio_init_port(dev);
+-	if (rc < 0)
+-		return rc;
++	if (!strcmp(ofnode_get_name(dev_ofnode(dev)), "sgpio2@102000"))
++		priv->siox_num = 1;
++	else if (!strcmp(ofnode_get_name(dev_ofnode(dev)), "sgpio1@101000"))
++		priv->siox_num = 0;
++	else
++		return -EINVAL;
+ 
++	npcm_sgpio_set_port(dev);
+ 	uc_priv->gpio_count = priv->nin_sgpio + priv->nout_sgpio;
+ 	uc_priv->bank_name = dev->name;
+ 
+-	npcm_sgpio_setup_enable(priv, true);
++	if (is_gpio_persist(dev)) {
++		ofnode_for_each_subnode(node, dev_ofnode(dev)) {
++			if (ofnode_read_bool(node, "persist-enable")) {
++				rc = ofnode_read_u32_array(node, "gpios", val, 2);
++				if (rc == 0)
++					priv->persist[GPIO_BANK(val[0])] = priv->persist[GPIO_BANK(val[0])] | BIT(GPIO_BIT(val[0]));
++			}
++		}
++		for (i = 0; i < priv->nout_sgpio; i++)
++			npcm_sgpio_set_value(dev, i, 0);
++	} else {
++		rc = npcm_sgpio_init_port(dev);
++		if (rc < 0)
++			return rc;
++
++		ofnode_for_each_subnode(node, dev_ofnode(dev)) {
++			if (ofnode_read_bool(node, "persist-enable"))
++				npcm_sgpio_reset_persist(dev, 1);
++		}
++
++		for (i = 0; i < priv->nout_sgpio; i++)
++			npcm_sgpio_set_value(dev, i, 0);
++
++		npcm_sgpio_setup_enable(priv, true);
++	}
+ 
+ 	return 0;
+ }
+-- 
+2.34.1
+
