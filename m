@@ -4,89 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B41E77180
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 10:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF490E77180
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 11:16:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9351E89089;
-	Tue, 10 Dec 2024 11:01:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E32C8891E8;
+	Tue, 10 Dec 2024 12:16:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KzexzSOi";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="lLy+wUqL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 504D889407; Tue, 10 Dec 2024 11:01:11 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A29EA89220; Tue, 10 Dec 2024 12:16:41 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 525D788F7B
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:01:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CABD8891C4
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 12:16:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d3d143376dso4995353a12.3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 02:01:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733824869; x=1734429669; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cOUVAGM+79ZbYHudGfktAyOXlmPH7Gup+Tn6wf+4Nl4=;
- b=KzexzSOi2Kn+r468/UunZCoEP0i46wg5wDvNX0TCatOCyHd4aHHhlgmrOD8dCE339D
- EZMAg5jpSZWyQc9IkZIf8ypjmQOFtqRjZ7x9OCmjpQnU7YaRX3oz659Ke6QifjVqy9JF
- kJXLs4B932hgVA2J9O0NcnUxncxHOhcpEOWOwvDDN0urn24zmU6WTODfkpqtVM8DcsSh
- xsJMCyQy36rTKnaJZYKVMnDmS0R/uWHZlhzMLAI+BV6mMVF6dqyILoStnNe1efzsiXQV
- u5G5b6wrleUGsltMRT5e637j+CSw4GSSb1KA4ZNyb3eAuyv86heks4+MKw1fc3QnCQb4
- JfuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733824869; x=1734429669;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cOUVAGM+79ZbYHudGfktAyOXlmPH7Gup+Tn6wf+4Nl4=;
- b=BbvQn5UFCU5IdJIpecbAgDhRsOVqj79fM5o3fZTq2Bd88KNYBVmJYs8s7IP/oLZ0sM
- DTT4gD18pqdMZFQ4efTEUzxRHfG75lM0x7rUJTeYTwVtSHPdPjG5LT3IyQ/YZYsEcLL+
- dbO5XKEmbuFUYmF/mayVCNnz3IB7SoZsZoYzHI1HQlMnOub8JzD3YmKsRWD0rk+jJw2P
- 8UMO2U3x9etlFl20K645u7BPe33L6h1+FTEciE/V3MpEf0F10A1dk6+ZcWaeW7tisrsM
- eBlb9P0k3vIHPuv3HPQFdbYOA9TRExBt51MbokKs3MfKNjCDhkUz3eo7bmuxBGicC6+v
- 3CEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlLM53r5iE34PPTHEEf94yO1YGtIhZctPCZC0OKkxldumEw9/72tBfZl5/3XhBEhFjGcyfleo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxwCLFTOFjgcPbAcM/ks6zmkquwGnPdTt7GjtC2jWYRlX/q2EZI
- F/t7rOQGXs7lTBVmxshRp/sWM6p/c2cF7NYFab85mQv44STV7t5gHb4gPIzXYco5ulBNYpML2Ec
- 1sHQJlYORgcSNAZ5RlLBsjWWrTrEAV8nH4zS6aA==
-X-Gm-Gg: ASbGncuJftiIxFC/fh8njPR+YdwofownaDqTxi3Z62ebA03ddMvzOpeByf1sSM2CtzM
- oCsdBrGKvH1HZzUK5fXURqRxO1tTsiZOT5iYv
-X-Google-Smtp-Source: AGHT+IHODi/Yon2vMdBfjP4G00m5+Ue/sFXec1W8u80C4D5RbX4xUpB1i68panbHfXpNH0ejLe1m2wjic4FmkZE5Q0I=
-X-Received: by 2002:a05:6402:1e90:b0:5d0:88da:c235 with SMTP id
- 4fb4d7f45d1cf-5d41863c29cmr4102184a12.31.1733824868724; Tue, 10 Dec 2024
- 02:01:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20241208105223.2821049-1-ilias.apalodimas@linaro.org>
- <20241208105223.2821049-5-ilias.apalodimas@linaro.org>
-In-Reply-To: <20241208105223.2821049-5-ilias.apalodimas@linaro.org>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 10 Dec 2024 15:30:57 +0530
-Message-ID: <CADg8p97FMuPkc2CYhPpG5MKE5YRGsxRYsmKeUy=UAz8uBcm4og@mail.gmail.com>
-Subject: Re: [RFC PATCH 4/7] lmb: Remove lmb_add_region()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Korsgaard <peter@korsgaard.com>, 
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Janne Grunau <j@jannau.net>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111634epoutp01d4c6438a90284d8c65b703f353d25c83~PzKYAnl-i3259332593epoutp01C
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:16:34 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20241210111634epoutp01d4c6438a90284d8c65b703f353d25c83~PzKYAnl-i3259332593epoutp01C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1733829394;
+ bh=0kfzU7hbJPEippuVy3lSbdvdB26aAGE1LB/p4uE1pYU=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=lLy+wUqLai9NJhnLpZPvYXG4Drglo7naucZ9hA251VpQwq8e4KYQsE8OGiBktvwAp
+ sE0FhiD70xUp9+/LdEsp/kvqImm80/dRPnOfyaWUh7teIjXqeMgBtT0CUKsMFE9tTN
+ kwR8fsKdYmgwU6fB2xKiOjj/kODhtgwV2cTgD8Wo=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111634epcas1p40e8140d83068738fc8e0ba91a8f0dcf8~PzKX2w2lU2304823048epcas1p4f;
+ Tue, 10 Dec 2024 11:16:34 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.36.132]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4Y6x4x4M3Pz4x9Pv; Tue, 10 Dec
+ 2024 11:16:33 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ E6.F2.23253.11328576; Tue, 10 Dec 2024 20:16:33 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20241210111633epcas1p3c6494f2b82cc658465e816f06ba8cec2~PzKWie8dZ3095230952epcas1p3a;
+ Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111633epsmtrp2f0d91558349fc7dfb3a9973c789df122~PzKWhz2aC2621126211epsmtrp2o;
+ Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
+X-AuditID: b6c32a33-5a18170000005ad5-58-675823111fa3
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 53.FA.33707.11328576; Tue, 10 Dec 2024 20:16:33 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20241210111633epsmtip19a4103ab53ca0aad1548da9922b691ef~PzKWSA7tq1343813438epsmtip1Q;
+ Tue, 10 Dec 2024 11:16:33 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Simon Glass'" <sjg@chromium.org>, "'U-Boot Mailing List'"
+ <u-boot@lists.denx.de>
+Cc: "'Tom Rini'" <trini@konsulko.com>, "'Stephen Warren'"
+ <swarren@wwwdotorg.org>, "'Stephen Warren'" <swarren@nvidia.com>, "'Matthias
+ Brugger'" <mbrugger@suse.com>, "'Peter Robinson'" <pbrobinson@gmail.com>
+In-Reply-To: <20241209195528.730260-3-sjg@chromium.org>
+Subject: RE: [PATCH v3 2/5] rpi: Set bootm_size to 512MB
+Date: Tue, 10 Dec 2024 20:16:32 +0900
+Message-ID: <0b9101db4af4$f7f4e8e0$e7debaa0$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQHWHE+rJGlG6nTqz0NZt5G0ftzdLQJbrX6/AiSRicKyxa8U0A==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmga6gckS6wY8GBYsFk5+wWqxbtYbN
+ 4tuWbYwWN6a3sFq8OtjGYjF10mZ2i7d7O9kd2D1mN1xk8dg56y67x6sDq9g9zt7ZwejR2/yO
+ zWP9lqssHhvnhgawR2XbZKQmpqQWKaTmJeenZOal2yp5B8c7x5uaGRjqGlpamCsp5CXmptoq
+ ufgE6Lpl5gAdpKRQlphTChQKSCwuVtK3synKLy1JVcjILy6xVUotSMkpMC3QK07MLS7NS9fL
+ Sy2xMjQwMDIFKkzIzmg+1stYsIyv4vTDCSwNjHe5uxg5OCQETCRW7LLoYuTiEBLYwSjxadUv
+ VgjnE6PE6x+zmeGcCf0L2LsYOcE6Tq/sY4FI7GSUON37CqrqJaPE1L9NLCBVbAJ6Ev8XLWQG
+ 2SEiECFx9oYfSJhZ4DKjxLsniSBhTgFziV/fA0FMYQELiXcf+UFMFgFViQPLLUFMXgFLiS0d
+ 0hBLFSR+Pl3GCmKLCDhJNOw8yAgxT0Ridmcb2H4JgY/sEpMnHWeFaHCR+N82HcoWlnh1fAvU
+ 9VISn9/tZYNoaGaUWLrkICuE08Mo8a/hOhtElbHE/qWTmUCuYBbQlFi/Sx9iG5/Eu689rJCA
+ 45XoaBOCqFaRuPT6JRPM/LtP/kPt9ZBoPzUVbK+QwHZg4LSHTmCUn4Xk7lkICxYwMq1iFEst
+ KM5NT002LDCEx2Jyfu4mRnAi1DLewXh5/j+9Q4xMHIyHGCU4mJVEeDm8Q9OFeFMSK6tSi/Lj
+ i0pzUosPMZoCw3Eis5Rocj4wFeeVxBuaWBqYmBkZm1gYmhkqifOeuVKWKiSQnliSmp2aWpBa
+ BNPHxMEp1cAU4O92PGfTnX+X3qaesSutmLqdc/obsQzehbGPpp66836CuP15raMK/QlpUyZV
+ LfZ+Hmv5t2R7TVDGBZ8ppzI2Tc8/vnfp4XgNnylL5q0sENX9VPHj5FQegR9GV9Y94eN1Oc6j
+ oBjisXnxD8tfix1lMwqny52UyMh4rnRwV5S2c5BNS3t5KMf1chGhck81x7erJJ5HPJDvm5Z5
+ +Ma7BSun3W/dN8tp1s03t1g2KunNLp2b08l/4wfnkyuNFToBJTqut37N4Z485+uTA8faHP5t
+ kG7atPufrmfUvuAlr4L+ugeuabog8apbRDn0hBOfVkzJ+T1fUh8pMbhb87KohBj++D2pPvnP
+ i3x9e5ETZ/MllFiKMxINtZiLihMB/eVyFw0EAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLLMWRmVeSWpSXmKPExsWy7bCSnK6gckS6wfHjXBYLJj9htVi3ag2b
+ xbct2xgtbkxvYbV4dbCNxWLqpM3sFm/3drI7sHvMbrjI4rFz1l12j1cHVrF7nL2zg9Gjt/kd
+ m8f6LVdZPDbODQ1gj+KySUnNySxLLdK3S+DKaD7Wy1iwjK/i9MMJLA2Md7m7GDk5JARMJE6v
+ 7GPpYuTiEBLYzihxbtkmJoiElMTnp1PZuhg5gGxhicOHi0HCQgLPGSU+dnuA2GwCehL/Fy1k
+ BrFFBCIk5v5axAQyh1ngOqPEhvNN7BBDNzNKrG9bCDaIU8Bc4tf3QBBTWMBC4t1HfhCTRUBV
+ 4sBySxCTV8BSYkuHNMQBChI/ny5jhZjuJNGw8yAjiM0sICIxu7ONeQKjwCwk7gJGxlWMoqkF
+ xbnpuckFhnrFibnFpXnpesn5uZsYwSGsFbSDcdn6v3qHGJk4GA8xSnAwK4nwcniHpgvxpiRW
+ VqUW5ccXleakFh9ilOZgURLnVc7pTBESSE8sSc1OTS1ILYLJMnFwSjUw+RwMMvHgeJDj19vY
+ Ieh3MTTtQGhRrZk618tVJlMv3jBMY/5sdkb5+m+/5QX6P/OXeHKdvRKUnrVLkN//QFBq56s3
+ 0163Zhnn7yyXvKXRobi+yjyO+UPkgY2vjnfcaf3476O1LNu7noXejM/E0s04dzxL3nGhJL1W
+ 9saVc3N+qPLklk8oYHP1nlZyLa+jVeKpAMeH6RJMoeyiAkt7TGYrKyVdvnZh04VDy2Xu8hev
+ Oaza+98jhe+pcnTTr+A+hVghP7k7M7X3PYzyT73au+/VEwvz5WWLpn60272BYzazTdtLldvy
+ c9tDrp++z2fEmlR0sPRCA8f6D3wJT1lq7V9ZpqduCBPIDzaJz7xy5LYSS3FGoqEWc1FxIgDQ
+ j3cy0AIAAA==
+X-CMS-MailID: 20241210111633epcas1p3c6494f2b82cc658465e816f06ba8cec2
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241209195605epcas1p233930ab12fd267c75549496e19540e9a
+References: <20241209195528.730260-1-sjg@chromium.org>
+ <CGME20241209195605epcas1p233930ab12fd267c75549496e19540e9a@epcas1p2.samsung.com>
+ <20241209195528.730260-3-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,48 +135,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 8 Dec 2024 at 16:22, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+
+
+> -----Original Message-----
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Simon Glass
+> Sent: Tuesday, December 10, 2024 4:55 AM
+> To: U-Boot Mailing List <u-boot@lists.denx.de>
+> Cc: Tom Rini <trini@konsulko.com>; Stephen Warren <swarren@wwwdotorg.org>; Stephen Warren
+> <swarren@nvidia.com>; Matthias Brugger <mbrugger@suse.com>; Simon Glass <sjg@chromium.org>; Peter
+> Robinson <pbrobinson@gmail.com>
+> Subject: [PATCH v3 2/5] rpi: Set bootm_size to 512MB
 >
-> There's no point defining a function that's called only once just to
-> avoid passing the flags. Remove the wrapper and just call
-> lmb_add_region_flags().
+> Set this option so that all boot images stay within the bottom 512MB of
+> memory. This should allow us to drop the fdt_high and initrd_high
+> options.
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+Tested-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+
 > ---
-
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
--sughosh
-
->  lib/lmb.c | 8 +-------
->  1 file changed, 1 insertion(+), 7 deletions(-)
 >
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index ffdd23d87b9b..56e005308dde 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -640,19 +640,13 @@ void lmb_add_memory(void)
->         }
->  }
+> Changes in v3:
+> - Add to the existing comment block
 >
-> -static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
-> -                          phys_size_t size)
-> -{
-> -       return lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
-> -}
-> -
->  /* This routine may be called with relocation disabled. */
->  long lmb_add(phys_addr_t base, phys_size_t size)
->  {
->         long ret;
->         struct alist *lmb_rgn_lst = &lmb.available_mem;
+> Changes in v2:
+> - Add new patch to set bootm_size
 >
-> -       ret = lmb_add_region(lmb_rgn_lst, base, size);
-> +       ret = lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
->         if (ret)
->                 return ret;
+>  board/raspberrypi/rpi/rpi.env | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
+> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+> index 30228285edd..a327fccc77f 100644
+> --- a/board/raspberrypi/rpi/rpi.env
+> +++ b/board/raspberrypi/rpi/rpi.env
+> @@ -60,7 +60,12 @@ dfu_alt_info+=zImage fat 0 1
+>   * Even with the smallest possible CPU-GPU memory split of the CPU getting
+>   * only 64M, the remaining 25M starting at 0x02700000 should allow quite
+>   * large initrds before they start colliding with U-Boot.
+> + *
+> + * Limit bootm_size to 512MB so that all boot images stay within the bottom
+> + * 512MB of memory
+>   */
+> +bootm_size=0x20000000
+> +
+>  #ifdef CONFIG_ARM64
+>  fdt_high=ffffffffffffffff
+>  initrd_high=ffffffffffffffff
 > --
-> 2.45.2
->
+> 2.34.1
+
+
+
