@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC51EE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A012E77180
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DA3D80278;
-	Tue, 10 Dec 2024 17:17:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79FF98027D;
+	Tue, 10 Dec 2024 17:17:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GvI81bS4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MKY4EGsa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D79CF8027E; Tue, 10 Dec 2024 17:17:13 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id C189980283; Tue, 10 Dec 2024 17:17:33 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E75D680269
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4A7580269
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e829ff44so5442581a12.0
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:10 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9f1c590ecdso1095015466b.1
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733847430; x=1734452230; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733847451; x=1734452251; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=waG5M+UtBF3/MCiVjxeHqiNp2Ahf4cyyRZHAV14zqjc=;
- b=GvI81bS4y6cWfiin/7UgfyWjmrXc40uO348cn3YePEpSBKjTKydN/isZQBkNE3Rkmf
- 3SsuCeHGxwZ6uIVuE2PVC0QQkztxLcfTb3PKODadg+IhWS3cGH+6hR5PWF4jeXYjlspX
- xtmuO1yqFLXl3yEFAVKmXUb3BW3xUDm5UQmts=
+ bh=DSDabWmN3+PQqSUuIeFNdZXyC6hihheJ5Ob8+LFcAMI=;
+ b=MKY4EGsa8DOicrsgFf+JClC3V/Qu4RY1diweqEG1mWxY/vKw18pIHgdJ/yyN3poQDB
+ WVifTxy0h7lFlJA6F+H0w282TikjQU4JQgLz/ZBqPnZE8Up0MMguwDBhm0jgV+chUBui
+ +ImiYL+hxxAFHM7g6PvZMqY/mHwJfFEXJXj90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733847430; x=1734452230;
+ d=1e100.net; s=20230601; t=1733847451; x=1734452251;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=waG5M+UtBF3/MCiVjxeHqiNp2Ahf4cyyRZHAV14zqjc=;
- b=h3kJa8WEYozvofD7B4xrX8QuV1Dd0FaMiSqATXuTL0zDK7SHTNvOnaD5h0CnmswUqu
- t13lfOZNBJwD1hAaGPScC2lb90PyrKtvDilFHCqWcyi8dfXKPYILXsQDiIAcZ0HYm3EL
- f8Lh5zJH5kq6C/D/dDMLAPQ1cuS3ZPibM2XCijuRAbv1h/RIiBrOJZatng+hcqU8kslt
- jbkweBdiFe7g6U2vLEDCgjowUjT7dBqxHmWt35rWlaZ8iV6svNSp2yRK/HjlCfzT0lvs
- ZD22tyJDUQ+ZSiCF3ofwL/jYvmOXAjOu7GKAfIcE443zfFyPX01ifU/yWKq6mXfqXay2
- nO/w==
+ bh=DSDabWmN3+PQqSUuIeFNdZXyC6hihheJ5Ob8+LFcAMI=;
+ b=Ou6WQqh+7EZ0lekoBcxZ+QtLypKKvJ51eecW8MldKCOAhYfgBEpfLjt5FdaevULVr0
+ eX0arBQK/PNDxuVSDGp7FQL4Ab6gGu42FlywPHa73BZm+UKO3io2BgAuJyxAODveQjLX
+ jcIb7WnPRVF+geTlpQFvmPX57eNIdCSjeN2xdOhJTOHCNAErQmyu+gvVx3kPAq1bW8di
+ E2icL5mV0OSiNOE7HL5VPNCUivdGwKPpr0HL93hj0t0nv7EUFvZf5ng8Xnrk0Kv2UpTL
+ ItnsrDeHErU9phEjT/si2FbjM62OtEVmTzUcjqvBSDghSvUk7fuxAtmaIP2sbvw5uhit
+ wA6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+oeOZ/YQXH2/HViYBPbxcx1SVmx6kuWLNgnNbt9i7UpO6IDQlD97x/XwAj84J2GFyuTEuW8c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxu3tA5AttnQjfLCAT5Ap9yyCMn3xcSgeT8B6c7ye5byL6PXbQu
- jdsClEnt6DYz45zZ3DzT+M2DCo5Hk0wRqcaPywTrVWino7WYQQjCrmalgtt35BSZ91DXPUhavmG
- FIFv10BMwPyHzagP06YjrPJrSMedjfLgi/OyG
-X-Gm-Gg: ASbGncv6HsXm2GX6CJzC1Bncp9+R90WIJeTx7TIwaaJzOk2iBGpZU5wjiiJFGBG9zYx
- o0ddaLEN9vhuCpvXcT9oCYcm40R0hf4AmDHkN
-X-Google-Smtp-Source: AGHT+IFYIEdvIwX953BIKEataIWCxvuXqI79gRhBR3jvQNFPBQDxFmrwoEBPBnatO6n/8qLe508//xlUkgR2vyCPCG8=
-X-Received: by 2002:a17:906:9d2:b0:aa6:7b49:28fb with SMTP id
- a640c23a62f3a-aa6a00794e5mr450318566b.14.1733847430382; Tue, 10 Dec 2024
- 08:17:10 -0800 (PST)
+ AJvYcCW0R7IQwxG98msVf3qdtqbYS+EvMbnM1i8Crb4Xwnzcu8rfZcyXwZjFC9O+I3DuKC3MliR6V28=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxip2CCxYusYF+IN/eVtCI0IuvEyh5q/OOH+OXw/sDXXECkAgxj
+ bT0WUj/aNXXN/ILXCys9NMt7re3mbRafO/40cnGyDhHESjE6PnD8CQnVEZp20EgmwlJsfb5x0Bd
+ +HwuNaybPIbhn8dUpXF3UsJC5zNydUEev/9jyTrg05qFCL44=
+X-Gm-Gg: ASbGncsa2bb7WT4xqcFu/EKnJSSzzoXpTbxOHdDCComtHBd/x2/moTDgmLSvhSzMbjt
+ wIvFV4rv9jBzz6DH6dBCnGcZhwKHCnOuLbSw4
+X-Google-Smtp-Source: AGHT+IERosftr1I6L7B0rjA04xRVGEYPh0cnbP2HhAgqx1/dkJ2uiboCEsSCvFrvxTWo0J311FL548FnMt9+9nUFT4Y=
+X-Received: by 2002:a17:907:c987:b0:aa6:5e35:d730 with SMTP id
+ a640c23a62f3a-aa69cd7ff43mr473461666b.24.1733847451064; Tue, 10 Dec 2024
+ 08:17:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20241209162801.288363-1-sjg@chromium.org>
- <20241209162801.288363-4-sjg@chromium.org>
- <0f17622a-ae3b-4d02-9cdc-c39d4f8bfa6d@gmx.de>
-In-Reply-To: <0f17622a-ae3b-4d02-9cdc-c39d4f8bfa6d@gmx.de>
+References: <cover.1730452668.git.michal.simek@amd.com>
+ <f79dc1fbf796dd5ad290f6080608ee68d7652cfc.1730452668.git.michal.simek@amd.com>
+ <CAFLszTiWOdsS8=pm7aSvyC2QYiXbbsciz2yb6s9YPV1FeFFrgg@mail.gmail.com>
+ <2ee46698-87c9-47e3-8951-41ac3c50331a@amd.com>
+ <20241209153216.GJ2457179@bill-the-cat>
+ <CAFLszTjb23qYBS2YDWjTJDFtJ2OnZZ5OQG56i9DBu_NeUT=FzQ@mail.gmail.com>
+ <b5145a88-aea0-43c1-8fa0-fe533bd9d169@amd.com>
+ <CAFLszTgR7A5N5NOpE0HX0j-DqQ5QqLR=391Y5tEJ00HPFfshTw@mail.gmail.com>
+ <3ed2af58-9e45-435f-aba7-a07f775f76cf@amd.com>
+In-Reply-To: <3ed2af58-9e45-435f-aba7-a07f775f76cf@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Dec 2024 09:16:57 -0700
-Message-ID: <CAFLszTgDCAxiZBYkDVUUb4jWejry4wWKm4gyyNndLhBYQ+zfAg@mail.gmail.com>
-Subject: Re: [PATCH 3/8] doc: test: Add docs and test for part_find
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Matthew Garrett <mgarrett@aurora.tech>,
- Emil Kronborg <emil.kronborg@protonmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
- Maxim Moskalets <maximmosk4@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>,
+Date: Tue, 10 Dec 2024 09:17:18 -0700
+Message-ID: <CAFLszTj0eQFLf9oD03VTXGCtQH3HAiZUC7YtNgdyuQ01tAg0SA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] common: binman: Calling initr_binman() when
+ BINMAN_FDT
+To: Michal Simek <michal.simek@amd.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, 
- Wang Jie <dave.wang@rock-chips.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com, 
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,58 +100,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Michal,
 
-On Tue, 10 Dec 2024 at 01:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 10 Dec 2024 at 05:41, Michal Simek <michal.simek@amd.com> wrote:
 >
-> On 09.12.24 17:27, Simon Glass wrote:
-> > Add some documentation and a test for this new command.
+> Hi Simon,
 >
-> Shouldn't this be two patches?
-
-Often we put the new command, its docs and tests in the same commit,
-since the question I always ask when looking at a command is, where
-are the docs and tests!
-
->
+> On 12/9/24 20:27, Simon Glass wrote:
+> > Hi Michal,
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
+> > On Mon, 9 Dec 2024 at 11:34, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >>
+> >>
+> >> On 12/9/24 16:47, Simon Glass wrote:
+> >>> Hi,
+> >>>
+> >>> On Mon, 9 Dec 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
+> >>>>
+> >>>> On Mon, Dec 09, 2024 at 04:26:15PM +0100, Michal Simek wrote:
+> >>>>>
+> >>>>>
+> >>>>> On 12/6/24 20:20, Simon Glass wrote:
+> >>>>>> On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
+> >>>>>>>
+> >>>>>>> Calling empty function when BINMAN_FDT is adding +64B for nothing which is
+> >>>>>>> not helping on size sensitive configurations as Xilinx mini configurations.
+> >>>>>>>
+> >>>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >>>>>>> ---
+> >>>>>>>
+> >>>>>>> Changes in v2:
+> >>>>>>> - new patch
+> >>>>>>>
+> >>>>>>>    From my perspective there is no reason to call empty function. It is just
+> >>>>>>> increase footprint for nothing and we are not far from that limit now.
+> >>>>>>>
+> >>>>>>> ---
+> >>>>>>>     common/board_r.c | 7 +++----
+> >>>>>>>     1 file changed, 3 insertions(+), 4 deletions(-)
+> >>>>>>
+> >>>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>>>>>
+> >>>>>> This is a bit odd, though. Do you have LTO enabled?
+> >>>>>>
+> >>>>>
+> >>>>> yes LTO is enabled. And there are other candidates like this.
+> >>>>> Is LTO able to fix function arrays which is calling empty function?
+> >>>>>
+> >>>>> (without this patch)
+> >>>>>
+> >>>>> 00000000fffc0eb4 <initr_of_live>:
+> >>>>>       fffc0eb4:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0eb8:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ebc <initr_dm_devices>:
+> >>>>>       fffc0ebc:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ec0:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ec4 <initr_bootstage>:
+> >>>>>       fffc0ec4:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ec8:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ecc <power_init_board>:
+> >>>>>       fffc0ecc:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ed0:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ed4 <initr_announce>:
+> >>>>>       fffc0ed4:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ed8:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0edc <initr_binman>:
+> >>>>>       fffc0edc:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ee0:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ee4 <initr_status_led>:
+> >>>>>       fffc0ee4:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ee8:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0eec <initr_boot_led_blink>:
+> >>>>>       fffc0eec:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ef0:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0ef4 <initr_boot_led_on>:
+> >>>>>       fffc0ef4:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0ef8:   d65f03c0        ret
+> >>>>>
+> >>>>> 00000000fffc0efc <initr_lmb>:
+> >>>>>       fffc0efc:   52800000        mov     w0, #0x0                        // #0
+> >>>>>       fffc0f00:   d65f03c0        ret
+> >>>>
+> >>>> No, but maybe Simon would prefer if we marked all of the could-be-empty
+> >>>> functions as __maybe_unused and did:
+> >>>>           CONFIG_IS_ENABLED(BINMAN_FDT, initr_binman),
+> >>>> etc in the list instead?
+> >>>
+> >>> Yes that looks better.
+> >>
+> >> But we are talking about using macro inside array at best with using #ifdefs.
+> >> Or maybe I am not seeing what you are saying.
+> >>
+> >>>
+> >>> Michal, see also [1] in case you can work out why it 'stopped
+> >>> working'. I could have sworn inlining the function was a win when it
+> >>> was applied, but no amount of toolchain juggling could make it be a
+> >>> win when I came back to it later.
+> >>
+> >> Are you saying that it worked in past?
 > >
-> >   doc/usage/cmd/part_find.rst | 119 ++++++++++++++++++++++++++++++++++++
-> >   doc/usage/index.rst         |   1 +
-> >   test/cmd/Makefile           |   1 +
-> >   test/cmd/part_find.c        |  42 +++++++++++++
-> >   4 files changed, 163 insertions(+)
-> >   create mode 100644 doc/usage/cmd/part_find.rst
-> >   create mode 100644 test/cmd/part_find.c
+> > I wasn't able to verify that post facto, but I believe I do remember
+> > checking it at the time. If you read the original commit message:
 > >
-> > diff --git a/doc/usage/cmd/part_find.rst b/doc/usage/cmd/part_find.rst
-> > new file mode 100644
-> > index 00000000000..fd5bd6578d5
-> > --- /dev/null
-> > +++ b/doc/usage/cmd/part_find.rst
-> > @@ -0,0 +1,119 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+:
+> > 47870afab92 initcall: Move to inline function
+> >
+> >      The board_r init function was complaining that we are looping through
+> >      an array, calling all our tiny init stubs sequentially via indirect
+> >      function calls (which can't be speculated, so they are slow).
+> >
+> >      The solution to that is pretty easy though. All we need to do is inline
+> >      the function that loops through the functions and the compiler will
+> >      automatically convert almost all indirect calls into direct inlined code.
+> >
+> >      With this patch, the overall code size drops (by 40 bytes on riscv64)
+> >      and boot time should become measurably faster for every target.
+> >
+> >      Signed-off-by: Alexander Graf <agraf@suse.de>
+> >
+> > Despite this hopeful sentiment, I seriously doubt any improvement in boot time.
 >
-> This is not a valid SPDX identifier.
-> Cf. https://spdx.org/licenses/GPL-2.0-or-later.html
+> I am not able to replicate this observation on arm64 or riscv64.
+>
+> Loop unrolling is not happening even if you pass -funroll-all-loops flag.
+>
+> Maybe different toolchains should be used to see this behavior.
 
-I have seen this point made a few times, but I'm afraid I still don't
-fully understand it:
-
-The Licenses/README lists the licenses and GPL-2.0+ appears in there.
-In the source tree:
-
-$ git grep GPL-2.0+ |wc -l
-13406
-$ git grep GPL-2.0-or-later |wc -l
-1847
-
-I have to say I much prefer GPL-2.0+ as it is easier to remember.
-
-But if we are planning to change, could you update checkpatch to throw
-a warning?
+Yes, maybe. Or perhaps it changed for some reason.
 
 Regards,
-SImon
+Simon
