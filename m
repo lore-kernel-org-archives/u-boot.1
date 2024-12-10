@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7BDE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 07:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1BDE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 08:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4868897B7;
-	Tue, 10 Dec 2024 08:13:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id E530089420;
+	Tue, 10 Dec 2024 09:10:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="BD8gpyk9";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IUE/4Aqj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABD7A897B7; Tue, 10 Dec 2024 08:13:23 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F5D689421; Tue, 10 Dec 2024 09:10:21 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DD26897B5
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:13:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3F25D89412
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 09:10:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7fd5248d663so1353604a12.0
- for <u-boot@lists.denx.de>; Mon, 09 Dec 2024 23:13:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1733814799; x=1734419599;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DVrcNMr42g6sa23BOjrgdPojwc+PrVOgOGqUcZnwHzQ=;
- b=BD8gpyk90uwC5ZZG7/E7s3ThF2iMxA/rAdJthbmWWz9Asz4CsdjkLVSYuDYBxj+ge2
- TKs+YIaJSLVPCTcFIAkrEeS6wT8uWN3ZhwhImNpySarxscu4LKWYy2LrNqZW3BcvHwHK
- cFtat9TK17y5K4lmmMw73Wb0wY+2ows7pML1Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733814799; x=1734419599;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DVrcNMr42g6sa23BOjrgdPojwc+PrVOgOGqUcZnwHzQ=;
- b=IIBUE+DKC1f9CkfOd7hPYkChVPqQqbR8z3VvXZV7I36DW66lDgwluVXZcKnwOVgUbx
- K5BXSJp4YTfoLM3pkpl7bVhF36NVz3SxX7YlF5wZLDp0idtnkr77Dj2BlB+RPZ4jc7Bo
- lSUTvw496al/kMt3rFbAzChdifbvQWY89vawWZB3PgbKHEUsBKLZga1MbX+IHAYnVqj/
- OYBpaWVWR/eARUr1UAHRisDV+IaFcv+mg9V5yAMoCfW6mZN9QEOpTQeBfSSGJ6Mt9z5u
- LsZx2iFYpIzB/04x1KnkNaIz+i7a5ygLdpRNhfJdiXLTS0sKO3ITi8+7Vn/iIATej+7C
- MT/g==
-X-Gm-Message-State: AOJu0YyqGEROVC8E0v2DCaoKmx2h3VGVBpPZz2Wp5I5z1M8HCdBDky6c
- rHadc3m/enuFDs4ZDmHDMliujp9ChA7gbv+dHegQYYYWfoExDd6SjZoLKd2GhkJp2XFjW+C/t33
- 08KbvKut/BX3phu3qjBOfr1yPaMCj0W66sQbz+A==
-X-Gm-Gg: ASbGnctjbnARBfENiPldIqJBqETOwlr7BWNk3H028bD1p3Ca7FSLCGOwZ0ufspXUg8C
- JCZGcCoQCYuJpoyLmSLWptu2q2ntl5KQG
-X-Google-Smtp-Source: AGHT+IGv+cOe4uQXR+wEecYnlJfSZRwnlz2MIkIHmvWXec3ze4tJ8E3g/S/LAmLnjc00fARuq+WyX4qMCsquI8PGu7s=
-X-Received: by 2002:a17:90b:3d46:b0:2ee:b2be:f390 with SMTP id
- 98e67ed59e1d1-2ef6aad0b80mr20147701a91.28.1733814799510; Mon, 09 Dec 2024
- 23:13:19 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1733818216; x=1734423016; i=xypron.glpk@gmx.de;
+ bh=5owrMGSUNU2h6+7BaL5Vh70GC2DdZbP4Y3hv/ilAgYc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=IUE/4Aqj6Zjhaar+nsxbtg+JmfIRiQi54Ig4+/oj8ozcJYWkPVnZ/CaZp/6t1hj3
+ 0WPqYlhVsG8Rk2MgqcMsCXG8VWGWqgrAA8QYJRdb+7/kvgp3qosGDK+ap4fAUzIFc
+ Z+xh59Js2zZ4LZ53c5uFSZYZ74FuE9NVRbOEEoK+PZCy3yRoSj38ZCZBbPtk1EvHL
+ BVMslNaJXllaVS0xMCUwIJSY7KFP5nqph9gjVmYXwNnr1nvaXpxmmy2lmJZ5k16Nf
+ n3HQFD86lxuuKPDlhFPkD3+LmsCupHu9FR0BhaMA6/r5pJERrJyqJaK2/v7Q/bfLU
+ yGP2J4t+ntQYa+oaiA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mof57-1u0GTh1i4P-00pps7; Tue, 10
+ Dec 2024 09:10:16 +0100
+Message-ID: <c95a1f38-43e7-4198-8763-4856defbc9ba@gmx.de>
+Date: Tue, 10 Dec 2024 09:10:06 +0100
 MIME-Version: 1.0
-References: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
- <ZtFt4rBOzF7Qgm-K@gmail.com>
- <CAOf5uwkhkCuW-st6ZnEVcQv6gDuRXSog_AQh_KQCUECFuyZ3sw@mail.gmail.com>
- <Z1fo_xrE8jLve6pK@gmail.com>
-In-Reply-To: <Z1fo_xrE8jLve6pK@gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 10 Dec 2024 08:12:52 +0100
-Message-ID: <CAOf5uw=U_eGm1b8_EUUHDVo=eSUatusr3OMQEH-NjvZmAcv92w@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: raw: atmel: remove unnecessary return value
-To: Marcus Folkesson <marcus.folkesson@gmail.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>, Alexander Dahl <ada@thorsis.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 8/8] efi: Avoid a memory leak in efi_bind_block() on error
+ path
+To: Simon Glass <sjg@chromium.org>
+Cc: Matthew Garrett <mgarrett@aurora.tech>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241209162801.288363-1-sjg@chromium.org>
+ <20241209162801.288363-9-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20241209162801.288363-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Provags-ID: V03:K1:YC37FojBo256F7sIYvhkF3ws3Wyb5fDa8hLGonVBmSczqsKnLiE
+ f/78+iQ7hI8TFQxJaPiLsBWij72y/TAXHOYvmyrku3cpttI7oCxnYbTLhKE95TJ2aNfZtZ1
+ MUU2BajCttBRB7gKlXgVLjLKrUnHfiY4bFJ8Uwsi7Er2XZTcHjiSbr+p/EasTSo2BZwnA5F
+ GspPFIpaDIAT1SmBXroTQ==
+UI-OutboundReport: notjunk:1;M01:P0:Nycog5WP5+w=;ZsD0z9xNH9zSPkzvMwaaKq1tqC2
+ nmt5lUZY4amR79v17SHbEdGLOcZO1F9EKKSPNtLsHZEpkoyxMsVYaKMr7rHNkhkb7A5p2ysAr
+ MNugxR1TqOf6DKlJ8iTozmjSXK7e5F0T5zmyGw1xtXmeWgZKiEnC4kXGqchGzG5Oxrl3Q0Qcz
+ hte7nZazqX/y8GohzVbZcluDP4dqWWvba5+yWD43E3LmGvaAJlXWT64R97pM9JhyuZAdyG+5Y
+ IQGiFvk+2amNjPOkzElLOJb5qEHqmhJCnuN40z4QeQgc0kAY+OFIGYCZM6uRRGfKFW+jYLgHj
+ 7KkcsIC+D8qk3nxHI2ouHrpFogzV8+yl5M/zACgXaQcyZy2vQToRRCRQBwLhPR8qb7dZqtYQ6
+ sM8MNAhI+pC8zfvPCVCFQTYoqp1gU/4ITte9QDi7t1bleAwjsmaFH2Uq6VCbMpK9FqQjKDqA2
+ fvWX1K1B16LwduyXwHcdUZFnPenw3p1t1ykrEPVK9NS2sIJeVRdvqm4u3L11itjn8vWz2+s6B
+ fIq+0Ab/SXiK7+wHMQkybvWNjmklIgONJATf6OdMAzZ2WKh1hGMVmMo/UE0ueqJs9PD9RGxxG
+ Q6mFEPVETgiqZebJfTC2/sjtpdtvrxQND0L7Kid7zf5y72mf6E5zcfXJmQATMgmIEyfg2BTwe
+ ZWmIm7PDwEKQeWFKPg97ZsD0WKjG1R6ZMXpNVzAGGMwEESPOccqciorOxDgX+FMccUpsgmE6i
+ q1z3ljIMqNoV+G3XRd8FbEnJqywC5l9D/2SePYnmWPItWVcrKfAu5BWh8gxsdDAvlWZX/TsAy
+ 6O9vL/D/hvWKc0to1w8Noa4yP4NMk3cD6q/Mi3Ql8BoxZU/x8vkICs7MQulWVYiRStCENUIck
+ yjJ7kAX4AjETWhvOK8WcaG1hpzZjuVLBQ+n6jCCSAH240jUv7q0ulz8wgq+M8mOkJhUHdY44j
+ 1Df9aZaF2Z5ng46ePyT0i3Y5Zxq/rqoltB/QyHcJbugJH8HnQ/FSkuwsH/NL8TuzNGQ6Zn1vN
+ SYAnfmaSqyq/TFmvP1A5u6DwePlR5we6CFmNFmsXzNKgwXBansqmzYKSqtMgfjHtY3QgfcgfS
+ B5vpGrXe+Rwhf2dqzkYH7mrG+tCvkJ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +98,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On 09.12.24 17:28, Simon Glass wrote:
+> Free the memory used if an error occurs.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>
+>   lib/efi/efi_app_init.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/efi/efi_app_init.c b/lib/efi/efi_app_init.c
+> index cc91e1d74b8..fec3f348cfb 100644
+> --- a/lib/efi/efi_app_init.c
+> +++ b/lib/efi/efi_app_init.c
+> @@ -60,8 +60,10 @@ int efi_bind_block(efi_handle_t handle, struct efi_bl=
+ock_io *blkio,
+>   	plat->handle =3D handle;
+>   	plat->blkio =3D blkio;
+>   	plat->device_path =3D malloc(device_path_len);
+> -	if (!plat->device_path)
+> +	if (!plat->device_path) {
+> +		free(plat);
 
-Il mar 10 dic 2024, 08:08 Marcus Folkesson <marcus.folkesson@gmail.com> ha
-scritto:
+As of origin master origin/next (9dd0a9ecaa539ad) plat is a local
+variable and not a pointer. You cannot free it.
 
-> Hello Michael,
->
-> On Fri, Aug 30, 2024 at 09:05:27AM +0200, Michael Nazzareno Trimarchi
-> wrote:
-> > Hi Marcus
-> >
-> > On Fri, Aug 30, 2024 at 8:59=E2=80=AFAM Marcus Folkesson
-> > <marcus.folkesson@gmail.com> wrote:
-> > >
-> > > On Fri, Aug 09, 2024 at 02:15:43PM +0200, Marcus Folkesson wrote:
-> > > > The condition 'ret' is always true as it is never set to other than
-> > > > -EIO.
-> > > >
-> > > > Remove 'ret' and the condition for copy.
-> > > >
-> > > > Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
-> > > > ---
-> > >
-> > > Any more thoughts on this?
-> >
-> > Reviewed-by: Michael Trimarchi <micheal@amarulasolutions.com>
-> >
-> > It will be included in the next pull request.
->
-> Not sure it got included?
->
+If there is some prerequisite patch that is making plat a pointer, you
+should add this correction to that patch.
 
-I will pick today.
+Best regards
 
-Michael
+Heinrich
 
->
-> >
-> > Michael
-> >
->
-> Thanks,
-> Marcus Folkesson
->
+>   		return log_msg_ret("path", -ENOMEM);
+> +	}
+>   	memcpy(plat->device_path, device_path, device_path_len);
+>   	ret =3D device_bind(dm_root(), DM_DRIVER_GET(efi_media), "efi_media",
+>   			  plat, ofnode_null(), &dev);
+
