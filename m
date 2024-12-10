@@ -4,121 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36B1E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 11:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8DEE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 11:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C4C989220;
-	Tue, 10 Dec 2024 12:16:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B4222892A4;
+	Tue, 10 Dec 2024 12:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="XZpYZa1A";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="uQi4jDmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25E67892A4; Tue, 10 Dec 2024 12:16:55 +0100 (CET)
+ id 9B4B38938D; Tue, 10 Dec 2024 12:17:09 +0100 (CET)
 Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E2B891C4
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 12:16:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06F10891C4
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 12:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20241210111648epoutp0403034c47d338207e667036aae1618830~PzKkZ1S-d2434224342epoutp04d
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:16:48 +0000 (GMT)
+ 20241210111704epoutp04a3e34340eb28f90f3469c4b2e37d7c3d~PzKz9ZhE_2670826708epoutp04R
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 11:17:04 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20241210111648epoutp0403034c47d338207e667036aae1618830~PzKkZ1S-d2434224342epoutp04d
+ 20241210111704epoutp04a3e34340eb28f90f3469c4b2e37d7c3d~PzKz9ZhE_2670826708epoutp04R
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733829408;
- bh=+scBT2jxzMQoRKL4UKnas74xENR9jeToo7ikUOop10w=;
+ s=mail20170921; t=1733829424;
+ bh=KykxBSKPu3YO5HmbGEWxOvpjf7R/sNhhmfl2D9MmOEE=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=XZpYZa1AMtSP6JL120HTwzy6bvHzI0bYqJjFqZYen7zoNDwLhWaIKP/dRzX/a2W8F
- Ur+GjL9Yg8W62cOvh3NVA5hIyMNcYjJFVc0wW6q0RQVDxXdJChxfTcEchZ0hG7j4lK
- VOGz1u1yo5iDC364gK+c3ZXhkvntah6wIo3dHmxI=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20241210111647epcas1p3b5678a4e8390f2e210a15a772f1b3fc0~PzKj6Jl2q3095230952epcas1p3D;
- Tue, 10 Dec 2024 11:16:47 +0000 (GMT)
-Received: from epsmges1p1.samsung.com (unknown [182.195.36.132]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Y6x5B55lGz4x9Q0; Tue, 10 Dec
- 2024 11:16:46 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ b=uQi4jDmwOTZr0vQXLUP7Bf+yKTL1+6vB5Bcrg56dJirUkpjrwhB3BG7NK5NpwHTI/
+ N1n9ebaxdLYOKQPjSPYVBjf2w8XTzLEwSCfAdaSQ1pUbnXwij0vLc2945C0uDJbW9x
+ OOh9jgyzz4/mNrMIltPooROykFXtPE6ZGR0u0ORw=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111704epcas1p272c6052ec06285e9a42e64cf0f718da6~PzKzr3IF31975419754epcas1p21;
+ Tue, 10 Dec 2024 11:17:04 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.236]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4Y6x5W46Wkz4x9Q0; Tue, 10 Dec
+ 2024 11:17:03 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
  epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 6E.D8.21650.E1328576; Tue, 10 Dec 2024 20:16:46 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20241210111646epcas1p1ec366993a224712e907e7377e0e5dba0~PzKieOIKl1345813458epcas1p1t;
- Tue, 10 Dec 2024 11:16:46 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241210111646epsmtrp28305bd8ac530568e51f9564a0fa1fa2c~PzKidjtMX2621126211epsmtrp2-;
- Tue, 10 Dec 2024 11:16:46 +0000 (GMT)
-X-AuditID: b6c32a35-093de70000005492-9b-6758231e6b40
+ 52.E8.21650.F2328576; Tue, 10 Dec 2024 20:17:03 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20241210111703epcas1p2b2074fa1e02c9bcab0c7586ba2a317ce~PzKydhvWM2082520825epcas1p2w;
+ Tue, 10 Dec 2024 11:17:03 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20241210111703epsmtrp16871f51343ff7676469d9d1a7bf85d2b~PzKycqeEO3212132121epsmtrp1s;
+ Tue, 10 Dec 2024 11:17:03 +0000 (GMT)
+X-AuditID: b6c32a35-09bdf70000005492-bc-6758232fa71d
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 48.FA.33707.E1328576; Tue, 10 Dec 2024 20:16:46 +0900 (KST)
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 94.68.18729.F2328576; Tue, 10 Dec 2024 20:17:03 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241210111645epsmtip18a72d771f6210a8a177ff7d27466f97e~PzKiSS7Xq1344413444epsmtip1m;
- Tue, 10 Dec 2024 11:16:45 +0000 (GMT)
+ 20241210111703epsmtip11c494c875b973ad1b772a93923e00a06~PzKyTYPVB1343813438epsmtip14;
+ Tue, 10 Dec 2024 11:17:03 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Simon Glass'" <sjg@chromium.org>, "'U-Boot Mailing List'"
  <u-boot@lists.denx.de>
 Cc: "'Tom Rini'" <trini@konsulko.com>, "'Stephen Warren'"
  <swarren@wwwdotorg.org>, "'Stephen Warren'" <swarren@nvidia.com>, "'Matthias
  Brugger'" <mbrugger@suse.com>, "'Peter Robinson'" <pbrobinson@gmail.com>
-In-Reply-To: <20241209195528.730260-4-sjg@chromium.org>
-Subject: RE: [PATCH v3 3/5] rpi: Drop fdt_high and initrd_high
-Date: Tue, 10 Dec 2024 20:16:45 +0900
-Message-ID: <0b9201db4af4$ffa59940$fef0cbc0$@samsung.com>
+In-Reply-To: <20241209195528.730260-5-sjg@chromium.org>
+Subject: RE: [PATCH v3 4/5] rpi: Update environment to support booti and
+ large initrd
+Date: Tue, 10 Dec 2024 20:17:02 +0900
+Message-ID: <0b9301db4af5$09e46e90$1dad4bb0$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHWHE+rJGlG6nTqz0NZt5G0ftzdLQFpv2XQALO/Mqay2MVhwA==
+Thread-Index: AQHWHE+rJGlG6nTqz0NZt5G0ftzdLQGH9LDYAoA+ZOWyyW/QEA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrHKsWRmVeSWpSXmKPExsWy7bCmvq6cckS6QfMDNYsFk5+wWqxbtYbN
- 4tuWbYwWN6a3sFq8OtjGYjF10mZ2i7d7O9kd2D1mN1xk8dg56y67x6sDq9g9zt7ZwejR2/yO
- zWP9lqssHhvnhgawR2XbZKQmpqQWKaTmJeenZOal2yp5B8c7x5uaGRjqGlpamCsp5CXmptoq
- ufgE6Lpl5gAdpKRQlphTChQKSCwuVtK3synKLy1JVcjILy6xVUotSMkpMC3QK07MLS7NS9fL
- Sy2xMjQwMDIFKkzIzmhY/56x4DJPxfxzTxgbGI9zdTFyckgImEj8PXmDtYuRi0NIYAejxM41
- 19khnE+MEnOfvWKDc57NbmGDaVn7oR+qaiejxI9Zf5khnJeMEtcad7CCVLEJ6En8X7QQKMHB
- ISIQIXH2hh9ImFngMqPEuyeJIGFOAXOJ3f1JIGFhATuJO8uWgHWyCKhKTFv8BGwXr4ClxLuj
- /YwQexUkfj5dxgox0UniwVx+iIkiErM728AukBD4yS5xdPtcFoh6F4n3h7YxQ9jCEq+Ob2GH
- sKUkPr/bywbR0MwosXTJQVYIp4dR4l/DdagvjSX2L53MBLKNWUBTYv0ufYhtfBLvvvaAHSEh
- wCvR0SYEUa0icen1SyaY+Xef/GeFsD0kVtxfAg2r7YwSM380sk9glJ+F5PBZCBsWMDKtYhRL
- LSjOTU8tNiwwhMdkcn7uJkZwQtQy3cE48e0HvUOMTByMhxglOJiVRHg5vEPThXhTEiurUovy
- 44tKc1KLDzGaAkNyIrOUaHI+MCXnlcQbmlgamJgZGZtYGJoZKonznrlSliokkJ5YkpqdmlqQ
- WgTTx8TBKdXAZK7jNulQSVzSnTMpuSE+S/5pq2n84tE8+D0ziKlrjw2b7Ie8I98zxV0ned6a
- zyZxjbPr57SSH3uNUh1V1JYwm387XhQsuGFHgM2EuR17/8+eZ2r+saG1xvPc+onrtv0+eH7u
- 5QeH4y+lx3/y2rBjw6RXHN7dG8vqAs4dZ/tse0xzkr3J/+IbawUE7b8J/Z7yq8TPm3He9g8f
- uzfHVXk2fbrVO1XN1aw0sHqOCrfeWUvvzsPcSwo4C5reLuxeWqs1YbnH+5JlP+/uPRG695zG
- /5qTZsyl52P/hnBuu/Dk8MqsQsnN6zsbea9+bX3BrxEec8HddK3075Pb15b4nMw65hLqu+Of
- 2qvwE6yObBPW71ZiKc5INNRiLipOBACC256qEQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHLMWRmVeSWpSXmKPExsWy7bCSnK6cckS6wde3LBYLJj9htVi3ag2b
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPKsWRmVeSWpSXmKPExsWy7bCmga6+ckS6wbXVChYLJj9htVi3ag2b
  xbct2xgtbkxvYbV4dbCNxWLqpM3sFm/3drI7sHvMbrjI4rFz1l12j1cHVrF7nL2zg9Gjt/kd
- m8f6LVdZPDbODQ1gj+KySUnNySxLLdK3S+DKaFj/nrHgMk/F/HNPGBsYj3N1MXJySAiYSKz9
- 0M8OYgsJbGeU2D5ZAiIuJfH56VS2LkYOIFtY4vDhYoiS54wSzb+VQWw2AT2J/4sWMoPYIgIR
- EnN/LWLqYuTiYBa4ziix4XwTO4gjJLCZUeLH9EnsIIM4BcwldvcngTQIC9hJ3Fm2hBXEZhFQ
- lZi2+AkbiM0rYCnx7mg/I8QNChI/ny5jBWkVEXCSeDCXHyTMLCAiMbuzjXkCo8AsJO4CRsZV
- jKKpBcW56bnJBYZ6xYm5xaV56XrJ+bmbGMFBrBW0g3HZ+r96hxiZOBgPMUpwMCuJ8HJ4h6YL
- 8aYkVlalFuXHF5XmpBYfYpTmYFES51XO6UwREkhPLEnNTk0tSC2CyTJxcEo1MPU75c5xz/4b
- 5fDuTI/Y4+aG9G02/x7bzGWc3xvGFrby69zA17GvuHie7LhndpXN4fcZTYOtVzrFGxlNbjid
- q14/c+efaXOXqzKWuTV89Py4T/6agEi68Im+uw9z2ne6f0jfwvjy/NMtKc//Vj9Q4Y/gOc1V
- uqMpUsbTX1fsquaX06s/LbMpsbmhpKPcZnV2ySMO77f72JcHRcZxTZIIXamUcK1ba5plqdnH
- jndB/HdvZ3E6/9+y9sfWqzwcX1c8f5K5MaLMkUvpauo9tV9bQgvOt+26Utvfc1KYQUfjzJ41
- /wy28vg+2vup0+D498ZpEXNNHy9U2vCu+xDDzpI/TyvapNsfP30fpfHWm+XFpAglluKMREMt
- 5qLiRABa1ze80QIAAA==
-X-CMS-MailID: 20241210111646epcas1p1ec366993a224712e907e7377e0e5dba0
+ m8f6LVdZPDbODQ1gj8q2yUhNTEktUkjNS85PycxLt1XyDo53jjc1MzDUNbS0MFdSyEvMTbVV
+ cvEJ0HXLzAE6SEmhLDGnFCgUkFhcrKRvZ1OUX1qSqpCRX1xiq5RakJJTYFqgV5yYW1yal66X
+ l1piZWhgYGQKVJiQnXGp5xh7wTLpipkPjrA3MC4S62Lk5JAQMJE4sP0RcxcjF4eQwA5GiRu3
+ Z0I5nxgl1h87xgThfGOUuH9qORtMy/4Xy6ASexklFiybzgrhvGSU+HDwIwtIFZuAnsT/RQuB
+ ZnFwiAhESJy94QcSZha4zCjx7kkiiM0pYC6xb9k/sHJhgXCJ7Y/amUBsFgFViWlzFoDZvAKW
+ Es9a57JALFaQ+Pl0GSuILSLgJPH65ClWiJkiErM725ghan6ySxzYUAJhu0i8ebQAKi4s8er4
+ FnYIW0riZX8bO8jNEgLNjBJLlxxkhXB6GCX+NVyHetNYYv/SyUwgDzALaEqs36UPsYxP4t3X
+ HlaQsIQAr0RHmxBEtYrEpdcvmWDm333ynxXC9pBonH0GGqTbGSVW/GlmnsAoPwvJ3bMQNixg
+ ZFrFKJZaUJybnlpsWGAIj8rk/NxNjOCUqGW6g3Hi2w96hxiZOBgPMUpwMCuJ8HJ4h6YL8aYk
+ VlalFuXHF5XmpBYfYjQFhuREZinR5HxgUs4riTc0sTQwMTMyNrEwNDNUEuc9c6UsVUggPbEk
+ NTs1tSC1CKaPiYNTqoGplt/vj/+t5wJNvzkstCeVqCW9SOjhbFp4QvqfL+OD37pXt1Ve9GuW
+ LTda9cDy1cc/mZk5/WoJDxZfv/S21ZRh+bZneis5K9eWNZ14ujl88R+nv5UMaw5tVc3drW1W
+ /cDhXKz4RNOZc4yanySmKj7JqgxIvDXn8jcHt968APl77xSEWGx3z7l66AGb9+GjpfIXZJJP
+ HpLYIX4sqmjvpPVNxgyL/Mz4b53c8VE75coiHYWZWpsaDvcZSXcy5xw+Yn9CvH0378P2krXb
+ ruSdP+7b9+XHz7XODdtS0w+K8DzUK7grbT/PJjrkgpL291mcLL8F9l8REjg7y06Ne7bonZOx
+ r0pnL534zMZ7+8wZc4INlViKMxINtZiLihMBUNx0/BIEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrGLMWRmVeSWpSXmKPExsWy7bCSnK6+ckS6weVr/BYLJj9htVi3ag2b
+ xbct2xgtbkxvYbV4dbCNxWLqpM3sFm/3drI7sHvMbrjI4rFz1l12j1cHVrF7nL2zg9Gjt/kd
+ m8f6LVdZPDbODQ1gj+KySUnNySxLLdK3S+DKuNRzjL1gmXTFzAdH2BsYF4l1MXJySAiYSOx/
+ sYypi5GLQ0hgN6PE60en2CESUhKfn05l62LkALKFJQ4fLoaoec4ocfT1VVaQGjYBPYn/ixYy
+ g9giAhESc38tAhvELHCdUWLD+SZ2iI7NjBKb5+0A6+AUMJfYt+wfC4gtLBAqsXTmArBuFgFV
+ iWlzFjCB2LwClhLPWueyQFyhIPHz6TJWiA1OEq9PngKzmQVEJGZ3tjFPYBSYhcRdwMi4ilEy
+ taA4Nz232LDAMC+1XK84Mbe4NC9dLzk/dxMjOKi1NHcwbl/1Qe8QIxMH4yFGCQ5mJRFeDu/Q
+ dCHelMTKqtSi/Pii0pzU4kOM0hwsSuK84i96U4QE0hNLUrNTUwtSi2CyTBycUg1MrqoTEiwy
+ rVbN49dc+DM7y+Fm2rWVTuJerMJlD/9LpMnc15Ioe3m74VyN3Oma+3s6lu6UWJ4/69Dea+0c
+ ks7VD371PVm2TTmCseDz/5un7F2+B094e+zN7eVp3Cd79mwX2Xa3lsdzjvLZWYvj5NxWfzs4
+ Y0ZbjWPT159CxldPSCXMmJTLk10tfXLPoj/lHC75VopbigqPb5wZJmXsMa/OqPZ29oaL75uu
+ rDcM38vQtiuyS0jaZNakyntzTX2YbmfdcHIK3fD3R960PjPJhaZadx6L9S0uDM3h7jWZOKfo
+ pb+EXLC21JGTFWKSPMvNy1a0KAbuZdkSuF0o0FdlK5eWVstHFp3/7+Wt2h/uNz2mxFKckWio
+ xVxUnAgAPmHJCtkCAAA=
+X-CMS-MailID: 20241210111703epcas1p2b2074fa1e02c9bcab0c7586ba2a317ce
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241209195615epcas1p31ff3283b2be65477025a43d02d0ece4d
+X-CMS-RootMailID: 20241209195624epcas1p2f22b12954d0d3a1a40c8fa37cf3b6e00
 References: <20241209195528.730260-1-sjg@chromium.org>
- <CGME20241209195615epcas1p31ff3283b2be65477025a43d02d0ece4d@epcas1p3.samsung.com>
- <20241209195528.730260-4-sjg@chromium.org>
+ <CGME20241209195624epcas1p2f22b12954d0d3a1a40c8fa37cf3b6e00@epcas1p2.samsung.com>
+ <20241209195528.730260-5-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,16 +145,13 @@ X-Virus-Status: Clean
 > Cc: Tom Rini <trini@konsulko.com>; Stephen Warren <swarren@wwwdotorg.org>; Stephen Warren
 > <swarren@nvidia.com>; Matthias Brugger <mbrugger@suse.com>; Simon Glass <sjg@chromium.org>; Peter
 > Robinson <pbrobinson@gmail.com>
-> Subject: [PATCH v3 3/5] rpi: Drop fdt_high and initrd_high
+> Subject: [PATCH v3 4/5] rpi: Update environment to support booti and large initrd
 >
-> These are not needed now since there is a bootm_size setting to keep
-> things within the lower part of memory.
->
-> Drop them.
+> The existing values don't provide for decompressing an arm64 boot-image.
+> Add those values and move things apart a bit so that a 50MB kernel can be
+> accommodated.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Suggested-by: Tom Rini <trini@konsulko.com>
 
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
@@ -161,32 +159,61 @@ Tested-by: Jaehoon Chung <jh80.chung@samsung.com>
 
 > ---
 >
-> (no changes since v2)
+> Changes in v3:
+> - Update the comment block with the new values, including compression
 >
-> Changes in v2:
-> - Add new patch to drop fdt_high and initrd_high
->
->  board/raspberrypi/rpi/rpi.env | 7 -------
->  1 file changed, 7 deletions(-)
+>  board/raspberrypi/rpi/rpi.env | 27 ++++++++++++++++-----------
+>  1 file changed, 16 insertions(+), 11 deletions(-)
 >
 > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> index a327fccc77f..9b9fad82828 100644
+> index 9b9fad82828..9ac9d6768ca 100644
 > --- a/board/raspberrypi/rpi/rpi.env
 > +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -66,13 +66,6 @@ dfu_alt_info+=zImage fat 0 1
+> @@ -48,28 +48,33 @@ dfu_alt_info+=zImage fat 0 1
+>   *
+>   * scriptaddr and pxefile_addr_r can be pretty much anywhere that doesn't
+>   * conflict with something else. Reserving 1M for each of them at
+> - * 0x02400000-0x02500000 and 0x02500000-0x02600000 should be plenty.
+> + * 0x05400000-0x05500000 and 0x05500000-0x05600000 should be plenty.
+>   *
+>   * On ARM, both the DTB and any possible initrd must be loaded such that they
+>   * fit inside the lowmem mapping in Linux. In practice, this usually means not
+>   * more than ~700M away from the start of the kernel image but this number can
+>   * be larger OR smaller depending on e.g. the 'vmalloc=xxxM' command line
+>   * parameter given to the kernel. So reserving memory from low to high
+> - * satisfies this constraint again. Reserving 1M at 0x02600000-0x02700000 for
+> - * the DTB leaves rest of the free RAM to the initrd starting at 0x02700000.
+> - * Even with the smallest possible CPU-GPU memory split of the CPU getting
+> - * only 64M, the remaining 25M starting at 0x02700000 should allow quite
+> - * large initrds before they start colliding with U-Boot.
+> + * satisfies this constraint again. Reserving 1M at 0x05600000-0x05700000 for
+> + * the DTB leaves rest of the free RAM to the initrd starting at 0x05700000.
+> + * This means that the board must have at least 128MB of RAM available to
+> + * U-Boot, more if the initrd is large.
+>   *
+> - * Limit bootm_size to 512MB so that all boot images stay within the bottom
+> + * For compressed kernels, the maximum size is just under 32MB, with an area for
+> + * decompression at 0x02000000 with space for 52MB, which is plenty for current
+> + * kernels.
+> + *
+> + * limit bootm_size to 512MB so that all boot images stay within the bottom
+>   * 512MB of memory
 >   */
 >  bootm_size=0x20000000
 >
-> -#ifdef CONFIG_ARM64
-> -fdt_high=ffffffffffffffff
-> -initrd_high=ffffffffffffffff
-> -#else
-> -fdt_high=ffffffff
-> -initrd_high=ffffffff
-> -#endif
 >  kernel_addr_r=0x00080000
->  scriptaddr=0x02400000
->  pxefile_addr_r=0x02500000
+> -scriptaddr=0x02400000
+> -pxefile_addr_r=0x02500000
+> -fdt_addr_r=0x02600000
+> -ramdisk_addr_r=0x02700000
+> +kernel_comp_addr_r=0x02000000
+> +kernel_comp_size=0x03400000
+> +scriptaddr=0x05400000
+> +pxefile_addr_r=0x05500000
+> +fdt_addr_r=0x05600000
+> +ramdisk_addr_r=0x05700000
+>
+>  boot_targets=mmc usb pxe dhcp
 > --
 > 2.34.1
 
