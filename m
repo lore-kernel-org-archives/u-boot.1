@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DF4BE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC51EE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA58D80245;
-	Tue, 10 Dec 2024 17:17:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1DA3D80278;
+	Tue, 10 Dec 2024 17:17:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CjqLPbcf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GvI81bS4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B4E58023C; Tue, 10 Dec 2024 17:17:04 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id D79CF8027E; Tue, 10 Dec 2024 17:17:13 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8695C8026A
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E75D680269
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa6aee68a57so1747666b.3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:02 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e829ff44so5442581a12.0
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733847422; x=1734452222; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733847430; x=1734452230; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MU+RYS3RQtbAwLERtv0F6ahYuzXMxxJM79cZ1Bj+jb4=;
- b=CjqLPbcf9oVZoywktXi3JoHcREsEiy3LVeQUX73I/tdAtwuKtJXunrQQoIVqy7Dzl1
- +mkv/KZnVWncnXKhUf/tZXRutTdb4vm1gOwLHgSih/JY6TaxcyrtXkXT9x4LIPNFNJ97
- fIYxI+7kYofZRme5m9DDfPytdTNxlPNgWrRnQ=
+ bh=waG5M+UtBF3/MCiVjxeHqiNp2Ahf4cyyRZHAV14zqjc=;
+ b=GvI81bS4y6cWfiin/7UgfyWjmrXc40uO348cn3YePEpSBKjTKydN/isZQBkNE3Rkmf
+ 3SsuCeHGxwZ6uIVuE2PVC0QQkztxLcfTb3PKODadg+IhWS3cGH+6hR5PWF4jeXYjlspX
+ xtmuO1yqFLXl3yEFAVKmXUb3BW3xUDm5UQmts=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733847422; x=1734452222;
+ d=1e100.net; s=20230601; t=1733847430; x=1734452230;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MU+RYS3RQtbAwLERtv0F6ahYuzXMxxJM79cZ1Bj+jb4=;
- b=IC1cFuBnnWyr9OYooN+rQO1pxKXGKlHCFNK7qH0327HxOqSYaqwu0qeflER9Gz0aDd
- rqkfKELgOUJFfNGAJO7tXNp0wFu9ABWM7qTNKSM+u0qcQMHKNLF0JVQ63lbhuHoiMB4j
- SJogVxZv2Hfq/GBiwgAmhU6mv3Ug0WzEkzleUPXaNFYT1Ndwi4aXilu2jnHkBB8Ycu31
- tE+v3G2LFVb7MWUpcjz2z1RL4eqxl5NumwXr8nySr9zJCw+fiF+GntBW39xHIVrG56eQ
- ajtWOoQwtfYOmnlgpQjNJrDNqob+k143w+42Fbo7lzFfv/Wu9aESoZZhi0KwBCqS6X9m
- djcQ==
+ bh=waG5M+UtBF3/MCiVjxeHqiNp2Ahf4cyyRZHAV14zqjc=;
+ b=h3kJa8WEYozvofD7B4xrX8QuV1Dd0FaMiSqATXuTL0zDK7SHTNvOnaD5h0CnmswUqu
+ t13lfOZNBJwD1hAaGPScC2lb90PyrKtvDilFHCqWcyi8dfXKPYILXsQDiIAcZ0HYm3EL
+ f8Lh5zJH5kq6C/D/dDMLAPQ1cuS3ZPibM2XCijuRAbv1h/RIiBrOJZatng+hcqU8kslt
+ jbkweBdiFe7g6U2vLEDCgjowUjT7dBqxHmWt35rWlaZ8iV6svNSp2yRK/HjlCfzT0lvs
+ ZD22tyJDUQ+ZSiCF3ofwL/jYvmOXAjOu7GKAfIcE443zfFyPX01ifU/yWKq6mXfqXay2
+ nO/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXME6VeFo6x8BIzO4640GoF6HXXYwt5l3SvAm4+MmWOluNBLzxwtHpEPcnd0umK7BDSFWHedE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzqffky3/9UvVwpw9L57Ld8gJWvDPCstiv7mA+qnp3mAW1ZbFsx
- rEElYbiXp6TBkxSPL6ebNpx5DuDQK3x/NdYusB/laqOBdR6G4EGCON9TyG/EK+3sLPUNE9LD/K0
- 1sEjZWuaY7dXwv5Oszx28V4qaepxN8weeTluX
-X-Gm-Gg: ASbGncsw+fsW6+Mf03MadOwpWey/T2mFOyqWz2pWHqwgI3/Epj0GqHPitCIFWe6R+9z
- lgHro8+rUWgcoKOm9z2HTM8k3fsSgvvs8VKpX
-X-Google-Smtp-Source: AGHT+IGmmXOemWKV4pvzJoEJta+v9FbPN5HjIQQ83fe0X9vxvvmd7nCShDbT3Mumoae1xXuplcf9O/9viLPeQIjbais=
-X-Received: by 2002:a17:906:292a:b0:aa6:71f1:4232 with SMTP id
- a640c23a62f3a-aa671f14719mr951368666b.24.1733847422001; Tue, 10 Dec 2024
- 08:17:02 -0800 (PST)
+ AJvYcCV+oeOZ/YQXH2/HViYBPbxcx1SVmx6kuWLNgnNbt9i7UpO6IDQlD97x/XwAj84J2GFyuTEuW8c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxu3tA5AttnQjfLCAT5Ap9yyCMn3xcSgeT8B6c7ye5byL6PXbQu
+ jdsClEnt6DYz45zZ3DzT+M2DCo5Hk0wRqcaPywTrVWino7WYQQjCrmalgtt35BSZ91DXPUhavmG
+ FIFv10BMwPyHzagP06YjrPJrSMedjfLgi/OyG
+X-Gm-Gg: ASbGncv6HsXm2GX6CJzC1Bncp9+R90WIJeTx7TIwaaJzOk2iBGpZU5wjiiJFGBG9zYx
+ o0ddaLEN9vhuCpvXcT9oCYcm40R0hf4AmDHkN
+X-Google-Smtp-Source: AGHT+IFYIEdvIwX953BIKEataIWCxvuXqI79gRhBR3jvQNFPBQDxFmrwoEBPBnatO6n/8qLe508//xlUkgR2vyCPCG8=
+X-Received: by 2002:a17:906:9d2:b0:aa6:7b49:28fb with SMTP id
+ a640c23a62f3a-aa6a00794e5mr450318566b.14.1733847430382; Tue, 10 Dec 2024
+ 08:17:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
- <20241123195616.305687-3-mjg59@srcf.ucam.org>
- <c9a76fec-a57e-466c-bdc4-0e18efd09ba0@gmx.de>
-In-Reply-To: <c9a76fec-a57e-466c-bdc4-0e18efd09ba0@gmx.de>
+References: <20241209162801.288363-1-sjg@chromium.org>
+ <20241209162801.288363-4-sjg@chromium.org>
+ <0f17622a-ae3b-4d02-9cdc-c39d4f8bfa6d@gmx.de>
+In-Reply-To: <0f17622a-ae3b-4d02-9cdc-c39d4f8bfa6d@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Dec 2024 09:16:50 -0700
-Message-ID: <CAFLszTjzuDY2fO1eB80MeVq_jYW5UdFHDd3V+sptdEP6-BgfsQ@mail.gmail.com>
-Subject: Re: [PATCH 02/10] Add part_find command
+Date: Tue, 10 Dec 2024 09:16:57 -0700
+Message-ID: <CAFLszTgDCAxiZBYkDVUUb4jWejry4wWKm4gyyNndLhBYQ+zfAg@mail.gmail.com>
+Subject: Re: [PATCH 3/8] doc: test: Add docs and test for part_find
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Matthew Garrett <mjg59@srcf.ucam.org>,
- Matthew Garrett <mgarrett@aurora.tech>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
+Cc: Matthew Garrett <mgarrett@aurora.tech>,
+ Emil Kronborg <emil.kronborg@protonmail.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+ Jerome Forissier <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Wang Jie <dave.wang@rock-chips.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,27 +99,56 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 10 Dec 2024 at 01:21, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 10 Dec 2024 at 01:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 23.11.24 20:55, Matthew Garrett wrote:
-> > From: Matthew Garrett <mgarrett@aurora.tech>
-> >
-> > part_find takes a GPT GUID and searches for a partition that matches
-> > that. It then sets the target_part environment variable to the media
-> > type, device number and partition number that matched, allowing
-> > $target_part to be passed directly to bootm and similar commands.
-> >
-> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> On 09.12.24 17:27, Simon Glass wrote:
+> > Add some documentation and a test for this new command.
 >
-> For user to memorize the command it would be preferable to add the
-> functionality as sub-command to the existing part command.
+> Shouldn't this be two patches?
 
-I looked at that when sending this series. My only concern is that it
-is wildly different from the existing 'part' command, in that it does
-special EFI things.
+Often we put the new command, its docs and tests in the same commit,
+since the question I always ask when looking at a command is, where
+are the docs and tests!
 
-But I don't have any strong opinions so am happy to incorporate it,
-with its own Kconfig option, of course.
+>
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   doc/usage/cmd/part_find.rst | 119 ++++++++++++++++++++++++++++++++++++
+> >   doc/usage/index.rst         |   1 +
+> >   test/cmd/Makefile           |   1 +
+> >   test/cmd/part_find.c        |  42 +++++++++++++
+> >   4 files changed, 163 insertions(+)
+> >   create mode 100644 doc/usage/cmd/part_find.rst
+> >   create mode 100644 test/cmd/part_find.c
+> >
+> > diff --git a/doc/usage/cmd/part_find.rst b/doc/usage/cmd/part_find.rst
+> > new file mode 100644
+> > index 00000000000..fd5bd6578d5
+> > --- /dev/null
+> > +++ b/doc/usage/cmd/part_find.rst
+> > @@ -0,0 +1,119 @@
+> > +.. SPDX-License-Identifier: GPL-2.0+:
+>
+> This is not a valid SPDX identifier.
+> Cf. https://spdx.org/licenses/GPL-2.0-or-later.html
+
+I have seen this point made a few times, but I'm afraid I still don't
+fully understand it:
+
+The Licenses/README lists the licenses and GPL-2.0+ appears in there.
+In the source tree:
+
+$ git grep GPL-2.0+ |wc -l
+13406
+$ git grep GPL-2.0-or-later |wc -l
+1847
+
+I have to say I much prefer GPL-2.0+ as it is easier to remember.
+
+But if we are planning to change, could you update checkpatch to throw
+a warning?
 
 Regards,
-Simon
+SImon
