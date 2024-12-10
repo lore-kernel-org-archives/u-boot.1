@@ -4,84 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B22E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 23:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C9E5E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 23:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D748680200;
-	Wed, 11 Dec 2024 00:44:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5887380209;
+	Wed, 11 Dec 2024 00:45:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GdVKzk4B";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qFC2gGqp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1601D80209; Wed, 11 Dec 2024 00:44:09 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AA17880214; Wed, 11 Dec 2024 00:45:46 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95BB1801DB
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 00:44:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52E0B801DB
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 00:45:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6eff5f6fe07so1310327b3.1
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 15:44:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733874245; x=1734479045; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qGI3gluMY5GJpMJ+HnOVjyFUkNMJlH45eFtn9b9jb+s=;
- b=GdVKzk4BTVE8CPznrG2Eo7fHl+ljfT6+lD7ugndM5+L9h0LnQlQ7GZgtIQwM4ztbTP
- TrOkPd0tCz4qHJvXWzIjIUKEqQzMNRyfDSKqpTBZtB0i6TjBwp3OPq5h4kDmRamJ70lJ
- lqfS0BdUDmf7UbaaR0a8oFu07AQZxasQTIn1WnPnBNxhjP65atormYQCWY/bChYPR2ZD
- urZ22cZZAKahP1Z21pkYm1swulA8GUTFWJr5qOvtNzYx1yqFOtd9OMEJMHZe83NaDH7s
- ms+6mINg6GSZO0PZyYESErTOPxVQDOXX8J9DUStU1wpDZ1Zuq01WPi4Ez1W0lxkOdckr
- 9QWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733874245; x=1734479045;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qGI3gluMY5GJpMJ+HnOVjyFUkNMJlH45eFtn9b9jb+s=;
- b=SmTbqRovehCHi0x83Yd+5vA3DvrV+lAry26PpsQiWakW0z6GnxB3fAyD2KhXeK29sd
- UQKrnKxg4RLgvybHBc/WnLif07VNv3uuixyGt7iFfnG5QDyPT6J73FEJif0og5TmaT3B
- MtW1tFx1t0U8d1R25s30rkivmHSLhKRFVoTj/JvfKlJKWy6QVLwm/HkcjmPMK9arUG/P
- ss9N3pBHOEdkkGZXG8Csf4hV+ueDG8x1oVRURKzHcXKTxRDpDzeD7fGxrkpuIfFtsQM/
- dF5BYRA5N43Ro6aBRbvFTjkZGLwz3SEy+HdFU8dKsiQM/Gvg6ew3hlL1tUaP3iMB3Fkl
- cMdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUnbxK0Z60H3kkKHlTGM5bYDjw0qLPhqjgv1PxkWIcgDeJHPK8J+tVHb4CVNzrtkyynFCiH7A0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmZKPl1Ha9lkYCeMPz/ruz1++Wz3w/pRTA1DpZAfsbBMhNhVwc
- sMbF3lDH4zVoBgn0GxhwUkd2o811n7HSs1gIbNbuIwSIardE639Cn4vuJxRd3BUsNJNONuh8IVp
- zJSrC67UidIqKAClyYWMWS2q8YjjvHQkuUMr5+A==
-X-Gm-Gg: ASbGncsc4youedN37Cn/MIWbPHy5Lszd6oonU5kUsDWLJGYI3UKxeLvL7t/Z2jXUB6H
- 46pStQ2mzj2s1WAbDB9BVhKsWK32Q449fWdM=
-X-Google-Smtp-Source: AGHT+IFj4BulpIRt8IH/8Xmr+HfRR62UMZnIef8hF8TGvW4SbkF8bfpODEA1ATN24OiFHjQJ/L/mh2fzayJifGo1+a8=
-X-Received: by 2002:a05:690c:3388:b0:6f0:697:da5f with SMTP id
- 00721157ae682-6f148b8f58cmr6779307b3.14.1733874245392; Tue, 10 Dec 2024
- 15:44:05 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Y7FjK44wtz9spX;
+ Wed, 11 Dec 2024 00:45:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1733874341;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=O8hU3FAHKxjtaEgC/RD9+CuMsrHC5XtZMMVC41GNu7A=;
+ b=qFC2gGqpiqjORd3Yti8h5240xuqWvImsFW6Z5/qQtNKIscXpyy7bjXA4C1YA8LMfG8jNEg
+ JqBmchL2XYy1ZWojeTA7e98n52FZrN/EClwsIqmKQzLPWlSP2qovz6cIOogBkRotZIWpUS
+ LO7kGIlI6S4Bcnjnf6L/6IotpJ6d9GAoHVdb05fofcFhzxwdlhun251dgxdZMDFywsZ4JS
+ NPqJ0wbtsxADNx3avWTl3TCSOofNEJ0QQX7nnaZHpx1LHLgJ1REeaQMTekkzdTHbSGYNrt
+ 8q8pGdyC1uqNFoZUwBMsVpPslFvNlQce+rPZXihXTPmwvUDWO5X+WszAp8OLGw==
+Message-ID: <3fab52c5-0635-4e0d-a107-9372e11bb554@mailbox.org>
+Date: Wed, 11 Dec 2024 00:45:38 +0100
 MIME-Version: 1.0
-References: <20241208002121.31887-1-semen.protsenko@linaro.org>
- <20241208002121.31887-3-semen.protsenko@linaro.org>
- <CAC_iWjJ4X+G=3OyfYmwu9aqdmRvYjhTfS6VcJ2nirVVYqcBhVA@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ4X+G=3OyfYmwu9aqdmRvYjhTfS6VcJ2nirVVYqcBhVA@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 10 Dec 2024 17:43:54 -0600
-Message-ID: <CAPLW+4=FuRPjib7ZNhRKvb-pKVUZy4XU9CrL28GQ0=9r_7dR2w@mail.gmail.com>
-Subject: Re: [PATCH 2/6] lmb: Return -EEXIST in lmb_add_region_flags() if
- region already added
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] mtd: spi-nor: Fix the read issue when addr_width is 4byte
+To: Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de,
+ j-humphreys@ti.com
+Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ u-kumar1@ti.com, trini@konsulko.com, seanga2@gmail.com,
+ caleb.connolly@linaro.org, sjg@chromium.org, william.zhang@broadcom.com,
+ stefan_b@posteo.net, quentin.schulz@cherry.de, git@amd.com
+References: <20241118090544.21956-1-venkatesh.abbarapu@amd.com>
+ <2773d157-2b75-4fe5-bf16-9e6927e0f6f4@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <2773d157-2b75-4fe5-bf16-9e6927e0f6f4@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: qh4qcre6mbn6r153b9eyeeoembfee1sk
+X-MBO-RS-ID: da2173dba6475d82ef3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,185 +80,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 8, 2024 at 12:50=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Sam,
->
-> On Sun, 8 Dec 2024 at 02:21, Sam Protsenko <semen.protsenko@linaro.org> w=
-rote:
-> >
-> > An attempt to add the already added LMB region (with exactly the same
-> > start address, size and flags) using lmb_add_region_flags() ends up in
-> > lmb_addrs_overlap() check, which eventually leads to either returning 0
-> > if 'flags' is LMB_NONE, or -1 otherwise. It makes it impossible for the
-> > user of this function to catch the case when the region is already adde=
-d
-> > and differentiate it from regular errors. That in turn may lead to
-> > incorrect error handling in the caller code, like reporting misleading
-> > errors or interrupting the normal code path where it could be treated a=
-s
-> > the normal case. An example is boot_fdt_reserve_region() function, whic=
-h
-> > might be called twice (e.g. during board startup in initr_lmb(), and
-> > then during 'booti' command booting the OS), thus trying to reserve
-> > exactly the same memory regions described in device tree twice, which
-> > produces an error message on second call.
-> >
-> > Implement the detection of cases when the already added region is tryin=
-g
-> > to be added again, and return -EEXIST error code in case the region
-> > exists and it's not LMB_NONE; for LMB_NONE return 0, to conform to unit
-> > tests (specifically test_alloc_addr() in test/lib/lmb.c) and the
-> > preferred behavior described in commit 1d9aa4a283da ("lmb: Fix the
-> > allocation of overlapping memory areas with !LMB_NONE"). The change of
-> > lmb_add_region_flags() return values is described in the table below:
-> >
-> >     Return case                        Pre-1d9   1d9    New
-> >     -----------------------------------------------------------
-> >     Added successfully                    0      0      0
-> >     Failed to add                         -1     -1     -1
-> >     Already added, flags =3D=3D LMB_NONE      0      0      0
-> >     Already added, flags !=3D LMB_NONE      0      -1     -EEXIST
-> >
-> > Rework all affected functions and their documentation. Also fix the
-> > corresponding unit test which checks reserving the same region with the
-> > same flags to account for the changed return value.
-> >
-> > No functional change is intended (by this patch itself).
-> >
-> > Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory are=
-as with !LMB_NONE")
-> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > ---
-> >  lib/lmb.c      | 18 ++++++++++++++----
-> >  test/lib/lmb.c |  2 +-
-> >  2 files changed, 15 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 713f072f75ee..ce0dc49345fb 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -183,8 +183,10 @@ static long lmb_resize_regions(struct alist *lmb_r=
-gn_lst,
-> >   * the function might resize an already existing region or coalesce tw=
-o
-> >   * adjacent regions.
-> >   *
-> > - *
-> > - * Returns: 0 if the region addition successful, -1 on failure
-> > + * Return:
-> > + * * %0                - Added successfully, or it's already added (on=
-ly if LMB_NONE)
-> > + * * %-EEXIST  - The region is already added, and flags !=3D LMB_NONE
-> > + * * %-1       - Failure
-> >   */
-> >  static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_=
-t base,
-> >                                  phys_size_t size, enum lmb_flags flags=
-)
-> > @@ -202,6 +204,14 @@ static long lmb_add_region_flags(struct alist *lmb=
-_rgn_lst, phys_addr_t base,
-> >                 phys_size_t rgnsize =3D rgn[i].size;
-> >                 enum lmb_flags rgnflags =3D rgn[i].flags;
-> >
-> > +               /* Already have this region, so we're done */
-> > +               if (base =3D=3D rgnbase && size =3D=3D rgnsize && flags=
- =3D=3D rgnflags) {
-> > +                       if (flags =3D=3D LMB_NONE)
-> > +                               return 0;
-> > +                       else
-> > +                               return -EEXIST;
-> > +               }
->
-> The change looks sane and I did plan to clean up LMB after the release
-> with similar logic.
-> But I wonder should we return -EEXIST here or a few lines below in
-> 'else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {'
->
+On 12/5/24 8:35 AM, Tudor Ambarus wrote:
+> + Marek
+> 
+> use get_maintainers script please
+> 
+> On 11/18/24 9:05 AM, Venkatesh Yadav Abbarapu wrote:
+>> Fix the read issue for 4byte address width by passing the entire
+>> length to the read function, split the memory of 16MB size banks
+>> only when the address width is 3byte. Also update the size when
+>> the configuration is stacked.
+>>
+>> Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories support")
+>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>> ---
+>>   drivers/mtd/spi/spi-nor-core.c | 24 +++++++++++++++---------
+>>   1 file changed, 15 insertions(+), 9 deletions(-)
+>>
+>> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+>> index ec841fb13b..c37a9bce74 100644
+>> --- a/drivers/mtd/spi/spi-nor-core.c
+>> +++ b/drivers/mtd/spi/spi-nor-core.c
+>> @@ -1580,6 +1580,7 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>>   	loff_t offset = from;
+>>   	u32 read_len = 0;
+>>   	u32 rem_bank_len = 0;
+>> +	u32 stack_shift = 0;
+>>   	u8 bank;
+>>   	bool is_ofst_odd = false;
+>>   
+>> @@ -1593,18 +1594,20 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>>   	}
+>>   
+>>   	while (len) {
+>> -		bank = (u32)from / SZ_16M;
+>> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>> -			bank /= 2;
+>> -
+>> -		rem_bank_len = SZ_16M * (bank + 1);
+>> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>> -			rem_bank_len *= 2;
+>> -		rem_bank_len -= from;
+>> -
+>> +		if (nor->addr_width == 3) {
+> 
+> No, this looks bad because you enter the body of this for all the
+> flashes with addr_width 3, not just for the parallel/stacked ones.
+> 
+> Instead you should do whatever you do here just for your
+> parallel/stacked cases.
+> 
+>> +			bank = (u32)from / SZ_16M;
+>> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+>> +				bank /= 2;
+>> +
+>> +			rem_bank_len = SZ_16M * (bank + 1);
+>> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+>> +				rem_bank_len *= 2;
+>> +			rem_bank_len -= from;
+>> +		}
+>>   		offset = from;
+>>   
+>>   		if (nor->flags & SNOR_F_HAS_STACKED) {
+>> +			stack_shift = 1;
+>>   			if (offset >= (mtd->size / 2)) {
+>>   				offset = offset - (mtd->size / 2);
+>>   				nor->spi->flags |= SPI_XFER_U_PAGE;
+>> @@ -1616,6 +1619,9 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>>   		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>>   			offset /= 2;
+>>   
+>> +		if (nor->addr_width == 4)
+>> +			rem_bank_len = (mtd->size >> stack_shift) - offset;
+> 
+> same here.
+> 
+> If we still want to keep this support until everything is implemented
+> above SPI NOR, other option is to duplicate core methods and introduce
+> dedicated methods for the parallel/stacked cases. You could keep the
+> parallel/stacked methods in dedicated file as well.
+> 
+> The advantage is that you won't interfere with current SPI NOR support
+> and that you won't break any flashes anymore. Then we can easily remove
+> everything once proper support is implemented above SPI NOR. The
+> disadvantage is that we duplicate code ... Marek?
+I can imagine the duplication can be solved by factoring out the SPI NOR 
+code into a library design, where each callback implementation could be 
+assembled from building blocks, thus avoiding code duplication. However, 
+this seems like a huge change for the current 2025.01 release cycle, we 
+are already in rc4.
 
-Yes, that makes sense. That's actually the exact line of code I
-initially debugged the problem to. Adding the "exactly the same
-region" corner case was a bad idea, because it misses the case when a
-region was coalesced with some other region, and is now contained
-inside of a bigger block. I will rework that in v2.
-
-> There are two cases we return -1 there, we could return -EEXIST. Somethin=
-g like
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 3a765c11bee6..f3d5b616c376 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -226,7 +226,7 @@ static long lmb_add_region_flags(struct alist
-> *lmb_rgn_lst, phys_addr_t base,
->                                 coalesced++;
->                                 break;
->                         } else {
-> -                               return -1;
-> +                               return -EEXIST;
->                         }
->                 }
->         }
->
-> I am not sure about the lmb_resize_regions() failure, I think we
-> should return a different error
->
-
-No, that seems like a different case. I think all 'region exists'
-cases for !LMB_NONE are handled in the code you referenced above, and
-all LMB_NONE cases are handled below, in "if (coalesced) return 0;"
-code.
-
-Right now it looks like only LMB_NONE regions can be merged. I wonder
-if it's intended, because it's not mentioned in corresponding LMB_*
-flags documentation, other than LMB_NOOVERWRITE. Also, commit "lmb:
-allow for resizing lmb regions" only mentions LMB_NOOVERWRITE.
-Anyways, that's out of scope here I guess.
-
-> > +
-> >                 ret =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsize=
-);
-> >                 if (ret > 0) {
-> >                         if (flags !=3D rgnflags)
-> > @@ -667,7 +677,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
-> >   *
-> >   * Free up a region of memory.
-> >   *
-> > - * Return: 0 if successful, -1 on failure
-> > + * Return: 0 if successful, negative error code on failure
-> >   */
-> >  long lmb_free_flags(phys_addr_t base, phys_size_t size,
-> >                     uint flags)
-> > @@ -818,7 +828,7 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base=
-, phys_size_t size,
-> >                                       lmb_memory[rgn].size,
-> >                                       base + size - 1, 1)) {
-> >                         /* ok, reserve the memory */
-> > -                       if (lmb_reserve_flags(base, size, flags) >=3D 0=
-)
-> > +                       if (!lmb_reserve_flags(base, size, flags))
-> >                                 return base;
-> >                 }
-> >         }
-> > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> > index 0bd29e2a4fe7..48c3c966f8f2 100644
-> > --- a/test/lib/lmb.c
-> > +++ b/test/lib/lmb.c
-> > @@ -754,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_stat=
-e *uts)
-> >
-> >         /* reserve again, same flag */
-> >         ret =3D lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
-> > -       ut_asserteq(ret, -1L);
-> > +       ut_asserteq(ret, -EEXIST);
-> >         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x1=
-0000,
-> >                    0, 0, 0, 0);
-> >
-> > --
-> > 2.39.5
-> >
->
-> Other than that it looks good thanks for fixing this!
-> Regards
-> /Ilias
+For 2025.01 , either this stacked stuff has to be carefully ifdeffed 
+out, so it can be enabled only for platforms which need it and disabled 
+for all others to avoid breaking them ... or reverted outright .
