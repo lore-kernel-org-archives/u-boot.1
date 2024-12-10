@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764D3E77182
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 13:51:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39BCFE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 13:57:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9D028949C;
-	Tue, 10 Dec 2024 14:51:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A836C89497;
+	Tue, 10 Dec 2024 14:57:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kuvfOe5G";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PLCEYf3V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11A9C89497; Tue, 10 Dec 2024 14:51:10 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 72D4F8949E; Tue, 10 Dec 2024 14:57:55 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9767C891E3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 14:51:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03C6B8948F
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 14:57:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADp4we2935671
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 10 Dec 2024 07:51:04 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADvoGh2678297
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 10 Dec 2024 07:57:50 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1733838664;
- bh=aJ9gHdjWnRRMoDil8ZBAqK0xzUJRI8dxAZ/LLYoLQPM=;
+ s=ti-com-17Q1; t=1733839070;
+ bh=XsW69EaPKnN7K9HEgUi8rQZczdiAYmtX5Kei16gFExQ=;
  h=From:To:CC:Subject:Date;
- b=kuvfOe5Gk01wBtPR7Mc+tJJS9VS8cKKcWQJfWmjSaE7OtmMrkoE+PNIg4r5x4v15y
- +Mvlcfr/vRoNasIUu1M145IlGKO7Pj4tKjPfRPxBQiM9EESKSHpWaSlNRj3j9xU9Hd
- gW+HaKYxTkTv8n9oHSzX89vA0hHM6J3eU7YzxBMY=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BADp4jd072383
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 10 Dec 2024 07:51:04 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ b=PLCEYf3VoE5sTjzhKrxicxnBdSQOajF1ay3YL+8A906vdhv6kn4sJry+bfbe0rwxC
+ 7s/5aEavQIIwRzsJdfOtXfbjpZfTWNG+CKtNIgipFF+p87pQcE1nANnh/B7JmHA+FV
+ Y0Bwnv9vXimmRpo/ugjlY4NJ4vOwL906+1GdCnVo=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BADvoC7050729;
+ Tue, 10 Dec 2024 07:57:50 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 10
- Dec 2024 07:51:04 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 07:57:50 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 10 Dec 2024 07:51:04 -0600
+ Frontend Transport; Tue, 10 Dec 2024 07:57:50 -0600
 Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
  [172.24.227.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BADp1EG055075;
- Tue, 10 Dec 2024 07:51:01 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BADvkpD062352;
+ Tue, 10 Dec 2024 07:57:47 -0600
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: [PATCH] dma: ti: k3-udma: Fix BCDMA probe by adding check for
- MMR_RFLOW
-Date: Tue, 10 Dec 2024 19:20:59 +0530
-Message-ID: <20241210135059.1043095-1-p-mantena@ti.com>
+Subject: [PATCH 0/4] Fix OSPI boot for J722S
+Date: Tue, 10 Dec 2024 19:27:27 +0530
+Message-ID: <20241210135731.1043269-1-p-mantena@ti.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -80,30 +78,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RFLOW config related MMR does not exist incase of BCDMA.
-Add check to bypass the RFLOW MMR extraction.
-Without this, the probe sequence fails checking for
-the MMR_RFLOW region, which is valid only for packet based
-DMA and obselete for BCDMA.
+This series fixes OSPI boot for J722S. It contains fixes for DMSC
+communication, R5 regmap for ospi and dma specific overrides for ospi.
 
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
----
- drivers/dma/ti/k3-udma.c | 2 ++
- 1 file changed, 2 insertions(+)
+Test log: https://gist.github.com/PrasanthBabuMantena/ad469dd09ab7263f85f87dadda46c86d
 
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index dac4023ccfd..3013c4741d0 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -1331,6 +1331,8 @@ static int udma_get_mmrs(struct udevice *dev)
- 			continue;
- 		if (i == MMR_RCHANRT && ud->rchan_cnt == 0)
- 			continue;
-+		if (i == MMR_RFLOW && ud->match_data->type == DMA_TYPE_BCDMA)
-+			continue;
- 
- 		ud->mmrs[i] = dev_read_addr_name_ptr(dev, mmr_names[i]);
- 		if (!ud->mmrs[i])
+Vaishnav Achath (4):
+  mailbox: k3-sec-proxy: Add DM to DMSC communication thread for J722S
+  arm: dts: k3-j722s-r5-evm: Fix DM2TIFS secproxy thread ID
+  arm: mach-k3: j722_spl: Add FAST XSPI boot mode
+  arm: dts: k3-j722s*: Add overrides specific to OSPI
+
+ arch/arm/dts/k3-j722s-evm-u-boot.dtsi     |  4 ++++
+ arch/arm/dts/k3-j722s-r5-evm.dts          | 17 +++++++++++++++--
+ arch/arm/mach-k3/include/mach/j722s_spl.h |  1 +
+ arch/arm/mach-k3/j722s/j722s_init.c       |  2 ++
+ drivers/mailbox/k3-sec-proxy.c            |  2 +-
+ 5 files changed, 23 insertions(+), 3 deletions(-)
+
 -- 
 2.34.1
 
