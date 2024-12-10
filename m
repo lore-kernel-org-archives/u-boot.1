@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A012E77180
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB32DE77180
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 16:17:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79FF98027D;
-	Tue, 10 Dec 2024 17:17:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DDF1D8029E;
+	Tue, 10 Dec 2024 17:17:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MKY4EGsa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kyJ/o5pZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C189980283; Tue, 10 Dec 2024 17:17:33 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id ACCD7802D5; Tue, 10 Dec 2024 17:17:40 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4A7580269
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97A3F80269
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:17:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9f1c590ecdso1095015466b.1
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:31 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aa543c4db92so344236566b.0
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 08:17:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733847451; x=1734452251; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733847458; x=1734452258; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DSDabWmN3+PQqSUuIeFNdZXyC6hihheJ5Ob8+LFcAMI=;
- b=MKY4EGsa8DOicrsgFf+JClC3V/Qu4RY1diweqEG1mWxY/vKw18pIHgdJ/yyN3poQDB
- WVifTxy0h7lFlJA6F+H0w282TikjQU4JQgLz/ZBqPnZE8Up0MMguwDBhm0jgV+chUBui
- +ImiYL+hxxAFHM7g6PvZMqY/mHwJfFEXJXj90=
+ bh=e8i9x53NB7xd1bSYFdHjae7wZIvcK+8q0cKMUVpqPaA=;
+ b=kyJ/o5pZmW8MY6yDjDAlPC+atWLjSVM0Sa6dXMFY3uWJLXlVmC6oIclgxt6LcYge9A
+ MG5JBtxf/62zZLY21fxHF1oW1aSv4fxlUKKeRbBWGQKGMNOcIfS4cStGCDyNT1ooOmA5
+ Gjvb2UkmaXl0VgM23teV/UMEs5Sf3i1GF4A6k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733847451; x=1734452251;
+ d=1e100.net; s=20230601; t=1733847458; x=1734452258;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DSDabWmN3+PQqSUuIeFNdZXyC6hihheJ5Ob8+LFcAMI=;
- b=Ou6WQqh+7EZ0lekoBcxZ+QtLypKKvJ51eecW8MldKCOAhYfgBEpfLjt5FdaevULVr0
- eX0arBQK/PNDxuVSDGp7FQL4Ab6gGu42FlywPHa73BZm+UKO3io2BgAuJyxAODveQjLX
- jcIb7WnPRVF+geTlpQFvmPX57eNIdCSjeN2xdOhJTOHCNAErQmyu+gvVx3kPAq1bW8di
- E2icL5mV0OSiNOE7HL5VPNCUivdGwKPpr0HL93hj0t0nv7EUFvZf5ng8Xnrk0Kv2UpTL
- ItnsrDeHErU9phEjT/si2FbjM62OtEVmTzUcjqvBSDghSvUk7fuxAtmaIP2sbvw5uhit
- wA6w==
+ bh=e8i9x53NB7xd1bSYFdHjae7wZIvcK+8q0cKMUVpqPaA=;
+ b=bq/67XwB4Mf2mQnzaVkifQERHWLVVv0fULJK+8/vp/JefFtoBLytFt9o21/C23rpl5
+ H06T6AvDYurV6tnf0xLP7gh8Tguj0S5gxs4tvQW6vDSzDmlon6KocUOe+XjjXEVw95lj
+ vhZ4LN/22dUXwqt1fD+c3U+R8vhfuqrzgcPXjCVQhScQgcbmi5DEn+VTBXi/tBc9BqU+
+ wP/91vulWCIGyAGk0/nGlPLKFYnLIUEh+MAocioXzlfP4uT31D9VIT1g9hlzxHu8gFPW
+ 9QJceYxXUla8at551LuiAMJgfi8oXgdRxb0hND8WrSgVjpS0GvIhWjQ1f4EtbzBt9HPD
+ x+3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0R7IQwxG98msVf3qdtqbYS+EvMbnM1i8Crb4Xwnzcu8rfZcyXwZjFC9O+I3DuKC3MliR6V28=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxip2CCxYusYF+IN/eVtCI0IuvEyh5q/OOH+OXw/sDXXECkAgxj
- bT0WUj/aNXXN/ILXCys9NMt7re3mbRafO/40cnGyDhHESjE6PnD8CQnVEZp20EgmwlJsfb5x0Bd
- +HwuNaybPIbhn8dUpXF3UsJC5zNydUEev/9jyTrg05qFCL44=
-X-Gm-Gg: ASbGncsa2bb7WT4xqcFu/EKnJSSzzoXpTbxOHdDCComtHBd/x2/moTDgmLSvhSzMbjt
- wIvFV4rv9jBzz6DH6dBCnGcZhwKHCnOuLbSw4
-X-Google-Smtp-Source: AGHT+IERosftr1I6L7B0rjA04xRVGEYPh0cnbP2HhAgqx1/dkJ2uiboCEsSCvFrvxTWo0J311FL548FnMt9+9nUFT4Y=
-X-Received: by 2002:a17:907:c987:b0:aa6:5e35:d730 with SMTP id
- a640c23a62f3a-aa69cd7ff43mr473461666b.24.1733847451064; Tue, 10 Dec 2024
- 08:17:31 -0800 (PST)
+ AJvYcCWiZFdZF+51Hd1IEhX+X9QiMIHiZSoUhXwWOg5nOv7mCU1kEf8z1ntSLPjUxkmcPWLM1QhgWu8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyzr+415DLQLyM/k0qLu21qOJ5wCHv6eZofYvIMzPjHPmls5/0u
+ SuusK3p8k1fVpBBvdyFP1Jkhx6iwdX82B8TJenmKT+Sn2OV6bfpxSsLaYNDVn7UaURrcboel//y
+ 5Y7YPusYiViwaHqpYtqP/HCPNH2mZO4iq/qpQ
+X-Gm-Gg: ASbGncsbkDvyCaMVzd8u/A+fJf1EQJ4HNoHspl/CWNRH61VcbwOPO3G9QUPjKN1/yI1
+ cRKuYKQ8kUBuChUcEIAgJK5ggYwGuxCAp9ru9
+X-Google-Smtp-Source: AGHT+IHJjFjNh3qnF8qoarC9GCTwFZKa/CpdKIKSF5944oN/3B3OENG6enKK5VDm46YbifvLl2s7Fu1lLEF4Tl2j4Rg=
+X-Received: by 2002:a17:907:9548:b0:aa6:759c:980 with SMTP id
+ a640c23a62f3a-aa69cd62729mr434411766b.34.1733847457999; Tue, 10 Dec 2024
+ 08:17:37 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1730452668.git.michal.simek@amd.com>
- <f79dc1fbf796dd5ad290f6080608ee68d7652cfc.1730452668.git.michal.simek@amd.com>
- <CAFLszTiWOdsS8=pm7aSvyC2QYiXbbsciz2yb6s9YPV1FeFFrgg@mail.gmail.com>
- <2ee46698-87c9-47e3-8951-41ac3c50331a@amd.com>
- <20241209153216.GJ2457179@bill-the-cat>
- <CAFLszTjb23qYBS2YDWjTJDFtJ2OnZZ5OQG56i9DBu_NeUT=FzQ@mail.gmail.com>
- <b5145a88-aea0-43c1-8fa0-fe533bd9d169@amd.com>
- <CAFLszTgR7A5N5NOpE0HX0j-DqQ5QqLR=391Y5tEJ00HPFfshTw@mail.gmail.com>
- <3ed2af58-9e45-435f-aba7-a07f775f76cf@amd.com>
-In-Reply-To: <3ed2af58-9e45-435f-aba7-a07f775f76cf@amd.com>
+References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <20241123195616.305687-10-mjg59@srcf.ucam.org>
+ <1a9d7b81-b06f-43bd-969e-2961ad8cd1e0@gmx.de>
+In-Reply-To: <1a9d7b81-b06f-43bd-969e-2961ad8cd1e0@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Dec 2024 09:17:18 -0700
-Message-ID: <CAFLszTj0eQFLf9oD03VTXGCtQH3HAiZUC7YtNgdyuQ01tAg0SA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/7] common: binman: Calling initr_binman() when
- BINMAN_FDT
-To: Michal Simek <michal.simek@amd.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, git@xilinx.com, neal.frager@amd.com, 
- Christian Marangi <ansuelsmth@gmail.com>,
+Date: Tue, 10 Dec 2024 09:17:26 -0700
+Message-ID: <CAFLszThHxSt7-8QScz8+d96PwrZy--MKYsnrhfdCw8TK0c8rLA@mail.gmail.com>
+Subject: Re: [PATCH 09/10] Fix efi_bind_block.
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Matthew Garrett <mjg59@srcf.ucam.org>,
+ Janis Danisevskis <jdanisevskis@aurora.tech>, 
+ Matthew Garrett <mgarrett@aurora.tech>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,141 +91,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Heinrich,
 
-On Tue, 10 Dec 2024 at 05:41, Michal Simek <michal.simek@amd.com> wrote:
+On Tue, 10 Dec 2024 at 01:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hi Simon,
+> On 23.11.24 20:55, Matthew Garrett wrote:
+> > From: Janis Danisevskis <jdanisevskis@aurora.tech>
+> >
+> > efi_bind_block had two issues.
+> > 1. A pointer to a the stack was inserted as plat structure and thus used
+> > beyond its life time.
+> > 2. Only the first segment of the device path was copied into the
+> > platfom data structure resulting in an unterminated device path.
+> >
+> > Signed-off-by: Janis Danisevskis <jdanisevskis@aurora.tech>
+> > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> > ---
+> >
+> >   lib/efi/efi_app_init.c | 29 +++++++++++++++++++++--------
+> >   1 file changed, 21 insertions(+), 8 deletions(-)
+> >
+> > diff --git a/lib/efi/efi_app_init.c b/lib/efi/efi_app_init.c
+> > index 9704020b749..cc91e1d74b8 100644
+> > --- a/lib/efi/efi_app_init.c
+> > +++ b/lib/efi/efi_app_init.c
+> > @@ -19,6 +19,15 @@
+> >
+> >   DECLARE_GLOBAL_DATA_PTR;
+> >
+> > +static size_t device_path_length(const struct efi_device_path *device_path)
+> > +{
+> > +     const struct efi_device_path *d;
+> > +
+> > +     for (d = device_path; d->type != DEVICE_PATH_TYPE_END; d = (void *)d + d->length) {
+> > +     }
+> > +     return (void *)d - (void *)device_path + d->length;
+> > +}
+> > +
+> >   /**
+> >    * efi_bind_block() - bind a new block device to an EFI device
+> >    *
+> > @@ -39,19 +48,23 @@ int efi_bind_block(efi_handle_t handle, struct efi_block_io *blkio,
+> >                  struct efi_device_path *device_path, int len,
+> >                  struct udevice **devp)
+> >   {
+> > -     struct efi_media_plat plat;
+> > +     struct efi_media_plat *plat;
+> >       struct udevice *dev;
+> >       char name[18];
+> >       int ret;
+> > -
+> > -     plat.handle = handle;
+> > -     plat.blkio = blkio;
+> > -     plat.device_path = malloc(device_path->length);
+> > -     if (!plat.device_path)
+> > +     size_t device_path_len = device_path_length(device_path);
+> > +
+> > +     plat = malloc(sizeof(struct efi_media_plat));
+> > +     if (!plat)
+> > +             return log_msg_ret("plat", -ENOMEM);
+> > +     plat->handle = handle;
+> > +     plat->blkio = blkio;
+> > +     plat->device_path = malloc(device_path_len);
+> > +     if (!plat->device_path)
+> >               return log_msg_ret("path", -ENOMEM);
+> > -     memcpy(plat.device_path, device_path, device_path->length);
+> > +     memcpy(plat->device_path, device_path, device_path_len);
+> >       ret = device_bind(dm_root(), DM_DRIVER_GET(efi_media), "efi_media",
+> > -                       &plat, ofnode_null(), &dev);
+> > +                       plat, ofnode_null(), &dev);
+> >       if (ret)
+> >               return log_msg_ret("bind", ret);
 >
-> On 12/9/24 20:27, Simon Glass wrote:
-> > Hi Michal,
-> >
-> > On Mon, 9 Dec 2024 at 11:34, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >>
-> >>
-> >> On 12/9/24 16:47, Simon Glass wrote:
-> >>> Hi,
-> >>>
-> >>> On Mon, 9 Dec 2024 at 08:32, Tom Rini <trini@konsulko.com> wrote:
-> >>>>
-> >>>> On Mon, Dec 09, 2024 at 04:26:15PM +0100, Michal Simek wrote:
-> >>>>>
-> >>>>>
-> >>>>> On 12/6/24 20:20, Simon Glass wrote:
-> >>>>>> On Fri, 1 Nov 2024 at 03:18, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>>>>
-> >>>>>>> Calling empty function when BINMAN_FDT is adding +64B for nothing which is
-> >>>>>>> not helping on size sensitive configurations as Xilinx mini configurations.
-> >>>>>>>
-> >>>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> >>>>>>> ---
-> >>>>>>>
-> >>>>>>> Changes in v2:
-> >>>>>>> - new patch
-> >>>>>>>
-> >>>>>>>    From my perspective there is no reason to call empty function. It is just
-> >>>>>>> increase footprint for nothing and we are not far from that limit now.
-> >>>>>>>
-> >>>>>>> ---
-> >>>>>>>     common/board_r.c | 7 +++----
-> >>>>>>>     1 file changed, 3 insertions(+), 4 deletions(-)
-> >>>>>>
-> >>>>>> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >>>>>>
-> >>>>>> This is a bit odd, though. Do you have LTO enabled?
-> >>>>>>
-> >>>>>
-> >>>>> yes LTO is enabled. And there are other candidates like this.
-> >>>>> Is LTO able to fix function arrays which is calling empty function?
-> >>>>>
-> >>>>> (without this patch)
-> >>>>>
-> >>>>> 00000000fffc0eb4 <initr_of_live>:
-> >>>>>       fffc0eb4:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0eb8:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ebc <initr_dm_devices>:
-> >>>>>       fffc0ebc:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ec0:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ec4 <initr_bootstage>:
-> >>>>>       fffc0ec4:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ec8:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ecc <power_init_board>:
-> >>>>>       fffc0ecc:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ed0:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ed4 <initr_announce>:
-> >>>>>       fffc0ed4:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ed8:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0edc <initr_binman>:
-> >>>>>       fffc0edc:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ee0:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ee4 <initr_status_led>:
-> >>>>>       fffc0ee4:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ee8:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0eec <initr_boot_led_blink>:
-> >>>>>       fffc0eec:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ef0:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0ef4 <initr_boot_led_on>:
-> >>>>>       fffc0ef4:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0ef8:   d65f03c0        ret
-> >>>>>
-> >>>>> 00000000fffc0efc <initr_lmb>:
-> >>>>>       fffc0efc:   52800000        mov     w0, #0x0                        // #0
-> >>>>>       fffc0f00:   d65f03c0        ret
-> >>>>
-> >>>> No, but maybe Simon would prefer if we marked all of the could-be-empty
-> >>>> functions as __maybe_unused and did:
-> >>>>           CONFIG_IS_ENABLED(BINMAN_FDT, initr_binman),
-> >>>> etc in the list instead?
-> >>>
-> >>> Yes that looks better.
-> >>
-> >> But we are talking about using macro inside array at best with using #ifdefs.
-> >> Or maybe I am not seeing what you are saying.
-> >>
-> >>>
-> >>> Michal, see also [1] in case you can work out why it 'stopped
-> >>> working'. I could have sworn inlining the function was a win when it
-> >>> was applied, but no amount of toolchain juggling could make it be a
-> >>> win when I came back to it later.
-> >>
-> >> Are you saying that it worked in past?
-> >
-> > I wasn't able to verify that post facto, but I believe I do remember
-> > checking it at the time. If you read the original commit message:
-> >
-> > 47870afab92 initcall: Move to inline function
-> >
-> >      The board_r init function was complaining that we are looping through
-> >      an array, calling all our tiny init stubs sequentially via indirect
-> >      function calls (which can't be speculated, so they are slow).
-> >
-> >      The solution to that is pretty easy though. All we need to do is inline
-> >      the function that loops through the functions and the compiler will
-> >      automatically convert almost all indirect calls into direct inlined code.
-> >
-> >      With this patch, the overall code size drops (by 40 bytes on riscv64)
-> >      and boot time should become measurably faster for every target.
-> >
-> >      Signed-off-by: Alexander Graf <agraf@suse.de>
-> >
-> > Despite this hopeful sentiment, I seriously doubt any improvement in boot time.
+> Here you have a memory leak for pointer plat if ret != 0.
 >
-> I am not able to replicate this observation on arm64 or riscv64.
+> Simon suggested a follow up patch. Instead we should fix it in this patch.
 >
-> Loop unrolling is not happening even if you pass -funroll-all-loops flag.
+> @Simon
+> The logic in the caller setup_block() looks wrong.
 >
-> Maybe different toolchains should be used to see this behavior.
+> LocateHandle() does not ensure that when you try to read from the block
+> device the same still does exist. E.g. if a USB device is removed the
+> block IO protocol could be uninstalled and the handle deleted and the
+> EFI app may crash. Please, call OpenProtocol() with attribute BY_DRIVER.
+>
+> HandleProtocol() is considered deprecated. Please, use OpenProtocol()
+> instead.
 
-Yes, maybe. Or perhaps it changed for some reason.
+Can you please send a follow-up with your ideas on this?
 
 Regards,
-Simon
+SImon
