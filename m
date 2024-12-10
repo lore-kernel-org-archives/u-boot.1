@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1C9E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 17:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB43EE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 10 Dec 2024 18:00:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DD90802DF;
-	Tue, 10 Dec 2024 18:17:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id CB2DF802C2;
+	Tue, 10 Dec 2024 19:00:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qWS15Tx4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cdmiEyNB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAA32802E3; Tue, 10 Dec 2024 18:17:28 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AD0DA802C6; Tue, 10 Dec 2024 19:00:52 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B768A80288
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 18:17:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D41C280274
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 19:00:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=2074364ab7=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BAD5235026243;
- Tue, 10 Dec 2024 18:17:18 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- rnxsu1BIfQD+GSLzppQLNK2Z1aU6g528q1B7AS1MLAQ=; b=qWS15Tx4aSz7XWn3
- yygqdVYjMj2L4tc5m6lZSYz/8QzzfhaSdkOw4CzYMeU4Lby21TTinEp+ZV3ucc3T
- UaoJ0awNlJNhWeSruFGzJFqQu22Ec3bQiOFFiOLkg3xClYTi6fBEziPNUIGM6QEs
- FB/tL/U3bvY0FE29K4kwjUWwQBdUnZLgwSatQH8MgfjhIHpxqqmqAc3VlkSbUzKl
- iUHUkC2HnoOEidDTqA2vnWV8KhMN7uFtvzz14u95wJcgxMzdXmYbDHBjDy5/RZGQ
- xRw+p4mFbVadhpLBYOe0TJXzSG4GuzV1dAnsN62QiiuWSOxkR2ng/uPvGAWIXgQe
- 4UVtyA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43cek1ws4a-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 Dec 2024 18:17:18 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9D37E40048;
- Tue, 10 Dec 2024 18:16:29 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F27132727E9;
- Tue, 10 Dec 2024 18:16:08 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Tue, 10 Dec
- 2024 18:16:08 +0100
-Message-ID: <81878c6e-b9e4-46c2-a374-465317e2e889@foss.st.com>
-Date: Tue, 10 Dec 2024 18:16:07 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6efed201f1dso32007327b3.0
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 10:00:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733853648; x=1734458448; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fI+gVZ0zrWXfcBfPbGreKfRTxqj/37NQflArVf4fQRc=;
+ b=cdmiEyNBvOx+E+nxsGraDKvZZb7jd6bzs2qHAdZRgoYJOjbF8yegP9Q2fdL9qBRj9T
+ GzMbJ6z3EF0ehNV09d2naLmsvoiisBar9nQ6XM7tf3At3QLz0iPWZtuEfzXu5lSl5V9N
+ O00iQjYhrkicAbNb/xDC3rmXGk18PFw83a5oQWnHJZB8tS3cW04anDu6VozgR+K+2uLw
+ T7iMXtkHDkHKbs749rm++1WQYXf3AiAzLtD9bOk2xoE/+qZalGfjGWVydCn70MzEvUgB
+ FGPjeS5YDBJwTd5UudH2W97e8kQCXBNmsb8ikMd1/Bs7RDwl2kk/4rzY1nw0oHMr+H+o
+ radw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733853648; x=1734458448;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fI+gVZ0zrWXfcBfPbGreKfRTxqj/37NQflArVf4fQRc=;
+ b=NNn4+6bNvIznrUwLYc2BKp1K6+6lXedHMOOEiGdFaeS18yPZENJ7uApxHIch3YxA5J
+ iLuYJR8RMhvHI1BHInbDwTjnH+dI9CDuwmc98kpLSzf+N/WYcZMs3sofdamivT17rr2n
+ QOfe/iDddiqHonjY+heCUzDfR4sryCZyZ62QGcdz7UR2MNXzdBSMhyOG7DXCMbAG/oay
+ 7YIUyH+5vcC94VhN294dIq773b+B+99Q9UGkoSGwGW98yT6kpec+AS/IdLgmlOFahr/E
+ C9ZIZuxPRw9FL10u8v7TlSZOZ9ykz895m9i1fTws5+Zue2VWJOMT6dJffl4pnfhjvDb3
+ ns6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDaAXVNTTINlnGNz72cqyVctuCMKI6OmkzzI3ttVJwQMNvd2jySPrrMtijQWXCnfJkDKyUlnM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx4E9opCvjk4V35a3tAfIaJdrWNyKgv0aOp4EJbspU9cMNIbD2D
+ ZOBVX2hjXj+qBAeZ0+/yuG3y9D45V/XL/FiDXUsMBSi2GHkmlGrMQXDCQD3Ntpkc8HeLmM9PsCg
+ amf0vljiBCq2LzYwf+EJLLqmFtNIIHuGxQR0bZA==
+X-Gm-Gg: ASbGncvJJoFq2yFTr7ok0FJJ1S1IqWSRz/pil3CW+fXgUn7je2nIVyOLP1POJwPh9Gy
+ SIqtBi+ejTPp0AWlxigsNYdLI30Sa4ufQt8g=
+X-Google-Smtp-Source: AGHT+IEOajT18diekmcLIHAKnJaJ4zHyHa0RbCRS3fHorsLBcMsdSo9Th7tgsFLgQOOOYjp1FBQsKa+cfYuYZirgzgE=
+X-Received: by 2002:a05:690c:48c3:b0:6ef:a227:c0b5 with SMTP id
+ 00721157ae682-6f147ff2306mr687267b3.25.1733853648603; Tue, 10 Dec 2024
+ 10:00:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] usb: onboard-hub: Update the bind function based on
- peer-hub property
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <fabrice.gasnier@foss.st.com>,
- <git@amd.com>
-References: <20241204072520.213949-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20241204072520.213949-1-venkatesh.abbarapu@amd.com>
+References: <20241208105223.2821049-1-ilias.apalodimas@linaro.org>
+ <20241208105223.2821049-2-ilias.apalodimas@linaro.org>
+ <CADg8p97-pEi7OTWwGQiDiTOvPaF+sq96UaK0bRhgU=YyQzTvRg@mail.gmail.com>
+ <CAFLszTgu-sUN=cGkUEtqfw08J8dqTLLyXw4tVE2NG2qNi3U+QA@mail.gmail.com>
+In-Reply-To: <CAFLszTgu-sUN=cGkUEtqfw08J8dqTLLyXw4tVE2NG2qNi3U+QA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 10 Dec 2024 20:00:12 +0200
+Message-ID: <CAC_iWjJbL=93UFfkGAm4T4UitfHM0Cuz7VGFhdmiswXFt=qciQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/7] lmb: Replace lmb_reserve() with
+ lmb_reserve_flags()
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, xypron.glpk@gmx.de,
+ trini@konsulko.com, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Nam Cao <namcao@linutronix.de>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,46 +104,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
 
-On 12/4/24 08:25, Venkatesh Yadav Abbarapu wrote:
-> As the "peer-hub" property is optional, don't error out just
-> skip the bind function.
-> 
-> Fixes: 57e30b09fc ("usb: onboard-hub: Bail out if peer hub is already probed")
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
-> Changes in v2:
-> - Removed the peer_hub variable and used the return value.
-> Changes in v3:
-> - Removed the else condition.
-> ---
->  common/usb_onboard_hub.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 6f28036e09..7fe62b043e 100644
-> --- a/common/usb_onboard_hub.c
-> +++ b/common/usb_onboard_hub.c
-> @@ -183,7 +183,12 @@ static int usb_onboard_hub_bind(struct udevice *dev)
->  	int ret, off;
->  
->  	ret = dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle);
-> -	if (ret)  {
-> +	if (ret == -ENOENT) {
-> +		dev_dbg(dev, "peer-hub property not present\n");
-> +		return 0;
-> +	}
-> +
-> +	if (ret) {
->  		dev_err(dev, "peer-hub not specified\n");
->  		return ret;
->  	}
+On Tue, 10 Dec 2024 at 18:16, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi,
+>
+> On Tue, 10 Dec 2024 at 02:54, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Sun, 8 Dec 2024 at 16:22, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > lmb_reserve() is just calling lmb_reserve_flags() with LMB_NONE.
+> > > There's not much we gain from this abstraction, so let's remove the
+> > > former and make the code a bit easier to follow.
+> > >
+> > > The code size increase is minimal - e.g for sandbox which includes all
+> > > of the LMB tests
+> > >
+> > > add/remove: 0/1 grow/shrink: 12/0 up/down: 46/-4 (42)
+> > > Function                                     old     new   delta
+> > > lib_test_lmb_overlapping_reserve            1018    1030     +12
+> > > version_string                                70      76      +6
+> > > test_get_unreserved_size                    1032    1038      +6
+> > > test_alloc_addr                             2933    2939      +6
+> > > test_multi_alloc.constprop                  3034    3036      +2
+> > > test_bigblock                                911     913      +2
+> > > load_serial                                  946     948      +2
+> > > lib_test_lmb_flags                          2101    2103      +2
+> > > do_bootz                                     526     528      +2
+> > > do_bootm_linux                              2067    2069      +2
+> > > bootm_run_states                            5275    5277      +2
+> > > boot_relocate_fdt                            599     601      +2
+> > > lmb_reserve                                    4       -      -4
+> > > Total: Before=2492742, After=2492784, chg +0.00%
+> > >
+> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
+> >
+> > Fwiw, I had attempted this earlier on similar lines -- have a single
+> > API, which would take the flag as a parameter [1], but was asked not
+> > to take this approach as part of the review [2].
+> >
+>
+> You missed that sandbox has LTO enabled. With that disabled (like many boards):
+>
+>    sandbox: (for 1/1 boards) all -32.0 text -32.0
+>
+> We just had a patch and discussion to remove a single function call to
+> save 8 bytes[3]
+>
+> For firefly-rk3399 this adds 36 bytes:
+>
+>    aarch64: (for 1/1 boards) all +68.0 bss +48.0 text +20.0
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Did you include DM tests in that config? Because applying the series
+says otherwise
 
-Tested on STM32MP157C-DK2 board
+for firefly-rk3399_defconfig
+add/remove: 0/5 grow/shrink: 14/0 up/down: 480/-544 (-64)
+Function                                     old     new   delta
+lmb_alloc_base_flags                          76     324    +248
+lmb_alloc_addr_flags                           4     144    +140
+version_string                                50      70     +20
+boot_relocate_fdt                            488     508     +20
+boot_ramdisk_high                            268     284     +16
+tftp_handler                                1304    1308      +4
+load_serial                                  512     516      +4
+lmb_alloc                                      8      12      +4
+image_setup_libfdt                           380     384      +4
+do_spi_flash                                2164    2168      +4
+do_load                                      732     736      +4
+do_bootz                                     332     336      +4
+do_booti                                     520     524      +4
+bootm_run_states                            2176    2180      +4
+lmb_reserve                                    8       -      -8
+lmb_alloc_addr                                 8       -      -8
+lmb_alloc_base                                80       -     -80
+_lmb_alloc_addr                              144       -    -144
+_lmb_alloc_base                              304       -    -304
+Total: Before=691587, After=691523, chg -0.01%
 
-Thanks
-Patrice
+>
+> You could run buildman on all arm64 boards to check it, perhaps.
+
+I did test on non-LTO platforms as well, building for all is kind of
+pointless no? It's either LTO or no LTO.
+FWIW you need to apply the entire series, not just a single patch.
+
+rpi_arm64_defconfig
+add/remove: 0/5 grow/shrink: 11/0 up/down: 452/-544 (-92)
+Function                                     old     new   delta
+lmb_alloc_base_flags                          76     324    +248
+lmb_alloc_addr_flags                           4     144    +140
+boot_relocate_fdt                            516     536     +20
+boot_ramdisk_high                            268     284     +16
+tftp_handler                                1552    1556      +4
+load_serial                                  512     516      +4
+lmb_alloc                                      8      12      +4
+image_setup_libfdt                           456     460      +4
+do_load                                      728     732      +4
+do_booti                                     520     524      +4
+bootm_run_states                            1824    1828      +4
+lmb_reserve                                    8       -      -8
+lmb_alloc_addr                                 8       -      -8
+lmb_alloc_base                                80       -     -80
+_lmb_alloc_addr                              144       -    -144
+_lmb_alloc_base                              304       -    -304
+Total: Before=542062, After=541970, chg -0.02%
+
+qemu_arm64_lwip_defconfig
+add/remove: 0/5 grow/shrink: 11/0 up/down: 452/-544 (-92)
+Function                                     old     new   delta
+lmb_alloc_base_flags                          76     324    +248
+lmb_alloc_addr_flags                           4     144    +140
+boot_relocate_fdt                            488     508     +20
+boot_ramdisk_high                            268     284     +16
+load_serial                                  548     552      +4
+lmb_alloc                                      8      12      +4
+image_setup_libfdt                           368     372      +4
+do_load                                      728     732      +4
+do_bootz                                     332     336      +4
+do_booti                                     520     524      +4
+bootm_run_states                            2176    2180      +4
+lmb_reserve                                    8       -      -8
+lmb_alloc_addr                                 8       -      -8
+lmb_alloc_base                                80       -     -80
+_lmb_alloc_addr                              144       -    -144
+_lmb_alloc_base                              304       -    -304
+Total: Before=1020122, After=1020030, chg -0.01%
+
+
+>
+> The other thing is that there is actually only one place apart from
+> tests where the flag is needed - in boot_fdt_add_mem_rsv_regions().
+> Boards don't use that flag. It is the flags themselves which are
+> confusing.
+>
+
+I still think it's way easier to read without two levels of
+abstraction. Since the series decreases the size -- unless you include
+all DM Tests, I'd like to keep the flags as is for now, so I can send
+the next round which is the actual cleanup.
+We can re-introduce them if someone finds a 'size problem'. But since
+it's only when you enable DM I doubt anyone wants to have them working
+in SPL or production firmware.
+
+/Ilias
+> Regards,
+> Simon
+>
+> > -sughosh
+> >
+> > [1] - https://lists.denx.de/pipermail/u-boot/2024-July/559790.html
+> > [2] - https://lists.denx.de/pipermail/u-boot/2024-August/561607.html
+> >
+> > >  arch/powerpc/cpu/mpc85xx/mp.c |  2 +-
+> > >  arch/powerpc/lib/misc.c       |  2 +-
+> > >  boot/bootm.c                  |  3 ++-
+> > >  boot/image-board.c            |  2 +-
+> > >  boot/image-fdt.c              |  5 +++--
+> > >  cmd/booti.c                   |  2 +-
+> > >  cmd/bootz.c                   |  2 +-
+> > >  cmd/load.c                    |  2 +-
+> > >  include/lmb.h                 |  1 -
+> > >  lib/lmb.c                     |  5 -----
+> > >  test/lib/lmb.c                | 30 +++++++++++++++---------------
+> > >  11 files changed, 26 insertions(+), 30 deletions(-)
+> > >
+>
+> [3] https://patchwork.ozlabs.org/project/uboot/patch/f79dc1fbf796dd5ad290f6080608ee68d7652cfc.1730452668.git.michal.simek@amd.com/
