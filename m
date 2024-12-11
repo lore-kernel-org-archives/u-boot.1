@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6AF8E7717F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 01:36:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EB9E7717F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 01:38:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0284A801EA;
-	Wed, 11 Dec 2024 02:36:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ECC7A801FE;
+	Wed, 11 Dec 2024 02:38:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R+PZzs6l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QquiEIYv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA114801FE; Wed, 11 Dec 2024 02:36:56 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 158968020B; Wed, 11 Dec 2024 02:38:52 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B4C5801E8
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:36:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 635EA801EA
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:38:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-6eff5ad69a1so34311717b3.3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:36:54 -0800 (PST)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6ef66fd2183so56780727b3.1
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 17:38:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733881013; x=1734485813; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733881128; x=1734485928; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bu+CRVfJsuyxqjQET3kTY6gzWOUHCIEqU01o/yX3gcc=;
- b=R+PZzs6ljflNNg/dmKRPlt+pL4lCv5bi2kbj2JnYih4UUl5vdL2TJ0r6U2bi+ch7GA
- QZMD1yW3rpDOAQzw/ZkBEJklOYM0mtM5o3SBqH/iu+5mHI7ryObLjDBd0Bqqnh/SbPbj
- 6BHTqQ4BKGGMPgA3qjBB8C3DtYTG+J6evLgPbeyJlA3Et4C/YMQkPqBOzrwVR/sbV5sW
- kL3NK7UNeYIC0IgCCxEjHOnb7o4RZQR4IBg8/lzJFhezSyu+nSmwWcJE+j0ChFdg1hCf
- HbsbWOI27qwgLoKPwMGAzo+qvAgBK03TIrYAZmiMIaRAotpAsAMyoIWN0Iwq3WhVwgc2
- OyxA==
+ bh=ycT5dT9quP1jyJZovxUeJMo8G9HTRaiuYRe/qL7vur4=;
+ b=QquiEIYvYbFIQH4p+ZUmvUJ+X8mCpZkTPLTTMkU2Cp/NDmGLR/rk2286oGHsAXtXOY
+ LDFmcb3wi0y2mleeeXnWT3yX+AC9rFdt4qkGeq9Ek5pTBCx1vx+F5easFDaf8w+C+wcM
+ n0qR99q/oyGjyOqBqEUdMXd4YPhpcnSIjVH11F8KgTQ9H4eSLy6/KtAeqFiHFiPKyZrz
+ MaKemtdSkS2JMoJpzWswUcInQ3noR1AncIGbiec6/NDD28v6Kn7IK8juZZKlPGbEeEP3
+ Z5kGWxX8Uv2nPwsBbLvAmJqdO8Km0PJuWjJhsn0cPq8ec4QjUlZ77zf+ISPUc7V1vgPO
+ lBDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733881013; x=1734485813;
+ d=1e100.net; s=20230601; t=1733881128; x=1734485928;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bu+CRVfJsuyxqjQET3kTY6gzWOUHCIEqU01o/yX3gcc=;
- b=lZC4KyaqtDiM2w3ezY4/23gfvF5wULOa32K9+s3Tu8q8RvDKCbvzFqhOpcrgITFW/E
- GsP/mkunsJftU+Qvtg3TOPGYONaK548XcZcUqIOtaX8lrNP4o4YTxXZC1YwdWLTYuBQs
- 26MXhXD6nD3PR3FE84U2+pw4SLYPTpzbhLQstUplCzllbwikGswltqAe+G/X+9o2DqzS
- BwifevsyyV8iHUgy9Jdrm90UPILBHuWfDfX8P4td+TyXKOCM8dcQYTHD3Ap+nbaw/zVa
- 4xU43hA2o1uPREI7uxUYn3DYVC1rO683yrd3CM331J0EA69FHCu4omyKf6Ho4hCgXKkP
- UjaA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4cKKr3PbTpzZh39Xyvy3gTtIUzPxJ7VmRVOEwrxGi19hkOLgYf+GMATz2MJlUukfvCLrsJpg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQCtrPQ+DmfIV6g/nvL7MTBVFJSK/zPY6vB2qPMGfEXon7jxdq
- NpuSwPuncYPNmw3juWhwSaWwp0XPq0h6ZZhQ811atrO9LX8uu/Em6Re24Nq4OHU+v7OqpjOFr4M
- OX+gOTqwuJ3cqY38CyU4sdWwbvYMLc2JUg4bxlA==
-X-Gm-Gg: ASbGncvdcdOZighAuld6GccvC0PGKDJ9nzG5vVdFdFZmwq613TxSdn9NZGJt9pqIG1z
- BcdipfKESsSUFib4j90dkshiUyeJFtdkQoxw=
-X-Google-Smtp-Source: AGHT+IHOqMEIJe16ulBVS0pudZin55ffKcr8QQcE1WJoFq/JlYdTl7ESPhOphJ1iQDOgOGgFP7o6+LUOZm2UVqpETt8=
-X-Received: by 2002:a05:690c:7309:b0:6ef:4c6c:3049 with SMTP id
- 00721157ae682-6f147ff2d3fmr18331497b3.14.1733881013220; Tue, 10 Dec 2024
- 17:36:53 -0800 (PST)
+ bh=ycT5dT9quP1jyJZovxUeJMo8G9HTRaiuYRe/qL7vur4=;
+ b=ZGdvc2yTqzP9nbFYidaX7lI/DvrqZUk0PFzwHuDKVmlHETh2mhe8j3L1Y0vwRwWZ5e
+ Q8OnUF9N2pDrPzcSnMHM/GkJWtGcTpubVa9Vz2uPI0XEI/dLJD65/7VhzqM0gRbONFhm
+ 0dZeBYNsDbUoVVgbjiMUqHAP+rFUf30hHjIHYuFRuwXUapd6jGS3tViLGJH6s34j3LFi
+ ut4kh+dIq4tOpe+6n4XfrVWgF5RL24TXuCRouiVVT8B+LMhy0BFNidG5Oi6MC5+D4sa2
+ 1FWTRQL2a7cTEhXnpR95JySPqtmMTD5sp3D2F/bjKkN+1t6oUSVgPLoI5aZJslQrIk0I
+ f9jQ==
+X-Gm-Message-State: AOJu0YyEaa6hx8OTJBvch+TE73WDvTx7y+SvTFq7EaxGN6P95rUgGkvy
+ r/0o1e6KkhQknCCG9bLnkefcTrPdb0lKt1NenHEh3SsVFiGElGFzpPLBZo4n1xu4a8zseDVg61Q
+ 0gdzw4nJZl7m2jlOd2w56ifHnY8odNd3LA0jQOQ==
+X-Gm-Gg: ASbGnctxZu25awb6rjkL07nE3nq5mFBqd0pLjJIGpDDH6siLSuqfKmkenMifDxdQ7cZ
+ S7tOdSPB4Ynu5RR+Vy96AayjN7is7QJxXTlQ=
+X-Google-Smtp-Source: AGHT+IExztQmewKNLt6mEji74l/n0DnpmwpSEDe2THNQhVx6whABSwS1rfgymqk1M184f6kiKFtU7cntHcFMitxoZWY=
+X-Received: by 2002:a05:690c:c14:b0:6ee:7012:d72 with SMTP id
+ 00721157ae682-6f148044433mr15803297b3.38.1733881128190; Tue, 10 Dec 2024
+ 17:38:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20241208002121.31887-1-semen.protsenko@linaro.org>
- <20241208002121.31887-3-semen.protsenko@linaro.org>
- <CAC_iWjJ4X+G=3OyfYmwu9aqdmRvYjhTfS6VcJ2nirVVYqcBhVA@mail.gmail.com>
- <CADg8p95FR8vJUY+fEgVnPAa2E38QAUn3J152ctCGD2WzY8AdFg@mail.gmail.com>
-In-Reply-To: <CADg8p95FR8vJUY+fEgVnPAa2E38QAUn3J152ctCGD2WzY8AdFg@mail.gmail.com>
+References: <CAPLW+4=qP6pCN0xd9n3U5jBePJk2jEKgixCs1A_uBaDTwFLT4g@mail.gmail.com>
+ <CADg8p95bi5G48xZdT9+gqzKEByN4C3ZxfQHNPEaCX=0_559T9w@mail.gmail.com>
+ <CAPLW+4nh2kxgV2ri=kkTD6pLjM2--aewZ4kMO8cjagv5OZCXUg@mail.gmail.com>
+ <CADg8p94-8GXxWAOkgd1Y7AhXhxPJazy04PSnMrg687VigOZC+Q@mail.gmail.com>
+ <CADg8p97K3jX7-37tLNVb4K208eqnN8agBzhEMEnp2Nn3BqvKuw@mail.gmail.com>
+In-Reply-To: <CADg8p97K3jX7-37tLNVb4K208eqnN8agBzhEMEnp2Nn3BqvKuw@mail.gmail.com>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 10 Dec 2024 19:36:41 -0600
-Message-ID: <CAPLW+4mMwqNw2AtXN_DUjF2R_WbTixfOUABFXinXUUiNjSzuRQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] lmb: Return -EEXIST in lmb_add_region_flags() if
- region already added
+Date: Tue, 10 Dec 2024 19:38:34 -0600
+Message-ID: <CAPLW+4knkV21yYKP0nbgW_GF7-aUMdTwtL7D-4-2XJfM+AfCGQ@mail.gmail.com>
+Subject: Re: [REGRESSION] lmb: add and reserve memory above ram_top
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+ Caleb Connolly <caleb.connolly@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, 
+ Mark Kettenis <kettenis@openbsd.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,194 +98,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 9, 2024 at 1:08=E2=80=AFAM Sughosh Ganu <sughosh.ganu@linaro.or=
+On Mon, Dec 9, 2024 at 5:43=E2=80=AFAM Sughosh Ganu <sughosh.ganu@linaro.or=
 g> wrote:
 >
-> On Sun, 8 Dec 2024 at 12:20, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Mon, 9 Dec 2024 at 12:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote=
+:
 > >
-> > Hi Sam,
-> >
-> > On Sun, 8 Dec 2024 at 02:21, Sam Protsenko <semen.protsenko@linaro.org>=
+> > On Sun, 8 Dec 2024 at 06:49, Sam Protsenko <semen.protsenko@linaro.org>=
  wrote:
 > > >
-> > > An attempt to add the already added LMB region (with exactly the same
-> > > start address, size and flags) using lmb_add_region_flags() ends up i=
-n
-> > > lmb_addrs_overlap() check, which eventually leads to either returning=
- 0
-> > > if 'flags' is LMB_NONE, or -1 otherwise. It makes it impossible for t=
-he
-> > > user of this function to catch the case when the region is already ad=
-ded
-> > > and differentiate it from regular errors. That in turn may lead to
-> > > incorrect error handling in the caller code, like reporting misleadin=
-g
-> > > errors or interrupting the normal code path where it could be treated=
- as
-> > > the normal case. An example is boot_fdt_reserve_region() function, wh=
-ich
-> > > might be called twice (e.g. during board startup in initr_lmb(), and
-> > > then during 'booti' command booting the OS), thus trying to reserve
-> > > exactly the same memory regions described in device tree twice, which
-> > > produces an error message on second call.
+> > > On Thu, Dec 5, 2024 at 11:23=E2=80=AFPM Sughosh Ganu <sughosh.ganu@li=
+naro.org> wrote:
+> > > >
 > > >
-> > > Implement the detection of cases when the already added region is try=
-ing
-> > > to be added again, and return -EEXIST error code in case the region
-> > > exists and it's not LMB_NONE; for LMB_NONE return 0, to conform to un=
-it
-> > > tests (specifically test_alloc_addr() in test/lib/lmb.c) and the
-> > > preferred behavior described in commit 1d9aa4a283da ("lmb: Fix the
-> > > allocation of overlapping memory areas with !LMB_NONE"). The change o=
-f
-> > > lmb_add_region_flags() return values is described in the table below:
+> > > [snip]
 > > >
-> > >     Return case                        Pre-1d9   1d9    New
-> > >     -----------------------------------------------------------
-> > >     Added successfully                    0      0      0
-> > >     Failed to add                         -1     -1     -1
-> > >     Already added, flags =3D=3D LMB_NONE      0      0      0
-> > >     Already added, flags !=3D LMB_NONE      0      -1     -EEXIST
+> > > > >     ERROR: reserving fdt memory region failed (addr=3Dbab00000
+> > > > > size=3D5500000 flags=3D2)
+> > > > >     ERROR: reserving fdt memory region failed (addr=3Df0000000
+> > > > > size=3D200000 flags=3D4)
+> > > > >
+> > > > > It looks like all mentioned error messages are harmless, in a way=
+ that
+> > > > > I'm still able to boot Linux, and U-Boot reserved areas still see=
+m to
+> > > > > exist in 'bdinfo'. But seeing error messages like that is definit=
+ely a
+> > > > > nuisance by itself, and might be an indicator of some actual issu=
+es.
+> > > > > Do you have any remedy for that by chance? Please let me know if =
+you
+> > > > > need more debug input from my side.
+> > > >
+> > > > This seems to be happening because the board is trying to reserve
+> > > > memory above ram_top with no-map or no-overwrite attributes. To
+> > > > confirm, you can print the value of ram_top in setup_dest_addr().
+> > > >
+> > > > -sughosh
+> > > >
 > > >
-> > > Rework all affected functions and their documentation. Also fix the
-> > > corresponding unit test which checks reserving the same region with t=
-he
-> > > same flags to account for the changed return value.
-> > >
-> > > No functional change is intended (by this patch itself).
-> > >
-> > > Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory a=
-reas with !LMB_NONE")
-> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > > ---
-> > >  lib/lmb.c      | 18 ++++++++++++++----
-> > >  test/lib/lmb.c |  2 +-
-> > >  2 files changed, 15 insertions(+), 5 deletions(-)
-> > >
-> > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > index 713f072f75ee..ce0dc49345fb 100644
-> > > --- a/lib/lmb.c
-> > > +++ b/lib/lmb.c
-> > > @@ -183,8 +183,10 @@ static long lmb_resize_regions(struct alist *lmb=
-_rgn_lst,
-> > >   * the function might resize an already existing region or coalesce =
-two
-> > >   * adjacent regions.
-> > >   *
-> > > - *
-> > > - * Returns: 0 if the region addition successful, -1 on failure
-> > > + * Return:
-> > > + * * %0                - Added successfully, or it's already added (=
-only if LMB_NONE)
-> > > + * * %-EEXIST  - The region is already added, and flags !=3D LMB_NON=
-E
-> > > + * * %-1       - Failure
-> > >   */
-> > >  static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_add=
-r_t base,
-> > >                                  phys_size_t size, enum lmb_flags fla=
-gs)
-> > > @@ -202,6 +204,14 @@ static long lmb_add_region_flags(struct alist *l=
-mb_rgn_lst, phys_addr_t base,
-> > >                 phys_size_t rgnsize =3D rgn[i].size;
-> > >                 enum lmb_flags rgnflags =3D rgn[i].flags;
-> > >
-> > > +               /* Already have this region, so we're done */
-> > > +               if (base =3D=3D rgnbase && size =3D=3D rgnsize && fla=
-gs =3D=3D rgnflags) {
-> > > +                       if (flags =3D=3D LMB_NONE)
-> > > +                               return 0;
-> > > +                       else
-> > > +                               return -EEXIST;
-> > > +               }
+> > > Thanks for your input, Sughosh! I did a bit of further analysis, and
+> > > found the mentioned error message is happening on 3 different
+> > > occasions. All 3 of them are caused by the recent LMB patches merged
+> > > in U-Boot/master. They are all probably harmless, but a bit
+> > > misleading. Also, I'm not sure whether they are actually *causing*
+> > > those errors, or just revealing some already existing issues.
+> > > Specifically those 3 occurrences are:
 > >
-> > The change looks sane and I did plan to clean up LMB after the release
-> > with similar logic.
-> > But I wonder should we return -EEXIST here or a few lines below in
-> > 'else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {'
+> > Thanks much for your investigation.
 > >
-> > There are two cases we return -1 there, we could return -EEXIST. Someth=
-ing like
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 3a765c11bee6..f3d5b616c376 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -226,7 +226,7 @@ static long lmb_add_region_flags(struct alist
-> > *lmb_rgn_lst, phys_addr_t base,
-> >                                 coalesced++;
-> >                                 break;
-> >                         } else {
-> > -                               return -1;
-> > +                               return -EEXIST;
-> >                         }
-> >                 }
-> >         }
+> > >
+> > > 1. The one reported in this thread. The root cause, like you
+> > > suggested, is the board trying to reserve the memory above ram_top.
+> > > It's actually happening in lmb_init(). Details:
+> > >
+> > >   - The 'memory' node from my dts:
+> > >
+> > >         memory@80000000 {
+> > >             device_type =3D "memory";
+> > >             reg =3D <0x0 0x80000000 0x3ab00000>,
+> > >                   <0x0 0xc0000000 0x40000000>,
+> > >                   <0x8 0x80000000 0x80000000>;
+> > >         };
+> > >
+> > >   - Reserved memory chunk: (addr=3Df0000000 size=3D200000 flags=3D4).
+> > >     That's 'ramoops' chunk from the 'reserved-memory' node in my dts.
+> > >   - ram_top (as seen in lmb_init) =3D 0xbab0_0000.
+> > >     That's because my board's dram_init() calls the
+> > > fdtdec_setup_mem_size_base(), which only takes the first cell from th=
+e
+> > > 'memory' node.
+> > >     Which is 0x8000_0000 ... 0xbab0_0000.
+> > >   - So the reserved memory is above ram_top, as you suggested.
+> > >   - Not sure how to properly fix it though. Maybe I need to "teach"
+> > > U-Boot to use all 3 chunks from my 'memory' node somehow?
 > >
+> > I think there needs to be a check in the related function to not
+> > reserve memory regions above ram_top. This wasn't showing up earlier
+> > because of the local nature of the lmb memory map, but is not the case
+> > anymore. I have a patch which I am testing currently. Will send it out
+> > in a day or so.
 >
-> +1 for this approach. Otherwise we are effectively reverting 1d9aa4a283da=
-.
+> This change should not be needed after your series gets applied.
 >
-
-I'll send v2 soon, addressing all comments and including this suggestion.
-
-> Sam, can you please check if this change also fixes the issue that you
-> see. Thanks.
+> >
+> > >   - I was able to work-around it by reworking the 'memory' node in my
+> > > device tree as described in my first message in this thread:
+> > >
+> > >         memory@80000000 {
+> > >             device_type =3D "memory";
+> > >             reg =3D <0x0 0x80000000 0x80000000>,
+> > >                   <0x8 0x80000000 0x80000000>;
+> > >         };
+> > >
+> > > 2. When booting Linux with 'booti' command, there happens the repeate=
+d
+> > > attempt to reserve all 'reserved-memory' chunks, which were already
+> > > reserved during the board init, which also leads to similar error
+> > > messages. I addressed that one (hopefully properly) in my series [1].
+> > > Please take a look. That one is caused by a combination of these two
+> > > commits:
+> > >
+> > >   - 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory area=
+s
+> > > with !LMB_NONE")
+> > >   - 827dee587b75 ("fdt: lmb: add reserved regions as no-overwrite")
+> >
+> > I will try out your patch series on my side and get back.
+> >
+> > >
+> > > 3. I noticed another similar error message when running sandbox U-Boo=
+t on my PC:
+> > >
+> > >         $ make sandbox_defconfig
+> > >         $ make -j32
+> > >         $ ./u-boot -D
+> > >         ...
+> > >         ERROR: reserving fdt memory region failed (addr=3Dfffe000
+> > > size=3D2000 flags=3D2)
+> > >
+> > >   Can you please check that one on your U-Boot/master? I was able to
+> > > narrow it down to commit 6534d26ee9a5 ("lmb: do away with
+> > > arch_lmb_reserve()"), if that helps.
+> >
+> > This is strange. I have not seen this issue with sandbox earlier.
+> > Might be a regression. Will check. Thanks.
+>
+> Same here. The issue goes away after this series.
 >
 
-Indeed. Three birds with one stone :) Meaning the sandbox one is fixed
-as well. That was a really good suggestion, to move -EEXIST. Thanks
-for letting me know about fixed cases!
+You are right, I just confirmed it on my end. With Ilias's suggestion,
+all 3 error messages are gone. I'll send v2 soon. Thanks for noticing
+that!
 
 > -sughosh
 >
-> > I am not sure about the lmb_resize_regions() failure, I think we
-> > should return a different error
 > >
-> > > +
-> > >                 ret =3D lmb_addrs_adjacent(base, size, rgnbase, rgnsi=
-ze);
-> > >                 if (ret > 0) {
-> > >                         if (flags !=3D rgnflags)
-> > > @@ -667,7 +677,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
-> > >   *
-> > >   * Free up a region of memory.
-> > >   *
-> > > - * Return: 0 if successful, -1 on failure
-> > > + * Return: 0 if successful, negative error code on failure
-> > >   */
-> > >  long lmb_free_flags(phys_addr_t base, phys_size_t size,
-> > >                     uint flags)
-> > > @@ -818,7 +828,7 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t ba=
-se, phys_size_t size,
-> > >                                       lmb_memory[rgn].size,
-> > >                                       base + size - 1, 1)) {
-> > >                         /* ok, reserve the memory */
-> > > -                       if (lmb_reserve_flags(base, size, flags) >=3D=
- 0)
-> > > +                       if (!lmb_reserve_flags(base, size, flags))
-> > >                                 return base;
-> > >                 }
-> > >         }
-> > > diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> > > index 0bd29e2a4fe7..48c3c966f8f2 100644
-> > > --- a/test/lib/lmb.c
-> > > +++ b/test/lib/lmb.c
-> > > @@ -754,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_st=
-ate *uts)
-> > >
-> > >         /* reserve again, same flag */
-> > >         ret =3D lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
-> > > -       ut_asserteq(ret, -1L);
-> > > +       ut_asserteq(ret, -EEXIST);
-> > >         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0=
-x10000,
-> > >                    0, 0, 0, 0);
-> > >
-> > > --
-> > > 2.39.5
-> > >
+> > -sughosh
 > >
-> > Other than that it looks good thanks for fixing this!
-> > Regards
-> > /Ilias
+> > >
+> > > Thanks!
+> > >
+> > > [1] https://lists.denx.de/pipermail/u-boot/2024-December/574308.html
