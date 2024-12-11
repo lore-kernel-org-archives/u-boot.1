@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E9B5E7717F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 02:26:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2B46E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 02:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB8CA80274;
-	Wed, 11 Dec 2024 03:25:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BE048022E;
+	Wed, 11 Dec 2024 03:26:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BaFsQ2PC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uBJATvEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57BE28023C; Wed, 11 Dec 2024 03:25:58 +0100 (CET)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 044428022E; Wed, 11 Dec 2024 03:26:05 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 071A3801FE
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 03:25:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48DF48023A
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 03:25:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-29645a83b1bso3161896fac.1
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 18:25:55 -0800 (PST)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3eb4da24f3bso1414243b6e.1
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 18:25:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733883955; x=1734488755; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733883956; x=1734488756; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VUULVKp6JsJMDTs4uADkfys/dyoa4YYb7jx4+q3kuks=;
- b=BaFsQ2PCbLabqBBTUGKMjd3CMG1Rtf7lJCfpjFhVaIYbqN//TEkFVtSbBnIdCgg18t
- zu9g6mBEhgarQ2g7/+iu7Z0sjM7YYz9GeJ1sHX9/7FHsal6/QUr0g8jsXpO/+9A1jvkQ
- 7kZDkJJMU5upEELBtxFlg+YWBtOVRzYPzu6sWTM/rQ8++mp/raXB1Ae4PreWjHY1PZfs
- QUNyXq9oXPPAzwnTsSe9BOYtMrYtlqx92pKb+K3nsukWDkQJEiLkKntJfcnGcD52E5OL
- IVogIGS11Bg38rcrIXs5gcEy1Scy12CI0t6At+k7aDLv0BlKLQWaahF7u5+Ne4tbNbxb
- CCRw==
+ bh=ZO8TXtqf2xRIVOtoc49ccfZf5XLnyi2rq2LUb4sCKyg=;
+ b=uBJATvEXhHm3/PVbkfuPxD1DEMLg9ab3pv3pQ0WoWIY5DfHDIHbCvWyaGmma/2RpBy
+ ZgDGYLQ/U2uWD7qfNOCgF51Ai2PlFKRjRzZ5n6rBSgleeBAFDb3E2ldqKsCh4535Jca8
+ yOZRNTdU04bnfBG766EP/rGc+QwXJ00lPZNq1V4dxKIR22VIPomGmP4i/7IeR3ixoTU4
+ qwflPgt33W2R6PNZz02fyYCKInq+b2wi1Apgehgj0v2ZtLNVoKGcMHbbHa2qXrVR3VZZ
+ GnPVEcokVka4MJLA6rmB/mkj2e+806T3v7SAqCiPmaAy81OvHF/M1wlKhzQNlwLomR/a
+ If7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733883955; x=1734488755;
+ d=1e100.net; s=20230601; t=1733883956; x=1734488756;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VUULVKp6JsJMDTs4uADkfys/dyoa4YYb7jx4+q3kuks=;
- b=EKHAr51kth2MsT5yGuZ02dLQzGMrJSM80TEtcpZtehJLP224ddH1N9kG1QMDVL2RdO
- DeqOj5QgSfLd9LfyuTHnwOvBKC91LIrmIB8DmLx+jHMjsKhNcLTC7PI6lxbnqb4iEkqB
- INDuGo1+nJZPDA0nwcsWJyfKUEGvuo1/3AiBHZGB0IVVtbKdB8mi5+8fLnVGA7EB+mqt
- u0gvh6mUDqNFFWSoDGG7TolAfecXUTyqU+FkPl0My67yEpRWVZ3JUpZZ0umpes4jTD6t
- FBX5utvYcVYt+wn6n01ZbTDxpfHaexmGRIk+0eApM/qepimBq6pxuFq8qZVKHfCjcWzF
- 9lpw==
+ bh=ZO8TXtqf2xRIVOtoc49ccfZf5XLnyi2rq2LUb4sCKyg=;
+ b=PDX0kcuMPyMURAqXDNLlwQjbdzYFy0guRdKp2Dt28yF8mfWiOQwwrDWPBZNYVCeB73
+ XCWYE6yk9cNr+NONlXhHMSr19pRDoKiTjWn3A/enYkV32tz63Lya2FpcW8fCvHZnryGO
+ uK0XF0LvzMPAR/fuOxtI9fmb1ZBHoMGI9gV/g09qaCWcO8Drzcu8v4mGeD6By9g4Fmma
+ +SRX6XixJBPzou9VnP7cS3DlIR9uywMDANN0wkiCOyfkckOjldtUNrZkhEkFZC3m9E5i
+ f0fW5qHXPsNwS0QSayl/sgWWopI1bGYmxmXBZRk0rHsy/xx4D3FyF8X01PiQ4NJQsA8c
+ uMOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6wwZ6D0l4sMC6qGQSSSaYCIQFuqvJ9h6iiX5S79wdzcaDG/hnNPd4yVZvgAf14KamFmLpGos=@lists.denx.de
-X-Gm-Message-State: AOJu0YwO5JGIMocjC/JqhIhDwxANkBAbnVJP2ahOm9VLu+MRaZLRnsVA
- nrZplUgPOzsO5sK3FKzOTVd8vMSHT07pnOGM1xPf8Vcp/S3cAianLD4CV9G9DQE=
-X-Gm-Gg: ASbGncsDN8m/u9uoU/PDFDvsXEEOoO39cW2F5qIfBvnpVrwJtQbJECWWmGCHqhSefT2
- eO5Q7D3KMq/d1isVFvih4vErD95NyJ1Bx5FLmlTVhp0B+fSphFEaQfnGIVNLTZk3Jll076UrXvV
- a8EJa4G8+B29gDScrOoOE6JYvW2BxzkFYsSpLxp0WPFhIntx1MyfH3Ky5CtrMT9s9bhSSKrNjnY
- OI5wy5x+tGT4WKUJAAmEGvieVZZ9kSIJwSA63wA2fo7xLQB3FJZTld2OCk=
-X-Google-Smtp-Source: AGHT+IGkJGhxdd+C0zy/DHsJ3pxjSgRghZn41vTXhKzYe/71VUf/ruLXp8mz7nrUadr6+sLkrudOaw==
-X-Received: by 2002:a05:6871:8916:b0:29e:29ac:5ade with SMTP id
- 586e51a60fabf-2a012e19fdfmr860987fac.35.1733883954846; 
- Tue, 10 Dec 2024 18:25:54 -0800 (PST)
+ AJvYcCUcrQE1U8tdZTJmS/d7DOylKbmRp0ndLa2T0XM3JLRMekOyjG5jCJyCfP19MsjoaJr3VWJjnfw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqMs/9ORPbpy2A1xJHhEb7rnIILtGaTaDqQ0RPhN3m5W4/ZYKX
+ 9qC/R30QqAehI0eMl9joHtF/KlQO7DO3vBva/ciec1RfKfrtYibfxsL87cd9to4=
+X-Gm-Gg: ASbGncuwZq+RUtN7PnA05X3A0dDnLDmdjJdSPy0Cfz3WuGKVD/uDFp5RNoyta5DYu49
+ CSBp2to4F2gPwfdhSE+vcl8BFew97Kh5s51HHo7sLS5JJg5KjTz+3hr8hQcr0n6mVhtYi1VaAB0
+ sbqmcB7IAPQChpIT4hn6LHECmU1usLvaiCrRgEcgUOPS2mI1iV7W8Tf6aLML+wZRi4tyG3FU62F
+ PE4QwEBdUa9jF5C0XjaRtDEgE8DlX6w6YVRWV3HYFiUMD8Z4wts7JJLiPc=
+X-Google-Smtp-Source: AGHT+IF4qItJtJVX5D54s91Bq5y0QKzbx7fhXWjqGcGdybQ1qKPdzhiGS1M1CvAgtQURU/kKfMvkEw==
+X-Received: by 2002:a05:6808:1b2c:b0:3ea:5d19:63c8 with SMTP id
+ 5614622812f47-3eb85ae336cmr830824b6e.6.1733883955934; 
+ Tue, 10 Dec 2024 18:25:55 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-29fd866f393sm1582995fac.21.2024.12.10.18.25.54
+ 46e09a7af769-71e11447b0fsm412398a34.57.2024.12.10.18.25.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2024 18:25:54 -0800 (PST)
+ Tue, 10 Dec 2024 18:25:55 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -77,9 +77,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 3/4] lmb: Improve coding style
-Date: Tue, 10 Dec 2024 20:25:49 -0600
-Message-Id: <20241211022550.2995-4-semen.protsenko@linaro.org>
+Subject: [PATCH v2 4/4] lmb: Improve kernel-doc comments
+Date: Tue, 10 Dec 2024 20:25:50 -0600
+Message-Id: <20241211022550.2995-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241211022550.2995-1-semen.protsenko@linaro.org>
 References: <20241211022550.2995-1-semen.protsenko@linaro.org>
@@ -101,128 +101,380 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix checkpatch warnings. No functional change.
+Fix warnings from kernel-doc script. Improve and unify overall style of
+kernel-doc comments in lmb source files. Move all kernel-doc comments
+for public functions into the header, as recommended in U-Boot
+documentation [1]:
+
+    Non-trivial functions should have a comment which describes what
+    they do. If it is an exported function, put the comment in the
+    header file so the API is in one place. If it is a static function,
+    put it in the C file.
+
+This also takes care of existing duplication. While at it, do a bit of
+cosmetic cleanups as well.
+
+No functional change.
+
+[1] doc/develop/codingstyle.rst
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2:
   - Added Acked-by tag from Ilias
+  - Provided the excerpt from U-Boot doc about comments for public API
 
- lib/lmb.c | 27 +++++++++++++++++----------
- 1 file changed, 17 insertions(+), 10 deletions(-)
+ include/lmb.h | 125 ++++++++++++++++++++++++++++++--------------------
+ lib/lmb.c     |  55 ----------------------
+ 2 files changed, 74 insertions(+), 106 deletions(-)
 
+diff --git a/include/lmb.h b/include/lmb.h
+index f221f0cce8f7..03d5fac6aa79 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -1,6 +1,13 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Logical memory blocks.
++ *
++ * Copyright (C) 2001 Peter Bergner, IBM Corp.
++ */
++
+ #ifndef _LINUX_LMB_H
+ #define _LINUX_LMB_H
++
+ #ifdef __KERNEL__
+ 
+ #include <alist.h>
+@@ -8,21 +15,15 @@
+ #include <asm/u-boot.h>
+ #include <linux/bitops.h>
+ 
+-/*
+- * Logical memory blocks.
+- *
+- * Copyright (C) 2001 Peter Bergner, IBM Corp.
+- */
+-
+-#define LMB_ALLOC_ANYWHERE      0
+-#define LMB_ALIST_INITIAL_SIZE  4
++#define LMB_ALLOC_ANYWHERE	0
++#define LMB_ALIST_INITIAL_SIZE	4
+ 
+ /**
+- * enum lmb_flags - definition of memory region attributes
+- * @LMB_NONE: no special request
+- * @LMB_NOMAP: don't add to mmu configuration
+- * @LMB_NOOVERWRITE: the memory region cannot be overwritten/re-reserved
+- * @LMB_NONOTIFY: do not notify other modules of changes to this memory region
++ * enum lmb_flags - Definition of memory region attributes
++ * @LMB_NONE: No special request
++ * @LMB_NOMAP: Don't add to MMU configuration
++ * @LMB_NOOVERWRITE: The memory region cannot be overwritten/re-reserved
++ * @LMB_NONOTIFY: Do not notify other modules of changes to this memory region
+  */
+ enum lmb_flags {
+ 	LMB_NONE		= 0,
+@@ -32,11 +33,10 @@ enum lmb_flags {
+ };
+ 
+ /**
+- * struct lmb_region - Description of one region.
+- *
+- * @base:	Base address of the region.
+- * @size:	Size of the region
+- * @flags:	memory region attributes
++ * struct lmb_region - Description of one region
++ * @base: Base address of the region
++ * @size: Size of the region
++ * @flags: Memory region attributes
+  */
+ struct lmb_region {
+ 	phys_addr_t base;
+@@ -46,10 +46,9 @@ struct lmb_region {
+ 
+ /**
+  * struct lmb - The LMB structure
+- *
+- * @free_mem:	List of free memory regions
+- * @used_mem:	List of used/reserved memory regions
+- * @test:	Is structure being used for LMB tests
++ * @free_mem: List of free memory regions
++ * @used_mem: List of used/reserved memory regions
++ * @test: Is structure being used for LMB tests
+  */
+ struct lmb {
+ 	struct alist free_mem;
+@@ -58,51 +57,77 @@ struct lmb {
+ };
+ 
+ /**
+- * lmb_init() - Initialise the LMB module
++ * lmb_init() - Initialise the LMB module.
++ *
++ * Return: 0 on success, negative error code on failure.
+  *
+  * Initialise the LMB lists needed for keeping the memory map. There
+- * are two lists, in form of alloced list data structure. One for the
++ * are two lists, in form of allocated list data structure. One for the
+  * available memory, and one for the used memory. Initialise the two
+  * lists as part of board init. Add memory to the available memory
+  * list and reserve common areas by adding them to the used memory
+  * list.
+- *
+- * Return: 0 on success, -ve on error
+  */
+ int lmb_init(void);
+ 
+ /**
+- * lmb_add_memory() - Add memory range for LMB allocations
++ * lmb_add_memory() - Add memory range for LMB allocations.
+  *
+  * Add the entire available memory range to the pool of memory that
+  * can be used by the LMB module for allocations.
+- *
+- * Return: None
+  */
+ void lmb_add_memory(void);
+ 
+ long lmb_add(phys_addr_t base, phys_size_t size);
+-long lmb_reserve(phys_addr_t base, phys_size_t size);
++
+ /**
+- * lmb_reserve_flags - Reserve one region with a specific flags bitfield.
++ * lmb_reserve() - Reserve a memory region (with no special flags)
++ * @base: Base address of the memory region
++ * @size: Size of the memory region
+  *
+- * @base:	base address of the memory region
+- * @size:	size of the memory region
+- * @flags:	flags for the memory region
+- * Return:	0 if OK, > 0 for coalesced region or a negative error code.
++ * Return: 0 on success, negative error code on failure.
++ */
++long lmb_reserve(phys_addr_t base, phys_size_t size);
++
++/**
++ * lmb_reserve_flags() - Reserve one region with a specific flags bitfield
++ * @base: Base address of the memory region
++ * @size: Size of the memory region
++ * @flags: Flags for the memory region
++ *
++ * Return:
++ * * %0		- Added successfully, or it's already added (only if LMB_NONE)
++ * * %-EEXIST	- The region is already added, and flags != LMB_NONE
++ * * %-1	- Failure
+  */
+ long lmb_reserve_flags(phys_addr_t base, phys_size_t size,
+ 		       enum lmb_flags flags);
++
+ phys_addr_t lmb_alloc(phys_size_t size, ulong align);
+ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr);
+ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
+ phys_size_t lmb_get_free_size(phys_addr_t addr);
+ 
++/**
++ * lmb_alloc_base_flags() - Allocate specified memory region with specified
++ *			    attributes
++ * @size: Size of the region requested
++ * @align: Alignment of the memory region requested
++ * @max_addr: Maximum address of the requested region
++ * @flags: Memory region attributes to be set
++ *
++ * Allocate a region of memory with the attributes specified through the
++ * parameter. The max_addr parameter is used to specify the maximum address
++ * below which the requested region should be allocated.
++ *
++ * Return: Base address on success, 0 on error.
++ */
+ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+ 				 phys_addr_t max_addr, uint flags);
+ 
+ /**
+- * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
++ * lmb_alloc_addr_flags() - Allocate specified memory address with specified
++ *			    attributes
+  * @base: Base Address requested
+  * @size: Size of the region requested
+  * @flags: Memory region attributes to be set
+@@ -111,20 +136,21 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+  * parameter. The base parameter is used to specify the base address
+  * of the requested region.
+  *
+- * Return: base address on success, 0 on error
++ * Return: Base address on success, 0 on error.
+  */
+ phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+ 				 uint flags);
+ 
+ /**
+- * lmb_is_reserved_flags() - test if address is in reserved region with flag bits set
++ * lmb_is_reserved_flags() - Test if address is in reserved region with flag
++ *			     bits set
++ * @addr: Address to be tested
++ * @flags: Bitmap with bits to be tested
+  *
+  * The function checks if a reserved region comprising @addr exists which has
+  * all flag bits set which are set in @flags.
+  *
+- * @addr:	address to be tested
+- * @flags:	bitmap with bits to be tested
+- * Return:	1 if matching reservation exists, 0 otherwise
++ * Return: 1 if matching reservation exists, 0 otherwise.
+  */
+ int lmb_is_reserved_flags(phys_addr_t addr, int flags);
+ 
+@@ -134,9 +160,7 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags);
+  * @size: Size of the region to be freed
+  * @flags: Memory region attributes
+  *
+- * Free up a region of memory.
+- *
+- * Return: 0 if successful, -1 on failure
++ * Return: 0 on success, negative error code on failure.
+  */
+ long lmb_free_flags(phys_addr_t base, phys_size_t size, uint flags);
+ 
+@@ -160,7 +184,7 @@ static inline int lmb_read_check(phys_addr_t addr, phys_size_t len)
+  * io_lmb_setup() - Initialize LMB struct
+  * @io_lmb: IO LMB to initialize
+  *
+- * Returns: 0 on success, negative error code on failure
++ * Return: 0 on success, negative error code on failure.
+  */
+ int io_lmb_setup(struct lmb *io_lmb);
+ 
+@@ -178,12 +202,13 @@ void io_lmb_teardown(struct lmb *io_lmb);
+  *
+  * Add the IOVA space [base, base + size] to be managed by io_lmb.
+  *
+- * Returns: 0 if the region addition was successful, -1 on failure
++ * Return: 0 on success, negative error code on failure.
+  */
+ long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+ 
+ /**
+- * io_lmb_alloc() - Allocate specified IO memory address with specified alignment
++ * io_lmb_alloc() - Allocate specified IO memory address with specified
++ *		    alignment
+  * @io_lmb: LMB to alloc from
+  * @size: Size of the region requested
+  * @align: Required address and size alignment
+@@ -191,7 +216,7 @@ long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+  * Allocate a region of IO memory. The base parameter is used to specify the
+  * base address of the requested region.
+  *
+- * Return: base IO address on success, 0 on error
++ * Return: Base IO address on success, 0 on error.
+  */
+ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
+ 
+@@ -201,9 +226,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align);
+  * @base: Base Address of region to be freed
+  * @size: Size of the region to be freed
+  *
+- * Free up a region of IOVA space.
+- *
+- * Return: 0 if successful, -1 on failure
++ * Return: 0 on success, negative error code on failure.
+  */
+ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size);
+ 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 0f9de26b64af..40f03151929c 100644
+index 40f03151929c..f9880a8dc62b 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -57,7 +57,6 @@ static long lmb_regions_overlap(struct alist *lmb_rgn_lst, unsigned long r1,
- 				unsigned long r2)
- {
- 	struct lmb_region *rgn = lmb_rgn_lst->data;
--
- 	phys_addr_t base1 = rgn[r1].base;
- 	phys_size_t size1 = rgn[r1].size;
- 	phys_addr_t base2 = rgn[r2].base;
-@@ -70,11 +69,11 @@ static long lmb_regions_adjacent(struct alist *lmb_rgn_lst, unsigned long r1,
- 				 unsigned long r2)
- {
- 	struct lmb_region *rgn = lmb_rgn_lst->data;
--
- 	phys_addr_t base1 = rgn[r1].base;
- 	phys_size_t size1 = rgn[r1].size;
- 	phys_addr_t base2 = rgn[r2].base;
- 	phys_size_t size2 = rgn[r2].size;
-+
- 	return lmb_addrs_adjacent(base1, size1, base2, size2);
+@@ -601,14 +601,6 @@ static __maybe_unused void lmb_reserve_common_spl(void)
+ 	}
  }
  
-@@ -228,6 +227,8 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
- 
- 			coalesced++;
- 			break;
-+
-+			return -1;
- 		}
- 	}
- 
-@@ -278,14 +279,17 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
- 	phys_addr_t end = base + size - 1;
+-/**
+- * lmb_add_memory() - Add memory range for LMB allocations
+- *
+- * Add the entire available memory range to the pool of memory that
+- * can be used by the LMB module for allocations.
+- *
+- * Return: None
+- */
+ void lmb_add_memory(void)
+ {
  	int i;
- 
--	rgnbegin = rgnend = 0; /* supress gcc warnings */
-+	/* Suppress GCC warnings */
-+	rgnbegin = 0;
-+	rgnend = 0;
-+
- 	rgn = lmb_rgn_lst->data;
- 	/* Find the region where (base, size) belongs to */
- 	for (i = 0; i < lmb_rgn_lst->count; i++) {
- 		rgnbegin = rgn[i].base;
- 		rgnend = rgnbegin + rgn[i].size - 1;
- 
--		if ((rgnbegin <= base) && (end <= rgnend))
-+		if (rgnbegin <= base && end <= rgnend)
- 			break;
- 	}
- 
-@@ -294,7 +298,7 @@ static long _lmb_free(struct alist *lmb_rgn_lst, phys_addr_t base,
- 		return -1;
- 
- 	/* Check to see if we are removing entire region */
--	if ((rgnbegin == base) && (rgnend == end)) {
-+	if (rgnbegin == base && rgnend == end) {
- 		lmb_remove_region(lmb_rgn_lst, i);
- 		return 0;
- 	}
-@@ -330,6 +334,7 @@ static long lmb_overlaps_region(struct alist *lmb_rgn_lst, phys_addr_t base,
- 	for (i = 0; i < lmb_rgn_lst->count; i++) {
- 		phys_addr_t rgnbase = rgn[i].base;
- 		phys_size_t rgnsize = rgn[i].size;
-+
- 		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
- 			break;
- 	}
-@@ -705,7 +710,7 @@ long lmb_reserve(phys_addr_t base, phys_size_t size)
+@@ -665,16 +657,6 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+ 	return lmb_map_update_notify(base, size, MAP_OP_ADD, LMB_NONE);
  }
  
- static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
--				    phys_addr_t max_addr, enum lmb_flags flags)
-+				   phys_addr_t max_addr, enum lmb_flags flags)
+-/**
+- * lmb_free_flags() - Free up a region of memory
+- * @base: Base Address of region to be freed
+- * @size: Size of the region to be freed
+- * @flags: Memory region attributes
+- *
+- * Free up a region of memory.
+- *
+- * Return: 0 if successful, negative error code on failure
+- */
+ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+ 		    uint flags)
+ {
+@@ -782,19 +764,6 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+ 	return alloc;
+ }
+ 
+-/**
+- * lmb_alloc_base_flags() - Allocate specified memory region with specified attributes
+- * @size: Size of the region requested
+- * @align: Alignment of the memory region requested
+- * @max_addr: Maximum address of the requested region
+- * @flags: Memory region attributes to be set
+- *
+- * Allocate a region of memory with the attributes specified through the
+- * parameter. The max_addr parameter is used to specify the maximum address
+- * below which the requested region should be allocated.
+- *
+- * Return: base address on success, 0 on error
+- */
+ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+ 				 phys_addr_t max_addr, uint flags)
+ {
+@@ -843,18 +812,6 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+ 	return _lmb_alloc_addr(base, size, LMB_NONE);
+ }
+ 
+-/**
+- * lmb_alloc_addr_flags() - Allocate specified memory address with specified attributes
+- * @base: Base Address requested
+- * @size: Size of the region requested
+- * @flags: Memory region attributes to be set
+- *
+- * Allocate a region of memory with the attributes specified through the
+- * parameter. The base parameter is used to specify the base address
+- * of the requested region.
+- *
+- * Return: base address on success, 0 on error
+- */
+ phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+ 				 uint flags)
+ {
+@@ -927,18 +884,6 @@ static int lmb_setup(bool test)
+ 	return 0;
+ }
+ 
+-/**
+- * lmb_init() - Initialise the LMB module
+- *
+- * Initialise the LMB lists needed for keeping the memory map. There
+- * are two lists, in form of alloced list data structure. One for the
+- * available memory, and one for the used memory. Initialise the two
+- * lists as part of board init. Add memory to the available memory
+- * list and reserve common areas by adding them to the used memory
+- * list.
+- *
+- * Return: 0 on success, -ve on error
+- */
+ int lmb_init(void)
  {
  	int ret;
- 	long i, rgn;
-@@ -720,16 +725,18 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
- 
- 		if (lmbsize < size)
- 			continue;
--		if (max_addr == LMB_ALLOC_ANYWHERE)
-+
-+		if (max_addr == LMB_ALLOC_ANYWHERE) {
- 			base = lmb_align_down(lmbbase + lmbsize - size, align);
--		else if (lmbbase < max_addr) {
-+		} else if (lmbbase < max_addr) {
- 			base = lmbbase + lmbsize;
- 			if (base < lmbbase)
- 				base = -1;
- 			base = min(base, max_addr);
- 			base = lmb_align_down(base - size, align);
--		} else
-+		} else {
- 			continue;
-+		}
- 
- 		while (base && lmbbase <= base) {
- 			rgn = lmb_overlaps_region(&lmb.used_mem, base, size);
-@@ -803,7 +810,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
- }
- 
- static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
--				    enum lmb_flags flags)
-+				   enum lmb_flags flags)
- {
- 	long rgn;
- 	struct lmb_region *lmb_memory = lmb.free_mem.data;
 -- 
 2.39.5
 
