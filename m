@@ -4,47 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5203E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF79E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3417D802F4;
-	Wed, 11 Dec 2024 16:23:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E8624802C2;
+	Wed, 11 Dec 2024 16:27:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OY4QDmk1";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49C0080314; Wed, 11 Dec 2024 16:23:08 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F20C7802C2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:23:04 +0100 (CET)
+ id F2B6C802EF; Wed, 11 Dec 2024 16:27:16 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 910098021A
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 53530FEC;
- Wed, 11 Dec 2024 07:23:32 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E20F23F5A1;
- Wed, 11 Dec 2024 07:23:02 -0800 (PST)
-Date: Wed, 11 Dec 2024 15:22:59 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Icenowy Zheng <uwu@icenowy.me>
-Cc: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: Re: [U-BOOT PATCH] sunxi: add support for Rervision A33-Vstar board
-Message-ID: <20241211152259.55d93ad0@donnerap.manchester.arm.com>
-In-Reply-To: <8a28ca7cf3c6241e398d5bdbb6bd7b94ceaa3fe3.camel@icenowy.me>
-References: <20241211031752.355509-1-uwu@icenowy.me>
- <f9b90a6f1bc5d81de2a3968f1bb92ed8f158731b.camel@icenowy.me>
- <20241211131415.2611b46c@donnerap.manchester.arm.com>
- <8a28ca7cf3c6241e398d5bdbb6bd7b94ceaa3fe3.camel@icenowy.me>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6ef9b8b4f13so66487817b3.2
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:27:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733930833; x=1734535633; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rkl8BPi2L1c3kuYn+B2esxbwCcXDtzNM18E91mdOcQ4=;
+ b=OY4QDmk1RixgN1uMOSYmQ2CHGINlJuvcMULjgef8Al4z6wBUyDDqLY0Pllm/klCapy
+ t2FzH5q98CSsSrSb3P3TWQEYs8Pdx4gwDWABW8CvAj8GdHPmO37ek/WQ13mW7SuGQwfa
+ PDBJo5TuX+7HamTejSEd4x8kcEEKNj/wRg5/1wfzOqx/3zETunAbxVuhHOtfwgjrfVA8
+ IcxB7Mdb0kwYNOevTozviwmGXiqff9t6sEF9HRw5q+8mt1waGZV/J65PTQbKXu/e/5TN
+ Ntu4OAs5HQK1DGpUjLcasFBexNpsrXgA2t59tyXVqbWOF2d3f0KKvAi9TzaL/LzaWwqq
+ zaAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733930833; x=1734535633;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rkl8BPi2L1c3kuYn+B2esxbwCcXDtzNM18E91mdOcQ4=;
+ b=EE55s1rSXoxKbzWhGs0tHoHwZOOv8BQ9Uks7ae+PgSDTh7S4t6M/e/SNGbwthUQBE7
+ HgxmjFZGsCijNLT45BG6e25Ah2UU3MlKQe9ChNp6hAH7r5OUdj0wlMbrbogpNiWf3vNC
+ SbTZZyGlUjXsOKHIwTQm4mC0RUje5Meo8wwUplkFaEF7qj++Xmod/BvUKTv7da2S4k/2
+ TfyFf8agB1uHraXTewYnBCPT8oO+eqf+RpOIEfog+X13vt1a3DokTeitaY4pUVZZDD/d
+ 04oB1InbVW+qKyWISQu4OvHXlq/uQGxTsC7E2lyIHgiLd3XA4IxifKPtXmIspckTFyse
+ ceHQ==
+X-Gm-Message-State: AOJu0YxVkZVYKQnkrywBVQt0c0nwsqXAPIJKsEraEyhD5KvVQIfE3KTa
+ C26wwkb3CfffHNVAvTVcD/zRyaRI2JP/tkzwSFgjNT3FRIQ1NjwsJS9Lh9QS8lmEc4+82Q7uOBG
+ cxOc/R2FFCo48PHfkdhbrLWZnDyHsFkXxNhcThw==
+X-Gm-Gg: ASbGncsP8TopOCWy5NEeueQpcAf26wcmLdoUARSifEmwCpqn5jdK4L0VIhx32f17P2m
+ X0dGGCwK0klOR8R0s3moe0m8QMCZ6Omw/o2I=
+X-Google-Smtp-Source: AGHT+IHjFjirKYZg/dALeVa/KpjT9KMe9FJZhfXK0bw+9QKnxHANRuWVvv8QQSGL+mCfFSmKNGr+Psl6S3zng2R6dD8=
+X-Received: by 2002:a05:690c:6d05:b0:6ee:4209:731 with SMTP id
+ 00721157ae682-6f14805cf74mr29820357b3.39.1733930833335; Wed, 11 Dec 2024
+ 07:27:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <20241211135418.563803-16-sjg@chromium.org>
+In-Reply-To: <20241211135418.563803-16-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Dec 2024 17:26:37 +0200
+Message-ID: <CAC_iWjL9kduAOJDEHKU0CBz87+ZJz_4TbXHmR3DdPU=i38+_rg@mail.gmail.com>
+Subject: Re: [PATCH v5 15/23] efi_loader: Rename physical_start to base
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,632 +90,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Dec 2024 22:07:38 +0800
-Icenowy Zheng <uwu@icenowy.me> wrote:
+Hi Simon,
 
-Hi,
+On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+>
+> The word 'physical' suggests that there is an associated virtual address
+> but there is not. Use 'base' since this is the base address of a region.
+>
+> Change some uint64_t and remove some brackets to keep checkpatch happy.
 
-> =E5=9C=A8 2024-12-11=E6=98=9F=E6=9C=9F=E4=B8=89=E7=9A=84 13:14 +0000=EF=
-=BC=8CAndre Przywara=E5=86=99=E9=81=93=EF=BC=9A
-> > On Wed, 11 Dec 2024 15:21:48 +0800
-> > Icenowy Zheng <uwu@icenowy.me> wrote:
-> >=20
-> > Hi Icenowy,
-> >=20
-> > thanks for sending the patch!
-> >  =20
-> > > =E5=9C=A8 2024-12-11=E6=98=9F=E6=9C=9F=E4=B8=89=E7=9A=84 11:17 +0800=
-=EF=BC=8CIcenowy Zheng=E5=86=99=E9=81=93=EF=BC=9A =20
-> > > > Rervision A33-Vstar is an evaluation board for their A33-Core1
-> > > > A33-
-> > > > based
-> > > > SoM.
-> > > >=20
-> > > > Add support for it.
-> > > >=20
-> > > > Fastboot support is enabled for flashing the eMMC included within
-> > > > the
-> > > > SoM, and R8152 Ethernet is enabled for the evaluation board's
-> > > > onboard
-> > > > USB-to-Ethernet.
-> > > >=20
-> > > > The device tree files are from Linux v6.13-rc1, with PMIC
-> > > > interrupt
-> > > > patched to match the r_intc node in U-Boot.
-> > > >=20
-> > > > Signed-off-by: Icenowy Zheng <uwu@icenowy.me>
-> > > > ---
-> > > > =C2=A0arch/arm/dts/Makefile=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=
-=A0=C2=A0 1 +
-> > > > =C2=A0arch/arm/dts/sun8i-a33-vstar-core1.dtsi |=C2=A0 96 +++++++++++
-> > > > =C2=A0arch/arm/dts/sun8i-a33-vstar.dts=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 | 205
-> > > > ++++++++++++++++++++++++
-> > > > =C2=A0board/sunxi/MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 =
-5 +
-> > > > =C2=A0configs/A33-Vstar_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 23 +++
-> > > > =C2=A05 files changed, 330 insertions(+)
-> > > > =C2=A0create mode 100644 arch/arm/dts/sun8i-a33-vstar-core1.dtsi
-> > > > =C2=A0create mode 100644 arch/arm/dts/sun8i-a33-vstar.dts
-> > > > =C2=A0create mode 100644 configs/A33-Vstar_defconfig
-> > > >=20
-> > > > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> > > > index 6ad59aeed5f..55dde416d71 100644
-> > > > --- a/arch/arm/dts/Makefile
-> > > > +++ b/arch/arm/dts/Makefile
-> > > > @@ -654,6 +654,7 @@ dtb-$(CONFIG_MACH_SUN8I_A33) +=3D \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-a33-olinuxino=
-.dtb \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-a33-q8-tablet=
-.dtb \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-a33-sinlinx-s=
-ina33.dtb \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-a33-vstar.dtb \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-r16-bananapi-=
-m2m.dtb \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-r16-nintendo-=
-nes-classic.dtb \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0sun8i-r16-nintendo-=
-super-nes-classic.dtb \
-> > > > diff --git a/arch/arm/dts/sun8i-a33-vstar-core1.dtsi
-> > > > b/arch/arm/dts/sun8i-a33-vstar-core1.dtsi
-> > > > new file mode 100644
-> > > > index 00000000000..5b7057015cc
-> > > > --- /dev/null
-> > > > +++ b/arch/arm/dts/sun8i-a33-vstar-core1.dtsi
-> > > > @@ -0,0 +1,96 @@
-> > > > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> > > > +/*
-> > > > + * Copyright (C) 2024 Icenowy Zheng <uwu@icenowy.me>
-> > > > + */
-> > > > +
-> > > > +#include "sun8i-a33.dtsi"
-> > > > +
-> > > > +&mmc2 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-names =3D "defau=
-lt";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-0 =3D <&mmc2_8bi=
-t_pins>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0vmmc-supply =3D <&reg_dc=
-dc1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bus-width =3D <8>;=C2=A0=
-  =20
-> > >=20
-> > > 8-bit eMMC operation seems to be unstable in U-Boot (but okay in
-> > > Linux).
-> > >=20
-> > > Should I change the bus-width to 4 here in this copy of DT? (The
-> > > kernel
-> > > side DT file is still 8) =20
-> >=20
-> > No, that would be just wrong, and a dirty hack at best, and we don't
-> > want
-> > any further differences between U-Boot and kernel.
-> > What speed modes do U-Boot and the kernel choose? Because I guess
-> > that's the real difference. Would be interesting to see if U-Boot is
-> > not =20
->=20
-> U-Boot chooses 52MHz and Linux chooses 52MHz DDR (nothing higher than
-> 52M DDR is available at 3.3V). Restricting U-Boot to 26MHz seems to be
-> not able to solve problem... oops
+Please drop this. physical start is what the spec uses and it's a lot
+easier to remember when reading the spec
 
-So does U-Boot not use DDR?
 
-> > honouring one of the properties (drive-strength?), or if there should
-> > be a =20
->=20
-> I tried to set drive strength to 4 in board/sunxi/board.c, and it makes
-> no difference -- I think the U-Boot driver do not really use the drive-
-> strength property of DT, right?
-
-The MMC driver not, but the pinctrl driver parses this property and should
-do the right thing - at least in U-Boot proper (there is no pinctrl driver
-as such in the SPL).
-
-So how does this problem show, exactly? On the H616, we can read some
-sectors, but trying to read anything beyond 6 sectors or so hangs, I
-believe.
-
-Cheers,
-Andre
-
->=20
-> > max-frequency or something? Another difference is that U-Boot is not
-> > using
-> > DMA, but PIO-ing the FIFO. This is a big and yet unsolved problem on
-> > H616,
-> > but I haven't heard of issues with older SoCs yet.
-> >=20
-> > One whitespace issue below ...
-> >  =20
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0non-removable;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0cap-mmc-hw-reset;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&mmc2_8bit_pins {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* Increase drive streng=
-th for DDR modes */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0drive-strength =3D <40>;
-> > > > +};
-> > > > +
-> > > > +&r_rsb {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0axp22x: pmic@3a3 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "x-powers,axp223";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0reg =3D <0x3a3>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0interrupt-parent =3D <&r_intc>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0interrupts =3D <0 IRQ_TYPE_LEVEL_LOW>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0eldoin-supply =3D <&reg_dcdc1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0x-powers,drive-vbus-en;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +#include "axp223.dtsi"
-> > > > +
-> > > > +&reg_aldo1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-io";
-> > > > +};
-> > > > +
-> > > > +&reg_aldo2 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <2350000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <2650000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vdd-=
-dll";
-> > > > +};
-> > > > +
-> > > > +&reg_aldo3 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-avcc";
-> > > > +};
-> > > > +
-> > > > +&reg_dc5ldo {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <900000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <1400000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vdd-=
-cpus";
-> > > > +};
-> > > > +
-> > > > +&reg_dcdc1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-3v3";
-> > > > +};
-> > > > +
-> > > > +&reg_dcdc2 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <900000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <1400000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vdd-=
-sys";
-> > > > +};
-> > > > +
-> > > > +&reg_dcdc3 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <900000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <1400000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vdd-=
-cpu";
-> > > > +};
-> > > > +
-> > > > +&reg_dcdc5 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <1500000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <1500000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-dram";
-> > > > +};
-> > > > +
-> > > > +&reg_rtc_ldo {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-rtc";
-> > > > +};
-> > > > diff --git a/arch/arm/dts/sun8i-a33-vstar.dts
-> > > > b/arch/arm/dts/sun8i-
-> > > > a33-vstar.dts
-> > > > new file mode 100644
-> > > > index 00000000000..9f5c29b3df4
-> > > > --- /dev/null
-> > > > +++ b/arch/arm/dts/sun8i-a33-vstar.dts
-> > > > @@ -0,0 +1,205 @@
-> > > > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> > > > +/*
-> > > > + * Copyright (C) 2024 Icenowy Zheng <uwu@icenowy.me>
-> > > > + */
-> > > > +
-> > > > +/dts-v1/;
-> > > > +#include "sun8i-a33-vstar-core1.dtsi"
-> > > > +
-> > > > +#include <dt-bindings/gpio/gpio.h>
-> > > > +#include <dt-bindings/input/input.h>
-> > > > +
-> > > > +/ {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0model =3D "Rervision A33=
--Vstar";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "rervisio=
-n,a33-vstar",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "rervision,a33-core1",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "allwinner,sun8i-a33";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0aliases {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0serial0 =3D &uart0;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0ethernet0 =3D &r8152;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0chosen {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0stdout-path =3D "serial0:115200n8";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0reg_usb1_vbus: regulator=
--usb1-vbus {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "regulator-fixed";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "usb1-vbus";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =3D <5000000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =3D <5000000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0regulator-boot-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0enable-active-high;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0gpio =3D <&pio 1 2 GPIO_ACTIVE_HIGH>; /* PB2 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0wifi_pwrseq: pwrseq {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "mmc-pwrseq-simple";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0reset-gpios =3D <&r_pio 0 6 GPIO_ACTIVE_LOW>; /*
-> > > > PL6 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0clocks =3D <&rtc CLK_OSC32K_FANOUT>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0clock-names =3D "ext_clock";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +&ac_power_supply {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&codec {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&dai {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&ehci0 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0#address-cells =3D <1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0#size-cells =3D <0>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0hub@1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0/* Onboard GL850G hub which needs no extra power
-> > > > sequence */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "usb5e3,608";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0reg =3D <1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0#address-cells =3D <1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0#size-cells =3D <0>;
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0r8152: ethernet@4 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/*
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * =
-Onboard Realtek RTL8152 USB Ethernet,
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * =
-with no MAC address programmed
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0com=
-patible =3D "usbbda,8152";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0reg=
- =3D <4>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +&lradc {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0vref-supply =3D <&reg_al=
-do3>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0button-191 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0label =3D "V+";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0linux,code =3D <KEY_VOLUMEUP>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0channel =3D <0>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0voltage =3D <191011>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0button-391 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0label =3D "V-";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0linux,code =3D <KEY_VOLUMEDOWN>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0channel =3D <0>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0voltage =3D <391304>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0button-600 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0label =3D "BACK";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0linux,code =3D <KEY_BACK>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0channel =3D <0>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0voltage =3D <600000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +&mmc0 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0vmmc-supply =3D <&reg_dc=
-dc1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bus-width =3D <4>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0cd-gpios =3D <&pio 1 4 G=
-PIO_ACTIVE_LOW>; /* PB4 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&mmc1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-names =3D "defau=
-lt";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-0 =3D <&mmc1_pg_=
-pins>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0vmmc-supply =3D <&reg_dl=
-do1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0mmc-pwrseq =3D <&wifi_pw=
-rseq>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bus-width =3D <4>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0non-removable;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0brcmf: wifi@1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0reg =3D <1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "brcm,bcm4329-fmac";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0interrupt-parent =3D <&r_pio>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0interrupts =3D <0 7 IRQ_TYPE_LEVEL_LOW>; /* PL7 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0interrupt-names =3D "host-wake";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +/*
-> > > > + * Our WiFi chip needs both DLDO1 and DLDO2 to be powered at the
-> > > > same
-> > > > + * time, with the two being in sync. Since this is not really
-> > > > + * supported right now, just use the two as always on, and we
-> > > > will
-> > > > fix
-> > > > + * it later.
-> > > > + */
-> > > > +&reg_dldo1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-wifi0";
-> > > > +};
-> > > > +
-> > > > +&reg_dldo2 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-always-on;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-min-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-max-microvolt =
-=3D <3300000>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "vcc-=
-wifi1";
-> > > > +};
-> > > > +
-> > > > +&reg_drivevbus {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0regulator-name =3D "usb0=
--vbus";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&sound {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0/* TODO: on-board microp=
-hone */
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0simple-audio-card,widget=
-s =3D "Headphone", "Headphone
-> > > > Jack";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0simple-audio-card,routin=
-g =3D
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"Left DAC", "DACL",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"Right DAC", "DACR",
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"Headphone Jack", "HP";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&uart0 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-names =3D "defau=
-lt";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-0 =3D <&uart0_pb=
-_pins>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&uart1 {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-names =3D "defau=
-lt";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0pinctrl-0 =3D <&uart1_pg=
-_pins>, <&uart1_cts_rts_pg_pins>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0uart-has-rtscts;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0bluetooth {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0compatible =3D "brcm,bcm43438-bt";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0clocks =3D <&rtc CLK_OSC32K_FANOUT>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0clock-names =3D "lpo";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0vbat-supply =3D <&reg_dldo1>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0device-wakeup-gpios =3D <&r_pio 0 10 =20
-> > > > GPIO_ACTIVE_HIGH>; =20
-> > > > /* PL10 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0host-wakeup-gpios =3D <&r_pio 0 9 =20
-> > > > GPIO_ACTIVE_HIGH>; /* =20
-> > > > PL9 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0shutdown-gpios =3D <&r_pio 0 8 GPIO_ACTIVE_HIGH>;
-> > > > /*
-> > > > PL8 */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0};
-> > > > +};
-> > > > +
-> > > > +&usb_otg {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0dr_mode =3D "otg";
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&usb_power_supply {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > +
-> > > > +&usbphy {
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0usb0_id_det-gpios =3D <&=
-pio 7 8 GPIO_ACTIVE_HIGH>; /* PH8
-> > > > */
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0usb0_vbus_power-supply =
-=3D <&usb_power_supply>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0usb0_vbus-supply =3D <&r=
-eg_drivevbus>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0usb1_vbus-supply =3D <&r=
-eg_usb1_vbus>;
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0status =3D "okay";
-> > > > +};
-> > > > diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> > > > index 84799879e85..5592d366600 100644
-> > > > --- a/board/sunxi/MAINTAINERS
-> > > > +++ b/board/sunxi/MAINTAINERS
-> > > > @@ -526,6 +526,11 @@ M:=C2=A0Quentin Schulz
-> > > > <quentin.schulz@free-electrons.com>
-> > > > =C2=A0S:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Maintained
-> > > > =C2=A0F:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0configs/parrot_r16_defconfig
-> > > > =C2=A0
-> > > > +RERVISION A33-VSTAR BOARD
-> > > > +M:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Icenowy Zheng <uwu@icenowy.me>
-> > > > +S:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Maintained
-> > > > +F:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0configs/A33-Vstar_defconfig
-> > > > +
-> > > > =C2=A0SINLINX SINA31s BOARD
-> > > > =C2=A0M:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Chen-Yu Tsai <wens@csie.org>
-> > > > =C2=A0S:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Maintained
-> > > > diff --git a/configs/A33-Vstar_defconfig b/configs/A33-
-> > > > Vstar_defconfig
-> > > > new file mode 100644
-> > > > index 00000000000..0053c243444
-> > > > --- /dev/null
-> > > > +++ b/configs/A33-Vstar_defconfig
-> > > > @@ -0,0 +1,23 @@
-> > > > +CONFIG_ARM=3Dy
-> > > > +CONFIG_ARCH_SUNXI=3Dy
-> > > > +CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-a33-vstar"
-> > > > +CONFIG_SPL=3Dy
-> > > > +CONFIG_MACH_SUN8I_A33=3Dy
-> > > > +CONFIG_DRAM_CLK=3D552
-> > > > +CONFIG_DRAM_ZQ=3D15291
-> > > > +CONFIG_DRAM_ODT_EN=3Dy
-> > > > +CONFIG_MMC_SUNXI_SLOT_EXTRA=3D2
-> > > > +CONFIG_USB0_ID_DET=3D"PH8"
-> > > > +CONFIG_USB1_VBUS_PIN=3D"PB2"
-> > > > +# CONFIG_VIDEO_SUNXI is not set
-> > > > +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> > > > +CONFIG_CMD_DFU=3Dy
-> > > > +CONFIG_DFU_RAM=3Dy
-> > > > +CONFIG_FASTBOOT_CMD_OEM_FORMAT=3Dy
-> > > > +CONFIG_AXP_DCDC1_VOLT=3D3300
-> > > > +CONFIG_USB_EHCI_HCD=3Dy
-> > > > +CONFIG_USB_MUSB_GADGET=3Dy
-> > > > +CONFIG_USB_HOST_ETHER=3Dy
-> > > > +CONFIG_USB_ETHER_RTL8152=3Dy
-> > > > +CONFIG_USB_FUNCTION_MASS_STORAGE=3Dy
-> > > > +# CONFIG_USB_ETHER is not set=C2=A0  =20
-> >=20
-> >=20
-> > There seem to be two extra spaces at the end here. =20
->=20
-> Oops, will fix this.
->=20
-> >=20
-> > Cheers,
-> > Andre =20
->=20
-
+Thanks
+/Ilias
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>  lib/efi_loader/efi_memory.c | 38 ++++++++++++++++++-------------------
+>  1 file changed, 19 insertions(+), 19 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 42319ceb16f..0f149f99c7d 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -36,7 +36,7 @@ efi_uintn_t efi_memory_map_key;
+>   *
+>   * @link: Link to prev/next node in list
+>   * @type: EFI memory-type
+> - * @physical_start: Start address of region in physical memory. Note that this
+> + * @base: Start address of region in physical memory. Note that this
+>   *     is really a pointer stored as an address, so use map_to_sysmem() to
+>   *     convert it to an address if needed
+>   * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
+> @@ -46,7 +46,7 @@ efi_uintn_t efi_memory_map_key;
+>  struct mem_node {
+>         struct list_head link;
+>         enum efi_memory_type type;
+> -       efi_physical_addr_t physical_start;
+> +       efi_physical_addr_t base;
+>         u64 num_pages;
+>         u64 attribute;
+>  };
+> @@ -121,9 +121,9 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
+>         struct mem_node *mema = list_entry(a, struct mem_node, link);
+>         struct mem_node *memb = list_entry(b, struct mem_node, link);
+>
+> -       if (mema->physical_start == memb->physical_start)
+> +       if (mema->base == memb->base)
+>                 return 0;
+> -       else if (mema->physical_start < memb->physical_start)
+> +       else if (mema->base < memb->base)
+>                 return 1;
+>         else
+>                 return -1;
+> @@ -137,7 +137,7 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
+>   */
+>  static uint64_t desc_get_end(struct mem_node *node)
+>  {
+> -       return node->physical_start + (node->num_pages << EFI_PAGE_SHIFT);
+> +       return node->base + (node->num_pages << EFI_PAGE_SHIFT);
+>  }
+>
+>  /**
+> @@ -169,13 +169,13 @@ static void efi_mem_sort(void)
+>                         cur = lmem;
+>                         prev = prevmem;
+>
+> -                       if ((desc_get_end(cur) == prev->physical_start) &&
+> -                           (prev->type == cur->type) &&
+> -                           (prev->attribute == cur->attribute)) {
+> +                       if (desc_get_end(cur) == prev->base &&
+> +                           prev->type == cur->type &&
+> +                           prev->attribute == cur->attribute) {
+>                                 /* There is an existing map before, reuse it */
+>                                 pages = cur->num_pages;
+>                                 prev->num_pages += pages;
+> -                               prev->physical_start -= pages << EFI_PAGE_SHIFT;
+> +                               prev->base -= pages << EFI_PAGE_SHIFT;
+>                                 list_del(&lmem->link);
+>                                 free(lmem);
+>
+> @@ -216,10 +216,10 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+>  {
+>         struct mem_node *newmap;
+>         struct mem_node *map_desc = map;
+> -       uint64_t map_start = map_desc->physical_start;
+> -       uint64_t map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
+> -       uint64_t carve_start = carve_desc->physical_start;
+> -       uint64_t carve_end = carve_start +
+> +       u64 map_start = map_desc->base;
+> +       u64 map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
+> +       u64 carve_start = carve_desc->base;
+> +       u64 carve_end = carve_start +
+>                              (carve_desc->num_pages << EFI_PAGE_SHIFT);
+>
+>         /* check whether we're overlapping */
+> @@ -241,7 +241,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+>                         list_del(&map->link);
+>                         free(map);
+>                 } else {
+> -                       map->physical_start = carve_end;
+> +                       map->base = carve_end;
+>                         map->num_pages = (map_end - carve_end)
+>                                               >> EFI_PAGE_SHIFT;
+>                 }
+> @@ -261,7 +261,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+>         if (!newmap)
+>                 return EFI_CARVE_OUT_OF_RESOURCES;
+>         newmap->type = map->type;
+> -       newmap->physical_start = carve_start;
+> +       newmap->base = carve_start;
+>         newmap->num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
+>         newmap->attribute = map->attribute;
+>         /* Insert before current entry (descending address order) */
+> @@ -298,7 +298,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>         if (!newlist)
+>                 return EFI_OUT_OF_RESOURCES;
+>         newlist->type = memory_type;
+> -       newlist->physical_start = start;
+> +       newlist->base = start;
+>         newlist->num_pages = pages;
+>
+>         switch (memory_type) {
+> @@ -415,7 +415,7 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
+>         struct mem_node *item;
+>
+>         list_for_each_entry(item, &efi_mem, link) {
+> -               u64 start = item->physical_start;
+> +               u64 start = item->base;
+>                 u64 end = start + (item->num_pages << EFI_PAGE_SHIFT);
+>
+>                 if (addr >= start && addr < end) {
+> @@ -695,10 +695,10 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+>         list_for_each_entry(lmem, &efi_mem, link) {
+>                 memory_map->type = lmem->type;
+>                 memory_map->reserved = 0;
+> -               memory_map->physical_start = lmem->physical_start;
+> +               memory_map->physical_start = lmem->base;
+>
+>                 /* virtual and physical are always the same */
+> -               memory_map->virtual_start = lmem->physical_start;
+> +               memory_map->virtual_start = lmem->base;
+>                 memory_map->num_pages = lmem->num_pages;
+>                 memory_map->attribute = lmem->attribute;
+>                 memory_map--;
+> --
+> 2.34.1
+>
