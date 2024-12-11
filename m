@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BBDE7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:57:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18DE4E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:57:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E84B180326;
-	Wed, 11 Dec 2024 14:54:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B9A980352;
+	Wed, 11 Dec 2024 14:55:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ad7aGgF/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ixaucxXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 220568035C; Wed, 11 Dec 2024 14:54:58 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 5F3D98031E; Wed, 11 Dec 2024 14:54:58 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6E2680323
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37F0E80330
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-8418ecda128so360969739f.2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:55 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a8160382d4so18842845ab.0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1733925294; x=1734530094; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UeUZa1wdYChk8BcUUGkuSUaf+RzegSAECf/9QOeEcVI=;
- b=Ad7aGgF/yqml6zXNE8v+UStclQ50G/hBWFjQmJ/4Uz07xkhrrClIYU25yGZ1HZizXa
- 810fVpLgNcjuxEZ35zP4b8xx4+yngk6cGzQqShxSuOz5/aolUVXcbcQb5VoijCHayfRt
- Hy4Fxna3UX12bgP0o4B7EJRQ0apVnddVYw4OQ=
+ bh=8nEQ/vQpSetEU940s0Bp/unPvaMzfsX5NxopejGxkxI=;
+ b=ixaucxXlGWa0IxX/xZUIDzQ3Ovu/xJ2Vm8t5hIGBxXD+8ebArxlJPckV1x9uJCgqlP
+ UuHIpX5OjILuggYi+Fb7L4lGX8Dj07ysam81FfGyddiPTZk5faiaobQc8FGX7Cqlumrl
+ +R3xA+8yYGG/1SvSUAIlmKsQQBsB95aiRt8LE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1733925294; x=1734530094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UeUZa1wdYChk8BcUUGkuSUaf+RzegSAECf/9QOeEcVI=;
- b=l1EmFcmhcalA6KvEAOw5V9WWeKPlLUGoGxCSvQgRlskT5j3NimFZ+6yhYkEj6LNSfq
- XEfomnyhQBHDG4pWCZzbgzLA8e4AluhP6Af+Ppa7TahO7Rj6v/FxoDG6S8TkJDyy6lUr
- GMTPaObFTEfL4Wz1CaPok+zcZ1FuR3/YuE9oJs3UdOUy1Dg4Pd+M1coRhDkjRkRPKlWR
- pm/ICFB5CBSHjy+oUt8IQ4pwoKBWQi/OLqH7KZKwrI3q1oUbntmCpRLmPy/l/aKAM8Ez
- Bvwfp131x94e1lyxwrCjo0y9W//+hitncCdilpyefilJfqhb7Q1Ts8Af8FhICLcUdRVe
- DFFw==
-X-Gm-Message-State: AOJu0Yw+OnxF2w2oX0HCi2LwImyveX17qs3gZgZlDVumSZjUZqxJwGRh
- VGIAyO0mBuFnbOHJ41LYfEDq+GBjiHJoxv3XrklQ3cLf0wbQDRGKs2CVyPEWpnRPIEla54zEZAg
+ bh=8nEQ/vQpSetEU940s0Bp/unPvaMzfsX5NxopejGxkxI=;
+ b=XfvjVj4rAZmcemFcMyiNh0HG0891qAiqRWJiODVYT/JqLXjuw7XWsC0U6hNz2BFwYk
+ OuxlcTt6bO7p8hNwNCgMUiO736aC25dKZylu8nAUDYPsJE8VEe3N4c8e5PtAWJZTThUv
+ xA8O4Ce1z3tSUjGLWpq647iwdowTIjmM3U8nFTNowv2N/9maKI6axvTztskDyOrBg+zw
+ 9zcq4KZcFa+67kY6hD4+LleUwTUNxuliyKJSrPRxL9G1O2idTrbSUg3nNhcrojW4mBbI
+ faERdU/t+xOMIbcwbMn5gZA6lvYf45h3KP3HdLY2LXn3mV/OeXeJTMojew1hHDQUctMq
+ prZQ==
+X-Gm-Message-State: AOJu0Yw/7f0NrZXl2q6sCkiysZ4Uwlwkt9maalpW1PU374kTrdNu821D
+ wkJgh3KpUIZP8KHdENXA3DucQL4bzeq3KeYriVU8aAseMnd6d2gIswoP40kCOAhUwyogDEz6FaY
  =
-X-Gm-Gg: ASbGncv93ZXxelkPmGLMOEhMb2z0Rgm8gQ0RakQoO1glFbNnRgg94jYvIjcc1xLnsMR
- o4DwApfX5cNST9r+cRVyy8bO2d4jJZAKShJDeme1UB4q18L0ylY8vGwaOGLR3bcx7/65EWY7YnI
- 6m6hExuDyc3kWqZ8WEgqJw9EkMsG+/RiEQfdKw4yc3hgfg+EDFPkRWKiBcRx6zaulz5gamt8RhF
- ujQYIX2Fan7Ts3E+r6j2MLVdItXpWd16ICq1nHZxckSpGB9tCR8fhNM28j3lr/1CsB8ZVz/AvHW
- W2kVB3vrjq+YQOM=
-X-Google-Smtp-Source: AGHT+IFY9qby2fInsKXhNheDXABTNW23luwQqlKHUl2Vj2xVycdrJiCAFjqMCW3+vjYWrRkxlqZy0g==
-X-Received: by 2002:a05:6602:2ccf:b0:835:4402:e2eb with SMTP id
- ca18e2360f4ac-844cb5fac44mr382422139f.7.1733925292802; 
- Wed, 11 Dec 2024 05:54:52 -0800 (PST)
+X-Gm-Gg: ASbGncuDu0SN6tP5KrrzBw67c0R5tDi02Ya6vArarglxO8oii1xbvloIIiYnoM3LieR
+ PEnTydW7JMHNno/YgR92ja1weB7QtkZ8XD+zUM2yVgm6fZMbeocGrhMgTwmsKZebxDCygDBslWl
+ buQH8p97xHKsLaVmC1HvdOP5ziM/Er0EmPbA43Y3dxjwsUnts7SIuFrS6O32FaJOyhKZTK1fi+G
+ 2vkt9R+I6laBRARUCEfat955s/j/t3c7DNdbDA1iNdzkn7ub7jgwxy5BMwYFz91yCFTY4OQiE3h
+ Uxjv38IxRHGuIhY=
+X-Google-Smtp-Source: AGHT+IFyBDeLE4cm91DBDA8nuoBOoZkcWqQEoht2G4tglQUqtHoMfgtbYoB3u/rw/V9uZpMRskCCWA==
+X-Received: by 2002:a05:6e02:12e4:b0:3a7:8720:9deb with SMTP id
+ e9e14a558f8ab-3aa06dd7230mr27759785ab.11.1733925294133; 
+ Wed, 11 Dec 2024 05:54:54 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.51
+ 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:54:52 -0800 (PST)
+ Wed, 11 Dec 2024 05:54:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Matthias Brugger <mbrugger@suse.com>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v5 16/23] efi_loader: Use correct type in
- efi_add_runtime_mmio()
-Date: Wed, 11 Dec 2024 06:54:10 -0700
-Message-Id: <20241211135418.563803-17-sjg@chromium.org>
+ Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 17/23] efi_loader: Show the address for pool allocations
+Date: Wed, 11 Dec 2024 06:54:11 -0700
+Message-Id: <20241211135418.563803-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241211135418.563803-1-sjg@chromium.org>
 References: <20241211135418.563803-1-sjg@chromium.org>
@@ -103,82 +95,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is passed the address of a void * so update the argument
-to match. It is better to have casts in the caller than introduce
-confusion as to what is passed in.
+When logging pool allocations, show the address of the pointer, not the
+pointer itself. This makes it easier to debug with sandbox
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v4)
 
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 2 +-
- arch/arm/mach-bcm283x/reset.c           | 2 +-
- include/efi_loader.h                    | 2 +-
- lib/efi_loader/efi_runtime.c            | 4 ++--
- 4 files changed, 5 insertions(+), 5 deletions(-)
+Changes in v4:
+- Add new patch to show the address for pool allocations
 
-diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-index d2d3e346a36..f9c379e9b06 100644
---- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-+++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
-@@ -1272,7 +1272,7 @@ void __efi_runtime EFIAPI efi_reset_system(
- 
- efi_status_t efi_reset_system_init(void)
+ lib/efi_loader/efi_boottime.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index f27b3827ed2..47ed22b1d9e 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -533,7 +533,7 @@ static efi_status_t EFIAPI efi_free_pool_ext(void *buffer)
  {
--	return efi_add_runtime_mmio(&rstcr, sizeof(*rstcr));
-+	return efi_add_runtime_mmio((void **)&rstcr, sizeof(*rstcr));
+ 	efi_status_t r;
+ 
+-	EFI_ENTRY("%p", buffer);
++	EFI_ENTRY("%llx", (u64)map_to_sysmem(buffer));
+ 	r = efi_free_pool(buffer);
+ 	return EFI_EXIT(r);
  }
- 
- #endif
-diff --git a/arch/arm/mach-bcm283x/reset.c b/arch/arm/mach-bcm283x/reset.c
-index 1dc7ce50d1d..fd10f01d4f7 100644
---- a/arch/arm/mach-bcm283x/reset.c
-+++ b/arch/arm/mach-bcm283x/reset.c
-@@ -85,7 +85,7 @@ void __efi_runtime EFIAPI efi_reset_system(
- efi_status_t efi_reset_system_init(void)
- {
- 	wdog_regs = (struct bcm2835_wdog_regs *)BCM2835_WDOG_PHYSADDR;
--	return efi_add_runtime_mmio(&wdog_regs, sizeof(*wdog_regs));
-+	return efi_add_runtime_mmio((void **)&wdog_regs, sizeof(*wdog_regs));
- }
- 
- #endif
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 3f75f2efcb6..3bfc56ebb5b 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -73,7 +73,7 @@ struct jmp_buf_data;
-  * Call this with mmio_ptr as the _pointer_ to a pointer to an MMIO region
-  * to make it available at runtime
-  */
--efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len);
-+efi_status_t efi_add_runtime_mmio(void **mmio_ptr, u64 len);
- 
- /*
-  * Special case handler for error/abort that just tries to dtrt to get
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 05369c47b01..9d3b940afbd 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -927,7 +927,7 @@ out:
-  * @len:		size of the memory-mapped IO region
-  * Returns:		status code
-  */
--efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
-+efi_status_t efi_add_runtime_mmio(void **mmio_ptr, u64 len)
- {
- 	struct efi_runtime_mmio_list *newmmio;
- 	uint64_t addr = *(uintptr_t *)mmio_ptr;
-@@ -941,7 +941,7 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
- 	if (!newmmio)
- 		return EFI_OUT_OF_RESOURCES;
- 	newmmio->ptr = mmio_ptr;
--	newmmio->paddr = *(uintptr_t *)mmio_ptr;
-+	newmmio->paddr = (uintptr_t)*(void **)mmio_ptr;
- 	newmmio->len = len;
- 	list_add_tail(&newmmio->link, &efi_runtime_mmio);
- 
 -- 
 2.34.1
 
