@@ -4,64 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48D7E7717F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 03:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA646E7717F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 03:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10D8C800B2;
-	Wed, 11 Dec 2024 04:26:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
+	by phobos.denx.de (Postfix) with ESMTP id 5C79080219;
+	Wed, 11 Dec 2024 04:26:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="icHxLJx/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA94F801FD; Wed, 11 Dec 2024 04:26:16 +0100 (CET)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B1E280224; Wed, 11 Dec 2024 04:26:40 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37D99800AA
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 04:26:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A298D80210
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 04:26:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=icenowy.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
-ARC-Seal: i=1; a=rsa-sha256; t=1733887570; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=HIPfjblMRASoMZml051VtLVst7RI4zf30wW4aOsKjM4iN1Xt32MVsVA4hiRnwSMxgyN0ZOMy4LRhSLpP5UlT67jDfeE9UYTcePmPNwbazVuZB7ZwY0KW405g1Cu1EFPbn9SKrnf3SK1mIPt7QNn0Kud4sGXZIwsvB15At5oO7Rs=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1733887570;
- h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=rsDWxbPaNgRdq9a47rbk15f+IRep8Q7yHfOOT8OTLp4=; 
- b=PcDTr8pFGYDeGi5MhvnkcvrQBUAxZIXKKjgUhgTIRoiQDfXUpjQItHwEKvbdpBjzyb0F+JeWeryKYzvBr5t3tnkcD2EojQaTyJv6qraYg1X2NeIu8bXaO7pW/ye/M27rpCgXAQRt768/ragUIUR4EqcDQp1vnnuCTtwxCggrJOM=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=icenowy.me;
- spf=pass  smtp.mailfrom=uwu@icenowy.me;
- dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1733887570; 
- s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
- h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-ID:MIME-Version:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=rsDWxbPaNgRdq9a47rbk15f+IRep8Q7yHfOOT8OTLp4=;
- b=icHxLJx/89uwInZYSF83atgztmPADhT7kYK1Ee7k/6DhWDmngFp3fQ5aXTIN41GI
- 462m85hb8W9bDtV6EGCZBCLAQBzzEFj9+9/CEfiMS6Otv0qEJJedtpkKb77gkRjWfaq
- LDSaSgjXL9LDsAlP9TOw+WI8hO7uvFdr5bMNjk05IciZQN6YONY3YKtpKJdJto/9Wcx
- 68mwJDxOuOXA3lnyH9ZN7XNsgZxO1x9k42STN/GSNxKskFjV28aI/ztvSUqfk1gKi8l
- ZThogV22Gp1IGMHPd9k1EEsD7b2ptpND18Ir5tg5Lt5VwPhITkMr3dRD94fZcYjbtr/
- XpoJPYZN3A==
-Received: by mx.zohomail.com with SMTPS id 1733887568247294.73561054886784;
- Tue, 10 Dec 2024 19:26:08 -0800 (PST)
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Tom Rini <trini@konsulko.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de,
- Icenowy Zheng <uwu@icenowy.me>
-Subject: [PATCH] boards/sunxi/MAINTAINERS: sort items
-Date: Wed, 11 Dec 2024 11:25:58 +0800
-Message-ID: <20241211032558.357258-1-uwu@icenowy.me>
-X-Mailer: git-send-email 2.47.1
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 4BB3QO3l005612; Wed, 11 Dec 2024 12:26:26 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ sumit.garg@linaro.org, jonas@kwiboo.se,
+ Cristian Ciocaltea <cristian.ciocaltea@collabora.com>,
+ Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH v2 3/5] arm64: dts: rockchip: Add HDMI0 node to rk3588
+Date: Wed, 11 Dec 2024 03:26:17 +0000
+Message-ID: <20241211032619.5610-4-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241211032619.5610-1-naoki@radxa.com>
+References: <20241211032619.5610-1-naoki@radxa.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,84 +54,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some items are out of alphabetical order.
+From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
 
-Put them to the corresponding position to fix the order.
+Add support for the HDMI0 output port found on RK3588 SoC.
 
-Signed-off-by: Icenowy Zheng <uwu@icenowy.me>
+Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Link: https://lore.kernel.org/r/20241019-rk3588-hdmi0-dt-v2-1-466cd80e8ff9@collabora.com
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+(cherry picked from commit d7bb71e69f58c1b3665a9f926bf8d3855111bf8e)
 ---
- board/sunxi/MAINTAINERS | 44 ++++++++++++++++++++---------------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+ .../src/arm64/rockchip/rk3588-base.dtsi       | 41 +++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index 84799879e85..267d6d6d9f2 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -216,11 +216,6 @@ M:	Aleksandr Aleksandrov <aleksandr.aleksandrov@emlid.com>
- S:	Maintained
- F:	configs/emlid_neutis_n5_devboard_defconfig
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+index ee99166ebd46..3064ecf1e22a 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+@@ -1254,6 +1254,47 @@
+ 		status = "disabled";
+ 	};
  
--LCTECH PI F1C200S
--M:	Andre Przywara <andre.przywara@arm.com>
--S:	Maintained
--F:	configs/lctech_pi_f1c200s_defconfig
--
- GEMEI-G9 TABLET
- M:	Priit Laes <plaes@plaes.org>
- S:	Maintained
-@@ -276,6 +271,28 @@ M:	Jelle de Jong <jelledejong@powercraft.nl>
- S:	Maintained
- F:	configs/Lamobo_R1_defconfig
- 
-+LCTECH PI F1C200S
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/lctech_pi_f1c200s_defconfig
++	hdmi0: hdmi@fde80000 {
++		compatible = "rockchip,rk3588-dw-hdmi-qp";
++		reg = <0x0 0xfde80000 0x0 0x20000>;
++		clocks = <&cru PCLK_HDMITX0>,
++			 <&cru CLK_HDMITX0_EARC>,
++			 <&cru CLK_HDMITX0_REF>,
++			 <&cru MCLK_I2S5_8CH_TX>,
++			 <&cru CLK_HDMIHDP0>,
++			 <&cru HCLK_VO1>;
++		clock-names = "pclk", "earc", "ref", "aud", "hdp", "hclk_vo1";
++		interrupts = <GIC_SPI 169 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 170 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 171 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 172 IRQ_TYPE_LEVEL_HIGH 0>,
++			     <GIC_SPI 360 IRQ_TYPE_LEVEL_HIGH 0>;
++		interrupt-names = "avp", "cec", "earc", "main", "hpd";
++		phys = <&hdptxphy_hdmi0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&hdmim0_tx0_cec &hdmim0_tx0_hpd
++			     &hdmim0_tx0_scl &hdmim0_tx0_sda>;
++		power-domains = <&power RK3588_PD_VO1>;
++		resets = <&cru SRST_HDMITX0_REF>, <&cru SRST_HDMIHDP0>;
++		reset-names = "ref", "hdp";
++		rockchip,grf = <&sys_grf>;
++		rockchip,vo-grf = <&vo1_grf>;
++		status = "disabled";
 +
-+LIBRETECH ALL-H3-CC BOARDS
-+M:	Chen-Yu Tsai <wens@csie.org>
-+S:	Maintained
-+F:	configs/libretech_all_h3_cc_h2_plus_defconfig
-+F:	configs/libretech_all_h3_cc_h3_defconfig
-+F:	configs/libretech_all_h3_cc_h5_defconfig
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
 +
-+LIBRETECH ALL-H3-IT BOARDS
-+M:	Chen-Yu Tsai <wens@csie.org>
-+S:	Maintained
-+F:	configs/libretech_all_h3_it_h5_defconfig
++			hdmi0_in: port@0 {
++				reg = <0>;
++			};
 +
-+LIBRETECH ALL-H5-CC BOARDS
-+M:	Chen-Yu Tsai <wens@csie.org>
-+S:	Maintained
-+F:	configs/libretech_all_h5_cc_h5_defconfig
++			hdmi0_out: port@1 {
++				reg = <1>;
++			};
++		};
++	};
 +
- LICHEEPI-ZERO BOARD
- M:	Icenowy Zheng <icenowy@aosc.xyz>
- S:	Maintained
-@@ -336,23 +353,6 @@ M:	Siarhei Siamashka <siarhei.siamashka@gmail.com>
- S:	Maintained
- F:	configs/MSI_Primo81_defconfig
- 
--LIBRETECH ALL-H3-CC BOARDS
--M:	Chen-Yu Tsai <wens@csie.org>
--S:	Maintained
--F:	configs/libretech_all_h3_cc_h2_plus_defconfig
--F:	configs/libretech_all_h3_cc_h3_defconfig
--F:	configs/libretech_all_h3_cc_h5_defconfig
--
--LIBRETECH ALL-H3-IT BOARDS
--M:	Chen-Yu Tsai <wens@csie.org>
--S:	Maintained
--F:	configs/libretech_all_h3_it_h5_defconfig
--
--LIBRETECH ALL-H5-CC BOARDS
--M:	Chen-Yu Tsai <wens@csie.org>
--S:	Maintained
--F:	configs/libretech_all_h5_cc_h5_defconfig
--
- NANOPI DUO2 BOARD
- M:	Chuanhong Guo <gch981213@gmail.com>
- S:	Maintained
+ 	qos_gpu_m0: qos@fdf35000 {
+ 		compatible = "rockchip,rk3588-qos", "syscon";
+ 		reg = <0x0 0xfdf35000 0x0 0x20>;
 -- 
-2.47.1
+2.43.0
 
