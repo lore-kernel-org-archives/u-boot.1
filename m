@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0622EE7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EFFE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C80802D5;
-	Wed, 11 Dec 2024 14:54:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A5EE8033D;
+	Wed, 11 Dec 2024 14:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mR48wybY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MUWFlLz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3577B8036E; Wed, 11 Dec 2024 14:54:53 +0100 (CET)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 9466280330; Wed, 11 Dec 2024 14:54:55 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D870D8031E
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F38DF8036D
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-3a7d690479eso37542145ab.0
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:50 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-841d8dec299so463797039f.3
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733925289; x=1734530089; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733925291; x=1734530091; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rI2NitIZWJwgFmzHXOnwQiUzfVEiMUXgBFKD+P02Ajo=;
- b=mR48wybYqZZCaQz2iiFgnKamKvzMP+nqPcCKQFtE3XerCwr8u7pGwLOMQFLBEc2aL+
- wvXebPUauDkS0ZsOFwAmfQ6Z4pF1cNZ/M2wTc6s/LnnpabjV3SpRCVJtpbnQA6pXcTsc
- P6JIXTwHbe1U7DGR7r2ZbdnaWFSLqr6CejQgU=
+ bh=u7bzpU5tkhyN2il0E8+BzXc4Vn//fGmhiOPnRRpNr9E=;
+ b=MUWFlLz/9uhpJXAl5+b6c/5r1sqyFCa1HLaEsBIJrey3DtqyLb5TlvH1L1NOfDLFdD
+ LF+aao4nuoZBy/Loi69XQ95jF6GOfcbTQHa+d8KmvOZo/zGaFRETZ1ZqD4CCNnJ8w/+V
+ TYxeSyJi8iAHo5OMHjiHPq3DWfwCWHeNaOxqk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733925289; x=1734530089;
+ d=1e100.net; s=20230601; t=1733925291; x=1734530091;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rI2NitIZWJwgFmzHXOnwQiUzfVEiMUXgBFKD+P02Ajo=;
- b=dZQIr/Jaq5HHJgu6hbQYHJx9fBnBeF846Ouf7pAccbfXas75Xx4yT9jGYIR2xOcECp
- RMONgRDuA5r12j8f52X6MkTKxuDnbJY5QVN+oH77j7KIgoQ8UbWU9sujJyGzMVdvFIW2
- yNkgcYG284nDh9RK9tWsPLvJkk/bG4K93xHfBBwd/96tBqW9YxDCKlfUXm8xHP6WJ7q+
- 9l3P/iYLe/ISJHZBXjRNx3Q4ADHqZWZK1DFF14LFlHeu2VV0TTX5JeUFJwpdkrki/gJK
- i6huF/eSwKUNRRol63yMNb4DVK0CLP2FDgCLKZtO7MMWkAfzzwVz2WNVtu3/dGrVTeMg
- o7hQ==
-X-Gm-Message-State: AOJu0Yye+wrspymXoLeT4buKxAD8KXdVwVw78bfkx5b0DHQrAHBEisaz
- ufprcjjeExScU/ebE8D9i0fjjKTJIkA4Hzgsaecf0NppwmjqRanFR1PmM/IPlEKOgGG694JxXjM
+ bh=u7bzpU5tkhyN2il0E8+BzXc4Vn//fGmhiOPnRRpNr9E=;
+ b=UlyLEisM1pdflCFsWwgSVoqI0HWKzDf5MVBa6PnaE2C+yvURg63svDGJxmexPdhAQd
+ NPoO4HIRTyECMeaDwLzpf3hWOkQZBPOFNW/3ZdX/DK5TpW5heRbCehsycZxCYntAuu99
+ hTNmN1iuATxo76bTviWqz2IwpAqHIaKk6ZhePOnx1RziBxKqynQ785ASdwwYF5pNpfLP
+ cQQLsQvLd5/AI0VcL4G2ej42fxlF0t+o4gs5oETU+y/h18IIElEdA7AQYiPamdHPo3IF
+ hjoQHVqdpYwK4HT9ZZdzWmaSP7gWEIeJobJVgJDA2cE81cHICQxKiLwpXZ9PYalQgkNR
+ c/wA==
+X-Gm-Message-State: AOJu0Yx1xuwNey6lcAk1ZgdH49prHPMulivG6Kg8WbyEYj3Dwlde0B5f
+ /E97e4Va3+bqAQpBXQhcCgumUjeOs6+IcgvJTQ9g2JlQzWF1xoG7VV5iKc0Mvzi3CR1awpRBlBM
  =
-X-Gm-Gg: ASbGncuUG2EeiN/+oipeXA33YV3ACzstc9Pbb6h96VUOPDUZy3NL1ImFDMRgjCBnA3C
- wUna7bccQHOPUJnRzeBG7VKjUnq0qS0Nm9WzQ5Y/NhyyD+IpeOky04SmMwEW8ec/i4hu3XVCUMA
- fZbS0znYN/ERW/NJr+ROKLyGgovJ/D0JXUMwXf0U9/tJgI/67hl/VATJdnCQEk/cOITVwQpG5Jc
- DY28H7dTS663cXZo4k4DqVxHjafXNGkgshwn/cSViJNAuBvIGzQeDt2++AWsPqjOs2M1NYmFwX9
- qHyj131s0QunKxk=
-X-Google-Smtp-Source: AGHT+IGeUueErlGK/PlJ3OA2H8NffGqwO6IYMjdHHtf1dxcs62G9PsgmKNKBdw1tbmo/aK1t2WlBhg==
-X-Received: by 2002:a05:6e02:12c3:b0:3a7:e047:733f with SMTP id
- e9e14a558f8ab-3aa054de4bfmr37719555ab.1.1733925289117; 
- Wed, 11 Dec 2024 05:54:49 -0800 (PST)
+X-Gm-Gg: ASbGnct/JQyp6CGUz/PyLVw8W/3wGvLvxZzk/p/8I9r7+Mh74Vsy3I5B54peNpZZCW9
+ 1/E9U739FvdLcmHaxa1lWY4QxYKv0TKLcnUE2KCkTPZBDdCpZB99mAOxqmBIGA7zwPt2uCNsAMH
+ PPpT62Ebtf3IfTSDZCVhgxRzpBLHIkjsrd4V7Mbnx0ik++ezcPY63SlNnvFdxsdjzxKnDEKvHCh
+ 58Yw9NAzRwLoSQwZT7y1xWmS+ZXCAEmJueKFxva03gacrJGSciw4aqxUF2sBboHQ8ktsbojuFAL
+ wof0hHAF511yTBk=
+X-Google-Smtp-Source: AGHT+IEjxy+h1v0mnUDZw9UP0Aiv3jzVU/9zTCBUQ+59zSAjf7nFj5YQo3FKbSQ5QoNS3KDR0EUKTQ==
+X-Received: by 2002:a05:6602:1485:b0:82c:e4e1:2e99 with SMTP id
+ ca18e2360f4ac-844cb684329mr334240439f.11.1733925291198; 
+ Wed, 11 Dec 2024 05:54:51 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.47
+ 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:54:47 -0800 (PST)
+ Wed, 11 Dec 2024 05:54:50 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 14/23] efi_loader: Rename struct efi_mem_list to mem_node
-Date: Wed, 11 Dec 2024 06:54:08 -0700
-Message-Id: <20241211135418.563803-15-sjg@chromium.org>
+Subject: [PATCH v5 15/23] efi_loader: Rename physical_start to base
+Date: Wed, 11 Dec 2024 06:54:09 -0700
+Message-Id: <20241211135418.563803-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241211135418.563803-1-sjg@chromium.org>
 References: <20241211135418.563803-1-sjg@chromium.org>
@@ -95,126 +95,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This struct is really a node in the list, not a list itself. Also it
-doesn't need an efi_ prefix. Rename it.
+The word 'physical' suggests that there is an associated virtual address
+but there is not. Use 'base' since this is the base address of a region.
+
+Change some uint64_t and remove some brackets to keep checkpatch happy.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_memory.c | 33 ++++++++++++++++-----------------
- 1 file changed, 16 insertions(+), 17 deletions(-)
+ lib/efi_loader/efi_memory.c | 38 ++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
 
 diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 89e001fa753..42319ceb16f 100644
+index 42319ceb16f..0f149f99c7d 100644
 --- a/lib/efi_loader/efi_memory.c
 +++ b/lib/efi_loader/efi_memory.c
-@@ -28,7 +28,7 @@ DECLARE_GLOBAL_DATA_PTR;
- efi_uintn_t efi_memory_map_key;
- 
- /**
-- * struct efi_mem_list - defines an EFI memory record
-+ * struct mem_node - defines an EFI memory record
+@@ -36,7 +36,7 @@ efi_uintn_t efi_memory_map_key;
   *
-  * Note that this struct is for use inside U-Boot and is not visible to the
-  * EFI application, other than through calls to efi_get_memory_map(), where this
-@@ -43,7 +43,7 @@ efi_uintn_t efi_memory_map_key;
-  *	bytes)
-  * @attribute: Memory attributes (see EFI_MEMORY...)
-  */
--struct efi_mem_list {
-+struct mem_node {
+  * @link: Link to prev/next node in list
+  * @type: EFI memory-type
+- * @physical_start: Start address of region in physical memory. Note that this
++ * @base: Start address of region in physical memory. Note that this
+  *	is really a pointer stored as an address, so use map_to_sysmem() to
+  *	convert it to an address if needed
+  * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
+@@ -46,7 +46,7 @@ efi_uintn_t efi_memory_map_key;
+ struct mem_node {
  	struct list_head link;
  	enum efi_memory_type type;
- 	efi_physical_addr_t physical_start;
-@@ -118,8 +118,8 @@ static u64 checksum(struct efi_pool_allocation *alloc)
-  */
- static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
- {
--	struct efi_mem_list *mema = list_entry(a, struct efi_mem_list, link);
--	struct efi_mem_list *memb = list_entry(b, struct efi_mem_list, link);
-+	struct mem_node *mema = list_entry(a, struct mem_node, link);
-+	struct mem_node *memb = list_entry(b, struct mem_node, link);
+-	efi_physical_addr_t physical_start;
++	efi_physical_addr_t base;
+ 	u64 num_pages;
+ 	u64 attribute;
+ };
+@@ -121,9 +121,9 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
+ 	struct mem_node *mema = list_entry(a, struct mem_node, link);
+ 	struct mem_node *memb = list_entry(b, struct mem_node, link);
  
- 	if (mema->physical_start == memb->physical_start)
+-	if (mema->physical_start == memb->physical_start)
++	if (mema->base == memb->base)
  		return 0;
-@@ -135,7 +135,7 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
-  * @node:	memory node
-  * Return:	end address + 1
+-	else if (mema->physical_start < memb->physical_start)
++	else if (mema->base < memb->base)
+ 		return 1;
+ 	else
+ 		return -1;
+@@ -137,7 +137,7 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
   */
--static uint64_t desc_get_end(struct efi_mem_list *node)
-+static uint64_t desc_get_end(struct mem_node *node)
+ static uint64_t desc_get_end(struct mem_node *node)
  {
- 	return node->physical_start + (node->num_pages << EFI_PAGE_SHIFT);
+-	return node->physical_start + (node->num_pages << EFI_PAGE_SHIFT);
++	return node->base + (node->num_pages << EFI_PAGE_SHIFT);
  }
-@@ -147,8 +147,8 @@ static uint64_t desc_get_end(struct efi_mem_list *node)
-  */
- static void efi_mem_sort(void)
- {
--	struct efi_mem_list *lmem;
--	struct efi_mem_list *prevmem = NULL;
-+	struct mem_node *lmem;
-+	struct mem_node *prevmem = NULL;
- 	bool merge_again = true;
  
- 	list_sort(NULL, &efi_mem, efi_mem_cmp);
-@@ -157,8 +157,8 @@ static void efi_mem_sort(void)
- 	while (merge_again) {
- 		merge_again = false;
- 		list_for_each_entry(lmem, &efi_mem, link) {
--			struct efi_mem_list *prev;
--			struct efi_mem_list *cur;
-+			struct mem_node *prev;
-+			struct mem_node *cur;
- 			uint64_t pages;
+ /**
+@@ -169,13 +169,13 @@ static void efi_mem_sort(void)
+ 			cur = lmem;
+ 			prev = prevmem;
  
- 			if (!prevmem) {
-@@ -211,12 +211,11 @@ static void efi_mem_sort(void)
-  * In case of EFI_CARVE_OVERLAPS_NONRAM it is the callers responsibility
-  * to re-add the already carved out pages to the mapping.
-  */
--static s64 efi_mem_carve_out(struct efi_mem_list *map,
--			     struct efi_mem_list *carve_desc,
-+static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
- 			     bool overlap_conventional)
+-			if ((desc_get_end(cur) == prev->physical_start) &&
+-			    (prev->type == cur->type) &&
+-			    (prev->attribute == cur->attribute)) {
++			if (desc_get_end(cur) == prev->base &&
++			    prev->type == cur->type &&
++			    prev->attribute == cur->attribute) {
+ 				/* There is an existing map before, reuse it */
+ 				pages = cur->num_pages;
+ 				prev->num_pages += pages;
+-				prev->physical_start -= pages << EFI_PAGE_SHIFT;
++				prev->base -= pages << EFI_PAGE_SHIFT;
+ 				list_del(&lmem->link);
+ 				free(lmem);
+ 
+@@ -216,10 +216,10 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
  {
--	struct efi_mem_list *newmap;
--	struct efi_mem_list *map_desc = map;
-+	struct mem_node *newmap;
-+	struct mem_node *map_desc = map;
- 	uint64_t map_start = map_desc->physical_start;
- 	uint64_t map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
- 	uint64_t carve_start = carve_desc->physical_start;
-@@ -278,8 +277,8 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 				   int memory_type,
- 				   bool overlap_conventional)
- {
--	struct efi_mem_list *lmem;
--	struct efi_mem_list *newlist;
-+	struct mem_node *lmem;
-+	struct mem_node *newlist;
- 	bool carve_again;
- 	uint64_t carved_pages = 0;
- 	struct efi_event *evt;
-@@ -413,7 +412,7 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type)
-  */
- static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
- {
--	struct efi_mem_list *item;
-+	struct mem_node *item;
+ 	struct mem_node *newmap;
+ 	struct mem_node *map_desc = map;
+-	uint64_t map_start = map_desc->physical_start;
+-	uint64_t map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
+-	uint64_t carve_start = carve_desc->physical_start;
+-	uint64_t carve_end = carve_start +
++	u64 map_start = map_desc->base;
++	u64 map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
++	u64 carve_start = carve_desc->base;
++	u64 carve_end = carve_start +
+ 			     (carve_desc->num_pages << EFI_PAGE_SHIFT);
+ 
+ 	/* check whether we're overlapping */
+@@ -241,7 +241,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+ 			list_del(&map->link);
+ 			free(map);
+ 		} else {
+-			map->physical_start = carve_end;
++			map->base = carve_end;
+ 			map->num_pages = (map_end - carve_end)
+ 					      >> EFI_PAGE_SHIFT;
+ 		}
+@@ -261,7 +261,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+ 	if (!newmap)
+ 		return EFI_CARVE_OUT_OF_RESOURCES;
+ 	newmap->type = map->type;
+-	newmap->physical_start = carve_start;
++	newmap->base = carve_start;
+ 	newmap->num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
+ 	newmap->attribute = map->attribute;
+ 	/* Insert before current entry (descending address order) */
+@@ -298,7 +298,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+ 	if (!newlist)
+ 		return EFI_OUT_OF_RESOURCES;
+ 	newlist->type = memory_type;
+-	newlist->physical_start = start;
++	newlist->base = start;
+ 	newlist->num_pages = pages;
+ 
+ 	switch (memory_type) {
+@@ -415,7 +415,7 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
+ 	struct mem_node *item;
  
  	list_for_each_entry(item, &efi_mem, link) {
- 		u64 start = item->physical_start;
-@@ -664,7 +663,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
- {
- 	size_t map_entries;
- 	efi_uintn_t map_size = 0;
--	struct efi_mem_list *lmem;
-+	struct mem_node *lmem;
- 	efi_uintn_t provided_map_size;
+-		u64 start = item->physical_start;
++		u64 start = item->base;
+ 		u64 end = start + (item->num_pages << EFI_PAGE_SHIFT);
  
- 	if (!memory_map_size)
+ 		if (addr >= start && addr < end) {
+@@ -695,10 +695,10 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+ 	list_for_each_entry(lmem, &efi_mem, link) {
+ 		memory_map->type = lmem->type;
+ 		memory_map->reserved = 0;
+-		memory_map->physical_start = lmem->physical_start;
++		memory_map->physical_start = lmem->base;
+ 
+ 		/* virtual and physical are always the same */
+-		memory_map->virtual_start = lmem->physical_start;
++		memory_map->virtual_start = lmem->base;
+ 		memory_map->num_pages = lmem->num_pages;
+ 		memory_map->attribute = lmem->attribute;
+ 		memory_map--;
 -- 
 2.34.1
 
