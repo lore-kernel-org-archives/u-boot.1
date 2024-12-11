@@ -4,98 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B16E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C81DAE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:57:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03300801FE;
-	Wed, 11 Dec 2024 11:55:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D42680224;
+	Wed, 11 Dec 2024 11:57:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ruovsQOQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zzWqGuJG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C881080241; Wed, 11 Dec 2024 11:55:41 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 80DEB8026A; Wed, 11 Dec 2024 11:56:59 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBBEE801BF
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EC478021C
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:56:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa67af4dc60so576662366b.2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:39 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6ef7f8acc33so58521257b3.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:56:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733914539; x=1734519339; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1Pa4i6SSo0ziuImDLfRHe3DBSlYndj2von0Q32AANuI=;
- b=ruovsQOQiNJpumVdcdvmcW3SxlLGAbPQyKOLrtLuIij2RLco0+xV4iFUtAdQiGNCM6
- 4tvGPe6J3ymEmNAMAp2Tgj9BNtSbOKTEHNai22C7QWDl7NGcE4kObBJWXjKE9cH9YC1s
- X6ZuzBPeX9QFm+mRB4zya7aPMPbpBJ8o/F8HjC/DFxNF5iWM25EMUGSWlF2Q3ntYnY8D
- 41kZO0RQLRRE7wQVL5IehO/TUclBsQnqC7utTAwBjlVKDgq+Wfux/CIhfVZEpcxQO9kd
- ln2FuHhUB8xYcQpAJFjtKFFXUQt3y8Cx4s1OZdHrY8WNAVJG6q2KvKaSsSgb0bK0Ks75
- 9tVg==
+ d=linaro.org; s=google; t=1733914616; x=1734519416; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AedkV/er7LGfIfJ6F+P6BglpnpYc4me/rRkOVjN/j4U=;
+ b=zzWqGuJGjIAcoaWd5YmvadJ+dV88EUuFDk9bDA4m1VoH/0Wa1RlkuTzEftzaqmCaNp
+ GOdQlE+9+RxlngXkAO6LG4DuqZEk5U02nsIumL/dwdrPnEAeO2iB+s0z90SqV02/heRE
+ IFF1ow4wwuYDvirslQqjJ1i7McT6i+ySv+e48rJuNDMgiBjA319OS6ZglRzXPpD6E+k8
+ lXWdk4/+qx+l68QgB8DYNql4imTXmoLEx5sOf39oww9uFEOUt5CleipxWp/UAYt8rVCQ
+ 23gxTgNEWkvX1nJyvKmhZs1zPMtdM/66vJiwulv+s20SmqimoOVnQZiCuTOAMRWH5cZk
+ Vkaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733914539; x=1734519339;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1Pa4i6SSo0ziuImDLfRHe3DBSlYndj2von0Q32AANuI=;
- b=OyByVo8zxR8tNnkuaZJdR0kMN7IO/G4Wn9utdnEtHoxKVCdWLX9+k9mUE6F1HMPHOW
- eYGq20zK3gD1DR6wfrMYAMEi/ELNM50YnzqFuM8wOq+dx+ty/iZoXbDF3MngxFuw6No9
- sQpJ4np5bvmHfwge12NmWStwLjkv1KtVBbk/kML6ECuQNm3Ibz4KajbHNmpAyOQ9Nhmw
- 4ZBh130BBi8vtTb9UotmcsW2kb1cI5urOfpBdNFG1lgpeQ+cCaO4JterrsgQx1/p2ltM
- iDXIyyRmgl0SJ7IW40/wHl+KjlgBTtayq0YL18vBTy/+lCNnSEnn9DFXdWYm+izwl67b
- lPPw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBUHvudLT4kjFMYKLmNtsj5roWDQgwzpUZWJqrCfzCvQCY7x2bG27rkIPL7gNOxbcMpWxD4EE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwnVXajgOy3zbkVLvLPmrZH3hSKoKFI9/EpzI0NcNJgWE4CDKan
- 9OOxpe0+MyN59t7VAUca6rd4WJq5oJZurAzHI39F1Ayf/HsLX9ZM5GurWymOoeE=
-X-Gm-Gg: ASbGncu4C+fANeW+BnToZGyJe2PHvCfBoUkqV9SNrwCTCFZnSWK2T1DX9H4oxR5PY3n
- 0bVI1If3+m8lK5y6ffnccCNvM08BYForE6hrEPrrqs/rQS5kvnKNJi64HeVPwm+a4/SThRhRDaQ
- StnGQjBKxUS56LtxDerktGFs3+JyVb3O9DC0o5frIJ80ahpNbRaKf79N0fKJdRPrxOAYHbx4kYr
- ShkHjl95lvxu3N6reNgpYFpObAUyW05L7PIKiwqnXw1o5X1X8rV5rVY3+IaJHPjdJ4Xrq3/a7u1
- ZoJ7VTGnE1M/zG3Wl/YYfH5KbGVZLH0=
-X-Google-Smtp-Source: AGHT+IE3/Zv+lKjDiKfZYF0rO1HoGlqlfgeka/9mctJSusFEkD3h2AS4DOLMF0IRpElCumETE622Pw==
-X-Received: by 2002:a17:907:84c2:b0:aa6:824c:4ae5 with SMTP id
- a640c23a62f3a-aa6b1505cc2mr176234066b.56.1733914539129; 
- Wed, 11 Dec 2024 02:55:39 -0800 (PST)
-Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
- [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 02:55:38 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
- Nam Cao <namcao@linutronix.de>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v1 8/8] lmb: Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
-Date: Wed, 11 Dec 2024 12:54:49 +0200
-Message-ID: <20241211105504.453234-9-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
-References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+ d=1e100.net; s=20230601; t=1733914616; x=1734519416;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AedkV/er7LGfIfJ6F+P6BglpnpYc4me/rRkOVjN/j4U=;
+ b=eotuEUNaGmWI+/osOcdhspe1tZNmXqv6sQBlcb+kKaIANdLKmEmsNRUgwxFmaF8HOv
+ ZKf1Mrb+ro22XpX/OIbUWOfQ0rqVIadPguUqhSbgKfWKv9GD3f6z+mH3nBX8INXA9n25
+ AGkzoWAasRnxxF8cHZgQXOw8aoymodtmkC0a5MU8q/mUtHG9RSyvINECFDLvqMscIHel
+ xC5b/bigz9Iu2y8lF7ONMIlbNcYDjGUIi73C7HbZTqj/rURJbGz5DzNR8au6ljUcE53C
+ OS7WySsEveHaYLKHUNc5Os953RA1Aj92Gn1IXFPBtwt23Th0YWvCHjm36pndm+FGyq2C
+ R2Xw==
+X-Gm-Message-State: AOJu0YxYAML9YCApeNjgTooI3dKAMmt5Keud4Z38NHJj4YRN9+mi836T
+ H4wRs4erydzepnnTy4KU+rTpAXsg8lP0DaNrOcozShQWsKpalsJPNVq0zo7AX68mBxGMPs8+dOI
+ c3dbIQXVByCZ6VfQ20nGXzdllbo4dFaiKmShrqg==
+X-Gm-Gg: ASbGncsd1ihk7vuPOQhhj5KP81pCNMxjDQMu/TVeMra4aaEkRL04rut9AidBlS71xUP
+ +aqLR6YPzjhOvC1Ff93xZVaYGwuTvECfS5Jk=
+X-Google-Smtp-Source: AGHT+IGcdVJIOmiT94yLrDtiIXpyJ9bClq2tDNg+UrS0gERUvBgox54XyvYlh7OYjoiyNq7ZIltxq5IKFiJB6f4Hqng=
+X-Received: by 2002:a05:690c:3392:b0:6ef:96f9:2f48 with SMTP id
+ 00721157ae682-6f148085108mr27824617b3.37.1733914616004; Wed, 11 Dec 2024
+ 02:56:56 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+In-Reply-To: <20241206101132.1094545-1-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Dec 2024 12:56:20 +0200
+Message-ID: <CAC_iWj+ktPxQjicOD4_iUGn9wpQnShdVF+AaLGn0VfiJfFn7uA@mail.gmail.com>
+Subject: Re: [PATCH] trace: proftool: dump-ftrace should write funcgraph times
+ in ns not us
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,54 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-lmb_alloc_addr_flags() is a wrapper for _lmb_alloc_addr() and it's the
-only function using it. Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
-and remove the wrapper.
+On Fri, 6 Dec 2024 at 12:11, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> When converting a U-Boot trace records file to ftrace function graph
+> format for use by trace-cmd ('proftool -f funcgraph dump-ftrace'), the
+> time associated to each function is incorrectly saved in microseconds
+> instead of nanoseconds. Multuply the value by 1000 to fix the issue.
+>
+> With this change, the trace-cmd output looks consistent. Here is an
+> example with udelay(25) added to mem_malloc_init() as a test case:
+>
+>  $ ./tools/proftool -m System.map -t /tmp/trace.bin -f funcgraph \
+>                     dump-ftrace -o /tmp/trace.dat
+>  $ trace-cmd report  /tmp/trace.dat >/tmp/trace.log
+>  $ vi /tmp/trace.log
+>  [...]
+>  u-boot-1     [000]     6.719659: funcgraph_entry:                   |    mem_malloc_init() {
+>  u-boot-1     [000]     6.719659: funcgraph_entry:                   |      udelay() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:                   |        schedule() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:                   |          cyclic_run() {
+>  u-boot-1     [000]     6.719660: funcgraph_entry:        1.000 us   |            cyclic_get_list();
+>  u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |            }
+>  u-boot-1     [000]     6.719661: funcgraph_exit:         1.000 us   |          }
+>  u-boot-1     [000]     6.719661: funcgraph_entry:                   |        __udelay() {
+>  u-boot-1     [000]     6.719662: funcgraph_entry:        0.000 us   |          usec_to_tick();
+>  u-boot-1     [000]     6.719687: funcgraph_exit:       + 26.000 us  |          }
+>  u-boot-1     [000]     6.719687: funcgraph_exit:       + 28.000 us  |        }
+>  u-boot-1     [000]     6.719687: funcgraph_entry:      # 37971.000 us |      memset();
+>  u-boot-1     [000]     6.757658: funcgraph_exit:       # 37999.000 us |      }
+>  u-boot-1     [000]     6.757658: funcgraph_exit:       # 38000.000 us |    }
+>
+> In the above dump, the udelay() call is reported as taking 26 us which
+> is consistent with the timestamps (6.719687 - 6.719659 = 0.000026).
+> Without this patch we would have "0.026 us" instead of "+ 26.000 us".
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  tools/proftool.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/tools/proftool.c b/tools/proftool.c
+> index c2e38099354..af2cdb6d584 100644
+> --- a/tools/proftool.c
+> +++ b/tools/proftool.c
+> @@ -1456,8 +1456,8 @@ static int write_pages(struct twriter *tw, enum out_format_t out_format,
+>                                 }
+>                                 tw->ptr += tputl(fout, 0);      /* overrun */
+>                                 tw->ptr += tputq(fout, 0);      /* calltime */
+> -                               /* rettime */
+> -                               tw->ptr += tputq(fout, func_duration);
+> +                               /* rettime (nanoseconds) */
+> +                               tw->ptr += tputq(fout, func_duration * 1000);
+>                         }
+>                 }
+>
+> --
+> 2.43.0
+>
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- include/lmb.h | 2 +-
- lib/lmb.c     | 7 +------
- 2 files changed, 2 insertions(+), 7 deletions(-)
-
-diff --git a/include/lmb.h b/include/lmb.h
-index d481972a6686..76fb82b197a9 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -123,7 +123,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
-  *
-  * Return: Base address on success, 0 on error.
-  */
--phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint flags);
-+phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags);
- 
- /**
-  * lmb_is_reserved_flags() - Test if address is in reserved region with flag
-diff --git a/lib/lmb.c b/lib/lmb.c
-index bdaaa634abd1..7ca44591e1d7 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -748,7 +748,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
- 	return alloc;
- }
- 
--static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
-+phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
- {
- 	long rgn;
- 	struct lmb_region *lmb_memory = lmb.available_mem.data;
-@@ -772,11 +772,6 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags
- 	return 0;
- }
- 
--phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint flags)
--{
--	return _lmb_alloc_addr(base, size, flags);
--}
--
- /* Return number of bytes from a given address that are free */
- phys_size_t lmb_get_free_size(phys_addr_t addr)
- {
--- 
-2.45.2
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
