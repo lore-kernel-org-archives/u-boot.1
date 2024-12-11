@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30EDE77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:22:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCBECE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:32:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36B87801FE;
-	Wed, 11 Dec 2024 08:22:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=icenowy.me
+	by phobos.denx.de (Postfix) with ESMTP id 423A28021C;
+	Wed, 11 Dec 2024 08:32:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=icenowy.me header.i=uwu@icenowy.me header.b="P15/IXeH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aUbqAFOX";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ngFJqJjg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550DD80200; Wed, 11 Dec 2024 08:22:03 +0100 (CET)
-Received: from sender4-op-o15.zoho.com (sender4-op-o15.zoho.com
- [136.143.188.15])
+ id 593CA801FD; Wed, 11 Dec 2024 08:32:34 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73890801FD
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:22:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A548801FD
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=icenowy.me
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=uwu@icenowy.me
-ARC-Seal: i=1; a=rsa-sha256; t=1733901716; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=fShIQaGJYxo7hNiOBzOADcOAGuZOq7poNB9F7nZZ+R00BICBewuguLh5nLgdnFxH2SVd7M9uRHbqAZt2kj4U6o5AFL5sXedhF0fWDGRwfYf6c8YlXu8MoZGwkoYB6BmPFJCQOuh9TdVZ/HMFuXhI3e7ESIZ8SAt9ThAD2OWYVFQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1733901716;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=Rqf+NUekYhnwo3O59q5dOMYj9C+bWXXdwh8YrDbrazA=; 
- b=luJWEl0Siu4XQjekNe3WFEXhIjY42EPSsx+5NQfFYMQ7QTJX2otc0Cq2rVfl/g8IIMoVl9BnmlXRp/2zhL/I+SUUuzaCH/txAM6B8Fg4w6xL9/EdbxWA5uddzRe0IeONfcAqFEEZyq+XCYeRE7m3MB9omae/J6nb2vOiG+8JiQI=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=icenowy.me;
- spf=pass  smtp.mailfrom=uwu@icenowy.me;
- dmarc=pass header.from=<uwu@icenowy.me>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1733901716; 
- s=zmail2; d=icenowy.me; i=uwu@icenowy.me;
- h=Message-ID:Subject:Subject:From:From:To:To:Cc:Cc:Date:Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:MIME-Version:Message-Id:Reply-To;
- bh=Rqf+NUekYhnwo3O59q5dOMYj9C+bWXXdwh8YrDbrazA=;
- b=P15/IXeH4NIZBsyNm7X5emLGRwIGTccHBAQ1lR7T3ND5EvRu9henWtAeMANW7eN4
- E2n37JfM3kNvC74w9EAI/Nqae6LnkS/lNYr50xkoCUsH252xN6MpSLct9KhW+ozxytw
- xlJB6XSP3yi6cKXRzBIA5JLBe7adnebHKI93oQ5KZFdi9WXBRyVUT9o3CeOv0U0vHDy
- 0TA3qAag614Z3jkfifi/6/yGNY0YJGlhDd/iMDjmHc6028KsaD7SYQ6ZwcWLhwTs/3Y
- NhN+dAmeuCVri/dUXG5Oik9cf3A+tukukb4ZeDw3GVciDgDFhmgIC2xveNAkco9W9/g
- vWjv4BeyHQ==
-Received: by mx.zohomail.com with SMTPS id 1733901713248617.2143720106477;
- Tue, 10 Dec 2024 23:21:53 -0800 (PST)
-Message-ID: <f9b90a6f1bc5d81de2a3968f1bb92ed8f158731b.camel@icenowy.me>
-Subject: Re: [U-BOOT PATCH] sunxi: add support for Rervision A33-Vstar board
-From: Icenowy Zheng <uwu@icenowy.me>
-To: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
- <jagan@amarulasolutions.com>,  Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de, 
- linux-sunxi@lists.linux.dev
-Date: Wed, 11 Dec 2024 15:21:48 +0800
-In-Reply-To: <20241211031752.355509-1-uwu@icenowy.me>
-References: <20241211031752.355509-1-uwu@icenowy.me>
-Organization: Anthon Open-Source Community
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
-User-Agent: Evolution 3.44.4 
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Y7S3z5szHz9sxX;
+ Wed, 11 Dec 2024 08:32:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1733902351;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WCdN1OmIvZM5pPDUqm1rD0OdHcFcEuihV173MtLOJVA=;
+ b=aUbqAFOXtZkNlf5uf5FYEEINCp4arAFk00Zlkv4DMMKjcwdCoOirtwGaUSrPIt++Ya58/S
+ XdvNKrG1ILXWcm0wiHLHrbZNsMTnbXNj0XTJnHqadYjHiHGgwegZ/dbLY+9hCJ5b56+db0
+ yBfBkQe1njdErGz36/E+NVSRME1aByn9hlPLiPeik0PDclO+n38oxqlhw2GP8PGhKbCgP+
+ VHZBH/EtHPa6DXtCGGuDfARw0Qeafbct9Z/sa+Rvyl7rYZAexenU6kEImewYgen6AlvBH+
+ N+fnV0gLxjMoEtHoEy2iF/r6kc5EYij/YO1kwE7Yl2hPZ4of/TMKliJT/A1jkA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1733902349;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WCdN1OmIvZM5pPDUqm1rD0OdHcFcEuihV173MtLOJVA=;
+ b=ngFJqJjglg8+rpKqpULLHbc7tCpCpBtT843VZjDR5BSeQjusa2/tRrSw8i274lItBWdk/E
+ BKXArMf66dZ55mUef4Kaymj6U8kQRbyHt3Jb0iTDl3o4uEECfVIDoer6Zyg4FOiRd3VDCz
+ kP4rrzQgMXuef3i8Mi/wAF6LsUera5BOGvyl8akm1fiU2tkXVTOOB84nGI/VuL0pGdL1NP
+ ZoQVKtDaqSsoaLiCfHdQQCO/DcMpOgXvN9s/EK/sVZp0TLEvwIklvJbqo+2RE8Hc7GHLUX
+ RF+GauEFDQVsE0IeFRJdoMf6gFDppA4TGe/gHTWg0LT1pdoypjIzkvJ81Jb2Rw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 01/13] ARM: dts: renesas: Fix R-Car spelling
+Date: Wed, 11 Dec 2024 08:30:25 +0100
+Message-ID: <20241211073210.8087-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: ado3izhf1x79pikab169i3qmt58sq9n8
+X-MBO-RS-ID: 77e3332df8207f3503a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,247 +81,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-5ZyoIDIwMjQtMTItMTHmmJ/mnJ/kuInnmoQgMTE6MTcgKzA4MDDvvIxJY2Vub3d5IFpoZW5n5YaZ
-6YGT77yaCj4gUmVydmlzaW9uIEEzMy1Wc3RhciBpcyBhbiBldmFsdWF0aW9uIGJvYXJkIGZvciB0
-aGVpciBBMzMtQ29yZTEgQTMzLQo+IGJhc2VkCj4gU29NLgo+IAo+IEFkZCBzdXBwb3J0IGZvciBp
-dC4KPiAKPiBGYXN0Ym9vdCBzdXBwb3J0IGlzIGVuYWJsZWQgZm9yIGZsYXNoaW5nIHRoZSBlTU1D
-IGluY2x1ZGVkIHdpdGhpbiB0aGUKPiBTb00sIGFuZCBSODE1MiBFdGhlcm5ldCBpcyBlbmFibGVk
-IGZvciB0aGUgZXZhbHVhdGlvbiBib2FyZCdzIG9uYm9hcmQKPiBVU0ItdG8tRXRoZXJuZXQuCj4g
-Cj4gVGhlIGRldmljZSB0cmVlIGZpbGVzIGFyZSBmcm9tIExpbnV4IHY2LjEzLXJjMSwgd2l0aCBQ
-TUlDIGludGVycnVwdAo+IHBhdGNoZWQgdG8gbWF0Y2ggdGhlIHJfaW50YyBub2RlIGluIFUtQm9v
-dC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBJY2Vub3d5IFpoZW5nIDx1d3VAaWNlbm93eS5tZT4KPiAt
-LS0KPiDCoGFyY2gvYXJtL2R0cy9NYWtlZmlsZcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCB8wqDCoCAxICsKPiDCoGFyY2gvYXJtL2R0cy9zdW44aS1hMzMtdnN0YXItY29yZTEu
-ZHRzaSB8wqAgOTYgKysrKysrKysrKysKPiDCoGFyY2gvYXJtL2R0cy9zdW44aS1hMzMtdnN0YXIu
-ZHRzwqDCoMKgwqDCoMKgwqAgfCAyMDUKPiArKysrKysrKysrKysrKysrKysrKysrKysKPiDCoGJv
-YXJkL3N1bnhpL01BSU5UQUlORVJTwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
-wqAgNSArCj4gwqBjb25maWdzL0EzMy1Wc3Rhcl9kZWZjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgfMKgIDIzICsrKwo+IMKgNSBmaWxlcyBjaGFuZ2VkLCAzMzAgaW5zZXJ0aW9ucygrKQo+
-IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvYXJtL2R0cy9zdW44aS1hMzMtdnN0YXItY29yZTEu
-ZHRzaQo+IMKgY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvYXJtL2R0cy9zdW44aS1hMzMtdnN0YXIu
-ZHRzCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmlncy9BMzMtVnN0YXJfZGVmY29uZmlnCj4g
-Cj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9NYWtlZmlsZSBiL2FyY2gvYXJtL2R0cy9NYWtl
-ZmlsZQo+IGluZGV4IDZhZDU5YWVlZDVmLi41NWRkZTQxNmQ3MSAxMDA2NDQKPiAtLS0gYS9hcmNo
-L2FybS9kdHMvTWFrZWZpbGUKPiArKysgYi9hcmNoL2FybS9kdHMvTWFrZWZpbGUKPiBAQCAtNjU0
-LDYgKzY1NCw3IEBAIGR0Yi0kKENPTkZJR19NQUNIX1NVTjhJX0EzMykgKz0gXAo+IMKgwqDCoMKg
-wqDCoMKgwqBzdW44aS1hMzMtb2xpbnV4aW5vLmR0YiBcCj4gwqDCoMKgwqDCoMKgwqDCoHN1bjhp
-LWEzMy1xOC10YWJsZXQuZHRiIFwKPiDCoMKgwqDCoMKgwqDCoMKgc3VuOGktYTMzLXNpbmxpbngt
-c2luYTMzLmR0YiBcCj4gK8KgwqDCoMKgwqDCoMKgc3VuOGktYTMzLXZzdGFyLmR0YiBcCj4gwqDC
-oMKgwqDCoMKgwqDCoHN1bjhpLXIxNi1iYW5hbmFwaS1tMm0uZHRiIFwKPiDCoMKgwqDCoMKgwqDC
-oMKgc3VuOGktcjE2LW5pbnRlbmRvLW5lcy1jbGFzc2ljLmR0YiBcCj4gwqDCoMKgwqDCoMKgwqDC
-oHN1bjhpLXIxNi1uaW50ZW5kby1zdXBlci1uZXMtY2xhc3NpYy5kdGIgXAo+IGRpZmYgLS1naXQg
-YS9hcmNoL2FybS9kdHMvc3VuOGktYTMzLXZzdGFyLWNvcmUxLmR0c2kKPiBiL2FyY2gvYXJtL2R0
-cy9zdW44aS1hMzMtdnN0YXItY29yZTEuZHRzaQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5k
-ZXggMDAwMDAwMDAwMDAuLjViNzA1NzAxNWNjCj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL2FyY2gv
-YXJtL2R0cy9zdW44aS1hMzMtdnN0YXItY29yZTEuZHRzaQo+IEBAIC0wLDAgKzEsOTYgQEAKPiAr
-Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IChHUEwtMi4wKyBPUiBNSVQpCj4gKy8qCj4gKyAq
-IENvcHlyaWdodCAoQykgMjAyNCBJY2Vub3d5IFpoZW5nIDx1d3VAaWNlbm93eS5tZT4KPiArICov
-Cj4gKwo+ICsjaW5jbHVkZSAic3VuOGktYTMzLmR0c2kiCj4gKwo+ICsmbW1jMiB7Cj4gK8KgwqDC
-oMKgwqDCoMKgcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IjsKPiArwqDCoMKgwqDCoMKgwqBwaW5j
-dHJsLTAgPSA8Jm1tYzJfOGJpdF9waW5zPjsKPiArwqDCoMKgwqDCoMKgwqB2bW1jLXN1cHBseSA9
-IDwmcmVnX2RjZGMxPjsKPiArwqDCoMKgwqDCoMKgwqBidXMtd2lkdGggPSA8OD47Cgo4LWJpdCBl
-TU1DIG9wZXJhdGlvbiBzZWVtcyB0byBiZSB1bnN0YWJsZSBpbiBVLUJvb3QgKGJ1dCBva2F5IGlu
-CkxpbnV4KS4KClNob3VsZCBJIGNoYW5nZSB0aGUgYnVzLXdpZHRoIHRvIDQgaGVyZSBpbiB0aGlz
-IGNvcHkgb2YgRFQ/IChUaGUga2VybmVsCnNpZGUgRFQgZmlsZSBpcyBzdGlsbCA4KQoKPiArwqDC
-oMKgwqDCoMKgwqBub24tcmVtb3ZhYmxlOwo+ICvCoMKgwqDCoMKgwqDCoGNhcC1tbWMtaHctcmVz
-ZXQ7Cj4gK8KgwqDCoMKgwqDCoMKgc3RhdHVzID0gIm9rYXkiOwo+ICt9Owo+ICsKPiArJm1tYzJf
-OGJpdF9waW5zIHsKPiArwqDCoMKgwqDCoMKgwqAvKiBJbmNyZWFzZSBkcml2ZSBzdHJlbmd0aCBm
-b3IgRERSIG1vZGVzICovCj4gK8KgwqDCoMKgwqDCoMKgZHJpdmUtc3RyZW5ndGggPSA8NDA+Owo+
-ICt9Owo+ICsKPiArJnJfcnNiIHsKPiArwqDCoMKgwqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4g
-Kwo+ICvCoMKgwqDCoMKgwqDCoGF4cDIyeDogcG1pY0AzYTMgewo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBjb21wYXRpYmxlID0gIngtcG93ZXJzLGF4cDIyMyI7Cj4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlZyA9IDwweDNhMz47Cj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoGludGVycnVwdC1wYXJlbnQgPSA8JnJfaW50Yz47Cj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoGludGVycnVwdHMgPSA8MCBJUlFfVFlQRV9MRVZFTF9MT1c+Owo+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBlbGRvaW4tc3VwcGx5ID0gPCZyZWdfZGNk
-YzE+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB4LXBvd2Vycyxkcml2ZS12YnVz
-LWVuOwo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gK307Cj4gKwo+ICsjaW5jbHVkZSAiYXhwMjIzLmR0
-c2kiCj4gKwo+ICsmcmVnX2FsZG8xIHsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItYWx3YXlz
-LW9uOwo+ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDMzMDAwMDA+
-Owo+ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1tYXgtbWljcm92b2x0ID0gPDMzMDAwMDA+Owo+
-ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1uYW1lID0gInZjYy1pbyI7Cj4gK307Cj4gKwo+ICsm
-cmVnX2FsZG8yIHsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItYWx3YXlzLW9uOwo+ICvCoMKg
-wqDCoMKgwqDCoHJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDIzNTAwMDA+Owo+ICvCoMKgwqDC
-oMKgwqDCoHJlZ3VsYXRvci1tYXgtbWljcm92b2x0ID0gPDI2NTAwMDA+Owo+ICvCoMKgwqDCoMKg
-wqDCoHJlZ3VsYXRvci1uYW1lID0gInZkZC1kbGwiOwo+ICt9Owo+ICsKPiArJnJlZ19hbGRvMyB7
-Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLWFsd2F5cy1vbjsKPiArwqDCoMKgwqDCoMKgwqBy
-ZWd1bGF0b3ItbWluLW1pY3Jvdm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1
-bGF0b3ItbWF4LW1pY3Jvdm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0
-b3ItbmFtZSA9ICJ2Y2MtYXZjYyI7Cj4gK307Cj4gKwo+ICsmcmVnX2RjNWxkbyB7Cj4gK8KgwqDC
-oMKgwqDCoMKgcmVndWxhdG9yLWFsd2F5cy1vbjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3It
-bWluLW1pY3Jvdm9sdCA9IDw5MDAwMDA+Owo+ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1tYXgt
-bWljcm92b2x0ID0gPDE0MDAwMDA+Owo+ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1uYW1lID0g
-InZkZC1jcHVzIjsKPiArfTsKPiArCj4gKyZyZWdfZGNkYzEgewo+ICvCoMKgwqDCoMKgwqDCoHJl
-Z3VsYXRvci1hbHdheXMtb247Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW1pbi1taWNyb3Zv
-bHQgPSA8MzMwMDAwMD47Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW1heC1taWNyb3ZvbHQg
-PSA8MzMwMDAwMD47Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW5hbWUgPSAidmNjLTN2MyI7
-Cj4gK307Cj4gKwo+ICsmcmVnX2RjZGMyIHsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItYWx3
-YXlzLW9uOwo+ICvCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDkwMDAw
-MD47Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW1heC1taWNyb3ZvbHQgPSA8MTQwMDAwMD47
-Cj4gK8KgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW5hbWUgPSAidmRkLXN5cyI7Cj4gK307Cj4gKwo+
-ICsmcmVnX2RjZGMzIHsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItYWx3YXlzLW9uOwo+ICvC
-oMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDkwMDAwMD47Cj4gK8KgwqDC
-oMKgwqDCoMKgcmVndWxhdG9yLW1heC1taWNyb3ZvbHQgPSA8MTQwMDAwMD47Cj4gK8KgwqDCoMKg
-wqDCoMKgcmVndWxhdG9yLW5hbWUgPSAidmRkLWNwdSI7Cj4gK307Cj4gKwo+ICsmcmVnX2RjZGM1
-IHsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItYWx3YXlzLW9uOwo+ICvCoMKgwqDCoMKgwqDC
-oHJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDE1MDAwMDA+Owo+ICvCoMKgwqDCoMKgwqDCoHJl
-Z3VsYXRvci1tYXgtbWljcm92b2x0ID0gPDE1MDAwMDA+Owo+ICvCoMKgwqDCoMKgwqDCoHJlZ3Vs
-YXRvci1uYW1lID0gInZjYy1kcmFtIjsKPiArfTsKPiArCj4gKyZyZWdfcnRjX2xkbyB7Cj4gK8Kg
-wqDCoMKgwqDCoMKgcmVndWxhdG9yLW5hbWUgPSAidmNjLXJ0YyI7Cj4gK307Cj4gZGlmZiAtLWdp
-dCBhL2FyY2gvYXJtL2R0cy9zdW44aS1hMzMtdnN0YXIuZHRzIGIvYXJjaC9hcm0vZHRzL3N1bjhp
-LQo+IGEzMy12c3Rhci5kdHMKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4IDAwMDAwMDAw
-MDAwLi45ZjVjMjliM2RmNAo+IC0tLSAvZGV2L251bGwKPiArKysgYi9hcmNoL2FybS9kdHMvc3Vu
-OGktYTMzLXZzdGFyLmR0cwo+IEBAIC0wLDAgKzEsMjA1IEBACj4gKy8vIFNQRFgtTGljZW5zZS1J
-ZGVudGlmaWVyOiAoR1BMLTIuMCsgT1IgTUlUKQo+ICsvKgo+ICsgKiBDb3B5cmlnaHQgKEMpIDIw
-MjQgSWNlbm93eSBaaGVuZyA8dXd1QGljZW5vd3kubWU+Cj4gKyAqLwo+ICsKPiArL2R0cy12MS87
-Cj4gKyNpbmNsdWRlICJzdW44aS1hMzMtdnN0YXItY29yZTEuZHRzaSIKPiArCj4gKyNpbmNsdWRl
-IDxkdC1iaW5kaW5ncy9ncGlvL2dwaW8uaD4KPiArI2luY2x1ZGUgPGR0LWJpbmRpbmdzL2lucHV0
-L2lucHV0Lmg+Cj4gKwo+ICsvIHsKPiArwqDCoMKgwqDCoMKgwqBtb2RlbCA9ICJSZXJ2aXNpb24g
-QTMzLVZzdGFyIjsKPiArwqDCoMKgwqDCoMKgwqBjb21wYXRpYmxlID0gInJlcnZpc2lvbixhMzMt
-dnN0YXIiLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAicmVydmlz
-aW9uLGEzMy1jb3JlMSIsCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-ICJhbGx3aW5uZXIsc3VuOGktYTMzIjsKPiArCj4gK8KgwqDCoMKgwqDCoMKgYWxpYXNlcyB7Cj4g
-K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHNlcmlhbDAgPSAmdWFydDA7Cj4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGV0aGVybmV0MCA9ICZyODE1MjsKPiArwqDCoMKgwqDC
-oMKgwqB9Owo+ICsKPiArwqDCoMKgwqDCoMKgwqBjaG9zZW4gewo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBzdGRvdXQtcGF0aCA9ICJzZXJpYWwwOjExNTIwMG44IjsKPiArwqDCoMKg
-wqDCoMKgwqB9Owo+ICsKPiArwqDCoMKgwqDCoMKgwqByZWdfdXNiMV92YnVzOiByZWd1bGF0b3It
-dXNiMS12YnVzIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY29tcGF0aWJsZSA9
-ICJyZWd1bGF0b3ItZml4ZWQiOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqByZWd1
-bGF0b3ItbmFtZSA9ICJ1c2IxLXZidXMiOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqByZWd1bGF0b3ItbWluLW1pY3Jvdm9sdCA9IDw1MDAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgcmVndWxhdG9yLW1heC1taWNyb3ZvbHQgPSA8NTAwMDAwMD47Cj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlZ3VsYXRvci1ib290LW9uOwo+ICvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBlbmFibGUtYWN0aXZlLWhpZ2g7Cj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoGdwaW8gPSA8JnBpbyAxIDIgR1BJT19BQ1RJVkVfSElHSD47IC8q
-IFBCMiAqLwo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoHdpZmlfcHdy
-c2VxOiBwd3JzZXEgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjb21wYXRpYmxl
-ID0gIm1tYy1wd3JzZXEtc2ltcGxlIjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-cmVzZXQtZ3Bpb3MgPSA8JnJfcGlvIDAgNiBHUElPX0FDVElWRV9MT1c+OyAvKiBQTDYgKi8KPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2xvY2tzID0gPCZydGMgQ0xLX09TQzMyS19G
-QU5PVVQ+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjbG9jay1uYW1lcyA9ICJl
-eHRfY2xvY2siOwo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gK307Cj4gKwo+ICsmYWNfcG93ZXJfc3Vw
-cGx5IHsKPiArwqDCoMKgwqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4gK307Cj4gKwo+ICsmY29k
-ZWMgewo+ICvCoMKgwqDCoMKgwqDCoHN0YXR1cyA9ICJva2F5IjsKPiArfTsKPiArCj4gKyZkYWkg
-ewo+ICvCoMKgwqDCoMKgwqDCoHN0YXR1cyA9ICJva2F5IjsKPiArfTsKPiArCj4gKyZlaGNpMCB7
-Cj4gK8KgwqDCoMKgwqDCoMKgI2FkZHJlc3MtY2VsbHMgPSA8MT47Cj4gK8KgwqDCoMKgwqDCoMKg
-I3NpemUtY2VsbHMgPSA8MD47Cj4gK8KgwqDCoMKgwqDCoMKgc3RhdHVzID0gIm9rYXkiOwo+ICsK
-PiArwqDCoMKgwqDCoMKgwqBodWJAMSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oC8qIE9uYm9hcmQgR0w4NTBHIGh1YiB3aGljaCBuZWVkcyBubyBleHRyYSBwb3dlcgo+IHNlcXVl
-bmNlICovCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGNvbXBhdGlibGUgPSAidXNi
-NWUzLDYwOCI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlZyA9IDwxPjsKPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgI2FkZHJlc3MtY2VsbHMgPSA8MT47Cj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCNzaXplLWNlbGxzID0gPDA+Owo+ICsKPiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcjgxNTI6IGV0aGVybmV0QDQgewo+ICvCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgLyoKPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqIE9uYm9hcmQgUmVhbHRlayBSVEw4
-MTUyIFVTQiBFdGhlcm5ldCwKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCAqIHdpdGggbm8gTUFDIGFkZHJlc3MgcHJvZ3JhbW1lZAo+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICovCj4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjb21wYXRpYmxlID0gInVzYmJkYSw4MTUy
-IjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJlZyA9
-IDw0PjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgfTsKPiArwqDCoMKgwqDCoMKg
-wqB9Owo+ICt9Owo+ICsKPiArJmxyYWRjIHsKPiArwqDCoMKgwqDCoMKgwqB2cmVmLXN1cHBseSA9
-IDwmcmVnX2FsZG8zPjsKPiArwqDCoMKgwqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4gKwo+ICvC
-oMKgwqDCoMKgwqDCoGJ1dHRvbi0xOTEgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBsYWJlbCA9ICJWKyI7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGxpbnV4LGNv
-ZGUgPSA8S0VZX1ZPTFVNRVVQPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2hh
-bm5lbCA9IDwwPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgdm9sdGFnZSA9IDwx
-OTEwMTE+Owo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gKwo+ICvCoMKgwqDCoMKgwqDCoGJ1dHRvbi0z
-OTEgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBsYWJlbCA9ICJWLSI7Cj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGxpbnV4LGNvZGUgPSA8S0VZX1ZPTFVNRURPV04+
-Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjaGFubmVsID0gPDA+Owo+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB2b2x0YWdlID0gPDM5MTMwND47Cj4gK8KgwqDCoMKg
-wqDCoMKgfTsKPiArCj4gK8KgwqDCoMKgwqDCoMKgYnV0dG9uLTYwMCB7Cj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoGxhYmVsID0gIkJBQ0siOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqBsaW51eCxjb2RlID0gPEtFWV9CQUNLPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgY2hhbm5lbCA9IDwwPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgdm9sdGFnZSA9IDw2MDAwMDA+Owo+ICvCoMKgwqDCoMKgwqDCoH07Cj4gK307Cj4gKwo+ICsm
-bW1jMCB7Cj4gK8KgwqDCoMKgwqDCoMKgdm1tYy1zdXBwbHkgPSA8JnJlZ19kY2RjMT47Cj4gK8Kg
-wqDCoMKgwqDCoMKgYnVzLXdpZHRoID0gPDQ+Owo+ICvCoMKgwqDCoMKgwqDCoGNkLWdwaW9zID0g
-PCZwaW8gMSA0IEdQSU9fQUNUSVZFX0xPVz47IC8qIFBCNCAqLwo+ICvCoMKgwqDCoMKgwqDCoHN0
-YXR1cyA9ICJva2F5IjsKPiArfTsKPiArCj4gKyZtbWMxIHsKPiArwqDCoMKgwqDCoMKgwqBwaW5j
-dHJsLW5hbWVzID0gImRlZmF1bHQiOwo+ICvCoMKgwqDCoMKgwqDCoHBpbmN0cmwtMCA9IDwmbW1j
-MV9wZ19waW5zPjsKPiArwqDCoMKgwqDCoMKgwqB2bW1jLXN1cHBseSA9IDwmcmVnX2RsZG8xPjsK
-PiArwqDCoMKgwqDCoMKgwqBtbWMtcHdyc2VxID0gPCZ3aWZpX3B3cnNlcT47Cj4gK8KgwqDCoMKg
-wqDCoMKgYnVzLXdpZHRoID0gPDQ+Owo+ICvCoMKgwqDCoMKgwqDCoG5vbi1yZW1vdmFibGU7Cj4g
-K8KgwqDCoMKgwqDCoMKgc3RhdHVzID0gIm9rYXkiOwo+ICsKPiArwqDCoMKgwqDCoMKgwqBicmNt
-Zjogd2lmaUAxIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgcmVnID0gPDE+Owo+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjb21wYXRpYmxlID0gImJyY20sYmNtNDMy
-OS1mbWFjIjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaW50ZXJydXB0LXBhcmVu
-dCA9IDwmcl9waW8+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpbnRlcnJ1cHRz
-ID0gPDAgNyBJUlFfVFlQRV9MRVZFTF9MT1c+OyAvKiBQTDcgKi8KPiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgaW50ZXJydXB0LW5hbWVzID0gImhvc3Qtd2FrZSI7Cj4gK8KgwqDCoMKg
-wqDCoMKgfTsKPiArfTsKPiArCj4gKy8qCj4gKyAqIE91ciBXaUZpIGNoaXAgbmVlZHMgYm90aCBE
-TERPMSBhbmQgRExETzIgdG8gYmUgcG93ZXJlZCBhdCB0aGUKPiBzYW1lCj4gKyAqIHRpbWUsIHdp
-dGggdGhlIHR3byBiZWluZyBpbiBzeW5jLiBTaW5jZSB0aGlzIGlzIG5vdCByZWFsbHkKPiArICog
-c3VwcG9ydGVkIHJpZ2h0IG5vdywganVzdCB1c2UgdGhlIHR3byBhcyBhbHdheXMgb24sIGFuZCB3
-ZSB3aWxsCj4gZml4Cj4gKyAqIGl0IGxhdGVyLgo+ICsgKi8KPiArJnJlZ19kbGRvMSB7Cj4gK8Kg
-wqDCoMKgwqDCoMKgcmVndWxhdG9yLWFsd2F5cy1vbjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0
-b3ItbWluLW1pY3Jvdm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3It
-bWF4LW1pY3Jvdm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItbmFt
-ZSA9ICJ2Y2Mtd2lmaTAiOwo+ICt9Owo+ICsKPiArJnJlZ19kbGRvMiB7Cj4gK8KgwqDCoMKgwqDC
-oMKgcmVndWxhdG9yLWFsd2F5cy1vbjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItbWluLW1p
-Y3Jvdm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItbWF4LW1pY3Jv
-dm9sdCA9IDwzMzAwMDAwPjsKPiArwqDCoMKgwqDCoMKgwqByZWd1bGF0b3ItbmFtZSA9ICJ2Y2Mt
-d2lmaTEiOwo+ICt9Owo+ICsKPiArJnJlZ19kcml2ZXZidXMgewo+ICvCoMKgwqDCoMKgwqDCoHJl
-Z3VsYXRvci1uYW1lID0gInVzYjAtdmJ1cyI7Cj4gK8KgwqDCoMKgwqDCoMKgc3RhdHVzID0gIm9r
-YXkiOwo+ICt9Owo+ICsKPiArJnNvdW5kIHsKPiArwqDCoMKgwqDCoMKgwqAvKiBUT0RPOiBvbi1i
-b2FyZCBtaWNyb3Bob25lICovCj4gKwo+ICvCoMKgwqDCoMKgwqDCoHNpbXBsZS1hdWRpby1jYXJk
-LHdpZGdldHMgPSAiSGVhZHBob25lIiwgIkhlYWRwaG9uZSBKYWNrIjsKPiArwqDCoMKgwqDCoMKg
-wqBzaW1wbGUtYXVkaW8tY2FyZCxyb3V0aW5nID0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIkxlZnQgREFDIiwgIkRBQ0wiLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAiUmlnaHQgREFDIiwgIkRBQ1IiLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAi
-SGVhZHBob25lIEphY2siLCAiSFAiOwo+ICvCoMKgwqDCoMKgwqDCoHN0YXR1cyA9ICJva2F5IjsK
-PiArfTsKPiArCj4gKyZ1YXJ0MCB7Cj4gK8KgwqDCoMKgwqDCoMKgcGluY3RybC1uYW1lcyA9ICJk
-ZWZhdWx0IjsKPiArwqDCoMKgwqDCoMKgwqBwaW5jdHJsLTAgPSA8JnVhcnQwX3BiX3BpbnM+Owo+
-ICvCoMKgwqDCoMKgwqDCoHN0YXR1cyA9ICJva2F5IjsKPiArfTsKPiArCj4gKyZ1YXJ0MSB7Cj4g
-K8KgwqDCoMKgwqDCoMKgcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IjsKPiArwqDCoMKgwqDCoMKg
-wqBwaW5jdHJsLTAgPSA8JnVhcnQxX3BnX3BpbnM+LCA8JnVhcnQxX2N0c19ydHNfcGdfcGlucz47
-Cj4gK8KgwqDCoMKgwqDCoMKgdWFydC1oYXMtcnRzY3RzOwo+ICvCoMKgwqDCoMKgwqDCoHN0YXR1
-cyA9ICJva2F5IjsKPiArCj4gK8KgwqDCoMKgwqDCoMKgYmx1ZXRvb3RoIHsKPiArwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgY29tcGF0aWJsZSA9ICJicmNtLGJjbTQzNDM4LWJ0IjsKPiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgY2xvY2tzID0gPCZydGMgQ0xLX09TQzMyS19G
-QU5PVVQ+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBjbG9jay1uYW1lcyA9ICJs
-cG8iOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB2YmF0LXN1cHBseSA9IDwmcmVn
-X2RsZG8xPjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgZGV2aWNlLXdha2V1cC1n
-cGlvcyA9IDwmcl9waW8gMCAxMCBHUElPX0FDVElWRV9ISUdIPjsKPiAvKiBQTDEwICovCj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoGhvc3Qtd2FrZXVwLWdwaW9zID0gPCZyX3BpbyAw
-IDkgR1BJT19BQ1RJVkVfSElHSD47IC8qCj4gUEw5ICovCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoHNodXRkb3duLWdwaW9zID0gPCZyX3BpbyAwIDggR1BJT19BQ1RJVkVfSElHSD47
-IC8qCj4gUEw4ICovCj4gK8KgwqDCoMKgwqDCoMKgfTsKPiArfTsKPiArCj4gKyZ1c2Jfb3RnIHsK
-PiArwqDCoMKgwqDCoMKgwqBkcl9tb2RlID0gIm90ZyI7Cj4gK8KgwqDCoMKgwqDCoMKgc3RhdHVz
-ID0gIm9rYXkiOwo+ICt9Owo+ICsKPiArJnVzYl9wb3dlcl9zdXBwbHkgewo+ICvCoMKgwqDCoMKg
-wqDCoHN0YXR1cyA9ICJva2F5IjsKPiArfTsKPiArCj4gKyZ1c2JwaHkgewo+ICvCoMKgwqDCoMKg
-wqDCoHVzYjBfaWRfZGV0LWdwaW9zID0gPCZwaW8gNyA4IEdQSU9fQUNUSVZFX0hJR0g+OyAvKiBQ
-SDggKi8KPiArwqDCoMKgwqDCoMKgwqB1c2IwX3ZidXNfcG93ZXItc3VwcGx5ID0gPCZ1c2JfcG93
-ZXJfc3VwcGx5PjsKPiArwqDCoMKgwqDCoMKgwqB1c2IwX3ZidXMtc3VwcGx5ID0gPCZyZWdfZHJp
-dmV2YnVzPjsKPiArwqDCoMKgwqDCoMKgwqB1c2IxX3ZidXMtc3VwcGx5ID0gPCZyZWdfdXNiMV92
-YnVzPjsKPiArwqDCoMKgwqDCoMKgwqBzdGF0dXMgPSAib2theSI7Cj4gK307Cj4gZGlmZiAtLWdp
-dCBhL2JvYXJkL3N1bnhpL01BSU5UQUlORVJTIGIvYm9hcmQvc3VueGkvTUFJTlRBSU5FUlMKPiBp
-bmRleCA4NDc5OTg3OWU4NS4uNTU5MmQzNjY2MDAgMTAwNjQ0Cj4gLS0tIGEvYm9hcmQvc3VueGkv
-TUFJTlRBSU5FUlMKPiArKysgYi9ib2FyZC9zdW54aS9NQUlOVEFJTkVSUwo+IEBAIC01MjYsNiAr
-NTI2LDExIEBAIE06wqBRdWVudGluIFNjaHVsego+IDxxdWVudGluLnNjaHVsekBmcmVlLWVsZWN0
-cm9ucy5jb20+Cj4gwqBTOsKgwqDCoMKgwqBNYWludGFpbmVkCj4gwqBGOsKgwqDCoMKgwqBjb25m
-aWdzL3BhcnJvdF9yMTZfZGVmY29uZmlnCj4gwqAKPiArUkVSVklTSU9OIEEzMy1WU1RBUiBCT0FS
-RAo+ICtNOsKgwqDCoMKgwqBJY2Vub3d5IFpoZW5nIDx1d3VAaWNlbm93eS5tZT4KPiArUzrCoMKg
-wqDCoMKgTWFpbnRhaW5lZAo+ICtGOsKgwqDCoMKgwqBjb25maWdzL0EzMy1Wc3Rhcl9kZWZjb25m
-aWcKPiArCj4gwqBTSU5MSU5YIFNJTkEzMXMgQk9BUkQKPiDCoE06wqDCoMKgwqDCoENoZW4tWXUg
-VHNhaSA8d2Vuc0Bjc2llLm9yZz4KPiDCoFM6wqDCoMKgwqDCoE1haW50YWluZWQKPiBkaWZmIC0t
-Z2l0IGEvY29uZmlncy9BMzMtVnN0YXJfZGVmY29uZmlnIGIvY29uZmlncy9BMzMtCj4gVnN0YXJf
-ZGVmY29uZmlnCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCAwMDAwMDAwMDAwMC4uMDA1
-M2MyNDM0NDQKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIvY29uZmlncy9BMzMtVnN0YXJfZGVmY29u
-ZmlnCj4gQEAgLTAsMCArMSwyMyBAQAo+ICtDT05GSUdfQVJNPXkKPiArQ09ORklHX0FSQ0hfU1VO
-WEk9eQo+ICtDT05GSUdfREVGQVVMVF9ERVZJQ0VfVFJFRT0ic3VuOGktYTMzLXZzdGFyIgo+ICtD
-T05GSUdfU1BMPXkKPiArQ09ORklHX01BQ0hfU1VOOElfQTMzPXkKPiArQ09ORklHX0RSQU1fQ0xL
-PTU1Mgo+ICtDT05GSUdfRFJBTV9aUT0xNTI5MQo+ICtDT05GSUdfRFJBTV9PRFRfRU49eQo+ICtD
-T05GSUdfTU1DX1NVTlhJX1NMT1RfRVhUUkE9Mgo+ICtDT05GSUdfVVNCMF9JRF9ERVQ9IlBIOCIK
-PiArQ09ORklHX1VTQjFfVkJVU19QSU49IlBCMiIKPiArIyBDT05GSUdfVklERU9fU1VOWEkgaXMg
-bm90IHNldAo+ICsjIENPTkZJR19TWVNfTUFMTE9DX0NMRUFSX09OX0lOSVQgaXMgbm90IHNldAo+
-ICtDT05GSUdfQ01EX0RGVT15Cj4gK0NPTkZJR19ERlVfUkFNPXkKPiArQ09ORklHX0ZBU1RCT09U
-X0NNRF9PRU1fRk9STUFUPXkKPiArQ09ORklHX0FYUF9EQ0RDMV9WT0xUPTMzMDAKPiArQ09ORklH
-X1VTQl9FSENJX0hDRD15Cj4gK0NPTkZJR19VU0JfTVVTQl9HQURHRVQ9eQo+ICtDT05GSUdfVVNC
-X0hPU1RfRVRIRVI9eQo+ICtDT05GSUdfVVNCX0VUSEVSX1JUTDgxNTI9eQo+ICtDT05GSUdfVVNC
-X0ZVTkNUSU9OX01BU1NfU1RPUkFHRT15Cj4gKyMgQ09ORklHX1VTQl9FVEhFUiBpcyBub3Qgc2V0
-Cgo=
+The correct spelling is R-Car, including the dash, update the usage.
+Comment change only, no functional change.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: No change
+---
+ arch/arm/dts/r8a7790-u-boot.dtsi  | 2 +-
+ arch/arm/dts/r8a7791-u-boot.dtsi  | 2 +-
+ arch/arm/dts/r8a7792-u-boot.dtsi  | 2 +-
+ arch/arm/dts/r8a7793-u-boot.dtsi  | 2 +-
+ arch/arm/dts/r8a7794-u-boot.dtsi  | 2 +-
+ arch/arm/dts/r8a77951-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77960-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77965-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77970-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77980-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77990-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a77995-u-boot.dtsi | 2 +-
+ arch/arm/dts/r8a779x-u-boot.dtsi  | 2 +-
+ 13 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/dts/r8a7790-u-boot.dtsi b/arch/arm/dts/r8a7790-u-boot.dtsi
+index 45e2fa6f9f0..2a7d76bd7b1 100644
+--- a/arch/arm/dts/r8a7790-u-boot.dtsi
++++ b/arch/arm/dts/r8a7790-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7790 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7790 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a7791-u-boot.dtsi b/arch/arm/dts/r8a7791-u-boot.dtsi
+index 7143ffc1658..bb0e2fd106c 100644
+--- a/arch/arm/dts/r8a7791-u-boot.dtsi
++++ b/arch/arm/dts/r8a7791-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7791 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7791 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a7792-u-boot.dtsi b/arch/arm/dts/r8a7792-u-boot.dtsi
+index 214cfde1f89..ebbdcb7efd5 100644
+--- a/arch/arm/dts/r8a7792-u-boot.dtsi
++++ b/arch/arm/dts/r8a7792-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7792 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7792 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a7793-u-boot.dtsi b/arch/arm/dts/r8a7793-u-boot.dtsi
+index fb947462c54..08f2248e1f3 100644
+--- a/arch/arm/dts/r8a7793-u-boot.dtsi
++++ b/arch/arm/dts/r8a7793-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7793 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7793 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a7794-u-boot.dtsi b/arch/arm/dts/r8a7794-u-boot.dtsi
+index 53b54c88917..303afaeb4ce 100644
+--- a/arch/arm/dts/r8a7794-u-boot.dtsi
++++ b/arch/arm/dts/r8a7794-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7794 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7794 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77951-u-boot.dtsi b/arch/arm/dts/r8a77951-u-boot.dtsi
+index 4cbec591479..c16c5116592 100644
+--- a/arch/arm/dts/r8a77951-u-boot.dtsi
++++ b/arch/arm/dts/r8a77951-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7795 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7795 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77960-u-boot.dtsi b/arch/arm/dts/r8a77960-u-boot.dtsi
+index 15a91474324..2245be2aa76 100644
+--- a/arch/arm/dts/r8a77960-u-boot.dtsi
++++ b/arch/arm/dts/r8a77960-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A7796 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A7796 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77965-u-boot.dtsi b/arch/arm/dts/r8a77965-u-boot.dtsi
+index 54107d1ae35..f39acc237d3 100644
+--- a/arch/arm/dts/r8a77965-u-boot.dtsi
++++ b/arch/arm/dts/r8a77965-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A77965 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A77965 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77970-u-boot.dtsi b/arch/arm/dts/r8a77970-u-boot.dtsi
+index d252c2e8e6c..7900c641ba1 100644
+--- a/arch/arm/dts/r8a77970-u-boot.dtsi
++++ b/arch/arm/dts/r8a77970-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A77970 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A77970 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77980-u-boot.dtsi b/arch/arm/dts/r8a77980-u-boot.dtsi
+index 9f7bf499bc0..aa7e058c585 100644
+--- a/arch/arm/dts/r8a77980-u-boot.dtsi
++++ b/arch/arm/dts/r8a77980-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A77980 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A77980 SoC
+  *
+  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77990-u-boot.dtsi b/arch/arm/dts/r8a77990-u-boot.dtsi
+index 50bbbe18647..b701f68db81 100644
+--- a/arch/arm/dts/r8a77990-u-boot.dtsi
++++ b/arch/arm/dts/r8a77990-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A77990 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A77990 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a77995-u-boot.dtsi b/arch/arm/dts/r8a77995-u-boot.dtsi
+index 347b59ac42c..f4bafb6d088 100644
+--- a/arch/arm/dts/r8a77995-u-boot.dtsi
++++ b/arch/arm/dts/r8a77995-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar R8A77995 SoC
++ * Device Tree Source extras for U-Boot on R-Car R8A77995 SoC
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+diff --git a/arch/arm/dts/r8a779x-u-boot.dtsi b/arch/arm/dts/r8a779x-u-boot.dtsi
+index 001ac59adb9..d1441f1f9df 100644
+--- a/arch/arm/dts/r8a779x-u-boot.dtsi
++++ b/arch/arm/dts/r8a779x-u-boot.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Device Tree Source extras for U-Boot on RCar Gen3
++ * Device Tree Source extras for U-Boot on R-Car Gen3
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
+-- 
+2.45.2
 
