@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EFFE7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5BBDE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 13:57:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A5EE8033D;
-	Wed, 11 Dec 2024 14:54:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E84B180326;
+	Wed, 11 Dec 2024 14:54:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MUWFlLz/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ad7aGgF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9466280330; Wed, 11 Dec 2024 14:54:55 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 220568035C; Wed, 11 Dec 2024 14:54:58 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F38DF8036D
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6E2680323
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-841d8dec299so463797039f.3
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:52 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-8418ecda128so360969739f.2
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:54:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733925291; x=1734530091; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733925294; x=1734530094; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u7bzpU5tkhyN2il0E8+BzXc4Vn//fGmhiOPnRRpNr9E=;
- b=MUWFlLz/9uhpJXAl5+b6c/5r1sqyFCa1HLaEsBIJrey3DtqyLb5TlvH1L1NOfDLFdD
- LF+aao4nuoZBy/Loi69XQ95jF6GOfcbTQHa+d8KmvOZo/zGaFRETZ1ZqD4CCNnJ8w/+V
- TYxeSyJi8iAHo5OMHjiHPq3DWfwCWHeNaOxqk=
+ bh=UeUZa1wdYChk8BcUUGkuSUaf+RzegSAECf/9QOeEcVI=;
+ b=Ad7aGgF/yqml6zXNE8v+UStclQ50G/hBWFjQmJ/4Uz07xkhrrClIYU25yGZ1HZizXa
+ 810fVpLgNcjuxEZ35zP4b8xx4+yngk6cGzQqShxSuOz5/aolUVXcbcQb5VoijCHayfRt
+ Hy4Fxna3UX12bgP0o4B7EJRQ0apVnddVYw4OQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733925291; x=1734530091;
+ d=1e100.net; s=20230601; t=1733925294; x=1734530094;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u7bzpU5tkhyN2il0E8+BzXc4Vn//fGmhiOPnRRpNr9E=;
- b=UlyLEisM1pdflCFsWwgSVoqI0HWKzDf5MVBa6PnaE2C+yvURg63svDGJxmexPdhAQd
- NPoO4HIRTyECMeaDwLzpf3hWOkQZBPOFNW/3ZdX/DK5TpW5heRbCehsycZxCYntAuu99
- hTNmN1iuATxo76bTviWqz2IwpAqHIaKk6ZhePOnx1RziBxKqynQ785ASdwwYF5pNpfLP
- cQQLsQvLd5/AI0VcL4G2ej42fxlF0t+o4gs5oETU+y/h18IIElEdA7AQYiPamdHPo3IF
- hjoQHVqdpYwK4HT9ZZdzWmaSP7gWEIeJobJVgJDA2cE81cHICQxKiLwpXZ9PYalQgkNR
- c/wA==
-X-Gm-Message-State: AOJu0Yx1xuwNey6lcAk1ZgdH49prHPMulivG6Kg8WbyEYj3Dwlde0B5f
- /E97e4Va3+bqAQpBXQhcCgumUjeOs6+IcgvJTQ9g2JlQzWF1xoG7VV5iKc0Mvzi3CR1awpRBlBM
+ bh=UeUZa1wdYChk8BcUUGkuSUaf+RzegSAECf/9QOeEcVI=;
+ b=l1EmFcmhcalA6KvEAOw5V9WWeKPlLUGoGxCSvQgRlskT5j3NimFZ+6yhYkEj6LNSfq
+ XEfomnyhQBHDG4pWCZzbgzLA8e4AluhP6Af+Ppa7TahO7Rj6v/FxoDG6S8TkJDyy6lUr
+ GMTPaObFTEfL4Wz1CaPok+zcZ1FuR3/YuE9oJs3UdOUy1Dg4Pd+M1coRhDkjRkRPKlWR
+ pm/ICFB5CBSHjy+oUt8IQ4pwoKBWQi/OLqH7KZKwrI3q1oUbntmCpRLmPy/l/aKAM8Ez
+ Bvwfp131x94e1lyxwrCjo0y9W//+hitncCdilpyefilJfqhb7Q1Ts8Af8FhICLcUdRVe
+ DFFw==
+X-Gm-Message-State: AOJu0Yw+OnxF2w2oX0HCi2LwImyveX17qs3gZgZlDVumSZjUZqxJwGRh
+ VGIAyO0mBuFnbOHJ41LYfEDq+GBjiHJoxv3XrklQ3cLf0wbQDRGKs2CVyPEWpnRPIEla54zEZAg
  =
-X-Gm-Gg: ASbGnct/JQyp6CGUz/PyLVw8W/3wGvLvxZzk/p/8I9r7+Mh74Vsy3I5B54peNpZZCW9
- 1/E9U739FvdLcmHaxa1lWY4QxYKv0TKLcnUE2KCkTPZBDdCpZB99mAOxqmBIGA7zwPt2uCNsAMH
- PPpT62Ebtf3IfTSDZCVhgxRzpBLHIkjsrd4V7Mbnx0ik++ezcPY63SlNnvFdxsdjzxKnDEKvHCh
- 58Yw9NAzRwLoSQwZT7y1xWmS+ZXCAEmJueKFxva03gacrJGSciw4aqxUF2sBboHQ8ktsbojuFAL
- wof0hHAF511yTBk=
-X-Google-Smtp-Source: AGHT+IEjxy+h1v0mnUDZw9UP0Aiv3jzVU/9zTCBUQ+59zSAjf7nFj5YQo3FKbSQ5QoNS3KDR0EUKTQ==
-X-Received: by 2002:a05:6602:1485:b0:82c:e4e1:2e99 with SMTP id
- ca18e2360f4ac-844cb684329mr334240439f.11.1733925291198; 
- Wed, 11 Dec 2024 05:54:51 -0800 (PST)
+X-Gm-Gg: ASbGncv93ZXxelkPmGLMOEhMb2z0Rgm8gQ0RakQoO1glFbNnRgg94jYvIjcc1xLnsMR
+ o4DwApfX5cNST9r+cRVyy8bO2d4jJZAKShJDeme1UB4q18L0ylY8vGwaOGLR3bcx7/65EWY7YnI
+ 6m6hExuDyc3kWqZ8WEgqJw9EkMsG+/RiEQfdKw4yc3hgfg+EDFPkRWKiBcRx6zaulz5gamt8RhF
+ ujQYIX2Fan7Ts3E+r6j2MLVdItXpWd16ICq1nHZxckSpGB9tCR8fhNM28j3lr/1CsB8ZVz/AvHW
+ W2kVB3vrjq+YQOM=
+X-Google-Smtp-Source: AGHT+IFY9qby2fInsKXhNheDXABTNW23luwQqlKHUl2Vj2xVycdrJiCAFjqMCW3+vjYWrRkxlqZy0g==
+X-Received: by 2002:a05:6602:2ccf:b0:835:4402:e2eb with SMTP id
+ ca18e2360f4ac-844cb5fac44mr382422139f.7.1733925292802; 
+ Wed, 11 Dec 2024 05:54:52 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.49
+ 8926c6da1cb9f-4e2d46f66f0sm695441173.30.2024.12.11.05.54.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:54:50 -0800 (PST)
+ Wed, 11 Dec 2024 05:54:52 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 15/23] efi_loader: Rename physical_start to base
-Date: Wed, 11 Dec 2024 06:54:09 -0700
-Message-Id: <20241211135418.563803-16-sjg@chromium.org>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Matthias Brugger <mbrugger@suse.com>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v5 16/23] efi_loader: Use correct type in
+ efi_add_runtime_mmio()
+Date: Wed, 11 Dec 2024 06:54:10 -0700
+Message-Id: <20241211135418.563803-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241211135418.563803-1-sjg@chromium.org>
 References: <20241211135418.563803-1-sjg@chromium.org>
@@ -95,144 +103,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The word 'physical' suggests that there is an associated virtual address
-but there is not. Use 'base' since this is the base address of a region.
-
-Change some uint64_t and remove some brackets to keep checkpatch happy.
+This function is passed the address of a void * so update the argument
+to match. It is better to have casts in the caller than introduce
+confusion as to what is passed in.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- lib/efi_loader/efi_memory.c | 38 ++++++++++++++++++-------------------
- 1 file changed, 19 insertions(+), 19 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 2 +-
+ arch/arm/mach-bcm283x/reset.c           | 2 +-
+ include/efi_loader.h                    | 2 +-
+ lib/efi_loader/efi_runtime.c            | 4 ++--
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 42319ceb16f..0f149f99c7d 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -36,7 +36,7 @@ efi_uintn_t efi_memory_map_key;
-  *
-  * @link: Link to prev/next node in list
-  * @type: EFI memory-type
-- * @physical_start: Start address of region in physical memory. Note that this
-+ * @base: Start address of region in physical memory. Note that this
-  *	is really a pointer stored as an address, so use map_to_sysmem() to
-  *	convert it to an address if needed
-  * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
-@@ -46,7 +46,7 @@ efi_uintn_t efi_memory_map_key;
- struct mem_node {
- 	struct list_head link;
- 	enum efi_memory_type type;
--	efi_physical_addr_t physical_start;
-+	efi_physical_addr_t base;
- 	u64 num_pages;
- 	u64 attribute;
- };
-@@ -121,9 +121,9 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
- 	struct mem_node *mema = list_entry(a, struct mem_node, link);
- 	struct mem_node *memb = list_entry(b, struct mem_node, link);
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index d2d3e346a36..f9c379e9b06 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -1272,7 +1272,7 @@ void __efi_runtime EFIAPI efi_reset_system(
  
--	if (mema->physical_start == memb->physical_start)
-+	if (mema->base == memb->base)
- 		return 0;
--	else if (mema->physical_start < memb->physical_start)
-+	else if (mema->base < memb->base)
- 		return 1;
- 	else
- 		return -1;
-@@ -137,7 +137,7 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
-  */
- static uint64_t desc_get_end(struct mem_node *node)
+ efi_status_t efi_reset_system_init(void)
  {
--	return node->physical_start + (node->num_pages << EFI_PAGE_SHIFT);
-+	return node->base + (node->num_pages << EFI_PAGE_SHIFT);
+-	return efi_add_runtime_mmio(&rstcr, sizeof(*rstcr));
++	return efi_add_runtime_mmio((void **)&rstcr, sizeof(*rstcr));
  }
  
- /**
-@@ -169,13 +169,13 @@ static void efi_mem_sort(void)
- 			cur = lmem;
- 			prev = prevmem;
- 
--			if ((desc_get_end(cur) == prev->physical_start) &&
--			    (prev->type == cur->type) &&
--			    (prev->attribute == cur->attribute)) {
-+			if (desc_get_end(cur) == prev->base &&
-+			    prev->type == cur->type &&
-+			    prev->attribute == cur->attribute) {
- 				/* There is an existing map before, reuse it */
- 				pages = cur->num_pages;
- 				prev->num_pages += pages;
--				prev->physical_start -= pages << EFI_PAGE_SHIFT;
-+				prev->base -= pages << EFI_PAGE_SHIFT;
- 				list_del(&lmem->link);
- 				free(lmem);
- 
-@@ -216,10 +216,10 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
+ #endif
+diff --git a/arch/arm/mach-bcm283x/reset.c b/arch/arm/mach-bcm283x/reset.c
+index 1dc7ce50d1d..fd10f01d4f7 100644
+--- a/arch/arm/mach-bcm283x/reset.c
++++ b/arch/arm/mach-bcm283x/reset.c
+@@ -85,7 +85,7 @@ void __efi_runtime EFIAPI efi_reset_system(
+ efi_status_t efi_reset_system_init(void)
  {
- 	struct mem_node *newmap;
- 	struct mem_node *map_desc = map;
--	uint64_t map_start = map_desc->physical_start;
--	uint64_t map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
--	uint64_t carve_start = carve_desc->physical_start;
--	uint64_t carve_end = carve_start +
-+	u64 map_start = map_desc->base;
-+	u64 map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
-+	u64 carve_start = carve_desc->base;
-+	u64 carve_end = carve_start +
- 			     (carve_desc->num_pages << EFI_PAGE_SHIFT);
+ 	wdog_regs = (struct bcm2835_wdog_regs *)BCM2835_WDOG_PHYSADDR;
+-	return efi_add_runtime_mmio(&wdog_regs, sizeof(*wdog_regs));
++	return efi_add_runtime_mmio((void **)&wdog_regs, sizeof(*wdog_regs));
+ }
  
- 	/* check whether we're overlapping */
-@@ -241,7 +241,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
- 			list_del(&map->link);
- 			free(map);
- 		} else {
--			map->physical_start = carve_end;
-+			map->base = carve_end;
- 			map->num_pages = (map_end - carve_end)
- 					      >> EFI_PAGE_SHIFT;
- 		}
-@@ -261,7 +261,7 @@ static s64 efi_mem_carve_out(struct mem_node *map, struct mem_node *carve_desc,
- 	if (!newmap)
- 		return EFI_CARVE_OUT_OF_RESOURCES;
- 	newmap->type = map->type;
--	newmap->physical_start = carve_start;
-+	newmap->base = carve_start;
- 	newmap->num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
- 	newmap->attribute = map->attribute;
- 	/* Insert before current entry (descending address order) */
-@@ -298,7 +298,7 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
- 	if (!newlist)
+ #endif
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 3f75f2efcb6..3bfc56ebb5b 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -73,7 +73,7 @@ struct jmp_buf_data;
+  * Call this with mmio_ptr as the _pointer_ to a pointer to an MMIO region
+  * to make it available at runtime
+  */
+-efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len);
++efi_status_t efi_add_runtime_mmio(void **mmio_ptr, u64 len);
+ 
+ /*
+  * Special case handler for error/abort that just tries to dtrt to get
+diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+index 05369c47b01..9d3b940afbd 100644
+--- a/lib/efi_loader/efi_runtime.c
++++ b/lib/efi_loader/efi_runtime.c
+@@ -927,7 +927,7 @@ out:
+  * @len:		size of the memory-mapped IO region
+  * Returns:		status code
+  */
+-efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
++efi_status_t efi_add_runtime_mmio(void **mmio_ptr, u64 len)
+ {
+ 	struct efi_runtime_mmio_list *newmmio;
+ 	uint64_t addr = *(uintptr_t *)mmio_ptr;
+@@ -941,7 +941,7 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
+ 	if (!newmmio)
  		return EFI_OUT_OF_RESOURCES;
- 	newlist->type = memory_type;
--	newlist->physical_start = start;
-+	newlist->base = start;
- 	newlist->num_pages = pages;
+ 	newmmio->ptr = mmio_ptr;
+-	newmmio->paddr = *(uintptr_t *)mmio_ptr;
++	newmmio->paddr = (uintptr_t)*(void **)mmio_ptr;
+ 	newmmio->len = len;
+ 	list_add_tail(&newmmio->link, &efi_runtime_mmio);
  
- 	switch (memory_type) {
-@@ -415,7 +415,7 @@ static efi_status_t efi_check_allocated(u64 addr, bool must_be_allocated)
- 	struct mem_node *item;
- 
- 	list_for_each_entry(item, &efi_mem, link) {
--		u64 start = item->physical_start;
-+		u64 start = item->base;
- 		u64 end = start + (item->num_pages << EFI_PAGE_SHIFT);
- 
- 		if (addr >= start && addr < end) {
-@@ -695,10 +695,10 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
- 	list_for_each_entry(lmem, &efi_mem, link) {
- 		memory_map->type = lmem->type;
- 		memory_map->reserved = 0;
--		memory_map->physical_start = lmem->physical_start;
-+		memory_map->physical_start = lmem->base;
- 
- 		/* virtual and physical are always the same */
--		memory_map->virtual_start = lmem->physical_start;
-+		memory_map->virtual_start = lmem->base;
- 		memory_map->num_pages = lmem->num_pages;
- 		memory_map->attribute = lmem->attribute;
- 		memory_map--;
 -- 
 2.34.1
 
