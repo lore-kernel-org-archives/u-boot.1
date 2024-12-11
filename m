@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95208E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 00:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CD3E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 00:46:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5910E80209;
-	Wed, 11 Dec 2024 01:45:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6B828007F;
+	Wed, 11 Dec 2024 01:46:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eXzM0vGv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cVsVkXNY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE4A80241; Wed, 11 Dec 2024 01:45:21 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id F147580081; Wed, 11 Dec 2024 01:46:48 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FA0E80235
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 01:45:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACD108007D
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 01:46:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3a814831760so16133935ab.1
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 16:45:19 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-844bfd40df6so40542939f.2
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 16:46:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733877917; x=1734482717; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MIE6gSSVyMRu2MY5YVRc4TcCageC3T/XYDIbDcVWJS4=;
- b=eXzM0vGvzfj+0JduK94UjXjlaCBv6kU8y2nXMxCRCnezOze1YZXamH00C1Bvj6/Ce3
- IaZAM4Rv9iwOEY/XeQZRVxznM4WZ3blJHzRgOU2xYSENrtXEDJTMWbaWBm6bIgnDfQal
- tgVaBa4oKoloutWfT3QCTYBUr0bCrAX3CL+y4=
+ d=chromium.org; s=google; t=1733878005; x=1734482805; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JWAMh6Ba62cJAu5Du+Zua/wiX2PZn3x0Q9c2K65iDcE=;
+ b=cVsVkXNYGfiXiFZo7rPlaVu40ZfeJ2e+Eljzw9oziY39006UWUYo8X5TXYuSNZsTxl
+ isafAA7dj+0zY98s9I5Hn7ECja8Lj2zT2J8yw9y3gCy+eQQzxmJ9kVQVTHItZbeQXlFd
+ 89hoqKeQFOWa9106pPtlbQI2Ie+IKcA+FFyWw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733877917; x=1734482717;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MIE6gSSVyMRu2MY5YVRc4TcCageC3T/XYDIbDcVWJS4=;
- b=X6DsZaDsb8NMSIY8JZlnX4NgVwUnhSQMmb8swqdYqmNLHaHvcYisyXbnm5cVy6uo/u
- 9ygDhRCBcMFvuR2yXaqpJAlBAB5u9Q+OrLNEEwxjGNBc6X9tgxjdvS7Jo89feAgJpZOM
- O836OfPObKLtEALYWS9jueOlgLeuKIY135M6ANOd0YJRHVA5nk/ic685cwUSImvt7/dR
- uiLswNRIdOI81D/fWh3RXir4ljTgLXZ730HRpPxI1hhkNg43Sp3NvKqxgxSuP1ZZtVHS
- hjE0dsQDKRHlE7Mo8A/Sspyqjo6AFvvvaOV3IhnXjGHehuTxluM25gr+wZHIy/3CsXu3
- LexA==
-X-Gm-Message-State: AOJu0Yz35zxDccKjfEPL82CaEPTKJiQS6RD9kRHxGQd1y6tgC6iW2Zrv
- EU9avGnBaSc4Zpi/yjr725En8r0cDti0Y6KiUXwcPuEKo3wsUKRgZT/Oe/qF2F+VBsGbH2ActyM
+ d=1e100.net; s=20230601; t=1733878005; x=1734482805;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JWAMh6Ba62cJAu5Du+Zua/wiX2PZn3x0Q9c2K65iDcE=;
+ b=DWu5yOdhLJdrwyKTVZrfLVjxQoR5USm4AWcrMFGYpFjK0O4jbzs6olA55h+p90N1KA
+ KjYFcVfLkevR9kqdqOVXIQyRfkrsGOFnLm5FWlBC+YGp1xnY+EfNT7dO6qF+Aijs7W3k
+ iuCjNUGw4/GzSlCXEog9WEzdFHp12wDcVNgV5snhuromozvbU6L1tR0dLjqup6EVJf+F
+ 2z1xRJ4lMGDfAouq93TjZe3MQ9513CqzdGBmZ57Z6rL9zH5ildXTtgJwcPria0syEFZ5
+ 50TbXQO7xosgt7TUlaaIDK8cHj2RQmIXPimDVdUUXBXPTz3v7sTUDePW7UDgff3MyAuK
+ Kasg==
+X-Gm-Message-State: AOJu0YzMoh59Babv7YiF4Xy8lgW/NG6GVxamxOII7LNLQJeVV/5fB1dZ
+ nshK+p7hlQmWicsZuMDNuxkBGjMNikv3BcaE1IWDcBFU8iz80hz9mN/0oEY6yiawMuu+zHPm5RM
  =
-X-Gm-Gg: ASbGnctQ7VN6elX2peGmMAMF2OqgIL+jh41uQiJTMWL+1J4RN8Fs7sWpOLc+neCm+83
- 1yaVfRXNtD7B1NMqDK7vOpntkP7yoFzU+toH276RXGYu4dpNGTnDcliU9NenSU38SjCIiPLoXSj
- HKbikt8wANDyhXzorkqAOQ2vkGoHhVwVUc3+mf9htT+5LwEK6WepeMIAil/hi9jthS0PaGvPXge
- cSrxhO/QxggCENTOaybVNJIeaFtmjpL2QFxj63L4OiCNTn0sFHGeuNtommWQXEzRAP+NgEOdAEz
- 4AzH7Rtdf2FhgdY=
-X-Google-Smtp-Source: AGHT+IHVO4A1yOn6OI8OWWhFin69mtO+iv/Ym5M7k4Tuy/W1HrD4mkgWva85TJ4G+Zb2+EEupek9fg==
-X-Received: by 2002:a05:6e02:2145:b0:3a7:c5ff:e60b with SMTP id
- e9e14a558f8ab-3aa058b6858mr11202895ab.6.1733877917364; 
- Tue, 10 Dec 2024 16:45:17 -0800 (PST)
+X-Gm-Gg: ASbGncsGkTXGm0bBtzr43EHFAegRLUaQNo40UnQpBD0WnK8ovRSqZNCd5nK025FDtCG
+ 1ifAgxUcEXSeWMC1Hc2V0BBVCqCFrqwQ6O+OKd7Oz0oFgbzAeieiXUmUX6EATAajLieXPHCx+Cl
+ 6Yz9ttWfvPCCMUsUgH0JGAX/N/qlbYZvzygM0DCeP1SY/nxximj466BU9RA1QNJbpD/eam/bQlG
+ eXWpFt7J9FxD+f51QOz6e2Bi02OgUJc5VQhq2Bbbx6do7t/hNA3/lB7MWBUwwOd5hKSkLIHpdKH
+ uyItBv6soPIqJkA=
+X-Google-Smtp-Source: AGHT+IF+oBlmAWFrerYAM0rVQ0MGbDH2gHOfHNhQpQdE5Fv22p2ZyX6rJVCkG5DyWGkBQqglrc4Wsg==
+X-Received: by 2002:a05:6602:15d1:b0:83a:bd82:77f with SMTP id
+ ca18e2360f4ac-844cb5d2bc9mr127368739f.8.1733878004892; 
+ Tue, 10 Dec 2024 16:46:44 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3a9ced6dfafsm17251305ab.54.2024.12.10.16.45.15
+ ca18e2360f4ac-844738fab36sm349291839f.26.2024.12.10.16.46.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2024 16:45:16 -0800 (PST)
+ Tue, 10 Dec 2024 16:46:44 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] efi: Switch over to OF_SEPARATE for the app
-Date: Tue, 10 Dec 2024 17:45:03 -0700
-Message-Id: <20241211004503.3775922-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] RFC: efi: Attempt to support automatically running SCT
+Date: Tue, 10 Dec 2024 17:46:40 -0700
+Message-Id: <20241211004640.3778457-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241211004503.3775922-1-sjg@chromium.org>
-References: <20241211004503.3775922-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,56 +92,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we can support a separate devicetree, enable this for the
-EFI-app builds.
+This is a feeble attempt to update the qemu script to run a selection of
+UEFI tests. It copies a .seq file into the disk so it can be read by
+SCT.
 
-Drop the Makefile-warning exception since we don't need it anymore.
+It doesn't seem to work and I am not sure why. I am posting it in case
+someone else has ideas or wants to pic it up.
+
+Once Ilias' CI solution is in place, I can perhaps come back to this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- Makefile                        | 2 +-
- configs/efi-x86_app32_defconfig | 1 -
- configs/efi-x86_app64_defconfig | 1 -
- 3 files changed, 1 insertion(+), 3 deletions(-)
+ scripts/build-qemu.sh | 56 +++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 46 insertions(+), 10 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index cbc0feff279..43966004d5f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1145,7 +1145,7 @@ all: .binman_stamp
- ifeq ($(CONFIG_DEPRECATED),y)
- 	$(warning "You have deprecated configuration options enabled in your .config! Please check your configuration.")
- endif
--ifeq ($(CONFIG_OF_EMBED)$(CONFIG_EFI_APP),y)
-+ifeq ($(CONFIG_OF_EMBED),y)
- 	@echo >&2 "===================== WARNING ======================"
- 	@echo >&2 "CONFIG_OF_EMBED is enabled. This option should only"
- 	@echo >&2 "be used for debugging purposes. Please use"
-diff --git a/configs/efi-x86_app32_defconfig b/configs/efi-x86_app32_defconfig
-index c730945f4f9..b20c85f1cff 100644
---- a/configs/efi-x86_app32_defconfig
-+++ b/configs/efi-x86_app32_defconfig
-@@ -31,7 +31,6 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_MAC_PARTITION=y
- CONFIG_ISO_PARTITION=y
- CONFIG_EFI_PARTITION=y
--CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
-diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defconfig
-index 1831fb2d5a7..0988ad45205 100644
---- a/configs/efi-x86_app64_defconfig
-+++ b/configs/efi-x86_app64_defconfig
-@@ -35,7 +35,6 @@ CONFIG_CMD_FS_GENERIC=y
- CONFIG_MAC_PARTITION=y
- CONFIG_ISO_PARTITION=y
- CONFIG_EFI_PARTITION=y
--CONFIG_OF_EMBED=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
+diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
+index 0ff53593cf9..f9ee0072573 100755
+--- a/scripts/build-qemu.sh
++++ b/scripts/build-qemu.sh
+@@ -21,20 +21,28 @@ usage() {
+ 	fi
+ 	echo "Usage: $0 -aBkrsw"
+ 	echo
+-	echo "   -a   - Select architecture (arm, x86)"
+-	echo "   -B   - Don't build; assume a build exists"
+-	echo "   -k   - Use kvm (kernel-based Virtual Machine)"
+-	echo "   -o   - Run Operating System ('ubuntu' only for now)"
+-	echo "   -r   - Run QEMU with the image"
+-	echo "   -R   - Select OS release (e.g. 24.04)"
+-	echo "   -s   - Use serial only (no display)"
+-	echo "   -w   - Use word version (32-bit)" ) >&2
++	echo "   -a <arch> - Select architecture (arm, x86)"
++	echo "   -B        - Don't build; assume a build exists"
++	echo "   -e        - Run UEFI Self-Certification Test (SCT)"
++	echo "   -k        - Use kvm (kernel-based Virtual Machine)"
++	echo "   -o <name> - Run Operating System ('ubuntu' only for now)"
++	echo "   -r        - Run QEMU with the image"
++	echo "   -R <os>   - Select OS release (e.g. 24.04)"
++	echo "   -s        - Use serial only (no display)"
++	echo "   -S <seq>  - Select SCT sequence-file"
++	echo "   -w        - Use word version (32-bit)" ) >&2
+ 	exit 1
+ }
+ 
+ # Directory tree for OS images
+ imagedir=${imagedir-/vid/software/linux}
+ 
++# Directory for UEFI Self-Certification Test (SCT)
++sctdir=${sctdir-/vid/software/devel/uefi/sct}
++
++# Mount point for use when writing to disk images
++mnt=${mnt-/mnt}
++
+ # architecture (arm or x86)
+ arch=arm
+ 
+@@ -65,7 +73,7 @@ kvm=
+ # We avoid in-tree build because it gets confusing trying different builds
+ ubdir=${ubdir-/tmp/b}
+ 
+-while getopts "a:Bko:rR:sw" opt; do
++while getopts "a:Beko:rR:sS:w" opt; do
+ 	case "${opt}" in
+ 	a)
+ 		arch=$OPTARG
+@@ -73,6 +81,17 @@ while getopts "a:Bko:rR:sw" opt; do
+ 	B)
+ 		build=
+ 		;;
++	e)
++		extra+=" -m 4G -smp 4"
++		extra+=" -display none"
++		extra+=" -device virtio-gpu-pci"
++		extra+=" -device qemu-xhci"
++		extra+=" -device usb-kbd"
++		extra+=" -drive file=${sctdir}/sct.img,format=raw,if=none,id=vda"
++		extra+=" -device virtio-blk-device,drive=vda,bootindex=1"
++		extra+=" -device virtio-net-device,netdev=net0"
++		extra+=" -netdev user,id=net0"
++		;;
+ 	k)
+ 		kvm="-enable-kvm"
+ 		;;
+@@ -91,6 +110,9 @@ while getopts "a:Bko:rR:sw" opt; do
+ 	s)
+ 		serial=1
+ 		;;
++	S)
++		seq=$OPTARG
++		;;
+ 	w)
+ 		bitness=32
+ 		;;
+@@ -105,6 +127,19 @@ build_u_boot() {
+ 	buildman -w -o $DIR --board $BOARD -I || exit $?
+ }
+ 
++# Write the SCT test-sequence file into the SCT image
++update_sct_seq() {
++	if [[ -z "${seq}" ]]; then
++		return
++	fi
++	LOOP=$(sudo losetup --show -f -P "${sctdir}/sct.img")
++	PART="${LOOP}p1"
++	sudo mount -o loop ${PART} ${mnt} -o uid=$(id -u),gid=$(id -g)
++	cp "${seq}" "${mnt}/."
++	sudo umount ${mnt}
++	sudo losetup -d ${LOOP}
++}
++
+ # Run QEMU with U-Boot
+ run_qemu() {
+ 	if [[ -n "${os_image}" ]]; then
+@@ -129,7 +164,7 @@ arm)
+ 	BOARD="qemu_arm"
+ 	BIOS="u-boot.bin"
+ 	qemu=qemu-system-arm
+-	extra+=" -machine virt"
++	extra+=" -machine virt -accel tcg"
+ 	suffix="arm"
+ 	if [[ "${bitness}" == "64" ]]; then
+ 		BOARD="qemu_arm64"
+@@ -168,6 +203,7 @@ DIR=${ubdir}/${BOARD}
+ 
+ if [[ -n "${build}" ]]; then
+ 	build_u_boot
++	update_sct_seq
+ fi
+ 
+ if [[ -n "${run}" ]]; then
 -- 
 2.34.1
 
