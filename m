@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EC6E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 18:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CC93E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 18:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0924B803B5;
+	by phobos.denx.de (Postfix) with ESMTP id 686F7803D0;
 	Wed, 11 Dec 2024 19:54:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mUwiS8h7";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="g6oOQd1Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D846B801CE; Wed, 11 Dec 2024 14:53:42 +0100 (CET)
+ id 204FB8022E; Wed, 11 Dec 2024 14:53:44 +0100 (CET)
 Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
  [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBC118021F
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:53:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22D4C80209
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=nbelin@baylibre.com
 Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4361b6f9faeso4326695e9.1
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:53:40 -0800 (PST)
+ 5b1f17b1804b1-434f3d934fcso23957445e9.3
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1733925220; x=1734530020;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1733925221; x=1734530021;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cx4Wjml6R7UqvqvYqSaz5Ezm+RbKNsCKx9qXP3CHfdg=;
- b=mUwiS8h7Cc+9sFiQtPena0IftkDeNKg5ex6hqg3SRa/skYghY7+zyGGp7N6XgiyECP
- f84IWznXLn3K1HN6vSPhnO7I1VI2u1NQjSOHeWuLgyPgt3lyeMYnpP6D/c1dutYZDBkm
- 03jiIPy64F8tdSKOWoeorLj/hAzkt1MkIsLVZAswD+b1Q7sOgRUfWfZqWgnITd9h8Xr9
- FUVLhsqzP1EzIpD4+ukE8ZCtw2Bsn2yv7Y7/6hWEF+cz0fPrBlA3tpWOyYcYVzjGZcn5
- b7YG+XSXFhPPx79oBEeDC1jK4KheipeVn0TIniaAlKGzDtdaZS649tvXvWXLZEBO7Hwy
- mXuA==
+ :reply-to; bh=t+Xwn1L/UKaex6dxOb+LW5T3XGyB4TCi4WT2GmBn7xk=;
+ b=g6oOQd1Q0uxuprh9/FNfcIVEO7Ygpc3fyHXhVvuE6EmKbK7peQ9DYbiUKPt6BoOls3
+ 5Kl5EkbwTqgBCo74jFOkfQ7DZIPTIlI1BFA5vieYpmyAmWuasnmXKvodYHcbK3RyAflI
+ GJIT1MVmF/ksN8z+Ly6DKQ6081bjoUm50LsEFx92OHJC1pTstr1MI8PLD5/VStUn74Ee
+ V7jr6gy9UB3NF8ZRetG8lgp97goJjmATaehV4ptKilW2yUJqST2SJU26V/iQkzwNq83L
+ zprZvIlbW/813rx9s/iGcCmdnybmP9wpuH18FbJHNLSTKVA1MsZLW+bz7T1Xn0faTzxL
+ gZOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733925220; x=1734530020;
+ d=1e100.net; s=20230601; t=1733925221; x=1734530021;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cx4Wjml6R7UqvqvYqSaz5Ezm+RbKNsCKx9qXP3CHfdg=;
- b=n3s5mILXjHtVN/Wi3S97Dx2xQeEZKY2KNHDN+GuwGzp7//bq8Idzy/xi4VBvqXNMb2
- z6obsW8qC8/DEoWS5KCIJAngBj6+fhpFwBES7K6gUJ4xNLOr7JynivsAjzkl4BG3pPL2
- a6LOuWdtSJdGS0gHwyIH0M/JFrir6qfRDztbUgvzSC54X41+qCYetgvku/mU2qjmW//x
- BWI+wMmfUGXmFH1A8de13eB+C4hnVlgI0PdLDgat9Iec4XtyaXk7hlGvoIo9dXAW6dsm
- Je7ozNBXidw1GQVr8kevbnRl5s5Pp0khEZ4cTvFZrH/Zxux/r+b5sOReidolKANysw/V
- b6TA==
-X-Gm-Message-State: AOJu0YxCOxiij243PfXy8GnTpbUVG4k8oCPGzD8cwGtIrUTKHLv4oHdx
- W+nEW6YIIyrGLwepR+H0//0AkGDayPSyObTMsLPJwx7Zm2CUS4Fm51cvBum0Sfk=
-X-Gm-Gg: ASbGncvhi0IHjif33fvRXYP8steIfveE960eXcIp5kEq1e7jJKIWGd8NdorvfNstU8U
- UdVhZAqBSkSYm8TfldvCR9sR6rLSeXSwacWZmKFZnQJIMG4ouvddghDfCoZuDioWFbYO79HDelx
- vr07qyRBg3RIYDl+xCfN1tRb87v1P+T9TYp/WMFFFrtUEMiUguSbrZ55z7gRvAKJ8u4yNxzQ1uC
- ZvaXzuwQJD2cHt7YQZAhJsr5skt09L+0UxRQT1+a+3w2jIO8DrHJx0=
-X-Google-Smtp-Source: AGHT+IH9tgDHXowkBAduhUDmoq0GhggtR7398aLoc0y3i8OhoYRmh+ZQJbVcYfTGjgN9Sw3xy/K95Q==
-X-Received: by 2002:a7b:ca57:0:b0:436:2155:be54 with SMTP id
- 5b1f17b1804b1-4362155c09amr6284645e9.1.1733925220201; 
- Wed, 11 Dec 2024 05:53:40 -0800 (PST)
+ bh=t+Xwn1L/UKaex6dxOb+LW5T3XGyB4TCi4WT2GmBn7xk=;
+ b=XVdTQj7yDNJ91kWU4qc0Gc8yVO0vkXFMjONCzPdKPyUOFkrmbvJL4UBOknCVbSNnDT
+ 2LE7U2a98WA/KVeyKSw1zu3gGOLTpNDMvNfsGVZk+vdHfW6YeVaVoIe6uLJAfpJVnfvu
+ pOyNRpUodti3jMjdb6bqNnq2MQN4gmL6/8VBofd6LWLh6ZFPLNdAHXJNBt+juQbrrVd6
+ fx4F/1IhJoCNVUuAd3O1nkbiwdDfpsdm9sPlEWebi3oV1mXqcb6X5jP/d57RCeJwTEIa
+ tyk5on59M7TdTNowSbPMYSkaMBMU+dp6fgHumgsmubhCkQ3KSpJfAnWG8uCj/okn06PW
+ jh4Q==
+X-Gm-Message-State: AOJu0YzTtoALgAYxF/9mPpGl7telffC3AZWKneTfsqWANVxxuiKz0azQ
+ wGNR/Mm6ZdLv4Y+sQby+/jF+nB8RdQIjbqUB3sBoiFBIJvzUTkovrRXzL2Hg3Ms=
+X-Gm-Gg: ASbGncuHiShv9yggHNBoOqgzn1ET8hezSTJ5I790RcUqFHT5J5NkxKFzhPj+ijIUFcN
+ z6J98EzaozsQhVuZJyLTNGuGN50j8o+s97PBX8HdhguKawYXJh8MxMJGsy8QcxY/KL84jFmTSTV
+ vIzbfqqintEksMnac48xOpOJZJ/hP4ivLLSXIK01gQsz9dN8IfX+gghV2LUNBFOHfpNK4bTZNhh
+ BYYSm8BK4F8H74t7pGQ86Cs0xlbLjmmK41VsuKJAipJOlOpM5lpeXU=
+X-Google-Smtp-Source: AGHT+IFR6AeElKxTlNKkQNE5dWjiAj5lF7QRIvF/lDklx4mVTIU4QR3ScWD1sRgsVUW3TkGCfY1BJg==
+X-Received: by 2002:a05:6000:1fad:b0:385:df2c:91aa with SMTP id
+ ffacd0b85a97d-3864ce4a77cmr2196632f8f.7.1733925221567; 
+ Wed, 11 Dec 2024 05:53:41 -0800 (PST)
 Received: from [127.0.1.1] ([2001:861:d40:6fb0:1b92:49fd:8154:d517])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38782521845sm1316013f8f.106.2024.12.11.05.53.39
+ ffacd0b85a97d-38782521845sm1316013f8f.106.2024.12.11.05.53.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:53:39 -0800 (PST)
+ Wed, 11 Dec 2024 05:53:40 -0800 (PST)
 From: Nicolas Belin <nbelin@baylibre.com>
-Date: Wed, 11 Dec 2024 14:53:24 +0100
-Subject: [PATCH 1/4] boot: android: fix extra command line support
+Date: Wed, 11 Dec 2024 14:53:25 +0100
+Subject: [PATCH 2/4] boot: android: free newbootargs when done
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241211-fix-bootargs-concatenation-v1-1-c6752bcb9dde@baylibre.com>
+Message-Id: <20241211-fix-bootargs-concatenation-v1-2-c6752bcb9dde@baylibre.com>
 References: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
 In-Reply-To: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -83,11 +83,11 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Ahmad Draidi <ar2000jp@gmail.com>
 Cc: u-boot@lists.denx.de, Nicolas Belin <nbelin@baylibre.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733925217; l=1192;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733925217; l=683;
  i=nbelin@baylibre.com; s=20241211; h=from:subject:message-id;
- bh=DyesOp+C590L5T7Z2hT7liy29EvlAGa6I63Wo6XkD6A=;
- b=+AqrgT+SquWLLUCLlweoWXd5oBDSMX5lX9qOMQ26HvrSmvpap+rZOwZT6GLQ1s5C4SDi8ylfG
- 7RS4ELkWBqLBYroOtVsVT9SNfpaO4l5No7N5wtafBIwa4u3jiWqSlE8
+ bh=OE1Xy5cljnPKV5UMtkvgBVpVgy99P855DXz1GjjjNgc=;
+ b=9oL3TDOfsDZj2fSmTmIIP3N6AUz0rLVO2+jHIfUry5pSxpjat1iEdlico8aKp90cCa2XJnrAW
+ hEDogbTn3GlBIK083KpVufNTe+BacU0KctmomN+JZKmgo9SWgiB8ATJ
 X-Developer-Key: i=nbelin@baylibre.com; a=ed25519;
  pk=w8SrWXgXuIaN/RB7JHkKa2EKDC5nVxqVHI8XawK2M7I=
 X-Mailman-Approved-At: Wed, 11 Dec 2024 19:54:12 +0100
@@ -107,38 +107,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Check that the value at the address kcmdline_extra is not 0
-instead of checking the address value itself keeping it
-consistent with what is done for kcmdline.
+Free newbootargs when the concatenation is done and bootargs env
+is set.
 
-Fixes: b36b227b ("android: boot: support extra command line")
+Fixes: 86f4695b ("image: Fix Android boot image support")
 Signed-off-by: Nicolas Belin <nbelin@baylibre.com>
 ---
- boot/image-android.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ boot/image-android.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/boot/image-android.c b/boot/image-android.c
-index cd01278f211d63262f2bdad7aa1176e2c1bbfedd..57158280b41c6552c82838e21384d925d5f7cde4 100644
+index 57158280b41c6552c82838e21384d925d5f7cde4..362a5c7435a3a8bcf7b674b96e31069a91a892b5 100644
 --- a/boot/image-android.c
 +++ b/boot/image-android.c
-@@ -292,7 +292,7 @@ int android_image_get_kernel(const void *hdr,
- 		len += strlen(img_data.kcmdline);
+@@ -322,6 +322,7 @@ int android_image_get_kernel(const void *hdr,
  	}
  
--	if (img_data.kcmdline_extra) {
-+	if (*img_data.kcmdline_extra) {
- 		printf("Kernel extra command line: %s\n", img_data.kcmdline_extra);
- 		len += strlen(img_data.kcmdline_extra);
- 	}
-@@ -316,7 +316,7 @@ int android_image_get_kernel(const void *hdr,
- 	if (*img_data.kcmdline)
- 		strcat(newbootargs, img_data.kcmdline);
+ 	env_set("bootargs", newbootargs);
++	free(newbootargs);
  
--	if (img_data.kcmdline_extra) {
-+	if (*img_data.kcmdline_extra) {
- 		strcat(newbootargs, " ");
- 		strcat(newbootargs, img_data.kcmdline_extra);
- 	}
+ 	if (os_data) {
+ 		if (image_get_magic(ihdr) == IH_MAGIC) {
 
 -- 
 2.34.1
