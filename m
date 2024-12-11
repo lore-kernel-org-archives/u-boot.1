@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548E0E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8055FE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:14:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 739E7801CF;
+	by phobos.denx.de (Postfix) with ESMTP id E642A801F5;
 	Thu, 12 Dec 2024 14:14:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=rwahl@gmx.de header.b="l/imgGtP";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=rwahl@gmx.de header.b="kVqGCSHH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B1E1801E7; Wed, 11 Dec 2024 21:51:32 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 31022801E7; Wed, 11 Dec 2024 21:52:22 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA59A80087
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 21:51:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA96280087
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 21:52:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rwahl@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1733950285; x=1734555085; i=rwahl@gmx.de;
- bh=T1BGRwTVMeL7C8Y0PH58EdVx9NaW8tVT7HZuOqK2tJA=;
+ s=s31663417; t=1733950329; x=1734555129; i=rwahl@gmx.de;
+ bh=hD+cxhuHtytBFh8YeNXMzjUd5LnFTtZDIf5nrZFhwrg=;
  h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:
  MIME-Version:Content-Transfer-Encoding:cc:
  content-transfer-encoding:content-type:date:from:message-id:
  mime-version:reply-to:subject:to;
- b=l/imgGtPrTgwADfuAISsUtlgSm+rZKLm6Uo3ch/nowzSSCfebcj5hkyVVUEh+SKa
- GY9nsHeCh7D/2si+PX1s5d3B66P9du1LH0dONMKHQDOeGpdPT24s1TR17iaqqxiPb
- EFiNRyY+6Cv7JQA2PUyoiVmzNQFgGu3OqZbZ+dNPOTwxpvhtb5k5HkUzUIZQaC05G
- ZJyys9lAGxLRGfMzbRfuKtPoO8z3OhLugq5ljHcR3R9uNHbzD1JjpPTda46VMmtoA
- bL0WO2oCk24efuM1gBB8UTslUKIaW+23Jio4WgYwqmjEgf1oMb9Tzuwuckz5dhr8P
- Ndkho41ST46TY2EisQ==
+ b=kVqGCSHHwFkCqxi9e6VV9cTpAAqwLAffEZryrxnWjlc+VwLE/eGGDDVy26RoSXoB
+ AOqAeUkGVbAnLm1ymm0wzm9EQ8ApMtY82R9j0JhhtG4hkVKFIylxsDJDELNAtEROB
+ kS6G2Ov01V+y+YCdIR7psdXQoc8wE06vEt8ZmyUBUe274lV/G2Mho6zEN2nEZvCV1
+ sD7T1EiL9y3WSkp/oq+e9R6kqYyYh1YrbLq09u02RVXZgtbZdViuD4Qw6GgCb3LDy
+ 56jOe1XUKN4093J009S6TKDivF3CfoEi8zPOaM/hK1XZePmPUjB8iTX7vZVE8Lf+Z
+ ShSItGcJmds4fyKC5w==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from rohan.localdomain ([84.156.157.89]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mlw7V-1u3Zjq0XwJ-00bJ0E; Wed, 11
- Dec 2024 21:51:25 +0100
+Received: from rohan.localdomain ([84.156.157.89]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MAfUe-1tS2Bl3Laq-0028IS; Wed, 11
+ Dec 2024 21:52:09 +0100
 From: Ronald Wahl <rwahl@gmx.de>
 To: u-boot@lists.denx.de
-Cc: Ronald Wahl <ronald.wahl@legrand.com>, Vignesh R <vigneshr@ti.com>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: [PATCH] spi: cadence-quadspi: fix potential malfunction after ~49
- days uptime
-Date: Wed, 11 Dec 2024 21:51:04 +0100
-Message-ID: <20241211205104.16099-1-rwahl@gmx.de>
+Cc: Ronald Wahl <ronald.wahl@legrand.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] mmc: Fix potential timer value truncation
+Date: Wed, 11 Dec 2024 21:52:00 +0100
+Message-ID: <20241211205200.16207-1-rwahl@gmx.de>
 X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Wbob3GHZZHwxccxA/K/tuSezS0/sD2Yk9oZ987qjyqfq7n2U0Ij
- 3qO9BbtYNs4Ro2BMSxGPQH/XmYg2XDF9+LUSPOWtP2rRMaIV9/jK1/rUuMyrhV22JwMlHmJ
- SonTOuLJxiW6JtIKHRr6DDg13useOxF/MVcD7o3H84ld1oO4CWF5lRAoZEPbvYOheugdUED
- U9qQMUxstnZTattOU5lpQ==
-UI-OutboundReport: notjunk:1;M01:P0:he70emx6pUA=;tRQb3QtbUkpylM62aVejTGPQuBs
- F/pJuHuUe0lllQmcYoJPwhQlCozDZaB5Q0Iw+vVPnVh5EYhWnfxTFQ4eJ/OcCKUPe28KJD/PT
- 7rhDn1uYRk2miro30Ju/ynTt4i9/YoFTvkVxgHtrdCtt8KsiE/AaQoyNw1wp9bLXzUYsKZH/9
- UeGfVqQbA7vr+K/QYhv0BKRdINIArkHW3FWQ8ytabs2q8TuQHVD9fKmkJycgozmyEHoPKb+To
- IHYU/YmrhmLZuqYQ8euB9Kd/cTwXvHzxYcvlLUVAstMsU/3YsF2QKJxGZNOlDECxvVn0IOUpx
- Eb2FP9H0GWAWK5G849cygmkJ+REzYOGNrUaXKVUZlTLYFzkWxlZOQr4D1pWMHEBvmhCkIe43Z
- gbeIX0Dyswq6ZyXBmb1LPwbqZQqHT5hudwwkG8u4AZTeQrma5Dc4K8lpSdVz9x52XjE4HB/xX
- f91c08DE2AylpnxBVk41T9ZhnCvC3YHnGv+3nntAPnp81Xwa5bsIxOnOWoFthdaOrq8qihLZi
- YN5TJ49GURgYtz04A7jGvztMCv6jyOvp7uzhY+e70VP+GoiUgKB7rtn/n+8FAk2Cpkx4KFlf3
- BB2J4tpY+PG7qi7HvkOQCXrD83T4MgIsShQdJ4Wh1GuDNBAcCgtLV9SOATrqDXCok5QWzTvPX
- JsXCksQwpkQDiNxE9zS9i3nZO1cnNq5VTmyNIP7wgZZ8G/OMpfLd2AeHV9RCni78ym9nu/Fli
- w20+F/iZMULFHGPjqsKWT4TZJNib0yAuY93pDAQLbHNuk75ELAlzThzhXJOtL6WFeuqxeD3jp
- wkZIqfxH9TeFKTk42jv74faaEPz844jQ6nRmvxXeMsUK6Rzur82BQFIeIY5OZ80DLLnnNrgu5
- W8o/XFO+Ijw8Exuy8kYJrbJJG36m3MptraseZ7G30NpBshpXyS8A3LoLIBRh7LC43wGNlnT5k
- A7xhXFv6f1RTD5bTU2jKHJbCE7+ZWeJlTsSx7XGQhwgysAI4ukz2WFrk3waDrxLylmjj4O6d+
- d1ffYV6JOGMvOi8qLxqX6Nqnanzz9+SvOGFT9wfbgHbMiAmORvH7CIdlg83sOC0ZN5o7wV9XS
- HEq0R77EuvwZgPSL4KPTTSiGaYUuPU
+X-Provags-ID: V03:K1:AkQMMoVIXRro1vB/rHiZiKJLv7jEvi0kzlJOV0JXf8NshX9KdTt
+ sgHlCfLOS4/RjBeqLObh+CKaIm7aiQy6/ORaj0yDLtO0n0N/N/uOATdmVJFtnvN44E0L9xN
+ MZPU/k5s2bHNCULxSy2fBt5iy5Tr86mN0EbhQrTuvStBmTLnwYtw/wtZd3xQJe2jmUAU1S6
+ n7SrCZ6I2aa/pBpXYJaSg==
+UI-OutboundReport: notjunk:1;M01:P0:clcvgi0k3Xc=;2T2GFK+9wBhVuajMg5br0XdFJM+
+ oFNSlvvBt017oJ54Rq55XXRYb0a4b/YeccootfeAnhzAtkESLsYJBJG2uPe6ZOyPu+/5F5AX8
+ j/kjfRU8T6DL8pvlGaZqgkfS69KTHNK5FbEDAl16pTrnl2sKhcKoGTyea6Ey7UWCUCEpYGUiN
+ +mxqS0rslnajw+Oi9G90hmQQNWZHMM91B/aDTwnQXDf8NkbeJ+PgPdH223390clLM/Ua4zajW
+ NpYRR/NoMab6medbfs7k+AU41lhs/8j7E9rt0fiVc4jDMbUyTMAUaOYCni0TOw2Jd4MP7dcIv
+ cQfYkmRelWK6Uu/AeaX9NKupviN+owzbugmaIEd/36bYADxj2kltbrmaYN0eWljTKLG3pD2VO
+ FURL4tJvIGcr7V0Oldx45Z3gX1FdlJ8NmZriICnfXHXcXCq8M3GbjqnkczWUaMllgXmH9iy4t
+ dD4iI7lfl15V1Fc/ymVZhBspvmBjLK+fiGGCO48pHziQPqZCz3lXhmB14xdQSl9S+kwzFjqau
+ PtjY70bBNluC0odgPAKH14viANBentv2tDaamnOjla/7kN8Y2hWAiEk8Uht+PanFIf05JgTeO
+ 3iaSm3qjvE1IZwEk3c1yXbaN3o8US4wilTz+jhLEZyn4vMMhDsq4TuqNH5V0SWFeKido8yjZc
+ nn3L7ihQmZuag07qeWmJpif9zbS0R7tA3+tV/cZh9cxygFfT1acAdl874a598AlyefwxzQQQ2
+ fmGZGPn5HgIzvrYaVRFxcoG2kBGa2XEIJc1HmstwWSpLqpWIQvoIxpqSVedEYXXlTPt1l0pxn
+ vI4ScIJcb+rgulWTMLtqUTz1SKm4AOyOgChGGcR7ry43APKdTKRpjSWNYsj8JPTm+xxLkhjzn
+ yQDkNWSZa6mkU0ntKnp9UqcSeBST2Y1x4+bIVMjoykR9wVNfTeYdla6wqKj+QTK8M6/auuMLp
+ MFBsYR7VahNkT1xhR84mhAR4i5EcaA+gx5DoQtUIutTuzCkzOarLN1JZm1sK3xxQ73tL1VAF1
+ cQxISwMGoOqE4cGDbCEJQJwvjtkuHnhwJFDdpN2rtuywHZcz2jdNWkhu2h8j1b7S8RFu1QKUe
+ vgFqjsGlw=
 X-Mailman-Approved-At: Thu, 12 Dec 2024 14:14:07 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,53 +91,43 @@ X-Virus-Status: Clean
 
 From: Ronald Wahl <ronald.wahl@legrand.com>
 
-The get_timer function returns an unsigned long which may be calculated
-from the ARM system counter. This counter is reset only on a cold reset.
-U-boot divides this counter down to a 1000 Hz counter that will cross
-the 32bit barrier after a bit more than 49 days. Assigning the value to
-an unsigned int will truncate it on 64bit systems.
-Passing this truncated value back to the get_timer function will return
-a very large value that is certainly larger than the timeout and so will
-go down the error path and besides stopping U-Boot will lead to messages
-like
-
-    "SPI: QSPI is still busy after poll for 5000 ms."
+On 64bit systems the timer value might be truncated to a 32bit value
+causing malfunctions. For example on ARM the timer might start from 0
+again only after a cold reset. The 32bit overflow occurs after a bit
+more than 49 days (1000 Hz counter) so booting after that time may lead
+to a surprise because the board might become stuck requiring a cold
+reset.
 
 Signed-off-by: Ronald Wahl <ronald.wahl@legrand.com>
-Cc: Vignesh R <vigneshr@ti.com>
-Cc: Pratyush Yadav <p.yadav@ti.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
 =2D--
- drivers/spi/cadence_qspi_apb.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/mmc/mmc.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb=
-.c
-index 93ab2b5635..f2f69cf9f1 100644
-=2D-- a/drivers/spi/cadence_qspi_apb.c
-+++ b/drivers/spi/cadence_qspi_apb.c
-@@ -151,9 +151,9 @@ static int cadence_qspi_set_protocol(struct cadence_sp=
-i_priv *priv,
- /* Return 1 if idle, otherwise return 0 (busy). */
- static unsigned int cadence_qspi_wait_idle(void *reg_base)
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index efe98354a0..799586891a 100644
+=2D-- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -750,7 +750,7 @@ static int mmc_send_op_cond(struct mmc *mmc)
  {
--	unsigned int start, count =3D 0;
-+	unsigned long start, count =3D 0;
- 	/* timeout in unit of ms */
--	unsigned int timeout =3D 5000;
-+	unsigned long timeout =3D 5000;
+ 	int err, i;
+ 	int timeout =3D 1000;
+-	uint start;
++	ulong start;
 
- 	start =3D get_timer(0);
- 	for ( ; get_timer(start) < timeout ; ) {
-@@ -170,7 +170,7 @@ static unsigned int cadence_qspi_wait_idle(void *reg_b=
-ase)
- 	}
-
- 	/* Timeout, still in busy mode. */
--	printf("QSPI: QSPI is still busy after poll for %d ms.\n", timeout);
-+	printf("QSPI: QSPI is still busy after poll for %lu ms.\n", timeout);
- 	return 0;
- }
-
+ 	/* Some cards seem to need this */
+ 	mmc_go_idle(mmc);
+@@ -844,7 +844,8 @@ int mmc_send_ext_csd(struct mmc *mmc, u8 *ext_csd)
+ static int __mmc_switch(struct mmc *mmc, u8 set, u8 index, u8 value,
+ 			bool send_status)
+ {
+-	unsigned int status, start;
++	ulong start;
++	unsigned int status;
+ 	struct mmc_cmd cmd;
+ 	int timeout_ms =3D DEFAULT_CMD6_TIMEOUT_MS;
+ 	bool is_part_switch =3D (set =3D=3D EXT_CSD_CMD_SET_NORMAL) &&
 =2D-
 2.47.1
 
