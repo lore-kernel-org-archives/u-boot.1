@@ -4,81 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7556E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 06:16:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87A5E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 06:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37D50801DA;
-	Wed, 11 Dec 2024 07:16:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 466E180200;
+	Wed, 11 Dec 2024 07:37:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h3Ct6Bop";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63563801DD; Wed, 11 Dec 2024 07:16:30 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7CC7480209; Wed, 11 Dec 2024 07:37:52 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DB4A801CF
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:16:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2763F801FD
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:37:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e3824e1adcdso4858516276.3
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 22:16:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733897787; x=1734502587; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r8jhA/NSLAssAHgAVJVEDUOcVh/WbWZyii5BXcThumE=;
- b=h3Ct6Bopc9kpFAJGG9vIB2s67EL2oz4knN/XBXJ+xmV5UNqvH0pB1oZ7bcKNLnm7Vw
- gFfpGfDqQ7RaGI1HEopW+1Lqc6wUGP+ENBTSCgqD04B9r9/oBqAKGpjLJz8QTmguxL1c
- BvyVAS+kBXguS4dN3fa6uR7FpvpLUrN/Rl9K1sozb+aD56uU/fMa1aYGdXey3RoKEI65
- psTpwSvwD79nUqHQw03fT8NerSLh7TN8X6VdnBz1AbKGHPB3rm+hDi+5PgnBUC9QvMRy
- fkq7xEGUWSyLqr+/1Eej1Z5Y4vYdycHeqYPDUZ1OOtNKqV9SLh2tExZExt4452riLIS6
- QUjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733897787; x=1734502587;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=r8jhA/NSLAssAHgAVJVEDUOcVh/WbWZyii5BXcThumE=;
- b=SWZCWG3ifB5luNHY92aV5X6P2SuHQa1pLZ2n6ba+YrfnX5k/+FvOQu1jVo6g3OXXrO
- gyJaqzgVZJy8HBMYlet9Uybh/solaYjlsxTM3GB0/Fd4UnOf1Tcvi11npqU/H4wey/v9
- wJRPeW4rXGGxSWAaQS2dwfx3yUJlb0RndhmCf5lcMQ0lBLchsivMkrg1ScSuVmO5KDE7
- Ijzj2iFneXb3BYc8ye68Vn4FHImprekPDUwHpaJ56GUAEqspH046McmI6aB3coHW+2VV
- vx35jbCocat2UfxMF/wqFsSM96vRUYr+WE2lf+Zt5i/2Y3M6+6v571JdV4YzO/LZlZTJ
- u4TA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQ4t0w3gnEJKifRzfWwDW4aKPalixrqoO47yj0n8bSVwdPZs5EZ6KNVkizkY5Zo0IOyyr7jsw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3AyocaEcsmtZTnz9sq8YnR1XWdHunJOgnXznscuf9HgBGRRli
- WieI2olKhzGdgN96LOJNxzdp7GlH9dbnRbTCfBkIX4GqOxodNXzwhdqHKPMfCTe6tOrNL1qkPZo
- TLJ51gWYBIeXPT6SANq3hsx8olqs7GZWTbI4Pbg==
-X-Gm-Gg: ASbGncsQOYI+akUu6s7bVJ0ZbQgLM9B3MAm+TNXgkLJPG9OhYlOvcC3E+3WrQxtYA7H
- 45DYTRK0oBn6wj3x1rBXP+I6zeLC8e7e8QNw=
-X-Google-Smtp-Source: AGHT+IGYSMDLfnVr85rpy/mYQpeRrfKhtLjBdjy0gzSaIZauXcEIBHxu8h6aQPKEeqFOeyTy/muhYnYB/cHAJ+0+5RY=
-X-Received: by 2002:a05:6902:218c:b0:e38:b34d:121a with SMTP id
- 3f1490d57ef6-e3c8e5da909mr1933940276.20.1733897786860; Tue, 10 Dec 2024
- 22:16:26 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 4BB6bdKl006200; Wed, 11 Dec 2024 15:37:39 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ jonas@kwiboo.se, FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH] rockchip: Add support for Radxa ROCK 5C Lite
+Date: Wed, 11 Dec 2024 06:37:29 +0000
+Message-ID: <20241211063729.57963-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241211021703.2333-1-semen.protsenko@linaro.org>
- <20241211021703.2333-2-semen.protsenko@linaro.org>
-In-Reply-To: <20241211021703.2333-2-semen.protsenko@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 11 Dec 2024 08:15:51 +0200
-Message-ID: <CAC_iWjLHSPMOqATVByDSm1nqwprbpGrOw2mTT7cXPWw5f4uxQw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] lmb: Return -EEXIST in lmb_add_region_flags() if
- region already added
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,132 +50,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Sam!
+Radxa ROCK 5C Lite[1] is a RK3582 based single board computer.
 
-On Wed, 11 Dec 2024 at 04:17, Sam Protsenko <semen.protsenko@linaro.org> wrote:
->
-> An attempt to add the already added LMB region using
-> lmb_add_region_flags() ends up in lmb_addrs_overlap() check, which
-> eventually leads to either returning 0 if 'flags' is LMB_NONE, or -1
-> otherwise. It makes it impossible for the user of this function to catch
-> the case when the region is already added and differentiate it from
-> regular errors. That in turn may lead to incorrect error handling in the
-> caller code, like reporting misleading errors or interrupting the normal
-> code path where it could be treated as the normal case. An example is
-> boot_fdt_reserve_region() function, which might be called twice (e.g.
-> during board startup in initr_lmb(), and then during 'booti' command
-> booting the OS), thus trying to reserve exactly the same memory regions
-> described in the device tree twice, which produces an error message on
-> second call.
->
-> Return -EEXIST error code in case when the added region exists and it's
-> not LMB_NONE; for LMB_NONE return 0, to conform to unit tests
-> (specifically test_alloc_addr() in test/lib/lmb.c) and the preferred
-> behavior described in commit 1d9aa4a283da ("lmb: Fix the allocation of
-> overlapping memory areas with !LMB_NONE"). The change of
-> lmb_add_region_flags() return values is described in the table below:
->
->     Return case                        Pre-1d9   1d9    New
->     -----------------------------------------------------------
->     Added successfully                    0      0      0
->     Failed to add                         -1     -1     -1
->     Already added, flags == LMB_NONE      0      0      0
->     Already added, flags != LMB_NONE      0      -1     -EEXIST
->
-> Rework all affected functions and their documentation. Also fix the
-> corresponding unit test which checks reserving the same region with the
-> same flags to account for the changed return value.
->
-> No functional change is intended (by this patch itself).
->
-> Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas with !LMB_NONE")
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> ---
-> Changes in v2:
->   - Removed the check for exactly the same region, and return -EEXIST in
->     the branch handling overlapping regions instead
->   - Reworded the commit message accordingly
->
->  lib/lmb.c      | 26 +++++++++++++-------------
->  test/lib/lmb.c |  2 +-
->  2 files changed, 14 insertions(+), 14 deletions(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index b03237bc06cb..a695edf70dfa 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -183,8 +183,10 @@ static long lmb_resize_regions(struct alist *lmb_rgn_lst,
->   * the function might resize an already existing region or coalesce two
->   * adjacent regions.
->   *
-> - *
-> - * Returns: 0 if the region addition successful, -1 on failure
-> + * Return:
-> + * * %0                - Added successfully, or it's already added (only if LMB_NONE)
-> + * * %-EEXIST  - The region is already added, and flags != LMB_NONE
-> + * * %-1       - Failure
->   */
->  static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
->                                  phys_size_t size, enum lmb_flags flags)
-> @@ -217,17 +219,15 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
->                         coalesced++;
->                         break;
->                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> -                       if (flags == LMB_NONE) {
-> -                               ret = lmb_resize_regions(lmb_rgn_lst, i, base,
-> -                                                        size);
-> -                               if (ret < 0)
-> -                                       return -1;
-> +                       if (flags != LMB_NONE)
-> +                               return -EEXIST;
->
-> -                               coalesced++;
-> -                               break;
-> -                       } else {
-> +                       ret = lmb_resize_regions(lmb_rgn_lst, i, base, size);
-> +                       if (ret < 0)
->                                 return -1;
-> -                       }
-> +
-> +                       coalesced++;
-> +                       break;
->                 }
->         }
->
-> @@ -667,7 +667,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
->   *
->   * Free up a region of memory.
->   *
-> - * Return: 0 if successful, -1 on failure
-> + * Return: 0 if successful, negative error code on failure
->   */
->  long lmb_free_flags(phys_addr_t base, phys_size_t size,
->                     uint flags)
-> @@ -818,7 +818,7 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
->                                       lmb_memory[rgn].size,
->                                       base + size - 1, 1)) {
->                         /* ok, reserve the memory */
-> -                       if (lmb_reserve_flags(base, size, flags) >= 0)
-> +                       if (!lmb_reserve_flags(base, size, flags))
->                                 return base;
->                 }
->         }
-> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> index 0bd29e2a4fe7..48c3c966f8f2 100644
-> --- a/test/lib/lmb.c
-> +++ b/test/lib/lmb.c
-> @@ -754,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
->
->         /* reserve again, same flag */
->         ret = lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
-> -       ut_asserteq(ret, -1L);
-> +       ut_asserteq(ret, -EEXIST);
->         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
->                    0, 0, 0, 0);
->
-> --
-> 2.39.5
->
+[1] https://radxa.com/products/rock5/5c
 
-Tom this needs to go in -master for the release
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+this patch depends on follwing patches:
+- https://patchwork.ozlabs.org/project/uboot/patch/20241210222341.3537543-2-jonas@kwiboo.se/
+- https://patchwork.ozlabs.org/project/uboot/patch/20241211033934.23044-6-naoki@radxa.com/
+---
+ arch/arm/mach-rockchip/rk3588/Kconfig | 5 +++--
+ configs/rock-5-rk3588s_defconfig      | 1 +
+ doc/board/rockchip/rockchip.rst       | 2 +-
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index e1487ecb0464..733ea35839a5 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -261,10 +261,11 @@ config TARGET_ROCK_5_ITX_RK3588
+ 	  Powered by either 12V, ATX power-supply or PoE
+ 
+ config TARGET_ROCK_5_RK3588S
+-	bool "Radxa ROCK 5C RK3588S2 board"
++	bool "Radxa ROCK 5C/5C Lite RK3588S2/RK3582 board"
+ 	select BOARD_LATE_INIT
+ 	help
+-	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
++	  Radxa ROCK 5C/5C Lite are Rockchip RK3588S2/RK3582 based
++	  single board computer.
+ 
+ config TARGET_SIGE7_RK3588
+ 	bool "ArmSoM Sige7 RK3588 board"
+diff --git a/configs/rock-5-rk3588s_defconfig b/configs/rock-5-rk3588s_defconfig
+index 54043264de48..a0137520803f 100644
+--- a/configs/rock-5-rk3588s_defconfig
++++ b/configs/rock-5-rk3588s_defconfig
+@@ -18,6 +18,7 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index 6b952654cb3d..4516260976ee 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -141,7 +141,7 @@ List of mainline supported Rockchip boards:
+      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+      - Radxa ROCK 5B (rock5b-rk3588)
+-     - Radxa ROCK 5C (rock-5-rk3588s)
++     - Radxa ROCK 5C/5C Lite (rock-5-rk3588s)
+      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
+      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
+-- 
+2.43.0
+
