@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E8E0E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5A57E77182
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C23E180304;
-	Wed, 11 Dec 2024 16:53:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 330AC8031E;
+	Wed, 11 Dec 2024 16:53:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X4nH6RA4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P4z9DIKl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 623F080303; Wed, 11 Dec 2024 16:53:31 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 1176980327; Wed, 11 Dec 2024 16:53:48 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FE198031E
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:53:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D73580303
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:53:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5cfa1ec3b94so9470294a12.2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:53:29 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-21661be2c2dso25762945ad.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:53:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733932409; x=1734537209; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733932424; x=1734537224; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qAzFZCADvDGEpLzCNxvfo+ihE8rYlRbOgnRw4xJFPMQ=;
- b=X4nH6RA4FCYqUOfOmocoFY12Aj8t2T6hy0GRnfNodAV1x3FK1xbDi3nSHRrAVh9Q37
- NYGRRTOjR3NAnt3O+/GkVyplEhd9OKU9akd0oakF45OXezWdXWpNwaxqYOzjliNKkSZG
- FBI8zvtMwFhzsiTDrnM3yhi4NlZumWe6S03to=
+ bh=VlxQ4XhSY+yDlWScgh6PQKhXUIiSUxEAIJsCuauipqM=;
+ b=P4z9DIKlIpAwc9lKDT88TzhYP4P0ifi4isehVC7hNdoImSgjnFUZXanx2ZUH/sJ/b6
+ Kx/RsCOx8IR4a+u+uekUUTlvg7VR1cLg2tm8VnLtbUwHb5jxOnh8FxiRPZq3h9pvBtq8
+ e0ckjvRddS+8QmGHi1QKRkeFjmEAlbZygKEnY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733932409; x=1734537209;
+ d=1e100.net; s=20230601; t=1733932424; x=1734537224;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qAzFZCADvDGEpLzCNxvfo+ihE8rYlRbOgnRw4xJFPMQ=;
- b=Jn/VkmGUZ8jIE7olv1TyEz5xoC7SQtG6hrDRxnRm7H8+0UHkGVO86LTRKCD8XK8hvF
- hdtfhZ0vdk2rLTDuamSI9D0+LVQX3YbLd7m0rfgCOSUssaePufBqW4tbiLpvuqMQIcFz
- DapmurgYItePnnI4FF8jo3N5Lr5BuGuRXvxtU5qkw8o6mBQJqoqbWOhOXWtee87Gqa3j
- a0ObHowkBJ0bGXw9d47ciFFiuQsJCS60PSJ3DbUA/yBK9Uunu+0wE0MDK6JZTohy3Fr7
- G1/Zq5Uc6dW0PVX6c+upa1t05unvxSjW2fp+eL+x+EPOwYRbodKLn6liMwwIfeemA2aR
- euZQ==
-X-Gm-Message-State: AOJu0YzkhKkmmd1W5eAaZxYvFRiWeVwoHIqnTgejnHzOiVQoOfAw7ZD1
- EES+tiIwS/k60FLiM+lxtzTJ/4uO+4DhZl2tMOPwEi/udVb+NbSIzqxT4VoXFa1Nus0PMG/AjQl
- uksCHBMDozM/DX/p4sJYKaiAt0fflainEZMWaiind80euO2c=
-X-Gm-Gg: ASbGncvMZfwD+54Fv2GJlFNLzHYHtiH1MnszhUcK/JmB6EuXKXXJ73YAH9RyvliNbQo
- cE+AHR/oSTgvM4/pLc/SH88plcSPnJTT5ZjwE
-X-Google-Smtp-Source: AGHT+IFZ2kkF8koXW9rS6pf0dHDkVBFMoRVXk19qAB9b6yvvyh3R6R1h23PEdnkvML0J7ymaGEIhaqai6G+n26q8C0M=
-X-Received: by 2002:a17:906:3154:b0:aa6:8fa5:f3e3 with SMTP id
- a640c23a62f3a-aa6c1ab62b1mr22979066b.8.1733932408124; Wed, 11 Dec 2024
- 07:53:28 -0800 (PST)
+ bh=VlxQ4XhSY+yDlWScgh6PQKhXUIiSUxEAIJsCuauipqM=;
+ b=D8v3HeiNHgWKQZVjfsk6EebSfkwPFJjU7rfjjWafE8VuVN34MGy8vQDtnVLd6c3DzF
+ sTgx/fW3jRK8ZRt947tzjuIhAgvUZg24O+NoISS9rlkka4+vRRXZUW1FVxXTxfiKuYof
+ f6H/zofbkDEUA1ktBcqHXL9XSKoXnBmxn1wE6VxF95PORZ9vPwGT+u4nfG6opbHKvkQI
+ sJu6GcDwgQOGZYMpa7EHaxvqOIvnVBbJuvYNjomt/azKD3rkjrTpXIPoZM6VAJGggmhi
+ lw2I9cLjuaB9z3dDHiviggZ9vNCGDwm8m5zYTTa+w66EXOONof5ChO1ACpQCF/isWwAx
+ M9+w==
+X-Gm-Message-State: AOJu0YxfCDc+wBLDrXT8rf9zC+RFGHECQgvQV2D8+Bn8wsAtohzdUCtE
+ hYE60MD35XSw4PKdACAfzOyvbpoSjaJcNBuwWKhpZyz5mdBqL+jY4yn0i1qJd+XKiMH9OtP48rU
+ zM8+YKxapmngU9UM6UKWdUqw7BrzD9Imvnff3
+X-Gm-Gg: ASbGncs5qGNm4R514yANO8vAswMnuWeUmyiFuWtmqmvfdV22gF62289OL55TNFFjDkt
+ uzdH2JfnFfXKL6e9wD6BapffnKlQAHgniCxkN
+X-Google-Smtp-Source: AGHT+IGYsyRjDSQB04SITWywSNUbpo2Dl5KXJMj70ys3QW2e0Xqp+1j1YZR/e9dPONrbjaqPY3GfaVPsYBkbsouGDNw=
+X-Received: by 2002:a17:902:e847:b0:20f:aee9:d8b8 with SMTP id
+ d9443c01a7336-2177851f98bmr52905885ad.20.1733932423978; Wed, 11 Dec 2024
+ 07:53:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211135418.563803-1-sjg@chromium.org>
- <20241211135418.563803-5-sjg@chromium.org>
- <CAC_iWjK8LO=m9ymhCDMep0xwa+hR8OSaBfS1VXgWsPLAGfnuXQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjK8LO=m9ymhCDMep0xwa+hR8OSaBfS1VXgWsPLAGfnuXQ@mail.gmail.com>
+ <20241211135418.563803-2-sjg@chromium.org>
+ <CAC_iWjLhpi5Wmd8569vgRP3O=CSoQUgLAaOYg7LyY_iOHG+U5A@mail.gmail.com>
+In-Reply-To: <CAC_iWjLhpi5Wmd8569vgRP3O=CSoQUgLAaOYg7LyY_iOHG+U5A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Dec 2024 08:53:16 -0700
-Message-ID: <CAFLszTiTLXpZ4NYX2rEtjYa3+2moXt-aFtJYQvui8_Po4tQt4w@mail.gmail.com>
-Subject: Re: [PATCH v5 04/23] efi_loader: Show the resulting memory address
- from an alloc
+Date: Wed, 11 Dec 2024 08:53:27 -0700
+Message-ID: <CAFLszTj2-Bse1wgzBX__5wH0FOdgC=N11faSHBKg8-T5+G2-ZQ@mail.gmail.com>
+Subject: Re: [PATCH v5 01/23] efi: Define fields in struct efi_mem_desc
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Matthew Garrett <mgarrett@aurora.tech>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,70 +93,43 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Wed, 11 Dec 2024 at 07:51, Ilias Apalodimas
+On Wed, 11 Dec 2024 at 07:45, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Update efi_allocate_pool_ext() to log the pointer returned from this
-> > call, which can be helpful when debugging.
+> Hi Simon,
 >
-> Can you explain how logging the success is helping? I think its pretty
-> pointless, why not log a failure?
-
-It shows the memory address that was allocated.
-
-
+> [...]
 >
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v3)
-> >
-> > Changes in v3:
-> > - Show the returned address rather than the pointer
-> >
-> > Changes in v2:
-> > - Use EFI_PRINT() instead of log_debug()
-> >
-> >  lib/efi_loader/efi_boottime.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> > index 080e7f78ae3..f27b3827ed2 100644
-> > --- a/lib/efi_loader/efi_boottime.c
-> > +++ b/lib/efi_loader/efi_boottime.c
-> > @@ -13,6 +13,7 @@
-> >  #include <irq_func.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > +#include <mapmem.h>
-> >  #include <pe.h>
-> >  #include <time.h>
-> >  #include <u-boot/crc.h>
-> > @@ -511,6 +512,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int pool_type,
-> >
-> >         EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
-> >         r = efi_allocate_pool(pool_type, size, buffer);
-> > +       if (r == EFI_SUCCESS)
-> > +               EFI_PRINT("*buffer = %llx\n", (u64)map_to_sysmem(*buffer));
+> >         u32 reserved;
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index 39809eac1bc..ee0cdd36500 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -788,8 +788,10 @@ efi_status_t efi_add_memory_map(u64 start, u64 size, int memory_type);
+> >  /**
+> >   * efi_add_memory_map_pg() - add pages to the memory map
+> >   *
+> > - * @start:                     start address, must be a multiple of
+> > - *                             EFI_PAGE_SIZE
+> > + * @start: start address, must be a multiple of EFI_PAGE_SIZE. Note that this
+> > + * is actually a pointer provided as an integer. To pass in an address, pass
+> > + * in (ulong)map_to_sysmem(addr)
 >
-> buffer can be null if size == 0
+> Why is this a pointer? This is the physical address of the hardware.
 
-No, buffer cannot be NULL, I believe you are thinking of *buffer
+The distinction between pointer and address is to make it clear
+whether you need to map_sysmem() or not. That is the purpose of this
+series - to clean up the confusion about translating back and forth.
+There definitely is quite a bit of confusion in the EFI_LOADER code.
 
-That's one reason why I prefer bufferp to buffer. It avoids this sort
-of confusion.
+Generally in U-Boot ulong is used for an address and void * for a
+pointer. In the case of EFI_LOADER, the original author may not have
+been aware of that. Incidentally, it was also written without sandbox
+support (which I added) and tests[1] (which Heinrich added).
 
->
-> > +
-> >         return EFI_EXIT(r);
-> >  }
-> >
-> > --
-> > 2.34.1
-> >
+If you like we could arrange a call to go over how sandbox works with memory.
 
 Regards,
-SImon
+Simon
+
+[1] https://lore.kernel.org/u-boot/7fbaabab-5d82-4670-eab6-edb9d27f0bb9@suse.de/
