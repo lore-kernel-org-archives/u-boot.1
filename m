@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B3E1E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 08:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FAFE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9B4F801F5;
-	Wed, 11 Dec 2024 09:36:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C660801EB;
+	Wed, 11 Dec 2024 11:55:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ziswiler.com header.i=marcel@ziswiler.com header.b="2GKxyW2G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W3cyjZvM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 922F080200; Wed, 11 Dec 2024 09:35:59 +0100 (CET)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D9AFF801F0; Wed, 11 Dec 2024 11:55:12 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979C3801CE
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 09:35:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FFD8801EA
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ziswiler.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel@ziswiler.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziswiler.com;
- s=s1-ionos; t=1733906122; x=1734510922; i=marcel@ziswiler.com;
- bh=j4RcTbX8t1G6ACyo9die8TKTpX8DcXh30kL9F/abvj4=;
- h=X-UI-Sender-Class:Message-ID:Subject:From:To:Cc:Date:In-Reply-To:
- References:Content-Type:Content-Transfer-Encoding:MIME-Version:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=2GKxyW2GgMvakLOqWjJ9AwzAbCFJt91pVZTbN6Ni/Btf8mEN4Fbe8ysGTcbPwRLA
- PvzkIo8099ssHN4JIOj8eHe19g905Rg3leMWmpnYa9zgzvpx9fSvQh7U99BL0tQTp
- afKB8m0lMKlxjs6l0/Nll391NhxptmIEzFzxc9VrLkVR6FmDbhyzS8NHuK57JYshN
- sLb8C5tadMjHD+3F/ZuH6gNuGLEhjEJze+oxhbHBxQpGifBoobza3VLrl9glMW4kJ
- ySzhecaqvYrhVO8Dhh1isVDn75VvWpww99NuP9Vb2n/BI330bJo8TJ3Ity2yohJ8Z
- 4Qef96ROnfwOE6ZAFQ==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from [10.10.1.166] ([194.230.241.203]) by mrelay.perfora.net
- (mreueus002 [74.208.5.2]) with ESMTPSA (Nemesis) id 0Levc1-1tyEv049Nf-00mFjI; 
- Wed, 11 Dec 2024 09:35:22 +0100
-Message-ID: <b7b51f70e6271ea38fe2257b8424c41bb3e6114e.camel@ziswiler.com>
-Subject: Re: [PATCH v4 2/2] doc: spacemit: bananapi_f3: document Banana Pi
- F3 board
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: Huan Zhou <pericycle.cc@gmail.com>
-Cc: Yixun Lan <dlan@gentoo.org>, u-boot@lists.denx.de, Ben Dooks	
- <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>, Dan Carpenter	
- <dan.carpenter@linaro.org>, Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt	 <xypron.glpk@gmx.de>, Jonas Schw?bel
- <jonasschwoebel@yahoo.de>, Kever Yang	 <kever.yang@rock-chips.com>, Leo
- <ycliang@andestech.com>, Michal Simek	 <michal.simek@amd.com>, Nishanth
- Menon <nm@ti.com>, Padmarao Begari	 <padmarao.begari@microchip.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,  Randolph
- <randolph@andestech.com>, Rick Chen <rick@andestech.com>, Samuel Holland	
- <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, Yu Chien Peter Lin	
- <peterlin@andestech.com>, Kongyang Liu <seashell11234455@gmail.com>
-Date: Wed, 11 Dec 2024 09:35:12 +0100
-In-Reply-To: <20241208065157.wd7jr4ltjtvbytld@per1cycle.per1cycle>
-References: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
- <20241129-pickup-bpif3-v4-2-e99fabf66e33@gmail.com>
- <ad100a4f673759559a6047083713d379847894cb.camel@ziswiler.com>
- <20241204005808-GYA559515@gentoo>
- <cdf417bfba7bf57379d18eb114822195610ad99d.camel@ziswiler.com>
- <20241208065157.wd7jr4ltjtvbytld@per1cycle.per1cycle>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.2 (by Flathub.org) 
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aa662795ca3so110157366b.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733914509; x=1734519309; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=oVS5maf9KllNKx/w3oCMP5752UFQu5gJ/SlM1/qiCQU=;
+ b=W3cyjZvM5mBhWex2sxKaAU7qkY38GRkrnmURWUEHJSQSms6pzZE70zeuCDLMD0TR7O
+ R26KcNPO/pXzC84XT/xrW4HHDyTFoQI+Q8ftY+bjZ2f9VtmeycA0bZ4UXhIDkaibuDE3
+ cSmEwbz4iS6dAgz2zS8SGggSn1PUaIoU44hudVlVR+koIRMQv5XQCV1U8DgQIDnXQ70H
+ yNg8VcbimspKbpuWh5DDmdm87jNb3r0lfarWSfiiM6pg1vZmh6RDc0e94ekei0VirqDA
+ hZRkMiEEp0kPcJCABD4wZix0kL3vG8Q9tLcmTGE6fXxNqZm5rVpOQ9AkJf2bGeEMtLsx
+ plPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733914509; x=1734519309;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oVS5maf9KllNKx/w3oCMP5752UFQu5gJ/SlM1/qiCQU=;
+ b=fryvq0XYAxfAofyYwdPsjOTjn0PSM4YZcg6V6YOsNFRurKAnNlOZbua80MNRUTMG0R
+ U+fOGxwEoccntQuf2Wo8wLPOOrr0oKydKDD8/ktdGE2lkpm/8Ta0b15EObyIURMjCes7
+ Ao30mZ1FH5AH+OOyqMasYV6YLQIoARneB9z1fC7pxqTdreKUkoWXtGmM3DQ3vrNl4hb8
+ pLxVJx8WHk3z8e1VPHW14Censx/41oRkmaw/19hLJw5MWJdIQfFYDQDAuBBtK/jFkEV+
+ pw2m5UpCl+CYkrF1x/GYJQ8CXo0elJ8z4NrZQpQJVZZjjFLvJm7Gn4UyDt2vIqS3tNf+
+ 5ovw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgQXJ0TFa8EA6mkjqmpZ5J78FZpZWVUPt5XztQuxE1ZLxyplsyaCoNy4VC/SnbJgamM3foGEw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkCaT+srZc6dlnE23UvvR7klRxk68eCRAnEHTk0jV5jBSZOzE8
+ rRZnNf7IEmYYJFqfUN00p8i0zyjWyG217/LLFazMRqPj48i+eIosfDI8B29zkaA=
+X-Gm-Gg: ASbGncuCFWa9Vjy7K5CowPSwrxPEU9Akc2yAurZPWPzz43aCa6v3L6qXVDRBDY3XVYP
+ xYfy/OIeloj7/lXdh66ko1OAgHEQTez3M1eNCfaFUpMD6eHh/d5DGKaFljq6kow575ilC5JDiJp
+ 273AMlEVnRGIQt0WHe1RlBcAXmaeKRYjkoJupFpiXPLgNsII4aw8aBFCKst7yHMh5OoJOsHRAkC
+ s3jg6zz0KmwbGmM/czDa1oS+U35IJV1LrXO1Eo/TVJn2o+Af4KvAKIWx6BGQum5s14T1vwdH8Ej
+ 3xUtEtunCemAndcHhT50161gqAAqmd4=
+X-Google-Smtp-Source: AGHT+IFjSOphtb4q3h57NJKYsp+Vgp/WM5Kx/H6+t8kWRxF4LNldxmYXfgo4M5CgoPYTL4knXF+Dzg==
+X-Received: by 2002:a17:907:94cc:b0:aa5:b1bb:10db with SMTP id
+ a640c23a62f3a-aa6b15555cemr143274966b.1.1733914509501; 
+ Wed, 11 Dec 2024 02:55:09 -0800 (PST)
+Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
+ [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Dec 2024 02:55:08 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ Nam Cao <namcao@linutronix.de>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Janne Grunau <j@jannau.net>, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1 0/8] Cleanup the LMB subsystem
+Date: Wed, 11 Dec 2024 12:54:41 +0200
+Message-ID: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:qmX6uOWaQkKKDxSZT7KLMyhXBmTToTnEFodB+BVeJFHENoTGsd+
- lvNcKf5OsVNxwVr5am/Xarf1r1i9a1Ptd2Fad8Yjv9kOvPlORJ+EOp7qFq8Ba2CTtKMkzCp
- x+519kkmy9U56VXAOPvnKs/0/IVksXQoAFMAVdoVj0yyRiMAJ03kGU7nG7+pG+TkQhgc80d
- mhJ/tHChxnlFmx6aJ68tw==
-UI-OutboundReport: notjunk:1;M01:P0:2lV7R+C61VY=;oIFfqztG8+x2guDdNc3C6Xt1t8/
- 5PQAZPrQSvoTK7UFS8uiZsZJZ2pQbaIzShQkhv0KZWXMrfih3Pl1oe7hlPmOLYwekk8Av7gHa
- 6bjJJ4MW1vUdBpr+w9kR6QU7aNdnxnK4/Qh07AZd0e2vVdqoNbS9rye0QlfMRAmMSv7gFACIz
- XOo+b2UX3R4qdi7A53HwQMWOSktzq9us1VrDEfl3s1EHKylsKnDMziw579wwv1YOec3Wx1uVb
- 6veDm0HaZTWL2pZU5JujMZNBYn5CTSAxvsNv+cetbir1Fd/7KlOnGCr5n+L0tpFy/tQuvPAWl
- LwqvxO2Zg5GVmzm6skD0zIyIn+JIfsojvvYidkzPBqhT8eji6anK9jswACiiUpnUIapIcvQd4
- HJLzyvqIsyaw2uaY8qwd6jqk6y9n2xUbjPFF0Uy6+IiyNnpPecaAxb+/kMVjUywC76ArPhcIr
- G1KFtGsALLpy313fXfZGRKiRtaGcok7Dls6CrtnWKcUBbTWH8xi/Rr9kOoFtrPb5oHkhE/2EJ
- qneAO21xV0ZbppHZSuk34fMsWcQQSDUS+nPRiA2g2Qko2PMf3+miHrZCWBoNaoVx0uYtL0FRc
- 7PY1eai3F10Qrh337GsvUmvII3xdGwS36Pv3P5iWX2qmppUMM1KUEVJysMOUo/VNjXolOSHig
- 4ADsBVRGBHsK5KhiKlYMuAmrObir8VpJKdt3Yf2Kr17JiWvrTk9AjlHqLNkcw1UVSibfqKpV8
- Q0Dc4oLnRcAOTFxf0P+t+j/uG7CyENkIojOrsocpG0Q/JZ3fhvUT1z15qMlo28Vkd5xOcm4X2
- e8PiY0tLJ74ngz8TuwjqIxk2PrG6rJABtzs68HRvihVWBeR+ihPCr8+itTMPHeaTvU1NU1xVT
- Uc1UbuGfKEhRCxtIK409JwE3VOwwAOze2Q/yUIn6nQbOBris2DmSDcDJ44Asdp070DFCVqupQ
- 0OIGVh4ysVG1IyQBIwooCeiFx4YReNMASxcoyGPLcoIVjGfBNMjWpg/ooORX+lBdtdzLt0a/F
- dKbU2WnVpadLjP2mmJCYqtBdWLGk3x0ZH4XIIuSUIszmtgjRjW+Gxsn9Shvw8uVxAZfCWLAtC
- DRSEQi1d0=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,271 +109,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Huan
+Hi all,
 
-On Sun, 2024-12-08 at 14:51 +0800, Huan Zhou wrote:
-> On Wed, Dec 04, 2024 at 09:52:09AM +0100, Marcel Ziswiler wrote:
-> > Hi Yixun Lan
-> >=20
-> > On Wed, 2024-12-04 at 08:58 +0800, Yixun Lan wrote:
-> > > Hi Marcel, Huan
-> > >=20
-> > > On 18:52 Tue 03 Dec=C2=A0=C2=A0=C2=A0=C2=A0 , Marcel Ziswiler wrote:
-> > > > Hi Huan Zhou=20
-> > > >=20
-> > > > On Fri, 2024-11-29 at 13:37 +0800, Huan Zhou wrote:
-> > > > > From: Kongyang Liu <seashell11234455@gmail.com>
-> > > > >=20
-> > > > > Add document for Banana Pi F3 board which based on SpacemiT's K1 =
-SoC.
-> > > > >=20
-> > > > > Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-> > > > > Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
-> > > > > ---
-> > > > > =C2=A0doc/board/index.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
-> > > > > =C2=A0doc/board/spacemit/bananapi-f3.rst | 86 +++++++++++++++++++=
-+++++++++++++++++++
-> > > > > =C2=A0doc/board/spacemit/index.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 |=C2=A0 8 ++++
-> > > > > =C2=A03 files changed, 95 insertions(+)
-> > > > >=20
-> > > > > diff --git a/doc/board/index.rst b/doc/board/index.rst
-> > > > > index 417c128c7af6ad2267ef1bc743c7f10ae70b6de7..367da2d62316d4cab=
-25ecc53f852ef742eba13dd 100644
-> > > > > --- a/doc/board/index.rst
-> > > > > +++ b/doc/board/index.rst
-> > > > > @@ -51,6 +51,7 @@ Board-specific doc
-> > > > > =C2=A0=C2=A0=C2=A0 sipeed/index
-> > > > > =C2=A0=C2=A0=C2=A0 socionext/index
-> > > > > =C2=A0=C2=A0=C2=A0 sophgo/index
-> > > > > +=C2=A0=C2=A0 spacemit/index
-> > > > > =C2=A0=C2=A0=C2=A0 st/index
-> > > > > =C2=A0=C2=A0=C2=A0 starfive/index
-> > > > > =C2=A0=C2=A0=C2=A0 ste/index
-> > > > > diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/space=
-mit/bananapi-f3.rst
-> > > > > new file mode 100644
-> > > > > index 0000000000000000000000000000000000000000..1e6d6ef19be7e2568=
-4966bd4a727bd21b147330a
-> > > > > --- /dev/null
-> > > > > +++ b/doc/board/spacemit/bananapi-f3.rst
-> > > > > @@ -0,0 +1,86 @@
-> > > > > +.. SPDX-License-Identifier: GPL-2.0-or-later
-> > > > > +
-> > > > > +Banana Pi F3
-> > > >=20
-> > > > Officially they call it Banana Pi BPI-F3.
-> > > >=20
-> > > > > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > > > +
-> > > > > +Building
-> > > > > +~~~~~~~~
-> > > > > +1. Install the spacemit riscv cross compile toolchain_, or skip =
-it if riscv toolchain is installed.
-> > > >=20
-> > > > I would not use a specific such toolchain but rather a regular RISC=
--V one e.g.
-> > > >=20
-> > > > https://github.com/riscv-collab/riscv-gnu-toolchain
-> > > >=20
-> > >=20
-> > > I think any riscv toolchain should work fine here, as I'm using Gento=
-o specific riscv toolchain..
-> > > so consider it's merely an example provided to demonstrate whole proc=
-ess working
-> >=20
-> > Okay.
-> >=20
-> > > > > +
-> > > > > +.. _toolchain: https://archive.spacemit.com/toolchain/
-> > > > > +
-> > > > > +2. Setup cross compilation environment variable:
-> > > > > +
-> > > > > +.. code-block:: console
-> > > > > +
-> > > > > +=C2=A0=C2=A0 export CROSS_COMPILE=3D<riscv64 toolchain prefix, e=
-.g /opt/spacemit/bin/riscv64-unknown-linux-gnu->
-> > > > > +
-> > > > > +3. Before building U-Boot, OpenSBI should be built first. OpenSB=
-I can be
-> > > > > +built for SpacemiT K1 SoC as below:
-> > > > > +
-> > > > > +.. code-block:: console
-> > > > > +
-> > > > > +=C2=A0=C2=A0 git clone https://github.com/cyyself/opensbi=C2=A0-=
-b k1-opensbi
-> > > > > +=C2=A0=C2=A0 cd opensbi
-> > > > > +=C2=A0=C2=A0 make PLATFORM=3Dgeneric
-> > > >=20
-> > > > What speaks against using regular master opensbi?
-> > > >=20
-> > > no idea if master of opensbi would work here, we can certainly try..
-> >=20
-> > I tried and it seems to work fine, resp. the only difference I could sp=
-ot is that instead of 'crc32+ OK' it
-> > prints some random ASCII characters in the last line before any U-Boot =
-output:
-> do you mean the extra '\n'?
+This is v1 of the rfc [0]
 
-No, it literally printed some random chars, but now it seems fine. Probably=
- some unrelated glitch maybe UART
-related.
+The LMB subsystem was used opportunistically for a number of years.
+A while back Sughosh merged it with the EFI subsystem in order to have a
+common allocator and avoid subsystems overwriting memory they shouldn't.
 
-Actually, one out of five to ten boots it prints such random chars: =EF=BF=
-=BD,=EF=BF=BD=EF=BF=BD&=EF=BF=BD%Hj=EF=BF=BDH=EF=BF=BD
+This is an initial cleanup of all the crud we gathered over the years.
+There's no functional change expected from the patches as they just cleanup
+some abstraction functions and rename a few variables to make more
+sense.
 
-I tried cyyself opensbi again and after 10 boots it also printed similar ra=
-ndom chars. Actually, it even always
-prints the exact same ones when it happens. I guess, sooner than later, som=
-ebody might need to debug into what
-exactly is happening there (;-p).
+I plan to make even bigger changes -- e.g I don't see the point of
+having *_alloc() and *_reserve() versions of the functions since they mostly
+do the same thing and just cause confusion. lmb_alloc_addr_flags()
+returning the base address on success makes little sense since we
+already *request* the address on the function arguments, etc.
+Since this patchset grew enough already, I'd like to get it in
+before more refactoring happens.
 
-[   0.579] ## Checking hash(es) for Image opensbi ...=EF=BF=BD,=EF=BF=BD=EF=
-=BF=BD&=EF=BF=BD%Hj=EF=BF=BDH=EF=BF=BD
+It's worth noting that although some patches slightly increase the code
+size due to an extra flags argument being carried around, the final
+result is eventually smaller.
 
-Anyway, regular upstream opensbi seems to work just fine, good.
+# qemu_arm64_lwip_defconfig (version string adds another 20b)
+add/remove: 0/5 grow/shrink: 15/1 up/down: 568/-628 (-60)
+Function                                     old     new   delta
+lmb_alloc_base                                80     324    +244
+lmb_alloc_addr                                 8     144    +136
+lmb_reserve                                    8      96     +88
+version_string                                50      70     +20
+boot_relocate_fdt                            488     508     +20
+boot_ramdisk_high                            268     284     +16
+lmb_add_region_flags                         696     704      +8
+boot_fdt_reserve_region                      100     108      +8
+load_serial                                  548     552      +4
+lmb_alloc                                      8      12      +4
+image_setup_libfdt                           368     372      +4
+do_load                                      728     732      +4
+do_bootz                                     332     336      +4
+do_booti                                     520     524      +4
+bootm_run_states                            2176    2180      +4
+lmb_alloc_addr_flags                           4       -      -4
+boot_fdt_add_mem_rsv_regions                 284     280      -4
+lmb_alloc_base_flags                          76       -     -76
+lmb_reserve_flags                             96       -     -96
+_lmb_alloc_addr                              144       -    -144
+_lmb_alloc_base                              304       -    -304
+Total: Before=1020102, After=1020042, chg -0.01%
 
-> > [=C2=A0=C2=A0 0.490] ## Checking hash(es) for Image opensbi ... crc32+ =
-OK
-> >=20
-> > > but I think it's another story, as we are focusing on mainlining uboo=
-t
-> >=20
-> > Yes, exactly. I am just curious if it needs combining with some obscure=
- vendor stuff.
-> the spl phase need some obscure vendor stuff.
+# sandbox_defconfig (version string adds another 20b)
+add/remove: 0/3 grow/shrink: 24/3 up/down: 523/-501 (22)
+Function                                     old     new   delta
+lmb_alloc_base                                48     299    +251
+lmb_alloc_addr                                 4      92     +88
+lmb_reserve                                    4      58     +54
+test_alloc_addr                             2933    2963     +30
+version_string                                50      70     +20
+lib_test_lmb_overlapping_reserve            1018    1030     +12
+lmb_add_region_flags                         600     610     +10
+test_multi_alloc.constprop                  3034    3042      +8
+test_get_unreserved_size                    1032    1038      +6
+boot_relocate_fdt                            599     605      +6
+boot_fdt_reserve_region                       67      73      +6
+lmb_alloc                                      4       9      +5
+lmb_free_flags                               190     194      +4
+wget_handler                                1530    1533      +3
+tftp_handler                                1190    1192      +2
+test_noreserved                             1207    1209      +2
+test_bigblock                                911     913      +2
+load_serial                                  946     948      +2
+lib_test_lmb_flags                          2101    2103      +2
+do_spi_flash                                3150    3152      +2
+do_bootz                                     526     528      +2
+do_bootm_linux                              2067    2069      +2
+bootm_run_states                            5275    5277      +2
+_fs_read.lto_priv                            331     333      +2
+lmb_dump_region.lto_priv                     356     353      -3
+lmb_add                                       59      52      -7
+efi_allocate_pages.part                      303     249     -54
+lmb_reserve_flags                             65       -     -65
+_lmb_alloc_addr.lto_priv                      92       -     -92
+_lmb_alloc_base.lto_priv                     280       -    -280
+Total: Before=2492722, After=2492744, chg +0.00%
 
-Sure, but I hope we can still upstream it after this first part landed.
+[0] https://lore.kernel.org/u-boot/20241208105223.2821049-1-ilias.apalodimas@linaro.org/T/#m43927af3f758f8d0be897a8a6c77b4325546afd5
 
-> > > FWIK, this branch is generally same version as vendor opensbi, but sl=
-ightly
-> > > =C2=A0rebase to more recent opensbi version
-> > >=20
-> > > > > +
-> > > > > +4. Then build U-Boot as following:
-> > > > > +
-> > > > > +.. code-block:: console
-> > > > > +
-> > > > > +=C2=A0=C2=A0 cd <U-Boot-dir>
-> > > > > +=C2=A0=C2=A0 make bananapi-f3_defconfig
-> > > > > +=C2=A0=C2=A0 make OPENSBI=3D<OpenSBI-dir>/build/platform/generic=
-/firmware/fw_dynamic.bin
-> > > > > +
-> > > > > +This will generate u-boot.itb
-> > > > > +
-> > > > > +Booting
-> > > > > +~~~~~~~
-> > > > > +Actually, we can replace the uboot part from bianbu linux which =
-is the bsp_ to validate this patch,
-> > > > > +use `balena etcher` to burn the bianbu-minimal.img to the sd car=
-d,=20
-> > > >=20
-> > > > trailing whitespace
-> > > >=20
-> > > > > +and replace the /dev/sdx4 where places the uboot_ with the `u-bo=
-ot.itb` generated from this patch.
-> > > > > +
-> > > > > +.. _bsp: https://archive.spacemit.com/image/k1/version/bianbu/v2=
-.0/
-> > > > > +.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-f=
-irmware-layout
-> > > > > +
-> > > > > +Sample boot log from Banana Pi F3 board
-> > > >=20
-> > > > BPI-F3
-> > > >=20
-> > > > > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > > > > +.. code-block:: none
-> > > > > +
-> > > > > +=C2=A0=C2=A0 try sd...
-> > > > > +=C2=A0=C2=A0 bm:3
-> > > > > +=C2=A0=C2=A0 j...
-> > > > > +
-> > > > > +=C2=A0=C2=A0 U-Boot SPL 2022.10spacemit-dirty (Oct 21 2024 - 09:=
-01:13 +0000)
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.279] DDR type LPDDR4X
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.292] lpddr4_silicon_init consume 13=
-ms
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.293] Change DDR data rate to 2400MT=
-/s
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.430] ## Checking hash(es) for confi=
-g conf-1 ... OK
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.432] ## Checking hash(es) for Image=
- opensbi ... OK
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.437] ## Checking hash(es) for Image=
- uboot ... OK
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.443] ## Checking hash(es) for Image=
- fdt-1 ... OK
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.488] ## Checking hash(es) for confi=
-g config_1 ... OK
-> > > > > +=C2=A0=C2=A0 [=C2=A0=C2=A0 0.490] ## Checking hash(es) for Image=
- opensbi ... crc32+ OK
-> > > > > +
-> > > > > +
-> > > > > +=C2=A0=C2=A0 U-Boot 2024.10-rc4-00462-g5b138cfcc587-dirty (Nov 2=
-8 2024 - 14:56:49 +0800)
-> > > > > +
-> > > > > +=C2=A0=C2=A0 DRAM:=C2=A0 4 GiB
-> > > >=20
-> > > > I guess it does not yet detect the amount of RAM available.
-> > > >=20
-> > > I would be fine with this, as currently the memory size is hardcoded,
-> > > we should work on follow-up patch to auto probe DDR size, and corret =
-it
-> >=20
-> > Yes, I agree.
-> >=20
-> > > > > +=C2=A0=C2=A0 Core:=C2=A0 19 devices, 8 uclasses, devicetree: sep=
-arate
-> > > > > +=C2=A0=C2=A0 Loading Environment from nowhere... OK
-> > > > > +=C2=A0=C2=A0 In:=C2=A0=C2=A0=C2=A0 serial@d4017000
-> > > > > +=C2=A0=C2=A0 Out:=C2=A0=C2=A0 serial@d4017000
-> > > > > +=C2=A0=C2=A0 Err:=C2=A0=C2=A0 serial@d4017000
-> > > > > +=C2=A0=C2=A0 Net:=C2=A0=C2=A0 No ethernet found.
-> > > > > +=C2=A0=C2=A0 =3D> cpu list
-> > > > > +=C2=A0=C2=A0 0: cpu@0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 1: cpu@1=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 2: cpu@2=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 3: cpu@3=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 4: cpu@4=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 5: cpu@5=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 6: cpu@6=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 7: cpu@7=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 spacemit,x60
-> > > > > +=C2=A0=C2=A0 =3D> test
-> > > > > +=C2=A0=C2=A0 =3D>=20
-> > > >=20
-> > > > trailing whitespace
-> > > >=20
-> > > > > +
-> > > > > diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/in=
-dex.rst
-> > > > > new file mode 100644
-> > > > > index 0000000000000000000000000000000000000000..3fb7d804ac8fc8dd4=
-c7ee67ffc877f9ad323162d
-> > > > > --- /dev/null
-> > > > > +++ b/doc/board/spacemit/index.rst
-> > > > > @@ -0,0 +1,8 @@
-> > > > > +.. SPDX-License-Identifier: GPL-2.0-or-later
-> > > > > +
-> > > > > +SpacemiT
-> > > > > +=3D=3D=3D=3D=3D=3D=3D=3D
-> > > > > +.. toctree::
-> > > > > +=C2=A0=C2=A0 :maxdepth: 1
-> > > > > +
-> > > > > +=C2=A0=C2=A0 bananapi-f3
-> > > > >=20
-> > > >=20
-> > > > new blank line at EOF
-> fixed.
+Changes since v1:
+- Rebased on top of
+  https://lore.kernel.org/u-boot/20241211021703.2333-1-semen.protsenko@linaro.org/
+  https://lore.kernel.org/u-boot/20241211022550.2995-1-semen.protsenko@linaro.org/
+- Converted enum lmb_flags to a u32
+- Removed the _flags from all the functions
+- Added a patch that removes lmb_align_down()
+- Picked up r-b tags. Tom I kept your on patch #3 since I only changed the name
+  of the function and assumed you are ok with it.
 
-Thanks!
+Ilias Apalodimas (8):
+  lmb: Remove lmb_align_down()
+  lmb: Move enum lmb_flags to a u32
+  lmb: Remove lmb_reserve_flags()
+  lmb: Rename free_mem to available_mem
+  lmb: Remove lmb_add_region()
+  lmb: Remove lmb_alloc_addr_flags()
+  lmb: Remove lmb_alloc_base_flags()
+  lmb: Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
 
-Cheers
+ arch/powerpc/cpu/mpc85xx/mp.c |   2 +-
+ arch/powerpc/lib/misc.c       |   2 +-
+ boot/bootm.c                  |   3 +-
+ boot/image-board.c            |  20 +++--
+ boot/image-fdt.c              |  15 ++--
+ cmd/booti.c                   |   2 +-
+ cmd/bootz.c                   |   2 +-
+ cmd/load.c                    |   2 +-
+ fs/fs.c                       |   2 +-
+ include/lmb.h                 |  58 ++++++---------
+ lib/efi_loader/efi_memory.c   |   6 +-
+ lib/lmb.c                     | 136 +++++++++++-----------------------
+ test/cmd/bdinfo.c             |   4 +-
+ test/lib/lmb.c                |  92 +++++++++++------------
+ 14 files changed, 145 insertions(+), 201 deletions(-)
 
-Marcel
---=20
-Marcel Ziswiler         | mailto:marcel@ziswiler.com
-Ch=C3=A4ppelirain 4          | https://www.ziswiler.net
-CH-6018 Buttisholz      | mobile: +41 (76) 338-0382
-Switzerland             | phone: +41 (41) 928-0509
+--
+2.45.2
+
