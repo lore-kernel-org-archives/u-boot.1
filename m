@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09072E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9982E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81A5580241;
-	Wed, 11 Dec 2024 16:13:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E38C8027E;
+	Wed, 11 Dec 2024 16:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jPMe3eDX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oPhmD44c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 069A48027E; Wed, 11 Dec 2024 16:13:46 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 77B34802E6; Wed, 11 Dec 2024 16:15:34 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8A2580212
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:13:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E53F80212
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:15:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6f150ddc86dso3989967b3.1
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:13:43 -0800 (PST)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e398484b60bso5536341276.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:15:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733930022; x=1734534822; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733930131; x=1734534931; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t5jQV05nx0CVo6foheoe2U4AARSFyE/HRlPpL1ygvic=;
- b=jPMe3eDXqZpcgp4BTtv1EIz7dg7KZMmS0rEOFSkE8bU1wUO9j90jivwQ4LIFVaAhBn
- QmpgImUbWuWV33fXdLtnJhLTn3bSOUv06MsiXl0Lc7B6JxG2zGZlaEgbLAw6swhY7G3r
- MiEOlu/SBtReLaSSPLLrpVduzvuxSLwkHsja4qHHLhlSlD3x8MBIIG7j2/rjVxIP8nwm
- nsQBAWRrVB4gUgYFx1XOzTMTEN6A5f3GnoJaPpJ8uVhPQuCjrrWLI6owJtNzZV8LtR6I
- Daljql80gSNNy9aHiOeFd6uYcyjvATRMmGLrtC+Bgh0+PGB1CTyzMOB4d5X9Lt8M7jpq
- ZbaQ==
+ bh=1ZBIZl46X6ck4ubJ+1d/eyW5ljfZDsrPlzvu+cpwh14=;
+ b=oPhmD44cHSZZBh+otdCm4B/BTFvyeemcxMYuX8MYXzD79NJoB+8dJl0++Wj30quw0E
+ +fLkByQhj4aGsPoWXZdCyPrBinnw5VGIvR5BB9ajyNxL8jtz6v3X1HZ0kBAc1xZSOYzs
+ Pn45r7z9Jxi/UyGd4DGRwh9FWAI+ow6373Nci9f7HPH9YV/kaHMWv+99MK1GiXMdJ0Wy
+ 34/cdDYtlnJv6sFqsTaJc6VklflH0uX6bzQtWq+AnQyf7UiM647Qt6SscUFIGKZskN7v
+ DMOaPHUat4PjNUc0jQ21cSk4fAS0kBpR/R0Kc8gOy74RRHy6n6Lx0+80Z5smURcMXihL
+ OtKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733930022; x=1734534822;
+ d=1e100.net; s=20230601; t=1733930131; x=1734534931;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t5jQV05nx0CVo6foheoe2U4AARSFyE/HRlPpL1ygvic=;
- b=kS3fXn3jAvcKXU988+Y2dS3bWaH+Q7u7wadYIINku3aHMKzQ8g+CGhqLuSBXahyen4
- Zlql+dMHVPFBKXFIMAik7d8OOORW65Lf75+CqkFy6tHmB9p8QY+zIGHmivrXxuvHgtwb
- qr7e9ZxT65ZgrqkexjV1WBT7Zdq9BGqPPJ0gCnNAx7COturbOaLXCrTVinEEIHsmolz4
- CiiVzZpYmPV9D1PKYFbSK8rN2nsi0h2xcjD6IvRZN0dw9oNolVif4mjabdPcSrBadm2K
- 48XltlYSIGf2Rpdv8wDQG74mKoP8CrgEDPrG7YVr34ky+fRrXwkkE0L6paOPReqDaDht
- PXOA==
-X-Gm-Message-State: AOJu0YwSSud4RAQC9ET7q6A20RECkR9/YrujFBW/Fsp3XfTj7RTr64fY
- 791JrJ2tHlMEKacIJCIrmqNVoOlg2T1K1sgfbLWDzaqNAH8IfiaHMROBfiZwz8GEo/3o781k66T
- eFXZgAvIL+CJtyAaFS9KGHud8KOHsLDQALGCkoAAii8CpHAiI
-X-Gm-Gg: ASbGncshRUYhSy08khaam9HmXsgxFAGm2Rk1ZvVEC774s7Ve8nb5L0cicNmVnewZqRi
- UrBRcLXnVJ3so5hnD+B6H5xa6o+g08DF2Qo4=
-X-Google-Smtp-Source: AGHT+IHmWL7vrt3Lw2A+dkHhmFRLVmKbKeec9YqgjuHjDrYPgeLi47DGzIHTjRWJAI59VBWPK45+cavfnKHF6rzULjY=
-X-Received: by 2002:a05:690c:4d02:b0:6ef:5688:f95e with SMTP id
- 00721157ae682-6f148052638mr30293737b3.42.1733930022538; Wed, 11 Dec 2024
- 07:13:42 -0800 (PST)
+ bh=1ZBIZl46X6ck4ubJ+1d/eyW5ljfZDsrPlzvu+cpwh14=;
+ b=CEPeY9fj2odObDtMzDbaxiX7ZDIL/jnyrGpfUkDyE5hN2i1JcHe+1FTLHfplXGlFxX
+ AIOHoexhKqPW3RNS/HwTgrRr/GmLbG7ffpxkd+bjnDyyeTiDR7c9SsrpKbUu0a7hTjls
+ nce8rzQN2aoZ/vGdPl+KvVXLiPRUdicKsC8rB2JBNis5B2axSnS2skuC7JKP4i2IS86H
+ fhqEXynRgQCS9Y/21QLVvYddIT/H/4AGTBZVPeAEUKyOHjU9DGKUjEQmOqB3vGNL8Tm+
+ rp8xaor+Ka6Aq31sOYA6Ea5x5xUNskvo8GIzrck2hTXc1qC5a+3o84UVLQ3VS1AywyOd
+ YRmA==
+X-Gm-Message-State: AOJu0YxCOGi0Pmj9tdjLFqVej8LbE21EQWe8OkoQvRz9b7pvAASsV39B
+ bojM8sYN0bbsu4Sdkn2w58VrlqgcFVIQ9/JQV+Pa/a8Duqk97RcvQ2817Gsbri6r/mZKhzb1gVe
+ Fi1j0MCEbjRutt+SnZT+ldB4TfhAYvIhffkIJEyUIm5U8mNad
+X-Gm-Gg: ASbGncuLByxS4zl1qThq5JZvV+/QB7C7xKKkU0peOlj2zvBUJvIwaee1QKHJA4lfIis
+ 37JPtU7JB1VZ3xFEJcKHQ8Og6r+v6GMfaDkc=
+X-Google-Smtp-Source: AGHT+IHetybf5irhSAy8LMOFLA3OrPUNEAoPDdBuaysyOpVICHnNjYo3z7W9cDd4ip9hrpuSR8an8mbL0vscyoPIiw8=
+X-Received: by 2002:a05:6902:1247:b0:e39:92ec:b5f6 with SMTP id
+ 3f1490d57ef6-e3ca053c0b7mr185871276.41.1733930130941; Wed, 11 Dec 2024
+ 07:15:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211135418.563803-1-sjg@chromium.org>
- <20241211135418.563803-11-sjg@chromium.org>
-In-Reply-To: <20241211135418.563803-11-sjg@chromium.org>
+ <20241211135418.563803-13-sjg@chromium.org>
+In-Reply-To: <20241211135418.563803-13-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 11 Dec 2024 17:13:06 +0200
-Message-ID: <CAC_iWj+JjfM5hhFHaukxuiAaM18qP1_1eVmogBTCDCgZkerWJQ@mail.gmail.com>
-Subject: Re: [PATCH v5 10/23] efi_loader: Drop reserved from priv_mem_desc
+Date: Wed, 11 Dec 2024 17:14:55 +0200
+Message-ID: <CAC_iWjKt36c6KK7Sv0H8U5zP_i8Wys8v9UDdLxQ-Menh5Bm4pg@mail.gmail.com>
+Subject: Re: [PATCH v5 12/23] efi_loader: Avoid assigning desc in
+ efi_mem_carve_out()
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -90,56 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
 On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
 >
-> This field is not used. Drop it and set the value to 0 when the
-> memory-map is requested.
-
-Looking at the spec the reserved field is wrong. Instead you should
-just remove it from struct efi_mem_desc
-
-Thanks
-/Ilias
+> Rather than assigning desc and then changing two fields, assign all four
+> fields, for clarity.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->  lib/efi_loader/efi_memory.c | 4 +---
->  1 file changed, 1 insertion(+), 3 deletions(-)
+>  lib/efi_loader/efi_memory.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
 > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 8211600f7f6..024361483a0 100644
+> index 4c0fd0c5dca..f3aaa0e9288 100644
 > --- a/lib/efi_loader/efi_memory.c
 > +++ b/lib/efi_loader/efi_memory.c
-> @@ -35,7 +35,6 @@ efi_uintn_t efi_memory_map_key;
->   * internal format is converted to the external struct efi_mem_desc format.
->   *
->   * @type (enum efi_memory_type): EFI memory-type
-> - * @reserved: unused
->   * @physical_start: Start address of region in physical memory
->   * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
->   *     bytes)
-> @@ -43,7 +42,6 @@ efi_uintn_t efi_memory_map_key;
->   */
->  struct priv_mem_desc {
->         u32 type;
-> -       u32 reserved;
->         efi_physical_addr_t physical_start;
->         u64 num_pages;
->         u64 attribute;
-> @@ -703,7 +701,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
->         memory_map = &memory_map[map_entries - 1];
->         list_for_each_entry(lmem, &efi_mem, link) {
->                 memory_map->type = lmem->desc.type;
-> -               memory_map->reserved = lmem->desc.reserved;
-> +               memory_map->reserved = 0;
->                 memory_map->physical_start = lmem->desc.physical_start;
+> @@ -268,9 +268,10 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>         newmap = calloc(1, sizeof(*newmap));
+>         if (!newmap)
+>                 return EFI_CARVE_OUT_OF_RESOURCES;
+> -       newmap->desc = map->desc;
+> +       newmap->desc.type = map->desc.type;
+>         newmap->desc.physical_start = carve_start;
+
+virtual start needs to be assigned if you want to do that as well. But
+what we have is fine really
+
+Thanks
+/Ilias
+>         newmap->desc.num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
+> +       newmap->desc.attribute = map->desc.attribute;
+>         /* Insert before current entry (descending address order) */
+>         list_add_tail(&newmap->link, &map->link);
 >
->                 /* virtual and physical are always the same */
 > --
 > 2.34.1
 >
