@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B71E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7B5E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6512802EF;
-	Wed, 11 Dec 2024 08:32:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1656B80303;
+	Wed, 11 Dec 2024 08:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="c15A0WJf";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mXNhBlJA";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pEbdC8hU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rDSJEkEa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBD3C80245; Wed, 11 Dec 2024 08:32:37 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 6DD9280282; Wed, 11 Dec 2024 08:32:38 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 928D08020B
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F7D180212
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Y7S432XlJz9sxX;
- Wed, 11 Dec 2024 08:32:35 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Y7S441pP3z9ssn;
+ Wed, 11 Dec 2024 08:32:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733902355;
+ s=mail20150812; t=1733902356;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hLsKZkrSq/5KHv4KiMjIU+RtfPnKw6CtjBMlbaysEck=;
- b=c15A0WJfAF7ueHoxe628YuuppdkRqoyUN2jGvO+4SNHRkf8M7Bw4fkm+OpEaH839EtpnSb
- U9QwacvtDW38HuirpPqOx9+QV9/qSgDmrqrqfiZqYbMfsYLPal0KEs2xI5fM7+fd7yC++8
- rCa7TIM4eyhjO+Qqh3iBnkgGR4p1Y6Q0lEh6OyhgUlICkCJCDGJ3DXCrWeUwQtZMOiKA69
- C8tOVYLkoWU9O7DjkM58Jp+GCDim2IPAMQrM+PiqBWt01DSkJfnlCCif8fZw0z3nvcaO13
- Z6mztZnyy0LSQsFnAJvft1WDuk0PkFGbGwnf3HojN/pHPuW1c6aQvV+yVREgUQ==
+ bh=2tp805NjB7plIPACAVPIocO60mKWw8lCO0hBEN9ayfc=;
+ b=pEbdC8hUzexRljsOR8AP+tdhCj1N4kVO0U/n6Vn/jeDoxK7BbtoOPeLvonoP1oRlAS+/w2
+ QGsQYOCWmet7kBGZO8NDGVaotcJPaJn2riuQ5AWDggUckAYtXDUB4WSicXuyuZcw1xX6xq
+ EbOFDn2Iw0KOGhSnPYZ3TyGiMMsf1lF4zKj8lJHVwkIbOdG46M5d5MquBT3/lQY+6Lhcfz
+ SpczP+8k8FS+e2VHoIuymOyGb6xyyt5CB4pX7MqG633XnJbVWkWXJWCvhXjGwfqHLR8NQQ
+ R8pJAFDDYlU6/fe8ipcJaEcMMtKpm/Z/y4FTXdevdBm3WHyCKIOqLHqEJ+mEUA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733902353;
+ s=mail20150812; t=1733902354;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hLsKZkrSq/5KHv4KiMjIU+RtfPnKw6CtjBMlbaysEck=;
- b=mXNhBlJAQrsc2Aseq8LO23XAfkLNeWgsezKIhhDmQ7PEQQeTTSA4xhlOMk1stbhg6J9d3w
- gltb87WzNVl3OxKsZMqF9NyO2fcPMrXGC/5/zhtCAXhTebZYVvp8TcP6TP8oDkKgXStSP/
- yxlAuTAcdGNE5AeulYIzqVrBhz2JcjHGLCEf6txhTW1MFgwEan/b9vGHezmwmmjKjF4QuW
- 2B06IHXgBpJdK3LntZtK9AKMidzWb4RaTm16iX+UN8ylirCdGRmRLLIJT/gI6O0KmWRRsc
- V8cSxW3+iXBkhTgyuqHCmGU8OQPOjRgz5NNuUaWkP4Q33860ewNf1vqjcCSYUQ==
+ bh=2tp805NjB7plIPACAVPIocO60mKWw8lCO0hBEN9ayfc=;
+ b=rDSJEkEanvl7VF7s6UMMmGm+SCdbw6JdJInnXE1AUBV1jZSpCvF3GqLfChlVE4EX50pEKG
+ rYmBkessT5r8LVcHcka8lHRplZbDARMP42O+wNIt+Pp7LzO2n5IqX8lfbhiwSBhRoWjYlJ
+ /50aubH4ghK3MMZ7KOwRs28SJk0JQtx3/FJd6FT1HiR7oC5uByJD70540lEoXBIj0MNSFd
+ 094Zng5uedSMlHp8YZ+sWnxwB9Ce0pckPZVcNMJTzC2J9TkPsALe4j/XPuOWSxEtEpMRzd
+ VrxMebCWpbfb0/01ZRLv+OYSQR8dq6KKmejDZUEvu+GGc5mLTtxrBJxOL1vE2Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 06/13] mmc: renesas: Fix R-Car spelling
-Date: Wed, 11 Dec 2024 08:30:30 +0100
-Message-ID: <20241211073210.8087-6-marek.vasut+renesas@mailbox.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 07/13] mtd: renesas: Fix R-Car spelling
+Date: Wed, 11 Dec 2024 08:30:31 +0100
+Message-ID: <20241211073210.8087-7-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241211073210.8087-1-marek.vasut+renesas@mailbox.org>
 References: <20241211073210.8087-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: kw9iwemk9xa4pwdz3jsdfhiiuds9skb9
-X-MBO-RS-ID: 79422e829b7e752177b
+X-MBO-RS-ID: a2e8d8e5ddfea23a6cc
+X-MBO-RS-META: x1tpxsebqs9i4x5t6s87wia1maytpjw1
+X-Rspamd-Queue-Id: 4Y7S441pP3z9ssn
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,69 +88,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 The correct spelling is R-Car, including the dash, update the usage.
-Comment changes only, no functional change.
+Kconfig strings and comment changes only, no functional change.
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: - Update commit message, do not mention Kconfig
-    - Add RB from Jaehoon
+V2: No change
 ---
- drivers/mmc/renesas-sdhi.c |  2 +-
- drivers/mmc/tmio-common.h  | 10 +++++-----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ drivers/mtd/Kconfig          | 4 ++--
+ drivers/mtd/renesas_rpc_hf.c | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 92afa6adcda..556f07eaf8f 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -571,7 +571,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- 	int i, ret = 0, sret;
- 	u32 caps, reg;
+diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+index 3764e2567c1..e7ce8b9577b 100644
+--- a/drivers/mtd/Kconfig
++++ b/drivers/mtd/Kconfig
+@@ -194,11 +194,11 @@ config ALTERA_QSPI
+ 	  "Embedded Peripherals IP User Guide" of Altera.
  
--	/* Only supported on Renesas RCar */
-+	/* Only supported on Renesas R-Car */
- 	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
- 		return -EINVAL;
+ config RENESAS_RPC_HF
+-	bool "Renesas RCar Gen3 RPC HyperFlash driver"
++	bool "Renesas R-Car Gen3 RPC HyperFlash driver"
+ 	depends on RCAR_GEN3 && DM_MTD
+ 	help
+ 	  This enables access to HyperFlash memory through the Renesas
+-	  RCar Gen3 RPC controller.
++	  R-Car Gen3 RPC controller.
  
-diff --git a/drivers/mmc/tmio-common.h b/drivers/mmc/tmio-common.h
-index f489fb70766..657aba75148 100644
---- a/drivers/mmc/tmio-common.h
-+++ b/drivers/mmc/tmio-common.h
-@@ -64,7 +64,7 @@
- #define   TMIO_SD_CLKCTL_DIV4		BIT(0)	/* SDCLK = CLK / 4 */
- #define   TMIO_SD_CLKCTL_DIV2		0	/* SDCLK = CLK / 2 */
- #define   TMIO_SD_CLKCTL_DIV1		BIT(10)	/* SDCLK = CLK */
--#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (RCar ver.) */
-+#define   TMIO_SD_CLKCTL_RCAR_DIV1	0xff	/* SDCLK = CLK (R-Car ver.) */
- #define   TMIO_SD_CLKCTL_OFFEN		BIT(9)	/* stop SDCLK when unused */
- #define   TMIO_SD_CLKCTL_SCLKEN	BIT(8)	/* SDCLK output enable */
- #define TMIO_SD_SIZE			0x04c	/* block size */
-@@ -90,7 +90,7 @@
- #define   TMIO_SD_VOLT_180		(2 << 0)/* 1.8V signal */
- #define TMIO_SD_DMA_MODE		0x410
- #define   TMIO_SD_DMA_MODE_DIR_RD	BIT(16)	/* 1: from device, 0: to dev */
--#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* RCar, 64bit */
-+#define   TMIO_SD_DMA_MODE_BUS_WIDTH	(BIT(5) | BIT(4)) /* R-Car, 64bit */
- #define   TMIO_SD_DMA_MODE_ADDR_INC	BIT(0)	/* 1: address inc, 0: fixed */
- #define TMIO_SD_DMA_CTL		0x414
- #define   TMIO_SD_DMA_CTL_START	BIT(0)	/* start DMA (auto cleared) */
-@@ -128,9 +128,9 @@ struct tmio_sd_priv {
- #define TMIO_SD_CAP_DIV1024		BIT(2)	/* divisor 1024 is available */
- #define TMIO_SD_CAP_64BIT		BIT(3)	/* Controller is 64bit */
- #define TMIO_SD_CAP_16BIT		BIT(4)	/* Controller is 16bit */
--#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas RCar version of IP */
--#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas RCar version of IP */
--#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas RCar UHS/SDR modes */
-+#define TMIO_SD_CAP_RCAR_GEN2		BIT(5)	/* Renesas R-Car version of IP */
-+#define TMIO_SD_CAP_RCAR_GEN3		BIT(6)	/* Renesas R-Car version of IP */
-+#define TMIO_SD_CAP_RCAR_UHS		BIT(7)	/* Renesas R-Car UHS/SDR modes */
- #define TMIO_SD_CAP_RCAR		\
- 	(TMIO_SD_CAP_RCAR_GEN2 | TMIO_SD_CAP_RCAR_GEN3)
- 	struct udevice *vqmmc_dev;
+ config HBMC_AM654
+ 	bool "HyperBus controller driver for AM65x SoC"
+diff --git a/drivers/mtd/renesas_rpc_hf.c b/drivers/mtd/renesas_rpc_hf.c
+index 03545822b07..50a6191d9c2 100644
+--- a/drivers/mtd/renesas_rpc_hf.c
++++ b/drivers/mtd/renesas_rpc_hf.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Renesas RCar Gen3 RPC HyperFlash driver
++ * Renesas R-Car Gen3 RPC HyperFlash driver
+  *
+  * Copyright (C) 2016 Renesas Electronics Corporation
+  * Copyright (C) 2016 Cogent Embedded, Inc.
 -- 
 2.45.2
 
