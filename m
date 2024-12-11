@@ -4,66 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03ACBE7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 05:48:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7556E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 06:16:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CB7C801FE;
-	Wed, 11 Dec 2024 06:48:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 37D50801DA;
+	Wed, 11 Dec 2024 07:16:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C71BB80200; Wed, 11 Dec 2024 06:48:39 +0100 (CET)
-Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25D84801FD
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 06:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpip4t1733896086tfsjfaz
-X-QQ-Originating-IP: 8M1QvgfAwg9hO04mY8pKH/1PKzh94DrcMUAp1HSRk0U=
-Received: from [IPV6:240f:10b:7440:1:b238:648b ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Dec 2024 13:48:03 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 16684294000597413743
-Message-ID: <C174424B32C445C8+950777d5-783c-4f93-90bb-72b0670fbee1@radxa.com>
-Date: Wed, 11 Dec 2024 14:48:02 +0900
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h3Ct6Bop";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 63563801DD; Wed, 11 Dec 2024 07:16:30 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DB4A801CF
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:16:28 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e3824e1adcdso4858516276.3
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 22:16:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733897787; x=1734502587; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r8jhA/NSLAssAHgAVJVEDUOcVh/WbWZyii5BXcThumE=;
+ b=h3Ct6Bopc9kpFAJGG9vIB2s67EL2oz4knN/XBXJ+xmV5UNqvH0pB1oZ7bcKNLnm7Vw
+ gFfpGfDqQ7RaGI1HEopW+1Lqc6wUGP+ENBTSCgqD04B9r9/oBqAKGpjLJz8QTmguxL1c
+ BvyVAS+kBXguS4dN3fa6uR7FpvpLUrN/Rl9K1sozb+aD56uU/fMa1aYGdXey3RoKEI65
+ psTpwSvwD79nUqHQw03fT8NerSLh7TN8X6VdnBz1AbKGHPB3rm+hDi+5PgnBUC9QvMRy
+ fkq7xEGUWSyLqr+/1Eej1Z5Y4vYdycHeqYPDUZ1OOtNKqV9SLh2tExZExt4452riLIS6
+ QUjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733897787; x=1734502587;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=r8jhA/NSLAssAHgAVJVEDUOcVh/WbWZyii5BXcThumE=;
+ b=SWZCWG3ifB5luNHY92aV5X6P2SuHQa1pLZ2n6ba+YrfnX5k/+FvOQu1jVo6g3OXXrO
+ gyJaqzgVZJy8HBMYlet9Uybh/solaYjlsxTM3GB0/Fd4UnOf1Tcvi11npqU/H4wey/v9
+ wJRPeW4rXGGxSWAaQS2dwfx3yUJlb0RndhmCf5lcMQ0lBLchsivMkrg1ScSuVmO5KDE7
+ Ijzj2iFneXb3BYc8ye68Vn4FHImprekPDUwHpaJ56GUAEqspH046McmI6aB3coHW+2VV
+ vx35jbCocat2UfxMF/wqFsSM96vRUYr+WE2lf+Zt5i/2Y3M6+6v571JdV4YzO/LZlZTJ
+ u4TA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQ4t0w3gnEJKifRzfWwDW4aKPalixrqoO47yj0n8bSVwdPZs5EZ6KNVkizkY5Zo0IOyyr7jsw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy3AyocaEcsmtZTnz9sq8YnR1XWdHunJOgnXznscuf9HgBGRRli
+ WieI2olKhzGdgN96LOJNxzdp7GlH9dbnRbTCfBkIX4GqOxodNXzwhdqHKPMfCTe6tOrNL1qkPZo
+ TLJ51gWYBIeXPT6SANq3hsx8olqs7GZWTbI4Pbg==
+X-Gm-Gg: ASbGncsQOYI+akUu6s7bVJ0ZbQgLM9B3MAm+TNXgkLJPG9OhYlOvcC3E+3WrQxtYA7H
+ 45DYTRK0oBn6wj3x1rBXP+I6zeLC8e7e8QNw=
+X-Google-Smtp-Source: AGHT+IGYSMDLfnVr85rpy/mYQpeRrfKhtLjBdjy0gzSaIZauXcEIBHxu8h6aQPKEeqFOeyTy/muhYnYB/cHAJ+0+5RY=
+X-Received: by 2002:a05:6902:218c:b0:e38:b34d:121a with SMTP id
+ 3f1490d57ef6-e3c8e5da909mr1933940276.20.1733897786860; Tue, 10 Dec 2024
+ 22:16:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] rockchip: Add initial RK3582 support
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20241210222341.3537543-1-jonas@kwiboo.se>
- <20241210222341.3537543-2-jonas@kwiboo.se>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20241210222341.3537543-2-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: OZZSS56D9fAjSg4OIWslkC33t7RsRaUwtO6jzKU/zpA5OBC4QWDT1tiR
- jBm4OqzacyPOmAJNhHF2nf/HlHmSaJ6Cb5o78SKM/rv+JApuyKKJ3spZF5LijBnuavW4EGp
- MS5NvueQ1ke6o7vG2t2aLz0/UgEHAZ5xHKbzyKxKUWzF+Er7eOjBvZtAXYwvRJeXjPDN2yG
- uSUFilNiUOcZlpyxu4TzbTRDzQlbNb80ta0TeoTYaPS/QGbzc5+EULVQqndlWDzHPXPlbye
- iXvuP98jGRQwYEeT+pmTT6TahWpe0o7MM4cd9X4E05nu9qG2XOiowX5lG8Ogo/zEgZG6EG3
- lxNP/En+Q3CnI/TAjTEW6yJNi8guIyv1+u3Ysb78Q+x8Ci9TOXk90z5yJSfZZkF2FApQffK
- NdGK5VOnCshEXnt//7Zz8NbWF7AtffWNpxjMtx+ao50zHwOhxWQEmmoxkXmr1lvdkiEVrLj
- 3BI6+oqio2guVLO57eczn1vA6OF/wdzD810UY/jGivzaCOfqgUhDzhX1tazqkhaMlqC7Pn1
- Iz983O12jd63Ln2D9HAvu3LekFXB6SME58s1PvQILBOunUJhorPD4o1ISKRQ3vpU8bw6NmP
- E5Kd3r2TU5HmqhhS1h6nZBfFK3+wKw3y3CQW9c9p87UXc3Fma0w8khVoRwNcICQTQGGBvuM
- xgzh9ZoHmLZfoe2sx2nIjb5gqROh4Vet14SOQBDnDILnvgKY3KdtX0e92jhIuSiVUhgeeng
- 7mjrHi9DOY22SjIKNdS/8/UXAdVGUsTXMIAwXtRixN28P3pS/fKw7T0WiOPehhgMp4O+p3w
- i2WQnVWwiYGxo7dW0oxSP9njHf+tBxI8QV0yG139WDuTaMGleWzLVvcmAaaDpHqYFjwtTCj
- iPuHb//Vc+rFheI7YGJJ69+uGjmlF9ZwhutLCZHSXhSn606xGfalfoPknI/S6Gw7CvJWKtP
- h5aLOY9/WbBDcPw==
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
-X-QQ-RECHKSPAM: 0
+References: <20241211021703.2333-1-semen.protsenko@linaro.org>
+ <20241211021703.2333-2-semen.protsenko@linaro.org>
+In-Reply-To: <20241211021703.2333-2-semen.protsenko@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Dec 2024 08:15:51 +0200
+Message-ID: <CAC_iWjLHSPMOqATVByDSm1nqwprbpGrOw2mTT7cXPWw5f4uxQw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] lmb: Return -EEXIST in lmb_add_region_flags() if
+ region already added
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,197 +95,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Thanks Sam!
 
-On 12/11/24 07:23, Jonas Karlman wrote:
-> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
-> What blocks are disabled/non-working is indicated by ip-state in OTP.
-> 
-> This add initial support for RK3582 by using ft_system_setup() to mark
-> any cpu and/or gpu node with status=fail as indicated by ip-state.
-> 
-> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
-> cores and the gpu is always failed/disabled.
-> 
-> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
-> the required DT fixups for RK3582 board variants.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-
-Tested-by: FUKAUMI Naoki <naoki@radxa.com>
-
-ROCK 5C Lite
-cpu-code: 35 82
-ip-state: 10 00 00
-fail gpu
-fail cpu cpu@400
-fail cpu cpu@500
-
-Radxa E52C
-cpu-code: 35 82
-ip-state: 00 02 00
-fail gpu
-fail cpu cpu@600
-fail cpu cpu@700
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
+On Wed, 11 Dec 2024 at 04:17, Sam Protsenko <semen.protsenko@linaro.org> wrote:
+>
+> An attempt to add the already added LMB region using
+> lmb_add_region_flags() ends up in lmb_addrs_overlap() check, which
+> eventually leads to either returning 0 if 'flags' is LMB_NONE, or -1
+> otherwise. It makes it impossible for the user of this function to catch
+> the case when the region is already added and differentiate it from
+> regular errors. That in turn may lead to incorrect error handling in the
+> caller code, like reporting misleading errors or interrupting the normal
+> code path where it could be treated as the normal case. An example is
+> boot_fdt_reserve_region() function, which might be called twice (e.g.
+> during board startup in initr_lmb(), and then during 'booti' command
+> booting the OS), thus trying to reserve exactly the same memory regions
+> described in the device tree twice, which produces an error message on
+> second call.
+>
+> Return -EEXIST error code in case when the added region exists and it's
+> not LMB_NONE; for LMB_NONE return 0, to conform to unit tests
+> (specifically test_alloc_addr() in test/lib/lmb.c) and the preferred
+> behavior described in commit 1d9aa4a283da ("lmb: Fix the allocation of
+> overlapping memory areas with !LMB_NONE"). The change of
+> lmb_add_region_flags() return values is described in the table below:
+>
+>     Return case                        Pre-1d9   1d9    New
+>     -----------------------------------------------------------
+>     Added successfully                    0      0      0
+>     Failed to add                         -1     -1     -1
+>     Already added, flags == LMB_NONE      0      0      0
+>     Already added, flags != LMB_NONE      0      -1     -EEXIST
+>
+> Rework all affected functions and their documentation. Also fix the
+> corresponding unit test which checks reserving the same region with the
+> same flags to account for the changed return value.
+>
+> No functional change is intended (by this patch itself).
+>
+> Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas with !LMB_NONE")
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->   arch/arm/mach-rockchip/rk3588/rk3588.c | 128 +++++++++++++++++++++++++
->   1 file changed, 128 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index c1dce3ee3703..06e6318312b2 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -7,6 +7,7 @@
->   #define LOG_CATEGORY LOGC_ARCH
->   
->   #include <dm.h>
-> +#include <fdt_support.h>
->   #include <misc.h>
->   #include <spl.h>
->   #include <asm/armv8/mmu.h>
-> @@ -185,6 +186,12 @@ int arch_cpu_init(void)
->   
->   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
->   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
-> +#define RK3588_OTP_IP_STATE_OFFSET		0x1d
+> Changes in v2:
+>   - Removed the check for exactly the same region, and return -EEXIST in
+>     the branch handling overlapping regions instead
+>   - Reworded the commit message accordingly
+>
+>  lib/lmb.c      | 26 +++++++++++++-------------
+>  test/lib/lmb.c |  2 +-
+>  2 files changed, 14 insertions(+), 14 deletions(-)
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index b03237bc06cb..a695edf70dfa 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -183,8 +183,10 @@ static long lmb_resize_regions(struct alist *lmb_rgn_lst,
+>   * the function might resize an already existing region or coalesce two
+>   * adjacent regions.
+>   *
+> - *
+> - * Returns: 0 if the region addition successful, -1 on failure
+> + * Return:
+> + * * %0                - Added successfully, or it's already added (only if LMB_NONE)
+> + * * %-EEXIST  - The region is already added, and flags != LMB_NONE
+> + * * %-1       - Failure
+>   */
+>  static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>                                  phys_size_t size, enum lmb_flags flags)
+> @@ -217,17 +219,15 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>                         coalesced++;
+>                         break;
+>                 } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+> -                       if (flags == LMB_NONE) {
+> -                               ret = lmb_resize_regions(lmb_rgn_lst, i, base,
+> -                                                        size);
+> -                               if (ret < 0)
+> -                                       return -1;
+> +                       if (flags != LMB_NONE)
+> +                               return -EEXIST;
+>
+> -                               coalesced++;
+> -                               break;
+> -                       } else {
+> +                       ret = lmb_resize_regions(lmb_rgn_lst, i, base, size);
+> +                       if (ret < 0)
+>                                 return -1;
+> -                       }
 > +
-> +#define BAD_CPU_CLUSTER0		GENMASK(3, 0)
-> +#define BAD_CPU_CLUSTER1		GENMASK(5, 4)
-> +#define BAD_CPU_CLUSTER2		GENMASK(7, 6)
-> +#define BAD_GPU				GENMASK(4, 1)
->   
->   int checkboard(void)
->   {
-> @@ -230,3 +237,124 @@ int checkboard(void)
->   
->   	return 0;
->   }
-> +
-> +#ifdef CONFIG_OF_SYSTEM_SETUP
-> +static int fdt_path_del_node(void *fdt, const char *path)
-> +{
-> +	int nodeoffset;
-> +
-> +	nodeoffset = fdt_path_offset(fdt, path);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	return fdt_del_node(fdt, nodeoffset);
-> +}
-> +
-> +static int fdt_path_set_name(void *fdt, const char *path, const char *name)
-> +{
-> +	int nodeoffset;
-> +
-> +	nodeoffset = fdt_path_offset(fdt, path);
-> +	if (nodeoffset < 0)
-> +		return nodeoffset;
-> +
-> +	return fdt_set_name(fdt, nodeoffset, name);
-> +}
-> +
-> +int ft_system_setup(void *blob, struct bd_info *bd)
-> +{
-> +	static const char * const cpu_node_names[] = {
-> +		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
-> +		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
-> +	};
-> +	u8 cpu_code[2], ip_state[3];
-> +	int parent, node, i, ret;
-> +	struct udevice *dev;
-> +
-> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
-> +		return -ENOSYS;
-> +
-> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +					  DM_DRIVER_GET(rockchip_otp), &dev);
-> +	if (ret) {
-> +		log_debug("Could not find otp device, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
-> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
-> +	if (ret < 0) {
-> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
-> +
-> +	/* skip on rk3588 */
-> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x88)
-> +		return 0;
-> +
-> +	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
-> +	if (ret < 0) {
-> +		log_debug("Could not read ip-state, ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	log_debug("ip-state: %02x %02x %02x\n",
-> +		  ip_state[0], ip_state[1], ip_state[2]);
-> +
-> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x82) {
-> +		/* policy: always disable gpu */
-> +		ip_state[1] |= BAD_GPU;
-> +
-> +		/* policy: always disable one big core cluster */
-> +		if (!(ip_state[0] & (BAD_CPU_CLUSTER1 | BAD_CPU_CLUSTER2)))
-> +			ip_state[0] |= BAD_CPU_CLUSTER2;
-> +	}
-> +
-> +	if (ip_state[0] & BAD_CPU_CLUSTER1) {
-> +		/* fail entire cluster when one or more core is bad */
-> +		ip_state[0] |= BAD_CPU_CLUSTER1;
-> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
-> +	}
-> +
-> +	if (ip_state[0] & BAD_CPU_CLUSTER2) {
-> +		/* fail entire cluster when one or more core is bad */
-> +		ip_state[0] |= BAD_CPU_CLUSTER2;
-> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
-> +	} else if (ip_state[0] & BAD_CPU_CLUSTER1) {
-> +		/* cluster nodes must be named in a continuous series */
-> +		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
-> +	}
-> +
-> +	/* gpu: ip_state[1]: bit1~4 */
-> +	if (ip_state[1] & BAD_GPU) {
-> +		log_debug("fail gpu\n");
-> +		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
-> +	}
-> +
-> +	parent = fdt_path_offset(blob, "/cpus");
-> +	if (parent < 0) {
-> +		log_debug("Could not find /cpus, parent=%d\n", parent);
-> +		return 0;
-> +	}
-> +
-> +	/* cpu: ip_state[0]: bit0~7 */
-> +	for (i = 0; i < 8; i++) {
-> +		/* fail any bad cpu core */
-> +		if (!(ip_state[0] & BIT(i)))
-> +			continue;
-> +
-> +		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
-> +		if (node >= 0) {
-> +			log_debug("fail cpu %s\n", cpu_node_names[i]);
-> +			fdt_status_fail(blob, node);
-> +		} else {
-> +			log_debug("Could not find %s, node=%d\n",
-> +				  cpu_node_names[i], node);
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +#endif
+> +                       coalesced++;
+> +                       break;
+>                 }
+>         }
+>
+> @@ -667,7 +667,7 @@ long lmb_add(phys_addr_t base, phys_size_t size)
+>   *
+>   * Free up a region of memory.
+>   *
+> - * Return: 0 if successful, -1 on failure
+> + * Return: 0 if successful, negative error code on failure
+>   */
+>  long lmb_free_flags(phys_addr_t base, phys_size_t size,
+>                     uint flags)
+> @@ -818,7 +818,7 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
+>                                       lmb_memory[rgn].size,
+>                                       base + size - 1, 1)) {
+>                         /* ok, reserve the memory */
+> -                       if (lmb_reserve_flags(base, size, flags) >= 0)
+> +                       if (!lmb_reserve_flags(base, size, flags))
+>                                 return base;
+>                 }
+>         }
+> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
+> index 0bd29e2a4fe7..48c3c966f8f2 100644
+> --- a/test/lib/lmb.c
+> +++ b/test/lib/lmb.c
+> @@ -754,7 +754,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
+>
+>         /* reserve again, same flag */
+>         ret = lmb_reserve_flags(0x40010000, 0x10000, LMB_NOMAP);
+> -       ut_asserteq(ret, -1L);
+> +       ut_asserteq(ret, -EEXIST);
+>         ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
+>                    0, 0, 0, 0);
+>
+> --
+> 2.39.5
+>
 
+Tom this needs to go in -master for the release
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
