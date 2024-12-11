@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D27E4E77183
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 18:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3DF3E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 18:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DC6D80423;
+	by phobos.denx.de (Postfix) with ESMTP id 8612A80431;
 	Wed, 11 Dec 2024 19:54:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=aurora.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OSNzKLAE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=aurora.tech header.i=@aurora.tech header.b="X/K/ZyAh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 157848021C; Wed, 11 Dec 2024 14:53:47 +0100 (CET)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 72C82803CB; Wed, 11 Dec 2024 18:50:47 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B65F80209
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:53:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DED8C803AE
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 18:50:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=aurora.tech
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nbelin@baylibre.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-386329da1d9so2440845f8f.1
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 05:53:45 -0800 (PST)
+ spf=pass smtp.mailfrom=jdanisevskis@aurora.tech
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-29fd0e63226so1696520fac.0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 09:50:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1733925224; x=1734530024;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mqgvpd3qJyK7aIBe5h/EodFHhY74i/dG8rn3KVIUtSY=;
- b=OSNzKLAE3ULIM1mY/7LYR8SzpT2eHd5WeTOUOBs6K7Ir1Z00WAYmjvwLaxMvdr1JrY
- pPoVTCAq5GbqlKrgt/gK3/fZV+9fP0aFq64TzmcinW0EqLE0Unw7M1O1Le+21Vig6Ewe
- yGr5pO1UAQdwfpOFpRpn+nu989YRjq/b4+BFlo7wapE8kkgW7aZdH28DinZ2zDjNmcW7
- y6M3762TUDEXaZljtvCl1p230WN4+tKC/NnbG1mPjWLfsEAv88W6pgxml1sLpq3V9qHt
- z+4O/fy8RyaDMezbsdsaHvkjkDi8gBU7T/1OTGoaaQHpmsOEAj0O+yZhDTO46tXt+3SN
- aBVg==
+ d=aurora.tech; s=google; t=1733939442; x=1734544242; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EzpdB7vV9VJxrrp5OlsOcQb73jvOw1zw2Owk9+Itbo4=;
+ b=X/K/ZyAh8g3puDuKKwBLclx7/YEhH70LbK1zYmSDHZEz4tR1y7fMtD0Prz8XrCMYf9
+ JsoyaBqsT/McOiSXWG6TOvWHj1/wY9qNyYSHEOWnLbcnAV6fEVufTE3HRgwW4DhDTItj
+ 4PitKQi7H2o3QeBQ8R00Z+wXyKRpl2jVy0KNVo/BStgI6vNs5tDNbazYvKkMiFvp2uOm
+ whf2NYQJuddqhAgnkoCQOlK/8Kl+FCONGaRWKe8UdKqib3su7AQG9mv3NzuGYsNYP9sh
+ QxT0vIK6x53dSkEuPoIkG61d0iZcwIcTaqIBXdkkg2zS1+T6bSyWLU/EfbHMTvyOhSVV
+ Y2Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733925224; x=1734530024;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mqgvpd3qJyK7aIBe5h/EodFHhY74i/dG8rn3KVIUtSY=;
- b=SbI5q1oLquCnSN2F3XHOvGz+gKVlBVMqWVzJ7+4QkIcI3azGfk+ncWxaT505IEygXs
- KrVT//NKTnGwSgTF42ADThc4OI+pu9aj/wkyxR9cpXWdnEF+rPD0VmaWC0x8jlDXxR46
- Hc23mmAD9sQMLZpIkgkK0JZ83/1IGzNLZGVWwOpYARKZFmx62DiLgXSHhJIEnVgGIm7+
- WWcyk7nwlwDK+OtlqSp1pKPa3CPx5e7ydaY9OS3htx94Y2RIcMUC7faNytM8eTKjQC5D
- MaO10s8nAsZVD4F9IaAMainy3GXzIB5vFtRQ/b0Ao+0NMygjVcHX7RpQaWo5tipqHfH1
- dgig==
-X-Gm-Message-State: AOJu0YwS1Q7G3ymDeKV8u8lUdQZWSgyi4rLeMkUgOa7AQvRao1wdqtV1
- IVVODgWL8AL8Vb5iKQtNZMSaC3gE0pgY7MzVALcyuY/kqlrBXDFP5pkfjA+HfUE=
-X-Gm-Gg: ASbGncszHjRgsIB+EdjzRf/X+1zSKue8bo9b4HUvyuVh4ZQ2UIZTLeVcfVDWNairktM
- mAGJGg4PgyJ+IA4EkIhFWDUC4OgSOVjdqxGytVYbGXbk4hlMdrauBAtlo5g5XB2ubdAQLQ2JTK4
- UG3bktoD1nVwSNLfCzy8zYmqV20ydFEMsJLbadwDhZmRyE8aH7WMkZk71octxnm6IHpLVrNK/7P
- ryrmBepvIXU1UZ1aKqnLqiWbe/P0mN9tBaLK47L/7nNWUsBEu/AlFw=
-X-Google-Smtp-Source: AGHT+IFAx7zR2rzJO6NzpVdpEfSADAjtMhyMRuscbbl/D6HCmb+caShb1kYTKpqKhh7j2nuQkO7nxA==
-X-Received: by 2002:adf:e192:0:b0:385:ee40:2d75 with SMTP id
- ffacd0b85a97d-3864ce559camr2586257f8f.20.1733925224441; 
- Wed, 11 Dec 2024 05:53:44 -0800 (PST)
-Received: from [127.0.1.1] ([2001:861:d40:6fb0:1b92:49fd:8154:d517])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38782521845sm1316013f8f.106.2024.12.11.05.53.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 05:53:43 -0800 (PST)
-From: Nicolas Belin <nbelin@baylibre.com>
-Date: Wed, 11 Dec 2024 14:53:27 +0100
-Subject: [PATCH 4/4] boot: android: reorder the length calculation order
+ d=1e100.net; s=20230601; t=1733939442; x=1734544242;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EzpdB7vV9VJxrrp5OlsOcQb73jvOw1zw2Owk9+Itbo4=;
+ b=tyhXfI9fjCVbFBP38k05+6Cs+QYP87NeuvDRA9w7v7tc/yT6MqhepRUNbdSSlQQq85
+ 9LNG5xMtZkCcj/ydVb68R0fkRgdDS9M1ddWB87Keu4nXIUHAZlJHNSrK9pq6R+6pg+9X
+ rkIjRRjG4Ii3860pyS3+gIvowNJDAesmUCo11x8iZ7IOtkMTyP9gD1pcUcCOMMgbrDwG
+ VU2w+Oz44TUc34AxlXMvhB5aGA/C56btysqm/TDprIzGYOX6ACdF0RkkXShFV1dQUx6b
+ wD9bQ5icZQBkStYCQ6bWGiuCWDh1X9xrxDbNceo1SHJZ/bn03K9/Pd3c7KRdCD26kAHv
+ heKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSm03gtPNufpO0nJRaEHdN89NgiRBmZRmGJpgR5YeQUWG8XBd4v8k/SYtE+GiHITg6Xzmzueo=@lists.denx.de
+X-Gm-Message-State: AOJu0YyZkk4XJtT261dv2eBHYJtxtmxWsY8MN0+bU1VC3L+0PL+jlJeF
+ Ie4WakSUX/cixLx2Xzj2BdST4Q94hbdSGZtG3SwBvO49QT82U6a35hfrU+lQEUnRm/5hAJ5jSnj
+ usTv471zNUywtuvKhK6e/Ai0yxaiKVpqaoH3ghw==
+X-Gm-Gg: ASbGnct4631af0pZ6VSPky12rHiNzIeuLtEV24VGNQftUGvHQ0+PLdcBlSUKuOOUXF6
+ y0eR9Gy5KNoZV6qGXy7CuiAAnBSdytAu/
+X-Google-Smtp-Source: AGHT+IH+ic9DVisZQA3EY41bin/OB0hPxe6uyEr4ijO9WijwmHcHaRHHTtRibOztOWPsW3m/Y3glexR+NmMAG//seOQ=
+X-Received: by 2002:a05:6870:89a3:b0:29e:67cd:1a89 with SMTP id
+ 586e51a60fabf-2a382756a63mr490917fac.36.1733939442667; Wed, 11 Dec 2024
+ 09:50:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241211-fix-bootargs-concatenation-v1-4-c6752bcb9dde@baylibre.com>
-References: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
-In-Reply-To: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Safae Ouajih <souajih@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Ahmad Draidi <ar2000jp@gmail.com>
-Cc: u-boot@lists.denx.de, Nicolas Belin <nbelin@baylibre.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733925217; l=1359;
- i=nbelin@baylibre.com; s=20241211; h=from:subject:message-id;
- bh=UvzwViUIFZQCNBwvBmizUKFMl5TpJmwUz0fGESF7Bnc=;
- b=FcSzQ8/5GzCt2W7bctKpUBjH674tYev5jePmYrL538MIbQWs7eF7pkv2y8UyhUXH2ScpUibny
- 3V2w6QeGj8kDox4Pnpvc3GyKl+jGjd1E5+JigMgd9sPSrKLV2sXY+Bx
-X-Developer-Key: i=nbelin@baylibre.com; a=ed25519;
- pk=w8SrWXgXuIaN/RB7JHkKa2EKDC5nVxqVHI8XawK2M7I=
+References: <20241123195616.305687-1-mjg59@srcf.ucam.org>
+ <20241123195616.305687-10-mjg59@srcf.ucam.org>
+ <1a9d7b81-b06f-43bd-969e-2961ad8cd1e0@gmx.de>
+ <CAFLszThHxSt7-8QScz8+d96PwrZy--MKYsnrhfdCw8TK0c8rLA@mail.gmail.com>
+ <20241210171113.GD2457179@bill-the-cat>
+In-Reply-To: <20241210171113.GD2457179@bill-the-cat>
+From: Janis Danisevskis <jdanisevskis@aurora.tech>
+Date: Wed, 11 Dec 2024 09:50:32 -0800
+Message-ID: <CAFBqBq9-wrpXnz99TNNokjMqbzz0fJPq+UUMqhuuMqZwmjSH=Q@mail.gmail.com>
+Subject: Re: [PATCH 09/10] Fix efi_bind_block.
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Matthew Garrett <mjg59@srcf.ucam.org>,
+ Matthew Garrett <mgarrett@aurora.tech>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 11 Dec 2024 19:54:12 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,42 +99,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Keep the same order (bootargs then kcmdline then kcmdline_extra)
-for both the length calculation and the string concatenation steps.
+Hi everyone,
 
-Signed-off-by: Nicolas Belin <nbelin@baylibre.com>
----
- boot/image-android.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+Good catch finding this leak. Would you like me to provide an updated patch=
+?
+I am good either way. Let Simon take credit for the fix on the git history.
+I can live with
+shame :-).
 
-diff --git a/boot/image-android.c b/boot/image-android.c
-index ed72a5c30424a453c1800bc61edbe8f33b31b341..a76f028090d0470842bbf559b638175949c527f0 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -287,6 +287,11 @@ int android_image_get_kernel(const void *hdr,
- 	       kernel_addr, DIV_ROUND_UP(img_data.kernel_size, 1024));
- 
- 	int len = 0;
-+	char *bootargs = env_get("bootargs");
-+
-+	if (bootargs)
-+		len += strlen(bootargs) + 1; /* Extra space character needed */
-+
- 	if (*img_data.kcmdline) {
- 		printf("Kernel command line: %s\n", img_data.kcmdline);
- 		len += strlen(img_data.kcmdline) + 1; /* Extra space character needed */
-@@ -297,10 +302,6 @@ int android_image_get_kernel(const void *hdr,
- 		len += strlen(img_data.kcmdline_extra);
- 	}
- 
--	char *bootargs = env_get("bootargs");
--	if (bootargs)
--		len += strlen(bootargs) + 1; /* Extra space character needed */
--
- 	char *newbootargs = malloc(len + 1); /* +1 for the '\0' */
- 	if (!newbootargs) {
- 		puts("Error: malloc in android_image_get_kernel failed!\n");
+Janis
 
--- 
-2.34.1
+On Tue, Dec 10, 2024 at 9:11=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
 
+> On Tue, Dec 10, 2024 at 09:17:26AM -0700, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Tue, 10 Dec 2024 at 01:50, Heinrich Schuchardt <xypron.glpk@gmx.de>
+> wrote:
+> > >
+> > > On 23.11.24 20:55, Matthew Garrett wrote:
+> > > > From: Janis Danisevskis <jdanisevskis@aurora.tech>
+> > > >
+> > > > efi_bind_block had two issues.
+> > > > 1. A pointer to a the stack was inserted as plat structure and thus
+> used
+> > > > beyond its life time.
+> > > > 2. Only the first segment of the device path was copied into the
+> > > > platfom data structure resulting in an unterminated device path.
+> > > >
+> > > > Signed-off-by: Janis Danisevskis <jdanisevskis@aurora.tech>
+> > > > Signed-off-by: Matthew Garrett <mgarrett@aurora.tech>
+> > > > ---
+> > > >
+> > > >   lib/efi/efi_app_init.c | 29 +++++++++++++++++++++--------
+> > > >   1 file changed, 21 insertions(+), 8 deletions(-)
+> > > >
+> > > > diff --git a/lib/efi/efi_app_init.c b/lib/efi/efi_app_init.c
+> > > > index 9704020b749..cc91e1d74b8 100644
+> > > > --- a/lib/efi/efi_app_init.c
+> > > > +++ b/lib/efi/efi_app_init.c
+> > > > @@ -19,6 +19,15 @@
+> > > >
+> > > >   DECLARE_GLOBAL_DATA_PTR;
+> > > >
+> > > > +static size_t device_path_length(const struct efi_device_path
+> *device_path)
+> > > > +{
+> > > > +     const struct efi_device_path *d;
+> > > > +
+> > > > +     for (d =3D device_path; d->type !=3D DEVICE_PATH_TYPE_END; d =
+=3D
+> (void *)d + d->length) {
+> > > > +     }
+> > > > +     return (void *)d - (void *)device_path + d->length;
+> > > > +}
+> > > > +
+> > > >   /**
+> > > >    * efi_bind_block() - bind a new block device to an EFI device
+> > > >    *
+> > > > @@ -39,19 +48,23 @@ int efi_bind_block(efi_handle_t handle, struct
+> efi_block_io *blkio,
+> > > >                  struct efi_device_path *device_path, int len,
+> > > >                  struct udevice **devp)
+> > > >   {
+> > > > -     struct efi_media_plat plat;
+> > > > +     struct efi_media_plat *plat;
+> > > >       struct udevice *dev;
+> > > >       char name[18];
+> > > >       int ret;
+> > > > -
+> > > > -     plat.handle =3D handle;
+> > > > -     plat.blkio =3D blkio;
+> > > > -     plat.device_path =3D malloc(device_path->length);
+> > > > -     if (!plat.device_path)
+> > > > +     size_t device_path_len =3D device_path_length(device_path);
+> > > > +
+> > > > +     plat =3D malloc(sizeof(struct efi_media_plat));
+> > > > +     if (!plat)
+> > > > +             return log_msg_ret("plat", -ENOMEM);
+> > > > +     plat->handle =3D handle;
+> > > > +     plat->blkio =3D blkio;
+> > > > +     plat->device_path =3D malloc(device_path_len);
+> > > > +     if (!plat->device_path)
+> > > >               return log_msg_ret("path", -ENOMEM);
+> > > > -     memcpy(plat.device_path, device_path, device_path->length);
+> > > > +     memcpy(plat->device_path, device_path, device_path_len);
+> > > >       ret =3D device_bind(dm_root(), DM_DRIVER_GET(efi_media),
+> "efi_media",
+> > > > -                       &plat, ofnode_null(), &dev);
+> > > > +                       plat, ofnode_null(), &dev);
+> > > >       if (ret)
+> > > >               return log_msg_ret("bind", ret);
+> > >
+> > > Here you have a memory leak for pointer plat if ret !=3D 0.
+> > >
+> > > Simon suggested a follow up patch. Instead we should fix it in this
+> patch.
+> > >
+> > > @Simon
+> > > The logic in the caller setup_block() looks wrong.
+> > >
+> > > LocateHandle() does not ensure that when you try to read from the blo=
+ck
+> > > device the same still does exist. E.g. if a USB device is removed the
+> > > block IO protocol could be uninstalled and the handle deleted and the
+> > > EFI app may crash. Please, call OpenProtocol() with attribute
+> BY_DRIVER.
+> > >
+> > > HandleProtocol() is considered deprecated. Please, use OpenProtocol()
+> > > instead.
+> >
+> > Can you please send a follow-up with your ideas on this?
+>
+> Simon, it's in your tree. The normal path here would be that the
+> submitter would correct this in v2. But you're trying to short-circuit
+> that path for your own reasons. No one should be making work on top of
+> your tree except for you.
+>
+> --
+> Tom
+>
