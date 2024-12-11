@@ -4,159 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B1E4E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 14:56:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FBB1E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 14:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEB0E80274;
-	Wed, 11 Dec 2024 15:56:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 834C3802F2;
+	Wed, 11 Dec 2024 15:59:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="CyAA8MWo";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="ZNEgtjDh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 619C8802A1; Wed, 11 Dec 2024 15:56:56 +0100 (CET)
+ id CA261802F4; Wed, 11 Dec 2024 15:59:07 +0100 (CET)
 Received: from PA5P264CU001.outbound.protection.outlook.com
  (mail-francecentralazlp170100000.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20a::])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E627980269
- for <u-boot+nodisclaimer@lists.denx.de>; Wed, 11 Dec 2024 15:56:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3832E802A1
+ for <u-boot+nodisclaimer@lists.denx.de>; Wed, 11 Dec 2024 15:59:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philippe.reynes@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Kyeab6tG5REMcPdgDcAQASu87WAOrl3uK9s2TnN0ry2y/kuUNKh7Lgf/b0eE9/LGv0XkwhthsORWCIz9n9KybWemtvFAUZfP1P1sK72aN7+gfkF8JIdx1ZHg6oCt0bfW39AxTH2RXc4gfyQ8gztz2TzBJX4HZZXAFJRYr3tj42VIhiKtK/jTEMuvW+702kA0aX0gwegDgbUy3DywvXHTC4pzPIrfz9BX1xNUn/wIEzsDu0g7NaEUiv13RAYyccbMK0WYFT4jytMwO7wkAhQEP0hj+FnFC6bvKkScMzLqMcxWXFO/36pvA7ewso2Xaqiw0sAMwhDIJ0z/EjLf2uXXTQ==
+ b=rPGwU6EjQSHAxnxcOGjH+92WPUyE6StLpkCjE1R/ZNpqWPsjKvnFkhkY/txLDokwkmSTN6+ST67dwHKoe+tAypA0W7lMl0L3BQvitqNu2F/gzTBw2Aem9Q3CmyVpmZishN/+CYxlHwwGbMxtF5hJ1uZ5PnaPCUEeGvwP9pSJGPR14A9zsHS5lpkfNZ9LqiZUeNdM2T8R0iQjfkx6yFgQGOq3MV04OqY5xdg2XgnuxGS3i/hAecwcwQZuXqzh1eIUBBrOxaX19kJzF4dHu1ozOSz1p85vkrXY5u16GdGUajlVS5psdi5LelPWbAdD0WEn9lmMmCld8WANVLwvsn22Rw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m9COhnv1wOASEbx7KwVE2Y5+yXyHpMFAY+KcfXkvaHg=;
- b=HO2ca+vTaVWgtKXsnKFzg56q9078oBwnHJHJkxX9ks1Or1M90HGaHaQn8F/HwEtZXT2deXki7icWWUAGh1I3Z5B5j51FPFinSt0m9pbeSPZ6Q0CbIFIm4LFKplmRDlKnCLHwN3yeir1CJXQYOzN+g38lxiqreRbkE7qn0FRg+b4gDnwmh9sgH7mTBiKxhTxhuRYny+sO5b3IxnOXuchaWRtvpvXRu7fY9KPFyqu/A22cEfhWM8TbMxecCoUku6orPw3E+umGN49LE4z0RXcA8HAxCiYS4w5XR0G8zTq2T2CrlGMFqvGaUphnX7MXjYiF+CXgL7MixKAhtwZKdfq7DQ==
+ bh=D5xSSManmEYaeFZ/2LUpZRaG0cJOZtgHyj8SFdXGqZk=;
+ b=BIJtYlS5DV3zV/DouyMF694f0rVCLgoVfsHHuRkv7ljKUVP+qIF0IjaA6gAznwTs8WKaR1OBIEFGSraUNXWdXoVcjTNFtyzNu64JT71Pjsqk1Cv+r3SrEKgccZXvdkMcJwqWJYlxEdClnBHPJfqYeuHZWi/PUtOWoKN5/GN8yAX2xf0+YtJfolq3fNF19bVRPxjz2IbFKFDYm1ebDAuUo+nAeXQHZAMZUAWskQJL87VHBVBUVRendtzjGy+tV/2YA1Nw5uLwDbX3V/I17oAQbxaqWMv8pjz6PL2esrhnRHa943FVPoE+MgdHThZuIvu+5dhpL+w/q3/48bUzc0WW6g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=softathome.com; dmarc=pass action=none
  header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=m9COhnv1wOASEbx7KwVE2Y5+yXyHpMFAY+KcfXkvaHg=;
- b=CyAA8MWo5EKvetXjWIwW+SbRuZ6teKZ9MjDuQUVmWHVpwiYuZ93iKNI8eIEXoLDNTf2LNhGWuPR7m0hlo5Gt5CwqJ7s5uzWlt3oqaF4lp9qtZTOcS+Lyn0IYDLaNlrBcIclRYvhDhEQledeWWCrrXskbpz6qYO8JiEQxgjxTKMxXGiBspNNT3KQ95oBEVC+u5PxLXTPFypQM1p6QRKpH09xnLNcrFYb5yfwUF7E5IKp++Wjsb1Zp9UAiIwB0iIkXRO+XZB08Hebj5HOSQFODW7hLjRt6EfX49lwBclnmpKUNyAnWvQnoy4eAoXzghc2t85e6+2AOSD/bkOc4OpLDUA==
+ bh=D5xSSManmEYaeFZ/2LUpZRaG0cJOZtgHyj8SFdXGqZk=;
+ b=ZNEgtjDhOMkSpFsD82kzZB5xMpx2VWFFWWbe5qBbIsGlxRYKabdX+kBDFbSPmnOt6HMzGrEvUzZ5FWvvQSVfwAZLAL9NERXoIuzcBNHc5j6fuelHIQ3gOrw8ggrfW4ArE/fbAPHwHh0AVd4tg49/qLSzJDH7NTfJJLCr0Fvv3UYA/Taz0rGKBRWlGXZ4+76/2pNdv5G0EqM5J+UL8K1Bj6eBA+bDJP6gQzYVSSiDf+0dmtruiwGhCLM0IiUQ4OY9MkicEyQyVjn9FrySZYVduz5/Jn+uKqzAvJ+rGvrWcGebu9N4NhnOINMakHItNOa6KLdRT9C3AFZvHy7UFvjIYA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=softathome.com;
 Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:1d0::9)
- by MR1P264MB2770.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:37::19) with
+ by PR0P264MB2257.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:16b::9) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.15; Wed, 11 Dec
- 2024 14:56:51 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.19; Wed, 11 Dec
+ 2024 14:59:03 +0000
 Received: from PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
  ([fe80::28e7:f006:fbc2:3f27]) by PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
  ([fe80::28e7:f006:fbc2:3f27%6]) with mapi id 15.20.8251.008; Wed, 11 Dec 2024
- 14:56:51 +0000
-Message-ID: <318f2d15-82b0-4ff1-bae5-f5603c49e1bd@softathome.com>
-Date: Wed, 11 Dec 2024 15:56:50 +0100
+ 14:59:03 +0000
+Message-ID: <5aea0a7b-6026-4080-8130-537a11cb6730@softathome.com>
+Date: Wed, 11 Dec 2024 15:59:02 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/5] lib: sha256: add feature sha256_hmac
+Subject: Re: [PATCH v3 3/5] test: lib: add test for sha256_hmac
 To: raymond.mao+nodisclaimer@linaro.org
 Cc: sjg+nodisclaimer@chromium.org, u-boot+nodisclaimer@lists.denx.de
 References: <20241209094159.8355-1-philippe.reynes@softathome.com>
- <20241209094159.8355-3-philippe.reynes@softathome.com>
- <CAEfUkU+7+mjckwERnr-rk2YO8z+VfT3EJKfNO9nOYHivyi-g=A@mail.gmail.com>
+ <20241209094159.8355-4-philippe.reynes@softathome.com>
+ <CAEfUkUJoZn3=caM6-XZcfDGtavR=0BubNT3RuZdUR84da04Emw@mail.gmail.com>
 Content-Language: en-US
 From: Philippe REYNES <philippe.reynes@softathome.com>
-In-Reply-To: <CAEfUkU+7+mjckwERnr-rk2YO8z+VfT3EJKfNO9nOYHivyi-g=A@mail.gmail.com>
-X-ClientProxiedBy: PA7P264CA0230.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:372::6) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
+In-Reply-To: <CAEfUkUJoZn3=caM6-XZcfDGtavR=0BubNT3RuZdUR84da04Emw@mail.gmail.com>
+X-ClientProxiedBy: PAZP264CA0118.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:1ef::23) To PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
  (2603:10a6:102:1d0::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|MR1P264MB2770:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9497cca4-f008-498e-eb72-08dd19f40b52
+X-MS-TrafficTypeDiagnostic: PR0P264MB2741:EE_|PR0P264MB2257:EE_
+X-MS-Office365-Filtering-Correlation-Id: 870afb81-21b4-4eb9-3970-08dd19f459f9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|8096899003;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TmFnL3ZZdEVwRHV6S1kzRGhvTzFSTWVRaG85WDJDcGwvc3N4dmM4T3pBM3Y2?=
- =?utf-8?B?NFJaR3kzRmZXaXJqOEIrQ2tFT0ZHcGZvWTBnNkxvWDdxeVNEYU9XK003VjRq?=
- =?utf-8?B?VGVsT2lnTzBRL3RCd3BtcStqR1ZHWVdQQ3Z4NSt4akl1OE11dXh2dG14WmtL?=
- =?utf-8?B?R1IzbkRYaDJRQi80YTNYRGlMcWR2T1JjaDBlaFlxb09jNEhIODhEK3hDbkxo?=
- =?utf-8?B?bG1id3pEcmRSRExMbFhuNVBTSnlvV0xvSFJIRkZQVkEzWVJVVVVrWVBqTUI4?=
- =?utf-8?B?K3M3TXpyRTJESGlFZE9qNUtzWnN3UWEzV3cxZ0V3ZVg5RWtnQkJtalViVnJj?=
- =?utf-8?B?RkxWUVRkcm1iOCt2aXU4cWNTQ21jTXdEcTZhaVVtUm5nTGVETlFaNWsrUEdV?=
- =?utf-8?B?YzJ0aFdjZ0dvK3M2MENmdzlPdlFVQldzMUh1aG54Y09CWURSVWtQZk5rTFVL?=
- =?utf-8?B?dlEzWG9VdThiSmVrUTRJMjJpcW1TK1pqdWRmbTRHYSsxMGY2Vk5nU0VEbStW?=
- =?utf-8?B?RHpYa3UyazMzUTk3N04vTTJ2MXZjU0ZyT0NSdjNpSHRvOW9RT09pQ3l2OStt?=
- =?utf-8?B?enlkZ1ZJelBjd3lsMmI1L3BhMGlBTU95MUZkbnQ3dFZqd1VNTk5XNkFQdERp?=
- =?utf-8?B?QTVITmFrbkE3dGVhSy9HalhGYW9aSmlkQjFVNmtubVJkb3ZBcVRla212b25s?=
- =?utf-8?B?Qncvd0RDQ0xjdEtkSXBibjY2R1lVbkhQVmZWYTdlS2pvZE1rYXVTSDRUZFha?=
- =?utf-8?B?NUtLOHQvbmFWZWFpMVJEZU05RHJyVmZJUnVOTFRSa29PU1dUQU9ZV3J5cmMr?=
- =?utf-8?B?dkRCNi9McXMzbkhiSWpHYmxhVjg3UG5XZThyeW1SRS81MGxXNFhZUWlPOEtT?=
- =?utf-8?B?N0c1dTVWaXJLN2dzU05XTEdRRnhwR2d0MkNMdlhDVTI4bElxQUdKSmtZVDdW?=
- =?utf-8?B?WWgvdDI5T2JkOHV3V3JUUmVOUkREOVJKZEozOEYrVjNXZzQvTUJhZ2RadVcr?=
- =?utf-8?B?RXFRVkhPUm5DZ0NSV2dvZm56eXRBd2trWWJ3M2xHWGU1UGxkZmg0UEcwbjRo?=
- =?utf-8?B?WWpqSlVPd2tkZ1FOeTQyOEZDanhDTzRGVTg1d3ZDVVFzblc5Y1FPR3N2anhn?=
- =?utf-8?B?ZmRqZUljdi91WEtHMVRGLzhWVVpORUJNd0ZLTkdIZXdvWVBrRVVwdkZ3d3VR?=
- =?utf-8?B?N0R5Tm1DTHhjMVdaVU1uNjRmUmVpYWVLS2FQWUM2REgzczBnd1g0UGdaZTBJ?=
- =?utf-8?B?Ty9xOUNrbGZrd1pOSHJzRWs3c3U2bjNDVnEvdlZwOCtpNVhWZUg1R2RYdGt6?=
- =?utf-8?B?elFVODFJS0U4a0pHdld4MTQzdm1XaXlnMWdDVE94RzI1eUVNeWV5YVdJTGkv?=
- =?utf-8?B?Z2hEQVEvb0d1UExjR2tVZmU1anAxeG45cGxkaEJtaWEvNUhyamY2TElXd0s4?=
- =?utf-8?B?ekNlRktOUFE2SXFyalQvMFdzVVgzKzM0WHltQVd0Zm5UTlE4dHpIQXJQcWFq?=
- =?utf-8?B?NE5QeW9RSW9jWUJhYmFsMXJYT2VzNUZZL1ZaSjZJd3VzUXc0dUppVDF0dHFo?=
- =?utf-8?B?Vy9PWENBQTNvWFQrTDNrSHZ1MzlRQUNHdzQwKytqT0NXSnU3TUhwL093V1Rq?=
- =?utf-8?B?VTMrTXNWWVFCaW1DSG1oVGx1bXNwby9PeG90R2tEZmE1ZmhNYjUza2xkKzhO?=
- =?utf-8?B?L3E5Nk5QdGYvRXQrYUVzeDdreWJQMHVwTFBETGpDMFhkZXEzVUN4QkRPemxZ?=
- =?utf-8?B?ZW9TdUhFaTVrYWVGQU5JWlpDMmkxbmlKYmRVSDYzNjc2dDdOeXArSHVwdUVR?=
- =?utf-8?B?aXhTMXF0L1BBd0J6T253Zz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|8096899003;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?akpXUmpIb0h4Ujd1K2dvK0JtNzZPVUsyeC9pa2sxZnRnWmZuYkNBRnZNdGt3?=
+ =?utf-8?B?RVNwTmVKUHFpNlB6bkVOS29HNU5sTjA1c1FPSUxEYU9lS2NqaGZGeXh5bnhC?=
+ =?utf-8?B?YzREdDVtcGlhWko5TWhwZ2lCOVBPdkJFTElqeUZNQzFRUFFkMDM0aGFJSDc1?=
+ =?utf-8?B?d0g1dkhzVnd1SndjVUN0bzhqYVplMlRTVjZqUnp0MmJoRW8wZTdLcHRPWmpN?=
+ =?utf-8?B?UDVSVERqa2IyYTlTT0hsb1ErdTlBLzNBMHhNdDNpMkxGSUNiOWpvcmoxZUZR?=
+ =?utf-8?B?Um9aWG1hdDREWUNRZVIybFVWMUlnSzc4UFp0N1VoM211Y05jRmtYYjc1MkZz?=
+ =?utf-8?B?cno3ZXNTa3lzVi9vaWVnbHdtaG44cmt2djMzU3FRZUgvVXREcWZoRlB3VHl4?=
+ =?utf-8?B?RHpuZTRNb095UmZLV0Q4U3UvNGlKSlhkemV5Y05DMlFyZXNCM3ZkanJJZ0Rl?=
+ =?utf-8?B?czZBUUhJcjRab1dFZ3ljQkhFTlRxUHR6aG1vSDNWRUhYdmJJS21HT0V2dk9K?=
+ =?utf-8?B?TjZUdGh2LzA1d0JRMHdlK0dtTUthUnhBWm9qazRlUWVmU0JRTERSQnJ2TTlq?=
+ =?utf-8?B?NCs0VDRHa3FXcFc1cVJpeFFLeWRjYmc4QjZ2RDVpYi93cnRYeDJmdEljS1pR?=
+ =?utf-8?B?NWZ1MTdnRlh2VGFqQkRYK3hUendQaHhMQllNQk9xMk11SmxGKzhxSU5UYXhX?=
+ =?utf-8?B?ZlJzMGplazVYd0wvMldNRElDUmdXM1R5citRcnZGczg4Z0dWQkxJVDRJTmJa?=
+ =?utf-8?B?SFJsZkQwSFYxU0RybTl3NlBtb2lpUWJkSlBlOEl5SFlVU0lnRkQwbXlseXc3?=
+ =?utf-8?B?SUxpSzcrVGxxS0s2RHFGb1lxKzJkOUN1WFI4UlhBNWVBajVCdFZFZmRtaDND?=
+ =?utf-8?B?VkhZZDZVSzQza2pmNHpCVDc0c3kxL2pQN0kxMEtkTnBBeVFLdjduSGxPRUE4?=
+ =?utf-8?B?bTlkdlMyOUhwandTdWhUZWpMaDhjRzJpQ0Vid1l2TElhNjlUaENmUjdUVk9Z?=
+ =?utf-8?B?aW01RGYvTFNJdFVlV01ZQXp5dHlXaExjSFlFcFZQRUJlaDVSNEZpdGhTK1hk?=
+ =?utf-8?B?ZStPTmYyUGlBSm1Kd1hjM1FEQTUwbzFGVTV0Y0VndUM1R3JYaEgwUFJ6NzZX?=
+ =?utf-8?B?QnlzRSt1T3cyZG1MNFJEd21KeitTbThQcEhDOFUwOGZnRjlCZnptZEJYc1VS?=
+ =?utf-8?B?M3lLV3ViK2FJbFh3K3FsQ2lpV3NnVjU2amFCbHBzRGx1VnJwb3hpcVVSWEto?=
+ =?utf-8?B?aFlybFI4VWFWNHJXQUUwYWpzb0hPanl4cWRoWkJKUm5JM1c1WWhlL0k4Qmw3?=
+ =?utf-8?B?dkE5Q1dLNGNoaGRTcCtxTmlGV1UvQWhjK2FReE05MWpFWC92emxmVFJrMDI1?=
+ =?utf-8?B?OGYySUg3a2VibG1Rd2JOdDFSdEw3T3ZYRWhsc1BIRmY4RmpORjJERnB4RUwz?=
+ =?utf-8?B?VGU1NHhaNk1XOXlLNHYzV1VGSUo0THFaZkkzR0o5aGM0MEh2UW5Ja1p3TlN6?=
+ =?utf-8?B?QXk4a3ozaWpGVTJJNnlrUTR5bzJVK3kyeElTMGxkblJKTW1jZlBvMEFoZTlH?=
+ =?utf-8?B?UDhBUW1ERXJuMVFUdUVIYkgycjNiK3FCOUtySHlaM0I5VmJPL29HcHk5MlRC?=
+ =?utf-8?B?eGE0TmZLa3VCU3dRYjZLdytlSjYwb2xxWXhXeElMbzk0MEg0aXN3SzRXVkxJ?=
+ =?utf-8?B?RDJTVmN1RXRER0xwRkovUDNlN2ZIVXRMbnRFSHBUMkZwamhENVZOWXp5RzR6?=
+ =?utf-8?B?VVo2THNkSGQvbTVSaFZZU2R6Nzgwclp1VStHN2xITjg5c1Z5Y0duMFFtSUsx?=
+ =?utf-8?Q?pI2nEAau/8so6O7rcR9Es+9Zlt9EC14hBgzH0=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(8096899003); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(1800799024)(376014)(8096899003); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VkI3N3VLSXNXL01vWnpWbVNSQVB0THd1YS9hTmN5Nnd3Z2pVRWJkSWlhWU1E?=
- =?utf-8?B?ZGlXbWhvVWx1Ujk1RTdid3c4OGlZZWhSTmtiWmdpVFVnb0w3cmZQU2FQOVVM?=
- =?utf-8?B?QVVtQUlUTUxrV2E3R3d1UTNxRU1BdTBnOHhreUl2RzdocHM2Q2NmTCtieVhv?=
- =?utf-8?B?M1ovaFppa2hVTFFQbzFPaGVnUGVqaEdZcW5aQklwcldCV3luUjJHRzYwYVU3?=
- =?utf-8?B?NDFIa2RLbERESFdVbzFJNXhOdExtbG82L2VYMituRHFna2M0dDgveWt6Ym5R?=
- =?utf-8?B?S1VhelIyRGNleWtKNlRsTXpRZHZvcFV1R2FmTWY3RDZaQmpnVUF0UUZ5dlhL?=
- =?utf-8?B?Nm1HeWs0b1k3WHBuR1BNUkNGSFJkMXIwNWdoQVJXNW9oUnNiWW9Oelh3MWw1?=
- =?utf-8?B?OTFjSVQweUJ3M21rbHFkc29BaG9NREQyVndoQzFxMkhEcmdVRml6aUVwZDEz?=
- =?utf-8?B?QmFTUmRPYzRSZXhNcE1xWjhldUF5aGlibEVNeDI4RUxqcHRlVFNjdDFCb3E2?=
- =?utf-8?B?WHRnRzJFWXJCV0pCTEtuUFJDUFZwR1BoK3RqRTZVSmE4T01SY0RqajUzREZX?=
- =?utf-8?B?OE9hSll2TGZpbVdqcHVtTFZnd3h6eW1VV3lZRmtERHloTjJIRHdwSzdVQVgx?=
- =?utf-8?B?ZExSVXlmQkYyaDdOdFVTc0E2Ry9SV2EvT0d0NldHWFhqR1RTZkphM0J2c0Rv?=
- =?utf-8?B?TEJGbng0NVhVTjFFTFI5R1ZYbkhoS3YrUDlrbWMwWmpOTEl6WE94T0xHOXUx?=
- =?utf-8?B?VVhNVEcxMXFSazZpeE9xdmpxMjJSc1pFWjFvNEFuK1B3UEsvK2dvV1M3RytB?=
- =?utf-8?B?TGJLdFBTVUJhZGZMR2JTY2JEWVZyVjFNRFFaNCtBekZ0MHoxS09uMjdWNkxu?=
- =?utf-8?B?enVadlRLZEFTYk5DR1hrQTdscU9EZ1VMcVd4KzdXcDV4NEw5YUhvNEZZZGto?=
- =?utf-8?B?UGdmMGpKbDZOUWRQVmFHZ3VoVW1vZ0FVVk5ONHpOZHFtVjNZbUtBcGdXRHVp?=
- =?utf-8?B?NVNXeFRjazY1MWhFM3pJa2RRRXFLbEN0Q2NZaE5TemlKUkpXdlBxQVY4MENw?=
- =?utf-8?B?amE4aUFlbXoxeVVveHFoN3BHUlI5ZHo5elRWVDVVbkN4UXhNLzN5VWRoOU1D?=
- =?utf-8?B?NURka0d6SGlBQjZPTFhOWWtIeC9wWi93UHoyS1BNZFJ1NUxCZjdpeFVoa083?=
- =?utf-8?B?MHpwbDFmWTJGOVo3SEhlYlk4T0xPR1J6N3FUNG5hSGhNWlovUm01TG10UTl3?=
- =?utf-8?B?cWtaOEpwWFVnY2RwRHMvZGJuSFRJbzcwZVd3T2NxWHlPZUplcENPd0QreERI?=
- =?utf-8?B?TUxZS29FK0wxQ0JBeUJPRTZ5K2wxTlEyd090bjRSaHJqWWJtamVHVXJUckhW?=
- =?utf-8?B?NkxrQk91bFNDREk0RkdZWXF1dHl6UHlsck5mSXplRzgvTVJXU21QamhIVlNJ?=
- =?utf-8?B?T1NSdnZHNUU2MENiS3RjT0x0U24yVXVLcC94Nlp2QkIxVVlhRlR0L0JtR1du?=
- =?utf-8?B?N296Mkx0Ti9ldDhFSXlsWjROYkFvU0o2YnAyV3pYcFBoT1puekw5bWIzQytV?=
- =?utf-8?B?T3R2ejVjRE5Qd1hRUUhOc2ZuQmpnOHhNUkxnZ2pjSGIxQmN5dGsxSnd1QTUw?=
- =?utf-8?B?R0hjRkw1VDIwNlZQQ09FeXZwS3J6dk9yS0pabVo3bE90Qms4UURuRUkrVVNt?=
- =?utf-8?B?MUdCUUhidGRsTWhNZU5rR1NITERNZ2FwaVlJZVVXdmR2T2N3UlNzNWgrN0ln?=
- =?utf-8?B?NzE0eklhL3NQTzIva2FoQlJxVVBLNHMrUFNvR2FvQmdHVW82cmxmT3ozQXZa?=
- =?utf-8?B?QWZUTkhXNS9Ra2V1TFNSY2FJb2R1VHlyL2JkWTBGUGdIdjF1a2ZMZ2dPc1k3?=
- =?utf-8?B?VVBFaVlBU2FUNTNoVHBnZDdmZGtxOWRRUHhCTlRUc0FWbEpqcXBBNjZ6MEVG?=
- =?utf-8?B?TU5YR1lubjdhVlBVLzRpVnlHUDNVMFVvbDJpMkZRdEJ1Qnlld0x4cStnWkdL?=
- =?utf-8?B?VDFJYUtFOVQyZU9yV0d3azFoNFJSQjJndXl2Q2Yzc29keHhqRXRYTmVSM2lX?=
- =?utf-8?B?U2c1Zko1eGdteTlyOWZsL29uT0kzRXU1d2xqYnRNbnZNVEcyNkNxcmNoQzkw?=
- =?utf-8?B?azZNU2tnZmwxOGthbjJvNkxxaGY2UXFGZEpNdzQremRzeGlYd2Zsa3BvbXNW?=
- =?utf-8?B?eXc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d2Z2T2huWjJoS2I1OE9VdzZ6clhpMXc0c2hzS2tWdmVhaUU5dDc1akhFaExN?=
+ =?utf-8?B?d2IrNG82aWc3WWp1RG0zSWNrNzRtTjZQQjRqSWViKzR2ZVZMdTE2eTdyZUlu?=
+ =?utf-8?B?dWtzL3kra2YyUFNkd0U4UVRYc3JUNUhuMlNySHREeSthM21RSkhjblkvK2Fk?=
+ =?utf-8?B?M0FiTFBBcWVna3kwMDlWQVJScVVTYVMrWlEvTDRSZFB0ekhZdVZJdWpWbjg5?=
+ =?utf-8?B?d29pbkVQamM2OUpwVUlhblNHKzVGQzRENDhKc1pCTXZyS0NsS1laa0d4TnBD?=
+ =?utf-8?B?WTdydE9DVWdxMjEzcDNodklFWWlpeTJjUUJhYVBWZ2t3ZW41Smp6UDI1Ykhn?=
+ =?utf-8?B?alVwOGZGOThzZDZPczVkdXYvbHNqRXJ6cXhKRzBEZ1o1N05URkNBcXJFRFl6?=
+ =?utf-8?B?aklYZmFCYzNmbDE1MFJxWE1zK2htKzViNk9jVGlocTFUTGYxTURXQndmSk1y?=
+ =?utf-8?B?eVYyYmZtaFZKQ0tQRDBpdTBYUDRGNldPOHMvQ05NcFQ0QUtRODE3eVVvaHg3?=
+ =?utf-8?B?SE1iemtFM0tRaDlhYTlMZ1p5dXl6c2dJV3JobXVONmcyWTlqMk8vSktKZ0cy?=
+ =?utf-8?B?MnhyY0ZWUVJXcWpQNS9BNTIvQXVOaHV3ZWRSNVJvQUFXcmlJVEFJK0JGbHFv?=
+ =?utf-8?B?bEgrRjBzZmJ6YlRGUjZ5QWtnZnNTbDBoazR3UVhtd0ZkRUdEOFRwQXdrUlgz?=
+ =?utf-8?B?bFlYUlcrU0dJaU03MEZKbnFVOGxlYnkycUtMTzVieHVHTjBKV3RHdkxQcTR5?=
+ =?utf-8?B?Zm5TVVppV2JPOVVRUXFFY2hkUTVkZHlnMmdWcjFkSEhwaG5JUVcrRFl6bDJB?=
+ =?utf-8?B?d01zNnFGYTBRMlo5dTBTa2d5SGRHbDUxQ1IyeGR4MVYralFXOFB2T2Vsck1r?=
+ =?utf-8?B?dnkyb2FRSHM4UTNmdnVmWkpGYmZvczQ0RExWUUppTGN4WXoxc0hJdHZOd1Zx?=
+ =?utf-8?B?OU9yaEtKUVBTTVViSVJBUGZpTWFxV3BOanlVdXV3WVJlN1RPdU1zdWM0NVFi?=
+ =?utf-8?B?S3lROG1Qa3FWbDVKNGZWV1NKZEJQL2NLZ25lTnc1Q0tLa0xqSXBjYmNjS0dM?=
+ =?utf-8?B?Zy92SDlLN01GeEJKeUEvckZ2VEU1aFFBNjZ4alJTZlpGRm9pSm9kMVE3anJH?=
+ =?utf-8?B?V05iRWJXWFVPSkhjeXlJYlRmNU5FR1lrWEhtSTg0UjFRUHhDQkUya2k0ckYv?=
+ =?utf-8?B?V2QyeVhhUzI4Z3RCYTBEL0tUYVBiODZWNXFjcjBnUWNJZ0tOOEFSRmhmSElv?=
+ =?utf-8?B?bGhoRzJMZzRrQ3NzS05Tc2MxcDZxSG5PM1VUTkV4c2pXQ0dKOGJqOE1IOGpj?=
+ =?utf-8?B?Vkd1cTN3MlM3Q3pCWTdHZTZjRnpHU0xKNlkvME9ReVZJb3RtNUJNQU00cDRw?=
+ =?utf-8?B?VUJYU0k3anViRDdrdGVtcVFWVG5zS2lWZ1BqUjhsT0Y1ZHhaS201cEhGWlY0?=
+ =?utf-8?B?WmxPQlMyOE5qa1BSU3N1NlVtejdMdjhydm85UEdLeEZrY2JjeTQ4RXUxM3Vz?=
+ =?utf-8?B?bUwxczczZytjQ282VU0zSlFoOEFQRDR6b205S2JrYUFPUHBYS3ZMVWx5enl0?=
+ =?utf-8?B?dUNXUDkxcXZ1TDNLdnFHWmNpdEZqRDNDUllJc0Q4N0JRSjRkZkppSjZGNnNt?=
+ =?utf-8?B?M24wQnN4MjFwUWcvTlg5ckh0RE5mL1pWeTZJcHAwRkF4TlVRZFo1ZE9GYS9B?=
+ =?utf-8?B?VTZBWDVMMjkySWdiY0Uxcm5QS3dZdFRFVXN1R3Z0aTh5dVA3NzdoMDI1UjYv?=
+ =?utf-8?B?NjVsb3VJbXR2ZzJGZkxlV0ZMclVRaXFEYWdGNkhzMUl3ZDFzN3JFTU9zQjRY?=
+ =?utf-8?B?RHJvbXlGa2hoalNOK0N3Q3IvTmtSTnVwYzh5ZmhIS3RmZnFBT0lHYWxtWTBx?=
+ =?utf-8?B?TkFFT1N5US9GVkZEYTJ2ZTFlYmx3bVhNWDZra0svUXJPZ0pGdWlSSmhyR1p4?=
+ =?utf-8?B?Njgrc0hYb2VuV0JxdE12OW1ZRnd0Z005aGE2Y3JIVUtFdDJXTHZyYjZaSjE2?=
+ =?utf-8?B?d2tMNFhtMUdzK2pteWYrWXNoRFloSXg0Ymg4QjdZRkhDODA5YkpqOW13Vzdz?=
+ =?utf-8?B?QUk4L0FUanVDZDhkK3pmRWhESEpQbEYxQlFJbjIyZFR3eXYxY3BvUUtsMWs1?=
+ =?utf-8?B?S0xJZmlRNFhVZ21WU0d5NkxtbVdGSFkyZmNPNXNTaGJsM0xVSzUySzZ6cW45?=
+ =?utf-8?B?Smc9PQ==?=
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9497cca4-f008-498e-eb72-08dd19f40b52
+X-MS-Exchange-CrossTenant-Network-Message-Id: 870afb81-21b4-4eb9-3970-08dd19f459f9
 X-MS-Exchange-CrossTenant-AuthSource: PR0P264MB2741.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2024 14:56:51.0769 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2024 14:59:03.1168 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R5GGW6Vi1wT3vSmw/5bpXRXQCWxYEkjtk24vrw6QKm6g+Qiv0Ks46YB9Jc16VgVFJkdzW/i+VXZIRdZop6l0G7/LU5XP4ji4x5mRt/iJdPo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB2770
+X-MS-Exchange-CrossTenant-UserPrincipalName: p0iRGhbP9gutV7RYLxe05ahlPQXmXFIRWpQ+9rgHgzhRBz5RbNSAb+GH5TiUg78mcFtT5slO+Ab583GuMrwfg7OCbL/CFZMzEyUaZsAx9BU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB2257
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -179,182 +179,173 @@ X-Virus-Status: Clean
 Hi Raymond,
 
 
-Le 09/12/2024 à 17:06, Raymond Mao a écrit :
+Le 09/12/2024 à 17:13, Raymond Mao a écrit :
 >
 > *This Mail comes from Outside of SoftAtHome: *Do not answer, click 
 > links or open attachments unless you recognize the sender and know the 
 > content is safe.**
 >
-> Hi Philippe,
+> Hi Philippe,
 >
 > On Mon, 9 Dec 2024 at 04:42, Philippe Reynes 
 > <philippe.reynes@softathome.com> wrote:
 >
->     Adds the support of the hmac based on sha256.
->     This implementation is based on rfc2104.
+>     Adds a test for the function sha256_hmac
 >
 >     Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 >     ---
->      include/u-boot/sha256.h |  4 ++++
->      lib/mbedtls/sha256.c    | 38 ++++++++++++++++++++++++++++++++++++++
->      lib/sha256.c            | 37 +++++++++++++++++++++++++++++++++++++
->      3 files changed, 79 insertions(+)
+>      test/lib/Makefile           |   1 +
+>      test/lib/test_sha256_hmac.c | 108
+>     ++++++++++++++++++++++++++++++++++++
+>      2 files changed, 109 insertions(+)
+>      create mode 100644 test/lib/test_sha256_hmac.c
 >
->     diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
->     index 44a9b528b48..2f12275b703 100644
->     --- a/include/u-boot/sha256.h
->     +++ b/include/u-boot/sha256.h
->     @@ -45,4 +45,8 @@ void sha256_finish(sha256_context * ctx, uint8_t
->     digest[SHA256_SUM_LEN]);
->      void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
->                     unsigned char *output, unsigned int chunk_sz);
->
->     +void sha256_hmac(const unsigned char *key, int keylen,
->     +                const unsigned char *input, unsigned int ilen,
->     +                unsigned char *output);
+>     diff --git a/test/lib/Makefile b/test/lib/Makefile
+>     index f516d001747..4c0abcba81a 100644
+>     --- a/test/lib/Makefile
+>     +++ b/test/lib/Makefile
+>     @@ -24,6 +24,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
+>      obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+>      obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+>      obj-$(CONFIG_AES) += test_aes.o
+>     +obj-$(CONFIG_SHA256) += test_sha256_hmac.o
+>      obj-$(CONFIG_GETOPT) += getopt.o
+>      obj-$(CONFIG_CRC8) += test_crc8.o
+>      obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
+>     diff --git a/test/lib/test_sha256_hmac.c b/test/lib/test_sha256_hmac.c
+>     new file mode 100644
+>     index 00000000000..473922bd9b0
+>     --- /dev/null
+>     +++ b/test/lib/test_sha256_hmac.c
+>     @@ -0,0 +1,108 @@
+>     +// SPDX-License-Identifier: GPL-2.0+
+>     +/*
+>     + * Copyright (c) 2024 Philippe Reynes
+>     <philippe.reynes@softathome.com>
+>     + *
+>     + * Unit tests for sha256_hmac functions
+>     + */
 >     +
->      #endif /* _SHA256_H */
->     diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
->     index 24aa58fa674..1b9fc1a8503 100644
->     --- a/lib/mbedtls/sha256.c
->     +++ b/lib/mbedtls/sha256.c
->     @@ -8,6 +8,7 @@
->      #ifndef USE_HOSTCC
->      #include <cyclic.h>
->      #endif /* USE_HOSTCC */
->     +#include <string.h>
->      #include <u-boot/sha256.h>
->
->      const u8 sha256_der_prefix[SHA256_DER_LEN] = {
->     @@ -60,3 +61,40 @@ void sha256_csum_wd(const unsigned char *input,
->     unsigned int ilen,
->
->             sha256_finish(&ctx, output);
->      }
+>     +#include <command.h>
+>     +#include <test/lib.h>
+>     +#include <test/test.h>
+>     +#include <test/ut.h>
+>     +#include <u-boot/sha256.h>
 >     +
->     +void sha256_hmac(const unsigned char *key, int keylen,
->     +                const unsigned char *input, unsigned int ilen,
->     +                unsigned char *output)
+>     +struct test_sha256_hmac_s {
+>     +       unsigned char *key;
+>     +       int keylen;
+>     +       unsigned char *input;
+>     +       int ilen;
+>     +       unsigned char *expected;
+>     +};
+>     +
+>     +/*
+>     + * data comes from:
+>     + * https://datatracker.ietf.org/doc/html/rfc4231
+>     <https://datatracker.ietf.org/doc/html/rfc4231>
+>     + */
+>     +static unsigned char key_test1[] = {
+>     +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+>     +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
+>     +
+>     +static unsigned char input_test1[] = {
+>     +       0x48, 0x69, 0x20, 0x54, 0x68, 0x65, 0x72, 0x65 };
+>     +
+>     +static unsigned char expected_test1[] = {
+>     +       0xb0, 0x34, 0x4c, 0x61, 0xd8, 0xdb, 0x38, 0x53,
+>     +       0x5c, 0xa8, 0xaf, 0xce, 0xaf, 0x0b, 0xf1, 0x2b,
+>     +       0x88, 0x1d, 0xc2, 0x00, 0xc9, 0x83, 0x3d, 0xa7,
+>     +       0x26, 0xe9, 0x37, 0x6c, 0x2e, 0x32, 0xcf, 0xf7 };
+>     +
+>     +static unsigned char key_test2[] = { 0x4a, 0x65, 0x66, 0x65 };
+>     +
+>     +static unsigned char input_test2[] = {
+>     +       0x77, 0x68, 0x61, 0x74, 0x20, 0x64, 0x6f, 0x20,
+>     +       0x79, 0x61, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20,
+>     +       0x66, 0x6f, 0x72, 0x20, 0x6e, 0x6f, 0x74, 0x68,
+>     +       0x69, 0x6e, 0x67, 0x3f };
+>     +
+>     +static unsigned char expected_test2[] = {
+>     +       0x5b, 0xdc, 0xc1, 0x46, 0xbf, 0x60, 0x75, 0x4e,
+>     +       0x6a, 0x04, 0x24, 0x26, 0x08, 0x95, 0x75, 0xc7,
+>     +       0x5a, 0x00, 0x3f, 0x08, 0x9d, 0x27, 0x39, 0x83,
+>     +       0x9d, 0xec, 0x58, 0xb9, 0x64, 0xec, 0x38, 0x43 };
+>     +
+>     +static struct test_sha256_hmac_s test_sha256_hmac[] = {
+>     +       {
+>     +               .key = key_test1,
+>     +               .keylen = sizeof(key_test1),
+>     +               .input = input_test1,
+>     +               .ilen = sizeof(input_test1),
+>     +               .expected = expected_test1,
+>     +       },
+>     +       {
+>     +               .key = key_test2,
+>     +               .keylen = sizeof(key_test2),
+>     +               .input = input_test2,
+>     +               .ilen = sizeof(input_test2),
+>     +               .expected = expected_test2,
+>     +       },
+>     +};
+>     +
+>     +static int _lib_test_sha256_hmac_run(struct unit_test_state *uts,
+>     +                                    unsigned char *key, int keylen,
+>     +                                    unsigned char *input, int ilen,
+>     +                                    unsigned char *expected)
 >     +{
->     +       int i;
->     +       sha256_context ctx;
->     +       unsigned char k_ipad[64];
->     +       unsigned char k_opad[64];
->     +       unsigned char tmpbuf[32];
+>     +       unsigned char output[32];
 >     +
->     +       memset(k_ipad, 0x36, 64);
->     +       memset(k_opad, 0x5C, 64);
+>     +       sha256_hmac(key, keylen, input, ilen, output);
+>     +       ut_asserteq_mem(expected, output, 32);
 >     +
->     +       for (i = 0; i < keylen; i++) {
->     +               if (i >= 64)
+>     +       return 0;
+>     +}
+>     +
+>     +static int lib_test_sha256_hmac_run(struct unit_test_state *uts,
+>     +                                   struct test_sha256_hmac_s *test)
+>     +{
+>     +       unsigned char *key = test->key;
+>     +       int keylen = test->keylen;
+>     +       unsigned char *input = test->input;
+>     +       int ilen = test->ilen;
+>     +       unsigned char *expected = test->expected;
+>     +
+>     +       return _lib_test_sha256_hmac_run(uts, key, keylen, input,
+>     ilen, expected);
+>     +}
+>     +
+>     +static int lib_test_sha256_hmac(struct unit_test_state *uts)
+>     +{
+>     +       int i, ret = 0;
+>     +
+>     +       for (i = 0; i < ARRAY_SIZE(test_sha256_hmac); i++) {
+>     +               ret = lib_test_sha256_hmac_run(uts,
+>     &test_sha256_hmac[i]);
+>     +               if (ret)
 >     +                       break;
->     +
->     +               k_ipad[i] ^= key[i];
->     +               k_opad[i] ^= key[i];
 >     +       }
 >     +
->
->
-> You are assuming that the key length is at most 64 bytes.
-> But according to the HMAC specification:
-> If the key is longer than the hash block size (64 bytes for SHA256),
-> it should be hashed first to produce a shorter key.
-> If the key is shorter than 64 bytes, it should be zero-padded to 64 bytes.
-
-
-good catch,  you're right, I've missed this part.
-I fix it in v4, and I also have added more test unit.
-btw: the sha1_hmac has the same issue.
-
-
->     +       sha256_starts(&ctx);
->     +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
->     +       sha256_update(&ctx, input, ilen);
->     +       sha256_finish(&ctx, tmpbuf);
->     +
->     +       sha256_starts(&ctx);
->     +       sha256_update(&ctx, k_opad, sizeof(k_opad));
->     +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
->     +       sha256_finish(&ctx, output);
->     +
->     +       memset(k_ipad, 0, sizeof(k_ipad));
->     +       memset(k_opad, 0, sizeof(k_opad));
->     +       memset(tmpbuf, 0, sizeof(tmpbuf));
->     +       memset(&ctx, 0, sizeof(sha256_context));
+>     +       return ret;
 >     +}
->     diff --git a/lib/sha256.c b/lib/sha256.c
->     index fb195d988f1..66224c92dd9 100644
->     --- a/lib/sha256.c
->     +++ b/lib/sha256.c
->     @@ -300,3 +300,40 @@ void sha256_csum_wd(const unsigned char
->     *input, unsigned int ilen,
->
->             sha256_finish(&ctx, output);
->      }
 >     +
->     +void sha256_hmac(const unsigned char *key, int keylen,
->     +                const unsigned char *input, unsigned int ilen,
->     +                unsigned char *output)
->     +{
->     +       int i;
->     +       sha256_context ctx;
->     +       unsigned char k_ipad[64];
->     +       unsigned char k_opad[64];
->     +       unsigned char tmpbuf[32];
->     +
->     +       memset(k_ipad, 0x36, 64);
->     +       memset(k_opad, 0x5C, 64);
->     +
->     +       for (i = 0; i < keylen; i++) {
->     +               if (i >= 64)
->     +                       break;
->     +
->     +               k_ipad[i] ^= key[i];
->     +               k_opad[i] ^= key[i];
->     +       }
->     +
->     +       sha256_starts(&ctx);
->     +       sha256_update(&ctx, k_ipad, sizeof(k_ipad));
->     +       sha256_update(&ctx, input, ilen);
->     +       sha256_finish(&ctx, tmpbuf);
->     +
->     +       sha256_starts(&ctx);
->     +       sha256_update(&ctx, k_opad, sizeof(k_opad));
->     +       sha256_update(&ctx, tmpbuf, sizeof(tmpbuf));
->     +       sha256_finish(&ctx, output);
->     +
->     +       memset(k_ipad, 0, sizeof(k_ipad));
->     +       memset(k_opad, 0, sizeof(k_opad));
->     +       memset(tmpbuf, 0, sizeof(tmpbuf));
->     +       memset(&ctx, 0, sizeof(sha256_context));
->     +}
+>     +LIB_TEST(lib_test_sha256_hmac, 0);
 >
 >
-> I understand now we have duplicated 'shaX_csum_wd()' under lib and 
-> lib/mbedtls.
-> That is because at the time when MbedTLS was added in, _csum_wd() is 
-> the only
-> duplicated function and it is a trade-off comparing with creating a 
-> new common
-> file for each algorithm.
-> But it is not the case if the number of these duplicated functions is 
-> increasing.
-> Do you mind moving them into a common file with the one you created?
-> At least for sha256 with this patch I think.
+> Can we extend the test cases with:
+> keys longer than 64 bytes to verify proper key hashing.
+
+
+Yes, I have added a test for each test vector provided in
+https://datatracker.ietf.org/doc/html/rfc4231
+
+And one of them has a key longer than 64.
+
+
 >
-
-In the v4, I have moved the function sha256_csum_wd() to the file 
-sha256_common.c
-
-I plan to do another serie for sha1 and sha512.
-
-
 > Regards,
 > Raymond
->
->     -- 
->     2.25.1
->
+
 
 Regards,
 Philippe
