@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3800E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:54:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB10EE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:54:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C76D8032B;
-	Wed, 11 Dec 2024 16:54:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 61630803AC;
+	Wed, 11 Dec 2024 16:54:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UqY0j1JV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m56zI7f0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA3D18034E; Wed, 11 Dec 2024 16:54:23 +0100 (CET)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
+ id B934E80327; Wed, 11 Dec 2024 16:54:28 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88FCD80327
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:54:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E0780371
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:54:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-7fc93152edcso757335a12.0
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:54:21 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-724d23df764so6301073b3a.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:54:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733932460; x=1734537260; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1733932465; x=1734537265; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ll1aMv8P07yiC9qBFWlSac67VNZchtO9SBnbVcI9oXw=;
- b=UqY0j1JVH2To5Ckzks889LY/G16lgKtedu0IvuxK7V5P0ri+G/OjbjGyO3CWDB4hFD
- TY5U3aMeJWbUiAZKYZ2PIGdXwXK5pAaNUM+53fQn9QUtO5LwrL5Lqff4c0FY4PdcAJ++
- gjYR2rdI3ihtpAwBtBLfue9zEZOvdkYn31jJ0=
+ bh=o5GzmLQrT0Zh4wzIKqtQe0uZdJ+6S2+nfqcG/boISVw=;
+ b=m56zI7f0MYmms2A1/I90LhxTNP93rLBv9obatcL1wSVN9N6/qFZ4UUOvVeo+pSN8Z8
+ hKCifpJkeRniq5QhOkYTVLgZbFMkOtNG3nc8Swr2rvkW/jGmwmWRzuIrGvRJtwfeBO52
+ mmBzSuBHTyNSqa6R4KBbVx32xgVSUpQOEdt/Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733932460; x=1734537260;
+ d=1e100.net; s=20230601; t=1733932465; x=1734537265;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ll1aMv8P07yiC9qBFWlSac67VNZchtO9SBnbVcI9oXw=;
- b=eo3Hy/O+qq1SQijup+5xpuvRqQyZrxwBKBJqpE8IzKm5bJVJTKRMddJ2YmtJn9LkuW
- 8F9x/2zKLdz/nMRlW/u9IDN4ap8oUL11/fYZDfZvTXeXF3NHABp2DNC2pwq/FvvRn6F+
- NXBOD/qQsh6kiAyUKiGoMNmV0KqCT6sx+VBiEvrUXwh/LemmQj7cMKgIeU223u0D8Z4W
- 60RQKPM3hJJTsWvd4X5KjQUqZsAhpBftQce30hYtdQD33EM6Trp8rDaoK8/9hyoTg6Ce
- 505maDv6xfFhxYThEu6tcspr84ubgWk771+5f7m5m0ZAaE+zwaWsER9zX272y0cXotl5
- wnPg==
-X-Gm-Message-State: AOJu0YyKvADj2aK5RG82XXLiL7jCgJyXtwHwW3H4QX/oAnM9VmpjgoF5
- 7LK9tl79TshSi8E9U9c/GfA9vAr9LkRgwVVUnXky5bbqcggS1AW8WwdjdC/CyJcdPaVFyCQq3Pl
- j5MKYP/PpqPtjU1BNwEgwpx344Ot36Jyu/GQx
-X-Gm-Gg: ASbGnct9kTpG+tvL9Ius0VRw/1Gg/FU7Y2ICzRemjTfQ8q2Hwyu/0KuP8UdtCiQCnui
- hfiw+MjAS9NOgp0zfv0gr6xDCSJ8nlgVNyNi4
-X-Google-Smtp-Source: AGHT+IFLVEeLPxrO6bu3JoE8WTymmiQqF+PHQAP3cPiA0NbXoYaQ4Tp5HVYAkbohRPI3/L8s1pH3d3BSE0SB1fDyUVE=
-X-Received: by 2002:a05:6a21:3990:b0:1e1:a75a:c43e with SMTP id
- adf61e73a8af0-1e1c27284cdmr4751904637.22.1733932460035; Wed, 11 Dec 2024
- 07:54:20 -0800 (PST)
+ bh=o5GzmLQrT0Zh4wzIKqtQe0uZdJ+6S2+nfqcG/boISVw=;
+ b=WPHQ/ofGxNR6EcbAxyJKeyQWVjf0i02Mq3Q7tRIBSIYPgNOauly3VqZ4N3IOYaiF97
+ vlEIXLLI4KeU/iE8jLs2LmO4F/pEKtIeAHqaz7nW10lKyBwk5u3nM9FakdMXdZVlWsHV
+ nSiX81Dv1+TyFtV29mCQSQG8TUC/EODz/ywWJbZvwM8/sfibrpMOfD6Jf83Nm9D/aLFH
+ /AL8J0qGqs8LCdIuX1G5se/CU/TXqcR4ce5f0zePrqAP+CHYvN4Ss1buoqBms1FMHLIw
+ g0YuWKJwa1WL2uXA38SDVD1zbi5ue2w9InSQ4JpSF0nTI6R2hVDNYEq3ii/y1YtnmG6E
+ s+Og==
+X-Gm-Message-State: AOJu0YwhcquQKFITjVLEhBW+88M8bRzzawL8tHPymlYyNTNOyx+lgUtY
+ cXBL1LwNVIevTIOO94cg6+mxOtRx3jWUNwP9DxCBfGvA5Nqz4a3Wlj+7mTfI8RJpb+g5opmIys2
+ A7yNw7w7cchMnctevgEQEY+MjAkODCqhUlAHw
+X-Gm-Gg: ASbGncs8G/3Exto160CBLkFXLM2/kuFpZWf5Fx/3lZWSE9ip0Pl9wJP2ynoyqf65aGp
+ 1vQoyitmW4lqxQZnpkFTfPnAYoGIqMLVXNadH
+X-Google-Smtp-Source: AGHT+IGNWpu1QZovx9x/tByA5hUgcNFo3k+AbzvARLZEJJ0/xGbIB4LRuUMlbP2IpsPZIp1AzD4xlnV5qw4oYnkG574=
+X-Received: by 2002:a05:6a20:728f:b0:1dc:e8d:c8f0 with SMTP id
+ adf61e73a8af0-1e1cdb20db5mr588669637.29.1733932464788; Wed, 11 Dec 2024
+ 07:54:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211135418.563803-1-sjg@chromium.org>
- <20241211135418.563803-13-sjg@chromium.org>
- <CAC_iWjKt36c6KK7Sv0H8U5zP_i8Wys8v9UDdLxQ-Menh5Bm4pg@mail.gmail.com>
-In-Reply-To: <CAC_iWjKt36c6KK7Sv0H8U5zP_i8Wys8v9UDdLxQ-Menh5Bm4pg@mail.gmail.com>
+ <20241211135418.563803-19-sjg@chromium.org>
+ <CAC_iWj+warnOCWhpp9H4-AUc70Ft-6jRM9tRcZ3yVTKJ1_88FA@mail.gmail.com>
+In-Reply-To: <CAC_iWj+warnOCWhpp9H4-AUc70Ft-6jRM9tRcZ3yVTKJ1_88FA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Dec 2024 08:53:54 -0700
-Message-ID: <CAFLszTjou8eJYbFGm2gMYGY_y+kh5qcU20SOFMEUsKCrC_gqbQ@mail.gmail.com>
-Subject: Re: [PATCH v5 12/23] efi_loader: Avoid assigning desc in
- efi_mem_carve_out()
+Date: Wed, 11 Dec 2024 08:54:11 -0700
+Message-ID: <CAFLszTgT0tE=fU2W__n1Kz_yoAE32wnMcVOEb99XG4EZCzP3TQ@mail.gmail.com>
+Subject: Re: [PATCH v5 18/23] efi_loader: Don't try to add sandbox runtime code
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -90,51 +89,87 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Wed, 11 Dec 2024 at 08:15, Ilias Apalodimas
+On Wed, 11 Dec 2024 at 08:19, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
 >
 > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Rather than assigning desc and then changing two fields, assign all four
-> > fields, for clarity.
+> > This cannot work since the code is not present in the emulated memory.
+> > In any case, sandbox cannot make use of the runtime code.
+> >
+> > For now, just drop it from sandbox. We can always adjust things to copy
+> > it into memory, if needed.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  lib/efi_loader/efi_memory.c | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >  lib/efi_loader/efi_memory.c | 26 ++++++++++++++++----------
+> >  1 file changed, 16 insertions(+), 10 deletions(-)
 > >
 > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 4c0fd0c5dca..f3aaa0e9288 100644
+> > index 0f149f99c7d..6475b94f951 100644
 > > --- a/lib/efi_loader/efi_memory.c
 > > +++ b/lib/efi_loader/efi_memory.c
-> > @@ -268,9 +268,10 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> >         newmap = calloc(1, sizeof(*newmap));
-> >         if (!newmap)
-> >                 return EFI_CARVE_OUT_OF_RESOURCES;
-> > -       newmap->desc = map->desc;
-> > +       newmap->desc.type = map->desc.type;
-> >         newmap->desc.physical_start = carve_start;
+> > @@ -767,16 +767,22 @@ static void add_u_boot_and_runtime(void)
+> >         runtime_mask = SZ_64K - 1;
+> >  #endif
+> >
+> > -       /*
+> > -        * Add Runtime Services. We mark surrounding boottime code as runtime as
+> > -        * well to fulfill the runtime alignment constraints but avoid padding.
+> > -        */
+> > -       runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
+> > -       runtime_end = (uintptr_t)__efi_runtime_stop;
+> > -       runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+> > -       runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> > -       efi_add_memory_map_pg(runtime_start, runtime_pages,
+> > -                             EFI_RUNTIME_SERVICES_CODE, false);
 >
-> virtual start needs to be assigned if you want to do that as well. But
-> what we have is fine really
+>
+> Can sandbox boot an OS? If not there's no point adding this. But if
+> you insist, I prefer
 
-At this point in the series, there is no virtual_start - see:
-efi_loader: Drop virtual_start from priv_mem_desc
+No sandbox can't really boot an OS. The primary reason for this change
+is to avoid strange things appearing in the EFI memory map (and
+therefore the EFI log). I found it very confusing.
+
+> if (IS_ENABLED(CONFIG_SANDBOX)
+>     return
+>
+> at the top of the function
+
+OK
 
 >
 > Thanks
 > /Ilias
-> >         newmap->desc.num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
-> > +       newmap->desc.attribute = map->desc.attribute;
-> >         /* Insert before current entry (descending address order) */
-> >         list_add_tail(&newmap->link, &map->link);
+>
+> > +       if (!IS_ENABLED(CONFIG_SANDBOX)) {
+> > +               /*
+> > +                * Add Runtime Services. We mark surrounding boottime code as
+> > +                * runtime as well to fulfill the runtime alignment constraints
+> > +                * but avoid padding.
+> > +                *
+> > +                * This is not enabled for sandbox, since we cannot map the
+> > +                * sandbox code into emulated SDRAM
+> > +                */
+> > +               runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
+> > +               runtime_end = (uintptr_t)__efi_runtime_stop;
+> > +               runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+> > +               runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+> > +               efi_add_memory_map_pg(runtime_start, runtime_pages,
+> > +                                     EFI_RUNTIME_SERVICES_CODE, false);
+> > +       }
+> >  }
 > >
+> >  int efi_memory_init(void)
 > > --
 > > 2.34.1
 > >
 
 Regards,
-SImon
+Simon
