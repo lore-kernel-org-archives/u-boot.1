@@ -4,69 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 998BAE77182
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 22:26:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA733E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 22:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A0AF8021C;
-	Wed, 11 Dec 2024 23:25:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E63B801E7;
+	Wed, 11 Dec 2024 23:38:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EF75EJ6u";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M+N9YXz0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9AA0801E7; Wed, 11 Dec 2024 23:25:55 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D3F02801B0; Wed, 11 Dec 2024 23:38:32 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD118801EA
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 23:25:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0C88E5C67E2;
- Wed, 11 Dec 2024 22:25:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 4C6DFC4CEE2;
- Wed, 11 Dec 2024 22:25:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1733955949;
- bh=S4KYjt1mAriaCxxt9OL8lVxgQx7CMHx2P2jUt4jvgBk=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=EF75EJ6uJ4mt3L/04BCZTArgRomIVZri+tWOKz0GxlRaaICOc/w+JYLwETQsFB/id
- MVQm2kY8qekSjSwSvyZH+kwjUnjLAAEL60jwC2ttL3C9j1DyBlJiSX7Ea7PwLw5fT2
- Jj9zQxsNxOHDbh4O3TTO3XS8uJevoV9FHErAM8EUaxarxCcK2oH/aBdBWqi4LneVJD
- lDSAiiwKAv7AhWL+Jcw/Gz+qcgK1wAUs/R1vGP/ID89F/MdLJNYWM6EeHNicudsLrx
- smq7JHRVfp0XBETg8E7pMdMupKNdVdvkpMnEFO+KreSuEmzQJgKsOzfPqEPILzYsJ0
- sm09C0WVKfttA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 42E9BE7717D;
- Wed, 11 Dec 2024 22:25:49 +0000 (UTC)
-From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
- <devnull+j.ne.posteo.net@kernel.org>
-Date: Wed, 11 Dec 2024 23:25:27 +0100
-Subject: [PATCH v2 3/3] cmd: ufetch: Show CPU architecture under "CPU"
+ by phobos.denx.de (Postfix) with ESMTPS id 8C6C0801B0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 23:38:30 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3a8c7b02d68so141585ab.3
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:38:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1733956709; x=1734561509; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BqauQY1jyXbtRJKPRWpiTmyDyKuXco05pci4hsBn0no=;
+ b=M+N9YXz03nRG12STNBEFDqL1AAWMfNljUIfGFR9m8aJWG5VcH9Mf8AeeERxINA8AoC
+ pLTEVCWPJw6Tazs9eW71aI50ZatfGDQGmC6T8qktvSgxC9urT3K+XOcC0076kUyRAvC7
+ ZYsJfeBs3R+eENgg7PWNfpC8/Gd7EpSG3xroU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733956709; x=1734561509;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BqauQY1jyXbtRJKPRWpiTmyDyKuXco05pci4hsBn0no=;
+ b=g/dpbvyvh9fx8blet9LxQs4OuAorm0nG+nQqJOdt0Hte2zz6eKfYzXwY8dY13pdCYh
+ FVabwxm+e5+JKPFELy6WVFJZMVmoIYbxqy/lB/zQ2ujsBDb30KUJ8yJod6MNppo08fS7
+ IwhHm+CTYoY5YiU3j/krtph/b+cQeWKxpuApC9bvogQyW7VEg/6OSI7ZwtSiptKwBwF4
+ c/Rs6F/sbC3FVj0BefxFP2Rjk6JUzPT1mEFuzFrMLnSAE1+gP3MWXo88JhirHlA9JERi
+ RELGKYaiuFNVfHS96wgmpDCqzWcad/+k0753vEO+wJVhZneShzOZRkiVpipA2Mi8Jrxb
+ J4Qg==
+X-Gm-Message-State: AOJu0Yx5psbsq28TCog85we3ARsQ/F5tiHhwdmUphvrwWgwMupFNOFpp
+ TlELs6zZ8MfagMuiwwFJk3W6rw9MP7V9BX8cpTk5bKfiC5GCAG1CtGaib+OAy10JpDsLUKfbcY8
+ =
+X-Gm-Gg: ASbGncu8Se3Cp4N9fci/Fpqyc3o8pkrJyeWOj6PhIXYD2AFCaGvJgve8GI/fm33Ko6e
+ ZjFG3S3FxeMDsy0nobGEHOgV1OxrPBe9VEnxStCQo78utiTJDsBwlZ3qkFkRGCZ/Sm52V16jXeb
+ VBqv8nNXgi3TkTnYXC1iJ6RWzm8a3S5ukCV4R4UszAr7n8NEhnjz8sZ5lVfcJZ95MatBaJYcaRB
+ 7iNjwuDu0bfpuZAWnUzB1p48mpLW0ad0ETwImUzs12UlkLRBBmiA7/cOvSJb/RD4pbWy0us7Zoc
+ 7eNUF65qkzVs478=
+X-Google-Smtp-Source: AGHT+IGmZwO9Js8qO49hJ0OqDI4B3n9zYrMffL5PxPJ2EGM+w7PhH2OMpCZ9llQw9cGcU2HJgTJ3gQ==
+X-Received: by 2002:a05:6e02:1c02:b0:3a7:2204:c83e with SMTP id
+ e9e14a558f8ab-3ac48bb347cmr13039255ab.10.1733956708843; 
+ Wed, 11 Dec 2024 14:38:28 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e2bce7981bsm1902816173.67.2024.12.11.14.38.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Dec 2024 14:38:27 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v2 0/7] efi: Start to chip away at the EFI workaround
+Date: Wed, 11 Dec 2024 15:38:15 -0700
+Message-Id: <20241211223822.2446254-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20241211-ufetch-v2-3-2b5432ffaeb1@posteo.net>
-References: <20241211-ufetch-v2-0-2b5432ffaeb1@posteo.net>
-In-Reply-To: <20241211-ufetch-v2-0-2b5432ffaeb1@posteo.net>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1733955948; l=1029;
- i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=/Cg0aGCHH9Ee1PEGTmvqDYJpZHTVfYwbSQst/nnF4mM=;
- b=hn1SVq0+J9nCc5W139NpXvfeteHxkh4G5mpVDUVABO1uQaW5071+MZQt/NiF4Smiu74Dmm5A+
- FNu64g1u3QVCGwWQj+7cYdHYjFFsFttvftNpZK7GvAxk3/f3C751Yi+
-X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
- pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
-X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
-X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,45 +93,43 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "J. Neuschäfer" <j.ne@posteo.net>
+At present there is a function, efi_set_bootdev(), which is used in
+various places to tell the EFI loader which device a file came from.
 
-When looking at ufetch output it isn't immediately obvious which CPU
-architecture the presented board has. This patch therefore adds the
-CPU architecture string (for example "powerpc") to the "CPU:" line.
-The new format is:
+With bootstd, this information is available in the bootflow.
 
-	CPU: powerpc (1 cores, 1 in use)
+This little series provides a way for bootstd to provide the bootflow to
+the EFI loader, so that it is able to select the correct paths.
 
-Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
----
+For now only the EFI bootmeth is updated.
 
-v2:
-- Reformat the CPU message for readability
----
- cmd/ufetch.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Adjust argument ordering for efi_run_image()
+- Use efi_loader tag instead of efi
+- Drop unnecessary path removal
+- Fix 'require' typo
+- Move calculation of dev-name into a separate function
+- Add new patch to support PXE booting
 
-diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-index 83cec0f6d5c875f150f7b948392a29803bdbc201..ed5a856c7abbe08949b81e0b2f634edd8b390be5 100644
---- a/cmd/ufetch.c
-+++ b/cmd/ufetch.c
-@@ -188,7 +188,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
- 				if (ofnode_name_eq(np, "cpu"))
- 					n_cpus++;
- 			}
--			printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
-+			printf("CPU: " RESET CONFIG_SYS_ARCH " (%d cores, 1 in use)\n", n_cpus);
- 			break;
- 		case MEMORY:
- 			for (int j = 0; j < CONFIG_NR_DRAM_BANKS && gd->bd->bi_dram[j].size; j++)
+Simon Glass (7):
+  efi_loader: Refactor device and image paths into a function
+  efi_loader: Make efi_run_image() static
+  efi_loader: Update efi_run_image() to accept image and device path
+  efi_loader: Add a version of efi_binary_run() with more parameters
+  efi_loader: Move the fallback code from efi_run_image()
+  efi_loader: Pass in the required parameters from EFI bootmeth
+  bootmeth_efi: Support PXE booting
+
+ boot/bootmeth_efi.c          |  64 +---------
+ include/efi_loader.h         |  10 ++
+ lib/efi_loader/efi_bootbin.c | 239 ++++++++++++++++++++++++++---------
+ 3 files changed, 189 insertions(+), 124 deletions(-)
 
 -- 
-2.45.2
-
+2.34.1
 
