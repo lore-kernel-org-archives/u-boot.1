@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99EC9E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:08:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C18E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB43A80296;
-	Wed, 11 Dec 2024 16:08:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D0AE802E3;
+	Wed, 11 Dec 2024 16:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L6+ljqt1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yxh44SXc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09C4A80306; Wed, 11 Dec 2024 16:08:07 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 5F8BA802E6; Wed, 11 Dec 2024 16:09:48 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A132780296
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:08:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ECD6A80212
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-6f00da6232bso33832557b3.2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:08:04 -0800 (PST)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-6ef7640e484so80140187b3.3
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:09:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733929683; x=1734534483; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733929785; x=1734534585; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NYYkAcYQ86I33u+SCjsRvoW9dnP1m7wDdySJFQ5DnMQ=;
- b=L6+ljqt17oz9b3F38eIhN3s0hxt0KCy8tBCRxTPBOGxKFiTv/5xjBYObBOhznL1ZWK
- xS8TXJStC8oDYXsN6JS4OtN8MF9x4EBcA2o0yZck1f57pjEMP3oeKCnA3Ig4rO0mlU3Y
- udLg0hvM9B6iMQc7GpJPeOXeMLdklVJgyAyG3rDFZkHkn1TU9mSc8ZSDssnC3DOQkkcf
- TsEMALgl5mcdwWSVYyQrH0GrIIMQukKaFITz3m7XzV0gECCgzI8b5vKHsizFPfheAHTh
- ykRmUKjjTpRAbKSkWLC2cI7I/8hWZWohjJBOid5mkmI09FZvCfgbNnEmgiQn/IrWsvNK
- dE/Q==
+ bh=KLyCN64lA0osNilokF9V/ut2KgKL7Fhq52UTgnUeYxU=;
+ b=yxh44SXc0DuG7yO6PZMYoUrdG4cMqJmzME9zDll67TqqVn6eKW1QJtwAjiT1RXaoOk
+ MVTRAxbtv7qxXMQlS1wC0030D6dd47k3psXs6vKfY+Ukk8wXyX747ZfLRAZgttxjnTI8
+ mBHEo0R6dYW6FZtEo9D6H0VQjzt5iXDY8aBb81wiqgZvXLnJAmk7zsgEOqZ/OXg5YcCo
+ m0I5sckSg+9MC9Tq8kbOtRPd7IR+J4zQlYBF1YyFlIIWJLOVWf8v15cUt66qf0ixKWoB
+ jlkqCxF7+D8Y7c4/Fc0ck7URhz4uVypT0kATu/rfgcmZHwcPeSLt2U3lPPvIvn93c4Ae
+ iOoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733929683; x=1734534483;
+ d=1e100.net; s=20230601; t=1733929785; x=1734534585;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NYYkAcYQ86I33u+SCjsRvoW9dnP1m7wDdySJFQ5DnMQ=;
- b=SeVwEi5qOjsDitfBe1Mi/0Efiwe55KyABgQqe5C9tkfh6bDInojaGwdYMoAM4MSLLT
- VPkglOWuDOobyjp+XQKZZ57VokDQgsTsCm4z2PPlonVozD78PwRIMpNhmkkzAvKh7Men
- NQz7PfGX3mcqtfWuv4inpmhHeezy3B0A8eBYFHVQwHLjfawCVRCTCRRCPugJXHe2SgPq
- irWDnqtusMVpHzZka8fa3pi2SkzhT9NyzJzvyvli2Xzs1+s3XWrIW1RIRH4RvrypQZMV
- LgiBEJCu04vAwX+MLculXGJeRL0M2CEP20mhxangRwqJIq+1EXCbrGeW9jOCzBQzpMsf
- bGYg==
-X-Gm-Message-State: AOJu0YzKdR6FUN4RjZ7EoElH3ZQ+9MYAEyaQK1P+ApV8utxQn1wBJ36m
- 3ESMgCQ7FsTiyYfEryte4suEgwYe2k664lVHgvLymEHq+tUxjXEsfjNQGAtoJegwJl332ks3Rak
- cQo53DZ8XQV1q2Ga3wHq+/4sTdPHQOyo7pZCR7w==
-X-Gm-Gg: ASbGncsIJyWe9Ao2Vz/mS6CJib4UBD567n260bQDLzfLN94ENy+D8q9UHX6oQTD1/0i
- JU8XhD6xOve9QTvcmNnnkJX3wtAi5eF41X2A=
-X-Google-Smtp-Source: AGHT+IFLtN4UH9fNNQkZixHkaA0i1rXehzOmOputYlmDqzllMS2dkulK9TNebZPwcs90GA3PO8TFLIzMOYEVkIDJwrg=
-X-Received: by 2002:a05:690c:4d02:b0:6ef:5688:f95e with SMTP id
- 00721157ae682-6f148052638mr29995597b3.42.1733929683240; Wed, 11 Dec 2024
- 07:08:03 -0800 (PST)
+ bh=KLyCN64lA0osNilokF9V/ut2KgKL7Fhq52UTgnUeYxU=;
+ b=hl6778lslVzzzyiNanSILq/71MB8l5XfFGUJP6oiUrzUeG6QTT3HI8MO30GSLQmskY
+ t5p5UlBmg6aPr0EhorAMeN+fPjJbLaN3p/LQBUXfemuwyb+pnt7IOX64zKMVZj1OtKqP
+ Ud4Vh/rCuBzhmZqoIEVrrINwUv56YJJGBlt01sHUz5vsuoq8LJDFuiQGXZpTqg6zQbxy
+ Q/lVOyP/Zawat6NvDG7BPoPZpEjtARmKssHtnc6AcZOxLXy342ayai7PX2AMNZP0G7bg
+ g9UqYnQLHzUQEeD+6nU8NcjuGk3sOdWS1dBDHHVqhdvyI3tl/9+f92/u1EuvWzmyunM5
+ pvjg==
+X-Gm-Message-State: AOJu0YyELFcFq0b0rpQvph9kNR1ZidkGetekv4bViMGBfK6IX7Cmye01
+ jbSV2bkc8BvI94OgU4DAuE8mVoAGYkz0HaGsuOVuj7L+zGNNTszBcDrxWM//ptOOwbCPOtFR5nt
+ r+6VkUJrHbM5Z2E8AO2NlvhXmZMPMzbnkJA/xqQ==
+X-Gm-Gg: ASbGncuXwhQ2+xX71VmoTYIf4ccVjJ7l5GV/AGGb9yGcH1fpe/WJbeqsmj2tQnETyRf
+ C6u+V2C2pcSAtUzPgpv2pneXPYA3Msq+I1a4=
+X-Google-Smtp-Source: AGHT+IE0zh6h+aHJGEuCn5vFtigL/9BYLI/8q4PnMnnIScsY9cgOiq1cCUmDa4jeTp3WKp/PlHzkp7p8Mtt+7khLUUo=
+X-Received: by 2002:a05:690c:6ac8:b0:6b3:a6ff:7676 with SMTP id
+ 00721157ae682-6f147fd1dd9mr33793007b3.3.1733929784767; Wed, 11 Dec 2024
+ 07:09:44 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211135418.563803-1-sjg@chromium.org>
- <20241211135418.563803-9-sjg@chromium.org>
-In-Reply-To: <20241211135418.563803-9-sjg@chromium.org>
+ <20241211135418.563803-10-sjg@chromium.org>
+In-Reply-To: <20241211135418.563803-10-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 11 Dec 2024 17:07:26 +0200
-Message-ID: <CAC_iWjKnvOsKP7sa447yaQB7_G6nvbY=FxDWuFxkW5pt=cXXeQ@mail.gmail.com>
-Subject: Re: [PATCH v5 08/23] efi_loader: Use a separate struct for memory
- nodes
+Date: Wed, 11 Dec 2024 17:09:09 +0200
+Message-ID: <CAC_iWj+g0Jzg3DMP2KgFnabhMe5U_L4mtvUYA+HUBms5_z5+BA@mail.gmail.com>
+Subject: Re: [PATCH v5 09/23] efi_loader: Drop virtual_start from priv_mem_desc
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -95,145 +94,86 @@ Hi Simon,
 
 On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
 >
-> At present efi_memory uses struct efi_mem_desc for each node of its
-> memory list. This is convenient but is not ideal, since:
->
-> - it means that the fields are under a 'desc' sub-structure
-> - it includes an unused 'reserved' field
-
-That's interesting. The EFI spec does not define that and I looked as
-back as 2.5.
-Heinrich, this predates my involvement with EFI, do you remember why
-it was added?
-
-Because it's defined in
-> - it includes virtual_start which is confusing as it is always the same
->   as physical_start
-> - we must use u64 to store pointers, since that is how they are returned
->   by calls to efi_get_memory_map()
-
-I don't understand the 'pointers' again here. It's a physical address.
-
->
-> As a first step to tidying this up, create a new, private struct to hold
-> these fields.
+> This field is always the same as physical_start, so keeping track of it
+> separately is unnecessary and confusing. Drop it.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> (no changes since v2)
+> (no changes since v1)
 >
-> Changes in v2:
-> - Add new patch to use a separate stuct for memory nodes
->
->  lib/efi_loader/efi_memory.c | 49 +++++++++++++++++++++++++++++++------
->  1 file changed, 42 insertions(+), 7 deletions(-)
+>  lib/efi_loader/efi_memory.c | 10 +++-------
+>  1 file changed, 3 insertions(+), 7 deletions(-)
 >
 > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 4bc6d12a1fe..db40aee8353 100644
+> index db40aee8353..8211600f7f6 100644
 > --- a/lib/efi_loader/efi_memory.c
 > +++ b/lib/efi_loader/efi_memory.c
-> @@ -27,9 +27,39 @@ DECLARE_GLOBAL_DATA_PTR;
->
->  efi_uintn_t efi_memory_map_key;
->
-> +/**
-> + * struct priv_mem_desc - defines an memory region
-> + *
-> + * Note that this struct is for use inside U-Boot and is not visible to the
-> + * EFI application, other than through calls to efi_get_memory_map(), where this
-> + * internal format is converted to the external struct efi_mem_desc format.
-> + *
-> + * @type (enum efi_memory_type): EFI memory-type
-> + * @reserved: unused
-> + * @physical_start: Start address of region in physical memory
-> + * @virtual_start: Start address of region in physical memory
-> + * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
-> + *     bytes)
-> + * @attribute: Memory attributes (see EFI_MEMORY...)
-> + */
-> +struct priv_mem_desc {
-> +       u32 type;
-> +       u32 reserved;
-> +       efi_physical_addr_t physical_start;
-> +       efi_virtual_addr_t virtual_start;
-> +       u64 num_pages;
-> +       u64 attribute;
-> +};
-
-This is not private, it's described by the EFI spec.
-
-> +
-> +/**
-> + * struct efi_mem_list - defines an EFI memory record
-> + *
-> + * @link: Link to prev/next node in list
-> + * @desc: Memory information about this node
-> + */
->  struct efi_mem_list {
->         struct list_head link;
-> -       struct efi_mem_desc desc;
-> +       struct priv_mem_desc desc;
+> @@ -37,7 +37,6 @@ efi_uintn_t efi_memory_map_key;
+>   * @type (enum efi_memory_type): EFI memory-type
+>   * @reserved: unused
+>   * @physical_start: Start address of region in physical memory
+> - * @virtual_start: Start address of region in physical memory
+>   * @num_pages: Number of EFI pages this record covers (each is EFI_PAGE_SIZE
+>   *     bytes)
+>   * @attribute: Memory attributes (see EFI_MEMORY...)
+> @@ -46,7 +45,6 @@ struct priv_mem_desc {
+>         u32 type;
+>         u32 reserved;
+>         efi_physical_addr_t physical_start;
+> -       efi_virtual_addr_t virtual_start;
+>         u64 num_pages;
+>         u64 attribute;
 >  };
+> @@ -187,7 +185,6 @@ static void efi_mem_sort(void)
+>                                 pages = cur->num_pages;
+>                                 prev->num_pages += pages;
+>                                 prev->physical_start -= pages << EFI_PAGE_SHIFT;
+> -                               prev->virtual_start -= pages << EFI_PAGE_SHIFT;
+>                                 list_del(&lmem->link);
+>                                 free(lmem);
 >
->  #define EFI_CARVE_NO_OVERLAP           -1
-> @@ -116,7 +146,7 @@ static int efi_mem_cmp(void *priv, struct list_head *a, struct list_head *b)
->   * @desc:      memory descriptor
->   * Return:     end address + 1
->   */
-> -static uint64_t desc_get_end(struct efi_mem_desc *desc)
-> +static uint64_t desc_get_end(struct priv_mem_desc *desc)
->  {
->         return desc->physical_start + (desc->num_pages << EFI_PAGE_SHIFT);
->  }
-> @@ -138,8 +168,8 @@ static void efi_mem_sort(void)
->         while (merge_again) {
->                 merge_again = false;
->                 list_for_each_entry(lmem, &efi_mem, link) {
-> -                       struct efi_mem_desc *prev;
-> -                       struct efi_mem_desc *cur;
-> +                       struct priv_mem_desc *prev;
-> +                       struct priv_mem_desc *cur;
->                         uint64_t pages;
+> @@ -255,7 +252,6 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>                         free(map);
+>                 } else {
+>                         map->desc.physical_start = carve_end;
+> -                       map->desc.virtual_start = carve_end;
+>                         map->desc.num_pages = (map_end - carve_end)
+>                                               >> EFI_PAGE_SHIFT;
+>                 }
+> @@ -276,7 +272,6 @@ static s64 efi_mem_carve_out(struct efi_mem_list *map,
+>                 return EFI_CARVE_OUT_OF_RESOURCES;
+>         newmap->desc = map->desc;
+>         newmap->desc.physical_start = carve_start;
+> -       newmap->desc.virtual_start = carve_start;
+>         newmap->desc.num_pages = (map_end - carve_start) >> EFI_PAGE_SHIFT;
+>         /* Insert before current entry (descending address order) */
+>         list_add_tail(&newmap->link, &map->link);
+> @@ -313,7 +308,6 @@ efi_status_t efi_add_memory_map_pg(u64 start, u64 pages,
+>                 return EFI_OUT_OF_RESOURCES;
+>         newlist->desc.type = memory_type;
+>         newlist->desc.physical_start = start;
+> -       newlist->desc.virtual_start = start;
+>         newlist->desc.num_pages = pages;
 >
->                         if (!prevmem) {
-> @@ -194,11 +224,11 @@ static void efi_mem_sort(void)
->   * to re-add the already carved out pages to the mapping.
->   */
->  static s64 efi_mem_carve_out(struct efi_mem_list *map,
-> -                            struct efi_mem_desc *carve_desc,
-> +                            struct priv_mem_desc *carve_desc,
->                              bool overlap_conventional)
->  {
->         struct efi_mem_list *newmap;
-> -       struct efi_mem_desc *map_desc = &map->desc;
-> +       struct priv_mem_desc *map_desc = &map->desc;
->         uint64_t map_start = map_desc->physical_start;
->         uint64_t map_end = map_start + (map_desc->num_pages << EFI_PAGE_SHIFT);
->         uint64_t carve_start = carve_desc->physical_start;
-> @@ -678,7 +708,12 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
->         /* Return the list in ascending order */
->         memory_map = &memory_map[map_entries - 1];
->         list_for_each_entry(lmem, &efi_mem, link) {
-> -               *memory_map = lmem->desc;
-
-What's wrong with that ?
-
-> +               memory_map->type = lmem->desc.type;
-> +               memory_map->reserved = lmem->desc.reserved;
-> +               memory_map->physical_start = lmem->desc.physical_start;
-> +               memory_map->virtual_start = lmem->desc.virtual_start;
-> +               memory_map->num_pages = lmem->desc.num_pages;
-> +               memory_map->attribute = lmem->desc.attribute;
+>         switch (memory_type) {
+> @@ -711,7 +705,9 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_map_size,
+>                 memory_map->type = lmem->desc.type;
+>                 memory_map->reserved = lmem->desc.reserved;
+>                 memory_map->physical_start = lmem->desc.physical_start;
+> -               memory_map->virtual_start = lmem->desc.virtual_start;
+> +
+> +               /* virtual and physical are always the same */
+> +               memory_map->virtual_start = lmem->desc.physical_start;
+>                 memory_map->num_pages = lmem->desc.num_pages;
+>                 memory_map->attribute = lmem->desc.attribute;
 >                 memory_map--;
->         }
->
 > --
 > 2.34.1
 >
-
-The only problem I see here is the reserved field. I think this patch
-should just remove that
+I don't like duplicating efi_mem_desc and have a priv without the
+virtual address. I don't understand what you find confusing, but we
+have follows the spec (minus that reserved member) and I prefer it
 
 Thanks
 /Ilias
