@@ -4,41 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E8D6E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 21:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEC8E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 22:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92AB5801E7;
-	Wed, 11 Dec 2024 22:54:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 686E3801DD;
+	Wed, 11 Dec 2024 23:25:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Yikivdqc";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE775801EA; Wed, 11 Dec 2024 22:54:24 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6E9E7801DB
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 22:54:22 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD5791007;
- Wed, 11 Dec 2024 13:54:49 -0800 (PST)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1AB083F58B;
- Wed, 11 Dec 2024 13:54:20 -0800 (PST)
-Date: Wed, 11 Dec 2024 21:53:27 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: u-boot@lists.denx.de, lhristov@gmail.com
-Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
-Message-ID: <20241211215327.26dc369a@minigeek.lan>
-In-Reply-To: <CALtQ3O2jF6sEvofpZ+FtJgmgTKZvNRuohnwEtPz4ES0WqtxU5g@mail.gmail.com>
-References: <CALtQ3O2jF6sEvofpZ+FtJgmgTKZvNRuohnwEtPz4ES0WqtxU5g@mail.gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ id 1A63D80209; Wed, 11 Dec 2024 23:25:53 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A01D380192
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 23:25:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DC0265C67D9;
+ Wed, 11 Dec 2024 22:25:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 27C31C4CEDE;
+ Wed, 11 Dec 2024 22:25:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1733955949;
+ bh=8LH42Hjv4WC6htds/2CkcroW24r5VhkNkyg/jfGnbUo=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=YikivdqcIor+w93jUC9J6u0A8FYKQol3GXr10GdF+086txTWuK3/iL7tegWMb9RpE
+ YswLIrgOkhTfSpEr1WnYLRjvhoMcIx3bhY7V+byx+gJ+Hk11N7w6Ut7JsadFmyC3t8
+ CDvp0SJynruTvHOt+A8meNNFUQzuk11YRNr8XGVAz0mXpoG/mQ8SvGhhZ0zVLRHSLU
+ zinCNKlYgPwFIW97+E/SM8bN7jxD6mm/thGWvGXf5lyAz9yeeuANzT2k4iqden4QS/
+ qZh+EutbNp44R7+ak5aRlyfEdyQC4O24HYgJnkxOBBA0gcYuaMG3O7adyJ3Pd4EF4o
+ 20BYipvirdffg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 14984E77182;
+ Wed, 11 Dec 2024 22:25:49 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Wed, 11 Dec 2024 23:25:25 +0100
+Subject: [PATCH v2 1/3] cmd: ufetch: Fix type mismatch on 32-bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20241211-ufetch-v2-1-2b5432ffaeb1@posteo.net>
+References: <20241211-ufetch-v2-0-2b5432ffaeb1@posteo.net>
+In-Reply-To: <20241211-ufetch-v2-0-2b5432ffaeb1@posteo.net>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1733955947; l=1467;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=ukV5W4viTNXoPORPuKkJ7XwZABI+SL1DgnUObgjPNLI=;
+ b=gfPor0h6dE/stpIj5+SQMuDzFmZy673j+Z6SWBXLNkGbC4FB4EogVCVQNWi0eaoIQ+Jhm5gMG
+ Z1I6UaAxtfQCxPx3tO1QZSGHsFNVBNcYlhX12XQ/JgxSFTgotJr7AKV
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -50,60 +77,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 9 Dec 2024 23:08:19 +0200
-Leon Anavi <leon.anavi@konsulko.com> wrote:
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-Hi Leon,
+On 32-bit architectures, LAST_LINE (_LAST_LINE - 1UL) is 64 bits long,
+but size_t (from ARRAY_SIZE(...)) is 32 bits. This results in a warning
+because the max() macro expects the same type on both sides:
 
-thanks for the report!
+cmd/ufetch.c: In function ‘do_ufetch’:
+include/linux/kernel.h:179:24: warning: comparison of distinct pointer types lacks a cast [-Wcompare-distinct-pointer-types]
+  179 |         (void) (&_max1 == &_max2);              \
+      |                        ^~
+cmd/ufetch.c:92:25: note: in expansion of macro ‘max’
+   92 |         int num_lines = max(LAST_LINE + 1, ARRAY_SIZE(logo_lines));
+      |                         ^~~
 
-> Commit ffb0294 from 12 November 2023 that simplifies early PMIC setup
-> conditions causes issues on Cubieboard 4 and Merrii A80 Optimus with
-> Allwinner A80 SoC (sun9i). The commit was introduced with U-Boot 2024.01
-> (rc3) and remains as of today. Because of it both of these boards hang at:
-> 
-> Starting kernel ...
+Fix this by casting LAST_LINE to size_t.
 
-That's odd, how do you boot the kernel, exactly?
-I just tried mainline U-Boot (via FEL), with:
-=> setenv bootargs "console=ttyS0,115200n8 earlycon"
-=> bootz $kernel_addr_r $ramdisk_addr_r:300000 $fdtcontroladdr
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
 
-and it booted fine to the prompt, on a Cubieboard 4 (CC-A80 v1.2).
-Kernel was some 6.11-rc6 I just had lying around.
+v2:
+- Add Caleb's R-b
+---
+ cmd/ufetch.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I also compared the code before and after that patch, the only
-difference is the order at which DCDC5 gets programmed: before it's
-after DCDC4, with the patch it's right after DCDC1.
-The rest looked the same.
-Booting ffb0294~1 and ffb0294~0 also worked for me, without issues.
-So can you please describe how you test that, exactly?
+diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+index 0b825d7e8c75f3b18933d3e3f77e5f40f2c7b658..5f3ef847b268dc384271fc6774720e5fd2337157 100644
+--- a/cmd/ufetch.c
++++ b/cmd/ufetch.c
+@@ -89,7 +89,7 @@ enum output_lines {
+ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     char *const argv[])
+ {
+-	int num_lines = max(LAST_LINE + 1, ARRAY_SIZE(logo_lines));
++	int num_lines = max((size_t)LAST_LINE + 1, ARRAY_SIZE(logo_lines));
+ 	const char *model, *compatible;
+ 	char *ipaddr;
+ 	int n_cmds, n_cpus = 0, ret, compatlen;
 
-Please also note we fixed d75fa8c80dcfa in U-Boot (DCDC4/5 typo), and
-dd36ad71ad6 in the kernel (DCDC5 constraints in the DT).
+-- 
+2.45.2
 
-Cheers,
-Andre
-
-> Older U-Boot versions without this commit work fine. As a temporary
-> solution I reverted commit ffb0294 and this way the boards boot
-> successfully. I tested this work around on Merrii A80 Optimus with several
-> U-Boot versions, including with U-Boot 2024.10.
-
-
-> 
-> Lazar, a friend who owns Cubieboard 4, also tested and confirmed his board
-> boots with U-Boot 2024.10 if this commit has been reverted.
-> 
-> How to fix this? Is there a known configuration that can be added to
-> Merrii_A80_Optimus_defconfig and Cubieboard4_defconfig to avoid hanging
-> with the existing source code from commit ffb0294 ?
-> 
-> Best regards,
-> Leon
 
