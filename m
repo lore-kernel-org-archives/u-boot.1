@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA596E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3969E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:55:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9EC88023C;
-	Wed, 11 Dec 2024 11:55:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19557801EA;
+	Wed, 11 Dec 2024 11:55:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LKTvaQT7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yhng+d9X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252CA80239; Wed, 11 Dec 2024 11:55:27 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id B629C801EA; Wed, 11 Dec 2024 11:55:30 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D5828021C
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC3A3801BF
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5cfa1ec3b94so8902782a12.2
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:25 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a9a68480164so962417966b.3
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733914524; x=1734519324; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733914528; x=1734519328; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eQ66NDUUIlNQKPYo6heYWOWor1RBFYpFYyRBelWLCDQ=;
- b=LKTvaQT7LvYs8NOQ5dVcnHeDbAZJ+4u0sq1HRU+XZYLKwTWVHtwbtNyUe+hYfI0Tw3
- LLTWIPpisa+stFfmzfIqmecmx2ChhYsG7F/Wx0iFAV5R57VKr0eNfseX1dkWRzNP4xKN
- iJUaqs2KYUG9cnFejLI4AwdBIvefS3932BYzGWslsuxzF45TkwDOrSshuTRW7IzHyam/
- EMcYMlPd70QlHXbsI1Bg2duSNa7XqDZ6aqlBQ2eXXeoZoqvOJXF3WEw9vgfI6nVW0qKf
- EKzra/Hd2+uaSSn1i3cN45/hSK86r9ug7wYW4LiOl/SWNA4skJ6CvReJnGBLNpLA6+lh
- ib9g==
+ bh=0LrJKDtfKA9ty6RP+PUQwpGRC7a/wDd2aZf4oOuSj3g=;
+ b=Yhng+d9XtoUlt5lnJwrHWhwboV53v1J6ULmuv/2EKOCnEC1drbfQDB3y89bsDbKkpZ
+ cEDn4fJ603jGqC05Hp5/V2M3/LqfgwolPUkU5JKoypxlI6wXBavZ+kBmmElPYBnN7Cxn
+ 8iMnV/7SV6EV79EVe2sO7FJyOoBqq3lRpTmIW6/+8kQdksGq4ot5t238QWwdqd5JvLic
+ vFrL0jjm8ik7CH+DLFb2Ld/l/H8adhDpF/PCcdNMyQF3FLkb+zi//tIHHdNrWlWufLp1
+ 21QHb4xitpOpkkt05QxqOaclmTmzglKBIPPZBl8/3GTGAQgwLcB04txGvea3xzcDKtae
+ BsAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733914524; x=1734519324;
+ d=1e100.net; s=20230601; t=1733914528; x=1734519328;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eQ66NDUUIlNQKPYo6heYWOWor1RBFYpFYyRBelWLCDQ=;
- b=K4IRPX563Vsv6JmomV+QHD/wWBqynSSi0qJo48jBwXniIed9Gwzn7T+BDuqdmF07Oc
- ijFp/7eCoVfSgyd4m223yRlg3gRW3ZytnnfcIGjdBcnvAHDxrjrEqJIh77KxrBWl1I4+
- EjpqhdEDfzt7ghSr66/j86gvSJNPRlIGNocggRWvc3cfuIxCEFDTLVV4zeFzR2NbIwgM
- Po9QizhWufinfjS2eEEVH+6GRWPyAtgj7DcKEN6lbMlB47PCjb3ka0hwLNO/7vuni+Yb
- DP7W7sNKOVUuU86ADvB4c0vMb3P61Cb3so9QsC3Im2RkzVLn0wosPDXZFTst23sxeyZ9
- hplQ==
+ bh=0LrJKDtfKA9ty6RP+PUQwpGRC7a/wDd2aZf4oOuSj3g=;
+ b=pTGAJ82KLSMKQRaK2/efLpmM4465yUu4dnbxU1JkHMIux0Fopn3nm6/BGR0urTg3Dr
+ wRsElSqIBRSTXloNn4VJLL0DZ6g469wjeojEptHflWqkiGaka0Am+Zvo1tF5LXBu+ywX
+ /XoobDfDxWQteKi/YTkRcKwJc1hZruX7SPKcuMOJMd43EO8mAvT0yhi+vVRyiVczltaF
+ WNdtO9xZbIRzvfvaF5e9Zhrq0iDiz+V73BRahN0EM1wO6RxTCigwYUJkrK9rikHm+q0l
+ tUVwAuz+cgjwh/9imzB8qUYe8hmY7f/MC2766W5uhxzveN5Q/OLlDoGH3jbzrpkBSoPP
+ 1qnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTWY+NAJDhKDJ5Ils5+KLBwsxnt1zHjDYogq3Nj34NtOmJJW3+cVM02P0a3vKaxL7lw9h7bEs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwB31ospWH7Jm8/oxUyIN7sgbv9D2SUykUTcNiQ1G5p+oCfrSXU
- oBftXFI2ZuwkyzbrhDGVsIGxC+A1H7HsvoRr4qYoQosEMYvB16HuO9wrOQre/AA=
-X-Gm-Gg: ASbGncscgGZHIT6q5Xdm7MenEgj7tLMKJ6UtLtL4wInCnh24kZx8L8/r5H3qu9A0Mwp
- m/hAbZeH9S6JjrxVvTkgsWJAJMtjN3UKzocphx0QFq6mzW1ObEaXhbPfEW/k1mIC2atuLzfnjD1
- h4dh6EyfENvC+UGZrlAYXgmPLp8wAvOkiO9IvW+U21ODfz0WcMQRicZOfelx9VCFa+zd5yYqJju
- Ak/ufzz9rdlWE99ei4lpzdZrF2lgDhm2YbOWKU9C36D8G1G21V/+yKELKl29u97XqUwoYtnrcvw
- +lL4EEViyESU+7GQJ/RV4XLLXX5w2AQ=
-X-Google-Smtp-Source: AGHT+IGP5rhlnaarIgJyT7kBq19UvsoBhTyh5MRaZEYpp256rqIJvKnq8ReHqPKXi+iTtyraJBTKbw==
-X-Received: by 2002:a17:907:9548:b0:aa6:748e:d20d with SMTP id
- a640c23a62f3a-aa6b12052c1mr184988266b.32.1733914524455; 
- Wed, 11 Dec 2024 02:55:24 -0800 (PST)
+ AJvYcCWHysDyoOtdJHCgxohj7ioSWHZ3tBeEp4KQw10FXYfucPab9L5SfzMVagq6icY6XQNzQyMQXJg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSx+EDJhiyUZ63gCn/0zA2LYX/ryCb22FowWGJ7W5RvTGC6u39
+ NH3KG6TXAAdbhJORJHKws5jbnUVuhHF5au/y8eJQ52Zu3jZ/aGvCHYbl+WxhzuY=
+X-Gm-Gg: ASbGnct2LaxKUa/DWpJ4Zi6IrBe4of29vz+nIFAVCQxTzZsqQ21ARFpOyc9P8sgZEf0
+ R7kT/tSx2+EcoAKrUFUYDiovpStIKBFx2WzyelWzZvJeP5TuvEOlYfSYe9VokNJbogonYllil/e
+ oIxjeTX6guA5TzfOM/fdVFvza+7gEUwiSOUPo/9ARbFi+Zne7r0qlWZHJfMLk/xg3yNNW+IlXoi
+ e+oOC3nLpD5cuS0EO7J1tOUzVOXVYQmd4B4eFRftJmrSNOroFTxWD49u1fMG6zVl4Kc4ZaowGpl
+ RzYzIdSzSKN8nTZ/bRH7mIPSL2lTsb8=
+X-Google-Smtp-Source: AGHT+IHenNo3GIh48RP9z58LOSNY8fPQcVnylfsIogIUciX8ao4VCXlvd+y0ovD1FLZSeoYALq6eqg==
+X-Received: by 2002:a17:906:1ba9:b0:aa6:995d:9ef1 with SMTP id
+ a640c23a62f3a-aa6b115b17emr204184266b.12.1733914528150; 
+ Wed, 11 Dec 2024 02:55:28 -0800 (PST)
 Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
  [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.22
+ a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 02:55:23 -0800 (PST)
+ Wed, 11 Dec 2024 02:55:27 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Peter Korsgaard <peter@korsgaard.com>,
  Roman Stratiienko <r.stratiienko@gmail.com>,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Baruch Siach <baruch@tkos.co.il>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Nam Cao <namcao@linutronix.de>, Sam Protsenko <semen.protsenko@linaro.org>,
- Janne Grunau <j@jannau.net>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de
-Subject: [PATCH v1 4/8] lmb: Rename free_mem to available_mem
-Date: Wed, 11 Dec 2024 12:54:45 +0200
-Message-ID: <20241211105504.453234-5-ilias.apalodimas@linaro.org>
+ Sean Anderson <seanga2@gmail.com>, Nam Cao <namcao@linutronix.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH v1 5/8] lmb: Remove lmb_add_region()
+Date: Wed, 11 Dec 2024 12:54:46 +0200
+Message-ID: <20241211105504.453234-6-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
 References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
@@ -112,191 +113,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-free_mem is a misnomer. We never update it with the free memory for
-LMB. Instead, it describes all available memory and is checked against
-used_mem to decide whether an area is free or not.
+There's no point defining a function that's called only once just to
+avoid passing the flags. Remove the wrapper and just call
+lmb_add_region_flags().
 
-So let's rename this field to better match its usage.
-
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- include/lmb.h     |  4 ++--
- lib/lmb.c         | 34 +++++++++++++++++-----------------
- test/cmd/bdinfo.c |  2 +-
- test/lib/lmb.c    |  2 +-
- 4 files changed, 21 insertions(+), 21 deletions(-)
+ lib/lmb.c | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/include/lmb.h b/include/lmb.h
-index 9539cb67c3d7..3db35992df8d 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -43,12 +43,12 @@ struct lmb_region {
- 
- /**
-  * struct lmb - The LMB structure
-- * @free_mem: List of free memory regions
-+ * @available_mem: List of memory available to LMB
-  * @used_mem: List of used/reserved memory regions
-  * @test: Is structure being used for LMB tests
-  */
- struct lmb {
--	struct alist free_mem;
-+	struct alist available_mem;
- 	struct alist used_mem;
- 	bool test;
- };
 diff --git a/lib/lmb.c b/lib/lmb.c
-index fd0e91981ad4..da960e422ada 100644
+index da960e422ada..659581f13f20 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -350,7 +350,7 @@ int io_lmb_setup(struct lmb *io_lmb)
- {
- 	int ret;
- 
--	ret = alist_init(&io_lmb->free_mem, sizeof(struct lmb_region),
-+	ret = alist_init(&io_lmb->available_mem, sizeof(struct lmb_region),
- 			 (uint)LMB_ALIST_INITIAL_SIZE);
- 	if (!ret) {
- 		log_debug("Unable to initialise the list for LMB free IOVA\n");
-@@ -371,13 +371,13 @@ int io_lmb_setup(struct lmb *io_lmb)
- 
- void io_lmb_teardown(struct lmb *io_lmb)
- {
--	alist_uninit(&io_lmb->free_mem);
-+	alist_uninit(&io_lmb->available_mem);
- 	alist_uninit(&io_lmb->used_mem);
+@@ -632,19 +632,13 @@ void lmb_add_memory(void)
+ 	}
  }
  
- long io_lmb_add(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
- {
--	return lmb_add_region_flags(&io_lmb->free_mem, base, size, LMB_NONE);
-+	return lmb_add_region_flags(&io_lmb->available_mem, base, size, LMB_NONE);
- }
- 
- /* derived and simplified from _lmb_alloc_base() */
-@@ -387,9 +387,9 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_size_t size, ulong align)
- 	phys_addr_t base = 0;
- 	phys_addr_t res_base;
- 	struct lmb_region *lmb_used = io_lmb->used_mem.data;
--	struct lmb_region *lmb_memory = io_lmb->free_mem.data;
-+	struct lmb_region *lmb_memory = io_lmb->available_mem.data;
- 
--	for (i = io_lmb->free_mem.count - 1; i >= 0; i--) {
-+	for (i = io_lmb->available_mem.count - 1; i >= 0; i--) {
- 		phys_addr_t lmbbase = lmb_memory[i].base;
- 		phys_size_t lmbsize = lmb_memory[i].size;
- 
-@@ -515,7 +515,7 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
- void lmb_dump_all_force(void)
- {
- 	printf("lmb_dump_all:\n");
--	lmb_dump_region(&lmb.free_mem, "memory");
-+	lmb_dump_region(&lmb.available_mem, "memory");
- 	lmb_dump_region(&lmb.used_mem, "reserved");
- }
- 
-@@ -642,7 +642,7 @@ static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+-static long lmb_add_region(struct alist *lmb_rgn_lst, phys_addr_t base,
+-			   phys_size_t size)
+-{
+-	return lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
+-}
+-
+ /* This routine may be called with relocation disabled. */
  long lmb_add(phys_addr_t base, phys_size_t size)
  {
  	long ret;
--	struct alist *lmb_rgn_lst = &lmb.free_mem;
-+	struct alist *lmb_rgn_lst = &lmb.available_mem;
+ 	struct alist *lmb_rgn_lst = &lmb.available_mem;
  
- 	ret = lmb_add_region(lmb_rgn_lst, base, size);
+-	ret = lmb_add_region(lmb_rgn_lst, base, size);
++	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
  	if (ret)
-@@ -688,9 +688,9 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
- 	phys_addr_t base = 0;
- 	phys_addr_t res_base;
- 	struct lmb_region *lmb_used = lmb.used_mem.data;
--	struct lmb_region *lmb_memory = lmb.free_mem.data;
-+	struct lmb_region *lmb_memory = lmb.available_mem.data;
+ 		return ret;
  
--	for (i = lmb.free_mem.count - 1; i >= 0; i--) {
-+	for (i = lmb.available_mem.count - 1; i >= 0; i--) {
- 		phys_addr_t lmbbase = lmb_memory[i].base;
- 		phys_size_t lmbsize = lmb_memory[i].size;
- 
-@@ -771,10 +771,10 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size,
- 				   u32 flags)
- {
- 	long rgn;
--	struct lmb_region *lmb_memory = lmb.free_mem.data;
-+	struct lmb_region *lmb_memory = lmb.available_mem.data;
- 
- 	/* Check if the requested address is in one of the memory regions */
--	rgn = lmb_overlaps_region(&lmb.free_mem, base, size);
-+	rgn = lmb_overlaps_region(&lmb.available_mem, base, size);
- 	if (rgn >= 0) {
- 		/*
- 		 * Check if the requested end address is in the same memory
-@@ -813,10 +813,10 @@ phys_size_t lmb_get_free_size(phys_addr_t addr)
- 	int i;
- 	long rgn;
- 	struct lmb_region *lmb_used = lmb.used_mem.data;
--	struct lmb_region *lmb_memory = lmb.free_mem.data;
-+	struct lmb_region *lmb_memory = lmb.available_mem.data;
- 
- 	/* check if the requested address is in the memory regions */
--	rgn = lmb_overlaps_region(&lmb.free_mem, addr, 1);
-+	rgn = lmb_overlaps_region(&lmb.available_mem, addr, 1);
- 	if (rgn >= 0) {
- 		for (i = 0; i < lmb.used_mem.count; i++) {
- 			if (addr < lmb_used[i].base) {
-@@ -830,8 +830,8 @@ phys_size_t lmb_get_free_size(phys_addr_t addr)
- 			}
- 		}
- 		/* if we come here: no reserved ranges above requested addr */
--		return lmb_memory[lmb.free_mem.count - 1].base +
--		       lmb_memory[lmb.free_mem.count - 1].size - addr;
-+		return lmb_memory[lmb.available_mem.count - 1].base +
-+		       lmb_memory[lmb.available_mem.count - 1].size - addr;
- 	}
- 	return 0;
- }
-@@ -854,7 +854,7 @@ static int lmb_setup(bool test)
- {
- 	bool ret;
- 
--	ret = alist_init(&lmb.free_mem, sizeof(struct lmb_region),
-+	ret = alist_init(&lmb.available_mem, sizeof(struct lmb_region),
- 			 (uint)LMB_ALIST_INITIAL_SIZE);
- 	if (!ret) {
- 		log_debug("Unable to initialise the list for LMB free memory\n");
-@@ -914,7 +914,7 @@ int lmb_push(struct lmb *store)
- 
- void lmb_pop(struct lmb *store)
- {
--	alist_uninit(&lmb.free_mem);
-+	alist_uninit(&lmb.available_mem);
- 	alist_uninit(&lmb.used_mem);
- 	lmb = *store;
- }
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 014391b38ac0..764294857082 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -131,7 +131,7 @@ static int lmb_test_dump_all(struct unit_test_state *uts)
- 	struct lmb *lmb = lmb_get();
- 
- 	ut_assert_nextline("lmb_dump_all:");
--	ut_assertok(lmb_test_dump_region(uts, &lmb->free_mem, "memory"));
-+	ut_assertok(lmb_test_dump_region(uts, &lmb->available_mem, "memory"));
- 	ut_assertok(lmb_test_dump_region(uts, &lmb->used_mem, "reserved"));
- 
- 	return 0;
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index 3c3e862ffa0e..6e870274fedb 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -65,7 +65,7 @@ static int setup_lmb_test(struct unit_test_state *uts, struct lmb *store,
- 
- 	ut_assertok(lmb_push(store));
- 	lmb = lmb_get();
--	*mem_lstp = &lmb->free_mem;
-+	*mem_lstp = &lmb->available_mem;
- 	*used_lstp = &lmb->used_mem;
- 
- 	return 0;
 -- 
 2.45.2
 
