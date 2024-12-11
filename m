@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C2AE77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 22:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E800DE7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 22:42:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD461801DD;
-	Wed, 11 Dec 2024 23:38:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7BCEA801BE;
+	Wed, 11 Dec 2024 23:42:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A212QCHk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JhqKD+t4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB373801B6; Wed, 11 Dec 2024 23:38:50 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 1BD16801E7; Wed, 11 Dec 2024 23:42:24 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8BA680212
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 23:38:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 909A0801BA
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 23:42:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3a9c9f2a569so292915ab.0
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:38:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7b68e73188cso4225985a.0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 14:42:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1733956727; x=1734561527; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cZFbXQXXrX4NNznvx9fJjmNHnly31Uve7xFmDoOl18w=;
- b=A212QCHkD+BvFXzMUoTjlEXXaNp29pNZtbgd3wCGRi71eEwlKiwGkRwuAyXFmNd+if
- wuY2Qk73joxmVrk2ZCw8nQAJUVkJ5Q5BxSc2WJs64fv92qNqYegSVq2ZA+oAvTnrkr/n
- WW1T2bTlQxuhPIGWNG14Ck1watLuDRABzKSlw=
+ d=konsulko.com; s=google; t=1733956940; x=1734561740; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=W5akENDYN5riBp9WwvwCrwUfbz8jXJICI0zlQqwDqSI=;
+ b=JhqKD+t4+m13eYLiAEtF03gsWudihf8DXgUsyeICa1cCdPtEXgXVZoL85Hrd0fdjBF
+ 95qnQWVFpdgdDDCsi5mbROI5mlF+AQT6ZjG/EeU+8hvAHzcgEMo7TWq6Uh/h0hmHfiLn
+ L+smk5QQchCG9l0BxVfUKPMIw50Oa3fcseSNU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733956727; x=1734561527;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cZFbXQXXrX4NNznvx9fJjmNHnly31Uve7xFmDoOl18w=;
- b=sWjd7athelILSARsjlF2ln7JF3aRekdJeN+5swEzTq/hF6/DE48k7jTj00KTQd+a+7
- td7yYu7LPnl0fxNky2WcWi+ov2sFnMhwgwhHlZboL5E59QMQyGi0Tryo9kQF3bmJ9Jf/
- FrXWM7QeWo3LobKGMjseKcv2/FcjOfwAgeFnZhNs7B0WydKNCVvO1wkq+2xfOUK7uTU9
- UzvSw2Z2MpvMppkScJ3+hIdAiV4Bou8NSxRo1dEn73Z/zEeSHEgjp00iYqs2o74axu9l
- qvYyu0NxgZAleTqHIXMf11c6Jt3S58gzRHeaZ1JL7R6boekapmuzVKZnwO5Quu++fdmQ
- 83Rw==
-X-Gm-Message-State: AOJu0Yy2euIVKDr34k1+KckTtr42yjdIwuSJU6fMiwVZOL0CiWtvlF08
- RjC4SnqW9Nk69V42W2xMyhxhFEauHzkK9ZE3tIdrrgPzgR2HL+J1xja8a5kViqbYizl4luS/XAU
- =
-X-Gm-Gg: ASbGncvYx9cv1tt5aIG1fQTlIXC/aS4Au1OQ9dVe6mNIsu7W9srYvNNYmL9yypDhI9Y
- y5ZMTp8eDzxXriHp5SkmLW5ocK6szd7p49mdXbIHAevCsWfQk8YO5xUGnqUtCMi4enti7YJ1GQw
- oHTs1QzxeLB0ur3DwBtv0cXGSU2jkQgqcQ7EuDlghdDAKHWo3fLBr6a2A311BFdZhoVVFRfOgOc
- mr3uZjvREn0unnnlntPbI9kzQ52lc6YP1Rw4m2sibXlj8XJdSy/36VXBwE6NhRtBskFqoB/t5kr
- qvUYLu9JMRhEekWfDA==
-X-Google-Smtp-Source: AGHT+IFZPAHYzEMWgPfI5F2BXQ5BbEzHuj8u+b3JmT9AfmtYNoM1m05+tOFRN3dKRgrID4uJ8EC27Q==
-X-Received: by 2002:a05:6e02:168d:b0:3a7:9670:7abb with SMTP id
- e9e14a558f8ab-3ac4d5e2adcmr14715975ab.15.1733956725439; 
- Wed, 11 Dec 2024 14:38:45 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e2bce7981bsm1902816173.67.2024.12.11.14.38.42
+ d=1e100.net; s=20230601; t=1733956940; x=1734561740;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=W5akENDYN5riBp9WwvwCrwUfbz8jXJICI0zlQqwDqSI=;
+ b=YeCEVCMgSqBMzWcOOGLnyT1yEBPKUMk0VVKUPcQ1xrpiqxomuhjpo395qyOkHzmQCR
+ olORiJLwIKRhjjYP+UA1cuO+QPQJ3yC2tNXFqrZHjiiUv2UQc07kUvWQftbfEamY8aUL
+ RrVytvYHi8j0tiXpWNQuV1jeDcEb7qesMgrQrlndvlKT0PZLTiZBr76oqP528Ez3CHlk
+ Ud3kFfjb5P0E3GiCNJuR+MI9lRKy8EyTSn4YCWLOJ74LoRAdVzqKit/StFfWDSQ1w5ta
+ rGXe47/k4Rjpw097JuiMu5UB+Z+/W/7TrqrkuOyw1q6wbXgYTO6tUEHKyh4E0rZcSEUr
+ TatA==
+X-Gm-Message-State: AOJu0YyqUI9aWgN5XV268I2hnOGbWuXEwbJ3x3In4XubzdcQZ3YyegiI
+ XeokDhuAS9kadK5hhxjwMt1z+4IXNjDGQBjXMuhHcimU1aSIoNFhq/KmKmNOuXfkT8VcPjo5y7u
+ QEgE=
+X-Gm-Gg: ASbGncsqvClbDNlCqXnh6GwfwWjOufvhYiKPKQxtpwo09/UoywP2dCEWLvjZc1p7EDp
+ spm9xtD6/Vr0k/2c/3OmH8G5/zljAJdW3K3ztoXiFIbiRAwuJAzdF7XwrMOwF26sUz87vrUmQJM
+ +Rf9th++XT0d7rVVW4dVCUtihK78I1+5EE5Nr3HYTY8rVr4I5tvrjmg+euxV+9gRlI8VWfn/n7P
+ 7E1KlvyUAeLTs0IDmsu7K2gziXsq34W1uxtizosZrVFu6yh5TzF/w==
+X-Google-Smtp-Source: AGHT+IGgQ8jRuB70k56ho3SUD7z+RCxvLfXDhgYIPAHbL3WLyQzQvhapbgvJjsTbcaCD5vD1ZYnhzg==
+X-Received: by 2002:a05:6214:1d2b:b0:6d1:7433:3670 with SMTP id
+ 6a1803df08f44-6dae38e49a1mr18346656d6.4.1733956938944; 
+ Wed, 11 Dec 2024 14:42:18 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d8da66eecbsm75090606d6.15.2024.12.11.14.42.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 14:38:44 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v2 7/7] bootmeth_efi: Support PXE booting
-Date: Wed, 11 Dec 2024 15:38:22 -0700
-Message-Id: <20241211223822.2446254-8-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241211223822.2446254-1-sjg@chromium.org>
-References: <20241211223822.2446254-1-sjg@chromium.org>
+ Wed, 11 Dec 2024 14:42:18 -0800 (PST)
+Date: Wed, 11 Dec 2024 16:42:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [GIT PULL] rpi: updates for v2025.01
+Message-ID: <20241211224215.GH2457179@bill-the-cat>
+References: <CALeDE9Nr0gDo0FFp9YJy7bWoxM-4mEq7pCAFcZnJqgVwk9dUBw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="v2+tklbAy4DcRXdn"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9Nr0gDo0FFp9YJy7bWoxM-4mEq7pCAFcZnJqgVwk9dUBw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,82 +94,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Finish off the implementation so it is possible to boot an EFI app over
-a network.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--v2+tklbAy4DcRXdn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- Add new patch to support PXE booting
+On Wed, Dec 11, 2024 at 04:07:51PM +0000, Peter Robinson wrote:
 
- boot/bootmeth_efi.c          | 15 +--------------
- lib/efi_loader/efi_bootbin.c |  5 ++++-
- 2 files changed, 5 insertions(+), 15 deletions(-)
+> Hi Tom,
+>=20
+> The following changes since commit: b841e559cd26ffcb20f22e8ee75debed9616c=
+002
+>=20
+>    Prepare v2025.01-rc4
+>=20
+> are available in the Git repository at:
+>=20
+>    https://source.denx.de/u-boot/custodians/u-boot-raspberrypi.git
+> tags/rpi-2025.01-rc5
+>=20
+> for you to fetch changes up to 6a5fc32fd20b5e5367fda9a75f0e8de1a4b76649
+>=20
+> Updates for RPi for 2025.01:
+> - Enable capsule updates
+> - Pass CMA through from firmware DT
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index b745ba8bd4b..0c9b4c3d59d 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -210,6 +210,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (size <= 0)
- 		return log_msg_ret("sz", -EINVAL);
- 	bflow->size = size;
-+	bflow->buf = map_sysmem(addr, size);
- 
- 	/* bootfile should be setup by dhcp */
- 	bootfile_name = env_get("bootfile");
-@@ -219,10 +220,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fname)
- 		return log_msg_ret("fi0", -ENOMEM);
- 
--	/* do the hideous EFI hack */
--	efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
--			bflow->size);
--
- 	/* read the DT file also */
- 	fdt_addr_str = env_get("fdt_addr_r");
- 	if (!fdt_addr_str)
-@@ -296,16 +293,6 @@ static int distro_efi_boot(struct udevice *dev, struct bootflow *bflow)
- 		if (bflow->flags & ~BOOTFLOWF_USE_BUILTIN_FDT)
- 			fdt = bflow->fdt_addr;
- 
--	} else {
--		/*
--		 * This doesn't actually work for network devices:
--		 *
--		 * do_bootefi_image() No UEFI binary known at 0x02080000
--		 *
--		 * But this is the same behaviour for distro boot, so it can be
--		 * fixed here.
--		 */
--		fdt = env_get_hex("fdt_addr_r", 0);
- 	}
- 
- 	if (efi_bootflow_run(bflow))
-diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-index 8efd779d9f1..d02c254c2bd 100644
---- a/lib/efi_loader/efi_bootbin.c
-+++ b/lib/efi_loader/efi_bootbin.c
-@@ -270,6 +270,9 @@ static const char *calc_dev_name(struct bootflow *bflow)
- 	media_dev = dev_get_parent(bflow->dev);
- 
- 	if (!bflow->blk) {
-+		if (device_get_uclass_id(media_dev) == UCLASS_ETH)
-+			return "Net";
-+
- 		log_err("Cannot boot EFI app on media '%s'\n",
- 			dev_get_uclass_name(media_dev));
- 
-@@ -310,7 +313,7 @@ efi_status_t efi_bootflow_run(struct bootflow *bflow)
- 	ret = calculate_paths(dev_name, devnum_str, bflow->fname, &device,
- 			      &image);
- 	if (ret)
--		return ret;
-+		return EFI_UNSUPPORTED;
- 
- 	if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
- 		log_debug("Booting with built-in fdt\n");
--- 
-2.34.1
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--v2+tklbAy4DcRXdn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdaFUMACgkQFHw5/5Y0
+tyyHXAv/S2704oU+MP3QYZyLTVNzwjMkQcFEOUlX+j8r6X2RziK33eOxA9z2YFpL
+uOfAwpx3HxRcadMadnoRLEg+ZFfPaqbR4C9R153vPkIS5A5f5E8VBoXtuOrrqtIY
+OKqNsCPW85g65qmnKdsNIhGZHQCJ6mu2Qg/eKTD9U8lXEomFsLethdDh+X049pcR
+bL0Iclz9AXDXllTM2Xk/DfdpKRt4CqX7vKJC3ebDKyM+d0/Wr9NapE/X/h83Knva
+teY9XJu3CkcJ/9DnbwVsIIo1Br45HR6JlrXp1nOsDnvtoE5o5wcDfHfnze2s6UGC
+05TCpd15iodgACeJtRh7SuhICy9a2N5KSzNKb5cVVrRotaKqdyw8vcgE/lLkuWzJ
+gmy9JwhWN1M3RUF7pK9BFto5h/3tIrzc+UZ1XxM9zP20XAaYC1WukUf3+9//z9tH
+MFEX6VuEU3PK/sS44ccafaBAe4caWyPXxgHnHWyxIlEx+RO4E2UpcD0myqcRh8QE
+jAoZfgDr
+=VYaX
+-----END PGP SIGNATURE-----
+
+--v2+tklbAy4DcRXdn--
