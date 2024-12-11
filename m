@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599C0E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFF9E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 15:58:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8FD78034E;
-	Wed, 11 Dec 2024 16:54:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B1BC680327;
+	Wed, 11 Dec 2024 16:58:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W0qsLssZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bzEYNsmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45F1080377; Wed, 11 Dec 2024 16:54:33 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 561338036B; Wed, 11 Dec 2024 16:58:55 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DEB48034E
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:54:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B39880316
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:58:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-467631f3ae3so22619611cf.0
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:54:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-728ea1573c0so1546541b3a.0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 07:58:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733932469; x=1734537269; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pHxwBP/pxtDfSIfdqslget5SziwHLcq6QG0sU/QXFVE=;
- b=W0qsLssZJLa2YdvkbU8p3n0OjA8IGRGF4lNV46BJGe7typDJguNEFpOKlGmaZE4/Zl
- xMzSFsYe6madA85xdlQfSA/nm8Hx3CJ0F7Nno0wjrCB1r6LrQnIFQ04RLhQVoGuufeQ6
- YsWMJ36vstIVfQ6CU5DiMgZ4jMofRja9v1VEc=
+ d=chromium.org; s=google; t=1733932731; x=1734537531; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uBn72cnTqGuJTGJagAH8I2YOkoB61tPB/CtCSmu8954=;
+ b=bzEYNsmwht30MPHzkVpMHmuXvBIbB0hkauMjpGVw/4Vy2Pmd35aNPIGP71FJEJQHo2
+ r5Cic3ybgVwr32YKrdOBqvNhpeKoAWbAKMjelQgD2Iy7pl1ZyjBx9qR0Ds3ZwT53sqNp
+ xsZssU7sX3gm6h4JyL4BA379U2zJIbP9LzY+o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733932469; x=1734537269;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pHxwBP/pxtDfSIfdqslget5SziwHLcq6QG0sU/QXFVE=;
- b=myb4RA1iCRnFzan0J1OqlLynTCg0ohqOKAQ5uJMFHZu6ORNNNMZoMkaLQJA5rHc6yg
- SHWv3eXsasBkpDX2PgVAT6GPSJ6tBUJrcA5v7yvs3LvUZ20UVegMFUBiYsMcdpJpRrfZ
- gtH3FiQ/KtF7w/1DdA/TsPSect80rp+K+zRfVqnRwwoOCffn37FbCjXUnpOG6iHxsvR3
- 16p304i2VUl+RtdCzt0Rl44b5L4QSQx2qboXWpszTDbxO7JM6uUO51c+oBmV3a5E3EyP
- YK547m67BS0RcpaBpV3V3Ue3Oth7ehFJowoIhp4+aubUc9Sz35DgAHFURG9REKhGJ6rQ
- 6LKQ==
-X-Gm-Message-State: AOJu0YxqVgb+t+3beU7ve6zXDrtHwFwU8Zpb2XL8D9AZNvztNhb35UTF
- KX/yh4v+15DJHqJvjUFC7UtbhNWXILtPFAi1fOA2KDWI5Kew368vOSiAqwlDL6k=
-X-Gm-Gg: ASbGncuNnnEMsP5j+AugGE/64eDnKK1X6PT7o00z9X2ipFCrEiFN1IswD0g/3jMwOGb
- QrYWbpQHjh7IWQjrYrYojMNjEjkXQgPvhDmqpQJJL3Hwl8clNxFqHLUi4BdxS6eUP1Y7xgEM31U
- KyqEe2s20hl4YiBW6sGjnBrsOCwPE6ri72wBNuvgw8mFhy0qIk30NwZkyERPNYC3Udh5Ra6pw4x
- Gcvkief93+JrbO1EwirVPq0ShhGk/27gwdwH547GCE5vW1keXUBuQ==
-X-Google-Smtp-Source: AGHT+IHwrSETUJKQfr5jrNmtVysStFiMbwKfprGGJ2D/Rmyb9B5znBXuSGrN6KYqvv/74yG8vDEPJQ==
-X-Received: by 2002:ac8:580c:0:b0:467:7725:8b69 with SMTP id
- d75a77b69052e-467953f4303mr4376431cf.40.1733932469035; 
- Wed, 11 Dec 2024 07:54:29 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4677a1b963fsm17970741cf.10.2024.12.11.07.54.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 07:54:28 -0800 (PST)
-Date: Wed, 11 Dec 2024 09:54:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH] test/py: Always use the current dir as the source tree
-Message-ID: <20241211155425.GF2457179@bill-the-cat>
-References: <20241211131858.520639-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1733932731; x=1734537531;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uBn72cnTqGuJTGJagAH8I2YOkoB61tPB/CtCSmu8954=;
+ b=F2lWScGdlVf16tepPQExhoaqVz1J06cXR41iQRFkMkttDuW/tD50/ftI+maQucwx0Z
+ 6WVnV4O323KQdMCQrA8MoxacPxQg58uEntDRaMAPw1/RnJbD2Zxe+jHiHJrP7pmVw1Rx
+ NMTUuBGJFnC+ihi8gH3+uAkU9SsCmXnKk3o/wudXivWELnvjWpS8VhStR82aJy/1PB6W
+ zgf0UPLnR6p7f0WjeQfaFCiCaw+PeBIJfukRYnDxPHJkKsrS6+b0mitvwYd7BClg9JlZ
+ ICiiZI9PrnnGWGSy1tmwIjRixoYilorJA0s3DZIMeaGz/un3TSzbFBvN7aTTBkyWdtkX
+ cbHA==
+X-Gm-Message-State: AOJu0Yzm8Y+V5bfc33GXiu4IoGXNlKNBwtojO304SgcT9cagzgR2N9dK
+ 9fQo4H6qqTupMsXtwq2IzRs0/y2NxXrrmh6zy0NzmXy8A1pIWO2KEf1d5L8jYAfp71PogCJofd0
+ l3fbn6mjPPCplqSAhlZfIFs/mvDsZhLrfzcNQ
+X-Gm-Gg: ASbGncuUZb5H4xgFRjhfJpYHxn2fxP2sj/LChbu00akyISryKhq2NwUS3y/OQfaMM5G
+ IlcMy3p+/J0M9XMDL9xSDH9bm53c54v/LICkC
+X-Google-Smtp-Source: AGHT+IEmzhdRwQnsA7AjBHHMAu/nf97DjhrKStjK0zporOLpjwVjoHBylznhSvlr7o7O1X98c/TkD4GvIaZr6jpUB58=
+X-Received: by 2002:a05:6a21:328c:b0:1e1:9c50:bcc with SMTP id
+ adf61e73a8af0-1e1cda5c08bmr636160637.3.1733932730989; Wed, 11 Dec 2024
+ 07:58:50 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LjIyN0FOsbxzZI2w"
-Content-Disposition: inline
-In-Reply-To: <20241211131858.520639-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <20241211135418.563803-4-sjg@chromium.org>
+ <CAC_iWjLVee69ALVcHixM+H4wvJhM5R03-jDCwL7unipRtr-0Fw@mail.gmail.com>
+In-Reply-To: <CAC_iWjLVee69ALVcHixM+H4wvJhM5R03-jDCwL7unipRtr-0Fw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 11 Dec 2024 08:58:38 -0700
+Message-ID: <CAFLszTgxbkFP9o+tb-983P3vPmH+qHd8vp7VBym2WafhcwKQLg@mail.gmail.com>
+Subject: Re: [PATCH v5 03/23] efi_loader: Add comments where incorrect
+ addresses are used
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,56 +90,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---LjIyN0FOsbxzZI2w
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 11 Dec 2024 at 07:48, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Some functions are passing addresses instead of pointers to the
+> > efi_add_memory_map() function. This confusion is understandable since
+> > the function arguments indicate an address.
+> >
+> > Make a note of the 8 places where there are problems, which would break
+> > usage in sandbox tests.
+> >
+> > Future work will resolve these problems.
+>
+> NAK, this serves no purpose whatsoever. Just send a patch with
+> whatever changes you think are needed
 
-On Wed, Dec 11, 2024 at 06:18:58AM -0700, Simon Glass wrote:
+Please see below
 
-> The logic in get_details() retrieves the default source directory from
-> the Labgrid settings. This is convenient for interactive use, since it
-> allows pytests to be run from any directory and still find the source
-> tree.
->=20
-> However, it is not actually correct.
->=20
-> Gitlab sets the current directory to the source tree and expects that to
-> be used. At present it is ignored. The result is that Gitlab builds
-> whatever happens to be in the default source directory, ignoring the
-> tree it is supposed to be building.
->=20
-> Fix this by using the directory of the source tree, always. This is
-> obtained by looking at the grandparent of the conftest.py file.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reported-by: Tom Rini <trini@konsulko.com>
-> Fixes: bf89a8f1fc2 ("test: Introduce the concept of a role")
+>
+> Thanks
+> /Ilias
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> > A request was made in v4 to drop this patch, but in the same thread, a
+> > query was sent about why we need these addresses, so at least until the
+> > series is about to be applied, I've left it in, so we can have that
+> > discussion in one place and build a shared understanding of why these
+> > addresses are needed, instead of peppering the rest of the series with
+> > similar questions.
 
-Ah good, thanks.
+I'm quite happy to drop this patch. But I want to first make sure that
+you understand that these bugs exist today in the code, albeit they
+only matter on sandbox. You will notice that my future patches don't
+change the code mentioned in this file. The bugs are simply resolved
+by reworking the EFI-loader memory map to use addresses, instead of
+pointers cast to u64
 
-Tested-by: Tom Rini <trini@konsulko.com>
+So can you please confirm this makes sense? (if not, let's discuss
+it). Then I can drop this patch and the later one.
 
---=20
-Tom
-
---LjIyN0FOsbxzZI2w
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdZtaoACgkQFHw5/5Y0
-tyzRfAwAqMgSx8BmwCqbTsMDVvjdLqUN23JIimFTuF6pqc263aBw2d/GgE8W42/L
-yX1q9IlV1Vwd/0lvX5UnfbtuKpV2L5J7NBaJb/61BSzz30O///9hyFHK0lTLrswA
-vkz0/pwR68/6SLY5j7Uo5QEyQGpBOFLfMMGt0rJIlUyaIxI+ADxpx0yEHYjPliB4
-YgqJivp7ZXWLtNoWNDP/XX0AGXG71yAe1BWv1G7+I6t5Waw7h6ZFiDpMXCwdfOaA
-qv4FL29qtP7Dtpcajo75pR3vmzFGIYWMfcZE5FzqJrLCOj7iXfB4/EIilbtbG1Up
-g7RFyhgGJ2cgGwU6Jo/v8N6eIgun5bY8AdNNU7AY6PlH/RXb77WeqNekwi5pTltT
-4FNaAz6n/QRX65/wGMTfYfmxDvPW7PPBanoiCSNRp2qq+C5ZGv+Taqpa6P0gSIkQ
-2QcAoF7jpRq4HkUn3rA3lvWFd9cZQgCgwp6l/V9+CIrbsjtGcSIIhpRTvfvL+sj6
-p9GNnLVw
-=lJXa
------END PGP SIGNATURE-----
-
---LjIyN0FOsbxzZI2w--
+> >
+> > Link: https://lore.kernel.org/u-boot/CAC_iWjLex4Z41CDpx4u07XeCYgjB7H+Ynd8aQYL-wruH7yRmQA@mail.gmail.com/
+> >
+> > (no changes since v2)
+> >
+> > Changes in v2:
+> > - Add a new patch with comments where incorrect addresses are used
+> >
+> >  lib/efi_loader/efi_acpi.c    | 2 ++
+> >  lib/efi_loader/efi_bootmgr.c | 5 +++++
+> >  lib/efi_loader/efi_helper.c  | 1 +
+> >  lib/efi_loader/efi_smbios.c  | 6 +++++-
+> >  lib/efi_loader/efi_var_mem.c | 2 ++
+> >  5 files changed, 15 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> > index 67bd7f8ca24..ffb360d461b 100644
+> > --- a/lib/efi_loader/efi_acpi.c
+> > +++ b/lib/efi_loader/efi_acpi.c
+> > @@ -28,12 +28,14 @@ efi_status_t efi_acpi_register(void)
+> >         /* Mark space used for tables */
+> >         start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+> >         end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
+> > +       /* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+> >         ret = efi_add_memory_map(start, end - start, EFI_ACPI_RECLAIM_MEMORY);
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> >         if (gd->arch.table_start_high) {
+> >                 start = ALIGN_DOWN(gd->arch.table_start_high, EFI_PAGE_MASK);
+> >                 end = ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
+> > +               /* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+> >                 ret = efi_add_memory_map(start, end - start,
+> >                                          EFI_ACPI_RECLAIM_MEMORY);
+> >                 if (ret != EFI_SUCCESS)
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index 8c51a6ef2ed..bb635d77b53 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -365,6 +365,8 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
+> >          * TODO: expose the ramdisk to OS.
+> >          * Need to pass the ramdisk information by the architecture-specific
+> >          * methods such as 'pmem' device-tree node.
+> > +        *
+> > +        * TODO(sjg): This should use (ulong)map_sysmem(addr)
+> >          */
+> >         ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
+> >         if (ret != EFI_SUCCESS) {
+> > @@ -399,6 +401,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+> >
+> >         /* cleanup for iso or img image */
+> >         if (ctx->ramdisk_blk_dev) {
+> > +               /* TODO(sjg): This should use (ulong)map_sysmem(...) */
+> >                 ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
+> >                                          EFI_CONVENTIONAL_MEMORY);
+> >                 if (ret != EFI_SUCCESS)
+> > @@ -506,6 +509,8 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> >
+> >                 source_buffer = NULL;
+> >                 source_size = 0;
+> > +
+> > +       /* TODO(sjg): This does not work on sandbox */
+> >         } else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+> >                 /*
+> >                  * loaded_dp must exist until efi application returns,
+> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> > index bf96f61d3d0..fd89ef6036f 100644
+> > --- a/lib/efi_loader/efi_helper.c
+> > +++ b/lib/efi_loader/efi_helper.c
+> > @@ -486,6 +486,7 @@ static efi_status_t copy_fdt(void **fdtp)
+> >                 log_err("Failed to reserve space for FDT\n");
+> >                 goto done;
+> >         }
+> > +       /* TODO(sjg): This does not work on sandbox */
+> >         new_fdt = (void *)(uintptr_t)new_fdt_addr;
+> >         memcpy(new_fdt, fdt, fdt_totalsize(fdt));
+> >         fdt_set_totalsize(new_fdt, fdt_size);
+> > diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> > index 8d2ef6deb51..02d4a5dd045 100644
+> > --- a/lib/efi_loader/efi_smbios.c
+> > +++ b/lib/efi_loader/efi_smbios.c
+> > @@ -40,7 +40,11 @@ efi_status_t efi_smbios_register(void)
+> >                 return EFI_NOT_FOUND;
+> >         }
+> >
+> > -       /* Mark space used for tables */
+> > +       /*
+> > +        * Mark space used for tables/
+> > +        *
+> > +        * TODO(sjg): This should use (ulong)map_sysmem(addr, ...)
+> > +        */
+> >         ret = efi_add_memory_map(addr, TABLE_SIZE, EFI_RUNTIME_SERVICES_DATA);
+> >         if (ret)
+> >                 return ret;
+> > diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> > index 139e16aad7c..5c69a1e0f3e 100644
+> > --- a/lib/efi_loader/efi_var_mem.c
+> > +++ b/lib/efi_loader/efi_var_mem.c
+> > @@ -226,6 +226,8 @@ efi_status_t efi_var_mem_init(void)
+> >                                  &memory);
+> >         if (ret != EFI_SUCCESS)
+> >                 return ret;
+> > +
+> > +       /* TODO(sjg): This does not work on sandbox */
+> >         efi_var_buf = (struct efi_var_file *)(uintptr_t)memory;
+> >         memset(efi_var_buf, 0, EFI_VAR_BUF_SIZE);
+> >         efi_var_buf->magic = EFI_VAR_FILE_MAGIC;
+> > --
+> > 2.34.1
+> >
