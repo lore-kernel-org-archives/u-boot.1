@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FF1CE77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 03:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F02AE7717F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 03:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A31D280295;
+	by phobos.denx.de (Postfix) with ESMTP id EFA01802B4;
 	Wed, 11 Dec 2024 04:26:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E111180210; Wed, 11 Dec 2024 04:26:42 +0100 (CET)
+ id EC81C8020B; Wed, 11 Dec 2024 04:26:42 +0100 (CET)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3056E8020B
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 04:26:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E6A280214
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 04:26:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 4BB3QO3n005612; Wed, 11 Dec 2024 12:26:27 +0900
+ 4BB3QO3k005612; Wed, 11 Dec 2024 12:26:26 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- sumit.garg@linaro.org, jonas@kwiboo.se, FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH v2 5/5] rockchip: Add support for Radxa ROCK 5C
-Date: Wed, 11 Dec 2024 03:26:19 +0000
-Message-ID: <20241211032619.5610-6-naoki@radxa.com>
+ sumit.garg@linaro.org, jonas@kwiboo.se,
+ Sam Edwards <cfsworks@gmail.com>, Sam Edwards <CFSworks@gmail.com>,
+ Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH v2 2/5] arm64: dts: rockchip: Split up RK3588's PCIe pinctrls
+Date: Wed, 11 Dec 2024 03:26:16 +0000
+Message-ID: <20241211032619.5610-3-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241211032619.5610-1-naoki@radxa.com>
 References: <20241211032619.5610-1-naoki@radxa.com>
@@ -52,353 +54,456 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
+From: Sam Edwards <cfsworks@gmail.com>
 
-[1] https://radxa.com/products/rock5/5c
+These pinctrls manage the low-speed PCIe signals:
+- CLKREQ#: An output on the RK3588 (both RC or EP modes), used to
+  request that external clock-generation circuitry provide a clock.
+- PERST#: An input on the RK3588 in EP mode, used to detect a reset
+  signal from the RC. In RC mode, the hardware does not use this signal:
+  Linux itself generates it by putting the pin in GPIO mode.
+- WAKE#: In EP mode, this is an output; in RC mode, this is an input.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+Each of these signals serves a distinct purpose, and more importantly,
+PERST# should not be muxed when the RK3588 is in the RC role. Bundling
+them together in pinctrl groups prevents proper use: indeed, almost none
+of the current board-specific .dts files make any use of them.
+(Exception: Rock 5A recently had a patch land that misuses _pins; this
+ patch corrects that.)
+
+However, on some RK3588 boards, the PCIe 3 controller will indefinitely
+stall the boot if CLKREQ# is not muxed (details in the next patch).
+This patch unbundles the signals to allow them to be used.
+
+Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+Link: https://lore.kernel.org/r/20240912025034.180233-2-CFSworks@gmail.com
+Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+(cherry picked from commit 4294e32111781b3de4d73b944cbd1bc1662a9a7a)
 ---
-Changes in v2:
-- arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
-- include/configs/rock-5-rk3588s.h: fix include order
----
- arch/arm/dts/rk3588s-rock-5-u-boot.dtsi     | 16 ++++
- arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi    |  6 ++
- arch/arm/mach-rockchip/rk3588/Kconfig       |  7 ++
- board/radxa/rock-5-rk3588s/Kconfig          | 12 +++
- board/radxa/rock-5-rk3588s/MAINTAINERS      |  8 ++
- board/radxa/rock-5-rk3588s/Makefile         |  3 +
- board/radxa/rock-5-rk3588s/rock-5-rk3588s.c | 77 +++++++++++++++++
- configs/rock-5-rk3588s_defconfig            | 95 +++++++++++++++++++++
- doc/board/rockchip/rockchip.rst             |  1 +
- include/configs/rock-5-rk3588s.h            | 15 ++++
- 10 files changed, 240 insertions(+)
- create mode 100644 arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
- create mode 100644 board/radxa/rock-5-rk3588s/Kconfig
- create mode 100644 board/radxa/rock-5-rk3588s/MAINTAINERS
- create mode 100644 board/radxa/rock-5-rk3588s/Makefile
- create mode 100644 board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
- create mode 100644 configs/rock-5-rk3588s_defconfig
- create mode 100644 include/configs/rock-5-rk3588s.h
+ .../arm64/rockchip/rk3588-base-pinctrl.dtsi   | 271 ++++++++++++++----
+ .../src/arm64/rockchip/rk3588s-rock-5a.dts    |   6 +-
+ 2 files changed, 228 insertions(+), 49 deletions(-)
 
-diff --git a/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-new file mode 100644
-index 000000000000..be1a2f9ae7bb
---- /dev/null
-+++ b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-+ */
-+
-+#include "rk3588s-u-boot.dtsi"
-+
-+&saradc {
-+	bootph-pre-ram;
-+	vdd-microvolts = <1800000>;
-+};
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-new file mode 100644
-index 000000000000..bb1cc9e4a279
---- /dev/null
-+++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-@@ -0,0 +1,6 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-+ */
-+
-+#include "rk3588s-rock-5-u-boot.dtsi"
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index b5a0e624a532..e1487ecb0464 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -260,6 +260,12 @@ config TARGET_ROCK_5_ITX_RK3588
- 	  Front-panel connectors for audio and case-power, -leds
- 	  Powered by either 12V, ATX power-supply or PoE
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base-pinctrl.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base-pinctrl.dtsi
+index 30db12c4fc82..b12562e9a985 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588-base-pinctrl.dtsi
++++ b/dts/upstream/src/arm64/rockchip/rk3588-base-pinctrl.dtsi
+@@ -1612,23 +1612,43 @@
  
-+config TARGET_ROCK_5_RK3588S
-+	bool "Radxa ROCK 5C RK3588S2 board"
-+	select BOARD_LATE_INIT
-+	help
-+	  Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
+ 	pcie20x1 {
+ 		/omit-if-no-ref/
+-		pcie20x1m0_pins: pcie20x1m0-pins {
++		pcie20x1m0_clkreqn: pcie20x1m0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie20x1_2_clkreqn_m0 */
+-				<3 RK_PC7 4 &pcfg_pull_none>,
++				<3 RK_PC7 4 &pcfg_pull_none>;
++		};
 +
- config TARGET_SIGE7_RK3588
- 	bool "ArmSoM Sige7 RK3588 board"
- 	select BOARD_LATE_INIT
-@@ -398,6 +404,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
- source "board/radxa/rock5a-rk3588s/Kconfig"
- source "board/radxa/rock5b-rk3588/Kconfig"
- source "board/radxa/rock-5-itx-rk3588/Kconfig"
-+source "board/radxa/rock-5-rk3588s/Kconfig"
- source "board/rockchip/evb_rk3588/Kconfig"
- source "board/rockchip/toybrick_rk3588/Kconfig"
- source "board/theobroma-systems/jaguar_rk3588/Kconfig"
-diff --git a/board/radxa/rock-5-rk3588s/Kconfig b/board/radxa/rock-5-rk3588s/Kconfig
-new file mode 100644
-index 000000000000..86830be1eeca
---- /dev/null
-+++ b/board/radxa/rock-5-rk3588s/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROCK_5_RK3588S
++		/omit-if-no-ref/
++		pcie20x1m0_perstn: pcie20x1m0-perstn {
++			rockchip,pins =
+ 				/* pcie20x1_2_perstn_m0 */
+-				<3 RK_PD1 4 &pcfg_pull_none>,
++				<3 RK_PD1 4 &pcfg_pull_none>;
++		};
 +
-+config SYS_BOARD
-+	default "rock-5-rk3588s"
++		/omit-if-no-ref/
++		pcie20x1m0_waken: pcie20x1m0-waken {
++			rockchip,pins =
+ 				/* pcie20x1_2_waken_m0 */
+ 				<3 RK_PD0 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie20x1m1_pins: pcie20x1m1-pins {
++		pcie20x1m1_clkreqn: pcie20x1m1-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie20x1_2_clkreqn_m1 */
+-				<4 RK_PB7 4 &pcfg_pull_none>,
++				<4 RK_PB7 4 &pcfg_pull_none>;
++		};
 +
-+config SYS_VENDOR
-+	default "radxa"
++		/omit-if-no-ref/
++		pcie20x1m1_perstn: pcie20x1m1-perstn {
++			rockchip,pins =
+ 				/* pcie20x1_2_perstn_m1 */
+-				<4 RK_PC1 4 &pcfg_pull_none>,
++				<4 RK_PC1 4 &pcfg_pull_none>;
++		};
 +
-+config SYS_CONFIG_NAME
-+	default "rock-5-rk3588s"
++		/omit-if-no-ref/
++		pcie20x1m1_waken: pcie20x1m1-waken {
++			rockchip,pins =
+ 				/* pcie20x1_2_waken_m1 */
+ 				<4 RK_PC0 4 &pcfg_pull_none>;
+ 		};
+@@ -1654,52 +1674,127 @@
+ 
+ 	pcie30x1 {
+ 		/omit-if-no-ref/
+-		pcie30x1m0_pins: pcie30x1m0-pins {
++		pcie30x1m0_0_clkreqn: pcie30x1m0-0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x1_0_clkreqn_m0 */
+-				<0 RK_PC0 12 &pcfg_pull_none>,
++				<0 RK_PC0 12 &pcfg_pull_none>;
++		};
 +
-+endif
-diff --git a/board/radxa/rock-5-rk3588s/MAINTAINERS b/board/radxa/rock-5-rk3588s/MAINTAINERS
-new file mode 100644
-index 000000000000..ead6356131c1
---- /dev/null
-+++ b/board/radxa/rock-5-rk3588s/MAINTAINERS
-@@ -0,0 +1,8 @@
-+ROCK-5-RK3588S
-+M:	FUKAUMI Naoki <naoki@radxa.com>
-+S:	Maintained
-+F:	arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
-+F:	arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
-+F:	board/radxa/rock-5-rk3588s/
-+F:	configs/rock-5-rk3588s_defconfig
-+F:	include/configs/rock-5-rk3588s.h
-diff --git a/board/radxa/rock-5-rk3588s/Makefile b/board/radxa/rock-5-rk3588s/Makefile
-new file mode 100644
-index 000000000000..d9be0f42e6b9
---- /dev/null
-+++ b/board/radxa/rock-5-rk3588s/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
++		/omit-if-no-ref/
++		pcie30x1m0_0_perstn: pcie30x1m0-0-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_0_perstn_m0 */
+-				<0 RK_PC5 12 &pcfg_pull_none>,
++				<0 RK_PC5 12 &pcfg_pull_none>;
++		};
 +
-+obj-y += rock-5-rk3588s.o
-diff --git a/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
-new file mode 100644
-index 000000000000..a840ca7698d4
---- /dev/null
-+++ b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
-@@ -0,0 +1,77 @@
-+// SPDX-License-Identifier: GPL-2.0+
++		/omit-if-no-ref/
++		pcie30x1m0_0_waken: pcie30x1m0-0-waken {
++			rockchip,pins =
+ 				/* pcie30x1_0_waken_m0 */
+-				<0 RK_PC4 12 &pcfg_pull_none>,
++				<0 RK_PC4 12 &pcfg_pull_none>;
++		};
 +
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <adc.h>
-+#include <env.h>
++		/omit-if-no-ref/
++		pcie30x1m0_1_clkreqn: pcie30x1m0-1-clkreqn {
++			rockchip,pins =
+ 				/* pcie30x1_1_clkreqn_m0 */
+-				<0 RK_PB5 12 &pcfg_pull_none>,
++				<0 RK_PB5 12 &pcfg_pull_none>;
++		};
 +
-+#define BOARD_ID	5
++		/omit-if-no-ref/
++		pcie30x1m0_1_perstn: pcie30x1m0-1-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_1_perstn_m0 */
+-				<0 RK_PB7 12 &pcfg_pull_none>,
++				<0 RK_PB7 12 &pcfg_pull_none>;
++		};
 +
-+struct board_model {
-+	unsigned int low;
-+	unsigned int high;
-+	const char *board;
-+	const char *board_name;
-+	const char *fdtfile;
-+};
++		/omit-if-no-ref/
++		pcie30x1m0_1_waken: pcie30x1m0-1-waken {
++			rockchip,pins =
+ 				/* pcie30x1_1_waken_m0 */
+ 				<0 RK_PB6 12 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x1m1_pins: pcie30x1m1-pins {
++		pcie30x1m1_0_clkreqn: pcie30x1m1-0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x1_0_clkreqn_m1 */
+-				<4 RK_PA3 4 &pcfg_pull_none>,
++				<4 RK_PA3 4 &pcfg_pull_none>;
++		};
 +
-+static const struct board_model board_models[] = {
-+	{
-+		0,
-+		50,
-+		"rock-5a-rk3588s",
-+		"Radxa ROCK 5A",
-+		"rockchip/rk3588s-rock-5a.dtb",
-+	},
-+	{
-+		2375,
-+		2425,
-+		"rock-5c-rk3588s",
-+		"Radxa ROCK 5C",
-+		"rockchip/rk3588s-rock-5c.dtb"
-+	},
-+};
++		/omit-if-no-ref/
++		pcie30x1m1_0_perstn: pcie30x1m1-0-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_0_perstn_m1 */
+-				<4 RK_PA5 4 &pcfg_pull_none>,
++				<4 RK_PA5 4 &pcfg_pull_none>;
++		};
 +
-+static const struct board_model *get_board_model(void)
-+{
-+	unsigned int val;
-+	int i, ret;
++		/omit-if-no-ref/
++		pcie30x1m1_0_waken: pcie30x1m1-0-waken {
++			rockchip,pins =
+ 				/* pcie30x1_0_waken_m1 */
+-				<4 RK_PA4 4 &pcfg_pull_none>,
++				<4 RK_PA4 4 &pcfg_pull_none>;
++		};
 +
-+	ret = adc_channel_single_shot("adc@fec10000", BOARD_ID, &val);
-+	debug("adc_channel_single_shot ret %d val %u\n", ret, val);
-+	if (ret)
-+		return NULL;
++		/omit-if-no-ref/
++		pcie30x1m1_1_clkreqn: pcie30x1m1-1-clkreqn {
++			rockchip,pins =
+ 				/* pcie30x1_1_clkreqn_m1 */
+-				<4 RK_PA0 4 &pcfg_pull_none>,
++				<4 RK_PA0 4 &pcfg_pull_none>;
++		};
 +
-+	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-+		unsigned int min = board_models[i].low;
-+		unsigned int max = board_models[i].high;
++		/omit-if-no-ref/
++		pcie30x1m1_1_perstn: pcie30x1m1-1-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_1_perstn_m1 */
+-				<4 RK_PA2 4 &pcfg_pull_none>,
++				<4 RK_PA2 4 &pcfg_pull_none>;
++		};
 +
-+		if (min <= val && val <= max)
-+			return &board_models[i];
-+	}
++		/omit-if-no-ref/
++		pcie30x1m1_1_waken: pcie30x1m1-1-waken {
++			rockchip,pins =
+ 				/* pcie30x1_1_waken_m1 */
+ 				<4 RK_PA1 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x1m2_pins: pcie30x1m2-pins {
++		pcie30x1m2_0_clkreqn: pcie30x1m2-0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x1_0_clkreqn_m2 */
+-				<1 RK_PB5 4 &pcfg_pull_none>,
++				<1 RK_PB5 4 &pcfg_pull_none>;
++		};
 +
-+	return NULL;
-+}
++		/omit-if-no-ref/
++		pcie30x1m2_0_perstn: pcie30x1m2-0-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_0_perstn_m2 */
+-				<1 RK_PB4 4 &pcfg_pull_none>,
++				<1 RK_PB4 4 &pcfg_pull_none>;
++		};
 +
-+int rk_board_late_init(void)
-+{
-+	const struct board_model *model = get_board_model();
++		/omit-if-no-ref/
++		pcie30x1m2_0_waken: pcie30x1m2-0-waken {
++			rockchip,pins =
+ 				/* pcie30x1_0_waken_m2 */
+-				<1 RK_PB3 4 &pcfg_pull_none>,
++				<1 RK_PB3 4 &pcfg_pull_none>;
++		};
 +
-+	if (model) {
-+		env_set("board", model->board);
-+		env_set("board_name", model->board_name);
-+		env_set("fdtfile", model->fdtfile);
-+	}
++		/omit-if-no-ref/
++		pcie30x1m2_1_clkreqn: pcie30x1m2-1-clkreqn {
++			rockchip,pins =
+ 				/* pcie30x1_1_clkreqn_m2 */
+-				<1 RK_PA0 4 &pcfg_pull_none>,
++				<1 RK_PA0 4 &pcfg_pull_none>;
++		};
 +
-+	return 0;
-+}
++		/omit-if-no-ref/
++		pcie30x1m2_1_perstn: pcie30x1m2-1-perstn {
++			rockchip,pins =
+ 				/* pcie30x1_1_perstn_m2 */
+-				<1 RK_PA7 4 &pcfg_pull_none>,
++				<1 RK_PA7 4 &pcfg_pull_none>;
++		};
 +
-+int board_fit_config_name_match(const char *name)
-+{
-+	const struct board_model *model = get_board_model();
++		/omit-if-no-ref/
++		pcie30x1m2_1_waken: pcie30x1m2-1-waken {
++			rockchip,pins =
+ 				/* pcie30x1_1_waken_m2 */
+ 				<1 RK_PA1 4 &pcfg_pull_none>;
+ 		};
+@@ -1721,45 +1816,85 @@
+ 
+ 	pcie30x2 {
+ 		/omit-if-no-ref/
+-		pcie30x2m0_pins: pcie30x2m0-pins {
++		pcie30x2m0_clkreqn: pcie30x2m0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x2_clkreqn_m0 */
+-				<0 RK_PD1 12 &pcfg_pull_none>,
++				<0 RK_PD1 12 &pcfg_pull_none>;
++		};
 +
-+	if (model && !strcmp(name, model->fdtfile))
-+		return 0;
++		/omit-if-no-ref/
++		pcie30x2m0_perstn: pcie30x2m0-perstn {
++			rockchip,pins =
+ 				/* pcie30x2_perstn_m0 */
+-				<0 RK_PD4 12 &pcfg_pull_none>,
++				<0 RK_PD4 12 &pcfg_pull_none>;
++		};
 +
-+	return -ENOENT;
-+}
-diff --git a/configs/rock-5-rk3588s_defconfig b/configs/rock-5-rk3588s_defconfig
-new file mode 100644
-index 000000000000..a0137520803f
---- /dev/null
-+++ b/configs/rock-5-rk3588s_defconfig
-@@ -0,0 +1,95 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ROCK_5_RK3588S=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_SYSTEM_SETUP=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_PWM=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_LIST="rockchip/rk3588s-rock-5a rockchip/rk3588s-rock-5c"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_ADC=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_PWM=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 9bab86d23479..6b952654cb3d 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -141,6 +141,7 @@ List of mainline supported Rockchip boards:
-      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
-      - Radxa ROCK 5A (rock5a-rk3588s)
-      - Radxa ROCK 5B (rock5b-rk3588)
-+     - Radxa ROCK 5C (rock-5-rk3588s)
-      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
-      - Theobroma Systems RK3588-SBC Jaguar (jaguar-rk3588)
-      - Theobroma Systems SOM-RK3588-Q7 - Tiger (tiger-rk3588)
-diff --git a/include/configs/rock-5-rk3588s.h b/include/configs/rock-5-rk3588s.h
-new file mode 100644
-index 000000000000..8020177d7585
---- /dev/null
-+++ b/include/configs/rock-5-rk3588s.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
-+ */
++		/omit-if-no-ref/
++		pcie30x2m0_waken: pcie30x2m0-waken {
++			rockchip,pins =
+ 				/* pcie30x2_waken_m0 */
+ 				<0 RK_PD2 12 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x2m1_pins: pcie30x2m1-pins {
++		pcie30x2m1_clkreqn: pcie30x2m1-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x2_clkreqn_m1 */
+-				<4 RK_PA6 4 &pcfg_pull_none>,
++				<4 RK_PA6 4 &pcfg_pull_none>;
++		};
 +
-+#ifndef __ROCK_5_RK3588S_H
-+#define __ROCK_5_RK3588S_H
++		/omit-if-no-ref/
++		pcie30x2m1_perstn: pcie30x2m1-perstn {
++			rockchip,pins =
+ 				/* pcie30x2_perstn_m1 */
+-				<4 RK_PB0 4 &pcfg_pull_none>,
++				<4 RK_PB0 4 &pcfg_pull_none>;
++		};
 +
-+#define ROCKCHIP_DEVICE_SETTINGS \
-+		"stdout=serial,vidconsole\0" \
-+		"stderr=serial,vidconsole\0"
++		/omit-if-no-ref/
++		pcie30x2m1_waken: pcie30x2m1-waken {
++			rockchip,pins =
+ 				/* pcie30x2_waken_m1 */
+ 				<4 RK_PA7 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x2m2_pins: pcie30x2m2-pins {
++		pcie30x2m2_clkreqn: pcie30x2m2-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x2_clkreqn_m2 */
+-				<3 RK_PD2 4 &pcfg_pull_none>,
++				<3 RK_PD2 4 &pcfg_pull_none>;
++		};
 +
-+#include <configs/rk3588_common.h>
++		/omit-if-no-ref/
++		pcie30x2m2_perstn: pcie30x2m2-perstn {
++			rockchip,pins =
+ 				/* pcie30x2_perstn_m2 */
+-				<3 RK_PD4 4 &pcfg_pull_none>,
++				<3 RK_PD4 4 &pcfg_pull_none>;
++		};
 +
-+#endif /* __ROCK_5_RK3588S_H */
++		/omit-if-no-ref/
++		pcie30x2m2_waken: pcie30x2m2-waken {
++			rockchip,pins =
+ 				/* pcie30x2_waken_m2 */
+ 				<3 RK_PD3 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x2m3_pins: pcie30x2m3-pins {
++		pcie30x2m3_clkreqn: pcie30x2m3-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x2_clkreqn_m3 */
+-				<1 RK_PD7 4 &pcfg_pull_none>,
++				<1 RK_PD7 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x2m3_perstn: pcie30x2m3-perstn {
++			rockchip,pins =
+ 				/* pcie30x2_perstn_m3 */
+-				<1 RK_PB7 4 &pcfg_pull_none>,
++				<1 RK_PB7 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x2m3_waken: pcie30x2m3-waken {
++			rockchip,pins =
+ 				/* pcie30x2_waken_m3 */
+ 				<1 RK_PB6 4 &pcfg_pull_none>;
+ 		};
+@@ -1774,45 +1909,85 @@
+ 
+ 	pcie30x4 {
+ 		/omit-if-no-ref/
+-		pcie30x4m0_pins: pcie30x4m0-pins {
++		pcie30x4m0_clkreqn: pcie30x4m0-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x4_clkreqn_m0 */
+-				<0 RK_PC6 12 &pcfg_pull_none>,
++				<0 RK_PC6 12 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m0_perstn: pcie30x4m0-perstn {
++			rockchip,pins =
+ 				/* pcie30x4_perstn_m0 */
+-				<0 RK_PD0 12 &pcfg_pull_none>,
++				<0 RK_PD0 12 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m0_waken: pcie30x4m0-waken {
++			rockchip,pins =
+ 				/* pcie30x4_waken_m0 */
+ 				<0 RK_PC7 12 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x4m1_pins: pcie30x4m1-pins {
++		pcie30x4m1_clkreqn: pcie30x4m1-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x4_clkreqn_m1 */
+-				<4 RK_PB4 4 &pcfg_pull_none>,
++				<4 RK_PB4 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m1_perstn: pcie30x4m1-perstn {
++			rockchip,pins =
+ 				/* pcie30x4_perstn_m1 */
+-				<4 RK_PB6 4 &pcfg_pull_none>,
++				<4 RK_PB6 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m1_waken: pcie30x4m1-waken {
++			rockchip,pins =
+ 				/* pcie30x4_waken_m1 */
+ 				<4 RK_PB5 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x4m2_pins: pcie30x4m2-pins {
++		pcie30x4m2_clkreqn: pcie30x4m2-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x4_clkreqn_m2 */
+-				<3 RK_PC4 4 &pcfg_pull_none>,
++				<3 RK_PC4 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m2_perstn: pcie30x4m2-perstn {
++			rockchip,pins =
+ 				/* pcie30x4_perstn_m2 */
+-				<3 RK_PC6 4 &pcfg_pull_none>,
++				<3 RK_PC6 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m2_waken: pcie30x4m2-waken {
++			rockchip,pins =
+ 				/* pcie30x4_waken_m2 */
+ 				<3 RK_PC5 4 &pcfg_pull_none>;
+ 		};
+ 
+ 		/omit-if-no-ref/
+-		pcie30x4m3_pins: pcie30x4m3-pins {
++		pcie30x4m3_clkreqn: pcie30x4m3-clkreqn {
+ 			rockchip,pins =
+ 				/* pcie30x4_clkreqn_m3 */
+-				<1 RK_PB0 4 &pcfg_pull_none>,
++				<1 RK_PB0 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m3_perstn: pcie30x4m3-perstn {
++			rockchip,pins =
+ 				/* pcie30x4_perstn_m3 */
+-				<1 RK_PB2 4 &pcfg_pull_none>,
++				<1 RK_PB2 4 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		pcie30x4m3_waken: pcie30x4m3-waken {
++			rockchip,pins =
+ 				/* pcie30x4_waken_m3 */
+ 				<1 RK_PB1 4 &pcfg_pull_none>;
+ 		};
+diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+index a385e0991990..d6a0b559edca 100644
+--- a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
++++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
+@@ -310,7 +310,7 @@
+ };
+ 
+ &pcie2x1l2 {
+-	pinctrl-0 = <&pcie20x1m0_pins>;
++	pinctrl-0 = <&pcie2_reset>, <&pcie20x1m0_clkreqn>, <&pcie20x1m0_waken>;
+ 	pinctrl-names = "default";
+ 	reset-gpios = <&gpio3 RK_PD1 GPIO_ACTIVE_HIGH>;
+ 	vpcie3v3-supply = <&vcc3v3_wf>;
+@@ -328,6 +328,10 @@
+ 		pow_en: pow-en {
+ 			rockchip,pins = <0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+ 		};
++
++		pcie2_reset: pcie2-reset {
++			rockchip,pins = <3 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
+ 	};
+ 
+ 	power {
 -- 
 2.43.0
 
