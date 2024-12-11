@@ -4,23 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC30E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:34:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F401E77183
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 07:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 353228029E;
-	Wed, 11 Dec 2024 08:32:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C870802DF;
+	Wed, 11 Dec 2024 08:32:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="AYtgHYi5";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EkotGa9v";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mYXpTJOx";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Vs3TuInh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D50B80209; Wed, 11 Dec 2024 08:32:42 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id D3ED080209; Wed, 11 Dec 2024 08:32:42 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4800E802D5
+ by phobos.denx.de (Postfix) with ESMTPS id CB0E180235
  for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -30,20 +31,20 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Y7S465Zrcz9ssn;
- Wed, 11 Dec 2024 08:32:38 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y7S473lrYz9sqZ;
+ Wed, 11 Dec 2024 08:32:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1733902358;
+ s=mail20150812; t=1733902359;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dyXQx39DwiKucOX6ppBjD6ymQEspZOfGHWO5NM3ShYU=;
- b=AYtgHYi5ZSPKddYdDo7MYQ5YNmu3CtSRR+bQXBf34cRbOYq/7Q8F1GVWrQA1ZlsPoHB5J7
- VMOR/TF8la7uKP3GnAbTElOqvnIiOwH3OymiUuhijaJYZKYEA68p+oqLXiU7kgt6pLbh0p
- ztOwBkd9NiEr4L/KUNmgoCuW8z3rOaf6Oetm6QlH402Y1kqbtEePh0LANw8ndko+35JtZq
- Kx+5CpDaUCVH7cM1yEUgxzRF29Ed14rXg5B07AEIPKyKK9cMl0QZ0GLTaVcku4Xzy23kqh
- /MIbdqCqcKpznDnxE91ys93tQepHI/JqYuBXIUzZKWxnrNHxrKbKfVoQIca7IA==
+ bh=fw9Xlg2/UabAdMzNKYpEjvPhHnU8jXMUTY5gSJqg5wI=;
+ b=mYXpTJOxvHQniAg5i1/fR+g5i9fZPlpUkUs4qHUozag2/pLCW0OxIg53/ZtCrwA9kg/27B
+ 9XVDwRclQnV0SYjHqDxGRQe5H+Btt1py0wLHgaLDQD8cfJUe/UyrpbNmm2F1oaJdrGja7E
+ X8jflMwT9cwwgLaykKM+d7++zdhtYirqSe9Rf91PVtNkm+ud52yEuI16tJ612YAZITi/K/
+ xAFSLbYXq0NPOoMcPDfZOxKCsShzO3SI8kG6inNg+vml5bPNh5L6eYl4vE7wx1TV20PTcV
+ oCUNRgwHszQMKUpubvWcfGmBmuDVUNoSx/H1xuA/x9NVnQfL7hheINz1HKbZMQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1733902357;
@@ -51,24 +52,24 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dyXQx39DwiKucOX6ppBjD6ymQEspZOfGHWO5NM3ShYU=;
- b=EkotGa9vIrEOnQNaR3eG5utHjTNZJYbowvyGcW+kd3fXkCJ07UAnzTEU2ZRmxQg7EpCmnT
- SIVKp10VAvJfrilW7VlnGX/vX4dVwhC65IgkCs9Ga58fJ21VR4MZ1HLbF3MH+4gUgHuqOj
- 4H3yCdVwLeWSp920bNz2XCdgZWjkevwcI2WmD5xqNES8jAAeH25gncVhVK4mJAK1cXK/X3
- xLeAnw3PhyANM2DvyGcbSmhee2TJqPnE90uSZrwtxijpgQR0eSLPXDriy4B0oY4rjNVMYP
- g33diYoFwEGBb0S1MW6n5q5na2954JeLZvSiujpcNgz9Jz3V19CXlPqJADyD/g==
+ bh=fw9Xlg2/UabAdMzNKYpEjvPhHnU8jXMUTY5gSJqg5wI=;
+ b=Vs3TuInhzxsL6QuL4S2SlwsHDMnl1j5+54Xbw2vADlTjNExNIsD3WQoshX+Ve31y8B17U/
+ vudoJ6/C8I19QA9YOfYqAuDV6F518Z1tCER84IFJStyVn5oD4DqU6E65Rlm89R6yM70Fw+
+ 9P4EaE8qvfD38+vdZXn8GJqAIf0bI9j0Y9GwPNf7/lffHVkzvor4hMvkm6aaC4Sx5xa+1J
+ 0GkWZ63bJroR9KzKgKfoolNUkrtl871M8fJME67e/9OvSKYWoXGAoOvds1U2xjwBvgzSNN
+ iKKoocpPkmAh+/0y0tU10kB0yx7Dk1HRBr9SyPaOJUoRgv+72G3aDbApHcJI+A==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 11/13] serial: renesas: Fix R-Car spelling
-Date: Wed, 11 Dec 2024 08:30:35 +0100
-Message-ID: <20241211073210.8087-11-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 12/13] spi: renesas: Fix R-Car spelling
+Date: Wed, 11 Dec 2024 08:30:36 +0100
+Message-ID: <20241211073210.8087-12-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20241211073210.8087-1-marek.vasut+renesas@mailbox.org>
 References: <20241211073210.8087-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 46cbcfdf0500051f14f
-X-MBO-RS-META: rufyuomnq94ob47t4pfym3njtq4mqg1w
+X-MBO-RS-META: 94zb87hs6qndtarfoan51np1tthjioxo
+X-MBO-RS-ID: a154a88d2ce72bac7e2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,22 +96,35 @@ Cc: u-boot@lists.denx.de
 ---
 V2: No change
 ---
- drivers/serial/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/spi/Kconfig           | 2 +-
+ drivers/spi/renesas_rpc_spi.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index 8b27ad9a77e..c4f4a8d78df 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -920,7 +920,7 @@ config SCIF_CONSOLE
- 	depends on SH || ARCH_RENESAS
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index fd5cb3694f6..96ea033082b 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -420,7 +420,7 @@ config RENESAS_RPC_SPI
+ 	imply SPI_FLASH_SFDP_SUPPORT
  	help
- 	  Select this to enable Renesas SCIF UART. To operate serial ports
--	  on systems with RCar or SH SoCs, say Y to this option. If unsure,
-+	  on systems with R-Car or SH SoCs, say Y to this option. If unsure,
- 	  say N.
+ 	  Enable the Renesas RPC SPI driver, used to access SPI NOR flash
+-	  on Renesas RCar Gen3 SoCs. This uses driver model and requires a
++	  on Renesas R-Car Gen3 SoCs. This uses driver model and requires a
+ 	  device tree binding to operate.
  
- choice
+ config ROCKCHIP_SFC
+diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_spi.c
+index f1e6f9f4e01..7103d786c7e 100644
+--- a/drivers/spi/renesas_rpc_spi.c
++++ b/drivers/spi/renesas_rpc_spi.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Renesas RCar Gen3 RPC QSPI driver
++ * Renesas R-Car Gen3 RPC QSPI driver
+  *
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+  */
 -- 
 2.45.2
 
