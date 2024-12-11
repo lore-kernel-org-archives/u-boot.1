@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1F20E7717D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 16:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61544E7717D
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 16:32:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD68280383;
-	Wed, 11 Dec 2024 17:32:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21ADC803D1;
+	Wed, 11 Dec 2024 17:32:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="koNSD+nh";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bi9yI5TE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BDE1801E7; Wed, 11 Dec 2024 17:32:06 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id A83AA803C7; Wed, 11 Dec 2024 17:32:11 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A3298036F
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 17:32:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88FEA803AE
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 17:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 8164B3FE57
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:32:03 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 5D55A3F467
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 16:32:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1733934723;
- bh=SVeYZFdgtiEzoxRxcUw/Q6m9kKGXsgX6HWKtIf+8IMM=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=koNSD+nhekhr+N90F6iG8CJThDrLkCpJgJOKGHNqXewqZ4WrXN4y6xNEXFN/KoWQS
- r1dK5iCQLw6foIeLZ0XnURZ9Gad6WlG5S3XxuGXSWSDtHHEvgrJbYQH+3nTdeQTZyU
- CKBWzldZYMZS/0BHuH9YuD1gi7swg2Sj65fbfGsuSKBhAOAXPiXpECk+ir/gX1nUUj
- 4sNUDBdgzVWj1frseRvPaR0Jb52FP7Pe+uj/eQM+sVVLpAawRGLlJ7lE3gRKJpIFhx
- wKjJCJsQ13Ja/vuUrX9LxWZNN1FCZ2fJ2cXc58qgR+2Sopg7akJWAGo8/7FjwSRFeW
- Qo5yzSfJlIFxA==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4361fc2b2d6so4542895e9.3
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:03 -0800 (PST)
+ s=20210705; t=1733934722;
+ bh=boLrYZCctI7yuyeGxQPh0oE1hQgzNY9JJCIuChFhkus=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=bi9yI5TEpggxx6wIOM5LA6cLIJXK9hRSJYcDD6U82t0dwmwQZGoRSJ/aZAd3Iu9Ul
+ feTYFAq/nrneBZftQE7r2ZjMOQLi41+QW9+obDjrUsOboofbb8KDoRMqkZjfDxVSpb
+ vUpndm5ubsF98dR/+ySQAjVf9Af5PJRWOBnkISwTkO4PJif74quAAYrGxeK5D8wnvC
+ nmArYTfFivJ5jCGNJBFACKGBcwoLh0QWkBOXgzGJ3P7+vSCyqqY0e3EEskVa5l1eR5
+ ztAfE+lOUJdn+oeaisKCckR9ilkJTUjosEOYWQStVYodu4felZLlcqxOFgJbaKNNDu
+ xMTq3kQQhs8Pw==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-4361b090d23so8467725e9.0
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 08:32:01 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733934722; x=1734539522;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SVeYZFdgtiEzoxRxcUw/Q6m9kKGXsgX6HWKtIf+8IMM=;
- b=PcpQvZRNe/ZHZQ03et98c6r+2eDTC4APs0hj75usTUqBjqJBUMK1Mv6+G2ZVnBRezU
- DqWTfKv6P/SOn3ldUjzZ35UcCfSSJxTMdoho97ouqQAs307QBQ6Z4qjkuAzmcJF930Zz
- R1VJrAWGLCpowfEZOg53rIUdxzWP72i15JujAVexY8oDOffXJ7f5glYJjfpc6ehk6RHO
- 7xNuA9tT0D2pzrJOT/SH0J2lY5Yu0T9JPPNJb9bpO59Jlq+PblmzzlK+aikLMwju/+sg
- +NnEpg94WcZJJ96soOAs0DAF2cFSsJiOxz4gM2ZFVsONomM2sisod6HuOglyHg+OtH06
- 62JA==
+ d=1e100.net; s=20230601; t=1733934720; x=1734539520;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=boLrYZCctI7yuyeGxQPh0oE1hQgzNY9JJCIuChFhkus=;
+ b=BERGv5bT7BtuWkMyK0p8bsnkMSRRU/ayd5KboZB/9MrgOcMDt6hpRNhoowbUa47fdE
+ bI12UStxbJcxatCQtZ+9Bh0QrVB59IoMRolJZMXRyUj/Ehbh2axvwjg8Xk5f4cazuFhu
+ BjqmNOxzwFbVpigpNP57WB5MtTDBy5d2prRikpphG7Z5rPOQkJdhLtHc/lJY6IUoIbxT
+ kcKo6JxpAiKGlKyfXTy4HrH/lNOC8Lowr8RMHojDKy9IDjcDfn0zU+OaS9403Z/ceLDl
+ PsLQLTeAZRJas9B55eU+bW0t7+rY8tUIPnHn0GsGvl1ihvu5pNlKZPeqDZb4SL+A1ddP
+ zMoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVApabdLLm3tk+KAbVA1E1hfTKsCdGhpZXtl1ZBLIjGfBIToUUtL6GfsjYQESGgQtnya4/tqfs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwT39X+DZXf2ZwP2qGM72UkjlcvmcsYgDEX2EcaHwf2sNhBmjuu
- 6kIqxMXQTmijm5JESZWRteItmA7KeIbunUdXCGoYQtv9gUje9zvI4WxfuMRJRskn2lqUafLH2iF
- 8UOFh7YmWPV9dtUo0JWBevmAmGq3lgg2WxXzHUlaAvFetJYE0PDStBvG/VfMxN0+6sIE=
-X-Gm-Gg: ASbGncsa5ybrq6swN31tK+g8+cQ1YszVYFA3ZdMMUV3mNkdNHtHiGIZdQtkiDVinJYT
- CzLnEpywghfe+Qr3P/v4IKfvmdaJNpfQNceQwj3T7vGlyxum7/ZGkUHUoB3e+11S01tLGofcAMe
- lvQm1AWOBaxxyIaS+AvmrAePrcOCxS/yN1QgLB4uIwrd7oWQQx4nvUXqPBJHQ9MDJ34f7HrweNS
- ldJJxugrnCmTlWQ6Pj1aUo0tPXv0NAkLFyZM3AU1p0f+4GGtdsxdL7Cyp3xAtmFmfpWbErCtPPt
- mM+YpsOTjmhRa2oLFuNUWkEs8Snmi0Vw6RWNllGs/bUeEZ5n7Q8I1GO6ZYQ=
-X-Received: by 2002:a05:600c:3b94:b0:434:fdaf:af2d with SMTP id
- 5b1f17b1804b1-4361c441f23mr30341905e9.30.1733934722734; 
- Wed, 11 Dec 2024 08:32:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFtWP4Mgdll6cHvOQaC6/vZuHz5QDMaV9cOsy3X/e81CD4Xv3zzIcCL0E7M5qRxoRb/ACkcmw==
-X-Received: by 2002:a05:600c:3b94:b0:434:fdaf:af2d with SMTP id
- 5b1f17b1804b1-4361c441f23mr30341605e9.30.1733934722362; 
- Wed, 11 Dec 2024 08:32:02 -0800 (PST)
+ AJvYcCV1p7DpjmkXvZgeCi27RhgatKDG1W7Uh1wQIf508cBjsFGtEeV4ygT7/C9DDSohYRMvPx+xThY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxiyuJaavri5qeK46FYuxXmII9IhzfYeVX36yrnsnrNlBEFKvRt
+ JW3glK7SlqPbmZ7uPLVoY75NRUVc1Ps5pOnXPmZOWReqyUX4ksLYthjiVEkB03whgJ4NTagZ22N
+ u6LPYOQBSSJQydCYKwmQT/4muQ7UJo252jx8iC+Ohz2e/Kk0CiP6X6nu8NY53CNVwHY0=
+X-Gm-Gg: ASbGnct2xhZR7+a7LK6Gu1K+zcJnZxrY6yLh8MmwQgePhD3o0gQD2dmaIYFGTg2A4fj
+ NrdKVfgBG40XWe9JSnnjRtT4mdAGIGUbBf0o7XdCRr5cGUdkD/owY5wA2AWfDSKpOfEBcGwvlvC
+ MUS+6eCmLwwHoRGDN72ndavs+N8DK6KLPt+eNalc0jqnDB9O85RgFvQxJh1T1++/q3wCviBAxnj
+ yeCVh8dDtP3wtlP++xUBW+ROSIuw9tcpTyToJ+WCt3NIdxhILw3NRDlfKKlNpKa/q4MDdD83bhN
+ /XmqpYkf1HZpDrqYg28oc6uNj+Y6h8a/jC07Ef3vKPm/tEB2bLntioLi
+X-Received: by 2002:a05:600c:468b:b0:434:a968:89a3 with SMTP id
+ 5b1f17b1804b1-4361c35ceffmr27494685e9.9.1733934720690; 
+ Wed, 11 Dec 2024 08:32:00 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHA7iaXWiKsyPc8QgnbjRkmEnT9YiaSUx4gW4VbG+TeuEVMsnod3cnCTpSjcPAiXWRhOF+ujA==
+X-Received: by 2002:a05:600c:468b:b0:434:a968:89a3 with SMTP id
+ 5b1f17b1804b1-4361c35ceffmr27494435e9.9.1733934720352; 
+ Wed, 11 Dec 2024 08:32:00 -0800 (PST)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3878248f521sm1627311f8f.16.2024.12.11.08.32.01
+ ffacd0b85a97d-3878248f521sm1627311f8f.16.2024.12.11.08.31.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 08:32:01 -0800 (PST)
+ Wed, 11 Dec 2024 08:31:59 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ashish Kumar <Ashish.Kumar@nxp.com>, Gaurav Jain <gaurav.jain@nxp.com>,
@@ -90,12 +89,10 @@ Cc: Ashish Kumar <Ashish.Kumar@nxp.com>, Gaurav Jain <gaurav.jain@nxp.com>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
  Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] crypto: typo volatge
-Date: Wed, 11 Dec 2024 17:31:54 +0100
-Message-ID: <20241211163154.56272-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/3] board: freescale: typo volatge
+Date: Wed, 11 Dec 2024 17:31:52 +0100
+Message-ID: <20241211163154.56272-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241211163154.56272-1-heinrich.schuchardt@canonical.com>
-References: <20241211163154.56272-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -118,22 +115,45 @@ X-Virus-Status: Clean
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/crypto/fsl/jr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/freescale/ls1088a/ls1088a.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-index c45481bef0b..8f7a821ebf3 100644
---- a/drivers/crypto/fsl/jr.c
-+++ b/drivers/crypto/fsl/jr.c
-@@ -654,7 +654,7 @@ static int rng_init(uint8_t sec_idx, ccsr_sec_t *sec)
- 		ret = instantiate_rng(sec_idx, sec, gen_sk);
- 		/*
- 		 * entropy delay is calculated via self-test method.
--		 * self-test are run across different volatge, temp.
-+		 * self-test are run across different voltage, temp.
- 		 * if worst case value for ent_dly is identified,
- 		 * loop can be skipped for that platform.
- 		 */
+diff --git a/board/freescale/ls1088a/ls1088a.c b/board/freescale/ls1088a/ls1088a.c
+index 9f4eb4811d9..9606434e8ff 100644
+--- a/board/freescale/ls1088a/ls1088a.c
++++ b/board/freescale/ls1088a/ls1088a.c
+@@ -690,7 +690,7 @@ int get_serdes_volt(void)
+ 	dm_i2c_read(dev, PMBUS_CMD_READ_VOUT, (void *)&vcode, 2);
+ #endif
+ 	if (ret) {
+-		printf("VID: failed to read the volatge\n");
++		printf("VID: failed to read the voltage\n");
+ 		return ret;
+ 	}
+ 
+@@ -716,11 +716,11 @@ int set_serdes_volt(int svdd)
+ 				   (void *)&buff, 5);
+ #endif
+ 	if (ret) {
+-		printf("VID: I2C failed to write to the volatge regulator\n");
++		printf("VID: I2C failed to write to the voltage regulator\n");
+ 		return -1;
+ 	}
+ 
+-	/* Wait for the volatge to get to the desired value */
++	/* Wait for the voltage to get to the desired value */
+ 	do {
+ 		vdd_last = get_serdes_volt();
+ 		if (vdd_last < 0) {
+@@ -778,7 +778,7 @@ int set_serdes_volt(int svdd)
+ 		return -1;
+ 	}
+ 
+-	/* Wait for the volatge to get to the desired value */
++	/* Wait for the voltage to get to the desired value */
+ 	udelay(10000);
+ 
+ 	return 1;
 -- 
 2.45.2
 
