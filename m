@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976F9E77180
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B16E77180
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 10:56:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE3418022B;
-	Wed, 11 Dec 2024 11:55:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03300801FE;
+	Wed, 11 Dec 2024 11:55:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gjwDneBk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ruovsQOQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6FB0801FE; Wed, 11 Dec 2024 11:55:39 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id C881080241; Wed, 11 Dec 2024 11:55:41 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12DA480278
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBBEE801BF
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 11:55:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-aa6b4cc7270so78780966b.0
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:36 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aa67af4dc60so576662366b.2
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 02:55:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733914535; x=1734519335; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733914539; x=1734519339; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vq7Et1+06yoU+SrfNejcP7FvAUznzZZKURsbScNxGrA=;
- b=gjwDneBk5FLuX2YM0u6jecWFwP1wxirMoAF5X/42cB1Dj0izpnjAhtltpltw4cnf+M
- QoiOGKJGIWuNvOHAWXszzeWwnhyb6lsNwesxX5EAeT57RH1SFWhweBVLw1/q+nhSP9qI
- d0+yMcQpRowKBtO5f9GZ3EkZCCUMy9C/LUDfSLQV2JFl2kHtux1+TLWKJ+wuEoNp5EnF
- ExznIO2mjHIgNeFMlf/iplLDOZZTA9fS0C62+LTraYmN+tPFxYvJ6tdz+PX8pc07iopv
- 8/NWE5NlADhb+uA7saPABbqkMyxuBokaxILhv2Hd/oKkVRd9sRZzezokGidhBuP91Th9
- o+FA==
+ bh=1Pa4i6SSo0ziuImDLfRHe3DBSlYndj2von0Q32AANuI=;
+ b=ruovsQOQiNJpumVdcdvmcW3SxlLGAbPQyKOLrtLuIij2RLco0+xV4iFUtAdQiGNCM6
+ 4tvGPe6J3ymEmNAMAp2Tgj9BNtSbOKTEHNai22C7QWDl7NGcE4kObBJWXjKE9cH9YC1s
+ X6ZuzBPeX9QFm+mRB4zya7aPMPbpBJ8o/F8HjC/DFxNF5iWM25EMUGSWlF2Q3ntYnY8D
+ 41kZO0RQLRRE7wQVL5IehO/TUclBsQnqC7utTAwBjlVKDgq+Wfux/CIhfVZEpcxQO9kd
+ ln2FuHhUB8xYcQpAJFjtKFFXUQt3y8Cx4s1OZdHrY8WNAVJG6q2KvKaSsSgb0bK0Ks75
+ 9tVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733914535; x=1734519335;
+ d=1e100.net; s=20230601; t=1733914539; x=1734519339;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vq7Et1+06yoU+SrfNejcP7FvAUznzZZKURsbScNxGrA=;
- b=bx0yvQRmesmdrmV4i1+9mpr1F4396NMNebRyf55paOE+3ArLkvJljYk0BCM98HNr2w
- EtNfQmJGiCrb9xI4/W3u/xcI+ekS/b9Ye4sHlTMuxJA8osGMe/LdQxHmOPsViX+3s9h/
- JBqQl0iIkZt4QPSl30cYL91XwisdRRHN/+hjhT43/qYEVu/uWMBifXoDpkNxmhguKze2
- O3QwPqfkmmcl6DOvScLXB6PXSA4Ih57ibwyRKoozeWJy+90S8+RTE2PoS4W1s16PEVvW
- 6Cww8NY63pDeCay+F+1gqHlPgwhJCyHj9MELrz3LtJ1NTmm3opbqlhsy8mYo2il5HhkJ
- BEQA==
+ bh=1Pa4i6SSo0ziuImDLfRHe3DBSlYndj2von0Q32AANuI=;
+ b=OyByVo8zxR8tNnkuaZJdR0kMN7IO/G4Wn9utdnEtHoxKVCdWLX9+k9mUE6F1HMPHOW
+ eYGq20zK3gD1DR6wfrMYAMEi/ELNM50YnzqFuM8wOq+dx+ty/iZoXbDF3MngxFuw6No9
+ sQpJ4np5bvmHfwge12NmWStwLjkv1KtVBbk/kML6ECuQNm3Ibz4KajbHNmpAyOQ9Nhmw
+ 4ZBh130BBi8vtTb9UotmcsW2kb1cI5urOfpBdNFG1lgpeQ+cCaO4JterrsgQx1/p2ltM
+ iDXIyyRmgl0SJ7IW40/wHl+KjlgBTtayq0YL18vBTy/+lCNnSEnn9DFXdWYm+izwl67b
+ lPPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW92S4FSxJmzJGZIeSM+Mm4gPj4dog9HNzxzmYPvizDNvkCgQtYQHkXCcNLTtrYjb6DaDb751E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7njjVyAPQDzl7dLiT7P3sN5g7eyDM9j+53enywsKJXae4Gc/J
- A8lluauz+fPnL58V5xOAw/iTfADq3VWXRdWJtS9j8ihbJPPV4BkmEayuFB7TMwU=
-X-Gm-Gg: ASbGncvizmqp1ptnvlke7uxSNbWFVYndfQJ2Jgp6S5wlyKvqCgkQwglDyRseb3GThqr
- PgEpYA04yRqwYFc/L/uSm6+80jKdEfdVOrmZSZBtEUNslSpwqWIWQWRS/Fc8SqVbpmXDZfRgaiH
- xRHo68o8dGYTSfCtUKIhGfa+evwwAss2wru+Q+bSvo+4FUnchQ3vzoBD453UY2qXdrg7B33WTWw
- +2Dg3gFigY2YUKeT8mi2qfH54KogcBtgCaSQeWZwXwcO20kqVjqknkrXWi+YRvyyyYbj8TUsDgR
- Srhads+2twHXL+Lrx4Tp5YsveQvb1dM=
-X-Google-Smtp-Source: AGHT+IFm1vYhSH3XIgLJTxZbaQFoP3kE8Im+62fEc3L17VkLQgOsCZx1Swun00YdiXNv0m5al+3bqw==
-X-Received: by 2002:a05:6402:4008:b0:5d0:ced8:d22d with SMTP id
- 4fb4d7f45d1cf-5d43314d119mr5792678a12.22.1733914535491; 
- Wed, 11 Dec 2024 02:55:35 -0800 (PST)
+ AJvYcCXBUHvudLT4kjFMYKLmNtsj5roWDQgwzpUZWJqrCfzCvQCY7x2bG27rkIPL7gNOxbcMpWxD4EE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwnVXajgOy3zbkVLvLPmrZH3hSKoKFI9/EpzI0NcNJgWE4CDKan
+ 9OOxpe0+MyN59t7VAUca6rd4WJq5oJZurAzHI39F1Ayf/HsLX9ZM5GurWymOoeE=
+X-Gm-Gg: ASbGncu4C+fANeW+BnToZGyJe2PHvCfBoUkqV9SNrwCTCFZnSWK2T1DX9H4oxR5PY3n
+ 0bVI1If3+m8lK5y6ffnccCNvM08BYForE6hrEPrrqs/rQS5kvnKNJi64HeVPwm+a4/SThRhRDaQ
+ StnGQjBKxUS56LtxDerktGFs3+JyVb3O9DC0o5frIJ80ahpNbRaKf79N0fKJdRPrxOAYHbx4kYr
+ ShkHjl95lvxu3N6reNgpYFpObAUyW05L7PIKiwqnXw1o5X1X8rV5rVY3+IaJHPjdJ4Xrq3/a7u1
+ ZoJ7VTGnE1M/zG3Wl/YYfH5KbGVZLH0=
+X-Google-Smtp-Source: AGHT+IE3/Zv+lKjDiKfZYF0rO1HoGlqlfgeka/9mctJSusFEkD3h2AS4DOLMF0IRpElCumETE622Pw==
+X-Received: by 2002:a17:907:84c2:b0:aa6:824c:4ae5 with SMTP id
+ a640c23a62f3a-aa6b1505cc2mr176234066b.56.1733914539129; 
+ Wed, 11 Dec 2024 02:55:39 -0800 (PST)
 Received: from localhost.localdomain (ppp176092181030.access.hol.gr.
  [176.92.181.30]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.33
+ a640c23a62f3a-aa67e652b1dsm508006566b.172.2024.12.11.02.55.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 02:55:35 -0800 (PST)
+ Wed, 11 Dec 2024 02:55:38 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	trini@konsulko.com
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Simon Glass <sjg@chromium.org>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Peter Korsgaard <peter@korsgaard.com>,
  Roman Stratiienko <r.stratiienko@gmail.com>,
@@ -89,9 +88,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nam Cao <namcao@linutronix.de>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH v1 7/8] lmb: Remove lmb_alloc_base_flags()
-Date: Wed, 11 Dec 2024 12:54:48 +0200
-Message-ID: <20241211105504.453234-8-ilias.apalodimas@linaro.org>
+Subject: [PATCH v1 8/8] lmb: Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
+Date: Wed, 11 Dec 2024 12:54:49 +0200
+Message-ID: <20241211105504.453234-9-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
 References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
@@ -113,209 +112,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-lmb_alloc_base() is just calling lmb_alloc_base_flags() with LMB_NONE.
-There's not much we gain from this abstraction, so let's remove the
-former add the flags argument to lmb_alloc_base() and make the code
-a bit easier to follow.
+lmb_alloc_addr_flags() is a wrapper for _lmb_alloc_addr() and it's the
+only function using it. Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
+and remove the wrapper.
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- boot/image-board.c          | 18 +++++++++++-------
- boot/image-fdt.c            |  5 +++--
- include/lmb.h               |  7 +++----
- lib/efi_loader/efi_memory.c |  4 ++--
- lib/lmb.c                   | 19 +++----------------
- test/lib/lmb.c              |  8 ++++----
- 6 files changed, 26 insertions(+), 35 deletions(-)
+ include/lmb.h | 2 +-
+ lib/lmb.c     | 7 +------
+ 2 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/boot/image-board.c b/boot/image-board.c
-index 070ada007185..4e86a9a22719 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -565,9 +565,11 @@ int boot_ramdisk_high(ulong rd_data, ulong rd_len, ulong *initrd_start,
- 			lmb_reserve(rd_data, rd_len, LMB_NONE);
- 		} else {
- 			if (initrd_high)
--				*initrd_start = (ulong)lmb_alloc_base(rd_len,
--								      0x1000,
--								      initrd_high);
-+				*initrd_start =
-+					(ulong)lmb_alloc_base(rd_len,
-+								    0x1000,
-+								    initrd_high,
-+								    LMB_NONE);
- 			else
- 				*initrd_start = (ulong)lmb_alloc(rd_len,
- 								 0x1000);
-@@ -839,7 +841,8 @@ int boot_get_cmdline(ulong *cmd_start, ulong *cmd_end)
- 
- 	barg = IF_ENABLED_INT(CONFIG_SYS_BOOT_GET_CMDLINE, CONFIG_SYS_BARGSIZE);
- 	cmdline = (char *)(ulong)lmb_alloc_base(barg, 0xf,
--				env_get_bootm_mapsize() + env_get_bootm_low());
-+				env_get_bootm_mapsize() + env_get_bootm_low(),
-+				LMB_NONE);
- 	if (!cmdline)
- 		return -1;
- 
-@@ -872,9 +875,10 @@ int boot_get_cmdline(ulong *cmd_start, ulong *cmd_end)
- int boot_get_kbd(struct bd_info **kbd)
- {
- 	*kbd = (struct bd_info *)(ulong)lmb_alloc_base(sizeof(struct bd_info),
--						       0xf,
--						       env_get_bootm_mapsize() +
--						       env_get_bootm_low());
-+							     0xf,
-+							     env_get_bootm_mapsize() +
-+							     env_get_bootm_low(),
-+							     LMB_NONE);
- 	if (!*kbd)
- 		return -1;
- 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index d717f6690729..9d1598b1a93c 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -187,7 +187,8 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
- 			lmb_reserve(map_to_sysmem(of_start), of_len, LMB_NONE);
- 			disable_relocation = 1;
- 		} else if (desired_addr) {
--			addr = lmb_alloc_base(of_len, 0x1000, desired_addr);
-+			addr = lmb_alloc_base(of_len, 0x1000, desired_addr,
-+					      LMB_NONE);
- 			of_start = map_sysmem(addr, of_len);
- 			if (of_start == NULL) {
- 				puts("Failed using fdt_high value for Device Tree");
-@@ -216,7 +217,7 @@ int boot_relocate_fdt(char **of_flat_tree, ulong *of_size)
- 			 * for LMB allocation.
- 			 */
- 			usable = min(start + size, low + mapsize);
--			addr = lmb_alloc_base(of_len, 0x1000, usable);
-+			addr = lmb_alloc_base(of_len, 0x1000, usable, LMB_NONE);
- 			of_start = map_sysmem(addr, of_len);
- 			/* Allocation succeeded, use this block. */
- 			if (of_start != NULL)
 diff --git a/include/lmb.h b/include/lmb.h
-index 5e59915340b7..d481972a6686 100644
+index d481972a6686..76fb82b197a9 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -91,11 +91,10 @@ long lmb_add(phys_addr_t base, phys_size_t size);
- long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags);
- 
- phys_addr_t lmb_alloc(phys_size_t size, ulong align);
--phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr);
- phys_size_t lmb_get_free_size(phys_addr_t addr);
- 
- /**
-- * lmb_alloc_base_flags() - Allocate specified memory region with specified
-+ * lmb_alloc_base() - Allocate specified memory region with specified
-  *			    attributes
-  * @size: Size of the region requested
-  * @align: Alignment of the memory region requested
-@@ -108,8 +107,8 @@ phys_size_t lmb_get_free_size(phys_addr_t addr);
+@@ -123,7 +123,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
   *
   * Return: Base address on success, 0 on error.
   */
--phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
--				 phys_addr_t max_addr, uint flags);
-+phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
-+			   uint flags);
+-phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint flags);
++phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags);
  
  /**
-  * lmb_alloc_addr() - Allocate specified memory address with specified attributes
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index 34e2b9e18ef0..1212772471e3 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -472,7 +472,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 	switch (type) {
- 	case EFI_ALLOCATE_ANY_PAGES:
- 		/* Any page */
--		addr = (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE,
-+		addr = (u64)lmb_alloc_base(len, EFI_PAGE_SIZE,
- 						 LMB_ALLOC_ANYWHERE, flags);
- 		if (!addr)
- 			return EFI_OUT_OF_RESOURCES;
-@@ -480,7 +480,7 @@ efi_status_t efi_allocate_pages(enum efi_allocate_type type,
- 	case EFI_ALLOCATE_MAX_ADDRESS:
- 		/* Max address */
- 		addr = map_to_sysmem((void *)(uintptr_t)*memory);
--		addr = (u64)lmb_alloc_base_flags(len, EFI_PAGE_SIZE, addr,
-+		addr = (u64)lmb_alloc_base(len, EFI_PAGE_SIZE, addr,
- 						 flags);
- 		if (!addr)
- 			return EFI_OUT_OF_RESOURCES;
+  * lmb_is_reserved_flags() - Test if address is in reserved region with flag
 diff --git a/lib/lmb.c b/lib/lmb.c
-index ffad7ec12eb5..bdaaa634abd1 100644
+index bdaaa634abd1..7ca44591e1d7 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -731,24 +731,11 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
- 
- phys_addr_t lmb_alloc(phys_size_t size, ulong align)
- {
--	return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE);
-+	return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE, LMB_NONE);
+@@ -748,7 +748,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
+ 	return alloc;
  }
  
--phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+-static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
++phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
+ {
+ 	long rgn;
+ 	struct lmb_region *lmb_memory = lmb.available_mem.data;
+@@ -772,11 +772,6 @@ static phys_addr_t _lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags
+ 	return 0;
+ }
+ 
+-phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint flags)
 -{
--	phys_addr_t alloc;
--
--	alloc = _lmb_alloc_base(size, align, max_addr, LMB_NONE);
--
--	if (alloc == 0)
--		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
--		       (ulong)size, (ulong)max_addr);
--
--	return alloc;
+-	return _lmb_alloc_addr(base, size, flags);
 -}
 -
--phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
--				 phys_addr_t max_addr, uint flags)
-+phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
-+			   uint flags)
+ /* Return number of bytes from a given address that are free */
+ phys_size_t lmb_get_free_size(phys_addr_t addr)
  {
- 	phys_addr_t alloc;
- 
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index 971614fd8314..fcb5f1af532a 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -128,7 +128,7 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2, alloc_64k_addr, 0x10000,
- 		   ram_end - 4, 4, 0, 0);
- 	/* alloc below end of reserved region -> below reserved region */
--	b = lmb_alloc_base(4, 1, alloc_64k_end);
-+	b = lmb_alloc_base(4, 1, alloc_64k_end, LMB_NONE);
- 	ut_asserteq(b, alloc_64k_addr - 4);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 4, 0x10000 + 4, ram_end - 4, 4, 0, 0);
-@@ -138,7 +138,7 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 	ut_asserteq(c, ram_end - 8);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 4, 0x10000 + 4, ram_end - 8, 8, 0, 0);
--	d = lmb_alloc_base(4, 1, alloc_64k_end);
-+	d = lmb_alloc_base(4, 1, alloc_64k_end, LMB_NONE);
- 	ut_asserteq(d, alloc_64k_addr - 8);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 8, 0, 0);
-@@ -163,7 +163,7 @@ static int test_multi_alloc(struct unit_test_state *uts, const phys_addr_t ram,
- 		   alloc_64k_addr - 8, 4, alloc_64k_addr, 0x10000,
- 		   ram_end - 8, 4);
- 	/* allocate again to ensure we get the same address */
--	b2 = lmb_alloc_base(4, 1, alloc_64k_end);
-+	b2 = lmb_alloc_base(4, 1, alloc_64k_end, LMB_NONE);
- 	ut_asserteq(b, b2);
- 	ASSERT_LMB(mem_lst, used_lst, 0, 0, 2,
- 		   alloc_64k_addr - 8, 0x10000 + 8, ram_end - 8, 4, 0, 0);
-@@ -363,7 +363,7 @@ static int test_noreserved(struct unit_test_state *uts, const phys_addr_t ram,
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 0, 0, 0, 0, 0, 0, 0);
- 
- 	/* allocate a block with base*/
--	b = lmb_alloc_base(alloc_size, align, ram_end);
-+	b = lmb_alloc_base(alloc_size, align, ram_end, LMB_NONE);
- 	ut_assert(a == b);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1,
- 		   ram + ram_size - alloc_size_aligned,
 -- 
 2.45.2
 
