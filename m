@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D79E7717F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 02:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7257E7717F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Dec 2024 02:17:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F1B680219;
-	Wed, 11 Dec 2024 03:17:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69F7980234;
+	Wed, 11 Dec 2024 03:17:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uhySUnsc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pdG5o93A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF9A280207; Wed, 11 Dec 2024 03:17:09 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id F18B08021F; Wed, 11 Dec 2024 03:17:11 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FAAE801FE
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 03:17:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2123380210
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 03:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-71e1158fe3eso438429a34.1
- for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 18:17:05 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-71decc7de4eso805105a34.2
+ for <u-boot@lists.denx.de>; Tue, 10 Dec 2024 18:17:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733883424; x=1734488224; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=oMTPy93NewWGtFcNDmISPBf+EnXAcOkMSCODJmeMmA8=;
- b=uhySUnscNjbot8bwo5nhXmM9/V9A0ZynA7JL2itd0UEDKTZLGhXnKwFDhIz0Mkae94
- vgMJPiMWNodNFbh52WSPkQGDSGYL5JpZtuCpU72WaQMaimTylhs/eqROU7ZMw6tmiWXA
- 5IGl15SMP8vNIfYjc1DWOihhk5KHpE74YkTHiqBwqffih5mhIm1DtfzgoymPxByBxeoW
- uKSfN3fuYV1OFr5u6ekWJzFGbCyGLicBa+R9LeQ8i3GelbjjavJJZVmpSAFM6JMksE2b
- pt2WfV7jH6ZjlniZW61Wg+jwy2LoeL89vpbPIk5tUtLy+i1dPGqCGertSQyU5NvPqnYz
- xmjw==
+ d=linaro.org; s=google; t=1733883426; x=1734488226; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z/V6Slifq/SZc9zepx0sUboIXo723LgvGKKgmbOvzOI=;
+ b=pdG5o93AUTfGDIJSTkiYmiZsrok2yGpCcCeoHXCb3Fd80hCV5/r0PRoiZxHwZiD+im
+ M3nFJgkdCRRyYcgXCLAcjwznY8otOLJVRSTOYh9itdUzIZKFqpYKAWeDhhPM/wgoZc7r
+ 1Nn4ggWNpyshrzMttV/1IVvKiT/mOIKrMW1obdDUmDg+CUU1FUeqQvtgDwv6qDJs+Yuo
+ a8FAaYQp/PL1RO9nO6RLy2f3aaL8H8+md57ZnJEtllc1JZrz1/MrOpWT0CXVCCbbt5oV
+ kyZJH066XCYuI1sCG5o6mfijVeldnJMupbvoCNjTfd6vP6+1/lNY1JD+hGEhrnqmmLwR
+ rNzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733883424; x=1734488224;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oMTPy93NewWGtFcNDmISPBf+EnXAcOkMSCODJmeMmA8=;
- b=u4Osj8pOBRReVDips7nRCC+DjdvDEph4x82cS9D/PAHF1MeqHYY7Aovd5BYghzDyVq
- D6yL0GekOFr078gzqLTqfSAVf/3knMzZJ7U3vyfm/8F/BbiHuibC63+a8N459ySlpl8j
- C2LORLVKerT8k3zQu0uvoWm0qspODeUGi/Hf1vYKUAKpmBD1Rsh9Q1MVGHvcsTHiCdD8
- DinwrAJ9Mfk92AEH+g53D6oI7MGd6ymC21k4LJJaQG0dOhsoK3HJj9ntjZ4ZviJ/IPcp
- PcZxWQTRxFH0pZInVBKGcUakt8ZNcqvQEhMfkmv8Lj4UBOtc3NVqkFds/aYWHl8wf7A7
- h7vw==
+ d=1e100.net; s=20230601; t=1733883426; x=1734488226;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z/V6Slifq/SZc9zepx0sUboIXo723LgvGKKgmbOvzOI=;
+ b=WP94GwqCrqn1nxtHypEZiVWbne8XDXIc788raYOSyg1n2WEgxErF0DaL9EkT7Kv75u
+ ZysGGredi+p5VgUy0lPVT74aZm5jkDFDThFtx10dAFqOXLyaiZWrT9QBbohfu94zajt7
+ RtBO8TiywnzsUlB37TIUSi1aYtAuAOVQhIb3xH1juNCO17bDJelyZZYVzBeoATS9wP98
+ NDEJdv/wffSV0kYWoVwiEG3DACazwT/w/DELLZBioX6MEPiGvc5szGxv+4e/fc64QtnV
+ 6WZfTanqxT1Hy8Z13k/D/4XnUfxSOIu9y8f4m2dvE/heVDYYFOAF0YRkfTULYrfqwGCs
+ rxNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvb+SmzKP4zZxX6b69fexpVwMou5tQCutKfvRSd0cDAGsR6nAfWkWhrfLQkcbtuRSwHNpN178=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdOpTCzEiKyN6hiNCNSYuSUQnin2X/7MJ2ztJrxnlWxhbwSjfv
- 97qmTra1mTZOLhUSlrUzPNihSMfd+jLNH3rFO6kgIbZdJceO5pYYoZCUM+cDTOVBAR/hmWKPpsN
- k2t8=
-X-Gm-Gg: ASbGncu/TQqCBHbM2StnUX8MKhi3tq2avFVwXDNn1HltT6qk7IPp0ee6w+YhJOJNGSE
- dyTK26xCQ4mI9D1RPJ6aUmRytlIhrYnKT4dXpQunQ2G45QOl94z7/gdJHtziOGx3heq8jaYEuIn
- ePRGKXPQSmjOxVl2jyRt3fnkY3fHjvJc6ObGTdgSvlCcUQCTjfc/IpZx98Xxb4QmP5Aj3iEjRiI
- ovO7rnPFmWQ9JUmlgjQujGWf0CTs/lMaB0mBoBJG6FJy3ecJugALACVrgs=
-X-Google-Smtp-Source: AGHT+IHmiheXuwOVIAEmOYTqBm/YiB3wrXzLa041FXqQ2EbNn0RrWXLoOPqRoH/9v0ve7lvIQv41mg==
-X-Received: by 2002:a05:6830:2650:b0:717:f666:9559 with SMTP id
- 46e09a7af769-71e197b7e1bmr652107a34.9.1733883423876; 
- Tue, 10 Dec 2024 18:17:03 -0800 (PST)
+ AJvYcCUXCXMrPP0tElbgl7ON3E6WIqAF8tqc4BvFkfB4DD8mJd0kmP5qfpqR5Wui1Z4SZWb4rrUbbt4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxO7W+0LSngmbErfrqEcJBgbuM3qTguTZHSulBU+xRZzOU/Jy+x
+ lbTRzvMMcgbkSJxzWLpAo9ZpHXrtX330U8oSm8AheF5CmBN+2cx6ZzyvAbpDFN8=
+X-Gm-Gg: ASbGncuSG3S1FSIgVbBxyUjd0YNEysq5M+Q+/IrMBqu0YzaSi/yYVIvZch2oZhPWASX
+ 4zZ4PQTKDUSkPOhHDh6zt7YXCrW/nxK5kX/lGVXNR2QlNMTQUvUi30Hf/loy/XmLke/mt9NuZXK
+ +B12vs6tMiczbDbgiMOjhEFnvstJm3A4xJgTLO4mZ6hepWJwVq/F6ohuY8Lr2TyNlOyt/uw9Ulf
+ k7jZqBZXFDKSboBxfEpkIg4SzuFc30pdOgWrM0VuCurHqcHQvUODUzRbFc=
+X-Google-Smtp-Source: AGHT+IHyiAkN31X5DHXvIclLmG17l/Kv3G+wXY38p8sPE/KLW9g02UyruSwi06iHm5R5/7o5X1umlQ==
+X-Received: by 2002:a05:6830:6d89:b0:718:6da0:72b with SMTP id
+ 46e09a7af769-71e197b7692mr661231a34.7.1733883426417; 
+ Tue, 10 Dec 2024 18:17:06 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71e1d74575bsm23958a34.7.2024.12.10.18.17.03
+ 006d021491bc7-5f2793225d5sm2791021eaf.42.2024.12.10.18.17.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2024 18:17:03 -0800 (PST)
+ Tue, 10 Dec 2024 18:17:05 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -77,10 +77,13 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/2] lmb: Fix reserving the same region multiple times
-Date: Tue, 10 Dec 2024 20:17:00 -0600
-Message-Id: <20241211021703.2333-1-semen.protsenko@linaro.org>
+Subject: [PATCH v2 2/2] boot: fdt: Handle already reserved memory in
+ boot_fdt_reserve_region()
+Date: Tue, 10 Dec 2024 20:17:02 -0600
+Message-Id: <20241211021703.2333-3-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241211021703.2333-1-semen.protsenko@linaro.org>
+References: <20241211021703.2333-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,42 +102,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is intended to be picked up for the v2025.01 release.
+The boot_fdt_add_mem_rsv_regions() function can be called twice, e.g.
+first time during the board init (as a part of LMB init), and then when
+booting the OS with 'booti' command:
 
-Since commit 1d9aa4a283da ("lmb: Fix the allocation of overlapping
-memory areas with !LMB_NONE") the lmb_add_region_flags() returns -1 when
-the caller tries to add the already existing region with !LMB_NONE
-flags (it was returning 0 before that patch). That causes
-boot_fdt_reserve_region() function to print erroneous error messages
-when it's called consequently more than one time.
+    lmb_add_region_flags
+    lmb_reserve_flags
+    boot_fdt_reserve_region
+    boot_fdt_add_mem_rsv_regions
+               ^
+               |
+               +-----------------------+
+               | (1)                   | (2)
+    lmb_reserve_common        image_setup_linux
+    lmb_init                  ...
+    initr_lmb                 do_booti
+    board_init_r              'booti'
 
-Make lmb_add_region_flags() return -EEXIST when the already added region
-with !LMB_NONE flags is being added, and then check that error code in
-boot_fdt_reserve_region() to avoid printing the misleading error
-messages.
+That consequently leads to the attempt of reserving the same memory
+areas (described in the 'reserved-memory' dts node) in LMB. The
+lmb_add_region_flags() returns -EEXIST error code in such cases, but
+boot_fdt_reserve_region() handles all negative error codes as a failure
+to reserve fdt memory region, printing corresponding error messages,
+which are essentially harmless, but misleading. For example, this is the
+output of 'booti' command on E850-96 board:
 
-This series fixes all 3 found cases (discussed at [1]) for the false
-positive error messages. All unit tests pass in sandbox U-Boot.
+    => booti $loadaddr - $fdtaddr
+    ...
+    ERROR: reserving fdt memory region failed
+           (addr=bab00000 size=5500000 flags=2)
+    ERROR: reserving fdt memory region failed
+           (addr=f0000000 size=200000 flags=4)
+    ...
+    Starting kernel ...
 
+The mentioned false positive error messages are observed starting with
+commit 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory
+areas with !LMB_NONE"), which removes the check for the already added
+memory regions in lmb_add_region_flags(), making it return -1 for
+!LMB_NONE cases. Another commit 827dee587b75 ("fdt: lmb: add reserved
+regions as no-overwrite") changes flags used for reserving memory in
+boot_fdt_add_mem_rsv_regions() from LMB_NONE to LMB_NOOVERWRITE. So
+together with the patch mentioned earlier, it makes
+lmb_add_region_flags() return -1 when called from
+boot_fdt_reserve_region().
+
+Since then, the different patch was implemented, returning -EEXIST error
+code in described cases, which is:
+
+   lmb: Return -EEXIST in lmb_add_region_flags() if region already added
+
+Handle -EEXIST error code as a normal (successful) case in
+lmb_reserve_flags() and don't print any messages.
+
+Fixes: 1d9aa4a283da ("lmb: Fix the allocation of overlapping memory areas with !LMB_NONE")
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 Changes in v2:
-  - Split the original series by two separate series (cleanups will be
-    sent out as a different one)
-  - Collected all R-b and A-b tags from review
-  - Patch #1: Removed the check for exactly the same region, and return
-    -EEXIST in the branch handling overlapping regions instead
-  - Reworded the commit messages slightly
+  - Added R-b tag from Ilias
+  - Reworded the commit message a bit, reflecting changes in the lmb patch
 
-[1] https://lists.denx.de/pipermail/u-boot/2024-December/574123.html
+ boot/image-fdt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Sam Protsenko (2):
-  lmb: Return -EEXIST in lmb_add_region_flags() if region already added
-  boot: fdt: Handle already reserved memory in boot_fdt_reserve_region()
-
- boot/image-fdt.c |  2 +-
- lib/lmb.c        | 26 +++++++++++++-------------
- test/lib/lmb.c   |  2 +-
- 3 files changed, 15 insertions(+), 15 deletions(-)
-
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 3d5b6f9e2dc7..73c43c30684f 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -77,7 +77,7 @@ static void boot_fdt_reserve_region(u64 addr, u64 size, enum lmb_flags flags)
+ 		debug("   reserving fdt memory region: addr=%llx size=%llx flags=%x\n",
+ 		      (unsigned long long)addr,
+ 		      (unsigned long long)size, flags);
+-	} else {
++	} else if (ret != -EEXIST) {
+ 		puts("ERROR: reserving fdt memory region failed ");
+ 		printf("(addr=%llx size=%llx flags=%x)\n",
+ 		       (unsigned long long)addr,
 -- 
 2.39.5
 
