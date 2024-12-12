@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 024D7E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:12:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33E19E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:12:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 724C48031E;
-	Thu, 12 Dec 2024 23:10:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CCC8D80296;
+	Thu, 12 Dec 2024 23:11:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GWH7c/a0";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hV5BbNLy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79B198031E; Thu, 12 Dec 2024 23:10:57 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 3C9BD80288; Thu, 12 Dec 2024 23:11:06 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 116FF802F2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:10:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE870801A0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:11:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,20 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734041450; bh=/VsA6szMy7OBm0Mj6GnntfzmErFjNKPFIaf8TjFgCPo=;
- b=GWH7c/a0bMwY/A0D5bmVJwBsb/wORb/I2noamAy1UWdmnp7RBpbLZheitAZbld8A0Xo72kN8Z
- QMvqsSlRqVKDUcsRK6UTOHtbQQtvhneKLKXyL5HKuOra5Aths4hfDjA0PdWaUlJYe3n9AyvVbr7
- sTOost7dzngYodLBj3RW55qYv1jJL6TOCFRlnXttaAb9H8djLtfGR6ysKnu9vZaBGE37GJysQmJ
- 6Q9OnmBuO1z2gZomSB6XpjOriRHLWNsRqApqs8lC35syruxwV3Pt+ITJDiETDGnZS8ORl1zIkHx
- DWj4gFKnf+zP36H1S12O2FRsdaercl6SZTRj1MlPyW6Q==
+ t=1734041458; bh=Gp3oQiMNLjYjbJtcnx06Rv8Gn+feHsaHDdWB4hRqPhE=;
+ b=hV5BbNLyQVg7FWlX0MezG4rXfrcE83v5jhQTUSwCgpB2Gr0KthYaJwTa0QTvHQZf13frqXuoU
+ oUUv03g70tPqZvlw+p/CMxWujM8usaFnB+Dfxt1vt9vdBJfugPFvPGBB/PZQZ17MP0IItjt8I4a
+ TNP056gGxS8Fnz/odHCP4IX0a4a1gkoVIYBKThkxs+8WWyO+o0kXnZI2o4BG6cogxcb+Xe+b0P4
+ y15kHFX0jKz/zbZYew4Yze/achktPLvupWeqr614xREwj+l+95wzytO0GFo8N8I5cZSlH5qzpLH
+ +L5Dyhm+z+Qk+yXNrGWv555zO0ZR7nkUEMERjT8TfTiQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 10/11] rockchip: rk3288-firefly: Fix slow Ethernet initializion
-Date: Thu, 12 Dec 2024 22:09:43 +0000
-Message-ID: <20241212221000.94501-11-jonas@kwiboo.se>
+Subject: [PATCH 11/11] rockchip: rk3288-firefly: Change to use FIT
+Date: Thu, 12 Dec 2024 22:09:44 +0000
+Message-ID: <20241212221000.94501-12-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241212221000.94501-1-jonas@kwiboo.se>
 References: <20241212221000.94501-1-jonas@kwiboo.se>
@@ -52,8 +52,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 675b5f69a511ed8f0b3fc8cb
+ 207.246.76.47
+X-ForwardEmail-ID: 675b5f6da511ed8f0b3fc8dd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,53 +70,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For some reason the Ethernet PHY reset delay is set to 1 second, this
-cause an unneccecery long boot delay.
-
-Firefly-RK3288 use RTL8211 Ethernet PHY, datasheet list an initial 10ms
-delay and then a 30-76ms delay before accessing registers.
-
-Change to use 80ms delay instead of a full second to speed up Ethernet
-initializion in U-Boot.
-
-Also enable PHY_REALTEK, DM_ETH_PHY and PHY_GIGE to improve Ethernet PHY
-support in U-Boot.
+Change to use FIT and FIT_SIGNATURE when loading U-Boot proper in SPL to
+allow checksum validation and fallback loading of FIT from a different
+mmc device.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3288-firefly-u-boot.dtsi | 4 ++++
- configs/firefly-rk3288_defconfig        | 3 +++
- 2 files changed, 7 insertions(+)
+ configs/firefly-rk3288_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm/dts/rk3288-firefly-u-boot.dtsi b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-index 13f5be27a969..b7d13bcb860d 100644
---- a/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-@@ -48,6 +48,10 @@
- 	bootph-some-ram;
- };
- 
-+&gmac {
-+	snps,reset-delays-us = <0 10000 80000>;
-+};
-+
- &gpio7 {
- 	/delete-property/ bootph-all;
- 	bootph-pre-ram;
 diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index a79e217c7adf..95fb20b8b24c 100644
+index 95fb20b8b24c..d8a671b7a8a4 100644
 --- a/configs/firefly-rk3288_defconfig
 +++ b/configs/firefly-rk3288_defconfig
-@@ -58,6 +58,9 @@ CONFIG_MISC=y
- CONFIG_ROCKCHIP_EFUSE=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_PHY_GIGE=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PINCTRL=y
+@@ -18,9 +18,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-firefly.dtb"
+ CONFIG_MISC_INIT_R=y
+ CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+@@ -92,4 +98,5 @@ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+ CONFIG_CONSOLE_SCROLL_LINES=10
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_SPL_CRC32=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.47.1
 
