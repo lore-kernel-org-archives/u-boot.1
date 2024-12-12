@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE3FE77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C73EE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:23:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD22E8023A;
-	Thu, 12 Dec 2024 11:21:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F8CB8025C;
+	Thu, 12 Dec 2024 11:21:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g9FuHTHa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y0ae+1Vn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2548A80219; Thu, 12 Dec 2024 11:21:39 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id EADC08021F; Thu, 12 Dec 2024 11:21:39 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 422228027D
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:21:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C3AD80285
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:21:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa679ad4265so312376066b.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:21:36 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aa66ead88b3so74575966b.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:21:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1733998896; x=1734603696; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kz197Wh/28h+GZeXhDd1fKkHk6zZCJMwtAYdRCAV+Io=;
- b=g9FuHTHaq0/rZ2YxGlBCxW4Vmc9ROxVQndB4zxEXWsuCVPbgQiQNzEONXaXPIhriim
- alGh4WMHTS09vG326GskSq3tjfAJVLfq88zj/UB4uuDf2tpziUyjeW3pgItBYbgJYeio
- vxr2rYjdOA12/ikkp+2BdOx398twDKB+T/hhKwjC99RnicwpIfdx+kwgEEiFGokdzUOy
- fyWCtlbi3Uc/WhztwV2582usnmo5Jw4usp5uIyBoeDdEFDCBwRw0S4fvGwiZg8CU+EWz
- Gn9MtqyT+aCBvy3sxlkvytkzjddgVBNel2g+6t71O8+JcCdaI/y8Y5yAONSl/R+A2XMa
- 5XsQ==
+ bh=IUbWsHOFXiRRECSzK+NtK1EsU2JRDh0ZCZDMfk1s7Gg=;
+ b=Y0ae+1VnHotgv4ezeL8TEWkqETHYI599jCLI5mSR/qbA1n8+Rg/68G766Y16iwm/C2
+ lqYRRhYWApau23rHZa3BmATrc6ZiKf1n0Z264g5gKA6a+Epgm88hjBqeRcJBJiS4Nx3f
+ GNkCm9qzaIQR6/+ALczE8roNBOSO0nJCPqEZcskx/9BBp/ali3JXHAl1LbkS9Bt28dxO
+ psv3gKYAfpCIkJJOb9zjf1YV4p341On2imINDURq48RrUB8u/CE37I2ODGjTRYriekAr
+ cy8bC/rPrvQQ3+cFrLlzCjSBi+PtEKl4eFDghqdGzB95tN1jjRuZjkO5I/igTBZEo2Z+
+ nM+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1733998896; x=1734603696;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kz197Wh/28h+GZeXhDd1fKkHk6zZCJMwtAYdRCAV+Io=;
- b=N8DRoKBzAIrTJF/HKiKky59YrjH/vVDMpHsny4Ki+vYhPbJhKOgKhmGN10c0yIGMQV
- syEO605r7lyAUYjdBqjDbNnEUfxBP2zoyv/5SOSfaRMdBevxzJdDbnNeVx5ZuI8hw4jO
- ouzPRSeGCz7F91F3jurKQptyoLNU6FxRpcdusZ8MuYHnmJWKTW4dxmGBuTMfBYxtCPqr
- Y5LS39bjA5O+rALD0/lRnfz27QvcwA4c2nsCbzU2/NQeVPTBErmi7UIORWcRIf8yXJ6f
- wG1KKVC4cjLms5egVJ4eM/gFhZPpgvoPNhd+VHHHfA9s9HvYVCuNHCZAXCuNrhM7g4/5
- BNNw==
-X-Gm-Message-State: AOJu0YzyE/jy2V9b2q2PGdeXT4yK4y3enlhIekwsw/se/2rAYCgt9yV4
- SswbDpcQxpIbDzn8y7cBBTTf+p8d76E3x6hn3WwsemghvNepGqtb
-X-Gm-Gg: ASbGnct/vFubtCdecMg8hzk72UI2d91z7fqQajC8WBbrueGE6qAs2YIKEC383+uqvEB
- XjCqCe2kgU/vGCuDIKlV+lEyNTn+qDXoNW4oAScPM/+vWYDQVQX7cbOUGyJw0SoQPEAu9ydISUc
- 0LglOoUtRQMP2UvAZ8E0R+qIVNApRimt/DZKiUtq166uxS/o+qO3gu1uZHQubjBGMaoSh264mYA
- 8W4upb3nZ0q7A0rhV1JB0nEy3lpWxiUTuAOr+ssDgwzWbfR
-X-Google-Smtp-Source: AGHT+IEpvQORyo0whYuuZ+QDzjdH6+ehpwr+//58tu1srTr8oWN+tpMsxeK0cNEKqGSk6zjkuW3y4w==
-X-Received: by 2002:a17:906:32d3:b0:aa6:6d88:3933 with SMTP id
- a640c23a62f3a-aa6c410327emr227610166b.9.1733998895557; 
- Thu, 12 Dec 2024 02:21:35 -0800 (PST)
+ bh=IUbWsHOFXiRRECSzK+NtK1EsU2JRDh0ZCZDMfk1s7Gg=;
+ b=EMNyTNjj2icaxtxm4OUTKEnpE8ZABvsGg/N/6XZunZt7uO4Slu9KrncEaC2NiDkWx2
+ 4ueRwAAyhCAwgfGQJfjakaZYy5AmWOkXdbWHcrqGzvoSeNkAejf7OfSyInBszYM7WeA+
+ ZrePpe70pCsdrJ0BnmcXUlu1LVU8VROdsapQOI3iBzLVZCrOlmATQGNPZGNJjnfrIVUI
+ rhwhXf5AoDiD5aKRxD1uwtR70/Q/ayzN752QUMF1i0lg8mMdH4/SwgT50M6ImCPr+R/N
+ K+dRToENSaiLMSCUNyWRezo+l1HeUyXR/6FQEIwVH4hiCy8XYr1+oHkMh4BDEs1cld8v
+ 6eHQ==
+X-Gm-Message-State: AOJu0Yw8auwVazViDqhdH35M3kwLGVCemYqxQnm2QPx0r4/p4NlG0L9x
+ hnN2kJtwKVR7q30Q8yQeS0KJ9DLUYD5cFMqNEuKQk9wuBtHqqZZc
+X-Gm-Gg: ASbGncuqEmgYWIzn6yjIDIudXMBZYJe6FWJBoCABqFEI5yb8B26DU1uR8KDiDj2PseZ
+ 2DpwCrLnArIVLqUlh24XJe+wQ240Q2IQuYPkKg1XSqttwxRiOcPk/GukAaYOEnwqbWM/Q8J41/y
+ mPRwCZ286LZf7tBXBUZPyc6bVuBmkJpTBemATMJqCnLd53by4s2jbqT8PUDfAhn1Q+RpNZqSM3Z
+ Kz/wfB5mi5TIBchFAPcKQfbt8WXsy7/zp3Iq1cGxcf1F/ZV
+X-Google-Smtp-Source: AGHT+IEhChtLHKxaKczc/eBkOs3cQq0yUTkTB+QezA5r2P1FsPCPSNfX3qw5cnr9v/21VVPyDmlrIQ==
+X-Received: by 2002:a17:906:319a:b0:aa6:800a:1291 with SMTP id
+ a640c23a62f3a-aa6b10f5969mr644751566b.7.1733998896456; 
+ Thu, 12 Dec 2024 02:21:36 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67d6fcd3dsm646818066b.80.2024.12.12.02.21.34
+ a640c23a62f3a-aa67d6fcd3dsm646818066b.80.2024.12.12.02.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 02:21:35 -0800 (PST)
+ Thu, 12 Dec 2024 02:21:36 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 08/12] video: tegra20: dsi: make SOL delay calculation mode
- independent
-Date: Thu, 12 Dec 2024 12:21:15 +0200
-Message-ID: <20241212102119.6466-9-clamor95@gmail.com>
+Subject: [PATCH v1 09/12] video: tegra20: dsi: calculate packet parameters for
+ video mode
+Date: Thu, 12 Dec 2024 12:21:16 +0200
+Message-ID: <20241212102119.6466-10-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241212102119.6466-1-clamor95@gmail.com>
 References: <20241212102119.6466-1-clamor95@gmail.com>
@@ -98,81 +98,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move SOL delay calculation outside of video mode conditions.
+Calculate packet parameters for video mode same way it is done or
+command mode, by halving timings plugged into equations.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dsi.c | 47 +++++++++++++++----------------
- 1 file changed, 22 insertions(+), 25 deletions(-)
+ drivers/video/tegra20/tegra-dsi.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index 97895f37739..b65d2118de9 100644
+index b65d2118de9..6cf6cffc0e4 100644
 --- a/drivers/video/tegra20/tegra-dsi.c
 +++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -698,9 +698,6 @@ static void tegra_dsi_configure(struct udevice *dev,
- 		writel(hact << 16 | hbp, &len->dsi_pkt_len_2_3);
- 		writel(hfp, &len->dsi_pkt_len_4_5);
- 		writel(0x0f0f << 16, &len->dsi_pkt_len_6_7);
--
--		/* set SOL delay (for non-burst mode only) */
--		writel(8 * mul / div, &misc->dsi_sol_delay);
- 	} else {
- 		if (priv->master || priv->slave) {
- 			/*
-@@ -720,31 +717,31 @@ static void tegra_dsi_configure(struct udevice *dev,
- 		value = MIPI_DCS_WRITE_MEMORY_START << 8 |
- 			MIPI_DCS_WRITE_MEMORY_CONTINUE;
- 		writel(value, &len->dsi_dcs_cmds);
-+	}
+@@ -683,12 +683,19 @@ static void tegra_dsi_configure(struct udevice *dev,
+ 		/* horizontal back porch */
+ 		hbp = timing->hback_porch.typ * mul / div;
  
--		/* set SOL delay */
--		if (priv->master || priv->slave) {
--			unsigned long delay, bclk, bclk_ganged;
--			unsigned int lanes = device->lanes;
--			unsigned long htotal = timing->hactive.typ + timing->hfront_porch.typ +
--					       timing->hback_porch.typ + timing->hsync_len.typ;
+-		if ((mode_flags & MIPI_DSI_MODE_VIDEO_SYNC_PULSE) == 0)
+-			hbp += hsw;
 -
--			/* SOL to valid, valid to FIFO and FIFO write delay */
--			delay = 4 + 4 + 2;
--			delay = DIV_ROUND_UP(delay * mul, div * lanes);
--			/* FIFO read delay */
--			delay = delay + 6;
--
--			bclk = DIV_ROUND_UP(htotal * mul, div * lanes);
--			bclk_ganged = DIV_ROUND_UP(bclk * lanes / 2, lanes);
--			value = bclk - bclk_ganged + delay + 20;
--		} else {
--			/* TODO: revisit for non-ganged mode */
--			value = 8 * mul / div;
--		}
--
--		writel(value, &misc->dsi_sol_delay);
-+	/* set SOL delay */
-+	if (priv->master || priv->slave) {
-+		unsigned long delay, bclk, bclk_ganged;
-+		unsigned int lanes = device->lanes;
-+		unsigned long htotal = timing->hactive.typ + timing->hfront_porch.typ +
-+				       timing->hback_porch.typ + timing->hsync_len.typ;
-+
-+		/* SOL to valid, valid to FIFO and FIFO write delay */
-+		delay = 4 + 4 + 2;
-+		delay = DIV_ROUND_UP(delay * mul, div * lanes);
-+		/* FIFO read delay */
-+		delay = delay + 6;
-+
-+		bclk = DIV_ROUND_UP(htotal * mul, div * lanes);
-+		bclk_ganged = DIV_ROUND_UP(bclk * lanes / 2, lanes);
-+		value = bclk - bclk_ganged + delay + 20;
-+	} else {
-+		/* set SOL delay (for non-burst mode only) */
-+		value = 8 * mul / div;
- 	}
+ 		/* horizontal front porch */
+ 		hfp = timing->hfront_porch.typ * mul / div;
  
-+	writel(value, &misc->dsi_sol_delay);
++		if (priv->master || priv->slave) {
++			hact /= 2;
++			hsw /= 2;
++			hbp /= 2;
++			hfp /= 2;
++		}
 +
- 	if (priv->slave) {
- 		/*
- 		 * TODO: Support modes other than symmetrical left-right
++		if ((mode_flags & MIPI_DSI_MODE_VIDEO_SYNC_PULSE) == 0)
++			hbp += hsw;
++
+ 		/* subtract packet overhead */
+ 		hsw -= 10;
+ 		hbp -= 14;
 -- 
 2.43.0
 
