@@ -4,136 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88AF7E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 08:13:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5730E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 08:28:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D50DF801B6;
-	Thu, 12 Dec 2024 09:13:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DEB5A801BE;
+	Thu, 12 Dec 2024 09:28:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tDMTtAVV";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="11fSXWxL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4934D801BA; Thu, 12 Dec 2024 09:13:00 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20615.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::615])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 72CF2801BF; Thu, 12 Dec 2024 09:28:16 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFEB7801B0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 09:12:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19425801BD
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 09:28:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uQ0fJ0dmwujddIOJ6b1vg2R51PQLPsmLW3nu8oHY4rg5DisdjBL5DrfpZfWWHQEPoNIb+wOPEwF9wAsYeEeE2DN5mQCmCp73BY/0o9KgWPAoLBB7uoaoNG3ikYnorLqxxBvOVN/sBqnIulAoa37Zkm/xEtQw6rpZEReWWcbG30yllZ+ZUzlxWmfDBOvs5A/VOE1ucwVk/wSKSUP8OLDDk1Ky1ekG2EseNjTa4caTKEfedwaSVbjGvUj+EXbG6lyfsdUoaey4qw2XTJ3U3Zcxu5Ms+6X1+NfpWwN+RZI2VL4BFrM5+8BCJQHw4NcCTFPer/95cyJRBkovDX1Tm7s9CA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dNOmmoiiisaSoZ3oqoqM+7Np/mRkYi5Hy8pcsmHQRwU=;
- b=iobYVY3XYIey3mx4IN60cVQtrA+SsrdJ/a2kvVS4ve3yfMvxKp3dB6lpcyDElNxs5Z/ELr5TDaICsjCYN11jHPMcColu9Xu62ztWzB+cAoywsxo4SbY7DzDPaiuBX+CJn/wfnh8Is/DSOEtcA5xK9dI4rLFsb8rnUJBKnhK9SB2O5a5KZnvnalTm/Yn+P0urkVeuHAkYWszifkxh6/mdA3WDuWAZdCfSGYHIAWvuwjosz5ZJBU8R3kh9t8hAXE9fcjDLnsct9YIdeHUiqmIcL/6697N39PJ1HVZqzim3mFAEEdbD+jeFkowRCd2QGJHAaPnYVsX0Ao8atsSfdjyw+A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dNOmmoiiisaSoZ3oqoqM+7Np/mRkYi5Hy8pcsmHQRwU=;
- b=tDMTtAVV0jamoNg8XdXsX/R++/q3jbUMjzsOWegWEEGVGtkMGejzNJiZ9kja+Y6E38iMcktcevDsbppTIdixDqr0/nHRsMrci0RxYBFpU0z8Cnf9VzqS2CfwjjWfa+ex2YQbUPHIGZbexgHbXqlKRuUuPqTAJO1zX1vH1YSu+5M=
-Received: from MN0P220CA0021.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::11)
- by MN0PR12MB6078.namprd12.prod.outlook.com (2603:10b6:208:3ca::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8230.18; Thu, 12 Dec
- 2024 08:12:53 +0000
-Received: from BN1PEPF00004687.namprd05.prod.outlook.com
- (2603:10b6:208:52e:cafe::d4) by MN0P220CA0021.outlook.office365.com
- (2603:10b6:208:52e::11) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.14 via Frontend Transport; Thu,
- 12 Dec 2024 08:12:53 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN1PEPF00004687.mail.protection.outlook.com (10.167.243.132) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.15 via Frontend Transport; Thu, 12 Dec 2024 08:12:52 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 12 Dec
- 2024 02:12:49 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Naman Trivedi <naman.trivedimanojbhai@amd.com>, Senthil Nathan Thangaraj
- <senthilnathan.thangaraj@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: zynqmp: add clock-output-names property in clock nodes
-Date: Thu, 12 Dec 2024 09:12:41 +0100
-Message-ID: <1080e31393c3e1b49735b77e7ddc14d570b83222.1733991159.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=2076b1cc10=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BC60JWD011913;
+ Thu, 12 Dec 2024 09:28:08 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ LVufC5JlnsHKFDP1yDdazga37b4w8aLILJ9qIpWhyyo=; b=11fSXWxLf3BV/lXt
+ 4uSCHnNi+p/RUbjQMcjY38VgKKVsxtS9tImCgW+UH+pNPPoJHYqSurCwoOtXOdyJ
+ S91WVZWNjPieJ4MOVpJDu4O9bP0MGzdbnWkNu41yYv23wyiiU7033G8q4zGeLUrl
+ vv80JSIWH2gNwvByFR2ve/tRVCAGENtvKTTBmUyc+aR1yBCS/1xiYOR5LQnEfShS
+ fRVI9OXF11r/4YuXrqwtpYZG8acHtmHoMFT6Tmxzbq4n0Tco0UsH5mV8j3XKJKe9
+ xgC6AazqIQfNzjXTW7BdQ3Wv2aHeJwpHxD9Qv9dxuZxVI560XAMWMktYsPcUmBKo
+ 72tNCg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43e2w9x0jg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Dec 2024 09:28:07 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3E42C40047;
+ Thu, 12 Dec 2024 09:27:12 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B6B7125C23B;
+ Thu, 12 Dec 2024 09:23:53 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 12 Dec
+ 2024 09:23:53 +0100
+Message-ID: <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com>
+Date: Thu, 12 Dec 2024 09:23:52 +0100
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1921; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=KqNNljjqFctdz42vxpj70wGzrY0dKfoIDpmkF2cNT5s=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSoWb/dTylOzisuCGj9dLIthasmWWfyux8Ln0TcnN+t8
- fe/ucSnjlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjCRD/IMCyYW2SebLGpbWX1m
- vmvcHWWVz+YKpkDRb3ynZGubO/6bc0dJz61ZvvtApBoA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00004687:EE_|MN0PR12MB6078:EE_
-X-MS-Office365-Filtering-Correlation-Id: f4efea71-14e4-4eca-4fbc-08dd1a84c6ac
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?uN/wr8duXo4mTZjqyx1PuUuSr13nsdqZJ/sw+ElreOyVqOyYUQIPqoERsBXd?=
- =?us-ascii?Q?ygqpp8JYpvk0LnBWXXzCfoWu1M6XMwsh+xCGACPYxv+XIma8h9iIRa3pYNTR?=
- =?us-ascii?Q?ZJOlY5DEpckdH2S3/20uD8KOLSz6TYrJrY0OzRFajKJAKpW3/9nZPzzOrVjm?=
- =?us-ascii?Q?AxugNGFAoxuVhVDkbdNgIClyF4KCG+TpX0zi+Rvrx2si2BWxa9cP+iPYZclz?=
- =?us-ascii?Q?bxORER63UKYTW0ZYQon115CfgHXzMjVsYWz41YZMf6HgVprbiJPgcbDBZdBe?=
- =?us-ascii?Q?0LRvV/3J5HaGDnLZNBFkNga4/Se5k3oZmRNTg1P/R3K+rHcsuXGvl9YMHvFU?=
- =?us-ascii?Q?+mSssEqd3h5bvQSVRIjHho1FL6vMnircnUbT4temRKx+uXzHf3Zh9r41P5DZ?=
- =?us-ascii?Q?enEMq/HaAIA4j2HyCDCOWH6xKL+IalFtcoIghJxnnbXp4bD7jCXV6j/JSj0r?=
- =?us-ascii?Q?oFtPa34dkorAFR70IiuMNL7FIygL9vnM/ChJR3GIMAoETTj1vnrtLnIux0zn?=
- =?us-ascii?Q?7O4K/WzeFD5Eys2GJMO0fGh7ssqHUhA7jEqIh+YzLLaNLeO0mv7FUZ1xCoE0?=
- =?us-ascii?Q?eSE1rTz1LUcRorjYQ/5R4kMaaEjEyK+YTFwjdRBrr+l8beYe2Dwl4jHzKItT?=
- =?us-ascii?Q?miTvrWSrcDkZHQFGJyp4tTe4bMC/PdaOtr48IHDK82JNAwqFDrBwJQTsDdrX?=
- =?us-ascii?Q?X1zCKjZnMpOPlmf9vPVac//oOBfn7vXJ+Ux3U14m1Y6DA3K7NvwG54T1aNY3?=
- =?us-ascii?Q?i2zHmRg/Mwa3F9VOMKTNzNixA/aw175rsccPqpjoxHnbNa1T18fK4sg7eqc0?=
- =?us-ascii?Q?rMZVoosvWvtWyuWs0Bd3fcfVpaTKgg14dbtikKowde4+ZQY/umFmw3anGyp1?=
- =?us-ascii?Q?m6zI7MpykeiXNvFmjEI5KLK05ubnuK3McT/8Tw25+NlPtg11zFlWBZPstHKS?=
- =?us-ascii?Q?bnzYg0NwjDk/Ocp1BpINVVAPwMGbAOVN2IGNfqFW9PQPXQdO547+XglB+gGP?=
- =?us-ascii?Q?aQ/8eC5SvR1NHEAqUOtW1OKzbcZwYJFeOA/jvPGc0STTLMHGmDMcwYtC+DBz?=
- =?us-ascii?Q?b4XZxbPH+gvtESqcALGWAAU5aRzMKVd6MHUjqCMQOA9/HODFMmZnFCEqt4Og?=
- =?us-ascii?Q?5Db+qlW2PmdjnEt/HFomATZO+eAy2hHPG06Obn1yrhBSuan/coSOU7DAsyat?=
- =?us-ascii?Q?KnU7/kPjR9vBbdoSpB/J4wQofcz297YhomE0go1f5CU87yWO7bTgkNs7hlYK?=
- =?us-ascii?Q?7Ft5fpLVcjsGoQ1CZBnXYNpG35JffGIltPJz30DDfeo4iDwxy/w6SqpANE0Z?=
- =?us-ascii?Q?CNHTtkCc2b2Rjfx82/lyJTGdpryTyyE0H98h6cCoIBPUA3QOn2ilhU1/XZgA?=
- =?us-ascii?Q?NXPhpmF5nC7MD4ditX8dWSiZ5tu7CKMktwXTqbrUxxzD5kk5tBoEa7HeMlEr?=
- =?us-ascii?Q?O2et11XhcIdP4w9UE9/bcKRrs883GMnV?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2024 08:12:52.6883 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f4efea71-14e4-4eca-4fbc-08dd1a84c6ac
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN1PEPF00004687.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6078
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
+ bank
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, E
+ Shattow <lucent@gmail.com>
+References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
+ <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
+ <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
+ <CADg8p96XXRVn6r-9tSu-h1CANgnayQuEVs8XVUb8eAd8d5kz9A@mail.gmail.com>
+ <7642b0fc-8383-4877-bbc6-22bcd22536fc@foss.st.com>
+ <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,76 +96,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Naman Trivedi <naman.trivedimanojbhai@amd.com>
 
-Replace underscores with hyphens in the clock node names as per
-dt-schema rule.
 
-Also, add clock-output-names property to all clock nodes, so that the
-resulting clock name do not change when clock node name is changed.
+On 12/11/24 19:16, Sughosh Ganu wrote:
+> On Wed, 11 Dec 2024 at 22:20, Patrice CHOTARD
+> <patrice.chotard@foss.st.com> wrote:
+>>
+>>
+>>
+>> On 12/11/24 17:27, Sughosh Ganu wrote:
+>>> On Wed, 11 Dec 2024 at 21:50, Patrice CHOTARD
+>>> <patrice.chotard@foss.st.com> wrote:
+>>>>
+>>>>
+>>>>
+>>>> On 12/7/24 16:57, Tom Rini wrote:
+>>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
+>>>>>
+>>>>>> There are platforms which set the value of ram_top based on certain
+>>>>>> restrictions that the platform might have in accessing memory above
+>>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
+>>>>>> even though the LMB allocator works as expected, when trying to
+>>>>>> allocate memory above ram_top, prohibit this by marking all memory
+>>>>>> above ram_top as reserved, even if the said memory region is from the
+>>>>>> same bank.
+>>>>>>
+>>>>>> [...]
+>>>>>
+>>>>> Applied to u-boot/master, thanks!
+>>>>>
+>>>> Hello
+>>>>
+>>>> This patch is breaking the boot on STM32MP135F-DK.
+>>>>
+>>>> On this platform, we got an area above gd->ram_top,
+>>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
+>>>>
+>>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
+>>>> this area is no more tagged as LMB_NOMAP, because it's previously been
+>>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
+>>>>
+>>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
+>>>>
+>>>> I suggest to revert this patch.
+>>>
+>>> I don't think that this patch should be reverted. If the said platform
+>>> has a reserved memory region above ram_top, I would suggest to either
+>>> a) move the ram_top on this platform so that the op-tee region gets
+>>> marked as no-map in the lmb memory map, or b) do not use the lmb
+>>
+>> In my explanation above, i indicated that before this commit,
+>> this area was marked as LMB_NOMAP in the lmb memory map by boot_fdt_add_mem_rsv_regions().
+>> this is exactly what you described in the possible solution "a)".
+>>
+>> But now with this commit, as lmb_add_memory() is called in lmb_init() the area above ram_top is marked LMB_NOOVERWRITE.
+>> Then later, boot_fdt_add_mem_rsv_regions() is executed, but the area above ram_top can't be marked as
+>> LMB_NOMAP as previously because it's already marked LMB_NOOVERWRITE.
+> 
+> This has been done to ensure that memory above ram_top is not taken
+> into consideration when it comes to U-Boot. The reason why memory
 
-Signed-off-by: Naman Trivedi <naman.trivedimanojbhai@amd.com>
-Acked-by: Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+It was already the case before this commit, ram_top was designed to
+indicate to U-Boot the top address of available RAM,
+see include/asm-generic/global_data.h :
 
- arch/arm/dts/zynqmp-clk-ccf.dtsi | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+	/**
+	 * @ram_top: top address of RAM used by U-Boot
+	 */
+	phys_addr_t ram_top;
 
-diff --git a/arch/arm/dts/zynqmp-clk-ccf.dtsi b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-index 60d1b1acf9a0..385fed8a852a 100644
---- a/arch/arm/dts/zynqmp-clk-ccf.dtsi
-+++ b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-@@ -10,39 +10,44 @@
- 
- #include <dt-bindings/clock/xlnx-zynqmp-clk.h>
- / {
--	pss_ref_clk: pss_ref_clk {
-+	pss_ref_clk: pss-ref-clk {
- 		bootph-all;
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <33333333>;
-+		clock-output-names = "pss_ref_clk";
- 	};
- 
--	video_clk: video_clk {
-+	video_clk: video-clk {
- 		bootph-all;
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <27000000>;
-+		clock-output-names = "video_clk";
- 	};
- 
--	pss_alt_ref_clk: pss_alt_ref_clk {
-+	pss_alt_ref_clk: pss-alt-ref-clk {
- 		bootph-all;
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <0>;
-+		clock-output-names = "pss_alt_ref_clk";
- 	};
- 
--	gt_crx_ref_clk: gt_crx_ref_clk {
-+	gt_crx_ref_clk: gt-crx-ref-clk {
- 		bootph-all;
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <108000000>;
-+		clock-output-names = "gt_crx_ref_clk";
- 	};
- 
--	aux_ref_clk: aux_ref_clk {
-+	aux_ref_clk: aux-ref-clk {
- 		bootph-all;
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <27000000>;
-+		clock-output-names = "aux_ref_clk";
- 	};
- };
- 
--- 
-2.43.0
+> above ram_top also needs to be added is to ensure that this memory
+> also gets passed on to the OS when booting with EFI. If it has to be
+> considered by U-Boot, the value of ram_top needs to be adjusted
+> accordingly. Is that not possible on the platform? If not, the only
+> other solution is to obtain this memory region from the DT, and then
+> configure the MMU.
 
+Currently, ram_top is adjusted on STM32MP platforms, 
+for example in stm32mp135f-dk.dts :
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		optee@dd000000 {
+			reg = <0xdd000000 0x3000000>;
+			no-map;
+		};
+	};
+
+          0xE000 0000  ********************  
+                       *                  *  
+                       *       OPTEE      *  
+                       *    (LMB_NOMAP)   *  
+                       *                  *  
+ram_top = 0xDD00 0000  ********************  
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+                       *                  *
+          0xC000 0000  ********************
+
+On STM32MP platforms, we already obtain all memory regions from DT with 
+property "no-map" and we marked them LMB_NOMAP.
+
+Later we parse the LMB regions, all of these region marked LMB_NOMAP are 
+used to configure our MMU accordingly.
+So, again, we are doing things as you suggested.
+
+This commit now forbids to mark OPTEE memory region with LMB_NOMAP as 
+indicated in DT.
+
+For information, it has impact on all STM32MP platforms (at least 6 boards).
+
+Patrice
+
+
+
+> 
+>>
+>>
+>>> memory map to configure the MMU -- can the MMU configuration logic not
+>>> read the DT to get which regions are to be marked as no-map?
+>>>
+>>> As far as the lmb module is concerned, it is being told through this
+>>> commit to not consider memory above ram_top for allocations, which is
+>>> not an incorrect thing imo.
+>>
+>> That's the case, we don't consider memory above ram_top for allocations,
+>> we only marked it with LMB_NOMAP.
+> 
+> That was because the lmb scope was local. That meant a platform could
+> add any size that it wanted, and then use that map for whatever it
+> fancied. The use of lmb for "allocating" addresses for io-va addresses
+> by the apple iommu is another such case.
+> 
+> -sughosh
+> 
+>>
+>> Thanks
+>> Patrice
+>>
+>>>
+>>> -sughosh
+>>>
+>>>>
+>>>> Patrice
