@@ -4,72 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF44BE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D75E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1A78801A0;
-	Fri, 13 Dec 2024 00:21:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id EF309801BA;
+	Fri, 13 Dec 2024 00:42:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="amPztYeS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iKEVSlVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B5C8801CF; Fri, 13 Dec 2024 00:21:22 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B08D5801CF; Fri, 13 Dec 2024 00:42:09 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15F580196
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:21:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E62EC801BA
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:42:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: ca15fa0d-b8df-11ef-9ddf-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id ca15fa0d-b8df-11ef-9ddf-00505699b430;
- Fri, 13 Dec 2024 00:21:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=yFkmxn63dNwT1J3ATgKVhR+E2koOEahPokO7ZygR86U=;
- b=amPztYeSUh7AZEKa+BgcS7nNBxWW1kXSkE/9VZ9ddGWilbqBPIJUwfYli4PFBy0YZ6LF5KAXH0ijx
- CRQyoknP3PZZ4zN6cjnFZdw8C4+muwEwMuBnuEcrIxXsuKUflTL/8UcNN7IkxunuJYkZrP71uVzyVw
- GUf5TZOtzSg7145UUA7seTM77XvN8WwwKHa9WedEQMWX/s4S5iB3jdp2fXKuWE7SKCLDxXO0I8VdkP
- AgN06X4wSzGFUJUVYUhL4/gq28qOeSMTqScDPoVZzJsLtH2plTUc6ZDPZS63gJ7I108SljZ07mIkj9
- rNuxvrv8Zvh/k706JkzQLha65qO/+Sg==
-X-KPN-MID: 33|fE0dIEqBEvyfV7C/PA/DlWx9mL5fYPqdoudxjM8a4g88N5DCxDG0qtUxupv7uO5
- fAz4CLIbyxZ5ozgq5PBXUz6Uem0CW2XXy/xXTv8mjz7g=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|5ZpLBjg5eUK/en1g2NjN/bpRTHOWB61juRGLvX02g06pw1tJgHgeNt2ojyw9wno
- C8oywlm3IzCVOEDX9oYm9ww==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id ca3acd84-b8df-11ef-b67f-00505699b758;
- Fri, 13 Dec 2024 00:21:18 +0100 (CET)
-Date: Fri, 13 Dec 2024 00:21:18 +0100
-Message-Id: <87y10kwkr5.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: patrice.chotard@foss.st.com, trini@konsulko.com,
- u-boot@lists.denx.de, patrick.delaunay@foss.st.com,
- xypron.glpk@gmx.de, lucent@gmail.com
-In-Reply-To: <CADg8p97N_L-+=kXbo5RYVjQue0iu4uNquC0we6hyM770KRhURw@mail.gmail.com>
- (message from Sughosh Ganu on Thu, 12 Dec 2024 20:24:18 +0530)
-Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
- bank
-References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
- <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
- <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
- <CADg8p96XXRVn6r-9tSu-h1CANgnayQuEVs8XVUb8eAd8d5kz9A@mail.gmail.com>
- <7642b0fc-8383-4877-bbc6-22bcd22536fc@foss.st.com>
- <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
- <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com>
- <8734itxerd.fsf@bloch.sibelius.xs4all.nl>
- <CADg8p958jWAQh2O2A_EECr-+-5Mqm4O5eEMVAZPXUzbw+xAN-w@mail.gmail.com>
- <87zfl1vudj.fsf@bloch.sibelius.xs4all.nl>
- <CADg8p97N_L-+=kXbo5RYVjQue0iu4uNquC0we6hyM770KRhURw@mail.gmail.com>
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6eeca49d8baso11037767b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:42:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734046926; x=1734651726; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K3kB+9cTQ00MWNuXqf8gqHfzQYi6qhNcdAkcq+MCHVY=;
+ b=iKEVSlVmU/Br5ZjdnJ4nL6cDAvVI63ok683AwMPArnmnUZUqHcgad6DKAtdhcElHYV
+ EFooQr1YGQUDJTVVpFzrbKo6g595Hf2MXobgyEVZM/RVd7HxQz+Dqs3mVfqGnIxXOzoU
+ UKdwiDusDmxlHnkBbJk96Bp3UxylZEHsGZLFBq3Ud4kYc/6lO0f+tRwcT7yseIoA5AAt
+ JfDCaUsQ9MrDjKS1dm48EOy6Ax4y+qg/tfsLMksAssCqmOoNQY+lOZrhcHwziXeGwkA2
+ rd/hV6Q0H6etCkJUBhrF1zOljQvS2IURYVrkiLBFbNmO5GCRX5T2d5U0WDEcEptU7ofw
+ An1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734046926; x=1734651726;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K3kB+9cTQ00MWNuXqf8gqHfzQYi6qhNcdAkcq+MCHVY=;
+ b=HBiFTMMdqeDfHF/sTv5NJkvay2JRQmEHWMV3vlOCM1Xq32SHi+bsDo94VEP1EHKENe
+ NsPMURJMebgARVyfnOF+VYM/579H3Zryt751QF+Hcyjclf6OS6Yw/VDy+W7YtrgW5EQ3
+ RXAQval73xykavpkziex6BQexYBKn75xCwrjKNWOVNBpOQ5CJRkecnBpS+eAtNNHysT+
+ exX9u1d+OqWpf+41fh25cRFRs7SgUD1jetWppnAxKG2dCkliOiFinUsCSFzhrg5HNlct
+ 959L44jJn8a3Ym6/+Gq7xpv5MgkZw5+MHIUsOaJxEtqFbT0otXaILOxlH+t6Arf4B9vM
+ v2mQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXurFJWWHnB/AMg/HlwGte+oPO32P8HWg1x1e4CS4/VN2mSu8Cyvdvy/lvkIBpKb0g41yoQf4s=@lists.denx.de
+X-Gm-Message-State: AOJu0YzYKxXHjRBfWkofFrm330mVDmeNaKht2uWskgPifPHwekpkNJoa
+ uVXspnoumfiGPZUOl2ewYDx0pBOkVIX9gwwJZbbHG6tO+ZICV+faljmQHV3Qn6FjxzeQzZVv7pP
+ MnzTTj7Amk3FQERyxXdfYwfWDrhIoqyfyfcUAag==
+X-Gm-Gg: ASbGncsXb11GW7Y3GYvWffVuIaX5JkNj0s3LTzgRvaUehkYGuQlYajW67dAV0IL6WuN
+ AARsigLV7xKy69Aur1gwNRPhWVRsobqFy9W2ayA==
+X-Google-Smtp-Source: AGHT+IGGbDkzF3g5L9DCyOlLqfZnw8fHX2DIMp10y3EdMZS0xPum1uWzKQRgiiaBB1cVxbnPxNpkxWxMQtxkSG8RrLU=
+X-Received: by 2002:a05:690c:360a:b0:6ee:40f0:ddc9 with SMTP id
+ 00721157ae682-6f27a9bf499mr3650467b3.12.1734046925718; Thu, 12 Dec 2024
+ 15:42:05 -0800 (PST)
+MIME-Version: 1.0
+References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 12 Dec 2024 17:41:54 -0600
+Message-ID: <CAPLW+4kYMx2G7ZiAWNwWtkOyDXfjOMag5X0pYJpWHr3jy6+kPg@mail.gmail.com>
+Subject: Re: [PATCH v1 0/8] Cleanup the LMB subsystem
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Nam Cao <namcao@linutronix.de>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,260 +103,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Date: Thu, 12 Dec 2024 20:24:18 +0530
+On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi all,
+>
+> This is v1 of the rfc [0]
+>
+> The LMB subsystem was used opportunistically for a number of years.
+> A while back Sughosh merged it with the EFI subsystem in order to have a
+> common allocator and avoid subsystems overwriting memory they shouldn't.
+>
+> This is an initial cleanup of all the crud we gathered over the years.
+> There's no functional change expected from the patches as they just clean=
+up
+> some abstraction functions and rename a few variables to make more
+> sense.
+>
+> I plan to make even bigger changes -- e.g I don't see the point of
+> having *_alloc() and *_reserve() versions of the functions since they mos=
+tly
+> do the same thing and just cause confusion. lmb_alloc_addr_flags()
+> returning the base address on success makes little sense since we
+> already *request* the address on the function arguments, etc.
+> Since this patchset grew enough already, I'd like to get it in
+> before more refactoring happens.
+>
+> It's worth noting that although some patches slightly increase the code
+> size due to an extra flags argument being carried around, the final
+> result is eventually smaller.
+>
+> # qemu_arm64_lwip_defconfig (version string adds another 20b)
+> add/remove: 0/5 grow/shrink: 15/1 up/down: 568/-628 (-60)
+> Function                                     old     new   delta
+> lmb_alloc_base                                80     324    +244
+> lmb_alloc_addr                                 8     144    +136
+> lmb_reserve                                    8      96     +88
+> version_string                                50      70     +20
+> boot_relocate_fdt                            488     508     +20
+> boot_ramdisk_high                            268     284     +16
+> lmb_add_region_flags                         696     704      +8
+> boot_fdt_reserve_region                      100     108      +8
+> load_serial                                  548     552      +4
+> lmb_alloc                                      8      12      +4
+> image_setup_libfdt                           368     372      +4
+> do_load                                      728     732      +4
+> do_bootz                                     332     336      +4
+> do_booti                                     520     524      +4
+> bootm_run_states                            2176    2180      +4
+> lmb_alloc_addr_flags                           4       -      -4
+> boot_fdt_add_mem_rsv_regions                 284     280      -4
+> lmb_alloc_base_flags                          76       -     -76
+> lmb_reserve_flags                             96       -     -96
+> _lmb_alloc_addr                              144       -    -144
+> _lmb_alloc_base                              304       -    -304
+> Total: Before=3D1020102, After=3D1020042, chg -0.01%
+>
+> # sandbox_defconfig (version string adds another 20b)
+> add/remove: 0/3 grow/shrink: 24/3 up/down: 523/-501 (22)
+> Function                                     old     new   delta
+> lmb_alloc_base                                48     299    +251
+> lmb_alloc_addr                                 4      92     +88
+> lmb_reserve                                    4      58     +54
+> test_alloc_addr                             2933    2963     +30
+> version_string                                50      70     +20
+> lib_test_lmb_overlapping_reserve            1018    1030     +12
+> lmb_add_region_flags                         600     610     +10
+> test_multi_alloc.constprop                  3034    3042      +8
+> test_get_unreserved_size                    1032    1038      +6
+> boot_relocate_fdt                            599     605      +6
+> boot_fdt_reserve_region                       67      73      +6
+> lmb_alloc                                      4       9      +5
+> lmb_free_flags                               190     194      +4
+> wget_handler                                1530    1533      +3
+> tftp_handler                                1190    1192      +2
+> test_noreserved                             1207    1209      +2
+> test_bigblock                                911     913      +2
+> load_serial                                  946     948      +2
+> lib_test_lmb_flags                          2101    2103      +2
+> do_spi_flash                                3150    3152      +2
+> do_bootz                                     526     528      +2
+> do_bootm_linux                              2067    2069      +2
+> bootm_run_states                            5275    5277      +2
+> _fs_read.lto_priv                            331     333      +2
+> lmb_dump_region.lto_priv                     356     353      -3
+> lmb_add                                       59      52      -7
+> efi_allocate_pages.part                      303     249     -54
+> lmb_reserve_flags                             65       -     -65
+> _lmb_alloc_addr.lto_priv                      92       -     -92
+> _lmb_alloc_base.lto_priv                     280       -    -280
+> Total: Before=3D2492722, After=3D2492744, chg +0.00%
+>
+> [0] https://lore.kernel.org/u-boot/20241208105223.2821049-1-ilias.apalodi=
+mas@linaro.org/T/#m43927af3f758f8d0be897a8a6c77b4325546afd5
+>
+> Changes since v1:
+> - Rebased on top of
+>   https://lore.kernel.org/u-boot/20241211021703.2333-1-semen.protsenko@li=
+naro.org/
+>   https://lore.kernel.org/u-boot/20241211022550.2995-1-semen.protsenko@li=
+naro.org/
+> - Converted enum lmb_flags to a u32
+> - Removed the _flags from all the functions
+> - Added a patch that removes lmb_align_down()
+> - Picked up r-b tags. Tom I kept your on patch #3 since I only changed th=
+e name
+>   of the function and assumed you are ok with it.
+>
+> Ilias Apalodimas (8):
+>   lmb: Remove lmb_align_down()
+>   lmb: Move enum lmb_flags to a u32
+>   lmb: Remove lmb_reserve_flags()
+>   lmb: Rename free_mem to available_mem
+>   lmb: Remove lmb_add_region()
+>   lmb: Remove lmb_alloc_addr_flags()
+>   lmb: Remove lmb_alloc_base_flags()
+>   lmb: Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
+>
+>  arch/powerpc/cpu/mpc85xx/mp.c |   2 +-
+>  arch/powerpc/lib/misc.c       |   2 +-
+>  boot/bootm.c                  |   3 +-
+>  boot/image-board.c            |  20 +++--
+>  boot/image-fdt.c              |  15 ++--
+>  cmd/booti.c                   |   2 +-
+>  cmd/bootz.c                   |   2 +-
+>  cmd/load.c                    |   2 +-
+>  fs/fs.c                       |   2 +-
+>  include/lmb.h                 |  58 ++++++---------
+>  lib/efi_loader/efi_memory.c   |   6 +-
+>  lib/lmb.c                     | 136 +++++++++++-----------------------
+>  test/cmd/bdinfo.c             |   4 +-
+>  test/lib/lmb.c                |  92 +++++++++++------------
+>  14 files changed, 145 insertions(+), 201 deletions(-)
+>
+> --
 
-Hi Sughosh,
+For all patches in the series:
 
-> On Thu, 12 Dec 2024 at 20:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > From: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > Date: Thu, 12 Dec 2024 19:02:44 +0530
-> >
-> > Hi Sughosh,
-> >
-> > > On Thu, 12 Dec 2024 at 18:03, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> > > >
-> > > > > Date: Thu, 12 Dec 2024 09:23:52 +0100
-> > > > > From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-> > > > >
-> > > > > On 12/11/24 19:16, Sughosh Ganu wrote:
-> > > > > > On Wed, 11 Dec 2024 at 22:20, Patrice CHOTARD
-> > > > > > <patrice.chotard@foss.st.com> wrote:
-> > > > > >>
-> > > > > >>
-> > > > > >>
-> > > > > >> On 12/11/24 17:27, Sughosh Ganu wrote:
-> > > > > >>> On Wed, 11 Dec 2024 at 21:50, Patrice CHOTARD
-> > > > > >>> <patrice.chotard@foss.st.com> wrote:
-> > > > > >>>>
-> > > > > >>>>
-> > > > > >>>>
-> > > > > >>>> On 12/7/24 16:57, Tom Rini wrote:
-> > > > > >>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
-> > > > > >>>>>
-> > > > > >>>>>> There are platforms which set the value of ram_top based on certain
-> > > > > >>>>>> restrictions that the platform might have in accessing memory above
-> > > > > >>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
-> > > > > >>>>>> even though the LMB allocator works as expected, when trying to
-> > > > > >>>>>> allocate memory above ram_top, prohibit this by marking all memory
-> > > > > >>>>>> above ram_top as reserved, even if the said memory region is from the
-> > > > > >>>>>> same bank.
-> > > > > >>>>>>
-> > > > > >>>>>> [...]
-> > > > > >>>>>
-> > > > > >>>>> Applied to u-boot/master, thanks!
-> > > > > >>>>>
-> > > > > >>>> Hello
-> > > > > >>>>
-> > > > > >>>> This patch is breaking the boot on STM32MP135F-DK.
-> > > > > >>>>
-> > > > > >>>> On this platform, we got an area above gd->ram_top,
-> > > > > >>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
-> > > > > >>>>
-> > > > > >>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
-> > > > > >>>> this area is no more tagged as LMB_NOMAP, because it's previously been
-> > > > > >>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
-> > > > > >>>>
-> > > > > >>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
-> > > > > >>>>
-> > > > > >>>> I suggest to revert this patch.
-> > > > > >>>
-> > > > > >>> I don't think that this patch should be reverted. If the said platform
-> > > > > >>> has a reserved memory region above ram_top, I would suggest to either
-> > > > > >>> a) move the ram_top on this platform so that the op-tee region gets
-> > > > > >>> marked as no-map in the lmb memory map, or b) do not use the lmb
-> > > > > >>
-> > > > > >> In my explanation above, i indicated that before this commit,
-> > > > > >> this area was marked as LMB_NOMAP in the lmb memory map by boot_fdt_add_mem_rsv_regions().
-> > > > > >> this is exactly what you described in the possible solution "a)".
-> > > > > >>
-> > > > > >> But now with this commit, as lmb_add_memory() is called in lmb_init() the area above ram_top is marked LMB_NOOVERWRITE.
-> > > > > >> Then later, boot_fdt_add_mem_rsv_regions() is executed, but the area above ram_top can't be marked as
-> > > > > >> LMB_NOMAP as previously because it's already marked LMB_NOOVERWRITE.
-> > > > > >
-> > > > > > This has been done to ensure that memory above ram_top is not taken
-> > > > > > into consideration when it comes to U-Boot. The reason why memory
-> > > > >
-> > > > > It was already the case before this commit, ram_top was designed to
-> > > > > indicate to U-Boot the top address of available RAM,
-> > > > > see include/asm-generic/global_data.h :
-> > > > >
-> > > > >       /**
-> > > > >        * @ram_top: top address of RAM used by U-Boot
-> > > > >        */
-> > > > >       phys_addr_t ram_top;
-> > > > >
-> > > > > > above ram_top also needs to be added is to ensure that this memory
-> > > > > > also gets passed on to the OS when booting with EFI. If it has to be
-> > > > > > considered by U-Boot, the value of ram_top needs to be adjusted
-> > > > > > accordingly. Is that not possible on the platform? If not, the only
-> > > > > > other solution is to obtain this memory region from the DT, and then
-> > > > > > configure the MMU.
-> > > > >
-> > > > > Currently, ram_top is adjusted on STM32MP platforms,
-> > > > > for example in stm32mp135f-dk.dts :
-> > > > >
-> > > > >       reserved-memory {
-> > > > >               #address-cells = <1>;
-> > > > >               #size-cells = <1>;
-> > > > >               ranges;
-> > > > >
-> > > > >               optee@dd000000 {
-> > > > >                       reg = <0xdd000000 0x3000000>;
-> > > > >                       no-map;
-> > > > >               };
-> > > > >       };
-> > > > >
-> > > > >           0xE000 0000  ********************
-> > > > >                        *                  *
-> > > > >                        *       OPTEE      *
-> > > > >                        *    (LMB_NOMAP)   *
-> > > > >                        *                  *
-> > > > > ram_top = 0xDD00 0000  ********************
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >                        *                  *
-> > > > >           0xC000 0000  ********************
-> > > > >
-> > > > > On STM32MP platforms, we already obtain all memory regions from DT with
-> > > > > property "no-map" and we marked them LMB_NOMAP.
-> > > > >
-> > > > > Later we parse the LMB regions, all of these region marked LMB_NOMAP are
-> > > > > used to configure our MMU accordingly.
-> > > > > So, again, we are doing things as you suggested.
-> > > > >
-> > > > > This commit now forbids to mark OPTEE memory region with LMB_NOMAP as
-> > > > > indicated in DT.
-> > > >
-> > > > And that's what needs to be fixed I think.  It should be allowed to
-> > > > add this flag to an already existing region regardless of whether the
-> > > > LMB_NOOVERWRITE flag is set (and split the region if necessary).
-> > > >
-> > > > I wonder if it is enough to adjust the
-> > > >
-> > > >                         if (flags == LMB_NONE) {
-> > > >
-> > > > in lib/lmb.c:lmb_add_region_flags() into
-> > > >
-> > > >                         if (flags == LMB_NONE || (flags & LMB_NOOVERWRITE)) {
-> > > >
-> > > > to fix your issue.
-> > >
-> > > I was thinking about this as a possible solution. To have an API which
-> > > allows adding flags. But then it is a slippery slope, where a more
-> > > restrictive attribute might get replaced by a less restrictive one.
-> > > Another option is to mark the region above ram_top as (LMB_NOOVERWRITE
-> > > | LMB_NOMAP).
-> >
-> > I suppose that would work in the current codebase.  But it would make
-> > generating the EFI memory map from the lmb memory map more difficult.
-> > These "no-map" entries need to end up in the EFI memory map as
-> > EFI_RESERVED_MEMORY_TYPE whereas the "usable" part above ram_top needs
-> > to end up as EFI_BOOT_SERVICES_DATA.
-> 
-> The current settings are the same as what was done in the 2024.10
-> release, whereby the EFI memory map had all memory above ram_top being
-> set as boot services data. If the regions set as no-map in the DT need
-> to be set as reserved memory type, that logic will have to be added.
+Tested-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-There is logic to do that already.  The efi_loader code in U-Boot
-makes another pass over the reserved regions in the device tree and
-adjust the EFI memory map.
+Tested on the E850-96 board. Didn't notice any changes. 'bdinfo'
+output is good, Debian is booting just fine, as before this series.
+The U-Boot output is good too (nothing changed). No regressions found.
 
-> But that was not being done earlier as well. I can take this up in the
-> future, but I need to understand how the kernel uses the memory map
-> passed on by the uefi firmware.
-
-It isn't really the kernel, but the EFI application that matters here.
-Typically that EFI application is a bootloader of some sorts.  Many
-OSes have their own, Linux has several.  But it can also be the EFI
-stub of a Linux kernel.
-
-Typical usage is that the EFI application will only use memory marked
-as EFI_CONVENTIONAL_MEMORY up until it calls ExitBootServices().  The
-OpenBSD bootloader for example walks the EFI memory map to find a
-suitable location to load the OpenBSD kernel.
-
-After ExitBootServices() has been called it will also use memory
-marked as EFI_BOOT_SERVICES_DATA (and potentially some other memory
-types that U-Boot doesn't use for now).
-
-> > > But I think instead of tinkering with the lmb code, it
-> > > would be much more prudent if the platform can handle this. In any
-> > > case, for the regions of memory below ram_top, this should not be an
-> > > issue. This is a corner case where some platforms need to configure
-> > > the memory region above ram_top. The platform can handle this
-> > > scenario.
-> >
-> > But are we sure the STM32 is the only platform where this problem
-> > arises?  We're rapidly approach the 2025.1 release date and it would
-> > be bad if several boards end up in a broken state.
-> 
-> There might be other platforms which have reserved,no-map memory
-> regions above ram_top, but fwiw, it is only the ST platforms which are
-> setting up the mmu based on the LMB_NOMAP flag.
-
-You're right.  Only STM32 uses the lmb_is_reserved_flags() API at this
-moment.  So it is likely that that is indeed the only affected platform.
-
-> > Also, my point about generating the EFI memory map from the lmb memory
-> > map still holds.  We need the LMB_NOMAP flag correctly represented in
-> > the lmb memory map to do that.
-> 
-> Okay, that support will have to be added. But like I said this is not
-> introduced by the recent changes, as the earlier efi memory map too
-> had all memory above ram_top set as boot services data.
-> 
-> -sughosh
-> 
-> >
-> > > > Currently the code in boot/image-fdt.c:boot_fdt_add_mem_rsv_regions()
-> > > > always adds LMB_NOOVERWRITE, which supports the view that LMB_NOMAP
-> > > > adds restrictions on top of that.
-> > > >
-> > > > > For information, it has impact on all STM32MP platforms (at least 6 boards).
-> > > > >
-> > > > > Patrice
-> > > > >
-> > > > >
-> > > > >
-> > > > > >
-> > > > > >>
-> > > > > >>
-> > > > > >>> memory map to configure the MMU -- can the MMU configuration logic not
-> > > > > >>> read the DT to get which regions are to be marked as no-map?
-> > > > > >>>
-> > > > > >>> As far as the lmb module is concerned, it is being told through this
-> > > > > >>> commit to not consider memory above ram_top for allocations, which is
-> > > > > >>> not an incorrect thing imo.
-> > > > > >>
-> > > > > >> That's the case, we don't consider memory above ram_top for allocations,
-> > > > > >> we only marked it with LMB_NOMAP.
-> > > > > >
-> > > > > > That was because the lmb scope was local. That meant a platform could
-> > > > > > add any size that it wanted, and then use that map for whatever it
-> > > > > > fancied. The use of lmb for "allocating" addresses for io-va addresses
-> > > > > > by the apple iommu is another such case.
-> > > > > >
-> > > > > > -sughosh
-> > > > > >
-> > > > > >>
-> > > > > >> Thanks
-> > > > > >> Patrice
-> > > > > >>
-> > > > > >>>
-> > > > > >>> -sughosh
-> > > > > >>>
-> > > > > >>>>
-> > > > > >>>> Patrice
-> > > > >
-> > >
-> 
+> 2.45.2
+>
