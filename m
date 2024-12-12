@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E92FE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:33:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76114E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:34:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B2AF801BD;
-	Thu, 12 Dec 2024 23:33:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F585801BD;
+	Thu, 12 Dec 2024 23:34:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mR4Ecwtt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sk0oqV+u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 131D3801BE; Thu, 12 Dec 2024 23:33:43 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 75087801BE; Thu, 12 Dec 2024 23:34:36 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C1EF801B0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:33:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31839801B0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:34:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6f95d2eafso47337185a.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:33:40 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6eff8289d0eso12307617b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:34:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734042819; x=1734647619; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/Z7UiQzU7ukrkWoi9/iMd8vQET487HJkL/p85ZZE18s=;
- b=mR4EcwttU/cP3wtTzSCkxG+pMMNOEbYKtZ4nMGvXMgMOQ3VsMMkaC8ikXYboN0UGRe
- 7EOO5TVRWo8XR5Vszx5vvGhflfJ4OG+sTfLANgk5MrvqVl09SSxcgcfJrC8VNmYFl4Nd
- Il55B8Cg3RHCwBMMHz/wvkqxtXJkGTXRGyTh4=
+ d=linaro.org; s=google; t=1734042873; x=1734647673; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zP2WjrrQxfDVlDyIqTFdwoqzzVyoaV0B8J184sQTSt0=;
+ b=sk0oqV+uqd/OOQjasSvqxXfVtI/uSu5ksPguS+reFg200h9RtZbmyTFMzNWQTeNTjw
+ MDPWnOPv7VBxFSkn22SJORIp4dkT/v5nFQhpuX01u6RBmxlpQslhUAK4D7Ns4bKYxbSm
+ ps0m8QdEjlymMDi6MWvkS30W7aX9rfqGeATEAM8uvqZlonj8f4EZOtfaOxwrWiIlQqGB
+ SZ7okwtAUzNtH7bD47XgYfGotiyiPlW+LPRwtnnPA4/q0LKAU7FlFXH8Vuy5UjA6sGu/
+ 5Mezc7botzPZf4meWD7MHVADKsfDAnqK1oUFir81EoRZD6tudbC5JWXRui52dCt6Pubw
+ OeeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734042819; x=1734647619;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/Z7UiQzU7ukrkWoi9/iMd8vQET487HJkL/p85ZZE18s=;
- b=IrXsPEU46zwFD4kVab8MamP+L00zoZQcfwrV8wMqfCsf8t2aRPXZDrVE4DY/IN81es
- ClGyjzku7W5KjIiqCXdvULKEatUIxBwI+rHtZ/0G0tk3b5ltaP9TxKTXIcNIZHosOAIX
- HWBn8PpRBLwIVgca5Z3FU7krHx/ysvcfszSnsJqQH2IIivgSX5RvRdJ1AIbhHhSmny2v
- MQNmnm6vj5o8ZdbFMEl+G/o5LquHUzxxzlDrmf2DnQTyZMxC3zxWPywr0cQPhm5l0Dq/
- 1l0W1ozk+sYQawPBDD+7YsLZyeJvGoSowZlXNQKtj2l7xtNyqHJzOJGW9MSDRUmLvh3Y
- PAgQ==
-X-Gm-Message-State: AOJu0YyaU3s9EAmCXPbjQ+bezw1G6tOGMb5C89ezT/NG380jY5J7m6Wo
- txyNQbkQ4QL3pU6TlUcUQvKxeCMFRmOAYMZFCFkJsSggeXMQomJeoqQSYXsnNWV3hS2qdOKGqli
- LZRU=
-X-Gm-Gg: ASbGncsMM7EQZuSEU+BCb0u3NYISzDWy/Ko9Vr34lyWjl00oC3ubZykRT1sBld2s2dK
- av0KcnGpUuPzlJaegx1Aauk0s5lw3OvcUlMkJ7oPd/S95ocIn6JcxOYHLMMyLTXS+QCTktjc4Mx
- nRRWzJs8eWMsGq2KK3euKzOpEnXK+FIqL1aZNvNDZd6+pOxBdih7Wi2ZjC03pPcLgrKtHOkleo7
- coF8S93aSdHjuBin3xkObaf7CG7RpvPTQPEE6Z56D6o2C3rHKRHvZuQw1zBlzzIDXjuM3XDwMV/
- QfY=
-X-Google-Smtp-Source: AGHT+IE2uew6quJ4BNesV63MkV0zf1IFRtWwbP2E8SCZfgRIXVrLrB4+hEkyj5oAgIPuA9bgldnVOg==
-X-Received: by 2002:a05:620a:4090:b0:7b6:c634:e332 with SMTP id
- af79cd13be357-7b6fbee8885mr32893785a.19.1734042819392; 
- Thu, 12 Dec 2024 14:33:39 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b6b5a9e96csm777402385a.120.2024.12.12.14.33.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 14:33:38 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: [PATCH] Gitlab: Remove some "rules:when: always" lines
-Date: Thu, 12 Dec 2024 16:33:36 -0600
-Message-ID: <20241212223336.1623762-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1734042873; x=1734647673;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zP2WjrrQxfDVlDyIqTFdwoqzzVyoaV0B8J184sQTSt0=;
+ b=CcXfZ5b9ezRSE+Qpk5lXen2wBP84LxrpeLJRAkp/2AD8ObRnPH1ZpbezeVOr0PgBIe
+ 5Ty9eWKr8EgKogYK1hLDeiqly2EfV1F8msuCcenecx5ybsSleV/3Jvn3pVhXfP+WE62U
+ pn+Q78c3gQDaJyycup8St5pj5q9JO8ps5ZALfw+cS7exP0EyQFrUZZ1T1RBWivZ+p7x7
+ p3MdeLe5oxH/+TO2fQN1CrEi/xKfvYuqfr3Cc8NUTipbNwxaVgHh9Bb4rHtxeGvfj8fG
+ Hy2i8U1y2uPTSKERsdsrrL84E11Vrx3Tl4bRumvq6uw5XXrQksXrLJlivGNpW0ny4dJt
+ 1dzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYxhYsgBA8fCosLCHFDTNP/UHS4WpVSkyXgRpTVpL1fcYne41y5uRoGqQMPMN0GXesWG7cLqc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6S1tk+w+oZ5BchEmdtg8sB62QaGhbyHQAcjG0IDUkHWes1Lw/
+ r9qQTzCwP2WRGMCK8g+bMsEq2FE+37oF1wqvd06nJTy3DTD8e8eh8CQlFHpTLiaGEhW5uwSyKBG
+ ol72KM5icl/TOw9M2gcriZq2UQe/B/K3aougvxg==
+X-Gm-Gg: ASbGncvrjg2JGtYGR3an4Htpw5fV1hd0177HpSVGf4vpR85JxXZQOPlBrPK2SdtA/O+
+ 8RHOp20MrQGv5eCORDST9JL9nItQZjSqvayG8Sw==
+X-Google-Smtp-Source: AGHT+IHPHLYmCtIjBPQvkYCo9tztr/GmCmhiI57G8RhlE3ANBB3g4746Vs0CUW/BMFf96cldYkUzG0mh6j8bqvnkKYA=
+X-Received: by 2002:a05:690c:f88:b0:6ef:a227:c082 with SMTP id
+ 00721157ae682-6f279b01c10mr4268667b3.14.1734042873024; Thu, 12 Dec 2024
+ 14:34:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+ <20241211105504.453234-7-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-7-ilias.apalodimas@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 12 Dec 2024 16:34:22 -0600
+Message-ID: <CAPLW+4=9EfzWwYE_X+-AnZUwky6+MOF4V73BsqOaoMcMS+EGmQ@mail.gmail.com>
+Subject: Re: [PATCH v1 6/8] lmb: Remove lmb_alloc_addr_flags()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Nam Cao <namcao@linutronix.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,57 +104,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In commit 399f739be6b2 ("CI: allow jobs to be run in merge requests") we
-added "rules:when: always" to many stages of the pipeline to allow for merge
-requests to trigger a run. However based on current Gitlab
-documentation, we should still be triggered on merge requests without
-this. Furthermore the way we have things written today we always run all
-stages of the CI rather than failing out early on problems, which is not
-always useful. Remove these as we should still be fine with merge
-requests triggering a run.
+On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> lmb_alloc_addr() is just calling lmb_alloc_addr_flags() with LMB_NONE
+> There's not much we gain from this abstraction, so let's remove the
+> latter, add a flags argument to lmb_alloc_addr() and make the code a
+> bit easier to follow.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  fs/fs.c                     |  2 +-
+>  include/lmb.h               | 10 ++++------
+>  lib/efi_loader/efi_memory.c |  2 +-
+>  lib/lmb.c                   | 15 ++-------------
+>  test/lib/lmb.c              | 34 +++++++++++++++++-----------------
+>  5 files changed, 25 insertions(+), 38 deletions(-)
+>
+> diff --git a/fs/fs.c b/fs/fs.c
+> index 21a23efd932d..99ddcc5e37be 100644
+> --- a/fs/fs.c
+> +++ b/fs/fs.c
+> @@ -554,7 +554,7 @@ static int fs_read_lmb_check(const char *filename, ul=
+ong addr, loff_t offset,
+>
+>         lmb_dump_all();
+>
+> -       if (lmb_alloc_addr(addr, read_len) =3D=3D addr)
+> +       if (lmb_alloc_addr(addr, read_len, LMB_NONE) =3D=3D addr)
+>                 return 0;
+>
+>         log_err("** Reading file would overwrite reserved memory **\n");
+> diff --git a/include/lmb.h b/include/lmb.h
+> index 3db35992df8d..5e59915340b7 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -92,7 +92,6 @@ long lmb_reserve(phys_addr_t base, phys_size_t size, u3=
+2 flags);
+>
+>  phys_addr_t lmb_alloc(phys_size_t size, ulong align);
+>  phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t ma=
+x_addr);
+> -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
+>  phys_size_t lmb_get_free_size(phys_addr_t addr);
+>
+>  /**
+> @@ -113,8 +112,8 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ul=
+ong align,
+>                                  phys_addr_t max_addr, uint flags);
+>
+>  /**
+> - * lmb_alloc_addr_flags() - Allocate specified memory address with speci=
+fied
+> - *                         attributes
+> + * lmb_alloc_addr() - Allocate specified memory address with specified a=
+ttributes
 
-Link: https://docs.gitlab.com/ee/ci/yaml/#rules
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Can you please test this in your setup? I'm actually a little unsure of
-what your setup needs now that I look at this harder, thanks.
+One character over 80 limit trips my OCD :/ Any chance you can move
+"attributes" to the next line? It's ok to break the line in kernel-doc
+function briefs.
 
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
----
- .gitlab-ci.yml | 6 ------
- 1 file changed, 6 deletions(-)
+> + *
+>   * @base: Base Address requested
+>   * @size: Size of the region requested
+>   * @flags: Memory region attributes to be set
+> @@ -125,8 +124,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, ul=
+ong align,
+>   *
+>   * Return: Base address on success, 0 on error.
+>   */
+> -phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+> -                                uint flags);
+> +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint flag=
+s);
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 57037e243ecb..2f324b0e1a90 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -24,8 +24,6 @@ stages:
- .buildman_and_testpy_template: &buildman_and_testpy_dfn
-   stage: test.py
-   retry: 2 # QEMU may be too slow, etc.
--  rules:
--    - when: always
-   before_script:
-     # Clone uboot-test-hooks
-     - git config --global --add safe.directory "${CI_PROJECT_DIR}"
-@@ -104,8 +102,6 @@ stages:
- 
- .world_build:
-   stage: world build
--  rules:
--    - when: always
- 
- build all 32bit ARM platforms:
-   extends: .world_build
-@@ -157,8 +153,6 @@ build all other platforms:
- 
- .testsuites:
-   stage: testsuites
--  rules:
--    - when: always
- 
- check for new CONFIG symbols outside Kconfig:
-   extends: .testsuites
--- 
-2.43.0
+Can we keep u32 for flags everywhere, for consistency?
 
+With above nitpicks addressed, feel free to add:
+
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+
+[snip]
