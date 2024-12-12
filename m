@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65984E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:47:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD82DE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:47:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0057E80137;
-	Thu, 12 Dec 2024 14:47:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5AFBB8027E;
+	Thu, 12 Dec 2024 14:47:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="H+dQxDZy";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UkE4C8r8";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="C9VtZ5y3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dj1NKmhU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F08D8018E; Thu, 12 Dec 2024 14:47:48 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 3339A8010E; Thu, 12 Dec 2024 14:47:53 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41F08010E
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:47:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFCD08020B
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:47:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,31 +31,33 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y8DLT506mz9tRR;
- Thu, 12 Dec 2024 14:47:45 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Y8DLY2Rj6z9t71;
+ Thu, 12 Dec 2024 14:47:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734011265;
+ s=mail20150812; t=1734011269;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
- b=H+dQxDZy1yEtyq+OR7XgbreAMgE04iOjmpi8+vCoJB15zZSzGSA2RYK1uEi085nRD2rZfw
- wjvrESxuF4ohVwOBLdYpkjQ4HioF4wNFccdRs+Lajx9wXeuDIeWaG/tFqNmc11EU3Vt+Vn
- LUvAzhvFZpzZKbtpZq+sFKU+bWBjVNHrMrRqxVsxoMDfOpQ7f7C7pR8OIYR69mnO/74Ccy
- W9I6clidFs12o7o+TGcBdhx/yO+bJi+885poy/9o1r/MJyZJjFeva6EmmfljmtQMIBHLwm
- 8V12GadCQ6ylmKeFntfrHiHzGdACiG3paECP6EkgRxEzmPiQta7ImNtmN5T6qg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FzKQZ4Jdd68VyTMCxN88+NUxxN5B4TfvTgsuRihMoUU=;
+ b=C9VtZ5y371EvYRiq3i9r1H3APxCNQNQXnb7zj8LnnZEW8nIhCU0bi1nFSXKtZjihAT9YfT
+ 4FaC9wmKWWDeg2WsbQvAPV6kGE7YQu4cU8sYDoSSebGMbMtgVol69/VSxUawO6adQvv1En
+ RKEn1J/CuC4UASjC0Z7jVRvHsRlqEUNYUmLhgH1HAdm6r8kQkEonYOUFke33WP4GG6tUK5
+ a5oO+TTvJongRZay+fznPg+it2BTuDNfhfzYFAp0INYbpTueE0L+2tMYvO16gilv1ISY3l
+ IpRG6C/K0IzVlYLB02upth59NwC0qCkgrtOXUkPWid+LwRvbOiV2x1bmwoV2tQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734011263;
+ s=mail20150812; t=1734011267;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
- b=UkE4C8r8avR8sRPAsyvVr6jkfK1XES93B+UJQa2odxxI+8bnW1efACqxcKu+t9FOPnjKM3
- AQrYIz6ZcVgpsw05Tn0NmJYXFBV5NCsjeJJGIkK0jhCi8O+qAji0fhwt2fT8DW2B73jTHv
- lfmptgn5aeoOujxxn1u8ca6X2vcsWs27bOut8y//BhZE8NK5Yh3ret13Y8H21ZclEMy5XV
- e4CPqfkauGTaMbg/GTl+0axhF0YmTaTOcEajDn3zvOoC7K6T/D/ieuU0l6Y0b/8CVqwGIP
- xzCMjQ2wBtE8jgXULE/5idxRsUD/7Wqu69NMsnaclddfNpezxYehh08WjsLMGw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=FzKQZ4Jdd68VyTMCxN88+NUxxN5B4TfvTgsuRihMoUU=;
+ b=dj1NKmhUkY0SajpZgmwC3Jc+xZwlfgM/AsNBYDre/PJCZoLzIF5vhJfivz/ghETt1QxvY+
+ 14VLOdhN8ldYjVyJbfDOrtl9f6IasYRxrkBZv17HsTqso5Vsfy7alj5RFyLvuqXVnaTgz7
+ +SXb/ncyjp0nW2GuQie3IT5NX8Ca/vB+yMQrWOqaTpUFh4gRGTX7LQXFAp9Iolem66vu3c
+ icjS51VM4vtq54Y9WWI7OW+IxtVoapdAWI9LmUhUoj95vH1QNZQn7jmxfi8PNBYeYY+245
+ nwQ5y4GDEBGdrxmIGjI+YHMuoH+of7ebs19/XJsABr2/3uKSWOtDmNK1B/5ezA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Andre Przywara <andre.przywara@arm.com>,
@@ -72,13 +74,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Peter Hoyes <Peter.Hoyes@arm.com>, Raymond Mao <raymond.mao@linaro.org>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [RFC][PATCH 1/3] arm64: Add late jump to kernel board hook
-Date: Thu, 12 Dec 2024 14:47:17 +0100
-Message-ID: <20241212134729.85391-1-marek.vasut+renesas@mailbox.org>
+Subject: [RFC][PATCH 2/3] image: Add support for starting TFA BL31 as fitImage
+ loadables
+Date: Thu, 12 Dec 2024 14:47:18 +0100
+Message-ID: <20241212134729.85391-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241212134729.85391-1-marek.vasut+renesas@mailbox.org>
+References: <20241212134729.85391-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: digt59dy86ctf61abxo4ekmyh9tnb85d
-X-MBO-RS-ID: 715c8ed7fee41562b58
+X-MBO-RS-META: 11jqczh6t664pwzhwe3ytbusducfibmd
+X-MBO-RS-ID: 6855f3ee1e45100d222
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +100,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add empty weak assembler function armv8_switch_to_el2_prep() which is
-jumped to just before U-Boot determines which EL it is running in and
-decides which path to take to boot the Linux kernel.
+Add support for starting TFA from U-Boot running in EL3 as part of
+fitImage boot, so the user can start U-Boot in the highest privilege
+level on the platform, bundle TFA, Linux, DT into a single fitImage
+and boot such a bundle as a whole.
 
-This weak function is meant to be used by architecture specific code
-to implement jump to a firmware blob, which then returns right past
-this weak function and continues execution of U-Boot code which then
-boots the Linux kernel. One example of such use case is when U-Boot
-jump tp TFA BL31, which switches from EL3 to EL2 and then returns to
-U-Boot code newly running in EL2 and starts the Linux kernel.
+There are two main benefits of this approach. First is the ability
+to run U-Boot in EL3, where it has unrestricted access to the entire
+system and can act as a useful debug tool, as it was always intended
+to be used. Second is the ability to easily and safely update of any
+component in the fitImage, be it TFA, Linux or DT.
 
-The weak function is called with caches already disabled and DM shut
-down. Any preparatory work or even loading of more data must be done
-in board_prep_linux(), this hook is meant only for the final jump to
-the firmware and return to U-Boot before booting Linux.
+The boot process is similar to regular Linux with DT fitImage boot
+process, except the TFA has to be bundled into the fitImage. For the
+bundling instructions, see below. The TFA is started as a 'loadables'
+with custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
+handling implemented in board code, and performing the handoff and
+boot in case the TFA was loaded.
+
+The loadables handler is optional and meant to set up any sort of
+handoff structures used by the TFA BL31 or perform any other setup
+that is needed by the blob. The custom armv8_switch_to_el2_prep()
+has to implement the jump to TFA BL31 with return to U-Boot just
+before booting the Linux kernel.
+
+Example fitImage image and configuration section:
+
+/dts-v1/;
+
+/ {
+    description = "Linux kernel with FDT blob and TFA BL31";
+
+    images {
+        kernel-1 { ... };
+        fdt-1 { ... };
+        atf-1 {                  /* This is the TFA BL31 image */
+            description = "TFA BL31";
+            data = /incbin/("../build/plat/release/bl31.bin");
+            type = "tfa-bl31";
+            arch = "arm64";
+            os = "arm-trusted-firmware";
+            compression = "none";
+            load = <0x46400000>;
+            entry = <0x46400000>;
+        };
+    };
+
+    configurations {
+        default = "conf-1";
+        conf-1 {
+            description = "Boot Linux";
+            kernel = "kernel-1";
+            fdt = "fdt-1";
+            loadables = "atf-1"; /* This is the TFA BL31 loadable */
+        };
+    };
+};
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -133,58 +179,47 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/cpu/armv8/transition.S |  8 ++++++++
- arch/arm/include/asm/system.h   | 16 ++++++++++++++++
- 2 files changed, 24 insertions(+)
+ boot/image-fit.c | 1 +
+ boot/image.c     | 1 +
+ include/image.h  | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/transition.S b/arch/arm/cpu/armv8/transition.S
-index 9dbdff3a4fc..85f13ccd0d2 100644
---- a/arch/arm/cpu/armv8/transition.S
-+++ b/arch/arm/cpu/armv8/transition.S
-@@ -9,8 +9,16 @@
- #include <linux/linkage.h>
- #include <asm/macro.h>
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 7d56f0b5e6e..9ee98bef817 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -2166,6 +2166,7 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
+ 	type_ok = fit_image_check_type(fit, noffset, image_type) ||
+ 		  fit_image_check_type(fit, noffset, IH_TYPE_FIRMWARE) ||
+ 		  fit_image_check_type(fit, noffset, IH_TYPE_TEE) ||
++		  fit_image_check_type(fit, noffset, IH_TYPE_TFA_BL31) ||
+ 		  (image_type == IH_TYPE_KERNEL &&
+ 		   fit_image_check_type(fit, noffset, IH_TYPE_KERNEL_NOLOAD));
  
-+.pushsection .text.armv8_switch_to_el2_prep, "ax"
-+WEAK(armv8_switch_to_el2_prep)
-+	ret
-+ENDPROC(armv8_switch_to_el2_prep)
-+.popsection
-+
- .pushsection .text.armv8_switch_to_el2, "ax"
- ENTRY(armv8_switch_to_el2)
-+	bl	armv8_switch_to_el2_prep
-+	nop
- 	switch_el x6, 1f, 0f, 0f
- 0:
- 	cmp x5, #ES_TO_AARCH64
-diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-index dbf9ab43e28..091082281c7 100644
---- a/arch/arm/include/asm/system.h
-+++ b/arch/arm/include/asm/system.h
-@@ -238,6 +238,22 @@ int __asm_flush_l3_dcache(void);
- int __asm_invalidate_l3_icache(void);
- void __asm_switch_ttbr(u64 new_ttbr);
+diff --git a/boot/image.c b/boot/image.c
+index abac254e026..139c5bd035a 100644
+--- a/boot/image.c
++++ b/boot/image.c
+@@ -183,6 +183,7 @@ static const table_entry_t uimage_type[] = {
+ 	{	IH_TYPE_FDT_LEGACY, "fdt_legacy", "legacy Image with Flat Device Tree ", },
+ 	{	IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
+ 	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
++	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
+ 	{	-1,		    "",		  "",			},
+ };
  
-+/*
-+ * armv8_switch_to_el2_prep() - prepare for switch from EL3 to EL2 for ARMv8
-+ *
-+ * @args:        For loading 64-bit OS, fdt address.
-+ *               For loading 32-bit OS, zero.
-+ * @mach_nr:     For loading 64-bit OS, zero.
-+ *               For loading 32-bit OS, machine nr
-+ * @fdt_addr:    For loading 64-bit OS, zero.
-+ *               For loading 32-bit OS, fdt address.
-+ * @arg4:	 Input argument.
-+ * @entry_point: kernel entry point
-+ * @es_flag:     execution state flag, ES_TO_AARCH64 or ES_TO_AARCH32
-+ */
-+void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
-+			      u64 arg4, u64 entry_point, u64 es_flag);
-+
- /*
-  * armv8_switch_to_el2() - switch from EL3 to EL2 for ARMv8
-  *
+diff --git a/include/image.h b/include/image.h
+index 9be5acd8158..90bd88ab3c2 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -232,6 +232,7 @@ enum image_type_t {
+ 	IH_TYPE_FDT_LEGACY,		/* Binary Flat Device Tree Blob	in a Legacy Image */
+ 	IH_TYPE_RENESAS_SPKG,		/* Renesas SPKG image */
+ 	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
++	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
+ 
+ 	IH_TYPE_COUNT,			/* Number of image types */
+ };
 -- 
 2.45.2
 
