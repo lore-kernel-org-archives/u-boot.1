@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBADEE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 342DEE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:39:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E85B801ED;
-	Thu, 12 Dec 2024 15:39:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B606A801B6;
+	Thu, 12 Dec 2024 15:39:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nW+Gp1RW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HZExacco";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0444F801A0; Thu, 12 Dec 2024 15:39:05 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48AC580209
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:39:02 +0100 (CET)
+ id 6C07F801BD; Thu, 12 Dec 2024 15:39:28 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C3782801A0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:39:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCEd0b23259412
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 12 Dec 2024 08:39:00 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BCEdNoh116649;
+ Thu, 12 Dec 2024 08:39:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734014340;
- bh=BCDpTDH5CnwD5nnkpE2FjditsUKA6AvySVvOA4/x2Hs=;
+ s=ti-com-17Q1; t=1734014363;
+ bh=VaDyqn8G+k0mKWdCBQKB4lHcFIzmn6R00w75wwzVKHw=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=nW+Gp1RWhvUOFhaQMcPgfRgLB+Y2wwyFEQEZhToGwLujniuQ6pyYicB+utpqxq8wB
- DgE096RsQuE4oWqRHcEJlzFcYMIU0ME+kGvUwNrWhejqOlMjtlXuAjzMSln8GmGJlO
- OsT45hVkoTt5EMfEm05wgGB8fC46bGc1g7wnEKFs=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCEd0WS109527
+ b=HZExaccoV5VDMvV31bXbcH1WyyEqNJcAatjRrM1wZvRrtXvXFAXCP4F8U9wVTOLuh
+ MqfCgOQ2mFqHWU3lXQ6pxEkegQWDa6WIMe8CaepOUT0m2a7gj6/rpfH58Q1VA3kBWA
+ izyVfTajXFqFo3u9Ab9aP1fO6dEw9vVpyNUWq4H8=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCEdNYS020224
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 12 Dec 2024 08:39:00 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 12 Dec 2024 08:39:23 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
- Dec 2024 08:38:59 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 08:39:23 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 12 Dec 2024 08:38:59 -0600
+ Frontend Transport; Thu, 12 Dec 2024 08:39:23 -0600
 Received: from [172.24.227.241] (santhoshkumark.dhcp.ti.com [172.24.227.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BCEcugx100771; 
- Thu, 12 Dec 2024 08:38:57 -0600
-Message-ID: <8e2968d6-2c60-4935-aa69-09fce7039042@ti.com>
-Date: Thu, 12 Dec 2024 20:08:56 +0530
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BCEdKWS027111; 
+ Thu, 12 Dec 2024 08:39:21 -0600
+Message-ID: <081d7453-cca4-48dd-9969-7ed1eb8bdf9f@ti.com>
+Date: Thu, 12 Dec 2024 20:09:19 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 2/8] ram: k3-ddrss: Add
  k3_ddrss_ddr_bank_base_size_calc() to solve 'calculations restricted to 32
  bits' issue
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: <trini@konsulko.com>, <nm@ti.com>, <u-kumar1@ti.com>, <vigneshr@ti.com>,
- <bb@ti.com>, <u-boot@lists.denx.de>, <w.egorov@phytec.de>,
+To: Bryan Brattlof <bb@ti.com>
+CC: <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
+ <vigneshr@ti.com>, <u-boot@lists.denx.de>, <w.egorov@phytec.de>,
  <n-francis@ti.com>, <s-k6@ti.com>
 References: <20241021044024.835846-1-s-k6@ti.com>
  <20241021044024.835846-3-s-k6@ti.com>
- <20241023044400.5mxggznayaxklrag@uda0497581>
+ <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
 Content-Language: en-US
 From: Santhosh Kumar K <s-k6@ti.com>
-In-Reply-To: <20241023044400.5mxggznayaxklrag@uda0497581>
+In-Reply-To: <20241023143905.xbrqu6eabaer6wui@bryanbrattlof.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -86,12 +85,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, Manorit,
+Hi, Bryan,
 
-On 23/10/24 10:14, Manorit Chawdhry wrote:
-> Hi Santhosh,
-> 
-> On 10:10-20241021, Santhosh Kumar K wrote:
+On 23/10/24 20:09, Bryan Brattlof wrote:
+> On October 21, 2024 thus sayeth Santhosh Kumar K:
 >> As R5 is a 32 bit processor, the RAM banks' base and size calculation
 >> is restricted to 32 bits, which results in wrong values if bank's base
 >> is greater than 32 bits or bank's size is greater than or equal to 4GB.
@@ -119,17 +116,10 @@ On 23/10/24 10:14, Manorit Chawdhry wrote:
 >> +	unsigned long long ddr_bank_size[CONFIG_NR_DRAM_BANKS];
 >> +	unsigned long long ddr_ram_size;
 > 
-> Would suggest using u64 ig if you are sending another revision, would be
-> a bit more readable IMHO.
+> Should we use the u64 typedef here?
 
-Yeah, sure!
+Yes, I'll replace.
 
-Regards,
-Santhosh.
-
-> 
-> Regards,
-> Manorit
 > 
 >>   };
 >>   
@@ -244,8 +234,25 @@ Santhosh.
 >> +	return fdt_fixup_memory_banks(blob, ddrss->ddr_bank_base,
 >> +				      ddrss->ddr_bank_size, CONFIG_NR_DRAM_BANKS);
 >>   }
->>   
->>   static int k3_ddrss_get_info(struct udevice *dev, struct ram_info *info)
->> -- 
->> 2.34.1
->>
+> 
+> Have we looked into passing this information via the global data pointer
+> rather than fixing up the device tree on each boot phase?
+> 
+>      https://patchwork.ozlabs.org/project/uboot/patch/20180926215520.87168-23-sjg@chromium.org/
+> 
+> I don't see a clear path to pass GD from SPL to SPL but there is a TPL
+> to SPL which I think we should be able to copy.
+
+At R5, the phys_addr_t is 32 bits - so, can't store more than 4GB in 
+global data pointer.
+
+Even in the above series you shared, handoff_save_dram() saves the RAM 
+and banks' size from global data only.
+
+Hence, the fix-up is necessary to pass information from R5 SPL to A53 SPL.
+
+Regards,
+Santhosh.
+
+> 
+> ~Bryan
