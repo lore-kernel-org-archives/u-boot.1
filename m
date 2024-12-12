@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F1FFE77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 16:31:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C0BE77182
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 16:34:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7596A80137;
-	Thu, 12 Dec 2024 17:31:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A3D9801BD;
+	Thu, 12 Dec 2024 17:34:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vGoeo1y8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AYyGsSmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63218801BD; Thu, 12 Dec 2024 17:31:31 +0100 (CET)
+ id B4336801DA; Thu, 12 Dec 2024 17:34:49 +0100 (CET)
 Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
  [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46F4E80079
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 17:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9636580137
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 17:34:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4361c705434so6110055e9.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 08:31:29 -0800 (PST)
+ 5b1f17b1804b1-43622354a3eso6097715e9.1
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 08:34:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734021089; x=1734625889; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734021287; x=1734626087; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6p1lJW2qwBto+PnNa143ZlL6/sugM4LCIXXSOUezaoA=;
- b=vGoeo1y8Q1KJAMDPGinbqgHL28dS7y63vqFbKHAQO/zaiNJBqOdLA/BncCRycU5ntR
- tGDz65GR1sUEDQxATLuUUcSKsfOQrG/V1JyXOSjlMrSZxl8pX2h2QKoW4QY2E2TWAVpz
- idJmXH9+PmaXgGuS1KGq9XGUG3Rf9DLxbcXb/90g7Nm/yqP/TP0uM2ucUOCWe8CZUbkU
- vpVTA5Xf9YwHLga/BbZ6/VnmybcfaJtKG7Krit7Dp05x/9plIFo2xv8K4PK1PHiNE4+v
- yxLReyybVG3MPlwAIoXyAzELbeSEjmozFCCIx5SzELOSOSM5Zp+QXAqhC1kmsavA/edL
- aPww==
+ bh=bgja4HdiAE7CfW/KKzLKuTU/ho9maomBfDHipSgEcSQ=;
+ b=AYyGsSmBxEIagTY72NIjNY1K2C/ahwKbSs/Ed36eNX2MmCgbHGitwjDrsAfDdw9sEe
+ X9MuDYh0Zz0LAtg3UFIQkqc3zWB1KEEz0wHdz6yAdJdQVMGZ4sA478yEG3BQuBQdrsMx
+ LFCZWKbFRPgSLcVrUQR00Komq0naWzju8Vei3MTkN8NZ1oiVJUCxnvTfvsDmBlORoOG3
+ iIP7GyzHRD+B+xKL3rpFNlZirD+/dBmoFxqcday/NY/3gTNnMtwu6SXGB3jImarH7xzG
+ 4Y1j331wDW9aMVc4CRzKCf6mPLidMGNsZRKo8zA24yZ+5ZdC7WBd7L3/0ydnanrS9tmZ
+ stEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734021089; x=1734625889;
+ d=1e100.net; s=20230601; t=1734021287; x=1734626087;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6p1lJW2qwBto+PnNa143ZlL6/sugM4LCIXXSOUezaoA=;
- b=lUV63/eIhPwMfkTBqEfn1btKyIknzzcQqAG2r9Etjq0+cNZJaN9+3lAj8PPZZ+GAqp
- YplQBIc0qUthxTJ6W36mGrSIPPGKGVEEpE9xJTdZ6hSKtnMp+fEz/YxcF6JVVrKJBC+B
- AjVakAFhT+vMdmBDkyM9i2gskKicmsomAzpKt+ELQuQzfTclxDDfCyb+D06prjL5XhB9
- Df6oUiob+NSkeUTY2yb/pCe7d99eupfACUucKtzRI4O2hZZwGM5DRDKdKUtI6h8xh+NT
- 7tKWTU2DH017jR4wRii6eTBIkwJZ/5td1nL2wMmynD9WjqxmyZ7hPkxNCgOOfr6ldmpm
- BvHw==
-X-Gm-Message-State: AOJu0Yxm9d6kQZdTXnFVskrkN+G9D0WqmUqNbm0JTxaFOjkuPlo4+onH
- SEg4HVNO+RMBWhlSskAfZ7bwKTYsb4YKhyoa/y3zj1qn54pNAq+9YXGmBhS1vtQ=
-X-Gm-Gg: ASbGnctEDO1qb4RDFxjloXdoC3HLXMCZlpd0+fDIP/mu1fOrnAfGDTfepLP8nX86YiX
- 9H6i+C+PbNoBNkivdNu+wjQ5RuG/GZJsrIGzj4vrFT8f6qiKNenfkOukc6YuTPbA9Jd9AmcQOgR
- AuI5xaERxyH5Z1/jwhZAqJU+dWqdj8mRtKKZzee8CJx17WlUQPspN6JsUmncDEn5HEOglkGnczl
- ZAiZLd1YeJ02FAdQg5LB1utyxt48RgH6SDvsuIoYy376KGz8dxwscUqIUu5hppwIXTv8balE0ir
- TWtSedgWDhw=
-X-Google-Smtp-Source: AGHT+IF/RyIs/24l06pYuW0oYrQhHjnta4hZ8K4XM/vGYStD9i8USTAK8Umy+NsK8u4N1ZvzBeYo5Q==
-X-Received: by 2002:a05:600c:4450:b0:436:1aa6:b8ee with SMTP id
- 5b1f17b1804b1-4361c346a7emr67236745e9.2.1734021087073; 
- Thu, 12 Dec 2024 08:31:27 -0800 (PST)
+ bh=bgja4HdiAE7CfW/KKzLKuTU/ho9maomBfDHipSgEcSQ=;
+ b=klPaHxGjJtXgybJFNsKBPo4Y3rVblZTYZ25G3ob2nSi+Pu+Ln9Hs5v50sI4JyVUBL6
+ MTRPkhIj5Oi6gi2YMSXEXpbonv54aMuy+WFrzM4uEiQ7S5MWnkzFbMawHREF86kWcOD9
+ H4PbJOFBMTB30wFFKTU6UOhWOkNz8Y114oMXPGNkzD4wBBz0nIIDPrvr558xag2VExDw
+ EpK9c+byye67jeIKBuQrC28kBpM+RW1cajHWS+gtqQ9KLl+ItbBlE7FGILcM7kwHjWjx
+ ldDIjL0UlyrwHlIdUBg+gRAxWK3KXfLSl6YVeo0cX1bkONlxdtlsRfYCUIPneCnFZ8B8
+ z4dg==
+X-Gm-Message-State: AOJu0Yz9aYOA7u3l1M8A6qMytEP/5mGm0KU2irMto6MVBniJGgDbAEZ/
+ J+tV1GBVQDuwnWbmBRXbsFl3f90qbFdNvZs2PvRAR9dLjJ4YP4NoKlyDntfxOr8=
+X-Gm-Gg: ASbGncvOkS4OwnX8E1/8WxrFeIOHHdAvDADpIciOdtyVakw+LWsfrtHRIuQnG6KL5z6
+ FeN1G11FPVDx+0ftSYPhWOs7Gvi6Qh/OLftXSJdkYqHnqt3YPTBzYI6pDn1ADdGHpEoCxSHLYrs
+ 3jWZ6rgIlDaFsERIDIOzgnN/TevV+bKgxgUbZnaJ+Y87Avqxn1eTsHLiA5aBX7WYKzQ6ERBXOaN
+ IljgDjVs/rfSSAgOIzaH0jqMoDMHluWHmrKptreJFrjqpUN3YT5MB7JPuc3Tv/cuxojXxvmRSK3
+ +9XRwjjyHFI=
+X-Google-Smtp-Source: AGHT+IGFIqRt1cY7/UOAykyVeLjd5JqBdrIgqavE3suoAFMpOVzyWGxr787BzTI6bjv7OWzjFObYzQ==
+X-Received: by 2002:a05:600c:1d83:b0:434:f7e3:bfa8 with SMTP id
+ 5b1f17b1804b1-4361c4590b1mr59282275e9.33.1734021286800; 
+ Thu, 12 Dec 2024 08:34:46 -0800 (PST)
 Received: from hera (ppp176092181030.access.hol.gr. [176.92.181.30])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4362555334bsm21512365e9.1.2024.12.12.08.31.26
+ 5b1f17b1804b1-4362557c66esm21806255e9.14.2024.12.12.08.34.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 08:31:26 -0800 (PST)
-Date: Thu, 12 Dec 2024 18:31:24 +0200
+ Thu, 12 Dec 2024 08:34:46 -0800 (PST)
+Date: Thu, 12 Dec 2024 18:34:44 +0200
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 2/2] bloblist: Disable CONFIG_SPL_BLOBLIST_PRIOR_STAGE on
- some platforms
-Message-ID: <Z1sP3FkqZ8Veaner@hera>
+Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
+Message-ID: <Z1sQpA6eTeh9lbys@hera>
 References: <20241212151142.1562825-1-trini@konsulko.com>
- <20241212151142.1562825-2-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20241212151142.1562825-2-trini@konsulko.com>
+In-Reply-To: <20241212151142.1562825-1-trini@konsulko.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,60 +95,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 12, 2024 at 09:11:42AM -0600, Tom Rini wrote:
-> A few platforms, notably chromebooks bob, coral and kevin, create the
-> bloblist that will be used in SPL and are not provided one by a prior
-> stage. They also define CONFIG_BLOBLIST_ADDR to be in DRAM and so we
-> cannot scan the area until after DRAM init happens in SPL.
+Hi Tom,
+
+On Thu, Dec 12, 2024 at 09:11:41AM -0600, Tom Rini wrote:
+> Introduce an option to control if we expect that a prior stage has
+> created a bloblist already and thus it is safe to scan the address. We
+> need to have this be configurable because we do not (and cannot) know if
+> the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or some special
+> on-chip memory and so it may or may not be safe to read from this
+> address this early.
+
+Yes this patch makes instead of making the OF_SEPARATE implicitly take
+priority
+
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  configs/chromebook_bob_defconfig   | 1 +
->  configs/chromebook_coral_defconfig | 1 +
->  configs/chromebook_kevin_defconfig | 1 +
->  3 files changed, 3 insertions(+)
+>  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
+>  lib/fdtdec.c   | 11 +++--------
+>  2 files changed, 35 insertions(+), 8 deletions(-)
 >
-> diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-> index decac2e19352..e44775506682 100644
-> --- a/configs/chromebook_bob_defconfig
-> +++ b/configs/chromebook_bob_defconfig
-> @@ -38,6 +38,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
->  CONFIG_BLOBLIST=y
->  CONFIG_BLOBLIST_ADDR=0x100000
->  CONFIG_BLOBLIST_SIZE=0x1000
-> +# CONFIG_SPL_BLOBLIST_PRIOR_STAGE is not set
->  CONFIG_SPL_MAX_SIZE=0x1e000
->  CONFIG_SPL_PAD_TO=0x7f8000
->  CONFIG_HANDOFF=y
-> diff --git a/configs/chromebook_coral_defconfig b/configs/chromebook_coral_defconfig
-> index 0fb730497386..a5ef4fd2675e 100644
-> --- a/configs/chromebook_coral_defconfig
-> +++ b/configs/chromebook_coral_defconfig
-> @@ -46,6 +46,7 @@ CONFIG_BLOBLIST=y
->  # CONFIG_TPL_BLOBLIST is not set
->  CONFIG_BLOBLIST_ADDR=0x100000
->  CONFIG_BLOBLIST_SIZE=0x30000
-> +# CONFIG_SPL_BLOBLIST_PRIOR_STAGE is not set
->  CONFIG_SPL_NO_BSS_LIMIT=y
->  CONFIG_HANDOFF=y
->  CONFIG_SPL_SEPARATE_BSS=y
-> diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-> index 5bbea6c42a8b..27fcfe866ee1 100644
-> --- a/configs/chromebook_kevin_defconfig
-> +++ b/configs/chromebook_kevin_defconfig
-> @@ -39,6 +39,7 @@ CONFIG_BOARD_EARLY_INIT_R=y
->  CONFIG_BLOBLIST=y
->  CONFIG_BLOBLIST_ADDR=0x100000
->  CONFIG_BLOBLIST_SIZE=0x1000
-> +# CONFIG_SPL_BLOBLIST_PRIOR_STAGE is not set
->  CONFIG_SPL_MAX_SIZE=0x1e000
->  CONFIG_SPL_PAD_TO=0x7f8000
->  CONFIG_HANDOFF=y
+> diff --git a/common/Kconfig b/common/Kconfig
+> index e8d89bf6eb9d..e8febad0f212 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -1077,6 +1077,14 @@ config BLOBLIST_SIZE
+>  	  is set up in the first part of U-Boot to run (TPL, SPL or U-Boot
+>  	  proper), and this sane bloblist is used for subsequent phases.
+>
+> +config BLOBLIST_PRIOR_STAGE
+> +	bool "Bloblist was created in a stage prior to U-Boot"
+> +	default y
+> +	depends on BLOBLIST_FIXED
+> +	help
+> +	  Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created
+> +	  before U-Boot is started.
+> +
+>  config BLOBLIST_SIZE_RELOC
+>  	hex "Size of bloblist after relocation"
+>  	default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
+> @@ -1117,6 +1125,14 @@ config SPL_BLOBLIST_ALLOC
+>
+>  endchoice
+>
+> +config SPL_BLOBLIST_PRIOR_STAGE
+> +	bool "Bloblist was created in a stage prior to SPL"
+> +	default y
+> +	depends on SPL_BLOBLIST_FIXED
+> +	help
+> +	  Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
+> +	  U-Boot SPL is started.
+> +
+>  endif # SPL_BLOBLIST
+>
+>  if TPL_BLOBLIST
+> @@ -1146,6 +1162,14 @@ config TPL_BLOBLIST_ALLOC
+>
+>  endchoice
+>
+> +config TPL_BLOBLIST_PRIOR_STAGE
+> +	bool "Bloblist was created in a stage prior to TPL"
+> +	default y
+> +	depends on TPL_BLOBLIST_FIXED
+> +	help
+> +	  Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
+> +	  U-Boot TPL is started.
+> +
+>  endif # TPL_BLOBLIST
+>
+>  if VPL_BLOBLIST
+> @@ -1175,6 +1199,14 @@ config VPL_BLOBLIST_ALLOC
+>
+>  endchoice
+>
+> +config VPL_BLOBLIST_PRIOR_STAGE
+> +	bool "Bloblist was created in a stage prior to VPL"
+> +	default y
+> +	depends on VPL_BLOBLIST_FIXED
+> +	help
+> +	  Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
+> +	  U-Boot VPL is started.
+> +
+>  endif # VPL_BLOBLIST
+>
+>  endmenu
+> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> index b06559880296..29bddab4150c 100644
+> --- a/lib/fdtdec.c
+> +++ b/lib/fdtdec.c
+> @@ -1669,15 +1669,10 @@ int fdtdec_setup(void)
+>  	int ret = -ENOENT;
+>
+>  	/*
+> -	 * If allowing a bloblist, check that first. There was discussion about
+> -	 * adding an OF_BLOBLIST Kconfig, but this was rejected.
+> -	 *
+> -	 * The necessary test is whether the previous phase passed a bloblist,
+> -	 * not whether this phase creates one.
+> +	 * Only scan for a bloblist and then if that bloblist contains a device
+> +	 * tree if we have been configured to expect one.
+>  	 */
+> -	if (CONFIG_IS_ENABLED(BLOBLIST) &&
+> -	    (xpl_prev_phase() != PHASE_TPL ||
+> -	     !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
+> +	if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE)) {
+
+Without wider context I am not sure but if that check can fold in
+bloblist_maybe_init() and return -X if the config isn't enabled, it's going
+to be easier to read
+
+Thanks
+/Ilias
+>  		ret = bloblist_maybe_init();
+>  		if (!ret) {
+>  			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
 > --
 > 2.43.0
 >
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
