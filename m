@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70627E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:08:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21664E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5B26801A9;
-	Thu, 12 Dec 2024 23:08:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D0C9801EB;
+	Thu, 12 Dec 2024 23:08:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerz.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gerz.io header.i=@gerz.io header.b="gb4hu9oK";
+	dkim=pass (2048-bit key; unprotected) header.d=gerz.io header.i=@gerz.io header.b="Nr0lTDct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6138801A9; Thu, 12 Dec 2024 23:06:46 +0100 (CET)
+ id 32270801A9; Thu, 12 Dec 2024 23:06:51 +0100 (CET)
 Received: from relay.yourmailgateway.de (relay.yourmailgateway.de
- [188.68.63.102])
+ [188.68.61.103])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3588E80196
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:06:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 407CA801A0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=gerz.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=burak@gerz.io
-Received: from mors-relay-2502.netcup.net (localhost [127.0.0.1])
- by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4Y8RQC5pGqz62tV;
- Thu, 12 Dec 2024 23:06:43 +0100 (CET)
+Received: from mors-relay-8403.netcup.net (localhost [127.0.0.1])
+ by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4Y8RQJ5t5hz873H;
+ Thu, 12 Dec 2024 23:06:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gerz.io; s=key2;
- t=1734041203; bh=PEGp6tOoIOFnd3ihVg/BUNRZMgEM4qC/UVFkTlFQHaw=;
- h=From:To:Cc:Subject:Date:From;
- b=gb4hu9oKOg4kXlquO/4zbhmWaeipRcfrldiRsD3qfRejaMa4fqFGF7fJuwh9qZ5gF
- P8nGAmID5ofPsC85NK9xl/YIJMSR4jUotsHLA2A0MHEU84XUkqkl0wlY849WnOXZA4
- 1m13m5AZ6y1WqtzfJezK1V7sCoThXBN9tTceJ9w9x7BbKPU/Je/UZNjj7hwNrf2uJY
- Eph2nJzbTDPEayJOx+Zd0LMlu6W9kV4VhiJQRfLTopLCD5UcGZzCS2ek454YWJmD+y
- egIyB9311Hof/tdSZgfsNU/KDfeR1k9SZVDu9wmXJJuw+8Vg4B0PR1mn1WOzRC6nRd
- XccATNU33nDIA==
+ t=1734041208; bh=jmwB2W7ZKqjkUZS3jZafDT7JHLK0Y3us6x2MmZSUgm0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Nr0lTDctW9bxmliySK29c22UApWqdVEe4M3Uf4gaAKCwQ4iMgrg+RcPIWWxuXalyv
+ m5MPA7ptTvoqmOB4pyxqBxCGlxE/kRlY/JMcCM6N8lNLVOQFDmgBHO7UM90uxy3TEy
+ Xnb61Zal39Id4J7AQMJcX6rxXE0+yDkWOzD7eoQlKCI4IjGoyhAjKwkCSkNvqLMcY8
+ ni4i+D8xBBokbsyP3iZ4PqFw+/c9lOnoWq3eeMtUwqx3OB+cXmhFC2nKtp2PXPlGBM
+ e5m14iBM2jWVacpgM7kJCjDyHVLjt/lnoTnfsyLH3QxiSVnxhmSIsZ1PlNbDHJ13nE
+ Y6ckl7ryIU/sg==
 Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
- by mors-relay-2502.netcup.net (Postfix) with ESMTPS id 4Y8RQC53Gcz4xJB;
- Thu, 12 Dec 2024 23:06:43 +0100 (CET)
+ by mors-relay-8403.netcup.net (Postfix) with ESMTPS id 4Y8RQJ5SKrz8732;
+ Thu, 12 Dec 2024 23:06:48 +0100 (CET)
 Received: from mx2e3f.netcup.net (unknown [10.243.12.53])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
  SHA256) (No client certificate requested)
- by policy02-mors.netcup.net (Postfix) with ESMTPS id 4Y8RQC13Q0z8sb0;
- Thu, 12 Dec 2024 23:06:43 +0100 (CET)
+ by policy02-mors.netcup.net (Postfix) with ESMTPS id 4Y8RQJ43Z8z8sZP;
+ Thu, 12 Dec 2024 23:06:48 +0100 (CET)
 Received: from localhost.localdomain (adsl-84-227-222-208.adslplus.ch
  [84.227.222.208])
- by mx2e3f.netcup.net (Postfix) with ESMTPSA id 1CADA60134;
- Thu, 12 Dec 2024 23:06:37 +0100 (CET)
+ by mx2e3f.netcup.net (Postfix) with ESMTPSA id 69EC06040B;
+ Thu, 12 Dec 2024 23:06:43 +0100 (CET)
 Authentication-Results: mx2e3f;
  spf=pass (sender IP is 84.227.222.208) smtp.mailfrom=burak@gerz.io
  smtp.helo=localhost.localdomain
@@ -57,22 +57,21 @@ Received-SPF: pass (mx2e3f: connection is authenticated)
 From: Burak Gerz <burak@gerz.io>
 To: u-boot@lists.denx.de
 Cc: Daniel.Venzin@mt.com, eballetb@redhat.com, manut@mecka.net, burak@gerz.io,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/2] fs: fat: Implement FAT file rename
-Date: Thu, 12 Dec 2024 23:06:27 +0100
-Message-ID: <20241212220635.25971-1-burak@gerz.io>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] efi_loader: enable support for file renaming
+Date: Thu, 12 Dec 2024 23:06:28 +0100
+Message-ID: <20241212220635.25971-2-burak@gerz.io>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241212220635.25971-1-burak@gerz.io>
+References: <20241212220635.25971-1-burak@gerz.io>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-PPP-Message-ID: <173404119885.20837.17037298748186851351@mx2e3f.netcup.net>
-X-Rspamd-Queue-Id: 1CADA60134
+X-PPP-Message-ID: <173404120436.21016.12521411030247298800@mx2e3f.netcup.net>
+X-Rspamd-Queue-Id: 69EC06040B
 X-Rspamd-Server: rspamd-worker-8404
-X-NC-CID: uMSxvuDIgQu0Cm3k9rVsS/haOVwHegp+TBRdjs0=
+X-NC-CID: QEzk7buEvz5sk3GLwU56fxIL36RBSbz5dRWweb8=
 X-Mailman-Approved-At: Thu, 12 Dec 2024 23:08:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,33 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello
-This patch series is a first implementation for file renaming on a FAT
-filesystems. This implementation does a file rename only (no moving
-between directories) as needed by bootloaders like systemd-boot [1].
+EFI applications can issue a file rename to U-boot - add support for
+this
 
-The renaming process is tried to be made as fail-safe as possible, by
-  1. Writing the new, empty file
-  2. Copying the address of the start cluster into new directory entry
-  3. Deleting old file
-This can decay in the worst case to a hard link
+Signed-off-by: Burak Gerz <burak@gerz.io>
+---
 
-Additionally, make use of the FAT file rename in /lib/efi_loader
+ lib/efi_loader/efi_file.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-[1] https://www.freedesktop.org/software/systemd/man/latest/systemd-boot.html#Boot%20Counting
-
-
-Burak Gerz (2):
-  efi_loader: enable support for file renaming
-  fs: fat: Implement FAT file rename
-
- fs/fat/fat_write.c        | 99 +++++++++++++++++++++++++++++++++++++++
- fs/fs.c                   | 30 ++++++++++++
- include/fat.h             |  1 +
- include/fs.h              |  2 +
- lib/efi_loader/efi_file.c |  9 ++--
- 5 files changed, 137 insertions(+), 4 deletions(-)
-
+diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+index 95b3c890ee..b4d1a9dad5 100644
+--- a/lib/efi_loader/efi_file.c
++++ b/lib/efi_loader/efi_file.c
+@@ -975,14 +975,15 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
+ 		}
+ 		pos = new_file_name;
+ 		utf16_utf8_strcpy(&pos, info->file_name);
++
+ 		if (strcmp(new_file_name, filename)) {
+-			/* TODO: we do not support renaming */
+-			EFI_PRINT("Renaming not supported\n");
++			if (set_blk_dev(fh) == 0 && fs_rename(fh->path, new_file_name) == 0)
++				ret = EFI_SUCCESS;
++			else
++				ret = EFI_DEVICE_ERROR;
+ 			free(new_file_name);
+-			ret = EFI_ACCESS_DENIED;
+ 			goto out;
+ 		}
+-		free(new_file_name);
+ 		/* Check for truncation */
+ 		if (!fh->isdir) {
+ 			ret = efi_get_file_size(fh, &file_size);
 -- 
 2.45.2
 
