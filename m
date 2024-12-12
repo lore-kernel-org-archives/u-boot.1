@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8752CE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 21:10:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E023E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 21:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E352801BE;
-	Thu, 12 Dec 2024 22:10:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44611801BD;
+	Thu, 12 Dec 2024 22:31:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OU1Kokme";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a7IyoMnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A533E801CF; Thu, 12 Dec 2024 22:10:11 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id E5461801BE; Thu, 12 Dec 2024 22:31:06 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53F87801BD
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 22:10:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05B87800B5
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 22:31:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-6efa5bf5202so9149557b3.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 13:10:09 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6ef60e500d7so9020007b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 13:31:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734037808; x=1734642608; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734039062; x=1734643862; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dblv2IOXCBI7f71ezDoEWVbjVtA5YRc6tyrFzCXOYU4=;
- b=OU1KokmesLmtmbkl01on+Uw2FsFDWhSUPxAazE4gLCwtRParOvCwPuaGFnXzjC2j7+
- 9OF8yUujbIaF6Nkb8LuQfeFiuJGRgROESEcNAxbODZutAAX246NMP9ABb7FI+CWQzShp
- BAFArrdsWQJ1nUhbDrr1iA7Q5VsRGTnqsdnCNYkNJz6ACW8VltmPDI3jxVbQY0dQ9Hs0
- 3bfAPzDtlJIG+WDZmHz1JixKuCQKDApefr8Cswtve7z+tnvlIE2xPT+pz59Q2PTL2IU1
- FMdzOAXb1wFa81cwXIyM/EHP/+Fpk13/6IdC+wu2p2/kRYrTBvuMSm/TdCwcWKEvJjOf
- kMkA==
+ bh=MHbEYb+jytdp+8GIvFL1LAigtHy9QZQl7jnhltMVqv8=;
+ b=a7IyoMnWd33v+YHquCP/prXd6t4rvtXQ3gUkgXZKsy3LK2rO5ZoTB6uJ9Bu6OQdcNH
+ uyepOW8QcEZFSRo7vQsPhne+ATsVHEhpojWHfoPDGqsZFMxn1jn3iNsWDqNXCuPh2baY
+ cRloxsljgTXc3EOvshQKnve78l8kqem59HOVPEsVinQa8gxrUUxZE7dpq0mhkXuy6sIo
+ dZAgOS+tG3kzDMFnG09rAIbLsO5X/cxx2TtBpyQJT+JNph1pfMAKrJj+FRkXOVHJtaiS
+ 3DChBM+yhoMxz9CH7IiD1PnVXlMnQddHs8X6AsBhDcJIv0j4C3PcfIG8CbiCnDqIQj7i
+ 71NA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734037808; x=1734642608;
+ d=1e100.net; s=20230601; t=1734039062; x=1734643862;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dblv2IOXCBI7f71ezDoEWVbjVtA5YRc6tyrFzCXOYU4=;
- b=l+eeE8jhWijjkWrBgNyWKFq7QXkLnR+H5UwFmLFWW0AhwDYHfXcd+JlbZjAyTZKXzJ
- At56+4Ze00BDK3D+ScaAUmv4eH5aSara9DthGaUmcl0pMf5Szb2W/0uTjRJmkxRElXBd
- SMCwkK1QQdpTSIMM7J9EHUQwlqF+qlU31QZq7TDuj/uoBp7iaBv5ShFYBwHiROwV//dz
- hg6qC7lxL5PIG6hrlqCdyjdigwTz3b499T0/BHjT5LjGY2D6/yGaXUfclqdyfLHjV5ja
- ggSMWIV038y61Yf759m/OHigNCSEO+57CDpcVZrm0Pzta6Wflo5s3SoR7P5Za7uJwnfg
- Uefw==
+ bh=MHbEYb+jytdp+8GIvFL1LAigtHy9QZQl7jnhltMVqv8=;
+ b=klzlkobxeyINk/7tMRpXZR5Xg6KF+gEO2qVwoQBs6VbgTGnowX6JhPxL/VU3SKkJtn
+ TPlM6SsrVgXXkNhravvJQFsfBH+XtjvuSZG0/bXNYJ6gYSoTLhW6TEpA+37Aea8ylNmD
+ 2LR6TjKvfJwHS/6+y2p1IsNJNIL4QtYU6opxyaFFO5Xvb1oaFxSipSNV8r90TXoABc4S
+ Ajy/p+9OvkiK2cEm16zx655phHLi30lRZ9F08kiY1hIqxyFa3GgnS+HHEKjN7u/OpZs+
+ sbU9OSuCHT1PaVRoCOdsSEI1rHa2axH3yI94HgWKwUA3OgsNNgYnwc5FG7ilQiE+d9Jq
+ cy9A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLmxJ6DOGqKcjOAHdgL3DB0pQMLneublQdsjFyKFbG5FXddqMXdGHPoLfeeIHF319OQxykgqw=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywt2/4xWmDqqXACojnkKFIRMLuxwtUCtu2toyoFFo+oPUhbLWRT
- GakKU13NR+ZBOmf92DNm8b/u9Qpfr/cIm23XwdgmGUncTPS/pzPKdFp7YmicnNT3vLVsVpP0W/c
- 1jVZJfqz3kReA8waceOcgRrBQGGWt/VfHg1hgqg==
-X-Gm-Gg: ASbGnctymhKvRdEtQl7Ov9lklGh1eAbfG4wmmHITdyTjx+1OedCl2udXWcf79E0k8MV
- QPaTAJ5AGKumf7vZUfeFEAkB6kOydSBbHsxIq5w==
-X-Google-Smtp-Source: AGHT+IH6NNvcMXdq2YMDvBT2Dgy774dL1QeGgdaUVv26ovYdTt6bnDTK/YwRQCNplcC++s36L/bb2AEp1fSxGB42RFY=
-X-Received: by 2002:a05:690c:6a05:b0:6ef:6a91:4966 with SMTP id
- 00721157ae682-6f279b9cab1mr1832847b3.38.1734037808098; Thu, 12 Dec 2024
- 13:10:08 -0800 (PST)
+ AJvYcCWV3bbYjKxwgmG7YaiPL0XpHSs8ezJC4uLN8up45U0JTqLWFzeKhPJZshXdBySt0RTjCMYxDzo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqCPDRX7OV1pl/pxlL8mYLUSC+0x3b5ogz6+iuTD7zNG4Gu+aJ
+ Zc8+BS+ts9rYqxM3x3OtPY+/j7ERg+Q37gN1E0ARKXlLQUgFyN2C3VSaCe6hU3PV1OIJixIB0ee
+ ZoHshkB9lTGmXrmQINTGq/TEelszoIRNKJ4w4YA==
+X-Gm-Gg: ASbGncvdvJKMZiGuyv9jHT4Nna6cbKkah8ADmiNEgz7VEM4zGvnfn3gWrzbukInl5SS
+ dvGQ7AfRZd0XcoWmDXNzwMLQTL6USCNZwZndxOQ==
+X-Google-Smtp-Source: AGHT+IEz5sI+gKK4XC+E79RhnHc+MI/I3R3u3BDbXGW2XwyDqLO67cHlbX2eUkggB5ItwW3GpZEn4pDd41eIAlxi9FE=
+X-Received: by 2002:a05:690c:48c1:b0:6ef:993a:29b4 with SMTP id
+ 00721157ae682-6f2798e22femr3534447b3.0.1734039061825; Thu, 12 Dec 2024
+ 13:31:01 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
- <20241211105504.453234-2-ilias.apalodimas@linaro.org>
-In-Reply-To: <20241211105504.453234-2-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 12 Dec 2024 15:09:57 -0600
-Message-ID: <CAPLW+4=A6CrxZTd4FKjn8do3KaJf0N-wKer7EBzy2RMjgqOL-A@mail.gmail.com>
-Subject: Re: [PATCH v1 1/8] lmb: Remove lmb_align_down()
+Date: Thu, 12 Dec 2024 15:30:51 -0600
+Message-ID: <CAPLW+4nTJ-hPA6d6PD5siVkW3VcbDkPbkmujVe5rAqFCPfUGFQ@mail.gmail.com>
+Subject: Re: [PATCH v1 0/8] Cleanup the LMB subsystem
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: xypron.glpk@gmx.de, trini@konsulko.com,
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Korsgaard <peter@korsgaard.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
  Roman Stratiienko <r.stratiienko@gmail.com>, 
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Nam Cao <namcao@linutronix.de>, Janne Grunau <j@jannau.net>, 
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -107,85 +106,144 @@ X-Virus-Status: Clean
 On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> We already have a macro for this. Use it instead of adding yet another
-> variant for alignment.
+> Hi all,
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-
->  lib/lmb.c | 15 +++++----------
->  1 file changed, 5 insertions(+), 10 deletions(-)
+> This is v1 of the rfc [0]
 >
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index f9880a8dc62b..b9c26cb02e10 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -342,11 +342,6 @@ static long lmb_overlaps_region(struct alist *lmb_rg=
-n_lst, phys_addr_t base,
->         return (i < lmb_rgn_lst->count) ? i : -1;
->  }
+> The LMB subsystem was used opportunistically for a number of years.
+> A while back Sughosh merged it with the EFI subsystem in order to have a
+> common allocator and avoid subsystems overwriting memory they shouldn't.
 >
-> -static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
-> -{
-> -       return addr & ~(size - 1);
-> -}
-> -
->  /*
->   * IOVA LMB memory maps using lmb pointers instead of the global LMB mem=
-ory map.
->   */
-> @@ -400,7 +395,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_siz=
-e_t size, ulong align)
+> This is an initial cleanup of all the crud we gathered over the years.
+> There's no functional change expected from the patches as they just clean=
+up
+> some abstraction functions and rename a few variables to make more
+> sense.
 >
->                 if (lmbsize < size)
->                         continue;
-> -               base =3D lmb_align_down(lmbbase + lmbsize - size, align);
-> +               base =3D ALIGN_DOWN(lmbbase + lmbsize - size, align);
+> I plan to make even bigger changes -- e.g I don't see the point of
+> having *_alloc() and *_reserve() versions of the functions since they mos=
+tly
+> do the same thing and just cause confusion. lmb_alloc_addr_flags()
+> returning the base address on success makes little sense since we
+> already *request* the address on the function arguments, etc.
+> Since this patchset grew enough already, I'd like to get it in
+> before more refactoring happens.
 >
->                 while (base && lmbbase <=3D base) {
->                         rgn =3D lmb_overlaps_region(&io_lmb->used_mem, ba=
-se, size);
-> @@ -416,7 +411,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_siz=
-e_t size, ulong align)
->                         res_base =3D lmb_used[rgn].base;
->                         if (res_base < size)
->                                 break;
-> -                       base =3D lmb_align_down(res_base - size, align);
-> +                       base =3D ALIGN_DOWN(res_base - size, align);
->                 }
->         }
->         return 0;
-> @@ -709,13 +704,13 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size=
-, ulong align,
->                         continue;
+> It's worth noting that although some patches slightly increase the code
+> size due to an extra flags argument being carried around, the final
+> result is eventually smaller.
 >
->                 if (max_addr =3D=3D LMB_ALLOC_ANYWHERE) {
-> -                       base =3D lmb_align_down(lmbbase + lmbsize - size,=
- align);
-> +                       base =3D ALIGN_DOWN(lmbbase + lmbsize - size, ali=
-gn);
->                 } else if (lmbbase < max_addr) {
->                         base =3D lmbbase + lmbsize;
->                         if (base < lmbbase)
->                                 base =3D -1;
->                         base =3D min(base, max_addr);
-> -                       base =3D lmb_align_down(base - size, align);
-> +                       base =3D ALIGN_DOWN(base - size, align);
->                 } else {
->                         continue;
->                 }
-> @@ -740,7 +735,7 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, =
-ulong align,
->                         res_base =3D lmb_used[rgn].base;
->                         if (res_base < size)
->                                 break;
-> -                       base =3D lmb_align_down(res_base - size, align);
-> +                       base =3D ALIGN_DOWN(res_base - size, align);
->                 }
->         }
->         return 0;
+> # qemu_arm64_lwip_defconfig (version string adds another 20b)
+> add/remove: 0/5 grow/shrink: 15/1 up/down: 568/-628 (-60)
+> Function                                     old     new   delta
+> lmb_alloc_base                                80     324    +244
+> lmb_alloc_addr                                 8     144    +136
+> lmb_reserve                                    8      96     +88
+> version_string                                50      70     +20
+> boot_relocate_fdt                            488     508     +20
+> boot_ramdisk_high                            268     284     +16
+> lmb_add_region_flags                         696     704      +8
+> boot_fdt_reserve_region                      100     108      +8
+> load_serial                                  548     552      +4
+> lmb_alloc                                      8      12      +4
+> image_setup_libfdt                           368     372      +4
+> do_load                                      728     732      +4
+> do_bootz                                     332     336      +4
+> do_booti                                     520     524      +4
+> bootm_run_states                            2176    2180      +4
+> lmb_alloc_addr_flags                           4       -      -4
+> boot_fdt_add_mem_rsv_regions                 284     280      -4
+> lmb_alloc_base_flags                          76       -     -76
+> lmb_reserve_flags                             96       -     -96
+> _lmb_alloc_addr                              144       -    -144
+> _lmb_alloc_base                              304       -    -304
+> Total: Before=3D1020102, After=3D1020042, chg -0.01%
+>
+> # sandbox_defconfig (version string adds another 20b)
+> add/remove: 0/3 grow/shrink: 24/3 up/down: 523/-501 (22)
+> Function                                     old     new   delta
+> lmb_alloc_base                                48     299    +251
+> lmb_alloc_addr                                 4      92     +88
+> lmb_reserve                                    4      58     +54
+> test_alloc_addr                             2933    2963     +30
+> version_string                                50      70     +20
+> lib_test_lmb_overlapping_reserve            1018    1030     +12
+> lmb_add_region_flags                         600     610     +10
+> test_multi_alloc.constprop                  3034    3042      +8
+> test_get_unreserved_size                    1032    1038      +6
+> boot_relocate_fdt                            599     605      +6
+> boot_fdt_reserve_region                       67      73      +6
+> lmb_alloc                                      4       9      +5
+> lmb_free_flags                               190     194      +4
+> wget_handler                                1530    1533      +3
+> tftp_handler                                1190    1192      +2
+> test_noreserved                             1207    1209      +2
+> test_bigblock                                911     913      +2
+> load_serial                                  946     948      +2
+> lib_test_lmb_flags                          2101    2103      +2
+> do_spi_flash                                3150    3152      +2
+> do_bootz                                     526     528      +2
+> do_bootm_linux                              2067    2069      +2
+> bootm_run_states                            5275    5277      +2
+> _fs_read.lto_priv                            331     333      +2
+> lmb_dump_region.lto_priv                     356     353      -3
+> lmb_add                                       59      52      -7
+> efi_allocate_pages.part                      303     249     -54
+> lmb_reserve_flags                             65       -     -65
+> _lmb_alloc_addr.lto_priv                      92       -     -92
+> _lmb_alloc_base.lto_priv                     280       -    -280
+> Total: Before=3D2492722, After=3D2492744, chg +0.00%
+>
+> [0] https://lore.kernel.org/u-boot/20241208105223.2821049-1-ilias.apalodi=
+mas@linaro.org/T/#m43927af3f758f8d0be897a8a6c77b4325546afd5
+>
+> Changes since v1:
+> - Rebased on top of
+>   https://lore.kernel.org/u-boot/20241211021703.2333-1-semen.protsenko@li=
+naro.org/
+>   https://lore.kernel.org/u-boot/20241211022550.2995-1-semen.protsenko@li=
+naro.org/
+> - Converted enum lmb_flags to a u32
+> - Removed the _flags from all the functions
+> - Added a patch that removes lmb_align_down()
+> - Picked up r-b tags. Tom I kept your on patch #3 since I only changed th=
+e name
+>   of the function and assumed you are ok with it.
+>
+> Ilias Apalodimas (8):
+>   lmb: Remove lmb_align_down()
+>   lmb: Move enum lmb_flags to a u32
+>   lmb: Remove lmb_reserve_flags()
+>   lmb: Rename free_mem to available_mem
+>   lmb: Remove lmb_add_region()
+>   lmb: Remove lmb_alloc_addr_flags()
+>   lmb: Remove lmb_alloc_base_flags()
+>   lmb: Rename _lmb_alloc_addr() to lmb_alloc_addr_flags()
+>
+>  arch/powerpc/cpu/mpc85xx/mp.c |   2 +-
+>  arch/powerpc/lib/misc.c       |   2 +-
+>  boot/bootm.c                  |   3 +-
+>  boot/image-board.c            |  20 +++--
+>  boot/image-fdt.c              |  15 ++--
+>  cmd/booti.c                   |   2 +-
+>  cmd/bootz.c                   |   2 +-
+>  cmd/load.c                    |   2 +-
+>  fs/fs.c                       |   2 +-
+>  include/lmb.h                 |  58 ++++++---------
+>  lib/efi_loader/efi_memory.c   |   6 +-
+>  lib/lmb.c                     | 136 +++++++++++-----------------------
+>  test/cmd/bdinfo.c             |   4 +-
+>  test/lib/lmb.c                |  92 +++++++++++------------
+>  14 files changed, 145 insertions(+), 201 deletions(-)
+>
 > --
+
+Hi Ilias,
+
+This series doesn't apply as is on current master (tried MBOX file
+from lore). I'll still try to review it by merging conflicts locally,
+but please double check it on your side, and re-submit in case of
+actual conflicts.
+
 > 2.45.2
 >
