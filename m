@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A4BE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 20:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8752CE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 21:10:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 143A68022B;
-	Thu, 12 Dec 2024 21:15:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E352801BE;
+	Thu, 12 Dec 2024 22:10:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z/JUK7XC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OU1Kokme";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B660801FE; Thu, 12 Dec 2024 21:15:06 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id A533E801CF; Thu, 12 Dec 2024 22:10:11 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55F118010E
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:15:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53F87801BD
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 22:10:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6d900c27af7so11755896d6.2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 12:15:03 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-6efa5bf5202so9149557b3.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 13:10:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734034502; x=1734639302; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=X6IFMo4SeAPkNOASUTeA8sWITNKjPV99Mz10kNkVCvs=;
- b=Z/JUK7XCiLdqWAS4IGxWxjiorftLI4zf4wvW73lqlMIrWlpaUG9rdtiEuFCmnu+BQH
- RJmIaqT4y+VSQfKPdlZhDEwYklMmogxL53LniV5X3RxlyY0PnczEehm4+k+BONWbOdrT
- CQe46POumfZekN30G22yds2ga4zPN4lUe9rIs=
+ d=linaro.org; s=google; t=1734037808; x=1734642608; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dblv2IOXCBI7f71ezDoEWVbjVtA5YRc6tyrFzCXOYU4=;
+ b=OU1KokmesLmtmbkl01on+Uw2FsFDWhSUPxAazE4gLCwtRParOvCwPuaGFnXzjC2j7+
+ 9OF8yUujbIaF6Nkb8LuQfeFiuJGRgROESEcNAxbODZutAAX246NMP9ABb7FI+CWQzShp
+ BAFArrdsWQJ1nUhbDrr1iA7Q5VsRGTnqsdnCNYkNJz6ACW8VltmPDI3jxVbQY0dQ9Hs0
+ 3bfAPzDtlJIG+WDZmHz1JixKuCQKDApefr8Cswtve7z+tnvlIE2xPT+pz59Q2PTL2IU1
+ FMdzOAXb1wFa81cwXIyM/EHP/+Fpk13/6IdC+wu2p2/kRYrTBvuMSm/TdCwcWKEvJjOf
+ kMkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734034502; x=1734639302;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X6IFMo4SeAPkNOASUTeA8sWITNKjPV99Mz10kNkVCvs=;
- b=k7ghc/ggDmP2c7tv5lyaDrQVXMdzXG4gRjYvtG0p8DWGuQnKtFW1lZa275dAHLdOWX
- B52bPu+6WZ0vuAcJLttYmGMAVGltzyZvClEypv/ft2P99yJsMb5srXYlXW+t+Z7nYkKi
- APPC8kt3hlsX20xM0Z7ZVp+fD525NN2L7g/56ZuGan3V0eZKGUt/5riJvjfE129ApCdG
- hQFvTMKgKoKSQA1/olwXLjjvXlVAEigVIOxiI2bviN5szuIEwhDoHk1Mzd/tCHf8roX9
- PXfd+wAlIVtzekugBnYKc5pVy69dHIP/6YFkU+EBoUXKsds//Wv87VU9mIJTHkqOCeA8
- 0yNQ==
-X-Gm-Message-State: AOJu0Yzq7eHs4IzcO/eDSAsU4X80WKqvSZyhEHVQEiYOgRkc93qgS4r+
- 947e3Pzo0XISL/k6k43yGIdVfTfyjPVoX6oi3z2s/9B93HEiTOD89nSMEFIvKL2Byqeof7ChEIQ
- G
-X-Gm-Gg: ASbGncuXsKDKwjEcboTS4Uloz8HCBt5634C7LvJX3h9rOfEUdiISM0Hcm0utG7rZ2pF
- xN+02aKrtgG/vfey9Dy718du6eGrqKWLwfiqpY9O4tBrKEjCQKs9s3ICBohszYftmfXfgRNvGH6
- DAOb5EoYA53WIF57nXMNbHe2wSdcVY2URW3IZ3uHYsvVbVDTFUgQ7bNgvGXE6QQY1spKJRbNJDs
- eHFQUSCDUrSylY3ry/hfyO7yIHpWY0xpIroMMXopkXmq0axU4hGuvvDSiWrCmEA4YBg77TcqwX0
- wbE=
-X-Google-Smtp-Source: AGHT+IGTAjKsCIDt00/dKN5MyxA+GbEgzEAvJHvLYL+yfeHlcYCecdG37cdGukkNWYldd2QgMEdGmg==
-X-Received: by 2002:a05:6214:5017:b0:6d8:aa14:f5b8 with SMTP id
- 6a1803df08f44-6db0f838df7mr25369586d6.40.1734034501823; 
- Thu, 12 Dec 2024 12:15:01 -0800 (PST)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8da9feab9sm84970566d6.71.2024.12.12.12.15.00
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 12:15:01 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] Gitlab: Make test.py stage only depend on binman et al
- testsuite
-Date: Thu, 12 Dec 2024 14:14:59 -0600
-Message-ID: <20241212201459.1613044-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1734037808; x=1734642608;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dblv2IOXCBI7f71ezDoEWVbjVtA5YRc6tyrFzCXOYU4=;
+ b=l+eeE8jhWijjkWrBgNyWKFq7QXkLnR+H5UwFmLFWW0AhwDYHfXcd+JlbZjAyTZKXzJ
+ At56+4Ze00BDK3D+ScaAUmv4eH5aSara9DthGaUmcl0pMf5Szb2W/0uTjRJmkxRElXBd
+ SMCwkK1QQdpTSIMM7J9EHUQwlqF+qlU31QZq7TDuj/uoBp7iaBv5ShFYBwHiROwV//dz
+ hg6qC7lxL5PIG6hrlqCdyjdigwTz3b499T0/BHjT5LjGY2D6/yGaXUfclqdyfLHjV5ja
+ ggSMWIV038y61Yf759m/OHigNCSEO+57CDpcVZrm0Pzta6Wflo5s3SoR7P5Za7uJwnfg
+ Uefw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVLmxJ6DOGqKcjOAHdgL3DB0pQMLneublQdsjFyKFbG5FXddqMXdGHPoLfeeIHF319OQxykgqw=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywt2/4xWmDqqXACojnkKFIRMLuxwtUCtu2toyoFFo+oPUhbLWRT
+ GakKU13NR+ZBOmf92DNm8b/u9Qpfr/cIm23XwdgmGUncTPS/pzPKdFp7YmicnNT3vLVsVpP0W/c
+ 1jVZJfqz3kReA8waceOcgRrBQGGWt/VfHg1hgqg==
+X-Gm-Gg: ASbGnctymhKvRdEtQl7Ov9lklGh1eAbfG4wmmHITdyTjx+1OedCl2udXWcf79E0k8MV
+ QPaTAJ5AGKumf7vZUfeFEAkB6kOydSBbHsxIq5w==
+X-Google-Smtp-Source: AGHT+IH6NNvcMXdq2YMDvBT2Dgy774dL1QeGgdaUVv26ovYdTt6bnDTK/YwRQCNplcC++s36L/bb2AEp1fSxGB42RFY=
+X-Received: by 2002:a05:690c:6a05:b0:6ef:6a91:4966 with SMTP id
+ 00721157ae682-6f279b9cab1mr1832847b3.38.1734037808098; Thu, 12 Dec 2024
+ 13:10:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+ <20241211105504.453234-2-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-2-ilias.apalodimas@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 12 Dec 2024 15:09:57 -0600
+Message-ID: <CAPLW+4=A6CrxZTd4FKjn8do3KaJf0N-wKer7EBzy2RMjgqOL-A@mail.gmail.com>
+Subject: Re: [PATCH v1 1/8] lmb: Remove lmb_align_down()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Nam Cao <namcao@linutronix.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,39 +104,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Our Gitlab pipeline is currently broken up in to several stages. This
-was done with the thought process of "we should test tools and if
-they're good test emulated targets and if they're good test real
-hardware and if they're good test the world". However, in terms of that
-first stage it only really matters that binman, et al are still
-functional. And for a few years now Gitlab has had a "needs" keyword
-that lets you refine pipeline dependencies. Use this to perform the
-minor optimization of having test.py only require that tool testing job.
-This will become more useful later when we add long running testsuites
-that we do not want to block later jobs.
+On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> We already have a macro for this. Use it instead of adding yet another
+> variant for alignment.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-More specifically, after talking with Ilias we will get the SystemReady
-IR ACS testsuite as a possible job in CI. But it takes ages to complete,
-so we'll be (a) running it only on tagged releases and (b) want to make
-sure it doesn't the rest of the pipeline.
----
- .gitlab-ci.yml | 1 +
- 1 file changed, 1 insertion(+)
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 2164ad79a72b..807837b6e118 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -23,6 +23,7 @@ stages:
- .buildman_and_testpy_template: &buildman_and_testpy_dfn
-   stage: test.py
-   retry: 2 # QEMU may be too slow, etc.
-+  needs: [ "Run binman, buildman, dtoc, Kconfig and patman testsuites" ]
-   rules:
-     - when: always
-   before_script:
--- 
-2.43.0
-
+>  lib/lmb.c | 15 +++++----------
+>  1 file changed, 5 insertions(+), 10 deletions(-)
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index f9880a8dc62b..b9c26cb02e10 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -342,11 +342,6 @@ static long lmb_overlaps_region(struct alist *lmb_rg=
+n_lst, phys_addr_t base,
+>         return (i < lmb_rgn_lst->count) ? i : -1;
+>  }
+>
+> -static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
+> -{
+> -       return addr & ~(size - 1);
+> -}
+> -
+>  /*
+>   * IOVA LMB memory maps using lmb pointers instead of the global LMB mem=
+ory map.
+>   */
+> @@ -400,7 +395,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_siz=
+e_t size, ulong align)
+>
+>                 if (lmbsize < size)
+>                         continue;
+> -               base =3D lmb_align_down(lmbbase + lmbsize - size, align);
+> +               base =3D ALIGN_DOWN(lmbbase + lmbsize - size, align);
+>
+>                 while (base && lmbbase <=3D base) {
+>                         rgn =3D lmb_overlaps_region(&io_lmb->used_mem, ba=
+se, size);
+> @@ -416,7 +411,7 @@ phys_addr_t io_lmb_alloc(struct lmb *io_lmb, phys_siz=
+e_t size, ulong align)
+>                         res_base =3D lmb_used[rgn].base;
+>                         if (res_base < size)
+>                                 break;
+> -                       base =3D lmb_align_down(res_base - size, align);
+> +                       base =3D ALIGN_DOWN(res_base - size, align);
+>                 }
+>         }
+>         return 0;
+> @@ -709,13 +704,13 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size=
+, ulong align,
+>                         continue;
+>
+>                 if (max_addr =3D=3D LMB_ALLOC_ANYWHERE) {
+> -                       base =3D lmb_align_down(lmbbase + lmbsize - size,=
+ align);
+> +                       base =3D ALIGN_DOWN(lmbbase + lmbsize - size, ali=
+gn);
+>                 } else if (lmbbase < max_addr) {
+>                         base =3D lmbbase + lmbsize;
+>                         if (base < lmbbase)
+>                                 base =3D -1;
+>                         base =3D min(base, max_addr);
+> -                       base =3D lmb_align_down(base - size, align);
+> +                       base =3D ALIGN_DOWN(base - size, align);
+>                 } else {
+>                         continue;
+>                 }
+> @@ -740,7 +735,7 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, =
+ulong align,
+>                         res_base =3D lmb_used[rgn].base;
+>                         if (res_base < size)
+>                                 break;
+> -                       base =3D lmb_align_down(res_base - size, align);
+> +                       base =3D ALIGN_DOWN(res_base - size, align);
+>                 }
+>         }
+>         return 0;
+> --
+> 2.45.2
+>
