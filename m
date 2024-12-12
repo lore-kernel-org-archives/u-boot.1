@@ -4,56 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33E19E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2D1E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:14:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCC8D80296;
-	Thu, 12 Dec 2024 23:11:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7F491801B0;
+	Thu, 12 Dec 2024 23:14:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hV5BbNLy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dk0OPCCD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9BD80288; Thu, 12 Dec 2024 23:11:06 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 795B1801BE; Thu, 12 Dec 2024 23:14:35 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE870801A0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:11:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D09B6800D7
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:14:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e29f=TG=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734041458; bh=Gp3oQiMNLjYjbJtcnx06Rv8Gn+feHsaHDdWB4hRqPhE=;
- b=hV5BbNLyQVg7FWlX0MezG4rXfrcE83v5jhQTUSwCgpB2Gr0KthYaJwTa0QTvHQZf13frqXuoU
- oUUv03g70tPqZvlw+p/CMxWujM8usaFnB+Dfxt1vt9vdBJfugPFvPGBB/PZQZ17MP0IItjt8I4a
- TNP056gGxS8Fnz/odHCP4IX0a4a1gkoVIYBKThkxs+8WWyO+o0kXnZI2o4BG6cogxcb+Xe+b0P4
- y15kHFX0jKz/zbZYew4Yze/achktPLvupWeqr614xREwj+l+95wzytO0GFo8N8I5cZSlH5qzpLH
- +L5Dyhm+z+Qk+yXNrGWv555zO0ZR7nkUEMERjT8TfTiQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 11/11] rockchip: rk3288-firefly: Change to use FIT
-Date: Thu, 12 Dec 2024 22:09:44 +0000
-Message-ID: <20241212221000.94501-12-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241212221000.94501-1-jonas@kwiboo.se>
-References: <20241212221000.94501-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b6eeff1fdfso86537385a.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:14:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734041671; x=1734646471; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TRN9myjHu9bMOqJAsnNtdSik2yJF/SlFKhMxs1oyzxU=;
+ b=Dk0OPCCDBqu1x7Ir26P5/5LDJmhzrQafyXs/0P+/z8PmMyeLyLpDGdHCXi4carAkJx
+ jbLGz+uRtcZaI45QqMhkeXe7oNVwpasBB8WNBwNZSDIwnvK3EvN4b8ZoEERvW8wcJ2xR
+ /JqOcDudwiVEmC3TkglAsQxh0BbsXbsDFNgog=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734041671; x=1734646471;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TRN9myjHu9bMOqJAsnNtdSik2yJF/SlFKhMxs1oyzxU=;
+ b=Ws/tG5h1u6MI+9OfGhu3UNpnGo3tMYKbJJogy2vJWfvkO2qFYIlsYSuMuzD94SJMP4
+ LGt3EwwYczuGAo4UjLC76MXt7837ObV1ASfpyXyH46kq+5slWpEElnoxEMn1zbdA1BwJ
+ T7tCM9NoBp9QYa+JNLqFS2aC9mF+AaepTH8sOrZrk0Xl2ZjTCLh0+KT/7hcE6BUQmRPi
+ /LGtFIzTknrXG54B82lj9u7UVj3SWJXbs10fwLjszeGPZixWGqafopYKw8XSdtQfc2H+
+ i0DUCw0NEEfxRy7OK7m6FhVUyJIC90+4puc726aDJWxKLOSockgMjqkKluOFOEndjvHx
+ ZC7Q==
+X-Gm-Message-State: AOJu0YyR7gAJccsB8DQt6y7McjMq5fIW3g1oKOLmapUs0V0E9MbxERAA
+ mdW8j/2oHXNy5jDLuFDhiZ+IXZErN8wj40Z4zYAANeWDTeUvBLzbAViBbYDFBpE=
+X-Gm-Gg: ASbGncunds5mUZBrgxumBSgzrBVmvOuH0YmtPkmXAzCxN+2hVjHLRWTLI1RZaDcqP/1
+ GbIciIBexmOuPS5x/GqlCLD93EaykEWlxaDPkD6wWEzCAABwVoCPt7dSkWtiShmlkgykwHeW0fU
+ KsD2yn7YMmSTyjskdL6CApgUyFV2tenSitK+dYK7uPc0XpUXu/vS4z8sTlhwoJDnNliu3ORxhEP
+ p0OmqR3ShZzW7uNc/RHbVHocLzAGSSMZPtqmCxMYzmVONOeRfr+Ylse
+X-Google-Smtp-Source: AGHT+IGTFWnQHTVPjw2D6ZFlzPhNcVj12FiTDir2vDKuHesqFodKkeWF4OR8Ci8oZKygvdjgBIvjjw==
+X-Received: by 2002:a05:620a:2716:b0:7b6:668a:5a7 with SMTP id
+ af79cd13be357-7b6fbf79679mr17676485a.62.1734041671620; 
+ Thu, 12 Dec 2024 14:14:31 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b6fbf9a8basm2981785a.35.2024.12.12.14.14.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Dec 2024 14:14:30 -0800 (PST)
+Date: Thu, 12 Dec 2024 16:14:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Burak Gerz <burak@gerz.io>
+Cc: u-boot@lists.denx.de, Daniel.Venzin@mt.com, eballetb@redhat.com,
+ manut@mecka.net, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 0/2] fs: fat: Implement FAT file rename
+Message-ID: <20241212221427.GM1505244@bill-the-cat>
+References: <20241212220635.25971-1-burak@gerz.io>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-ForwardEmail-ID: 675b5f6da511ed8f0b3fc8dd
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="up3YQPt7cifqVG6O"
+Content-Disposition: inline
+In-Reply-To: <20241212220635.25971-1-burak@gerz.io>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,41 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change to use FIT and FIT_SIGNATURE when loading U-Boot proper in SPL to
-allow checksum validation and fallback loading of FIT from a different
-mmc device.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- configs/firefly-rk3288_defconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+--up3YQPt7cifqVG6O
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index 95fb20b8b24c..d8a671b7a8a4 100644
---- a/configs/firefly-rk3288_defconfig
-+++ b/configs/firefly-rk3288_defconfig
-@@ -18,9 +18,15 @@ CONFIG_DEBUG_UART_BASE=0xff690000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3288-firefly.dtb"
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
-@@ -92,4 +98,5 @@ CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_HDMI=y
- CONFIG_CONSOLE_SCROLL_LINES=10
- CONFIG_CMD_DHRYSTONE=y
-+CONFIG_SPL_CRC32=y
- CONFIG_ERRNO_STR=y
--- 
-2.47.1
+On Thu, Dec 12, 2024 at 11:06:27PM +0100, Burak Gerz wrote:
 
+> Hello
+> This patch series is a first implementation for file renaming on a FAT
+> filesystems. This implementation does a file rename only (no moving
+> between directories) as needed by bootloaders like systemd-boot [1].
+>=20
+> The renaming process is tried to be made as fail-safe as possible, by
+>   1. Writing the new, empty file
+>   2. Copying the address of the start cluster into new directory entry
+>   3. Deleting old file
+> This can decay in the worst case to a hard link
+>=20
+> Additionally, make use of the FAT file rename in /lib/efi_loader
+>=20
+> [1] https://www.freedesktop.org/software/systemd/man/latest/systemd-boot.=
+html#Boot%20Counting
+
+This is useful, thanks! Can you please extend the existing tests in=20
+test/py/tests/test_fs/ to cover this as well?
+
+--=20
+Tom
+
+--up3YQPt7cifqVG6O
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdbYD0ACgkQFHw5/5Y0
+tyxUyAv9FUCOTZLeynQ+IPihaSt77wlK2cqkx6D1Cd5U1uSbijqap3wALAxAA/ve
+oME9X/X2f5Upq2XOVW4K/kbT9C4ZgFxK1yDV2wrNnntCM7KT5BD7sMnrOmrnDQy+
+q0WnOtiUaZOAWtw4hi9HRMNXXrrIbBvisfk/8zmd4vdwtSkIcix6VQKqU+Se7qRS
+S/ZR4bMm9TsTzMXTSVfu+LKOX7BIGhkx43ZH6caS8na6rrzt2e1sTc5D//X5RSLD
+5IIuPdSnMk1FtKmDx6reWMrIveOui6W44GpMArhJfYj6JbNiDfZp2b3ZKEnAEVoc
+03LHEQ7A0dB82C8AUEB5Gw5HkQ+uXu0/1sZmU0CfeOgDe5Tf9mzxCmK7Q5gYnyUn
+c6WyJwDeYXvpp9N26jGQPEWuu1i8FPOWjjDGqBV2qip5K5Tnms22Vp9ZCT4hn+Js
+UB+Qocme5iwfwzzsP/ZU2vZ7M6StvCi8bQjpvYenKP8NQWkYIIHp6uXERN1L5bWm
+78DzNM9o
+=aUAj
+-----END PGP SIGNATURE-----
+
+--up3YQPt7cifqVG6O--
