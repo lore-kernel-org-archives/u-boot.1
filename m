@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34E77E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1C1E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFF99801B0;
-	Thu, 12 Dec 2024 23:10:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3498D80224;
+	Thu, 12 Dec 2024 23:10:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MW5LZxuF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0LG5ffY8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 521258022F; Thu, 12 Dec 2024 23:10:30 +0100 (CET)
+ id CE7C1801A0; Thu, 12 Dec 2024 23:10:35 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0AF980212
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:10:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D73F3802B4
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:10:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734041425; bh=Qkuj9E/yr0I7yLEnz4lpQeZuA1D4A70PDnSNqA5tu6U=;
- b=MW5LZxuFePA44iSskfxxukJFwI5SqzSFbXlPXPCnMxgxlgM1bEhDeNCPxgdvafXnbu0XPbBUS
- i3UlI/knoxzUGhxSrDdo5pNIOoRpD90zoJvgVplD5S2r2Z9YQO2EPECuoLSch83ltVnQ9nnLWRc
- K5SJzX1znGdyX57mva9eiK5rnzCVgEXq3lNXOt9TdjhQ/jChRVJoz1HK1VU9JPc817g621ThMWm
- 5bq5jflvhqQCFXQpJ/Gy3MAkXapt4L4LCP+xaW8svRAoM3zQj3l79x4vKH+BnVOgZjxkrzybVEq
- vtSmGem/xNp1ohEtduXjN/s3tehb6Tt/BpbXaOEDF1vA==
+ t=1734041430; bh=z/uQCovnsR35F7L5Ohk+ylCMDsWHR2EtrmeuUG0o71U=;
+ b=0LG5ffY8nPzUgjDyDMy3vj4VWtA8Qd99kBqq2n38bITk63PwpfoNRPdzqvjXJIOb+PenvVD1u
+ NAJveCuO0y2PRfcqG6RPfqiwDafC/RnF5YjuUc1NOd0OEUQ8AJW576JaL5ovV0nkaYE8R1fV25u
+ qHkz5yvIlv/5iGep55ZEi5G8W/YdHyNASnFp6H5h5BvpTOI/dLNIGhQtTzhNhCoGW18RgZGRWn8
+ sZoaKjkjMNH4jcwuji3OkC3Lv6pECXRDs+2rBuxaeQZQHEqCb8fAQPqvsAZJKzn350KLWbI/GPg
+ iKGCbm5pEL3FoeyBoBfRiaqE6d5AD4h3en30j5u4WSww==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 04/11] rockchip: rk3288-firefly: Use common bss and stack
- addresses
-Date: Thu, 12 Dec 2024 22:09:37 +0000
-Message-ID: <20241212221000.94501-5-jonas@kwiboo.se>
+Subject: [PATCH 05/11] rockchip: rk3288-firefly: Include required DT nodes in
+ xPL
+Date: Thu, 12 Dec 2024 22:09:38 +0000
+Message-ID: <20241212221000.94501-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241212221000.94501-1-jonas@kwiboo.se>
 References: <20241212221000.94501-1-jonas@kwiboo.se>
@@ -54,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 675b5f50a511ed8f0b3fc83e
+X-ForwardEmail-ID: 675b5f54a511ed8f0b3fc850
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,62 +71,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate to use common bss, stack and malloc heap size and addresses to
-unify memory use in TPL, SPL and pre-reloc.
+Add bootph- props to emmc, sdmmc, uart and related pinctrl nodes to
+ensure devices and pinctrl can be used in xPL and U-Boot pre-reloc.
 
-ENV_OFFSET is using the default value of 0x3f8000 and is also dropped.
+Remove the explicit bootph-all prop from the pinctrl node, any bootph-
+prop will automatically be propagated to the pinctrl node.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3288/Kconfig |  1 +
- configs/firefly-rk3288_defconfig      | 10 ----------
- 2 files changed, 1 insertion(+), 10 deletions(-)
+ arch/arm/dts/rk3288-firefly-u-boot.dtsi | 55 ++++++++++++++++++++++---
+ configs/firefly-rk3288_defconfig        |  2 +-
+ 2 files changed, 51 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3288/Kconfig b/arch/arm/mach-rockchip/rk3288/Kconfig
-index 9cc97bacc41d..e563bf455e68 100644
---- a/arch/arm/mach-rockchip/rk3288/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3288/Kconfig
-@@ -75,6 +75,7 @@ config TARGET_FENNEC_RK3288
- config TARGET_FIREFLY_RK3288
- 	bool "Firefly-RK3288"
- 	select BOARD_LATE_INIT
-+	select ROCKCHIP_COMMON_STACK_ADDR
- 	select TPL
- 	help
- 	  Firefly is a RK3288-based development board with 2 USB ports,
+diff --git a/arch/arm/dts/rk3288-firefly-u-boot.dtsi b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
+index 8870188e6129..435a02acea5d 100644
+--- a/arch/arm/dts/rk3288-firefly-u-boot.dtsi
++++ b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
+@@ -26,35 +26,75 @@
+ };
+ 
+ &emmc {
+-	bootph-all;
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&emmc_bus8 {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&emmc_clk {
++	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+-&gpio3 {
++&emmc_cmd {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&emmc_pwr {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&gpio7 {
++	/delete-property/ bootph-all;
++};
++
++&pcfg_pull_none {
+ 	bootph-all;
+ };
+ 
+-&pcfg_pull_up_drv_12ma {
++&pcfg_pull_none_12ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+-&pinctrl {
++&pcfg_pull_up {
+ 	bootph-all;
+ };
+ 
++&pcfg_pull_up_drv_12ma {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
+ &sdmmc {
+-	bootph-all;
++	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc_bus4 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdmmc_cd {
++	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc_cmd {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc_pwr {
+@@ -64,3 +104,8 @@
+ &uart2 {
+ 	bootph-all;
+ };
++
++&uart2_xfer {
++	bootph-pre-sram;
++	bootph-pre-ram;
++};
 diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index eed0806b2321..87ed0c0d2aea 100644
+index 87ed0c0d2aea..862a17c84e07 100644
 --- a/configs/firefly-rk3288_defconfig
 +++ b/configs/firefly-rk3288_defconfig
-@@ -5,19 +5,11 @@ CONFIG_SYS_ARCH_TIMER=y
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_TEXT_BASE=0x01000000
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x100000
- CONFIG_SF_DEFAULT_SPEED=20000000
--CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3288-firefly"
- CONFIG_DM_RESET=y
--CONFIG_SYS_MONITOR_LEN=614400
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_FIREFLY_RK3288=y
--CONFIG_SPL_STACK_R_ADDR=0x80000
--CONFIG_SPL_STACK=0xff718000
--CONFIG_SPL_STACK_R=y
--CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_SPL_SIZE_LIMIT=0x40000
-@@ -31,8 +23,6 @@ CONFIG_SILENT_CONSOLE=y
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_MISC_INIT_R=y
- CONFIG_SPL_PAD_TO=0x7f8000
--CONFIG_SPL_NO_BSS_LIMIT=y
--# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
+@@ -38,7 +38,7 @@ CONFIG_CMD_REGULATOR=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_REGMAP=y
 -- 
 2.47.1
 
