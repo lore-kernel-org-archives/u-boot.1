@@ -4,84 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91699E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:09:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BAD1E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:38:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00CD5801B6;
-	Thu, 12 Dec 2024 15:09:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 54AEA801B6;
+	Thu, 12 Dec 2024 15:38:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dre0+f3S";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o3BhFNbl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC66C801BD; Thu, 12 Dec 2024 15:09:27 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E117980192
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:09:24 +0100 (CET)
+ id 4DEBA801BD; Thu, 12 Dec 2024 15:38:42 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F837801A0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:38:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5d0d32cd31aso786908a12.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 06:09:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734012564; x=1734617364; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jKHWiLiJo+gUqMa9aOsSuI6jMBWRmimcQwncBBD31ys=;
- b=Dre0+f3S/RbvnSScBPI2mk7JfufSvLOUDIorgJOqxdTQI0k2E5WoBRMcoqRRpgwOy4
- FecnAtwrY6NCwleT0cRj6xEOkv7ot8NtM++2bnSriBc+NaMc/fT8nirdoaHSS5s3IknJ
- NL5TV9an+4Qy+MN0bzOTw1iLgTjTdXQANSpog=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734012564; x=1734617364;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jKHWiLiJo+gUqMa9aOsSuI6jMBWRmimcQwncBBD31ys=;
- b=tqHjnyide5KH/g51BmHsb5H8LNNmtG6gygc/Zs1m6oH2TY1iyS06sg4nDB5j22icKG
- xVmsTHKoB8F0VMPWYAjuwfN9OBC0mx73Rj0MZtKm1vxiCN3rwvHXnY9v0v1wFedrXq7V
- qJ88o4Nq+xOZHKCIGLX3Ag59U8WBxMX+Qfd82Wk3XGmDvoj3aZguyyk9jH0RWFXFDBND
- HVR6dQ+yXV3QshzaMu3Lx6+Q10bKvzuc4NfezwQOKl6Qr3T+9MV+QAXdVBvHkdSu+/3N
- HsTdsljZjR5/JLYcBWqend2zS15FBQSlskpZeK+aStb1ArcmQyZJPrJtIoXhivc5Iv8e
- GP0Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX2Gd6dtqk//kUs+Wd7qAZobhvg9sV/W+clfFo4PTbvD/yH9mZH9jL22vFa0su3YZCSDY0hwuI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzYc1jMTs4zMd5ZflNCIm2Svtkupy/G5BAWGemWtjl5ANqK3FG
- rcTnk2TQqA4fCvFFAuPJQ/S4sMsDrMBdtzuAvEnDdOmTG30IxXiVb0qd+5ENE1JMU6Cxp/MGw63
- yoyw8EuVAMPnaibsRIfeww8Tia+hwvRQD5j89
-X-Gm-Gg: ASbGncvvVdvVZpDIrcLKvma4DTSQ7KpwBwS8C3+HlFHsfWaKJljsVX1zXXZLeOtOzNh
- xVsXs/bK4jMapsAm1w7OY5YQt29bkdwr4JYyzWBs=
-X-Google-Smtp-Source: AGHT+IGxtGe0yJg/E+MArwGesyNnF35FNvxOHN4GjlqQcqj8JInWKyZ7adtCE+z0BgXq8j1V5+5CWBwMCDHROrBKkUY=
-X-Received: by 2002:a05:6402:2696:b0:5d0:d491:2d5e with SMTP id
- 4fb4d7f45d1cf-5d632369307mr788097a12.7.1734012564219; Thu, 12 Dec 2024
- 06:09:24 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCEcbOW2998938
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 12 Dec 2024 08:38:37 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734014317;
+ bh=zOcPppgZ4Go7rrr1gMDkcsH6uvv/uAvKWjyxtGgwuzE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=o3BhFNblX7LciC0jP6HhXR0TvL9Szw7IzyeNd+fGVzIcXyOHaXIy0YnA99ujqDNjY
+ fCFEljbavcvsW+rGQwwJOVqF5esGqx6nFVqxG/yjQX+nxYpdMvlzAhp1+6yRbYo/Se
+ JVfDMYASnPZKyLBTxyaz422lC+mIW0E6FPbG8NFY=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCEcbaw130413
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 12 Dec 2024 08:38:37 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
+ Dec 2024 08:38:36 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 12 Dec 2024 08:38:36 -0600
+Received: from [172.24.227.241] (santhoshkumark.dhcp.ti.com [172.24.227.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BCEcX6E100479; 
+ Thu, 12 Dec 2024 08:38:34 -0600
+Message-ID: <8e1b6379-4c82-4c08-9461-43e547e01a01@ti.com>
+Date: Thu, 12 Dec 2024 20:08:33 +0530
 MIME-Version: 1.0
-References: <20241202001243.1283274-1-sjg@chromium.org>
- <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
- <20241202141558.GD2457179@bill-the-cat>
- <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
- <20241204012907.GD2457179@bill-the-cat>
- <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
- <20241204162707.GG2457179@bill-the-cat>
- <CAFLszTjs7taGs5LjiZ4XBgkJtjK_Db7ZiWwbpW6Kzz_tFjo=Rw@mail.gmail.com>
- <20241206201236.GA2457179@bill-the-cat>
- <CAFLszTg2Y13iUsL7EHcw=8cKY_ii==ANoG-ztpS0Y5eMc_UKow@mail.gmail.com>
- <20241207005910.GE2457179@bill-the-cat>
-In-Reply-To: <20241207005910.GE2457179@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 12 Dec 2024 07:09:12 -0700
-Message-ID: <CAFLszTg74zTUN-8VhY5sENe0hMxrnHkXd67ji4w=q=eu33NAaQ@mail.gmail.com>
-Subject: Re: Applying patches to mainline (Was: Re: [PATCH v2 0/7] efi_loader:
- Add support for logging to a buffer)
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/8] Inline ECC Series
+To: <trini@konsulko.com>, <m-chawdhry@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
+ <vigneshr@ti.com>, <bb@ti.com>
+CC: <u-boot@lists.denx.de>, <w.egorov@phytec.de>, <n-francis@ti.com>,
+ <s-k6@ti.com>
+References: <20241021044024.835846-1-s-k6@ti.com>
+Content-Language: en-US
+From: Santhosh Kumar K <s-k6@ti.com>
+In-Reply-To: <20241021044024.835846-1-s-k6@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,238 +82,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi, everyone,
 
-On Fri, 6 Dec 2024 at 17:59, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 06, 2024 at 04:43:47PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 6 Dec 2024 at 13:12, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Dec 06, 2024 at 12:19:38PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 4 Dec 2024 at 09:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Dec 04, 2024 at 08:13:04AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 3 Dec 2024 at 18:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Dec 02, 2024 at 05:21:05PM -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > From my side I'd like to change the conversation a little, to how to
-> > > > > > > > land code, rather than why we should bother. "Code needs to land"
-> > > > > > > > should be the motto. If someone has taken the time to create
-> > > > > > > > something, our bias should be towards getting it in, with sufficient
-> > > > > > > > changes to make it fit the project. There are cases where something is
-> > > > > > > > just a bad idea, or should be done another way, but for people working
-> > > > > > > > on major features or changes, biasing towards not landing the code is
-> > > > > > > > just going to make them go elsewhere.
-> > > > > > >
-> > > > > > > This is the wrong approach I believe. The goal has always been and
-> > > > > > > continues to be to have reviewed (whenever possible, our developer
-> > > > > > > community is small) incremental change over time.
-> > > > > >
-> > > > > > Yes, I agree with that, but it isn't what I said.
-> > > > >
-> > > > > I don't know how else to interpret "Code needs to land". I'm not sure
-> > > > > what reviewed patches we have that are outstanding, but also not fairly
-> > > > > new. We do have patches outstanding, in general. Much of those fall in
-> > > > > to the categories of:
-> > > > > - Custodian is active, but also very busy (virtually everyone is a
-> > > > >   volunteer so I have a hard time getting forceful with people that have
-> > > > >   a large queue).
-> > > > > - Custodian isn't active / no direct custodian and the code hasn't been
-> > > > >   reviewed by anyone else.
-> > > >
-> > > > Here's my intention with 'code needs to land': to bias against people
-> > > > saying "I don't like this; I don't care about your use case; please go
-> > > > away"
-> > >
-> > > To me that applies an arbitrary nature to patches being rejected, which
-> > > I do not see as being the case.
-> > >
-> > > > > > > Just because something
-> > > > > > > has been posted a number of times does not mean it's ready to be merged.
-> > > > > >
-> > > > > > I didn't say that either.
-> > > > >
-> > > > > It's an impression you give however when you repost a series less than a
-> > > > > day after last posting, without addressing all of the feedback.
-> > > >
-> > > > I'm going to ignore that comment as it is not helpful and
-> > > > mischaracterises my contributions.
-> > >
-> > > I stand by it, and will let others judge if that's the impression they
-> > > have, or not.
-> >
-> > I'll put the relevant threads at [1], ditto.
-> >
-> > >
-> > > > > > > Your challenge today is that on patchwork you have over 150 patches
-> > > > > > > covering a wide variety of topics and of which many series have
-> > > > > > > technically-merited feedback that needs to be addressed in a technical
-> > > > > > > manner.
-> > > > > >
-> > > > > > By my count I have about 10 series in progress, with a small number of
-> > > > > > patches (< 10?) with pending feedback
-> > > > >
-> > > > > I'm not sure about that less than 10 number, in part because it's hard
-> > > > > to keep track of which feedback was applied, and which not. And part
-> > > > > because some of those series are places where I told you I'm unsure
-> > > > > about the core concept but you asked and I'm giving you leeway to show
-> > > > > me the end result.
-> > > >
-> > > > OK
-> > > >
-> > > > >
-> > > > > > that isn't effectively just a
-> > > > > > NAK.
-> > > > >
-> > > > > To be clear, "just a NAK" isn't the whole story. Those NAKs come with
-> > > > > technical rationales and requests. But maybe they're just lost in the
-> > > > > volume of emails you have in some cases. I know for example I mentioned
-> > > > > a few times and places that we have tests today for booting the OS, when
-> > > > > you mention that we need to add a test for booting the OS. We need to
-> > > > > expand that test, yes.
-> > > >
-> > > > If you look at the OF_BLOBLIST thing, it is basically a NAK. I don't
-> > > > see any other way to interpret it,. So several boards in my lab have
-> > > > been broken for a year.
-> > >
-> > > To be clear, you want to revert:
-> > > commit 70fe23859437ffe4efe0793423937d8b78ebf9d6
-> > > Author:     Simon Glass <sjg@chromium.org>
-> > > AuthorDate: Wed Jan 3 18:49:19 2024 -0700
-> > > Commit:     Simon Glass <sjg@chromium.org>
-> > > CommitDate: Sun Jan 7 13:45:07 2024 -0700
-> > >
-> > >     fdt: Allow the devicetree to come from a bloblist
-> > >
-> > >     Standard passage provides for a bloblist to be passed from one firmware
-> > >     phase to the next. That can be used to pass the devicetree along as well.
-> > >     Add an option to support this.
-> > >
-> > >     Tests for this will be added as part of the Universal Payload work.
-> > >
-> > >     Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >     Reviewed-by: Tom Rini <trini@konsulko.com>
-> > >     Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > >
-> > > Which means that you did not test your changes on your hardware at the
-> > > time? And wish to (seemingly) replace that with an earlier version of
-> > > the patch which was objected to on technical grounds at the time.
-> > > Without explaining why the current code does not function on these
-> > > platforms, only that it does not, for entirely unclear reasons.
-> >
-> > It never worked on my board, though. I spent 6 revisions trying to
-> > explain that. After number 6 [2] you got in touch and said that I
-> > needed to rework it, which I dutifully did, in version 7 [3]. I did
-> > that purely to unblock Raymond's series. I even put that in the patch:
-> >
-> > "The discussion on this was not resolved and is now important due to the
-> > bloblist series from Raymond. So I am sending it again since I believe
-> > this is a better starting point than building on OF_BOARD"
-> >
-> > Are you now saying I should have refused and argued for another few
-> > revisions? Patience does have its limits.
->
-> I'm saying that I assumed what you pushed functioned on your hardware,
-> which is why I'm surprised now that it doesn't.
+On 21/10/24 10:10, Santhosh Kumar K wrote:
+> Hello,
+> 
+> This series is to:
+> 
+> Add support for Inline ECC in DDR for AM64X, AM62X, AM62AX, AM62PX,
+> J721S2 and J784S4 devices.
+> 
+> (1/8) Enable ECC priming with BIST engine
+> (2/8) Add a function to store base address and size of RAM's banks
+>        in a 64-bit device private data
+> (3/8) Setup the ECC region start and range
+> (4/8) Enable ECC 1-bit error, 2-bit error and multiple-bit
+>        error interrupts
+> (5/8) Add CONFIG_K3_INLINE_ECC
+> (6/8) Set NR_DRAM_BANKS to 2
+> (7/8) Pull Redundant DDR functions to a common location and Fixup
+>        DDR size when ECC is enabled
+> (8/8) Add ss_cfg reg entry
+> 
+> Changes since v3:
+> Pull redundant DDR functions to arch/arm/mach-k3/*
+> 
+> v3: https://lore.kernel.org/all/20240523050430.455201-1-s-k6@ti.com/
+> 
+> Changes since v2:
+> Removed 'default n' in Kconfig as that is default setting
+> 
+> v2: https://lore.kernel.org/u-boot/20240510084707.1903133-1-s-k6@ti.com/
+> 
+> Changes since v1:
+> Add support for J7* devices.
+> 
+> v1: https://lore.kernel.org/u-boot/20240131060213.1128024-1-s-k6@ti.com/
+> 
+> Test Results: https://gist.github.com/santhosh21/25937355aa2c134a64fa76480ac6a4a2
 
-How can you possibly assume that, or be 'surprised' about that?! I
-repeatedly said that the solution was no good for me and I was very
-clear that I only sent that patch because you insisted on it. You sent
-a 'thank you' afterwards, which rang pretty hollow after so much
-effort and still having broken boards.
-
-From what I vaguely recall, in a discussion that went on till the cows
-came home, it was tied up with U-Boot not being allowed to have its
-own devicetree. Another vague recollection was that I was stupid and I
-didn't understand...
-
-> I'll look through all of
-> the links later, but I think you still haven't explained _why_ this
-> solution doesn't function on your platforms (now or last year) and what
-> your platforms need (as in, can't change) / want (you would need to
-> rework some other part of the firmware stack to get them in agreement on
-> that platform).
-
-Actually I've explained that many, many times. They use bloblist but
-not for passing the FDT. This strange insistence that the bloblist
-must carry the FDT is what caused all these problems. I need a
-platform to be able to boot TPL, have a bloblist set up in SPL, pass
-it to U-Boot proper, all without having an FDT in it.
-
->
-> > > So I do not think I've arbitrarily nak'd the revert you posted, I've
-> > > been asking you to explain why the code doesn't work. And I still don't
-> > > have an answer as to why after at run time we don't find a valid
-> > > bloblist here the fall-back use cases aren't functioning. To me that
-> > > seems like the bug to investigate and explain. Reverting code to find
-> > > when functionality broke is great, I do it all the time. Saying we need
-> > > to revert because something broke *without* saying why it broke is a
-> > > problem.
-> > >
-> > > > > > It isn't a particularly large number, if you add up the patches I
-> > > > > > do in each cycle. It is in the nature of development and code review
-> > > > > > that things are often not right the first time, or someone else has
-> > > > > > another perspective, so I cannot see how this can be reduced.
-> > > > >
-> > > > > The easy way to reduce it would be to go from 10 series in progress to 1
-> > > > > series in progress, and finish that before picking up series number 2,
-> > > > > and so on. And then in the future, stop when you have more than 2 or 3
-> > > > > in progress at once.
-> > > >
-> > > > That's obviously not practical for the amount I am contributing and
-> > > > the length of time it takes us to get things in. I hope it isn't a
-> > > > serious suggestion!
-> > >
-> > > It's extremely serious. For example
-> > > https://patchwork.ozlabs.org/project/uboot/list/?series=435516&state=*
-> > > is a 46 part patch series that touches 3 or 4 different areas and the
-> > > only type of review that's feasible is "Does this cause the binary to
-> > > grow too much? Or in unexpected ways?" And that sets aside that I
-> > > believe I did ask you to rework "bootm: Allow building bootm.c without
-> > > CONFIG_SYS_BOOTM_LEN" to refactor things so that SYS_BOOTM_LEN is always
-> > > defined. That's not even a hard change, I say as someone that had to do
-> > > that as part of Kconfig migration of oddly (ab)used symbol names.
-> > >
-> > > But in this case, your series that touch areas of code actively
-> > > maintained by other people is even more relevant. Whereas areas without
-> > > other active developers, or where you are the main developer, I can find
-> > > some smaller limits on what must be reviewed all of your *EFI* has other
-> > > active developers on it. Who are providing technical feedback, not
-> > > arbitrary or stylistic feedback. Please be explicit about what you are
-> > > suggesting in this case, so I do not mischaracterize your intention.
-> > >
-> > > > > But really, it feels like "Code needs to land" is another way of saying
-> > > > > "Just a NAK should be ignored".
-> > > >
-> > > > Yes, a bias more towards that would be more healthy IMO. A NAK needs
-> > > > to come with a full understanding of the use case, an alternative way
-> > > > to meet the use case, once that doesn't involve boiling the Pacific
-> > > > Ocean.
-> > >
-> > > As it stands, I do not like to, but sometimes feel I *have*to* break one
-> > > board to unbreak another board and keep reminding both parties to
-> > > resolve the issue so no board is broken. There has been, since I have
-> > > taken over the lead of the project, at least once where I have
-> > > over-ruled the relevant custodian and that has resulted in the custodian
-> > > leaving. I both feel that was the right technical call, and regret it
-> > > came to that, still. I do not want to adopt a more broad use of that
-> > > policy. The default for absence of agreement must be to try again.
-> >
-> > I see that Peter sent a few indignant emails. You can't win.
->
-> I assume this is about the LED series, and I further assume you forgot /
-> missed where he explained that removing the legacy code is a functional
-> user visible usability regression on the pinephone.
-
-It seems you are saying that we can break my boards completely, but
-Peter must have his flashing LEDs?
+I apologize for the delayed response!
 
 Regards,
-Simon
+Santhosh.
+
+> 
+> Thanks and Regards,
+> Santhosh.
+> 
+> Georgi Vlaev (1):
+>    ram: k3-ddrss: Use the DDR controller BIST engine for ECC priming
+> 
+> Neha Malcom Francis (2):
+>    drivers: ram: Kconfig: Add CONFIG_K3_INLINE_ECC
+>    configs: j7*_evm_r5_defconfig: Set NR_DRAM_BANKS to 2
+> 
+> Santhosh Kumar K (5):
+>    ram: k3-ddrss: Add k3_ddrss_ddr_bank_base_size_calc() to solve
+>      'calculations restricted to 32 bits' issue
+>    ram: k3-ddrss: Setup ECC region start and range
+>    ram: k3-ddrss: Enable ECC interrupts
+>    board: ti: Pull redundant DDR functions to a common location and Fixup
+>      DDR size when ECC is enabled
+>    arm: dts: k3-*-ddr: Add ss_cfg reg entry
+> 
+>   arch/arm/dts/k3-am62a-ddr.dtsi         |   7 +-
+>   arch/arm/dts/k3-j721s2-ddr.dtsi        |  12 +-
+>   arch/arm/dts/k3-j784s4-ddr.dtsi        |  24 ++-
+>   arch/arm/mach-k3/Makefile              |   2 +-
+>   arch/arm/mach-k3/include/mach/k3-ddr.h |  15 ++
+>   arch/arm/mach-k3/k3-ddr.c              |  88 ++++++++++
+>   board/ti/am62ax/evm.c                  |  17 +-
+>   board/ti/am62px/evm.c                  |  17 +-
+>   board/ti/am62x/evm.c                   |  62 +------
+>   board/ti/am64x/evm.c                   |  73 +--------
+>   board/ti/am65x/evm.c                   |  29 +---
+>   board/ti/j721e/evm.c                   |  29 +---
+>   board/ti/j721s2/evm.c                  |  35 ++--
+>   board/ti/j784s4/evm.c                  |  17 +-
+>   configs/j7200_evm_r5_defconfig         |   1 +
+>   configs/j721e_evm_r5_defconfig         |   1 +
+>   configs/j721s2_evm_r5_defconfig        |   1 +
+>   configs/j784s4_evm_r5_defconfig        |   1 +
+>   drivers/ram/Kconfig                    |  10 ++
+>   drivers/ram/k3-ddrss/k3-ddrss.c        | 214 +++++++++++++++++++++----
+>   20 files changed, 387 insertions(+), 268 deletions(-)
+>   create mode 100644 arch/arm/mach-k3/include/mach/k3-ddr.h
+>   create mode 100644 arch/arm/mach-k3/k3-ddr.c
+> 
