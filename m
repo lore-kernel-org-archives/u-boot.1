@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0CA0E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 312C4E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:58:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 448CE801ED;
-	Fri, 13 Dec 2024 00:57:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D16D801A0;
+	Fri, 13 Dec 2024 00:58:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ZGpbOKut";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="O9Qzq0Hp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EADE280141; Fri, 13 Dec 2024 00:57:55 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id ECFE480214; Fri, 13 Dec 2024 00:57:58 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74495801A0
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:57:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D1C3801DA
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:57:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734047870; bh=65vJyzfUZpZFIpU5ZNZTdT1wyNyGrMIJr4QYZtDFQvs=;
- b=ZGpbOKut+Uez7+wtuNbh0NVnr9XEkSbB5iOcR1/06E47bQ9whPM6PYqxUDTarwkPY68t1niEn
- tLJ8355USktS+p8xGdNv6x0GGhEL8dvpEkigme/WO6VaOmGCYfXhVYjQt0ENxGAUoXiNl8YSNCa
- vgFPuVq305kWua0vDQ9yg0pIbSBzdl86yo+/7x7nsgwfTbq+x+J8DxYFoW+t8d0idd7Jw+QiZ/X
- QLQy3HOimGeLBJuaJig+v2r/rFXLjqUcPLwYYMf/gpQn4OGPSri3gIcr3yVEP1OwZPs0uD9MV7t
- SiHJXPS7AH1dn6vBAIrePJzU5OlHpvpgEx9CICF1lhdg==
+ t=1734047871; bh=PwkHdmksqTd42U/5NYPLKdvYopbxR2smlIsaRQYHSOU=;
+ b=O9Qzq0HpIo4pXevW0XS1ePiqiotgorhn5XzV/CfwieVcdic824cHJ4GzthdFTJfPYhVJ0cNuO
+ HL0gGmEwuf2Fkv582lIjuZo/WR2COtfI7zaIiHlEVt6Jilq+1GrAxOA1K3DH1Fk+qx+N75u4GhN
+ 4BvWtotSmlYajihEVNZc2vhI7I50e1soon4gmBmNEnrJLZT8ALZbrTvh4DRoQ86Af/v6PdyOvlQ
+ s7EvPpuuO2C12QSrT37Dpder4cYuap1BW1pdQK4xI1vEzWccT7CsSJ0YjWwxgIpNpnlW5WekmxO
+ TpUBDpTHicml5xLRGG4Ua5ySTkrHQ+ypDL67Kefr1YDA==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 01/12] rockchip: rk3399: Fix TPL build of bob and kevin
-Date: Thu, 12 Dec 2024 23:57:08 +0000
-Message-ID: <20241212235735.164272-2-jonas@kwiboo.se>
+Subject: [PATCH 02/12] rockchip: rk3399-gru: Use SYS_SPI_U_BOOT_OFFS value in
+ offset prop
+Date: Thu, 12 Dec 2024 23:57:09 +0000
+Message-ID: <20241212235735.164272-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241212235735.164272-1-jonas@kwiboo.se>
 References: <20241212235735.164272-1-jonas@kwiboo.se>
@@ -53,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 675b787aa511ed8f0b3fe25e
+ 207.246.76.47
+X-ForwardEmail-ID: 675b787ea511ed8f0b3fe270
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,38 +72,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Building chromebook_bob/kevin with TPL=y ends with a linking error:
+Use the offset configured with SYS_SPI_U_BOOT_OFFS Kconfig option
+instead of a hardcoded 0x40000 for the FIT payload offset.
 
-  arch/arm/mach-rockchip/rk3399/rk3399.o: in function `board_debug_uart_init':
-  arch/arm/mach-rockchip/rk3399/rk3399.c:148:(.text.board_debug_uart_init+0x34):
-    undefined reference to `spl_gpio_output'
-  arch/arm/mach-rockchip/rk3399/rk3399.c:148:(.text.board_debug_uart_init+0x34):
-    relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `spl_gpio_output'
-
-  make[2]: *** [scripts/Makefile.xpl:542: tpl/u-boot-tpl] Error 1
-  make[1]: *** [Makefile:2134: tpl/u-boot-tpl] Error 2
-  make: *** [Makefile:568: __build_one_by_one] Error 2
-
-Change to only use spl_gpio functions in SPL to fix this.
+This has no intended impact as SYS_SPI_U_BOOT_OFFS=0x40000.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3399/rk3399.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/rk3399-gru-u-boot.dtsi | 2 +-
+ arch/arm/dts/rk3399-u-boot.dtsi     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index 0c28241c603e..ba89079b1e73 100644
---- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-+++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -136,7 +136,7 @@ void board_debug_uart_init(void)
- 	struct rk3399_pmugrf_regs * const pmugrf = (void *)PMUGRF_BASE;
- 	struct rockchip_gpio_regs * const gpio = (void *)GPIO0_BASE;
+diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+index 6bdc892bd913..2505d9b01b8a 100644
+--- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+@@ -11,7 +11,7 @@
+ 	};
  
--	if (IS_ENABLED(CONFIG_XPL_BUILD) &&
-+	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
- 	    (IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_BOB) ||
- 	     IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_KEVIN))) {
- 		rk_setreg(&grf->io_vsel, 1 << 0);
+ 	config {
+-		u-boot,spl-payload-offset = <0x40000>;
++		u-boot,spl-payload-offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+ 	};
+ };
+ 
+diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
+index 2bec139d8338..81a3c6fc972b 100644
+--- a/arch/arm/dts/rk3399-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-u-boot.dtsi
+@@ -43,7 +43,7 @@
+ 			};
+ 		};
+ 		u-boot-img {
+-			offset = <0x40000>;
++			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+ 		};
+ 		u-boot {
+ 			offset = <0x300000>;
 -- 
 2.47.1
 
