@@ -4,203 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CDBCE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 15:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88061E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 15:32:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D6380141;
-	Thu, 12 Dec 2024 16:21:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1121080192;
+	Thu, 12 Dec 2024 16:32:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Rv59cdGm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L5Ut55zr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 875788018E; Thu, 12 Dec 2024 16:21:30 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::60a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65EED801BE; Thu, 12 Dec 2024 16:32:35 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F05780079
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 16:21:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F5658018E
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 16:32:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wr81wZg0VEnuVY/pwkszX6zhkZdjJ5VPcUddmkh+W3TCt8ySsTmh1QpTJX1cH6pkHKcoPr+JP89CcgBltNjnaMIZp+kA90JbklxNJXO/0Fp1b9KRezvMuMcj3FtzKIwZ11OvJJhRhsTMhkeVApntYrhzb51JT+tuYWs69boM78kwUSdRRU74uCiHfyew1kJ/ni3Xc9pHB97nApm0tu+hoiD9h2CZ7WWA3U59L7dZJhbJQrPZiM7nKotFwfHyuHggWcaI10RjLLiXASDzSBDcvKHV/dPeiIPNk+FeVkL+1tXrPTQnrIXyRD8lvjzevtk3P8jPKStKJP8wSQH6iTemsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KSou7KQ0T+R6ngbnrI4czjQ9LwFWHIOml1turMZM8VU=;
- b=AKdLgciy+3jo/sxUthGe+TqVdSCjedIEUtgY5SPurYTLRh+vk2WjqAD9ds+edlvKbnhvPj9Wg1MavhuHF25RONzAw5jYeboA6bioE5zH/PDo9cLoL+j7lB/ZfGnEIPk0mgtx/u9ZqcOcKVWz6+aRajemNpV+/VnQXZrHKSWAZEz7LTfrC1ah8AZlBsH49VONpzmG5bb6k32dp+eeiXXc36PWhJsAlquNp0mIl5GHDIIUJJDWDZMHwvH5eU5TwTVByci/yhFgj99lF8VDfhJ0ZNQsGkSVZXOm418SVNpU47/MbmZbUkQNF8QxGeBR+LiZ1ttelhxgtiwEORppyswWQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KSou7KQ0T+R6ngbnrI4czjQ9LwFWHIOml1turMZM8VU=;
- b=Rv59cdGmmxbuATmWhii5UyCHVsZeEeTA+CJx6ka0u0NGnfZo8BvUuOb3iKzq0HGz0KS3U6WW17hGOF4irxa9dLTSIXsKRlryIEqeTccENcV8hsgfduQnNd73nnbb4xHZGLT01ZQWK9ZtBPmZl/IXn1XxPDCNVNNFMP383b3Czf0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DM4PR12MB5817.namprd12.prod.outlook.com (2603:10b6:8:60::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.16; Thu, 12 Dec
- 2024 15:21:25 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.8230.016; Thu, 12 Dec 2024
- 15:21:25 +0000
-Message-ID: <6f7f3522-e29e-4fa3-bef7-5e0a42673c14@amd.com>
-Date: Thu, 12 Dec 2024 16:21:21 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] video: zynqmp: Add support for reset
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Anatolij Gustschin <agust@denx.de>, Peter Robinson
- <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <0504474a91a9839828aecd37f8855fd154cdf2e1.1733742708.git.michal.simek@amd.com>
-Content-Language: en-US
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <0504474a91a9839828aecd37f8855fd154cdf2e1.1733742708.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR05CA0137.namprd05.prod.outlook.com
- (2603:10b6:a03:33d::22) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6efa5bf5202so6068217b3.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 07:32:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734017551; x=1734622351; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=a8tuOqiDW5D+Hk92uSGd8gsBh/whTjqqwmxHLLrGu48=;
+ b=L5Ut55zrByIUb/9Xg4GeAoiLga0+ZZZ8UHJHmRz5Y8uLYgdmsoxW4cJyXF00utsydG
+ XI/fO0RvyqgxtJDt5fm4uUMDaSXENgdV1iDxRa2qUibrEnuGFDji89I/pIWR5Pwi8M2G
+ 1s+1X6vB5zTFMLhuVIT+JM75M116NpXW7SbemFz1dZ4xXzzMvBfub+Tw5JsLz7/vKTls
+ DQah4uOXlEgBc2VO6kdV4FIqS4QZ1ouX9G910fCzofAbM96YaMXR/7cA8g1bCNFH8cSl
+ PCHFHs1SkQUltlgiiXaeGjNbd8iz0JIkHUkNQjcTOWGFJd0GsOqU0TSFYl3LgDunSLJd
+ cSZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734017551; x=1734622351;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a8tuOqiDW5D+Hk92uSGd8gsBh/whTjqqwmxHLLrGu48=;
+ b=WH17cmEb033J/Zqhbl12QR+mfXmzT9ri6uNzuGKWLs41YGNl6f3NbdwdKnsMUKd7Fk
+ O8WsvLr+4p03JY5DUX6rtnAwWCg8P7zOXVOo/lBZqWDCHoEt3ZVOdlNV6We0s2NH0K9V
+ n4L5ZhFhQRWkOpvMVu6/Vpyk6f9+LTNvWcSYyJH+N3B4q9pLMUYIlPercXdOHOSoNzl0
+ dyD9jBXNzYjXAosplcpzfqeCHTCVZ+zN2nKr4oUDFhrtZTxdlleVA8RWOk9FMMa6mS7y
+ HJnIuIzxQNTbQKkXuN00wF4LewcMI5AfwbsL0rOeriqMqzFQwF514vZ1ddtwWUVrgoWm
+ MERQ==
+X-Gm-Message-State: AOJu0YxStKh0t+6ixaqgX0g7WOTS37zSW4Twl5NCBCmoSIQtqu/H5fq1
+ BkR7dOn1n7q4W2CHXT+440LVKhi19MKdt1tlKm5+6E004ZiuHYr+XMglBAy9ZqQ//q8cj9RrLOk
+ GJk3eOCpS4spRUi6MiMI6vP16bmNYQm4X1vTiOA==
+X-Gm-Gg: ASbGncscAbhbrSKJ30xZVc/+OawpFmo7c4HkYn/wGbwSxZZy4V/HghzEFI0yEeO1lId
+ qLBCN5kHZQjjoxN/h7Iv3S4fXtfWVRAclv9nDSw==
+X-Google-Smtp-Source: AGHT+IG+vbTUqszBxJCeyI9azKtvQu3Dsat5+t3ANSOW8srz6gznW2tCrvXcEkTdaqIpPPDT6YPyvKyTtUa49JXAICo=
+X-Received: by 2002:a05:690c:6a07:b0:6ef:593e:285c with SMTP id
+ 00721157ae682-6f275263d45mr8223667b3.3.1734017551192; Thu, 12 Dec 2024
+ 07:32:31 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM4PR12MB5817:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1648b7c-6316-48c4-4f17-08dd1ac0a454
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q0NJU0ZIVVczdjlXd0Jpa0RqcER6cGtPY3gwY2NXWUdhR1poc3RmaHNnSWFn?=
- =?utf-8?B?L0dVNmZpOC9zTWh3VEpQNlNzMFhmNUYxV0J1b1poa2YySytUd3h6NDhGSmFG?=
- =?utf-8?B?TzN4RWdQNUhkUWk0bGtqMk1pa09EYkNnZU9VQm1yakx0aUUvNjlManVJbUtB?=
- =?utf-8?B?SjRjUUVzQjlURzM5VkJuN2VKT1liTUt3UlBhYysrdE9rWVNsZTd1K2krZXBH?=
- =?utf-8?B?SFlsM1JpZUIzdUpQaDVFWm45OHZQZmtkeVFXQ2Q3WUpOK1pGcXpRSWF4ckI3?=
- =?utf-8?B?RWlaVXMyL0FMZHBWWTlIdFA0eU5Wbm9FaFlqdVZTTjNkRTEzY1kzRTFrelo1?=
- =?utf-8?B?VG1QeTZrVjJmNVI0b1FzYVpLTHY0djhxT0kwdkMxTXRvOTZrSWZ3ejlLMXIw?=
- =?utf-8?B?aDVoaFdhMFRySWFGV2RxL3NqOEFRRXNIYnFZbGkxbUZ4TVMxa2tWT1lZVytu?=
- =?utf-8?B?VEh3ZWN3TDlsMDE0TFV5L1pxWGZ2SEFhNFMwQTh6SnZ3ZEpzdjh4Vmtjakt2?=
- =?utf-8?B?QVNJRWlqVCtCSXVRazBOTFhwYTV0d1hxSkRyVEFIQ05RMGV0WGxTdFJ6bHRa?=
- =?utf-8?B?UmNQeGtIZzMrWkVSN3hXY0tDRElzQnJnMnFqZXBCUlpVNXZNbTRwRXhTR3dv?=
- =?utf-8?B?TkFKekE4ejRobDFoTzBUQ29UYSthQnA5d0N0NGdPWWhvOCtGSTRIemlaN1Q3?=
- =?utf-8?B?bmk0NndGbVNSOVdiUmxYRzlHSWgyMzkySlVmVnlPd1N3b09jR25RVXZXNll3?=
- =?utf-8?B?MzNDR2ZFbzNPem02QVJvRHp0NWw0QXdMaDZpS1VFOTNMcnFUb1pDcUd0RC9w?=
- =?utf-8?B?WFZWdnZJNVVkaSswUWx1dUppY1BlM2o0UkdndCtiRDhOc09jKzFjcFA0eDBH?=
- =?utf-8?B?cy81SnpBa1AzNnVxSk9LNVllZ2JrQVpKQTBQR0I5UGF2cEJLaVNMOU9pNmhq?=
- =?utf-8?B?VTlFOWJvTXMzL0x3Z3JkSW4wQlAxOGV2STVZOW0zQm56TXI1ZWFlNmlGSjRX?=
- =?utf-8?B?dzZCWlB0VlNMWGlsNjVmVzNTS2FrUGhwV2l6RDgxb0NLbG5tOVUvSTZDdTR3?=
- =?utf-8?B?bW5FRHl0eXRNKzR2TDBzdXdkS1lydGF4Qi94OUJ2dkpGYWsvcG1tZTBsZTJl?=
- =?utf-8?B?azBnRVVVUjF2TlZzSjdkWDBTT3d1MGE0VGlFdHFzR213bFZPbHJadkFHbWFH?=
- =?utf-8?B?ZXBOR0x0L1Zwb2xiczcrZzlLcDIrRHMxVTlMUjFhZVhKcjB4RFY4TEJGb0du?=
- =?utf-8?B?dlFWa2RXKzBLRnVwTThSY2x4aWdFRnlRWjF5MzJMdVkvL3g5NXhMQXp6bjRX?=
- =?utf-8?B?MUgxQ2U4R2NuL0EzN1FYQlpuN1FwNE1xLzJabDEva0hqQ0RrTmZTUTBGanho?=
- =?utf-8?B?aGZIK0hMSm1qOGFVZVk2VCsraWlLck8xTjRtL2Z0SW5SeS9pWVZRUWV2NzlS?=
- =?utf-8?B?dEkwU2g3RkQxbVhJMHBLa2IwWnRzTGZzc1BWRWZEbWN3OVZxdWFjdC9VZWxC?=
- =?utf-8?B?QjM5UC9menptL2E0VFNWNXpyNHpWY3poTzMxRXBnVWpTSzJIL0JOa3ZVNXA5?=
- =?utf-8?B?QVlnRElsV3VLczgvcFVuaTJ5Zk9VcXRKaFBqcnEvaVZQMUZjLzMvVHZJZjBm?=
- =?utf-8?B?OEVpa1ZIUkdRcGtxdlBENlRwd25RTmlaS0hQd2wrS0pyNGJiTDM2cEZLbkRs?=
- =?utf-8?B?dC9OZ29DdngwL0NlcmJ1ZDcvODNqS2xFSGFKelVKNFBRRUNIYjVzN1pCd1Nr?=
- =?utf-8?B?MGwreHlDOVRWRkpxY2N4Y0RObEhjRURwYVgyQVlvNjhCV0lURTVScXFTN2FU?=
- =?utf-8?B?c1VDYWFrYSs5SkJjZlZUdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a3c3Y0wyaHJyb2ZwSThqblRCL3NWVkZyR1lnTE5DM2NndytiQ3pPSDF1eStr?=
- =?utf-8?B?NFlacm9heFVuVmtWYWoyYkhPMEsyMWdYVGVOdFlBdEpVdm5hdVZDQ05BVFpJ?=
- =?utf-8?B?TmlucXdDeVZWMlhLMldWaFU3S3B5S3pnVjVNb05hVnJCWkxiZERGSWtEQVR1?=
- =?utf-8?B?QnFrVXpOQjVDTnpHVmdnOVpRTHBVTG45bVBjTGJlRTJGZ1dHcGY2bytRbEZL?=
- =?utf-8?B?VE5vd3dwMnJIM1ozTW1zN0FJVDE5Yk5yb2J3SytaY1d2UHlFWHZoNUdtbVhp?=
- =?utf-8?B?bTgxUjNVVlQwN1BXNmFBQ0F4U0dWRUh2cGVsbitHSFNqSEE0UHdKRzZ1d3Bx?=
- =?utf-8?B?SlFWcTd0NWdNb3ZDa0sxU1ZuL1NrbTBaVHFuZmZsSmFYYmdJOXFMUUoyT0FH?=
- =?utf-8?B?MVNxRnBlOGJ4ZWd4b3RpcFo5UGNHcnJXbzRaampZWHRia1RpbGM2VThDOVAw?=
- =?utf-8?B?Y1BUTDFDV3Rtd3FCVmE1bEgzVHlsRmdyQm5EdWNzWDU4OExwMzhKdDJUNHIy?=
- =?utf-8?B?Z01GTXhkc2ppSGtKM2VaelFLRUl2akF4enlzb3I4akg1M1JlRTFlVlVod3JB?=
- =?utf-8?B?M0JMQ1dxMWRkZVk3ckxocmF5STVuT210ZmxhT1d5NElGbXdpTUhUWS9JUTF3?=
- =?utf-8?B?MlVlN3lRalNDczFKMG5mYVJKRC9qSDM4aDRUYWFBTStUdVBKeHNGM0pnTU1P?=
- =?utf-8?B?dkJzK2hpNlNpVmxyTURVN29UNHRIUlBVSVltbkZDUE9NMWVaQXROMTdIQmY5?=
- =?utf-8?B?dHJTK2ZCMm4wR0c0ODYwZERYZnFpL1B4dlFYSEpmMEhxUE16VDVaaUdWbysy?=
- =?utf-8?B?TjJOcEU2TEN6R1BxQlQ3ZXcvR1pVSXd4anNEdFA3b3ZLZFVzeXpHNzYzMEZ0?=
- =?utf-8?B?THRSdFFYSFV5ZEJtYTNoNkgzVmNDQm9Femtyc0pEeXlsMnlpWWFabGtQaFB2?=
- =?utf-8?B?SDgzOG9tbjB4UUZVQitWYk0rOVpGTm1Bdkd4dDJQYzdESlEzR3JmSXEvNGpJ?=
- =?utf-8?B?eGtuOGt3MHUzK1JVNHJpY0FvbENXcWxVZGJNTmZlUWxFZzRZQmc0VTArNTZk?=
- =?utf-8?B?amNSUHZ4dFFlNzJudTEyODZwTHZuQjBITldlRWVrdUpHbTZ1RDVUWVlyM2ZO?=
- =?utf-8?B?RDYwOTRxQ2FIRCtLWTBnc0huTGhFU1BaVU95dVlwejlxdW9qdUpWMG5wQlY5?=
- =?utf-8?B?V1c4elRyeWZsMmNkME5hbElpYTU0bkViNCszWG1vTGVoUVN4L1V0anZXQ25L?=
- =?utf-8?B?L2h6ZmN0R3J5SVR2SnRUb2htd0hxT2VGQm15VkFvUFp5Z3dwcnpmNzB2ZXN5?=
- =?utf-8?B?TnVkZVl6ZC80Um1mYnorazk5R0NkZitaUjYxVGF4RWEzSlZnaXE1WVZCN2JV?=
- =?utf-8?B?dXlZemFUUUxLcFdOR1RITmVPQTBMR3dZbm1VbnhZREVNdm05UlVvbWpmNmhB?=
- =?utf-8?B?ZGVWRG80MHlDM3NVUS9KWFBhQ1JFV2MxYUt6UC9XRjgzTXpZa3ZHamgydzFR?=
- =?utf-8?B?a2Z5c2hQVHk5Z3NtZm9yWUJtZEozZHRFeUZCajZoOEJxWERyWE82SlpUREdn?=
- =?utf-8?B?Y0JBakdSeU43dUNqRWJkRnVGbUFONWloMTFYUjIzVnY2Y2RZa0NVanBXT3BX?=
- =?utf-8?B?eXFZa0VlRllkdTc3UWhRRzFnNXdFMW5HeWxoa1V2d0xqMVdnQ1NxWVJmL3NH?=
- =?utf-8?B?NGhXcC84eUxZeXpWVjFXTWUxaVlqSVBxYWtENW84LzA4SFlTeGJSRWxlcGM0?=
- =?utf-8?B?TmV2NjZHcDR0a0EwQmI0TkVlSVhCQnhUNTFtTnZ5dW1YR0ZyUnJ6RnAzc01K?=
- =?utf-8?B?d0FtbFJrV1RTTmxZS24wVWdrRm02V2I4TCtnMlhWdHRoTHMyNmExV1VleXMw?=
- =?utf-8?B?MVUrb3NyUzVnSDhnSUpIZGxNZEZSMkdsWFlXMFRLaGhDVTJZRzh5em9tT3U1?=
- =?utf-8?B?QkwyUDBsdlo4TVdMMzIxNERRcmd5L1RHcDRaVWJsdXFtUkhrMmFtNW00M2dy?=
- =?utf-8?B?TXNPbVl6bWx2Wis3ZEZzbWtVYmt5bmU2YmZiUk8yTHdTcm5uemZHSHJuUTh4?=
- =?utf-8?B?WEh2ckg4bjR3N3RpamhBUi9JVWI2T2J0WU8vSGRhQTVSaU1SUU5zb202U3U1?=
- =?utf-8?Q?ue51PHTAb0ZT65bru828ubuyA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1648b7c-6316-48c4-4f17-08dd1ac0a454
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2024 15:21:25.0452 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WboF/gdCt2M4XtSHScNetUrsfLq9th/Hx/iNZ3E457zgFb+qyKYTIXfkNbflaUJZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5817
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <20241211135418.563803-4-sjg@chromium.org>
+ <CAC_iWjLVee69ALVcHixM+H4wvJhM5R03-jDCwL7unipRtr-0Fw@mail.gmail.com>
+ <CAFLszTgxbkFP9o+tb-983P3vPmH+qHd8vp7VBym2WafhcwKQLg@mail.gmail.com>
+ <CAC_iWjLNvR=TMp9tvuwrxmjqN7+Gz8-CZbaCgq841NcPQNQukA@mail.gmail.com>
+ <CAFLszTiirJ9eLJ6R4rJ5LDWA4M2o3Mksdk8z35=NKQM244LKYA@mail.gmail.com>
+In-Reply-To: <CAFLszTiirJ9eLJ6R4rJ5LDWA4M2o3Mksdk8z35=NKQM244LKYA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 12 Dec 2024 17:31:55 +0200
+Message-ID: <CAC_iWjJRK2wvObHAtDENQQqmZwwbcozexXtWwzbvscmdT_jRfg@mail.gmail.com>
+Subject: Re: [PATCH v5 03/23] efi_loader: Add comments where incorrect
+ addresses are used
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -217,46 +97,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 12 Dec 2024 at 15:44, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 11 Dec 2024 at 23:15, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Wed, 11 Dec 2024 at 17:58, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Wed, 11 Dec 2024 at 07:48, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Some functions are passing addresses instead of pointers to the
+> > > > > efi_add_memory_map() function. This confusion is understandable since
+> > > > > the function arguments indicate an address.
+> > > > >
+> > > > > Make a note of the 8 places where there are problems, which would break
+> > > > > usage in sandbox tests.
+> > > > >
+> > > > > Future work will resolve these problems.
+> > > >
+> > > > NAK, this serves no purpose whatsoever. Just send a patch with
+> > > > whatever changes you think are needed
+> > >
+> > > Please see below
+> > >
+> > > >
+> > > > Thanks
+> > > > /Ilias
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > > A request was made in v4 to drop this patch, but in the same thread, a
+> > > > > query was sent about why we need these addresses, so at least until the
+> > > > > series is about to be applied, I've left it in, so we can have that
+> > > > > discussion in one place and build a shared understanding of why these
+> > > > > addresses are needed, instead of peppering the rest of the series with
+> > > > > similar questions.
+> > >
+> > > I'm quite happy to drop this patch. But I want to first make sure that
+> > > you understand that these bugs exist today in the code, albeit they
+> > > only matter on sandbox.
+> >
+> > Thei weird thing is sandbox works perfectly fine in EFI, passes all
+> > internal tests, EFI SCT tests, loads binaries etc. Any idea why that
+> > works?
+>
+> From what I can tell, the code mentioned is not tested by sandbox yet.
+> It would just segfault. We do have a lot of self tests, but my
+> bootflow_efi should allow testing of more features over time. I
+> noticed the runtime-code issue when looking at an EFI log.
+>
+> BTW how are you running that? When I tried it on x86_64 it just
+> crashed. Are you using the sandbox build on an Arm64 machine?
 
+Yes, and it passes all the SCT tests.
 
-On 12/9/24 12:11, Michal Simek wrote:
-> In Kria SOM configuration DP is under reset and access to DP is causing
-> hang that's why call reset at probe to avoid this situation.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   drivers/video/zynqmp/zynqmp_dpsub.c | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/drivers/video/zynqmp/zynqmp_dpsub.c b/drivers/video/zynqmp/zynqmp_dpsub.c
-> index 76abfeac4433..52af23c3c835 100644
-> --- a/drivers/video/zynqmp/zynqmp_dpsub.c
-> +++ b/drivers/video/zynqmp/zynqmp_dpsub.c
-> @@ -11,6 +11,7 @@
->   #include <dm.h>
->   #include <errno.h>
->   #include <generic-phy.h>
-> +#include <reset.h>
->   #include <stdlib.h>
->   #include <video.h>
->   #include <wait_bit.h>
-> @@ -2093,10 +2094,15 @@ static int zynqmp_dpsub_probe(struct udevice *dev)
->   {
->   	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
->   	struct zynqmp_dpsub_priv *priv = dev_get_priv(dev);
-> +	struct reset_ctl_bulk resets;
->   	struct clk clk;
->   	int ret;
->   	int mode = RGBA8888;
->   
-> +	ret = reset_get_bulk(dev, &resets);
-> +	if (!ret)
-> +		reset_deassert_bulk(&resets);
-> +
->   	ret = clk_get_by_name(dev, "dp_apb_clk", &clk);
->   	if (ret < 0) {
->   		dev_err(dev, "failed to get clock\n");
-
-Applied.
-M
+Thanks
+/Ilias
+>
+> >
+> > > You will notice that my future patches don't
+> > > change the code mentioned in this file. The bugs are simply resolved
+> > > by reworking the EFI-loader memory map to use addresses, instead of
+> > > pointers cast to u64
+> > >
+> > > So can you please confirm this makes sense? (if not, let's discuss
+> > > it). Then I can drop this patch and the later one.
+> >
+> > The ptrs to u64 doesn't make too much sense tbh. I do understand how
+> > sandbox works, but EFI deals with physical addresses which are also
+> > mapped 1:1
+>
+> Yes, and that's why (in efi_boottime) the conversion is done in one
+> place (from u64 pointers/addresses to U-Boot addresses). It simplifies
+> the code and avoids the kind of bugs here.
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > Thanks
+> > /Ilias
+> > >
+> > > > >
+> > > > > Link: https://lore.kernel.org/u-boot/CAC_iWjLex4Z41CDpx4u07XeCYgjB7H+Ynd8aQYL-wruH7yRmQA@mail.gmail.com/
+> > > > >
+> > > > > (no changes since v2)
+> > > > >
+> > > > > Changes in v2:
+> > > > > - Add a new patch with comments where incorrect addresses are used
+> > > > >
+> > > > >  lib/efi_loader/efi_acpi.c    | 2 ++
+> > > > >  lib/efi_loader/efi_bootmgr.c | 5 +++++
+> > > > >  lib/efi_loader/efi_helper.c  | 1 +
+> > > > >  lib/efi_loader/efi_smbios.c  | 6 +++++-
+> > > > >  lib/efi_loader/efi_var_mem.c | 2 ++
+> > > > >  5 files changed, 15 insertions(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/lib/efi_loader/efi_acpi.c b/lib/efi_loader/efi_acpi.c
+> > > > > index 67bd7f8ca24..ffb360d461b 100644
+> > > > > --- a/lib/efi_loader/efi_acpi.c
+> > > > > +++ b/lib/efi_loader/efi_acpi.c
+> > > > > @@ -28,12 +28,14 @@ efi_status_t efi_acpi_register(void)
+> > > > >         /* Mark space used for tables */
+> > > > >         start = ALIGN_DOWN(gd->arch.table_start, EFI_PAGE_MASK);
+> > > > >         end = ALIGN(gd->arch.table_end, EFI_PAGE_MASK);
+> > > > > +       /* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+> > > > >         ret = efi_add_memory_map(start, end - start, EFI_ACPI_RECLAIM_MEMORY);
+> > > > >         if (ret != EFI_SUCCESS)
+> > > > >                 return ret;
+> > > > >         if (gd->arch.table_start_high) {
+> > > > >                 start = ALIGN_DOWN(gd->arch.table_start_high, EFI_PAGE_MASK);
+> > > > >                 end = ALIGN(gd->arch.table_end_high, EFI_PAGE_MASK);
+> > > > > +               /* TODO(sjg): This should use (ulong)map_sysmem(start, ...) */
+> > > > >                 ret = efi_add_memory_map(start, end - start,
+> > > > >                                          EFI_ACPI_RECLAIM_MEMORY);
+> > > > >                 if (ret != EFI_SUCCESS)
+> > > > > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > > > > index 8c51a6ef2ed..bb635d77b53 100644
+> > > > > --- a/lib/efi_loader/efi_bootmgr.c
+> > > > > +++ b/lib/efi_loader/efi_bootmgr.c
+> > > > > @@ -365,6 +365,8 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
+> > > > >          * TODO: expose the ramdisk to OS.
+> > > > >          * Need to pass the ramdisk information by the architecture-specific
+> > > > >          * methods such as 'pmem' device-tree node.
+> > > > > +        *
+> > > > > +        * TODO(sjg): This should use (ulong)map_sysmem(addr)
+> > > > >          */
+> > > > >         ret = efi_add_memory_map(addr, size, EFI_RESERVED_MEMORY_TYPE);
+> > > > >         if (ret != EFI_SUCCESS) {
+> > > > > @@ -399,6 +401,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+> > > > >
+> > > > >         /* cleanup for iso or img image */
+> > > > >         if (ctx->ramdisk_blk_dev) {
+> > > > > +               /* TODO(sjg): This should use (ulong)map_sysmem(...) */
+> > > > >                 ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
+> > > > >                                          EFI_CONVENTIONAL_MEMORY);
+> > > > >                 if (ret != EFI_SUCCESS)
+> > > > > @@ -506,6 +509,8 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> > > > >
+> > > > >                 source_buffer = NULL;
+> > > > >                 source_size = 0;
+> > > > > +
+> > > > > +       /* TODO(sjg): This does not work on sandbox */
+> > > > >         } else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+> > > > >                 /*
+> > > > >                  * loaded_dp must exist until efi application returns,
+> > > > > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> > > > > index bf96f61d3d0..fd89ef6036f 100644
+> > > > > --- a/lib/efi_loader/efi_helper.c
+> > > > > +++ b/lib/efi_loader/efi_helper.c
+> > > > > @@ -486,6 +486,7 @@ static efi_status_t copy_fdt(void **fdtp)
+> > > > >                 log_err("Failed to reserve space for FDT\n");
+> > > > >                 goto done;
+> > > > >         }
+> > > > > +       /* TODO(sjg): This does not work on sandbox */
+> > > > >         new_fdt = (void *)(uintptr_t)new_fdt_addr;
+> > > > >         memcpy(new_fdt, fdt, fdt_totalsize(fdt));
+> > > > >         fdt_set_totalsize(new_fdt, fdt_size);
+> > > > > diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> > > > > index 8d2ef6deb51..02d4a5dd045 100644
+> > > > > --- a/lib/efi_loader/efi_smbios.c
+> > > > > +++ b/lib/efi_loader/efi_smbios.c
+> > > > > @@ -40,7 +40,11 @@ efi_status_t efi_smbios_register(void)
+> > > > >                 return EFI_NOT_FOUND;
+> > > > >         }
+> > > > >
+> > > > > -       /* Mark space used for tables */
+> > > > > +       /*
+> > > > > +        * Mark space used for tables/
+> > > > > +        *
+> > > > > +        * TODO(sjg): This should use (ulong)map_sysmem(addr, ...)
+> > > > > +        */
+> > > > >         ret = efi_add_memory_map(addr, TABLE_SIZE, EFI_RUNTIME_SERVICES_DATA);
+> > > > >         if (ret)
+> > > > >                 return ret;
+> > > > > diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> > > > > index 139e16aad7c..5c69a1e0f3e 100644
+> > > > > --- a/lib/efi_loader/efi_var_mem.c
+> > > > > +++ b/lib/efi_loader/efi_var_mem.c
+> > > > > @@ -226,6 +226,8 @@ efi_status_t efi_var_mem_init(void)
+> > > > >                                  &memory);
+> > > > >         if (ret != EFI_SUCCESS)
+> > > > >                 return ret;
+> > > > > +
+> > > > > +       /* TODO(sjg): This does not work on sandbox */
+> > > > >         efi_var_buf = (struct efi_var_file *)(uintptr_t)memory;
+> > > > >         memset(efi_var_buf, 0, EFI_VAR_BUF_SIZE);
+> > > > >         efi_var_buf->magic = EFI_VAR_FILE_MAGIC;
+> > > > > --
+> > > > > 2.34.1
+> > > > >
