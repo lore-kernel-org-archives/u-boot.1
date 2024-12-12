@@ -4,67 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C4AE77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 12:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA220E77182
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 12:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CB56801BE;
-	Thu, 12 Dec 2024 13:33:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id F1A18801BD;
+	Thu, 12 Dec 2024 13:41:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="CsGr5/2W";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ac7dWLCf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 437DF801B6; Thu, 12 Dec 2024 13:33:14 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CEBB3801BE; Thu, 12 Dec 2024 13:41:08 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07403801BD
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 13:33:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E281801B6
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 13:41:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 3ff30d5c-b885-11ef-8d54-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 3ff30d5c-b885-11ef-8d54-005056999439;
- Thu, 12 Dec 2024 13:33:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=qSiDMltgRPENwedpuvKNJpTyLuLiDZ3TAKyXwItORyA=;
- b=CsGr5/2WD9QeQ1agNyu7mGTvFBYQBbaapcNVBiCqXqIszS9JqrLlNDo1zBf31ixXTU2fn5gIDhla/
- Qpz+MRR6r4mqLCEv8vou/y9NuszhwckPKRr6rKTMssVICs7shi7Azm5+JdbDGwemshEclrtDRkiymP
- PaUO01xTiTiAvxJ3wID1ll2KlRo7P+9eLq2Q9kToSkzUj2Yuj5EHzSDkmeI0cp7mW44nlfcx1HOrTA
- E49IBSDy3brLUdeXvBfHWaC4kHqKFj3yLB9UzOXju7yDVwqrrXeqO0W5CsE+iAtv/ecAxirmX1wk2j
- jcRUeThLUjrrmMp9daE5r9NLi4vFREg==
-X-KPN-MID: 33|3i5CdhyrgPP96wm7VJyDhLxYZbkq7SEcimWg+v3p6XEgFV467cYI8WmXX5iuMgo
- BQph3/402wC9Y73AqiTtHsZrrPuQss4WQo0hxLAvzewg=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|HYtnqnDV9Iaoe39FJN7P/EYcGZzXyK3RnthPs/EaEjAqmscYDy6fkq9gABM23iu
- CMNuums+wTCUNCQ7MJkPwSg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 3f7926aa-b885-11ef-88b2-00505699772e;
- Thu, 12 Dec 2024 13:33:11 +0100 (CET)
-Date: Thu, 12 Dec 2024 13:33:10 +0100
-Message-Id: <8734itxerd.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: sughosh.ganu@linaro.org, trini@konsulko.com, u-boot@lists.denx.de,
- patrick.delaunay@foss.st.com, xypron.glpk@gmx.de, lucent@gmail.com
-In-Reply-To: <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com> (message from
- Patrice CHOTARD on Thu, 12 Dec 2024 09:23:52 +0100)
-Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
- bank
-References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
- <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
- <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
- <CADg8p96XXRVn6r-9tSu-h1CANgnayQuEVs8XVUb8eAd8d5kz9A@mail.gmail.com>
- <7642b0fc-8383-4877-bbc6-22bcd22536fc@foss.st.com>
- <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
- <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com>
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aadb1so727984a12.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 04:41:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734007264; x=1734612064; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mvudhmnY+ssrYqaAz+05OP2fvr5Au/LpcH+40M5d74I=;
+ b=Ac7dWLCfMiCYK/WE1WtZ0JkZRH70QYrhQ+b/ufmo2SKFag7Vgl5GglNs1J0s4lAxom
+ 23Vw1fWhH+mmFTpm670t/e4GwEl0/tY18YAHcMF3FM/pg4V4jq+0PauV0KlPVwvidtQI
+ nE361Bif33+SbbMwFumnbSotDSjZ1fuUvjgyQE6YA1Srm7GOjWlFvhf0oAKSOFzvdbos
+ U8TrHNYluy3UkpcMJYNLKoaXmGRMdupGhc8osNG3CrgAmdSNK8aEJoEUsvwQQ7ojsHg5
+ BiD1UvoPoMJdojpbMFqORSiN6txF8smxMGG1A5+rFhElh+mgFlzLHmSj3XiDb9gt48Ks
+ tfTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734007264; x=1734612064;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mvudhmnY+ssrYqaAz+05OP2fvr5Au/LpcH+40M5d74I=;
+ b=kOlvAluLi2WeThb3y7f7vXoSpjFLRYaRGLG3C/KG3B7es2XWs/8nwT4RB4W8RTqXy/
+ VPNu5zHJLaPcLBIMA8pQHuDqV1NqDjaXVLnJ3JrWModKm5oJn8wzINy+erSyhumiWuZl
+ WgOvWU47hYKoWCw5ewbNw2VHXw/rmBPqvqLgsIy3p3sEi4/4FIdrSNeRLeC0hPAllYTf
+ bVCqGzH4L7ErYo2B/JGr7Ya+zc7rgY3+REbfj9i80AzQQ/p7uNrpWqD1WoZr72eYIB+y
+ N/bQisPC3wRyPqKg290SI7Wdyyz72/aon6NvRofNim3TPNKCrQacdKZ0vM8F3Bl63U8v
+ VshA==
+X-Gm-Message-State: AOJu0YyaBovjRyPVh3WQzEWgx6Yfj+m0miwb2YweU6WQe+JDXxdo5t3/
+ ZpN3A5uXvjTzsmEMuxZ+jrB/ML0ZmmFldQ6g8j837cwv+YtdxFRRI5IWIA95f/rEF/XsGzKA72o
+ R7PY=
+X-Gm-Gg: ASbGnctLpEnOtWqLq8PrVM90VG41TFXjGq8eSCxLQfAg0HDrytN5LFxr8Ht2XidIT4r
+ xZolOHjMHHL2rvol7RQgB99C8QTMLdJcxcPeJIacV1rkf7o3PKAbN4I//1d3FbCHItmbDPi+xAr
+ 2wdM+PiQ2B+9CnOstICNi/4QaHMlhzmUtbpQE1m9c5ELl17VqRrB8x+zWUURdv2DD7Ra0O3FxLl
+ vAc+W2vI5UCZglgD35szR+VwjloGc1AveeZ42gKkqwkDJrzWJzu/vsxEaZABtxXwGmkpUlXTcqk
+ 3ng8cfcxoZLiTWxWOndytFWiMBlWpWloMTqW8lY=
+X-Google-Smtp-Source: AGHT+IEeb7kPcc2VVYGfGGXZAI9metv/FMSohZQOREtvIe8stceWgfwIuJgsyYIMrnoPqpe7d4bteA==
+X-Received: by 2002:a05:6402:27cb:b0:5d0:d84c:abb3 with SMTP id
+ 4fb4d7f45d1cf-5d6334f6f53mr100335a12.26.1734007264328; 
+ Thu, 12 Dec 2024 04:41:04 -0800 (PST)
+Received: from ?IPV6:2a02:8109:888d:ff00:ca7f:54ff:fe52:4519?
+ ([2a02:8109:888d:ff00:ca7f:54ff:fe52:4519])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d3d51c3c4fsm8206480a12.64.2024.12.12.04.41.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Dec 2024 04:41:03 -0800 (PST)
+Message-ID: <18ecd087-a3d5-4496-8b5e-ed8e7a7a5278@linaro.org>
+Date: Thu, 12 Dec 2024 13:41:02 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] cmd: ufetch: Show CPU architecture under "CPU"
+Content-Language: en-US
+To: j.ne@posteo.net, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241211-ufetch-v2-0-2b5432ffaeb1@posteo.net>
+ <20241211-ufetch-v2-3-2b5432ffaeb1@posteo.net>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20241211-ufetch-v2-3-2b5432ffaeb1@posteo.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,176 +101,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Thu, 12 Dec 2024 09:23:52 +0100
-> From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-> 
-> On 12/11/24 19:16, Sughosh Ganu wrote:
-> > On Wed, 11 Dec 2024 at 22:20, Patrice CHOTARD
-> > <patrice.chotard@foss.st.com> wrote:
-> >>
-> >>
-> >>
-> >> On 12/11/24 17:27, Sughosh Ganu wrote:
-> >>> On Wed, 11 Dec 2024 at 21:50, Patrice CHOTARD
-> >>> <patrice.chotard@foss.st.com> wrote:
-> >>>>
-> >>>>
-> >>>>
-> >>>> On 12/7/24 16:57, Tom Rini wrote:
-> >>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
-> >>>>>
-> >>>>>> There are platforms which set the value of ram_top based on certain
-> >>>>>> restrictions that the platform might have in accessing memory above
-> >>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
-> >>>>>> even though the LMB allocator works as expected, when trying to
-> >>>>>> allocate memory above ram_top, prohibit this by marking all memory
-> >>>>>> above ram_top as reserved, even if the said memory region is from the
-> >>>>>> same bank.
-> >>>>>>
-> >>>>>> [...]
-> >>>>>
-> >>>>> Applied to u-boot/master, thanks!
-> >>>>>
-> >>>> Hello
-> >>>>
-> >>>> This patch is breaking the boot on STM32MP135F-DK.
-> >>>>
-> >>>> On this platform, we got an area above gd->ram_top,
-> >>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
-> >>>>
-> >>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
-> >>>> this area is no more tagged as LMB_NOMAP, because it's previously been
-> >>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
-> >>>>
-> >>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
-> >>>>
-> >>>> I suggest to revert this patch.
-> >>>
-> >>> I don't think that this patch should be reverted. If the said platform
-> >>> has a reserved memory region above ram_top, I would suggest to either
-> >>> a) move the ram_top on this platform so that the op-tee region gets
-> >>> marked as no-map in the lmb memory map, or b) do not use the lmb
-> >>
-> >> In my explanation above, i indicated that before this commit,
-> >> this area was marked as LMB_NOMAP in the lmb memory map by boot_fdt_add_mem_rsv_regions().
-> >> this is exactly what you described in the possible solution "a)".
-> >>
-> >> But now with this commit, as lmb_add_memory() is called in lmb_init() the area above ram_top is marked LMB_NOOVERWRITE.
-> >> Then later, boot_fdt_add_mem_rsv_regions() is executed, but the area above ram_top can't be marked as
-> >> LMB_NOMAP as previously because it's already marked LMB_NOOVERWRITE.
-> > 
-> > This has been done to ensure that memory above ram_top is not taken
-> > into consideration when it comes to U-Boot. The reason why memory
-> 
-> It was already the case before this commit, ram_top was designed to
-> indicate to U-Boot the top address of available RAM,
-> see include/asm-generic/global_data.h :
-> 
-> 	/**
-> 	 * @ram_top: top address of RAM used by U-Boot
-> 	 */
-> 	phys_addr_t ram_top;
-> 
-> > above ram_top also needs to be added is to ensure that this memory
-> > also gets passed on to the OS when booting with EFI. If it has to be
-> > considered by U-Boot, the value of ram_top needs to be adjusted
-> > accordingly. Is that not possible on the platform? If not, the only
-> > other solution is to obtain this memory region from the DT, and then
-> > configure the MMU.
-> 
-> Currently, ram_top is adjusted on STM32MP platforms, 
-> for example in stm32mp135f-dk.dts :
-> 
-> 	reserved-memory {
-> 		#address-cells = <1>;
-> 		#size-cells = <1>;
-> 		ranges;
-> 
-> 		optee@dd000000 {
-> 			reg = <0xdd000000 0x3000000>;
-> 			no-map;
-> 		};
-> 	};
-> 
->           0xE000 0000  ********************  
->                        *                  *  
->                        *       OPTEE      *  
->                        *    (LMB_NOMAP)   *  
->                        *                  *  
-> ram_top = 0xDD00 0000  ********************  
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->                        *                  *
->           0xC000 0000  ********************
-> 
-> On STM32MP platforms, we already obtain all memory regions from DT with 
-> property "no-map" and we marked them LMB_NOMAP.
-> 
-> Later we parse the LMB regions, all of these region marked LMB_NOMAP are 
-> used to configure our MMU accordingly.
-> So, again, we are doing things as you suggested.
-> 
-> This commit now forbids to mark OPTEE memory region with LMB_NOMAP as 
-> indicated in DT.
 
-And that's what needs to be fixed I think.  It should be allowed to
-add this flag to an already existing region regardless of whether the
-LMB_NOOVERWRITE flag is set (and split the region if necessary).
 
-I wonder if it is enough to adjust the
-
-                        if (flags == LMB_NONE) {
-
-in lib/lmb.c:lmb_add_region_flags() into
-
-                        if (flags == LMB_NONE || (flags & LMB_NOOVERWRITE)) {
-
-to fix your issue.
-
-Currently the code in boot/image-fdt.c:boot_fdt_add_mem_rsv_regions()
-always adds LMB_NOOVERWRITE, which supports the view that LMB_NOMAP
-adds restrictions on top of that.
-
-> For information, it has impact on all STM32MP platforms (at least 6 boards).
+On 11/12/2024 23:25, J. Neuschäfer via B4 Relay wrote:
+> From: "J. Neuschäfer" <j.ne@posteo.net>
 > 
-> Patrice
+> When looking at ufetch output it isn't immediately obvious which CPU
+> architecture the presented board has. This patch therefore adds the
+> CPU architecture string (for example "powerpc") to the "CPU:" line.
+> The new format is:
 > 
+> 	CPU: powerpc (1 cores, 1 in use)
 > 
+> Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+Thanks for re-spinning this!
+> ---
 > 
-> > 
-> >>
-> >>
-> >>> memory map to configure the MMU -- can the MMU configuration logic not
-> >>> read the DT to get which regions are to be marked as no-map?
-> >>>
-> >>> As far as the lmb module is concerned, it is being told through this
-> >>> commit to not consider memory above ram_top for allocations, which is
-> >>> not an incorrect thing imo.
-> >>
-> >> That's the case, we don't consider memory above ram_top for allocations,
-> >> we only marked it with LMB_NOMAP.
-> > 
-> > That was because the lmb scope was local. That meant a platform could
-> > add any size that it wanted, and then use that map for whatever it
-> > fancied. The use of lmb for "allocating" addresses for io-va addresses
-> > by the apple iommu is another such case.
-> > 
-> > -sughosh
-> > 
-> >>
-> >> Thanks
-> >> Patrice
-> >>
-> >>>
-> >>> -sughosh
-> >>>
-> >>>>
-> >>>> Patrice
+> v2:
+> - Reformat the CPU message for readability
+> ---
+>  cmd/ufetch.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
+> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
+> index 83cec0f6d5c875f150f7b948392a29803bdbc201..ed5a856c7abbe08949b81e0b2f634edd8b390be5 100644
+> --- a/cmd/ufetch.c
+> +++ b/cmd/ufetch.c
+> @@ -188,7 +188,7 @@ static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
+>  				if (ofnode_name_eq(np, "cpu"))
+>  					n_cpus++;
+>  			}
+> -			printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
+> +			printf("CPU: " RESET CONFIG_SYS_ARCH " (%d cores, 1 in use)\n", n_cpus);
+>  			break;
+>  		case MEMORY:
+>  			for (int j = 0; j < CONFIG_NR_DRAM_BANKS && gd->bd->bi_dram[j].size; j++)
+> 
+
+-- 
+// Caleb (they/them)
+
