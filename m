@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB59E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65984E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 13:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55275800CF;
-	Thu, 12 Dec 2024 14:45:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0057E80137;
+	Thu, 12 Dec 2024 14:47:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BlqEeEHR";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="H+dQxDZy";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UkE4C8r8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A4D780209; Thu, 12 Dec 2024 14:45:30 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F08D8018E; Thu, 12 Dec 2024 14:47:48 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 432038008A
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:45:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F41F08010E
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:47:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-aa689a37dd4so110027066b.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 05:45:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734011128; x=1734615928; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mg+5HP6MhUvELT4ln7Tr6W6dloeSu8Tag7qglFgJMfs=;
- b=BlqEeEHRjajrRVHjz9MjzdMp5J1r3OuUqtfW69wHwHmN1rekitsA7cjCRsbfpT4sxF
- 6SHKIsQKVgGJR+CqIWGpHJYFClMYyzHFZwjz0Js/PUITNluPGRsjO5p9zKYqiVU89K8k
- 0SFavGNElffRkOUqYY9waoZr2919zvJjKUvyI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734011128; x=1734615928;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Mg+5HP6MhUvELT4ln7Tr6W6dloeSu8Tag7qglFgJMfs=;
- b=jjrIke3Csl9r+oquxr6CM9XmiUyI3O3ewM27OaBj6MLyimBmOo86/KtBcrHuMykwzY
- Wdtq3yTjAvevKkWmWR+1mgZJg0NofRtbW0VFj2fZeUJXrviorFko9UfN2g38Unnfk9xV
- fb5sJegaKiszBy+UGss8j6L6sMXsJrxHXQmnB8RQLLOb/gP0sWhyx39/VJjqgFB7qNRz
- bykPzbi9V7ooJPtmfoigEMSiOGhmCe4e/OZzsw1WSgeLfHuWvT5bC99j35v1DEFjWh9D
- 2f4YnkJXAzdZm6IUWQ8m1aQwAQPBBLqHnAoEgHZTHGetfv7x6w/0qTId6zY4a4t7P88G
- UwcA==
-X-Gm-Message-State: AOJu0YyhufzKfGtCEeIo+hLHdNPdQ/PAS7wk3f5l2ZRNoTuExaxJJ35E
- rbG8h8k2Nbc3LxgW1P/eFeHSFWkCMuLru+gZpgM7lWuMq+8i8i4mOk9vJtsEL/VtAvC6nQ1qRrK
- gocnzbe67GXhIeRbyAzjhm5qZWSmpZotEejI1
-X-Gm-Gg: ASbGncvlACees61imp3/sbdQawTaMdn0BtF/ItWQhdTuyfa6Ii2Dsd146B+aAL24u1j
- ubdaxlYgdKBudaa5sPTjLjNnKrptkUY24YNlUB1c=
-X-Google-Smtp-Source: AGHT+IEO1Qznejk1jUPTSvNHczV/V5XmLU1rNXBTHiDX2v9XA28fnfwWsSy71LF7X9qJftAN5lsfmGV/o/obo3P4ia0=
-X-Received: by 2002:a17:907:1ca7:b0:aa6:77e6:ea3d with SMTP id
- a640c23a62f3a-aa6b1378bfamr804796266b.45.1734011127647; Thu, 12 Dec 2024
- 05:45:27 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y8DLT506mz9tRR;
+ Thu, 12 Dec 2024 14:47:45 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734011265;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
+ b=H+dQxDZy1yEtyq+OR7XgbreAMgE04iOjmpi8+vCoJB15zZSzGSA2RYK1uEi085nRD2rZfw
+ wjvrESxuF4ohVwOBLdYpkjQ4HioF4wNFccdRs+Lajx9wXeuDIeWaG/tFqNmc11EU3Vt+Vn
+ LUvAzhvFZpzZKbtpZq+sFKU+bWBjVNHrMrRqxVsxoMDfOpQ7f7C7pR8OIYR69mnO/74Ccy
+ W9I6clidFs12o7o+TGcBdhx/yO+bJi+885poy/9o1r/MJyZJjFeva6EmmfljmtQMIBHLwm
+ 8V12GadCQ6ylmKeFntfrHiHzGdACiG3paECP6EkgRxEzmPiQta7ImNtmN5T6qg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734011263;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=G4fPl43AD90vyfin5cQ8ti+FHwXovPYz4/KEymIAQFU=;
+ b=UkE4C8r8avR8sRPAsyvVr6jkfK1XES93B+UJQa2odxxI+8bnW1efACqxcKu+t9FOPnjKM3
+ AQrYIz6ZcVgpsw05Tn0NmJYXFBV5NCsjeJJGIkK0jhCi8O+qAji0fhwt2fT8DW2B73jTHv
+ lfmptgn5aeoOujxxn1u8ca6X2vcsWs27bOut8y//BhZE8NK5Yh3ret13Y8H21ZclEMy5XV
+ e4CPqfkauGTaMbg/GTl+0axhF0YmTaTOcEajDn3zvOoC7K6T/D/ieuU0l6Y0b/8CVqwGIP
+ xzCMjQ2wBtE8jgXULE/5idxRsUD/7Wqu69NMsnaclddfNpezxYehh08WjsLMGw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Raymond Mao <raymond.mao@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [RFC][PATCH 1/3] arm64: Add late jump to kernel board hook
+Date: Thu, 12 Dec 2024 14:47:17 +0100
+Message-ID: <20241212134729.85391-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20241211223822.2446254-1-sjg@chromium.org>
- <20241211223822.2446254-6-sjg@chromium.org>
- <CAC_iWjLk_moWeTpo-dR_FV7E4+40U0S+DjD5dd3nWhf2KSGDrg@mail.gmail.com>
-In-Reply-To: <CAC_iWjLk_moWeTpo-dR_FV7E4+40U0S+DjD5dd3nWhf2KSGDrg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 12 Dec 2024 06:45:16 -0700
-Message-ID: <CAFLszTh1wPrjXu7oJrdUGqyGEFLC-mZ4JzuwXuiUjegpqhPA9g@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] efi_loader: Move the fallback code from
- efi_run_image()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: digt59dy86ctf61abxo4ekmyh9tnb85d
+X-MBO-RS-ID: 715c8ed7fee41562b58
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,177 +95,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Add empty weak assembler function armv8_switch_to_el2_prep() which is
+jumped to just before U-Boot determines which EL it is running in and
+decides which path to take to boot the Linux kernel.
 
-On Thu, 12 Dec 2024 at 00:53, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Checkpatch has errors on this. Please have a look
+This weak function is meant to be used by architecture specific code
+to implement jump to a firmware blob, which then returns right past
+this weak function and continues execution of U-Boot code which then
+boots the Linux kernel. One example of such use case is when U-Boot
+jump tp TFA BL31, which switches from EL3 to EL2 and then returns to
+U-Boot code newly running in EL2 and starts the Linux kernel.
 
-It's the brackets not matching up because of
-efi_uninstall_multiple_protocol_interfaces() being so long. It also
-complains about possible blank lines at the end of the file, but that
-isn't correct.
+The weak function is called with caches already disabled and DM shut
+down. Any preparatory work or even loading of more data must be done
+in board_prep_linux(), this hook is meant only for the final jump to
+the firmware and return to U-Boot before booting Linux.
 
->
-> Also for some reason is fails to apply after patch 4.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Julien Masson <jmasson@baylibre.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: Michael Walle <mwalle@kernel.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
+Cc: Peter Hoyes <Peter.Hoyes@arm.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/cpu/armv8/transition.S |  8 ++++++++
+ arch/arm/include/asm/system.h   | 16 ++++++++++++++++
+ 2 files changed, 24 insertions(+)
 
-It is based on top of the other series (confusion between pointers and
-addresses). I can send it independently if you'd like to apply this
-one first.
+diff --git a/arch/arm/cpu/armv8/transition.S b/arch/arm/cpu/armv8/transition.S
+index 9dbdff3a4fc..85f13ccd0d2 100644
+--- a/arch/arm/cpu/armv8/transition.S
++++ b/arch/arm/cpu/armv8/transition.S
+@@ -9,8 +9,16 @@
+ #include <linux/linkage.h>
+ #include <asm/macro.h>
+ 
++.pushsection .text.armv8_switch_to_el2_prep, "ax"
++WEAK(armv8_switch_to_el2_prep)
++	ret
++ENDPROC(armv8_switch_to_el2_prep)
++.popsection
++
+ .pushsection .text.armv8_switch_to_el2, "ax"
+ ENTRY(armv8_switch_to_el2)
++	bl	armv8_switch_to_el2_prep
++	nop
+ 	switch_el x6, 1f, 0f, 0f
+ 0:
+ 	cmp x5, #ES_TO_AARCH64
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index dbf9ab43e28..091082281c7 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -238,6 +238,22 @@ int __asm_flush_l3_dcache(void);
+ int __asm_invalidate_l3_icache(void);
+ void __asm_switch_ttbr(u64 new_ttbr);
+ 
++/*
++ * armv8_switch_to_el2_prep() - prepare for switch from EL3 to EL2 for ARMv8
++ *
++ * @args:        For loading 64-bit OS, fdt address.
++ *               For loading 32-bit OS, zero.
++ * @mach_nr:     For loading 64-bit OS, zero.
++ *               For loading 32-bit OS, machine nr
++ * @fdt_addr:    For loading 64-bit OS, zero.
++ *               For loading 32-bit OS, fdt address.
++ * @arg4:	 Input argument.
++ * @entry_point: kernel entry point
++ * @es_flag:     execution state flag, ES_TO_AARCH64 or ES_TO_AARCH32
++ */
++void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
++			      u64 arg4, u64 entry_point, u64 es_flag);
++
+ /*
+  * armv8_switch_to_el2() - switch from EL3 to EL2 for ARMv8
+  *
+-- 
+2.45.2
 
->
-> Thanks
-> /Ilias
->
->
-> On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > This code is only needed if an invalid image/device path is passed in.
-> > Move the code out to a caller where this can be dealt with. The normal
-> > flow will provide these parameters.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  lib/efi_loader/efi_bootbin.c | 103 ++++++++++++++++-------------------
-> >  1 file changed, 48 insertions(+), 55 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index 8ebd48547cb..582b2745ced 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -147,36 +147,13 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
-> >                                   struct efi_device_path *device,
-> >                                   struct efi_device_path *image)
-> >  {
-> > -       efi_handle_t mem_handle = NULL, handle;
-> > -       struct efi_device_path *file_path = NULL;
-> > -       struct efi_device_path *msg_path;
-> > +       efi_handle_t handle;
-> > +       struct efi_device_path *msg_path, *file_path;
-> >         efi_status_t ret;
-> >         u16 *load_options;
-> >
-> > -       if (!device || !image) {
-> > -               log_debug("Not loaded from disk\n");
-> > -               /*
-> > -                * Special case for efi payload not loaded from disk,
-> > -                * such as 'bootefi hello' or for example payload
-> > -                * loaded directly into memory via JTAG, etc:
-> > -                */
-> > -               file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> > -                                           source_buffer, source_size);
-> > -               /*
-> > -                * Make sure that device for device_path exist
-> > -                * in load_image(). Otherwise, shell and grub will fail.
-> > -                */
-> > -               ret = efi_install_multiple_protocol_interfaces(&mem_handle,
-> > -                                                              &efi_guid_device_path,
-> > -                                                              file_path, NULL);
-> > -               if (ret != EFI_SUCCESS)
-> > -                       goto out;
-> > -               msg_path = file_path;
-> > -       } else {
-> > -               file_path = efi_dp_concat(device, image, 0);
-> > -               msg_path = image;
-> > -               log_debug("Loaded from disk\n");
-> > -       }
-> > +       file_path = efi_dp_concat(device, image, 0);
-> > +       msg_path = image;
-> >
-> >         log_info("Booting %pD\n", msg_path);
-> >
-> > @@ -195,36 +172,13 @@ static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size,
-> >         ret = do_bootefi_exec(handle, load_options);
-> >
-> >  out:
-> > -       if (mem_handle) {
-> > -               efi_status_t r;
-> > -
-> > -               r = efi_uninstall_multiple_protocol_interfaces(
-> > -                       mem_handle, &efi_guid_device_path, file_path, NULL);
-> > -               if (r != EFI_SUCCESS)
-> > -                       log_err("Uninstalling protocol interfaces failed\n");
-> > -       }
-> > -       efi_free_pool(file_path);
-> >
-> >         return ret;
-> >  }
-> >
-> > -/**
-> > - * efi_binary_run_() - run loaded UEFI image
-> > - *
-> > - * @image_ptr: memory address of the UEFI image
-> > - * @size:      size of the UEFI image
-> > - * @fdt:       device-tree
-> > - * @device:    EFI device-path
-> > - * @image:     EFI image-path
-> > - *
-> > - * Execute an EFI binary image loaded at @image.
-> > - * @size may be zero if the binary is loaded with U-Boot load command.
-> > - *
-> > - * Return:     status code
-> > - */
-> > -efi_status_t efi_binary_run_(void *image_ptr, size_t size, void *fdt,
-> > -                            struct efi_device_path *device,
-> > -                            struct efi_device_path *image)
-> > +static efi_status_t efi_binary_run_(void *image_ptr, size_t size, void *fdt,
-> > +                                   struct efi_device_path *device,
-> > +                                   struct efi_device_path *image)
-> >  {
-> >         efi_status_t ret;
-> >
-> > @@ -257,6 +211,45 @@ efi_status_t efi_binary_run_(void *image_ptr, size_t size, void *fdt,
-> >   */
-> >  efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> >  {
-> > -       return efi_binary_run_(image, size, fdt, bootefi_device_path,
-> > -                              bootefi_image_path);
-> > +       efi_handle_t mem_handle = NULL;
-> > +       struct efi_device_path *file_path = NULL;
-> > +       efi_status_t ret;
-> > +
-> > +       if (!bootefi_device_path || !bootefi_image_path) {
-> > +               log_debug("Not loaded from disk\n");
-> > +               /*
-> > +                * Special case for efi payload not loaded from disk,
-> > +                * such as 'bootefi hello' or for example payload
-> > +                * loaded directly into memory via JTAG, etc:
-> > +                */
-> > +               file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, image,
-> > +                                           size);
-> > +               /*
-> > +                * Make sure that device for device_path exist
-> > +                * in load_image(). Otherwise, shell and grub will fail.
-> > +                */
-> > +               ret = efi_install_multiple_protocol_interfaces(&mem_handle,
-> > +                                                              &efi_guid_device_path,
-> > +                                                              file_path, NULL);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       goto out;
-> > +       } else {
-> > +               log_debug("Loaded from disk\n");
-> > +       }
-> > +
-> > +       ret = efi_binary_run_(image, size, fdt, bootefi_device_path,
-> > +                             bootefi_image_path);
-> > +out:
-> > +       if (mem_handle) {
-> > +               efi_status_t r;
-> > +
-> > +               r = efi_uninstall_multiple_protocol_interfaces(mem_handle,
-> > +                                       &efi_guid_device_path, file_path, NULL);
-> > +               if (r != EFI_SUCCESS)
-> > +                       log_err("Uninstalling protocol interfaces failed\n");
-> > +       }
-> > +       efi_free_pool(file_path);
-> > +
-> > +       return ret;
-> >  }
-> > +
-> > --
-> > 2.34.1
-> >
