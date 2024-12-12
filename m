@@ -4,199 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F90E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:42:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74F1E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 14:54:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51E90801B6;
-	Thu, 12 Dec 2024 15:42:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CD03801EB;
+	Thu, 12 Dec 2024 15:54:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UlTEl+/F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ssN7zdAI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71FF4801BD; Thu, 12 Dec 2024 15:42:45 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::609])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E459801ED; Thu, 12 Dec 2024 15:54:33 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94117801B0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:42:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA936801DA
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 15:54:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VoFI0sDQF5sepXAjYZR+KwnULJpHkibKxESgprxOvpCbjpogikM559Yd+6ph3d1ezVDWE8+UBYscPanE/SCjEAtSyIudnW4Or10PXKwGZlDJknD13k3iqV8fHECs4hzd5PaZkLzzNQVeAih0sjn04zErcFdp/oH/rceteBYj6+29Bbg0MbJsG1beWRz6iNDXrHAH6lHV4pi3eBoSd5jxNTaJSzHpf0ttIZD7owIVzBdRYU9EuCUDg+wOMF5v9GWDGrpSvpwxu6HWcnQLNjn4Cdgv6wOqaNBTUu6qOye+FLKErxPGriGdNt5tQVLORR2Sk0nZieycFhzgn0oI1CpiWA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bOLkO8uvCbdJwMpyzFi1WtWG0PR6oOfCPa3eBtGPj+k=;
- b=BCOJ+jbLTiRxSVvjp6+8LEueETKZi/DF+PfzvdWcMWVUKwMJ1BuqAO1gelgJpIVtVZw2kKroDYDTEFNZZgoxuosq946bXS+K9LogddVEN99z6l5AQgvSzJadaPQsTHsiM05gIKAtaediZWZ8f5+CalSeIyW9XsWUHORWt1SekF2zowI6sThw/in0gGyuGr2OvwL3CKx/N/mL9z5hvH38+4jaDJIUJrQ0XzpyJwIBtAg/4VtlWn2/y3XsHzWyaOF51J9n4+cuRPmd2iOkQ/dYexteGj3kMhdloCsvBhGK1sqEwJ9N7NkKfIWzM8avHutyi/GlqeKTUitC1FV2ByXozA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bOLkO8uvCbdJwMpyzFi1WtWG0PR6oOfCPa3eBtGPj+k=;
- b=UlTEl+/FC0jmxA0I1UjNvm57dUdK1wGMfoe4BCUzjcpxLieGYwEh5QZvNFFRRXETFYa40ux/lPqUuYN0SIcQoJDz91vLZrYakVtBaQ9dQZdxKUokstj+/DSN+5LAg+rCUyOiGZbbSqtmML5Nbn09ivPZLRzCx5zVTCPsbE4geLo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS7PR12MB9474.namprd12.prod.outlook.com (2603:10b6:8:252::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.16; Thu, 12 Dec
- 2024 14:42:39 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%5]) with mapi id 15.20.8230.016; Thu, 12 Dec 2024
- 14:42:39 +0000
-Message-ID: <09e7bc07-46a9-41f4-914b-7855485ee090@amd.com>
-Date: Thu, 12 Dec 2024 15:42:31 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <michal.simek@amd.com>
-Subject: [GIT PULL] xilinx: Fix for v2025.01-rc5
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0047.eurprd01.prod.exchangelabs.com
- (2603:10a6:803::24) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3e9a88793so1066954a12.1
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 06:54:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734015270; x=1734620070; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zvHnbdB181dxGgxIEKZhOmCcYYCekmIi58O8RuRTniY=;
+ b=ssN7zdAIeVACkucAt8jfgk8h3abKkMMiwrYI9sj5pI8ac3cQlZGzUDqRN2fg36ZFCH
+ jfihWCCzKHGEYRU2VpHN4XAe+CYCF/yyPaMV1vbCLGi8MYA+/n/35ZH8AY8xGeg1u7kT
+ mPq5pU8XafNKLQ9QrWAJYIoN6WsqMd+r0A8gEBUp1T8opVadxa/vkVfAbuC5mUJSR01x
+ sBsgZUEc0CYe6MO155u1r1Rvb5sigYJZdvCA1xGH7RmRyCa4hl3HCCSgZUhRAvgNzwVG
+ CBMlIW3berXrZ+XWpKJ+6lqh3y4wuyDAGl2EeZXsJBW60FEBq6DoEqlI0I7oyWDkYjxz
+ SK8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734015270; x=1734620070;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zvHnbdB181dxGgxIEKZhOmCcYYCekmIi58O8RuRTniY=;
+ b=vNypkCYKZSb5/F8IsBKTfIQ/I+qGpskbu7sh61SGt3Dm4kRtcQwhG4qSx99kHumPMi
+ UgYobufxXpWLKZgNm0BkaWeLHWFcOfRiwkdVIajXB/cU4g7IrLTlClBMfxhgFd+Tir/N
+ w/25Gi5G0gLDY7iGikQx6gQcFXg/A/c77U6VAhZ+PeIW3fIMzZgu+K+za3KXifWWynwn
+ 4nl/mGW2ff+8vp6IzR1xt7Zt5Nai2llOUJfM7aHItQFyIwuIMp0llf2d51J71xES6Xhn
+ L3D2zDo9BW0ZQO1Z7DYZ80ATUfwqu30D22rAFvq+GTuwYAjDcOsmUkK369SvnT0Dy66d
+ O0PQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYZzehP4cOeDCVRBjEa1AsbxGJ4QApwex4ojKOwzUfolkFciqLEx7RMORMnt4plJaaq81Fj1Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YwumLj4Dh+vvyepcOkQ7W46FDvW9VcE0FwP9xvz+n+TnxQXMVBE
+ VBAllwUhzaD4vi+WPoOCvyiD/J5cePZcaDo+kpXP4H/fHe5Y3VCmoiA4fZVNEggUPvb3choOYgT
+ hMitpPAPhOZYT061zGmCjYU5bNPAlXl3NIJGFHQ==
+X-Gm-Gg: ASbGncuNJSsLLhr5/AviF1gtGZ5nCSeNH4VbkUdvqWysDnVI74URghCFZrw2iKP3kVi
+ TxA1ishHDOtdtgm6Iw0zCJU+L5Vt4+8wUwDSNxQ==
+X-Google-Smtp-Source: AGHT+IFo6CYdyYxiYXs+0lR4i4I/nipnY0sJZh48/gj8lSnywTopgrq8uBmRwukD6DRL14gCXsXnDk+8qWx5w+61dK8=
+X-Received: by 2002:a05:6402:13d1:b0:5d0:d5af:d417 with SMTP id
+ 4fb4d7f45d1cf-5d632368e9bmr510799a12.1.1734015269912; Thu, 12 Dec 2024
+ 06:54:29 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS7PR12MB9474:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7aa2f45-2c29-44a2-d67d-08dd1abb39dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?bHBtTGdOeDEvUFl6VStPSytyS3FaalpEMDRmc3N0eWNaNUR3NkJqNFplV1RV?=
- =?utf-8?B?cW5RMlVIN3dzYzZiV2ZSeW9EQUtYZHVEdDZIM1NubS94Szk2K051UWRiTEkv?=
- =?utf-8?B?Y3hWdXJrZnZsTGFuOFJaWjl5dmZEZEQzbGRyVDFVbmw0RXZpZnB6QmRKZGM3?=
- =?utf-8?B?ODVxK3BlQTNBQitIWGkrb3F1c2xkenhoaEtqU3ZSbUF5YjdnN2ozWHFobDh4?=
- =?utf-8?B?VXZ6NUZBbDlaVHZHaVl4TlZ2Ujh2V3lHcFhZMVV0YVZ0anNmT08vdnNjS3JQ?=
- =?utf-8?B?VWF5YmpGLzZYa1lpeDhZZ284UXV3VkVyVjZFT0ZtcVptckNSOFZWemVyNTlN?=
- =?utf-8?B?aUpZOUNWRlZQNXFHcHEzTjV0OEZjcHZjT1orMUxyTUxtbXlZdGhrSm1jQkdL?=
- =?utf-8?B?dHA3M0JqRnVMVjRKWWhLYVJQanlnVXREWmFFUU0rM1RTR3hCYk5QOVBrOTZ0?=
- =?utf-8?B?ZVRFQitXQi9kbEVPTkF6bFMzTCt1eStEWVY1TEJmTkNaMXlGSEh0Tk9ZZVFW?=
- =?utf-8?B?SzJSUDU4T1l4alpBcTdLMCt2S29kcEUyemxEVWdkQVhpZEZzV05BeEJUcEt4?=
- =?utf-8?B?K241eFZwNVlmajh4dXUxR3JEejdpKzcvVWZxM1JzSWdnNG9CWkRYN2k4NWNY?=
- =?utf-8?B?dTl0VzVpOG82bmNnK2NTMjlPaXhVNGpSRXR4RGN3RG4rTVFTU2E1YlI5cFMw?=
- =?utf-8?B?ZWN3MVpOSE5hU09iNlBOdkZZQ1dwMFpPQ0JLOWtaS3RvMlJNWUxiSW5ualo2?=
- =?utf-8?B?NnFmeVVaOWxBWFdIRG5zLzNHSDZIOGJZZ2VOaVZ3SWNSR295QjR0cm1WQUJu?=
- =?utf-8?B?aGlHc2VodncyTC9rYk5JWVorWjJWZEhIcFRYVmdFdm1FKzVnZ2lMNnp4OVFX?=
- =?utf-8?B?LzFNTStDalRlNTkyZ1lyNDUwb0hLNE4xWWJvaHZNZ3N5UlZUYzVwRVNqNEpL?=
- =?utf-8?B?WVJtUENiSHZITXllNEpYR3ZteW01bXZRMTNKellqMjVVQ0dQT0ZEVjlXcE1x?=
- =?utf-8?B?VlpyL1I2Q0o5cVR4M0tsOTlFVzhTRmZOd1pSOFl5bnNxLy9ldDZiT2RjdWEr?=
- =?utf-8?B?V0tYVk9zS1lKZjRtdC80Y1dBVytGYmRFMXo0NjVyV29aYkt1QzJZbG83THN3?=
- =?utf-8?B?OXpqYkJZL1MxeU0zREtHWGxwV1IrcHlTQVFobjROalN0WUVVSVJlU1V6dEVE?=
- =?utf-8?B?dmltdWMvdmdjaUJDS2JUSmt6ckl3cTRFQjAwY3hjUS85WXVSNVQ2V2crSi9N?=
- =?utf-8?B?RzZuRkpqU3o0TlJwUEdHQzJNNWZva0RZRWtWNVJnRWtGU2hVYmwyTUY0Ymsr?=
- =?utf-8?B?TUJsRjNNZXJqenhXcllhZVRNOXRzWU8rUHQ0WEh5YzZvNGU4TjNlZVgrRllF?=
- =?utf-8?B?MTdRS3ZNc3JkdDBwRXNIQ20vSmxwc1lHWFA5dzdoajNJc1hlQTQ5NHdlajI3?=
- =?utf-8?B?MnNoMStZUWdLVGpXeHZqQTNVM09GSS8xV0E1VGVFR1ErMjBvRnBRcDdLbTZl?=
- =?utf-8?B?a3pINjZVQ1hjSnkzcFlWdVZ2M05MSTVGSko0TkxQYTcxL2I5cWJKR1hnYVVR?=
- =?utf-8?B?bkJHUmJWZS90YlBCUUVLL3hBb1JqekV6MkcxYmdnYWhDbk1PMXk0OTEzSVJn?=
- =?utf-8?B?QTJrdnJEWXhsNVdKSmZ3QkhyVUZXU0d3MnJVUk1KRkh0bmQ5M0dKbGpKdHR5?=
- =?utf-8?B?NW4rUG1DTDNSeEhveldIbDJocktxTU9CMTFnZXdCNGdsSnFvMjhNZHBneXFD?=
- =?utf-8?B?YTJqNXpzQWNzRndqdkhBdE41Q0VOV0R2TzdHNklVUUtHZkZ6dWJuL2poRzNQ?=
- =?utf-8?Q?tM7WWTJft531hhT4vgWoEy4mCOWC5NNdfq8DU=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MkxyOUJTNHJ1Z1pGZ255RFBNYUkyZ2l3NTlyUlNwM3QrdVpVVm8xV2Frb1c5?=
- =?utf-8?B?RmtQUGRXZWh0VTY5aXRCRnNibmlObjM3blBiTjlrZDdCd0VJZytkMzBiYTNj?=
- =?utf-8?B?UHZjUWgxa0xMS0dWaHRNd2VFdjNoWXc3cC9Oc1UzYzk2a0FqSUxXQnVPcFFk?=
- =?utf-8?B?aEdUYzdoZitvQjAyV1B0aE1iSkwrSnhPWDl1MG5YM1dQaUpEQXNEcGVaSGhh?=
- =?utf-8?B?MTQ4WHlqNDdzZDhjczRKRWtSNFNWd0hvYURMUjR5cDB4L2R2NEVtNEo1L21D?=
- =?utf-8?B?WU9PSzlpOHFVWVZqUjY2ZHBhc2p4WTBlQldOVERMaXFMK2w5NDJOSkoxUTlI?=
- =?utf-8?B?WmpoMktQWXVzNnNZakxTU2Zsbjg3Sjh4ekh1c2pHVEtzYUp6akFiT01yUHlH?=
- =?utf-8?B?MktqZDNvVGNFazJEblNoSUJheTRDV09nQlVjbFpxRXkxV1d6V0dTalZWRlU3?=
- =?utf-8?B?OUR0K1RYaGZDRTFMNVorWE0xTi9WS1RtQnBwWERzcE9MK2hvendmUGxKNEx4?=
- =?utf-8?B?WmdXYStXcFJpekdNajhDRlpHZE05VWEvTGdRRHl6ZjBneWJjWnRqRmFqc0RS?=
- =?utf-8?B?ZTg3ZzBZcjNHRWVvRUFyUGFLdzRaRHhQLzlvbnJZMm1jdnd1UE5LbVBxb2Nk?=
- =?utf-8?B?UFhDdXNxYzBxRVJpeTFxV0pvRjNrS3JFaHlaU1laODErZ3FjVE0rMTJ1bjdQ?=
- =?utf-8?B?YzBGcmwzNEFpR2dDOUZoSkxkWGFpMTlmUDVrS1QwVm9CdHkyUXFuYXlNL09q?=
- =?utf-8?B?dzFGUXh2SEtrcHVhcVB5K1VPSGVvR3BaeTRKVERUdVlMLzU1aURIUGVzcS94?=
- =?utf-8?B?SmpSVWVzUzhUNDVKSzFmc21GQWNkSTFVcEw0SGQzOXBvWVB2YTBJMTVQRHZp?=
- =?utf-8?B?R2VjdDVUcXlZSm9BV01DcXNjaTVQUUpMWkVLZGt1OEJPZWNESmZ0bFNObnZT?=
- =?utf-8?B?UWdKWE5Ra08xN29UaENYM0pMU2kvUzhybDZFNmoxVTdndU0wV0o3OTJiNkNn?=
- =?utf-8?B?YmtzclFPUUJmMWN5ZUt2RTVzLzZQOTU2U09XNjYyaktTUTIxb1dWaEJRQWQz?=
- =?utf-8?B?dFp2eTIrZit5aVViNkczSGJWakVGRGxxbzMweFlRUFBEanlEMTVXeXkzRHNi?=
- =?utf-8?B?NHRyQk0yZUtBbVN3ZUtUNVNja1NZcC94SFBVakw2dThkMlZHT0VmSnRuVzNv?=
- =?utf-8?B?ck15bnZSNGllM2JxcjJmblM2WjdqTjljZ2xRdlNVSDAyWnB6dXRtTVRvR0p0?=
- =?utf-8?B?TTlGcDBJYmtWeUlUWVQrVDhETDJLV0tESllFSkZSNmViQWRHRWlwWE8wY296?=
- =?utf-8?B?RDAzZWZ5MjVZUFBicENsaUgyVzlQZnFCWEVvRWUya3IxcVlJRTg2Z0h3cUxn?=
- =?utf-8?B?MStvb1ZBRmtyVHIvQlkrRUFncGR6d01BZXBqY3FMQnhHQjFTbmRtNFdZTkli?=
- =?utf-8?B?b0IzSG9xNEI2SHlFSHBhdGJDb3g2UWZ6aUFJdm5SclN2ejF6bmFOSGZ4Nk52?=
- =?utf-8?B?NkRndEVTQmJndVFqeE1ML2I1WU5YVzJHSHlEeW4ybkdkWXI3VTRBL2NUekRw?=
- =?utf-8?B?ckxwOUdVQjY2UTd2d3BjNkJ6cE1iUE1oQnV1cE16dG0vNGJnS2VzamJYOW9u?=
- =?utf-8?B?Q1lLMnppcElva2pUVXNVN0pZTHkwM0VhRUMyMmZQM0FLOVlQS0VUWUZjUmlU?=
- =?utf-8?B?YXlsaThqZlpkbVl4QlVIcExLRHk3QUNEVk5oVlNmc2dEakI2V3A1MkRwSDFH?=
- =?utf-8?B?U0VxS2dDRnNVOEltd0pySkFlRTJmL1RmSUc2bkxENnNkdjJnUEw5VHVSd2F3?=
- =?utf-8?B?STNnNjFXK3pDQVlSYWNKakZMcS9TWFZWZnEyNmxtMWZaU1BvM29iVlEvUXVn?=
- =?utf-8?B?WmJjNDRnYTF3blFNbHpFV3BkWUU3b0RzZzdYWmx3MG9NZGd5dFR0NUxab2JD?=
- =?utf-8?B?b2MrM1g4WjBqUGlvMWRVQ1JjcEhkOGxuUW9rVk1MM0pxNktyaFQrTDZoSGFt?=
- =?utf-8?B?emxOYWhxcEpQTzZvWjU2czArNW1HTEVIeWV4NDRkdW9tN1ZqMTcwZTQ1WEx5?=
- =?utf-8?B?Mm9rbEJFTVg0aWVGanJJdCsyblZQV2dsalBXT2YvU1lpcTJuUGNrLzBibWc2?=
- =?utf-8?Q?dyDJYYynCrxSQlF/d7qrKHubJ?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7aa2f45-2c29-44a2-d67d-08dd1abb39dc
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2024 14:42:39.0247 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3ZnDZ0he7s2XGN0UOXYj6WeiNk0zC4HPnH6Nfm72bufTaejjXxzC9vO8mSYmuCm/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB9474
+References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
+ <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
+ <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
+ <CADg8p96XXRVn6r-9tSu-h1CANgnayQuEVs8XVUb8eAd8d5kz9A@mail.gmail.com>
+ <7642b0fc-8383-4877-bbc6-22bcd22536fc@foss.st.com>
+ <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
+ <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com>
+ <8734itxerd.fsf@bloch.sibelius.xs4all.nl>
+ <CADg8p958jWAQh2O2A_EECr-+-5Mqm4O5eEMVAZPXUzbw+xAN-w@mail.gmail.com>
+ <87zfl1vudj.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87zfl1vudj.fsf@bloch.sibelius.xs4all.nl>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 12 Dec 2024 20:24:18 +0530
+Message-ID: <CADg8p97N_L-+=kXbo5RYVjQue0iu4uNquC0we6hyM770KRhURw@mail.gmail.com>
+Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
+ bank
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: patrice.chotard@foss.st.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ patrick.delaunay@foss.st.com, xypron.glpk@gmx.de, lucent@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -213,46 +100,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Thu, 12 Dec 2024 at 20:08, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > Date: Thu, 12 Dec 2024 19:02:44 +0530
+>
+> Hi Sughosh,
+>
+> > On Thu, 12 Dec 2024 at 18:03, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+> > >
+> > > > Date: Thu, 12 Dec 2024 09:23:52 +0100
+> > > > From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+> > > >
+> > > > On 12/11/24 19:16, Sughosh Ganu wrote:
+> > > > > On Wed, 11 Dec 2024 at 22:20, Patrice CHOTARD
+> > > > > <patrice.chotard@foss.st.com> wrote:
+> > > > >>
+> > > > >>
+> > > > >>
+> > > > >> On 12/11/24 17:27, Sughosh Ganu wrote:
+> > > > >>> On Wed, 11 Dec 2024 at 21:50, Patrice CHOTARD
+> > > > >>> <patrice.chotard@foss.st.com> wrote:
+> > > > >>>>
+> > > > >>>>
+> > > > >>>>
+> > > > >>>> On 12/7/24 16:57, Tom Rini wrote:
+> > > > >>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
+> > > > >>>>>
+> > > > >>>>>> There are platforms which set the value of ram_top based on certain
+> > > > >>>>>> restrictions that the platform might have in accessing memory above
+> > > > >>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
+> > > > >>>>>> even though the LMB allocator works as expected, when trying to
+> > > > >>>>>> allocate memory above ram_top, prohibit this by marking all memory
+> > > > >>>>>> above ram_top as reserved, even if the said memory region is from the
+> > > > >>>>>> same bank.
+> > > > >>>>>>
+> > > > >>>>>> [...]
+> > > > >>>>>
+> > > > >>>>> Applied to u-boot/master, thanks!
+> > > > >>>>>
+> > > > >>>> Hello
+> > > > >>>>
+> > > > >>>> This patch is breaking the boot on STM32MP135F-DK.
+> > > > >>>>
+> > > > >>>> On this platform, we got an area above gd->ram_top,
+> > > > >>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
+> > > > >>>>
+> > > > >>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
+> > > > >>>> this area is no more tagged as LMB_NOMAP, because it's previously been
+> > > > >>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
+> > > > >>>>
+> > > > >>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
+> > > > >>>>
+> > > > >>>> I suggest to revert this patch.
+> > > > >>>
+> > > > >>> I don't think that this patch should be reverted. If the said platform
+> > > > >>> has a reserved memory region above ram_top, I would suggest to either
+> > > > >>> a) move the ram_top on this platform so that the op-tee region gets
+> > > > >>> marked as no-map in the lmb memory map, or b) do not use the lmb
+> > > > >>
+> > > > >> In my explanation above, i indicated that before this commit,
+> > > > >> this area was marked as LMB_NOMAP in the lmb memory map by boot_fdt_add_mem_rsv_regions().
+> > > > >> this is exactly what you described in the possible solution "a)".
+> > > > >>
+> > > > >> But now with this commit, as lmb_add_memory() is called in lmb_init() the area above ram_top is marked LMB_NOOVERWRITE.
+> > > > >> Then later, boot_fdt_add_mem_rsv_regions() is executed, but the area above ram_top can't be marked as
+> > > > >> LMB_NOMAP as previously because it's already marked LMB_NOOVERWRITE.
+> > > > >
+> > > > > This has been done to ensure that memory above ram_top is not taken
+> > > > > into consideration when it comes to U-Boot. The reason why memory
+> > > >
+> > > > It was already the case before this commit, ram_top was designed to
+> > > > indicate to U-Boot the top address of available RAM,
+> > > > see include/asm-generic/global_data.h :
+> > > >
+> > > >       /**
+> > > >        * @ram_top: top address of RAM used by U-Boot
+> > > >        */
+> > > >       phys_addr_t ram_top;
+> > > >
+> > > > > above ram_top also needs to be added is to ensure that this memory
+> > > > > also gets passed on to the OS when booting with EFI. If it has to be
+> > > > > considered by U-Boot, the value of ram_top needs to be adjusted
+> > > > > accordingly. Is that not possible on the platform? If not, the only
+> > > > > other solution is to obtain this memory region from the DT, and then
+> > > > > configure the MMU.
+> > > >
+> > > > Currently, ram_top is adjusted on STM32MP platforms,
+> > > > for example in stm32mp135f-dk.dts :
+> > > >
+> > > >       reserved-memory {
+> > > >               #address-cells = <1>;
+> > > >               #size-cells = <1>;
+> > > >               ranges;
+> > > >
+> > > >               optee@dd000000 {
+> > > >                       reg = <0xdd000000 0x3000000>;
+> > > >                       no-map;
+> > > >               };
+> > > >       };
+> > > >
+> > > >           0xE000 0000  ********************
+> > > >                        *                  *
+> > > >                        *       OPTEE      *
+> > > >                        *    (LMB_NOMAP)   *
+> > > >                        *                  *
+> > > > ram_top = 0xDD00 0000  ********************
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >                        *                  *
+> > > >           0xC000 0000  ********************
+> > > >
+> > > > On STM32MP platforms, we already obtain all memory regions from DT with
+> > > > property "no-map" and we marked them LMB_NOMAP.
+> > > >
+> > > > Later we parse the LMB regions, all of these region marked LMB_NOMAP are
+> > > > used to configure our MMU accordingly.
+> > > > So, again, we are doing things as you suggested.
+> > > >
+> > > > This commit now forbids to mark OPTEE memory region with LMB_NOMAP as
+> > > > indicated in DT.
+> > >
+> > > And that's what needs to be fixed I think.  It should be allowed to
+> > > add this flag to an already existing region regardless of whether the
+> > > LMB_NOOVERWRITE flag is set (and split the region if necessary).
+> > >
+> > > I wonder if it is enough to adjust the
+> > >
+> > >                         if (flags == LMB_NONE) {
+> > >
+> > > in lib/lmb.c:lmb_add_region_flags() into
+> > >
+> > >                         if (flags == LMB_NONE || (flags & LMB_NOOVERWRITE)) {
+> > >
+> > > to fix your issue.
+> >
+> > I was thinking about this as a possible solution. To have an API which
+> > allows adding flags. But then it is a slippery slope, where a more
+> > restrictive attribute might get replaced by a less restrictive one.
+> > Another option is to mark the region above ram_top as (LMB_NOOVERWRITE
+> > | LMB_NOMAP).
+>
+> I suppose that would work in the current codebase.  But it would make
+> generating the EFI memory map from the lmb memory map more difficult.
+> These "no-map" entries need to end up in the EFI memory map as
+> EFI_RESERVED_MEMORY_TYPE whereas the "usable" part above ram_top needs
+> to end up as EFI_BOOT_SERVICES_DATA.
 
-please pull this one patch to your tree. It is fixing issue on Kria SOM when SPL 
-flow is used. Display port driver is touching IP registers but none is getting 
-IP out of reset. That's why adding support for reset fixing it.
+The current settings are the same as what was done in the 2024.10
+release, whereby the EFI memory map had all memory above ram_top being
+set as boot services data. If the regions set as no-map in the DT need
+to be set as reserved memory type, that logic will have to be added.
+But that was not being done earlier as well. I can take this up in the
+future, but I need to understand how the kernel uses the memory map
+passed on by the uefi firmware.
 
-And the commit 1a48b0be93d48f9ec5498297ec775fb572d3d150 "lmb: prohibit 
-allocations above ram_top even from same bank"
+>
+> > But I think instead of tinkering with the lmb code, it
+> > would be much more prudent if the platform can handle this. In any
+> > case, for the regions of memory below ram_top, this should not be an
+> > issue. This is a corner case where some platforms need to configure
+> > the memory region above ram_top. The platform can handle this
+> > scenario.
+>
+> But are we sure the STM32 is the only platform where this problem
+> arises?  We're rapidly approach the 2025.1 release date and it would
+> be bad if several boards end up in a broken state.
 
-introduced regression on SOM
-ERROR: reserving fdt memory region failed (addr=7ff00000 size=100000 flags=2)
+There might be other platforms which have reserved,no-map memory
+regions above ram_top, but fwiw, it is only the ST platforms which are
+setting up the mmu based on the LMB_NOMAP flag.
 
-but this series is fixing it.
-https://lore.kernel.org/all/20241211021703.2333-1-semen.protsenko@linaro.org/
-That's why would be good to get it to v2025.01 release.
+>
+> Also, my point about generating the EFI memory map from the lmb memory
+> map still holds.  We need the LMB_NOMAP flag correctly represented in
+> the lmb memory map to do that.
 
-Thanks,
-Michal
+Okay, that support will have to be added. But like I said this is not
+introduced by the recent changes, as the earlier efi memory map too
+had all memory above ram_top set as boot services data.
 
-The following changes since commit b841e559cd26ffcb20f22e8ee75debed9616c002:
+-sughosh
 
-   Prepare v2025.01-rc4 (2024-12-09 16:09:28 -0600)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2025.01-rc5
-
-for you to fetch changes up to 8b81010a2fe385524b58bea9116f1b6954c3d2bd:
-
-   video: zynqmp: Add support for reset (2024-12-11 12:40:13 +0100)
-
-----------------------------------------------------------------
-AMD/Xilinx changes for v2025.01-rc5
-
-- Fix reset issue for SOM
-
-----------------------------------------------------------------
-Michal Simek (1):
-       video: zynqmp: Add support for reset
-
-  drivers/video/zynqmp/zynqmp_dpsub.c | 6 ++++++
-  1 file changed, 6 insertions(+)
+>
+> > > Currently the code in boot/image-fdt.c:boot_fdt_add_mem_rsv_regions()
+> > > always adds LMB_NOOVERWRITE, which supports the view that LMB_NOMAP
+> > > adds restrictions on top of that.
+> > >
+> > > > For information, it has impact on all STM32MP platforms (at least 6 boards).
+> > > >
+> > > > Patrice
+> > > >
+> > > >
+> > > >
+> > > > >
+> > > > >>
+> > > > >>
+> > > > >>> memory map to configure the MMU -- can the MMU configuration logic not
+> > > > >>> read the DT to get which regions are to be marked as no-map?
+> > > > >>>
+> > > > >>> As far as the lmb module is concerned, it is being told through this
+> > > > >>> commit to not consider memory above ram_top for allocations, which is
+> > > > >>> not an incorrect thing imo.
+> > > > >>
+> > > > >> That's the case, we don't consider memory above ram_top for allocations,
+> > > > >> we only marked it with LMB_NOMAP.
+> > > > >
+> > > > > That was because the lmb scope was local. That meant a platform could
+> > > > > add any size that it wanted, and then use that map for whatever it
+> > > > > fancied. The use of lmb for "allocating" addresses for io-va addresses
+> > > > > by the apple iommu is another such case.
+> > > > >
+> > > > > -sughosh
+> > > > >
+> > > > >>
+> > > > >> Thanks
+> > > > >> Patrice
+> > > > >>
+> > > > >>>
+> > > > >>> -sughosh
+> > > > >>>
+> > > > >>>>
+> > > > >>>> Patrice
+> > > >
+> >
