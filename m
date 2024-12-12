@@ -4,83 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A08E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 19:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46675E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 20:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D24801CF;
-	Thu, 12 Dec 2024 20:50:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AC43F801BE;
+	Thu, 12 Dec 2024 21:14:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Frowtx6i";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rHZRxq45";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07062801DA; Thu, 12 Dec 2024 20:50:28 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95ABB801CF; Thu, 12 Dec 2024 21:14:43 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 977DB801BE
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 20:50:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64A958010E
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:14:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d27243ba8bso1822153a12.2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:50:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734033025; x=1734637825; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nLSniyT6iaXq9O/1X9du+ZjjOx3ySkHH1zyiYcIg0Ig=;
- b=Frowtx6iRnJ1z7nOVzlR/M7J07jGh3Wd+9rMKP793aAkw9qjTi1lrC9JvgtsFDpOAf
- tqL3SGKXIL2vkOsBzWKxpSBWy7jZfj+W588DEni1SWYrfSWPHZWuibO+PgNDi1cF4C28
- Bz0cx6fRKD2S2tdyRwmKaB+cYKOqQWgLy3KLthlhw61dh9AZqVb5toi/ysG+Kf3ce6Jz
- aEjpQCB4OnIrv1lCvKraxFKE/G8AwexPABAe8XXCr3Z5CCnK2qGq9CsD2yQxff2nygSg
- w33LjJOz8htwXdPIESqnTmRVe34+lD4a34Jwpj0ljNnO2KC78bF4ZOfel1X9dd8Bd78X
- wR+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734033025; x=1734637825;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nLSniyT6iaXq9O/1X9du+ZjjOx3ySkHH1zyiYcIg0Ig=;
- b=TyXhw/SvS9JVyUo3GLEyXfkBJsDndtMnBR+7k9XQyp83uzOW0i9gVt0QLq9O5JMZM8
- aa9uXUSf1gpXg1i3phOugDJ8jEIVj/KLOPG6FpjTjW5BdgKfzINDzDwLuuY3H2X41gzz
- vOZc3MtnvrK3e3J++zBkrc4IbGJbEdPtQkNJY0HTBN4u26ONhss3eXJIk6u4D67NJ8zA
- ry238UbKRZuNy9mULOQ+Zi+u6u7fqmOCMrMfSjOj1a3fNX0UPhJAvzYeDgvBSB1j/Hoa
- w168/oTxFAFlACzYOUKMODlCAOkss4z/LGG4myM++vSuY4BqkX+joeojuD4e7eTFTnaU
- t/EA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTvjZ/znzPfffPEyd2YHiV9PJl5R26CgajlGF1YuZpmEn3bvtJM04w6Ex6dREQxXX9310aVTw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzhptx1NgpEXS4YAFOZjSvmNkr1gKu0EMvVqH97UsAiKQMUgtOp
- 5b2lwSZYMOhGPk8lhHKh8HzcPXQutxYEg+9OK86xUSYdIEPwY+g3bs9AJw+xQnDXPTEQI/oZwGn
- Q55EzhqCBeGMAM6zhkcAIZXV+iJD8czRrUD9mMw==
-X-Gm-Gg: ASbGncsU/ON/fOU/35f2NXECYlOgHvO5arinQN2A2y5yIte4/VBhiQQiMRBIGqg/Ypb
- kN9i1uFwKsZmoW2KRLlITDKzyvSz0VxWnojgnlKw=
-X-Google-Smtp-Source: AGHT+IEeVgoC/8DfjdkbuOWurYAsLRrt1e+qIoVte4cEAdooidxolgpJIhkh/mWAYM1w7nNl1biRJsf1AGglL0wPex8=
-X-Received: by 2002:a05:6402:27d2:b0:5cf:d19c:e21c with SMTP id
- 4fb4d7f45d1cf-5d63238c775mr1862132a12.20.1734033024986; Thu, 12 Dec 2024
- 11:50:24 -0800 (PST)
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BCKELCr096806;
+ Thu, 12 Dec 2024 14:14:21 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734034461;
+ bh=DjUVIL+RPna1QChSYwz7kpD3yv50G4F0SOvoPwDK6i4=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=rHZRxq45e34uJ9+JyLhjXRPIVDUnv9t2hKDaUiGwqFYgUK/wJIWhaWQYV78y3lp6K
+ Zj+NFKZ9oUzofzDcLx3+MzGdb3uTr1ci5BWDijCH1HmvLbWg0pXFbLJ5FvSmVLKGLz
+ UUrafbNPx54F5ye5Pmofd9dTjKJZ3R6IgFHmAQtc=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCKELsL052494
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 12 Dec 2024 14:14:21 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
+ Dec 2024 14:14:21 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 12 Dec 2024 14:14:21 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BCKELcs083847;
+ Thu, 12 Dec 2024 14:14:21 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>, <tudor.ambarus@linaro.org>, <marex@denx.de>
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
+ <caleb.connolly@linaro.org>, <sjg@chromium.org>,
+ <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
+ <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
+ <p-mantena@ti.com>, <git@amd.com>
+Subject: Re: [PATCH v2] mtd: spi-nor: Fix the spi_nor_read() when config
+ SPI_STACKED_PARALLEL is enabled
+In-Reply-To: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
+References: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
+Date: Thu, 12 Dec 2024 14:14:20 -0600
+Message-ID: <86zfl04q1v.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
- <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
- <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
- <20241212191822.GK1505244@bill-the-cat>
-In-Reply-To: <20241212191822.GK1505244@bill-the-cat>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 13 Dec 2024 01:20:13 +0530
-Message-ID: <CADg8p94h9rdV+gLxuhmNTi7yWhdDjOy32SpJwGSugTovtq39Rw@mail.gmail.com>
-Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
- bank
-To: Tom Rini <trini@konsulko.com>
-Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- E Shattow <lucent@gmail.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,56 +84,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Dec 2024 at 00:48, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Dec 11, 2024 at 05:18:28PM +0100, Patrice CHOTARD wrote:
->
-> >
-> >
-> > On 12/7/24 16:57, Tom Rini wrote:
-> > > On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
-> > >
-> > >> There are platforms which set the value of ram_top based on certain
-> > >> restrictions that the platform might have in accessing memory above
-> > >> ram_top, even when the memory region is in the same DRAM bank. So,
-> > >> even though the LMB allocator works as expected, when trying to
-> > >> allocate memory above ram_top, prohibit this by marking all memory
-> > >> above ram_top as reserved, even if the said memory region is from the
-> > >> same bank.
-> > >>
-> > >> [...]
-> > >
-> > > Applied to u-boot/master, thanks!
-> > >
-> > Hello
-> >
-> > This patch is breaking the boot on STM32MP135F-DK.
-> >
-> > On this platform, we got an area above gd->ram_top,
-> > this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
-> >
-> > Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
-> > this area is no more tagged as LMB_NOMAP, because it's previously been
-> > tagged with LMB_NOOVERWRITE in lmb_add_memory().
-> >
-> > By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
-> >
-> > I suggest to revert this patch.
->
-> Hi Patrice. Can you please re-test current top of tree? I believe Sam's
-> series should resolve this problem as well. Thanks!
+Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com> writes:
 
-Tom, that won't happen. This is a separate issue from what is being
-fixed by Sam's series.
-
-Patrice, please let me know if the hang is being fixed by the change
-that I had suggested earlier in this thread. For some reason I don't
-see a hang on the DK2 board despite the board having a similar memory
-map of memory being reserved for the op-tee image above ram_top with
-no-map property.
-
--sughosh
-
+> Update the spi_nor_read() function only for parallel configuration
+> when config SPI_STACKED_PARALLEL is enabled and keep the default
+> code as is. For parallel configurations fix the read issue for
+> 4byte address width by passing the entire length to the read
+> function, split the memory of 16MB size banks only when the
+> address width is 3byte. Also update the size when the
+> configuration is stacked.
 >
-> --
-> Tom
+> Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories support")
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+> Changes in v2:
+> - Update the nor read for parallel configuration and for other case
+>   keep the code as is.
+> - Fixed the commit description.
+> - Tested the changes with s25fl128s flash
+> Zynq> sf probe 0 0 0
+> SF: Detected s25fl128s with page size 256 Bytes, erase size 64 KiB, total 16 MiB
+> Zynq> time sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;time sf write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;time sf read 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x1000000
+> SF: 16777216 bytes @ 0x0 Erased: OK
+>
+> time: 32.464 seconds
+> device 0 whole chip
+> SF: 16777216 bytes @ 0x0 Written: OK
+>
+> time: 15.515 seconds
+> device 0 whole chip
+> SF: 16777216 bytes @ 0x0 Read: OK
+>
+> time: 1.557 seconds
+> Total of 16777216 byte(s) were the same
+> ---
+>  drivers/mtd/spi/spi-nor-core.c | 50 ++++++++++++++++++++++------------
+>  1 file changed, 33 insertions(+), 17 deletions(-)
+>
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> index ec841fb13b..8d7087b5c9 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -1140,7 +1140,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+>  				nor->spi->flags &= ~SPI_XFER_U_PAGE;
+>  		}
+>  #ifdef CONFIG_SPI_FLASH_BAR
+> -		ret = write_bar(nor, addr);
+> +		ret = write_bar(nor, offset);
+>  		if (ret < 0)
+>  			goto erase_err;
+>  #endif
+> @@ -1152,7 +1152,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+>  		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
+>  			ret = spi_nor_erase_chip(nor);
+>  		} else {
+> -			ret = spi_nor_erase_sector(nor, addr);
+> +			ret = spi_nor_erase_sector(nor, offset);
+>  		}
+>  		if (ret < 0)
+>  			goto erase_err;
+> @@ -1578,8 +1578,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>  	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+>  	int ret;
+>  	loff_t offset = from;
+> -	u32 read_len = 0;
+>  	u32 rem_bank_len = 0;
+> +	u32 stack_shift = 0;
+>  	u8 bank;
+>  	bool is_ofst_odd = false;
+>  
+> @@ -1593,18 +1593,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>  	}
+>  
+>  	while (len) {
+> -		bank = (u32)from / SZ_16M;
+> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+> -			bank /= 2;
+> -
+> -		rem_bank_len = SZ_16M * (bank + 1);
+> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
+> -			rem_bank_len *= 2;
+> -		rem_bank_len -= from;
+> -
+> +		size_t read_len = len;
+>  		offset = from;
+>  
+> +	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+> +		if (nor->addr_width == 3) {
+> +			bank = (u32)from / SZ_16M;
+> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+> +				bank /= 2;
+> +
+> +			rem_bank_len = SZ_16M * (bank + 1);
+> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
+> +				rem_bank_len *= 2;
+> +			rem_bank_len -= from;
+> +		}
+> +
+>  		if (nor->flags & SNOR_F_HAS_STACKED) {
+> +			stack_shift = 1;
+>  			if (offset >= (mtd->size / 2)) {
+>  				offset = offset - (mtd->size / 2);
+>  				nor->spi->flags |= SPI_XFER_U_PAGE;
+> @@ -1613,20 +1618,31 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+>  			}
+>  		}
+>  
+> +		if (nor->addr_width == 4)
+> +			rem_bank_len = (mtd->size >> stack_shift) - offset;
+> +
+>  		if (nor->flags & SNOR_F_HAS_PARALLEL)
+>  			offset /= 2;
+> +	}
+>  
+>  #ifdef CONFIG_SPI_FLASH_BAR
+> +		u32 remain_len;
+> +
+>  		ret = write_bar(nor, offset);
+>  		if (ret < 0)
+>  			return log_ret(ret);
+> -#endif
+> -
+> -		if (len < rem_bank_len)
+> +		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
+> +		if (len < remain_len)
+>  			read_len = len;
+>  		else
+> -			read_len = rem_bank_len;
+> -
+> +			read_len = remain_len;
+> +#endif
+> +		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
+> +			if (len < rem_bank_len)
+> +				read_len = len;
+> +			else
+> +				read_len = rem_bank_len;
+> +		}
+>  		if (read_len == 0)
+>  			return -EIO;
+>  
+> -- 
+> 2.34.1
+
+Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
+
