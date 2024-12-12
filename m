@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA40E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F25AE77183
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:13:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0924180217;
-	Thu, 12 Dec 2024 11:07:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EFC0280212;
+	Thu, 12 Dec 2024 11:13:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fIuL3Urf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ay0OyrPS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5491E801EB; Thu, 12 Dec 2024 11:07:21 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 463E780209; Thu, 12 Dec 2024 11:13:42 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0858801F5
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:07:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48A2B801DA
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:13:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e9f60bf4so601513a12.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:07:18 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3bdccba49so685663a12.1
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:13:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733998038; x=1734602838; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Cumbc+fUF7YJ+aTg19QgoW+pwIBW6tziSOYyoFBDSm0=;
- b=fIuL3Urf8RaAUrNntSWy+sS8k6LO9ZOhqxOZwKimOER27X4iMgePAp0vY6C56s7R/H
- R7ucoV4+zuhwi/VG3e5TVodeaz0ZzzHIBoGESQsw0IHjKwlylmsfDwfDJN1j95ztNy+h
- zsfXhbDXLnLZ6NJW3D4PmSWu4+JDewh98YRNApWm7ynWCYIYhueCdsCqYbx/H2MeHFWO
- Z5MY9gRIM/quixOreJsetuirti8h6NPYAVoNDl7vAYDCv8xxrHEZtXnOlnQzkM/qXNi/
- E7ymu3YJ90Vq/Swy/tIBc7KxP3CHR1cMbRjadSs9vDsNNwYtLlkyQyc7ITtgQxvENyiB
- WfCQ==
+ d=gmail.com; s=20230601; t=1733998420; x=1734603220; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2Rv6Py4XYOZIn0AqgZfjmXqeGiLRjb67GiRi8PTzuVE=;
+ b=ay0OyrPSAm/b6wHfAAoeUaPRJ7p3zASgW6HVbk8ln/PTSztit6VE1TJ8qVvCMY1lsK
+ PqEq8ZBp1lwzjE5zo2FIVnWAdJIOVJ+UQh4EbTWJsuFyi4kI70A9PIzgm/Rq8I2UDbil
+ S3NtwwiI93plbHmE2uwvQh+g94CWnInu4/eJJNC7TR+l3ILwEhKOxudiPc4ltuBGlPKU
+ 435drVdFkyjdeI6PIwiPsV1mN98XBl4VblunWRDXn6ecjM8wuDQDQ2WmHY5kgcyw1s7J
+ BPIyLL9pf5wI0OKHmqOLwnN6J3NtpFMNQUZ2U9thkifrXT7F1+Vtu6Cp9RPBRrI2t/0B
+ Pa0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733998038; x=1734602838;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Cumbc+fUF7YJ+aTg19QgoW+pwIBW6tziSOYyoFBDSm0=;
- b=qPyyVV2o2rDUkmI1mQVnzF4J5A66ht40X9iJVbpS6Q8kthhZ2gbFWEryeRc8ppbNJE
- qzbkz4Tc2m7st0ZgCV9sgGwLf3yufgZ4JSpRvE6OqSCuNt7y3jVaUmOlt/2StqKYUqwO
- 87i52Y9qm6Mf5SaYZZSPEJSUhycNz3DUZDx1eHVrogcinWAVy6YrK8SyDoIfqNH98rhH
- JDIyS3/SSWPl76hKBFDovoSQw69n9S5J85jSBOk1mOwhsTLsVmVq0olSFydD6i/kXkYQ
- y1YpBp5Rntp2ShxpMkn+EdvO7T8cvYZUOxa/cOK5UAcGSXnPt9RW5x22lV91g5EZ9MDB
- SZrw==
-X-Gm-Message-State: AOJu0YyTl8yYyFmikiBg8JgbNy41edW/Wokc7/dzX/YQCSHlqRxx/FMV
- d88+j8b5NVg1iMKvnuCI764PlRDEnpsgcxeT/hRbIDeoliFnOEWd
-X-Gm-Gg: ASbGncvGB+iOBkRRXXH9awlGMZ54aoWplo2zo+fNLZcfwmYf3le1t/PmpSzCXHP3t9z
- OnuU4MawAIIeQiL8YS0rmdZXrafQNgvukjFTJReDCQy/W5cbK61DF/MDkUHHn68m54PTb/HXcGE
- kxIbbN9VpmLCAphx/XvJ3nWO0l36U3N6xeZkVk+52TI9cNtjejFgSVcdUc3hsNNN2pPwNlvgLj7
- R6dAYL2AYtI57tU8+wPL94tZh6GAzwUFcs4uDJVYGE19f0k
-X-Google-Smtp-Source: AGHT+IGUY92RoKYN8FMKGO421HyPYBt0JcAVGYRsHjNB6ndk4O0ldE46ROBYY6dt2UY975FczBe/jQ==
-X-Received: by 2002:a05:6402:528b:b0:5d3:e45d:ba91 with SMTP id
- 4fb4d7f45d1cf-5d54dda9136mr216770a12.32.1733998037950; 
- Thu, 12 Dec 2024 02:07:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733998420; x=1734603220;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2Rv6Py4XYOZIn0AqgZfjmXqeGiLRjb67GiRi8PTzuVE=;
+ b=j4+GeFV/JlQxEkRoXZ7u5cBPzOxReJdOJaszLQRcHXBgy333aXbHjMPXZe0rI8DF8Y
+ vj+gZI+3PGCXEP7zO5kMThMpRqzgnxAl5w7i7KJPVleyDh9RgZJAQGoidK7acL2VEJqU
+ WSgNPXP8RwQACoeGTwDt9rhRCrj+VtnNXTTDx3e8tkiD1iEaj9j8RUSJwg3h8gNFKWuZ
+ 3tyn/JfI1B3a3NlIw8k/ihL6PvNlLxT9IhmYb94rVvQz+KkhDhK0gomvS8unHMUIwT6f
+ xXMvIHQqvKojFTUXNJUKc8SV3AUQn0fTaIa7VjzmSpEokyxPUCEAKIuc4EtgjBpy3zlU
+ Px5w==
+X-Gm-Message-State: AOJu0Yyn5ArxRlMzI/YEZ31Sx8OM85Xkio5OOOoF4bmqpYn9a+jCmALX
+ jhRyEFAwylLSdvTr0qTV2MOvrPm/eolODlcJh2USion+vhiZrlTh
+X-Gm-Gg: ASbGnct/67JhjoFQ8MppCtaj7rdYFqft9oyKWOn5dqtEX1LfDPxrfRT0k1kxKNszX4g
+ qwT5o+8poYl+sZHXh1In9mSma2fwJGSIt3UXbWgUk/Jo6qz2ZLM3KCneh8OS9LWp0KmFw90Jbee
+ Ri5mky76ta1cTPcLJaL2xS/ruNGAdqaD41BSlB+bsUDKDpJkAnZqRh7U/Tbc9TBqyhLITTURg4P
+ vZNAcI0iko9g/q6jAMhUilT9dnWflm+5DDVCiNmpufCeY2/
+X-Google-Smtp-Source: AGHT+IEu29ktmnK7wu4AAn1ZoUwOJKhZpizyy3C+6QaJ09hc3ssIODxPhC6/wMJPykNfv3o4fuxpFw==
+X-Received: by 2002:a05:6402:2116:b0:5d0:bcdd:ff97 with SMTP id
+ 4fb4d7f45d1cf-5d4e8f64753mr424655a12.5.1733998419623; 
+ Thu, 12 Dec 2024 02:13:39 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d149b4a049sm10167200a12.35.2024.12.12.02.07.17
+ 4fb4d7f45d1cf-5d149a25cdcsm10192647a12.9.2024.12.12.02.13.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 02:07:17 -0800 (PST)
+ Thu, 12 Dec 2024 02:13:39 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] driver: clk: tegra: init basic clocks on probe
-Date: Thu, 12 Dec 2024 12:06:46 +0200
-Message-ID: <20241212100646.5646-3-clamor95@gmail.com>
+Subject: [PATCH v1 0/5] ARCH Tegra improvements
+Date: Thu, 12 Dec 2024 12:13:26 +0200
+Message-ID: <20241212101331.6135-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241212100646.5646-1-clamor95@gmail.com>
-References: <20241212100646.5646-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,29 +92,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case DM drivers probe earlier than board clock setup is done
-init of basic clocks should be done in CAR driver probe as well.
-Add it to avoid possible clock related problems.
+- Expand plld2 support for T124 and T210 same as for other generations
+- Sync common tegra30 and tegra124 trees with upstream (DSI nodes)
+- Mark DC with pre-relocation flag for T124 like other gens have
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- drivers/clk/tegra/tegra-car-clk.c | 3 +++
- 1 file changed, 3 insertions(+)
+Svyatoslav Ryhel (5):
+  ARM: tegra124: clock: implement PLLD2 support
+  ARM: tegra210: clock: implement PLLD2 support
+  ARM: tegra30: dts: complete DSI nodes
+  ARM: tegra124: dts: add missing DSI nodes
+  ARM: tegra124: dts: mark HOST1X and DC with pre-relocation flag
 
-diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/tegra-car-clk.c
-index dd4d7791120..a07c16c487a 100644
---- a/drivers/clk/tegra/tegra-car-clk.c
-+++ b/drivers/clk/tegra/tegra-car-clk.c
-@@ -112,6 +112,9 @@ static int tegra_car_clk_probe(struct udevice *dev)
- {
- 	debug("%s(dev=%p)\n", __func__, dev);
- 
-+	clock_init();
-+	clock_verify();
-+
- 	return 0;
- }
- 
+ arch/arm/dts/tegra124-nyan-big-u-boot.dtsi    |  7 ----
+ arch/arm/dts/tegra124-u-boot.dtsi             | 13 +++++++
+ arch/arm/dts/tegra124.dtsi                    | 39 +++++++++++++++++++
+ arch/arm/dts/tegra30.dtsi                     | 21 +++++++++-
+ .../include/asm/arch-tegra124/clock-tables.h  |  2 +-
+ .../include/asm/arch-tegra210/clock-tables.h  |  2 +-
+ arch/arm/mach-tegra/tegra124/clock.c          |  7 ++++
+ arch/arm/mach-tegra/tegra210/clock.c          |  7 ++++
+ 8 files changed, 88 insertions(+), 10 deletions(-)
+
 -- 
 2.43.0
 
