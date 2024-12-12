@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5730E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 08:28:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06A6E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 09:19:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEB5A801BE;
-	Thu, 12 Dec 2024 09:28:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id D71F0801DB;
+	Thu, 12 Dec 2024 10:19:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="11fSXWxL";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rd6ULWzd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72CF2801BF; Thu, 12 Dec 2024 09:28:16 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F15B1801EA; Thu, 12 Dec 2024 10:19:10 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19425801BD
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 09:28:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 41DBB801DA
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 10:19:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=2076b1cc10=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BC60JWD011913;
- Thu, 12 Dec 2024 09:28:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- LVufC5JlnsHKFDP1yDdazga37b4w8aLILJ9qIpWhyyo=; b=11fSXWxLf3BV/lXt
- 4uSCHnNi+p/RUbjQMcjY38VgKKVsxtS9tImCgW+UH+pNPPoJHYqSurCwoOtXOdyJ
- S91WVZWNjPieJ4MOVpJDu4O9bP0MGzdbnWkNu41yYv23wyiiU7033G8q4zGeLUrl
- vv80JSIWH2gNwvByFR2ve/tRVCAGENtvKTTBmUyc+aR1yBCS/1xiYOR5LQnEfShS
- fRVI9OXF11r/4YuXrqwtpYZG8acHtmHoMFT6Tmxzbq4n0Tco0UsH5mV8j3XKJKe9
- xgC6AazqIQfNzjXTW7BdQ3Wv2aHeJwpHxD9Qv9dxuZxVI560XAMWMktYsPcUmBKo
- 72tNCg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43e2w9x0jg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Dec 2024 09:28:07 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3E42C40047;
- Thu, 12 Dec 2024 09:27:12 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B6B7125C23B;
- Thu, 12 Dec 2024 09:23:53 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Thu, 12 Dec
- 2024 09:23:53 +0100
-Message-ID: <a1b49293-7ebd-4590-8311-f3bc2943a6dd@foss.st.com>
-Date: Thu, 12 Dec 2024 09:23:52 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=leon.anavi@konsulko.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3bbb0f09dso587369a12.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 01:19:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1733995147; x=1734599947; darn=lists.denx.de;
+ h=in-reply-to:from:content-language:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a1q2tMss4ppFH9/J2ZpE8f/7fqFSHGwO1hBoguhnOZ0=;
+ b=Rd6ULWzd3aoMNZ09GcXn2Oiltplpxh8lN8XEfFiEjnPHiazSfIYOdubl7T9B89Jgmy
+ 5vhquVeWpkMIOEEGrrpl8c48Z/lSjGbl0vlSzOhZxt2+yg3hjsbcOs3auOj9ju3itzHP
+ IQ/r1FydVCS8kxRq+S0CPaoOhzMhMx4ubdLbk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733995147; x=1734599947;
+ h=in-reply-to:from:content-language:references:cc:to:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=a1q2tMss4ppFH9/J2ZpE8f/7fqFSHGwO1hBoguhnOZ0=;
+ b=fdyHtGmgJOgVQi5KlvK6Ke56ur8pvZdL4ueRfuhMQ1hPWCQs0dWr6wX7lhdKXzQBGw
+ JiISXaXQV4OJBdLrxs5yYv4FJdWUrsexjreGrj3lIoqpEBth/R4eBNKztbqlOaCzakgd
+ w2vl73efn47GJI+is7NLrPpmTkNMNqqxKSUOwU8m9FzNHnlRJgogHP5e07PKI5oGRJha
+ KzaFf/r2/14gp4xhN2RyuYEt9v2V9pH3OlqAlVbm8EE7ROErmextbvXSt1JfMPn11N8P
+ 2bYUhsXtQB2Q2ZXUJfOhGZ/51WiZI0iWcUMrinCjFP60Bxwpvv18S4rQONZ3ZsJNbtI9
+ Id5w==
+X-Gm-Message-State: AOJu0YxsPf5L+etqRChNGYRbgqSTIzxjjUWG01SlMlD+tCmtzmSVKlea
+ AtMMV6EPc97lWUWmC55UfLIHsZprrbiLz9GVvXK1q5v3Kr03wiRx2Nh8OgYfaRs=
+X-Gm-Gg: ASbGncsjRzYTrir9r1u85I3Bex3L0TTZ2HVUiEf7u0hdurcJvtkZK2aaT+0DgS17jFZ
+ EhqDe0TgPXuY+/Wtu/4NO3z4AnbSe0tfLfKRmDT4GHS70hPVxelM8JwuNyBrdqH6uvbiMnCK8J9
+ lt3QHvLQZGd5wF+zjwLPN0qHzb0JKBaTLV3S0k6B6GaOAZ975WjB244YS0oHZFSkjaWd8aoY12/
+ LkGt1cs3nA7392NncS2EQPZIIl9rwALqYZeRCeIwhTmCrrdzY579aRKE+jOR+cT
+X-Google-Smtp-Source: AGHT+IEwPychjAUnjQ56CuMOzWWHIxBYpc6Tq0lK1j2ng44jP+NSEsITjXF7fbRb1yx4RyFiyZFpCw==
+X-Received: by 2002:a05:6402:5007:b0:5d0:e2c8:dc8d with SMTP id
+ 4fb4d7f45d1cf-5d4edce2bffmr416582a12.20.1733995147227; 
+ Thu, 12 Dec 2024 01:19:07 -0800 (PST)
+Received: from [192.168.5.161] ([46.55.231.62])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d3e7936581sm7084972a12.56.2024.12.12.01.19.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Dec 2024 01:19:06 -0800 (PST)
+Message-ID: <e77f6b37-7d50-4f3d-9bed-6d3e39effb4c@konsulko.com>
+Date: Thu, 12 Dec 2024 11:19:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
- bank
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, E
- Shattow <lucent@gmail.com>
-References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
- <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
- <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
- <CADg8p96XXRVn6r-9tSu-h1CANgnayQuEVs8XVUb8eAd8d5kz9A@mail.gmail.com>
- <7642b0fc-8383-4877-bbc6-22bcd22536fc@foss.st.com>
- <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, lhristov@gmail.com
+References: <CALtQ3O2jF6sEvofpZ+FtJgmgTKZvNRuohnwEtPz4ES0WqtxU5g@mail.gmail.com>
+ <20241211215327.26dc369a@minigeek.lan>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CADg8p951Y10c_ffDCKZaCS6kG+c8mR2aDrTtDgD3rZsWoBM3Cw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+From: Leon Anavi <leon.anavi@konsulko.com>
+In-Reply-To: <20241211215327.26dc369a@minigeek.lan>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,156 +96,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andre,
 
-
-On 12/11/24 19:16, Sughosh Ganu wrote:
-> On Wed, 11 Dec 2024 at 22:20, Patrice CHOTARD
-> <patrice.chotard@foss.st.com> wrote:
+On 11.12.24 г. 23:53 ч., Andre Przywara wrote:
+> On Mon, 9 Dec 2024 23:08:19 +0200
+> Leon Anavi<leon.anavi@konsulko.com> wrote:
+>
+> Hi Leon,
+>
+> thanks for the report!
+>
+>> Commit ffb0294 from 12 November 2023 that simplifies early PMIC setup
+>> conditions causes issues on Cubieboard 4 and Merrii A80 Optimus with
+>> Allwinner A80 SoC (sun9i). The commit was introduced with U-Boot 2024.01
+>> (rc3) and remains as of today. Because of it both of these boards hang at:
 >>
+>> Starting kernel ...
+> That's odd, how do you boot the kernel, exactly?
+> I just tried mainline U-Boot (via FEL), with:
+> => setenv bootargs "console=ttyS0,115200n8 earlycon"
+> => bootz $kernel_addr_r $ramdisk_addr_r:300000 $fdtcontroladdr
+>
+> and it booted fine to the prompt, on a Cubieboard 4 (CC-A80 v1.2).
+> Kernel was some 6.11-rc6 I just had lying around.
+>
+> I also compared the code before and after that patch, the only
+> difference is the order at which DCDC5 gets programmed: before it's
+> after DCDC4, with the patch it's right after DCDC1.
+> The rest looked the same.
+> Booting ffb0294~1 and ffb0294~0 also worked for me, without issues.
+> So can you please describe how you test that, exactly?
+I built core-image-base using the Yocto Project and OpenEmbedded as well 
+as the meta-sunxi BSP layer. The U-Boot version depends on the Yocto 
+release. For Scarthgap it is with U-Boot 2024.01 and for the ongoing 
+development in the master branches the U-Boot version is 2024.10. The 
+Linux kernel version is 6.6.28. I experienced the same issue with both 
+U-Boot versions on Merrii A80 Optimus and Lazar (his email is CC) 
+confirmed the same results on Cubieboard 4. The boot sequence for the 
+boards in meta-sunxi is through boot.scr generated from the following 
+boot.cmd:
+https://github.com/linux-sunxi/meta-sunxi/blob/master/recipes-bsp/u-boot/files/arm/boot.cmd
+
+In a nutshell, the issue can be reproduced with the following scenario 
+in U-Boot:
+
+setenv bootargs console=ttyS0,115200 console=tty1 root=/dev/mmcblk0p2 
+rootwait panic=10
+load mmc 0:1 ${fdt_addr_r} ${fdtfile}
+load mmc 0:1 ${kernel_addr_r} zImage
+bootz ${kernel_addr_r} - ${fdt_addr_r}
+
+Merrii A80 Optimus board boots fine if I revert commit ffb0294. However, 
+if commit ffb0294 is present in U-Boot the board hangs. Here is the log: 
+U-Boot 2024.10-dirty (Oct 07 2024 - 14:54:35 +0000) Allwinner Technology 
+CPU: Allwinner A80 (SUN9I) Model: Merrii A80 Optimus Board DRAM: 2 GiB 
+Core: 62 devices, 18 uclasses, devicetree: separate WDT: Not starting 
+watchdog@6000ca0 WDT: Not starting watchdog@8001000 MMC: 
+sunxi_set_reset: (RST#0) unhandled sunxi_set_reset: (RST#2) unhandled 
+sunxi_set_reset: (RST#1) unhandled mmc@1c0f000: 0, mmc@1c10000: 2, 
+mmc@1c11000: 1 Loading Environment from FAT... Unable to read 
+"uboot.env" from mmc0:1... In: serial@7000000 Out: serial@7000000 Err: 
+serial@7000000 Net: No ethernet found. Hit any key to stop autoboot: 0 
+=> setenv bootargs console=ttyS0,115200 console=tty1 root=/dev/mmcblk0p2 
+rootwait panic=10 => load mmc 0:1 ${fdt_addr_r} ${fdtfile} 24443 bytes 
+read in 3 ms (7.8 MiB/s) => load mmc 0:1 ${kernel_addr_r} zImage 5397992 
+bytes read in 236 ms (21.8 MiB/s) => bootz ${kernel_addr_r} - 
+${fdt_addr_r} Kernel image @ 0x22000000 [ 0x000000 - 0x525de8 ] ## 
+Flattened Device Tree blob at 23000000 Booting using the fdt blob at 
+0x23000000 Working FDT set to 23000000 Loading Device Tree to 29ff7000, 
+end 29ffff7a ... OK Working FDT set to 29ff7000 Starting kernel ... 
+Please note that U-Boot is marked with suffix "-dirty" because of the 
+patches applied by u-boot_%.bbappend from Yocto/OE layer meta-sunxi but 
+these patches are for other boards and don't touch the file 
+board/sunxi/board.c. Am I missing something as a configuration that can 
+make the board boot the same way without hanging when commit ffb0294 is 
+present?Best regards,
+Leon
+
+>
+> Please also note we fixed d75fa8c80dcfa in U-Boot (DCDC4/5 typo), and
+> dd36ad71ad6 in the kernel (DCDC5 constraints in the DT).
+>
+> Cheers,
+> Andre
+>
+>> Older U-Boot versions without this commit work fine. As a temporary
+>> solution I reverted commit ffb0294 and this way the boards boot
+>> successfully. I tested this work around on Merrii A80 Optimus with several
+>> U-Boot versions, including with U-Boot 2024.10.
+>
+>> Lazar, a friend who owns Cubieboard 4, also tested and confirmed his board
+>> boots with U-Boot 2024.10 if this commit has been reverted.
 >>
+>> How to fix this? Is there a known configuration that can be added to
+>> Merrii_A80_Optimus_defconfig and Cubieboard4_defconfig to avoid hanging
+>> with the existing source code from commit ffb0294 ?
 >>
->> On 12/11/24 17:27, Sughosh Ganu wrote:
->>> On Wed, 11 Dec 2024 at 21:50, Patrice CHOTARD
->>> <patrice.chotard@foss.st.com> wrote:
->>>>
->>>>
->>>>
->>>> On 12/7/24 16:57, Tom Rini wrote:
->>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
->>>>>
->>>>>> There are platforms which set the value of ram_top based on certain
->>>>>> restrictions that the platform might have in accessing memory above
->>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
->>>>>> even though the LMB allocator works as expected, when trying to
->>>>>> allocate memory above ram_top, prohibit this by marking all memory
->>>>>> above ram_top as reserved, even if the said memory region is from the
->>>>>> same bank.
->>>>>>
->>>>>> [...]
->>>>>
->>>>> Applied to u-boot/master, thanks!
->>>>>
->>>> Hello
->>>>
->>>> This patch is breaking the boot on STM32MP135F-DK.
->>>>
->>>> On this platform, we got an area above gd->ram_top,
->>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
->>>>
->>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
->>>> this area is no more tagged as LMB_NOMAP, because it's previously been
->>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
->>>>
->>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
->>>>
->>>> I suggest to revert this patch.
->>>
->>> I don't think that this patch should be reverted. If the said platform
->>> has a reserved memory region above ram_top, I would suggest to either
->>> a) move the ram_top on this platform so that the op-tee region gets
->>> marked as no-map in the lmb memory map, or b) do not use the lmb
->>
->> In my explanation above, i indicated that before this commit,
->> this area was marked as LMB_NOMAP in the lmb memory map by boot_fdt_add_mem_rsv_regions().
->> this is exactly what you described in the possible solution "a)".
->>
->> But now with this commit, as lmb_add_memory() is called in lmb_init() the area above ram_top is marked LMB_NOOVERWRITE.
->> Then later, boot_fdt_add_mem_rsv_regions() is executed, but the area above ram_top can't be marked as
->> LMB_NOMAP as previously because it's already marked LMB_NOOVERWRITE.
-> 
-> This has been done to ensure that memory above ram_top is not taken
-> into consideration when it comes to U-Boot. The reason why memory
-
-It was already the case before this commit, ram_top was designed to
-indicate to U-Boot the top address of available RAM,
-see include/asm-generic/global_data.h :
-
-	/**
-	 * @ram_top: top address of RAM used by U-Boot
-	 */
-	phys_addr_t ram_top;
-
-> above ram_top also needs to be added is to ensure that this memory
-> also gets passed on to the OS when booting with EFI. If it has to be
-> considered by U-Boot, the value of ram_top needs to be adjusted
-> accordingly. Is that not possible on the platform? If not, the only
-> other solution is to obtain this memory region from the DT, and then
-> configure the MMU.
-
-Currently, ram_top is adjusted on STM32MP platforms, 
-for example in stm32mp135f-dk.dts :
-
-	reserved-memory {
-		#address-cells = <1>;
-		#size-cells = <1>;
-		ranges;
-
-		optee@dd000000 {
-			reg = <0xdd000000 0x3000000>;
-			no-map;
-		};
-	};
-
-          0xE000 0000  ********************  
-                       *                  *  
-                       *       OPTEE      *  
-                       *    (LMB_NOMAP)   *  
-                       *                  *  
-ram_top = 0xDD00 0000  ********************  
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-                       *                  *
-          0xC000 0000  ********************
-
-On STM32MP platforms, we already obtain all memory regions from DT with 
-property "no-map" and we marked them LMB_NOMAP.
-
-Later we parse the LMB regions, all of these region marked LMB_NOMAP are 
-used to configure our MMU accordingly.
-So, again, we are doing things as you suggested.
-
-This commit now forbids to mark OPTEE memory region with LMB_NOMAP as 
-indicated in DT.
-
-For information, it has impact on all STM32MP platforms (at least 6 boards).
-
-Patrice
-
-
-
-> 
->>
->>
->>> memory map to configure the MMU -- can the MMU configuration logic not
->>> read the DT to get which regions are to be marked as no-map?
->>>
->>> As far as the lmb module is concerned, it is being told through this
->>> commit to not consider memory above ram_top for allocations, which is
->>> not an incorrect thing imo.
->>
->> That's the case, we don't consider memory above ram_top for allocations,
->> we only marked it with LMB_NOMAP.
-> 
-> That was because the lmb scope was local. That meant a platform could
-> add any size that it wanted, and then use that map for whatever it
-> fancied. The use of lmb for "allocating" addresses for io-va addresses
-> by the apple iommu is another such case.
-> 
-> -sughosh
-> 
->>
->> Thanks
->> Patrice
->>
->>>
->>> -sughosh
->>>
->>>>
->>>> Patrice
+>> Best regards,
+>> Leon
