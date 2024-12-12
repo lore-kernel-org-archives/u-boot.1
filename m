@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D8CBE7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 06:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3305E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 06:22:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22C0F801EA;
-	Thu, 12 Dec 2024 07:16:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44831801EA;
+	Thu, 12 Dec 2024 07:22:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wylknQUo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CWZxic9l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4959801EB; Thu, 12 Dec 2024 07:16:09 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 6B58D801EB; Thu, 12 Dec 2024 07:22:33 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D5AE801DB
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 07:16:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 239B0801DB
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 07:22:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e3983f8ff40so127481276.1
- for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 22:16:07 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e3fd6cd9ef7so148410276.1
+ for <u-boot@lists.denx.de>; Wed, 11 Dec 2024 22:22:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733984166; x=1734588966; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1733984550; x=1734589350; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=m1ipZ16jhEJy96td6xKmdN6ehsP27RVTjaHW2LEZNqg=;
- b=wylknQUocSpGQOMUf6j3WZ9KDLrAokX752aPVnmqRjTKT7R7wGuDeujdMz6Nn0N5jW
- JT5C17Rp+x3gfFy7Y8plmzvLxPAaG0vizWM5qLjClMBNK1x8Ca+GD3m7L2v/th+FG3WV
- 6rlAw6/y2z99Xg8LiYOz8+PbjiNnMv20BoL5sAT3FYkpp6uSjYLjveHtKuU8hZ8584Pk
- AaFviboqqgHRdvk8/Q7a34qNxl/XpslLVdZRzpHj9vOfusdTGZlG/37I31V5IPAs828B
- 0mMZ7APqSwE6/ebQiyqP90NNHtcLCoFublr+AtOE0NA/AF/GUErIcSOFrESn5sSiWgvW
- RPkw==
+ bh=qY3sY7I4Pxrgv8GNCiPVBQWyD8FBcazoENUl0m9nLkY=;
+ b=CWZxic9lf0VP4jWEE+pSAq8QHpTMDcESg6VVdK4G4tAgq10SJHuXlT7EMQObLZiYtH
+ BbyRNYi5HBUMydjfJPK81aILHMwjD9cG2x1z6g2ktrx22dW2iszIv042KOzY0FDykG4n
+ gQLKrDLkauP42RzhPlG6gZyBZid4EbS9W4nxNATXSDJxCm7pj5x6Qa4KjwoDeNTlZpBA
+ eW6ZohTC8+gqAY1KgsIiO7vpujmWEsJaO4+UqmcaoyGXAxvIXeBkF/NGn96YjPumGHpv
+ h50M/eaQ8jI1Ut9Dc6EF8RnJ0hwlvdbJGt+/u36yZm15UsrrUHeC3EeLCwzh9py/d68z
+ FU4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733984166; x=1734588966;
+ d=1e100.net; s=20230601; t=1733984550; x=1734589350;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=m1ipZ16jhEJy96td6xKmdN6ehsP27RVTjaHW2LEZNqg=;
- b=MQWtYDPPIgowKxK89Y+sYmSMyGqasxIbHOh5IjjvT4wXYxUWw2StQVzu3/XlPY/t7c
- rhibQNnRHVy5kAXTC4kLzw0tmc+5d+Cfyg7auYREvj9ynKq4s20o6OzAa03L0RX5sU/1
- Ium4J3yxQQmxawKhkF2l+72c2/PGV3Ql7XcdqGqKj5ladiihU9Vh0UfY9Qa3v43ux45y
- bZDl2CdlCIQUy2uoSt3VSbCToHWXW6cHAQSm3blPOHexTrM+hpjiyasWTQnrWvdAaGM1
- hac9BgrUn31QbHzSDWd2914a4h8sotV1LU6HC1lQJPUltKUv6lt3r7BwT3EUN2q5T+Hu
- Ianw==
-X-Gm-Message-State: AOJu0YzX0VD2V3FJPaIrwBJp4KJTlWKxD3JhGVpSDqj2Sybakwni55lN
- Jh297UYQ0KAmXA0k01giKmKCiKqTmXUdQUx0vKQUZ/WclId7bAifNn0DJdKOxN/j2Rqw7nhLjgD
- ACbCc8YFB+eT2tZq1JMb/oHAWfOb9BiThA6pmnA==
-X-Gm-Gg: ASbGncsX+Sr2DO1IisCozEZXs6Xp5H1VchmFlrziY9mNqIGDTDoELXxE0D3m9da+4I2
- aE3Ak+hhfuFnp7er636MwsJZYwbfC18fBjd05/g==
-X-Google-Smtp-Source: AGHT+IEvnkY4u+C1vpAcS1JiA+GjGEqMKnCGbIo8bsvG0+87xJXqF7MhkLNJDVrvENvYR06ptO6NRj6cfazbP/ylPVk=
-X-Received: by 2002:a05:6902:e01:b0:e39:80c5:e81f with SMTP id
- 3f1490d57ef6-e3da1eee2a1mr1486745276.35.1733984166324; Wed, 11 Dec 2024
- 22:16:06 -0800 (PST)
+ bh=qY3sY7I4Pxrgv8GNCiPVBQWyD8FBcazoENUl0m9nLkY=;
+ b=iMWyx/1eKfa02s/8UMucGTIgUMlw1CzdOh2bfHsgLi9uQUmf2akrcpf5cs2VSC8AOr
+ RaPYQqRWN2vz7aI4L5NwF9bDy35eXqwwqo2tv58fH8bBksPYhxeGpf34KbnP4NI8rNQJ
+ h6JtN2i+Re0m0zNFhXq3R9NDHtGMaX3rOtZ0JQL4Qlt4SKD9slNFV9v5pL3vkuoookub
+ qSTLqsN3Vz6MWQDfQZGylHxWw4hwcGqWDvzy23UhzigNI9STuUqn782V7j3hrVJtutHA
+ ffu59SBXsrGjMG8IO0ZiS2N/Rtl50WJ5u0CJekCLTLRrd3nhX9REaRv6KMXBTlIiLqWH
+ wUfg==
+X-Gm-Message-State: AOJu0YyldfkJOSqtbP4kBD0XsvYCthUesbezr5MHjMCunkkc/tbwwrCy
+ DKr4YxWaqWGQJZiJwmFqv67KfaO4eeX82Ed5TNalNWZLaJ/gFf19SzvwuMEBchUHOrUX3vBh9EX
+ sLkkPnVX4ZRlvUx3MUrhQ+6LFiAAKhukcB1b68mTVBdcDzefS
+X-Gm-Gg: ASbGnctrOTFsEEu7++u3KB/9zHk7OfMjHR0QcsF1E+eM1Zdk02wFdC3ZuGFwvd7qnFu
+ 1ltkC8iytxCgeQJHtmrDN+TcVdpSeIa05u4Z0Kg==
+X-Google-Smtp-Source: AGHT+IELyYUqB4Hq8lyFgYQd7HlkH/91Gd8RNRL4h42i7Wo3iECrQRst1JjCUC82F+Myghqf8G1xr3DJ1IbBtBqAUoc=
+X-Received: by 2002:a25:8445:0:b0:e38:7df5:5577 with SMTP id
+ 3f1490d57ef6-e3ddad92f59mr1755523276.24.1733984549976; Wed, 11 Dec 2024
+ 22:22:29 -0800 (PST)
 MIME-Version: 1.0
 References: <20241211135418.563803-1-sjg@chromium.org>
- <20241211135418.563803-19-sjg@chromium.org>
- <CAC_iWj+warnOCWhpp9H4-AUc70Ft-6jRM9tRcZ3yVTKJ1_88FA@mail.gmail.com>
- <CAFLszTgT0tE=fU2W__n1Kz_yoAE32wnMcVOEb99XG4EZCzP3TQ@mail.gmail.com>
-In-Reply-To: <CAFLszTgT0tE=fU2W__n1Kz_yoAE32wnMcVOEb99XG4EZCzP3TQ@mail.gmail.com>
+ <20241211135418.563803-5-sjg@chromium.org>
+ <CAC_iWjK8LO=m9ymhCDMep0xwa+hR8OSaBfS1VXgWsPLAGfnuXQ@mail.gmail.com>
+ <CAFLszTiTLXpZ4NYX2rEtjYa3+2moXt-aFtJYQvui8_Po4tQt4w@mail.gmail.com>
+In-Reply-To: <CAFLszTiTLXpZ4NYX2rEtjYa3+2moXt-aFtJYQvui8_Po4tQt4w@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 12 Dec 2024 08:15:30 +0200
-Message-ID: <CAC_iWj+Yjg81CRvgt3hV0wFoudhD_QS4yOBRwBbJ0zq14jb-TQ@mail.gmail.com>
-Subject: Re: [PATCH v5 18/23] efi_loader: Don't try to add sandbox runtime code
+Date: Thu, 12 Dec 2024 08:21:54 +0200
+Message-ID: <CAC_iWj+3-pwCZ+=vJGMzPwyzywRXXOJXCLQ3GT0h6jEjcpeK-g@mail.gmail.com>
+Subject: Re: [PATCH v5 04/23] efi_loader: Show the resulting memory address
+ from an alloc
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+ Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,96 +93,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Dec 2024 at 17:54, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 11 Dec 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Ilias,
 >
-> On Wed, 11 Dec 2024 at 08:19, Ilias Apalodimas
+> On Wed, 11 Dec 2024 at 07:51, Ilias Apalodimas
 > <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
 > >
 > > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > This cannot work since the code is not present in the emulated memory.
-> > > In any case, sandbox cannot make use of the runtime code.
-> > >
-> > > For now, just drop it from sandbox. We can always adjust things to copy
-> > > it into memory, if needed.
+> > > Update efi_allocate_pool_ext() to log the pointer returned from this
+> > > call, which can be helpful when debugging.
+> >
+> > Can you explain how logging the success is helping? I think its pretty
+> > pointless, why not log a failure?
+>
+> It shows the memory address that was allocated.
+
+Sure, but that's not what I asked.
+
+>
+>
+> >
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > ---
 > > >
-> > > (no changes since v1)
+> > > (no changes since v3)
 > > >
-> > >  lib/efi_loader/efi_memory.c | 26 ++++++++++++++++----------
-> > >  1 file changed, 16 insertions(+), 10 deletions(-)
+> > > Changes in v3:
+> > > - Show the returned address rather than the pointer
 > > >
-> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > > index 0f149f99c7d..6475b94f951 100644
-> > > --- a/lib/efi_loader/efi_memory.c
-> > > +++ b/lib/efi_loader/efi_memory.c
-> > > @@ -767,16 +767,22 @@ static void add_u_boot_and_runtime(void)
-> > >         runtime_mask = SZ_64K - 1;
-> > >  #endif
+> > > Changes in v2:
+> > > - Use EFI_PRINT() instead of log_debug()
 > > >
-> > > -       /*
-> > > -        * Add Runtime Services. We mark surrounding boottime code as runtime as
-> > > -        * well to fulfill the runtime alignment constraints but avoid padding.
-> > > -        */
-> > > -       runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
-> > > -       runtime_end = (uintptr_t)__efi_runtime_stop;
-> > > -       runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
-> > > -       runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
-> > > -       efi_add_memory_map_pg(runtime_start, runtime_pages,
-> > > -                             EFI_RUNTIME_SERVICES_CODE, false);
+> > >  lib/efi_loader/efi_boottime.c | 4 ++++
+> > >  1 file changed, 4 insertions(+)
+> > >
+> > > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> > > index 080e7f78ae3..f27b3827ed2 100644
+> > > --- a/lib/efi_loader/efi_boottime.c
+> > > +++ b/lib/efi_loader/efi_boottime.c
+> > > @@ -13,6 +13,7 @@
+> > >  #include <irq_func.h>
+> > >  #include <log.h>
+> > >  #include <malloc.h>
+> > > +#include <mapmem.h>
+> > >  #include <pe.h>
+> > >  #include <time.h>
+> > >  #include <u-boot/crc.h>
+> > > @@ -511,6 +512,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int pool_type,
+> > >
+> > >         EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
+> > >         r = efi_allocate_pool(pool_type, size, buffer);
+> > > +       if (r == EFI_SUCCESS)
+> > > +               EFI_PRINT("*buffer = %llx\n", (u64)map_to_sysmem(*buffer));
 > >
-> >
-> > Can sandbox boot an OS? If not there's no point adding this. But if
-> > you insist, I prefer
+> > buffer can be null if size == 0
 >
-> No sandbox can't really boot an OS. The primary reason for this change
-> is to avoid strange things appearing in the EFI memory map (and
-> therefore the EFI log). I found it very confusing.
+> No, buffer cannot be NULL, I believe you are thinking of *buffer
 >
-> > if (IS_ENABLED(CONFIG_SANDBOX)
-> >     return
-> >
-> > at the top of the function
->
-> OK
+> That's one reason why I prefer bufferp to buffer. It avoids this sort
+> of confusion.
 
-But can't we call ExitBootServices  from sandbox and test some of those?
+I personally don't find any of this confusing. Yes, I am talking about
+*buffer, but I am pretty sure this is obvious in the context of the if
+check. It can be NULL
+
 
 Thanks
 /Ilias
 >
 > >
-> > Thanks
-> > /Ilias
-> >
-> > > +       if (!IS_ENABLED(CONFIG_SANDBOX)) {
-> > > +               /*
-> > > +                * Add Runtime Services. We mark surrounding boottime code as
-> > > +                * runtime as well to fulfill the runtime alignment constraints
-> > > +                * but avoid padding.
-> > > +                *
-> > > +                * This is not enabled for sandbox, since we cannot map the
-> > > +                * sandbox code into emulated SDRAM
-> > > +                */
-> > > +               runtime_start = (uintptr_t)__efi_runtime_start & ~runtime_mask;
-> > > +               runtime_end = (uintptr_t)__efi_runtime_stop;
-> > > +               runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
-> > > +               runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
-> > > +               efi_add_memory_map_pg(runtime_start, runtime_pages,
-> > > +                                     EFI_RUNTIME_SERVICES_CODE, false);
-> > > +       }
+> > > +
+> > >         return EFI_EXIT(r);
 > > >  }
 > > >
-> > >  int efi_memory_init(void)
 > > > --
 > > > 2.34.1
 > > >
 >
 > Regards,
-> Simon
+> SImon
