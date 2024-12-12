@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FDD6E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEEBFE77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BC5F80224;
+	by phobos.denx.de (Postfix) with ESMTP id EBFB280269;
 	Thu, 12 Dec 2024 11:21:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mOAaQmIV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ccRZXbpm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8D3280214; Thu, 12 Dec 2024 11:21:32 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 6CF9980214; Thu, 12 Dec 2024 11:21:33 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A3B1801EB
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:21:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6661D80141
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:21:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aa69077b93fso56778366b.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:21:30 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa69107179cso77868066b.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:21:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733998890; x=1734603690; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733998891; x=1734603691; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FhowHUeT/5LhDHKoQ+5wxstPgZDhJA8I1NnUSkErjrE=;
- b=mOAaQmIVRQ8YTX5q3eTJCkCQq4oPkFhnXcCOghAlcQDANB5ivN7BbVyfDbV2vC0cJe
- u0zH8kTpmBwF2WCCFeiIcZHcOznMOfsslOplpfA5E5Ed0Bd8UbjgFkdpGVLCsPSPDmay
- Ap2x/WG7y+CO8KeG+hhnWmCs2Ws6Fhn4QNZWfXdIs/BqvEAVID3ov3iP4Uf3WOIBJtV6
- ysfhwm31AnZM85kgZ23uieqBRD/MO9N90btWG3LsB7Sn7O0a9yiKiqfYhRsOaP7uFgE/
- gZB023wW30c5vCIk+GnOxYTuTwYORgnPMwMwB1TrT6iX/v5s7+Ac3QG5izXOK405Si/M
- +7Wg==
+ bh=0dciG/B6io1KT8uJfWXG8NdwHO9GG90j444uif4697s=;
+ b=ccRZXbpmHcYh3yCVV9Fh8chGcrg4HxaKZp/yzrGLERizkdmLP3m+fY44VzrFknscml
+ nrKRWuC8n7es25L02Toe9KBDFz6qHq626nqKtcxhvS5rfWlugQmNryLVfESp6qHpiy/i
+ TMyKdkvaIlPJr+ixQtd+UbyX07G9vj28wjCE3lZMJnuwV/BAxB3QDyJxM3l1Ucpn8aX6
+ hKwhytOepyav6IlVa+j4noVZSdMPnmQ7CtcGohIwEjLibS3u8BQrqOBo/FAIdP0B89ya
+ MV+xTrialy8olGG2gA7MY1Xr4JHbluCgwWmgjVHhDYE0WNXjMdywovn3RlpIqEfYomtj
+ gtFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733998890; x=1734603690;
+ d=1e100.net; s=20230601; t=1733998891; x=1734603691;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FhowHUeT/5LhDHKoQ+5wxstPgZDhJA8I1NnUSkErjrE=;
- b=OCCB26xqTEqwuQRQ9Sk6BFRJUI9I7wVCSnq67OVGRid0vlM1lJm9ZU518sVXOKIVyB
- DnesCX5IWXQoAF9bcA8v8xlAkZLG0VqlWauo/Dasa4CdPIfRH/GQX+AWro2DcyRJiLqh
- 7sLmNHlr3xRgE/pqVJmtGU8tR4ZhiqJZ0Cqoy0Pzw7ZIWmBD47StV/1uCDu5FBrBvHva
- XUutOgls/IICtBparasYoLb0YnG7q6sVETDPbeWMxmyPM1W4GionsMgNL7WxcA/1S34X
- uAUdhXl8giFyIPi9WZ4sQaSrPZSrTN1Iqk+5+UVJCvmKBETFZqQFr34UfMWivuNXaDBs
- FSyg==
-X-Gm-Message-State: AOJu0YzR2DIfpO7WQBwIVMfxvA1iCz/LwGQPFzh05HtjDhfGnykTF0QA
- +OvbbeBzkakNhjLmBAzwMChcNQ4/Osqztb5xU+IDxI3p27ecwni/
-X-Gm-Gg: ASbGncuKFoalTgLPCPKMuRZ1R3AvakrvgtW1VuxawEBTrrp01S9rV0gIbnQEIqlIydS
- EZ5n6WNDRITSOe+6oAngVev91tG+h1pNpBIi2y2TZ7I3zmVIdQFbhRbMh/byAa0Wp4eyxGRYl1p
- 0Zxi3dvSzCCbkLwAZfJx16qt4y+Fu2GIg9gZSYT11EttNsXNqo1mP8bcTBIJC/Es7rYJOI/X5ik
- XCuAW69jREiJvjX+OoERNV7N2NI4XvWA27OjiDpyZWVWb5g
-X-Google-Smtp-Source: AGHT+IGbPB0vUCF4G4Vn0NxjzltSg334CFlIK7pBktQA5FeIeRhknBfVtezH+jyc7Ug0TnCkbMiyrQ==
-X-Received: by 2002:a17:906:2922:b0:aa6:abb0:747d with SMTP id
- a640c23a62f3a-aa6c1cf067cmr281813466b.47.1733998889757; 
- Thu, 12 Dec 2024 02:21:29 -0800 (PST)
+ bh=0dciG/B6io1KT8uJfWXG8NdwHO9GG90j444uif4697s=;
+ b=AmhC7D6Rve/HR9bmdOny7Rj+MADqDT5yuy1xiV7Bl6Y1SyYEoWdlwYHCWsTiGiGPE0
+ 1Gsj+CKJdQSMRhztPcmFeT8leRbSeMOIioPrwWGrdX9EzzUDLzy9hiiMpM5qoNXf3/Fa
+ dEY4Mi9zeb4v6sS/4HUtHPc7Wx/EO9AXbVhlUqWMk3ZjhN+gPXxQeoV/NAaSwbM/aCUB
+ KBBDCgcsJpGsAVFY8Cklf+XZXJrfYj6fGmL1MQGXTpvWVCCJ6afkiaw/nMqyOjXi8RiS
+ wT5mZO9b+6mWbHjQqZjNmkCCDerLKQWQ/8yqNmQTgR29y9PXYkNqNww3eu6Dlpg/pH9F
+ lqxQ==
+X-Gm-Message-State: AOJu0YxRNZGnrnuAMn2xFWHVIankMNUrEVc1YtCxgKSX68YqZUksu3Dz
+ cG0s21Nv4KKjBAB74MUN0eFOgFYJqYqhFxXPeMhMcqlsa+Rjq2yk
+X-Gm-Gg: ASbGncuEKb/yr7DQ+42i6AsSC6y7zKALn+AiAcmuM4u+vSRvWj5+O9q1M6YdeGTPf6K
+ AHUuRBkDPPcL0PLm9bj9hYUnLPHwQNsiagjtbh0vafUZp8pWyxSyKLV6FPUqphlpE7ZItghmEVw
+ DW+zos5G1Hsq4s8NXkjV9SzNPHiGMPzQghvHpbLoIQ8Rm3VMUCHfoTparWNw9aRE9xkDlndKm/G
+ Acs+qtLCD9LlHTFepClh1AzIu6OIHTeI9iKHSiaNxX1A4ag
+X-Google-Smtp-Source: AGHT+IG6n6FPhYpYWr6kasHkpMaWLHBIfHMXAXAMKkyanDHwRF2gMdnLAVpm779pulGiPLy3TfXHsg==
+X-Received: by 2002:a17:907:3a0f:b0:aa6:a732:212b with SMTP id
+ a640c23a62f3a-aa6b13db76dmr581838266b.58.1733998890689; 
+ Thu, 12 Dec 2024 02:21:30 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67d6fcd3dsm646818066b.80.2024.12.12.02.21.28
+ a640c23a62f3a-aa67d6fcd3dsm646818066b.80.2024.12.12.02.21.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 02:21:29 -0800 (PST)
+ Thu, 12 Dec 2024 02:21:30 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 02/12] video: tegra20: dc: remove hardcoded Tegra 2
- specific parts
-Date: Thu, 12 Dec 2024 12:21:09 +0200
-Message-ID: <20241212102119.6466-3-clamor95@gmail.com>
+Subject: [PATCH v1 03/12] video: tegra20: dc: remove excessive headers
+Date: Thu, 12 Dec 2024 12:21:10 +0200
+Message-ID: <20241212102119.6466-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241212102119.6466-1-clamor95@gmail.com>
 References: <20241212102119.6466-1-clamor95@gmail.com>
@@ -98,81 +97,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since pinmux driver now is available for Tegra 2, these parts may
-be removed from here and defined either in device tree or in
-the device board files.
-
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- .../include/asm/arch-tegra20/clock-tables.h    |  2 ++
- drivers/video/tegra20/tegra-dc.c               | 18 ++----------------
- 2 files changed, 4 insertions(+), 16 deletions(-)
+ drivers/video/tegra20/tegra-dc.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/arch/arm/include/asm/arch-tegra20/clock-tables.h b/arch/arm/include/asm/arch-tegra20/clock-tables.h
-index 861b3d5d07c..82685353bd1 100644
---- a/arch/arm/include/asm/arch-tegra20/clock-tables.h
-+++ b/arch/arm/include/asm/arch-tegra20/clock-tables.h
-@@ -32,6 +32,7 @@ enum clock_id {
- 
- 	CLOCK_ID_COUNT,	/* number of clocks */
- 	CLOCK_ID_NONE = -1,
-+	CLOCK_ID_DISPLAY2 = CLOCK_ID_NONE, /* for compatibility */
- };
- 
- /* The clocks supported by the hardware */
-@@ -159,6 +160,7 @@ enum periph_id {
- 
- 	PERIPH_ID_COUNT,
- 	PERIPH_ID_NONE = -1,
-+	PERIPH_ID_DSIB = CLOCK_ID_NONE, /* for compatibility */
- };
- 
- enum pll_out_id {
 diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
-index bd0d8ca7b8f..d54279ebda1 100644
+index d54279ebda1..54d60836b66 100644
 --- a/drivers/video/tegra20/tegra-dc.c
 +++ b/drivers/video/tegra20/tegra-dc.c
-@@ -311,15 +311,10 @@ static int tegra_display_probe(struct tegra_lcd_priv *priv,
- 	 * We halve the rate if DISP1 parent is PLLD, since actual parent
- 	 * is plld_out0 which is PLLD divided by 2.
- 	 */
--	if (priv->clk_parent->id == CLOCK_ID_DISPLAY)
-+	if (priv->clk_parent->id == CLOCK_ID_DISPLAY ||
-+	    priv->clk_parent->id == CLOCK_ID_DISPLAY2)
- 		rate /= 2;
- 
--#ifndef CONFIG_TEGRA20
--	/* PLLD2 obeys same rules as PLLD but it is present only on T30+ */
--	if (priv->clk_parent->id == CLOCK_ID_DISPLAY2)
--		rate /= 2;
--#endif
+@@ -10,20 +10,11 @@
+ #include <fdtdec.h>
+ #include <log.h>
+ #include <panel.h>
+-#include <part.h>
+-#include <pwm.h>
+ #include <video.h>
+-#include <asm/cache.h>
+-#include <asm/global_data.h>
+ #include <asm/system.h>
+-#include <asm/gpio.h>
+ #include <asm/io.h>
 -
- 	/*
- 	 * The pixel clock divider is in 7.1 format (where the bottom bit
- 	 * represents 0.5). Here we calculate the divider needed to get from
-@@ -366,10 +361,6 @@ static int tegra_lcd_probe(struct udevice *dev)
- 	int ret;
+ #include <asm/arch/clock.h>
+-#include <asm/arch/funcmux.h>
+-#include <asm/arch/pinmux.h>
+ #include <asm/arch/powergate.h>
+-#include <asm/arch/pwm.h>
  
- 	/* Initialize the Tegra display controller */
--#ifdef CONFIG_TEGRA20
--	funcmux_select(PERIPH_ID_DISP1, FUNCMUX_DEFAULT);
--#endif
--
- 	if (priv->soc->has_pgate) {
- 		uint powergate;
+ #include "tegra-dc.h"
  
-@@ -409,11 +400,6 @@ static int tegra_lcd_probe(struct udevice *dev)
- 		return -1;
- 	}
- 
--#ifdef CONFIG_TEGRA20
--	pinmux_set_func(PMUX_PINGRP_GPU, PMUX_FUNC_PWM);
--	pinmux_tristate_disable(PMUX_PINGRP_GPU);
--#endif
--
- 	ret = panel_enable_backlight(priv->panel);
- 	if (ret) {
- 		debug("%s: Cannot enable backlight, ret=%d\n", __func__, ret);
 -- 
 2.43.0
 
