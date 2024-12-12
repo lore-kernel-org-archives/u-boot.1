@@ -4,57 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1C1E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D8BE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3498D80224;
+	by phobos.denx.de (Postfix) with ESMTP id 8916680278;
 	Thu, 12 Dec 2024 23:10:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0LG5ffY8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YQiyHgCo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE7C1801A0; Thu, 12 Dec 2024 23:10:35 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF95F8022F; Thu, 12 Dec 2024 23:10:35 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D73F3802B4
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:10:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95AA580224
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e29f=TG=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734041430; bh=z/uQCovnsR35F7L5Ohk+ylCMDsWHR2EtrmeuUG0o71U=;
- b=0LG5ffY8nPzUgjDyDMy3vj4VWtA8Qd99kBqq2n38bITk63PwpfoNRPdzqvjXJIOb+PenvVD1u
- NAJveCuO0y2PRfcqG6RPfqiwDafC/RnF5YjuUc1NOd0OEUQ8AJW576JaL5ovV0nkaYE8R1fV25u
- qHkz5yvIlv/5iGep55ZEi5G8W/YdHyNASnFp6H5h5BvpTOI/dLNIGhQtTzhNhCoGW18RgZGRWn8
- sZoaKjkjMNH4jcwuji3OkC3Lv6pECXRDs+2rBuxaeQZQHEqCb8fAQPqvsAZJKzn350KLWbI/GPg
- iKGCbm5pEL3FoeyBoBfRiaqE6d5AD4h3en30j5u4WSww==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 05/11] rockchip: rk3288-firefly: Include required DT nodes in
- xPL
-Date: Thu, 12 Dec 2024 22:09:38 +0000
-Message-ID: <20241212221000.94501-6-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241212221000.94501-1-jonas@kwiboo.se>
-References: <20241212221000.94501-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6ef81222be7so11429087b3.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:10:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734041432; x=1734646232; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QhFazxDzKwD6rCcNUFhDbmpViEYA1VL9qVuR0+XJ5NU=;
+ b=YQiyHgCovGrzC/EXvuVh906GVpty2tr22bDWFsRm/fzWCv80mwN6mtsA3B/+VK+69W
+ VrcY2yxiB8kz22yXokqOw0lfEV5wKcUwW7KLM1f0+Gvqe26GtQ3HlWi9P2Rm1Ops+tOL
+ 9k73n2rj7vlTGG4DZc5qIbZ9Rvcrop8uxYoTgDIJUQBJ45MHmp/t7Ezr0irwrip1NaCh
+ bmcYAfxFMtH4PhT95B+wcs1+xlHON0Q5eWQVgq6FGJZwRN0ldMQw9oGMeE5qYT04NkhB
+ 4s+qSdXDBxGTGMXXqoQWhIPvbug3N2KLFeEuQ8SYax66Ny/odMP/3zP2EmsajX1FXQC1
+ MzMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734041432; x=1734646232;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QhFazxDzKwD6rCcNUFhDbmpViEYA1VL9qVuR0+XJ5NU=;
+ b=mnZf/Vb+byyctbNeH32k+SRp4+VnnL4uySWBVixeruuS+n1HdC0SukFk4bgx+wd40F
+ sBVRyhFgwtrNcOlMaIuGMIiszoyKj+P07jlIpwMoospSPAYlSiACz0D10S+K43E2c/A6
+ FvkWoeuW/I2ocgice3zYqc87rN/iPZOHobCCpBNYynQgA7XDYW9OEne4qMwkfTWOcNSL
+ Qwg/XYBL3PaxW4yte3eYEArTaYVDkp1Lp6nckFQoZziiB3pOAb0moZsBTyGlqUBRZdO3
+ /TrDKk7lZNXv+HK7OFhBAdH4awrnXKWXqmVMB9NabKMHmwwhMwSEI4NUUzUzvUpdZYg+
+ D0rQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU1zPjmCAwuxPxjryFTuUoD6OA2yD+JlhXk63O/YLPhAWwSUIkLQSt9lXIOYyV2q+D/rmZaBOo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1TviB53TGJtw67IG+mKoSEH1yFA+N/9Uqquk5OX9xjv+5+S+I
+ 7cPABIKRvgiXLoqHtgYLHBfccMZGkXNnsSP3lSNDe1D5mQLp3EOkvwT9RzBUpvqqZoS85pTUykA
+ Dfxrl8lQgCnf9NKZOhU6lVj1oJu5dJEkdQBmhNg==
+X-Gm-Gg: ASbGncuZO9ikw1pqqZ2RO8+S3612zvoRLv2AFDQWxmFyiTe2TEAT3tvbNQRKCzep95U
+ 8jHgKM57UGxKz7lY4fAgOwO+kQ1AB/FSr3hroHA==
+X-Google-Smtp-Source: AGHT+IFEFyDKphnNPxKYULYgx0v68d3Vyn6RIATAQUQiUzyK0h+YpaaRhW2Q52sIK4eyTokZpgXdWFi1bCH+dqsJtFI=
+X-Received: by 2002:a05:690c:360f:b0:6e2:ada7:ab3e with SMTP id
+ 00721157ae682-6f279b96e9fmr3914407b3.30.1734041432253; Thu, 12 Dec 2024
+ 14:10:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 675b5f54a511ed8f0b3fc850
+References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+ <20241211105504.453234-4-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-4-ilias.apalodimas@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 12 Dec 2024 16:10:20 -0600
+Message-ID: <CAPLW+4nVZP4nSJd9YPFMnjKCzaCmQPn1DJMmRDV4OmE3z-v4mg@mail.gmail.com>
+Subject: Re: [PATCH v1 3/8] lmb: Remove lmb_reserve_flags()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>, Nam Cao <namcao@linutronix.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,125 +104,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bootph- props to emmc, sdmmc, uart and related pinctrl nodes to
-ensure devices and pinctrl can be used in xPL and U-Boot pre-reloc.
+On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> lmb_reserve() is just calling lmb_reserve_flags() with LMB_NONE.
+> There's not much we gain from this abstraction.
+> So let's remove the latter, add the flags argument to lmb_reserve()
+> and make the code a bit easier to follow.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
 
-Remove the explicit bootph-all prop from the pinctrl node, any bootph-
-prop will automatically be propagated to the pinctrl node.
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3288-firefly-u-boot.dtsi | 55 ++++++++++++++++++++++---
- configs/firefly-rk3288_defconfig        |  2 +-
- 2 files changed, 51 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm/dts/rk3288-firefly-u-boot.dtsi b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-index 8870188e6129..435a02acea5d 100644
---- a/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-firefly-u-boot.dtsi
-@@ -26,35 +26,75 @@
- };
- 
- &emmc {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&emmc_bus8 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&emmc_clk {
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
--&gpio3 {
-+&emmc_cmd {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&emmc_pwr {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&gpio7 {
-+	/delete-property/ bootph-all;
-+};
-+
-+&pcfg_pull_none {
- 	bootph-all;
- };
- 
--&pcfg_pull_up_drv_12ma {
-+&pcfg_pull_none_12ma {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
--&pinctrl {
-+&pcfg_pull_up {
- 	bootph-all;
- };
- 
-+&pcfg_pull_up_drv_12ma {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &sdmmc {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_bus4 {
- 	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdmmc_cd {
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_clk {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_cmd {
- 	bootph-pre-ram;
-+	bootph-some-ram;
- };
- 
- &sdmmc_pwr {
-@@ -64,3 +104,8 @@
- &uart2 {
- 	bootph-all;
- };
-+
-+&uart2_xfer {
-+	bootph-pre-sram;
-+	bootph-pre-ram;
-+};
-diff --git a/configs/firefly-rk3288_defconfig b/configs/firefly-rk3288_defconfig
-index 87ed0c0d2aea..862a17c84e07 100644
---- a/configs/firefly-rk3288_defconfig
-+++ b/configs/firefly-rk3288_defconfig
-@@ -38,7 +38,7 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_REGMAP=y
--- 
-2.47.1
-
+[snip]
