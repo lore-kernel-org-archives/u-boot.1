@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46675E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 20:14:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A4BE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 20:15:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC43F801BE;
-	Thu, 12 Dec 2024 21:14:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 143A68022B;
+	Thu, 12 Dec 2024 21:15:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rHZRxq45";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z/JUK7XC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95ABB801CF; Thu, 12 Dec 2024 21:14:43 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4B660801FE; Thu, 12 Dec 2024 21:15:06 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64A958010E
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:14:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55F118010E
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:15:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BCKELCr096806;
- Thu, 12 Dec 2024 14:14:21 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734034461;
- bh=DjUVIL+RPna1QChSYwz7kpD3yv50G4F0SOvoPwDK6i4=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=rHZRxq45e34uJ9+JyLhjXRPIVDUnv9t2hKDaUiGwqFYgUK/wJIWhaWQYV78y3lp6K
- Zj+NFKZ9oUzofzDcLx3+MzGdb3uTr1ci5BWDijCH1HmvLbWg0pXFbLJ5FvSmVLKGLz
- UUrafbNPx54F5ye5Pmofd9dTjKJZ3R6IgFHmAQtc=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BCKELsL052494
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 12 Dec 2024 14:14:21 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
- Dec 2024 14:14:21 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 12 Dec 2024 14:14:21 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BCKELcs083847;
- Thu, 12 Dec 2024 14:14:21 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <u-boot@lists.denx.de>, <tudor.ambarus@linaro.org>, <marex@denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
- <p-mantena@ti.com>, <git@amd.com>
-Subject: Re: [PATCH v2] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-In-Reply-To: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
-References: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
-Date: Thu, 12 Dec 2024 14:14:20 -0600
-Message-ID: <86zfl04q1v.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6d900c27af7so11755896d6.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 12:15:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734034502; x=1734639302; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=X6IFMo4SeAPkNOASUTeA8sWITNKjPV99Mz10kNkVCvs=;
+ b=Z/JUK7XCiLdqWAS4IGxWxjiorftLI4zf4wvW73lqlMIrWlpaUG9rdtiEuFCmnu+BQH
+ RJmIaqT4y+VSQfKPdlZhDEwYklMmogxL53LniV5X3RxlyY0PnczEehm4+k+BONWbOdrT
+ CQe46POumfZekN30G22yds2ga4zPN4lUe9rIs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734034502; x=1734639302;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=X6IFMo4SeAPkNOASUTeA8sWITNKjPV99Mz10kNkVCvs=;
+ b=k7ghc/ggDmP2c7tv5lyaDrQVXMdzXG4gRjYvtG0p8DWGuQnKtFW1lZa275dAHLdOWX
+ B52bPu+6WZ0vuAcJLttYmGMAVGltzyZvClEypv/ft2P99yJsMb5srXYlXW+t+Z7nYkKi
+ APPC8kt3hlsX20xM0Z7ZVp+fD525NN2L7g/56ZuGan3V0eZKGUt/5riJvjfE129ApCdG
+ hQFvTMKgKoKSQA1/olwXLjjvXlVAEigVIOxiI2bviN5szuIEwhDoHk1Mzd/tCHf8roX9
+ PXfd+wAlIVtzekugBnYKc5pVy69dHIP/6YFkU+EBoUXKsds//Wv87VU9mIJTHkqOCeA8
+ 0yNQ==
+X-Gm-Message-State: AOJu0Yzq7eHs4IzcO/eDSAsU4X80WKqvSZyhEHVQEiYOgRkc93qgS4r+
+ 947e3Pzo0XISL/k6k43yGIdVfTfyjPVoX6oi3z2s/9B93HEiTOD89nSMEFIvKL2Byqeof7ChEIQ
+ G
+X-Gm-Gg: ASbGncuXsKDKwjEcboTS4Uloz8HCBt5634C7LvJX3h9rOfEUdiISM0Hcm0utG7rZ2pF
+ xN+02aKrtgG/vfey9Dy718du6eGrqKWLwfiqpY9O4tBrKEjCQKs9s3ICBohszYftmfXfgRNvGH6
+ DAOb5EoYA53WIF57nXMNbHe2wSdcVY2URW3IZ3uHYsvVbVDTFUgQ7bNgvGXE6QQY1spKJRbNJDs
+ eHFQUSCDUrSylY3ry/hfyO7yIHpWY0xpIroMMXopkXmq0axU4hGuvvDSiWrCmEA4YBg77TcqwX0
+ wbE=
+X-Google-Smtp-Source: AGHT+IGTAjKsCIDt00/dKN5MyxA+GbEgzEAvJHvLYL+yfeHlcYCecdG37cdGukkNWYldd2QgMEdGmg==
+X-Received: by 2002:a05:6214:5017:b0:6d8:aa14:f5b8 with SMTP id
+ 6a1803df08f44-6db0f838df7mr25369586d6.40.1734034501823; 
+ Thu, 12 Dec 2024 12:15:01 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d8da9feab9sm84970566d6.71.2024.12.12.12.15.00
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Dec 2024 12:15:01 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] Gitlab: Make test.py stage only depend on binman et al
+ testsuite
+Date: Thu, 12 Dec 2024 14:14:59 -0600
+Message-ID: <20241212201459.1613044-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,147 +91,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com> writes:
+Our Gitlab pipeline is currently broken up in to several stages. This
+was done with the thought process of "we should test tools and if
+they're good test emulated targets and if they're good test real
+hardware and if they're good test the world". However, in terms of that
+first stage it only really matters that binman, et al are still
+functional. And for a few years now Gitlab has had a "needs" keyword
+that lets you refine pipeline dependencies. Use this to perform the
+minor optimization of having test.py only require that tool testing job.
+This will become more useful later when we add long running testsuites
+that we do not want to block later jobs.
 
-> Update the spi_nor_read() function only for parallel configuration
-> when config SPI_STACKED_PARALLEL is enabled and keep the default
-> code as is. For parallel configurations fix the read issue for
-> 4byte address width by passing the entire length to the read
-> function, split the memory of 16MB size banks only when the
-> address width is 3byte. Also update the size when the
-> configuration is stacked.
->
-> Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories support")
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
-> Changes in v2:
-> - Update the nor read for parallel configuration and for other case
->   keep the code as is.
-> - Fixed the commit description.
-> - Tested the changes with s25fl128s flash
-> Zynq> sf probe 0 0 0
-> SF: Detected s25fl128s with page size 256 Bytes, erase size 64 KiB, total 16 MiB
-> Zynq> time sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;time sf write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;time sf read 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x1000000
-> SF: 16777216 bytes @ 0x0 Erased: OK
->
-> time: 32.464 seconds
-> device 0 whole chip
-> SF: 16777216 bytes @ 0x0 Written: OK
->
-> time: 15.515 seconds
-> device 0 whole chip
-> SF: 16777216 bytes @ 0x0 Read: OK
->
-> time: 1.557 seconds
-> Total of 16777216 byte(s) were the same
-> ---
->  drivers/mtd/spi/spi-nor-core.c | 50 ++++++++++++++++++++++------------
->  1 file changed, 33 insertions(+), 17 deletions(-)
->
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> index ec841fb13b..8d7087b5c9 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -1140,7 +1140,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
->  				nor->spi->flags &= ~SPI_XFER_U_PAGE;
->  		}
->  #ifdef CONFIG_SPI_FLASH_BAR
-> -		ret = write_bar(nor, addr);
-> +		ret = write_bar(nor, offset);
->  		if (ret < 0)
->  			goto erase_err;
->  #endif
-> @@ -1152,7 +1152,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
->  		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
->  			ret = spi_nor_erase_chip(nor);
->  		} else {
-> -			ret = spi_nor_erase_sector(nor, addr);
-> +			ret = spi_nor_erase_sector(nor, offset);
->  		}
->  		if (ret < 0)
->  			goto erase_err;
-> @@ -1578,8 +1578,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->  	struct spi_nor *nor = mtd_to_spi_nor(mtd);
->  	int ret;
->  	loff_t offset = from;
-> -	u32 read_len = 0;
->  	u32 rem_bank_len = 0;
-> +	u32 stack_shift = 0;
->  	u8 bank;
->  	bool is_ofst_odd = false;
->  
-> @@ -1593,18 +1593,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->  	}
->  
->  	while (len) {
-> -		bank = (u32)from / SZ_16M;
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			bank /= 2;
-> -
-> -		rem_bank_len = SZ_16M * (bank + 1);
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			rem_bank_len *= 2;
-> -		rem_bank_len -= from;
-> -
-> +		size_t read_len = len;
->  		offset = from;
->  
-> +	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> +		if (nor->addr_width == 3) {
-> +			bank = (u32)from / SZ_16M;
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +				bank /= 2;
-> +
-> +			rem_bank_len = SZ_16M * (bank + 1);
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +				rem_bank_len *= 2;
-> +			rem_bank_len -= from;
-> +		}
-> +
->  		if (nor->flags & SNOR_F_HAS_STACKED) {
-> +			stack_shift = 1;
->  			if (offset >= (mtd->size / 2)) {
->  				offset = offset - (mtd->size / 2);
->  				nor->spi->flags |= SPI_XFER_U_PAGE;
-> @@ -1613,20 +1618,31 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->  			}
->  		}
->  
-> +		if (nor->addr_width == 4)
-> +			rem_bank_len = (mtd->size >> stack_shift) - offset;
-> +
->  		if (nor->flags & SNOR_F_HAS_PARALLEL)
->  			offset /= 2;
-> +	}
->  
->  #ifdef CONFIG_SPI_FLASH_BAR
-> +		u32 remain_len;
-> +
->  		ret = write_bar(nor, offset);
->  		if (ret < 0)
->  			return log_ret(ret);
-> -#endif
-> -
-> -		if (len < rem_bank_len)
-> +		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
-> +		if (len < remain_len)
->  			read_len = len;
->  		else
-> -			read_len = rem_bank_len;
-> -
-> +			read_len = remain_len;
-> +#endif
-> +		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> +			if (len < rem_bank_len)
-> +				read_len = len;
-> +			else
-> +				read_len = rem_bank_len;
-> +		}
->  		if (read_len == 0)
->  			return -EIO;
->  
-> -- 
-> 2.34.1
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+More specifically, after talking with Ilias we will get the SystemReady
+IR ACS testsuite as a possible job in CI. But it takes ages to complete,
+so we'll be (a) running it only on tagged releases and (b) want to make
+sure it doesn't the rest of the pipeline.
+---
+ .gitlab-ci.yml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 2164ad79a72b..807837b6e118 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -23,6 +23,7 @@ stages:
+ .buildman_and_testpy_template: &buildman_and_testpy_dfn
+   stage: test.py
+   retry: 2 # QEMU may be too slow, etc.
++  needs: [ "Run binman, buildman, dtoc, Kconfig and patman testsuites" ]
+   rules:
+     - when: always
+   before_script:
+-- 
+2.43.0
 
