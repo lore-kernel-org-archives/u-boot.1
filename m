@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDE73E77182
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E7AE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:14:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A34E8023A;
-	Thu, 12 Dec 2024 11:13:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C0AC580282;
+	Thu, 12 Dec 2024 11:13:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M3fGgnDP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QWcBi5QS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62D76801EB; Thu, 12 Dec 2024 11:13:45 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 9E15A80224; Thu, 12 Dec 2024 11:13:55 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65391801DB
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:13:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6736801DB
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:13:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5d414b8af7bso794100a12.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:13:43 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5d4e2aa7ea9so734507a12.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:13:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733998423; x=1734603223; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1733998433; x=1734603233; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4GRcmeu67lAsFvpn2VWFY5oGYsBLuvjsjyiPjqspLAo=;
- b=M3fGgnDPDCeshpb3PNClNsxDDcUEG3ukoxebtqKi1d8nDbkLn3gS3RNOxqmAKRf92P
- er77W1jSHz3uglEZTU9A1r3HbhTYyOBxtvLe2FGWkyEsWCFfceqSVlWPn1pWa3pThGCg
- IMI+5O7DnEB6xXRd041UBA/IeK+g9X+yn0Yvunfk/LRWmZysCYUOJp9/+56qiO4uarGx
- WZRjaigQyX+b4jKwnYh9N5psKxQGJYLsw9u7rDK2OwnAceUD3R6evUs+uqbcsmBySaYH
- w3TWLAF4JlTEKZJt+sNKTo83RJPL7HD0o/hTp3jCj5BP/jUEFOeNZ7FlkNqd05Y+Q62c
- 75kQ==
+ bh=oD8VRAt9jSZv/xteB5kK6DoRP/el/8/etAgK0cnGEo8=;
+ b=QWcBi5QSmsyPRdfYv9WezlF5tN6QWpH2vA7E/kUOtFxyDIv70iLPecfm9qtwF79Ogm
+ BfBb+F5NQlF0LQmNe3hklj9cDYfwd43Dvvc2Y5aDdaG47C+pLqfQ1sNGOwiLvw12umHv
+ zlQ9MlP/fUmjVLeAp8BV2yPD8ohdA9di6uCO+La1hsTFbFrANf78n7/kH7KXR9Sjbl82
+ 35myHGBohX9ac9PdC91XZeaHTMR44hRCFdFD4KKm2aFqs2uGYCC/WMph1Cape62utnWo
+ 3wP12VAWU0P9DBUnKtGBD8iSFjxUlgs6srXZA5yNMny2+di3zrMCdKChpnCoEvlPIh2c
+ ebJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733998423; x=1734603223;
+ d=1e100.net; s=20230601; t=1733998433; x=1734603233;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4GRcmeu67lAsFvpn2VWFY5oGYsBLuvjsjyiPjqspLAo=;
- b=EzKoHW+BnKR+9PzkiblgV7IrzalhcMWvmYWZm9r/CQbmHajGVED0KitUARHpZoSnHt
- +oR6v8GPOyp1gEH0KSEMatJx5NA6YzaEaG3mJ7yp799JWFkrivs9Opp3MxQjXFxonSTH
- 8OF/IIUaucBMYwa70zrOQ6EVE/Q2CW6P4uTDk+djM+F3NRVwa/y9pJX6eJwozQa3Zff+
- 8i+/6J+knhjFc+HiCC1mzlCGjgbk4snZjf0pvepOVmvVen6cGfvsnq1it1lmnAmixDaZ
- pPEFDDUxdXRL/uUP5YEitc9GF+FNjQpUgpVEzN5+Q/57//29jIls6+6tN/TNOPcOccIo
- q27g==
-X-Gm-Message-State: AOJu0YwufVdFX84vmElp2ZLXU+dMmzbYzuU+gKxUR+3zk23WzJiUEUzn
- yq19kOvoJPpvE7T/XMUruCdsBW1nZHgHga+0pYltQmIyZQ3UyVZ+mdXnoA==
-X-Gm-Gg: ASbGnctrfeuNJIDC9PvovGT5OM1QUQLUarnZmmTD6+pArDqVTlWQ2hWcIni8ZylfZJ2
- U7rRs1KsKnRlP2bqBpZaxNe3Sfs+E8FuvzMkg5FlHTuzSeyGxrmqGaNkF7nXYIVjeFBM8QEfHuX
- AziG9akLCrZB2Bskvqr7/ldMJl2DBuru35MojX2ZCuE294tWcUoEeNGSshp1Pc4QJqImwRBgR0m
- k8fnix+l72Zs7qN1C18OPnQXC70QMZ41xx3rsTl7EP/qdK2
-X-Google-Smtp-Source: AGHT+IGnY/VBAUygQU8gsqlk8LgiVIVYZWqw0jy6UCm1Fk9+9rTQQnZskySW8S1jNfYJrqoryjBWHg==
-X-Received: by 2002:a05:6402:3508:b0:5d0:c67e:e263 with SMTP id
- 4fb4d7f45d1cf-5d4edcc5c1bmr491791a12.8.1733998422711; 
- Thu, 12 Dec 2024 02:13:42 -0800 (PST)
+ bh=oD8VRAt9jSZv/xteB5kK6DoRP/el/8/etAgK0cnGEo8=;
+ b=TZJLode6zedGRT0jaM5AL9Kxqp+PHaZyrmLG05xro8i/E2RhuIW+OrLthvVhEOrAG9
+ h07cJc6xYfNcBT9IadTVmcRQ8LxotGBjfgx5KMpiyAiVLoUtEfXLOrPpCd5HgqcE8izs
+ RNo8Dxm0ynV9TvEjlHMR4ajgyftmfPBgUozYL2oXyJPIOPv+gJXuPr3H3dvDom1r2sx+
+ lFFQAO/K3Pl+/qRFmlo6DKJ3u6uPAdSDz4OkgOfj2Yxby/gERhaYpU8RX7ue9sbS4tuC
+ 76yt+sqgFXoqg2uz+pqPTOfbAVTWD1hBIzKVYEr5XV8bsOoUnI+oczVmu0qWBQw4sBOe
+ VPEw==
+X-Gm-Message-State: AOJu0Yyri+COwW3JeCY2jvPYj3yFBhcr3cEA+ZpTQeWaYAonABEXYNW6
+ fgiDnRQJTi744FqRn8Yk6lsiPmai9PNhJ8s4rH/XYik3zvjgr/Je
+X-Gm-Gg: ASbGncvP2o0CEbZd7h9fCKazr/FLbw63HVVAMvLKOJO4BMxgaSFvjhde/NJYs6JUIsW
+ c7I4ebPOc0J0ZECE71iJGWQLO/F+82tc5chW4BKtV4jdnmTtXkgIjnwleDblE2zYWGM+ebN6KEJ
+ ILXIyamx9g//HBM6+yHraXtrSOEUSpSbmrWO8KQ/UhrMWGbmrZOVUTRi9uffjCt7oGAT/d42ZiK
+ +xYkCgqWMKVYCscZahY9dE9SLU+GaAFwjprmSBmVEBgi/NM
+X-Google-Smtp-Source: AGHT+IGYCmTnje1+pmGI/1P8rw8x522/ptFVz3ZWYMCyN9EkyZDHQFawp8bDsIi+XrnTMvEvV5QKtA==
+X-Received: by 2002:a05:6402:348d:b0:5d1:2377:5ae2 with SMTP id
+ 4fb4d7f45d1cf-5d5476281efmr344867a12.7.1733998423462; 
+ Thu, 12 Dec 2024 02:13:43 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
  4fb4d7f45d1cf-5d149a25cdcsm10192647a12.9.2024.12.12.02.13.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 02:13:42 -0800 (PST)
+ Thu, 12 Dec 2024 02:13:43 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 4/5] ARM: tegra124: dts: add missing DSI nodes
-Date: Thu, 12 Dec 2024 12:13:30 +0200
-Message-ID: <20241212101331.6135-5-clamor95@gmail.com>
+Subject: [PATCH v1 5/5] ARM: tegra124: dts: mark HOST1X and DC with
+ pre-relocation flag
+Date: Thu, 12 Dec 2024 12:13:31 +0200
+Message-ID: <20241212101331.6135-6-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241212101331.6135-1-clamor95@gmail.com>
 References: <20241212101331.6135-1-clamor95@gmail.com>
@@ -95,70 +96,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind missing DSI and MIPI calibration devices.
+Same as on previous SoC generations this is required for proper
+video output work.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra124.dtsi | 39 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ arch/arm/dts/tegra124-nyan-big-u-boot.dtsi |  7 -------
+ arch/arm/dts/tegra124-u-boot.dtsi          | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/dts/tegra124.dtsi b/arch/arm/dts/tegra124.dtsi
-index ffec9cae09d..cac9b112302 100644
---- a/arch/arm/dts/tegra124.dtsi
-+++ b/arch/arm/dts/tegra124.dtsi
-@@ -136,6 +136,38 @@
- 			status = "disabled";
- 		};
+diff --git a/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi b/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi
+index 376dcdf68fb..79de06761bb 100644
+--- a/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi
++++ b/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi
+@@ -7,13 +7,6 @@
+ #include "tegra-u-boot.dtsi"
  
-+		dsi@54300000 {
-+			compatible = "nvidia,tegra124-dsi";
-+			reg = <0x54300000 0x00040000>;
-+			clocks = <&tegra_car TEGRA124_CLK_DSIA>,
-+				 <&tegra_car TEGRA124_CLK_DSIALP>,
-+				 <&tegra_car TEGRA124_CLK_PLL_D_OUT0>;
-+			clock-names = "dsi", "lp", "parent";
-+			resets = <&tegra_car 48>;
-+			reset-names = "dsi";
-+			nvidia,mipi-calibrate = <&mipi 0x060>; /* DSIA & DSIB pads */
-+			status = "disabled";
+ / {
+-	host1x@50000000 {
+-		bootph-all;
+-		dc@54200000 {
+-			bootph-all;
+-		};
+-	};
+-
+ 	spi@7000d400 {
+ 		spi-deactivate-delay = <500>;
+ 		spi-max-frequency = <3000000>;
+diff --git a/arch/arm/dts/tegra124-u-boot.dtsi b/arch/arm/dts/tegra124-u-boot.dtsi
+index 7c119725528..6a02714a258 100644
+--- a/arch/arm/dts/tegra124-u-boot.dtsi
++++ b/arch/arm/dts/tegra124-u-boot.dtsi
+@@ -1,3 +1,16 @@
+ #include <config.h>
+ 
+ #include "tegra-u-boot.dtsi"
 +
-+			#address-cells = <1>;
-+			#size-cells = <0>;
++/ {
++	host1x@50000000 {
++		bootph-all;
++		dc@54200000 {
++			bootph-all;
 +		};
 +
-+		dsi@54400000 {
-+			compatible = "nvidia,tegra124-dsi";
-+			reg = <0x54400000 0x00040000>;
-+			clocks = <&tegra_car TEGRA124_CLK_DSIB>,
-+				 <&tegra_car TEGRA124_CLK_DSIBLP>,
-+				 <&tegra_car TEGRA124_CLK_PLL_D_OUT0>;
-+			clock-names = "dsi", "lp", "parent";
-+			resets = <&tegra_car 82>;
-+			reset-names = "dsi";
-+			nvidia,mipi-calibrate = <&mipi 0x180>; /* DSIC & DSID pads */
-+			status = "disabled";
-+
-+			#address-cells = <1>;
-+			#size-cells = <0>;
++		dc@54240000 {
++			bootph-all;
 +		};
-+
- 		sor@54540000 {
- 			compatible = "nvidia,tegra124-sor";
- 			reg = <0x54540000 0x00040000>;
-@@ -737,6 +769,13 @@
- 		#thermal-sensor-cells = <1>;
- 	};
- 
-+	mipi: mipi@700e3000 {
-+		compatible = "nvidia,tegra124-mipi";
-+		reg = <0x700e3000 0x100>;
-+		clocks = <&tegra_car TEGRA124_CLK_MIPI_CAL>;
-+		#nvidia,mipi-calibrate-cells = <1>;
 +	};
-+
- 	dfll: clock@70110000 {
- 		compatible = "nvidia,tegra124-dfll";
- 		reg = <0x70110000 0x100>, /* DFLL control */
++};
 -- 
 2.43.0
 
