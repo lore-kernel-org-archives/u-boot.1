@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79829E77180
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E982E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908A38022E;
-	Fri, 13 Dec 2024 00:58:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E988580274;
+	Fri, 13 Dec 2024 00:58:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="n2L4Msh3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="honHwNXS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 048328022E; Fri, 13 Dec 2024 00:58:23 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id BDB3A80274; Fri, 13 Dec 2024 00:58:24 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E1D58022B
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:58:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62473800B6
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:58:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734047895; bh=EkAixVurhvb0r9VKMuPWimQBRkpvKoul/St10ke9z7M=;
- b=n2L4Msh3ib5FFCrSvDDSdijZcyKZXyb57pdIj7fEvOA7KCBXBgvYvmzC3Ef7XYspeeyxhG7Bu
- qFzvL/LAfqrraVKlpdtvN/gZg/9+lEKtQQ1oILLwcS7DkvZvHV5OdTYQkfgWGNpZAWQvHGSwp8u
- VaWIzwkrEHmClfilXsdnttEQ3diNfmUPCaj5YNcHygg4NiBhpnjqbE0EgWhDCvUEsF1BXqQ9H+o
- RyYTu7G0srOHMrMxhpmir3C6Hi+zlO0mIIeYL7CfyesZS3zk9sHEm+L3FgP9VaLQVnpuaiyhhGs
- rN9oQBIOaHV0p3RX7BJlNOM7oLcrRlzc4q+4GgwjHUBg==
+ t=1734047897; bh=4q7oFsKCl4wn7EWdImSI8GM5ld8Me8t5y2z+V/rEHUc=;
+ b=honHwNXSCPV+xIQ4S12i84wtiveY5rWrQOkAu4NxfS9zCZ+fCwC+U4iKBdiMwmir8SjnieaNG
+ e0ZqjXvsCqz9mtbK8DigTHJgrbm7e9W8Sj9MNLJtcg8PtYYJ9I3ga33QBOi/FRdBchbW7kOHasd
+ GkeVeUqaPw6otx0/wf0QdwtG64DVjistSsMgJa06On+cZBDEw3xLsFMGm41l/4IlOeWpBWR7EtO
+ 9twyr9goYZ71rqyVDHCadLb7DV97ht+40gWifqF/ew6WuL/QxAwyBDwC6b7Y+VbGeaXd2vaUIBb
+ gFdyaD8zZnK9S6zflAxEmRcUA94fS70q95GYeZGrdZwg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 07/12] rockchip: rk3399: Drop common Kconfig options already
- implied
-Date: Thu, 12 Dec 2024 23:57:14 +0000
-Message-ID: <20241212235735.164272-8-jonas@kwiboo.se>
+Subject: [PATCH 08/12] rockchip: rk3399-gru: Remove unused nodes from xPL
+ control FDT
+Date: Thu, 12 Dec 2024 23:57:15 +0000
+Message-ID: <20241212235735.164272-9-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20241212235735.164272-1-jonas@kwiboo.se>
 References: <20241212235735.164272-1-jonas@kwiboo.se>
@@ -54,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 675b7893a511ed8f0b3fe2e6
+ 207.246.76.47
+X-ForwardEmail-ID: 675b7897a511ed8f0b3fe313
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,47 +72,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The last two RK3399 boards, chromebook bob and kevin, have now migraded
-to use common bss and stack addresses.
+The eMMC PHY and SPI flash is not used in all xPL phases.
 
-Cleanup and remove Kconfig options no longer needed in rk3399/Kconfig
-when all boards now use common bss and stack addresses.
+Change to no longer include emmc_phy and spi_flash in all xPL phases.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/rk3399/Kconfig | 12 ------------
- 1 file changed, 12 deletions(-)
+ arch/arm/dts/rk3399-gru-u-boot.dtsi | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
-index 04a84e2f6a04..500cfcd87afd 100644
---- a/arch/arm/mach-rockchip/rk3399/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3399/Kconfig
-@@ -146,15 +146,6 @@ config SYS_SOC
- config ROCKCHIP_COMMON_STACK_ADDR
- 	default y
+diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+index 2505d9b01b8a..5f44327736df 100644
+--- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+@@ -29,6 +29,11 @@
+ 	rockchip,panel = <&edp_panel>;
+ };
  
--config SYS_MALLOC_F_LEN
--	default 0x4000 if !SPL_SHARES_INIT_SP_ADDR
--
--config SPL_LIBCOMMON_SUPPORT
--	default y
--
--config SPL_LIBGENERIC_SUPPORT
--	default y
--
- config TPL_LDSCRIPT
- 	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
++&emmc_phy {
++	/delete-property/ bootph-pre-ram;
++};
++
++
+ &pp1800_audio {
+ 	regulator-min-microvolt = <1800000>;
+ 	regulator-max-microvolt = <1800000>;
+@@ -80,7 +85,8 @@
  
-@@ -164,9 +155,6 @@ config TPL_STACK
- config TPL_TEXT_BASE
-         default 0xff8c2000
+ &spi1 {
+ 	spi_flash: flash@0 {
+-		bootph-all;
++		bootph-pre-ram;
++		bootph-some-ram;
+ 	};
+ };
  
--config SPL_STACK_R_ADDR
--	default 0x04000000 if !SPL_SHARES_INIT_SP_ADDR
--
- if BOOTCOUNT_LIMIT
- 
- config BOOTCOUNT_BOOTLIMIT
 -- 
 2.47.1
 
