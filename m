@@ -4,95 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499E2E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B84DCE77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:37:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80D82801A9;
-	Thu, 12 Dec 2024 11:34:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C080801B0;
+	Thu, 12 Dec 2024 11:37:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ziswiler.com header.i=marcel@ziswiler.com header.b="DYYLTPZ1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ey9htMTC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F720801DA; Thu, 12 Dec 2024 11:34:55 +0100 (CET)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6A65C801B6; Thu, 12 Dec 2024 11:37:30 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AC7F801A0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:34:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71926801A9
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:37:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ziswiler.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel@ziswiler.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziswiler.com;
- s=s1-ionos; t=1733999661; x=1734604461; i=marcel@ziswiler.com;
- bh=N2ThzU1uBBI725dbq7UUneTGzXYZ32khbcSrFNvDJuQ=;
- h=X-UI-Sender-Class:Message-ID:Subject:From:To:Cc:Date:In-Reply-To:
- References:Content-Type:Content-Transfer-Encoding:MIME-Version:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=DYYLTPZ1Uvuy81nKpztESVFv+i5yhQ6sPW8pDOPpaxlmwTQlP39A69/vPwE4bmQb
- SwEWwz24mQ5yWnsDmhegdipj8JgLIrXB+vHv3A3I4i5cOafDqgrV5SHV9BExOlsOU
- 74IjyYQHIgeEyVE6q7d+dBk/h6EzUZmj/KDppGpimVkaa/mKEWwpqPZLJH+BX1OiE
- a5HoxuRnrw5KGWYYZXsFX/C+zNg9l7F9wbjqlq1g1YqtnarL39x6w2ZcGbiL4JZ2p
- UhljyObBlXnDpGMfxaGK/fWDcQwVQZnP0FHjjwNTYhwcskQM/W6AjFG5ECp32pykt
- z8AL3I4TdsXhmoZF5A==
-X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
-Received: from [10.10.1.204] ([194.230.241.203]) by mrelay.perfora.net
- (mreueus002 [74.208.5.2]) with ESMTPSA (Nemesis) id 0MgM1Q-1t0Hn83Yes-00JPEJ; 
- Thu, 12 Dec 2024 11:34:21 +0100
-Message-ID: <1e5f3c0528a7c2e038ffb11c5b2dc7577162f3fa.camel@ziswiler.com>
-Subject: Re: [PATCH v4 2/2] doc: spacemit: bananapi_f3: document Banana Pi
- F3 board
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: Huan Zhou <pericycle.cc@gmail.com>
-Cc: Yixun Lan <dlan@gentoo.org>, u-boot@lists.denx.de, Ben Dooks	
- <ben.dooks@codethink.co.uk>, Bin Meng <bmeng@tinylab.org>, Dan Carpenter	
- <dan.carpenter@linaro.org>, Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt	 <xypron.glpk@gmx.de>, Jonas Schw?bel
- <jonasschwoebel@yahoo.de>, Kever Yang	 <kever.yang@rock-chips.com>, Leo
- <ycliang@andestech.com>, Michal Simek	 <michal.simek@amd.com>, Nishanth
- Menon <nm@ti.com>, Padmarao Begari	 <padmarao.begari@microchip.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,  Randolph
- <randolph@andestech.com>, Rick Chen <rick@andestech.com>, Samuel Holland	
- <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, Yu Chien Peter Lin	
- <peterlin@andestech.com>, Kongyang Liu <seashell11234455@gmail.com>
-Date: Thu, 12 Dec 2024 11:34:12 +0100
-In-Reply-To: <20241212040015.ii6f6tklgulfwsqy@per1cycle.per1cycle>
-References: <20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com>
- <20241129-pickup-bpif3-v4-2-e99fabf66e33@gmail.com>
- <ad100a4f673759559a6047083713d379847894cb.camel@ziswiler.com>
- <20241204005808-GYA559515@gentoo>
- <cdf417bfba7bf57379d18eb114822195610ad99d.camel@ziswiler.com>
- <20241208065157.wd7jr4ltjtvbytld@per1cycle.per1cycle>
- <b7b51f70e6271ea38fe2257b8424c41bb3e6114e.camel@ziswiler.com>
- <20241212040015.ii6f6tklgulfwsqy@per1cycle.per1cycle>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.54.2 (by Flathub.org) 
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3bbb0f09dso709936a12.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:37:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1733999848; x=1734604648; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eKDAxdyLYVzRJ+IHMMFmMA8GyvXThla84fXRo/RTqY8=;
+ b=Ey9htMTCrkicflpN7AcMvbvXE4nw2hs+fy+QWwUTjy7G1iA/DGsBDAt7GHPmk3VlcM
+ V3vwna16nxVAA/6ESmOxS8T0N2ucfQ/p6xb5Fd0MGJlmn6KM/poaarCYRmofuosljsVg
+ 0vZziOQRy86vj5Y1TPiZwi5Q0PwU9go89zx3WQKDx9iEMe6TG2rd+lU2FwwHaqB0bG08
+ XQ0K/MITt0nstXel+6TbH5qRRJmyYXDPVoEs2hgWfI/ARo3I1MOZ0MoM7/spJZN7AIfu
+ oHBk8tlAq0pk4SbUM/lpeS7Qsj2hSpX+Ch/xQxy2gbUU+Bam0TYHp6YbcyiJfFpRqjPj
+ PmIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733999848; x=1734604648;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eKDAxdyLYVzRJ+IHMMFmMA8GyvXThla84fXRo/RTqY8=;
+ b=BPOAWZh1Dtic4sQinU/8VRF/zDYpXjEXIW4lv7dIcH3cANiOsUwMWm6qJinYSvFIx4
+ Ke4P//U7Y+0RaS7SpB6wLfgWcj+RyZkw5dwEI0U2B8i9fX/m6GAVPui79yxUQnI+oWpJ
+ bXhD2Xmu2qaoa1I6/JkMVde95pbfI8rR1QG5IyDvZ0E3sGLX8OLnJ9Y9qlueWqkkGSe/
+ +jm00rNCoUhJ75Udd08KzA8WgiKax28VUsIVCo7fS+Tk5/0zBwOxRDL53vNPJ2hsVxOs
+ UfBIBKoDj0Aag7jJz11UIj9kavvoDfh2PQ7hmZp4NAnQFgqFe/7daKPbo/t3xGTWv/4a
+ Hxqw==
+X-Gm-Message-State: AOJu0Yx1mTCAx/hjINEVvPvrXNkxz8DRvYBEuMi7ZYRHZAVgjxrKNGYs
+ nhvhseF+USmHZQ1GEs5TbjjPiAVKTB+jILzYMVNBPzdzV32U1Wc6uH8WVQ==
+X-Gm-Gg: ASbGncs4nkRH47ZoHC6HOTtxFt3dpbIdoNy1CiSuo5mcVk02RaXQMQC3FIKikeodOlB
+ NNn90XCAuF9KhLkhk1r5VN7i0Cm6x/p4QS3PorTusDx/XQz0fuYuQ5Xpjl90DrxdH0IXpKHPMqK
+ Hzb34RPtD+XRVdS54RJi7lfCDegYaDEDavbUfY9WgQUqBhpeMv12fJTQpkxVTkm19MSwzJbmeGQ
+ UKD5B6EgfwOlMyVyfh9MCxJAQ8wqe7+WaRR37603e/6qtoZ
+X-Google-Smtp-Source: AGHT+IG8lNMlozVr0MpKP5IF5Q7iqVJpMzc3TJzepFyDrsUaAG6qavIFipXQV+JEStCetU0sPXH0Iw==
+X-Received: by 2002:a17:907:290f:b0:aa6:ab70:4a7d with SMTP id
+ a640c23a62f3a-aa6c1d3250cmr295446366b.58.1733999847731; 
+ Thu, 12 Dec 2024 02:37:27 -0800 (PST)
+Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa68770c481sm569415966b.110.2024.12.12.02.37.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Dec 2024 02:37:27 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Thierry Reding <treding@nvidia.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/2] Misc Tegra changes
+Date: Thu, 12 Dec 2024 12:37:04 +0200
+Message-ID: <20241212103711.7516-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:CIeprUro0Lx6dvsfKiNnK/Fu/LgOjlaJ9MdwgjP2vg8elPLpMVL
- 84l3Fi5xkpkYdaLPh8t3W/8P4TyRbU4koY46TV46fG9UYc5aK0oCwIxy2SjmXG+9RuNbt/Z
- 2tkWHGxSqv9B2yyn1Yq687Sc4T1ORV+KqocqR6q6sgaRNiCh+MhrwboNQkO4dq2tKXT0dsG
- UeAU973GlBgEITPOQ67UA==
-UI-OutboundReport: notjunk:1;M01:P0:YqoxprZhCeA=;qtHiygxdRUS7XuigDaK/6w0gLMt
- caXlDAsF/x0DpAVAleZlzjhpgbVRvkFH23JgbxzYnGXf73w0lDnNTtMkkOd7tuY9C0zPe8uoU
- vJ0noO+1FcHcvtVF4pfG+ix0EqOCAQlRRvupyIyEa6lWUmsZqkKXnBpF5Ua3EtM5WR+kBX30P
- 2AA/1t1PEOO0u3bBS4eLSwyZKB5GtrYHGj3ESVXmdLNLA+hJpXHfLhXo+sPehDNRArf22ivS7
- QvhbNLggRLP2EUH1Mj67852TZGrPzk8vn3g6qVsgXaIU+2l3jowwwZ7ZnF9YkB6tYVCuDrWdU
- JsLJsGuHvn5aeimbONu9SHOh85jrFM6nZtetEQD6/obg77PbD81+wIEY8Dg0dkBMuIX4w1JqN
- Kuw9DfIPsieJuvx7OuuOWF/P5GNTYMGVi8f6UEeJpO9NIErieccpvmTR25WN2ER10sXrgs+1h
- r1KDfPWfuvhzHlDfuClZQxKlwJq4/itp1acBCdfHFZZAVfl4CLj7MfULFjmxwO7prMkW6uNzl
- H/DKjfeXgX9E3mObEneDyddyaF4QpFDRB83SXeGO7d9EMJTcDbJryKur307mSzJCzXscSdZ/O
- BhADb6jy7QDtDJZa7yzi+VUkPuC7ilc1OHQUc6yL3ehRm73IaavXGCaOHAqrHPmE/nRzKjr8O
- 11fHAxt15fwZhjkDxGlxzDJ5Aj+b/TUw2y645QGbk9a6wivVgl+RVHd++HW6A3QPW4Mdn34qK
- hbBYMDlBoGRCCXkTGGAVW/StpJ6RgJSZ50uwJpmOsep/LJzJXq5SvedxMoP6qvH5U5Tn6nOfU
- 8WN7Bz6ma7BEi4bqpABjQZJ1+vNIsILPjLt/kSxvvi0E7GleEq3PCdhiGH0EuJ0yrKWT9FzZ8
- NS3H7gww5ED0ox9hu9Ybv2O4QBXegYfagezZnZw7iadacX3piFNK98ceuJ6Wv7uTJZp4r2jpZ
- rtMbENEYjxP6KHWKcIawiA1LSCG1Xd5mnGBQqwUHQI3ehbED6qhw4lwz6cZ4A3RoPEkBHbC5U
- wlFDWUzhITCNDH4UROE00Reh1GPDLYSmQlLfNaX
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,53 +93,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Huan
+Include changes which are single commits with small changes
 
-On Thu, 2024-12-12 at 12:00 +0800, Huan Zhou wrote:
-> On Wed, Dec 11, 2024 at 09:35:12AM +0100, Marcel Ziswiler wrote:
+- adjust Tegra 2 pinmux parsing logic
+- update documentation to reflect current state 
 
-[snap]
+Svyatoslav Ryhel (2):
+  pinctrl: tegra20: adjust pin type detection
+  doc: board: tegra: update device information
 
-> > > > I tried and it seems to work fine, resp. the only difference I coul=
-d spot is that instead of 'crc32+
-> > > > OK' it
-> > > > prints some random ASCII characters in the last line before any U-B=
-oot output:
-> > > do you mean the extra '\n'?
-> >=20
-> > No, it literally printed some random chars, but now it seems fine. Prob=
-ably some unrelated glitch maybe
-> > UART
-> > related.
-> i think it may be your baud rate setting problem?
-> I use xshell and the baud rate is set to 115200 and the random char issue=
- never happens to me.
+ doc/board/asus/grouper.rst              | 12 ++++++------
+ doc/board/asus/transformer_t20.rst      |  6 +++---
+ doc/board/asus/transformer_t30.rst      | 13 +++++++------
+ doc/board/htc/endeavoru.rst             |  9 ++++-----
+ doc/board/lg/x3_t30.rst                 | 20 ++++++++++----------
+ doc/board/microsoft/surface-rt.rst      |  4 ++--
+ doc/board/wexler/qc750.rst              |  9 ++++-----
+ drivers/pinctrl/tegra/pinctrl-tegra20.c |  4 ++--
+ 8 files changed, 38 insertions(+), 39 deletions(-)
 
-Yes, could indeed be. However, I do use a quality FTDI FT232R with proper v=
-oltage-level translation circuitry
-and also set it to 115200 baud. If I get time I will hook up my scope to se=
-e what that tells us.
+-- 
+2.43.0
 
-> > Actually, one out of five to ten boots it prints such random chars: =EF=
-=BF=BD,=EF=BF=BD=EF=BF=BD&=EF=BF=BD%Hj=EF=BF=BDH=EF=BF=BD
-> >=20
-> > I tried cyyself opensbi again and after 10 boots it also printed simila=
-r random chars. Actually, it even
-> > always
-> > prints the exact same ones when it happens. I guess, sooner than later,=
- somebody might need to debug into
-> > what
-> > exactly is happening there (;-p).
-> >=20
-> > [=C2=A0=C2=A0 0.579] ## Checking hash(es) for Image opensbi ...=EF=BF=
-=BD,=EF=BF=BD=EF=BF=BD&=EF=BF=BD%Hj=EF=BF=BDH=EF=BF=BD
-> >=20
-> > Anyway, regular upstream opensbi seems to work just fine, good.
-
-[snap]
-
-Thanks!
-
-Cheers
-
-Marcel
