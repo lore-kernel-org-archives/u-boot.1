@@ -4,85 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2D1E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95DFEE7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 22:15:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F491801B0;
-	Thu, 12 Dec 2024 23:14:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2433A801B0;
+	Thu, 12 Dec 2024 23:15:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dk0OPCCD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lipzmj+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 795B1801BE; Thu, 12 Dec 2024 23:14:35 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 068DD801BE; Thu, 12 Dec 2024 23:15:25 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D09B6800D7
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:14:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5D5C800D7
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 23:15:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7b6eeff1fdfso86537385a.2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:14:32 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6efa5bf5202so9581387b3.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 14:15:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734041671; x=1734646471; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TRN9myjHu9bMOqJAsnNtdSik2yJF/SlFKhMxs1oyzxU=;
- b=Dk0OPCCDBqu1x7Ir26P5/5LDJmhzrQafyXs/0P+/z8PmMyeLyLpDGdHCXi4carAkJx
- jbLGz+uRtcZaI45QqMhkeXe7oNVwpasBB8WNBwNZSDIwnvK3EvN4b8ZoEERvW8wcJ2xR
- /JqOcDudwiVEmC3TkglAsQxh0BbsXbsDFNgog=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734041671; x=1734646471;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1734041721; x=1734646521; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TRN9myjHu9bMOqJAsnNtdSik2yJF/SlFKhMxs1oyzxU=;
- b=Ws/tG5h1u6MI+9OfGhu3UNpnGo3tMYKbJJogy2vJWfvkO2qFYIlsYSuMuzD94SJMP4
- LGt3EwwYczuGAo4UjLC76MXt7837ObV1ASfpyXyH46kq+5slWpEElnoxEMn1zbdA1BwJ
- T7tCM9NoBp9QYa+JNLqFS2aC9mF+AaepTH8sOrZrk0Xl2ZjTCLh0+KT/7hcE6BUQmRPi
- /LGtFIzTknrXG54B82lj9u7UVj3SWJXbs10fwLjszeGPZixWGqafopYKw8XSdtQfc2H+
- i0DUCw0NEEfxRy7OK7m6FhVUyJIC90+4puc726aDJWxKLOSockgMjqkKluOFOEndjvHx
- ZC7Q==
-X-Gm-Message-State: AOJu0YyR7gAJccsB8DQt6y7McjMq5fIW3g1oKOLmapUs0V0E9MbxERAA
- mdW8j/2oHXNy5jDLuFDhiZ+IXZErN8wj40Z4zYAANeWDTeUvBLzbAViBbYDFBpE=
-X-Gm-Gg: ASbGncunds5mUZBrgxumBSgzrBVmvOuH0YmtPkmXAzCxN+2hVjHLRWTLI1RZaDcqP/1
- GbIciIBexmOuPS5x/GqlCLD93EaykEWlxaDPkD6wWEzCAABwVoCPt7dSkWtiShmlkgykwHeW0fU
- KsD2yn7YMmSTyjskdL6CApgUyFV2tenSitK+dYK7uPc0XpUXu/vS4z8sTlhwoJDnNliu3ORxhEP
- p0OmqR3ShZzW7uNc/RHbVHocLzAGSSMZPtqmCxMYzmVONOeRfr+Ylse
-X-Google-Smtp-Source: AGHT+IGTFWnQHTVPjw2D6ZFlzPhNcVj12FiTDir2vDKuHesqFodKkeWF4OR8Ci8oZKygvdjgBIvjjw==
-X-Received: by 2002:a05:620a:2716:b0:7b6:668a:5a7 with SMTP id
- af79cd13be357-7b6fbf79679mr17676485a.62.1734041671620; 
- Thu, 12 Dec 2024 14:14:31 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b6fbf9a8basm2981785a.35.2024.12.12.14.14.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 14:14:30 -0800 (PST)
-Date: Thu, 12 Dec 2024 16:14:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Burak Gerz <burak@gerz.io>
-Cc: u-boot@lists.denx.de, Daniel.Venzin@mt.com, eballetb@redhat.com,
- manut@mecka.net, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 0/2] fs: fat: Implement FAT file rename
-Message-ID: <20241212221427.GM1505244@bill-the-cat>
-References: <20241212220635.25971-1-burak@gerz.io>
+ bh=P78WjJpaWk9WfNHKHWYtw7DQaDpDhPaJvgXTwtEYA8Y=;
+ b=lipzmj+Ze0nM0pAzEK9AqYZJDD2t+/xSnQRttWKhve+Kgh5TbTG8sXp1JGndm0xXMY
+ 70FJVe3N2llhO33ubrSaFrvILzFcCRTP63qvAavaG7biHDxARGPeZ+VtsZ5E+BEUGqil
+ JU8Ifel7tM1K/lchs2drSg5JugGWiTy+Ylz9jqrwXnI8rUEiG0oOZO8l84lgcx8Az6gi
+ 8Y8jV85RiPS9xF6lsCDVJQRVSZ/Oa5ej0D0Gz3rwBxI+uPZDvIUNxp4s2umNPEQniJn6
+ WCMcnwZzXoE4TtANsELeCkWeMh4jFiKEMHv6O4cn01EwCQzSWYXGXG/TUSQ173UDBuTX
+ zIKA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734041721; x=1734646521;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=P78WjJpaWk9WfNHKHWYtw7DQaDpDhPaJvgXTwtEYA8Y=;
+ b=gPkrBMnQCcXgilaNqJMPDYlN6pAJtUysQktfulYlWFA0jsPihCTgHmAgnYpwFPI+0A
+ oe9kP+d/KDkvF8evEb8489nDBMSFh+FSCftQnzGSC0sUjNY33n+k+Cilsv+YxTjsU/ZB
+ iFnDQ9d/zkI+M47EawwfRuL0QAW3fRYnOa5hFhrJ2pKmfbPPN7nJkkX2qKvsRxY3NK8z
+ fHZushBBs+w+b6BfpGsNCd9ph1VSku6op8lg5aoknrSnF7QOd6r7qPKXGGB3QXWDJyw6
+ 5DC+oJHg/A9m04fpW68KvQpyxLUlgCKqhlbwLTrzbntugejUHdvXlpt8HxiK1GujFLv0
+ baiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX1WXW7xoTcIcprcpkStnoReQGYrP2dJq7lqsoMb2IQYwfLwi7jUUhF9Hhh/dj0nSkbc5czazw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwG5YhQnmVAcZYAB8BVe4gM4B3jpnZv9SV13b1cptxDzNpXH3Jl
+ gRfzva5ctNDD+P6FJi517CpLQXeh16Tp6YSmltlN7ML7gzJdJV+vKr0uIG1sghTp4OJ86xdkzbE
+ Y54ibh2Z3DjzhL+6cMlQiLIwC5bYr1dFv8hBgig==
+X-Gm-Gg: ASbGncuXazSVCKLJKpbrp03qb3WVq5xc0QxJQEcHqqVmLANgyzIPCmtdQVqlV+f3H2m
+ q96BCUDLemHB8tZzo0uJ7SijEv/NZOfc8JYMMmw==
+X-Google-Smtp-Source: AGHT+IHi+ItBWF6AiYh6SoZ1/FxYzOLP8fL9nG8Z7cI7Cq0fAnd53A1U8k3chd6dbubyoeWdcGQ44QfBTjZUxzsohxk=
+X-Received: by 2002:a05:690c:6301:b0:6ef:6035:828e with SMTP id
+ 00721157ae682-6f279b9bbb3mr4584597b3.35.1734041721730; Thu, 12 Dec 2024
+ 14:15:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="up3YQPt7cifqVG6O"
-Content-Disposition: inline
-In-Reply-To: <20241212220635.25971-1-burak@gerz.io>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
+ <20241211105504.453234-5-ilias.apalodimas@linaro.org>
+In-Reply-To: <20241211105504.453234-5-ilias.apalodimas@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 12 Dec 2024 16:15:10 -0600
+Message-ID: <CAPLW+4npOR5wng=iV+3Cw5bE-qp4_cKwDhE_2cz9FJ_jXBY7Gw@mail.gmail.com>
+Subject: Re: [PATCH v1 4/8] lmb: Rename free_mem to available_mem
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Peter Korsgaard <peter@korsgaard.com>, 
+ Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Nam Cao <namcao@linutronix.de>, 
+ Janne Grunau <j@jannau.net>, Caleb Connolly <caleb.connolly@linaro.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,52 +105,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> free_mem is a misnomer. We never update it with the free memory for
+> LMB. Instead, it describes all available memory and is checked against
+> used_mem to decide whether an area is free or not.
+>
+> So let's rename this field to better match its usage.
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
 
---up3YQPt7cifqVG6O
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-On Thu, Dec 12, 2024 at 11:06:27PM +0100, Burak Gerz wrote:
-
-> Hello
-> This patch series is a first implementation for file renaming on a FAT
-> filesystems. This implementation does a file rename only (no moving
-> between directories) as needed by bootloaders like systemd-boot [1].
->=20
-> The renaming process is tried to be made as fail-safe as possible, by
->   1. Writing the new, empty file
->   2. Copying the address of the start cluster into new directory entry
->   3. Deleting old file
-> This can decay in the worst case to a hard link
->=20
-> Additionally, make use of the FAT file rename in /lib/efi_loader
->=20
-> [1] https://www.freedesktop.org/software/systemd/man/latest/systemd-boot.=
-html#Boot%20Counting
-
-This is useful, thanks! Can you please extend the existing tests in=20
-test/py/tests/test_fs/ to cover this as well?
-
---=20
-Tom
-
---up3YQPt7cifqVG6O
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdbYD0ACgkQFHw5/5Y0
-tyxUyAv9FUCOTZLeynQ+IPihaSt77wlK2cqkx6D1Cd5U1uSbijqap3wALAxAA/ve
-oME9X/X2f5Upq2XOVW4K/kbT9C4ZgFxK1yDV2wrNnntCM7KT5BD7sMnrOmrnDQy+
-q0WnOtiUaZOAWtw4hi9HRMNXXrrIbBvisfk/8zmd4vdwtSkIcix6VQKqU+Se7qRS
-S/ZR4bMm9TsTzMXTSVfu+LKOX7BIGhkx43ZH6caS8na6rrzt2e1sTc5D//X5RSLD
-5IIuPdSnMk1FtKmDx6reWMrIveOui6W44GpMArhJfYj6JbNiDfZp2b3ZKEnAEVoc
-03LHEQ7A0dB82C8AUEB5Gw5HkQ+uXu0/1sZmU0CfeOgDe5Tf9mzxCmK7Q5gYnyUn
-c6WyJwDeYXvpp9N26jGQPEWuu1i8FPOWjjDGqBV2qip5K5Tnms22Vp9ZCT4hn+Js
-UB+Qocme5iwfwzzsP/ZU2vZ7M6StvCi8bQjpvYenKP8NQWkYIIHp6uXERN1L5bWm
-78DzNM9o
-=aUAj
------END PGP SIGNATURE-----
-
---up3YQPt7cifqVG6O--
+[snip]
