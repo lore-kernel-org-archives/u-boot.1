@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35462E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 15:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98009E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 15:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9D6F801DA;
-	Thu, 12 Dec 2024 16:49:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2779E800D2;
+	Thu, 12 Dec 2024 16:51:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ETpik2ax";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P2ugnFCC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38723801FE; Thu, 12 Dec 2024 16:49:53 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 4044780196; Thu, 12 Dec 2024 16:51:17 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DA1080196
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 16:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B2D5800D0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 16:51:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46772a0f8fbso6252231cf.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 07:49:50 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-6eff5f99de4so8224447b3.1
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 07:51:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734018589; x=1734623389; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m9GK4dXKEjyAgs+fcrfQ/fu6LCqjCw97bgcr6+JMNw4=;
- b=ETpik2axXhmZXaas+F8bfif4vUUjZ0aRdFv3P7Jv2WHWSaGJeFb0unHOPOcImLwLfA
- G0m0cK/gl9ulHMIgh7jnhbLAFEYTC72eC5RB5E4HGoZUpyMRjK4tBQWCR112bjwci7FB
- w5WtOpo7yXzolUe6Z5c3vb8rtD5KmxikAuo7E=
+ d=linaro.org; s=google; t=1734018673; x=1734623473; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=o+h03JgAZnUSK6UZ4QT9jow6gEFV0HnAi7pCgPMZnOo=;
+ b=P2ugnFCCG7VQtGtnwiqeA2occyFDsqSqj2R/N5vC0a3LJ4VFt5GA2PrkI7Dd9iMvrE
+ dxCv6foIkrHMCw/JdfZqBlgkfE0d7NZ35u0o/fDnkfvw7z9LhmorYZVpXYobdn1d7gOB
+ MmHqtK4PZqfLJbvzV2sdDy6zAg3SQ7huT5/GSqnbgDsOJwatp1kA2R9bsgDHuvlWoO+O
+ uxlLfYscez/nN2SIfBOXB0A/d1mKZierPvU2U2dISt0b9JBwj7s9eSCeQwBSScbpa3+S
+ vmT3ah3LvruaVI60n9dcU2q7W65Ys4BnXjcA1FT4tnceL5ygKS574cIkWWp/dMUAVy/G
+ LURw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734018589; x=1734623389;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m9GK4dXKEjyAgs+fcrfQ/fu6LCqjCw97bgcr6+JMNw4=;
- b=CknkT+yYLI4Dh+Jv/0MjKAPzUG9Z3icc75l1EMaigNFJ6Kd880OhxjyYfoQLVz6UrK
- fcDbbjncfHCrGjr8qpE1jAQMS1+Aq+LouGGbbMoz5GiYHJWYrY+8G9vkDrNF5b/EOjwM
- zN7s2e2Rmjfiu0zVuqCzK7mLoCP5eQjN8Qzic/kC9g197uLUAh0MNXdRC/uETSl4mSCJ
- 79jDg30pBeNjQi0s6TN1Qyz1FtTd4H5O+6mYHe4VrBhK05ESoFzr2HuV/88rj1pZmMQ6
- vqn20Bu01UnRx8yMDa3GE9tYHbrQqtBshnPi+1zZcKMOGkNfczuAzdMjkzWuKc6kb+Zh
- Btug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW/vg95sHc3a5BJoxf1y0NN+z3DywTjxjxKiMWtvUACMlpcIIYFiY8gZElTYK2NsxH7wo9PuME=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiBQJMp90zSNpVUKcNnx0tcI124970gW+dhV9uMno9SF8Mxgko
- cjQLkKx9dCgtjRCR+z2PNndXbub2ukzNxyTw6+7C1zTXoz3l+xYO4p9SNWWYZGc=
-X-Gm-Gg: ASbGnctsITkukf2H5oN7A9cJco/xf1784+TbvxD/yAxE4qTekT6B6eckrBYgcgAYgvQ
- cFISVDO61M/Qy1hfeE8ODMwz6B9M0mlUX4k/4WAVe+6ySrQaw1mClo9hwGqqzVjgfpWbtGzSJyU
- KV02GSDT53ky+UrZ2eHPF+dQwlPSB+vp/JPJuOMCEaXdDjhqToZrAMJvAsVD4XaEvHTBzKVjE1L
- Wek8ZKNqCUKFNjW3aVG7hF71v6m9au2wWGF+e3gEKGPYsBIQhsaXKDv
-X-Google-Smtp-Source: AGHT+IHK68LZgoruzX3a17fzaSkuX+7mvUACKgriBNAApDKgdkX9dUgS+TBxKjg1ZGYNuSzx/JHG9g==
-X-Received: by 2002:a05:622a:1c13:b0:467:5375:5804 with SMTP id
- d75a77b69052e-467a16859d8mr15023741cf.38.1734018589370; 
- Thu, 12 Dec 2024 07:49:49 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467a3126d0asm21221cf.40.2024.12.12.07.49.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 07:49:48 -0800 (PST)
-Date: Thu, 12 Dec 2024 09:49:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Applying patches to mainline (Was: Re: [PATCH v2 0/7]
- efi_loader: Add support for logging to a buffer)
-Message-ID: <20241212154945.GD1505244@bill-the-cat>
-References: <20241202001243.1283274-1-sjg@chromium.org>
- <D477BE0D-064D-46CE-B83B-C8B1E546575D@gmx.de>
- <20241202141558.GD2457179@bill-the-cat>
- <CAFLszTjxOE_037+kR0jgdax80sBombYo_k0YgiuVnP=KZCOvuA@mail.gmail.com>
- <20241204012907.GD2457179@bill-the-cat>
- <CAFLszTgrd3gb0hfTCtRgaX2nwbCPhGKiftAJ8gCqrGDw-thOHw@mail.gmail.com>
- <20241204162707.GG2457179@bill-the-cat>
- <CAFLszTjs7taGs5LjiZ4XBgkJtjK_Db7ZiWwbpW6Kzz_tFjo=Rw@mail.gmail.com>
- <CAC_iWjL1f3T2YSNS4OV76EyvaU757XSt4xrG2kZFjMOwL-Y0Pg@mail.gmail.com>
- <CAFLszTgnzrBfS=TeCsKQRHKfufAs9x+M=VbOmF22T-guXx3R_A@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1734018673; x=1734623473;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o+h03JgAZnUSK6UZ4QT9jow6gEFV0HnAi7pCgPMZnOo=;
+ b=r3Dwi6au15eu+05NH+EqURMq4d0eRCKLd+si+SQF6nxzK0/BLVf5DkeRYfH6rUgWna
+ kgS7/87UeD2IQEfGXcZlX53vsziHNRe/5DSn6Kv2COG1mZrr5oGffz1XhXfKsdCSjlD+
+ N9ZPPQzpgQ/plN7FEy1Scbn+t9djIbA3W0BwEXiTdGqBWIqn5T37CempKNO8ans27FhB
+ muNJzCyMj7Z0krmr/Qq8zLrH07E/BPD8vL19z58kOXmwKvsyJlK9RvkjuIjKzgUO45zF
+ axIWKWV8wzelgAHvXwYKx5TFN0seQUTTsti11LIicNnLU2I0kHiPn/t7kiogZ0B3XSlr
+ PhDQ==
+X-Gm-Message-State: AOJu0YyYmtcGe2jCYn59J3b4WNGK4Mz9wMO4FFQD23Kz9iCXtN2a7NXb
+ 51QD3YCEAgetKKAwPJbqkzQga8LuOJnJ+fxWxqR8dT6PsxOCx1ubQVwSa6QLLl9Ns1POAcnjmaS
+ DineFjBbcWYLZw6jQ9S311YoPPQO/HgcZ36SDGQ==
+X-Gm-Gg: ASbGncu25P8Mn8SXSfVXrBUlWGtBUks/jaL+Sj3P88nPyd/8F+SxJ9g8y+8JBgvt+Jz
+ luVdesxLVfcWbXj4ndSfpfJoF6tnpKZi1ohJguA==
+X-Google-Smtp-Source: AGHT+IFt6/S+S7oSXfBJ2C4kpFkAj1X79P8HNM8kuv9w4+MSAPIHSA9Z5D8/9KSbEdhKQcPCPe6IBuE1eQWrvbsQhYg=
+X-Received: by 2002:a05:690c:6485:b0:6ef:8122:282f with SMTP id
+ 00721157ae682-6f2752bcde8mr9316787b3.24.1734018673324; Thu, 12 Dec 2024
+ 07:51:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/ftRvWdGyT+tleDp"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgnzrBfS=TeCsKQRHKfufAs9x+M=VbOmF22T-guXx3R_A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <CAC_iWjLXtTxbbcjf=dG=OpnNMh69HW69xpg4DJ4Es4TLjikgXg@mail.gmail.com>
+ <CAFLszTghBQ6pMi4mrBwnWONwzS=dLC8k+VV+9gn75J8bVn=6vQ@mail.gmail.com>
+In-Reply-To: <CAFLszTghBQ6pMi4mrBwnWONwzS=dLC8k+VV+9gn75J8bVn=6vQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 12 Dec 2024 17:50:37 +0200
+Message-ID: <CAC_iWjJVjYiywhCbcLDpZuriKGobxxdPYS2LQYod00JadHd1fw@mail.gmail.com>
+Subject: Re: [PATCH v5 00/23] efi: Tidy up confusion between pointers and
+ addresses
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Janne Grunau <j@jannau.net>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Matthew Garrett <mgarrett@aurora.tech>, Matthias Brugger <mbrugger@suse.com>, 
+ Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, 
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,100 +105,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---/ftRvWdGyT+tleDp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 12, 2024 at 07:04:54AM -0700, Simon Glass wrote:
+On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
+>
 > Hi Ilias,
->=20
-> On Sat, 7 Dec 2024 at 01:18, Ilias Apalodimas
-[snip]
-> > Another example is the fdt sutff here
-> > https://lore.kernel.org/u-boot/20241201144240.1664398-5-sjg@chromium.or=
-g/
-> > Tom, Raymond and I spent a lot of our time explaining why we need this
-> > feature like this and what's the technical reason behind the decision.
-> > Your commit message basically says "I know better and you should all
-> > listen to my almighty ideas and btw this breaks 3 special ancient
-> > platforms, so I am reverting this".
->=20
-> This is a deflection at best. WIth OF_BLOBLIST, you can just enable
-> that option and get what you want. You can even make it the default in
-> U-Boot. The issue is that you don't want to have the option. But
-> without the ability to turn the option off, my special, ancient
-> platforms, that no one cares about except me, break.
->=20
-> > Now I don't know who Kevin and BoB
-> > are and I wish them luck, but that's hardly a readable commit message
-> > or will mean anything in a year from now.
->=20
-> chromebook_kevin and chromebook_bob are a rk3399-based Chromebooks
->=20
-> Again, the commit message is not a core issue. If you found yourself
-> in a reflective mood, you might want to consider how I feel about 5-6
-> platforms which I care about a lot, being permanently broken in Tom's
-> tree.
+>
+> On Wed, 11 Dec 2024 at 23:40, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> >  Hi Simon,
+> >
+> > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > The EFI-loader implementation converts things back and forth between
+> > > addresses and pointers, with not much consistency in how this is done.
+> > >
+> > > Within most of U-Boot a pointer is a void * and an address is a ulong
+> > >
+> > > This convention is very helpful, since it is obvious in common code as
+> > > to whether you need to call map_sysmem() and friends, or not.
+> > >
+> > > As part of cleaning up the EFI memory-management, I found it almost
+> > > impossible to know in some cases whether something is an address or a
+> > > pointer. I decided to give up on that and come back to it when this is
+> > > resolved.
+> > >
+> > > This series starts applying the normal ulong/void * convention to the
+> > > EFI_loader code, so making things easier to follow. For now, u64 is
+> > > often used instead of ulong, but the effect is the same.
+> > >
+> > > The main changes are:
+> > > - Rather than using the external struct efi_mem_desc data-structure for
+> > >   internal bookkeeping, create a new one, so it can have different
+> > >   semantics
+> > > - Within efi_memory.c addresses are used, rather than addresses
+> > >   masquerading as pointers. The conversions are done in efi_boottime
+> > >
+> > > Unforunately my foray into attempting to use enum for the memory type
+> > > failed. The problem is not just that the external interface cannot use
+> > > an enum. In fact the enum in the spec is really just confusing, since
+> > > values not mentioned in the enum are valid. While we could handle this
+> > > by declaring a few more values in enum efi_memory_type, it doesn't seem
+> > > worth it. For example, if we declare 0x6fffffff and -1 as valid values,
+> > > we get the correct range, but then we need to be careful about
+> > > conversion in efi_boottime. If we declare 0xffffffff as valid, then the
+> > > enum ends up being 64-bits wide! Yes, that would work, I suppose it
+> > > wouldn't matter, but at that point I believe using an enum is actually
+> > > more confusing than not. It also made passing SCT tricky, since invalid
+> > > values are passed in...
+> > >
+> >
+> > So my general feedback on this is
+> > - Split it into a number of reviewable patches
+> > - Send the typos & doc changes in one patchset that we can easily pick
+> > up since it's mostly reviewed
+> > - Drop the two patches that add 'sjg' stuff that are removed later
+> > - Investigate why there's a reserved member in efi_mem_desc -- which I
+> > think is a bug and send the fix as a single patch
+> > - Drop the renames and duplication of efi_mem_desc with priv_mem_desc.
+> > I don't see any point in duplication that, keeping the memory
+> > descriptors in a list as it currently works is fine
+>
+> All the other points are OK, just more work. However, this one defeats
+> the purpose of the series. As you can see, I am lining up the EFI
+> internal-table more with how U-Boot and lmb do things, with addresses.
 
-Having just this morning figured out the problem with those chromebooks
-(because they're available in CI, so thank you for that work), I think
-this is also a good example of one of the problems. My recollection of
-the threads from last year does not include you mentioning that on these
-three platforms the issue is that you put the fixed bloblist address in
-DRAM *and* that SPL initializes DRAM here (not TPL, not TF-A) that's the
-concern. My recollection of the threads is you had very different
-technical reasons for wanting what you proposed and those technical
-reasons had technical objections. I've posted
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D436459&state=3D*
-now and that fixes those three platforms. And we could have done that a
-year ago if you had explained the problem on those platforms. I would
-have asked why not putting the bloblist in IRAM instead, at that point,
-and you may have had an answer, but that would have still left coral to
-sort out.
+I think Heinrich and I have repeated this more than once. EFI works
+with physical addresses, just like sandbox needs to map_sysmem. It's
+way easier for us to review and look at code exactly how the spec
+describes it. Also the reason for duplicating that in the commit
+message is
+- the name is confusing, which reallys int
+- The 'reserved' filed isn't needed, which is probably just a generic
+bug in the EFI struct  definition
 
-And how is this part of the problem? You cannot suggest architectural
-designs without explaining the technical details of what and why you
-want something. We all spent countless hours arguing about some feature
-of bloblist design which zero platforms actually need.
 
-> > The way I read this commit message is that you show zero respect for
-> > the effort all of the other people put into code explaining and
-> > documenting the feature, your 'justification' has no technical
-> > background whatsoever and then you come back complaining that people
-> > don't appreciate your efforts.
->=20
-> Obviously you are entitled to your opinions, but I don't agree, sorry.
-> I doubt anyone is particularly interested in my thoughts on this, so
-> I'll refrain from commenting further.
->=20
-> Just to confirm, nothing in your email appears to address any of my
-> concerns. If it was intended to, please point out what I missed.
-
-No, this is another example of the problems. You've been given feedback
-here, which is that your communication skills are a problem, and your
-response is to say you don't agree.
-
---=20
-Tom
-
---/ftRvWdGyT+tleDp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdbBhYACgkQFHw5/5Y0
-tyznUAv/UZ5z6MAm4fMIUkduUFcnaR1k75UVFO59YFweRxXpL8vXP7Jf/dZGFNq7
-auqd/B+XpAS0wEMM6BjUPBiLltgsVJxm8yyUR7mqIvYA/3Btc123PnTLn9A9buVl
-BIQ5aGzykvRzpPpEcJkC2v7dhM05jFhPJ/U/CBThlhko8Foan0phsM8sixC6oA84
-E4e1dCYdB7BkOSAaucrMUumUdiyZFvGdmWLaaRlxmVCDtiTQRLYo2vGcUTeWa3P5
-CrmUL7YtAjg289BFFBmbp4TNhRieLV/xee4E6Mq1qSZFGV0KoPPy4msAHFHRT/1r
-riovZf0MItZ7p9q5qer7MmHClBbusT8HEC8Ki0JOifBNWFIvrhHRiFLv8f/zAfH5
-WXLXzdR1RmGsKyGW0iWKkBUx334JhWImSz4dPAdlxCOUXfMZUP/dFHQceK4bGbDH
-Ve8U7liLg/afyh6JNN40JNbuyrMM8gzmxYB/Hpyo6+RY3fVV7MtT9fwyHwbRdTup
-fXzBeI6E
-=ZxzG
------END PGP SIGNATURE-----
-
---/ftRvWdGyT+tleDp--
+Thanks
+/Ilias
+> I cannot use both addresses and pointers in the same struct...I
+> initially did that but it was just far too confusing.
+>
+> > - Send the map_to_sysmem() places you need in a different patchset
+> > with an explanation of *why* this is working currently (or not
+> > working)
+> >
+> > Hope this helps
+> > /Ilias
+> >
+> > > Link: https://lore.kernel.org/u-boot/20240725135629.3505072-1-sjg@chromium.org/
+> > >
+> > > Changes in v5:
+> > > - Drop the enum / mem_type patch as it is not needed
+> > > - Drop the patch to remove extra brackets in efi_mem_carve_out()
+> > >
+> > > Changes in v4:
+> > > - Add new patch to show the address for pool allocations
+> > > - Combine the various pointer-to-address patches into one
+> > >
+> > > Changes in v3:
+> > > - Adjust comments
+> > > - Show the returned address rather than the pointer
+> > > - Put the header-file in its own section
+> > > - Add comment to struct efi_device_path_memory
+> > > - Use a pointer for the values in struct efi_device_path_memory
+> > >
+> > > Changes in v2:
+> > > - Fix missing @
+> > > - Note that this holds pointers, not addresses
+> > > - Add a new patch with comments where incorrect addresses are used
+> > > - Use EFI_PRINT() instead of log_debug()
+> > > - Rebase on early patch
+> > > - Add new patch to add the EFI-loader API documentation
+> > > - Add new patch to use a separate stuct for memory nodes
+> > > - Drop patch 'Convert efi_get_memory_map() to return pointers'
+> > > - Drop patch 'efi_loader: Make more use of ulong'
+> > > - Significantly expand and redirect the series
+> > >
+> > > Simon Glass (23):
+> > >   efi: Define fields in struct efi_mem_desc
+> > >   efi_loader: Fix typos in enum efi_allocate_type
+> > >   efi_loader: Add comments where incorrect addresses are used
+> > >   efi_loader: Show the resulting memory address from an alloc
+> > >   efi_loader: Update startimage_exit self-test to check error
+> > >   efi_loader: Move some memory-function comments to header
+> > >   doc: efi: Add the EFI-loader API documentation
+> > >   efi_loader: Use a separate struct for memory nodes
+> > >   efi_loader: Drop virtual_start from priv_mem_desc
+> > >   efi_loader: Drop reserved from priv_mem_desc
+> > >   efi_loader: Use the enum for the memory type in priv_mem_desc
+> > >   efi_loader: Avoid assigning desc in efi_mem_carve_out()
+> > >   efi_loader: Move struct efi_mem_list fields together
+> > >   efi_loader: Rename struct efi_mem_list to mem_node
+> > >   efi_loader: Rename physical_start to base
+> > >   efi_loader: Use correct type in efi_add_runtime_mmio()
+> > >   efi_loader: Show the address for pool allocations
+> > >   efi_loader: Don't try to add sandbox runtime code
+> > >   efi_loader: Update to use addresses internally
+> > >   efi_loader: Correct address-usage in copy_fdt()
+> > >   efi_loader: Drop comments about incorrect addresses
+> > >   efi_bootmgr: Avoid casts in try_load_from_uri_path()
+> > >   efi_loader: Simplify efi_dp_from_mem()
+> > >
+> > >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |   2 +-
+> > >  arch/arm/mach-bcm283x/reset.c                 |   2 +-
+> > >  doc/api/efi.rst                               |   6 +
+> > >  include/efi.h                                 |  23 +-
+> > >  include/efi_api.h                             |  10 +
+> > >  include/efi_loader.h                          |  87 +++++-
+> > >  lib/efi_loader/efi_bootbin.c                  |   3 +-
+> > >  lib/efi_loader/efi_bootmgr.c                  |  10 +-
+> > >  lib/efi_loader/efi_boottime.c                 |  43 ++-
+> > >  lib/efi_loader/efi_device_path.c              |  16 +-
+> > >  lib/efi_loader/efi_dt_fixup.c                 |   4 -
+> > >  lib/efi_loader/efi_helper.c                   |   4 +-
+> > >  lib/efi_loader/efi_image_loader.c             |   3 +-
+> > >  lib/efi_loader/efi_memory.c                   | 261 +++++++-----------
+> > >  lib/efi_loader/efi_runtime.c                  |   7 +-
+> > >  lib/efi_loader/efi_var_mem.c                  |   6 +-
+> > >  .../efi_selftest_startimage_exit.c            |   6 +-
+> > >  lib/lmb.c                                     |  10 +-
+> > >  18 files changed, 278 insertions(+), 225 deletions(-)
+> > >
+> > > --
+> > > 2.34.1
+> > >
+>
+> Regards,
+> SImon
