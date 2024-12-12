@@ -4,82 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B06A6E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 09:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5136E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 09:42:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D71F0801DB;
-	Thu, 12 Dec 2024 10:19:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 301EB801DB;
+	Thu, 12 Dec 2024 10:42:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rd6ULWzd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xq0SsfZx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F15B1801EA; Thu, 12 Dec 2024 10:19:10 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6C42801EA; Thu, 12 Dec 2024 10:42:01 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::600])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41DBB801DA
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 10:19:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 395DF801DA
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 10:41:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=leon.anavi@konsulko.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5d3bbb0f09dso587369a12.2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 01:19:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1733995147; x=1734599947; darn=lists.denx.de;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a1q2tMss4ppFH9/J2ZpE8f/7fqFSHGwO1hBoguhnOZ0=;
- b=Rd6ULWzd3aoMNZ09GcXn2Oiltplpxh8lN8XEfFiEjnPHiazSfIYOdubl7T9B89Jgmy
- 5vhquVeWpkMIOEEGrrpl8c48Z/lSjGbl0vlSzOhZxt2+yg3hjsbcOs3auOj9ju3itzHP
- IQ/r1FydVCS8kxRq+S0CPaoOhzMhMx4ubdLbk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733995147; x=1734599947;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=a1q2tMss4ppFH9/J2ZpE8f/7fqFSHGwO1hBoguhnOZ0=;
- b=fdyHtGmgJOgVQi5KlvK6Ke56ur8pvZdL4ueRfuhMQ1hPWCQs0dWr6wX7lhdKXzQBGw
- JiISXaXQV4OJBdLrxs5yYv4FJdWUrsexjreGrj3lIoqpEBth/R4eBNKztbqlOaCzakgd
- w2vl73efn47GJI+is7NLrPpmTkNMNqqxKSUOwU8m9FzNHnlRJgogHP5e07PKI5oGRJha
- KzaFf/r2/14gp4xhN2RyuYEt9v2V9pH3OlqAlVbm8EE7ROErmextbvXSt1JfMPn11N8P
- 2bYUhsXtQB2Q2ZXUJfOhGZ/51WiZI0iWcUMrinCjFP60Bxwpvv18S4rQONZ3ZsJNbtI9
- Id5w==
-X-Gm-Message-State: AOJu0YxsPf5L+etqRChNGYRbgqSTIzxjjUWG01SlMlD+tCmtzmSVKlea
- AtMMV6EPc97lWUWmC55UfLIHsZprrbiLz9GVvXK1q5v3Kr03wiRx2Nh8OgYfaRs=
-X-Gm-Gg: ASbGncsjRzYTrir9r1u85I3Bex3L0TTZ2HVUiEf7u0hdurcJvtkZK2aaT+0DgS17jFZ
- EhqDe0TgPXuY+/Wtu/4NO3z4AnbSe0tfLfKRmDT4GHS70hPVxelM8JwuNyBrdqH6uvbiMnCK8J9
- lt3QHvLQZGd5wF+zjwLPN0qHzb0JKBaTLV3S0k6B6GaOAZ975WjB244YS0oHZFSkjaWd8aoY12/
- LkGt1cs3nA7392NncS2EQPZIIl9rwALqYZeRCeIwhTmCrrdzY579aRKE+jOR+cT
-X-Google-Smtp-Source: AGHT+IEwPychjAUnjQ56CuMOzWWHIxBYpc6Tq0lK1j2ng44jP+NSEsITjXF7fbRb1yx4RyFiyZFpCw==
-X-Received: by 2002:a05:6402:5007:b0:5d0:e2c8:dc8d with SMTP id
- 4fb4d7f45d1cf-5d4edce2bffmr416582a12.20.1733995147227; 
- Thu, 12 Dec 2024 01:19:07 -0800 (PST)
-Received: from [192.168.5.161] ([46.55.231.62])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d3e7936581sm7084972a12.56.2024.12.12.01.19.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Dec 2024 01:19:06 -0800 (PST)
-Message-ID: <e77f6b37-7d50-4f3d-9bed-6d3e39effb4c@konsulko.com>
-Date: Thu, 12 Dec 2024 11:19:06 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bdIF87ZyC3BGc+jycsDXjeZTgqfKTSYOcNjQQucTGKYL67y6BLG8EMkmQ70NNniG7y7OyHUyrDmnOpgBHEzEEXuL+nqBCs2LR/FWxy+t1yKzTFeGDEul5d7uHpNPVyAUA3rx8Uk83n4hsQfY2Se7ApaOAK3SfW1zT93vOGZDdirm6Ew7xb8o330pbv9GXib3cPeU873sIdZxZNkItVIphN87MxBNjBK0zNi8nqjG3ZGaoXDkDfcVTQWvRZKOP0fO+1cXLPLeGq5W+KUiRt+mnb3SF8Y6BO4dZxPA9RSD2WWl+Q8bQuje0hplfmJLCaJxk6iAzAA6bQbSHQEMDs0Ihg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VwbfGX8g1B6muhNvV2JQAq2cy6jCst1fvWhSfJAauek=;
+ b=uzYULN2BeqH5Zm4x6zwbSN6iLPfAOF7VTlktjcUa1G1wjKMRpz/J+6pZde5leutyY2+Vn/i6AhZnHdxz0J5oBJq+jvqx8A99N6KRswWWK3xqntb1PM9gdVhmj/4spgZy6thvGn08F8ELurXtKDMbfLZ6KudAwFw4CPe3Zavbzg/GrjPx4H3FnmXWcF8V+UGKxc/vA6JZKthBrfptKR7KjP2w3jA1XAy1tBuzxj1TCnSCwXnX6Tfb/Rp63LxAa7/OYZL7176x0hkvnm4JEf/7aBBIuYnI5GP7CONpQR8LJDne4Lu9zmU57UtSYZzW6hh1gwpZxbtzZBj4EzX0NafHbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VwbfGX8g1B6muhNvV2JQAq2cy6jCst1fvWhSfJAauek=;
+ b=xq0SsfZxGynQ+Jm3co+ZYtRwm5UgDeDiWKiQBKVx0omfZAhpZo7m0YJdc56bwg+BvGDQNMD7PRwuHgjkHiNtjj8jazF6f6LbFpEqGmyHBgpSTGSIWohClztU1xLopBPLblL3WdcLeURUCKmFVGN4lOAz0Y3cQbPxy5sy0yR4sCM=
+Received: from BN9P222CA0006.NAMP222.PROD.OUTLOOK.COM (2603:10b6:408:10c::11)
+ by IA1PR12MB6459.namprd12.prod.outlook.com (2603:10b6:208:3a9::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.15; Thu, 12 Dec
+ 2024 09:41:52 +0000
+Received: from BL6PEPF0001AB50.namprd04.prod.outlook.com
+ (2603:10b6:408:10c:cafe::b9) by BN9P222CA0006.outlook.office365.com
+ (2603:10b6:408:10c::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.14 via Frontend Transport; Thu,
+ 12 Dec 2024 09:41:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB50.mail.protection.outlook.com (10.167.242.74) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8251.15 via Frontend Transport; Thu, 12 Dec 2024 09:41:52 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 12 Dec
+ 2024 03:41:49 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Lukas Funke
+ <lukas.funke@weidmueller.com>, Manikanta Guntupalli
+ <manikanta.guntupalli@amd.com>, Paul Alvin <alvin.paulp@amd.com>, "Srinivas
+ Goud" <srinivas.goud@amd.com>, Tanmay Shah <tanmay.shah@amd.com>, Tom Rini
+ <trini@konsulko.com>, Vishal Patel <vishal.patel@amd.com>
+Subject: [PATCH] arm64: zynqmp: Sync DTs with Linux v6.13-rc1
+Date: Thu, 12 Dec 2024 10:41:44 +0100
+Message-ID: <06e466d64c9d8e718e2f06a76cc65d6da2a37a7b.1733996500.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, lhristov@gmail.com
-References: <CALtQ3O2jF6sEvofpZ+FtJgmgTKZvNRuohnwEtPz4ES0WqtxU5g@mail.gmail.com>
- <20241211215327.26dc369a@minigeek.lan>
-Content-Language: en-US
-From: Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <20241211215327.26dc369a@minigeek.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7008; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=HAAdnpP7MTbUAIDosqVlNaGTyjmmVfiKYCCv8Fl/vC0=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSo9bfaE2PF3opdK2NvXabacsFv5kIj0W+5a010pvX+q
+ dm2pWpmRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZhI/AGG+Q5fuFNUolVkp3/3
+ nlYU92O/RkB6EcNcwenCkg/nropb8lXSIT1STFfgru08AA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB50:EE_|IA1PR12MB6459:EE_
+X-MS-Office365-Filtering-Correlation-Id: 64881670-d961-406f-47ef-08dd1a913542
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|1800799024|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?III2ZJ3RooFssLwCljLHbx393qZURDHmvDc97zFKzGwjWpBOcFbhw7ZSlvYy?=
+ =?us-ascii?Q?Pz3Lq5acY9cWrTSjqYVnwTYSZ6Z3lcFkHyc62ZY4cU3ffi7XtgPEQea3WFg3?=
+ =?us-ascii?Q?YYhvFXQ5VOdwlcpnr5qCzYzt2AngPQJPK9AIp96CqMjyaW8nkVZ6pQJUDQ1O?=
+ =?us-ascii?Q?HAfuz3W9TlAvuV3MTdEypax8/mpWiLV2My/Uli81mFbAEj4WI1jz6hrmQQZJ?=
+ =?us-ascii?Q?dKYOJEw1Sa8s05MeS4AXZO3Epu3QGA0zE2sTWRe2cci/nPn8cCmwwgxOLQmp?=
+ =?us-ascii?Q?zgob+NPWpzQDPtux2jJ/eWss6TestpdKgr2AcCuVnClLFy7BaJKLAEHWdM6R?=
+ =?us-ascii?Q?lXUzZL50xQEK3+EA2Tehhd36C/wnn7KPtjEo6tfjGMQ3Eq03GWLLaV0wfj+0?=
+ =?us-ascii?Q?FwHZxZetroWd5gzFcRxVuAA18VH4CgDfTfSalbDMHMBoumx2iA6sEqciq2jK?=
+ =?us-ascii?Q?FXxPo7/7Wg/8Qm3oOIR+jOxQRHm8U8FefcVqRROPjunFH+885/pjTJVrKGIS?=
+ =?us-ascii?Q?qvrMPrzyHxmj0nGgw1YQfNOBz4ZIscGU1m547O/WPfza5FVY95xiaGQLI2Xm?=
+ =?us-ascii?Q?Hr+D1+Vc1z629kssardnqNxBI2BghBafVT5FvHhjwxWihKTDPBUJC2yjbI0X?=
+ =?us-ascii?Q?BFNe0bIScTC21DrOdXN1s0NWyBvafAQYOgLZunoGx7pLX+AWld9DlYlSDdjI?=
+ =?us-ascii?Q?z8TzfN/9KltpGBB9PaPd+oEAVda/faRPIod6WPdLOxnaNkKwDAsh6qbqNrxc?=
+ =?us-ascii?Q?tyhV5Yq9kEfbEYBeh06H8sljzGzS8Bd+31WYe4k/Ju1Hb1loGIpfjRS9zSAN?=
+ =?us-ascii?Q?rHZtwYKqU+nnCIDzc+UyRFIYD+7Foy4x3gQm3wuOGku/XHQA3icLrLJDfUol?=
+ =?us-ascii?Q?yhUFYimq8De6IZ6HpIJP7XrAmUSgKXkE3MImbqhBo1CeoNDSk9bFOs1A6v+6?=
+ =?us-ascii?Q?Gn5MleVDGMIHHAE8S6E+rkNGP7cIVC8Rh/fU9vUCo2sphgyCrQuFwKWMANxx?=
+ =?us-ascii?Q?RSkfKXVJ5OTd5tHWYivvZ7wD1M+DgIPcI0ud0yKmVu1u3l+arMNHAiw0XVGW?=
+ =?us-ascii?Q?ldvzTGOqiw9LgWIZNH5lNIZRA6nlLd4NrBrr3nxx7HXAMdU2pyA6dZcostjY?=
+ =?us-ascii?Q?I7IY83o1WQFypuuI9KurU49fWgQtgKKl8w1FQvZrCMv8PqNjK0tfZWr2XRLu?=
+ =?us-ascii?Q?NsBpxbFcTwESO9/XQtL/sTX8vCLpdA3AbxZRCG1VQKMzAnehgAC2cNdlmLbH?=
+ =?us-ascii?Q?nGYETk+Vmdl/pcdakL63j9KlKgP0or1M+VvYqiGwbH9+5kURZkyurl6V9V99?=
+ =?us-ascii?Q?AdIWmdp4surFaVq4PwOle5PuSyVA46ePKAPhoNCjtRpUcCjdXpnaRafvLiAd?=
+ =?us-ascii?Q?nImZpddEmNDj7Tc+v4pGprTZF4dNVwq40CBf/8V0NPE50wNCHMm+EVNCSkJM?=
+ =?us-ascii?Q?ZML/F3b5zWsJfImO4zUQM9EEIorOSyei?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2024 09:41:52.1969 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64881670-d961-406f-47ef-08dd1a913542
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB50.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6459
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,101 +153,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Sync zynqmp* DTS files with v6.13-rc1 Linux kernel including three patches
+from Sean:
+arm64: zynqmp: Enable AMS for all boards
+arm64: zynqmp: Expose AMS to userspace as HWMON
+arm64: zynqmp: Add thermal zones
 
-On 11.12.24 г. 23:53 ч., Andre Przywara wrote:
-> On Mon, 9 Dec 2024 23:08:19 +0200
-> Leon Anavi<leon.anavi@konsulko.com> wrote:
->
-> Hi Leon,
->
-> thanks for the report!
->
->> Commit ffb0294 from 12 November 2023 that simplifies early PMIC setup
->> conditions causes issues on Cubieboard 4 and Merrii A80 Optimus with
->> Allwinner A80 SoC (sun9i). The commit was introduced with U-Boot 2024.01
->> (rc3) and remains as of today. Because of it both of these boards hang at:
->>
->> Starting kernel ...
-> That's odd, how do you boot the kernel, exactly?
-> I just tried mainline U-Boot (via FEL), with:
-> => setenv bootargs "console=ttyS0,115200n8 earlycon"
-> => bootz $kernel_addr_r $ramdisk_addr_r:300000 $fdtcontroladdr
->
-> and it booted fine to the prompt, on a Cubieboard 4 (CC-A80 v1.2).
-> Kernel was some 6.11-rc6 I just had lying around.
->
-> I also compared the code before and after that patch, the only
-> difference is the order at which DCDC5 gets programmed: before it's
-> after DCDC4, with the patch it's right after DCDC1.
-> The rest looked the same.
-> Booting ffb0294~1 and ffb0294~0 also worked for me, without issues.
-> So can you please describe how you test that, exactly?
-I built core-image-base using the Yocto Project and OpenEmbedded as well 
-as the meta-sunxi BSP layer. The U-Boot version depends on the Yocto 
-release. For Scarthgap it is with U-Boot 2024.01 and for the ongoing 
-development in the master branches the U-Boot version is 2024.10. The 
-Linux kernel version is 6.6.28. I experienced the same issue with both 
-U-Boot versions on Merrii A80 Optimus and Lazar (his email is CC) 
-confirmed the same results on Cubieboard 4. The boot sequence for the 
-boards in meta-sunxi is through boot.scr generated from the following 
-boot.cmd:
-https://github.com/linux-sunxi/meta-sunxi/blob/master/recipes-bsp/u-boot/files/arm/boot.cmd
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-In a nutshell, the issue can be reproduced with the following scenario 
-in U-Boot:
+ arch/arm/dts/zynqmp-sm-k26-revA.dts |  18 -----
+ arch/arm/dts/zynqmp-zcu100-revC.dts |   4 --
+ arch/arm/dts/zynqmp-zcu102-revA.dts |   4 --
+ arch/arm/dts/zynqmp-zcu104-revA.dts |   4 --
+ arch/arm/dts/zynqmp-zcu104-revC.dts |   4 --
+ arch/arm/dts/zynqmp.dtsi            | 101 +++++++++++++++++++++++++++-
+ 6 files changed, 100 insertions(+), 35 deletions(-)
 
-setenv bootargs console=ttyS0,115200 console=tty1 root=/dev/mmcblk0p2 
-rootwait panic=10
-load mmc 0:1 ${fdt_addr_r} ${fdtfile}
-load mmc 0:1 ${kernel_addr_r} zImage
-bootz ${kernel_addr_r} - ${fdt_addr_r}
+diff --git a/arch/arm/dts/zynqmp-sm-k26-revA.dts b/arch/arm/dts/zynqmp-sm-k26-revA.dts
+index 620f5185cc46..b514dc27f710 100644
+--- a/arch/arm/dts/zynqmp-sm-k26-revA.dts
++++ b/arch/arm/dts/zynqmp-sm-k26-revA.dts
+@@ -90,20 +90,6 @@
+ 		};
+ 	};
+ 
+-	ams {
+-		compatible = "iio-hwmon";
+-		io-channels = <&xilinx_ams 0>, <&xilinx_ams 1>, <&xilinx_ams 2>,
+-			<&xilinx_ams 3>, <&xilinx_ams 4>, <&xilinx_ams 5>,
+-			<&xilinx_ams 6>, <&xilinx_ams 7>, <&xilinx_ams 8>,
+-			<&xilinx_ams 9>, <&xilinx_ams 10>, <&xilinx_ams 11>,
+-			<&xilinx_ams 12>, <&xilinx_ams 13>, <&xilinx_ams 14>,
+-			<&xilinx_ams 15>, <&xilinx_ams 16>, <&xilinx_ams 17>,
+-			<&xilinx_ams 18>, <&xilinx_ams 19>, <&xilinx_ams 20>,
+-			<&xilinx_ams 21>, <&xilinx_ams 22>, <&xilinx_ams 23>,
+-			<&xilinx_ams 24>, <&xilinx_ams 25>, <&xilinx_ams 26>,
+-			<&xilinx_ams 27>, <&xilinx_ams 28>, <&xilinx_ams 29>;
+-	};
+-
+ 	pwm-fan {
+ 		compatible = "pwm-fan";
+ 		status = "okay";
+@@ -369,10 +355,6 @@
+ 			  "", "", "", ""; /* 170 - 173 */
+ };
+ 
+-&xilinx_ams {
+-	status = "okay";
+-};
+-
+ &ams_ps {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp-zcu100-revC.dts b/arch/arm/dts/zynqmp-zcu100-revC.dts
+index c9051360931b..3542844e6977 100644
+--- a/arch/arm/dts/zynqmp-zcu100-revC.dts
++++ b/arch/arm/dts/zynqmp-zcu100-revC.dts
+@@ -593,10 +593,6 @@
+ 	status = "okay";
+ };
+ 
+-&xilinx_ams {
+-	status = "okay";
+-};
+-
+ &ams_ps {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp-zcu102-revA.dts b/arch/arm/dts/zynqmp-zcu102-revA.dts
+index dd63d22f45e7..955810ae7178 100644
+--- a/arch/arm/dts/zynqmp-zcu102-revA.dts
++++ b/arch/arm/dts/zynqmp-zcu102-revA.dts
+@@ -1065,10 +1065,6 @@
+ 	status = "okay";
+ };
+ 
+-&xilinx_ams {
+-	status = "okay";
+-};
+-
+ &ams_ps {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp-zcu104-revA.dts b/arch/arm/dts/zynqmp-zcu104-revA.dts
+index 31effbf27a8e..64d822255ec5 100644
+--- a/arch/arm/dts/zynqmp-zcu104-revA.dts
++++ b/arch/arm/dts/zynqmp-zcu104-revA.dts
+@@ -527,10 +527,6 @@
+ 	status = "okay";
+ };
+ 
+-&xilinx_ams {
+-	status = "okay";
+-};
+-
+ &ams_ps {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp-zcu104-revC.dts b/arch/arm/dts/zynqmp-zcu104-revC.dts
+index 999b2431bdf2..3e883d717c2f 100644
+--- a/arch/arm/dts/zynqmp-zcu104-revC.dts
++++ b/arch/arm/dts/zynqmp-zcu104-revC.dts
+@@ -539,10 +539,6 @@
+ 	status = "okay";
+ };
+ 
+-&xilinx_ams {
+-	status = "okay";
+-};
+-
+ &ams_ps {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
+index 70ca5e6379fc..e8750b08162d 100644
+--- a/arch/arm/dts/zynqmp.dtsi
++++ b/arch/arm/dts/zynqmp.dtsi
+@@ -18,6 +18,7 @@
+ #include <dt-bindings/interrupt-controller/irq.h>
+ #include <dt-bindings/power/xlnx-zynqmp-power.h>
+ #include <dt-bindings/reset/xlnx-zynqmp-resets.h>
++#include <dt-bindings/thermal/thermal.h>
+ 
+ / {
+ 	compatible = "xlnx,zynqmp";
+@@ -36,6 +37,7 @@
+ 		#size-cells = <0>;
+ 
+ 		cpu0: cpu@0 {
++			#cooling-cells = <2>;
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
+ 			enable-method = "psci";
+@@ -46,6 +48,7 @@
+ 		};
+ 
+ 		cpu1: cpu@1 {
++			#cooling-cells = <2>;
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
+ 			enable-method = "psci";
+@@ -56,6 +59,7 @@
+ 		};
+ 
+ 		cpu2: cpu@2 {
++			#cooling-cells = <2>;
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
+ 			enable-method = "psci";
+@@ -66,6 +70,7 @@
+ 		};
+ 
+ 		cpu3: cpu@3 {
++			#cooling-cells = <2>;
+ 			compatible = "arm,cortex-a53";
+ 			device_type = "cpu";
+ 			enable-method = "psci";
+@@ -388,6 +393,101 @@
+ 		};
+ 	};
+ 
++	ams {
++		compatible = "iio-hwmon";
++		io-channels = <&xilinx_ams 0>, <&xilinx_ams 1>, <&xilinx_ams 2>,
++			<&xilinx_ams 3>, <&xilinx_ams 4>, <&xilinx_ams 5>,
++			<&xilinx_ams 6>, <&xilinx_ams 7>, <&xilinx_ams 8>,
++			<&xilinx_ams 9>, <&xilinx_ams 10>, <&xilinx_ams 11>,
++			<&xilinx_ams 12>, <&xilinx_ams 13>, <&xilinx_ams 14>,
++			<&xilinx_ams 15>, <&xilinx_ams 16>, <&xilinx_ams 17>,
++			<&xilinx_ams 18>, <&xilinx_ams 19>, <&xilinx_ams 20>,
++			<&xilinx_ams 21>, <&xilinx_ams 22>, <&xilinx_ams 23>,
++			<&xilinx_ams 24>, <&xilinx_ams 25>, <&xilinx_ams 26>,
++			<&xilinx_ams 27>, <&xilinx_ams 28>, <&xilinx_ams 29>;
++	};
++
++
++	tsens_apu: thermal-sensor-apu {
++		compatible = "generic-adc-thermal";
++		#thermal-sensor-cells = <0>;
++		io-channels = <&xilinx_ams 7>;
++		io-channel-names = "sensor-channel";
++	};
++
++	tsens_rpu: thermal-sensor-rpu {
++		compatible = "generic-adc-thermal";
++		#thermal-sensor-cells = <0>;
++		io-channels = <&xilinx_ams 8>;
++		io-channel-names = "sensor-channel";
++	};
++
++	tsens_pl: thermal-sensor-pl {
++		compatible = "generic-adc-thermal";
++		#thermal-sensor-cells = <0>;
++		io-channels = <&xilinx_ams 20>;
++		io-channel-names = "sensor-channel";
++	};
++
++	thermal-zones {
++		apu-thermal {
++			polling-delay-passive = <1000>;
++			polling-delay = <5000>;
++			thermal-sensors = <&tsens_apu>;
++
++			trips {
++				apu_passive: passive {
++					temperature = <93000>;
++					hysteresis = <3500>;
++					type = "passive";
++				};
++
++				apu_critical: critical {
++					temperature = <96500>;
++					hysteresis = <3500>;
++					type = "critical";
++				};
++			};
++
++			cooling-maps {
++				map {
++					trip = <&apu_passive>;
++					cooling-device =
++						<&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
++						<&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++				};
++			};
++		};
++
++		rpu-thermal {
++			polling-delay = <10000>;
++			thermal-sensors = <&tsens_rpu>;
++
++			trips {
++				critical {
++					temperature = <96500>;
++					hysteresis = <3500>;
++					type = "critical";
++				};
++			};
++		};
++
++		pl-thermal {
++			polling-delay = <10000>;
++			thermal-sensors = <&tsens_pl>;
++
++			trips {
++				critical {
++					temperature = <96500>;
++					hysteresis = <3500>;
++					type = "critical";
++				};
++			};
++		};
++	};
++
+ 	amba: axi {
+ 		compatible = "simple-bus";
+ 		bootph-all;
+@@ -1153,7 +1253,6 @@
+ 
+ 		xilinx_ams: ams@ffa50000 {
+ 			compatible = "xlnx,zynqmp-ams";
+-			status = "disabled";
+ 			interrupt-parent = <&gic>;
+ 			interrupts = <GIC_SPI 56 IRQ_TYPE_LEVEL_HIGH>;
+ 			reg = <0x0 0xffa50000 0x0 0x800>;
+-- 
+2.43.0
 
-Merrii A80 Optimus board boots fine if I revert commit ffb0294. However, 
-if commit ffb0294 is present in U-Boot the board hangs. Here is the log: 
-U-Boot 2024.10-dirty (Oct 07 2024 - 14:54:35 +0000) Allwinner Technology 
-CPU: Allwinner A80 (SUN9I) Model: Merrii A80 Optimus Board DRAM: 2 GiB 
-Core: 62 devices, 18 uclasses, devicetree: separate WDT: Not starting 
-watchdog@6000ca0 WDT: Not starting watchdog@8001000 MMC: 
-sunxi_set_reset: (RST#0) unhandled sunxi_set_reset: (RST#2) unhandled 
-sunxi_set_reset: (RST#1) unhandled mmc@1c0f000: 0, mmc@1c10000: 2, 
-mmc@1c11000: 1 Loading Environment from FAT... Unable to read 
-"uboot.env" from mmc0:1... In: serial@7000000 Out: serial@7000000 Err: 
-serial@7000000 Net: No ethernet found. Hit any key to stop autoboot: 0 
-=> setenv bootargs console=ttyS0,115200 console=tty1 root=/dev/mmcblk0p2 
-rootwait panic=10 => load mmc 0:1 ${fdt_addr_r} ${fdtfile} 24443 bytes 
-read in 3 ms (7.8 MiB/s) => load mmc 0:1 ${kernel_addr_r} zImage 5397992 
-bytes read in 236 ms (21.8 MiB/s) => bootz ${kernel_addr_r} - 
-${fdt_addr_r} Kernel image @ 0x22000000 [ 0x000000 - 0x525de8 ] ## 
-Flattened Device Tree blob at 23000000 Booting using the fdt blob at 
-0x23000000 Working FDT set to 23000000 Loading Device Tree to 29ff7000, 
-end 29ffff7a ... OK Working FDT set to 29ff7000 Starting kernel ... 
-Please note that U-Boot is marked with suffix "-dirty" because of the 
-patches applied by u-boot_%.bbappend from Yocto/OE layer meta-sunxi but 
-these patches are for other boards and don't touch the file 
-board/sunxi/board.c. Am I missing something as a configuration that can 
-make the board boot the same way without hanging when commit ffb0294 is 
-present?Best regards,
-Leon
-
->
-> Please also note we fixed d75fa8c80dcfa in U-Boot (DCDC4/5 typo), and
-> dd36ad71ad6 in the kernel (DCDC5 constraints in the DT).
->
-> Cheers,
-> Andre
->
->> Older U-Boot versions without this commit work fine. As a temporary
->> solution I reverted commit ffb0294 and this way the boards boot
->> successfully. I tested this work around on Merrii A80 Optimus with several
->> U-Boot versions, including with U-Boot 2024.10.
->
->> Lazar, a friend who owns Cubieboard 4, also tested and confirmed his board
->> boots with U-Boot 2024.10 if this commit has been reverted.
->>
->> How to fix this? Is there a known configuration that can be added to
->> Merrii_A80_Optimus_defconfig and Cubieboard4_defconfig to avoid hanging
->> with the existing source code from commit ffb0294 ?
->>
->> Best regards,
->> Leon
