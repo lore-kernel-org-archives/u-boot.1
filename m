@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CF35E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:23:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA387E77180
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 10:26:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 304E38030F;
-	Thu, 12 Dec 2024 11:21:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 302A680214;
+	Thu, 12 Dec 2024 11:26:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DW4tdMWz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g/rbz4uQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B176880285; Thu, 12 Dec 2024 11:21:41 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id E019780212; Thu, 12 Dec 2024 11:26:08 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCE780141
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:21:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D842D801DA
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 11:26:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aa6a3c42400so73601666b.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:21:39 -0800 (PST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf6f804233so564827a12.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 02:26:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733998899; x=1734603699; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rbuEw22xQWhJ0T2OHWyGd32leSWFic6kujgCi8DscRo=;
- b=DW4tdMWzQGWVuxDY8Ny9XlEp+dQkomlbdqxbH++qfU5I/ix0AHQT6E7EhyMxyn46r8
- cLJrs4KA1nDMpmA/5s3IOBEJDUr66UGpwpvdK+lL+Lvs6qKWVIsnazqMmuecqeleQtnY
- dsEOesaDVciz3BCjnrUoIFPxBP636BXNTOUB9mt0Tu0f9VBhwS3lb+CjY0Z6j1K5tHL5
- acBKOnwnZdBJc3N7OfWDRsfgp+OqtJPM1rQmHmPCoaF1BiLxC1S7IHPChLGSRkf0CuUc
- NYGJjoBY35a8M88iMiOe1GLnsZlycwqIUzXPsENBpb0C+uiekIIdPcV9jgRyIAW8d82c
- vpVg==
+ d=gmail.com; s=20230601; t=1733999166; x=1734603966; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9h54Ise4N7qkCGYW0oBoLQcFq5FzwBRfUlWHThAIzuI=;
+ b=g/rbz4uQoTz6eGQf5Az4TXs0GhZeJW4mukDJxCAhmTVxKZaTICQkIcOvQywQdIxfBV
+ Hs9uRyXI5RWw6DIZn+HMoCL8dYDAI+Q6kED9aVxTEQ9saF151my0hKPxIeviPs3qFKlI
+ Dgi+t+g7od3q8LRF+/QUPjK9hbiylx7uJQMECKb8o3Qs5J2EQY5wb37l87cuPiGcSGFj
+ NEtSKNuE8agmqxDrbKYnr3C7F2nLIaJOu9Oy0oFVc05VDMedIomTUo+W6Wo2t/ms27pQ
+ Q3K0T9StMKd8hX463Hn0vKGeV1vPhMfXyCQjfSkzkoVqZSsG0IVeXw+d7kw9/+4fQvMV
+ XUjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733998899; x=1734603699;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rbuEw22xQWhJ0T2OHWyGd32leSWFic6kujgCi8DscRo=;
- b=dokYN5rHDH5PXr9WND4axNU/L9H/5KjnqM/++BdvIuWOzYWxqkTu3iWNrdK45LeL95
- 3WUrfvBkNBbvSuh6PPdq4OfmQq4JM4paAhbzIfLXmH4Rlr0D27GBiouqnp5SZu2qa2RZ
- c1DrhF34a+Csoi+vT4EUYO0+4xKiF8YOMizxAlKGcApGxu40IScrCMjDyBs9KNejPR3u
- trRQps162HvXm6j7b28J/3nRr9Yi66ylBRRWnGbUBXOWcrY20uPsHtcin6UWbkpcZZ0i
- feGJMI9X0hLjFhry92wvu/A9vREhpouYaH6YvTZsvR4EVYoNOkROZD0+BrfAkDsDa+p6
- Bxiw==
-X-Gm-Message-State: AOJu0Yz0XUQtZwykL0TPxb7+wT1X63f4jPr7pvQplZy8qfJwtav9AAwc
- Ilb5gltRW2Q0Dl989AhlnHxpxlV3uETFvmcSCGICiCmN4C47jamz
-X-Gm-Gg: ASbGncvS2oJfkq7y/EXqfX1QkjiXzWHFX3wTcQlKBcCrSj6DApufmOmXOrfyMO4rt4N
- yPcRefTLeJRHlOYFW7DA2xZjBUI8zYCo75REyVFYSaliTX6EjG4afvRY59e0fbCRTNrwrpI0XOR
- yihP1IEFvM+Ml16jjDIAIH79geuL2Ayj4BdVa5J92teUQrGKeF7CMM7zbvLwUNiT0anTcL3EGqQ
- NJrikiz/OMG1jCh2aqjHqoColPmZIEAUJgp6Ku2qIHi5zdf
-X-Google-Smtp-Source: AGHT+IHMP5WKl0FA49xna8PdV3jzMuKVCbFk+w2o6VXMt/F+L23efFXwTakokjga4RZ3NY3r4y/45A==
-X-Received: by 2002:a17:906:7947:b0:aa5:b8dd:fec4 with SMTP id
- a640c23a62f3a-aa6c40bc8f9mr249185166b.4.1733998899104; 
- Thu, 12 Dec 2024 02:21:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733999166; x=1734603966;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9h54Ise4N7qkCGYW0oBoLQcFq5FzwBRfUlWHThAIzuI=;
+ b=msC9vOWi5BdHNT+d0osOlGYBnLeNCPoBuwgKuiF/Rv0NW50R6wtgVK1ZPTgSz9Wy3H
+ jta68IRKIknNPtUPg0t2Cy7jGRLezOpHRXmCCjL11/bwORwU8yMjSDFhofNQEPeySiC8
+ dPiXs0AZbmdlLjx8rwaY2fbP7/yepbqo19cquiy2NKYr+CphCGuGv/bNBbheLCq+HDBD
+ le4v1psNTV8IzsnhndYw6qleg2atUcAxja7ndh/5otBf0LRCa9mNgyfgR7qCQF71NXeR
+ MOUB8iUPhdtaHbj8ZJJjgnu+aNVf3mihmkghK8xH3kiPeFQNJ7J7CS2cU1YbsemRxWTq
+ K85Q==
+X-Gm-Message-State: AOJu0YzlAlhYOrg8JaOAnhWb0vL5L/Y+sC3nKlne6gwPWJjeYOF1yEbO
+ tbVJ092KgtAz6ABtybhXEUYfSHj4kvCam/75WT2cg44Xe2w6tCgg
+X-Gm-Gg: ASbGncvYVGk+vckZ7Z0mKBShSAeOe7I5Hn5rM+I9zoFpBSTAr7bz2CObkq3IOk0DunQ
+ 7LsGDSDyyxtggB9cQ3fUW/i35+oP5GYed3qD57x3PYH4bfP632dLio2oR367T6gC3GttrYva7lr
+ IrtzZrlQBBtTcym58DiY3ZXSfQiJQF7F54jkAX2EAcDYBXmpuHJDa3janenLzc1IYE1BWuVjduf
+ 1eKqhYkC8kpljjMZBOgGt6JCpCHrDgdxcRVmLMwzv/4TaD8
+X-Google-Smtp-Source: AGHT+IH4qqh9U99avpQphcVOW8bEqDbhd0bgZChO5FDGIy1kW5hvR7xVBTCS1UrhMuBXAlEqX/zTjg==
+X-Received: by 2002:a05:6402:3586:b0:5d0:b60a:2ff6 with SMTP id
+ 4fb4d7f45d1cf-5d4fa1b2fe9mr602188a12.22.1733999166110; 
+ Thu, 12 Dec 2024 02:26:06 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67d6fcd3dsm646818066b.80.2024.12.12.02.21.38
+ 4fb4d7f45d1cf-5d3f4ecdd02sm6172037a12.81.2024.12.12.02.26.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 02:21:38 -0800 (PST)
+ Thu, 12 Dec 2024 02:26:05 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
- Peter Robinson <pbrobinson@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 12/12] ARM: tegra: endeavoru: adjust panel node
-Date: Thu, 12 Dec 2024 12:21:19 +0200
-Message-ID: <20241212102119.6466-13-clamor95@gmail.com>
+Subject: [PATCH v1 0/2] Tegra 4: add support for Asus TF701T and Nvidia
+ Tegratab
+Date: Thu, 12 Dec 2024 12:25:54 +0200
+Message-ID: <20241212102556.6891-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241212102119.6466-1-clamor95@gmail.com>
-References: <20241212102119.6466-1-clamor95@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,54 +94,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind panel in Linux-style, as DSI child.
+Add support for Asus TF701T and Nvidia Tegratab Tegra 4 devices.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/arm/dts/tegra30-htc-endeavoru.dts | 23 +++++++++++------------
- 1 file changed, 11 insertions(+), 12 deletions(-)
+Svyatoslav Ryhel (2):
+  board: asus: transformer: add ASUS Transformer Pad TF701T support
+  board: nvidia: tegratab: add Nvidia Tegra Note 7 support
 
-diff --git a/arch/arm/dts/tegra30-htc-endeavoru.dts b/arch/arm/dts/tegra30-htc-endeavoru.dts
-index dbff795bd89..8a0ba3c07cc 100644
---- a/arch/arm/dts/tegra30-htc-endeavoru.dts
-+++ b/arch/arm/dts/tegra30-htc-endeavoru.dts
-@@ -48,7 +48,17 @@
- 
- 			avdd-dsi-csi-supply = <&avdd_dsi_csi>;
- 
--			panel = <&panel>;
-+			panel@0 {
-+				compatible = "htc,edge-panel";
-+				reg = <0>;
-+
-+				reset-gpios = <&gpio TEGRA_GPIO(N, 6) GPIO_ACTIVE_LOW>;
-+
-+				vdd-supply = <&vdd_3v3_panel>;
-+				vddio-supply = <&vdd_1v8_panel>;
-+
-+				backlight = <&backlight>;
-+			};
- 		};
- 	};
- 
-@@ -1292,17 +1302,6 @@
- 		};
- 	};
- 
--	panel: panel {
--		compatible = "htc,edge-panel";
--
--		reset-gpios = <&gpio TEGRA_GPIO(N, 6) GPIO_ACTIVE_LOW>;
--
--		vdd-supply = <&vdd_3v3_panel>;
--		vddio-supply = <&vdd_1v8_panel>;
--
--		backlight = <&backlight>;
--	};
--
- 	vcore_emmc: regulator-emmc {
- 		compatible = "regulator-fixed";
- 		regulator-name = "vdd_2v85_sdmmc";
+ arch/arm/dts/Makefile                         |    2 +
+ arch/arm/dts/tegra114-asus-tf701t.dts         | 1256 +++++++++++++++++
+ arch/arm/dts/tegra114-nvidia-tegratab.dts     | 1050 ++++++++++++++
+ arch/arm/mach-tegra/tegra114/Kconfig          |   10 +
+ board/asus/transformer-t114/Kconfig           |   12 +
+ board/asus/transformer-t114/MAINTAINERS       |    8 +
+ board/asus/transformer-t114/Makefile          |   10 +
+ .../transformer-t114/transformer-t114-spl.c   |   42 +
+ .../asus/transformer-t114/transformer-t114.c  |   57 +
+ .../transformer-t114/transformer-t114.env     |   15 +
+ board/nvidia/tegratab/Kconfig                 |   12 +
+ board/nvidia/tegratab/MAINTAINERS             |    8 +
+ board/nvidia/tegratab/Makefile                |   10 +
+ board/nvidia/tegratab/tegratab-spl.c          |   42 +
+ board/nvidia/tegratab/tegratab.c              |   56 +
+ board/nvidia/tegratab/tegratab.env            |   15 +
+ configs/tegratab_defconfig                    |   82 ++
+ configs/tf701t_defconfig                      |   87 ++
+ doc/board/asus/index.rst                      |    1 +
+ doc/board/asus/transformer_t114.rst           |   72 +
+ doc/board/index.rst                           |    1 +
+ doc/board/nvidia/index.rst                    |    9 +
+ doc/board/nvidia/tegratab.rst                 |   72 +
+ include/configs/tegratab.h                    |   25 +
+ include/configs/transformer-t114.h            |   25 +
+ 25 files changed, 2979 insertions(+)
+ create mode 100644 arch/arm/dts/tegra114-asus-tf701t.dts
+ create mode 100644 arch/arm/dts/tegra114-nvidia-tegratab.dts
+ create mode 100644 board/asus/transformer-t114/Kconfig
+ create mode 100644 board/asus/transformer-t114/MAINTAINERS
+ create mode 100644 board/asus/transformer-t114/Makefile
+ create mode 100644 board/asus/transformer-t114/transformer-t114-spl.c
+ create mode 100644 board/asus/transformer-t114/transformer-t114.c
+ create mode 100644 board/asus/transformer-t114/transformer-t114.env
+ create mode 100644 board/nvidia/tegratab/Kconfig
+ create mode 100644 board/nvidia/tegratab/MAINTAINERS
+ create mode 100644 board/nvidia/tegratab/Makefile
+ create mode 100644 board/nvidia/tegratab/tegratab-spl.c
+ create mode 100644 board/nvidia/tegratab/tegratab.c
+ create mode 100644 board/nvidia/tegratab/tegratab.env
+ create mode 100644 configs/tegratab_defconfig
+ create mode 100644 configs/tf701t_defconfig
+ create mode 100644 doc/board/asus/transformer_t114.rst
+ create mode 100644 doc/board/nvidia/index.rst
+ create mode 100644 doc/board/nvidia/tegratab.rst
+ create mode 100644 include/configs/tegratab.h
+ create mode 100644 include/configs/transformer-t114.h
+
 -- 
 2.43.0
 
