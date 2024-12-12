@@ -4,74 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12983E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 17:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E35E7717F
+	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 17:25:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 920CE801CF;
-	Thu, 12 Dec 2024 18:09:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D19B3801BF;
+	Thu, 12 Dec 2024 18:25:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fxT115Bh";
+	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="W/wbeVNQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7121B801F5; Thu, 12 Dec 2024 18:09:14 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 40B7B801FE; Thu, 12 Dec 2024 18:25:36 +0100 (CET)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8400B801BF
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 18:09:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12325801B0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 18:25:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6efe4324f96so7066047b3.1
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 09:09:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734023350; x=1734628150; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cXx6Vw9lVghxP2kWrVDJmhyK6mzNDjkr1kUXkCZlf5A=;
- b=fxT115BhSTHtYU0usAAvfRXuuadaGzZZvInhJ+T2sfQxpmuyOweWRbJDgvnUNNnh6g
- UadsDlHDMlJCNluha2n/OmWzubcvf6Ul/QLhmvSkaVQbGOuf3CCppIwwDaDm6Wd2wWr+
- sX68JtB/gZwsAvT5CvT8m54g7I8V6pphCEVkj8xUFP+IlP4hjSITPuzLkzC2pSjfXZ6e
- eocjypJGg8bdqYdO86mwa+0qmSxbPkUlUpsl7MKFtfvQ/LSEM9GjQ/w5GSgSenKwj3BD
- u/NNwx1LrFEDJXendkmts8zWxpzLjxOpC/XPzJGtRqors3LzHwNYo+1JxlJDLOV2Es0v
- zHKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734023350; x=1734628150;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cXx6Vw9lVghxP2kWrVDJmhyK6mzNDjkr1kUXkCZlf5A=;
- b=kVheQ6ehPSDkoMVKpEz7xV7vX+PCvbkjMdGOIZVCqArZ/xXx3UPlG8b7Fh5pRvWaZ6
- 23WezGKdZOxUc28TA0qW5NP5OcIcLE9WXe5Mh19vSzmGhP+6k7qOujVwVLkhY+4EPPyD
- hCwQID0lOYnjJeGQFNVcSK0K91adHeDEABe2P5V3YfyyyL39VI9+RhGi+ipK7SwDzpQO
- fwcGsYJjzIa+Um3scBaO8THiJPAKBz0efwvb7G2D80e2wTKXsmsa5ZmOcGqOpuJ62L32
- KmA3jbvAdtGmO9NlYhZNBxoRCUW/Yt5l6GZYhqV67duwMfkyKUpK1ePMCBcno0AKi1eU
- pqWA==
-X-Gm-Message-State: AOJu0YyXxrpx588GP4qkOuhFICm86lRHeFAkeOj5YN0D7tRT9mPXboy4
- gBf4+UhomhjuGOOx/WXuOi0nXglLF5Q1xVoLrMLuxhhpfs6bAnOtsFvaAC1c/TvMslJX5UiVYAV
- YiqC+e8nNwQLdqgFJldNK07AT39+q/wmO8rUEHA==
-X-Gm-Gg: ASbGncuOCwy/J9cws4LaSoXMT6YzK/46fgV6+UiWuaASGLF6YqjD4uyleta9hQ+ujCd
- NN/WItESr0QnbHsL6FQTai5zGHFrtB92OatW6CQ==
-X-Google-Smtp-Source: AGHT+IGe43vnA9Yk2D7XdPcrak7iYUH8I+qRbJgRM/aA+bIIqBczO1oRnLouMvJ4cxKRdNQTLWQhEKWqINo4ceNIH+M=
-X-Received: by 2002:a05:690c:62c9:b0:6ef:66fd:5c93 with SMTP id
- 00721157ae682-6f2753946bfmr11710177b3.41.1734023350376; Thu, 12 Dec 2024
- 09:09:10 -0800 (PST)
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 20241212172533682635317660639d34 for <u-boot@lists.denx.de>;
+ Thu, 12 Dec 2024 18:25:33 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
+ d=siemens.com; i=alexander.sverdlin@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=9Kp+3JKY3GkIruGfWZm3AE5mUd4RzbiVbF5A8JxSw9o=;
+ b=W/wbeVNQ/t6g0jT4PJA+XpDfc7PfAmy3lpnkGB45U5eCTehcn1ULb5W7fQYWm6kF5cZSaW
+ TyApyWVfJ2Nf8s6JtUuUmsaVolJ6pzCg56RhL6lVGzYcTYfbj1bYcNL68ZpnDAhGO79OxYaz
+ EPQ6TlIl2Yi5BTw0evg2oji6xxEzpUrpja6wI8xMXs92EZmDOxFdOnhdqwF1H7m8nTshdqyQ
+ glpKZtP5I3BiP4ucrIV3DIbjBCKBdq2TuNaA8KoG/E4b8EtK824uqlJDt8KoDJOWau9hzDDx
+ zth7h4KHV/Aeh8zoUM20MwLIpOruFxWO+uPmj+ir6BScSmsyIeXgXTVQ==;
+From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Heiko Schocher <hs@denx.de>
+Subject: [PATCH] net: fec: phy: Don't advertise Gbit on (R)MII
+Date: Thu, 12 Dec 2024 18:25:24 +0100
+Message-ID: <20241212172530.2551014-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
-References: <20241212151142.1562825-1-trini@konsulko.com>
- <Z1sQpA6eTeh9lbys@hera> <20241212170210.GG1505244@bill-the-cat>
-In-Reply-To: <20241212170210.GG1505244@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 12 Dec 2024 19:08:34 +0200
-Message-ID: <CAC_iWjKexG6TDn8OGvyVrwUVNjDbCpCptpwtXkW1-E9hFs2Ksg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,133 +68,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Dec 2024 at 19:02, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Dec 12, 2024 at 06:34:44PM +0200, Ilias Apalodimas wrote:
-> > Hi Tom,
-> >
-> > On Thu, Dec 12, 2024 at 09:11:41AM -0600, Tom Rini wrote:
-> > > Introduce an option to control if we expect that a prior stage has
-> > > created a bloblist already and thus it is safe to scan the address. We
-> > > need to have this be configurable because we do not (and cannot) know if
-> > > the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or some special
-> > > on-chip memory and so it may or may not be safe to read from this
-> > > address this early.
-> >
-> > Yes this patch makes instead of making the OF_SEPARATE implicitly take
-> > priority
-> >
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > > Cc: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
-> > >  lib/fdtdec.c   | 11 +++--------
-> > >  2 files changed, 35 insertions(+), 8 deletions(-)
-> > >
-> > > diff --git a/common/Kconfig b/common/Kconfig
-> > > index e8d89bf6eb9d..e8febad0f212 100644
-> > > --- a/common/Kconfig
-> > > +++ b/common/Kconfig
-> > > @@ -1077,6 +1077,14 @@ config BLOBLIST_SIZE
-> > >       is set up in the first part of U-Boot to run (TPL, SPL or U-Boot
-> > >       proper), and this sane bloblist is used for subsequent phases.
-> > >
-> > > +config BLOBLIST_PRIOR_STAGE
-> > > +   bool "Bloblist was created in a stage prior to U-Boot"
-> > > +   default y
-> > > +   depends on BLOBLIST_FIXED
-> > > +   help
-> > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created
-> > > +     before U-Boot is started.
-> > > +
-> > >  config BLOBLIST_SIZE_RELOC
-> > >     hex "Size of bloblist after relocation"
-> > >     default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
-> > > @@ -1117,6 +1125,14 @@ config SPL_BLOBLIST_ALLOC
-> > >
-> > >  endchoice
-> > >
-> > > +config SPL_BLOBLIST_PRIOR_STAGE
-> > > +   bool "Bloblist was created in a stage prior to SPL"
-> > > +   default y
-> > > +   depends on SPL_BLOBLIST_FIXED
-> > > +   help
-> > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
-> > > +     U-Boot SPL is started.
-> > > +
-> > >  endif # SPL_BLOBLIST
-> > >
-> > >  if TPL_BLOBLIST
-> > > @@ -1146,6 +1162,14 @@ config TPL_BLOBLIST_ALLOC
-> > >
-> > >  endchoice
-> > >
-> > > +config TPL_BLOBLIST_PRIOR_STAGE
-> > > +   bool "Bloblist was created in a stage prior to TPL"
-> > > +   default y
-> > > +   depends on TPL_BLOBLIST_FIXED
-> > > +   help
-> > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
-> > > +     U-Boot TPL is started.
-> > > +
-> > >  endif # TPL_BLOBLIST
-> > >
-> > >  if VPL_BLOBLIST
-> > > @@ -1175,6 +1199,14 @@ config VPL_BLOBLIST_ALLOC
-> > >
-> > >  endchoice
-> > >
-> > > +config VPL_BLOBLIST_PRIOR_STAGE
-> > > +   bool "Bloblist was created in a stage prior to VPL"
-> > > +   default y
-> > > +   depends on VPL_BLOBLIST_FIXED
-> > > +   help
-> > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR was created before
-> > > +     U-Boot VPL is started.
-> > > +
-> > >  endif # VPL_BLOBLIST
-> > >
-> > >  endmenu
-> > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > index b06559880296..29bddab4150c 100644
-> > > --- a/lib/fdtdec.c
-> > > +++ b/lib/fdtdec.c
-> > > @@ -1669,15 +1669,10 @@ int fdtdec_setup(void)
-> > >     int ret = -ENOENT;
-> > >
-> > >     /*
-> > > -    * If allowing a bloblist, check that first. There was discussion about
-> > > -    * adding an OF_BLOBLIST Kconfig, but this was rejected.
-> > > -    *
-> > > -    * The necessary test is whether the previous phase passed a bloblist,
-> > > -    * not whether this phase creates one.
-> > > +    * Only scan for a bloblist and then if that bloblist contains a device
-> > > +    * tree if we have been configured to expect one.
-> > >      */
-> > > -   if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > -       (xpl_prev_phase() != PHASE_TPL ||
-> > > -        !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > > +   if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE)) {
-> >
-> > Without wider context I am not sure but if that check can fold in
-> > bloblist_maybe_init() and return -X if the config isn't enabled, it's going
-> > to be easier to read
->
-> Hmm. We'd have:
->         if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) &&
->             !(ret = bloblist_maybe_init()) {
->                 /* We have a bloblist, see if it has FDT */
+From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-I mean move the check inside bloblist_maybe_init()
+Currently if a gigabit-capable PHY is connected to FEC via RMII or MII, it
+will advertise 1000FULL and 1000HALF to a link partner.
 
-Cheers
-/Ilias
->                 gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
->                 ....
->
-> And I don't think that reads better.
->
-> --
-> Tom
+Different problems may arise here:
+- usually with (R)MII between MAC and PHY the PHY's connection to magnetics
+would have only 2 pairs routed as well, otherwise a PHY can negotiate 1000
+speed and there will be no traffic possible;
+- but even if there is no way to negotiate 1000 speed in HW (only 2 signal
+pairs routed), it may take a lot of time for PHY to figure this out; in
+case of AD1300 it takes 17-20 seconds, which is waay longer than default
+4s PHY_ANEG_TIMEOUT.
+
+Use phy_set_supported() in such cases to disable gigabit advertised
+options.
+
+Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+---
+ drivers/net/fec_mxc.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+index eca681b16d1..7d2170ae72c 100644
+--- a/drivers/net/fec_mxc.c
++++ b/drivers/net/fec_mxc.c
+@@ -1162,6 +1162,7 @@ static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
+ {
+ 	struct phy_device *phydev = NULL;
+ 	int addr;
++	int ret;
+ 
+ 	addr = device_get_phy_addr(priv, dev);
+ #ifdef CFG_FEC_MXC_PHYADDR
+@@ -1175,6 +1176,17 @@ static int fec_phy_init(struct fec_priv *priv, struct udevice *dev)
+ 	if (!phydev)
+ 		return -ENODEV;
+ 
++	switch (priv->interface) {
++	case PHY_INTERFACE_MODE_MII:
++	case PHY_INTERFACE_MODE_RMII:
++		ret = phy_set_supported(phydev, SPEED_100);
++		if (ret)
++			return ret;
++		break;
++	default:
++		break;
++	}
++
+ 	priv->phydev = phydev;
+ 	priv->phydev->node = priv->phy_of_node;
+ 	phy_config(phydev);
+-- 
+2.47.1
+
