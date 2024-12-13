@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2395AE7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 10:23:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A17BE7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 10:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E946380219;
-	Fri, 13 Dec 2024 11:23:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4456080245;
+	Fri, 13 Dec 2024 11:23:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fqMoeuS1";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="n3IzRh6F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47799801FE; Fri, 13 Dec 2024 11:23:39 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
+ id E38E58022B; Fri, 13 Dec 2024 11:23:40 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 445508010E
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 11:23:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE977800DF
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 11:23:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mwalle@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 23276A42A2C;
- Fri, 13 Dec 2024 10:21:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C6B9CC4CED1;
- Fri, 13 Dec 2024 10:23:34 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id BD9D5A42A31;
+ Fri, 13 Dec 2024 10:21:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65210C4CED7;
+ Fri, 13 Dec 2024 10:23:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734085416;
- bh=wzvtGplHyeAXNEF0hdfug2A1kLixQUi/eiuN7psFxHY=;
+ s=k20201202; t=1734085417;
+ bh=vgU9NzIheGFg2OZkw8n7pTPh3MkzAg/V+NZzgWgfqAM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fqMoeuS1YptrMEJekcv6WOwj4rQSGoVaLZ+AS3tJe/QVB7oKa3xUjfHJup0nE/QbS
- 9LofDwr8jxvR0aGqM+5NmP6HlQj4NpFDIbjsxziQsqIiRARm/7jq2WjRKsDgScNIZm
- dqCfVqPObqwrcWZdLQDGwK6NQSfPhBwM1mrNRsbmYYyC+GvVSwqNmfNiUixiFoEpzR
- L6qXc+ThJMjSZCsTD22jLTyvH0P7TFxO+qJ5S+Ildf2xP2qz0Dn0bIy+RwC04YKkcQ
- p7v1vCeuomuk6Gjeh3Nrf3DTDsQMrhYcAY7z0g0PytjysQSMzAz5sMoYbXpSStQuMn
- fAD+Ho9aQ2bQg==
+ b=n3IzRh6FndsyiKaiW+0QJACefkxWJl34qHLAILN9S84x9kLCLtBSs57eUYdsgEMGe
+ eJWtKyCCTda/FR8ywWCxBA1iDxOuh0iZ65h17Pjr/MC9xIQgC98h5Q/Ptme9xBZKlm
+ 2oGtyNt9VqHBAqzDuQ5zNZozbRn4PiP5WOFkdjiyQ5ufWWjxRLlX1GfZGh6BHwwV4H
+ LUehltrw6owMZg2s1DBDDsILylMpfGCjDSAEkaNatubrnQI5ldOqbsDQkcmdJR3psY
+ UsTLA8GY3cILs9rJnQKVbkhUSjp+MGdWMKjb2RUOaFougKR/hfzwn1KT8N7lTntxJd
+ JECZMWj7WAPvg==
 From: Michael Walle <mwalle@kernel.org>
 To: Peng Fan <peng.fan@nxp.com>
 Cc: u-boot@lists.denx.de, heiko.thiery@gmail.com, thomas.schaefer@kontron.com,
  Michael Walle <mwalle@kernel.org>
-Subject: [PATCH 1/5] board: sl28: fix linking with disabled watchdog
-Date: Fri, 13 Dec 2024 11:23:17 +0100
-Message-Id: <20241213102321.2166920-2-mwalle@kernel.org>
+Subject: [PATCH 2/5] board: sl28: increase SPL_SYS_MALLOC_SIZE
+Date: Fri, 13 Dec 2024 11:23:18 +0100
+Message-Id: <20241213102321.2166920-3-mwalle@kernel.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241213102321.2166920-1-mwalle@kernel.org>
 References: <20241213102321.2166920-1-mwalle@kernel.org>
@@ -69,29 +68,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't have a reference to the driver used by
-uclass_get_device_by_driver() in stop_recovery_watchdog(). Fix it by not
-calling that function if the watchdog driver isn't enabled.
+Increase the malloc size to 2MiB because our FIT image exceeds the 1MiB
+limit either if BL31 mode is enabled or if another device tree is added
+to the image.
 
 Signed-off-by: Michael Walle <mwalle@kernel.org>
 ---
- board/kontron/sl28/sl28.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ configs/kontron_sl28_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
-index adfec8ba237..0baf5c63f18 100644
---- a/board/kontron/sl28/sl28.c
-+++ b/board/kontron/sl28/sl28.c
-@@ -156,7 +156,8 @@ int fsl_board_late_init(void)
- 	 * If the watchdog isn't enabled at reset (which is a configuration
- 	 * option) disabling it doesn't hurt either.
- 	 */
--	if (!IS_ENABLED(CONFIG_WATCHDOG_AUTOSTART))
-+	if (IS_ENABLED(CONFIG_WDT_SL28CPLD) &&
-+	    !IS_ENABLED(CONFIG_WATCHDOG_AUTOSTART))
- 		stop_recovery_watchdog();
- 
- 	return 0;
+diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
+index 35894a10cbe..eae06b546da 100644
+--- a/configs/kontron_sl28_defconfig
++++ b/configs/kontron_sl28_defconfig
+@@ -54,6 +54,7 @@ CONFIG_SPL_MAX_SIZE=0x20000
+ CONFIG_SPL_BOARD_INIT=y
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_SYS_MALLOC_SIZE=0x200000
+ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x900
+ CONFIG_SPL_MPC8XXX_INIT_DDR=y
 -- 
 2.39.5
 
