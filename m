@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52175E77180
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 12:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F18E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 12:48:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8B4E80224;
-	Fri, 13 Dec 2024 13:46:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4B08780137;
+	Fri, 13 Dec 2024 13:48:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YoMHb8zm";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Rb6Pw4TN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DEF080219; Fri, 13 Dec 2024 13:46:06 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 0416D80141; Fri, 13 Dec 2024 13:48:50 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 746F880083
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 13:46:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 527F48012C
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 13:48:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4361d5dcf5bso17931705e9.3
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:46:04 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4362bae4d7dso3892095e9.1
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:48:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734093964; x=1734698764; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FemKKIYzALdLpYA70zP6qxDBZOd7zFXuN0pcldeuz44=;
- b=YoMHb8zmUTgadcgBGfCaTNYsY8cou6PyYHVGa+C4GUQULLJ4t5YmEs0tTYKzWlQSSF
- Hv/32sd0HMiV7ZQA6yRLlKWEYwVapepqaPu4nq4GkpgwqG6++NbDKzGSI6WzGnxzRh2G
- qHO2+5FlQllQaVA7mxPmsBr7HNr7RpUWiNtYHm6jJfZoVogME7y/DpryaE1p83pj16Ka
- QZcbaSLXdJ/vG7WLMT7BPh59DCShz49km6RKQ4jEgPk0ahkQKXs6cTpdLjYXoMhU39vw
- QUyj+p8CI18PoTmglRHYU1VLgmxONytnZXxV2eiFtHyb5ratWhkMWhVH8roEkkyKaP+4
- XVpQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734094127; x=1734698927;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=NIf9g74E5fPVZx/A+HVu76TbRYpP0Y8CBaYYb4HbBDU=;
+ b=Rb6Pw4TNYCbGJiLb0ODzfzHX5GgEi22Vy5aUVr+8H88v06LBq3XOQdRYOg7gNbW6R5
+ XYhipG7YjWPtM20Am6ffuZ+/4G6xw9hkLHKhGiLFGPlNzBQFheHFjxoYlbLOxz5Ilwad
+ +gonVt5AxqCi7NNv6oJYZ2F7Uu4t6q6RdfIVTsNpIdBUG6G8JWEd35b4PpUZqZdN/wxi
+ pKaNqRxHczx+ES/ALD9V4ToA77nUzfX4npWrWYTTob/Vgnxiqa1DkqmROV5Pz+dzMqzG
+ 9VTWYRYstsmgxrR+usXmbbQfxbFP2kVb+OqIq19uefyFQJ7LDJ7gCxPtoO4sbmeGGzF4
+ 008Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734093964; x=1734698764;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1734094127; x=1734698927;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FemKKIYzALdLpYA70zP6qxDBZOd7zFXuN0pcldeuz44=;
- b=ZP4aXPrVRZQOmWVGyy81LOYxAdcpA0QFofC7flxNOcAliHTNBelEg/pBTRU0XTrSlu
- r/JbyDfQ0OtBNy/lNkcHAEXwvXWsYLHvc5icOePTE4F88n7HODT79bHWXkVpWsrWXtWZ
- UPIbsHzBaCKRDlrl72lWffBtIZpcvN+jLHCOV4xJeldAoWAvlKtj5Pkj/gCe/8IwToM3
- OtQvM2Ydg4f99SNZzU1F4pqjkawcinmCmFnLuPf8q8wblbWfIFGenFq8HpIIQvlw5Koz
- mmNF5eVTR8I3iiNip9R7rA5uGC9S45yuAR/aktm4qy7x5FGPEWAOLlaNgfpz0SfAPXJY
- xokw==
-X-Gm-Message-State: AOJu0YzjljzrSKt6jc0rmn3Xt8DzkqrU8/zdUVhGLJ15H5rxq1aUC6ul
- OeLnrVYkiQZPexGPH4dRtgnXfTYZ7Z3J48HwA4Tjw4E+mahw0C4xoIZB2rzBlWOZMUC6BzvkxdW
- hLqo=
-X-Gm-Gg: ASbGncsiYsqW7f4GHEfV7pMvgM+TGKmEGdiDV6lR1jGHgxOQMNYq3ZzPSnF/Qhxqwmd
- +DRehMgy7ojfGSVoXfB8mydiZpuflZsTe58x6d0RQ/wNx4cS20ou6bpDElJ2RGNs/jYa54tnCJK
- qiyYkdXkgjVm656rIVShh3wYfwpVTSDlW03J6731Nnq29Pvv/4ya1JxQX49T29hLXqYn0ZXZdkq
- Chbj0l4FpEgI+cdT8MBksNCvWGvP5ucjaoNAYgLJwr6ySO7IEaKaDLTVnn6aMFZHQ==
-X-Google-Smtp-Source: AGHT+IEZgN2zaMg9sPpb8xciSnoqxLj79bnetOxc93La+HXU1CU2U9DfwAtCFeIAJVY0qihVTlD5OQ==
-X-Received: by 2002:a05:600c:1da6:b0:434:a7e3:db5c with SMTP id
- 5b1f17b1804b1-4362aa27ef1mr19202095e9.11.1734093963765; 
- Fri, 13 Dec 2024 04:46:03 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:3390:8f2f:2eb7:90a7])
+ bh=NIf9g74E5fPVZx/A+HVu76TbRYpP0Y8CBaYYb4HbBDU=;
+ b=cnEDQLM93LVBru051jcfdsj9tOlCYeYQwvxzNco42bWawjxTpdFMfU597ITqZqOvnL
+ /UC9ebzn7rdn2T4DS9E5Nz4wy9taRv+z3UBI7Ywg3XOOKxna/XB6gbZljF1I77iVgxdm
+ ZjAOe8/67xT5CCIsUcsyP83Hb/TpfruUkUGgWoXmwn8+CehVovs8/tdpz4VRl5d/5K/f
+ Cxs3d4Im3dPf2oL4raPK2y0f+6JkrCdTtH4SCLFQiokkNN1RNgW1l05zeW1TnljtuaUz
+ RUlel7oz/OBw6o3WA2IP9bd1bskeK0h4y5oEin7i54W7rbNN07hU5sLXMZNljoHC6uPy
+ i5wQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4+YIodWK5vyz0QFghbZDJUz/O535hEHRWIjArLd4eb9n0MvqqJo2Na5V8JtbFWhmjf0aZa7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxR/G5QZV4V4q7aV5JLpHkvWLTNjyF/RfNe6w7zVwsZZSM6yat6
+ MhtDxCg5u9acuSPAB2ADkD0PCxhYuQ19vozFM7wUf0PDKMmllxcCnaDPJSFyqgM=
+X-Gm-Gg: ASbGncuUu8s1jz0L2f3VEmJb/bGFPiHMRpgkqPsY3halkMjkyJCvDXuR6OC9r5bjMgO
+ CG3cn2pD1VbXigTsSMCL7MreWZx7wxIfONS0Zb2gXu2jnfbohzHwCe2BFzWJJCoDtau3uIclYBY
+ WNOezwINC9CF9yzzDCym9LPNgnm9hbjghTvD/EqJj+OcRslYcAef1QAEJ/gW4qlJxYKABXI1pu/
+ 2qRmCNNRYlpZ0TcWFCmfacJJj6F+75+rEO6G/irt5KLpdunLusto5Tuj6HYfngAbA==
+X-Google-Smtp-Source: AGHT+IE7sKSfQvZ7YrnJISeKSeUttUuKTQ/ne1otx8/ZcywQV5sSjS9j954nupO5PRe/midgPfN2+g==
+X-Received: by 2002:a05:600c:1da1:b0:431:547e:81d0 with SMTP id
+ 5b1f17b1804b1-4362aa4386dmr20693135e9.11.1734094126676; 
+ Fri, 13 Dec 2024 04:48:46 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3878248e54dsm7050988f8f.19.2024.12.13.04.46.03
+ 5b1f17b1804b1-436256e02b7sm48601365e9.37.2024.12.13.04.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 04:46:03 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH v2 3/3] trace: document 'trace wipe'
-Date: Fri, 13 Dec 2024 13:45:38 +0100
-Message-ID: <1833d3884f623ef66b81443be87b773b1e896498.1734093566.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1734093566.git.jerome.forissier@linaro.org>
-References: <cover.1734093566.git.jerome.forissier@linaro.org>
+ Fri, 13 Dec 2024 04:48:45 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, trini@konsulko.com, sjg@chromium.org,
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
+ xypron.glpk@gmx.de, jerome.forissier@linaro.org, akashi.tkhro@gmail.com,
+ francis.laniel@amarulasolutions.com, ddrokosov@salutedevices.com,
+ git@amd.com
+Subject: Re: [PATCH v2 1/2] cmd: Add support for optee hello world ta command
+In-Reply-To: <20241213110034.1113036-2-venkatesh.abbarapu@amd.com>
+References: <20241213110034.1113036-1-venkatesh.abbarapu@amd.com>
+ <20241213110034.1113036-2-venkatesh.abbarapu@amd.com>
+Date: Fri, 13 Dec 2024 13:48:44 +0100
+Message-ID: <87a5czg34j.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,35 +102,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation for the 'trace wipe' command.
+Hi Venkatesh,
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- doc/develop/trace.rst | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+Thank you for the patch.
 
-diff --git a/doc/develop/trace.rst b/doc/develop/trace.rst
-index 546862020b1..d3c8628d124 100644
---- a/doc/develop/trace.rst
-+++ b/doc/develop/trace.rst
-@@ -163,6 +163,17 @@ you will see the time taken by each function shown against its exit record.
-               u-boot-1     [000]     3.116466: funcgraph_entry:        0.063 us   |        memset();
-               u-boot-1     [000]     3.116539: funcgraph_exit:         0.143 us   |        }
- 
-+The `trace wipe` command may be used to clear the trace buffer. It leaves
-+tracing in its current enable state. This command is convenient when tracing a
-+single command, for example:
-+
-+.. code-block:: console
-+
-+   => trace pause; trace wipe
-+   => trace resume; dhcp; trace pause
-+   => trace stats
-+   ...
-+
- Flame graph
- -----------
- 
--- 
-2.43.0
+On ven., d=C3=A9c. 13, 2024 at 16:30, Venkatesh Yadav Abbarapu <venkatesh.a=
+bbarapu@amd.com> wrote:
 
+> Enable "optee hello" command which increments the value passed.
+> This provides easy test for establishing a session with OP-TEE
+> TA and verify.
+>
+> It includes following subcommands:
+> optee hello
+> optee hello <value>; value to increment via OP-TEE HELLO
+> WORLD TA.
+>
+> To enable the OP-TEE side HELLO WORLD example please refer
+> https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee=
+_examples.html
+>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>  cmd/Kconfig                |   8 +++
+>  cmd/Makefile               |   1 +
+>  cmd/optee_hello_world_ta.c | 104 +++++++++++++++++++++++++++++++++++++
+>  3 files changed, 113 insertions(+)
+>  create mode 100644 cmd/optee_hello_world_ta.c
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 1d7ddb4ed36..f1f8d1b9571 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1446,6 +1446,14 @@ config CMD_OPTEE_RPMB
+>  	  in the Replay Protection Memory Block partition in eMMC by
+>  	  using Persistent Objects in OPTEE
+>=20=20
+> +config CMD_OPTEE_HELLO_WORLD
+
+If CMD_OPTEE_HELLO_WORLD has hello as a subcommand and we plan to add
+other commands, shouldn't we give this Kconfig symbol a more generic
+name?
+
+How about CMD_OPTEE or CMD_OPTEE_TEST?
+
+Maybe others have better recommendations for the naming.
+
+> +	bool "Enable Hello world TA"
+> +	depends on OPTEE
+> +	default y
+
+Are we sure we want this enabled by default for everyone?
+It seems indeed like a nice debugging tool, but maybe keep it opt-in?
+
+> +	help
+> +	 Enable the hello world ta command to test the OPTEE by passing
+
+OPTEE -> OP-TEE
+
+> +	 a "value" which should increment by OPTEE TA example.
+
+Ditto
+
+> +
+>  config CMD_MTD
+>  	bool "mtd"
+>  	depends on MTD
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index d1f369deec0..049147a1442 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -118,6 +118,7 @@ obj-$(CONFIG_CMD_PAUSE) +=3D pause.o
+>  obj-$(CONFIG_CMD_SLEEP) +=3D sleep.o
+>  obj-$(CONFIG_CMD_MMC) +=3D mmc.o
+>  obj-$(CONFIG_CMD_OPTEE_RPMB) +=3D optee_rpmb.o
+> +obj-$(CONFIG_CMD_OPTEE_HELLO_WORLD) +=3D optee_hello_world_ta.o
+
+Similar remark for the file name.
+
+>  obj-$(CONFIG_CMD_MP) +=3D mp.o
+>  obj-$(CONFIG_CMD_MTD) +=3D mtd.o
+>  obj-$(CONFIG_CMD_MTDPARTS) +=3D mtdparts.o
+> diff --git a/cmd/optee_hello_world_ta.c b/cmd/optee_hello_world_ta.c
+> new file mode 100644
+> index 00000000000..7c398bcad2c
+> --- /dev/null
+> +++ b/cmd/optee_hello_world_ta.c
+> @@ -0,0 +1,104 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * (C) Copyright 2024, Advanced Micro Devices, Inc.
+> + */
+> +#include <command.h>
+> +#include <errno.h>
+> +#include <tee.h>
+> +#include <vsprintf.h>
+> +
+> +static struct udevice *tee;
+> +static u32 session;
+> +
+> +#define TA_HELLO_WORLD_CMD_INC_VALUE 0
+> +/* This needs to match the UUID of the Hello World TA. */
+> +#define TA_HELLO_WORLD_UUID \
+> +	{ 0x8aaaf200, 0x2450, 0x11e4, \
+> +	{ 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} }
+> +
+> +static int hello_world_ta_open_session(void)
+> +{
+> +	const struct tee_optee_ta_uuid uuid =3D TA_HELLO_WORLD_UUID;
+> +	struct tee_open_session_arg arg;
+> +	int rc;
+> +
+> +	tee =3D tee_find_device(tee, NULL, NULL, NULL);
+> +	if (!tee)
+> +		return -ENODEV;
+> +
+> +	memset(&arg, 0, sizeof(arg));
+> +	tee_optee_ta_uuid_to_octets(arg.uuid, &uuid);
+> +	rc =3D tee_open_session(tee, &arg, 0, NULL);
+> +	if (rc !=3D 0)
+> +		session =3D arg.session;
+> +
+> +	return 0;
+> +}
+> +
+> +static int hello_world_ta(unsigned int value)
+> +{
+> +	struct tee_param param[2];
+> +	struct tee_invoke_arg arg;
+> +	int status =3D -EACCES;
+> +
+> +	printf("The Hello World TA is going to be called\n");
+> +
+> +	status =3D hello_world_ta_open_session();
+> +	if (status) {
+> +		printf("hello_world_ta_open_session failed(%d)", status);
+> +		return status;
+> +	}
+> +
+> +	arg.func =3D TA_HELLO_WORLD_CMD_INC_VALUE;
+> +	arg.session =3D session;
+> +
+> +	param[0].attr =3D TEE_PARAM_ATTR_TYPE_VALUE_INOUT;
+> +	param[0].u.value.a =3D value;
+> +
+> +	printf("TA value: %d\n", (int)param[0].u.value.a);
+> +
+> +	tee_invoke_func(tee, &arg, 1, param);
+> +
+> +	printf("TA value: %d\n", (int)param[0].u.value.a);
+> +
+> +	tee_invoke_func(tee, &arg, 1, param);
+> +
+> +	printf("TA value: %d\n", (int)param[0].u.value.a);
+> +
+> +	status =3D tee_close_session(tee, session);
+> +
+> +	return status;
+> +}
+> +
+> +static int do_optee_hello_world_ta(struct cmd_tbl *cmdtp, int flag, int =
+argc,
+> +				   char * const argv[])
+> +{
+> +	int ret;
+> +	int value =3D 0;
+> +
+> +	if (argc !=3D cmdtp->maxargs && argv[1] !=3D NULL) {
+> +		debug("do_optee_hello_world_ta: incorrect parameters passed\n");
+> +		return CMD_RET_USAGE;
+> +	}
+> +
+> +	if (argv[1] !=3D NULL)
+> +		value =3D dectoul(argv[1], NULL);
+> +
+> +	ret =3D hello_world_ta(value);
+> +	if (ret)
+> +		return CMD_RET_FAILURE;
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+> +U_BOOT_LONGHELP(optee,
+> +		"- commands can be verified on OP-TEE\n\n"
+> +		"optee hello\n"
+> +		"optee hello <value>\n"
+> +		"\n"
+> +		"With:\n"
+> +		"\t<value>: integer value\n"
+> +		);
+> +
+> +U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
+> +			U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
+> --=20
+> 2.34.1
