@@ -4,89 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34975E7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293F7E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5676D8012C;
-	Fri, 13 Dec 2024 15:28:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C4088012C;
+	Fri, 13 Dec 2024 15:31:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nJp4OZ2q";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="IM9OOsVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 706C180137; Fri, 13 Dec 2024 15:28:51 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1B3B580137; Fri, 13 Dec 2024 15:31:08 +0100 (CET)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97C7D80104
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:28:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEC9480104
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:31:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b6edb82f85so223696285a.3
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:28:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734100127; x=1734704927; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1QlKkb7/jg+2EMw+IPiUQKIa5FHGBR/1x+phwjwG4Yk=;
- b=nJp4OZ2qEalBm42apr6kjx4DNax03emIcrBFSgr2u8jAyCu+KxxqF/WHyZ0i8WC8J7
- lwD4/mxdjVobWCSo2pC8MKeXM+E6uKADu0as4qqFk59/wnXP10k/TYQP996ayIoLf71p
- L1M2Mywb7lZwv2T7hXBEKFVshDmXJDRSKdcpU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734100127; x=1734704927;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1QlKkb7/jg+2EMw+IPiUQKIa5FHGBR/1x+phwjwG4Yk=;
- b=rguxD6GDfuizqAOFpR7aKRt8N5eEHvsZIY4sz5bqzP8Mp/bF+JpvClEROIdfZHT/IW
- XkUxztX27+elFjB35MDJFWbQ3qqM74qVQxjH/pN8PWO08Io2MvGLT3HM5ZpGy/htUKUy
- h6D/pDxaQcFOKaEXs8mwZTDtwqzUVPvTQv7zTUvT3XoBfSk7COAqwbFiBfVAP/8r8XZy
- LorIdBB+tx7IWMRKhSzGGqI8w8VEOcRWVtYNuDZUN8LHwqj/fbuK8vEb4UTWggNTQPHx
- 5yQKdBx9ZRYkSl5x+usnDory83c6Qkvx0Z/GST7U6uTKikEQ4mfeOJ0P/dGFv7dChknF
- EDLA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUyavHiQUkdynbSFVyGqP61F4lqFw0Q8aChRoyN7Wv+pGjQTwIcuDmTG0aAAGXI7FM50FGVpVA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxiF1T7j8XIg4+/q6uRwpD9U5g3bqSyNB3p+saNh64jCHKgKotU
- rJsarOE8ZnduzG7GAhVQ9GGPta3Ee1++IjB15sTWT8DeBWY1JhuyuV3xrzxp1g4aCSjabO9w5W3
- 7GlU=
-X-Gm-Gg: ASbGncvFjEUgj0azIMXUhCyW1386wtxT9GwRMsAVqbt7+0U/SVZMt9gDhSMbEscSsFP
- IHCmQyZw1jNV53bM5ibE7ZxSefzQZ9bCx6RF5+WqJ98EcBCryNjMud4SCJfedjgaBpmZCXEDE3F
- itm/pZP71I3iz4uyIoSb2l1NrOO+8nAz2Bsy8Ww+xQufRKF5ekU+viUwq67Ku2VDbMgQRhakbjw
- CyBxdD3P0fm4q6b4lYENdTwFHYe81lhZQIKlSU0LLZkJuiQ0/a8X2uW
-X-Google-Smtp-Source: AGHT+IHsNgjDCHpU08ZNDBCuoMuuM6iGfuviN5qO4qjWykqa/iTOcnTCokx4NgaG4ZyALyyijk+sLw==
-X-Received: by 2002:a05:622a:580f:b0:467:6fa1:9e2a with SMTP id
- d75a77b69052e-467a57fb30cmr54148901cf.40.1734100127310; 
- Fri, 13 Dec 2024 06:28:47 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46761e8c79bsm57507691cf.49.2024.12.13.06.28.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 06:28:46 -0800 (PST)
-Date: Fri, 13 Dec 2024 08:28:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
-Message-ID: <20241213142843.GT1505244@bill-the-cat>
-References: <20241212151142.1562825-1-trini@konsulko.com>
- <Z1sQpA6eTeh9lbys@hera> <20241212170210.GG1505244@bill-the-cat>
- <CAC_iWjKexG6TDn8OGvyVrwUVNjDbCpCptpwtXkW1-E9hFs2Ksg@mail.gmail.com>
- <20241212172745.GH1505244@bill-the-cat>
- <CAC_iWjJb=nXTf0PvzmZsocD9VX77SZiRTSpTwZY-HuSucw9fEQ@mail.gmail.com>
- <CAFLszTi+kx+U-xCEBJZpJD+W8LLtJHjKYaacNmLmHsCqeYQtZw@mail.gmail.com>
- <20241213140338.GR1505244@bill-the-cat>
- <CAFLszThj0trbN4wyCcVge18eYe8Qbw0Xt6CzUt4MmF+Smm-=1A@mail.gmail.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=dil9G7R0XLpqC6rKVbNaIWyjvJzQe3BFGDJTxS1Od/xfuxvHxSkGVKDB57QgiYvWWwBneJu9TK6AXeczqoaNrFv9OPpwJOJBP6E7N9MEhStYlMA7/6ZvHRZpCuCYinUON3nIDo/hRO/xnjJ8GcA02Xs3hemBLMoU8YEkmERqPhU2vzUrHYWq97xPRd4DnjucL8I/hXx2m+lyflUNq1j4Z62IJTI5hclXxevyewcTUrXP4ju/IjW5c0eSBO7mHB0igk+OvqnY1lswd2KP/V40w7NGeIygdgNE/kM5XWCxHhIUSSlJJ0T61kSr0EJ0EfuCeIFLfDP/JouH65pK4lVysg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7wC5cCSqiyPUN6H6bbwHkBLuQYEhLuMU6ziOJHFQVCw=;
+ b=KgqtuI4S8Gw/4WKjADqLE8LhfG0H0vxUE3rOjzhLl194OeebN4SbLkFUMfyNFWfXA/eaHXMXj7OcNYebqJpvtAnQMw3SgEGPb+u20TZrnQZeBtH+/yxK2sdUGvC1V9FmUgVUvvOgYIkoTJp3ksGJk5B4Ks1nlVWc3x4WkqSL+eQhJTzc7QU0+qBetPwtrTxkdYz1/OIdG2GZpgwuJBbUXSXjFJ5yId1k1+KSF7TMMc04TZx9W0OMq/kZDJwrs3o5sl01uUmtrGe92UlbwOh5ae5/L6UEGn54h8ejRrDgnI/lO5o7cObvmquMkD+96VCOnGwIB4OGW2K/KYkdNrMgxg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7wC5cCSqiyPUN6H6bbwHkBLuQYEhLuMU6ziOJHFQVCw=;
+ b=IM9OOsVeKCbVpYQn51xYYIYzpGp2kTCNu5li/ldhazMoM4QBDu7rpF5v9mRkN8TGbPbbFtBR1u7yiv/GcJ7WzEDji/QtHY0D5YfYKQxtPzEIWknogj+KF0VwMD/te8DQc5RMnIAuZElwqRT2Fhjb0giNltzwbAtzTi5SoebaUkk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by GV1PR04MB10155.eurprd04.prod.outlook.com (2603:10a6:150:1a8::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.16; Fri, 13 Dec
+ 2024 14:31:00 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%7]) with mapi id 15.20.8251.015; Fri, 13 Dec 2024
+ 14:30:59 +0000
+Message-ID: <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
+Date: Fri, 13 Dec 2024 15:30:58 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
+ in u-boot.rom image
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241212235735.164272-1-jonas@kwiboo.se>
+ <20241212235735.164272-7-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20241212235735.164272-7-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0174.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a0::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0dOdDaUsM8OoUu6J"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThj0trbN4wyCcVge18eYe8Qbw0Xt6CzUt4MmF+Smm-=1A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GV1PR04MB10155:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3d4c1509-eb29-42a9-ba0b-08dd1b82c35c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?akxWM2s1UXNrVlBLN0RrRGxpWXhYQ3Q2UTVIS0VJRGFKZGpVRnp1TnYvb1U5?=
+ =?utf-8?B?R2swU0xadTkxcFhGWi9aQlJlbysvaUtiR1dXRWxPdXVZNnhVMDJNTXJpL1VD?=
+ =?utf-8?B?cGRRSGpTTHZ0bjFHMTNZU1VzdFdBMUhSQTRtWmdRVGFRRk5jK0V2UjRTd0Uv?=
+ =?utf-8?B?YUJtSVBidkd5bldUcUpVdFJCazhHNEhTbGJ6cUp3NnlkM3AzUkNlMC83b3JP?=
+ =?utf-8?B?cFVLdWxpNG0rNXpsN25mVlNjaWFudit2K1E4NDNWcmxUZktNQzE0WHptU01R?=
+ =?utf-8?B?aFQvZGhac3FBOEVyM3BtRXdjLzBpcDR4a3dFd3Q0QzdTS1lqYkUvUU0yYVVu?=
+ =?utf-8?B?SHJzUlFMWEpUVGdJZFUzNzBicThjZWhzZ3FBWWhDZVlRQVJHbjJOY3pYRVJF?=
+ =?utf-8?B?Qm5heDkvV0YwM01NdGFzTTZQU2RvMlRkTEp2RTR3a05KcllDMmRyOHBRdWJR?=
+ =?utf-8?B?NG5ZdkhDUkJubXpqMGFTOUUySmp2bko4Q0dCV3Q0ZHo5SERvdUVDcFY5RnN0?=
+ =?utf-8?B?anlSb1ZSbHh5M0FSUDNXN2l2VHN4eXRwK2Y0SlZaRHZhUm9uTkw0LzRqMlYz?=
+ =?utf-8?B?Mjc3NjNiRGNFcFNjSGlsZVdEcC9oTjMzQk4zTXJLTjlJc2RrRHBYOGNXMklL?=
+ =?utf-8?B?TnZBNllKdXRsbHM4TUZkaUJwenczbVJsWjNoRTkwa3lLZ0Nqeno2VXoraVdn?=
+ =?utf-8?B?TkFVVkhtOG5NY0E2MHByNWZxT2hFcjB0bTZueHJGdSs5MkRGU3FnKzJXL2xP?=
+ =?utf-8?B?SGt3S3lYOUxLazhkdXhuY01UOStWZXBYK05xK2oxYU5acUdRWFlzcFYvS3F4?=
+ =?utf-8?B?VGdxbGJtV1FSdWhCVGpsNWZYN0k0VDVpOG1IVmFuaGJyYTJRdkdCUjhqT3lL?=
+ =?utf-8?B?ZHJJNFN2NDNKRUtNbDR3aG5FUDJWbHJCdTROZk5RZFVLTFZZZ0lmSWRHUTZx?=
+ =?utf-8?B?S2FIbFZ0bmFiUllJMHByQUlMQkU3Y0ZTNFdQeHpkTit6ZGsvbjV4TUxVNzVl?=
+ =?utf-8?B?aExFSWl6dGc4L2VnbGlsZU5Va3dTdEE2Umtsa3AzSDQxREhwblVZTW1Ja0xG?=
+ =?utf-8?B?VWZCQ294cGNvZFFMdC8rSVpOZmNoUTM4YUVwRUlTdGNOVWJoaEtyamZ1YnJn?=
+ =?utf-8?B?WDd3bWo2QUNoMXJ3TEZkWTFqL3VIbEluYXFYMGN1UEoxZHIwNUduVjJLRm55?=
+ =?utf-8?B?TVJacXMvM0prWWUwT0xQOXJQMmNDaFRIcnVVNHpyTmI4SFlLYS9QNUNwbXJl?=
+ =?utf-8?B?NDlwRVJQdmpROGRVbnJ4SmtkMXlQRklHR3liTEQvVWh0TmE4YWRVVEN6alJS?=
+ =?utf-8?B?cS9paVRTWmVZVjV1WGU2L2hSWko2NmIrZHFLcTd0TGxSZnZkUkVXVzhHbG1G?=
+ =?utf-8?B?ZVNPczFjbmdsSnRLT0UyYzVPWVRBQVJ4Q1g5a0RiOWs4a2RDUjBqQ3ZpT3NC?=
+ =?utf-8?B?YUg5Q2pZU0xkQ1NKSEUxalBBMllXVEZhTW1BMzlBeVVDNmg5ays3Vnd0dlpK?=
+ =?utf-8?B?UjZYa2N6Q2hHMS9mTXhjcCtkWGpsZ0RWRW1iSDRCMmNiWnpFZ0FES1V2S1Y5?=
+ =?utf-8?B?d2pkU2xPekFuNDd6NU9UUnV5cDF3TlR2Nm9ETTRQVEhDWjhlMEsxMUVnYWZ6?=
+ =?utf-8?B?QlQ5amduelpvMHlDNDFGTDJOSEc1Q2RSeDFIcXE4QkNreUVjU1RPTDA2QTEw?=
+ =?utf-8?B?U2tqNllsd0I1WUJDeXh3Z1l2ZHBVNU5HempzRWltRVRrM1FvZ3hRQkVtRWJ4?=
+ =?utf-8?B?UDVtdkhKUS9FTVd2M1N1T1BLRW1DcERFOTZzRm9rcXZKM0RhdVhHQWZIUUJS?=
+ =?utf-8?B?MDJlOVdYY1IvVzIwT3JwUT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?R3hYTDJtRFByQ0hTcUVTU2pSM3lMWmdOb01YdkZxcEdmV2ZTL1E5YXFtc1Ft?=
+ =?utf-8?B?cGl1Rkt4Sm9PS0R5a21EdHRpbHZLaG5XN2tOYk8waVFFb2xZbndDM2VXZVFF?=
+ =?utf-8?B?cDFuYkFMZ08xMjdrS1NudzAzT2ZtcVZLdVM1MVpaL0piN3dISTlwVlpoMzJT?=
+ =?utf-8?B?SEplNkVqZjQvSUV0TjNaNW92cVY4Q2x4UDEwcHBvVXpZS2U0VTNYVzFnQkwy?=
+ =?utf-8?B?MzR2d1NuV3Zpd3BGMXdLZGlMUzlmV25PcXZxcU05ek9VU0tObXZVSGliUFZQ?=
+ =?utf-8?B?S0JIdUt1YnFlakJheS9LeEI5Q1NQTGllOHE1YlF0NXZVcExLUFVTK1RwZGpK?=
+ =?utf-8?B?SmwraG8rR3g5aXdDV05ra3VKZnBqMnlpZFR2VHFPMlRiSWZxNjRHL1BpMDlM?=
+ =?utf-8?B?MVVPNUVpV1FqTUtJN1h1dnhEWCtaV1dLdGNoNGx2Y1h2SVQrRjRzQnJ1RGRB?=
+ =?utf-8?B?WXo5K3Yyd0FSMVI3SWhYS0orc3VQVnFqdjltYndhRFg3SEVEVGI4c0FUcDM1?=
+ =?utf-8?B?UnlIdmVVU3c5a0lEMEVTZnVFYy8raGhzR2JxSnB4TlB2UzlXc0NmQ2JXajJ5?=
+ =?utf-8?B?L1VSQkFYL2VXZVBRRFZsSkhUeWlnbXg2WXoreFRvQkZxSldKc1oySmxDeW1D?=
+ =?utf-8?B?ZXluWHBVaU1SM2xheXEzODErWGJDZ2tSMFZPSUNGVm9MbzhZTkVEUk9mUE9z?=
+ =?utf-8?B?cmJkdit6bXNEbytkd0FlYW8yU2ZoV2lVaStmNHpZTE5aZ0RvZ2RSWjRCUG1J?=
+ =?utf-8?B?Qm9jRHV2ODNhTnBhZWpxOVo0aTQyWVNDbjhMVGpMQ2NSY1hrZklGamlxMEN6?=
+ =?utf-8?B?TEROamh5R3lWMU9pUXFFVzV5YmZXUG91b2hpRWxRRXlwODhnV3ZJRVRMdnZU?=
+ =?utf-8?B?bkVpd3JMTnJjTGFOQTI0SFZQMm56akVmeEJDRVNoS1N4ODZoUjA3anZZQStp?=
+ =?utf-8?B?UmRiUTlqeVF3anBMb0JFbTZ5bmFhdXVYOWIxU0pZK1FuejZZZ3dUc1VrREwv?=
+ =?utf-8?B?MFgyTWNBNVYwcFJaL3g5Z1JaZUQ0a1FvZ3UwcmErSEV6emIyYVhVZFc4S2Mx?=
+ =?utf-8?B?U0lBbE51NXh1MlUyb3BLeGdIUEZaVEdjSUJZTlBUaWNRdk04MjBEZ3RWbEQ0?=
+ =?utf-8?B?SEVFSnpUeUx6TllqZ0JJOE56d1IvMG94UlFoU3JKUnlnQmxoVXIyQktTaWs3?=
+ =?utf-8?B?ZkRzaFBZcjdZN0I1MGRFNUk0dnpOaGJZOUhLZGJWMG9XRUdqQkVmMTJOUmk5?=
+ =?utf-8?B?dldWNEZXOW5HdjBlRmhMeTRhcG8xZHh3NlBBT1ZsQjRvNHN0NlgveHU2dEt5?=
+ =?utf-8?B?WEZqdkZ5NW94ODc1VXZSbm1IVW1CYVFUemxBeGgzRFU5anF4MEJ0QzVqQVJr?=
+ =?utf-8?B?dlExRzRPcEYrNXFtT05RM2wwTGJhN1hUeXpKUlJVdXpLOURWTzh2WEdZMUFF?=
+ =?utf-8?B?ZENSeGhwNW9WbkdpakhNNTJXYWR0dmpGcWhlZUVBN3hhOHZra1NNdU9hdHZM?=
+ =?utf-8?B?MVV6ZVRHWEk1dnpWSm0vWFRkMVloSHV2V3Q1bkxZcGVWUUhmaGFIMTRWOVVw?=
+ =?utf-8?B?b2dyc3VBZ05xOGh2cEtlQUxGbWZnQnlVYU1ramozTCtMMnk5QlAwZGNzK2E1?=
+ =?utf-8?B?SUdpQXNqVkQrRVpjWm4yeUgvVlFjTmFrR2VBSlRZNlRyZnI1SDZsWUhCK2x1?=
+ =?utf-8?B?SVR2eldUU2phaXNuT3psS3p4bndrTFdqWDhueXNLUTFmV2ErcDhZVmZXVm1G?=
+ =?utf-8?B?Z1I0K09ERVRka2VSMjV3eG9CZXZidXpOSTNVb3hTS1hJM044MjZRaGVXV0Jk?=
+ =?utf-8?B?cW0zZVhOZ3RYTUVKaHhvcFJhVXVVaXphMjhFS2lvUHZtdnQvczFXM01KdVhK?=
+ =?utf-8?B?blhSbWl1QUtiNnZNODllN01POWttQko1VzkvbEROWXJSNmRaeFJXMjRPL1dt?=
+ =?utf-8?B?M3lnZ1VEWkNDS05FQVpiOThUajVtS2NnYm51NklzTmVoNTZHdG1xVGF2eEYv?=
+ =?utf-8?B?ODNXWDM1UzdhekRPbW0wa0h6anRpT3ZpMFUwV0lkcXNVVDZITWdKemJNMm5o?=
+ =?utf-8?B?MnJreTdBRFlkWk8rMmxjRWJQRGl0ZXF4Tkc2dkR5TlExVi9Pcm5najNjbk12?=
+ =?utf-8?B?S01rVjNBZ3dZNzErMWwwb3lVMkpsblNxQ2xQdHNaSUZBMzZ6MWF0dUhMK0dC?=
+ =?utf-8?B?YUE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3d4c1509-eb29-42a9-ba0b-08dd1b82c35c
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2024 14:30:59.5382 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: P79KQc23TQNxWWbQFxiNBcetZDq5DKJtFkx5QU9jeNZ1VY+v3ihyB+r/lGoskgPO36Br0/sWzft6gaUVAJm3D7jNyyZcqRg6Q0x8Ls4LD2A=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR04MB10155
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,236 +177,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---0dOdDaUsM8OoUu6J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 12/13/24 12:57 AM, Jonas Karlman wrote:
+> The u-boot.rom image contain u-boot.img FIT instead of the FIT generated
+> by binman for the u-boot-rockchip.bin image.
+> 
+> Change to include the binman generated FIT for the u-boot.rom image.
+> 
+> This change result in TF-A being included and the use sha256 instead of
+> crc32 checksum in the u-boot.rom FIT.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-On Fri, Dec 13, 2024 at 07:15:09AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 13 Dec 2024 at 07:03, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Dec 12, 2024 at 08:38:32PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Thu, 12 Dec 2024 at 10:29, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > On Thu, 12 Dec 2024 at 19:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Dec 12, 2024 at 07:08:34PM +0200, Ilias Apalodimas wrote:
-> > > > > > On Thu, 12 Dec 2024 at 19:02, Tom Rini <trini@konsulko.com> wro=
-te:
-> > > > > > >
-> > > > > > > On Thu, Dec 12, 2024 at 06:34:44PM +0200, Ilias Apalodimas wr=
-ote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Thu, Dec 12, 2024 at 09:11:41AM -0600, Tom Rini wrote:
-> > > > > > > > > Introduce an option to control if we expect that a prior =
-stage has
-> > > > > > > > > created a bloblist already and thus it is safe to scan th=
-e address. We
-> > > > > > > > > need to have this be configurable because we do not (and =
-cannot) know if
-> > > > > > > > > the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or=
- some special
-> > > > > > > > > on-chip memory and so it may or may not be safe to read f=
-rom this
-> > > > > > > > > address this early.
-> > > > > > > >
-> > > > > > > > Yes this patch makes instead of making the OF_SEPARATE impl=
-icitly take
-> > > > > > > > priority
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > ---
-> > > > > > > > > Cc: Simon Glass <sjg@chromium.org>
-> > > > > > > > > ---
-> > > > > > > > >  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
-> > > > > > > > >  lib/fdtdec.c   | 11 +++--------
-> > > > > > > > >  2 files changed, 35 insertions(+), 8 deletions(-)
-> > > > > > > > >
-> > > > > > > > > diff --git a/common/Kconfig b/common/Kconfig
-> > > > > > > > > index e8d89bf6eb9d..e8febad0f212 100644
-> > > > > > > > > --- a/common/Kconfig
-> > > > > > > > > +++ b/common/Kconfig
-> > > > > > > > > @@ -1077,6 +1077,14 @@ config BLOBLIST_SIZE
-> > > > > > > > >       is set up in the first part of U-Boot to run (TPL, =
-SPL or U-Boot
-> > > > > > > > >       proper), and this sane bloblist is used for subsequ=
-ent phases.
-> > > > > > > > >
-> > > > > > > > > +config BLOBLIST_PRIOR_STAGE
-> > > > > > > > > +   bool "Bloblist was created in a stage prior to U-Boot"
-> > > > > > > > > +   default y
-> > > > > > > > > +   depends on BLOBLIST_FIXED
-> > > > > > > > > +   help
-> > > > > > > > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR=
- was created
-> > > > > > > > > +     before U-Boot is started.
-> > > > > > > > > +
-> > > > > > > > >  config BLOBLIST_SIZE_RELOC
-> > > > > > > > >     hex "Size of bloblist after relocation"
-> > > > > > > > >     default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_A=
-LLOC
-> > > > > > > > > @@ -1117,6 +1125,14 @@ config SPL_BLOBLIST_ALLOC
-> > > > > > > > >
-> > > > > > > > >  endchoice
-> > > > > > > > >
-> > > > > > > > > +config SPL_BLOBLIST_PRIOR_STAGE
-> > > > > > > > > +   bool "Bloblist was created in a stage prior to SPL"
-> > > > > > > > > +   default y
-> > > > > > > > > +   depends on SPL_BLOBLIST_FIXED
-> > > > > > > > > +   help
-> > > > > > > > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR=
- was created before
-> > > > > > > > > +     U-Boot SPL is started.
-> > > > > > > > > +
-> > > > > > > > >  endif # SPL_BLOBLIST
-> > > > > > > > >
-> > > > > > > > >  if TPL_BLOBLIST
-> > > > > > > > > @@ -1146,6 +1162,14 @@ config TPL_BLOBLIST_ALLOC
-> > > > > > > > >
-> > > > > > > > >  endchoice
-> > > > > > > > >
-> > > > > > > > > +config TPL_BLOBLIST_PRIOR_STAGE
-> > > > > > > > > +   bool "Bloblist was created in a stage prior to TPL"
-> > > > > > > > > +   default y
-> > > > > > > > > +   depends on TPL_BLOBLIST_FIXED
-> > > > > > > > > +   help
-> > > > > > > > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR=
- was created before
-> > > > > > > > > +     U-Boot TPL is started.
-> > > > > > > > > +
-> > > > > > > > >  endif # TPL_BLOBLIST
-> > > > > > > > >
-> > > > > > > > >  if VPL_BLOBLIST
-> > > > > > > > > @@ -1175,6 +1199,14 @@ config VPL_BLOBLIST_ALLOC
-> > > > > > > > >
-> > > > > > > > >  endchoice
-> > > > > > > > >
-> > > > > > > > > +config VPL_BLOBLIST_PRIOR_STAGE
-> > > > > > > > > +   bool "Bloblist was created in a stage prior to VPL"
-> > > > > > > > > +   default y
-> > > > > > > > > +   depends on VPL_BLOBLIST_FIXED
-> > > > > > > > > +   help
-> > > > > > > > > +     Select this if the bloblist at CONFIG_BLOBLIST_ADDR=
- was created before
-> > > > > > > > > +     U-Boot VPL is started.
-> > > > > > > > > +
-> > > > > > > > >  endif # VPL_BLOBLIST
-> > > > > > > > >
-> > > > > > > > >  endmenu
-> > > > > > > > > diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> > > > > > > > > index b06559880296..29bddab4150c 100644
-> > > > > > > > > --- a/lib/fdtdec.c
-> > > > > > > > > +++ b/lib/fdtdec.c
-> > > > > > > > > @@ -1669,15 +1669,10 @@ int fdtdec_setup(void)
-> > > > > > > > >     int ret =3D -ENOENT;
-> > > > > > > > >
-> > > > > > > > >     /*
-> > > > > > > > > -    * If allowing a bloblist, check that first. There wa=
-s discussion about
-> > > > > > > > > -    * adding an OF_BLOBLIST Kconfig, but this was reject=
-ed.
-> > > > > > > > > -    *
-> > > > > > > > > -    * The necessary test is whether the previous phase p=
-assed a bloblist,
-> > > > > > > > > -    * not whether this phase creates one.
-> > > > > > > > > +    * Only scan for a bloblist and then if that bloblist=
- contains a device
-> > > > > > > > > +    * tree if we have been configured to expect one.
-> > > > > > > > >      */
-> > > > > > > > > -   if (CONFIG_IS_ENABLED(BLOBLIST) &&
-> > > > > > > > > -       (xpl_prev_phase() !=3D PHASE_TPL ||
-> > > > > > > > > -        !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
-> > > > > > > > > +   if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE)) {
-> > > > > > > >
-> > > > > > > > Without wider context I am not sure but if that check can f=
-old in
-> > > > > > > > bloblist_maybe_init() and return -X if the config isn't ena=
-bled, it's going
-> > > > > > > > to be easier to read
-> > > > > > >
-> > > > > > > Hmm. We'd have:
-> > > > > > >         if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) &&
-> > > > > > >             !(ret =3D bloblist_maybe_init()) {
-> > > > > > >                 /* We have a bloblist, see if it has FDT */
-> > > > > >
-> > > > > > I mean move the check inside bloblist_maybe_init()
-> > > > >
-> > > > > As we talked about on IRC, no, because the "maybe" in that functi=
-on
-> > > > > means "find or create". So the expected usage here is that we have
-> > > > > platforms that create the bloblist in SPL (post DRAM init) and us=
-e that
-> > > > > with the HANDOFF mechanism to pass information to full U-Boot.
-> > > > >
-> > > >
-> > > > Yes thanks
-> > > > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > >
-> > > I am struggling to see how this is different from the patch I sent a =
-year ago
-> > >
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20231226094625.22167=
-1-1-sjg@chromium.org/
-> > >
-> > > Is it just a rebase and a rename?
-> >
-> > Well, no. I came up with this after debugging the failure on Bob / Kevin
-> > via Gitlab. This in fact allows for the device tree to NOT come from the
-> > bloblist.
->=20
-> Yes that was the point of my patch, to allow me to disable OF_BLOBLIST
+IIRC Simon was fine with removing u-boot.rom support for RK3399 when I 
+asked months (probably years?) ago, if that hasn't changed, maybe we 
+should now.
 
-The entire reason that you needed that was never ever explained or
-someone would have told you to move the bloblist to IRAM instead of DDR.
-Instead we went round and round about something else.
+Especially since the only RK3399 with CONGIG_HAS_ROM set are Bob and Kevin.
 
-> > The biggest problem with the "OF_BLOBLIST" thread from last
-> > year is that your explanation of the problem doesn't match the problem
-> > you have.
->=20
-> At this point I am worried you might be one of those people who is never =
-wrong.
+@Simon, you said you tested the patch series on them, with which image 
+did you do that? Are you still fine with removing the u-boot.rom for RK3399?
 
-If so, I'll be sure to continue to enjoy your company.
-
-> > What's really tragically funny now is that Jonas' add TPL to Bob/Kevin
-> > and init DRAM there means that we don't need this series for that
-> > platform and only Coral is still doing the likely ill-advised thing of
-> > saying the bloblist exists in DRAM without ensuring that DRAM will have
-> > been initialized already.
->=20
-> At least someone is enjoying all this. The whole thing is a bad memory
-> and makes me sick to think of it.
-
-I mean in the Shakespeareian sense. None of us are enjoying it.
-
---=20
-Tom
-
---0dOdDaUsM8OoUu6J
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdcRJgACgkQFHw5/5Y0
-tyxjnQv+Pt08J8RsY1us4uMCIQKQTYK3gIPkM9sMskavH/PMcmJYEyhmOnHu+/vJ
-q2NDxlvDq01j+FTlQ0DwBx4yykvLj+yBrCZxT05vjrsVv8lHiWCvL8j70AKrR/q/
-Y4fCN7AW2dyDSwwp4p/LcUiXqqHgA6iw8vUO8G3nkjkIkfrtP2o25rZ7ksJaRDsn
-fzd3AOR2ju/4kqCdRaS4Zdfl3ChicG2FbDK2ZQrlscCK5uUqAkavYYWsFTFNptJI
-jViUF7dXxba2LdrVKsjTTaEcMbf47r9nY6dFJnuNWj1o8qwifbi2nPBirzl8S19u
-zOAIFo9wsqwnQ16ky7/xaE6uBSxp9evyBfF4j4hX3ns7f8s48ZzIPi2v8BAiQK1Y
-OVV9b4/cNkApekbgd01ZaZU2duHnORrTyG1UdyMhbwCdTCMu0Q2UaNHCjxaeGvHR
-T+pRHH6vc25J2PYcVIgqAU2LntvBR07eZe+3fckatO4mttERh2okZi8NGtVFq2AM
-BXw93dEr
-=bbaf
------END PGP SIGNATURE-----
-
---0dOdDaUsM8OoUu6J--
+Cheers,
+Quentin
