@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4838FE7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:31:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85C4E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF941800D7;
-	Fri, 13 Dec 2024 15:31:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4FF5480104;
+	Fri, 13 Dec 2024 15:32:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yFAzhbyZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z2xfPA5l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE53680104; Fri, 13 Dec 2024 15:31:17 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 0A9A78012C; Fri, 13 Dec 2024 15:32:39 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 362A38021D
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:31:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2D73800D7
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5d122cf8dd1so3122807a12.2
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:31:15 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-aa5f1909d6fso331121366b.3
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:32:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734100275; x=1734705075; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734100356; x=1734705156; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a8OdqOVUrnRO0M+eyymuEifvO/5SwQPJmPjaXRkypDM=;
- b=yFAzhbyZodSRXj2Cxh7BWmp6zLXGL4fUMcmCdG2jDkbYynHnTs31U0ZHOxkCBVnFwR
- ohIci2QTxma5OyGhgGpTrkjwyLJ3+wJe2oD+y99uQF6z0oK7PQGl4vAwduM+jmEO629/
- B8VwrnG7RsTjYw82b6OlTfI3+MzoLW/+beRUGfM14lOuLj2A0YMA3iHWMX33z3IFBrnp
- tMAarCdBk/WzF+girQzv9cWwUg6zHby5OmI9yxSsHNzBIM7yllSx7JEG9kz3aslHQsLb
- 9w4MbBCL7NV3YuE/qBsJ50iu4Jf8bTm1B3+NK2lt9HqPhEpNF2WcmTWD77lGQuAuxYDV
- Xf+g==
+ bh=vvLdo+bLG8twPQra9HRCHAOKC8ppOybs+7wHXjZU/qI=;
+ b=Z2xfPA5l4h51D48gCVlutqa7ytmAM0H+S550/oNZPQSwCccsPnY2CQ3ZiT1NNGsKCS
+ kzd/+NEXrd5tnpqP6Pyh+jMN5tP89zJ5qTvzUi7QhlXa0iD4bITmThCFVIcAvpr4iY0E
+ +DzFIO9+v7W0hg/XCIojI/6O44PDMyaXe7ylk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734100275; x=1734705075;
+ d=1e100.net; s=20230601; t=1734100356; x=1734705156;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a8OdqOVUrnRO0M+eyymuEifvO/5SwQPJmPjaXRkypDM=;
- b=sMSyqdEJp2x9QOTK3Y6EgcYqia56DF10gZGWDmZAuWomD0QjbEZVM8Pt/aVIDf3hE/
- G0nFIMMrl7+TFUcQSlV8VhB2Q446VW3x8BiH6tykuKfTubaZIcvi6NiztlqIHaGiIzAT
- oicqySBi1PzXNwMxfpSDgGzvOeC+g5VUeNRvD1Agg793uZNMZMSvRwaOqavMJkvPJwy8
- oKonwJ2NET9Vv3kYPTkcYCgo1JyYm/pfpIPMqpxsS6XoiD73DJa+RDTsFEhK2Nc4WPWK
- gOtzPkZdHs2A8GAdREJ+5O+YNB3AelGO+WLPLZ1HQGMDv5QBqu3/jayIkxt39GRgF0pl
- M6RQ==
-X-Gm-Message-State: AOJu0YzlAaDkRqGQ7mr1w8R6hhbNR/O7S0IXsBeOwt/PqITiTLIVUEGB
- WOKCkJCtqI4XP9GHyOsSO0j/om8yqnE/gqbvs6rDxy4JXiMrzuE+2pg9rzL1VC61WeP3ToHkTN+
- bBrhJuItXQgu03cl0mZKmd2aXeRMVxZMcs4ZiUj06CObWJcYkChk=
-X-Gm-Gg: ASbGncsQehw0XBgFG42etqeCpgDqd7KYixvSxbO9cymUEUTV0+uJOVgVn4bjLcWtaPm
- Dw2JHi20TII3AtZv4iwiEaoygC5l1b/QkYN6BoQ==
-X-Google-Smtp-Source: AGHT+IHRl4htuJVgS14ECqteZzX4zrvmCBcnQL53L6rijF7j34vQQ5UqCttuRTtHP3sJ5ToyOMe9qByAWYt8jcRFkcI=
-X-Received: by 2002:a05:6402:40d4:b0:5d0:ed71:3ce4 with SMTP id
- 4fb4d7f45d1cf-5d63c2e9060mr2404326a12.6.1734100274596; Fri, 13 Dec 2024
- 06:31:14 -0800 (PST)
+ bh=vvLdo+bLG8twPQra9HRCHAOKC8ppOybs+7wHXjZU/qI=;
+ b=cqt87Zf1q7dXECtg0gFhALz7amUgA9ds7rZ0K6xfSjorjSk/aFXtBrF7UAWBSwdsSB
+ /5XP0UMQhqRSpnrIEI2+qS6uuV0RUQH4Dg+ZK2L8ZhxLZzVQuPZPRtLN4G1fyrl/uJ7+
+ WJCHUz9it8l8svK6WJomznX2/ZBi2vL21x2v2/7PEimAxiEQ8U0P47btzKsM3/U20Vaj
+ 9MZ9ZgwG9XT5HvIDjRjYeLs3AA2zaRiUosyVjkBegwuUwgao1ThQogQGimTRrpTS5lYO
+ lRdlYTgfFV/iCxqfFWCzpVsAVbfbC7MwrffQq5vH82TA93sTyC6NheWaDwt6ULzLHO9R
+ b9Lg==
+X-Gm-Message-State: AOJu0Yzj1jSvaxp4tvako7zZ429UBDlDsYIzxFD+IXCHD2mbtvqnM0mw
+ UZ0u9OhbD1x0XB/Sq/hXcv6pRGLjoSLR7sLMAZPa9d6YKgSYnmBI+s7f/kX8t/JKhDLchWPDHis
+ GVkNou27bRAXkoeAbWmKkF4yejnR4xC6QWZOv
+X-Gm-Gg: ASbGncvbpMfuDN9/YPPcOryOhhy3ptbI3uD6+pAAafHjmFYP0uy/M1XpoINV1DFv74x
+ ZYoVmUda1LaUkKtrOIWn66J6BPcBP41QR1QTYLp8=
+X-Google-Smtp-Source: AGHT+IHTgV+Qo543BvNjhCI72WHZ+8Bou+dVhj5EqHREA/fgBnSkVS+ZpwiYpJQo4LVLVQPE3th88QnyJI56Jjqv1lo=
+X-Received: by 2002:a17:907:7204:b0:aa6:3de7:f258 with SMTP id
+ a640c23a62f3a-aab77e9d1e3mr280885266b.37.1734100356278; Fri, 13 Dec 2024
+ 06:32:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20241213132655.670837-1-patrice.chotard@foss.st.com>
-In-Reply-To: <20241213132655.670837-1-patrice.chotard@foss.st.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 13 Dec 2024 20:01:03 +0530
-Message-ID: <CADg8p977UDbohn7M7UdfMbq8qB7qEc1NzvFxDnYV9krdaJpuiA@mail.gmail.com>
-Subject: Re: [PATCH] ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located
- above ram_top
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
- Igor Opaniuk <igor.opaniuk@foundries.io>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
+References: <20241212151142.1562825-1-trini@konsulko.com>
+In-Reply-To: <20241212151142.1562825-1-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 13 Dec 2024 07:32:24 -0700
+Message-ID: <CAFLszTiF8m7P8mBCNRhhiRQt=bcfRB3ddaaumF_EXETTXbUmDQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,61 +83,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Dec 2024 at 18:59, Patrice Chotard
-<patrice.chotard@foss.st.com> wrote:
+Hi Tom,
+
+On Thu, 12 Dec 2024 at 08:11, Tom Rini <trini@konsulko.com> wrote:
 >
-> Previously, all LMB marked with LMB_NOMAP (above and below ram_top)
-> are considered as invalid entry in TLB.
+> Introduce an option to control if we expect that a prior stage has
+> created a bloblist already and thus it is safe to scan the address. We
+> need to have this be configurable because we do not (and cannot) know if
+> the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or some special
+> on-chip memory and so it may or may not be safe to read from this
+> address this early.
 >
-> Since commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top
->  even from same bank") all LMB located above ram_top are now marked
-> LMB_NOOVERWRITE and no more LMB_MAP.
->
-> This area above ram_top is reserved for OPTEE and must not be cacheable,
-> otherwise this leads to a Panic on some boards (Issue on STM32MP135F-DK).
->
-> Restore previous behavior by marking invalid entry all TLB above ram_top.
->
-> Fixes: 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank")
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
--sughosh
-
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
+>  lib/fdtdec.c   | 11 +++--------
+>  2 files changed, 35 insertions(+), 8 deletions(-)
 >
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> index 62cc98910a7..cb1b84c9af9 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -53,6 +53,7 @@ void dram_bank_mmu_setup(int bank)
->         struct bd_info *bd = gd->bd;
->         int     i;
->         phys_addr_t start;
-> +       phys_addr_t addr;
->         phys_size_t size;
->         bool use_lmb = false;
->         enum dcache_option option;
-> @@ -77,8 +78,12 @@ void dram_bank_mmu_setup(int bank)
->         for (i = start >> MMU_SECTION_SHIFT;
->              i < (start >> MMU_SECTION_SHIFT) + (size >> MMU_SECTION_SHIFT);
->              i++) {
-> +               addr = i << MMU_SECTION_SHIFT;
->                 option = DCACHE_DEFAULT_OPTION;
-> -               if (use_lmb && lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP))
-> +               if (use_lmb &&
-> +                   (lmb_is_reserved_flags(i << MMU_SECTION_SHIFT, LMB_NOMAP) ||
-> +                   addr >= gd->ram_top)
-> +                  )
->                         option = 0; /* INVALID ENTRY in TLB */
->                 set_section_dcache(i, option);
->         }
-> --
-> 2.25.1
->
+
+Since this is the essentially the same as my OF_BLOBLIST patch, which
+was rejected:
+
+NAK
+
+The issue is not whether some 'previous stage' set up a bloblist. For
+example, if VPL_BLOBLIST_PRIOR_STAGE is enabled, that presumably means
+that TPL set it up. But it doesn't mean that TPL put the FDT in there.
+
+You are basically adding an option to tell U-Boot not to look at the
+bloblist when setting up the FDT, since it might not be there yet and
+the machine will hang. So confusing. Only the board author knows the
+intended flow of boot, so just let the board author decide! Within
+U-Boot you can infer from the bloblist options which phase actually
+creates the bloblist, and there is some attempt to do this in
+bloblist_init(), although it is pretty messy ATM. Anyway, As soon as
+you say that some secret-source blob might create a bloblist, you need
+a way to describe that. But again, only the board author knows.
+
+Regards,
+Simon
