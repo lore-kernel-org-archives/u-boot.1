@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E1AE77180
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4AC0E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 14:54:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E56598012C;
-	Fri, 13 Dec 2024 15:53:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B58D8021D;
+	Fri, 13 Dec 2024 15:53:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GYM9jyhL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AukDR+KO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44903801BF; Fri, 13 Dec 2024 15:53:51 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 62A5F80212; Fri, 13 Dec 2024 15:53:52 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C59B80137
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:53:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5476F8007A
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:53:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-3023c51146cso17993161fa.1
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:53:49 -0800 (PST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-30036310158so15345731fa.0
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:53:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734101628; x=1734706428; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1734101629; x=1734706429; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8bQN3g5i+OCi0GMeYBJJ9GgdhdUZQv0+FBunoyVSnDk=;
- b=GYM9jyhLAsWPz+Gjez5a4Tzlsmy52CI0x3YK9Un9f791+N/gBEYFhaFA3KbeJtIQkQ
- 7CbLcITmezAdYODQsFyN7NoAXyqPvJxz2KjrT8p2X+4sQrsRpcufDZHSlxtMsKQmLZCG
- xJBv7vXl25PbmmoZqYNEuZWPP018kVwcFBCSV92ZDKBdkWAIutqnSlv77ioG5JEIRWwK
- /+tihHeTVM/Yy7mGVC0X0A+qjd/olxpz4+M1okWpVUNxaRwKY09BS0UZpJYw5biqJjNv
- 2h1Wb9o1zN1Kb2mnXaILcwJZ6jBl2NOpMLPFWtO6ck0Hn8yjKK5+EMXycqCmD/VH2vBS
- ncpQ==
+ bh=Qd5de0Wg7Tm7QAHQZ7DFM008qPVi/zrnNM+GXdTvVcI=;
+ b=AukDR+KOHZkGmTNKlpKjml04CpRg2QybXfv4nf3ba3HJCJGpQq/ruiK0y0Pk+KL7VI
+ PlRxt9V4WwOkLWtPQ+/cqgdv5F0J+DAma8C+kaTCHYc5LZCu6wzwfHl60RHjY4EO+1rZ
+ 2h6bBl6o77eafztcq9iA7Tl96NhaXVbnZlWvvF95qmZ7j4IHIv4JsJBeb6gvwWgz/UPA
+ gbJyk/wBx3jlkvqEZZ7JAl6+jm++4tTlKJEZI4TFUCn0/Gkky785EoQNYiOT8qzsCUjj
+ fM4AnES896SaOrzM3zKKEXEVIw+gvEe8atl9Kgo1rSZXBPRW0BbSYIKpqUxKblrtbuUg
+ 9r3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734101628; x=1734706428;
+ d=1e100.net; s=20230601; t=1734101629; x=1734706429;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8bQN3g5i+OCi0GMeYBJJ9GgdhdUZQv0+FBunoyVSnDk=;
- b=quy5VPl33WOKd2ylNh611VAu8c4wRmaUcqisU5Rdlh/3R/nYNj3C3b8twGOd5NQHNh
- 7oO6Vkij5qeHdE5Drd3pe3bdpQca0ONJNKaoTL1zfDnG8j4+X72PY8++XmX6jfiL4IZl
- zZ7fw4mX8SFhYk4b3s4oxgHxLdHSurOxOYQCI0c2nfADPolgK7j1f0Lggl+vQcoykmOi
- M5539rtjkFyTHI8rUnTgYrJaOo+EoUKm3XExdebnCIdY1aP3/Mmg2igEeb3JacAiuBm/
- 4vF0IR35qTrfXGBYUKVJMMChROCf1t9UMTzYDrkmUDyGHPtn4AwBI5N/zpIArW3VVTvx
- 2ZGg==
-X-Gm-Message-State: AOJu0YwG493YAuUzWR1AtJigq/RQtYTlVxTeMX3AENT9CvNZn+/gb0rC
- I1/g4dIq83Ga1nD6d+TgqglJ8aUogKvBbpTO1R+bKNCY7+JFRk+Z
-X-Gm-Gg: ASbGncvArLBi/7s9V4uXXa5znsazNrhfKrYpAIW9pgI7Cul2s0+2jOE84Y5S8bIBDgZ
- ObYf/uAlKNRNCPNCErXIStZg6ZLVvX/JM6Uxrn482hozv+F0FdsqlN+S4KhRSRVQPOR/RCsqCW4
- dUo4S7mrFKVqo/29wMQWgnmyioJZK+0F8CnV6O6anRJImi8kpUZWgedNvwf6HZA+gf9RRUxu4Kq
- EgBSQi4FNI3dwbUpEvWUx2i1WI+71VcFsGBztojHKTa/5To
-X-Google-Smtp-Source: AGHT+IFXIcw815UNkUKcslpaP9NoFg3CxTov3/XIQLHt4TOfQ+DwH8Zvp5OQQfrMxx2uYy8ZH0aA7g==
-X-Received: by 2002:a05:651c:b28:b0:302:2097:392f with SMTP id
- 38308e7fff4ca-30251c1466bmr18173951fa.7.1734101628271; 
- Fri, 13 Dec 2024 06:53:48 -0800 (PST)
+ bh=Qd5de0Wg7Tm7QAHQZ7DFM008qPVi/zrnNM+GXdTvVcI=;
+ b=XZLwX/iJDKY6ZzrJNQehSKbkSg7n2mhgB1lVXXpiYcHMDzNBfIUP1IrTSetWQ5AeuM
+ ZfqmjDz9jBonGoadepHysijqGbC1Lv7glJ6s+DcFTIQPelbyIt6BI87jr93YaVl7vQTW
+ GNTc2OUbqqb8/omNpkRNKtim6WAyJilLZquE1fjaclJThB+D8ktCAko6CMYvZKi3tc4A
+ PUc5QUjUIKGGWvO35puIYW7Z/8r+O9CkYqtt7BA1qRdyVybeNPck3csE/8Cg9RE2io+3
+ WPSf6sxAaV4SMvVp5KUgT1rqdSSFSmBAuR9vb5cSvQv3By2kbbKjNPEDxPBBj5bs+jxq
+ NAGg==
+X-Gm-Message-State: AOJu0YwPLlQIH5iMmD08AJopLiubwA/krQ5shBJSLow/5QkoSlBGxZ7P
+ 00Jb/GAGHwGnJbP1Ihv5Gx6JgnuQwl2gn/12w1SwDdzJ9SNETH2T
+X-Gm-Gg: ASbGncuEcucigwhBCAvo8iWc0XHJ4FyLbQ7XQiOT7BNKQdSiK1afpXFElb0GDx/PkjN
+ c7wxEhkuMwZYvrEovzvE1zKHMn3qnIN+iqHeqTEBk1aSYXX/gEaB+U+3piHW8mE8etA2lt3T7Ua
+ EvSUvCk80W1GlvARbA4/oBtQ0LfK8usOQVzgz7CQFkuKN6mTFWsZQEudO5fgVwuGqlbhRFudQQv
+ JUUAF3YJYNHXFGG5e5bJDGsqKNjsUL3a1p3nL36jLkMTVUL
+X-Google-Smtp-Source: AGHT+IFzYmtgc7aTeZibblj2WL93VzkPtRf93fegsnhdrAMFMiJFONFXFhQd7CYWXzA2rfWCLQjn6Q==
+X-Received: by 2002:a2e:b892:0:b0:302:360e:a153 with SMTP id
+ 38308e7fff4ca-302545b8d96mr8908361fa.36.1734101629311; 
+ Fri, 13 Dec 2024 06:53:49 -0800 (PST)
 Received: from xeon.. ([188.163.112.48]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30216eb1013sm18626561fa.34.2024.12.13.06.53.46
+ 38308e7fff4ca-30216eb1013sm18626561fa.34.2024.12.13.06.53.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 06:53:47 -0800 (PST)
+ Fri, 13 Dec 2024 06:53:48 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 1/2] driver: clk: tegra: partially support PLL clocks
-Date: Fri, 13 Dec 2024 16:53:18 +0200
-Message-ID: <20241213145319.10956-2-clamor95@gmail.com>
+Subject: [PATCH v3 2/2] driver: clk: tegra: init basic clocks on probe
+Date: Fri, 13 Dec 2024 16:53:19 +0200
+Message-ID: <20241213145319.10956-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241213145319.10956-1-clamor95@gmail.com>
 References: <20241213145319.10956-1-clamor95@gmail.com>
@@ -96,110 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return PLL id into struct clk if PLL is parsed from device
-tree instead of throwing an error. Allow requesting PLL
-clock rate via get_rate op.
+In case DM drivers probe earlier than board clock setup is done
+init of basic clocks should be done in CAR driver probe as well.
+Add it to avoid possible clock related problems.
 
+Acked-by: Thierry Reding <treding@nvidia.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/clk/tegra/tegra-car-clk.c | 47 +++++++++++++++++++++++++------
- 1 file changed, 38 insertions(+), 9 deletions(-)
+ drivers/clk/tegra/tegra-car-clk.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/clk/tegra/tegra-car-clk.c b/drivers/clk/tegra/tegra-car-clk.c
-index 1d61f8dc378..ec89d4b2b2d 100644
+index ec89d4b2b2d..880dd4f6ece 100644
 --- a/drivers/clk/tegra/tegra-car-clk.c
 +++ b/drivers/clk/tegra/tegra-car-clk.c
-@@ -10,6 +10,9 @@
- #include <asm/arch/clock.h>
- #include <asm/arch-tegra/clk_rst.h>
- 
-+#define TEGRA_CAR_CLK_PLL	BIT(0)
-+#define TEGRA_CAR_CLK_PERIPH	BIT(1)
-+
- static int tegra_car_clk_request(struct clk *clk)
+@@ -112,6 +112,9 @@ static int tegra_car_clk_probe(struct udevice *dev)
  {
- 	debug("%s(clk=%p) (dev=%p, id=%lu)\n", __func__, clk, clk->dev,
-@@ -20,24 +23,41 @@ static int tegra_car_clk_request(struct clk *clk)
- 	 * varies per SoC) are the peripheral clocks, which use a numbering
- 	 * scheme that matches HW registers 1:1. There are other clock IDs
- 	 * beyond this that are assigned arbitrarily by the Tegra CAR DT
--	 * binding. Due to the implementation of this driver, it currently
--	 * only supports the peripheral IDs.
-+	 * binding.
- 	 */
--	if (clk->id >= PERIPH_ID_COUNT)
--		return -EINVAL;
-+	if (clk->id < PERIPH_ID_COUNT) {
-+		clk->data |= TEGRA_CAR_CLK_PERIPH;
-+		return 0;
-+	}
+ 	debug("%s(dev=%p)\n", __func__, dev);
  
--	return 0;
-+	/* If check for periph failed, then check for PLL clock id */
-+	int id = clk_id_to_pll_id(clk->id);
++	clock_init();
++	clock_verify();
 +
-+	if (clock_id_is_pll(id)) {
-+		clk->id = id;
-+		clk->data |= TEGRA_CAR_CLK_PLL;
-+		return 0;
-+	}
-+
-+	return -EINVAL;
- }
- 
- static ulong tegra_car_clk_get_rate(struct clk *clk)
- {
--	enum clock_id parent;
--
- 	debug("%s(clk=%p) (dev=%p, id=%lu)\n", __func__, clk, clk->dev,
- 	      clk->id);
- 
--	parent = clock_get_periph_parent(clk->id);
--	return clock_get_periph_rate(clk->id, parent);
-+	if (clk->data & TEGRA_CAR_CLK_PLL)
-+		return clock_get_rate(clk->id);
-+
-+	if (clk->data & TEGRA_CAR_CLK_PERIPH) {
-+		enum clock_id parent;
-+
-+		parent = clock_get_periph_parent(clk->id);
-+		return clock_get_periph_rate(clk->id, parent);
-+	}
-+
-+	return -1U;
- }
- 
- static ulong tegra_car_clk_set_rate(struct clk *clk, ulong rate)
-@@ -47,6 +67,9 @@ static ulong tegra_car_clk_set_rate(struct clk *clk, ulong rate)
- 	debug("%s(clk=%p, rate=%lu) (dev=%p, id=%lu)\n", __func__, clk, rate,
- 	      clk->dev, clk->id);
- 
-+	if (clk->data & TEGRA_CAR_CLK_PLL)
-+		return 0;
-+
- 	parent = clock_get_periph_parent(clk->id);
- 	return clock_adjust_periph_pll_div(clk->id, parent, rate, NULL);
- }
-@@ -56,6 +79,9 @@ static int tegra_car_clk_enable(struct clk *clk)
- 	debug("%s(clk=%p) (dev=%p, id=%lu)\n", __func__, clk, clk->dev,
- 	      clk->id);
- 
-+	if (clk->data & TEGRA_CAR_CLK_PLL)
-+		return 0;
-+
- 	clock_enable(clk->id);
- 
  	return 0;
-@@ -66,6 +92,9 @@ static int tegra_car_clk_disable(struct clk *clk)
- 	debug("%s(clk=%p) (dev=%p, id=%lu)\n", __func__, clk, clk->dev,
- 	      clk->id);
+ }
  
-+	if (clk->data & TEGRA_CAR_CLK_PLL)
-+		return 0;
-+
- 	clock_disable(clk->id);
- 
- 	return 0;
 -- 
 2.43.0
 
