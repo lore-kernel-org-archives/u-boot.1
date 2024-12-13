@@ -4,155 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF678E7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 18:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673B7E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 18:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3638E80104;
-	Fri, 13 Dec 2024 19:08:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 7932F80104;
+	Fri, 13 Dec 2024 19:19:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="WlKHCggJ";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="cGEF7g2e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC25E80137; Fri, 13 Dec 2024 19:08:26 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20608.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::608])
+ id 52FD480137; Fri, 13 Dec 2024 19:19:56 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47104800D9
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 19:08:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 9F0C8800D9
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 19:19:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nexjeG84OY93S/9T2dSt8tA4DwL547BPrMpOzmrELszYd8iHfLrNpb+KwY/cFBk8kJbJO8VDP/wiaxysb/69BmTzHGUXdZegnGK/VvtVE4M4cAoaPvKZpoFNnPCjlSoXXUm557sL8z1MCvaKoENp8w8+cwglFSml60oGoUbpiZ/uCUUspWmiFIipuyfPLET64Uuz0mimsuxVpxuByTzvB9fjDbZG1ZCdttq+l6Xuw2FEyZjwLxWEQkLNqU15jN1jM+lDC6y67REiiO9i01bnWybB5wBqMbuOkCmegU8v/gfwW6xTwwc+PF+2xQTkL17wZ4ZDAky5xZgx8bFhlfpt3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fX/K71iwBUeKuqksdViSUOF0he7NUAIInwBH5y78EIU=;
- b=cmnR3+ad2hJswFPSc9Gp2d/HWvCiwMQklV2D1Dx5gDJID8l7Necrcp8t/aWaM6PDbvXPbgs8kyrqjlMDVhq/Sk0fwwgjZEfMr4kiMJi32RxEg9JgkUNNeLw1W7SPchaa90ylGZSzJEPXX6Tg7sBhCZN6GVvARM9NtdTyjZIOGMMpZtUK4xbKso+RsDv0ie6KwR5emam+L+nVpXReyXo05Kl4Wd6xyhEkA70cpMuodIK/eGYV4T0bVmT/tLX7MjwxrHow8suTC9vaQd1I5OUN0DikGQOHNI2DRBITNsKJkMt9GU7GboboUld7dEMPlANlXMXnQLb41fDxw9//bPJ4Gw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fX/K71iwBUeKuqksdViSUOF0he7NUAIInwBH5y78EIU=;
- b=WlKHCggJbpX0FI6I0dtFCTp5G7nwBhEwkje39ePFceZBOVzazk3DuVG6w1X5QIdanQJWHiljJCMPoo1AXwUA/IPp96NVineOicO3iLJBOwZefy4cHSgVmO1gtAMJ5+BBQFGBSPQHfKFuNc5VPPHbt1zg12Vqk/NbMp0o/Ws58nQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by GVXPR04MB10109.eurprd04.prod.outlook.com (2603:10a6:150:1b7::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.18; Fri, 13 Dec
- 2024 18:08:20 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%5]) with mapi id 15.20.8251.015; Fri, 13 Dec 2024
- 18:08:20 +0000
-Message-ID: <48defa98-9718-4997-86cb-b171187708a6@cherry.de>
-Date: Fri, 13 Dec 2024 19:08:19 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: devicetree-spec@vger.kernel.org
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [RFC] Adding bootsource and reset-source* to /chosen
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0168.eurprd09.prod.outlook.com
- (2603:10a6:800:120::22) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|GVXPR04MB10109:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4600ea1-6c2a-4637-cfa4-08dd1ba12044
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TFZpSFN2WEhwTDk5S21CK2dhMGZLdkFNRkpqQmx0VVdmeXovZEIxdlFWaEpa?=
- =?utf-8?B?QlJQeDVWSFFMMTJLZjdLVmd0OWY1RmdzSXNManpCR2hjVEJiUW4xTVhPejFn?=
- =?utf-8?B?WlVwMVN3ektGQ0hmU0ZWNmUvcjBuTXhhN2p1Rm95NEVMaUtmanJKR2R4YVF5?=
- =?utf-8?B?QkQ3UER3TS9UMzlUMGdvNlVETFRCVVZVSUUvUTdMR2xyRUFWNUNKS29MWnJi?=
- =?utf-8?B?aU41eHNrU0R3YmlkNUVDeGJKZWJRTGpZU0hLZFF4RTlNS0J4eXYwR2R1NllJ?=
- =?utf-8?B?Z2VKUmJCR0F3T0lMSzl0ejYxMitjVEdiNjF3K2lSNjl2ZFc3OTVCWGNEQXZ3?=
- =?utf-8?B?U2Nld05mVDRQOUJ6QU1QZFFwL1E1VWkwVWtWOVVqRTVrdGJ2cE9EZ3E1WDlk?=
- =?utf-8?B?cU10Rm5zZmRudlRTK0FHcjNjZitGYUtMc0E4UURyN2ZSR0N5L3hjSVhreEpv?=
- =?utf-8?B?SlRtaXBGakMyZy9RcDAyM3A5OGtQR2lQaG5FVm45Zy9lMVAzTFVoWUVqZlBB?=
- =?utf-8?B?MWNsVjJiVXB0QVJrUFhTdE1VbWx0WGhHWW11bUduTEdqV3JjWEsrbGNaaFV1?=
- =?utf-8?B?ajVtNnVOWmZ4cmo0am9sbmpGMjZvMExOUEhFaytpRVB0Z0h6MFU1QXlxZHp5?=
- =?utf-8?B?TDVkKzQwMDNLLzhxd0YyK1RDZFF4MzRTcWljOXlZY1I2ZHpnTVdNVFExUG8w?=
- =?utf-8?B?K090VnlwS1dqcmVGUTI4bFpXRDV3TVBiUnZZaEs1eEpkU2IwUnptTGZZWDJo?=
- =?utf-8?B?anE2NzlzRHB4Mm8xSkpBcHpFdC95UUJKY3E1Z2hFN0xjOTBZOUN6TVN3eTBz?=
- =?utf-8?B?RTFuTU1PMnRpWXNnd3ZLOGFySERPZk5MZkhPcjNkWi82cERwa3NROTlVSS8x?=
- =?utf-8?B?eUltdnFUZU9hQ2FTSmdzOU0zYWpIOGpSV2VHWnRjM0wwa0piSlVSeE13M2RG?=
- =?utf-8?B?WWZvcXNtVjhYZ0xhQmIyVjE2N0d2b2dJeXhSWDEzY3VEOUt0Q2o3aXhhRDVV?=
- =?utf-8?B?OUE2N3hqS3R6Lzg5ZFBCZk4yR216VllaV05xcTI5SThDTVFBWVFpLzNrcGRj?=
- =?utf-8?B?ZkJMZVgyYlBKb2lRcUVBTlhZZUFrbWZ5WHRBcnBJZ2RCWWYvM2VWMXo5VUhW?=
- =?utf-8?B?UVFpdmQwK1dMNVBOc0h2Q0o4cklwUzYwNzNBUjRYME9UM0F0bUdNRndhbzlC?=
- =?utf-8?B?N0dUSHRtS1JUaTZkWFZUVC9UejhhZDdCQklmU2ZMclRYa2NMNnNQSGhYMHF2?=
- =?utf-8?B?RjZxVEQyUmtkT2tIOHdoUUIwc1B5V0ZKUEZNd01FL2R2dHNjVEhYY2V1UnQ3?=
- =?utf-8?B?WSs1SzMrL3lJNW0za0pKaUlNZTY4ZEhnb0lBdzZ5YnB0aUZVVjBmY1ptd213?=
- =?utf-8?B?M1FIZzZHdndWSFk2Q3pwNUgwRjRVTk5SL2V6UmtBdUQxcnRwL0ZKa1gvOEQ1?=
- =?utf-8?B?RmtwdnhEaTJvamJyTDFkYmVKNDNEUUkzY1dKUXJXeGpGWmE4d2I2WUJpU3ZN?=
- =?utf-8?B?dFYrbURrOVpxTDJZajVzcXJQVjQraHRKM3BHUXNqV3FXaFY4ak1ycFhDdW12?=
- =?utf-8?B?b1ZQYlN0V1ZSVE1wK3lja3FiRmlTVS9GcCtPM0NERXJsaCtkdjJZMEpkaXpX?=
- =?utf-8?B?aE0wejljSmhETGJWcDhxeVJDVDMzcUNNS0tSTWdqMFNuNlB4Y3VMVjdZcEJm?=
- =?utf-8?B?QTNpb01iQUlJUTRPNm8wQjNOU0lMVVR0SHBHenpzNlFZQ1BUamtSMDNqUXdW?=
- =?utf-8?Q?DD08zlhluM6NmPERpA=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TmJKOS95VXp3MlVXS2FNekpVT29sWllraW9ZdTZqRW0wQjhWVHVWVVM5bTZ1?=
- =?utf-8?B?V1paR3BkSTdldWZDL2ZEbkIvUHorQzZsTXBVWnc1Y1lUUEtYeXd0SmxycDBJ?=
- =?utf-8?B?Mk45K29Jc1NNSEJBZHNSdXdLeXphQk01ZjZMWllHZlJ5Q3JFRExKa0s5QTNQ?=
- =?utf-8?B?ZUdCOHlEQUNoOFhVaFEwSUI4YlNmTXVwaFNYSjYvNCs5VjhVMWJkMDBlZEtB?=
- =?utf-8?B?WnkwWDAyU3hXdmxuekt4bm5VNDhVeEVrbmZmL1IwTE05cHNJdmJkcjd0a3Jj?=
- =?utf-8?B?MVRTYktzUStrME5jaEpoMC9YOC9DR2xlcnlmSm9yN1VBdzR6MkxNcXVHYU9L?=
- =?utf-8?B?OWR1eEJ2RnlxT0JEaHB4ZGZ6WWh4ZkM4Y0lZcVJLM3NVM0ZpMDd3R0NFZktE?=
- =?utf-8?B?UmFrcGsrK0JOaDlYVmR4V1Z5UVFRVVNKOWFER2pHMCs4TGIrUGMxRExFdzN3?=
- =?utf-8?B?Z0g1bjNEa29McWEyNWdiaXJMemV2cUJpbm1vakJXL1h1V0o4M0NrTDdBbS9P?=
- =?utf-8?B?S0I3SUE5TExLTHgrWEhVZFdZcFhnOTRIV3dEVU5SZisxYndFSXo4RCs1My8x?=
- =?utf-8?B?alpTY1BmZVFyVTFsenZZc3ZUOGp2c0VXM1ZSdGIyMmpoMkcrY2VQQjZQdzYr?=
- =?utf-8?B?RFdhSms2bnhoUFN0N3lNQnVTa0dWSXA1SzR0Z1dkVTQwSmk3VHZMclZPSW8w?=
- =?utf-8?B?L1BHQUltZzhqNkwzcXNTY1NYQW0xUVJnR1ZTWTR0QWYwcG9VVENsamcrSGRP?=
- =?utf-8?B?ZVN1SHV4UlVhYTJtZDFSVEdwVERuZUdVUDRUa1BWT2x5bHZuVWdFM3kwY0p0?=
- =?utf-8?B?VWdTMmVKazZOT1ZHY1lwZjFRbWhpSUxLK0dmRUdUMlRPRkpheWxTTkozbTN1?=
- =?utf-8?B?NEdXT0hkOXg4c3ViL24rVDdSOVl2QWFoendpbXE1M2tyUWFsRVYveG1FU09Z?=
- =?utf-8?B?QW1INVhXcVp2aE5CU3lBdzFSazA4SFBBK1lnOS9yTkR0S2pMYkN0dXRNNHVQ?=
- =?utf-8?B?bjZ4amtHSXRGREg1VFZBN1VWUjM0RUMvazkyRjJGMWsyZjRCelBpQTA5STZK?=
- =?utf-8?B?bUloayt0YnJsZmc2RExtNG4zOFJxSTBia2V4VW8wRnJEb2lOUzVTNU8rcGth?=
- =?utf-8?B?cVVrS3o2YjROdGxKK213U2dWN1NUN2dUMGgvVmpFd2twaFNXWGQ0M2Q4Y1I5?=
- =?utf-8?B?dTNma2VtZjN3WWczOER5RUZSTlFhL1pKTG40SG11TUxuSkFldjl0V2w0OXZS?=
- =?utf-8?B?cjZ2SlpDRFdLRGtRdXpYbE42WmJWcEw1U0hIRU5NV1BudkhqMTFOMStUSE4x?=
- =?utf-8?B?Y1NWWXdmSkVpTzdPcVRobEROR1VqSVlYdWJ6L0ErR2hUOU5TRWVwNWVpWTJi?=
- =?utf-8?B?aW1NWStvQWJ5T1BoRGpQRWpHOUZ2TFVBeG9pUnJKdTRPUVFjRlVaY3p5UUUw?=
- =?utf-8?B?dnFjbmJNWEVveE5OS28zc1Z1TjZTbkJhdWVMZ1NkckVpbks5c0tGNkcyNVJU?=
- =?utf-8?B?OFNvZVNCL01CeXIrY3dxM2s5Q0MvODNYQ1doUThDL0ZoVWp1eE0vMlBnZ0t1?=
- =?utf-8?B?cHVlZW5vMFdGVitMMkxCdzZ1SFFnUGI4NEFOSktVaHNjYWczQ1ZBajNUblVx?=
- =?utf-8?B?VE9id3JTOGhFUitYL2RHSnRGVis2QmEvN1NNVmhrZU41bkFSbndMSGd2WkFI?=
- =?utf-8?B?SmNra1VjeTR0Mlp2dWhUYzd2bGFSTDJudUxRUys5TFV3bEs5WmFlUG1yRlpG?=
- =?utf-8?B?MVM4TnIwYVU5NFRkZERkTXRPSmFsN1lGMm5SYmJYNjlsU3FBMFVqSms1RGtp?=
- =?utf-8?B?dUdxaUQvR1UrQmZkSE5tZGI0MFErbkRTa0RUVTRSa2pWTjFFL0hSSEVETytz?=
- =?utf-8?B?L0tydnhYNEtyY1BwWU5ybTFsUUxTUDBoeDllWDk4bFBqZVFlRnRSbUtzaXov?=
- =?utf-8?B?SnY5T1Z3K2NEbklJelV1Q0Fha1lzb0NZTWQ2b3VlU3RFOVlpUzRXMzNyY000?=
- =?utf-8?B?YmEvTllHREdjZkNSc2g5UWtCcXRMWlZ5b1VLZmR5Q1AwM21qWCtNYklrQW5w?=
- =?utf-8?B?YWFPZndicjZBUGRxVy9kY0NtWno4aFBpSUtLczBmSmFQNENsdG5QQWZnWXJP?=
- =?utf-8?B?bTJ6ZnF6NFoxaU1ZYUQ5SHF3Nkc4QVhmSWVLcEZ2UUpneGF0NnUzRGcya1Er?=
- =?utf-8?B?V1E9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4600ea1-6c2a-4637-cfa4-08dd1ba12044
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2024 18:08:20.3214 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dgvc5yRUi6IMqhYoetPrZcbRM3tk5xqC5JIylMhiq5wopKZpuT2zKCu/+KBscFZfh9pZY6kcIPW2NmK3G+QT4r0FEPTtXeSK9HA7mKAlbnM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10109
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: d865e6b4-b97e-11ef-8d54-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id d865e6b4-b97e-11ef-8d54-005056999439;
+ Fri, 13 Dec 2024 19:19:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=77sppwCQUdIBjDu5jve+zcOSp+hJi0yP1Grj79qkrD4=;
+ b=cGEF7g2eyu+riD4JevMPupAanVvTs9j7o0b0qLSh3MRKa+yQoa8TPMM6N6pOx/ZPgcf7qsekd1I3A
+ Fe9B2bfM8foLSnfWJVFvATW9lYQwiE2lzyyTez2drqMQDXZiQ6Kd408t1OAv8eFWsKeoDSmZjABhsl
+ SOhNlP2R9VwTwkomdK0bjNAshpPEsM3ucdi/2EqMMzucBHUL6udeAqEdCv1IlXoLr4ol4KcEvj+vIx
+ P0SbhKcEgG82Tm3IHzGcpPy4Ahpe9/8qNC/UYedzMIoKtUFxHyorfLH0w4Blp0RCIYXW883fzb82h0
+ ZyuGzqort8lf5mZC8Gm2OeTl4aUZDxQ==
+X-KPN-MID: 33|VJ7TRLmMicz3LluvX66g+FJh+CGOXZUM7NERtAfR/ZFG97PkoL/hR86icWVZijI
+ DDYkNwqpFpn0R5SlCwuanphn/wnmJDHs50xLviHJ7wIE=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|WqE6plyTmVdeJJOM3/1XcLj4Zd0rYIgWDuIk3T2TBt45jxIWAr0ZAlx1qtKFFot
+ VtSfNQBlTZblljVvr/RboXQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id d84a4839-b97e-11ef-b682-00505699b758;
+ Fri, 13 Dec 2024 19:19:52 +0100 (CET)
+Date: Fri, 13 Dec 2024 19:19:51 +0100
+Message-Id: <87wmg3wim0.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Simon Glass <sjg@chromium.org>
+Cc: ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, akashi.tkhro@gmail.com,
+ caleb.connolly@linaro.org, j@jannau.net,
+ marek.vasut+renesas@mailbox.org, kettenis@openbsd.org,
+ kojima.masahisa@socionext.com, mgarrett@aurora.tech,
+ mbrugger@suse.com, moritzf@google.com, pwildt@google.com,
+ peng.fan@nxp.com, pbrobinson@gmail.com,
+ rasmus.villemoes@prevas.dk, richard.henderson@linaro.org,
+ CFSworks@gmail.com, sr@denx.de, sughosh.ganu@linaro.org,
+ trini@konsulko.com, vincent.stehle@arm.com
+In-Reply-To: <CAFLszTiU0WXytXAWrp763dY9XZSfuk8GONhnoOFZCbZzpoqgNQ@mail.gmail.com>
+ (message from Simon Glass on Fri, 13 Dec 2024 07:02:42 -0700)
+Subject: Re: [PATCH v5 00/23] efi: Tidy up confusion between pointers and
+ addresses
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <CAC_iWjLXtTxbbcjf=dG=OpnNMh69HW69xpg4DJ4Es4TLjikgXg@mail.gmail.com>
+ <CAFLszTghBQ6pMi4mrBwnWONwzS=dLC8k+VV+9gn75J8bVn=6vQ@mail.gmail.com>
+ <CAC_iWjJVjYiywhCbcLDpZuriKGobxxdPYS2LQYod00JadHd1fw@mail.gmail.com>
+ <CAFLszTiU0WXytXAWrp763dY9XZSfuk8GONhnoOFZCbZzpoqgNQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,62 +87,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+> From: Simon Glass <sjg@chromium.org>
+> Date: Fri, 13 Dec 2024 07:02:42 -0700
 
-In U-Boot, there are multiple stages which can be loaded from different 
-media each. On Rockchip SoCs, it mostly goes this way, SoC BootROM loads 
-from a medium (storage or over USB) and executes the TPL (or SPL if no 
-TPL supported), the TPL goes back to BootROM and reads the SPL from the 
-same medium and executes it. The SPL will favor the same medium for 
-loading the U-Boot FIT image (containing TF-A BL31, OP-TEE OS BL32 and 
-U-Boot proper image), but in case it fails, falls back to other possible 
-media. In U-Boot we have the storage medium used for loading the U-Boot 
-FIT image stored in the DTB under /chosen/u-boot,spl-boot-device 
-property. But we do not have a property for the medium the BootROM 
-loaded the TPL (or SPL) from. This could be useful information. For 
-example, I have some CI where I want to check whether the BootROM loaded 
-the TPL from the expected location (important when checking that they 
-all work and don't depend on a bootloader flashed in a fallback medium 
-for example). Another usecase could be to detect whenever one loads the 
-TPL from USB (not a USB stick, some USB transfer; see rockusb for 
-Rockchip for example) and decide to do something else in U-Boot or the 
-OS depending on that (could be starting DFU for flashing the device, or 
-fastboot for loading the rest of the system).
+Hi Simon,
 
-Barebox currently does that by setting /chosen/bootsource to the full 
-path of the device the BootROM says it booted from, but that isn't part 
-of the DT spec so before I add support in U-Boot for that, I'm asking 
-whether that's fine or if we should correct course in Barebox and use 
-another name and/or location.
+> Hi Ilias,
+> 
+> On Thu, 12 Dec 2024 at 08:51, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Wed, 11 Dec 2024 at 23:40, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > >  Hi Simon,
+> > > >
+> > > > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > The EFI-loader implementation converts things back and forth between
+> > > > > addresses and pointers, with not much consistency in how this is done.
+> > > > >
+> > > > > Within most of U-Boot a pointer is a void * and an address is a ulong
+> > > > >
+> > > > > This convention is very helpful, since it is obvious in common code as
+> > > > > to whether you need to call map_sysmem() and friends, or not.
+> > > > >
+> > > > > As part of cleaning up the EFI memory-management, I found it almost
+> > > > > impossible to know in some cases whether something is an address or a
+> > > > > pointer. I decided to give up on that and come back to it when this is
+> > > > > resolved.
+> > > > >
+> > > > > This series starts applying the normal ulong/void * convention to the
+> > > > > EFI_loader code, so making things easier to follow. For now, u64 is
+> > > > > often used instead of ulong, but the effect is the same.
+> > > > >
+> > > > > The main changes are:
+> > > > > - Rather than using the external struct efi_mem_desc data-structure for
+> > > > >   internal bookkeeping, create a new one, so it can have different
+> > > > >   semantics
+> > > > > - Within efi_memory.c addresses are used, rather than addresses
+> > > > >   masquerading as pointers. The conversions are done in efi_boottime
+> > > > >
+> > > > > Unforunately my foray into attempting to use enum for the memory type
+> > > > > failed. The problem is not just that the external interface cannot use
+> > > > > an enum. In fact the enum in the spec is really just confusing, since
+> > > > > values not mentioned in the enum are valid. While we could handle this
+> > > > > by declaring a few more values in enum efi_memory_type, it doesn't seem
+> > > > > worth it. For example, if we declare 0x6fffffff and -1 as valid values,
+> > > > > we get the correct range, but then we need to be careful about
+> > > > > conversion in efi_boottime. If we declare 0xffffffff as valid, then the
+> > > > > enum ends up being 64-bits wide! Yes, that would work, I suppose it
+> > > > > wouldn't matter, but at that point I believe using an enum is actually
+> > > > > more confusing than not. It also made passing SCT tricky, since invalid
+> > > > > values are passed in...
+> > > > >
+> > > >
+> > > > So my general feedback on this is
+> > > > - Split it into a number of reviewable patches
+> > > > - Send the typos & doc changes in one patchset that we can easily pick
+> > > > up since it's mostly reviewed
+> > > > - Drop the two patches that add 'sjg' stuff that are removed later
+> > > > - Investigate why there's a reserved member in efi_mem_desc -- which I
+> > > > think is a bug and send the fix as a single patch
+> > > > - Drop the renames and duplication of efi_mem_desc with priv_mem_desc.
+> > > > I don't see any point in duplication that, keeping the memory
+> > > > descriptors in a list as it currently works is fine
+> > >
+> > > All the other points are OK, just more work. However, this one defeats
+> > > the purpose of the series. As you can see, I am lining up the EFI
+> > > internal-table more with how U-Boot and lmb do things, with addresses.
+> >
+> > I think Heinrich and I have repeated this more than once.
+> 
+> As an aside, I notice that you say this every now and then but I don't
+> think you realise how it comes across to the other person.
+> 
+> > EFI works
+> > with physical addresses, just like sandbox needs to map_sysmem. It's
+> > way easier for us to review and look at code exactly how the spec
+> > describes it.
+> 
+> So it looks like this series is not going to fly, because you *want*
+> the internal EFI tables to hold pointers-as-u64, rather than
+> addresses. You don't want to do that translation at the EFI boundary.
+> Is that right?
+> 
+> Also the reason for duplicating that in the commit
+> > message is
+> > - the name is confusing, which reallys int
+> 
+> I am unsure what you are referring to here.
+> 
+> > - The 'reserved' filed isn't needed, which is probably just a generic
+> > bug in the EFI struct  definition
+> 
+> I was surprised to see that I wrote that code. My guess is that it is
+> there to ensure the alignment is correct. The first field is u32 and
+> the third is u64 so perhaps I was concerned that the compiler would
+> not naturally align the u64? It was over 9 years ago and I don't
+> remember.
+> 
+> struct efi_mem_desc {
+>    u32 type;
+>    u32 reserved;
+>    efi_physical_addr_t physical_start;
+>    efi_virtual_addr_t virtual_start;
+>    u64 num_pages;
+>    u64 attribute;
+> };
+> 
+> The spec says "Unless otherwise specified all data types are naturally
+> aligned. Structures are aligned on
+> boundaries equal to the largest internal datum of the structure and
+> internal data are implicitly padded to
+> achieve natural alignment."
+> 
+> I'm pretty sure any compiler that we use will handle this, so you are
+> right, we don't need the field.
 
-I've also been made aware of other "sources" that are added to the 
-/chosen node in Barebox, reset-source, reset-source-instance and 
-reset-source-device. I am not entirely sure what those exactly are for 
-BUT it seems that this is of interest to U-Boot as well since we do try 
-to report a reset cause as read from the CPU for Rockchip SoCs, c.f. 
-https://elixir.bootlin.com/u-boot/v2024.10/source/arch/arm/mach-rockchip/cpu-info.c#L14. 
-I believe /chosen/reset-source would be the reason, e.g. "POR", "RST", 
-"WDG", "WKE", "THERM", etc. /chosen/reset-source-device contains the 
-node path to the device that triggered that, that could be useful in the 
-event there are more than one thermal trip point (e.g. CPU or GPU), or 
-more than one hardware watchdog (I for example have a system with 
-potentially 4: SoC, PMIC, 2 separate in an external MCU). I guess 
-/chosen/reset-source-instance is for HW blocks that expose the same 
-reset but from two different sources which aren't modeled in Device 
-Tree. Again, this would be useful for the bootloader or OS to decide to 
-do something else based on the reset cause (e.g. have data on why some 
-devices reboot in the field, e.g. because of thermals, power loss, 
-brownout, etc..).
+The i386 SysV ABI uses a maximum alignment of 4 bytes, so without that
+field, the later memebers of the struct would not be naturally
+aligned.  Now whether a 32-bit x86 U-Boot is something we care about
+is a different question.
 
-I'm reaching out to the devicetree-spec community before I add code in 
-U-Boot to implement this so we don't add unnecessary backward 
-compatibility code, were the properties or locations to be modified to 
-match the spec.
-
-Does anyone disagree with adding this to the spec? Does anyone have 
-another suggestion for the naming or location of the properties?
-
-Would you prefer a patch to the spec and discuss "code" directly there?
-
-Cheers,
-Quentin
+> Regards,
+> Simon
+> 
+> >
+> >
+> > Thanks
+> > /Ilias
+> > > I cannot use both addresses and pointers in the same struct...I
+> > > initially did that but it was just far too confusing.
+> > >
+> > > > - Send the map_to_sysmem() places you need in a different patchset
+> > > > with an explanation of *why* this is working currently (or not
+> > > > working)
+> > > >
+> > > > Hope this helps
+> > > > /Ilias
+> > > >
+> > > > > Link: https://lore.kernel.org/u-boot/20240725135629.3505072-1-sjg@chromium.org/
+> > > > >
+> > > > > Changes in v5:
+> > > > > - Drop the enum / mem_type patch as it is not needed
+> > > > > - Drop the patch to remove extra brackets in efi_mem_carve_out()
+> > > > >
+> > > > > Changes in v4:
+> > > > > - Add new patch to show the address for pool allocations
+> > > > > - Combine the various pointer-to-address patches into one
+> > > > >
+> > > > > Changes in v3:
+> > > > > - Adjust comments
+> > > > > - Show the returned address rather than the pointer
+> > > > > - Put the header-file in its own section
+> > > > > - Add comment to struct efi_device_path_memory
+> > > > > - Use a pointer for the values in struct efi_device_path_memory
+> > > > >
+> > > > > Changes in v2:
+> > > > > - Fix missing @
+> > > > > - Note that this holds pointers, not addresses
+> > > > > - Add a new patch with comments where incorrect addresses are used
+> > > > > - Use EFI_PRINT() instead of log_debug()
+> > > > > - Rebase on early patch
+> > > > > - Add new patch to add the EFI-loader API documentation
+> > > > > - Add new patch to use a separate stuct for memory nodes
+> > > > > - Drop patch 'Convert efi_get_memory_map() to return pointers'
+> > > > > - Drop patch 'efi_loader: Make more use of ulong'
+> > > > > - Significantly expand and redirect the series
+> > > > >
+> > > > > Simon Glass (23):
+> > > > >   efi: Define fields in struct efi_mem_desc
+> > > > >   efi_loader: Fix typos in enum efi_allocate_type
+> > > > >   efi_loader: Add comments where incorrect addresses are used
+> > > > >   efi_loader: Show the resulting memory address from an alloc
+> > > > >   efi_loader: Update startimage_exit self-test to check error
+> > > > >   efi_loader: Move some memory-function comments to header
+> > > > >   doc: efi: Add the EFI-loader API documentation
+> > > > >   efi_loader: Use a separate struct for memory nodes
+> > > > >   efi_loader: Drop virtual_start from priv_mem_desc
+> > > > >   efi_loader: Drop reserved from priv_mem_desc
+> > > > >   efi_loader: Use the enum for the memory type in priv_mem_desc
+> > > > >   efi_loader: Avoid assigning desc in efi_mem_carve_out()
+> > > > >   efi_loader: Move struct efi_mem_list fields together
+> > > > >   efi_loader: Rename struct efi_mem_list to mem_node
+> > > > >   efi_loader: Rename physical_start to base
+> > > > >   efi_loader: Use correct type in efi_add_runtime_mmio()
+> > > > >   efi_loader: Show the address for pool allocations
+> > > > >   efi_loader: Don't try to add sandbox runtime code
+> > > > >   efi_loader: Update to use addresses internally
+> > > > >   efi_loader: Correct address-usage in copy_fdt()
+> > > > >   efi_loader: Drop comments about incorrect addresses
+> > > > >   efi_bootmgr: Avoid casts in try_load_from_uri_path()
+> > > > >   efi_loader: Simplify efi_dp_from_mem()
+> > > > >
+> > > > >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |   2 +-
+> > > > >  arch/arm/mach-bcm283x/reset.c                 |   2 +-
+> > > > >  doc/api/efi.rst                               |   6 +
+> > > > >  include/efi.h                                 |  23 +-
+> > > > >  include/efi_api.h                             |  10 +
+> > > > >  include/efi_loader.h                          |  87 +++++-
+> > > > >  lib/efi_loader/efi_bootbin.c                  |   3 +-
+> > > > >  lib/efi_loader/efi_bootmgr.c                  |  10 +-
+> > > > >  lib/efi_loader/efi_boottime.c                 |  43 ++-
+> > > > >  lib/efi_loader/efi_device_path.c              |  16 +-
+> > > > >  lib/efi_loader/efi_dt_fixup.c                 |   4 -
+> > > > >  lib/efi_loader/efi_helper.c                   |   4 +-
+> > > > >  lib/efi_loader/efi_image_loader.c             |   3 +-
+> > > > >  lib/efi_loader/efi_memory.c                   | 261 +++++++-----------
+> > > > >  lib/efi_loader/efi_runtime.c                  |   7 +-
+> > > > >  lib/efi_loader/efi_var_mem.c                  |   6 +-
+> > > > >  .../efi_selftest_startimage_exit.c            |   6 +-
+> > > > >  lib/lmb.c                                     |  10 +-
+> > > > >  18 files changed, 278 insertions(+), 225 deletions(-)
+> > > > >
+> > > > > --
+> > > > > 2.34.1
+> > > > >
+> > >
+> > > Regards,
+> > > SImon
+> 
