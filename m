@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39AADE7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 03:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C605DE7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 03:53:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45E7A8018E;
-	Fri, 13 Dec 2024 04:53:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A16F801FE;
+	Fri, 13 Dec 2024 04:53:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V3RA6+yc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c1qv9gwf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4B1180192; Fri, 13 Dec 2024 04:53:24 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id AE93D8021C; Fri, 13 Dec 2024 04:53:31 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C78A80141
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:53:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A268480141
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:53:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa69077b93fso189037766b.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 19:53:22 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f249f3b2so1638831a12.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 19:53:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734062002; x=1734666802; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734062009; x=1734666809; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KNlSYNSYYkpYYKAS1bQMVTO8cpWwFUOtScQh9UdLSB4=;
- b=V3RA6+ycrSd8D0g0mWjriIBYcBoH/841caA6k2+0kaoZeWBxbTKTnIp+6TBZkqFVrD
- cDSQHr48uLtT0nnFvRCPtJD152EAJFNTkeVjp/bPCel5Wz1JK+DALJTrbMx2miOpYgFd
- Pi6waiaQKXMzRkzCc5zAhw/Uri/xW4gNOm7e0=
+ bh=QbN3Czeygd0gQMlg3dIq5QVpKz8ZMocp1ShtaqsTl90=;
+ b=c1qv9gwff7dmgGdqtHQFYmf8ZilEUEkx9GrEOxxUH/kI/Q1sLoNsz2sh/Iqv/qhk+3
+ 0tLqBt1DPao9ub+KZ0Cxm9qN32KFM9OoDNppS3grI9V/TFR9Q5WqjpfiSGIqREMQayib
+ 2Fmml06yf2I2jsxlDrUkcXKn7nTYBTfeOBwAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734062002; x=1734666802;
+ d=1e100.net; s=20230601; t=1734062009; x=1734666809;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KNlSYNSYYkpYYKAS1bQMVTO8cpWwFUOtScQh9UdLSB4=;
- b=N0BGFMkeIMftSECdq5Xh1issbW0W1Oyt7zqE9PrI6nY/E9bOtGlbOXHQQv6vV3g87O
- h45znqrIxjoiIX/BjNp5eIluTlKmHIQKijVRZrR/viu1TPSg/K7H61tPBGh0HdBO/kwZ
- Da9AcE+E713vVS7oX8lIZHuxAPFAwWPCDM+PcXD86svn3khOoy4MgG6RusonK1uRz1B8
- j7x67K8A5F4i/jqmm50vkHzjsn9P0BPOFONZ7c1tElxbF8BAgmZcU+KzBfhAXcOt4/rs
- fhu1QekwdORl4pbzjSoaYWHynBCh3Sd1u6gOfBM9/7KsGQbgYtKFV0Tt2XkyK3DgJxzI
- Pieg==
-X-Gm-Message-State: AOJu0YxNFADdkCv4o2l3e/VOwhOlcLer3Uty26SVtNYDHt5PtrvU2lYK
- 14EAntuBjVnmHiUndwQ4a6m6jcxfr1WmAYZmBPlyrqHIBhVMr4J4QvseqSwX3phqP5t6xPjlQgX
- NMQPNzzca6LwgUhLBzWe9mAaOQgV5FVGufIfW
-X-Gm-Gg: ASbGnctzabI7Fev0pLTcPiRPDj4f+OyAZasO4y4xLzWKCbrIR9Zjo/DE7A/7DLCTKTD
- C1Lqzt/k/2/QB9F0SJfhgvy4eDzTf1t8lEGcVvVU=
-X-Google-Smtp-Source: AGHT+IGFLX6M5g++TbfI0PprDmSrggwB5QNasxf0RXZWSx+6IEc9NLz90jZt5JNDmboK1O7B9OiGwYNt3pnEIUmL70k=
-X-Received: by 2002:a17:907:7290:b0:aa6:79fa:b486 with SMTP id
- a640c23a62f3a-aab77ed3a3amr110421966b.49.1734062001738; Thu, 12 Dec 2024
- 19:53:21 -0800 (PST)
+ bh=QbN3Czeygd0gQMlg3dIq5QVpKz8ZMocp1ShtaqsTl90=;
+ b=tT8C3aYbQ+hSyAFOAZr/tnGOHZDnnV0uXBl/qhhFqG5hnjEJR7Y9S4vwFfVut/hol7
+ oeFkE3PITgtBA07AjPRTgVrxhizPy8Cy+178ji0LAoAFcvGElbp76LyC9mTPBaPKlF3v
+ 2FLKbISTUhrwNmhWWM940A/zNmSK4NpwPWCQ3BqpnfS0H853rEc20NxWlIdlrnbYAtEK
+ FJGbjG96D34Zj5x/6dBeKr+fN0qZg73+FCkAHqQpqESixvOZ7zzxqLJQqhafU7BkaPOv
+ +AGaRQh61LS19VH7XGsVyL2fhbIcVWxtnCjof6SLIWNaMx0mj0VGpawu9snTRDmxVUIQ
+ /Bnw==
+X-Gm-Message-State: AOJu0YwwUixLWNqOjqyvZWDCwy+vRru50YymqyNsm1dcAuvXUhND46CG
+ 7PnW4wPLCztoWvdqeJNj2Bb8q+Pxu+Y5QIm5J6G3t0j17A7Z9PWv3VtTnkjBf12IaSyDjOALOIX
+ vyBjdMJArid0pwP3o0XzdF3y90WTmILA+KqSC+I1voVJ7VZw=
+X-Gm-Gg: ASbGnct4HhVFM1XcnZYX8mRW82+f5I94UF1jl1M3spVMOy9E1EUxMBsR5OETrQacRXl
+ kgNHaO2cBSZZLRe9sJtTGK59dKRTQ9yh1MInFJXE=
+X-Google-Smtp-Source: AGHT+IH0QMiLVs5vk4a5CWVNT6SVXhkguv/IgvdF6YOggHgv8VESsSRU05f1OiOp2F4jDdiUPFVkFDysv4H0wbP6ZoQ=
+X-Received: by 2002:a05:6402:390a:b0:5d4:2ef7:1c with SMTP id
+ 4fb4d7f45d1cf-5d63c3db8d9mr2120223a12.24.1734062009164; Thu, 12 Dec 2024
+ 19:53:29 -0800 (PST)
 MIME-Version: 1.0
-References: <20241211223822.2446254-1-sjg@chromium.org>
- <20241211223822.2446254-5-sjg@chromium.org>
- <CAC_iWjKaywBv3qyk=fHNqH_anC3xT63Ua2=DMG2w1=LEt2vDLg@mail.gmail.com>
- <CAFLszTj8z+CL4FU_6yGjvN82ARYr3ZiWsGd7h9A=p6ObhEKcug@mail.gmail.com>
- <CAC_iWjJtG2qoHEWW8h7hVVU1c6+dPFJ3X7jYSe5H0UzXkSHxcQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJtG2qoHEWW8h7hVVU1c6+dPFJ3X7jYSe5H0UzXkSHxcQ@mail.gmail.com>
+References: <20241211135418.563803-1-sjg@chromium.org>
+ <20241211135418.563803-5-sjg@chromium.org>
+ <CAC_iWjK8LO=m9ymhCDMep0xwa+hR8OSaBfS1VXgWsPLAGfnuXQ@mail.gmail.com>
+ <CAFLszTiTLXpZ4NYX2rEtjYa3+2moXt-aFtJYQvui8_Po4tQt4w@mail.gmail.com>
+ <CAC_iWj+3-pwCZ+=vJGMzPwyzywRXXOJXCLQ3GT0h6jEjcpeK-g@mail.gmail.com>
+ <CAFLszTg0ByzE0WhHmgvgZhDWu4BxZ3a8bLc6EDUvHNqBLyYprg@mail.gmail.com>
+ <CAC_iWjKHYznXnjTxC060v3H8vdvMcmTHBM0ZKKqb8PjPoUCqZQ@mail.gmail.com>
+ <CAC_iWjLhFymSyHaZ96K6Ga4jz2EbX2L87WUX98pH2xPiJ4WijA@mail.gmail.com>
+In-Reply-To: <CAC_iWjLhFymSyHaZ96K6Ga4jz2EbX2L87WUX98pH2xPiJ4WijA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 12 Dec 2024 20:53:09 -0700
-Message-ID: <CAFLszTinZrL8VLiMSk-PxWP7oWdY=35kNNUYXXx3EfEz7Z72cQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] efi_loader: Add a version of efi_binary_run() with
- more parameters
+Date: Thu, 12 Dec 2024 20:53:17 -0700
+Message-ID: <CAFLszTg4Pn_NZkGOtGduz5bm8R5PkTN4W+J7zKCLXJmiX2QYuw@mail.gmail.com>
+Subject: Re: [PATCH v5 04/23] efi_loader: Show the resulting memory address
+ from an alloc
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Janne Grunau <j@jannau.net>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,114 +95,106 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Thu, 12 Dec 2024 at 08:45, Ilias Apalodimas
+On Thu, 12 Dec 2024 at 08:48, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, 12 Dec 2024 at 17:46, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > Hi Ilias,
-> >
-> > On Thu, 12 Dec 2024 at 00:49, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
+> > On Thu, 12 Dec 2024 at 15:44, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > This uses a few global variables at present. With the bootflow we have
-> > > > the required parameters, so add a function which accepts these. Update
-> > > > the existing function to call the new one with the globals.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  lib/efi_loader/efi_bootbin.c | 29 +++++++++++++++++++++++++----
-> > > >  1 file changed, 25 insertions(+), 4 deletions(-)
-> > > >
-> > > > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > > > index 8febd325f34..8ebd48547cb 100644
-> > > > --- a/lib/efi_loader/efi_bootbin.c
-> > > > +++ b/lib/efi_loader/efi_bootbin.c
-> > > > @@ -209,18 +209,22 @@ out:
-> > > >  }
-> > > >
-> > > >  /**
-> > > > - * efi_binary_run() - run loaded UEFI image
-> > > > + * efi_binary_run_() - run loaded UEFI image
-> > > >   *
-> > > >   * @image_ptr: memory address of the UEFI image
-> > > >   * @size:      size of the UEFI image
-> > > >   * @fdt:       device-tree
-> > > > + * @device:    EFI device-path
-> > > > + * @image:     EFI image-path
-> > > >   *
-> > > >   * Execute an EFI binary image loaded at @image.
-> > > >   * @size may be zero if the binary is loaded with U-Boot load command.
-> > > >   *
-> > > >   * Return:     status code
-> > > >   */
-> > > > -efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
-> > > > +efi_status_t efi_binary_run_(void *image_ptr, size_t size, void *fdt,
-> > > > +                            struct efi_device_path *device,
-> > > > +                            struct efi_device_path *image)
-> > > >  {
+> > > Hi Ilias,
 > > >
-> > > This needs to be static here. Not the next patch. But I don't think we
-> > > need this at all (look below)
-> > >
-> > > >         efi_status_t ret;
+> > > On Wed, 11 Dec 2024 at 23:22, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
 > > > >
-> > > > @@ -236,6 +240,23 @@ efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
-> > > >         if (ret != EFI_SUCCESS)
-> > > >                 return ret;
+> > > > On Wed, 11 Dec 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Wed, 11 Dec 2024 at 07:51, Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Update efi_allocate_pool_ext() to log the pointer returned from this
+> > > > > > > call, which can be helpful when debugging.
+> > > > > >
+> > > > > > Can you explain how logging the success is helping? I think its pretty
+> > > > > > pointless, why not log a failure?
+> > > > >
+> > > > > It shows the memory address that was allocated.
 > > > >
-> > > > -       return efi_run_image(image_ptr, size, bootefi_device_path,
-> > > > -                            bootefi_image_path);
-> > > > +       return efi_run_image(image_ptr, size, device, image);
-> > > > +}
-> > > > +
-> > > > +/**
-> > > > + * efi_binary_run() - run loaded UEFI image
-> > > > + *
-> > > > + * @image:     memory address of the UEFI image
-> > > > + * @size:      size of the UEFI image
-> > > > + * @fdt:       device-tree
-> > > > + *
-> > > > + * Execute an EFI binary image loaded at @image.
-> > > > + * @size may be zero if the binary is loaded with U-Boot load command.
-> > > > + *
-> > > > + * Return:     status code
-> > > > + */
-> > > > +efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> > > > +{
-> > > > +       return efi_binary_run_(image, size, fdt, bootefi_device_path,
-> > > > +                              bootefi_image_path);
-> > > >  }
+> > > > Sure, but that's not what I asked.
 > > >
-> > > We don't need functions and wrappers for such a simple call. Just
-> > > update all the callisites with the extra parameters and keep one
-> > > function
-> >
-> > If you look at the two call sites, you'll see that they would need to
-> > pass bootefi_device_path and bootefi_image_path in. but these are
-> > static variables in this file.
+> > > On failure, the address is undefined, so logging it just adds
+> > > confusion. It will likely be a random number.
 >
-> Ah fair enough, then please rename efi_binary_run_ -> _efi_binary_run
-> ands make it static on this patch
+> I mean just report a failure to update. What use can the allocated
+> address be of?
 
-I don't mind where the underscore goes. I changed my mind about that
-when the dtc maintainer pointed out that C-library functions start
-with underscore, so putting an underscore at the start of the function
-is confusing things.
+Can you please rewrite the patch so I can understand what you are getting at?
 
-"The underscore prefix is reserved for functions and types used by the
-compiler and standard library. The standard library can use these
-names freely."[1]
+>
+> Thanks
+> /Ilias
+> > >
+> > > >
+> > > > >
+> > > > >
+> > > > > >
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > > (no changes since v3)
+> > > > > > >
+> > > > > > > Changes in v3:
+> > > > > > > - Show the returned address rather than the pointer
+> > > > > > >
+> > > > > > > Changes in v2:
+> > > > > > > - Use EFI_PRINT() instead of log_debug()
+> > > > > > >
+> > > > > > >  lib/efi_loader/efi_boottime.c | 4 ++++
+> > > > > > >  1 file changed, 4 insertions(+)
+> > > > > > >
+> > > > > > > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> > > > > > > index 080e7f78ae3..f27b3827ed2 100644
+> > > > > > > --- a/lib/efi_loader/efi_boottime.c
+> > > > > > > +++ b/lib/efi_loader/efi_boottime.c
+> > > > > > > @@ -13,6 +13,7 @@
+> > > > > > >  #include <irq_func.h>
+> > > > > > >  #include <log.h>
+> > > > > > >  #include <malloc.h>
+> > > > > > > +#include <mapmem.h>
+> > > > > > >  #include <pe.h>
+> > > > > > >  #include <time.h>
+> > > > > > >  #include <u-boot/crc.h>
+> > > > > > > @@ -511,6 +512,9 @@ static efi_status_t EFIAPI efi_allocate_pool_ext(int pool_type,
+> > > > > > >
+> > > > > > >         EFI_ENTRY("%d, %zu, %p", pool_type, size, buffer);
+> > > > > > >         r = efi_allocate_pool(pool_type, size, buffer);
+> > > > > > > +       if (r == EFI_SUCCESS)
+> > > > > > > +               EFI_PRINT("*buffer = %llx\n", (u64)map_to_sysmem(*buffer));
+> > > > > >
+> > > > > > buffer can be null if size == 0
+> > > > >
+> > > > > No, buffer cannot be NULL, I believe you are thinking of *buffer
+> > > > >
+> > > > > That's one reason why I prefer bufferp to buffer. It avoids this sort
+> > > > > of confusion.
+> > > >
+> > > > I personally don't find any of this confusing. Yes, I am talking about
+> > > > *buffer, but I am pretty sure this is obvious in the context of the if
+> > > > check. It can be NULL
+> > >
+> > > OK, then I am missing your point. Could you expand on what you mean here?
+> >
+> > EFI is require identity mapping. You have a physical address but if
+> > you want to dereference the ptr it it's *(virt addr). Since it's 1:1
+> > *(phys addr) would also work, but we shouldn't do the latter.
 
-But I don't mind. We don't even use the C library except for sandbox
-and tools. So let me know what you think.
+We need to talk about sandbox...
 
 Regards,
-SImon
-
-[1] https://stackoverflow.com/questions/39625352/why-do-some-functions-in-c-have-an-underscore-prefix
+Simon
