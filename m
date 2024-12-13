@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C03E77180
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 01:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E35E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 01:12:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1856580137;
-	Fri, 13 Dec 2024 02:05:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29AA380137;
+	Fri, 13 Dec 2024 02:11:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h7jzk+qf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i+TwwdyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8370580192; Fri, 13 Dec 2024 02:05:34 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 40E5880192; Fri, 13 Dec 2024 02:11:58 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AAEF800D7
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 02:05:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19766800D6
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 02:11:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6d8f99cb0d9so11469066d6.0
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 17:05:32 -0800 (PST)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-46772a0f8fbso10840161cf.3
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 17:11:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734051931; x=1734656731; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ilJlvOFbFUUueINfvobbICPdZ3zMD5a7TelVdedTPog=;
- b=h7jzk+qfYPXwyIvG7oyGk2l98bmG+we8FLj9UMIy8x3HO10Ekm9ydFLTKLK78HSM2x
- Kt7s2MK+dBJJdo2e2nS1K7HySMW0+w1CCOh7xkGoyBojGBnPxnoql3AZcft+CZyfXXQq
- txYO232jQ6FHsI92HvR8VbhTaTbuTPOiILF7A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734051931; x=1734656731;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1734052315; x=1734657115; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ilJlvOFbFUUueINfvobbICPdZ3zMD5a7TelVdedTPog=;
- b=H8yBEsCPcEtUduhbbAbI9oAwKXe39mcrEobh4GKvSeqVOrJ+x8crRtNr82p4a7UdWq
- u+s3cTWY1npCs7LTFTqklFdY1WC0woGrsgM+czW3gSDeuL0Zui+eQFdZ+3T3c26RaUAt
- oxmO5ea6sYAasoBKE0BybfrdHIU2SQjEX2hFpvgxrNtkNVzxPwImRtor/8UDcrcSh3ck
- ufv87wVQRDQSm62JVUqVvkspfIv9MsAOuj1qwzFQNCcTTSCSX45FYsjHMq1cAwqZ6P5D
- Wo/0Q1PYWHOkxaZTJ/I0vKVr82HhFI7KE5ajf025B1ox069hlmNQ2FzhdnApIbTIgDQp
- lI+A==
-X-Gm-Message-State: AOJu0YyQQ9YWUy0iLBp3/YwOVuDJuC4VmNut18aChyQPJ0/sUikiS8v5
- 7c5q1Nqvp/OiWCPmJh0aj6VxFk24JI/pDTZFr9l+RoP0RvY+3QWBBf7MPfmpWwc=
-X-Gm-Gg: ASbGncsQNPQqWXw/o1Rqb/MYi7QTOkfgrvfBYfe0eBnlHqD/0pLAXEyhUuuR8zw87J/
- HBLm48spoGN1asgYGV5frYmb1EjVbrmHbMspSNeOCyI1wdaW77oDn8a5IqavmETKe+pvEqIqkRe
- UWocRF1H4f7Tp71uyoOB5TImEO3EO+pSwmH0Mp1vO8J4EFqUDRwHezKDTPXLcDTriFd0XyuNDa6
- uc5NRIjXMXFksP3iFBAF1Ikm4a0KSHtzZFO3Q8nbovVSzkJ1Acrq8/w
-X-Google-Smtp-Source: AGHT+IGlvtp3cIHxSTh/P9WixZDyCVEkqggl2foWG4/QcOMqzRjvGCOyFDV3Ji3NaAx9TRfNKerVBw==
-X-Received: by 2002:a05:6214:c28:b0:6d4:215d:91b9 with SMTP id
- 6a1803df08f44-6dc8ca508d7mr13907216d6.11.1734051931172; 
- Thu, 12 Dec 2024 17:05:31 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6d8e0e8c1dfsm83545546d6.59.2024.12.12.17.05.28
+ bh=VsKEV1l+GrZ31i6avEUCSpxWiVlLN7j8BzN8WX/NpCI=;
+ b=i+TwwdyRsf9O2ywpq9ESg2G0Hl3Q8Be3bKjkOrHOma1AusRYMYJt6+AfwBrtaHGQf9
+ PrfQczyLPO81ylTZhrE4PYRARgT0JUXgMzbaSXUSJ58JF0pPMtXtA6C+24jyIkPM/PBU
+ JZee8q40hNKsxoYu73/Gp3+xCrLqhN4ECW/0k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734052315; x=1734657115;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VsKEV1l+GrZ31i6avEUCSpxWiVlLN7j8BzN8WX/NpCI=;
+ b=Vufc+r1BgLJExCy7g/56+A5+jWeS1TmiKHZXv242nOKnwSIvRDwxNn0icqP6PWIXfv
+ 1E/L7ME7FUcEhNA5vxLujPRgZN+jIxtt5l5IP1scFA1b1S9j0Hc+qVpJMAhBQINr55St
+ 4q9dTar4AhcetHKg1Kc41DDFlZ6j4RvkoXTbXnEr/t45VrqlUHAZh+qKj6Fns+3Y3IS/
+ EMuJF/inj5zxRcMlEZDeYC3/zwI4v6Wka7hJCKtaYymkD+6PoSsRviuuO3qNElELac5m
+ 1dRLqPrmnKKDuUborFJVJBXJlgv9cLgqYz0IBMXJnJ8Yy3whVfNlxRWUIySP1DxRv9E+
+ GTEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6/jdneiLpjxlwMWhgasI6plCKqu9dFxOrXBM/eVOy5U1Fi1hhOBGfEQ4KBdkOLo6d8BxQS0s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyQXH6fJetJ+B5Z3lUPxFds7fvyqXMGP2nTMUviUd9hXX/JdDK/
+ 62cuySbhDB1ShjN3yEjP9mt8hbXu9qYYVD3JQe2Kb0zXd1M9xvV4GW6bE1or6hY=
+X-Gm-Gg: ASbGnctrUBRjiLkqAvOy6k/X9WUZZA8vJAicuc5UKmSEm/8x/DsyGrElpo8EY9BcaXX
+ sNqv7ZdibOm4fd+0PThqPQtOtnW/Ikyd0dhUzklXxX6CT9TQfviYdhaH5UkNSufabPFZfiKWAyL
+ SBE+lwdVMIa1IXnnY5jc0Lnb3A+Hea6eJXELCnkMdQzgaohEUMeeHE+ZFmHdl3i0dalicr1Chym
+ wwSUaiGr8UECKJ0Iy/CM/bVwbYx9HIsKtbCZ6AJxj+uCet1efvWhoo=
+X-Google-Smtp-Source: AGHT+IHmZ/AIPAOkTf7ftkuXgaKPdPciNshVDW0/R4VCFvaZqxsKxOLwqtXxu78KGvqZ0qw8MIMPig==
+X-Received: by 2002:a05:622a:18a7:b0:467:451b:eb99 with SMTP id
+ d75a77b69052e-467a57a95e4mr12761831cf.29.1734052315007; 
+ Thu, 12 Dec 2024 17:11:55 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4672978dc20sm90148181cf.71.2024.12.12.17.11.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 17:05:29 -0800 (PST)
-Date: Thu, 12 Dec 2024 19:05:25 -0600
+ Thu, 12 Dec 2024 17:11:53 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH] gitlab: Add an rpi to the sjg lab
-Message-ID: <20241213010525.GN1505244@bill-the-cat>
-References: <20241213005903.73919-1-sjg@chromium.org>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
+ Yang Xiwen <forbidden405@outlook.com>, Julien Masson <jmasson@baylibre.com>, 
+ u-boot@lists.denx.de, Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20240308000432.32369-1-semen.protsenko@linaro.org>
+References: <20240308000432.32369-1-semen.protsenko@linaro.org>
+Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present
+Message-Id: <173405231246.1635625.8070306930792525634.b4-ty@konsulko.com>
+Date: Thu, 12 Dec 2024 19:11:52 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QO8QC5U6N3ATsWE1"
-Content-Disposition: inline
-In-Reply-To: <20241213005903.73919-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,40 +100,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 07 Mar 2024 18:04:32 -0600, Sam Protsenko wrote:
 
---QO8QC5U6N3ATsWE1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Sometimes clocks provided to a consumer might not have .set_rate
+> operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
+> set. In that case it's usually possible to find a parent up the tree
+> which is capable of setting the rate (div, pll, etc). Implement a simple
+> lookup procedure for such cases, to traverse the clock tree until
+> .set_rate capable parent is found, and use that parent to actually
+> change the rate. The search will stop once the first .set_rate capable
+> clock is found, which is usually enough to handle most cases.
+> 
+> [...]
 
-On Thu, Dec 12, 2024 at 05:59:03PM -0700, Simon Glass wrote:
+Applied to u-boot/next, thanks!
 
-> I have an original rpi installed now, loaded with OS Lite (32-bit)
-> Add an entry for it so that it can be used for testing.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+-- 
 Tom
 
---QO8QC5U6N3ATsWE1
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdbiE4ACgkQFHw5/5Y0
-tywW3AwAoEgnav1MEMAjJrkBx2Vb0IyAO/azUFChKeXQ0fByfhFbhwn4A18yGfmp
-onB/V6OV01ioc1oZ2yy5+0sevVM9q78b4EdJWuonkvjFTwORMGfmitbYaFt064oH
-QKBqkhRD9LVLQAV2iKEZwL4u6m0NELqn9b9e0ea36CWKPTIAEMCSnSCbZMdNDbCn
-uQCC5oQ60UqNJaySvS9Zykq/e/WspMPJKVWcfOggih2bHhGaPrGiY2m7anrXdpBI
-t41XA9NzPvFhP7SfGbqCRM25IVcSFjZdi321RLU//8Ft9Nfhw2QEK4Xi5mxY981U
-OI/Tk8jCvIkk2euen03Ki/560a5O1639EQ9Y3DWlZJ1F1ocdqq2XFcBhPhXvobfx
-CFbD3zuRzO/iLn7TJUXRO1yWOh8qtzmxx+ElqRDUcNtuMWIzHGdmFuNolgHtqwrf
-JVnDWUfQ0wAz39CjOh0UBwm5ICDdFiTY+HG+aJyjoIUgqdtxGdih8hMfBDkoco9y
-pdjRDxBO
-=kmiZ
------END PGP SIGNATURE-----
-
---QO8QC5U6N3ATsWE1--
