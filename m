@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10025E7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 16:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3082E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 16:42:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0272F800C8;
-	Fri, 13 Dec 2024 17:41:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 72905800D7;
+	Fri, 13 Dec 2024 17:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mqGtJJw5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NxTmkim2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FB6A800D7; Fri, 13 Dec 2024 17:41:39 +0100 (CET)
+ id 3AA4480104; Fri, 13 Dec 2024 17:42:35 +0100 (CET)
 Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
  [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C3A8800C1
- for <u-boot+nodisclaimer@lists.denx.de>; Fri, 13 Dec 2024 17:41:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E1F7800C8
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri, 13 Dec 2024 17:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
 Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2ef6c56032eso1315835a91.2
- for <u-boot+nodisclaimer@lists.denx.de>; Fri, 13 Dec 2024 08:41:36 -0800 (PST)
+ 98e67ed59e1d1-2ee786b3277so1319562a91.1
+ for <u-boot+nodisclaimer@lists.denx.de>; Fri, 13 Dec 2024 08:42:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734108095; x=1734712895; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734108151; x=1734712951; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bf6X8wZQT6J6XIQdsg8M63wkKHvf3Acp+dj5l5atGmk=;
- b=mqGtJJw5DGujmXkjoMQQgDWe/hL4tMWYKZdparojDpJ6vVoXxE3mwkmVDAe+mzLQPp
- jj7k+egYOkvFJBDroD83utJIwThdTtd72MRNsx4f6vbAEYtcAkcnypQKpSHY5IzB8SEZ
- 6IzKBvwsDAe0Yn6v7SYm+po3KwqMP3dIqjYEDHBBwUKJeWlBne5+243l3I6IvrKlGK9b
- 4Z2oiqFPj3hnZowOdrWFquaI7IyQE4jU2Xup5Wxcw4lOMYNarCaJeCp8ajq9sKduwnyb
- C6mZja7FIIEMhz4xYnzGlWHBMGhaoxxFAyQdqx3Rsh2h+24VcZ75NBpyqJmU1EaEXCsJ
- JcOQ==
+ bh=rf43cUYS4h8CzCvB6H6y5NYZgLVM43bA44IAiOjq5g4=;
+ b=NxTmkim2WWIRuCSfG7KerOKA/y9oANj0ccTs4fbuHVzthzCLmODBzGwFhvoIPK4Vvz
+ lmHPlA77qx93qkpI6RC/l6dVhU3rq6SWSqqDzDTh9xd9DjaU/hg07OiKZn7QJCT9Eo9z
+ xVTPMch3XB5VOBLlNplK/atqeSgrZOjUkMXouK7tp+eR8fpquniNvKmNSTiCK7iBZQBX
+ y3JEYipEyhq+hcb53/TWawducfDFosxvoEi026i7abeMbkJ0VH064H34pP6AluUr+KFf
+ a7g6PiRaBmE1ThbBhN0RCZ+MR/+beaVzB/b1fG18DEL3nx0znoSwdo0hbvFcB6HG109J
+ 961Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734108095; x=1734712895;
+ d=1e100.net; s=20230601; t=1734108151; x=1734712951;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bf6X8wZQT6J6XIQdsg8M63wkKHvf3Acp+dj5l5atGmk=;
- b=R23A8tXrc80cQOQC7sZcQoROjBvm2W7sedWP66wKrU+XdGrjjUvKXLa7xTP4HgU4Tj
- M0w3wG7onduEiDQ5ux5J0X94ItMKcAPR6EMuFnd93AO+qFBUFL/nz0WlaQ6+YjwV+xky
- sbHHblzRC8vXS2UjosqK7c15POrJl/ooB7uHZ/7JRi8k/OIYIcih3vWPelUBI6DjCsX2
- kTQsn3La8au0Y8siASkTjNwc50AkyLU9eEwvoc/YYjfaqMwbQ4L+tN7XMWA92lGUhkgm
- BzfqAumqFDXZnF60qKA5qPnrZ1KHC5Jz6Y4Rm03z2TD8URgdYpqL+Rgz03C5wL9YeJMK
- FDag==
+ bh=rf43cUYS4h8CzCvB6H6y5NYZgLVM43bA44IAiOjq5g4=;
+ b=i7IIzypYTtlEHxZ5Bs9WoybfBZ/Anjac2yyaMtzl7otsqDxREBrDa5XNRskJ5qYonK
+ yAKlys/wYK1NQYYw0hKfsSJQq+rcD7dNtGAtkSJ8vFPAuByer1qClVPmxRgwtLWNaARg
+ GjtsSIdTieBnB5jqXjwgM9EDxD0Xj2m2vfhQe/XeXZN3WngGOZfbZgUhkipdswlzT1Lc
+ 0fKRXC+TChd9pFU59r0PY1mcQ3eNva0ITEqVHM+eXXh6yrAsneJmhOn6iwcdjVsmxjUD
+ fzYb4OqAKNtTgp06i0CLKIkWFzqFRKGq16JuYpCqgYQ63LFmn7StuQ5P3kD7YxwYYQGW
+ oZhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXk8sQmssWNVItvE7v3So9QCtDuCx3T4bSGZKl076ZtFK0pSTplVOHT/zadeVFueREG2ScRqqU=@lists.denx.de
-X-Gm-Message-State: AOJu0YzEn1OaAso858AhXgNk4Lew778pccKvrjDAe0EPDIl/7BzD+xaI
- 9j+UccaRz1ozoaUkrhrZ8CKdgAtJ34XmQhSkSQQB1CkCdjByXEXCil38+C8H0PIT3Q3/cuEifLc
- A8hqqy/qbFjCztTwF5RkXqFsDWKSHPeN6N5JONQ==
-X-Gm-Gg: ASbGncs5+D+DFFib40DJZtNkG8Jx1o1oqmdolYhCHC5EBpltiHwb3ptBm/iplzD8g74
- f37MF2eHX+IL9IrQEhu92hnzGRVS0aQs6KhfLJaZiY7uYN2ted8Io2sMWCYYn7XSoH8Qv+4U=
-X-Google-Smtp-Source: AGHT+IGUrbGh6ui0WL1DRvN6qmS5SoGnpSRkT9mRY2caAq2hXEKdJZ+DSFVe/vXhZYzW5w2XOBt0GJ4hCNkouesMX5g=
-X-Received: by 2002:a17:90b:1dc3:b0:2ee:cb5c:6c with SMTP id
- 98e67ed59e1d1-2f28fd676eemr4299158a91.22.1734108094846; Fri, 13 Dec 2024
- 08:41:34 -0800 (PST)
+ AJvYcCUiGBeR7RCtzTW4c1/MRk0vyTiBhmdh+yFgJ4lKUDR4rdgG9em314CbUX/xWQb36BLm43RGlTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEizeXNcGNd/hxhe6gBKpih+/sMsH50ggB3MeWoKkQ6Ors9WK0
+ btWBWzaQxHJb/ObEKfmIABMkoemBgd1nV5MVX2kvxJMNC18zfbUtm9fE3b0uBnj/uEV33eeKZMj
+ 57+dJdpSaK1LkJIcskv0kBYoEUHZ48DfQVXY9YQ==
+X-Gm-Gg: ASbGncsw1R4F9JLsU5fNtBIS/ED9BfZCZc0h2o+PliGEzIYM0VlAR49Q03XOW6YmOrg
+ PIGdR3DTkW1ltIKsl0IvcO0WFnrWH+iNV3JCzkgJeQ4TzOqqxMKYvn6l0MM9SQpNNCznR9U0=
+X-Google-Smtp-Source: AGHT+IEy2Njq3UwF/7nh/o2HNa1bww44PGZSfrlAJS7aAFwJIYMhIkyvftBbYb9e2F89aGgmnhQYmVvBP3eXkOZEAmU=
+X-Received: by 2002:a17:90a:fa8d:b0:2ef:31a9:95c6 with SMTP id
+ 98e67ed59e1d1-2f28fb63fcfmr5325070a91.14.1734108151011; Fri, 13 Dec 2024
+ 08:42:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20241212133710.172404-1-philippe.reynes@softathome.com>
- <20241212133710.172404-4-philippe.reynes@softathome.com>
-In-Reply-To: <20241212133710.172404-4-philippe.reynes@softathome.com>
+ <20241212133710.172404-5-philippe.reynes@softathome.com>
+In-Reply-To: <20241212133710.172404-5-philippe.reynes@softathome.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 13 Dec 2024 11:41:24 -0500
-Message-ID: <CAEfUkUKHtwnFupOGWfd3d81mWtNN5e-CV=VyVfDnhDFB2L6=kg@mail.gmail.com>
-Subject: Re: [PATCH v4 3/8] mbedtls: enable support of hkdf
+Date: Fri, 13 Dec 2024 11:42:19 -0500
+Message-ID: <CAEfUkU+Z1rPASx9w_PLya0P8mu3XxOR_-uqiiODgtnnGzEka6w@mail.gmail.com>
+Subject: Re: [PATCH v4 4/8] lib: sha256: move common function to
+ sha256_common.c
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
  u-boot+nodisclaimer@lists.denx.de
@@ -97,84 +98,187 @@ Hi Philippe,
 On Thu, 12 Dec 2024 at 08:37, Philippe Reynes <
 philippe.reynes@softathome.com> wrote:
 
-> Adds the support of key derivation using
-> the scheme hkdf.
+> The function sha256_csum_wd is defined in lib/sha256.c
+> and in lib/mbedtls/sha256.c. To avoid duplicating this
+> function (and future function), we move this function
+> to the file lib/sha256_common.c
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
->  lib/mbedtls/Kconfig              | 14 ++++++++++++++
->  lib/mbedtls/Makefile             |  2 ++
->  lib/mbedtls/mbedtls_def_config.h |  4 ++++
->  3 files changed, 20 insertions(+)
+>  lib/Makefile         |  1 +
+>  lib/mbedtls/sha256.c | 27 ------------------------
+>  lib/sha256.c         | 36 -------------------------------
+>  lib/sha256_common.c  | 50 ++++++++++++++++++++++++++++++++++++++++++++
+>  tools/Makefile       |  1 +
+>  5 files changed, 52 insertions(+), 63 deletions(-)
+>  create mode 100644 lib/sha256_common.c
 >
-> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-> index 78167ffa252..aa82336ef14 100644
-> --- a/lib/mbedtls/Kconfig
-> +++ b/lib/mbedtls/Kconfig
-> @@ -297,6 +297,13 @@ config MD5_MBEDTLS
->           This option enables support of hashing using MD5 algorithm
->           with MbedTLS crypto library.
+> diff --git a/lib/Makefile b/lib/Makefile
+> index d24ed629732..17201f66798 100644
+> --- a/lib/Makefile
+> +++ b/lib/Makefile
+> @@ -77,6 +77,7 @@ obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
 >
-> +config HKDF_MBEDTLS
-> +       bool "Enable HKDF support with MbedTLS crypto library"
-> +       depends on MBEDTLS_LIB_CRYPTO
-> +       help
-> +         This option enables support of key derivation using HKDF
-> algorithm
-> +         with MbedTLS crypto library.
+>  obj-$(CONFIG_$(XPL_)MD5_LEGACY) += md5.o
+>  obj-$(CONFIG_$(XPL_)SHA1_LEGACY) += sha1.o
+> +obj-$(CONFIG_$(XPL_)SHA256) += sha256_common.o
+>  obj-$(CONFIG_$(XPL_)SHA256_LEGACY) += sha256.o
+>  obj-$(CONFIG_$(XPL_)SHA512_LEGACY) += sha512.o
+>
+> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+> index 24aa58fa674..2128e598834 100644
+> --- a/lib/mbedtls/sha256.c
+> +++ b/lib/mbedtls/sha256.c
+> @@ -33,30 +33,3 @@ void sha256_finish(sha256_context *ctx, uint8_t
+> digest[SHA256_SUM_LEN])
+>         mbedtls_sha256_finish(ctx, digest);
+>         mbedtls_sha256_free(ctx);
+>  }
+> -
+> -void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+> -                   unsigned char *output, unsigned int chunk_sz)
+> -{
+> -       sha256_context ctx;
+> -
+> -       sha256_starts(&ctx);
+> -
+> -       if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG))
+> {
+> -               const unsigned char *curr = input;
+> -               const unsigned char *end = input + ilen;
+> -               int chunk;
+> -
+> -               while (curr < end) {
+> -                       chunk = end - curr;
+> -                       if (chunk > chunk_sz)
+> -                               chunk = chunk_sz;
+> -                       sha256_update(&ctx, curr, chunk);
+> -                       curr += chunk;
+> -                       schedule();
+> -               }
+> -       } else {
+> -               sha256_update(&ctx, input, ilen);
+> -       }
+> -
+> -       sha256_finish(&ctx, output);
+> -}
+> diff --git a/lib/sha256.c b/lib/sha256.c
+> index fb195d988f1..827bd9a872b 100644
+> --- a/lib/sha256.c
+> +++ b/lib/sha256.c
+> @@ -264,39 +264,3 @@ void sha256_finish(sha256_context * ctx, uint8_t
+> digest[32])
+>         PUT_UINT32_BE(ctx->state[6], digest, 24);
+>         PUT_UINT32_BE(ctx->state[7], digest, 28);
+>  }
+> -
+> -/*
+> - * Output = SHA-256( input buffer ). Trigger the watchdog every 'chunk_sz'
+> - * bytes of input processed.
+> - */
+> -void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+> -               unsigned char *output, unsigned int chunk_sz)
+> -{
+> -       sha256_context ctx;
+> -#if !defined(USE_HOSTCC) && \
+> -    (defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG))
+> -       const unsigned char *end;
+> -       unsigned char *curr;
+> -       int chunk;
+> -#endif
+> -
+> -       sha256_starts(&ctx);
+> -
+> -#if !defined(USE_HOSTCC) && \
+> -    (defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG))
+> -       curr = (unsigned char *)input;
+> -       end = input + ilen;
+> -       while (curr < end) {
+> -               chunk = end - curr;
+> -               if (chunk > chunk_sz)
+> -                       chunk = chunk_sz;
+> -               sha256_update(&ctx, curr, chunk);
+> -               curr += chunk;
+> -               schedule();
+> -       }
+> -#else
+> -       sha256_update(&ctx, input, ilen);
+> -#endif
+> -
+> -       sha256_finish(&ctx, output);
+> -}
+> diff --git a/lib/sha256_common.c b/lib/sha256_common.c
+> new file mode 100644
+> index 00000000000..7041abd26d9
+> --- /dev/null
+> +++ b/lib/sha256_common.c
+> @@ -0,0 +1,50 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * FIPS-180-2 compliant SHA-256 implementation
+> + *
+> + * Copyright (C) 2001-2003  Christophe Devine
+> + */
 > +
->  if SPL
->
->  config SPL_SHA1_MBEDTLS
-> @@ -335,6 +342,13 @@ config SPL_MD5_MBEDTLS
->           This option enables support of hashing using MD5 algorithm
->           with MbedTLS crypto library.
->
-> +config SPL_HKDF_MBEDTLS
-> +       bool "Enable HKDF support in SPL with MbedTLS crypto library"
-> +       depends on MBEDTLS_LIB_CRYPTO
-> +       help
-> +         This option enables support of key derivation using HKDF
-> algorithm
-> +         with MbedTLS crypto library.
+> +#ifndef USE_HOSTCC
+> +#include <u-boot/schedule.h>
+> +#endif /* USE_HOSTCC */
+> +#include <string.h>
+> +#include <u-boot/sha256.h>
 > +
->  endif # SPL
->
->  endif # MBEDTLS_LIB_CRYPTO
-> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-> index ce0a61e4054..e66c2018d97 100644
-> --- a/lib/mbedtls/Makefile
-> +++ b/lib/mbedtls/Makefile
-> @@ -33,6 +33,8 @@ mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
->         $(MBEDTLS_LIB_DIR)/sha256.o
->  mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
->         $(MBEDTLS_LIB_DIR)/sha512.o
-> +mbedtls_lib_crypto-$(CONFIG_$(SPL_)HKDF_MBEDTLS) += \
-> +       $(MBEDTLS_LIB_DIR)/hkdf.o
->
->  # MbedTLS X509 library
->  obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
-> diff --git a/lib/mbedtls/mbedtls_def_config.h
-> b/lib/mbedtls/mbedtls_def_config.h
-> index 1d2314e90e4..fd440c392f9 100644
-> --- a/lib/mbedtls/mbedtls_def_config.h
-> +++ b/lib/mbedtls/mbedtls_def_config.h
-> @@ -56,6 +56,10 @@
->  #endif
->  #endif
->
-> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
-> +#define MBEDTLS_HKDF_C
+> +#include <linux/compiler_attributes.h>
+> +
+> +/*
+> + * Output = SHA-256( input buffer ). Trigger the watchdog every 'chunk_sz'
+> + * bytes of input processed.
+> + */
+> +void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+> +                   unsigned char *output, unsigned int chunk_sz)
+> +{
+> +       sha256_context ctx;
+> +#if !defined(USE_HOSTCC) && \
+> +       (defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG))
+> +       const unsigned char *end;
+> +       unsigned char *curr;
+> +       int chunk;
 > +#endif
 > +
->  #if defined CONFIG_MBEDTLS_LIB_X509
->
->  #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+> +       sha256_starts(&ctx);
+> +
+> +#if !defined(USE_HOSTCC) && \
+> +       (defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG))
+> +       curr = (unsigned char *)input;
+> +       end = input + ilen;
+> +       while (curr < end) {
+> +               chunk = end - curr;
+> +               if (chunk > chunk_sz)
+> +                       chunk = chunk_sz;
+> +               sha256_update(&ctx, curr, chunk);
+> +               curr += chunk;
+> +               schedule();
+> +       }
+> +#else
+> +       sha256_update(&ctx, input, ilen);
+> +#endif
+> +
+> +       sha256_finish(&ctx, output);
+> +}
+> diff --git a/tools/Makefile b/tools/Makefile
+> index ee08a9675df..237fa900a24 100644
+> --- a/tools/Makefile
+> +++ b/tools/Makefile
+> @@ -135,6 +135,7 @@ dumpimage-mkimage-objs := aisimage.o \
+>                         generated/lib/hash-checksum.o \
+>                         generated/lib/sha1.o \
+>                         generated/lib/sha256.o \
+> +                       generated/lib/sha256_common.o \
+>                         generated/lib/sha512.o \
+>                         generated/common/hash.o \
+>                         ublimage.o \
 > --
 > 2.25.1
 >
->
-Sounds good to me.
+> Sounds good to me.
 Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
 
 Regards,
