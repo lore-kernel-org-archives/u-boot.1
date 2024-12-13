@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9095BE77180
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 23:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F0EE7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 23:17:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF3480141;
-	Sat, 14 Dec 2024 00:16:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 112CA80245;
+	Sat, 14 Dec 2024 00:16:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jv4KL1U+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WcYubyJv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42B2880141; Sat, 14 Dec 2024 00:16:52 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 55BD5801CF; Sat, 14 Dec 2024 00:16:54 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF57E80141
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 00:16:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16792801CF
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 00:16:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-4679eacf25cso12258351cf.3
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:16:49 -0800 (PST)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-46792996074so27358561cf.0
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 15:16:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734131808; x=1734736608; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734131811; x=1734736611; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H9wdcU/k+WobI6ivOpiJKZRLozImxQh+y2ATYl23jiU=;
- b=Jv4KL1U+OeJzZgZWXp9WWfepPPEiKmxoo5pxXzOU4AbmL1i5LhXsPerZD8/gN6p1+j
- 7glsrdcXhWfVmUrllI/zaa57RB5ziETJ+6ekb1tP/IWjBRyZLQMxEe2BD6popmIXU8d7
- DPI32x4wB6tcYSugi5ClbHpkMXgr/EjVWt0Ek=
+ bh=IrOhgOUW8C+dYNlCcesoigBBwR7Th4WLYhOPmXER3UE=;
+ b=WcYubyJvBXhwCsYza7WWsaWYOjK9ED7enRQIcvx0/rbPl7xZsdVGXYbDrbFk3REdj6
+ 3yDukfUVSYxMNZwq31cyl8QKGOtmyXn6ayt8sQqlXpURt4N4MzBDhkwPRUSujEE9/Lau
+ +ud4Jnx/glhUJc+xkwKca3SB50Si3RyoOV9CU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734131808; x=1734736608;
+ d=1e100.net; s=20230601; t=1734131811; x=1734736611;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H9wdcU/k+WobI6ivOpiJKZRLozImxQh+y2ATYl23jiU=;
- b=CSrM37gBOc6BfdjUqTjFfTgcZcF/Lph1ZhxTROcT+qbPcYH94u8chJ0jj9RV5CeW9+
- 7x1ACzjIIz+XYtU3GH4+7/OxPkR+k7J31rGgVWw/duH/vMk4z5UJjAQpQqnHWqOWtiot
- WYuNIYURhwqrVHxIlyOrKW/tyAo3sNHf5usoETKlttUN9B7PkutFzmrjpx9TVz+24CLd
- VmV9TLshwF5bvX4gx4ODeJBbmD5gpk2BgN7bZeE3bOs8yCGNZPP8o2TKRzXwC6pKCuDV
- T6e0Y+9qZ5YolIugXMjfKm4H/mYnKhfWsfPBYnJf5vXxJx/dAP5X4UIlPl2GYPsDkYEQ
- y8zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWwkadDsxIm0Uo2PDxhnfFQd8ctRtZaiyKnLXjoOUj7uLdMlJD3T725tSBryCiPH2qjFqagcZE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLqJC02pbqskcbKfhm7mNjT2zqFnftMujk9a3qcQbhHq5Wf3do
- lwqqgHGAB4ZKEPX/PhyT4c0PVotoTGYFsU+u37GdPScdrmZeezemh5c34EgBXs0=
-X-Gm-Gg: ASbGncsruKfCuja11S4ZlT9TWss+u3YmgOvnE828acTYtcjiAfytU3FxYxGLIOc8c2l
- y54/yq6Nxx4os2RWUMs11zM3deEa7fpXZtE6GKYjumFmFMSjPiX/zV+57+jPZcf6MW/j78r4evs
- hlF8eDbtOZECpUCuIkww8iAsKys52LSt9nIFhqiyCCqJA+DL35FnTeRTED4McaZiCxE7c7IyHvp
- nQoOdbPtLqbFX0aEDMWXPDC+44lankCfeSgw7/7WMDwsTNKvBgzF5Q=
-X-Google-Smtp-Source: AGHT+IHsaHSGL/CKennGouUzDhLOH3gt4VthvwwfH0QCqJkAI0Rov0mGHCIQLbk51t8BZs6OJLGTIA==
-X-Received: by 2002:a05:622a:4185:b0:467:7472:7ac9 with SMTP id
- d75a77b69052e-467a5758359mr87015171cf.18.1734131808729; 
- Fri, 13 Dec 2024 15:16:48 -0800 (PST)
+ bh=IrOhgOUW8C+dYNlCcesoigBBwR7Th4WLYhOPmXER3UE=;
+ b=B7p243R/BTRkugkc14P3NZHgh6CTlCx6zqRNE7AY9rqbgME6vbJb9wrP1LMi/+jI9Q
+ 0Ari0Z5K9macSwK6YbnXrbQJiW+X17APZvwInGN1znGfOe2Q9iJoi+/BT2bSOg4WYL5k
+ 5sB6DaNvB4oH/9uEfHqisVm1UYsOHGVwU6nZLZ0hZ1+3ScOhxqF1jmzb0LtUy3jX+8dg
+ O7CQka40BhyqtgSzgGwiAWTC+onTygbyqPm+U0d5E5FHmlZFco+qPZOX2u+pRjbZw/AT
+ 4wnb7bbj5+0ekIjvITqDorq/GMStNHAoBIMsNVfeLlq1+eRpERv6otn53Ykinp2fFlcW
+ H3RQ==
+X-Gm-Message-State: AOJu0YyzZLiG72Hd3RGLhtpaW6o276YaRVUqt2UHKXE13fCzHrCOLVIP
+ kkgucnL0zPJiW3JOeZV4CvPAO25P4VLuT0q0eqg5hnhRkYmcO/mYY2ixXW+JjgE=
+X-Gm-Gg: ASbGncsCOekURZ635GgUfjKJEKVRT+Q0IIKag4njkTxKyVi4mpMi3EL+tx/hb2zDJWu
+ 47mWfDZeljQukLhiNlL35Dwx1dJwWy0FCRCKdBcUE3Sf+uuX+k5BM7AfDjvrVtjwbl/c8u424fr
+ mcgqI8iY2LyVu2/ohh0FT+ojVJFXAVyfjHT260eANR77oIk2eGRZ4THW9TwXmOileTZ74yEIUpC
+ x/aMADMinrmbXUUacz05+dDCkvF1ImDjSgWnjV2kahEWgBjC5s4Lw8=
+X-Google-Smtp-Source: AGHT+IGYol84/sSGoTa8QLbALJPMOO8zgcHT+RWEmoq4k/VRpmqNSmAE2Rn7UWK5/kOgziPP2LK8gQ==
+X-Received: by 2002:a05:622a:14cd:b0:466:a119:f4d3 with SMTP id
+ d75a77b69052e-467a58402ebmr86019511cf.45.1734131810939; 
+ Fri, 13 Dec 2024 15:16:50 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467b2cbb69asm2690171cf.39.2024.12.13.15.16.47
+ d75a77b69052e-467b2cbb69asm2690171cf.39.2024.12.13.15.16.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 15:16:48 -0800 (PST)
+ Fri, 13 Dec 2024 15:16:50 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: vigneshr@ti.com, Udit Kumar <u-kumar1@ti.com>
-Cc: n-francis@ti.com, u-boot@lists.denx.de, nm@ti.com, m-chawdhry@ti.com, 
- j-keerthy@ti.com, p-mantena@ti.com, j-choudhary@ti.com
-In-Reply-To: <20241126053426.2627686-1-u-kumar1@ti.com>
-References: <20241126053426.2627686-1-u-kumar1@ti.com>
-Subject: Re: [PATCH 0/3] J721S2: Enable ESMs and related PMIC
-Message-Id: <173413180706.1760624.5157121063405114863.b4-ty@konsulko.com>
-Date: Fri, 13 Dec 2024 17:16:47 -0600
+To: vigneshr@ti.com, bb@ti.com, marex@denx.de, hnagalla@ti.com, 
+ mkorpershoek@baylibre.com, caleb.connolly@linaro.org, 
+ neil.armstrong@linaro.org, jan.kiszka@siemens.com, jonas@kwiboo.se, 
+ j-humphreys@ti.com, rogerq@kernel.org, nm@ti.com, devarsht@ti.com, 
+ ilias.apalodimas@linaro.org, Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20241126120322.1760862-1-s-vadapalli@ti.com>
+References: <20241126120322.1760862-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH 0/2] AM62A DWC3: Add support for USB DFU boot in OTG mode
+Message-Id: <173413180891.1760624.9231691279584984355.b4-ty@konsulko.com>
+Date: Fri, 13 Dec 2024 17:16:48 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,14 +96,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Nov 2024 11:04:23 +0530, Udit Kumar wrote:
+On Tue, 26 Nov 2024 17:33:17 +0530, Siddharth Vadapalli wrote:
 
-> This enables the ESMs and the associated PMIC. Programming these bits is
-> a requirement to make the watchdog actually reset the board.
+> This series adds support for USB DFU boot on TI's AM62A SoC which has
+> two instances of DWC3 USB Controllers namely USB0 and USB1. The USB0
+> instance of the USB Controller supports USB DFU boot:
+> ROM => tiboot3.bin => tispl.bin => u-boot.img
 > 
-> Logs
-> WDT reset J721S2
-> https://gist.github.com/uditkumarti/93cfe863d1f3fe3abb82b1821105f274#file-j721s2-L2708
+> USB DFU Boot requires the USB Controller to be configured for Gadget
+> mode of operation. Since the USB0 instance of the DWC3 USB Controller
+> supports both Host and Gadget modes of operation via the Type-C interface
+> on the AM62A7-SK board, the device-tree specifies the "dr_mode" as "OTG".
+> However, there is currently no support for dynamically switching the "mode"
+> from Host to Gadget and vice-versa with the help of a state-machine.
+> The OTG mode is treated as a separate mode in itself rather than being
+> treated as an intermediate stage before assuming the Host/Gadget mode.
+> Due to this, USB DFU boot via the Type-C interface doesn't work as the
+> USB Controller hasn't been appropriately configured for Device/Gadget
+> mode of operation. One option is to change the device-tree to specify
+> "dr_mode" as "peripheral" and force the controller to assume the Device
+> role. This will imply that the U-Boot device-tree for AM62A diverges
+> from its Linux counterpart. Therefore, with the intent of keeping the
+> device-tree uniform across Linux and U-Boot, and at the same time, in
+> order to enable USB DFU boot in "OTG" mode with the DWC3 Controller,
+> the first patch in this series sets the "mode" on the basis of the
+> caller function, rather than using the "dr_mode" property in the
+> device-tree. There are only two callers of "dwc3_generic_probe()",
+> each of which clearly specify the expected mode of configuration.
+> This will enable both Host and Device mode of operation based on the
+> command executed by the user, thereby truly supporting "OTG"
+> functionality when the USB Controller supports it.
 > 
 > [...]
 
