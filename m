@@ -4,86 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E35E7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 01:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE9B3E7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 01:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29AA380137;
-	Fri, 13 Dec 2024 02:11:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8892380196;
+	Fri, 13 Dec 2024 02:44:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i+TwwdyR";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="klp4Jfbq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40E5880192; Fri, 13 Dec 2024 02:11:58 +0100 (CET)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D72A4801A0; Fri, 13 Dec 2024 02:44:47 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19766800D6
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 02:11:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 519C280192
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 02:44:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-46772a0f8fbso10840161cf.3
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 17:11:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734052315; x=1734657115; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VsKEV1l+GrZ31i6avEUCSpxWiVlLN7j8BzN8WX/NpCI=;
- b=i+TwwdyRsf9O2ywpq9ESg2G0Hl3Q8Be3bKjkOrHOma1AusRYMYJt6+AfwBrtaHGQf9
- PrfQczyLPO81ylTZhrE4PYRARgT0JUXgMzbaSXUSJ58JF0pPMtXtA6C+24jyIkPM/PBU
- JZee8q40hNKsxoYu73/Gp3+xCrLqhN4ECW/0k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734052315; x=1734657115;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VsKEV1l+GrZ31i6avEUCSpxWiVlLN7j8BzN8WX/NpCI=;
- b=Vufc+r1BgLJExCy7g/56+A5+jWeS1TmiKHZXv242nOKnwSIvRDwxNn0icqP6PWIXfv
- 1E/L7ME7FUcEhNA5vxLujPRgZN+jIxtt5l5IP1scFA1b1S9j0Hc+qVpJMAhBQINr55St
- 4q9dTar4AhcetHKg1Kc41DDFlZ6j4RvkoXTbXnEr/t45VrqlUHAZh+qKj6Fns+3Y3IS/
- EMuJF/inj5zxRcMlEZDeYC3/zwI4v6Wka7hJCKtaYymkD+6PoSsRviuuO3qNElELac5m
- 1dRLqPrmnKKDuUborFJVJBXJlgv9cLgqYz0IBMXJnJ8Yy3whVfNlxRWUIySP1DxRv9E+
- GTEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV6/jdneiLpjxlwMWhgasI6plCKqu9dFxOrXBM/eVOy5U1Fi1hhOBGfEQ4KBdkOLo6d8BxQS0s=@lists.denx.de
-X-Gm-Message-State: AOJu0YyQXH6fJetJ+B5Z3lUPxFds7fvyqXMGP2nTMUviUd9hXX/JdDK/
- 62cuySbhDB1ShjN3yEjP9mt8hbXu9qYYVD3JQe2Kb0zXd1M9xvV4GW6bE1or6hY=
-X-Gm-Gg: ASbGnctrUBRjiLkqAvOy6k/X9WUZZA8vJAicuc5UKmSEm/8x/DsyGrElpo8EY9BcaXX
- sNqv7ZdibOm4fd+0PThqPQtOtnW/Ikyd0dhUzklXxX6CT9TQfviYdhaH5UkNSufabPFZfiKWAyL
- SBE+lwdVMIa1IXnnY5jc0Lnb3A+Hea6eJXELCnkMdQzgaohEUMeeHE+ZFmHdl3i0dalicr1Chym
- wwSUaiGr8UECKJ0Iy/CM/bVwbYx9HIsKtbCZ6AJxj+uCet1efvWhoo=
-X-Google-Smtp-Source: AGHT+IHmZ/AIPAOkTf7ftkuXgaKPdPciNshVDW0/R4VCFvaZqxsKxOLwqtXxu78KGvqZ0qw8MIMPig==
-X-Received: by 2002:a05:622a:18a7:b0:467:451b:eb99 with SMTP id
- d75a77b69052e-467a57a95e4mr12761831cf.29.1734052315007; 
- Thu, 12 Dec 2024 17:11:55 -0800 (PST)
-Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4672978dc20sm90148181cf.71.2024.12.12.17.11.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 17:11:53 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Michal Simek <michal.simek@amd.com>, 
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, 
- Yang Xiwen <forbidden405@outlook.com>, Julien Masson <jmasson@baylibre.com>, 
- u-boot@lists.denx.de, Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20240308000432.32369-1-semen.protsenko@linaro.org>
-References: <20240308000432.32369-1-semen.protsenko@linaro.org>
-Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
- present
-Message-Id: <173405231246.1635625.8070306930792525634.b4-ty@konsulko.com>
-Date: Thu, 12 Dec 2024 19:11:52 -0600
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20241213014440epoutp047cf6b59007a6a7a9e7b9c6cb68aabf9c~QmS4_eJFV2739527395epoutp044
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 01:44:40 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20241213014440epoutp047cf6b59007a6a7a9e7b9c6cb68aabf9c~QmS4_eJFV2739527395epoutp044
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1734054280;
+ bh=6MnEaEWCLXWPydILtAlgBfTbV5MQkQFFZBeYRkKUZ7w=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=klp4JfbqFOA5TQyhZn3E4SqouT9F9wFyeONyMDwp+ISw0IMylVVWYnYj9QaFspKZn
+ B0Fnickg9D9h9l29UIOkU09LPsRc3AFmWFj0MpGQ6oN9EOpX2IKJFsLrxDU59PRPld
+ vHB+tPudaPmQq9wxea9dbbuvpq8A+GMSZ9Z89AGA=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20241213014440epcas1p4d6f0ce012a580b92bfcbd113a34b53ac~QmS4rWq7u1681116811epcas1p4p;
+ Fri, 13 Dec 2024 01:44:40 +0000 (GMT)
+Received: from epsmgec1p1-new.samsung.com (unknown [182.195.36.145]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4Y8XFg1NY3z4x9Px; Fri, 13 Dec
+ 2024 01:44:39 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 61.BF.31735.7819B576; Fri, 13 Dec 2024 10:44:39 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20241213014438epcas1p212becd190804a79526e9dc6a307bc0f0~QmS3RXIac0517805178epcas1p2x;
+ Fri, 13 Dec 2024 01:44:38 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20241213014438epsmtrp27dd18af4180395bc3e44d957c117249c~QmS3QisVs2913629136epsmtrp2v;
+ Fri, 13 Dec 2024 01:44:38 +0000 (GMT)
+X-AuditID: b6c32a4c-ad1fe70000007bf7-2e-675b91870b93
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 2A.6F.18729.6819B576; Fri, 13 Dec 2024 10:44:38 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20241213014438epsmtip230e9f9eb1aee58b02e0d6e151cf5b13d~QmS3ILXCN0307603076epsmtip2L;
+ Fri, 13 Dec 2024 01:44:38 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Ronald Wahl'" <rwahl@gmx.de>, <u-boot@lists.denx.de>
+Cc: "'Ronald Wahl'" <ronald.wahl@legrand.com>, "'Peng Fan'" <peng.fan@nxp.com>
+In-Reply-To: <20241211205200.16207-1-rwahl@gmx.de>
+Subject: RE: [PATCH] mmc: Fix potential timer value truncation
+Date: Fri, 13 Dec 2024 10:44:38 +0900
+Message-ID: <000001db4d00$92207120$b6615360$@samsung.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQK2Zkc5VxGzAh7FmcPHAG/2q3QizwE6u6VRsSNcxEA=
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCKsWRmVeSWpSXmKPExsWy7bCmnm77xOh0g2XrOCx+rPrCatHb+5jZ
+ 4th2RYu3ezvZHVg8PnyM83jQtYDZ4+ydHYweG9/tYApgicq2yUhNTEktUkjNS85PycxLt1Xy
+ Do53jjc1MzDUNbS0MFdSyEvMTbVVcvEJ0HXLzAHaqKRQlphTChQKSCwuVtK3synKLy1JVcjI
+ Ly6xVUotSMkpMC3QK07MLS7NS9fLSy2xMjQwMDIFKkzIznj4vp+p4DlPxdmdDSwNjFO4uhg5
+ OSQETCTOfZ3P1MXIxSEksIdRYtHUiewQzidGiW1rl7JAON8YJVY9PcwC03Ll1Fo2iMReoMSp
+ r0wgCSGBl4wSbzYHgdhsAnoS/xctZAaxRQSsJObunMcGYjMLBEh0LNkBFOfg4BQwkti/WR4k
+ LCxgJzHry0Kw+SwCqhJHflwAK+cVsJR4uvgiM8ReBYmfT5exwoz8+LaBCWKkiMTszjZmkHsk
+ BI6xSyzb+IgdosFFYv/BBawQtrDEq+NboOJSEp/f7WWDaGhmlFi65CArhNPDKPGv4TobRJWx
+ xP6lk5lALmUW0JRYv0sfYhufxLuvPawgYQkBXomONiGIahWJS69fMsHMv/vkP9ReD4n5Lcuh
+ QdrKKHH1+nqWCYzys5AcPgthwwJGplWMUqkFxbnpqcmGBYa6eanl8OhMzs/dxAhOblo+Oxi/
+ r/+rd4iRiYPxEKMEB7OSCO8N+8h0Id6UxMqq1KL8+KLSnNTiQ4ymwOCcyCwlmpwPTK95JfGG
+ JpYGJmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwyXxKP2Vz9yVn3n4v9YkB
+ gryfyuZumPo6Y2ef6FruyPLEFW0z5JPCopJmrelMfbui4dpnD+ngXd+EnzMV37+d2n+3gOXa
+ 83WR77LmHWS6oWIZECmRrl/UufvKuqUlbos3zZW+caLMyz37gVfea5HVln/PpYX3Ck2ebs58
+ uP/qW/9HBaVprelHJZT1d5oH8IZt0BTdKvDuYajkh6+8JYZ399+8cDqTy/LCk7QNNkE3wqaW
+ cFv/YYjdZs55/nk3T45pVvvSzBxbdfGZs4wyH240Wmycs8s7scrd00wr/7xSxO1sFmbJPfUX
+ 2iIDTT8u4l1e8r3srGnlgtefd734kLvpjo5ZvcOsUpGuwy91PTyUWIozEg21mIuKEwGfd3Kh
+ 9wMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrMLMWRmVeSWpSXmKPExsWy7bCSvG7bxOh0g2cfFS1+rPrCatHb+5jZ
+ 4th2RYu3ezvZHVg8PnyM83jQtYDZ4+ydHYweG9/tYApgieKySUnNySxLLdK3S+DKePi+n6ng
+ OU/F2Z0NLA2MU7i6GDk5JARMJK6cWsvWxcjFISSwm1Hi6dnZzBAJKYnPT6cCJTiAbGGJw4eL
+ IWqeM0p87vvGBlLDJqAn8X/RQmaQGhEBG4nHh/hAwswCARLdtw6ClQgJNDNKHD+lBVLCKWAk
+ sX+zPEhYWMBOYtaXhSwgNouAqsSRHxfAynkFLCWeLr4IdYGCxM+ny1hBbBEBK4mPbxuYIMaL
+ SMzubGOewCgwC4m7gJFxFaNkakFxbnpusWGBYV5quV5xYm5xaV66XnJ+7iZGcDhqae5g3L7q
+ g94hRiYOxkOMEhzMSiK8N+wj04V4UxIrq1KL8uOLSnNSiw8xSnOwKInzir/oTRESSE8sSc1O
+ TS1ILYLJMnFwSjUwtb5fcekHa2gZ/z7r+9LeAT+NLwcZ6ubo7l591C1w+eUFXkFzqmJXXGP/
+ tPivoNys06npToHOW69vqOp9uX//z2I9u4XuCsvvp9mHdm1QXim8bv3Rews5axd8OdIZKlaY
+ Fcxh3zr3zxGlpdvEgqUalHN7vItt1RUjtKSEj69PkVjTLqp3LvrnFydtlZbdKeFivxVex2xv
+ 0n1yUHz2H5mDKb37ttddN5xu+jbb71r210WPPFbcuK+pt15Od6nZ7PAdfza7daZ91+TbL1N3
+ Pm7twotpPdKl112mhFz6xD57FZNMwn0DV4Nj2h8eTnDp5LvGacwaI3fYi6nu133ThEsn3XSq
+ dW+90Nzo2JhwhrFciaU4I9FQi7moOBEA3kLgxbYCAAA=
+X-CMS-MailID: 20241213014438epcas1p212becd190804a79526e9dc6a307bc0f0
+X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20241211205220epcas1p245fe464c26b8d3b51a8400a571d8d3a1
+References: <CGME20241211205220epcas1p245fe464c26b8d3b51a8400a571d8d3a1@epcas1p2.samsung.com>
+ <20241211205200.16207-1-rwahl@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,22 +130,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 07 Mar 2024 18:04:32 -0600, Sam Protsenko wrote:
+Hi,
 
-> Sometimes clocks provided to a consumer might not have .set_rate
-> operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
-> set. In that case it's usually possible to find a parent up the tree
-> which is capable of setting the rate (div, pll, etc). Implement a simple
-> lookup procedure for such cases, to traverse the clock tree until
-> .set_rate capable parent is found, and use that parent to actually
-> change the rate. The search will stop once the first .set_rate capable
-> clock is found, which is usually enough to handle most cases.
-> 
-> [...]
+> -----Original Message-----
+> From: Ronald Wahl <rwahl@gmx.de>
+> Sent: Thursday, December 12, 2024 5:52 AM
+> From: Ronald Wahl <ronald.wahl@legrand.com>
+>
+> On 64bit systems the timer value might be truncated to a 32bit value
+> causing malfunctions. For example on ARM the timer might start from 0
+> again only after a cold reset. The 32bit overflow occurs after a bit
+> more than 49 days (1000 Hz counter) so booting after that time may lead
+> to a surprise because the board might become stuck requiring a cold
+> reset.
+>
+> Signed-off-by: Ronald Wahl <ronald.wahl@legrand.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
 
-Applied to u-boot/next, thanks!
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
--- 
-Tom
+Best Regards,
+Jaehoon Chung
+
+> ---
+>  drivers/mmc/mmc.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index efe98354a0..799586891a 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -750,7 +750,7 @@ static int mmc_send_op_cond(struct mmc *mmc)
+>  {
+>  	int err, i;
+>  	int timeout = 1000;
+> -	uint start;
+> +	ulong start;
+>
+>  	/* Some cards seem to need this */
+>  	mmc_go_idle(mmc);
+> @@ -844,7 +844,8 @@ int mmc_send_ext_csd(struct mmc *mmc, u8 *ext_csd)
+>  static int __mmc_switch(struct mmc *mmc, u8 set, u8 index, u8 value,
+>  			bool send_status)
+>  {
+> -	unsigned int status, start;
+> +	ulong start;
+> +	unsigned int status;
+>  	struct mmc_cmd cmd;
+>  	int timeout_ms = DEFAULT_CMD6_TIMEOUT_MS;
+>  	bool is_part_switch = (set == EXT_CSD_CMD_SET_NORMAL) &&
+> --
+> 2.47.1
+
 
 
