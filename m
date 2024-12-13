@@ -4,91 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D36DE7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 05:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B72E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 05:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4EC38018E;
-	Fri, 13 Dec 2024 06:39:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6576A80192;
+	Fri, 13 Dec 2024 06:40:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aFuO7gly";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SanjdD3b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA1E980192; Fri, 13 Dec 2024 06:39:44 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id D293A801CF; Fri, 13 Dec 2024 06:40:10 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEBC680141
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:39:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3648380141
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 06:40:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6f27bbe8fc3so1642857b3.2
- for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:39:41 -0800 (PST)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-6eff0f3306fso10935187b3.2
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 21:40:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734068381; x=1734673181; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=77mErJjiuJVEQwIJPTBF+ooy+vKaKSPkSekdyN9Gq7U=;
- b=aFuO7glyS9MhpWzvrPJDpYrIKe8Yzs1xGDHl7n/qXRWp1zKvd+dbMzFjxiZ6IPilcA
- j2R8DFcOTKwJqd4oNoB7jmYfPK1uevWPadjc30r9jR7wZX1gM5p766esvOkQQcR+Oi13
- 0013rt7lOUxiIlgrRm+lkqugc+fNIIM4fF879DZ/367cr87UCmc1nmHWrWYwUWdRPHtJ
- YM9VcIn2M7QriGM7kaHlsEIpOdt3v+cyvGicx4XNtHPYkYFzWBHgvSeJ9OIBsrY/l0N8
- Sf5jToGy5ODMCS7r9VPRwf3h9d/BR41nKW7cN8mewVBWdVIxNKGQUH4D8+toHAr5jsQE
- EsFw==
+ d=linaro.org; s=google; t=1734068407; x=1734673207; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZaXKeOu5Jo5rOXAT1jSYtBF5bPFjaehtiSfdfzKM1KU=;
+ b=SanjdD3bbcnnDwu95DRp0skayDJRMyZVZmMqyjiqEFigvN1LWR58RYdKclHNaDRJVt
+ fWFR4mm4Itnsla3WzVTGc4BAcGkKDd8XfWpXqPDehI7Zaxla1WU26wTzgNZnrmSCPP8G
+ VQQPBIbkJTHrFupR9qKZZ91hG6peDF+ZvbLl+5vs9gNER5lFoFZMvWKHXlOQLHLM++iO
+ cxEVK//EplCBv1qlRzjLEIcSZ7GC36w+vntB+5j4YyUKnqXx9JKrDNdWhMZ6p4qx3eUl
+ DzI9THjkUxns2thakZWd4Q/Lcsih3ls5Ew4cAM0Luw3o2eMetO6QYw63DdTLKB37bCf/
+ E3JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734068381; x=1734673181;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=77mErJjiuJVEQwIJPTBF+ooy+vKaKSPkSekdyN9Gq7U=;
- b=SjT6u+n6by9/YBmmzDClM+CTJRYqdHjGtNOOBqVw5zGOPN4rkXUtuKUrw6BrYcWdkH
- fTH9227AutLm8a69KQQSqHTkb7lc9U2CI0SwNigQJGjhLghMWeCANuj2kqe5OCf1UKQ+
- lp4byo1M3B2CwyKYjhpZUMUF0fYVmsuBqZlsHflYkV9epFCFdfmRwI79T3Ixemf7QmgU
- kSwTuUt8hYOVWWrDXI80DaiSmeBTWyEycA3UH9hOFwIUW3rPxyGzmb4ARQRGUzAC58Am
- Pvstm5zmnK5/EJ1oJDtIfXMlM8myU0vwQ8Yls7JfvhctHkTY8CmNl9EvKTbwXlemIzUU
- ywAA==
+ d=1e100.net; s=20230601; t=1734068407; x=1734673207;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZaXKeOu5Jo5rOXAT1jSYtBF5bPFjaehtiSfdfzKM1KU=;
+ b=KqqlAwjH3RD/zvk+ARuM8i3heMzsQ+iHFlRFLTpoJappMABAkGfFcdyc2wxeYLsxJP
+ bllXZ5/l/52iUNVbcxxCpIy9V6aRIkpHQAj1Btl3JhE2Abl+FhhKSwlaanEYgYJq4DHy
+ 8dPa89k5uLAanoIhaB2viBiRG2lwnF10Gi2F+iOc1Jiu7xitEI0jPbGGA9bZ93wKLu2z
+ 64WmbmKf9CLAePmDBexGGi1ZolS1jcn+KpLY3CWENN3OUZOR8pR2+oY6ayZEcSTyU0l+
+ zjsHoezmDIuL7gL7VoxIDR4JATakSokm+TJsKfdrbuaVEHQouME/QwanQVqyWZ/cRWCD
+ BIuw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRwqJ4VxLTJwGZdOb/zdCHG2PrXMQlfi39sB5sQhgRMED89Us+u8SoAL92LnuEGE6cl96lLiE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7ZlHYW4+QqjvHNNTI2gP1AEo7VSSSru7DG7/BdzYyHQfhIRb2
- UrAEaqzYecgvL3aGBTaCDKTrAlIQo6hDsjTcI8eVY02OrQfje+8ylNYeH3C1kmpXEFKJuLscokq
- fETmc1sBEmpxBKzw/kGw685udAIv33L/tbvnciQ==
-X-Gm-Gg: ASbGncvmGjDFrfzp5QZRXedEmLRDNkcivjMhkHwoAQ3YYri2O0Iy/P//a3v75Pl4hej
- buN0IhjbPvu7ygvUrQ+rwT7BPL5FCQcUYHXTXGQ==
-X-Google-Smtp-Source: AGHT+IGoiDhEMxleDKC1Ql+uFBdGGEZJYWWB/+/EGqf6HosG3prOJ1CywPPfbnxX5vivmA4iBCHmazqRIEdpm0KrBAs=
-X-Received: by 2002:a05:690c:600c:b0:6ef:91a0:dd25 with SMTP id
- 00721157ae682-6f279affbf8mr13974927b3.17.1734068380740; Thu, 12 Dec 2024
- 21:39:40 -0800 (PST)
+ AJvYcCXRMWERJen8QOuCqG+MLYE/JVV3EaEzquGEwKSnRjW/V/jZ8rsOGNQZLFYntwTit9h1nt81w98=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz3+EH3xHYT89CWM2BeYX8vMZPV89eTH+JghOHhh3Ahw4VUfwFI
+ 4hHFuZGtxDN/sB1GZyZzPDhNy5YqdboGrHxORrqrb3pqg2p90Amt+iVcaDpOePqHiKbiK7gpPRG
+ zvTZ6QUZHN8+8+e7OlxCW7SR+/yI7/PiRgiQ4mQ==
+X-Gm-Gg: ASbGncuMKaNZ8NRz9mhelbDjcYeVeKleVJJsaOu8Ek/eymdfdRXmJfYB7kPLanPSuB1
+ 3EkdOYlUg19kpogPVRw81wwQUtoIO7x4Eu427iA==
+X-Google-Smtp-Source: AGHT+IEsBVWKfAD1ndJ/xqIPDLiZA1JBuNQ+mGO+jq4fmHnXAeajTLWZPzGN1DWCeKuGcEuS2gkMBg3dkMCJ4xG5rvo=
+X-Received: by 2002:a05:690c:f95:b0:6ef:79d1:2f69 with SMTP id
+ 00721157ae682-6f279b8da0amr12836957b3.31.1734068407084; Thu, 12 Dec 2024
+ 21:40:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20241211105504.453234-1-ilias.apalodimas@linaro.org>
- <20241211105504.453234-7-ilias.apalodimas@linaro.org>
- <CAPLW+4=9EfzWwYE_X+-AnZUwky6+MOF4V73BsqOaoMcMS+EGmQ@mail.gmail.com>
-In-Reply-To: <CAPLW+4=9EfzWwYE_X+-AnZUwky6+MOF4V73BsqOaoMcMS+EGmQ@mail.gmail.com>
+References: <20241213005903.73919-1-sjg@chromium.org>
+ <20241213010525.GN1505244@bill-the-cat>
+In-Reply-To: <20241213010525.GN1505244@bill-the-cat>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Dec 2024 07:39:04 +0200
-Message-ID: <CAC_iWjJiwzb=kWm+u_dESny-5hYQzAnBG75VgzJVwQ7dB0y6eQ@mail.gmail.com>
-Subject: Re: [PATCH v1 6/8] lmb: Remove lmb_alloc_addr_flags()
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Peter Korsgaard <peter@korsgaard.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Nam Cao <namcao@linutronix.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Janne Grunau <j@jannau.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Date: Fri, 13 Dec 2024 07:39:31 +0200
+Message-ID: <CAC_iWjLykti=CG70ADm1qYpR7RzWqgSOcZjhp9SgJTh3UCdp9w@mail.gmail.com>
+Subject: Re: [PATCH] gitlab: Add an rpi to the sjg lab
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,98 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Dec 2024 at 00:34, Sam Protsenko <semen.protsenko@linaro.org> wr=
-ote:
+On Fri, 13 Dec 2024 at 03:05, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Dec 11, 2024 at 4:55=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > lmb_alloc_addr() is just calling lmb_alloc_addr_flags() with LMB_NONE
-> > There's not much we gain from this abstraction, so let's remove the
-> > latter, add a flags argument to lmb_alloc_addr() and make the code a
-> > bit easier to follow.
-> >
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  fs/fs.c                     |  2 +-
-> >  include/lmb.h               | 10 ++++------
-> >  lib/efi_loader/efi_memory.c |  2 +-
-> >  lib/lmb.c                   | 15 ++-------------
-> >  test/lib/lmb.c              | 34 +++++++++++++++++-----------------
-> >  5 files changed, 25 insertions(+), 38 deletions(-)
-> >
-> > diff --git a/fs/fs.c b/fs/fs.c
-> > index 21a23efd932d..99ddcc5e37be 100644
-> > --- a/fs/fs.c
-> > +++ b/fs/fs.c
-> > @@ -554,7 +554,7 @@ static int fs_read_lmb_check(const char *filename, =
-ulong addr, loff_t offset,
-> >
-> >         lmb_dump_all();
-> >
-> > -       if (lmb_alloc_addr(addr, read_len) =3D=3D addr)
-> > +       if (lmb_alloc_addr(addr, read_len, LMB_NONE) =3D=3D addr)
-> >                 return 0;
-> >
-> >         log_err("** Reading file would overwrite reserved memory **\n")=
-;
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index 3db35992df8d..5e59915340b7 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -92,7 +92,6 @@ long lmb_reserve(phys_addr_t base, phys_size_t size, =
-u32 flags);
-> >
-> >  phys_addr_t lmb_alloc(phys_size_t size, ulong align);
-> >  phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t =
-max_addr);
-> > -phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size);
-> >  phys_size_t lmb_get_free_size(phys_addr_t addr);
-> >
-> >  /**
-> > @@ -113,8 +112,8 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, =
-ulong align,
-> >                                  phys_addr_t max_addr, uint flags);
-> >
-> >  /**
-> > - * lmb_alloc_addr_flags() - Allocate specified memory address with spe=
-cified
-> > - *                         attributes
-> > + * lmb_alloc_addr() - Allocate specified memory address with specified=
- attributes
+> On Thu, Dec 12, 2024 at 05:59:03PM -0700, Simon Glass wrote:
 >
-> One character over 80 limit trips my OCD :/ Any chance you can move
-> "attributes" to the next line? It's ok to break the line in kernel-doc
-> function briefs.
+> > I have an original rpi installed now, loaded with OS Lite (32-bit)
+> > Add an entry for it so that it can be used for testing.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> > + *
-> >   * @base: Base Address requested
-> >   * @size: Size of the region requested
-> >   * @flags: Memory region attributes to be set
-> > @@ -125,8 +124,7 @@ phys_addr_t lmb_alloc_base_flags(phys_size_t size, =
-ulong align,
-> >   *
-> >   * Return: Base address on success, 0 on error.
-> >   */
-> > -phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
-> > -                                uint flags);
-> > +phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, uint fl=
-ags);
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
-> Can we keep u32 for flags everywhere, for consistency?
+> --
+> Tom
 
-We are, I thought it would make the patches easier to review if I only
-changed the enum here.
-This turns to a u32 in the last patch
-
-
->
-> With above nitpicks addressed, feel free to add:
->
-> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
-
-Thanks!
-/Ilias
-
->
-> [snip]
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
