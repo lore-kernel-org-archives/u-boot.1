@@ -4,99 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B197EE7717F
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 20:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D969E77180
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 22:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB7E1800D7;
-	Fri, 13 Dec 2024 21:09:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 849D7800D2;
+	Fri, 13 Dec 2024 23:56:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ARX8zhP0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FWL226Bx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 591798010B; Fri, 13 Dec 2024 21:09:10 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id B5DD2800D6; Fri, 13 Dec 2024 23:55:58 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E53F800D2
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 21:09:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62926800C2
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 23:55:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6dcc11444f4so13460766d6.2
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 12:09:07 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6d92cd1e811so31931586d6.1
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 14:55:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734120546; x=1734725346; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oKqP5fNDdRWl6J52Go39R1OmtvzK57v+w9pKQ0hrWBA=;
- b=ARX8zhP06DderKcWugbG1aaW9HnvMxweOMCZ9/Gcki1c0DUvYp0f8wZcypXjUQrWK/
- /jQzgeNy6x1R2zjlFRJyIjEnfzchmZ+5v/46fuCEl0UaL3D/p/GIZdDWfdyDp07araOd
- UvDJM3C7cIlonxgQRjpeL4EiBUX52vughyv10=
+ d=linaro.org; s=google; t=1734130555; x=1734735355; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sXEUyw5iudYsqNCtwuS3EWdMb81+3c+KKbtrVT0v+Ik=;
+ b=FWL226BxHfmbL/Kny2I7QPGYvCkNuN5gUNPE3a463aTGilL4S+gdNOVq9QRf9YdkyO
+ +ospLFnzMO9HuproH9xIxaG0T3+X3gAv5KfgXx9O9zVfZkwBtp22oY6kY2kezDwj6fsC
+ Qgw5Vkjpz7iDs7HrjkTN1es7DY+tiSsqK1+S30HAeYdF6PwrlRsJXyC/IsS6acz2Nl0b
+ dp5cAFfscTy3kU6pPmdOj7BWzAr49C6OwQ1+Q0FSMFxAxBy8zzXZilRrbFJdsVDkBeY1
+ 4596U7xaYYz4ig3+FplODLwfXxkAFfGwgiGLq/PBBY7/PI66fyhH2C3AR5tj0P0TIZyp
+ ODzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734120546; x=1734725346;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oKqP5fNDdRWl6J52Go39R1OmtvzK57v+w9pKQ0hrWBA=;
- b=Y1YVp5wVT+SqBzPuc4R62XDb2EeQqGsi64sJkzZXrs/0DtVgSwFuYg2VcRJ/Pl+/37
- DmZGD1gmg6vLqojkE48qB6kKlDjydgFf3bE+d1gMXFD4paHOR9gRZ/k11B7lzDI9lopO
- eMhfN/qoi+mTXaxs/xWqTOMneQYj5naFyAY3RLR5V0Pkq9wLX3qv+7m2M8oD1kOVOmQO
- IS5+iCAeXwc2EqmiADKYoOxpvcM6Q/L3ox2aLrJ7EgJOBlHa1Ox7P+mYpgruBu2nyhCg
- 048j2iIj0x4oE1JZCbKokMpDS8PM0qF/VVqNLBb4d2Ka5f80Pa+I5zwSphLZclT2u/iz
- OwUQ==
-X-Gm-Message-State: AOJu0Yw1Pw1zR8e9BN716iJ3SCqP0QS+Evml+KT/8zwrS8OU0Rleh3xE
- ZQEhYJIL+fembzGXfpOLsayY0vbQ86ZNxosZKBQmdSOAIlhd9tF0/QXCi177mdE=
-X-Gm-Gg: ASbGnctvdDryqXhB8SldwR0G++RSoPUlivZqzFYJ4wSUNqE3UJGeGxiGGOIizvGtxrd
- C8G3JnmeKW5zO5EiTxqwKvoCE9rSTd5rU7judTKaXVhURc37M1gtfY3IrEOTUl8k5/CtarrmiTc
- kvEyMxXh/1VcnUo+CRCRm8qFUsOoovzuVim7a5idiNL9NO3ARvRTZJA85YvHIi+BerljCN3P1xU
- rQQRD+G84rTVVa1gDPLzkV6L/gqcy78TUoPS/Wb4PR+yRglkbKAHHDz
-X-Google-Smtp-Source: AGHT+IFD6fHd9cy+H2UHJTtHCCKpOPXV9/C8hMt2khBKRQviYA+X1KgEQ21eYc1wEQvMInOi69a0sQ==
-X-Received: by 2002:a05:6214:2464:b0:6d8:9ef6:5b10 with SMTP id
- 6a1803df08f44-6dc8ca93cf8mr59000936d6.23.1734120546000; 
- Fri, 13 Dec 2024 12:09:06 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
+ d=1e100.net; s=20230601; t=1734130555; x=1734735355;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sXEUyw5iudYsqNCtwuS3EWdMb81+3c+KKbtrVT0v+Ik=;
+ b=Za0nJi4UC/tFGnTcfHEnQNWVs6Izy/P0XGyTQ3bhBmlNJwZR1XYk6Z52QGgN8x6VzF
+ j206LzpscbOhWjXunmnvJFwob5KZIN/DmgSAH2SXQXpIP6MZU3rAQdNHEiAdlivUC8tH
+ j5LL+KbkS1eWmmG+mpQI2E26NQAevJyASrrLLcVfAa3faLBZdJM604D2ypOjg/IrwW3X
+ 1qIAEmI9yEJ1V0xvbpGzVBDsltWraQyW15XXnroN8xJRTuZrBFq4O1jlrmctGoYsXOHS
+ WecnRcMHNjQKcd7/a6RD7WvbsEfIChq1gBd+rtYUVvxwF2R6Zw74JPPElazvMb5y/TKh
+ OPfw==
+X-Gm-Message-State: AOJu0Yz4uGAlyhpAw2i/MPgPuMzKI9NcGx6gSqcpUH9XDFoSfqt40I4E
+ yo+A12yv0nG0V+4vEN4DD30bjgSIKmr4jvYSf0SgBIO9C+wnZXbaAYo3hWPfTBDTYdbe6ejDznm
+ 8
+X-Gm-Gg: ASbGncvke9V+zaTZ7TF5dmClvXIa+ilMBwkfFwavmx0acErKhWVu1RIEDGRhqQFGyzt
+ lLkTzVQgrLNB7PC/j+CXcy7yO7u5/8pv+7Ng7/qrvNNKVBjqP/chUjBtxJsLrE/AO94le+9sQDw
+ GLcoZaOF8CXS8NxX60MRifFhP0lYwuXTh2BnXLDjNfVWcQK7Dc8LXC0GzACl508u5IAbLHvdG60
+ X3jj14c6FPgktyi20mMbF+e78BBDiJ8PkVGSat4vSvchbPvtEXj5N6KTsdP5WCgT4G0tjicUeof
+ OwRsd/TSjMN0VO2UFvdyjcxmkQvUSHMoASkaWNNWzscIFWxCjSTC5DY=
+X-Google-Smtp-Source: AGHT+IGuElUaxYS1NuhIzQ/g4IKxhM4UWBYyKQiQL0B1ucY+uzj5e3BLLS2me/D0EsZC76x2sZnZwA==
+X-Received: by 2002:a05:6214:3002:b0:6d9:429:ab4b with SMTP id
+ 6a1803df08f44-6db0f241e68mr111855916d6.0.1734130554773; 
+ Fri, 13 Dec 2024 14:55:54 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dccd257297sm726406d6.45.2024.12.13.12.09.02
+ 6a1803df08f44-6dccd366196sm2084106d6.80.2024.12.13.14.55.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 12:09:05 -0800 (PST)
-Date: Fri, 13 Dec 2024 14:09:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Ben Dooks <ben.dooks@codethink.co.uk>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Prusov <ivprusov@salutedevices.com>,
+ Fri, 13 Dec 2024 14:55:54 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Rick Chen <rick@andestech.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH v4 0/4] Select CONFIG_64BIT for sandbox64 and x86_64
-Message-ID: <20241213200900.GA1746743@bill-the-cat>
-References: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
+ Levi Yun <yeoreum.yun@arm.com>
+Subject: [PATCH 1/2] bloblist: add api to get blob with size
+Date: Fri, 13 Dec 2024 14:55:39 -0800
+Message-Id: <20241213225543.392282-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Iuwh/LGB4nUGGkyY"
-Content-Disposition: inline
-In-Reply-To: <20241125115554.1707080-1-andrew.goodbody@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,48 +99,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+bloblist_find function only returns the pointer of blob data,
+which is fine for those self-describing data like FDT.
+But as a common scenario, an interface is needed to retrieve both
+the pointer and the size of the blob data.
 
---Iuwh/LGB4nUGGkyY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+ common/bloblist.c  | 17 +++++++++++++++--
+ include/bloblist.h | 18 ++++++++++++++++++
+ 2 files changed, 33 insertions(+), 2 deletions(-)
 
-On Mon, Nov 25, 2024 at 11:55:50AM +0000, Andrew Goodbody wrote:
+diff --git a/common/bloblist.c b/common/bloblist.c
+index ec6ff7a5a9..efc1905da3 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
+ }
+ 
+ void *bloblist_find(uint tag, int size)
++{
++	void *blob = NULL;
++	int blob_size;
++
++	blob = bloblist_get_blob(tag, &blob_size);
++
++	if (size && size != blob_size)
++		return NULL;
++
++	return blob;
++}
++
++void *bloblist_get_blob(uint tag, int *size)
+ {
+ 	struct bloblist_rec *rec;
+ 
+ 	rec = bloblist_findrec(tag);
+ 	if (!rec)
+ 		return NULL;
+-	if (size && size != rec->size)
+-		return NULL;
++
++	*size = rec->size;
+ 
+ 	return (void *)rec + rec_hdr_size(rec);
+ }
+diff --git a/include/bloblist.h b/include/bloblist.h
+index ff32d3fecf..a04c7c80be 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
+ 	return ptr;
+ }
+ 
++#if CONFIG_IS_ENABLED(BLOBLIST)
++/**
++ * bloblist_get_blob() - Find a blob and get the size of it
++ *
++ * Searches the bloblist and returns the blob with the matching tag
++ *
++ * @tag:	Tag to search for (enum bloblist_tag_t)
++ * @size:	Size of the blob found
++ * Return: pointer to bloblist if found, or NULL if not found
++ */
++void *bloblist_get_blob(uint tag, int *size);
++#else
++static inline void *bloblist_get_blob(uint tag, int *size)
++{
++	return NULL;
++}
++#endif
++
+ /**
+  * bloblist_find() - Find a blob
+  *
+-- 
+2.25.1
 
-> Picking up a series from Dan Carpenter and applying requested
-> changes for v2.
->=20
-> I had previously set CONFIG_64BIT for arm64.  This patchset does the
-> same thing for sandbox and x86_64.  (Mips and riscv were already
-> doing it).  This CONFIG option is used in the Makefile to determine
-> if it's a 32 or 64 bit system for the CHECKER.
->=20
-> Makefile
->   1052  # the checker needs the correct machine size
->   1053  CHECKFLAGS +=3D $(if $(CONFIG_64BIT),-m64,-m32)
-
-Unfortunately this currently fails to build for chromebook_coral
-chromebook_samus_tpl qemu-x86_64 and snow platforms.
-
---=20
-Tom
-
---Iuwh/LGB4nUGGkyY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdclFgACgkQFHw5/5Y0
-tyzB3wv+PReVT6utlyrGBwlNGzz5QmchyPErcDTfAarGGQa92xzZFRPU+x0o7d4i
-Skhc9/uQLjPonhMWR/A7p8SoaqS3i0OXgQXjH2UpsWMtqoLRqavQHDhmac5uEXHD
-xdi3UWO5TBIEeKY7C8S/Ml8YW480WRh5P8f9GUJ3feqHA9/Mm73X0I6itZH0uqlz
-R/jIVieEiDCaNGIZvjn2eLVoYI8GquzGac3X7KCf0GYXJmSBmE0kY+hdX0M75hu6
-OJJSFsRE5WtLBk8nIiRojZ99Y2XTjpE5x54CwM/I3tZVKMA5rcxxzEy/8yJW3zz3
-3gCD3rNF5KShnhJaQsTqoqqhFXMfVQ/EouMrYEujxGHI4mHRV/PjbZr6RESBETY4
-THqN3iT5sLSgeFkwyz9kwptGadHnwzEuhlkOi+fjCPtaIkiFJVn6qUyshFbXIkK8
-PXeESJdspfHJqC0Ofsj1p2YHKSgEkcTgrEDFWLVtwxSOfsiEtMgmRo0/8rt9X8ZZ
-yNDRbkyg
-=nYf2
------END PGP SIGNATURE-----
-
---Iuwh/LGB4nUGGkyY--
