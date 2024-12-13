@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD46BE7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 15:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E602E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 15:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB208800D6;
-	Fri, 13 Dec 2024 16:08:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 56055800C2;
+	Fri, 13 Dec 2024 16:20:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RUNtnTN1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="boqDvW+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B08D28012C; Fri, 13 Dec 2024 16:08:23 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9AEA5800D6; Fri, 13 Dec 2024 16:20:34 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CC54800AA
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 16:08:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2CD4800C1
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 16:20:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a9e44654ae3so278607166b.1
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 07:08:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734102500; x=1734707300; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DjUMv/EymDA1SGlesrPYgxnXoOuzjmnHp9xnck1w2Kw=;
- b=RUNtnTN1MfwrwpUnjQn5qcArGoOl+cOf+Fday72GTG6BPTirlgxe9FcF8p2BjGmLaD
- 667Z5oNT3keOb8pHM+5hDhRMXIVEoSQ1D7Ji9nVPof/TpdHKPL+tBjeSLaT3kHdvfx67
- qzLXMZ/FJPaZknRlfPBRx7jc2uv9Ym3z0hS+U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734102500; x=1734707300;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DjUMv/EymDA1SGlesrPYgxnXoOuzjmnHp9xnck1w2Kw=;
- b=C7P+MPWODZfaYayjxfkO6eThIkkUusxZcKVAtHoPumIkg/Uep/CGTlUP+M7nyqjQAx
- A/6dkMUSAGCkSnZfloiTP102/Fvz+OcMQ+2i6JyvoRM0RsA1To44edG3ZE0IueJ1T21F
- x35YnuYrkcyK6Lk7JfSl1zLkbKmkz9aB+TSjU6w1Mh/rQD2ioH0aiTj39Er6pGla+P5/
- ui4JknPCjq0w+8qcZasBh2yCn1/Fh/7pDUun5HLqhN2GY5UPRbwJ7Rqz5JoPwXz1Zp9c
- 77j6+nRKvZ93g8OdBcKmOB0duUtTH1WXB0Yn4//CfX3feHhRZrlAUf7HjDUr6zCJOJxk
- UxqQ==
-X-Gm-Message-State: AOJu0YyHkSvxiSzfYqMHcE2dHnp7BsdN/5L+jSGYDvD6S48fBRktOZCL
- rN9Rrf3JrtNfoRtpLRUFElQVMRTtFXnaCZZbho9/P5BBTxlZYPJ0+rILJwrnRbfcx9MGigj5B4f
- O+K2QpsJhufQ2nydLVhjz8T01YkM8YBQrG5xV
-X-Gm-Gg: ASbGncuMJCbhpSrKRNtKrJ4w6X0/4V3e2jkhlNYX0X/jxi+1NJxHoF6ea1L81jzjcv9
- HG+F/nCuBtKCW+k10cHSdMl5kh3DABuTeDMcamcU=
-X-Google-Smtp-Source: AGHT+IFKCV4wOdbXzBdDM0ZyuLBdNXSgMjOXJ214xTmrucydNt0uelZti7qsf8/QxEa/c5urx3s9JAtn2BbF+H3c8Ds=
-X-Received: by 2002:a17:906:f597:b0:aa6:1c6a:30a1 with SMTP id
- a640c23a62f3a-aab779cffcbmr330778266b.32.1734102498967; Fri, 13 Dec 2024
- 07:08:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=6390=TH=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1734103226;
+ bh=CR05AuCK1VKe8YAD6xwNeiuzue+8rFQfH7TWgeZXuCQ=;
+ b=boqDvW+OBWxDMAjjceqcs1b8xwXeA+KeJ/ZDDgh4CNTjiEJY6sch02KBAdgp6gNHSuHlA7bMP
+ w6j2HMNR17C47MFogEsCoRkwZ18YIdi/hhlH5Xp/0mir7IfVaYEygv5BOLfgd7MdLQSw2o9jDLD
+ R2uqYY1ODErAWK0MQYolAzVVJR4S4OjY+cx1EK17puMnhg16fJp2B6OphXEo7gDcaA3uVbJhfQt
+ sCqei35K+qfvaptTc5nJlKUO4lDy2PTWrxDHGYFbM1gxM1A3eOFUXYGhZVJKnMALUYQgJ1F6QBN
+ 5FVnl1MPXkFllMyOdg/4wgeIbvKsE5G1sduhg+SpfKYg==
+Message-ID: <223d5d07-bc97-420c-810f-bbf967ec5af7@kwiboo.se>
+Date: Fri, 13 Dec 2024 16:20:22 +0100
 MIME-Version: 1.0
-References: <20241211223822.2446254-1-sjg@chromium.org>
- <20241211223822.2446254-5-sjg@chromium.org>
- <CAC_iWjKaywBv3qyk=fHNqH_anC3xT63Ua2=DMG2w1=LEt2vDLg@mail.gmail.com>
- <CAFLszTj8z+CL4FU_6yGjvN82ARYr3ZiWsGd7h9A=p6ObhEKcug@mail.gmail.com>
- <CAC_iWjJtG2qoHEWW8h7hVVU1c6+dPFJ3X7jYSe5H0UzXkSHxcQ@mail.gmail.com>
- <CAFLszTinZrL8VLiMSk-PxWP7oWdY=35kNNUYXXx3EfEz7Z72cQ@mail.gmail.com>
- <CAC_iWjL94RJCD4cM+SPS6FRAEM8VoK4kLSovOJFc6sJQ3FaSDA@mail.gmail.com>
-In-Reply-To: <CAC_iWjL94RJCD4cM+SPS6FRAEM8VoK4kLSovOJFc6sJQ3FaSDA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Dec 2024 08:08:07 -0700
-Message-ID: <CAFLszTgQr-czmdwzHbNvZOxMzUzM0zb8EDUhVLq6ArM+DUe0Bg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] efi_loader: Add a version of efi_binary_run() with
- more parameters
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] rockchip: Add initial RK3582 support
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20241210222341.3537543-1-jonas@kwiboo.se>
+ <20241210222341.3537543-2-jonas@kwiboo.se>
+ <e10f729d-cc77-41ba-b165-e32f6e058422@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <e10f729d-cc77-41ba-b165-e32f6e058422@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 675c50b896abc14790b84f7d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,136 +75,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Quentin,
 
-On Fri, 13 Dec 2024 at 05:13, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Fri, 13 Dec 2024 at 05:53, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Thu, 12 Dec 2024 at 08:45, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Thu, 12 Dec 2024 at 00:49, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > On Thu, 12 Dec 2024 at 00:38, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > This uses a few global variables at present. With the bootflow we have
-> > > > > > the required parameters, so add a function which accepts these. Update
-> > > > > > the existing function to call the new one with the globals.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  lib/efi_loader/efi_bootbin.c | 29 +++++++++++++++++++++++++----
-> > > > > >  1 file changed, 25 insertions(+), 4 deletions(-)
-> > > > > >
-> > > > > > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > > > > > index 8febd325f34..8ebd48547cb 100644
-> > > > > > --- a/lib/efi_loader/efi_bootbin.c
-> > > > > > +++ b/lib/efi_loader/efi_bootbin.c
-> > > > > > @@ -209,18 +209,22 @@ out:
-> > > > > >  }
-> > > > > >
-> > > > > >  /**
-> > > > > > - * efi_binary_run() - run loaded UEFI image
-> > > > > > + * efi_binary_run_() - run loaded UEFI image
-> > > > > >   *
-> > > > > >   * @image_ptr: memory address of the UEFI image
-> > > > > >   * @size:      size of the UEFI image
-> > > > > >   * @fdt:       device-tree
-> > > > > > + * @device:    EFI device-path
-> > > > > > + * @image:     EFI image-path
-> > > > > >   *
-> > > > > >   * Execute an EFI binary image loaded at @image.
-> > > > > >   * @size may be zero if the binary is loaded with U-Boot load command.
-> > > > > >   *
-> > > > > >   * Return:     status code
-> > > > > >   */
-> > > > > > -efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
-> > > > > > +efi_status_t efi_binary_run_(void *image_ptr, size_t size, void *fdt,
-> > > > > > +                            struct efi_device_path *device,
-> > > > > > +                            struct efi_device_path *image)
-> > > > > >  {
-> > > > >
-> > > > > This needs to be static here. Not the next patch. But I don't think we
-> > > > > need this at all (look below)
-> > > > >
-> > > > > >         efi_status_t ret;
-> > > > > >
-> > > > > > @@ -236,6 +240,23 @@ efi_status_t efi_binary_run(void *image_ptr, size_t size, void *fdt)
-> > > > > >         if (ret != EFI_SUCCESS)
-> > > > > >                 return ret;
-> > > > > >
-> > > > > > -       return efi_run_image(image_ptr, size, bootefi_device_path,
-> > > > > > -                            bootefi_image_path);
-> > > > > > +       return efi_run_image(image_ptr, size, device, image);
-> > > > > > +}
-> > > > > > +
-> > > > > > +/**
-> > > > > > + * efi_binary_run() - run loaded UEFI image
-> > > > > > + *
-> > > > > > + * @image:     memory address of the UEFI image
-> > > > > > + * @size:      size of the UEFI image
-> > > > > > + * @fdt:       device-tree
-> > > > > > + *
-> > > > > > + * Execute an EFI binary image loaded at @image.
-> > > > > > + * @size may be zero if the binary is loaded with U-Boot load command.
-> > > > > > + *
-> > > > > > + * Return:     status code
-> > > > > > + */
-> > > > > > +efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> > > > > > +{
-> > > > > > +       return efi_binary_run_(image, size, fdt, bootefi_device_path,
-> > > > > > +                              bootefi_image_path);
-> > > > > >  }
-> > > > >
-> > > > > We don't need functions and wrappers for such a simple call. Just
-> > > > > update all the callisites with the extra parameters and keep one
-> > > > > function
-> > > >
-> > > > If you look at the two call sites, you'll see that they would need to
-> > > > pass bootefi_device_path and bootefi_image_path in. but these are
-> > > > static variables in this file.
-> > >
-> > > Ah fair enough, then please rename efi_binary_run_ -> _efi_binary_run
-> > > ands make it static on this patch
-> >
-> > I don't mind where the underscore goes. I changed my mind about that
-> > when the dtc maintainer pointed out that C-library functions start
-> > with underscore, so putting an underscore at the start of the function
-> > is confusing things.
-> >
-> > "The underscore prefix is reserved for functions and types used by the
-> > compiler and standard library. The standard library can use these
-> > names freely."[1]
-> >
-> > But I don't mind. We don't even use the C library except for sandbox
-> > and tools. So let me know what you think.
->
-> I don't mind really. you can do __efi_binary_run() or keep whjat you
-> have. I jsut find the leading underscores a bit easier to read and
-> spot, but not a huge deal
+On 2024-12-13 14:43, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 12/10/24 11:23 PM, Jonas Karlman wrote:
+>> The RK3582 SoC is a variant of the RK3588S with some IP blocks disabled.
+>> What blocks are disabled/non-working is indicated by ip-state in OTP.
+>>
+>> This add initial support for RK3582 by using ft_system_setup() to mark
+>> any cpu and/or gpu node with status=fail as indicated by ip-state.
+>>
+>> This apply same policy as vendor U-Boot for RK3582, i.e. two big cpu
+>> cores and the gpu is always failed/disabled.
+>>
+>> Enable Kconfig option OF_SYSTEM_SETUP in board defconfig to make use of
+>> the required DT fixups for RK3582 board variants.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   arch/arm/mach-rockchip/rk3588/rk3588.c | 128 +++++++++++++++++++++++++
+>>   1 file changed, 128 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> index c1dce3ee3703..06e6318312b2 100644
+>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>> @@ -7,6 +7,7 @@
+>>   #define LOG_CATEGORY LOGC_ARCH
+>>   
+>>   #include <dm.h>
+>> +#include <fdt_support.h>
+>>   #include <misc.h>
+>>   #include <spl.h>
+>>   #include <asm/armv8/mmu.h>
+>> @@ -185,6 +186,12 @@ int arch_cpu_init(void)
+>>   
+>>   #define RK3588_OTP_CPU_CODE_OFFSET		0x02
+>>   #define RK3588_OTP_SPECIFICATION_OFFSET		0x06
+>> +#define RK3588_OTP_IP_STATE_OFFSET		0x1d
+>> +
+>> +#define BAD_CPU_CLUSTER0		GENMASK(3, 0)
+>> +#define BAD_CPU_CLUSTER1		GENMASK(5, 4)
+>> +#define BAD_CPU_CLUSTER2		GENMASK(7, 6)
+>> +#define BAD_GPU				GENMASK(4, 1)
+>>   
+>>   int checkboard(void)
+>>   {
+>> @@ -230,3 +237,124 @@ int checkboard(void)
+>>   
+>>   	return 0;
+>>   }
+>> +
+>> +#ifdef CONFIG_OF_SYSTEM_SETUP
+>> +static int fdt_path_del_node(void *fdt, const char *path)
+>> +{
+>> +	int nodeoffset;
+>> +
+>> +	nodeoffset = fdt_path_offset(fdt, path);
+>> +	if (nodeoffset < 0)
+>> +		return nodeoffset;
+>> +
+>> +	return fdt_del_node(fdt, nodeoffset);
+>> +}
+>> +
+>> +static int fdt_path_set_name(void *fdt, const char *path, const char *name)
+>> +{
+>> +	int nodeoffset;
+>> +
+>> +	nodeoffset = fdt_path_offset(fdt, path);
+>> +	if (nodeoffset < 0)
+>> +		return nodeoffset;
+>> +
+>> +	return fdt_set_name(fdt, nodeoffset, name);
+>> +}
+>> +
+>> +int ft_system_setup(void *blob, struct bd_info *bd)
+>> +{
+>> +	static const char * const cpu_node_names[] = {
+>> +		"cpu@0", "cpu@100", "cpu@200", "cpu@300",
+>> +		"cpu@400", "cpu@500", "cpu@600", "cpu@700",
+>> +	};
+>> +	u8 cpu_code[2], ip_state[3];
+>> +	int parent, node, i, ret;
+>> +	struct udevice *dev;
+>> +
+>> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
+>> +		return -ENOSYS;
+>> +
+>> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+>> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+>> +	if (ret) {
+>> +		log_debug("Could not find otp device, ret=%d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	/* cpu-code: SoC model, e.g. 0x35 0x82 or 0x35 0x88 */
+>> +	ret = misc_read(dev, RK3588_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+>> +	if (ret < 0) {
+>> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	log_debug("cpu-code: %02x %02x\n", cpu_code[0], cpu_code[1]);
+>> +
+>> +	/* skip on rk3588 */
+>> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x88)
+>> +		return 0;
+>> +
+>> +	ret = misc_read(dev, RK3588_OTP_IP_STATE_OFFSET, &ip_state, 3);
+> 
+> Do you have information about what;s in the third byte? It's not used in 
+> this patch series for example, so wondering if it really makes sense to 
+> read it and dump it?
 
-Yes I find them easier to read also. I'll go with a single underscore,
-since __ is supposed to be for start-up code, or something.
+To my knowledge information about rkvenc is stored in the third byte.
 
-But Tom asked me not to send anything until Wednesday and I'm heading
-off for a few weeks at EOW. Let's see what you decide on the big
-series, and then perhaps I can send both before I go.
+Vendor U-Boot [1] lists following:
+- ip_state[0]: bit0~7 - cpu_mask
+- ip_state[2]: bit0,2 - rkvenc_mask
+- ip_state[1]: bit6,7 - rkvdec_mask
+- ip_state[1]: bit1~4 - gpu_mask
+
+However, vendor U-Boot also #if out the entire gpu_mask so not fully
+sure if that is correct or even filled in.
+
+[1] https://github.com/rockchip-linux/u-boot/blob/next-dev/arch/arm/mach-rockchip/rk3588/rk3588.c#L1393-L1404
+
+> 
+>> +	if (ret < 0) {
+>> +		log_debug("Could not read ip-state, ret=%d\n", ret);
+>> +		return ret;
+>> +	}
+>> +
+>> +	log_debug("ip-state: %02x %02x %02x\n",
+>> +		  ip_state[0], ip_state[1], ip_state[2]);
+>> +
+>> +	if (cpu_code[0] == 0x35 && cpu_code[1] == 0x82) {
+>> +		/* policy: always disable gpu */
+>> +		ip_state[1] |= BAD_GPU;
+>> +
+>> +		/* policy: always disable one big core cluster */
+>> +		if (!(ip_state[0] & (BAD_CPU_CLUSTER1 | BAD_CPU_CLUSTER2)))
+>> +			ip_state[0] |= BAD_CPU_CLUSTER2;
+> 
+> That's a very interesting choice, wondering what's prompted this 
+> decision (which I assume comes from vendor tree :) ).
+
+Not sure myself, my rk3582 boards only have a single rkvdec, kkvenc or
+cpu core marked as bad, have not seen any board with multiple cores
+marked as bad.
+
+I did a simple tests with only disable the exact cores that was marked
+as bad on the board with a bad cpu core and left all 8 cores enabled on
+the other boards and that seem to run fine.
+
+Could be related to marketing or thermal, the policy was copied from
+vendor as-is.
+
+> 
+>> +	}
+>> +
+>> +	if (ip_state[0] & BAD_CPU_CLUSTER1) {
+>> +		/* fail entire cluster when one or more core is bad */
+>> +		ip_state[0] |= BAD_CPU_CLUSTER1;
+>> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster1");
+>> +	}
+>> +
+>> +	if (ip_state[0] & BAD_CPU_CLUSTER2) {
+>> +		/* fail entire cluster when one or more core is bad */
+>> +		ip_state[0] |= BAD_CPU_CLUSTER2;
+>> +		fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
+>> +	} else if (ip_state[0] & BAD_CPU_CLUSTER1) {
+>> +		/* cluster nodes must be named in a continuous series */
+>> +		fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
+>> +	}
+>> +
+> 
+> Nitpick on readability (to me at least, matter of a taste :) )
+> 
+> Could suggest:
+> 
+> if (ip_state[0] & BAD_CPU_CLUSTER1) {
+>      /* cluster nodes must be named in a continuous series */
+>      fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
+> 
+>      if (!(ip_state[0] & BAD_CPU_CLUSTER2))
+>          /* cluster nodes must be named in a continuous series */
+>          fdt_path_set_name(blob, "/cpus/cpu-map/cluster2", "cluster1");
+> }
+> 
+> if (ip_state[0] & BAD_CPU_CLUSTER2) {
+>      /* fail entire cluster when one or more core is bad */
+>      ip_state[0] |= BAD_CPU_CLUSTER2;
+>      fdt_path_del_node(blob, "/cpus/cpu-map/cluster2");
+> }
+
+Main reason for separation with above rk3582 policy handling was because
+I added the rk3582 policy last second, and it also made it possible to
+easily remove the entire cpu_code == 3582 block if one wants to use all
+cores not marked as bad.
+
+Also in the vendor U-Boot there is a mention and different policy for a
+RK3583 variant, so current separation may be preferred but will try to
+add some comments in a v2.
+
+> 
+> For CPU clusters, it seems the bitmask matches how many cores there are 
+> in a cluster. Right now we are removing the whole cluster even if only 
+> one core in the cluster is broken. But I see later that we only disable 
+> the cores marked as bad. The dt-binding says clusters are for one or 
+> more cores, so maybe we are too eager here to remove a cluster even if 
+> not all cores in the cluster are broken? Do you know what are the 
+> possible side effects of removing a cluster but still having one of its 
+> cores enabled in DT?
+
+The code do ip_state[0] |= BAD_CPU_CLUSTER2 when one of the cores in
+cluster 2 is marked as bad, so both cores will be marked as failed.
+
+Howerver, the code should probably just remove the cluster if both cores
+are bad, should make it easier if one want to test without any of the
+policy. Will try to re-work this a little bit to make it more readable
+and easy to just comment out any of the policy lines.
+
+> 
+>> +	/* gpu: ip_state[1]: bit1~4 */
+>> +	if (ip_state[1] & BAD_GPU) {
+>> +		log_debug("fail gpu\n");
+>> +		fdt_status_fail_by_pathf(blob, "/gpu@fb000000");
+>> +	}
+>> +
+> 
+> Here I'm a bit perplexed. We don't define multiple cores in the GPU node 
+> on Linux kernel IIRC. I have not a single clue why the bitmask for the 
+> GPU is 3 bits, do you have any idea or information?
+
+The gpu_mask in vendor tree is not used and the gpu is instead always
+disabled for RK3582, and left enabled for RK3583.
+
+Was not sure if we should try to use the ip-state values or just, so I
+went with a similar approach as for cpu cores, fill all bits in policy
+part and check for any bit in the fail part.
+
+> 
+>> +	parent = fdt_path_offset(blob, "/cpus");
+>> +	if (parent < 0) {
+>> +		log_debug("Could not find /cpus, parent=%d\n", parent);
+> 
+> Any reason for not making this an error message? Are we expecting this 
+> code path to be hit in "normal" behavior?
+
+I do not think it should be possible, maybe only if the code where to
+run on the xPL control FDT.
+
+The return 0 is probably just something left from the early code I
+tested where it just printed what should happen. Will check what happen
+if we return an error here and adjust for v2.
+
+> 
+>> +		return 0;
+>> +	}
+>> +
+>> +	/* cpu: ip_state[0]: bit0~7 */
+>> +	for (i = 0; i < 8; i++) {
+>> +		/* fail any bad cpu core */
+>> +		if (!(ip_state[0] & BIT(i)))
+>> +			continue;
+>> +
+>> +		node = fdt_subnode_offset(blob, parent, cpu_node_names[i]);
+>> +		if (node >= 0) {
+>> +			log_debug("fail cpu %s\n", cpu_node_names[i]);
+>> +			fdt_status_fail(blob, node);
+>> +		} else {
+>> +			log_debug("Could not find %s, node=%d\n",
+>> +				  cpu_node_names[i], node);
+> 
+> Any particular reason for making this a debug message rather than an 
+> error message?
+
+This and the /cpus debug messages was added last second before sending
+this out :-), will change to error messages in v2.
 
 Regards,
-Simon
+Jonas
 
-> > [1] https://stackoverflow.com/questions/39625352/why-do-some-functions-in-c-have-an-underscore-prefix
+> 
+> Cheers,
+> Quentin
+
