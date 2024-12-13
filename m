@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85A3E7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 12:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACC1E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 12:18:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6418012C;
-	Fri, 13 Dec 2024 13:17:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9EC18801DA;
+	Fri, 13 Dec 2024 13:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zou9oOUR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PpUhwuMB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FBC380137; Fri, 13 Dec 2024 13:17:26 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 51CF6801F5; Fri, 13 Dec 2024 13:18:02 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A3998010E
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 13:17:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10FA380137
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 13:18:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6eff5f6fe07so12297887b3.1
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:17:23 -0800 (PST)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6ef81222aaaso17061887b3.3
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 04:18:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734092243; x=1734697043; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734092279; x=1734697079; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VhlMo71NizJaPH9DB3uBkunbdiIOp7XpaonEKJ0LxHw=;
- b=zou9oOURkzCmlcrOIyTH40T0U34tCH61CtzIZMPOtnjwWFm0dt1FAjE7mEgP1r/Sdl
- /M93gnfNz2HeuA7wWaSqcaQFjFiGGvEjGQxESGk/HhCAXWB9dsyY7DuHUKy7PMci7pkb
- eRCdjYFCHwis7ikneT9BR9Kv1xopmDEqX9XRd4hU6tLrL+7Yov5qoyHucT5WGrVBfcrX
- hflkSobRYBguKevEyjNGkfoZrNp+Mkgw82BY3A07ZQWdC3wi58gXgCoIFHEtOm2RJbv3
- fNzClZ9njxjcg9TRj3haUV1dQuKa5mXe7WS7ozXKNVDsMDdMA6VWPln4DadegVu7mznF
- eDAA==
+ bh=Ejw/vTR7+EbqlbI36njLXK9DnEf8MZtlfIif4PaDSqY=;
+ b=PpUhwuMBbSeIQc13bh3aNLvT2l9vYQ/sUd5VcOKvvnoSjQzKb79u0QUegRt9DsFChR
+ j/7AQrluGT6medgKpCnQxmlvy/nlTkizJpPJcOgkrNi0tuYkhxQpDaXdZtosDAfc1t00
+ rVtby1v14FfNirayNNWCU8UO3qpIYvXc1Ui6cRCMks1SAQdNjZpAf2O5vI8Y/GK5CCg3
+ H577t+91/noE+iOuQGkOLSGbJbiJmqpriKuBNoWhNnHGUwKLuYjOIkopEVBxW7PQzp/b
+ IqiI1sHNU9PgS8kHKRP7b6GJpSLTJv8XRF8JcUMejEMO5uHJwWjWR6RxHQRFu8GZiEJ8
+ UM7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734092243; x=1734697043;
+ d=1e100.net; s=20230601; t=1734092279; x=1734697079;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VhlMo71NizJaPH9DB3uBkunbdiIOp7XpaonEKJ0LxHw=;
- b=fyzNYN/n7vm5ao27ubqnGEe7XGb7JpHM5WblpH1J/n+xeluWe73UEdei3DVKEgqxIU
- K6X86qX3cdlfe6NMc2fX8qwn7P+HZMH70i/8m18dGS9sM/496cvQC0NJWqOkinWzFdC8
- Ox8Su0wLo5uH2M6ncawzyGagKB1+F4f37Y4IZXOH/uHufVOuDwNglw8/enBdaXozC2ly
- LpqXa7Odjtj3aSrlSwnDgIM4kTi8gBFtH9tORO/4LjArdwvgttidDKCT5UPblttGaNqK
- j0PmeWt7sXLyLX7hQtC7RYZ1oarIfns2/5aTEnHFDW+/eXGlpbQgYNXvzmXHLzZDdur9
- UWuw==
-X-Gm-Message-State: AOJu0YzeKjZVU/a+eLgnbGzH7EfEA4SUyNKzSB0rZQtZFhnxU9mSPZgk
- hDi5OMEYfInwPDnvsSjKM8a4jPe5e7OX6vj/NFjIv9V7Jq+S+AqJ5svJrsq0vgkdObgSVWW/n6m
- XxmSdrwEpvd3pY7kZOBQdayC9HqOInxmRnGHO8Q==
-X-Gm-Gg: ASbGncs40Pq1G/KoZ3TRdDu3DRlEiGNqhIO6E5x3b3Si4nWDEZDRq5e+9t0bZKipQJ6
- wVtRjU9UBEA/bcGfj1MZzpn/0xl9xgmTPlpmb+Q==
-X-Google-Smtp-Source: AGHT+IFpXPgC49KfTz/cUuCcu22SkWTl8w2wjS+u7Z1mgEDnaecXfE/dkx3p6RiXDt9/ZNyTWcgvbmI4LV0ToUi/e2k=
-X-Received: by 2002:a05:690c:6ac3:b0:6ee:4855:45de with SMTP id
- 00721157ae682-6f275c4ed77mr35221977b3.9.1734092242902; Fri, 13 Dec 2024
- 04:17:22 -0800 (PST)
+ bh=Ejw/vTR7+EbqlbI36njLXK9DnEf8MZtlfIif4PaDSqY=;
+ b=kQ6161HM/S43iR5NkLa+EaUlYVhrfDzP5M7EJ5GKR1zLyCwxmUstY/l3HieuEUqPbQ
+ kK14guZajJD5irZd6oSXMjU4yG4FQ3Miwrk452xiPYXwU13VFc2NX9dXSR8SR2LNutBa
+ ay17XWxGjqqKsFL/IgxJB0TQDheGcG0zy/DxrH/UsVoWJI1t0GaW3IIW9qJ+pVPqV6R2
+ hl84LiQ+mxFMbkoaoeTjpxEedhaQYUkWve1ixcD7Cgcw4FDO32QpFmoi/NNscqbl0d8E
+ TCEX6mDIG3LQmFpixWJVuHjKpEfpQwVmha8tpaUYkiabg4zkZ+l5lG7QBlG4GQv9OZ+5
+ L+3w==
+X-Gm-Message-State: AOJu0YzwlsfcEaGGGRAj6dShL4wD2j5ap71tERHPK/agVJwajnsrBglQ
+ bCGyxZ5+T0QvLoR+1D1/Apab/ss0D6R8GECV+/qEK+CLvLJQv8AbAiMIFXkrfk0H5WQ6nVvnkCa
+ qKxFbUf2zJpJqvB7wUD5JOiKEwMkR63wa7jTSAQ==
+X-Gm-Gg: ASbGncvV9grvTZsmOfAMjukgz8eLCC98qPhgUDnnXXfITCj/CajREIE9Sc44NAXLiwa
+ 1ErqNtMkfvDwvBj6rDgrmTxkgdZrrDWTFbhuLnQ==
+X-Google-Smtp-Source: AGHT+IFY/u/G+KAjVtuQRoyKjZ2t5tbZTp/P62GBa9jpJXLLWCJsDPWrHLpdRaqPQ85mgSnSrp18reRmMdfxArQTgBA=
+X-Received: by 2002:a05:690c:64c6:b0:6ef:aae1:ac6f with SMTP id
+ 00721157ae682-6f279ae3757mr22793977b3.3.1734092278939; Fri, 13 Dec 2024
+ 04:17:58 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1733757864.git.jerome.forissier@linaro.org>
- <47c647a8dfc23ba24c90560feb1360788609384a.1733757864.git.jerome.forissier@linaro.org>
- <CAC_iWjJ8gNmnyfwg-DURJhZQ=Vs=8LUS-Vv=dD30NdR6rcApHQ@mail.gmail.com>
- <613a8e02-d5ed-4528-81f1-10f07986730a@linaro.org>
-In-Reply-To: <613a8e02-d5ed-4528-81f1-10f07986730a@linaro.org>
+ <a23d88947ef928e3492445796855db2c00d64b2d.1733757864.git.jerome.forissier@linaro.org>
+In-Reply-To: <a23d88947ef928e3492445796855db2c00d64b2d.1733757864.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 13 Dec 2024 14:16:47 +0200
-Message-ID: <CAC_iWjJGxaP+SW05OXjKgQoLY5O4Ecf43-uHsU6fk_8PQxkw5Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] trace: add support for "trace clear"
+Date: Fri, 13 Dec 2024 14:17:23 +0200
+Message-ID: <CAC_iWjLBRSpen8V77nrnN9J-NN--EpAV5-V-PHqbsvsVuAM=aQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] test: test_trace.py: test "trace clear" command
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,185 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks,
-
-Apologies I missed something else as well
-
-On Fri, 13 Dec 2024 at 14:14, Jerome Forissier
+On Mon, 9 Dec 2024 at 17:32, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
+> Also test the newly added command 'trace clear'.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  test/py/tests/test_trace.py | 30 ++++++++++++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>
+> diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+> index ec1e624722c..29c115275da 100644
+> --- a/test/py/tests/test_trace.py
+> +++ b/test/py/tests/test_trace.py
+> @@ -70,6 +70,32 @@ def collect_trace(cons):
+>      return fname, int(dm_f_time[0])
 >
 >
-> On 12/13/24 13:09, Ilias Apalodimas wrote:
-> > Hi Jerome
-> >
-> > On Mon, 9 Dec 2024 at 17:32, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> >>
-> >> Implement a "trace clear" command to delete the currently accumulated
-> >> trace data. This comes handy when someone needs to trace a particular
-> >> command. For example:
-> >>
-> >>   => trace clear; dhcp; trace pause
-> >>   => trace stats
-> >>   => trace calls 0x02100000 0x10000000
-> >>   => tftpput $profbase $profoffset 192.168.0.16:trace.bin
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  cmd/trace.c     | 13 ++++++++++++-
-> >>  include/trace.h |  2 ++
-> >>  lib/trace.c     | 47 +++++++++++++++++++++++++++++++++--------------
-> >>  3 files changed, 47 insertions(+), 15 deletions(-)
-> >>
-> >> diff --git a/cmd/trace.c b/cmd/trace.c
-> >> index 937e6a682ad..e95ac7ca9da 100644
-> >> --- a/cmd/trace.c
-> >> +++ b/cmd/trace.c
-> >> @@ -87,8 +87,18 @@ int do_trace(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> >>                 trace_set_enabled(0);
-> >>                 break;
-> >>         case 'c':
-> >> -               if (create_call_list(argc, argv))
-> >> +               switch (*(cmd + 1)) {
-> >> +               case 'a':
-> >> +                       if (create_call_list(argc, argv))
-> >> +                               return cmd_usage(cmdtp);
-> >> +                       break;
-> >> +               case 'l':
-> >> +                       if (trace_clear())
-> >> +                               return CMD_RET_FAILURE;
-> >> +                       break;
-> >
-> > Instead of this, mind changing the command to trace wipe or something similar?
-> > Then we can have a discrete case for 'w' rather than scanning for a string
+> +def clear_and_collect_trace(cons):
+> +    """Pause and clear traces, return the number of calls (should be zero)
+> +
+> +    Args:
+> +        cons (ConsoleBase): U-Boot console
+> +
+> +    Returns:
+> +        int: the number of traced function calls reported by 'trace stats'
+> +    """
+> +    cons.run_command('trace pause')
+> +    cons.run_command('trace clear')
+> +    out = cons.run_command('trace stats')
+> +
+> +    # The output is something like this:
+> +    # 117,221 function sites
+> +    #       0 function calls
+> +    #       0 untracked function calls
+> +    #       0 traced function calls
+> +
+> +    # Get a dict of values from the output
+> +    lines = [line.split(maxsplit=1) for line in out.splitlines() if line]
+> +    vals = {key: val.replace(',', '') for val, key in lines}
+> +
+> +    return int(vals['traced function calls'])
+> +
+> +
+>  def check_function(cons, fname, proftool, map_fname, trace_dat):
+>      """Check that the 'function' output works
 >
-> Good idea.
->
-> Thanks,
+> @@ -304,3 +330,7 @@ def test_trace(u_boot_console):
+>      # This allows for CI being slow to run
+>      diff = abs(fg_time - dm_f_time)
+>      assert diff / dm_f_time < 0.3
+> +
+> +    # Check that the trace buffer can be cleared
+> +    numcalls = clear_and_collect_trace(cons)
+> +    assert numcalls == 0
 > --
-> Jerome
+> 2.43.0
 >
-> >
-> > Cheers
-> > /Ilias
-> >> +               default:
-> >>                         return cmd_usage(cmdtp);
-> >> +               }
-> >>                 break;
-> >>         case 'r':
-> >>                 trace_set_enabled(1);
-> >> @@ -113,6 +123,7 @@ U_BOOT_CMD(
-> >>         "stats                        - display tracing statistics\n"
-> >>         "trace pause                        - pause tracing\n"
-> >>         "trace resume                       - resume tracing\n"
-> >> +       "trace clear                        - clear traces\n"
-> >>         "trace funclist [<addr> <size>]     - dump function list into buffer\n"
-> >>         "trace calls  [<addr> <size>]       "
-> >>                 "- dump function call trace into buffer"
-> >> diff --git a/include/trace.h b/include/trace.h
-> >> index 763d6d1255a..782eaae2fc2 100644
-> >> --- a/include/trace.h
-> >> +++ b/include/trace.h
-> >> @@ -100,6 +100,8 @@ void trace_set_enabled(int enabled);
-> >>
-> >>  int trace_early_init(void);
-> >>
-> >> +int trace_clear(void);
-> >> +
-> >>  /**
-> >>   * Init the trace system
-> >>   *
-> >> diff --git a/lib/trace.c b/lib/trace.c
-> >> index cabbe47b58a..def9f912c92 100644
-> >> --- a/lib/trace.c
-> >> +++ b/lib/trace.c
-> >> @@ -351,14 +351,8 @@ static int get_func_count(void)
-> >>         return gd->mon_len / FUNC_SITE_SIZE;
-> >>  }
-> >>
-> >> -/**
-> >> - * trace_init() - initialize the tracing system and enable it
-> >> - *
-> >> - * @buff:      Pointer to trace buffer
-> >> - * @buff_size: Size of trace buffer
-> >> - * Return:     0 if ok
-> >> - */
-> >> -int notrace trace_init(void *buff, size_t buff_size)
-> >> +static int notrace trace_init_(void *buff, size_t buff_size, bool copy_early,
-> >> +                              bool enable)
-> >>  {
-> >>         int func_count = get_func_count();
-> >>         size_t needed;
-> >> @@ -368,7 +362,7 @@ int notrace trace_init(void *buff, size_t buff_size)
-> >>                 return func_count;
-> >>         trace_save_gd();
-> >>
-> >> -       if (!was_disabled) {
-> >> +       if (copy_early) {
-> >>  #ifdef CONFIG_TRACE_EARLY
-> >>                 ulong used, count;
-> >>                 char *end;
-> >> @@ -394,9 +388,6 @@ int notrace trace_init(void *buff, size_t buff_size)
-> >>                 }
-> >>                 puts("\n");
-> >>                 memcpy(buff, hdr, used);
-> >> -#else
-> >> -               puts("trace: already enabled\n");
-> >> -               return -EALREADY;
-> >>  #endif
-> >>         }
-> >>         hdr = (struct trace_hdr *)buff;
-> >> @@ -419,13 +410,41 @@ int notrace trace_init(void *buff, size_t buff_size)
-> >>         hdr->ftrace_size = (buff_size - needed) / sizeof(*hdr->ftrace);
-> >>         hdr->depth_limit = CONFIG_TRACE_CALL_DEPTH_LIMIT;
-> >>
-> >> -       puts("trace: enabled\n");
-> >> -       trace_enabled = 1;
-> >> +       printf("trace: initialized, %senabled\n", enable ? "" : "not ");
-> >> +       trace_enabled = enable;
-> >>         trace_inited = 1;
-> >>
-> >>         return 0;
-> >>  }
-> >>
-> >> +/**
-> >> + * trace_init() - initialize the tracing system and enable it
-> >> + *
-> >> + * @buff:      Pointer to trace buffer
-> >> + * @buff_size: Size of trace buffer
-> >> + * Return:     0 if ok
-> >> + */
-> >> +int notrace trace_init(void *buff, size_t buff_size)
-> >> +{
-> >> +       /* If traces are enabled already, we may have early traces to copy */
-> >> +       return trace_init_(buff, buff_size, trace_enabled, true);
 
-This is a global, so you can skip passing it and just check the
-trace_enabled in trace_init_()
-
-Thanks
-/Ilias
-> >> +}
-> >> +
-> >> +/**
-> >> + * trace_clear() - clear accumulated traced data
-> >> + *
-> >> + * May be called with tracing enabled or disabled.
-> >> + */
-> >> +int notrace trace_clear(void)
-> >> +{
-> >> +       bool was_enabled = trace_enabled;
-> >> +
-> >> +       if (trace_enabled)
-> >> +               trace_enabled = 0;
-> >> +       return trace_init_(gd->trace_buff, CONFIG_TRACE_BUFFER_SIZE,
-> >> +                          false, was_enabled);
-> >> +}
-> >> +
-> >>  #ifdef CONFIG_TRACE_EARLY
-> >>  /**
-> >>   * trace_early_init() - initialize the tracing system for early tracing
-> >> --
-> >> 2.43.0
-> >>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
