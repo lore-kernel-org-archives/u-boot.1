@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93ADE7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 11:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02224E7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 11:49:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69E218012C;
-	Fri, 13 Dec 2024 12:07:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E9F880104;
+	Fri, 13 Dec 2024 12:49:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VPqAq2DF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fsdvmTll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E27780192; Fri, 13 Dec 2024 12:07:54 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 22D498010B; Fri, 13 Dec 2024 12:49:32 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EDC7800D6
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 12:07:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94724800DF
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 12:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-30229d5b21cso13390871fa.1
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 03:07:52 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6f00b10bc1dso15107347b3.3
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 03:49:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734088071; x=1734692871; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734090568; x=1734695368; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CjwNKVzocZ291uHq3Mwq0vPS0Q1RpXGIxAp0bHBevF8=;
- b=VPqAq2DFR6jCjMnaJtudPxP2AUwcW7CWXZJbrqZXFvtagaXWY9rhrD0FfTVfSrAM/J
- 79QwEGCtL/stURfDENWEPA430Vb3KBqxs+UWrhscLFw+yeF9guI/kWoeVThKf97jZoc+
- i9nj4MgP6+GgWOQ7shVPHu1UlVIXkLr8D464CNeUfDnN4IXt6RHvsJ71rynwWCNsQquC
- GrbBXW8OJ5OcRt2idM/o3KA1KCHvCxyR7Wyjz6Cjf6z7L+9Zgv1Z5LowYZcXn2Lo4pbw
- ssGb5rkiUKxypQKqlPWsrbCo6YaT19Cpy6B4cvyCupgPI3fifna10Z9Xh84UU7MRv3OZ
- 58dA==
+ bh=f4zPj7ZR31+bjyCtFRbLqSK9FeBeyH6N2LNRi+qTRTU=;
+ b=fsdvmTll+GcnFUNMBDj+nz7ktdzwrJ5vvpbWYIp0DM3McwNdHjP9BEo5MqPXXrbhKf
+ bp3x+vrs6QyeAJogO84fQLQKXw6ci/BzZ+aUtckUtohuzeeK0BaR72DHMPmHcvkTrB1K
+ a0/OVamWenWfGS0Qh8l2RHKZd+wgzlXuIcag28+FHbnE2V7XhHKHL7EfmYQ/j4fVK3iB
+ 6TJiqwQcf6hz2ctnGmwLRLu8RFvuXS1UMscBOje3AeKRDkyjIl+EKD/xvflq3MUrIm16
+ NHLoi1d0XYpdRfXzLk1/0Ymobt8ePdiweR2znT45GUmqBn6S/8P0Yuvcn6y5hLDT96+n
+ cS2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734088071; x=1734692871;
+ d=1e100.net; s=20230601; t=1734090568; x=1734695368;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CjwNKVzocZ291uHq3Mwq0vPS0Q1RpXGIxAp0bHBevF8=;
- b=Fieh7l9gwx3UAbsajisjCQiIzPsYg9T7tUwyYrijtBBEiqmshAPA3m0gJay2w5sGN0
- dnozQcXk9+VgKkfNahJQDvoPoinpsbfri7TYaI5EScNLYrdzbyhNiffJfJNqMBFYToiM
- lI5tap5oo/cP7uc8Zw0U1Imyf6IDFK4NB+CSQ1gM+3u/xezq+VE9By8n5Bgbavf01xgb
- Gjkzv4RUdcXBv10mhCvid2rUmb0kQPNBH3AXfRzGwUr3RzY3veilxgEc2rT/ggsio85k
- c2R8BM6nAHIFTG95dz4yzX8s9zN17grtk8DZHBZ1WHCw9KCLyOf7jfTqnb/jvuDlcA0F
- 79Tw==
+ bh=f4zPj7ZR31+bjyCtFRbLqSK9FeBeyH6N2LNRi+qTRTU=;
+ b=L8nv1TpT3SDv59A7DqvvipL/WK1d1LOo7kPDzeMRXrNuGqdBLBSx9T8rJIEX8uPREh
+ +gSZrBL7SLXLCRdvKuMP3La7ZQNfoH5nW/viGy7cqjmXRpj6W4nJ1Gw/4K7yCwMjCP0A
+ R5Rh62C/5uFFdJdVoEL563OzDjJctDc/itflodRcpFLDyFCX7ErbwNvveFBmA6LS/ooY
+ bqm+qMRyHdaPaxYYzi9uroemRjvH8YRKguDlvty/xp//mIa+XiN/C99q/QDgfBovm9JT
+ prq+m8Xctig3n1dBQPji/5oz7XE/SMfyO6u6w/qeWfK6oHJvTNatEkpPd3RZIfV7ex4m
+ DQ4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1Zqj36M/W5zlC565LFgRQjBKYsbuaY0TStrDBbNaR1AjUyaz+9lbFXB4410eU33HxPfP2Gu0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqkwUL68EuDX6BdBhfKSU4o44tl2WPHneqDCYnfAyahGO35qxu
- rV8uOFBYXbzaA1yta3NvMlE23CCdQ3VVOztyKsP3io7bxfD6dZZ00j8s6TlJb8OJqdyXK6TTF0W
- Ccq9KYbtIvi6z5jnxbjr3WGp7Sk8=
-X-Gm-Gg: ASbGncvPQdymr6V5VWRRG8BvWassNLJ/t8CfEadlJEVqzxOAI/2LuyPpEOkkNFSyelF
- Mcq2sKWio5Y+MfQ4LAfiTrMf1VwoibpisRhOZ2CA=
-X-Google-Smtp-Source: AGHT+IHBbAAm8hOI2INMxLCj5PM06dlGMuNM4QRl3mk4gpAfAVMIrocuAiNqnsRi1q9oa7U06G+2Sxtoinm9HG4QxP4=
-X-Received: by 2002:a05:651c:4cb:b0:300:33b1:f0e2 with SMTP id
- 38308e7fff4ca-3025442715cmr5588891fa.3.1734088071175; Fri, 13 Dec 2024
- 03:07:51 -0800 (PST)
+ AJvYcCU5lDLR/5UE1LTw3pPrMCuqNNdLV7tMd39ddC9o79kBrcFLlICD1Tqbl6TGOGAW4iMHgdbZCng=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/G/niSbFE7GolJtkocZj7lT6rQ3oZ7UoUlHlRPNGCV/DgNL9s
+ 6Lo6ffGty2stkELphWxEUfU1aM8n//gmj/8H9Pm8OyAdNQnwk78EQowG19ixpKHb/8RuRQXzK0q
+ WvU+KLZdt2qPSfiEOkLX1O9B5klE1BeObDj+p5g==
+X-Gm-Gg: ASbGncsA6sXxeOyWiFjacqkifvMe0PsiYiBvXEuRKGjPD5lWxVF7sEhtPCJ/PTPLO2V
+ WRQsyFKfBHSsW+V7K4E5pNyryQC6wlyxEI/U2ew==
+X-Google-Smtp-Source: AGHT+IF2y5WqgoK4R8wUdQgzMKedG3etiY3Ns4zOFXP1BpdQ8O/ZXe/o/3mwAi/Rq3/CdPPywu0Lbxavjax3d036PmY=
+X-Received: by 2002:a05:690c:25c3:b0:6ef:57ad:9d91 with SMTP id
+ 00721157ae682-6f279b3897amr17661567b3.24.1734090568414; Fri, 13 Dec 2024
+ 03:49:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20241213102321.2166920-1-mwalle@kernel.org>
- <20241213102321.2166920-2-mwalle@kernel.org>
-In-Reply-To: <20241213102321.2166920-2-mwalle@kernel.org>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Fri, 13 Dec 2024 12:07:39 +0100
-Message-ID: <CAEyMn7ZkyKweyUYrmV57SxbQjOX=CXqOk21udDALv06kobOKQQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] board: sl28: fix linking with disabled watchdog
-To: Michael Walle <mwalle@kernel.org>
-Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de,
- thomas.schaefer@kontron.com
+References: <20241213092032.28196-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241213092032.28196-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 13 Dec 2024 13:48:52 +0200
+Message-ID: <CAC_iWjKKFLxUYGpGyOy6uFquGXmbOTy49iFrio8dC9D14Z07_w@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: efidebug: update output of memory attributes
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,36 +89,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-Am Fr., 13. Dez. 2024 um 11:23 Uhr schrieb Michael Walle <mwalle@kernel.org>:
+On Fri, 13 Dec 2024 at 11:20, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> We don't have a reference to the driver used by
-> uclass_get_device_by_driver() in stop_recovery_watchdog(). Fix it by not
-> calling that function if the watchdog driver isn't enabled.
+> * add EFI_MEMORY_CPU_CRYPTO, EFI_MEMORY_HOT_PLUGGABLE
+> * correct output for EFI_MEMORY_XP
+> * remove duplicate list entry for EFI_MEMORY_UC
 >
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
-
-Reviewed-by: Heiko Thiery <heiko.thiery@gmail.com>
-
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  board/kontron/sl28/sl28.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  cmd/efidebug.c | 5 +++--
+>  include/efi.h  | 2 ++
+>  2 files changed, 5 insertions(+), 2 deletions(-)
 >
-> diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
-> index adfec8ba237..0baf5c63f18 100644
-> --- a/board/kontron/sl28/sl28.c
-> +++ b/board/kontron/sl28/sl28.c
-> @@ -156,7 +156,8 @@ int fsl_board_late_init(void)
->          * If the watchdog isn't enabled at reset (which is a configuration
->          * option) disabling it doesn't hurt either.
->          */
-> -       if (!IS_ENABLED(CONFIG_WATCHDOG_AUTOSTART))
-> +       if (IS_ENABLED(CONFIG_WDT_SL28CPLD) &&
-> +           !IS_ENABLED(CONFIG_WATCHDOG_AUTOSTART))
->                 stop_recovery_watchdog();
+> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> index 02f1e080e88..2461425e291 100644
+> --- a/cmd/efidebug.c
+> +++ b/cmd/efidebug.c
+> @@ -554,7 +554,6 @@ static const struct efi_mem_attrs {
+>         const u64 bit;
+>         const char *text;
+>  } efi_mem_attrs[] = {
+> -       {EFI_MEMORY_UC, "UC"},
+>         {EFI_MEMORY_UC, "UC"},
+>         {EFI_MEMORY_WC, "WC"},
+>         {EFI_MEMORY_WT, "WT"},
+> @@ -562,11 +561,13 @@ static const struct efi_mem_attrs {
+>         {EFI_MEMORY_UCE, "UCE"},
+>         {EFI_MEMORY_WP, "WP"},
+>         {EFI_MEMORY_RP, "RP"},
+> -       {EFI_MEMORY_XP, "WP"},
+> +       {EFI_MEMORY_XP, "XP"},
+>         {EFI_MEMORY_NV, "NV"},
+>         {EFI_MEMORY_MORE_RELIABLE, "REL"},
+>         {EFI_MEMORY_RO, "RO"},
+>         {EFI_MEMORY_SP, "SP"},
+> +       {EFI_MEMORY_CPU_CRYPTO, "CRYPT"},
+> +       {EFI_MEMORY_HOT_PLUGGABLE, "HOTPL"},
+>         {EFI_MEMORY_RUNTIME, "RT"},
+>  };
 >
->         return 0;
+> diff --git a/include/efi.h b/include/efi.h
+> index c559fda3004..899160f1546 100644
+> --- a/include/efi.h
+> +++ b/include/efi.h
+> @@ -266,6 +266,8 @@ enum efi_memory_type {
+>  #define EFI_MEMORY_RO          ((u64)0x0000000000020000ULL)    /* read-only */
+>  #define EFI_MEMORY_SP          ((u64)0x0000000000040000ULL)    /* specific-purpose memory (SPM) */
+>  #define EFI_MEMORY_CPU_CRYPTO  ((u64)0x0000000000080000ULL)    /* cryptographically protectable */
+> +#define EFI_MEMORY_HOT_PLUGGABLE \
+> +                               ((u64)0x0000000000100000ULL)    /* hot pluggable */
+>  #define EFI_MEMORY_RUNTIME     ((u64)0x8000000000000000ULL)    /* range requires runtime mapping */
+>  #define EFI_MEM_DESC_VERSION   1
+>
 > --
-> 2.39.5
+> 2.45.2
 >
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
