@@ -4,58 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19966E7717F
-	for <u-boot@archiver.kernel.org>; Thu, 12 Dec 2024 23:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCBBE7717F
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 00:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 640EF80245;
-	Fri, 13 Dec 2024 00:58:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 14A1A80137;
+	Fri, 13 Dec 2024 01:59:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="lFxFHula";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cZlDBVUr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A2F801ED; Fri, 13 Dec 2024 00:58:41 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8115780192; Fri, 13 Dec 2024 01:59:13 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 905B8802C2
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:58:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1270C800D7
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 01:59:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e29f=TG=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1734047915; bh=GBrRO4QAj4qJg0nWFta7I2qyeJmEuTOZ5T9MghUrCvE=;
- b=lFxFHulabXFZuOn1hWjYna36MIbC7y0dTUtZh5X7jLgzpXYJ6zTkZiUHXYcU+VmHis9m7yGXv
- 36kq7MZMFtesqm+B0p2oJwAcrMfu+aF658bCwgxVvrGBTVuSf9rcd3Zx36fNmRlFjw7g0i6sTHo
- 6A1w/xW540LoLaDtPclE+dnicjN+GffjYabyqFXLNRZqLhIgYdY0Gh48LQTOMYSv7wmlzALoEqq
- XvvF3xT57kdA/tgxkyrKY52T4PRkuhwvSaNTza+eAi1/3bwsHnPuVPVyIEnA9eP1bjJ0l4rByt6
- T5cSY/wywaKegO+JE4W9MBASG2qkiBCWEnm88nFCBtsQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 12/12] rockchip: rk3399: Drop unneeded bob and kevin board
- specific code
-Date: Thu, 12 Dec 2024 23:57:19 +0000
-Message-ID: <20241212235735.164272-13-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241212235735.164272-1-jonas@kwiboo.se>
-References: <20241212235735.164272-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-844e1eb50e2so36527339f.0
+ for <u-boot@lists.denx.de>; Thu, 12 Dec 2024 16:59:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734051549; x=1734656349; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UWRG0Vu9JwPKlRt3ksh/HkbRktJbqc/tm12IqlecLfc=;
+ b=cZlDBVUrkGPE3jbTeKDgKQa7OLyvnSa0ox0+ng4rJTWz40l/tuUVXKNQYJ/Om3ON8/
+ zHJGxOu5MTP9WkFT/eenf2mF2prZcrrRSS73qKs67H4mGZzChlKNNL0quk7SRnCmNRfx
+ +ugrl/hW6Y7zH2XB76xZu9xGhiUlCDtaGXoYE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734051549; x=1734656349;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UWRG0Vu9JwPKlRt3ksh/HkbRktJbqc/tm12IqlecLfc=;
+ b=SlnQqn0YP84lek0ULzvT9W5ds/asPyUK7B9EhirlOKPk86yoWDr0zj5kdbH/A9aC9H
+ nUlxAaUDgHeqSdvBowDgWj6/gop1IPBhjQnCmIRLs/UCBBV1Qh8sraJmG2gliAhdc36F
+ 1HbkJHuwIjqMa1sDjUDDH9sivIVqohWWrHUtiOuVbTUyYMutz6hbc/bl60wtFI9nRiq1
+ M1S4Yf7spQ+aYZw3/pCaRNAnw/lrs5kE117GYy498Cjl7GEmIfsGO2ntTuacCpvtJDk6
+ GcI8wO/fku8PcLjIH3sXI4ahBrvHhsD548zX7hGPPA5/xOBnj04AsptE4l9ZvZDYRi7S
+ BCLA==
+X-Gm-Message-State: AOJu0YxPCoiZUw+OwXmJOD/oAIJEJjw3pmLQv42FNMCs7jmdSPt95gnm
+ g7COYy58jxmumDOXU607olgWZi2zflpiKj6Jg/PkmhrHK5IJvPPSbM77bX9X3zkE3H3Zy8y04K4
+ =
+X-Gm-Gg: ASbGncvAwufyIYpy+v2g1OJelfnqJHF+R7AgScXr7hxXw45kt5FTLGQTNNBUeB4jGGs
+ MfXgaZ9PT83mCJS+8Qe0id3NVs/8uMwOE0Z3KvrOfClpMfdvkvALvAPAnOO7a+KsLaqqMk26TZI
+ aRmAWY3Jx4TQ1euI62kt8ddzYAuEKc2Re7Uxe+msOat+JsRwheOlugwhm+YOphDcGHIP/XXER5R
+ 1rVqx5nXNHfGWWVJLdYuyhV7gDicm8LKsu2KPFGwnfUfqM6D0qVsIO/w2Jfk0Kab5do6pdXqRhn
+ rl+oMso3dzcYsE0n7Q==
+X-Google-Smtp-Source: AGHT+IFET9FarTSLtR2E3AZHvWV++TBkN/5aoHRYJGyeHwMx3YtiGRWCAIQfQ4agU6vMuyI5sMMH3g==
+X-Received: by 2002:a05:6602:6b8b:b0:83e:5860:5189 with SMTP id
+ ca18e2360f4ac-844e88a1dd9mr71500339f.10.1734051548733; 
+ Thu, 12 Dec 2024 16:59:08 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e2cd7e472fsm1764502173.1.2024.12.12.16.59.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Dec 2024 16:59:06 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH] gitlab: Add an rpi to the sjg lab
+Date: Thu, 12 Dec 2024 17:59:03 -0700
+Message-Id: <20241213005903.73919-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 675b78a9a511ed8f0b3fe391
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,66 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The IO-domain driver will configure io_vsel and always-on/boot-on
-regulators will be enabled based on the board device tree now that
-required nodes and Kconfig options is enabled for SPL.
+I have an original rpi installed now, loaded with OS Lite (32-bit)
+Add an entry for it so that it can be used for testing.
 
-Remove the bob and kevin board specific code from the common rk3399.c,
-the IO-domain and regulator driver provide similar functionality.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-rockchip/rk3399/rk3399.c | 23 +----------------------
- 1 file changed, 1 insertion(+), 22 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index ba89079b1e73..1ce43c6f0d40 100644
---- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-+++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -7,7 +7,6 @@
- #include <init.h>
- #include <log.h>
- #include <spl.h>
--#include <spl_gpio.h>
- #include <syscon.h>
- #include <asm/armv8/mmu.h>
- #include <asm/arch-rockchip/bootrom.h>
-@@ -16,6 +15,7 @@
- #include <asm/arch-rockchip/gpio.h>
- #include <asm/arch-rockchip/grf_rk3399.h>
- #include <asm/arch-rockchip/hardware.h>
-+#include <asm/gpio.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
- #include <power/regulator.h>
-@@ -133,27 +133,6 @@ void board_debug_uart_init(void)
- 		     GRF_GPIO3B7_SEL_MASK,
- 		     GRF_UART3_SOUT << GRF_GPIO3B7_SEL_SHIFT);
- #else
--	struct rk3399_pmugrf_regs * const pmugrf = (void *)PMUGRF_BASE;
--	struct rockchip_gpio_regs * const gpio = (void *)GPIO0_BASE;
--
--	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
--	    (IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_BOB) ||
--	     IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_KEVIN))) {
--		rk_setreg(&grf->io_vsel, 1 << 0);
--
--		/*
--		 * Let's enable these power rails here, we are already running
--		 * the SPI-Flash-based code.
--		 */
--		spl_gpio_output(gpio, GPIO(BANK_B, 2), 1);  /* PP1500_EN */
--		spl_gpio_set_pull(&pmugrf->gpio0_p, GPIO(BANK_B, 2),
--				  GPIO_PULL_NORMAL);
--
--		spl_gpio_output(gpio, GPIO(BANK_B, 4), 1);  /* PP3000_EN */
--		spl_gpio_set_pull(&pmugrf->gpio0_p, GPIO(BANK_B, 4),
--				  GPIO_PULL_NORMAL);
--	}
--
- 	/* Enable early UART2 channel C on the RK3399 */
- 	rk_clrsetreg(&grf->gpio4c_iomux,
- 		     GRF_GPIO4C3_SEL_MASK,
+ .gitlab-ci.yml | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index f379c11a1ba..ffcf8532944 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -691,3 +691,8 @@ nyan-big:
+   variables:
+     ROLE: nyan-big
+   <<: *lab_dfn
++
++rpi:
++  variables:
++    ROLE: rpi
++  <<: *lab_dfn
 -- 
-2.47.1
+2.34.1
 
