@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA68BE7717D
-	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 08:58:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD31CE7717D
+	for <u-boot@archiver.kernel.org>; Fri, 13 Dec 2024 09:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E9D80137;
-	Fri, 13 Dec 2024 09:58:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id F066D80137;
+	Fri, 13 Dec 2024 10:14:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YEoXlImu";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="402zOE0K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4792280141; Fri, 13 Dec 2024 09:58:52 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DA6780141; Fri, 13 Dec 2024 10:14:57 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DFEC8012C
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 09:58:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 305218012C
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 10:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E9CCA3F7FE
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 08:58:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1734080328;
- bh=gL6pjWY58vjrFbQ88gCOfU1tPXPBonBegWmeNUbi0lY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=YEoXlImuWoMyd9GyR0aNdRFIucofmlLo1q7V17H6kHfLztDhlyNGZQXtkBiQaoLC2
- BgWz2u86a2AC6Pzoaur2se0Ry5egDjmb9FUpaSFregWlFqPL5qF4d10rKJfMrya7Ka
- BU/CXyJ4RbIcZT6OBZBeTOBS3gwJbidp3fVigoRoLBLFbZZanyH0p35Sf7DZSzazjY
- D3BbufjatfoExth+MLWtUUgbn1OnakBaDoB2Ie3lr4HHk5T8kPSlTXXaJpm2JN+Hvj
- Ez5BFMa3BYlRvXjIl+He1yC3SsOayTTspTDuPmogBExpJbwTDRL8ZwGHPB3cf1NUif
- KidiavsV05gDg==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-aa6a831f93cso162444066b.1
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 00:58:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734080327; x=1734685127;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gL6pjWY58vjrFbQ88gCOfU1tPXPBonBegWmeNUbi0lY=;
- b=IzKSAKvbKKJ0uvmn44n6RQ+artTtKmLckz6riYAiTv0PK2XSfDur46RAX2SmABQKjq
- tYgvf8fN1/ug+gJHLCfHEKQUGAANVPbS3o2MKdGHE1Y0KICUCud8omHrDRARQulPi0Be
- f7Saev5ebraXXQ15mtiYkpYg7n8ZoiC00D74pIX7xB8F10Ys8VMnG8TlJmTWWdwLBSrN
- m6DGInqYZlda3L4Ft3wHv0s1QcMx6s+XVr375PW1AHZpG7aohzH+/lWJfZ5Voyn+QCHr
- DXY83N3TbxtXhrU3WXVK9d+sUqsvRNOVoXS5PY5hHXEvZdvAs1EYYx1ddX83FA0Nx7mB
- H0hQ==
-X-Gm-Message-State: AOJu0Yy2wVAWUbJh6Itep+8HpmFqyjwrd6CHXzu0ehZ84p7NQx2Lcp34
- 0FtKVkzUyHfQnB7u51/8rRvOxBqB5IDkUs4MJVkwkFRlZlUR7k4/N7BEPl+y+adWr3ffdJK9WjG
- DG+/zo/t0BROTe462E3lV9DHhHED1zhdu8pZLf8wd+XOwz3PveluPbLlsnqCet/FgfHE=
-X-Gm-Gg: ASbGncvTJnqmxpLqyS3kRpV/lACoQxgkwrkoPFCDGeOu3oaxu7P7uKLIvsIlt4jeWl0
- RnWiWXLC+uPTiaEe/pntsZvGU2saWnhDMbmHFWtRHLemDCCYB/LBMsRPkGuU/md8oM6HcBDnyoA
- e/Cv8nFTOinEkBZkYARqfXazKtT6g9dpWOmHuGK+HOpm7qJBYUFGAok4FXXuetB4HVzwy8WAyqe
- 1/GMoIAFD0KTHgFnen+lxd1qs7W3oaormRDwrYBdK5cRVL8cFjEfLCXzhsYwBOPAUYpg2QjLaHO
- iykgAH/EkpQQ/E17C1cHAltjITxJ0wBzbo0xjaPYqlad9a/duBQy15hIXiY=
-X-Received: by 2002:a17:907:1c1d:b0:aa6:a501:9b3b with SMTP id
- a640c23a62f3a-aab7792d03emr203692466b.19.1734080326739; 
- Fri, 13 Dec 2024 00:58:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGyUt+iScAOhykKIgaQ9f/ocb3CH1av1A5gp+1xpMAHp4qi4/GTC2ebKZgl9XeT5ASekxF+ng==
-X-Received: by 2002:a17:907:1c1d:b0:aa6:a501:9b3b with SMTP id
- a640c23a62f3a-aab7792d03emr203690366b.19.1734080326416; 
- Fri, 13 Dec 2024 00:58:46 -0800 (PST)
-Received: from localhost.localdomain
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d3d9e30b7asm8783147a12.57.2024.12.13.00.58.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 00:58:45 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: update EFI specification version
-Date: Fri, 13 Dec 2024 09:58:40 +0100
-Message-ID: <20241213085840.21872-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ smtp.mailfrom=prvs=2077089778=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BD5qcsr009046;
+ Fri, 13 Dec 2024 10:14:50 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ JC5C/GVxJqMCGgV3Mwx6b2kfAbRtlPZp2i+ubPQtoiQ=; b=402zOE0KLK1PSCwK
+ R4VCb3bHXTnTmPTAOCGw0gP8LyAW236xKqzwy7KusgC2sC36BJSW43D1lUxEAhLH
+ QuXMaQdnnbmIn2LS91bbcO8I9Xfugby3rkG4V4pwQpvt+qVWY6GuzmCeCgQdXFTM
+ ATgWabZ0YvJ7D+TtosXlbHa5tZo6lj7tKNJoMs8G0eFYtZ1N7NpQnRUybtSkld49
+ Fe/4Pw4vVfJRjlxDmQcX4xJFWFqegTfOWmRCkJO2f5iZ3PtwOp5hlfW+YFaniMFk
+ 5Fe8JQMyFLokwWygL3KxdFuZzStTlXHD3S304bALQE7yov804WHMpYKcLZEnUvzF
+ SpP7jQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43ffwc7fad-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 13 Dec 2024 10:14:49 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8B6854005C;
+ Fri, 13 Dec 2024 10:13:43 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 73B0125670C;
+ Fri, 13 Dec 2024 10:13:14 +0100 (CET)
+Received: from [10.252.14.115] (10.252.14.115) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 13 Dec
+ 2024 10:13:13 +0100
+Message-ID: <5d2c7448-11a7-436e-b04b-4e510b440e26@foss.st.com>
+Date: Fri, 13 Dec 2024 10:13:13 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lmb: prohibit allocations above ram_top even from same
+ bank
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, E Shattow <lucent@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Mark Kettenis
+ <mark.kettenis@xs4all.nl>
+References: <20241202070624.1295497-1-sughosh.ganu@linaro.org>
+ <173358702572.3722028.2684286775587826268.b4-ty@konsulko.com>
+ <092f9d73-c0c5-419e-b6e5-e671f8227753@foss.st.com>
+ <20241212191822.GK1505244@bill-the-cat>
+ <CADg8p94h9rdV+gLxuhmNTi7yWhdDjOy32SpJwGSugTovtq39Rw@mail.gmail.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <CADg8p94h9rdV+gLxuhmNTi7yWhdDjOy32SpJwGSugTovtq39Rw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.14.115]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,34 +96,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-UEFI specification 2.11 has been published.
-There are no changes relevant for the U-Boot scope.
-So let us update the supported specification version.
 
-Change the comment for the constant to Sphinx style.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- include/efi_api.h | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+On 12/12/24 20:50, Sughosh Ganu wrote:
+> On Fri, 13 Dec 2024 at 00:48, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Wed, Dec 11, 2024 at 05:18:28PM +0100, Patrice CHOTARD wrote:
+>>
+>>>
+>>>
+>>> On 12/7/24 16:57, Tom Rini wrote:
+>>>> On Mon, 02 Dec 2024 12:36:24 +0530, Sughosh Ganu wrote:
+>>>>
+>>>>> There are platforms which set the value of ram_top based on certain
+>>>>> restrictions that the platform might have in accessing memory above
+>>>>> ram_top, even when the memory region is in the same DRAM bank. So,
+>>>>> even though the LMB allocator works as expected, when trying to
+>>>>> allocate memory above ram_top, prohibit this by marking all memory
+>>>>> above ram_top as reserved, even if the said memory region is from the
+>>>>> same bank.
+>>>>>
+>>>>> [...]
+>>>>
+>>>> Applied to u-boot/master, thanks!
+>>>>
+>>> Hello
+>>>
+>>> This patch is breaking the boot on STM32MP135F-DK.
+>>>
+>>> On this platform, we got an area above gd->ram_top,
+>>> this area, reserved for OPTEE, is tagged with LMB_NOMAP in boot_fdt_add_mem_rsv_regions().
+>>>
+>>> Since this commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank"),
+>>> this area is no more tagged as LMB_NOMAP, because it's previously been
+>>> tagged with LMB_NOOVERWRITE in lmb_add_memory().
+>>>
+>>> By not being tagged LMB_NOMAP, the MMU configuration is impacted and leads to a panic.
+>>>
+>>> I suggest to revert this patch.
+>>
+>> Hi Patrice. Can you please re-test current top of tree? I believe Sam's
+>> series should resolve this problem as well. Thanks!
+> 
+> Tom, that won't happen. This is a separate issue from what is being
+> fixed by Sam's series.
 
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 61c4eda8f8a..b10f467f67f 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -20,8 +20,10 @@
- #include <charset.h>
- #include <pe.h>
- 
--/* UEFI spec version 2.9 */
--#define EFI_SPECIFICATION_VERSION (2 << 16 | 100)
-+/**
-+ * define EFI_SPECIFICATION_VERSION - UEFI specification version
-+ */
-+#define EFI_SPECIFICATION_VERSION (2 << 16 | 110)
- 
- /* Types and defines for EFI CreateEvent */
- enum efi_timer_delay {
--- 
-2.45.2
+Hi All
 
+I confirm, Sam's series didn't help here as Sughosh said.
+
+> 
+> Patrice, please let me know if the hang is being fixed by the change
+> that I had suggested earlier in this thread. For some reason I don't
+> see a hang on the DK2 board despite the board having a similar memory
+> map of memory being reserved for the op-tee image above ram_top with
+> no-map property.
+
+On my side i didn't see the issue on STM32MP157C-DK2 board, but 
+i got it systematically on STM2MP135F-DK.
+
+Your suggested patch is fixing the hang observed, i will send a patch.
+
+Thanks all ;-)
+
+Patrice
+
+
+> 
+> -sughosh
+> 
+>>
+>> --
+>> Tom
