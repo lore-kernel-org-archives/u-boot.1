@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6412E7716A
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 21:33:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E831FE7716A
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:44:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CBEA80073;
-	Sat, 14 Dec 2024 22:33:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 24D8E80087;
+	Sat, 14 Dec 2024 23:44:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gxyg/2qi";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UQjOZl3s";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Mz1lT2qY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F7E18007A; Sat, 14 Dec 2024 22:33:30 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 1386380083; Sat, 14 Dec 2024 23:44:05 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A00658006D
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 22:33:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACDDE8006C
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:44:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1734212005; x=1734816805; i=xypron.glpk@gmx.de;
- bh=KrsAu4S+69Z+VUZx4ETMY7oI1OBdhWVCnY2r2uiKLcA=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=gxyg/2qitXTYzwfhzu9CF6R9yMqLLSvRjuzS5lfKLiSiCRDXTj4Sgk4436RDDGbV
- RiBPid8E5ku0dROuTb0Qg6G0teK2vHEExUGGQXjeaPqCxHVFz8FOWciLjA9F0OB7U
- pJltdls1J31DGYTMg5nDfy6ftqU5bdRRj/8Zk8ynbaz+VAETiYLLlELeQgz5z0TUX
- kVrNobCKiH9AyJbMOtYJ4kPwBjo178zvfBChkzwlmQbmzPJUSlGtrkABunHbBZRyo
- pczlPMfO+2UuSvUDEyFR4pfMIT6U12FpL/WafjUp1ciRO5764lGn5PuZ67HGYMwAD
- MoxcaBSauw3RfBnKUg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.106.118]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MAwbp-1tSr9R1jAH-001t2E; Sat, 14
- Dec 2024 22:33:24 +0100
-Date: Sat, 14 Dec 2024 22:33:21 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Leonard Anderweit <l.anderweit@phytec.de>, u-boot@lists.denx.de
-CC: ilias.apalodimas@linaro.org, trini@konsulko.com
-Subject: Re: [PATCH] doc: cosmetic: fwu_updates: Fix formatting
-User-Agent: Thunderbird for Android
-In-Reply-To: <20241213102024.174888-1-l.anderweit@phytec.de>
-References: <20241213102024.174888-1-l.anderweit@phytec.de>
-Message-ID: <20B95A3D-F191-451E-9515-C7966F6C7D59@gmx.de>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y9h8L39Ldz9slc;
+ Sat, 14 Dec 2024 23:44:02 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734216242;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=vtbiBsg9yLeU9qzCAg2NzZSmXOav9Oi16XicVJK8Pek=;
+ b=UQjOZl3silS+OPUq4iK4glhQMWh79ZVzFAY+O/EFE28CHWnBWkzlCznvY53YG2i82J0pLT
+ C+DRrL/kIed2eRXYU8MLfiEwcwWaq/JLkAZsmTYD+6y7PHV+iY7Zjo01Kik+Z8QFqMgu/b
+ WbP0MwRSX/76XwK9YoHN1+6oXlCMDht4nmLLFrgJnza6365eKvAwG6V2ky5jqDejxgAPmr
+ /SOMvKD8M9pV7MTxtWls2rbtDbtyEAfNH/PDUijeN77ou0VqZfosIC1H2Gz1iUQCLuueCk
+ YJq3IwW4q523CuBKYMlhFsoc89h1Yua+6URrzR4m8LUdkWfxdGTq1MCw6E2i8g==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734216240;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=vtbiBsg9yLeU9qzCAg2NzZSmXOav9Oi16XicVJK8Pek=;
+ b=Mz1lT2qYGWSp1FNtO5YNjE/lIC7JUsdEpT3YXJFSCevQN68ynvqmoYWShfGJ0gZ1gtTSGL
+ j4f5bNHiO6FZ6lWNEWFbSyBrp3yJm7K8dDr3DWxu9D4zxhlWj6Ukpb4IwCnDnWZLVRTVxC
+ 9qQljb2xfKQhoGgOJ5AM5MkpwJx7HCXZwpbHE48Oo8bbhzZBkW0vnbI49L5t/RlxQRxPK5
+ FcW/q4bD794fi7QzRCpZcmgoRkh0sJ4kQcKb0f9XuesMASsNR1QKIcK9dK6lQMj0xznqLi
+ bY2X6rJ/bfB8cPeV3g3DkjlehpYA6emS6zcLZhpvDJZwDLg05zFFvGGYSYJs/A==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Biju Das <biju.das.jz@bp.renesas.com>,
+ Chris Paterson <chris.paterson2@renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/3] arm64: Convert core type check macros into inline
+ functions
+Date: Sat, 14 Dec 2024 23:42:46 +0100
+Message-ID: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:QC8KXXcep26nWSasnHU+bzWiRAE1ylZ2uMwCXI/EFC3xj2nURa1
- gNkHEvGbtIcPMjL4vPZxylctA6wBtEEkXCXejOtY0329qXuxhVePZoQa31NSrCvP1iexfmQ
- MhetlEI4nHgXCzkBZGGevr5jhAgEU+wXoosFHl4GQYaHZi13IEMTPZwaC6wFFwZn090vzww
- 37L4EWnhtqa08X/hpgFcQ==
-UI-OutboundReport: notjunk:1;M01:P0:2kbaGBLBBlo=;rENoyMvAioQoFs5o1gp5xPMzRL9
- HDhfl9kcau54xRoLQ+AXkaf2Ae9s80ACSwZ5VqzRRpt+ic0lQzjm8Cs3elI+99O6eCD9oKP3Z
- M/PXf9GO30qf9xdkM+r//JcV/irtseC0/FTFPIZEt8ocG2CDYcPjMHEKf3aTlkbHSCop7N2cA
- dYvb/gT1XTIQhQkH9lHrEvfXCvEDnj8T9Ep8TjFRvYfc29+KUaFT5ef6fNuFk+D1q4UQaFIgS
- J4NohRMv1gISxEcq3ttNKYBwxesD3GGVD6RknK5Qn0tw9C2Bh+6CMADJFpWBQILTvf/zBoh08
- mjWLbih4pPZVNyL/fiGEvFDMVct0lfBbTjldbVaApl4tZp94d1aWDo9wSCKIc4+H4QTD8Vkhv
- qkqWB0NCXV2B30/UmIX5Nt6lXNGK3XeXTTsBr3jCQam3OnJ9vvXMkBm/XIcwu0OXZXpPADOym
- F3NBi1scclWze994rtjPlQM5P0SBJ8IiUmbPT25JZm7EUAZbhimDCdT2cJFOfonhK13Te0VuW
- kG5bs6V9IG9ngr1yIL9B7YobHeUZGeFWfCvXt+O2g7mnI0Y9GDbNnwFrWPDtj6/jRnLKbQyhS
- ZmNZeN1a9+zY8W872w1K0sUU1r3kGZIZzVXstPqmlXRCvRF+fp6sdmHBrcr8ER/E+YzpBANS9
- IXinCzfaVckrbuUDKv26ftWzhsvPLugveAzkx32wSRcGE5PdUvLptbKowheQkhXFIQH07qqgU
- cOtHd0W7LO3nzuVnZYU0v9t3YvvMFraWNSlCH9GF9PJgCDWaLNctoDiInFgh0nsg3g4Pb/D0d
- 6iDZ3OXgIJXYRDS+BaMItM8JEkDCGnDru05dyEuwwabl+to91rGduwPqYCZAe+nkv7+6weja8
- mbwTN6p68Fo71HscN2U/QUTps/eddEicOwJprOnqP9JPg7vCW9Wm4xSFClOnbu+a50emKQuTq
- Rvcpv80f1/WaizD9Y+PYvpB9W/pT55H5yQGjl8FyPxhJ6OiErUljst5Y7I7ePrxe2gBgRX1H4
- vHKYEHG2ozlFalwEpV/8iNsh1ve2AVrd/TkMYjZoT2dnz1F4i1f/uQ0JO5Ey/WF+fVLEel//E
- ov8wPutr9zZXeNuzb8HBj6f9O8GySQ
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: mod1nkmr6enc8e6rkmzt1tuk8gtcsigh
+X-MBO-RS-ID: 433b679a28ff0c5d7a7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +86,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 13=2E Dezember 2024 11:20:24 MEZ schrieb Leonard Anderweit <l=2Eanderwei=
-t@phytec=2Ede>:
->Remove one of the double colon so =2E=2Ecode-block is used for formatting=
-=2E
->
->Signed-off-by: Leonard Anderweit <l=2Eanderweit@phytec=2Ede>
+Turn the core type check macros into inline functions to perform
+better type checking on them. The inline functions get optimized
+out in case they are not used. Indent the MIDR_PARTNUM_CORTEX_An
+macros in preparation for addition of future three-digit cores
+and use MIDR_PARTNUM_SHIFT in MIDR_PARTNUM_MASK to be consistent.
 
-Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Biju Das <biju.das.jz@bp.renesas.com>
+Cc: Chris Paterson <chris.paterson2@renesas.com>
+Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/include/asm/armv8/cpu.h | 28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
 
->---
-> doc/develop/uefi/fwu_updates=2Erst | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
->
->diff --git a/doc/develop/uefi/fwu_updates=2Erst b/doc/develop/uefi/fwu_up=
-dates=2Erst
->index 51e8a28efe15=2E=2E847135814590 100644
->--- a/doc/develop/uefi/fwu_updates=2Erst
->+++ b/doc/develop/uefi/fwu_updates=2Erst
->@@ -170,7 +170,7 @@ build the tool, enable::
->=20
->     CONFIG_TOOLS_MKEFICAPSULE=3Dy
->=20
->-Run the following commands to generate the accept/revert capsules::
->+Run the following commands to generate the accept/revert capsules:
->=20
-> =2E=2E code-block:: bash
->=20
->@@ -180,7 +180,7 @@ Run the following commands to generate the accept/rev=
-ert capsules::
->       <capsule_file_name>
->=20
-> Some examples of using the mkeficapsule tool for generation of the
->-empty capsule would be::
->+empty capsule would be:
->=20
-> =2E=2E code-block:: bash
->=20
+diff --git a/arch/arm/include/asm/armv8/cpu.h b/arch/arm/include/asm/armv8/cpu.h
+index 40d54dc85ab..aa1470bb72d 100644
+--- a/arch/arm/include/asm/armv8/cpu.h
++++ b/arch/arm/include/asm/armv8/cpu.h
+@@ -3,11 +3,11 @@
+  * Copyright 2018 NXP
+  */
+ 
+-#define MIDR_PARTNUM_CORTEX_A35	0xD04
+-#define MIDR_PARTNUM_CORTEX_A53	0xD03
+-#define MIDR_PARTNUM_CORTEX_A72	0xD08
+-#define MIDR_PARTNUM_SHIFT	0x4
+-#define MIDR_PARTNUM_MASK	(0xFFF << 0x4)
++#define MIDR_PARTNUM_CORTEX_A35		0xD04
++#define MIDR_PARTNUM_CORTEX_A53		0xD03
++#define MIDR_PARTNUM_CORTEX_A72		0xD08
++#define MIDR_PARTNUM_SHIFT		0x4
++#define MIDR_PARTNUM_MASK		(0xFFF << MIDR_PARTNUM_SHIFT)
+ 
+ static inline unsigned int read_midr(void)
+ {
+@@ -18,9 +18,15 @@ static inline unsigned int read_midr(void)
+ 	return val;
+ }
+ 
+-#define is_cortex_a35() (((read_midr() & MIDR_PARTNUM_MASK) >> \
+-			 MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A35)
+-#define is_cortex_a53() (((read_midr() & MIDR_PARTNUM_MASK) >> \
+-			 MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A53)
+-#define is_cortex_a72() (((read_midr() & MIDR_PARTNUM_MASK) >>\
+-			 MIDR_PARTNUM_SHIFT) == MIDR_PARTNUM_CORTEX_A72)
++#define is_cortex_a(__n)					\
++	static inline int is_cortex_a##__n(void)		\
++	{							\
++		unsigned int midr = read_midr();		\
++		midr &= MIDR_PARTNUM_MASK;			\
++		midr >>= MIDR_PARTNUM_SHIFT;			\
++		return midr == MIDR_PARTNUM_CORTEX_A##__n;	\
++	}
++
++is_cortex_a(35)
++is_cortex_a(53)
++is_cortex_a(72)
+-- 
+2.45.2
 
