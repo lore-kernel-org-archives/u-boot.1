@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1740E77180
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818F7E7716A
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 637A38006F;
-	Sat, 14 Dec 2024 23:45:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 161828007A;
+	Sat, 14 Dec 2024 23:46:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uisCdImn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RvZ2Va24";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wogYzf8H";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YKTUQFTm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EEEC8007A; Sat, 14 Dec 2024 23:45:48 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id 7C81980098; Sat, 14 Dec 2024 23:46:21 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81D948006C
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:45:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 740DC8006C
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Y9hBL2DSxz9slY;
- Sat, 14 Dec 2024 23:45:46 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Y9hBz1W1pz9sbh;
+ Sat, 14 Dec 2024 23:46:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216346;
+ s=mail20150812; t=1734216379;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=eF2YoM8EBEvAcXIL5YYvdWoUsPBQPlvGuTyWdsby8Nk=;
- b=uisCdImn/vOO/jXThU+M7LUpuNJuHoQ2tbpELLQIkQHVCbF2hZlXi/CQpXM7SGKCjppLq2
- vkXtzbmaI5riPQPTfezpLsVpxfeELt6H7nnwMerHg7Z248vsygu4OIJX5R/SQnNu/mJQuU
- Zlj8JAnDbtt1S1jL07KFw3YuBxOlBeuVbBotJtOEdpKKdiSLwdDuwleMWxiITg0U6c4rkA
- gXgWIlOqP/33psqDeF6CFQMJJGplOpi+tWbBTCGafiXpT091j3+XqWRllXoag+eILbGQgG
- DoLkT5ThdPBxh/6dnm/kkuMHGlfRXml6KI0/wvX9OEuQ6oX7Xvd7j2OF/8Tifg==
+ bh=BFw/XqMVo05esRuas4i0H3aXOYLY5MS5f0NLrA+hQ8g=;
+ b=wogYzf8HzZa+vlwpW3bRiXTGt617kiINtizukRNDO3saffa+DIqBnOAk7uJ9UTE+PrzvUS
+ 9uSEYvhWdEIrrs9yYHwrKDllmwAGF/z5MoBsZhWOBlK3/IV1h/c12DalYF1zQxcnlwkKo+
+ eTLrT1ZfzdfrDvQZX8VTh1vdWszK1aXGaa2CA7KmvPXK0DrJpODcBjhJ92ayjUePneD2I4
+ 9OmnexKv36lHnq58PdN8uXuhuk7C303TLsQv0z+yzuMakGVfg/3ZK2WdEL7hW3vMmmYX21
+ nB8QMZgufBssnkEoCvaUpOMPjVQytKHg/OEwdnc/rpCcT1sCrB3le+wKHwaP0g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216344;
+ s=mail20150812; t=1734216377;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=eF2YoM8EBEvAcXIL5YYvdWoUsPBQPlvGuTyWdsby8Nk=;
- b=RvZ2Va24hRv1wAIMCDoc3WvuvJI2LXy1hcV92/CwFZObVZoIKZQs5T5hpgbs8HksmiRwIP
- 7hqDWWfLvhDnnVnFekC/nRrkkWsUBcENSuZ9rWlg0NQYqFKNis6t/ak855pG9UIkkslbd2
- pfcxg+dXQT+GDigE1Rv8+sgvkvouJbSnPMlNZzWRsbwPKAZIFhQN8a1sDRPEsxmhgQrrgV
- +ZydPpUs7rZjOdxpgLBVMIZBCZ5QrP6oJGbY2MCtXIA9pV+z2ZXUWZ7KnyJJQOyjXK2goW
- KKRjnoeb1JYqCczRVIZ9tcPfbmOV9pWEetfASA7YbcaZrhnzrQwwqVX3jolrKg==
+ bh=BFw/XqMVo05esRuas4i0H3aXOYLY5MS5f0NLrA+hQ8g=;
+ b=YKTUQFTmFEj6Xu5bozmyj3AMLohl8VhV3jWBkhXVWnbdGuU6R1Iwo2Y8BVqJN24LaUvBLH
+ et8nA+lWoCNfRYyMfCytbKBzAl2jbDAGcJeqC0DzVNsGFthwTey5xdbX70YNIDMIxcbqad
+ CcxGh3r9tMyZUpHxkRTndwxZp20nNBYnjYlnikLI1801X+FLnUJ/SxrQhp6foN+fvcbvBT
+ 1oojuVbactHelhCrA6RIAfNZHCcRiTojJIdzoknPAsFaYC5F3WvWNEco4g8tdByajiXVWh
+ kcj6f4u8cgpgoWgNVXFwIgM5M6lfesiyRbRWjY44U+PgJt+IJk0GOxobN/9h2Q==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: renesas: Align configuration headers
-Date: Sat, 14 Dec 2024 23:45:11 +0100
-Message-ID: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] arm64: dts: renesas: Drop OF_UPSTREAM conversion remnant
+Date: Sat, 14 Dec 2024 23:45:52 +0100
+Message-ID: <20241214224607.303903-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: tikknjtxad5w8ai87h3fdzfa7thft1cm
-X-MBO-RS-ID: b6b16e8f71d3f190a2d
-X-Rspamd-Queue-Id: 4Y9hBL2DSxz9slY
+X-MBO-RS-META: fgc6cip99zimj7jokrfp55fp84fewk8h
+X-MBO-RS-ID: 5efdb6421d2b50c356e
+X-Rspamd-Queue-Id: 4Y9hBz1W1pz9sbh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,17 +84,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Align R-Car Gen2/Gen3/Gen4 configuration header file to look
-basically the same way across these three SoC generations.
-There are subtle difference between the remaining bits in
-those files across SoC generations, but the common bits are
-now aligned. There is not much left in those headers either,
-most of the configuration is now converted to Kconfig.
-
-Specifically for R-Car Gen3, GIC registers have been moved
-to architecture specific header file rcar-gen3-base.h , the
-rest of the changes here are comment changes and indentation
-changes.
+This DTC_FLAGS assignment is no longer necessary as all R-Car Gen2/Gen3/Gen4
+platforms have been converted to OF_UPSTREAM and matching DTC_FLAGS assignment
+is present in dts/upstream/src/arm64/Makefile . Drop the remnant.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -104,139 +95,24 @@ Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- .../include/mach/rcar-gen3-base.h             |  5 +++++
- include/configs/rcar-gen2-common.h            | 10 ++++++----
- include/configs/rcar-gen3-common.h            | 19 ++++++-------------
- include/configs/rcar-gen4-common.h            |  8 +++-----
- 4 files changed, 20 insertions(+), 22 deletions(-)
+ arch/arm/dts/Makefile | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h b/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
-index 5e2e9eca452..7b4f5f0c651 100644
---- a/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
-+++ b/arch/arm/mach-renesas/include/mach/rcar-gen3-base.h
-@@ -67,6 +67,11 @@
- #define SMSTPCR10		0xE6150998
- #define SMSTPCR11		0xE615099C
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 99d775fd382..3763e34dea3 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -978,10 +978,6 @@ dtb-$(CONFIG_ARCH_IMXRT) += imxrt1050-evk.dtb \
+ 	imxrt1020-evk.dtb \
+ 	imxrt1170-evk.dtb \
  
-+/* GICv3 */
-+/* Distributor Registers */
-+#define GICD_BASE		0xF1010000
-+#define GICC_BASE		0xF1020000
-+
- /* PFC */
- #define PFC_PUEN5	0xE6060414
- #define PUEN_SSI_SDATA4	BIT(17)
-diff --git a/include/configs/rcar-gen2-common.h b/include/configs/rcar-gen2-common.h
-index 67c9faeca57..020e79ca2a8 100644
---- a/include/configs/rcar-gen2-common.h
-+++ b/include/configs/rcar-gen2-common.h
-@@ -1,8 +1,9 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- /*
-  * include/configs/rcar-gen2-common.h
-+ *	This file is R-Car Gen2 common configuration file.
-  *
-- * Copyright (C) 2013,2014 Renesas Electronics Corporation
-+ * Copyright (C) 2013-2024 Renesas Electronics Corporation
-  */
- 
- #ifndef __RCAR_GEN2_COMMON_H
-@@ -10,14 +11,15 @@
- 
- #include <asm/arch/renesas.h>
- 
--/* console */
--#define CFG_SYS_BAUDRATE_TABLE	{ 38400, 115200 }
-+/* Console */
-+#define CFG_SYS_BAUDRATE_TABLE		{ 38400, 115200 }
- 
-+/* Memory */
- #define CFG_SYS_SDRAM_BASE		(RCAR_GEN2_SDRAM_BASE)
- #define CFG_SYS_SDRAM_SIZE		(RCAR_GEN2_UBOOT_SDRAM_SIZE)
- 
- /* Timer */
--#define CFG_SYS_TIMER_COUNTER	(TMU_BASE + 0xc)	/* TCNT0 */
-+#define CFG_SYS_TIMER_COUNTER		(TMU_BASE + 0xc)	/* TCNT0 */
- #define CFG_SYS_TIMER_RATE		(get_board_sys_clk() / 8)
- 
- #endif	/* __RCAR_GEN2_COMMON_H */
-diff --git a/include/configs/rcar-gen3-common.h b/include/configs/rcar-gen3-common.h
-index 3f0831a901c..bedb1c0843e 100644
---- a/include/configs/rcar-gen3-common.h
-+++ b/include/configs/rcar-gen3-common.h
-@@ -3,7 +3,7 @@
-  * include/configs/rcar-gen3-common.h
-  *	This file is R-Car Gen3 common configuration file.
-  *
-- * Copyright (C) 2015-2017 Renesas Electronics Corporation
-+ * Copyright (C) 2015-2024 Renesas Electronics Corporation
-  */
- 
- #ifndef __RCAR_GEN3_COMMON_H
-@@ -11,24 +11,17 @@
- 
- #include <asm/arch/renesas.h>
- 
--/* boot option */
-+/* Console */
-+#define CFG_SYS_BAUDRATE_TABLE		{ 115200, 38400 }
- 
--/* Generic Interrupt Controller Definitions */
--#define GICD_BASE	0xF1010000
--#define GICC_BASE	0xF1020000
+-ifdef CONFIG_RCAR_64
+-DTC_FLAGS += -R 4 -p 0x1000
+-endif
 -
--/* console */
--#define CFG_SYS_BAUDRATE_TABLE	{ 115200, 38400 }
--
--/* MEMORY */
-+/* Memory */
- #define DRAM_RSV_SIZE			0x08000000
- #define CFG_SYS_SDRAM_BASE		(0x40000000 + DRAM_RSV_SIZE)
- #define CFG_SYS_SDRAM_SIZE		(0x80000000u - DRAM_RSV_SIZE)
- #define CFG_MAX_MEM_MAPPED		(0x80000000u - DRAM_RSV_SIZE)
+ dtb-$(CONFIG_RZA1) += \
+ 	r7s72100-gr-peach.dtb
  
--/* ENV setting */
--
--#define CFG_EXTRA_ENV_SETTINGS	\
-+/* Environment setting */
-+#define CFG_EXTRA_ENV_SETTINGS		\
- 	"bootm_size=0x10000000\0"
- 
- #endif	/* __RCAR_GEN3_COMMON_H */
-diff --git a/include/configs/rcar-gen4-common.h b/include/configs/rcar-gen4-common.h
-index 37a37c013df..1a00adb79d1 100644
---- a/include/configs/rcar-gen4-common.h
-+++ b/include/configs/rcar-gen4-common.h
-@@ -3,7 +3,7 @@
-  * include/configs/rcar-gen4-common.h
-  *	This file is R-Car Gen4 common configuration file.
-  *
-- * Copyright (C) 2021 Renesas Electronics Corporation
-+ * Copyright (C) 2021-2024 Renesas Electronics Corporation
-  */
- 
- #ifndef __RCAR_GEN4_COMMON_H
-@@ -12,7 +12,7 @@
- #include <asm/arch/renesas.h>
- 
- /* Console */
--#define CFG_SYS_BAUDRATE_TABLE	{ 38400, 115200, 921600, 1843200 }
-+#define CFG_SYS_BAUDRATE_TABLE		{ 38400, 115200, 921600, 1843200 }
- 
- /* Memory */
- #define DRAM_RSV_SIZE			0x08000000
-@@ -20,10 +20,8 @@
- #define CFG_SYS_SDRAM_SIZE		(0x80000000u - DRAM_RSV_SIZE)
- #define CFG_MAX_MEM_MAPPED		(0x80000000u - DRAM_RSV_SIZE)
- 
--/* PHY needs a longer autoneg timeout */
--
- /* Environment setting */
--#define CFG_EXTRA_ENV_SETTINGS					\
-+#define CFG_EXTRA_ENV_SETTINGS		\
- 	"bootm_size=0x10000000\0"
- 
- #endif	/* __RCAR_GEN4_COMMON_H */
 -- 
 2.45.2
 
