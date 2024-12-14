@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5B5E7716A
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 18:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE08E77180
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 18:21:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1705180079;
-	Sat, 14 Dec 2024 19:20:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6725A8007A;
+	Sat, 14 Dec 2024 19:20:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dnGNOhaf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lCd2XEK9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4C4F80083; Sat, 14 Dec 2024 19:20:43 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 9B47F80073; Sat, 14 Dec 2024 19:20:47 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91E18800AD
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 19:20:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6868C80192
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 19:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-84435dbda4bso131969739f.0
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 10:20:41 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a9cb8460f7so21629075ab.2
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 10:20:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734200440; x=1734805240; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734200443; x=1734805243; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uLADFX8zgj9fMgLJ/poPYOYijUwyDbuZQcY/CUdBo+k=;
- b=dnGNOhafxTOWoEris/IJ/eixUoHct2oox9qMWuH/7YBd+uMV+RG7Yha7BV7/te25io
- /Ll4OitUi7bFE+QAR7m4tpEhSvpAsggKgrF32EsLmIyb0b5Kc79HqiXkAIFXl+Xhq1dq
- 0otJ8bes9dOUrdDbBlRCEMcbzuIHqMiWPVgmg=
+ bh=mPJ9hEUkAkj74pHDDYFLC74XS47p2f+iEhZ5F2nrxE0=;
+ b=lCd2XEK92NX0XhYjOIowsNZ0ATgg5Q9wVjKygpTWXLEjuU8nWGsXTGh1pZyRUrBh9u
+ yqjvSYvJyNRWyyMTPLoQvCFfFYnFgV/E4XH8UEbNFBhcyZX99wSLYOTOWANuAfTJS1MW
+ O6X3BtR/2WFr8BgRTbJg8cQcBiUiBPrNH+OA8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734200440; x=1734805240;
+ d=1e100.net; s=20230601; t=1734200443; x=1734805243;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uLADFX8zgj9fMgLJ/poPYOYijUwyDbuZQcY/CUdBo+k=;
- b=imi3o8C6CwxgPxve6/Lhl/Xy34RzPtmjBw9XyMR16OPBvkWTs7UfQHPR2/Gta+edQH
- 4gARzXiWCikMpNqIhOVzb+muFvhzLt6uS8b59f8NAjXVh3U8aMVXF4fKzYCz+1klCo6I
- tak17DvpGhd4ylpo4F547XME/E/pDqQ6R/nWfh5O7L//ofi4tPI4rMolzCD3PizdX28f
- oaVRymN/qK/DjVP+HAcrMu8u/z0XKziporzTT09JJZp6rU/x0CaX2t0rpkzjVIfXkxZV
- DsyfDkwsROhTgoFLUWkirhs7hL/EktQWcrk+wD1ropxUOYQP8rTDz7mjxAk8Auxl4nA9
- 1JdA==
-X-Gm-Message-State: AOJu0YzQIuS20NevSsKJso3QbG7qLNvub6XVnOk81Fo/KKX+u7oJDZFg
- /dfKrsiJVevQ5VE7briK9Q/0dPmayp/tZtrzb6oxZEsmqGjAbodZtNS45vV80xyQkZMGAP+oHPU
+ bh=mPJ9hEUkAkj74pHDDYFLC74XS47p2f+iEhZ5F2nrxE0=;
+ b=dovGy2CJqn4G2ZAvuEy7EUg1ll5kWwu4tGC8DIBr3PS+lQ23lV9kW/VhErVxQjSu5o
+ tsLJsWNh8fg5Tw0kt9SI8EqzlSciTHviQqAzrx4exAlTZ/PbvCIKA18L5df6kIvw3F32
+ UwCZjkNRom1ZG+9pbFdXud15GotPjJ6rxhVbaUI3mpy2zsX+S0sqIEZoLrUXf0iCGbKk
+ MJn3+XSs7dfDVICaq4wZ0UCZ4JsyudaK8HVY2Af6/+2DD6s584Uf//3nZRN0rpj5Stw3
+ AmgL8lSB0/Bv/V0HlKgVhYay/JrPYWaJF37EDG11JvmYrv42/FrCMQkJuUsTH1uglC9D
+ /eBQ==
+X-Gm-Message-State: AOJu0Yzk3QWOMnfbNsVmV76IEq13UaQuhLc/rYYhW+ts3b3g60Jkgijc
+ OOC6HzjL3FT5tNJodwuWgdGdRtIPwNhKV8f1vyEdI8xdRjiSk8wmomrT7/dfClm2Jde1DAucA70
  =
-X-Gm-Gg: ASbGncsMJm2VpK6qxzcmvfacSdBVavmUNTQIJJmPZtSSJpJVLj9DqoYsh09MvHbvfil
- LjofwqEre7luJq4xroMBZ3Lb/0jUTIe9ZDBMRZWOrKVTdjT31gSyL+8CUScijSRnHID9ngas54i
- uHsuWM5mDaez9sdbPCp0frUIPPD2Yn5oCj2xGQTsUaEfRP+Bhx6gGrOYeOcJEKGW5JPVK/bmYPC
- FXhAGuBkRTOKoPIZnfWHM6JDJmOuH0ki5qKhUbpTpufUa200zKwQX7KcnRTN0iiuzLRd+WJ06Hq
- 4kDLl0x2fwTMydv1jQ==
-X-Google-Smtp-Source: AGHT+IEPy/pBP4U7ZyruKrnmjQX0TwnujOUiYqhDXIjGWcDMsAzRjfoJYGXbSsii6AtqNJbrb7EjGQ==
-X-Received: by 2002:a5e:cb41:0:b0:844:2ef3:a95a with SMTP id
- ca18e2360f4ac-844e5b6e500mr810602239f.7.1734200439812; 
- Sat, 14 Dec 2024 10:20:39 -0800 (PST)
+X-Gm-Gg: ASbGncuy9hCDdbSW836OmR2kXpVSG+suD9Vg2uvPHA4aSm4N+fuHjtsAw2OTOKe2yF2
+ kHYCSdbBwXQEmaNOcHwJSBvwStWRKqacBKTYo7ocr1jq7iDx8PSbC3ydWeNO+wlenKh00TtZOiT
+ z5R0dAKDC0QDmlOfVd5SW0fxHoW353874grwsnpCfKEIhLJmPxeEoyMXAloQvPzLqkRmD7HHHxa
+ QSDbtSUzrZlofW6n0UDMo5aF4V0YqKNaEkWegD9pdgScxvnqAwVOGa2A9Dgo7J83UYyoptb/EtU
+ jkTCEt0BOM5P+4wDyw==
+X-Google-Smtp-Source: AGHT+IF2Edl4JSX+FbwhNPUmK9eJncLqyqKUMFrPfAJMfmU6xc324PghID8ac9LrRZs+fl4oeQ7Pfg==
+X-Received: by 2002:a05:6e02:1948:b0:3a7:8c3f:edce with SMTP id
+ e9e14a558f8ab-3aff4619adamr81120335ab.3.1734200443183; 
+ Sat, 14 Dec 2024 10:20:43 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e5dd620e20sm415135173.0.2024.12.14.10.20.38
+ 8926c6da1cb9f-4e5dd620e20sm415135173.0.2024.12.14.10.20.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Dec 2024 10:20:39 -0800 (PST)
+ Sat, 14 Dec 2024 10:20:41 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH 3/5] buildman: Drop unused OUTPUT_FILE constant
-Date: Sat, 14 Dec 2024 11:20:22 -0700
-Message-Id: <20241214182024.1954974-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Subject: [PATCH 4/5] buildman: Record an error if a toolchain is missing
+Date: Sat, 14 Dec 2024 11:20:23 -0700
+Message-Id: <20241214182024.1954974-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241214182024.1954974-1-sjg@chromium.org>
 References: <20241214182024.1954974-1-sjg@chromium.org>
@@ -94,27 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not actually used but its presence suggests that it is the
-filename for the board database. Drop it to avoid confusion.
+Buildman has always treated the lack of a toolchain as an infrastructure
+problem rather than a build failure.
+
+However the logic for this is not correct, since it does not write a
+'done' file in this case.
+
+As a result, one of two things can happen.
+
+1. If a previous build ran in the same (output) directory, the outcome
+   of *that* build is recorded as the outcome of this one
+2. Otherwise, no outcome is recorded
+
+Obviously this inconsistency is not ideal. While (2) is rare, it can be
+very confusing as the build sort-of fails but does not produce any
+summary output with 'buildman -s'
+
+Overall it seems better to attribute a toolchain issue to the boards
+that it affects. This results in clear failures which can be examined,
+no matter what happened in the .bm-work directory previously.
+
+So write a 'done' file for each build when a toolchain is missing.
+
+The end result of this patch is to make missing toolchains much more
+obvious. It should be things a bit easier for novice users.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/buildman/boards.py | 1 -
- 1 file changed, 1 deletion(-)
+ tools/buildman/builderthread.py | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/tools/buildman/boards.py b/tools/buildman/boards.py
-index 9e7b486656b..e7aa0d85a58 100644
---- a/tools/buildman/boards.py
-+++ b/tools/buildman/boards.py
-@@ -25,7 +25,6 @@ from u_boot_pylib import tools
- from u_boot_pylib import tout
+diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+index b5afee61aff..29e6cf32af1 100644
+--- a/tools/buildman/builderthread.py
++++ b/tools/buildman/builderthread.py
+@@ -19,6 +19,7 @@ import threading
+ from buildman import cfgutil
+ from patman import gitutil
+ from u_boot_pylib import command
++from u_boot_pylib import tools
  
- ### constant variables ###
--OUTPUT_FILE = 'boards.cfg'
- CONFIG_DIR = 'configs'
- SLEEP_TIME = 0.03
- COMMENT_BLOCK = f'''#
+ RETURN_CODE_RETRY = -1
+ BASE_ELF_FILENAMES = ['u-boot', 'spl/u-boot-spl', 'tpl/u-boot-tpl']
+@@ -555,10 +556,10 @@ class BuilderThread(threading.Thread):
+         if result.return_code < 0:
+             return
+ 
++        done_file = self.builder.get_done_file(result.commit_upto,
++                result.brd.target)
+         if result.toolchain:
+             # Write the build result and toolchain information.
+-            done_file = self.builder.get_done_file(result.commit_upto,
+-                    result.brd.target)
+             with open(done_file, 'w', encoding='utf-8') as outf:
+                 if maybe_aborted:
+                     # Special code to indicate we need to retry
+@@ -638,6 +639,9 @@ class BuilderThread(threading.Thread):
+                                 result.brd.target)
+                 with open(sizes, 'w', encoding='utf-8') as outf:
+                     print('\n'.join(lines), file=outf)
++        else:
++            # Indicate that the build failure due to lack of toolchain
++            tools.write_file(done_file, '2\n', binary=False)
+ 
+         if not work_in_output:
+             # Write out the configuration files, with a special case for SPL
 -- 
 2.34.1
 
