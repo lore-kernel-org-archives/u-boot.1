@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED444E7716A
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BEBFE7716A
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EDC68006F;
-	Sat, 14 Dec 2024 23:47:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA8398006F;
+	Sat, 14 Dec 2024 23:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="s3lHDSkj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AAjr84wZ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YALLVKzz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ppdHc7KH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ADF88007A; Sat, 14 Dec 2024 23:47:43 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 910538007A; Sat, 14 Dec 2024 23:48:25 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D1C78006C
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:47:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 696B78006C
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:48:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Y9hDX5cC2z9sls;
- Sat, 14 Dec 2024 23:47:40 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Y9hFL6x2Mz9sbh;
+ Sat, 14 Dec 2024 23:48:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216460;
+ s=mail20150812; t=1734216503;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=M+a9U61kHtVSUjifIRUm1D4fpbfN0FDUn6KKk4CnPBs=;
- b=s3lHDSkjOVNIz0ip4GqHpjTWrQOKGob0orv4NrVdC8Sg9dfSebI146mmr3SxisMmSqxiI/
- thGJmc17uUPKygR/1VMchQpqZb1z9L/EJ2JTeLse2DSJQbCaRKnZjOwJvrwZhjx5is8JVV
- 0G/YtXixJCOM2KycRq54vGp5XF2ac41pfpZNYGqKbtz4wKbnkFFImOMg3ZNuhWn7b/LfLz
- pmO7wATz35xHN3k1ZiXR3nF6FgHgveT5BLAOhLiv1CPIwKgdIbFQTiHZ/fGsOJD73vxg+V
- F2W8PBZRj6+1MMBPxWxbNDetXLCollj7HGDYaOpgB0ghiar7NXZJ7iNZMmrSRw==
+ bh=ShqQzz+BvWP1NDUAnvegWNL/+LEialnhMhFgWUH3PBM=;
+ b=YALLVKzz8HvnjQMW3XXjcxoqz67ut/8nRCDQLocmZB/sA8WIm6duALUcEq0rqk1Pq7Rnsf
+ 1INKplHazZzVKp3QmyjOkn08VSms12d14WgE4C7GG9fF3Jrd/UnCM+FL2J4ZF1zfhHOr3U
+ kZMreD3tpocMJICJF0/A4YWgMLZ/3w7Zf71Svjfb41GgkqFWZBCS6ANLcF0KF6Dmsh4XAc
+ cMFurWCUkZ5feb+UFs6zQ0dNlVB8jvQRZw6bTX/pSMPVV5dKprAdXMV7ilnV3ZWmlyYVzR
+ iWpJi0+/jMtqgIyJXTzq0wXiYxDCZx8pMkPfzHjVx5QvVNbbSnHCo6gagSYJNw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216458;
+ s=mail20150812; t=1734216501;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=M+a9U61kHtVSUjifIRUm1D4fpbfN0FDUn6KKk4CnPBs=;
- b=AAjr84wZa+y/GzQ4ib65cya57jOZxD3ZHbCmyKfUhUh+opFUR33s9KmfgZSFdRrwo15Jt0
- PRnRHZbb4jZ+jj/fYBDyojSnTbA826nTInNOwvveZ9AFtaMqNDyRTox9oGkbwazK64+6IZ
- ctYTdD/pRYpOv76OK+R2UCbYYuO2u0tgjKyhwMmpFHJklff1Sxdw+wEHzQ5rVomZHZ0xhR
- B3dhl4rJlmXuyy3jXHmXJq7PPOtB1FeBN5Fd+qiQsizYRS3h0rNwFyacT8BEI7t5tD2WtS
- KS+R0Tt8TFXau0Vql9NyfKAXYZtBSzHOyr0aioOWuVgJP1S2+pVQXS9Bz06s4A==
+ bh=ShqQzz+BvWP1NDUAnvegWNL/+LEialnhMhFgWUH3PBM=;
+ b=ppdHc7KHUCfxGLJ5QX2rnPxj5dMBGn7V/KP5X9YNJqyKWcdBudT+3sLB6ygKYmpl9V8WpN
+ Z+NAp/AEoYW7bMQa4u4D79pVC1caPJJuIjo6JfkBjBxE3Lt1lb7njK837F9zBYg/j5h/xB
+ Q6Z1MRfK79II4bdq0sjEVymWSNWGKlSYf1+IFwDAzBubaYcKL5YbKWpAmz05w8PP4EUfHJ
+ 0l7dCu+qYtIH58Brgq5Q5YCYdpHmcIOOoNhWce12Lz0mj+2TC9QPO/QPyeL3z4YcLbkhOK
+ 3/IddoSuBbqQhIkxbICydynht15iW9UzSSOtaHxfD5zZjxsFqbKz1L7pB0utnQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Chris Paterson <chris.paterson2@renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: dts: renesas: Deduplicate extalr_clk bootph-all
-Date: Sat, 14 Dec 2024 23:46:58 +0100
-Message-ID: <20241214224726.304025-1-marek.vasut+renesas@mailbox.org>
+ Hai Pham <hai.pham.ud@renesas.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] pinctrl: renesas: Convert to IS_ENABLED() macro
+Date: Sat, 14 Dec 2024 23:47:43 +0100
+Message-ID: <20241214224807.304054-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: mudajn5ro8udxkjdyumuwnd7xz76i1r6
-X-MBO-RS-ID: 65eb59c2572006f2aaa
-X-Rspamd-Queue-Id: 4Y9hDX5cC2z9sls
+X-MBO-RS-META: 4kjufrbexkjed67mfqf9n1ottg768w5i
+X-MBO-RS-ID: e4db5d28ca4af218ca6
+X-Rspamd-Queue-Id: 4Y9hFL6x2Mz9sbh
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,260 +85,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most R-Car Gen3 and Gen4 systems require extalr_clk very early
-in the boot process. Currently the extalr_clk { bootph-all } DT
-property to indicate this clock should be available early is set
-in each SoC U-Boot DT extras file. Deduplicate this assignment to
-new common r8a779x-rcar64-u-boot.dtsi file.
+Use the IS_ENABLED() macro to reduce amount of #ifdef use in the driver
+and improve code coverage. With IS_ENABLED() macro, the code is compiled
+and then optimized out, which prevents bitrot.
 
-Note that R-Car Gen3 R8A77990 E3 and R8A77995 D3 do not require
-extalr_clk early, therefore these SoCs still include plain
-r8a779x-u-boot.dtsi in their U-Boot DT extras .
+In case no PFC table matches the SoC in use, do not probe the driver
+and instead exit with -ENODEV. This should never happen under normal
+conditions, because this would mean the driver DT compatible string
+match happened, but the list in probe() cannot match the model listed
+in match data associated with the compatible string on which the match
+did happen.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Chris Paterson <chris.paterson2@renesas.com>
-Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/dts/r8a774a1-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a774b1-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a774c0-u-boot.dtsi       |  2 +-
- arch/arm/dts/r8a774e1-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a77951-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a77960-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a77965-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a77970-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a77980-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a779a0-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a779f0-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a779g0-u-boot.dtsi       |  6 +-----
- arch/arm/dts/r8a779x-rcar64-u-boot.dtsi | 12 ++++++++++++
- 13 files changed, 24 insertions(+), 56 deletions(-)
- create mode 100644 arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
+ drivers/pinctrl/renesas/pfc.c | 128 ++++++++++++----------------------
+ 1 file changed, 44 insertions(+), 84 deletions(-)
 
-diff --git a/arch/arm/dts/r8a774a1-u-boot.dtsi b/arch/arm/dts/r8a774a1-u-boot.dtsi
-index 3530eeb2718..bd91a963cd6 100644
---- a/arch/arm/dts/r8a774a1-u-boot.dtsi
-+++ b/arch/arm/dts/r8a774a1-u-boot.dtsi
-@@ -5,8 +5,4 @@
-  * Copyright (C) 2021 Renesas Electronics Corporation
-  */
+diff --git a/drivers/pinctrl/renesas/pfc.c b/drivers/pinctrl/renesas/pfc.c
+index 2f6c3b3d1c7..db6be39a528 100644
+--- a/drivers/pinctrl/renesas/pfc.c
++++ b/drivers/pinctrl/renesas/pfc.c
+@@ -961,90 +961,50 @@ static int sh_pfc_pinctrl_probe(struct udevice *dev)
+ 	if (!priv->pfc.regs)
+ 		return -ENOMEM;
  
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
-diff --git a/arch/arm/dts/r8a774b1-u-boot.dtsi b/arch/arm/dts/r8a774b1-u-boot.dtsi
-index 07aeabc46b4..38a82f065c0 100644
---- a/arch/arm/dts/r8a774b1-u-boot.dtsi
-+++ b/arch/arm/dts/r8a774b1-u-boot.dtsi
-@@ -5,8 +5,4 @@
-  * Copyright (C) 2021 Renesas Electronics Corp.
-  */
+-#ifdef CONFIG_PINCTRL_PFC_R8A7790
+-	if (model == SH_PFC_R8A7790)
++	if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7790) && model == SH_PFC_R8A7790)
+ 		priv->pfc.info = &r8a7790_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7791
+-	if (model == SH_PFC_R8A7791)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7791) && model == SH_PFC_R8A7791)
+ 		priv->pfc.info = &r8a7791_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7792
+-	if (model == SH_PFC_R8A7792)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7792) && model == SH_PFC_R8A7792)
+ 		priv->pfc.info = &r8a7792_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7793
+-	if (model == SH_PFC_R8A7793)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7793) && model == SH_PFC_R8A7793)
+ 		priv->pfc.info = &r8a7793_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7794
+-	if (model == SH_PFC_R8A7794)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7794) && model == SH_PFC_R8A7794)
+ 		priv->pfc.info = &r8a7794_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77951
+-	if (model == SH_PFC_R8A7795)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77951) && model == SH_PFC_R8A7795)
+ 		priv->pfc.info = &r8a77951_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77960
+-	if (model == SH_PFC_R8A77960)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77960) && model == SH_PFC_R8A77960)
+ 		priv->pfc.info = &r8a77960_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77961
+-	if (model == SH_PFC_R8A77961)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77961) && model == SH_PFC_R8A77961)
+ 		priv->pfc.info = &r8a77961_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774A1
+-	if (model == SH_PFC_R8A774A1)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774A1) && model == SH_PFC_R8A774A1)
+ 		priv->pfc.info = &r8a774a1_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774B1
+-	if (model == SH_PFC_R8A774B1)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774B1) && model == SH_PFC_R8A774B1)
+ 		priv->pfc.info = &r8a774b1_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774C0
+-	if (model == SH_PFC_R8A774C0)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774C0) && model == SH_PFC_R8A774C0)
+ 		priv->pfc.info = &r8a774c0_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774E1
+-	if (model == SH_PFC_R8A774E1)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774E1) && model == SH_PFC_R8A774E1)
+ 		priv->pfc.info = &r8a774e1_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77965
+-	if (model == SH_PFC_R8A77965)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77965) && model == SH_PFC_R8A77965)
+ 		priv->pfc.info = &r8a77965_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77970
+-	if (model == SH_PFC_R8A77970)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77970) && model == SH_PFC_R8A77970)
+ 		priv->pfc.info = &r8a77970_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77980
+-	if (model == SH_PFC_R8A77980)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77980) && model == SH_PFC_R8A77980)
+ 		priv->pfc.info = &r8a77980_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77990
+-	if (model == SH_PFC_R8A77990)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77990) && model == SH_PFC_R8A77990)
+ 		priv->pfc.info = &r8a77990_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77995
+-	if (model == SH_PFC_R8A77995)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77995) && model == SH_PFC_R8A77995)
+ 		priv->pfc.info = &r8a77995_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779A0
+-	if (model == SH_PFC_R8A779A0)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779A0) && model == SH_PFC_R8A779A0)
+ 		priv->pfc.info = &r8a779a0_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779F0
+-	if (model == SH_PFC_R8A779F0)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779F0) && model == SH_PFC_R8A779F0)
+ 		priv->pfc.info = &r8a779f0_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779G0
+-	if (model == SH_PFC_R8A779G0)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779G0) && model == SH_PFC_R8A779G0)
+ 		priv->pfc.info = &r8a779g0_pinmux_info;
+-#endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779H0
+-	if (model == SH_PFC_R8A779H0)
++	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779H0) && model == SH_PFC_R8A779H0)
+ 		priv->pfc.info = &r8a779h0_pinmux_info;
+-#endif
++	else
++		return -ENODEV;
  
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
-diff --git a/arch/arm/dts/r8a774c0-u-boot.dtsi b/arch/arm/dts/r8a774c0-u-boot.dtsi
-index 4572c22f6c1..91d14536e48 100644
---- a/arch/arm/dts/r8a774c0-u-boot.dtsi
-+++ b/arch/arm/dts/r8a774c0-u-boot.dtsi
-@@ -6,7 +6,7 @@
-  *
-  */
+ 	priv->pmx.pfc = &priv->pfc;
+ 	sh_pfc_init_ranges(&priv->pfc);
+@@ -1054,127 +1014,127 @@ static int sh_pfc_pinctrl_probe(struct udevice *dev)
+ }
  
--#include "r8a779x-u-boot.dtsi"
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a774e1-u-boot.dtsi b/arch/arm/dts/r8a774e1-u-boot.dtsi
-index 2202731ccb3..f314b2b0cf8 100644
---- a/arch/arm/dts/r8a774e1-u-boot.dtsi
-+++ b/arch/arm/dts/r8a774e1-u-boot.dtsi
-@@ -5,8 +5,4 @@
-  * Copyright (C) 2020 Renesas Electronics Corp.
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
-diff --git a/arch/arm/dts/r8a77951-u-boot.dtsi b/arch/arm/dts/r8a77951-u-boot.dtsi
-index 4cbec591479..54eb331ec39 100644
---- a/arch/arm/dts/r8a77951-u-boot.dtsi
-+++ b/arch/arm/dts/r8a77951-u-boot.dtsi
-@@ -5,11 +5,7 @@
-  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a77960-u-boot.dtsi b/arch/arm/dts/r8a77960-u-boot.dtsi
-index 15a91474324..c712837500e 100644
---- a/arch/arm/dts/r8a77960-u-boot.dtsi
-+++ b/arch/arm/dts/r8a77960-u-boot.dtsi
-@@ -5,11 +5,7 @@
-  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a77965-u-boot.dtsi b/arch/arm/dts/r8a77965-u-boot.dtsi
-index 54107d1ae35..4a6ded386f8 100644
---- a/arch/arm/dts/r8a77965-u-boot.dtsi
-+++ b/arch/arm/dts/r8a77965-u-boot.dtsi
-@@ -5,11 +5,7 @@
-  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a77970-u-boot.dtsi b/arch/arm/dts/r8a77970-u-boot.dtsi
-index d252c2e8e6c..160e1c983cb 100644
---- a/arch/arm/dts/r8a77970-u-boot.dtsi
-+++ b/arch/arm/dts/r8a77970-u-boot.dtsi
-@@ -5,11 +5,7 @@
-  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a77980-u-boot.dtsi b/arch/arm/dts/r8a77980-u-boot.dtsi
-index 9f7bf499bc0..afb226403a0 100644
---- a/arch/arm/dts/r8a77980-u-boot.dtsi
-+++ b/arch/arm/dts/r8a77980-u-boot.dtsi
-@@ -5,11 +5,7 @@
-  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include "r8a779x-u-boot.dtsi"
--
--&extalr_clk {
--	bootph-all;
--};
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-diff --git a/arch/arm/dts/r8a779a0-u-boot.dtsi b/arch/arm/dts/r8a779a0-u-boot.dtsi
-index 2b6d6ef05dc..f506a666518 100644
---- a/arch/arm/dts/r8a779a0-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779a0-u-boot.dtsi
-@@ -5,7 +5,7 @@
-  * Copyright (C) 2020 Renesas Electronics Corp.
-  */
- 
--#include "r8a779x-u-boot.dtsi"
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-@@ -19,7 +19,3 @@
- 		};
- 	};
- };
--
--&extalr_clk {
--	bootph-all;
--};
-diff --git a/arch/arm/dts/r8a779f0-u-boot.dtsi b/arch/arm/dts/r8a779f0-u-boot.dtsi
-index 0f98c09fc52..08d32fef2b9 100644
---- a/arch/arm/dts/r8a779f0-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779f0-u-boot.dtsi
-@@ -5,7 +5,7 @@
-  * Copyright (C) 2021 Renesas Electronics Corp.
-  */
- 
--#include "r8a779x-u-boot.dtsi"
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- / {
- 	soc {
-@@ -22,7 +22,3 @@
- 		};
- 	};
- };
--
--&extalr_clk {
--	bootph-all;
--};
-diff --git a/arch/arm/dts/r8a779g0-u-boot.dtsi b/arch/arm/dts/r8a779g0-u-boot.dtsi
-index f60eba531e4..4fc196e97b5 100644
---- a/arch/arm/dts/r8a779g0-u-boot.dtsi
-+++ b/arch/arm/dts/r8a779g0-u-boot.dtsi
-@@ -5,13 +5,9 @@
-  * Copyright (C) 2021 Renesas Electronics Corp.
-  */
- 
--#include "r8a779x-u-boot.dtsi"
-+#include "r8a779x-rcar64-u-boot.dtsi"
- 
- &rpc {
- 	bank-width = <2>;
- 	num-cs = <1>;
- };
--
--&extalr_clk {
--	bootph-all;
--};
-diff --git a/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi b/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
-new file mode 100644
-index 00000000000..b59cc7deca7
---- /dev/null
-+++ b/arch/arm/dts/r8a779x-rcar64-u-boot.dtsi
-@@ -0,0 +1,12 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Device Tree Source extras for U-Boot on R-Car 64bit SoC
-+ *
-+ * Copyright (C) 2024 Marek Vasut <marek.vasut+renesas@mailbox.org>
-+ */
-+
-+#include "r8a779x-u-boot.dtsi"
-+
-+&extalr_clk {
-+	bootph-all;
-+};
+ static const struct udevice_id sh_pfc_pinctrl_ids[] = {
+-#ifdef CONFIG_PINCTRL_PFC_R8A7790
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7790)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7790",
+ 		.data = SH_PFC_R8A7790,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7791
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7791)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7791",
+ 		.data = SH_PFC_R8A7791,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7792
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7792)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7792",
+ 		.data = SH_PFC_R8A7792,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7793
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7793)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7793",
+ 		.data = SH_PFC_R8A7793,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A7794
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7794)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7794",
+ 		.data = SH_PFC_R8A7794,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77951
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77951)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7795",
+ 		.data = SH_PFC_R8A7795,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77960
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77960)
+ 	{
+ 		.compatible = "renesas,pfc-r8a7796",
+ 		.data = SH_PFC_R8A77960,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77961
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77961)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77961",
+ 		.data = SH_PFC_R8A77961,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774A1
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774A1)
+ 	{
+ 		.compatible = "renesas,pfc-r8a774a1",
+ 		.data = SH_PFC_R8A774A1,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774B1
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774B1)
+ 	{
+ 		.compatible = "renesas,pfc-r8a774b1",
+ 		.data = SH_PFC_R8A774B1,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774C0
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774C0)
+ 	{
+ 		.compatible = "renesas,pfc-r8a774c0",
+ 		.data = SH_PFC_R8A774C0,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A774E1
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774E1)
+ 	{
+ 		.compatible = "renesas,pfc-r8a774e1",
+ 		.data = SH_PFC_R8A774E1,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77965
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77965)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77965",
+ 		.data = SH_PFC_R8A77965,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77970
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77970)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77970",
+ 		.data = SH_PFC_R8A77970,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77980
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77980)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77980",
+ 		.data = SH_PFC_R8A77980,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77990
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77990)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77990",
+ 		.data = SH_PFC_R8A77990,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A77995
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77995)
+ 	{
+ 		.compatible = "renesas,pfc-r8a77995",
+ 		.data = SH_PFC_R8A77995,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779A0
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779A0)
+ 	{
+ 		.compatible = "renesas,pfc-r8a779a0",
+ 		.data = SH_PFC_R8A779A0,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779F0
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779F0)
+ 	{
+ 		.compatible = "renesas,pfc-r8a779f0",
+ 		.data = SH_PFC_R8A779F0,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779G0
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779G0)
+ 	{
+ 		.compatible = "renesas,pfc-r8a779g0",
+ 		.data = SH_PFC_R8A779G0,
+ 	},
+ #endif
+-#ifdef CONFIG_PINCTRL_PFC_R8A779H0
++#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779H0)
+ 	{
+ 		.compatible = "renesas,pfc-r8a779h0",
+ 		.data = SH_PFC_R8A779H0,
 -- 
 2.45.2
 
