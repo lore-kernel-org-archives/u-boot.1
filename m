@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C529CE77180
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 14:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FFFCE7716A
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 18:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1F978007F;
-	Sat, 14 Dec 2024 15:23:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1773E80081;
+	Sat, 14 Dec 2024 19:20:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WS6mxLyZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j05uUBNy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0741280092; Sat, 14 Dec 2024 15:23:59 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id AB0DA8007A; Sat, 14 Dec 2024 19:20:36 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97257800CF
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 15:23:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C31680073
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 19:20:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-46772a0f85bso24698581cf.3
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 06:23:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3a9cdcec53fso24472935ab.1
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 10:20:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734186235; x=1734791035; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FoUBUHGkL3Yg9qRTtxSFVszQ516OIVsVoTjPoVoFqE8=;
- b=WS6mxLyZEXtApkEQxMu8AG9UwdLvByVGad50olZdDcLf+tz39clfYHNh3BynoeKPRh
- l9Q3qD/b3GTZYg4eXWPLbwGFxuhquVgaS7cwbm46AdqtAyuAOUT5SZ1Bg/yebCC56uIA
- /54SvqipV8MG0S8NIGD7GqbDNB3wRHge+7OWE=
+ d=chromium.org; s=google; t=1734200432; x=1734805232; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=e2mbZz2po4gMCBplyf2+5gNwgauBG87rWGsHO37/WMI=;
+ b=j05uUBNyDwB90HAX4YLyLy57+N7dKsZv945lySZin+/tahczoYhxvojsUpUwfWvuJD
+ qKk/swPwMTN0cuieAWOy4pkgVpoHbJukGrqHC+3hY7frWGOV1bQ6jSd0BLiJ1l3yKaHB
+ rvCSgZxNyWsJBb3oUGLdXJ3u2rdTrAX+g1Is8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734186235; x=1734791035;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FoUBUHGkL3Yg9qRTtxSFVszQ516OIVsVoTjPoVoFqE8=;
- b=wV0qFJgCowk+86rf/pIYrHG9A7VBB9EgAT+zJIowTJmfmhHRuGIX9tJVysiKaHGHcP
- 6paSm+MNPa7okYoD/+btLTMpf7oqzPuSRzgaWmHk6cUSjWjV26O6+Uy2clArJPt+JIIC
- MIu0sB3kVvujMgYL+dj0xwjVzftRmuC70rTX7EmFLIQdy9+0cbTxFwODsm0lo82B19zZ
- TjZ5t5QXrXJKWr0rigm68LPJNmaY//ziut9rd8zwhL9rQ5T1ZjFVBsQ1mqkMimThrx94
- sX/2dPbtWER/g6HgFGwqftmkz5A3L8piiUIGVTWBYDuqO4B317OwZkMrb/3jDrNE8YfI
- wTUg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTjPnITy3IMj5kzjeSB5jcGE+xrLB/2fg1vYyPbY+sSoTQnwSf/d7cmR2DZOlx5uSNOfkU9dA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw2D6ANJju9p22s2nF+7fJA5M3iHTGTiNX21cCNeYaxydkGTW04
- viKohWX2KvlTwEMfjKN81N7/semiAjDY+e3Hoy8lNoiF8auH9q5OlTemfww+E/c=
-X-Gm-Gg: ASbGncsVjpUdGKVpq4QMpyl7SSezcqrf8CteenCHOl7He7QPAQM8xjmFaf59Mp83s0Q
- lIPoStAYMdJAbQVn4oLpMIFoxc3vAYue793wJv218kQvUddN46r3g9J+UxMD4JwcqM/TIRq6ldk
- TRCiFN9rnmIQms8QlPYm/2EHhn9JU576TSGH6LtnXF/Bx0sHsMYWPFVnoPhzqCIQZWs50ExOoOS
- zqyIPWvE1whkPJOdWJOQr6qgrF0le4cyrbze1Fzs0mtAqIXa767A0zv
-X-Google-Smtp-Source: AGHT+IEk4Yr/MPyz7s+GyjpFhMdwibkhjpTsAGXPlxiz+fXfRoo/K6ZidErxVY1QDL+9HEbrkjDTAQ==
-X-Received: by 2002:ac8:7c48:0:b0:464:af64:a90b with SMTP id
- d75a77b69052e-467a575c57dmr116311451cf.20.1734186235518; 
- Sat, 14 Dec 2024 06:23:55 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7047d08a0sm72752385a.33.2024.12.14.06.23.53
+ d=1e100.net; s=20230601; t=1734200432; x=1734805232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e2mbZz2po4gMCBplyf2+5gNwgauBG87rWGsHO37/WMI=;
+ b=pJley4ptJqn7WySPzLSXefiKHoRPpqw4fr7W4eqOs6US8DmFR5sZGIwk/Azg41tWI/
+ yZrAprrw2fleKnBEAYFFyP8skMHLTc7J904mWVegQ2NYUcVaCvfl9czLf+pgHB2t0/zz
+ aKVU/8ZTBNjV8SY7Cr9EL+Eot7ywO0n6tzDjrALkZ7Ps6NB1eXkkY5LXT9V/dylEQWCy
+ juiOexnTf2VV+kxeZ6vy8nQIk1YKlbd0r5SoZDm/vel4hv/7wXpUxxYHRGaW7rJyJgrr
+ QNKMzZSkdRQStypQyPjpkIZD6eTYfwfFT0Jaos5/+WP0YHkz2Z7/W9bqr7yfl+JBmii8
+ 1KPQ==
+X-Gm-Message-State: AOJu0YwXggwsIVixLDY0DmumDtnk7JUGP1zEkwkfHymOQw7aLzhpe8PT
+ cwvwK579EacnkaVcuD0+io9Boczvf5CVOIi8D6VN9iOLoeWH/ja0CXMp2Zeo1L2cOQudydt8zeo
+ =
+X-Gm-Gg: ASbGncvgyDQ+nS8FnuexussHT2IdLrZKambBecfL0PPesKMJz4qPOmAbmhimrzr0tot
+ AbdzRHAS2iGHe3S9k0kmLoqkC4JAuJPl2jzYiirxqY9v0dDwkVZaYPIT0TwKTeCAmYfdWRBGzaV
+ 4/F1Kqrxqv/QUT+9WOxm/4vdLYlN+Ao2Am8pUVS/NLKBfjOzX8xRw43VYR/fM7SQKo0BrycRpPj
+ pUZytyVOz5EB9ZTJSDPw+zCC6Q62CzE5srAIklIwK20JTFve/5zzWEaFBqueHHOnfnquQsmuKjx
+ V2vx1n2NKM4b2BQy6g==
+X-Google-Smtp-Source: AGHT+IFFHc5oE7iWte7/cF4oLeX7NVSR6JStT4X6zNtId4Oaoz4zD3EbQ1wKRCbJCHgPOgsCLgs+eQ==
+X-Received: by 2002:a05:6e02:174e:b0:3a7:66e0:a98a with SMTP id
+ e9e14a558f8ab-3aff6020017mr68710865ab.9.1734200431827; 
+ Sat, 14 Dec 2024 10:20:31 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e5dd620e20sm415135173.0.2024.12.14.10.20.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Dec 2024 06:23:54 -0800 (PST)
-Date: Sat, 14 Dec 2024 08:23:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Vitor Soares <ivitro@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
- emanuele.ghidoli@toradex.com
-Subject: Re: [PATCH v3] toradex: tdx-cfg-block: rework modules pid4 handling
-Message-ID: <20241214142351.GZ1505244@bill-the-cat>
-References: <20241125174911.70723-1-ivitro@gmail.com>
+ Sat, 14 Dec 2024 10:20:29 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 0/5] gitlab: Fixes to get StarFive VisionFive2 into the sjg lab
+Date: Sat, 14 Dec 2024 11:20:19 -0700
+Message-Id: <20241214182024.1954974-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nURySScgGz5mgdML"
-Content-Disposition: inline
-In-Reply-To: <20241125174911.70723-1-ivitro@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This board fought valiantly against attempts to add it to my lab. After
+several hours of debugging, I found problems in the Labgrid integration
+(not included here), test.py and buildman
 
---nURySScgGz5mgdML
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series fixes these and the board now seems to be reliable enough.
 
-On Mon, Nov 25, 2024 at 05:49:10PM +0000, Vitor Soares wrote:
+Note that the board fails test_dm_compat
 
-> From: Vitor Soares <vitor.soares@toradex.com>
->=20
-> The module pid4 currently corresponds to the index of the toradex_module
-> array. If a new pid4 is introduced that does not follow the sequence of
-> the previous entries, it will create a gap in the array.
->=20
-> To address this, embed pid4 within the toradex_som structure and
-> implement a function to retrieve the index corresponding to pid4.
->=20
-> Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
-> Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Link: https://github.com/labgrid-project/labgrid/pull/1411
 
-Applied to u-boot/next, thanks!
 
---=20
-Tom
+Simon Glass (5):
+  test/py: Provide the correct U_BOOT_SOURCE_DIR to getrole
+  test/py: Handle u-boot-test-getrole failure
+  buildman: Drop unused OUTPUT_FILE constant
+  buildman: Record an error if a toolchain is missing
+  gitlab: Add a StarFive VisionFive2 to the sjg lab
 
---nURySScgGz5mgdML
-Content-Type: application/pgp-signature; name="signature.asc"
+ .gitlab-ci.yml                  | 5 +++++
+ test/py/conftest.py             | 9 +++++++--
+ tools/buildman/boards.py        | 1 -
+ tools/buildman/builderthread.py | 8 ++++++--
+ 4 files changed, 18 insertions(+), 5 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.34.1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmddlPQACgkQFHw5/5Y0
-tyyc7wwAo7JOuEIu3tfNIiNldqC0IEjoPHepL4tzt7WKeGGKpCMGHAU6zlcCLOJ2
-fF4maRI3RVHmpRMR4c5+k61A3/REzeDcSyf1rHSEALlxsGXb0cxReKWP/5uA6TdS
-xUr7L45ExCPQnpAKLXIu/E9DMCSu3xJtDI5i40e5QQaVbpxhT5XU19WOrZipInFw
-z1vit58UV2X37j4waNeAJb4zyImllzEOjuSlUO8pefX9C7bRxBryskAn8xU8JmZH
-B8at4P1bBEldO/fnyyYyX8ua9RVma8MDC72gxkRvqgA8vnq149P1PhqwrlkJ0Tu8
-xEImg3zo7PtVLV5TEZVxyrxlsqS9l72D1EUEkq+qhkxuYYG7QXRB5KUHT1Od0etQ
-27Z8wlhi2jmyEwHP7QjUdOI99GM7HEOIbTYIJHkuSA1qfqLTJ65Zj/7pTFSOymO9
-2AnSkk+DE8+K42TgItApel1GvS5ssNJnOoWPZuu5Z22Y7971sOimtIk3k41+O8Kg
-nV/O9ETZ
-=Ecrr
------END PGP SIGNATURE-----
-
---nURySScgGz5mgdML--
