@@ -4,104 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCB07E77180
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 06:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC7A6E7716A
+	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 06:52:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A66D6800D7;
-	Sat, 14 Dec 2024 07:45:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 394E8800B2;
+	Sat, 14 Dec 2024 07:52:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gpz1x29v";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="muiRkqeQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1321C801F9; Sat, 14 Dec 2024 07:45:35 +0100 (CET)
-Received: from mail-pf1-x444.google.com (mail-pf1-x444.google.com
- [IPv6:2607:f8b0:4864:20::444])
+ id 99A6A800B3; Sat, 14 Dec 2024 07:52:41 +0100 (CET)
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com
+ [IPv6:2607:f8b0:4864:20::643])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43265800B1
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 07:45:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01ABC800B1
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 07:52:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pericycle.cc@gmail.com
-Received: by mail-pf1-x444.google.com with SMTP id
- d2e1a72fcca58-728e729562fso2037138b3a.0
- for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 22:45:32 -0800 (PST)
+Received: by mail-pl1-x643.google.com with SMTP id
+ d9443c01a7336-2166360285dso22391955ad.1
+ for <u-boot@lists.denx.de>; Fri, 13 Dec 2024 22:52:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734158731; x=1734763531; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=IeYUzc+Iy8LtogU8ey/WJWWYfOWyVh1HQrPkMOdYRyA=;
- b=Gpz1x29vsjWElPgC1Ucj7gr/PlOSWUxUbljxmJpiiPnF7zPjXLl8y4+onGlV+jjv25
- 9PyzUMH24LriBGUP/x8YXzJBwv7bJc0iC7LPyncAutYdYv9/hl7oN+kyszxcLQVWUjTg
- KuRoZ+8R7Q3UCHjj+4lcQKJfCZcr0UtbB6cajDrmMWTOTs0SX1XM43hHGuplCUGYf4gd
- Zl6s6ezBdrEXbYMDQrt75YniQwzHdKm+ORQdRm/bJboyWcAjrGcndW5xUAm+RrRCWiSH
- 81PsIhGsiG07Fw/vV146/j6m8fHyknCqdH0DrBrfb3fbJyp32WZa29GoBlgEd6b+Dc8J
- 54+w==
+ d=gmail.com; s=20230601; t=1734159156; x=1734763956; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=a7TZoXQUBb4ggGbZhR95vqcyKSS7oT4rsRtUFnlkUh8=;
+ b=muiRkqeQuMPqP5krCXPF7XpcYFb0AKzxYHIqymZAfyqkCGm6w3SYQvVqyUh3NXEZUw
+ wOeslWAyPtKVCKDlInMroHGTnqpUE0xq7vgiFo5wUtR7EibeRUxKgnbFTqwlmWesh/Dq
+ e+bFmVDRUA6rpAII2QbXGXepeAUnw6ni54jUoGLc4U3y1vy6QHI7R/v5z1JSvyxG6ZtV
+ S4/vwGLiVGB7zTw3BW2Q1vEBO0Oo3YIDM/fd2Iehd9lcNJ6ovtx6FJcTwqP0ydd0u6Xe
+ /N3K5qcYRILMe7UaFB49/ISHnKDfMDFLkKR8F/K0RqxFbJX+VALEGrOPIbet7A/ZVLgG
+ Jw6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734158731; x=1734763531;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IeYUzc+Iy8LtogU8ey/WJWWYfOWyVh1HQrPkMOdYRyA=;
- b=ijc2MbZA+A/XeMwAfPcs4tsiAUSHmvFMReZlce+dxv8/fhrL6+2PDD3fTvnmtFdnDY
- 4I1iCZ8DAww0i31aRG+pc1yWRX34pl2U6ME/dGAH4Vbeeb5GTBxNfS+FU4S+ztlR9get
- kn2I1L2E9OJuXA4OSfd7HMFVD/ma4l4gca9yiAJH64pLwRPIpn9y/pdCIXVxD1UI6EKb
- bbmQhLRF2O//eer8kDPzaUY281YRfaqNRvBGeExNxdcrT+AKmCaP+kkFx6X2AXe2RUPK
- 8jlT7BaUl7b8LJEuvnCIXDRwxeUTPyTkRhYuHpH1T+xaX8cL24jdm+QLWA2UCwpPTVZW
- wGYg==
-X-Gm-Message-State: AOJu0YxYP6D9wjJjcF48N/DZcJDRiAAAWx2afx9IOgqoYw+99uZaJOLO
- 2baz3k8AS8M0gXpHyvBZicPWqca7L5OfKxId3AggNUfRwSXwqftm
-X-Gm-Gg: ASbGncsJEdmcvRDCI79iiBsEimeOm4SYZ7bhDds316g3Bk4222Sqp1E8i2n7lLyJLjA
- S0gOrfVDGrQYSz+TXY3fr8kCec0JivFJFw0/TErf2Foplr067Lv83g0FY9kkB/2hkBIT/ZY+esK
- a8yn3vyk3jlRhCdhlkVJMNhyvp2UogvVXjk8jsUzTMZjq/2mAmSQ8hkma20CNgh1r5bHjrr9j4U
- VfmrLJxRTHKHUPZGuSNovH+Lk3OW998AWccpQy1nKG8gtFoz8jfrWL/EY//52/FI0/Z+vr92ATw
- E30/qUP1SLw83tQ3BlSj3LSz9A==
-X-Google-Smtp-Source: AGHT+IFod3blGUf0ffFMy/0tc7uI46q2QC9EPBhtZr1RR4vReRLIC3aIgdFXRWZXv3meU4qOfb2jIg==
-X-Received: by 2002:a05:6a00:228b:b0:725:ef4b:de30 with SMTP id
- d2e1a72fcca58-7290c1a8691mr8039364b3a.14.1734158730575; 
- Fri, 13 Dec 2024 22:45:30 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734159156; x=1734763956;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a7TZoXQUBb4ggGbZhR95vqcyKSS7oT4rsRtUFnlkUh8=;
+ b=n4bR7jzSKpWSsauVztK0+2oVsN0eGd/3gowWoGSA0tuOccLcDYaZK3m73qhT+e/XbL
+ 2Aq1Tl+u7kIMYlPk6MjgjvPU9heeAlvzkTKhbjbrsWQfhyOaNsw0w1Dmowk9hO2q8QKB
+ oQnu+S9OV1T4cEWFOow4YfumRBgGwWRdNe9zken7LUF1qr6TQbVwBV8SCCXBhcJt+H+n
+ T18rRlgq+pUe84jFVh77O0c5HvxrY8wvzNY1/d4EdBJ7G4a5IkQbaWZTo2C4+TmGhVMd
+ 5HVLi4dbhis5UAhpfj5DP50rmJt1f6/Dp6M0T4Ek8PfYNnW8czEmdHcIyPEU99gxp8oy
+ hwOw==
+X-Gm-Message-State: AOJu0Yw73GM8NxmtAYD/1938nHzxjnCLduU2/evIzDWyJ6YcPC9znl3t
+ rTjQ893LoY/r4qtSnkya20zwbhvE/qNTKjYGysYmUfB0bCZI7rH38aC56mC+LLMKV9O/
+X-Gm-Gg: ASbGncvUGRdvyQVC0zDOVNU4SQeB2y49zkSI4rM5n/HKlG2wDCMPMGVyxkoVDIwp7nl
+ 60lAb7dnEpUTyGEmBoT9efNcFstsKhputcmLiYA8dE8TA7w8Cd1ganHpIRQLpNmSiac3tEJqTlT
+ x2yYamHmY4SToHmZhGWSW0VrcFFKBSTus3gLG5GBp3W5vkWC0DowyoIunwGQVB7LyYKxgqob/6e
+ GFoiuPog1gEA6CpyzhUQeRVLD/qS6+LFyp0zD24FCCf59McIjMUpJgmqb+Lk94nK+O1tTA3AZkZ
+ 89zcKQ4PmGuMlBrHcSwQ1BAl8Q==
+X-Google-Smtp-Source: AGHT+IEY7ZNPHqeSz/ZpBGWecSWpuxegz6mczlSipz8SNzD2lZ0xdiM+8aj0xKNO3rm2zyKhUcnsoQ==
+X-Received: by 2002:a17:902:e88e:b0:215:7dbf:f3de with SMTP id
+ d9443c01a7336-218929ff6cbmr79330665ad.28.1734159156426; 
+ Fri, 13 Dec 2024 22:52:36 -0800 (PST)
 Received: from per1cycle.per1cycle (n220246100016.netvigator.com.
  [220.246.100.16]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72918bcde27sm831431b3a.181.2024.12.13.22.45.23
+ d9443c01a7336-218a1e501dbsm7197985ad.153.2024.12.13.22.52.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 22:45:29 -0800 (PST)
+ Fri, 13 Dec 2024 22:52:35 -0800 (PST)
+Date: Sat, 14 Dec 2024 14:52:27 +0800
 From: Huan Zhou <pericycle.cc@gmail.com>
-Date: Sat, 14 Dec 2024 14:45:01 +0800
-Subject: [PATCH v6 2/2] doc: spacemit: bananapi_f3: document Banana Pi F3 board
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241214-pickup-bpif3-v6-2-306355826455@gmail.com>
-References: <20241214-pickup-bpif3-v6-0-306355826455@gmail.com>
-In-Reply-To: <20241214-pickup-bpif3-v6-0-306355826455@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
- Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>, 
- Dan Carpenter <dan.carpenter@linaro.org>, Yixun Lan <dlan@gentoo.org>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- =?utf-8?q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>, 
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>, 
- Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Yu Chien Peter Lin <peterlin@andestech.com>, 
- Huan Zhou <pericycle.cc@gmail.com>, 
- Kongyang Liu <seashell11234455@gmail.com>, 
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>,
+ Marcel Ziswiler <marcel@ziswiler.com>, Bin Meng <bmeng@tinylab.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, Yixun Lan <dlan@gentoo.org>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
+ Samuel Holland <samuel@sholland.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
  Padmarao Begari <padmarao.begari@amd.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734158705; l=4836;
- i=pericycle.cc@gmail.com; s=20241109; h=from:subject:message-id;
- bh=j1IVC2FCsDEEngdbkGqhy1M1BPHaQE05WluCeKeM7Pg=;
- b=CO5/b4PL6q6dvyNY9sooZDZ0BGcVMRT5PRjDl2VExBPr4OCwPtl6XGNJsOo54P8o+U60bCErq
- 09y+VfUupWdDYagasnnuudIPOagL9iKHfVKmavkJES9qshFgSoAl75v
-X-Developer-Key: i=pericycle.cc@gmail.com; a=ed25519;
- pk=Wd3eEYWh1pNETTTXjX4aeanCWrr201iLaYYW5G1BdbU=
+Subject: Re: [PATCH v6 0/2] riscv: spacemit: add support for bananapi-f3
+Message-ID: <20241214065227.ebzq66trwo7tonjm@per1cycle.per1cycle>
+References: <20241214-pickup-bpif3-v6-0-306355826455@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241214-pickup-bpif3-v6-0-306355826455@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,158 +109,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kongyang Liu <seashell11234455@gmail.com>
+This version of patch does need addition review or test, only small comment change and 
+another doc update.
 
-Add document for Banana Pi F3 board which based on SpacemiT's K1 SoC.
-
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
-Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
----
- doc/board/index.rst                |   1 +
- doc/board/spacemit/bananapi-f3.rst | 106 +++++++++++++++++++++++++++++++++++++
- doc/board/spacemit/index.rst       |   9 ++++
- 3 files changed, 116 insertions(+)
-
-diff --git a/doc/board/index.rst b/doc/board/index.rst
-index b54c1748d57ece029f0f3ab829956dc893e7f5d7..b1c470eb2cbb1c07f907eb2282039520c219c72a 100644
---- a/doc/board/index.rst
-+++ b/doc/board/index.rst
-@@ -55,6 +55,7 @@ Board-specific doc
-    sipeed/index
-    socionext/index
-    sophgo/index
-+   spacemit/index
-    st/index
-    starfive/index
-    ste/index
-diff --git a/doc/board/spacemit/bananapi-f3.rst b/doc/board/spacemit/bananapi-f3.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..54b412775e458ee7a8cd436d7a1f1c6ac70744f6
---- /dev/null
-+++ b/doc/board/spacemit/bananapi-f3.rst
-@@ -0,0 +1,106 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+Banana Pi BPI-F3
-+============
-+
-+Building
-+~~~~~~~~
-+1. Install the spacemit riscv cross compile toolchain_, or skip it if riscv toolchain is installed.
-+
-+.. _toolchain: https://archive.spacemit.com/toolchain/
-+
-+2. Setup cross compilation environment variable:
-+
-+.. code-block:: console
-+
-+   export CROSS_COMPILE=<riscv64 toolchain prefix, e.g /opt/spacemit/bin/riscv64-unknown-linux-gnu->
-+
-+3. Before building U-Boot, OpenSBI should be built first. OpenSBI can be
-+built for SpacemiT K1 SoC as below:
-+
-+.. code-block:: console
-+
-+   git clone https://github.com/cyyself/opensbi -b k1-opensbi
-+   cd opensbi
-+   make PLATFORM=generic
-+
-+4. Then build U-Boot as following:
-+
-+.. code-block:: console
-+
-+   cd <U-Boot-dir>
-+   make bananapi-f3_defconfig
-+   make OPENSBI=<OpenSBI-dir>/build/platform/generic/firmware/fw_dynamic.bin
-+
-+This will generate u-boot.itb
-+
-+Burning
-+~~~~~~~~
-+Actually, we can replace the uboot part from bianbu linux which is the bsp_ to validate this patch,
-+use `balena etcher` to burn the bianbu-minimal.img to the sd card,
-+and replace the /dev/sdx4 where places the uboot_ with the `u-boot.itb` generated from this patch.
-+Or use fastboot:
-+Collect FSBL.bin, u-boot.itb, partition_2M.json, bootinfo_spinor.bin
-+u-boot-env-default.bin, fw_dynamic.itb from vendor sdk
-+
-+.. code-block:: console
-+
-+   fastboot stage FSBL.bin
-+   fastboot continue
-+   fastboot stage u-boot.itb-vendor # the itb from vendor uboot
-+   fastboot continue
-+
-+   fastboot flash mtd partition_2M.json
-+   fastboot flash bootinfo bootinfo_spinor.bin
-+   fastboot flash fsbl FSBL.bin
-+   fastboot flash env u-boot-env-default.bin
-+   fastboot flash opensbi fw_dynamic.itb
-+
-+   fastboot flash uboot u-boot.itb-mainline # the itb from mainline uboot
-+
-+.. _bsp: https://archive.spacemit.com/image/k1/version/bianbu/v2.0/
-+.. _uboot: https://bianbu-linux.spacemit.com/en/device/boot#21-firmware-layout
-+
-+Booting
-+~~~~~~~
-+Sample boot log from Banana Pi BPI-F3 board
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+.. code-block:: none
-+
-+   try sd...
-+   bm:3
-+   j...
-+
-+   U-Boot SPL 2022.10spacemit-dirty (Oct 21 2024 - 09:01:13 +0000)
-+   [   0.279] DDR type LPDDR4X
-+   [   0.292] lpddr4_silicon_init consume 13ms
-+   [   0.293] Change DDR data rate to 2400MT/s
-+   [   0.430] ## Checking hash(es) for config conf-1 ... OK
-+   [   0.432] ## Checking hash(es) for Image opensbi ... OK
-+   [   0.437] ## Checking hash(es) for Image uboot ... OK
-+   [   0.443] ## Checking hash(es) for Image fdt-1 ... OK
-+   [   0.488] ## Checking hash(es) for config config_1 ... OK
-+   [   0.490] ## Checking hash(es) for Image opensbi ... crc32+ OK
-+
-+
-+   U-Boot 2024.10-rc4-00462-g5b138cfcc587-dirty (Nov 28 2024 - 14:56:49 +0800)
-+
-+   DRAM:  4 GiB
-+   Core:  19 devices, 8 uclasses, devicetree: separate
-+   Loading Environment from nowhere... OK
-+   In:    serial@d4017000
-+   Out:   serial@d4017000
-+   Err:   serial@d4017000
-+   Net:   No ethernet found.
-+   => cpu list
-+   0: cpu@0      spacemit,x60
-+   1: cpu@1      spacemit,x60
-+   2: cpu@2      spacemit,x60
-+   3: cpu@3      spacemit,x60
-+   4: cpu@4      spacemit,x60
-+   5: cpu@5      spacemit,x60
-+   6: cpu@6      spacemit,x60
-+   7: cpu@7      spacemit,x60
-+   => test
-+   =>
-+
-diff --git a/doc/board/spacemit/index.rst b/doc/board/spacemit/index.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..e7d3d94e4599fbeb8da16c8a837e777a0be06227
---- /dev/null
-+++ b/doc/board/spacemit/index.rst
-@@ -0,0 +1,9 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+SpacemiT
-+========
-+.. toctree::
-+   :maxdepth: 1
-+
-+   bananapi-f3
-+
-
--- 
-2.39.5
-
+On Sat, Dec 14, 2024 at 02:44:59PM +0800, Huan Zhou wrote:
+> Banana Pi F3 board is a industrial grade RISC-V development board, it
+> design with SpacemiT K1 8 core RISC-V chip, CPU integrates 2.0 TOPs AI
+> computing power. 4G DDR and 16G eMMC onboard. 2x GbE Ethernet port, 4x USB
+> 3.0 and PCIe for M.2 interface, support HDMI and Dual MIPI-CSI Camera.
+> 
+> This patch introduces fundamental support for the Banana Pi F3 board,
+> encompassing UART, CPU, and PLIC support. This ensures that U-Boot can
+> operate in serial console mode.
+> 
+> Changes in v6:
+> - Rebase the patch to the latest branch.
+> - Add small comment in bananapi-f3.h
+> - Add tag in previous patch(e.g reviewed by or tested by)
+> - Add fastboot burn procedure in doc.
+> - Link to v5: https://lore.kernel.org/r/20241209-pickup-bpif3-v5-0-92f801b7c6c1@gmail.com
+> 
+> Changes in v5:
+> - Formal the name from Bananapif3 -> Banana Pi BPI-F3
+> - Trailing whitespace
+> - New blank line at EOF in spacemit/index.rst
+> - Link to v4: https://lore.kernel.org/r/20241129-pickup-bpif3-v4-0-e99fabf66e33@gmail.com
+> 
+> Changes in v4:
+> - Change uart compatible in k1.dtsi in v3, cause related driver in not implemented in u-boot.
+> - Update doc, show how to validate the patch.
+> - Update maintainer, remove kongyang cause he lefted.
+> - Link to v3: https://lore.kernel.org/r/20241114-pickup-bpif3-v3-0-98a45802ab79@gmail.com
+> 
+> Changes in v3:
+> - Add base commit
+> - Clear redifinition warning while building in UART_IIR_ID
+> - Change underscore to dash in bananapi*f3
+> - Update maintainer
+> - link to v2 https://lore.kernel.org/u-boot/20240718043329.1500-1-seashell11234455@gmail.com/
+> 
+> Changes in v2:
+> - Change license to GPL-2.0-or-later
+> - Add memory node for dts
+> - Add ft_board_setup function for kernel memory init
+> - Use default prompt
+> - links to v1 https://lore.kernel.org/u-boot/20240714150828.736-1-seashell11234455@gmail.com/
+> 
+> Signed-off-by: Huan Zhou <pericycle.cc@gmail.com>
+> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+> Tested-by: Marcel Ziswiler <marcel@ziswiler.com>
+> ---
+> Kongyang Liu (2):
+>       riscv: spacemit: bananapi_f3: initial support added
+>       doc: spacemit: bananapi_f3: document Banana Pi F3 board
+> 
+>  arch/riscv/Kconfig                     |   5 +
+>  arch/riscv/cpu/k1/Kconfig              |  18 ++
+>  arch/riscv/cpu/k1/Makefile             |   6 +
+>  arch/riscv/cpu/k1/cpu.c                |   9 +
+>  arch/riscv/cpu/k1/dram.c               |  54 ++++
+>  arch/riscv/dts/Makefile                |   2 +
+>  arch/riscv/dts/k1-bananapi-f3.dts      |  25 ++
+>  arch/riscv/dts/k1.dtsi                 | 459 +++++++++++++++++++++++++++++++++
+>  board/spacemit/bananapi-f3/Kconfig     |  25 ++
+>  board/spacemit/bananapi-f3/MAINTAINERS |   6 +
+>  board/spacemit/bananapi-f3/Makefile    |   5 +
+>  board/spacemit/bananapi-f3/board.c     |   9 +
+>  configs/bananapi-f3_defconfig          |  20 ++
+>  doc/board/index.rst                    |   1 +
+>  doc/board/spacemit/bananapi-f3.rst     | 106 ++++++++
+>  doc/board/spacemit/index.rst           |   9 +
+>  include/configs/bananapi-f3.h          |  13 +
+>  17 files changed, 772 insertions(+)
+> ---
+> base-commit: b0b6d0c87082813aada4c052a8b4e20c257dbbda
+> change-id: 20241112-pickup-bpif3-245ab208b9a4
+> 
+> Best regards,
+> -- 
+> Huan Zhou <pericycle.cc@gmail.com>
+> 
