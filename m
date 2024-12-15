@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E2E0E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 13:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FA2E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 14:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3346D80040;
-	Sun, 15 Dec 2024 14:24:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B7DE58005D;
+	Sun, 15 Dec 2024 15:03:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y+PNP4aK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ug5F7CMD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47C408004F; Sun, 15 Dec 2024 14:24:10 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 3BB7080050; Sun, 15 Dec 2024 15:03:53 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED70C8001F
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 14:24:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D62180040
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 15:03:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-30034ad2ca3so26924271fa.1
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 05:24:07 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7b6ff72ba5aso159326585a.1
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 06:03:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734269047; x=1734873847; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1734271430; x=1734876230; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AspOJNSW3qiBqml6bQs7edXRSwXqzkwUAmtvazEPGUY=;
- b=Y+PNP4aKGmeERvVf/oqr3oQfP5aaJ8BUDVvGcXQkleP84daW5a4jSqHiNgaQTZjS8c
- 8wAnMDCrhhkQZv+qs1kq2u0r+GFkBuBNiwd3g2qiGs/akkM9Vi3xL0UjJtTvf72y0piR
- VR+zVCJi8PiuCJEp+MRq0lhs3XmxSjYMtuWp6AZBu3ktuf5gWav8mFfMJYBrferpYGX4
- H7zHFn6BO0j3zYs/ZBpqIuV1G1RkwKPZN890qoqp04IGygGf1820348RFcm0HFnhJiDw
- rqBmx/qfXfgxCsmLhrsJUNcrswA2tDtl7LFDjvh5hdIf3lYvNaLn//gbwDCdaPS+nn8Z
- 0BWw==
+ bh=Vo6V1fHD0D02rGD2DMJ4JlWwNw6IUycFI48VGdByRHs=;
+ b=ug5F7CMDCiCjGE4LhL7e9mDgowNGS0GXdgbHDH2PIAntuiCQWHA6+AM8302TbKEmR9
+ UOQ/Y9sEoSmMjdR44fydEaHxfHxzdx0LeGC2tTNLpeHCGI+dREXKmq+84VMoeJF/lwak
+ 4gI0grjtPqSlr1t++3S/g67ZJLT9ACjJ1zTfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734269047; x=1734873847;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1734271430; x=1734876230;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AspOJNSW3qiBqml6bQs7edXRSwXqzkwUAmtvazEPGUY=;
- b=BUJAmohpjPnRWSKQrWK/uOrvC4qSIEHphUsDQep5b7+9hBgNiZoE9/rorT23sNjhHH
- 2PVyaHdmkzeFva2BE17WbR12GdpFSOOu+u5nPBKqS1rM94+6+3C1aSm7BPzZg5nhv4Q8
- xhCqWUgY3lCVO/WGAhDiNSaPwsH0jBay4eMCwP0MlQf4EPhsib7/+ymGVFIncDn6r3Ic
- gA2x6VvcHsv/1oPRmqIfVsN+ePTlqSQ1p/D+bZ1I117oTA2ygkF2BS1zb4TooMqsBzvM
- c8GCaCa6tBZN9/RrdSHjLcIcZgfeJSWgiqqhUTCk9ekHZDRFwuRTdii1NXk/VITCRn4V
- gB5g==
-X-Gm-Message-State: AOJu0Yw4EBqyMXUMwg8PWJFFfs1OFdhzjLDiHyeqYW8NrTeK9rYm1onG
- s8lBCZVthqZQWdKpgx44bGz274YcsF0ReHN4b97mc/5SHsZ49R0BxbCkg6WXzGit+ilWevzJxSR
- 2iSQlJwWLBWtUmfmqqV6bc/jeQwax9qAw
-X-Gm-Gg: ASbGncuqsZkl0GVzfejlHxgqcs/shUOHwCWxzxUGA7qcGqEG2ly+mTe0FlNyQudh4AG
- vjKtphVpwGyVRRXggANnevvOjuXJM97C/t+Gy/vfGL0ezvvyh5suN7AAD99Dj+p+wHra7
-X-Google-Smtp-Source: AGHT+IFVT5DjQl7Cco0Ys1q5RZmrJeGW1lrVYmPZXbx9SW8ebF76Hqa9HbRQQXKkJRmD1WGe/U3hmX94AXU0u1G7DVU=
-X-Received: by 2002:a05:6512:3996:b0:540:1d58:da7b with SMTP id
- 2adb3069b0e04-5408ad7f99dmr2719655e87.11.1734269047048; Sun, 15 Dec 2024
- 05:24:07 -0800 (PST)
+ bh=Vo6V1fHD0D02rGD2DMJ4JlWwNw6IUycFI48VGdByRHs=;
+ b=sUEhgMrPgww/ILi4Zhkuq+zR9UXxPUXe6bM5uQWA72QS9JlNwf0V37+KkW5GBBzEwc
+ aP6CwXiHlMpsbnKKYrSGUZYauSOsaqc93a3onVbWJ9cnzUnGT4GNZPuV4xfEhy0pl017
+ HWkS67gL+h1369sy/6Nx3gL//BOBxj0Wn86uiCqbQwz4dl9W6JPq1TlxuByUauTTb88F
+ 7k+IYZUjpnoOz79Y+7nSkWTprf0yWYFtjTpenIY9QRPmWxbnfPmD4QQUZm7MkOtifj1v
+ obIFz/GPtWRr9F/69ZisGINRzw7iBz99H8fiww2OLW3BU/gXDbZvgNCtgh862Z3d4Avx
+ oJFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrJ5KsVGE9NoMU6edl0QiyGi2obi5VmKaQBDIiGqIyzHlsxceziQbnAmFpXkMGGqWDA3otX80=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVnl/rAIcMXgtgHsYYS6wRTuRIfozITJIytDh4+0Cl0yk1+A4I
+ HNN7RSiBPWt8fuvrkue5RrsSU7NiB0D/CwduYrU0TYhqssFA35cKkZ7jAxI5/ck=
+X-Gm-Gg: ASbGnctrGKcOZfEXBxA/SZM10z0FltmtLLeC3/G7oTdUILg57yXnNPsmu2Y0PYNF9Uy
+ L0fsIuURXB3kscImPpnPzU4G/lrACPBf5BlKfshClbOVa2dvNFbifzhSdiU2AHVlmKit2KWWeiK
+ LIozJ3ghd2mDwYtkq96abLo9abnOn+vetsSYpOnHj3gv5GRUQiPDwz7yT6bf26NGL+bXHPbmgRx
+ 36TvLhRIeOomxpkD5M+NGG3yu8cXly3DAz1CpCMjB8yEMrw5x9axO8=
+X-Google-Smtp-Source: AGHT+IFBmCwytkwUa/6gyjtdhquzM+ZdMO6XIby7Lhe1CHa7/fbPIS5d9bUapscdPXrRKKgapb/a/g==
+X-Received: by 2002:a05:620a:2690:b0:7b6:e931:460a with SMTP id
+ af79cd13be357-7b6fbee660emr1716777485a.21.1734271429823; 
+ Sun, 15 Dec 2024 06:03:49 -0800 (PST)
+Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b7048bd82asm139942785a.82.2024.12.15.06.03.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Dec 2024 06:03:49 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Gokul Praveen <g-praveen@ti.com>
+Cc: sjg@chromium.org, rasmus.villemoes@prevas.dk, sr@denx.de, 
+ pbrobinson@gmail.com, jonas@kwiboo.se, u-boot@lists.denx.de
+In-Reply-To: <20241126105131.43359-1-g-praveen@ti.com>
+References: <20241126105131.43359-1-g-praveen@ti.com>
+Subject: Re: [PATCH 0/2] UART support for higher baudrate
+Message-Id: <173427142791.1931614.16747957994473568570.b4-ty@konsulko.com>
+Date: Sun, 15 Dec 2024 08:03:47 -0600
 MIME-Version: 1.0
-References: <CAJvHTNwFr4B=aNomxJ+davqz6eWG59E7H2Zh8=UnROsPyu=tuw@mail.gmail.com>
-In-Reply-To: <CAJvHTNwFr4B=aNomxJ+davqz6eWG59E7H2Zh8=UnROsPyu=tuw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 15 Dec 2024 10:23:55 -0300
-Message-ID: <CAOMZO5Dvyom8AyO0RpkcrCdk_349Mxum4Lc=o28fZBQGZEBCiA@mail.gmail.com>
-Subject: Re: clang: error: unsupported option '-ffixed-x18' for target
- 'arm-linux-gnueabi'
-To: Jack Andrews <effbiae@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,26 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 15, 2024 at 10:07=E2=80=AFAM Jack Andrews <effbiae@gmail.com> w=
-rote:
->
-> thanks for uboot!
->
-> i'm trying to build uboot for raspi 4.
-> these steps produced warnings and a compile error
-> ```
-> $ git clone https://source.denx.de/u-boot/u-boot.git
-> $ cd u-boot/
+On Tue, 26 Nov 2024 16:21:29 +0530, Gokul Praveen wrote:
 
-> $ make CC=3Dclang rpi_4_defconfig
-> clang: error: unsupported option '-ffixed-x18' for target
+> The OMAP specific UART driver is changed from a generic implementation of
+> certain ops functions to an OMAP specific implementation of it to add
+> support for higher baudrates for OMAP devices.
+> 
+> Hence to support the above change, static functionality of ops functions
+> in generic ns16550 UART U-Boot driver is removed and also migrated certain
+> macros to its header file for usage in device-specific drivers.
+> 
+> [...]
 
-rpi_4_defconfig is a 64-bit target according to
-doc/board/broadcom/raspberrypi.rst.
+Applied to u-boot/next, thanks!
 
-export ARCH=3Darm64
-export CROSS_COMPILE=3D/usr/bin/aarch64-linux-gnu-
-make rpi_4_defconfig
-make
+-- 
+Tom
 
-In your case, you need to use a 64-bit clang.
+
