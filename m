@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4650E7717F
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E104E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:48:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65500800CF;
-	Sun, 15 Dec 2024 17:48:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B90D0800B5;
+	Sun, 15 Dec 2024 17:48:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sHaE8tz+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/BWEd/b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 194A28006E; Sun, 15 Dec 2024 17:48:44 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 1CCC480086; Sun, 15 Dec 2024 17:48:52 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0E1F80050
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:48:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ADDC80050
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:48:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6d89dc50927so25193116d6.3
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:48:41 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d89dc50927so25193496d6.3
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:48:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734281320; x=1734886120; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734281328; x=1734886128; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l3qHZ1i3urxpu/YyuPJLRjiLbvgncD4ohGaJ68nU1N4=;
- b=sHaE8tz+R4IxBcvRYonuAV5hyearKCKztl+4a6r9ljT8Ss475tTt5Tss1LLkNZbRwO
- Ov7bkPNN9cvpVAk4kidBZUD1H8kcuRe0xKgxZ1DAKjRJGjnkw/G3jjBoyi+Ri8hcXBm5
- oe+c1JpaEOe0CvalO8i5dhYyIbDQns5g8CqQU=
+ bh=pkzzgG8auriSH0wi2qDuaTcOTHLwXpMJcnFKviuUotA=;
+ b=X/BWEd/bb597z3TSIrebTU4tJHepvDML/v1jplQ5oxl5scOof4Za59wzUSRZKZYcwy
+ G2ccdJXyMFUkgOX4iXRxVg16XKnXivjJ6+dv5eP/nINmoBcT0XLhcTw526XP5hcF6CWG
+ 3Tz6OqHnrQv/nSZ+i17X1tWI144fW+Q4VHef4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734281320; x=1734886120;
+ d=1e100.net; s=20230601; t=1734281328; x=1734886128;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l3qHZ1i3urxpu/YyuPJLRjiLbvgncD4ohGaJ68nU1N4=;
- b=rB60NUA/HLZy/0ihfdPz8fMXdjQ2P98/p50ctDMWr8BaoELvahwmjefRaapYSWUX0F
- ouy8ca99mkR1sbFc1VaB7b5XOXGvXWKogWfMQi9rluhoZ2V+n5V6AJ1dSQeVE4MkEqJF
- kxsWTjZVHXHrnWo1bjYmNA/A6n1VKYYS/nT4jX6vMAdFcj29brt+4tN5VEEvXK1aREdV
- bj2wRgmuDnHXZp3Fvj0iTmHffST2Cz7AoQyJpAQsWJg4l/IU6/dyxVYwLJ1ILEDVjr/j
- tHqWGSeTAavowpp/fijwJZFWLIG4smMN4gnliiZSwLn6OQJZykDJBjuRETxS9jMDblBI
- 5jRA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVjNIZHW/OM80M+eqVpOQV2sKDYqSNrAsjkXPMIX4MO1shdGp9TlBn0ceq2EOtorm4azGjjHW8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRautSEhW1/P3DRNunXnPHUf9Ue1C7uguoOPwIDPw1eoBEaqKH
- zy2pWPPnSixABcVXisnYVUOgTj8ziaOp2n7L8O4EwDOxEfp53NSx/3g4Xy+NGpc=
-X-Gm-Gg: ASbGncureaxcFH6TPOKNrYquCD70cS15gPtZNH+QGlWyge2q4wAFXQaGBAWwnUbB37H
- 7Hyy7RWGRUvevZfNTwkKyBuzi6Ow5rAeexDeeYRANuDFA/wD8cA4kxwjhSJwVmgWb7ifiK3YxO4
- pOPaD++q4d0vW4E0NnpNv2dPzzubuIYvfUKMXuZmcwb5KxBdZoYThNZ1NGZLqIN1dMWukvh4Q3n
- vfGG44LrUfPOE1AX0oY1g2YbFOcHQXGZyaUJ0KdhsZJwYGyz27KsajL
-X-Google-Smtp-Source: AGHT+IHP7AiEyceLVlPslcp7CZ6EYYlQM0vrCO6AFcERJ2RLVVHqEwUTakOS86gt5RlPDJlywCtVmA==
-X-Received: by 2002:a05:6214:19c3:b0:6d4:36ff:4356 with SMTP id
- 6a1803df08f44-6dc8ca74ec1mr194104246d6.19.1734281320544; 
- Sun, 15 Dec 2024 08:48:40 -0800 (PST)
+ bh=pkzzgG8auriSH0wi2qDuaTcOTHLwXpMJcnFKviuUotA=;
+ b=ohWRXLeAcNnqrzYwns+3Hloew9xqQpkAryQh/uKYrgWnX47m1xoKX0dpHx8rY2I8g0
+ gE+g71nPpvV+zuI8Ln1LgCYBdCWJCC+yvwYZ4FgrpCPe9ROc0jU6QqAQL4cBnTk9i/s0
+ urTZJn1lSroemlT0X4LPrqmT6hYfWyciHAgbFDmLK8Mi8F+BTRGP/AQ7TwzW3YBLZHy8
+ XGrArcd9J5VFns3yTsjRNIeL3YwOQaHvEkDv438OrOKsHqSl7G+OgST00ntuGxZ1Fdfd
+ cgXS9dMjf/ONxVYtVVgecQ919K7RhDagjBydVoO4KbDEhnjrICCKiq8nfmlmOhJJUAxm
+ wqHg==
+X-Gm-Message-State: AOJu0YzgXv/kauOLu9ctc6LnvEW5ec73TdI5oi+xwMagPg99+62fV8WW
+ WADGmcdHCWqye67AiSE6+tL6CMjDBsWQDVavAbEVroVjlJ+kZqAKq8fJJj60oho=
+X-Gm-Gg: ASbGncvc/gYMnm5r/hLGuOBFyTB3+PD1nCbL1cqIeBo6ahk/csRUBO5sXVang1bZlz/
+ c6qKJsG75X4bA9Li9mFxQBNDrCNpEfnojAX8C5Z4vdKH7aHHSAgWqARv4xpzbxcECuhTYm+1Seu
+ vq3tiTUDXHXgaPXOiAgREGxhoHUjyIZBhbN9/IN32WlV42Sli/17Kkx4jGsWqepXP49ARjrzW+2
+ NeU3lBXrTOHT3/s+nio7yeRscZZSsSyhokdoridBXpfSSMiPM/vvTBq
+X-Google-Smtp-Source: AGHT+IHPMyUK2Z2LD1TxLEeJejpxr2qoZXaGczkqfXgyK+KGp3PkXBLlKKAeGoz3jXSL9Uj0ZgxkAA==
+X-Received: by 2002:a05:6214:f6c:b0:6ce:2357:8a2e with SMTP id
+ 6a1803df08f44-6dc9684fd5dmr172422246d6.37.1734281328403; 
+ Sun, 15 Dec 2024 08:48:48 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dccd26d07asm18337326d6.58.2024.12.15.08.48.38
+ 6a1803df08f44-6dccd38074dsm17986006d6.118.2024.12.15.08.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 08:48:39 -0800 (PST)
-Date: Sun, 15 Dec 2024 10:48:37 -0600
+ Sun, 15 Dec 2024 08:48:47 -0800 (PST)
+Date: Sun, 15 Dec 2024 10:48:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Levi Yun <yeoreum.yun@arm.com>
-Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
-Message-ID: <20241215164837.GC1505244@bill-the-cat>
-References: <20241213225543.392282-1-raymond.mao@linaro.org>
- <20241213225543.392282-2-raymond.mao@linaro.org>
- <CAC_iWjKwm9uC09mE-Fbq6V_2tzf9DV1GrLmh2Qn=BpNSGA9irg@mail.gmail.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: Re: [PATCH] arm64: renesas: Align configuration headers
+Message-ID: <20241215164844.GD1505244@bill-the-cat>
+References: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="A363pmS6kV04emw9"
+ protocol="application/pgp-signature"; boundary="OGUD+kHzRGF3D4ws"
 Content-Disposition: inline
-In-Reply-To: <CAC_iWjKwm9uC09mE-Fbq6V_2tzf9DV1GrLmh2Qn=BpNSGA9irg@mail.gmail.com>
+In-Reply-To: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,85 +95,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---A363pmS6kV04emw9
+--OGUD+kHzRGF3D4ws
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 15, 2024 at 09:34:32AM +0200, Ilias Apalodimas wrote:
-> On Sat, 14 Dec 2024 at 00:56, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Get tpm event log from bloblist instead of FDT when bloblist is
-> > enabled and valid from previous boot stage.
-> >
-> > Note:
-> > This patch depends on:
-> > [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
-> > https://lore.kernel.org/u-boot/20241212151142.1562825-1-trini@konsulko.=
-com/
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  lib/tpm_tcg2.c | 7 +++++++
-> >  1 file changed, 7 insertions(+)
-> >
-> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
-> > index 7f868cc883..acaf0acb88 100644
-> > --- a/lib/tpm_tcg2.c
-> > +++ b/lib/tpm_tcg2.c
-> > @@ -19,6 +19,7 @@
-> >  #include <linux/unaligned/generic.h>
-> >  #include <linux/unaligned/le_byteshift.h>
-> >  #include "tpm-utils.h"
-> > +#include <bloblist.h>
-> >
-> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *ac=
-tive_pcr,
-> >                       u32 *pcr_banks)
-> > @@ -672,6 +673,12 @@ __weak int tcg2_platform_get_log(struct udevice *d=
-ev, void **addr, u32 *size)
-> >         *addr =3D NULL;
-> >         *size =3D 0;
-> >
-> > +       if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) && !bloblist_maybe_=
-init()) {
-> > +               *addr =3D bloblist_get_blob(BLOBLISTT_TPM_EVLOG, size);
-> > +               if (*addr && *size)
-> > +                       return 0;
-> > +       }
-> > +
-> >         addr_prop =3D dev_read_prop(dev, "tpm_event_log_addr", &asize);
-> >         if (!addr_prop)
-> >                 addr_prop =3D dev_read_prop(dev, "linux,sml-base", &asi=
-ze);
-> > --
-> > 2.25.1
-> >
->=20
-> Tom, this is a mix of TPM & bloblist series. Do you want me to carry
-> them via the TPM tree?
+On Sat, Dec 14, 2024 at 11:45:11PM +0100, Marek Vasut wrote:
 
-Yeah, that works, thanks.
+> Align R-Car Gen2/Gen3/Gen4 configuration header file to look
+> basically the same way across these three SoC generations.
+> There are subtle difference between the remaining bits in
+> those files across SoC generations, but the common bits are
+> now aligned. There is not much left in those headers either,
+> most of the configuration is now converted to Kconfig.
+>=20
+> Specifically for R-Car Gen3, GIC registers have been moved
+> to architecture specific header file rcar-gen3-base.h , the
+> rest of the changes here are comment changes and indentation
+> changes.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  .../include/mach/rcar-gen3-base.h             |  5 +++++
+>  include/configs/rcar-gen2-common.h            | 10 ++++++----
+>  include/configs/rcar-gen3-common.h            | 19 ++++++-------------
+>  include/configs/rcar-gen4-common.h            |  8 +++-----
+>  4 files changed, 20 insertions(+), 22 deletions(-)
+
+This is good. As a follow-up, since it's a functional change, can we
+just switch to the default CFG_SYS_BAUDRATE_TABLE of { 9600, 19200,
+38400, 57600, 115200 } ?
 
 --=20
 Tom
 
---A363pmS6kV04emw9
+--OGUD+kHzRGF3D4ws
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCGUACgkQFHw5/5Y0
-tywkvgv/Y8ztnlGEBHv8aRoWLpwM8kYUIFOdXRc7OWGej0vQRtGuopyj3g6bhltA
-bhQ0pN/bNjEq4H7bwszh34nYu5ChWd2QnMUXnB/1ZaSuVk2BwKSGMkY6d9AyI6Fu
-PmVz/9vgsjKNgcUqK98q4hKkcnGuuAzynoAi6TLM7Lf12QmnTYZV2SsC96bmtN7D
-7+4UQqqxh8oabBmLaJ5P849I34S/5RiV3zbW18iekqhWZWOcGAXnhHrYdTSfcR4K
-/wlCAb9Tk5EzStp5ybzdSLkK8COFGgGUk/N9GhnLKF4cfyqxqam0SEWBQHfYKDea
-c9NJEJlBb9tQwq7OB08jkjDJ/c5PT1G2JOjF1n3bhnD27We5K9NhI6AE6wqJGP55
-ug2hH3PaoSH9SIuy0gDFTgCaAhDfrHRjoKGVA/CQ6+1wINg9UoPt3XYcZJB7ee0o
-N89aDf2XYHZj01LWs3z5+HAkKKbF4GzJoL0ElK/lDoOdMt0RpxIqso2nFGzmunNx
-wkBbBtif
-=a6af
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCGwACgkQFHw5/5Y0
+tyyROwv/btsbWJG3XOPBvZyaJBeCqbsM3D18sNikN6hRC1BwImqrdhCn+IYJ24F5
+Uwq1BewK5vCgi+30cNQqwqrD5IcGSy8bTPlqKHirszIAk8CQuByz63Lo0Hq2MqKm
+fOFgrHUiMpumnBxrlcD+eX66fj8u8o106AwmNiyESKwG59gz7ypK/r90FuzeBDLf
+gtgPcMW2tyl4h738/7GaccGvmbR4yDwqIlC2Sh1qa2H2dmDa+ejCobh+m9GSTtha
+fd0TuJIko+H1D76ZOIgJhzv1Kzki036juVgsh7ms7v5iXw5a/S8BpQclCt50AksV
+64sP5PwW6Xl1o3wfYDYHj06RsvZEydxILFt0Pnlybz+fU0EDeNgehy6unGu+GtbU
+/l3sPD7NaCJeSo2QXTlvVuzwe9oOmC5z2Gx6yG6VU13RewrqEk9NiKxHSxmEieRu
+EFUvMKrgCfTutRSps348isUB96kBTN4W/Ivd1K/UV1cZAU4GsuL0161pZ+vBfKbV
+SJclWlYJ
+=m5GF
 -----END PGP SIGNATURE-----
 
---A363pmS6kV04emw9--
+--OGUD+kHzRGF3D4ws--
