@@ -4,40 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA0BE7717F
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 22:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66C99E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 23:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 686C68005B;
-	Sun, 15 Dec 2024 23:14:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9724880104;
+	Mon, 16 Dec 2024 00:30:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1734305446;
+	bh=fbxqsGpQ52zL7e/JI6Kh5yJz3imCihdPuGVdQch2H8Y=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=Dr/ofhTtgfzB+yIGLDxg19xqsmobhfqMqoRdIQdQn+tMKgr+l6S+D/WHIEzLx07uw
+	 BFoIh3GPiY9gOHyES+OCYha2eRQWcVB2hJ7UZ60OTp/Y9kMNvA7DiGCVoRskUFiB2a
+	 rqn0ikbQa7SwzjQmeaL67ZdfUwRrXwx8PARZcfIRu0BFMzXYe1bxKrh5KZQHaQqs4l
+	 E17CZGoEX+Vqn1HV/NseqrkSVI5B1MNeguBhns7nRSsKIEfK+n4jDxZGWiDCtf6Xhq
+	 n5SS+23iZRlGMk/hk0wFCXHkIT82sopSTPEasCayo5N+svbXdoifcqZ2X5VXni7t28
+	 6AnZt5crosONA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EDC380083; Sun, 15 Dec 2024 23:14:22 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 06C8080050
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 23:14:20 +0100 (CET)
+ id 24EE080192; Mon, 16 Dec 2024 00:30:45 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F20FB8005B
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:30:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3074B11FB;
- Sun, 15 Dec 2024 14:14:47 -0800 (PST)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 214833F720;
- Sun, 15 Dec 2024 14:14:18 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Chen-Yu Tsai <wens@csie.org>, Leon Anavi <leon.anavi@konsulko.com>,
- lhristov@gmail.com
-Subject: [PATCH] power: pmic: sunxi: guard DCDC5 separately
-Date: Sun, 15 Dec 2024 22:13:31 +0000
-Message-ID: <20241215221331.28461-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.46.2
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Lyckr3Wa"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 9F9A71048B8CC; Mon, 16 Dec 2024 00:30:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1734305441;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=fbxqsGpQ52zL7e/JI6Kh5yJz3imCihdPuGVdQch2H8Y=;
+ b=Lyckr3WahWKaCI9kb3HBEu+x0+LogclqMqE1kR2FDJaY8e3bNaiLqT+2S0gj751lF6XVXO
+ kjTeW8XKB+J1qg8TbqlNBLGEt4FYLNekw/ZihOHfuHXMmYndlkG9BZwNfXCBglrw+Yk2+v
+ xNRaEl+FYynM6eoo6UfCs+If+C4nFocuWIJwisEK0gyXnETV0+6km4cGWcCsMI7Ot0s8JB
+ tYqbYRixp5BYwE1CqtoCp3meEc2Vq164mGBdwxymZVOwWtaYt18tfSq40Knx24ApQK63HU
+ HxvyIHG+I8XwjEG1+RSDmc3feRLW1apgdQfO/XScfIp1nk7hlz7eiOXGD4Ywvg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 1/4] ARM: dts: stm32: Reinstate missing root oscillators on DH
+ STM32MP15xx DHCOR
+Date: Mon, 16 Dec 2024 00:29:12 +0100
+Message-ID: <20241215233011.569287-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,52 +80,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So far all sunxi boards programming the DCDC1 power rail on the AXP PMIC
-also set the DCDC5 rail, so we could handle both with the same DCDC1
-guard.
-Some boards using the AXP313 will need to set DCDC1 now as well, and
-since the AXP313 only has three buck converters, there will be no DCDC5,
-so this trick is not going to work anymore.
+The root oscillators reference used to be in rcc node since
+3d15245502c4 ("ARM: dts: stm32mp1: explicit clock reference needed by RCC clock driver")
+however this is not part of upstream stm32mp151.dtsi . The
+RCC driver does need this reference, reinstate it locally.
 
-Don't try to be too clever, and just protect programming the two DCDC
-rails with two separate guards.
-
-This has the interesting side effect of fixing operation on A80 boards,
-using the AXP809 PMIC. Apparently programming DCDC5 right after DCDC1,
-but before the other three rails caused some glitch, which made the board
-hang during Linux boot, during the PSCI handler in U-Boot. Just keeping
-the old setup order (DCDC1,2,3,4,5) will make those boards boot to the
-Linux prompt again.
-
-Fixes: ffb02942fab024d4a9b6a ("sunxi: board: simplify early PMIC setup conditions")
-Reported-by: Leon Anavi <leon.anavi@konsulko.com>
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- board/sunxi/board.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+NOTE: For 2025.01
+---
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-index 824c322a0dc..9c340908a96 100644
---- a/board/sunxi/board.c
-+++ b/board/sunxi/board.c
-@@ -577,7 +577,6 @@ void sunxi_board_init(void)
+diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+index 08439342cb2..ab162f39473 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+@@ -112,6 +112,10 @@
+ };
  
- #ifdef CONFIG_AXP_DCDC1_VOLT
- 	power_failed |= axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
--	power_failed |= axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
- #endif
- #ifdef CONFIG_AXP_DCDC2_VOLT
- 	power_failed |= axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
-@@ -586,6 +585,9 @@ void sunxi_board_init(void)
- #ifdef CONFIG_AXP_DCDC4_VOLT
- 	power_failed |= axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
- #endif
-+#ifdef CONFIG_AXP_DCDC5_VOLT
-+	power_failed |= axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
-+#endif
- 
- #ifdef CONFIG_AXP_ALDO1_VOLT
- 	power_failed |= axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
+ &rcc {
++	clock-names = "hse", "hsi", "csi", "lse", "lsi";
++	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>,
++		 <&clk_lse>, <&clk_lsi>;
++
+ 	st,clksrc = <
+ 		CLK_MPU_PLL1P
+ 		CLK_AXI_PLL2P
 -- 
-2.46.2
+2.45.2
 
