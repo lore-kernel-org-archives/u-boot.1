@@ -4,71 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BEBFE7716A
-	for <u-boot@archiver.kernel.org>; Sat, 14 Dec 2024 22:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2088DE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 00:00:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA8398006F;
-	Sat, 14 Dec 2024 23:48:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 368CB8006D;
+	Sun, 15 Dec 2024 01:00:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="YALLVKzz";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ppdHc7KH";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ld+lJ1+f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 910538007A; Sat, 14 Dec 2024 23:48:25 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 9FC778006F; Sun, 15 Dec 2024 01:00:07 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20604.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::604])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 696B78006C
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:48:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56B2A80066
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 01:00:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Y9hFL6x2Mz9sbh;
- Sat, 14 Dec 2024 23:48:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216503;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ShqQzz+BvWP1NDUAnvegWNL/+LEialnhMhFgWUH3PBM=;
- b=YALLVKzz8HvnjQMW3XXjcxoqz67ut/8nRCDQLocmZB/sA8WIm6duALUcEq0rqk1Pq7Rnsf
- 1INKplHazZzVKp3QmyjOkn08VSms12d14WgE4C7GG9fF3Jrd/UnCM+FL2J4ZF1zfhHOr3U
- kZMreD3tpocMJICJF0/A4YWgMLZ/3w7Zf71Svjfb41GgkqFWZBCS6ANLcF0KF6Dmsh4XAc
- cMFurWCUkZ5feb+UFs6zQ0dNlVB8jvQRZw6bTX/pSMPVV5dKprAdXMV7ilnV3ZWmlyYVzR
- iWpJi0+/jMtqgIyJXTzq0wXiYxDCZx8pMkPfzHjVx5QvVNbbSnHCo6gagSYJNw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734216501;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ShqQzz+BvWP1NDUAnvegWNL/+LEialnhMhFgWUH3PBM=;
- b=ppdHc7KHUCfxGLJ5QX2rnPxj5dMBGn7V/KP5X9YNJqyKWcdBudT+3sLB6ygKYmpl9V8WpN
- Z+NAp/AEoYW7bMQa4u4D79pVC1caPJJuIjo6JfkBjBxE3Lt1lb7njK837F9zBYg/j5h/xB
- Q6Z1MRfK79II4bdq0sjEVymWSNWGKlSYf1+IFwDAzBubaYcKL5YbKWpAmz05w8PP4EUfHJ
- 0l7dCu+qYtIH58Brgq5Q5YCYdpHmcIOOoNhWce12Lz0mj+2TC9QPO/QPyeL3z4YcLbkhOK
- 3/IddoSuBbqQhIkxbICydynht15iW9UzSSOtaHxfD5zZjxsFqbKz1L7pB0utnQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] pinctrl: renesas: Convert to IS_ENABLED() macro
-Date: Sat, 14 Dec 2024 23:47:43 +0100
-Message-ID: <20241214224807.304054-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CwaUzro0dExLDR3TOosXZ5JEZL3CmWeUls3IHoT7IVHjqYAMDODF8jpeV0SGVbJqN4eFDw6Ae51lgKcJNZvVpbNZxXKZHHy77BGFaAOPEwYMagKYzfqWj+cVoeDH1lxucILleKDqyxCJgyNL5Ttaj7kZA3dIf/oJA6NKyE2f+fS5dEStwAAUR/EQA3Y3bsb5960vV4rCKV9PrvFMft2M638IoGSDqhxx68OLWw+njVZaI7NeudxkRC93/wxYBjLwWnCGXiFTnNi+MasigStyOOVDO7/WHqDAiwc5XoUYt2f7zyl+/yoQ7/8VEthTbfFfX/X3ZU9MiMWRzY6TG9Km0g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ifCpSIT4KP4inSJhhwUG1kRTmrvbD2VlTiOerXaODxs=;
+ b=SnCDj+tI6sEXiVO5zOD2WNWTxCJwUiMDl7yXexbUaZaRO6PcScTg6vnPMrZxFdwl5+m8QMKc9mR0OW4TA3jD0Y2bwza9IRg+dUYpQPkvsE8oS4m/h/Akcp5u0bzu2RrUFro/2/l8eHyTKxBSuMfL64cjJoO5yEpHDyAPVCSrCBVwAMj8L5sYrMAt/epqTeSM0GvYI3djoxFSDfVqkeIRm3PYoLbD5QdBVTNRvxz8b+ZUiGi7U9eYubaA1XEhZfHGulzdY5DWoTxUR94o326Ge7V28Wvh/Quefszqx9haBB6H/f4jOr4Jwz+MCRZ58AGHbvxhVz00WahQYGNb5ezEGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ifCpSIT4KP4inSJhhwUG1kRTmrvbD2VlTiOerXaODxs=;
+ b=ld+lJ1+f2F0r9Cskbarf5MlmSjMxw+4d0BCewu/FlVgQBknfpLMKUXsqmqXDjqlCBgCOglgyIM925/yD0rRZ//Q60fM2syJjPpZb2PEscM9uAIdjAC7zVU8sNaXS0VW9GQyATQAibv9rzCgusLMzIYmqN61IF1j5YCIDFKTtBFRt/lx7pXw3XRCOMWXb4+R+CFfrheqLvHZg36EYFeNbrl18jsPgEEtZJeZCAMF4pFX1soyohVCx+G0FU00hufT8GOzRvUA78OXHFZj/SdVcBVKPyImrClZ30dkyj+wnJ2+HFRDokhlpNDVV3BLhQpGqgv2Bf6vdbGILgA6z1aHhhg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI1PR04MB10025.eurprd04.prod.outlook.com (2603:10a6:800:1e0::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.20; Sat, 14 Dec
+ 2024 23:59:59 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8251.015; Sat, 14 Dec 2024
+ 23:59:58 +0000
+Date: Sun, 15 Dec 2024 09:05:18 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Abdelrahman Ibrahem <mail@aibrahem.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] arm: imx: Remove arch_env_get_location to fix env lockdown
+Message-ID: <20241215010518.GA16463@localhost.localdomain>
+References: <20241107125122.48361-1-mail@aibrahem.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241107125122.48361-1-mail@aibrahem.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG3P274CA0023.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::35)
+ To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 4kjufrbexkjed67mfqf9n1ottg768w5i
-X-MBO-RS-ID: e4db5d28ca4af218ca6
-X-Rspamd-Queue-Id: 4Y9hFL6x2Mz9sbh
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI1PR04MB10025:EE_
+X-MS-Office365-Filtering-Correlation-Id: 75f124c7-6257-4629-16d3-08dd1c9b6a52
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|1800799024|376014|366016|38350700014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?P6t2BDmgqvktBlevaiESuPDVXocO4dr1JyVa1qYUL1LSoAXJExFMRq7swHu6?=
+ =?us-ascii?Q?Qc4rp0KYgmbjU2hz2FhtsY/yhPoz1LQ75jR42JJJOYXPoY4nQ4T4UHItpAJj?=
+ =?us-ascii?Q?CQBmOiyKWlWCfs1fmJqtWA6qLHLQVLZpqZlIa55NGwp0s5e34+RbOo3gDtRL?=
+ =?us-ascii?Q?oOiC2KXwBCOOnOhF/y+gE4BlzlsXY0R5z04DZwBTgqFpkePXtUSm1leSfkI8?=
+ =?us-ascii?Q?W7iQmiHpErqLeL6qpMCZdZ+TMM8m1/HfyVpvCcxOW6tArXdGDdG+1T1BKeF9?=
+ =?us-ascii?Q?VqJDmrCaPNrRbtMgFCFQTBNYo8IWKiACO0tNKNVP/1N/t9XkPrLuXOI/EtZK?=
+ =?us-ascii?Q?YM5U3SFD5hAYMQZe/gUC4Ez9vJ0/B9ezOaF1QkbhTYO7PmwSdwe7xY0TRpiu?=
+ =?us-ascii?Q?1FbpSN4ZRhfR7UYlYIBSZ9K7xOopaPAkMQEJgLbAqLq5+BZXxFahNLh24D1J?=
+ =?us-ascii?Q?3Hh77SwMDgKcz74FURCCSK1wpaIiZc2K9V6tkO23/dONA2Q2uimSS6Nzhrr6?=
+ =?us-ascii?Q?gaulBAmc8S5fh+pE5V1tkqqorCLYFFnNhiCvYlGj4XhkezNK2QjM9AV52G8/?=
+ =?us-ascii?Q?ijtS6Vmoh5k6UCmB9LGJwztoc0NoCpp+q2ljzcVnyrDnCWAs8GzYUMopRk6P?=
+ =?us-ascii?Q?RFp0q1z1NlL4Ex8m75Vaew2aNWLQoYIGU6iUIl7qFapxJgZwlvFetE8GIrrz?=
+ =?us-ascii?Q?k3dxeN7D1g4+0G9+zwIm2xEnLW5qekmtU59elgNw0CuNbkcAqRKf93VoMCyE?=
+ =?us-ascii?Q?+xG8Kn8gO7TsY04a5dM/MONvCp1vDE+/PEfnk1IAv+IGdABEO/tOOwwd8S4q?=
+ =?us-ascii?Q?KO5FwRL2qm8TAzBqWN5rf9NJCJK2gHun/69g29q6x5saATqGu+rpDP1TueOP?=
+ =?us-ascii?Q?jwHZndwUH6YpBjHTZxGc44HMAHxVO4tEHQBDT3OFZdvvTuSWakr9le9MpAd4?=
+ =?us-ascii?Q?tCZkA5pSqh7gVxXL1QHk9GjdJNbEPxq3zXShUV03mXZjIneOF9qCIGXC9bDA?=
+ =?us-ascii?Q?La69vt01RQ+riDgTMHzBoz83+D2QswbxhOPpyO/FZxAJTfTP0PjJ0g1wbdrk?=
+ =?us-ascii?Q?wKwYF5u4K0433xQBWy9RzaLNwHTlImxpne/Bbb0/c4OjD8WLM6Y9ilqYoMG/?=
+ =?us-ascii?Q?JDqBHa9E1wCI/D7PpGyfxmbjnP19AcmeBJLBqy5kvcXxnH2aktFnfvcvMAww?=
+ =?us-ascii?Q?DMacc3k0NquVHM2YuVIswiFgc6jJJJsRzVFiYYI2NtZMpwL2/1k1a1xAlYic?=
+ =?us-ascii?Q?9dasx0/mbKtTXuHcyL2rgkGbgNVEmLXQiQNTXLbCk/FIYWi7maMr9vsLUS3j?=
+ =?us-ascii?Q?M+di5kF/imzchmLIFaVqNjEiAUHCBP7c5icbWwUrE3trpyeD+T6hnNvVoTcT?=
+ =?us-ascii?Q?FvKbvdilfqmv/J6KI+GtCHIabLmk1ltVE1+coIWl1pBQI1KIBgaqY+S5gCqS?=
+ =?us-ascii?Q?ndyDUygiBUhtG59IEgc4+yb/ZtSYhpAf?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(1800799024)(376014)(366016)(38350700014)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8mo5TR0oF6bUA9lz96LtQWrG5CeOWXdXoL8edB+gKU6zgjk3yEYwcDPL7G63?=
+ =?us-ascii?Q?0SuEqlq7heozzRafEoD6wFmhslBeE7rlVplq6qRjBmkVEyJJpWgzNy1gwVV0?=
+ =?us-ascii?Q?vrbB4GktPAm4BAr7YQ0P8t7+aJJxC2haRnjcbDrO07hW+UA8MuDlVIv2AUd4?=
+ =?us-ascii?Q?2jdj8DTdNaE+gpogb9CN8x5tLGPwthAvyhr2S0SL1E9RpmwyW1cdm+DHyWCU?=
+ =?us-ascii?Q?WIzJh0OxHsM3vNYZCwGFL+TvDDFQFaySMq0IFfYpxIua0DDrpC6m+usC660X?=
+ =?us-ascii?Q?a29rsfIqhdEHuD+qiic0gB22o34BLJdKc/G6SqCIld1HcWDeer825sg0QTLA?=
+ =?us-ascii?Q?MtTF9oSiuxvboon90V+5H8rYtoozl6idwQQCFX1bM0ovL+XydfLCVsdD0ETV?=
+ =?us-ascii?Q?288JDx2vqW8YzQAQ3LC6Jo1zyvtRBsQKU0YWpe9XlQRJpylq5WywPxIj/5qD?=
+ =?us-ascii?Q?SG4sEUtyIZ65DqyasyzSPd67Lwt0vFp3aXqUmNkOv+zAQrnLLISP89yI22m0?=
+ =?us-ascii?Q?C0rMoK27jYP3JQ3kbRyKzQ15fIQ31R4Q0Pz0fj1qXfPnHCj2RHFlV28g4Cfq?=
+ =?us-ascii?Q?IT/1sR0/DLYkDXlsqePZ0CEt9lcgM+HCp5cFkjyxdkoEGMmmUKNpM1LxXtCL?=
+ =?us-ascii?Q?9mP694VzW7CZSCFmXX6VuvZR83EULoeP3By5vWweA711YTWDxxvhsZL0wyo2?=
+ =?us-ascii?Q?+klsGQrNGQoImRlQFhkEVqaciRy9yxoFn0lKHWf0MXpu6ft355ih4aDPYiJM?=
+ =?us-ascii?Q?GIOdFkTtULVez9tQDJEP4N/q8bCNEd6uz1MhKECSAPle33fxnWekSVznIxFR?=
+ =?us-ascii?Q?jKFshMleNws7I5J3kORNzk/L8QrM22eKAdTbtKLoMp1trWX/JMhzHHC+gh/s?=
+ =?us-ascii?Q?k9X/emreNr2+OUnciSOtTw17KoAIUOIeW5jG1ZitV1J/oDYI5eWCGG12URIa?=
+ =?us-ascii?Q?Yh9AvOIV4VHMtB/WnRmSgqm4vnfoGQG+GMFQyUGJxCP2GbzXNy+KUGxi6B/+?=
+ =?us-ascii?Q?WugUT++PdTQNySbuLhPNoVe07sAchdW7l6VX1FSwfjqdQbQ22iG9H2iG2nTW?=
+ =?us-ascii?Q?4cO4Px+rRUHM02FQJO2T3pMTYfRe0ooaOptAPPjHIcv+burABIRnzmM7/r0h?=
+ =?us-ascii?Q?SslPgR2ar+yzAjz3d3STi4Z+xloiQGforVsxkN3A86idFogAFdJcdA3JMSAQ?=
+ =?us-ascii?Q?tZUIM26gEWdT3luMnBBFaW7FBlYOkja+ovax25L1n+dp0IP+Isk34N8djVNp?=
+ =?us-ascii?Q?XM7f9QSl+miiNURsqzh5IZDvpM/zLaLTOy+ovf7rDYeE5aU0oSCAFAS/ZWYf?=
+ =?us-ascii?Q?XuBZUf2VuXXO+EAwkbUDwv8FDdGEDDVkKljt5+2dobsuh8o3SNhVhwU4W3Jv?=
+ =?us-ascii?Q?jTWntEqHblfIQI8EX+iBD5YHw0bHIIywMeArOdsbzz9BGOcvef4DdwLPz2V/?=
+ =?us-ascii?Q?aul08yF+Cj9fnDmB3y4wRFXg40Vq/8KK3Sjn9hwEkE6VR4n64oCzMdmRZua5?=
+ =?us-ascii?Q?oDI01ptio6OpJOlVfzRJjahSBc3Y3VtHUmfWo1I3iuiOu+ZLb9hQru76wVnQ?=
+ =?us-ascii?Q?PBJvvL8ufSvQ4PHb0SXRJT6poAdadAy3U1YK/rmY?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 75f124c7-6257-4629-16d3-08dd1c9b6a52
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Dec 2024 23:59:58.7389 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9mqXVRYZ9RymQdBOb2faXm2evjyUBe+Acp+iygA5rxM4FD79+iB2yrg0tIadGrIWUfOL34YBkgV4VQWE2wQCQA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB10025
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,295 +162,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the IS_ENABLED() macro to reduce amount of #ifdef use in the driver
-and improve code coverage. With IS_ENABLED() macro, the code is compiled
-and then optimized out, which prevents bitrot.
+s/imx/layerscape/
 
-In case no PFC table matches the SoC in use, do not probe the driver
-and instead exit with -ENODEV. This should never happen under normal
-conditions, because this would mean the driver DT compatible string
-match happened, but the list in probe() cannot match the model listed
-in match data associated with the compatible string on which the match
-did happen.
+On Thu, Nov 07, 2024 at 01:50:44PM +0100, Abdelrahman Ibrahem wrote:
+>This patch resolves an issue encountered with Layerscape SoCs, where
+>attempts to restrict write access to environment variables to enforce
+>secureboot are ineffective when using the CONFIG_ENV_IS_NOWHERE
+>configuration in combination with CONFIG_ENV_IS_IN_xxx.
+>
+>Signed-off-by: Abdelrahman Ibrahem <mail@aibrahem.com>
+>---
+>
+> arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 41 -------------------------
+> 1 file changed, 41 deletions(-)
+>
+>diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+>index d2d3e346a3..7dd5f429bf 100644
+>--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+>+++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+>@@ -819,47 +819,6 @@ int mmc_get_env_dev(void)
+> }
+> #endif
+> 
+>-enum env_location arch_env_get_location(enum env_operation op, int prio)
+>-{
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/pinctrl/renesas/pfc.c | 128 ++++++++++++----------------------
- 1 file changed, 44 insertions(+), 84 deletions(-)
+This looks wrong to me. Drop the arch_env_get_location would break
+other cases.
 
-diff --git a/drivers/pinctrl/renesas/pfc.c b/drivers/pinctrl/renesas/pfc.c
-index 2f6c3b3d1c7..db6be39a528 100644
---- a/drivers/pinctrl/renesas/pfc.c
-+++ b/drivers/pinctrl/renesas/pfc.c
-@@ -961,90 +961,50 @@ static int sh_pfc_pinctrl_probe(struct udevice *dev)
- 	if (!priv->pfc.regs)
- 		return -ENOMEM;
- 
--#ifdef CONFIG_PINCTRL_PFC_R8A7790
--	if (model == SH_PFC_R8A7790)
-+	if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7790) && model == SH_PFC_R8A7790)
- 		priv->pfc.info = &r8a7790_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7791
--	if (model == SH_PFC_R8A7791)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7791) && model == SH_PFC_R8A7791)
- 		priv->pfc.info = &r8a7791_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7792
--	if (model == SH_PFC_R8A7792)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7792) && model == SH_PFC_R8A7792)
- 		priv->pfc.info = &r8a7792_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7793
--	if (model == SH_PFC_R8A7793)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7793) && model == SH_PFC_R8A7793)
- 		priv->pfc.info = &r8a7793_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7794
--	if (model == SH_PFC_R8A7794)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7794) && model == SH_PFC_R8A7794)
- 		priv->pfc.info = &r8a7794_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77951
--	if (model == SH_PFC_R8A7795)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77951) && model == SH_PFC_R8A7795)
- 		priv->pfc.info = &r8a77951_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77960
--	if (model == SH_PFC_R8A77960)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77960) && model == SH_PFC_R8A77960)
- 		priv->pfc.info = &r8a77960_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77961
--	if (model == SH_PFC_R8A77961)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77961) && model == SH_PFC_R8A77961)
- 		priv->pfc.info = &r8a77961_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774A1
--	if (model == SH_PFC_R8A774A1)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774A1) && model == SH_PFC_R8A774A1)
- 		priv->pfc.info = &r8a774a1_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774B1
--	if (model == SH_PFC_R8A774B1)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774B1) && model == SH_PFC_R8A774B1)
- 		priv->pfc.info = &r8a774b1_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774C0
--	if (model == SH_PFC_R8A774C0)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774C0) && model == SH_PFC_R8A774C0)
- 		priv->pfc.info = &r8a774c0_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774E1
--	if (model == SH_PFC_R8A774E1)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774E1) && model == SH_PFC_R8A774E1)
- 		priv->pfc.info = &r8a774e1_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77965
--	if (model == SH_PFC_R8A77965)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77965) && model == SH_PFC_R8A77965)
- 		priv->pfc.info = &r8a77965_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77970
--	if (model == SH_PFC_R8A77970)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77970) && model == SH_PFC_R8A77970)
- 		priv->pfc.info = &r8a77970_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77980
--	if (model == SH_PFC_R8A77980)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77980) && model == SH_PFC_R8A77980)
- 		priv->pfc.info = &r8a77980_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77990
--	if (model == SH_PFC_R8A77990)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77990) && model == SH_PFC_R8A77990)
- 		priv->pfc.info = &r8a77990_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77995
--	if (model == SH_PFC_R8A77995)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77995) && model == SH_PFC_R8A77995)
- 		priv->pfc.info = &r8a77995_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779A0
--	if (model == SH_PFC_R8A779A0)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779A0) && model == SH_PFC_R8A779A0)
- 		priv->pfc.info = &r8a779a0_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779F0
--	if (model == SH_PFC_R8A779F0)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779F0) && model == SH_PFC_R8A779F0)
- 		priv->pfc.info = &r8a779f0_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779G0
--	if (model == SH_PFC_R8A779G0)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779G0) && model == SH_PFC_R8A779G0)
- 		priv->pfc.info = &r8a779g0_pinmux_info;
--#endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779H0
--	if (model == SH_PFC_R8A779H0)
-+	else if (IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779H0) && model == SH_PFC_R8A779H0)
- 		priv->pfc.info = &r8a779h0_pinmux_info;
--#endif
-+	else
-+		return -ENODEV;
- 
- 	priv->pmx.pfc = &priv->pfc;
- 	sh_pfc_init_ranges(&priv->pfc);
-@@ -1054,127 +1014,127 @@ static int sh_pfc_pinctrl_probe(struct udevice *dev)
- }
- 
- static const struct udevice_id sh_pfc_pinctrl_ids[] = {
--#ifdef CONFIG_PINCTRL_PFC_R8A7790
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7790)
- 	{
- 		.compatible = "renesas,pfc-r8a7790",
- 		.data = SH_PFC_R8A7790,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7791
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7791)
- 	{
- 		.compatible = "renesas,pfc-r8a7791",
- 		.data = SH_PFC_R8A7791,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7792
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7792)
- 	{
- 		.compatible = "renesas,pfc-r8a7792",
- 		.data = SH_PFC_R8A7792,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7793
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7793)
- 	{
- 		.compatible = "renesas,pfc-r8a7793",
- 		.data = SH_PFC_R8A7793,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A7794
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A7794)
- 	{
- 		.compatible = "renesas,pfc-r8a7794",
- 		.data = SH_PFC_R8A7794,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77951
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77951)
- 	{
- 		.compatible = "renesas,pfc-r8a7795",
- 		.data = SH_PFC_R8A7795,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77960
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77960)
- 	{
- 		.compatible = "renesas,pfc-r8a7796",
- 		.data = SH_PFC_R8A77960,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77961
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77961)
- 	{
- 		.compatible = "renesas,pfc-r8a77961",
- 		.data = SH_PFC_R8A77961,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774A1
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774A1)
- 	{
- 		.compatible = "renesas,pfc-r8a774a1",
- 		.data = SH_PFC_R8A774A1,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774B1
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774B1)
- 	{
- 		.compatible = "renesas,pfc-r8a774b1",
- 		.data = SH_PFC_R8A774B1,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774C0
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774C0)
- 	{
- 		.compatible = "renesas,pfc-r8a774c0",
- 		.data = SH_PFC_R8A774C0,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A774E1
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A774E1)
- 	{
- 		.compatible = "renesas,pfc-r8a774e1",
- 		.data = SH_PFC_R8A774E1,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77965
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77965)
- 	{
- 		.compatible = "renesas,pfc-r8a77965",
- 		.data = SH_PFC_R8A77965,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77970
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77970)
- 	{
- 		.compatible = "renesas,pfc-r8a77970",
- 		.data = SH_PFC_R8A77970,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77980
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77980)
- 	{
- 		.compatible = "renesas,pfc-r8a77980",
- 		.data = SH_PFC_R8A77980,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77990
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77990)
- 	{
- 		.compatible = "renesas,pfc-r8a77990",
- 		.data = SH_PFC_R8A77990,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A77995
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A77995)
- 	{
- 		.compatible = "renesas,pfc-r8a77995",
- 		.data = SH_PFC_R8A77995,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779A0
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779A0)
- 	{
- 		.compatible = "renesas,pfc-r8a779a0",
- 		.data = SH_PFC_R8A779A0,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779F0
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779F0)
- 	{
- 		.compatible = "renesas,pfc-r8a779f0",
- 		.data = SH_PFC_R8A779F0,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779G0
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779G0)
- 	{
- 		.compatible = "renesas,pfc-r8a779g0",
- 		.data = SH_PFC_R8A779G0,
- 	},
- #endif
--#ifdef CONFIG_PINCTRL_PFC_R8A779H0
-+#if IS_ENABLED(CONFIG_PINCTRL_PFC_R8A779H0)
- 	{
- 		.compatible = "renesas,pfc-r8a779h0",
- 		.data = SH_PFC_R8A779H0,
--- 
-2.45.2
+Thanks,
+Peng
 
