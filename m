@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF9EE7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33BCFE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 17:04:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 373D58004F;
-	Sun, 15 Dec 2024 17:51:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 903F080050;
+	Sun, 15 Dec 2024 18:04:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fb7+BqRp";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="fKRTjgle";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D82C680040; Sun, 15 Dec 2024 17:51:13 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 545458005D; Sun, 15 Dec 2024 18:04:30 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63AD080050
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:51:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B2C78004F
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 18:04:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6fc3e9e4aso216093085a.2
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:51:11 -0800 (PST)
+ spf=pass smtp.mailfrom=chf.fritz@googlemail.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3862d16b4f5so2159885f8f.0
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 09:04:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734281470; x=1734886270; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DF/i7CGg/SzJHxX7tArwK8oDMkJGI6ZTLqd2ORqXOK8=;
- b=fb7+BqRp9iw6nE9XG9sj7UKz1hFBkrfzhTzPoKm3JWuwS+M5EkRdInF2Lbfnp8EoU9
- IWr2BjD2yr22517rurcgzc538hKRIBrsd6uDdmP0V7/95MaWrYPdlJrsRZWOTPppLWEw
- HtxKYusL/E0NZbTd0v7paTUds/ejQQp5XOyGc=
+ d=googlemail.com; s=20230601; t=1734282267; x=1734887067; darn=lists.denx.de; 
+ h=mime-version:user-agent:content-transfer-encoding:date:cc:to
+ :reply-to:from:subject:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=6kCkFq+KsK3nYZnDVg8+XQ2gZxm3R4KqwRrXkpsO1/s=;
+ b=fKRTjgleNeUXlq3ibLk30gSzcUITQ9jXHxj2AGAIVGJMK1CCuheTtv2XuM+Pnh8iOg
+ hP304EV1jedjqRNaG6c0tnOW0Emiivb8sJvpXOQWo0oWXfZjgoreZtrvZjR8gT0c6mbD
+ jtEZJkFoPpCwLIuTVvT111itBwgCmBHRZnIHCY4NR1RPn2Rsw8fGDnZ0czFaG9uCqOib
+ 6S2MwwBE2i6v0/oDlLFbBF3MnEcD6l3Q59fW+xdC3WwoA+/WfsuGp9WsWy5cY+ZJvrM8
+ lyE5yyfBK5Xb/DTm6IH2Ea9ZpSdPCYSMfJn541NirFTIpYem69LA1JNDwULhRj3bv1ZF
+ 0FPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734281470; x=1734886270;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DF/i7CGg/SzJHxX7tArwK8oDMkJGI6ZTLqd2ORqXOK8=;
- b=p/s92ta3ojJ0NI+ErhVCmdb04XFxI08AQ30VWtQHeDj6bi7OmfPBR86iMEJWIvn2pJ
- dkiqNuZtPoYNkVYHCR+YbBGu/PfdyynAImMubuRPQ6P74PfIwtik8L6XlAulugqnCC1i
- r8bC9j170vTroynU/9tHhXeg92BULIOhJrk/QwCzaT5NPGna6s4N3Wu93Ftr2Ng9+pow
- v1f8vfY8HClDXmiS2wtOoJgD/mU61nag5a+/ZVsgNo/VsosuIO0s7P9Q3Qxo+gClaTzD
- S5FkHzsWtjcwGHAOhV5vxEUEGFvEE455eiCVAERJigJuo8GgKYOzUR5HpiFr49FNI/4e
- uLtw==
-X-Gm-Message-State: AOJu0YxENBaDswyG+ejhmdaI/g3QprWLYmneuPrcid2bhRaSJuVvEyYS
- BTVzQwn4TGOcZns9B4BtdueFd9GQVu3Ogw51FIdgbZyTS7s0cj7JtKdTcpTOWo8NLa0v/3y7wx1
- BzWM=
-X-Gm-Gg: ASbGnctZ/ZVqosJ/K6B+xi0Brlj+DEtx47zKPwmq4PPf0zwDQo4dMwo+525qiYn+Usc
- lm71GqDF5jedGJcD7x/BmP9oDc1x9qG/0ZQewQzlNkHDZOzhx/Fr609rm3txKGktVhfY1GMklsp
- hpSuGQa9o+BD88ZV3Olkj8hWjA3uDRFjCdD5sgz5s8RP+LMegpu0jMIzWAK/xee6knH6COkJzhU
- Tp5eJrPkeeOFR5zM4A1vkzfmZEzENw6KrT0F8mPhDYQdbvVWU+oIe6x
-X-Google-Smtp-Source: AGHT+IG5JMmkjx0kfBJje/7F3yzdQv6mdbdPTGqg5U9Ak9tAqUj1QoKNZlqL3/OKekMEWWB02/mnZA==
-X-Received: by 2002:a05:620a:4554:b0:7b6:6365:1b72 with SMTP id
- af79cd13be357-7b6fbecc52dmr1467977885a.3.1734281470259; 
- Sun, 15 Dec 2024 08:51:10 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
+ d=1e100.net; s=20230601; t=1734282267; x=1734887067;
+ h=mime-version:user-agent:content-transfer-encoding:date:cc:to
+ :reply-to:from:subject:message-id:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6kCkFq+KsK3nYZnDVg8+XQ2gZxm3R4KqwRrXkpsO1/s=;
+ b=jIX7fWI70+zbPjG1KRm70/L4wCouvoaWr+pUWlomXqavP48R1hyp4NISBiC813Xtcb
+ bzkW8xw5GV7KKG/V1uJ2hnUVP+uLs87xsIn+lvsHRgB3aQhctpTT1K69US2Zo3BgufjX
+ Wv9gMT0ZHaddRjFQ0bVzVSlqNIL/7aeLPIcyZGXlSHd/eGYVbooQOy/IwadLSaCrEjul
+ 1z1mCbkKdZDXqRdgvFVdp46Y8o10pnxcTI7AeL68YIIzfJkjZAE7COmAZJ+7q5U0tAjt
+ 0zgpEAsX1y0stPzSE0P6Q0MRsti0lJF9+xFgE5Dql8/Tpg2JezYF8JeIghoWdY5uMYpG
+ A8Rw==
+X-Gm-Message-State: AOJu0Yyuk2i+RXLNRjAoqGk6mHlVk9AAg/TxeTKvto0/AHwbEeZcEmDk
+ FCLDEV5AqoEQhZYSEoxGk0gu6Bwow8EYSgDjhRzB86nohD3VF/KNyoU3yg==
+X-Gm-Gg: ASbGncuUjkMMJxTBaQdrGJIPJAJ71yHyforb+5qgUlPOMJy3zVvTrig3dXzDoY+nn8F
+ /WorCGneCzOtwvtiVbXrSZlMnKYn6CB/AcsKeAkUNiUzBNyvUtHdaEzREs6RgSfkn/DnLjZBoU0
+ XK81If9/d9fsw6w9ZpRsn42lqGJc9B7sh50PMYEn+hULb+HvOCuwqd2qfPUAhhB8gcVD0H4KBy8
+ 5cAj/jzxhwRdbGeIh480IFDmq7EZXZoY897bi94K//AYhFn7ebvIabS54nhXlH9DFxD8ng=
+X-Google-Smtp-Source: AGHT+IHj3SqY4GQPdpbJzqo6LO8a8sIaMpbSld2jCZfNyDSrMkUt1AuG8BoPUx6bSI2ySu09E9QAgQ==
+X-Received: by 2002:a5d:64ac:0:b0:386:37f8:451c with SMTP id
+ ffacd0b85a97d-387887c24f0mr12993937f8f.1.1734282266679; 
+ Sun, 15 Dec 2024 09:04:26 -0800 (PST)
+Received: from mars.fritz.box ([2a02:8071:7130:82c0:da34:bd1d:ae27:5be6])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7047d08a0sm150439185a.33.2024.12.15.08.51.08
+ 5b1f17b1804b1-4363601569csm59310595e9.4.2024.12.15.09.04.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 08:51:09 -0800 (PST)
-Date: Sun, 15 Dec 2024 10:51:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: Re: Pull request for u-boot-nand-20241212
-Message-ID: <20241215165106.GE1505244@bill-the-cat>
-References: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
+ Sun, 15 Dec 2024 09:04:25 -0800 (PST)
+Message-ID: <33e7b95383c1e5dd20f4cd2e30b88391a09e0858.camel@googlemail.com>
+Subject: [PATCH] imx: hab: fix srktool -c usage by removing spaces
+From: Christoph Fritz <chf.fritz@googlemail.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot <u-boot@lists.denx.de>
+Date: Sun, 15 Dec 2024 18:04:25 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.46.4-2 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U+6G1cITY2xT/5LY"
-Content-Disposition: inline
-In-Reply-To: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,66 +88,58 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: chf.fritz@googlemail.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The srktool option -c does not allow spaces between certificate
+filenames. Only commas (',') should separate the filenames. If spaces
+are incorrectly included, srktool will not display an error or warning
+message but will only process the first certificate in the list.
 
---U+6G1cITY2xT/5LY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+So adapt documentation accordingly.
 
-On Sun, Dec 15, 2024 at 03:46:22PM +0100, Michael Nazzareno Trimarchi wrote:
-> Hi Tom
->=20
-> The following changes since commit 9452fb7484118822b878ad445237d111b7b1a2=
-8d:
->=20
->   Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh (2024-12-11
-> 12:50:29 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
-> mike/u-boot-nand-20241212
->=20
-> for you to fetch changes up to 65ac40c1e99826b346c5e3b829143902494415e2:
->=20
->   nand: Add a watch command (2024-12-12 19:28:07 +0100)
->=20
-> Small addition to uboot-nand. Nothing relevant for now. Anyway
-> a nice new command coming from Miquel Raynal and small changes.
->=20
-> The patches pass the pipeline CI:
-> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/23=
-837
+Signed-off-by: Christoph Fritz <chf.fritz@googlemail.com>
+---
+ doc/imx/habv4/introduction_habv4.txt | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-This doesn't seem like the level of fixes only we should aim for, for
-master at this point in the cycle so I'm going to take this to -next
-after the next -rc release, thanks.
-
+diff --git a/doc/imx/habv4/introduction_habv4.txt b/doc/imx/habv4/introduct=
+ion_habv4.txt
+index 25711bbe95a..53c54b2a88f 100644
+--- a/doc/imx/habv4/introduction_habv4.txt
++++ b/doc/imx/habv4/introduction_habv4.txt
+@@ -240,16 +240,17 @@ root of trust is established and the HAB code can pro=
+gress with the image
+ authentication.
+=20
+ The srktool can be used for generating the SRK Table and its respective SR=
+K
+-Table Hash.
++Table Hash (certificate filenames must be separated by ',' with no spaces)=
+.
+=20
+ - Generating SRK Table and SRK Hash in Linux 64-bit machines:
+=20
++  $ CERTS=3D"SRK1_sha256_2048_65537_v3_ca_crt.pem"
++  $ CERTS=3D"$CERTS,SRK2_sha256_2048_65537_v3_ca_crt.pem"
++  $ CERTS=3D"$CERTS,SRK3_sha256_2048_65537_v3_ca_crt.pem"
++  $ CERTS=3D"$CERTS,SRK4_sha256_2048_65537_v3_ca_crt.pem"
++
+   $ ../linux64/bin/srktool -h 4 -t SRK_1_2_3_4_table.bin -e \
+-	SRK_1_2_3_4_fuse.bin -d sha256 -c \
+-	SRK1_sha256_2048_65537_v3_ca_crt.pem,\
+-	SRK2_sha256_2048_65537_v3_ca_crt.pem,\
+-	SRK3_sha256_2048_65537_v3_ca_crt.pem,\
+-	SRK4_sha256_2048_65537_v3_ca_crt.pem
++	SRK_1_2_3_4_fuse.bin -d sha256 -c "$CERTS"
+=20
+ The SRK_1_2_3_4_table.bin and SRK_1_2_3_4_fuse.bin files can be used in fu=
+rther
+ steps as explained in HAB guides available under doc/imx/habv4/guides/
 --=20
-Tom
+2.39.5
 
---U+6G1cITY2xT/5LY
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCPoACgkQFHw5/5Y0
-tywVcgwAi8b/2Wj7NIF/5BnYqJdhh/tBLo5SjowJXj9BigFLZmMajf5nxUDrJYZC
-Eoq1Hs7ZlbESQ2EHFFC39TUrRVgiZ4AaO9RRWAqZagYuAEmawsyISPVFm3VIgpE8
-UlLt47Gjq2tw8eNsjUuYAFwIxWKrPk7HrIwqXRLrnfKlkGm6dw7qXn4JoIoehJl/
-LzHi+/oQ07yTy2BsAw9UjbJPd9snEuLGVKG3WpbpvyRDfPn922vZjnY4ThJSfbsJ
-ZuoYPu7+FPSt8xOiE6M2LJHosGc3Q8Orvil8C3M1WwfYy2qRwfZYBNokYkx0fTk3
-SiiR0etrD8H/THwjJAlqtBS6mmF6gbzrMorbRgSjytZDFtob7gfEA5JORelPGlw1
-T2dA8IvN4wdD46VfK63ngGbpKXCJs8bTuWBrTRvWHyrQ5l+ZnfFOcu3U/T5ChZuG
-94lEQyPyfwXC7J9UZ6FR9pOzQX2QPPE5MVb5IwmIuFnG4GgNKO2pGDKL52XF/jf9
-cJhrhpPQ
-=YOxk
------END PGP SIGNATURE-----
-
---U+6G1cITY2xT/5LY--
