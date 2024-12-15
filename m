@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A8BE7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 15:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE0BE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:48:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31C7A8004F;
-	Sun, 15 Dec 2024 16:50:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 43D858004F;
+	Sun, 15 Dec 2024 17:48:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HDK03Dq4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EaQDjU60";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC93B80050; Sun, 15 Dec 2024 16:50:03 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id A226780050; Sun, 15 Dec 2024 17:48:28 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4346780040
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 16:50:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26CB380040
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aa66ead88b3so621032266b.0
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 07:50:01 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6dcdf23b4edso4710516d6.0
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:48:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734277800; x=1734882600; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4Efi7SLeOxNEy2G2Hb76XPzb3CzrbdKoujSYkvgScS0=;
- b=HDK03Dq4+Bdsc5kodnMDBYArUdWheHv11Ogv5qj1XvWtCAOyq9mfu5pBC498SLao9U
- M4/Cop8M6ZYZ3FZai5Mm0uM9cS5BSF0mjcAcw8LN8EdSIFmL/mjsyOiGiXpSCRiLx1Z/
- 9SgwlvmtJfilmkO/xebIH0cfQ7c88DtRlshzI=
+ d=konsulko.com; s=google; t=1734281305; x=1734886105; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pXR7KM/1lOa29+LWGjVOzz7gWXJu1Q6pNMPB6fp9ePw=;
+ b=EaQDjU60vEXkA9asHyc5zQ/bCCFj+yufgYNMeQcwdYg++WfCl4R7hswa8f83r3ILnZ
+ pFLSOXm3u2Wu9V1Xb5BWQTjw0WlMiuHFdj8l8bRuniNJUtbToqRfwyLNAFDG/EFT1rdQ
+ hBLHN1UsmP9FHIGGGSjIHOamk8Zsfxg8aRBO0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734277800; x=1734882600;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4Efi7SLeOxNEy2G2Hb76XPzb3CzrbdKoujSYkvgScS0=;
- b=jtXmgIYQqTHSIvna6lWN2CirMX/Het07lCtTC+KauiiCaSxbz82TYPOWMiE5iRGzwG
- EdfPEd1/o682puJdk8NCzjTODsjJy2mjq1DFJnC8pFHmCbOfjnPGCzKSkSOCsPzB1v4H
- +gOXcl8QTwGf1Meudq41Aj7SjzMNMZLxl6soYbvQT3KT/nt3tQAiPo8cZTTmiTU2dPbl
- J6CKIu/bm7nMyzxqoRkUxIYTdoDo/Ueq4JhVEjoFeyvWeuF219vc+Z2PTlPIvTp3mDMl
- 3TyhpcBsZu4WX397+ZdSeNDtJVXRRqvEf3yIRV4/COj5BNgF06+P/k3NBHQyd0+R6cfD
- WFKQ==
-X-Gm-Message-State: AOJu0YzFK4Rv2pvw9fWaaZY0t8iSYtGsYxDJv7kQINilS4hJ2yKc5VVI
- Y7SMDBpZ3fX5BfigAoaGnKjPDtQEnGeRMgV6Us2x7Ukym9KFw0PX64M7fAgCh4SyWeRkz+oNS50
- JBrdCyhYE7KyQghim5fqRNFW6zMsAJcttRUrv
-X-Gm-Gg: ASbGnct/Md5BdCni3IrQBI7gAnExjSEXQ1wxnQ9HqqeHhBrp6420sHT5glSagjwzlOd
- /6u0Hhx8H30YeBlCp5uenYtXD3jrdYoNHeAi4
-X-Google-Smtp-Source: AGHT+IHqsJ06nmgf96+wddxKmTJzApeY3kt6g16v3kzDZ773ZufRhS2tV4BF6Uam1wotnkP7iXeG3ZUctpY7UXgPjOQ=
-X-Received: by 2002:a17:907:3e91:b0:aa6:6331:936c with SMTP id
- a640c23a62f3a-aab77eb0085mr937425966b.59.1734277800457; Sun, 15 Dec 2024
- 07:50:00 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734281305; x=1734886105;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pXR7KM/1lOa29+LWGjVOzz7gWXJu1Q6pNMPB6fp9ePw=;
+ b=t9bk2EYyf1A8cGb3SWw0v4H5uZxvehqyN4ZY9JcRCZatg/yc5NNXrI8miocoYhiOvD
+ J4Q+tmcpC7YJwe091clEGNnnVq0GSeZZ1/LHDMGeqOIRoK9Mnx/EZTR2TZqRg4zpauvO
+ /XpVonZUYnq1fZwWfk4cRIQ/3ixOGGotQN5t6jfFbvd8iaGUywYy7gmBsB87TCdYKjg/
+ r/uR2lxDuNptX2ALMbCt+L2sqHvHiBMTiscKla9CMftjQNvUh8kZa+gbRvboEbEa0WI2
+ XB20XvJivIWro+wxQwbgKgkIVPj7+B2Gjuc9Dmqhrz/LdTou1oNJHtoKGF8qL1jPwgVo
+ NaKw==
+X-Gm-Message-State: AOJu0YzIoJOkxk6wxODretR3HoUGQw3ZX4mBTrq+kKOpWVXjWzp0000w
+ YR1Fy+TLuPFasl55ZGXkviGE7nW9fKZde4I0gqhk+2oFNgqYdga+DSy36Sxye/g=
+X-Gm-Gg: ASbGncvzyT5pN3CoQswvFJEkMSzHYp/hoz5NtD/hD33hJnTk57IOfs7FZ+qosBhlnhZ
+ KqzVLYpLmZ9wn773xbRBXGGr8Pr9y6FOb5x4KzvI8abPfw/9p8ba1mPcJ7O/OUcvLqQY7OeqpZz
+ Y5XGwufljjxBA845Uq2CBAgkfFXosNs6+tXXCbrIstZ3OAVrd/PxL5u2/mzRJsGAgj/i+2MpicY
+ sf2WDNFccRzHXtBAn7nyBZCJ+2NpekTN2R44kx4xhRZ7U9mcjFkVrK0
+X-Google-Smtp-Source: AGHT+IHEq+liMjznetF2Alj6UTUcPwLp6GT5E3HfDZYf9+OzGdlwRnvoh34ausOFRpQ3kbnM6xr2Wg==
+X-Received: by 2002:a05:6214:2388:b0:6d8:ab7e:e552 with SMTP id
+ 6a1803df08f44-6dc96878b78mr189196256d6.39.1734281305057; 
+ Sun, 15 Dec 2024 08:48:25 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dccd25a2c8sm18188526d6.40.2024.12.15.08.48.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Dec 2024 08:48:24 -0800 (PST)
+Date: Sun, 15 Dec 2024 10:48:21 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Andy Yan <andyshrk@163.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Leonard Anderweit <l.anderweit@phytec.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: Pull request doc-2025-01-rc5
+Message-ID: <20241215164821.GA1505244@bill-the-cat>
+References: <7739d82f-fdac-482f-8c04-8261e8aae069@canonical.com>
 MIME-Version: 1.0
-References: <20241213225543.392282-1-raymond.mao@linaro.org>
-In-Reply-To: <20241213225543.392282-1-raymond.mao@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 15 Dec 2024 08:49:48 -0700
-Message-ID: <CAFLszTjSGqmk8yYYbXFEaFZWFhF8uhj_rNxZz7ship1-Fb8p3Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bloblist: add api to get blob with size
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TyH/EFMqHL/NQz8y"
+Content-Disposition: inline
+In-Reply-To: <7739d82f-fdac-482f-8c04-8261e8aae069@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,95 +98,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
 
-On Fri, 13 Dec 2024 at 15:55, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> bloblist_find function only returns the pointer of blob data,
-> which is fine for those self-describing data like FDT.
-> But as a common scenario, an interface is needed to retrieve both
-> the pointer and the size of the blob data.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  common/bloblist.c  | 17 +++++++++++++++--
->  include/bloblist.h | 18 ++++++++++++++++++
->  2 files changed, 33 insertions(+), 2 deletions(-)
->
+--TyH/EFMqHL/NQz8y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please could you add a test? Otherwise looks good.
+On Sun, Dec 15, 2024 at 04:00:16AM +0100, Heinrich Schuchardt wrote:
 
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index ec6ff7a5a9..efc1905da3 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct
-bloblist_rec **recp, int size,
->  }
->
->  void *bloblist_find(uint tag, int size)
-> +{
-> +       void *blob = NULL;
-> +       int blob_size;
-> +
-> +       blob = bloblist_get_blob(tag, &blob_size);
-> +
-> +       if (size && size != blob_size)
-> +               return NULL;
-> +
-> +       return blob;
-> +}
-> +
-> +void *bloblist_get_blob(uint tag, int *size)
+> Dear Tom,
+>=20
+> The following changes since commit 88bd5701efdc48048e030d91c2633048f0f753=
+a0:
+>=20
+>   Merge branch 'master' of
+> https://source.denx.de/u-boot/custodians/u-boot-usb (2024-12-12 09:50:25
+> -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/doc-2025-01-rc5
+>=20
+> for you to fetch changes up to 55e8704402350d06e8ebf244515d96c36a3bacf5:
+>=20
+>   doc: cosmetic: fwu_updates: Fix formatting (2024-12-15 02:11:13 +0100)
+>=20
+> Gitlab-CI showed no issues.
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/23857
+>=20
 
-Can you use sizep instead, like the other functions, so it is clear within
-the function that it is a pointer?
+Applied to u-boot/master, thanks!
 
->  {
->         struct bloblist_rec *rec;
->
->         rec = bloblist_findrec(tag);
->         if (!rec)
->                 return NULL;
-> -       if (size && size != rec->size)
-> -               return NULL;
-> +
-> +       *size = rec->size;
->
->         return (void *)rec + rec_hdr_size(rec);
->  }
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index ff32d3fecf..a04c7c80be 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
->         return ptr;
->  }
->
-> +#if CONFIG_IS_ENABLED(BLOBLIST)
-> +/**
-> + * bloblist_get_blob() - Find a blob and get the size of it
-> + *
-> + * Searches the bloblist and returns the blob with the matching tag
-> + *
-> + * @tag:       Tag to search for (enum bloblist_tag_t)
-> + * @size:      Size of the blob found
-> + * Return: pointer to bloblist if found, or NULL if not found
-> + */
-> +void *bloblist_get_blob(uint tag, int *size);
-> +#else
-> +static inline void *bloblist_get_blob(uint tag, int *size)
-> +{
-> +       return NULL;
-> +}
-> +#endif
-> +
->  /**
->   * bloblist_find() - Find a blob
->   *
-> --
-> 2.25.1
->
+--=20
+Tom
 
-Regards,
-Simon
+--TyH/EFMqHL/NQz8y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCFEACgkQFHw5/5Y0
+tyy30wwApU6E5MpYU07rXXYUNK+z0H7f4lUEDoG18VisiNQ9IUQOTMgrjTeDScNK
+wpwR+Ypn/2Ewwvc5wBvR9DQnoWKuaHx/2gNQZ7o8DT8mUMMbfKUWJK7XMzj59gVJ
+7obHn35jBisns0CQasPOjM811KuFLDl68y7rLdUv0t/KvH3hoL9VbnT3bovxoLev
+k9+abzHt4Sgh8AE1nGV24q4x/PjhrpoJWDPw2DgiWa17GYV1/cIwpDDF2yLa2JXB
+abHQmjEPinV1TAuU0vUZWHPlggAwhHk7/GbOuZiTQS/UQWrK01Ueb3WU8CdezD7C
+k74CoWwLkk/4J4X/kmrhXakDzlCy17mfB2C3OH0aoOCtve40I+EfFZv6YYycXP9E
+0pYP5CEJwAX8+PtUJi2V6WInQ/oWwtRQqyICajkDMf2spFlcQrADrCghDO2Hsqo4
+HJlOsF1IqP8j17XOPFWB9D979imC6sVjYBPqH08H0BTX8xoAtkG4OtapZ6a+jK+R
+Mmw8dpLh
+=dztl
+-----END PGP SIGNATURE-----
+
+--TyH/EFMqHL/NQz8y--
