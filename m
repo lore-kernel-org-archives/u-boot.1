@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE15CE7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 07:32:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 186E2E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 07:34:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 100828006E;
-	Sun, 15 Dec 2024 08:32:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A6608006E;
+	Sun, 15 Dec 2024 08:34:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qMH3tPOB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IomHKhJ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9CCE8006F; Sun, 15 Dec 2024 08:32:35 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 6AF698006F; Sun, 15 Dec 2024 08:34:23 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60D9D8006C
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:32:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3715B8006C
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:34:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6eeca49d8baso26375777b3.0
- for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:32:33 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6f00da6232bso28036407b3.2
+ for <u-boot@lists.denx.de>; Sat, 14 Dec 2024 23:34:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734247952; x=1734852752; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734248060; x=1734852860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xB2wPwQP7Zgn3FqpAjsHgsXZYk3IAsb1Le2NhSoq0ZI=;
- b=qMH3tPOBO2w9M4H/6GH9qbt3IWJ9Arapw2DukHWa/jMEgUIqUR0jp0XdhXtuWE8oNg
- Wcv/yx2rM/6hqiUNu7pvsa6UXlG/D3MVWoOuEJLJo7snELI42tpVHNHlyToI2HNDrZHv
- BDbFDH5L+Zc57cZcxWGhd6/OMdqwrm7VhLOe9Zr3MRD8Boi9Rxfb4n+BEEJxjcwAtqMu
- pATuIkYkl28pYsw9yAM4kOv86+zfCiR6nF/orx/QD+qBxOo+g+tiyVszcFRGizmI8Wup
- Ul/9hSNWHEHslamEWOicu8e+TMRosgOaDSEJwl3ZL22S7ImXGJv9SNgbRMgvQx8fXbyK
- 4fPw==
+ bh=YCRneLGjcLQLuqxOJ68n3Gwxf+giwbl17Q57nOPrSrY=;
+ b=IomHKhJ7pzb70vcso+qupQZEGy9+Fy6eZNCMFh26QIvQNMBLCm/GrQ0KYIP//EBRim
+ 0PGm/35f+koNJaeFojSpHS4MIGeDAsCLsQ00wRJguSu6BSkDMVBYcbsIxh05IcKjXxy7
+ SY//cq3ikURfk/+8mX1jj4reVI8HC+JoJVPaUa1voxmfXgJdqfzjylTkhrVvEitBbio3
+ 7PJBiY6sVt1T7/mMKAxKT+hDWA6gNiOTFOTLIB61CIEO5s+eq4CiFTwCEmMNRrBkuaKH
+ J+5twFDb1wpt5CkuOUWWCKGeSwu77k29I7DMHmI8ujabF7zRVfkHd2ces4CQCVQrOCCH
+ vYlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734247952; x=1734852752;
+ d=1e100.net; s=20230601; t=1734248060; x=1734852860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xB2wPwQP7Zgn3FqpAjsHgsXZYk3IAsb1Le2NhSoq0ZI=;
- b=ViXVWvI5eTHjdnj3tEUc9zRRfll4tBM25Pjp48W8OVP501Wk0C0eH0f1r1Zu+rKa9Q
- TsKKJEhxnDtt3QM/TemR9pfWppUrHYSozm9B2C7ZmEjMuwPmw6IGUsINEjL02/77NAxX
- IvADOCSOb1lR3s4EFJLpwVJf8z5fSERrKUMXHfsaLyrSFItLYypXXLvS9uS4D5lWykxx
- P8BL6HZvcbxOBevhi5JB6pxY5eo3KTxf3HvbyV+4xJ5a5WGDw9lFnu1LpRI+IXh3WwL5
- calm/ueSfDVBm41VFwSV7+/g1Dc23Bw5eHQ1f7Tn9qMD7e2EzPxtBTA210GKONRbdd7d
- 9EGA==
-X-Gm-Message-State: AOJu0YwI+61ZmdNNrvbCATE1m+gXt/4wqfKCZf1e4hg+JrGEd2Vu6LQ5
- Sx04GoSR/oSZhoHVCfx5QTx9cw/jHjNlhskeRnpXrNpTmU0p1Hs6JCoc0n40Nm1MWtsOMGxcFK2
- 3uQw1C4TqLov/DSWthj8fm+BIPZbKe7wKtBPj2g==
-X-Gm-Gg: ASbGncvWKomrb59uhjntnV2VrT+xHKboBv7q7EaWLWLmZ/VsI9fiPNAgDHCVEhjgNOm
- ReYcGHA3kN1QH82MSL+9aSKKERae8d8IsjqHwpQ==
-X-Google-Smtp-Source: AGHT+IHJG3/yfTkY9nZhEIhrlMVBEkLTtf/wAc6UTrupxDgLc4p3CbR/5JPdTb61hEOHPpabF38Oaw5VZZP5tv8GfKw=
-X-Received: by 2002:a05:690c:6001:b0:6ef:f37b:3dd4 with SMTP id
- 00721157ae682-6f275c50183mr84692447b3.10.1734247952143; Sat, 14 Dec 2024
- 23:32:32 -0800 (PST)
+ bh=YCRneLGjcLQLuqxOJ68n3Gwxf+giwbl17Q57nOPrSrY=;
+ b=edTLwiKYtxpRVw6loEAusp2vVLnjlVazdnEZK2YgIQPPCIULQHU7XesJgmuEyDIEYX
+ a7Rp+S4IyB80y5KzQlBAYwKk4cbvEHtY5N77JKSJz1O5TY2RSHiMC8fHlz+K0Kek9IP3
+ FeU4KoAtBcbwa5kyAjcQ4tboFP9a0TBkBcV1CbE6GzDReYMdmkAPFzUasy5q82+Gwobh
+ UR9f8t4sSMeuQOBkJ8culiaZ8kYWkdmvmkn134q3gX1u4/4GTepwgtvrWK650HPKfXnV
+ MxJw9WMY/mI4JM3DdGUfOx4x2SF+1PyOfsn1PLZo+WasWnURJuAjf1OHt49VprknDv7Z
+ /ErQ==
+X-Gm-Message-State: AOJu0YxvDL+opU2oq3tfIuMZs/lmbcYK4IF+0TDBXmOB3V4DyUYHDPqU
+ b9AplB3fVnDhOOit+gVpq5E3fRjIaZQyItsaoQbagTgND9FNy/a04MSPo7ZqmTYfEEZ81E0Gfkh
+ cdB6uqmz556Hwc6BUOIGxpMQNTXkGTaLJ/Gx2PQ==
+X-Gm-Gg: ASbGncuBBBKDiTGAQko4TDdSmCOhqy3Kf+e+ILwaTTz++fKf+JXdQhXTQknDTZjjpLS
+ 4mq0mUXDnvWIEE5rS/ob0TjtbxHU47jBS0V1Z/g==
+X-Google-Smtp-Source: AGHT+IEQiiRJfQdnx0od/Jp6TZxy4apGURkAJ9ocjTcdfS/PdHpJi//lBiDO4JK/8ABtpzUWX1Vq/cZ1mZ88CvTIJ4g=
+X-Received: by 2002:a05:690c:601:b0:6ef:62c7:cedb with SMTP id
+ 00721157ae682-6f279b22225mr78802707b3.17.1734248060116; Sat, 14 Dec 2024
+ 23:34:20 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1734093566.git.jerome.forissier@linaro.org>
- <8d7a88c7d11d820527d4909557a2af25be53fbbc.1734093566.git.jerome.forissier@linaro.org>
-In-Reply-To: <8d7a88c7d11d820527d4909557a2af25be53fbbc.1734093566.git.jerome.forissier@linaro.org>
+References: <20241213225543.392282-1-raymond.mao@linaro.org>
+In-Reply-To: <20241213225543.392282-1-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 15 Dec 2024 09:31:56 +0200
-Message-ID: <CAC_iWjJ0b9=7YBLAtYUfVnONapST-eG7_Nzs3ZN_vij8pKR6+A@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] trace: add support for 'trace wipe'
-To: Jerome Forissier <jerome.forissier@linaro.org>
+Date: Sun, 15 Dec 2024 09:33:44 +0200
+Message-ID: <CAC_iWj+Ohu8yi_ECZfWJxEXa7Yy4QHDyZxCMscm_O_ReF4qf2A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bloblist: add api to get blob with size
+To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Levi Yun <yeoreum.yun@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,148 +89,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Dec 2024 at 14:46, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Sat, 14 Dec 2024 at 00:55, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Implement a 'trace wipe' command to delete the currently accumulated
-> trace data. This comes handy when someone needs to trace a particular
-> command. For example:
+> bloblist_find function only returns the pointer of blob data,
+> which is fine for those self-describing data like FDT.
+> But as a common scenario, an interface is needed to retrieve both
+> the pointer and the size of the blob data.
 >
->   => trace pause; trace wipe
->   => trace resume; dhcp; trace pause
->   => trace stats
->   => trace calls 0x02100000 0x10000000
->   => tftpput $profbase $profoffset 192.168.0.16:trace.bin
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  cmd/trace.c     |  5 +++++
->  include/trace.h |  2 ++
->  lib/trace.c     | 47 +++++++++++++++++++++++++++++++++--------------
->  3 files changed, 40 insertions(+), 14 deletions(-)
+>  common/bloblist.c  | 17 +++++++++++++++--
+>  include/bloblist.h | 18 ++++++++++++++++++
+>  2 files changed, 33 insertions(+), 2 deletions(-)
 >
-> diff --git a/cmd/trace.c b/cmd/trace.c
-> index 937e6a682ad..d36008720db 100644
-> --- a/cmd/trace.c
-> +++ b/cmd/trace.c
-> @@ -100,6 +100,10 @@ int do_trace(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->         case 's':
->                 trace_print_stats();
->                 break;
-> +       case 'w':
-> +               if (trace_wipe())
-> +                       return CMD_RET_FAILURE;
-> +               break;
->         default:
->                 return CMD_RET_USAGE;
->         }
-> @@ -113,6 +117,7 @@ U_BOOT_CMD(
->         "stats                        - display tracing statistics\n"
->         "trace pause                        - pause tracing\n"
->         "trace resume                       - resume tracing\n"
-> +       "trace wipe                         - wipe traces\n"
->         "trace funclist [<addr> <size>]     - dump function list into buffer\n"
->         "trace calls  [<addr> <size>]       "
->                 "- dump function call trace into buffer"
-> diff --git a/include/trace.h b/include/trace.h
-> index 763d6d1255a..782eaae2fc2 100644
-> --- a/include/trace.h
-> +++ b/include/trace.h
-> @@ -100,6 +100,8 @@ void trace_set_enabled(int enabled);
->
->  int trace_early_init(void);
->
-> +int trace_clear(void);
-> +
->  /**
->   * Init the trace system
->   *
-> diff --git a/lib/trace.c b/lib/trace.c
-> index cabbe47b58a..def9f912c92 100644
-> --- a/lib/trace.c
-> +++ b/lib/trace.c
-> @@ -351,14 +351,8 @@ static int get_func_count(void)
->         return gd->mon_len / FUNC_SITE_SIZE;
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index ec6ff7a5a9..efc1905da3 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -222,14 +222,27 @@ static int bloblist_ensurerec(uint tag, struct bloblist_rec **recp, int size,
 >  }
 >
-> -/**
-> - * trace_init() - initialize the tracing system and enable it
-> - *
-> - * @buff:      Pointer to trace buffer
-> - * @buff_size: Size of trace buffer
-> - * Return:     0 if ok
-> - */
-> -int notrace trace_init(void *buff, size_t buff_size)
-> +static int notrace trace_init_(void *buff, size_t buff_size, bool copy_early,
-> +                              bool enable)
+>  void *bloblist_find(uint tag, int size)
+> +{
+> +       void *blob = NULL;
+> +       int blob_size;
+> +
+> +       blob = bloblist_get_blob(tag, &blob_size);
+> +
+> +       if (size && size != blob_size)
+> +               return NULL;
+> +
+> +       return blob;
+> +}
+> +
+> +void *bloblist_get_blob(uint tag, int *size)
 >  {
->         int func_count = get_func_count();
->         size_t needed;
-> @@ -368,7 +362,7 @@ int notrace trace_init(void *buff, size_t buff_size)
->                 return func_count;
->         trace_save_gd();
+>         struct bloblist_rec *rec;
 >
-> -       if (!was_disabled) {
-> +       if (copy_early) {
->  #ifdef CONFIG_TRACE_EARLY
->                 ulong used, count;
->                 char *end;
-> @@ -394,9 +388,6 @@ int notrace trace_init(void *buff, size_t buff_size)
->                 }
->                 puts("\n");
->                 memcpy(buff, hdr, used);
-> -#else
-> -               puts("trace: already enabled\n");
-> -               return -EALREADY;
->  #endif
->         }
->         hdr = (struct trace_hdr *)buff;
-> @@ -419,13 +410,41 @@ int notrace trace_init(void *buff, size_t buff_size)
->         hdr->ftrace_size = (buff_size - needed) / sizeof(*hdr->ftrace);
->         hdr->depth_limit = CONFIG_TRACE_CALL_DEPTH_LIMIT;
+>         rec = bloblist_findrec(tag);
+>         if (!rec)
+>                 return NULL;
+> -       if (size && size != rec->size)
+> -               return NULL;
+> +
+> +       *size = rec->size;
 >
-> -       puts("trace: enabled\n");
-> -       trace_enabled = 1;
-> +       printf("trace: initialized, %senabled\n", enable ? "" : "not ");
-> +       trace_enabled = enable;
->         trace_inited = 1;
->
->         return 0;
+>         return (void *)rec + rec_hdr_size(rec);
+>  }
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index ff32d3fecf..a04c7c80be 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -250,6 +250,24 @@ static inline void *bloblist_check_magic(ulong addr)
+>         return ptr;
 >  }
 >
+> +#if CONFIG_IS_ENABLED(BLOBLIST)
 > +/**
-> + * trace_init() - initialize the tracing system and enable it
+> + * bloblist_get_blob() - Find a blob and get the size of it
 > + *
-> + * @buff:      Pointer to trace buffer
-> + * @buff_size: Size of trace buffer
-> + * Return:     0 if ok
-> + */
-> +int notrace trace_init(void *buff, size_t buff_size)
-> +{
-> +       /* If traces are enabled already, we may have early traces to copy */
-> +       return trace_init_(buff, buff_size, trace_enabled, true);
-> +}
-> +
-> +/**
-> + * trace_clear() - clear accumulated traced data
+> + * Searches the bloblist and returns the blob with the matching tag
 > + *
-> + * May be called with tracing enabled or disabled.
+> + * @tag:       Tag to search for (enum bloblist_tag_t)
+> + * @size:      Size of the blob found
+> + * Return: pointer to bloblist if found, or NULL if not found
 > + */
-> +int notrace trace_clear(void)
+> +void *bloblist_get_blob(uint tag, int *size);
+> +#else
+> +static inline void *bloblist_get_blob(uint tag, int *size)
 > +{
-> +       bool was_enabled = trace_enabled;
-> +
-> +       if (trace_enabled)
-> +               trace_enabled = 0;
-> +       return trace_init_(gd->trace_buff, CONFIG_TRACE_BUFFER_SIZE,
-> +                          false, was_enabled);
+> +       return NULL;
 > +}
+> +#endif
 > +
->  #ifdef CONFIG_TRACE_EARLY
 >  /**
->   * trace_early_init() - initialize the tracing system for early tracing
+>   * bloblist_find() - Find a blob
+>   *
 > --
-> 2.43.0
+> 2.25.1
 >
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
