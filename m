@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F907E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 23:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF28E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 23:58:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B67418005B;
-	Mon, 16 Dec 2024 00:54:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 498408005B;
+	Mon, 16 Dec 2024 00:58:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1734306859;
-	bh=s880YLKTnraIExc57JDg6MG8CQo28bldYdjKlkKrzKM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SXaL5oX+PFKFAHXWPud2y6U6bZcm8RxPihNZCaOub8xMbMaG8KPnudFdd5/LVYvU2
-	 E3c9FYp8XHMjvhCLJJ8vlIWLBp5sNkyNL04ZBVfHUxVMbmDnhNAC5Nq0h2QIKr9ZoK
-	 hPy4AeLw/Qif7W21pS4n1rtt9sUVWp0pI4kMM5/1hg5GHal/Pcau7tXkdyC3nlEdRg
-	 vEbbSGsLu8w7+2Gtc23W2Di/m4iHUTOUw1YqzFmmu92aZLKZQBe8AI+pcAm1V9NETf
-	 cA+p3beE+9XGNQmy8dPTIV3lxhz0w5LiTROKIUDu2w4ACLTJs+UE1toopk+MbQPVLB
-	 dYVKWDxGo4lZg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qOgQnOx8";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fp3ZTZnw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89AEF80092; Mon, 16 Dec 2024 00:54:18 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id A936280137; Mon, 16 Dec 2024 00:58:38 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3321080050
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:54:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79FBD80050
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:58:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="QByZTX3p"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 456FF1049AF78; Mon, 16 Dec 2024 00:54:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1734306854;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4YBKlw1PCpz9sdW;
+ Mon, 16 Dec 2024 00:58:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734307116;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=s880YLKTnraIExc57JDg6MG8CQo28bldYdjKlkKrzKM=;
- b=QByZTX3p9C3sPUD0gdvcxmF/ujlga9DbN16tdxMHRrx8XyZthHIAKL5rMt+7Dl/AN0ihhN
- zylRCqwNQwgQdKJBjMJPiVA0f+5t2y6QU+t3EJQcxD40Dxq/p/VAQexjJXQ3ojOWi8MNnz
- f6z2me1auEfS/A3VExRXZ1EdX0s6gbt1HCY+TrSB2ha9VMvWJWQ7UjGC6E5uYNUdoh7I0S
- zwE+qGYGqCCelz4MavJOvmpzkxQYcpAOZpB7uljAknfdKW71UWvdyOaSAqlF8xgI5OSntl
- YzP4DtQfbuDv+Hg2zB1GHILQpSWb3fw4/DYC6yIiPv1nMcVtWiILcbHeLZ59eQ==
-Message-ID: <fccae74a-3097-4172-8ae5-3bc72e8d9aa0@denx.de>
-Date: Mon, 16 Dec 2024 00:50:49 +0100
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mEvTAhkV+b7USbzFm7yD1Uzyrcyd4zG+0MVFJZMfcOY=;
+ b=qOgQnOx8R4cISbYF0fQlOWNnyUZl6C1b79rmGCoNQuX+tL02IhD+s11x3db71beU84k2vm
+ 32N87umc6Ss/ZJqZd0HIobGkZmqIt7eNNvfL1ymdTPYXoxw0RhzB5Uck3sxNa01CQrGhVC
+ Tnh+Q7XVqBfSaZpjBuGCwRftWsiWjUZojE3IfjGZHRZclZmDNum3hEZg3JOMALvCvl7j3p
+ rHCpu1KzgL0VkH4WDoMz08B4ylYh18Afr4KP6Y5bSoyAZ5fJZvb9zzWlfn6OC/HCy66bmb
+ B5/KD9CotAwqq9cjkmLs6T+fG8Qvz+ygpOAOlDMQUB3J+yG+XBvXS1TWcbtS7w==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734307114;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mEvTAhkV+b7USbzFm7yD1Uzyrcyd4zG+0MVFJZMfcOY=;
+ b=fp3ZTZnwETWur1JHuJVN8LIeCKx9NeJh6BY0nJVcdP9rSdgeiTvl/zYlipu7yg31xohVpC
+ sqnTYPfPo5Eg5yblROyLcASenqKq/ELmxQav400d13ER7nysxZRGmTKqwOybYxhJGBamBO
+ bhby7tHSCKWBa6JVApsgKyU0Lq3wmyvPUMDUlKzxVgGrZSSIlZxoX4GXVt4DZ6GswtFsax
+ La3cpJhC+2+3SEQowr6R16M2SjP5aFdZEzWaWnshW2TacALp5DtLAAIjmW0Ue8z/4BmlvT
+ wAJwxEEe5HZfGJQEs7R9KM6Ln0e5/t64dfu34WdMNJdaW/9ECbeXUH6fF5E5gg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] net: rswitch: Replace enum rswitch_reg with plain macros
+Date: Mon, 16 Dec 2024 00:57:49 +0100
+Message-ID: <20241215235815.572689-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, tudor.ambarus@linaro.org, j-humphreys@ti.com
-Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- u-kumar1@ti.com, trini@konsulko.com, seanga2@gmail.com,
- caleb.connolly@linaro.org, sjg@chromium.org, william.zhang@broadcom.com,
- stefan_b@posteo.net, quentin.schulz@cherry.de, Takahiro.Kuwano@infineon.com,
- p-mantena@ti.com, git@amd.com
-References: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 5715e71e0626c7467f7
+X-MBO-RS-META: 78fpjt4amepxq8smeff8mms388q38rgw
+X-Rspamd-Queue-Id: 4YBKlw1PCpz9sdW
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,205 +85,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/11/24 1:06 PM, Venkatesh Yadav Abbarapu wrote:
-> Update the spi_nor_read() function only for parallel configuration
-> when config SPI_STACKED_PARALLEL is enabled and keep the default
-> code as is. For parallel configurations fix the read issue for
-> 4byte address width by passing the entire length to the read
-> function, split the memory of 16MB size banks only when the
-> address width is 3byte. Also update the size when the
-> configuration is stacked.
-> 
-> Fixes: 5d40b3d384 ("mtd: spi-nor: Add parallel and stacked memories support")
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
-> Changes in v2:
-> - Update the nor read for parallel configuration and for other case
->    keep the code as is.
-> - Fixed the commit description.
-> - Tested the changes with s25fl128s flash
-> Zynq> sf probe 0 0 0
-> SF: Detected s25fl128s with page size 256 Bytes, erase size 64 KiB, total 16 MiB
-> Zynq> time sf erase 0x0 0x1000000;mw.b 0x8000 aabbccdd 0x1000000;time sf write 0x8000 0x0 0x1000000;mw.b 0x8008000 0x0 0x1000000;time sf read 0x8008000 0x0 0x1000000;cmp.b 0x8000 0x8008000 0x1000000
-> SF: 16777216 bytes @ 0x0 Erased: OK
-> 
-> time: 32.464 seconds
-> device 0 whole chip
-> SF: 16777216 bytes @ 0x0 Written: OK
-> 
-> time: 15.515 seconds
-> device 0 whole chip
-> SF: 16777216 bytes @ 0x0 Read: OK
-> 
-> time: 1.557 seconds
-> Total of 16777216 byte(s) were the same
-> ---
->   drivers/mtd/spi/spi-nor-core.c | 50 ++++++++++++++++++++++------------
->   1 file changed, 33 insertions(+), 17 deletions(-)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> index ec841fb13b..8d7087b5c9 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -1140,7 +1140,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
->   				nor->spi->flags &= ~SPI_XFER_U_PAGE;
->   		}
->   #ifdef CONFIG_SPI_FLASH_BAR
-> -		ret = write_bar(nor, addr);
-> +		ret = write_bar(nor, offset);
+Replace enum rswitch_reg with plain #define REGISTER OFFSET macros.
+The enum rswitch_reg was not referenced anywhere, so there was no
+benefit of keeping it around. Include register block labels. Turn
+all register offsets into lowercase hex values. No functional change.
 
-This change is really inobvious, the code above likely needs to be 
-compiled out if the SPI_STACKED_PARALLEL stuff is disabled ?
+Rename EATDQDC to EATDQDCR, GWTRC to GWTRCR, GWDCC to GWDCCR, FWPC0
+to FWPC, FWPBFC to FWPBFCR, FWPBFCSDC to FWPBFCSDCR because there
+are both register names which used to be part of this enum and also
+macros with the same name, each used for slightly different purpose.
+Make sure there is no collission.
 
-"
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 8d7087b5c95..691962ef271 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -1130,6 +1130,7 @@ static int spi_nor_erase(struct mtd_info *mtd, 
-struct erase_info *instr)
-                         goto erase_err;
-                 }
-                 offset = addr;
-+               if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-                         if (nor->flags & SNOR_F_HAS_PARALLEL)
-                                 offset /= 2;
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/net/rswitch.c | 95 +++++++++++++++++++++----------------------
+ 1 file changed, 47 insertions(+), 48 deletions(-)
 
-@@ -1139,6 +1140,7 @@ static int spi_nor_erase(struct mtd_info *mtd, 
-struct erase_info *instr)
-                                 else
-                                         nor->spi->flags &= 
-~SPI_XFER_U_PAGE;
-                         }
-+               }
-  #ifdef CONFIG_SPI_FLASH_BAR
-                 ret = write_bar(nor, offset);
-                 if (ret < 0)
-"
-
->   		if (ret < 0)
->   			goto erase_err;
->   #endif
-> @@ -1152,7 +1152,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
->   		    !(nor->flags & SNOR_F_NO_OP_CHIP_ERASE)) {
->   			ret = spi_nor_erase_chip(nor);
->   		} else {
-> -			ret = spi_nor_erase_sector(nor, addr);
-> +			ret = spi_nor_erase_sector(nor, offset);
->   		}
->   		if (ret < 0)
->   			goto erase_err;
-> @@ -1578,8 +1578,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->   	struct spi_nor *nor = mtd_to_spi_nor(mtd);
->   	int ret;
->   	loff_t offset = from;
-> -	u32 read_len = 0;
->   	u32 rem_bank_len = 0;
-> +	u32 stack_shift = 0;
->   	u8 bank;
->   	bool is_ofst_odd = false;
->   
-> @@ -1593,18 +1593,23 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->   	}
->   
->   	while (len) {
-> -		bank = (u32)from / SZ_16M;
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			bank /= 2;
-> -
-> -		rem_bank_len = SZ_16M * (bank + 1);
-> -		if (nor->flags & SNOR_F_HAS_PARALLEL)
-> -			rem_bank_len *= 2;
-> -		rem_bank_len -= from;
-> -
-> +		size_t read_len = len;
->   		offset = from;
->   
-> +	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> +		if (nor->addr_width == 3) {
-> +			bank = (u32)from / SZ_16M;
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +				bank /= 2;
-> +
-> +			rem_bank_len = SZ_16M * (bank + 1);
-> +			if (nor->flags & SNOR_F_HAS_PARALLEL)
-> +				rem_bank_len *= 2;
-> +			rem_bank_len -= from;
-> +		}
-> +
->   		if (nor->flags & SNOR_F_HAS_STACKED) {
-> +			stack_shift = 1;
->   			if (offset >= (mtd->size / 2)) {
->   				offset = offset - (mtd->size / 2);
->   				nor->spi->flags |= SPI_XFER_U_PAGE;
-> @@ -1613,20 +1618,31 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
->   			}
->   		}
->   
-> +		if (nor->addr_width == 4)
-> +			rem_bank_len = (mtd->size >> stack_shift) - offset;
-> +
->   		if (nor->flags & SNOR_F_HAS_PARALLEL)
->   			offset /= 2;
-> +	}
->   
->   #ifdef CONFIG_SPI_FLASH_BAR
-> +		u32 remain_len;
-> +
->   		ret = write_bar(nor, offset);
->   		if (ret < 0)
->   			return log_ret(ret);
-> -#endif
-> -
-> -		if (len < rem_bank_len)
-> +		remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
-> +		if (len < remain_len)
->   			read_len = len;
->   		else
-> -			read_len = rem_bank_len;
-> -
-> +			read_len = remain_len;
-> +#endif
-> +		if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-> +			if (len < rem_bank_len)
-> +				read_len = len;
-> +			else
-> +				read_len = rem_bank_len;
-> +		}
-
-If I look at this change with 'git show -w' , the change looks like this:
-
-"
-  #ifdef CONFIG_SPI_FLASH_BAR
-+               u32 remain_len;
-+
-                 ret = write_bar(nor, offset);
-                 if (ret < 0)
-                         return log_ret(ret);
-+               remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
-+               if (len < remain_len)
-+                       read_len = len;
-+               else
-+                       read_len = remain_len;
-  #endif
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 8e1b6e2f6f6..cbc9a413313 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -48,48 +48,47 @@
+ #define TARO    0
+ #define RMRO    0x1000
+ 
+-enum rswitch_reg {
+-	EAMC		= TARO + 0x0000,
+-	EAMS		= TARO + 0x0004,
+-	EATDQDC		= TARO + 0x0060,
+-	EATTFC          = TARO + 0x0138,
+-	EATASRIRM	= TARO + 0x03E4,
 -
-+               if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-                         if (len < rem_bank_len)
-                                 read_len = len;
-                         else
-                                 read_len = rem_bank_len;
+-	GWMC		= GWRO + 0x0000,
+-	GWMS		= GWRO + 0x0004,
+-	GWMTIRM		= GWRO + 0x0100,
+-	GWVCC		= GWRO + 0x0130,
+-	GWTTFC		= GWRO + 0x0138,
+-	GWDCBAC0	= GWRO + 0x0194,
+-	GWDCBAC1	= GWRO + 0x0198,
+-	GWTRC		= GWRO + 0x0200,
+-	GWARIRM		= GWRO + 0x0380,
+-	GWDCC		= GWRO + 0x0400,
 -
-+               }
-                 if (read_len == 0)
-                         return -EIO;
-"
+-	RRC		= CARO + 0x0004,
+-	RCEC		= CARO + 0x0008,
+-	RCDC		= CARO + 0x000C,
+-	CABPIRM		= CARO + 0x0140,
+-
+-	FWPC0		= FWRO + 0x0100,
+-	FWPBFC		= FWRO + 0x4A00,
+-	FWPBFCSDC	= FWRO + 0x4A04,
+-
+-	MPSM		= RMRO + 0x0000,
+-	MPIC		= RMRO + 0x0004,
+-	MRMAC0		= RMRO + 0x0084,
+-	MRMAC1		= RMRO + 0x0088,
+-	MRAFC		= RMRO + 0x008C,
+-	MRSCE		= RMRO + 0x0090,
+-	MRSCP		= RMRO + 0x0094,
+-	MLVC		= RMRO + 0x0180,
+-	MLBC		= RMRO + 0x0188,
+-	MXGMIIC		= RMRO + 0x0190,
+-	MPCH		= RMRO + 0x0194,
+-	MANM		= RMRO + 0x019C,
+-	MMIS0		= RMRO + 0x0210,
+-	MMIS1		= RMRO + 0x0220,
+-};
++/* List of TSNA registers (ETHA) */
++#define EAMC		(TARO + 0x0000)
++#define EAMS		(TARO + 0x0004)
++#define EATDQDCR	(TARO + 0x0060)
++#define EATTFC		(TARO + 0x0138)
++#define EATASRIRM	(TARO + 0x03e4)
++/* Gateway CPU agent block (GWCA) */
++#define GWMC		(GWRO + 0x0000)
++#define GWMS		(GWRO + 0x0004)
++#define GWMTIRM		(GWRO + 0x0100)
++#define GWVCC		(GWRO + 0x0130)
++#define GWTTFC		(GWRO + 0x0138)
++#define GWDCBAC0	(GWRO + 0x0194)
++#define GWDCBAC1	(GWRO + 0x0198)
++#define GWTRCR		(GWRO + 0x0200)
++#define GWARIRM		(GWRO + 0x0380)
++#define GWDCCR		(GWRO + 0x0400)
++/* List of Common Agent registers (COMA) */
++#define RRC		(CARO + 0x0004)
++#define RCEC		(CARO + 0x0008)
++#define RCDC		(CARO + 0x000c)
++#define CABPIRM		(CARO + 0x0140)
++/* List of MFWD registers */
++#define FWPC		(FWRO + 0x0100)
++#define FWPBFCR		(FWRO + 0x4a00)
++#define FWPBFCSDCR	(FWRO + 0x4a04)
++/* List of RMAC registers (RMAC) */
++#define MPSM		(RMRO + 0x0000)
++#define MPIC		(RMRO + 0x0004)
++#define MRMAC0		(RMRO + 0x0084)
++#define MRMAC1		(RMRO + 0x0088)
++#define MRAFC		(RMRO + 0x008c)
++#define MRSCE		(RMRO + 0x0090)
++#define MRSCP		(RMRO + 0x0094)
++#define MLVC		(RMRO + 0x0180)
++#define MLBC		(RMRO + 0x0188)
++#define MXGMIIC		(RMRO + 0x0190)
++#define MPCH		(RMRO + 0x0194)
++#define MANM		(RMRO + 0x019c)
++#define MMIS0		(RMRO + 0x0210)
++#define MMIS1		(RMRO + 0x0220)
+ 
+ /* COMA */
+ #define RRC_RR		BIT(0)
+@@ -99,7 +98,7 @@ enum rswitch_reg {
+ #define CABPIRM_BPR	BIT(1)
+ 
+ /* MFWD */
+-#define FWPC0(i)	(FWPC0 + (i) * 0x10)
++#define FWPC0(i)	(FWPC + (i) * 0x10)
+ #define FWPC0_LTHTA     BIT(0)
+ #define FWPC0_IP4UE     BIT(3)
+ #define FWPC0_IP4TE     BIT(4)
+@@ -118,13 +117,13 @@ enum rswitch_reg {
+ 			 FWPC0_IPDSA | FWPC0_IPHLA | FWPC0_MACSDA | \
+ 			 FWPC0_MACHLA | FWPC0_MACHMA | FWPC0_VLANSA)
+ 
+-#define FWPBFC(i)	(FWPBFC + (i) * 0x10)
+-#define FWPBFCSDC(j, i)	(FWPBFCSDC + (i) * 0x10 + (j) * 0x04)
++#define FWPBFC(i)	(FWPBFCR + (i) * 0x10)
++#define FWPBFCSDC(j, i)	(FWPBFCSDCR + (i) * 0x10 + (j) * 0x04)
+ 
+ /* ETHA */
+ #define EATASRIRM_TASRIOG	BIT(0)
+ #define EATASRIRM_TASRR		BIT(1)
+-#define EATDQDC(q)		(EATDQDC + (q) * 0x04)
++#define EATDQDC(q)		(EATDQDCR + (q) * 0x04)
+ #define EATDQDC_DQD		(0xff)
+ 
+ /* RMAC */
+@@ -189,8 +188,8 @@ enum rswitch_gwca_mode {
+ #define GWARIRM_ARR		BIT(1)
+ #define GWVCC_VEM_SC_TAG	(0x3 << 16)
+ #define GWDCBAC0_DCBAUP		(0xff)
+-#define GWTRC(i)		(GWTRC + (i) * 0x04)
+-#define GWDCC(i)		(GWDCC + (i) * 0x04)
++#define GWTRC(i)		(GWTRCR + (i) * 0x04)
++#define GWDCC(i)		(GWDCCR + (i) * 0x04)
+ #define	GWDCC_DQT		BIT(11)
+ #define GWDCC_BALR		BIT(24)
+ 
+-- 
+2.45.2
 
-Why is there this part of code twice now, ifdeffed out differently in 
-each case ?
-
-"
-                         if (len < rem_bank_len)
-                                 read_len = len;
-                         else
-                                 read_len = rem_bank_len;
-"
