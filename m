@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7E0E77180
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 02:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1113FE77180
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 02:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F6E980092;
-	Sun, 15 Dec 2024 03:37:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E8B3C800B1;
+	Sun, 15 Dec 2024 03:37:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NpWAS8rz";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="U4gPpdr/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 983D88006D; Sun, 15 Dec 2024 03:37:53 +0100 (CET)
+ id 3FF25800AA; Sun, 15 Dec 2024 03:37:55 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0584C8006E
+ by phobos.denx.de (Postfix) with ESMTPS id C17F78008A
  for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 03:37:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,27 +31,26 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7565141226; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CBBB741227; 
  Sun, 15 Dec 2024 02:37:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1734230270;
- bh=rE4jaRVRb+beysPu7GtTuOYoZ4Nuhx3OAW3UHab8uec=;
+ s=20210705; t=1734230271;
+ bh=49hhvzjKkypNFbZzEyvJ3+Bf+kLkoVrTCJ6qdbHiCGQ=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=NpWAS8rzVfvmWP5Sa2Kl0HkehfcWjPuzlFeLZ+eoVkccGBhYFQTB/+Cr+r6rj3NdN
- OWwvBIncN4FMUjB+8Vno+a1TBVOMvv7AGvr1MY2Md6qP14xmqvmBkKQ0zbPrzxjBwv
- H/6u7UGgrJPx/izjqhuFffJBNCOQcv2e24neodgjbYlRDqNzpPsBRvcZ0zG0cA0hhz
- zeZLsU1QMf7tSM59jPvJvkN6xw84RElJ4X0w/yaChNos+IcXugCHUFwZ7JVhw62IDi
- f2hqxnQGtGe3qzc4FpOROpjn1599gWVMa3LIX8kMmXQ4dtkejWpHkxvNIVz6P0TDoc
- w7JJ3mg5AJNbw==
+ b=U4gPpdr/17ZmAjIvu/PxPLSI61fxOzR8C3xb5h+g6HHtwnUmQ/JFwX9kG76O8h+ZS
+ j5/OJ+BJZmWBG1ymftj0t0x+dCigDfb+I2XAb1a+433LWtDVTXRCeNWRopxeHLyB/U
+ yM0RmF14VIutB3L96RDXlSTqKAHPfWSzR061VyrJ1EDyLP7T75gE6WI6IU6KGulX/X
+ J6Bx43hzJBjT5gbKnBMJVg92h9SUnx6DOi6XAYAqm9+ZWKHtQ84EOYn9w0p4riV9km
+ Cbop/Zs2sLXWV466BMEeQfWTpRR0SdITdAOsaGUdmH7CDtbyeeZrjcqPNMcctWX+2U
+ mJXwvHwL2eHXw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/2] scripts/checkpatch.pl: allow special characters in
- spelling.txt
-Date: Sun, 15 Dec 2024 03:37:31 +0100
-Message-ID: <20241215023732.68902-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/2] scripts/spelling.txt: add GPL-2.0+
+Date: Sun, 15 Dec 2024 03:37:32 +0100
+Message-ID: <20241215023732.68902-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241215023732.68902-1-heinrich.schuchardt@canonical.com>
 References: <20241215023732.68902-1-heinrich.schuchardt@canonical.com>
@@ -73,30 +72,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Checkpatch.pl uses the misspelled words from spelling.txt both as keys of a
-hash and as part of a regular expression. For usage in the regular
-expression special characters like the plus sign need to be escaped.
+The correct SPDX identifier for the 'GNU General Public License v2.0 or
+later' is GPL-2.0-or-later.
 
-Escape special characters in the list of misspelled words.
-
+Link: https://spdx.org/licenses/GPL-2.0-or-later.html
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- scripts/checkpatch.pl | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ scripts/spelling.txt | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index b8eb57f38c7..cee60e390e7 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -942,7 +942,7 @@ if ($codespell) {
- 	}
- }
- 
--$misspellings = join("|", sort keys %spelling_fix) if keys %spelling_fix;
-+$misspellings = join("|", map{quotemeta($_)} sort keys %spelling_fix) if keys %spelling_fix;
- 
- sub read_words {
- 	my ($wordsRef, $file) = @_;
+diff --git a/scripts/spelling.txt b/scripts/spelling.txt
+index 17fdc620d54..61a3e86deef 100644
+--- a/scripts/spelling.txt
++++ b/scripts/spelling.txt
+@@ -694,6 +694,7 @@ genereate||generate
+ genereted||generated
+ genric||generic
+ globel||global
++gpl-2.0+||GPL-2.0-or-later
+ grabing||grabbing
+ grahical||graphical
+ grahpical||graphical
 -- 
 2.45.2
 
