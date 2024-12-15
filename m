@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E104E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BF9EE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 16:51:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B90D0800B5;
-	Sun, 15 Dec 2024 17:48:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 373D58004F;
+	Sun, 15 Dec 2024 17:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X/BWEd/b";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fb7+BqRp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CCC480086; Sun, 15 Dec 2024 17:48:52 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id D82C680040; Sun, 15 Dec 2024 17:51:13 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ADDC80050
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:48:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63AD080050
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:51:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6d89dc50927so25193496d6.3
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:48:49 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6fc3e9e4aso216093085a.2
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 08:51:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734281328; x=1734886128; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734281470; x=1734886270; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pkzzgG8auriSH0wi2qDuaTcOTHLwXpMJcnFKviuUotA=;
- b=X/BWEd/bb597z3TSIrebTU4tJHepvDML/v1jplQ5oxl5scOof4Za59wzUSRZKZYcwy
- G2ccdJXyMFUkgOX4iXRxVg16XKnXivjJ6+dv5eP/nINmoBcT0XLhcTw526XP5hcF6CWG
- 3Tz6OqHnrQv/nSZ+i17X1tWI144fW+Q4VHef4=
+ bh=DF/i7CGg/SzJHxX7tArwK8oDMkJGI6ZTLqd2ORqXOK8=;
+ b=fb7+BqRp9iw6nE9XG9sj7UKz1hFBkrfzhTzPoKm3JWuwS+M5EkRdInF2Lbfnp8EoU9
+ IWr2BjD2yr22517rurcgzc538hKRIBrsd6uDdmP0V7/95MaWrYPdlJrsRZWOTPppLWEw
+ HtxKYusL/E0NZbTd0v7paTUds/ejQQp5XOyGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734281328; x=1734886128;
+ d=1e100.net; s=20230601; t=1734281470; x=1734886270;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pkzzgG8auriSH0wi2qDuaTcOTHLwXpMJcnFKviuUotA=;
- b=ohWRXLeAcNnqrzYwns+3Hloew9xqQpkAryQh/uKYrgWnX47m1xoKX0dpHx8rY2I8g0
- gE+g71nPpvV+zuI8Ln1LgCYBdCWJCC+yvwYZ4FgrpCPe9ROc0jU6QqAQL4cBnTk9i/s0
- urTZJn1lSroemlT0X4LPrqmT6hYfWyciHAgbFDmLK8Mi8F+BTRGP/AQ7TwzW3YBLZHy8
- XGrArcd9J5VFns3yTsjRNIeL3YwOQaHvEkDv438OrOKsHqSl7G+OgST00ntuGxZ1Fdfd
- cgXS9dMjf/ONxVYtVVgecQ919K7RhDagjBydVoO4KbDEhnjrICCKiq8nfmlmOhJJUAxm
- wqHg==
-X-Gm-Message-State: AOJu0YzgXv/kauOLu9ctc6LnvEW5ec73TdI5oi+xwMagPg99+62fV8WW
- WADGmcdHCWqye67AiSE6+tL6CMjDBsWQDVavAbEVroVjlJ+kZqAKq8fJJj60oho=
-X-Gm-Gg: ASbGncvc/gYMnm5r/hLGuOBFyTB3+PD1nCbL1cqIeBo6ahk/csRUBO5sXVang1bZlz/
- c6qKJsG75X4bA9Li9mFxQBNDrCNpEfnojAX8C5Z4vdKH7aHHSAgWqARv4xpzbxcECuhTYm+1Seu
- vq3tiTUDXHXgaPXOiAgREGxhoHUjyIZBhbN9/IN32WlV42Sli/17Kkx4jGsWqepXP49ARjrzW+2
- NeU3lBXrTOHT3/s+nio7yeRscZZSsSyhokdoridBXpfSSMiPM/vvTBq
-X-Google-Smtp-Source: AGHT+IHPMyUK2Z2LD1TxLEeJejpxr2qoZXaGczkqfXgyK+KGp3PkXBLlKKAeGoz3jXSL9Uj0ZgxkAA==
-X-Received: by 2002:a05:6214:f6c:b0:6ce:2357:8a2e with SMTP id
- 6a1803df08f44-6dc9684fd5dmr172422246d6.37.1734281328403; 
- Sun, 15 Dec 2024 08:48:48 -0800 (PST)
+ bh=DF/i7CGg/SzJHxX7tArwK8oDMkJGI6ZTLqd2ORqXOK8=;
+ b=p/s92ta3ojJ0NI+ErhVCmdb04XFxI08AQ30VWtQHeDj6bi7OmfPBR86iMEJWIvn2pJ
+ dkiqNuZtPoYNkVYHCR+YbBGu/PfdyynAImMubuRPQ6P74PfIwtik8L6XlAulugqnCC1i
+ r8bC9j170vTroynU/9tHhXeg92BULIOhJrk/QwCzaT5NPGna6s4N3Wu93Ftr2Ng9+pow
+ v1f8vfY8HClDXmiS2wtOoJgD/mU61nag5a+/ZVsgNo/VsosuIO0s7P9Q3Qxo+gClaTzD
+ S5FkHzsWtjcwGHAOhV5vxEUEGFvEE455eiCVAERJigJuo8GgKYOzUR5HpiFr49FNI/4e
+ uLtw==
+X-Gm-Message-State: AOJu0YxENBaDswyG+ejhmdaI/g3QprWLYmneuPrcid2bhRaSJuVvEyYS
+ BTVzQwn4TGOcZns9B4BtdueFd9GQVu3Ogw51FIdgbZyTS7s0cj7JtKdTcpTOWo8NLa0v/3y7wx1
+ BzWM=
+X-Gm-Gg: ASbGnctZ/ZVqosJ/K6B+xi0Brlj+DEtx47zKPwmq4PPf0zwDQo4dMwo+525qiYn+Usc
+ lm71GqDF5jedGJcD7x/BmP9oDc1x9qG/0ZQewQzlNkHDZOzhx/Fr609rm3txKGktVhfY1GMklsp
+ hpSuGQa9o+BD88ZV3Olkj8hWjA3uDRFjCdD5sgz5s8RP+LMegpu0jMIzWAK/xee6knH6COkJzhU
+ Tp5eJrPkeeOFR5zM4A1vkzfmZEzENw6KrT0F8mPhDYQdbvVWU+oIe6x
+X-Google-Smtp-Source: AGHT+IG5JMmkjx0kfBJje/7F3yzdQv6mdbdPTGqg5U9Ak9tAqUj1QoKNZlqL3/OKekMEWWB02/mnZA==
+X-Received: by 2002:a05:620a:4554:b0:7b6:6365:1b72 with SMTP id
+ af79cd13be357-7b6fbecc52dmr1467977885a.3.1734281470259; 
+ Sun, 15 Dec 2024 08:51:10 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dccd38074dsm17986006d6.118.2024.12.15.08.48.45
+ af79cd13be357-7b7047d08a0sm150439185a.33.2024.12.15.08.51.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 08:48:47 -0800 (PST)
-Date: Sun, 15 Dec 2024 10:48:44 -0600
+ Sun, 15 Dec 2024 08:51:09 -0800 (PST)
+Date: Sun, 15 Dec 2024 10:51:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: Re: [PATCH] arm64: renesas: Align configuration headers
-Message-ID: <20241215164844.GD1505244@bill-the-cat>
-References: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: Re: Pull request for u-boot-nand-20241212
+Message-ID: <20241215165106.GE1505244@bill-the-cat>
+References: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OGUD+kHzRGF3D4ws"
+ protocol="application/pgp-signature"; boundary="U+6G1cITY2xT/5LY"
 Content-Disposition: inline
-In-Reply-To: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,61 +96,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---OGUD+kHzRGF3D4ws
+--U+6G1cITY2xT/5LY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 14, 2024 at 11:45:11PM +0100, Marek Vasut wrote:
-
-> Align R-Car Gen2/Gen3/Gen4 configuration header file to look
-> basically the same way across these three SoC generations.
-> There are subtle difference between the remaining bits in
-> those files across SoC generations, but the common bits are
-> now aligned. There is not much left in those headers either,
-> most of the configuration is now converted to Kconfig.
+On Sun, Dec 15, 2024 at 03:46:22PM +0100, Michael Nazzareno Trimarchi wrote:
+> Hi Tom
 >=20
-> Specifically for R-Car Gen3, GIC registers have been moved
-> to architecture specific header file rcar-gen3-base.h , the
-> rest of the changes here are comment changes and indentation
-> changes.
+> The following changes since commit 9452fb7484118822b878ad445237d111b7b1a2=
+8d:
 >=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  .../include/mach/rcar-gen3-base.h             |  5 +++++
->  include/configs/rcar-gen2-common.h            | 10 ++++++----
->  include/configs/rcar-gen3-common.h            | 19 ++++++-------------
->  include/configs/rcar-gen4-common.h            |  8 +++-----
->  4 files changed, 20 insertions(+), 22 deletions(-)
+>   Merge branch 'master' of
+> https://source.denx.de/u-boot/custodians/u-boot-sh (2024-12-11
+> 12:50:29 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
+> mike/u-boot-nand-20241212
+>=20
+> for you to fetch changes up to 65ac40c1e99826b346c5e3b829143902494415e2:
+>=20
+>   nand: Add a watch command (2024-12-12 19:28:07 +0100)
+>=20
+> Small addition to uboot-nand. Nothing relevant for now. Anyway
+> a nice new command coming from Miquel Raynal and small changes.
+>=20
+> The patches pass the pipeline CI:
+> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/23=
+837
 
-This is good. As a follow-up, since it's a functional change, can we
-just switch to the default CFG_SYS_BAUDRATE_TABLE of { 9600, 19200,
-38400, 57600, 115200 } ?
+This doesn't seem like the level of fixes only we should aim for, for
+master at this point in the cycle so I'm going to take this to -next
+after the next -rc release, thanks.
 
 --=20
 Tom
 
---OGUD+kHzRGF3D4ws
+--U+6G1cITY2xT/5LY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCGwACgkQFHw5/5Y0
-tyyROwv/btsbWJG3XOPBvZyaJBeCqbsM3D18sNikN6hRC1BwImqrdhCn+IYJ24F5
-Uwq1BewK5vCgi+30cNQqwqrD5IcGSy8bTPlqKHirszIAk8CQuByz63Lo0Hq2MqKm
-fOFgrHUiMpumnBxrlcD+eX66fj8u8o106AwmNiyESKwG59gz7ypK/r90FuzeBDLf
-gtgPcMW2tyl4h738/7GaccGvmbR4yDwqIlC2Sh1qa2H2dmDa+ejCobh+m9GSTtha
-fd0TuJIko+H1D76ZOIgJhzv1Kzki036juVgsh7ms7v5iXw5a/S8BpQclCt50AksV
-64sP5PwW6Xl1o3wfYDYHj06RsvZEydxILFt0Pnlybz+fU0EDeNgehy6unGu+GtbU
-/l3sPD7NaCJeSo2QXTlvVuzwe9oOmC5z2Gx6yG6VU13RewrqEk9NiKxHSxmEieRu
-EFUvMKrgCfTutRSps348isUB96kBTN4W/Ivd1K/UV1cZAU4GsuL0161pZ+vBfKbV
-SJclWlYJ
-=m5GF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfCPoACgkQFHw5/5Y0
+tywVcgwAi8b/2Wj7NIF/5BnYqJdhh/tBLo5SjowJXj9BigFLZmMajf5nxUDrJYZC
+Eoq1Hs7ZlbESQ2EHFFC39TUrRVgiZ4AaO9RRWAqZagYuAEmawsyISPVFm3VIgpE8
+UlLt47Gjq2tw8eNsjUuYAFwIxWKrPk7HrIwqXRLrnfKlkGm6dw7qXn4JoIoehJl/
+LzHi+/oQ07yTy2BsAw9UjbJPd9snEuLGVKG3WpbpvyRDfPn922vZjnY4ThJSfbsJ
+ZuoYPu7+FPSt8xOiE6M2LJHosGc3Q8Orvil8C3M1WwfYy2qRwfZYBNokYkx0fTk3
+SiiR0etrD8H/THwjJAlqtBS6mmF6gbzrMorbRgSjytZDFtob7gfEA5JORelPGlw1
+T2dA8IvN4wdD46VfK63ngGbpKXCJs8bTuWBrTRvWHyrQ5l+ZnfFOcu3U/T5ChZuG
+94lEQyPyfwXC7J9UZ6FR9pOzQX2QPPE5MVb5IwmIuFnG4GgNKO2pGDKL52XF/jf9
+cJhrhpPQ
+=YOxk
 -----END PGP SIGNATURE-----
 
---OGUD+kHzRGF3D4ws--
+--U+6G1cITY2xT/5LY--
