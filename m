@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FA2E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 14:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C611BE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 14:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7DE58005D;
-	Sun, 15 Dec 2024 15:03:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1054E80086;
+	Sun, 15 Dec 2024 15:03:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ug5F7CMD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p4bbjUh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BB7080050; Sun, 15 Dec 2024 15:03:53 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 8992780083; Sun, 15 Dec 2024 15:03:55 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D62180040
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 15:03:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6021080040
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 15:03:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7b6ff72ba5aso159326585a.1
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 06:03:50 -0800 (PST)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7b15d7b7a32so345754285a.1
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 06:03:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734271430; x=1734876230; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734271432; x=1734876232; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vo6V1fHD0D02rGD2DMJ4JlWwNw6IUycFI48VGdByRHs=;
- b=ug5F7CMDCiCjGE4LhL7e9mDgowNGS0GXdgbHDH2PIAntuiCQWHA6+AM8302TbKEmR9
- UOQ/Y9sEoSmMjdR44fydEaHxfHxzdx0LeGC2tTNLpeHCGI+dREXKmq+84VMoeJF/lwak
- 4gI0grjtPqSlr1t++3S/g67ZJLT9ACjJ1zTfQ=
+ bh=I1v6+UvKyJlfavJ8z0p3WMC6CC8B7OfHILUaH7yNrxw=;
+ b=p4bbjUh6HpqEM2UKxX02gh4aEKBBaTu23LM0Aei01yIxalkHVQckeiqlmMz8VREsn5
+ BBDRlZt/xV1CUDia1nbb0EQGoGPo3t7msbQzBjQY5YdZS/OLFQb2WgymyfK/Sk/zbbWD
+ nPeMzWt5kKVxq8DML1mA1wXGgmHQBV7MGZfTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734271430; x=1734876230;
+ d=1e100.net; s=20230601; t=1734271432; x=1734876232;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vo6V1fHD0D02rGD2DMJ4JlWwNw6IUycFI48VGdByRHs=;
- b=sUEhgMrPgww/ILi4Zhkuq+zR9UXxPUXe6bM5uQWA72QS9JlNwf0V37+KkW5GBBzEwc
- aP6CwXiHlMpsbnKKYrSGUZYauSOsaqc93a3onVbWJ9cnzUnGT4GNZPuV4xfEhy0pl017
- HWkS67gL+h1369sy/6Nx3gL//BOBxj0Wn86uiCqbQwz4dl9W6JPq1TlxuByUauTTb88F
- 7k+IYZUjpnoOz79Y+7nSkWTprf0yWYFtjTpenIY9QRPmWxbnfPmD4QQUZm7MkOtifj1v
- obIFz/GPtWRr9F/69ZisGINRzw7iBz99H8fiww2OLW3BU/gXDbZvgNCtgh862Z3d4Avx
- oJFA==
+ bh=I1v6+UvKyJlfavJ8z0p3WMC6CC8B7OfHILUaH7yNrxw=;
+ b=Q+P0w+uRnWNraSL5C41J60DGm1agJg+Q8VGHiKsWkbkGKoY1RnI0iqxGggTuh2IhyR
+ Kmb30fiu5niTCz4zFFULjosROj6g+lm+w/l/50i1r9uMHSV1rkpPSQDA09c2VWqsfapn
+ FGIJJxIJ4gyvPqDo2Xfexrxv/ksSaqnh2x36a3b52FzQ/0x+T2tBUhrXLX8rizJLgJpv
+ JIz7Gbhylp3ehEp4QkBQHMDJfvUc4qRiT4TiAyIpV6ChVdqALaeG1ZC2Fk2RnTkNdK7g
+ zzPbH4rALEAV5pl/JSOLi4HVe7Z+1eEadrZo6txvt0EO2zxIHTGLwR6ZERSZiJM5GNFj
+ HZkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVrJ5KsVGE9NoMU6edl0QiyGi2obi5VmKaQBDIiGqIyzHlsxceziQbnAmFpXkMGGqWDA3otX80=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVnl/rAIcMXgtgHsYYS6wRTuRIfozITJIytDh4+0Cl0yk1+A4I
- HNN7RSiBPWt8fuvrkue5RrsSU7NiB0D/CwduYrU0TYhqssFA35cKkZ7jAxI5/ck=
-X-Gm-Gg: ASbGnctrGKcOZfEXBxA/SZM10z0FltmtLLeC3/G7oTdUILg57yXnNPsmu2Y0PYNF9Uy
- L0fsIuURXB3kscImPpnPzU4G/lrACPBf5BlKfshClbOVa2dvNFbifzhSdiU2AHVlmKit2KWWeiK
- LIozJ3ghd2mDwYtkq96abLo9abnOn+vetsSYpOnHj3gv5GRUQiPDwz7yT6bf26NGL+bXHPbmgRx
- 36TvLhRIeOomxpkD5M+NGG3yu8cXly3DAz1CpCMjB8yEMrw5x9axO8=
-X-Google-Smtp-Source: AGHT+IFBmCwytkwUa/6gyjtdhquzM+ZdMO6XIby7Lhe1CHa7/fbPIS5d9bUapscdPXrRKKgapb/a/g==
-X-Received: by 2002:a05:620a:2690:b0:7b6:e931:460a with SMTP id
- af79cd13be357-7b6fbee660emr1716777485a.21.1734271429823; 
- Sun, 15 Dec 2024 06:03:49 -0800 (PST)
+ AJvYcCVQhY6T7BhN8CuS0MV+cTQZaOnBPyCl45eDfcAGY0vDCFErJwfSu4V63KQSYckQSVc6cXnV64E=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNFK9zA/+UB9tUTw+ae245xImRlDyAFiXPZh0sCNINp5y5GhEY
+ c1O6Edm+rqb+6vFIgCFj7jhnz6axrTWrE2BWa/HevtAciORl0KvFRSYu70Qym84=
+X-Gm-Gg: ASbGncvV55J8AxDJ9LzTuxJcs4psszN5zrXGaB3FnwSiX3OaloBkCBYFAda3XfA6Qsz
+ cZeII0dCD7IPwJaUWpjDOUg4L58FzzLiiUIFONTSZEvbxGOrShk2r9jBjolzZuGSExN1lRW1aHw
+ 4cSqMCPGJEefhbupFQc8xZYdAW5wEgk2HavXhUH7sgOcEZ4sI/VT6Yl1Ms8uXP07b/G5+CLYvzV
+ PH0XCDF3mvpBQrZHuP0+o91SuytklVnJ6sFexIq7AfeMfCxR3CXvUw=
+X-Google-Smtp-Source: AGHT+IFlEaua1JtedZ50AJeucv+10tDXqJozcCqwhDalVzLWv22Jhgs9dBQJvDuQ1LbHFV1hM2gztw==
+X-Received: by 2002:a05:620a:2990:b0:7ad:832a:4063 with SMTP id
+ af79cd13be357-7b6fbecc68cmr1299735485a.7.1734271432253; 
+ Sun, 15 Dec 2024 06:03:52 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7048bd82asm139942785a.82.2024.12.15.06.03.47
+ af79cd13be357-7b7048bd82asm139942785a.82.2024.12.15.06.03.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 06:03:49 -0800 (PST)
+ Sun, 15 Dec 2024 06:03:51 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Gokul Praveen <g-praveen@ti.com>
-Cc: sjg@chromium.org, rasmus.villemoes@prevas.dk, sr@denx.de, 
- pbrobinson@gmail.com, jonas@kwiboo.se, u-boot@lists.denx.de
-In-Reply-To: <20241126105131.43359-1-g-praveen@ti.com>
-References: <20241126105131.43359-1-g-praveen@ti.com>
-Subject: Re: [PATCH 0/2] UART support for higher baudrate
-Message-Id: <173427142791.1931614.16747957994473568570.b4-ty@konsulko.com>
-Date: Sun, 15 Dec 2024 08:03:47 -0600
+To: m-chawdhry@ti.com, vaishnav.a@ti.com, j-choudhary@ti.com, 
+ b-padhi@ti.com, Neha Malcom Francis <n-francis@ti.com>
+Cc: u-kumar1@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20241129110333.444270-1-n-francis@ti.com>
+References: <20241129110333.444270-1-n-francis@ti.com>
+Subject: Re: [PATCH 0/2] configs: Enable CMD_NFS by default
+Message-Id: <173427142999.1931614.11975835681042536271.b4-ty@konsulko.com>
+Date: Sun, 15 Dec 2024 08:03:49 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,15 +95,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Nov 2024 16:21:29 +0530, Gokul Praveen wrote:
+On Fri, 29 Nov 2024 16:33:31 +0530, Neha Malcom Francis wrote:
 
-> The OMAP specific UART driver is changed from a generic implementation of
-> certain ops functions to an OMAP specific implementation of it to add
-> support for higher baudrates for OMAP devices.
+> Enable the NFS command across all platforms to allow network booting via
+> the NFS. Clean up the J7 configs to use TI_COMMON_CMD_OPTIONS.
 > 
-> Hence to support the above change, static functionality of ops functions
-> in generic ns16550 UART U-Boot driver is removed and also migrated certain
-> macros to its header file for usage in device-specific drivers.
+> Neha Malcom Francis (2):
+>   board: ti: common: Kconfig: Add CMD_NFS
+>   configs: j7*: Enable TI_COMMON_CMD_OPTIONS
 > 
 > [...]
 
