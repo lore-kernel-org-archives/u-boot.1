@@ -4,165 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9679E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 01:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D7EE7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 01:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C16B68006E;
-	Sun, 15 Dec 2024 02:06:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id CB5348006E;
+	Sun, 15 Dec 2024 02:38:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="echftJvE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D34CA800B3; Sun, 15 Dec 2024 02:06:00 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2061e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::61e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7B3818006F; Sun, 15 Dec 2024 02:38:37 +0100 (CET)
+Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0A058006D
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 02:05:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 081378006D
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 02:38:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wpswP4tFTnpyJ0psN2e+dlq9WFuaeojehai+nLhXTRCeEazXz1PbKuJcmtWuSOJbfyA3UvGuSka6mQCJAew2IApAvImn10k8FZciKFAFL2Gk1Z3CzRqmHqz4++rqcfsUK4O4mDsM1Bt8EY3f4EbGeLVFvz3CZEm5crTN1nkSbZQFBZgWkF75m8Pct0Fy3BQvJVKudoxNAojk9XSKw4KUXo9x7u2zwPwzb6z2EZ6In3NWSEZ45n2gRwKhNmVKZnSrejmUSCGKYvYaF7UuRbdsPl7ScA5MG/A/v3TuhV5ljijSyC74Dsx/5F55/frEOioHDm0Sw2EnvaV1iNvlYIuI1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wupC+hPtiktH61oMP5pAO6b2uxD4hJofQMrS0g256so=;
- b=TGhlb2IY83kRaJm3+DiQUmrx60FF6wu5FiMSJ7Oa9f/FjfWqEkytVVfUcmzHuGlEx+nPB2oHLiJo9OeSI4q4mxQhofR0G87sXtdglHWEER3EL0+BRhJ+QhxAkwUEptbHGh9XQ0FQh3bSd+xx0rzX7tLaSAk8l9Vwp3TgAcVgUCNhj7oTzE8KP5l+rxFED1INqyz2LbWYeMX0saUp6c66I1p6PhMjoWdkePaUQbAHukGQ7f4BecNOOtTyoXGAViZ8K6xUbZEaHfqiCmZxLvQhrr0lpt7drWcV6tIXTZjyxHjx4eOAE3NwpP1VAwuq4gAPJk2wD4fXn0x+Mrdj0Wjt5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wupC+hPtiktH61oMP5pAO6b2uxD4hJofQMrS0g256so=;
- b=echftJvEFeKCn1x6AltWhxwiv8Wk1q68HRghQHb7Gc+O5Z8+YYbJaRliyh5+Ko6IAoXzIe1NnJ9o9jYSl0l/iarpXtyvFr8fA0NbXxBDu2ew8e9dANDFUbvMPYryQX4M3f41cuwFHJdnSjzN7FcE9tdZZLDnNOKMlku9MDb58OHUDW8/nYhY1ZGewmGRFc6b5nYrK2XLu6Rzwqn/22s6iMy9gydYIymRW6e5vYpaGJBsogX5QWXegSrpoD8V1v+wYEsQUss/HQJab7qQptzWPA14am39/oalCopHOWcISCp7/BwkYLPraw6V4J5xgInLNh+4GHwuARzHT1m5DLk+uA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VE1PR04MB7485.eurprd04.prod.outlook.com (2603:10a6:800:1a6::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.20; Sun, 15 Dec
- 2024 01:05:57 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%5]) with mapi id 15.20.8251.015; Sun, 15 Dec 2024
- 01:05:57 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: u-boot@lists.denx.de,
-	Michael Walle <mwalle@kernel.org>
-Cc: Peng Fan <peng.fan@nxp.com>, heiko.thiery@gmail.com,
- thomas.schaefer@kontron.com
-Subject: Re: [PATCH 0/5] board: sl28: various fixes
-Date: Sun, 15 Dec 2024 10:11:05 +0800
-Message-Id: <173422862034.21608.6712428560264829998.b4-ty@nxp.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20241213102321.2166920-1-mwalle@kernel.org>
-References: <20241213102321.2166920-1-mwalle@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SI2P153CA0007.APCP153.PROD.OUTLOOK.COM (2603:1096:4:140::8)
- To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip2t1734226680tcs85u6
+X-QQ-Originating-IP: 1XeVhICMZBjuPbEr7J+Uws8QASVItWerDcHrvGW/0AI=
+Received: from [IPV6:240f:10b:7440:1:95e0:ea9a ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Sun, 15 Dec 2024 09:37:57 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 14681587849142026819
+Message-ID: <115020791DA19920+c09c7adb-9fe7-47f4-99cb-2c8c862fe1c5@radxa.com>
+Date: Sun, 15 Dec 2024 10:37:56 +0900
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VE1PR04MB7485:EE_
-X-MS-Office365-Filtering-Correlation-Id: fa3978d6-67a6-4205-3d8e-08dd1ca4a170
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?eFpXbWNLdVlTUk1Sc3JUR2dYNjJneHlINXRMbmZKdmIwUzFwUCtScHdROExn?=
- =?utf-8?B?RHNOcWtZaG1palV6RSt0TkdnT25laENnSGFjbzVWdjhpVGNJZDJGbjVJREdI?=
- =?utf-8?B?a2NtcHo1bEZLcFljNmR0UXFKWW5vUytVb3V1alM0ZExYSVhhenoySWhJVWp2?=
- =?utf-8?B?emw3ekJPOW92cTJ0UFJXRis0QU0yVzBEc1ZVQTR6WlE4U1JacFowcVQ2YXdo?=
- =?utf-8?B?S0F1NlROcUJaYXd6T296MEZmdFpLYlBFbzF5OGg2bEJ0Q1I2N3dQRU50WjZW?=
- =?utf-8?B?TUpESkIwNkV6NXJySGNpYjlCbkRzRDRGaGxpd2V2Ly8zM2tBcDdiN0NvVUo5?=
- =?utf-8?B?V1VHbk04alVjQityQ1oyMjVnMlA2SysvWGxzMk1sR3dTNFhIMVlCaXJJbnJC?=
- =?utf-8?B?VCsvbHhoOXpMR0dDbXhvekRUZ2N4UDNnTURHTWtSQlJVSE9JVEFrbUVESjVF?=
- =?utf-8?B?Y0w2Rk1rOG1Qc1JHWWVDSkI5QWtXZ25GbGZNc2dTZlVmVnJGenBjUWl3Ymp5?=
- =?utf-8?B?aGZxOGVBdnNzZkJQbUdkWlNkc2cwUHBsVk83Kzh2a1A5anVKdWxUcDZEM3ZC?=
- =?utf-8?B?YXB5WU44Qks2QlpvZXhKNnRTSWNLVmtDSVhNcXRMLzN6TlZWODlDb3RXSU1N?=
- =?utf-8?B?YmlNWHVydkd5VE1UdVRJOUJNMDRiMXUwYXNJbU9zS3NuWHJ4TkRGSEthZzhQ?=
- =?utf-8?B?NTlreDBLekt6OHhIZWlTRXRIa0QyMDIrNGM4dzBTYTRqWkRDaFZ0WVJYVnM1?=
- =?utf-8?B?WnJ1TklSMUFRS1RKdG90Z2ZvWjBnbnZFOG5UK1MzM2lqVTJYeTdTNXJoV3ZJ?=
- =?utf-8?B?Wms0MjBnckxiaEFzM1RoTUdNRVMrLzhKS3VGcm5Bd3c1dEI0VmVNK1JkbXU0?=
- =?utf-8?B?bXlwekR2em9TaEt2ekV2YTFqMW5CbnI1ZHlJRWZSc0VRQU91c0E5SXpOTm42?=
- =?utf-8?B?OU1VVXZmK3c3RDZxUkdHNldacGprTUJmUlJkaXdnMzJSWThydFJMYVNhWGJx?=
- =?utf-8?B?Qis3ZGl5aXZlbkRsZExtYlNlRHdKUXhjRjVzTS9nS0I2eVd3VG1IcUtFTjZ4?=
- =?utf-8?B?ckNTcDdoL2dSVjlSWnlFTnY3U2VERVQ3L1dRQzdaaGhJTTdPdEVkT1IzSU1V?=
- =?utf-8?B?Mi9QbUVMdzdleFJSNEV0UnpkNytscXZzUkY1U29tNzl5TW40VHdXYnVLcFI2?=
- =?utf-8?B?VVQ3Vm1GSlVOUUtYYW5OZWltU3lZN0g4UHBKUTdQSE54bVhiT1IvRlJZa01y?=
- =?utf-8?B?dlE1Z1lwU2hzZVM1V1FxcUt0cklPTWZoV2o4bU9kNDVBaEcvMnhnTFJyN1Fq?=
- =?utf-8?B?RWU2OXZ4dEhxSVAzOFJvSFE1dzdqb0pMVkRSZnNrQlF5b3ZXcCtwTkhpL2tM?=
- =?utf-8?B?d2JWVmlVdHV4WXlyVzZ5aDVmUU9MV0NaUGo3bzJ6SnpEb3haTkx6ZStHMm1n?=
- =?utf-8?B?eVcwZ1ZOSzU3VnRqckNKTW5YcHAvem9vMU41R2p3aDFMVVFNakYweG52eW9v?=
- =?utf-8?B?N2phMWhZdk83ZUJRRHVNTmw3bTBkS09OR2xvbHgwOVpiSk5VcHI5bHdQMUk2?=
- =?utf-8?B?aFIzR1lGNVl1SjB1VDJIc3dHdit5c0hrdDFRN2RtY3ZrWnBZMmJET0VKUkNx?=
- =?utf-8?B?Uy9VNGRLUDVJRm1Cejc2LzZuYmJOV1o1UGJsUWV0cHVPMXFJMU1FQWUwZFRT?=
- =?utf-8?B?WEhWZzBlczc0RTJ4WGRFelJQVUhwNlRSYi84eDdKa0cvY0lnNFhWMDBqelJM?=
- =?utf-8?B?Mkw2bHczRHZTbGNxRmw1S1VWaEJoQkxZOVE0N2NyL0psc0RpVDRtWEQ3S01y?=
- =?utf-8?B?S0hXWFo5OGFWU3ZRNGNKMlljdGZOa3V0ZTVGMFFVVk9TbHlxdTI0VzNUeU9q?=
- =?utf-8?B?ZTVWTXpINHBoRWoxQlYxYWlEZlV5K3FIY1BLbmZCcmlsWkE9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TitQMVUzS3JRaWpxRXJlQ0V1WFNKcXZGRm0ybzgxQW5PY3RDcjNOc3Q3VFlQ?=
- =?utf-8?B?dlR2aXJ2ZUJXeVBOREIzVVE1NWJpL2FWOEV0V0E0OWRDUXlIckNFOEhoV2Va?=
- =?utf-8?B?NmlYSVR0SE9kdUFGZ2s4WG9XS2xQV0xTN1oxMDZnN1dScE5NY3VSbWpZMGx4?=
- =?utf-8?B?M2JDeUxXbXN6YzhsN3FjbGlBVE9xQWhzWlh5Mnd3M3g1bDVuckVyQWd3dE9V?=
- =?utf-8?B?OXRsYzBvdzdVT1dTdW85ZmxmSW93Mm5VT0VUOXlzL09CRjFNSjBNT2h2Q1o3?=
- =?utf-8?B?NkRISXNQbE9RVzRmN2xSc3hxWDVHV3RPU3VPOEFtdTF0bWloSTV3VEJCcUI0?=
- =?utf-8?B?MnpWTjF5SXMxWjZUVkdSNmZ3SVdVK3lhb3o2QzBxbjhsRUdCSWd3RWlxUGNC?=
- =?utf-8?B?STlaeHc4cXl0U3Fpa1dWazF2eHpvb3lLR29iYTh0TXlVMTZQWi9LRWFVMUQw?=
- =?utf-8?B?MEZHWU16SGQ2Ukt0MHViMkhvbkFPMkpmeXp2QldNYUwyNEM5N0Z4QXQ3WERl?=
- =?utf-8?B?SXdXQkdvUkxQQTIycVJ4bHZFY2Nkcms2MWM0UUpHNHlvTEdBYkhJYkc2L1hK?=
- =?utf-8?B?WHBVdi9hOVFKcVNFYXhaOGZTalBKVE1WVlZjb1EzdHA2aEZENE1GWEI3TTlx?=
- =?utf-8?B?Z0lJQXhReENxWHRqVGFTK1VYT2dDcUg4aUFlalRLYnlRMkVqdC85TnBXOXZO?=
- =?utf-8?B?UWZ6WjI1SzJrNEFVSnZFQUR2QjJCZk16RWlwOExDSDZ0UG1RRVRzY3NlSnpx?=
- =?utf-8?B?cFE2UldmWWFmdllMS0QvU3FSd2VENzJNckVhbVNtcHlUNDBpVjNaN1lJbHd6?=
- =?utf-8?B?TWpYeHUvWlpGVVRsUno3UG82WlZUKzJSWnVualpEdSszNjNDdmRMOTRVZUZB?=
- =?utf-8?B?RklRdDk2MFM3eDFpaGtjb2pMVUlQTnluTTlMS0l3NE4vMjhhaU1FeW9Vcmc5?=
- =?utf-8?B?b3Uyd25vbmRpSkwwVVpBUzRUZHM4SlhDVmF6cFJ2RWsweVlZZFROSjJFblc1?=
- =?utf-8?B?NldjTG5GV2lVYVBGSFZWWXJQd2pyZlVDblNwKzN2YURPSHZOaW82RnFzbGNR?=
- =?utf-8?B?MjBoWEd0aXNkMlRSYlhLSFB0VlB5TnVTeGlzY0xTN3I1VDlGKy84Y3RmRloy?=
- =?utf-8?B?Q3J2Yk1meVhsYWp0WW1WK0p3ekF2ZG5pd005WG9MV2NmOFhGTXk5NjlUME9x?=
- =?utf-8?B?Q2JLckJIb3IvWGsrcXdNTHphYThPTGdsSk1MbHczb2QxRXVMY0EycGMvNEVP?=
- =?utf-8?B?MlM5RW83RDZ1ZkZlRkUvMXZSOUcyTHRobE1scHJINndjUlhmMmV3ZzBmaldU?=
- =?utf-8?B?Z1RXa3JETURPMkQ2eWdvdFFFbVBsWkI3TmFhRzMvcUltUTdJUThaRDdFeDdv?=
- =?utf-8?B?SjdLTVU0cUxtNEllSDIxTUFBNitEbXBzdXRuSGNOU1BKb2xvZzdsT3JDSjVG?=
- =?utf-8?B?QzQ4Wis4OE1QVStPekk1NnJmVklsZXhpWmtiNkZRV2VtTEljMG4xbWQvRVgw?=
- =?utf-8?B?U0FUT2FMcU1RUU53eHJGV0RKWnJFTUQxcmdhZXk1bE1BMWQvTE9OeXA5YkFa?=
- =?utf-8?B?Q2VyKzd4REV5Z2Q0eDV2Ni83WGRXeTlmbFM4a0Y1cjc0SHB1NU5WMnY1WUFH?=
- =?utf-8?B?QzVWSEs0TE5YMG9abnI2eHhHT0QzUGxkKyt6L3ZPcjkrWndjeWROWU10b3JX?=
- =?utf-8?B?VG0xN0FtNHJEZjMvTCs5Vy9lUkxZMGIvZ0tqcXNKYWt0WVFob2ZzdkFrd2VP?=
- =?utf-8?B?NFN0SDdWVkUyNDA0aGNZcDZjSitiMEFEOHNFUHRnOVR1M2NxWU9HemN6Nk9J?=
- =?utf-8?B?ZmFQdmwydTFzL3R2VUduSU5GMXVKRW5uSkRwNzB0dEF4eFE5MjhSWElTdVMv?=
- =?utf-8?B?eldSelZDSUZqaUlFdDlPOFlGcm5YVlJFejVRcE8vME1qdklTd2lMcDFIT2Fr?=
- =?utf-8?B?a3M1dGpGcTF4MW03QThDTTdiOVJKdjVEclZUYnJWWkZpeUh2RDVTU0I5WWMy?=
- =?utf-8?B?THNoSFFZcFpVV1czbE90N0E1SWlIdHVHWUZFdksrSG1NWll1U1Y2Z2JqaXBV?=
- =?utf-8?B?RTNxdzJWWWROMmg2cExVN1BiaXBsaWZRUW5RR1NpTXVoYjR1OEtlS0tFUmln?=
- =?utf-8?Q?b2ekQBlJgcj1PJJqyqYYX9kE0?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa3978d6-67a6-4205-3d8e-08dd1ca4a170
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2024 01:05:57.0716 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ToIDhNSLgH1iOVIEsWJwqwraZ5Sttzxu/r8D94JPxATxbm9cGuvd5rjBjGN5Y1bq0CRUIkYTyAOWlAJpss9jUA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7485
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/5] rockchip: Add support for Radxa ROCK 5C
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ sumit.garg@linaro.org, jonas@kwiboo.se
+References: <20241211033934.23044-1-naoki@radxa.com>
+ <20241211033934.23044-6-naoki@radxa.com>
+ <2600bdcb-3c57-4d52-97d1-c63758b25ed2@cherry.de>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <2600bdcb-3c57-4d52-97d1-c63758b25ed2@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: OKkKo7I1HxIeB/XG+KGdetr6X6wNPDbjFAqtJA/gfTsQgUHq8QljHF1p
+ 8Z16Eu3Yn+NA9cxatihLyxgisqIJUkwc8LHm1V/Wp5W5551xcQtoMakx/DN4swfofkx1Dw/
+ E5kapb+u5fPKHej4Z/nd1vT7OTuUK1E+GHdFVbIOemIQZjEU4NTKrCBvgve+rwpTAgn8rbq
+ SgQPBNhaoI0BVrI1fRahUiUSYg5H+F0reBzZEH9ARRA7ghv+xzUkvskTJDbs9OCbNgvW5aB
+ 39zcKsRpEQAGsGlaZhnZKvLkCAaxvDigjwOHfse+V4uaJY+2RJFnoNfC2hd4ND3IQyNlF8o
+ 0UVKVV4D5fRurEaImsnppYvq8jDPpwB/E8HvcCFVy6hMyNrk/InJuMEiZexEevIUzOjFl7l
+ 55wBxvPgAc/1FEZjGuFSfj9Uzdpbb7TpjGdRBdZKHtg5Bak9BTdBnMiXK7gwJPzpkcpS4UU
+ TpVNr8IjS2+KNsaKdKdrbg5ctOciCmHE4KrEfckMF33EwV7FCJFnxren3JHR88phrlIs+c2
+ Uyay+awB0wEbaGdxLy2UO6ouRBgKcjXttNP3RXeJ+RKpGB+9d0KOHy0s2VBO+YCvdsIheXl
+ MSRGVf+m76MONJmdr6wqtTBIMkTXdSgR22/TfzEdfcxL4U42JWPGpEJ3YiJB1xSwn9LeJvi
+ JY2xuonlFyzV6jS5Udhdat/7Ga+qDkcfpaLLofk56FkIMjeZ2w8zveQFW2G2Du1qblE0b4W
+ o91+8dSKCungmYEmivDhY9WGDNMXn//UqgWHNz+zx7Yrpw334e4/TVy1MX3E0LUrespKRLP
+ z4EEqYxeQ5ZRHYwtEp5fadoITju1mgF3I1NimrGr+8xQWhGkMnwJ3cKSeiBGswhOVIn5Nlr
+ bJsvF+bf64Owxd/874WNPvPeVSRXI2sXyRi+aEyii6L7SnM70ciOUhodLK2Kpa0Q
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,35 +79,298 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi Quentin,
 
+Thank you very much for your review!
 
-On Fri, 13 Dec 2024 11:23:16 +0100, Michael Walle wrote:
-> Give the sl28 board some love and fix various issues. Most of them
-> were due to the transition to the upstream device trees.
+On 12/13/24 22:11, Quentin Schulz wrote:
+> Hi Naoki,
 > 
-> Michael Walle (5):
->   board: sl28: fix linking with disabled watchdog
->   board: sl28: increase SPL_SYS_MALLOC_SIZE
->   board: sl28: fix network on variant 3
->   doc: board: sl28: fix table
->   board: sl28: fix USB0
+> On 12/11/24 4:39 AM, FUKAUMI Naoki wrote:
+>> Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
+>>
+>> [1] https://radxa.com/products/rock5/5c
+>>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>> ---
+>> Changes in v3:
+>> - fix compile error
+>> Changes in v2:
+>> - arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
+>> - include/configs/rock-5-rk3588s.h: fix include order
+>> ---
+>>   arch/arm/dts/rk3588s-rock-5-u-boot.dtsi     | 16 ++++
+>>   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi    |  6 ++
+>>   arch/arm/mach-rockchip/rk3588/Kconfig       |  7 ++
+>>   board/radxa/rock-5-rk3588s/Kconfig          | 12 +++
+>>   board/radxa/rock-5-rk3588s/MAINTAINERS      |  8 ++
+>>   board/radxa/rock-5-rk3588s/Makefile         |  3 +
+>>   board/radxa/rock-5-rk3588s/rock-5-rk3588s.c | 77 +++++++++++++++++
+>>   configs/rock-5-rk3588s_defconfig            | 94 +++++++++++++++++++++
+>>   doc/board/rockchip/rockchip.rst             |  1 +
+>>   include/configs/rock-5-rk3588s.h            | 15 ++++
+>>   10 files changed, 239 insertions(+)
+>>   create mode 100644 arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
+>>   create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+>>   create mode 100644 board/radxa/rock-5-rk3588s/Kconfig
+>>   create mode 100644 board/radxa/rock-5-rk3588s/MAINTAINERS
+>>   create mode 100644 board/radxa/rock-5-rk3588s/Makefile
+>>   create mode 100644 board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
+>>   create mode 100644 configs/rock-5-rk3588s_defconfig
+>>   create mode 100644 include/configs/rock-5-rk3588s.h
+>>
+>> diff --git a/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi b/arch/arm/dts/ 
+>> rk3588s-rock-5-u-boot.dtsi
+>> new file mode 100644
+>> index 000000000000..be1a2f9ae7bb
+>> --- /dev/null
+>> +++ b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
+>> @@ -0,0 +1,16 @@
+>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +/*
+>> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
+>> + */
+>> +
+>> +#include "rk3588s-u-boot.dtsi"
+>> +
+>> +&saradc {
+>> +    bootph-pre-ram;
+>> +    vdd-microvolts = <1800000>;
+>> +};
+>> +
+>> +&sdhci {
+>> +    cap-mmc-highspeed;
+>> +    mmc-hs200-1_8v;
+>> +};
+>> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/dts/ 
+>> rk3588s-rock-5c-u-boot.dtsi
+>> new file mode 100644
+>> index 000000000000..bb1cc9e4a279
+>> --- /dev/null
+>> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+>> @@ -0,0 +1,6 @@
+>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +/*
+>> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
+>> + */
+>> +
+>> +#include "rk3588s-rock-5-u-boot.dtsi"
+>> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach- 
+>> rockchip/rk3588/Kconfig
+>> index b5a0e624a532..e1487ecb0464 100644
+>> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+>> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+>> @@ -260,6 +260,12 @@ config TARGET_ROCK_5_ITX_RK3588
+>>         Front-panel connectors for audio and case-power, -leds
+>>         Powered by either 12V, ATX power-supply or PoE
+>> +config TARGET_ROCK_5_RK3588S
 > 
-> [...]
+> This should be TARGET_ROCK_5C_RK3588S?
 
-Applied, thanks!
+rock-pi-4-rk3399_defconfig uses CONFIG_TARGET_ROCKPI4_RK3399.
+I'm doing same thing.
 
-[1/5] board: sl28: fix linking with disabled watchdog
-      commit: 781a7c660cee194566d8e21f20c156e40bcea322
-[2/5] board: sl28: increase SPL_SYS_MALLOC_SIZE
-      commit: 6c849340b7ab5953e061885c4f7152bd93e3ba49
-[3/5] board: sl28: fix network on variant 3
-      commit: ad7ebf1b989baf32e8917695a1611ea051356e35
-[4/5] doc: board: sl28: fix table
-      commit: 079ae2734c4641b148932c1758a2524492d35772
-[5/5] board: sl28: fix USB0
-      commit: 56aa021f080096e8a0ac24b31c3ff40662c8b81b
+>> +    bool "Radxa ROCK 5C RK3588S2 board"
+>> +    select BOARD_LATE_INIT
+>> +    help
+>> +      Radxa ROCK 5C is a Rockchip RK3588S2 based single board computer.
+>> +
+>>   config TARGET_SIGE7_RK3588
+>>       bool "ArmSoM Sige7 RK3588 board"
+>>       select BOARD_LATE_INIT
+>> @@ -398,6 +404,7 @@ source "board/turing/turing-rk1-rk3588/Kconfig"
+>>   source "board/radxa/rock5a-rk3588s/Kconfig"
+>>   source "board/radxa/rock5b-rk3588/Kconfig"
+>>   source "board/radxa/rock-5-itx-rk3588/Kconfig"
+>> +source "board/radxa/rock-5-rk3588s/Kconfig"
+> 
+> Where's the c gone?
+
+There is board/radxa/rockpi4-rk3399/.
+
+>>   source "board/rockchip/evb_rk3588/Kconfig"
+>>   source "board/rockchip/toybrick_rk3588/Kconfig"
+>>   source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+>> diff --git a/board/radxa/rock-5-rk3588s/Kconfig b/board/radxa/rock-5- 
+>> rk3588s/Kconfig
+>> new file mode 100644
+>> index 000000000000..86830be1eeca
+>> --- /dev/null
+>> +++ b/board/radxa/rock-5-rk3588s/Kconfig
+>> @@ -0,0 +1,12 @@
+>> +if TARGET_ROCK_5_RK3588S
+>> +
+>> +config SYS_BOARD
+>> +    default "rock-5-rk3588s"
+>> +
+>> +config SYS_VENDOR
+>> +    default "radxa"
+>> +
+>> +config SYS_CONFIG_NAME
+>> +    default "rock-5-rk3588s"
+>> +
+>> +endif
+>> diff --git a/board/radxa/rock-5-rk3588s/MAINTAINERS b/board/radxa/ 
+>> rock-5-rk3588s/MAINTAINERS
+>> new file mode 100644
+>> index 000000000000..ead6356131c1
+>> --- /dev/null
+>> +++ b/board/radxa/rock-5-rk3588s/MAINTAINERS
+>> @@ -0,0 +1,8 @@
+>> +ROCK-5-RK3588S
+>> +M:    FUKAUMI Naoki <naoki@radxa.com>
+>> +S:    Maintained
+>> +F:    arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
+>> +F:    arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+>> +F:    board/radxa/rock-5-rk3588s/
+>> +F:    configs/rock-5-rk3588s_defconfig
+>> +F:    include/configs/rock-5-rk3588s.h
+> 
+> Why are all those files missing the c character?
+
+Same reason as above.
+
+>> diff --git a/board/radxa/rock-5-rk3588s/Makefile b/board/radxa/rock-5- 
+>> rk3588s/Makefile
+>> new file mode 100644
+>> index 000000000000..d9be0f42e6b9
+>> --- /dev/null
+>> +++ b/board/radxa/rock-5-rk3588s/Makefile
+>> @@ -0,0 +1,3 @@
+>> +# SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +obj-y += rock-5-rk3588s.o
+>> diff --git a/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c b/board/ 
+>> radxa/rock-5-rk3588s/rock-5-rk3588s.c
+>> new file mode 100644
+>> index 000000000000..a840ca7698d4
+>> --- /dev/null
+>> +++ b/board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
+>> @@ -0,0 +1,77 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +#include <linux/errno.h>
+>> +#include <linux/kernel.h>
+>> +#include <adc.h>
+>> +#include <env.h>
+>> +
+>> +#define BOARD_ID    5
+>> +
+>> +struct board_model {
+>> +    unsigned int low;
+>> +    unsigned int high;
+>> +    const char *board;
+>> +    const char *board_name;
+>> +    const char *fdtfile;
+>> +};
+>> +
+>> +static const struct board_model board_models[] = {
+>> +    {
+>> +        0,
+>> +        50,
+>> +        "rock-5a-rk3588s",
+>> +        "Radxa ROCK 5A",
+>> +        "rockchip/rk3588s-rock-5a.dtb",
+> 
+> We already have a config and board files for the rock-5a... There should 
+> probably something to be done to merge them together or remove this part?
+
+I'll drop this part from this patch.
+
+>> +    },
+>> +    {
+>> +        2375,
+>> +        2425,
+>> +        "rock-5c-rk3588s",
+>> +        "Radxa ROCK 5C",
+>> +        "rockchip/rk3588s-rock-5c.dtb"
+>> +    },
+>> +};
+>> +
+>> +static const struct board_model *get_board_model(void)
+>> +{
+>> +    unsigned int val;
+>> +    int i, ret;
+>> +
+>> +    ret = adc_channel_single_shot("adc@fec10000", BOARD_ID, &val);
+>> +    debug("adc_channel_single_shot ret %d val %u\n", ret, val);
+>> +    if (ret)
+>> +        return NULL;
+>> +
+>> +    for (i = 0; i < ARRAY_SIZE(board_models); i++) {
+>> +        unsigned int min = board_models[i].low;
+>> +        unsigned int max = board_models[i].high;
+>> +
+>> +        if (min <= val && val <= max)
+>> +            return &board_models[i];
+>> +    }
+>> +
+>> +    return NULL;
+>> +}
+>> +
+>> +int rk_board_late_init(void)
+>> +{
+>> +    const struct board_model *model = get_board_model();
+>> +
+>> +    if (model) {
+>> +        env_set("board", model->board);
+>> +        env_set("board_name", model->board_name);
+>> +        env_set("fdtfile", model->fdtfile);
+>> +    }
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +int board_fit_config_name_match(const char *name)
+>> +{
+>> +    const struct board_model *model = get_board_model();
+>> +
+>> +    if (model && !strcmp(name, model->fdtfile))
+>> +        return 0;
+>> +
+>> +    return -ENOENT;
+>> +}
+>> diff --git a/configs/rock-5-rk3588s_defconfig b/configs/rock-5- 
+>> rk3588s_defconfig
+>> new file mode 100644
+>> index 000000000000..54043264de48
+>> --- /dev/null
+>> +++ b/configs/rock-5-rk3588s_defconfig
+>> @@ -0,0 +1,94 @@
+>> +CONFIG_ARM=y
+>> +CONFIG_SKIP_LOWLEVEL_INIT=y
+>> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>> +CONFIG_COUNTER_FREQUENCY=24000000
+>> +CONFIG_ARCH_ROCKCHIP=y
+>> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588s-rock-5a"
+>> +CONFIG_ROCKCHIP_RK3588=y
+>> +CONFIG_SPL_SERIAL=y
+>> +CONFIG_TARGET_ROCK_5_RK3588S=y
+>> +CONFIG_SYS_LOAD_ADDR=0xc00800
+>> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+>> +CONFIG_DEBUG_UART_CLOCK=24000000
+>> +CONFIG_PCI=y
+>> +CONFIG_DEBUG_UART=y
+>> +CONFIG_AHCI=y
+>> +CONFIG_FIT=y
+>> +CONFIG_FIT_VERBOSE=y
+>> +CONFIG_SPL_FIT_SIGNATURE=y
+>> +CONFIG_SPL_LOAD_FIT=y
+>> +CONFIG_LEGACY_IMAGE_FORMAT=y
+>> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
+> 
+> And now we default to ROCK 5A DTB... This is all very confusing with 
+> this little explained in the commit log.
+
+Same as rock-pi-4-rk3399_defconfig, but I'll change them.
 
 Best regards,
--- 
-Peng Fan <peng.fan@nxp.com>
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+> Cheers,
+> Quentin
+> 
+
