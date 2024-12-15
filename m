@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957E5E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 14:46:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D75E7717F
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 15:18:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE0048004F;
-	Sun, 15 Dec 2024 15:46:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 480DC8004F;
+	Sun, 15 Dec 2024 16:18:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="fmHOEZM2";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d+IR9Nt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0D6280050; Sun, 15 Dec 2024 15:46:39 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 122EA8006C; Sun, 15 Dec 2024 16:18:28 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6ED080040
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 15:46:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2efded08c79so2222159a91.0
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 06:46:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1734273995; x=1734878795;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=kyUP2J/ZvtP+fPkplWXNDM9zq5P9fQfgb1y+jTfUPAU=;
- b=fmHOEZM2AINJi7HhgjpwDcOa0kTQvRlOdcn1t79QQtmuAAVtJ2rhUQbpPsqkubUE0r
- dBxH404TS7etIoFeveKMGvlSMREIuhtGdd1JvUIfkUcI1fWfKRzBcrZNPm047j1xsYx0
- d0LR9yyQz0EAnobPk+LJh5QaeQsBwA7g4LkJY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734273995; x=1734878795;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kyUP2J/ZvtP+fPkplWXNDM9zq5P9fQfgb1y+jTfUPAU=;
- b=TOSMpa9aQyMXqZvV6hdOf8fUmkXKJS1Gk1MBmMmUhsVpnCWLnOKnumdliQ8reiCn/S
- x1sO9u0xorB6WhRsZMcZkGGR3KCNJGcp6kOTmu2v7V7BUe83yKs9dB19XXZ8Vpj39WhO
- BiHz+bhau8d7VGZsCTlbG1hk9ZDS+PN8Kd5ppBwj8EuxUSLwycSoQWpoqEmi4P5P46Xq
- wvZ1CYaJ4QPayJN0e89fPJqjRuohX6cqJhfM9h3pWpAkNLWMkQmaSIIlS+ncl3c6PkrR
- U6WgcvS4uUxo66MEz343Gj4p1+M2P8qgUFGdoM+xUD9P7FzJyoR4qVyFyDfrYzZcF6JA
- g5/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCyH7AYe67eZMydIuJ+VvK5T58YtVWAg8ny1YvgRL2K0P77PtpE8ZyfhZDnFAY2A/BDrXX8PU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAIwYNDWkY3BgICQjCW73myh1XzzQ3e1EciJERGxXW8Ujc00lm
- g1VsRXkyOLf11O3uC1Bj/AzH9wVJn5DAGGyad6UioEhC+zRy29aeRFjPFrhd1TV/jqWwynETiDe
- 1hafJm/yUns8e6aU+9BlOkOX0pP1bhdiuwlBZxb0WLWYSstr1x6I=
-X-Gm-Gg: ASbGncuJYVezQE83JMqMb/HXpX1eILYmNmVANm/ecormuLmf28n0jiZWdxPSWctm5rp
- tEV+SPqOIpJpSEb2NygDwj5OIhVeohoelTm7g5w==
-X-Google-Smtp-Source: AGHT+IHbE70NYZdS7hbu3oEJf7N1bwX5C9YfbIlj+pZrVF/W/f6Cd7ORRuMU7qzQj9vleXUlGD622f2BgWo6/pteheU=
-X-Received: by 2002:a17:90b:4f:b0:2ef:e0bb:1ef2 with SMTP id
- 98e67ed59e1d1-2f28fd6b782mr13462444a91.19.1734273995039; Sun, 15 Dec 2024
- 06:46:35 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92F7F80040
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 16:18:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id 9D05AA40A92;
+ Sun, 15 Dec 2024 15:16:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3E733C4CECE;
+ Sun, 15 Dec 2024 15:18:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1734275904;
+ bh=2LSNvlp3nbx2CgnMYiqPLJSjEys1T2iXYu5oVraYJ2w=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=d+IR9Nt9D2eoN85NGdbJrxK4x5M94CXieI77GyoE8TkAO4zskOgqK5fT/Dt5dDbUy
+ IcFndeZvQT3D8xqAlVFl1ScyxTVWptR96K0GfRJR/2LnOASLJfV7D3dWUbLagFfmLt
+ zQTtrHAlmc83irZfPzFmnmQZjt+frrmGIi8LWunETZbYEXwzi2/qSBKMhDQB6RsUBV
+ IMURetxrKRJ5f15WsoAz7/OAzC/2Z+pRfdyh+oZcSJG34uhOmPieSLFUyvyW4ix9qq
+ fdidE1l7eVbLOE19gOTJzg5bzyCZXPq5JpC9OfPaP0uW8O+oBFPLLB6O3ZY5fVviBm
+ 5q2GRhXzT7HCA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 298C2E77184;
+ Sun, 15 Dec 2024 15:18:24 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Sun, 15 Dec 2024 16:18:14 +0100
+Subject: [PATCH 2/4] powerpc: mpc83xx: Allow including initreg.h into
+ multiple files
 MIME-Version: 1.0
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 15 Dec 2024 15:46:22 +0100
-Message-ID: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
-Subject: Pull request for u-boot-nand-20241212
-To: Tom Rini <trini@konsulko.com>, U-Boot-Denx <u-boot@lists.denx.de>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20241215-mpc83xx-misc-v1-2-8cd6daae4f93@posteo.net>
+References: <20241215-mpc83xx-misc-v1-0-8cd6daae4f93@posteo.net>
+In-Reply-To: <20241215-mpc83xx-misc-v1-0-8cd6daae4f93@posteo.net>
+To: Mario Six <mario.six@gdsys.cc>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1734275902; l=1489;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=pnKhiCEoqHZcEXzPJ1EHoMgMVolmAehsMUi2q/0/jnA=;
+ b=GwQP9+lkKNXcaxhMhnTgQMKABg71EpkZhvSbmGWGSTnJB/Lb9r+4Wyo+AsxL4fy96abl/OHcL
+ dJ8y55mTTFKBBQ1lI4UmTuBZbzBJe7pjcHe+YYoX9YSYn56PPSTjzI0
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,47 +79,64 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-The following changes since commit 9452fb7484118822b878ad445237d111b7b1a28d:
+Globals defined in headers can result in multiple-definition errors
+while linking, if they are visible beyond the current translation unit.
 
-  Merge branch 'master' of
-https://source.denx.de/u-boot/custodians/u-boot-sh (2024-12-11
-12:50:29 -0600)
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
+ arch/powerpc/cpu/mpc83xx/initreg/initreg.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-are available in the Git repository at:
+diff --git a/arch/powerpc/cpu/mpc83xx/initreg/initreg.h b/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
+index 63aa5c946696ee0368bb3453b40ff0110f0fbcfd..ea1176e7fe10dbb549125ab6b2706fee05a92734 100644
+--- a/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
++++ b/arch/powerpc/cpu/mpc83xx/initreg/initreg.h
+@@ -13,7 +13,7 @@
+ #define SPCR_TSECBDP_MASK	0x00000C00
+ #define SPCR_TSECEP_MASK	0x00000300
+ 
+-	const __be32 spcr_mask =
++	static const __be32 spcr_mask =
+ #if defined(CONFIG_SPCR_OPT) && !defined(CONFIG_SPCR_OPT_UNSET)
+ 		SPCR_OPT_MASK |
+ #endif
+@@ -27,7 +27,7 @@
+ 		SPCR_TSEC2EP_MASK |
+ #endif
+ 		0;
+-	const __be32 spcr_val =
++	static const __be32 spcr_val =
+ #if defined(CONFIG_SPCR_OPT) && !defined(CONFIG_SPCR_OPT_UNSET)
+ 		CONFIG_SPCR_OPT |
+ #endif
+@@ -42,7 +42,7 @@
+ #endif
+ 		0;
+ 
+-	const __be32 lcrr_mask =
++	static const __be32 lcrr_mask =
+ #if defined(CONFIG_LCRR_DBYP) && !defined(CONFIG_LCRR_DBYP_UNSET)
+ 		LCRR_DBYP |
+ #endif
+@@ -60,7 +60,7 @@
+ #endif
+ 		0;
+ 
+-	const __be32 lcrr_val =
++	static const __be32 lcrr_val =
+ #if defined(CONFIG_LCRR_DBYP) && !defined(CONFIG_LCRR_DBYP_UNSET)
+ 		CONFIG_LCRR_DBYP |
+ #endif
 
-  git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
-mike/u-boot-nand-20241212
+-- 
+2.45.2
 
-for you to fetch changes up to 65ac40c1e99826b346c5e3b829143902494415e2:
 
-  nand: Add a watch command (2024-12-12 19:28:07 +0100)
-
-Small addition to uboot-nand. Nothing relevant for now. Anyway
-a nice new command coming from Miquel Raynal and small changes.
-
-The patches pass the pipeline CI:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/23837
-
-----------------------------------------------------------------
-Heinrich Schuchardt (1):
-      cmd: mtd: simplify mtd_show_device()
-
-Marcus Folkesson (1):
-      mtd: nand: raw: atmel: remove unnecessary return value
-
-Michael Trimarchi (1):
-      nand: Add a watch command
-
- cmd/Kconfig                                  |   5 ++
- cmd/mtd.c                                    |   2 -
- cmd/nand.c                                   | 103 +++++++++++++++++++++++++++
- drivers/mtd/mtdcore.c                        |  22 ++++++
- drivers/mtd/nand/raw/atmel/nand-controller.c |  10 +--
- 5 files changed, 132 insertions(+), 10 deletions(-)
