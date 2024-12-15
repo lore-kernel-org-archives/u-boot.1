@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 356E4E7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 18:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96693E7716A
+	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 19:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 473AC8004F;
-	Sun, 15 Dec 2024 19:03:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B9A668004F;
+	Sun, 15 Dec 2024 20:03:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NcebdcVD";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="L1CcsRA7";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RbpMEytC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C34D80050; Sun, 15 Dec 2024 19:03:12 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8541580050; Sun, 15 Dec 2024 20:03:56 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEA3980040
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 19:03:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 545D780040
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 20:03:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6d8f65ef5abso28659936d6.3
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 10:03:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734285789; x=1734890589; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QjkWNbrMUWyvmm8ie7VU0BnCohCEt9f5qmhtybzo8XI=;
- b=NcebdcVD0hBFKLx2zCv47Q9AezObm92HInHJFS8t1BzuZFb0FtCEjkSGENjG9lhheO
- O1mpC58x8y8Me5gkiofqDbGPYmQqac8ybeimMlDlyhmj/LQla2osqEm//VukgTNXTTyM
- /REqgTyGPxzhd5XxyfSeKutcynIoP0VmDOS6U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734285789; x=1734890589;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QjkWNbrMUWyvmm8ie7VU0BnCohCEt9f5qmhtybzo8XI=;
- b=xPoyvLGF+uImE8+Iqpncsr1O2rlmzrFDq4g6gjQ3UA72ceqIpKA0d1jVBrp0ig62Pr
- dH7o9UZFsmGa2WJLdD/Qv/XF8dFYSiGu574UZt2Mg8fLUkTYCUKWEOhTqjj1rcJaU3Tj
- DB7Lsm49qLVivGyQcdsrFpbrWX6BuFQtuVCNAmaaUcUrR3DXz0xk5/6AOrRv3Wj90FoJ
- 3qB0OyfJxhIpv+FFCt3wXZje6TPiiLmIjd2tsL/GkHdkeVCPXA+k3bS43v3ZvHXDg67Z
- 1Cxok4OD+BN3q5tMdipj55bjodhv/HfHzUXuvbmsJna3Eh9MwwJb8miKOV3AWqaKbzsB
- 8q+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaG/te0vrwxipdffBPWUNQ2DiYg6FonTEb4T7l1IWi+8M3Kc9rVXz51MS8jrvNpnrQaFsxG/k=@lists.denx.de
-X-Gm-Message-State: AOJu0Yynol+dBXX+Dr9OiulMitM1BN0wqIOVlc6DjukjSPF0AJ6oQjR6
- hCNq2wJG4UwChfkF+1km3ofl/WJT1jDCOQZ7afOUhg9RINawNUCB9w8xMKjPcmw=
-X-Gm-Gg: ASbGnctTW2vtMrkYS1ZRNcXhdIUnFzq+rr4x6fTeU092/X/xkIvZzunTBDk/nrZQgcM
- AwjbERh337wOaQKmULDLcTPySDr2Ev99BRcewySvhJU8yZCFYk/HzgQJ0kSasn+BX771qcFVD1m
- rcBj/3IkdnEr0UOP3A0uEzvSHDk7JMfjibwHZykqNII42EbkAITgBVgG+fcmzXiEO150f9fm9hE
- 2EqktNKHme4sXC9Js7KatvscGnE0JUWZpD2pEyOO7I+MhqyiK7mi1tY
-X-Google-Smtp-Source: AGHT+IFoczCkoXDMwd1E2vZv4vGK7Qkzt3aiY1cHiZw33QOGc6eczA/Q6ZixIxobMpbXMqYAQ/LS6A==
-X-Received: by 2002:a05:6214:1314:b0:6d8:99cf:d2db with SMTP id
- 6a1803df08f44-6dc8cad6199mr220114136d6.38.1734285788498; 
- Sun, 15 Dec 2024 10:03:08 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dccd2840a5sm18700566d6.69.2024.12.15.10.03.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 10:03:07 -0800 (PST)
-Date: Sun, 15 Dec 2024 12:03:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: j.ne@posteo.net, Sinan Akman <sinan@writeme.com>
-Cc: Mario Six <mario.six@gdsys.cc>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/4] Misc. PowerPC MPC83xx fixes/cleanups
-Message-ID: <20241215180304.GF1505244@bill-the-cat>
-References: <20241215-mpc83xx-misc-v1-0-8cd6daae4f93@posteo.net>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YBCCr71Kfz9sl3;
+ Sun, 15 Dec 2024 20:03:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734289433;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mdabCcjHzlkeSuWEpS5tJVToKlnt9q3y9wZhlvPOo/Y=;
+ b=L1CcsRA74eCHL7cOmczzOqEn/egKv8PFHu0iNKRZSxSYYjsVcoVvQSZBQCgeVw4JNa59SR
+ 7VacpfgJlsAzxrTwc+B9eZTRhB7h8cxE3+AzB1KUTTcvjzPJlm0Reqj/wAVhQLviw2atIb
+ 9gYy90/Ncamn9L2c7H0EbwSBH+ir9Q6fhzafnWVGwCM/G3HYduTlJ9mfBkMYAMK2QMoF+Q
+ veF71rBGpLbV/DL8YpV88LK1EVPYbkCSeQLL8SP0+VA+/h5SWksiYZ9vMU/f59TPHCQ0b9
+ iyuIcaEBBjECfiuvaDEAJADsGN9VQkanc62cohuSk+9teG5lTGw9j7knSzGSYg==
+Message-ID: <3ad25e20-c7db-4fe2-bd09-b6306f218a0a@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734289431;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mdabCcjHzlkeSuWEpS5tJVToKlnt9q3y9wZhlvPOo/Y=;
+ b=RbpMEytCZMentQcTDLyj6u3MTJEX1P8xBEHQaLCNPVYNGyO939BNu4a7T/zNNG1Eg27YaD
+ UjXnRyAzrIW/GEjDPXDhgESIsrPrLA4Uk/VLuOKkla2oF8D0uR+A/V4CqTB4aOjBtFeMNB
+ tPql9h0RAKlyPcuTvIS6Di4jF8HfZ+A0oHwEeo2VVooXbveC2qnYG1+9gYOsBB5VxAa0+P
+ ptHDUWHUpZps4CFDWdcoqvf3jihcQOSYY3bcrniqI5btSiH0bJV79lt3Q6ZL+FZFPvAXir
+ CsXETOUNnBbPCPDijEXuN1/5I6GPlWxKrqIGyWBLllhG/CF2GIPu4c5Xpf49aA==
+Date: Sun, 15 Dec 2024 20:03:48 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="P6u17TXWngTTATSC"
-Content-Disposition: inline
-In-Reply-To: <20241215-mpc83xx-misc-v1-0-8cd6daae4f93@posteo.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH] arm64: renesas: Align configuration headers
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+References: <20241214224529.303866-1-marek.vasut+renesas@mailbox.org>
+ <20241215164844.GD1505244@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241215164844.GD1505244@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 3eae3872353207ac316
+X-MBO-RS-META: fwphc6ng4oyy8cpg9qbmhfzpwsnth7jd
+X-Rspamd-Queue-Id: 4YBCCr71Kfz9sl3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,53 +91,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/15/24 5:48 PM, Tom Rini wrote:
+> On Sat, Dec 14, 2024 at 11:45:11PM +0100, Marek Vasut wrote:
+> 
+>> Align R-Car Gen2/Gen3/Gen4 configuration header file to look
+>> basically the same way across these three SoC generations.
+>> There are subtle difference between the remaining bits in
+>> those files across SoC generations, but the common bits are
+>> now aligned. There is not much left in those headers either,
+>> most of the configuration is now converted to Kconfig.
+>>
+>> Specifically for R-Car Gen3, GIC registers have been moved
+>> to architecture specific header file rcar-gen3-base.h , the
+>> rest of the changes here are comment changes and indentation
+>> changes.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   .../include/mach/rcar-gen3-base.h             |  5 +++++
+>>   include/configs/rcar-gen2-common.h            | 10 ++++++----
+>>   include/configs/rcar-gen3-common.h            | 19 ++++++-------------
+>>   include/configs/rcar-gen4-common.h            |  8 +++-----
+>>   4 files changed, 20 insertions(+), 22 deletions(-)
+> 
+> This is good. As a follow-up, since it's a functional change
 
---P6u17TXWngTTATSC
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is it ?
 
-On Sun, Dec 15, 2024 at 04:18:12PM +0100, J. Neusch=E4fer via B4 Relay wrot=
-e:
-
-> This patchset contains a few small fixes/cleanups for the MPC83xx
-> platform.
->=20
-> Signed-off-by: J. Neusch=E4fer <j.ne@posteo.net>
-> ---
-> J. Neusch=E4fer (4):
->       powerpc: mpc83xx: Fix timer value calculation
->       powerpc: mpc83xx: Allow including initreg.h into multiple files
->       powerpc: mpc83xx: Use defined constant for SPCR[TBEN]
->       gpio: mpc8xxx: Preserve pre-init state of outputs
->=20
->  arch/powerpc/cpu/mpc83xx/initreg/initreg.h |  8 ++++----
->  arch/powerpc/cpu/mpc83xx/interrupts.c      |  3 ++-
->  drivers/gpio/mpc8xxx_gpio.c                | 12 +++++++++++-
->  drivers/timer/mpc83xx_timer.c              |  2 +-
->  4 files changed, 18 insertions(+), 7 deletions(-)
-
-Sinan, do you have time to look at these patches by chance?
-
---=20
-Tom
-
---P6u17TXWngTTATSC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdfGdQACgkQFHw5/5Y0
-tyznxAv/Y6CP/3O4fwtF1Xk3TfWqhtf3TCbFqFFAdkFm8lUW7pVLLA79JT+J6pdd
-4ra7Nemy/orXGPdn9RyscSi9p/0t81qY2G/6RAaVRv8R/9jxZXmPKLnJjiK/jVSq
-JhxMWjsHwQL6EZFufdH/HwAPtfKuEMV9NMtsPmxsB0kPZO3sprBH9IZIV7ekF0zC
-3f/2llY22FNHR1z9UkIG46HWIWWqyeyYRySFLg3ivG56af6AK7GjE6XNq4LRUpNC
-In7m5gER6wtrFp3aRkAVRLMHgMVREf5FTu4nSbQB69A6faNmoqQZBr5WXG+20bSL
-jomRdPrnyPjQfo2OnvJU4il/TngTijq15bQysXFm2cLrf2cigrFMgWAa5jFd6o6W
-7vklTb2WggBt6PfIMwQwQTxo/awXoC73zx8TxkTNy+KPM6gmGBQ9+y0Oj0NPI5r/
-8V1l8WRt6spToKog3qighzz+Cb/lNAw6GfmSeWyprXRmabk/vw/0d6dyzxLx1hW6
-y/TSmY4D
-=YMck
------END PGP SIGNATURE-----
-
---P6u17TXWngTTATSC--
+> , can we
+> just switch to the default CFG_SYS_BAUDRATE_TABLE of { 9600, 19200,
+> 38400, 57600, 115200 } ?
+We cannot, because the new(er) SoC generations use 1843200 Bdps UART 
+baudrate .
