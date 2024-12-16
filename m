@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EBCE7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 23:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0565EE7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 23:39:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D18B780141;
-	Tue, 17 Dec 2024 00:39:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D8F4801A0;
+	Tue, 17 Dec 2024 00:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WFVaRS8w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KqFGsKUX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B275801A0; Tue, 17 Dec 2024 00:39:22 +0100 (CET)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 81586801FB; Tue, 17 Dec 2024 00:39:31 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B57F800D7
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 00:39:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21626801A0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 00:39:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3a8f1c97ef1so14181555ab.2
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 15:39:19 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-844d5444b3dso168604139f.1
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 15:39:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734392357; x=1734997157; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=RdlxZsXRzcdde86YNA7SLax3dWgmBKG3GZt2XtrmCz4=;
- b=WFVaRS8wN0YjUwhG0Nwl5cr0AU3VwVu/T4/VFe3YWjyi0JoggSFFx0tckeBy+wv+6K
- Y6D8hrXq9Fau0PHCJw8CxtIZqF+gdwxCcazKx6Z1njsYZvouuk7wrZLTUGuMFYbTCZpH
- 17iYR34FSB5fYonumjKPCYLYmN0cz2PQu8M2Y=
+ d=chromium.org; s=google; t=1734392367; x=1734997167; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RuuBbs5cN7vmhXre4zKr6z4PLmiIngKMn/F6gvZfmx8=;
+ b=KqFGsKUX/57qCvgIkJXzHgTywH2+VUCUfoUvzFEJiVMQ4IuifA6NXqJ3mmaGBNgZfT
+ 6YXBhWjmRsbHteb+nTnujVrej3blTC/tw0F01G8V/UkQ4N1ibRUc1cCRCGgImm/Ywbrc
+ NEweybxM0B8XfhySDLN3dftGWEhL+85/THFCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734392357; x=1734997157;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RdlxZsXRzcdde86YNA7SLax3dWgmBKG3GZt2XtrmCz4=;
- b=rT5gnA2rveZECkolOlB0UQpxWhLe4glA7ICt/9JTy4zxRv2btl6dLDddkxmbyBQ1xW
- hp07/jp7S0fLX5u57fRO/kvkM1WKKcsMQd4KsAEQilZqbXUBzITYHPByITO+oNKnMO9/
- FNc1NT+ex1f3d37mVipAqU9g8uMon7QsOlT/WO/Rl6bsciihZWbDUdpgOSYbSs4ZSXwv
- oHx6RB6PdnZC+k9l4YylXA4e1VsUG374OMDzdQZzdoLK7eH0gDIRVvEQHXgF9aE1krB0
- y82r437Cmi/mqvndgjv+hjUD9im/DljSO9XNq8mZ1hJCz5vnYP5L+ukvVOg0CctJa/bj
- 4avw==
-X-Gm-Message-State: AOJu0YwdWn23TPSFAdZsnLmgdWwgJMKizd2bgTJZlZxWQ5nQwbCogvaY
- /dSyBi0VBcXj+rQP8AXGXVIb/rdMWSBMPqkkMb6mlCfUpJN6CASu+vwGuPUgC9Ms9fTpWJ+/Tsw
+ d=1e100.net; s=20230601; t=1734392367; x=1734997167;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RuuBbs5cN7vmhXre4zKr6z4PLmiIngKMn/F6gvZfmx8=;
+ b=ZcBBKUmR6JgggEJvRtIIZlREFOhYA0wPTEMMp3qJyHZNyvVX/yixhDPLBtEbNAXiBB
+ 0huBWbNUc0REfUdQBWfTiTRypEzijc44oFgswpGArpRulNTNYnzwVLRIBF7J3m8O/Qp+
+ 9zo7tauAWZQqrivsVq9IsHmWKRGRzrDwZadLAK4SUAunfLqWLj4sONgZr7BShxYl0Nio
+ HmR0Ol9GSZnV45she5xu/fzasPuCPWJLVvBwEX0lFLfI+VF043vAh7A0PL+4th2+/ER8
+ j+RFYffUZdkOo5Fr6gnyEjnh84aTkRor5KCP2OQnu5ShlWcGWiTlnARn/wh+64Zw3Kkb
+ rNVA==
+X-Gm-Message-State: AOJu0YxXTPgnJtjSgTLSyhuEhxP0jhW/9SU4Swv0lPIh9qEOennZknUq
+ KtM+jHOK2ZfDtgjKH+gxxSEbuSu1rscoTmI0zINyuJUKor7w1s8eK+YhZZGy2Hji8EY0BtWWzJs
  =
-X-Gm-Gg: ASbGncuNRSypWvO1nX/midO87gX0/tAUHMaSp1APF4+kMe92apbcaCOBBb7OAacpPOO
- gSx87yMFpGYfU2Wr7BUVmpNlKabLdzUmxY+ZP7Gsa7gY0+o87maqYvffuz9nm90+ub0CfK1vrqq
- QN3zqj4PB9BCwsMOhNDrQbkXrNhMSp2IOYMNZFrxfDXrOhFstaSrk/MFfQqldBKVvjcj+bWQ9HZ
- tEZXwmKa856riUK5Kfpu6mToEvkVEjGWKy4PUTmybc4/0+Ovjmsm8CDaWRFm6gJSJo2/aCnE0JB
- NzVvFu1Mk5hkbgU+ig==
-X-Google-Smtp-Source: AGHT+IH7Hqk9MxqrEHI67ik5MmpczRRiUZjw/M0AT5VvccjcthOaFl97gysGFim2Sd2iF54Nlkxr2w==
-X-Received: by 2002:a05:6e02:164f:b0:3a7:8208:b847 with SMTP id
- e9e14a558f8ab-3aff8c91872mr129513655ab.22.1734392357333; 
- Mon, 16 Dec 2024 15:39:17 -0800 (PST)
+X-Gm-Gg: ASbGncunsYliO8NeNmSB5YeKUwhTGsiIqnLdo+46AxXhOLMBUOYfohOz7tLRJcXwnUX
+ 5JOovD2Oj9R+2Spy5QlPTC2vgIRWb+mXFJBSs6C7cpnJJ/yJ4ZWPGuYKaqRa5smi+1NCrCtsQ+u
+ 0kuRE26hQD8PaDoH5VMh5t7ywcHMXHUB6hsS/7rhxXjC8cOl10T5s+lOxcUXL8A5C14LdgkMNiJ
+ hNRAyULqqzzOMgeeaSuAKHsjxvtUDJNXjaL2pK8iUt5tNVeDJVKYfSUMMJLzjfVf2Lz+cDX893L
+ cp5DgnOZB8RhEYX75g==
+X-Google-Smtp-Source: AGHT+IFOy9Lmu1iaFv5O7cImcNGIYYxBIplzTRNv3cQIcB0711aoRGgKHJ39IQHShzeVn6h6glzH8g==
+X-Received: by 2002:a05:6602:3401:b0:841:99cb:776f with SMTP id
+ ca18e2360f4ac-84747e257b4mr116523439f.6.1734392367278; 
+ Mon, 16 Dec 2024 15:39:27 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e5e3781fa2sm1406731173.118.2024.12.16.15.39.15
+ 8926c6da1cb9f-4e5e3781fa2sm1406731173.118.2024.12.16.15.39.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 15:39:15 -0800 (PST)
+ Mon, 16 Dec 2024 15:39:25 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -74,11 +75,12 @@ Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 0/1] gitlab: Fixes to get StarFive VisionFive2 into the sjg
- lab
-Date: Mon, 16 Dec 2024 16:38:52 -0700
-Message-Id: <20241216233853.2125656-1-sjg@chromium.org>
+Subject: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
+Date: Mon, 16 Dec 2024 16:38:53 -0700
+Message-Id: <20241216233853.2125656-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241216233853.2125656-1-sjg@chromium.org>
+References: <20241216233853.2125656-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,26 +99,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This board fought valiantly against attempts to add it to my lab. After
-several hours of debugging, I found problems in the Labgrid integration
-(not included here), test.py and buildman
+I have one of these boards loaded with Ubuntu 24.10 (64-bit). Add an
+entry for it so that it can be used for testing.
 
-This series fixes these and the board now seems to be reliable enough.
-
-Note that the board fails test_dm_compat
-
-Link: https://github.com/labgrid-project/labgrid/pull/1411
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v2:
 - Rename the board to vf2
 - Add a comment about what the board is
 
-Simon Glass (1):
-  gitlab: Add a StarFive VisionFive2 to the sjg lab
-
  .gitlab-ci.yml | 6 ++++++
  1 file changed, 6 insertions(+)
 
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index ffcf8532944..a17c1b0a366 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -696,3 +696,9 @@ rpi:
+   variables:
+     ROLE: rpi
+   <<: *lab_dfn
++
++# StarFive VisionFive 2
++vf2:
++  variables:
++    ROLE: vf2
++  <<: *lab_dfn
 -- 
 2.34.1
 
