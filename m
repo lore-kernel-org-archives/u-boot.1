@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C70EEE7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 18:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF01AE7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 18:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BCF801BF;
-	Mon, 16 Dec 2024 19:07:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5949D80250;
+	Mon, 16 Dec 2024 19:08:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hDOru2gt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ic5I7GcR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E13EF80104; Mon, 16 Dec 2024 19:07:54 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 1ED86800D2; Mon, 16 Dec 2024 19:07:57 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9E47800D2
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 19:07:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1891F800D2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 19:07:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-435f8f29f8aso31908785e9.2
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 10:07:52 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43618283dedso43405585e9.3
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 10:07:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734372472; x=1734977272; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ove7bZW/WZrAXCVjkM+eSwvXos23SRXJ8Rhchqsz7UA=;
- b=hDOru2gtedZhBgFUqGVtVDVIRuV1Wv46L9qtV27DCeNpBSLJNaGUzkX+6adK/PJqeC
- mtkgUfFqLc9Ju3PcUCU/yCQp5k2/V5nCjR5/+mqhGCI1BXqEa6RfIPZD5vmdOstafhxd
- Gn9ZhLMGxVQOYuHh6FmVTuF0AyZBZG5jDS2BuXCWLAOeJyCFwnKjXQ12kdG7Apffdk60
- sG1ubMMn8dbMmMfJmyErhs5ZI/+pwr6gF2LO4Tdk8WLKoYXPd73FmEoT9aHpw8WH/hEB
- 2T0lzoW9mvqAWMYwpgmazzxXujKpQFM2o4izUzVG5+v2ejVl2ufx5IsSMrzFONUpbDdY
- 9cRg==
+ d=linaro.org; s=google; t=1734372474; x=1734977274; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/bIeqD+tgm9Gkr/VFzi9SNixE+TBzGIvSZpyuKOO9KU=;
+ b=ic5I7GcRV832TFwbBGSyPJBa7g6dE8lXIR8Df/aF5+GZ75jyiSTpxRN65a9c3Ikiwl
+ F+H8KGB/qrnApy4JUMjg25ZIVcFCx7Gb5fwt/NUFfaXV7oxQIRy9K2fycd2417O/nzYs
+ 03lFHeU2TjWebaNO9q3ReDFb4FjmLyAyPdeM/6TFO855TYpTy1ae+zHNZaUTWleHjE1E
+ qbzlZDTpzFJLrMF2SYSxThnaH4x06FcWJwEbTvjSdzu1cgN+xY+LCdnQXdStDqXrn0j9
+ p+J/IQh1guFVXKVx1h+VBsseCpoYjmV6YQ8RrevbFImsgoTyOSEjKsNLmY4haKYS6HO8
+ ZDkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734372472; x=1734977272;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ove7bZW/WZrAXCVjkM+eSwvXos23SRXJ8Rhchqsz7UA=;
- b=o7L83I3AfN8Q6PJTwx2LMWGeG6a70NDx0U4eQr8ZZkFOkYhQLoGhBqr1tyTwLRqahm
- JqxJx/LdZY3L6ycdlFski6wbuLRWsjOi3jA6DnWrGyOG0ZZvokyoRYl0NqkvH0nXqrCe
- tDdMnLLUR8MwgKMT62bwb1XPq30PtgmLAvApmrsMxjn9dlQTjypxf5Z4GvUvFwXp2Bjh
- ukQ6GVyh0xB+t36sRznu51mGYXW/ckVqKcfc2B80CnzuxDD3A77rlOBDv8V08rykzdGU
- eJYbqfne1EY5exNHc7URXiVtvrbtd97f8SAeSUdUJrTF6vzB3qkD61d/oy/Li5YqWr+r
- XWuQ==
-X-Gm-Message-State: AOJu0YwQdqhcGXFIDsuTX5dyE9uyRuxGVVUEYZbtHsR12x4FzIeWVaei
- KAex7cLroEpGkCZKnssWla2oLkiic55RkYaNi0wyO8kNXWVCA/z8WEWjOYqDHjxOzxk89z0y21e
- XAQo=
-X-Gm-Gg: ASbGncs6zgokg2VkNg8DJwnN8JAihTQbJkC6keoZWst4ypqPQNn74vDIG180bOgI1/u
- MtI39+jYcJqMsk5vx4TjLTdOstE+bjuwQ0wRSMKVmkGEIGNH1EBSijFQZs4XXaL2wM/L45UUhjB
- pncJYA3x3ulRSiHrCAQ7HxKb2ufje5sGhk4p54QyvYqzo0NvkRcYH3w1D4pXMWIdqeiohKFEjWw
- lRi5TmFBLtcn7XEKqyEmsbj+8O5lGPSkGfZrxSxzCrXD37X5ig6G9wKlenM8u3HiyD8mwcl6k7l
-X-Google-Smtp-Source: AGHT+IFaxvPej8IWs0DaeMJ+knxzjrGdJGSViBw9JC+WIr6k7petEhe3s82pa21ICwYPGZMC7C5TOQ==
-X-Received: by 2002:a05:6000:1a88:b0:385:e0ea:d4e7 with SMTP id
- ffacd0b85a97d-388da5b5d92mr445387f8f.55.1734372472124; 
- Mon, 16 Dec 2024 10:07:52 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734372474; x=1734977274;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/bIeqD+tgm9Gkr/VFzi9SNixE+TBzGIvSZpyuKOO9KU=;
+ b=dgfotstuz+S0PNSd8r9/8+MIM+S9FdJ7VRNZg6mUlkJiS48wd1j7MRJAZXDo0vdjHh
+ FsSSkHgzXUtppSxq7ngPUmEdEDQ7bhmQqBpsHDLDYtqFYVY18cDqf5tH1UX4b5hoZAo2
+ umc8tlCLL8u751EHp6JKNu7sJ7tsFveAtOTOXDKx9Qn5rUAMbNizzLkUcwZ3dHQ+wQ+H
+ NucRMDr/D9gvWJPe7LB4pvXT1k3X8zUhvZCwPZiecOXDqhjtKmuP+YCGsKE2YDct0gw9
+ itIfMomoaGwjLMVuxcVjDvfkRg+2ank/RgIL0+1a8j+RjDsYaUFBwLRJT8CAhWfvWSIb
+ ZJTg==
+X-Gm-Message-State: AOJu0YxOnu6fxbiqdKhZd2iTxEbT+5iQWHfMajrTyXChkT9Cfxr6u/6W
+ Dh00+KZYDV6fuK3SMTWRBAeKdyPiHJF21cPJwqpdMZoWfGEr86T9wXem2DyB4Ni5MZlIGVDqR2f
+ ASgs=
+X-Gm-Gg: ASbGncvJrVU/e15UZQ2OMmoOaK8vKHiW8mKEBcGO8BKSBojNLNsG/UnKcdXob7nsbwl
+ Af9Lclqtfc0n3Ma/xp1pmE2XhD+ijuSmbvl8Y/ahibODCgDB/wVQ+mng+Uf89ZTGI7NZVt+23hE
+ Ttw8wBZ1mKGVdgIWKvkZUQKST012Og2m7BTMhdCFUYMAsbZfuGcxoRlaMKIagoqZZ7dKczJ83g8
+ mngtG8eL3kb0vgNUIqMSUuxg2EQ8chnm2tnSoum7DXkhz1JyHvbs2SYkB9+Qa2QwIyEQfypthPw
+X-Google-Smtp-Source: AGHT+IGz2ZXOhg/FVxi3ININn/0qMWF6gXenBPAvGBCjISJMJZJMY0TXzmXjxt2JdFgQ+I/VB6fPhg==
+X-Received: by 2002:a05:600c:cc9:b0:434:ffd7:6fd2 with SMTP id
+ 5b1f17b1804b1-4362aa26cdbmr119223065e9.7.1734372474607; 
+ Mon, 16 Dec 2024 10:07:54 -0800 (PST)
 Received: from artemis2.broadband ([2a0a:ef40:ee3:c001:477a:6a2a:86f6:a454])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436360154absm91501605e9.2.2024.12.16.10.07.51
+ 5b1f17b1804b1-436360154absm91501605e9.2.2024.12.16.10.07.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 10:07:51 -0800 (PST)
+ Mon, 16 Dec 2024 10:07:54 -0800 (PST)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Andrew Goodbody <andrew.goodbody@linaro.org>,
- Ben Dooks <ben.dooks@codethink.co.uk>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Kongyang Liu <seashell11234455@gmail.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v5 0/4] Select CONFIG_64BIT for sandbox64 and x86_64
-Date: Mon, 16 Dec 2024 18:07:32 +0000
-Message-Id: <20241216180736.1933807-1-andrew.goodbody@linaro.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 1/4] sandbox: Correct guard around readq/writeq
+Date: Mon, 16 Dec 2024 18:07:33 +0000
+Message-Id: <20241216180736.1933807-2-andrew.goodbody@linaro.org>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241216180736.1933807-1-andrew.goodbody@linaro.org>
+References: <20241216180736.1933807-1-andrew.goodbody@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,57 +97,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Picking up a series from Dan Carpenter and applying requested
-changes for v2.
+In include/linux/io.h the declarations of ioread64 and iowrite64
+which make use of readq/writeq are guarded with CONFIG_64BIT so
+guard the sandbox declarations of readq and writeq also with
+CONFIG_64BIT.
 
-I had previously set CONFIG_64BIT for arm64.  This patchset does the
-same thing for sandbox and x86_64.  (Mips and riscv were already
-doing it).  This CONFIG option is used in the Makefile to determine
-if it's a 32 or 64 bit system for the CHECKER.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
 
-Makefile
-  1052  # the checker needs the correct machine size
-  1053  CHECKFLAGS += $(if $(CONFIG_64BIT),-m64,-m32)
-
-Changes in v5:
- - Previous version mistakenly simplified the change to
-   bloblist.c, so reinstate the full change in order to
-   fix those platforms that broke.
-
-Changes in v4:
- - Add help text to describe new symbol CONFIG_SPL_64BIT
- - Split the statement in bloblist.c to be more readable
+(no changes since v3)
 
 Changes in v3:
-Added a new patch 1/4 to make fixes to the source needed
-by the sandbox patch 2/4.
-Updated 3/4 to account for x86 being built with a 64 bit
-U-Boot proper but a 32 bit SPL.
-Added another patch 4/4 to fix an incorrect use of
-CONFIG_PHYS_64BIT which should be CONFIG_64BIT at the request
-of Tom Rini.
+This is a new patch in the series at this point.
 
-Changes in v2:
-Resubmitted by Andrew Goodbody with changes requested by reviewer
+ arch/sandbox/include/asm/io.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Andrew Goodbody (4):
-  sandbox: Correct guard around readq/writeq
-  sandbox: select CONFIG_64BIT for sandbox
-  x86: select CONFIG_64BIT for X86_64
-  test: lib: Use CONFIG_64BIT to detect 64 bit compile
-
- arch/Kconfig                  |  8 ++++++++
- arch/arm/Kconfig              |  1 +
- arch/mips/Kconfig             |  4 ++++
- arch/riscv/Kconfig            |  1 +
- arch/sandbox/Kconfig          |  2 ++
- arch/sandbox/include/asm/io.h |  4 ++--
- arch/x86/Kconfig              |  1 +
- common/bloblist.c             | 13 ++++++++-----
- include/limits.h              |  3 ++-
- test/lib/str.c                |  8 ++++----
- 10 files changed, 33 insertions(+), 12 deletions(-)
-
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index 3d09170063..f656f361cd 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -39,13 +39,13 @@ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
+ #define readb(addr) sandbox_read((const void *)addr, SB_SIZE_8)
+ #define readw(addr) sandbox_read((const void *)addr, SB_SIZE_16)
+ #define readl(addr) sandbox_read((const void *)addr, SB_SIZE_32)
+-#ifdef CONFIG_SANDBOX64
++#ifdef CONFIG_64BIT
+ #define readq(addr) sandbox_read((const void *)addr, SB_SIZE_64)
+ #endif
+ #define writeb(v, addr) sandbox_write((void *)addr, v, SB_SIZE_8)
+ #define writew(v, addr) sandbox_write((void *)addr, v, SB_SIZE_16)
+ #define writel(v, addr) sandbox_write((void *)addr, v, SB_SIZE_32)
+-#ifdef CONFIG_SANDBOX64
++#ifdef CONFIG_64BIT
+ #define writeq(v, addr) sandbox_write((void *)addr, v, SB_SIZE_64)
+ #endif
+ 
 -- 
 2.39.5
 
