@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D33E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 04:36:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31797E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 04:36:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BA2B800D2;
+	by phobos.denx.de (Postfix) with ESMTP id B6B7080192;
 	Mon, 16 Dec 2024 05:36:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=aibrahem.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=aibrahem.com header.i=@aibrahem.com header.b="S7J8z/7J";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CJUvvgWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BEE980086; Sun, 15 Dec 2024 21:56:40 +0100 (CET)
-Received: from st43p00im-ztbu10073601.me.com (st43p00im-ztbu10073601.me.com
- [17.58.63.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9A73D800D7; Mon, 16 Dec 2024 02:57:16 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F78B8005D
- for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 21:56:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6595880050
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 02:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=aibrahem.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mail@aibrahem.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aibrahem.com;
- s=sig1; t=1734296197;
- bh=wNnmyVUN53ZmFUbII8s2pc0Sknx1oMh0lyxDk/dp3eM=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:x-icloud-hme;
- b=S7J8z/7JgxN342Jut466W9UaQuNNL6A89mfr0qfHQ82t09riN1mpM+x6WS2A4WX6R
- jGEHt8CynJj+4+GjpFT4jUSd4RH2Nci6//4cRnDmb8whfVzftfoaBHBRrT44kkRf2O
- x2qpYvrlMUb2fy84StB/1WKKOiQpFRlP8ob8Ev6hT0TeeuS8Faiz9icS/3V2krpMSS
- e5a/WtR+fBbXXd0CtMsZqZQqPYufm0YD3GYu1HYr/TzCLr5j/ak7uTE5WxchePOam6
- 5p3HS0B3vucN6FIrhU1jtUXjq02fxCZdS8WqfHXruPhkGeorD/F9/1iCOGGCl7vf7I
- ONGP8k1GdPLfQ==
-Received: from localhost.localdomain (st43p00im-dlb-asmtp-mailmevip.me.com
- [17.42.251.41])
- by st43p00im-ztbu10073601.me.com (Postfix) with ESMTPSA id 013B9180358;
- Sun, 15 Dec 2024 20:56:35 +0000 (UTC)
-From: Abdelrahman Ibrahem <mail@aibrahem.com>
-To: u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Stefano Babic <sbabic@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] arm: imx: Remove arch_env_get_location to fix env lockdown
-Date: Sun, 15 Dec 2024 21:55:53 +0100
-Message-ID: <20241215205553.10445-1-mail@aibrahem.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241215010518.GA16463@localhost.localdomain>
-References: <20241215010518.GA16463@localhost.localdomain>
+ spf=pass smtp.mailfrom=effbiae@gmail.com
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3a7e108b491so32846295ab.3
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 17:57:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734314233; x=1734919033; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=5pwE8zDu35ok4YLSrSrKqbQ38w9za7lEOlNsnTb9kuc=;
+ b=CJUvvgWHF2WH/E+DIzn1hfceRqgGDPGwUkpHbIjyE451kNrA7WYWb89Rcew5hwvyvi
+ 2uG1Ju9X+6pLiHiUVZKOBq82aP77cYH0VC/RyZ4vc6ziCQdpSUjsC2c8e069PPc0w/1U
+ nbYKno42P8u5J5RU8gmEmuqbzNafklK13hRfbHBc3ZcPSab6lyQUR0A5/14PeXb+QUWu
+ A95AVW9TDXaENfW73vGqQ31gxAlx9KPbjaKi+hH0F8f5ba3sPmQpO9PDc3+aH7YGevzs
+ /K8NqkeglgORhEzSFxQaZtqmgl+mUMuwg8eqgrkG1FmRm0UTq3Pd1s/TTiNqdiz9BGki
+ CPaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734314233; x=1734919033;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5pwE8zDu35ok4YLSrSrKqbQ38w9za7lEOlNsnTb9kuc=;
+ b=BxVkyaKmEPKv0pNajkWiE+PmFsa7fLCQVEoAkULVq3V66DqsZYsa47GpCUZEb6/hxa
+ AMozn+F81hP+crvpVvWdDFTf35fT92/R2LedlPkOczji6yxQYvd1cK48jLBVCtZGTr3e
+ 0P4xaN/nZoIyC4Wy43wy/HBoaIYdIPezHiZHnTRKF8Lv3XKn+D58y16JPtHHrenyQERj
+ 9mkbIs400S9Ot5xPRd6sG+F33hDPCwgkzGisleVaMsiUVSLpP1lJh14jhAioWiikisI+
+ ZPgDWsAk4DvkAYexqxgwY65HtbGOF6t6wogCl/5i+ZjPlb32uS9dgTN4BtOmjXEvPvAb
+ kmfw==
+X-Gm-Message-State: AOJu0YxPGDP9illZ19dVAZlhkmfqJP6AQVhDINuiJIt2W0xkR1IpZFjj
+ ldMbTWaR0Ud33F1OVgPKzeBe9QiXJJ88PpMYink22zafJ7FWmFpXbDc5YNbH/XEtH5n9mulmAB8
+ 3aRmxJ/Rl0QQHBN1CZT/hNa36w6M4VTNXPQ0=
+X-Gm-Gg: ASbGncuRTaWY41Op11l+KDUoU9ADFb9kzwzwYXlfVvz/mQG9HUcc0VTfoJePcjVQqTw
+ 81IVw9Fif2vnrq7IbM6fekiG20HChz4v6MeYU/g==
+X-Google-Smtp-Source: AGHT+IHeeWsTaeQ/1kGWtJUfcO0Y6JDVlvfjWYsCQXG0pu+fMoAIlKwvATtvtNTbqJtYzIfDtFjuKPbkc1vp5APvWnY=
+X-Received: by 2002:a05:6e02:2169:b0:3a0:8c5f:90c0 with SMTP id
+ e9e14a558f8ab-3afee4ba0a7mr116291195ab.10.1734314232855; Sun, 15 Dec 2024
+ 17:57:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: X4zpcUzUaTiRqU8Erk8QQMAW_layOIO9
-X-Proofpoint-ORIG-GUID: X4zpcUzUaTiRqU8Erk8QQMAW_layOIO9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2024-12-15_09,2024-12-13_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- suspectscore=0 spamscore=0
- bulkscore=0 adultscore=0 clxscore=1030 mlxscore=0 mlxlogscore=364
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2308100000 definitions=main-2412150183
+From: Jack Andrews <effbiae@gmail.com>
+Date: Mon, 16 Dec 2024 12:57:01 +1100
+Message-ID: <CAJvHTNwvmDH8L3x8ujcbJLR4=dXsGb97VmZ37Jm2ZMWLaC67rw@mail.gmail.com>
+Subject: running u-boot in qemu-system-arm64
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Mon, 16 Dec 2024 05:36:45 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,13 +85,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you for your feedback.
+thanks for u-boot.
 
-This file is global for all Layerscape Processors, if this function is
-needed for a specific board then it needs to be moved to only be included
-for that board.
+does u-boot run in qemu when emulating a raspberry pi 3 (or 4)?
 
-Let me know if you have further suggestions.
+i'm running
+ $ qemu-system-arm64 -M raspi3b -kernel u-boot
 
-Best regards,
-Abdelrahman Ibrahem
+and i just get a blank screen
+
+i built u-boot with
+export ARCH=arm64
+export CROSS_COMPILE=/usr/bin/aarch64-linux-gnu-
+export CC=gcc
+make rpi_3_defconfig
+make
+
+i also tried variations on qemu like:
+ $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3b
+-kernel u-boot
+ $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3ap
+-kernel u-boot
+
+best,
+jack
