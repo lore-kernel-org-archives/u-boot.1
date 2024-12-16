@@ -4,171 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B156E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 11:53:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D28CE7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 12:41:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4BA08004E;
-	Mon, 16 Dec 2024 12:53:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 611548004E;
+	Mon, 16 Dec 2024 13:41:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=bp.renesas.com header.i=@bp.renesas.com header.b="jdGqrxh0";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DEDF8005B; Mon, 16 Dec 2024 12:53:08 +0100 (CET)
-Received: from TY3P286CU002.outbound.protection.outlook.com
- (mail-japaneastazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c405::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AC1A68005B; Mon, 16 Dec 2024 13:41:31 +0100 (CET)
+Received: from smtpbg150.qq.com (smtpbg150.qq.com [18.132.163.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE11A8004E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 12:52:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
+ by phobos.denx.de (Postfix) with ESMTPS id C7B4D8003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 13:41:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=biju.das.jz@bp.renesas.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qP1mM25FBX3XZfw3lLTObP0FErymDdLi91h0CVP7IgNXZc/6T2r+PuyFYTdLBFEkaeG/+BcspHwh/YimQmtfZP5AGaduECNv9mlzwosqREjwJ5gx0GTbQ4yE56ztRirejQ8IYezWlv3/oqy1MlKQoDQ1/tH9pm1mkDTqDZzT1qUMjQC5eL2zs+d+BDcqsmugdSzphEg5OBF3N5bSd5lqrC0aq7itMRbe+NETtaPfnef790XLft8W/UE7bnZDU5hnta/E9dXn4c6Dcwk712bBUxq5IQUedH9EAUStQ+BOGfTEBa07o/FLey6abMiOx5c8FiEH7UoCAs+4P2kSTf36Pw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q9ZqyQwP8wZKpuxC5BezJ1PxUkfWA4C/agfHVjTTBB8=;
- b=Z1wdPkknWE+qjyAx4ilPGlP1TaoOpYJAA/tiuekb1PW7ioFcytChMSsJNRvm9CrBmSCO00sVbitGimehLdBefPtW+SwDyJwQMrmfenaSjV0Ub3e9cJS4M0bytr0Lxcn+rDq+hRIktCLt3K4S+M6CqoYIg6vDyuxyMXSZRtbNv5Q68UNqVM5RqdqlOf/pMGr4YNskc6LXTnti0LvfdNNrZFVP5HzrWeL+2XzlecB/BaeEAuyiEmwJFRq6cZSqFT83HgT3qHyFsXFOmFqnp6hJZELH4r1Vq4V+kyIcdcsDKyFgYYv/E2bJDL1eqeIubGcgydvulLLyRSYUE7uIW7Z9YQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bp.renesas.com; dmarc=pass action=none
- header.from=bp.renesas.com; dkim=pass header.d=bp.renesas.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bp.renesas.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Q9ZqyQwP8wZKpuxC5BezJ1PxUkfWA4C/agfHVjTTBB8=;
- b=jdGqrxh0dkJ348eTn3EbYRnMdPc46Orj/7jvsJ0Xw/Vr4+2WSZi2RfMHIN/xd6fJ/8Bmkt7hw7Cfm5n2rkTY64J5ZA+GtwdoFS5LpaVxQ+U3oR4t0oSM8Y46GNfESQfhBePU3mFkZ0KOkGGqbQ2IujJNQt1pcwI6LRApQImX4io=
-Received: from TY3PR01MB11346.jpnprd01.prod.outlook.com (2603:1096:400:3d0::7)
- by TYTPR01MB10979.jpnprd01.prod.outlook.com (2603:1096:400:39d::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8251.21; Mon, 16 Dec
- 2024 11:52:54 +0000
-Received: from TY3PR01MB11346.jpnprd01.prod.outlook.com
- ([fe80::86ef:ca98:234d:60e1]) by TY3PR01MB11346.jpnprd01.prod.outlook.com
- ([fe80::86ef:ca98:234d:60e1%5]) with mapi id 15.20.8251.015; Mon, 16 Dec 2024
- 11:52:54 +0000
-From: Biju Das <biju.das.jz@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Chris Paterson <Chris.Paterson2@renesas.com>, Prabhakar Mahadev Lad
- <prabhakar.mahadev-lad.rj@bp.renesas.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini
- <trini@konsulko.com>
-Subject: RE: [PATCH 1/3] arm64: Convert core type check macros into inline
- functions
-Thread-Topic: [PATCH 1/3] arm64: Convert core type check macros into inline
- functions
-Thread-Index: AQHbTnmwjG67vquKBUCMIHR6qTOggrLoku7AgAAxbwCAAABUUA==
-Date: Mon, 16 Dec 2024 11:52:54 +0000
-Message-ID: <TY3PR01MB113460207C1C2A1B9CB534B2D863B2@TY3PR01MB11346.jpnprd01.prod.outlook.com>
-References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <TY3PR01MB1134681A786D500D575B1D2CE863B2@TY3PR01MB11346.jpnprd01.prod.outlook.com>
- <18cbc9d6-847a-49ea-9308-b1a6ee4ae920@mailbox.org>
-In-Reply-To: <18cbc9d6-847a-49ea-9308-b1a6ee4ae920@mailbox.org>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bp.renesas.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TY3PR01MB11346:EE_|TYTPR01MB10979:EE_
-x-ms-office365-filtering-correlation-id: 77fc981e-2f00-4138-591c-08dd1dc82d41
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|366016|376014|38070700018;
-x-microsoft-antispam-message-info: =?utf-8?B?aWNnT2k1RlRoN0RVRlBxTlBuMlgxSzdkYVVDSG1McHJuaUEybS8vYmYydzZw?=
- =?utf-8?B?OGEzaG13NFQ4TXRVM01ZeXk4YU9hcS9Rd21jSExJSXpXNUgvWWl4NHRuYXA5?=
- =?utf-8?B?a3V2Z2hWL3R1YmpRT2lKVkd1VHFkOGVjc1loR2kwa0ZlMlBjcHFMZWQrZXNW?=
- =?utf-8?B?WENyVDR5TjN2L25PR0hJT0NpV0pZYWNSRUhZazZJYnBkQ3Q1eU0wLzdjRXcv?=
- =?utf-8?B?QWVmaHlPNTdsMllPN3hTQ0lUMUpNUXJVQm4vL2pxaFh4dFFCWVBCaUtaVzNX?=
- =?utf-8?B?NllDank5Nm92Q2xqdFJyVld5SUthRE90MGdkQTNKMEpvaTBTMFRoLzJLNVBB?=
- =?utf-8?B?c3F6Q24yRkZtRU1qWVBVK1p4VTJTaVJJUStIbTFtVnZrMFVvMExhTkdaZDBE?=
- =?utf-8?B?OFhUWHNhYlhsNXNvd3lWYXhuR1N5ekhHYTNUUittMFc0RmZEZGpYdFFtMTFL?=
- =?utf-8?B?WGhFeUdnSlVCMUppZHFVNkQrb25JRXRVTTc4ZFVUSld0eEk4TlRsVGFLcUUy?=
- =?utf-8?B?eTAyR0pNYWhPQVkyb3QvcS9oV2FScXZmMWc5TERFVjFMK2EydTFBL2xLUlVQ?=
- =?utf-8?B?QllSTlZkNG1ySlVaNHhjZlZkdzZjL2h4Umc2TmZNckFES2tlMUs4czA0S1do?=
- =?utf-8?B?K0dlbm9teWNOWlFNK2dVUmxGbVJaUG4xTE5relFybkFrK3ppQ09sNzZKQTMz?=
- =?utf-8?B?ZThmWUpIQkVPQzVoR3NCbXFQR0wxcHZVOWxXN1FHWVRnSXI0Z3pIWWR5YTVj?=
- =?utf-8?B?MWxqaXl6WTU1WlNsMlpoc2JZQWxsSkdFNnpramRnR2JNemtLVndBQW14cnIz?=
- =?utf-8?B?Q084bHBFL0R1YUM2c1RGZHp2YXpXTWdvV3lzcUhVWGJqajZlRWV2eGhTMURG?=
- =?utf-8?B?SGh5dnpka2FoeW9tbWQ2M2VVTkN1S2ZkdmRtaEdsUjd3M3pNNjRSWmRiMzZI?=
- =?utf-8?B?aWRBUmRYdmRPcmIwWXlsK0x2WTFtMlFSYVNuY25Va1pFd2JQSThIa0Fxd2o0?=
- =?utf-8?B?OEFOUkp4N050aEl6RE9PNXdhMzdTM3VLdWJIRVZIQS9PSkoxOFJQaGxMeUJo?=
- =?utf-8?B?S3BvOHNGemdIR2RVeEVRRnhaNWI0ZUZZYUZ4ZHk3cG5MSGR0QVhuT2VqME0z?=
- =?utf-8?B?WEp0VGpHZFhxemp4ZWJUZUlEdjIrUGY2ZEVEcnN5REw1cmJVaW83cjJXRWRR?=
- =?utf-8?B?T2h0YTVlR0R2K215V0w3MnBzeDg4VGdGMWhwTmpxbkdraEJOcFVOZFlXS0RS?=
- =?utf-8?B?aVVhWmtXMm5XSnkwNWFmN1VNMmxzUEUwWG41QVRVS1ZRdW1RVVZZOHphazB6?=
- =?utf-8?B?T2JtcXJYbGpWUlFyYnZxMWV3UDh6WmxBTU11VW45RXpLUitZS3JkNUxCMjQr?=
- =?utf-8?B?YnpKYy9qWk85WWNXYTRWd1RwUjA2NytiQ0pRVG85TVlWTFlzb3ptcWNrM3Aw?=
- =?utf-8?B?cC82QUxnTStEQTZYMEFTSkZxcmZoYXRqYU5UVmdHVCs0UjdBS0tIRjA4K2ND?=
- =?utf-8?B?TDdxN2ZpZzJybk5OMGxZZDZtR1J6R3FaU01kQ2NoRDRnbWZ1aXRzSG1Mc0FJ?=
- =?utf-8?B?M2QyN1FWTHo5MTRqaE16Ry9lQWdUUVY1ZGcwL01mM1VBVGRTbnBvR0d5SkRE?=
- =?utf-8?B?UzhQZzkzNUlqbjBnTG5MMldWREM2TG9SNzFtVGQ0RUFoMDFEaEcyaGtzOTFC?=
- =?utf-8?B?UEpzSDBKVEJQTnlEa0Y2Wm9QM3hSZUxmczRqbUJMclk1a0RzUUczQ1VhNzAx?=
- =?utf-8?B?MVlaUS9Ba1pramkzMmRwbXg4Z2pMRWtGZnZxek1yL2NwaUZwdkRTMFNmMjF3?=
- =?utf-8?B?RUdSZGEyMTI5Njgzbm9kc2hwdGFWUklPSFhkVlRnMCt2TmpKTjJLSloyM0or?=
- =?utf-8?B?SEhWM1RHcUs1WXZkU1ZqcStwek1KQ2lodnhwcUEvRkFxM1JxczB4eHdLbGtN?=
- =?utf-8?Q?MRn1xS3Jp3ISjNcE4wiEV0C+VR+rMaVo?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TY3PR01MB11346.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?OTk1YjVKOHhrSTNQRi9ZS2lYZEljWkFCS2d2L2lzRVpFSFdzc3VRbjJCcG5V?=
- =?utf-8?B?cWVDTHlYcE1DY2NDOG9yTXpQbmljQXlNNVZqWTkyYjF3VHJqNDJ3ckhqdTBr?=
- =?utf-8?B?bW9sN3JlNlU3SElmNjRXOGVFekovdllaRWhlTEJZZVNzOTF2cFBlOEt1WXk5?=
- =?utf-8?B?bis0V3V3d1p2dzdqSnlOWFdYM0FkNyt2dnZONjJ0ZTZnSE1KbTBCVXZ6dGlR?=
- =?utf-8?B?R3JOUnlWZFFSZi9pcGhTdjNoN0dKQU40dVFHR1FlVEI3QjNCQTcwMkJBdjFm?=
- =?utf-8?B?bDNoZEhxbThhejN5V1BSelN2ZmlDelFjcGhucnUwdG5IUWlTWnI3Y0RlSlBH?=
- =?utf-8?B?TFFLZEJJdVpibTFNMEt1ZDdmYlFIRWxoUjY3SnppSGExZ2JjbzdtMDZra2o0?=
- =?utf-8?B?STJ2V1NoZUZIY3VYMmg5TkZZZ2lFYmNxei9kRDh2bDAxWWNrckY3UkJCT1pt?=
- =?utf-8?B?cFpnT0dxWXhtN2tnSUxYb3VrM29xcEtKTTRoaGlUSHBFVEw0U0dWNnhsMnp0?=
- =?utf-8?B?ejRnaUVlT2kvbnFEY1JiVEk2b204bHZCMCtUMndyYjhDU1FuMlIzK1I0SWFk?=
- =?utf-8?B?a1REZmdYektYV0NnYk1CdFRCWGRYRVhKOERnUVJTOGFYSHNzU1A3WnZBZ25P?=
- =?utf-8?B?aHJ2WENkSkw4bzNjUmdJeHVxQlRXRVhFUE16dFBmVTBnbkpaYkhZU3pFd1By?=
- =?utf-8?B?Uk90MDdQNHh0QkgxSmgyOWZhbm92TFpFbHFMbFNXUTJSNlF2UWF0NnhmWG42?=
- =?utf-8?B?dnhBWloxRS9sN3FPQW8xVnNQaWNBdDRPYnZkOXoyRU9BbHRoWnp1U1lFOFBq?=
- =?utf-8?B?VWJ3SC9tYXYraUtXTG1HNmRYMFlyYVVKcWVVcnlqa0NVczl2di9CbHZPcFFW?=
- =?utf-8?B?Ujc5YUxaeWcwVnhyOVlUd1JyS1hxMUZWWDQ0Qit0U2czRGF2cm83UjlXTk8w?=
- =?utf-8?B?dXJBQVB1ZG9VZGlnN1Y0Y0xzdW90bGZXOHEwMy8wSGNVOFFQaThJdEgzWklQ?=
- =?utf-8?B?SGs1THNMYVI4TXpYTEhzWjhacExMUVlmY3Y0YVhGVmNncWJubGRiWkI5NTVx?=
- =?utf-8?B?T2EvRGtLTGF6TFRzRlhXcVlJVDk2anlUb2JSQjlSUVZkVjVRak9zdU1IOEF6?=
- =?utf-8?B?eWNob29IQjlWVzBiNWtDcXpub3BFczlKMVlveUdZOVdCczFUM2hJUlRtTmVz?=
- =?utf-8?B?aVFrb1lOS05Sd3FrZWdheUZRVGQyR0lVcEMrODdiYkNYOStwTVBsRXF3Q3FL?=
- =?utf-8?B?Ulk1N0pkb2J1WGMzVmZSRHhxeHh2WWpsbnJYTGRuL01qNEdXLy9oWGtwNGpq?=
- =?utf-8?B?N3hBeS85UFAvTlpwSzBGcWVNRG9CSmZlanZjdHlNY3MwR2dGUmRWSE51a01M?=
- =?utf-8?B?L1EydHJuekRYWXhmYzNmT2ZFMzMybUlLeUtOdUx2eTl3OE1vU2VrZVNBVldE?=
- =?utf-8?B?VzhpZW1wSG9JRTBOQjY1ZDQrd0RveFVlRTdlV01nMGV6MkFBaHV2M3lZVVVp?=
- =?utf-8?B?WVAvSTN0b1c5QVlqeXk5aUw4SS9nRnJmVDdFamhCQ0hNU0lPdTlwbFFvT1F2?=
- =?utf-8?B?L2p6Z3JhMnJXN1FveXdKbUNHK3Vaa2VnSmdVZzE0YXRNZmVyVHlYWHc5RUkx?=
- =?utf-8?B?bWJKSW5rbVNOMG11M0I3OGpHSWRkRFNDNWJPWThUZExKR0ZEWG5IcFZKeWph?=
- =?utf-8?B?bkR0T01RbVJhVThOZGZQTk5XM2hyeTR0M1RQV21rM1RzVFlSdXoyS0U0Zndu?=
- =?utf-8?B?UVd2YW5GbXBLeWlJeWFDOUJjNVpQQWxJdCtiUVREcTNERjVDRXVpYm1kY2Nh?=
- =?utf-8?B?ZzZvcFNjK3hUdDAzeHV3ZThhWjBmMUVQZzRiVjJGZjNCSzNSUDNXaFJ1bnhO?=
- =?utf-8?B?akwrRCtlQ3UxODlGL0xjM2t2L3p2ZFovNmF3U3IyY1A3WW13RndvVDM1R3p5?=
- =?utf-8?B?ZFdJUjhXU0k5M1QzbnUrRzVRUFB6aFE5Z0xSakxiUFhuZ0hOTW5kbEViRG92?=
- =?utf-8?B?emx1dlNQWmthYWJlcC9JZ2dXaGFqbDhPa0RjNGppRVlzSzRldy9GaW1PU2hN?=
- =?utf-8?B?dFhsblBnZXp6Vm1vVjR6TUpNSVVsZE9JaVJWTGVhNzJkazl1aWt1Z3BUWmdi?=
- =?utf-8?B?RkM2MUFOaEZqei9xdU5tZG9HZDdiMWZIaW1kOXJJamZlb2dLeEhLQnVWNU5n?=
- =?utf-8?B?RWc9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpip3t1734352849t2alxae
+X-QQ-Originating-IP: lmUJnJf/VsSPG1edUxCbThlBa4UhNvW1xlhkI0Y/K6U=
+Received: from [IPV6:240f:10b:7440:1:f7da:fd82 ( [localhost])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Mon, 16 Dec 2024 20:39:53 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 9600504126561212684
+Message-ID: <445A20D66F127770+f902f36a-5648-4850-8dd9-99b7f36380a8@radxa.com>
+Date: Mon, 16 Dec 2024 21:39:52 +0900
 MIME-Version: 1.0
-X-OriginatorOrg: bp.renesas.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB11346.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77fc981e-2f00-4138-591c-08dd1dc82d41
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Dec 2024 11:52:54.5974 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /4Jn4qeTWRH9OVDV0zLIoBhFyyfumqecvqW/bBNSXR0aDcX5jII1iEwHGnaKZEsAZIobqlmEeWpfiC6PNeXPphnfazOk9GZFU8b+pUSXhZE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYTPR01MB10979
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/5] rockchip: Add support for Radxa ROCK 5C
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ sumit.garg@linaro.org, jonas@kwiboo.se
+References: <20241211033934.23044-1-naoki@radxa.com>
+ <20241211033934.23044-6-naoki@radxa.com>
+ <2600bdcb-3c57-4d52-97d1-c63758b25ed2@cherry.de>
+ <115020791DA19920+c09c7adb-9fe7-47f4-99cb-2c8c862fe1c5@radxa.com>
+ <6b93f3d7-c0bf-4517-9523-3c1a6a1e23dd@cherry.de>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd.
+In-Reply-To: <6b93f3d7-c0bf-4517-9523-3c1a6a1e23dd@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-QQ-XMAILINFO: MKt+JqokN1p2rwxZys9JjFP59DCoJAb1MUKvWX8OFsfl9RL/UgnDnLNn
+ A8iCqBQUdtiC/lNd1+aP7DZwChDQYYmSjIXFLqdo5H/34qvqPEybHGqpn4cCX8g1RrrZGQF
+ N52K5VMhRnbaIuQ4hF0ULtB+oPocDeUz8eHMf1CGg/JIm5QYkHBwbXLRp5R1LW6mjhtH2hW
+ yCwsMWpNcLjBHx7/LUtrUStU7q1zXm9YpZ2rQQfuvFjYdE2Qmlt7zqWf5LklMWxCuN7w8Pu
+ +SnulVMR+6sAMzcFXKjuojmUtOdxdzRe8g4AH0Pm9X4psb2G97vvRxPcEjz/XOwS6TxmCyQ
+ 2n4yx3Kgc2zI/Kg3ZRoDXW/pDOi5sUC68ybfh3NS2lkSlsqEbBIjlovpvK8OZOwtxUPK2uZ
+ B7GIMuxwkmzEef3n8Wy/8GmlvS85qvMe9bEQMpNmbf1vkf6kKX8IOa3L77shXBz1zR2PDma
+ J5YHXGj85Kjpt9JywE+2YoiciO1GBX2NZAkZ1lH1YU9aqTWFoBPctaeJmC0WwBmtI3vaUn0
+ DrUVgn2rjYUm8KyIOnEe9F7V9mLcrzkMtSzqYXBL8mABJujf1//r+WklFsDLAB8NYg8J0ch
+ 0AYLoiSDSXSFgcYD7IescXyHXv9atNXuaYxtC2dwVUQmnlzXtaO0YHo498dG8ZdrBBnyMtA
+ fEJdGYnUB1W7lDe7AFxKV/Fu+csP3emVf6I26BaEx/qps0pq7gQohqHTg/zuFDvQUqXugu/
+ fuD8qEwnYSjH9MZLWip0vPI16gg+bEEZubgewVFVqJHAkWyVTMK/KN+pGdLKRXN1P69yk9A
+ dDV4elMPJA0LRLgJPwSre9lE4S0UJeeY634ItIrH+fZYjwYLXnKtf/WrDvixVmmNa6p3eCS
+ p5knOIV7oC8Dey5n4vni/PMiP4bEAZLH
+X-QQ-XMRINFO: Mp0Kj//9VHAxr69bL5MkOOs=
+X-QQ-RECHKSPAM: 0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,61 +82,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTWFyZWssDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogTWFyZWsg
-VmFzdXQgPG1hcmVrLnZhc3V0QG1haWxib3gub3JnPg0KPiBTZW50OiAxNiBEZWNlbWJlciAyMDI0
-IDExOjUwDQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMS8zXSBhcm02NDogQ29udmVydCBjb3JlIHR5
-cGUgY2hlY2sgbWFjcm9zIGludG8gaW5saW5lIGZ1bmN0aW9ucw0KPiANCj4gT24gMTIvMTYvMjQg
-OTo1NCBBTSwgQmlqdSBEYXMgd3JvdGU6DQo+ID4gSGkgTWFyZWssDQo+ID4NCj4gPiBUaGFua3Mg
-Zm9yIHRoZSBwYXRjaC4NCj4gPg0KPiA+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+
-PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZWsudmFzdXQrcmVuZXNhc0BtYWlsYm94Lm9yZz4NCj4g
-Pj4gU2VudDogMTQgRGVjZW1iZXIgMjAyNCAyMjo0Mw0KPiA+PiBTdWJqZWN0OiBbUEFUQ0ggMS8z
-XSBhcm02NDogQ29udmVydCBjb3JlIHR5cGUgY2hlY2sgbWFjcm9zIGludG8NCj4gPj4gaW5saW5l
-IGZ1bmN0aW9ucw0KPiA+Pg0KPiA+PiBUdXJuIHRoZSBjb3JlIHR5cGUgY2hlY2sgbWFjcm9zIGlu
-dG8gaW5saW5lIGZ1bmN0aW9ucyB0byBwZXJmb3JtDQo+ID4+IGJldHRlciB0eXBlIGNoZWNraW5n
-IG9uIHRoZW0uIFRoZSBpbmxpbmUgZnVuY3Rpb25zIGdldCBvcHRpbWl6ZWQgb3V0DQo+ID4+IGlu
-IGNhc2UgdGhleSBhcmUgbm90IHVzZWQuIEluZGVudCB0aGUgTUlEUl9QQVJUTlVNX0NPUlRFWF9B
-biBtYWNyb3MNCj4gPj4gaW4gcHJlcGFyYXRpb24gZm9yIGFkZGl0aW9uIG9mIGZ1dHVyZSB0aHJl
-ZS1kaWdpdCBjb3JlcyBhbmQgdXNlIE1JRFJfUEFSVE5VTV9TSElGVCBpbg0KPiBNSURSX1BBUlRO
-VU1fTUFTSyB0byBiZSBjb25zaXN0ZW50Lg0KPiA+Pg0KPiA+PiBTaWduZWQtb2ZmLWJ5OiBNYXJl
-ayBWYXN1dCA8bWFyZWsudmFzdXQrcmVuZXNhc0BtYWlsYm94Lm9yZz4NCj4gPj4gLS0tDQo+ID4+
-IENjOiBCaWp1IERhcyA8YmlqdS5kYXMuanpAYnAucmVuZXNhcy5jb20+DQo+ID4+IENjOiBDaHJp
-cyBQYXRlcnNvbiA8Y2hyaXMucGF0ZXJzb24yQHJlbmVzYXMuY29tPg0KPiA+PiBDYzogTGFkIFBy
-YWJoYWthciA8cHJhYmhha2FyLm1haGFkZXYtbGFkLnJqQGJwLnJlbmVzYXMuY29tPg0KPiA+PiBD
-YzogTm9idWhpcm8gSXdhbWF0c3UgPGl3YW1hdHN1QG5pZ2F1cmkub3JnPg0KPiA+PiBDYzogUGF1
-bCBCYXJrZXIgPHBhdWwuYmFya2VyLmN0QGJwLnJlbmVzYXMuY29tPg0KPiA+PiBDYzogVG9tIFJp
-bmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4NCj4gPj4gQ2M6IHUtYm9vdEBsaXN0cy5kZW54LmRlDQo+
-ID4+IC0tLQ0KPiA+PiAgIGFyY2gvYXJtL2luY2x1ZGUvYXNtL2FybXY4L2NwdS5oIHwgMjggKysr
-KysrKysrKysrKysrKystLS0tLS0tLS0tLQ0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCAxNyBpbnNl
-cnRpb25zKCspLCAxMSBkZWxldGlvbnMoLSkNCj4gPj4NCj4gPj4gZGlmZiAtLWdpdCBhL2FyY2gv
-YXJtL2luY2x1ZGUvYXNtL2FybXY4L2NwdS5oDQo+ID4+IGIvYXJjaC9hcm0vaW5jbHVkZS9hc20v
-YXJtdjgvY3B1LmgNCj4gPj4gaW5kZXggNDBkNTRkYzg1YWIuLmFhMTQ3MGJiNzJkIDEwMDY0NA0K
-PiA+PiAtLS0gYS9hcmNoL2FybS9pbmNsdWRlL2FzbS9hcm12OC9jcHUuaA0KPiA+PiArKysgYi9h
-cmNoL2FybS9pbmNsdWRlL2FzbS9hcm12OC9jcHUuaA0KPiA+PiBAQCAtMywxMSArMywxMSBAQA0K
-PiA+PiAgICAqIENvcHlyaWdodCAyMDE4IE5YUA0KPiA+PiAgICAqLw0KPiA+Pg0KPiA+PiAtI2Rl
-ZmluZSBNSURSX1BBUlROVU1fQ09SVEVYX0EzNQkweEQwNA0KPiA+PiAtI2RlZmluZSBNSURSX1BB
-UlROVU1fQ09SVEVYX0E1MwkweEQwMw0KPiA+PiAtI2RlZmluZSBNSURSX1BBUlROVU1fQ09SVEVY
-X0E3MgkweEQwOA0KPiA+PiAtI2RlZmluZSBNSURSX1BBUlROVU1fU0hJRlQJMHg0DQo+ID4+IC0j
-ZGVmaW5lIE1JRFJfUEFSVE5VTV9NQVNLCSgweEZGRiA8PCAweDQpDQo+ID4+ICsjZGVmaW5lIE1J
-RFJfUEFSVE5VTV9DT1JURVhfQTM1CQkweEQwNA0KPiA+PiArI2RlZmluZSBNSURSX1BBUlROVU1f
-Q09SVEVYX0E1MwkJMHhEMDMNCj4gPj4gKyNkZWZpbmUgTUlEUl9QQVJUTlVNX0NPUlRFWF9BNzIJ
-CTB4RDA4DQo+ID4+ICsjZGVmaW5lIE1JRFJfUEFSVE5VTV9TSElGVAkJMHg0DQo+ID4+ICsjZGVm
-aW5lIE1JRFJfUEFSVE5VTV9NQVNLCQkoMHhGRkYgPDwgTUlEUl9QQVJUTlVNX1NISUZUKQ0KPiA+
-Pg0KPiA+PiAgIHN0YXRpYyBpbmxpbmUgdW5zaWduZWQgaW50IHJlYWRfbWlkcih2b2lkKSAgeyBA
-QCAtMTgsOSArMTgsMTUgQEANCj4gPj4gc3RhdGljIGlubGluZSB1bnNpZ25lZCBpbnQNCj4gPj4g
-cmVhZF9taWRyKHZvaWQpDQo+ID4+ICAgCXJldHVybiB2YWw7DQo+ID4+ICAgfQ0KPiA+Pg0KPiA+
-PiAtI2RlZmluZSBpc19jb3J0ZXhfYTM1KCkgKCgocmVhZF9taWRyKCkgJiBNSURSX1BBUlROVU1f
-TUFTSykgPj4gXA0KPiA+PiAtCQkJIE1JRFJfUEFSVE5VTV9TSElGVCkgPT0gTUlEUl9QQVJUTlVN
-X0NPUlRFWF9BMzUpDQo+ID4+IC0jZGVmaW5lIGlzX2NvcnRleF9hNTMoKSAoKChyZWFkX21pZHIo
-KSAmIE1JRFJfUEFSVE5VTV9NQVNLKSA+PiBcDQo+ID4+IC0JCQkgTUlEUl9QQVJUTlVNX1NISUZU
-KSA9PSBNSURSX1BBUlROVU1fQ09SVEVYX0E1MykNCj4gPj4gLSNkZWZpbmUgaXNfY29ydGV4X2E3
-MigpICgoKHJlYWRfbWlkcigpICYgTUlEUl9QQVJUTlVNX01BU0spID4+XA0KPiA+PiAtCQkJIE1J
-RFJfUEFSVE5VTV9TSElGVCkgPT0gTUlEUl9QQVJUTlVNX0NPUlRFWF9BNzIpDQo+ID4+ICsjZGVm
-aW5lIGlzX2NvcnRleF9hKF9fbikJCQkJCVwNCj4gPj4gKwlzdGF0aWMgaW5saW5lIGludCBpc19j
-b3J0ZXhfYSMjX19uKHZvaWQpCQlcDQo+ID4+ICsJewkJCQkJCQlcDQo+ID4+ICsJCXVuc2lnbmVk
-IGludCBtaWRyID0gcmVhZF9taWRyKCk7CQlcDQo+ID4NCj4gPiBNYXliZSB1bnNpZ25lZCBpbnQg
-bWlkciA9IHJlYWRfbWlkcigpICYgTUlEUl9QQVJUTlVNX01BU0ssIHRvIHJlZHVjZQ0KPiA+IG9u
-ZSBzdG9yZSBPcGVyYXRpb24/Pz8NCj4gVGhlIGNvbXBpbGVyIHdpbGwgb3B0aW1pemUgdGhlIHJl
-c3VsdCBhcyBuZWVkZWQsIHRoaXMgZXhwYW5zaW9uIGhlcmUgaXMgZm9yIHJlYWRhYmlsaXR5IHB1
-cnBvc2Ugb25seS4NCg0KT0suIElmIGFsbCB0aGUgY29tcGlsZXJzIGF2YWlsYWJsZSB0b2RheSBp
-cyBtYWtpbmcgb3B0aW1pemF0aW9uIGZvciB0aGlzIGluc3RydWN0aW9uLiBUaGVuLCBpdCBtYWtl
-IHNlbnNlLg0KDQpDaGVlcnMsDQpCaWp1DQo=
+Hi Quentin,
+
+On 12/16/24 18:57, Quentin Schulz wrote:
+> Hi Naoki,
+> 
+> On 12/15/24 2:37 AM, FUKAUMI Naoki wrote:
+>> Hi Quentin,
+>>
+>> Thank you very much for your review!
+>>
+>> On 12/13/24 22:11, Quentin Schulz wrote:
+>>> Hi Naoki,
+>>>
+>>> On 12/11/24 4:39 AM, FUKAUMI Naoki wrote:
+>>>> Radxa ROCK 5C[1] is a Rockchip RK3588S2 based single board computer.
+>>>>
+>>>> [1] https://eur02.safelinks.protection.outlook.com/? 
+>>>> url=https%3A%2F%2Fradxa.com%2Fproducts%2Frock5%2F5c&data=05%7C02%7Cquentin.schulz%40cherry.de%7Cbe7d810ae88f4203af8208dd1ca921c6%7C5e0e1b5221b54e7b83bb514ec460677e%7C0%7C0%7C638698234938145886%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=8TcHBC2dV1LzouPSR8%2FICOBVshq9RndgMQS3m3XLwFs%3D&reserved=0
+>>>>
+>>>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>>>> ---
+>>>> Changes in v3:
+>>>> - fix compile error
+>>>> Changes in v2:
+>>>> - arch/arm/dts/rk3588s-rock-5-u-boot.dtsi: remove unused node
+>>>> - include/configs/rock-5-rk3588s.h: fix include order
+>>>> ---
+>>>>   arch/arm/dts/rk3588s-rock-5-u-boot.dtsi     | 16 ++++
+>>>>   arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi    |  6 ++
+>>>>   arch/arm/mach-rockchip/rk3588/Kconfig       |  7 ++
+>>>>   board/radxa/rock-5-rk3588s/Kconfig          | 12 +++
+>>>>   board/radxa/rock-5-rk3588s/MAINTAINERS      |  8 ++
+>>>>   board/radxa/rock-5-rk3588s/Makefile         |  3 +
+>>>>   board/radxa/rock-5-rk3588s/rock-5-rk3588s.c | 77 +++++++++++++++++
+>>>>   configs/rock-5-rk3588s_defconfig            | 94 +++++++++++++++++ 
+>>>> ++++
+>>>>   doc/board/rockchip/rockchip.rst             |  1 +
+>>>>   include/configs/rock-5-rk3588s.h            | 15 ++++
+>>>>   10 files changed, 239 insertions(+)
+>>>>   create mode 100644 arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
+>>>>   create mode 100644 arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+>>>>   create mode 100644 board/radxa/rock-5-rk3588s/Kconfig
+>>>>   create mode 100644 board/radxa/rock-5-rk3588s/MAINTAINERS
+>>>>   create mode 100644 board/radxa/rock-5-rk3588s/Makefile
+>>>>   create mode 100644 board/radxa/rock-5-rk3588s/rock-5-rk3588s.c
+>>>>   create mode 100644 configs/rock-5-rk3588s_defconfig
+>>>>   create mode 100644 include/configs/rock-5-rk3588s.h
+>>>>
+>>>> diff --git a/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi b/arch/arm/dts/ 
+>>>> rk3588s-rock-5-u-boot.dtsi
+>>>> new file mode 100644
+>>>> index 000000000000..be1a2f9ae7bb
+>>>> --- /dev/null
+>>>> +++ b/arch/arm/dts/rk3588s-rock-5-u-boot.dtsi
+>>>> @@ -0,0 +1,16 @@
+>>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>>>> +/*
+>>>> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
+>>>> + */
+>>>> +
+>>>> +#include "rk3588s-u-boot.dtsi"
+>>>> +
+>>>> +&saradc {
+>>>> +    bootph-pre-ram;
+>>>> +    vdd-microvolts = <1800000>;
+>>>> +};
+>>>> +
+>>>> +&sdhci {
+>>>> +    cap-mmc-highspeed;
+>>>> +    mmc-hs200-1_8v;
+>>>> +};
+>>>> diff --git a/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi b/arch/arm/ 
+>>>> dts/ rk3588s-rock-5c-u-boot.dtsi
+>>>> new file mode 100644
+>>>> index 000000000000..bb1cc9e4a279
+>>>> --- /dev/null
+>>>> +++ b/arch/arm/dts/rk3588s-rock-5c-u-boot.dtsi
+>>>> @@ -0,0 +1,6 @@
+>>>> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>>>> +/*
+>>>> + * Copyright (c) 2024 Radxa Computer (Shenzhen) Co., Ltd.
+>>>> + */
+>>>> +
+>>>> +#include "rk3588s-rock-5-u-boot.dtsi"
+>>>> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach- 
+>>>> rockchip/rk3588/Kconfig
+>>>> index b5a0e624a532..e1487ecb0464 100644
+>>>> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+>>>> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+>>>> @@ -260,6 +260,12 @@ config TARGET_ROCK_5_ITX_RK3588
+>>>>         Front-panel connectors for audio and case-power, -leds
+>>>>         Powered by either 12V, ATX power-supply or PoE
+>>>> +config TARGET_ROCK_5_RK3588S
+>>>
+>>> This should be TARGET_ROCK_5C_RK3588S?
+>>
+>> rock-pi-4-rk3399_defconfig uses CONFIG_TARGET_ROCKPI4_RK3399.
+>> I'm doing same thing.
+>>
+> 
+> config TARGET_ROCKPI4_RK3399
+>     help
+>       Support for ROCK Pi 4 board family by Radxa.
+> 
+> Here you say this option is for ROCK 5C only.
+
+Because this is first patch which adds support for ROCK 5C.
+
+> While this could be a good idea, anything odd needs to be justified in 
+> the commit log so that we can follow your train of thoughts.
+> 
+> This patch series only adds support for the ROCK 5C so nothing hints at 
+> this being usable/used for other boards from Radxa. Which boards are you 
+> planning to support with this option? If the ROCK 5B/ROCK 5 ITX aren't 
+> going to be part of it, why and how do I know which of the ROCK 5 is 
+> supported by this option?
+
+It's possible to add support for ROCK 5A (RK3588S).
+
+For RK3588 boards, I have another patch which adds rock-5-rk3588.
+
+> This could also be started with a "normal" config option which is named 
+> after the board and for the next board support you want to reuse this 
+> config option for, you rename it to something more appropriate. In any 
+> case, please document the reasons for doing that :)
+
+Sorry for my poor explanation...
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+> Cheers,
+> Quentin
+> 
+
