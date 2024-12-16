@@ -4,76 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A87AE77180
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25324E77180
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 16:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE7D480214;
-	Mon, 16 Dec 2024 16:43:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 39A62800D7;
+	Mon, 16 Dec 2024 17:59:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dhjrAO43";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Elo5Sr/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72ABA801CF; Mon, 16 Dec 2024 16:43:49 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8898280104; Mon, 16 Dec 2024 17:59:27 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0327C80219
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:43:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26548800D2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 17:59:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa6a92f863cso853183766b.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:43:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734363826; x=1734968626; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fm4V2qE6rLjoIz0vMrYCaruFxT67g7tTlB+QMFQ8vIg=;
- b=dhjrAO43/Ha66/O6Ym02Vm1Y+1OqEszGVe686E/pWUiK3a2TkJQjhQ3wEyIookMFIa
- XHJ6MlLLw4zF/B2k4UkKWRW55P6faQiw5p/oydXRMM5yVn0WBkUDBi1fBHK35HU5KuOF
- 1acw10QvZyzJw9FPyXhqS3wlWIE4HObtVJkPU=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 6BF9C3F2B4
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:59:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1734368364;
+ bh=PnR+MlhHeoxQR+eQF/wqpKfNJNpmPSJA7UOpzYk5elQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Elo5Sr/D20+WUVRuNEle7HLLcWlpdlHLmUtEq2KpIWI8Pvo2LKsNl7XiPJdFdMlOK
+ 5G2cS43kQTNKiZfgM4otmTVxBaeuTk6h2uneHNyhwTrBo6hX+NFVtm/cCjTCYMAW+z
+ FNbBt5nTtvGiZzatxlmc6NEzG3UH6UIU3kyfcnL5vXeDX9KLIjtUcVeUtM1iSTuX8s
+ gzwPGPO0kkxiSDuE5g5ZLv4N2LsUfoXcTbGG7cywW2GjeXcMrKA1N7IGrB4t95aQEO
+ F8SnxXjLtOLpSVtw0K5LD8De+Ue/itu0YkCgpmL7GBdBB128rLRJ99A2MYObD1D+lK
+ mGQfRU0aI84IA==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-385e3cbf308so1779703f8f.2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 08:59:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734363826; x=1734968626;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fm4V2qE6rLjoIz0vMrYCaruFxT67g7tTlB+QMFQ8vIg=;
- b=RWOJSnVbYj2xRJliv4dlFPmVILBca5RmnZmCCq7hhp6R9vevJaUtgsZIzy85PY2iJr
- r1XCXKrZRaz5bUHm7ydb2yoeieg139Ok7tYDjbi+qLe1X3xTo17RwpWVUIUE7C6Rre9L
- NsLrZ4hwgFtf3gPk3Sau3hyMhDpF9ntMgOf3eVno6uwiBWzeQYF7DB8ViPCCHkBvp/kt
- kuASs5PVmjE3u/uRnPl6I2/9A7VXEaOfskmmy8ZKVViFEkSQBqxqYdi1+uERjcYN/a5E
- 5iQ5LnoDBf7sdK9Jyp6OAWAHQEB7FMUeDORU4GZ6/iq1N8DQazmJz0w6wb81NHnOWzlH
- g5jQ==
-X-Gm-Message-State: AOJu0YxObw4XLKkO+uddnBy+g0plp3XqOykuLjh0tbkeBtF+KnmP5sik
- iEvi1H/uzn6ejiN2UAgocAyJJiSpol4RZDobVzKlfOx8QQqAIfUSbDXhdN95S7FwlHB8rtJMEhC
- 9U7scVBRlJke4Q8ETZn3IIznt2yaYvdHqESMD
-X-Gm-Gg: ASbGncvwh1qLfBNSHuwk9REzwe8iXHvMcv10WN2TA149Vvkm6azlWgusOKvIbrEfLpY
- kH6rBit8mPpnFbp+bunIKXIFBi8pZYJ1x3WEHXWg=
-X-Google-Smtp-Source: AGHT+IEeCdIzwwdKapFcXX3gRIZawunI0JKiNnJGkN62dA1mMg2MqBT144lwUxHCkvokzUPnMpMW31VvsUasz4C1OKE=
-X-Received: by 2002:a17:907:2d0d:b0:aa6:71dc:3123 with SMTP id
- a640c23a62f3a-aab778c1f0amr1100118066b.8.1734363826503; Mon, 16 Dec 2024
- 07:43:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734368364; x=1734973164;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PnR+MlhHeoxQR+eQF/wqpKfNJNpmPSJA7UOpzYk5elQ=;
+ b=vq36RbxjML8wIQNylJvHHzkVcQQXdvHjEG1/khU6Dh1x9Owua0oka6wHw3SXXgFHkV
+ ChiBKtvx8bEJ5gudMyqKmqE4tiKda/Smnex0DLGWFolE/XCc0VXiJAX7Ntq+cRbYZWtl
+ t+WERPXsGA3oqiAmXnrzb2tv1+hou5anuWjAry3nYIyjY6NVTm+hZF3omDRLXTDZVrqK
+ 0kSVC3Lw6Ebujcsr0DQSLA7goyYlrp+4uRc2G5Ij0p+/sTNV6ORLaYMGRzOHMLHrF46p
+ +wftoadpf7mMqJljRm2rZ33nsJ7UGchU26JG8jBPtSH9iwsB2MLcoCghIgO1RacBUYox
+ X6LQ==
+X-Gm-Message-State: AOJu0Yx7Fw8Wjnx/NRKhNt7dh/0aFCx+WJzwISxcVAJr1U9sSLmksDgI
+ cwuoAQ7ZGYg/ol2l1njp8uGaKSppzK+3x5w1jPe3hIrPhAplQ3oTgkqYmOK30pF13a14DifzAbj
+ oPWZefLdjSsAyeq1HCl71/d3ANCgu6crS25Qt0BHnNpCQfoZTmoEQSwFGEo2tj1z5ENQ=
+X-Gm-Gg: ASbGncsMKAXDmeU6Fn2MRZAx+vjroPwTXQRQCf007amuusCJqj6CMHWJx56KO6C4OBc
+ jxGxgZ6kA2ZThy2scjzW0ZIqfRzAsVkgbaU2yRA3MXRueVAy4twVQGQ1SyiPx8PVIoivY38fimc
+ hhuEpvIr3M+//8jML3ekwxhZkpttljvBx8voYu8yhaxmWJDlj2mbnKd4yO5TDHeHRy/e0a/UrMG
+ 5fFRtZDt+X0sRuviUDmcLTZH47x+tUeqF7i7HmELHZ3TZjXFJ102Skwj+ZPNEzCo4CGqCUMzI6n
+ 4sXl3q5MicQjNKVydXJaz7xz+c6RuPgwK5493m+Aur1+oTNV4KhP5w==
+X-Received: by 2002:a05:6000:4024:b0:386:3f3e:ab11 with SMTP id
+ ffacd0b85a97d-3888e0bd231mr11006543f8f.34.1734368364040; 
+ Mon, 16 Dec 2024 08:59:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGh97BlzS60DRxPeTtx/Ht7hMmVK5HG12ZnFH5WjBkHhpWT5fL3leAcnw2Bzig9DkrFvTxHxw==
+X-Received: by 2002:a05:6000:4024:b0:386:3f3e:ab11 with SMTP id
+ ffacd0b85a97d-3888e0bd231mr11006514f8f.34.1734368363718; 
+ Mon, 16 Dec 2024 08:59:23 -0800 (PST)
+Received: from [192.168.103.102]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-388c80120c7sm8626030f8f.13.2024.12.16.08.59.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Dec 2024 08:59:23 -0800 (PST)
+Message-ID: <d22efd6f-f680-4a4f-8093-aa74ca17cd35@canonical.com>
+Date: Mon, 16 Dec 2024 17:59:22 +0100
 MIME-Version: 1.0
-References: <20241213225543.392282-1-raymond.mao@linaro.org>
- <20241213225543.392282-2-raymond.mao@linaro.org>
- <CAFLszTiVmZGxETFkngDbsv0PCLN_bVv7ox6MFiAoGGN2v7tbKQ@mail.gmail.com>
- <CAEfUkUL1EyJ6si_N6k6Ku1ZM9dWF6uHYXrQ14dueUeTEYzSRNQ@mail.gmail.com>
- <CAFLszThWQ2pOQux_Hsa2M=ArBR7f+R2GHeB2d4CB6k4MxShR4w@mail.gmail.com>
- <CAEfUkUKA9raUu0dANWf25aw6kBzu-DKshctQxVre57bEiN94kA@mail.gmail.com>
-In-Reply-To: <CAEfUkUKA9raUu0dANWf25aw6kBzu-DKshctQxVre57bEiN94kA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Dec 2024 08:43:34 -0700
-Message-ID: <CAFLszTh4hjCHAoqkr+zdeBeq5rCoaO3aSjBVvFyCYVLoccPSUw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] scripts/spelling.txt: add GPL-2.0+
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20241215023732.68902-1-heinrich.schuchardt@canonical.com>
+ <2ebed5a8-002c-4792-a474-7cf31b6c0bad@canonical.com>
+ <20241216153845.GG1505244@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241216153845.GG1505244@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,98 +111,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+On 16.12.24 16:38, Tom Rini wrote:
+> On Sun, Dec 15, 2024 at 03:55:35AM +0100, Heinrich Schuchardt wrote:
+>> On 12/15/24 03:37, Heinrich Schuchardt wrote:
+>>> The correct SPDX identifier for the 'GNU General Public License v2.0 or
+>>> later' is GPL-2.0-or-later.
+>>>
+>>> Checkpatch.pl uses the misspelled words from spelling.txt both as keys of a
+>>> hash and as part of a regular expression. For usage in the regular
+>>> expression special characters like the plus sign need to be escaped.
+>>>
+>>> Heinrich Schuchardt (2):
+>>>     scripts/checkpatch.pl: allow special characters in spelling.txt
+>>>     scripts/spelling.txt: add GPL-2.0+
+>>>
+>>>    scripts/checkpatch.pl | 2 +-
+>>>    scripts/spelling.txt  | 1 +
+>>>    2 files changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>
+>> I sent similar patches send to the Linux kernel list:
+>>
+>> https://lore.kernel.org/lkml/20241215025104.70096-1-heinrich.schuchardt@canonical.com/T/#t
+> 
+> Thanks for trying this upstream. As they seem uninterested, adding this
+> to the existing function of "sub u_boot_line" in our checkpatch.pl is
+> fine as an alternative.
+> 
 
-On Mon, 16 Dec 2024 at 08:29, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Simon,
->
-> On Mon, 16 Dec 2024 at 10:20, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Raymond,
->>
->> On Mon, 16 Dec 2024 at 07:52, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > Hi Simon,
->> >
->> > On Sun, 15 Dec 2024 at 19:25, Simon Glass <sjg@chromium.org> wrote:
->> >>
->> >> Hi Raymond,
->> >>
->> >> On Fri, 13 Dec 2024 at 15:56, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >> >
->> >> > Get tpm event log from bloblist instead of FDT when bloblist is
->> >> > enabled and valid from previous boot stage.
->> >> >
->> >> > Note:
->> >> > This patch depends on:
->> >> > [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
->> >> > https://lore.kernel.org/u-boot/20241212151142.1562825-1-trini@konsulko.com/
->> >> >
->> >> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> >> > ---
->> >> >  lib/tpm_tcg2.c | 7 +++++++
->> >> >  1 file changed, 7 insertions(+)
->> >> >
->> >> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
->> >> > index 7f868cc883..acaf0acb88 100644
->> >> > --- a/lib/tpm_tcg2.c
->> >> > +++ b/lib/tpm_tcg2.c
->> >> > @@ -19,6 +19,7 @@
->> >> >  #include <linux/unaligned/generic.h>
->> >> >  #include <linux/unaligned/le_byteshift.h>
->> >> >  #include "tpm-utils.h"
->> >> > +#include <bloblist.h>
->> >> >
->> >> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
->> >> >                       u32 *pcr_banks)
->> >> > @@ -672,6 +673,12 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
->> >> >         *addr = NULL;
->> >> >         *size = 0;
->> >> >
->> >> > +       if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) && !bloblist_maybe_init()) {
->> >>
->> >> Please drop the second term...the bloblist is inited by U-Boot already.
->> >>
->> >
->> > As an independent library, from the tpm library's angle, whether the bloblist init was already called or not is agnostic.
->> > I think this is the purpose of the "maybe" function.
->>
->> No. U-Boot does init at the start. We don't want each subsystem
->> 'maybe' initing each other subsystem that it uses. If you want to
->> check whether bloblist is available, you can use the GD flag.
->>
->
-> OK. I can use the gd instead.
->
->>
->> >
->> >>
->> >> Also please drop the first term. If you find it in the bloblist, just use it.
->> >>
->> >
->> > I think here we should have the same logic as the existing one in fdtdec:
->> > If bloblist is not enabled or errors observed, do a fallback to the original process.
->> > At least I want to keep the same logic in different places before everything is ready from TF-A to U-boot.
->>
->> Yes, your second line is right. But PRIOR_STAGE doesn't exist, nor
->> should it. Nor do you need it, since you can just check the bloblist
->> for what you want. If you don't find it, fall back.
->>
->
-> Since Firmware Handoff is still an experimental feature and not mandatory yet (at least now),
-> I put everything under PRIOR_STAGE to allow users to disable it by their own decisions.
-> I saw PRIOR_STAGE in one of Tom's recent patches so I have added a dependency claim in my commit message.
+u_boot_line() is not called for *.rst files.
 
-Yes, but even if Tom does pick his patch, which I object to, by the
-time your code is called, there will be a bloblist.
+Best regards
 
-So the end result of your test is to allow the user to ignore any TPM
-log in the bloblist. If that's what you want (which seems fine to me),
-add a Kconfig for it.
-
-This is the sort of confusion that I find very frustrating. At least
-with OF_BLOBLIST it was clear that it related to devicetree only...
-
-Regards,
-Simon
+Heinrich
