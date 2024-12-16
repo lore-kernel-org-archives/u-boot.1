@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35B18E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6C99E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:40:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71FFC800D2;
-	Mon, 16 Dec 2024 16:38:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F402B800D2;
+	Mon, 16 Dec 2024 16:40:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bOS6dfFU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CLUui8sK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22AFD800D7; Mon, 16 Dec 2024 16:38:53 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id AF03F80141; Mon, 16 Dec 2024 15:54:31 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 964A28005B
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:38:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BDF28003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 15:54:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6f53c12adso254977085a.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:38:50 -0800 (PST)
+ spf=pass smtp.mailfrom=marcin.slusarz@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2eec9b3a1bbso2870164a91.3
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 06:54:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734363529; x=1734968329; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VjMcou3uuzmJ4HFbBKfO9YBwoF0MTYcnvCYxWxQdmrg=;
- b=bOS6dfFUmgU5sVkiUfTsK2j7Dz0V+j0LvMhNh2IQVPKvxbMdHFFzISwdfCdm4DxX8I
- R3xhyMsQ+xbEEIwGWEQM6PMMKcRMK2N9KBN07ReV0QSWjUc/wc5qXClBO7MeWvSG+C8V
- MWExya1chD4eawK8d6jXQznxgzMTf9GWOkQNg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734363529; x=1734968329;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1734360868; x=1734965668; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VjMcou3uuzmJ4HFbBKfO9YBwoF0MTYcnvCYxWxQdmrg=;
- b=CSxH4+zpKJc/WCPnbHfzlrGwX9N6x6z+aQKCUcjYm0dv76gEqKT4hG/s1oRX17V0tk
- mqvdwTiQYW/BIetHc389A4C4yDYmc2mYtsXDn8agDyRAH+uyeWmXsAZdtOvGPWtIPT0f
- tsoluiDHlYHhr5aegZn/J5V0kiqsrR635yOXflK2PTkOzZ2n/dcC/M2ypfZmYzUml7W8
- FRcwH03qf07ocyA/BNrPmG3/GS18ZyM7NQf6SdA2ltLfU1yE+TFgZVxR5cmvuSKA/AY6
- kzeZOX95AXw9J8iZT1Fcn8BwpX01Dgdl8h89V42MF6rHmPLAG/gH/6kf8wdM0maqayAA
- Iegg==
-X-Gm-Message-State: AOJu0Yz7Cd0DKZw2z0l2BT/TFakGzvZBBC0dw2b0r/LPJeZnmO+32UOy
- 7dRoF5O/nH6B2n2h2nMe47Wqx3ocOfJmGCwRFRmuMlV54V2RhwHV2ikQ65qhnjwCVnUCWH8/YLR
- HNAU=
-X-Gm-Gg: ASbGncsWI1GjhBzYoePSezps+oOoBRB/9+XiFS03ZBzFALn1+x5YZ3Z8XbYkPpdWg96
- 5NtCbsFHZ2DTI5AmkWxLs8udAsJMEuyZmUzAf8Y232qzwefKgBpUrzoqo3xGj+F4maP3uLkaNLz
- KT11AzsOxlqbqK2jJCEKs0gD9jvB7S/aKjczqrt2U5Ir+c+JSns7j3yxE7ASOSz27jkVFmJcboY
- UmQJERRzVQvN9JtuvvMCuBIIBxOwHpw2qz3HVREeRAMGWGgRwMHkF3Y
-X-Google-Smtp-Source: AGHT+IEh3Bd2zWGc4TaaOi2rPfFIZrKj5mE+g5kfrsjXR2AH1yREomRmi265dTy3WDeNjGXFHy0STA==
-X-Received: by 2002:a05:6214:2a4c:b0:6d8:821d:7370 with SMTP id
- 6a1803df08f44-6dc9698f0afmr192188856d6.49.1734363529239; 
- Mon, 16 Dec 2024 07:38:49 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dccd26d38fsm28495846d6.60.2024.12.16.07.38.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 07:38:48 -0800 (PST)
-Date: Mon, 16 Dec 2024 09:38:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] scripts/spelling.txt: add GPL-2.0+
-Message-ID: <20241216153845.GG1505244@bill-the-cat>
-References: <20241215023732.68902-1-heinrich.schuchardt@canonical.com>
- <2ebed5a8-002c-4792-a474-7cf31b6c0bad@canonical.com>
+ bh=Rkjc0ibneE4a3SI3+Pi9BCKzCMYrRDdY3GFWA9N+crU=;
+ b=CLUui8sK/20MnMnu4JjWC9V3OZjQRLf3O0jJUkOkDsgtbMbxF/ed/fTfxWgU7OpR+5
+ oDAbqcbBhunCI1dUYHRY7B/HEdCnlYokubzqRpOyQPO20GTKcZGsX1Ih2a81KTMdYtuH
+ 2B+2+wOpcpQY9JmeTxsz2W88kjeTp6/Mx/kLTKYfJQNIHMwlgV2rN/OcRWDflF/5++GD
+ YbtSj/nVPRvIMymqUoprEVXgXBo7cGBGShopPjLDHY6Us3WltS0/A6ZIBvR2Uzq8Jdo3
+ iojtXp3lAhGyI7USyK/ERf7Ujm01aHk3xTq6Inc5EoT411LdCc2FKmC0VBvorFnib+r8
+ uNrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734360868; x=1734965668;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Rkjc0ibneE4a3SI3+Pi9BCKzCMYrRDdY3GFWA9N+crU=;
+ b=cUy4GXu6MVK4+RzuX5reM1zgKuSstxJEknXrBq977jP9UVXsU+9uBxhKtLgpeowBne
+ zcynHOm1G3ovvQL+ffhGQ4iR8o8z+43kmFQahaJDD3T8auYnr+CX+zCe2wSdWceFNW6v
+ gEv+yKEcK9mRXEzSSUsxX2mbSTvmWw+rIU8/M2ItNA81R1KWDS/pwXeD8yAk5Yb62vaW
+ ENoTAiLNp0p7LdzG4WEMDZ6+YZ04GMfejY+4GkFLWU7HHGj8knOpjd6/JixzXFkXIqx8
+ Iw73LKt2mvnettmA7TQOKDoF9MFvyS5EXs2/vUUiECl88Dr8qqJ74NsR72JcrAU/lF2j
+ p9Dw==
+X-Gm-Message-State: AOJu0Yz7rC/O7tBzuDIaVzvmXNlikeeGR3YLnitaRTYa5F2AbWqtbupq
+ BGLyfI5hr4NGztMjDU0xj68pOW32YvvQLk56cSKSB50sKp/FFtJ9laRIdEJEc+FrVYy3IRapROF
+ 2K/VxmTMJzQSL/qSP5pQQ5Qy2Vh3OAg==
+X-Gm-Gg: ASbGncsLqRga/i7O7Arb5st1ar1ZKnvexrRNMYXZqvtYTPW8M9Wp1dl7t9BVcQD/AvE
+ xr8h7zE0S7SYbO6MTK7pi2WyoWckuJAO0enDz
+X-Google-Smtp-Source: AGHT+IFtR7ula8zGibjV3s1GBByR8KxqIP3RzoJ7lnrEi6jmCMypE264i0TEJ3ySR00cZMvIpJ4lolQQDtTog3hotIA=
+X-Received: by 2002:a17:90b:2b45:b0:2ee:a583:e616 with SMTP id
+ 98e67ed59e1d1-2f28fb667a1mr19487826a91.9.1734360867566; Mon, 16 Dec 2024
+ 06:54:27 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NhwzCxJhyxPaWIH5"
-Content-Disposition: inline
-In-Reply-To: <2ebed5a8-002c-4792-a474-7cf31b6c0bad@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241127130419.50489-1-mslusarz@renau.com>
+ <20241216134000.1b9ceacd@donnerap.manchester.arm.com>
+In-Reply-To: <20241216134000.1b9ceacd@donnerap.manchester.arm.com>
+From: =?UTF-8?Q?Marcin_=C5=9Alusarz?= <marcin.slusarz@gmail.com>
+Date: Mon, 16 Dec 2024 15:54:23 +0100
+Message-ID: <CA+GA0_vgLijyTRCZDM0xa+5dmmfGxtggzfPvb8Z9wThiRwkutw@mail.gmail.com>
+Subject: Re: [PATCH] power: axp: sunxi: configure charge current
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, =?UTF-8?Q?Marcin_=C5=9Alusarz?= <mslusarz@renau.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 16 Dec 2024 16:40:29 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,59 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+pon., 16 gru 2024 o 14:40 Andre Przywara <andre.przywara@arm.com> napisa=C5=
+=82(a):
+>
+> On Wed, 27 Nov 2024 13:04:19 +0000
+> "Marcin =C5=9Alusarz" <marcin.slusarz@gmail.com> wrote:
+>
+> Hi Marcin,
+>
+> thanks for taking care of sending a mainline patch!
+>
+> > Allows decreasing initial charge current, e.g. when power
+> > supply is too weak to support both charging and other operations.
+>
+> Can you explain a bit more why and where you actually need that?
 
---NhwzCxJhyxPaWIH5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+One of the boards I worked on had a design flaw where the power supply
+was incorrectly sized. Booting that device on AC with an almost empty
+battery led to weird behavior of some connected devices because
+the board was starved by battery charging. The design bug was fixed, but
+old boards exist and need to work...
 
-On Sun, Dec 15, 2024 at 03:55:35AM +0100, Heinrich Schuchardt wrote:
-> On 12/15/24 03:37, Heinrich Schuchardt wrote:
-> > The correct SPDX identifier for the 'GNU General Public License v2.0 or
-> > later' is GPL-2.0-or-later.
-> >=20
-> > Checkpatch.pl uses the misspelled words from spelling.txt both as keys =
-of a
-> > hash and as part of a regular expression. For usage in the regular
-> > expression special characters like the plus sign need to be escaped.
-> >=20
-> > Heinrich Schuchardt (2):
-> >    scripts/checkpatch.pl: allow special characters in spelling.txt
-> >    scripts/spelling.txt: add GPL-2.0+
-> >=20
-> >   scripts/checkpatch.pl | 2 +-
-> >   scripts/spelling.txt  | 1 +
-> >   2 files changed, 2 insertions(+), 1 deletion(-)
-> >=20
->=20
-> I sent similar patches send to the Linux kernel list:
->=20
-> https://lore.kernel.org/lkml/20241215025104.70096-1-heinrich.schuchardt@c=
-anonical.com/T/#t
+> The problem I have with the code is that it's doing it in the SPL, where =
+I
+> actually want to decrease any PMIC usage. We really only need the PMIC th=
+at
+> early to set the DRAM and CPU core voltage, everything else should be don=
+e
+> in either U-Boot proper or the kernel.
 
-Thanks for trying this upstream. As they seem uninterested, adding this
-to the existing function of "sub u_boot_line" in our checkpatch.pl is
-fine as an alternative.
+The problem with disabling (or decreasing) charging later is that it
+might be too late.
+While I never tracked booting failures to that problem, it's
+theoretically possible.
 
---=20
-Tom
+> So how did this work before, and why it is a problem now? AXP221 points t=
+o
+> some older SoC, I guess?
 
---NhwzCxJhyxPaWIH5
-Content-Type: application/pgp-signature; name="signature.asc"
+It's an older SoC, but it's still used to develop new products :/.
 
------BEGIN PGP SIGNATURE-----
+> Is it that you find yourself with a somewhat weak power supply, and if th=
+e
+> battery is discharged, there won't be enough power left for the system to
+> boot reliably?
+>
+> Do you know of any existing DT property for instance that could limit the
+> charge current? Or is there a sysfs property only?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdgSYIACgkQFHw5/5Y0
-tyyuaAwAjYZN0P+1UPenZvlWWQ6BwXkR/p91LCHgFoiD0X76Dyx/ltOtHKD77GAd
-DUWVyxpYO6jrF0A3PakIC3RzXtHywAtSfcr45RPGcq5qK7oouvtpDxcd2oV1I1Wt
-r16YJIcJxtSXxNiqtrWez0Wv2I8J6Xp7Ne61oyv15lFmah25SRMrRhhup8y4ie0s
-u+J94y8cirRgMuODO7bPCstGD8YCyvi//x/2WoiyWfPH/L03PKrvnryzOnPOdjg1
-Dj/PgJEOvwfDZ/0TxpctP/YxDkDpw2jDs2sptHoBLOtXbuewulUAGtQJSOIT0ZSV
-Ns2LafWJivfN8jRka0cTuXkzHrhDMcOPpGeCb1fMJGN2zC/O6y0MmkKvlhnRCvvy
-XVkenash9Idv7/f/RW+1gsnQfuzDqWXuN9L/5ltvvrmY+iRtzi6ABoFVUFkY4ROM
-TnZTZW8AOuA5Gs2C83gUL8bOBb5ezQ18TBGAHaOJp7jVX7fETJYFQXMg6Zg6sYOa
-cdM1bkMA
-=yGZV
------END PGP SIGNATURE-----
+It's possible to limit charging via DT and tweak it after booting with
+sysfs, but
+in the kernel version I had to deal with, it was not possible to disable
+charging completely. And as I said, I fear it might be too late to do
+it after bootup.
 
---NhwzCxJhyxPaWIH5--
+With all that said, there's no big need to merge this patch upstream. It wo=
+uld
+lower the effort to update to a newer UBoot, and I thought it's generic eno=
+ugh
+that someone else could use it.
+
+Cheers,
+Marcin
