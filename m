@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202E8E77180
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A72E77180
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FD468021D;
-	Mon, 16 Dec 2024 16:17:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0051E80141;
+	Mon, 16 Dec 2024 16:20:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f4mefFNW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LbWAaUj1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C738D80269; Mon, 16 Dec 2024 16:17:19 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id EF7B280214; Mon, 16 Dec 2024 16:20:13 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 844008003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:17:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C67800D7
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:20:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aa662795ca3so1015485066b.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:17:17 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aa6aee68a57so617810366b.3
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:20:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734362237; x=1734967037; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734362411; x=1734967211; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IbWWb6VMwo1idTE97kuG8vsdjCpQHTo4Z0235Nnb8uU=;
- b=f4mefFNWDoz04L3G/QdbGr75W9mQ1iJbjH1Y3jKjAZQ4M5Ol4TyShkHsjJe1IYyL2j
- g+3QheW9JjDOkd7UIrzuZIzfpPwAVg2dHGYaQKnjYbxpjSkxh+cvIxDHcGLKehA4iQ8U
- Xtc3Akh+DnHe0/JrNUcCVGSCrN7iqkPPn5/kw=
+ bh=BFIxgKuLjtjRePb/tdu8I69tPWbL19AiB45FDGQoCXg=;
+ b=LbWAaUj1Urx3byqpcW0VA2tU4Xscr0fqbuk332hFr3lF5x2++YKb1whTPYOnBtBMex
+ IRjgYihLgeKm8i0+547gnfFql/zWiUxRs2J2ruMj5xTXBsaY05ZGdTWRpcprVuQJuZ7e
+ FVnlJ+Rpw+3P4iZ0aNL0J3C4TfwIR0pAvZH48=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734362237; x=1734967037;
+ d=1e100.net; s=20230601; t=1734362411; x=1734967211;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IbWWb6VMwo1idTE97kuG8vsdjCpQHTo4Z0235Nnb8uU=;
- b=QTSh7TIp/XTF0O9R+4GI6pEFho1QmIWyTBuILyWe0CvVPIhIVaz9zpko4oo68EMooh
- TacfiF33+y+JuS+9eovPCkQC7gJunpxnTLq1E1By2vArlAQ5kYyqnME54p2XbSDy6W9r
- YlL3uCYCCz1VPflrW0EqCHxRjUBUQJp6j0x5L+ztVwBBGdULf0q71ZGN9+twqBnPUJIg
- DtpSOTvgZFseB2Px4kvkkqj8Y+MDYeXEsDLWquwYPUAW0LbNNWyxEfdDUNOXNR7MVRv8
- oCkM6i9j3W3J4E8GRztS+gzKSm84NpdtAZ5rPGIPQszMqPQMf4IMuJTagEe8JLfnPA8O
- 40xg==
-X-Gm-Message-State: AOJu0YxDlyo8hsAcgroyxJyv95zxZ7H/t0+R9Ltjp5CsTeQ4XsNCxikF
- ks8gz+XFKzGga9H29QC0NX17LTGC2wYr2oVD29TY9uQxBmytTk6vRBRBSV/EHYVF5/qSgSIxay7
- zwH9pkUt1iht29tzCT/AIyieGXKwy3qTB01eVn9/cDGHMQEc=
-X-Gm-Gg: ASbGnctBCn9jhKBP6yRn5fRbWBmC+SmIqe/eDZoxMaWhulCxf+e2A5nTg1iVTaBRuSS
- z+WBm8ydI146C0Q1YoECve5webEhgVrTotwRLlE4=
-X-Google-Smtp-Source: AGHT+IEcCjZ+wOHMidOxmsPl/Xka/t+tO/Hv1nwX7cazNRnFkDKGudSM+NI07BYisHiZCG4TkoFBzFicQ9RBL3BmlN0=
-X-Received: by 2002:a17:906:ca92:b0:aab:9258:488 with SMTP id
- a640c23a62f3a-aab925804f4mr866664766b.10.1734362236929; Mon, 16 Dec 2024
- 07:17:16 -0800 (PST)
+ bh=BFIxgKuLjtjRePb/tdu8I69tPWbL19AiB45FDGQoCXg=;
+ b=aw/1CSxbifqIazkggxsSu4+Dh97tySmLaK9mZEs8p8i8F7Ycx8RDmMNvDOC54cpbp0
+ fkjoCXsuiq00dU7faR+Ss/bePBpc0pkXOcxvcXZA4ByBttTmplYlKS1be/iepvIkdQLC
+ zz/kDl7ivl4CpILg2pMltzFBnMW92MjQvZTEUBdHPuY0Vli+35w9DniJGD9CmOLAto7Y
+ nbz4rlHd2APXEg0t+F+TU+sWaVzekyZ+Kw9KVysZB0vr+NcZJykuPqz425TFQWN5ucYX
+ yjLR6QDf+lK92ojM6cQ+zjMfr2SupuMs6mWNnR8me6YNreX9RodjdgaXWUkJ1OIZzAOM
+ KCsg==
+X-Gm-Message-State: AOJu0YwYrX5AiTflWE/tcc9Nhkc6YfJx+v6vTpxl5ulauD3Pj8c3UHSo
+ hX/7rPCMqAL09eYtuBNiLDKxwRCXxRRCtmrdEt8mlh8g053J0ziWB4tJZtVrNRlC2dkrWWUGnPz
+ DbTz8WHWKDnwcSe/zr7mATHe18nxSzo3xkK70
+X-Gm-Gg: ASbGncuIKH4m85IxBxNAO5gKmypwphJDrAS7Q/NS7SPXvtAPD+oEljeTEMA4AmDgHNR
+ LnzrVeOuRHNB79vnF+DGBKE8vkEcdch6Mk1h+6Ec=
+X-Google-Smtp-Source: AGHT+IFktBlY2tS6hIeARljIfsku6EWTiRzhH9LiTg+P+1LVCW/a5rikWrIGbCev+t41PQeWdWWUmV2OVdZrAMQVeA0=
+X-Received: by 2002:a17:906:3142:b0:aab:d7ef:d44 with SMTP id
+ a640c23a62f3a-aabd7ef10d8mr69400066b.24.1734362410961; Mon, 16 Dec 2024
+ 07:20:10 -0800 (PST)
 MIME-Version: 1.0
-References: <CAJvHTNwvmDH8L3x8ujcbJLR4=dXsGb97VmZ37Jm2ZMWLaC67rw@mail.gmail.com>
-In-Reply-To: <CAJvHTNwvmDH8L3x8ujcbJLR4=dXsGb97VmZ37Jm2ZMWLaC67rw@mail.gmail.com>
+References: <20241213225543.392282-1-raymond.mao@linaro.org>
+ <20241213225543.392282-2-raymond.mao@linaro.org>
+ <CAFLszTiVmZGxETFkngDbsv0PCLN_bVv7ox6MFiAoGGN2v7tbKQ@mail.gmail.com>
+ <CAEfUkUL1EyJ6si_N6k6Ku1ZM9dWF6uHYXrQ14dueUeTEYzSRNQ@mail.gmail.com>
+In-Reply-To: <CAEfUkUL1EyJ6si_N6k6Ku1ZM9dWF6uHYXrQ14dueUeTEYzSRNQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Dec 2024 08:17:05 -0700
-Message-ID: <CAFLszTjDXUJ6V17v6QwnjmG0DjgnBL=BTdx_5EVEt3hT2r5RUA@mail.gmail.com>
-Subject: Re: running u-boot in qemu-system-arm64
-To: Jack Andrews <effbiae@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot@lists.denx.de
+Date: Mon, 16 Dec 2024 08:19:59 -0700
+Message-ID: <CAFLszThWQ2pOQux_Hsa2M=ArBR7f+R2GHeB2d4CB6k4MxShR4w@mail.gmail.com>
+Subject: Re: [PATCH 2/2] tpm: get tpm event log from bloblist
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,50 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Peter Robinson
-+Matthias Brugger
+Hi Raymond,
 
-Hi Jack,
+On Mon, 16 Dec 2024 at 07:52, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Sun, 15 Dec 2024 at 19:25, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Fri, 13 Dec 2024 at 15:56, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Get tpm event log from bloblist instead of FDT when bloblist is
+>> > enabled and valid from previous boot stage.
+>> >
+>> > Note:
+>> > This patch depends on:
+>> > [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
+>> > https://lore.kernel.org/u-boot/20241212151142.1562825-1-trini@konsulko.com/
+>> >
+>> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> > ---
+>> >  lib/tpm_tcg2.c | 7 +++++++
+>> >  1 file changed, 7 insertions(+)
+>> >
+>> > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c
+>> > index 7f868cc883..acaf0acb88 100644
+>> > --- a/lib/tpm_tcg2.c
+>> > +++ b/lib/tpm_tcg2.c
+>> > @@ -19,6 +19,7 @@
+>> >  #include <linux/unaligned/generic.h>
+>> >  #include <linux/unaligned/le_byteshift.h>
+>> >  #include "tpm-utils.h"
+>> > +#include <bloblist.h>
+>> >
+>> >  int tcg2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+>> >                       u32 *pcr_banks)
+>> > @@ -672,6 +673,12 @@ __weak int tcg2_platform_get_log(struct udevice *dev, void **addr, u32 *size)
+>> >         *addr = NULL;
+>> >         *size = 0;
+>> >
+>> > +       if (CONFIG_IS_ENABLED(BLOBLIST_PRIOR_STAGE) && !bloblist_maybe_init()) {
+>>
+>> Please drop the second term...the bloblist is inited by U-Boot already.
+>>
+>
+> As an independent library, from the tpm library's angle, whether the bloblist init was already called or not is agnostic.
+> I think this is the purpose of the "maybe" function.
 
-On Sun, 15 Dec 2024 at 21:36, Jack Andrews <effbiae@gmail.com> wrote:
->
-> thanks for u-boot.
->
-> does u-boot run in qemu when emulating a raspberry pi 3 (or 4)?
->
-> i'm running
->  $ qemu-system-arm64 -M raspi3b -kernel u-boot
->
-> and i just get a blank screen
->
-> i built u-boot with
-> export ARCH=arm64
-> export CROSS_COMPILE=/usr/bin/aarch64-linux-gnu-
-> export CC=gcc
-> make rpi_3_defconfig
-> make
->
-> i also tried variations on qemu like:
->  $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3b
-> -kernel u-boot
->  $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3ap
-> -kernel u-boot
+No. U-Boot does init at the start. We don't want each subsystem
+'maybe' initing each other subsystem that it uses. If you want to
+check whether bloblist is available, you can use the GD flag.
 
-Here you are telling QEMU that the kernel is U-Boot, but U-Boot is
-firmware, not LInux. Also, 'u-boot' is an ELF file. At least in the
-instructions today[2] we use the flat binary produced from that ELF:
+>
+>>
+>> Also please drop the first term. If you find it in the bloblist, just use it.
+>>
+>
+> I think here we should have the same logic as the existing one in fdtdec:
+> If bloblist is not enabled or errors observed, do a fallback to the original process.
+> At least I want to keep the same logic in different places before everything is ready from TF-A to U-boot.
 
-qemu-system-arm64 -M raspi3b -kernel u-boot.bin
+Yes, your second line is right. But PRIOR_STAGE doesn't exist, nor
+should it. Nor do you need it, since you can just check the bloblist
+for what you want. If you don't find it, fall back.
 
-But that doesn't work either. So I'm not sure how to make it work. If
-you do figure it out, a documentation patch for U-Boot
+>
+> [snip]
 
-Regards,
+REgards,
 Simon
-
->
-> best,
-> jack
-
-[1] https://www.qemu.org/docs/master/system/arm/raspi.html
-[2] https://docs.u-boot.org/en/latest/board/emulation/qemu-arm.html#running-u-boot
