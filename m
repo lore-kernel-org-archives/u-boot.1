@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4DBE7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 10:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8281E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 10:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1EF680283;
-	Mon, 16 Dec 2024 11:24:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 266618005B;
+	Mon, 16 Dec 2024 11:48:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JO/7cZEh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GM2X3VFj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D367E8003E; Mon, 16 Dec 2024 11:24:53 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7418880104; Mon, 16 Dec 2024 11:48:40 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E361480216
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:24:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 694F98003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:48:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=20806bd110=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BG7LAU1026470;
- Mon, 16 Dec 2024 11:24:48 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=a7Q6w/k9Gl0pYiKpZCAMgS
- Wn4JSfDeBHWt4NIAmmsU4=; b=JO/7cZEhqCH9V23Td+fN2opqKObcB3wL5/dIIO
- ABPXGSTY5EoUJ5ddctANOD0cVc5fo0qMwymVQxWRqI+OUuc6h1GNKW4yAvCN/fvq
- XsQHajxPIer1GrsUZ9TPB/y0LMcX1dPFpXj7kWpl3AZw4pe2jpSp52qhqIm2r04s
- xgTdyQlhouyWTbmZ7wKDlSmOSujQgMheQhZLnAYBcY5bvYpxiPdOmvuonM7v1CSV
- pIydJp4wlvIyHVaGtKW4q3RUsggC1XBo8DViivFWlFHdHUfsalbOcnt1b7au503R
- 4hqnxedgYEwibBLMyvRa8om5OpFrKaL3vrI3Ztz0iMLRNExw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43jfr90vdx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 16 Dec 2024 11:24:48 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 121974005F;
- Mon, 16 Dec 2024 11:23:44 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6081326CBE6;
- Mon, 16 Dec 2024 11:22:34 +0100 (CET)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 16 Dec
- 2024 11:22:34 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Sughosh
- Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/5] configs: stm32mp1: Restore boot SPL from sdcard for
- stm32mp15
-Date: Mon, 16 Dec 2024 11:22:15 +0100
-Message-ID: <20241216102219.347725-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-30167f4c1deso34314261fa.1
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 02:48:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734346118; x=1734950918; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kZCjLSl7my5wc/EYM8ifFJ0pADStzDZJVzQwJTVr42k=;
+ b=GM2X3VFj3cLhvy+S2IVWLFlf6lG7EkU873iSpjdFTta/dRZqHGFRaaB5b37PxkvVob
+ 63wAW8x/utgbxKfNHmbGDM6pCzwuvl2z0EsfECwvCJ+M5aM5VqriYOrqizb2gX0iV7Vt
+ E2kUQ1wqguFArF/hslQHIw2LQzQ/rdN2ojbXp9zP1U0+AEgwjNqF6t6nchB8imivmSEY
+ iyRG7Xi0b7zglF6LLvNzzOxAHB5ExKuEu143ZeWqIhoF72BBJBu7FaC3sIGeiIgblbms
+ hqHaxyhXer/PYJXhit4xFWq9Mq/c1JAaz0o9xxy8GHJyt8OWHVhb90LtLYKQkaQyjI7t
+ G5/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734346118; x=1734950918;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kZCjLSl7my5wc/EYM8ifFJ0pADStzDZJVzQwJTVr42k=;
+ b=nq2LpfvHZQw3vJqzm6xAw/VZopFuy/9wqhmxb8uM30EFgNkqNJpHuVC5LXhecdbyLL
+ kDZZ7GdSuvkici1sSbDYiLJpbG2lp+II7uhRSF6h7CeJdy5DDtD0HeVoUgqWR+a+LASQ
+ azAB08HnKwbnOf5WyIsA/kObrmTe70u8Dk/POO4cagxxIs6HSTWEGP0nKPPj2A8yKq8f
+ f7YhYWu+otJsTFpNIJusj8qGjpQpVlZaK80rhH/XxeaPxqSeDHOBNBuSeJFP4SSg2uCz
+ 895j/dApxjJTwvm2JherU59aoaNEMGej9fqBqqcmuxbuP8cGj/nQzHxlfIqokHrfMvJe
+ hi1w==
+X-Gm-Message-State: AOJu0YxzCU69irnwSyzbkj/M1YgfckW7dnATCry7wUUir84wEMsAVgz+
+ e1iXWX7yfr6cUkSwDbSpOyaCOjrqZP+FdMl67Njp3d26+9CCh23G6gRhW4f7ac3RTMXZeT+xO1R
+ /fPshumFF5D9Ne0JWFD9WK4qQNZc=
+X-Gm-Gg: ASbGncsCXAnRoA0CyZ3e7dJXeOMEPUNiG/zJyIUYaIfHovhAQxcpxeAbu20SL5AUrc4
+ 9Dzx0cAFjQ/tG8R9X8o80jxAABNHPaQ8k8wS3xIQ99xSpbLInlKyHsM8DnQE6YjGoYc72
+X-Google-Smtp-Source: AGHT+IHOnMM1FKufgz24Y5p2hghMTt3De3m7oufkprPYwHUMDoWjgwnseTB1DfXV439M2Timgboczg3vCJd9ynWnyKk=
+X-Received: by 2002:a2e:94d6:0:b0:2ff:c027:cf5c with SMTP id
+ 38308e7fff4ca-30254464008mr29661601fa.16.1734346117353; Mon, 16 Dec 2024
+ 02:48:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+References: <33e7b95383c1e5dd20f4cd2e30b88391a09e0858.camel@googlemail.com>
+ <CAOMZO5BezDHXphjvX+Kat6rFq5zYC5yVucET2NzTHdFYnYTqXA@mail.gmail.com>
+ <01420bb81265f69bbcd56dbe658fc0528d94e87f.camel@googlemail.com>
+In-Reply-To: <01420bb81265f69bbcd56dbe658fc0528d94e87f.camel@googlemail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 16 Dec 2024 07:48:25 -0300
+Message-ID: <CAOMZO5CZ2cnAozFUnybUYWQUQ4CyvuDWWy6pbVq8SnbBe_RXdQ@mail.gmail.com>
+Subject: Re: [PATCH] imx: hab: fix srktool -c usage by removing spaces
+To: chf.fritz@googlemail.com
+Cc: u-boot <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,30 +91,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restore boot SPL from sdcard for STM32MP1 platforms.
+Hi Christoph,
 
-Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+On Mon, Dec 16, 2024 at 5:27=E2=80=AFAM Christoph Fritz
+<chf.fritz@googlemail.com> wrote:
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+> thanks, looks great. Do you want me to adapt the patch and resend?
 
- configs/stm32mp15_basic_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 1c0d0d0a073..dcf44bcc0e7 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -38,6 +38,9 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_I2C=y
- CONFIG_SPL_MTD=y
--- 
-2.25.1
-
+Yes, please send a v2 and I will apply it.
