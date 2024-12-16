@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 070E6E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB16E77180
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 553D98005B;
-	Mon, 16 Dec 2024 09:34:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB6758005B;
+	Mon, 16 Dec 2024 09:35:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66A6A80104; Mon, 16 Dec 2024 09:34:53 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id DBB258003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:34:49 +0100 (CET)
+ id DA536801CF; Mon, 16 Dec 2024 09:35:33 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 322C68003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:35:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: B4RpVYPGQBewMuTun0Ugog==
-X-CSE-MsgGUID: eElqmpqFRAuZadVeNPRFvg==
-X-IronPort-AV: E=Sophos;i="6.12,237,1728918000"; 
- d="asc'?scan'208";a="227976598"
+X-CSE-ConnectionGUID: c11cFm7aQxqHDCoEFwkGZg==
+X-CSE-MsgGUID: vpXqZsH8RmirKYCFPqZCow==
+X-IronPort-AV: E=Sophos;i="6.12,238,1728918000"; 
+ d="asc'?scan'208";a="231954196"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 16 Dec 2024 17:34:47 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 16 Dec 2024 17:35:29 +0900
 Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 08C9641AA0FD;
- Mon, 16 Dec 2024 17:34:32 +0900 (JST)
-Message-ID: <d65cb815-0de5-4c98-a279-0093fdd50888@bp.renesas.com>
-Date: Mon, 16 Dec 2024 08:34:30 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id C230041AC168;
+ Mon, 16 Dec 2024 17:35:09 +0900 (JST)
+Message-ID: <3f108ae7-021a-4429-9cdf-ce998c817b19@bp.renesas.com>
+Date: Mon, 16 Dec 2024 08:35:07 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arm64: Convert core type check macros into inline
- functions
+Subject: Re: [PATCH 2/3] arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
+Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Chris Paterson <chris.paterson2@renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
 References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
+ <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------WV6tQRCpevutJS0yJSs4guZL"
+ boundary="------------W3JORKuv0UsuFGb4hBSN29VJ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +65,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------WV6tQRCpevutJS0yJSs4guZL
-Content-Type: multipart/mixed; boundary="------------7Pyt5zjUYGGH0898iOU6pjxR";
+--------------W3JORKuv0UsuFGb4hBSN29VJ
+Content-Type: multipart/mixed; boundary="------------MNH0Vv1cKnXM46MA00Ci0U0u";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -74,25 +74,22 @@ Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Chris Paterson <chris.paterson2@renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <d65cb815-0de5-4c98-a279-0093fdd50888@bp.renesas.com>
-Subject: Re: [PATCH 1/3] arm64: Convert core type check macros into inline
- functions
+Message-ID: <3f108ae7-021a-4429-9cdf-ce998c817b19@bp.renesas.com>
+Subject: Re: [PATCH 2/3] arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
 References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
+ <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
 
---------------7Pyt5zjUYGGH0898iOU6pjxR
-Content-Type: multipart/mixed; boundary="------------4c8qIIhrDTnfumCjtNfBd20W"
+--------------MNH0Vv1cKnXM46MA00Ci0U0u
+Content-Type: multipart/mixed; boundary="------------KDPEWf8Nj5uiEb6Sppdw0qz6"
 
---------------4c8qIIhrDTnfumCjtNfBd20W
+--------------KDPEWf8Nj5uiEb6Sppdw0qz6
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 14/12/2024 22:42, Marek Vasut wrote:
-> Turn the core type check macros into inline functions to perform
-> better type checking on them. The inline functions get optimized
-> out in case they are not used. Indent the MIDR_PARTNUM_CORTEX_An
-> macros in preparation for addition of future three-digit cores
-> and use MIDR_PARTNUM_SHIFT in MIDR_PARTNUM_MASK to be consistent.
+> Add MIDR entries for Cortex-A57 and Cortex-A76 cores.
+> Those are used on R-Car Gen3 and Gen4 SoCs respectively.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -108,7 +105,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------4c8qIIhrDTnfumCjtNfBd20W
+--------------KDPEWf8Nj5uiEb6Sppdw0qz6
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -172,21 +169,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------4c8qIIhrDTnfumCjtNfBd20W--
+--------------KDPEWf8Nj5uiEb6Sppdw0qz6--
 
---------------7Pyt5zjUYGGH0898iOU6pjxR--
+--------------MNH0Vv1cKnXM46MA00Ci0U0u--
 
---------------WV6tQRCpevutJS0yJSs4guZL
+--------------W3JORKuv0UsuFGb4hBSN29VJ
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1/mFgUDAAAAAAAKCRDbaV4Vf/JGvZCI
-APoCeQRcMmB/d8VbWmCdjZFEYZihL9VS7uYvfsDVKsSZMgD9HLUOoh638sqJ6fpgIK+yrpSquCzM
-IrZW1QGv0BClQwQ=
-=X250
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1/mOwUDAAAAAAAKCRDbaV4Vf/JGvTuF
+AQDXh6dOOSqGweIdHCIZj71nxvUl1CCaMX2P6zW4hvbaKQD/d3u/CWLGD/5YPytKi0tYDcAvVQ3D
+B6pKb0obh5xU6wk=
+=2rz7
 -----END PGP SIGNATURE-----
 
---------------WV6tQRCpevutJS0yJSs4guZL--
+--------------W3JORKuv0UsuFGb4hBSN29VJ--
