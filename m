@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79B01E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:17:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202E8E77180
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:17:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11203800D7;
-	Mon, 16 Dec 2024 16:17:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6FD468021D;
+	Mon, 16 Dec 2024 16:17:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iyTkPg0f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f4mefFNW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 118C080214; Mon, 16 Dec 2024 16:17:14 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id C738D80269; Mon, 16 Dec 2024 16:17:19 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00A4C8003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:17:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 844008003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:17:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a9f1c590ecdso718208266b.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:17:11 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-aa662795ca3so1015485066b.1
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:17:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734362231; x=1734967031; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734362237; x=1734967037; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ca8B7s3CrTsyVyJnWpFUYeiecIjM/tPsBSfH/c6uhYQ=;
- b=iyTkPg0fns50X2ku04coVrMsLFH0zUrD1QIhMSDFjQs4ICd1cMFKTsc/pjwb4BXtPk
- Rvh+AnKQFbArF0xXuf7LUhloxPRg+1zf874V65I/TR5i/Bsb2aPqRSwczR7RfORFviBT
- ZB46zzNRsiQFen4O1+6ZB2vIg9T01KsOfD93o=
+ bh=IbWWb6VMwo1idTE97kuG8vsdjCpQHTo4Z0235Nnb8uU=;
+ b=f4mefFNWDoz04L3G/QdbGr75W9mQ1iJbjH1Y3jKjAZQ4M5Ol4TyShkHsjJe1IYyL2j
+ g+3QheW9JjDOkd7UIrzuZIzfpPwAVg2dHGYaQKnjYbxpjSkxh+cvIxDHcGLKehA4iQ8U
+ Xtc3Akh+DnHe0/JrNUcCVGSCrN7iqkPPn5/kw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734362231; x=1734967031;
+ d=1e100.net; s=20230601; t=1734362237; x=1734967037;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ca8B7s3CrTsyVyJnWpFUYeiecIjM/tPsBSfH/c6uhYQ=;
- b=H2+3wEiFyXMxWFle0+CbPwvN5hdqR0CF1pqkUC2bPypIGMpjg5jDNxGP+MsAn8auCx
- gsY8ci9Da9ERbvALMSRKasgyruMPwianJpSlgo9lHapgVbbLuMvQi1ygLBoGMALQaNHf
- G+pIFqu6uvc9owjWAHCUJ6A0z+yipdY/3N79W7ljCKLuc5iyGyWWfwi/PdBxLR5q/Xcj
- CQH23STSazYktgVeCSDVif64mJda7t1YppUOWsW7WOVMhPfFO9RfTRmTUr06lLW0shhs
- nT9HAeNMVmW8AQAh6TL3jHWRilq51iJBJO8c2cozuHGJL8NpncsowKtvUODy1R3gPtTv
- VRQQ==
-X-Gm-Message-State: AOJu0Yxp8ZK6oblHgG6mFZAlcqo2uoqoRy2TQp88xf4fREruSDSS0jpH
- m6SuUlOpPNM4W2Dlz5fVNCH1zpSCUJ3M8yjgSbE5+kPuE42E8gAVRfl3vF2N6ohbxDWNEYKUuiF
- /1dGRfZx/qgW1Yi0keYhAFTxXkuEDfTlG5p6d
-X-Gm-Gg: ASbGncuIGuBw5hBiOvoriV7xp+lHhXT77o/nZ1llfBty9V6RI6tIi7D2rRbeG2e7zfR
- ujN8DqxSkd4IUpfiFmyQ1YMjuylxy/AZwcX/4+k4=
-X-Google-Smtp-Source: AGHT+IEK/0QfwBGtK2zGFRC5RJZAV3QYj51N1mvu8TNUUZkqUhGpVKca3lWo+dYO/mP9Prcx/upSYysBnomhRuw0usc=
-X-Received: by 2002:a17:906:30c3:b0:aa6:c161:9935 with SMTP id
- a640c23a62f3a-aab77e7b8bfmr1161534866b.44.1734362231337; Mon, 16 Dec 2024
- 07:17:11 -0800 (PST)
+ bh=IbWWb6VMwo1idTE97kuG8vsdjCpQHTo4Z0235Nnb8uU=;
+ b=QTSh7TIp/XTF0O9R+4GI6pEFho1QmIWyTBuILyWe0CvVPIhIVaz9zpko4oo68EMooh
+ TacfiF33+y+JuS+9eovPCkQC7gJunpxnTLq1E1By2vArlAQ5kYyqnME54p2XbSDy6W9r
+ YlL3uCYCCz1VPflrW0EqCHxRjUBUQJp6j0x5L+ztVwBBGdULf0q71ZGN9+twqBnPUJIg
+ DtpSOTvgZFseB2Px4kvkkqj8Y+MDYeXEsDLWquwYPUAW0LbNNWyxEfdDUNOXNR7MVRv8
+ oCkM6i9j3W3J4E8GRztS+gzKSm84NpdtAZ5rPGIPQszMqPQMf4IMuJTagEe8JLfnPA8O
+ 40xg==
+X-Gm-Message-State: AOJu0YxDlyo8hsAcgroyxJyv95zxZ7H/t0+R9Ltjp5CsTeQ4XsNCxikF
+ ks8gz+XFKzGga9H29QC0NX17LTGC2wYr2oVD29TY9uQxBmytTk6vRBRBSV/EHYVF5/qSgSIxay7
+ zwH9pkUt1iht29tzCT/AIyieGXKwy3qTB01eVn9/cDGHMQEc=
+X-Gm-Gg: ASbGnctBCn9jhKBP6yRn5fRbWBmC+SmIqe/eDZoxMaWhulCxf+e2A5nTg1iVTaBRuSS
+ z+WBm8ydI146C0Q1YoECve5webEhgVrTotwRLlE4=
+X-Google-Smtp-Source: AGHT+IEcCjZ+wOHMidOxmsPl/Xka/t+tO/Hv1nwX7cazNRnFkDKGudSM+NI07BYisHiZCG4TkoFBzFicQ9RBL3BmlN0=
+X-Received: by 2002:a17:906:ca92:b0:aab:9258:488 with SMTP id
+ a640c23a62f3a-aab925804f4mr866664766b.10.1734362236929; Mon, 16 Dec 2024
+ 07:17:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20241209195528.730260-1-sjg@chromium.org>
- <20241209195528.730260-3-sjg@chromium.org>
- <CALeDE9P3GJitSOCA3w2RfZc-nJp3zdYQgz2rpg_CzCbhep84Ew@mail.gmail.com>
- <CAFLszTiCQ9kPCkZ7wrMGv3ENwB59KBp87vzq1qNQYEO-bdrVbQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiCQ9kPCkZ7wrMGv3ENwB59KBp87vzq1qNQYEO-bdrVbQ@mail.gmail.com>
+References: <CAJvHTNwvmDH8L3x8ujcbJLR4=dXsGb97VmZ37Jm2ZMWLaC67rw@mail.gmail.com>
+In-Reply-To: <CAJvHTNwvmDH8L3x8ujcbJLR4=dXsGb97VmZ37Jm2ZMWLaC67rw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Dec 2024 08:16:59 -0700
-Message-ID: <CAFLszTgeTbL2-sLhwM5x1K9gZQRiomvasp=grcnXoSJeRF9ZEg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] rpi: Set bootm_size to 512MB
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Stephen Warren <swarren@wwwdotorg.org>, Stephen Warren <swarren@nvidia.com>,
+Date: Mon, 16 Dec 2024 08:17:05 -0700
+Message-ID: <CAFLszTjDXUJ6V17v6QwnjmG0DjgnBL=BTdx_5EVEt3hT2r5RUA@mail.gmail.com>
+Subject: Re: running u-boot in qemu-system-arm64
+To: Jack Andrews <effbiae@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, 
  Matthias Brugger <mbrugger@suse.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,80 +84,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
++Peter Robinson
++Matthias Brugger
 
-On Wed, 11 Dec 2024 at 10:26, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Peter,
->
-> On Wed, 11 Dec 2024 at 09:27, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> >
-> >
-> > On Mon, 9 Dec 2024 at 19:55, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Set this option so that all boot images stay within the bottom 512MB of
-> >> memory. This should allow us to drop the fdt_high and initrd_high
-> >> options.
-> >
-> >
-> > How does this work for a device with < 256Mb of RAM? There's a number of the original RPi series that have 256Mb of RAM and that equates to less than that due to reservations for the vendor firmware.
->
-> Looking at boot_relocate_fdt(), this is just a maximum, and lmb is
-> used to allocate the FDT / cmdline. So this patch shouldn't affect
-> that.
->
-> But the later patch to move the ramdisk up will cause problems. Based
-> on the comment, a 256MB (I assume you mean) device can have as little
-> as 64MB of RAM available to the ARM core, which is not enough to load
-> a ramdisk from the new start-address of about 90MB.
->
-> I found an old rpi1 which I could hook up to my lab, perhaps. Could
-> you point me to a distro-image that boots OK on that, ideally with
-> only 64MB available?
+Hi Jack,
 
-Well I set it up with Raspbian. It seems to boot OK into the kernel.
-But unfortunately I only have a 512MB device.
-
-"When I were a lad, we had hard drives of 20MB and were grateful for it!"
-
+On Sun, 15 Dec 2024 at 21:36, Jack Andrews <effbiae@gmail.com> wrote:
 >
-> >
-> >>
-> >> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> Reviewed-by: Tom Rini <trini@konsulko.com>
-> >> Suggested-by: Tom Rini <trini@konsulko.com>
-> >> ---
-> >>
-> >> Changes in v3:
-> >> - Add to the existing comment block
-> >>
-> >> Changes in v2:
-> >> - Add new patch to set bootm_size
-> >>
-> >>  board/raspberrypi/rpi/rpi.env | 5 +++++
-> >>  1 file changed, 5 insertions(+)
-> >>
-> >> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-> >> index 30228285edd..a327fccc77f 100644
-> >> --- a/board/raspberrypi/rpi/rpi.env
-> >> +++ b/board/raspberrypi/rpi/rpi.env
-> >> @@ -60,7 +60,12 @@ dfu_alt_info+=zImage fat 0 1
-> >>   * Even with the smallest possible CPU-GPU memory split of the CPU getting
-> >>   * only 64M, the remaining 25M starting at 0x02700000 should allow quite
-> >>   * large initrds before they start colliding with U-Boot.
-> >> + *
-> >> + * Limit bootm_size to 512MB so that all boot images stay within the bottom
-> >> + * 512MB of memory
-> >>   */
-> >> +bootm_size=0x20000000
-> >> +
-> >>  #ifdef CONFIG_ARM64
-> >>  fdt_high=ffffffffffffffff
-> >>  initrd_high=ffffffffffffffff
-> >> --
-> >> 2.34.1
-> >>
+> thanks for u-boot.
+>
+> does u-boot run in qemu when emulating a raspberry pi 3 (or 4)?
+>
+> i'm running
+>  $ qemu-system-arm64 -M raspi3b -kernel u-boot
+>
+> and i just get a blank screen
+>
+> i built u-boot with
+> export ARCH=arm64
+> export CROSS_COMPILE=/usr/bin/aarch64-linux-gnu-
+> export CC=gcc
+> make rpi_3_defconfig
+> make
+>
+> i also tried variations on qemu like:
+>  $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3b
+> -kernel u-boot
+>  $ qemu-system-arm64 -smp 4,cores=1 -serial null -serial stdio -M raspi3ap
+> -kernel u-boot
+
+Here you are telling QEMU that the kernel is U-Boot, but U-Boot is
+firmware, not LInux. Also, 'u-boot' is an ELF file. At least in the
+instructions today[2] we use the flat binary produced from that ELF:
+
+qemu-system-arm64 -M raspi3b -kernel u-boot.bin
+
+But that doesn't work either. So I'm not sure how to make it work. If
+you do figure it out, a documentation patch for U-Boot
 
 Regards,
 Simon
+
+>
+> best,
+> jack
+
+[1] https://www.qemu.org/docs/master/system/arm/raspi.html
+[2] https://docs.u-boot.org/en/latest/board/emulation/qemu-arm.html#running-u-boot
