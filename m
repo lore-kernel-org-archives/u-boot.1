@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC95EE77180
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 10:25:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4DBE7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 10:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D7CF80245;
+	by phobos.denx.de (Postfix) with ESMTP id A1EF680283;
 	Mon, 16 Dec 2024 11:24:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="3O13OMP6";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="JO/7cZEh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE61280224; Mon, 16 Dec 2024 11:24:52 +0100 (CET)
+ id D367E8003E; Mon, 16 Dec 2024 11:24:53 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 816EC801BF
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:24:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E361480216
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:24:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=20806bd110=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BG72pvn024953;
- Mon, 16 Dec 2024 11:24:43 +0100
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BG7LAU1026470;
+ Mon, 16 Dec 2024 11:24:48 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- fDyItthtZ1eW9Arm2LOmq88/p4jdeDQqNwcDGm0/cjY=; b=3O13OMP6wD9WEY8v
- YLlDqEa9MF7I+LmhvbyjXZAs4xXGA6tFDiW/4F8s8oLKlxp8dzJYHAMnNGjeu7sV
- SCe7h1ZOJJxOMYivGseqnM8UAuSzt30jjFDpiLh04XVW0q4mIg0LeR5BwdCLiko3
- 6strTTn4dRy7lpzkDOHesfdZgK8zHT/UC/w5nCgF+EDi7ss+ZjQEmBgosgjCp25A
- NITy+XN+OrO5X09YSVGo82HC9mimi4aS+P7weUPD32x7sXqLJRuxfNkPk1l7uRuq
- J5cOCy/Gg+64UD6oeVRVM13LlHuLKdfoPbPV/Np/yyegz3wsUqW0Vfe52c/igzbX
- JUjwHQ==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=a7Q6w/k9Gl0pYiKpZCAMgS
+ Wn4JSfDeBHWt4NIAmmsU4=; b=JO/7cZEhqCH9V23Td+fN2opqKObcB3wL5/dIIO
+ ABPXGSTY5EoUJ5ddctANOD0cVc5fo0qMwymVQxWRqI+OUuc6h1GNKW4yAvCN/fvq
+ XsQHajxPIer1GrsUZ9TPB/y0LMcX1dPFpXj7kWpl3AZw4pe2jpSp52qhqIm2r04s
+ xgTdyQlhouyWTbmZ7wKDlSmOSujQgMheQhZLnAYBcY5bvYpxiPdOmvuonM7v1CSV
+ pIydJp4wlvIyHVaGtKW4q3RUsggC1XBo8DViivFWlFHdHUfsalbOcnt1b7au503R
+ 4hqnxedgYEwibBLMyvRa8om5OpFrKaL3vrI3Ztz0iMLRNExw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43jb1t1pse-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43jfr90vdx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 16 Dec 2024 11:24:43 +0100 (CET)
+ Mon, 16 Dec 2024 11:24:48 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 024C940060;
- Mon, 16 Dec 2024 11:23:45 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 121974005F;
+ Mon, 16 Dec 2024 11:23:44 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31DB126CBEB;
- Mon, 16 Dec 2024 11:22:35 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6081326CBE6;
+ Mon, 16 Dec 2024 11:22:34 +0100 (CET)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 16 Dec
@@ -57,18 +56,15 @@ From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/5] configs: stm32mp1: Restore boot SPL from sdcard for
- Engicam i.Core STM32MP1 C.TOUCH 2.0
-Date: Mon, 16 Dec 2024 11:22:16 +0100
-Message-ID: <20241216102219.347725-2-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Sughosh
+ Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/5] configs: stm32mp1: Restore boot SPL from sdcard for
+ stm32mp15
+Date: Mon, 16 Dec 2024 11:22:15 +0100
+Message-ID: <20241216102219.347725-1-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241216102219.347725-1-patrice.chotard@foss.st.com>
-References: <20241216102219.347725-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -94,21 +90,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Restore boot SPL from sdcard for Engicam i.Core STM32MP1 C.TOUCH 2.0.
+Restore boot SPL from sdcard for STM32MP1 platforms.
 
 Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig | 3 +++
+ configs/stm32mp15_basic_defconfig | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-index 4e171200ef2..00c475307c9 100644
---- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-@@ -27,6 +27,9 @@ CONFIG_SPL_SYS_MALLOC=y
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index 1c0d0d0a073..dcf44bcc0e7 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -38,6 +38,9 @@ CONFIG_SPL_SYS_MALLOC=y
  CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
  CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
  CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
@@ -117,7 +113,7 @@ index 4e171200ef2..00c475307c9 100644
 +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
  CONFIG_SPL_ENV_SUPPORT=y
  CONFIG_SPL_I2C=y
- CONFIG_SPL_POWER=y
+ CONFIG_SPL_MTD=y
 -- 
 2.25.1
 
