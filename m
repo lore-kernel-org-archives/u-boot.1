@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F19E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 19:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48EF0E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 19:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0375800D7;
-	Mon, 16 Dec 2024 20:32:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 94E4B800D7;
+	Mon, 16 Dec 2024 20:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xuzj1Egv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FKlbCqTk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC14080104; Mon, 16 Dec 2024 20:32:24 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 13D7D80104; Mon, 16 Dec 2024 20:36:38 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADB64800D2
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 20:32:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBFF5800D2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 20:36:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa5f1909d6fso762377466b.3
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:32:22 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6f006748fd1so35311817b3.3
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 11:36:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734377542; x=1734982342; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734377794; x=1734982594; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A2Hyw+WKt9fDTg1PN8hvV74MpO+d8yzNMoayaz+uORg=;
- b=xuzj1EgvqWWqiUjt0RUNxY5lMIzJf8Q+pb5nbUQn+Q9GvtqB6m6GC/9GJjxDFYN8C6
- SjaT0ERoxdwRyMbSaE492vTQKD1X6+HyhrgHLad+bJUSLJQLFW0ASh1+i7qCpdN5jtqx
- XnSrFjs1klc7hjS5b4fPgIWxD/ykwO0Og76A1Lt9NfbBPm0jvBmjs/Ad43rizHiYPOO1
- qyoowoa4KPOCKbF+PuzGuOab9W1cWComo48ALh59Y7/GAFBz+MKP3bVmFVti07RPVsqH
- 5WYlqPbreRi1cO549XV5GHi/8ssKElNCzDuVyi35BeXBzBA3yjwe62X2vxESax2/bH/f
- e7Mw==
+ bh=F3Z5wK9yGIbKEvYaa+ume8CK3MbjrLhRkZsCPjhLirI=;
+ b=FKlbCqTkJfSKYpcrWooO18pdgzfH4oQHoBWG3/1OdxywjmdhWZ65C7RpkfMtQFLmy7
+ GHB7KfVWtCFLW1EPLUQze742mtzqH81zcX2ip35JRLMmY2gBeNce98kXEs2z+KqODLV3
+ AfqqYZrdsZQJxpNeUwOm/6mKfnVIx9aDf/1sDcfqh99Jk3VhxOMTbU0kA207tAMK7SrC
+ d+LV3z7uPdzPIvbObe4XoAyyp76UCtBofF+MRvMgm2euJ921jYjhTXr+GU0r6Z+W6FHr
+ LJGKIBOnXLizIvDrM/0jwlHjgUWY2KtaCHjNxQ9LZQHiTe1lc1iF7oSbbbhOv0y1eSZs
+ YVZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734377542; x=1734982342;
+ d=1e100.net; s=20230601; t=1734377794; x=1734982594;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A2Hyw+WKt9fDTg1PN8hvV74MpO+d8yzNMoayaz+uORg=;
- b=Atp6N+C2pwK+f0lbc3FCrrTQC01izxPLeYWN/6feijqAscSkfaZjAyQyiGZv45AghQ
- ZPypN9hkwuFtxzert6WlfH+Rtx47z1rxSncElPGC+/FTYyzXeOACAmurxWKcIPyAJRd3
- 2R6Ut5wqQidFbteiDdSEmRWMWjUk6HoT64fjjHPG8fvpoOfGQjiPweym+0TBNL0cx9pP
- CzM8gKXjP+wigOoXZ/Fg0rLby3QjdYN50aLrz9hhVDAhU+CI2S0tbxECP5NAFEFx6rFe
- dnILofKXdDBx+0rDWOoZlSn3O+5Mp4HTRtLSflgp7yBB+YKAk1ZPYNb8UvVCAHDkiSYU
- zVFw==
+ bh=F3Z5wK9yGIbKEvYaa+ume8CK3MbjrLhRkZsCPjhLirI=;
+ b=LkRcNMA7+qiDqODtnHNXQUA0pctAbfAc4ut8vPiuOFgEbHfbDZwiybkqAmsWZWnNft
+ gDw1uDBV01bdopgm3s4xItc2FhtrDQoX0Az9rJ397IBaSjM/fux8AH+4Bq+Z6os1JFNv
+ u5PmsAGluO2I85K7GzUwfIk/WUowM0EgWcjkRoiFK7srhWWiolzmWkbq2cfhlhnoX2ja
+ wXfR3iGgeLXWrn5zUQOq9JmEX+qgLD8ktAxHKVyyXYdeGR9N3jYsrq28ykOMrsGcNYW1
+ CQj6ua/I2xK3tM9tWbU0bCpG5za9W4f4OTfg18PCre2TAXlNb0JFeDdvVZSd3zWyXh14
+ qPPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUS86c+Gd4OjBiR280siavdrm7HvGY7TJMuzyfOBZ2iwgawKX13gV8EqjOzZAEhZa8dUQxeaO0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyL8dM/PjpyDVVqD49jOOisWQmCExN3Am9Cs2Je3OZK2ks+zzJC
- r2d405FRe2mlMGRd3f6bkBjhfXEqz8XSd0FiRRJ10uT0hPQ/bWTODR5suRAaj4d4NDxCQbrJD29
- 5IznnCe4Vms/8PQt2gCjvaW8AlfkkDhPw9HptrA==
-X-Gm-Gg: ASbGncsVYPJ2hYFuLCVgIaXy3pEmscc+Uf33ztko+uwW/HmSPrfXHSP3p8mQdtod2Le
- BUrkK0gvPqZROvVuR8kmY2CkQWyaYn851dKQAqbc=
-X-Google-Smtp-Source: AGHT+IGqOs1LX/HS7uaVqwIdo/QbOyYAKW3I49GKnuf1Bezjq8juwl4ujjwxKHMIRlmT6jRSOjhYITBlX5risXEFvp4=
-X-Received: by 2002:a17:906:c14d:b0:aab:7588:f40b with SMTP id
- a640c23a62f3a-aab7797b793mr1288083866b.21.1734377542208; Mon, 16 Dec 2024
- 11:32:22 -0800 (PST)
+ AJvYcCVOA7ckYAtj+bvpOZUXR3reYaTKbx31Ea76mTx2Pg5WtHijJhlSEKYm25KwPVWJF6PaWg2AIBg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWYAU4Hu5sCwEmnmd4MIpfWJVmBK0rF79W19Y9vCoxzZ5Y4HV2
+ 4rkRU/7RhPDLMFuS/tVIJCKQqU8TiUcEIrx93NZl7ovPebewZcI0KXig0Ww/S0BoSSVPVpUEDTZ
+ 0Y0KcRu1MevRaN2RYFGqnqRBYQ/Wa8pX2y3MMgg==
+X-Gm-Gg: ASbGncvNdRBevKlUxVomgqeO1s8aBib7YK5+H3ps00FCe6HoH379phVDR2Qf3q3DoNr
+ EwLxE9x9cJOc6oj/WigZzBU1lnH4Hbi4jJ87CYA==
+X-Google-Smtp-Source: AGHT+IE2+s8Le+hOGhcJSbB0f4e+a+KQaSerEcMO9RGJ/Ct5/wxu7hra8Oj+VWoVij8foAEdVpgPAPncs4L5bONx0iA=
+X-Received: by 2002:a05:690c:46c8:b0:6ef:8122:282f with SMTP id
+ 00721157ae682-6f279b1a9a0mr132850667b3.24.1734377794672; Mon, 16 Dec 2024
+ 11:36:34 -0800 (PST)
 MIME-Version: 1.0
 References: <20241216114231.qpfwug3zfqkxn3d5@joaog-nb.corp.toradex.com>
  <CADg8p95K5sgLbqutnGWwcggU+o94GFrS5w3=GQecuO_NT5y6PQ@mail.gmail.com>
@@ -71,15 +71,16 @@ References: <20241216114231.qpfwug3zfqkxn3d5@joaog-nb.corp.toradex.com>
  <20241216190255.GA55577@francesco-nb>
  <CADg8p96Aiy-DBNc8piA5gN01E+iWHZJ4OGhY5qjOK1wCUS-O7Q@mail.gmail.com>
  <Z2B_sqO2XcAMIF3H@gaggiata.pivistrello.it>
-In-Reply-To: <Z2B_sqO2XcAMIF3H@gaggiata.pivistrello.it>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 17 Dec 2024 01:02:10 +0530
-Message-ID: <CADg8p94S5kzr_yDhs0m8M_J8U_jKLCkdQ+RXiQAbmL+uF+F4+w@mail.gmail.com>
+ <CADg8p94S5kzr_yDhs0m8M_J8U_jKLCkdQ+RXiQAbmL+uF+F4+w@mail.gmail.com>
+In-Reply-To: <CADg8p94S5kzr_yDhs0m8M_J8U_jKLCkdQ+RXiQAbmL+uF+F4+w@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 16 Dec 2024 21:35:58 +0200
+Message-ID: <CAC_iWjKV09uXouhvLTKXk3B+Qfw481_unXc1phLq674R0CKyZQ@mail.gmail.com>
 Subject: Re: [REGRESSION] Out of memory error: unable to boot on imx8mp/imx8mm
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Francesco Dolcini <francesco@dolcini.it>, 
+ =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <jpaulo.silvagoncalves@gmail.com>, 
+ Tom Rini <trini@konsulko.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>, 
  =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
  u-boot@lists.denx.de
@@ -101,48 +102,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 17 Dec 2024 at 00:59, Francesco Dolcini <francesco@dolcini.it> wrot=
-e:
+On Mon, 16 Dec 2024 at 21:32, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Tue, Dec 17, 2024 at 12:37:38AM +0530, Sughosh Ganu wrote:
-> > On Tue, 17 Dec 2024 at 00:33, Francesco Dolcini <francesco@dolcini.it> =
-wrote:
-> > >
-> > > Hello,
-> > >
-> > > On Mon, Dec 16, 2024 at 11:28:42AM -0300, Jo=C3=A3o Paulo Gon=C3=A7al=
-ves wrote:
-> > > > Hi Sughosh,
-> > > >
-> > > > > Can you show the output of bdinfo. And also print the value of ra=
-m_top
-> > > > > while booting the board.
-> > > > >
-> > > >
-> > > > Below are ram_top and bdinfo:
-> > >
-> > > We briefly discussed this off list, what is likely happen is that our
-> > > heap is after 0xFFFFFFFF, or said in a simpler way in the 64-bit addr=
-ess
-> > > space, while ram top is at the 4GB boundary.
-> > >
-> > > The solution seems to either move the heap down or move ram top up.
+> On Tue, 17 Dec 2024 at 00:59, Francesco Dolcini <francesco@dolcini.it> wr=
+ote:
 > >
-> > I am not sure I understand. Isn't the heap memory part of the U-Boot
-> > image, meaning it will always be below the ram_top? How do you have
-> > this configuration where the heap is above ram_top? Can you point me
-> > to the code where the heap is getting set above ram_top.
+> > On Tue, Dec 17, 2024 at 12:37:38AM +0530, Sughosh Ganu wrote:
+> > > On Tue, 17 Dec 2024 at 00:33, Francesco Dolcini <francesco@dolcini.it=
+> wrote:
+> > > >
+> > > > Hello,
+> > > >
+> > > > On Mon, Dec 16, 2024 at 11:28:42AM -0300, Jo=C3=A3o Paulo Gon=C3=A7=
+alves wrote:
+> > > > > Hi Sughosh,
+> > > > >
+> > > > > > Can you show the output of bdinfo. And also print the value of =
+ram_top
+> > > > > > while booting the board.
+> > > > > >
+> > > > >
+> > > > > Below are ram_top and bdinfo:
+> > > >
+> > > > We briefly discussed this off list, what is likely happen is that o=
+ur
+> > > > heap is after 0xFFFFFFFF, or said in a simpler way in the 64-bit ad=
+dress
+> > > > space, while ram top is at the 4GB boundary.
+> > > >
+> > > > The solution seems to either move the heap down or move ram top up.
+> > >
+> > > I am not sure I understand. Isn't the heap memory part of the U-Boot
+> > > image, meaning it will always be below the ram_top? How do you have
+> > > this configuration where the heap is above ram_top? Can you point me
+> > > to the code where the heap is getting set above ram_top.
+> >
+> > I just guessed this, I might be plain wrong. I assume some malloc is fa=
+iling,
+> > maybe Joao can confirm.
 >
-> I just guessed this, I might be plain wrong. I assume some malloc is fail=
-ing,
-> maybe Joao can confirm.
+> Ah okay. If it is some efi allocation that is failing, then the
+> allocation is not being done from heap. One thing that can be tried is
+> to have ram_top at 0x1_0000_0000 instead of 0xFFFF_FFFF.
 
-Ah okay. If it is some efi allocation that is failing, then the
-allocation is not being done from heap. One thing that can be tried is
-to have ram_top at 0x1_0000_0000 instead of 0xFFFF_FFFF.
+It was an EFI allocation that was failing by looking at the logs
 
--sughosh
-
+Cheers
+/Ilias
 >
-> Francesco
+> -sughosh
 >
+> >
+> > Francesco
+> >
