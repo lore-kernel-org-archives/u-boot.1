@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11CBDE77180
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 11:36:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E9CE7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 11:42:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D16D8005B;
-	Mon, 16 Dec 2024 12:36:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 04B358005B;
+	Mon, 16 Dec 2024 12:42:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1734348961;
-	bh=TLGt2gakmSp0IK/512I6WikP2YfH8JbUcmZx+CR7b5s=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0MohLZEkIB1RdGoun4z5S/TCzeRtwcKgPWLuleVJcQC7OThxsWeVcNjKMRumOO48x
-	 WwUwBCTT5IGomQbICJsWgaMM7huvNrvSwcR+tTr0Rpk6zZCrnVT/j6hdqv3ublyhv5
-	 zNSuDDF7SWdpM7BtXGplDYs/DvlJOmslWv1ZQIeq5bh/D534vbqeLIkfYo3kuYFulA
-	 Ot4BM+g1eQSbQnJuuHWejT2bk9TDVeJdT+x229KkYk9EOoLjKfBD6rISnJdM72Il0k
-	 GZyqXxQaztqZh+zBCQoduv6urE2jvwcvAVzd1gMkgmMOh4CphaIX3EkwkGSyIAZOO/
-	 2JsAeC3nOR+sA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EF3C680104; Mon, 16 Dec 2024 12:35:58 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8A668003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 12:35:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="UzCyeMXl"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E103E108B6FA1; Mon, 16 Dec 2024 12:35:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1734348955;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TLGt2gakmSp0IK/512I6WikP2YfH8JbUcmZx+CR7b5s=;
- b=UzCyeMXlqTDjhcxAg4Dw0SyuKgwdSe8o+GLOiTs1df9I3hDmXKOPUnHa4JoPsZ6xf0lK5O
- phYlhUMMDqryB1eWh4y6tdLj2Xm9kzH4R70tJ0bXneFsBKVhye0q4ReyhMT2Lzz737bo+n
- DJx7N6Ns25VRaLlF3/zHYtTqMu1+ki+gyE3eopv+8cxbFjDF4r7bMG/QbMHj4dnfqO76bu
- PqXcYbVZAzkl1CV+5CO/wWQsDcc0w33EspA7EE7gMkIn0zWC5zhb1NQz5kNb3ZayCnrCp9
- 5poC77/RmS7obZ0hFy7EaBXJUBig1E1DeZa+n60ka5nA/e3dr0JMoB4vU6MHsw==
-Message-ID: <3307c1e3-123b-4ff1-8140-18be7393b5e5@denx.de>
-Date: Mon, 16 Dec 2024 11:35:45 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fK+paGcr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B8BA680104; Mon, 16 Dec 2024 12:42:39 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 74D268003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 12:42:37 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-21683192bf9so36601275ad.3
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 03:42:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734349356; x=1734954156; darn=lists.denx.de;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=otHc2+h5CmGK6mHNf/rxOMqn/QuTz+4OBqm7mZu0oxc=;
+ b=fK+paGcra+BTgtCJAwBnkbXg9GiWQCcUKnJRg6bQWpK1qU792vrwMF4UbxNHI88Gg4
+ UN5xhZN0NjZXUWEU1P67PpVadaIK2Qg3h8V07K5QF1uKSPd4M7Bie+vOAoiDKcAsceo9
+ wM7SiQyJKklibD2NxKNSj/7uLcmTEwOyiCD8ZhXRk2kXuBZgcwJ8SF2XkQYR32kJgiBG
+ S5R98x5e9UJAynQNNkIHnyjwBEJeoSdVzZnrX5+3xVUASHvLXXPHnjR8CJKH/fesYa9K
+ 7JyJNKqd514FE13tkgiASz9AtIo8bdixgPEc4e3zOnQ0BTlGNG+6fcwLnY/pa98UGGMZ
+ AfnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734349356; x=1734954156;
+ h=content-transfer-encoding:content-disposition:mime-version
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=otHc2+h5CmGK6mHNf/rxOMqn/QuTz+4OBqm7mZu0oxc=;
+ b=h1wu98U35KdVx1+7cHBGDnJIeqvuMT8UxBcAB9oU3RxOrJoZt0N2Cot8Cm/u5u5rv1
+ wcI1Nh05wsm/LL+0XrJlSe3yuTqtYhUEzSZQr+xriXohqxWcjiOpPI8CE561VgMHivHQ
+ AbmjGUXt6iEWJC+TEPYXRpL0qruN9hO6TVWQ+fweSfmNXnylB/lnK8Tumq+0abUZ2TOZ
+ 5yR8heyLoSS1I79qerfapcMvVC/2g6xtw7mD6Bg+/hQZlPObouIE2sx/590zVGiOfuwC
+ vJwCSoBRlj7g8iHmTxghpg4hgIiq1izXeCrYgT5yccxbvfqfTvo02UfgyNyVgnA9H4G2
+ DH0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWkjdmS6dRbFGk11cSASAXyQLOD0Dw7TdiGHLIYWmSWQYxpwBvWraZYm9HU7yAX7AMpcjUDh7k=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCIHXGLKqPqtRmIGsoPYiyHgNuHjB+OMmkEn6JMNADetYoWT06
+ 3SOelXonvS3dkEWFPj0LjGkjto7UgyeErYLm2+BjSUh+Lce7KU03
+X-Gm-Gg: ASbGncsV+aISvQZp/wbb8/AcCcgp6aGjWOJB0vjjz5R6vauiM+YY/ezdYydnTo9UZdP
+ /TIYkaLD33XGvSLEmnNv1bFnq3scsMSMiQg+Wwyd/hQfN7OPqWwr9RibfMLrOdcdkpKBLFH+4Rm
+ RgKlpN6NAaWher8pmyK0V+wrbpjHpTgQiZgfbjEjbn++DfZxJfnefXWUbJrID4A0VQ2x/yZc2ef
+ 20mqHj1s7G2rvBszIqyNvB/vDAOVL5fdEpDm/L7gzYaRzaHjGJiyVGyGErDk5NIAoS5rXfQEpLd
+ 0w0A9xaU/OH4jeI=
+X-Google-Smtp-Source: AGHT+IHKCPoG9o1FrmSWf4WDTbXfhF1vOAt6LQ9Bmr+LqgtF8//rY5fBUVZHpRd57jNkJT7D5Jpt0w==
+X-Received: by 2002:a17:90a:d2ce:b0:2ee:d024:e4e2 with SMTP id
+ 98e67ed59e1d1-2f28fa4ef7emr18484963a91.7.1734349355636; 
+ Mon, 16 Dec 2024 03:42:35 -0800 (PST)
+Received: from joaog-nb.corp.toradex.com ([67.159.246.222])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f2a1e80a35sm4475053a91.4.2024.12.16.03.42.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Dec 2024 03:42:35 -0800 (PST)
+Date: Mon, 16 Dec 2024 08:42:31 -0300
+From: =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ u-boot@lists.denx.de
+Subject: [REGRESSION] Out of memory error: unable to boot on imx8mp/imx8mm
+Message-ID: <20241216114231.qpfwug3zfqkxn3d5@joaog-nb.corp.toradex.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
- "j-humphreys@ti.com" <j-humphreys@ti.com>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>,
- "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
- "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
- "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
-References: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
- <fccae74a-3097-4172-8ae5-3bc72e8d9aa0@denx.de>
- <SA1PR12MB869702808B7A784031F17F83983B2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB869702808B7A784031F17F83983B2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,72 +101,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/16/24 5:16 AM, Abbarapu, Venkatesh wrote:
+Hello,
 
-[...]
+U-Boot is not able too boot on imx8mm and imx8mp and gives out of memory
+errors:
 
->>> +++ b/drivers/mtd/spi/spi-nor-core.c
->>> @@ -1140,7 +1140,7 @@ static int spi_nor_erase(struct mtd_info *mtd, struct
->> erase_info *instr)
->>>    				nor->spi->flags &= ~SPI_XFER_U_PAGE;
->>>    		}
->>>    #ifdef CONFIG_SPI_FLASH_BAR
->>> -		ret = write_bar(nor, addr);
->>> +		ret = write_bar(nor, offset);
->>
->> This change is really inobvious, the code above likely needs to be compiled out if the
->> SPI_STACKED_PARALLEL stuff is disabled ?
-> 
-> In the spi_nor_erase()
-> 	offset = addr;
-> 	if(PARALLEL)
-> 		offset/=2;
-> 	so for parallel or single configuration we need to pass "offset" to write_bar()
-> 	write_bar(nor, offset");
+U-Boot SPL 2025.01-rc4-00041-g50334151c020 (Dec 15 2024 - 14:02:46 +0000)
+Training FAILED
+DDR configured as single rank
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+SEC0:  RNG instantiated
+Normal Boot
+Trying to boot from BOOTROM
+Boot Stage: Primary boot
+Find img info 0x4802f000, size 1116
+Need continue download 1024
+NOTICE:  Do not release JR0 to NS as it can be used by HAB
+NOTICE:  BL31: v2.10.0	(release):android-14.0.0_2.2.0-rc2-0-g7c64d4e86-dirty
+NOTICE:  BL31: Built : 10:35:32, Aug 29 2024
+U-Boot 2025.01-rc4-00041-g50334151c020 (Dec 15 2024 - 14:02:46 +0000)
+CPU:   Freescale i.MX8MP[8] rev1.1 1600 MHz (running at 1200 MHz)
+CPU:   Industrial temperature grade (-40C to 105C) at 24C
+Reset cause: POR
+DRAM:  4 GiB
+Core:  183 devices, 31 uclasses, devicetree: separate
+WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+out of memory
+ERROR: Out of memory
+MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... out of memory
+out of memory
+Adding partition for mmc@30b60000.blk:1 failed
+*** Warning - No block device, using default environment
+out of memory
+out of memory
+Adding partition for mmc@30b60000.blk:1 failed
 
-The code above likely needs to be compiled out if the 
-SPI_STACKED_PARALLEL stuff is disabled ?
+The regression was introduced with commit 1a48b0be93d4 ('lmb: prohibit
+allocations above ram_top even from same bank'). Reverting it, allows U-Boot to
+boot again. The issue seems to occur on modules with >=4Gb of RAM.
 
-[...]
+Do you have any idea what might be causing the issue? On our boards, the first
+error occurs in efi_init_early() and then in initr_mmc(), and it happens during
+memory allocation using lmb.
 
->> If I look at this change with 'git show -w' , the change looks like this:
->>
->> "
->>    #ifdef CONFIG_SPI_FLASH_BAR
->> +               u32 remain_len;
->> +
->>                   ret = write_bar(nor, offset);
->>                   if (ret < 0)
->>                           return log_ret(ret);
->> +               remain_len = (SZ_16M * (nor->bank_curr + 1)) - offset;
->> +               if (len < remain_len)
->> +                       read_len = len;
->> +               else
->> +                       read_len = remain_len;
->>    #endif
->> -
->> +               if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
->>                           if (len < rem_bank_len)
->>                                   read_len = len;
->>                           else
->>                                   read_len = rem_bank_len;
->> -
->> +               }
->>                   if (read_len == 0)
->>                           return -EIO;
->> "
->>
->> Why is there this part of code twice now, ifdeffed out differently in each case ?
->>
->> "
->>                           if (len < rem_bank_len)
->>                                   read_len = len;
->>                           else
->>                                   read_len = rem_bank_len; "
-> 
-> For parallel/stacked configuration and address width the "rem_bank_len" will vary and as we don't want to disturb the default read functionality added the ifdef separately.
-What would happen if both SPI_FLASH_BAR and SPI_STACKED_PARALLEL are 
-enabled on a system that only has one SPI NOR attached 
-(non-stacked/parallel) ? I noticed the second "copy" of the code behaves 
-slightly differently in the else branch, so does that mean this would 
-break such setup ?
+Best Regards,
+João Paulo Gonçalves
+
