@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6C99E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:40:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD61E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 15:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F402B800D2;
-	Mon, 16 Dec 2024 16:40:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD9E1801CF;
+	Mon, 16 Dec 2024 16:40:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CLUui8sK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF03F80141; Mon, 16 Dec 2024 15:54:31 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 77B5580141; Mon, 16 Dec 2024 16:00:16 +0100 (CET)
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+ [209.85.208.180])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BDF28003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 15:54:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B46428003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 16:00:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=csie.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcin.slusarz@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2eec9b3a1bbso2870164a91.3
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 06:54:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734360868; x=1734965668; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rkjc0ibneE4a3SI3+Pi9BCKzCMYrRDdY3GFWA9N+crU=;
- b=CLUui8sK/20MnMnu4JjWC9V3OZjQRLf3O0jJUkOkDsgtbMbxF/ed/fTfxWgU7OpR+5
- oDAbqcbBhunCI1dUYHRY7B/HEdCnlYokubzqRpOyQPO20GTKcZGsX1Ih2a81KTMdYtuH
- 2B+2+wOpcpQY9JmeTxsz2W88kjeTp6/Mx/kLTKYfJQNIHMwlgV2rN/OcRWDflF/5++GD
- YbtSj/nVPRvIMymqUoprEVXgXBo7cGBGShopPjLDHY6Us3WltS0/A6ZIBvR2Uzq8Jdo3
- iojtXp3lAhGyI7USyK/ERf7Ujm01aHk3xTq6Inc5EoT411LdCc2FKmC0VBvorFnib+r8
- uNrQ==
+ spf=pass smtp.mailfrom=wens213@gmail.com
+Received: by mail-lj1-f180.google.com with SMTP id
+ 38308e7fff4ca-3043e84c687so5227281fa.1
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:00:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734360868; x=1734965668;
+ d=1e100.net; s=20230601; t=1734361211; x=1734966011;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Rkjc0ibneE4a3SI3+Pi9BCKzCMYrRDdY3GFWA9N+crU=;
- b=cUy4GXu6MVK4+RzuX5reM1zgKuSstxJEknXrBq977jP9UVXsU+9uBxhKtLgpeowBne
- zcynHOm1G3ovvQL+ffhGQ4iR8o8z+43kmFQahaJDD3T8auYnr+CX+zCe2wSdWceFNW6v
- gEv+yKEcK9mRXEzSSUsxX2mbSTvmWw+rIU8/M2ItNA81R1KWDS/pwXeD8yAk5Yb62vaW
- ENoTAiLNp0p7LdzG4WEMDZ6+YZ04GMfejY+4GkFLWU7HHGj8knOpjd6/JixzXFkXIqx8
- Iw73LKt2mvnettmA7TQOKDoF9MFvyS5EXs2/vUUiECl88Dr8qqJ74NsR72JcrAU/lF2j
- p9Dw==
-X-Gm-Message-State: AOJu0Yz7rC/O7tBzuDIaVzvmXNlikeeGR3YLnitaRTYa5F2AbWqtbupq
- BGLyfI5hr4NGztMjDU0xj68pOW32YvvQLk56cSKSB50sKp/FFtJ9laRIdEJEc+FrVYy3IRapROF
- 2K/VxmTMJzQSL/qSP5pQQ5Qy2Vh3OAg==
-X-Gm-Gg: ASbGncsLqRga/i7O7Arb5st1ar1ZKnvexrRNMYXZqvtYTPW8M9Wp1dl7t9BVcQD/AvE
- xr8h7zE0S7SYbO6MTK7pi2WyoWckuJAO0enDz
-X-Google-Smtp-Source: AGHT+IFtR7ula8zGibjV3s1GBByR8KxqIP3RzoJ7lnrEi6jmCMypE264i0TEJ3ySR00cZMvIpJ4lolQQDtTog3hotIA=
-X-Received: by 2002:a17:90b:2b45:b0:2ee:a583:e616 with SMTP id
- 98e67ed59e1d1-2f28fb667a1mr19487826a91.9.1734360867566; Mon, 16 Dec 2024
- 06:54:27 -0800 (PST)
+ :reply-to:in-reply-to:references:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zW7bZzCvEG9vXH7hmhUpYlJcI+Z/kO6+zIFWocpGb5Q=;
+ b=p8LKHkUKK/jkHe6kWmaCsdbK5/YgmEsEmdj8lzMMADcwblVtv+TmHFkS00oXSPhOSF
+ VDRGNCZF38ZOqH2aJgUpkms19zJVZNR8O33XRgbkIebO/oU5W/5dtu7pQCcd9jW9jeJj
+ nsC7DvcX7ZhQOSsh6zy3GVu+4eJ+eXFt59t0UxHWxF6nkIgR+LXDSz2nObBb4ngJu7Mk
+ x/VM/AU5tS30ZKTJFU3o2mRgJeilwX4ngJSIgosAcvAY8FpsCmIH40RlGt2wVMUAsO/A
+ QKLi5VeHo8syuvry7AER/A9wegMYdFVWPbwvMuHOHdJbzyX6OUhE7+1u/51cK6mF/sFf
+ RK/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWV+hVVe1uFES7kkeiOH0a7DQHB/+1JXX5ZNEcbrj6iPx088Csh2JvUaXljito6DEo788p7Qxs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmHMT3nb09bCHcUaL607fhOkUuxqnMINhcGXC1U58B7w26vQjk
+ Ytd6P9I3ig01rxxx2HP/ScoDoh1kFLZg0HOolFs3eC/yqYFYXpuoaiOOLr4A
+X-Gm-Gg: ASbGncux2qkR0hmXbHgfD6+GwPx1cHefAXfZbDBJsGdfvRJb/DBxC7ab+xwYYm843qK
+ h2i8kMbkle/oK4lBEiCQDbLMasHAZy2Q/QMcST3HG804cKjp+lsKIIL756YTc0oxu53K1E0svoG
+ +RL8//IQNW7OKHFQjOYzxmCuYt+3PrOlOjZVzK51DLLKlgVaHgWSy7wd4WeKl13mq+ahvSfOV1Y
+ 8fXEe6OghW7k6JjR65gr1MVRBhinVkXEHoVPo4J+xogljpiTtO12HcO31wni+yy88W+jLPcza8D
+ +NkHf3+NmS5kmg==
+X-Google-Smtp-Source: AGHT+IHppcB+dBYaqR8bzjmbeMGbyCS4b7cR7YSBmCgilaP0c09aGLGqUpphVp3xtHdmadoZFd3Eng==
+X-Received: by 2002:a05:651c:1994:b0:300:3a15:8f19 with SMTP id
+ 38308e7fff4ca-30254611fafmr53430261fa.32.1734361210418; 
+ Mon, 16 Dec 2024 07:00:10 -0800 (PST)
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com.
+ [209.85.208.176]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-30344175ae4sm9524711fa.78.2024.12.16.07.00.09
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 16 Dec 2024 07:00:10 -0800 (PST)
+Received: by mail-lj1-f176.google.com with SMTP id
+ 38308e7fff4ca-30037784fceso41455481fa.2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 07:00:09 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV0SVSLLFxoW6zH0MIwZrA6HbHCLzyv8AO3HE7eVo5PoJNtTQ/5t/nFLhWp//3l7Nw+GhrjdBQ=@lists.denx.de
+X-Received: by 2002:a05:651c:2108:b0:302:3de5:b039 with SMTP id
+ 38308e7fff4ca-30254566a55mr47627831fa.8.1734361209666; Mon, 16 Dec 2024
+ 07:00:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20241127130419.50489-1-mslusarz@renau.com>
- <20241216134000.1b9ceacd@donnerap.manchester.arm.com>
-In-Reply-To: <20241216134000.1b9ceacd@donnerap.manchester.arm.com>
-From: =?UTF-8?Q?Marcin_=C5=9Alusarz?= <marcin.slusarz@gmail.com>
-Date: Mon, 16 Dec 2024 15:54:23 +0100
-Message-ID: <CA+GA0_vgLijyTRCZDM0xa+5dmmfGxtggzfPvb8Z9wThiRwkutw@mail.gmail.com>
-Subject: Re: [PATCH] power: axp: sunxi: configure charge current
+References: <20241215221331.28461-1-andre.przywara@arm.com>
+In-Reply-To: <20241215221331.28461-1-andre.przywara@arm.com>
+From: Chen-Yu Tsai <wens@csie.org>
+Date: Mon, 16 Dec 2024 22:59:57 +0800
+X-Gmail-Original-Message-ID: <CAGb2v64Csz+cWY=oCr7fFWCJoeF5jOXBvThOJYBTWkp7qbn24A@mail.gmail.com>
+Message-ID: <CAGb2v64Csz+cWY=oCr7fFWCJoeF5jOXBvThOJYBTWkp7qbn24A@mail.gmail.com>
+Subject: Re: [PATCH] power: pmic: sunxi: guard DCDC5 separately
 To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, =?UTF-8?Q?Marcin_=C5=9Alusarz?= <mslusarz@renau.com>,
- Jagan Teki <jagan@amarulasolutions.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, 
+ linux-sunxi@lists.linux.dev, Leon Anavi <leon.anavi@konsulko.com>,
+ lhristov@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 16 Dec 2024 16:40:29 +0100
@@ -87,70 +91,65 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: wens@csie.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pon., 16 gru 2024 o 14:40 Andre Przywara <andre.przywara@arm.com> napisa=C5=
-=82(a):
+On Mon, Dec 16, 2024 at 6:14=E2=80=AFAM Andre Przywara <andre.przywara@arm.=
+com> wrote:
 >
-> On Wed, 27 Nov 2024 13:04:19 +0000
-> "Marcin =C5=9Alusarz" <marcin.slusarz@gmail.com> wrote:
+> So far all sunxi boards programming the DCDC1 power rail on the AXP PMIC
+> also set the DCDC5 rail, so we could handle both with the same DCDC1
+> guard.
+> Some boards using the AXP313 will need to set DCDC1 now as well, and
+> since the AXP313 only has three buck converters, there will be no DCDC5,
+> so this trick is not going to work anymore.
 >
-> Hi Marcin,
+> Don't try to be too clever, and just protect programming the two DCDC
+> rails with two separate guards.
 >
-> thanks for taking care of sending a mainline patch!
+> This has the interesting side effect of fixing operation on A80 boards,
+> using the AXP809 PMIC. Apparently programming DCDC5 right after DCDC1,
+> but before the other three rails caused some glitch, which made the board
+> hang during Linux boot, during the PSCI handler in U-Boot. Just keeping
+> the old setup order (DCDC1,2,3,4,5) will make those boards boot to the
+> Linux prompt again.
 >
-> > Allows decreasing initial charge current, e.g. when power
-> > supply is too weak to support both charging and other operations.
+> Fixes: ffb02942fab024d4a9b6a ("sunxi: board: simplify early PMIC setup co=
+nditions")
+> Reported-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+
+Reviewed-by: Chen-Yu Tsai <wens@csie.org>
+
+> ---
+>  board/sunxi/board.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 >
-> Can you explain a bit more why and where you actually need that?
-
-One of the boards I worked on had a design flaw where the power supply
-was incorrectly sized. Booting that device on AC with an almost empty
-battery led to weird behavior of some connected devices because
-the board was starved by battery charging. The design bug was fixed, but
-old boards exist and need to work...
-
-> The problem I have with the code is that it's doing it in the SPL, where =
-I
-> actually want to decrease any PMIC usage. We really only need the PMIC th=
-at
-> early to set the DRAM and CPU core voltage, everything else should be don=
-e
-> in either U-Boot proper or the kernel.
-
-The problem with disabling (or decreasing) charging later is that it
-might be too late.
-While I never tracked booting failures to that problem, it's
-theoretically possible.
-
-> So how did this work before, and why it is a problem now? AXP221 points t=
-o
-> some older SoC, I guess?
-
-It's an older SoC, but it's still used to develop new products :/.
-
-> Is it that you find yourself with a somewhat weak power supply, and if th=
-e
-> battery is discharged, there won't be enough power left for the system to
-> boot reliably?
+> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> index 824c322a0dc..9c340908a96 100644
+> --- a/board/sunxi/board.c
+> +++ b/board/sunxi/board.c
+> @@ -577,7 +577,6 @@ void sunxi_board_init(void)
 >
-> Do you know of any existing DT property for instance that could limit the
-> charge current? Or is there a sysfs property only?
-
-It's possible to limit charging via DT and tweak it after booting with
-sysfs, but
-in the kernel version I had to deal with, it was not possible to disable
-charging completely. And as I said, I fear it might be too late to do
-it after bootup.
-
-With all that said, there's no big need to merge this patch upstream. It wo=
-uld
-lower the effort to update to a newer UBoot, and I thought it's generic eno=
-ugh
-that someone else could use it.
-
-Cheers,
-Marcin
+>  #ifdef CONFIG_AXP_DCDC1_VOLT
+>         power_failed |=3D axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
+> -       power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+>  #endif
+>  #ifdef CONFIG_AXP_DCDC2_VOLT
+>         power_failed |=3D axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
+> @@ -586,6 +585,9 @@ void sunxi_board_init(void)
+>  #ifdef CONFIG_AXP_DCDC4_VOLT
+>         power_failed |=3D axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
+>  #endif
+> +#ifdef CONFIG_AXP_DCDC5_VOLT
+> +       power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+> +#endif
+>
+>  #ifdef CONFIG_AXP_ALDO1_VOLT
+>         power_failed |=3D axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
+> --
+> 2.46.2
+>
