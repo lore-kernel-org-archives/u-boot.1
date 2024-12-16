@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CD8EE7716A
-	for <u-boot@archiver.kernel.org>; Sun, 15 Dec 2024 23:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B362EE7716A
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 00:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A462B80192;
-	Mon, 16 Dec 2024 00:58:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EF4B38005B;
+	Mon, 16 Dec 2024 01:25:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Qj/TR7ea";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lHVcQYKh";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HM2iScvb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A530F80050; Mon, 16 Dec 2024 00:58:39 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D372B80092; Mon, 16 Dec 2024 01:25:39 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8422080092
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:58:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FCBA80050
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 01:25:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YBKlx2Dwsz9stH;
- Mon, 16 Dec 2024 00:58:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734307117;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GqIwJ5KCP3/3gbmJpvr9na3ykiseTnSTKMMQSbNDH/w=;
- b=Qj/TR7ea8Tq7s9s8XPAnR7ooRh4iJAvKITGYkbx8xO9dDPwJLI7E1Q4hBO+xD6Tea5kFED
- /5QPDAQEh4WIsdPB+THuF/oM4cPoRtwMI9sy1+Tw9kDMGmU9tmKq2uSDpZUEyjDN3fqd4r
- fmFGfGdGlnKfJDUjbnacjXdwGhQKlBrXz3qjMdz28161ufeFW7P3Jm7OZHbp+ql9E2Z1jC
- MqGmYaqb9872qEmsCfNDmggno+hoWF0kIeL5rj3hZMy0LUAC8wmVnLuDYXgnzVmwJGHZ5c
- JZRD47Ullw0VTkOPSgODjNWQZ8t7TTmh4SbC4lAjYEZdBP11B7XORGkcCj+2zA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734307115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GqIwJ5KCP3/3gbmJpvr9na3ykiseTnSTKMMQSbNDH/w=;
- b=lHVcQYKhs8Y6S15P34M7w9nw0+Tj36wkZVgo0jWQhWE7JVA0JorU+Gy3wI1H4ra2X9CaAI
- ExDmvk6+aShJB6Izo1zTpKgvmCf0XzIaDW1bVemf7/t+VkOIGlrI4FLXjZBk+DEn14e/8V
- P1h+Ns9uErMPTijRjdsoWSKmjiTM3ZGKalX+TTpGZkKmSMXupz3uucW0/s/6tFKYnL+BC2
- HJrzaR1iZbZWq7Mlptl36izthSL67S40JnZM5ltZKkMR3Mj8U6M5o7zFFNMq94NjlxJVAX
- plIe9TzHrax3in5fBRFrvKS8c86wdw6U+HLaOnmg5f3V4LHVoXrFgKM3gfMciw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/2] net: rswitch: Fix up macro indent
-Date: Mon, 16 Dec 2024 00:57:50 +0100
-Message-ID: <20241215235815.572689-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241215235815.572689-1-marek.vasut+renesas@mailbox.org>
-References: <20241215235815.572689-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aab6fa3e20eso456166766b.2
+ for <u-boot@lists.denx.de>; Sun, 15 Dec 2024 16:25:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734308737; x=1734913537; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wgaqZ6tOcybwWhuG/3ud2NFCw8wIbLb13lw1Bpnwboo=;
+ b=HM2iScvb/vG0kdYWB3SLAmAy37fyF0ZzpUydjtGqO3xLQOsli+pXwxYgvL++nLrVMx
+ OudWXQg/aTkpfQ0dt1XcR7UTw3HX43UdtwEx5fklxFU7dRhnenSUol7Q3Onk/zdYg515
+ rPY2aGUg9Tp+jUfKpB8zcBWGPlv+it47x4V+o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734308737; x=1734913537;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wgaqZ6tOcybwWhuG/3ud2NFCw8wIbLb13lw1Bpnwboo=;
+ b=TOq5OOxW8RyMCUL+XxVgDsL3Zr8fNv6GzUmeySy3fqhdql17vnxhDENNhKg6KG+iIp
+ 7ZC0iGQVHg30CgCso4DLZ8L2TEyaA6QQzZYlq8JAWuKVmINqCds/ZfGCtQtLiIoGwbzr
+ cHA7Cb0YSjMQ3wggftyjrUcP5qmz+sZfhB2TDoimWfgm7dqIcEBD02XqnGzgRTuky31E
+ 21IYvR3ZEu2Q5cpMBY/l9ye/sY66t2ZiqCgGcJdQU/r8OfB+Fg+2KuYPTPMJm/r3YmVO
+ Ycl6z+aLkLyYkjI2SBFUyvIEngmVTcHqotr+pdc0p71ZczletUIK9vMAWzj1AjIo2wEF
+ 7aTg==
+X-Gm-Message-State: AOJu0YxWsv+3C4K1QsZoLe2bFNqAUzBvUzqaHfXqsUGDdsBkbwiAMKTF
+ rDuaX2tF3sg1Cu2NNnetQt2UlnZBABDyFw+URXTaWZNKkbXVPuo7eRWjtWxeK07NzQAxcoKW0rb
+ S77iVw4Gty+70PrXPfyvCyeMKbbVV8GexYpOD
+X-Gm-Gg: ASbGncunV5UAzCeaN77HwjO4ygk0UOAmN4ZdIsI4SbSnS8kltK7h+f99LVv8AsuZau0
+ 3/Aww8JQwmaVVeR0Q7SWWlrwNEm4LA/dzg3w3UN6bbZLivP9A0UM1UB8rQzjGkwGinj2g8gI=
+X-Google-Smtp-Source: AGHT+IG1Ca0rGx8KVwPorsyionGTMO5om9uBaMtFPMcPdWLdTIi+1R479QDGVDOAQ8+gAsG7YJf4sPcRE4O1xG60H18=
+X-Received: by 2002:a17:907:9710:b0:aa6:90f1:a9bb with SMTP id
+ a640c23a62f3a-aab779aa8a9mr919598466b.24.1734308736578; Sun, 15 Dec 2024
+ 16:25:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 78d204460ba70eb4656
-X-MBO-RS-META: 689uon6y9spmqd8agpjwpx3ge9oqsugh
-X-Rspamd-Queue-Id: 4YBKlx2Dwsz9stH
+References: <20241212151142.1562825-1-trini@konsulko.com>
+ <CAFLszTiF8m7P8mBCNRhhiRQt=bcfRB3ddaaumF_EXETTXbUmDQ@mail.gmail.com>
+ <20241213170736.GW1505244@bill-the-cat>
+In-Reply-To: <20241213170736.GW1505244@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 15 Dec 2024 17:25:24 -0700
+Message-ID: <CAFLszTiPxTDqB9r+rdT4gARCA1HPx9ELO+tWELB1eKuijFvAeA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,188 +86,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the macro indent, replace multiple spaces with tabs proper.
-No functional change.
+Hi Tom,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/net/rswitch.c | 136 +++++++++++++++++++++---------------------
- 1 file changed, 68 insertions(+), 68 deletions(-)
+On Fri, 13 Dec 2024 at 10:07, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Dec 13, 2024 at 07:32:24AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Thu, 12 Dec 2024 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > Introduce an option to control if we expect that a prior stage has
+> > > created a bloblist already and thus it is safe to scan the address. We
+> > > need to have this be configurable because we do not (and cannot) know
+if
+> > > the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or some special
+> > > on-chip memory and so it may or may not be safe to read from this
+> > > address this early.
+> > >
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
+> > >  lib/fdtdec.c   | 11 +++--------
+> > >  2 files changed, 35 insertions(+), 8 deletions(-)
+> > >
+> >
+> > Since this is the essentially the same as my OF_BLOBLIST patch, which
+> > was rejected:
+> >
+> > NAK
+> >
+> > The issue is not whether some 'previous stage' set up a bloblist. For
+> > example, if VPL_BLOBLIST_PRIOR_STAGE is enabled, that presumably means
+> > that TPL set it up. But it doesn't mean that TPL put the FDT in there.
+>
+> This is wrong. The root problem is saying that the bloblist is in
+> possibly uninitialized memory. The code is quite happy to NOT find the
+> device tree in the bloblist and continue searching other paths.
 
-diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
-index cbc9a413313..91e2c7b7845 100644
---- a/drivers/net/rswitch.c
-+++ b/drivers/net/rswitch.c
-@@ -36,86 +36,86 @@
- #define RSWITCH_MAX_CTAG_PCP	7
- 
- /* Registers */
--#define RSWITCH_COMA_OFFSET     0x00009000
--#define RSWITCH_ETHA_OFFSET     0x0000a000      /* with RMAC */
--#define RSWITCH_ETHA_SIZE       0x00002000      /* with RMAC */
-+#define RSWITCH_COMA_OFFSET	0x00009000
-+#define RSWITCH_ETHA_OFFSET	0x0000a000	/* with RMAC */
-+#define RSWITCH_ETHA_SIZE	0x00002000	/* with RMAC */
- #define RSWITCH_GWCA_OFFSET	0x00010000
- #define RSWITCH_GWCA_SIZE	0x00002000
- 
--#define FWRO    0
--#define CARO    RSWITCH_COMA_OFFSET
--#define GWRO    0
--#define TARO    0
--#define RMRO    0x1000
-+#define FWRO			0
-+#define CARO			RSWITCH_COMA_OFFSET
-+#define GWRO			0
-+#define TARO			0
-+#define RMRO			0x1000
- 
- /* List of TSNA registers (ETHA) */
--#define EAMC		(TARO + 0x0000)
--#define EAMS		(TARO + 0x0004)
--#define EATDQDCR	(TARO + 0x0060)
--#define EATTFC		(TARO + 0x0138)
--#define EATASRIRM	(TARO + 0x03e4)
-+#define EAMC			(TARO + 0x0000)
-+#define EAMS			(TARO + 0x0004)
-+#define EATDQDCR		(TARO + 0x0060)
-+#define EATTFC			(TARO + 0x0138)
-+#define EATASRIRM		(TARO + 0x03e4)
- /* Gateway CPU agent block (GWCA) */
--#define GWMC		(GWRO + 0x0000)
--#define GWMS		(GWRO + 0x0004)
--#define GWMTIRM		(GWRO + 0x0100)
--#define GWVCC		(GWRO + 0x0130)
--#define GWTTFC		(GWRO + 0x0138)
--#define GWDCBAC0	(GWRO + 0x0194)
--#define GWDCBAC1	(GWRO + 0x0198)
--#define GWTRCR		(GWRO + 0x0200)
--#define GWARIRM		(GWRO + 0x0380)
--#define GWDCCR		(GWRO + 0x0400)
-+#define GWMC			(GWRO + 0x0000)
-+#define GWMS			(GWRO + 0x0004)
-+#define GWMTIRM			(GWRO + 0x0100)
-+#define GWVCC			(GWRO + 0x0130)
-+#define GWTTFC			(GWRO + 0x0138)
-+#define GWDCBAC0		(GWRO + 0x0194)
-+#define GWDCBAC1		(GWRO + 0x0198)
-+#define GWTRCR			(GWRO + 0x0200)
-+#define GWARIRM			(GWRO + 0x0380)
-+#define GWDCCR			(GWRO + 0x0400)
- /* List of Common Agent registers (COMA) */
--#define RRC		(CARO + 0x0004)
--#define RCEC		(CARO + 0x0008)
--#define RCDC		(CARO + 0x000c)
--#define CABPIRM		(CARO + 0x0140)
-+#define RRC			(CARO + 0x0004)
-+#define RCEC			(CARO + 0x0008)
-+#define RCDC			(CARO + 0x000c)
-+#define CABPIRM			(CARO + 0x0140)
- /* List of MFWD registers */
--#define FWPC		(FWRO + 0x0100)
--#define FWPBFCR		(FWRO + 0x4a00)
--#define FWPBFCSDCR	(FWRO + 0x4a04)
-+#define FWPC			(FWRO + 0x0100)
-+#define FWPBFCR			(FWRO + 0x4a00)
-+#define FWPBFCSDCR		(FWRO + 0x4a04)
- /* List of RMAC registers (RMAC) */
--#define MPSM		(RMRO + 0x0000)
--#define MPIC		(RMRO + 0x0004)
--#define MRMAC0		(RMRO + 0x0084)
--#define MRMAC1		(RMRO + 0x0088)
--#define MRAFC		(RMRO + 0x008c)
--#define MRSCE		(RMRO + 0x0090)
--#define MRSCP		(RMRO + 0x0094)
--#define MLVC		(RMRO + 0x0180)
--#define MLBC		(RMRO + 0x0188)
--#define MXGMIIC		(RMRO + 0x0190)
--#define MPCH		(RMRO + 0x0194)
--#define MANM		(RMRO + 0x019c)
--#define MMIS0		(RMRO + 0x0210)
--#define MMIS1		(RMRO + 0x0220)
-+#define MPSM			(RMRO + 0x0000)
-+#define MPIC			(RMRO + 0x0004)
-+#define MRMAC0			(RMRO + 0x0084)
-+#define MRMAC1			(RMRO + 0x0088)
-+#define MRAFC			(RMRO + 0x008c)
-+#define MRSCE			(RMRO + 0x0090)
-+#define MRSCP			(RMRO + 0x0094)
-+#define MLVC			(RMRO + 0x0180)
-+#define MLBC			(RMRO + 0x0188)
-+#define MXGMIIC			(RMRO + 0x0190)
-+#define MPCH			(RMRO + 0x0194)
-+#define MANM			(RMRO + 0x019c)
-+#define MMIS0			(RMRO + 0x0210)
-+#define MMIS1			(RMRO + 0x0220)
- 
- /* COMA */
--#define RRC_RR		BIT(0)
--#define RCEC_RCE	BIT(16)
-+#define RRC_RR			BIT(0)
-+#define RCEC_RCE		BIT(16)
- 
--#define CABPIRM_BPIOG	BIT(0)
--#define CABPIRM_BPR	BIT(1)
-+#define CABPIRM_BPIOG		BIT(0)
-+#define CABPIRM_BPR		BIT(1)
- 
- /* MFWD */
--#define FWPC0(i)	(FWPC + (i) * 0x10)
--#define FWPC0_LTHTA     BIT(0)
--#define FWPC0_IP4UE     BIT(3)
--#define FWPC0_IP4TE     BIT(4)
--#define FWPC0_IP4OE     BIT(5)
--#define FWPC0_L2SE      BIT(9)
--#define FWPC0_IP4EA     BIT(10)
--#define FWPC0_IPDSA     BIT(12)
--#define FWPC0_IPHLA     BIT(18)
--#define FWPC0_MACSDA    BIT(20)
--#define FWPC0_MACHLA    BIT(26)
--#define FWPC0_MACHMA    BIT(27)
--#define FWPC0_VLANSA    BIT(28)
--
--#define FWPC0_DEFAULT   (FWPC0_LTHTA | FWPC0_IP4UE | FWPC0_IP4TE | \
--			 FWPC0_IP4OE | FWPC0_L2SE | FWPC0_IP4EA | \
--			 FWPC0_IPDSA | FWPC0_IPHLA | FWPC0_MACSDA | \
--			 FWPC0_MACHLA | FWPC0_MACHMA | FWPC0_VLANSA)
-+#define FWPC0(i)		(FWPC + (i) * 0x10)
-+#define FWPC0_LTHTA		BIT(0)
-+#define FWPC0_IP4UE		BIT(3)
-+#define FWPC0_IP4TE		BIT(4)
-+#define FWPC0_IP4OE		BIT(5)
-+#define FWPC0_L2SE		BIT(9)
-+#define FWPC0_IP4EA		BIT(10)
-+#define FWPC0_IPDSA		BIT(12)
-+#define FWPC0_IPHLA		BIT(18)
-+#define FWPC0_MACSDA		BIT(20)
-+#define FWPC0_MACHLA		BIT(26)
-+#define FWPC0_MACHMA		BIT(27)
-+#define FWPC0_VLANSA		BIT(28)
-+
-+#define FWPC0_DEFAULT		(FWPC0_LTHTA | FWPC0_IP4UE | FWPC0_IP4TE | \
-+				 FWPC0_IP4OE | FWPC0_L2SE | FWPC0_IP4EA | \
-+				 FWPC0_IPDSA | FWPC0_IPHLA | FWPC0_MACSDA | \
-+				 FWPC0_MACHLA | FWPC0_MACHMA | FWPC0_VLANSA)
- 
- #define FWPBFC(i)	(FWPBFCR + (i) * 0x10)
- #define FWPBFCSDC(j, i)	(FWPBFCSDCR + (i) * 0x10 + (j) * 0x04)
-@@ -148,8 +148,8 @@
- #define MDIO_WRITE_C45		0x01
- #define MDIO_ADDR_C45		0x00
- 
--#define MDIO_READ_C22           0x02
--#define MDIO_WRITE_C22          0x01
-+#define MDIO_READ_C22		0x02
-+#define MDIO_WRITE_C22		0x01
- 
- #define MPSM_POP_MASK		(0x03 << 13)
- #define MPSM_PRA_MASK		(0x1f << 8)
--- 
-2.45.2
+But until the bloblist is set up, it doesn't exist. We should not be
+looking for a bloblist that we know is not there yet. The bloblist is set
+up by bloblist_init(). You seem to be imputing your own semantics for
+bloblist.
 
+In SPL, init happens in board_init_r(), i.e. after RAM is set up. So don't
+look in the bloblist until it is set up! It doesn't exist.
+
+In U-Boot proper, we look for it before relocation, so we can relocate and
+expand it for use with ACPI tables, etc.
+
+Take a look at this patch, too:
+
+3d6531803e1 bloblist: Support initing from multiple places
+
+>
+> An alternative here would be to better document the requirements of
+> BLOBLIST_ADDR, and then just disable it on chromebook_coral until
+> someone is inclined to move DDR init in to TPL, or someone finds a
+> non-main-memory address to use for BLOBLIST_ADDR or switches to using
+> BLOBLIST_ALLOC.
+
+Coral's TPL runs in cache-as-ram, with a 30KB limit on code size. It cannot
+do DDR init in TPL because the DDR blob is large (160KB?) and there is a
+ton of setup to do first, in any case. When CAR goes away, its memory
+vanishes, so you need to have copied the bloblist somewhere else (the
+bloblist holds the MRC data which needs to be written to SPI flash later
+on, when possible). This all works perfectly and there is really no need to
+change anything.
+
+Again, you seem to be imputing semantics to bloblist which don't exist.
+
+Regards,
+Simon
