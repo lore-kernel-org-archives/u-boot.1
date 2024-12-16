@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB16E77180
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89736E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB6758005B;
-	Mon, 16 Dec 2024 09:35:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20DFB8005B;
+	Mon, 16 Dec 2024 09:36:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA536801CF; Mon, 16 Dec 2024 09:35:33 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 322C68003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:35:30 +0100 (CET)
+ id 3233180104; Mon, 16 Dec 2024 09:36:34 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id BFB0C8003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:36:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: c11cFm7aQxqHDCoEFwkGZg==
-X-CSE-MsgGUID: vpXqZsH8RmirKYCFPqZCow==
-X-IronPort-AV: E=Sophos;i="6.12,238,1728918000"; 
- d="asc'?scan'208";a="231954196"
+X-CSE-ConnectionGUID: cWVy+hMoSbem40z9ZJD0QQ==
+X-CSE-MsgGUID: Y1U6Xr37QR6ClsT5CHwg5A==
+X-IronPort-AV: E=Sophos;i="6.12,237,1728918000"; 
+ d="asc'?scan'208";a="227976827"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 16 Dec 2024 17:35:29 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 16 Dec 2024 17:36:30 +0900
 Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id C230041AC168;
- Mon, 16 Dec 2024 17:35:09 +0900 (JST)
-Message-ID: <3f108ae7-021a-4429-9cdf-ce998c817b19@bp.renesas.com>
-Date: Mon, 16 Dec 2024 08:35:07 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 5986441ABBFD;
+ Mon, 16 Dec 2024 17:36:19 +0900 (JST)
+Message-ID: <2efd9093-d828-4066-a68e-790cc49327b0@bp.renesas.com>
+Date: Mon, 16 Dec 2024 08:36:17 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
+Subject: Re: [PATCH 3/3] arm64: renesas: Convert boards over to is_cortex_a()
+ functions
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
@@ -42,12 +43,12 @@ Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
 References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
+ <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------W3JORKuv0UsuFGb4hBSN29VJ"
+ boundary="------------lTFvcG2uYQQ1rbsGYOANvuae"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +66,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------W3JORKuv0UsuFGb4hBSN29VJ
-Content-Type: multipart/mixed; boundary="------------MNH0Vv1cKnXM46MA00Ci0U0u";
+--------------lTFvcG2uYQQ1rbsGYOANvuae
+Content-Type: multipart/mixed; boundary="------------h1LJUZq6tQnsfFL5Zvz521GY";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -74,22 +75,24 @@ Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Chris Paterson <chris.paterson2@renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <3f108ae7-021a-4429-9cdf-ce998c817b19@bp.renesas.com>
-Subject: Re: [PATCH 2/3] arm64: Add MIDR entries for Cortex-A57 and Cortex-A76
+Message-ID: <2efd9093-d828-4066-a68e-790cc49327b0@bp.renesas.com>
+Subject: Re: [PATCH 3/3] arm64: renesas: Convert boards over to is_cortex_a()
+ functions
 References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241214224344.303452-2-marek.vasut+renesas@mailbox.org>
+ <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
 
---------------MNH0Vv1cKnXM46MA00Ci0U0u
-Content-Type: multipart/mixed; boundary="------------KDPEWf8Nj5uiEb6Sppdw0qz6"
+--------------h1LJUZq6tQnsfFL5Zvz521GY
+Content-Type: multipart/mixed; boundary="------------039pqqHRQLMv9rg2C7kOg7Xh"
 
---------------KDPEWf8Nj5uiEb6Sppdw0qz6
+--------------039pqqHRQLMv9rg2C7kOg7Xh
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 14/12/2024 22:42, Marek Vasut wrote:
-> Add MIDR entries for Cortex-A57 and Cortex-A76 cores.
-> Those are used on R-Car Gen3 and Gen4 SoCs respectively.
+> Use generic is_cortex_a() functions instead of open-coded midr_el1 read=
+=2E
+> No functional change.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -105,7 +108,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------KDPEWf8Nj5uiEb6Sppdw0qz6
+--------------039pqqHRQLMv9rg2C7kOg7Xh
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -169,21 +172,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------KDPEWf8Nj5uiEb6Sppdw0qz6--
+--------------039pqqHRQLMv9rg2C7kOg7Xh--
 
---------------MNH0Vv1cKnXM46MA00Ci0U0u--
+--------------h1LJUZq6tQnsfFL5Zvz521GY--
 
---------------W3JORKuv0UsuFGb4hBSN29VJ
+--------------lTFvcG2uYQQ1rbsGYOANvuae
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1/mOwUDAAAAAAAKCRDbaV4Vf/JGvTuF
-AQDXh6dOOSqGweIdHCIZj71nxvUl1CCaMX2P6zW4hvbaKQD/d3u/CWLGD/5YPytKi0tYDcAvVQ3D
-B6pKb0obh5xU6wk=
-=2rz7
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1/mgQUDAAAAAAAKCRDbaV4Vf/JGvfLO
+AQDE8jD/SOdSTufl2szZ0gWXoEvSbOv0PsgOTv0UfxAkzAD/QOfjSrj0ALPIhFL3iliIVZBnVtkK
++XvqFP2Q89dzzgs=
+=YfZH
 -----END PGP SIGNATURE-----
 
---------------W3JORKuv0UsuFGb4hBSN29VJ--
+--------------lTFvcG2uYQQ1rbsGYOANvuae--
