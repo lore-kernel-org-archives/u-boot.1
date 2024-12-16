@@ -4,51 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89736E7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6817CE77180
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:41:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20DFB8005B;
-	Mon, 16 Dec 2024 09:36:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id D38608005B;
+	Mon, 16 Dec 2024 09:41:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3233180104; Mon, 16 Dec 2024 09:36:34 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id BFB0C8003E
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:36:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: cWVy+hMoSbem40z9ZJD0QQ==
-X-CSE-MsgGUID: Y1U6Xr37QR6ClsT5CHwg5A==
-X-IronPort-AV: E=Sophos;i="6.12,237,1728918000"; 
- d="asc'?scan'208";a="227976827"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 16 Dec 2024 17:36:30 +0900
-Received: from [10.226.92.22] (unknown [10.226.92.22])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 5986441ABBFD;
- Mon, 16 Dec 2024 17:36:19 +0900 (JST)
-Message-ID: <2efd9093-d828-4066-a68e-790cc49327b0@bp.renesas.com>
-Date: Mon, 16 Dec 2024 08:36:17 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="fly/k4kb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AEB2280104; Mon, 16 Dec 2024 09:41:11 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 65DD38003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:41:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-385e27c75f4so2967748f8f.2
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:41:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734338467; x=1734943267;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=raRUIQTMT6vpJxiPdvVREn9hwnAWvX3F49LN7a81EgM=;
+ b=fly/k4kbHHnvUfZ498+pbwyGOY60e1NAXyzEs1kcQA8A/5EDdJ2lNuaa929i/4vIV2
+ DzykHnhqZgpOaZmuuN1HH0XC0Qu8zjBXeiDBa+86ze99RTd9fX7a5A60t28h5X6wDACI
+ SysmLWtXgsyOrwx/CzW/7svT5mwqR17OZ6wmkv2Ino4/L5028S5iUVHZNPAaHZHovI3v
+ 9rGiYOFbClCJsEGEz31lUqN3z4PM2n1Imi0geacXvJTYiUxGs4xO5z3uAv4LQygvpGFg
+ oT6GABCV8dyltFh7tCffZL7CDYBVpXxWP+ow6lmjDcP0wul9sv3iMjnzvbP2hyTm/cvN
+ 3MWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734338467; x=1734943267;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=raRUIQTMT6vpJxiPdvVREn9hwnAWvX3F49LN7a81EgM=;
+ b=XGV/CUw0YKi3upGUuDylWnK31uMskWjQnW1MO6H8P7pz7oOgQsrQnbgEIWcnwJPXnM
+ Lgwsa6tNHjEzEgz6PqUIC9vlmnrx1LePAERpeqA3MyQ75xCVo+Kgodh0UF0EJDIykh0Z
+ P2LCc3iw2j8OXJWqjudZzbjMm6lr1rssWQsi9F7EVvNReHlcMkemWyOgtmvEwNHJTHbx
+ MMOX4Zw5hwapbXTpMzcbkvBBkfO0pAPU2fTsJ/Hj0CGQEPUZ5ZhOZoKavssrXOukPvMQ
+ stGewrgFn9gQi/f/ZZldlXUoq/TgarRT8zNHjjP16ZUp3LaWtGgw5WM97jTLUVpauguD
+ kVqg==
+X-Gm-Message-State: AOJu0YyC9EnLFd3zsYNnCACluvKEVyf6Y4CBEgucYYELJPA1kOot30QG
+ rGx5AaGVHo2ZztxaIYzSMusSPc7lQ56bYd+DA3n+NsYrO1ru/BBgjoS92YzwVeo=
+X-Gm-Gg: ASbGncvBAwmvYv+dAxOz3XUhZRxbm6pZZlKKJtvMF9mKcOczrgG8avDAZTjmidCnNgH
+ hlOaRRishry9d0lmj5rHXmKJ40FdmbyN38OB42EXuyNZ+/SRvhGxp8quZ5iAM4CBKac4zVtrbqY
+ NR80yIjhIarLi+6X8i51c/JWuO11rmmFZFF0s79chOfv3n0JfdJappvNETNoHUa/44+qPrdn3kQ
+ pqWsKW7XHx8zDhlRj3+AHM1SqdGT7MSxgZ8iH8J6QMXgkJLvbT2dcjHb+DyzLrPmw==
+X-Google-Smtp-Source: AGHT+IFhpWT6fv1o83PGF4nOV2/avRxlaeM8j5uxoha2zxxIjWIU4NnGvXg6AOZ/J/sMNrqTE0h82g==
+X-Received: by 2002:a05:6000:1ac9:b0:385:f3fb:46a5 with SMTP id
+ ffacd0b85a97d-3888e0c16c1mr8099696f8f.52.1734338466784; 
+ Mon, 16 Dec 2024 00:41:06 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-388c80163b8sm7376075f8f.35.2024.12.16.00.41.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Dec 2024 00:41:06 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Nicolas Belin <nbelin@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Safae Ouajih <souajih@baylibre.com>, Ahmad
+ Draidi <ar2000jp@gmail.com>
+Cc: u-boot@lists.denx.de, Nicolas Belin <nbelin@baylibre.com>
+Subject: Re: [PATCH 3/4] boot: android: rework bootargs concatenation
+In-Reply-To: <20241211-fix-bootargs-concatenation-v1-3-c6752bcb9dde@baylibre.com>
+References: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
+ <20241211-fix-bootargs-concatenation-v1-3-c6752bcb9dde@baylibre.com>
+Date: Mon, 16 Dec 2024 09:41:05 +0100
+Message-ID: <87cyhsxboe.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] arm64: renesas: Convert boards over to is_cortex_a()
- functions
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Chris Paterson <chris.paterson2@renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------lTFvcG2uYQQ1rbsGYOANvuae"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,128 +98,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------lTFvcG2uYQQ1rbsGYOANvuae
-Content-Type: multipart/mixed; boundary="------------h1LJUZq6tQnsfFL5Zvz521GY";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Chris Paterson <chris.paterson2@renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <2efd9093-d828-4066-a68e-790cc49327b0@bp.renesas.com>
-Subject: Re: [PATCH 3/3] arm64: renesas: Convert boards over to is_cortex_a()
- functions
-References: <20241214224344.303452-1-marek.vasut+renesas@mailbox.org>
- <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241214224344.303452-3-marek.vasut+renesas@mailbox.org>
+Hi Nicolas,
 
---------------h1LJUZq6tQnsfFL5Zvz521GY
-Content-Type: multipart/mixed; boundary="------------039pqqHRQLMv9rg2C7kOg7Xh"
+Thank you for the patch.
 
---------------039pqqHRQLMv9rg2C7kOg7Xh
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On mer., d=C3=A9c. 11, 2024 at 14:53, Nicolas Belin <nbelin@baylibre.com> w=
+rote:
 
-On 14/12/2024 22:42, Marek Vasut wrote:
-> Use generic is_cortex_a() functions instead of open-coded midr_el1 read=
-=2E
-> No functional change.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Rework the bootargs concatenation allocating more accurately
+> the length that is needed.
+> Do not forget an extra byte for the null termination byte as,
+> in some cases, the allocation was 1 byte short.
+>
+> Fixes: 86f4695b ("image: Fix Android boot image support")
+> Signed-off-by: Nicolas Belin <nbelin@baylibre.com>
 > ---
-> Cc: Biju Das <biju.das.jz@bp.renesas.com>
-> Cc: Chris Paterson <chris.paterson2@renesas.com>
-> Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
+>  boot/image-android.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index 362a5c7435a3a8bcf7b674b96e31069a91a892b5..ed72a5c30424a453c1800bc61=
+edbe8f33b31b341 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -289,7 +289,7 @@ int android_image_get_kernel(const void *hdr,
+>  	int len =3D 0;
+>  	if (*img_data.kcmdline) {
+>  		printf("Kernel command line: %s\n", img_data.kcmdline);
+> -		len +=3D strlen(img_data.kcmdline);
+> +		len +=3D strlen(img_data.kcmdline) + 1; /* Extra space character neede=
+d */
+>  	}
+>=20=20
+>  	if (*img_data.kcmdline_extra) {
+> @@ -299,28 +299,28 @@ int android_image_get_kernel(const void *hdr,
+>=20=20
+>  	char *bootargs =3D env_get("bootargs");
+>  	if (bootargs)
+> -		len +=3D strlen(bootargs);
+> +		len +=3D strlen(bootargs) + 1; /* Extra space character needed */
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+In some cases, we will allocate for an extra space character when this
+is not needed.
 
---=20
-Paul Barker
---------------039pqqHRQLMv9rg2C7kOg7Xh
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+For example, with:
+* bootargs =3D "b"
+* kcmdline =3D NULL
+* kcmdline_extra =3D NULL
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+We will allocate strlen("b") + 1 + 1. But we only need to allocate
+strlen("b") + 1.
 
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
+Another example:
+* bootargs =3D "b"
+* kcmdline =3D "k"
+* kcmdline_extra =3D NULL
 
---------------039pqqHRQLMv9rg2C7kOg7Xh--
+Will allocate strlen("b") + 1 + strlen("k") + 1 + 1. But we only need:
+strlen("b") + 1 + strlen("k") + 1.
 
---------------h1LJUZq6tQnsfFL5Zvz521GY--
+How about we count the amount of elements that are not NULL to compute
+the amount of spaces:
+* 0 -> 0 space
+* 1 -> 0 space
+* 2 -> 1 space
+* 3 -> 2 spaces
 
---------------lTFvcG2uYQQ1rbsGYOANvuae
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+>=20=20
+> -	char *newbootargs =3D malloc(len + 2);
+> +	char *newbootargs =3D malloc(len + 1); /* +1 for the '\0' */
+>  	if (!newbootargs) {
+>  		puts("Error: malloc in android_image_get_kernel failed!\n");
+>  		return -ENOMEM;
+>  	}
+> -	*newbootargs =3D '\0';
+> +	*newbootargs =3D '\0'; /* set to NULL in case no components below are p=
+resent */
 
------BEGIN PGP SIGNATURE-----
+The comment should state Null, not NULL. NULL is the pointer and Null is
+the \0 character.
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ1/mgQUDAAAAAAAKCRDbaV4Vf/JGvfLO
-AQDE8jD/SOdSTufl2szZ0gWXoEvSbOv0PsgOTv0UfxAkzAD/QOfjSrj0ALPIhFL3iliIVZBnVtkK
-+XvqFP2Q89dzzgs=
-=YfZH
------END PGP SIGNATURE-----
+>=20=20
+>  	if (bootargs) {
+>  		strcpy(newbootargs, bootargs);
+>  		strcat(newbootargs, " ");
 
---------------lTFvcG2uYQQ1rbsGYOANvuae--
+A similar thing can be stated here. Sometimes, we add spaces which are
+not needed.
+
+Can we rework this a little to only add what is needed?
+
+>  	}
+>=20=20
+> -	if (*img_data.kcmdline)
+> +	if (*img_data.kcmdline) {
+>  		strcat(newbootargs, img_data.kcmdline);
+> -
+> -	if (*img_data.kcmdline_extra) {
+>  		strcat(newbootargs, " ");
+> -		strcat(newbootargs, img_data.kcmdline_extra);
+>  	}
+>=20=20
+> +	if (*img_data.kcmdline_extra)
+> +		strcat(newbootargs, img_data.kcmdline_extra);
+> +
+>  	env_set("bootargs", newbootargs);
+>  	free(newbootargs);
+>=20=20
+>
+> --=20
+> 2.34.1
