@@ -4,84 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0532E77183
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:00:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9894E7717F
+	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 08:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3710380104;
-	Mon, 16 Dec 2024 09:00:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CE698005B;
+	Mon, 16 Dec 2024 09:06:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="VRAZeet9";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="E4p55qDY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 743AD801BE; Mon, 16 Dec 2024 09:00:32 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C144980104; Mon, 16 Dec 2024 09:06:05 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CAB38005B
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:00:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 625DC8003E
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 09:06:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-38633b5dbcfso4082605f8f.2
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 00:00:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734336030; x=1734940830;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=97pQlD+ezHqCdmlbNNhCMI0CzG01GeufrZgOPtifH4c=;
- b=VRAZeet9N6igJUCKT1fY+yS50nJswPJnFNkhp7OH+ALGIf6oscF9xJa5RF01+Pd4B6
- bM0EzFasvOgLrJc/S37Zgci/BOvQ1d0Ff2CjdYJxHDZZkPghvTP/kcZ0Wdk7ct/17rTn
- BXK5IRZLvfCIWfWX2FQBzToefRdREA0fhxL0cg/+tgHVILKKpaX/kjbEyGosLxurdS4P
- A6Ain1X7cb0g7BN/HPxKdIudLAay7Btu7G4SymzeCnIkHMu2BmgER+HdRp0Qx/u0xkVt
- kxOLkK2tIjNJ5CtqeHDH0jrS1VyN2FgSEPx/hrt/c/RargkLkc/fCj7PLLJc1YzVHx3g
- /3Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734336030; x=1734940830;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=97pQlD+ezHqCdmlbNNhCMI0CzG01GeufrZgOPtifH4c=;
- b=IOq/D9flHl1FqKRYRs8lrqgorKWS+7IVXf9R0IoUfcFYp+gluQMh5noSMw0epsdYni
- k8tnApn2tE932R2qm3chsXVs/qwTPKsaiZQfyEBLJJE7Ep4qf4zgYn/IvOA7+VVicfu7
- UeVhOFWPydzwAon0AYcuqcRQuAnRwmNBQsa6e0BpQkMo5MNwMdTcGCi/4QEgqjCqddb7
- Qm3w4Y5QaCY0eNG846yqZ3HzvbKbqZ+H9Ct2FNrmauC/FfygJDL3l22dHbIf0xO04FR6
- YU6DM3EIypZWoJiLUZzRJdzIAmMp5yfOY871PhkvJNjCwKeHS1fbh8TKPemMrIVgMBlj
- WbaQ==
-X-Gm-Message-State: AOJu0YyM8oc/pdV8uCpufpNBSCLCrbJmHR/mgy6mzQwITX3YpPvGykem
- MMPKQ6FMHkw9vSGFeW95rjfvdTEfK+gE2t1nqVhN/GA2VupRhsf7tS3orQSUnZg=
-X-Gm-Gg: ASbGncsMg/7ONrV40LLqIYlQq8izZ9DCheYxslrB1IzouQuBOeeNqpFbfjvJ8Chq0If
- nUbi/kLwo0UndRPGO7R4hVmqIuS8lbw93+9WhTbLUPGiMw6uOHXuAvfxJ1a53Goz5+lFhj8BQ+D
- raCqpW2Za4CkTiVm7zcih1KC9ux2GuS1IxbJ1M28Aie6ZZB3kxuCsYp9zHEEbJ+otqsnpsFWVhZ
- rVAu9LQKR2Xrn9t818fP7HackktjoB+ve7XNexSAgCsMdHFOxd+8xyoEwXGRYb8Bg==
-X-Google-Smtp-Source: AGHT+IEvXLGA01ksFOqtRYFHH2IXag2EXqNDh5Ep/SMfWB6Utjddoq+R0n7MKs0jBqno1QaIhHHKzQ==
-X-Received: by 2002:a05:6000:186e:b0:386:3903:86eb with SMTP id
- ffacd0b85a97d-38880ad9177mr8849997f8f.23.1734336029618; 
- Mon, 16 Dec 2024 00:00:29 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43625550518sm132194235e9.5.2024.12.16.00.00.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 00:00:29 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Nicolas Belin <nbelin@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Safae Ouajih <souajih@baylibre.com>, Ahmad
- Draidi <ar2000jp@gmail.com>
-Cc: u-boot@lists.denx.de, Nicolas Belin <nbelin@baylibre.com>
-Subject: Re: [PATCH 2/4] boot: android: free newbootargs when done
-In-Reply-To: <20241211-fix-bootargs-concatenation-v1-2-c6752bcb9dde@baylibre.com>
-References: <20241211-fix-bootargs-concatenation-v1-0-c6752bcb9dde@baylibre.com>
- <20241211-fix-bootargs-concatenation-v1-2-c6752bcb9dde@baylibre.com>
-Date: Mon, 16 Dec 2024 09:00:27 +0100
-Message-ID: <87frmoxdk4.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1734336347; x=1734941147; i=xypron.glpk@gmx.de;
+ bh=e4euv0Tab//3dq8ppvmmGWWX3zPJro9gcRiE8g/XP20=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=E4p55qDYA0aLt9fVu+EdQekLGOn7Z6LOwsr7w28zB0U66GOkKeIDBlRbrDMnt304
+ bQe7YLodK04Wv7jOUjEypWMf7EH+KMFxuX2qWiGAfHCgYY4PFMXlBbh4kqBL0gwuH
+ jrFUkKzbNwF+OLy+Delr+EyTvy1rJi1cC9uYJlQjWZUjlpR6cyo3OqB6DnUMP2Yzs
+ 8rrc81xSaVwn5ihiFqpDR1Kc6KIkYwmRo+F+1JXtilY0LceGQwmUAMJd6YLB3JgvC
+ 9FUl8henDfm/lsQeBNRvKq5e5hsDxxpgtwR83zaPTxdVqgMQGnUGQpj477adx9WGp
+ 2vUKU9xWTRCOWnOgEg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.105.196]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MyKDU-1tWlEM3UdA-014rmx; Mon, 16
+ Dec 2024 09:05:47 +0100
+Date: Mon, 16 Dec 2024 09:05:42 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: Matthew Garrett <mgarrett@aurora.tech>,
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Wang Jie <dave.wang@rock-chips.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 3/8] doc: test: Add docs and test for part_find
+User-Agent: Thunderbird for Android
+In-Reply-To: <CAFLszThPgtngJM16oCcOD1oCJNzpdn7We0=OB6E41XRHokxDuA@mail.gmail.com>
+References: <20241209162801.288363-1-sjg@chromium.org>
+ <20241209162801.288363-4-sjg@chromium.org>
+ <0f17622a-ae3b-4d02-9cdc-c39d4f8bfa6d@gmx.de>
+ <CAFLszTgDCAxiZBYkDVUUb4jWejry4wWKm4gyyNndLhBYQ+zfAg@mail.gmail.com>
+ <20241210170856.GC2457179@bill-the-cat>
+ <CAFLszThPgtngJM16oCcOD1oCJNzpdn7We0=OB6E41XRHokxDuA@mail.gmail.com>
+Message-ID: <33FA4F32-AD4F-438C-BE53-F89DA5FCC86B@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:kFOzXaIeLJuIMBXcXqjjO9CTX7Qr6bAmnzx2L0dJP7oIFURlhG1
+ ErnnJSdYe/QhewixBnjhbWdykLgzbbqt7KY4s5Bw1iHwNGjyeoXj7xRGBA3xN0bieOMLBT3
+ /56oS7OTQMzJ4lxSaURVJepakXnwel7xMhf1w1B+D/i24Jiz4Z/91hE5xNsOgBZNTpo3T4/
+ 976Vqr2H7l3MeFGqfpcqA==
+UI-OutboundReport: notjunk:1;M01:P0:eemUSGEnZJo=;XXNogPUggMrIi2bpiswDZL1eIsN
+ T6E/pvT90ScGwptyKh2MmeHIQ1KJBfQ1aB3fH+VVZ/qQXfIWJKU7Zb4/hFeSGcKM0Sl+uf/61
+ 1aZIVlV3bnPjiCGc4fGIhegyihXFea3K+7WsQ6P4ETyASkcd/Y84ayKp9yadmTAuam9/T8TnI
+ 8lX1uR0DyJiaD+xsQCBxaMvph4FDNN4rqzrhK9/M9CP1Vwut4rAnCcw7c8QydcVFsWD4OYE9q
+ JlFwy2CbeTRfh/x1jQvPaSOws9a84nN+AdGQ8ciy5RHuO8O0OHIcO/HN48qw/1RZRC/LkrQpg
+ BMd+cwYRdUjFJBkJQxa3F8UXwvDIgMlaXdeNl1zXrXhzmFqK5utXO/m4Vv9E4VUH0u0bh0CEf
+ hXqOwH7pxrhijMkjeCYLsxFRAR6eFKVk2uWjcbA9KJU9aixJeqxXtX2kqtzUFv7x5vkEA1Rcv
+ F/18mkjPWCDMuio1Sxblie1ZdeiqQ+vNLt6Wa4I43DgEXTGUq2ZmLfzdlhxHQGLmjI4hkhezB
+ plZPqJCi/3VxnA8rmLJtWPEflOemCKjVOtD51Dw5LnIGS+zEh2z7uZBARXCufBF4ARwtXXy04
+ dksLycPSDooLzlT5C1rjebhkQA2Oc6LklpUz+1yYQUIZWsroG3Agnq1s2wLNNaZcQTh467drq
+ V8NZ5QJp4lzbkPPXr0eWfidqMGCb/q3pQwdw2RY8e652/BLHX1hJ+EYkoZjbbxKMOEe51PbUE
+ gfKz/PT+3D0tOPOsyNmMkSGuVOfPBEaLFvze9k6NuYwT70E5dam9Hxyg67rRPwn0aUmNQjuBo
+ kqfyJDTYua3OyBwrzP/3R7L+/i5wrahrexidE2WgW/9bEp/NuSlSz4g8eWsR8De2SWPHk2oN4
+ WgV0Cv6irbeYcNPuLO2fFmfB+Um10UtedsA3OOZFS9+mybhky3LiuPuBH0JMU8H6SRYRND60R
+ NIKiBowAm4cD/SUR/RnOU26lJ06fAvCm6d1QBLOmgSX6VC4HeZ5C6xgkkgL7OoAAJD/Aqn3Ss
+ bFDj2mnBASTSbrym9cju8snl1IFN7TT438z9m1iPYz1KxHZJU9PfOmvoC5QxgbGquKjuDTf40
+ jP85ShQ0ofiZOq6HMwRPWPXqohpqGg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,38 +107,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nicolas,
-
-Thank you for the patch.
-
-On mer., d=C3=A9c. 11, 2024 at 14:53, Nicolas Belin <nbelin@baylibre.com> w=
-rote:
-
-> Free newbootargs when the concatenation is done and bootargs env
-> is set.
+Am 16=2E Dezember 2024 01:29:04 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>Hi Tom,
 >
-> Fixes: 86f4695b ("image: Fix Android boot image support")
-> Signed-off-by: Nicolas Belin <nbelin@baylibre.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
->  boot/image-android.c | 1 +
->  1 file changed, 1 insertion(+)
+>On Tue, 10 Dec 2024 at 10:09, Tom Rini <trini@konsulko=2Ecom> wrote:
+>>
+>> On Tue, Dec 10, 2024 at 09:16:57AM -0700, Simon Glass wrote:
+>> > Hi Heinrich,
+>> >
+>> > On Tue, 10 Dec 2024 at 01:16, Heinrich Schuchardt <xypron=2Eglpk@gmx=
+=2Ede> wrote:
+>> > >
+>> > > On 09=2E12=2E24 17:27, Simon Glass wrote:
+>> > > > Add some documentation and a test for this new command=2E
+>> > >
+>> > > Shouldn't this be two patches?
+>> >
+>> > Often we put the new command, its docs and tests in the same commit,
+>> > since the question I always ask when looking at a command is, where
+>> > are the docs and tests!
+>> >
+>> > >
+>> > > >
+>> > > > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>> > > > ---
+>> > > >
+>> > > >   doc/usage/cmd/part_find=2Erst | 119 +++++++++++++++++++++++++++=
++++++++++
+>> > > >   doc/usage/index=2Erst         |   1 +
+>> > > >   test/cmd/Makefile           |   1 +
+>> > > >   test/cmd/part_find=2Ec        |  42 +++++++++++++
+>> > > >   4 files changed, 163 insertions(+)
+>> > > >   create mode 100644 doc/usage/cmd/part_find=2Erst
+>> > > >   create mode 100644 test/cmd/part_find=2Ec
+>> > > >
+>> > > > diff --git a/doc/usage/cmd/part_find=2Erst b/doc/usage/cmd/part_f=
+ind=2Erst
+>> > > > new file mode 100644
+>> > > > index 00000000000=2E=2Efd5bd6578d5
+>> > > > --- /dev/null
+>> > > > +++ b/doc/usage/cmd/part_find=2Erst
+>> > > > @@ -0,0 +1,119 @@
+>> > > > +=2E=2E SPDX-License-Identifier: GPL-2=2E0+:
+>> > >
+>> > > This is not a valid SPDX identifier=2E
+>> > > Cf=2E https://spdx=2Eorg/licenses/GPL-2=2E0-or-later=2Ehtml
+>> >
+>> > I have seen this point made a few times, but I'm afraid I still don't
+>> > fully understand it:
+>> >
+>> > The Licenses/README lists the licenses and GPL-2=2E0+ appears in ther=
+e=2E
+>> > In the source tree:
+>> >
+>> > $ git grep GPL-2=2E0+ |wc -l
+>> > 13406
+>> > $ git grep GPL-2=2E0-or-later |wc -l
+>> > 1847
+>> >
+>> > I have to say I much prefer GPL-2=2E0+ as it is easier to remember=2E
+>> >
+>> > But if we are planning to change, could you update checkpatch to thro=
+w
+>> > a warning?
+>>
+>> As I've said before too, GPL-2=2E0+ is deprecated by SPDX and
+>> GPL-2=2E0-or-later is the correct tag=2E But we aren't, sadly, right no=
+w a
+>> best practices example for SPDX anyhow and so it's not a deal breaker t=
+o
+>> use the old tag, just something that should be avoided=2E
 >
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index 57158280b41c6552c82838e21384d925d5f7cde4..362a5c7435a3a8bcf7b674b96=
-e31069a91a892b5 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -322,6 +322,7 @@ int android_image_get_kernel(const void *hdr,
->  	}
->=20=20
->  	env_set("bootargs", newbootargs);
-> +	free(newbootargs);
->=20=20
->  	if (os_data) {
->  		if (image_get_magic(ihdr) =3D=3D IH_MAGIC) {
+>OK, I will try to remember this=2E
 >
-> --=20
-> 2.34.1
+>At minimum, if this is important, Licenses/README should be updated to
+>drop the old license?
+>
+>Heinrich, please update checkpatch to warn about this=2E
+>
+>Regards,
+>Simon
+
+See
+<https://lore=2Ekernel=2Eorg/u-boot/20241215023732=2E68902-1-heinrich=2Esc=
+huchardt@canonical=2Ecom/>
+
