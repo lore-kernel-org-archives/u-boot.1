@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 355B0E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 15:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAD8CE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 15:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94901801CE;
-	Tue, 17 Dec 2024 16:00:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E888801CE;
+	Tue, 17 Dec 2024 16:06:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lXNaSs/a";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cm7IaJ0q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D3AF801FB; Tue, 17 Dec 2024 16:00:08 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id 85BEA8021A; Tue, 17 Dec 2024 16:06:16 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91D5080107
- for <u-boot+nodisclaimer@lists.denx.de>; Tue, 17 Dec 2024 16:00:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF8CA801CE
+ for <u-boot+nodisclaimer@lists.denx.de>; Tue, 17 Dec 2024 16:06:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-7feb6871730so3665363a12.2
- for <u-boot+nodisclaimer@lists.denx.de>; Tue, 17 Dec 2024 07:00:04 -0800 (PST)
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7fc88476a02so4211549a12.2
+ for <u-boot+nodisclaimer@lists.denx.de>; Tue, 17 Dec 2024 07:06:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734447603; x=1735052403; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734447972; x=1735052772; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UuzQxNSXB+e6kHJ1i/MoRFSAqoGh8/3HipPC88Gscyc=;
- b=lXNaSs/a7/joLPidEg4Cqnb7iSTwd4ggZfwHKYSKbkLtiqqGteTaV36lwd/yHh+QOJ
- HMux0XA4CgOhpEtila0HD43ANN+pWBiPkzC3Pxqo0z8Ui9DurCvt4KxECQl4TFL3bOBh
- 7e0jmHu2nUUUo52C+V2rOC2BiXpdFJlTsE4JWo7q1iplS+xw//BwLa0smGnCl0EGSE0g
- OkLLQ6m6ZIWTE7WKpD93HjCUrtC2h4K8iMqVYxW4SqhMc/HXz8UiG0LPwVRYXYxslCof
- T9JOwAJMFku9//mXhNDHihYNthKWEpwYCVuCSbsUZ86h1XcRK2+t2/GYmc0QL03vpjGi
- Rykw==
+ bh=5ebYB6A4YE0jxMKN7RZJ4CTE0DUbkVPulzWkp7ibTho=;
+ b=cm7IaJ0qJ4SaYwDs86Z2nqAQyoK4P4AmuUB0LD1q/wJ2SvJdU0s59VnUesDKwWrNC6
+ OnktcClAiXidXU0GKNw1BlMFF8fMlSI0ZO6p3K6hYPqxMBaOV1hszgjESD4dUQfs+4kW
+ d97q8y2zdUUrKNX+2uF3iczLawugbFmPsyRSEBAKOuAVtUT8gtXr4jZi3xHwZVDA/Ufj
+ Wt4ellB+4gozVN9KHWR2T3Oirrq/zqGOyQaqypIIaLuB+uA5LjKq+9hZrDzK22mJYUfE
+ V9IXHq2YL+mmaX8If3NMG3xcnBFC+nH/Mj8Uf+srVwy6twq6+nAOFXAPwe3qG/uIacbw
+ sN3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734447603; x=1735052403;
+ d=1e100.net; s=20230601; t=1734447972; x=1735052772;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UuzQxNSXB+e6kHJ1i/MoRFSAqoGh8/3HipPC88Gscyc=;
- b=cpxM8h/s1Ic44oKCL9ZpbhD4pwIWCOVqomUTSRV3sEKWEgHvvCtqlHxXKpm1A+tTnf
- ksKFmlYIqiFc2Vsvr66GARKFR+6OkvAjtFJqZBmBfQU35uw4/A40sfgQpfHsEHGvaYiq
- jhfQfqcvO6av6Mpqq1pmwgleT5lPbrhCQ9mfp7gEiX8TSy+N6GxZwA+3jd0nLa5/PBdG
- jUZst+kdfTtujPaYHFdVF1FfrZupAJZg+p/oLvAOs+8X7qMiKXsRDzemR9BaYd06kHRP
- yiTii07q7kWQORAzO8CxE62po4DvA2Z0ewoBC93E8LsyNGbywb7aFD5A3XKb/i8YVPxk
- e9Ag==
+ bh=5ebYB6A4YE0jxMKN7RZJ4CTE0DUbkVPulzWkp7ibTho=;
+ b=gTE7eNJ66DMSxq+KMpj7Ts/49SrVbJhHPifX7hp/xGO/dieFZ/91OXAY29S3eCaxFo
+ vOVzdmbgm5V6Yw2L8sU69YBRXz1amLPY7Gu1GYKpgjJPVTTea45MLQOtyNOALeBRvEJX
+ QlIepKp2LEvOeOPnCaqRJdhb8LiuFxpRviKTq1VcYNTP8M+4LFjUzlmp12A3PncqCIiw
+ LwWjd+SPk7D+9tCryrbdEjWaCH/UwpU4kn7PGHsk+l1EdtDymDEisVjab1EsABuIskqv
+ WnulvvHmCSCxZR+JMQ3mzMiZbiEQ/ffhSKrf9K8Kvp/1gWtScm8YJ9rXC0w1DRsJuetz
+ BZeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWbPg2RGGvgCk+3Zu0m8fABpsE8/L8cwN+iFJzxoW6DN0mrWa8mbmwEr4oAKdOCblB71wDa4Nc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZf8V9YqDOBWReVZYZwDz594/nj0jnsG57pI0ZwHcA6oweDXgW
- zD1UzcPzy7PzPPoAGqfZGPfCeE9QZLf6/mTSTw+t6I8fD7+uFPzwkfu98OQEuDclhg2AA9zA/CQ
- DdEwAi0zF/CsPxA8zZw6AcI4xe6C4OLEhjjoL0A==
-X-Gm-Gg: ASbGncs0lrAEdLxWGwEDPDxG3SYZorL8pdkOKxIl7wJdKMW1veG95yKwOtTdipAqP0d
- YN1UuW3Pue9EfH9CkISgzrhXSzggDdXpyov4EDk/InDg8k97dleJAi1CGrViXyQamSaAmS/4=
-X-Google-Smtp-Source: AGHT+IEs4ZR2SJ8QdK8fHQJNBLxYyFEYPK+7LnfmpNcETkDtpRr8YTYyUyTPJTF9M8789wy9SNZAUTAKEmJH/RS/cCw=
-X-Received: by 2002:a17:90b:4b0f:b0:2ee:bbd8:2b7e with SMTP id
- 98e67ed59e1d1-2f28fb6aba4mr30216792a91.12.1734447602604; Tue, 17 Dec 2024
- 07:00:02 -0800 (PST)
+ AJvYcCWiISoOmwJLplhO/AgfnoeksFQuL0mZIt20Rxb5MXtOhdjo71bnIN3WSxbqxgn/OatWKeu/9wc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy8eoPqIz6JzF1gMWj1v8An4idzamATyaCfLzc+IeYTeM6Qsfbv
+ ot4IA9gXvTCK9DQq0NhL/fxb7iOLEEiLEC7v4aVnVKWRCdQd5dS0FCiISo7i5jx4OF7nynTOLFW
+ GGzFaHKCO4K3jZjflYa8C+yS5KNdK2QrFyMn34w==
+X-Gm-Gg: ASbGncsbQnvUomrNj+cMj42vQ98DW5UG4hF16j/7+1I964BirBij9EZwLrWWSnxYgDH
+ mEnMhQ48rpfHvTBBoSnuLySOFmtmSeBe+bx3HOOD/xiiHZSScCkAzFbopb62PGpw/NUgDaFI=
+X-Google-Smtp-Source: AGHT+IHtUN4b5n2a99LGCAnFV2/VePTvuiZNDXFjLoPd6+O5FysSY90ryT6f3K+m01TdQlcFBgTnx4SGMDwiv5gjyHg=
+X-Received: by 2002:a17:90b:3b52:b0:2ee:ab04:1037 with SMTP id
+ 98e67ed59e1d1-2f28fd7040amr27620819a91.17.1734447972002; Tue, 17 Dec 2024
+ 07:06:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20241217083212.70330-1-philippe.reynes@softathome.com>
- <20241217083212.70330-7-philippe.reynes@softathome.com>
-In-Reply-To: <20241217083212.70330-7-philippe.reynes@softathome.com>
+ <20241217083212.70330-8-philippe.reynes@softathome.com>
+In-Reply-To: <20241217083212.70330-8-philippe.reynes@softathome.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 17 Dec 2024 09:59:49 -0500
-Message-ID: <CAEfUkU+HdnKY9WQ0J0EgEqjtooFDhnPT0wGBu6=svxaEPzX-xw@mail.gmail.com>
-Subject: Re: [PATCH v5 6/9] test: lib: add test for sha256_hmac
+Date: Tue, 17 Dec 2024 10:06:00 -0500
+Message-ID: <CAEfUkUJdk2qS8VWp8GfghJyM6cLJDsr2mCyoLydAAh3Ziod5zw@mail.gmail.com>
+Subject: Re: [PATCH v5 7/9] lib: mbedtls: sha256: add support of key derivation
 To: Philippe Reynes <philippe.reynes@softathome.com>
 Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
  u-boot+nodisclaimer@lists.denx.de
@@ -97,335 +97,95 @@ Hi Philippe,
 On Tue, 17 Dec 2024 at 03:32, Philippe Reynes <
 philippe.reynes@softathome.com> wrote:
 
-> Adds a test for the function sha256_hmac
+> Adds the support of key derivation using the scheme hkdf.
+> This scheme is defined in rfc5869.
 >
 > Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
 > ---
->  test/lib/Makefile           |   1 +
->  test/lib/test_sha256_hmac.c | 294 ++++++++++++++++++++++++++++++++++++
->  2 files changed, 295 insertions(+)
->  create mode 100644 test/lib/test_sha256_hmac.c
+>  include/u-boot/sha256.h | 20 ++++++++++++++++++++
+>  lib/mbedtls/sha256.c    | 23 +++++++++++++++++++++++
+>  2 files changed, 43 insertions(+)
 >
-> diff --git a/test/lib/Makefile b/test/lib/Makefile
-> index f516d001747..4c0abcba81a 100644
-> --- a/test/lib/Makefile
-> +++ b/test/lib/Makefile
-> @@ -24,6 +24,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
->  obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
->  obj-$(CONFIG_UT_LIB_RSA) += rsa.o
->  obj-$(CONFIG_AES) += test_aes.o
-> +obj-$(CONFIG_SHA256) += test_sha256_hmac.o
->  obj-$(CONFIG_GETOPT) += getopt.o
->  obj-$(CONFIG_CRC8) += test_crc8.o
->  obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
-> diff --git a/test/lib/test_sha256_hmac.c b/test/lib/test_sha256_hmac.c
-> new file mode 100644
-> index 00000000000..ca072f97226
-> --- /dev/null
-> +++ b/test/lib/test_sha256_hmac.c
-> @@ -0,0 +1,294 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
-> + *
-> + * Unit tests for sha256_hmac functions
-> + */
-> +
-> +#include <command.h>
-> +#include <test/lib.h>
-> +#include <test/test.h>
-> +#include <test/ut.h>
-> +#include <u-boot/sha256.h>
-> +
-> +struct test_sha256_hmac_s {
-> +       unsigned char *key;
-> +       int keylen;
-> +       unsigned char *input;
-> +       int ilen;
-> +       unsigned char *expected;
-> +       int elen;
-> +};
+> diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+> index 99cf78e204c..d7a3403270b 100644
+> --- a/include/u-boot/sha256.h
+> +++ b/include/u-boot/sha256.h
+> @@ -1,6 +1,8 @@
+>  #ifndef _SHA256_H
+>  #define _SHA256_H
 >
-
-Should be 'const unsigned char *' for all test data.
-
-
-> +
-> +/*
-> + * data comes from:
-> + * https://datatracker.ietf.org/doc/html/rfc4231
-> + */
-> +static unsigned char key_test1[] = {
-> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
-> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
-> +
-> +static unsigned char input_test1[] = {
-> +       0x48, 0x69, 0x20, 0x54, 0x68, 0x65, 0x72, 0x65 };
-> +
-> +static unsigned char expected_test1[] = {
-> +       0xb0, 0x34, 0x4c, 0x61, 0xd8, 0xdb, 0x38, 0x53,
-> +       0x5c, 0xa8, 0xaf, 0xce, 0xaf, 0x0b, 0xf1, 0x2b,
-> +       0x88, 0x1d, 0xc2, 0x00, 0xc9, 0x83, 0x3d, 0xa7,
-> +       0x26, 0xe9, 0x37, 0x6c, 0x2e, 0x32, 0xcf, 0xf7 };
-> +
-> +static unsigned char key_test2[] = { 0x4a, 0x65, 0x66, 0x65 };
-> +
-> +static unsigned char input_test2[] = {
-> +       0x77, 0x68, 0x61, 0x74, 0x20, 0x64, 0x6f, 0x20,
-> +       0x79, 0x61, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20,
-> +       0x66, 0x6f, 0x72, 0x20, 0x6e, 0x6f, 0x74, 0x68,
-> +       0x69, 0x6e, 0x67, 0x3f };
-> +
-> +static unsigned char expected_test2[] = {
-> +       0x5b, 0xdc, 0xc1, 0x46, 0xbf, 0x60, 0x75, 0x4e,
-> +       0x6a, 0x04, 0x24, 0x26, 0x08, 0x95, 0x75, 0xc7,
-> +       0x5a, 0x00, 0x3f, 0x08, 0x9d, 0x27, 0x39, 0x83,
-> +       0x9d, 0xec, 0x58, 0xb9, 0x64, 0xec, 0x38, 0x43 };
-> +
-> +static unsigned char key_test3[] = {
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa };
-> +
-> +static unsigned char input_test3[] = {
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
-> +       0xdd, 0xdd };
-> +
-> +static unsigned char expected_test3[] = {
-> +       0x77, 0x3e, 0xa9, 0x1e, 0x36, 0x80, 0x0e, 0x46,
-> +       0x85, 0x4d, 0xb8, 0xeb, 0xd0, 0x91, 0x81, 0xa7,
-> +       0x29, 0x59, 0x09, 0x8b, 0x3e, 0xf8, 0xc1, 0x22,
-> +       0xd9, 0x63, 0x55, 0x14, 0xce, 0xd5, 0x65, 0xfe };
-> +
-> +static unsigned char key_test4[] = {
-> +       0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
-> +       0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
-> +       0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
-> +       0x19,
-> +};
-> +
-> +static unsigned char input_test4[] = {
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
-> +       0xcd, 0xcd,
-> +};
-> +
-> +static unsigned char expected_test4[] = {
-> +       0x82, 0x55, 0x8a, 0x38, 0x9a, 0x44, 0x3c, 0x0e,
-> +       0xa4, 0xcc, 0x81, 0x98, 0x99, 0xf2, 0x08, 0x3a,
-> +       0x85, 0xf0, 0xfa, 0xa3, 0xe5, 0x78, 0xf8, 0x07,
-> +       0x7a, 0x2e, 0x3f, 0xf4, 0x67, 0x29, 0x66, 0x5b,
-> +};
-> +
-> +static unsigned char key_test5[] = {
-> +       0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
-> +       0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
-> +       0x0c, 0x0c, 0x0c, 0x0c,
-> +};
-> +
-> +static unsigned char input_test5[] = {
-> +       0x54, 0x65, 0x73, 0x74, 0x20, 0x57, 0x69, 0x74,
-> +       0x68, 0x20, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61,
-> +       0x74, 0x69, 0x6f, 0x6e,
-> +};
-> +
-> +static unsigned char expected_test5[] = {
-> +       0xa3, 0xb6, 0x16, 0x74, 0x73, 0x10, 0x0e, 0xe0,
-> +       0x6e, 0x0c, 0x79, 0x6c, 0x29, 0x55, 0x55, 0x2b,
-> +};
-> +
-> +static unsigned char key_test6[] = {
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa };
-> +
-> +static unsigned char input_test6[] = {
-> +       0x54, 0x65, 0x73, 0x74, 0x20, 0x55, 0x73, 0x69,
-> +       0x6e, 0x67, 0x20, 0x4c, 0x61, 0x72, 0x67, 0x65,
-> +       0x72, 0x20, 0x54, 0x68, 0x61, 0x6e, 0x20, 0x42,
-> +       0x6c, 0x6f, 0x63, 0x6b, 0x2d, 0x53, 0x69, 0x7a,
-> +       0x65, 0x20, 0x4b, 0x65, 0x79, 0x20, 0x2d, 0x20,
-> +       0x48, 0x61, 0x73, 0x68, 0x20, 0x4b, 0x65, 0x79,
-> +       0x20, 0x46, 0x69, 0x72, 0x73, 0x74 };
-> +
-> +static unsigned char expected_test6[] = {
-> +       0x60, 0xe4, 0x31, 0x59, 0x1e, 0xe0, 0xb6, 0x7f,
-> +       0x0d, 0x8a, 0x26, 0xaa, 0xcb, 0xf5, 0xb7, 0x7f,
-> +       0x8e, 0x0b, 0xc6, 0x21, 0x37, 0x28, 0xc5, 0x14,
-> +       0x05, 0x46, 0x04, 0x0f, 0x0e, 0xe3, 0x7f, 0x54 };
-> +
-> +static unsigned char key_test7[] = {
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
-> +       0xaa, 0xaa, 0xaa,
-> +};
-> +
-> +static unsigned char input_test7[] = {
-> +       0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20,
-> +       0x61, 0x20, 0x74, 0x65, 0x73, 0x74, 0x20, 0x75,
-> +       0x73, 0x69, 0x6e, 0x67, 0x20, 0x61, 0x20, 0x6c,
-> +       0x61, 0x72, 0x67, 0x65, 0x72, 0x20, 0x74, 0x68,
-> +       0x61, 0x6e, 0x20, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
-> +       0x2d, 0x73, 0x69, 0x7a, 0x65, 0x20, 0x6b, 0x65,
-> +       0x79, 0x20, 0x61, 0x6e, 0x64, 0x20, 0x61, 0x20,
-> +       0x6c, 0x61, 0x72, 0x67, 0x65, 0x72, 0x20, 0x74,
-> +       0x68, 0x61, 0x6e, 0x20, 0x62, 0x6c, 0x6f, 0x63,
-> +       0x6b, 0x2d, 0x73, 0x69, 0x7a, 0x65, 0x20, 0x64,
-> +       0x61, 0x74, 0x61, 0x2e, 0x20, 0x54, 0x68, 0x65,
-> +       0x20, 0x6b, 0x65, 0x79, 0x20, 0x6e, 0x65, 0x65,
-> +       0x64, 0x73, 0x20, 0x74, 0x6f, 0x20, 0x62, 0x65,
-> +       0x20, 0x68, 0x61, 0x73, 0x68, 0x65, 0x64, 0x20,
-> +       0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x20, 0x62,
-> +       0x65, 0x69, 0x6e, 0x67, 0x20, 0x75, 0x73, 0x65,
-> +       0x64, 0x20, 0x62, 0x79, 0x20, 0x74, 0x68, 0x65,
-> +       0x20, 0x48, 0x4d, 0x41, 0x43, 0x20, 0x61, 0x6c,
-> +       0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x2e,
-> +};
-> +
-> +static unsigned char expected_test7[] = {
-> +       0x9b, 0x09, 0xff, 0xa7, 0x1b, 0x94, 0x2f, 0xcb,
-> +       0x27, 0x63, 0x5f, 0xbc, 0xd5, 0xb0, 0xe9, 0x44,
-> +       0xbf, 0xdc, 0x63, 0x64, 0x4f, 0x07, 0x13, 0x93,
-> +       0x8a, 0x7f, 0x51, 0x53, 0x5c, 0x3a, 0x35, 0xe2,
-> +};
-> +
-> +static struct test_sha256_hmac_s test_sha256_hmac[] = {
-> +       {
-> +               .key = key_test1,
-> +               .keylen = sizeof(key_test1),
-> +               .input = input_test1,
-> +               .ilen = sizeof(input_test1),
-> +               .expected = expected_test1,
-> +               .elen = sizeof(expected_test1),
-> +       },
-> +       {
-> +               .key = key_test2,
-> +               .keylen = sizeof(key_test2),
-> +               .input = input_test2,
-> +               .ilen = sizeof(input_test2),
-> +               .expected = expected_test2,
-> +               .elen = sizeof(expected_test2),
-> +       },
-> +       {
-> +               .key = key_test3,
-> +               .keylen = sizeof(key_test3),
-> +               .input = input_test3,
-> +               .ilen = sizeof(input_test3),
-> +               .expected = expected_test3,
-> +               .elen = sizeof(expected_test3),
-> +       },
-> +       {
-> +               .key = key_test4,
-> +               .keylen = sizeof(key_test4),
-> +               .input = input_test4,
-> +               .ilen = sizeof(input_test4),
-> +               .expected = expected_test4,
-> +               .elen = sizeof(expected_test4),
-> +       },
-> +       {
-> +               .key = key_test5,
-> +               .keylen = sizeof(key_test5),
-> +               .input = input_test5,
-> +               .ilen = sizeof(input_test5),
-> +               .expected = expected_test5,
-> +               .elen = sizeof(expected_test5),
-> +       },
-> +       {
-> +               .key = key_test6,
-> +               .keylen = sizeof(key_test6),
-> +               .input = input_test6,
-> +               .ilen = sizeof(input_test6),
-> +               .expected = expected_test6,
-> +               .elen = sizeof(expected_test6),
-> +       },
-> +       {
-> +               .key = key_test7,
-> +               .keylen = sizeof(key_test7),
-> +               .input = input_test7,
-> +               .ilen = sizeof(input_test7),
-> +               .expected = expected_test7,
-> +               .elen = sizeof(expected_test7),
-> +       },
-> +};
-> +
-> +static int _lib_test_sha256_hmac_run(struct unit_test_state *uts,
-> +                                    unsigned char *key, int keylen,
-> +                                    unsigned char *input, int ilen,
-> +                                    unsigned char *expected, int elen)
-> +{
-> +       unsigned char output[SHA256_SUM_LEN];
-> +       int ret;
-> +
-> +       ut_assert(elen <= sizeof(output));
-> +       ret = sha256_hmac(key, keylen, input, ilen, output);
-> +       ut_assert(!ret);
-> +       ut_asserteq_mem(expected, output, elen);
-> +
-> +       return 0;
+> +#include <linux/compiler_attributes.h>
+> +#include <linux/errno.h>
+>  #include <linux/kconfig.h>
+>  #include <linux/types.h>
+>
+> @@ -49,4 +51,22 @@ int sha256_hmac(const unsigned char *key, int keylen,
+>                 const unsigned char *input, unsigned int ilen,
+>                 unsigned char *output);
+>
+> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
+> +int sha256_hkdf(const unsigned char *salt, int saltlen,
+> +               const unsigned char *ikm, int ikmlen,
+> +               const unsigned char *info, int infolen,
+> +               unsigned char *output, int outputlen);
+> +#else
+> +static inline int sha256_hkdf(const unsigned char __always_unused *salt,
+> +                             int __always_unused saltlen,
+> +                             const unsigned char __always_unused *ikm,
+> +                             int __always_unused ikmlen,
+> +                             const unsigned char __always_unused *info,
+> +                             int __always_unused infolen,
+> +                             unsigned char __always_unused *output,
+> +                             int __always_unused outputlen) {
+> +       return -EOPNOTSUPP;
 > +}
+> +#endif
 > +
-> +static int lib_test_sha256_hmac_run(struct unit_test_state *uts,
-> +                                   struct test_sha256_hmac_s *test)
+>  #endif /* _SHA256_H */
+> diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+> index 7d456a82017..59edcb517df 100644
+> --- a/lib/mbedtls/sha256.c
+> +++ b/lib/mbedtls/sha256.c
+> @@ -12,6 +12,10 @@
+>
+>  #include <mbedtls/md.h>
+>
+> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
+> +#include <mbedtls/hkdf.h>
+> +#endif
+> +
+>  const u8 sha256_der_prefix[SHA256_DER_LEN] = {
+>         0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
+>         0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
+> @@ -48,3 +52,22 @@ int sha256_hmac(const unsigned char *key, int keylen,
+>
+>         return mbedtls_md_hmac(md, key, keylen, input, ilen, output);
+>  }
+> +
+> +#if CONFIG_IS_ENABLED(HKDF_MBEDTLS)
+> +int sha256_hkdf(const unsigned char *salt, int saltlen,
+> +               const unsigned char *ikm, int ikmlen,
+> +               const unsigned char *info, int infolen,
+> +               unsigned char *output, int outputlen)
 > +{
-> +       return _lib_test_sha256_hmac_run(uts, test->key, test->keylen,
-> +                                        test->input, test->ilen,
-> +                                        test->expected, test->elen);
+> +       const mbedtls_md_info_t *md;
+> +
+> +       md = mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
+> +       if (!md)
+> +               return MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE;
+> +
+> +       return mbedtls_hkdf(md, salt, saltlen,
+> +                           ikm, ikmlen,
+> +                           info, infolen,
+> +                           output, outputlen);
 > +}
-> +
-> +static int lib_test_sha256_hmac(struct unit_test_state *uts)
-> +{
-> +       int i, ret = 0;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(test_sha256_hmac); i++) {
-> +               ret = lib_test_sha256_hmac_run(uts, &test_sha256_hmac[i]);
-> +               if (ret)
-> +                       return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +LIB_TEST(lib_test_sha256_hmac, 0);
+> +#endif
 > --
 > 2.25.1
 >
 >
+Sounds good to me.
+Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
+
 Regards,
 Raymond
