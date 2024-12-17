@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A751E7716A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 07:09:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D55E7716A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 07:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09343801CE;
-	Tue, 17 Dec 2024 08:09:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9840B801CE;
+	Tue, 17 Dec 2024 08:37:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eO9E8iKu";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KKJNFmdl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C6E4801CF; Tue, 17 Dec 2024 08:09:50 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7D7DA801CF; Tue, 17 Dec 2024 08:37:56 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CCE4801A0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 08:09:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AC32801A0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 08:37:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6eff4f0d627so43991657b3.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 23:09:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734419386; x=1735024186; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sj/IiKFq0tpuob/5JMgl/yAneQx5zDE9wYKq2q/v5Uc=;
- b=eO9E8iKu8HQXtQakunKURa0UxZrutBu1adwPyA00od751FMOOfWOh9y2ibXXPlVEa2
- GtY/g0i7OMMDyAWtGhv/GfGLhlnKTTPac6yqZVTFV2v/dfTR7eiPEp3xIMo/cNMFcZzS
- X4/xXGSnOKjRkUUNMPulYxHYYbV9XiPwQqyO4D2GFXwRkk6N5Ct7x1JdBBAYAXO14Y+A
- JLuUxfalIhOBQkaEuOCmG/DrfmrZLNwAnf01jFtAinqxUIUUib1CgU5ruFgns5oKGbJ5
- qC3rG6mG+49ZRPEjAUwNXeJNB0SlidHd0cn7xTvKDmwcM3Z3zkqT8ctv3QKvfNOwo7Fe
- u9Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734419386; x=1735024186;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sj/IiKFq0tpuob/5JMgl/yAneQx5zDE9wYKq2q/v5Uc=;
- b=Y+WFIiR/q44AnmUZLEwrm3Su30aKoWA40oUex2EY4Q0DgxVdi6uMa3curSN4xpSUOe
- jzuULHRcpgeVW/YMtWT3MqGWszszFfn8gZ4QifUUWDJz7KUWR2JZgruS5hL8aSUkpHcu
- 6Ob6A/R/3w/i9H2CyFnLiwBg3jvBz1Dq6hu10v+MQB0zcFqcDEGMaMes2y6+F4M0VE6n
- h87q0fyt8iuCtUKipmYXzDAS9TZvEfrDglCvD/J1VmEX2WnGxgMOcbuAwYbZjCkxYZXZ
- TBPYKn1MiAlc7GwQVVixvT+C9IAJib259vEx/vAIdlHe41BidMXX4MKzR6Eed3sXD1M9
- MtJQ==
-X-Gm-Message-State: AOJu0YxXFMuOo+B9w7XV+T7Etu79tCtbYOGNKdSWIJfNlUzWQB1bx8q6
- e/erhYHQZ4sQmFt8tGEnr6BA/aG07hDw/LZ7je2X2ZEGyjNs4+idJtH4TMbOSGhNqqIgP5PZoYn
- Dc5uU+QStik2TxtWGUWpih8nGT/jg2Djhyy79+Q==
-X-Gm-Gg: ASbGncu6eu1pTk8p+5Qx3P82Npfy6jJhFnVfQwU/cVwMwbSnSD1SfBuO5iKyxDHP42b
- HkHK8s/mOqNFNEf8CMRDzPDBYobenn9oiBv6Rjg==
-X-Google-Smtp-Source: AGHT+IF4QrgdhQNiKeqOb8SLGsqJFfqhVetNMcDeo4bucFmTeUf0mMBuoPY8A6EpCVKq5YuRK6RQYtC/JiCHoA65kCc=
-X-Received: by 2002:a05:690c:5685:b0:6ef:6cdd:57e3 with SMTP id
- 00721157ae682-6f2bd6159e9mr9102927b3.8.1734419386259; Mon, 16 Dec 2024
- 23:09:46 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1734421062; x=1735025862; i=xypron.glpk@gmx.de;
+ bh=lEchGfzBMzDBIX+Gdq33AUWgbGmtTML7R2ONHQW1XRA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=KKJNFmdln1N3Ghm5NUQ/klNFa/hiDpLS7BprSft/gRkUrIYrtCPULPMLlxX+FQxC
+ ScUEMh7FtnhdOut88H6NWKxtIyPM/k4blAyl43smJ4kjpVE/Dcn3TkJP0JvoGr64k
+ UEVlwSbdvGHUgaE2oowfZQLL/VmIL1bjQlpW+4UzM+1pP40mxUyxM0m17HYqC0DH3
+ 2KOUyWgbwCyFcja+g7YXYRgYvBhjEFw5liD63G72P4rWps5NkSc8U/wNDtvtPaKA7
+ fJEItLnHemWiWcvUyHFPT2FdP/zjZtxGmGxVCRmJSlifr1S2GCJTe98NyaNhFNG40
+ sCBEFIe2gberuMyvNA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N2E1M-1taGgC1bME-00ybnL; Tue, 17
+ Dec 2024 08:37:42 +0100
+Date: Tue, 17 Dec 2024 08:37:42 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+CC: michal.simek@amd.com, trini@konsulko.com, sjg@chromium.org,
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, mkorpershoek@baylibre.com,
+ akashi.tkhro@gmail.com, francis.laniel@amarulasolutions.com,
+ ddrokosov@salutedevices.com, git@amd.com
+Subject: Re: [PATCH v4 2/2] doc: man-page for optee commands
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241217035914.1297469-3-venkatesh.abbarapu@amd.com>
+References: <20241217035914.1297469-1-venkatesh.abbarapu@amd.com>
+ <20241217035914.1297469-3-venkatesh.abbarapu@amd.com>
+Message-ID: <997D5EA1-DAB6-4C5D-85CB-3B10E17CACD3@gmx.de>
 MIME-Version: 1.0
-References: <20241211135418.563803-1-sjg@chromium.org>
- <CAC_iWjLXtTxbbcjf=dG=OpnNMh69HW69xpg4DJ4Es4TLjikgXg@mail.gmail.com>
- <CAFLszTghBQ6pMi4mrBwnWONwzS=dLC8k+VV+9gn75J8bVn=6vQ@mail.gmail.com>
- <CAC_iWjJVjYiywhCbcLDpZuriKGobxxdPYS2LQYod00JadHd1fw@mail.gmail.com>
- <CAFLszTiU0WXytXAWrp763dY9XZSfuk8GONhnoOFZCbZzpoqgNQ@mail.gmail.com>
- <CAFLszThNvbxZWOmLky0jpFPeUgFhAaFLVkMVVk9UCCP_PFSTTA@mail.gmail.com>
-In-Reply-To: <CAFLszThNvbxZWOmLky0jpFPeUgFhAaFLVkMVVk9UCCP_PFSTTA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 17 Dec 2024 09:09:10 +0200
-Message-ID: <CAC_iWjKpMY11rXakk8xqEGk=UNn5bAAjqtBq-CAmVVOBBUrWRg@mail.gmail.com>
-Subject: Re: [PATCH v5 00/23] efi: Tidy up confusion between pointers and
- addresses
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Janne Grunau <j@jannau.net>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Matthew Garrett <mgarrett@aurora.tech>, Matthias Brugger <mbrugger@suse.com>, 
- Moritz Fischer <moritzf@google.com>, Patrick Wildt <pwildt@google.com>,
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, 
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Hgff5tdKPBao1KV8gzQn5of0N3fuGmRsq8Cy8vqD3dPuMOYSnkg
+ k2AAu7S/DMsA7w7u6diUI44P4Z+EAmU4c1CkiuW2PtBYLsiWQncN0DCf27u83kokfWlSWq6
+ ARl6AK7ORbv+bifGMPebW1R/7pnSsJBxN7TNh8BSsDA1pcAp6CmR2shvibXx1PoA0ndxT8q
+ iaUpPiNkeELN8nN1W/wrA==
+UI-OutboundReport: notjunk:1;M01:P0:vEZlRDy3zoA=;OE/3zzv5tQf8v1aaYV5lG7qS//F
+ TTo8w44/eQi+2RSBqlMenBLiIassIi2AKoyUaSOzT5dGkB7egOSek4AVXLHD9KD0Pjw2Lvx3j
+ cdiIPzQOtW83pytbBTy3C2mVYKOE1PA8U390Dv948xBf2tBVhoxtq7EmB2UTcBW7zs23bSJte
+ AALNqBZlHyk4EwR8skTAZFnNA9Rzs6bWRFuPiTNsXxIGGw2yrfqRNPjbwbIwy/ypYYxcqjtsu
+ ajYD7jPmOyh6FhgLO53L+pXNr8rh3c94SUpMkTYMzWjOAEtYQnydEDFjhYeEwe1dZtIG42QjV
+ SufxzrP0MfjoHl2X+viDkTM5rt9RjPcaLszIpY1lPFlKifuR3R4bNWGgLuYUrT3UprtyYxSvS
+ I7vzvpZkOZF4brkRJ1M1osdE3wA725s1um+IGrrBvR/JkK0eQbBlOOEE8sWcTlkd3EO4Xf1Wf
+ xL4TRIXecXcpBli89t9rGRG7ANt2sDRmAjJCtRCpEB4fSozUls3wHEf+wM7UzP5BXRB8cdg8V
+ gEn9mjp+1u+oxaDhPrA3Os3nmfILMbwFSdzw6nTUdlNBkPwGVtQGS2EeCx+77h9U714brqqdf
+ AX0rLd8Ln2JShpNoi0QlRmiN6PjEQdE3KRS38x9ldRU0P51HkXbwmc4y/NxQ8P1Kt0yOZddaW
+ m3art+PHMNgt5REB8wj4z3SNNpTCi6u57qCK2KgECoxESIHpH03UdQ6WczZyf/Ah+w3eC3kY2
+ TfRDW3QXF2kKVTiF61G6AZj0DzJxWLa0ggGKIxUFpExPBALwokmPS1VheNvQEFVX9jU1mOFUG
+ yZ2t9cx5h8CliPDF1mJTbqew1fTcAPJBJ8Kmfhd2UNLZGTPF4cYfBSNa20Sp1tZ290pC8qvzS
+ kJiQE3w5ZOBHnJTYBB8S4JLAJOyxbU+YimbR/vVk8qL1uJobXp1nGRxy8zflNaLR0sB/bpu8S
+ Q69NLwBDhqAGFG6zAG3dcN5066KoTvAojPN0jbCJr9y3AdKx+shbVo4huMgaJ00tWTlk+crMx
+ D+Aw9KEykjSX6yAKHkUj3f8Z4xRgcJ4mCe2jyoHxjTmrApIL8lnerRBviY2rcMg9VT4cWLO4U
+ IlYF9Qy/hmUB16b9BYezUKXu9Xgd1f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,236 +97,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Am 17=2E Dezember 2024 04:59:14 MEZ schrieb Venkatesh Yadav Abbarapu <venka=
+tesh=2Eabbarapu@amd=2Ecom>:
+>Provide a man-page for the optee command=2E
+>
+>Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh=2Eabbarapu@amd=2Ecom>
+>---
+> doc/usage/cmd/optee=2Erst | 66 +++++++++++++++++++++++++++++++++++++++++
+> doc/usage/index=2Erst     |  1 +
+> 2 files changed, 67 insertions(+)
+> create mode 100644 doc/usage/cmd/optee=2Erst
+>
+>diff --git a/doc/usage/cmd/optee=2Erst b/doc/usage/cmd/optee=2Erst
+>new file mode 100644
+>index 00000000000=2E=2E53e36853742
+>--- /dev/null
+>+++ b/doc/usage/cmd/optee=2Erst
+>@@ -0,0 +1,66 @@
+>+=2E=2E SPDX-License-Identifier: GPL-2=2E0+
 
-On Mon, 16 Dec 2024 at 17:14, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi again Ilias,
->
-> On Fri, 13 Dec 2024 at 07:02, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Thu, 12 Dec 2024 at 08:51, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > On Thu, 12 Dec 2024 at 15:45, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Wed, 11 Dec 2024 at 23:40, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > >  Hi Simon,
-> > > > >
-> > > > > On Wed, 11 Dec 2024 at 15:54, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > The EFI-loader implementation converts things back and forth between
-> > > > > > addresses and pointers, with not much consistency in how this is done.
-> > > > > >
-> > > > > > Within most of U-Boot a pointer is a void * and an address is a ulong
-> > > > > >
-> > > > > > This convention is very helpful, since it is obvious in common code as
-> > > > > > to whether you need to call map_sysmem() and friends, or not.
-> > > > > >
-> > > > > > As part of cleaning up the EFI memory-management, I found it almost
-> > > > > > impossible to know in some cases whether something is an address or a
-> > > > > > pointer. I decided to give up on that and come back to it when this is
-> > > > > > resolved.
-> > > > > >
-> > > > > > This series starts applying the normal ulong/void * convention to the
-> > > > > > EFI_loader code, so making things easier to follow. For now, u64 is
-> > > > > > often used instead of ulong, but the effect is the same.
-> > > > > >
-> > > > > > The main changes are:
-> > > > > > - Rather than using the external struct efi_mem_desc data-structure for
-> > > > > >   internal bookkeeping, create a new one, so it can have different
-> > > > > >   semantics
-> > > > > > - Within efi_memory.c addresses are used, rather than addresses
-> > > > > >   masquerading as pointers. The conversions are done in efi_boottime
-> > > > > >
-> > > > > > Unforunately my foray into attempting to use enum for the memory type
-> > > > > > failed. The problem is not just that the external interface cannot use
-> > > > > > an enum. In fact the enum in the spec is really just confusing, since
-> > > > > > values not mentioned in the enum are valid. While we could handle this
-> > > > > > by declaring a few more values in enum efi_memory_type, it doesn't seem
-> > > > > > worth it. For example, if we declare 0x6fffffff and -1 as valid values,
-> > > > > > we get the correct range, but then we need to be careful about
-> > > > > > conversion in efi_boottime. If we declare 0xffffffff as valid, then the
-> > > > > > enum ends up being 64-bits wide! Yes, that would work, I suppose it
-> > > > > > wouldn't matter, but at that point I believe using an enum is actually
-> > > > > > more confusing than not. It also made passing SCT tricky, since invalid
-> > > > > > values are passed in...
-> > > > > >
-> > > > >
-> > > > > So my general feedback on this is
-> > > > > - Split it into a number of reviewable patches
-> > > > > - Send the typos & doc changes in one patchset that we can easily pick
-> > > > > up since it's mostly reviewed
-> > > > > - Drop the two patches that add 'sjg' stuff that are removed later
-> > > > > - Investigate why there's a reserved member in efi_mem_desc -- which I
-> > > > > think is a bug and send the fix as a single patch
-> > > > > - Drop the renames and duplication of efi_mem_desc with priv_mem_desc.
-> > > > > I don't see any point in duplication that, keeping the memory
-> > > > > descriptors in a list as it currently works is fine
-> > > >
-> > > > All the other points are OK, just more work. However, this one defeats
-> > > > the purpose of the series. As you can see, I am lining up the EFI
-> > > > internal-table more with how U-Boot and lmb do things, with addresses.
-> > >
-> > > I think Heinrich and I have repeated this more than once.
-> >
-> > As an aside, I notice that you say this every now and then but I don't
-> > think you realise how it comes across to the other person.
-> >
-> > > EFI works
-> > > with physical addresses, just like sandbox needs to map_sysmem. It's
-> > > way easier for us to review and look at code exactly how the spec
-> > > describes it.
-> >
-> > So it looks like this series is not going to fly, because you *want*
-> > the internal EFI tables to hold pointers-as-u64, rather than
-> > addresses. You don't want to do that translation at the EFI boundary.
-> > Is that right?
->
-> Just let me know what you want to do here. From what you said, this is
-> a NAK, but if I have interpreted this incorrectly, and you are OK with
-> the concept and just want some code changes, PLMK.
+The correct SPDX identifier is GPL-2=2E0-or-later=2E
 
-It's all summarized here
-https://lore.kernel.org/u-boot/CAFLszThNvbxZWOmLky0jpFPeUgFhAaFLVkMVVk9UCCP_PFSTTA@mail.gmail.com/T/#m5ce9e8591ee5889134b47983731113e66b624ef9
+Maybe that can be fixed when merging=2E
 
-Thanks
-/Ilias
->
-> >
-> > Also the reason for duplicating that in the commit
-> > > message is
-> > > - the name is confusing, which reallys int
-> >
-> > I am unsure what you are referring to here.
-> >
-> > > - The 'reserved' filed isn't needed, which is probably just a generic
-> > > bug in the EFI struct  definition
-> >
-> > I was surprised to see that I wrote that code. My guess is that it is
-> > there to ensure the alignment is correct. The first field is u32 and
-> > the third is u64 so perhaps I was concerned that the compiler would
-> > not naturally align the u64? It was over 9 years ago and I don't
-> > remember.
-> >
-> > struct efi_mem_desc {
-> >    u32 type;
-> >    u32 reserved;
-> >    efi_physical_addr_t physical_start;
-> >    efi_virtual_addr_t virtual_start;
-> >    u64 num_pages;
-> >    u64 attribute;
-> > };
-> >
-> > The spec says "Unless otherwise specified all data types are naturally
-> > aligned. Structures are aligned on
-> > boundaries equal to the largest internal datum of the structure and
-> > internal data are implicitly padded to
-> > achieve natural alignment."
-> >
-> > I'm pretty sure any compiler that we use will handle this, so you are
-> > right, we don't need the field.
-> >
-> > Regards,
-> > Simon
-> >
-> > >
-> > >
-> > > Thanks
-> > > /Ilias
-> > > > I cannot use both addresses and pointers in the same struct...I
-> > > > initially did that but it was just far too confusing.
-> > > >
-> > > > > - Send the map_to_sysmem() places you need in a different patchset
-> > > > > with an explanation of *why* this is working currently (or not
-> > > > > working)
-> > > > >
-> > > > > Hope this helps
-> > > > > /Ilias
-> > > > >
-> > > > > > Link: https://lore.kernel.org/u-boot/20240725135629.3505072-1-sjg@chromium.org/
-> > > > > >
-> > > > > > Changes in v5:
-> > > > > > - Drop the enum / mem_type patch as it is not needed
-> > > > > > - Drop the patch to remove extra brackets in efi_mem_carve_out()
-> > > > > >
-> > > > > > Changes in v4:
-> > > > > > - Add new patch to show the address for pool allocations
-> > > > > > - Combine the various pointer-to-address patches into one
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > - Adjust comments
-> > > > > > - Show the returned address rather than the pointer
-> > > > > > - Put the header-file in its own section
-> > > > > > - Add comment to struct efi_device_path_memory
-> > > > > > - Use a pointer for the values in struct efi_device_path_memory
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > - Fix missing @
-> > > > > > - Note that this holds pointers, not addresses
-> > > > > > - Add a new patch with comments where incorrect addresses are used
-> > > > > > - Use EFI_PRINT() instead of log_debug()
-> > > > > > - Rebase on early patch
-> > > > > > - Add new patch to add the EFI-loader API documentation
-> > > > > > - Add new patch to use a separate stuct for memory nodes
-> > > > > > - Drop patch 'Convert efi_get_memory_map() to return pointers'
-> > > > > > - Drop patch 'efi_loader: Make more use of ulong'
-> > > > > > - Significantly expand and redirect the series
-> > > > > >
-> > > > > > Simon Glass (23):
-> > > > > >   efi: Define fields in struct efi_mem_desc
-> > > > > >   efi_loader: Fix typos in enum efi_allocate_type
-> > > > > >   efi_loader: Add comments where incorrect addresses are used
-> > > > > >   efi_loader: Show the resulting memory address from an alloc
-> > > > > >   efi_loader: Update startimage_exit self-test to check error
-> > > > > >   efi_loader: Move some memory-function comments to header
-> > > > > >   doc: efi: Add the EFI-loader API documentation
-> > > > > >   efi_loader: Use a separate struct for memory nodes
-> > > > > >   efi_loader: Drop virtual_start from priv_mem_desc
-> > > > > >   efi_loader: Drop reserved from priv_mem_desc
-> > > > > >   efi_loader: Use the enum for the memory type in priv_mem_desc
-> > > > > >   efi_loader: Avoid assigning desc in efi_mem_carve_out()
-> > > > > >   efi_loader: Move struct efi_mem_list fields together
-> > > > > >   efi_loader: Rename struct efi_mem_list to mem_node
-> > > > > >   efi_loader: Rename physical_start to base
-> > > > > >   efi_loader: Use correct type in efi_add_runtime_mmio()
-> > > > > >   efi_loader: Show the address for pool allocations
-> > > > > >   efi_loader: Don't try to add sandbox runtime code
-> > > > > >   efi_loader: Update to use addresses internally
-> > > > > >   efi_loader: Correct address-usage in copy_fdt()
-> > > > > >   efi_loader: Drop comments about incorrect addresses
-> > > > > >   efi_bootmgr: Avoid casts in try_load_from_uri_path()
-> > > > > >   efi_loader: Simplify efi_dp_from_mem()
-> > > > > >
-> > > > > >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |   2 +-
-> > > > > >  arch/arm/mach-bcm283x/reset.c                 |   2 +-
-> > > > > >  doc/api/efi.rst                               |   6 +
-> > > > > >  include/efi.h                                 |  23 +-
-> > > > > >  include/efi_api.h                             |  10 +
-> > > > > >  include/efi_loader.h                          |  87 +++++-
-> > > > > >  lib/efi_loader/efi_bootbin.c                  |   3 +-
-> > > > > >  lib/efi_loader/efi_bootmgr.c                  |  10 +-
-> > > > > >  lib/efi_loader/efi_boottime.c                 |  43 ++-
-> > > > > >  lib/efi_loader/efi_device_path.c              |  16 +-
-> > > > > >  lib/efi_loader/efi_dt_fixup.c                 |   4 -
-> > > > > >  lib/efi_loader/efi_helper.c                   |   4 +-
-> > > > > >  lib/efi_loader/efi_image_loader.c             |   3 +-
-> > > > > >  lib/efi_loader/efi_memory.c                   | 261 +++++++-----------
-> > > > > >  lib/efi_loader/efi_runtime.c                  |   7 +-
-> > > > > >  lib/efi_loader/efi_var_mem.c                  |   6 +-
-> > > > > >  .../efi_selftest_startimage_exit.c            |   6 +-
-> > > > > >  lib/lmb.c                                     |  10 +-
-> > > > > >  18 files changed, 278 insertions(+), 225 deletions(-)
-> > > > > >
-> > > > > > --
-> > > > > > 2.34.1
-> > > > > >
->
-> Rgards,
-> SImon
+Otherwise
+
+Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
+>+
+>+=2E=2E index::
+>+   single: optee (command)
+>+
+>+optee command
+>+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>+
+>+Synopsis
+>+--------
+>+
+>+::
+>+
+>+    optee hello
+>+    optee hello <value>
+>+
+>+Description
+>+-----------
+>+
+>+This is a very simple optee hello command which is going to
+>+increment an integer value=2E
+>+
+>+value
+>+	value to be passed which is going to increment
+>+
+>+To enable the OP-TEE OS side HELLO WORLD example please refer
+>+https://optee=2Ereadthedocs=2Eio/en/latest/building/gits/optee_examples/=
+optee_examples=2Ehtml
+>+
+>+Examples
+>+--------
+>+
+>+::
+>+
+>+	=3D=3D> optee hello
+>+	The Hello World TA is going to be called
+>+	D/TA:  TA_CreateEntryPoint:39 has been called
+>+	I/TA: Hello World!
+>+	TA value: 0x0
+>+	D/TA:  inc_value:105 has been called
+>+	I/TA: Got value: 0 from NW
+>+	I/TA: Increase value to: 1
+>+	TA value: 0x1
+>+	I/TA: Goodbye!
+>+	D/TA:  TA_DestroyEntryPoint:50 has been called
+>+
+>+	=3D=3D=3D> optee hello 74
+>+	The Hello World TA is going to be called
+>+	D/TA:  TA_CreateEntryPoint:39 has been called
+>+	I/TA: Hello World!
+>+	TA value: 0x74
+>+	D/TA:  inc_value:105 has been called
+>+	I/TA: Got value: 116 from NW
+>+	I/TA: Increase value to: 117
+>+	TA value: 0x75
+>+	I/TA: Goodbye!
+>+	D/TA:  TA_DestroyEntryPoint:50 has been called
+>+
+>+Configuration
+>+-------------
+>+
+>+The optee command is enabled by CONFIG_OPTEE=3Dy and CONFIG_CMD_OPTEE=3D=
+y=2E
+>+
+>+Return value
+>+------------
+>+
+>+The return value $? is 0 (true) if the command succeeds, 1 (false) other=
+wise=2E
+>diff --git a/doc/usage/index=2Erst b/doc/usage/index=2Erst
+>index cb7a23f1170=2E=2E4dd00f002cd 100644
+>--- a/doc/usage/index=2Erst
+>+++ b/doc/usage/index=2Erst
+>@@ -92,6 +92,7 @@ Shell commands
+>    cmd/msr
+>    cmd/mtest
+>    cmd/mtrr
+>+   cmd/optee
+>    cmd/panic
+>    cmd/part
+>    cmd/pause
+
