@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438C3E77187
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 16:00:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911D0E77184
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 16:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FC408022E;
-	Tue, 17 Dec 2024 17:00:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DCA20801CE;
+	Tue, 17 Dec 2024 17:00:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UkeJJstP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d84CpowW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB74380239; Tue, 17 Dec 2024 17:00:10 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 0E2C180274; Tue, 17 Dec 2024 17:00:12 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080EC801CE
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 17:00:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83AC08022E
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 17:00:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-434b3e32e9dso59750915e9.2
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 08:00:07 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4361f65ca01so53714645e9.1
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 08:00:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734451206; x=1735056006; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734451209; x=1735056009; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xidtNStbnwE+v0UOCwnLkOTG7ANuPpQ1sto+3K2OWSQ=;
- b=UkeJJstPweJLnImidwZNCP1besY23MLzSuJQUdgegA7irVoRz4GvQHQz3aih2veHSS
- nXK338tthcMBPO5apeQql2gl5dzGyaCQSXDWVFWfaielECJVrhrhkYR7hKwCrL6mS7Bm
- /iNjZrbFwDBFh8lmIVFFcQ+pwWcRJ8Ub/GD1lHKj3j4QsIq1KBez/9vgzfpKJYl2mNYP
- plnKI0E5ZN7EMn1RXz3GUkEiTJFd0GBWXdKb7aWR3yI2aR/FUX/f7dF0VQn70d6/uYaa
- wueF73OJ2Z0a7dgHsrA1CrC5tJCbkCTDmJhb3AwKkWpj2sCnP8zDQUnnO5tE30wAjBfI
- bLsA==
+ bh=bc5dcGomkTmzvvZyWwHhfntlWLKNrTTzvh9e4xyRGnc=;
+ b=d84CpowWsc3zc5QalMgPAGdXv4jOKrsGWkaEmaA7Cp2OQGagtq6r2/awldIATOUneJ
+ qznUsCuhBfX96E91cFG8HDfuQIIn0zhdOvBDxOnTCWE23eAq6Z72e0Yh7PhBtIqUDfWP
+ KEkd4igL+R6YT6/jGdfZhSOOwMNDqJQt2CLl0dz9+fGV3IYLCbzhhfan0sFTKIqy3LEw
+ htL7sTL6BkDG/Lqj9uwCkb16NYN7M1l38OuyQfhGC0fgIQ5jUBLx4LT7s3NIOlCUE98N
+ F4wtfxHjD7ESolYCZYsS4VE3gV5SNZ/qrB4K3bfiuXxvg17uGkgGqJu4STlRaeODDm2a
+ FT6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734451206; x=1735056006;
+ d=1e100.net; s=20230601; t=1734451209; x=1735056009;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xidtNStbnwE+v0UOCwnLkOTG7ANuPpQ1sto+3K2OWSQ=;
- b=AEdBqFNI1tR9yc39XI/AGcp64QGZlHLmCF8luwR+e/8jCVKKFIh+K0GCLpfgAdn1Gy
- UePnsMKk1mn4ea5jZIjnUpXdYvxACg26kZEbEsNhxFKPvnk+Ue6AqtC5gPv4tHhigoCV
- foO+ruqdb3vuZK4yMc72Y35cICrGI1C0rNI4I+kZGyH1Vzh2Azlmr+eMDvYV5fKAi4+F
- rI8o6MPZt9e+f8Md29d4ePcklEcMpTV1l08ThXAd+1HOcVvLlJ54irONSzsTV5i223uE
- 4U2FSgYbmDSTN1gquL7DXYmCoXyRtyKsViAhd7FFHnu0z/eEB9Q8GRoMSnFXj3WiZqhE
- rOhA==
-X-Gm-Message-State: AOJu0Ywaa2IeX8+4hlbxxxjFrIX12xF1vutdXZIfQ+zDwpq30PAy+99z
- BHVqxo6YPSf39N2xK/k+1VVf+O8LRxunjaXq1m8wPyfa6259Vtji8NEuZc7WO/rwej0CJ3+Z158
- Y9fc=
-X-Gm-Gg: ASbGncvdE4cL2RtZyCoUYq2JOofNePOzFBq7E7iu+GWBAYy8C6Giu4UeE4mHNZFMgL9
- vo1feDdjJyuRWQt8fnSK3Mi96unn5+J8u+IGqoyaEsjV1blGSLFrh6kf+oQlS8+cAh3Jy6qQCLF
- T2XWbxIbOKt99TK1lBN81P7dVc4BQDwRGBsfNWcOHdOIy6vBcoM8CBQn4rd61tXnRmXsqPpsLd9
- 2QvAOJBw6yzj9DmeK/ntztF3CAcccyAeMyLTNil1v8daHpE+RzTUSIJVKrQtU8upA==
-X-Google-Smtp-Source: AGHT+IFxehlyisWNWLd6YkIrcjcLfbJcVVO3GimUfECeVtxinCjqp+JtpuLUoZZdq+j+3SlfkaqYmw==
-X-Received: by 2002:a05:6000:1846:b0:385:fc8c:24b6 with SMTP id
- ffacd0b85a97d-38880ada79emr15001870f8f.27.1734451206067; 
- Tue, 17 Dec 2024 08:00:06 -0800 (PST)
+ bh=bc5dcGomkTmzvvZyWwHhfntlWLKNrTTzvh9e4xyRGnc=;
+ b=l3GQo0705N+ndDoTOS8MyFG8UgFJwoByMcZs9hyA8P1D8Bg7n4JV202HH+a5ian8zb
+ +0RncKHnfN/LHfbhkCia61gFjClSNOBuDYhfzmwqKWUoDtmiwlLB3fYCBEYQXsHBxYPo
+ 78ghXxaCZZGmKZym9W2q3Hxn1yTQmqW83JV/ytMXZI3kW3plrE+uKZ2h8ltDfQl9aLPL
+ PFJ6rMWVbBXS7HMw/hc21nNvz8dqKsG4+QktiUPi6/WlQAfd7dt9t+F2uUPXyB/M6sfa
+ liyh9E4+jSUpb52ozINtyO7deP2TxSMkI6k5i8fcdtk1mP7HPy4R7HpLpaF3RkNhHy8e
+ 12LQ==
+X-Gm-Message-State: AOJu0YwIRxFr4G+Nh2ah8qn4Zaf+sej8IebOnoytAmXEGVxPSJTkJ0V/
+ VKCAv1IdhJLJlbTnrImr+RhFlOjMGgrZo+bY+KS9a7pgBhpXivzXhNTFi2i/Aw4BcABkoY4ExUz
+ bQF8=
+X-Gm-Gg: ASbGncuXakDY8RaeNAefVwGyJzmE5tPt5wtECV1hAu/n/5tTv0bB03Xrikf5+vjGSVX
+ 4uJmzHryhbN0p6jYFHjimKHHVlJv6JCMvS9UJbHEADD+8MmBhZxdc/vGobI7x+Y4kJNOfPZPmjs
+ pgN7BXvp0QBk0wDaT4/bUAZCfHpmD9R/4SxJwMKYLeQyvb37H/L+SYh9h3dn1TYFa4Huey9nhpf
+ bkgg5GaT6dmW12DIW07k5q3w9IueukQkj7hMlG77Aeeg6/BQAoKGDA+r0xxHPI6Og==
+X-Google-Smtp-Source: AGHT+IGqjhlBixDfrYQB++fjXq86nJmgMbfMAitlraUCi4e+/xLTzmItm9z8bGMRPgS0pNuK4gElIw==
+X-Received: by 2002:a05:600c:1e19:b0:435:1a2:2633 with SMTP id
+ 5b1f17b1804b1-4362aa52c65mr164849365e9.15.1734451208693; 
+ Tue, 17 Dec 2024 08:00:08 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-388c801ad9asm11390181f8f.58.2024.12.17.08.00.05
+ ffacd0b85a97d-388c801ad9asm11390181f8f.58.2024.12.17.08.00.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 08:00:05 -0800 (PST)
+ Tue, 17 Dec 2024 08:00:08 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>
-Subject: [PATCH 3/5] board_init_f_r(): use static calls
-Date: Tue, 17 Dec 2024 16:59:34 +0100
-Message-ID: <0adfb649adecfd0b11e764342ca22ea0ebe438fb.1734448827.git.jerome.forissier@linaro.org>
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>
+Subject: [PATCH 5/5] initcall: remove initcall_run_list()
+Date: Tue, 17 Dec 2024 16:59:36 +0100
+Message-ID: <164daec366a7ad0e7c7a16b3d713fc1905a53125.1734448827.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1734448827.git.jerome.forissier@linaro.org>
 References: <cover.1734448827.git.jerome.forissier@linaro.org>
@@ -100,54 +103,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the init_sequence_f_r function array by direct calls.
+Now that all initcalls have been converted to static calls, remove
+initcall_run_list().
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- common/board_f.c | 19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+ include/initcall.h |  24 -----------
+ lib/Makefile       |   1 -
+ lib/initcall.c     | 102 ---------------------------------------------
+ 3 files changed, 127 deletions(-)
+ delete mode 100644 lib/initcall.c
 
-diff --git a/common/board_f.c b/common/board_f.c
-index ba1af3d8055..b2c83af943a 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -1020,8 +1020,8 @@ void board_init_f(ulong boot_flags)
- /*
-  * For now this code is only used on x86.
-  *
-- * init_sequence_f_r is the list of init functions which are run when
-- * U-Boot is executing from Flash with a semi-limited 'C' environment.
-+ * Run init functions which are run when U-Boot is executing from Flash with a
-+ * semi-limited 'C' environment.
-  * The following limitations must be considered when implementing an
-  * '_f_r' function:
-  *  - 'static' variables are read-only
-@@ -1034,17 +1034,18 @@ void board_init_f(ulong boot_flags)
-  * NOTE: At present only x86 uses this route, but it is intended that
-  * all archs will move to this when generic relocation is implemented.
-  */
--static const init_fnc_t init_sequence_f_r[] = {
--#if !CONFIG_IS_ENABLED(X86_64)
--	init_cache_f_r,
+diff --git a/include/initcall.h b/include/initcall.h
+index 72faab42ada..c47a0410197 100644
+--- a/include/initcall.h
++++ b/include/initcall.h
+@@ -11,30 +11,6 @@
+ 
+ _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
+ 
+-/**
+- * init_fnc_t - Init function
+- *
+- * Return: 0 if OK -ve on error
+- */
+-typedef int (*init_fnc_t)(void);
+-
+-/* Top bit indicates that the initcall is an event */
+-#define INITCALL_IS_EVENT	GENMASK(BITS_PER_LONG - 1, 8)
+-#define INITCALL_EVENT_TYPE	GENMASK(7, 0)
+-
+-#define INITCALL_EVENT(_type)	(void *)((_type) | INITCALL_IS_EVENT)
+-
+-/**
+- * initcall_run_list() - Run through a list of function calls
+- *
+- * This calls functions one after the other, stopping at the first error, or
+- * when NULL is obtained.
+- *
+- * @init_sequence: NULL-terminated init sequence to run
+- * Return: 0 if OK, or -ve error code from the first failure
+- */
+-int initcall_run_list(const init_fnc_t init_sequence[]);
+-
+ #define INITCALL(_call) \
+ 	do { \
+ 		if (!ret) { \
+diff --git a/lib/Makefile b/lib/Makefile
+index d24ed629732..78d9d02369b 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -44,7 +44,6 @@ obj-$(CONFIG_GZIP_COMPRESSED) += gzip.o
+ obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbios.o
+ obj-$(CONFIG_SMBIOS_PARSER) += smbios-parser.o
+ obj-$(CONFIG_IMAGE_SPARSE) += image-sparse.o
+-obj-y += initcall.o
+ obj-y += ldiv.o
+ obj-$(CONFIG_XXHASH) += xxhash.o
+ obj-y += net_utils.o
+diff --git a/lib/initcall.c b/lib/initcall.c
+deleted file mode 100644
+index 2686b9aed5c..00000000000
+--- a/lib/initcall.c
++++ /dev/null
+@@ -1,102 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (c) 2013 The Chromium OS Authors.
+- */
+-
+-#include <efi.h>
+-#include <initcall.h>
+-#include <log.h>
+-#include <relocate.h>
+-#include <asm/global_data.h>
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+-static ulong calc_reloc_ofs(void)
+-{
+-#ifdef CONFIG_EFI_APP
+-	return (ulong)image_base;
 -#endif
-+static int intcall_run_f_r(void)
-+{
-+	int ret = 0;
- 
--	NULL,
--};
-+	CONFIG_IS_ENABLED(X86_64, (INITCALL(init_cache_f_r);))
-+
-+	return ret;
-+}
- 
- void board_init_f_r(void)
- {
--	if (initcall_run_list(init_sequence_f_r))
-+	if (initcall_run_f_r())
- 		hang();
- 
- 	/*
+-	/*
+-	 * Sandbox is relocated by the OS, so symbols always appear at
+-	 * the relocated address.
+-	 */
+-	if (IS_ENABLED(CONFIG_SANDBOX) || (gd->flags & GD_FLG_RELOC))
+-		return gd->reloc_off;
+-
+-	return 0;
+-}
+-
+-/**
+- * initcall_is_event() - Get the event number for an initcall
+- *
+- * func: Function pointer to check
+- * Return: Event number, if this is an event, else 0
+- */
+-static int initcall_is_event(init_fnc_t func)
+-{
+-	ulong val = (ulong)func;
+-
+-	if ((val & INITCALL_IS_EVENT) == INITCALL_IS_EVENT)
+-		return val & INITCALL_EVENT_TYPE;
+-
+-	return 0;
+-}
+-
+-/*
+- * To enable debugging. add #define DEBUG at the top of the including file.
+- *
+- * To find a symbol, use grep on u-boot.map
+- */
+-int initcall_run_list(const init_fnc_t init_sequence[])
+-{
+-	ulong reloc_ofs;
+-	const init_fnc_t *ptr;
+-	enum event_t type;
+-	init_fnc_t func;
+-	int ret = 0;
+-
+-	for (ptr = init_sequence; func = *ptr, func; ptr++) {
+-		reloc_ofs = calc_reloc_ofs();
+-		type = initcall_is_event(func);
+-
+-		if (type) {
+-			if (!CONFIG_IS_ENABLED(EVENT))
+-				continue;
+-			debug("initcall: event %d/%s\n", type,
+-			      event_type_name(type));
+-		} else if (reloc_ofs) {
+-			debug("initcall: %p (relocated to %p)\n",
+-			      (char *)func - reloc_ofs, (char *)func);
+-		} else {
+-			debug("initcall: %p\n", (char *)func - reloc_ofs);
+-		}
+-
+-		ret = type ? event_notify_null(type) : func();
+-		if (ret)
+-			break;
+-	}
+-
+-	if (ret) {
+-		if (CONFIG_IS_ENABLED(EVENT)) {
+-			char buf[60];
+-
+-			/* don't worry about buf size as we are dying here */
+-			if (type) {
+-				sprintf(buf, "event %d/%s", type,
+-					event_type_name(type));
+-			} else {
+-				sprintf(buf, "call %p",
+-					(char *)func - reloc_ofs);
+-			}
+-
+-			printf("initcall failed at %s (err=%dE)\n", buf, ret);
+-		} else {
+-			printf("initcall failed at call %p (err=%d)\n",
+-			       (char *)func - reloc_ofs, ret);
+-		}
+-
+-		return ret;
+-	}
+-
+-	return 0;
+-}
 -- 
 2.43.0
 
