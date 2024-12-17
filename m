@@ -4,78 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B574E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6428AE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B2FB8022F;
-	Tue, 17 Dec 2024 14:52:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9CF56801FB;
+	Tue, 17 Dec 2024 14:53:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k+bAyV4S";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CWQHf6t2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A4CA801FB; Tue, 17 Dec 2024 14:52:09 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338F780107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:52:07 +0100 (CET)
+ id 5C5A780224; Tue, 17 Dec 2024 14:53:21 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DA2F480107
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a9a68480164so868184666b.3
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 05:52:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734443527; x=1735048327; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=J+gO6dggM051NlJssKDAASBklHZnC7VH7C07gRguQxI=;
- b=k+bAyV4SNFaljf/JT2warOHxO5Fg1VKXrxH2RVUZbgwxORtUntCM9zK1T3uMiHhDsw
- lhyfekmQEszbxzM9OQkpTweAASvhldhUYsfBug2+AK8Ddis60AOxanzyMLKFJKphDVG7
- YM3WeoeQM8Ei4ZW4N/wFa5kVI/l7hKTKglBBo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734443527; x=1735048327;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=J+gO6dggM051NlJssKDAASBklHZnC7VH7C07gRguQxI=;
- b=nN1/25NNH/ek8G9lLAkOcogIexi1WOBzyX17teCvWJkxE1Smga/6k1r00Qjoq0fF93
- NAjLjlojHrqmlmdXWu4H7AS6h5Q1KN7C1rpSAZFpAQ2DAuiSOjMnS7CBRhgchE4gdHKL
- WzwJJhZKzkBvf8Z0Iyhu6dbslnzudBOVNm6kf/5GgpbFp0RJ6ygkAwFanDqBigKbNZwB
- y/3ci2+svPHoSMUyupLtlem46NgEf8EJ9tGHWpT9cOSwp7oYe6UHy/Ws7Xa+LzKT8304
- bLTbrlDJBnuOQnuNLU6p0zwRRuVfG4NCf19oON5fCKpC557ieic1tfd/uZF3uOvIXER7
- 2c/A==
-X-Gm-Message-State: AOJu0YxPYcqy5hdVoBVm3TgfFPRTgB+vj16ozXyPe8q7kxb0NKtoNmwL
- pUUoj2DLZSuCXxP1VhSCaYW/yktOoMpen4gf3nVf50LIQqHGqg1zLSXurHJn/IIFLkRZPGKAhsf
- +fCpsH8HF8obp1jA3LMiR+SGfq9hYSvZ9Otb4
-X-Gm-Gg: ASbGncv/PRdMjtC1sNe/nX+Be0rRLY/bFhCXBoPyYxWZZod4JDUnE+fmqYWomB6QsKI
- x/tjIUEx3H4a/pH9u5UFTlQ4B/dovAP9c1fYC75Q=
-X-Google-Smtp-Source: AGHT+IFhsLsABy+8vaoqekVOAcZjVcupxiuC+WuPINgwrZCVoxmVixscv8/QNoedVjiMCG1etUJ/6nXA9zUb2sZF6Uk=
-X-Received: by 2002:a17:907:3f23:b0:aa6:61b7:938f with SMTP id
- a640c23a62f3a-aab778c8b12mr1867772866b.6.1734443526696; Tue, 17 Dec 2024
- 05:52:06 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDrGHm011360
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 17 Dec 2024 07:53:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734443596;
+ bh=HKS7gMUU5tz8k2rEz7QVMS9WNPjXv3I3Ol98hnncrlc=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=CWQHf6t2xEw1jCME5n4BaMTytGAisLGmjZnCVC42OENX/CddYTArgl49qSOjdYK5k
+ pXbX+v8QV2qlL0dVtCU+D+7uLaeeXwn9hWXL1ZzmrMpq2Fk0TaABEq3cvSJjtjSuqQ
+ zRhwUakXfnKRuYQIz/qtlulAyuIerDKS5qXmymCI=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDrGMk006448
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Dec 2024 07:53:16 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Dec 2024 07:53:15 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 17 Dec 2024 07:53:15 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHDrFer125974;
+ Tue, 17 Dec 2024 07:53:15 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
+ <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
+Subject: Re: [PATCH] dma: ti: k3-udma: Fix BCDMA probe by adding check for
+ MMR_RFLOW
+In-Reply-To: <20241210135059.1043095-1-p-mantena@ti.com>
+References: <20241210135059.1043095-1-p-mantena@ti.com>
+Date: Tue, 17 Dec 2024 07:53:15 -0600
+Message-ID: <86r0664dro.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <20241217134417.4064239-1-sjg@chromium.org>
- <CAOMZO5CJGuSLog9Gsnw0cJ55FLJ+jGE+UB3kVw=79TGQZAhUCg@mail.gmail.com>
-In-Reply-To: <CAOMZO5CJGuSLog9Gsnw0cJ55FLJ+jGE+UB3kVw=79TGQZAhUCg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Dec 2024 06:51:55 -0700
-Message-ID: <CAFLszTj91_UNoN5PUpWrbbt=JtoHoyvQrkNN01QmovzGREzA2g@mail.gmail.com>
-Subject: Re: [PATCH] gitlab: Add a Colibri iMX8 board to the sjg lab
-To: Fabio Estevam <festevam@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Francesco Dolcini <francesco@dolcini.it>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,39 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+Prasanth Babu Mantena <p-mantena@ti.com> writes:
 
-On Tue, 17 Dec 2024 at 06:46, Fabio Estevam <festevam@gmail.com> wrote:
+> RFLOW config related MMR does not exist incase of BCDMA.
+> Add check to bypass the RFLOW MMR extraction.
+> Without this, the probe sequence fails checking for
+> the MMR_RFLOW region, which is valid only for packet based
+> DMA and obselete for BCDMA.
 >
-> Hi Simon,
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> ---
+>  drivers/dma/ti/k3-udma.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> On Tue, Dec 17, 2024 at 10:44=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
-rote:
-> >
-> > I have one of these boards loaded with Linux 6.6.2 and a video demo. Ad=
-d
-> > an entry for it so that it can be used for testing.
-> >
-> > Unfortunately quite a lot of work-arounds are needed to make this board
-> > work, but I am working with the supplier on this.
->
-> Just curious: what workarounds are you talking about?
+> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+> index dac4023ccfd..3013c4741d0 100644
+> --- a/drivers/dma/ti/k3-udma.c
+> +++ b/drivers/dma/ti/k3-udma.c
+> @@ -1331,6 +1331,8 @@ static int udma_get_mmrs(struct udevice *dev)
+>  			continue;
+>  		if (i == MMR_RCHANRT && ud->rchan_cnt == 0)
+>  			continue;
+> +		if (i == MMR_RFLOW && ud->match_data->type == DMA_TYPE_BCDMA)
+> +			continue;
+>  
+>  		ud->mmrs[i] = dev_read_addr_name_ptr(dev, mmr_names[i]);
+>  		if (!ud->mmrs[i])
+> -- 
+> 2.34.1
 
-1. It needs a special build target to build the final image[1]
-2. Needs binary blobs in the root dir (I need it to use an env var to
-specify the location, or ideally use Binman)
-3. The first time I build it gives an error, so I need to build a
-second time; it should build from a clean directory in one pass
-
-Other things, for some reason, there is quite a delay between when the
-board boots and uuu returns, so some console output is lost. Also uuu
-is hugely verbose and needs a 'silent' mode.
-
-Passing run here at [2]
-
-Regards,
-Simon
-
-[1] https://docs.u-boot.org/en/latest/board/toradex/colibri-imx8x.html#buil=
-d-u-boot
-[2] https://ci.u-boot.org/u-boot/u-boot/-/jobs/8625
+Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
