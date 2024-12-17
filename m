@@ -4,78 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3801CE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:54:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF91E7716A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8721A801CE;
-	Tue, 17 Dec 2024 09:54:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B1E5801CE;
+	Tue, 17 Dec 2024 09:56:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FmjHNJiF";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ga5U6fLf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18427801CF; Tue, 17 Dec 2024 09:54:48 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE9CC801A0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:54:44 +0100 (CET)
+ id 9CC0E801CF; Tue, 17 Dec 2024 09:56:12 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 259BA801A0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:56:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BH8sg003605071
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 17 Dec 2024 02:54:42 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734425682;
- bh=Cj5Hxe5B4Vj4JQgaAirqRBea8DsSmp8psAIr+x7oFKE=;
- h=From:Date:Subject:To:CC;
- b=FmjHNJiFCf8EuPokXnSSo6TaHlCBNSC5Y5d2+8DRoCr3gi9tTU1t8XzND3qBKQWZy
- 2xIpigJ49QXhmIFU1ZKoZ7IseBvDXHCW6zY/o8Pj3Nmlmu7MCRnx5527UUemmJ20Ks
- 8uoMRoWC5NARArVdD/BE68PYm7ivmXky4fBczl2w=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BH8sgm2039219
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Dec 2024 02:54:42 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 02:54:41 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 02:54:41 -0600
-Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.160])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BH8sdvp125542;
- Tue, 17 Dec 2024 02:54:39 -0600
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 17 Dec 2024 14:24:37 +0530
-Subject: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
+ spf=pass smtp.mailfrom=eabachinin@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 7D9C3120004;
+ Tue, 17 Dec 2024 11:56:07 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7D9C3120004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1734425767;
+ bh=0o+2LOgRi4IOlx6scrq6pZGg5HFTGqLFDBhRpBZBlvI=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=ga5U6fLfngEzPtSKV9WngbAjAkmhs7TlYO0GtlHAMFrheEub3agH0w29fUp3FPJb1
+ UBab5RhcA9dSFi1N02+rzPec2MEOQL7z0wjS52rM8H7OFxLdANfRabOkI4mQMYtv00
+ edAs0VazySDypfSY9tScU3vBe1GOALI6oeBwZUrcWxkzauphzReRpWuTeNvPj9rHgS
+ 4tzU+1Un2j2vW0acb/3M6IJ3NU6pdlbFU6peAhm0QM2AeYuqO6KwWuMtYhtQ5KiP3W
+ oTTdI7fe9Xa2D/HDXQ5XUligrFjjPL1LWr4/rGt6ANrpqGyd15gLMBh4iSxbsCUFWo
+ 8o2qkr2JeFf5w==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 17 Dec 2024 11:56:07 +0300 (MSK)
+Date: Tue, 17 Dec 2024 11:56:06 +0300
+From: Evgeny Bachinin <eabachinin@salutedevices.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Patrick Rudolph
+ <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>, "Francis
+ Laniel" <francis.laniel@amarulasolutions.com>, <kernel@salutedevices.com>,
+ <evgen89bachinin@gmail.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/5] sandbox: repair compile and run-time for OF_EMBED case
+Message-ID: <lxjnwb4nxc2fvl5cmon6qlqfaagvm6mgmgk5bccqrrjpkzi2gm@kfzzhqt42fd7>
+References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
+ <CAFLszTic80ddU1QRxD0dKG0fruZnMXxpoZVEAuK76ji3pM2vMg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
-X-B4-Tracking: v=1; b=H4sIAEw8YWcC/x2MSQqAMAwAvyI5G7CLIn5FPFQbNeBGqiJI/27xO
- AwzLwQSpgBN9oLQzYH3LYHKMxhmt02E7BODLrRVWlXYW7yOcAq5Ff2KhxAKLfuAZW2UsV47Ywt
- IeTIjP/+67WL8AHe9igpqAAAA
-X-Change-ID: 20241216-b4-upstream-dm-pre-reloc-583134d2a340
-To: Tom Rini <trini@konsulko.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>,
- Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Manorit Chawdhry
- <m-chawdhry@ti.com>
-X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734425679; l=1456;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=4cdbWd/SkQAmeNMRV/eb5rPWGmEIJSn+YfkA6DF6f50=;
- b=HbpL/oNzxappOyWT6zRJqPM92sKGiJXXNc9w7HjEXjJX0hQw2pVF0KZbbnxQhhOwuXLpdc1+W
- Z2Crdcr0XIHD6bZFzt/G9AeAP4Fo/qOEXiW1bn5o/UKoRK3+bbV6cD0
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTic80ddU1QRxD0dKG0fruZnMXxpoZVEAuK76ji3pM2vMg@mail.gmail.com>
+User-Agent: NeoMutt/20231006
+X-Originating-IP: [172.28.224.238]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 189881 [Dec 17 2024]
+X-KSMG-AntiSpam-Version: 6.1.1.7
+X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 47 0.3.47
+ 57010b355d009055a5b6c34e0385c69b21a4e07f, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
+ smtp.sberdevices.ru:7.1.1,5.0.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
+ github.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/12/17 08:10:00
+X-KSMG-LinksScanning: Clean, bases: 2024/12/17 08:11:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/12/17 06:22:00 #26894014
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,43 +104,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the driver relies on bootph flag to probe it during PRE_RELOC
-stage but with the upcoming cleanup of v6.13, we don't have the bootph
-property in the parent nodes anymore and ti_sci driver being one of the
-parent nodes required during SPL stage would end up hampering the probe
-model [0].
 
-Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+Hello, Simon.
 
-[0]: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
 
-Suggested-by: Vignesh Raghavendra <vigneshr@ti.com>
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
-Test logs with current DT: https://gist.github.com/manorit2001/b28bebd8229818412ff74e40d4a53f71
-Test logs with 6.13-rc3 DT: https://gist.github.com/manorit2001/b91691b59581d445c301e2608ce5931a
----
- drivers/firmware/ti_sci.c | 1 +
- 1 file changed, 1 insertion(+)
+On Fri, Dec 06, 2024 at 12:19:42PM -0700, Simon Glass wrote:
+> Hi Evgeny,
+> 
+> On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
+> <EABachinin@salutedevices.com> wrote:
+> >
+> > This patch-set repairs ability to use sandbox with CONFIG_OF_EMBED=y.
+> >
+> > For now, to use OF_EMBED, the following must be done
+> > 1) sandbox64_defconfig should have:
+> >   ```
+> >   -CONFIG_OF_LIVE=y
+> >   +CONFIG_OF_EMBED=y
+> >   ```
+> >
+> > 2) On sandbox when CONFIG_OF_EMBED=y, the u-boot process can't start
+> > due to:
+> >   ```
+> >   Bloblist at b000 not found (err=-2)
+> >   initcall failed at call 000000000011829c (err=-2: No such file or \
+> >       directory)
+> >   ### ERROR ### Please RESET the board ###
+> >   ```
+> >   So, it is natural desire to disable CONFIG_BLOBLIST just to test
+> > sandbox with OF_EMBED=y (disable it one way or another):
+> >   ```
+> >     config SANDBOX
+> >   -     select BLOBLIST
+> >   +     select BLOBLIST if SOME_NON_EXISTING_OPTION
+> >   ```
+> >
+> > 3) As a result, having such changes (CONFIG_OF_EMBED=y &&
+> > CONFIG_BLOBLIST=n) leads to the link & run-time errors, being fixed
+> > by this patch series.
+> >
+> > Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
+> > ---
+> > Tested:
+> > * locally with aforementioned options applied
+> > * CI - https://github.com/u-boot/u-boot/pull/704
+> >   * No regression
+> >
+> > ---
+> > Evgeny Bachinin (5):
+> >       sandbox: fix bloblist_finish() linker error if BLOBLIST=n
+> >       test: sandbox: fix invalid_use_of_IF_ENABLED_INT if BLOBLIST=n
+> >       test: sandbox: fix link error with do_ut_bloblist if BLOBLIST=n
+> >       test: sandbox: fix link error with do_ut_bootm if BLOBLIST=n
+> >       sandbox: set retval early in board_fdt_blob_setup()
+> >
+> >  arch/sandbox/cpu/cpu.c |  2 +-
+> >  include/bloblist.h     |  7 +++++++
+> >  test/cmd_ut.c          |  2 ++
+> >  test/lib/kconfig.c     | 10 ++++++----
+> >  4 files changed, 16 insertions(+), 5 deletions(-)
+> > ---
+> > base-commit: 3073246d1be682071d8b3d07d06c2484907aed60
+> > change-id: 20241120-sandbox_repair_of_embed-2188465eb22b
+> >
+> > Best regards,
+> > --
+> > Evgeny Bachinin <EABachinin@salutedevices.com>
+> >
+> 
+> Thanks for looking at this.
+> 
+> You could add a test for ~OF_EMBED in
+> test/py/tests/test_sandbox_opts.py if you want to keep this working in
+> future.
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 719cfa771b4198159a305a08a044c7a8aaf7a14f..190a1e3f5fc3713464b0cbf3ae8c35e3f185a353 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -3077,6 +3077,7 @@ U_BOOT_DRIVER(ti_sci) = {
- 	.of_match = ti_sci_ids,
- 	.probe = ti_sci_probe,
- 	.priv_auto	= sizeof(struct ti_sci_info),
-+	.flags = DM_FLAG_PRE_RELOC,
- };
- 
- #if IS_ENABLED(CONFIG_K3_DM_FW)
+I did not know about this. Thank you, will do.
 
----
-base-commit: 9bc62c980d418f0a67632ab29cd3501072cdb6f0
-change-id: 20241216-b4-upstream-dm-pre-reloc-583134d2a340
-
-Best regards,
 -- 
-Manorit Chawdhry <m-chawdhry@ti.com>
-
+Best Regards,
+Evgeny Bachinin
