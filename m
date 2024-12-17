@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A00E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 00:18:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D289CE7716A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 03:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C2C6800D7;
-	Tue, 17 Dec 2024 01:18:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 06FAF80107;
+	Tue, 17 Dec 2024 04:56:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PYYlKNrX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GH48dfDG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23D2C80107; Tue, 17 Dec 2024 01:18:48 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9511A801A0; Tue, 17 Dec 2024 04:56:45 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0607800D2
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 01:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12528800D2
+ for <U-Boot@lists.denx.de>; Tue, 17 Dec 2024 04:56:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1734394721; x=1734999521; i=xypron.glpk@gmx.de;
- bh=8vXHUeA3In6CMp+3EpZmMdTyheHkrIiMc7gdfyKRJdc=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=PYYlKNrXdKYEfghFCyoSediBmhZNnornhMfcQbADB2JFcsiXdFyBxr0SVZqOxPHy
- 9bqo9IIzBF7i/oKSFhZcm9l4nSsQcNmONOGvwdS4/+RIoAO0xPEp2FkMCWN8KdJaP
- I/zW8jsP3THe62uHCL6on5Ph7oNdCoxMmjXBaVfiL5WCUot5PyokLM2ia6Kgqj4UR
- FDtrTm3BOA7ZDhYFCgXnxTaPrpa/q5Hj++4dQyz7pgdm+wOUdG3T5aBLRnEO1voYq
- 8o+PuEKXgjNHC/+xetCdfX77JEQstdYM11DXfzO/mSzeHWjVf2fJUtBZoK+wdYChD
- Bft+3NUJBMFrj+relQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.106.131]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgeoI-1u48J23kWy-00okZW; Tue, 17
- Dec 2024 01:18:41 +0100
-Date: Tue, 17 Dec 2024 01:18:36 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
-User-Agent: Thunderbird for Android
-In-Reply-To: <20241216233853.2125656-2-sjg@chromium.org>
-References: <20241216233853.2125656-1-sjg@chromium.org>
- <20241216233853.2125656-2-sjg@chromium.org>
-Message-ID: <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-46788c32a69so59643681cf.2
+ for <U-Boot@lists.denx.de>; Mon, 16 Dec 2024 19:56:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734407802; x=1735012602; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LB5T+nnUb47RV8hjeEx6l5Ag1Kwe5DQM3ndtTRORCp8=;
+ b=GH48dfDG7WEq6NUcBXft1kDu4vKl1979Q4TX5XdTYrsRiV9rhH49wjgt/eO981kodL
+ zSULImZcjkJU2bCUbjqr9z7ox6nx+ZY5QuTgm5ouY53KI5d9ZG+vE574BwiT3gogvu9d
+ 9nEXopp/CWAblTahdymNIVO8EKeiThnflDH0s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734407802; x=1735012602;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LB5T+nnUb47RV8hjeEx6l5Ag1Kwe5DQM3ndtTRORCp8=;
+ b=fgc0IepbgHAio33geMOns8D1OPR/UQplYOvcVnyyJWZ6vIRaBNL3coiddWw/mg1Dvf
+ 5M/1qOVnySaE5iLExvlu/+XsUlod5KTgKrBaLkq4VnTjPgC2LhNLMxla4DTG6yIk7t1G
+ QtW1tQHiaN94lrBrrcpTqOmTnsoC0OCYI+sBXbiy+5ixtMiPnUqzII1cw7xDC9NF3Bpg
+ 3tSs4BGb83ZSwQYP4arowTkFUHlEQxN+ISj1bjZRo3BL4/cqVV49oyIj+ZxWSJ2uDkxc
+ 28FlW5uFSLFM0s2ehXsU652HgURiGMUmq8F0td8gsvNLJ8yUCsLb+7rPqecAKishOPYM
+ bb9A==
+X-Gm-Message-State: AOJu0YxQuJo82sIAKsgbBzDf+MOxo+HnCCkjoS+LdVrmMa/tF7A321hZ
+ ApwTJ7DGbi+lmOxz534pLSYQrQTaVHybMOtD401M54M4Q1OBc/TOqUDa+7UaCnA=
+X-Gm-Gg: ASbGncuBCEXu+kZGzRo33O23gLcewZvzFeId3CGhLD8+WRj2fV8fBf9wIBI0FmI3nyb
+ MeJbN5d5hx/9j/zD9TSxbnXllEYEHySDLuu4coV/wDruueHIAR6b3aTvL7ucqs5D/rQBISMO48s
+ e0M59kMZurvK1JF0U4PbsWizLe8VVDt7Zqgrj5pKZ7Jf9eix0egkfhABcDA6dI6p/157kT9DunU
+ 5GURHE3k2EGFtzf/pDkM4389Vi70wYr022WGTnzxOz6GXVwsAYGH2K9
+X-Google-Smtp-Source: AGHT+IFyiTsZHvLeH5Q5vfwLwsOIa31pYL8k2SE6BSw3FyOgqCcH0ZOwYFFSqMEjbaydM5LHwIDO0A==
+X-Received: by 2002:ac8:5741:0:b0:460:90aa:ba8e with SMTP id
+ d75a77b69052e-467a583bfb5mr315802821cf.52.1734407801801; 
+ Mon, 16 Dec 2024 19:56:41 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b7048bbfa8sm281495085a.84.2024.12.16.19.56.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Dec 2024 19:56:40 -0800 (PST)
+Date: Mon, 16 Dec 2024 21:56:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: U-Boot Mailing List <U-Boot@lists.denx.de>, ronald.wahl@legrand.com
+Subject: Re: [GIT PULL] Please pull u-boot-mmc master
+Message-ID: <20241217035637.GI1505244@bill-the-cat>
+References: <CGME20241216051037epcas1p12e4dcb7ac35bb120deebc9cd1300b504@epcas1p1.samsung.com>
+ <ec1e7fef-d067-4d7c-b7ae-b45cf788f765@samsung.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:qINqnZrP/49ybbEbJP2dWNFH1Q9A5s6kUkMUwykeryo/uHfzQ7f
- 2BAyNIXbA6UOLBNq6+3KN79Az04ajX7pEj70MxMsy76+GY0CvXczJRZiTtlS5by7jMhSrzk
- D1rtZw1qy0KfbFkttbSfSlc/eGb+jmP+X3Qqw//w8vPujPfzGm9ZaVFZ6Wr/cTB4qnga+bG
- e73kr+Zp+4TQft/CC2kFw==
-UI-OutboundReport: notjunk:1;M01:P0:DMz9wjg836I=;Rd8ahnLrIu+PCRcSPHu5VKARt6I
- rtjfSFf9muR5hJrWCpfVlD5lYotcGW3snq3/n6vzS5rboRNv4RjCA2ZX2cw9BiaUq7mM9VGbV
- XWCIdcE7Pa5GlHeDIcwoADmCS3jz5/9CeKiBpQ0Xrzz/E6wyUyhunJvg4BoErxYeYIvB86RP/
- +iW3FaUC0oWHs4GQgsVTy8xX3VZNHY9tC2Zm5ktYwN9K00blWrE5E7NEPpSA/5DkfOouvYEbv
- mre+0wAeIdecgBMs27H83z9KK/kUDoDkeSSJVB95ELUU2XXVJDoQBFzu/myIc0xpYxrgO/Mtx
- q7qieZA6RCXk83p4qjw9up94EzlXGM5TRHiEMV1aFg3Syk3PyXahO8y+PgH9122WZS1kTDc6p
- GEhU8Xp4Hq9GBUbQGIRuQYYzyrulfIlTYQV2EgawioBlUZGml5VjVrOm8y/lBUwUxMcKsSwVf
- KmEqszpXuA1GgAN6GQSN8epEg5Ww3ddqBPrneAGUnHsN6jrWkYTg55HTpWFSY6hHYRYi6mhzN
- XwqLcAwuSYGkLBE3rM6THScsf3hJWXaP4cnIBalM5t8m46B8xA/oXLQ4Z5OkuZraoRdsdJk4u
- PlADZ0kgRJx/zUCAtYBZth+XD2XpIimR1nTQyCJkyJk402XnIP+VrvZapcFALgYwX5eVDjrU+
- VJpiFkNhXSmHWsWSH+OmDxDXTcfwDK4vjsUvZzV3njbckEeM/pN/QJjBRBLN2oSxseN02HLVE
- xxor3FApzOC8hPItPcbsM1ojwH4FWLpk5JbL2hXa/FtG7mgOI0lJfcxm2LAK/Ar7XuSpbroMY
- AkHxC9kF4nYyVR0hzX1YbaieHKL1DYsKcT5dtP13JCWMO0/gQdz6JYPwjsiFUaWLrUBEbEbJy
- 5v6oaV9VCv4kFJL8iHY5NNlXY1V6fC3/QKFcYcTfb1Ad4n9t9Orjhp/MPEH3PfW1+wDHkicak
- VaHZslHCAWmJRpYsdrYgK3vCuteZBa+qG4cylmMnS3Gxhyw9Iv4Ky7ipNvm591lhrYnoV09aa
- r+AiOlMc+Yrtpg0Q5sN9Hxo5gGiZewkaISir4wZBhgIHNUKBQ0jBcBdUurCnu9qcmzLXq2Art
- ISEOrHPc5JCK0vWpwIsL/5II8gBX2c
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WyZqHyS1fHgx/d35"
+Content-Disposition: inline
+In-Reply-To: <ec1e7fef-d067-4d7c-b7ae-b45cf788f765@samsung.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,54 +94,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 17=2E Dezember 2024 00:38:53 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
->:
->I have one of these boards loaded with Ubuntu 24=2E10 (64-bit)=2E Add an
->entry for it so that it can be used for testing=2E
->
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
 
-=2Egitlab-ci=2Eyml supports an include statement=2E
-Maybe it would make sense to move the lab definitions for lab_dfn into an =
-include=2E
+--WyZqHyS1fHgx/d35
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Such a file could be conditionally included:
+On Mon, Dec 16, 2024 at 02:10:36PM +0900, Jaehoon Chung wrote:
 
-include:=20
-  - local: 'lab_dfn=2Eyml'
-    rules:
-      - if: '$LAB =3D=3D "dfn"'
+> Dear Tom,
+>=20
+> Please pull u-boot-mmc master into u-boot master branch.
+> If there is any problem, let me know, plz
+>=20
+> Best Regards,
+> Jaehoon Chung
+>=20
+> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/23871
+>=20
+> The following changes since commit 50334151c02077f16613b0a082d95640800ba6=
+0e:
+>=20
+>   Merge tag 'fsl-qoriq-2024-12-15' of https://source.denx.de/u-boot/custo=
+dians/u-boot-fsl-qoriq (2024-12-15 08:02:46 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-mmc.git master
+>=20
+> for you to fetch changes up to 822afeb7bf84ca1c9289a61ea99604b4deb8e091:
+>=20
+>   mmc: Fix potential timer value truncation (2024-12-16 11:24:42 +0900)
+>=20
 
-Cf=2E https://docs=2Egitlab=2Ecom/ee/ci/yaml/index=2Ehtml
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
 
-For the current patch
+--WyZqHyS1fHgx/d35
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Acked-By: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdg9nEACgkQFHw5/5Y0
+tyyMIQv+NCTgROKPWT5YjZn5a7N1/ZvFemW0DFNePzfYUvp5jrJrEsksibmHXK3J
+irRN3WR6VZTMbvqSstDzq0zSNrJV+hMCQryb8+zlyXL9E621T/e8OaTsDRb4COMw
+/txLIPXTFdlzMo9iBa+6akX4cGvdCSB7ydF3trNYgng2sgMxSrzIyyEKWV567w0D
+yrMQ0ItO6KpFWBh5Ubb4U7LOJqXq0wnuXQd2UPu+FGYpK7bFW9qvA+9mGDnIs6LC
+sYu2XL3m0POurPGg2YamVOlXjZDAICtHSc/ERACqbxQXf3+JL4DC0gJGpz2j71IJ
+GnhICsTq1+58S6LZVFRtBkv46Ty4wmdTn3yRPQ9a8ZXNPmsZGjguygNPbvLb4ILB
+6bagSZOnA9giolWI7+9SHBeK7t7HiY3zOBRJKMM3sn4WHWCDS/HtIj/wKgOT6L+c
+IkhpGabMjiYUgxOiaU1aSUJTfZBlJGMY7nx1M1ycQRpkbb1xgmsxSdjBa96KvsxY
+IJQ+q694
+=zf6Y
+-----END PGP SIGNATURE-----
 
-
->---
->
->Changes in v2:
->- Rename the board to vf2
->- Add a comment about what the board is
->
-> =2Egitlab-ci=2Eyml | 6 ++++++
-> 1 file changed, 6 insertions(+)
->
->diff --git a/=2Egitlab-ci=2Eyml b/=2Egitlab-ci=2Eyml
->index ffcf8532944=2E=2Ea17c1b0a366 100644
->--- a/=2Egitlab-ci=2Eyml
->+++ b/=2Egitlab-ci=2Eyml
->@@ -696,3 +696,9 @@ rpi:
->   variables:
->     ROLE: rpi
->   <<: *lab_dfn
->+
->+# StarFive VisionFive 2
->+vf2:
->+  variables:
->+    ROLE: vf2
->+  <<: *lab_dfn
-
+--WyZqHyS1fHgx/d35--
