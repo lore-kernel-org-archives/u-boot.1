@@ -4,91 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE0BE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 09:11:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78872E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 10:54:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4023E801CE;
-	Tue, 17 Dec 2024 10:11:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id B0320801CF;
+	Tue, 17 Dec 2024 11:54:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="RjD19qVg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W/YuByxL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05F06801CF; Tue, 17 Dec 2024 10:11:09 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D90CB801F9; Tue, 17 Dec 2024 11:54:41 +0100 (CET)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D856C801A0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 10:11:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 403F5801CE
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:54:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eabachinin@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 52886120009;
- Tue, 17 Dec 2024 12:11:06 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 52886120009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1734426666;
- bh=BCyXjSTUaM8/MxveU8nMlpcXdOKixQYD1lWvC+8cP/Q=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=RjD19qVg4TcffCdjv6o8RH5Isxyg8Dmk68ERUmO3kEmEMtz3/P/4fDqlUjyDJDG7O
- n0E5IIzTNylxNwwAHEn5DFmV6JDMankKmNkBvs17v31gR+MyDrg/QCTeCmg11UcN4c
- dUPOkyFRsdZqXXj/HsKoSUN2qwpyohoN7E2xrx4FEwboDcON57MTtwRqKBeat0cVqD
- /I4IKS/QVpv8GYisRq48uJZg0MyhExdA3UHszhlAoPfYnrUkxtmUksh3pMMXLbRcdI
- U0ComtaRrZiCNbUppMR7Fnv8oJy8nqlMx/E+awCTmOSbeSK9Ok0So9s8NX+6p6NHyS
- kDimKzT5O6SYw==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 17 Dec 2024 12:11:06 +0300 (MSK)
-Date: Tue, 17 Dec 2024 12:11:05 +0300
-From: Evgeny Bachinin <eabachinin@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>
-CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Patrick Rudolph
- <patrick.rudolph@9elements.com>, Levi Yun <yeoreum.yun@arm.com>, "Francis
- Laniel" <francis.laniel@amarulasolutions.com>, <kernel@salutedevices.com>,
- <evgen89bachinin@gmail.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 4/5] test: sandbox: fix link error with do_ut_bootm if
- BLOBLIST=n
-Message-ID: <gzsr5konsq4iyxakbmcengqglrgoawu7kxf6mvtfmidpvz5xan@akuwzh3fe4pj>
-References: <20241202-sandbox_repair_of_embed-v1-0-05aff4b0ccf7@salutedevices.com>
- <20241202-sandbox_repair_of_embed-v1-4-05aff4b0ccf7@salutedevices.com>
- <CAFLszTisVG9Jn-Zi9F6VUERmecn=g=x6EwaNQORS+yiaCRBJRQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7265c18d79bso5472899b3a.3
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 02:54:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1734432877; x=1735037677; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LkkwoMi/QTYgXuw25C6M5By2xtNcmpymBrHRvKaRK/I=;
+ b=W/YuByxL9X90gP+EE1P1t1gvnmoTNtyUnggwMpgKVt1JaIpe6ajrrnrUhYxo8mJW38
+ /l1RgNT8RqZDvDkE6TV9xgoQaNacCa0xJCIMouPzKBgdWKhGuA1gEbh+n4rw8wgtclCH
+ 0o3M5+gfpxcFkDL2xVHzu3pfww0zq5F+PN9nCZm1IkdB2KGRmGEbVmKdLzxFhd9ZGhUn
+ oHtSPrQBb29TTNSqJuWPOVfaDi/pEJX25laENGf2M35GQRxV1YkMqd+SZ/fu1lgmO2sH
+ rmZb9/Qj+O9irLBU5fgn1DStZjl+Jjox7cpOXDmGTJPxv5bVeC8Iq0/WeqcW+U3MB6kg
+ KnRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734432877; x=1735037677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LkkwoMi/QTYgXuw25C6M5By2xtNcmpymBrHRvKaRK/I=;
+ b=cr2wF8Fmt1JBRcyNYV4eSFnXBvGGyss//l/DmFCbhYEgOC/WhFXPien6cfTvTJlPfX
+ 2ye6GYuMdz1WQilxDT01tzKJAz1G/pZOPphC08ae8xmsfzWRaKsPLORVKXxNvFLzMC/0
+ zsAIu1ww+MMD6OFf/CUQBkeAFoVbo24D5wrzxbpemhRkJjBgye7wTmtgjzRZMac+U8Up
+ PEIzJ5Gua8K83zvUVxZQa7gtEuW6XMbXNeKXvrOqrJ2IyIxK+7yEDZo+i5/I3IBuaM9K
+ fQ529RmklNkQMYsDJM6XoQQxBjq2dI/xulAGZ8HIbdPUc4pUooUuS43K2pgzJsDuIQMf
+ FUkw==
+X-Gm-Message-State: AOJu0YwvPiNWiv3HWvLNrLgopPSewIjHghqfKPQSKSdD8hIU3LPuKyLg
+ rQj7gdFywEuxSNuTzJzjhMQKPQr/gkzx2ppLSsQ98R+pkOYvSx81
+X-Gm-Gg: ASbGnctDqUXRGg1Q1Q3tQ/EDNkl59o9sHa4zzKaJnBshGuy2EsZk+Kv11bCgBXDqmU8
+ W5CBHsiFuwquxpGVnefVkqsdpa5NPDbh01gwSE9ErlHtT2sxAUmU9wDEc7rcoUmNBOEGdhDZ6P6
+ 9h9xjwDrrsfXMCmFFZCje1nyhwffdzQTcxUhrW0DRtr6DDFxb56smuvqN08adOrdyfqei2f/UKY
+ 6XB5zhR5xhaS246M0H5QE3FrpHJiScaYiofGB6vTiKpaVzcPFTsVc1JZQv1Uwzsp0GJLQ==
+X-Google-Smtp-Source: AGHT+IHWJC+2/3CDSPBviMlVzzABTRv3q1WECSgHzNkmCuPKWm8BqELLSzb7d5hdJe7YsctuQ1NMYw==
+X-Received: by 2002:a05:6a21:3a93:b0:1e1:dbfd:1fde with SMTP id
+ adf61e73a8af0-1e1dfda98bfmr23186968637.27.1734432877553; 
+ Tue, 17 Dec 2024 02:54:37 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:2d08:94b1:8dd:a583])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-801d5a93567sm5504288a12.4.2024.12.17.02.54.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Dec 2024 02:54:37 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20241217
+Date: Tue, 17 Dec 2024 07:54:33 -0300
+Message-Id: <20241217105433.1419146-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTisVG9Jn-Zi9F6VUERmecn=g=x6EwaNQORS+yiaCRBJRQ@mail.gmail.com>
-User-Agent: NeoMutt/20231006
-X-Originating-IP: [172.28.224.238]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 189882 [Dec 17 2024]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 47 0.3.47
- 57010b355d009055a5b6c34e0385c69b21a4e07f, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/12/17 06:22:00 #26894014
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,105 +92,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-Hi, Simon. See below, please
+Please pull from u-boot-imx/next, thanks.
 
-On Fri, Dec 06, 2024 at 08:31:22AM -0700, Simon Glass wrote:
-> Hi Evgeny,
->
-> On Mon, 2 Dec 2024 at 06:46, Evgeny Bachinin
-> <EABachinin@salutedevices.com> wrote:
-> >
-> > Having CONFIG_OF_EMBED=y && CONFIG_BLOBLIST=n leads to the link
-> > error:
-> > ```
-> > ld: /tmp/ccwtRVty.ltrans28.ltrans.o:(.data.rel+0x4e8): undefined \
-> >                                             reference to `do_ut_bootm'
->
-> Are you sure? I don't see that one. The bootm test should not relate
-> to bloblist.
+The following changes since commit 8aab7730c1c26192b0e4218fbf2f6009f955cb88:
 
+  Merge patch series "Hyperflash Boot fixes for J7200/J721E" (2024-12-14 09:34:27 -0600)
 
-I've double checked - reproduced on v2024.10. There we had in
-test/Makefile:
-  ```
-  ifneq ($(CONFIG_$(SPL_)BLOBLIST),)
-  obj-$(CONFIG_$(SPL_)CMDLINE) += bootm.o
-  endif
-  ```
-So do_ut_bootm()  was not built if BLOBLIST=n
+are available in the Git repository at:
 
-We do not see "undefined reference to `do_ut_bootm'" on v2025.01-rc3
-due to this patch:
-  7f8b8c5abc2 ("bootm: test: Move test into boot")
-  It made bootm.o dependant on CONFIG_SANDBOX and independent from
-  BLOBLIST.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20241217
 
-And because aforementioned patch fixes the issue, I'm going to get rid
-of this current patch.
+for you to fetch changes up to 7cf57825eb4366a474ee0a13ef690d460f8c4775:
 
+  imx: hab: fix srktool -c usage by removing spaces (2024-12-16 14:35:58 -0300)
 
-> This is what I see:
->
-> buildman  -a OF_EMBED -a ~BLOBLIST --bo sandbox
-> Building current source for 1 boards (1 thread, 32 jobs per thread)
->    sandbox:  +   sandbox
-> +===================== WARNING ======================
-> +CONFIG_OF_EMBED is enabled. This option should only
-> +be used for debugging purposes. Please use
-> +CONFIG_OF_SEPARATE for boards in mainline.
-> +See doc/develop/devicetree/control.rst for more info.
-> +====================================================
-> +
-> +Some CONFIG adjustments did not take effect. This may be because
-> +the request CONFIGs do not exist or conflict with others.
-> +Failed adjustments:
-> +~BLOBLIST             CONFIG_BLOBLIST=y
+u-boot-imx-next-20241217
+--------------------------
 
-Just a side note:
-I am not familiar with buildman yet, but it seems, it can not set up
-CONFIG_BLOBLIST=n because BLOBLIST is selected by 'select'.
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/23877
 
-JFYI, I'm going to extend the patch series by new patch to make BLOBLIST
-selectable from menuconfig for sandbox via 'imply'.
+- Add support for Apalis iMX8 1300MHz version.
+- Don't advertise Gbit on (R)MII on the FEC controller.
+- Fix srktool -c usage by removing spaces.
+----------------------------------------------------------------
+Alexander Sverdlin (1):
+      net: fec: phy: Don't advertise Gbit on (R)MII
 
+Christoph Fritz (1):
+      imx: hab: fix srktool -c usage by removing spaces
 
->     0    0    1 /1              sandbox
-> Completed: 1 total built, 1 newly), duration 0:00:11, rate 0.09
->
->
-> > ```
-> >
-> > Fixes: fe158657a5b ("test: inconsistent bootm tests")
-> > Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
-> > ---
-> >  test/cmd_ut.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-> > index 842c2c3e7f65eb9fe017fa1949eb2390be171487..a14dbf4ca5e571a872585ff11bfe7adae3f4edf3 100644
-> > --- a/test/cmd_ut.c
-> > +++ b/test/cmd_ut.c
-> > @@ -107,9 +107,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
-> >  #if CONFIG_IS_ENABLED(BLOBLIST)
-> >         U_BOOT_CMD_MKENT(bloblist, CONFIG_SYS_MAXARGS, 1, do_ut_bloblist,
-> >                          "", ""),
-> > -#endif
-> >         U_BOOT_CMD_MKENT(bootm, CONFIG_SYS_MAXARGS, 1, do_ut_bootm, "", ""),
-> >  #endif
-> > +#endif
-> >  #ifdef CONFIG_CMD_ADDRMAP
-> >         U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
-> >  #endif
-> >
-> > --
-> > 2.34.1
-> >
->
-> Regards,
-> SImon
->
+Stefan Eichenberger (5):
+      toradex: tdx-cfg-block: set apalis imx8dxp to always disabled
+      toradex: tdx-cfg-block: increase indentation for longer defines
+      toradex: tdx-cfg-block: add new apalis imx8 pids
+      toradex: apalis-imx8: simplify module version handling
+      imx: mach: imx8: fdt: set correct frequencies for the industrial SoC
 
---
-Best Regards,
-Evgeny Bachinin
+ arch/arm/mach-imx/imx8/fdt.c            | 132 +++++++++++++++++++++++
+ board/toradex/apalis-imx8/apalis-imx8.c |  19 ++--
+ board/toradex/common/tdx-cfg-block.c    | 183 ++++++++++++++++----------------
+ board/toradex/common/tdx-cfg-block.h    |   5 +
+ doc/imx/habv4/introduction_habv4.txt    |   8 +-
+ drivers/net/fec_mxc.c                   |  12 +++
+ 6 files changed, 254 insertions(+), 105 deletions(-)
