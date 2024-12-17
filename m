@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A2FE77184
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 17:18:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CBACE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 17:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7FF580224;
-	Tue, 17 Dec 2024 18:18:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F45580243;
+	Tue, 17 Dec 2024 18:18:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wqy4M5Jb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EkEJgYYQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A6ED80107; Tue, 17 Dec 2024 18:18:14 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 189AF80241; Tue, 17 Dec 2024 18:18:16 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DFCD180107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 18:18:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB6768021A
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 18:18:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-467a3c85e11so30142311cf.2
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:18:11 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b6e4d38185so431205185a.0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:18:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734455891; x=1735060691; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734455893; x=1735060693; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r3Yr9ou5BIpjqMq+yiGHmG2crlEGHQu5keKjtjxT2sg=;
- b=Wqy4M5JbBPgkzKBt5AQ2oSbPLWDJt2vpKR23SUBTNaqoajzijUVuWYDGr3l+ajrKBx
- gJpxmzPkQ3FMa7ZUVmjwBNE+3ZSdbp5QJnUx68SqyE69h3rq15yUq7BmfCOMXwizcep3
- W5JjfwPiCkKZYvWmKAXuOn8UWGWT0ioouR7hA=
+ bh=lm21hFo1WRl1hvyq7fEg+n7cYbKOOsv6HAVvl0iHHXM=;
+ b=EkEJgYYQSuzA19KuoPB6qzEkZsxgRZWhfuFnVo1UDWI7jNd894Vl3L8GVXw4yp8ijJ
+ wU7ITqspr0CUSh5eVs7tVxXnQo/4E3TloKWzo6JT9QP8kohLT4+JlI+cVdCSbTkA5S/F
+ E3mZGZPOcTTEr8rWyd73gNMeDSgzvLMdhIodI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734455891; x=1735060691;
+ d=1e100.net; s=20230601; t=1734455893; x=1735060693;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r3Yr9ou5BIpjqMq+yiGHmG2crlEGHQu5keKjtjxT2sg=;
- b=YJSAi5ZjLmvxkxCn2b2AnCnAwqpex1XNblhnb296CuCtNau/OKVP04EpExTGud5Icr
- wpfHXuvAa3U1O5Jsu6AL9wHSDAXJP1CqwVa514peSze6Z1cAtPfEXLIiWJ2bJKR+2t2H
- Sce/wIIT32POhrBUrkum7qlcjl60uUowDcIpxaDik6HZ+QzOOxoePSyFKuvDO2MBYDnK
- cZvlSrFsErla8ZKrHvVi6D7tmGskdWf8xqlrNosrPRMLv4RUNo0vmK/rxBtvUSpNkfFX
- ZWrbYRHaCIfN6DdTlPvgMeJXLR4nWSvrV3Ibc9DiL8mjraql0frhdNs8pdoh1r8GkfHi
- 9/bA==
-X-Gm-Message-State: AOJu0Yx22MR+B10xbHbNOU6SxJpw6JFFDxq04/UwAbZ09LnJ3CklmZqg
- 4eBL0Du7zNS1z7ueAorWlhGLYk4b+x9iGSTi+4El8mkHuDdsFvu+oQXXbZN3TI0=
-X-Gm-Gg: ASbGncsyfEjCmmp0soG3/g4bIV7T8+bi+Wi2c1AiA4l5OkKY1sfLQNU/uIW6JEBhQZd
- uTJWl3o7pgh6yHwrMnnKY/KWdmI93Lx/HVrftWGuwiVro0AHfR/WzMBBJQGbt4nFY2PZmGChAYC
- T1YA9WhyL1wwbkCY2ABtI8Mg+y50usL8FES3uAzJSgQhRPZjYKHQkoh8IEbXv+sDPM6NUTyvHgp
- en5r2nKKiQ2sQ0oBRwLgRX1tQtrvnM3u5ptrXNHK/HIiyPHmNHmTIw=
-X-Google-Smtp-Source: AGHT+IGXeNEwkF4U0r2QpgYdXwQPuTqEXmT7Qu4+t9wpSiSB44EiDUBwJk8Q91tUtJVDNmeHLyJNSQ==
-X-Received: by 2002:ac8:7f8a:0:b0:467:4f0a:1b5d with SMTP id
- d75a77b69052e-467a5829d50mr244814511cf.42.1734455890701; 
- Tue, 17 Dec 2024 09:18:10 -0800 (PST)
+ bh=lm21hFo1WRl1hvyq7fEg+n7cYbKOOsv6HAVvl0iHHXM=;
+ b=byqhaCA2Nsy2XUhi5N9EsUGU9tutDgPDLPCqRf5MEn7/JRTFMBu0UG0Zrhk6OWjgA/
+ WfAXi3ecbuhGFY4rYt0mnJI1OO/b0rAaaw75AA/S8lgaNR3oBa0hUSeUX7FxYxhAQS29
+ hWkPUp2sK3GSAaD2WAaPK90hP57Vh603dpIGNvyJoYfN8NvZhHVZy1z7hejAyFY/4Bpr
+ Uo31YrnAkUxA3jugy7bxMB56Yy/OhQyx1jiTcMkF+64u9KOXqjEUS882TbExsR1atmlA
+ k4YoJLuEc4NGDzOZMzmafyLzSruPWLIEimFStYKWSW1YNBKe5bAZLyhrvU0RzsR4gQPh
+ rblQ==
+X-Gm-Message-State: AOJu0Yx7kJsStArcziR7CYCHb7HArPs59zWbABkzEWb66RXlXAdiKL2Y
+ On1TaVoYTQPTrtI5kr2woSiRwrokE6u4yedXKmT95VTDwiVQEB8OQ/xqhUymqmQ=
+X-Gm-Gg: ASbGncutNwRRWZcOIeNkAgbz12I8nzK+xKth+OV1XQUFp1TlymWnb9DP21VnRgLQtMM
+ L6Lkmfe18T/g6mIcg8h9jdkTcoiqt1vFVD/ia+3PZO8DaCcQfAq4FZ+0vEohMIZHGOasrb2l8VG
+ QBMbJgGtzMPWIPS5CjaCcF9M10ueRMavs6aVSjKvJFw8LwnvzUdanz+WFLCIY5xM1FMYMs3popw
+ TWpL3NmGB5DBo1XmmgI3hFxsAHBSI+/OkjVO53/AFCmvwk5BYKnhgY=
+X-Google-Smtp-Source: AGHT+IFG/cewJpTsF9lfgIJlcGl+tO/xmKDPNsXIhMbcjQaIOgTb43BFOTRG2IfSc22Oh6kak4V6xw==
+X-Received: by 2002:a05:620a:7186:b0:7b8:627c:5fc3 with SMTP id
+ af79cd13be357-7b8627c67c4mr33328285a.5.1734455892837; 
+ Tue, 17 Dec 2024 09:18:12 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7048bbe9asm336450385a.94.2024.12.17.09.18.08
+ af79cd13be357-7b7048bbe9asm336450385a.94.2024.12.17.09.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 09:18:09 -0800 (PST)
+ Tue, 17 Dec 2024 09:18:11 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
-In-Reply-To: <20241211131858.520639-1-sjg@chromium.org>
-References: <20241211131858.520639-1-sjg@chromium.org>
-Subject: Re: [PATCH] test/py: Always use the current dir as the source tree
-Message-Id: <173445588887.4187054.7330271372420229440.b4-ty@konsulko.com>
-Date: Tue, 17 Dec 2024 11:18:08 -0600
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Julien Masson <jmasson@baylibre.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+In-Reply-To: <20241207145227.1024491-1-sjg@chromium.org>
+References: <20241207145227.1024491-1-sjg@chromium.org>
+Subject: Re: [PATCH] boot: Use correct PHASE_ variable for expo
+Message-Id: <173445589095.4187054.5817915905875014543.b4-ty@konsulko.com>
+Date: Tue, 17 Dec 2024 11:18:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,16 +96,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Dec 2024 06:18:58 -0700, Simon Glass wrote:
+On Sat, 07 Dec 2024 07:52:27 -0700, Simon Glass wrote:
 
-> The logic in get_details() retrieves the default source directory from
-> the Labgrid settings. This is convenient for interactive use, since it
-> allows pytests to be run from any directory and still find the source
-> tree.
+> This patch was written before the XPL change-over. Update the Makefile
+> condition to the new way.
 > 
-> However, it is not actually correct.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
