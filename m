@@ -4,137 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6E12E77186
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 03:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF2AE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 04:00:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7500980245;
-	Tue, 17 Dec 2024 04:59:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E0304801A0;
+	Tue, 17 Dec 2024 05:00:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="RyznUvWw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CGSU/PsT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAF818021D; Tue, 17 Dec 2024 04:59:37 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::61a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB77A801CF; Tue, 17 Dec 2024 05:00:47 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C4B801F9
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 04:59:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8675800D2
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 05:00:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lMBwp2mSaYSQ9DcyM34TbIC7k4ueXX767dcrD0g/MtvZHjpKXIYPuqu7fHmXv9zw9bywUQmaM7RhAZjIZkkQhJZnWNUj7nL9FFLNl5hThNCN6X3ZN+T3hvX4gYH/9BdsdnS/ZfRm3N8w4WbUYEuoDKS+YdkaTe46wmmX9AOw+WC7vAFrCuhTIgy1CJpXcEqNQ65td//pSwcVquxo0b7mt8ARoZpcrfDnKF+ghRh5JxwdIvyXue74yI4qrCb7J5twWfJFkAFUlUCMx/TyAqOk6Mg0lZ/YCStu40GtctsW9Galh0jwJMy1WpZDgwckJHxyo7ifMu0oqll9aJKALhBPRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2MAsg0JBJVMN93sgwyKk6i3VPuEQJtm0kUtvf89VSjo=;
- b=AR3ZxnXkf2dBupK7W9y+qRU8F6/G+8mQxj41ZRKiGo+LMLhqm+MBcsw8RStCnhG3s5HBMQ+NSjWqaFRdUiXmLT2EVnSdRz2qQXSknd3jxS5SBmSX86u9RxQfYrWBHlaCiam6QdJ2qrxTj7jyC2xOO/jMDo0o3BYa3E8NBTxLpyeyL1R2wZfMg81Fslf0ul/M12oTGIfk0HFJNqdj7v515W7Mv8THP/LungrZOYN09rpUzJDduxJeyVNws2Sai7g/3N41biN136wZRKKUT1uIRqW+FXjiHX6fS9yNCkBIUW7Ca4H93roDNQSYWE9HXGDP2Wlw4srHTdUKMQbY/JM7Og==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2MAsg0JBJVMN93sgwyKk6i3VPuEQJtm0kUtvf89VSjo=;
- b=RyznUvWwO9/qMAoLB0+4qtuOzPJyhXS+EZJA9X/C+Kq4t6pd+TfEnyAiDefyoAkbwsK6tHRhSr81/KO2lWLKorLU3E5cvioPWq39Ue9Z+B+MoSCJIjKTHHWMGK+br39K+fVsOOLG/GvufU1jcgm/iNGxdGgKYPRgR/ft8FHf4bQ=
-Received: from DM6PR01CA0004.prod.exchangelabs.com (2603:10b6:5:296::9) by
- SJ2PR12MB8925.namprd12.prod.outlook.com (2603:10b6:a03:542::9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8251.21; Tue, 17 Dec 2024 03:59:31 +0000
-Received: from DS3PEPF000099D6.namprd04.prod.outlook.com
- (2603:10b6:5:296:cafe::d1) by DM6PR01CA0004.outlook.office365.com
- (2603:10b6:5:296::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.21 via Frontend Transport; Tue,
- 17 Dec 2024 03:59:18 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS3PEPF000099D6.mail.protection.outlook.com (10.167.17.7) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.15 via Frontend Transport; Tue, 17 Dec 2024 03:59:30 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 16 Dec
- 2024 21:59:27 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 16 Dec 2024 21:59:24 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <trini@konsulko.com>, <sjg@chromium.org>,
- <jens.wiklander@linaro.org>, <ilias.apalodimas@linaro.org>,
- <xypron.glpk@gmx.de>, <jerome.forissier@linaro.org>,
- <mkorpershoek@baylibre.com>, <akashi.tkhro@gmail.com>,
- <francis.laniel@amarulasolutions.com>, <ddrokosov@salutedevices.com>,
- <git@amd.com>
-Subject: [PATCH v4 1/2] cmd: Add support for optee commands
-Date: Tue, 17 Dec 2024 09:29:13 +0530
-Message-ID: <20241217035914.1297469-2-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241217035914.1297469-1-venkatesh.abbarapu@amd.com>
-References: <20241217035914.1297469-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6dcdf23b4edso18012456d6.0
+ for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 20:00:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734408044; x=1735012844; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+skJNmE7B3/efk9CYVb5NYa0c99wqNcKu0JVVIlp774=;
+ b=CGSU/PsTnTkeorAHG13H0j5K7A9IfRAEtAAHh4167/MX9cEeNn8Lv+x5hYMpbVzESL
+ 92Yf3hQ6JWopgofJwhQXMWdD04x7+neE/0FFSw3Spxpic2DUrxujCgJ922IOASBjHR+U
+ lDnZXN77oqzM8wEaop5h4Y6t3yyk8GmykNU50=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734408044; x=1735012844;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+skJNmE7B3/efk9CYVb5NYa0c99wqNcKu0JVVIlp774=;
+ b=U0AMQPpIC45nj9GwH5w38ClyaGfWMzbtz801qwz20FELPvgUEielJPx04sn7hXtMID
+ hJNxgvrrJwYk1Nd25U2t46TCuuYGtSRxlxqJGas1AjJF0agQMGgcJsD5NSIbkUy5QXel
+ HDx31YXlR4qHXMbDxuJakryeXbQxVb4VsMszvUQtlpC7lB5Dx/OrFZlnd5XYY8SFi2PK
+ 7PIIwEiLrSIwaaTUwUzZ5dnywLYYORER1YydnJo2bsTW6Sao6mIY9h6iDAMucJlNX1Pi
+ t1nDJ9pbv+KeJ9aAx+F7NDtzTGChgaA4EPD7BLgCSGDehRV2kDOnvtSPC6sXtcrlINtf
+ YcdA==
+X-Gm-Message-State: AOJu0YzuZ/jJxu3Z3HgiuuY7bS8K5IocrKYP+MlTuIz40uSt9uUqFZYx
+ 7RaVCyBfdw9oVekFTpqAzNOLT2xwixfNG+IQJDCrvj/sKwI3EGmSWbsrxMXb1IE=
+X-Gm-Gg: ASbGnctlF5yZxc1j51FJAmeW5vUisG4CZhGCR0GWrPH8nPqbZVbB0s5KWpOXSGqQWRE
+ XKqczE3DAlBeQNXhoC/UNCVM2x9gcR7LpmFhKJ3ttlhwy2voh5Y2g9rOYNw3SPi3StA2u0AJiEo
+ On0NN7vhGlHq1/YtwtZ7TQEUceJMl4w0rVu7MNkgf3RozqzBS3C+jdJg2Y6/eK6XDiCGx0fqZEc
+ Zh3p0nypVq6FlDmfbApbY5LMi65tRA/ibeuf6zAd/vCa3urPq0xrcsV
+X-Google-Smtp-Source: AGHT+IFplP3Lvnh9YvA2o9VXBJMZbwtYzA45nvNYdWRcf0s2+u3QJqMepkw7rf5YliMN+FTg9tvN0g==
+X-Received: by 2002:a05:6214:caa:b0:6d8:a8e1:b57b with SMTP id
+ 6a1803df08f44-6dc96850fa1mr294579196d6.36.1734408044463; 
+ Mon, 16 Dec 2024 20:00:44 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dccd256b1csm34206096d6.30.2024.12.16.20.00.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Dec 2024 20:00:43 -0800 (PST)
+Date: Mon, 16 Dec 2024 22:00:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/2] bloblist: Introduce BLOBLIST_PRIOR_STAGE options
+Message-ID: <20241217040040.GJ1505244@bill-the-cat>
+References: <20241212151142.1562825-1-trini@konsulko.com>
+ <CAFLszTiF8m7P8mBCNRhhiRQt=bcfRB3ddaaumF_EXETTXbUmDQ@mail.gmail.com>
+ <20241213170736.GW1505244@bill-the-cat>
+ <CAFLszTiPxTDqB9r+rdT4gARCA1HPx9ELO+tWELB1eKuijFvAeA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D6:EE_|SJ2PR12MB8925:EE_
-X-MS-Office365-Filtering-Correlation-Id: f99cbcca-4c65-4210-e07f-08dd1e4f35d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|7416014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ikOpS6HdQPq7m3guXmjQ7vaO7GGCCcZfwJO58ApMRHktwEiAuJcVRi88491X?=
- =?us-ascii?Q?1BDqMsahpRTX7VVFvamalrc8AjVwo32TQDYE5dG6xI76b/Ub7HASmnw5Dg08?=
- =?us-ascii?Q?0hRiQUmq+12RWOJfE3jaEI2OlygLVlfSzSO82zfA+ebFJUGMqiBC2hpDLMT3?=
- =?us-ascii?Q?QZ83/mG5nQ49Q+rQT1JjYSo/eRoGQ0HHyn5tyPsfZCjjGgCqe+NV7vWBFfdg?=
- =?us-ascii?Q?jMl0y5LhbDQEPXI+S4SbJWSecjYCg/q2vynFM7ATRTT1vHVeQpxaEjDszC1w?=
- =?us-ascii?Q?y8gBalmjgquPInZ5nB/YOcVO/yh2xf4VapXud4yyYz3kFl3T7MSBCBgNa1Zf?=
- =?us-ascii?Q?KKG2LiyXGeexKiS0DHgsiP0hGix9ISolbq/s2MXxOA+uyEiawi1l6AQ719YZ?=
- =?us-ascii?Q?3JtCmlpQfr/E5P/0jdStlO1VZVTi84qPmUKSRPmeGlNl8aqLNtYLOvGuy5Ot?=
- =?us-ascii?Q?qzBsypbMK2sttWtpwdxDl4VruO/Ml+BnkTp78jKxT++ulLABuPHbtTg890q+?=
- =?us-ascii?Q?pYh8UXrvEynnGdNGRf3HrJhkHg0emi9CLte/Reekiv10JhooMTdpPKj2vrMt?=
- =?us-ascii?Q?jhSWi+/iZbepDIKJZ/3BbplGqsqA4bv7N3zboirZcCmxkBIM6B+XK17ksUUk?=
- =?us-ascii?Q?GAF+AlQ617yjjQ0+8MdWr7oNItJKD/fIIOxufLYgNDT6PDiCb4fHVyD0RHcB?=
- =?us-ascii?Q?cEiA9XSa2B3zpgXUXyoowefslzHS9H3upucwxcV6ndPtNd5MWOHtqg+RQQFT?=
- =?us-ascii?Q?iumjOIItbnFm49hi2lDGIR8qiECLcD1l6QV12ETDuhvB9Bt9jvS2zdDEUZDA?=
- =?us-ascii?Q?uPhyPEBssWIkp0SQGt0mJHLONkpuiZTyBHft4oSr6QmLDqHNNct7b6t6ZvaF?=
- =?us-ascii?Q?xpqD73K6f/7HwoRNs69fOu9klByUP+ToPxAApsHKpolbCg/ITbm2KZKRcNGC?=
- =?us-ascii?Q?+AP3KZZ40o8FxijAlmJ03WHTXEgB3ecz8Y3V4Yars3l4b6+LD6Gnk1cvdzAs?=
- =?us-ascii?Q?vVYOFXv6Zg5kuIa6VZV8/n5+zlaQDEGOJdmjd+E+fN3YfaDeZ7yVnWZY6iJK?=
- =?us-ascii?Q?nQ8KE0r1A/IIe6Vt/q2mqPMQ4h6brhZYXVn123EaCObRrPULkqlz+2p+ywFb?=
- =?us-ascii?Q?cp+qVEEK5XHBbOVNpSwhDuN0plJRfrfG+QTIjjvwh8nQyfKaNthUXix1CNnw?=
- =?us-ascii?Q?DhPg6jHDllXzAqRJzRYRfYH8bl9ym9UdI8fux+pIBAOfCoiHGcYZDMeD1dgr?=
- =?us-ascii?Q?TgkXxtL6/im5DTd3HZy+lqh/SB6C3wDnuU6LDoZBd/ns5FqOVeRswN3te394?=
- =?us-ascii?Q?OFn1zVYcz9peXe76EuMjGWGkbnYzI2yrwlaURW1+eA8TPka05teICpxEPxHg?=
- =?us-ascii?Q?e7bTXUJpv6e3HJn1O4gl/HByPu8XkdsOTieuffZ7P5Xg4R2rNWj8jhiW5FJ8?=
- =?us-ascii?Q?LSmagwdSmZw=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(7416014)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Dec 2024 03:59:30.9581 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f99cbcca-4c65-4210-e07f-08dd1e4f35d1
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D6.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8925
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5gx8YKENFQ++PwAA"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTiPxTDqB9r+rdT4gARCA1HPx9ELO+tWELB1eKuijFvAeA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,138 +96,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the basic 'hello world ta' command which increment
-of the value passed. This provides easy test for
-establishing a session with OP-TEE TA and verify.
 
-It includes following "hello world ta" subcommands:
-optee hello; default value '0' is passed and gets incremented.
-optee hello <value>; value to increment via OP-TEE HELLO
-WORLD TA.
+--5gx8YKENFQ++PwAA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-To enable the OP-TEE side HELLO WORLD example please refer
-https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
+On Sun, Dec 15, 2024 at 05:25:24PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 13 Dec 2024 at 10:07, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Dec 13, 2024 at 07:32:24AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 12 Dec 2024 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > Introduce an option to control if we expect that a prior stage has
+> > > > created a bloblist already and thus it is safe to scan the address.=
+ We
+> > > > need to have this be configurable because we do not (and cannot) kn=
+ow
+> if
+> > > > the address at CONFIG_BLOBLIST_ADDR is in regular DRAM or some spec=
+ial
+> > > > on-chip memory and so it may or may not be safe to read from this
+> > > > address this early.
+> > > >
+> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > ---
+> > > > Cc: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >  common/Kconfig | 32 ++++++++++++++++++++++++++++++++
+> > > >  lib/fdtdec.c   | 11 +++--------
+> > > >  2 files changed, 35 insertions(+), 8 deletions(-)
+> > > >
+> > >
+> > > Since this is the essentially the same as my OF_BLOBLIST patch, which
+> > > was rejected:
+> > >
+> > > NAK
+> > >
+> > > The issue is not whether some 'previous stage' set up a bloblist. For
+> > > example, if VPL_BLOBLIST_PRIOR_STAGE is enabled, that presumably means
+> > > that TPL set it up. But it doesn't mean that TPL put the FDT in there.
+> >
+> > This is wrong. The root problem is saying that the bloblist is in
+> > possibly uninitialized memory. The code is quite happy to NOT find the
+> > device tree in the bloblist and continue searching other paths.
+>=20
+> But until the bloblist is set up, it doesn't exist.
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- cmd/Kconfig  |  6 ++++
- cmd/Makefile |  1 +
- cmd/optee.c  | 77 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 84 insertions(+)
- create mode 100644 cmd/optee.c
+An almost philosophical statement, yes. How should the generic code know
+if it exists, or does not exist? That is the question.
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 1d7ddb4ed36..4b33468891e 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1446,6 +1446,12 @@ config CMD_OPTEE_RPMB
- 	  in the Replay Protection Memory Block partition in eMMC by
- 	  using Persistent Objects in OPTEE
- 
-+config CMD_OPTEE
-+	bool "Enable OP-TEE commands"
-+	depends on OPTEE
-+	help
-+	 OP-TEE commands support.
-+
- config CMD_MTD
- 	bool "mtd"
- 	depends on MTD
-diff --git a/cmd/Makefile b/cmd/Makefile
-index d1f369deec0..533d0f6a1be 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -118,6 +118,7 @@ obj-$(CONFIG_CMD_PAUSE) += pause.o
- obj-$(CONFIG_CMD_SLEEP) += sleep.o
- obj-$(CONFIG_CMD_MMC) += mmc.o
- obj-$(CONFIG_CMD_OPTEE_RPMB) += optee_rpmb.o
-+obj-$(CONFIG_CMD_OPTEE) += optee.o
- obj-$(CONFIG_CMD_MP) += mp.o
- obj-$(CONFIG_CMD_MTD) += mtd.o
- obj-$(CONFIG_CMD_MTDPARTS) += mtdparts.o
-diff --git a/cmd/optee.c b/cmd/optee.c
-new file mode 100644
-index 00000000000..39947c00145
---- /dev/null
-+++ b/cmd/optee.c
-@@ -0,0 +1,77 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * (C) Copyright 2024, Advanced Micro Devices, Inc.
-+ */
-+#include <command.h>
-+#include <errno.h>
-+#include <tee.h>
-+#include <vsprintf.h>
-+
-+#define TA_HELLO_WORLD_CMD_INC_VALUE 0
-+/* This needs to match the UUID of the Hello World TA. */
-+#define TA_HELLO_WORLD_UUID \
-+	{ 0x8aaaf200, 0x2450, 0x11e4, \
-+	{ 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} }
-+
-+static int hello_world_ta(unsigned int value)
-+{
-+	const struct tee_optee_ta_uuid uuid = TA_HELLO_WORLD_UUID;
-+	struct tee_open_session_arg session_arg;
-+	struct udevice *tee = NULL;
-+	struct tee_invoke_arg arg;
-+	struct tee_param param[2];
-+	int rc;
-+
-+	printf("The Hello World TA is going to be called\n");
-+
-+	tee = tee_find_device(tee, NULL, NULL, NULL);
-+	if (!tee)
-+		return -ENODEV;
-+
-+	memset(&session_arg, 0, sizeof(session_arg));
-+	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
-+	rc = tee_open_session(tee, &session_arg, 0, NULL);
-+	if (rc) {
-+		printf("tee_open_session(): failed(%d)\n", rc);
-+		return rc;
-+	}
-+
-+	arg.func = TA_HELLO_WORLD_CMD_INC_VALUE;
-+	arg.session = session_arg.session;
-+
-+	param[0].attr = TEE_PARAM_ATTR_TYPE_VALUE_INOUT;
-+	param[0].u.value.a = value;
-+
-+	tee_invoke_func(tee, &arg, 1, param);
-+
-+	printf("value: 0x%x TA value: 0x%x\n", value, (int)param[0].u.value.a);
-+
-+	return tee_close_session(tee, session_arg.session);
-+}
-+
-+static int do_optee_hello_world_ta(struct cmd_tbl *cmdtp, int flag, int argc,
-+				   char * const argv[])
-+{
-+	int ret, value = 0;
-+
-+	if (strcmp(argv[1], NULL))
-+		value = hextoul(argv[1], NULL);
-+
-+	ret = hello_world_ta(value);
-+	if (ret)
-+		return CMD_RET_FAILURE;
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+U_BOOT_LONGHELP(optee,
-+		"- commands can be verified on OP-TEE\n\n"
-+		"optee hello\n"
-+		"optee hello <value>\n"
-+		"\n"
-+		"With:\n"
-+		"\t<value>: integer value\n"
-+		);
-+
-+U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
-+			U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
--- 
-2.34.1
+> We should not be
+> looking for a bloblist that we know is not there yet. The bloblist is set
+> up by bloblist_init(). You seem to be imputing your own semantics for
+> bloblist.
 
+We don't know if the bloblist exists or not. That's the problem. It
+could already exist. That's the whole reason we're in this particular
+argument.
+
+> In SPL, init happens in board_init_r(), i.e. after RAM is set up. So don't
+> look in the bloblist until it is set up! It doesn't exist.
+
+Unless of course it was setup before. We don't know if it was setup
+before or not until we look. A big part of the problem is that for prior
+to U-Boot bloblist we don't need to use main DRAM, the bloblist is tiny
+and we have some other persistent memory available. Unfortunately, x86
+does not.
+
+> In U-Boot proper, we look for it before relocation, so we can relocate and
+> expand it for use with ACPI tables, etc.
+
+I'm not sure that's relevant. This means we've taken what we were passed
+at a fixed address and allocated more space for it and are using it
+somewhere else.
+
+> Take a look at this patch, too:
+>=20
+> 3d6531803e1 bloblist: Support initing from multiple places
+
+I'm not sure it's relevant. It does show we have a problem of not
+knowing if the bloblist exists, or not. And I don't think we're solving
+that right today (nor does v1 of my patch).
+
+> > An alternative here would be to better document the requirements of
+> > BLOBLIST_ADDR, and then just disable it on chromebook_coral until
+> > someone is inclined to move DDR init in to TPL, or someone finds a
+> > non-main-memory address to use for BLOBLIST_ADDR or switches to using
+> > BLOBLIST_ALLOC.
+>=20
+> Coral's TPL runs in cache-as-ram, with a 30KB limit on code size. It cann=
+ot
+> do DDR init in TPL because the DDR blob is large (160KB?) and there is a
+> ton of setup to do first, in any case. When CAR goes away, its memory
+> vanishes, so you need to have copied the bloblist somewhere else (the
+> bloblist holds the MRC data which needs to be written to SPI flash later
+> on, when possible). This all works perfectly and there is really no need =
+to
+> change anything.
+
+Ah, so there's some of the details finally. And oh goodness, we're
+writing to the SPI flash on each boot? That's not good for longevity...
+
+> Again, you seem to be imputing semantics to bloblist which don't exist.
+
+Unfortunately some things were missed along the way, and are still
+missing.
+
+--=20
+Tom
+
+--5gx8YKENFQ++PwAA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdg92gACgkQFHw5/5Y0
+tyxSawv6AzyXzxMLmR43cJiWkKx4/P+koMeawbysTHioZ/rjqlL3kEkAYXvKvzqc
+OKULsdDm0JzOmyuLImuiplhJypEmKPuXs8dMjry8VnOoLk5Et3trf0zul6VCdqb+
+1uaC91fKeE0TK3Ln8H/ihft6rHB+5jRGVv3K5Zwjign32K9P7//pLiG7jpA1vUFH
+8+MLsQQTGRFq6vTJ2pIzGFwmI1VWGy3MQyZZlhwIMdfSnYriI6j32wP9pOlNSEoa
+OGiIQ8+BqDIFoTG+ycBEAgSTtx2/YatMW2eaCFcm6iVUsbUK5QX6mvVP+Fk6kzyi
+fyndwghUIGwH5HYnou0YwrX0aki/Iw//ctNp2bxsnXrKWZqYx46NWoYPeYJfgc+w
+x8H0syE7x7GXvWL9kRXAFESGDMHafgkIdnNUxMLvhMnjo9nRyZ1rVMdrfQx95Gcn
+B5BZFQiAD3g7d6gvTyA9AOxpHTZtpWELQqFThoYbuIqqXg37MqloCNiv1CIp0YdI
+cd6yZpj4
+=+oSo
+-----END PGP SIGNATURE-----
+
+--5gx8YKENFQ++PwAA--
