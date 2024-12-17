@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0565EE7717F
-	for <u-boot@archiver.kernel.org>; Mon, 16 Dec 2024 23:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A00E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 00:18:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D8F4801A0;
-	Tue, 17 Dec 2024 00:39:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C2C6800D7;
+	Tue, 17 Dec 2024 01:18:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KqFGsKUX";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PYYlKNrX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81586801FB; Tue, 17 Dec 2024 00:39:31 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 23D2C80107; Tue, 17 Dec 2024 01:18:48 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21626801A0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 00:39:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0607800D2
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 01:18:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-844d5444b3dso168604139f.1
- for <u-boot@lists.denx.de>; Mon, 16 Dec 2024 15:39:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734392367; x=1734997167; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RuuBbs5cN7vmhXre4zKr6z4PLmiIngKMn/F6gvZfmx8=;
- b=KqFGsKUX/57qCvgIkJXzHgTywH2+VUCUfoUvzFEJiVMQ4IuifA6NXqJ3mmaGBNgZfT
- 6YXBhWjmRsbHteb+nTnujVrej3blTC/tw0F01G8V/UkQ4N1ibRUc1cCRCGgImm/Ywbrc
- NEweybxM0B8XfhySDLN3dftGWEhL+85/THFCI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734392367; x=1734997167;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RuuBbs5cN7vmhXre4zKr6z4PLmiIngKMn/F6gvZfmx8=;
- b=ZcBBKUmR6JgggEJvRtIIZlREFOhYA0wPTEMMp3qJyHZNyvVX/yixhDPLBtEbNAXiBB
- 0huBWbNUc0REfUdQBWfTiTRypEzijc44oFgswpGArpRulNTNYnzwVLRIBF7J3m8O/Qp+
- 9zo7tauAWZQqrivsVq9IsHmWKRGRzrDwZadLAK4SUAunfLqWLj4sONgZr7BShxYl0Nio
- HmR0Ol9GSZnV45she5xu/fzasPuCPWJLVvBwEX0lFLfI+VF043vAh7A0PL+4th2+/ER8
- j+RFYffUZdkOo5Fr6gnyEjnh84aTkRor5KCP2OQnu5ShlWcGWiTlnARn/wh+64Zw3Kkb
- rNVA==
-X-Gm-Message-State: AOJu0YxXTPgnJtjSgTLSyhuEhxP0jhW/9SU4Swv0lPIh9qEOennZknUq
- KtM+jHOK2ZfDtgjKH+gxxSEbuSu1rscoTmI0zINyuJUKor7w1s8eK+YhZZGy2Hji8EY0BtWWzJs
- =
-X-Gm-Gg: ASbGncunsYliO8NeNmSB5YeKUwhTGsiIqnLdo+46AxXhOLMBUOYfohOz7tLRJcXwnUX
- 5JOovD2Oj9R+2Spy5QlPTC2vgIRWb+mXFJBSs6C7cpnJJ/yJ4ZWPGuYKaqRa5smi+1NCrCtsQ+u
- 0kuRE26hQD8PaDoH5VMh5t7ywcHMXHUB6hsS/7rhxXjC8cOl10T5s+lOxcUXL8A5C14LdgkMNiJ
- hNRAyULqqzzOMgeeaSuAKHsjxvtUDJNXjaL2pK8iUt5tNVeDJVKYfSUMMJLzjfVf2Lz+cDX893L
- cp5DgnOZB8RhEYX75g==
-X-Google-Smtp-Source: AGHT+IFOy9Lmu1iaFv5O7cImcNGIYYxBIplzTRNv3cQIcB0711aoRGgKHJ39IQHShzeVn6h6glzH8g==
-X-Received: by 2002:a05:6602:3401:b0:841:99cb:776f with SMTP id
- ca18e2360f4ac-84747e257b4mr116523439f.6.1734392367278; 
- Mon, 16 Dec 2024 15:39:27 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e5e3781fa2sm1406731173.118.2024.12.16.15.39.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 15:39:25 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1734394721; x=1734999521; i=xypron.glpk@gmx.de;
+ bh=8vXHUeA3In6CMp+3EpZmMdTyheHkrIiMc7gdfyKRJdc=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=PYYlKNrXdKYEfghFCyoSediBmhZNnornhMfcQbADB2JFcsiXdFyBxr0SVZqOxPHy
+ 9bqo9IIzBF7i/oKSFhZcm9l4nSsQcNmONOGvwdS4/+RIoAO0xPEp2FkMCWN8KdJaP
+ I/zW8jsP3THe62uHCL6on5Ph7oNdCoxMmjXBaVfiL5WCUot5PyokLM2ia6Kgqj4UR
+ FDtrTm3BOA7ZDhYFCgXnxTaPrpa/q5Hj++4dQyz7pgdm+wOUdG3T5aBLRnEO1voYq
+ 8o+PuEKXgjNHC/+xetCdfX77JEQstdYM11DXfzO/mSzeHWjVf2fJUtBZoK+wdYChD
+ Bft+3NUJBMFrj+relQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([46.114.106.131]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgeoI-1u48J23kWy-00okZW; Tue, 17
+ Dec 2024 01:18:41 +0100
+Date: Tue, 17 Dec 2024 01:18:36 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
-Date: Mon, 16 Dec 2024 16:38:53 -0700
-Message-Id: <20241216233853.2125656-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241216233853.2125656-1-sjg@chromium.org>
+Subject: Re: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
+User-Agent: Thunderbird for Android
+In-Reply-To: <20241216233853.2125656-2-sjg@chromium.org>
 References: <20241216233853.2125656-1-sjg@chromium.org>
+ <20241216233853.2125656-2-sjg@chromium.org>
+Message-ID: <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:qINqnZrP/49ybbEbJP2dWNFH1Q9A5s6kUkMUwykeryo/uHfzQ7f
+ 2BAyNIXbA6UOLBNq6+3KN79Az04ajX7pEj70MxMsy76+GY0CvXczJRZiTtlS5by7jMhSrzk
+ D1rtZw1qy0KfbFkttbSfSlc/eGb+jmP+X3Qqw//w8vPujPfzGm9ZaVFZ6Wr/cTB4qnga+bG
+ e73kr+Zp+4TQft/CC2kFw==
+UI-OutboundReport: notjunk:1;M01:P0:DMz9wjg836I=;Rd8ahnLrIu+PCRcSPHu5VKARt6I
+ rtjfSFf9muR5hJrWCpfVlD5lYotcGW3snq3/n6vzS5rboRNv4RjCA2ZX2cw9BiaUq7mM9VGbV
+ XWCIdcE7Pa5GlHeDIcwoADmCS3jz5/9CeKiBpQ0Xrzz/E6wyUyhunJvg4BoErxYeYIvB86RP/
+ +iW3FaUC0oWHs4GQgsVTy8xX3VZNHY9tC2Zm5ktYwN9K00blWrE5E7NEPpSA/5DkfOouvYEbv
+ mre+0wAeIdecgBMs27H83z9KK/kUDoDkeSSJVB95ELUU2XXVJDoQBFzu/myIc0xpYxrgO/Mtx
+ q7qieZA6RCXk83p4qjw9up94EzlXGM5TRHiEMV1aFg3Syk3PyXahO8y+PgH9122WZS1kTDc6p
+ GEhU8Xp4Hq9GBUbQGIRuQYYzyrulfIlTYQV2EgawioBlUZGml5VjVrOm8y/lBUwUxMcKsSwVf
+ KmEqszpXuA1GgAN6GQSN8epEg5Ww3ddqBPrneAGUnHsN6jrWkYTg55HTpWFSY6hHYRYi6mhzN
+ XwqLcAwuSYGkLBE3rM6THScsf3hJWXaP4cnIBalM5t8m46B8xA/oXLQ4Z5OkuZraoRdsdJk4u
+ PlADZ0kgRJx/zUCAtYBZth+XD2XpIimR1nTQyCJkyJk402XnIP+VrvZapcFALgYwX5eVDjrU+
+ VJpiFkNhXSmHWsWSH+OmDxDXTcfwDK4vjsUvZzV3njbckEeM/pN/QJjBRBLN2oSxseN02HLVE
+ xxor3FApzOC8hPItPcbsM1ojwH4FWLpk5JbL2hXa/FtG7mgOI0lJfcxm2LAK/Ar7XuSpbroMY
+ AkHxC9kF4nYyVR0hzX1YbaieHKL1DYsKcT5dtP13JCWMO0/gQdz6JYPwjsiFUaWLrUBEbEbJy
+ 5v6oaV9VCv4kFJL8iHY5NNlXY1V6fC3/QKFcYcTfb1Ad4n9t9Orjhp/MPEH3PfW1+wDHkicak
+ VaHZslHCAWmJRpYsdrYgK3vCuteZBa+qG4cylmMnS3Gxhyw9Iv4Ky7ipNvm591lhrYnoV09aa
+ r+AiOlMc+Yrtpg0Q5sN9Hxo5gGiZewkaISir4wZBhgIHNUKBQ0jBcBdUurCnu9qcmzLXq2Art
+ ISEOrHPc5JCK0vWpwIsL/5II8gBX2c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,33 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I have one of these boards loaded with Ubuntu 24.10 (64-bit). Add an
-entry for it so that it can be used for testing.
+Am 17=2E Dezember 2024 00:38:53 MEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>I have one of these boards loaded with Ubuntu 24=2E10 (64-bit)=2E Add an
+>entry for it so that it can be used for testing=2E
+>
+>Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+=2Egitlab-ci=2Eyml supports an include statement=2E
+Maybe it would make sense to move the lab definitions for lab_dfn into an =
+include=2E
 
-Changes in v2:
-- Rename the board to vf2
-- Add a comment about what the board is
+Such a file could be conditionally included:
 
- .gitlab-ci.yml | 6 ++++++
- 1 file changed, 6 insertions(+)
+include:=20
+  - local: 'lab_dfn=2Eyml'
+    rules:
+      - if: '$LAB =3D=3D "dfn"'
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index ffcf8532944..a17c1b0a366 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -696,3 +696,9 @@ rpi:
-   variables:
-     ROLE: rpi
-   <<: *lab_dfn
-+
-+# StarFive VisionFive 2
-+vf2:
-+  variables:
-+    ROLE: vf2
-+  <<: *lab_dfn
--- 
-2.34.1
+Cf=2E https://docs=2Egitlab=2Ecom/ee/ci/yaml/index=2Ehtml
+
+
+For the current patch
+
+Acked-By: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+
+
+
+>---
+>
+>Changes in v2:
+>- Rename the board to vf2
+>- Add a comment about what the board is
+>
+> =2Egitlab-ci=2Eyml | 6 ++++++
+> 1 file changed, 6 insertions(+)
+>
+>diff --git a/=2Egitlab-ci=2Eyml b/=2Egitlab-ci=2Eyml
+>index ffcf8532944=2E=2Ea17c1b0a366 100644
+>--- a/=2Egitlab-ci=2Eyml
+>+++ b/=2Egitlab-ci=2Eyml
+>@@ -696,3 +696,9 @@ rpi:
+>   variables:
+>     ROLE: rpi
+>   <<: *lab_dfn
+>+
+>+# StarFive VisionFive 2
+>+vf2:
+>+  variables:
+>+    ROLE: vf2
+>+  <<: *lab_dfn
 
