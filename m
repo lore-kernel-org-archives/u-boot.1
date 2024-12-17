@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC92E77184
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C933E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:17:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 343388021D;
-	Tue, 17 Dec 2024 14:17:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 790388022F;
+	Tue, 17 Dec 2024 14:17:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LNzV/UIu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OAabBb98";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3227801CF; Tue, 17 Dec 2024 14:17:27 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 0A606801CE; Tue, 17 Dec 2024 14:17:33 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75D99801CE
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:17:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAB328022E
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDH5Wu3970125
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDHFWX007643
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 17 Dec 2024 07:17:05 -0600
+ Tue, 17 Dec 2024 07:17:15 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734441425;
- bh=WutxAz3kRhV6Qe9emgdyGlbuk8gwLCdmA03ocHtdo/Y=;
- h=From:To:CC:Subject:Date;
- b=LNzV/UIuKz91WS+yK2s5j7ByeoJJw+wREUWzXTNssuhIOweS79Cnox4Bs0JpwJo3J
- szrn+6ZorDQRHS/yDwI8hJf7s8TT5Nd0XzsOcfFNKlhcO7lnamzTQm+0RS5ujJecLa
- 4HmVDnORejdrUlbSQUR5+gOXo3y+xZ54GsBSQlkA=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDH5g1065750
+ s=ti-com-17Q1; t=1734441435;
+ bh=v+3OxJULGsFsXJOoTYnGXKwaGApUol/hDrIJTuax0K0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=OAabBb981aF1ZswK4SuqmsDU+0d6Cje+K7ksPh18N+DEY9/dnLRNElHKBnu1goJdj
+ CTQP4PrAas/PPWTXK1TIjDDnFVWlG6ymfyy9ouzzb4l2qXg0kq9Z+798CKRfRQxPtC
+ N03m38Z+Zt/7P6JUSzW21yQI7sZ3P1ww1w/KPYgI=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDHF1c028818
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Dec 2024 07:17:05 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 07:17:04 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ Tue, 17 Dec 2024 07:17:15 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
  (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Dec 2024 07:17:14 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 07:17:04 -0600
+ Frontend Transport; Tue, 17 Dec 2024 07:17:15 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHDGxZL085338;
- Tue, 17 Dec 2024 07:17:00 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHDGxZN085338;
+ Tue, 17 Dec 2024 07:17:10 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <n-francis@ti.com>, <mkorpershoek@baylibre.com>, <afd@ti.com>,
@@ -59,10 +59,12 @@ To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
  <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH 0/4] Add support for USB DFU boot on AM62Px
-Date: Tue, 17 Dec 2024 18:46:28 +0530
-Message-ID: <20241217131658.2920799-1-s-vadapalli@ti.com>
+Subject: [PATCH 2/4] board: ti: am62px: env: include environment for DFU Boot
+Date: Tue, 17 Dec 2024 18:46:30 +0530
+Message-ID: <20241217131658.2920799-3-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241217131658.2920799-1-s-vadapalli@ti.com>
+References: <20241217131658.2920799-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,70 +85,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Include the TI K3 DFU environment to support DFU Boot and DFU Flash.
+Also add "usb" to the list of "boot_targets".
 
-This series add support for USB DFU boot on TI's AM62Px SoC which has
-two instances of USB Controllers, of which the USB0 instance of USB
-which is a DWC3 USB Controller is used for USB DFU Boot:
-ROM => tiboot3.bin => tispl.bin => u-boot.img
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
+ board/ti/am62px/am62px.env | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-The first patch of this series is based on the suggestion of
-Jonathan Humphreys <j-humpreys@ti.com>
-at:
-https://patchwork.ozlabs.org/project/uboot/cover/20241124070828.617558-1-s-vadapalli@ti.com/#3419733
-which prevents overwriting the "dfu_alt_info" environment variable which
-is set by "spl_dfu_cmd()" for USB DFU boot.
-
-The second patch adds USB DFU environment for AM62Px.
-
-The third patch extends "am62x_r5_usbdfu.config" config fragment for
-being re-used by AM62Px SoC by dropping configs which aren't required
-for USB DFU boot. This is necessary to reduce the size of R5 SPL
-(tiboot3.bin) built for USB DFU boot.
-
-The fourth patch enables USB device-tree nodes for USB DFU functionality
-on AM62Px. Since CONFIG_OF_UPSTREAM is not yet supported for AM62Px, the
-changes are being made in arch/arm/dts/k3-am62p5-sk-u-boot.dtsi at the
-moment, with the intent of making the same changes in the Linux
-device-tree and eventually enabling CONFIG_OF_UPSTREAM to drop the
-changes made in "k3-am62p5-sk-u-boot.dtsi".
-
-Series is based on commit
-3b3c7280b82 smbios: address build warning
-of the next branch of U-Boot.
-
-The USB DFU config fragments for AM62x are to be re-used for enabling
-USB DFU boot on AM62Px as follows:
-R5  => am62px_evm_r5_defconfig + am62x_r5_usbdfu.config
-A53 => am62px_evm_a53_defconfig + am62x_a53_usbdfu.config
-
-Series has been tested on AM62P5-SK. Logs validating USB DFU boot on
-AM62P5-SK with this series:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/50198ee3348c2db73e0dbd3a14cb0f8b
-
-Series has also been validated on AM625-SK to ensure that the changes
-made to "am62x_r5_usbdfu.config" config fragment being used by AM625-SK
-for USB DFU boot do not cause a regression on AM625-SK w.r.t. USB DFU
-boot. Logs validating USB DFU Boot on AM625-SK with this series:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/85a7579ed2c95330ac71ee3a832cadfb
-
-Regards,
-Siddharth.
-
-Jonathan Humphreys (1):
-  dfu: do not overwrite "dfu_alt_info"
-
-Siddharth Vadapalli (3):
-  board: ti: am62px: env: include environment for DFU Boot
-  configs: am62x_r5_usbdfu: extend for AM62Px
-  arm: dts: k3-am62p5-sk-u-boot: enable USB0 for USB DFU boot
-
- arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 ++++++++++
- board/ti/am62px/am62px.env            |  5 +++--
- configs/am62x_r5_usbdfu.config        |  3 +++
- drivers/dfu/dfu.c                     |  7 +++++--
- 4 files changed, 21 insertions(+), 4 deletions(-)
-
+diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
+index 7ef54079aa8..e0838196e3a 100644
+--- a/board/ti/am62px/am62px.env
++++ b/board/ti/am62px/am62px.env
+@@ -1,5 +1,6 @@
+ #include <env/ti/ti_common.env>
+ #include <env/ti/mmc.env>
++#include <env/ti/k3_dfu.env>
+ 
+ name_kern=Image
+ console=ttyS2,115200n8
+@@ -7,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+ 	${mtdparts}
+ run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+ 
+-boot_targets=mmc1 mmc0 pxe dhcp
++boot_targets=mmc1 mmc0 usb pxe dhcp
+ boot=mmc
+ mmcdev=1
+ bootpart=1:2
+@@ -17,4 +18,4 @@ rd_spec=-
+ #if CONFIG_BOOTMETH_ANDROID
+ #include <env/ti/android.env>
+ adtb_idx=3
+-#endif
+\ No newline at end of file
++#endif
 -- 
 2.43.0
 
