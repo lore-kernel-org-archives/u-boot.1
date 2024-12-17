@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B86B1E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 14:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F050DE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 14:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C04380303;
-	Tue, 17 Dec 2024 15:01:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 602B9801FB;
+	Tue, 17 Dec 2024 15:04:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j7R6oLMq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFzp3pJx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5921F802D5; Tue, 17 Dec 2024 15:01:00 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 4713080224; Tue, 17 Dec 2024 15:04:14 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AEDB80291
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 15:00:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 239AD801CE
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 15:04:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aa69077b93fso795801666b.0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 06:00:58 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-53df80eeeedso5252411e87.2
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 06:04:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734444058; x=1735048858; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cdAJi83J4jhw7DvZwwr4cdnVB5riVfLGk49mp2Shxyk=;
- b=j7R6oLMqhcUbVeU+LV4++9LqW5k6BdtEEwmCYKhg9dH31+bumFZxuReH1uNrwxZQGQ
- cgq4e6is/8tL0dKm9WjUjiNv/WCKyt3/fEJR+szqLeUVXIBESqyX/13etfWGIZdkpKzA
- I3IGHNqtnffkju+Tj6jw4EYC4UYmLk1gIeY/I=
+ d=linaro.org; s=google; t=1734444251; x=1735049051; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g31TGTrOXIU4AXOFGH3N/YDV4itk1MtqA5qQayR4rcQ=;
+ b=LFzp3pJxy3oyKW6l6mAda+HDoy7+zATh5PxR4i2p0ygc/AGV0aW1r49R1lifXTsUeR
+ 4rkHeJA2j/OV4kirGWo5w/WIJKMTb8DGnpSKebj9si6zfbMVnsPCtTqIhFlrTZK/CZS0
+ Vy5NmJjawvValvpLPNsmw0xEK15Sq/3Coog8cphlAUb6Igc++ZKFke26t8pAeZQ3bEss
+ RDdSqImxN1wLg96NQPOrOJ3FazJ7YY30Fjui3cq5MZJM9+OQbxYn5NC2yIpdJlolrN64
+ 1HQUsj3/akeL+UJcNgJaZrTkKdPcXW5S/v+nE6pWdRJggVEYkZLplBMBy6aCJbjmSeYW
+ W+hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734444058; x=1735048858;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cdAJi83J4jhw7DvZwwr4cdnVB5riVfLGk49mp2Shxyk=;
- b=w1cAQpzEV4r3EvCyGM0WgSKr1vXMsJzXFYZE3Gmrm7qWfWreY7NLoyPElPfKQcR5tj
- l7KjnzgscmVeQo6luZd1iuf9dYDNx9klsOukc09LVxTevOj443PNkrF1Njz38Yd81N4T
- aKP32je+myYJ3sHHKbwGXqHU+ClVGKcjSCgcUJtGdJOejI7OG67j366WWD+Op62Pk8HW
- Gksv/KfUafRW7kX+V7kDPSLa/tBojgtgvCNRxyma3Xw0jQN7wbTy6TLhIkDl0z1NPrD/
- aTsA8xCPT5AnrpBSvz25heRFSavH1MqIAYAEbKobUrJXSzvCTZ6grhwSdIa4WKCdBVPk
- x+TQ==
+ d=1e100.net; s=20230601; t=1734444251; x=1735049051;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g31TGTrOXIU4AXOFGH3N/YDV4itk1MtqA5qQayR4rcQ=;
+ b=s4uk3NuHjxMeZ0SLnZ/Ml37EwxMxNM6wfsBF57LSfzAyh/kX5eWcOmkrtMuzoXj+6o
+ sFha/2Wh1SYTzl5EIjzcG2jq57o2IF9C2WfW5p9RdNgM/uGhpa3KAQo3d3HbXnLkufDc
+ 7WgCqkbTZB585ca2Eqfzz63FR4S064p8CtdyD8f4IVp8iu8YD5JUuYnMJulUeoHWCb31
+ hl+fdPed+uhHjAr0eRVsygzYg39PJ+xSO0va6jPmBIphcjQADs/xB4H+7GppizVc70Cq
+ Jvy6LInEthYJiS4KAlQ3lOAFE11A8bQbRF9mR5wu80Trseu0bqnAWieU1heLKf9lPlJB
+ p2gQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEqs6U5TpIIwkP7/Q/k8GYv+uo0i7AuEQEy9e367zNao0w93egQwUNl/WpN8rkfAWU1lA/stw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyuyz+b5qkMkNSkQ2P3k09QoaKrizyUaNmQq5mcDQBrCwM8L6Ge
- fSP8zU0mXYcjGhvrVh6R+ZN0y1OGWv1rVc/BGgYvJTAwTXVkVFMwlGRfALZhgiWAP+vwwoXBjPf
- wietDjKtdxeSb4Be5UdjNDlRp5n57K77WVfde
-X-Gm-Gg: ASbGnctmnzEaBZOBgA6vtbjrxsN+mJjagkH3H2kI/63jyCsJUuEeg5jWI0OZGPMuP0c
- e5OBWQGBXZ/AVvegkEaxf8ehmXE//ozdYlTfPoh0=
-X-Google-Smtp-Source: AGHT+IGdHLmuVnJYoXHuZaKIoP7T4FMTgnuAuTSyb528HJhwyEfnpUxXGaW6SK9viY6G25HIPN22+jQ2f9r0NtzvTSE=
-X-Received: by 2002:a17:906:f5aa:b0:aa6:a8a9:80bb with SMTP id
- a640c23a62f3a-aab76ce2e9dmr1705032866b.0.1734444057741; Tue, 17 Dec 2024
- 06:00:57 -0800 (PST)
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 17 Dec 2024 08:00:56 -0600
+ AJvYcCXQGD5VXkqHzKFFrQ1OCZ/ZpmsiSI3PIjQ3jb4n1QHvyWPmx7MIoPkxSw2qKXDB7pNCj3Hh93k=@lists.denx.de
+X-Gm-Message-State: AOJu0YzMM791TjBq7ihrmrpfS6UQqWH3T1M1Qg0qTUW/K3RB5fTpr0h0
+ /Gqa/ZRGLB617hwo/cUoT7uWu6Hao66Os35tvNGuVBcmIL4o9LCXGtkNm28+fMqSQv01R0fb1r/
+ PC1JqMhBPDxRtvXC+b3C6M3XIiqtQbapJhhE0gg==
+X-Gm-Gg: ASbGncuEsoI1hvnVrV13+cJqycyjOP2Ol5oZ2uwTKsg53KW+FpSwk+HndMFWylZ1Hm3
+ ixpSPuB/qt+XzTGMcgxYJwT5/pZhUaI0JQMJzJg==
+X-Google-Smtp-Source: AGHT+IEcAxIlPPZkuYullHlopQ22/h7zU8Q8dagb4hBSqA3EF4R1LnFOg6/qYOCkUYJcT5rJtsLn1yuhYVm7QpBGPbE=
+X-Received: by 2002:a05:6512:308d:b0:540:1f67:689a with SMTP id
+ 2adb3069b0e04-54099b72c9emr4427263e87.55.1734444249725; Tue, 17 Dec 2024
+ 06:04:09 -0800 (PST)
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241211004503.3775922-2-sjg@chromium.org>
-References: <20241211004503.3775922-2-sjg@chromium.org>
- <20241211004503.3775922-1-sjg@chromium.org>
-Date: Tue, 17 Dec 2024 08:00:56 -0600
-X-Google-Sender-Auth: v3o91jNzPgKvyc1WoEwk73iyONY
-Message-ID: <CAFLszTjHyhwf0dV8THPDswXz58jRCW+ZX90Hr4_i7PjXsVHPBA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] efi: Correct logic for OF_EMBED and OF_SEPARATE
- co-existing
-To: Simon Glass <sjg@chromium.org>
-Cc: Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
- Matthew Garrett <mgarrett@aurora.tech>, Raymond Mao <raymond.mao@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241205203621.45806-1-heinrich.schuchardt@canonical.com>
+ <20241205203621.45806-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241205203621.45806-2-heinrich.schuchardt@canonical.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 17 Dec 2024 15:03:57 +0100
+Message-ID: <CACRpkdbTQHKNGuJtkQgV0M99k190RXZh2JftB-Jiq4t5BTW7kA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] rtc: CONFIGS_RTC_PL031 must depend on
+ CONFIGS_DM_RTC
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ David Feng <fenghua@phytium.com.cn>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,26 +95,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While we do plan to switch to OF_SEPARATE now it is supported, it seems
-worth at least showing how OF_EMBED could be used instead, just for the
-record.
+On Thu, Dec 5, 2024 at 9:36=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 
-So make the Makefile rule conditional on OF_SEPARATE and adjust fdtdec
-to avoid a build error when OF_EMBED is used.
+> Building qemu_arm64_defconfig with CONFIGS_DM_RTC=3Dn and CONFIGS_RTC_PL0=
+31=3Dy
+> leads to a build failure.
+>
+> Adjust the vexpress64 configuration to avoid circular dependency.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>     Adjust the vexpress64 configuration to avoid circular dependency.
 
-Finally. the dtb symbol has a double underscore, so update it to avoid a
-build warning.
+> +       imply DM_RTC
+>         imply RTC_PL031
+> -       select DM_RTC if RTC_PL031
 
-With future patches, OF_EMBED will no-longer be used with the EFI app,
-so it is expected that it will eventually stop working.
+Should it not be:
+imply RTC_PL031 if DM_RTC
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 2e7bf25f6bf ("Support separate DTB files with the UEFI app")
----
+(The dependency in the driver will fix it I guess.)
 
- Makefile                       | 2 +-
- include/asm-generic/sections.h | 2 +-
- lib/fdtdec.c                   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+The way we are using imply in U-Boot is a bit worrisome
+but I'm no expert. It may work better in our case because we
+never have an option be "m" (module) as in Linux... This
+works for sure.
 
-Applied to sjg/master, thanks!
+Yours,
+Linus Walleij
