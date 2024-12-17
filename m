@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03261E7716A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:23:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6E44E7716A
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:29:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4101801CE;
-	Tue, 17 Dec 2024 09:23:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC016801CE;
+	Tue, 17 Dec 2024 09:29:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DhYb/ynM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZylqI1Gs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E25801CF; Tue, 17 Dec 2024 09:23:25 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 977A5801CF; Tue, 17 Dec 2024 09:29:41 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41ACD801A0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:23:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ED5C801A0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:29:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d3dce16a3dso9340436a12.1
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 00:23:23 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so1019473166b.0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 00:29:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734423803; x=1735028603; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1734424178; x=1735028978; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=8tbGKyjbRwmQjS1xWlwON/C3q9dn3ni6RqEqS/PvIQI=;
- b=DhYb/ynMxLsnw2gxxhL95AF+iMXQFNle7amppU6tDQPsKeXFkpidYfvd1h96UPtG6l
- HAj2AcKT6drfvo5bJzrIMBAFlZh1BLO41FWwRj98yl+Ax6r8n34Wk9jMMv8sRJJiU3l9
- hauwB3EZ3mNiI28XxEZ3bb1s+C+xdKKuqBErse/j+ImJOdzqeWYNjV5Qf9fXK8/PuPxE
- h95bS5KxnlxokN4WmqeOSKpBIq883YPU/i8LDKNrwkGJpyWrd8OvyzoxVhnuv0wPDrw+
- AUTAuEMuIkievZsOeJciW47sky4ae3hHjsuZzd4aOj6rxKSm/mjlx+hcDleVfG9uAQwM
- +JyA==
+ bh=kFlUdtFdhA9knSorH7igU94yJ7N0/iVuvLHvNnD096g=;
+ b=ZylqI1Gs2jBcFDPC8R2YYTQ3YZWtvrjHosCKsfTLAKkJHVZNBPTREs9Z4OIvcfZ9i4
+ hxeARn9RNUfL9h0EYtq2wVtzZ2HCQA9wCUynEmg9aTb/kHdfrqSpy6G6otRrIDRhY4h4
+ BLSfmPiCtJR8EQUSCAHeGqDmHdms5SpNKMg+KWus2yWzqqy/gOPPbRItg9oQjkXeJdXN
+ ahM0+kwldaabYeWNnn1tYLUuCU8ChYs7tbxKxTHMRdEJkvpx3J/AhwfQ0qN7kpGp1OE2
+ FtaLurh8qQbmA8hWpthaxgItz0Q582BVMfr8/xhLydUBAwPymcvlkvmmMXj60u3jCyKM
+ J4MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734423803; x=1735028603;
+ d=1e100.net; s=20230601; t=1734424178; x=1735028978;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8tbGKyjbRwmQjS1xWlwON/C3q9dn3ni6RqEqS/PvIQI=;
- b=Bg/+58cAXh1yP3oOscjaoU6dOnE+jJShuV5DPBxI/VuYDyBnOAV/UBAa8KwRZqdMuN
- J9T3VPmzoXJ5sldC1LfjKLwOlGVyEaKyz79nDGGOCkS2H6CETT7tsUpolLd5ybAxkfqy
- Q+KLUOdWYNBd/K80Jlc8NddNKxrYZDs2BH56B7kAnE8+v5zWJlha7jxOoejtmVZpUEUy
- hQq6Pf7leKQrEiT6/JBNrU9kUZFx3cuhMJ2nKMYXsIXIq1f+MZwKA1Ywzokg7lKCLqaZ
- k1UsplC55YJzdZ6gDQKy24nTDnJWjxbQyezcl4eAf9HKsoCpZYecgVHtNjEPsuSEEMJW
- EoTQ==
+ bh=kFlUdtFdhA9knSorH7igU94yJ7N0/iVuvLHvNnD096g=;
+ b=RxLnjqyg9iDsOlP3MKbu19OSxj02hCpqhMMIXcvXqDOWhHl+ZkFMNsvmVbdjbrd6Rp
+ Bn+VDZkWrOSKPX9J9T6WkJI35JJrUcTg973x+06OhgeamLfrmmtWIhxY0ZeRZ2fMK9GH
+ +WK/2dPc/yYIdnZvjx4owpm7SK5Z5dpiYZBPPhw5JkJo8hq8XZGtCSZt2Iy8/GEV5s83
+ qJXz/yILDTQ+N4bPPy4n+wxmxcEdNwdMT4d4/n4xdUmutukwXesf8s8lSVZ/rdHNUDHC
+ qhaPH1xVGtTob7pHGcLlfKEYMWvGg08ERafqzLe5CrwZ5bEmYqpqvv10F0wAgA8URNBf
+ 6/Lw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVRGWyftIZ5CyWih5pmrvKyE1hEHv/YxWDrXoMl+a4twwJ8pH4zAkXf78J4S8p+tO49A0ub2w=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBAGjKdOuhaTXms37BJkk6WHlXEeFLSujNCdP/btPSkc5Yux3s
- OGG9sHbWIzs5NSiK//aLNAFxpCpeGlRFg6goy7xnFbXPi//h6lORGXDzWUpG/Is=
-X-Gm-Gg: ASbGncsGlLrPUnD2gbVi8hYu82+8ioM/ZG7EQ5ZxOmFkFCZA4JpTjtu3BAwMYto9Dix
- 3aD08zmEmHoDVUmDNbDX+fF4raT0e7VhMBNVx3NrTH/Bx7gm1JBOSzK2/wYBu2xHAww9ciI8nxD
- sk6xKgFRpmeFcSN5RX+nH/0Ea2JKMD6KJmLr//Sf0GQaYC6QbZqw3j3YCDYD6UKzlu2uJmoNrFL
- jLI1D1690cM/AG36E42Zv6YijDYR6mr5PJD7+/pQZKtmLhws4HtdFPYwMGQLme6Uh/3
-X-Google-Smtp-Source: AGHT+IEAPDjYeZV14u9HWnt2RTu+burQ8c3PxOJTlgtI1j3kwaA9eOATU24dFlJVX8rF8kmIlUkWXA==
-X-Received: by 2002:a05:6402:518e:b0:5cf:ba23:3e44 with SMTP id
- 4fb4d7f45d1cf-5d7d55719f9mr1984469a12.7.1734423802433; 
- Tue, 17 Dec 2024 00:23:22 -0800 (PST)
+ AJvYcCUAMIW0+11o/C9i+GP1dyVAjAzfjl60HyHpOR6RHog/ICOMcDK92ldJ7GRPOFiIaCsRamsD50Y=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+S9mFol9RfwfRIJGtvo1x1y8X/kcj6m2MR24j+zAQrj/zV7II
+ R6DDM0MXCc2Obz2k+9neRpwiF+FlFZPtHiTek8xnwtTtR6YIjXXpLEkyj49sT1I=
+X-Gm-Gg: ASbGnctorYpuQyfSfrhKc8VpqzJV7H1R5+iNwfT+7rXUmAol806LcwEatAHAJHGHAfc
+ 6axHNrBLVJACoXhG7GEtSXdgpY8d1CEXYAN9o0LjOM7Vtt9X2W09/SooR7fTE1aPz7RnP8NChyZ
+ d0K1gEg2GjWUUR5H5WzknGhjID066tJxACMdSzkrH7FST7ctUzE0Lp4z958FwUjgcLLfTrsmUNE
+ +ovoaJtmhf8M6t5lx5bEFf7dYROTSjuaBkpv6EgalTT+lej+RsWYlKCfDK3+JBjP1kA
+X-Google-Smtp-Source: AGHT+IF7jZP+unNEPEO7FD4hrrDGQUcyDYDiphdLKk4XoK28iy6DlZvn2bwX1+2c7H5Uk2gL6Mf1MA==
+X-Received: by 2002:a17:907:7753:b0:aa6:707a:af59 with SMTP id
+ a640c23a62f3a-aabdb8ddc26mr205337366b.50.1734424178392; 
+ Tue, 17 Dec 2024 00:29:38 -0800 (PST)
 Received: from [10.100.0.2] ([194.15.111.158])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d6529e6a06sm4026346a12.0.2024.12.17.00.23.21
+ a640c23a62f3a-aab963cecd1sm417226366b.198.2024.12.17.00.29.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Dec 2024 00:23:21 -0800 (PST)
-Message-ID: <3c667acf-17fb-40ed-b954-9cce1e6bc5a4@linaro.org>
-Date: Tue, 17 Dec 2024 09:23:20 +0100
+ Tue, 17 Dec 2024 00:29:38 -0800 (PST)
+Message-ID: <7f5b4f46-1ca6-4207-88d1-40a8e22c56e2@linaro.org>
+Date: Tue, 17 Dec 2024 09:29:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] doc: man-page for optee commands
+Subject: Re: [PATCH v4 1/2] cmd: Add support for optee commands
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: michal.simek@amd.com, trini@konsulko.com, sjg@chromium.org,
  jens.wiklander@linaro.org, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
  mkorpershoek@baylibre.com, akashi.tkhro@gmail.com,
  francis.laniel@amarulasolutions.com, ddrokosov@salutedevices.com, git@amd.com
 References: <20241217035914.1297469-1-venkatesh.abbarapu@amd.com>
- <20241217035914.1297469-3-venkatesh.abbarapu@amd.com>
+ <20241217035914.1297469-2-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241217035914.1297469-3-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20241217035914.1297469-2-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,128 +105,152 @@ X-Virus-Status: Clean
 
 Hi Venkatesh,
 
-Some suggestions below.
-
 On 12/17/24 04:59, Venkatesh Yadav Abbarapu wrote:
-> Provide a man-page for the optee command.
+> Add the basic 'hello world ta' command which increment
+> of the value passed. This provides easy test for
+> establishing a session with OP-TEE TA and verify.
+> 
+> It includes following "hello world ta" subcommands:
+> optee hello; default value '0' is passed and gets incremented.
+> optee hello <value>; value to increment via OP-TEE HELLO
+> WORLD TA.
+> 
+> To enable the OP-TEE side HELLO WORLD example please refer
+> https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
 > 
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
->  doc/usage/cmd/optee.rst | 66 +++++++++++++++++++++++++++++++++++++++++
->  doc/usage/index.rst     |  1 +
->  2 files changed, 67 insertions(+)
->  create mode 100644 doc/usage/cmd/optee.rst
+>  cmd/Kconfig  |  6 ++++
+>  cmd/Makefile |  1 +
+>  cmd/optee.c  | 77 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 84 insertions(+)
+>  create mode 100644 cmd/optee.c
 > 
-> diff --git a/doc/usage/cmd/optee.rst b/doc/usage/cmd/optee.rst
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 1d7ddb4ed36..4b33468891e 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1446,6 +1446,12 @@ config CMD_OPTEE_RPMB
+>  	  in the Replay Protection Memory Block partition in eMMC by
+>  	  using Persistent Objects in OPTEE
+>  
+> +config CMD_OPTEE
+> +	bool "Enable OP-TEE commands"
+> +	depends on OPTEE
+> +	help
+> +	 OP-TEE commands support.
+> +
+>  config CMD_MTD
+>  	bool "mtd"
+>  	depends on MTD
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index d1f369deec0..533d0f6a1be 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -118,6 +118,7 @@ obj-$(CONFIG_CMD_PAUSE) += pause.o
+>  obj-$(CONFIG_CMD_SLEEP) += sleep.o
+>  obj-$(CONFIG_CMD_MMC) += mmc.o
+>  obj-$(CONFIG_CMD_OPTEE_RPMB) += optee_rpmb.o
+> +obj-$(CONFIG_CMD_OPTEE) += optee.o
+>  obj-$(CONFIG_CMD_MP) += mp.o
+>  obj-$(CONFIG_CMD_MTD) += mtd.o
+>  obj-$(CONFIG_CMD_MTDPARTS) += mtdparts.o
+> diff --git a/cmd/optee.c b/cmd/optee.c
 > new file mode 100644
-> index 00000000000..53e36853742
+> index 00000000000..39947c00145
 > --- /dev/null
-> +++ b/doc/usage/cmd/optee.rst
-> @@ -0,0 +1,66 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+> +++ b/cmd/optee.c
+> @@ -0,0 +1,77 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * (C) Copyright 2024, Advanced Micro Devices, Inc.
+> + */
+> +#include <command.h>
+> +#include <errno.h>
+> +#include <tee.h>
+> +#include <vsprintf.h>
 > +
-> +.. index::
-> +   single: optee (command)
+> +#define TA_HELLO_WORLD_CMD_INC_VALUE 0
+> +/* This needs to match the UUID of the Hello World TA. */
+> +#define TA_HELLO_WORLD_UUID \
+> +	{ 0x8aaaf200, 0x2450, 0x11e4, \
+> +	{ 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} }
 > +
-> +optee command
-> +=============
+> +static int hello_world_ta(unsigned int value)
+> +{
+> +	const struct tee_optee_ta_uuid uuid = TA_HELLO_WORLD_UUID;
+> +	struct tee_open_session_arg session_arg;
+> +	struct udevice *tee = NULL;
+> +	struct tee_invoke_arg arg;
+> +	struct tee_param param[2];
+> +	int rc;
 > +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    optee hello
-> +    optee hello <value>
-> +
-> +Description
-> +-----------
-> +
-> +This is a very simple optee hello command which is going to
-> +increment an integer value.
+> +	printf("The Hello World TA is going to be called\n");
 
-While this description may be good enough, I believe it would be
-better to say more about the real purpose. This is a test command.
-
-"""
-This is an OP-TEE sanity test which invokes the "Hello World"
-Trusted Application (TA). The TA does two things:
-- It prints debug and information messages to the secure
-console (if logging is enabled)
-- It increments the integer value passed as a parameter and
-returns it
-"""
+I would remove this, and replace with "Calling TA" -- see below.
 
 > +
-> +value
-> +	value to be passed which is going to increment
-
-Integer value that the TA is expected to increment and return.
-The default value is 0.
-
+> +	tee = tee_find_device(tee, NULL, NULL, NULL);
+> +	if (!tee)
+> +		return -ENODEV;
 > +
-> +To enable the OP-TEE OS side HELLO WORLD example please refer
-
-To enable the OP-TEE Hello World example please refer to
-
-> +https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
+> +	memset(&session_arg, 0, sizeof(session_arg));
+> +	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
+> +	rc = tee_open_session(tee, &session_arg, 0, NULL);
+> +	if (rc) {
+> +		printf("tee_open_session(): failed(%d)\n", rc);
+> +		return rc;
+> +	}
 > +
-> +Examples
-> +--------
+> +	arg.func = TA_HELLO_WORLD_CMD_INC_VALUE;
+> +	arg.session = session_arg.session;
 > +
-> +::
+> +	param[0].attr = TEE_PARAM_ATTR_TYPE_VALUE_INOUT;
+> +	param[0].u.value.a = value;
 > +
-> +	==> optee hello
-> +	The Hello World TA is going to be called
-> +	D/TA:  TA_CreateEntryPoint:39 has been called
-> +	I/TA: Hello World!
-> +	TA value: 0x0
-> +	D/TA:  inc_value:105 has been called
-> +	I/TA: Got value: 0 from NW
-> +	I/TA: Increase value to: 1
-> +	TA value: 0x1
-> +	I/TA: Goodbye!
-> +	D/TA:  TA_DestroyEntryPoint:50 has been called
+> +	tee_invoke_func(tee, &arg, 1, param);
+> +
+> +	printf("value: 0x%x TA value: 0x%x\n", value, (int)param[0].u.value.a);
 
-This output doesn't match with the code in 1/2
+I find "value" and "TA value" unclear. How about:
 
- +       printf("value: 0x%x TA value: 0x%x\n", value, (int)param[0].u.value.a);
+printf("Value before: 0x%x\n", (int)param[0].u.value.a);
+printf("Calling TA\n");
+tee_invoke_func(tee, &arg, 1, param);
+printf("Value after: 0x%x\n", (int)param[0].u.value.a);
+
+?
 
 > +
-> +	===> optee hello 74
-> +	The Hello World TA is going to be called
-> +	D/TA:  TA_CreateEntryPoint:39 has been called
-> +	I/TA: Hello World!
-> +	TA value: 0x74
-> +	D/TA:  inc_value:105 has been called
-> +	I/TA: Got value: 116 from NW
-> +	I/TA: Increase value to: 117
-> +	TA value: 0x75
-> +	I/TA: Goodbye!
-> +	D/TA:  TA_DestroyEntryPoint:50 has been called
+> +	return tee_close_session(tee, session_arg.session);
+> +}
 > +
-> +Configuration
-> +-------------
+> +static int do_optee_hello_world_ta(struct cmd_tbl *cmdtp, int flag, int argc,
+> +				   char * const argv[])
+> +{
+> +	int ret, value = 0;
 > +
-> +The optee command is enabled by CONFIG_OPTEE=y and CONFIG_CMD_OPTEE=y.
+> +	if (strcmp(argv[1], NULL))
+> +		value = hextoul(argv[1], NULL);
 > +
-> +Return value
-> +------------
+> +	ret = hello_world_ta(value);
+> +	if (ret)
+> +		return CMD_RET_FAILURE;
 > +
-> +The return value $? is 0 (true) if the command succeeds, 1 (false) otherwise.
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index cb7a23f1170..4dd00f002cd 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -92,6 +92,7 @@ Shell commands
->     cmd/msr
->     cmd/mtest
->     cmd/mtrr
-> +   cmd/optee
->     cmd/panic
->     cmd/part
->     cmd/pause
-
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+> +U_BOOT_LONGHELP(optee,
+> +		"- commands can be verified on OP-TEE\n\n"
+> +		"optee hello\n"
+> +		"optee hello <value>\n"
+> +		"\n"
+> +		"With:\n"
+> +		"\t<value>: integer value\n"
+> +		);
+> +
+> +U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
+> +			U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
 
 Thanks,
 -- 
