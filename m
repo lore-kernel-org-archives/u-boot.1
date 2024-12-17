@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AABC3E77187
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:46:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0230E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:47:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4F1D801FB;
-	Tue, 17 Dec 2024 20:46:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 51C858022E;
+	Tue, 17 Dec 2024 20:47:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MgmptYKV";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bdnbdOTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A6B780107; Tue, 17 Dec 2024 20:46:40 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C01F980269; Tue, 17 Dec 2024 20:47:07 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45183801FB
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:46:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C707D80107
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:47:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa662795ca3so7168766b.1
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:46:36 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa67ac42819so920725566b.0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:47:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734464796; x=1735069596; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1734464825; x=1735069625; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kQwwTjonLXf1MoLZFeGp4hSgpdUB2GKNg7tRWIYTprc=;
- b=MgmptYKVfOfyeV9oHoXUYySgntcp3Hwj1k0Nk56D0MnahS7c/ZJp7f5Zu1QLsp9bhq
- lFymmehmRDwyKJ+7QdZca3tKOP6ziEfZKp8HcnjAOpC4mBQeeq7FuRaTMc2Dz0NmBOVi
- L2nr6UG6sXVclBxf7XcyxioBEFMEZvX1gwsXw=
+ bh=AYCk3raWOfNOCCDdwRx1sohB3+2KHS+Nabtj1VwtYIM=;
+ b=bdnbdOTXMc6EbU8Z8hfepVJWnRnlMw9BW6IdEny/oakVm2zZ0PFkHxdMdvvbPZ/t+O
+ HDo/Q1egFPnbrLH9sv9JWWES3ksm2laTVcR6xIzEFXVAXDFZNuo6r/yb5S8/iQgVIlm6
+ k3nL1lxNQAgh52XtwdprM/++9gaDOBoGvYr9g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734464796; x=1735069596;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1734464825; x=1735069625;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kQwwTjonLXf1MoLZFeGp4hSgpdUB2GKNg7tRWIYTprc=;
- b=i/VOjYR1x4dLgxQAU1MIwNhs6PFam24f6DHhYwU3BsuYCdbBCyZA9WUzTZOH8gQ7zc
- 729fVmxcV/uHRI28EjETBWEQXP9UxGy2lZ1YMQAkqdLAC56lXlwxpQFtUdrRx+5uryI1
- CYKITKiRc4BnoFfxKPlvqELD+OYX0PH8zNMnRcj4jdJ8t/R4uriG/nB82wOz5KBNswq1
- IaqehE6W5MZJywZgAck/h3fGC5MvKhLvzV/0ohUyVqOPZDWXqdxl7UuDjOcxibe70I/f
- wZEqo8dE70/tK86RUQKps4bUCJsM2+LHCGJc3TG7Hfvh4L+R/L1YddHFj6W5obw87vgy
- dphw==
-X-Gm-Message-State: AOJu0YxQGCfyKDEahVFQI+VlUQa9Dn7RelgO2ON+yKE9NVfq9ZrCIZkk
- 7HJsPZ9b/zmK4W7ZdFT6a48mdvepchUtJzjNLnjySJM7Lk34BkUumr9893kKCojukiZjaNLRFIF
- St/a0tLywzOWuHKMtY1FuljXyHpLxp2V+aLsg
-X-Gm-Gg: ASbGnctgwT2YyHY2c4stE2GKt9Ldugh1+vEJrbGwSK5Gu1CRxQ6bhFtDRWWdDi1SQkn
- mhIsQERUOVKfYczKTtYEC9totkaQFPZ42GBx4xPE=
-X-Google-Smtp-Source: AGHT+IFFDCAmAqd1HyV6nilu6bl7QXFmiRZ4J9YSM0TLYcKqK9zTlhqxMx0A2j8BEW26Y4dRS5vBCPWKrSv5LQ6kmPA=
-X-Received: by 2002:a17:907:9725:b0:aa6:112f:50ba with SMTP id
- a640c23a62f3a-aabdc8bd101mr506355066b.13.1734464795766; Tue, 17 Dec 2024
- 11:46:35 -0800 (PST)
+ bh=AYCk3raWOfNOCCDdwRx1sohB3+2KHS+Nabtj1VwtYIM=;
+ b=cf1m/ObUUaZijFdVlrjodk6LWrk4IzyinVM7UMoKeipysxmsouskzUZX8dBxqQSLRA
+ gAzfNgJVntbc3vcOKLf3urZh7jbmLERPfyJXuPPPHqcfQJ+fyY7tZDIJNu4npash5/pv
+ gMkFA9HEUPpqc9h/Dm0FIDrTEVW8SwBAVAFCwD+3bgCP4EfjJRaUFcsqpRKrVpeROc52
+ npNwp1+4uzrPvUL5Swc0IFFzE2NLlsNyffaYVH8YjEqDU9rN7bS0AAGzgk80strRPQ3R
+ JRyYCVobxEO3fNIBzXDIGAO9BBaCHjIxck27nFvP1+aOgv+SMqf3GHXuYJ6rNmIbipll
+ HySA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbZ37j7k46/kSpUIvrvMUfXgGwyAjOWq4m3NHiregQemtb6RK22r+wUGYExhBVNxJcr2T/CfI=@lists.denx.de
+X-Gm-Message-State: AOJu0YywZnY7dFQY/7CCr/fRBiEIm2a2LoyumZq+sssA27emFua/shSb
+ /Hh8/c3yEPK96gQrncOpob05y0G6ZeTGSmP2Zt/Q4TqJ7IlMEhk4eQh4Ktoy+tPOjln07LEBk+H
+ 5ASYQ9X2ODus9x7aMw3y9la2ezo7SwTSUYlgjQ65IyHkIEZY=
+X-Gm-Gg: ASbGncs4LQftq+md8ar2DUnuLiZqQcqwcARHcpvOilBga6a1ZqdsmUtbYb8GxAdlWz4
+ vi0oO4+ZQvbgzGyk1mqhyfpsyi2qvyQddL4tzHmQ=
+X-Google-Smtp-Source: AGHT+IHp3uKRO7fvUaZvWrPCslf50lUpXkRptIM6ftgWgCepPctwf9tipsdd37zoMiHcEnME3zUug0VxUczwc1P3WCw=
+X-Received: by 2002:a17:906:c142:b0:aa6:a33c:70a7 with SMTP id
+ a640c23a62f3a-aab77ee59eamr1802402266b.49.1734464825278; Tue, 17 Dec 2024
+ 11:47:05 -0800 (PST)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 17 Dec 2024 13:47:04 -0600
 MIME-Version: 1.0
-References: <20241216233853.2125656-1-sjg@chromium.org>
- <20241216233853.2125656-2-sjg@chromium.org>
- <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
-In-Reply-To: <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Dec 2024 12:46:23 -0700
-Message-ID: <CAFLszTh+UE6LywCtmqEUdeYSFsNjZFk-pCUTEYGV-=ptC43OeQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+In-Reply-To: <20241211135418.563803-24-sjg@chromium.org>
+References: <20241211135418.563803-24-sjg@chromium.org>
+ <20241211135418.563803-1-sjg@chromium.org>
+Date: Tue, 17 Dec 2024 13:47:04 -0600
+X-Google-Sender-Auth: pGyHDYzHGyceKb3Ywp7qCwI7KhQ
+Message-ID: <CAFLszTiP40ncVx_f84QUBYdm6RWkF5speA5Hg30a8sx3AAQ2wg@mail.gmail.com>
+Subject: Re: [PATCH v5 23/23] efi_loader: Simplify efi_dp_from_mem()
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Moritz Fischer <moritzf@google.com>, 
+ Patrick Wildt <pwildt@google.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,66 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+This function should take a pointer, not an address. Update it along
+with all users.
 
-On Mon, 16 Dec 2024 at 17:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> Am 17. Dezember 2024 00:38:53 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >I have one of these boards loaded with Ubuntu 24.10 (64-bit). Add an
-> >entry for it so that it can be used for testing.
-> >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
->
-> .gitlab-ci.yml supports an include statement.
-> Maybe it would make sense to move the lab definitions for lab_dfn into an include.
->
-> Such a file could be conditionally included:
->
-> include:
->   - local: 'lab_dfn.yml'
->     rules:
->       - if: '$LAB == "dfn"'
->
-> Cf. https://docs.gitlab.com/ee/ci/yaml/index.html
->
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Yes, it would be a bit cleaner to have an include file, but it should
-not be conditional. Tom is missing a patch.
+Changes in v5:
+- Drop the enum / mem_type patch as it is not needed
+- Drop the patch to remove extra brackets in efi_mem_carve_out()
 
->
-> For the current patch
->
-> Acked-By: Heinrich Schuchardt <xypron.glpk@gmx.de>
->
+Changes in v3:
+- Add comment to struct efi_device_path_memory
+- Use a pointer for the values in struct efi_device_path_memory
 
-Thanks
+Changes in v2:
+- Drop patch 'Convert efi_get_memory_map() to return pointers'
+- Drop patch 'efi_loader: Make more use of ulong'
+- Significantly expand and redirect the series
 
->
->
-> >---
-> >
-> >Changes in v2:
-> >- Rename the board to vf2
-> >- Add a comment about what the board is
-> >
-> > .gitlab-ci.yml | 6 ++++++
-> > 1 file changed, 6 insertions(+)
-> >
-> >diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> >index ffcf8532944..a17c1b0a366 100644
-> >--- a/.gitlab-ci.yml
-> >+++ b/.gitlab-ci.yml
-> >@@ -696,3 +696,9 @@ rpi:
-> >   variables:
-> >     ROLE: rpi
-> >   <<: *lab_dfn
-> >+
-> >+# StarFive VisionFive 2
-> >+vf2:
-> >+  variables:
-> >+    ROLE: vf2
-> >+  <<: *lab_dfn
->
+ include/efi_api.h                | 10 ++++++++++
+ include/efi_loader.h             |  3 +--
+ lib/efi_loader/efi_bootbin.c     |  3 +--
+ lib/efi_loader/efi_bootmgr.c     |  2 +-
+ lib/efi_loader/efi_device_path.c | 16 ++++++++--------
+ 5 files changed, 21 insertions(+), 13 deletions(-)
 
-Regards,
-Simon
+Applied to sjg/master, thanks!
