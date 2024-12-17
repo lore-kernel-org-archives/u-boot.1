@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52BBE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:46:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B574E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:52:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 717CF801CE;
-	Tue, 17 Dec 2024 14:46:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B2FB8022F;
+	Tue, 17 Dec 2024 14:52:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lv3qoKWi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k+bAyV4S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C1ED801FB; Tue, 17 Dec 2024 14:46:56 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 8A4CA801FB; Tue, 17 Dec 2024 14:52:09 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D2B180107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:46:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 338F780107
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:52:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-30033e07ef3so59319371fa.0
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 05:46:54 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a9a68480164so868184666b.3
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 05:52:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734443214; x=1735048014; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734443527; x=1735048327; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kBKQ9f/jp2qxfEBqWp0kGPBSA6b+ovGeamfiK+5AZko=;
- b=lv3qoKWiPH92u4x9A7t7x0rgA92IbuvZuBGbbmOcCp8HHwnlpWXrOBjMQQSebfoiHD
- Bg8PHrSS/cgvD/z3RSo8C3jetg06hgnJqjlo2nWNMoZvXENQiCqBxWfK9iq/I685zgzE
- gmXPjW7tksfsihqIO9BokcwTbMBWXkXj1TxmsNrLbc75Dt1DXko+n12iVV31liw1kwR3
- 6OmejFf29KiBd1qgCpYMs+b0YFnby8yqBUnGO4kwgIs3kj0oPhIeDpljtzujkemGvbAb
- aK3LVd6nuw/KWVmqjc+xJKIvuMjWl1951DalFkZQ3PfiIj1mWk+fQyrXg1Q4MDrMRK4x
- Ys5A==
+ bh=J+gO6dggM051NlJssKDAASBklHZnC7VH7C07gRguQxI=;
+ b=k+bAyV4SNFaljf/JT2warOHxO5Fg1VKXrxH2RVUZbgwxORtUntCM9zK1T3uMiHhDsw
+ lhyfekmQEszbxzM9OQkpTweAASvhldhUYsfBug2+AK8Ddis60AOxanzyMLKFJKphDVG7
+ YM3WeoeQM8Ei4ZW4N/wFa5kVI/l7hKTKglBBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734443214; x=1735048014;
+ d=1e100.net; s=20230601; t=1734443527; x=1735048327;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kBKQ9f/jp2qxfEBqWp0kGPBSA6b+ovGeamfiK+5AZko=;
- b=q6gfGmYNRQvIuIRPWL5XR5uWIUjlo3299Z8e/qVJ/zBLJMt26AVE4HvYBtCcBBczlD
- YB/kV6P/V45C5LKw0wxQITJNzcLZ5jjJAl0LrhwCFCH7e1RQC7Ja1vkZiJmgWqD2shvc
- M1Zd71mQUa4AxJOc2pyghx6vbZ4iFe3ZdFpq9IdKftKhEjtMXA4URAJqFioG8EnHXiXs
- HN572z2ERItTNN6xVzPbzHnlL5piqy2hilC15XFA1rXfCRqup9ehsqgi3fuzue2GvQRL
- EKGqKm0ceGQkTACM3GZNhz0YW0HWAVyFmraJfy4PlUwRqC95lbkGlhvzc3o5vrD0tVjL
- 0bPw==
-X-Gm-Message-State: AOJu0YwAGVBVTAH1mEzeb15UuR81BtjpZYf85m8mhUH8Mmc3HHlMd2YR
- P83NT8p8asuME9s1AXoqYPTxwTJweZo9XG6NMa9Q2vG5Q1qbdedMvfmeHAtlGCCxhN5GHZQvj1i
- tIWNEfW3bbVChXRXp1rAVt35wIAw=
-X-Gm-Gg: ASbGncslP9uR89tSuzqYjuLzTS0OarsgDXP2+2dZitgdBvWDSFnmW0O9h+j4mRuR7gD
- 17wKf41z6kR5iJJAxSoRyhtUajIbieiUZ5j3HKnCg6RTWZ5xbuU8rYbB85FJTuC0LlTVN
-X-Google-Smtp-Source: AGHT+IFqLzyZVpxtHU7yxcoKRkwNDRzjqzFdTaK9f02SpgAAB5ecFKJciqBYni+iys0CgQVfJo8BGClP7DowIhXFyB0=
-X-Received: by 2002:a05:651c:54f:b0:302:49f7:1d72 with SMTP id
- 38308e7fff4ca-30444304da9mr10378321fa.9.1734443213492; Tue, 17 Dec 2024
- 05:46:53 -0800 (PST)
+ bh=J+gO6dggM051NlJssKDAASBklHZnC7VH7C07gRguQxI=;
+ b=nN1/25NNH/ek8G9lLAkOcogIexi1WOBzyX17teCvWJkxE1Smga/6k1r00Qjoq0fF93
+ NAjLjlojHrqmlmdXWu4H7AS6h5Q1KN7C1rpSAZFpAQ2DAuiSOjMnS7CBRhgchE4gdHKL
+ WzwJJhZKzkBvf8Z0Iyhu6dbslnzudBOVNm6kf/5GgpbFp0RJ6ygkAwFanDqBigKbNZwB
+ y/3ci2+svPHoSMUyupLtlem46NgEf8EJ9tGHWpT9cOSwp7oYe6UHy/Ws7Xa+LzKT8304
+ bLTbrlDJBnuOQnuNLU6p0zwRRuVfG4NCf19oON5fCKpC557ieic1tfd/uZF3uOvIXER7
+ 2c/A==
+X-Gm-Message-State: AOJu0YxPYcqy5hdVoBVm3TgfFPRTgB+vj16ozXyPe8q7kxb0NKtoNmwL
+ pUUoj2DLZSuCXxP1VhSCaYW/yktOoMpen4gf3nVf50LIQqHGqg1zLSXurHJn/IIFLkRZPGKAhsf
+ +fCpsH8HF8obp1jA3LMiR+SGfq9hYSvZ9Otb4
+X-Gm-Gg: ASbGncv/PRdMjtC1sNe/nX+Be0rRLY/bFhCXBoPyYxWZZod4JDUnE+fmqYWomB6QsKI
+ x/tjIUEx3H4a/pH9u5UFTlQ4B/dovAP9c1fYC75Q=
+X-Google-Smtp-Source: AGHT+IFhsLsABy+8vaoqekVOAcZjVcupxiuC+WuPINgwrZCVoxmVixscv8/QNoedVjiMCG1etUJ/6nXA9zUb2sZF6Uk=
+X-Received: by 2002:a17:907:3f23:b0:aa6:61b7:938f with SMTP id
+ a640c23a62f3a-aab778c8b12mr1867772866b.6.1734443526696; Tue, 17 Dec 2024
+ 05:52:06 -0800 (PST)
 MIME-Version: 1.0
 References: <20241217134417.4064239-1-sjg@chromium.org>
-In-Reply-To: <20241217134417.4064239-1-sjg@chromium.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 17 Dec 2024 10:46:41 -0300
-Message-ID: <CAOMZO5CJGuSLog9Gsnw0cJ55FLJ+jGE+UB3kVw=79TGQZAhUCg@mail.gmail.com>
+ <CAOMZO5CJGuSLog9Gsnw0cJ55FLJ+jGE+UB3kVw=79TGQZAhUCg@mail.gmail.com>
+In-Reply-To: <CAOMZO5CJGuSLog9Gsnw0cJ55FLJ+jGE+UB3kVw=79TGQZAhUCg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 17 Dec 2024 06:51:55 -0700
+Message-ID: <CAFLszTj91_UNoN5PUpWrbbt=JtoHoyvQrkNN01QmovzGREzA2g@mail.gmail.com>
 Subject: Re: [PATCH] gitlab: Add a Colibri iMX8 board to the sjg lab
-To: Simon Glass <sjg@chromium.org>
+To: Fabio Estevam <festevam@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Francesco Dolcini <francesco@dolcini.it>, 
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
@@ -95,15 +92,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Fabio,
 
-On Tue, Dec 17, 2024 at 10:44=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
+On Tue, 17 Dec 2024 at 06:46, Fabio Estevam <festevam@gmail.com> wrote:
 >
-> I have one of these boards loaded with Linux 6.6.2 and a video demo. Add
-> an entry for it so that it can be used for testing.
+> Hi Simon,
 >
-> Unfortunately quite a lot of work-arounds are needed to make this board
-> work, but I am working with the supplier on this.
+> On Tue, Dec 17, 2024 at 10:44=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
+> > I have one of these boards loaded with Linux 6.6.2 and a video demo. Ad=
+d
+> > an entry for it so that it can be used for testing.
+> >
+> > Unfortunately quite a lot of work-arounds are needed to make this board
+> > work, but I am working with the supplier on this.
+>
+> Just curious: what workarounds are you talking about?
 
-Just curious: what workarounds are you talking about?
+1. It needs a special build target to build the final image[1]
+2. Needs binary blobs in the root dir (I need it to use an env var to
+specify the location, or ideally use Binman)
+3. The first time I build it gives an error, so I need to build a
+second time; it should build from a clean directory in one pass
+
+Other things, for some reason, there is quite a delay between when the
+board boots and uuu returns, so some console output is lost. Also uuu
+is hugely verbose and needs a 'silent' mode.
+
+Passing run here at [2]
+
+Regards,
+Simon
+
+[1] https://docs.u-boot.org/en/latest/board/toradex/colibri-imx8x.html#buil=
+d-u-boot
+[2] https://ci.u-boot.org/u-boot/u-boot/-/jobs/8625
