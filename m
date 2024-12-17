@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6428AE7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 13:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2C0E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 14:00:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CF56801FB;
-	Tue, 17 Dec 2024 14:53:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 657A7801FB;
+	Tue, 17 Dec 2024 15:00:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CWQHf6t2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vBk5Barf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C5A780224; Tue, 17 Dec 2024 14:53:21 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA2F480107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 14:53:18 +0100 (CET)
+ id E676380224; Tue, 17 Dec 2024 15:00:32 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CC75880107
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 15:00:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDrGHm011360
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 17 Dec 2024 07:53:16 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734443596;
- bh=HKS7gMUU5tz8k2rEz7QVMS9WNPjXv3I3Ol98hnncrlc=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=CWQHf6t2xEw1jCME5n4BaMTytGAisLGmjZnCVC42OENX/CddYTArgl49qSOjdYK5k
- pXbX+v8QV2qlL0dVtCU+D+7uLaeeXwn9hWXL1ZzmrMpq2Fk0TaABEq3cvSJjtjSuqQ
- zRhwUakXfnKRuYQIz/qtlulAyuIerDKS5qXmymCI=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHDrGMk006448
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Dec 2024 07:53:16 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 07:53:15 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 07:53:15 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHDrFer125974;
- Tue, 17 Dec 2024 07:53:15 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: Re: [PATCH] dma: ti: k3-udma: Fix BCDMA probe by adding check for
- MMR_RFLOW
-In-Reply-To: <20241210135059.1043095-1-p-mantena@ti.com>
-References: <20241210135059.1043095-1-p-mantena@ti.com>
-Date: Tue, 17 Dec 2024 07:53:15 -0600
-Message-ID: <86r0664dro.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5401d3ea5a1so5883748e87.3
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 06:00:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734444030; x=1735048830; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S7whYjDQHJlqeA4U672NPdTK3pBuFQjLWBkowWyU6Eg=;
+ b=vBk5Barf+ZjUSK+u4FzviAU4TSgFyC/ShPS0qTEfloRMBNK/3zUn5dLBV3f557dkUw
+ x++V2k71TSjpkAa1V8jsdnCo5fLd6vSDs424KodM17b2rOK92DNdqk+Gkl+EXVR8Ij2c
+ 6Bs8ggvpYr2ny0TRrzpFry8I4ei8DjSIYik0mk5xxDqMapDHhH6LxK+aMZOD4m1meQDN
+ +44Y9YGSVRrqwMtxk2X5uu9Qvhaesst2Xz92ztLcnKfvwbr7FPzi/WOpnLmgfmr1iy8Q
+ CrkUT5uUcHNahS1mCr4CVUK/C4S9YpapJ9hygwPF9hzET2PeKT2d19oDYJS71l98S5B4
+ EV/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734444030; x=1735048830;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=S7whYjDQHJlqeA4U672NPdTK3pBuFQjLWBkowWyU6Eg=;
+ b=RoPZTJfxtlql8tS/LnK89kBD97p1MTvAO8oJz7kmwsR/8jCYr49AvCifYN+RGkqJhV
+ Re5esdgd1pV3Uy9gcD1XZrug8r8u84E2aJg18z0uYTwV3XofYMvnHnfI1vBQy4r1S1EV
+ mGppJadtboR3scnvhwjcUlEmJ06to5eq6VAQgCqUvfuhBeuNPc2+VKLv27u84QOHaROl
+ gnsU1FNWo/0hPERFC0XOpPyd1GreV8kkBifPPhb90MISINYV50Us/1LQ6NVmZkAylxC0
+ Y3dcJ9X2qBwUJSqF15IYlRI4rF2TDnYI7ou6nnEwS1VQ78zkF6h3A2kSLNRahNDDNdpa
+ tN4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW79+p3Vvh1ohZOxFSWg3sQ8q5CEatDwbIveommPYYGWDHWiyz34GIUyDXC6CHdtmCrh5i57rM=@lists.denx.de
+X-Gm-Message-State: AOJu0YypyX9NquOeebgrkZjxlI3RQhVw1rKa2LF0QDQTtx9LQoMlq4s9
+ lveFTN3pRidhjDm/ZtXjRCftdcpUAK/3IF8q3n1vWl1QkyGUZKh12UKBCerfEbhz5Tmqih9QoAT
+ G+62GrP6ueBP9mlqpWktP0v7i4uY5Wt14R9HNUWYLMebGLxxscUI=
+X-Gm-Gg: ASbGnctESW4ewmnoDuEXz9juTcfrIW/hBt7IgethRRXyszjNAg9ZKJglSUlm7/DoKRc
+ kDvfNhXhvSwgtQeaWug7hEkV6mPIabeWsBih+kw==
+X-Google-Smtp-Source: AGHT+IExw4lNLAiC9T4zmzy3xGaLk8Do04AsuZFznLW9esHEEUhwipqCTVpZGbX97O/Lo4bVqM3tXsvKcPs24VZZrek=
+X-Received: by 2002:ac2:5b10:0:b0:540:75d3:95af with SMTP id
+ 2adb3069b0e04-54090563f67mr4058463e87.29.1734444029969; Tue, 17 Dec 2024
+ 06:00:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20241205203033.42915-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20241205203033.42915-1-heinrich.schuchardt@canonical.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 17 Dec 2024 15:00:18 +0100
+Message-ID: <CACRpkdYqUJEfv+JJ=PzSfkcADwv1n3QzZ68MSMDE0S3=XvpoNA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] rtc: CONFIGS_RTC_PL031 must depend on CONFIGS_DM_RTC
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,33 +91,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prasanth Babu Mantena <p-mantena@ti.com> writes:
+On Thu, Dec 5, 2024 at 9:30=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 
-> RFLOW config related MMR does not exist incase of BCDMA.
-> Add check to bypass the RFLOW MMR extraction.
-> Without this, the probe sequence fails checking for
-> the MMR_RFLOW region, which is valid only for packet based
-> DMA and obselete for BCDMA.
+> Building qemu_arm64_defconfig with CONFIGS_DM_RTC=3Dn and CONFIGS_RTC_PL0=
+31=3Dy
+> leads to a build failure.
 >
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> ---
->  drivers/dma/ti/k3-udma.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-> index dac4023ccfd..3013c4741d0 100644
-> --- a/drivers/dma/ti/k3-udma.c
-> +++ b/drivers/dma/ti/k3-udma.c
-> @@ -1331,6 +1331,8 @@ static int udma_get_mmrs(struct udevice *dev)
->  			continue;
->  		if (i == MMR_RCHANRT && ud->rchan_cnt == 0)
->  			continue;
-> +		if (i == MMR_RFLOW && ud->match_data->type == DMA_TYPE_BCDMA)
-> +			continue;
->  
->  		ud->mmrs[i] = dev_read_addr_name_ptr(dev, mmr_names[i]);
->  		if (!ud->mmrs[i])
-> -- 
-> 2.34.1
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+
+Yours,
+Linus Walleij
