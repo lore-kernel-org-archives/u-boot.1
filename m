@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 684A6E7718B
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 20:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C81E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 21:09:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD97C801CE;
-	Tue, 17 Dec 2024 21:55:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C55E801CE;
+	Tue, 17 Dec 2024 22:09:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dZ7zWe+A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d+Rbal2W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C27B801CE; Tue, 17 Dec 2024 21:55:29 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC39480107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 21:55:26 +0100 (CET)
+ id B8DA180239; Tue, 17 Dec 2024 22:09:28 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DA6A801FB
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 22:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BHKtEbM055775
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 17 Dec 2024 14:55:14 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734468915;
- bh=FR0NokLqx1x73N3GzwxpIuiZbWEYxEQWjSV8zp2JC8s=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=dZ7zWe+AzVHh3ZCIgFSLXtiDR9Us4p1XEcodzwFwe9bAxcwCCObJ8tnp9Zog0NEOW
- mNLbPMrNPL2d6qnKAmGqWcDnX5EXR6fVnYRH7fw3IkxVZ+Ik7zelZXYPg5ftju2jtc
- EUSPcBJKe3tamhF54kILFrDScoSuY4GQhPIBpu68=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHKtEBC016072;
- Tue, 17 Dec 2024 14:55:14 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 14:55:13 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 14:55:13 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BHKtD7m103484;
- Tue, 17 Dec 2024 14:55:13 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <lukma@denx.de>, <n-francis@ti.com>,
- <mkorpershoek@baylibre.com>, <afd@ti.com>, <glaroque@baylibre.com>,
- <sjoerd@collabora.com>, <martyn.welch@collabora.com>,
- <rasmus.villemoes@prevas.dk>, <caleb.connolly@linaro.org>,
- <rogerq@kernel.org>, <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH 1/4] dfu: do not overwrite "dfu_alt_info"
-In-Reply-To: <20241217131658.2920799-2-s-vadapalli@ti.com>
-References: <20241217131658.2920799-1-s-vadapalli@ti.com>
- <20241217131658.2920799-2-s-vadapalli@ti.com>
-Date: Tue, 17 Dec 2024 14:55:13 -0600
-Message-ID: <86ldwe3u8e.fsf@udb0321960.dhcp.ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3a77980fe3aso551195ab.0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 13:09:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734469764; x=1735074564; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0dkiO0gqwi7I56f/h5hzg4Vk1b6zX2qKSb4DOq6MwtQ=;
+ b=d+Rbal2WmedhINsmxwRQQmXZ6lGPoa0e5/smzYbrE0KMEB8g2L4sLlRjVPUW2cMGWV
+ +2lhNDrtj/BCJspvcTri/Uj+SMTABzyU8AMldOY1UJQDJxhZs8YrLSeR6XKQtZg14b40
+ de3pDG5Y7s/vKpGQp1LNL0Zt3zZOdskWiV6DA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734469764; x=1735074564;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0dkiO0gqwi7I56f/h5hzg4Vk1b6zX2qKSb4DOq6MwtQ=;
+ b=nRCREFDeYA4qhjj2GlwfC5S7cgE5kxWROsP841P7eI0e2lAWz18H9pHvmAmAAGYGm9
+ sd5TKRWoJ2Nvl2G6nGk5HcNsm9sPc+bxz4D6S+T+rtM//+Qupathp5oXLkdb75xoDsi5
+ 7YGT01CEbYNqeKKE6mDPvA249hmZgKUs6bQtJP7hh1oPC2hYSr/rDW/eBnhNJQVgmMG/
+ xS/T1O9S+89ckA7UXq22xHesMdqRajZSK5TrN+y8e1JuuMqH2KGJnL0WwRrRd3WGHSjf
+ JVeXQtU8bOJmILt1NQpEAd0yo15AFlR1ryG8lH5edhYXyk7O+8WO7HzrbHfHLsY7hzEM
+ q4wA==
+X-Gm-Message-State: AOJu0YwUvfkw8GHewpDi9FjIp0qZpsA0QTBvHdN718KtYK7Em/UV3wwI
+ M+Iq/JxeOeYyWMcWgNKLZrOnVcmgxEGhqLHhaajD1SM02lnCsHWGgRCPPCbER8soiIE8xqXHeak
+ =
+X-Gm-Gg: ASbGncu1NZiwZ5UoJRXkA3pBx89jJAFlXNdNGzvYr6YODw9AkLLies9EFlugy8tBeLV
+ 7SiuemwjkpwNBjd3zccH3WIEjSn/gyi24Gcx9LjhHzHuvq3htX2+6AJ5Xr8xZmGcpcWW72UveHX
+ yXddO+K5PdD+vOmcdn/7OK0r3haUpGBUjQVmFbTXCn8LT5niE6pOkfGyIOPXqv31TOPZhiW11Ip
+ a0lAfaXSHKyjsSMSh/QFgvdSFRnixSsYrL0KGsQIifoWs7I62YkzqAe5Kr7Fxg3wcA2UDg3mFoB
+ iNfO2zljFwjwJBMkJA==
+X-Google-Smtp-Source: AGHT+IEIlfkh+Zk4eS0eWTcNMLA15veaWkNxGpQ62KA+nNy6tDRHjbCuVBwO61Ka8TUhU1ZB//AaFQ==
+X-Received: by 2002:a92:ca09:0:b0:3a7:e8df:3fcb with SMTP id
+ e9e14a558f8ab-3bde3b213f6mr1762935ab.7.1734469764205; 
+ Tue, 17 Dec 2024 13:09:24 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-3b248cb72fdsm22845915ab.35.2024.12.17.13.09.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Dec 2024 13:09:22 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] gitlab: Add a NVIDIA Jetson TK1 board to the sjg lab
+Date: Tue, 17 Dec 2024 14:09:19 -0700
+Message-Id: <20241217210920.2050997-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,49 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Siddharth Vadapalli <s-vadapalli@ti.com> writes:
+I have one of these boards, with no OS loaded. Add an entry for it so
+that it can be used for testing.
 
-> From: Jonathan Humphreys <j-humphreys@ti.com>
->
-> For use-cases such as USB DFU Boot, "spl_dfu_cmd()" will setup the
-> appropriate value for "dfu_alt_info". To facilitate such use-cases and
-> in order to avoid overwriting the value of "dfu_alt_info", invoke the
-> "set_dfu_alt_info()" function only when "dfu_alt_info" is not defined.
->
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
->  drivers/dfu/dfu.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> index 756569217bb..ab8abae1d89 100644
-> --- a/drivers/dfu/dfu.c
-> +++ b/drivers/dfu/dfu.c
-> @@ -169,10 +169,13 @@ int dfu_init_env_entities(char *interface, char *devstr)
->  	dfu_reinit_needed = false;
->  	dfu_alt_info_changed = false;
->  
-> +	str_env = env_get("dfu_alt_info");
->  #ifdef CONFIG_SET_DFU_ALT_INFO
-> -	set_dfu_alt_info(interface, devstr);
-> +	if (!str_env) {
-> +		set_dfu_alt_info(interface, devstr);
-> +		str_env = env_get("dfu_alt_info");
-> +	}
->  #endif
-> -	str_env = env_get("dfu_alt_info");
->  	if (!str_env) {
->  		pr_err("\"dfu_alt_info\" env variable not defined!\n");
->  		return -EINVAL;
-> -- 
-> 2.43.0
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Hi Siddharth, thanks. I went ahead and just posted a separate patch to fix
-this issue. I added a bit more explanation, and wanted it separate so that
-it can hopefully make the 2025.01 release.
+ .gitlab-ci.yml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-See https://lore.kernel.org/r/20241217204835.3312765-1-j-humphreys@ti.com.
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 1c15907fffa..60a841bd4d6 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -707,3 +707,9 @@ colibrimx8:
+   variables:
+     ROLE: colibrimx8
+   <<: *lab_dfn
++
++# NVIDIA Jetson TK1
++tk1:
++  variables:
++    ROLE: tk1
++  <<: *lab_dfn
+-- 
+2.34.1
 
-Thanks
-Jon
