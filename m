@@ -4,69 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922A4E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 12:29:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A173EE77184
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 12:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0F99801CF;
-	Tue, 17 Dec 2024 13:29:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DCB36801CF;
+	Tue, 17 Dec 2024 13:38:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jqBquHLa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f0V+ufrm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F986801FB; Tue, 17 Dec 2024 13:29:47 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 231BF801FB; Tue, 17 Dec 2024 13:38:15 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24CBB801CE
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 13:29:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5577801CE
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 13:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5cec9609303so7245776a12.1
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 04:29:45 -0800 (PST)
+ spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-21669fd5c7cso45028215ad.3
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 04:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734438584; x=1735043384; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=O5EtmWZWC4UQx1C6baErXULHwTKA0U5t6uDX0uBTJ0M=;
- b=jqBquHLa2RY4nuMt7UDMpixVngFMEUzEFEv3H7wvVY0FQ7PHDJukI8+/6h/Fp1NOWe
- 4ABPuPOvTJcDFUL0vVrgvErd7xXEK/f6R6pLWLwdoofB9J4/qrtRU+9s0sEnZv0X2iRN
- 6i0OIdjLUGczUn+tXIamzLvRW1dvmZT1P5t1CbwLxsPvSZym7j4lP6S+INMUG0S0atfP
- 6hnyVu22IkHmxqx77SvKEyXo/LoGBqgzqV3U87iBOaTjGG0iWTNSUv23Ews4WqaftF5r
- U5CqfbNTYm1QXGYFOafBGPm18sE2GQLCW9WVPdW2NlGzhvM1jAG4di/fRzxNkGX9btyn
- wm8g==
+ d=gmail.com; s=20230601; t=1734439091; x=1735043891; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Usu5IY7SxgA/oss+Kgv/v24TUjQkr4pbq4X/7s2yJRk=;
+ b=f0V+ufrmA5K+tZjjM0MMbPePkPHdjOPztAYecH9L6AIhjGcDDmGfErRQt0OF95K8Qv
+ 2PIsnteUlSY4dEEGBPveTANZ82pBLYwH2hadlPuQdXzcIXlIUh5+ihaLA/6rLZ540stW
+ 1XftojL4VjR0dmTRFqJX6esWET7HmqobssReDgaNB82RihgMu5/4lCw56ZdgO57gjOjG
+ vqNpqCjQv1WMptCKUWqOqZe6X6esXi3X9AglmGnj8Ncn12s7ab1zOQFZeyNsL2AbTjHh
+ IjBY5nxoAEqfy6OgDC+7J3KHxFiXQUvYlMC3z04w+7qRZiuJsaBZVq+tDPKouKWEVvVC
+ qXfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734438584; x=1735043384;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=O5EtmWZWC4UQx1C6baErXULHwTKA0U5t6uDX0uBTJ0M=;
- b=aqWWq7YhSLRPycfgAlf7F2238RTZmPa7t4p/LrGzf4Hno9zyacl46bQ21rzyaEEy9g
- shqQF72dELTwP945zLIIJGTfPp2+WMc4VKSTGTKrlMywa6C319QncQ9kOyXLuLpHhSpN
- JnbcqjjgwThqVcuLySr2MAD0TOOXsKcdLA6j42PQmEkpgWO+f6pxDFATIIgJ1oZPNEZc
- xDfNKeriuNmVj083NCTWUDLuqnMYkHmoV6FL9a/gYbdq7oo+GDctREzwfV2ia69B3ZQs
- JLSuqhfGaV+tLcOqZX69+U+PwRPCeryaE0F8AdH5rMEGR2WpYxFap5gHHIizULYW4X3y
- mfsw==
+ d=1e100.net; s=20230601; t=1734439091; x=1735043891;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Usu5IY7SxgA/oss+Kgv/v24TUjQkr4pbq4X/7s2yJRk=;
+ b=p5GWkcd1sbiWV1XOCE5P9zuMExzBqPQNzHx1tCDoMQKFkFSSiu+fZA1X1ED1BfS0gP
+ teaJ3bRW/o97bdm2PiwxF7/GAIHxqk+BP78h2Bdjd5BFXfTaHeqXYAMvoiI/A7+/UszU
+ nG/fcbRx7YiFJiMeC/A7QnAJhXN/lOrbqiZbtOKRv8qD9dfjmb8//v/qAxd2bW5Y3qDr
+ f8rPpTel/3F1OyCukEPe3nEmK+EABokhsyBMRD4bqILUJlT/WvLnOk5KQfudTrnFH5w3
+ PTuRyZapZWZJLd/Pn8bn7d4ys/8eNX5m0YrvxaNSzDZpaW2cJ/YKT6IA2mR2aPOhHneS
+ fWYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUu8aL/XtWW0X2+AV1ekpYTpIKD8/r6Gk4nttDNK2adhdmrBWUCoEXz4S+UORB9/EGPSKr1Uho=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzji09F5FJ6lHuunkYlYa1MtJABhRK4IzAh6hCuYOs47tlBLB8k
- ZdoRtvYkLDointPC9A1KI+wzeqIz9WGAUh+hX9mVWcgVL4mUhJCGRpaqvi/VevuKe21ixzDDQea
- Tafzh46WvTc7ky3GJmHQwcDGOhIg4qi36Irfo8A==
-X-Gm-Gg: ASbGncufDe66BG0YZjkqYPjtnTAYyu7+QfWQLtpW01B5Kowg/4IvNjPThMmJDal6D0g
- HbUqpNaU064V4NEQnIKczxWYS2drKPscuDMsp0A==
-X-Google-Smtp-Source: AGHT+IHLnVRIUy8Nyif5qYfnCGYS2cFXVbHNrNQnSO2m89XQOKODr6FSpIGJZKjQvklp2VeRVec0K7ntfGJC5yDPGnk=
-X-Received: by 2002:a05:6402:3489:b0:5d4:1ac2:277f with SMTP id
- 4fb4d7f45d1cf-5d63c306485mr15397994a12.9.1734438584492; Tue, 17 Dec 2024
- 04:29:44 -0800 (PST)
-MIME-Version: 1.0
-References: <CADg8p95K5sgLbqutnGWwcggU+o94GFrS5w3=GQecuO_NT5y6PQ@mail.gmail.com>
- <20241216142842.p5j4otcinwpszt5l@joaog-nb.corp.toradex.com>
+ AJvYcCWlKIPD5865uWkPtSLGsmwcK2TYWWfTDV02sKa1CRTjzUf7o6kDmwIh+jA6sknncfbyAgnuhzs=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywc0XVKZw4G+1bAmPFefWuj+hKprpHH55YcwKI6w31/KWunHI6z
+ HpOddCk+PRlHWWmMils3Orwyuk+9y/uSvXcN9tBkZHWR+umY3lty
+X-Gm-Gg: ASbGncvZi8a7VHIlovj6XFOavZV2i/01dP7uILZ6AqsDNKiJE698B3TgQURLGyLwQUP
+ tVYB4djKpsGX4I7OQrhCj6vEJHXhtMLgRj3y0c4Q/mKgHwj5TdoE1PEVXSYYYwfuASnBsqWgO1C
+ VLZyPyP+tB8QXL1PmmX/B1P7TV4CogQDLLbEej8ArtUFBtthLm+dAC7oZE+AaTY+18dM5nwF3Aq
+ yCZcsl/LAx5Ziuw7u/cH+S2rgDVaAkYHOG9ntA1RNAfduV3253Cd6uqlz38x0oiN5vcZZzHoRak
+ dx/i7muEG5eLQkE=
+X-Google-Smtp-Source: AGHT+IG03J9IKE5cCuGEeI2Ls4qEW+e9NrX+PG4YCuB74wo/TZFA+mHWF8C4lboLX0GqvKColmi27Q==
+X-Received: by 2002:a17:902:d508:b0:216:6f1a:1c81 with SMTP id
+ d9443c01a7336-21892992997mr237658415ad.2.1734439090927; 
+ Tue, 17 Dec 2024 04:38:10 -0800 (PST)
+Received: from joaog-nb.corp.toradex.com ([67.159.246.222])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-218a1db7587sm58558975ad.35.2024.12.17.04.38.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Dec 2024 04:38:10 -0800 (PST)
+Date: Tue, 17 Dec 2024 09:38:05 -0300
+From: =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
+ <jpaulo.silvagoncalves@gmail.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ =?utf-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>,
+ u-boot@lists.denx.de
+Subject: Re: [REGRESSION] Out of memory error: unable to boot on imx8mp/imx8mm
+Message-ID: <20241217123805.r6a74g4ot2hblmld@joaog-nb.corp.toradex.com>
+References: <20241216142842.p5j4otcinwpszt5l@joaog-nb.corp.toradex.com>
  <20241216190255.GA55577@francesco-nb>
  <CADg8p96Aiy-DBNc8piA5gN01E+iWHZJ4OGhY5qjOK1wCUS-O7Q@mail.gmail.com>
  <Z2B_sqO2XcAMIF3H@gaggiata.pivistrello.it>
@@ -75,23 +91,12 @@ References: <CADg8p95K5sgLbqutnGWwcggU+o94GFrS5w3=GQecuO_NT5y6PQ@mail.gmail.com>
  <Z2CCOS76kgh_Kun9@gaggiata.pivistrello.it>
  <CADg8p970OvCpHnXaL2iMKN+uDBom-gZ5DQcq3GshFYf-VvZDJw@mail.gmail.com>
  <20241217111850.sazfsh3majbgy7iu@joaog-nb.corp.toradex.com>
- <20241217112535.GA43472@francesco-nb>
-In-Reply-To: <20241217112535.GA43472@francesco-nb>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 17 Dec 2024 17:59:33 +0530
-Message-ID: <CADg8p94+y3VwpeWNy6Zgutei9HE4WSWeBr6QSeU+UqpeVOY4Qw@mail.gmail.com>
-Subject: Re: [REGRESSION] Out of memory error: unable to boot on imx8mp/imx8mm
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?=
- <jpaulo.silvagoncalves@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- =?UTF-8?Q?Jo=C3=A3o_Paulo_Gon=C3=A7alves?= <joao.goncalves@toradex.com>, 
- u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Fabio Estevam <festevam@denx.de>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAC_iWjJWA5nUP_cPkKnziK9s=dd6Zv40eOueyi7biERoO-UrkA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAC_iWjJWA5nUP_cPkKnziK9s=dd6Zv40eOueyi7biERoO-UrkA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,13 +113,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 17 Dec 2024 at 16:55, Francesco Dolcini <francesco@dolcini.it> wrot=
-e:
->
-> +Fabio, Marex, Peng, Frieder
->
-> On Tue, Dec 17, 2024 at 08:18:50AM -0300, Jo=C3=A3o Paulo Gon=C3=A7alves =
-wrote:
+On Tue, Dec 17, 2024 at 01:55:51PM +0200, Ilias Apalodimas wrote:
+> Joao, there's 3 places that
+> 'ERROR: Out of memory'. Since I don't have access to the board, can
+> you change the prints a bit and figure out where it comes from? I
+> assume it's from efi_console.c. Can we verify it?
+> 
+> Thanks
+> /Ilias
+> 
+> On Tue, 17 Dec 2024 at 13:18, João Paulo Gonçalves
+> <jpaulo.silvagoncalves@gmail.com> wrote:
+> >
 > > >
 > > > Okay. Please try changing the value of ram_top to 0x1_0000_0000
 > > > instead of 0xFFFF_FFFF. That should work.
@@ -122,11 +132,9 @@ wrote:
 > >
 > > Changing ram_top to 0x1_0000_0000 worked:
 > >
-> > U-Boot SPL 2025.01-rc4-00025-g100a40dd79f8 (Dec 17 2024 - 08:05:06 -030=
-0)
+> > U-Boot SPL 2025.01-rc4-00025-g100a40dd79f8 (Dec 17 2024 - 08:05:06 -0300)
 > > DDR configured as dual rank
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
+> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
 > > SEC0:  RNG instantiated
 > > Normal Boot
 > > Trying to boot from BOOTROM
@@ -145,8 +153,7 @@ ut)
 > > DRAM:  Ram top: 100000000
 > > 8 GiB
 > > Core:  183 devices, 31 uclasses, devicetree: separate
-> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeo=
-ut)
+> > WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
 > > MMC:   FSL_SDHC: 1, FSL_SDHC: 2
 > > Loading Environment from MMC... Reading from MMC(2)... OK
 > > In:    serial@30880000
@@ -174,47 +181,26 @@ ut)
 > > correct solution. Should ram_top be the last valid address or the upper
 > > bound?
 > >
-> > diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/so=
-c.c
+> > diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
 > > index 9588b8b28bf2..e01774ebc8a4 100644
 > > --- a/arch/arm/mach-imx/imx8m/soc.c
 > > +++ b/arch/arm/mach-imx/imx8m/soc.c
-> > @@ -362,7 +362,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t to=
-tal_size)
+> > @@ -362,7 +362,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
 > >          * space below the 4G address boundary (which is 3GiB big),
 > >          * even when the effective available memory is bigger.
 > >          */
-> > -       top_addr =3D clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, 0xfff=
-fffff);
-> > +       top_addr =3D clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, 0x100=
-000000);
+> > -       top_addr = clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, 0xffffffff);
+> > +       top_addr = clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, 0x100000000);
 > >
 > >         /*
 > >          * rom_pointer[0] stores the TEE memory start address.
->
-> see commit e27bddff4b97 ("imx8m: Restrict usable memory to space below 4G=
- boundary").
->
-> I assume such a change might introduce regressions.
+> >
+> > Best Regards,
+> > João Paulo Gonçalves
 
-I am not sure which commit you mean, since the above commit is
-actually restricting the ram_top to 0x8000_0000. This is a corner case
-of the bank end being above the value of ram_top. With the current
-values, a single byte at 0xffff_ffff is getting reserved. And this
-causes the lmb to not reserve the u-boot image region and also causes
-the future allocations to fail. With the value of ram_top set to
-0x1_0000_0000, the single byte reservation does not happen, and the
-issue is not seen.
+Yes, it is coming from efi_console.c in the efi_console_register(). The
+first 'out of memory' occurs in efi_alloc() within efi_dp_from_uart().
+As a result, efi_console_register() fails in efi_dp_from_uart() and
+returns 'ERROR: Out of memory'." 
 
-There is another way that this can be handled in the lmb code, but I
-want to send that change after this release as we are pretty close to
-this release. For the meantime, for this release, can you bump up the
-value of ram_top by 1. I understand that the value of ram_top is one
-more than the highest address that is to be used on the platform.
-
--sughosh
-
->
-> Francesco
->
->
+João Paulo
