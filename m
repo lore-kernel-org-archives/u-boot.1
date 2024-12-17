@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ACFE77184
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AABC3E77187
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:46:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B3D4801CE;
-	Tue, 17 Dec 2024 20:46:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E4F1D801FB;
+	Tue, 17 Dec 2024 20:46:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lFESk6D6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MgmptYKV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BCC4801FB; Tue, 17 Dec 2024 20:46:31 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 0A6B780107; Tue, 17 Dec 2024 20:46:40 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64D6E80107
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:46:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45183801FB
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:46:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fc01so1627072a12.2
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:46:29 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa662795ca3so7168766b.1
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:46:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734464789; x=1735069589; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734464796; x=1735069596; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=82T5v230eAHpv/4Afs+OYGARvMjWGPtfAi5n8jWD2/Q=;
- b=lFESk6D6UhDtvopckz8cEd0ALcziUPZ7RvtZY/1twKfSrukap/ifgYVRgaG62T7yKC
- Vz6slvKcif3ajLYYl7UNtPqcOmZPw/j3jh8TXQ388fAocHlJNA1KqfKHJfChllNDr/6w
- hD11aNYueABZNTZvOBuF18OtcOVm5WKelmLhQ=
+ bh=kQwwTjonLXf1MoLZFeGp4hSgpdUB2GKNg7tRWIYTprc=;
+ b=MgmptYKVfOfyeV9oHoXUYySgntcp3Hwj1k0Nk56D0MnahS7c/ZJp7f5Zu1QLsp9bhq
+ lFymmehmRDwyKJ+7QdZca3tKOP6ziEfZKp8HcnjAOpC4mBQeeq7FuRaTMc2Dz0NmBOVi
+ L2nr6UG6sXVclBxf7XcyxioBEFMEZvX1gwsXw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734464789; x=1735069589;
+ d=1e100.net; s=20230601; t=1734464796; x=1735069596;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=82T5v230eAHpv/4Afs+OYGARvMjWGPtfAi5n8jWD2/Q=;
- b=LKpOJR6AgGuHRLMrVHLqIS8Xd7/Y5YcfJQ4o9j/D0M7epEni/Wr/IOCFfQTNj9vNhi
- jCvH+ffFoaEAjeOt2Zop0rpsURrCLTFanIy9OZd/D/Swl7dQIz1UpHAiL4p8x9ouyn6m
- ZYyzIdHHrrc4CGXMahBYAQ16fN+xTzwvPCHMf5ZFuT+DgPCmY4jPP/HxPjomkDHN1uZ0
- UoghqHlKcyMAGxgHcKIgW7c4gZml7aXskjx+XwG2kUxz//+9EbDnz2jELfR8TKxm8MbC
- xwyxwyquT4txQpp/TimSOM2MxI+0/DjLHBHn7420GhKCAC2mKvYNXA4ozJD0qniDR2KK
- EPrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWkzAMoFYA6onmWWqFymeUXoJCD9TzwWdcuvyVJ/A+YdRaTZ0Li6gFHjp1sDga6Rrdo50/xzpk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwycLYgo/x6VUL6sW/MFR64gJfFXBZbaCKZ4RGA46W+coyPBdRO
- Xm2oIikahedjKVZjTxP5gltuzhr8A5LdXD0hR0LvlKfIkXn5BgfwdNPW2XsCoyXBuQ4GQfJPSuD
- cKFGYq+iCkglkiNwA4qmIOZF5bmeBF+KQb95u
-X-Gm-Gg: ASbGncvi0+47nG/DZxeP+lAJRPBIWKj3OldBQWpydYuEPTUFha8RvW4lZPBC4SmZEHu
- hU42Hx9Xji6ZwlOQfua6w8flt69TE6n7d4QjcfCI=
-X-Google-Smtp-Source: AGHT+IF7Nizp+GdTmoJS1f+sF/MBu+l7NTJsNILFDLfYoVwFq8p4x12/9tRianEV5M4avPg82Dg6BYaaUu8ScA6suZQ=
-X-Received: by 2002:a17:907:7216:b0:aab:76bd:5f8e with SMTP id
- a640c23a62f3a-aab77ed35d6mr1812466766b.53.1734464788900; Tue, 17 Dec 2024
- 11:46:28 -0800 (PST)
+ bh=kQwwTjonLXf1MoLZFeGp4hSgpdUB2GKNg7tRWIYTprc=;
+ b=i/VOjYR1x4dLgxQAU1MIwNhs6PFam24f6DHhYwU3BsuYCdbBCyZA9WUzTZOH8gQ7zc
+ 729fVmxcV/uHRI28EjETBWEQXP9UxGy2lZ1YMQAkqdLAC56lXlwxpQFtUdrRx+5uryI1
+ CYKITKiRc4BnoFfxKPlvqELD+OYX0PH8zNMnRcj4jdJ8t/R4uriG/nB82wOz5KBNswq1
+ IaqehE6W5MZJywZgAck/h3fGC5MvKhLvzV/0ohUyVqOPZDWXqdxl7UuDjOcxibe70I/f
+ wZEqo8dE70/tK86RUQKps4bUCJsM2+LHCGJc3TG7Hfvh4L+R/L1YddHFj6W5obw87vgy
+ dphw==
+X-Gm-Message-State: AOJu0YxQGCfyKDEahVFQI+VlUQa9Dn7RelgO2ON+yKE9NVfq9ZrCIZkk
+ 7HJsPZ9b/zmK4W7ZdFT6a48mdvepchUtJzjNLnjySJM7Lk34BkUumr9893kKCojukiZjaNLRFIF
+ St/a0tLywzOWuHKMtY1FuljXyHpLxp2V+aLsg
+X-Gm-Gg: ASbGnctgwT2YyHY2c4stE2GKt9Ldugh1+vEJrbGwSK5Gu1CRxQ6bhFtDRWWdDi1SQkn
+ mhIsQERUOVKfYczKTtYEC9totkaQFPZ42GBx4xPE=
+X-Google-Smtp-Source: AGHT+IFFDCAmAqd1HyV6nilu6bl7QXFmiRZ4J9YSM0TLYcKqK9zTlhqxMx0A2j8BEW26Y4dRS5vBCPWKrSv5LQ6kmPA=
+X-Received: by 2002:a17:907:9725:b0:aa6:112f:50ba with SMTP id
+ a640c23a62f3a-aabdc8bd101mr506355066b.13.1734464795766; Tue, 17 Dec 2024
+ 11:46:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20241211004503.3775922-2-sjg@chromium.org>
- <20241211004503.3775922-1-sjg@chromium.org>
- <CAFLszTjHyhwf0dV8THPDswXz58jRCW+ZX90Hr4_i7PjXsVHPBA@mail.gmail.com>
- <20241217142527.GL1505244@bill-the-cat>
-In-Reply-To: <20241217142527.GL1505244@bill-the-cat>
+References: <20241216233853.2125656-1-sjg@chromium.org>
+ <20241216233853.2125656-2-sjg@chromium.org>
+ <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
+In-Reply-To: <B12C4F95-DD8B-44C3-AE40-3EFFB7402914@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Dec 2024 12:46:17 -0700
-Message-ID: <CAFLszTg93ddp3r2Bmv+p-wKRBDxVYqz2mQ56etGqSWCGUjo6Jw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] efi: Correct logic for OF_EMBED and OF_SEPARATE
- co-existing
-To: Tom Rini <trini@konsulko.com>
-Cc: Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+Date: Tue, 17 Dec 2024 12:46:23 -0700
+Message-ID: <CAFLszTh+UE6LywCtmqEUdeYSFsNjZFk-pCUTEYGV-=ptC43OeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] gitlab: Add a StarFive VisionFive2 to the sjg lab
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
- Matthew Garrett <mgarrett@aurora.tech>, Raymond Mao <raymond.mao@linaro.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,48 +90,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Tue, 17 Dec 2024 at 07:25, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 16 Dec 2024 at 17:23, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On Tue, Dec 17, 2024 at 08:00:56AM -0600, Simon Glass wrote:
+> Am 17. Dezember 2024 00:38:53 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >I have one of these boards loaded with Ubuntu 24.10 (64-bit). Add an
+> >entry for it so that it can be used for testing.
+> >
+> >Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> > While we do plan to switch to OF_SEPARATE now it is supported, it seems
-> > worth at least showing how OF_EMBED could be used instead, just for the
-> > record.
-> >
-> > So make the Makefile rule conditional on OF_SEPARATE and adjust fdtdec
-> > to avoid a build error when OF_EMBED is used.
-> >
-> > Finally. the dtb symbol has a double underscore, so update it to avoid a
-> > build warning.
-> >
-> > With future patches, OF_EMBED will no-longer be used with the EFI app,
-> > so it is expected that it will eventually stop working.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Fixes: 2e7bf25f6bf ("Support separate DTB files with the UEFI app")
-> > ---
-> >
-> >  Makefile                       | 2 +-
-> >  include/asm-generic/sections.h | 2 +-
-> >  lib/fdtdec.c                   | 2 +-
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >
-> > Applied to sjg/master, thanks!
+> .gitlab-ci.yml supports an include statement.
+> Maybe it would make sense to move the lab definitions for lab_dfn into an include.
 >
-> Since you've picked up several series that no one was objecting to and
-> providing reasonable feedback on and applied them to your own tree, do
-> you plan to squash/rebase them and repost so they can be applied to
-> master / next at some point?
+> Such a file could be conditionally included:
+>
+> include:
+>   - local: 'lab_dfn.yml'
+>     rules:
+>       - if: '$LAB == "dfn"'
+>
+> Cf. https://docs.gitlab.com/ee/ci/yaml/index.html
+>
 
-The original EFI-app series actually had objections in toto. Did you
-not see the comments from Heinrich?
+Yes, it would be a bit cleaner to have an include file, but it should
+not be conditional. Tom is missing a patch.
 
-I've offered to send pull requests every now and then, to keep things
-in sync, if that is your goal? But I don't believe I can do that for
-particular patches/series. It is going to be hard enough for me to
-just maintain my own tree, let along dealing with your/Linaro tree.
+>
+> For the current patch
+>
+> Acked-By: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>
+
+Thanks
+
+>
+>
+> >---
+> >
+> >Changes in v2:
+> >- Rename the board to vf2
+> >- Add a comment about what the board is
+> >
+> > .gitlab-ci.yml | 6 ++++++
+> > 1 file changed, 6 insertions(+)
+> >
+> >diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> >index ffcf8532944..a17c1b0a366 100644
+> >--- a/.gitlab-ci.yml
+> >+++ b/.gitlab-ci.yml
+> >@@ -696,3 +696,9 @@ rpi:
+> >   variables:
+> >     ROLE: rpi
+> >   <<: *lab_dfn
+> >+
+> >+# StarFive VisionFive 2
+> >+vf2:
+> >+  variables:
+> >+    ROLE: vf2
+> >+  <<: *lab_dfn
+>
 
 Regards,
-SImon
+Simon
