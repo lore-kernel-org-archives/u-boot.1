@@ -4,83 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF114E7717F
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 704F1E7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 19:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 424EA80303;
-	Tue, 17 Dec 2024 20:53:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DEDEE8021A;
+	Tue, 17 Dec 2024 20:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="isr9+7DQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ACB1IfLa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CCB180315; Tue, 17 Dec 2024 20:53:56 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id D18EF8022F; Tue, 17 Dec 2024 20:57:42 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0CAB80214
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:53:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D28580107
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 20:57:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6f1b54dc3so846227685a.1
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:53:53 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7b6ef047e9bso5133585a.1
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 11:57:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734465232; x=1735070032; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734465459; x=1735070259; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5LjSdX0VWCLUk3iGeTCfi8+giGZprqI3veONlzPjIYg=;
- b=isr9+7DQXxXjVarHCUJHxYJ2gn/S6EL00DiH/Af6vSmUWzsK/ScPf0qtHpAOYi6Of3
- XTIpdo87lT2uODEzHu5hBPNxVeLphPULIznl/DL1NVfwm2PuOcZacutFYelTFOKtv0uc
- LBDTumGHK4UzjgrmYLjrtBSe9iaPrZVyb9jnw=
+ bh=Eo1GC76gx+CaubOCBObaAfsmYaN2jeSRSkQgaH5Kou0=;
+ b=ACB1IfLa9QFzluFM1K3nlA4Z5zmElF6ShV3TBZI7FXAhGC79yy0IJiXW04029jkOuC
+ bFP6Mxk0vRu3rNaH3BNsoOBIKFZlejBC8espV/CiTkUPaLamULsHXMHao3pF+gSA/NVn
+ 2CIP8bme8DycVBjasQDOdAW4I2j82MtEEuXUY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734465232; x=1735070032;
+ d=1e100.net; s=20230601; t=1734465459; x=1735070259;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5LjSdX0VWCLUk3iGeTCfi8+giGZprqI3veONlzPjIYg=;
- b=gyEkl4Cn8MvR8I7b09MVODjq2/VQfswkJ5WizQWG+49SAhJ9v0ClQbz/ORMk8RYtOw
- yDO7ZoRVELkhPbKsE1gL2trWTq/fjTvIq15u2fdtyXwSlxwhyzkIQa4SqaIsnmcV8s8o
- y/Kbmr6NsonO55j99vc+CYZunp1dQ7th030BEP02rs8wUkuMwdWgawnlh9fl0l/PZ5lO
- 1biXPh4MqWZnZYeFMl5+J57HxCtkHySP5/DbFW0bPW3Vo3xZReOXbZFzd1aW7G4uYmwO
- +F7/8qbhfYtNikrz3MpxPwmBrKl+IHNC2/wkuFzM1Py6DgMpPiJy55LkoDmTazb0zKLX
- 9Lkw==
-X-Gm-Message-State: AOJu0YwnLapqYRJ7f07BPdu4AKFyqcu+Hulj+aaJi11NxS3CLGSFEbUc
- oWeXyxh4yqJdVPGpQQ86kR6yJ/DMdFmyWWqurTt58gJnzNojT9uPa5JkQv5zjZ1XqPdHRQ1B5rf
- UOpM=
-X-Gm-Gg: ASbGncs1UdAkQB+crkg/Vr1S6OGpf+ZB22a5DhJqsDM6C/QsRWtPrZMBPg43RFfD8aR
- w8Bc8bNiRFbZ6CVrYPH5R0KIK0N50O9Am2JL33WSOwrz78FtHI4Vbt4KTAeImsDClH7gYbacuB3
- djx11ZkOnytHxlETuJ1oQoNh2ng140dq+1yYDCO9q0LPWDUtrkt/p6Dih2BhriYhAgPtQcMvVXK
- b3nB/4aIVjm2xhTo/eAzcn1kY44OcH+AppyK7mVpe/Z1IYYJzQs5VYG
-X-Google-Smtp-Source: AGHT+IEb4wAVrdHK4BmvJ2o1I6whn32aiaJweBBT8YrPsSvOWF3o7BjYtkpyV8kpl0R7mLFKIFqrCw==
-X-Received: by 2002:a05:620a:454b:b0:79f:67b:4fdc with SMTP id
- af79cd13be357-7b8636ebb10mr7519385a.2.1734465232516; 
- Tue, 17 Dec 2024 11:53:52 -0800 (PST)
+ bh=Eo1GC76gx+CaubOCBObaAfsmYaN2jeSRSkQgaH5Kou0=;
+ b=m26W2LQj35GQKvoFSG61FsHoNu0aB2Chbq6LnfbSxTgRrj27ZfUdqkBs6Sn7HzkuhA
+ uk2V6rQJ2uDtFRDq1orZoMwwk/4zoljuD3u0Zo9EVVv2ToK+NCIs70DG5q4z7tGg7yxk
+ GvhzWJcBzkCGBdvn/WLiV5a9BM9lDex8dX7en7MWzwo6Af4wQ3ZbVzJC+G7kQBp+qKag
+ k9zwy+esrAmcUNOgn70r54qwdicbqXprdb2yPzHUozkx2TA/6Lsk9q1KpEI+n1ipjsby
+ YFoyrloLms/oam4JgOWplxQXOKG/6Wuusz8SVCqvXIfrHkPG2Tcm+pQokn+YtX2o5J/U
+ aGWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEodimcxW6CaEhK0t+S8MOOfevStw9jhoQRg6qiBxHXiSOXMPU2D8019oIBPf94/rggyy4xt4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBzU03/7zJla7/xMP7gBS3oZbgiSMhaigKZB6qc6xM3241XslA
+ 9++6JZ4ZzXy9/5qBMZ8Csq7sN833/Bm7aqDvVqRL08Zn7tvYR7R30yf3VgywYfk=
+X-Gm-Gg: ASbGnctrzU47rJwgWAwF38MW4wZn+DOiqe9kaIHk0Zk3l85cY+CeHrcAoJLND9eUc+g
+ csbwzpHW/sNzlzgmSipnL4dtA2Ae0I7mfEaaXwZHgZ5wTXv7/no6dZtX1k3KwMCVpiuvXkOPNVA
+ waLBOWuokNtczYasWKWPTXWrKq7/81dRYR7IJ2G8eC0ZHcqN597wwR79KDGzYscoEaETpAHWj2v
+ RsahHEhYb10bDJiW6wzYfN/HwZpHhIOdIZGF01DBgLgLFsCrQ9esDM+
+X-Google-Smtp-Source: AGHT+IFj5zBLCsd4n3IF/VKGU6l4U6AJ7MBUHdMQjpMOGEQayTmtBy7I1wuUJScSRCJTmdlKFBNrgA==
+X-Received: by 2002:a05:620a:4084:b0:7a9:a356:a5dd with SMTP id
+ af79cd13be357-7b86368fe34mr12782685a.20.1734465459208; 
+ Tue, 17 Dec 2024 11:57:39 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7047ea148sm348476685a.53.2024.12.17.11.53.50
+ af79cd13be357-7b7047d5de0sm349424785a.35.2024.12.17.11.57.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 11:53:51 -0800 (PST)
-Date: Tue, 17 Dec 2024 13:53:48 -0600
+ Tue, 17 Dec 2024 11:57:38 -0800 (PST)
+Date: Tue, 17 Dec 2024 13:57:34 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>
-Subject: Re: [PATCH] buildman: Add a way to build a particular target
-Message-ID: <20241217195348.GQ1505244@bill-the-cat>
-References: <20241217132616.3708573-1-sjg@chromium.org>
- <20241217142016.GK1505244@bill-the-cat>
- <CAFLszTjfxxseCJUvUXPgZQWQYNrL+yT3u8qZ9OieJHxaC=dfDg@mail.gmail.com>
+Cc: Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/3] efi: Correct logic for OF_EMBED and OF_SEPARATE
+ co-existing
+Message-ID: <20241217195734.GR1505244@bill-the-cat>
+References: <20241211004503.3775922-2-sjg@chromium.org>
+ <20241211004503.3775922-1-sjg@chromium.org>
+ <CAFLszTjHyhwf0dV8THPDswXz58jRCW+ZX90Hr4_i7PjXsVHPBA@mail.gmail.com>
+ <20241217142527.GL1505244@bill-the-cat>
+ <CAFLszTg93ddp3r2Bmv+p-wKRBDxVYqz2mQ56etGqSWCGUjo6Jw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yEy7ZC7iAeul62Vz"
+ protocol="application/pgp-signature"; boundary="QiFyRDLagytM5HUa"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjfxxseCJUvUXPgZQWQYNrL+yT3u8qZ9OieJHxaC=dfDg@mail.gmail.com>
+In-Reply-To: <CAFLszTg93ddp3r2Bmv+p-wKRBDxVYqz2mQ56etGqSWCGUjo6Jw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,65 +109,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yEy7ZC7iAeul62Vz
+--QiFyRDLagytM5HUa
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 17, 2024 at 12:45:29PM -0700, Simon Glass wrote:
+On Tue, Dec 17, 2024 at 12:46:17PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Tue, 17 Dec 2024 at 07:20, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 17 Dec 2024 at 07:25, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Tue, Dec 17, 2024 at 06:26:16AM -0700, Simon Glass wrote:
+> > On Tue, Dec 17, 2024 at 08:00:56AM -0600, Simon Glass wrote:
 > >
-> > > At present buildman only supports building the default target. Genera=
-lly
-> > > this is what is wanted, but in some cases boards erroneously have a
-> > > different target for product extra files.
+> > > While we do plan to switch to OF_SEPARATE now it is supported, it see=
+ms
+> > > worth at least showing how OF_EMBED could be used instead, just for t=
+he
+> > > record.
 > > >
-> > > Add a --target option to help. Also add a comment indicating which
-> > > letters are free for new options.
+> > > So make the Makefile rule conditional on OF_SEPARATE and adjust fdtdec
+> > > to avoid a build error when OF_EMBED is used.
+> > >
+> > > Finally. the dtb symbol has a double underscore, so update it to avoi=
+d a
+> > > build warning.
+> > >
+> > > With future patches, OF_EMBED will no-longer be used with the EFI app,
+> > > so it is expected that it will eventually stop working.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Fixes: 2e7bf25f6bf ("Support separate DTB files with the UEFI app")
+> > > ---
+> > >
+> > >  Makefile                       | 2 +-
+> > >  include/asm-generic/sections.h | 2 +-
+> > >  lib/fdtdec.c                   | 2 +-
+> > >  3 files changed, 3 insertions(+), 3 deletions(-)
+> > >
+> > > Applied to sjg/master, thanks!
 > >
-> > How do you use this? It would be nice to be able to do "--target
-> > u-boot-initial-env" for example for converting and verifying the
-> > conversion of boards to plain text environment. Except the list of
-> > artifacts that are kept isn't updated with that string as well. And
-> > FWIW, is this for a case not solved by CONFIG_BUILD_TARGET?
+> > Since you've picked up several series that no one was objecting to and
+> > providing reasonable feedback on and applied them to your own tree, do
+> > you plan to squash/rebase them and repost so they can be applied to
+> > master / next at some point?
 >=20
-> It's related to the problem where colibri-imx8 doesn't actually build
-> an image with the default boot target.
+> The original EFI-app series actually had objections in toto. Did you
+> not see the comments from Heinrich?
 
-I don't recall if there's a good reason for imx8 not setting
-CONFIG_BUILD_TARGET to something, but that sounds like how to solve this
-problem. "make all" should work, normally.
+I assume you mean:
+https://patchwork.ozlabs.org/project/uboot/patch/20241123195616.305687-2-mj=
+g59@srcf.ucam.org/#3419029
+which is a question.
 
-> But yes, we could add more things to buildman, e.g. it could output
-> the initial env as a file for later parsing.
+> I've offered to send pull requests every now and then, to keep things
+> in sync, if that is your goal? But I don't believe I can do that for
+> particular patches/series. It is going to be hard enough for me to
+> just maintain my own tree, let along dealing with your/Linaro tree.
 
-Well, your patch supports that, if I read it right. It just doesn't save it.
+I find you calling the mainline project tree "your/Linaro tree"
+offensive. And I'm again asking you to explain in public what you are
+doing exactly.
 
 --=20
 Tom
 
---yEy7ZC7iAeul62Vz
+--QiFyRDLagytM5HUa
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdh1skACgkQFHw5/5Y0
-tyynPgwArHdLGVV0OxnETojK7G8kgXPXns5rkpWE+AycYIZqBixeMPups93ANio9
-TjxE394IoL5tEvi7VrSEymbpoeUfV1LnEOjRb6aWT37PB7urzyA0Nb8F6QhFt9/B
-0zVCJkVxNjA9jJigA1DIHGdAOrlXivgVHgQrIpqDPGB55XMNhi70AiTn0mX+XRsy
-fH5CE8FEoHJkZjr5HCZEi50ZlQ5KKZ2Vde1EHgENyLw1th/jf0T+QVkLQeyGTX48
-qGGrz9/dQmlFxWN1TJ1h6xt69TyggKg9jWObzlxjECZ4o0qkk7sN8wZNjHU6Crsf
-wGDmFr34PG+cBr7eMGHgXHsd8LAIX4GvKQ3xj6Qqhm/Dezcf7Fy/qxRsaDAWMH1z
-HzdyaHvdzUHkzabxNSwGNwhxDKt15l6bxCFMkdUPC6Qf2iNwYtWRQFual8g6vHuI
-zXzPPR6OYHkj21KkB+AZlkNw/9b/R7BnCmrF7rueXOcqWvZZRRosLLZCG7TpI9+C
-I/gpKZKa
-=o9ur
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdh164ACgkQFHw5/5Y0
+tyyNQwv+IEn9RGhnZlyOzBg3G5LVRavDM9OjUE6d6zE3KPl8THNCoGuvoo6YUnrH
+aVzfu3FRJTTte1rfiUqNQdYE9uP5uvVlSlYJuPYCL7HCKqRqu7q8f9yjBegqlOCN
+mMd2/Dt5EPF/m0tLjU2isqF+G6ZYDZZgqszksJgEIJAP4hiPo6buqxY9wT3h1DLB
+ttHNBJGPONFm6RAxEau3Q/H9L4oxdndBuhhqSfryRWCuXMZgmHLGFjvDcQYuMMJ3
+hJ30dasoc/nhh2ZxVPt2Va0o1ZJJECFPF8bj+L2YcvyXNSsxQ5K0F8f+U8M2xnjZ
+7ddi8CoCLGgKzsi5c7wpFUpKoJVgYfcCVfzZpq96gMqhlRYnPyi+qaoVs/igbX7y
+/Ss9R7KxHjPwMJV5XW2h+BwGaqRTdyqfKpj2Vam2H5w1xn1vS04ojMosI7pfbRKg
+kPcMt/ZCkGQaYO9Bf3h89KSDuqyp/Qit2A0E4mmj+VtGAbyUeSzRExpIJWiKd3Y0
+pZf77wzs
+=Wpcq
 -----END PGP SIGNATURE-----
 
---yEy7ZC7iAeul62Vz--
+--QiFyRDLagytM5HUa--
