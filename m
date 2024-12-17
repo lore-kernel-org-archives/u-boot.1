@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89449E7716A
-	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3801CE7717F
+	for <u-boot@archiver.kernel.org>; Tue, 17 Dec 2024 08:54:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0867F80224;
-	Tue, 17 Dec 2024 09:40:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 8721A801CE;
+	Tue, 17 Dec 2024 09:54:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="CBUrWoYD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FmjHNJiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE7180282; Tue, 17 Dec 2024 09:40:15 +0100 (CET)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F402F801CF
- for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:40:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ id 18427801CF; Tue, 17 Dec 2024 09:54:48 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DE9CC801A0
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 09:54:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 83c87d36bc5211efbd192953cf12861f-20241217
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=3PJ2qjSgUWrk5Rm9azfN9sal1cDW2uERdtWmoiuh+Y4=; 
- b=CBUrWoYDkAVqPkTSG4HCPO8DGIdrm61DTHc7w7JROjMbPRbTzVLfu3e5R90Vl76kpUZmTzSkTKg8lz6qFJTEN6omQMiLZXdhXBZjo1YpWkVKD56HCHqNXOZq13zj8zcpfCp8eQGPNF9Kom0cGIKXM73N+dULWq4ibLinM8B6wV0=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.45, REQID:d5bc64a1-2f58-4dd6-9a4c-c341098c57aa, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:6493067, CLOUDID:eee3a628-d2eb-4de2-b5c9-495d1bc17256,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:nil,Content:0,EDM:-3,IP
- :nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,
- LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 83c87d36bc5211efbd192953cf12861f-20241217
-Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 501278132; Tue, 17 Dec 2024 16:40:05 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Tue, 17 Dec 2024 16:40:04 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Tue, 17 Dec 2024 16:40:04 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom
- Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, Weijie
- Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 10/10] net: mediatek: fix usability with wget command
-Date: Tue, 17 Dec 2024 16:40:03 +0800
-Message-ID: <29575b5c213b966235ba1a21da9cf40cd6d6de2d.1734406968.git.weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1734406967.git.weijie.gao@mediatek.com>
-References: <cover.1734406967.git.weijie.gao@mediatek.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BH8sg003605071
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 17 Dec 2024 02:54:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734425682;
+ bh=Cj5Hxe5B4Vj4JQgaAirqRBea8DsSmp8psAIr+x7oFKE=;
+ h=From:Date:Subject:To:CC;
+ b=FmjHNJiFCf8EuPokXnSSo6TaHlCBNSC5Y5d2+8DRoCr3gi9tTU1t8XzND3qBKQWZy
+ 2xIpigJ49QXhmIFU1ZKoZ7IseBvDXHCW6zY/o8Pj3Nmlmu7MCRnx5527UUemmJ20Ks
+ 8uoMRoWC5NARArVdD/BE68PYm7ivmXky4fBczl2w=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BH8sgm2039219
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Dec 2024 02:54:42 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Dec 2024 02:54:41 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 17 Dec 2024 02:54:41 -0600
+Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.160])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BH8sdvp125542;
+ Tue, 17 Dec 2024 02:54:39 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Tue, 17 Dec 2024 14:24:37 +0530
+Subject: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
+X-B4-Tracking: v=1; b=H4sIAEw8YWcC/x2MSQqAMAwAvyI5G7CLIn5FPFQbNeBGqiJI/27xO
+ AwzLwQSpgBN9oLQzYH3LYHKMxhmt02E7BODLrRVWlXYW7yOcAq5Ff2KhxAKLfuAZW2UsV47Ywt
+ IeTIjP/+67WL8AHe9igpqAAAA
+X-Change-ID: 20241216-b4-upstream-dm-pre-reloc-583134d2a340
+To: Tom Rini <trini@konsulko.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>, Manorit Chawdhry
+ <m-chawdhry@ti.com>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1734425679; l=1456;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=4cdbWd/SkQAmeNMRV/eb5rPWGmEIJSn+YfkA6DF6f50=;
+ b=HbpL/oNzxappOyWT6zRJqPM92sKGiJXXNc9w7HjEXjJX0hQw2pVF0KZbbnxQhhOwuXLpdc1+W
+ Z2Crdcr0XIHD6bZFzt/G9AeAP4Fo/qOEXiW1bn5o/UKoRK3+bbV6cD0
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,40 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The wget command currently cannot work correctly with mtk_eth driver.
-This patch fixed this by increase DMA ring size and invalidate ring data
-after use.
+Currently the driver relies on bootph flag to probe it during PRE_RELOC
+stage but with the upcoming cleanup of v6.13, we don't have the bootph
+property in the parent nodes anymore and ti_sci driver being one of the
+parent nodes required during SPL stage would end up hampering the probe
+model [0].
 
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+
+[0]: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
+
+Suggested-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- drivers/net/mtk_eth.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Test logs with current DT: https://gist.github.com/manorit2001/b28bebd8229818412ff74e40d4a53f71
+Test logs with 6.13-rc3 DT: https://gist.github.com/manorit2001/b91691b59581d445c301e2608ce5931a
+---
+ drivers/firmware/ti_sci.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/net/mtk_eth.c b/drivers/net/mtk_eth.c
-index 888e8c1e855..454caa3cd3a 100644
---- a/drivers/net/mtk_eth.c
-+++ b/drivers/net/mtk_eth.c
-@@ -29,8 +29,8 @@
+diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+index 719cfa771b4198159a305a08a044c7a8aaf7a14f..190a1e3f5fc3713464b0cbf3ae8c35e3f185a353 100644
+--- a/drivers/firmware/ti_sci.c
++++ b/drivers/firmware/ti_sci.c
+@@ -3077,6 +3077,7 @@ U_BOOT_DRIVER(ti_sci) = {
+ 	.of_match = ti_sci_ids,
+ 	.probe = ti_sci_probe,
+ 	.priv_auto	= sizeof(struct ti_sci_info),
++	.flags = DM_FLAG_PRE_RELOC,
+ };
  
- #include "mtk_eth.h"
- 
--#define NUM_TX_DESC		24
--#define NUM_RX_DESC		24
-+#define NUM_TX_DESC		32
-+#define NUM_RX_DESC		32
- #define TX_TOTAL_BUF_SIZE	(NUM_TX_DESC * PKTSIZE_ALIGN)
- #define RX_TOTAL_BUF_SIZE	(NUM_RX_DESC * PKTSIZE_ALIGN)
- #define TOTAL_PKT_BUF_SIZE	(TX_TOTAL_BUF_SIZE + RX_TOTAL_BUF_SIZE)
-@@ -1897,6 +1897,9 @@ static int mtk_eth_free_pkt(struct udevice *dev, uchar *packet, int length)
- 
- 	rxd = priv->rx_ring_noc + idx * priv->soc->rxd_size;
- 
-+	invalidate_dcache_range((ulong)rxd->rxd1,
-+				(ulong)rxd->rxd1 + PKTSIZE_ALIGN);
-+
- 	if (MTK_HAS_CAPS(priv->soc->caps, MTK_NETSYS_V2) ||
- 	    MTK_HAS_CAPS(priv->soc->caps, MTK_NETSYS_V3))
- 		rxd->rxd2 = PDMA_V2_RXD2_PLEN0_SET(PKTSIZE_ALIGN);
+ #if IS_ENABLED(CONFIG_K3_DM_FW)
+
+---
+base-commit: 9bc62c980d418f0a67632ab29cd3501072cdb6f0
+change-id: 20241216-b4-upstream-dm-pre-reloc-583134d2a340
+
+Best regards,
 -- 
-2.34.1
+Manorit Chawdhry <m-chawdhry@ti.com>
 
