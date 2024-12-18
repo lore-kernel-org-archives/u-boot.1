@@ -4,63 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0455E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C91E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36EBF80241;
-	Wed, 18 Dec 2024 15:08:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 03F6B80241;
+	Wed, 18 Dec 2024 15:14:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ODD+8xKZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bd+eYz47";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA8BD80269; Wed, 18 Dec 2024 15:08:10 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org
- [IPv6:2604:1380:45d1:ec00::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 70B2680283; Wed, 18 Dec 2024 15:14:45 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2631B8022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:08:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id EF6D28022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:14:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A1885A42088;
- Wed, 18 Dec 2024 14:06:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A3BC4CECD;
- Wed, 18 Dec 2024 14:08:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734530887;
- bh=M/VsDFYGw15F/GDX+qo/c0LKW/pkrzRqjbGGnB78EmY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ODD+8xKZmb/+MNBiRS0Zzea885uzyrUe4o+xBOl+0LYXMC9GB4PZQU5ITBmg2pX81
- PeoaMiLj+L7Ce+7TR6si+mBMyg6YT9khRhrqZYpQo7xh4TMzP0hj2ebQzRTPmoPRJE
- LIW4jSeBiWFMelS+FguB/T6guo1fKydGOacRZtlztk/EWsAlKg+bJJmuavWWwxSE7s
- TsdYfoMO/evd7M7PLzd3FNQvfFmgzH0n7aMaWwagTW9/lqJxiDGmAVaKAp0ay+DuGd
- Z458m4ZOSCl/JPVE7x3TsM+7CEuVRyNd8TsZVzTpWmLpOtD5SMWzeKXsbsrV6gzqd7
- lwC25zf25JUrw==
-Message-ID: <ebc7bc88-1545-4a53-8cd0-1c9812723025@kernel.org>
-Date: Wed, 18 Dec 2024 16:08:01 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a9a68480164so1061057166b.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 06:14:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734531281; x=1735136081; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=aEdW+CB1uK3lVzJFVhDcH1F6wQaiRvEqgzuFnEj5v5A=;
+ b=bd+eYz47VrMW9cOJCfqjJC8GulgXrLd2tC4i283ysQQuSgWfhJrIv/+yspnw0FYGCE
+ +vnloFXrzU2HJyMn9vbQf7/QJSK43IAnfcSnCnjQWkzhrcCxVysFo7tge4ixKJfzoMDS
+ nZaLbdDdzTh6JyZzm/o2/C5TtK6wOksPYhE0E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734531281; x=1735136081;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aEdW+CB1uK3lVzJFVhDcH1F6wQaiRvEqgzuFnEj5v5A=;
+ b=vxs7BgCBKXZbEmQ6g+d1OAMRZQdBVtSszkqRIqBLL3wAs+2u2ivJex0nA5TYCEB+0v
+ uwW0l3MG7SaJogXuItynGoDC6kCET2QwjQgAJdjoBpLb7SpFAEp3kkZQVP7h2bA6ivAc
+ 62xW/rBn4thLK1nuw/QXbAW92bBQ5AzEBGhdIeHw6D7+i9J2IJ0iMWmShKoFC4CseTPQ
+ v/q7YsgB+IcWHPiR84Kz6DJaUAh7/yDAR0xo9Kmdp/Hxj9UXyUozPDbo/L8n1ccxKzTw
+ 5ia1erXmFcZPNWlTqQxOAdUp/IRqkiyIyB5DZrxdDT9gOfFchpyEqB3Jf99MuYJaWpVh
+ 9n2Q==
+X-Gm-Message-State: AOJu0Yzl7kbx9CJ82JZ1OHsOosONePirabkYGTeI+9kd2CLwy7j+zNPL
+ UnHQ2H4kCZNxlfLH+7wc95NMJ/soKHNu9KP0ZEhsqYWqs18noLW+CfhtF+E/0je66WfIZVdILkZ
+ HPNTRJoBBCXAf3qJhkELAdIbWOT80uxQrdRIDdxYD6oPYBA4Rig==
+X-Gm-Gg: ASbGnct8bQbUkBi0eJ5cK58iIRG40lj6fjSYtsIvEvGn2TWmRdc+ysepha+fQBjw7ae
+ 7JGwEfC9aEZXejg9vOjYaLuww+Odt7G+fJ+GBVrg=
+X-Google-Smtp-Source: AGHT+IFU0zMIVF5eybnamupVjexkID2GH0HfWf7E4WvVRPaFaNoIBdbB0BAxQ2ahb7kfmjClgBbeL194DWXh7oUTipg=
+X-Received: by 2002:a17:907:708:b0:aab:736c:558 with SMTP id
+ a640c23a62f3a-aabf4907a08mr332885866b.55.1734531281479; Wed, 18 Dec 2024
+ 06:14:41 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] doc: board: document support for USB DFU boot on
- AM62Px SoC
-To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
- trini@konsulko.com, lukma@denx.de, n-francis@ti.com,
- mkorpershoek@baylibre.com, afd@ti.com, glaroque@baylibre.com,
- sjoerd@collabora.com, martyn.welch@collabora.com,
- rasmus.villemoes@prevas.dk, caleb.connolly@linaro.org, j-humphreys@ti.com,
- nm@ti.com
-Cc: u-boot@lists.denx.de, srk@ti.com
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-6-s-vadapalli@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20241218124542.3519447-6-s-vadapalli@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 18 Dec 2024 07:14:30 -0700
+Message-ID: <CAFLszTiU0K2Wc0iOvWnnK21H+JiGbswc1avqrS9BP8wXF1uV9g@mail.gmail.com>
+Subject: cm_fx6 booting
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,82 +80,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+I have a Compulab Utilite cm_fx6 in my lab but I am not sure how to
+make it boot.
 
-On 18/12/2024 14:45, Siddharth Vadapalli wrote:
-> Since USB DFU boot is supported on AM62Px SoC, document the steps
-> required to build the image for USB DFU boot along with the steps to
-> send images using the "dfu-util" tool.
-> 
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> ---
-> This patch has been newly introduced in this series based on the
-> discussion at:
-> https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3-s-vadapalli@ti.com/#3432702
-> 
-> NOTE: This patch should only be merged if all other patches in this
-> series will also be merged, in order to ensure that the feature is
-> documented only if it is supported (i.e. all patches in this series
-> which are required for the feature to be functional have been merged).
-> 
->  doc/board/ti/am62px_sk.rst | 31 +++++++++++++++++++++++++++++++
->  1 file changed, 31 insertions(+)
-> 
-> diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-> index 99bdc034869..75451ad76b5 100644
-> --- a/doc/board/ti/am62px_sk.rst
-> +++ b/doc/board/ti/am62px_sk.rst
-> @@ -124,6 +124,18 @@ Set the variables corresponding to this platform:
->      :start-after: .. k3_rst_include_start_build_steps_spl_r5
->      :end-before: .. k3_rst_include_end_build_steps_spl_r5
->  
-> +* 3.1.1 Alternative build of R5 for DFU boot:
-> +
-> +  As the SPL size can exceed the limit when building it with support for
-> +  booting from both local storage *and* DFU, in order to disable the
-> +  configs not required for DFU boot, a config fragment should be used
-> +  to not only enable configs for DFU boot, but also disabled the unneeded
-> +  configs.
-> +
-> +.. prompt:: bash $
-> +
-> +   export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
-> +
->  * 3.2 A53:
->  
->  .. include::  ../ti/k3.rst
-> @@ -290,6 +302,25 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
->  
->  For SW2 and SW1, the switch state in the "ON" position = 1.
->  
-> +DFU based boot
-> +--------------
-> +
-> +To boot the board over DFU, set the switches to DFU mode and connect to the
-> +USB type C DRD port on the board. After power-on the build artifacts needs to be
-> +uploaded one by one with a tool like dfu-util.
-> +
-> +The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
-> +upload. The next stages as exposed by U-Boot have target alts matching the name
-> +of the artifacts, for these a USB reset has to be done after each upload.
-> +
-> +When using dfu-util the following commands can be used to boot to a U-Boot shell:
-> +
-> +.. prompt:: bash $
-> +
-> +  dfu-util -a bootloader -D tiboot3.bin
-> +  dfu-util -R -a tispl -D tispl.bin
-> +  dfu-util -R -a u-boot.img -D u-boot.img
+I am using:
 
-Is there a known reason why -R was not used for the first command but required in last two?
-What about if -R is not used for all 3 commands?
+dd if=u-boot-with-spl.imx of=/dev/sdt bs=1K seek=1
 
-> +
->  Debugging U-Boot
->  ----------------
->  
+It does seem to detect an image on the mmc (since it doesn't boot from
+SPI flash), but SPL and U-Boot output nothing.
 
--- 
-cheers,
--roger
+Does anyone have any ideas? Perhaps this device is a bit old.
 
+Thanks,
+Simon
