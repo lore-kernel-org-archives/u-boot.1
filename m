@@ -4,67 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FA9E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:36:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64058E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 966208031E;
-	Wed, 18 Dec 2024 18:36:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C56F180269;
+	Wed, 18 Dec 2024 18:38:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y3g7kvpG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UCd2ldxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C7C80269; Wed, 18 Dec 2024 18:12:43 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7689F80283
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:12:39 +0100 (CET)
+ id 8E3A880274; Wed, 18 Dec 2024 18:38:45 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 044EA80241
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:38:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-ramamoorthy@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIHCb43184519
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 11:12:37 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734541957;
- bh=LyRwgSF0RIw64B08x7rwMiKTo9TeqyR1lR+jFVd0Bck=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=y3g7kvpGU1Hnh1fnXODNyPQaL0hLakW30VH2/uxLOz8Qth6as+TwPPYv7WPmzTyf7
- ZrApFzGFMTcS+zrmyzOUpdePidw2HEMi0ZenVEIvqWCgR9LlVpnNE23AkNcG4UBybT
- Ls3LO18Zf7rRZEhW2rU03KiB2pTncFmQw3TEHbnk=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIHCanJ010549
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 11:12:36 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 11:12:36 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 11:12:36 -0600
-Received: from DMZ007XYY.dhcp.ti.com (dmz007xyy.dhcp.ti.com [128.247.29.8])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIHCaRZ112285;
- Wed, 18 Dec 2024 11:12:36 -0600
-From: Shree Ramamoorthy <s-ramamoorthy@ti.com>
-To: <u-boot@lists.denx.de>, <jh80.chung@samsung.com>, <trini@konsulko.com>
-CC: <m-leonard@ti.com>, <praneeth@ti.com>
-Subject: [PATCH v1 2/2] power: replace magic numbers with macros
-Date: Wed, 18 Dec 2024 11:12:36 -0600
-Message-ID: <20241218171236.1022565-3-s-ramamoorthy@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241218171236.1022565-1-s-ramamoorthy@ti.com>
-References: <20241218171236.1022565-1-s-ramamoorthy@ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7b98a2e3b3eso39005185a.2
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 09:38:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734543522; x=1735148322; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=G1pgKVoASNHCXkkZNcIvdKrYjA0rJjVyMP5yFIYs7Jo=;
+ b=UCd2ldxomdPgfp3uxlXiEnLddl13Q6TtTJ9PT0ROG1ETvYIwfGesFNDsDM64O+wO11
+ yI2VWZyvn7LPowhjQ12kVxN1k9xWgodyFFjOOzoTvEM25p0vUH1oCYScQ4hNlDE/WGzQ
+ mZ75EM9ec7dn66xuhPlOieYWh/0hPv4J8/Kx0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734543522; x=1735148322;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G1pgKVoASNHCXkkZNcIvdKrYjA0rJjVyMP5yFIYs7Jo=;
+ b=XNcSb98OwDXdjs8bsf12vdEX5DJbEsjcH0INJoFL9Xao+VxL25e1zF6iEac1dkGVau
+ cpFtQG79X/B3KQmLyBZQKPKJNR+DBCZXN/RVJLD+i8WIE6faHmiQKX5/fJ9tRCZMlK7k
+ ndrkb34GB0Ls0y7OjILWajjzaaiqwnJh9PIEpHev4inrFgnyZabE+f/uO0hMIeK8mg8q
+ xPlnm77YxaBc75Jvb0mmviG3GuBGFy1usREnJMR5wIfvfeRZ8AFxOWfOiLR7SX2OJ5SE
+ snc0nhZ3E7t30HpxKj29EerRVYLMBx0PKv8OLUldJhvz/vVE7LG7rYQTX0Jt7XT/L0D5
+ T+Gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZmzdrsgsMpVJldAPx4eSq2+1g0rdMFso60TeKEztEYCT5uZIbobMh/QKS/9Lo9LgTvqYSsCY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRnqX2nH6FO7HEz2rLZ752BxHisoKnQEJOXUaHIUGEgEvNjmKR
+ OVVRqqkvDVzfeh0y6q2aRuV6kiuFYc36JZNGAp13nrcWOKQFJCCD5J5S7Oy35xMkm6mqxNcnrqt
+ r
+X-Gm-Gg: ASbGncsJcUs3nMhgWtjfqgGs71/gAxeAwdkIpTrMkDj3npZIk7pYOAS2apGaDvJvxP2
+ bqFH2Qf2IX7b4C3URnpIQlB7QCKau7m5oc461OPg0wGl4WkXBYFlHcQ6HUJTSuO44zTL248hrzy
+ 6vU0xaM6rdVWRD8Pj1bZF1YAEtH8XFku9h7ieiFFhqjOKQgL107rAmsJSDSZ/PnGLEfXHBiqIWC
+ RXlw2dXXXlSyh9vWxGPrR5oq2YyxtSzva2U/Q9KMCiBzFTqbfbRTy9T
+X-Google-Smtp-Source: AGHT+IHrnG7MiWbkLnTKnNVNFVxs2gOdwKrMnTD5GPdFq7TeIGUsIfSgfQuzHVfyoL6PX9EMTqhd8g==
+X-Received: by 2002:a05:620a:2a10:b0:7b6:6c46:55b with SMTP id
+ af79cd13be357-7b8636e6eb6mr521062785a.7.1734543521838; 
+ Wed, 18 Dec 2024 09:38:41 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b7048c9bc6sm448306485a.97.2024.12.18.09.38.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 09:38:41 -0800 (PST)
+Date: Wed, 18 Dec 2024 11:38:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
+Message-ID: <20241218173837.GJ1505244@bill-the-cat>
+References: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
+ <20241217145300.GN1505244@bill-the-cat>
+ <20241218050837.5fppn7j7s5vv5f5m@uda0497581>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Wed, 18 Dec 2024 18:36:03 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yGYofS/WW7MIzoOb"
+Content-Disposition: inline
+In-Reply-To: <20241218050837.5fppn7j7s5vv5f5m@uda0497581>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,102 +100,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace magic numbers in buckval2votl() & buckvolt2val() with macros to
-help with clarity and correlate what the numbers correspond to in the
-TPS65219 datasheet.
 
-Signed-off-by: Shree Ramamoorthy <s-ramamoorthy@ti.com>
----
- drivers/power/regulator/tps65219_regulator.c | 26 ++++++++++----------
- include/power/tps65219.h                     | 14 +++++++++--
- 2 files changed, 25 insertions(+), 15 deletions(-)
+--yGYofS/WW7MIzoOb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/power/regulator/tps65219_regulator.c b/drivers/power/regulator/tps65219_regulator.c
-index 4b0fb205909a..88abc896b3a2 100644
---- a/drivers/power/regulator/tps65219_regulator.c
-+++ b/drivers/power/regulator/tps65219_regulator.c
-@@ -72,12 +72,12 @@ static int tps65219_buck_enable(struct udevice *dev, int op, bool *enable)
- 
- static int tps65219_buck_volt2val(int uV)
- {
--	if (uV > TPS65219_BUCK_VOLT_MAX)
-+	if (uV > TPS65219_BUCK_3V4)
- 		return -EINVAL;
--	else if (uV >= 1400000)
--		return (uV - 1400000) / 100000 + 0x20;
--	else if (uV >= 600000)
--		return (uV - 600000) / 25000 + 0x00;
-+	else if (uV >= TPS65219_BUCK_1V4)
-+		return (uV - TPS65219_BUCK_1V4) / TPS65219_VOLT_STEP_100MV + TPS65219_BUCK_REG_1V4;
-+	else if (uV >= TPS65219_BUCK_0V6)
-+		return (uV - TPS65219_BUCK_0V6) / TPS65219_VOLT_STEP_25MV + TPS65219_BUCK_REG_0V6;
- 	else
- 		return -EINVAL;
- }
-@@ -86,12 +86,12 @@ static int tps65219_buck_val2volt(int val)
- {
- 	if (val > TPS65219_VOLT_MASK)
- 		return -EINVAL;
--	else if (val > 0x34)
--		return TPS65219_BUCK_VOLT_MAX;
--	else if (val > 0x20)
--		return 1400000 + (val - 0x20) * 100000;
--	else if (val >= 0)
--		return 600000 + val * 25000;
-+	else if (val > TPS65219_BUCK_REG_3V4)
-+		return TPS65219_BUCK_3V4;
-+	else if (val > TPS65219_BUCK_REG_1V4)
-+		return TPS65219_BUCK_1V4 + (val - TPS65219_BUCK_REG_1V4) * TPS65219_VOLT_STEP_100MV;
-+	else if (val >= TPS65219_BUCK_REG_0V6)
-+		return TPS65219_BUCK_0V6 + val * TPS65219_VOLT_STEP_25MV;
- 	else
- 		return -EINVAL;
- }
-@@ -161,7 +161,7 @@ static int tps65219_ldo_volt2val(int idx, int uV)
- 	if (uV > max)
- 		return -EINVAL;
- 	else if (uV >= base)
--		return (uV - TPS65219_LDO12_VOLT_MIN) / 50000;
-+		return (uV - TPS65219_LDO12_VOLT_MIN) / TPS65219_VOLT_STEP_50MV;
- 	else
- 		return -EINVAL;
- }
-@@ -187,7 +187,7 @@ static int tps65219_ldo_val2volt(int idx, int val)
- 	else if (val <= reg_base)
- 		return base;
- 	else if (val >= 0)
--		return TPS65219_LDO12_VOLT_MIN + (50000 * val);
-+		return TPS65219_LDO12_VOLT_MIN + (TPS65219_VOLT_STEP_50MV * val);
- 	else
- 		return -EINVAL;
- }
-diff --git a/include/power/tps65219.h b/include/power/tps65219.h
-index aa81b92266fd..e8780af2d811 100644
---- a/include/power/tps65219.h
-+++ b/include/power/tps65219.h
-@@ -17,10 +17,20 @@
- #define TPS65219_BUCK_DRIVER		"tps65219_buck"
- 
- #define TPS65219_VOLT_MASK		0x3F
--#define TPS65219_BUCK_VOLT_MAX		3400000
--
- #define TPS65219_ENABLE_CTRL_REG	0x2
- 
-+#define TPS65219_VOLT_STEP_25MV		25000
-+#define TPS65219_VOLT_STEP_50MV		50000
-+#define TPS65219_VOLT_STEP_100MV	100000
-+
-+#define TPS65219_BUCK_0V6		600000
-+#define TPS65219_BUCK_1V4		1400000
-+#define TPS65219_BUCK_3V4		3400000
-+
-+#define TPS65219_BUCK_REG_0V6		0x00
-+#define TPS65219_BUCK_REG_1V4		0x20
-+#define TPS65219_BUCK_REG_3V4		0x34
-+
- #define TPS65219_BUCK1_VOUT_REG		0xa
- #define TPS65219_BUCK2_VOUT_REG		0x9
- #define TPS65219_BUCK3_VOUT_REG		0x8
--- 
-2.34.1
+On Wed, Dec 18, 2024 at 10:38:37AM +0530, Manorit Chawdhry wrote:
+> Hi Tom,
+>=20
+> On 08:53-20241217, Tom Rini wrote:
+> > On Tue, Dec 17, 2024 at 02:24:37PM +0530, Manorit Chawdhry wrote:
+> >=20
+> > > Currently the driver relies on bootph flag to probe it during PRE_REL=
+OC
+> > > stage but with the upcoming cleanup of v6.13, we don't have the bootph
+> > > property in the parent nodes anymore and ti_sci driver being one of t=
+he
+> > > parent nodes required during SPL stage would end up hampering the pro=
+be
+> > > model [0].
+> > >=20
+> > > Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+> >=20
+> >=20
+> > Can you please expand on why with v6.13 we don't have the flag anymore?
+> > Thanks.
+>=20
+> So the idea was that following series [0] would help us cleanup all the
+> parent node bootph-* tags as putting a bootph-* in child node implies
+> that it applies to parent nodes as well, though even if the parent node
+> gets packed after the following series, the parent node still don't get
+> probed as from my understanding, we need bootph-* tag to probe the
+> driver as well but the phase tag doesn't get propagated as such.
+>=20
+> So while working in Linux, some comments related to this was raised [1]
+> and after confirming the behaviour with Simon [2], the cleanup was done
+> in Linux and meanwhile this way was found to probe the driver so that
+> even after cleaning up the parent bootph-* tags we can continue.
+>=20
+> I don't think it's a hack also as this driver is required pre-relocation
+> and this is another way to probe it pre-relocation but the only thing is
+> that since the cleanup is done right now, we would kind of need it to be
+> booting in some platforms ( that were fully reliant on Linux DT and
+> don't have -u-boot override for this particular node with bootph-* )
+> before 6.13 DT gets synced up.
+>=20
+> [0]: https://lore.kernel.org/u-boot/20231217163627.2339802-1-sjg@chromium=
+=2Eorg/
+> [1]: https://lore.kernel.org/all/20240709084857.nf7c57mi6miajeau@uda04975=
+81/#t
+> [2]: https://lore.kernel.org/u-boot/CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8=
+FZnLBE7ep5ejXw@mail.gmail.com/
 
+Thanks. Did you end up filing an issue about this? And can you now
+perhaps push to make doing the fdtgrep work a priority? There's going to
+be a lot of other cases like this to resolve I suspect.
+
+--=20
+Tom
+
+--yGYofS/WW7MIzoOb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjCJ0ACgkQFHw5/5Y0
+tyxXMAv+I4WvsQyfZtxOulbHUv0UgPY/5MtlTTUCI0G7pvBYh3J0QNz/vH0QUcdC
+vR7U1Eb2TBU9syD1yETbt8BKQRqRggXEUdb9Q3sWGAQnMUzYiaaI8it9sJPqeJSv
+mIg8Bz6RfUsjOhLtCxaqx2SekoE/bTbiosOTLgzNcNchALLfmfhQG3FWhu9MGHwe
+hsdJHgT9zowcFJSttwtjcEZRpjpdlDrMRdSVTAcuTiR+RopGBxjMZ9TpaKQ/XDV3
+guHCi0Ig8S39If6n/XIOQL89dLX48UeSepEWWRxY596zgx3PIWisqn3fFbi8YWRU
+ejeVQTF7SGoq4esbpA3ofb42535B3IYuDGKa79ORNIcIz5p+ZlPK0PxJ/TNYTeph
+BHjl0UtVL+YS0SnvjwX0TyKbOlCQSPKMDWXxPjMRNqDCfiDyAcJeF8qpSar+wfpq
+YjCFG/dnYUx0zQ7XXnIpuKOJxL0f1nK049o8SrKuQpLKoyVip/RXCIMMEDjpOqPx
+D4pq8OC/
+=dZDU
+-----END PGP SIGNATURE-----
+
+--yGYofS/WW7MIzoOb--
