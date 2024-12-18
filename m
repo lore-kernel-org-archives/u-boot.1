@@ -4,40 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B29DE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 20:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802A0E77188
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D7BB8022B;
-	Wed, 18 Dec 2024 21:43:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C5168022B;
+	Wed, 18 Dec 2024 22:02:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vd4qUyyq";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="IryKRNHH";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F1F680241; Wed, 18 Dec 2024 21:43:25 +0100 (CET)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ id 6F1F380241; Wed, 18 Dec 2024 22:02:44 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 742E78021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 21:43:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 139178021D
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:02:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1tO0t5-002gNE-Ar;
- Wed, 18 Dec 2024 20:43:19 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: u-boot@lists.denx.de,
-	Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] arm: dts: imx8mp-venice-gw72xx: fix TPM device
-Date: Wed, 18 Dec 2024 12:43:08 -0800
-Message-Id: <20241218204307.1883744-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YD5jY4JRpz9sn9;
+ Wed, 18 Dec 2024 22:02:41 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734555761;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=y2/xPq12p1UpM0I50Owqe4Lgt91lJYZl/SYVVEfrXIc=;
+ b=vd4qUyyqp+gzVOo8c7jSQtv6olECAitGPm8DVnPCta+qYXZ2TlXp0yQQegpZYraxV8Oz5L
+ 5BNjEZrXSEUYfquTPDGI7VWkrQOtIEJu4ECdQN7Vo62KdYAITcU/5muIZSQAnWpldOY0He
+ YVfhkHEuhO9k+AFm9u+ARvxSAim0xnpbHqKurWW1XuLAxCG+f/9cfG4h0ZaGyxOcDvFJay
+ PsoXzM7/FpcNV2856kGrVmWgGG18QmUwftegHxAsdwg2wZeTK0nfloIsJYzx7SJ4ZAwLmn
+ J+ZhKkm2zfJCRpsPC+0A3G7Ex7vZ6WKd6bYSylDrsDJ/RqVJalRV6FUsW0Axzw==
+Message-ID: <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734555759;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=y2/xPq12p1UpM0I50Owqe4Lgt91lJYZl/SYVVEfrXIc=;
+ b=IryKRNHH28cdgMCALRX1RuvJJcsIMwo2qlMmyal90h9RSqgf93nHSzVW64lwTOHQRO92Tv
+ OQOih9d87z6xumjmnSdufdnGDq3x8Xty15q1Jf8pLMJx35xpMIW5pwpy+D2WYOYLbZ1YkQ
+ FtmqyUbuNiO7pFPfyYNyft+fCPHswntw2pQVvtpcPfokNfieoRBqFI11N6/rl46IJvj9nI
+ e3lC6Vh9IY5U7srZpER5QF67zgvDVlkADjlqUYntCYvGNZPCdCfw6oEH1T4e9TixkVPfpW
+ YUsJ3Ofs5/esg/7db8UPfa6erpKJCyk4A88Q646H8Ce8W5yolaKYXD728KsZrA==
+Date: Wed, 18 Dec 2024 22:02:36 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+References: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
+ <20241218194327.GO1505244@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20241218194327.GO1505244@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 267a12f00dd607cb907
+X-MBO-RS-META: ms6zxb4t8f7tt8fch4t1tsiy4kofiwdm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,49 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With an IMX8MP based SOM the SPI RST is gpio4_9 instead of gpio1_11. Fix
-this.
+On 12/18/24 8:43 PM, Tom Rini wrote:
+> On Wed, Dec 18, 2024 at 08:41:28PM +0100, Marek Vasut wrote:
+>> TFTP transfer size can be used to re-size the TFTP progress bar on
+>> single line based on the server reported file size. Enable it by
+>> default for Renesas hardware to avoid long scrolling walls of '#'
+>> character during long TFTP transfers.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Adriano Cordova <adrianox@gmail.com>
+>> Cc: Anand Moon <linux.amoon@gmail.com>
+>> Cc: Baruch Siach <baruch@tkos.co.il>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>> NOTE: I wonder, shall we simply enable this by default ?
+> 
+> Any chance you did a size comparison before/after this patch? That'd be
+> handy to know for making this default for everyone.
+r8a779f0_spider_defconfig
 
-Fixes: c0689191f120 arm: dts: imx8mp-venice-gw72xx: add TPM device
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
- arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
+without: 744640
+with:    752824
 
-diff --git a/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
-index 525316d11892..bdf5370fcdf6 100644
---- a/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
-@@ -4,15 +4,6 @@
-  */
- #include "imx8mp-venice-gw702x-u-boot.dtsi"
- 
--&gpio1 {
--	tpm_rst {
--		gpio-hog;
--		output-high;
--		gpios = <11 GPIO_ACTIVE_HIGH>;
--		line-name = "tpm_rst#";
--	};
--};
--
- &gpio4 {
- 	dio_1 {
- 		gpio-hog;
-@@ -21,6 +12,13 @@
- 		line-name = "dio1";
- 	};
- 
-+	tpm_rst {
-+		gpio-hog;
-+		output-high;
-+		gpios = <9 GPIO_ACTIVE_HIGH>;
-+		line-name = "tpm_rst#";
-+	};
-+
- 	dio_0 {
- 		gpio-hog;
- 		input;
--- 
-2.25.1
-
+So maybe this is not for everyone.
