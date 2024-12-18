@@ -4,86 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15A2EE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 13:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23383E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 13:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BE578021A;
-	Wed, 18 Dec 2024 14:05:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 87B7B80241;
+	Wed, 18 Dec 2024 14:13:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="xC1bgnQx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZJo5mI3W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 432698021D; Wed, 18 Dec 2024 14:05:41 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 13FF380269; Wed, 18 Dec 2024 14:13:55 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE42080214
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 14:05:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53D1E8022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 14:13:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3862b364538so430317f8f.1
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 05:05:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734527138; x=1735131938;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=joFAF9u4JgEKng3SUUFiCD2/CNMMIS2/NycxO46jZUI=;
- b=xC1bgnQxaM+88hBq4LB804KzmqeCzTIKgX6dTMDYa4dlUthhTyrNL8ARvQ45b2BX4L
- R1FGwVRNaoJfL4ikowk9MnhM4DqIBMEqmiqSpk1q7UudJQzG3t/3oiw2jjhafoNxn+aJ
- OF3xzzFNjYIJ0dZgVXFEVSLYo4B2b/N/ctMXOcVC/lBClRRhAZSjchEMwJ6HG84ce18F
- mhqkna33p85VsDAQC+uwEukCLe6II4u9WdrNhFShGsKvwo9nEWgXFG9bKVyVDqmSTXBB
- UGCaM7YVpO4/ogwOyceAs+367VcgzQIPlKEkpYF2J3XBtTv0AjUaHOd7kEpfrBmZWivu
- Amog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734527138; x=1735131938;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=joFAF9u4JgEKng3SUUFiCD2/CNMMIS2/NycxO46jZUI=;
- b=OvPRKSrWzZ+RQkBbYdT9/T9VIkke6YJAmyFtmuxubRywkE2AVs3gURDBnw44JpS7Hm
- kXuqyEoJEE+MjUvuqNf1SuJaBcf/gJ3EKGgwuvWDkJai3p+WGLEUiSW77XeC/c8rsZn4
- I1lY6svCWjCzKCj3qoqypje5gpYNRqipeAvwdZBJPLnXoW3LlxJS/n+wIBr9nuEkKHJI
- gKLaPTKIkMaaBE/BUvVxxkHfm738/DJywcWEcYNNteZQ8dJ/+NpT+ZVIhvxjUMyho9nc
- nM+GbzRRhGC5NDauRX4JnshD4tHtZYMu1MwBmjukgtgIXJVEFwJLzZXfPx/8VyC9W4A3
- BcLQ==
-X-Gm-Message-State: AOJu0YyBNi9/8E8z4yg5ck7JLjV5qpyznu60yGIiYM6Ai4OHWAu+Wbv3
- 2MRaeaCJwgdUGdiiJXy2tlb8oeIerI2Yuc6lM06bdz5Fkmiuos/vKsRDatOlwaM=
-X-Gm-Gg: ASbGncs22BVulow8OqcWr59F007fz2ks2Uf5bTvgRqwmDPPCh0Q4d/6ETZzAE/8Y7em
- Ymi+gVDtp7Vh+8amsrsUvgiO58xj18Yw4jMCwhcVRraa6rLr0tMrNH0tZJvlrOph4MtPyMD/Tkg
- uZbqdM9N6y+7HnJkjGK7AGaC/uwXY7RkfVHqgHL+XEmaSgbwxtSMcqjK7vC3I7aiBIW6yaHSyl8
- HGfvIuv4F+PQjLInk/6zOjrZgmCbo0qg+EJjIyFnYFK05rVFRF5YG9sUdPTxIg6Uss/PskK
-X-Google-Smtp-Source: AGHT+IEoh7LSaAbCnDN14R9k33y9/qBKNzJC1M9zdz6QVI+3z+tnmOMbuVxolcrLRwFiVcNCqx5XRA==
-X-Received: by 2002:a5d:6c66:0:b0:386:3672:73e4 with SMTP id
- ffacd0b85a97d-388db2939d9mr6624706f8f.26.1734527138359; 
- Wed, 18 Dec 2024 05:05:38 -0800 (PST)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656b013a1sm20415845e9.11.2024.12.18.05.05.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 05:05:37 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Safae Ouajih <souajih@baylibre.com>, Ahmad Draidi <ar2000jp@gmail.com>, 
- Nicolas Belin <nbelin@baylibre.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20241217-fix-bootargs-concatenation-v2-0-b2fd7cf4e130@baylibre.com>
-References: <20241217-fix-bootargs-concatenation-v2-0-b2fd7cf4e130@baylibre.com>
-Subject: Re: [PATCH v2 0/3] boot: android: rework the bootargs
- concatenation
-Message-Id: <173452713770.1832219.4083670486821711343.b4-ty@baylibre.com>
-Date: Wed, 18 Dec 2024 14:05:37 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDDmtR074944;
+ Wed, 18 Dec 2024 07:13:48 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734527628;
+ bh=s+k+KneSdc0RHBnC49WXPYrJ8iac8R+v+jU1Er8TkbQ=;
+ h=From:To:CC:Subject:Date;
+ b=ZJo5mI3WlDuG6YTNhrzBkiYMa9H/F/uGLYJrYbgYTHitn0hAqF3WLOd4APLW2phso
+ +WuXDj5AzEMuUZJo9nKEsQnCVr9VSD+XNvRfDDL0dvJbQHJp5wNh9s3u7VWHtqARvp
+ jWGl9BgTKGsBsWfojwil7VnQHkSn+jZ8tJ6dsiEI=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDDmgK059399;
+ Wed, 18 Dec 2024 07:13:48 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
+ Dec 2024 07:13:48 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 18 Dec 2024 07:13:48 -0600
+Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
+ [172.24.227.142])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDDjRY035276;
+ Wed, 18 Dec 2024 07:13:46 -0600
+From: Prasanth Babu Mantena <p-mantena@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
+Subject: [PATCH v2 0/4] Fix OSPI boot for J722S
+Date: Wed, 18 Dec 2024 18:43:37 +0530
+Message-ID: <20241218131341.2073823-1-p-mantena@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3-dev-86319
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,27 +77,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This series fixes OSPI boot for J722S. It contains fixes for DMSC
+communication, R5 regmap for ospi and dma specific overrides for ospi.
 
-On Tue, 17 Dec 2024 14:29:07 +0100, Nicolas Belin wrote:
-> Rework the bootargs concatenation logic to make the logic clearer
-> and address several issues such as:
-> - checking the value at the address kcmdline_extra instead of
-> checking the address value itself
-> - freeing the string that was malloced for the concatenation
-> - making sure to malloc the right amount of bytes for the concatenated
-> string, not forgetting the byte for the NULL termination
-> 
-> [...]
+Test log: https://gist.github.com/PrasanthBabuMantena/ad469dd09ab7263f85f87dadda46c86d
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+v2 <==> v1
+* Add Fixes tag wherever required.
+* Improve commit message.
 
-[1/3] boot: android: fix extra command line support
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/53a0ddb6d3bed9f9607af79934a7625299c36793
-[2/3] boot: android: free newbootargs when done
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/fd8b44a81be55b33c7defbe96a1ddd79ed286eb4
-[3/3] boot: android: rework bootargs concatenation
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/9e5fad0f792539ae4258bc116bf408bb6faf7e82
+Vaishnav Achath (4):
+  mailbox: k3-sec-proxy: Add DM to DMSC communication thread for J722S
+  arm: dts: k3-j722s-r5-evm: Fix DM2TIFS secproxy thread ID
+  arm: mach-k3: j722_spl: Add FAST XSPI boot mode
+  arm: dts: k3-j722s*: Add overrides specific to OSPI
 
---
-Mattijs
+ arch/arm/dts/k3-j722s-evm-u-boot.dtsi     |  4 ++++
+ arch/arm/dts/k3-j722s-r5-evm.dts          | 17 +++++++++++++++--
+ arch/arm/mach-k3/include/mach/j722s_spl.h |  1 +
+ arch/arm/mach-k3/j722s/j722s_init.c       |  2 ++
+ drivers/mailbox/k3-sec-proxy.c            |  2 +-
+ 5 files changed, 23 insertions(+), 3 deletions(-)
+
+-- 
+2.34.1
+
