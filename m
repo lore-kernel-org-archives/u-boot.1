@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4E32E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90934E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:39:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 296778027E;
-	Wed, 18 Dec 2024 11:39:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3059780288;
+	Wed, 18 Dec 2024 11:39:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="AteKwr3Y";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oL9hdiWj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D778980288; Wed, 18 Dec 2024 11:39:43 +0100 (CET)
+ id F0CD78021D; Wed, 18 Dec 2024 11:39:53 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 856388021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:39:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D616280288
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:39:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2082afbf55=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI60NJW011765;
- Wed, 18 Dec 2024 11:39:28 +0100
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI6oGQR032714;
+ Wed, 18 Dec 2024 11:39:38 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- wZQsRsmmR6gvjui3fD6ZLLSbboXFvFkdJwNc1YvHaNI=; b=AteKwr3YJFlfr0p+
- B/ncmpLl2916ff0lldg7BMCNbE+kgTCmXq2WMwR0JwxgNjiqjWAn3XBKIlMeoI5J
- h2az9dtcBAG0SXl8t1eM4Y7t36xsr4XOG938aoWPn58Z16d0abUelHaz/LxE3B7A
- MJPDCC43W4dFYPchc/FPR8B3b9ej6UlLhzNOsHDp7jZg/ychhC68sRn8i8y0cGPq
- nnc6S0XnittrCUm28+/4VCS14OTjJrBJn4gHXzXX61Qp/kGbs6Ahrw66JHtslEZ+
- AmUKe0ceNjNt7RyZ9q4E2SVyq9wmrfiBJKCovJIi/+phXiGoyOuW1vneGJURyuWl
- 57+z2Q==
+ IIGSxr/BX46WY461Idqkp/cuB6STl8uBRZhl134PQZo=; b=oL9hdiWj+Guw+zYV
+ 2p4U/TWJgambq1wwplKbtse81pNP3IwuQUiEsnyE03TqZ/Yatmb9Z1a7lTIcPN74
+ ESL2z3D7MGP0iNTDju3L1Ao42vcuRhjYZCSrPpVe62cic0CSNeaV7KJ1L5Y1QCzx
+ 4JFnZglQbz4/NTi77qiXN/DtU59tqxGtvB2SM6qS3s7JvUF6cHwqZ3UN+gxb4OhX
+ bC5VStbk40oe+13865LJcKX1nif8YIFxozo5wA3XnWeKjlEMsMT0fj0Q3IOtSAnE
+ DzIwJAUt/wPlZFrcSBJkEx3y9M0Iogs3GAWFpQSu1gOdPoLZobu68XgwiZNX62gn
+ aq+zaA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43krrcs4ca-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43ksfrgyvr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Dec 2024 11:39:28 +0100 (CET)
+ Wed, 18 Dec 2024 11:39:38 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A41D74005D;
- Wed, 18 Dec 2024 11:38:06 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C01B34004F;
+ Wed, 18 Dec 2024 11:38:36 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5E8CE26181C;
- Wed, 18 Dec 2024 11:36:21 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5DD0326354E;
+ Wed, 18 Dec 2024 11:38:08 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
- 2024 11:36:20 +0100
-Message-ID: <18af62bf-e7c4-4056-a8f8-ed74ff493cf8@foss.st.com>
-Date: Wed, 18 Dec 2024 11:36:20 +0100
+ 2024 11:38:07 +0100
+Message-ID: <782a079c-36e1-4f18-856e-35bbafca4e03@foss.st.com>
+Date: Wed, 18 Dec 2024 11:38:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [Uboot-stm32] [PATCH 1/4] ARM: dts: stm32: Reinstate missing root
- oscillators on DH STM32MP15xx DHCOR
+Subject: Re: [PATCH 2/4] ARM: dts: stm32: Reinstate SPL_SYS_MMCSD_RAW_MODE on
+ DH STM32MP15xx DHSOM
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>, Simon Glass
- <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Igor Opaniuk
- <igor.opaniuk@gmail.com>
+CC: Igor Opaniuk <igor.opaniuk@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20241215233011.569287-1-marex@denx.de>
- <9e0c75e5-8047-4f21-9a0b-da2e058b0f09@foss.st.com>
- <1f436aef-5640-4792-be7b-0a9a5a7da8f9@foss.st.com>
+ <20241215233011.569287-2-marex@denx.de>
+ <c78cd5dd-1e98-4c63-ba6a-dc97d4a91c7a@foss.st.com>
+ <4dc85e80-3c73-4db0-8c47-2aaf7c35373a@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <1f436aef-5640-4792-be7b-0a9a5a7da8f9@foss.st.com>
+In-Reply-To: <4dc85e80-3c73-4db0-8c47-2aaf7c35373a@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
@@ -96,18 +97,20 @@ X-Virus-Status: Clean
 
 
 
-On 12/18/24 11:31, Patrice CHOTARD wrote:
+On 12/18/24 11:32, Patrice CHOTARD wrote:
 > 
 > 
-> On 12/17/24 17:42, Patrice CHOTARD wrote:
+> On 12/16/24 09:54, Patrice CHOTARD wrote:
 >>
 >>
 >> On 12/16/24 00:29, Marek Vasut wrote:
->>> The root oscillators reference used to be in rcc node since
->>> 3d15245502c4 ("ARM: dts: stm32mp1: explicit clock reference needed by RCC clock driver")
->>> however this is not part of upstream stm32mp151.dtsi . The
->>> RCC driver does need this reference, reinstate it locally.
+>>> Commit 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+>>> broke booting from SD card on STM32MP15xx , reinstate raw mode SD
+>>> boot configuration options and select the correct raw mode partition
+>>> for STM32MP15xx to fix SD boot on STM32MP15xx DHSOM.
 >>>
+>>> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+>>> Reported-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >>> Signed-off-by: Marek Vasut <marex@denx.de>
 >>> ---
 >>> NOTE: For 2025.01
@@ -121,29 +124,32 @@ On 12/18/24 11:31, Patrice CHOTARD wrote:
 >>> Cc: u-boot@lists.denx.de
 >>> Cc: uboot-stm32@st-md-mailman.stormreply.com
 >>> ---
->>>  arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi | 4 ++++
->>>  1 file changed, 4 insertions(+)
+>>>  configs/stm32mp15_dhsom.config | 3 +++
+>>>  1 file changed, 3 insertions(+)
 >>>
->>> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->>> index 08439342cb2..ab162f39473 100644
->>> --- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->>> +++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->>> @@ -112,6 +112,10 @@
->>>  };
->>>  
->>>  &rcc {
->>> +	clock-names = "hse", "hsi", "csi", "lse", "lsi";
->>> +	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>,
->>> +		 <&clk_lse>, <&clk_lsi>;
->>> +
->>>  	st,clksrc = <
->>>  		CLK_MPU_PLL1P
->>>  		CLK_AXI_PLL2P
+>>> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+>>> index efc149577ea..04ee9bfc444 100644
+>>> --- a/configs/stm32mp15_dhsom.config
+>>> +++ b/configs/stm32mp15_dhsom.config
+>>> @@ -57,11 +57,14 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>>>  CONFIG_SPL_STACK=0x30000000
+>>>  CONFIG_SPL_SYS_MALLOC=y
+>>>  CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+>>> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+>>>  CONFIG_SPL_TEXT_BASE=0x2FFC2500
+>>>  CONFIG_SPL_USB_GADGET=y
+>>>  CONFIG_STM32_ADC=y
+>>>  CONFIG_SYSRESET_SYSCON=y
+>>>  CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
+>>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
+>>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+>>>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+>>>  CONFIG_SYS_PBSIZE=1050
+>>>  CONFIG_PREBOOT="run dh_preboot"
 >>
 >> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>
 >> Thanks
->> PAtrice
+>> Patrice
 > Applied to u-boot-stm32/next
 > 
 > Thanks
@@ -153,8 +159,3 @@ Sorry, applied to u-boot-stm32/master
 
 Thanks
 Patrice
-
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
