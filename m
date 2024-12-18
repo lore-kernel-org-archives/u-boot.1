@@ -4,73 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26CECE77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 19:42:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80BBE77188
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 19:42:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93F758022B;
-	Wed, 18 Dec 2024 20:42:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EEF60802EF;
+	Wed, 18 Dec 2024 20:42:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="j7gSVoxY";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DqdEpelg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 645DA80291; Wed, 18 Dec 2024 20:42:04 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 61147802F2; Wed, 18 Dec 2024 20:42:30 +0100 (CET)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EA038021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 20:42:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBE7180291
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 20:42:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YD3wT6CbJz9t2v;
- Wed, 18 Dec 2024 20:42:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734550921;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=L/u2Ri5r6yVEcAvpOt88NzK3bRIKxx3C6XfE7hx2pLk=;
- b=j7gSVoxYukoyiL34d+4oAYFufOnbD84EO+ydc0YCTBXvae1wFUQ/eVx/Urcmy83ZfZ95RO
- WW7JORdqB6PF6e4Sb1wSnsEzYTcXm9eVgpxiTVudf8Pmml1cb7mES0pgHAeGSd3N7p2YAw
- HnNqlc8+NOmf4K6TZAAreLS4vVn2nLW8bdbBPp50VX+b79rxPM8oneboH5yQUs3Vgeciee
- mPLWeRqfshwS+94ZoOpH0AtKMNyLogLCda0hKKIYPJyIM0qhl0TFKXFIe4/y0C0jzojB/+
- NcVO2hOu9/pOYbHiDEoM9fwZdV8wHgcY18Z3aLTAfatJvI2haz8/PXfAiGviCw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734550920;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=L/u2Ri5r6yVEcAvpOt88NzK3bRIKxx3C6XfE7hx2pLk=;
- b=DqdEpelg3BxFKiCQAZuItEBrwfODEvfwe8YWxR4TIWr38Up62ktbkAf9yOvlYQ5FN6QpXp
- Iax0hgxt6N2Rn1vzSjj2p6iJpmT74JalfNisJ9PC8XbYo2G3V0CzkrmSkj8HbU8gprJB6d
- 5+YTzz87iooUxELZhsQckCodNl/aULIsVa8R3CBOxop/I1Cu2V/pnrBadsxCd0mEN2+Tzv
- 80ns1ZFUCNqMi7qSpg317S22bAyPjGe+SGjCoppjc6H1Pi+eDVsbmz5ZeTc8xVsa7U6/sV
- g0Qx4zi44NCS0oqipr2FyjSonhPg3T/bk6TpwXzDzXu8SxM+H2EoZe7TC+wPug==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Baruch Siach <baruch@tkos.co.il>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
-Date: Wed, 18 Dec 2024 20:41:28 +0100
-Message-ID: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1tNzwA-002gK3-7X;
+ Wed, 18 Dec 2024 19:42:26 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH] spi: mxc_spi: use proper clock for SPI bus
+Date: Wed, 18 Dec 2024 11:42:24 -0800
+Message-Id: <20241218194224.1867039-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: iwrn5d4roe54y6p4mjptpze3zsb3sk4o
-X-MBO-RS-ID: cd7554e139f8846919a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,41 +53,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TFTP transfer size can be used to re-size the TFTP progress bar on
-single line based on the server reported file size. Enable it by
-default for Renesas hardware to avoid long scrolling walls of '#'
-character during long TFTP transfers.
+The mxc_get_clock function is around for compatibility with older
+drivers that are not clock aware. In this case asking for the clk for
+MXC_CSPI_CLK does not take into account there are multiple SPI busses on
+modern IMX SoC's and it will return the clock for the first bus which
+may not be used or configured.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adriano Cordova <adrianox@gmail.com>
-Cc: Anand Moon <linux.amoon@gmail.com>
-Cc: Baruch Siach <baruch@tkos.co.il>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-NOTE: I wonder, shall we simply enable this by default ?
----
- net/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+In the case you are not using the first bus you will not get the proper
+clock. Fix this by obtaining the clock rate from the bus clock.
 
-diff --git a/net/Kconfig b/net/Kconfig
-index b4bb68dd613..24508026200 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -90,7 +90,7 @@ config TFTP_WINDOWSIZE
- config TFTP_TSIZE
- 	bool "Track TFTP transfers based on file size option"
- 	depends on CMD_TFTPBOOT
--	default y if (ARCH_OMAP2PLUS || ARCH_K3)
-+	default y if (ARCH_OMAP2PLUS || ARCH_K3 || ARCH_RENESAS)
- 	help
- 	  By default, TFTP progress bar is increased for each received UDP
- 	  frame, which can lead into long time being spent for sending
+This resolves an invalid SPI clock frequency configuration for SPI2 on a
+board where SPI1 is not used.
+
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+ drivers/spi/mxc_spi.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/spi/mxc_spi.c b/drivers/spi/mxc_spi.c
+index 9ab39a188b22..2c9b0ada87ba 100644
+--- a/drivers/spi/mxc_spi.c
++++ b/drivers/spi/mxc_spi.c
+@@ -114,6 +114,9 @@ struct mxc_spi_slave {
+ 	u32		ctrl_reg;
+ #if defined(MXC_ECSPI)
+ 	u32		cfg_reg;
++#endif
++#if CONFIG_IS_ENABLED(CLK)
++	struct clk	clk;
+ #endif
+ 	int		gpio;
+ 	int		ss_pol;
+@@ -214,7 +217,11 @@ static s32 spi_cfg_mxc(struct mxc_spi_slave *mxcs, unsigned int cs)
+ #ifdef MXC_ECSPI
+ static s32 spi_cfg_mxc(struct mxc_spi_slave *mxcs, unsigned int cs)
+ {
++#if CONFIG_IS_ENABLED(CLK)
++	u32 clk_src = clk_get_rate(&mxcs->clk);
++#else
+ 	u32 clk_src = mxc_get_clock(MXC_CSPI_CLK);
++#endif
+ 	s32 reg_ctrl, reg_config;
+ 	u32 ss_pol = 0, sclkpol = 0, sclkpha = 0, sclkctl = 0;
+ 	u32 pre_div = 0, post_div = 0;
+@@ -599,14 +606,13 @@ static int mxc_spi_probe(struct udevice *bus)
+ 		return -ENODEV;
+ 
+ #if CONFIG_IS_ENABLED(CLK)
+-	struct clk clk;
+-	ret = clk_get_by_index(bus, 0, &clk);
++	ret = clk_get_by_index(bus, 0, &mxcs->clk);
+ 	if (ret)
+ 		return ret;
+ 
+-	clk_enable(&clk);
++	clk_enable(&mxcs->clk);
+ 
+-	mxcs->max_hz = clk_get_rate(&clk);
++	mxcs->max_hz = clk_get_rate(&mxcs->clk);
+ #else
+ 	int node = dev_of_offset(bus);
+ 	const void *blob = gd->fdt_blob;
 -- 
-2.45.2
+2.25.1
 
