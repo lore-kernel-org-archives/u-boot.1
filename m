@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F299E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:43:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6842AE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 372BF80269;
-	Wed, 18 Dec 2024 11:43:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CECAB802E3;
+	Wed, 18 Dec 2024 11:45:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BKseRJCq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="eo/Bh6nm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B59DC80274; Wed, 18 Dec 2024 11:42:59 +0100 (CET)
+ id A377080274; Wed, 18 Dec 2024 11:45:20 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2C4880239
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:42:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B09EA80239
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2082afbf55=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI60KY1011155;
- Wed, 18 Dec 2024 11:42:49 +0100
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI60L0C011674;
+ Wed, 18 Dec 2024 11:45:11 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- OfShzcGFgqvffvmdn9sJQiIvRj2oCnlhYYOcVkn6qZ4=; b=BKseRJCqtWmUpMdQ
- i5UWsQjC+c5MoJaPmJd2mOUTp/FrYCGtp57v4ySIQxRpOG8X5LKEQcaQYrOyfUPb
- 0Ue9dd6slOymKNF/vztncRbdDlKhhAK8pRpRKZjB0T11OC5eMTOuE8UBuO+uAvxY
- FUGqoUYZj5DgVsutPVt9WOi10yruuMnS6c2NPKG0yAtFZNSlampL+1+pzVKurdFD
- KkoqvdGuWi5awJ0JqRJN006OaQULUFLv52nAIL0XjklX1IAfy5nzcLgycv/HBmjf
- tetQAgeOejyZlm3Jl34C1Gine/0TP9+SPY8dl9uS8RgZWQCYv3hXagI+aCsC8pvz
- t4S0pw==
+ EdaZhDCZuY7B75Dc5Rrta6PCTTK1rOCUcwYCYZlaRw0=; b=eo/Bh6nmTIjBUnhq
+ CCsgzYu1Xbt8r1YOad+HO6EzF7+gfFVvIiY8oDP0B5ztksHBtY9J41vYsqD9dcBf
+ 35K4yoM3EcjAMXpg82KBlI3hdc847s8hd2TwodQ4Qk/So93nZVk+roLRyVeDo6e5
+ hD9VK+riJtiBym+ec+vGrzFHU7zSo2xW0EO24W1rHQ2CarCvBEz27AScN/7RwS8v
+ /jN4nYsejIcZc/nDaGvHVk6ZfXCZ8i1VjrYnV1u3N7zTNrrhTXSQUpwdL1GB85kL
+ IX2pnFhPaxca48POHnQKUXjO8wjyjG8ueDF0dnXMKgU4SFnM+USyQQSDUIBZ7HBH
+ X6SoQQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43krrcs4rc-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43krrcs54s-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Dec 2024 11:42:49 +0100 (CET)
+ Wed, 18 Dec 2024 11:45:11 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 231A240046;
- Wed, 18 Dec 2024 11:41:09 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4183D40055;
+ Wed, 18 Dec 2024 11:44:13 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D71EB268961;
- Wed, 18 Dec 2024 11:40:06 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BB57125E1E4;
+ Wed, 18 Dec 2024 11:43:17 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
- 2024 11:40:06 +0100
-Message-ID: <eb4c25a5-f939-4280-a8a8-1d6d63dfbb65@foss.st.com>
-Date: Wed, 18 Dec 2024 11:40:05 +0100
+ 2024 11:43:17 +0100
+Message-ID: <f18f23e0-383d-4e13-b6d3-357668d48e49@foss.st.com>
+Date: Wed, 18 Dec 2024 11:43:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Kconfig: Set STACK_SIZE to 16KB for STM32 MCUs
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Greg Malysa
- <greg.malysa@timesys.com>, Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, Masahiro Yamada
- <yamada.masahiro@socionext.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20241218075833.2049241-1-patrice.chotard@foss.st.com>
- <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
- <290b3572-bc50-410d-bba0-3e204e68bc56@foss.st.com>
+Subject: Re: [PATCH 2/5] configs: stm32mp1: Restore boot SPL from sdcard for
+ Engicam i.Core STM32MP1 C.TOUCH 2.0
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20241216102219.347725-1-patrice.chotard@foss.st.com>
+ <20241216102219.347725-2-patrice.chotard@foss.st.com>
+ <895daee1-23bc-4c37-8d81-5de08153cf4c@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <290b3572-bc50-410d-bba0-3e204e68bc56@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <895daee1-23bc-4c37-8d81-5de08153cf4c@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.87.62]
@@ -100,99 +97,42 @@ X-Virus-Status: Clean
 
 
 
-On 12/18/24 11:28, Patrice CHOTARD wrote:
+On 12/18/24 10:04, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 12/16/24 11:22, Patrice Chotard wrote:
+>> Restore boot SPL from sdcard for Engicam i.Core STM32MP1 C.TOUCH 2.0.
+>>
+>> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+>> index 4e171200ef2..00c475307c9 100644
+>> --- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+>> +++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+>> @@ -27,6 +27,9 @@ CONFIG_SPL_SYS_MALLOC=y
+>>   CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+>>   CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+>>   CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+>> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
+>>   CONFIG_SPL_ENV_SUPPORT=y
+>>   CONFIG_SPL_I2C=y
+>>   CONFIG_SPL_POWER=y
 > 
 > 
-> On 12/18/24 10:59, Patrick DELAUNAY wrote:
->> Hi
->>
->> On 12/18/24 08:58, Patrice Chotard wrote:
->>> Since commit 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()"),
->>> STM32F746-disco hangs when loading device tree just before starting
->>> kernel:
->>>
->>> Retrieving file: /stm32f746-disco.dtb
->>> Kernel image @ 0xc0008000 [ 0x000000 - 0x19ae00 ]
->>> Flattened Device Tree blob at c0408000
->>>     Booting using the fdt blob at 0xc0408000
->>> Working FDT set to c0408000
->>>     Loading Device Tree to c05f8000, end c05ff71c ...
->>>
->>> Adjust STACK_SIZE to 16KB for STM32 MCUs (F4/F7 and H7) boards
->>> to fix kernel boot process as some of these boards embeds a limited
->>> amount of memory.
->>>
->>> Fixes: 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()")
->>
->>
->> I think it is also linked to an other commit
->>
->> Fixes:74b869bae74c ("efi_loader: use CONFIG_STACK_SIZE in the UEFI sub-system")
->>
->> before the patch CONFIG_SET_STACK_SIZE was not defined for ALL ARM platform
->>
->> So CONFIG_STACK_SIZE was not defined  / and was no used in platform
->>
->> (U-Boot stack up to end of the U-Boot area)
->>
->> after the patch the CONFIG_STACK_SIZEis set a 16MB for all platform, even if EFI is not used
->>
->>
->> +config STACK_SIZE
->> +    hex "Define max stack size that can be used by U-Boot"
->>
->> +    default 0x4000000 if ARCH_VERSAL || ARCH_ZYNQMP
->> +    default 0x200000 if MICROBLAZE
->> +    default 0x1000000
->>
->>
->> 16MB is needed ONLY for EFI loader cases, for other platform that seems huge.
->>
->>
->> @Heinrich: do you think you can add this condition CONFIG_EFI_LOADER to avoid issue for other platforms =
->>
->> So use 16MB (previously hardcoded in lib/efi_loader/efi_memory.c with add_u_boot_and_runtime() )
->>
->>     default 0x1000000 if EFI_LOADER
->>
->>
->> and so force the other platforms to define the CONFIG_STACK_SIZE (now used in LMB) with an adequate value ?
->>
->>
->>>
->>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>> ---
->>>
->>>   Kconfig | 1 +
->>>   1 file changed, 1 insertion(+)
->>>
->>> diff --git a/Kconfig b/Kconfig
->>> index 1f5b0f1972d..c087a420a24 100644
->>> --- a/Kconfig
->>> +++ b/Kconfig
->>> @@ -578,6 +578,7 @@ config STACK_SIZE
->>>       hex "Define max stack size that can be used by U-Boot"
->>>       default 0x4000000 if ARCH_VERSAL_NET || ARCH_VERSAL || ARCH_ZYNQMP
->>>       default 0x200000 if MICROBLAZE
->>> +    default 0x4000 if ARCH_STM32
->>>       default 0x1000000
->>>       help
->>>         Define Max stack size that can be used by U-Boot. This value is used
->>
->>
->> Anyway for this STM32 MCU patch:
->>
->>
->> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>
->> Thanks
->> Patrick
->>
-> Applied to u-boot-stm32/next
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
 > Thanks
-> Patrice
-Sorry, applied to u-boot-stm32/master
+> Patrick
+> 
+Applied to u-boot-stm32/master
 
 Thanks
 Patrice
