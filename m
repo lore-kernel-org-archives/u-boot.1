@@ -4,89 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A29E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 15:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34E7E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 16:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48C93802F2;
-	Wed, 18 Dec 2024 16:54:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 722CB80269;
+	Wed, 18 Dec 2024 17:09:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sojm6M3v";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="LB31Rl/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A56128036D; Wed, 18 Dec 2024 16:54:26 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0A70180274; Wed, 18 Dec 2024 17:09:58 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8921A80316
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 16:54:24 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4362f61757fso53261495e9.2
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 07:54:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734537264; x=1735142064; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BfQbeffR+wV3yx3YnO6qFvNIxYUPN2RkZEsAar5iRYA=;
- b=Sojm6M3vZnBPqfMOA1DttkBjPOe6HSDctgK26Q7HCW6Go4rRUuU/C+OQbHg6fwdrOg
- r2m5G/qe1h7xcr1ZlKklLnikQ5N3a2PQkj0zf/gPRwLNdCC1aVjppETg5Vs07pLh2Y1E
- v+B8wfvBwqPzTGgx97ZhYIFnQDA9yDZAr6+DNYO3ij4mgR30ouBRWlzGg7/lb3iXb6Z2
- Cji/QUmEiLWKTu1VSRDi9Tx5vWMC1nKnyrbRS+LU/phGBQo0n1oQbXRdc9I88+fhiXV1
- rZPsARdsX4dsN23r/OdSdrCADOe56qO9yZCJQBUOvmkCGk7ancMjeN3fJF/R8Ksp71jS
- Z+lQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734537264; x=1735142064;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BfQbeffR+wV3yx3YnO6qFvNIxYUPN2RkZEsAar5iRYA=;
- b=PFGhlzfBATTp4NzqbmkwJo/TjJjw44AVh6vOUzxFWO7oSfLkV47PDEYgqdPxucwG1U
- C6ZN+KF791SmYXZsiTEMie5uFmSG8Z8UO9RKG4CCxyODaln7N1iRhywLEaPM/U08SoZC
- aUf9yIqD5fDnTdqmtp5ms8R5Rz7sGO58tO3cuX2tTb7pWIMOrtzi5UkwgcZJNjta7AJD
- kdAc3UoV6A0q5sealbnVemTyNRMtned1fv2i+N83R/M1FHOxMx78CNNKg5yVYSxjXh4p
- dZBODueXejhTSUL9pAahNPuiFJC3fHnJvYH3BqCxapR1hvOoLWvaXL+/Jz4hvY9TvNBJ
- OfZQ==
-X-Gm-Message-State: AOJu0YwkmyZe1/DiMKsXIghHEVm7ilwPXWqD0UnOqZU4c258M6qJ80Qx
- rO19mFlr252xp2SFDh0cv85d2TOySJbWzRiYpSR12I5uE8eRcV3Tkqp1io4AeHpbVW1U5hy4J8m
- 95Bo=
-X-Gm-Gg: ASbGncuy60DCmfa6HhBVDFgEuat1rQPcSVrHk05DqLiSECwJMvE276JZoQxK5ehlSRk
- M0S4yTd/SF+yZ0rxQ8T+ssO7sDejWPArDW2WP9dYjVIhWJ94YSgF9PsEwGGEh4Sg2+ak4yck+vn
- k1n/qL8keciuFkAJzAdcLhtPAQSnKnULIAlQ/jFn31ZvWkaM8+rsGIb6h5EiCBlKD40t6Fw4jOu
- kYacfE8mzdms9aoji7YBQOlase3SkGXNudb6f5vdpTjHHS6L5QdbMq5O8hRp/oCyw==
-X-Google-Smtp-Source: AGHT+IGQ0qphZhFMUt4Fd9MEp2q5CzEnxP4DCNp98oOLJjmMqgOyF9JaRuZa8F8YzY7gMoZ9ymU0/g==
-X-Received: by 2002:a05:600c:350c:b0:435:d22:9c9e with SMTP id
- 5b1f17b1804b1-4365536be84mr29119275e9.19.1734537263764; 
- Wed, 18 Dec 2024 07:54:23 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656afc125sm25181705e9.6.2024.12.18.07.54.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 07:54:23 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 7777880241
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 17:09:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D8BF014806B5; Wed, 18 Dec 2024 17:09:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1734538192;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=LXhHMnsdzxDuQ+Kol4xy950W2tXSiEJFj8iha/h86E4=;
+ b=LB31Rl/FwsXMG87L6IccYfCG1aqDdmeM6e5D4poZFwaCRpU41mB0bWC4TIp24MYWa80Rrw
+ LL7r16g4dT5tyzet6HAmfoRmD/qWKlEjSakBXIhyNLWH9o6RfRogQu7Ntkspil6C4riG8k
+ xT1YMOgUnPDQumMjGDZjz7nqlYSirQ5v0LygXzWq22V/zX0AsixDbtDe8HTybEGs5TKo9t
+ aK8/szVKNp/5kuicP1lrn3nPnOVBij5BJtE2gykF3WPNkgukcZnbRrwIEsw+1hRmhrMEZw
+ vg3QQRDRUIU/kNxmApE2LaW5RJN/WrZ/JyvGpTr+hKGRDA9yZEZXU4K99RyypA==
+From: Alexander Dahl <ada@thorsis.com>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Dan Carpenter <dan.carpenter@linaro.org>
-Subject: [PATCH v2 5/5] initcall: remove initcall_run_list()
-Date: Wed, 18 Dec 2024 16:53:58 +0100
-Message-ID: <c82384c9655e3065dbe550183c24ede9c458a332.1734537135.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1734537135.git.jerome.forissier@linaro.org>
-References: <cover.1734537135.git.jerome.forissier@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH] spi: atmel: Really drop atmel_spi.h
+Date: Wed, 18 Dec 2024 17:09:47 +0100
+Message-Id: <20241218160947.681253-1-ada@thorsis.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,172 +64,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that all initcalls have been converted to static calls, remove
-initcall_run_list().
+First try dropping this was with commit 37434db29be4 ("spi: atmel: Drop
+atmel_spi.h") back in 2018 which was reverted not much later with commit
+5270df283676 ("Revert "spi: atmel: Drop atmel_spi.h"").
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Second try dropping this was in 2020 with commit beeb34ac0cc6 ("spi:
+atmel: Drop atmel_spi.h"), but that only moved all the definitions into
+the source file and did not remove the header file.
+
+Currently all of the definitions in the header file are (still)
+contained in the source file, and the header file is include nowhere.
+
+Fixes: beeb34ac0cc6 ("spi: atmel: Drop atmel_spi.h")
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
 ---
- include/initcall.h |  24 -----------
- lib/Makefile       |   1 -
- lib/initcall.c     | 102 ---------------------------------------------
- 3 files changed, 127 deletions(-)
- delete mode 100644 lib/initcall.c
 
-diff --git a/include/initcall.h b/include/initcall.h
-index 9398a3ec7d5..9d1af44778b 100644
---- a/include/initcall.h
-+++ b/include/initcall.h
-@@ -12,30 +12,6 @@
- 
- _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
- 
--/**
-- * init_fnc_t - Init function
-- *
-- * Return: 0 if OK -ve on error
-- */
--typedef int (*init_fnc_t)(void);
--
--/* Top bit indicates that the initcall is an event */
--#define INITCALL_IS_EVENT	GENMASK(BITS_PER_LONG - 1, 8)
--#define INITCALL_EVENT_TYPE	GENMASK(7, 0)
--
--#define INITCALL_EVENT(_type)	(void *)((_type) | INITCALL_IS_EVENT)
--
--/**
-- * initcall_run_list() - Run through a list of function calls
-- *
-- * This calls functions one after the other, stopping at the first error, or
-- * when NULL is obtained.
-- *
-- * @init_sequence: NULL-terminated init sequence to run
-- * Return: 0 if OK, or -ve error code from the first failure
-- */
--int initcall_run_list(const init_fnc_t init_sequence[]);
--
- #define INITCALL(_call) \
- 	do { \
- 		if (_call()) { \
-diff --git a/lib/Makefile b/lib/Makefile
-index d24ed629732..78d9d02369b 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -44,7 +44,6 @@ obj-$(CONFIG_GZIP_COMPRESSED) += gzip.o
- obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbios.o
- obj-$(CONFIG_SMBIOS_PARSER) += smbios-parser.o
- obj-$(CONFIG_IMAGE_SPARSE) += image-sparse.o
--obj-y += initcall.o
- obj-y += ldiv.o
- obj-$(CONFIG_XXHASH) += xxhash.o
- obj-y += net_utils.o
-diff --git a/lib/initcall.c b/lib/initcall.c
+Notes:
+    Build tested for all upstream atmel boards.  This is no complete build
+    coverage, but should be safe to remove, because it is not included
+    anywhere.
+
+ drivers/spi/atmel_spi.h | 86 -----------------------------------------
+ 1 file changed, 86 deletions(-)
+ delete mode 100644 drivers/spi/atmel_spi.h
+
+diff --git a/drivers/spi/atmel_spi.h b/drivers/spi/atmel_spi.h
 deleted file mode 100644
-index 2686b9aed5c..00000000000
---- a/lib/initcall.c
+index 9663cca5e66..00000000000
+--- a/drivers/spi/atmel_spi.h
 +++ /dev/null
-@@ -1,102 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
+@@ -1,86 +0,0 @@
 -/*
-- * Copyright (c) 2013 The Chromium OS Authors.
+- * Register definitions for the Atmel AT32/AT91 SPI Controller
 - */
 -
--#include <efi.h>
--#include <initcall.h>
--#include <log.h>
--#include <relocate.h>
--#include <asm/global_data.h>
+-/* Register offsets */
+-#include <linux/bitops.h>
+-#define ATMEL_SPI_CR			0x0000
+-#define ATMEL_SPI_MR			0x0004
+-#define ATMEL_SPI_RDR			0x0008
+-#define ATMEL_SPI_TDR			0x000c
+-#define ATMEL_SPI_SR			0x0010
+-#define ATMEL_SPI_IER			0x0014
+-#define ATMEL_SPI_IDR			0x0018
+-#define ATMEL_SPI_IMR			0x001c
+-#define ATMEL_SPI_CSR(x)		(0x0030 + 4 * (x))
+-#define ATMEL_SPI_VERSION		0x00fc
 -
--DECLARE_GLOBAL_DATA_PTR;
+-/* Bits in CR */
+-#define ATMEL_SPI_CR_SPIEN		BIT(0)
+-#define ATMEL_SPI_CR_SPIDIS		BIT(1)
+-#define ATMEL_SPI_CR_SWRST		BIT(7)
+-#define ATMEL_SPI_CR_LASTXFER		BIT(24)
 -
--static ulong calc_reloc_ofs(void)
--{
--#ifdef CONFIG_EFI_APP
--	return (ulong)image_base;
--#endif
--	/*
--	 * Sandbox is relocated by the OS, so symbols always appear at
--	 * the relocated address.
--	 */
--	if (IS_ENABLED(CONFIG_SANDBOX) || (gd->flags & GD_FLG_RELOC))
--		return gd->reloc_off;
+-/* Bits in MR */
+-#define ATMEL_SPI_MR_MSTR		BIT(0)
+-#define ATMEL_SPI_MR_PS			BIT(1)
+-#define ATMEL_SPI_MR_PCSDEC		BIT(2)
+-#define ATMEL_SPI_MR_FDIV		BIT(3)
+-#define ATMEL_SPI_MR_MODFDIS		BIT(4)
+-#define ATMEL_SPI_MR_WDRBT		BIT(5)
+-#define ATMEL_SPI_MR_LLB		BIT(7)
+-#define ATMEL_SPI_MR_PCS(x)		(((x) & 15) << 16)
+-#define ATMEL_SPI_MR_DLYBCS(x)		((x) << 24)
 -
--	return 0;
--}
+-/* Bits in RDR */
+-#define ATMEL_SPI_RDR_RD(x)		(x)
+-#define ATMEL_SPI_RDR_PCS(x)		((x) << 16)
 -
--/**
-- * initcall_is_event() - Get the event number for an initcall
-- *
-- * func: Function pointer to check
-- * Return: Event number, if this is an event, else 0
-- */
--static int initcall_is_event(init_fnc_t func)
--{
--	ulong val = (ulong)func;
+-/* Bits in TDR */
+-#define ATMEL_SPI_TDR_TD(x)		(x)
+-#define ATMEL_SPI_TDR_PCS(x)		((x) << 16)
+-#define ATMEL_SPI_TDR_LASTXFER		BIT(24)
 -
--	if ((val & INITCALL_IS_EVENT) == INITCALL_IS_EVENT)
--		return val & INITCALL_EVENT_TYPE;
+-/* Bits in SR/IER/IDR/IMR */
+-#define ATMEL_SPI_SR_RDRF		BIT(0)
+-#define ATMEL_SPI_SR_TDRE		BIT(1)
+-#define ATMEL_SPI_SR_MODF		BIT(2)
+-#define ATMEL_SPI_SR_OVRES		BIT(3)
+-#define ATMEL_SPI_SR_ENDRX		BIT(4)
+-#define ATMEL_SPI_SR_ENDTX		BIT(5)
+-#define ATMEL_SPI_SR_RXBUFF		BIT(6)
+-#define ATMEL_SPI_SR_TXBUFE		BIT(7)
+-#define ATMEL_SPI_SR_NSSR		BIT(8)
+-#define ATMEL_SPI_SR_TXEMPTY		BIT(9)
+-#define ATMEL_SPI_SR_SPIENS		BIT(16)
 -
--	return 0;
--}
+-/* Bits in CSRx */
+-#define ATMEL_SPI_CSRx_CPOL		BIT(0)
+-#define ATMEL_SPI_CSRx_NCPHA		BIT(1)
+-#define ATMEL_SPI_CSRx_CSAAT		BIT(3)
+-#define ATMEL_SPI_CSRx_BITS(x)		((x) << 4)
+-#define ATMEL_SPI_CSRx_SCBR(x)		((x) << 8)
+-#define ATMEL_SPI_CSRx_SCBR_MAX		GENMASK(7, 0)
+-#define ATMEL_SPI_CSRx_DLYBS(x)		((x) << 16)
+-#define ATMEL_SPI_CSRx_DLYBCT(x)	((x) << 24)
 -
--/*
-- * To enable debugging. add #define DEBUG at the top of the including file.
-- *
-- * To find a symbol, use grep on u-boot.map
-- */
--int initcall_run_list(const init_fnc_t init_sequence[])
--{
--	ulong reloc_ofs;
--	const init_fnc_t *ptr;
--	enum event_t type;
--	init_fnc_t func;
--	int ret = 0;
+-/* Bits in VERSION */
+-#define ATMEL_SPI_VERSION_REV(x)	((x) & 0xfff)
+-#define ATMEL_SPI_VERSION_MFN(x)	((x) << 16)
 -
--	for (ptr = init_sequence; func = *ptr, func; ptr++) {
--		reloc_ofs = calc_reloc_ofs();
--		type = initcall_is_event(func);
+-/* Constants for CSRx:BITS */
+-#define ATMEL_SPI_BITS_8		0
+-#define ATMEL_SPI_BITS_9		1
+-#define ATMEL_SPI_BITS_10		2
+-#define ATMEL_SPI_BITS_11		3
+-#define ATMEL_SPI_BITS_12		4
+-#define ATMEL_SPI_BITS_13		5
+-#define ATMEL_SPI_BITS_14		6
+-#define ATMEL_SPI_BITS_15		7
+-#define ATMEL_SPI_BITS_16		8
 -
--		if (type) {
--			if (!CONFIG_IS_ENABLED(EVENT))
--				continue;
--			debug("initcall: event %d/%s\n", type,
--			      event_type_name(type));
--		} else if (reloc_ofs) {
--			debug("initcall: %p (relocated to %p)\n",
--			      (char *)func - reloc_ofs, (char *)func);
--		} else {
--			debug("initcall: %p\n", (char *)func - reloc_ofs);
--		}
--
--		ret = type ? event_notify_null(type) : func();
--		if (ret)
--			break;
--	}
--
--	if (ret) {
--		if (CONFIG_IS_ENABLED(EVENT)) {
--			char buf[60];
--
--			/* don't worry about buf size as we are dying here */
--			if (type) {
--				sprintf(buf, "event %d/%s", type,
--					event_type_name(type));
--			} else {
--				sprintf(buf, "call %p",
--					(char *)func - reloc_ofs);
--			}
--
--			printf("initcall failed at %s (err=%dE)\n", buf, ret);
--		} else {
--			printf("initcall failed at call %p (err=%d)\n",
--			       (char *)func - reloc_ofs, ret);
--		}
--
--		return ret;
--	}
--
--	return 0;
--}
+-/* Register access macros */
+-#define spi_readl(as, reg)					\
+-	readl(as->regs + ATMEL_SPI_##reg)
+-#define spi_writel(as, reg, value)				\
+-	writel(value, as->regs + ATMEL_SPI_##reg)
+
+base-commit: 25fb58e88aba0c4af0af554d7b141be3f2e5e0b5
 -- 
-2.43.0
+2.39.5
 
