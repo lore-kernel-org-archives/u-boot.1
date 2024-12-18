@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ABD7E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:40:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E36E8E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:40:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 300B380269;
-	Wed, 18 Dec 2024 18:40:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A9AF8031E;
+	Wed, 18 Dec 2024 18:40:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ATeokrPE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TyQ4HkMB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB8D980269; Wed, 18 Dec 2024 18:40:03 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 9EB548030F; Wed, 18 Dec 2024 18:40:09 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33E4480241
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:40:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25250802F2
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:40:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b6e9317a2aso85304185a.0
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 09:40:01 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7b6f95d2eafso531394785a.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 09:40:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734543600; x=1735148400; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734543606; x=1735148406; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8w3tpdw0uGlTAQUT+peuz0A9wnHvOh/5MxmEaJl/yF0=;
- b=ATeokrPEe1+HXCqe2hXCcy21TgLUJhtHCqvikJZgN5n9cOwCJSL8YP24MZ/NiVlMAj
- SuKjl2kLjU94/vptyiX9ApDlVZeyDaQiF3HK0Tc5IRhrbLax9hqNn4Nnx/MiEYa/PJcm
- 13+L4hGGv1VeTtlhVPSGGQAW2x+loGxnINfgo=
+ bh=tyzb3hm1b78ifFhKB+ZoObhOOHan7zoagOaCdhkSn6s=;
+ b=TyQ4HkMBZKIAVwQ3SlzkQ1beQ+n95pkfUWuUfF0UkaOmA7+nVcKQUEfx4tj0UtR/ei
+ 9Hp4R6O67UysGCtHo+SaQ66VKhrD+tWdn5dqY6rfrGhgbcnVcQq+CDDVdJF2yW4LiuBG
+ H59AD0wtLto+BWpU6DluoMI/FGlpwR1DDLb9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734543600; x=1735148400;
+ d=1e100.net; s=20230601; t=1734543606; x=1735148406;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8w3tpdw0uGlTAQUT+peuz0A9wnHvOh/5MxmEaJl/yF0=;
- b=mK1yoNQTmxHr5pm6LF9QShzEESgFsvDfj2/fRV/M6hRW6XLcJPxFN87gigkvkxIiHK
- rWYHm2GUcrqiWGcA1KNHOaToG/JhLz2haAR3gakpsdOqfBifIQ/ks4uq0h2uihKr1Tv4
- rarFfPq6IuYUMU1hGbfP5ODvxL2j2zUCz5jr0YsOGNOxPjXhv1WZ4qXLa81EUmq8kcXG
- 2gxNkUEO6qA/KHrTUtpkgP2TXm3DJEyi/Tjv//po9DW4jbRXV+NZw/+EbeKHxTZpMonC
- 2gMoa6znYyiUqpw5JbbmoX7thbhfi2GY1IQqPpfgtIOlJDoTtDOWXtyPcm9tHqmKQe+R
- KNvQ==
-X-Gm-Message-State: AOJu0YzOpiRpy6gKanBuyOTI3yKZdeunEO3mdF2sNAWejqtDn7J1XwPI
- W0tREKUkP5BvfBAgNtgdyHN6Xfgcvke/ZIGZgX2vaugMfrg5rfwMiMo2eggIkTrxSoNoFEkOwxT
- 6
-X-Gm-Gg: ASbGncu/n7DThOY03HpUycIDrKpsumgqU4dq9Szb/Gc+b/SgPE1ErvhGdkcL8324msZ
- cHhP1b4h//vvq2M7tEp9va3rKu6HWuk++7i8fuMOa4Z7hcY0+rJfdwb0YPGITLB7vgHloQRm8cn
- D1StVUL2C8cMgnhIrhnixWPUNx3bMOxDFajebyX334H+EP47Lx7izTMRo47fnV78z3yAXRbgHpN
- EGA59lypzkU2E5cJ17kg8uVs/FFLNvGNfwicaFfw2koI+9FMRLHwzFu
-X-Google-Smtp-Source: AGHT+IHHE+Brp2B64XMZfrzNEX1QZRzRogbZgd66cIiFIXbD8tYdcdgVp82ksLb/sO3eU/kweHKM9g==
-X-Received: by 2002:a05:622a:1a82:b0:466:91f3:12ca with SMTP id
- d75a77b69052e-46a3af9ea8bmr2244981cf.8.1734543600041; 
- Wed, 18 Dec 2024 09:40:00 -0800 (PST)
+ bh=tyzb3hm1b78ifFhKB+ZoObhOOHan7zoagOaCdhkSn6s=;
+ b=sbHPua+HPxtgQOeYF1Ccb7z+20Vo3/PKyIW+U/X9gR5oqO3j+LZ1R6l7Jb/kgbEjuL
+ pfJYBRHoLt1a6Dnqt2DvG2lltS4v4Wm/1Ki9V4JpfX9Hssc19o4y+DLiAfR2IKmFZWUm
+ eHOz+eTPrQr34n8W0dkfAf88RE2ejxq0iC2CDM20pKS2VMTyXn4GXTUkNN7byn3B2DAZ
+ 9xsLDk/kvC2G/oMwuCPrnfoF8yp3gFcomdSYQMEUPiQ4gxCUwpaOZs+tYCXg9y7iKfQz
+ 7J9df8vlOoa0aElgzU7v5M7krfcsEtdx0/XOqvUJ/zfTyY0yxxkiaZ2F2T39QfgWNS1O
+ lblg==
+X-Gm-Message-State: AOJu0YxrVvXHQjq49diKEPXYFapmAAA0M6QbJ7XZZ9+bevQoBMILPzr1
+ jsb8F8jEkzllIIkheVcOlSqBomnHHPpcVBkGwevHFz+YIfgDuCpr0s+bdCB+Xg4T4lo2wNodpE/
+ u
+X-Gm-Gg: ASbGncvFNm8pCDBFlfknjLQvg020+CroG3szBPBvyohpaNK71uD2BrPQ7QWFXUwwWa6
+ 0TjOCvsTJZiNOvZKTx2ln3yx60gbEZPDf0cACAhu0xJfz98ZKdDKWmDHuOBBdGytIQM416xnVh7
+ +X2vrXS0galr9fdO9N0vmysYLBSJPc2w/qS6NpFHyMFYWPfcuZaP1ZkR+ACefdLh8g7Yl9bgLzH
+ K/KKkQPmxzyFJkb7pmINUBvgUYQRTgfqUaC2xIwMdsVMleUAIwBDqwZ
+X-Google-Smtp-Source: AGHT+IEwmgKrOm23UwsE6sLgEa7pvvY1op4awczbzigwYBnB2zw1TKbdN0XxVQqLKYsAU7ZppITFdA==
+X-Received: by 2002:a05:620a:2950:b0:7b3:5858:1286 with SMTP id
+ af79cd13be357-7b8637b7bacmr502654585a.47.1734543606022; 
+ Wed, 18 Dec 2024 09:40:06 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-467b2e84db6sm53187251cf.54.2024.12.18.09.39.59
+ af79cd13be357-7b7047eea1asm450488285a.60.2024.12.18.09.40.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 09:39:59 -0800 (PST)
-Date: Wed, 18 Dec 2024 11:39:57 -0600
+ Wed, 18 Dec 2024 09:40:05 -0800 (PST)
+Date: Wed, 18 Dec 2024 11:40:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20241217
-Message-ID: <20241218173957.GK1505244@bill-the-cat>
-References: <20241217105433.1419146-1-festevam@gmail.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: Re: Pull request for u-boot-nand-20241212
+Message-ID: <20241218174002.GL1505244@bill-the-cat>
+References: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6OOW6/QniDJsxWfa"
+ protocol="application/pgp-signature"; boundary="G7+WgUiWcsSBubh2"
 Content-Disposition: inline
-In-Reply-To: <20241217105433.1419146-1-festevam@gmail.com>
+In-Reply-To: <CAOf5uwnqcLbVH6Chd_rKc_Q5aEe0jC+-Z5g_K_nQD8wF+qmDOw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,56 +96,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---6OOW6/QniDJsxWfa
+--G7+WgUiWcsSBubh2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 17, 2024 at 07:54:33AM -0300, Fabio Estevam wrote:
+On Sun, Dec 15, 2024 at 03:46:22PM +0100, Michael Nazzareno Trimarchi wrote:
 
-> Hi Tom,
+> Hi Tom
 >=20
-> Please pull from u-boot-imx/next, thanks.
+> The following changes since commit 9452fb7484118822b878ad445237d111b7b1a2=
+8d:
 >=20
-> The following changes since commit 8aab7730c1c26192b0e4218fbf2f6009f955cb=
-88:
->=20
->   Merge patch series "Hyperflash Boot fixes for J7200/J721E" (2024-12-14 =
-09:34:27 -0600)
+>   Merge branch 'master' of
+> https://source.denx.de/u-boot/custodians/u-boot-sh (2024-12-11
+> 12:50:29 -0600)
 >=20
 > are available in the Git repository at:
 >=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--next-20241217
+>   git@source.denx.de:u-boot/custodians/u-boot-nand-flash.git
+> mike/u-boot-nand-20241212
 >=20
-> for you to fetch changes up to 7cf57825eb4366a474ee0a13ef690d460f8c4775:
+> for you to fetch changes up to 65ac40c1e99826b346c5e3b829143902494415e2:
 >=20
->   imx: hab: fix srktool -c usage by removing spaces (2024-12-16 14:35:58 =
--0300)
+>   nand: Add a watch command (2024-12-12 19:28:07 +0100)
 >=20
-> u-boot-imx-next-20241217
+> Small addition to uboot-nand. Nothing relevant for now. Anyway
+> a nice new command coming from Miquel Raynal and small changes.
+>=20
+> The patches pass the pipeline CI:
+> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/23=
+837
+>=20
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---6OOW6/QniDJsxWfa
+--G7+WgUiWcsSBubh2
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjCO0ACgkQFHw5/5Y0
-tyzlsAv/X4hWUiO+OEnBKIgH1RpmYMngcjsCvYHEGec487rQSsSfdgtqRhHhlwip
-sPsCq9NlmG9QlT/puysHNTRvjhBcbdBzGQJWBqI7zw0l+asJ8u/Q1ta7dkbuMDRB
-8FiVGDC0HDbssmt1Ua4vfTKNX0jkxORwNzidCQwVUnxBOYRzYy/2bZFDdGGNBM5g
-H38a2nMVz9jERJ6f5eC9TEdlELk28qL7Z/A2tOCmHXTg0WTgL13jLu6Z1b9c51oS
-hEb9SBzHWlyL83UiHlR6ENIsxeLEH43em05TaHuw9G0HlOrgi/oEtMjgp9pA4es/
-RYiNgteba6UtOu96nzRzOajxdQPsEUHa+GTox88JVAV/qBrpuls5uLxABlyi7EuT
-0nb/bQ2G1czhIlUGr2R9/qSh70bA8360fPXBBKn1DcDam5tt7dFYpjXNh0w6LbJ+
-iMdrMf5GtvQa5U1Dzy2ZOh+gpB1jozDwzShVNTUMAjAO5fhYE1Bpx9lD0KS6jnRE
-cOZgUtYu
-=Y8yG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjCPIACgkQFHw5/5Y0
+tyw9jgv+I5okV95vuh5eGNzFYz+HdAK6a5vtrCT7wLuDcMYeNNbWVDQmvDblPg5F
+n5e/2alJF6e8wdBtmBCEONEX9jCuXTPGBQTul2BrU0C5Poe8hLHXcp4yRAzzRo2G
+Gu2qgbwZkcZQdX+8Vk10iEpo1rlYxrpCyWtHaPTpoRxZJEM4XXlyuzIhXEOby2TK
+pKGlx3EHX+8ztE0s3bS/Gg7PmgTo96wXebFH2UHi/u19O+vZLtv/lE6jRc6fSuoK
+F36qU2iFMiXnMf+gcbAbXYz+5tBpEqZTInAFcuSYg/cYfb9SKcWFLX88qxt+uL1k
+RSKCXxzCBmZjiHFgkORU+VdeZ9WygAkZeT+TGfa09y3S3Aw+mlUMzNOxyEXLh8Xm
+7I5Ytja2glggY+5ihR+Z2Fo7CpxcZshZMeaW9KHj7SKeQbxK6oWX3yeM4+Ft0lH/
+cxDI28hdqrM1aQZDyAWT3NliqrTBbIaviURE4D2ZyblbLgvUbL/1V32Io2yen+qG
+8yhKDPDg
+=jJWy
 -----END PGP SIGNATURE-----
 
---6OOW6/QniDJsxWfa--
+--G7+WgUiWcsSBubh2--
