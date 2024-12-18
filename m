@@ -4,118 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC6FDE77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 22:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF30E7718A
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 22:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12F768022B;
+	by phobos.denx.de (Postfix) with ESMTP id 6A17480304;
 	Wed, 18 Dec 2024 23:44:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="oi1/6cPO";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WHWp3otD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BFDD802B4; Wed, 18 Dec 2024 23:44:50 +0100 (CET)
+ id 396F08021D; Wed, 18 Dec 2024 23:44:50 +0100 (CET)
 Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E81338021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 23:44:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F1608022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 23:44:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20241218224440epoutp04e532b2256faadf5a0ef6901e88f6981d~SZtcCvbns2007420074epoutp04N
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:44:40 +0000 (GMT)
+ 20241218224444epoutp04d663cae0e029c97244a93e1509a1f9d3~SZtf0yJfs1950019500epoutp04t
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:44:44 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20241218224440epoutp04e532b2256faadf5a0ef6901e88f6981d~SZtcCvbns2007420074epoutp04N
+ 20241218224444epoutp04d663cae0e029c97244a93e1509a1f9d3~SZtf0yJfs1950019500epoutp04t
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1734561880;
- bh=zgQh1p9yRhxIOVJPR+KOthBE3JTUS7AnUuMJIjiFVww=;
+ s=mail20170921; t=1734561884;
+ bh=ZXeD63SqrKuaFqzFIBpFrXI6JhpO6khUNqYJa6Hoh6Q=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=oi1/6cPO4l9azV/56sCKL1JsLhuPBp9qGT85+ejwWIZ/Zcvwd1uRK/f1ZujUBRD7f
- gxjN8bcraiG2V+9lcuuPHfJDwjXrHSrBGnPiD0GIdOQB3KFGBLw+UGp93zRWM8l601
- XdqGpSb47CPPjNCAaACdBrc4NokduRjHFe3XdApA=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ b=WHWp3otDlQYBR1VSDTr1NNlAH3wz2SJYwvsf6xnh2Cvf5UUWFO4opIIlwJxZ93rfc
+ C83j9t8Y95iG+TogkKSinyow/j7+nWQJnt09z1hpVTD/t2K4k+Us6E3wJti0sFpvnz
+ r4UC/IY3E4WGK8zmvjaTHdeLIA5lEOi6OmokuybM=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
  epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20241218224439epcas1p2b8893e570ced59b0398f67423994a9d8~SZtbtCr8h1856918569epcas1p2c;
- Wed, 18 Dec 2024 22:44:39 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.231]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4YD7zB63nbz4x9Ps; Wed, 18 Dec
- 2024 22:44:38 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- F2.BC.31735.65053676; Thu, 19 Dec 2024 07:44:38 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20241218224438epcas1p2fee74afbd74ebc3e389b78cb194e5c6a~SZtaa2JpH1857518575epcas1p2D;
- Wed, 18 Dec 2024 22:44:38 +0000 (GMT)
+ 20241218224443epcas1p2cca3b575a62f221433056916fcd121dd~SZtffvQK91857518575epcas1p2b;
+ Wed, 18 Dec 2024 22:44:43 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.36.145]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4YD7zG6hLjz4x9Px; Wed, 18 Dec
+ 2024 22:44:42 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ A0.3B.21650.A5053676; Thu, 19 Dec 2024 07:44:42 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20241218224441epcas1p1bbae21289af09be67221e080b92b7504~SZtdfnH3d2006520065epcas1p1c;
+ Wed, 18 Dec 2024 22:44:41 +0000 (GMT)
 Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241218224438epsmtrp2efa7dfc2256b62f7fd818e6f3a32296b~SZtaaDrLZ1148511485epsmtrp2W;
- Wed, 18 Dec 2024 22:44:38 +0000 (GMT)
-X-AuditID: b6c32a4c-ad1fe70000007bf7-f3-676350569c47
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20241218224441epsmtrp195dd49d2c7e9452be524346890db2d39~SZtde9Jr-0409604096epsmtrp1H;
+ Wed, 18 Dec 2024 22:44:41 +0000 (GMT)
+X-AuditID: b6c32a35-093de70000005492-dd-6763505a0f12
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
  epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 3C.58.18949.65053676; Thu, 19 Dec 2024 07:44:38 +0900 (KST)
+ BC.58.18949.95053676; Thu, 19 Dec 2024 07:44:41 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241218224438epsmtip2f72b7862924e760bfa06d3a5a51bf45b~SZtaPCs5q2194921949epsmtip2V;
- Wed, 18 Dec 2024 22:44:38 +0000 (GMT)
+ 20241218224441epsmtip2b0d006e70dfc9fb8d03ef967b9b34e7c~SZtdT8xzv2194921949epsmtip2W;
+ Wed, 18 Dec 2024 22:44:41 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Shree Ramamoorthy'" <s-ramamoorthy@ti.com>, <u-boot@lists.denx.de>,
  <trini@konsulko.com>
 Cc: <m-leonard@ti.com>, <praneeth@ti.com>
-In-Reply-To: <20241218171236.1022565-2-s-ramamoorthy@ti.com>
-Subject: RE: [PATCH v1 1/2] power: regulator: replace printf() with pr_err()
-Date: Thu, 19 Dec 2024 07:44:37 +0900
-Message-ID: <01e301db519e$6b18ed80$414ac880$@samsung.com>
+In-Reply-To: <20241218171236.1022565-3-s-ramamoorthy@ti.com>
+Subject: RE: [PATCH v1 2/2] power: replace magic numbers with macros
+Date: Thu, 19 Dec 2024 07:44:41 +0900
+Message-ID: <01e401db519e$6d116220$47342660$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
 Content-Language: ko
-Thread-Index: AQDJjZr8Ya4lM0w/UNXlTz8OpdnKCAJLF2nhAfA6lWu07kZFQA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrBKsWRmVeSWpSXmKPExsWy7bCmvm5YQHK6wbbjBhYPt89jsfjz6CWb
+Thread-Index: AQDJjZr8Ya4lM0w/UNXlTz8OpdnKCAFA/cSAAi20pJa09Knc4A==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrEKsWRmVeSWpSXmKPExsWy7bCmgW5UQHK6wb/nBhYPt89jsfjz6CWb
  xa9D65ktpk7azG7xdm8nuwOrx6sDq9g9zt7Zwehx/MZ2pgDmqGybjNTElNQihdS85PyUzLx0
  WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKCdSgpliTmlQKGAxOJiJX07m6L80pJU
- hYz84hJbpdSClJwC0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjG+t/5gLlnBX7Fh8gaWBcQZn
- FyMnh4SAicSt7S2sXYxcHEICexglpn/7wg7hfGKU2Ld1AxuE841R4sncqawwLR3/DjBBJPYy
- Stx+B9PyklFiRc9bdpAqNgE9if+LFjKD2CICCRJ/Nt1mArGZBTQl9mzfyAJicwrYSLT1PWEE
- sYUFfCSebX0BVsMioCqx+9kRMJtXwFLi+PtPTBCbFSR+Pl3GCjFHRGJ2ZxvUfCeJY4tWsIAc
- ISFwil3i4vk5bBANLhLz3+xjhrCFJV4d38IOYUtJfH63lw2ioZlRYumSg6wQTg+jxL+G61Dd
- xhL7l04GWs0Bdvb6XfoQm/kk3n3tYQUJSwjwSnS0CUFUq0hcev2SCWb+3Sf/ocHlIbFsby80
- uA4C7eo6xTSBUX4WkidmIWxYwMi0ilEqtaA4Nz012bDAUDcvtRweocn5uZsYwUlOy2cH4/f1
- f/UOMTJxMB5ilOBgVhLhddNMTBfiTUmsrEotyo8vKs1JLT7EaAoMzonMUqLJ+cA0m1cSb2hi
- aWBiZmRsYmFoZqgkznvmSlmqkEB6YklqdmpqQWoRTB8TB6dUA9PKR0b3qlN6LXm2B0xj5Lwj
- 53ri10WmY/ZNwmzTF9bMS+Q/P03oSKN14qODVpwzq8//ebnq74bDtrKK7rdYe2Y4TvQovr+F
- +cpC2WabmlmKbLmcKRn9LvWPXtV+j1J5+f2+RfLHl8v/vWJRteno9KjUX7BcM3NG+a6Sx5q6
- Ilm/Fp6s3yWjrrw22Pts0NuZR2YvLH53PnyTzNzy/IvG2zfMe72QrVpyxv2cDrM9LApqV574
- rz0oYhtUKruBQcPP/6Hi28W6j70XLbUS+f8ln3kHf9hrC6eHekUxqmGi7uvW9EkKaX/Yp/Bg
- +fyIxrXPGuzEZt2I6WPepT7h5LR9MVfScpfN99l08sDVn9LbpsgqsRRnJBpqMRcVJwIArg+3
- pvsDAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrOLMWRmVeSWpSXmKPExsWy7bCSvG5YQHK6wcy/QhYPt89jsfjz6CWb
- xa9D65ktpk7azG7xdm8nuwOrx6sDq9g9zt7Zwehx/MZ2pgDmKC6blNSczLLUIn27BK6Mb63/
- mAuWcFfsWHyBpYFxBmcXIyeHhICJRMe/A0xdjFwcQgK7GSW27t3ODpGQkvj8dCpbFyMHkC0s
- cfhwMUTNc0aJP2/ng9WwCehJ/F+0kBmkRkQgSeLE5lqQMLOAtkT3og5GiPq9jBIzrixmAklw
- CthItPU9YQSxhQV8JJ5tfQEWZxFQldj97AiYzStgKXH8/ScmiBsUJH4+XcYKMVREYnZnGzOI
- LSLgJHFs0QqWCYwCs5CkFjAyrmKUTC0ozk3PLTYsMMpLLdcrTswtLs1L10vOz93ECA5LLa0d
- jHtWfdA7xMjEwXiIUYKDWUmE100zMV2INyWxsiq1KD++qDQntfgQozQHi5I477fXvSlCAumJ
- JanZqakFqUUwWSYOTqkGJqezWtdez4wIcZm6OEK41Mbj+oe3d+drsKzjEv+8a+4s390z607t
- f/LY+sWkS4ui2+bp3Mxet8WwbTIHS0/+lM0WjreEZbv8ZbhuP4rZ7fnuxxfdfO5Hu/ZcLLpz
- YqrD5ut9Yp8zr8RFHva71KL9K3Z5/OF9R8M61m0xiHt8Qot5C3/egwb/+asr+m/XBArs7n+y
- 3S6wISfxqsTt8zYnI6pZwnbtOSbNK9EkKMS83NH+jDfrVbb++fz8pe1V7UnvyvkaM6PmLc1i
- CX1yrvVpevMK9hX2HvnMH95rORpfeT/NxExI7L+knV/b596mm1t0+uoMH3QeLf/Kt4V7VoTQ
- F58mXl1f4cCnMiuVnj7vVWIpzkg01GIuKk4EAFKNCJ+6AgAA
-X-CMS-MailID: 20241218224438epcas1p2fee74afbd74ebc3e389b78cb194e5c6a
+ hYz84hJbpdSClJwC0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjFnzOQoOylXsOvSbsYHxhEQX
+ IyeHhICJxP7+DvYuRi4OIYEdjBIbN6xghXA+MUpsPXCdEcL5xijR/HMXM0zLhRv/mCESexkl
+ Njz7CNX/klGiZ8VtdpAqNgE9if+LFoJ1iAgkSPzZdJsJxGYW0JTYs30jC4jNKWAj8WnlB6B6
+ Dg5hAReJR5sCQMIsAqoSfV3zWUFsXgFLiZuPtjBCLFaQ+Pl0GSvEGBGJ2Z1tUOOdJM5cfc0C
+ coOEwCl2iU8n+1ghGlwkjh3cwg5hC0u8Og5jS0m87G9jh2hoZpRYuuQgK4TTwyjxr+E6G0SV
+ scT+pZOZQK4DuXr9Ln2IzXwS7772sIKEJQR4JTrahCCqVSQuvX7JBDP/7pP/UDd4SJztXM0C
+ CaCDjBLvmncyTWCUn4XkiVkIGxYwMq1iFEstKM5NTy02LDCER2Vyfu4mRnBi0zLdwTjx7Qe9
+ Q4xMHIyHGCU4mJVEeN00E9OFeFMSK6tSi/Lji0pzUosPMZoCg3Iis5Rocj4wteaVxBuaWBqY
+ mBkZm1gYmhkqifOeuVKWKiSQnliSmp2aWpBaBNPHxMEp1cDkVnj9Zmz6dl39M+s3xNxiX3ru
+ XkGuzdzFd2/oryuu+DDb42zgNw6D3+ZMBaXOJ1W11m8/cmLyQcsv68+tEtXINZp9ybk1KzzK
+ SXbGebkpHPU/jfvq+w8YfmDft3nv1D35550NGP+GPy95zFcvK30tfSM3T0vWhU1bttv93+G5
+ OdB1/2bG+KUbi1oLitkFBS/wffgkW/M47dOUwnm1N4u4giRusNc8uT3l3Z+nfyrZmTYs+KIr
+ HnV0bbS4zKRuxmS53gNN8uvLGu8c2/dYp3K/i4fLMqmTR88fF/70Q2H7s47J63/0fxPJCL4x
+ i91/puhZ9iSGzyc1lK/lTy12mzCtZdOf9z/vazOyJ+2W/632TYmlOCPRUIu5qDgRAETl9Br1
+ AwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKLMWRmVeSWpSXmKPExsWy7bCSvG5kQHK6wbZZqhYPt89jsfjz6CWb
+ xa9D65ktpk7azG7xdm8nuwOrx6sDq9g9zt7Zwehx/MZ2pgDmKC6blNSczLLUIn27BK6MWfM5
+ Cg7KVew69JuxgfGERBcjJ4eEgInEhRv/mLsYuTiEBHYzSmyYd5oNIiEl8fnpVCCbA8gWljh8
+ uBii5jmjxJWVu5lAatgE9CT+L1rIDFIjIpAkcWJzLUiYWUBbontRByNE/V5GiUNXT7OCJDgF
+ bCQ+rfzADlIvLOAi8WhTAEiYRUBVoq9rPlgJr4ClxM1HWxghTlCQ+Pl0GSvETBGJ2Z1tzCC2
+ iICTxJmrr1kmMArMQpJawMi4ilEytaA4Nz232LDAKC+1XK84Mbe4NC9dLzk/dxMjOCS1tHYw
+ 7ln1Qe8QIxMH4yFGCQ5mJRFeN83EdCHelMTKqtSi/Pii0pzU4kOM0hwsSuK83173pggJpCeW
+ pGanphakFsFkmTg4pRqYDgirTshXNze1cmKY/m+R5u3Q1yl7Slkks3XETgn59q4t2iHFEPBN
+ 2y4r90l0Y/zdmCqdKMlird6shzML1gh+uqRwdW7y57MSMb2iqy2LT7wNv6ghs6ZHT2ve3VP+
+ 22872BsnTr71sOLyyoXNUbe+xlfNnWp3RGfHlCOPNQ4EPD/qsWUi+14m7Q6f5V9q1qt+4O7d
+ klHd1/nxVIe23DIW1dAJNyOajcOnPQx18Fqu6p16P+nLHtXoZzrzfU5IrS9xPHDnVsaKBvX+
+ A0WVAV3pW6OW9EQGzY5s/e1V33VgZkame0bq3HsVrx9N4pBfdj971a+UdVMD1DgdYg3iFYUP
+ HNCQvMjv6VoqnfFaSlqJpTgj0VCLuag4EQBMKrQ7uAIAAA==
+X-CMS-MailID: 20241218224441epcas1p1bbae21289af09be67221e080b92b7504
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241218171243epcas1p23ee518764dd0f1c0bb275e474db4ad03
+X-CMS-RootMailID: 20241218171243epcas1p1071f30015793a4317dfb47c70b99dacf
 References: <20241218171236.1022565-1-s-ramamoorthy@ti.com>
- <CGME20241218171243epcas1p23ee518764dd0f1c0bb275e474db4ad03@epcas1p2.samsung.com>
- <20241218171236.1022565-2-s-ramamoorthy@ti.com>
+ <CGME20241218171243epcas1p1071f30015793a4317dfb47c70b99dacf@epcas1p1.samsung.com>
+ <20241218171236.1022565-3-s-ramamoorthy@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,49 +132,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
+Hi,
 
 > -----Original Message-----
 > From: Shree Ramamoorthy <s-ramamoorthy@ti.com>
 > Sent: Thursday, December 19, 2024 2:13 AM
 >
-> Replace printf() with pr_err() because pr_err() has a uniform print format
-> and takes into consideration the log levels supported.
+> Replace magic numbers in buckval2votl() & buckvolt2val() with macros to
+> help with clarity and correlate what the numbers correspond to in the
+> TPS65219 datasheet.
 >
 > Signed-off-by: Shree Ramamoorthy <s-ramamoorthy@ti.com>
+> ---
+>  drivers/power/regulator/tps65219_regulator.c | 26 ++++++++++----------
+>  include/power/tps65219.h                     | 14 +++++++++--
+>  2 files changed, 25 insertions(+), 15 deletions(-)
+>
+> diff --git a/drivers/power/regulator/tps65219_regulator.c
+> b/drivers/power/regulator/tps65219_regulator.c
+> index 4b0fb205909a..88abc896b3a2 100644
+> --- a/drivers/power/regulator/tps65219_regulator.c
+> +++ b/drivers/power/regulator/tps65219_regulator.c
+> @@ -72,12 +72,12 @@ static int tps65219_buck_enable(struct udevice *dev, int op, bool *enable)
+>
+>  static int tps65219_buck_volt2val(int uV)
+>  {
+> -	if (uV > TPS65219_BUCK_VOLT_MAX)
+> +	if (uV > TPS65219_BUCK_3V4)
+>  		return -EINVAL;
+> -	else if (uV >= 1400000)
+> -		return (uV - 1400000) / 100000 + 0x20;
+> -	else if (uV >= 600000)
+> -		return (uV - 600000) / 25000 + 0x00;
+> +	else if (uV >= TPS65219_BUCK_1V4)
+> +		return (uV - TPS65219_BUCK_1V4) / TPS65219_VOLT_STEP_100MV + TPS65219_BUCK_REG_1V4;
+
+Even though Not relevant to this subject. If uV is 340000, the return value is correct?
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
 Best Regards,
 Jaehoon Chung
 
-> ---
->  drivers/power/regulator/tps65219_regulator.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/power/regulator/tps65219_regulator.c
-> b/drivers/power/regulator/tps65219_regulator.c
-> index b7124fed0245..4b0fb205909a 100644
-> --- a/drivers/power/regulator/tps65219_regulator.c
-> +++ b/drivers/power/regulator/tps65219_regulator.c
-> @@ -250,7 +250,7 @@ static int tps65219_ldo_probe(struct udevice *dev)
->  	/* idx must be in 1..TPS65219_LDO_NUM */
->  	idx = dev->driver_data;
->  	if (idx < 1 || idx > TPS65219_LDO_NUM) {
-> -		printf("Wrong ID for regulator\n");
-> +		pr_err("Wrong ID for regulator\n");
+> +	else if (uV >= TPS65219_BUCK_0V6)
+> +		return (uV - TPS65219_BUCK_0V6) / TPS65219_VOLT_STEP_25MV + TPS65219_BUCK_REG_0V6;
+>  	else
 >  		return -EINVAL;
->  	}
->
-> @@ -271,7 +271,7 @@ static int tps65219_buck_probe(struct udevice *dev)
->  	/* idx must be in 1..TPS65219_BUCK_NUM */
->  	idx = dev->driver_data;
->  	if (idx < 1 || idx > TPS65219_BUCK_NUM) {
-> -		printf("Wrong ID for regulator\n");
-> +		pr_err("Wrong ID for regulator\n");
+>  }
+> @@ -86,12 +86,12 @@ static int tps65219_buck_val2volt(int val)
+>  {
+>  	if (val > TPS65219_VOLT_MASK)
 >  		return -EINVAL;
->  	}
+> -	else if (val > 0x34)
+> -		return TPS65219_BUCK_VOLT_MAX;
+> -	else if (val > 0x20)
+> -		return 1400000 + (val - 0x20) * 100000;
+> -	else if (val >= 0)
+> -		return 600000 + val * 25000;
+> +	else if (val > TPS65219_BUCK_REG_3V4)
+> +		return TPS65219_BUCK_3V4;
+> +	else if (val > TPS65219_BUCK_REG_1V4)
+> +		return TPS65219_BUCK_1V4 + (val - TPS65219_BUCK_REG_1V4) * TPS65219_VOLT_STEP_100MV;
+> +	else if (val >= TPS65219_BUCK_REG_0V6)
+> +		return TPS65219_BUCK_0V6 + val * TPS65219_VOLT_STEP_25MV;
+>  	else
+>  		return -EINVAL;
+>  }
+> @@ -161,7 +161,7 @@ static int tps65219_ldo_volt2val(int idx, int uV)
+>  	if (uV > max)
+>  		return -EINVAL;
+>  	else if (uV >= base)
+> -		return (uV - TPS65219_LDO12_VOLT_MIN) / 50000;
+> +		return (uV - TPS65219_LDO12_VOLT_MIN) / TPS65219_VOLT_STEP_50MV;
+>  	else
+>  		return -EINVAL;
+>  }
+> @@ -187,7 +187,7 @@ static int tps65219_ldo_val2volt(int idx, int val)
+>  	else if (val <= reg_base)
+>  		return base;
+>  	else if (val >= 0)
+> -		return TPS65219_LDO12_VOLT_MIN + (50000 * val);
+> +		return TPS65219_LDO12_VOLT_MIN + (TPS65219_VOLT_STEP_50MV * val);
+>  	else
+>  		return -EINVAL;
+>  }
+> diff --git a/include/power/tps65219.h b/include/power/tps65219.h
+> index aa81b92266fd..e8780af2d811 100644
+> --- a/include/power/tps65219.h
+> +++ b/include/power/tps65219.h
+> @@ -17,10 +17,20 @@
+>  #define TPS65219_BUCK_DRIVER		"tps65219_buck"
 >
+>  #define TPS65219_VOLT_MASK		0x3F
+> -#define TPS65219_BUCK_VOLT_MAX		3400000
+> -
+>  #define TPS65219_ENABLE_CTRL_REG	0x2
+>
+> +#define TPS65219_VOLT_STEP_25MV		25000
+> +#define TPS65219_VOLT_STEP_50MV		50000
+> +#define TPS65219_VOLT_STEP_100MV	100000
+> +
+> +#define TPS65219_BUCK_0V6		600000
+> +#define TPS65219_BUCK_1V4		1400000
+> +#define TPS65219_BUCK_3V4		3400000
+> +
+> +#define TPS65219_BUCK_REG_0V6		0x00
+> +#define TPS65219_BUCK_REG_1V4		0x20
+> +#define TPS65219_BUCK_REG_3V4		0x34
+> +
+>  #define TPS65219_BUCK1_VOUT_REG		0xa
+>  #define TPS65219_BUCK2_VOUT_REG		0x9
+>  #define TPS65219_BUCK3_VOUT_REG		0x8
 > --
 > 2.34.1
 
