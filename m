@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C905E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:06:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0455E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDE6380269;
-	Wed, 18 Dec 2024 15:05:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36EBF80241;
+	Wed, 18 Dec 2024 15:08:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="gp9sSCdP";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ODD+8xKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C13180274; Wed, 18 Dec 2024 15:05:57 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id BA8BD80269; Wed, 18 Dec 2024 15:08:10 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6C708022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:05:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2631B8022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:08:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 33E8AA41BA2;
- Wed, 18 Dec 2024 14:04:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EF0E2C4CECD;
- Wed, 18 Dec 2024 14:05:49 +0000 (UTC)
+ by nyc.source.kernel.org (Postfix) with ESMTP id A1885A42088;
+ Wed, 18 Dec 2024 14:06:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54A3BC4CECD;
+ Wed, 18 Dec 2024 14:08:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1734530753;
- bh=4cTMeusGZafpAeWjhYYv8kZsKP1NkG3uWFPUU1sAphE=;
+ s=k20201202; t=1734530887;
+ bh=M/VsDFYGw15F/GDX+qo/c0LKW/pkrzRqjbGGnB78EmY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=gp9sSCdPOZA8/xa5aby5fdrme39uVYNDdy05g5O3Qyyn5dISuV0OEwZVapS8jwphj
- 7O3g77yy418VMoei+nzUbreb3/GPw322JXC4p0qMjC0Rt86J8TmDWVFMZurUi5lr/k
- dXXI4M4lYZwZYwN+z0iR7z2E/M4UT2FxkrakQlD/nQJ/bbfukGkZrqsbHAh8SQDuQ5
- z0CQ3vQt+q3QCD5ED1J9XvEelrAs1CkgRTD4Ypqugg438cso9pORGzuDu6libpOFpF
- qdes5eH1XP3wSeWGR3DnzGVFYyrOmhhaRPxL2T6wfrU3ROKWgeL+Q51zDyKi24Xy0X
- 4PS4UvAFux0xg==
-Message-ID: <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
-Date: Wed, 18 Dec 2024 16:05:47 +0200
+ b=ODD+8xKZmb/+MNBiRS0Zzea885uzyrUe4o+xBOl+0LYXMC9GB4PZQU5ITBmg2pX81
+ PeoaMiLj+L7Ce+7TR6si+mBMyg6YT9khRhrqZYpQo7xh4TMzP0hj2ebQzRTPmoPRJE
+ LIW4jSeBiWFMelS+FguB/T6guo1fKydGOacRZtlztk/EWsAlKg+bJJmuavWWwxSE7s
+ TsdYfoMO/evd7M7PLzd3FNQvfFmgzH0n7aMaWwagTW9/lqJxiDGmAVaKAp0ay+DuGd
+ Z458m4ZOSCl/JPVE7x3TsM+7CEuVRyNd8TsZVzTpWmLpOtD5SMWzeKXsbsrV6gzqd7
+ lwC25zf25JUrw==
+Message-ID: <ebc7bc88-1545-4a53-8cd0-1c9812723025@kernel.org>
+Date: Wed, 18 Dec 2024 16:08:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for USB
- DFU boot
+Subject: Re: [PATCH v2 5/5] doc: board: document support for USB DFU boot on
+ AM62Px SoC
 To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  trini@konsulko.com, lukma@denx.de, n-francis@ti.com,
  mkorpershoek@baylibre.com, afd@ti.com, glaroque@baylibre.com,
@@ -54,10 +55,10 @@ To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  nm@ti.com
 Cc: u-boot@lists.denx.de, srk@ti.com
 References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
+ <20241218124542.3519447-6-s-vadapalli@ti.com>
 Content-Language: en-US
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20241218124542.3519447-5-s-vadapalli@ti.com>
+In-Reply-To: <20241218124542.3519447-6-s-vadapalli@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,47 +77,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Siddharth,
+
 
 On 18/12/2024 14:45, Siddharth Vadapalli wrote:
-> Enable USB0 instance of the USB controller for USB DFU boot functionality
-> which requires the "bootph-all" property in order to have USB enabled at
-> all stages of the USB DFU boot.
+> Since USB DFU boot is supported on AM62Px SoC, document the steps
+> required to build the image for USB DFU boot along with the steps to
+> send images using the "dfu-util" tool.
 > 
 > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
-> v1:
-> https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-5-s-vadapalli@ti.com/
-> Changes since v1:
-> - Collected Reviewed-by tag.
+> This patch has been newly introduced in this series based on the
+> discussion at:
+> https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3-s-vadapalli@ti.com/#3432702
 > 
->  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+> NOTE: This patch should only be merged if all other patches in this
+> series will also be merged, in order to ensure that the feature is
+> documented only if it is supported (i.e. all patches in this series
+> which are required for the feature to be functional have been merged).
 > 
-> diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-> index cf087c6e343..c2091fc1a51 100644
-> --- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-> @@ -16,3 +16,13 @@
->  &dmsc {
->  	bootph-pre-ram;
->  };
+>  doc/board/ti/am62px_sk.rst | 31 +++++++++++++++++++++++++++++++
+>  1 file changed, 31 insertions(+)
+> 
+> diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
+> index 99bdc034869..75451ad76b5 100644
+> --- a/doc/board/ti/am62px_sk.rst
+> +++ b/doc/board/ti/am62px_sk.rst
+> @@ -124,6 +124,18 @@ Set the variables corresponding to this platform:
+>      :start-after: .. k3_rst_include_start_build_steps_spl_r5
+>      :end-before: .. k3_rst_include_end_build_steps_spl_r5
+>  
+> +* 3.1.1 Alternative build of R5 for DFU boot:
 > +
-> +/* Required for USB DFU boot */
-> +&usbss0 {
-> +	status = "okay";
-> +};
+> +  As the SPL size can exceed the limit when building it with support for
+> +  booting from both local storage *and* DFU, in order to disable the
+> +  configs not required for DFU boot, a config fragment should be used
+> +  to not only enable configs for DFU boot, but also disabled the unneeded
+> +  configs.
+> +
+> +.. prompt:: bash $
+> +
+> +   export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
+> +
+>  * 3.2 A53:
+>  
+>  .. include::  ../ti/k3.rst
+> @@ -290,6 +302,25 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
+>  
+>  For SW2 and SW1, the switch state in the "ON" position = 1.
+>  
+> +DFU based boot
+> +--------------
+> +
+> +To boot the board over DFU, set the switches to DFU mode and connect to the
+> +USB type C DRD port on the board. After power-on the build artifacts needs to be
+> +uploaded one by one with a tool like dfu-util.
+> +
+> +The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
+> +upload. The next stages as exposed by U-Boot have target alts matching the name
+> +of the artifacts, for these a USB reset has to be done after each upload.
+> +
+> +When using dfu-util the following commands can be used to boot to a U-Boot shell:
+> +
+> +.. prompt:: bash $
+> +
+> +  dfu-util -a bootloader -D tiboot3.bin
+> +  dfu-util -R -a tispl -D tispl.bin
+> +  dfu-util -R -a u-boot.img -D u-boot.img
 
-This should come via upstream DT sync?
+Is there a known reason why -R was not used for the first command but required in last two?
+What about if -R is not used for all 3 commands?
 
 > +
-> +/* Required for USB DFU boot */
-> +&usb0 {
-> +	bootph-all;
-> +};
-
-This as well? But I don't see it upstream. Do you have a patch for upstream DT?
+>  Debugging U-Boot
+>  ----------------
+>  
 
 -- 
 cheers,
