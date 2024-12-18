@@ -4,39 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80BBE77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 19:42:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0248AE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 19:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEF60802EF;
-	Wed, 18 Dec 2024 20:42:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8494F80291;
+	Wed, 18 Dec 2024 20:43:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fVRtpHQY";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61147802F2; Wed, 18 Dec 2024 20:42:30 +0100 (CET)
-Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 92321802B4; Wed, 18 Dec 2024 20:43:36 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBE7180291
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 20:42:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD2368022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 20:43:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=tharvey.pdc.gateworks.com)
- by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1tNzwA-002gK3-7X;
- Wed, 18 Dec 2024 19:42:26 +0000
-From: Tim Harvey <tharvey@gateworks.com>
-To: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] spi: mxc_spi: use proper clock for SPI bus
-Date: Wed, 18 Dec 2024 11:42:24 -0800
-Message-Id: <20241218194224.1867039-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6dccccd429eso253296d6.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:43:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734551013; x=1735155813; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bjaIc+QjN4lwhF2Rj642/LW0Q74Zrt9ueV3lbvPU6bQ=;
+ b=fVRtpHQYMe9ZI9rMFlupF+qMizxthjdOJWojTJAYUkHFNWvQkabundwKbnjTVVNyMc
+ NEMAAFESGBQtkbWZzW7xhglRnWNxJO1XyGtgdr+ZQ90UCiUGwgX1xSmXwnWYQ4mxsJz3
+ H7yV7FTCZ/vTaIn77wqf/E2bgFFdr1f+UU42s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734551013; x=1735155813;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bjaIc+QjN4lwhF2Rj642/LW0Q74Zrt9ueV3lbvPU6bQ=;
+ b=h+dhqaOtZBt+sCNvSu7MGphVi0ojdNd30KBLPF7wIAqmmlQ83rl2xuZB5ajBaw4C8G
+ w+waTAHaWSJA8FoS+skY4FT0hW6PDqSW1BX788c7IztU8xGmg1avCHyGVEK1acMjW1Sr
+ is73RnmI+cUa54OCnkA4h/EE6dgTlH/++4f4ghkk5pexw2bAeGRaI4AUBYK8MmRpucz8
+ 7x/qwgxTBzw6aUj9+FqyK1xmMo07dCGBLMJmFyDRpZxDPU9kJxSLtGCAAt94SBxHi4gX
+ jKw1ehpGRrojqSqwnzB0Vyi4jPYhQZyIy+m/AMpQTUgZ5V31H2OdiQMq2/Hutsqwc9VO
+ r9Mw==
+X-Gm-Message-State: AOJu0Yyjj1/AAk2Itw7uSHPLBcaMvFiGalbAh8jLFsMR++PASpOIMz9v
+ vmmW/HHn2Os7z/ZtMeVmtMtxe8+4Rcua0OOJ61zF7kHtZjBz31NSwh/NM75V7S0=
+X-Gm-Gg: ASbGnctC0ff6Im0TdGjuYMaQNwM6EVk1HfI4KLO+D60v1RzpuWMucN/IGkwrm2NM6nH
+ hoUO29gptIv+8+nVt+CGpH1k6OAUR9jJQPlHw8sLebfF2GlxRrBfMD3U5qEHrRw+7JNMNGekv3k
+ dfY/KdM8JZNuUWrOs2Y7gmO0xHOS8dal5NkkI4yK/J+uNJrU/dAfRThEImi/mLwQAI8LoXjMswa
+ oYkT3LbmrnGXRlyz0xvIDCEMxYQhsj0NUbLPrnyk938fVzrfeOAjTsF
+X-Google-Smtp-Source: AGHT+IFI2V1RNrqdIFKc7y7sJ3/m9/r7I2dAC5HnhYD1TGwVpFpxGoPiok40TOihSfKSrLKnuD2ZyA==
+X-Received: by 2002:a05:6214:2a89:b0:6d8:8256:41d4 with SMTP id
+ 6a1803df08f44-6dd091afa71mr74593956d6.19.1734551012724; 
+ Wed, 18 Dec 2024 11:43:32 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6dccd26e4f8sm53897586d6.67.2024.12.18.11.43.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 11:43:31 -0800 (PST)
+Date: Wed, 18 Dec 2024 13:43:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
+Message-ID: <20241218194327.GO1505244@bill-the-cat>
+References: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zkgJYXNHxcWSqZcT"
+Content-Disposition: inline
+In-Reply-To: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,67 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mxc_get_clock function is around for compatibility with older
-drivers that are not clock aware. In this case asking for the clk for
-MXC_CSPI_CLK does not take into account there are multiple SPI busses on
-modern IMX SoC's and it will return the clock for the first bus which
-may not be used or configured.
 
-In the case you are not using the first bus you will not get the proper
-clock. Fix this by obtaining the clock rate from the bus clock.
+--zkgJYXNHxcWSqZcT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This resolves an invalid SPI clock frequency configuration for SPI2 on a
-board where SPI1 is not used.
+On Wed, Dec 18, 2024 at 08:41:28PM +0100, Marek Vasut wrote:
+> TFTP transfer size can be used to re-size the TFTP progress bar on
+> single line based on the server reported file size. Enable it by
+> default for Renesas hardware to avoid long scrolling walls of '#'
+> character during long TFTP transfers.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Adriano Cordova <adrianox@gmail.com>
+> Cc: Anand Moon <linux.amoon@gmail.com>
+> Cc: Baruch Siach <baruch@tkos.co.il>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> NOTE: I wonder, shall we simply enable this by default ?
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
----
- drivers/spi/mxc_spi.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+Any chance you did a size comparison before/after this patch? That'd be
+handy to know for making this default for everyone.
 
-diff --git a/drivers/spi/mxc_spi.c b/drivers/spi/mxc_spi.c
-index 9ab39a188b22..2c9b0ada87ba 100644
---- a/drivers/spi/mxc_spi.c
-+++ b/drivers/spi/mxc_spi.c
-@@ -114,6 +114,9 @@ struct mxc_spi_slave {
- 	u32		ctrl_reg;
- #if defined(MXC_ECSPI)
- 	u32		cfg_reg;
-+#endif
-+#if CONFIG_IS_ENABLED(CLK)
-+	struct clk	clk;
- #endif
- 	int		gpio;
- 	int		ss_pol;
-@@ -214,7 +217,11 @@ static s32 spi_cfg_mxc(struct mxc_spi_slave *mxcs, unsigned int cs)
- #ifdef MXC_ECSPI
- static s32 spi_cfg_mxc(struct mxc_spi_slave *mxcs, unsigned int cs)
- {
-+#if CONFIG_IS_ENABLED(CLK)
-+	u32 clk_src = clk_get_rate(&mxcs->clk);
-+#else
- 	u32 clk_src = mxc_get_clock(MXC_CSPI_CLK);
-+#endif
- 	s32 reg_ctrl, reg_config;
- 	u32 ss_pol = 0, sclkpol = 0, sclkpha = 0, sclkctl = 0;
- 	u32 pre_div = 0, post_div = 0;
-@@ -599,14 +606,13 @@ static int mxc_spi_probe(struct udevice *bus)
- 		return -ENODEV;
- 
- #if CONFIG_IS_ENABLED(CLK)
--	struct clk clk;
--	ret = clk_get_by_index(bus, 0, &clk);
-+	ret = clk_get_by_index(bus, 0, &mxcs->clk);
- 	if (ret)
- 		return ret;
- 
--	clk_enable(&clk);
-+	clk_enable(&mxcs->clk);
- 
--	mxcs->max_hz = clk_get_rate(&clk);
-+	mxcs->max_hz = clk_get_rate(&mxcs->clk);
- #else
- 	int node = dev_of_offset(bus);
- 	const void *blob = gd->fdt_blob;
--- 
-2.25.1
+--=20
+Tom
 
+--zkgJYXNHxcWSqZcT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjJdgACgkQFHw5/5Y0
+tyz8pQv/eQ30k8lPmvBiPcJdPzGDYELDSmVLPAdpi/KcWsFlDUMkWWCCf2+j2ivI
+KdUv3VuP8qNBkXuvBvv9/QfdPnNsDJkH4X5K6D0VEsV63tKYebbqN7GOU9OMbVc+
+a7FcnNih1VmZgxngwjfPbrq4V8YvzMLEsKD4aJeLJn551woGqAMg4U7YYgHdYCcF
+m5VfLubGquhx2nUnbbZoufI9584gvgmaMvatv1byyTinnBMrBUyFVBkJQrT24duQ
+uijeQnwU3E6KAi+tbh6zqE1vUQfPqxfZkueZ7JRRl08tItV6xR37D1ydjbKiJW32
+pM5xBoSOAhtO1hLLmUvqEJ9Z0WulmzjX4StF37+Ocl+6yz+P4PHecNqYD90ixWha
+Dunfx/AoAWMx11MSiOztm7p5p7TFPLUeHnFNSBzkMG6a5ylLfPz888EUS18AOA3H
+wfTfASjoXcyOcVCUjn7L9ngYjyyus/3ncXRK1kYbERDq+6MeIsEKhm6IPDhHKEKt
+eWyNAY80
+=Tqiu
+-----END PGP SIGNATURE-----
+
+--zkgJYXNHxcWSqZcT--
