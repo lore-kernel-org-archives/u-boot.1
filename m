@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E954E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 15:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012F2E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 15:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8F4D80241;
-	Wed, 18 Dec 2024 16:23:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4A7AD80241;
+	Wed, 18 Dec 2024 16:27:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Me2cDJb8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GEY7Z5Qg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D5780269; Wed, 18 Dec 2024 16:23:30 +0100 (CET)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 9EA3780269; Wed, 18 Dec 2024 16:27:16 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 387208022B
- for <u-boot+nodisclaimer@lists.denx.de>; Wed, 18 Dec 2024 16:23:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB838022B
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 16:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7ee11ff7210so4870952a12.1
- for <u-boot+nodisclaimer@lists.denx.de>; Wed, 18 Dec 2024 07:23:28 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6e5c74cb7so515051385a.2
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 07:27:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734535407; x=1735140207; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xRzbCM0EcnPQyoNx7uRDpsQ37ZGKBidRge/fq63yODM=;
- b=Me2cDJb8fAtv8XmDzyXx1wa+TUvnjMF8w6Q/ipD0y8xYB7GaDOYbJ8y1hZFNt7nboD
- hgRcVA3NlBqSMPZpFp2Md+1JSqM4LjsS+RzRSBaSOrPsYb9i9TAIghlknSEhKEf6JjyB
- v2hawyB60GiRyeDPRBUly1sIBcjNTeu0bNm43h7ULBYY71V8e3UABwhjfjSu3KVidHIA
- T+qbITs87+ZHmjOTI7J/fdV6YCgu7Hp1dIqL70/i0LaBayhbDLsm66XS2SpwhpFcB893
- ZeQIPTLAJQq81vbQNYFbPffqabE+txwVlvWBHyM8rZel4FSA1J5xq8nmSskZ7qCSIuw8
- K2Jg==
+ d=konsulko.com; s=google; t=1734535633; x=1735140433; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=480H06WZGMyWLXZlrpA3I3aCM/LTduT797PttCsZmlQ=;
+ b=GEY7Z5QgGqxJ+XO3OQbBi6BMW2S+Z5Z2wOhOhXjTj0gBDDwpoK4kM28MH1lhruJAVN
+ HtKBQ9FG9Qerfy2lmXmM9qV+zjK+XMMhWXa05VQHxU+J5H9Q1SmScDDtZDpFpulxCTOl
+ geuHm25sBGzdXKDRSvwVMa26jLfk6VfQQXres=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734535407; x=1735140207;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xRzbCM0EcnPQyoNx7uRDpsQ37ZGKBidRge/fq63yODM=;
- b=hkdCBeLUQ6EYlrUO5U1wjgMS4aX6FdB1t/skjNcjFIPJ/50HlEQLhyS257GmW/MO6o
- PHB8E9ZoX1up8AVAzC8vV9/o0MLKxx25xiaLFb+cou5g5tEEcgIt+MCbOACNzLDZIgln
- 2lCDlCdKtp8XHPFRci7925TDXro+HBdG+qfYFurq6GmVjwkvxrrGHcwrHsVCn2GpmiMp
- WQFvqewjY+o4wOvB9bWurEFrMkFaphxrYJLwFVVHWzLndSXOfve8X6BlGXLLwXz13X0F
- 7Xr7S15MhMda2NA2EZ6dQjulEC0gsZSVT5DM67vsywvBrITbqObf4DKyZgluZfc8kjVi
- rydg==
+ d=1e100.net; s=20230601; t=1734535633; x=1735140433;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=480H06WZGMyWLXZlrpA3I3aCM/LTduT797PttCsZmlQ=;
+ b=WcbSDXLHve3G2KjjcGtQV+kQNpRz/B7jdIXHuGSCDAfJB+HgBd0jTIbBSk/G/zYMEh
+ BoEHhs1Kw33VFV1fVMNnnY5SUCC4nC04mq5OfRShV2tTKyWTjxXGGsedPfkHx81DAEB/
+ ezeUPYmEHIOT4yVVnThnvJURjHgX98c9yDhqFcl9cAwN436vKeYuMB4FMgwfVV/7LcPv
+ 2IVmTcG558WhP4yuwXD2MdzupTqMzWXTlQQrRjLMFLgm6s3d7SRE9dRhd3B6GIcon+LR
+ cj/KxKEw4kfJjE5fsX2xImCj0AkTH+F1/U0uC/PRnkfjCJqrEZEcGUOcAVq3pxLc14xR
+ ysMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOgpHP6ZrdA+1xaNcVvISK2NIdnWMWrdGRq1WJJpQ/QLwXtUXIecCj2KonW9K9N+TVmwILevg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQw0RYK/DpZAMt7OAx8bezc4nipPJI9vyGr7t+oqsAAGwID0wo
- hkqra4Jk/GXBAeWL0mKkeTYgPnAnAjZHFWcteaDgI109/x1hQ8hO5LvMeFKLgClwQyByxfN2Dpk
- aoECn/iFCXFKHglfalgU241UcDvma5ArNdI/J6A==
-X-Gm-Gg: ASbGncs5DjBB/kmXz3YqXVHqqDTdAOEGgOGPGRObzjEXtCcN+7UyQpZcTfrFG9gCZ2y
- T8jqsvhvPRgMHH5vDf/FCnbXQX5rTv5p5S5u5uy9YBT0JL8pp1Dz3Jmi0fqGsEF2ZjWqH648=
-X-Google-Smtp-Source: AGHT+IGyNFum66S/XMytt2YFfKap8mdP7O7/k0vMYwiNaLC5bdFvbWwW5qv4T6aBU5f69/HaCjptKfDOQYb/Efobna8=
-X-Received: by 2002:a17:90b:2543:b0:2ea:696d:732f with SMTP id
- 98e67ed59e1d1-2f2e933d4d3mr4948787a91.29.1734535406771; Wed, 18 Dec 2024
- 07:23:26 -0800 (PST)
+ AJvYcCUxIhgVLn90laxV3KFQ2eHul0QUy2v5PkwJKhbhdaTYrrr1HMbu4Ryzu2AspeDDvBAaGWfFBGs=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw75et4Sb099O6ssxvqiTms8q6YkT06dJVeVZ2XBve7C/WRXTfV
+ r6RFxwnIu1TTL0bSDVRSpv36+2hTmtNg2mIzPeNqEs0pijhFj7H3jWwVrwi5K7s=
+X-Gm-Gg: ASbGncs9WlJNu+xel0cgCFYrKYXBqQHh0bFmZ4V/x8P8cu86VsUv6xduHi9JcHX6P75
+ T/Xy8yReLNMxABbdNz2xwQv6NJ5NY+o9k9/HC5RyXYj0ZszGUjOufW7qOwiLgqzF7xSMAtoY+Jt
+ u2poPhmDjM66lqi2w7Pmaz9IxcDOrCp3j6SP2NdIsCB3iCYQoYwHmViZvzo5UFUkJFebpC69WtD
+ Mfxz9asrRey/ckkhdDqayrmBiewEZiZPxeRlHn6dxbmBhG1Yksux2Bq
+X-Google-Smtp-Source: AGHT+IF5y0JOIjudBcW0fgySqc96/jDDX8FgQz7IL5hLP7R9nVLbBxwsoud78ioD614g6WaGg+6UhA==
+X-Received: by 2002:a05:622a:345:b0:466:8616:2553 with SMTP id
+ d75a77b69052e-46908eb4b4cmr48431091cf.48.1734535633150; 
+ Wed, 18 Dec 2024 07:27:13 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-467b2ecf137sm51291221cf.86.2024.12.18.07.27.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 07:27:12 -0800 (PST)
+Date: Wed, 18 Dec 2024 09:27:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Paul Geurts <paul.geurts@prodrive-technologies.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH] imx: Fix usable memory ranges for imx8m SOCs
+Message-ID: <20241218152708.GB1505244@bill-the-cat>
+References: <20241218090007.692815-1-ilias.apalodimas@linaro.org>
+ <93a5b107-63c7-4d44-a0f4-f4079935f8e8@kontron.de>
+ <CAC_iWjJxi9mkaAbR6DFHCZ13FNSnkWKSkFLZa_PLpvDOuZq9bw@mail.gmail.com>
+ <20241218143440.GA1505244@bill-the-cat>
+ <CAC_iWj+Tdayh_YNkMA1xvfG0MujXPwvyUdaL209RH2Ch93ShdA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20241217213613.286813-1-philippe.reynes@softathome.com>
-In-Reply-To: <20241217213613.286813-1-philippe.reynes@softathome.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 18 Dec 2024 10:23:14 -0500
-Message-ID: <CAEfUkUK3=yia5kmG7YO-niUUVSLtSZfjZS-k_4qEAe-6V5F9nQ@mail.gmail.com>
-Subject: Re: [PATCH v6 0/9] add the support of sha256_hmac and sha256_hkdf
-To: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
- u-boot+nodisclaimer@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="T/FP+5aQRaH+8RnS"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWj+Tdayh_YNkMA1xvfG0MujXPwvyUdaL209RH2Ch93ShdA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,78 +106,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Philippe,
 
-On Tue, 17 Dec 2024 at 16:36, Philippe Reynes <
-philippe.reynes@softathome.com> wrote:
+--T/FP+5aQRaH+8RnS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> This serie adds the support of sha256_hmac and sha256_hkdf.
-> A first version was sent several months ago just before the
-> integration of mbedtls. This new version is based on mbedtls.
->
-> The first patch of this serie add the support of hkdf
-> using mbedtls.
->
-> v6:
-> - use const for test
-> - set buffer to 0 before using to to compute hmac
->
-> v5:
-> - use mbedtls to compute hmac
-> - add tests for hkdf
-> - enabled mbedtls in sandbox_defconfig
-> - some cleanup
->
-> v4:
-> - fix computation of the hmac
-> - add more test for hmac
-> - move sha256 common functions to sha256_common.c
-> - some cleanup
->
-> v3:
-> - also define sha256_hmac for legacy sha256
-> - add some #if to define function only when needed
->
->
-Can you add my review tag to the commit messages for those ones I stated if
-there are no new changes?
-So that I can skip them in the next round.
+On Wed, Dec 18, 2024 at 04:50:09PM +0200, Ilias Apalodimas wrote:
+> Hi Tom,
+>=20
+> On Wed, 18 Dec 2024 at 16:34, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Dec 18, 2024 at 11:24:45AM +0200, Ilias Apalodimas wrote:
+> > > Thanks Frieder
+> > >
+> > > On Wed, 18 Dec 2024 at 11:17, Frieder Schrempf
+> > > <frieder.schrempf@kontron.de> wrote:
+> > > >
+> > > > On 18.12.24 10:00 AM, Ilias Apalodimas wrote:
+> > > > > commit e27bddff4b97 ("imx8m: Restrict usable memory to space belo=
+w 4G boundary")
+> > > > > tried to adjust the usable memory limits on a 4GB boundary.
+> > > >
+> > > > I would be nice to also mention 74f88b72219e ("ARM: imx: imx8m: Fix
+> > > > board_get_usable_ram_top()") which actually introduces the value of
+> > > > 0xFFFF_FFFF. I guess it would even qualify for another Fixes tag.
+> > >
+> > > Ah thanks, Tom can you amend it or want me to send a v2?
+> >
+> > patchwork / b4 will pickup a Fixes tag, but if you want to
+> > further-reword things instead do a v2 please.
+>=20
+> Great, I am fine with the current commit message unless someone has a
+> better idea.
 
+Fixes: 74f88b72219e ("ARM: imx: imx8m: Fix board_get_usable_ram_top()")
 
-> Philippe Reynes (9):
->   tools: kwbimage.h: use linux/compiler_attributes.h
->   tools: renesas_spkgimage.h: use linux/compiler_attributes.h
->   mbedtls: enable support of hkdf
->   lib: sha256: move common function to sha256_common.c
->   lib: sha256: add feature sha256_hmac
->   test: lib: add test for sha256_hmac
->   lib: mbedtls: sha256: add support of key derivation
->   test: lib: add test for key derivation
->   configs: sandbox: enable mbedtls
->
->  configs/sandbox_defconfig        |   2 +
->  include/u-boot/sha256.h          |  24 +++
->  lib/Makefile                     |   1 +
->  lib/mbedtls/Kconfig              |  14 ++
->  lib/mbedtls/Makefile             |   2 +
->  lib/mbedtls/mbedtls_def_config.h |   4 +
->  lib/mbedtls/sha256.c             |  59 ++++---
->  lib/sha256.c                     |  67 ++++---
->  lib/sha256_common.c              |  50 ++++++
->  test/lib/Makefile                |   2 +
->  test/lib/test_sha256_hkdf.c      | 198 +++++++++++++++++++++
->  test/lib/test_sha256_hmac.c      | 294 +++++++++++++++++++++++++++++++
->  tools/Makefile                   |   1 +
->  tools/kwbimage.h                 |   6 +-
->  tools/renesas_spkgimage.h        |   6 +-
->  15 files changed, 670 insertions(+), 60 deletions(-)
->  create mode 100644 lib/sha256_common.c
->  create mode 100644 test/lib/test_sha256_hkdf.c
->  create mode 100644 test/lib/test_sha256_hmac.c
->
-> --
-> 2.25.1
->
->
-Thanks and regards,
-Raymond
+--=20
+Tom
+
+--T/FP+5aQRaH+8RnS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdi6cQACgkQFHw5/5Y0
+tyyF1gwAhhhIvihc4B14acqw8o+owPH08AlK/RBwfzL3QxzCiilfJDdReOc9T8eh
+Fd2gzwEWaeTfFBmN0bCfYjNoVLZztrcSFSRW6EHr5qD/TMGqdjOhzX0XySXIO+Dc
+zOdZBJQOnFf0j/YY0EitPezR44dpmmUyRyLwMLM9d6gMazb/DbLOp/BU8eqaY3Ee
+P4a93DGE1v5HWH++q3Pr3zd4A3YmcBypoZbDFWxZQeqRQagqB4TTkMt3VC2TnM95
+IUuvntLlmqH4oEZ6FQt+RP+zKe6wIgvS/u9K+6EuU9tN2ZPXTx49g4eP//iMRrsp
+9eG3BKRu8bkxQd2G7JnWUiGDRuTFLJGLua0ZyLZTlq/OBMReuewQ9NQZsUe7JHe1
+D8pTeiQAsChCufezwvrSJER+Wy7xhqM6s6b+SIS+fw0DhrfG3QFCQ7bPUoe+VTOH
+eLzqVtWGOk7unwMbcvKBT+Hax34HCnAwCKLlZBV1VFhvIWZB5+bYv0lTVzpCWwJ8
+QMS7qjoQ
+=K0zO
+-----END PGP SIGNATURE-----
+
+--T/FP+5aQRaH+8RnS--
