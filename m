@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A75E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1F2EE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 13:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3B138021A;
-	Wed, 18 Dec 2024 13:59:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A6988021D;
+	Wed, 18 Dec 2024 14:00:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2vBHeqMC";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s56+M17r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1FE48021D; Wed, 18 Dec 2024 13:59:43 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 8EEC680243; Wed, 18 Dec 2024 14:00:17 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 916B680214
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:59:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 444B880214
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 14:00:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-385d7f19f20so3276802f8f.1
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 04:59:39 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4361dc6322fso43142315e9.3
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 05:00:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734526779; x=1735131579;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734526815; x=1735131615;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FtYhmAHpiFNCRCgbWGs6FZJAujUpPPmM9g1qkAj5oRs=;
- b=2vBHeqMCwoiP8XZUHCQTNkl1MsSwYMLBdZwgzxpOt9YpspLpGSYMu7vuSBtAhLpvbA
- YnDxFLDnEvLuFKbheDizeg9Pnv/dAWQPDOCHaLjl21HN7hUAFhyo2oyT85XhAquN0Bw9
- rH5DXeLJgSF2YkKq5XN59ePpsQPdZCxgDcoKSASLJCtyTuOYx04bxuhAA/xsMq+GAI+v
- iS+3EHcAXMhxSB146VCsedEMgY7yp6X+9yAlyMQ3IUjI3dIqu8xmzXWWPhjnmBKA7L+u
- JOZC0/017JI5sdpQGDcv3yO+mgkaPmqTLBrNJ/p/AYTNMx3VkqP9e4MqJbbUvv53iUkp
- yFVA==
+ :reply-to; bh=c9DpYgfZQwo1RNQgkpBJ7wD5VfAmJemn1lian6+oRQ8=;
+ b=s56+M17rngN3TqGt5zvpA8kuL/BDBbdluOYnolZDGkxM0q2fXBTnKfavabFZcqQapq
+ /nNKk5ZZbH0qmJuLXUv74f6+egMimgnFVrFcWKlHmW5j7rnK3XNZDkk6yOVJp4RixjiO
+ ueT9dvqCSgbIZdDC2x85103DhajC3QwtT1BrkyunqzdYU6DfhpAH7BZUFY5wXTu/KdTb
+ xzNYGf40UQL7fIVgvy9guYaZcc7oa2topjuiPcU+nvS/Pg87k2JtLLwFZ/W0yeRSmJr9
+ oW+ESUffDJY2rJ2oFG72irDclIZH9Pkz5GMdSmqcV9+0wS/BgCkYmsqj4YXyfFmfht7n
+ HOsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734526779; x=1735131579;
+ d=1e100.net; s=20230601; t=1734526815; x=1735131615;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FtYhmAHpiFNCRCgbWGs6FZJAujUpPPmM9g1qkAj5oRs=;
- b=bT+gvjQWnZW49RUsIZW3a/NCn0tTItdoLQPufSUexMM5cGOyJ4/4IPMQQZQIJNjkSo
- nGwQJrLBHrLgV3okxbfckh274493viybbToo+v/SGdqM9o6ydYfbOC2jeK9/1Eribn5u
- vJsO6RBSg6/gkM0I/jHU4ApgBSbqzTjmHQ4kq9bsftN7XKp3uLFERmZJrqt7uInOnCGq
- U/MqbAErvCCboA5VZlLNJzhC3KP7UHSe9zt4+ib8MxRh/uMgbPSMX7Wb5oBrdvRhYXv1
- DdqIEowgdaZQwI4Ps7bYpu/y2S1fpjkG0+rVveY9XdbMV7w7711yvBipIjYWiKEoXUOF
- 3WVw==
-X-Gm-Message-State: AOJu0YxugrU1ui6KKooZbfj/x0Inj3KBSpC7+hwEt3/x7tX9ziEHCgiV
- vpqWLzHxADeoQMqt78eoZQigRNz7ikKV67z+up5emHj8D1VvByMFmTm3P0T82bA=
-X-Gm-Gg: ASbGncuf4Ts8JTezBBcfWWwFEVtvv9xgjawNw/EEPviMfBP0y3DzwlsKhPsD3t8TeEc
- UwPo5rCp0rdPZwm9L5JMqr4PRa6zSbfcpFqaXxa3WNDPI8ij5rR3b054vbSmMec9WRDUUCkNw1J
- Wsq8QFm7Y2H1Zngqj4cDQg3UBuO96DyfhqwdhO2SXg+ZIQ6TP6CRBzxSqG9yZoYUZsVPhuuiVGm
- GqXaC3cdJS+7+9jHVtyHdm4fBCeSsCQpBY0DuTm1jGcFCzDYR5wvr5QYEsW74iE5w==
-X-Google-Smtp-Source: AGHT+IFYMRqdojd99KPHgtXPwupOiNlaN7BipASgEfaPodlyhacVoW6unTIzFe2alOiiDgr2E+vumg==
-X-Received: by 2002:a05:6000:144c:b0:385:ec89:2f07 with SMTP id
- ffacd0b85a97d-388e4d5db3fmr2282887f8f.32.1734526778845; 
- Wed, 18 Dec 2024 04:59:38 -0800 (PST)
+ bh=c9DpYgfZQwo1RNQgkpBJ7wD5VfAmJemn1lian6+oRQ8=;
+ b=NhLI/Li9FJosS7/kgBdhj14LIqwJf2A0GZ7raA5stMbTSnipVN/TuudPSR56pPcqPQ
+ TS7Q68eo1T/Y/h0QdW5xPj+k/2PK1GympeINktHOe5o6GmpMs7XCDZAHVboOkIbTpoTJ
+ GUpdEvEe3so6chkHAZeA2zk12/8NEAMmT8J5WJraIl7nwO/Z0kO0ySqgJRUq4v9Pnzes
+ RXY+8eodHunTbAPSaSHRx8wIH/exTpIvp1dqOP/af96K4uhtZT/guqlwOpCvGwFW0wOZ
+ 58M3VG5J9G0jJ7uPhQN/FKG1avwo/pgGzeBNi/NkfGGqpLA3iCmeAQVQJwF4AmT6AVVy
+ O3jg==
+X-Gm-Message-State: AOJu0YycFlvh2pzJjUI5qu2hDJWgA3ip8RYIitGWD4MOOF1MtM3yFhgl
+ 6yHcWJ25XP/aw9CxMfkvdRDG4HE4AwxqgXjSoypXIca4LehuTjYfDtZZU0HLI7A=
+X-Gm-Gg: ASbGnctH5os70iGtSxR1qK6xJJOg9AEi8Ssu7iVFkug66x0L4SFWF6zNzrJNgF80ooA
+ xhPqcV/jkJNPX9WltdBuQRf9bMeezmJBi5eMggxGUltR+iwHzenYv3SBmOGh1Si47nFYUkM8IhX
+ s9q8AO37cdSggmStrrnDnUcJGfa9zqqamBOlV0ZwYekjm34ln8pnw65zq3hRjG49EuBQVaZNh75
+ MNYTDX+pxMzCZfSz8C++HxrOuJ41J2n6DZeK6fS0sp58RZm4/Tih94gX0SNgIlhsg==
+X-Google-Smtp-Source: AGHT+IEmDYI9vf5XOKkCJyfueY8z6bYeuvySCHx5jPrGAZ5nejmHyT2ZJ0enDTc7qpRjEY0lNLBA0Q==
+X-Received: by 2002:a05:600c:3b23:b0:434:f335:83b with SMTP id
+ 5b1f17b1804b1-43655347782mr22231345e9.5.1734526814628; 
+ Wed, 18 Dec 2024 05:00:14 -0800 (PST)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-388c8047324sm14209390f8f.78.2024.12.18.04.59.38
+ ffacd0b85a97d-388c80162b1sm13830856f8f.38.2024.12.18.05.00.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 04:59:38 -0800 (PST)
+ Wed, 18 Dec 2024 05:00:14 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  trini@konsulko.com, lukma@denx.de, n-francis@ti.com, afd@ti.com,
@@ -75,11 +75,13 @@ To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
  rasmus.villemoes@prevas.dk, caleb.connolly@linaro.org, j-humphreys@ti.com,
  rogerq@kernel.org, nm@ti.com
 Cc: u-boot@lists.denx.de, srk@ti.com, s-vadapalli@ti.com
-Subject: Re: [PATCH v2 0/5] Add support for USB DFU boot on AM62Px
-In-Reply-To: <20241218124542.3519447-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH v2 1/5] board: ti: am62px: env: include environment for
+ DFU Boot
+In-Reply-To: <20241218124542.3519447-2-s-vadapalli@ti.com>
 References: <20241218124542.3519447-1-s-vadapalli@ti.com>
-Date: Wed, 18 Dec 2024 13:59:37 +0100
-Message-ID: <87bjx9w3ie.fsf@baylibre.com>
+ <20241218124542.3519447-2-s-vadapalli@ti.com>
+Date: Wed, 18 Dec 2024 14:00:13 +0100
+Message-ID: <878qsdw3he.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -101,103 +103,58 @@ X-Virus-Status: Clean
 
 Hi Siddharth,
 
-Thank you for the series.
+Thank you for the patch.
 
 On mer., d=C3=A9c. 18, 2024 at 18:15, Siddharth Vadapalli <s-vadapalli@ti.c=
 om> wrote:
 
-> Hello,
+> Include the TI K3 DFU environment to support DFU Boot and DFU Flash.
+> Also add "usb" to the list of "boot_targets". While at it, add a newline
+> at the end of the file.
 >
-> This series add support for USB DFU boot on TI's AM62Px SoC which has
-> two instances of USB Controllers, of which the USB0 instance of USB
-> which is a DWC3 USB Controller is used for USB DFU Boot:
-> ROM =3D> tiboot3.bin =3D> tispl.bin =3D> u-boot.img
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
->
-> v1 of this series is at:
-> https://patchwork.ozlabs.org/project/uboot/cover/20241217131658.2920799-1=
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+> v1:
+> https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3=
 -s-vadapalli@ti.com/
 > Changes since v1:
-> - Dropped the first patch of the v1 series since its equivalent has been
->   posted by Jonathan Humphreys <j-humphreys@ti.com> at:
->   https://patchwork.ozlabs.org/project/uboot/patch/20241217204835.3312765=
--1-j-humphreys@ti.com/
-> - Based on the feedback from Mattijs Korpershoek on the second patch of
->   the v1 series, the patches in this series have been updated. More
->   details regarding the changes have been described below the tearline
->   of the respective patches.
-> - Collected Reviewed-by tags.
-
-I have tested this on the AM62Px SK EVM. I did *not* apply the
-dependency (20241217204835.3312765-1-j-humphreys@ti.com) and it worked
-fine for me:
-
-I did:
-$ snagrecover -s am625 -f ./am62px-sk-evm.yaml
-
-Boot logs:
-https://paste.debian.net/1340393/
-
-Also tested that I could enumerate the board with "fastboot".
-
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-
+> - Updated commit message indicating that a newline is also being added
+>   at the end of this file based on feedback from Mattijs Korpershoek on
+>   the v1 patch.
 >
-> NOTE: I did *not* collect the Tested-by tag since this series has
-> significant changes when compared to the v1 series. Though I have tested
-> this series before posting it, I intend to get a Tested-by on this v2
-> series itself after it gets tested.
+>  board/ti/am62px/am62px.env | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 >
-> Series is based on commit
-> 3b3c7280b82 smbios: address build warning
-> of the next branch of U-Boot.
->
-> NOTE: Series *depends* on:
->   https://patchwork.ozlabs.org/project/uboot/patch/20241217204835.3312765=
--1-j-humphreys@ti.com/
-> since the corresponding patch has been dropped in this series when
-> compared with the v1 of this series.
->
-> The USB DFU config fragments for AM62x are to be re-used for enabling
-> USB DFU boot on AM62Px as follows:
-> R5  =3D> am62px_evm_r5_defconfig + am62x_r5_usbdfu.config
-> A53 =3D> am62px_evm_a53_defconfig + am62x_a53_usbdfu.config
->
-> Series has been tested on AM62P5-SK. Logs validating USB DFU boot on
-> AM62P5-SK with this series:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/d70cff3bfff53ef094d3a77=
-5e44f84c7
->
-> Since am62px_evm_a53_defconfig has significant changes in this series,
-> SD Boot has also been validated on AM62P5-SK with the
-> am62px_evm_a53_defconfig of this series. Logs for the same are at:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/971df121c8b69a2b8fb17f1=
-c585ee0f4
->
-> Series has also been validated on AM625-SK to ensure that the changes
-> made to "am62x_r5_usbdfu.config" config fragment being used by AM625-SK
-> for USB DFU boot do not cause a regression on AM625-SK w.r.t. USB DFU
-> boot. Logs validating USB DFU Boot on AM625-SK with this series:
-> https://gist.github.com/Siddharth-Vadapalli-at-TI/627c69150c34171b0652048=
-39c410e92
->
-> Regards,
-> Siddharth.
->
-> Siddharth Vadapalli (5):
->   board: ti: am62px: env: include environment for DFU Boot
->   configs: am62x_r5_usbdfu: extend for AM62Px
->   configs: am62px_evm_a53_defconfig: enable USB DFU support
->   arm: dts: k3-am62p5-sk-u-boot: enable USB0 for USB DFU boot
->   doc: board: document support for USB DFU boot on AM62Px SoC
->
->  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 +++++++++
->  board/ti/am62px/am62px.env            |  5 +++--
->  configs/am62px_evm_a53_defconfig      | 24 +--------------------
->  configs/am62x_r5_usbdfu.config        |  3 +++
->  doc/board/ti/am62px_sk.rst            | 31 +++++++++++++++++++++++++++
->  5 files changed, 48 insertions(+), 25 deletions(-)
->
+> diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
+> index 7ef54079aa8..e0838196e3a 100644
+> --- a/board/ti/am62px/am62px.env
+> +++ b/board/ti/am62px/am62px.env
+> @@ -1,5 +1,6 @@
+>  #include <env/ti/ti_common.env>
+>  #include <env/ti/mmc.env>
+> +#include <env/ti/k3_dfu.env>
+>=20=20
+>  name_kern=3DImage
+>  console=3DttyS2,115200n8
+> @@ -7,7 +8,7 @@ args_all=3Dsetenv optargs ${optargs} earlycon=3Dns16550a,=
+mmio32,0x02800000
+>  	${mtdparts}
+>  run_kern=3Dbooti ${loadaddr} ${rd_spec} ${fdtaddr}
+>=20=20
+> -boot_targets=3Dmmc1 mmc0 pxe dhcp
+> +boot_targets=3Dmmc1 mmc0 usb pxe dhcp
+>  boot=3Dmmc
+>  mmcdev=3D1
+>  bootpart=3D1:2
+> @@ -17,4 +18,4 @@ rd_spec=3D-
+>  #if CONFIG_BOOTMETH_ANDROID
+>  #include <env/ti/android.env>
+>  adtb_idx=3D3
+> -#endif
+> \ No newline at end of file
+> +#endif
 > --=20
 > 2.43.0
