@@ -4,231 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C88DE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5940AE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 17:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D558780269;
-	Wed, 18 Dec 2024 18:24:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F09D80269;
+	Wed, 18 Dec 2024 18:27:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="cbDjXHl4";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="cbDjXHl4";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Ho4iAcTc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A6CE80274; Wed, 18 Dec 2024 18:24:04 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::609])
+ id F190280274; Wed, 18 Dec 2024 18:27:42 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::608])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B560A80241
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:24:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9971180241
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 18:27:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Harrison.Mutai@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=qQ0JMdGVOQh6bqLNXNR65Szm6jDonIt/cXIUhYVV1OV7BVa2TY1ijNK3MTI7NyRE/oZdoOBDpIQYmAMxiPPa34bgqVQSmnMCrH/RicIvfwV170SFxik/caeSBXedG4TXJY8ruBn9L+q8JJ66jvoxK72eQQpkhwv+TYKSm69eAmb2/vSM3crwQ2n52I7SEW6YAAOe4Wzm8dpicaUFN05dB4rM1N0VHNdmYdce6DRJw2NbZF/QPxCvYuxLkxeRpTS0nsGa2vMdJakiK3s10J3xZqi8ZH1BJbj3zNhMjE/C2gIRhkQ8g91Dybxd/m4s3bXSNc+oIhX3rArE/guH9CxYfQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hkv+87bvnmtTEzZ/PuZR+LYAT6+LcFJJ37S+6g/JGck=;
- b=bdKr8eXAlk/rUXLT25BxkwPdtoJA1LWqLQIj07YQ9Iyu/v3iA8XDhsHkD3q6SucW6WZVT9AW6equc9bkA5FIOCogmeyZbL8eF62ly8c+y3dMUYbvGHMRI0m7ljom5j4MMIRMrN4SrpIsZQmO/h/WSllOfD0UcZHrl87Tz3oK/xkRth/jf1F/SSQG4teTrpdkl5nDwjV6aHHnmsdMDOqbu2YYgW0JEK0qzMfD+1JT6OrczpD4MJMV2OkHHy7KZkxmkkRzLHTIbkS2Bp7YY8UObHUv9UuFpz1GOjfppiepVh19RfyVsL+BdwnPlDKLauBU+oVW22jc8zvQkY91FEi0pQ==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hkv+87bvnmtTEzZ/PuZR+LYAT6+LcFJJ37S+6g/JGck=;
- b=cbDjXHl4ReuW6lsYZLRJztT/akRmF11gIRc4EJbGdMD9khoU/RiSS/jkzHvjOh6DY4r5fjqa+asgU4a6wSRGERnSF7KGQx6u1mdAXVJWbICM330WuD73Ta5a2p9MCw7GxJ+4QgpMNwpeVnMm06/xQbyNU3gY7ohp3FwZgYiWNjE=
-Received: from DU2PR04CA0214.eurprd04.prod.outlook.com (2603:10a6:10:2b1::9)
- by AS8PR08MB7353.eurprd08.prod.outlook.com (2603:10a6:20b:444::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Wed, 18 Dec
- 2024 17:23:59 +0000
-Received: from DU6PEPF00009525.eurprd02.prod.outlook.com
- (2603:10a6:10:2b1:cafe::50) by DU2PR04CA0214.outlook.office365.com
- (2603:10a6:10:2b1::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.22 via Frontend Transport; Wed,
- 18 Dec 2024 17:23:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DU6PEPF00009525.mail.protection.outlook.com (10.167.8.6) with
- Microsoft SMTP
- Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.15 via
- Frontend Transport; Wed, 18 Dec 2024 17:23:58 +0000
-Received: ("Tessian outbound 867970499bdc:v528");
- Wed, 18 Dec 2024 17:23:58 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: db0218a24b55b883
-X-TessianGatewayMetadata: 4kz7VC69dtMC77BGMeuJU2wl6SeL0y1TsRocugRXlPowo19IODbXGuBDPi6NUfMtLLZLLu7t2mIJvgrO4AfdfvjBWekLiKVv0sUaRA2fsu0fufiLDZYzMUd+oYSYMl1sBgJy31QiEUHDhgzbpMdnQZTOJ84OlZnMkfxaZGh7U60=
-X-CR-MTA-TID: 64aa7808
-Received: from L94be0c378eb6.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 23D280B1-69C6-4C30-9840-4BD85A390B17.1; 
- Wed, 18 Dec 2024 17:23:51 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id
- L94be0c378eb6.2 (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 18 Dec 2024 17:23:51 +0000
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vPmXE3KC9zflilwzhRp3v0UHmTfW2X909uVzI6yl3KdiI/7Lj67ggy7E6xmv7seFfsHvOcrzr0ybjXp8YJwx0pw1d5pNmTuA+fau8ep2peoBzx1TkejBbJEl/PKEhfdpaZgoWaaDlu8Z/rJUjqNpFlglHY9ept5uNsV9j5r9tdQKAJw1Fj+NMsqLvPS7lx/qEg7JZneqNuGU6PTlKe3jHyk2Z9wlr/IPhegY6GhMJY3DSxMqFEQA1ogV2SpD2nvsiPEo/zMo3uuBw9EzqUPeCW2O+HCrfyXixwgsZcwlF3dYW1OtroWq6fYCpUlmuj6BWzfenEdKoGxEvytO4ty64A==
+ b=ukDZ8xjEoZaq1l6iwe9+dovd2GGNJpgCn3tt8zWySvinhAk5nACth/OHCvRlq8WHaGxiFvFnZ9MI07nhZQSGASTwLRZ4oAjC+eICx+3vhVaaRIib5AFtfaEi93WvuXCjEYWaYKt9AzoJVjxlWhIB9AZjDWeZopxuIeTSOVCq3w23+F+XLFBi1Ng68tIVYEssmhw07Kzla5KdvF7JW+j8X+nYXIdK3VQbgVvR3AABpPC05SfSN9QXAV/llX22zOWQv9pTu/+39UkNKs0y/Ntb5U+96TskiBF86kBLav4uCsaPntGDipNLKZ9ohvCVOBFC1HUgLw2jT6FtByOpVb6YSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Hkv+87bvnmtTEzZ/PuZR+LYAT6+LcFJJ37S+6g/JGck=;
- b=MRkSwGeRXlY89XG7FmcF3c2vsF7DhxKsS1pwh5UhsF+FjyI0lo/dnlEg9N5b418JO/2ti51PJTaouFThxlImX5dgfzJzobwTOG6eZlHhMQC9v0Ru4EA49Xpzf8RGRstrw20eIG56vxmaB6+s2UHFBG+O69v6Oo4AivrMhroMP4C1wVZR6Xkk+eygAMRLEpbM/MPjSu3gDgF85RPHfKS0/zM1/I7boMD5IT5id1P9617ABEF82X3z63Z/SF/F2rF1S0qzl3PQlrwORr5utKlHYuodjMiFOmBQYNOns1rjeHoKRAbdDEU1T7MDc3rep+lGLQh5BTDwXpIfVxkCJGrNSw==
+ bh=87vcNtUoTsLc8r5OnzwsV/kwCzZcJJu35RJ4IC7YX5Y=;
+ b=inkHAOOvVcePiveG5qvySwNaoNmTWwGU7yOt3AToOLKbQWm1+FePcb94NRlJxeDZjgCrbzctT+WHF+XnnImWt257C73gHzPwhSb+peVnWwjDCervV/CmkvZUJyjc8wlBZ+yhbHIfsP9//uRtszH+Wk8DqWps/sKoeQpIpNXznF24bekRdrzMawEf8jftnnmW3hpIXf0SQJRg1IOkWuuRlt+wBMDxWQfKofWkAwpseaa9eYL/qpSfoNNmfsSFZ2n0cjVgNyd7Czh9OU9bbMIVyFjl5CX4T6FFd/XDoJYVDdYlQv47dimmRDYrMNkCHv/P7wIcb54iiDyrj0rVaBiFOA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Hkv+87bvnmtTEzZ/PuZR+LYAT6+LcFJJ37S+6g/JGck=;
- b=cbDjXHl4ReuW6lsYZLRJztT/akRmF11gIRc4EJbGdMD9khoU/RiSS/jkzHvjOh6DY4r5fjqa+asgU4a6wSRGERnSF7KGQx6u1mdAXVJWbICM330WuD73Ta5a2p9MCw7GxJ+4QgpMNwpeVnMm06/xQbyNU3gY7ohp3FwZgYiWNjE=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from DU4PR08MB11188.eurprd08.prod.outlook.com (2603:10a6:10:571::11)
- by AM9PR08MB6081.eurprd08.prod.outlook.com (2603:10a6:20b:2dd::20)
+ bh=87vcNtUoTsLc8r5OnzwsV/kwCzZcJJu35RJ4IC7YX5Y=;
+ b=Ho4iAcTc/QWQhVX5aG0ChDuR6yb2tBKpZ0K9eUvXw/g2yKUo5KBRf4dvsoNiCwByXfM9PIBpj6iytLD5upkKssajco+36zua1oWnQRiTBLDzdORyye/dH7BZc9g/qLF5UlpW3CzBamRdd4GsQxtmNWhEzEhy4BbixX4tE0RE9gI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AS8PR04MB7893.eurprd04.prod.outlook.com (2603:10a6:20b:2ab::6)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Wed, 18 Dec
- 2024 17:23:49 +0000
-Received: from DU4PR08MB11188.eurprd08.prod.outlook.com
- ([fe80::5926:9f0b:ea5d:24df]) by DU4PR08MB11188.eurprd08.prod.outlook.com
- ([fe80::5926:9f0b:ea5d:24df%6]) with mapi id 15.20.8272.005; Wed, 18 Dec 2024
- 17:23:49 +0000
-Message-ID: <a41a8559-689f-49fa-a19a-2b1f8c4c62ba@arm.com>
-Date: Wed, 18 Dec 2024 17:23:48 +0000
+ 2024 17:27:39 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8272.013; Wed, 18 Dec 2024
+ 17:27:38 +0000
+Message-ID: <fd8470e7-4527-4024-8477-63248a7cc6de@cherry.de>
+Date: Wed, 18 Dec 2024 18:27:37 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] bloblist: fix typo in code comments
-To: Tom Rini <trini@konsulko.com>
-Cc: nd@arm.com, andre.przywara@arm.com, manish.pandey2@arm.com,
- u-boot@lists.denx.de
-References: <20241218153933.37649-1-harrison.mutai@arm.com>
- <20241218153933.37649-2-harrison.mutai@arm.com>
- <20241218154803.GE1505244@bill-the-cat>
-Content-Language: en-GB
-From: Harrison Mutai <harrison.mutai@arm.com>
-In-Reply-To: <20241218154803.GE1505244@bill-the-cat>
+Subject: Re: [PATCH v2 2/5] board_init_f(): use static calls
+To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Devarsh Thakkar <devarsht@ti.com>
+References: <cover.1734537135.git.jerome.forissier@linaro.org>
+ <252364e53d56fab1c77bda74563b24ad8a17d635.1734537135.git.jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <252364e53d56fab1c77bda74563b24ad8a17d635.1734537135.git.jerome.forissier@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO2P265CA0059.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:60::23) To DU4PR08MB11188.eurprd08.prod.outlook.com
- (2603:10a6:10:571::11)
+X-ClientProxiedBy: FR2P281CA0121.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9d::12) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: DU4PR08MB11188:EE_|AM9PR08MB6081:EE_|DU6PEPF00009525:EE_|AS8PR08MB7353:EE_
-X-MS-Office365-Filtering-Correlation-Id: c14d78b3-545d-4814-acff-08dd1f88c209
-x-checkrecipientrouted: true
-NoDisclaimer: true
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB7893:EE_
+X-MS-Office365-Filtering-Correlation-Id: b65a6e49-d9ed-4d73-e39b-08dd1f89450c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|376014|1800799024|366016|7053199007; 
-X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?Z2I0b25FYlNkaWhiUHRNSnpkS0RCaFNNbXRXOTBydUpDVGg1U0dVcjhVV045?=
- =?utf-8?B?dnJNVEZYSDBJbXJOc1JIVVJwSWsycFQwRUxWM0NzTnBjV2NwRzA1Yy9QejhB?=
- =?utf-8?B?cCtKSmNndzdldUgvMURsNGE3T1pyVjRRNk15Qk5CMjJ0QUlIbXlPbjRERWZ4?=
- =?utf-8?B?THNYOXNJdUltOUFCeFNWdDdoczNNa2ZaMnJ3OStuQngrTVcwdjRhV01QNnV6?=
- =?utf-8?B?ZXdzeWwyZ1NnTmxySUw2Qnp6K09CNGp3SlM4VW9GUUNsd0ZLTTNTRys5OEY1?=
- =?utf-8?B?c3pQOXJjQmVoRThyV1R5LzVtUFArM1pMcU85eWh6RnVlbWNsa2hIcWtPYkFH?=
- =?utf-8?B?dUg3T1dIdHQ1VzdqdXEybDJpeTduU2ZnMzgwTU80WHYzcW15SUlEcEU0T2lh?=
- =?utf-8?B?alhiWW5UaWxVWUJLaVBjSnBsbEIrYm02UkFabEljYXJ4K0NlbXBhYURNSkFo?=
- =?utf-8?B?NFl5dEl1R3pQSGZ1YkhtOUtnZlpqYkIzY1hLRVhoV0tuTG45SnZ6OWo2eVVG?=
- =?utf-8?B?NWR1L2FubWdZbFp2T01QdWxGeVFlSXNrTFVwZ3B0K3ltQkpIYzlBbXdFMzhU?=
- =?utf-8?B?U1ZjSGJBeE12c01xcDczamszdXNEbExnaXhkSjFtbTc2eVN6NGFveHRSaUNt?=
- =?utf-8?B?YlRNKzBnR01lbTFiaXErWFNEUXgralVWeVkzUFB0L1NwYmVWTDNnV1N1Zitq?=
- =?utf-8?B?VEpydnV5S3pTdGhrNktvQTJaS0Fjc2JXbXgvdzdQdFZLeFNLSWE0YkF2dGVM?=
- =?utf-8?B?MzNVTGhlZGV1ZmZ4VmV0aDZyeXdnMXNwV0lvZ21lSHFURFlFUkZ6cXJ6NHR5?=
- =?utf-8?B?azdzWkgvVHRlczRPWFgwRTB6ZFRNc1g5cDdNM1VKVGxObUhLMzlTMlY1QjFQ?=
- =?utf-8?B?bFJ5ZkJGTkdaWnFKMklDSXpsNVNHSUdwa0cwVGcvSEUwOTFVby9IUmJFcmlk?=
- =?utf-8?B?Vm84RmRXY0tmclFFWGdjcTZFS2JTdC9lczhRK2s4UkhjZW5XeWU1TkIvVzNU?=
- =?utf-8?B?UTFDVGh1ZWkzYlBjMkFVaWFUekVhZ2pDd1o5UEgxT3ZRbzhPRXNIaGJIRnAr?=
- =?utf-8?B?YllZVzRxN3Q2NFM3ME5zU0tSMlZDOUVQcVQ2QkVNaVpIcjNKZ1FXQTYxNGkr?=
- =?utf-8?B?L3ZnZjY0YkEvVldLS3I5ZFF1bFlqNlIvN0tNWWhrTlhUUEJCWWROWTZrRlRo?=
- =?utf-8?B?amIxSU1uSHdTcGE2ZWtQVFE5djJIblRZRi9qWjlIQTdxdUVkd2tmcVJmWlpM?=
- =?utf-8?B?L0Ura1hyNzRLdElkQzRieDFNdmtxN3NFY0VJMDNCaXRCSjl2VWpiNGpxUkRt?=
- =?utf-8?B?ZWxITGd6YndwZmJEZkhreXc1dnZZcUlVbGZNNVJsc0IvR29vSE5OOFk1L0VJ?=
- =?utf-8?B?Y2oyWmZDdW5paXM3Q2Q2ellBZzgxNlk0UnBaTG1kdmQ1U3F5dW43MTZtR0ds?=
- =?utf-8?B?SmhZZm9JemRqQStrcU9tYXo4SEl1QS9BUlNJdXRLWCtsalBObHNjVlN6Nmx5?=
- =?utf-8?B?ZmdSTmlNU0dYa3Y0MDVsWnhySS9zbndJSXU4Wms4cWZwSFgxV2xMRGI5cVlU?=
- =?utf-8?B?THZiVzVqY1dIRkc0M3krZTQzaGkwSzNacDg5VURocmhKRWhSU1h2WjRNKzRk?=
- =?utf-8?B?UW1QdEd3Y0JoVkhEWjhzS2IzcVkzV3Bka2lWTGhDWDlITlZhd0dPQ2t0N0xK?=
- =?utf-8?B?OUhDTWxiUU1NT2NrVkN1WGZiL2NsMzVBL2VONlhYQjNyNmdZTjdRQ1FNRkNk?=
- =?utf-8?B?d2pERkZTQ1hjcWRvYTczeTRXVUpzR0JCb1cvSUFubnRnUkh1S3ZPMzkrTGdQ?=
- =?utf-8?B?Rmpnd3l0blZhOE1WZzJ3cGZkSG1WKzA2RVo4ZGhmWXRUNnB4K3Jhd09ETjFV?=
- =?utf-8?Q?gqDLDyaka3B2i?=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DU4PR08MB11188.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(376014)(1800799024)(366016)(7053199007);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6081
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-SkipListedInternetSender: ip=[2603:10a6:10:571::11];
- domain=DU4PR08MB11188.eurprd08.prod.outlook.com
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU6PEPF00009525.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 3901f2ab-34a5-4ee2-d903-08dd1f88bc66
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|35042699022|82310400026|14060799003|376014|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WEpGZGY2N2d4SkJBOHp6dmZ1OGN3bzcrcnI4UkxGMVRhYzZTTmI3Yi9HKzgr?=
- =?utf-8?B?VzV5emhvanA1L3BYWWZHSTlNa3VlVW1UQmFuSEtCNGVQK3ZhOTBKbFZkNzRO?=
- =?utf-8?B?cXo5enZhdmRXWndVWGJ3dGY4Tm1jdlVZeVdPYncwaHdGbVcvOEc3SWw1bElx?=
- =?utf-8?B?UEFVaFZkcllKVVQ1cXJhLzBzS0hqaC9iTGRmTTVEZ3NSV3JQc1Yxd05KeHkr?=
- =?utf-8?B?UVBhZzBRWVFKY3NpUHZLaUx4MExCOGZnd0s3eERMLzZ3WUlpblhXT2FrZXBk?=
- =?utf-8?B?WWxZaTVGTUl2VndMN01xbUpES2dBTHhWeERIUnJNZ1BmY2RBTk9IR0xXaDhS?=
- =?utf-8?B?TWFOQzAwK2J2UW9KNXFIaFNKUGhWdG8wT2pqQ0dIL2lHL1RZaTJ4SjZ4UC9w?=
- =?utf-8?B?MmVTcDVhTVFGamNKaHVDQ2NQNnRhMXVhMExreEpzQWZUWGkzQzF0aCt1TFJP?=
- =?utf-8?B?VDk1RFhqUEZueFVpZkF1Q0xBeEt5RG5mWm5oVTQyeTI4M3Y5ZGp4c0kySjBQ?=
- =?utf-8?B?UzAzYjd4WWFLN3ZQZ056NGtUbmdMV1QyVkJGRnVxSzZCLzdZcHg5b3NvSUNp?=
- =?utf-8?B?VDRvWHdxYldnSWxGZk5OMzZYZEtOVjBZSGxiNW1IVEh2cTlIMEx2WjVsUm9n?=
- =?utf-8?B?bjh2SnByYU5SdUtORGZtRHEvOTR3ekJLeTM1U1ZXVU5TSXpRbnJLd1R1N2do?=
- =?utf-8?B?SmJ1UzVqYkFkaUZzeWorOVBhTVZBNlkzbUtYT0l1VldES1lZVElMcE1IT0Rk?=
- =?utf-8?B?eDNZM2ZMYzZNWURub3BzNlpnWlRibU9oM1RiT21HcEJVd2xvcHdSemVWZTgy?=
- =?utf-8?B?RnE4RytBbkZEMjFDVEJtL3Awb3pSQmtvWDRYWGx5M2pGOFZtUFZZclF6ckJW?=
- =?utf-8?B?ZFR5bjV0eHpWYjVmdEljUTl6cFB3MlEvcEpDVVJSOXFpR0EycmtQYXFXdWtB?=
- =?utf-8?B?bXlNelVEc1RWNCtrczR3d1A4TGJUZWxETDJua1EvRGNwcXl2cXhsVEl4Wjdl?=
- =?utf-8?B?ZTh0YWVTS01OdWtEZi8wMkVEcWZTcmdlZG4ya1FqWUljeU0zTERFc1NsWVp4?=
- =?utf-8?B?TThsMnRyN0RMSXhIckM2cDR3d3ZoSHc3NkN5c29kbHYwOGxock5BbmVBQjZn?=
- =?utf-8?B?aXNLczFXQ1BSMEUwd0pIQmZTYkxvalBRbUw2MVVwOW1WSi93UjJiOEJNNFY2?=
- =?utf-8?B?SGd2d1ZvYWY1aFB5WTBGc0J1ZEFlOU13MUlUeW94MnE0NE5BVG1RcUJBVHVm?=
- =?utf-8?B?cXdrbnBCVWkyV3M3dE1jdForTmptUEUybkhNTjEwc0wxQnFKOTkrWkE2S2hB?=
- =?utf-8?B?MEVablFJd05zbFNiL1c4K0FOcGhIb25jUjNyQ1Vpd2V5MjBud0JFeG1zZVBH?=
- =?utf-8?B?ZFVaUit3bkR1T3g3dlhuT1R3UXZ1d1hScGN6TjliM3dpT2g1RUprV3k0QXVz?=
- =?utf-8?B?dkg2dFBvNUZvanNYcFc3Vk5jVnVYdURqQ1ZnaFN2MjQwQkg1clJ1TWJzd2NO?=
- =?utf-8?B?REU3YTdJRDEvRC82eGtFM0dxZzFodmIrQ1NKMnFDNmRSdVNaSUxERnRnbXhs?=
- =?utf-8?B?cE1XMzBCWW5LeUUvdjhmYjRpWEU5aHRPRmVVdW43M3M3ZGgzU3pCTWF0VWU1?=
- =?utf-8?B?OE9hb0REZHRYNmFybTc3UGM5ZCtwVWszWURCckNYMzliYXkzYkg0TisyWWtz?=
- =?utf-8?B?cC85eHJ6K2cwNVUwUWxucnFkQWQ5TFhxVTcyYWtkcG9ndDV5ckx4UnBibldZ?=
- =?utf-8?B?bHl1UjR5TDBucUVIK3k4YXdSaDFNL3hsRlJBTnJYL3ZWNjdPSlFZOStGVUh5?=
- =?utf-8?B?U1JBL3p5dms1WjVqQjBaZldzK2dPUWVyU2VkSHlxSzF1anNqcThJNjlWTXBa?=
- =?utf-8?B?djhWOWJESFNnRVFHZFJNMVhhTFVadzY4T29sNnJvSktHMWo3a1BXZnRZOFM3?=
- =?utf-8?B?WDAweisyd1dVcXdQY1FIQzdGM1FYQVJVcHRoRXEySVlLaGZOcDlXcmZLLzVV?=
- =?utf-8?Q?nFmxYaz6Z2uvNCtPDzk1unj8HOP+X4=3D?=
-X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
- PTR:64aa7808-outbound-1.mta.getcheckrecipient.com; CAT:NONE;
- SFS:(13230040)(35042699022)(82310400026)(14060799003)(376014)(1800799024)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2024 17:23:58.7905 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c14d78b3-545d-4814-acff-08dd1f88c209
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
- Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009525.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB7353
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UHA3VnlLeVA0K09wbDQ5akFRamluNWlwZUZIbnJaaU9VSnA4eGpVR1R6WEI2?=
+ =?utf-8?B?WFYvYllmakxBb0VFSHdJRnM3eTl6L1gvVlJ4anh2bW4xSkVxbWtmTXZVMGsx?=
+ =?utf-8?B?d1luMkhEWHlVenFXV3FJOTkxb21UVDdiaWpBM05BZGJ5ZEFraXh2RkY3enND?=
+ =?utf-8?B?dE4wa3JIWWV5ak5JMXdObWFpY3UvVEJCYml6OEFZaHRsRXh5TXpHMnhmb25X?=
+ =?utf-8?B?NFBzd0Z2SzhwUjk5NWl2b0FaYVYzeUJxaEZWKzdkRUhIWkNJSzErZ1BWRzF6?=
+ =?utf-8?B?Sjh3TUlzUGdUdXA0WjgySTRYUVVNSDNmUVg1a1BOeU1TeDNZaGlHYkFHc3Iy?=
+ =?utf-8?B?d1BkYUtwblR0Y1cxVG9MU0swb2VqNngyRDQ5OXhoOHh5b1JudVgxU3BEcjNv?=
+ =?utf-8?B?dXcxUVJYS0NrbnpRaHJiUTJ4NitRQ3lGNFFscGRybWpOOEkzdy9kbzZhbFZO?=
+ =?utf-8?B?WUtuc0F0R2JrbStUS2lJYWNaeGlGaVZ4WTU4Zk9ZWURWMEtzMUc0UnhDODVP?=
+ =?utf-8?B?WEdodHJjV0RGVVhLdkpWc2JZVUQ4QU0ycUN0MU9lU2oxOWNMcFpyRHQrL3pq?=
+ =?utf-8?B?N3ZzZXRVR2ZhWDZlZ2JyakloVXpwVXkxTzcvcGlneUVYc3JJdk16OHRwU2hP?=
+ =?utf-8?B?VkdzcDhnQ05NbEFJd25ZSUxIVjQ2VzBCZGRuTTY5QnhTVVQvQXR6T3FidDBk?=
+ =?utf-8?B?NGVHL0dxTDREYW1BOTYvSkJOZlE5OHVPWnVaSmVkVklESHY1U3BYTzd4dlU0?=
+ =?utf-8?B?ckhZQVltVDlSUXZUZXRaeXhtZHcyMzd5N1ZNeVdENGdFTkI3L2d2M2pOLzdj?=
+ =?utf-8?B?Y3krcEoyQWVtcVZqeHhwZk5hbkFFZ0EwL2JGeE1PZmY3aE10YWM5eHlsek9L?=
+ =?utf-8?B?bEI1a09YYkhXL3ZnQVYzMGRRM1BEazYxMkc3Myt6eWE5YzlmVmtlRXdJdTVu?=
+ =?utf-8?B?WDZEZEQzNVhJOEhFaDZ1bU93OUFNSUozTE9STm9tbmJ2MGZQSnhTSjgwcnA1?=
+ =?utf-8?B?d2tkeFZ4Wk1oblNKZURvMXJ3NmJzR1ZZay9QbkZYOEN0VzV0OW9Yb2VIZUJJ?=
+ =?utf-8?B?OG1ReXhyUVhFQ29uOEFnczYwSFBiVlJEeEhQOFdpYjRXRTdqb0VrUG1GWG1E?=
+ =?utf-8?B?K29ScEdhaC85V01FcWtVWW5WeThLQzVQWXYyb3BkdkpXSk5tQTN4ajIyM2hl?=
+ =?utf-8?B?ekVjbWZOTm5rY3dNTnJ0M2E0SGtNY0htWitzd1psN2k5bW9VYlZjOUNSdGg2?=
+ =?utf-8?B?RW5BRVBmNkwwZnVPZ0NEbkQya1hFR1Y4OVNxc1dTcGFDcG5JZkYxb3JtSDVW?=
+ =?utf-8?B?RTUwVGZuMlpOT3VhcCt4ZVQvRGY3akNHVDc5ZlI0Uk1FTnVTQzQ5aTZva3hV?=
+ =?utf-8?B?ZVZEVmtmVTk3ZWNRV0RNSWYxTkIwM0dQdVVRLzdUOEVkaGRKSUhhMThIckdI?=
+ =?utf-8?B?K0pRRUl3b1FpZyt1azBocmFLRk1Xd3lXRUR2UWZHK29nQXdEY2hWREo2Rkpz?=
+ =?utf-8?B?Z2ZSMW1BTUNJNi9vaGZEdHE1c1NJbWl6RnhsVmJUTkk3ZFJBOUlNMHB5Lyt5?=
+ =?utf-8?B?SmlqQW1QRmFFUXdqMStJdytQdDlVMzFOZUFna1BzZUI3ZFdwOE5CUUljQm9z?=
+ =?utf-8?B?UnVYeE9UeWpVSXZ0ZGU0bFJLRENncnVlMW1sRFlCVVlQUklIWEZCMnQ2WUs1?=
+ =?utf-8?B?OXBTSnVmTzBLK0RJUlhzT0pSOG1JR0pwZGF4NDNnL2FKbVIvMzFseXpVS3lI?=
+ =?utf-8?B?dmM4ekhhc0wvcDA5MTROeGU0OTFvSkJHZjhSa3JkTmhXaWdDK1d1cjkybm52?=
+ =?utf-8?B?OEdLbm5rVEx0R1FGU2J5Q3hpMWo0am5IMisvaHd2SjhhbDAxTkN2NzBuVVFJ?=
+ =?utf-8?Q?qfFhD79yMYEqU?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ajJIUWJCZXlLWUEwdGRuSTRtZ2JWUTllaWtNenozUFVWajhFYkJvZnoxYVg0?=
+ =?utf-8?B?QzhERm5vQ20yWktXYU9qQnRGTXBhMEFIdStrRGRFSGVEcjBKcUprc005S0V1?=
+ =?utf-8?B?aC9laWYxOGlyQ2VxOGVacFBjZkg3NlY5MGZSVml4SHNKSHhSdC96MUx0a2Jj?=
+ =?utf-8?B?aGV0TGE3QXhFL0VUVmNHWC9ta1hMTXRuZTFORDJ0NTRXV2R5NElCNHBKSGhT?=
+ =?utf-8?B?ck0vMGswNmRwWU53Z01mR0V3RDN6ckxTdnE1a1NiaFFRVTBucTRSSFFnSjJ1?=
+ =?utf-8?B?MmNKa0Y2RVdsTDAxRHRiQWduTG5KVEVraHdJQnZlM2xrMll3RTdXbVVSMCt3?=
+ =?utf-8?B?eFhjVTlsRFlzN2NpT09GNDVHMEFSTGg3c0ovOVE0blM1QzdUTnNzT2R1NUVI?=
+ =?utf-8?B?OWsrNUQxc291V29BNlJhZms4QnJCMFdSWXBGQU54RHhFTG5WR01SSzFidXpM?=
+ =?utf-8?B?ZzR6Ty9LRUo2ZXhRMzNjbWxCQVJEdkxuU1V3dFovRDl5Vkh5OVdRYllabDhP?=
+ =?utf-8?B?V2hxOUVKKy9PL0h3M2dvT3ErVm82OENXUkpMMzFTZWxrZTAybkN4ZU8xOVBG?=
+ =?utf-8?B?NllZMks1LzZNdFNEYmtKczdoRldaRms2TWJTR1BYeHV3R3h2bUp1NVVmRHI2?=
+ =?utf-8?B?ZFRpaEFMMHhSUnA5OUtldk4vcy85cVBuZkdoeS9seEFjaGNhZFhnQWNPWTE1?=
+ =?utf-8?B?Z2hNQmF5NC80T2FrSnZsSjZMNEVlbVUyN3NjTTE5K1Z1dUF6UlBmWjExTzVE?=
+ =?utf-8?B?Y1ZWa05GS1RibG1hcmVBNnM1MWhWNE1PUWdnTFNRa1JEeFRXZnp1eCtDd1hk?=
+ =?utf-8?B?N1BuMTBVS09EOEFSb2xQRDdpejNrSUViV28rQjF4T3N2NEhCT0dPNkM2Snho?=
+ =?utf-8?B?MVJrTHBVdnlxSThmRFlBU2REc2l2dER5a3lNL2lkQ2wxSkM2SW1iM09DMlor?=
+ =?utf-8?B?U1dqVGZDaG56endWZE0wTEw3THBJZzNKZzZUTGd2MkNQU2hOdFJ2RUJsWVBP?=
+ =?utf-8?B?amZUTk5UZnlOYWpjZlhmODlWYlRIOUVuQ2t2cTgrd25JeXJJSG9MV2lyNU1Z?=
+ =?utf-8?B?VmxSNXhlNkRkdjh5VFFSTEU1UjhENWFwd2IzWWhrUjNpK0hNcHJDL0U5RG4y?=
+ =?utf-8?B?NVp4cEFzNjFsaWJabTRkUk1qczZvTklmMU9YZExpUEU1WWp5UDZ6RXVvMDNK?=
+ =?utf-8?B?WUZoL204dUdyNjg4bEM3N1V1b1dyV3cvTWxzWE04MFc0dFc2OExWbTVIWi9n?=
+ =?utf-8?B?Z1QwelZTV1YzQ2g2NXA3czdKc2cyalp2NUpmdkY4ZHdHbytoeXhFUFJMRzNM?=
+ =?utf-8?B?VjlKclc3MGQvYlc3RVFEVWJrUU1YSVZic0JOV1ZLSnRGYzNmcU5uZnhpWjdD?=
+ =?utf-8?B?UmZ2V1ZPUllBYUEvRzNwMHlwRHREcDE4b3h3N1RoQjdYanlNVFQ2Vms4ZytR?=
+ =?utf-8?B?MXd4ekhvcTdrL1RWaVV4cnBDRGpqT2x4NW5uZGpPcERWKy8zaXh2SDlEZ0Jx?=
+ =?utf-8?B?eHJjazdXV0dtVjJwaHpjK3h6RXo2N0dleUo5NmxWZXBZKzhtUUduYWJYU2R4?=
+ =?utf-8?B?c29YR3Jzd0E1em9oWEY4TW5xUHdvcXZjSW1icXIwQjhOc3o2UFI4blpVd05P?=
+ =?utf-8?B?THpsZzJWUGQxOHg1dEZZd3UzK0xLdklHLzluN0VlOGlVSjhUeEhWM3VRUFd5?=
+ =?utf-8?B?OUEremMwYVhVNDhnQzJrUDNPbzN6N0hUTGhvaDZDaXZMdjJIc3JLV0hxLzNS?=
+ =?utf-8?B?TXQ1K1FLOWtwSHp5NEZ4aVVrOU5NQ1E3ME1rWGcrN3R1T1ljQ0pnTEp6N1Ry?=
+ =?utf-8?B?NTdFVjBYdUpLSElDMndpZk1iQktXbmU1Mm1aUVpnbHgwM1NLSmpUckVjRmt0?=
+ =?utf-8?B?TG5kTWJUOE5LZzdHU0VSb1AwbG13Rit6bzVRckxTZlN5MnNQU1hpdUNaQzlJ?=
+ =?utf-8?B?VmpITGgzaE5YcW02aENGZHZUc0MzbjBZRFlPU3l5Ulh4VzJmUmRoMGlJbVQz?=
+ =?utf-8?B?bGFxZmlUa1ZId25pR2NxUmorK2RDMm1ncXJrOXYxbXM0TjBQN2Zra29CUk5I?=
+ =?utf-8?B?dHkyZ0R1MmFMbC9rQXdoWHVkSFcyRzNmZ2FGZldrbkpONUY4TkJ1a3hSTUNY?=
+ =?utf-8?B?V2xiSHJ5a0pEZVFpcWVhOWxVUGZMVGhvVitKcGVUYjhXclBJRitZa2lZQVZu?=
+ =?utf-8?B?UEE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: b65a6e49-d9ed-4d73-e39b-08dd1f89450c
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2024 17:27:38.7554 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: nghucof1G/IHflMQzjPjpXrBA1LQ8wIDKr6xtFtXq5NRPtBVYSU7ygQ8REZF2pDiix/AEUyQ57b+BKWmw3ip67mGD56pz9Rf1dApMOqozgs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7893
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -245,30 +177,291 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Jerome,
 
-Thanks for reviewing.
-
-On 18/12/2024 15:48, Tom Rini wrote:
-> On Wed, Dec 18, 2024 at 03:39:28PM +0000, Harrison Mutai wrote:
+On 12/18/24 4:53 PM, Jerome Forissier wrote:
+> Make static calls instead of iterating over the init_sequence_f arrays.
+> Tested on a KV260 board (xilinx_zynqmp_kria_defconfig).
 > 
->> Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
->> ---
->>   common/Kconfig     | 2 +-
->>   include/bloblist.h | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
+> - With LTO enabled, the code size reported by bloat-o-meter is 1200
+>    bytes less (-0.11%)
+> - With LTO disabled, the code is 594 bytes smaller (-0.05%)
+> - Execution time does not change in a noticeable way
 > 
-> Please add a short commit message body "Fix the two typos in ...",
-> thanks. With that:
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>   common/board_f.c   | 165 +++++++++++++++++++++++----------------------
+>   include/initcall.h |  27 ++++++++
+>   2 files changed, 110 insertions(+), 82 deletions(-)
 > 
-Ack - will add in next revision.
+> diff --git a/common/board_f.c b/common/board_f.c
+> index a4d8850cb7d..cebed85ed4d 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -38,6 +38,7 @@
+>   #include <spl.h>
+>   #include <status_led.h>
+>   #include <sysreset.h>
+> +#include <time.h>
+>   #include <timer.h>
+>   #include <trace.h>
+>   #include <upl.h>
+> @@ -870,58 +871,60 @@ static int initf_upl(void)
+>   	return 0;
+>   }
+>   
+> -static const init_fnc_t init_sequence_f[] = {
+> -	setup_mon_len,
+> -	CONFIG_IS_ENABLED(OF_CONTROL, (fdtdec_setup,))
+> -	CONFIG_IS_ENABLED(TRACE_EARLY, (trace_early_init,))
+> -	initf_malloc,
+> -	initf_upl,
+> -	log_init,
+> -	initf_bootstage,	/* uses its own timer, so does not need DM */
+> -	event_init,
+> -	bloblist_maybe_init,
+> -	setup_spl_handoff,
+> -	CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F, (console_record_init,))
+> -	INITCALL_EVENT(EVT_FSP_INIT_F),
+> -	arch_cpu_init,		/* basic arch cpu dependent setup */
+> -	mach_cpu_init,		/* SoC/machine dependent CPU setup */
+> -	initf_dm,
+> -	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_F, (board_early_init_f,))
+> +static void initcall_run_f(void)
+> +{
+> +	INITCALL(setup_mon_len);
+> +	CONFIG_IS_ENABLED(OF_CONTROL, (INITCALL(fdtdec_setup)));
+> +	CONFIG_IS_ENABLED(TRACE_EARLY, (INITCALL(trace_early_init)));
+> +	INITCALL(initf_malloc);
+> +	INITCALL(initf_upl);
+> +	INITCALL(log_init);
+> +	INITCALL(initf_bootstage); /* uses its own timer, so does not need DM */
+> +	INITCALL(event_init);
+> +	INITCALL(bloblist_maybe_init);
+> +	INITCALL(setup_spl_handoff);
+> +	CONFIG_IS_ENABLED(CONSOLE_RECORD_INIT_F,
+> +			  (INITCALL(console_record_init);))
+> +	INITCALL_EVT(EVT_FSP_INIT_F);
+> +	INITCALL(arch_cpu_init);	/* basic arch cpu dependent setup */
+> +	INITCALL(mach_cpu_init);	/* SoC/machine dependent CPU setup */
+> +	INITCALL(initf_dm);
+> +	CONFIG_IS_ENABLED(BOARD_EARLY_INIT_F, (INITCALL(board_early_init_f);))
+>   #if defined(CONFIG_PPC) || defined(CONFIG_SYS_FSL_CLK) || defined(CONFIG_M68K)
+>   	/* get CPU and bus clocks according to the environment variable */
+> -	get_clocks,		/* get CPU and bus clocks (etc.) */
+> +	INITCALL(get_clocks);		/* get CPU and bus clocks (etc.) */
+>   #endif
+>   #if !defined(CONFIG_M68K) || (defined(CONFIG_M68K) && !defined(CONFIG_MCFTMR))
+> -	timer_init,		/* initialize timer */
+> +	INITCALL(timer_init);		/* initialize timer */
+>   #endif
+> -	CONFIG_IS_ENABLED(BOARD_POSTCLK_INIT, (board_postclk_init,))
+> -	env_init,		/* initialize environment */
+> -	init_baud_rate,		/* initialze baudrate settings */
+> -	serial_init,		/* serial communications setup */
+> -	console_init_f,		/* stage 1 init of console */
+> -	display_options,	/* say that we are here */
+> -	display_text_info,	/* show debugging info if required */
+> -	checkcpu,
+> -	CONFIG_IS_ENABLED(SYSRESET, (print_resetinfo,))
+> +	CONFIG_IS_ENABLED(BOARD_POSTCLK_INIT,
+> +			  (INITCALL(board_postclk_init);))
+> +	INITCALL(env_init);		/* initialize environment */
+> +	INITCALL(init_baud_rate);	/* initialze baudrate settings */
+> +	INITCALL(serial_init);		/* serial communications setup */
+> +	INITCALL(console_init_f);	/* stage 1 init of console */
+> +	INITCALL(display_options);	/* say that we are here */
+> +	INITCALL(display_text_info);	/* show debugging info if required */
+> +	INITCALL(checkcpu);
+> +	CONFIG_IS_ENABLED(SYSRESET, (INITCALL(print_resetinfo);))
+>   	/* display cpu info (and speed) */
+> -	CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (print_cpuinfo,))
+> -	CONFIG_IS_ENABLED(DTB_RESELECT, (embedded_dtb_select,))
+> -	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (show_board_info,))
+> -	INIT_FUNC_WATCHDOG_INIT
+> -	INITCALL_EVENT(EVT_MISC_INIT_F),
+> -	INIT_FUNC_WATCHDOG_RESET
+> -	CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (init_func_i2c,))
+> -	announce_dram_init,
+> -	dram_init,		/* configure available RAM banks */
+> -	CONFIG_IS_ENABLED(POST, (post_init_f,))
+> -	INIT_FUNC_WATCHDOG_RESET
+> +	CONFIG_IS_ENABLED(DISPLAY_CPUINFO, (INITCALL(print_cpuinfo);))
+> +	CONFIG_IS_ENABLED(DTB_RESELECT, (INITCALL(embedded_dtb_select);))
+> +	CONFIG_IS_ENABLED(DISPLAY_BOARDINFO, (INITCALL(show_board_info);))
+> +	WATCHDOG_INIT();
+> +	INITCALL_EVT(EVT_MISC_INIT_F);
+> +	WATCHDOG_RESET();
+> +	CONFIG_IS_ENABLED(SYS_I2C_LEGACY, (INITCALL(init_func_i2c);))
+> +	INITCALL(announce_dram_init);
+> +	INITCALL(dram_init);		/* configure available RAM banks */
+> +	CONFIG_IS_ENABLED(POST, (INITCALL(post_init_f);))
+> +	WATCHDOG_INIT();
+>   #if defined(CFG_SYS_DRAM_TEST)
+> -	testdram,
+> +	INITCALL(testdram);
+>   #endif /* CFG_SYS_DRAM_TEST */
+> -	INIT_FUNC_WATCHDOG_RESET
+> -
+> -	CONFIG_IS_ENABLED(POST, (init_post,))
+> -	INIT_FUNC_WATCHDOG_RESET
+> +	WATCHDOG_RESET();
+> +	CONFIG_IS_ENABLED(POST, (INITCALL(init_post);))
+> +	WATCHDOG_RESET();
+>   	/*
+>   	 * Now that we have DRAM mapped and working, we can
+>   	 * relocate the code and continue running from DRAM.
+> @@ -934,48 +937,48 @@ static const init_fnc_t init_sequence_f[] = {
+>   	 *  - monitor code
+>   	 *  - board info struct
+>   	 */
+> -	setup_dest_addr,
+> +	INITCALL(setup_dest_addr);
+>   #if defined(CONFIG_OF_BOARD_FIXUP) && !defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -	fix_fdt,
+> +	INITCALL(fix_fdt);
+>   #endif
+>   #ifdef CFG_PRAM
+> -	reserve_pram,
+> +	INITCALL(reserve_pram);
+>   #endif
+> -	reserve_round_4k,
+> -	setup_relocaddr_from_bloblist,
+> -	arch_reserve_mmu,
+> -	reserve_video,
+> -	reserve_trace,
+> -	reserve_uboot,
+> -	reserve_malloc,
+> -	reserve_board,
+> -	reserve_global_data,
+> -	reserve_fdt,
+> +	INITCALL(reserve_round_4k);
+> +	INITCALL(setup_relocaddr_from_bloblist);
+> +	INITCALL(arch_reserve_mmu);
+> +	INITCALL(reserve_video);
+> +	INITCALL(reserve_trace);
+> +	INITCALL(reserve_uboot);
+> +	INITCALL(reserve_malloc);
+> +	INITCALL(reserve_board);
+> +	INITCALL(reserve_global_data);
+> +	INITCALL(reserve_fdt);
+>   #if defined(CONFIG_OF_BOARD_FIXUP) && defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -	reloc_fdt,
+> -	fix_fdt,
+> +	INITCALL(reloc_fdt);
+> +	INITCALL(fix_fdt);
+>   #endif
+> -	reserve_bootstage,
+> -	reserve_bloblist,
+> -	reserve_arch,
+> -	reserve_stacks,
+> -	dram_init_banksize,
+> -	show_dram_config,
+> -	INIT_FUNC_WATCHDOG_RESET
+> -	setup_bdinfo,
+> -	display_new_sp,
+> -	INIT_FUNC_WATCHDOG_RESET
+> +	INITCALL(reserve_bootstage);
+> +	INITCALL(reserve_bloblist);
+> +	INITCALL(reserve_arch);
+> +	INITCALL(reserve_stacks);
+> +	INITCALL(dram_init_banksize);
+> +	INITCALL(show_dram_config);
+> +	WATCHDOG_RESET();
+> +	INITCALL(setup_bdinfo);
+> +	INITCALL(display_new_sp);
+> +	WATCHDOG_RESET();
+>   #if !defined(CONFIG_OF_BOARD_FIXUP) || !defined(CONFIG_OF_INITIAL_DTB_READONLY)
+> -	reloc_fdt,
+> +	INITCALL(reloc_fdt);
+>   #endif
+> -	reloc_bootstage,
+> -	reloc_bloblist,
+> -	setup_reloc,
+> +	INITCALL(reloc_bootstage);
+> +	INITCALL(reloc_bloblist);
+> +	INITCALL(setup_reloc);
+>   #if defined(CONFIG_X86) || defined(CONFIG_ARC)
+> -	copy_uboot_to_ram,
+> -	do_elf_reloc_fixups,
+> +	INITCALL(copy_uboot_to_ram);
+> +	INITCALL(do_elf_reloc_fixups);
+>   #endif
+> -	clear_bss,
+> +	INITCALL(clear_bss);
+>   	/*
+>   	 * Deregister all cyclic functions before relocation, so that
+>   	 * gd->cyclic_list does not contain any references to pre-relocation
+> @@ -985,12 +988,11 @@ static const init_fnc_t init_sequence_f[] = {
+>   	 * This should happen as late as possible so that the window where a
+>   	 * watchdog device is not serviced is as small as possible.
+>   	 */
+> -	cyclic_unregister_all,
+> +	INITCALL(cyclic_unregister_all);
+>   #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX)
+> -	jump_to_copy,
+> +	INITCALL(jump_to_copy);
+>   #endif
+> -	NULL,
+> -};
+> +}
+>   
+>   void board_init_f(ulong boot_flags)
+>   {
+> @@ -1000,8 +1002,7 @@ void board_init_f(ulong boot_flags)
+>   	gd->flags &= ~GD_FLG_HAVE_CONSOLE;
+>   	gd->boardf = &boardf;
+>   
+> -	if (initcall_run_list(init_sequence_f))
+> -		hang();
+> +	initcall_run_f();
+>   
+>   #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX) && \
+>   		!defined(CONFIG_EFI_APP) && !CONFIG_IS_ENABLED(X86_64) && \
+> diff --git a/include/initcall.h b/include/initcall.h
+> index 62d3bb67f08..9398a3ec7d5 100644
+> --- a/include/initcall.h
+> +++ b/include/initcall.h
+> @@ -8,6 +8,7 @@
+>   
+>   #include <asm/types.h>
+>   #include <event.h>
+> +#include <hang.h>
+>   
+>   _Static_assert(EVT_COUNT < 256, "Can only support 256 event types with 8 bits");
+>   
+> @@ -35,4 +36,30 @@ typedef int (*init_fnc_t)(void);
+>    */
+>   int initcall_run_list(const init_fnc_t init_sequence[]);
+>   
+> +#define INITCALL(_call) \
+> +	do { \
+> +		if (_call()) { \
+> +			debug("%s(): calling %s() failed\n", __func__, \
+> +			      #_call); \
+> +			hang(); \
+> +		} \
+> +	} while (0)
+> +
+> +#define INITCALL_EVT(_evt) \
+> +	do { \
+> +		if (event_notify_null(_evt)) { \
+> +			debug("%s(): event %d/%s failed\n", __func__, _evt, \
+> +			      event_type_name(_evt)) ; \
+> +			hang(); \
+> +		} \
+> +	} while (0)
+> +
 
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> 
+initcall_run_list() currently prints (printf) whenever an initcall 
+fails. It's happened to me a lot already while debugging/bringing up 
+boards to have an initcall fail on me and that message wasn't really 
+enough to put me on the right track, but at least I had something. Now I 
+believe this would just hang without notifying you before. Is my 
+understanding correct?
 
-I realized I made an error when posting the series and accidentally left 
-out the cover letter. Would it be best to send an updated version (v2) 
-to the mailing list to include the missing cover letter?
+Would it be possible to print an error message (or raise the loglevel 
+from debug to error or something like that?) before hang()?
 
-All the best,
-Harrison
+Cheers,
+Quentin
