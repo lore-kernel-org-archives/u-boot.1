@@ -4,76 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C27E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 111D4E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:20:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFF4880241;
-	Wed, 18 Dec 2024 22:10:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F91D8022B;
+	Wed, 18 Dec 2024 22:20:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gxaZFxwp";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AB6280291; Wed, 18 Dec 2024 22:10:29 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1AFCC80241; Wed, 18 Dec 2024 22:20:43 +0100 (CET)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0161D8021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:10:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C4588021D
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:20:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3a817ee9936so299075ab.2
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:10:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734556225; x=1735161025; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lW/cAblWWB2ELnMQuT0TcnkknEQlkHKIQMo1VNYwFaQ=;
- b=gxaZFxwp2Z6EpjT/PfcOBbPkBYx+RvZ7es+fLbqGhlil6yRDnJzsrEM3uZ/5IkhN/q
- Av2VUnUvytaMEF5GPMtSo9HWHpepRT98W4CfTp/QsQI+AzvEhCKHMWvoXntnsyz5i2eP
- 9dctyLtfYxlDVhLmgWPV5bNBdkRY5IVDkwo0U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734556225; x=1735161025;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lW/cAblWWB2ELnMQuT0TcnkknEQlkHKIQMo1VNYwFaQ=;
- b=n5UWB91e8Mdj6Jmpey13WiGuNqOXiIxU2joROFnfjz7aNjbSBZy9ql9A76xBYPG8yZ
- i4dTDn/hFc28tC3UvqQVj5ut/Kz2qj/E69fQuCbUwgqzXkoYCenz8VdJ68526RM+JgjO
- +nyf+AUH76LV9NxflxBI/TjYuJY7JsH7k1JpzQWT486jeeqd9DhJpjX8QTNzh9WyJjGE
- gnZDv3UUw+cIV9y8+Ek+8OVDYRcW3kDu7AP9mTRCZ2hbLUvkV9EJCLzUjODA6VxKwvH+
- axwn6OjLUbj4Y/lcaDe1/1SL41vOsDPM1ml2bHNdBD6qVhiJhVwyOdfwHemaLSdnDM8K
- c/XQ==
-X-Gm-Message-State: AOJu0YwgpQ3QUJf/3jO9IdAb/rX/URarW1k5Qf+zGhDjqeFvKKe5Uc7a
- CTJxjz8zUl5hmnmuXi+2AnsUHGZVe4m8prQT2S+h6jMExsfjbRZ3Y9KpFzTrq7+yc/vak8M+B9w
- =
-X-Gm-Gg: ASbGncu2JTu/7tqkK7GvFCWeaGk6GNqNZOrANXQkWn8R0mF9YJH0YmfU+xCq7k36f9u
- nOKTWIElwdjzlKT9EXs5Kyj7LrPYa/qDjzJGDt6bhSHQ8ia2b6s8+fk7GJMMoMRrZoTjgRvWEZr
- qpvWUgUhNzN+OZKMKOezutdtNLiOmq7icDNgxRSRY0fPACLzOij5zJhXIIx1+fjwQwsMZGGDjr1
- /1pv84bfF5ypNkxgJApdjTdluEz19JI+uLd577HV4if0cTv/BIHMxEyPD330HMSMdFIaQOHZlJx
- nguTRh1VmcbMzaB0Hg==
-X-Google-Smtp-Source: AGHT+IGLw28pf2HeEy1zobUA/sT/Vw9OJ/RlSLwefurIsOinTTDcNI0h+i1Six/f7I4g80oqOkxllg==
-X-Received: by 2002:a05:6e02:154e:b0:3a7:86ab:be6d with SMTP id
- e9e14a558f8ab-3bdc4282640mr38704135ab.16.1734556224858; 
- Wed, 18 Dec 2024 13:10:24 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e5e3d5e833sm2449643173.140.2024.12.18.13.10.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 13:10:23 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] gitlab: Add rock3a and 5b to the sjg lab
-Date: Wed, 18 Dec 2024 14:10:20 -0700
-Message-Id: <20241218211020.742702-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1tO1TA-002gP5-Og;
+ Wed, 18 Dec 2024 21:20:36 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: u-boot@lists.denx.de,
+	Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v2] arm: dts: imx8mp-venice-gw7*xx: fix TPM reset
+Date: Wed, 18 Dec 2024 13:20:35 -0800
+Message-Id: <20241218212035.1892970-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,38 +54,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These Radxa boards use similar Rockchip SoCs and unfortunately have a
-lot of secret code. Add entries for these so that they can be used for
-testing.
+With an IMX8MP based SOM the SPI RST is gpio4_9 instead of gpio1_11.
+Fix this.
 
-For some reason the 5b hangs (for me) with any significant amount of
-output (e.g. dm tree). The board currently uses this for DDR init:
-rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
+v2: include additional boards affected by this
+---
+ arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi | 16 +++++++---------
+ arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi | 16 +++++++---------
+ arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi | 16 +++++++---------
+ 3 files changed, 21 insertions(+), 27 deletions(-)
 
- .gitlab-ci.yml | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index d04868a04e8..1b19da28861 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -715,3 +715,13 @@ rockpro64:
-   variables:
-     ROLE: rockpro64
-   <<: *lab_dfn
+diff --git a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
+index 216a7a0d8d7c..a291b7abab62 100644
+--- a/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi
+@@ -4,15 +4,6 @@
+  */
+ #include "imx8mp-venice-gw702x-u-boot.dtsi"
+ 
+-&gpio1 {
+-	tpm_rst {
+-		gpio-hog;
+-		output-high;
+-		gpios = <11 GPIO_ACTIVE_HIGH>;
+-		line-name = "tpm_rst#";
+-	};
+-};
+-
+ &gpio4 {
+ 	dio_1 {
+ 		gpio-hog;
+@@ -21,6 +12,13 @@
+ 		line-name = "dio1";
+ 	};
+ 
++	tpm_rst {
++		gpio-hog;
++		output-high;
++		gpios = <9 GPIO_ACTIVE_HIGH>;
++		line-name = "tpm_rst#";
++	};
 +
-+rock3a:
-+  variables:
-+    ROLE: rock3a
-+  <<: *lab_dfn
+ 	dio_0 {
+ 		gpio-hog;
+ 		input;
+diff --git a/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
+index 525316d11892..bdf5370fcdf6 100644
+--- a/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw72xx-2x-u-boot.dtsi
+@@ -4,15 +4,6 @@
+  */
+ #include "imx8mp-venice-gw702x-u-boot.dtsi"
+ 
+-&gpio1 {
+-	tpm_rst {
+-		gpio-hog;
+-		output-high;
+-		gpios = <11 GPIO_ACTIVE_HIGH>;
+-		line-name = "tpm_rst#";
+-	};
+-};
+-
+ &gpio4 {
+ 	dio_1 {
+ 		gpio-hog;
+@@ -21,6 +12,13 @@
+ 		line-name = "dio1";
+ 	};
+ 
++	tpm_rst {
++		gpio-hog;
++		output-high;
++		gpios = <9 GPIO_ACTIVE_HIGH>;
++		line-name = "tpm_rst#";
++	};
 +
-+rock5b:
-+  variables:
-+    ROLE: rock5b
-+  <<: *lab_dfn
+ 	dio_0 {
+ 		gpio-hog;
+ 		input;
+diff --git a/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi b/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
+index 4d0e9a1e67c5..7e6f66bd9dd9 100644
+--- a/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi
+@@ -10,15 +10,6 @@
+ 	reset-post-delay-us = <300000>;
+ };
+ 
+-&gpio1 {
+-	tpm_rst {
+-		gpio-hog;
+-		output-high;
+-		gpios = <11 GPIO_ACTIVE_HIGH>;
+-		line-name = "tpm_rst#";
+-	};
+-};
+-
+ &gpio4 {
+ 	dio_1 {
+ 		gpio-hog;
+@@ -27,6 +18,13 @@
+ 		line-name = "dio1";
+ 	};
+ 
++	tpm_rst {
++		gpio-hog;
++		output-high;
++		gpios = <9 GPIO_ACTIVE_HIGH>;
++		line-name = "tpm_rst#";
++	};
++
+ 	dio_0 {
+ 		gpio-hog;
+ 		input;
 -- 
-2.34.1
+2.25.1
 
