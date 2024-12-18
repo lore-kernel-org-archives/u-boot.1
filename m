@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43AE3E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6F6E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:47:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24E178030F;
-	Wed, 18 Dec 2024 13:46:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E7368021D;
+	Wed, 18 Dec 2024 13:47:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eLdJ0klc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l/8foEtY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA11B8022B; Wed, 18 Dec 2024 13:46:24 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22FD580239
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:46:22 +0100 (CET)
+ id 12B098031D; Wed, 18 Dec 2024 10:30:40 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 14E2E8027E
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:30:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BICkDeG008778;
- Wed, 18 Dec 2024 06:46:13 -0600
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UZDx4102799
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 18 Dec 2024 03:30:35 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734525973;
- bh=g87Yo8g2XqkpmTTSkrjvVI6AsFDOWBcmSHg9LWhq1Bk=;
+ s=ti-com-17Q1; t=1734514235;
+ bh=+NmmsVPwEhR3gXxZol1XiHme+1UxtlJYmnYIWnt1EFs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=eLdJ0klcIBRLv2SaGFtRzq+OTKhIUvZIR0ANzXkspS1o1kW5YZGeUmR0AWhgFkSJv
- L2swqIwA2r12TRmHrqs14N3G8JrcDEoSK1eKWDHOReB9Hjl/PM7Bg3XhAnbw1QSHo6
- BcF/RBk4xs/uR/JGqRELqm2GYKCTMciMdeA/aWE8=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICkDkB044641;
- Wed, 18 Dec 2024 06:46:13 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ b=l/8foEtYzsgDtZfZgxju+1v43/4IgksSiTpz4ZEGwvnHomJpLzYlIr4eqwGeF0PYi
+ e5WIFt8b0SXnFIa+m/DH+XnVfqKOnFRRnMFJvuTjz/vdKFppJDDwgiy87NnmnVLCXG
+ b0k1ootv4HRptq1NXlrkiffMocfe9VjyrdudXmuU=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UZQH025753
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 18 Dec 2024 03:30:35 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 06:46:12 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 03:30:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 06:46:12 -0600
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICjgTH003797;
- Wed, 18 Dec 2024 06:46:08 -0600
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
- <n-francis@ti.com>, <mkorpershoek@baylibre.com>, <afd@ti.com>,
- <glaroque@baylibre.com>, <sjoerd@collabora.com>,
- <martyn.welch@collabora.com>, <rasmus.villemoes@prevas.dk>,
- <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
- <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2 5/5] doc: board: document support for USB DFU boot on
- AM62Px SoC
-Date: Wed, 18 Dec 2024 18:15:35 +0530
-Message-ID: <20241218124542.3519447-6-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241218124542.3519447-1-s-vadapalli@ti.com>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
+ Frontend Transport; Wed, 18 Dec 2024 03:30:34 -0600
+Received: from aparna-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.31])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI9USGF060685;
+ Wed, 18 Dec 2024 03:30:32 -0600
+From: Aparna Patra <a-patra@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>
+CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
+ Aparna Patra <a-patra@ti.com>
+Subject: [PATCH 1/3] arm: mach-k3: am62p: Fixup CPU core,
+ CAN-FD and Video-codec nodes in fdt
+Date: Wed, 18 Dec 2024 15:00:23 +0530
+Message-ID: <20241218093025.45701-2-a-patra@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241218093025.45701-1-a-patra@ti.com>
+References: <20241218093025.45701-1-a-patra@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Wed, 18 Dec 2024 13:47:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,73 +83,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since USB DFU boot is supported on AM62Px SoC, document the steps
-required to build the image for USB DFU boot along with the steps to
-send images using the "dfu-util" tool.
+AM62P SOC is available in multiple variants:
+-CPU cores (Cortex-A) AM62Px1 (1 core),
+ AM62Px2 (2 cores), AM62Px4 (4 cores)
+-With and without CAN-FD & Video-codec support
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Remove the relevant FDT nodes by reading the actual configuration
+from the SoC registers, with that change it is possible to have a single
+dts/dtb file handling the different variant at runtime.
+
+Signed-off-by: Aparna Patra <a-patra@ti.com>
 ---
-This patch has been newly introduced in this series based on the
-discussion at:
-https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3-s-vadapalli@ti.com/#3432702
+ arch/arm/mach-k3/am62px/am62p5_fdt.c          | 34 +++++++++++++++++++
+ .../arm/mach-k3/include/mach/am62p_hardware.h | 29 ++++++++++++++++
+ 2 files changed, 63 insertions(+)
 
-NOTE: This patch should only be merged if all other patches in this
-series will also be merged, in order to ensure that the feature is
-documented only if it is supported (i.e. all patches in this series
-which are required for the feature to be functional have been merged).
-
- doc/board/ti/am62px_sk.rst | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
-
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index 99bdc034869..75451ad76b5 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -124,6 +124,18 @@ Set the variables corresponding to this platform:
-     :start-after: .. k3_rst_include_start_build_steps_spl_r5
-     :end-before: .. k3_rst_include_end_build_steps_spl_r5
+diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+index 29c832d28a..e88760ea51 100644
+--- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
++++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
+@@ -7,8 +7,42 @@
+ #include "../common_fdt.h"
+ #include <fdt_support.h>
  
-+* 3.1.1 Alternative build of R5 for DFU boot:
++static void fdt_fixup_cores_wdt_nodes_am62p(void *blob, int core_nr)
++{
++	char node_path[32];
 +
-+  As the SPL size can exceed the limit when building it with support for
-+  booting from both local storage *and* DFU, in order to disable the
-+  configs not required for DFU boot, a config fragment should be used
-+  to not only enable configs for DFU boot, but also disabled the unneeded
-+  configs.
++	if (core_nr < 1)
++		return;
 +
-+.. prompt:: bash $
++	for (; core_nr < 4; core_nr++) {
++		snprintf(node_path, sizeof(node_path), "/cpus/cpu@%d", core_nr);
++		fdt_del_node_path(blob, node_path);
++		snprintf(node_path, sizeof(node_path), "/cpus/cpu-map/cluster0/core%d", core_nr);
++		fdt_del_node_path(blob, node_path);
++		snprintf(node_path, sizeof(node_path), "/bus@f0000/watchdog@e0%d0000", core_nr);
++		fdt_del_node_path(blob, node_path);
++	}
++}
 +
-+   export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
++static void fdt_fixup_video_codec_nodes_am62p(void *blob, bool has_video_codec)
++{
++	if (!has_video_codec)
++		fdt_del_node_path(blob, "/bus@f0000/video-codec@30210000");
++}
 +
- * 3.2 A53:
++static void fdt_fixup_canfd_nodes_am62p(void *blob, bool has_canfd)
++{
++	if (!has_canfd) {
++		fdt_del_node_path(blob, "/bus@f0000/can@20701000");
++		fdt_del_node_path(blob, "/bus@f0000/can@20711000");
++	}
++}
++
+ int ft_system_setup(void *blob, struct bd_info *bd)
+ {
++	fdt_fixup_cores_wdt_nodes_am62p(blob, k3_get_core_nr());
++	fdt_fixup_video_codec_nodes_am62p(blob, k3_has_video_codec());
++	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
+ 	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
+ 	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
  
- .. include::  ../ti/k3.rst
-@@ -290,6 +302,25 @@ https://www.ti.com/lit/pdf/spruj83 under the `Boot Mode Pins` section.
+diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
+index 923466c41f..339562722d 100644
+--- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
+@@ -19,6 +19,14 @@
+ #define MCU_CTRL_MMR0_BASE			0x04500000
+ #define WKUP_CTRL_MMR0_BASE			0x43000000
  
- For SW2 and SW1, the switch state in the "ON" position = 1.
++#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
++#define JTAG_DEV_CORE_NR_MASK			GENMASK(19, 18)
++#define JTAG_DEV_CORE_NR_SHIFT			18
++#define JTAG_DEV_CANFD_MASK			BIT(15)
++#define JTAG_DEV_CANFD_SHIFT			15
++#define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
++#define JTAG_DEV_VIDEO_CODEC_SHIFT			14
++
+ #define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
+ #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
+ #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
+@@ -72,6 +80,27 @@
  
-+DFU based boot
-+--------------
-+
-+To boot the board over DFU, set the switches to DFU mode and connect to the
-+USB type C DRD port on the board. After power-on the build artifacts needs to be
-+uploaded one by one with a tool like dfu-util.
-+
-+The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
-+upload. The next stages as exposed by U-Boot have target alts matching the name
-+of the artifacts, for these a USB reset has to be done after each upload.
-+
-+When using dfu-util the following commands can be used to boot to a U-Boot shell:
-+
-+.. prompt:: bash $
-+
-+  dfu-util -a bootloader -D tiboot3.bin
-+  dfu-util -R -a tispl -D tispl.bin
-+  dfu-util -R -a u-boot.img -D u-boot.img
-+
- Debugging U-Boot
- ----------------
+ #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
  
++static inline int k3_get_core_nr(void)
++{
++	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
++
++	return ((dev_id & JTAG_DEV_CORE_NR_MASK) >> JTAG_DEV_CORE_NR_SHIFT) + 1;
++}
++
++static inline int k3_has_video_codec(void)
++{
++	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
++
++	return !((dev_id & JTAG_DEV_VIDEO_CODEC_MASK) >> JTAG_DEV_VIDEO_CODEC_SHIFT);
++}
++
++static inline int k3_has_canfd(void)
++{
++	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
++
++	return (dev_id & JTAG_DEV_CANFD_MASK) >> JTAG_DEV_CANFD_SHIFT;
++}
++
+ #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
+ 
+ static const u32 put_device_ids[] = {};
 -- 
-2.43.0
+2.34.1
 
