@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29392E77183
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 04:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B043E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 05:08:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE63A80214;
-	Wed, 18 Dec 2024 05:55:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D06548021A;
+	Wed, 18 Dec 2024 06:08:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="I6BWMAno";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NQWPSF/S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033738021A; Wed, 18 Dec 2024 05:55:41 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id B46E78021D; Wed, 18 Dec 2024 06:08:43 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69D4080196
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 05:55:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2335780214
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 06:08:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI4tSPV4071042
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 17 Dec 2024 22:55:28 -0600
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI58dtm110584
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 17 Dec 2024 23:08:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734497728;
- bh=TcMkQYGQM/EddZziyMEK2cFFJhT5Y9evmuw/P2ReAys=;
+ s=ti-com-17Q1; t=1734498519;
+ bh=C1wK17Bpm7iGgGdDUIIHcp365Ics4G07uhIznf1WLXk=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=I6BWMAnoBIADP2+sfqZsV0MGWQm/F2rqVMvXnBn0luP9taWrKzqCh6FRyKI2B1JES
- JyoPdIwoe6MIFkvjDj6Q9Dd6LqOz5A0hxKuJ8GaVhqSoBocXJrZkxYAA5owWinYL8n
- 414b1ulnx3tny3lkHMtdldWcL6wOXqgBticpmHLk=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI4tSgk031856;
- Tue, 17 Dec 2024 22:55:28 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ b=NQWPSF/SbRADk3gpau83r204hwZSkQ/CLpDA/3ysy03kq+P1mmBu4J+9VFp77Qd3n
+ 5Pjy1+8Qeg0p0owOgDDB8xjUy57qsT6rMNqlX49QbWGOIngcv/5/AbRMWLZA/ZyGQt
+ gPCGJX/dHkxBpRE6dieHWNTgszcFhYdziYJeE+As=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI58dfP101811
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Dec 2024 23:08:39 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Dec 2024 22:55:28 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 23:08:38 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Dec 2024 22:55:28 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI4tRrg059666;
- Tue, 17 Dec 2024 22:55:27 -0600
-Date: Wed, 18 Dec 2024 10:25:26 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Jon Humphreys <j-humphreys@ti.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <lukma@denx.de>, <n-francis@ti.com>,
- <mkorpershoek@baylibre.com>, <afd@ti.com>, <glaroque@baylibre.com>,
- <sjoerd@collabora.com>, <martyn.welch@collabora.com>,
- <rasmus.villemoes@prevas.dk>, <caleb.connolly@linaro.org>,
- <rogerq@kernel.org>, <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH 1/4] dfu: do not overwrite "dfu_alt_info"
-Message-ID: <p7cti5gasig2ambea2mtu4ruhmzvsfmzidvvcqsk2hbxcygl6t@ucnebtamj64g>
-References: <20241217131658.2920799-1-s-vadapalli@ti.com>
- <20241217131658.2920799-2-s-vadapalli@ti.com>
- <86ldwe3u8e.fsf@udb0321960.dhcp.ti.com>
+ Frontend Transport; Tue, 17 Dec 2024 23:08:38 -0600
+Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI58c3K017183;
+ Tue, 17 Dec 2024 23:08:38 -0600
+Date: Wed, 18 Dec 2024 10:38:37 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>,
+ Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
+Message-ID: <20241218050837.5fppn7j7s5vv5f5m@uda0497581>
+References: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
+ <20241217145300.GN1505244@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <86ldwe3u8e.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <20241217145300.GN1505244@bill-the-cat>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,53 +82,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 17, 2024 at 02:55:13PM -0600, Jon Humphreys wrote:
-> Siddharth Vadapalli <s-vadapalli@ti.com> writes:
-> 
-> > From: Jonathan Humphreys <j-humphreys@ti.com>
-> >
-> > For use-cases such as USB DFU Boot, "spl_dfu_cmd()" will setup the
-> > appropriate value for "dfu_alt_info". To facilitate such use-cases and
-> > in order to avoid overwriting the value of "dfu_alt_info", invoke the
-> > "set_dfu_alt_info()" function only when "dfu_alt_info" is not defined.
-> >
-> > Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > ---
-> >  drivers/dfu/dfu.c | 7 +++++--
-> >  1 file changed, 5 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> > index 756569217bb..ab8abae1d89 100644
-> > --- a/drivers/dfu/dfu.c
-> > +++ b/drivers/dfu/dfu.c
-> > @@ -169,10 +169,13 @@ int dfu_init_env_entities(char *interface, char *devstr)
-> >  	dfu_reinit_needed = false;
-> >  	dfu_alt_info_changed = false;
-> >  
-> > +	str_env = env_get("dfu_alt_info");
-> >  #ifdef CONFIG_SET_DFU_ALT_INFO
-> > -	set_dfu_alt_info(interface, devstr);
-> > +	if (!str_env) {
-> > +		set_dfu_alt_info(interface, devstr);
-> > +		str_env = env_get("dfu_alt_info");
-> > +	}
-> >  #endif
-> > -	str_env = env_get("dfu_alt_info");
-> >  	if (!str_env) {
-> >  		pr_err("\"dfu_alt_info\" env variable not defined!\n");
-> >  		return -EINVAL;
-> > -- 
-> > 2.43.0
-> 
-> Hi Siddharth, thanks. I went ahead and just posted a separate patch to fix
-> this issue. I added a bit more explanation, and wanted it separate so that
-> it can hopefully make the 2025.01 release.
-> 
-> See https://lore.kernel.org/r/20241217204835.3312765-1-j-humphreys@ti.com.
+Hi Tom,
 
-Thank you Jon. I will drop this patch in the v2 series. I have reviewed
-your patch and shared feedback.
+On 08:53-20241217, Tom Rini wrote:
+> On Tue, Dec 17, 2024 at 02:24:37PM +0530, Manorit Chawdhry wrote:
+> 
+> > Currently the driver relies on bootph flag to probe it during PRE_RELOC
+> > stage but with the upcoming cleanup of v6.13, we don't have the bootph
+> > property in the parent nodes anymore and ti_sci driver being one of the
+> > parent nodes required during SPL stage would end up hampering the probe
+> > model [0].
+> > 
+> > Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+> 
+> 
+> Can you please expand on why with v6.13 we don't have the flag anymore?
+> Thanks.
+
+So the idea was that following series [0] would help us cleanup all the
+parent node bootph-* tags as putting a bootph-* in child node implies
+that it applies to parent nodes as well, though even if the parent node
+gets packed after the following series, the parent node still don't get
+probed as from my understanding, we need bootph-* tag to probe the
+driver as well but the phase tag doesn't get propagated as such.
+
+So while working in Linux, some comments related to this was raised [1]
+and after confirming the behaviour with Simon [2], the cleanup was done
+in Linux and meanwhile this way was found to probe the driver so that
+even after cleaning up the parent bootph-* tags we can continue.
+
+I don't think it's a hack also as this driver is required pre-relocation
+and this is another way to probe it pre-relocation but the only thing is
+that since the cleanup is done right now, we would kind of need it to be
+booting in some platforms ( that were fully reliant on Linux DT and
+don't have -u-boot override for this particular node with bootph-* )
+before 6.13 DT gets synced up.
+
+[0]: https://lore.kernel.org/u-boot/20231217163627.2339802-1-sjg@chromium.org/
+[1]: https://lore.kernel.org/all/20240709084857.nf7c57mi6miajeau@uda0497581/#t
+[2]: https://lore.kernel.org/u-boot/CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com/
 
 Regards,
-Siddharth.
+Manorit
+
+> 
+> -- 
+> Tom
