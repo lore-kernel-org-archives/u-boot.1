@@ -4,74 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5ECE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:15:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8771E77188
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:29:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6164D8027E;
-	Wed, 18 Dec 2024 11:15:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 431F480288;
+	Wed, 18 Dec 2024 11:29:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kw05g/Pn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bHDG31dv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F6F880288; Wed, 18 Dec 2024 11:15:01 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1774E80269
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:14:58 +0100 (CET)
+ id 57F81802EF; Wed, 18 Dec 2024 11:29:16 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BC7468027E
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:29:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIAEkMv4107307
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 04:14:46 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734516886;
- bh=AxrQOZ1S7OLQbMjpCz1H7OuMiJc91USYDhyEVA9naRk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=kw05g/PnOwj0lEMqrnjAbJXbL1P1sDPtnoCevrDUJTbv4mLo1KQrS05m/bxyxLhN7
- PhvWyLPfyFkZHxeb1yF21bPn1wr9VwnCP1b7lsBTF5iGBSGL8Y6YIOkiY8wFL1vc/y
- AIti/jrM1YSdbbbMo5vz90G2LMu5ad+2imM/4nh4=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIAEk7m027292
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 04:14:46 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 04:14:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 04:14:45 -0600
-Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIAEijF109344;
- Wed, 18 Dec 2024 04:14:45 -0600
-Date: Wed, 18 Dec 2024 15:44:43 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
- <trini@konsulko.com>, <lukma@denx.de>, <n-francis@ti.com>,
- <afd@ti.com>, <glaroque@baylibre.com>, <sjoerd@collabora.com>,
- <martyn.welch@collabora.com>, <rasmus.villemoes@prevas.dk>,
- <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
- <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
-Subject: Re: [PATCH 2/4] board: ti: am62px: env: include environment for DFU
- Boot
-Message-ID: <g7pupq6leeait24a4uqf3toncr5knxl2ffjvxtqesp4uymacdq@c3vsv5ee5mdt>
-References: <20241217131658.2920799-1-s-vadapalli@ti.com>
- <20241217131658.2920799-3-s-vadapalli@ti.com>
- <87y10dwbxr.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5cec9609303so8765296a12.1
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 02:29:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734517753; x=1735122553; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OXX2Ey1HxNeXcT5Cd20FX34PSsKDVYm9bgKot4XI0Fw=;
+ b=bHDG31dvIIE9OCj+5tsOPlupgm+C5cprRnGxEPCPGlIC5rfhdT2Fd34mE+TAdFYCTK
+ Qo3EX+A1VixYO+EIizcZyRf1IzyitPl3yLmyX2KTB90BM1hvUefriTUXJoDHiRHsQRFQ
+ VaYC7NI8mhq/QvK4KnKSthr9O08yUSRs6icDd9hkGrytSYWgTbG1IpYvTFLoKSGgzzjr
+ c/tg+oaSKkx2vKpWGFP7+FYAZRn2o5LaD/wvERbXHkAUxWJPVCycRXqSPj5CpuUhI1Rn
+ OkvuMFk+qAaOYHsB42o8wMHaVBp0yWdQzg5EyYt7xYPgmB0A8oxCdZdEE46GhJJRXznq
+ SQ6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734517753; x=1735122553;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OXX2Ey1HxNeXcT5Cd20FX34PSsKDVYm9bgKot4XI0Fw=;
+ b=atCYPupmy9noR6+aIXU4a9RkumxHWJWay+y1EVaKJ4T5HOrnWqmZd4zY0xhkBhjXJ+
+ p8RoyTV304WwmoKJ4eTgcORPBUdAIEz2/ITEg3WB9WldlwfzM2viwnA4rJEFcY8fO+Up
+ WLLQLuwz84lY7ArcBwnZVmtRTi3Ubpo/1TBR2m9fMHhYbwZCxGhQ24p/Jnn8cjjadD36
+ 9UepCcp5+94CwK5LVjt9snwX03UJs/kGFIHGz47oUEE+W/I6pU2d8NILIRGmeFiyzpu4
+ 77hJdAORka90OFFAaZcGwWJUi1oj9SrB+o0LnetZBedLnFO79Nj1O6bMTl1Tl9TbZ4Ue
+ Bo2Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUoU/kjIs9kv+E0bS4nlwHaQD4ZU/N/scJOM4BTNcXx8Z/jeRAWelKcKo0eIF5QI4/0E5ytSaw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7I1NlFtw5jL3Ktp5gHzktHViJV6YkuGe35wIglL/m5XskOwC7
+ OjffPV435eoCg+A2qFNI4wHNG2Z/wPMLOwpFpWJc/201WRGY354wY34kuLV9JMaecdUXYrAEBd4
+ r3B4=
+X-Gm-Gg: ASbGncvNkk1Z5TItVKdCM7kGC5a9Zaf2DWerpxbcmpjGHXv6W45W6YcW2AINeD/NJvI
+ GfPurdNdqfq8vhSoOZp+zqacKI/55zhtErXIXeY5gh9ZitIsTbdQK/NdDaXs7HGBQY7tGqNqyOp
+ IBE3y98EEoalU+Igp8eAYZfDgiUfmBERbNOmJW7XPvVoNK5U8YSqk+4ao4UCeLKY7RsCOFwjabP
+ 5rgDs5iqO301o3LEHynJD1sdbH9AkyKnBv9sSldg85eQmADmZupuRO3pMvSJc7bH37ILNvF2Dwd
+ L/Rf91saPJt6h91gGHETb+puLrWULxcxVMDU
+X-Google-Smtp-Source: AGHT+IH3iRT7D4AAb/f1Uqj9H4+HrdTUfO8UF9fC+1NICEgwQkbYEG30UxhZ97VuOSkdkvRB0DG02w==
+X-Received: by 2002:a05:6402:2345:b0:5d0:bcdd:ff8f with SMTP id
+ 4fb4d7f45d1cf-5d7ee3a334emr2416889a12.4.1734517753135; 
+ Wed, 18 Dec 2024 02:29:13 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:7a7b:97ce:b355:53a9?
+ ([2a01:e0a:3cb:7bb0:7a7b:97ce:b355:53a9])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d652ab5114sm5444270a12.5.2024.12.18.02.29.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Dec 2024 02:29:12 -0800 (PST)
+Message-ID: <4dfe81d0-e15f-45cd-bc0e-a509157877b7@linaro.org>
+Date: Wed, 18 Dec 2024 11:29:11 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87y10dwbxr.fsf@baylibre.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/2] cmd: Add support for optee commands
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, trini@konsulko.com, sjg@chromium.org,
+ jens.wiklander@linaro.org, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
+ mkorpershoek@baylibre.com, akashi.tkhro@gmail.com,
+ francis.laniel@amarulasolutions.com, ddrokosov@salutedevices.com, git@amd.com
+References: <20241218041914.1463666-1-venkatesh.abbarapu@amd.com>
+ <20241218041914.1463666-2-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20241218041914.1463666-2-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,110 +106,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Dec 18, 2024 at 10:57:36AM +0100, Mattijs Korpershoek wrote:
 
-Hello Mattijs,
 
-> Hi Siddharth,
+On 12/18/24 05:19, Venkatesh Yadav Abbarapu wrote:
+> Add the basic 'hello world ta' command which increment
+> of the value passed. This provides easy test for
+> establishing a session with OP-TEE TA and verify.
 > 
-> Thank you for the patch.
+> It includes following "hello world ta" subcommands:
+> optee hello; default value '0' is passed and gets incremented.
+> optee hello <value>; value to increment via OP-TEE HELLO
+> WORLD TA.
 > 
-> On mar., déc. 17, 2024 at 18:46, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
+> To enable the OP-TEE side HELLO WORLD example please refer
+> https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
 > 
-> > Include the TI K3 DFU environment to support DFU Boot and DFU Flash.
-> > Also add "usb" to the list of "boot_targets".
-> >
-> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> > ---
-> >  board/ti/am62px/am62px.env | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-> > index 7ef54079aa8..e0838196e3a 100644
-> > --- a/board/ti/am62px/am62px.env
-> > +++ b/board/ti/am62px/am62px.env
-> > @@ -1,5 +1,6 @@
-> >  #include <env/ti/ti_common.env>
-> >  #include <env/ti/mmc.env>
-> > +#include <env/ti/k3_dfu.env>
-> >
-> >  name_kern=Image
-> >  console=ttyS2,115200n8
-> > @@ -7,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-> >  	${mtdparts}
-> >  run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-> >
-> > -boot_targets=mmc1 mmc0 pxe dhcp
-> > +boot_targets=mmc1 mmc0 usb pxe dhcp
-> >  boot=mmc
-> >  mmcdev=1
-> >  bootpart=1:2
-> > @@ -17,4 +18,4 @@ rd_spec=-
-> >  #if CONFIG_BOOTMETH_ANDROID
-> >  #include <env/ti/android.env>
-> >  adtb_idx=3
-> > -#endif
-> > \ No newline at end of file
-> > +#endif
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>  cmd/Kconfig  |  6 +++++
+>  cmd/Makefile |  1 +
+>  cmd/optee.c  | 76 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 83 insertions(+)
+>  create mode 100644 cmd/optee.c
 > 
-> This change seems un-related, is it needed?
-
-My editor automatically adds a newline, thereby fixing the warning/error
-regarding the absence of a newline. I assume that a newline is expected.
-Please let me know if you want me to undo this in the v2 series.
-
-> 
-> Also, looking at Martyn's/Sjoerd's series, I see a couple of things
-> missing:
-> 1. Documentation. now that am62px is compatible with the
->    am62x_r5_usbdfu.config fragment, we need to document this in the board
->    docs. See: commit def64b493748 ("doc: board: Add document for DFU boot on am62x SoCs")
-
-I planned on documenting it once this series got merged. The reason
-behind it is that I was unsure if the device-tree patch in this series
-will be accepted or will be asked to be enabled via the Linux DT Sync
-process. In the latter case, documenting this feature will be incorrect
-in the event of a partial merge (i.e. the documentation patch gets
-merged but the device-tree patch doesn't).
-
-> 
-> 2. Including configs/am62x_a53_usbdfu.config in configs/am62px_evm_a53_defconfig.
->    This is how it's done for am62x, see:
->    commit dfc2dff5a844 ("configs: am62x_evm_*: Enable USB and DFU support")
-> 
-> Note that If we don't do 2), we cannot use USB gadget from a U-Boot that
-> has been booted over DFU:
-> 
->     => fastboot usb 0
->     No USB device found
->     USB init failed: -19
->     => usb list
->     USB is stopped. Please issue 'usb start' first.
->     => usb start
->     starting USB...
->     No USB controllers found
->     =>
-> 
-> For 2, this diff fixes it:
-> 
-> diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-> index 9635beb1b27e..81f433c997b5 100644
-> --- a/configs/am62px_evm_a53_defconfig
-> +++ b/configs/am62px_evm_a53_defconfig
-> @@ -183,3 +183,4 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
->  CONFIG_EFI_SET_TIME=y
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 1d7ddb4ed36..4b33468891e 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1446,6 +1446,12 @@ config CMD_OPTEE_RPMB
+>  	  in the Replay Protection Memory Block partition in eMMC by
+>  	  using Persistent Objects in OPTEE
 >  
->  #include <configs/k3_efi_capsule.config>
-> +#include <configs/am62x_a53_usbdfu.config>
-> 
-> In my opinion, 2) is a valid use case:
-> 1. On a blank board, we boot the bootloaders over DFU
-> 2. Once U-Boot is started, we start fastboot to flash all images to eMMC.
-> 
-> Could this be added for v2, please?
+> +config CMD_OPTEE
+> +	bool "Enable OP-TEE commands"
+> +	depends on OPTEE
+> +	help
+> +	 OP-TEE commands support.
+> +
+>  config CMD_MTD
+>  	bool "mtd"
+>  	depends on MTD
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index d1f369deec0..533d0f6a1be 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -118,6 +118,7 @@ obj-$(CONFIG_CMD_PAUSE) += pause.o
+>  obj-$(CONFIG_CMD_SLEEP) += sleep.o
+>  obj-$(CONFIG_CMD_MMC) += mmc.o
+>  obj-$(CONFIG_CMD_OPTEE_RPMB) += optee_rpmb.o
+> +obj-$(CONFIG_CMD_OPTEE) += optee.o
+>  obj-$(CONFIG_CMD_MP) += mp.o
+>  obj-$(CONFIG_CMD_MTD) += mtd.o
+>  obj-$(CONFIG_CMD_MTDPARTS) += mtdparts.o
+> diff --git a/cmd/optee.c b/cmd/optee.c
+> new file mode 100644
+> index 00000000000..e8d5f4ceb36
+> --- /dev/null
+> +++ b/cmd/optee.c
+> @@ -0,0 +1,76 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * (C) Copyright 2024, Advanced Micro Devices, Inc.
+> + */
+> +#include <command.h>
+> +#include <errno.h>
+> +#include <tee.h>
+> +#include <vsprintf.h>
+> +
+> +#define TA_HELLO_WORLD_CMD_INC_VALUE 0
+> +/* This needs to match the UUID of the Hello World TA. */
+> +#define TA_HELLO_WORLD_UUID \
+> +	{ 0x8aaaf200, 0x2450, 0x11e4, \
+> +	{ 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} }
+> +
+> +static int hello_world_ta(unsigned int value)
+> +{
+> +	const struct tee_optee_ta_uuid uuid = TA_HELLO_WORLD_UUID;
+> +	struct tee_open_session_arg session_arg;
+> +	struct udevice *tee = NULL;
+> +	struct tee_invoke_arg arg;
+> +	struct tee_param param[2];
+> +	int rc;
+> +
+> +	tee = tee_find_device(tee, NULL, NULL, NULL);
+> +	if (!tee)
+> +		return -ENODEV;
+> +
+> +	memset(&session_arg, 0, sizeof(session_arg));
+> +	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
+> +	rc = tee_open_session(tee, &session_arg, 0, NULL);
+> +	if (rc) {
+> +		printf("tee_open_session(): failed(%d)\n", rc);
+> +		return rc;
+> +	}
+> +
+> +	arg.func = TA_HELLO_WORLD_CMD_INC_VALUE;
+> +	arg.session = session_arg.session;
+> +
+> +	param[0].attr = TEE_PARAM_ATTR_TYPE_VALUE_INOUT;
+> +	param[0].u.value.a = value;
+> +
+> +	printf("Value before: 0x%x\n", (int)param[0].u.value.a);
+> +	printf("Calling TA\n");
+> +	tee_invoke_func(tee, &arg, 1, param);
+> +
+> +	printf("Value after: 0x%x\n", (int)param[0].u.value.a);
+> +	return tee_close_session(tee, session_arg.session);
+> +}
+> +
+> +static int do_optee_hello_world_ta(struct cmd_tbl *cmdtp, int flag, int argc,
+> +				   char * const argv[])
+> +{
+> +	int ret, value = 0;
+> +
+> +	if (strcmp(argv[1], NULL))
+> +		value = hextoul(argv[1], NULL);
+> +
+> +	ret = hello_world_ta(value);
+> +	if (ret)
+> +		return CMD_RET_FAILURE;
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+> +U_BOOT_LONGHELP(optee,
+> +		"- commands can be verified on OP-TEE\n\n"
 
-Sure, I will include it in the v2 series. Thank you for reviewing this
-patch and sharing feedback.
+What is this supposed to mean?
 
-Regards,
-Siddharth.
+> +		"optee hello\n"
+> +		"optee hello <value>\n"
+
+Optional values are usually indicated with []
+
+> +		"\n"
+> +		"With:\n"
+> +		"\t<value>: integer value\n"
+> +		);
+> +
+> +U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
+> +			U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
+
+I believe the following should be clear and good enough:
+
+U_BOOT_LONGHELP(optee,
+	"hello [<value>]   Invoke the OP-TEE 'Hello World' TA\n");
+U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
+	U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
+
+
+With that:
+
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
+
+Thanks,
+-- 
+Jerome
