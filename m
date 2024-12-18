@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF84E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05889E77188
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:45:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBE528031F;
-	Wed, 18 Dec 2024 11:45:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5AC908037B;
+	Wed, 18 Dec 2024 11:45:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="gqJarCIl";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="b1HPqNaQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE56780377; Wed, 18 Dec 2024 11:45:25 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 5FEED80377; Wed, 18 Dec 2024 11:45:26 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD7A5802C2
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:45:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 650198031F
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:45:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2082afbf55=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI60KUl011158;
- Wed, 18 Dec 2024 11:45:10 +0100
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI7EeJS022006;
+ Wed, 18 Dec 2024 11:45:21 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- lFDSQWFS0IjSoJz2iiQketPtlHDGr/swBFnxhFOFpoo=; b=gqJarCIlTpb9TCCH
- bno9aimTthi/A1mUmrT9UtSKxt2zLSYPFuNx395I8TnOU2l83xFe0LFYpfrLCiTa
- /Nn3179A8O+HsYuTjKmp9nZCtyQ+9nmfBbpVcVQ9YCAu/RDJhOaJBpe4/WpYPgSa
- +o8y2J77OuCbbAp2aKwddVSWEPiVSkfhIrNEJdclh6VwipvnkW7Ah4X5IX8F0duz
- mb+x5aep2N3CliHiwDcEOljVH3L1CpyAVgpN5wCotrUQe5KS+I/TLJe3+wAhyymE
- M4Sc3qONOHTy/ceDZck2poWmUvnniIphUaY4VhDQeEydM94An2mFPMJdmhvLe4VO
- t2y37g==
+ zRMvvVCDxfDuIZAEkBJfTJFg1QpqpCVxLqnXYodOt30=; b=b1HPqNaQnxWSDPA+
+ 4WMCMfrjUnEDJE1ZRwZHqFmbl5UsB4ggMmpyYnLNoMlHybY5piFx67R90Bz5JdwF
+ wllWuaBwEF0zQ2PqUW9c+K1Mn9vGKX39a25cOxxejfJ78qCZpnMt3now5lKioOfN
+ 6KVX1h+JUnj5K3L2B1AExrSdBVpTSw+KbACkHUHbefqFw+Nr5LEPH51uqejj5LB7
+ gblRlcURiUH0fBL21vAo5NEhrHWqDI7JlDSgRLQvaWh1bbaZpTH8EkNlrfoiZGk1
+ yuGUgkQjqLZZ9Mvpr/R9z1n+zoe+EupVAU2prZTmy4aVc+jCfHpEXBK6AeuETtK9
+ Thc+/A==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43krrcs54n-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43kfu8am95-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Dec 2024 11:45:10 +0100 (CET)
+ Wed, 18 Dec 2024 11:45:20 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B977040071;
- Wed, 18 Dec 2024 11:43:44 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 152124008A;
+ Wed, 18 Dec 2024 11:44:16 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 10C812698F6;
- Wed, 18 Dec 2024 11:41:49 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7546525EEA5;
+ Wed, 18 Dec 2024 11:43:27 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
- 2024 11:41:48 +0100
-Message-ID: <ad83c80a-261a-45ed-bd1d-1f4871d9a543@foss.st.com>
-Date: Wed, 18 Dec 2024 11:41:48 +0100
+ 2024 11:43:26 +0100
+Message-ID: <c63bcb77-2f72-431f-b33e-067e51a3abde@foss.st.com>
+Date: Wed, 18 Dec 2024 11:43:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [Uboot-stm32] [PATCH 3/4] ARM: dts: stm32: Drop
- access-controllers from SPL DT on DH STM32MP15xx DHSOM
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>, Simon Glass
- <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Igor Opaniuk
- <igor.opaniuk@gmail.com>
-References: <20241215233011.569287-1-marex@denx.de>
- <20241215233011.569287-3-marex@denx.de>
- <e88ac210-9f46-41c1-b007-494740603d07@foss.st.com>
- <3b50d9e8-89d7-4b2b-8187-17c69d6aa494@foss.st.com>
+Subject: Re: [PATCH 3/5] configs: stm32mp1: Restore boot SPL from sdcard for
+ Engicam i.Core STM32MP1 EDIMM2.2
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20241216102219.347725-1-patrice.chotard@foss.st.com>
+ <20241216102219.347725-3-patrice.chotard@foss.st.com>
+ <41a32d96-4563-422a-8164-4f995cd7769f@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <3b50d9e8-89d7-4b2b-8187-17c69d6aa494@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <41a32d96-4563-422a-8164-4f995cd7769f@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -97,72 +97,42 @@ X-Virus-Status: Clean
 
 
 
-On 12/18/24 11:32, Patrice CHOTARD wrote:
+On 12/18/24 10:05, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 12/16/24 11:22, Patrice Chotard wrote:
+>> Restore boot SPL from sdcard for Engicam i.Core STM32MP1 EDIMM2.2.
+>>
+>> Fixes: 2a00d73d081a ("spl: mmc: Try to clean up raw-mode options")
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+>> index 3f7eebd21d8..b733913be01 100644
+>> --- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+>> +++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+>> @@ -27,6 +27,9 @@ CONFIG_SPL_SYS_MALLOC=y
+>>   CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+>>   CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+>>   CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+>> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
+>>   CONFIG_SPL_ENV_SUPPORT=y
+>>   CONFIG_SPL_I2C=y
+>>   CONFIG_SPL_POWER=y
 > 
 > 
-> On 12/16/24 09:54, Patrice CHOTARD wrote:
->>
->>
->> On 12/16/24 00:29, Marek Vasut wrote:
->>> The access-controllers DT property is not useful in STM32MP15xx SPL,
->>> remove it to reduce SPL control DT size. No functional change.
->>>
->>> Signed-off-by: Marek Vasut <marex@denx.de>
->>> ---
->>> NOTE: For 2025.01
->>> ---
->>> Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
->>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> Cc: Simon Glass <sjg@chromium.org>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: u-boot@dh-electronics.com
->>> Cc: u-boot@lists.denx.de
->>> Cc: uboot-stm32@st-md-mailman.stormreply.com
->>> ---
->>>  configs/stm32mp15_dhcom_basic_defconfig | 2 +-
->>>  configs/stm32mp15_dhcor_basic_defconfig | 2 +-
->>>  2 files changed, 2 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
->>> index b730bf76dca..5add66fb2f4 100644
->>> --- a/configs/stm32mp15_dhcom_basic_defconfig
->>> +++ b/configs/stm32mp15_dhcom_basic_defconfig
->>> @@ -7,5 +7,5 @@ CONFIG_SYS_MEMTEST_START=0xc0000000
->>>  CONFIG_SYS_MEMTEST_END=0xc4000000
->>>  CONFIG_SYS_I2C_EEPROM_BUS=3
->>>  CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
->>> -CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
->>> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks access-controllers"
->>>  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
->>> diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
->>> index 42a596505ca..dd14db3b4c5 100644
->>> --- a/configs/stm32mp15_dhcor_basic_defconfig
->>> +++ b/configs/stm32mp15_dhcor_basic_defconfig
->>> @@ -5,7 +5,7 @@ CONFIG_ARCH_STM32MP=y
->>>  CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
->>>  CONFIG_SYS_I2C_EEPROM_BUS=2
->>>  CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st/stm32mp153c-dhcor-drc-compact"
->>> -CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
->>> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks access-controllers"
->>>  CONFIG_SYS_I2C_EEPROM_ADDR=0x53
->>>  CONFIG_PHY_MICREL=y
->>>  CONFIG_PHY_MICREL_KSZ90X1=y
->>
->> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> Thanks
->> Patrice
-> Applied to u-boot-stm32/next
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
 > Thanks
-> Patrice
-
-Sorry, applied to u-boot-stm32/master
+> Patrick
+> 
+Applied to u-boot-stm32/master
 
 Thanks
 Patrice
-
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
