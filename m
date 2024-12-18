@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0562E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 15:22:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E954E77188
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 15:23:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40AD280241;
-	Wed, 18 Dec 2024 16:22:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A8F4D80241;
+	Wed, 18 Dec 2024 16:23:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1734535365;
-	bh=MCw1TJaHnfDnno+ZydgTxX38MeZJXdIPJeKbJ36PIQk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LV/911tnmfXm4Nn0t1FOt43XJNWUWVuX/MIP303+6FjWOLg4hUsNFyZnqjQBj+2q0
-	 JaBsNkgOjkKzUra1//xhl3X/USUC3LFf1BBbJCljJewM9fNkfuOjZpfPpXqTspV0NF
-	 GpkwPS3UT5j/VGkkwrijr1ufWnNwwCZ5JbFTyUST69TFK4iozHenx0Bl3l3lMXQoXH
-	 nh63mboA5Y6XtzrbRRB2xUkawIVfa8VsEpRmY8rRFTpDzSnYPMPtKdwJOyZ5Latv9I
-	 fq10Aj5zmZ3FSjnLg1eLfbCwfEFcrupf7nJMVBKsZXbULlgiBQcua09YDbpZsbQ8Zj
-	 T3JH1ISfwkDUg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0233780269; Wed, 18 Dec 2024 16:22:44 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D218022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 16:22:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="BEnRtmbZ"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 59C861048558D; Wed, 18 Dec 2024 16:22:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1734535360;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MCw1TJaHnfDnno+ZydgTxX38MeZJXdIPJeKbJ36PIQk=;
- b=BEnRtmbZcACWIXPqrWnXb25I7yI52Yqn9aKKXXD/YkjQ5+GgVuHrsiGHXk8yUJX1veMj5j
- AO5/ajf+kN8a60poMWXsJLNwfUgf1uQdbjNzvLuGfbwddPiBpQ4PlDIhCgYiP83HM+BNwg
- D7L0TbRnjbRQIB59cHzgMNfuZx2QevyAv9Lb0LGCW1OzQ6ZX8S2KOMMrhaTWoVgB9uzh08
- Stn1rfULmVpFDyzrCqquwSefC/aaFilWnXIpIxTRUCgmconuHRaRbqvnkOYYjtQRJ+KAo9
- OTLHwffgEdtVHtmGlMNWkOFHQkZMT4vwyHwWtJXnJO5Ah0G6xkdH9BoiU5YGeQ==
-Message-ID: <7cef71fc-7d7f-4c9f-b28c-e2b1ab893f75@denx.de>
-Date: Wed, 18 Dec 2024 14:58:09 +0100
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Me2cDJb8";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A6D5780269; Wed, 18 Dec 2024 16:23:30 +0100 (CET)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 387208022B
+ for <u-boot+nodisclaimer@lists.denx.de>; Wed, 18 Dec 2024 16:23:28 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-7ee11ff7210so4870952a12.1
+ for <u-boot+nodisclaimer@lists.denx.de>; Wed, 18 Dec 2024 07:23:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734535407; x=1735140207; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xRzbCM0EcnPQyoNx7uRDpsQ37ZGKBidRge/fq63yODM=;
+ b=Me2cDJb8fAtv8XmDzyXx1wa+TUvnjMF8w6Q/ipD0y8xYB7GaDOYbJ8y1hZFNt7nboD
+ hgRcVA3NlBqSMPZpFp2Md+1JSqM4LjsS+RzRSBaSOrPsYb9i9TAIghlknSEhKEf6JjyB
+ v2hawyB60GiRyeDPRBUly1sIBcjNTeu0bNm43h7ULBYY71V8e3UABwhjfjSu3KVidHIA
+ T+qbITs87+ZHmjOTI7J/fdV6YCgu7Hp1dIqL70/i0LaBayhbDLsm66XS2SpwhpFcB893
+ ZeQIPTLAJQq81vbQNYFbPffqabE+txwVlvWBHyM8rZel4FSA1J5xq8nmSskZ7qCSIuw8
+ K2Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734535407; x=1735140207;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xRzbCM0EcnPQyoNx7uRDpsQ37ZGKBidRge/fq63yODM=;
+ b=hkdCBeLUQ6EYlrUO5U1wjgMS4aX6FdB1t/skjNcjFIPJ/50HlEQLhyS257GmW/MO6o
+ PHB8E9ZoX1up8AVAzC8vV9/o0MLKxx25xiaLFb+cou5g5tEEcgIt+MCbOACNzLDZIgln
+ 2lCDlCdKtp8XHPFRci7925TDXro+HBdG+qfYFurq6GmVjwkvxrrGHcwrHsVCn2GpmiMp
+ WQFvqewjY+o4wOvB9bWurEFrMkFaphxrYJLwFVVHWzLndSXOfve8X6BlGXLLwXz13X0F
+ 7Xr7S15MhMda2NA2EZ6dQjulEC0gsZSVT5DM67vsywvBrITbqObf4DKyZgluZfc8kjVi
+ rydg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOgpHP6ZrdA+1xaNcVvISK2NIdnWMWrdGRq1WJJpQ/QLwXtUXIecCj2KonW9K9N+TVmwILevg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxQw0RYK/DpZAMt7OAx8bezc4nipPJI9vyGr7t+oqsAAGwID0wo
+ hkqra4Jk/GXBAeWL0mKkeTYgPnAnAjZHFWcteaDgI109/x1hQ8hO5LvMeFKLgClwQyByxfN2Dpk
+ aoECn/iFCXFKHglfalgU241UcDvma5ArNdI/J6A==
+X-Gm-Gg: ASbGncs5DjBB/kmXz3YqXVHqqDTdAOEGgOGPGRObzjEXtCcN+7UyQpZcTfrFG9gCZ2y
+ T8jqsvhvPRgMHH5vDf/FCnbXQX5rTv5p5S5u5uy9YBT0JL8pp1Dz3Jmi0fqGsEF2ZjWqH648=
+X-Google-Smtp-Source: AGHT+IGyNFum66S/XMytt2YFfKap8mdP7O7/k0vMYwiNaLC5bdFvbWwW5qv4T6aBU5f69/HaCjptKfDOQYb/Efobna8=
+X-Received: by 2002:a17:90b:2543:b0:2ea:696d:732f with SMTP id
+ 98e67ed59e1d1-2f2e933d4d3mr4948787a91.29.1734535406771; Wed, 18 Dec 2024
+ 07:23:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: spi-nor: Fix the spi_nor_read() when config
- SPI_STACKED_PARALLEL is enabled
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "tudor.ambarus@linaro.org" <tudor.ambarus@linaro.org>,
- "j-humphreys@ti.com" <j-humphreys@ti.com>
-Cc: "Simek, Michal" <michal.simek@amd.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>,
- "caleb.connolly@linaro.org" <caleb.connolly@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "william.zhang@broadcom.com" <william.zhang@broadcom.com>,
- "stefan_b@posteo.net" <stefan_b@posteo.net>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>,
- "Takahiro.Kuwano@infineon.com" <Takahiro.Kuwano@infineon.com>,
- "p-mantena@ti.com" <p-mantena@ti.com>, "git (AMD-Xilinx)" <git@amd.com>
-References: <20241211120644.775575-1-venkatesh.abbarapu@amd.com>
- <fccae74a-3097-4172-8ae5-3bc72e8d9aa0@denx.de>
- <SA1PR12MB869702808B7A784031F17F83983B2@SA1PR12MB8697.namprd12.prod.outlook.com>
- <3307c1e3-123b-4ff1-8140-18be7393b5e5@denx.de>
- <SA1PR12MB86974EDF358A58732A9B7A6F983B2@SA1PR12MB8697.namprd12.prod.outlook.com>
- <7f2b69af-ea98-4d22-a831-e484811c9715@denx.de>
- <SA1PR12MB86975AD9D85A5F7865FF4AFD98052@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SA1PR12MB86975AD9D85A5F7865FF4AFD98052@SA1PR12MB8697.namprd12.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20241217213613.286813-1-philippe.reynes@softathome.com>
+In-Reply-To: <20241217213613.286813-1-philippe.reynes@softathome.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 18 Dec 2024 10:23:14 -0500
+Message-ID: <CAEfUkUK3=yia5kmG7YO-niUUVSLtSZfjZS-k_4qEAe-6V5F9nQ@mail.gmail.com>
+Subject: Re: [PATCH v6 0/9] add the support of sha256_hmac and sha256_hkdf
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
+ u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,25 +91,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/24 10:22 AM, Abbarapu, Venkatesh wrote:
+Hi Philippe,
 
->>>>> For parallel/stacked configuration and address width the
->>>>> "rem_bank_len" will vary
->>>> and as we don't want to disturb the default read functionality added
->>>> the ifdef separately.
->>>> What would happen if both SPI_FLASH_BAR and SPI_STACKED_PARALLEL
->> are
->>>> enabled on a system that only has one SPI NOR attached
->>>> (non-stacked/parallel) ? I noticed the second "copy" of the code
->>>> behaves slightly differently in the else branch, so does that mean this would
->> break such setup ?
->>>
->>> If both SPI_FLASH_BAR and SPI_STACKED_PARALLEL are enabled, the
->> "rem_bank_len" manipulation is done under the
->> CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL) code and this won't break any
->> default functionality.
->> Wouldn't read_len calculation be done twice ?
-> Yes.  As "rem_bank_len" will be changed based on parallel configuration, so added the additional code copy to not break the default code.
-Can you please also update it to avoid the code duplication ?
+On Tue, 17 Dec 2024 at 16:36, Philippe Reynes <
+philippe.reynes@softathome.com> wrote:
 
-Thank you
+> This serie adds the support of sha256_hmac and sha256_hkdf.
+> A first version was sent several months ago just before the
+> integration of mbedtls. This new version is based on mbedtls.
+>
+> The first patch of this serie add the support of hkdf
+> using mbedtls.
+>
+> v6:
+> - use const for test
+> - set buffer to 0 before using to to compute hmac
+>
+> v5:
+> - use mbedtls to compute hmac
+> - add tests for hkdf
+> - enabled mbedtls in sandbox_defconfig
+> - some cleanup
+>
+> v4:
+> - fix computation of the hmac
+> - add more test for hmac
+> - move sha256 common functions to sha256_common.c
+> - some cleanup
+>
+> v3:
+> - also define sha256_hmac for legacy sha256
+> - add some #if to define function only when needed
+>
+>
+Can you add my review tag to the commit messages for those ones I stated if
+there are no new changes?
+So that I can skip them in the next round.
+
+
+> Philippe Reynes (9):
+>   tools: kwbimage.h: use linux/compiler_attributes.h
+>   tools: renesas_spkgimage.h: use linux/compiler_attributes.h
+>   mbedtls: enable support of hkdf
+>   lib: sha256: move common function to sha256_common.c
+>   lib: sha256: add feature sha256_hmac
+>   test: lib: add test for sha256_hmac
+>   lib: mbedtls: sha256: add support of key derivation
+>   test: lib: add test for key derivation
+>   configs: sandbox: enable mbedtls
+>
+>  configs/sandbox_defconfig        |   2 +
+>  include/u-boot/sha256.h          |  24 +++
+>  lib/Makefile                     |   1 +
+>  lib/mbedtls/Kconfig              |  14 ++
+>  lib/mbedtls/Makefile             |   2 +
+>  lib/mbedtls/mbedtls_def_config.h |   4 +
+>  lib/mbedtls/sha256.c             |  59 ++++---
+>  lib/sha256.c                     |  67 ++++---
+>  lib/sha256_common.c              |  50 ++++++
+>  test/lib/Makefile                |   2 +
+>  test/lib/test_sha256_hkdf.c      | 198 +++++++++++++++++++++
+>  test/lib/test_sha256_hmac.c      | 294 +++++++++++++++++++++++++++++++
+>  tools/Makefile                   |   1 +
+>  tools/kwbimage.h                 |   6 +-
+>  tools/renesas_spkgimage.h        |   6 +-
+>  15 files changed, 670 insertions(+), 60 deletions(-)
+>  create mode 100644 lib/sha256_common.c
+>  create mode 100644 test/lib/test_sha256_hkdf.c
+>  create mode 100644 test/lib/test_sha256_hmac.c
+>
+> --
+> 2.25.1
+>
+>
+Thanks and regards,
+Raymond
