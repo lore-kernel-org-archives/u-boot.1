@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E4F4E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2BEDE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:34:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 755CA80288;
-	Wed, 18 Dec 2024 11:31:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1254A8032B;
+	Wed, 18 Dec 2024 11:34:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0xt5HHHk";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Yb38YhrZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45965802EF; Wed, 18 Dec 2024 11:31:11 +0100 (CET)
+ id A36498033D; Wed, 18 Dec 2024 11:34:33 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 381648027E
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:31:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C2238027E
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:34:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=2082afbf55=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI7p9Iw007677;
- Wed, 18 Dec 2024 11:30:58 +0100
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI7pASS007696;
+ Wed, 18 Dec 2024 11:34:20 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- Qj8nYAeLKnxt3XIsgesskRCyvYRpkGFs0X60og4r6hg=; b=0xt5HHHkgmVNx6jP
- yDbowyh1VlJ+JtI+UTrm3x3bWOaMuOjGGWg3y1TdO6l27TCmDw6YZty4PGPGwzth
- d0l06+klkfjNR505VYigIeQvCWyUiLZNiPeOSCBvnNfpYS0tzSC+R7J8FzL6Gb/9
- KeDG5xbEXSbfb1iJ2hpENQxtQs/1K1Gym/53utaSnWvSdorAOUbl/nWjXQrzZrFW
- ryQpJeUWgoQ6OLrnde/o4GCEyWGwcAJaUOo6riqJeScGFE85kzyY5EL3FgnYSp/5
- qUKAoB4Sww5L4P+uoXC69z4pjlcIbwQq87C90Aqh/1gRmDpZwtW3i7JPdHtElW8X
- U7IbnA==
+ uxMcFaQkVsmakOyUwO5AUO93qA9VADyGn1sRJAwuG7A=; b=Yb38YhrZZUcTMtZJ
+ N1+dz/cOCXjNuT39cXEQ/aA7GMFEnzuk9Oh8XVsoyDjdagHw2MLzvEVpMnWfNFmz
+ 5tjhRsKEfRk3WdkmuB0H9Xaw6z2qvhIKGa64rakjLoUWl0yQhmtXSBY7faqEK/sJ
+ 2GwNcBuajQepuWLZxcpK3YkzhD63Ck+4+Bsh16ckaiPBiAq9S+plB6RYVI+04jpA
+ x5ABUofFh/YHIYUNG4yRs56WrL1cYUH/w1oN8b7OUHzBOW96+AtdUGaqhfTOE6vh
+ hFIxHUbtXs+UIFqmhXz1UA3YO0ZrJan6BUlF5Un9bRcQkULlJgVOeIAluS3K7uTy
+ lHCmpg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43ktca0qkp-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43ktca0r27-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Dec 2024 11:30:57 +0100 (CET)
+ Wed, 18 Dec 2024 11:34:20 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7783F40075;
- Wed, 18 Dec 2024 11:29:07 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DB6574005F;
+ Wed, 18 Dec 2024 11:33:15 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E717425C24A;
- Wed, 18 Dec 2024 11:28:08 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AE382242944;
+ Wed, 18 Dec 2024 11:31:10 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
- 2024 11:28:08 +0100
-Message-ID: <290b3572-bc50-410d-bba0-3e204e68bc56@foss.st.com>
-Date: Wed, 18 Dec 2024 11:28:07 +0100
+ 2024 11:31:10 +0100
+Message-ID: <996b51ba-9867-4d72-ad09-b16b610ec64b@foss.st.com>
+Date: Wed, 18 Dec 2024 11:31:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Kconfig: Set STACK_SIZE to 16KB for STM32 MCUs
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Greg Malysa
- <greg.malysa@timesys.com>, Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, Masahiro Yamada
- <yamada.masahiro@socionext.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20241218075833.2049241-1-patrice.chotard@foss.st.com>
- <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
-Content-Language: en-US
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: Reinstate missing root
+ oscillators on STM32MP15xx
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@dh-electronics.com>, Simon Glass
+ <sjg@chromium.org>, <uboot-stm32@st-md-mailman.stormreply.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Igor Opaniuk
+ <igor.opaniuk@gmail.com>
+References: <20241215233210.569642-1-marex@denx.de>
+ <f993a286-924f-4e73-8991-4563043c6c5c@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <f993a286-924f-4e73-8991-4563043c6c5c@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -99,91 +95,59 @@ X-Virus-Status: Clean
 
 
 
-On 12/18/24 10:59, Patrick DELAUNAY wrote:
-> Hi
+On 12/16/24 09:23, Patrice CHOTARD wrote:
 > 
-> On 12/18/24 08:58, Patrice Chotard wrote:
->> Since commit 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()"),
->> STM32F746-disco hangs when loading device tree just before starting
->> kernel:
+> 
+> On 12/16/24 00:31, Marek Vasut wrote:
+>> The root oscillators reference used to be in rcc node since
+>> 3d15245502c4 ("ARM: dts: stm32mp1: explicit clock reference needed by RCC clock driver")
+>> however this is not part of upstream stm32mp151.dtsi . The
+>> RCC driver does need this reference, reinstate it globally.
 >>
->> Retrieving file: /stm32f746-disco.dtb
->> Kernel image @ 0xc0008000 [ 0x000000 - 0x19ae00 ]
->> Flattened Device Tree blob at c0408000
->>     Booting using the fdt blob at 0xc0408000
->> Working FDT set to c0408000
->>     Loading Device Tree to c05f8000, end c05ff71c ...
->>
->> Adjust STACK_SIZE to 16KB for STM32 MCUs (F4/F7 and H7) boards
->> to fix kernel boot process as some of these boards embeds a limited
->> amount of memory.
->>
->> Fixes: 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()")
-> 
-> 
-> I think it is also linked to an other commit
-> 
-> Fixes:74b869bae74c ("efi_loader: use CONFIG_STACK_SIZE in the UEFI sub-system")
-> 
-> before the patch CONFIG_SET_STACK_SIZE was not defined for ALL ARM platform
-> 
-> So CONFIG_STACK_SIZE was not defined  / and was no used in platform
-> 
-> (U-Boot stack up to end of the U-Boot area)
-> 
-> after the patch the CONFIG_STACK_SIZEis set a 16MB for all platform, even if EFI is not used
-> 
-> 
-> +config STACK_SIZE
-> +    hex "Define max stack size that can be used by U-Boot"
-> 
-> +    default 0x4000000 if ARCH_VERSAL || ARCH_ZYNQMP
-> +    default 0x200000 if MICROBLAZE
-> +    default 0x1000000
-> 
-> 
-> 16MB is needed ONLY for EFI loader cases, for other platform that seems huge.
-> 
-> 
-> @Heinrich: do you think you can add this condition CONFIG_EFI_LOADER to avoid issue for other platforms =
-> 
-> So use 16MB (previously hardcoded in lib/efi_loader/efi_memory.c with add_u_boot_and_runtime() )
-> 
->     default 0x1000000 if EFI_LOADER
-> 
-> 
-> and so force the other platforms to define the CONFIG_STACK_SIZE (now used in LMB) with an adequate value ?
-> 
-> 
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
 >> ---
+>> NOTE: Would be good for 2025.01, but needs to be tested on other systems
+>> ---
+>> Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: u-boot@lists.denx.de
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>  arch/arm/dts/stm32mp15-u-boot.dtsi | 3 +++
+>>  1 file changed, 3 insertions(+)
 >>
->>   Kconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/Kconfig b/Kconfig
->> index 1f5b0f1972d..c087a420a24 100644
->> --- a/Kconfig
->> +++ b/Kconfig
->> @@ -578,6 +578,7 @@ config STACK_SIZE
->>       hex "Define max stack size that can be used by U-Boot"
->>       default 0x4000000 if ARCH_VERSAL_NET || ARCH_VERSAL || ARCH_ZYNQMP
->>       default 0x200000 if MICROBLAZE
->> +    default 0x4000 if ARCH_STM32
->>       default 0x1000000
->>       help
->>         Define Max stack size that can be used by U-Boot. This value is used
+>> diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
+>> index 66d4c40c6a8..3f57bd5fe0f 100644
+>> --- a/arch/arm/dts/stm32mp15-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
+>> @@ -186,6 +186,9 @@
+>>  	bootph-all;
+>>  	#address-cells = <1>;
+>>  	#size-cells = <0>;
+>> +	clock-names = "hse", "hsi", "csi", "lse", "lsi";
+>> +	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>,
+>> +		 <&clk_lse>, <&clk_lsi>;
+>>  };
+>>  
+>>  &usart1 {
 > 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
-> Anyway for this STM32 MCU patch:
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Tested on STM32MP157C-DK2 and STM32MP157C-EV1
 > 
 > Thanks
-> Patrick
-> 
+> Patrice
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+
 Applied to u-boot-stm32/next
 
 Thanks
