@@ -4,66 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C91E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:14:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DBBDE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 14:22:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03F6B80241;
-	Wed, 18 Dec 2024 15:14:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CC78480241;
+	Wed, 18 Dec 2024 15:22:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bd+eYz47";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H+1LSPWw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70B2680283; Wed, 18 Dec 2024 15:14:45 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 3B5198022B; Wed, 18 Dec 2024 15:22:38 +0100 (CET)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF6D28022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:14:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1AF1802EF
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 15:22:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9a68480164so1061057166b.3
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 06:14:42 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-3011c7b39c7so71649661fa.1
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 06:22:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734531281; x=1735136081; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=aEdW+CB1uK3lVzJFVhDcH1F6wQaiRvEqgzuFnEj5v5A=;
- b=bd+eYz47VrMW9cOJCfqjJC8GulgXrLd2tC4i283ysQQuSgWfhJrIv/+yspnw0FYGCE
- +vnloFXrzU2HJyMn9vbQf7/QJSK43IAnfcSnCnjQWkzhrcCxVysFo7tge4ixKJfzoMDS
- nZaLbdDdzTh6JyZzm/o2/C5TtK6wOksPYhE0E=
+ d=gmail.com; s=20230601; t=1734531755; x=1735136555; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/ksaFMkerj5x2N7vzckh5MQgJQM+71MYbMy0hNvQTyM=;
+ b=H+1LSPWwnDv+ooJw1NkP9eH273jqX4IN6F0cAhH1IsxsZK52Qqo6OpLHJ7a0FR4Y4r
+ iVpgRODtxk5FvdVfn+wLydkyoA3z/WMqDl9vq2WYiY+fz38pXbKEqpuLngFKVyy/PphV
+ L+K5MK/K4K6xUqYAxWaXzRkj9TSPG97kFt1BYqckQ2WM6D+qkardeeyLaIDnag67X2p2
+ 7IO4uQ8MYffvyKaImqiONeoT5PU2YRKk2yVrW6S94f+ORO7grm3jnGYqiaaviJwZupgt
+ u0qlyi3vN+xw8uvZ69H57QROC6UlBHelCI2SpXdTdtrx9Mc6EONfj9JS3dbsMQvliK11
+ P6Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734531281; x=1735136081;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aEdW+CB1uK3lVzJFVhDcH1F6wQaiRvEqgzuFnEj5v5A=;
- b=vxs7BgCBKXZbEmQ6g+d1OAMRZQdBVtSszkqRIqBLL3wAs+2u2ivJex0nA5TYCEB+0v
- uwW0l3MG7SaJogXuItynGoDC6kCET2QwjQgAJdjoBpLb7SpFAEp3kkZQVP7h2bA6ivAc
- 62xW/rBn4thLK1nuw/QXbAW92bBQ5AzEBGhdIeHw6D7+i9J2IJ0iMWmShKoFC4CseTPQ
- v/q7YsgB+IcWHPiR84Kz6DJaUAh7/yDAR0xo9Kmdp/Hxj9UXyUozPDbo/L8n1ccxKzTw
- 5ia1erXmFcZPNWlTqQxOAdUp/IRqkiyIyB5DZrxdDT9gOfFchpyEqB3Jf99MuYJaWpVh
- 9n2Q==
-X-Gm-Message-State: AOJu0Yzl7kbx9CJ82JZ1OHsOosONePirabkYGTeI+9kd2CLwy7j+zNPL
- UnHQ2H4kCZNxlfLH+7wc95NMJ/soKHNu9KP0ZEhsqYWqs18noLW+CfhtF+E/0je66WfIZVdILkZ
- HPNTRJoBBCXAf3qJhkELAdIbWOT80uxQrdRIDdxYD6oPYBA4Rig==
-X-Gm-Gg: ASbGnct8bQbUkBi0eJ5cK58iIRG40lj6fjSYtsIvEvGn2TWmRdc+ysepha+fQBjw7ae
- 7JGwEfC9aEZXejg9vOjYaLuww+Odt7G+fJ+GBVrg=
-X-Google-Smtp-Source: AGHT+IFU0zMIVF5eybnamupVjexkID2GH0HfWf7E4WvVRPaFaNoIBdbB0BAxQ2ahb7kfmjClgBbeL194DWXh7oUTipg=
-X-Received: by 2002:a17:907:708:b0:aab:736c:558 with SMTP id
- a640c23a62f3a-aabf4907a08mr332885866b.55.1734531281479; Wed, 18 Dec 2024
- 06:14:41 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734531755; x=1735136555;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/ksaFMkerj5x2N7vzckh5MQgJQM+71MYbMy0hNvQTyM=;
+ b=OeN3h+uMu5rZUMIuBGnevUypCICCEvi53f09wxdfQn022fbFtFqiVrFLyTAmHROP2C
+ 9Ep/s/2WkOsDFhr1Etq2nXOvLg3+rWiHo1YqXA5P5Y8Y8SX3sB67+DomYkO6PrIgt7Zc
+ kJNAkw2pinTuuIHKjbgB+f3URJuXappvG8JuDzGisF6UtB6wfv9HW6JUxy9XZUT7FQVG
+ VGD/O0yRt5TMllIn0/B0QDSDH1cDquUCbtGbGBXQ2wDvs8UVk1wbF3b0D6Qrz7zDqVyA
+ q8gpsK3nTOIrEAO/m2nc6cVqGD+ORMUsbd0yeaB5CLl1yKmK49lZhiSo0+pnm8R8Gbe2
+ 97ew==
+X-Gm-Message-State: AOJu0Ywu6vDbqdL8PYGJ1aFQOvA/cCc32fg7GTsUmhfSdRFiDDCwGhi4
+ kmdOCqyeZg3/ZZ9MtYTjLIPBLRe/TvDijt7j0M3MQc2/Hwt90EOF1FgNdMxvHXn6+r2wBtp3CNp
+ 1RC5bO/S5MXJVzU4b6YIKH0So35M=
+X-Gm-Gg: ASbGncvIB3OM+wzdUCeQW7Ovth2Smi7V0bY7NEiTZPs+6ilz+urUUGrhuMvUBVApUcM
+ GHMhCBOSFt/xbbGI9vpIXJhNStTvMeUjmSIccLmgTCR+ABg/2MVntMLF4Y6s0x94NOdMbuA==
+X-Google-Smtp-Source: AGHT+IErQzsQuS2NXrE2numzOIr1zwKNPl/RIzXTctCN3lZsW+/0wpHobbYhfWmsMdkjDcnufDLQw4154YEzKy+1nqo=
+X-Received: by 2002:a05:6512:3193:b0:540:2292:50b2 with SMTP id
+ 2adb3069b0e04-541ed902ef5mr1196332e87.52.1734531754783; Wed, 18 Dec 2024
+ 06:22:34 -0800 (PST)
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 18 Dec 2024 07:14:30 -0700
-Message-ID: <CAFLszTiU0K2Wc0iOvWnnK21H+JiGbswc1avqrS9BP8wXF1uV9g@mail.gmail.com>
-Subject: cm_fx6 booting
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>
+References: <CAFLszTiU0K2Wc0iOvWnnK21H+JiGbswc1avqrS9BP8wXF1uV9g@mail.gmail.com>
+In-Reply-To: <CAFLszTiU0K2Wc0iOvWnnK21H+JiGbswc1avqrS9BP8wXF1uV9g@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 18 Dec 2024 11:22:23 -0300
+Message-ID: <CAOMZO5A0m1fmrwu4fp0THHEvi+5N4aizPHD_uPxU_t9ULKbgnQ@mail.gmail.com>
+Subject: Re: cm_fx6 booting
+To: Simon Glass <sjg@chromium.org>, Nikita Kiryanov <nikita@compulab.co.il>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,19 +89,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-I have a Compulab Utilite cm_fx6 in my lab but I am not sure how to
-make it boot.
+On Wed, Dec 18, 2024 at 11:14=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
+te:
+>
+> Hi,
+>
+> I have a Compulab Utilite cm_fx6 in my lab but I am not sure how to
+> make it boot.
+>
+> I am using:
+>
+> dd if=3Du-boot-with-spl.imx of=3D/dev/sdt bs=3D1K seek=3D1
+>
+> It does seem to detect an image on the mmc (since it doesn't boot from
+> SPI flash), but SPL and U-Boot output nothing.
+>
+> Does anyone have any ideas? Perhaps this device is a bit old.
 
-I am using:
+Adding Nikita on Cc, who is the board maintainer.
 
-dd if=u-boot-with-spl.imx of=/dev/sdt bs=1K seek=1
+Looking at https://www.mediawiki.compulab.com/w/index.php?title=3DCM-FX6:_U=
+-Boot:_Creating_a_bootable_SD_card
 
-It does seem to detect an image on the mmc (since it doesn't boot from
-SPI flash), but SPL and U-Boot output nothing.
+"Booting from an SD card
 
-Does anyone have any ideas? Perhaps this device is a bit old.
+Plug the SD card into the SDIO3(BOOT) SD card socket of the SB-FX6
+Hold the BOOT SELECT (SW5) button while resetting/powering on the
+CM-FX6 evaluation system
+The CM-FX6 will boot from the SD card"
 
-Thanks,
-Simon
+Do you think this helps?
