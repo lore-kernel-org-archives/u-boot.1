@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E50E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:47:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595AEE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:47:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5597E80317;
+	by phobos.denx.de (Postfix) with ESMTP id AC7CA8032B;
 	Wed, 18 Dec 2024 13:47:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FdMA3/dO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RaCuYzyU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 328B38027E; Wed, 18 Dec 2024 10:30:44 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 6DBA68027E; Wed, 18 Dec 2024 10:30:48 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7E9180288
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:30:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33FC780288
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:30:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9Udgu136648
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UiSn4102841
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 03:30:39 -0600
+ Wed, 18 Dec 2024 03:30:44 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734514239;
- bh=1MtwABCcmqeJlfSkmcMsvuRz064W0i3jEVrZa6KEDAc=;
+ s=ti-com-17Q1; t=1734514244;
+ bh=42ertIb+8MmaeEU4IyStPtVtgbpKgS/AL96X+sPGBT0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FdMA3/dODOlbEEvieTi5axESsXGnoq4zmytZ4WD9VDQHOpL5bumWb0HQVHJwzPvMy
- S5YZs/mam3MbnWXEBd/tLhrLk/2cV9kDIZQE5nOGeYSGu0kv6nKF9ymw+88f7wBUvU
- MK9yhZRO9NflDGM2c1WjL6GUefJYyHRMpjcMaJNU=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9Ud9M064903
+ b=RaCuYzyUhMbgAsKMNsD5K3muUwFhFZf2GeD5Xd2YgjPdvgbKKWc51DnQUykkjMUse
+ gMq5Zd+zn/0SQhKwBA5JcHHVLoK4ElTXHgACYdgRFhhDmaLNka5kWVb0t2bcqi+8hh
+ FOypDah3DGM4BDnukCWNJUrREHA/XgP/EycNdSQA=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UiJw128745
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 03:30:39 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 18 Dec 2024 03:30:44 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 03:30:38 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 03:30:42 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 03:30:38 -0600
+ Frontend Transport; Wed, 18 Dec 2024 03:30:42 -0600
 Received: from aparna-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.31])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI9USGG060685;
- Wed, 18 Dec 2024 03:30:36 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI9USGH060685;
+ Wed, 18 Dec 2024 03:30:40 -0600
 From: Aparna Patra <a-patra@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>
 CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
  Aparna Patra <a-patra@ti.com>
-Subject: [PATCH 2/3] arm: mach-k3: am62p: Fixup thermal zone critical points
-Date: Wed, 18 Dec 2024 15:00:24 +0530
-Message-ID: <20241218093025.45701-3-a-patra@ti.com>
+Subject: [PATCH 3/3] arm: mach-k3: am62p: Fixup a53 max cpu frequency by
+ speed-grade
+Date: Wed, 18 Dec 2024 15:00:25 +0530
+Message-ID: <20241218093025.45701-4-a-patra@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241218093025.45701-1-a-patra@ti.com>
 References: <20241218093025.45701-1-a-patra@ti.com>
@@ -82,57 +83,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Read the max temperature for the SoC temperature grade from the hardware
-and modify the critical trip nodes on each thermal zone of FDT at
-runtime so they are correct with the hardware value for its grade.
+AM62P SoC has multiple speed grades. Add function to delete
+non-relevant CPU frequency nodes, based on the information
+retrieved from hardware registers. Fastest grade's maximum
+frequency also depends on PMIC voltage, hence to simplify
+implementation use the smaller value.
 
 Signed-off-by: Aparna Patra <a-patra@ti.com>
 ---
- arch/arm/mach-k3/am62px/am62p5_fdt.c          | 37 +++++++++++++++++++
- .../arm/mach-k3/include/mach/am62p_hardware.h | 17 +++++++++
- 2 files changed, 54 insertions(+)
+ arch/arm/mach-k3/am62px/am62p5_fdt.c          | 12 ++++++++++++
+ .../arm/mach-k3/include/mach/am62p_hardware.h | 19 +++++++++++++++++++
+ 2 files changed, 31 insertions(+)
 
 diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-index e88760ea51..96194cebcd 100644
+index 96194cebcd..2c40fa5a59 100644
 --- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
 +++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-@@ -38,11 +38,48 @@ static void fdt_fixup_canfd_nodes_am62p(void *blob, bool has_canfd)
+@@ -74,12 +74,24 @@ static void fdt_fixup_thermal_zone_nodes_am62p(void *blob, int maxc)
  	}
  }
  
-+static int fdt_fixup_trips_node(void *blob, int zoneoffset, int maxc)
++static void fdt_fixup_cpu_freq_nodes_am62p(void *blob, int max_freq)
 +{
-+	int node, trip;
-+
-+	node = fdt_subnode_offset(blob, zoneoffset, "trips");
-+	if (node < 0)
-+		return -1;
-+
-+	fdt_for_each_subnode(trip, blob, node) {
-+		const char *type = fdt_getprop(blob, trip, "type", NULL);
-+
-+		if (!type || (strncmp(type, "critical", 8) != 0))
-+			continue;
-+
-+		if (fdt_setprop_u32(blob, trip, "temperature", 1000 * maxc) < 0)
-+			return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+static void fdt_fixup_thermal_zone_nodes_am62p(void *blob, int maxc)
-+{
-+	int node, zone;
-+
-+	node = fdt_path_offset(blob, "/thermal-zones");
-+	if (node < 0)
++	if (max_freq >= 1250000000)
 +		return;
 +
-+	fdt_for_each_subnode(zone, blob, node) {
-+		if (fdt_fixup_trips_node(blob, zone, maxc) < 0)
-+			printf("Failed to set temperature in %s critical trips\n",
-+			       fdt_get_name(blob, zone, NULL));
++	if (max_freq <= 1000000000) {
++		fdt_del_node_path(blob, "/opp-table/opp-1250000000");
++		fdt_del_node_path(blob, "/opp-table/opp-1400000000");
 +	}
 +}
 +
@@ -141,40 +119,43 @@ index e88760ea51..96194cebcd 100644
  	fdt_fixup_cores_wdt_nodes_am62p(blob, k3_get_core_nr());
  	fdt_fixup_video_codec_nodes_am62p(blob, k3_has_video_codec());
  	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
-+	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
+ 	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
++	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
  	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
  	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
  
 diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-index 339562722d..2f1c8517e6 100644
+index 2f1c8517e6..95af5c5c54 100644
 --- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
 +++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-@@ -26,6 +26,12 @@
+@@ -26,6 +26,8 @@
  #define JTAG_DEV_CANFD_SHIFT			15
  #define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
  #define JTAG_DEV_VIDEO_CODEC_SHIFT			14
-+#define JTAG_DEV_TEMP_MASK			GENMASK(5, 3)
-+#define JTAG_DEV_TEMP_SHIFT			3
-+
-+#define JTAG_DEV_TEMP_AUTOMOTIVE        0x5
-+#define JTAG_DEV_TEMP_EXTENDED_VALUE    105
-+#define JTAG_DEV_TEMP_AUTOMOTIVE_VALUE  125
++#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
++#define JTAG_DEV_SPEED_SHIFT			6
+ #define JTAG_DEV_TEMP_MASK			GENMASK(5, 3)
+ #define JTAG_DEV_TEMP_SHIFT			3
  
- #define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
- #define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
-@@ -101,6 +107,17 @@ static inline int k3_has_canfd(void)
- 	return (dev_id & JTAG_DEV_CANFD_MASK) >> JTAG_DEV_CANFD_SHIFT;
+@@ -118,6 +120,23 @@ static inline int k3_get_max_temp(void)
+ 		return JTAG_DEV_TEMP_EXTENDED_VALUE;
  }
  
-+static inline int k3_get_max_temp(void)
++static inline char k3_get_speed_grade(void)
 +{
 +	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 dev_temp = (dev_id & JTAG_DEV_TEMP_MASK) >> JTAG_DEV_TEMP_SHIFT;
++	u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
++			   JTAG_DEV_SPEED_SHIFT;
 +
-+	if (dev_temp == JTAG_DEV_TEMP_AUTOMOTIVE)
-+		return JTAG_DEV_TEMP_AUTOMOTIVE_VALUE;
++	return 'A' - 1 + speed_grade;
++}
++
++static inline int k3_get_a53_max_frequency(void)
++{
++	if (k3_get_speed_grade() == 'O')
++		return 1000000000;
 +	else
-+		return JTAG_DEV_TEMP_EXTENDED_VALUE;
++		return 1250000000;
 +}
 +
  #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
