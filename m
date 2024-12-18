@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C993E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 967E4E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F68D802EF;
-	Wed, 18 Dec 2024 13:46:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C46AB80269;
+	Wed, 18 Dec 2024 13:46:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dsbftsVX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eeFgnxoz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED373802C2; Wed, 18 Dec 2024 13:46:14 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7E0180316
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:46:11 +0100 (CET)
+ id 8FD5C8022B; Wed, 18 Dec 2024 13:46:23 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 282F380304
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICjwkF155278
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 06:45:58 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4BICk8w9066896;
+ Wed, 18 Dec 2024 06:46:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734525958;
- bh=9HJ+f3NX57GfZru/PoWMwXqSDtoXw/srtUch0f6CN4U=;
+ s=ti-com-17Q1; t=1734525968;
+ bh=4dBiizqnDehyahnM/UIx01uFzZL3pw3Rc9sxJ0KDo+M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=dsbftsVXlTYzvGIKvBcJlZGn/hFtdywt4tOfylF9+1HPJ0yz5C6UbSPjb8va4GnS1
- 2HipshX/LV0ACAuADDZvnRqu4fHfcxeSpYK+/mXWdsIA/vPfZ50k0EqRmJXuE35GXT
- /NUVhP67W8+rYEJSmdpCcmQYYnaO+A2ad9aXozTo=
+ b=eeFgnxozDiD5600nBD0wzOH8MsWzpVYFsH4a0c9wv0QqnI1m536cG8pfCkEdvqWAU
+ xfqMIX7C0Tfefq7liWB4uJ8lUVY82/Z9FLz7yOz0I8ozu/jLHk0oDr7GHn9iE6/ZcL
+ d31lI66ODJXaM3ZzSXczueevKeg0NAZ0O8ESlJlI=
 Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICjwAh109046
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICk8Km016507
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 06:45:58 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+ Wed, 18 Dec 2024 06:46:08 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE114.ent.ti.com
  (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 06:45:57 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 06:46:07 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 06:45:57 -0600
+ Frontend Transport; Wed, 18 Dec 2024 06:46:07 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICjgTE003797;
- Wed, 18 Dec 2024 06:45:53 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICjgTG003797;
+ Wed, 18 Dec 2024 06:46:03 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <n-francis@ti.com>, <mkorpershoek@baylibre.com>, <afd@ti.com>,
@@ -59,9 +58,10 @@ To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
  <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2 2/5] configs: am62x_r5_usbdfu: extend for AM62Px
-Date: Wed, 18 Dec 2024 18:15:32 +0530
-Message-ID: <20241218124542.3519447-3-s-vadapalli@ti.com>
+Subject: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for USB DFU
+ boot
+Date: Wed, 18 Dec 2024 18:15:34 +0530
+Message-ID: <20241218124542.3519447-5-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241218124542.3519447-1-s-vadapalli@ti.com>
 References: <20241218124542.3519447-1-s-vadapalli@ti.com>
@@ -85,31 +85,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable configs which are not required for USB DFU functionality, in
-order to allow reusing this fragment for AM62Px SoC.
+Enable USB0 instance of the USB controller for USB DFU boot functionality
+which requires the "bootph-all" property in order to have USB enabled at
+all stages of the USB DFU boot.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
 v1:
-https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-4-s-vadapalli@ti.com/
+https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-5-s-vadapalli@ti.com/
 Changes since v1:
 - Collected Reviewed-by tag.
 
- configs/am62x_r5_usbdfu.config | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/configs/am62x_r5_usbdfu.config b/configs/am62x_r5_usbdfu.config
-index 772bb2ab935..f094ed127e6 100644
---- a/configs/am62x_r5_usbdfu.config
-+++ b/configs/am62x_r5_usbdfu.config
-@@ -26,3 +26,6 @@ CONFIG_SPL_DFU=y
- # CONFIG_CMD_MMC is not set
- # CONFIG_CMD_FAT is not set
- # CONFIG_MMC_SDHCI is not set
-+# CONFIG_SPL_MTD is not set
-+# CONFIG_DMA_CHANNELS is not set
-+# CONFIG_TI_K3_NAVSS_UDMA is not set
+diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+index cf087c6e343..c2091fc1a51 100644
+--- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
+@@ -16,3 +16,13 @@
+ &dmsc {
+ 	bootph-pre-ram;
+ };
++
++/* Required for USB DFU boot */
++&usbss0 {
++	status = "okay";
++};
++
++/* Required for USB DFU boot */
++&usb0 {
++	bootph-all;
++};
 -- 
 2.43.0
 
