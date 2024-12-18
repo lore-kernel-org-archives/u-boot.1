@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72D9E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:46:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12E0DE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:46:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C243D80241;
-	Wed, 18 Dec 2024 13:46:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E4C7802B4;
+	Wed, 18 Dec 2024 13:46:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Uoc1pTt9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LqjTwbRf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC1A380291; Wed, 18 Dec 2024 13:46:06 +0100 (CET)
+ id E6CF9802BF; Wed, 18 Dec 2024 13:46:14 +0100 (CET)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 417E68022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:46:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E59D580312
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:46:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICjrnP4122556
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICk3JM4122702
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 06:45:53 -0600
+ Wed, 18 Dec 2024 06:46:03 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734525953;
- bh=cijPtmXsKClLEl+mlg3wz0aeBTNAea2YbbuHZhYIvg4=;
+ s=ti-com-17Q1; t=1734525963;
+ bh=L79MqA09ztc+uzQdR206DrlwBK3MbLfYtiO4ZklDcsA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Uoc1pTt95GUKZEfCHv9FG2dO7OzjZvdjZaX/dWB0MFg2d3o+qucfEdS3pBZyj4QJL
- rtDeQCUB8oEq8qaHawtl1AH6uztVUP45CLuVbgZzQU0zCj8vU8iXu1G68PNoVSqTZa
- oAUcKaHzYFfPVNxcoq+U+cO0sKi6dmjDHOJ0UkOQ=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICjrZe047195
+ b=LqjTwbRfAfWPgz1gf57STeVufDLHXGRKukS7mpkoBHrUEJdqFHN+ZhMCAQYKsqTMT
+ FJl0mo/aw9axXy6BEKvVdh3E5X+Qog6eSpgPrsoUacKzJgRBmls2sRXc92Bx244XXs
+ VVN0xaU/haC7Ube9noHB6Ou6PR5wbrCLuLVH5pWo=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BICk3AH016443
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 06:45:53 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 18 Dec 2024 06:46:03 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 06:45:52 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 06:46:02 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 06:45:52 -0600
+ Frontend Transport; Wed, 18 Dec 2024 06:46:03 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICjgTD003797;
- Wed, 18 Dec 2024 06:45:48 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BICjgTF003797;
+ Wed, 18 Dec 2024 06:45:58 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <n-francis@ti.com>, <mkorpershoek@baylibre.com>, <afd@ti.com>,
@@ -59,10 +59,10 @@ To: <vigneshr@ti.com>, <bb@ti.com>, <trini@konsulko.com>, <lukma@denx.de>,
  <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
  <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v2 1/5] board: ti: am62px: env: include environment for DFU
- Boot
-Date: Wed, 18 Dec 2024 18:15:31 +0530
-Message-ID: <20241218124542.3519447-2-s-vadapalli@ti.com>
+Subject: [PATCH v2 3/5] configs: am62px_evm_a53_defconfig: enable USB DFU
+ support
+Date: Wed, 18 Dec 2024 18:15:33 +0530
+Message-ID: <20241218124542.3519447-4-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241218124542.3519447-1-s-vadapalli@ti.com>
 References: <20241218124542.3519447-1-s-vadapalli@ti.com>
@@ -86,49 +86,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include the TI K3 DFU environment to support DFU Boot and DFU Flash.
-Also add "usb" to the list of "boot_targets". While at it, add a newline
-at the end of the file.
+The config fragment "am62x_a53_usbdfu.config" which adds USB DFU support
+for AM62x SoC is applicable to the AM62Px SoC as well. Hence, include it
+in "am62px_evm_a53_defconfig" in order to enable support for USB DFU
+flash and boot. Remove those configs from "am62px_evm_a53_defconfig" which
+are present in the "am62x_a53_usbdfu.config" config fragment that is being
+included.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
-v1:
-https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3-s-vadapalli@ti.com/
-Changes since v1:
-- Updated commit message indicating that a newline is also being added
-  at the end of this file based on feedback from Mattijs Korpershoek on
-  the v1 patch.
+This patch has been newly introduced in this series based on the
+discussion at:
+https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.2920799-3-s-vadapalli@ti.com/#3432702
 
- board/ti/am62px/am62px.env | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ configs/am62px_evm_a53_defconfig | 24 +-----------------------
+ 1 file changed, 1 insertion(+), 23 deletions(-)
 
-diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-index 7ef54079aa8..e0838196e3a 100644
---- a/board/ti/am62px/am62px.env
-+++ b/board/ti/am62px/am62px.env
-@@ -1,5 +1,6 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
-+#include <env/ti/k3_dfu.env>
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+index 9635beb1b27..9862b1f9a16 100644
+--- a/configs/am62px_evm_a53_defconfig
++++ b/configs/am62px_evm_a53_defconfig
+@@ -41,14 +41,11 @@ CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+ CONFIG_SPL_DMA=y
+-CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_DM_MAILBOX=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+ CONFIG_SPL_POWER_DOMAIN=y
+-CONFIG_SPL_RAM_SUPPORT=y
+-CONFIG_SPL_RAM_DEVICE=y
+ # CONFIG_SPL_SPI_FLASH_TINY is not set
+ CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPL_SPI_LOAD=y
+@@ -58,14 +55,12 @@ CONFIG_SPL_YMODEM_SUPPORT=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_NVEDIT_EFI=y
+ CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_REMOTEPROC=y
+-CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_TIME=y
+@@ -85,17 +80,12 @@ CONFIG_SPL_DM_DEVICE_REMOVE=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+-CONFIG_SPL_SYSCON=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
+ CONFIG_CLK_TI_SCI=y
+-CONFIG_DFU_MMC=y
+ CONFIG_DFU_MTD=y
+-CONFIG_DFU_RAM=y
+ CONFIG_DFU_SF=y
+-CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
+-CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+ CONFIG_DMA_CHANNELS=y
+ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+@@ -164,22 +154,10 @@ CONFIG_SYSRESET=y
+ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_TI_SCI=y
+ CONFIG_DM_THERMAL=y
+-CONFIG_USB=y
+-CONFIG_DM_USB_GADGET=y
+-CONFIG_SPL_DM_USB_GADGET=y
+ CONFIG_SPL_USB_HOST=y
+-CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_DWC3=y
+-CONFIG_USB_DWC3_GENERIC=y
+-CONFIG_SPL_USB_DWC3_GENERIC=y
+ CONFIG_SPL_USB_STORAGE=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+-CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
+-CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_EFI_SET_TIME=y
  
- name_kern=Image
- console=ttyS2,115200n8
-@@ -7,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
- 	${mtdparts}
- run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
- 
--boot_targets=mmc1 mmc0 pxe dhcp
-+boot_targets=mmc1 mmc0 usb pxe dhcp
- boot=mmc
- mmcdev=1
- bootpart=1:2
-@@ -17,4 +18,4 @@ rd_spec=-
- #if CONFIG_BOOTMETH_ANDROID
- #include <env/ti/android.env>
- adtb_idx=3
--#endif
-\ No newline at end of file
-+#endif
+ #include <configs/k3_efi_capsule.config>
++#include <configs/am62x_a53_usbdfu.config>
 -- 
 2.43.0
 
