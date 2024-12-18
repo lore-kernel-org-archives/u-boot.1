@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84ABDE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:02:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5ECE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:15:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F54D80288;
-	Wed, 18 Dec 2024 11:02:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6164D8027E;
+	Wed, 18 Dec 2024 11:15:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BU6LogZ2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kw05g/Pn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7423880291; Wed, 18 Dec 2024 11:02:27 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71FEC8027E
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:02:25 +0100 (CET)
+ id 6F6F880288; Wed, 18 Dec 2024 11:15:01 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1774E80269
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:14:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=2082479c14=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI60KLK011349;
- Wed, 18 Dec 2024 11:02:14 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- Z3LkVGqH8jWg2kp/gzlL20PyEl4FMXEbgilj343Q35I=; b=BU6LogZ2tdh4ByGz
- 1ELrKW9psFGJ17pXr2rtYn1Vib8Ui4EbTenfbBdCmVp9ClFXYFcb2jjEOK0XKTNC
- BtROZOu+J+VpvFZv8A1cqOrBVjncjsyEWEk2f7by2ZU/0TGrJR4cjkhGD4OJtlcm
- wi7mZqFalC47j7sbVNFReB+ho3HA32xPDixuB2cTqKfItDUM8kvfe2PW6D1y34E1
- Ge80QDc83C2sY1GYRgss76eQGvyvNgfkvKFJID4FfFfAfWd7v3+hJF6BA/dHqgEy
- zmOxt0z0lzML0WCwa3VJTDQCPfZ3puk1Qhk7TVe/Sd1WNG62dvFgJGcbQBDoUlsr
- hIn58w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43krrcrxs4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Dec 2024 11:02:13 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A732440074;
- Wed, 18 Dec 2024 11:00:34 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EFA9C25E65F;
- Wed, 18 Dec 2024 10:59:32 +0100 (CET)
-Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
- 2024 10:59:32 +0100
-Message-ID: <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
-Date: Wed, 18 Dec 2024 10:59:30 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIAEkMv4107307
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 18 Dec 2024 04:14:46 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1734516886;
+ bh=AxrQOZ1S7OLQbMjpCz1H7OuMiJc91USYDhyEVA9naRk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=kw05g/PnOwj0lEMqrnjAbJXbL1P1sDPtnoCevrDUJTbv4mLo1KQrS05m/bxyxLhN7
+ PhvWyLPfyFkZHxeb1yF21bPn1wr9VwnCP1b7lsBTF5iGBSGL8Y6YIOkiY8wFL1vc/y
+ AIti/jrM1YSdbbbMo5vz90G2LMu5ad+2imM/4nh4=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIAEk7m027292
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 18 Dec 2024 04:14:46 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
+ Dec 2024 04:14:45 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 18 Dec 2024 04:14:45 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIAEijF109344;
+ Wed, 18 Dec 2024 04:14:45 -0600
+Date: Wed, 18 Dec 2024 15:44:43 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, 
+ <trini@konsulko.com>, <lukma@denx.de>, <n-francis@ti.com>,
+ <afd@ti.com>, <glaroque@baylibre.com>, <sjoerd@collabora.com>,
+ <martyn.welch@collabora.com>, <rasmus.villemoes@prevas.dk>,
+ <caleb.connolly@linaro.org>, <j-humphreys@ti.com>, <rogerq@kernel.org>,
+ <nm@ti.com>, <u-boot@lists.denx.de>, <srk@ti.com>
+Subject: Re: [PATCH 2/4] board: ti: am62px: env: include environment for DFU
+ Boot
+Message-ID: <g7pupq6leeait24a4uqf3toncr5knxl2ffjvxtqesp4uymacdq@c3vsv5ee5mdt>
+References: <20241217131658.2920799-1-s-vadapalli@ti.com>
+ <20241217131658.2920799-3-s-vadapalli@ti.com>
+ <87y10dwbxr.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Kconfig: Set STACK_SIZE to 16KB for STM32 MCUs
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Greg Malysa
- <greg.malysa@timesys.com>, Hiago De Franco <hiago.franco@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, Masahiro Yamada
- <yamada.masahiro@socionext.com>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Kocialkowski <contact@paulk.fr>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20241218075833.2049241-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20241218075833.2049241-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.86.243]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+In-Reply-To: <87y10dwbxr.fsf@baylibre.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,96 +88,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On Wed, Dec 18, 2024 at 10:57:36AM +0100, Mattijs Korpershoek wrote:
 
-On 12/18/24 08:58, Patrice Chotard wrote:
-> Since commit 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()"),
-> STM32F746-disco hangs when loading device tree just before starting
-> kernel:
->
-> Retrieving file: /stm32f746-disco.dtb
-> Kernel image @ 0xc0008000 [ 0x000000 - 0x19ae00 ]
-> Flattened Device Tree blob at c0408000
->     Booting using the fdt blob at 0xc0408000
-> Working FDT set to c0408000
->     Loading Device Tree to c05f8000, end c05ff71c ...
->
-> Adjust STACK_SIZE to 16KB for STM32 MCUs (F4/F7 and H7) boards
-> to fix kernel boot process as some of these boards embeds a limited
-> amount of memory.
->
-> Fixes: 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()")
+Hello Mattijs,
 
+> Hi Siddharth,
+> 
+> Thank you for the patch.
+> 
+> On mar., déc. 17, 2024 at 18:46, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
+> 
+> > Include the TI K3 DFU environment to support DFU Boot and DFU Flash.
+> > Also add "usb" to the list of "boot_targets".
+> >
+> > Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> > ---
+> >  board/ti/am62px/am62px.env | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
+> > index 7ef54079aa8..e0838196e3a 100644
+> > --- a/board/ti/am62px/am62px.env
+> > +++ b/board/ti/am62px/am62px.env
+> > @@ -1,5 +1,6 @@
+> >  #include <env/ti/ti_common.env>
+> >  #include <env/ti/mmc.env>
+> > +#include <env/ti/k3_dfu.env>
+> >
+> >  name_kern=Image
+> >  console=ttyS2,115200n8
+> > @@ -7,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+> >  	${mtdparts}
+> >  run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+> >
+> > -boot_targets=mmc1 mmc0 pxe dhcp
+> > +boot_targets=mmc1 mmc0 usb pxe dhcp
+> >  boot=mmc
+> >  mmcdev=1
+> >  bootpart=1:2
+> > @@ -17,4 +18,4 @@ rd_spec=-
+> >  #if CONFIG_BOOTMETH_ANDROID
+> >  #include <env/ti/android.env>
+> >  adtb_idx=3
+> > -#endif
+> > \ No newline at end of file
+> > +#endif
+> 
+> This change seems un-related, is it needed?
 
-I think it is also linked to an other commit
+My editor automatically adds a newline, thereby fixing the warning/error
+regarding the absence of a newline. I assume that a newline is expected.
+Please let me know if you want me to undo this in the v2 series.
 
-Fixes:74b869bae74c ("efi_loader: use CONFIG_STACK_SIZE in the UEFI sub-system")
+> 
+> Also, looking at Martyn's/Sjoerd's series, I see a couple of things
+> missing:
+> 1. Documentation. now that am62px is compatible with the
+>    am62x_r5_usbdfu.config fragment, we need to document this in the board
+>    docs. See: commit def64b493748 ("doc: board: Add document for DFU boot on am62x SoCs")
 
-before the patch CONFIG_SET_STACK_SIZE was not defined for ALL ARM platform
+I planned on documenting it once this series got merged. The reason
+behind it is that I was unsure if the device-tree patch in this series
+will be accepted or will be asked to be enabled via the Linux DT Sync
+process. In the latter case, documenting this feature will be incorrect
+in the event of a partial merge (i.e. the documentation patch gets
+merged but the device-tree patch doesn't).
 
-So CONFIG_STACK_SIZE was not defined  / and was no used in platform
+> 
+> 2. Including configs/am62x_a53_usbdfu.config in configs/am62px_evm_a53_defconfig.
+>    This is how it's done for am62x, see:
+>    commit dfc2dff5a844 ("configs: am62x_evm_*: Enable USB and DFU support")
+> 
+> Note that If we don't do 2), we cannot use USB gadget from a U-Boot that
+> has been booted over DFU:
+> 
+>     => fastboot usb 0
+>     No USB device found
+>     USB init failed: -19
+>     => usb list
+>     USB is stopped. Please issue 'usb start' first.
+>     => usb start
+>     starting USB...
+>     No USB controllers found
+>     =>
+> 
+> For 2, this diff fixes it:
+> 
+> diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+> index 9635beb1b27e..81f433c997b5 100644
+> --- a/configs/am62px_evm_a53_defconfig
+> +++ b/configs/am62px_evm_a53_defconfig
+> @@ -183,3 +183,4 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+>  CONFIG_EFI_SET_TIME=y
+>  
+>  #include <configs/k3_efi_capsule.config>
+> +#include <configs/am62x_a53_usbdfu.config>
+> 
+> In my opinion, 2) is a valid use case:
+> 1. On a blank board, we boot the bootloaders over DFU
+> 2. Once U-Boot is started, we start fastboot to flash all images to eMMC.
+> 
+> Could this be added for v2, please?
 
-(U-Boot stack up to end of the U-Boot area)
+Sure, I will include it in the v2 series. Thank you for reviewing this
+patch and sharing feedback.
 
-after the patch the CONFIG_STACK_SIZEis set a 16MB for all platform, 
-even if EFI is not used
-
-
-+config STACK_SIZE
-+    hex "Define max stack size that can be used by U-Boot"
-
-+    default 0x4000000 if ARCH_VERSAL || ARCH_ZYNQMP
-+    default 0x200000 if MICROBLAZE
-+    default 0x1000000
-
-
-16MB is needed ONLY for EFI loader cases, for other platform that seems 
-huge.
-
-
-@Heinrich: do you think you can add this condition CONFIG_EFI_LOADER to 
-avoid issue for other platforms =
-
-So use 16MB (previously hardcoded in lib/efi_loader/efi_memory.c with 
-add_u_boot_and_runtime() )
-
-     default 0x1000000 if EFI_LOADER
-
-
-and so force the other platforms to define the CONFIG_STACK_SIZE (now 
-used in LMB) with an adequate value ?
-
-
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   Kconfig | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/Kconfig b/Kconfig
-> index 1f5b0f1972d..c087a420a24 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -578,6 +578,7 @@ config STACK_SIZE
->   	hex "Define max stack size that can be used by U-Boot"
->   	default 0x4000000 if ARCH_VERSAL_NET || ARCH_VERSAL || ARCH_ZYNQMP
->   	default 0x200000 if MICROBLAZE
-> +	default 0x4000 if ARCH_STM32
->   	default 0x1000000
->   	help
->   	  Define Max stack size that can be used by U-Boot. This value is used
-
-
-Anyway for this STM32 MCU patch:
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
-
-
-
-
-
+Regards,
+Siddharth.
