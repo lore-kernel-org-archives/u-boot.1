@@ -4,69 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595AEE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC1DE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 12:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC7CA8032B;
-	Wed, 18 Dec 2024 13:47:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 601C98022B;
+	Wed, 18 Dec 2024 13:47:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RaCuYzyU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N0/XJ4o0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DBA68027E; Wed, 18 Dec 2024 10:30:48 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33FC780288
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:30:46 +0100 (CET)
+ id 6840E80214; Wed, 18 Dec 2024 02:46:51 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3333B801CE
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 02:46:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-patra@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UiSn4102841
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 18 Dec 2024 03:30:44 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734514244;
- bh=42ertIb+8MmaeEU4IyStPtVtgbpKgS/AL96X+sPGBT0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RaCuYzyUhMbgAsKMNsD5K3muUwFhFZf2GeD5Xd2YgjPdvgbKKWc51DnQUykkjMUse
- gMq5Zd+zn/0SQhKwBA5JcHHVLoK4ElTXHgACYdgRFhhDmaLNka5kWVb0t2bcqi+8hh
- FOypDah3DGM4BDnukCWNJUrREHA/XgP/EycNdSQA=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4BI9UiJw128745
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 18 Dec 2024 03:30:44 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 03:30:42 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 03:30:42 -0600
-Received: from aparna-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (aparna-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.31])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BI9USGH060685;
- Wed, 18 Dec 2024 03:30:40 -0600
-From: Aparna Patra <a-patra@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <bb@ti.com>
-CC: <d-gole@ti.com>, <vigneshr@ti.com>, <n-francis@ti.com>, <nm@ti.com>,
- Aparna Patra <a-patra@ti.com>
-Subject: [PATCH 3/3] arm: mach-k3: am62p: Fixup a53 max cpu frequency by
- speed-grade
-Date: Wed, 18 Dec 2024 15:00:25 +0530
-Message-ID: <20241218093025.45701-4-a-patra@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241218093025.45701-1-a-patra@ti.com>
-References: <20241218093025.45701-1-a-patra@ti.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aab6fa3e20eso861028166b.2
+ for <u-boot@lists.denx.de>; Tue, 17 Dec 2024 17:46:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1734486408; x=1735091208; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ulrUte3wEkAEMsUTkzNS8oTVKUq+jtyv9VT60HHI8B0=;
+ b=N0/XJ4o04mv7beIP31CuKHnZyx/PgkH3VzKt1RwN5Yq4XRq46qg5JOTaOwkfF7k/6C
+ Pmx0/wZ2nuFG09jueJhAo7/FKYepEjLbSRSWv0O0s5HKNgSdUS4hHSE2nQM4mCKrNF8o
+ wHnTBFR0mstA7gfDzDflWBxkaK01k0sKRX2MQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734486408; x=1735091208;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ulrUte3wEkAEMsUTkzNS8oTVKUq+jtyv9VT60HHI8B0=;
+ b=Ctbp6uWeUMACKBld/gwDCcOOQ4InP7xputHssy0FbWq9daNNzOxm6inAFPEc2LcfZ7
+ VAtSBsTCfw1B2NzCwlzhFpPrzdkKxBFImCa4aOyzV4KnkMS0O1DapCePz1xok8/hr2sv
+ Ceki/IV4I+gsIystrb8WDBIlNLO7mJtiDV+WpiqJ9iSmV9sO7Fjj8wXXX032LdMWSmbe
+ jkphDeiNGGuzg5HXNigSMlbKouo52WI8kbSX/QhPZKJ1TPnMSTk65ytQfpGJ0F0UdK19
+ uaECFMTijZxra40NkkFppr/jshsQDE+MFmxv7LppRkgkWcmx3HedacNBvGm/enQqA+X2
+ QrlQ==
+X-Gm-Message-State: AOJu0YzfyGkhTyeFRhLbK5RbGKtqmQJwNPige1rOC7X702ONMPiWJbVs
+ g8grzClTafBZuNcB5yHxPYfyXpA0UaehQm+PGNmUew7Zw2OyzjLT2kiy8ZuvyQJibte2TJpsADc
+ ued8Qh2zqvM518YZs3lDq90KqMnRrj410weve
+X-Gm-Gg: ASbGnctWqgabn2cdEawaf+Mjnr+6oNdpyhFCvm/2C11PkSjBagXPHGZv8LvGkxGLS8A
+ aG0ik2cdx+drySKs3l+QFhMiQFapHwzAQ/Kfd2CA=
+X-Google-Smtp-Source: AGHT+IGRXCKgFE/Z3RG/DDP12mP3NeOPsRNTbana0r+mk4nfglClvG0yTGJmIQN6PyWPO8hwPgGwQijafEt6eVFEy7M=
+X-Received: by 2002:a17:906:f5aa:b0:aab:eefc:92e5 with SMTP id
+ a640c23a62f3a-aabf473fe7emr64984466b.14.1734486408588; Tue, 17 Dec 2024
+ 17:46:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Wed, 18 Dec 2024 13:47:15 +0100
+References: <20241102174944.412088-1-sjg@chromium.org>
+ <20241102174944.412088-2-sjg@chromium.org>
+ <280e1d54-89ff-496f-93d3-0de7a9797bc9@foss.st.com>
+In-Reply-To: <280e1d54-89ff-496f-93d3-0de7a9797bc9@foss.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 17 Dec 2024 18:46:37 -0700
+Message-ID: <CAFLszTjyxf9m4twDCQw6K99QXA5DmM9nAt-ryH5M3gb5bKyBzg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] fdt: Swap the signature for board_fdt_blob_setup()
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Aaron Williams <awilliams@marvell.com>, Alexander Graf <agraf@csgraf.de>, 
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Anup Patel <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ David Feng <fenghua@phytium.com.cn>, E Shattow <lucent@gmail.com>, 
+ Eric Curtin <ecurtin@redhat.com>, Francois Berder <fberder@outlook.fr>, 
+ Green Wan <green.wan@sifive.com>, H Bell <dmoo_dv@protonmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, 
+ "Ivan T. Ivanov" <iivanov@suse.de>, James Hilliard <james.hilliard1@gmail.com>,
+ Janne Grunau <j@jannau.net>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Linus Walleij <linus.walleij@linaro.org>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <kettenis@openbsd.org>, Matthias Brugger <mbrugger@suse.com>, 
+ Michal Simek <michal.simek@amd.com>, Minda Chen <minda.chen@starfivetech.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Padmarao Begari <padmarao.begari@amd.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Paul Walmsley <paul.walmsley@sifive.com>, Peng Fan <peng.fan@nxp.com>, 
+ Peter Hoyes <Peter.Hoyes@arm.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Randolph <randolph@andestech.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>,
+ Sam Day <me@samcday.com>, 
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Tim Harvey <tharvey@gateworks.com>, 
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ William Zhang <william.zhang@broadcom.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, u-boot-qcom@groups.io, 
+ uboot-stm32@st-md-mailman.stormreply.com, 
+ =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Wed, 18 Dec 2024 13:47:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,84 +126,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM62P SoC has multiple speed grades. Add function to delete
-non-relevant CPU frequency nodes, based on the information
-retrieved from hardware registers. Fastest grade's maximum
-frequency also depends on PMIC voltage, hence to simplify
-implementation use the smaller value.
+On Tue, 26 Nov 2024 at 10:10, Patrice CHOTARD
+<patrice.chotard@foss.st.com> wrote:
+>
+>
+>
+> On 11/2/24 18:49, Simon Glass wrote:
+> > This returns a devicetree and updates a parameter with an error code.
+> > Swap it, since this fits better with the way U-Boot normally works. It
+> > also (more easily) allows leaving the existing pointer unchanged.
+> >
+> > No yaks were harmed in this change, but there is a very small code-size
+> > reduction.
+> >
+> > For sifive, the OF_BOARD option must be set for the function to be
+> > called, so there is no point in checking it again. Also OF_SEPARATE is
+> > defined always.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v2:
+> > - Set up the existing FDT in case the board wants to check it
+> > - Update snapdragon to return -EEXIST
+> > - Set the existing FDT before calling board_fd_blob_setup()
+> > - Update sandbox to return -EEXIST if an fdt comes from a bloblist
+> > - Update do_go_uboot() to set the existing FDT
+> > - Drop unnecessary setting of FDT in vexpress64
+> > - Tidy up redundant RISC-V code
+> >
+> >  arch/arm/mach-apple/board.c                   |  7 ++--
+> >  arch/arm/mach-snapdragon/board.c              |  9 ++---
+> >  arch/arm/mach-stm32mp/boot_params.c           | 19 ++++++-----
+> >  arch/sandbox/cpu/cpu.c                        | 34 +++++++++----------
+> >  board/Marvell/octeontx/board-fdt.c            | 12 +++----
+> >  board/Marvell/octeontx2/board-fdt.c           | 12 +++----
+> >  board/Marvell/octeontx2/board.c               |  3 +-
+> >  board/andestech/ae350/ae350.c                 | 23 +++++++------
+> >  board/armltd/vexpress64/vexpress64.c          | 33 ++++++++----------
+> >  board/broadcom/bcmstb/bcmstb.c                |  7 ++--
+> >  board/emulation/qemu-arm/qemu-arm.c           |  7 ++--
+> >  board/emulation/qemu-ppce500/qemu-ppce500.c   | 12 +++----
+> >  board/emulation/qemu-riscv/qemu-riscv.c       |  7 ++--
+> >  board/highbank/highbank.c                     |  7 ++--
+> >  board/raspberrypi/rpi/rpi.c                   | 13 ++++---
+> >  board/sifive/unleashed/unleashed.c            | 12 +++----
+> >  board/sifive/unmatched/unmatched.c            | 11 +++---
+> >  .../visionfive2/starfive_visionfive2.c        | 11 +++---
+> >  board/xen/xenguest_arm64/xenguest_arm64.c     | 14 ++++----
+> >  board/xilinx/common/board.c                   | 26 ++++++++------
+> >  include/fdtdec.h                              |  9 ++---
+> >  lib/fdtdec.c                                  | 14 +++++---
+> >  22 files changed, 152 insertions(+), 150 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> > index 0b6d290b8ac..2644a04a622 100644
+> > --- a/arch/arm/mach-apple/board.c
+> > +++ b/arch/arm/mach-apple/board.c
+> > @@ -691,11 +691,12 @@ int dram_init_banksize(void)
+> >
+> >  extern long fw_dtb_pointer;
+> >
+> > -void *board_fdt_blob_setup(int *err)
+> > +int board_fdt_blob_setup(void **fdtp)
+> >  {
+> >       /* Return DTB pointer passed by m1n1 */
+> > -     *err = 0;
+> > -     return (void *)fw_dtb_pointer;
+> > +     *fdtp = (void *)fw_dtb_pointer;
+> > +
+> > +     return 0;
+> >  }
+> >
+> >  void build_mem_map(void)
+> > diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> > index 2ab2ceb5138..cd49de540f0 100644
+> > --- a/arch/arm/mach-snapdragon/board.c
+> > +++ b/arch/arm/mach-snapdragon/board.c
+> > @@ -147,12 +147,12 @@ static void show_psci_version(void)
+> >   * or for supporting quirky devices where it's easier to leave the downstream DT in place
+> >   * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
+> >   */
+> > -void *board_fdt_blob_setup(int *err)
+> > +int board_fdt_blob_setup(void **fdtp)
+> >  {
+> >       struct fdt_header *fdt;
+> >       bool internal_valid, external_valid;
+> > +     int ret = 0;
+> >
+> > -     *err = 0;
+> >       fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+> >       external_valid = fdt && !fdt_check_header(fdt);
+> >       internal_valid = !fdt_check_header(gd->fdt_blob);
+> > @@ -167,10 +167,11 @@ void *board_fdt_blob_setup(int *err)
+> >
+> >       if (internal_valid) {
+> >               debug("Using built in FDT\n");
+> > +             ret = -EEXIST;
+> >       } else {
+> >               debug("Using external FDT\n");
+> >               /* So we can use it before returning */
+> > -             gd->fdt_blob = fdt;
+> > +             *fdtp = fdt;
+> >       }
+> >
+> >       /*
+> > @@ -179,7 +180,7 @@ void *board_fdt_blob_setup(int *err)
+> >        */
+> >       qcom_parse_memory();
+> >
+> > -     return (void *)gd->fdt_blob;
+> > +     return ret;
+> >  }
+> >
+> >  void reset_cpu(void)
+> > diff --git a/arch/arm/mach-stm32mp/boot_params.c b/arch/arm/mach-stm32mp/boot_params.c
+> > index ebddf6a7dbc..2d058edc419 100644
+> > --- a/arch/arm/mach-stm32mp/boot_params.c
+> > +++ b/arch/arm/mach-stm32mp/boot_params.c
+> > @@ -6,6 +6,7 @@
+> >  #define LOG_CATEGORY LOGC_ARCH
+> >
+> >  #include <config.h>
+> > +#include <errno.h>
+> >  #include <log.h>
+> >  #include <linux/libfdt.h>
+> >  #include <asm/arch/sys_proto.h>
+> > @@ -16,20 +17,22 @@
+> >   * Use the saved FDT address provided by TF-A at boot time (NT_FW_CONFIG =
+> >   * Non Trusted Firmware configuration file) when the pointer is valid
+> >   */
+> > -void *board_fdt_blob_setup(int *err)
+> > +int board_fdt_blob_setup(void **fdtp)
+> >  {
+> >       unsigned long nt_fw_dtb = get_stm32mp_bl2_dtb();
+> >
+> >       log_debug("%s: nt_fw_dtb=%lx\n", __func__, nt_fw_dtb);
+> >
+> > -     *err = 0;
+> >       /* use external device tree only if address is valid */
+> > -     if (nt_fw_dtb >= STM32_DDR_BASE) {
+> > -             if (fdt_magic(nt_fw_dtb) == FDT_MAGIC)
+> > -                     return (void *)nt_fw_dtb;
+> > -             log_debug("%s: DTB not found.\n", __func__);
+> > +     if (nt_fw_dtb < STM32_DDR_BASE ||
+> > +         fdt_magic(nt_fw_dtb) != FDT_MAGIC) {
+> > +             log_debug("DTB not found.\n");
+> > +             log_debug("fall back to builtin DTB, %p\n", _end);
+> > +
+> > +             return -EEXIST;
+> >       }
+> > -     log_debug("%s: fall back to builtin DTB, %p\n", __func__, _end);
+> >
+> > -     return (void *)_end;
+> > +     *fdtp = (void *)nt_fw_dtb;
+> > +
+> > +     return 0;
+> >  }
+>
+> For mach-stm32mp:
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>
+> Thanks
+>
 
-Signed-off-by: Aparna Patra <a-patra@ti.com>
----
- arch/arm/mach-k3/am62px/am62p5_fdt.c          | 12 ++++++++++++
- .../arm/mach-k3/include/mach/am62p_hardware.h | 19 +++++++++++++++++++
- 2 files changed, 31 insertions(+)
-
-diff --git a/arch/arm/mach-k3/am62px/am62p5_fdt.c b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-index 96194cebcd..2c40fa5a59 100644
---- a/arch/arm/mach-k3/am62px/am62p5_fdt.c
-+++ b/arch/arm/mach-k3/am62px/am62p5_fdt.c
-@@ -74,12 +74,24 @@ static void fdt_fixup_thermal_zone_nodes_am62p(void *blob, int maxc)
- 	}
- }
- 
-+static void fdt_fixup_cpu_freq_nodes_am62p(void *blob, int max_freq)
-+{
-+	if (max_freq >= 1250000000)
-+		return;
-+
-+	if (max_freq <= 1000000000) {
-+		fdt_del_node_path(blob, "/opp-table/opp-1250000000");
-+		fdt_del_node_path(blob, "/opp-table/opp-1400000000");
-+	}
-+}
-+
- int ft_system_setup(void *blob, struct bd_info *bd)
- {
- 	fdt_fixup_cores_wdt_nodes_am62p(blob, k3_get_core_nr());
- 	fdt_fixup_video_codec_nodes_am62p(blob, k3_has_video_codec());
- 	fdt_fixup_canfd_nodes_am62p(blob, k3_has_canfd());
- 	fdt_fixup_thermal_zone_nodes_am62p(blob, k3_get_max_temp());
-+	fdt_fixup_cpu_freq_nodes_am62p(blob, k3_get_a53_max_frequency());
- 	fdt_fixup_reserved(blob, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
- 	fdt_fixup_reserved(blob, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
- 
-diff --git a/arch/arm/mach-k3/include/mach/am62p_hardware.h b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-index 2f1c8517e6..95af5c5c54 100644
---- a/arch/arm/mach-k3/include/mach/am62p_hardware.h
-+++ b/arch/arm/mach-k3/include/mach/am62p_hardware.h
-@@ -26,6 +26,8 @@
- #define JTAG_DEV_CANFD_SHIFT			15
- #define JTAG_DEV_VIDEO_CODEC_MASK			BIT(14)
- #define JTAG_DEV_VIDEO_CODEC_SHIFT			14
-+#define JTAG_DEV_SPEED_MASK			GENMASK(10, 6)
-+#define JTAG_DEV_SPEED_SHIFT			6
- #define JTAG_DEV_TEMP_MASK			GENMASK(5, 3)
- #define JTAG_DEV_TEMP_SHIFT			3
- 
-@@ -118,6 +120,23 @@ static inline int k3_get_max_temp(void)
- 		return JTAG_DEV_TEMP_EXTENDED_VALUE;
- }
- 
-+static inline char k3_get_speed_grade(void)
-+{
-+	u32 dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+	u32 speed_grade = (dev_id & JTAG_DEV_SPEED_MASK) >>
-+			   JTAG_DEV_SPEED_SHIFT;
-+
-+	return 'A' - 1 + speed_grade;
-+}
-+
-+static inline int k3_get_a53_max_frequency(void)
-+{
-+	if (k3_get_speed_grade() == 'O')
-+		return 1000000000;
-+	else
-+		return 1250000000;
-+}
-+
- #if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
- 
- static const u32 put_device_ids[] = {};
--- 
-2.34.1
-
+Applied to sjg/master, thanks!
