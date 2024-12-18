@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E9FDE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 13:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C1AEE77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 13:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4E6080269;
-	Wed, 18 Dec 2024 14:14:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2949080283;
+	Wed, 18 Dec 2024 14:14:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FQjgdRBW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iMvPepti";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A59C8802EF; Wed, 18 Dec 2024 14:14:06 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id E4C6D8022B; Wed, 18 Dec 2024 14:14:10 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E05D80269
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 14:14:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D45BB80312
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 14:14:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIDE2df163290
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4BIDE5As157865
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 18 Dec 2024 07:14:02 -0600
+ Wed, 18 Dec 2024 07:14:05 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1734527642;
- bh=l+wNP1zQ5UlpZf0IacOpxjHrCI+QyQuRdC/k412wrss=;
+ s=ti-com-17Q1; t=1734527645;
+ bh=aHAVHB5l0jUknRbDeVdg05SGxhNA5POjuFIdVMHSW+M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FQjgdRBWFauO/x01kxiA/c2x/4jPyuaB6OaChO9hiafLapcMdalgZb14PrTK1bBUE
- CUqzJJq3dwXMP0sM71vAWRtsM7655Zx70AVvve6+vL3geYuYu3pmOOzzahdpn3D7K6
- +Ciqp+0vQl0ObCkKyc2gZ5SXzYSdxO71eGYWGYEw=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDE25F059523;
- Wed, 18 Dec 2024 07:14:02 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ b=iMvPeptiEtDdZFksByvhCar4pThDKSmPT/Oz+yzlajBeiaRMzJUSEoqcxoSCmpVMl
+ bU3QC0g2+8mbqo0uhwDazpv3kH+zcq5WsSG9flMsIa9sJc6ER5TtsQNgTWg36n2Doi
+ PA5G+lpx1FFbz+9UEXdFNaOwuy5dS8uabruGzW7g=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDE5rV059647;
+ Wed, 18 Dec 2024 07:14:05 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 18
- Dec 2024 07:14:01 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2024 07:14:04 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 18 Dec 2024 07:14:01 -0600
+ Frontend Transport; Wed, 18 Dec 2024 07:14:04 -0600
 Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
  [172.24.227.142])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDDjRb035276;
- Wed, 18 Dec 2024 07:13:59 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4BIDDjRc035276;
+ Wed, 18 Dec 2024 07:14:02 -0600
 From: Prasanth Babu Mantena <p-mantena@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
-Subject: [PATCH v2 3/4] arm: mach-k3: j722_spl: Add FAST XSPI boot mode
-Date: Wed, 18 Dec 2024 18:43:40 +0530
-Message-ID: <20241218131341.2073823-4-p-mantena@ti.com>
+Subject: [PATCH v2 4/4] arm: dts: k3-j722s*: Add overrides specific to OSPI
+Date: Wed, 18 Dec 2024 18:43:41 +0530
+Message-ID: <20241218131341.2073823-5-p-mantena@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241218131341.2073823-1-p-mantena@ti.com>
 References: <20241218131341.2073823-1-p-mantena@ti.com>
@@ -82,40 +82,50 @@ X-Virus-Status: Clean
 
 From: Vaishnav Achath <vaishnav.a@ti.com>
 
-Fast XSPI boot mode is supported by J722S ROM, add that.
+OSPI Boot requires overrides specific to R5 and also
+to use DMA in R5 SPL stage the DM_TIFS needs to be used.
+Add the corresponding overrides for R5 SPL stage.
 
 Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
 ---
- arch/arm/mach-k3/include/mach/j722s_spl.h | 1 +
- arch/arm/mach-k3/j722s/j722s_init.c       | 2 ++
- 2 files changed, 3 insertions(+)
+ arch/arm/dts/k3-j722s-evm-u-boot.dtsi |  4 ++++
+ arch/arm/dts/k3-j722s-r5-evm.dts      | 13 +++++++++++++
+ 2 files changed, 17 insertions(+)
 
-diff --git a/arch/arm/mach-k3/include/mach/j722s_spl.h b/arch/arm/mach-k3/include/mach/j722s_spl.h
-index eab8c511b7c..a91cc82448f 100644
---- a/arch/arm/mach-k3/include/mach/j722s_spl.h
-+++ b/arch/arm/mach-k3/include/mach/j722s_spl.h
-@@ -24,6 +24,7 @@
- #define BOOT_DEVICE_DFU			0x0A
- #define BOOT_DEVICE_GPMC_NAND		0x0B
- #define BOOT_DEVICE_GPMC_NOR		0x0C
-+#define BOOT_DEVICE_FAST_XSPI		0x0D
- #define BOOT_DEVICE_XSPI		0x0E
- #define BOOT_DEVICE_NOBOOT		0x0F
- 
-diff --git a/arch/arm/mach-k3/j722s/j722s_init.c b/arch/arm/mach-k3/j722s/j722s_init.c
-index 01b00681f68..c4d99142e48 100644
---- a/arch/arm/mach-k3/j722s/j722s_init.c
-+++ b/arch/arm/mach-k3/j722s/j722s_init.c
-@@ -219,6 +219,8 @@ static u32 __get_primary_bootmedia(u32 devstat)
- 		fallthrough;
- 	case BOOT_DEVICE_XSPI:
- 		fallthrough;
-+	case BOOT_DEVICE_FAST_XSPI:
-+		fallthrough;
- 	case BOOT_DEVICE_SPI:
- 		return BOOT_DEVICE_SPI;
- 
+diff --git a/arch/arm/dts/k3-j722s-evm-u-boot.dtsi b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
+index 88c4a72db61..6ae76beea3e 100644
+--- a/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
++++ b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
+@@ -16,3 +16,7 @@
+ &dmsc {
+ 	bootph-pre-ram;
+ };
++
++&main_bcdma {
++	bootph-pre-ram;
++};
+diff --git a/arch/arm/dts/k3-j722s-r5-evm.dts b/arch/arm/dts/k3-j722s-r5-evm.dts
+index 1bec997c93c..d797e954f97 100644
+--- a/arch/arm/dts/k3-j722s-r5-evm.dts
++++ b/arch/arm/dts/k3-j722s-r5-evm.dts
+@@ -81,3 +81,16 @@
+ &wkup_uart0 {
+ 	status = "okay";
+ };
++
++&ospi0 {
++	reg = <0x00 0x0fc40000 0x00 0x100>,
++	      <0x00 0x60000000 0x00 0x08000000>;
++};
++
++&main_bcdma {
++	ti,sci = <&dm_tifs>;
++};
++
++&main_pktdma {
++	ti,sci = <&dm_tifs>;
++};
 -- 
 2.34.1
 
