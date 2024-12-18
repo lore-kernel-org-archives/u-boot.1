@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0172EE77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 09:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6E9E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 09:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69A69802EF;
-	Wed, 18 Dec 2024 10:25:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 759C78027E;
+	Wed, 18 Dec 2024 10:43:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yJQH+PGP";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="GSz4ur5y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD5B380304; Wed, 18 Dec 2024 10:25:24 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id C965680288; Wed, 18 Dec 2024 10:43:10 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65DC68022B
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:25:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4459780269
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 10:43:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-6ef60e500d7so44928897b3.0
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 01:25:22 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-385eed29d17so3153191f8f.0
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 01:43:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734513921; x=1735118721; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D9v44OaqwFy9svn0RjmQ9QbUJUfA84tB9DWcyiv1uIc=;
- b=yJQH+PGPcYiY7LB0niwk6MqXbCHvc0tDH9ku9J91v60Ar/sR8gkJ8X6wIVIJOYejHH
- KeNylbWn6scrMwaO2+uAv8vgT7ayBnRS/a9lt8AB6xv/1O4fKg0NjVVZYBnIaR2I9Rui
- hd2UxSnv5WMPze3/kYjPoR4ytP6QVfag+0D8BXQleOQGDs1Z/WzliwhxRFwvVqQ61zGM
- QM1b9/b5NEbFyJGe5KIYXd0PJstDUBDoK+8f8QoZZk9q1qicTSYXJrzhAmbeASVETAo3
- XTpyaeH6x+3H5Li2QSS0K2ZzqFIXK1r5M2Dev1QJ+fX/WnseCh7hws8fkgkiGcOJS1Qr
- x5fQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1734514988; x=1735119788;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=YBMUD3tHxkzUi8je7A3HxWe9uOLlDfXFFhOk9zuFDG8=;
+ b=GSz4ur5y7HkpHb+06PV6ByXxq0dEoxQZ6NIfTsnnEUv928bxbfjAEPNFc/o8YTcMxm
+ 9cWA4596lhGH9q8wQngK4YbJS8wooHJgGcLhxiDpnutHKK2W7ZiFNNWuprVv6Vjxsk+l
+ dlh/i3QNIM/KdvCQvOzksS8vsZy7UhN43IOK2rZ44U1Ob6tv7+Ij96li5rGwWYgI/Z3c
+ rnBWt9hj/SNp6r/0QlppasLQEcLmamlMMBlAO0wHM4ti4edsxodaBQGs6+aZcCdxzIDL
+ eNQR5BWz8uMXSJsPGvSEMX+FZS0HYBu/rjilro0+ECLxtcxRCMW9qmJtDbZV7DQT3bjo
+ qBNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734513921; x=1735118721;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D9v44OaqwFy9svn0RjmQ9QbUJUfA84tB9DWcyiv1uIc=;
- b=nByJiEvaTD3Cdbiso9hMMcTI9pRkXlzdtQ2SWVL5n+lCYSFDUmLJJGY5kTB4YA9l0g
- Cj7XDLtvBjd2x8kH/6BChHYly1EXpuwx9uMy1XVPb+tpJVK/v36xnISi6iabYUNxNOxR
- baADu83BwpdsuU15L04MJxJ53311xaUCZPmlwB/6SRxUi7fmB+DwWbt8cLPYnQTzI0Zt
- K/x1a6nKJ6TH35wOxaXjAl4laZgwqAjzzlcXvuXTL1NXqmSXweJ+nZXxDpU7vpZIT6q5
- JCQ3r3Go+Db2jpPejk0sEvaa9DMUtDQ2N+4kRbhwjFwCdwu5GMdL9Gd75W2dHbLtXap9
- JS6A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOzvxDUNLcmhN4NK0RbGtH0OaCq/NuKojRTtvB3hQVceSF/0RLiAQ1oGj2DbBr1OoMuoFbmBs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlXCaR2PUd3+q7iVV3z5OPmyvpQ6lfOIMuLWgqL95OVTRr2hdN
- 3jUR56R1bXhjcrhy21NGfuHXdm8rWGT9TiLyCOVi2KwbZpQVLhgHpHlfGTiKT84hkt/nITQsoCV
- fWYMxtE85wQ2H8uO3nsz1VZVaxFSRitj6UPov4w==
-X-Gm-Gg: ASbGncsgW1E2HUXm7J+ZaNXR/AgC+i/DD6DmyGaVVsT9e+ON8OLJC0khjU3oMMCu2ty
- Fw7fNxZOCGcJhaiS9cKt4r3W/OXdqftlldMDZLQ==
-X-Google-Smtp-Source: AGHT+IHXVGBcz3YUqEhHMk3EfIu+Owen9k+k0zGP3xkbBLvviCM6xo9MqR6L26SLlouthwb4TjR7E5IjibAU2IzB6/w=
-X-Received: by 2002:a05:690c:700c:b0:6ef:97a2:49e6 with SMTP id
- 00721157ae682-6f3d2696b61mr15990577b3.31.1734513921273; Wed, 18 Dec 2024
- 01:25:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1734514988; x=1735119788;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YBMUD3tHxkzUi8je7A3HxWe9uOLlDfXFFhOk9zuFDG8=;
+ b=ZaKXyADyRIfpJ8jatpyKhy7oYtjz8c0ZLDH0nyZLEFsmCFC4JKP8BNlvboudkD27iL
+ Vpv7zPc+r4BjctFYqenzx71w6X47yHXc0I2/+cV/keiAaaAabOwgTLwgGxbbFPOoLKyv
+ FjsH+yhLDS9eI1rw0Q+QdNxbVG1FVcRQr4dPTlBwLEE3vKWUIiMP7wiC9GEw3+QW0lw4
+ yqXzuJ/IJWroHqXsCRIK9MtnN8/EjwcVv3mBksm/zdbiFMNsflTtuQ1RVQUo4H5an3ho
+ 3t4j97psqp8y9KU25U00LBu5hyq0rwcRnsGHUDso8iYHK3pYsJS96xSePfd1W4cK9mYY
+ izvQ==
+X-Gm-Message-State: AOJu0Yz39RIczfsgitUik4l9OXVwCLGhSEyZT/WwpNWAYNYqe9LFeztc
+ UDXcbw0rouMHDz/DJ+LOQ9oG2KuNbGgLg8MBjyfsAfHwkjO6a6LYNOp/Q7lgXIg=
+X-Gm-Gg: ASbGncsQBIKcpYJGjjkj5wacQ3OLhhaYHbTaVcofQk5xA4nHoltkA4xRAVmpexoXaC2
+ 9UYvqC0kcELUd1XqGMnhor5FXqIm3DBySORls1E13yAvK4YpUT/AkQEP1+Xdasu4dxpDmEs4FxD
+ EKd6J/0DPRBSxQUCVlV8sQnCp2pfuaWT9Oj8szSHr2finwJEBVR+p3FW/YajzkG/XRsi0nRvwcz
+ iur0pn5vTJdGhocTFigPBv5HzsaYRfOdfKqtVxNQNAPxdXUiBh7xeUMz2BcOVzXug==
+X-Google-Smtp-Source: AGHT+IGxjYA2PhV7kakBIMoL149virTwIltYTiwkaoJjv5iormYSh/Tiqm1Z2LS7JH6SfEeQvdfiaQ==
+X-Received: by 2002:a05:6000:4a03:b0:385:fc97:9c76 with SMTP id
+ ffacd0b85a97d-388e4d4a25cmr2195445f8f.3.1734514987611; 
+ Wed, 18 Dec 2024 01:43:07 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-388c801233asm13928504f8f.9.2024.12.18.01.43.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 01:43:06 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
+ trini@konsulko.com, lukma@denx.de, n-francis@ti.com, afd@ti.com,
+ glaroque@baylibre.com, sjoerd@collabora.com, martyn.welch@collabora.com,
+ rasmus.villemoes@prevas.dk, caleb.connolly@linaro.org, j-humphreys@ti.com,
+ rogerq@kernel.org, nm@ti.com
+Cc: u-boot@lists.denx.de, srk@ti.com, s-vadapalli@ti.com
+Subject: Re: [PATCH 0/4] Add support for USB DFU boot on AM62Px
+In-Reply-To: <20241217131658.2920799-1-s-vadapalli@ti.com>
+References: <20241217131658.2920799-1-s-vadapalli@ti.com>
+Date: Wed, 18 Dec 2024 10:43:05 +0100
+Message-ID: <871py5xr6e.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20241218090007.692815-1-ilias.apalodimas@linaro.org>
- <93a5b107-63c7-4d44-a0f4-f4079935f8e8@kontron.de>
-In-Reply-To: <93a5b107-63c7-4d44-a0f4-f4079935f8e8@kontron.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 18 Dec 2024 11:24:45 +0200
-Message-ID: <CAC_iWjJxi9mkaAbR6DFHCZ13FNSnkWKSkFLZa_PLpvDOuZq9bw@mail.gmail.com>
-Subject: Re: [PATCH] imx: Fix usable memory ranges for imx8m SOCs
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: trini@konsulko.com, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Vitor Soares <vitor.soares@toradex.com>, 
- Paul Geurts <paul.geurts@prodrive-technologies.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,92 +99,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Frieder
+Hi Siddharth,
 
-On Wed, 18 Dec 2024 at 11:17, Frieder Schrempf
-<frieder.schrempf@kontron.de> wrote:
->
-> On 18.12.24 10:00 AM, Ilias Apalodimas wrote:
-> > commit e27bddff4b97 ("imx8m: Restrict usable memory to space below 4G boundary")
-> > tried to adjust the usable memory limits on a 4GB boundary.
->
-> I would be nice to also mention 74f88b72219e ("ARM: imx: imx8m: Fix
-> board_get_usable_ram_top()") which actually introduces the value of
-> 0xFFFF_FFFF. I guess it would even qualify for another Fixes tag.
+Thank you for the series.
 
-Ah thanks, Tom can you amend it or want me to send a v2?
+On mar., d=C3=A9c. 17, 2024 at 18:46, Siddharth Vadapalli <s-vadapalli@ti.c=
+om> wrote:
+
+> Hello,
+>
+> This series add support for USB DFU boot on TI's AM62Px SoC which has
+> two instances of USB Controllers, of which the USB0 instance of USB
+> which is a DWC3 USB Controller is used for USB DFU Boot:
+> ROM =3D> tiboot3.bin =3D> tispl.bin =3D> u-boot.img
+>
+> The first patch of this series is based on the suggestion of
+> Jonathan Humphreys <j-humpreys@ti.com>
+> at:
+> https://patchwork.ozlabs.org/project/uboot/cover/20241124070828.617558-1-=
+s-vadapalli@ti.com/#3419733
+> which prevents overwriting the "dfu_alt_info" environment variable which
+> is set by "spl_dfu_cmd()" for USB DFU boot.
+>
+> The second patch adds USB DFU environment for AM62Px.
+>
+> The third patch extends "am62x_r5_usbdfu.config" config fragment for
+> being re-used by AM62Px SoC by dropping configs which aren't required
+> for USB DFU boot. This is necessary to reduce the size of R5 SPL
+> (tiboot3.bin) built for USB DFU boot.
+>
+> The fourth patch enables USB device-tree nodes for USB DFU functionality
+> on AM62Px. Since CONFIG_OF_UPSTREAM is not yet supported for AM62Px, the
+> changes are being made in arch/arm/dts/k3-am62p5-sk-u-boot.dtsi at the
+> moment, with the intent of making the same changes in the Linux
+> device-tree and eventually enabling CONFIG_OF_UPSTREAM to drop the
+> changes made in "k3-am62p5-sk-u-boot.dtsi".
+>
+> Series is based on commit
+> 3b3c7280b82 smbios: address build warning
+> of the next branch of U-Boot.
+>
+> The USB DFU config fragments for AM62x are to be re-used for enabling
+> USB DFU boot on AM62Px as follows:
+> R5  =3D> am62px_evm_r5_defconfig + am62x_r5_usbdfu.config
+> A53 =3D> am62px_evm_a53_defconfig + am62x_a53_usbdfu.config
+>
+> Series has been tested on AM62P5-SK. Logs validating USB DFU boot on
+> AM62P5-SK with this series:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/50198ee3348c2db73e0dbd3=
+a14cb0f8b
+>
+> Series has also been validated on AM625-SK to ensure that the changes
+> made to "am62x_r5_usbdfu.config" config fragment being used by AM625-SK
+> for USB DFU boot do not cause a regression on AM625-SK w.r.t. USB DFU
+> boot. Logs validating USB DFU Boot on AM625-SK with this series:
+> https://gist.github.com/Siddharth-Vadapalli-at-TI/85a7579ed2c95330ac71ee3=
+a832cadfb
+>
+> Regards,
+> Siddharth.
+>
+> Jonathan Humphreys (1):
+>   dfu: do not overwrite "dfu_alt_info"
+>
+> Siddharth Vadapalli (3):
+>   board: ti: am62px: env: include environment for DFU Boot
+>   configs: am62x_r5_usbdfu: extend for AM62Px
+>   arm: dts: k3-am62p5-sk-u-boot: enable USB0 for USB DFU boot
+
+Boot tested this on AM62Px SK EVM using snagrecover:
+
+Boot logs are here: https://paste.debian.net/1340377/
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 >
-> >
-> > ram_top is described as 'top address of RAM used by U-Boot' and we want
-> > to preserve that. This is defined as a phys_addr_t and unfortunately
-> > its size differs across architectures. This has lead us to a weird
-> > state where 32bit boards define it 'SZ_4GB - 1' and 64bit boards as
-> > 'SZ_4GB' unless it was otherwise defined.
-> >
-> > With some recent LMB changes and specifically
-> > commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank")
-> > the board fails to boot properly although the commit above is correct
-> > since it's making sure that no memory above ram_top is usable -- but
-> > added to our memory map so EFI can hand it over to the booted OS.
-> >
-> > The reason for that is that during the LMB init we add all usable memory
-> > in lmb_add_memory(). In that function any memory above ram_top gets added
-> > as 'reserved' for LMB. With the current values tha's set to 0xFFFF_FFFF
-> > for this board. Later LMB is trying to protect the memory area U-Boot lives
-> > in with lmb_reserve_common(). The latter fails though since it tries to
-> > add U-Boot top (which is 0xFFFF_FFFF as well) to U-Boot 'bottom'. This call
-> > will fail since 1 byte of that memory range is already marked as 'reserved'.
-> >
-> > Since we are close to the release, LMB seems to assume that the address
-> > is rounded up and is the 'next address' and so does parsing and adding
-> > memory ranges from DT files, bump the ram_top of the board by 1byte.
-> >
-> > In the long run we should change all of the above and have 32b and 64b
-> > platforms define ram_top identically.
+>  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 ++++++++++
+>  board/ti/am62px/am62px.env            |  5 +++--
+>  configs/am62x_r5_usbdfu.config        |  3 +++
+>  drivers/dfu/dfu.c                     |  7 +++++--
+>  4 files changed, 21 insertions(+), 4 deletions(-)
 >
-> Some more ideas for cleaning up the situation in the long run:
->
-> * Get rid of board_get_usable_ram_top() and fix the drivers that require
->   address space below SZ_4G.
->
-> * Parse the 'dma-ranges' property in the SoC node of the devicetree
->   which already tells us what address space is usable (at least for
->   i.MX8M).
->
-> Anyway, the change looks good to me for now, so:
-
-Yep both of these are valid and good ideas.
-
->
-> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-
-Thanks
-/Ilias
-
->
-> >
-> > Add a Fixes tag although the commit is correct, so people can figure out
-> > the broken scenarios in the future.
-> >
-> > Suggested-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Fixes: commit 1a48b0be93d4 ("lmb: prohibit allocations above ram_top even from same bank")
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  arch/arm/mach-imx/imx8m/soc.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-> > index 9588b8b28bf2..85dc8b51a145 100644
-> > --- a/arch/arm/mach-imx/imx8m/soc.c
-> > +++ b/arch/arm/mach-imx/imx8m/soc.c
-> > @@ -362,7 +362,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-> >        * space below the 4G address boundary (which is 3GiB big),
-> >        * even when the effective available memory is bigger.
-> >        */
-> > -     top_addr = clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, 0xffffffff);
-> > +     top_addr = clamp_val((u64)PHYS_SDRAM + gd->ram_size, 0, SZ_4G);
-> >
-> >       /*
-> >        * rom_pointer[0] stores the TEE memory start address.
->
+> --=20
+> 2.43.0
