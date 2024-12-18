@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A50E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:29:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E4F4E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 10:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB9A802EF;
-	Wed, 18 Dec 2024 11:29:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 755CA80288;
+	Wed, 18 Dec 2024 11:31:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sJPg+O1i";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0xt5HHHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFAA48031F; Wed, 18 Dec 2024 11:29:54 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 45965802EF; Wed, 18 Dec 2024 11:31:11 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 706258027E
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:29:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 381648027E
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 11:31:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3862b40a6e0so3533994f8f.0
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 02:29:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734517792; x=1735122592; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=c2ABOGNfUNPFTN3+UeY2qZ7pW9zV9XnSXYpEo8qhXnI=;
- b=sJPg+O1iqODlEYzqKAi4j8wcBwUNPfFqSi4U1cUfAti5KVmlzPvFwUsoiVK0CKu1RJ
- Cj4czCA9jrvJKTjamXLh/GGbB4zAKBMXvSnTOeGzQxUYooa2ZKSgwk1tCtA2SNAJjoz9
- p+4CsGAjDITe0/2W635IOvKJUhYSx2B2JZEzMbB9K1cyAHmqfsZ3J42G189DYYwZCdvq
- somjv048mtK+5pytmgefZF1M2+YncLSfxTJsegGT9JCyeJvnCwdPuHBSwXLsl6gRKvz6
- UNCQhLqWQAi3zoh+c+Y0V5G96ScRQo004y6wuFfw+s4m9gK9YR3tHVTMD3kJCcx98/TL
- gXXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734517792; x=1735122592;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=c2ABOGNfUNPFTN3+UeY2qZ7pW9zV9XnSXYpEo8qhXnI=;
- b=pq22InzT2i+6hM3ImhUK+M0vgnKiKVDrtp8mLakHTytciMJWuwzM4dM6as8NDu47V+
- uGMbj3jJ7ZGf3DrmOcK/yqIlKE3g/hksmdEuuHom7yKpo/+yiI/N/9QhEH5Sy+JroBSy
- q2vK7Ksve9cMbs/HRWS5ETmL4h1IQhR/f0Eq3f8EXREx9FaRu3q2eWym3mYX6fShnoDJ
- GYPP9liKTyAv5tsOk5UxBLACZGbKENZoD/p1YMYYwYXQkKfpPib6ijzvJYEQdDHnDKxm
- 0L8OXnbnSB1v7IR1i1aIMpj6K13NkeLb0GUnywDIQIVx3OI6n/rxttjobQhu4nV7OUik
- /Q2Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX1TitCymx6WWitegxE53H7CL+vVBapPLbQbwtD8SDOzLvYOggzI9qWGnHbh+VYX7/ZWBf5nvs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxj3wnNHHEs/pdVfzpNlNRlheGThtD4glIvveHO4ftaMR4XwAvl
- UQHg4Soezhoe1AxEIk9GPBKfTIR1uk2UmQJoKp0gjLFaXCc6269mWC6WXSW4ZWo=
-X-Gm-Gg: ASbGncs7AlZDkqufUWdWH7RrlKySIi7qmNYvD4NvV86MKhc8upytKrUv1mXl7vStnW+
- 4lY6KZ27PAB2Yp0xWJYN1FmhdJ6pwgWhS9iPF7Tns9D3re4bRwQyndBNNRAB30ikZYCT4qt5FVS
- Pe8Uh8HovjtAbqUZZpWLK2Y4MpG/9BNC/eQQX6HDwe8lTEABs5+avSsCCWM/vdvh50XHjdA6lUC
- n8lzA0o/66D5oxKBnCNd8Bdp9nOa2ow8LEqILZ71vb+UxITbItQmaCuTA/x3BEFRz6kX84PGhr9
- hhoLlusGIwOrSvGtZYDMm6FTWfkQ05mf2SXM
-X-Google-Smtp-Source: AGHT+IHeDn0QjrpZmj4I83qBN2/T9k+1edT0lR1yUgP81NiueFD9SmX+skzxWJvT2zfGNyTge3THBg==
-X-Received: by 2002:a05:6000:2c3:b0:385:e30a:394b with SMTP id
- ffacd0b85a97d-388e4d83283mr1840214f8f.16.1734517791897; 
- Wed, 18 Dec 2024 02:29:51 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:7a7b:97ce:b355:53a9?
- ([2a01:e0a:3cb:7bb0:7a7b:97ce:b355:53a9])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-388c806055bsm13465172f8f.92.2024.12.18.02.29.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Dec 2024 02:29:51 -0800 (PST)
-Message-ID: <494b484c-8102-4594-98dd-68751c7d18f9@linaro.org>
-Date: Wed, 18 Dec 2024 11:29:50 +0100
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=2082afbf55=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BI7p9Iw007677;
+ Wed, 18 Dec 2024 11:30:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ Qj8nYAeLKnxt3XIsgesskRCyvYRpkGFs0X60og4r6hg=; b=0xt5HHHkgmVNx6jP
+ yDbowyh1VlJ+JtI+UTrm3x3bWOaMuOjGGWg3y1TdO6l27TCmDw6YZty4PGPGwzth
+ d0l06+klkfjNR505VYigIeQvCWyUiLZNiPeOSCBvnNfpYS0tzSC+R7J8FzL6Gb/9
+ KeDG5xbEXSbfb1iJ2hpENQxtQs/1K1Gym/53utaSnWvSdorAOUbl/nWjXQrzZrFW
+ ryQpJeUWgoQ6OLrnde/o4GCEyWGwcAJaUOo6riqJeScGFE85kzyY5EL3FgnYSp/5
+ qUKAoB4Sww5L4P+uoXC69z4pjlcIbwQq87C90Aqh/1gRmDpZwtW3i7JPdHtElW8X
+ U7IbnA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43ktca0qkp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 18 Dec 2024 11:30:57 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7783F40075;
+ Wed, 18 Dec 2024 11:29:07 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E717425C24A;
+ Wed, 18 Dec 2024 11:28:08 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 18 Dec
+ 2024 11:28:08 +0100
+Message-ID: <290b3572-bc50-410d-bba0-3e204e68bc56@foss.st.com>
+Date: Wed, 18 Dec 2024 11:28:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/2] doc: man-page for optee commands
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, trini@konsulko.com, sjg@chromium.org,
- jens.wiklander@linaro.org, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de,
- mkorpershoek@baylibre.com, akashi.tkhro@gmail.com,
- francis.laniel@amarulasolutions.com, ddrokosov@salutedevices.com, git@amd.com
-References: <20241218041914.1463666-1-venkatesh.abbarapu@amd.com>
- <20241218041914.1463666-3-venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH] Kconfig: Set STACK_SIZE to 16KB for STM32 MCUs
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Greg Malysa
+ <greg.malysa@timesys.com>, Hiago De Franco <hiago.franco@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>, Masahiro Yamada
+ <yamada.masahiro@socionext.com>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20241218075833.2049241-1-patrice.chotard@foss.st.com>
+ <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20241218041914.1463666-3-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <268def1b-0b7f-453b-b079-885ea3e49bb4@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,111 +99,92 @@ X-Virus-Status: Clean
 
 
 
-On 12/18/24 05:19, Venkatesh Yadav Abbarapu wrote:
-> Provide a man-page for the optee command.
+On 12/18/24 10:59, Patrick DELAUNAY wrote:
+> Hi
 > 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  doc/usage/cmd/optee.rst | 70 +++++++++++++++++++++++++++++++++++++++++
->  doc/usage/index.rst     |  1 +
->  2 files changed, 71 insertions(+)
->  create mode 100644 doc/usage/cmd/optee.rst
+> On 12/18/24 08:58, Patrice Chotard wrote:
+>> Since commit 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()"),
+>> STM32F746-disco hangs when loading device tree just before starting
+>> kernel:
+>>
+>> Retrieving file: /stm32f746-disco.dtb
+>> Kernel image @ 0xc0008000 [ 0x000000 - 0x19ae00 ]
+>> Flattened Device Tree blob at c0408000
+>>     Booting using the fdt blob at 0xc0408000
+>> Working FDT set to c0408000
+>>     Loading Device Tree to c05f8000, end c05ff71c ...
+>>
+>> Adjust STACK_SIZE to 16KB for STM32 MCUs (F4/F7 and H7) boards
+>> to fix kernel boot process as some of these boards embeds a limited
+>> amount of memory.
+>>
+>> Fixes: 6534d26ee9a5 ("lmb: do away with arch_lmb_reserve()")
 > 
-> diff --git a/doc/usage/cmd/optee.rst b/doc/usage/cmd/optee.rst
-> new file mode 100644
-> index 00000000000..532d488d5e3
-> --- /dev/null
-> +++ b/doc/usage/cmd/optee.rst
-> @@ -0,0 +1,70 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. index::
-> +   single: optee (command)
-> +
-> +optee command
-> +=============
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    optee hello
-> +    optee hello <value>
-> +
-> +Description
-> +-----------
-> +
-> +This is an OP-TEE sanity test which invokes the "Hello World"
-> +Trusted Application (TA). The TA does two things:
-> +- It prints debug and information messages to the secure console (if logging is enabled)
-> +- It increments the integer value passed as a parameter and returns it """
+> 
+> I think it is also linked to an other commit
+> 
+> Fixes:74b869bae74c ("efi_loader: use CONFIG_STACK_SIZE in the UEFI sub-system")
+> 
+> before the patch CONFIG_SET_STACK_SIZE was not defined for ALL ARM platform
+> 
+> So CONFIG_STACK_SIZE was not defined  / and was no used in platform
+> 
+> (U-Boot stack up to end of the U-Boot area)
+> 
+> after the patch the CONFIG_STACK_SIZEis set a 16MB for all platform, even if EFI is not used
+> 
+> 
+> +config STACK_SIZE
+> +    hex "Define max stack size that can be used by U-Boot"
+> 
+> +    default 0x4000000 if ARCH_VERSAL || ARCH_ZYNQMP
+> +    default 0x200000 if MICROBLAZE
+> +    default 0x1000000
+> 
+> 
+> 16MB is needed ONLY for EFI loader cases, for other platform that seems huge.
+> 
+> 
+> @Heinrich: do you think you can add this condition CONFIG_EFI_LOADER to avoid issue for other platforms =
+> 
+> So use 16MB (previously hardcoded in lib/efi_loader/efi_memory.c with add_u_boot_and_runtime() )
+> 
+>     default 0x1000000 if EFI_LOADER
+> 
+> 
+> and so force the other platforms to define the CONFIG_STACK_SIZE (now used in LMB) with an adequate value ?
+> 
+> 
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>>   Kconfig | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/Kconfig b/Kconfig
+>> index 1f5b0f1972d..c087a420a24 100644
+>> --- a/Kconfig
+>> +++ b/Kconfig
+>> @@ -578,6 +578,7 @@ config STACK_SIZE
+>>       hex "Define max stack size that can be used by U-Boot"
+>>       default 0x4000000 if ARCH_VERSAL_NET || ARCH_VERSAL || ARCH_ZYNQMP
+>>       default 0x200000 if MICROBLAZE
+>> +    default 0x4000 if ARCH_STM32
+>>       default 0x1000000
+>>       help
+>>         Define Max stack size that can be used by U-Boot. This value is used
+> 
+> 
+> Anyway for this STM32 MCU patch:
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
+Applied to u-boot-stm32/next
 
-Drop the """
-
-> +
-> +
-> +value
-> +	Integer value that the TA is expected to increment and return.
-> +	The default value is 0.
-> +
-> +To enable the OP-TEE Hello World example please refer
-> +https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
-> +
-> +Examples
-> +--------
-> +
-> +::
-> +
-> +	==> optee hello
-> +	D/TA:  TA_CreateEntryPoint:39 has been called
-> +	I/TA: Hello World!
-> +	Value before: 0x0
-> +	Calling TA
-> +	D/TA:  inc_value:105 has been called
-> +	I/TA: Got value: 0 from NW
-> +	I/TA: Increase value to: 1
-> +	Value after: 0x1
-> +	I/TA: Goodbye!
-> +	D/TA:  TA_DestroyEntryPoint:50 has been called
-> +
-> +	==> optee hello 74
-> +	D/TA:  TA_CreateEntryPoint:39 has been called
-> +	I/TA: Hello World!
-> +	Value before: 0x74
-> +	Calling TA
-> +	D/TA:  inc_value:105 has been called
-> +	I/TA: Got value: 116 from NW
-> +	I/TA: Increase value to: 117
-> +	Value after: 0x75
-> +	I/TA: Goodbye!
-> +	D/TA:  TA_DestroyEntryPoint:50 has been called
-> +
-> +Configuration
-> +-------------
-> +
-> +The optee command is enabled by CONFIG_OPTEE=y and CONFIG_CMD_OPTEE=y.
-> +
-> +Return value
-> +------------
-> +
-> +The return value $? is 0 (true) if the command succeeds, 1 (false) otherwise.
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index cb7a23f1170..4dd00f002cd 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -92,6 +92,7 @@ Shell commands
->     cmd/msr
->     cmd/mtest
->     cmd/mtrr
-> +   cmd/optee
->     cmd/panic
->     cmd/part
->     cmd/pause
-
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-
-Thanks,
--- 
-Jerome
+Thanks
+Patrice
