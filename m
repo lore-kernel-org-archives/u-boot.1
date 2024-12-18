@@ -4,78 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802A0E77188
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A13E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C5168022B;
-	Wed, 18 Dec 2024 22:02:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D8DC980241;
+	Wed, 18 Dec 2024 22:05:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vd4qUyyq";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="IryKRNHH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YpSf2hNK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F1F380241; Wed, 18 Dec 2024 22:02:44 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0B3A7802EF; Wed, 18 Dec 2024 22:05:39 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 139178021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:02:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F388021D
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:05:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4YD5jY4JRpz9sn9;
- Wed, 18 Dec 2024 22:02:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734555761;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=y2/xPq12p1UpM0I50Owqe4Lgt91lJYZl/SYVVEfrXIc=;
- b=vd4qUyyqp+gzVOo8c7jSQtv6olECAitGPm8DVnPCta+qYXZ2TlXp0yQQegpZYraxV8Oz5L
- 5BNjEZrXSEUYfquTPDGI7VWkrQOtIEJu4ECdQN7Vo62KdYAITcU/5muIZSQAnWpldOY0He
- YVfhkHEuhO9k+AFm9u+ARvxSAim0xnpbHqKurWW1XuLAxCG+f/9cfG4h0ZaGyxOcDvFJay
- PsoXzM7/FpcNV2856kGrVmWgGG18QmUwftegHxAsdwg2wZeTK0nfloIsJYzx7SJ4ZAwLmn
- J+ZhKkm2zfJCRpsPC+0A3G7Ex7vZ6WKd6bYSylDrsDJ/RqVJalRV6FUsW0Axzw==
-Message-ID: <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1734555759;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=y2/xPq12p1UpM0I50Owqe4Lgt91lJYZl/SYVVEfrXIc=;
- b=IryKRNHH28cdgMCALRX1RuvJJcsIMwo2qlMmyal90h9RSqgf93nHSzVW64lwTOHQRO92Tv
- OQOih9d87z6xumjmnSdufdnGDq3x8Xty15q1Jf8pLMJx35xpMIW5pwpy+D2WYOYLbZ1YkQ
- FtmqyUbuNiO7pFPfyYNyft+fCPHswntw2pQVvtpcPfokNfieoRBqFI11N6/rl46IJvj9nI
- e3lC6Vh9IY5U7srZpER5QF67zgvDVlkADjlqUYntCYvGNZPCdCfw6oEH1T4e9TixkVPfpW
- YUsJ3Ofs5/esg/7db8UPfa6erpKJCyk4A88Q646H8Ce8W5yolaKYXD728KsZrA==
-Date: Wed, 18 Dec 2024 22:02:36 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
-To: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Adriano Cordova <adrianox@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6e5ee6ac7so3767385a.0
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:05:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1734555935; x=1735160735; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+F0v6/zQ8w7cu6uIj+1EwvHuLrGhqk85p+iH4w3m5Og=;
+ b=YpSf2hNK6WTXqiLiE/c/Rlj+085lgn/oU+AQfr/96DIFqmPOAeHe8aI627Lib4FOeK
+ g+tAE5JH8AWTJgAFRxZkhj1af03h8WycyUrd0nOrwanY/S0h29BcNu3bdBkiJ9/2dGYf
+ Vi24m0NHjDO2mP4r+O8IZ91X+j2p03eW8Ghuo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734555935; x=1735160735;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+F0v6/zQ8w7cu6uIj+1EwvHuLrGhqk85p+iH4w3m5Og=;
+ b=NHizewevtDcT8QkO/KpdT7fPZyvdzJZ7On51ePUXZcVEjtFrHth9APXvwppoRSpdhk
+ COisvHBOlE+9CKkxm/TzNuyKiyd3fQt3FDY3Q9zd1kpg2AsogteSvOBUo4fkq3bRJtzd
+ j6FKVJvZHI/5nzcfyaSB+V6WOpV3uBJC2QU7a3jJWQ4rThGRFsDw7Ks/KNODKTSIfzYm
+ TN8nYyNAJeab46tK6Y8pMfWmDZi5we/cUEP9EE10o3pWXjuiHcLNNCjrEUq0SRlhR8Et
+ 9JPlZ4RXsIf67bmGItzDIOIwUvoXsPJ6m0BXJdO+ZMKhns0Xw6VYAkoOYmMCbEJ/u2Pw
+ bYNA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVSgpbyg7qvO8pk46YFSV44KWgUmEILuU3rIpjoHIfuzJlrXtvHLgRvqIHRNjmHvgyQOc3asiw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwUbNeDlSbjwVp8/rnzK+ZvPhQiItrwonNj8GZQzop32VTnlEaR
+ 9HCsH1ZuoRSPFD32ZXR2uEEobj0T5gq/FeeoeOALUjmIgewbnTLlxHlGbAiFLoA=
+X-Gm-Gg: ASbGncvZroaOJElLHNYXHT2bmwEchVlN4BsmHg05IQYZJ1O7kZvm5gy5bO0KENy5+px
+ eDFSg9ZigfFmEYiNWCc2WNpjwm9ehUva4o1mTLLOl9KikL3z7N/831R+gJsOW8FWvG56F6C63nZ
+ z+y+OD51J1gW44SJFj3vk7QjoVuPmObWL2jXjI9tvoYv99sxv6COSJUwOq6oU5k56QEWTTG6uQw
+ 3qg97tj42EnGUWzTln1JV/1Bkw4jW0zbewWAyJGaroKMXmiaFh4G8Kz
+X-Google-Smtp-Source: AGHT+IEYpRl3+7MhcQMiKxEE4YfdaywJKt4gNyKuLF9HXKWaTUxbKpBrUilM84zrDNfpY7xN/Gi4IQ==
+X-Received: by 2002:a05:620a:1d06:b0:7b6:d4ea:fe8a with SMTP id
+ af79cd13be357-7b9aa8b47bamr154299885a.12.1734555935612; 
+ Wed, 18 Dec 2024 13:05:35 -0800 (PST)
+Received: from bill-the-cat ([187.144.29.192])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b7047aa91dsm465895785a.15.2024.12.18.13.05.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 13:05:34 -0800 (PST)
+Date: Wed, 18 Dec 2024 15:05:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Baruch Siach <baruch@tkos.co.il>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
+Message-ID: <20241218210529.GP1505244@bill-the-cat>
 References: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
  <20241218194327.GO1505244@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20241218194327.GO1505244@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 267a12f00dd607cb907
-X-MBO-RS-META: ms6zxb4t8f7tt8fch4t1tsiy4kofiwdm
+ <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vevCj8apz4S4c9iR"
+Content-Disposition: inline
+In-Reply-To: <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,32 +103,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/24 8:43 PM, Tom Rini wrote:
-> On Wed, Dec 18, 2024 at 08:41:28PM +0100, Marek Vasut wrote:
->> TFTP transfer size can be used to re-size the TFTP progress bar on
->> single line based on the server reported file size. Enable it by
->> default for Renesas hardware to avoid long scrolling walls of '#'
->> character during long TFTP transfers.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> ---
->> Cc: Adriano Cordova <adrianox@gmail.com>
->> Cc: Anand Moon <linux.amoon@gmail.com>
->> Cc: Baruch Siach <baruch@tkos.co.il>
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->> Cc: Joe Hershberger <joe.hershberger@ni.com>
->> Cc: Ramon Fried <rfried.dev@gmail.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> NOTE: I wonder, shall we simply enable this by default ?
-> 
-> Any chance you did a size comparison before/after this patch? That'd be
-> handy to know for making this default for everyone.
-r8a779f0_spider_defconfig
 
-without: 744640
-with:    752824
+--vevCj8apz4S4c9iR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So maybe this is not for everyone.
+On Wed, Dec 18, 2024 at 10:02:36PM +0100, Marek Vasut wrote:
+> On 12/18/24 8:43 PM, Tom Rini wrote:
+> > On Wed, Dec 18, 2024 at 08:41:28PM +0100, Marek Vasut wrote:
+> > > TFTP transfer size can be used to re-size the TFTP progress bar on
+> > > single line based on the server reported file size. Enable it by
+> > > default for Renesas hardware to avoid long scrolling walls of '#'
+> > > character during long TFTP transfers.
+> > >=20
+> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > ---
+> > > Cc: Adriano Cordova <adrianox@gmail.com>
+> > > Cc: Anand Moon <linux.amoon@gmail.com>
+> > > Cc: Baruch Siach <baruch@tkos.co.il>
+> > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> > > Cc: Joe Hershberger <joe.hershberger@ni.com>
+> > > Cc: Ramon Fried <rfried.dev@gmail.com>
+> > > Cc: Tom Rini <trini@konsulko.com>
+> > > Cc: u-boot@lists.denx.de
+> > > ---
+> > > NOTE: I wonder, shall we simply enable this by default ?
+> >=20
+> > Any chance you did a size comparison before/after this patch? That'd be
+> > handy to know for making this default for everyone.
+> r8a779f0_spider_defconfig
+>=20
+> without: 744640
+> with:    752824
+>=20
+> So maybe this is not for everyone.
+
+Indeed, thanks for checking.
+
+--=20
+Tom
+
+--vevCj8apz4S4c9iR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjORIACgkQFHw5/5Y0
+tywMZQwArcmSIls/3AIOOBeUtPl2eBGqxGH6xWpxPEqsTI6KjDJ09yj4cPQVFzMf
+jr3cDzuFscEDB0AodysUTsQHkji62NZ7GDUKESPTMBqE9n7Zw4lGN8maiT3nM6op
+eezBFgNO3VHd4GlPbQAuan91mK+FtUUFAp/XB+HbZ1JVrTTiN8yo/FkUGGKuVD6p
+u7x3LOWVj8AmZ0OlvoJLArAA1Kip1sdRpW/sacsHlZQRrvGTVLush9ld6WMknBJp
+G++BcPTW06C9kZ7+xIrO+aVJkf7VlglgKrTnWUWBLZoE4RZxSzvaB894oNp+yf09
+loUunc5Mm0x7YRtj0Tg7hMFYsTYm46WrbSysq2UsE2Cg2NI+/Q1a8aQc2HdnjLYc
+JjVX8pY+xu+MvtO/GZtmizmuZRI09HLnbXOaNAxy1i2hxxu+4hEguK1Z9aZrAGMU
+o3ROXknUOue9n+gZvmkSvPFfO8nsaKva6xWt5GsBpAgw0jAFDplewQF4/j0ntk3l
++neyxNg9
+=fDBj
+-----END PGP SIGNATURE-----
+
+--vevCj8apz4S4c9iR--
