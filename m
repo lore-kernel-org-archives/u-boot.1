@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A13E77187
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C27E77187
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 21:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8DC980241;
-	Wed, 18 Dec 2024 22:05:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AFF4880241;
+	Wed, 18 Dec 2024 22:10:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YpSf2hNK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gxaZFxwp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B3A7802EF; Wed, 18 Dec 2024 22:05:39 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 3AB6280291; Wed, 18 Dec 2024 22:10:29 +0100 (CET)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6F388021D
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:05:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0161D8021D
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 22:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7b6e5ee6ac7so3767385a.0
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:05:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-3a817ee9936so299075ab.2
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 13:10:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734555935; x=1735160735; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+F0v6/zQ8w7cu6uIj+1EwvHuLrGhqk85p+iH4w3m5Og=;
- b=YpSf2hNK6WTXqiLiE/c/Rlj+085lgn/oU+AQfr/96DIFqmPOAeHe8aI627Lib4FOeK
- g+tAE5JH8AWTJgAFRxZkhj1af03h8WycyUrd0nOrwanY/S0h29BcNu3bdBkiJ9/2dGYf
- Vi24m0NHjDO2mP4r+O8IZ91X+j2p03eW8Ghuo=
+ d=chromium.org; s=google; t=1734556225; x=1735161025; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lW/cAblWWB2ELnMQuT0TcnkknEQlkHKIQMo1VNYwFaQ=;
+ b=gxaZFxwp2Z6EpjT/PfcOBbPkBYx+RvZ7es+fLbqGhlil6yRDnJzsrEM3uZ/5IkhN/q
+ Av2VUnUvytaMEF5GPMtSo9HWHpepRT98W4CfTp/QsQI+AzvEhCKHMWvoXntnsyz5i2eP
+ 9dctyLtfYxlDVhLmgWPV5bNBdkRY5IVDkwo0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734555935; x=1735160735;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+F0v6/zQ8w7cu6uIj+1EwvHuLrGhqk85p+iH4w3m5Og=;
- b=NHizewevtDcT8QkO/KpdT7fPZyvdzJZ7On51ePUXZcVEjtFrHth9APXvwppoRSpdhk
- COisvHBOlE+9CKkxm/TzNuyKiyd3fQt3FDY3Q9zd1kpg2AsogteSvOBUo4fkq3bRJtzd
- j6FKVJvZHI/5nzcfyaSB+V6WOpV3uBJC2QU7a3jJWQ4rThGRFsDw7Ks/KNODKTSIfzYm
- TN8nYyNAJeab46tK6Y8pMfWmDZi5we/cUEP9EE10o3pWXjuiHcLNNCjrEUq0SRlhR8Et
- 9JPlZ4RXsIf67bmGItzDIOIwUvoXsPJ6m0BXJdO+ZMKhns0Xw6VYAkoOYmMCbEJ/u2Pw
- bYNA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVSgpbyg7qvO8pk46YFSV44KWgUmEILuU3rIpjoHIfuzJlrXtvHLgRvqIHRNjmHvgyQOc3asiw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUbNeDlSbjwVp8/rnzK+ZvPhQiItrwonNj8GZQzop32VTnlEaR
- 9HCsH1ZuoRSPFD32ZXR2uEEobj0T5gq/FeeoeOALUjmIgewbnTLlxHlGbAiFLoA=
-X-Gm-Gg: ASbGncvZroaOJElLHNYXHT2bmwEchVlN4BsmHg05IQYZJ1O7kZvm5gy5bO0KENy5+px
- eDFSg9ZigfFmEYiNWCc2WNpjwm9ehUva4o1mTLLOl9KikL3z7N/831R+gJsOW8FWvG56F6C63nZ
- z+y+OD51J1gW44SJFj3vk7QjoVuPmObWL2jXjI9tvoYv99sxv6COSJUwOq6oU5k56QEWTTG6uQw
- 3qg97tj42EnGUWzTln1JV/1Bkw4jW0zbewWAyJGaroKMXmiaFh4G8Kz
-X-Google-Smtp-Source: AGHT+IEYpRl3+7MhcQMiKxEE4YfdaywJKt4gNyKuLF9HXKWaTUxbKpBrUilM84zrDNfpY7xN/Gi4IQ==
-X-Received: by 2002:a05:620a:1d06:b0:7b6:d4ea:fe8a with SMTP id
- af79cd13be357-7b9aa8b47bamr154299885a.12.1734555935612; 
- Wed, 18 Dec 2024 13:05:35 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b7047aa91dsm465895785a.15.2024.12.18.13.05.32
+ d=1e100.net; s=20230601; t=1734556225; x=1735161025;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lW/cAblWWB2ELnMQuT0TcnkknEQlkHKIQMo1VNYwFaQ=;
+ b=n5UWB91e8Mdj6Jmpey13WiGuNqOXiIxU2joROFnfjz7aNjbSBZy9ql9A76xBYPG8yZ
+ i4dTDn/hFc28tC3UvqQVj5ut/Kz2qj/E69fQuCbUwgqzXkoYCenz8VdJ68526RM+JgjO
+ +nyf+AUH76LV9NxflxBI/TjYuJY7JsH7k1JpzQWT486jeeqd9DhJpjX8QTNzh9WyJjGE
+ gnZDv3UUw+cIV9y8+Ek+8OVDYRcW3kDu7AP9mTRCZ2hbLUvkV9EJCLzUjODA6VxKwvH+
+ axwn6OjLUbj4Y/lcaDe1/1SL41vOsDPM1ml2bHNdBD6qVhiJhVwyOdfwHemaLSdnDM8K
+ c/XQ==
+X-Gm-Message-State: AOJu0YwgpQ3QUJf/3jO9IdAb/rX/URarW1k5Qf+zGhDjqeFvKKe5Uc7a
+ CTJxjz8zUl5hmnmuXi+2AnsUHGZVe4m8prQT2S+h6jMExsfjbRZ3Y9KpFzTrq7+yc/vak8M+B9w
+ =
+X-Gm-Gg: ASbGncu2JTu/7tqkK7GvFCWeaGk6GNqNZOrANXQkWn8R0mF9YJH0YmfU+xCq7k36f9u
+ nOKTWIElwdjzlKT9EXs5Kyj7LrPYa/qDjzJGDt6bhSHQ8ia2b6s8+fk7GJMMoMRrZoTjgRvWEZr
+ qpvWUgUhNzN+OZKMKOezutdtNLiOmq7icDNgxRSRY0fPACLzOij5zJhXIIx1+fjwQwsMZGGDjr1
+ /1pv84bfF5ypNkxgJApdjTdluEz19JI+uLd577HV4if0cTv/BIHMxEyPD330HMSMdFIaQOHZlJx
+ nguTRh1VmcbMzaB0Hg==
+X-Google-Smtp-Source: AGHT+IGLw28pf2HeEy1zobUA/sT/Vw9OJ/RlSLwefurIsOinTTDcNI0h+i1Six/f7I4g80oqOkxllg==
+X-Received: by 2002:a05:6e02:154e:b0:3a7:86ab:be6d with SMTP id
+ e9e14a558f8ab-3bdc4282640mr38704135ab.16.1734556224858; 
+ Wed, 18 Dec 2024 13:10:24 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e5e3d5e833sm2449643173.140.2024.12.18.13.10.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 13:05:34 -0800 (PST)
-Date: Wed, 18 Dec 2024 15:05:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
- Baruch Siach <baruch@tkos.co.il>,
+ Wed, 18 Dec 2024 13:10:23 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH] net: renesas: Enable TFTP_TSIZE on all Renesas hardware
-Message-ID: <20241218210529.GP1505244@bill-the-cat>
-References: <20241218194143.79136-1-marek.vasut+renesas@mailbox.org>
- <20241218194327.GO1505244@bill-the-cat>
- <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] gitlab: Add rock3a and 5b to the sjg lab
+Date: Wed, 18 Dec 2024 14:10:20 -0700
+Message-Id: <20241218211020.742702-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vevCj8apz4S4c9iR"
-Content-Disposition: inline
-In-Reply-To: <c0733d18-e778-422c-af06-7fd33479e92d@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,64 +92,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+These Radxa boards use similar Rockchip SoCs and unfortunately have a
+lot of secret code. Add entries for these so that they can be used for
+testing.
 
---vevCj8apz4S4c9iR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+For some reason the 5b hangs (for me) with any significant amount of
+output (e.g. dm tree). The board currently uses this for DDR init:
+rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin
 
-On Wed, Dec 18, 2024 at 10:02:36PM +0100, Marek Vasut wrote:
-> On 12/18/24 8:43 PM, Tom Rini wrote:
-> > On Wed, Dec 18, 2024 at 08:41:28PM +0100, Marek Vasut wrote:
-> > > TFTP transfer size can be used to re-size the TFTP progress bar on
-> > > single line based on the server reported file size. Enable it by
-> > > default for Renesas hardware to avoid long scrolling walls of '#'
-> > > character during long TFTP transfers.
-> > >=20
-> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > > ---
-> > > Cc: Adriano Cordova <adrianox@gmail.com>
-> > > Cc: Anand Moon <linux.amoon@gmail.com>
-> > > Cc: Baruch Siach <baruch@tkos.co.il>
-> > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> > > Cc: Joe Hershberger <joe.hershberger@ni.com>
-> > > Cc: Ramon Fried <rfried.dev@gmail.com>
-> > > Cc: Tom Rini <trini@konsulko.com>
-> > > Cc: u-boot@lists.denx.de
-> > > ---
-> > > NOTE: I wonder, shall we simply enable this by default ?
-> >=20
-> > Any chance you did a size comparison before/after this patch? That'd be
-> > handy to know for making this default for everyone.
-> r8a779f0_spider_defconfig
->=20
-> without: 744640
-> with:    752824
->=20
-> So maybe this is not for everyone.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Indeed, thanks for checking.
+ .gitlab-ci.yml | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
---=20
-Tom
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index d04868a04e8..1b19da28861 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -715,3 +715,13 @@ rockpro64:
+   variables:
+     ROLE: rockpro64
+   <<: *lab_dfn
++
++rock3a:
++  variables:
++    ROLE: rock3a
++  <<: *lab_dfn
++
++rock5b:
++  variables:
++    ROLE: rock5b
++  <<: *lab_dfn
+-- 
+2.34.1
 
---vevCj8apz4S4c9iR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdjORIACgkQFHw5/5Y0
-tywMZQwArcmSIls/3AIOOBeUtPl2eBGqxGH6xWpxPEqsTI6KjDJ09yj4cPQVFzMf
-jr3cDzuFscEDB0AodysUTsQHkji62NZ7GDUKESPTMBqE9n7Zw4lGN8maiT3nM6op
-eezBFgNO3VHd4GlPbQAuan91mK+FtUUFAp/XB+HbZ1JVrTTiN8yo/FkUGGKuVD6p
-u7x3LOWVj8AmZ0OlvoJLArAA1Kip1sdRpW/sacsHlZQRrvGTVLush9ld6WMknBJp
-G++BcPTW06C9kZ7+xIrO+aVJkf7VlglgKrTnWUWBLZoE4RZxSzvaB894oNp+yf09
-loUunc5Mm0x7YRtj0Tg7hMFYsTYm46WrbSysq2UsE2Cg2NI+/Q1a8aQc2HdnjLYc
-JjVX8pY+xu+MvtO/GZtmizmuZRI09HLnbXOaNAxy1i2hxxu+4hEguK1Z9aZrAGMU
-o3ROXknUOue9n+gZvmkSvPFfO8nsaKva6xWt5GsBpAgw0jAFDplewQF4/j0ntk3l
-+neyxNg9
-=fDBj
------END PGP SIGNATURE-----
-
---vevCj8apz4S4c9iR--
