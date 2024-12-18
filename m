@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 435F5E77183
-	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 04:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD880E77183
+	for <u-boot@archiver.kernel.org>; Wed, 18 Dec 2024 04:20:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C55FB8021A;
-	Wed, 18 Dec 2024 05:20:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24F7680283;
+	Wed, 18 Dec 2024 05:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="IcW87gBV";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="UDSvG/NB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D9B780196; Wed, 18 Dec 2024 05:20:06 +0100 (CET)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2405::61d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1E6568021A; Wed, 18 Dec 2024 05:20:06 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::623])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 697BA8021A
- for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 05:20:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF88E80243
+ for <u-boot@lists.denx.de>; Wed, 18 Dec 2024 05:19:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CUdfbVSH9Q5xMD/+gBBVypXgem2MsJe69meVvrCXy3kxZ52GH8EVgUTE4KTd7AnrW7DPyK7hwlpoF89qlYkkPKlYvVV8QL8NIMY+0Oz+X22ebQBlcmeKSLE5XcEsMsYwLJl99zFUOEr6nVbseqCK5lQ5eqzO6GPnOkQijdv9KZfoXL/88bzuTcdwoIAu4SwkP36iHQZpgyszhNpkQWT6JEQDa/Gujxmj4/GDcmV6L7zhYS3BcfgFl7HCKpiBQ4lTFZl/pR6rBlR+CSzUp+UjbqLv/XnIUH//jnapoGXMQgqHVAUZ1XvENUDRPGUGoyYQp7qzJhekZ+b4BGQ5fysXpw==
+ b=XWDZ2KsI4kOqfjZkLKA4oFa21IjS2qBvkqU/UY9d/+9lXIrG4zMZNeBt7SsP+JTa+3sT9NAB0yUQXAWlWxQWHmak/gs6SqOJaxxzi8fbVhvtmqk6Z/hKaHyxshl9c6G48bMXocwnKzVvtZ3zlYGIx4lHwGEjrAg9XfdstnPH6aTURzIuhaEtMScDavqRu4fjzbmOB8A51bY+rWhy1MgfpdNn5VoOd3GnntYEzfX+6EcDziyPAqiDW7HY8NTydteIaNudqDt58VNgoDSEdErMHwjg3Elgw6rmUYPwczCg4E2djnavo3pUwZ7alSVFLyWLwCzO3VeNDUWaxvsFSYOnqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V3gZ9u9fnuy/to1RuilEP+nZ0EoYmKZ5jlwilBmKIf0=;
- b=YTVwq68cgJUmsOf9wglaN93Mbs+n2i2ge0qMl2TC3T2tyUWZi8V2tJ4BwyZApKa6Jw/GP4WAtYf7SZkhqzOBZFSBLE1OF2M5myix4BUt3Wed5+DM5K3cnaQ6NbYkjdgg4yIAs6odF4HtgszV6cBewBVcXzBI+HJQya4uOvXbPr2xa9caGSQ/VZ7RevAde1/KmMFJsRypcTVmhMhdS5ZOY8uBH3TpvU2DPFXxkR329BS2GGT2aiXnDT9O+0NQUOSPBVYunOzrOxuv1+XEdx/YM2sqnatjbHFj1lnfD3upuHHewoEoKGQ7Hr+dfSsIeN6kQWM89houZcBE3e9pjP2irw==
+ bh=q0SpQlBERkRNImzrw02pl/OZazt+g146xfYFyZRuQZI=;
+ b=J4hK2Afcz6oxSpei8htdHkPQy0jP8DLC3K5w/cVCQW85i+i1qQrsV+c7iM2XzE+m3bUzQcSxSGkhHQT+czJid4FwPgcmn7M35jP9THpCAeYq0Vhw56p8pYeZniGGTH68GkYNzNFywy6aKz79D8zhIdxdV5kJgdwnnVnkuLnGgfXuSEjb9DXGP/cZdityZYWBD3LtIq1dSaY7AOyumVyC2BuI2c3Hh4iv3b7u82+OHITqWuh09/8Rrihxexp3qELVprfovYhIZ0/Nxpko/HeH7nhONZ+V9aApyqp3e5gbkvMCazxgAMifMxZyJKYrr0dOQ/R+/aXvicl1G8gfT8PgVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V3gZ9u9fnuy/to1RuilEP+nZ0EoYmKZ5jlwilBmKIf0=;
- b=IcW87gBVVw9dQvZoeupZ0kc0696AQEvi8ZkuinaKztN4YEhN6eRKPMrfRb7zbmsVF+J0QF+YmVbrJQtKtp9sMC233n9b01o/RG0msZ2a5RgUo3DahU5ZZ2oVaaDxwszzICqRRBM0Nf1TKIZTcRHoq/sqDaErfuGVkswJEQ17K8M=
-Received: from CH2PR05CA0043.namprd05.prod.outlook.com (2603:10b6:610:38::20)
- by PH7PR12MB6934.namprd12.prod.outlook.com (2603:10b6:510:1b8::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.13; Wed, 18 Dec
- 2024 04:19:56 +0000
-Received: from CH2PEPF00000146.namprd02.prod.outlook.com
- (2603:10b6:610:38:cafe::75) by CH2PR05CA0043.outlook.office365.com
- (2603:10b6:610:38::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8272.11 via Frontend Transport; Wed,
- 18 Dec 2024 04:19:55 +0000
+ bh=q0SpQlBERkRNImzrw02pl/OZazt+g146xfYFyZRuQZI=;
+ b=UDSvG/NB4mnUl6Flt3W70btfc/Ngl5O3aeObDFX5r/se1AMXN3rz7cFOyXjhInxlS2NRjIR6g6+GjnagAhSaOnPeTSBaOgZ/HN7L2ISUUS2MN0P77cmQ4bwDDI0lh954FTJcmdaLfpF1a+Qu5XX2V8l3AR20xP89oe2JzvkcNc0=
+Received: from CH2PR07CA0020.namprd07.prod.outlook.com (2603:10b6:610:20::33)
+ by DM4PR12MB6256.namprd12.prod.outlook.com (2603:10b6:8:a3::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8272.12; Wed, 18 Dec 2024 04:19:52 +0000
+Received: from CH2PEPF00000147.namprd02.prod.outlook.com
+ (2603:10b6:610:20:cafe::3b) by CH2PR07CA0020.outlook.office365.com
+ (2603:10b6:610:20::33) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8251.22 via Frontend Transport; Wed,
+ 18 Dec 2024 04:19:52 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,17 +59,17 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH2PEPF00000146.mail.protection.outlook.com (10.167.244.103) with Microsoft
+ CH2PEPF00000147.mail.protection.outlook.com (10.167.244.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8251.15 via Frontend Transport; Wed, 18 Dec 2024 04:19:55 +0000
+ 15.20.8251.15 via Frontend Transport; Wed, 18 Dec 2024 04:19:52 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 17 Dec
- 2024 22:19:53 -0600
+ 2024 22:19:48 -0600
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 17 Dec 2024 22:19:50 -0600
+ Transport; Tue, 17 Dec 2024 22:19:45 -0600
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <trini@konsulko.com>, <sjg@chromium.org>,
@@ -78,9 +78,9 @@ CC: <michal.simek@amd.com>, <trini@konsulko.com>, <sjg@chromium.org>,
  <mkorpershoek@baylibre.com>, <akashi.tkhro@gmail.com>,
  <francis.laniel@amarulasolutions.com>, <ddrokosov@salutedevices.com>,
  <git@amd.com>
-Subject: [PATCH v5 2/2] doc: man-page for optee commands
-Date: Wed, 18 Dec 2024 09:49:14 +0530
-Message-ID: <20241218041914.1463666-3-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v5 1/2] cmd: Add support for optee commands
+Date: Wed, 18 Dec 2024 09:49:13 +0530
+Message-ID: <20241218041914.1463666-2-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241218041914.1463666-1-venkatesh.abbarapu@amd.com>
 References: <20241218041914.1463666-1-venkatesh.abbarapu@amd.com>
@@ -91,51 +91,51 @@ Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000146:EE_|PH7PR12MB6934:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85c3a687-eddd-47f5-9b1e-08dd1f1b3a20
+X-MS-TrafficTypeDiagnostic: CH2PEPF00000147:EE_|DM4PR12MB6256:EE_
+X-MS-Office365-Filtering-Correlation-Id: 302916a7-1e46-45ff-d238-08dd1f1b3821
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|7416014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3e6LnFQ5cvl3WtLpPFVUj8YWbjVrKV8tUoHAoI+XUONj0YW3nyD6mO2z5EAK?=
- =?us-ascii?Q?TUKGwxKhqEsEvX5eEDF4t11IGykwdLYSr2FjiKrxRfXlASmPOI6KGpb5Xye4?=
- =?us-ascii?Q?lW3X/FO+9/t85qIAQL96Gb7/dgAYZWNXhFx3U8tg2cRQIyttb5uLHdorxaGU?=
- =?us-ascii?Q?Ve2vyyFMlfcvwEdNAi7bDaKjOj7EOr9lALHwYh9CRmyWG0qVhqwnaBrqLRel?=
- =?us-ascii?Q?5EyqDMP4WhZejve+Y9519sgIxikUjj+Qhn9ygC3GTV3ZBn/wp4wb06U3Tga+?=
- =?us-ascii?Q?d5nWKqau2CA7gTEghzdvCDfm3/UgPmVUIu/08+xUmBf+gFxHjfZLt2DvFszG?=
- =?us-ascii?Q?+B5TR79foHZJiNejWq+37//7RCrOcqdrm2SMZLGCluDJ7O4GduCK/NcUBm3U?=
- =?us-ascii?Q?D9DNesfPkwBWi75V4e6G2ri5P8mvLhsTvUqdfKWYToEqWYEDUVriW6eVguDH?=
- =?us-ascii?Q?bb7vA/dyNe24gZkKRbwvpm5gl/fMz2VT02qdnFXpNSoC8GNrSiqVfVKkh3T9?=
- =?us-ascii?Q?7mZaV6VCsa4aPjSqWbpgQdfAI0nb75jbjqHm3VQ9zsExJn9t2HRMHBs13lXW?=
- =?us-ascii?Q?mPecznqNiQLrfpmxqn27xI52xJVUkW1V4R/K0rypvw1a935Gh25ojoZg4wi9?=
- =?us-ascii?Q?HhNfT9mG6JSdGj1T6YaXJQNfwLEzmKDn2dzbGPV1hum/tH46p76E+bn+EBuB?=
- =?us-ascii?Q?ABuwO2FtPKNlskSqel9olFaeGi39kcVeRqeupXOWu8HQkwsCYR6Pd1iJrmdS?=
- =?us-ascii?Q?G5E7NE5l4+FOPrFKWa4uI2GTewpgzUwiraoMhmv+++XIEdM0yJ+bnY8vsmIj?=
- =?us-ascii?Q?fU+9OYKq7KJZJOpcR6s169al3bIdo4MtuHn84PgfUns+2nKamfkrB3MYclHH?=
- =?us-ascii?Q?dnkvyRIEjzM3pTBNFlQ6Dq5rdDSGuBh46GwsMdLGbULhyq1cb6t4GcSw7lUF?=
- =?us-ascii?Q?U6VU++mJ/IrtkHwmSXmcZxJ9JPUpuGlgQqB9ICMBxmn4VKdXA+D1I/CV60Ou?=
- =?us-ascii?Q?ibHF9HvP9N/Q+C9Zwa13vyQN4hxN/Xj0fxV8zHuf6JKcJYdLOQkEB397h7F0?=
- =?us-ascii?Q?IlNnZO8b6ILzKErhERa6sSi63H0HTV/ONQCINCi15wz/1V37+SEqm4Ihv/IE?=
- =?us-ascii?Q?uDg2jqDSR5Bk1gQjd2z5Hy6+plP8MoMWi43si9/vqNQkL3+VcWRk/Ov7MOKK?=
- =?us-ascii?Q?CYtQMreQ0PqDRYuVXcKLQROuzr2kXZz+V61nO3dAXq16/Q99gSb2LZW4iclp?=
- =?us-ascii?Q?vUtl/4/oy4PQ63RHrYuHMU35O0q9NiB+S5twWUa6DUmxIGayMol2BPBRaZ2z?=
- =?us-ascii?Q?1AgyON16p9i8eSWgf4iIl9el1rPB/ydgjs6xAt7EYzZ34xZKV5skyDEzBP9i?=
- =?us-ascii?Q?EtqGzRuEGyRrxyf6j/8ykYfcqFEN1Myyp+RFyGuu8Djzx9rj0KHLchfRdgLb?=
- =?us-ascii?Q?RuKEGGzwEOY=3D?=
+ ARA:13230040|82310400026|36860700013|7416014|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?lU4325FG7cyjxPHTvpkv4gu98B7lGE9plwYeLofGE/DVOe9fa5b1Uk3qWzcE?=
+ =?us-ascii?Q?PJiHr6g91TBYuscfmsMqmDHVAbz3KkvdRaqfowp8qw5IR6vybZeqHgsCwSK5?=
+ =?us-ascii?Q?SQ8JcUV3JFnwOutEEXvZ2sXxI252wpbCgeUzbdkJdUG463WYkyffajlFUH0+?=
+ =?us-ascii?Q?AH8u1Dyd/5X0L+AWBPa2n8yRWTC+zvpQF48hU8GLpqlxR1olUAwK1gLyu8wQ?=
+ =?us-ascii?Q?y96gDULsEMJdRowOU3+o82+5NPR9Ovxj6rWGL4izGB3z0xFM0GkxdHVrSMhd?=
+ =?us-ascii?Q?83iV1nmf3y5AdPdJfHyjuFz+taeoQFxe65KXlximuePIySCmwU6McTuxvpdJ?=
+ =?us-ascii?Q?DFoqNXIM+Hm1gsZqTvov9pZygvuTScFgJ2AoKXlIl8VZfadlWihJVmPSsf7i?=
+ =?us-ascii?Q?gguORLdwEz4I5d1OYMRScYYZtabFaW4x3BD4ohPwlGUCW5Cm0z+vrCpuRqfy?=
+ =?us-ascii?Q?NZTOkYJLquRIwGjuTWX1i8qqf7H/pcltXMRiXkuMbel4jpV8+dcSOyl3xsCo?=
+ =?us-ascii?Q?JbEB5ZPDrVr9RWX3ZIuPT/CI+Y7UQu332MlmkdYOugnFa6th8O22ikmBF/sE?=
+ =?us-ascii?Q?Fi2LkPhpv07qTbSINwhxBYSt0WsJqU4MHDWv/++MeYlgC0q5GyYUl7F8ThqX?=
+ =?us-ascii?Q?Kmvlrfy3DpbmVWFpFTpMmlZkO8wbAnPBop5q/mI8KiY12M+SHveifQ94DFef?=
+ =?us-ascii?Q?4OwraAgkG8D9N26q9+sllUZXWi+sm0nHW0H9BwbW2wgDw1BiIONXuUM0q9Xd?=
+ =?us-ascii?Q?dokV2oX21MX0y1iT+HhXbZPm0puNWauGoWY45ROaCgr54ibr7RUz7qlYxKk7?=
+ =?us-ascii?Q?O/jZx34fiXYYIDzvGm/spAm2aFQlsCjcCiM7xZMQ6n3fpHT03rQOseI3QAKe?=
+ =?us-ascii?Q?bT15EXC1FzROCYg0WmT3Z1aBmxlayMyCWcmrQmbM0F0b9mZonkNXvYWgWVaM?=
+ =?us-ascii?Q?oN9O+XLkYOcN2WvQ/AAqt6G3PDZR01DdUXUDKPmiBdmn+OQp5XpHRDQOdqBA?=
+ =?us-ascii?Q?y0xPvORFHx7MA30wQtpke/+uzflfN2H8KbrJFVxqAJePjWBZS0rNX8fbyn1w?=
+ =?us-ascii?Q?+Yk3VV70oEFgzo9lbhTSmUSEM/saPotLrSqZ9xyr8/KQ4hRdfdgzJ/BUYgWa?=
+ =?us-ascii?Q?AURj4uxycltAkTaHwHEQLpzjkFU5CXYz6iUKtdgGtFmlOGBwcr/a6f2pW3lY?=
+ =?us-ascii?Q?M7qC4+vywR7lsq8mSuQLHjAIdfrO1y1pz79C6A35JQxS4/R76j+FZs5nBdHK?=
+ =?us-ascii?Q?IWI5U4SV7PekA4F+riV/qZFlB1wk4oW3LV1iS9mY5mYDTRfKwJGt5G0svYsZ?=
+ =?us-ascii?Q?cTCGnF91kk2g8T0/eKwDPfWp2pHdiEUcZsXlnhOl1KaC896uSCmnbtv1B0u0?=
+ =?us-ascii?Q?H9xy6QVNEfKryJYZ8TwEOq66Ie9QWyQKCybt1TNZGcIiDBev8qR7RFckao76?=
+ =?us-ascii?Q?Y/3rjGtw4aY=3D?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(7416014)(1800799024)(36860700013); DIR:OUT;
+ SFS:(13230040)(82310400026)(36860700013)(7416014)(376014)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2024 04:19:55.5334 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85c3a687-eddd-47f5-9b1e-08dd1f1b3a20
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2024 04:19:52.1859 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 302916a7-1e46-45ff-d238-08dd1f1b3821
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000146.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF00000147.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6934
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6256
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,104 +152,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a man-page for the optee command.
+Add the basic 'hello world ta' command which increment
+of the value passed. This provides easy test for
+establishing a session with OP-TEE TA and verify.
+
+It includes following "hello world ta" subcommands:
+optee hello; default value '0' is passed and gets incremented.
+optee hello <value>; value to increment via OP-TEE HELLO
+WORLD TA.
+
+To enable the OP-TEE side HELLO WORLD example please refer
+https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
 
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
- doc/usage/cmd/optee.rst | 70 +++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst     |  1 +
- 2 files changed, 71 insertions(+)
- create mode 100644 doc/usage/cmd/optee.rst
+ cmd/Kconfig  |  6 +++++
+ cmd/Makefile |  1 +
+ cmd/optee.c  | 76 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+)
+ create mode 100644 cmd/optee.c
 
-diff --git a/doc/usage/cmd/optee.rst b/doc/usage/cmd/optee.rst
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 1d7ddb4ed36..4b33468891e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1446,6 +1446,12 @@ config CMD_OPTEE_RPMB
+ 	  in the Replay Protection Memory Block partition in eMMC by
+ 	  using Persistent Objects in OPTEE
+ 
++config CMD_OPTEE
++	bool "Enable OP-TEE commands"
++	depends on OPTEE
++	help
++	 OP-TEE commands support.
++
+ config CMD_MTD
+ 	bool "mtd"
+ 	depends on MTD
+diff --git a/cmd/Makefile b/cmd/Makefile
+index d1f369deec0..533d0f6a1be 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -118,6 +118,7 @@ obj-$(CONFIG_CMD_PAUSE) += pause.o
+ obj-$(CONFIG_CMD_SLEEP) += sleep.o
+ obj-$(CONFIG_CMD_MMC) += mmc.o
+ obj-$(CONFIG_CMD_OPTEE_RPMB) += optee_rpmb.o
++obj-$(CONFIG_CMD_OPTEE) += optee.o
+ obj-$(CONFIG_CMD_MP) += mp.o
+ obj-$(CONFIG_CMD_MTD) += mtd.o
+ obj-$(CONFIG_CMD_MTDPARTS) += mtdparts.o
+diff --git a/cmd/optee.c b/cmd/optee.c
 new file mode 100644
-index 00000000000..532d488d5e3
+index 00000000000..e8d5f4ceb36
 --- /dev/null
-+++ b/doc/usage/cmd/optee.rst
-@@ -0,0 +1,70 @@
-+.. SPDX-License-Identifier: GPL-2.0
++++ b/cmd/optee.c
+@@ -0,0 +1,76 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2024, Advanced Micro Devices, Inc.
++ */
++#include <command.h>
++#include <errno.h>
++#include <tee.h>
++#include <vsprintf.h>
 +
-+.. index::
-+   single: optee (command)
++#define TA_HELLO_WORLD_CMD_INC_VALUE 0
++/* This needs to match the UUID of the Hello World TA. */
++#define TA_HELLO_WORLD_UUID \
++	{ 0x8aaaf200, 0x2450, 0x11e4, \
++	{ 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} }
 +
-+optee command
-+=============
++static int hello_world_ta(unsigned int value)
++{
++	const struct tee_optee_ta_uuid uuid = TA_HELLO_WORLD_UUID;
++	struct tee_open_session_arg session_arg;
++	struct udevice *tee = NULL;
++	struct tee_invoke_arg arg;
++	struct tee_param param[2];
++	int rc;
 +
-+Synopsis
-+--------
++	tee = tee_find_device(tee, NULL, NULL, NULL);
++	if (!tee)
++		return -ENODEV;
 +
-+::
++	memset(&session_arg, 0, sizeof(session_arg));
++	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
++	rc = tee_open_session(tee, &session_arg, 0, NULL);
++	if (rc) {
++		printf("tee_open_session(): failed(%d)\n", rc);
++		return rc;
++	}
 +
-+    optee hello
-+    optee hello <value>
++	arg.func = TA_HELLO_WORLD_CMD_INC_VALUE;
++	arg.session = session_arg.session;
 +
-+Description
-+-----------
++	param[0].attr = TEE_PARAM_ATTR_TYPE_VALUE_INOUT;
++	param[0].u.value.a = value;
 +
-+This is an OP-TEE sanity test which invokes the "Hello World"
-+Trusted Application (TA). The TA does two things:
-+- It prints debug and information messages to the secure console (if logging is enabled)
-+- It increments the integer value passed as a parameter and returns it """
++	printf("Value before: 0x%x\n", (int)param[0].u.value.a);
++	printf("Calling TA\n");
++	tee_invoke_func(tee, &arg, 1, param);
 +
++	printf("Value after: 0x%x\n", (int)param[0].u.value.a);
++	return tee_close_session(tee, session_arg.session);
++}
 +
-+value
-+	Integer value that the TA is expected to increment and return.
-+	The default value is 0.
++static int do_optee_hello_world_ta(struct cmd_tbl *cmdtp, int flag, int argc,
++				   char * const argv[])
++{
++	int ret, value = 0;
 +
-+To enable the OP-TEE Hello World example please refer
-+https://optee.readthedocs.io/en/latest/building/gits/optee_examples/optee_examples.html
++	if (strcmp(argv[1], NULL))
++		value = hextoul(argv[1], NULL);
 +
-+Examples
-+--------
++	ret = hello_world_ta(value);
++	if (ret)
++		return CMD_RET_FAILURE;
 +
-+::
++	return CMD_RET_SUCCESS;
++}
 +
-+	==> optee hello
-+	D/TA:  TA_CreateEntryPoint:39 has been called
-+	I/TA: Hello World!
-+	Value before: 0x0
-+	Calling TA
-+	D/TA:  inc_value:105 has been called
-+	I/TA: Got value: 0 from NW
-+	I/TA: Increase value to: 1
-+	Value after: 0x1
-+	I/TA: Goodbye!
-+	D/TA:  TA_DestroyEntryPoint:50 has been called
++U_BOOT_LONGHELP(optee,
++		"- commands can be verified on OP-TEE\n\n"
++		"optee hello\n"
++		"optee hello <value>\n"
++		"\n"
++		"With:\n"
++		"\t<value>: integer value\n"
++		);
 +
-+	==> optee hello 74
-+	D/TA:  TA_CreateEntryPoint:39 has been called
-+	I/TA: Hello World!
-+	Value before: 0x74
-+	Calling TA
-+	D/TA:  inc_value:105 has been called
-+	I/TA: Got value: 116 from NW
-+	I/TA: Increase value to: 117
-+	Value after: 0x75
-+	I/TA: Goodbye!
-+	D/TA:  TA_DestroyEntryPoint:50 has been called
-+
-+Configuration
-+-------------
-+
-+The optee command is enabled by CONFIG_OPTEE=y and CONFIG_CMD_OPTEE=y.
-+
-+Return value
-+------------
-+
-+The return value $? is 0 (true) if the command succeeds, 1 (false) otherwise.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index cb7a23f1170..4dd00f002cd 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -92,6 +92,7 @@ Shell commands
-    cmd/msr
-    cmd/mtest
-    cmd/mtrr
-+   cmd/optee
-    cmd/panic
-    cmd/part
-    cmd/pause
++U_BOOT_CMD_WITH_SUBCMDS(optee, "OP-TEE commands", optee_help_text,
++			U_BOOT_SUBCMD_MKENT(hello, 2, 1, do_optee_hello_world_ta));
 -- 
 2.34.1
 
