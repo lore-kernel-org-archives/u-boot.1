@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D579E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A66E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B6A8021D;
-	Thu, 19 Dec 2024 16:07:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 273FE8022B;
+	Thu, 19 Dec 2024 16:07:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AiTHmoYK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WqP6hipC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A1F88021D; Thu, 19 Dec 2024 16:07:20 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id A4F3880328; Thu, 19 Dec 2024 16:07:37 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B6C18021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:07:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BC038021A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:07:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9f1d76dab1so165330166b.0
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 07:07:18 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aa684b6d9c7so156870566b.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 07:07:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734620838; x=1735225638; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734620855; x=1735225655; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=827JXMyDIr0oQ2arh+OA9tXQKUS7722myEjunarIXeQ=;
- b=AiTHmoYKBBe0FPWp4kDl/WLp0IpSRKHRNFfo9RcL1Y1Ck+UlWqhr7yrLXceCokmyHT
- HmkJte4ad4uNvPf63TZ4VofHL4nRQXM6i7pAuK+H6lNyxEkCjG1bhq4F+z1TgcEyqO3M
- M22BIkjPJMbyo9fnoUWeGUPeZDLQFC8IZFCkY=
+ bh=0cY6t8HM5qMscrZ/w5/f7Lx8xt47p0V1/ST5W1iybhw=;
+ b=WqP6hipC4iFh2uHUw6wrwYgzcR/js2aQNSEpTecC6pPCNNMJe2vGgeLKHW94nUT79q
+ RtQo8Esa0jS4HLUiO5OmhLO2A4VKNB1pKTt1M2zjf230o4x85uYUBaOK9WQtqxFMMksV
+ JrhpGF0K4zsUMtqHwwQJQd1knee0bzcuMagL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734620838; x=1735225638;
+ d=1e100.net; s=20230601; t=1734620855; x=1735225655;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=827JXMyDIr0oQ2arh+OA9tXQKUS7722myEjunarIXeQ=;
- b=Jsdacu3avd6PWtomwoRb/9T1rdCs446YlKDhIzCthM6CPSMcRaEeUHor8CZZaNyE6v
- YPwjd4+Uen+B+voTWqe0zrdUi+Re97bj110Kp9LxPNcz1CQTBZWTMFhF3NEdVMiUBa+R
- zey+ugjHVlXIbdROlxnMN6/3akj0pHfxjv1CvcN547eSoe8/VCF3dRMs6TNYh3juUGY3
- NSPxOsa66sMh6L3XLmO3nXm1k64a/l5+09z2HsCi6zWBUSgtxkS6sqwZ//QGm2ZP04DC
- Yhtsoe6YP2/L9Y8UJnCl0onSHNaYdzlT+ZTuoMZny3/aHiveyMaZpywSlPJGrcUbgld0
- +6hA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlwqvufGrGEiOFbKrJOzNgzobmYKYsvtADRrnJIUYBTlrhhxz0wDSQhwp7LBsvsS2gS8eYjn8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0JBbFGYbGqPJMMb38SLLM/EhFXHH4g+uZs4ci9m+SvlmT+I9n
- T0xWt43B5UAvW2Rzpcn5cgiVwPwEMXLJAIT3VntS6iTEAnGD1qvwILyss32HCvRGHle8mgpsayc
- FPAWzg/lwe8unrPzvMAHz+37qGBbVlm7XW/2a
-X-Gm-Gg: ASbGncs7vq3/LtjL+/CfbzGaFRh8JV3TEfZLOOGymjq7cON5xk3snxKQoNUqBf+0JxF
- j//Bck/ah49+PmPigUatDEemEx4VV9pIyw0FqcAI=
-X-Google-Smtp-Source: AGHT+IH0pTcCgX7eSS2VwDrjCuXvyf14IFcIh/l2S9YsxIovfDj7jtT7jn1gBGG1O63EK6wqQuM9cL6Q0jjvc5zT+LM=
-X-Received: by 2002:a17:906:30d2:b0:aa6:33cf:b389 with SMTP id
- a640c23a62f3a-aabf47a7ff3mr601682066b.34.1734620836759; Thu, 19 Dec 2024
- 07:07:16 -0800 (PST)
+ bh=0cY6t8HM5qMscrZ/w5/f7Lx8xt47p0V1/ST5W1iybhw=;
+ b=U08CTeidx1Xl26kfOcARm/s1AdhDCh9zFJ05fGVferA0FlfJ3rkXp5igcw1krZ2MYp
+ sg1c/gizFuX25Hz4fErQ4HCI6F7Lbj2vmh+8shsohSorwEfSCYBiKTpx7GjLeRvZw7Zc
+ 6oWWULbO1PSDHmDeTqGhZKXUtL8aHsoywWNZ33JQFFir+iWWGVHvCQmJNeKZcifJjTab
+ 7DxHqyFdrE8jyTbGfts7/+ZlyH8H9w6/Zb+IgiMumeJ/VQ+R4t3KI0c75XBzuHpXk+iI
+ USHRv7BmsjaDiiW3seZvRq2MmSYVzLcHTVDdvQmD1IYBV0/0vI2GeB7HAjTkw+iN3y6f
+ Eb7w==
+X-Gm-Message-State: AOJu0YwLWL/QRVinPdcJ56lg6xiyo4t6QhRcr3OJZXQl1QnjcJtpFlkc
+ zGYhWi1iqJUaGzXc4Mk37AnH5dDVFMoSA1qh7+qVzXNCkFpfEyRLxs72SCkvfjvuhrEDIwIzxh4
+ l8blOoF7j8yIFGqXAJlee4vhB9oh9uLeTbkbfpfoivsfvcMs=
+X-Gm-Gg: ASbGnctO5UncbJHEnZyiwBXOk2OFboj3TkS8vhYz6S2CYuXvElFPXhgqviE+cXDEr3t
+ 4Oauuj8M2RTUiQSY2L2835tQx8v1w+MX73wmztsY=
+X-Google-Smtp-Source: AGHT+IHbAmWAUMPkBW10fhrKbzE8IMB7BDKecqhTrCPyfrJVzDbLOcEBuby2dmcK8zqJsiYEPOogYhkRqEtpuolL0us=
+X-Received: by 2002:a17:907:9715:b0:aa6:8676:3b33 with SMTP id
+ a640c23a62f3a-aabf490854amr611423666b.47.1734620853809; Thu, 19 Dec 2024
+ 07:07:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20241211004640.3778457-1-sjg@chromium.org>
- <0a1b7c12-a8d7-46c2-9c00-4914d3286bc4@gmx.de>
-In-Reply-To: <0a1b7c12-a8d7-46c2-9c00-4914d3286bc4@gmx.de>
+References: <20241217132616.3708573-1-sjg@chromium.org>
+ <20241217142016.GK1505244@bill-the-cat>
+ <CAFLszTjfxxseCJUvUXPgZQWQYNrL+yT3u8qZ9OieJHxaC=dfDg@mail.gmail.com>
+ <20241217195348.GQ1505244@bill-the-cat>
+ <CAFLszTgaLn-xO104gw2meFTHBfVdWjPu+AiSXkYcSLM=uYWdrA@mail.gmail.com>
+ <20241217235411.GV1505244@bill-the-cat>
+In-Reply-To: <20241217235411.GV1505244@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Dec 2024 08:07:04 -0700
-Message-ID: <CAFLszTg+L_qNXfwpkQjHoVn6u6Lhgr+5egS444DVqOLzdxSksg@mail.gmail.com>
-Subject: Re: [PATCH] RFC: efi: Attempt to support automatically running SCT
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 19 Dec 2024 08:07:22 -0700
+Message-ID: <CAFLszTgyScyRrV0pNksMYB5r1RxGN1dnJFO-96XaLtn=NLZu+g@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Add a way to build a particular target
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,159 +90,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Wed, 18 Dec 2024 at 05:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 17 Dec 2024 at 16:54, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 11.12.24 01:46, Simon Glass wrote:
-> > This is a feeble attempt to update the qemu script to run a selection of
-> > UEFI tests. It copies a .seq file into the disk so it can be read by
-> > SCT.
+> On Tue, Dec 17, 2024 at 04:42:30PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > It doesn't seem to work and I am not sure why. I am posting it in case
-> > someone else has ideas or wants to pic it up.
+> > On Tue, 17 Dec 2024 at 12:53, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Dec 17, 2024 at 12:45:29PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 17 Dec 2024 at 07:20, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Dec 17, 2024 at 06:26:16AM -0700, Simon Glass wrote:
+> > > > >
+> > > > > > At present buildman only supports building the default target. Generally
+> > > > > > this is what is wanted, but in some cases boards erroneously have a
+> > > > > > different target for product extra files.
+> > > > > >
+> > > > > > Add a --target option to help. Also add a comment indicating which
+> > > > > > letters are free for new options.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >
+> > > > > How do you use this? It would be nice to be able to do "--target
+> > > > > u-boot-initial-env" for example for converting and verifying the
+> > > > > conversion of boards to plain text environment. Except the list of
+> > > > > artifacts that are kept isn't updated with that string as well. And
+> > > > > FWIW, is this for a case not solved by CONFIG_BUILD_TARGET?
+> > > >
+> > > > It's related to the problem where colibri-imx8 doesn't actually build
+> > > > an image with the default boot target.
+> > >
+> > > I don't recall if there's a good reason for imx8 not setting
+> > > CONFIG_BUILD_TARGET to something, but that sounds like how to solve this
+> > > problem. "make all" should work, normally.
 > >
-> > Once Ilias' CI solution is in place, I can perhaps come back to this.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   scripts/build-qemu.sh | 56 +++++++++++++++++++++++++++++++++++--------
-> >   1 file changed, 46 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/scripts/build-qemu.sh b/scripts/build-qemu.sh
-> > index 0ff53593cf9..f9ee0072573 100755
-> > --- a/scripts/build-qemu.sh
-> > +++ b/scripts/build-qemu.sh
-> > @@ -21,20 +21,28 @@ usage() {
-> >       fi
-> >       echo "Usage: $0 -aBkrsw"
-> >       echo
-> > -     echo "   -a   - Select architecture (arm, x86)"
-> > -     echo "   -B   - Don't build; assume a build exists"
-> > -     echo "   -k   - Use kvm (kernel-based Virtual Machine)"
-> > -     echo "   -o   - Run Operating System ('ubuntu' only for now)"
-> > -     echo "   -r   - Run QEMU with the image"
-> > -     echo "   -R   - Select OS release (e.g. 24.04)"
-> > -     echo "   -s   - Use serial only (no display)"
-> > -     echo "   -w   - Use word version (32-bit)" ) >&2
-> > +     echo "   -a <arch> - Select architecture (arm, x86)"
+> > Even if it did, the build fails the first time. It just needs to be fixed/
 >
-> How about qemu-riscv64_smode_defconfig for RISC-V?
->
-> > +     echo "   -B        - Don't build; assume a build exists"
-> > +     echo "   -e        - Run UEFI Self-Certification Test (SCT)"
-> > +     echo "   -k        - Use kvm (kernel-based Virtual Machine)"
-> > +     echo "   -o <name> - Run Operating System ('ubuntu' only for now)"
-> > +     echo "   -r        - Run QEMU with the image"
-> > +     echo "   -R <os>   - Select OS release (e.g. 24.04)"
-> > +     echo "   -s        - Use serial only (no display)"
-> > +     echo "   -S <seq>  - Select SCT sequence-file"
-> > +     echo "   -w        - Use word version (32-bit)" ) >&2
->
->
-> A typical definition of word size is:
->
-> Word "size" refers to the amount of data a CPU's internal data registers
-> can hold and process at one time.
->
-> I.e. a word on a 64-bit architecture has 64 bit.
->
-> %s/Use word version (32-bit)/Use 32-bit architecture/
->
-> Wouldn't it be the best to get rid of this parameter and just use
-> parameter -a with values
->
-> - arm
-> - arm64
-> - riscv64
-> - loongson64
-> - x86
-> - x86_64
+> Yes, there's both the problem of CONFIG_BUILD_TARGET not being set and
+> then whatever issues there are with configuring access to the blobs
+> especially when they exist and aren't faked via BINMAN_ALLOW_MISSING.
+> IIRC Toradex does weekly builds of top of tree, via OpenEmbedded / Yocto
+> so there's not some bitrot here to be fixed, just smoothing out
+> integration.
 
-Yes, that might be better. My intent was to try to default to 64-bit,
-since that is what we normally want, but it isn't a very good flag.
-The efi script has the same thing.
+To me, BUILD_TARGET is a pre-Binman construction and we should just
+use binman to make sure that the default target builds a bootable
+image.
 
-On the other hand, it is annoying to say '64' when that is almost
-always what we mean. Perhaps a --32 flag?
+It's good to hear that Toradex has CI going, but it looks like there
+is a workaround in there.
 
 >
-> >       exit 1
-> >   }
+> > > > But yes, we could add more things to buildman, e.g. it could output
+> > > > the initial env as a file for later parsing.
+> > >
+> > > Well, your patch supports that, if I read it right. It just doesn't save it.
 > >
-> >   # Directory tree for OS images
-> >   imagedir=${imagedir-/vid/software/linux}
-> >
-> > +# Directory for UEFI Self-Certification Test (SCT)
-> > +sctdir=${sctdir-/vid/software/devel/uefi/sct}
-> > +
-> > +# Mount point for use when writing to disk images
-> > +mnt=${mnt-/mnt}
-> > +
-> >   # architecture (arm or x86)
-> >   arch=arm
-> >
-> > @@ -65,7 +73,7 @@ kvm=
-> >   # We avoid in-tree build because it gets confusing trying different builds
-> >   ubdir=${ubdir-/tmp/b}
-> >
-> > -while getopts "a:Bko:rR:sw" opt; do
-> > +while getopts "a:Beko:rR:sS:w" opt; do
-> >       case "${opt}" in
-> >       a)
-> >               arch=$OPTARG
-> > @@ -73,6 +81,17 @@ while getopts "a:Bko:rR:sw" opt; do
-> >       B)
-> >               build=
-> >               ;;
-> > +     e)
-> > +             extra+=" -m 4G -smp 4"
-> > +             extra+=" -display none"
-> > +             extra+=" -device virtio-gpu-pci"
-> > +             extra+=" -device qemu-xhci"
-> > +             extra+=" -device usb-kbd"
-> > +             extra+=" -drive file=${sctdir}/sct.img,format=raw,if=none,id=vda"
-> > +             extra+=" -device virtio-blk-device,drive=vda,bootindex=1"
-> > +             extra+=" -device virtio-net-device,netdev=net0"
-> > +             extra+=" -netdev user,id=net0"
-> > +             ;;
-> >       k)
-> >               kvm="-enable-kvm"
-> >               ;;
-> > @@ -91,6 +110,9 @@ while getopts "a:Bko:rR:sw" opt; do
-> >       s)
-> >               serial=1
-> >               ;;
-> > +     S)
-> > +             seq=$OPTARG
-> > +             ;;
-> >       w)
-> >               bitness=32
-> >               ;;
-> > @@ -105,6 +127,19 @@ build_u_boot() {
-> >       buildman -w -o $DIR --board $BOARD -I || exit $?
-> >   }
-> >
-> > +# Write the SCT test-sequence file into the SCT image
-> > +update_sct_seq() {
-> > +     if [[ -z "${seq}" ]]; then
-> > +             return
-> > +     fi
-> > +     LOOP=$(sudo losetup --show -f -P "${sctdir}/sct.img")
-> > +     PART="${LOOP}p1"
-> > +     sudo mount -o loop ${PART} ${mnt} -o uid=$(id -u),gid=$(id -g)
-> > +     cp "${seq}" "${mnt}/."
+> > Yes, it would be pretty easy to provide a flag that builds that
+> > target, runs the executable and puts the environment in a file.
 >
-> This will not work. The sequence file must be in Sequence directory of
-> the installed SCT and you must specify the filename when invoking the SCT.
->
-> To avoid instance dependent file names you may copy the user provided
-> sequence file always to the same location mnt/SCT/Sequence/uboot.seq.
+> Er, "make u-boot-initial-env" does that. So "--target
+> u-boot-initial-env" should suffice, if that was also saved.
 
-OK, thanks, I'll take another look. It would be nice to get this
-working, although I believe Ilias will have a patch for CI before
-long.
+Oh, yes. Either I didn't know that or I forgot...
 
 Regards,
 Simon
