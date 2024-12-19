@@ -4,94 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F37AE77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 19:42:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4E5E7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 19:42:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DA708036B;
-	Thu, 19 Dec 2024 20:41:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=broadcom.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C68A80317;
+	Thu, 19 Dec 2024 20:41:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=broadcom.com header.i=@broadcom.com header.b="dGjctjWh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hZOIlEE2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BED0680312; Thu, 19 Dec 2024 19:50:09 +0100 (CET)
-Received: from mail-qv1-xf61.google.com (mail-qv1-xf61.google.com
- [IPv6:2607:f8b0:4864:20::f61])
+ id F25058022B; Thu, 19 Dec 2024 19:29:17 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6328E8022B
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=broadcom.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5F9868021A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:29:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=dregan@broadcom.com
-Received: by mail-qv1-xf61.google.com with SMTP id
- 6a1803df08f44-6d8de4407f3so997666d6.0
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:50:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3a815ed5acfso3667975ab.0
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:29:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=broadcom.com; s=google; t=1734634206; x=1735239006; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=elX00jXAQkaKgsYxzUX01+U5QNJPZmKZizOpS+PsO7Y=;
- b=dGjctjWhKQzeWdUCNv5uQUXNGP8O8/7cqWilBpZ06s46Kg1M5Ne6+t7xZB34TgV0YN
- ZFdM3RRlF929OPwrU3Wf+yPtaGFmEQljuvBej1i6HAcNp537l5/yDdXRjJeKktlSgt3o
- /R1JM3GKFunpRhXqenRyzMNYsw9g+BM+QIjLA=
+ d=chromium.org; s=google; t=1734632953; x=1735237753; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Io4/O3EA2wrAzVTobpQxkDRpy4UeGVoi2lu32+v6VL8=;
+ b=hZOIlEE2XRBIFg3diMHf2+9eUQo8HKtYg5LNMegw+UOh5OUP/uC4URBFrEfP1duIlJ
+ JJf0Ragz/gfu6TFglSunR5dj93IDXaGl44Th8lFDbCZEo7s0+fZbBGBCn2spLtkr30Yp
+ O6dsNzFjCgKGfzIYxhZmj9K2/0lbIAvOD85gM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734634206; x=1735239006;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=elX00jXAQkaKgsYxzUX01+U5QNJPZmKZizOpS+PsO7Y=;
- b=HScSwUkLRMyO3Fng1CkISDtTz0LBjDBWtgY8sEz9bc25/BBiLrq/GQVwafpWpTTNEO
- DHtQiinnCZsm2j2gI0BdEbRXj5so/RHooDmCiAncW57RtXpY+FXnr5jtCE/7ZwHsCODx
- FYOhqau3fAfxaovEuI7gzHHUcSj3AiLuQ9ETTljlPwtTDu+KgKZmn6he2UzhZYTZe6wN
- LGlWa/EIf2BM4bpILoxfS7i1+OLXjU5sacYdAzG98XTM9ge+1lph2YwT8qt75tgURfCa
- hg+/iYna4ig9M5ua3Mgt6FvZ2Wc420qLCtpHFToj6d5jORs+rQ1xPD8slXNMaYlXF0wF
- wPxg==
-X-Gm-Message-State: AOJu0YyenzBxklBGC7/OyDaBLAz2MAvkrzSSQMVFqEuDeEpQDL5nJaFZ
- GnmQdA/tik8d4CUNnFNoPPRHgzw2QA6LAoFn6Hu1F9Aa+d5xVfaKdohrpSkn4aoKtqCI0ydmNld
- lyF6oBH+KBwTkSMZmsOGjrANZefK9fekLCUPQ62P4JpgTFVWjKM9mEJSSnZ+DWfzmwXng/ydrYp
- LH2tF5x7n/XwKwEx2FlREmrwPNfZXHPMIWvIbuFfmLNxgQ5GEQ8KPnhpUPMPKjuN0hE9Kc
-X-Gm-Gg: ASbGncuCN2jN8d6fKAFghOc5Eb30tEjKC7SL1TdllGZp3Xam5fVP+KWzcwTsWGS+wPo
- aaYmRmwsUe3As4053Bws8pd7Mc2SCeRaFHkvfKgoRCIOfajKHXXt03h8PFr/Kge0DVvi6W0djdx
- a0jvXpw4fPMjV72hYmm+2rUoak+6Zv3E1XvPMQzR/5S23rS+uSslrmb1/qBsY66S6parrBQBD7z
- 923Iy9uBLQBPz//iPwOD7saJacTLSnZl47+J7qQ18RSklfVIwecZtUWcFIF29I4BWTd+A91pHnf
- D2vg5cKWZgCoa2Mtpa7+E/4R/46GLA8=
-X-Google-Smtp-Source: AGHT+IHVDgeci01rH7xMiJXzI487L1U6iwM6Qtd2JwZhSQ5aWzQCUWJgC4Dcqfgi9ueVycd/kkHllFnJ+5TF
-X-Received: by 2002:a05:6214:3008:b0:6d4:2db5:e585 with SMTP id
- 6a1803df08f44-6dd233172fbmr8856d6.1.1734634205859; 
- Thu, 19 Dec 2024 10:50:05 -0800 (PST)
-Received: from bcacpedev-irv-3.lvn.broadcom.net ([192.19.161.250])
- by smtp-relay.gmail.com with ESMTPS id
- 6a1803df08f44-6dd180f0c0dsm981206d6.27.2024.12.19.10.50.03
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 19 Dec 2024 10:50:05 -0800 (PST)
-X-Relaying-Domain: broadcom.com
-From: david regan <dregan@broadcom.com>
-To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ d=1e100.net; s=20230601; t=1734632953; x=1735237753;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Io4/O3EA2wrAzVTobpQxkDRpy4UeGVoi2lu32+v6VL8=;
+ b=OD1A3s72sksgHPEoOxOJhedTjOqOmWs5mPKvO1snOrtPhYwpX8G67QeQ8kExdZ7TlF
+ Xf9WWuMg9Lusa14pXGvKzmj7fDRamSzZn7Li4bFVu344G8mQUQH3b0g24zFdQo6+wMT9
+ Xqn3QHWjP3bFkcnnIB6q9GnRNMvohiJo9WUUqazRmMnZi7S8C3o8y1ctUl6VjO0bWxWR
+ MBgi4p7KiP8e+HpunKszdhlW0RPkMDedg4d1wXTaybZHoxIgTsMW5b57nyO3cgxCjKPC
+ 6SOhMDxiDVkwk0Ng7yoPUb3BZ8RAk5sYEqrmy/Y8IglhacA/Rq7age9+mnLA4AEQxk/U
+ DC9w==
+X-Gm-Message-State: AOJu0Yyd/5cQK/y/3l0Yb1kWGYLaObzLW9NKUXlM7E/k6L8TdOSi+mmO
+ GZFmBfsh30triSTSNTrZ422ueI6+d2qUs/iYTN++wCm6SIbp2J3mkLnfwCe+E50tAO/SeLdR/xY
+ =
+X-Gm-Gg: ASbGnctUe4CRlYNatj+poA7XtSZHRATAXNuHAMDAkptlHJnohuHn8/5pdS2VnMy2wD0
+ nKJ+NrxJQWzciCyXIdyB6iP7ye5x05HX+Rb8JepNrtfbMPnSAP6cnIFQ0w26bAA4qVc8VdhB4ab
+ al/D66gNA7KzTlhhn5Fm4kC8a1vj0bNz7R+WPAJs9CVIA7PwdYJBJTPaKi/e3OsBe9MqRxYoxFC
+ PU3B+134/85OzGkC9Ng9CxrwIvIygZ+BaOMJYhWDVp2FTvG6e/YAcXmeElcKW9LOkbEdeTDPp/a
+ 8ZpoiI9ln2o74wfwVA==
+X-Google-Smtp-Source: AGHT+IGRHV9jmI5Rae08DV4x62Jv519YG1036YgVwgHZPakxnSFQ38VJ+Q7wRlmpiqmMMDEsstx6LQ==
+X-Received: by 2002:a05:6e02:148d:b0:3bc:be0f:edcd with SMTP id
+ e9e14a558f8ab-3c2d2d4f4a6mr842655ab.11.1734632953467; 
+ Thu, 19 Dec 2024 10:29:13 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4e68bf676c6sm393655173.50.2024.12.19.10.29.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Dec 2024 10:29:12 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alex Shumsky <alexthreed@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Dragan Simic <dsimic@manjaro.org>,
+ Gary Bisson <bisson.gary@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Julien Masson <jmasson@baylibre.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
- Anand Gore <anand.gore@broadcom.com>,
- William Zhang <william.zhang@broadcom.com>,
- Kursad Oney <kursad.oney@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Florian Fainelli <florian.fainelli@broadcom.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Kamal Dasu <kamal.dasu@broadcom.com>, Tom Rini <trini@konsulko.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
- Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, dregan@mail.com, dregan@broadcom.com
-Subject: [PATCH 2/2] arm: dts: Update nand node for bcmbca board dts
-Date: Thu, 19 Dec 2024 10:49:53 -0800
-Message-Id: <20241219184953.226978-3-dregan@broadcom.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20241219184953.226978-1-dregan@broadcom.com>
-References: <20241219184953.226978-1-dregan@broadcom.com>
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 00/19] vbe: Series part E
+Date: Thu, 19 Dec 2024 11:28:48 -0700
+Message-Id: <20241219182907.2609704-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 19 Dec 2024 20:41:51 +0100
+X-Mailman-Approved-At: Thu, 19 Dec 2024 20:41:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,113 +121,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update bcmbca dts to current nand node naming convention.
 
-Signed-off-by: david regan <dregan@broadcom.com>
-Reviewed-by: William Zhang <william.zhang@broadcom.com>
-Reviewed-by: Anand Gore <anand.gore@broadcom.com>
----
- arch/arm/dts/bcm96753ref.dts   | 19 ++++++++-----------
- arch/arm/dts/bcm968360bg.dts   | 19 ++++++++-----------
- arch/arm/dts/bcm968580xref.dts | 19 ++++++++-----------
- 3 files changed, 24 insertions(+), 33 deletions(-)
+This includes various patches towards implementing the VBE abrec
+bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
+fatures are available in VPL.
 
-diff --git a/arch/arm/dts/bcm96753ref.dts b/arch/arm/dts/bcm96753ref.dts
-index ebc8c8e4ce77..1efaf3c9fbf1 100644
---- a/arch/arm/dts/bcm96753ref.dts
-+++ b/arch/arm/dts/bcm96753ref.dts
-@@ -64,19 +64,16 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-on-flash-bbt;
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
-diff --git a/arch/arm/dts/bcm968360bg.dts b/arch/arm/dts/bcm968360bg.dts
-index 1335f484ee6c..725ba6c06772 100644
---- a/arch/arm/dts/bcm968360bg.dts
-+++ b/arch/arm/dts/bcm968360bg.dts
-@@ -62,19 +62,16 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-on-flash-bbt;
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
-diff --git a/arch/arm/dts/bcm968580xref.dts b/arch/arm/dts/bcm968580xref.dts
-index 9aa45877b543..6aea79ece865 100644
---- a/arch/arm/dts/bcm968580xref.dts
-+++ b/arch/arm/dts/bcm968580xref.dts
-@@ -62,19 +62,16 @@
- 	status = "okay";
- };
- 
--&nand {
-+&nand_controller {
-+	brcm,wp-not-connected;
- 	status = "okay";
--	write-protect = <0>;
--	#address-cells = <1>;
--	#size-cells = <0>;
-+};
- 
--	nandcs@0 {
--		compatible = "brcm,nandcs";
--		reg = <0>;
--		nand-ecc-strength = <4>;
--		nand-ecc-step-size = <512>;
--		brcm,nand-oob-sector-size = <16>;
--	};
-+&nandcs {
-+	nand-on-flash-bbt;
-+	nand-ecc-strength = <4>;
-+	nand-ecc-step-size = <512>;
-+	brcm,nand-oob-sector-size = <16>;
- };
- 
- &leds {
+Changes in v4:
+- Add an option to avoid code bloat with rcar3_salvator-x for example
+
+Changes in v3:
+- Add new patch to avoid size growth in spl_mmc_find_device() debug
+- Use strlcpy() instead of strncpy()
+- Rebase to master
+
+Changes in v2:
+- Add field names into the message
+- Fix 'depends on SPL' to depend on TPL
+- Depend on TPL/VPL as well
+- Drop patch 'serial: ns16550: Allow clocks to be missing'
+
+Simon Glass (19):
+  spl: mmc: Avoid size growth in spl_mmc_find_device() debug
+  image: Add a prototype for fit_image_get_phase()
+  boot: Allow FIT to fall back from best-match option
+  bootstd: Avoid sprintf() in SPL when creating bootdevs
+  boot: Respect the load_op in fit_image_load()
+  malloc: Show amount of used space when memory runs out
+  malloc: Provide a simple malloc for VPL
+  Support setting a maximum size for the VPL image
+  spl: Report a loader failure
+  spl: Allow serial to be disabled in any XPL phase
+  spl: Support a relocated stack in any XPL phase
+  spl: Drop use of uintptr_t
+  spl: Drop a duplicate variable in boot_from_devices()
+  spl: Add some more debugging to load_simple_fit()
+  spl: lib: Allow for decompression in any SPL build
+  boot: Allow use of FIT in TPL and VPL
+  lib: Allow crc8 in TPL and VPL
+  boot: Imply CRC8 with VBE
+  hash: Plumb crc8 into the hash functions
+
+ boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
+ boot/bootdev-uclass.c         | 10 ++++-
+ boot/image-fit.c              | 29 ++++++++------
+ common/Kconfig                |  8 ++++
+ common/hash.c                 |  8 ++++
+ common/malloc_simple.c        |  3 +-
+ common/spl/Kconfig.vpl        | 17 +++++++++
+ common/spl/spl.c              | 15 +++++---
+ common/spl/spl_atf.c          | 36 +++++++++---------
+ common/spl/spl_fit.c          | 12 +++++-
+ common/spl/spl_legacy.c       |  8 ++--
+ common/spl/spl_mmc.c          |  6 ++-
+ configs/sandbox_vpl_defconfig |  2 +
+ include/image.h               | 16 +++++++-
+ include/spl.h                 | 28 +++++++-------
+ include/u-boot/crc.h          |  3 ++
+ lib/Kconfig                   | 53 ++++++++++++++++++++++++++
+ lib/Makefile                  | 12 +++---
+ lib/crc8.c                    |  6 +++
+ 19 files changed, 275 insertions(+), 68 deletions(-)
+
 -- 
-2.37.3
+2.34.1
 
