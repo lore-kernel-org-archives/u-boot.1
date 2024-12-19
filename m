@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972D1E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0C0E7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:43:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E96C80291;
-	Thu, 19 Dec 2024 22:43:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8664B80379;
+	Thu, 19 Dec 2024 22:43:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fDblEeXn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GsWj4zyQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 159AA8021D; Thu, 19 Dec 2024 22:43:23 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id D32BF8033E; Thu, 19 Dec 2024 22:43:25 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA5D880196
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:43:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A99780196
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:43:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6d8f65ef5abso10121966d6.3
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 13:43:20 -0800 (PST)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-6d933736380so13690296d6.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 13:43:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734644600; x=1735249400; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734644602; x=1735249402; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R5V2rDd7yD7mj/crK0u4H3jiXG6pFx4AHEeyIiIeDvw=;
- b=fDblEeXn/W0dcfxhI3KXB56VxHhCEXl223Alt16YDUBB41tjuih1iZQeC6fDhKbHw+
- i9xNU58Yq/6oYrT/bu6L+4Pcs2wpFBRhmCdiODNjnWUoz0XHZ4HthXH08M50G33nux+/
- TnwqAWsOr/CuDGfwp3aGGXcfctlSF9byXbnV4=
+ bh=XlvyoVPWX3n6zycdO4q+zdSGSq59nKcXCtxC5pdXOjs=;
+ b=GsWj4zyQDXdPLin2Bwa8Ks58Wz+RQFgtveIJvDsdGmzSUFszXdwbtU/2wFvbgiBDk+
+ dMakc2mjO1nlUxcNxZi+Avpb5dnZYcUxljewaA7gPRk570/EDgkseTsFMbnP/+GYCGVY
+ +ePe8B/1Q1uRBh9/BDH16s6W181rVtC5AAy5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734644600; x=1735249400;
+ d=1e100.net; s=20230601; t=1734644602; x=1735249402;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R5V2rDd7yD7mj/crK0u4H3jiXG6pFx4AHEeyIiIeDvw=;
- b=ANKIE/3k68L1QHJDZ+N9AgNj5UfbGU89jAz4TkOSqR01YId1+mAZcZC/2xWJ3QsBPG
- aCVgXjxWg3li460wvtiylYPYTGidOSieGVHlpThpB1hLrj0PpIQAOll5TZTLpE+kP94e
- OphxmKSDJRuQCLXBpTa916I/KDSCbJlk9NlqpusxAroMb7+y0jyrkLIjpcGU2xwcPEP7
- iXmzpNebONDWVuMPPx4FPBZ9OLxVkLvpwRbaKwt22ouzDI1dEiZJQ5MkYkaVJGwVq4CS
- ju1f785P5CLOLnQECR6Bkfb9/W2KIYrbeIjxbL4pHBSZULunlcwCXF75usbweW9RGsGw
- v6lQ==
+ bh=XlvyoVPWX3n6zycdO4q+zdSGSq59nKcXCtxC5pdXOjs=;
+ b=WEI9t/zBd0WU0rPKVFbAN9QOAKH+//brGnXYWlseeqXI/NAnKip48FHp57Ll7VfC5Z
+ 4uavbYPtpHq3384nUKH1jdXa/aQyCE+eIRjcwELWyYmY4kd+u1JVWM86gXvfk0gjs33j
+ kq5LA1/QNv00+Al3klv4Fc1kBrcnWKJenuSHvieEmAqIOcL2T08NxiS6s8j/8uDfZ9U1
+ TWEGejNue7Wk9TvhWi6GcjZXWBhJJqO/tZ4DEyVpnjcKiof4OIN56V75C0K4y2SXiZRn
+ oBs0cryiBRVC/bPsYT7oVNFse9yu9nWCjPBd29727sq0QRUISS44Y1otvBUAq/h9s8/L
+ x1sA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0+NgznttbW8tkvSJwF5mwUYi/N8T8GMZKe6paCDmAJkdZ17Qz8EJVD9+zxGqIdu5wr+FmNss=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxJKyRY7YaBiz4tzTLAcv9PqHNY6cYFflrkYUyzWUeD4hkqJQm
- 1h3ri3FDjkGWAeyw8gGan+PYzIAqrP/3iuvMgf/d9DoCpGX/opXXjGmslHo9aW0=
-X-Gm-Gg: ASbGncsTRqOleHXFfNcx5HVxp3Wh3F6YcDPj5mjMVt1hjLhQRM8K5CWdnhAWvLgKaT7
- cRSD293xlEAEioBaiYH7/885O1YBAVUJGRipAUs3BQGjgfhVrMLu+SHyLjrQeYCQ03K4UcWG0CR
- fEEtfGUn1+L/RNOHRSOJK8UQl1YVrrplNcqR94shSs61Vq6wq3HCCAcfiW1a8aid37m5he+1i0K
- T9C0PPqoEPd2vYgZE/hCNH/AQ3WQv6ttUopeeyf6OD5ADcVvO/MOig=
-X-Google-Smtp-Source: AGHT+IHPXwBWcqXbQ3EC86URbcY7LuiZcE1JsiY88sYIPoaSn6SipV3I0ncX/6sK+9kYnG40sz6Jag==
-X-Received: by 2002:a05:6214:4302:b0:6d4:215d:91b9 with SMTP id
- 6a1803df08f44-6dd23338c83mr9880336d6.11.1734644599765; 
- Thu, 19 Dec 2024 13:43:19 -0800 (PST)
+ AJvYcCVp7nybg++qmyKJeUSugetFDWkxVQcw6YlXmyzDs3gGTBxQY35caqczEefXtMcJm583UXDagyI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZm72316xtBCXDe1wvfvmFACbLYcTmIO7YK7aXrqyryGZ5X2cS
+ 7dGiGrDcz6/Pzoe4VBaI0Zroz3SWJQxiXU8A013b3NdkDvEcD6w588D3sqXJj8w=
+X-Gm-Gg: ASbGncvEiQFiFLidMIKeIwMp2FGdH7R2Wd0RWzB2Zny/tSwe71GnIKfzhJr8lSCaw2Y
+ 4UwZxdxx0BZv9h1oNUvVMgRm/b91SFGbPh7eKI1+C4OT6Hhh206F1atz70G8I2EHh6+a5Ue/bOX
+ s6VP4DyR4Rjng2rRZQm0XIMYNSIYNwK0CC4HNL6R5iAe+TmffZl/eR8akuoY8GX0Ean87Wbmo8/
+ 7VJ5l8awZC2AyDUboGXJlmVj2YmK+RtNoTOwI39E7euiL8/BLEz2pQ=
+X-Google-Smtp-Source: AGHT+IHR0XUCh7sUw0iZ92crK253cuQjYy8sXuuWo1DKxbyzdq1Io0F/Mu7znVxA5u+CU2RoEz50/g==
+X-Received: by 2002:a05:6214:3c8c:b0:6d8:8874:2127 with SMTP id
+ 6a1803df08f44-6dd23318093mr11861676d6.5.1734644602280; 
+ Thu, 19 Dec 2024 13:43:22 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd180ea824sm10410196d6.4.2024.12.19.13.43.16
+ 6a1803df08f44-6dd180ea824sm10410196d6.4.2024.12.19.13.43.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 13:43:17 -0800 (PST)
+ Thu, 19 Dec 2024 13:43:20 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: Jerome Forissier <jerome.forissier@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
-References: <20241205193254.25807-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] net: lwip: do not return CMD_RET_USAGE if no interface
-Message-Id: <173464459670.3661439.13658406548179011499.b4-ty@konsulko.com>
-Date: Thu, 19 Dec 2024 15:43:16 -0600
+In-Reply-To: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
+References: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] net: lwip: check if network device is available in
+ do_dhcp
+Message-Id: <173464459991.3661439.11794080261351677826.b4-ty@konsulko.com>
+Date: Thu, 19 Dec 2024 15:43:19 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,10 +98,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 05 Dec 2024 20:32:53 +0100, Heinrich Schuchardt wrote:
+On Thu, 05 Dec 2024 20:17:36 +0100, Heinrich Schuchardt wrote:
 
-> If the dns command cannot find a network interface, we should return
-> CMD_RETFAIURE and not -1 (CMD_RET_USAGE).
+> eth_get_dev() returns NULL if no network device is available.
+> Not checking the return value leads to a crash when the device
+> pointer is dereferenced.
 > 
 > 
 
