@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D536E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:42:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A26ACE7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:42:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECB468033E;
-	Thu, 19 Dec 2024 22:42:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE8D280383;
+	Thu, 19 Dec 2024 22:42:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="K8SsRXUk";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="qE5SM1/g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDA2980312; Thu, 19 Dec 2024 22:42:16 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 35BBA8032B; Thu, 19 Dec 2024 22:42:17 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E1E80291
+ by phobos.denx.de (Postfix) with ESMTPS id 1BD1F80196
  for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:42:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C275A10000C;
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 42941120013;
  Fri, 20 Dec 2024 00:42:09 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C275A10000C
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 42941120013
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1734644529;
- bh=A30LdPzevITfy6CDIU99lazXkItHflkSePfLWk/55BA=;
- h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=K8SsRXUknW1ZwgUM9AwSNUcb7pUBWWp2aAgo+BvPLeg7rGFeRJ3TQ20ZETTMBy3FZ
- uYKS0NPgiSriy8rV1EG4DOpghLpFw9PvMkQ1fuHRqIbIIK17w2jokou7vhq5kEfZGP
- l/PHNbg64uewbg87ZaVvCTsGbL4EWE7rU3Wi3y0yRFfdN5O+mAWMLvOTLbbeVS0ybB
- L5e8l+rnllDWaCRmlKLf/sAFblUy89i37nFZw4isfJlK1CmvJXynCkpxOcPgO+QEhQ
- WUXPkAVe11ERqhdDQooKX0KfkMcvARFHTsorJRdnrgtQP9GxWYNcAAx1IQWbJAsfkd
- qM3Uw2+bNCrwA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
+ bh=kQ3KL2Tuk1TzC/Qb94nK3XAeHPJ3kfuyGu5qKys7Fy4=;
+ h=From:Subject:Date:Message-ID:MIME-Version:Content-Type:To:From;
+ b=qE5SM1/g3u0IunaVLm44nbQ/ov1/LrIj3GeE9GNWHh5/Ci33DeXAs0MfjQSoJk4Xh
+ bURQlsRdRcPQ8QKHnsDY7iBJUTlDjMQgQlcOaAHWsL68Nqvy9jMs/grQ08pY6p7kmQ
+ dIGFq8RvyXreGKY11TMnQfXAQuTBlxcpIFW/l37nWS9w3Efj68CfrhNbPE3f4qgVxw
+ pR0CaRHKRpAPtkkkRLxw3AWtH/BzZjFVzmN8fOIuN6hpRpR9yoT2TfnKBpxWueea5v
+ NqG8qRqFkqs4KPmWpJzTGGT5ergbdBCzcXHK+6YDB8Uu4yJskXgLffE/T1t2H7CCet
+ PtNuQzAskr4og==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
  Fri, 20 Dec 2024 00:42:09 +0300 (MSK)
 From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Date: Fri, 20 Dec 2024 00:42:10 +0300
-Subject: [PATCH 3/3] common: fdt: hand over original fdt bootargs into
- board chosen handler
+Subject: [PATCH 0/3] fdt_support: improve board_fdt_chosen_bootargs() for
+ flexibility
+Date: Fri, 20 Dec 2024 00:42:07 +0300
+Message-ID: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20241220-board_fdt_chosen_bootargs_improvements-v1-3-f6a7181787c5@salutedevices.com>
-References: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
-In-Reply-To: <20241220-board_fdt_chosen_bootargs_improvements-v1-0-f6a7181787c5@salutedevices.com>
+X-B4-Tracking: v=1; b=H4sIAC+TZGcC/x2NQQqEMAwAvyI5W9gWUdyvLFJaGzUHG0mKCOLfL
+ Xucw8zcoCiECt/mBsGTlDhXsG0D8xbyioZSZXAf11lnRxM5SPJLKn7eWDH7yFyCrOppP4RP3DE
+ XNUPf9bFKYwwD1NghuND1H/2m53kBkFrpB3gAAAA=
+X-Change-ID: 20241219-board_fdt_chosen_bootargs_improvements-7646b2029ba7
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Tim Harvey
  <tharvey@gateworks.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Sam Protsenko
@@ -62,11 +64,11 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Tim Harvey
 CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>, 
  Dmitry Rokosov <ddrokosov@salutedevices.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1734644528; l=3662;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1734644528; l=2087;
  i=ddrokosov@salutedevices.com; s=20241008; h=from:subject:message-id;
- bh=nsyoWU8o4mhhIbCCXTgM3ocFRUZtGFdj/zEgzgPYJus=;
- b=WyxNweZ/pLwhFJRpqiLjT5EHvoFrkZk4ZwPxc4GFsUp1gKX7a0pVjPEB8HgrsV8Ea6WQuifZO
- GA1ensULrGgBDiG+c4r4NwRSlJ+MnAdKSXjSCuFmgX/7YClR/Mdrd7O
+ bh=emBG4z/BJodznm7vA58VX9+IG0jG5PXBvwVS9hJ3R8c=;
+ b=a5NeGxuL1qB80sgbWAu2RwZjGY0QBKGu3mVoviV8zaOt8zJ4a9c4B5ffnjkAkmm3WdKCT9ww7
+ +LbiDuqn2dYDQACnTkAmwU/uSyVGdvkQXnCuyurpNHIsbp0gl3VqmFe
 X-Developer-Key: i=ddrokosov@salutedevices.com; a=ed25519;
  pk=J6t8z4aofCVwzR1Xs7royc+IGyQcL0cTby92cz3i8B4=
 X-Originating-IP: [172.28.162.51]
@@ -82,14 +84,14 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 49 0.3.49
- 28b3b64a43732373258a371bd1554adb2caa23cb,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s
+ 28b3b64a43732373258a371bd1554adb2caa23cb, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; github.com:7.1.1;
+ smtp.sberdevices.ru:7.1.1,5.0.1; 127.0.0.199:7.1.2, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
+X-KSMG-AntiPhishing: Clean, bases: 2024/12/19 20:37:00
+X-KSMG-LinksScanning: Clean, bases: 2024/12/19 20:37:00
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
  bases: 2024/12/19 19:16:00 #26891781
 X-KSMG-AntiVirus-Status: Clean, skipped
@@ -109,86 +111,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sometimes, it is necessary to provide an additional bootargs string to
-the kernel command line.
+This series consists of three patches.
 
-We have a real scenario where one U-Boot blob needs to boot several
-kernel images: the vendor-patched kernel image and the latest upstream
-kernel image. The Amlogic (Meson architecture) tty driver has different
-tty suffixes in these kernels: the vendor uses 'ttySx', while the
-upstream implementation uses 'ttyAMLx'. The initial console setup is
-provided to the kernel using the kernel command line (bootargs). For the
-vendor kernel, we should use 'console=ttyS0,115200', while for the
-upstream kernel, it must be 'console=ttyAML0,115200'. This means we have
-to use different command line strings depending on the kernel version.
+The first patch modifies the function documentation style in the
+include/fdt_support.h file to comply with kernel-doc requirements.
 
-To resolve this issue, we cannot use the CMDLINE_EXTEND kernel
-configuration because it is considered legacy and is not supported for
-the arm64 architecture. CMDLINE_EXTEND is outdated primarily because we
-can provide additional command line strings through the
-'chosen/bootargs' FDT node. However, U-Boot uses this node to inject the
-U-Boot bootargs environment variable content, which results in U-Boot
-silently overriding all data in the 'chosen/bootargs' node. While we do
-have the board_fdt_chosen_bootargs() board hook to address such issues,
-this function lacks any FDT context, such as the original value of the
-'chosen/bootargs' node.
+The second patch modifies the board_fdt_chosen_bootargs() function to
+return a const char* type. This change clarifies to the caller that the
+returned string should neither be freed nor modified. It aligns with the
+existing fdt_setprop() function, which already utilizes a const char*
+parameter. This promotes consistency within the codebase and enhances
+code safety by preventing unintended modifications to the returned
+string.
 
-This patch introduces a read-only (RO) fdt_property argument to
-board_fdt_chosen_bootargs() to share the original 'chosen/bootargs' data
-with the board code. Consequently, the board developer can decide how to
-handle this information for their board setup: whether to drop it or
-merge it with the bootargs environment.
+The third patch addresses the need for flexibility in providing kernel
+command line arguments (bootargs) for different kernel images within the
+same U-Boot environment. It introduces a read-only (RO) fdt_property
+argument to the board_fdt_chosen_bootargs() function, allowing access to
+the original chosen/bootargs data. This is crucial for scenarios where
+different kernel versions require distinct console setups (e.g., ttyS0
+for vendor kernels and ttyAML0 for upstream kernels). By enabling board
+developers to either merge or replace the original bootargs, this
+patch enhances the configurability of U-Boot for various kernel
+images without relying on outdated configurations like CMDLINE_EXTEND.
+
+CI/CD results: https://github.com/u-boot/u-boot/pull/716/checks
 
 Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 ---
- boot/fdt_support.c    | 5 +++--
- include/fdt_support.h | 4 +++-
- 2 files changed, 6 insertions(+), 3 deletions(-)
+Dmitry Rokosov (3):
+      include/fdt_support: fix docstyle to comply with kernel-doc requirements
+      fdt_support: board_fdt_chosen_bootargs() should return const char*
+      common: fdt: hand over original fdt bootargs into board chosen handler
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 2c39b2dd14b7c447bc4c7c8fad64e22cb00e88e0..49efeec3681f7c97341ccdce596bcaa4e1f037eb 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -321,7 +321,7 @@ int fdt_kaslrseed(void *fdt, bool overwrite)
-  * board_fdt_chosen_bootargs - boards may override this function to use
-  *                             alternative kernel command line arguments
-  */
--__weak const char *board_fdt_chosen_bootargs(void)
-+__weak const char *board_fdt_chosen_bootargs(const struct fdt_property *fdt_ba)
- {
- 	return env_get("bootargs");
- }
-@@ -364,7 +364,8 @@ int fdt_chosen(void *fdt)
- 		}
- 	}
- 
--	str = board_fdt_chosen_bootargs();
-+	str = board_fdt_chosen_bootargs(fdt_get_property(fdt, nodeoffset,
-+							 "bootargs", NULL));
- 
- 	if (str) {
- 		err = fdt_setprop(fdt, nodeoffset, "bootargs", str,
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index f481881ce640797e0f6204d599f008d0e5dc2bf7..7731feba5f068f82c8ee25f18a9f0e57729e2bd8 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -231,12 +231,14 @@ int board_rng_seed(struct abuf *buf);
- /**
-  * board_fdt_chosen_bootargs() - arbitrarily amend fdt kernel command line
-  *
-+ * @fdt_ba: FDT chosen/bootargs from the kernel image if available
-+ *
-  * This is used for late modification of kernel command line arguments just
-  * before they are added into the /chosen node in flat device tree.
-  *
-  * Return: pointer to kernel command line arguments in memory
-  */
--const char *board_fdt_chosen_bootargs(void);
-+const char *board_fdt_chosen_bootargs(const struct fdt_property *fdt_ba);
- 
- /*
-  * The keystone2 SOC requires all 32 bit aliased addresses to be converted
+ boot/fdt_support.c    |   7 +-
+ include/fdt_support.h | 173 ++++++++++++++++++++++++++++++--------------------
+ 2 files changed, 107 insertions(+), 73 deletions(-)
+---
+base-commit: 69bd83568c57813cd23bc2d100c066a17e7e349d
+change-id: 20241219-board_fdt_chosen_bootargs_improvements-7646b2029ba7
 
+Best regards,
 -- 
-2.43.0
+Dmitry Rokosov <ddrokosov@salutedevices.com>
 
