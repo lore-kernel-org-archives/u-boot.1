@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 134F5E7718A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 18:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080B9E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 18:30:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6D108039B;
-	Thu, 19 Dec 2024 19:29:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3ADF480383;
+	Thu, 19 Dec 2024 19:29:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QrWVrJvJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RPGnDJBa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5559D8021A; Thu, 19 Dec 2024 19:29:34 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 068AB802B4; Thu, 19 Dec 2024 19:29:39 +0100 (CET)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2958B80351
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:29:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EB7C803B5
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 19:29:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-844dac0a8f4so78417639f.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:29:32 -0800 (PST)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3a777958043so3611605ab.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 10:29:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734632970; x=1735237770; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734632974; x=1735237774; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6j74QLmzUVfx1nYppzT1UpJ4hWHCPdMUetn6Cp+dtlo=;
- b=QrWVrJvJlTCdSPASXR/bPSO1ioujspvOyoaeWheeKp6uY4StgXr+3gsgDDSjYWPCRd
- TlWKXXdVqe5oAplDPRMhN3SqdbuMgBw2NvIDz7s+Oew4KfO1/jIwrlbCZjUePBYCxK3L
- X2zvrnmsQ7JBjCuu5LLiw13tmVovgTJWFsegs=
+ bh=cqj2YVVu9L1AkthObNEdMZy2vUhvoT4ahnmRMzhQ574=;
+ b=RPGnDJBafjsE9LVBdP7V0Y2CmhYQ222MUZ9XHyeC0bvBOgZr+jD0Ou8sTUODjOqlBu
+ CWBk8NXULSi4giU3osL4dHUXbIgYYxr7POO2fwfqN7e0v4yo3i4BbjERhBoJKhMUCB3R
+ CJD8lZIk7woP9OXQCewYuFiXCnvfvu0IeYDrQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734632970; x=1735237770;
+ d=1e100.net; s=20230601; t=1734632974; x=1735237774;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6j74QLmzUVfx1nYppzT1UpJ4hWHCPdMUetn6Cp+dtlo=;
- b=H6z+RbYXpwTa8l5DqWDCtEm98PdoHwe0A91UafuyPygG1VR63qITUPQWO6Zay35SIA
- zNUojOy/xmVhd4T5T8HFUVCiNHRRQZySInf37pixyiJeGKO/BhLpv4hJmebs5I7YFbwe
- tigsN484VTwL6kG4+XOH7wS5KyIv7qilIh5LHmomnozTDiXfIn5GhTkppathGYA+5cyI
- qfWIto9JShnZbnfhi3LVAe9AkXhdW2gyRgV84PAQZCzZXw1QErM6qAHfPNrNzMI4jH6a
- yx3Lj0o3wxq1WrxyFqBBzQtET2kWIfvuCT5rTeTyTCi24fb1QsvJc02zobk9IBF+xwx8
- MT/g==
-X-Gm-Message-State: AOJu0YxWp63Vt8qOQXE/SdScqAx21JEOB0590IJKYpp6KWdQMvQG6i8Z
- F59JP7+vLOEBIqXrltxBneO4KS+/gT4G1zFpJAia5eVMzkOwBa6o2nDvjbTDo5aQ/z206i4b+KY
+ bh=cqj2YVVu9L1AkthObNEdMZy2vUhvoT4ahnmRMzhQ574=;
+ b=T9e5pFREYxDPyeZyq6vWygx1Rum3OZjbS917MSL2HVZLuLBWwNtlAHk88i1x/83IoN
+ fm3eklut+5YutIQEzOdMptAOgZidBHlmbJxtLwdA5VN0wcNyZknNOsyzisPmzMfKrv1l
+ YmKUVznfHVTwPQXH8n4jrb7QcFMSByBTbRSz9iU1hMV7owNm1w6dBYgjVxyPZGNe06yX
+ vmwUWWWbLIJWryPwXN/G7Dv6zCLxLW4YJ05JXUqEFc3cPemhRQiI3oBvErS5tR95ioI3
+ ryJf1hndDWtlVD+ESGmBktz3+5fuXMxa5Ig+gG/P1xgQVvK6/swL8UnuMdDw8all90dH
+ rxcg==
+X-Gm-Message-State: AOJu0YxNAf83JHno/Z3hANumcQoGQibeZqv+h5Dj5KG8d/MH6sb5Hx/2
+ vWfH7R/491TmVdi7NBihFZw+UjV4kiHen+AeNnpSVIMkdpArIqfkc4MmQHkJJuOWvNWP3NzO//o
  =
-X-Gm-Gg: ASbGncvBOqJgW/NRl70Zec5guFqqUKHdF/tpsHP/bacKxk7kdSa4vM6TSb84at8LwyK
- bcTYX+ATQge2SGriEYZmZ/N2vk1nZNfm2yVgRl1dyaeYYVpsNsbCm2BLGSTd35Nctdr7TOsDpSZ
- fNDwtrxu9H9TBVFqmrHIp5oncLtrb1DzeNNis6kbNTEBkFGIwqE9VfPdjl6zzAAvTr9YBO3QZUJ
- 7U8Iwx1q1RW1xfeFpVAiQTpuwYeJDZ6dRwccbClvlQ7hAV9kKP1UeccpmwGwgTv7WE6GT1f3DCw
- ctyI8qq+E4s85Ss0Mg==
-X-Google-Smtp-Source: AGHT+IFF7OXubuBNlak4oP5FnPpn/skyPkiAF9GPj3r6cB4ILJXypEop1/0pM3DJtwyC5Ow4E6a2bw==
-X-Received: by 2002:a05:6e02:3dc9:b0:3a7:c5ff:e5e2 with SMTP id
- e9e14a558f8ab-3c2cca3e450mr1703445ab.0.1734632970393; 
- Thu, 19 Dec 2024 10:29:30 -0800 (PST)
+X-Gm-Gg: ASbGncumiBmVFkSfXxGEBjAluR3fDirfPrqA1cL+/C6tn/7dr4L9UjKRsjzVkOqAdBC
+ xhK3TT7iWVJ/aWPglc4is6b26miLlXcx6qRCt2X/lXwqqHfZ26hHMuV918a2vYIKx2yUokWy1xd
+ AkiDJusvU9tCPazPTxNsGSCM1r6CzGBYQOpfdWIt0pD8OER2Rnr8zrmo8g3b1E2Bp13XR7DF3mp
+ DLC7vaI1HaYodLnwcwJ1CZJf6+D2/lT9MEQOf15b0dT8s0qSgGr4ElNMkxK7sibjzDhZ28lf5qc
+ iMNppjJW3t+/VLiMrQ==
+X-Google-Smtp-Source: AGHT+IErtENYVWMUJfip9tGJmOAz32hfGQ2NLqEZFF1+UFUfqMWvahHPerd+0tibAX/mOQZCXkoUGA==
+X-Received: by 2002:a05:6e02:3201:b0:3a7:e286:a560 with SMTP id
+ e9e14a558f8ab-3c2d1aa30b7mr1292415ab.2.1734632974260; 
+ Thu, 19 Dec 2024 10:29:34 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4e68bf676c6sm393655173.50.2024.12.19.10.29.27
+ 8926c6da1cb9f-4e68bf676c6sm393655173.50.2024.12.19.10.29.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 10:29:28 -0800 (PST)
+ Thu, 19 Dec 2024 10:29:33 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Gary Bisson <bisson.gary@gmail.com>,
- Mathieu Othacehe <m.othacehe@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+Cc: Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 07/19] malloc: Provide a simple malloc for VPL
-Date: Thu, 19 Dec 2024 11:28:55 -0700
-Message-Id: <20241219182907.2609704-8-sjg@chromium.org>
+Subject: [PATCH v4 09/19] spl: Report a loader failure
+Date: Thu, 19 Dec 2024 11:28:57 -0700
+Message-Id: <20241219182907.2609704-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20241219182907.2609704-1-sjg@chromium.org>
 References: <20241219182907.2609704-1-sjg@chromium.org>
@@ -95,37 +97,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The VPL phase may want to use the smaller malloc() implementation, so
-add an option for this.
+If a loader returns an error code it is silently ignored. Show a message
+to at least provide some feedback to the user.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/Kconfig.vpl | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ common/spl/spl.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
-index d06f36d4ee4..3dc0e95e09f 100644
---- a/common/spl/Kconfig.vpl
-+++ b/common/spl/Kconfig.vpl
-@@ -222,6 +222,15 @@ config VPL_SPI_FLASH_SUPPORT
- 	  lines). This enables the drivers in drivers/mtd/spi as part of a
- 	  VPL build. This normally requires VPL_SPI_SUPPORT.
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 1ceb63daf31..7c57eb8539b 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -612,6 +612,7 @@ static int boot_from_devices(struct spl_image_info *spl_image,
+ 	for (i = 0; i < count && spl_boot_list[i] != BOOT_DEVICE_NONE; i++) {
+ 		struct spl_image_loader *loader;
+ 		int bootdev = spl_boot_list[i];
++		int ret;
  
-+config VPL_SYS_MALLOC_SIMPLE
-+	bool "Only use malloc_simple functions in the VPL"
-+	default y
-+	help
-+	  Say Y here to only use the *_simple malloc functions from
-+	  malloc_simple.c, rather then using the versions from dlmalloc.c;
-+	  this will make the VPL binary smaller at the cost of more heap
-+	  usage as the *_simple malloc functions do not re-use free-ed mem.
-+
- config VPL_TEXT_BASE
- 	hex "VPL Text Base"
- 	default 0x0
+ 		if (CONFIG_IS_ENABLED(SHOW_ERRORS))
+ 			ret = -ENXIO;
+@@ -631,10 +632,13 @@ static int boot_from_devices(struct spl_image_info *spl_image,
+ 					     "Unsupported Boot Device!\n");
+ 				}
+ 			}
+-			if (loader &&
+-				!spl_load_image(spl_image, loader)) {
+-				spl_image->boot_device = bootdev;
+-				return 0;
++			if (loader) {
++				ret = spl_load_image(spl_image, loader);
++				if (!ret) {
++					spl_image->boot_device = bootdev;
++					return 0;
++				}
++				printf("Error: %d\n", ret);
+ 			}
+ 		}
+ 	}
 -- 
 2.34.1
 
