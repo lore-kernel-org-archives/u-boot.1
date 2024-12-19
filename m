@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045A0E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E3B9E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:22:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843C48021D;
-	Thu, 19 Dec 2024 16:15:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DB1788021D;
+	Thu, 19 Dec 2024 16:22:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SdJExwxs";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mpWQOG0V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 445BF8022B; Thu, 19 Dec 2024 16:15:21 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id BFC5D8022B; Thu, 19 Dec 2024 16:22:47 +0100 (CET)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 847C48021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:15:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D7118021A
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 19 Dec 2024 16:22:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7b6e5ee6ac7so63622485a.0
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 07:15:18 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-7fd35b301bdso705112a12.2
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 19 Dec 2024 07:22:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734621317; x=1735226117; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Rz2i2AKnAmkk2tyXiomv+mZHcBTq8HKetGPPn5Z63bI=;
- b=SdJExwxshpEEO6roP49usaswaYTF+oTux3yM0zbpMHLc9uRYeOz8mqKZ2TpoqkUXol
- Mn0pFDlkn95CeLTafWeS38ID0srVogqSopVHhlK4Wnbh5jQB5Nq8cmbSfCSf6X/ImTEI
- Uztk+0N/LoNOcaBtO6GGkblzAwEvhrwKyUETo=
+ d=linaro.org; s=google; t=1734621763; x=1735226563; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0LUfN1Yc7P2NakpaEdBD4N1hg+x3U3azLFySiDg+70s=;
+ b=mpWQOG0Vb4ze87avJU7uCtsrzODkSuoqgu0YxFJB+zZVVBaAjefL8vx4yrJ0UtyruI
+ m15k1EGR7YVjtuHrF2tzhvn/lieH3CFeCv7zS8/UzAZhT8oBnjyYB9c8OTT9EY146eGr
+ jNu7WsVMmuT3J4MaCNo7NAQclXxb0E+xua1zelFX+dTqObGb7JRdwRtiLsGNb2MqFEhT
+ K3FGZi/tGBIoqU7B6QbQ2v4I34RbK9yJC8MdQc9G5RkxMpID9Hr5X8buxDCt79pyFzhK
+ FpRfqLnPCNmeY5hSEd6vxyeGLl82hONqsgynWfHOKLaEVWZWvxXvPDDcDmt6AbCKEEyJ
+ pkIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734621317; x=1735226117;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rz2i2AKnAmkk2tyXiomv+mZHcBTq8HKetGPPn5Z63bI=;
- b=PWZkJVRYLkP0qWcqK1ImYTcc6DCsszlY5pyB3CJlqatMpGkUqjauYDwkk9uGew4AC0
- lCxaAeBJjCj2GfGC3SCXiZY4JpiAV9l7bs8/br943GEcsNwbGH/wh+YkWwKQDUPqh3ZF
- vuPRtB/aI21GAKOdZxS5bhfeCXfcQimx6SORKBaU+BCEEk2mhQFr/zvDInf5ssq15nSm
- wGAyUnUtcTFCLgb6j1nb+HgxZXEC3jzGMXJW+E0L5Fz5TSM33lgOyg4PQpNC3ECxvR1/
- AFLL/W9VvQiPP6i6Cq+eji5poMpO3mg0NSivD5pjBxryhT/RtofrzXGtZfQMe6qauZwP
- ZDBQ==
-X-Gm-Message-State: AOJu0YyrJ2aRYuZWE9JQetAY/6uygbEazPLKG6wwJ/piJixmqvDL9yyH
- EZ7qw+3AQDU0ZS4OC/tWW620clCSb+/CgQiHug91w3HCJa64jm+UMGLqPlalE04=
-X-Gm-Gg: ASbGnct2ImoL/cFLIHpuifIj1Zkjf/N49ICp8K1rQMj4tn8YNOQKGOyw4QPdZiqYJsP
- 3f4AzQF6PusA3MeBpCH4YcA80mBeVkQYvoqScYbCZsfsRCWv5xLGNQocIkRqEIQ1XMAQalc7lae
- 6ig+UOMpBEutZAAkWMx67emcAcxe9CJ02lW4oAv8+wdSCX/6uzDQBabMBAzZFZtmuusZuPHXC5h
- eeO1Odvk1wqXPDXlyZ6Co/aTWnlRq0f5cGE3SxWF5KwVXT867cb+j/W
-X-Google-Smtp-Source: AGHT+IEMDmuLH4edFz55cY/nbW9src8mFf45pvKjQUro5tvxSZN3LM7JLywgef1panIfriIASJmw0Q==
-X-Received: by 2002:a05:620a:8001:b0:7b1:b216:e2fb with SMTP id
- af79cd13be357-7b9aa8d596bmr580608785a.20.1734621317374; 
- Thu, 19 Dec 2024 07:15:17 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b9ac4e2741sm54346485a.119.2024.12.19.07.15.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 07:15:16 -0800 (PST)
-Date: Thu, 19 Dec 2024 09:15:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Paul HENRYS (EXT)" <paul.henrys_ext@softathome.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "paul.henrysd+nodisclaimer@gmail.com" <paul.henrysd+nodisclaimer@gmail.com>,
- "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data
- encrypted by mkimage
-Message-ID: <20241219151513.GU1505244@bill-the-cat>
-References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
- <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
- <20241219005119.GA3555833@bill-the-cat>
- <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
+ d=1e100.net; s=20230601; t=1734621763; x=1735226563;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0LUfN1Yc7P2NakpaEdBD4N1hg+x3U3azLFySiDg+70s=;
+ b=EejCaDvY0Df3NQ75t0WykAB2PpNDd2+8kxihm/bZCuG3PEvGuwFzToUFgIhTrk591j
+ MXEPTo8nUALy/jeMgB1UP+XaWHDw0pyF0/cv05JDebnFwFzvcuDwE8pO7syKslKsfCmH
+ kAR8+gj6WiuXJrlsrKc7jzXhePLa4s131wIDYtCe6s/QZkY7jF7hE+h4q8khjzZYiLmy
+ QkDLWsduXBWP/aKfgnNDphUe5gP8mNG09Zccp8FupY5emorj0wy0aqYXGMdGhipoKRfQ
+ /kMKjv1REQHlUHynd6hdo108KHn82LU0MoHbrq3oquxF8xy7EN9kuZRb/Jm8s4E/IXLH
+ gWoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYv9GSHU2yUd+Z/flTOgsB3XXwvDogee5vj7AO3VR04RdGOq829G3m7wOxKNJ0Fcg+D487Csc=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywzal5Vc6PbTDnV8jLvUdpoNzyYz7VPZlMPILvTS0vqxAkX0oM4
+ 5SiG0zMX9UyJ/ouUWG5z3i91fmNLYTJcYiudJOEHEpE9SlzgXjrgD1rrZDRO1gXzeWSuCNw4JyD
+ 5qtCz1DEkfyojuCgAk6ScQjEL90cKEqsi79eghA==
+X-Gm-Gg: ASbGncsT+oq6SBM9/Xy1TOtHNvz55pbEK+3Z2QpyD6md1CdPeZ8xF3/dAjWjClvAsO6
+ fy2iLez4Dyvn/2hBhYQaNefk2H9Pxu8AM1YQuPWLXc4rTBbBa2/egFMtoHEK17nfFVGzAnEc=
+X-Google-Smtp-Source: AGHT+IFTbUj7l/eprB8mqBQZbwXkQabj8puoG+soqt+3Ahj67++B80zBkIN108EW8c8VNn985bfzt1g6kxJf0c/OUxU=
+X-Received: by 2002:a17:90b:2d43:b0:2ee:fdf3:390d with SMTP id
+ 98e67ed59e1d1-2f443d6e5e6mr4587203a91.31.1734621762779; Thu, 19 Dec 2024
+ 07:22:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8cbu7HLK5pl5JUbC"
-Content-Disposition: inline
-In-Reply-To: <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241219130554.49825-1-philippe.reynes@softathome.com>
+ <20241219130554.49825-9-philippe.reynes@softathome.com>
+In-Reply-To: <20241219130554.49825-9-philippe.reynes@softathome.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 19 Dec 2024 10:22:30 -0500
+Message-ID: <CAEfUkUJHAhExVQevZXQ7isUpDOhD5fcDBw56Xq4CYBFmMaTJtg@mail.gmail.com>
+Subject: Re: [PATCH v7 8/9] test: lib: add test for key derivation
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
+ u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,167 +92,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Philippe,
 
---8cbu7HLK5pl5JUbC
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 19 Dec 2024 at 08:06, Philippe Reynes <
+philippe.reynes@softathome.com> wrote:
 
-On Thu, Dec 19, 2024 at 09:51:16AM +0000, Paul HENRYS (EXT) wrote:
-> Hello Tom,
->=20
-> The issue comes from the key that is reported missing (or zero size):
->=20
-> ValueError: Error 1 running 'mkimage -t -k /tmp/binmant.nvd038o5/keys -F =
-/tmp/binman.is3n51x5/fit.fit': File /tmp/binmant.nvd038o5/keys/aes256.bin d=
-on't have the expected size (size=3D0, expected=3D32)
->=20
-> The issue is that the "binary" file fails to be provided in patchwork. I =
-send the following mail about this on 05/08/24:
-
-Indeed, I thought I had fixed that up, but didn't do it correctly,
-thanks!
-
->=20
-> > Hi Simon,
-> >=20
-> > Sorry for the late reply as I missed your message blocked in quarantine.
-> > It looks like when I push a patch with binary data, patchworks does not=
- seem to get it right. Nonetheless, using git send-email, a copy is also se=
-nt to me and I do get the patch right.
-> > I put you in CC this time so you should also have received a copy of th=
-e patches. Could you take a look you get the patch "[v2,3/3] tools: binman:=
- Add tests for FIT with data encrypted by mkimage" with the binary data?
-> >=20
-> > The end of the patch with the binary data should be as such:
-> >=20
-> > diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/aes256.bi=
-n                                                                          =
-                       =20
-> > new file mode 100644                                                   =
-                                                                           =
-                       =20
-> > index 0000000000000000000000000000000000000000..09b8bf6254ada5c084039f3=
-2916bc7d30233bb2c                                                          =
-                       =20
-> > GIT binary patch                                                       =
-                                                                           =
-                       =20
-> > literal 32                                                             =
-                                                                           =
-                       =20
-> > ncmXpsGBz<aGq<obNK8sjNli=3D7$jr*l$<50zC@d;2DJ=3Ds4pC}7U                =
-                                                                           =
-                           =20
-> >                                                                        =
-                                                                           =
-                       =20
-> > literal 0                                                              =
-                                                                           =
-                       =20
-> > HcmV?d00001
-> >=20
-> >=20
-> > FYI, I also added the requested changes.
-> >=20
-> > Best regards,
-> > Paul
->=20
-> Best regards,
-> Paul
->=20
-> ________________________________________
-> From:=A0Tom Rini
-> Sent:=A0Thursday, December 19, 2024 01:51
-> To:=A0Paul HENRYS (EXT)
-> Cc:=A0u-boot@lists.denx.de; paul.henrysd+nodisclaimer@gmail.com; sjg@chro=
-mium.org; al.kochet@gmail.com
-> Subject:=A0Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data =
-encrypted by mkimage
->=20
->=20
-> On Mon, Nov 25, 2024 at 06:47:17PM +0100, Paul HENRYS wrote:
->=20
->=20
->=20
-> > Test the property 'fit,encrypt' to encrypt FIT data.
->=20
-> >
->=20
-> > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
->=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> > ---
->=20
-> > Changes for v4:
->=20
-> > - Update the tests to use 'fit,encrypt'
->=20
-> >
->=20
-> >=A0 tools/binman/ftest.py=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 45 +++++++++++++++
->=20
-> >=A0 tools/binman/test/343_fit_encrypt_data.dts=A0=A0=A0 |=A0 53 ++++++++=
-++++++++++
->=20
-> >=A0 .../test/344_fit_encrypt_data_no_key.dts=A0=A0=A0=A0=A0 |=A0 53 ++++=
-++++++++++++++
->=20
-> >=A0 tools/binman/test/aes256.bin=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0 | Bin 0 -> 32 bytes
->=20
-> >=A0 4 files changed, 151 insertions(+)
->=20
-> >=A0 create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
->=20
-> >=A0 create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
->=20
-> >=A0 create mode 100644 tools/binman/test/aes256.bin
->=20
->=20
->=20
-> This fails in CI:
->=20
-> https://source.denx.de/u-boot/u-boot/-/jobs/980030
->=20
-> or
->=20
-> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10169&view=
-=3Dlogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a39-ad9=
-2-0220c9b8101a&l=3D300
->=20
-> Please see https://docs.u-boot.org/en/latest/develop/ci_testing.html=A0for
->=20
-> how to trigger Azure yourself to resolve these, thanks!
->=20
->=20
->=20
+> Adds a test for the function sha256_hkdf.
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+>  test/lib/Makefile           |   1 +
+>  test/lib/test_sha256_hkdf.c | 198 ++++++++++++++++++++++++++++++++++++
+>  2 files changed, 199 insertions(+)
+>  create mode 100644 test/lib/test_sha256_hkdf.c
+>
+> diff --git a/test/lib/Makefile b/test/lib/Makefile
+> index 4c0abcba81a..24ce6ed8f00 100644
+> --- a/test/lib/Makefile
+> +++ b/test/lib/Makefile
+> @@ -25,6 +25,7 @@ obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+>  obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+>  obj-$(CONFIG_AES) += test_aes.o
+>  obj-$(CONFIG_SHA256) += test_sha256_hmac.o
+> +obj-$(CONFIG_HKDF_MBEDTLS) += test_sha256_hkdf.o
+>  obj-$(CONFIG_GETOPT) += getopt.o
+>  obj-$(CONFIG_CRC8) += test_crc8.o
+>  obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
+> diff --git a/test/lib/test_sha256_hkdf.c b/test/lib/test_sha256_hkdf.c
+> new file mode 100644
+> index 00000000000..5277b44eba5
+> --- /dev/null
+> +++ b/test/lib/test_sha256_hkdf.c
+> @@ -0,0 +1,198 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
+> + *
+> + * Unit tests for sha256_hkdf functions
+> + */
+> +
+> +#include <command.h>
+> +#include <test/lib.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +#include <u-boot/sha256.h>
+> +
+> +struct test_sha256_hkdf_s {
+> +       const unsigned char *salt;
+> +       int saltlen;
+> +       const unsigned char *ikm;
+> +       int ikmlen;
+> +       const unsigned char *info;
+> +       int infolen;
+> +       const unsigned char *expected;
+> +       int expectedlen;
+> +};
+> +
+> +/*
+> + * data comes from:
+> + * https://www.rfc-editor.org/rfc/rfc5869
+> + */
+> +static unsigned char salt_test1[] = {
+> +       0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
+> +       0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c };
+> +
+> +static unsigned char ikm_test1[] = {
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b
+> +};
+> +
+> +static unsigned char info_test1[] = {
+> +       0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9
+> +};
+> +
+> +static unsigned char expected_test1[] = {
+> +       0x3c, 0xb2, 0x5f, 0x25, 0xfa, 0xac, 0xd5, 0x7a,
+> +       0x90, 0x43, 0x4f, 0x64, 0xd0, 0x36, 0x2f, 0x2a,
+> +       0x2d, 0x2d, 0x0a, 0x90, 0xcf, 0x1a, 0x5a, 0x4c,
+> +       0x5d, 0xb0, 0x2d, 0x56, 0xec, 0xc4, 0xc5, 0xbf,
+> +       0x34, 0x00, 0x72, 0x08, 0xd5, 0xb8, 0x87, 0x18,
+> +       0x58, 0x65
+> +};
+> +
+> +static unsigned char salt_test2[] = {
+> +       0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67,
+> +       0x68, 0x69, 0x6a, 0x6b, 0x6c, 0x6d, 0x6e, 0x6f,
+> +       0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77,
+> +       0x78, 0x79, 0x7a, 0x7b, 0x7c, 0x7d, 0x7e, 0x7f,
+> +       0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87,
+> +       0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f,
+> +       0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97,
+> +       0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f,
+> +       0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7,
+> +       0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf,
+> +};
+> +
+> +static unsigned char ikm_test2[] = {
+> +       0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+> +       0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+> +       0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+> +       0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+> +       0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
+> +       0x28, 0x29, 0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f,
+> +       0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37,
+> +       0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
+> +       0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
+> +       0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f,
+> +};
+> +
+> +static unsigned char info_test2[] = {
+> +       0xb0, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7,
+> +       0xb8, 0xb9, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf,
+> +       0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7,
+> +       0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf,
+> +       0xd0, 0xd1, 0xd2, 0xd3, 0xd4, 0xd5, 0xd6, 0xd7,
+> +       0xd8, 0xd9, 0xda, 0xdb, 0xdc, 0xdd, 0xde, 0xdf,
+> +       0xe0, 0xe1, 0xe2, 0xe3, 0xe4, 0xe5, 0xe6, 0xe7,
+> +       0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
+> +       0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7,
+> +       0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff,
+> +};
+> +
+> +static unsigned char expected_test2[] = {
+> +       0xb1, 0x1e, 0x39, 0x8d, 0xc8, 0x03, 0x27, 0xa1,
+> +       0xc8, 0xe7, 0xf7, 0x8c, 0x59, 0x6a, 0x49, 0x34,
+> +       0x4f, 0x01, 0x2e, 0xda, 0x2d, 0x4e, 0xfa, 0xd8,
+> +       0xa0, 0x50, 0xcc, 0x4c, 0x19, 0xaf, 0xa9, 0x7c,
+> +       0x59, 0x04, 0x5a, 0x99, 0xca, 0xc7, 0x82, 0x72,
+> +       0x71, 0xcb, 0x41, 0xc6, 0x5e, 0x59, 0x0e, 0x09,
+> +       0xda, 0x32, 0x75, 0x60, 0x0c, 0x2f, 0x09, 0xb8,
+> +       0x36, 0x77, 0x93, 0xa9, 0xac, 0xa3, 0xdb, 0x71,
+> +       0xcc, 0x30, 0xc5, 0x81, 0x79, 0xec, 0x3e, 0x87,
+> +       0xc1, 0x4c, 0x01, 0xd5, 0xc1, 0xf3, 0x43, 0x4f,
+> +       0x1d, 0x87,
+> +};
+> +
+> +static unsigned char salt_test3[] = {
+> +};
+> +
+> +static unsigned char ikm_test3[] = {
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +};
+> +
+> +static unsigned char info_test3[] = {
+> +};
+> +
+> +static unsigned char expected_test3[] = {
+> +       0x8d, 0xa4, 0xe7, 0x75, 0xa5, 0x63, 0xc1, 0x8f,
+> +       0x71, 0x5f, 0x80, 0x2a, 0x06, 0x3c, 0x5a, 0x31,
+> +       0xb8, 0xa1, 0x1f, 0x5c, 0x5e, 0xe1, 0x87, 0x9e,
+> +       0xc3, 0x45, 0x4e, 0x5f, 0x3c, 0x73, 0x8d, 0x2d,
+> +       0x9d, 0x20, 0x13, 0x95, 0xfa, 0xa4, 0xb6, 0x1a,
+> +       0x96, 0xc8,
+> +};
+> +
+> +static struct test_sha256_hkdf_s test_sha256_hkdf[] = {
+> +       {
+> +               .salt = salt_test1,
+> +               .saltlen = sizeof(salt_test1),
+> +               .ikm = ikm_test1,
+> +               .ikmlen = sizeof(ikm_test1),
+> +               .info = info_test1,
+> +               .infolen = sizeof(info_test1),
+> +               .expected = expected_test1,
+> +               .expectedlen = sizeof(expected_test1),
+> +       },
+> +       {
+> +               .salt = salt_test2,
+> +               .saltlen = sizeof(salt_test2),
+> +               .ikm = ikm_test2,
+> +               .ikmlen = sizeof(ikm_test2),
+> +               .info = info_test2,
+> +               .infolen = sizeof(info_test2),
+> +               .expected = expected_test2,
+> +               .expectedlen = sizeof(expected_test2),
+> +       },
+> +       {
+> +               .salt = salt_test3,
+> +               .saltlen = sizeof(salt_test3),
+> +               .ikm = ikm_test3,
+> +               .ikmlen = sizeof(ikm_test3),
+> +               .info = info_test3,
+> +               .infolen = sizeof(info_test3),
+> +               .expected = expected_test3,
+> +               .expectedlen = sizeof(expected_test3),
+> +       },
+> +};
+> +
+> +static int _lib_test_sha256_hkdf_run(struct unit_test_state *uts,
+> +                                    const unsigned char *salt, int
+> saltlen,
+> +                                    const unsigned char *ikm, int ikmlen,
+> +                                    const unsigned char *info, int
+> infolen,
+> +                                    const unsigned char *expected,
+> +                                    int expectedlen)
+> +{
+> +       unsigned char output[256];
+> +       int ret;
+> +
+> +       ut_assert(expectedlen <= sizeof(output));
+> +       ret = sha256_hkdf(salt, saltlen, ikm, ikmlen, info, infolen,
+> output, expectedlen);
+> +       ut_assert(!ret);
+> +       ut_asserteq_mem(expected, output, expectedlen);
+> +
+> +       return 0;
+> +}
+> +
+> +static int lib_test_sha256_hkdf_run(struct unit_test_state *uts,
+> +                                   struct test_sha256_hkdf_s *test)
+> +{
+> +       return _lib_test_sha256_hkdf_run(uts, test->salt, test->saltlen,
+> +                                        test->ikm, test->ikmlen,
+> +                                        test->info, test->infolen,
+> +                                        test->expected,
+> test->expectedlen);
+> +}
+> +
+> +static int lib_test_sha256_hkdf(struct unit_test_state *uts)
+> +{
+> +       int i, ret = 0;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(test_sha256_hkdf); i++) {
+> +               ret = lib_test_sha256_hkdf_run(uts, &test_sha256_hkdf[i]);
+> +               if (ret)
+> +                       return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +LIB_TEST(lib_test_sha256_hkdf, 0);
 > --
->=20
-> Tom
->=20
+> 2.25.1
+>
+>
+Sounds good to me.
+Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
 
---=20
-Tom
-
---8cbu7HLK5pl5JUbC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkOH0ACgkQFHw5/5Y0
-tyz2yQwAoLZZpNZUbaNsSxkqMZvDVuGKhhRjWyUT+i1oU9mRId3ZTDpuwt1JxDX0
-VVF3a0KnlO2V0OmnyPKxvN57Oe6gc3eW6rvlksn4fy+37EU6INKZmiXy8PQzD6Jc
-MkR3ay/2kDIqp40mXVV3oC7ah3yGijj3fx773SnMaV4zC2VxXUkfxLMF81sLGlpp
-kPJSS1ezGur13pD0ghICp0P6O1ziZK4pPTTQs9v2soruCJY1ZBf90FUT90nNIFK/
-6Z9G5WvRxxpCg69q9w+UpA24kGPWE13Z6DWN0F9zCFneP+OVXnG0OEgruWvybBlp
-Qc7/LewqkU/gH0UYlNP8yP295Kbv7xfBcXDyP1/RA9DaGTXORRrWwpopnI+L75Vu
-RGIAlgZsE2YGR2zqUUxLDLznZasrpBPDPxGCKoojlhew7s24s64VddjThS9g5Vm3
-aJIPzXzAdOqfVQYvdQYQhptN/qIyhjKqMBxj/K8QDmA8CkYd5TdwiPtNKaqxeked
-NcnSR9UA
-=Dx7n
------END PGP SIGNATURE-----
-
---8cbu7HLK5pl5JUbC--
+Regards,
+Raymond
