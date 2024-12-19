@@ -4,48 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325E1E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8279CE77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 476F18021D;
-	Thu, 19 Dec 2024 16:04:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 0055A8021D;
+	Thu, 19 Dec 2024 16:05:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DOeSfKIX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBDEE8022B; Thu, 19 Dec 2024 16:04:07 +0100 (CET)
-Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch
- [IPv6:2001:1600:7:10::bc0f])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 818A48022B; Thu, 19 Dec 2024 16:05:27 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1E018021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:04:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 225AA8021A
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 19 Dec 2024 16:05:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
- [10.7.10.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YDYjK1fN2ztYL;
- Thu, 19 Dec 2024 16:04:05 +0100 (CET)
-Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4YDYjJ39W4zs26; Thu, 19 Dec 2024 16:04:04 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 19 Dec 2024 16:03:41 +0100
-Subject: [PATCH RFC] image: apply FDTOs on FDT image node without a load
- property
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-7fd51285746so505585a12.3
+ for <u-boot+nodisclaimer@lists.denx.de>; Thu, 19 Dec 2024 07:05:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1734620722; x=1735225522; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=INYfd3xnscDqhRUhGTGLJ/Tfjy7gPKKLQKYjPJL1JCE=;
+ b=DOeSfKIX2RJYlmZP4DDtFy+GlEOXDSbgJDt9dpXI+DjOPJBXRrdIfSf397xVF14au5
+ YkQlIwvXuNIK2o+G9vsxHPCjT3VGo+L8MB15O+qTmXWoU+XVnkzcrbKRA7MJ0aZIDe5O
+ s3E5+yCaZnZsKzoFlyf2erSYmVzpTckpumLcJ/3mR+wJgCzobjWBCaTmF+kBFRee7aDD
+ CCaB6tOMw3D3GEq6G7PnmsrFzctdY2vHE+H8MBym7vsVuZ86Ho++WrqILz3PZGRE2Wah
+ 46G3gcKcMB+7wYCNbibylhYjDhOYxUwutG+5CliuFF9SZ2rBEpZ/e7V5+EPhjoimHcXr
+ i7OA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734620722; x=1735225522;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=INYfd3xnscDqhRUhGTGLJ/Tfjy7gPKKLQKYjPJL1JCE=;
+ b=wOHjmAteZvVoF1OY6IUpqgzgmPMOFeOcgVru4xxFd66YVFNfnQWp7cmx0P7zZOla3i
+ TrcdJRVEP0dfXE2kf2/rEisDNaLUzr6R+/WFCDulq0qExRYlWvja8HdGGeYsx97w1Fsg
+ akTcSIZclXv0crXP/1OYYlzs4nQVtWtGcgJoOZ0RyCAFL5UghIAklwSzuw/DX4Mxy743
+ ylS5HXVlAs87TSSaxmX4dT8D8F/NlLIIRg4TFUfMmzFhKjS8cTL7PkdgGMX7PU7zIGU7
+ MIz8PPEuOWLbrlGzh4/8Ojgg8x0JgGUH6VrXlXWu7W20TH95snIURcSSYrCM261nhS0d
+ 8lHA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYQZ9SQvDKMNqcKEGxzLP8F/f5WNhh0HhTZaDRmCaeY4V9gr0Dr4p2fPeF4inWUrbQnpM1+EA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz9qfIFVc4rklgqfeZzmy3HalVdOqUuSnUHnOS3uzcn+d1mDvQQ
+ 1uNT2gidGpwxt/vtuchLveQXNduPd62qlz6hlhgdJFlp9Gpx5w6THMr/hb1FK2fNlFpIoII5M8h
+ ePrfzdX947dyH+51WiqSGqbNmYjr0f1if5LCGuw==
+X-Gm-Gg: ASbGncv4lAUpfcEnCeY2SejJkT7YSbQ0Wlr/t/GiGhtKCkiZaoEj0+t+2jvNaaZMi8d
+ pw3d73fcpwuR6zOsEwOcQDSwD2QIWZIei86rdfKzFGky9Ubo6ROh8yIWgevaGzPISpqC6Hvo=
+X-Google-Smtp-Source: AGHT+IGmrROEF/nvrJ3SzXhneu+6hPMVNueGw36R3auEzXyKR4D4H2rhJSiUuf3ZeEHNMEFYilr/lA/w8PXu2u5bdmY=
+X-Received: by 2002:a17:90b:5484:b0:2ea:853b:2761 with SMTP id
+ 98e67ed59e1d1-2f2e93865f6mr10883985a91.37.1734620722399; Thu, 19 Dec 2024
+ 07:05:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241219-extlinux-relocate-dtb-when-dtbo-v1-1-fe5eeb8fd4f1@cherry.de>
-X-B4-Tracking: v=1; b=H4sIAMw1ZGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxNDI0NL3dSKkpzMvNIK3aLUnPzkxJJU3ZSSJN3yjNQ8ECNf1yTZ3NTYLM3
- CwiDJSAloSkFRalpmBdiGaKUgN2el2NpaAKeBiep2AAAA
-X-Change-ID: 20241219-extlinux-relocate-dtb-when-dtbo-4c7536f880b2
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marex@denx.de>, Heiko Stuebner <heiko@sntech.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+References: <20241219130554.49825-1-philippe.reynes@softathome.com>
+ <20241219130554.49825-7-philippe.reynes@softathome.com>
+In-Reply-To: <20241219130554.49825-7-philippe.reynes@softathome.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 19 Dec 2024 10:05:10 -0500
+Message-ID: <CAEfUkUJ+Bw2VjcSYMdHj-mciwhDid5bmeeOzTf5y=iekAoTC5w@mail.gmail.com>
+Subject: Re: [PATCH v7 6/9] test: lib: add test for sha256_hmac
+To: Philippe Reynes <philippe.reynes@softathome.com>
+Cc: sjg+nodisclaimer@chromium.org, raymond.mao+nodisclaimer@linaro.org, 
+ u-boot+nodisclaimer@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,72 +92,339 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Philippe,
 
-A FIT image which is NOT using -E when created by mkimage - that is with
-image data within the FIT - will fail to apply FDTO if the base FDT
-image node does not specify a load property (which points to an address
-in DRAM). This is because we check that the FDT address we want to apply
-overlay to (i.e. modify and likely increase in size) is not inside the
-FIT and give up otherwise. This is assumed necessary because we may then
-overwrite other data when applying in-place.
+On Thu, 19 Dec 2024 at 08:05, Philippe Reynes <
+philippe.reynes@softathome.com> wrote:
 
-However, we can do better than giving up: relocating the FDT in another
-place in DRAM where it's safe to increase its size and apply FDTOs.
+> Adds a test for the function sha256_hmac
+>
+> Signed-off-by: Philippe Reynes <philippe.reynes@softathome.com>
+> ---
+>  test/lib/Makefile           |   1 +
+>  test/lib/test_sha256_hmac.c | 294 ++++++++++++++++++++++++++++++++++++
+>  2 files changed, 295 insertions(+)
+>  create mode 100644 test/lib/test_sha256_hmac.c
+>
+> diff --git a/test/lib/Makefile b/test/lib/Makefile
+> index f516d001747..4c0abcba81a 100644
+> --- a/test/lib/Makefile
+> +++ b/test/lib/Makefile
+> @@ -24,6 +24,7 @@ obj-$(CONFIG_ERRNO_STR) += test_errno_str.o
+>  obj-$(CONFIG_UT_LIB_ASN1) += asn1.o
+>  obj-$(CONFIG_UT_LIB_RSA) += rsa.o
+>  obj-$(CONFIG_AES) += test_aes.o
+> +obj-$(CONFIG_SHA256) += test_sha256_hmac.o
+>  obj-$(CONFIG_GETOPT) += getopt.o
+>  obj-$(CONFIG_CRC8) += test_crc8.o
+>  obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
+> diff --git a/test/lib/test_sha256_hmac.c b/test/lib/test_sha256_hmac.c
+> new file mode 100644
+> index 00000000000..5279dd78e0f
+> --- /dev/null
+> +++ b/test/lib/test_sha256_hmac.c
+> @@ -0,0 +1,294 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2024 Philippe Reynes <philippe.reynes@softathome.com>
+> + *
+> + * Unit tests for sha256_hmac functions
+> + */
+> +
+> +#include <command.h>
+> +#include <test/lib.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +#include <u-boot/sha256.h>
+> +
+> +struct test_sha256_hmac_s {
+> +       const unsigned char *key;
+> +       int keylen;
+> +       const unsigned char *input;
+> +       int ilen;
+> +       const unsigned char *expected;
+> +       int elen;
+> +};
+> +
+> +/*
+> + * data comes from:
+> + * https://datatracker.ietf.org/doc/html/rfc4231
+> + */
+> +static unsigned char key_test1[] = {
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b,
+> +       0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b, 0x0b };
+> +
+> +static unsigned char input_test1[] = {
+> +       0x48, 0x69, 0x20, 0x54, 0x68, 0x65, 0x72, 0x65 };
+> +
+> +static unsigned char expected_test1[] = {
+> +       0xb0, 0x34, 0x4c, 0x61, 0xd8, 0xdb, 0x38, 0x53,
+> +       0x5c, 0xa8, 0xaf, 0xce, 0xaf, 0x0b, 0xf1, 0x2b,
+> +       0x88, 0x1d, 0xc2, 0x00, 0xc9, 0x83, 0x3d, 0xa7,
+> +       0x26, 0xe9, 0x37, 0x6c, 0x2e, 0x32, 0xcf, 0xf7 };
+> +
+> +static unsigned char key_test2[] = { 0x4a, 0x65, 0x66, 0x65 };
+> +
+> +static unsigned char input_test2[] = {
+> +       0x77, 0x68, 0x61, 0x74, 0x20, 0x64, 0x6f, 0x20,
+> +       0x79, 0x61, 0x20, 0x77, 0x61, 0x6e, 0x74, 0x20,
+> +       0x66, 0x6f, 0x72, 0x20, 0x6e, 0x6f, 0x74, 0x68,
+> +       0x69, 0x6e, 0x67, 0x3f };
+> +
+> +static unsigned char expected_test2[] = {
+> +       0x5b, 0xdc, 0xc1, 0x46, 0xbf, 0x60, 0x75, 0x4e,
+> +       0x6a, 0x04, 0x24, 0x26, 0x08, 0x95, 0x75, 0xc7,
+> +       0x5a, 0x00, 0x3f, 0x08, 0x9d, 0x27, 0x39, 0x83,
+> +       0x9d, 0xec, 0x58, 0xb9, 0x64, 0xec, 0x38, 0x43 };
+> +
+> +static unsigned char key_test3[] = {
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa };
+> +
+> +static unsigned char input_test3[] = {
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd, 0xdd,
+> +       0xdd, 0xdd };
+> +
+> +static unsigned char expected_test3[] = {
+> +       0x77, 0x3e, 0xa9, 0x1e, 0x36, 0x80, 0x0e, 0x46,
+> +       0x85, 0x4d, 0xb8, 0xeb, 0xd0, 0x91, 0x81, 0xa7,
+> +       0x29, 0x59, 0x09, 0x8b, 0x3e, 0xf8, 0xc1, 0x22,
+> +       0xd9, 0x63, 0x55, 0x14, 0xce, 0xd5, 0x65, 0xfe };
+> +
+> +static unsigned char key_test4[] = {
+> +       0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+> +       0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
+> +       0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
+> +       0x19,
+> +};
+> +
+> +static unsigned char input_test4[] = {
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd, 0xcd,
+> +       0xcd, 0xcd,
+> +};
+> +
+> +static unsigned char expected_test4[] = {
+> +       0x82, 0x55, 0x8a, 0x38, 0x9a, 0x44, 0x3c, 0x0e,
+> +       0xa4, 0xcc, 0x81, 0x98, 0x99, 0xf2, 0x08, 0x3a,
+> +       0x85, 0xf0, 0xfa, 0xa3, 0xe5, 0x78, 0xf8, 0x07,
+> +       0x7a, 0x2e, 0x3f, 0xf4, 0x67, 0x29, 0x66, 0x5b,
+> +};
+> +
+> +static unsigned char key_test5[] = {
+> +       0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
+> +       0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
+> +       0x0c, 0x0c, 0x0c, 0x0c,
+> +};
+> +
+> +static unsigned char input_test5[] = {
+> +       0x54, 0x65, 0x73, 0x74, 0x20, 0x57, 0x69, 0x74,
+> +       0x68, 0x20, 0x54, 0x72, 0x75, 0x6e, 0x63, 0x61,
+> +       0x74, 0x69, 0x6f, 0x6e,
+> +};
+> +
+> +static unsigned char expected_test5[] = {
+> +       0xa3, 0xb6, 0x16, 0x74, 0x73, 0x10, 0x0e, 0xe0,
+> +       0x6e, 0x0c, 0x79, 0x6c, 0x29, 0x55, 0x55, 0x2b,
+> +};
+> +
+> +static unsigned char key_test6[] = {
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa };
+> +
+> +static unsigned char input_test6[] = {
+> +       0x54, 0x65, 0x73, 0x74, 0x20, 0x55, 0x73, 0x69,
+> +       0x6e, 0x67, 0x20, 0x4c, 0x61, 0x72, 0x67, 0x65,
+> +       0x72, 0x20, 0x54, 0x68, 0x61, 0x6e, 0x20, 0x42,
+> +       0x6c, 0x6f, 0x63, 0x6b, 0x2d, 0x53, 0x69, 0x7a,
+> +       0x65, 0x20, 0x4b, 0x65, 0x79, 0x20, 0x2d, 0x20,
+> +       0x48, 0x61, 0x73, 0x68, 0x20, 0x4b, 0x65, 0x79,
+> +       0x20, 0x46, 0x69, 0x72, 0x73, 0x74 };
+> +
+> +static unsigned char expected_test6[] = {
+> +       0x60, 0xe4, 0x31, 0x59, 0x1e, 0xe0, 0xb6, 0x7f,
+> +       0x0d, 0x8a, 0x26, 0xaa, 0xcb, 0xf5, 0xb7, 0x7f,
+> +       0x8e, 0x0b, 0xc6, 0x21, 0x37, 0x28, 0xc5, 0x14,
+> +       0x05, 0x46, 0x04, 0x0f, 0x0e, 0xe3, 0x7f, 0x54 };
+> +
+> +static unsigned char key_test7[] = {
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa,
+> +       0xaa, 0xaa, 0xaa,
+> +};
+> +
+> +static unsigned char input_test7[] = {
+> +       0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20,
+> +       0x61, 0x20, 0x74, 0x65, 0x73, 0x74, 0x20, 0x75,
+> +       0x73, 0x69, 0x6e, 0x67, 0x20, 0x61, 0x20, 0x6c,
+> +       0x61, 0x72, 0x67, 0x65, 0x72, 0x20, 0x74, 0x68,
+> +       0x61, 0x6e, 0x20, 0x62, 0x6c, 0x6f, 0x63, 0x6b,
+> +       0x2d, 0x73, 0x69, 0x7a, 0x65, 0x20, 0x6b, 0x65,
+> +       0x79, 0x20, 0x61, 0x6e, 0x64, 0x20, 0x61, 0x20,
+> +       0x6c, 0x61, 0x72, 0x67, 0x65, 0x72, 0x20, 0x74,
+> +       0x68, 0x61, 0x6e, 0x20, 0x62, 0x6c, 0x6f, 0x63,
+> +       0x6b, 0x2d, 0x73, 0x69, 0x7a, 0x65, 0x20, 0x64,
+> +       0x61, 0x74, 0x61, 0x2e, 0x20, 0x54, 0x68, 0x65,
+> +       0x20, 0x6b, 0x65, 0x79, 0x20, 0x6e, 0x65, 0x65,
+> +       0x64, 0x73, 0x20, 0x74, 0x6f, 0x20, 0x62, 0x65,
+> +       0x20, 0x68, 0x61, 0x73, 0x68, 0x65, 0x64, 0x20,
+> +       0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x20, 0x62,
+> +       0x65, 0x69, 0x6e, 0x67, 0x20, 0x75, 0x73, 0x65,
+> +       0x64, 0x20, 0x62, 0x79, 0x20, 0x74, 0x68, 0x65,
+> +       0x20, 0x48, 0x4d, 0x41, 0x43, 0x20, 0x61, 0x6c,
+> +       0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x2e,
+> +};
+> +
+> +static unsigned char expected_test7[] = {
+> +       0x9b, 0x09, 0xff, 0xa7, 0x1b, 0x94, 0x2f, 0xcb,
+> +       0x27, 0x63, 0x5f, 0xbc, 0xd5, 0xb0, 0xe9, 0x44,
+> +       0xbf, 0xdc, 0x63, 0x64, 0x4f, 0x07, 0x13, 0x93,
+> +       0x8a, 0x7f, 0x51, 0x53, 0x5c, 0x3a, 0x35, 0xe2,
+> +};
+> +
+> +static struct test_sha256_hmac_s test_sha256_hmac[] = {
+> +       {
+> +               .key = key_test1,
+> +               .keylen = sizeof(key_test1),
+> +               .input = input_test1,
+> +               .ilen = sizeof(input_test1),
+> +               .expected = expected_test1,
+> +               .elen = sizeof(expected_test1),
+> +       },
+> +       {
+> +               .key = key_test2,
+> +               .keylen = sizeof(key_test2),
+> +               .input = input_test2,
+> +               .ilen = sizeof(input_test2),
+> +               .expected = expected_test2,
+> +               .elen = sizeof(expected_test2),
+> +       },
+> +       {
+> +               .key = key_test3,
+> +               .keylen = sizeof(key_test3),
+> +               .input = input_test3,
+> +               .ilen = sizeof(input_test3),
+> +               .expected = expected_test3,
+> +               .elen = sizeof(expected_test3),
+> +       },
+> +       {
+> +               .key = key_test4,
+> +               .keylen = sizeof(key_test4),
+> +               .input = input_test4,
+> +               .ilen = sizeof(input_test4),
+> +               .expected = expected_test4,
+> +               .elen = sizeof(expected_test4),
+> +       },
+> +       {
+> +               .key = key_test5,
+> +               .keylen = sizeof(key_test5),
+> +               .input = input_test5,
+> +               .ilen = sizeof(input_test5),
+> +               .expected = expected_test5,
+> +               .elen = sizeof(expected_test5),
+> +       },
+> +       {
+> +               .key = key_test6,
+> +               .keylen = sizeof(key_test6),
+> +               .input = input_test6,
+> +               .ilen = sizeof(input_test6),
+> +               .expected = expected_test6,
+> +               .elen = sizeof(expected_test6),
+> +       },
+> +       {
+> +               .key = key_test7,
+> +               .keylen = sizeof(key_test7),
+> +               .input = input_test7,
+> +               .ilen = sizeof(input_test7),
+> +               .expected = expected_test7,
+> +               .elen = sizeof(expected_test7),
+> +       },
+> +};
+> +
+> +static int _lib_test_sha256_hmac_run(struct unit_test_state *uts,
+> +                                    const unsigned char *key, int keylen,
+> +                                    const unsigned char *input, int ilen,
+> +                                    const unsigned char *expected, int
+> elen)
+> +{
+> +       unsigned char output[SHA256_SUM_LEN];
+> +       int ret;
+> +
+> +       ut_assert(elen <= sizeof(output));
+> +       ret = sha256_hmac(key, keylen, input, ilen, output);
+> +       ut_assert(!ret);
+> +       ut_asserteq_mem(expected, output, elen);
+> +
+> +       return 0;
+> +}
+> +
+> +static int lib_test_sha256_hmac_run(struct unit_test_state *uts,
+> +                                   struct test_sha256_hmac_s *test)
+> +{
+> +       return _lib_test_sha256_hmac_run(uts, test->key, test->keylen,
+> +                                        test->input, test->ilen,
+> +                                        test->expected, test->elen);
+> +}
+> +
+> +static int lib_test_sha256_hmac(struct unit_test_state *uts)
+> +{
+> +       int i, ret = 0;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(test_sha256_hmac); i++) {
+> +               ret = lib_test_sha256_hmac_run(uts, &test_sha256_hmac[i]);
+> +               if (ret)
+> +                       return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +LIB_TEST(lib_test_sha256_hmac, 0);
+> --
+> 2.25.1
+>
+>
+Sounds good to me.
+Reviewed-by: Raymond Mao <raymond.mao@linaro.org>
 
-Suggested-by: Marek Vasut <marex@denx.de>
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
-Tested with extlinux with:
-- conf node with multiple fdt entries
-- conf node with base fdt + conf node with fdto (stored in fdt property)
-- FDT image node with load property (behavior unchanged)
-- FDT image node without load property
-
-I'll be frank, I don't really know what I'm doing here and I'm on
-holidays for a month in a few hours, so take this with a bigger grain of
-salt than usual (hence the RFC). It works (tm) for now.
-
-Cc: Heiko Stuebner <heiko@sntech.de>
----
- boot/image-fit.c | 17 +++++++++++------
- 1 file changed, 11 insertions(+), 6 deletions(-)
-
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 7d56f0b5e6ed39a75e029b09dc95d605835c0f91..088482c4d5d2e194cce66f10b0acd9e586f826b2 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2392,13 +2392,18 @@ int boot_get_fdt_fit(struct bootm_headers *images, ulong addr,
- 	image_end = addr + fit_get_size(fit);
- 	/* verify that relocation took place by load address not being in fit */
- 	if (load >= image_start && load < image_end) {
--		/* check is simplified; fit load checks for overlaps */
--		printf("Overlayed FDT requires relocation\n");
--		fdt_noffset = -EBADF;
--		goto out;
--	}
-+		/* Cannot overlay an FDT stored inside the fitImage, so let's relocate */
-+		char *of_flat_tree = map_sysmem(load, len);
- 
--	base = map_sysmem(load, len);
-+		len = ALIGN(fdt_totalsize(load), SZ_4K);
-+		if (boot_relocate_fdt(&of_flat_tree, &len)) {
-+			printf("Required FDT relocation for applying overlays failed...");
-+			fdt_noffset = -EBADF;
-+			goto out;
-+		}
-+
-+		load = (ulong)of_flat_tree;
-+	}
- 
- 	/* apply extra configs in FIT first, followed by args */
- 	for (i = 1; ; i++) {
-
----
-base-commit: 69bd83568c57813cd23bc2d100c066a17e7e349d
-change-id: 20241219-extlinux-relocate-dtb-when-dtbo-4c7536f880b2
-
-Best regards,
--- 
-Quentin Schulz <quentin.schulz@cherry.de>
-
+Regards,
+Raymond
