@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76826E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 13:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0270E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 13:57:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DE938021D;
-	Thu, 19 Dec 2024 14:53:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 295EC8021D;
+	Thu, 19 Dec 2024 14:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dpDwMGq7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QlZPOel0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 555778022B; Thu, 19 Dec 2024 14:53:48 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 759B28022B; Thu, 19 Dec 2024 14:57:12 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B279801F5
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 14:53:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB1CB801F5
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 14:57:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-46783d44db0so6749291cf.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 05:53:45 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6d8fa32d3d6so10481166d6.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 05:57:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734616424; x=1735221224; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734616629; x=1735221429; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/IfbRygg2fjnVKmkkZzHfW284woAvVyRliRGC190DL8=;
- b=dpDwMGq79cNwEEy7xJ3v1gddh6CLIwgdPwPsXehKRmU3D60zq/C3CCWEs1dZZdMb2a
- OEw6WEQ5b3dqsDt3hlnVVrSzJ3i2xzly9310UIzG436C6R9eA3dFqZXfDjHRuU+myGvb
- GjbCpZC16GQiYXIG714nXHsSphTQXnhQYHBaU=
+ bh=PxDtbX7ejZ2TBZtruKo3o1YgaoebbTFK/bBhQZdNtgY=;
+ b=QlZPOel0dPzGWGl80eQa3YjaEGE9nZhScxI8R2HvQvkCnKJCTZeUsMOOSir8sY9MFP
+ UP6I21HMB9tyPj6g7FlROVfWrgFcAyNAE9Y2k6wJyaE3b3fDRk3M5M5/yL10iA7r5yiU
+ 9mogRtKcfGGD/YV/nvonfYHlgISc5PgZX/DEk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734616424; x=1735221224;
+ d=1e100.net; s=20230601; t=1734616629; x=1735221429;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/IfbRygg2fjnVKmkkZzHfW284woAvVyRliRGC190DL8=;
- b=h1/hcGdb+wXo1cqotBo19fC7Mno//igQWpvYow5UnsBhnXgPWosn/9DQYtPA6rjQj2
- rtJ+w2l/DvOyiiG5Zu/vHBoAkQfFTiXjBnBJoSpICPETtpZuC/TClCXIF0mSl7lx8jkw
- 5plDnMgZINBQM2nJ+o1M1ixHr5ne7ro4wUibH0dWv21ssQqYCzDaz7msx98dO0X68gUz
- JNCWqfL5GLh1sfMFbg28vYBDhXOLuScfmqyR1toUMRgYr2vMHMBgMukWw1PO2/KMMW8E
- U0rEp/A6kxYBNGbx03XV3ugSy9sz7tSqPG5adiE/a5HStXTMyr4qmJGqv+NixBBQvumw
- 3oog==
-X-Gm-Message-State: AOJu0YyUtMUd5YhUGbc1517U+a+NSuk0zEHE2GgvBv3OixmBSOazJyes
- 3IXvgs0w5x48KqAJW09Y2Yut0HBz/B5U+jauJzbeFI0usDLiJcYw7UDw1ps2vs4=
-X-Gm-Gg: ASbGncv1osWvZvsFP9fgE0MDOJ/QqWLXyDBY9R0bP24xptkhFTM9XW54lLlYaRFFN7q
- HvIEg7VCWTM4RynMPRp6x0x7WFXe5gNnYNTsXYMrZ/XN/UqoY8U/ucBrlTbVr6QzSGWiN1OVo7v
- ZdsRlPfynDP2Tr6nwv8+nZ/c7xOftjtEluQjTfb6UiYFnD78/Ov6OJssg73/XtdelTP4zWacL9Z
- ju/Y4pe3ZqiNiv82Mez/uWb6mhB+6IK5+VyTw/leYwACWELRUNTtLyt
-X-Google-Smtp-Source: AGHT+IFJx5wyK1RldQmKw8h3LZRl+oRSHsql1ICfYr4LE0D8vv9jHRILURuF+tfKEUcpx4n1WILu4A==
-X-Received: by 2002:a05:622a:11d5:b0:467:597a:be50 with SMTP id
- d75a77b69052e-46908dbe390mr145430971cf.4.1734616424389; 
- Thu, 19 Dec 2024 05:53:44 -0800 (PST)
+ bh=PxDtbX7ejZ2TBZtruKo3o1YgaoebbTFK/bBhQZdNtgY=;
+ b=uXgQ9JTd8aYVf8J+7BsIPywWBpEeaci6BeBm4u66wCona6WaEZZsEOvpxKxmxON7Bt
+ l4KiLbZ8HXneIwLc8tdm2WkEYZ7TOpy4JK5oq/5bAbeANddk4ta3ea9AaHfQIs4YlANK
+ rMlw4deooN8YpqyE0DALmmbKDWPPio+IXASKhqg6BzOBaOdiW/YhL2E7yuFJX8GPlsBf
+ nj3roVtjwOC4HZkBtKsDbgaWz9313JR8FpSiO5HhgJXXlz8i548IGJy5vgvuYaJ/qCOL
+ AQbS7LlmiqYuZi6o4fxVn85EtWSzyO3k7CRB4T2pnjmzDSkU0au5r6o0NctVEMNMx9r6
+ /lyQ==
+X-Gm-Message-State: AOJu0Ywh00UWn/KZyqtcPKKGA8vceQ1kFt4PUZvmPQ/w7vqPwtnSdnQi
+ EzJmIbHjwZ+lVaJ5zboWDeO5p5rlxjt8hoya7H4bRLdkJ95IetbPdFgolwkLpqA=
+X-Gm-Gg: ASbGncsakYL1Wur2wOuDJl7/ZAcGZCq9zhzU1tTR6TsSg76vQHQSn+q/NhDxBTvDGvQ
+ UUo/aGudoBVR9ru6rqze+TM57Bstxl3JxH4DPIQ0aZL9b8AGtwlqrT2tYLicgle0WBfPDDxSd5k
+ HgQmA2/semucuaRRNcZIeQO5pO1XMhem1oMse8K9X77SQXQ59MUdp9vBvj/CW0C0HXFlHMETm9C
+ PmlR6xzQMOdxxEtvcBA4iCtOGH2dnZfeKBHkKfoIQiPVQXrDDPVNCWL
+X-Google-Smtp-Source: AGHT+IHcW9VcG2UkNtwYRNfdFngc5xtfMEdWwA4yHh4GTsNTQ/+tUNfWvnsNG5G7ZI/edTEk76rsqQ==
+X-Received: by 2002:ad4:5cef:0:b0:6d8:a7f7:c3a5 with SMTP id
+ 6a1803df08f44-6dd14c7525cmr52146876d6.44.1734616628706; 
+ Thu, 19 Dec 2024 05:57:08 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3e67e23asm6208791cf.22.2024.12.19.05.53.42
+ 6a1803df08f44-6dd1810cf86sm6729076d6.29.2024.12.19.05.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 05:53:43 -0800 (PST)
-Date: Thu, 19 Dec 2024 07:53:39 -0600
+ Thu, 19 Dec 2024 05:57:07 -0800 (PST)
+Date: Thu, 19 Dec 2024 07:57:04 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, sjg@chromium.org,
- jens.wiklander@linaro.org, ilias.apalodimas@linaro.org,
- xypron.glpk@gmx.de, jerome.forissier@linaro.org,
- mkorpershoek@baylibre.com, akashi.tkhro@gmail.com,
- francis.laniel@amarulasolutions.com, ddrokosov@salutedevices.com,
- git@amd.com
-Subject: Re: [PATCH v6 0/2] cmd: Add support for optee commands.
-Message-ID: <20241219135339.GR1505244@bill-the-cat>
-References: <20241219043918.1646095-1-venkatesh.abbarapu@amd.com>
+To: "Paul HENRYS (EXT)" <paul.henrys_ext@softathome.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "paul.henrysd+nodisclaimer@gmail.com" <paul.henrysd+nodisclaimer@gmail.com>,
+ "sjg@chromium.org" <sjg@chromium.org>
+Subject: Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data
+ encrypted by mkimage
+Message-ID: <20241219135704.GS1505244@bill-the-cat>
+References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
+ <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
+ <20241219005119.GA3555833@bill-the-cat>
+ <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WHdaro7Yv2ttDAha"
+ protocol="application/pgp-signature"; boundary="Te2AqcgdM8eQt8la"
 Content-Disposition: inline
-In-Reply-To: <20241219043918.1646095-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,46 +100,170 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WHdaro7Yv2ttDAha
-Content-Type: text/plain; charset=us-ascii
+--Te2AqcgdM8eQt8la
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 19, 2024 at 10:09:16AM +0530, Venkatesh Yadav Abbarapu wrote:
+On Thu, Dec 19, 2024 at 09:51:16AM +0000, Paul HENRYS (EXT) wrote:
 
-> Add the basic 'hello world ta' command which increments the value passed.
-> This provides easy test for establishing a session with OP-TEE TA and ver=
-ify.
+> Hello Tom,
 >=20
-> It includes following subcommands:
-> optee hello
-> optee hello <value>; value to increment via OP-TEE HELLO WORLD TA.
+> The issue comes from the key that is reported missing (or zero size):
+>=20
+> ValueError: Error 1 running 'mkimage -t -k /tmp/binmant.nvd038o5/keys -F =
+/tmp/binman.is3n51x5/fit.fit': File /tmp/binmant.nvd038o5/keys/aes256.bin d=
+on't have the expected size (size=3D0, expected=3D32)
+>=20
+> The issue is that the "binary" file fails to be provided in patchwork. I =
+send the following mail about this on 05/08/24:
+>=20
 
-Neat. Since we have the ability to do something like qemu+TF-A+OP-TEE in
-CI, we should have a test written for this now, so it can be run when
-someone has the time to add it to CI. And we also run on real HW that
-uses TF-A + OP-TEE, so we can run the test on those platforms now (or,
-as soon as I update OP-TEE if needed). Thanks!
+I will try again. But please note that "lore.kernel.org" also is missing
+things, seemingly, because I started this out with b4 grabbing the
+patches there, and then tried patchwork which did give me
+tools/binman/test/aes256.bin but not the key file (and was a bit tricky
+because of .gitignore). Thanks for explaining.
+
+> > Hi Simon,
+> >=20
+> > Sorry for the late reply as I missed your message blocked in quarantine.
+> > It looks like when I push a patch with binary data, patchworks does not=
+ seem to get it right. Nonetheless, using git send-email, a copy is also se=
+nt to me and I do get the patch right.
+> > I put you in CC this time so you should also have received a copy of th=
+e patches. Could you take a look you get the patch "[v2,3/3] tools: binman:=
+ Add tests for FIT with data encrypted by mkimage" with the binary data?
+> >=20
+> > The end of the patch with the binary data should be as such:
+> >=20
+> > diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/aes256.bi=
+n                                                                          =
+                       =20
+> > new file mode 100644                                                   =
+                                                                           =
+                       =20
+> > index 0000000000000000000000000000000000000000..09b8bf6254ada5c084039f3=
+2916bc7d30233bb2c                                                          =
+                       =20
+> > GIT binary patch                                                       =
+                                                                           =
+                       =20
+> > literal 32                                                             =
+                                                                           =
+                       =20
+> > ncmXpsGBz<aGq<obNK8sjNli=3D7$jr*l$<50zC@d;2DJ=3Ds4pC}7U                =
+                                                                           =
+                           =20
+> >                                                                        =
+                                                                           =
+                       =20
+> > literal 0                                                              =
+                                                                           =
+                       =20
+> > HcmV?d00001
+> >=20
+> >=20
+> > FYI, I also added the requested changes.
+> >=20
+> > Best regards,
+> > Paul
+>=20
+> Best regards,
+> Paul
+>=20
+> ________________________________________
+> From:=A0Tom Rini
+> Sent:=A0Thursday, December 19, 2024 01:51
+> To:=A0Paul HENRYS (EXT)
+> Cc:=A0u-boot@lists.denx.de; paul.henrysd+nodisclaimer@gmail.com; sjg@chro=
+mium.org; al.kochet@gmail.com
+> Subject:=A0Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data =
+encrypted by mkimage
+>=20
+>=20
+> On Mon, Nov 25, 2024 at 06:47:17PM +0100, Paul HENRYS wrote:
+>=20
+>=20
+>=20
+> > Test the property 'fit,encrypt' to encrypt FIT data.
+>=20
+> >
+>=20
+> > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+>=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> > ---
+>=20
+> > Changes for v4:
+>=20
+> > - Update the tests to use 'fit,encrypt'
+>=20
+> >
+>=20
+> >=A0 tools/binman/ftest.py=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 45 +++++++++++++++
+>=20
+> >=A0 tools/binman/test/343_fit_encrypt_data.dts=A0=A0=A0 |=A0 53 ++++++++=
+++++++++++
+>=20
+> >=A0 .../test/344_fit_encrypt_data_no_key.dts=A0=A0=A0=A0=A0 |=A0 53 ++++=
+++++++++++++++
+>=20
+> >=A0 tools/binman/test/aes256.bin=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 | Bin 0 -> 32 bytes
+>=20
+> >=A0 4 files changed, 151 insertions(+)
+>=20
+> >=A0 create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
+>=20
+> >=A0 create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
+>=20
+> >=A0 create mode 100644 tools/binman/test/aes256.bin
+>=20
+>=20
+>=20
+> This fails in CI:
+>=20
+> https://source.denx.de/u-boot/u-boot/-/jobs/980030
+>=20
+> or
+>=20
+> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10169&view=
+=3Dlogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a39-ad9=
+2-0220c9b8101a&l=3D300
+>=20
+> Please see https://docs.u-boot.org/en/latest/develop/ci_testing.html=A0for
+>=20
+> how to trigger Azure yourself to resolve these, thanks!
+>=20
+>=20
+>=20
+> --
+>=20
+> Tom
+>=20
 
 --=20
 Tom
 
---WHdaro7Yv2ttDAha
+--Te2AqcgdM8eQt8la
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkJVcACgkQFHw5/5Y0
-tyxazwv/WE78R6WgTA1E0Ar39x7pEuHNelBx+pWwViVWcl7U+k9x6e2iuIsor+fi
-ntWmFGHKbbOYsNyxWjPbiuSdo0aquX4vWPtrEnBBQOCD+JKzgb2sZlPC8fEEOjKY
-ZPTHr5xqbiHu0JBmk8AAkjQ4i1dO5kEqUzM27vK7FsBh9lIm6A1/AsnrzMgWs3NZ
-lZNIISsLCeNTq+vrXF7BGYrhYLn4HuWwlZEHOGON0lP4JMy6o8yhI3YXs73w5taJ
-iU582GBi7twLjIBoA6RRPRnRdNAn5IXru/C14HmJKslNhK1RWwI0s2J1cTeI2oa1
-uMIQ560/VYKmsUQ2EjSdEvtQoPB1G9tCjq4aTX2wpAwZq3xvZlGcyMNjHxL2sHL1
-FtPFNf5b6oOF1j6W/KVsGg11tc0LQan6T87g06MGnh0cca2p+UrlSQt/uYGzNxiE
-HTr9sV7MN1Qj2yccswVBoCeuqGJbFPdZOSKKvm2vpSZNEIkxt6Qb+9zgWdQf/vFZ
-V7M9HJh3
-=p95f
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkJjAACgkQFHw5/5Y0
+tyxA0wv/UYd9tRXmJxP6XsmW+oiI5jSaeos2P0kGWztg8CFRQ71DPWnUajouC/vP
+F2xLBiUwr2f13oQK3Jn0eIhPHLLkrfVwHnzDgLGdsFZciTewFSbX2/JDZILXNRnJ
+i0MdH6X/vzz6EWwumPvJ0TUry8ImOWJYfNyYxdskHwQy8qrGhcbtOVpOxCY2ccWr
+n6A/D2dZV8PFdxoyiKh9Q6pqS0qza/5aKtfiEFLscBEgo1t8adT3squK324SusJq
+2EbqjE5flOsb8sviZNKVqCRpmfzHwtkgfWAa7pDaWzRTBF52DKjMOe0LDYWbBYZJ
+dP/N/tnCI40TAcULHyAPagJGesaU/+RJHBUq3sl0l1QCH0RqUzhY0s9qbVU0lYjV
+TAnT0J7tE3eKkwP7Pkj9BlsUMrb1XOJld3TVTY8vRW1j4pH3r4F8roFdL/3Thh9m
+ReYVdmhSLmpDY6iS3/N0FeVfppZggCPSKbiMTxs1em+6aF1ZoVpq1ubU6TD502zL
+Da/q1Qhp
+=O7u3
 -----END PGP SIGNATURE-----
 
---WHdaro7Yv2ttDAha--
+--Te2AqcgdM8eQt8la--
