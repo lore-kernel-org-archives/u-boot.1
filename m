@@ -4,92 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7948E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 17:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A734DE77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 17:21:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 212F980196;
-	Thu, 19 Dec 2024 18:01:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B860380196;
+	Thu, 19 Dec 2024 18:21:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m79n1C5w";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HfZpiClA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 948108021A; Thu, 19 Dec 2024 18:01:03 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 486948021A; Thu, 19 Dec 2024 18:21:11 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F044B8007D
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 18:01:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC4638007D
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 18:21:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5f1dbf0d060so459093eaf.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 09:01:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734627659; x=1735232459; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UeyvAGqJzze+5suVVkXvhTdAlCNJZimWY4bNNKIjZrk=;
- b=m79n1C5wI+Oa779Xp83pBuP/gjbUyP0GJPNiWG2N06CZOEtFQ/aoFufAjlaMwQ56sb
- /ft7E8UsyryOlwUnHALzq0HY5Xg2R/XJ+3ywpnZHmAuDGWoRil/IjxLDgOV64Ier7IGN
- hvO2zV9nL3MDBjNFArgWV/0vfoFXogRPcsYz4=
+ spf=pass smtp.mailfrom=eballetb@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1734628867;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=6FJpcGweYRMYizJfEg8lUXGsVGoOy6sYsUs9urD/OBw=;
+ b=HfZpiClAJNF1GamxLlr/n6GVMKdkRHuBqsQM91eZ6Rkoix2Sy/4oazsQSQfupLjfSkmiF/
+ OZECILNVKMV8QF3o7HOQLQHKb26xV7FD1doJUN/7Ftn7LhcnRBC1Ni86A6jUtBwDXgKsGl
+ Dt9uiUPgVlvGOCvtF+lGs9j3U9UAF8s=
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com
+ [209.85.161.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-652-8q0V7eeUNN-V0sEzG0BXFg-1; Thu, 19 Dec 2024 12:21:06 -0500
+X-MC-Unique: 8q0V7eeUNN-V0sEzG0BXFg-1
+X-Mimecast-MFC-AGG-ID: 8q0V7eeUNN-V0sEzG0BXFg
+Received: by mail-oo1-f72.google.com with SMTP id
+ 006d021491bc7-5f31e3b6dacso64228eaf.3
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 09:21:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734627659; x=1735232459;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UeyvAGqJzze+5suVVkXvhTdAlCNJZimWY4bNNKIjZrk=;
- b=cKg3aSaZVgA9v5R2GWye+Eik4L3wZFnz2lRzD768qDGGNOzVsldovgXKWHnFVeaoje
- F+DPUgrkbDzD51x+nu1ygkabS0iqVoK++g+yVsAKTj3Bg09CmseIQ14YXGA1IYgh3Qw+
- 5CWYbwl5frrQorDqAwXqVcGnNtPr7jhalZEWZ40qL/gWpTkdkPu0o8TKTiOftaTZdQws
- HtAml9TCE1VJs00E0Yp+Evyj5YpIGTYd2TbSRhUU1slpwRb9BU/8tPOtS1tzRZ6aRYHQ
- p73Fpuqt2hce/+gomsM0zsO8ys+EAGK6DP6hLPdinvk8vEu0jw29Bw/+uDJfDlmRGSh1
- LVNQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8HzdKeydRQ5AfvABgEB1fMr7SpqxIhpNHRsRNNJiXbNPykO0XajETjFbh+Dk36hwN02ML9Lg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPM5u4RXJ4KFVVPUsw8yJHmIinkpTdjWx11BfvVTdKWm4RPh4o
- uHbijYCJuAfEbACMY7AfwYwh1hqVRHQG5oTEwRkF+0yXP+SiTxIHQXciw64li47R08xQBmittot
- 7
-X-Gm-Gg: ASbGncssfYJdMITkiUzqkIkNX7tCMKHnq1u9CB4Lz0UgusFTFYjbHa00VpQHzRUGIQJ
- FE7mbVvgJ3xRisNhsXcdmsoJN4rmrkt4d5CjlaY+9pNryVKlQnfHs9yDBQPTAi9BLwZBA//LUaZ
- 8owtndv1Krr31WCt/g1ex73yvLfB1n60ymgxwFaWZcW6RiUyFBUpsEczfNUBN7dMm6OrwK0ughb
- 8dMj/L23jR+RJew5QPKL9wFsIgjOHQdEtLGZBPmRja/5h9TvJ36udco
-X-Google-Smtp-Source: AGHT+IFSy05AZSmVFdQzTX1WdRhm7x1GYQ4trgdAQo2FQm8qjrJtVldxSFEmqGfbNJXqP+ZPZYHp1Q==
-X-Received: by 2002:a05:6102:3a0b:b0:4b1:16f8:efcb with SMTP id
- ada2fe7eead31-4b2cb29a77cmr362944137.17.1734627648820; 
- Thu, 19 Dec 2024 09:00:48 -0800 (PST)
-Received: from bill-the-cat ([187.144.29.192])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd1810ec55sm8215626d6.48.2024.12.19.09.00.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 09:00:48 -0800 (PST)
-Date: Thu, 19 Dec 2024 11:00:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, vigneshr@ti.com, bb@ti.com,
- lukma@denx.de, n-francis@ti.com, mkorpershoek@baylibre.com,
- afd@ti.com, glaroque@baylibre.com, sjoerd@collabora.com,
- martyn.welch@collabora.com, rasmus.villemoes@prevas.dk,
- caleb.connolly@linaro.org, j-humphreys@ti.com, nm@ti.com,
- u-boot@lists.denx.de, srk@ti.com
-Subject: Re: [PATCH v2 4/5] arm: dts: k3-am62p5-sk-u-boot: enable USB0 for
- USB DFU boot
-Message-ID: <20241219170044.GX1505244@bill-the-cat>
-References: <20241218124542.3519447-1-s-vadapalli@ti.com>
- <20241218124542.3519447-5-s-vadapalli@ti.com>
- <e4b23017-375e-4430-aef2-001c1b6402ca@kernel.org>
- <noztdv7z4cwzjwc5sgqvzli36ppm2tlgrpqjgxbkbtojs34jnp@3lhnfx6ol4in>
- <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
+ d=1e100.net; s=20230601; t=1734628866; x=1735233666;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6FJpcGweYRMYizJfEg8lUXGsVGoOy6sYsUs9urD/OBw=;
+ b=RIqTVLlKnsiBIfPzoUPbIu3B6eoS2EuG84Yk+YbaclSTZ6twPVY8sqScEUdIzersRE
+ nmBzfP4ln9JBUwFbTeS6rkK6+hrTlzuBEB3Hd3dLcMjwwwIj2bL+ztWq6YSnghKq/PEv
+ AwFaPotb5gY5fFjAP6Q0SnwuvLUEcAiNN6q4+W9g0YFdVFVpZ/74u9zDsLcHqKhJud9n
+ VyIY2D07JmuQubIxdRlPLRPN80xSWXTFf353L9dTqFzp/z5CxkWL4ZUygYasQ5ZEwKj6
+ o1lDzxrCfKey4cyqaxOn3oN/zg1OzpPA2UtW9kQDOkyMjfwkeTQI6LejhG21uZrAVVlz
+ rsMQ==
+X-Gm-Message-State: AOJu0Ywpdmqdl5DUX9UBr/k1/+tYp6rfCmqKblrW3v+NH1IwXdqw3gwa
+ cX44pSaNL/ysDGX1H7dMefp7D9xnboDRyVcpsWFjie3GkgQv/ZuxS5tk07xAvU9pM79fNXyAaLo
+ hvQLNyz+WUfT1n801E+FmC+B87ZssT/P53QO7FriSOch3OTbRxnn75ON9UrPVbnEUHfCV2keLI2
+ /QMZvjK0zx38IEeVoJMGGtaBIeQA==
+X-Gm-Gg: ASbGnctF0B1BGgZd6C/foLe0u5RdlgtDyf8Tr1mBKpPW8W0IYxQWTSYuOYMF8M3fI1s
+ mN2ZB8fOgP2VTwc1Tjo1HGSsx3mB1D6dJOzMA
+X-Received: by 2002:a05:6871:33a5:b0:296:9146:f455 with SMTP id
+ 586e51a60fabf-2a7b31361abmr1324761fac.7.1734628865766; 
+ Thu, 19 Dec 2024 09:21:05 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGKCI7JIWNDR8Kl9n54YWxI6xthEoTjMYCNZeoRWMcHPCD0uYx6nn/BlkaIP8ktxvRJb+t5w8GtSPYm2R2+Mtc=
+X-Received: by 2002:a05:6871:33a5:b0:296:9146:f455 with SMTP id
+ 586e51a60fabf-2a7b31361abmr1324754fac.7.1734628865427; Thu, 19 Dec 2024
+ 09:21:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tu7srQ7k/Co4aQ5B"
-Content-Disposition: inline
-In-Reply-To: <a0dd6878-5f26-47a0-8025-ba9d9d320a31@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20241219105303.6938-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241219105303.6938-1-marek.vasut+renesas@mailbox.org>
+From: Enric Balletbo i Serra <eballetb@redhat.com>
+Date: Thu, 19 Dec 2024 18:20:54 +0100
+Message-ID: <CALE0LRumNO8vOUA+bjpn6NA-S6vnQVWmqsp-ppD4U+Z_KrgSRw@mail.gmail.com>
+Subject: Re: [PATCH] net: rswitch: Add missing cache invalidate of TX
+ descriptor
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Cs66sy8Pr1GY7ZuRM5kAEa4zJTpyKTNQqE7kLwhzYW4_1734628866
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,104 +103,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---tu7srQ7k/Co4aQ5B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks Marek for fixing this.
 
-On Thu, Dec 19, 2024 at 11:41:10AM +0200, Roger Quadros wrote:
->=20
->=20
-> On 19/12/2024 07:50, Siddharth Vadapalli wrote:
-> > On Wed, Dec 18, 2024 at 04:05:47PM +0200, Roger Quadros wrote:
-> >=20
-> > Hello Roger,
-> >=20
-> >> Hi Siddharth,
-> >>
-> >> On 18/12/2024 14:45, Siddharth Vadapalli wrote:
-> >>> Enable USB0 instance of the USB controller for USB DFU boot functiona=
-lity
-> >>> which requires the "bootph-all" property in order to have USB enabled=
- at
-> >>> all stages of the USB DFU boot.
-> >>>
-> >>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> >>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> >>> ---
-> >>> v1:
-> >>> https://patchwork.ozlabs.org/project/uboot/patch/20241217131658.29207=
-99-5-s-vadapalli@ti.com/
-> >>> Changes since v1:
-> >>> - Collected Reviewed-by tag.
-> >>>
-> >>>  arch/arm/dts/k3-am62p5-sk-u-boot.dtsi | 10 ++++++++++
-> >>>  1 file changed, 10 insertions(+)
-> >>>
-> >>> diff --git a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi b/arch/arm/dts/k3-=
-am62p5-sk-u-boot.dtsi
-> >>> index cf087c6e343..c2091fc1a51 100644
-> >>> --- a/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-> >>> +++ b/arch/arm/dts/k3-am62p5-sk-u-boot.dtsi
-> >>> @@ -16,3 +16,13 @@
-> >>>  &dmsc {
-> >>>  	bootph-pre-ram;
-> >>>  };
-> >>> +
-> >>> +/* Required for USB DFU boot */
-> >>> +&usbss0 {
-> >>> +	status =3D "okay";
-> >>> +};
-> >>
-> >> This should come via upstream DT sync?
-> >>
-> >>> +
-> >>> +/* Required for USB DFU boot */
-> >>> +&usb0 {
-> >>> +	bootph-all;
-> >>> +};
-> >>
-> >> This as well? But I don't see it upstream. Do you have a patch for ups=
-tream DT?
-> >=20
-> > I haven't posted the patch for Linux device-tree yet. I will post it and
-> > it can be synced with U-Boot later. In order to avoid blocking USB DFU
-> > support on the Linux device-tree sync, I have posted this patch for this
-> > series to be complete in terms of functionality. If Linux device-tree
-> > based sync is the only way to enable this, then the following patch in
-> > this series for documentation should also be dropped since the feature
-> > will not be functional without the changes made by this patch.
-> >=20
-> > Please let me know if this patch can be merged on the condition that I
-> > post the patch for making the same set of changes in the Linux
-> > device-tree as well.
->=20
-> Tom, what do you suggest?
+On Thu, Dec 19, 2024 at 12:02=E2=80=AFPM Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> TFTP transfers of large files, for example 128 MiB, can sporadically
+> get stuck and the transfer slows down considerably.
+>
+> This happens because the TX DMA descriptor in DRAM becomes out of sync
+> with the view of the TX DMA descriptor content from the CPU side, which
+> is viewed through the CPU caches. In order to guarantee these two views
+> are consistent, the cache over TX DMA descriptor that has possibly been
+> written by the rswitch hardware must first be invalidated, only then can
+> the descriptor be cleared and updated by the CPU, and finally the cache
+> over that area must be flushed back into DRAM to make sure the rswitch
+> hardware has consistent view of the updated descriptor content.
+>
+> The very first invalidation operation was missing, which led to sporadic
+> corruption of the TX DMA descriptor. Fix it, add the missing invalidation
+> operation.
+>
+> Reported-by: Enric Balletbo i Serra <eballetb@redhat.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-I feel like Nishanth will say it if I don't, so, it's blocked until it
-comes in via OF_UPSTREAM being re-synced. That's the rule to avoid the
-problems we've had in the past.
+I did a stress test with one S4 Spider board tftp'ing a big image for
+more than 1 hour without getting stuck, before this patch this test
+didn't succeed, so
 
---=20
-Tom
+Tested-by: Enric Balletbo i Serra <eballetb@redhat.com>
 
---tu7srQ7k/Co4aQ5B
-Content-Type: application/pgp-signature; name="signature.asc"
+> ---
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  drivers/net/rswitch.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+> index 91e2c7b7845..259d584ac98 100644
+> --- a/drivers/net/rswitch.c
+> +++ b/drivers/net/rswitch.c
+> @@ -836,6 +836,7 @@ static int rswitch_send(struct udevice *dev, void *pa=
+cket, int len)
+>
+>         /* Update TX descriptor */
+>         rswitch_flush_dcache((uintptr_t)packet, len);
+> +       rswitch_invalidate_dcache((uintptr_t)desc, sizeof(*desc));
+>         memset(desc, 0x0, sizeof(*desc));
+>         desc->die_dt =3D DT_FSINGLE;
+>         desc->info_ds =3D len;
+> --
+> 2.45.2
+>
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkUTUACgkQFHw5/5Y0
-tywFPAv/ToUH/e7s5agn1t1lExlavbT0pxnQ4332y5iY2EdnSNM1qN1ctnEtyy/A
-gTqrC+sUoSRYcaS6L3goalHS0I8DNX3nCN4XyDnWzMn1zf5KQlX0P0OV0cYyXngD
-cGpIkmVUGVBKG8ONp/2jDItNyR1CIyJoD+gl8KsD8vnYPjOmG3eZ669u6yxwk1UP
-pRXf5kaD/NYxtpNluP4+PzKDoq+T7ICIYZckkAyijSec81E6hEjRIYxRvOb0zBko
-oRnKqXUbT1ZaHiJMoGzp5UHkFfBWhcX9tMPWAHU2jKk1Pn3UsO8nMIa5BabpZCpL
-/SHJtNrqY4m31yq294PwZJn8RYho+pcS2WxAhXkb0c4OwImYfhCEo/F8dTmJY7/P
-p1D0RRMIMjRbqEf7+Q58aAcgbqCt13Q+8swkKVmn8TsZmThXijM25chSpzrB2UBh
-pOcrfQrzRRRFb0GuXzCPLt86ZTy83m5EcrJ9l9OiaYxCziLjoPXOYBzoCT3FK93f
-Addhm3Ff
-=4dmu
------END PGP SIGNATURE-----
-
---tu7srQ7k/Co4aQ5B--
