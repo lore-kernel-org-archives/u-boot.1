@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0C0E7718A
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:43:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA0DE7718A
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 21:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8664B80379;
+	by phobos.denx.de (Postfix) with ESMTP id D8CF480394;
 	Thu, 19 Dec 2024 22:43:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GsWj4zyQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h1mXbVTt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D32BF8033E; Thu, 19 Dec 2024 22:43:25 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id F3B328036E; Thu, 19 Dec 2024 22:43:26 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A99780196
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:43:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D966F8032B
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 22:43:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6d933736380so13690296d6.1
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 13:43:23 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6d8fa32d3d6so16357146d6.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 13:43:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734644602; x=1735249402; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734644604; x=1735249404; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XlvyoVPWX3n6zycdO4q+zdSGSq59nKcXCtxC5pdXOjs=;
- b=GsWj4zyQDXdPLin2Bwa8Ks58Wz+RQFgtveIJvDsdGmzSUFszXdwbtU/2wFvbgiBDk+
- dMakc2mjO1nlUxcNxZi+Avpb5dnZYcUxljewaA7gPRk570/EDgkseTsFMbnP/+GYCGVY
- +ePe8B/1Q1uRBh9/BDH16s6W181rVtC5AAy5w=
+ bh=xA+oUIkQ8U9IbkzbFSrMzwHHGPgI60tBc+I6a0HEHEs=;
+ b=h1mXbVTtbjAuzw4bRUZ/FD6Wn7CqMkrEsmSxDRldYr/tuBMOLWb26Yt/yY/Nl4MVKp
+ fhSz6KviM6cPUmcRTxdin6NY+5eaUgauuMw90ouV8uLdCc/7stlTczl47ctkbH8dJX2M
+ fW9LAVlgoVP/yCR/F/YlD9nMQP35iIqMFiC+4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734644602; x=1735249402;
+ d=1e100.net; s=20230601; t=1734644604; x=1735249404;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XlvyoVPWX3n6zycdO4q+zdSGSq59nKcXCtxC5pdXOjs=;
- b=WEI9t/zBd0WU0rPKVFbAN9QOAKH+//brGnXYWlseeqXI/NAnKip48FHp57Ll7VfC5Z
- 4uavbYPtpHq3384nUKH1jdXa/aQyCE+eIRjcwELWyYmY4kd+u1JVWM86gXvfk0gjs33j
- kq5LA1/QNv00+Al3klv4Fc1kBrcnWKJenuSHvieEmAqIOcL2T08NxiS6s8j/8uDfZ9U1
- TWEGejNue7Wk9TvhWi6GcjZXWBhJJqO/tZ4DEyVpnjcKiof4OIN56V75C0K4y2SXiZRn
- oBs0cryiBRVC/bPsYT7oVNFse9yu9nWCjPBd29727sq0QRUISS44Y1otvBUAq/h9s8/L
- x1sA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVp7nybg++qmyKJeUSugetFDWkxVQcw6YlXmyzDs3gGTBxQY35caqczEefXtMcJm583UXDagyI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZm72316xtBCXDe1wvfvmFACbLYcTmIO7YK7aXrqyryGZ5X2cS
- 7dGiGrDcz6/Pzoe4VBaI0Zroz3SWJQxiXU8A013b3NdkDvEcD6w588D3sqXJj8w=
-X-Gm-Gg: ASbGncvEiQFiFLidMIKeIwMp2FGdH7R2Wd0RWzB2Zny/tSwe71GnIKfzhJr8lSCaw2Y
- 4UwZxdxx0BZv9h1oNUvVMgRm/b91SFGbPh7eKI1+C4OT6Hhh206F1atz70G8I2EHh6+a5Ue/bOX
- s6VP4DyR4Rjng2rRZQm0XIMYNSIYNwK0CC4HNL6R5iAe+TmffZl/eR8akuoY8GX0Ean87Wbmo8/
- 7VJ5l8awZC2AyDUboGXJlmVj2YmK+RtNoTOwI39E7euiL8/BLEz2pQ=
-X-Google-Smtp-Source: AGHT+IHR0XUCh7sUw0iZ92crK253cuQjYy8sXuuWo1DKxbyzdq1Io0F/Mu7znVxA5u+CU2RoEz50/g==
-X-Received: by 2002:a05:6214:3c8c:b0:6d8:8874:2127 with SMTP id
- 6a1803df08f44-6dd23318093mr11861676d6.5.1734644602280; 
- Thu, 19 Dec 2024 13:43:22 -0800 (PST)
+ bh=xA+oUIkQ8U9IbkzbFSrMzwHHGPgI60tBc+I6a0HEHEs=;
+ b=m2nt9gDVfVXyeGExdLsRGlKrQlKaoGwP/PEtOCLEa4Tn/fo88HARisvd+r6UakUPpQ
+ oQaBn2hsfgZLnfrK0VH9Arw2VKmeiHzruMVs4uuke21elUquL2ETHkmjDeK1ii572nMW
+ FxS6mLu4Jq6CdxASk6O5I624jKwrSatHbhVkTxKM6cMhG8uz7UtqrAGfjng28gdp07uJ
+ IRX3wvi8VogIo5478yCV5IQXCJs8yYE83uvVYY9qlg3sKvHcXk/rpwvUsHlZKSqYNqwv
+ 8L1xe3pGeOMZxzOs+Ol5zPSnhx1Z0jhSZ/QWCOxYWwvOqLvtQYYGNPam08k0E9u0wH6X
+ LRqA==
+X-Gm-Message-State: AOJu0Yy/MWjr3pNM7wUB3LmoDjfCnLt7bCzsVGHsBi6H3G9Iedz2AYlq
+ mAJPsbK5q6QskYAYctaJBYtguxpKrtUh2FfIoodZsJii8hh2iwkVk4Hdxkzk/nbfmGE8saGA5Hh
+ 0gPM=
+X-Gm-Gg: ASbGncvbZgibXBBZ7cxUgLdlPD6Fqp37HN4cNUWHeSRIQ1pWS5tmc8K2Uth+Cd8EDJt
+ DYCjxS3KyhpD1oeZj8vESLD8zsAztrB45Pwm+SDMd7unDsMyupdg/aDsxlWQPGSV9lbM5NsuioY
+ 8/F4xjRb4cjmIK78878WtUM62q4FF3h739AExzYFth8l7ZTMJj4Gs17/IqaGbuNriAf/9lk7eZT
+ +nVq2UEBQ5wcvI+cllfMJFSJNiR/ONk4Arg5dVBEHzcWfVS6VxZSaM=
+X-Google-Smtp-Source: AGHT+IGpNiMeUs/BnW51c03D7ahFu00XdsNuHuMVoEx+Depw6weV/c68+C32l+OeGyk/NLKTAM3WVQ==
+X-Received: by 2002:a05:6214:5189:b0:6cb:e4d3:10a0 with SMTP id
+ 6a1803df08f44-6dd233ab438mr7779486d6.48.1734644603794; 
+ Thu, 19 Dec 2024 13:43:23 -0800 (PST)
 Received: from [127.0.1.1] ([187.144.29.192]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd180ea824sm10410196d6.4.2024.12.19.13.43.19
+ 6a1803df08f44-6dd180ea824sm10410196d6.4.2024.12.19.13.43.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 13:43:20 -0800 (PST)
+ Thu, 19 Dec 2024 13:43:22 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
-References: <20241205191736.21503-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] net: lwip: check if network device is available in
- do_dhcp
-Message-Id: <173464459991.3661439.11794080261351677826.b4-ty@konsulko.com>
-Date: Thu, 19 Dec 2024 15:43:19 -0600
+To: Minda Chen <minda.chen@starfivetech.com>, E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20241216063220.627348-1-e@freeshell.de>
+References: <20241216063220.627348-1-e@freeshell.de>
+Subject: Re: [PATCH] Revert "configs: JH7110: enable EFI_LOADER_BOUNCE_BUFFER"
+Message-Id: <173464460239.3661439.16683756459500422895.b4-ty@konsulko.com>
+Date: Thu, 19 Dec 2024 15:43:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,13 +93,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 05 Dec 2024 20:17:36 +0100, Heinrich Schuchardt wrote:
+On Sun, 15 Dec 2024 22:32:12 -0800, E Shattow wrote:
 
-> eth_get_dev() returns NULL if no network device is available.
-> Not checking the return value leads to a crash when the device
-> pointer is dereferenced.
+> ("Enable EFI_LOADER_BOUNCE_BUFFER") is not the correct fix for the
+> problem it describes.
 > 
+> The change of memory addressing leading to side-effects in commit
+> 22f2c9ed9f53 ("efi: memory: use the lmb API's for allocating and
+> freeing memory") is remedied by commit 1a48b0be93d4 ("lmb: prohibit
+> allocations above ram_top even from same bank").
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
