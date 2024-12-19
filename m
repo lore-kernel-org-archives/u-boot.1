@@ -4,51 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A681E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 10:28:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F38E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 10:53:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A56128021D;
-	Thu, 19 Dec 2024 11:27:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id DE1D88021A;
+	Thu, 19 Dec 2024 11:53:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EXwzoWDt";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SsRpfkIh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D428022B; Thu, 19 Dec 2024 11:27:58 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ id DC1FF8021D; Thu, 19 Dec 2024 11:53:21 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EBF08021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 11:27:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6B58B801F5
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 11:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1tODl3-0000n4-4d; Thu, 19 Dec 2024 11:27:53 +0100
-Message-ID: <2200ece8-593b-4ac3-be3e-b05570165e5e@pengutronix.de>
-Date: Thu, 19 Dec 2024 11:27:52 +0100
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YDS7y169Qz9t27;
+ Thu, 19 Dec 2024 11:53:18 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734605598;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UBXiJMSC8esk/OP2AXTfL9f4JTE0zo5UVIOQdwMSB8c=;
+ b=EXwzoWDtP/D81XofxozT7wt9iPt3Uz5WW7ATPNF9uImcL7wW5nvOI6eBzGmCjGOWTEQXL5
+ fPy2wLyRjN7fu7pgKDHrnuFi/CctdVv/kjicbbohsizri+gUlvit0lZR8Zj7gbRlpkk6Lj
+ bg/eBnQv0axsWnF5RJqLWnTVNqhWAOGWD+ekPp2EtyGQGzxmp3bfULQVA26POmzCPEj69z
+ K+D0f47FbrPSvuI1COcP4BL1zEqKe1mtcLt3XyNJJanKowGHjP/5MWlCZV54cZeTlnHlgm
+ 7AzsXdC7VcD/M5RQUiG/WsYxeQBTBXKgx9RtZDp2oY6xRFcw/3jhPO7IzGfF3A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1734605596;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=UBXiJMSC8esk/OP2AXTfL9f4JTE0zo5UVIOQdwMSB8c=;
+ b=SsRpfkIhhe7o2UQB4FafEci/VpbyaS16I/5usDI/pu7JyIBtySHuV7fj0hMzUqWI3+r8LL
+ 34auUMI9IRlzT/5VdeJ4owtnrTEC3gNVo4oCUnW/v3I1Y5JaBFKXY3aCqFUbjXswOF4gAD
+ dLkJFm+OBtIW41WodsqzFpAdZMfhLyuO2xYOe/s8IORIbRKSfR9OCoAbb34CsO3n0vB3/M
+ MCwo/IHWWU4j5KyoMZoN1JV58KKpDPQG3fsFrZox6JLlqJlMVMALYMXhu/HacThrXsAjzK
+ 7GmIMyfjng++wplpgSiz1Qy82zh2ULQlhISA+XtXdL7fOslI2RjXoSjkZU+Gow==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Enric Balletbo i Serra <eballetb@redhat.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: rswitch: Add missing cache invalidate of TX descriptor
+Date: Thu, 19 Dec 2024 11:52:46 +0100
+Message-ID: <20241219105303.6938-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: i.MX8/9: question about unused DDR PHY trained CSR board array
-To: Peng Fan <peng.fan@nxp.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- "barebox@lists.infradead.org" <barebox@lists.infradead.org>,
- dl-uboot-imx <uboot-imx@nxp.com>, Steffen Trumtrar <str@pengutronix.de>
-References: <8074530f-720b-4aea-934b-c0643c356617@pengutronix.de>
- <PAXPR04MB8459A8BB89FAB50D6871EA9388762@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Language: en-US
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <PAXPR04MB8459A8BB89FAB50D6871EA9388762@PAXPR04MB8459.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 9hjr6y57fsndanpy4hbt83sru8gf4i8g
+X-MBO-RS-ID: 6d7554730600fb8a1c5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,66 +84,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Peng,
+TFTP transfers of large files, for example 128 MiB, can sporadically
+get stuck and the transfer slows down considerably.
 
-On 30.09.24 08:38, Peng Fan wrote:
->> Subject: i.MX8/9: question about unused DDR PHY trained CSR board
->> array
->> Looking at the DDR setup code for i.MX8M and i.MX9 that you had
->> contributed, I am wondering about struct
->> dram_cfg_param::ddrphy_trained_csr and the global
->> ddrphy_trained_csr array.
->>
->> struct dram_cfg_param::ddrphy_trained_csr is presumably generated
->> by the i.MX DDR tool and it seems populated by all the i.MX8M/9
->> boards in U-Boot.
->>
->> This struct member is wholly unused though and instead a global
->> ddrphy_trained_csr is used.
->>
->> What I wonder about is whether it's possible for the DDR tool to
->> generate a different ddrphy_trained_csr than the default:
->>
->>   1) If yes, we should drop the global ddrphy_trained_csr and actually
->> use
->>      the board-specific array
->>
->>   2) If not, we should drop the board-specific array and perhaps ask for
->>     the DDR tool to be changed
->>
->> I initially assumed 1) and because all boards supported by barebox had
->> a board-specific ddrphy_trained_csr that's identical to the global
->> ddrphy_trained_csr, I dropped the unused array[1][2].
->>
->> I now have the DDR settings for an i.MX9 LPDDR4 board in front of me
->> that has different contents for struct
->> dram_cfg_param::ddrphy_trained_csr than the default.
->>
->> I will inquire how that came about, but in parallel I wanted to ask you if
->> this is supposed to happen and to alert you to this issue.
-> 
-> Thanks for raising this issue. I think board specific csr should be used.
-> 
-> I will check with DDR TOOL owners on this.
+This happens because the TX DMA descriptor in DRAM becomes out of sync
+with the view of the TX DMA descriptor content from the CPU side, which
+is viewed through the CPU caches. In order to guarantee these two views
+are consistent, the cache over TX DMA descriptor that has possibly been
+written by the rswitch hardware must first be invalidated, only then can
+the descriptor be cleared and updated by the CPU, and finally the cache
+over that area must be flushed back into DRAM to make sure the rswitch
+hardware has consistent view of the updated descriptor content.
 
-Did you hear back in the meantime?
+The very first invalidation operation was missing, which led to sporadic
+corruption of the TX DMA descriptor. Fix it, add the missing invalidation
+operation.
 
-Thanks,
-Ahmad
+Reported-by: Enric Balletbo i Serra <eballetb@redhat.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/net/rswitch.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> 
->>
->> The way things are, this is either a bug or a missed space saving
->> opportunity for U-Boot.
-> 
-> Thanks,
-> Peng.
-> 
-> 
-
-
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 91e2c7b7845..259d584ac98 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -836,6 +836,7 @@ static int rswitch_send(struct udevice *dev, void *packet, int len)
+ 
+ 	/* Update TX descriptor */
+ 	rswitch_flush_dcache((uintptr_t)packet, len);
++	rswitch_invalidate_dcache((uintptr_t)desc, sizeof(*desc));
+ 	memset(desc, 0x0, sizeof(*desc));
+ 	desc->die_dt = DT_FSINGLE;
+ 	desc->info_ds = len;
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+2.45.2
+
