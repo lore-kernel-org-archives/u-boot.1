@@ -4,84 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0270E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 13:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C01DE77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 14:12:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 295EC8021D;
-	Thu, 19 Dec 2024 14:57:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 017A98021D;
+	Thu, 19 Dec 2024 15:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QlZPOel0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G6Qs39z7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 759B28022B; Thu, 19 Dec 2024 14:57:12 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 7CE7B8022B; Thu, 19 Dec 2024 15:12:15 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB1CB801F5
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 14:57:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21EDC801F5
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 15:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6d8fa32d3d6so10481166d6.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 05:57:09 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7b6e8fe401eso51026785a.2
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 06:12:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1734616629; x=1735221429; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1734617532; x=1735222332; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PxDtbX7ejZ2TBZtruKo3o1YgaoebbTFK/bBhQZdNtgY=;
- b=QlZPOel0dPzGWGl80eQa3YjaEGE9nZhScxI8R2HvQvkCnKJCTZeUsMOOSir8sY9MFP
- UP6I21HMB9tyPj6g7FlROVfWrgFcAyNAE9Y2k6wJyaE3b3fDRk3M5M5/yL10iA7r5yiU
- 9mogRtKcfGGD/YV/nvonfYHlgISc5PgZX/DEk=
+ bh=yUAxmlySJin7mLYC3ZxwLM3X6W+1hjTNHiYQmZtA6r0=;
+ b=G6Qs39z7W3yrHocBhPFeYw7ytekJRUS4vIP+hM4PDlUeNsuBrxOPI/WY80BLTygv1F
+ yIol/qw2vJhyzFSuwFGZWa40m6Us+btWnMJY2TJsTPEuBBbiXV52UYGhoNmfP+6i0NTL
+ lwMN8e5x9O0HiQZT+NRbU0zDRgDd8LCx5A/wE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734616629; x=1735221429;
+ d=1e100.net; s=20230601; t=1734617532; x=1735222332;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PxDtbX7ejZ2TBZtruKo3o1YgaoebbTFK/bBhQZdNtgY=;
- b=uXgQ9JTd8aYVf8J+7BsIPywWBpEeaci6BeBm4u66wCona6WaEZZsEOvpxKxmxON7Bt
- l4KiLbZ8HXneIwLc8tdm2WkEYZ7TOpy4JK5oq/5bAbeANddk4ta3ea9AaHfQIs4YlANK
- rMlw4deooN8YpqyE0DALmmbKDWPPio+IXASKhqg6BzOBaOdiW/YhL2E7yuFJX8GPlsBf
- nj3roVtjwOC4HZkBtKsDbgaWz9313JR8FpSiO5HhgJXXlz8i548IGJy5vgvuYaJ/qCOL
- AQbS7LlmiqYuZi6o4fxVn85EtWSzyO3k7CRB4T2pnjmzDSkU0au5r6o0NctVEMNMx9r6
- /lyQ==
-X-Gm-Message-State: AOJu0Ywh00UWn/KZyqtcPKKGA8vceQ1kFt4PUZvmPQ/w7vqPwtnSdnQi
- EzJmIbHjwZ+lVaJ5zboWDeO5p5rlxjt8hoya7H4bRLdkJ95IetbPdFgolwkLpqA=
-X-Gm-Gg: ASbGncsakYL1Wur2wOuDJl7/ZAcGZCq9zhzU1tTR6TsSg76vQHQSn+q/NhDxBTvDGvQ
- UUo/aGudoBVR9ru6rqze+TM57Bstxl3JxH4DPIQ0aZL9b8AGtwlqrT2tYLicgle0WBfPDDxSd5k
- HgQmA2/semucuaRRNcZIeQO5pO1XMhem1oMse8K9X77SQXQ59MUdp9vBvj/CW0C0HXFlHMETm9C
- PmlR6xzQMOdxxEtvcBA4iCtOGH2dnZfeKBHkKfoIQiPVQXrDDPVNCWL
-X-Google-Smtp-Source: AGHT+IHcW9VcG2UkNtwYRNfdFngc5xtfMEdWwA4yHh4GTsNTQ/+tUNfWvnsNG5G7ZI/edTEk76rsqQ==
-X-Received: by 2002:ad4:5cef:0:b0:6d8:a7f7:c3a5 with SMTP id
- 6a1803df08f44-6dd14c7525cmr52146876d6.44.1734616628706; 
- Thu, 19 Dec 2024 05:57:08 -0800 (PST)
+ bh=yUAxmlySJin7mLYC3ZxwLM3X6W+1hjTNHiYQmZtA6r0=;
+ b=BtJM3E7OofoFUhDYBlaoLvniEA6pc6F+nxkN49oFu87Xc6UX3brDHVQTgvpzq9ZXmy
+ LwbFmcB0Bb47895arvNopJxPJ8ccHWStTtZU+mtA4u0OU6BFpDIt4MrIz5L1Aup5zJ9H
+ VGiYmLPhOEUPcTVMiz88QHzUlwCWATsZsG87Ax3MWqV923RueDlC9+Y5xZbXxlf2h6o8
+ 31MBMAHjAL2QgGdiQJHwUFe3u0zY8b1e+qFK4uTPG9li/i00wUHyH+tOR9KlNrrO9ptn
+ t1T6MlbBLKwL+kypOPcSTpDn47GeXaZEpzYTazXNVkDKY2ZuXmK+YNUQyrXGqqOqHpWs
+ C/PA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXD/WUs5b/A9F15aK49T6mzq3lCLoE94d0UAlTcKngPnD8IXyi/PXqwfqiPnWdLbJseMvY58fQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyf1ae4+cLqPei7cYuZYTxrTWiyNxFHLdrCPJfWv23E8MXWNhIo
+ Bm85M5dGbP7dCjaHMrtmwAuIKQ+ydg7KNP+Ci8PQAqnuOB6feIv3CNFmlTcYtEw=
+X-Gm-Gg: ASbGncsC4S3r20hlVdn/pVozpDRPRycbQ4rcjl2FSyJ+J8IhxM8FFNUbNDM+eA9A2fr
+ 5b/SWQgfQ/ZNJiLSepwE+H99wYsR0h0cNR8CLZ2HPB2yX15BP5kLoIF1uGoGb2ZZuYKfbYAKcRU
+ SX/r0IyX/Oh6Vi4EhRGnyITTTCoeOafIrory/HlB36C0jiuaNFgVjoIDJBEqcvqwV3cjEscSu1i
+ SH3xvwizMi5fQXwY0GG6TfVGf41JUqCrG1bkLD+EKhS1LJXZQnJV8tu
+X-Google-Smtp-Source: AGHT+IHv7Zyy1vBc3DDMxOwXpVML8+ZOCSdzrtCXHhhXWntIVgNqIMeZFqHt5Bq02g9e+HqqRWxL5A==
+X-Received: by 2002:a05:620a:2415:b0:7b6:d1f6:3dc with SMTP id
+ af79cd13be357-7b863720470mr818984385a.18.1734617531858; 
+ Thu, 19 Dec 2024 06:12:11 -0800 (PST)
 Received: from bill-the-cat ([187.144.29.192])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd1810cf86sm6729076d6.29.2024.12.19.05.57.06
+ af79cd13be357-7b9ac2dfe3bsm50798985a.36.2024.12.19.06.12.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Dec 2024 05:57:07 -0800 (PST)
-Date: Thu, 19 Dec 2024 07:57:04 -0600
+ Thu, 19 Dec 2024 06:12:10 -0800 (PST)
+Date: Thu, 19 Dec 2024 08:12:06 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Paul HENRYS (EXT)" <paul.henrys_ext@softathome.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "paul.henrysd+nodisclaimer@gmail.com" <paul.henrysd+nodisclaimer@gmail.com>,
- "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data
- encrypted by mkimage
-Message-ID: <20241219135704.GS1505244@bill-the-cat>
-References: <20241125174717.1181452-1-paul.henrys_ext@softathome.com>
- <20241125174717.1181452-3-paul.henrys_ext@softathome.com>
- <20241219005119.GA3555833@bill-the-cat>
- <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
+To: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
+Cc: Bryan Brattlof <bb@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/3] efi: Correct logic for OF_EMBED and OF_SEPARATE
+ co-existing
+Message-ID: <20241219141206.GT1505244@bill-the-cat>
+References: <20241211004503.3775922-2-sjg@chromium.org>
+ <20241211004503.3775922-1-sjg@chromium.org>
+ <CAFLszTjHyhwf0dV8THPDswXz58jRCW+ZX90Hr4_i7PjXsVHPBA@mail.gmail.com>
+ <20241217142527.GL1505244@bill-the-cat>
+ <CAFLszTg93ddp3r2Bmv+p-wKRBDxVYqz2mQ56etGqSWCGUjo6Jw@mail.gmail.com>
+ <20241217195734.GR1505244@bill-the-cat>
+ <CAFLszTidPRWQCeQ+fsyn_P420eK6obqtYu7=pHtxDHhxumVoLg@mail.gmail.com>
+ <20241217202900.GT1505244@bill-the-cat>
+ <CAFLszTiaWSAVc4_zDvPfLO2srSMqko9BzauxHAs5x3MPvY6Rjw@mail.gmail.com>
+ <CALeDE9PU4emhs0VNLSyhen9KF80UD9R_AoChRAtGs+GzAmbezw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Te2AqcgdM8eQt8la"
+ protocol="application/pgp-signature"; boundary="lVsVIi8CYA5PBcH1"
 Content-Disposition: inline
-In-Reply-To: <MRZP264MB3114A97D471EA723D4D7A0B3AA062@MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM>
+In-Reply-To: <CALeDE9PU4emhs0VNLSyhen9KF80UD9R_AoChRAtGs+GzAmbezw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,170 +114,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Te2AqcgdM8eQt8la
-Content-Type: text/plain; charset=iso-8859-1
+--lVsVIi8CYA5PBcH1
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 19, 2024 at 09:51:16AM +0000, Paul HENRYS (EXT) wrote:
-
-> Hello Tom,
+On Thu, Dec 19, 2024 at 11:52:29AM +0000, Peter Robinson wrote:
+> On Tue, 17 Dec 2024 at 23:44, Simon Glass <sjg@chromium.org> wrote:
 >=20
-> The issue comes from the key that is reported missing (or zero size):
->=20
-> ValueError: Error 1 running 'mkimage -t -k /tmp/binmant.nvd038o5/keys -F =
-/tmp/binman.is3n51x5/fit.fit': File /tmp/binmant.nvd038o5/keys/aes256.bin d=
-on't have the expected size (size=3D0, expected=3D32)
->=20
-> The issue is that the "binary" file fails to be provided in patchwork. I =
-send the following mail about this on 05/08/24:
->=20
-
-I will try again. But please note that "lore.kernel.org" also is missing
-things, seemingly, because I started this out with b4 grabbing the
-patches there, and then tried patchwork which did give me
-tools/binman/test/aes256.bin but not the key file (and was a bit tricky
-because of .gitignore). Thanks for explaining.
-
-> > Hi Simon,
-> >=20
-> > Sorry for the late reply as I missed your message blocked in quarantine.
-> > It looks like when I push a patch with binary data, patchworks does not=
- seem to get it right. Nonetheless, using git send-email, a copy is also se=
-nt to me and I do get the patch right.
-> > I put you in CC this time so you should also have received a copy of th=
-e patches. Could you take a look you get the patch "[v2,3/3] tools: binman:=
- Add tests for FIT with data encrypted by mkimage" with the binary data?
-> >=20
-> > The end of the patch with the binary data should be as such:
-> >=20
-> > diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/aes256.bi=
-n                                                                          =
-                       =20
-> > new file mode 100644                                                   =
-                                                                           =
-                       =20
-> > index 0000000000000000000000000000000000000000..09b8bf6254ada5c084039f3=
-2916bc7d30233bb2c                                                          =
-                       =20
-> > GIT binary patch                                                       =
-                                                                           =
-                       =20
-> > literal 32                                                             =
-                                                                           =
-                       =20
-> > ncmXpsGBz<aGq<obNK8sjNli=3D7$jr*l$<50zC@d;2DJ=3Ds4pC}7U                =
-                                                                           =
-                           =20
-> >                                                                        =
-                                                                           =
-                       =20
-> > literal 0                                                              =
-                                                                           =
-                       =20
-> > HcmV?d00001
-> >=20
-> >=20
-> > FYI, I also added the requested changes.
-> >=20
-> > Best regards,
-> > Paul
->=20
-> Best regards,
-> Paul
->=20
-> ________________________________________
-> From:=A0Tom Rini
-> Sent:=A0Thursday, December 19, 2024 01:51
-> To:=A0Paul HENRYS (EXT)
-> Cc:=A0u-boot@lists.denx.de; paul.henrysd+nodisclaimer@gmail.com; sjg@chro=
-mium.org; al.kochet@gmail.com
-> Subject:=A0Re: [PATCH v4 3/3] tools: binman: Add tests for FIT with data =
-encrypted by mkimage
->=20
->=20
-> On Mon, Nov 25, 2024 at 06:47:17PM +0100, Paul HENRYS wrote:
->=20
->=20
->=20
-> > Test the property 'fit,encrypt' to encrypt FIT data.
->=20
+> > Hi Tom,
+> >
+> > [snip]
+> >
+> > I'm very happy with your leadership. The project is extremely lucky to
+> > have you doing what you do and we all know it.
+> >
+> > In my own way I will be able to contribute to the project more
+> > effectively than I have done for the last year or two. So let's focus
+> > on working together within the constraints that we each have. I'm
+> > pretty sure that in a year you will be happy with the result.
+> >
+> > No, I have not been paid for U-Boot work for more than 10 years and I
+> > doubt that will change anytime soon. A little empathy on your part
+> > could go a long way.
 > >
 >=20
-> > Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+> Simon, I have never been paid by my employers to work on U-Boot or a lot =
+of
+> other open source projects I contribute to. I do it in my own time for my
+> own enjoyment. There are many contributors to this project, some are paid
+> to do it, some are volunteers, all people have the same standing as
+> contributors, just like I don't care if someone likes to wear plain
+> t-shirts or Hawaiian shirts they have the same standings.
 >=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> > ---
->=20
-> > Changes for v4:
->=20
-> > - Update the tests to use 'fit,encrypt'
->=20
-> >
->=20
-> >=A0 tools/binman/ftest.py=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0 45 +++++++++++++++
->=20
-> >=A0 tools/binman/test/343_fit_encrypt_data.dts=A0=A0=A0 |=A0 53 ++++++++=
-++++++++++
->=20
-> >=A0 .../test/344_fit_encrypt_data_no_key.dts=A0=A0=A0=A0=A0 |=A0 53 ++++=
-++++++++++++++
->=20
-> >=A0 tools/binman/test/aes256.bin=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
-=A0=A0=A0=A0 | Bin 0 -> 32 bytes
->=20
-> >=A0 4 files changed, 151 insertions(+)
->=20
-> >=A0 create mode 100644 tools/binman/test/343_fit_encrypt_data.dts
->=20
-> >=A0 create mode 100644 tools/binman/test/344_fit_encrypt_data_no_key.dts
->=20
-> >=A0 create mode 100644 tools/binman/test/aes256.bin
->=20
->=20
->=20
-> This fails in CI:
->=20
-> https://source.denx.de/u-boot/u-boot/-/jobs/980030
->=20
-> or
->=20
-> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10169&view=
-=3Dlogs&j=3Dc59aff74-743b-5f08-f408-4a608a489153&t=3Df2ea3536-b291-5a39-ad9=
-2-0220c9b8101a&l=3D300
->=20
-> Please see https://docs.u-boot.org/en/latest/develop/ci_testing.html=A0for
->=20
-> how to trigger Azure yourself to resolve these, thanks!
->=20
->=20
->=20
-> --
->=20
-> Tom
->=20
+> The expectation that you get special treatment in this or any other
+> community because of the reasons you contribute is not the way Open Source
+> works, or in fact just about any community I am aware of. you are judged =
+on
+> your patches, your non code contributions and your behavior.
+
+Thanks Peter.
+
+Simon, this is why again, I am asking you in public to explain what
+exactly you hope to accomplish with your "sjg" branches and to either
+work with the community, including the feedback you disagree with and
+move away from touching those subsystems, or to just properly fork the
+project and go experiment on your own. You are and have long been a
+valued member of the community, but a community cannot hold when someone
+says they're going to ignore a number of other people.
 
 --=20
 Tom
 
---Te2AqcgdM8eQt8la
+--lVsVIi8CYA5PBcH1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkJjAACgkQFHw5/5Y0
-tyxA0wv/UYd9tRXmJxP6XsmW+oiI5jSaeos2P0kGWztg8CFRQ71DPWnUajouC/vP
-F2xLBiUwr2f13oQK3Jn0eIhPHLLkrfVwHnzDgLGdsFZciTewFSbX2/JDZILXNRnJ
-i0MdH6X/vzz6EWwumPvJ0TUry8ImOWJYfNyYxdskHwQy8qrGhcbtOVpOxCY2ccWr
-n6A/D2dZV8PFdxoyiKh9Q6pqS0qza/5aKtfiEFLscBEgo1t8adT3squK324SusJq
-2EbqjE5flOsb8sviZNKVqCRpmfzHwtkgfWAa7pDaWzRTBF52DKjMOe0LDYWbBYZJ
-dP/N/tnCI40TAcULHyAPagJGesaU/+RJHBUq3sl0l1QCH0RqUzhY0s9qbVU0lYjV
-TAnT0J7tE3eKkwP7Pkj9BlsUMrb1XOJld3TVTY8vRW1j4pH3r4F8roFdL/3Thh9m
-ReYVdmhSLmpDY6iS3/N0FeVfppZggCPSKbiMTxs1em+6aF1ZoVpq1ubU6TD502zL
-Da/q1Qhp
-=O7u3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdkKa4ACgkQFHw5/5Y0
+tyzvSQv/UzzTDeQx+290ALpxJqpdmWWrwo8FlcohSzDII7jm7SBlqD/3tdATuNLU
+nszJBWa9sFqmmAz5Wt9Hy8J30xt7c4sTvsDH9U1/0EuMTAjRuioX5pU5CvGTJxr/
+BCa8iJufK9OehEolZZlRA3CXHp3Xw73clyNYkQqxVMy0m5k2rgpy7imPfTCqX0OL
++qif02Lv+52IOPcU/Gz7SUzKWN2dz39qVl9meX4vfe9o792YI3GnTtxtZa3C6Z3I
+E1Cpnn0rml1pqxOoY9g5J+j7+wF6yTqTpOCMeRcFRmD8ohINAIopLWmxuEhuv0yx
+yUGLXFi3EnSCZT7FpLMSX+UUvrBHSzJrxkAcToJghUa7H5DZB6JV6mb66a586qYh
+t6JYJ7h9ZrZTEjDlxCseWjWm/WxwuzRjVl2Eqy5OYztHoaRLPGLe6zi/aq9Q6ucg
+pfCe7yi9QbKe3W59VHeLwcEMuXm8Caq5729fEaPGRfzMuTIPcJnbameKzg3/RQZR
+HNyaShrx
+=g87W
 -----END PGP SIGNATURE-----
 
---Te2AqcgdM8eQt8la--
+--lVsVIi8CYA5PBcH1--
