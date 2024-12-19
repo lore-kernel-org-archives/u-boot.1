@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03251E77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:52:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47050E7718B
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227628022B;
-	Thu, 19 Dec 2024 16:52:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CAC3E8022B;
+	Thu, 19 Dec 2024 16:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fYEuUizl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PeQ9+reQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22265802B4; Thu, 19 Dec 2024 16:52:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 6A121802B4; Thu, 19 Dec 2024 16:53:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD46C8021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:52:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01E818021A
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:53:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1734623523; x=1735228323; i=xypron.glpk@gmx.de;
- bh=+B1m1eNVxdrKkGhZwFx0giYyHyceJJIj5/cnXIA6i4o=;
+ s=s31663417; t=1734623569; x=1735228369; i=xypron.glpk@gmx.de;
+ bh=LqX2o7KfW/KkQUv7cBFQpeRKj8Mw8UNG3UDX+0HjnGQ=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=fYEuUizlyezqsiheC/+2UcWbG3JQUDVq+ctnx6BC4JMn3xv00VTUCRKQ6ljwedQ4
- 5PAND3xX7KxeVk5+oJtApXxoR+XKNyu0ZAXYFYBcjRRoWtkODB8IANdHdXrjsddyk
- KoDipZK3ze4hMpQjMkU0MnhXifEYzd1QhWTXtlatvH1sK/d/E9dzDNgfi0PPs4QOh
- zuF3uA6H7reEpJ9Dk5rBliiH6mkR1H+UuBL3GiLE+p1jLD4p9NqL9oI+14bdrn7hv
- y9y90DlBtu210glB+7g4nhnKaEfEthLhC0Ls0VSW8fcTbK63SK3YHSxfxfXOyhiRU
- JfGAA4MG3qpd8ehF7A==
+ b=PeQ9+reQsO1YdPZdWmNKbQyLwrCo3aIzOM2FRWuk2ycJFqmCqhYug8srzlMpe+CN
+ yuoLzJP0xA6zlZblrAjCZN5AcrlSnaSM+RhrNhiBTcnd1ZDukqnRJJ8XJ2ftmXdTe
+ zdQuLB0PdGc8O44ky0u/TUvIk1bXyHdirT1zX177WZR9zTIOV+2IHeQ0/PlGMmlTt
+ 6dq/yWRvq/btcwNaiIc1j6wZs3iNkJlDkFRRaBw0H4H9325clpKnNFb/BWAtEXj6Y
+ tM+kSWldBikNJadG1BkObSNcmcPEWGWVXLjr4LO/3bmnGhmWUbtKbIbYvYUDdgEPF
+ i9tnu3bR5dX6q5cToA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.143.104] ([46.114.111.103]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MPokD-1tBsVV3zUp-00M8Er; Thu, 19
- Dec 2024 16:52:03 +0100
-Message-ID: <5b317e3d-7c1c-414e-9070-b76e306cca7f@gmx.de>
-Date: Thu, 19 Dec 2024 16:51:55 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvsIv-1tfhWZ30it-00s9B9; Thu, 19
+ Dec 2024 16:52:48 +0100
+Message-ID: <81e51c97-2b12-44e0-8ee4-6ef81f1cd0de@gmx.de>
+Date: Thu, 19 Dec 2024 16:52:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/10] armv8: Add arch-specific sysinfo platform driver
+Subject: Re: [PATCH v3 01/10] smbios: Refactor the smbios headfile
 To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Stefan Roese <sr@denx.de>,
  =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Alexander Gendin <agendin@matrox.com>, Jonas Karlman <jonas@kwiboo.se>,
- Wan Yee Lau <wan.yee.lau@intel.com>,
+ Alexander Gendin <agendin@matrox.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Jonas Karlman <jonas@kwiboo.se>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
- Michal Simek <michal.simek@amd.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+ Michal Simek <michal.simek@amd.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Peter Robinson
+ <pbrobinson@gmail.com>, u-boot@lists.denx.de
 References: <20241206225438.13866-1-raymond.mao@linaro.org>
- <20241206225438.13866-8-raymond.mao@linaro.org>
+ <20241206225438.13866-2-raymond.mao@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20241206225438.13866-8-raymond.mao@linaro.org>
+In-Reply-To: <20241206225438.13866-2-raymond.mao@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:n5o3uYi+F8rQ3OphS8t/4MdvTUqX7Zd9arO0+4U5gi9GADG53rY
- HK34YHP8C8SOGujpAtdPXQ4IKPAhk8zTdwapBShV5kOmHnJVVL2aE/EUjefkmxnnSzDHEJI
- D3nM4bMthIMybLgcQsgmmIL9SjqRaXYoIc9XY5XI4fCwL9U4LCsZznU9QVYCG+/tVEy7qLE
- Ekw58OQbTMyBqtbcJWXug==
-UI-OutboundReport: notjunk:1;M01:P0:tdrQrkFQVzo=;+EPvbd8V15aH/Zh/1KB+dKDfkfb
- 4EYN91bVo0JUNbsLtQKyZjd2WFVw1+PZqX200XOA/1cBgYK7+WJ2Lu2h6vA6u2tz9de9rYJLr
- hGXWOvzSfQaVJHZPb3Twn/fbHlPfe4hJcFQI5iBJtcw3Sp6hQGl0lND4X6Zd+EckA2X7xsK+0
- do7RKrbgsy0iz1bVBjdY9p40rmKIY+EAgD4j9A475dttBc6IdgSio/vFP37IneMlK/xPNmRDF
- iPAiWmCUljXJe+ltf5AeMK29lNYgRbkYL9+Oyxxr7tDcQV1b54PzoiRCy6rl6nQgrAepiNygf
- 84ToYahnh4EFrHpPihBSrYBMr1Z0UA+sFS/qJuffskXPRTjk5j74syKBz+GipGXlpiRbw+bzF
- OTbTJWpHe8Wn8jGPQcNhmOsKEhHhAR6p8hHjmHqyyLfN6tw17CCLlE1PL4+DArAfvu9aiWpHO
- nQ8nvpbiRQeJnk0KwFw92Q10s9lGxo3kA0gV97/A9DRLN4hotcZd61kDovyhxBo//DqSOC1J+
- ckaSg6h7AxPbWueg2tqpIlioYNd0NgtUw0Zqc57QJpyrdvxUFUeJfKzh/6dL7l6T854vUTjy/
- 4lBZaBMWXxSo0SHEUe9Xg2V9yWQoIiNXCSR2T2r4ItP7uCO2MOS0uLvkuRVMHEI3asOLwk8kj
- dUk1Am5HT1PZNE5S5mqBf0bunLp2EnWOmYGgJvvgiC5rokySakXGUFDfw+cVUhLCTJWtMEmln
- lqsbep4w2rwCj/NFpIwnkmcpZ4Ae8R1uS1AhkrWD440YDrZGUChgn6nwFfbnX6Qzr/FupnSzl
- 23mFXjoCIYVFCOoRlmG53K0E/jvySRE89MhUpRf/aaJwKP3IkzTGWq/yUIE7sRAqAHipSd4Jq
- TcOerVe/QynDZTSlxJOEzobzpJe8en/T0FLXfuUGpfYSjkr4qRdywNMygQ2QiRW1qylvuwdfg
- FRw7AVb3ytf9ma7IpTnchhqqbYm5KST5ITBXxkOzrXKh7OrJtIkFJIgCVwTTD3YlZMelshKos
- oN/OjQ6M183qK3u1rVaxILSFecqgGF2Xs56z9FELsVFZOeD6NzSODlcYWz+iAJgAKsh11Kf5g
- I6QAb0YZ3b1qXbiOAmR2SzujpvyevK
+X-Provags-ID: V03:K1:M2NmfVw7PlKeYrerschKjAyKsohlpO4pgrp7IH+AnsbqdiVwP3U
+ +2xKqsi0IUlpkrvPnWmeNZofXkvb3XIWqS/chc/RQCYQvAeVvMCcoCTWr2PqUMZgyRaPXo4
+ ACToiyhkUIurJe42nDfio3pSsVZlJ9idAQ+iV2/eO/QC5fN/iDFBupT1jQlq12NfdMh2hTP
+ 4O+kKb8f4oV6VBmKmp5ew==
+UI-OutboundReport: notjunk:1;M01:P0:PLtnAjTpbQM=;bIyTVzhX71XVuAZKVMRcGIoyIwf
+ lVMI+K6JdZDEYIRVkYgUdWpgueNjKOWKX+OC2ahE9oyFBvt+yhKmBSuSj+TfO/ybmSv+RcnDz
+ LfG2rp5Hm+bZVbR2uwl5hjsEihpu2blvMiWksBm1J3RqLzD6IIRJtqVcorROZqAS0PlmNhJpr
+ s7Wf7SoOsyAk/GiCcNdoXhj85i0UdLEo8VdmANJ0nospdrgfCPAwyRsym9bev2kiVGmGLSLeM
+ VIWPY1dwQJPIa7Lit9HQs8SHAvqFAl6gIbL41o2vbQTEYy2b+mXUIeOkX+5ZTTh/w2b/KBt2C
+ duGyyTrGufBY3qQsFGNTWadY+zB1+rXi9q58nja3+wsWVxQgA7rTVH7jhcTKjInKqTfPbeEjc
+ HgResphJEQK2cETkFFnf+D8oxc7An0pi+wUmh8PPUGNWGfKELQVtd4PN5BkGxiZTguGESjBD0
+ 30xKM8g3/sCYrpMstYm0t38ayWy8PSF/Nf835A+8PvGzDs/dV2KfmVvJ/p0ps8iJlDyf2EnJG
+ Rj90s39kUv51sVZ+mYGKQOUgItJ6V+BZgPwXskVuVyGc/+01NMfV6Wg6FEIwmJslLMc0Z3esE
+ X2EJC6wLj/VAI1G4NXBpNmdwXEAuDCJL9w27lUCmgBDUcaqDu/I+12zqtZClqX7aM5tNphvfF
+ c8kjTVYLupo/ruw8slArNXeXYrqC589YEFbh0dKRHgZCgu5s3+RNwqdv9dTnJMNekHHFgF0X+
+ O3dIeeLy1ntju+d/ah6dEgz5cSE0Z/MjhWuGDYiQsVrdZtoCH9i31DFCJcei0oUgCapUWgoEF
+ QrePT88CoOmr4ooC1zghR07rTX6rXuzK3IB/qTHy1Y/YRgbJPHSzDg/kOtbEsBZwPAXAe2xUk
+ t83+xQpZnWYRRKCa+CcH3jSyqtmxaI9czyg7dW3dRdWsrmIsdQhQIu0sCFhurhC1y4uGXVeWf
+ tlFjXVxqg+X2+ZIy9g4NpmVw56n1tm14oogeAGifYJbSgsXL5khT7LijGpdGw5B8igKNvAvdW
+ KQgnqXgn8ySDtZ5s2Hv+tgQDXCgo0kh7jbFdFFH9auhca0TWd6LjwPxwmdzIjPH2XV/IOohoa
+ isCssRqGz6owFWZ416kPRw9F5/ZPOm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,359 +108,558 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 06.12.24 23:54, Raymond Mao wrote:
-> Add sysinfo platform driver for all armv8 platforms to retrieve
-> hardware information on processor and cache.
+> Move the smbios field definitions to a separated simple headfile,
+> which is a prerequisite to be included by dts files.
+> Add new definitions for cache information.
+> This patch also includes a few of code optimizations in smbios.
 >
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Acked-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
 > Changes in v2
-> - Combine with #8(v1) patch.
-> - Remove the handling of the common strings and values.
+> - Initial patch.
 > Changes in v3
-> - None.
+> - Miscellaneous updates.
 >
->   arch/arm/cpu/armv8/Makefile  |   2 +
->   arch/arm/cpu/armv8/sysinfo.c | 292 +++++++++++++++++++++++++++++++++++
->   2 files changed, 294 insertions(+)
->   create mode 100644 arch/arm/cpu/armv8/sysinfo.c
+>   cmd/smbios.c         |   4 +-
+>   include/smbios.h     |  81 +++---------------
+>   include/smbios_def.h | 194 +++++++++++++++++++++++++++++++++++++++++++
+>   lib/smbios.c         |  44 +++++-----
+>   4 files changed, 231 insertions(+), 92 deletions(-)
+>   create mode 100644 include/smbios_def.h
 >
-> diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-> index 2e71ff2dc97..b4126c61df1 100644
-> --- a/arch/arm/cpu/armv8/Makefile
-> +++ b/arch/arm/cpu/armv8/Makefile
-> @@ -46,3 +46,5 @@ obj-$(CONFIG_TARGET_BCMNS3) +=3D bcmns3/
->   obj-$(CONFIG_XEN) +=3D xen/
->   obj-$(CONFIG_ARMV8_CE_SHA1) +=3D sha1_ce_glue.o sha1_ce_core.o
->   obj-$(CONFIG_ARMV8_CE_SHA256) +=3D sha256_ce_glue.o sha256_ce_core.o
+> diff --git a/cmd/smbios.c b/cmd/smbios.c
+> index d3bd8b12a67..2122ac04e55 100644
+> --- a/cmd/smbios.c
+> +++ b/cmd/smbios.c
+> @@ -99,12 +99,12 @@ static void smbios_print_type1(struct smbios_type1 *=
+table)
+>   	smbios_print_str("Product Name", table, table->product_name);
+>   	smbios_print_str("Version", table, table->version);
+>   	smbios_print_str("Serial Number", table, table->serial_number);
+> -	if (table->length >=3D 0x19) {
+> +	if (table->hdr.length >=3D SMBIOS_TYPE1_LENGTH_V21) {
+>   		printf("\tUUID: %pUl\n", table->uuid);
+>   		printf("\tWake-up Type: %s\n",
+>   		       smbios_wakeup_type_str(table->wakeup_type));
+>   	}
+> -	if (table->length >=3D 0x1b) {
+> +	if (table->hdr.length >=3D SMBIOS_TYPE1_LENGTH_V24) {
+>   		smbios_print_str("SKU Number", table, table->sku_number);
+>   		smbios_print_str("Family", table, table->family);
+>   	}
+> diff --git a/include/smbios.h b/include/smbios.h
+> index 00119d7a60c..78fd14d881b 100644
+> --- a/include/smbios.h
+> +++ b/include/smbios.h
+> @@ -9,6 +9,7 @@
+>   #define _SMBIOS_H_
+>
+>   #include <linux/types.h>
+> +#include <smbios_def.h>
+>
+>   /* SMBIOS spec version implemented */
+>   #define SMBIOS_MAJOR_VER	3
+> @@ -80,19 +81,14 @@ struct __packed smbios3_entry {
+>   	u64 struct_table_address;
+>   };
+>
+> -/* BIOS characteristics */
+> -#define BIOS_CHARACTERISTICS_PCI_SUPPORTED	(1 << 7)
+> -#define BIOS_CHARACTERISTICS_UPGRADEABLE	(1 << 11)
+> -#define BIOS_CHARACTERISTICS_SELECTABLE_BOOT	(1 << 16)
+> -
+> -#define BIOS_CHARACTERISTICS_EXT1_ACPI		(1 << 0)
+> -#define BIOS_CHARACTERISTICS_EXT2_UEFI		(1 << 3)
+> -#define BIOS_CHARACTERISTICS_EXT2_TARGET	(1 << 2)
+> -
+> -struct __packed smbios_type0 {
+> +struct __packed smbios_header {
+>   	u8 type;
+>   	u8 length;
+>   	u16 handle;
+> +};
 > +
-> +obj-$(CONFIG_SYSINFO_SMBIOS) +=3D sysinfo.o
-> diff --git a/arch/arm/cpu/armv8/sysinfo.c b/arch/arm/cpu/armv8/sysinfo.c
+> +struct __packed smbios_type0 {
+> +	struct smbios_header hdr;
+>   	u8 vendor;
+>   	u8 bios_ver;
+>   	u16 bios_start_segment;
+> @@ -109,37 +105,12 @@ struct __packed smbios_type0 {
+>   	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>   };
+>
+> -/**
+> - * enum smbios_wakeup_type - wake-up type
+> - *
+> - * These constants are used for the Wake-Up Type field in the SMBIOS
+> - * System Information (Type 1) structure.
+> - */
+> -enum smbios_wakeup_type {
+> -	/** @SMBIOS_WAKEUP_TYPE_RESERVED: Reserved */
+> -	SMBIOS_WAKEUP_TYPE_RESERVED,
+> -	/** @SMBIOS_WAKEUP_TYPE_OTHER: Other */
+> -	SMBIOS_WAKEUP_TYPE_OTHER,
+> -	/** @SMBIOS_WAKEUP_TYPE_UNKNOWN: Unknown */
+> -	SMBIOS_WAKEUP_TYPE_UNKNOWN,
+> -	/** @SMBIOS_WAKEUP_TYPE_APM_TIMER: APM Timer */
+> -	SMBIOS_WAKEUP_TYPE_APM_TIMER,
+> -	/** @SMBIOS_WAKEUP_TYPE_MODEM_RING: Modem Ring */
+> -	SMBIOS_WAKEUP_TYPE_MODEM_RING,
+> -	/** @SMBIOS_WAKEUP_TYPE_LAN_REMOTE: LAN Remote */
+> -	SMBIOS_WAKEUP_TYPE_LAN_REMOTE,
+> -	/** @SMBIOS_WAKEUP_TYPE_POWER_SWITCH: Power Switch */
+> -	SMBIOS_WAKEUP_TYPE_POWER_SWITCH,
+> -	/** @SMBIOS_WAKEUP_TYPE_PCI_PME: PCI PME# */
+> -	SMBIOS_WAKEUP_TYPE_PCI_PME,
+> -	/** @SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED: AC Power Restored */
+> -	SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED,
+> -};
+> +#define SMBIOS_TYPE1_LENGTH_V20		0x08
+> +#define SMBIOS_TYPE1_LENGTH_V21		0x19
+> +#define SMBIOS_TYPE1_LENGTH_V24		0x1b
+>
+>   struct __packed smbios_type1 {
+> -	u8 type;
+> -	u8 length;
+> -	u16 handle;
+> +	struct smbios_header hdr;
+>   	u8 manufacturer;
+>   	u8 product_name;
+>   	u8 version;
+> @@ -151,13 +122,8 @@ struct __packed smbios_type1 {
+>   	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>   };
+>
+> -#define SMBIOS_BOARD_FEATURE_HOSTING	(1 << 0)
+> -#define SMBIOS_BOARD_MOTHERBOARD	10
+> -
+>   struct __packed smbios_type2 {
+> -	u8 type;
+> -	u8 length;
+> -	u16 handle;
+> +	struct smbios_header hdr;
+>   	u8 manufacturer;
+>   	u8 product_name;
+>   	u8 version;
+> @@ -171,14 +137,8 @@ struct __packed smbios_type2 {
+>   	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>   };
+>
+> -#define SMBIOS_ENCLOSURE_DESKTOP	3
+> -#define SMBIOS_STATE_SAFE		3
+> -#define SMBIOS_SECURITY_NONE		3
+> -
+>   struct __packed smbios_type3 {
+> -	u8 type;
+> -	u8 length;
+> -	u16 handle;
+> +	struct smbios_header hdr;
+>   	u8 manufacturer;
+>   	u8 chassis_type;
+>   	u8 version;
+> @@ -196,17 +156,8 @@ struct __packed smbios_type3 {
+>   	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>   };
+>
+> -#define SMBIOS_PROCESSOR_TYPE_CENTRAL	3
+> -#define SMBIOS_PROCESSOR_STATUS_ENABLED	1
+> -#define SMBIOS_PROCESSOR_UPGRADE_NONE	6
+> -
+> -#define SMBIOS_PROCESSOR_FAMILY_OTHER	1
+> -#define SMBIOS_PROCESSOR_FAMILY_UNKNOWN	2
+> -
+>   struct __packed smbios_type4 {
+> -	u8 type;
+> -	u8 length;
+> -	u16 handle;
+> +	struct smbios_header hdr;
+>   	u8 socket_designation;
+>   	u8 processor_type;
+>   	u8 processor_family;
+> @@ -252,12 +203,6 @@ struct __packed smbios_type127 {
+>   	char eos[SMBIOS_STRUCT_EOS_BYTES];
+>   };
+>
+> -struct __packed smbios_header {
+> -	u8 type;
+> -	u8 length;
+> -	u16 handle;
+> -};
+> -
+>   /**
+>    * fill_smbios_header() - Fill the header of an SMBIOS table
+>    *
+> diff --git a/include/smbios_def.h b/include/smbios_def.h
 > new file mode 100644
-> index 00000000000..850142da37d
+> index 00000000000..81c5781217f
 > --- /dev/null
-> +++ b/arch/arm/cpu/armv8/sysinfo.c
-> @@ -0,0 +1,292 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-
-GPL-2.0-or-later
-see https://spdx.org/licenses/LGPL-2.0-or-later.html
-
+> +++ b/include/smbios_def.h
+> @@ -0,0 +1,194 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
 > +/*
 > + * Copyright (c) 2024 Linaro Limited
 > + * Author: Raymond Mao <raymond.mao@linaro.org>
 > + */
-> +#include <dm.h>
-> +#include <smbios_plat.h>
-> +#include <stdio.h>
-> +#include <sysinfo.h>
 > +
-> +union ccsidr_el1 {
-> +	struct {
-> +		u64 linesize:3;
-> +		u64 associativity:10;
-> +		u64 numsets:15;
-> +		u64 unknown:4;
-> +		u64 reserved:32;
-> +	} no_ccidx;
-> +	struct {
-> +		u64 linesize:3;
-> +		u64 associativity:21;
-> +		u64 reserved1:8;
-> +		u64 numsets:24;
-> +		u64 reserved2:8;
-> +	} ccidx_aarch64;
-> +	struct {
-> +		u64 linesize:3;
-> +		u64 associativity:21;
-> +		u64 reserved:8;
-> +		u64 unallocated:32;
-> +	} ccidx_aarch32;
-> +	u64 data;
-> +};
-> +
-> +union midr_el1 {
-> +	struct {
-> +		u64 revision:4;
-> +		u64 partnum:12;
-> +		u64 architecture:4;
-> +		u64 variant:4;
-> +		u64 implementer:8;
-> +		u64 reserved:32;
-> +	} fields;
-> +	u64 data;
-> +};
-> +
-> +enum {
-> +	CACHE_NONE,
-> +	CACHE_INST_ONLY,
-> +	CACHE_DATA_ONLY,
-> +	CACHE_INST_WITH_DATA,
-> +	CACHE_UNIFIED,
-> +};
-> +
-> +enum {
-> +	CACHE_ASSOC_DIRECT_MAPPED =3D 1,
-> +	CACHE_ASSOC_2WAY =3D 2,
-> +	CACHE_ASSOC_4WAY =3D 4,
-> +	CACHE_ASSOC_8WAY =3D 8,
-> +	CACHE_ASSOC_16WAY =3D 16,
-> +	CACHE_ASSOC_12WAY =3D 12,
-> +	CACHE_ASSOC_24WAY =3D 24,
-> +	CACHE_ASSOC_32WAY =3D 32,
-> +	CACHE_ASSOC_48WAY =3D 48,
-> +	CACHE_ASSOC_64WAY =3D 64,
-> +	CACHE_ASSOC_20WAY =3D 20,
-> +};
-> +
-> +enum {
-> +	VENDOR_RESERVED =3D 0,
-> +	VENDOR_ARM =3D 0x41,
-> +	VENDOR_BROADCOM =3D 0x42,
-> +	VENDOR_CAVIUM =3D 0x43,
-> +	VENDOR_DEC =3D 0x44,
-> +	VENDOR_FUJITSU =3D 0x46,
-> +	VENDOR_INFINEON =3D 0x49,
-> +	VENDOR_FREESCALE =3D 0x4d,
-> +	VENDOR_NVIDIA =3D 0x4e,
-> +	VENDOR_AMCC =3D 0x50,
-> +	VENDOR_QUALCOMM =3D 0x51,
-> +	VENDOR_MARVELL =3D 0x56,
-> +	VENDOR_INTEL =3D 0x69,
-> +	VENDOR_AMPERE =3D 0xc0,
-> +};
+> +#ifndef _SMBIOS_DEF_H_
+> +#define _SMBIOS_DEF_H_
 > +
 > +/*
-> + * TODO:
-> + * To support ARMv8.3, we need to read "CCIDX, bits [23:20]" from
-> + * ID_AA64MMFR2_EL1 to get the format of CCSIDR_EL1:
-> + *
-> + * 0b0000 - 32-bit format implemented for all levels of the CCSIDR_EL1.
-> + * 0b0001 - 64-bit format implemented for all levels of the CCSIDR_EL1.
-> + *
-> + * Here we assume to use CCSIDR_EL1 in no CCIDX layout:
-> + * NumSets, bits [27:13]: (Number of sets in cache) - 1
-> + * Associativity, bits [12:3]: (Associativity of cache) - 1
-> + * LineSize, bits [2:0]: (Log2(Number of bytes in cache line)) - 4
+> + * BIOS characteristics
 > + */
-> +int sysinfo_get_cache_info(u8 level, struct cache_info *cinfo)
-> +{
-> +	u64 clidr_el1;
-> +	u32 csselr_el1;
-> +	u32 num_sets;
-> +	union ccsidr_el1 creg;
-> +	int cache_type;
 > +
-> +	sysinfo_cache_info_default(cinfo);
+> +#define BIOS_CHARACTERISTICS_PCI_SUPPORTED	0x80 /* BIT(7) */
+> +#define BIOS_CHARACTERISTICS_UPGRADEABLE	0x800 /* BIT(11) */
+> +#define BIOS_CHARACTERISTICS_SELECTABLE_BOOT	0x10000  /* BIT(16) */
 > +
-> +	/* Read CLIDR_EL1 */
-> +	asm volatile("mrs %0, clidr_el1" : "=3Dr" (clidr_el1));
-> +	debug("CLIDR_EL1: 0x%llx\n", clidr_el1);
+> +#define BIOS_CHARACTERISTICS_EXT1_ACPI		1 /* BIT(0) */
+> +#define BIOS_CHARACTERISTICS_EXT2_UEFI		8 /* BIT(3) */
+> +#define BIOS_CHARACTERISTICS_EXT2_TARGET	4 /* BIT(2) */
 > +
-> +	cache_type =3D (clidr_el1 >> (3 * level)) & 0x7;
-> +	if (cache_type =3D=3D CACHE_NONE) /* level does not exist */
-> +		return -1;
+> +/*
+> + * System Information
+> + */
 > +
-> +	switch (cache_type) {
-> +	case CACHE_INST_ONLY:
-> +		cinfo->cache_type =3D SMBIOS_CACHE_SYSCACHE_TYPE_INST;
-> +		break;
-> +	case CACHE_DATA_ONLY:
-> +		cinfo->cache_type =3D SMBIOS_CACHE_SYSCACHE_TYPE_DATA;
-> +		break;
-> +	case CACHE_UNIFIED:
-> +		cinfo->cache_type =3D SMBIOS_CACHE_SYSCACHE_TYPE_UNIFIED;
-> +		break;
-> +	case CACHE_INST_WITH_DATA:
-> +		cinfo->cache_type =3D SMBIOS_CACHE_SYSCACHE_TYPE_OTHER;
-> +		break;
-> +	default:
-> +		cinfo->cache_type =3D SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN;
-> +		break;
-> +	}
+> +#define SMBIOS_WAKEUP_TYPE_RESERVED		0
+> +#define SMBIOS_WAKEUP_TYPE_OTHER		1
+> +#define SMBIOS_WAKEUP_TYPE_UNKNOWN		2
+> +#define SMBIOS_WAKEUP_TYPE_APM_TIMER		3
+> +#define SMBIOS_WAKEUP_TYPE_MODEM_RING		4
+> +#define SMBIOS_WAKEUP_TYPE_LAN_REMOTE		5
+> +#define SMBIOS_WAKEUP_TYPE_POWER_SWITCH		6
+> +#define SMBIOS_WAKEUP_TYPE_PCI_PME		7
+> +#define SMBIOS_WAKEUP_TYPE_AC_POWER_RESTORED	8
 > +
-> +	/* Select cache level */
-> +	csselr_el1 =3D (level << 1);
-> +	asm volatile("msr csselr_el1, %0" : : "r" (csselr_el1));
+> +/*
+> + * Baseboard Information
+> + */
 > +
-> +	/* Read CCSIDR_EL1 */
-> +	asm volatile("mrs %0, ccsidr_el1" : "=3Dr" (creg.data));
-> +	debug("CCSIDR_EL1 (Level %d): 0x%llx\n", level + 1, creg.data);
+> +#define SMBIOS_BOARD_FEAT_HOST_BOARD		1 /* BIT(0) */
+> +#define SMBIOS_BOARD_FEAT_REQ_AUX		2 /* BIT(1) */
+> +#define SMBIOS_BOARD_FEAT_REMOVABLE		4 /* BIT(2) */
+> +#define SMBIOS_BOARD_FEAT_REPLACEABLE		8 /* BIT(3) */
+> +#define SMBIOS_BOARD_FEAT_HOT_SWAPPABLE		16 /* BIT(4) */
 > +
-> +	/* Extract cache size and associativity */
-> +	cinfo->line_size =3D 1 << (creg.no_ccidx.linesize + 4);
+> +#define SMBIOS_BOARD_TYPE_UNKNOWN		1
+> +#define SMBIOS_BOARD_TYPE_OTHER			2
+> +#define SMBIOS_BOARD_TYPE_SERVER_BLADE		3
+> +#define SMBIOS_BOARD_TYPE_CON_SWITCH		4
+> +#define SMBIOS_BOARD_TYPE_SM_MODULE		5
+> +#define SMBIOS_BOARD_TYPE_PROCESSOR_MODULE	6
+> +#define SMBIOS_BOARD_TYPE_IO_MODULE		7
+> +#define SMBIOS_BOARD_TYPE_MEM_MODULE		8
+> +#define SMBIOS_BOARD_TYPE_DAUGHTER_BOARD	9
+> +#define SMBIOS_BOARD_TYPE_MOTHERBOARD		10
+> +#define SMBIOS_BOARD_TYPE_PROC_MEM_MODULE	11
+> +#define SMBIOS_BOARD_TYPE_PROC_IO_MODULE	12
+> +#define SMBIOS_BOARD_TYPE_INTERCON		13
 > +
-> +	/* Map the associativity value */
-> +	switch (creg.no_ccidx.associativity + 1) {
-> +	case CACHE_ASSOC_DIRECT_MAPPED:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_DMAPPED;
-> +		break;
-> +	case CACHE_ASSOC_2WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_2WAY;
-> +		break;
-> +	case CACHE_ASSOC_4WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_4WAY;
-> +		break;
-> +	case CACHE_ASSOC_8WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_8WAY;
-> +		break;
-> +	case CACHE_ASSOC_16WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_16WAY;
-> +		break;
-> +	case CACHE_ASSOC_12WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_12WAY;
-> +		break;
-> +	case CACHE_ASSOC_24WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_24WAY;
-> +		break;
-> +	case CACHE_ASSOC_32WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_32WAY;
-> +		break;
-> +	case CACHE_ASSOC_48WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_48WAY;
-> +		break;
-> +	case CACHE_ASSOC_64WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_64WAY;
-> +		break;
-> +	case CACHE_ASSOC_20WAY:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_20WAY;
-> +		break;
-> +	default:
-> +		cinfo->associativity =3D SMBIOS_CACHE_ASSOC_UNKNOWN;
-> +		break;
-> +	}
+> +/*
+> + * System Enclosure or Chassis
+> + */
+> +#define SMBIOS_ENCLOSURE_UNKNOWN	2
+> +#define SMBIOS_ENCLOSURE_DESKTOP	3
 > +
-> +	num_sets =3D creg.no_ccidx.numsets + 1;
-> +	/* Size in KB */
-> +	cinfo->max_size =3D (cinfo->associativity * num_sets * cinfo->line_siz=
-e) /
-> +			  1024;
+> +#define SMBIOS_STATE_OTHER		1
+> +#define SMBIOS_STATE_UNKNOWN		2
+> +#define SMBIOS_STATE_SAFE		3
+> +#define SMBIOS_STATE_WARNING		4
+> +#define SMBIOS_STATE_CRITICAL		5
+> +#define SMBIOS_STATE_NONRECOVERABLE	6
 > +
-> +	debug("L%d Cache:\n", level + 1);
-> +	debug("Number of bytes in cache line:%u\n", cinfo->line_size);
-> +	debug("Associativity of cache:%u\n", cinfo->associativity);
-> +	debug("Number of sets in cache:%u\n", num_sets);
-> +	debug("Cache size in KB:%u\n", cinfo->max_size);
+> +#define SMBIOS_SECURITY_OTHER		1
+> +#define SMBIOS_SECURITY_UNKNOWN		2
+> +#define SMBIOS_SECURITY_NONE		3
+> +#define SMBIOS_SECURITY_EXTINT_LOCK	4
+> +#define SMBIOS_SECURITY_EXTINT_EN	5
 > +
-> +	cinfo->inst_size =3D cinfo->max_size;
+> +#define SMBIOS_ENCLOSURE_OEM_UND	0
+> +#define SMBIOS_ENCLOSURE_HEIGHT_UND	0
+> +#define SMBIOS_POWCORD_NUM_UND		0
+> +#define SMBIOS_ELEMENT_TYPE_SELECT	0x80 /* BIT(7) */
 > +
-> +	/*
-> +	 * Below fields with common values are placed under DT smbios node
-
-As I have seen nodes /smbios and /smbios/smbios, please, be specific. Do
-you mean:
-
-The following properties are provided in the /smbios device-tree node:
-
-> +	 * socket-design, config
-> +	 * Other fields are typically specific to the implementation of the AR=
-M
-> +	 * processor by the silicon vendor:
-> +	 * supp_sram_type, curr_sram_type, speed, err_corr_type
-
-It is not clear what you mean.
-
-Don't these properties appear in the /smbios node? Where would they be
-found?
-
-> +	 */
+> +/*
+> + * Processor Information
+> + */
 > +
-> +	return 0;
-> +}
+> +#define SMBIOS_PROCESSOR_TYPE_OTHER	1
+> +#define SMBIOS_PROCESSOR_TYPE_UNKNOWN	2
+> +#define SMBIOS_PROCESSOR_TYPE_CENTRAL	3
+> +#define SMBIOS_PROCESSOR_TYPE_MATH	4
+> +#define SMBIOS_PROCESSOR_TYPE_DSP	5
+> +#define SMBIOS_PROCESSOR_TYPE_VIDEO	6
 > +
-> +int sysinfo_get_processor_info(struct processor_info *pinfo)
-> +{
-> +	u64 mpidr, core_count;
-> +	union midr_el1 midr;
+> +#define SMBIOS_PROCESSOR_STATUS_UNKNOWN		0
+> +#define SMBIOS_PROCESSOR_STATUS_ENABLED		1
+> +#define SMBIOS_PROCESSOR_STATUS_DISABLED_USER	2
+> +#define SMBIOS_PROCESSOR_STATUS_DISABLED_BIOS	3
+> +#define SMBIOS_PROCESSOR_STATUS_IDLE		4
+> +#define SMBIOS_PROCESSOR_STATUS_OTHER		7
 > +
-> +	/* Read the MIDR_EL1 register */
-> +	asm volatile("mrs %0, MIDR_EL1" : "=3Dr"(midr.data));
-> +	/* Read the MPIDR_EL1 register */
-> +	asm volatile("mrs %0, MPIDR_EL1" : "=3Dr"(mpidr));
+> +#define SMBIOS_PROCESSOR_UPGRADE_OTHER		1
+> +#define SMBIOS_PROCESSOR_UPGRADE_UNKNOWN	2
+> +#define SMBIOS_PROCESSOR_UPGRADE_NONE		6
 > +
-> +	debug("MIDR: 0x%016llx\n", midr.data);
-> +	debug("MPIDR: 0x%016llx\n", mpidr);
-> +	debug("CPU Implementer: 0x%02x\n", midr.fields.implementer);
+> +#define SMBIOS_PROCESSOR_FAMILY_OTHER	1
+> +#define SMBIOS_PROCESSOR_FAMILY_UNKNOWN	2
+> +#define SMBIOS_PROCESSOR_FAMILY_RSVD	255
+> +#define SMBIOS_PROCESSOR_FAMILY_ARMV7	256
+> +#define SMBIOS_PROCESSOR_FAMILY_ARMV8	257
+> +#define SMBIOS_PROCESSOR_FAMILY_RV32	512
+> +#define SMBIOS_PROCESSOR_FAMILY_RV64	513
 > +
-> +	switch (midr.fields.implementer) {
-> +	case VENDOR_ARM:
-> +		pinfo->manufacturer =3D "ARM Limited";
-> +		break;
-> +	case VENDOR_BROADCOM:
-> +		pinfo->manufacturer =3D "Broadcom Corporation";
-> +		break;
-> +	case VENDOR_CAVIUM:
-> +		pinfo->manufacturer =3D "Cavium Inc";
-> +		break;
-> +	case VENDOR_DEC:
-> +		pinfo->manufacturer =3D "Digital Equipment Corporation";
-> +		break;
-> +	case VENDOR_FUJITSU:
-> +		pinfo->manufacturer =3D "Fujitsu Ltd";
-> +		break;
-> +	case VENDOR_INFINEON:
-> +		pinfo->manufacturer =3D "Infineon Technologies AG";
-> +		break;
-> +	case VENDOR_FREESCALE:
-> +		pinfo->manufacturer =3D "Freescale Semiconductor Inc";
-> +		break;
-> +	case VENDOR_NVIDIA:
-> +		pinfo->manufacturer =3D "NVIDIA Corporation";
-> +		break;
-> +	case VENDOR_AMCC:
-> +		pinfo->manufacturer =3D
-> +			"Applied Micro Circuits Corporation";
-> +		break;
-> +	case VENDOR_QUALCOMM:
-> +		pinfo->manufacturer =3D "Qualcomm Inc";
-> +		break;
-> +	case VENDOR_MARVELL:
-> +		pinfo->manufacturer =3D "Marvell International Ltd";
-> +		break;
-> +	case VENDOR_INTEL:
-> +		pinfo->manufacturer =3D "Intel Corporation";
-> +		break;
-> +	case VENDOR_AMPERE:
-> +		pinfo->manufacturer =3D "Ampere Computing";
-> +		break;
-> +	default:
-> +		pinfo->manufacturer =3D "Unknown";
-
-Should we write the numerical number to a string here? E.g.
-
-'Manufacturer %d'
-
-> +		break;
-> +	}
-> +	debug("CPU part number: 0x%x\n", midr.fields.partnum);
-> +	debug("CPU revision: 0x%x\n", midr.fields.revision);
-> +	debug("CPU architecture: 0x%x\n", midr.fields.architecture);
-> +	debug("CPU variant: 0x%x\n", midr.fields.variant);
+> +#define SMBIOS_PROCESSOR_FAMILY_EXT	0xfe
 > +
-> +	/* Extract number of cores */
-> +	core_count =3D (mpidr >> 0) & 0xFF;
-> +	pinfo->core_count =3D core_count + 1;
-> +	debug("CPU Core Count: %d\n", pinfo->core_count);
+> +/* Processor Characteristics */
+> +#define SMBIOS_PROCESSOR_RSVD		1 /* BIT(0) */
+> +#define SMBIOS_PROCESSOR_UND		2 /* BIT(1) */
+> +#define SMBIOS_PROCESSOR_64BIT		4 /* BIT(2) */
+> +#define SMBIOS_PROCESSOR_MULTICORE	8 /* BIT(3) */
+> +#define SMBIOS_PROCESSOR_HWTHREAD	16 /* BIT(4) */
+> +#define SMBIOS_PROCESSOR_EXEC_PROT	32 /* BIT(5) */
+> +#define SMBIOS_PROCESSOR_ENH_VIRT	64 /* BIT(6) */
+> +#define SMBIOS_PROCESSOR_POW_CON	0x80 /* BIT(7) */
+> +#define SMBIOS_PROCESSOR_128BIT		0x100 /* BIT(8) */
+> +#define SMBIOS_PROCESSOR_ARM64_SOCID	0x200 /* BIT(9) */
 > +
-> +	pinfo->core_enabled =3D pinfo->core_count;
-> +	pinfo->characteristics =3D SMBIOS_PROCESSOR_64BIT |
-> +		SMBIOS_PROCESSOR_ARM64_SOCID;
-> +	if (pinfo->core_count > 1)
-> +		pinfo->characteristics |=3D SMBIOS_PROCESSOR_MULTICORE;
+> +/*
+> + * Cache Information
+> + */
 > +
-> +	/*
-> +	 * Below fields with common values are placed under DT smbios node
-> +	 * version, processor-type, processor-status, upgrade, family2,
-> +	 * socket-design, serial, asset-tag, part-number
-
-The following properties are provided in the /smbios device-tree node:
-
-Best regards
-
-Heinrich
-
-> +	 */
+> +#define SMBIOS_CACHE_SIZE_EXT_KB (2047 * 1024) /* 2047 MiB */
+> +#define SMBIOS_CACHE_HANDLE_NONE 0xffff
 > +
-> +	return 0;
-> +}
+> +/* System Cache Type */
+> +#define SMBIOS_CACHE_SYSCACHE_TYPE_OTHER	1
+> +#define SMBIOS_CACHE_SYSCACHE_TYPE_UNKNOWN	2
+> +#define SMBIOS_CACHE_SYSCACHE_TYPE_INST		3
+> +#define SMBIOS_CACHE_SYSCACHE_TYPE_DATA		4
+> +#define SMBIOS_CACHE_SYSCACHE_TYPE_UNIFIED	5
+> +
+> +/* Cache Speed */
+> +#define SMBIOS_CACHE_SPEED_UNKNOWN	0
+> +
+> +/* SRAM Type */
+> +#define SMBIOS_CACHE_SRAM_TYPE_UNKNOWN	2 /* BIT(1) */
+> +
+> +/* Error Correction Type */
+> +#define SMBIOS_CACHE_ERRCORR_OTHER	1
+> +#define SMBIOS_CACHE_ERRCORR_UNKNOWN	2
+> +#define SMBIOS_CACHE_ERRCORR_NONE	3
+> +#define SMBIOS_CACHE_ERRCORR_PARITY	4
+> +#define SMBIOS_CACHE_ERRCORR_SBITECC	5
+> +#define SMBIOS_CACHE_ERRCORR_MBITECC	6
+> +
+> +/* Cache Configuration */
+> +#define SMBIOS_CACHE_LEVEL_1	0
+> +#define SMBIOS_CACHE_LEVEL_2	1
+> +#define SMBIOS_CACHE_LEVEL_3	2
+> +#define SMBIOS_CACHE_LEVEL_4	3
+> +#define SMBIOS_CACHE_LEVEL_5	4
+> +#define SMBIOS_CACHE_LEVEL_6	5
+> +#define SMBIOS_CACHE_LEVEL_7	6
+> +#define SMBIOS_CACHE_LEVEL_8	7
+> +#define SMBIOS_CACHE_SOCKETED	8 /* BIT(3) */
+> +#define SMBIOS_CACHE_LOCATE_EXTERNAL	32 /* BIT(5) */
+> +#define SMBIOS_CACHE_LOCATE_RESERVED	64 /* BIT(6) */
+> +#define SMBIOS_CACHE_LOCATE_UNKNOWN	96 /* (BIT(5) | BIT(6)) */
+> +#define SMBIOS_CACHE_ENABLED	0x80 /* BIT(7) */
+> +#define SMBIOS_CACHE_OP_WB	0x100 /* BIT(8), Write Back */
+> +#define SMBIOS_CACHE_OP_VAR	0x200 /* BIT(9), Varies with Memory Address=
+ */
+> +#define SMBIOS_CACHE_OP_UND	0x300 /* (BIT(8) | BIT(9)), Unknown*/
+> +
+> +/* Cache Granularity */
+> +#define SMBIOS_CACHE_GRANU_1K	0
+> +#define SMBIOS_CACHE_GRANU_64K	1
+> +
+> +/* Cache Associativity */
+> +#define SMBIOS_CACHE_ASSOC_OTHER	1
+> +#define SMBIOS_CACHE_ASSOC_UNKNOWN	2
+> +#define SMBIOS_CACHE_ASSOC_DMAPPED	3
+> +#define SMBIOS_CACHE_ASSOC_2WAY		4
+> +#define SMBIOS_CACHE_ASSOC_4WAY		5
+> +#define SMBIOS_CACHE_ASSOC_FULLY	6
+> +#define SMBIOS_CACHE_ASSOC_8WAY		7
+> +#define SMBIOS_CACHE_ASSOC_16WAY	8
+> +#define SMBIOS_CACHE_ASSOC_12WAY	9
+> +#define SMBIOS_CACHE_ASSOC_24WAY	10
+> +#define SMBIOS_CACHE_ASSOC_32WAY	11
+> +#define SMBIOS_CACHE_ASSOC_48WAY	12
+> +#define SMBIOS_CACHE_ASSOC_64WAY	13
+> +#define SMBIOS_CACHE_ASSOC_20WAY	14
+> +
+> +#endif /* _SMBIOS_DEF_H_ */
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index a36d4b4e54a..1dd564a1762 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -330,10 +330,10 @@ static int smbios_write_type0(ulong *current, int =
+handle,
+>   			      struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type0 *t;
+> -	int len =3D sizeof(struct smbios_type0);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type0));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>   	t->vendor =3D smbios_add_prop(ctx, NULL, "U-Boot");
+> @@ -374,7 +374,7 @@ static int smbios_write_type0(ulong *current, int ha=
+ndle,
+>   	t->ec_major_release =3D 0xff;
+>   	t->ec_minor_release =3D 0xff;
+>
+> -	len =3D t->length + smbios_string_table_len(ctx);
+> +	len =3D t->hdr.length + smbios_string_table_len(ctx);
+>   	*current +=3D len;
+>   	unmap_sysmem(t);
+>
+> @@ -385,11 +385,11 @@ static int smbios_write_type1(ulong *current, int =
+handle,
+>   			      struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type1 *t;
+> -	int len =3D sizeof(struct smbios_type1);
+> +	int len =3D sizeof(*t);
+>   	char *serial_str =3D env_get("serial#");
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type1));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>   	t->manufacturer =3D smbios_add_prop_si(ctx, "manufacturer",
+> @@ -403,7 +403,7 @@ static int smbios_write_type1(ulong *current, int ha=
+ndle,
+>   					NULL);
+>   	if (serial_str) {
+>   		t->serial_number =3D smbios_add_prop(ctx, NULL, serial_str);
+> -		strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
+> +		strlcpy((char *)t->uuid, serial_str, sizeof(t->uuid));
+>   	} else {
+>   		t->serial_number =3D smbios_add_prop_si(ctx, "serial",
+>   						      SYSID_SM_SYSTEM_SERIAL,
+> @@ -415,7 +415,7 @@ static int smbios_write_type1(ulong *current, int ha=
+ndle,
+>   	t->family =3D smbios_add_prop_si(ctx, "family",
+>   				       SYSID_SM_SYSTEM_FAMILY, NULL);
+>
+> -	len =3D t->length + smbios_string_table_len(ctx);
+> +	len =3D t->hdr.length + smbios_string_table_len(ctx);
+>   	*current +=3D len;
+>   	unmap_sysmem(t);
+>
+> @@ -426,10 +426,10 @@ static int smbios_write_type2(ulong *current, int =
+handle,
+>   			      struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type2 *t;
+> -	int len =3D sizeof(struct smbios_type2);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type2));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>   	t->manufacturer =3D smbios_add_prop_si(ctx, "manufacturer",
+> @@ -448,11 +448,11 @@ static int smbios_write_type2(ulong *current, int =
+handle,
+>   	t->asset_tag_number =3D smbios_add_prop_si(ctx, "asset-tag",
+>   						 SYSID_SM_BASEBOARD_ASSET_TAG,
+>   						 NULL);
+> -	t->feature_flags =3D SMBIOS_BOARD_FEATURE_HOSTING;
+> -	t->board_type =3D SMBIOS_BOARD_MOTHERBOARD;
+> +	t->feature_flags =3D SMBIOS_BOARD_FEAT_HOST_BOARD;
+> +	t->board_type =3D SMBIOS_BOARD_TYPE_MOTHERBOARD;
+>   	t->chassis_handle =3D handle + 1;
+>
+> -	len =3D t->length + smbios_string_table_len(ctx);
+> +	len =3D t->hdr.length + smbios_string_table_len(ctx);
+>   	*current +=3D len;
+>   	unmap_sysmem(t);
+>
+> @@ -463,10 +463,10 @@ static int smbios_write_type3(ulong *current, int =
+handle,
+>   			      struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type3 *t;
+> -	int len =3D sizeof(struct smbios_type3);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type3));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>   	t->manufacturer =3D smbios_add_prop(ctx, "manufacturer", NULL);
+> @@ -476,7 +476,7 @@ static int smbios_write_type3(ulong *current, int ha=
+ndle,
+>   	t->thermal_state =3D SMBIOS_STATE_SAFE;
+>   	t->security_status =3D SMBIOS_SECURITY_NONE;
+>
+> -	len =3D t->length + smbios_string_table_len(ctx);
+> +	len =3D t->hdr.length + smbios_string_table_len(ctx);
+>   	*current +=3D len;
+>   	unmap_sysmem(t);
+>
+> @@ -521,10 +521,10 @@ static int smbios_write_type4(ulong *current, int =
+handle,
+>   			      struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type4 *t;
+> -	int len =3D sizeof(struct smbios_type4);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type4));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_PROCESSOR_INFORMATION, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>   	t->processor_type =3D SMBIOS_PROCESSOR_TYPE_CENTRAL;
+> @@ -535,7 +535,7 @@ static int smbios_write_type4(ulong *current, int ha=
+ndle,
+>   	t->l2_cache_handle =3D 0xffff;
+>   	t->l3_cache_handle =3D 0xffff;
+>
+> -	len =3D t->length + smbios_string_table_len(ctx);
+> +	len =3D t->hdr.length + smbios_string_table_len(ctx);
+>   	*current +=3D len;
+>   	unmap_sysmem(t);
+>
+> @@ -546,10 +546,10 @@ static int smbios_write_type32(ulong *current, int=
+ handle,
+>   			       struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type32 *t;
+> -	int len =3D sizeof(struct smbios_type32);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type32));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_SYSTEM_BOOT_INFORMATION, len, handle);
+>   	smbios_set_eos(ctx, t->eos);
+>
+> @@ -563,10 +563,10 @@ static int smbios_write_type127(ulong *current, in=
+t handle,
+>   				struct smbios_ctx *ctx)
+>   {
+>   	struct smbios_type127 *t;
+> -	int len =3D sizeof(struct smbios_type127);
+> +	int len =3D sizeof(*t);
+>
+>   	t =3D map_sysmem(*current, len);
+> -	memset(t, 0, sizeof(struct smbios_type127));
+> +	memset(t, 0, len);
+>   	fill_smbios_header(t, SMBIOS_END_OF_TABLE, len, handle);
+>
+>   	*current +=3D len;
 
