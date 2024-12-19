@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B0AE77184
-	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0284E77184
+	for <u-boot@archiver.kernel.org>; Thu, 19 Dec 2024 15:09:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96C3180328;
-	Thu, 19 Dec 2024 16:08:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 753FF80328;
+	Thu, 19 Dec 2024 16:09:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VY1KPzl4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PjN73w1T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCAF18033A; Thu, 19 Dec 2024 16:08:39 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id AC5A28021A; Thu, 19 Dec 2024 16:09:50 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7696A8021A
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:08:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42E508022B
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 16:09:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-aa66e4d1d5aso137230566b.2
- for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 07:08:37 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a9f1c590ecdso164482966b.1
+ for <u-boot@lists.denx.de>; Thu, 19 Dec 2024 07:09:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1734620917; x=1735225717; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1734620988; x=1735225788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8YZvAhvXpHv9BarT5YjflyhL6swTAwlXx3wzVkO8oL0=;
- b=VY1KPzl4zR5BbAVmxfKLYCeUYlXUNSxrG1RCBjv1cAvgpuOJHKmXM61B38NWMUcC1U
- H4d7vrv1QE0Gz0Jb0qy4mrWfk3U3ugOGWVhmUS8+4og0ghYOpgjsFGzS5UUP/Ev3HzKS
- VD9GnoiHoMtwb/0QeS9YocuA/OiQ0WdrZMNkY=
+ bh=t7RE8VdBFULq8tVx8npaBlecrrHy497yE5Vnu4XvXVU=;
+ b=PjN73w1TYCYyMMgnKfMnY0W9cszSkpQ9uAVed3gy5gFPj3gFhQBG077P0fFkg2rmz/
+ z0I/SRJRF/6r0nxruaczbBccbMNHjNB12lx39Cr5KaLsAAIx9t7Wx09u1f+K+6ih+KOJ
+ 4WIH+97FFgrwbxd3dsl8nWSaSI33IMFnDGitU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734620917; x=1735225717;
+ d=1e100.net; s=20230601; t=1734620988; x=1735225788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8YZvAhvXpHv9BarT5YjflyhL6swTAwlXx3wzVkO8oL0=;
- b=XbJe2nHL3b1rBJapDt4WM15Cvd4mkoJmIVa1xP4m8GM2EUAolXa7PgRjH0I1/rh1GG
- FUkqGH/QkYUD65g/ZtgnEKAdy9CGesjbYLoCpVZCqfjnlswTuXDpO3YIkw9GA5sYEb1i
- sjNIxZrVtjk2wVyHbvMq89Zt73CYzYOjUeq4MVsHRGppGuwrNTuynAeLj98FGwzvygmE
- Auc+05FKSLtiuryhrTjJmlyLA360BJisanWVzQrValwrkOl2clkZOJvxcsiX1FOoMO7c
- 2HMM1uS/Yaecqagkf2p8ZuH4866m3Q6nwfGOxdCjPP4AVCw9Y79FGDkV4jYF+av3Eq6z
- N/jA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9V6FKn8cnSydRLonxZvMVaZnVkfKbgSNgUSkCBrwLDIKVQj3iRtQnFKZqGR9wM6gJg2zMw/Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQKdnedhuQeSWqxosXa6I68cysQsZxxbOwrCT5fPBpjEWiYICx
- gezzm7fXs/rzvBW/ofpwyvzVc6v4obFWvoqXJK2FYqr91cfM0axcAU4IfIH4GjhTa7Ev00QQW98
- iBWcmDO3Dt7DsZ4FYwAINkfKXvuDQ1j4LxV3I
-X-Gm-Gg: ASbGncsuNwGgmChbFSQnBLY/mP41Wdej2gs53+rKx+wMoTMGz4+gCX4jEWJvBEzzpyN
- djKnz1YJEvJXl63FzyXrwILf2QB2SgC95VBR1l+4=
-X-Google-Smtp-Source: AGHT+IFADOqkgvYjAS9OXFNWBQ4RHvhT9LQWq9xRJuHRMwfhN2LqvRgeubbgmIzIM81ceiIjOgRn+o9051XIP0rKU24=
-X-Received: by 2002:a17:906:310c:b0:aa6:668b:2733 with SMTP id
- a640c23a62f3a-aac07954ca7mr277669166b.33.1734620916691; Thu, 19 Dec 2024
- 07:08:36 -0800 (PST)
+ bh=t7RE8VdBFULq8tVx8npaBlecrrHy497yE5Vnu4XvXVU=;
+ b=Yl6aypm4n1wrATtrXEIaO55SjBGmvJrdgkMvFocytU3Uq2Pk2nJYLfCtx3Ahw4VJrP
+ o3pyv7g3mQUhaSCorJWyb9vO1CWSvvaECcDU62iu8O2EvT0PGG34BMZu/FPw9NxwK0cT
+ eWJ0jj/nizGRsBaca6rPoWS8QZAzwczJ3p6uorSlyMDvodP/6WOhHagD/y78s8z6oSaz
+ blbS7+aBJMgAwve3XtVS/whrDnQW43t7fMViepbOq1nNWe9rig52ekn5K0PWEgieF9gP
+ hbWsB7LpDeShaacdfhv4SgMX7UaNoxfa38UwqtTkfv5VP7UcHklvk2oA+8zBYsj+R/cA
+ +mpQ==
+X-Gm-Message-State: AOJu0Yxxt2oVFk/TDE9L57bmVJ6lkMM2XHKS7MODTEgl6CgQa/e3VOfV
+ JyGNWMn2HTyemhrTYxNBkumq2txWhyhro/NZfolj4iUhnfJzcog+H+li68y/PsXpWzLKprN2TdU
+ mU8BEZ0psIzhkjj5KtjlVVT9OxBHLQFrcf9GC
+X-Gm-Gg: ASbGnctLO/Xwz9bqKMiST3JbUyMsZqJ4gX0mpkN+fS2QT7sGsudV3e9HbX3z+9EmZPG
+ MGUe1tIo+gL1HNvQiK4QFpyjBTbsJkFUfEaHT4xw=
+X-Google-Smtp-Source: AGHT+IHRFNR0IGFzVD2Xq7fZGB9ak2ySzq6zBkQuRzf7O9bX0GUy5ErusSG3Ndz+9GLuR+PuwUEmI9/QLUc74uGV644=
+X-Received: by 2002:a17:907:9491:b0:aa6:7d82:5413 with SMTP id
+ a640c23a62f3a-aabf47f755emr564328866b.34.1734620987492; Thu, 19 Dec 2024
+ 07:09:47 -0800 (PST)
 MIME-Version: 1.0
-References: <20241217-b4-upstream-dm-pre-reloc-v1-1-ccd29165bbb6@ti.com>
- <20241217145300.GN1505244@bill-the-cat>
- <20241218050837.5fppn7j7s5vv5f5m@uda0497581>
- <20241218173837.GJ1505244@bill-the-cat>
-In-Reply-To: <20241218173837.GJ1505244@bill-the-cat>
+References: <20231217163627.2339802-1-sjg@chromium.org>
+ <20231217163627.2339802-10-sjg@chromium.org>
+ <20240710061528.4afx6lcsdsbookug@uda0497581>
+ <CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com>
+ <20240716044215.axz24dmwv4v5m5wo@uda0497581>
+ <20241219091611.piznhvwqdoiax3yl@uda0497581>
+In-Reply-To: <20241219091611.piznhvwqdoiax3yl@uda0497581>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Dec 2024 08:08:25 -0700
-Message-ID: <CAFLszTjCez6yRW1F9HayLPk3deqPEAx-4uwYfpLcaQft=az-+A@mail.gmail.com>
-Subject: Re: [PATCH] drivers: firmware: ti_sci: Add DM_FLAG_PRE_RELOC to driver
-To: Tom Rini <trini@konsulko.com>
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>, 
- Beleswar Padhi <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de
+Date: Thu, 19 Dec 2024 08:09:36 -0700
+Message-ID: <CAFLszTiEZYoo+=+MJg7sgN93k144zEi18A5_Hk+J3sce00g+=w@mail.gmail.com>
+Subject: Re: [PATCH 09/10] fdtgrep: Allow propagating properties up to
+ supernodes
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,64 +91,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Manorit,
 
-On Wed, 18 Dec 2024 at 10:38, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 19 Dec 2024 at 02:16, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
 >
-> On Wed, Dec 18, 2024 at 10:38:37AM +0530, Manorit Chawdhry wrote:
-> > Hi Tom,
+> Hi Simon,
+>
+> On 10:12-20240716, Manorit Chawdhry wrote:
+> > Hi Simon,
 > >
-> > On 08:53-20241217, Tom Rini wrote:
-> > > On Tue, Dec 17, 2024 at 02:24:37PM +0530, Manorit Chawdhry wrote:
+> > On 10:39-20240711, Simon Glass wrote:
+> > > Hi Manorit,
 > > >
-> > > > Currently the driver relies on bootph flag to probe it during PRE_RELOC
-> > > > stage but with the upcoming cleanup of v6.13, we don't have the bootph
-> > > > property in the parent nodes anymore and ti_sci driver being one of the
-> > > > parent nodes required during SPL stage would end up hampering the probe
-> > > > model [0].
+> > > On Wed, 10 Jul 2024 at 07:15, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
 > > > >
-> > > > Add DM_FLAG_PRE_RELOC to ti_sci driver for mitigating this issue.
+> > > > Hi Simon,
+> > > >
+> > > > On 09:36-20231217, Simon Glass wrote:
+> > > > > The existing bootph binding is defined such that properties in a
+> > > > > subnode are also implied in the supernode also, as in this example:
+> > > > >
+> > > > >    buttons {
+> > > > >       /* bootph,pre-ram is implied by btn1 */
+> > > > >       compatible = "gpio-keys";
+> > > > >
+> > > > >       btn1 {
+> > > > >          bootph,pre-ram;
+> > > > >          gpios = <&gpio_a 3 0>;
+> > > > >          label = "button1";
+> > > > >          linux,code = <BTN_1>;
+> > > > >       };
+> > > > >
+> > > > > Provide an option to implement this in fdtgrep.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > Coming back to this patch as am facing some issues with the bootph-all
+> > > > propagation to the parent nodes [0]. We have a dmsc/sms node in our
+> > > > devices and it is a parent node of k3_pds, k3_clks, k3_reset.
+> > > >
+> > > > During U-boot proper we are initializing the serial console and during
+> > > > that time we have to make some calls to our Device manager for clocks
+> > > > and power domains. With the DT modelling, the clocks and power domains
+> > > > come under the device manager node ( dmsc/sms ) but interestingly that
+> > > > driver is not getting probed while putting bootph-all in the child
+> > > > nodes. Do you know anything about this? I thought putting it in child
+> > > > node will propagate it to the parent nodes as well so it'll be probed as
+> > > > well. We are having to put bootph-all explicitely in the dmsc/sms node
+> > > > for it to work.
 > > >
+> > > Yes, that is because fdtgrep is only used with the SPL DT. The U-Boot
+> > > one is used unmodified by U-Boot and it does not check parents for
+> > > such properties (neither does SPL, but fdtgrep has logic to imply
+> > > these properties internally).
 > > >
-> > > Can you please expand on why with v6.13 we don't have the flag anymore?
-> > > Thanks.
+> > > The easiest way to fix this would probably be to process the DT in
+> > > Binman for insertion into the final image, since Binman already does
+> > > lots of other DT processing.
+> > >
+> > > If you like, you could create an issue for it [1]. If you want to have
+> > > a crack at fixing it, I could provide some pointers.
 > >
-> > So the idea was that following series [0] would help us cleanup all the
-> > parent node bootph-* tags as putting a bootph-* in child node implies
-> > that it applies to parent nodes as well, though even if the parent node
-> > gets packed after the following series, the parent node still don't get
-> > probed as from my understanding, we need bootph-* tag to probe the
-> > driver as well but the phase tag doesn't get propagated as such.
-> >
-> > So while working in Linux, some comments related to this was raised [1]
-> > and after confirming the behaviour with Simon [2], the cleanup was done
-> > in Linux and meanwhile this way was found to probe the driver so that
-> > even after cleaning up the parent bootph-* tags we can continue.
-> >
-> > I don't think it's a hack also as this driver is required pre-relocation
-> > and this is another way to probe it pre-relocation but the only thing is
-> > that since the cleanup is done right now, we would kind of need it to be
-> > booting in some platforms ( that were fully reliant on Linux DT and
-> > don't have -u-boot override for this particular node with bootph-* )
-> > before 6.13 DT gets synced up.
-> >
-> > [0]: https://lore.kernel.org/u-boot/20231217163627.2339802-1-sjg@chromium.org/
-> > [1]: https://lore.kernel.org/all/20240709084857.nf7c57mi6miajeau@uda0497581/#t
-> > [2]: https://lore.kernel.org/u-boot/CAFLszTjr7bJFPnyVx7rTdFB3AFBM_2DVAZU8FZnLBE7ep5ejXw@mail.gmail.com/
+> > I am not sure if I'll be able to focus on this now but feel free to give
+> > your pointers, might help anyone else as well if they want to take a
+> > look at it.
 >
-> Thanks. Did you end up filing an issue about this? And can you now
-> perhaps push to make doing the fdtgrep work a priority? There's going to
-> be a lot of other cases like this to resolve I suspect.
+> Would you be able to give some pointers?
 
-fdtgrep is done, the confusion is that there are two [0] references in
-this chain. The one you want is:
+Can we first just be clear on the problem? Is it that before
+relocation, devices are not bound because the bootph tag is not there?
+Can you update your issue with a bit more info?
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
+If so, then there are two options I can think of:
 
-For SPL and U-Boot proper, all is well. But for pre-relocation, U-Boot
-doesn't actually bind parents even if their children have a bootph
-property, as I understand it. I believe that is what needs to be
-fixed?
+1. Update dm_scan_fdt_node() / lists_bind_fdt() so that it scans
+children before relocation, even when a parent does not have the
+required bootph tag. But it only binds the parent if any of its
+children have the tag. This should be possible and I suspect the
+performance would be OK.
+
+2. Update binman so that it adds tags into the devicetree when it sees
+that they are implied in a parent. This would avoid code changes in
+U-Boot, and perhaps be a bit faster.
+
+> Also I was wondering why do we
+> even need to process the DT in binman, why isn't the parent node probed
+> by default in this flow, is there some use case like that where the
+> child needs to be probed but not the parent before it or is it some
+> other bug?
+
+Basically, Rob Herring wanted to have child tags implied in the
+parent. This was the 'deal' under which the bootph stuff went into the
+schema. U-Boot has never supported this previously, of course and we
+have had to add the tags manually in the parent, when any child needs
+it. But anyway Rob's idea seemed reasonable to me since it is actually
+a pain to add these tags in parents, particular when there are several
+levels of hierarchy, e.g. an soc node, etc.
+
+So I then implemented this in fdtgrep, thinking that this was the end
+of the story, but as you have found (if I have this right), it is not.
+
+>
+> >
+> > Meanwhile I will open a issue as you mentioned for tracking this, trying
+> > to register on the URL that you provided. Thanks!
+>
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
+
+> > > [1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues
+> > >
+> > >
+> > > >
+> > > > [0]: https://lore.kernel.org/linux-arm-kernel/20240705-b4-upstream-bootph-all-v2-0-9007681ed7d8@ti.com/T/#t
+> > > >
+> > > > Regards,
+> > > > Manorit
 
 Regards,
-SImon
+Simon
